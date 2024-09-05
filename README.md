@@ -8,9 +8,9 @@ The main panel of the program can be opened using the combination **Win Alt Home
 
 - Inserting a character by Unicode/Alt-code or its “tag”.
 - Converting numbers to Roman Numerals (17489 → ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ) or to superscript/subscript numbers.
-- The “Smelter” of characters: allows you to create a specific symbol/ligature by combining available keyboard symbols, for example: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ.
+- The “Smelter” of characters: it allows you to create a specific symbol/ligature by combining available keyboard symbols, for example: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ.
 
-Most combinations are divided into “activation groups” and you need to first activate the desired group, for example, “Win Alt F1” for “First Diacritic Group,” and then press the key for the desired mark, for example, “a” for acute \[◌́\].
+Most combinations are divided into “activation groups” and you need to first activate the desired group, for example, “Win Alt F1” for “First Diacritic Group,” and then press the key for the desired mark, for example, “a” for acute \[á\].
 
 You can activate “Quick Keys,” the simplified combinations for a limited set of characters, such as “Ctrl Alt a” for entering the same acute mark.
 
@@ -24,7 +24,7 @@ You can activate “Quick Keys,” the simplified combinations for a limited set
 - Конвертация числа в Римские Цифры (17489 → ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ) или в надстрочные/подстрочные цифры.
 - «Плавильня» символов — позволяет через комбинацию доступных на клавиатуре символов получить тот или иной знак/лигатуру, например: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ.
 
-Большинство комбинаций разделено на «группы активаций» — необходимо сначала активировать нужную группу, например, «Win Alt F1» для «Первой группы диакритики», а затем нажать на ключ нужного знака, например «ф» для акута \[◌́\].
+Большинство комбинаций разделено на «группы активаций» — необходимо сначала активировать нужную группу, например, «Win Alt F1» для «Первой группы диакритики», а затем нажать на ключ нужного знака, например «ф» для акута \[á\].
 
 Можно активировать «Быстрые ключи» — упрощённые комбинации ограниченного ряда знаков, например, «Ctrl Alt ф» для ввода того же акута.
 
