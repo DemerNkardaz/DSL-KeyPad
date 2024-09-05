@@ -1,4 +1,4 @@
-# DSL KeyPad
+# DSL KeyPad \*in dev
 
 ### On English
 
@@ -12,7 +12,9 @@ The main panel of the program can be opened using the combination **Win Alt Home
 
 Most combinations are divided into “activation groups” and you need to first activate the desired group, for example, “Win Alt F1” for “First Diacritic Group,” and then press the key for the desired mark, for example, “a” for acute \[á\].
 
-You can activate “Quick Keys,” the simplified combinations for a limited set of characters, such as “Ctrl Alt a” for entering the same acute mark.
+You can activate “Quick Keys” via RAlt Home, the simplified combinations for a limited set of characters, such as “Ctrl Alt a” for entering the same acute mark.
+
+For using the “DSL KeyPad” you need to simply [download the .ahk file](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk) and run it. In the program also there is the system of updates and you do not need to go to the repository again for getting the latest version.
 
 ### На русском
 
@@ -26,7 +28,9 @@ You can activate “Quick Keys,” the simplified combinations for a limited set
 
 Большинство комбинаций разделено на «группы активаций» — необходимо сначала активировать нужную группу, например, «Win Alt F1» для «Первой группы диакритики», а затем нажать на ключ нужного знака, например «ф» для акута \[á\].
 
-Можно активировать «Быстрые ключи» — упрощённые комбинации ограниченного ряда знаков, например, «Ctrl Alt ф» для ввода того же акута.
+Нажав RAlt Home можно активировать «Быстрые ключи» — упрощённые комбинации ограниченного ряда знаков, например, «Ctrl Alt ф» для ввода того же акута.
+
+Для использования «DSL KeyPad» требуется просто [скачать .ahk файл](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk) и запустить. В программе так же предусмотрена система обновлений, и вам не потребуется вновь заходить в репозиторий для получения свежей версии.
 
 ![](Images/20240905_0.png)
 
