@@ -1687,12 +1687,69 @@ MapInsert(Characters,
       symbol: Chr(0x014A)
     },
     "0000 lat_s_let_nj", {
-      unicode: "{U+014B}", html: "014B", entity: "&eng;",
+      unicode: "{U+014B}", html: "&#331;", entity: "&eng;",
       titlesAlt: True,
       group: ["Latin Extended"],
       tags: [".nj", "строчный энг", "small eng"],
       recipe: "nj",
       symbol: Chr(0x014B)
+    },
+    ;
+    ;
+    ; * Accented Latin Letters
+    "0000 lat_c_let_a_acute", {
+      unicode: "{U+00C1}", html: "&#193;", entity: "&Aacute;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная A с акутом", "capital A with acute"],
+      recipe: "A" . GetChar("acute"),
+      recipeAlt: "A" . DottedCircle . GetChar("acute"),
+      symbol: Chr(0x00C1)
+    },
+    "0000 lat_s_let_a_acute", {
+      unicode: "{U+00E1}", html: "&#225;", entity: "&aacute;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная a с акутом", "small a with acute"],
+      recipe: "a" . GetChar("acute"),
+      recipeAlt: "a" . DottedCircle . GetChar("acute"),
+      symbol: Chr(0x00E1)
+    },
+    "0000 lat_c_let_a_breve", {
+      unicode: "{U+0102}", html: "&#258;", entity: "&Abreve;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная A с краткой", "capital A with breve"],
+      recipe: "A" . GetChar("breve"),
+      recipeAlt: "A" . DottedCircle . GetChar("breve"),
+      symbol: Chr(0x0102)
+    },
+    "0000 lat_s_let_a_breve", {
+      unicode: "{U+0103}", html: "&#259;", entity: "&abreve;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная a с краткой", "small a with breve"],
+      recipe: "a" . GetChar("breve"),
+      recipeAlt: "a" . DottedCircle . GetChar("breve"),
+      symbol: Chr(0x0103)
+    },
+    "0000 lat_c_let_a_macron", {
+      unicode: "{U+0100}", html: "&#256;", entity: "&Amacr;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная A с макроном", "capital A with macron"],
+      recipe: "A" . GetChar("macron"),
+      recipeAlt: "A" . DottedCircle . GetChar("macron"),
+      symbol: Chr(0x0100)
+    },
+    "0000 lat_s_let_a_macron", {
+      unicode: "{U+0101}", html: "&#257;", entity: "&amacr;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: [".a", "строчная a с макроном", "small a with macron"],
+      recipe: "a" . GetChar("macron"),
+      recipeAlt: "a" . DottedCircle . GetChar("macron"),
+      symbol: Chr(0x0101)
     },
     ;
     ;
@@ -3196,6 +3253,7 @@ Constructor()
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, , True)
+  InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, , True)
 
