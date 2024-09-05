@@ -1460,6 +1460,22 @@ MapInsert(Characters,
       recipe: "ll",
       symbol: Chr(0x1EFB)
     },
+    "0000 lat_c_lig_oe", {
+      unicode: "{U+0152}", html: "&#338;", entity: "&OElig;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!oe", "лигатура OE", "ligature OE"],
+      recipe: "OE",
+      symbol: Chr(0x0152)
+    },
+    "0000 lat_s_lig_oe", {
+      unicode: "{U+0153}", html: "&#339;", entity: "&oelig;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".oe", "лигатура oe", "ligature oe"],
+      recipe: "oe",
+      symbol: Chr(0x0153)
+    },
     "0000 lat_c_lig_eszett", {
       unicode: "{U+1E9E}", html: "&#7838;",
       titlesAlt: True,
@@ -1539,6 +1555,14 @@ MapInsert(Characters,
       ],
       symbol: Chr(0x01C6)
     },
+    "0000 lat_s_dig_feng", {
+      unicode: "{U+02A9}", html: "&#681;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".fnj", "диграф фэнг", "diagraph feng"],
+      recipe: ["fnj", "fŋ"],
+      symbol: Chr(0x02A9)
+    },
     "0000 lat_c_dig_lj", {
       unicode: "{U+01C7}", html: "&#455;",
       titlesAlt: True,
@@ -1563,12 +1587,28 @@ MapInsert(Characters,
       recipe: "lj",
       symbol: Chr(0x01C9)
     },
+    "0000 lat_s_dig_ls", {
+      unicode: "{U+02AA}", html: "&#682;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ls", "диграф ls", "diagraph ls"],
+      recipe: "ls",
+      symbol: Chr(0x02AA)
+    },
+    "0000 lat_s_dig_lz", {
+      unicode: "{U+02AB}", html: "&#683;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".lz", "диграф lz", "diagraph lz"],
+      recipe: "lz",
+      symbol: Chr(0x02AB)
+    },
     "0000 lat_c_dig_nj", {
       unicode: "{U+01CA}", html: "&#458;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: ["!nj", "диграф NJ", "diagraph NJ"],
-      recipe: "NJ",
+      recipe: "N-J",
       symbol: Chr(0x01CA)
     },
     "0000 lat_cs_dig_nj", {
@@ -1576,7 +1616,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: ["!.nj", "диграф Nj", "diagraph Nj"],
-      recipe: "Nj",
+      recipe: "N-j",
       symbol: Chr(0x01CB)
     },
     "0000 lat_s_dig_nj", {
@@ -1584,8 +1624,40 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: [".nj", "диграф nj", "diagraph nj"],
-      recipe: "nj",
+      recipe: "n-j",
       symbol: Chr(0x01CC)
+    },
+    "0000 lat_s_dig_st", {
+      unicode: "{U+FB06}", html: "&#64262;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".st", "диграф st", "diagraph st"],
+      recipe: "st",
+      symbol: Chr(0xFB06)
+    },
+    "0000 lat_s_dig_tc", {
+      unicode: "{U+02A8}", html: "&#680;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".tc", "диграф tc", "diagraph tc"],
+      recipe: "tc",
+      symbol: Chr(0x02A8)
+    },
+    "0000 lat_s_dig_tch", {
+      unicode: "{U+02A7}", html: "&#679;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".tch", "диграф tch", "diagraph tch"],
+      recipe: ["tch", "tʃ"],
+      symbol: Chr(0x02A7)
+    },
+    "0000 lat_s_dig_ts", {
+      unicode: "{U+02A6}", html: "&#678;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ts", "диграф ts", "diagraph ts"],
+      recipe: "ts",
+      symbol: Chr(0x02A6)
     },
     ;
     ;
@@ -1605,6 +1677,22 @@ MapInsert(Characters,
       tags: [".thp", "строчный торн", "small thorn"],
       recipe: "thp",
       symbol: Chr(0x00FE)
+    },
+    "0000 lat_c_let_nj", {
+      unicode: "{U+014A}", html: "&#330;", entity: "&ENG;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: ["!nj", "прописной энг", "capital eng"],
+      recipe: "NJ",
+      symbol: Chr(0x014A)
+    },
+    "0000 lat_s_let_nj", {
+      unicode: "{U+014B}", html: "014B", entity: "&eng;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: [".nj", "строчный энг", "small eng"],
+      recipe: "nj",
+      symbol: Chr(0x014B)
     },
     ;
     ;
