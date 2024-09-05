@@ -32,6 +32,12 @@ For using the “DSL KeyPad” you need to simply [download the .ahk file](https
 
 Для использования «DSL KeyPad» требуется просто [скачать .ahk файл](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk) и запустить. В программе так же предусмотрена система обновлений, и вам не потребуется вновь заходить в репозиторий для получения свежей версии.
 
+---
+
 ![](Images/20240905_0.png)
 
 ![](Images/20240905_1.png)
+
+# License
+
+All own code source (i.e. exclude third-party code parts) is licensed under the [MIT License](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/LICENSE)
