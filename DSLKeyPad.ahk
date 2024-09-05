@@ -40,7 +40,7 @@ UpdateVersionString := ""
 
 RawRepo := "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/main/"
 RawRepoFiles := RawRepo . "UtilityFiles/"
-RepoSource := "https://github.com/DemerNkardaz/DSL-KeyPad/DSLKeyPad.ahk"
+RepoSource := "https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk"
 
 RawSource := RawRepo . "DSLKeyPad.ahk"
 UpdateAvailable := False
