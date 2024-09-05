@@ -1257,10 +1257,10 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: ["!aea", "лигатура AE с акутом", "ligature AE with acute"],
-      recipe: ["AE" . GetChar("acute"), "Æ" . GetChar("acute")],
+      recipe: ["AE" . GetChar("acute"), Chr(0x00C6) . GetChar("acute")],
       recipeAlt: [
         "AE" . DottedCircle . GetChar("acute"),
-        "Æ" . DottedCircle . GetChar("acute")
+        Chr(0x00C6) . DottedCircle . GetChar("acute")
       ],
       symbol: Chr(0x01FC)
     },
@@ -1269,10 +1269,10 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: [".aea", "лигатура ae с акутом", "ligature ae with acute"],
-      recipe: ["ae" . GetChar("acute"), "æ" . GetChar("acute")],
+      recipe: ["ae" . GetChar("acute"), Chr(0x00E6) . GetChar("acute")],
       recipeAlt: [
         "ae" . DottedCircle . GetChar("acute"),
-        "æ" . DottedCircle . GetChar("acute")
+        Chr(0x00E6) . DottedCircle . GetChar("acute")
       ],
       symbol: Chr(0x01FD)
     },
@@ -1281,10 +1281,10 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: ["!aem", "лигатура AE с макроном", "ligature AE with macron"],
-      recipe: ["AE" . GetChar("macron"), "Æ" . GetChar("macron")],
+      recipe: ["AE" . GetChar("macron"), Chr(0x00C6) . GetChar("macron")],
       recipeAlt: [
         "AE" . DottedCircle . GetChar("macron"),
-        "Æ" . DottedCircle . GetChar("macron")
+        Chr(0x00C6) . DottedCircle . GetChar("macron")
       ],
       symbol: Chr(0x01E2)
     },
@@ -1293,10 +1293,10 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: [".aem", "лигатура ae с макроном", "ligature ae with macron"],
-      recipe: ["ae" . GetChar("macron"), "æ" . GetChar("macron")],
+      recipe: ["ae" . GetChar("macron"), Chr(0x00E6) . GetChar("macron")],
       recipeAlt: [
         "ae" . DottedCircle . GetChar("macron"),
-        "æ" . DottedCircle . GetChar("macron")
+        Chr(0x00E6) . DottedCircle . GetChar("macron")
       ],
       symbol: Chr(0x01E3)
     },
@@ -1379,6 +1379,69 @@ MapInsert(Characters,
       tags: [".ay", "лигатура ay", "ligature ay"],
       recipe: "ay",
       symbol: Chr(0xA73D)
+    },
+    ;
+    ;
+    ; * Latin Digraphs
+    "0000 lat_c_dig_dz", {
+      unicode: "{U+01F1}", html: "&#497;",
+      titlesAlt: True,
+      group: ["Latin Digraphs"],
+      tags: ["!dz", "диграф DZ", "diagraph DZ"],
+      recipe: "DZ",
+      symbol: Chr(0x01F1)
+    },
+    "0000 lat_cs_dig_dz", {
+      unicode: "{U+01F2}", html: "&#498;",
+      titlesAlt: True,
+      group: ["Latin Digraphs"],
+      tags: ["!.dz", "диграф Dz", "diagraph Dz"],
+      recipe: "Dz",
+      symbol: Chr(0x01F2)
+    },
+    "0000 lat_s_dig_dz", {
+      unicode: "{U+01F3}", html: "&#499;",
+      titlesAlt: True,
+      group: ["Latin Digraphs"],
+      tags: [".dz", "диграф dz", "diagraph dz"],
+      recipe: "dz",
+      symbol: Chr(0x01F3)
+    },
+    "0000 lat_c_dig_dz_caron", {
+      unicode: "{U+01C4}", html: "&#452;",
+      titlesAlt: True,
+      group: ["Latin Digraphs"],
+      tags: ["!dzh", "диграф DZ с гачеком", "diagraph DZ with caron"],
+      recipe: ["DZ" . GetChar("caron"), Chr(0x01F1) . GetChar("caron")],
+      recipeAlt: [
+        "DZ" . DottedCircle . GetChar("caron"),
+        Chr(0x01F1) . DottedCircle . GetChar("caron")
+      ],
+      symbol: Chr(0x01C4)
+    },
+    "0000 lat_cs_dig_dz_caron", {
+      unicode: "{U+01C5}", html: "&#453;",
+      titlesAlt: True,
+      group: ["Latin Digraphs"],
+      tags: ["!.dzh", "диграф Dz с гачеком", "diagraph Dz with caron"],
+      recipe: ["Dz" . GetChar("caron"), Chr(0x01F2) . GetChar("caron")],
+      recipeAlt: [
+        "Dz" . DottedCircle . GetChar("caron"),
+        Chr(0x01F2) . DottedCircle . GetChar("caron")
+      ],
+      symbol: Chr(0x01C5)
+    },
+    "0000 lat_s_dig_dz_caron", {
+      unicode: "{U+01C6}", html: "&#454;",
+      titlesAlt: True,
+      group: ["Latin Digraphs"],
+      tags: [".dzh", "диграф dz с гачеком", "diagraph dz with caron"],
+      recipe: ["dz" . GetChar("caron"), Chr(0x01F3) . GetChar("caron")],
+      recipeAlt: [
+        "dz" . DottedCircle . GetChar("caron"),
+        Chr(0x01F3) . DottedCircle . GetChar("caron")
+      ],
+      symbol: Chr(0x01C6)
     },
     ;
     ;
@@ -2880,6 +2943,7 @@ Constructor()
   DSLContent["BindList"].TabSmelter := []
 
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, , True)
+  InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, , True)
 
