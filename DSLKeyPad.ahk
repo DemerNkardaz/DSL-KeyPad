@@ -1380,6 +1380,86 @@ MapInsert(Characters,
       recipe: "ay",
       symbol: Chr(0xA73D)
     },
+    "0000 lat_s_lig_ff", {
+      unicode: "{U+FB00}", html: "&#64256;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ff", "лигатура ff", "ligature ff"],
+      recipe: "ff",
+      symbol: Chr(0xFB00)
+    },
+    "0000 lat_s_lig_fi", {
+      unicode: "{U+FB01}", html: "&#64257;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".fi", "лигатура fi", "ligature fi"],
+      recipe: "fi",
+      symbol: Chr(0xFB01)
+    },
+    "0000 lat_s_lig_fl", {
+      unicode: "{U+FB02}", html: "&#64258;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".fl", "лигатура fl", "ligature fl"],
+      recipe: "fl",
+      symbol: Chr(0xFB02)
+    },
+    "0000 lat_s_lig_ft", {
+      unicode: "{U+FB05}", html: "&#64261;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ft", "лигатура ft", "ligature ft"],
+      recipe: "ft",
+      symbol: Chr(0xFB05)
+    },
+    "0000 lat_s_lig_ffi", {
+      unicode: "{U+FB03}", html: "&#64259;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ffi", "лигатура ffi", "ligature ffi"],
+      recipe: "ffi",
+      symbol: Chr(0xFB03)
+    },
+    "0000 lat_s_lig_ffl", {
+      unicode: "{U+FB04}", html: "&#64260;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ffl", "лигатура ffl", "ligature ffl"],
+      recipe: "ffl",
+      symbol: Chr(0xFB04)
+    },
+    "0000 lat_c_lig_ij", {
+      unicode: "{U+0132}", html: "&#306;", entity: "&IJlig;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!ij", "лигатура IJ", "ligature IJ"],
+      recipe: "IJ",
+      symbol: Chr(0x0132)
+    },
+    "0000 lat_s_lig_ij", {
+      unicode: "{U+0133}", html: "&#307;", entity: "&ijlig;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ij", "лигатура ij", "ligature ij"],
+      recipe: "ij",
+      symbol: Chr(0x0133)
+    },
+    "0000 lat_c_lig_ll", {
+      unicode: "{U+1EFA}", html: "&#7930;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!ll", "лигатура lL", "ligature lL"],
+      recipe: "lL",
+      symbol: Chr(0x1EFA)
+    },
+    "0000 lat_s_lig_ll", {
+      unicode: "{U+1EFB}", html: "&#7931;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ll", "лигатура ll", "ligature ll"],
+      recipe: "ll",
+      symbol: Chr(0x1EFB)
+    },
     ;
     ;
     ; * Latin Digraphs
@@ -1442,6 +1522,30 @@ MapInsert(Characters,
         Chr(0x01F3) . DottedCircle . GetChar("caron")
       ],
       symbol: Chr(0x01C6)
+    },
+    "0000 lat_c_dig_lj", {
+      unicode: "{U+01C7}", html: "&#455;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!lj", "диграф LJ", "diagraph LJ"],
+      recipe: "LJ",
+      symbol: Chr(0x01C7)
+    },
+    "0000 lat_cs_dig_lj", {
+      unicode: "{U+01C8}", html: "&#456;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!.lj", "диграф Lj", "diagraph Lj"],
+      recipe: "Lj",
+      symbol: Chr(0x01C8)
+    },
+    "0000 lat_s_dig_lj", {
+      unicode: "{U+01C9}", html: "&#457;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".lj", "диграф lj", "diagraph lj"],
+      recipe: "lj",
+      symbol: Chr(0x01C9)
     },
     ;
     ;
