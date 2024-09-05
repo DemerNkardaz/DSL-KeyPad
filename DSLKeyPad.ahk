@@ -53,7 +53,6 @@ ChangeLogRaw := Map(
 LocalesRaw := RawRepoFiles . "DSLKeyPad.locales.ini"
 AppIcoRaw := RawRepoFiles . "DSLKeyPad.app.ico"
 
-
 WorkingDir := A_MyDocuments . "\DSLKeyPad"
 DirCreate(WorkingDir)
 
@@ -3519,6 +3518,8 @@ ToggleFastKeys()
   ActivationMessage["en"].Deactive := "Fast keys deactivated"
   MsgBox(FastKeysIsActive ? ActivationMessage[LanguageCode].Active : ActivationMessage[LanguageCode].Deactive, "FastKeys", 0x40)
 
+  Sleep 25
+  RegFastKeys(FastKeysList)
   return
 }
 
@@ -3568,12 +3569,12 @@ CheckLayoutValid() {
   return False
 }
 
-HandleFastKey(CharacterName, CheckOff := False)
+HandleFastKey(CharacterName)
 {
   global FastKeysIsActive
   IsLayoutValid := CheckLayoutValid()
 
-  if IsLayoutValid && (FastKeysIsActive || CheckOff == True) {
+  if IsLayoutValid {
     for characterEntry, value in Characters {
       entryName := RegExReplace(characterEntry, "^\S+\s+")
 
@@ -3602,18 +3603,72 @@ HandleFastKey(CharacterName, CheckOff := False)
   return
 }
 
-<^<!a:: HandleFastKey("acute")
-<^<+<!a:: HandleFastKey("acute_double")
-<^<!b:: HandleFastKey("breve")
-<^<+<!b:: HandleFastKey("breve_inverted")
-<^<!c:: HandleFastKey("circumflex")
-<^<+<!c:: HandleFastKey("caron")
-<^<!d:: HandleFastKey("dot_above")
-<^<+<!d:: HandleFastKey("diaeresis")
-<^<!g:: HandleFastKey("grave")
-<^<+<!g:: HandleFastKey("grave_double")
-<^<!m:: HandleFastKey("macron")
-<^<+<!m:: HandleFastKey("macron_below")
+RegFastKeys(Bindings) {
+  global FastKeysIsActive
+
+  for index, pair in Bindings {
+    if (Mod(index, 2) = 1) {
+      key := pair
+      value := Bindings[index + 1]
+      if (FastKeysIsActive) {
+        HotKey(key, value, "On")
+      } else {
+        HotKey(key, value, "Off")
+      }
+    }
+  }
+}
+
+FastKeysList :=
+  [
+    "<^<!a", (*) => HandleFastKey("acute"),
+    "<^<+<!a", (*) => HandleFastKey("acute_double"),
+    "<^<!b", (*) => HandleFastKey("breve"),
+    "<^<+<!b", (*) => HandleFastKey("breve_inverted"),
+    "<^<!c", (*) => HandleFastKey("circumflex"),
+    "<^<+<!c", (*) => HandleFastKey("caron"),
+    "<^<!d", (*) => HandleFastKey("dot_above"),
+    "<^<+<!d", (*) => HandleFastKey("diaeresis"),
+    "<^<!g", (*) => HandleFastKey("grave"),
+    "<^<+<!g", (*) => HandleFastKey("grave_double"),
+    "<^<!m", (*) => HandleFastKey("macron"),
+    "<^<+<!m", (*) => HandleFastKey("macron_below"),
+    ;
+    "<^>!>+1", (*) => HandleFastKey("emsp"),
+    "<^>!>+2", (*) => HandleFastKey("ensp"),
+    "<^>!>+3", (*) => HandleFastKey("emsp13"),
+    "<^>!>+4", (*) => HandleFastKey("emsp14"),
+    "<^>!>+5", (*) => HandleFastKey("thinspace"),
+    "<^>!>+6", (*) => HandleFastKey("emsp16"),
+    "<^>!>+7", (*) => HandleFastKey("narrow_no_break_space"),
+    "<^>!>+8", (*) => HandleFastKey("hairspace"),
+    "<^>!>+9", (*) => HandleFastKey("punctuation_space"),
+    "<^>!>+0", (*) => HandleFastKey("zero_width_space"),
+    "<^>!>+-", (*) => HandleFastKey("word_joiner"),
+    "<^>!>+=", (*) => HandleFastKey("figure_space"),
+    "<^>!<+Space", (*) => HandleFastKey("no_break_space"),
+    ;
+    "<^<!Numpad0", (*) => HandleFastKey("dotted_circle"),
+    "<^>!NumpadMult", (*) => HandleFastKey("asterisk_two"),
+    "<^>!>+NumpadMult", (*) => HandleFastKey("asterism"),
+    "<^>!<+NumpadMult", (*) => HandleFastKey("asterisk_low"),
+    "<^>!NumpadDiv", (*) => HandleFastKey("dagger"),
+    "<^>!>+NumpadDiv", (*) => HandleFastKey("dagger_double"),
+  ]
+
+if CurrentLayout = CodeEn {
+  Hotkey("<#[", (*) => Send("{U+300C}"))
+  Hotkey("<#<+[", (*) => Send("{U+300E}"))
+  Hotkey("<#]", (*) => Send("{U+300D}"))
+  Hotkey("<#<+]", (*) => Send("{U+300F}"))
+
+  Hotkey("<#<^[", (*) => Send("{U+FE41}"))
+  Hotkey("<#<^<+[", (*) => Send("{U+FE43}"))
+  Hotkey("<#<^]", (*) => Send("{U+FE42}"))
+  Hotkey("<#<^<+]", (*) => Send("{U+FE44}"))
+}
+
+RegFastKeys(FastKeysList)
 
 
 <^<!t:: Send("{U+0303}") ; Combining tilde
@@ -3674,44 +3729,12 @@ HandleFastKey(CharacterName, CheckOff := False)
 ;<^<+<!9:: HandleFastKey("{U+2089}") ; Subscript 9
 ;<^<+<!0:: HandleFastKey("{U+2080}") ; Subscript 0
 
-<^>!>+1:: HandleFastKey("emsp")
-<^>!>+2:: HandleFastKey("ensp")
-<^>!>+3:: HandleFastKey("emsp13")
-<^>!>+4:: HandleFastKey("emsp14")
-<^>!>+5:: HandleFastKey("thinspace")
-<^>!>+6:: HandleFastKey("emsp16")
-<^>!>+7:: HandleFastKey("narrow_no_break_space")
-<^>!>+8:: HandleFastKey("hairspace")
-<^>!>+9:: HandleFastKey("punctuation_space")
-<^>!>+0:: HandleFastKey("zero_width_space")
-<^>!>+-:: HandleFastKey("word_joiner")
-<^>!>+=:: HandleFastKey("figure_space")
-<^>!<+Space:: HandleFastKey("no_break_space")
 
 <^>!m:: Send("{U+2212}") ; Minus
 
 
-<^<!Numpad0:: HandleFastKey("dotted_circle")
-
-<^>!NumpadMult:: HandleFastKey("asterisk_two")
-<^>!>+NumpadMult:: HandleFastKey("asterism")
-<^>!<+NumpadMult:: HandleFastKey("asterisk_low")
-<^>!NumpadDiv:: HandleFastKey("dagger")
-<^>!>+NumpadDiv:: HandleFastKey("dagger_double")
-
 <^>!NumpadSub:: Send("{U+00AD}") ; Soft hyphenation
 
-if CurrentLayout = CodeEn {
-  Hotkey("<#[", (*) => Send("{U+300C}"))
-  Hotkey("<#<+[", (*) => Send("{U+300E}"))
-  Hotkey("<#]", (*) => Send("{U+300D}"))
-  Hotkey("<#<+]", (*) => Send("{U+300F}"))
-
-  Hotkey("<#<^[", (*) => Send("{U+FE41}"))
-  Hotkey("<#<^<+[", (*) => Send("{U+FE43}"))
-  Hotkey("<#<^]", (*) => Send("{U+FE42}"))
-  Hotkey("<#<^<+]", (*) => Send("{U+FE44}"))
-}
 
 <^<!e:: Send("{U+045E}") ; Cyrillic u with breve
 <^<+<!e:: Send("{U+040E}") ; Cyrillic cap u with breve
