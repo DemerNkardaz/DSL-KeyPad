@@ -1460,6 +1460,22 @@ MapInsert(Characters,
       recipe: "ll",
       symbol: Chr(0x1EFB)
     },
+    "0000 lat_c_lig_eszett", {
+      unicode: "{U+1E9E}", html: "&#7838;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!ss", "лигатура SS", "ligature SS", "прописной эсцет", "capital eszett"],
+      recipe: "SS",
+      symbol: Chr(0x1E9E)
+    },
+    "0000 lat_s_lig_eszett", {
+      unicode: "{U+00DF}", html: "&#223;", entity: "&szlig;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ss", "лигатура ss", "ligature ss", "строчный эсцет", "small eszett"],
+      recipe: "ss",
+      symbol: Chr(0x00DF)
+    },
     ;
     ;
     ; * Latin Digraphs
@@ -1546,6 +1562,49 @@ MapInsert(Characters,
       tags: [".lj", "диграф lj", "diagraph lj"],
       recipe: "lj",
       symbol: Chr(0x01C9)
+    },
+    "0000 lat_c_dig_nj", {
+      unicode: "{U+01CA}", html: "&#458;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!nj", "диграф NJ", "diagraph NJ"],
+      recipe: "NJ",
+      symbol: Chr(0x01CA)
+    },
+    "0000 lat_cs_dig_nj", {
+      unicode: "{U+01CB}", html: "&#459;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!.nj", "диграф Nj", "diagraph Nj"],
+      recipe: "Nj",
+      symbol: Chr(0x01CB)
+    },
+    "0000 lat_s_dig_nj", {
+      unicode: "{U+01CC}", html: "&#460;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".nj", "диграф nj", "diagraph nj"],
+      recipe: "nj",
+      symbol: Chr(0x01CC)
+    },
+    ;
+    ;
+    ; * Latin Letters
+    "0000 lat_c_let_th", {
+      unicode: "{U+00DE}", html: "&#222;", entity: "&THORN;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: ["!thp", "прописной торн", "capital thorn"],
+      recipe: "THP",
+      symbol: Chr(0x00DE)
+    },
+    "0000 lat_s_let_th", {
+      unicode: "{U+00FE}", html: "&#254;", entity: "&thorn;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: [".thp", "строчный торн", "small thorn"],
+      recipe: "thp",
+      symbol: Chr(0x00FE)
     },
     ;
     ;
@@ -3048,6 +3107,7 @@ Constructor()
 
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, , True)
+  InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, , True)
 
