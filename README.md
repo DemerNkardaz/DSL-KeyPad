@@ -8,7 +8,7 @@ The main panel of the program can be opened using the combination **Win Alt Home
 
 - Inserting a character by Unicode/Alt-code or its “tag”.
 - Converting numbers to Roman Numerals (17489 → ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ) or to superscript/subscript numbers.
-- The “Smelter” of characters: it allows you to create a specific symbol/ligature by combining available keyboard symbols, for example: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ. If the resource does not support combining characters (á = 2 symbols, a◌́, and may turn out to be as a a ́  ), then some letters can be melted into one mark (á = 1 symbol).
+- The “Smelter” of characters: it allows you to create a specific symbol/ligature by combining available keyboard symbols, for example: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ. If the resource does not support combining characters (á = 2 symbols, a◌́, and may turn out to be as “a ́  ”), then some letters can be melted into one mark (á = 1 symbol).
 
 Most combinations are divided into “activation groups” and you need to first activate the desired group, for example, “Win Alt F1” for “First Diacritic Group,” and then press the key for the desired mark, for example, “a” for acute \[á\].
 
@@ -24,7 +24,7 @@ For using the “DSL KeyPad” you need to simply [download the .ahk file](https
 
 - Вставка символа по Unicode/Alt-code или его «тегу».
 - Конвертация числа в Римские Цифры (17489 → ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ) или в надстрочные/подстрочные цифры.
-- «Плавильня» символов — позволяет через комбинацию доступных на клавиатуре символов получить тот или иной знак/лигатуру, например: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ. Если на ресурсе, где вы вводите текст, не поддерживаются комбинируемые знаки (á = 2 символа, a◌́, и может отобразиться как a ́  ), то некоторые буквы с ними можно «сплавить» в один знак (á = 1 символ).
+- «Плавильня» символов — позволяет через комбинацию доступных на клавиатуре символов получить тот или иной знак/лигатуру, например: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ. Если на ресурсе, где вы вводите текст, не поддерживаются комбинируемые знаки (á = 2 символа, a◌́, и может отобразиться как «a ́  »), то некоторые буквы с ними можно «сплавить» в один знак (á = 1 символ).
 
 Большинство комбинаций разделено на «группы активаций» — необходимо сначала активировать нужную группу, например, «Win Alt F1» для «Первой группы диакритики», а затем нажать на ключ нужного знака, например «ф» для акута \[á\].
 

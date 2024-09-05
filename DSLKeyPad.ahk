@@ -685,13 +685,23 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
         characterTitle := ReadLocale(entryName, "chars")
       }
 
-
       characterSymbol := HasProp(value, "symbol") ? value.symbol : ""
       characterModifier := (HasProp(value, "modifier") && ShowOnFastKeys) ? value.modifier : ""
-      characterBinding := ShowRecipes ? (HasProp(value, "recipeAlt") ? RecipesMicroController(value.recipeAlt) : HasProp(value, "recipe") ? RecipesMicroController(value.recipe) : "") :
-        ShowOnFastKeys && HasProp(value, "alt_on_fast_keys") ? value.alt_on_fast_keys :
-          FormatHotKey(value.group[2], characterModifier)
+      characterBinding := ""
 
+      if (ShowRecipes) {
+        if (HasProp(value, "recipeAlt")) {
+          characterBinding := RecipesMicroController(value.recipeAlt)
+        } else if (HasProp(value, "recipe")) {
+          characterBinding := RecipesMicroController(value.recipe)
+        } else {
+          characterBinding := ""
+        }
+      } else if (ShowOnFastKeys && HasProp(value, "alt_on_fast_keys")) {
+        characterBinding := value.alt_on_fast_keys
+      } else {
+        characterBinding := FormatHotKey(value.group[2], characterModifier)
+      }
 
       if !ShowOnFastKeys || ShowOnFastKeys && (HasProp(value, "show_on_fast_keys") && value.show_on_fast_keys) {
         TermporaryArray.Push([characterTitle, characterBinding, characterSymbol, UniTrim(value.unicode)])
@@ -1247,8 +1257,11 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: ["!aea", "лигатура AE с акутом", "ligature AE with acute"],
-      recipe: "AE" . GetChar("acute"),
-      recipeAlt: "AE" . DottedCircle . GetChar("acute"),
+      recipe: ["AE" . GetChar("acute"), "Æ" . GetChar("acute")],
+      recipeAlt: [
+        "AE" . DottedCircle . GetChar("acute"),
+        "Æ" . DottedCircle . GetChar("acute")
+      ],
       symbol: Chr(0x01FC)
     },
     "0000 lat_s_lig_ae_acute", {
@@ -1256,8 +1269,11 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: [".aea", "лигатура ae с акутом", "ligature ae with acute"],
-      recipe: "ae" . GetChar("acute"),
-      recipeAlt: "ae" . DottedCircle . GetChar("acute"),
+      recipe: ["ae" . GetChar("acute"), "æ" . GetChar("acute")],
+      recipeAlt: [
+        "ae" . DottedCircle . GetChar("acute"),
+        "æ" . DottedCircle . GetChar("acute")
+      ],
       symbol: Chr(0x01FD)
     },
     "0000 lat_c_lig_ae_macron", {
@@ -1265,8 +1281,11 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: ["!aem", "лигатура AE с макроном", "ligature AE with macron"],
-      recipe: "AE" . GetChar("macron"),
-      recipeAlt: "AE" . DottedCircle . GetChar("macron"),
+      recipe: ["AE" . GetChar("macron"), "Æ" . GetChar("macron")],
+      recipeAlt: [
+        "AE" . DottedCircle . GetChar("macron"),
+        "Æ" . DottedCircle . GetChar("macron")
+      ],
       symbol: Chr(0x01E2)
     },
     "0000 lat_s_lig_ae_macron", {
@@ -1274,8 +1293,11 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: [".aem", "лигатура ae с макроном", "ligature ae with macron"],
-      recipe: "ae" . GetChar("macron"),
-      recipeAlt: "ae" . DottedCircle . GetChar("macron"),
+      recipe: ["ae" . GetChar("macron"), "æ" . GetChar("macron")],
+      recipeAlt: [
+        "ae" . DottedCircle . GetChar("macron"),
+        "æ" . DottedCircle . GetChar("macron")
+      ],
       symbol: Chr(0x01E3)
     },
     "0000 lat_c_lig_ao", {
@@ -2334,6 +2356,7 @@ FindCharacterPage() {
   PromptValue := GetCharacterUnicode(PromptValue)
 
   if (PromptValue != "") {
+    Sleep 100
     Run("https://symbl.cc/" . GetLanguageCode() . "/" . PromptValue)
   }
 
