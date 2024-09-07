@@ -1374,7 +1374,7 @@ Characters := Map(
       group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], ["A", "Ф"]],
       show_on_fast_keys: True,
       alt_on_fast_keys: "[Num*]",
-      recipe: "**",
+      recipe: ["**", "2*"],
       symbol: Chr(0x2051)
     },
     "0000 asterism", {
@@ -1383,7 +1383,7 @@ Characters := Map(
       group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], CtrlA],
       show_on_fast_keys: True,
       alt_on_fast_keys: "RShift [Num*]",
-      recipe: "***",
+      recipe: ["***", "3*"],
       symbol: Chr(0x2042)
     },
     "0000 colon_triangle", {
@@ -2859,6 +2859,7 @@ SendAltNumpad(CharacterCode) {
   Send("{Alt Up}")
 }
 
+
 Ligaturise(SmeltingMode := "InputBox") {
   LanguageCode := GetLanguageCode()
   BackupClipboard := ""
@@ -2919,12 +2920,38 @@ Ligaturise(SmeltingMode := "InputBox") {
     LastInput := ""
 
     GetUnicodeSymbol := ""
+    IsValidateBreak := False
+    Found := False
+
+    ValidatorArray := []
+    for chracterEntry, value in Characters {
+      if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+        continue
+      } else {
+        Recipe := value.recipe
+        if IsObject(Recipe) {
+          for _, recipe in Recipe {
+            ValidatorArray.Push(GetUnicodeString(recipe))
+          }
+        } else {
+          ValidatorArray.Push(GetUnicodeString(Recipe))
+        }
+      }
+    }
 
     Loop {
       Input := ih.Input
       if (Input != LastInput) {
         LastInput := Input
-        FoundInLoop := False
+
+        IsValidateBreak := True
+        for validatingValue in ValidatorArray {
+          if RegExMatch(validatingValue, "^" . GetUnicodeString(Input)) {
+            IsValidateBreak := False
+            break
+          }
+        }
+
         for chracterEntry, value in Characters {
           if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
             continue
@@ -2936,21 +2963,21 @@ Ligaturise(SmeltingMode := "InputBox") {
                 if (Input == recipe) {
                   GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
                   IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
-                  FoundInLoop := True
+                  Found := True
                   break 2
                 }
               }
             } else if (Input == Recipe) {
               GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
               IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
-              FoundInLoop := True
+              Found := True
               break 2
             }
           }
         }
       }
 
-      if (StrLen(Input) >= 6) {
+      if (StrLen(Input) >= 6 || IsValidateBreak) {
         break
       }
 
@@ -2958,7 +2985,7 @@ Ligaturise(SmeltingMode := "InputBox") {
     }
 
     ih.Stop()
-    if (!FoundInLoop) {
+    if (!Found) {
       MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
     } else {
       SendText(GetUnicodeSymbol)
@@ -2968,7 +2995,7 @@ Ligaturise(SmeltingMode := "InputBox") {
   }
 
 
-  FoundInLoop := False
+  Found := False
   OriginalValue := PromptValue
   NewValue := ""
 
@@ -2983,18 +3010,18 @@ Ligaturise(SmeltingMode := "InputBox") {
           if (recipe == PromptValue) {
             Send(value.unicode)
             IniWrite PromptValue, ConfigFile, "LatestPrompts", "Ligature"
-            FoundInLoop := True
+            Found := True
           }
         }
       } else if (Recipe == PromptValue) {
         Send(value.unicode)
         IniWrite PromptValue, ConfigFile, "LatestPrompts", "Ligature"
-        FoundInLoop := True
+        Found := True
       }
     }
   }
 
-  if (!FoundInLoop) {
+  if (!Found) {
     SplitWords := StrSplit(OriginalValue, " ")
 
     for i, word in SplitWords {
@@ -3026,12 +3053,12 @@ Ligaturise(SmeltingMode := "InputBox") {
 
     if (NewValue != OriginalValue) {
       Send(NewValue)
-      FoundInLoop := True
+      Found := True
     }
   }
 
 
-  if !FoundInLoop {
+  if !Found {
     if !SmeltingMode = "InputBox" {
       Send("^{Right}")
       Sleep 400
@@ -3087,6 +3114,31 @@ Ligaturise(SmeltingMode := "InputBox") {
 
 GetCharacterUnicode(symbol) {
   return format("{:x}", ord(symbol))
+}
+
+GetUnicodeString(str) {
+  unicodeArray := []
+
+  for symbol in StrSplit(str, "") {
+    unicodeArray.Push(GetCharacterUnicode(symbol))
+  }
+
+  unicodeString := ""
+  totalCount := 0
+  for index in unicodeArray {
+    totalCount++
+  }
+
+  currentIndex := 0
+  for index, unicode in unicodeArray {
+    unicodeString .= unicode
+    currentIndex++
+    if (currentIndex < totalCount) {
+      unicodeString .= "-"
+    }
+  }
+
+  return unicodeString
 }
 
 FindCharacterPage() {
@@ -3472,6 +3524,7 @@ Constructor()
     [Map("ru", "Выплавка символа в тексте", "en", "Melt symbol in text"), "", ""],
     [Map("ru", " (выделить)", "en", " (select)"), "RShift L", "ІУЖ → Ѭ, ІЭ → Ѥ"],
     [Map("ru", " (установить курсор справа от символов)", "en", " (set cursor to the right of the symbols)"), "RShift Backspace", "st → ﬆ, іат → ѩ"],
+    [Map("ru", " Режиме «Compose»", "en", " “Compose” mode"), "RAlt×2", ""],
     [Map("ru", "Конвертировать в верхний индекс", "en", "Convert into superscript"), "Win LAlt 1", "‌¹‌²‌³‌⁴‌⁵‌⁶‌⁷‌⁸‌⁹‌⁰‌⁽‌⁻‌⁼‌⁾"],
     [Map("ru", "Конвертировать в нижний индекс", "en", "Convert into subscript"), "Win RAlt 1", "‌₁‌₂‌₃‌₄‌₅‌₆‌₇‌₈‌₉‌₀‌₍‌₋‌₌‌₎"],
     [Map("ru", "Конвертировать в Римские цифры", "en", "Convert into Roman Numerals"), "Win RAlt 2", "15128 → ↂↁⅭⅩⅩⅧ"],
