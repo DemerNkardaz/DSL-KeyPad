@@ -209,7 +209,7 @@ SetPreviousLayout(Timing := 150) {
   if (PreviousLayout != "") {
     Sleep Timing
     ChangeKeyboardLayout(PreviousLayout, 2)
-    ;IniWrite("", ConfigFile, "ServiceFields", "PrevLayout")
+    IniWrite("", ConfigFile, "ServiceFields", "PrevLayout")
   }
 }
 
@@ -2910,11 +2910,65 @@ Ligaturise(SmeltingMode := "InputBox") {
     Sleep 50
   } else if (SmeltingMode = "Compose") {
     ShowInfoMessage("message_compose")
+
+    ih := InputHook("C", "L")
+    ih.MaxLen := 6
+    ih.Start()
+
+    Input := ""
+    LastInput := ""
+
+    GetUnicodeSymbol := ""
+
+    Loop {
+      Input := ih.Input
+      if (Input != LastInput) {
+        LastInput := Input
+        FoundInLoop := False
+        for chracterEntry, value in Characters {
+          if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+            continue
+          } else {
+            Recipe := value.recipe
+
+            if IsObject(Recipe) {
+              for _, recipe in Recipe {
+                if (Input == recipe) {
+                  GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+                  IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
+                  FoundInLoop := True
+                  break 2
+                }
+              }
+            } else if (Input == Recipe) {
+              GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+              IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
+              FoundInLoop := True
+              break 2
+            }
+          }
+        }
+      }
+
+      if (StrLen(Input) >= 6) {
+        break
+      }
+
+      Sleep 10
+    }
+
+    ih.Stop()
+    if (!FoundInLoop) {
+      MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
+    } else {
+      SendText(GetUnicodeSymbol)
+    }
+
     return
   }
 
 
-  Found := False
+  FoundInLoop := False
   OriginalValue := PromptValue
   NewValue := ""
 
@@ -2929,18 +2983,18 @@ Ligaturise(SmeltingMode := "InputBox") {
           if (recipe == PromptValue) {
             Send(value.unicode)
             IniWrite PromptValue, ConfigFile, "LatestPrompts", "Ligature"
-            Found := True
+            FoundInLoop := True
           }
         }
       } else if (Recipe == PromptValue) {
         Send(value.unicode)
         IniWrite PromptValue, ConfigFile, "LatestPrompts", "Ligature"
-        Found := True
+        FoundInLoop := True
       }
     }
   }
 
-  if (!Found) {
+  if (!FoundInLoop) {
     SplitWords := StrSplit(OriginalValue, " ")
 
     for i, word in SplitWords {
@@ -2972,12 +3026,12 @@ Ligaturise(SmeltingMode := "InputBox") {
 
     if (NewValue != OriginalValue) {
       Send(NewValue)
-      Found := True
+      FoundInLoop := True
     }
   }
 
 
-  if !Found {
+  if !FoundInLoop {
     if !SmeltingMode = "InputBox" {
       Send("^{Right}")
       Sleep 400
@@ -4437,7 +4491,49 @@ FastKeysList :=
     "<^>!i", (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_i", "cyr_s_let_i"], True),
     "<^>!p", (*) => HandleFastKey("prime_single"),
     "<^>!+p", (*) => HandleFastKey("prime_double"),
+    ;
+    "RAlt", (*) => ProceedCompose(),
   ]
+
+RAltsCount := 0
+RAltsTimerEnds := False
+RAltsTimer := ""
+
+ProceedCompose() {
+  global RAltsTimerEnds, RAltsCount
+
+  if (RAltsTimerEnds) {
+    return
+  }
+
+  if RAltsCount = 1 {
+    RAltsCount := 0
+    Ligaturise("Compose")
+    return
+  } else {
+    RAltsCount++
+    RAltsEndingTimer()
+  }
+}
+
+RAltsEndingTimer() {
+  global RAltsTimer
+  if (RAltsTimer != "") {
+    SetTimer(RAltsSetStats, 0)
+    RAltsTimer := ""
+  }
+
+  return SetTimer(RAltsSetStats, -300)
+}
+
+RAltsSetStats() {
+  global RAltsCount, RAltsTimerEnds
+  RAltsCount := 0
+  RAltsTimerEnds := True
+  Sleep 100
+  RAltsTimerEnds := False
+}
+
 
 if CurrentLayout = CodeEn {
   Hotkey("<#[", (*) => Send("{U+300C}"))
