@@ -2051,6 +2051,30 @@ MapInsert(Characters,
       recipe: ["ужат", Chr(0x046B) . Chr(0x0467)],
       symbol: Chr(0xA65B)
     },
+    ;
+    ;
+    ; * Wallet Signs
+    "0000 wallet_eur", {
+      unicode: "{U+20AC}", html: "&#8364;",
+      group: ["Wallet Signs"],
+      tags: ["евро", "euro"],
+      recipe: "eur",
+      symbol: Chr(0x20AC)
+    },
+    "0000 wallet_rub", {
+      unicode: "{U+20BD}", html: "&#8381;",
+      group: ["Wallet Signs"],
+      tags: ["рубль", "ruble"],
+      recipe: ["rub", "руб"],
+      symbol: Chr(0x20BD)
+    },
+    "0000 wallet_pound", {
+      unicode: "{U+00A3}", html: "&#163;", entity: "&pound;",
+      group: ["Wallet Signs"],
+      tags: ["фунт", "pound"],
+      recipe: "gbp",
+      symbol: Chr(0x00A3)
+    },
 )
 
 
@@ -3447,6 +3471,7 @@ Constructor()
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, , True)
+  InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, , True)
 
 
   LigaturesLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.smelting)
