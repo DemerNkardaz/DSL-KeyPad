@@ -2834,7 +2834,8 @@ Ligaturise(SmeltingMode := "InputBox") {
           }
         }
       }
-      NewValue .= TempValue . ""
+      NewValue .= TempValue . (i < SplitWords.Length - 0 ? " " : "")
+
     }
 
     NewValue := RTrim(NewValue)
