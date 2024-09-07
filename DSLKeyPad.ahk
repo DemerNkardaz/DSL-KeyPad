@@ -617,11 +617,27 @@ GetChar(CharacterName) {
 }
 
 MapInsert(MapObj, Pairs*) {
+  keyCount := 0
+  for index in MapObj {
+    keyCount++
+  }
+
+  startNumber := keyCount + 1
+  numberLength := 4
+
   for i, pair in Pairs {
-    if (Mod(i, 2) == 1)
+    if (Mod(i, 2) == 1) {
       key := pair
-    else
-      MapObj[key] := pair
+      ; Форматируем число с ведущими нулями
+      numberStr := "0" . startNumber
+      while (StrLen(numberStr) < numberLength) {
+        numberStr := "0" . numberStr
+      }
+      formattedKey := numberStr . " " . key
+      startNumber++
+    } else {
+      MapObj[formattedKey] := pair
+    }
   }
 }
 
@@ -742,16 +758,17 @@ Characters := Map(
     symbol: "",
     symbolAlt: "",
     symbolCustom: ""
+  })
+MapInsert(Characters,
+  "acute", {
+    unicode: "{U+0301}", html: "&#769;",
+    LaTeX: ["\'", "\acute"],
+    tags: ["acute", "акут", "ударение"],
+    group: [["Diacritics Primary", "Diacritics Fast Primary"], ["a", "ф"]],
+    show_on_fast_keys: True,
+    symbol: DottedCircle . Chr(0x0301)
   },
-    "0000 acute", {
-      unicode: "{U+0301}", html: "&#769;",
-      LaTeX: ["\'", "\acute"],
-      tags: ["acute", "акут", "ударение"],
-      group: [["Diacritics Primary", "Diacritics Fast Primary"], ["a", "ф"]],
-      show_on_fast_keys: True,
-      symbol: DottedCircle . Chr(0x0301)
-    },
-    "0001 acute_double", {
+    "acute_double", {
       unicode: "{U+030B}", html: "&#779;",
       tags: ["double acute", "двойной акут", "двойное ударение"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["A", "Ф"]],
@@ -759,13 +776,13 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x030B)
     },
-    "0002 acute_below", {
+    "acute_below", {
       unicode: "{U+0317}", html: "&#791;",
       tags: ["acute below", "акут снизу"],
       group: ["Diacritics Secondary", ["a", "ф"]],
       symbol: DottedCircle . Chr(0x0317)
     },
-    "0003 acute_tone_vietnamese", {
+    "acute_tone_vietnamese", {
       unicode: "{U+0341}", html: "&#833;",
       tags: ["acute tone", "акут тона"],
       group: ["Diacritics Secondary", ["A", "Ф"]],
@@ -773,13 +790,13 @@ Characters := Map(
     },
     ;
     ;
-    "0004 asterisk_above", {
+    "asterisk_above", {
       unicode: "{U+20F0}", html: "&#8432;",
       tags: ["asterisk above", "астериск сверху"],
       group: ["Diacritics Tertiary", ["a", "ф"]],
       symbol: DottedCircle . Chr(0x20F0)
     },
-    "0005 asterisk_below", {
+    "asterisk_below", {
       unicode: "{U+0359}", html: "&#857;",
       tags: ["asterisk below", "астериск снизу"],
       group: ["Diacritics Tertiary", ["A", "Ф"]],
@@ -787,7 +804,7 @@ Characters := Map(
     },
     ;
     ;
-    "0006 breve", {
+    "breve", {
       unicode: "{U+0306}", html: "&#774;",
       LaTeX: ["\u", "\breve"],
       tags: ["breve", "бреве", "кратка"],
@@ -795,7 +812,7 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0306)
     },
-    "0007 breve_inverted", {
+    "breve_inverted", {
       unicode: "{U+0311}", html: "&#785;",
       tags: ["inverted breve", "перевёрнутое бреве", "перевёрнутая кратка"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["B", "И"]],
@@ -803,13 +820,13 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0311)
     },
-    "0008 breve_below", {
+    "breve_below", {
       unicode: "{U+032E}", html: "&#814;",
       tags: ["breve below", "бреве снизу", "кратка снизу"],
       group: ["Diacritics Secondary", ["b", "и"]],
       symbol: DottedCircle . Chr(0x032E)
     },
-    "0009 breve_inverted_below", {
+    "breve_inverted_below", {
       unicode: "{U+032F}", html: "&#815;",
       tags: ["inverted breve below", "перевёрнутое бреве снизу", "перевёрнутая кратка снизу"],
       group: ["Diacritics Secondary", ["B", "И"]],
@@ -817,19 +834,19 @@ Characters := Map(
     },
     ;
     ;
-    "0010 bridge_above", {
+    "bridge_above", {
       unicode: "{U+0346}", html: "&#838;",
       tags: ["bridge above", "мостик сверху"],
       group: ["Diacritics Tertiary", ["b", "и"]],
       symbol: DottedCircle . Chr(0x0346)
     },
-    "0011 bridge_below", {
+    "bridge_below", {
       unicode: "{U+032A}", html: "&#810;",
       tags: ["bridge below", "мостик снизу"],
       group: ["Diacritics Tertiary", ["B", "И"]],
       symbol: DottedCircle . Chr(0x032A)
     },
-    "0012 bridge_inverted_below", {
+    "bridge_inverted_below", {
       unicode: "{U+033A}", html: "&#825;",
       tags: ["inverted bridge below", "перевёрнутый мостик снизу"],
       group: ["Diacritics Tertiary", CtrlB],
@@ -837,7 +854,7 @@ Characters := Map(
     },
     ;
     ;
-    "0013 circumflex", {
+    "circumflex", {
       unicode: "{U+0302}", html: "&#770;",
       LaTeX: ["\^", "\hat"],
       tags: ["circumflex", "циркумфлекс"],
@@ -845,7 +862,7 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0302)
     },
-    "0014 caron", {
+    "caron", {
       unicode: "{U+030C}", html: "&#780;",
       LaTeX: "\v",
       tags: ["caron", "hachek", "карон", "гачек"],
@@ -854,19 +871,19 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x030C)
     },
-    "0015 circumflex_below", {
+    "circumflex_below", {
       unicode: "{U+032D}", html: "&#813;",
       tags: ["circumflex below", "циркумфлекс снизу"],
       group: ["Diacritics Secondary", ["c", "с"]],
       symbol: DottedCircle . Chr(0x032D)
     },
-    "0016 caron_below", {
+    "caron_below", {
       unicode: "{U+032C}", html: "&#812;",
       tags: ["caron below", "карон снизу", "гачек снизу"],
       group: ["Diacritics Secondary", ["C", "С"]],
       symbol: DottedCircle . Chr(0x032C)
     },
-    "0017 cedilla", {
+    "cedilla", {
       unicode: "{U+0327}", html: "&#807;",
       LaTeX: "\c",
       tags: ["cedilla", "седиль"],
@@ -875,14 +892,14 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0327)
     },
-    "0018 comma_above", {
+    "comma_above", {
       unicode: "{U+0313}", html: "&#787;",
       tags: ["comma above", "запятая сверху"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], [",", "б"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0313)
     },
-    "0019 comma_below", {
+    "comma_below", {
       unicode: "{U+0326}", html: "&#806;",
       tags: ["comma below", "запятая снизу"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["<", "Б"]],
@@ -890,13 +907,13 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0326)
     },
-    "0020 comma_above_turned", {
+    "comma_above_turned", {
       unicode: "{U+0312}", html: "&#786;",
       tags: ["turned comma above", "перевёрнутая запятая сверху"],
       group: ["Diacritics Secondary", [",", "б"]],
       symbol: DottedCircle . Chr(0x0312)
     },
-    "0021 comma_above_reversed", {
+    "comma_above_reversed", {
       unicode: "{U+0314}", html: "&#788;",
       tags: ["reversed comma above", "зеркальная запятая сверху"],
       group: [["Diacritics Secondary", "Diacritics Fast Secondary"], ["<", "Б"]],
@@ -904,13 +921,13 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0314)
     },
-    "0022 comma_above_right", {
+    "comma_above_right", {
       unicode: "{U+0315}", html: "&#789;",
       tags: ["comma above right", "запятая сверху справа"],
       group: ["Diacritics Tertiary", [",", "б"]],
       symbol: DottedCircle . Chr(0x0315)
     },
-    "0023 candrabindu", {
+    "candrabindu", {
       unicode: "{U+0310}", html: "&#784;",
       tags: ["candrabindu", "карон снизу"],
       group: ["Diacritics Tertiary", ["C", "С"]],
@@ -918,7 +935,7 @@ Characters := Map(
     },
     ;
     ;
-    "0024 dot_above", {
+    "dot_above", {
       unicode: "{U+0307}", html: "&#775;",
       LaTeX: ["\.", "\dot"],
       tags: ["dot above", "точка сверху"],
@@ -926,7 +943,7 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0307)
     },
-    "0025 diaeresis", {
+    "diaeresis", {
       unicode: "{U+0308}", html: "&#776;",
       LaTeX: ["\" . QuotationDouble, "\ddot"],
       tags: ["diaeresis", "диерезис"],
@@ -935,13 +952,13 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0308)
     },
-    "0026 dot_below", {
+    "dot_below", {
       unicode: "{U+0323}", html: "&#803;",
       tags: ["dot below", "точка снизу"],
       group: ["Diacritics Secondary", ["d", "в"]],
       symbol: DottedCircle . Chr(0x0323)
     },
-    "0027 diaeresis_below", {
+    "diaeresis_below", {
       unicode: "{U+0324}", html: "&#804;",
       tags: ["diaeresis below", "диерезис снизу"],
       group: ["Diacritics Secondary", ["D", "В"]],
@@ -949,7 +966,7 @@ Characters := Map(
     },
     ;
     ;
-    "0028 fermata", {
+    "fermata", {
       unicode: "{U+0352}", html: "&#850;",
       tags: ["fermata", "фермата"],
       group: [["Diacritics Tertiary", "Diacritics Fast Primary"], ["F", "А"]],
@@ -958,7 +975,7 @@ Characters := Map(
     },
     ;
     ;
-    "0029 grave", {
+    "grave", {
       unicode: "{U+0300}", html: "&#768;",
       LaTeX: ["\" . Backquote, "\grave"],
       tags: ["grave", "гравис"],
@@ -966,7 +983,7 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0300)
     },
-    "0030 grave_double", {
+    "grave_double", {
       unicode: "{U+030F}", html: "&#783;",
       tags: ["double grave", "двойной гравис"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["G", "П"]],
@@ -974,13 +991,13 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x030F)
     },
-    "0031 grave_below", {
+    "grave_below", {
       unicode: "{U+0316}", html: "&#790;",
       tags: ["grave below", "гравис снизу"],
       group: ["Diacritics Secondary", ["g", "п"]],
       symbol: DottedCircle . Chr(0x0316)
     },
-    "0032 grave_tone_vietnamese", {
+    "grave_tone_vietnamese", {
       unicode: "{U+0340}", html: "&#832;",
       tags: ["grave tone", "гравис тона"],
       group: ["Diacritics Secondary", ["G", "П"]],
@@ -988,14 +1005,14 @@ Characters := Map(
     },
     ;
     ;
-    "0033 hook_above", {
+    "hook_above", {
       unicode: "{U+0309}", html: "&#777;",
       tags: ["hook above", "хвостик сверху"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["h", "р"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0309)
     },
-    "0034 horn", {
+    "horn", {
       unicode: "{U+031B}", html: "&#795;",
       tags: ["horn", "рожок"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["H", "Р"]],
@@ -1003,13 +1020,13 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x031B)
     },
-    "0035 palatalized_hook_below", {
+    "palatalized_hook_below", {
       unicode: "{U+0321}", html: "&#801;",
       tags: ["palatalized hook below", "палатальный крюк"],
       group: ["Diacritics Secondary", ["h", "р"]],
       symbol: DottedCircle . Chr(0x0321)
     },
-    "0036 retroflex_hook_below", {
+    "retroflex_hook_below", {
       unicode: "{U+0322}", html: "&#802;",
       tags: ["retroflex hook below", "ретрофлексный крюк"],
       group: ["Diacritics Secondary", ["H", "Р"]],
@@ -1017,14 +1034,14 @@ Characters := Map(
     },
     ;
     ;
-    "0037 macron", {
+    "macron", {
       unicode: "{U+0304}", html: "&#772;",
       tags: ["macron", "макрон"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["m", "ь"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0304)
     },
-    "0038 macron_below", {
+    "macron_below", {
       unicode: "{U+0331}", html: "&#817;",
       tags: ["macron below", "макрон снизу"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["M", "Ь"]],
@@ -1032,45 +1049,45 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0331)
     },
-    "0039 ogonek", {
+    "ogonek", {
       unicode: "{U+0328}", html: "&#808;",
       tags: ["ogonek", "огонэк"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["o", "щ"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0328)
     },
-    "0040 overline", {
+    "overline", {
       unicode: "{U+0305}", html: "&#773;",
       tags: ["overline", "черта сверху"],
       group: ["Diacritics Secondary", ["o", "щ"]],
       symbol: DottedCircle . Chr(0x0305)
     },
-    "0041 overline_double", {
+    "overline_double", {
       unicode: "{U+033F}", html: "&#831;",
       tags: ["overline", "черта сверху"],
       group: ["Diacritics Secondary", ["O", "Щ"]],
       symbol: DottedCircle . Chr(0x033F)
     },
-    "0042 low_line", {
+    "low_line", {
       unicode: "{U+0332}", html: "&#818;",
       tags: ["low line", "черта снизу"],
       group: ["Diacritics Tertiary", ["o", "щ"]],
       symbol: DottedCircle . Chr(0x0332)
     },
-    "0043 low_line_double", {
+    "low_line_double", {
       unicode: "{U+0333}", html: "&#819;",
       tags: ["dobule low line", "двойная черта снизу"],
       group: ["Diacritics Tertiary", ["O", "Щ"]],
       symbol: DottedCircle . Chr(0x0333)
     },
-    "0044 ring_above", {
+    "ring_above", {
       unicode: "{U+030A}", html: "&#778;",
       tags: ["ring above", "кольцо сверху"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["r", "к"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x030A)
     },
-    "0045 ring_below", {
+    "ring_below", {
       unicode: "{U+0325}", html: "&#805;",
       tags: ["ring below", "кольцо снизу"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["R", "К"]],
@@ -1078,20 +1095,20 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0325)
     },
-    "0046 ring_below_double", {
+    "ring_below_double", {
       unicode: "{U+035A}", html: "&#858;",
       tags: ["double ring below", "двойное кольцо снизу"],
       group: ["Diacritics Primary", CtrlR],
       symbol: DottedCircle . Chr(0x035A)
     },
-    "0047 line_vertical", {
+    "line_vertical", {
       unicode: "{U+030D}", html: "&#781;",
       tags: ["vertical line", "вертикальная черта"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["v", "м"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x030D)
     },
-    "0048 line_vertical_double", {
+    "line_vertical_double", {
       unicode: "{U+030E}", html: "&#782;",
       tags: ["double vertical line", "двойная вертикальная черта"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["V", "М"]],
@@ -1099,26 +1116,26 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x030E)
     },
-    "0049 line_vertical_below", {
+    "line_vertical_below", {
       unicode: "{U+0329}", html: "&#809;",
       tags: ["vertical line below", "вертикальная черта снизу"],
       group: ["Diacritics Secondary", ["v", "м"]],
       symbol: DottedCircle . Chr(0x0329)
     },
-    "0050 line_vertical_double_below", {
+    "line_vertical_double_below", {
       unicode: "{U+0348}", html: "&#840;",
       tags: ["dobule vertical line below", "двойная вертикальная черта снизу"],
       group: ["Diacritics Secondary", ["V", "М"]],
       symbol: DottedCircle . Chr(0x0348)
     },
-    "0051 stroke_short", {
+    "stroke_short", {
       unicode: "{U+0335}", html: "&#821;",
       tags: ["short stroke", "короткое перечёркивание"],
       group: [["Diacritics Quatemary", "Diacritics Fast Primary"], ["s", "ы"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0335)
     },
-    "0052 stroke_long", {
+    "stroke_long", {
       unicode: "{U+0336}", html: "&#822;",
       tags: ["long stroke", "длинное перечёркивание"],
       group: [["Diacritics Quatemary", "Diacritics Fast Primary"], ["S", "Ы"]],
@@ -1126,7 +1143,7 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0336)
     },
-    "0053 solidus_short", {
+    "solidus_short", {
       unicode: "{U+0337}", html: "&#823;",
       tags: ["short solidus", "короткая косая черта"],
       group: [["Diacritics Quatemary", "Diacritics Fast Primary"], "\"],
@@ -1134,7 +1151,7 @@ Characters := Map(
       alt_on_fast_keys: "[/]",
       symbol: DottedCircle . Chr(0x0337)
     },
-    "0054 solidus_long", {
+    "solidus_long", {
       unicode: "{U+0338}", html: "&#824;",
       tags: ["long solidus", "длинная косая черта"],
       group: [["Diacritics Quatemary", "Diacritics Fast Primary"], "/"],
@@ -1143,14 +1160,14 @@ Characters := Map(
       alt_on_fast_keys: "[/]",
       symbol: DottedCircle . Chr(0x0338)
     },
-    "0055 tilde", {
+    "tilde", {
       unicode: "{U+0303}", html: "&#771;",
       tags: ["tilde", "тильда"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["t", "е"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0303)
     },
-    "0056 tilde_vertical", {
+    "tilde_vertical", {
       unicode: "{U+033E}", html: "&#830;",
       tags: ["tilde vertical", "вертикальная тильда"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["T", "Е"]],
@@ -1158,32 +1175,32 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x033E)
     },
-    "0057 tilde_below", {
+    "tilde_below", {
       unicode: "{U+0330}", html: "&#816;",
       tags: ["tilde below", "тильда снизу"],
       group: ["Diacritics Secondary", ["t", "е"]],
       symbol: DottedCircle . Chr(0x0330)
     },
-    "0058 tilde_not", {
+    "tilde_not", {
       unicode: "{U+034A}", html: "&#842;",
       tags: ["not tilde", "перечёрнутая тильда"],
       group: ["Diacritics Secondary", ["T", "Е"]],
       symbol: DottedCircle . Chr(0x034A)
     },
-    "0059 tilde_overline", {
+    "tilde_overline", {
       unicode: "{U+0334}", html: "&#820;",
       tags: ["tilde overline", "тильда посередине"],
       group: ["Diacritics Quatemary", ["t", "е"]],
       symbol: DottedCircle . Chr(0x0334)
     },
-    "0060 x_above", {
+    "x_above", {
       unicode: "{U+033D}", html: "&#829;",
       tags: ["x above", "x сверху"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["x", "ч"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x033D)
     },
-    "0061 x_below", {
+    "x_below", {
       unicode: "{U+0353}", html: "&#851;",
       tags: ["x below", "x снизу"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["X", "Ч"]],
@@ -1191,7 +1208,7 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0353)
     },
-    "0062 zigzag_above", {
+    "zigzag_above", {
       unicode: "{U+035B}", html: "&#859;",
       tags: ["zigzag above", "зигзаг сверху"],
       group: [["Diacritics Primary", "Diacritics Fast Primary"], ["z", "я"]],
@@ -1201,7 +1218,7 @@ Characters := Map(
     ;
     ;
     ; ? Шпации
-    "0063 emsp", {
+    "emsp", {
       unicode: "{U+2003}", html: "&#8195;", entity: "&emsp;",
       tags: ["em space", "emspace", "emsp", "круглая шпация"],
       group: ["Spaces", "1"],
@@ -1211,7 +1228,7 @@ Characters := Map(
       symbolAlt: Chr(0x2003),
       symbolCustom: "underline"
     },
-    "0064 ensp", {
+    "ensp", {
       unicode: "{U+2002}", html: "&#8194;", entity: "&ensp;",
       tags: ["en space", "enspace", "ensp", "полукруглая шпация"],
       group: ["Spaces", "2"],
@@ -1221,7 +1238,7 @@ Characters := Map(
       symbolAlt: Chr(0x2002),
       symbolCustom: "underline"
     },
-    "0065 emsp13", {
+    "emsp13", {
       unicode: "{U+2004}", html: "&#8196;", entity: "&emsp13;",
       tags: ["emsp13", "1/3emsp", "1/3 круглой Шпации"],
       group: ["Spaces", "3"],
@@ -1231,7 +1248,7 @@ Characters := Map(
       symbolAlt: Chr(0x2004),
       symbolCustom: "underline"
     },
-    "0066 emsp14", {
+    "emsp14", {
       unicode: "{U+2005}", html: "&#8196;", entity: "&emsp14;",
       tags: ["emsp14", "1/4emsp", "1/4 круглой Шпации"],
       group: ["Spaces", "4"],
@@ -1241,7 +1258,7 @@ Characters := Map(
       symbolAlt: Chr(0x2005),
       symbolCustom: "underline"
     },
-    "0067 thinspace", {
+    "thinspace", {
       unicode: "{U+2009}", html: "&#8201;", entity: "&thinsp;",
       tags: ["thinsp", "thin space", "узкий пробел", "тонкий пробел"],
       group: ["Spaces", "5"],
@@ -1251,7 +1268,7 @@ Characters := Map(
       symbolAlt: Chr(0x2009),
       symbolCustom: "underline"
     },
-    "0068 emsp16", {
+    "emsp16", {
       unicode: "{U+2006}", html: "&#8198;", entity: "&emsp16;",
       tags: ["emsp16", "1/6emsp", "1/6 круглой Шпации"],
       group: ["Spaces", "6"],
@@ -1261,7 +1278,7 @@ Characters := Map(
       symbolAlt: Chr(0x2006),
       symbolCustom: "underline"
     },
-    "0069 narrow_no_break_space", {
+    "narrow_no_break_space", {
       unicode: "{U+202F}", html: "&#8239;",
       tags: ["nnbsp", "narrow no-break space", "узкий неразрывный пробел", "тонкий неразрывный пробел"],
       group: ["Spaces", "7"],
@@ -1271,7 +1288,7 @@ Characters := Map(
       symbolAlt: Chr(0x202F),
       symbolCustom: "underline"
     },
-    "0070 hairspace", {
+    "hairspace", {
       unicode: "{U+200A}", html: "&#8202;", entity: "&hairsp;",
       tags: ["hsp", "hairsp", "hair space", "волосяная шпация"],
       group: ["Spaces", "8"],
@@ -1281,7 +1298,7 @@ Characters := Map(
       symbolAlt: Chr(0x200A),
       symbolCustom: "underline"
     },
-    "0071 punctuation_space", {
+    "punctuation_space", {
       unicode: "{U+2008}", html: "&#8200;", entity: "&puncsp;",
       tags: ["psp", "puncsp", "punctuation space", "пунктуационный пробел"],
       group: ["Spaces", "9"],
@@ -1291,7 +1308,7 @@ Characters := Map(
       symbolAlt: Chr(0x2008),
       symbolCustom: "underline"
     },
-    "0072 zero_width_space", {
+    "zero_width_space", {
       unicode: "{U+200B}", html: "&#8200;", entity: "&NegativeVeryThinSpace;",
       tags: ["zwsp", "zero-width space", "пробел нулевой ширины"],
       group: ["Spaces", "0"],
@@ -1301,7 +1318,7 @@ Characters := Map(
       symbolAlt: Chr(0x200B),
       symbolCustom: "underline"
     },
-    "0073 word_joiner", {
+    "word_joiner", {
       unicode: "{U+2060}", html: "&#8288;", entity: "&NoBreak;",
       tags: ["wj", "word joiner", "соединитель слов"],
       group: ["Spaces", "-"],
@@ -1311,7 +1328,7 @@ Characters := Map(
       symbolAlt: Chr(0x2060),
       symbolCustom: "underline"
     },
-    "0074 figure_space", {
+    "figure_space", {
       unicode: "{U+2007}", html: "&#8199;", entity: "&numsp;",
       tags: ["nsp", "numsp", "figure space", "цифровой пробел"],
       group: ["Spaces", "="],
@@ -1321,7 +1338,7 @@ Characters := Map(
       symbolAlt: Chr(0x2007),
       symbolCustom: "underline"
     },
-    "0075 no_break_space", {
+    "no_break_space", {
       unicode: "{U+00A0}", html: "&#160;", entity: "&nbsp;",
       altcode: "0160",
       LaTeX: "~",
@@ -1332,7 +1349,7 @@ Characters := Map(
       symbolAlt: Chr(0x00A0),
       symbolCustom: "underline"
     },
-    "0076 emquad", {
+    "emquad", {
       unicode: "{U+2001}", html: "&#8193;",
       LaTeX: "\qquad",
       tags: ["em quad", "emquad", "emqd", "em-квадрат"],
@@ -1341,7 +1358,7 @@ Characters := Map(
       symbolAlt: Chr(0x2001),
       symbolCustom: "underline"
     },
-    "0077 enquad", {
+    "enquad", {
       unicode: "{U+2000}", html: "&#8192;",
       LaTeX: "\quad",
       tags: ["en quad", "enquad", "enqd", "en-квадрат"],
@@ -1353,13 +1370,13 @@ Characters := Map(
     ;
     ;
     ; ? Special Characters
-    "0000 arrow_left", {
+    "arrow_left", {
       unicode: "{U+2190}", html: "&#8592;",
       tags: ["left arrow", "стрелка влево"],
       group: ["Special Characters", ["RShift+A"]],
       symbol: Chr(0x2190)
     },
-    "0000 asterisk_low", {
+    "asterisk_low", {
       unicode: "{U+204E}", html: "&#8270;",
       tags: ["low asterisk", "нижний астериск"],
       group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], ["a", "ф"]],
@@ -1368,7 +1385,7 @@ Characters := Map(
       recipe: "*",
       symbol: Chr(0x204E)
     },
-    "0000 asterisk_two", {
+    "asterisk_two", {
       unicode: "{U+2051}", html: "&#8273;",
       tags: ["two asterisks", "два астериска"],
       group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], ["A", "Ф"]],
@@ -1377,7 +1394,7 @@ Characters := Map(
       recipe: ["**", "2*"],
       symbol: Chr(0x2051)
     },
-    "0000 asterism", {
+    "asterism", {
       unicode: "{U+2042}", html: "&#8258;",
       tags: ["asterism", "астеризм"],
       group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], CtrlA],
@@ -1386,25 +1403,25 @@ Characters := Map(
       recipe: ["***", "3*"],
       symbol: Chr(0x2042)
     },
-    "0000 colon_triangle", {
+    "colon_triangle", {
       unicode: "{U+02D0}", html: "&#720;",
       tags: ["triangle colon", "знак долготы"],
       group: ["Special Characters", [";", "ж"]],
       symbol: Chr(0x02D0)
     },
-    "0000 colon_triangle_half", {
+    "colon_triangle_half", {
       unicode: "{U+02D1}", html: "&#721;",
       tags: ["half triangle colon", "знак полудолготы"],
       group: ["Special Characters", [":", "Ж"]],
       symbol: Chr(0x02D1)
     },
-    "0000 degree", {
+    "degree", {
       unicode: "{U+00B0}", html: "&#176;", entity: "&deg;",
       tags: ["degree", "градус"],
       group: ["Special Characters", ["d", "в"]],
       symbol: Chr(0x00B0)
     },
-    "0000 dagger", {
+    "dagger", {
       unicode: "{U+2020}", html: "&#8224;", entity: "&dagger;",
       LaTeX: "\dagger",
       tags: ["dagger", "даггер", "крест"],
@@ -1413,7 +1430,7 @@ Characters := Map(
       alt_on_fast_keys: "[Num/]",
       symbol: Chr(0x2020)
     },
-    "0000 dagger_double", {
+    "dagger_double", {
       unicode: "{U+2021}", html: "&#8225;", entity: "&Dagger;",
       LaTeX: "\ddagger",
       tags: ["double dagger", "двойной даггер", "двойной крест"],
@@ -1422,13 +1439,13 @@ Characters := Map(
       alt_on_fast_keys: "RShift [Num/]",
       symbol: Chr(0x2021)
     },
-    "0000 dagger_tripple", {
+    "dagger_tripple", {
       unicode: "{U+2E4B}", html: "&#11851;",
       tags: ["tripple dagger", "тройной даггер", "тройной крест"],
       group: ["Special Characters", CtrlT],
       symbol: Chr(0x2E4B)
     },
-    "0000 fraction_slash", {
+    "fraction_slash", {
       unicode: "{U+2044}", html: "&#8260;",
       tags: ["fraction slash", "дробная черта"],
       group: [["Special Characters", "Special Fast Secondary"], "/"],
@@ -1436,27 +1453,27 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: Chr(0x2044)
     },
-    "0000 grapheme_joiner", {
+    "grapheme_joiner", {
       unicode: "{U+034F}", html: "&#847;",
       tags: ["grapheme joiner", "соединитель графем"],
       group: ["Special Characters", ["g", "п"]],
       symbol: DottedCircle . Chr(0x034F)
     },
-    "0000 prime_single", {
+    "prime_single", {
       unicode: "{U+2032}", html: "&#8242;", entity: "&prime;",
       LaTeX: "\prime",
       tags: ["prime", "штрих"],
       group: ["Special Characters", ["p", "з"]],
       symbol: Chr(0x2032)
     },
-    "0000 prime_double", {
+    "prime_double", {
       unicode: "{U+2033}", html: "&#8243;", entity: "&Prime;",
       LaTeX: "\prime\prime",
       tags: ["double prime", "двойной штрих"],
       group: ["Special Characters", ["P", "З"]],
       symbol: Chr(0x2033)
     },
-    "0000 permille", {
+    "permille", {
       unicode: "{U+2030}", html: "&#8240;", entity: "&permil;",
       altcode: "0137",
       LaTeX: "\permil",
@@ -1465,7 +1482,7 @@ Characters := Map(
       group: ["Special Characters", "5"],
       symbol: Chr(0x2030)
     },
-    "0000 pertenthousand", {
+    "pertenthousand", {
       unicode: "{U+2031}", html: "&#8241;", entity: "&pertenk;",
       LaTeX: "\textpertenthousand",
       LaTeXPackage: "textcomp",
@@ -1473,7 +1490,7 @@ Characters := Map(
       group: ["Special Characters", "%"],
       symbol: Chr(0x2031)
     },
-    "0000 dotted_circle", {
+    "dotted_circle", {
       unicode: "{U+25CC}", html: "&#9676;",
       tags: ["пунктирный круг", "dottet circle"],
       group: ["Special Fast Primary", "Num0"],
@@ -1485,7 +1502,7 @@ MapInsert(Characters,
   ;
   ;
   ; * Letters Latin
-  "0000 lat_c_lig_aa", {
+  "lat_c_lig_aa", {
     unicode: "{U+A732}", html: "&#42802;",
     titlesAlt: True,
     group: ["Latin Ligatures"],
@@ -1493,7 +1510,7 @@ MapInsert(Characters,
     recipe: "AA",
     symbol: Chr(0xA732)
   },
-    "0000 lat_s_lig_aa", {
+    "lat_s_lig_aa", {
       unicode: "{U+A733}", html: "&#42803;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1501,7 +1518,7 @@ MapInsert(Characters,
       recipe: "aa",
       symbol: Chr(0xA733)
     },
-    "0000 lat_c_lig_ae", {
+    "lat_c_lig_ae", {
       unicode: "{U+00C6}", html: "&#198;", entity: "&AElig;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1509,7 +1526,7 @@ MapInsert(Characters,
       recipe: "AE",
       symbol: Chr(0x00C6)
     },
-    "0000 lat_s_lig_ae", {
+    "lat_s_lig_ae", {
       unicode: "{U+00E6}", html: "&#230;", entity: "&aelig;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1517,7 +1534,7 @@ MapInsert(Characters,
       recipe: "ae",
       symbol: Chr(0x00E6)
     },
-    "0000 lat_c_lig_ae_acute", {
+    "lat_c_lig_ae_acute", {
       unicode: "{U+01FC}", html: "&#508;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1529,7 +1546,7 @@ MapInsert(Characters,
       ],
       symbol: Chr(0x01FC)
     },
-    "0000 lat_s_lig_ae_acute", {
+    "lat_s_lig_ae_acute", {
       unicode: "{U+01FD}", html: "&#509;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1541,7 +1558,7 @@ MapInsert(Characters,
       ],
       symbol: Chr(0x01FD)
     },
-    "0000 lat_c_lig_ae_macron", {
+    "lat_c_lig_ae_macron", {
       unicode: "{U+01E2}", html: "&#482;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1553,7 +1570,7 @@ MapInsert(Characters,
       ],
       symbol: Chr(0x01E2)
     },
-    "0000 lat_s_lig_ae_macron", {
+    "lat_s_lig_ae_macron", {
       unicode: "{U+01E3}", html: "&#483;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1565,7 +1582,7 @@ MapInsert(Characters,
       ],
       symbol: Chr(0x01E3)
     },
-    "0000 lat_c_lig_ao", {
+    "lat_c_lig_ao", {
       unicode: "{U+A734}", html: "&#42804;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1573,7 +1590,7 @@ MapInsert(Characters,
       recipe: "AO",
       symbol: Chr(0xA734)
     },
-    "0000 lat_s_lig_ao", {
+    "lat_s_lig_ao", {
       unicode: "{U+A735}", html: "&#42805;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1581,7 +1598,7 @@ MapInsert(Characters,
       recipe: "ao",
       symbol: Chr(0xA735)
     },
-    "0000 lat_c_lig_au", {
+    "lat_c_lig_au", {
       unicode: "{U+A736}", html: "&#42806;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1589,7 +1606,7 @@ MapInsert(Characters,
       recipe: "AU",
       symbol: Chr(0xA736)
     },
-    "0000 lat_s_lig_au", {
+    "lat_s_lig_au", {
       unicode: "{U+A737}", html: "&#42807;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1597,7 +1614,7 @@ MapInsert(Characters,
       recipe: "au",
       symbol: Chr(0xA737)
     },
-    "0000 lat_c_lig_av", {
+    "lat_c_lig_av", {
       unicode: "{U+A738}", html: "&#42808;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1605,7 +1622,7 @@ MapInsert(Characters,
       recipe: "AV",
       symbol: Chr(0xA738)
     },
-    "0000 lat_s_lig_av", {
+    "lat_s_lig_av", {
       unicode: "{U+A739}", html: "&#42809;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1613,7 +1630,7 @@ MapInsert(Characters,
       recipe: "av",
       symbol: Chr(0xA739)
     },
-    "0000 lat_c_lig_avi", {
+    "lat_c_lig_avi", {
       unicode: "{U+A73A}", html: "&#42810;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1621,7 +1638,7 @@ MapInsert(Characters,
       recipe: "AVI",
       symbol: Chr(0xA73A)
     },
-    "0000 lat_s_lig_avi", {
+    "lat_s_lig_avi", {
       unicode: "{U+A73B}", html: "&#42811;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1629,7 +1646,7 @@ MapInsert(Characters,
       recipe: "avi",
       symbol: Chr(0xA73B)
     },
-    "0000 lat_c_lig_ay", {
+    "lat_c_lig_ay", {
       unicode: "{U+A73C}", html: "&#42812;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1637,7 +1654,7 @@ MapInsert(Characters,
       recipe: "AY",
       symbol: Chr(0xA73C)
     },
-    "0000 lat_s_lig_ay", {
+    "lat_s_lig_ay", {
       unicode: "{U+A73D}", html: "&#42813;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1645,7 +1662,7 @@ MapInsert(Characters,
       recipe: "ay",
       symbol: Chr(0xA73D)
     },
-    "0000 lat_s_lig_ff", {
+    "lat_s_lig_ff", {
       unicode: "{U+FB00}", html: "&#64256;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1653,7 +1670,7 @@ MapInsert(Characters,
       recipe: "ff",
       symbol: Chr(0xFB00)
     },
-    "0000 lat_s_lig_fi", {
+    "lat_s_lig_fi", {
       unicode: "{U+FB01}", html: "&#64257;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1661,7 +1678,7 @@ MapInsert(Characters,
       recipe: "fi",
       symbol: Chr(0xFB01)
     },
-    "0000 lat_s_lig_fl", {
+    "lat_s_lig_fl", {
       unicode: "{U+FB02}", html: "&#64258;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1669,7 +1686,7 @@ MapInsert(Characters,
       recipe: "fl",
       symbol: Chr(0xFB02)
     },
-    "0000 lat_s_lig_ft", {
+    "lat_s_lig_ft", {
       unicode: "{U+FB05}", html: "&#64261;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1677,7 +1694,7 @@ MapInsert(Characters,
       recipe: "ft",
       symbol: Chr(0xFB05)
     },
-    "0000 lat_s_lig_ffi", {
+    "lat_s_lig_ffi", {
       unicode: "{U+FB03}", html: "&#64259;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1685,7 +1702,7 @@ MapInsert(Characters,
       recipe: "ffi",
       symbol: Chr(0xFB03)
     },
-    "0000 lat_s_lig_ffl", {
+    "lat_s_lig_ffl", {
       unicode: "{U+FB04}", html: "&#64260;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1693,7 +1710,7 @@ MapInsert(Characters,
       recipe: "ffl",
       symbol: Chr(0xFB04)
     },
-    "0000 lat_c_lig_ij", {
+    "lat_c_lig_ij", {
       unicode: "{U+0132}", html: "&#306;", entity: "&IJlig;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1701,7 +1718,7 @@ MapInsert(Characters,
       recipe: "IJ",
       symbol: Chr(0x0132)
     },
-    "0000 lat_s_lig_ij", {
+    "lat_s_lig_ij", {
       unicode: "{U+0133}", html: "&#307;", entity: "&ijlig;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1709,7 +1726,7 @@ MapInsert(Characters,
       recipe: "ij",
       symbol: Chr(0x0133)
     },
-    "0000 lat_c_lig_ll", {
+    "lat_c_lig_ll", {
       unicode: "{U+1EFA}", html: "&#7930;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1717,7 +1734,7 @@ MapInsert(Characters,
       recipe: "lL",
       symbol: Chr(0x1EFA)
     },
-    "0000 lat_s_lig_ll", {
+    "lat_s_lig_ll", {
       unicode: "{U+1EFB}", html: "&#7931;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1725,7 +1742,7 @@ MapInsert(Characters,
       recipe: "ll",
       symbol: Chr(0x1EFB)
     },
-    "0000 lat_c_lig_oe", {
+    "lat_c_lig_oe", {
       unicode: "{U+0152}", html: "&#338;", entity: "&OElig;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1733,7 +1750,7 @@ MapInsert(Characters,
       recipe: "OE",
       symbol: Chr(0x0152)
     },
-    "0000 lat_s_lig_oe", {
+    "lat_s_lig_oe", {
       unicode: "{U+0153}", html: "&#339;", entity: "&oelig;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1741,7 +1758,7 @@ MapInsert(Characters,
       recipe: "oe",
       symbol: Chr(0x0153)
     },
-    "0000 lat_c_lig_eszett", {
+    "lat_c_lig_eszett", {
       unicode: "{U+1E9E}", html: "&#7838;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1749,7 +1766,7 @@ MapInsert(Characters,
       recipe: "SS",
       symbol: Chr(0x1E9E)
     },
-    "0000 lat_s_lig_eszett", {
+    "lat_s_lig_eszett", {
       unicode: "{U+00DF}", html: "&#223;", entity: "&szlig;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1760,7 +1777,7 @@ MapInsert(Characters,
     ;
     ;
     ; * Latin Digraphs
-    "0000 lat_c_dig_dz", {
+    "lat_c_dig_dz", {
       unicode: "{U+01F1}", html: "&#497;",
       titlesAlt: True,
       group: ["Latin Digraphs"],
@@ -1768,7 +1785,7 @@ MapInsert(Characters,
       recipe: "DZ",
       symbol: Chr(0x01F1)
     },
-    "0000 lat_cs_dig_dz", {
+    "lat_cs_dig_dz", {
       unicode: "{U+01F2}", html: "&#498;",
       titlesAlt: True,
       group: ["Latin Digraphs"],
@@ -1776,7 +1793,7 @@ MapInsert(Characters,
       recipe: "Dz",
       symbol: Chr(0x01F2)
     },
-    "0000 lat_s_dig_dz", {
+    "lat_s_dig_dz", {
       unicode: "{U+01F3}", html: "&#499;",
       titlesAlt: True,
       group: ["Latin Digraphs"],
@@ -1784,7 +1801,7 @@ MapInsert(Characters,
       recipe: "dz",
       symbol: Chr(0x01F3)
     },
-    "0000 lat_c_dig_dz_caron", {
+    "lat_c_dig_dz_caron", {
       unicode: "{U+01C4}", html: "&#452;",
       titlesAlt: True,
       group: ["Latin Digraphs"],
@@ -1796,7 +1813,7 @@ MapInsert(Characters,
       ],
       symbol: Chr(0x01C4)
     },
-    "0000 lat_cs_dig_dz_caron", {
+    "lat_cs_dig_dz_caron", {
       unicode: "{U+01C5}", html: "&#453;",
       titlesAlt: True,
       group: ["Latin Digraphs"],
@@ -1808,7 +1825,7 @@ MapInsert(Characters,
       ],
       symbol: Chr(0x01C5)
     },
-    "0000 lat_s_dig_dz_caron", {
+    "lat_s_dig_dz_caron", {
       unicode: "{U+01C6}", html: "&#454;",
       titlesAlt: True,
       group: ["Latin Digraphs"],
@@ -1820,7 +1837,7 @@ MapInsert(Characters,
       ],
       symbol: Chr(0x01C6)
     },
-    "0000 lat_s_dig_feng", {
+    "lat_s_dig_feng", {
       unicode: "{U+02A9}", html: "&#681;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1828,7 +1845,7 @@ MapInsert(Characters,
       recipe: ["fnj", "fŋ"],
       symbol: Chr(0x02A9)
     },
-    "0000 lat_c_dig_lj", {
+    "lat_c_dig_lj", {
       unicode: "{U+01C7}", html: "&#455;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1836,7 +1853,7 @@ MapInsert(Characters,
       recipe: "LJ",
       symbol: Chr(0x01C7)
     },
-    "0000 lat_cs_dig_lj", {
+    "lat_cs_dig_lj", {
       unicode: "{U+01C8}", html: "&#456;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1844,7 +1861,7 @@ MapInsert(Characters,
       recipe: "Lj",
       symbol: Chr(0x01C8)
     },
-    "0000 lat_s_dig_lj", {
+    "lat_s_dig_lj", {
       unicode: "{U+01C9}", html: "&#457;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1852,7 +1869,7 @@ MapInsert(Characters,
       recipe: "lj",
       symbol: Chr(0x01C9)
     },
-    "0000 lat_s_dig_ls", {
+    "lat_s_dig_ls", {
       unicode: "{U+02AA}", html: "&#682;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1860,7 +1877,7 @@ MapInsert(Characters,
       recipe: "ls",
       symbol: Chr(0x02AA)
     },
-    "0000 lat_s_dig_lz", {
+    "lat_s_dig_lz", {
       unicode: "{U+02AB}", html: "&#683;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1868,7 +1885,7 @@ MapInsert(Characters,
       recipe: "lz",
       symbol: Chr(0x02AB)
     },
-    "0000 lat_c_dig_nj", {
+    "lat_c_dig_nj", {
       unicode: "{U+01CA}", html: "&#458;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1876,7 +1893,7 @@ MapInsert(Characters,
       recipe: "N-J",
       symbol: Chr(0x01CA)
     },
-    "0000 lat_cs_dig_nj", {
+    "lat_cs_dig_nj", {
       unicode: "{U+01CB}", html: "&#459;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1884,7 +1901,7 @@ MapInsert(Characters,
       recipe: "N-j",
       symbol: Chr(0x01CB)
     },
-    "0000 lat_s_dig_nj", {
+    "lat_s_dig_nj", {
       unicode: "{U+01CC}", html: "&#460;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1892,7 +1909,7 @@ MapInsert(Characters,
       recipe: "n-j",
       symbol: Chr(0x01CC)
     },
-    "0000 lat_s_dig_st", {
+    "lat_s_dig_st", {
       unicode: "{U+FB06}", html: "&#64262;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1900,7 +1917,7 @@ MapInsert(Characters,
       recipe: "st",
       symbol: Chr(0xFB06)
     },
-    "0000 lat_s_dig_tc", {
+    "lat_s_dig_tc", {
       unicode: "{U+02A8}", html: "&#680;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1908,7 +1925,7 @@ MapInsert(Characters,
       recipe: "tc",
       symbol: Chr(0x02A8)
     },
-    "0000 lat_s_dig_tch", {
+    "lat_s_dig_tch", {
       unicode: "{U+02A7}", html: "&#679;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1916,7 +1933,7 @@ MapInsert(Characters,
       recipe: ["tch", "tʃ"],
       symbol: Chr(0x02A7)
     },
-    "0000 lat_s_dig_ts", {
+    "lat_s_dig_ts", {
       unicode: "{U+02A6}", html: "&#678;",
       titlesAlt: True,
       group: ["Latin Ligatures"],
@@ -1927,7 +1944,7 @@ MapInsert(Characters,
     ;
     ;
     ; * Latin Letters
-    "0000 lat_c_let_th", {
+    "lat_c_let_th", {
       unicode: "{U+00DE}", html: "&#222;", entity: "&THORN;",
       titlesAlt: True,
       group: ["Latin Extended"],
@@ -1935,7 +1952,7 @@ MapInsert(Characters,
       recipe: "THP",
       symbol: Chr(0x00DE)
     },
-    "0000 lat_s_let_th", {
+    "lat_s_let_th", {
       unicode: "{U+00FE}", html: "&#254;", entity: "&thorn;",
       titlesAlt: True,
       group: ["Latin Extended"],
@@ -1943,7 +1960,7 @@ MapInsert(Characters,
       recipe: "thp",
       symbol: Chr(0x00FE)
     },
-    "0000 lat_c_let_nj", {
+    "lat_c_let_nj", {
       unicode: "{U+014A}", html: "&#330;", entity: "&ENG;",
       titlesAlt: True,
       group: ["Latin Extended"],
@@ -1951,7 +1968,7 @@ MapInsert(Characters,
       recipe: "NJ",
       symbol: Chr(0x014A)
     },
-    "0000 lat_s_let_nj", {
+    "lat_s_let_nj", {
       unicode: "{U+014B}", html: "&#331;", entity: "&eng;",
       titlesAlt: True,
       group: ["Latin Extended"],
@@ -1959,7 +1976,7 @@ MapInsert(Characters,
       recipe: "nj",
       symbol: Chr(0x014B)
     },
-    "0000 lat_s_let_i_dotless", {
+    "lat_s_let_i_dotless", {
       unicode: "{U+0131}", html: "&#305;", entity: "&imath;",
       titlesAlt: True,
       group: ["Latin Extended", "i"],
@@ -1967,10 +1984,17 @@ MapInsert(Characters,
       tags: ["і без точки", "i dotless"],
       symbol: Chr(0x0131)
     },
+    "lat_s_let_ie", {
+      unicode: "{U+AB61}", html: "&#43873;;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: ["строчная ie", "small ie"],
+      symbol: Chr(0xAB61)
+    },
     ;
     ;
     ; * Accented Latin Letters
-    "0000 lat_c_let_a_acute", {
+    "lat_c_let_a_acute", {
       unicode: "{U+00C1}", html: "&#193;", entity: "&Aacute;",
       titlesAlt: True,
       group: ["Latin Accented"],
@@ -1979,7 +2003,7 @@ MapInsert(Characters,
       recipeAlt: "A" . DottedCircle . GetChar("acute"),
       symbol: Chr(0x00C1)
     },
-    "0000 lat_s_let_a_acute", {
+    "lat_s_let_a_acute", {
       unicode: "{U+00E1}", html: "&#225;", entity: "&aacute;",
       titlesAlt: True,
       group: ["Latin Accented"],
@@ -1988,7 +2012,7 @@ MapInsert(Characters,
       recipeAlt: "a" . DottedCircle . GetChar("acute"),
       symbol: Chr(0x00E1)
     },
-    "0000 lat_c_let_a_breve", {
+    "lat_c_let_a_breve", {
       unicode: "{U+0102}", html: "&#258;", entity: "&Abreve;",
       titlesAlt: True,
       group: ["Latin Accented"],
@@ -1997,7 +2021,7 @@ MapInsert(Characters,
       recipeAlt: "A" . DottedCircle . GetChar("breve"),
       symbol: Chr(0x0102)
     },
-    "0000 lat_s_let_a_breve", {
+    "lat_s_let_a_breve", {
       unicode: "{U+0103}", html: "&#259;", entity: "&abreve;",
       titlesAlt: True,
       group: ["Latin Accented"],
@@ -2006,7 +2030,7 @@ MapInsert(Characters,
       recipeAlt: "a" . DottedCircle . GetChar("breve"),
       symbol: Chr(0x0103)
     },
-    "0000 lat_c_let_a_macron", {
+    "lat_c_let_a_macron", {
       unicode: "{U+0100}", html: "&#256;", entity: "&Amacr;",
       titlesAlt: True,
       group: ["Latin Accented"],
@@ -2015,7 +2039,7 @@ MapInsert(Characters,
       recipeAlt: "A" . DottedCircle . GetChar("macron"),
       symbol: Chr(0x0100)
     },
-    "0000 lat_s_let_a_macron", {
+    "lat_s_let_a_macron", {
       unicode: "{U+0101}", html: "&#257;", entity: "&amacr;",
       titlesAlt: True,
       group: ["Latin Accented"],
@@ -2027,7 +2051,39 @@ MapInsert(Characters,
     ;
     ;
     ; * Letters Cyriillic
-    "0000 cyr_c_yus_big", {
+    "cyr_c_a_iotified", {
+      unicode: "{U+A656}", html: "&#42582;",
+      titlesAlt: True,
+      group: ["Cyrillic Ligatures & Letters"],
+      tags: ["!йа", "!ia", "А йотированное", "A iotified"],
+      recipe: "ІА",
+      symbol: Chr(0xA656)
+    },
+    "cyr_s_a_iotified", {
+      unicode: "{U+A657}", html: "&#42583;",
+      titlesAlt: True,
+      group: ["Cyrillic Ligatures & Letters"],
+      tags: [".йа", ".ia", "а йотированное", "a iotified"],
+      recipe: "іа",
+      symbol: Chr(0xA657)
+    },
+    "cyr_c_e_iotified", {
+      unicode: "{U+0464}", html: "&#1124;",
+      titlesAlt: True,
+      group: ["Cyrillic Ligatures & Letters"],
+      tags: ["!йэ", "!ie", "А йотированное", "E iotified"],
+      recipe: ["ІЕ", "ІЄ"],
+      symbol: Chr(0x0464)
+    },
+    "cyr_s_e_iotified", {
+      unicode: "{U+0465}", html: "&#1125;",
+      titlesAlt: True,
+      group: ["Cyrillic Ligatures & Letters"],
+      tags: [".йэ", ".ie", "а йотированное", "e iotified"],
+      recipe: ["іе", "є"],
+      symbol: Chr(0x0465)
+    },
+    "cyr_c_yus_big", {
       unicode: "{U+046A}", html: "&#1130;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2035,7 +2091,7 @@ MapInsert(Characters,
       recipe: "УЖ",
       symbol: Chr(0x046A)
     },
-    "0000 cyr_s_yus_big", {
+    "cyr_s_yus_big", {
       unicode: "{U+046B}", html: "&#046B;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2043,7 +2099,7 @@ MapInsert(Characters,
       recipe: "уж",
       symbol: Chr(0x046B)
     },
-    "0000 cyr_c_yus_big_iotified", {
+    "cyr_c_yus_big_iotified", {
       unicode: "{U+046C}", html: "&#1132;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2051,7 +2107,7 @@ MapInsert(Characters,
       recipe: ["ІУЖ", "І" . Chr(0x046A)],
       symbol: Chr(0x046C)
     },
-    "0000 cyr_s_yus_big_iotified", {
+    "cyr_s_yus_big_iotified", {
       unicode: "{U+046D}", html: "&#1133;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2059,7 +2115,7 @@ MapInsert(Characters,
       recipe: ["іуж", "і" . Chr(0x046B)],
       symbol: Chr(0x046D)
     },
-    "0000 cyr_c_yus_little", {
+    "cyr_c_yus_little", {
       unicode: "{U+0466}", html: "&#1126;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2067,7 +2123,7 @@ MapInsert(Characters,
       recipe: "АТ",
       symbol: Chr(0x0466)
     },
-    "0000 cyr_s_yus_little", {
+    "cyr_s_yus_little", {
       unicode: "{U+0467}", html: "&#1127;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2075,7 +2131,7 @@ MapInsert(Characters,
       recipe: "ат",
       symbol: Chr(0x0467)
     },
-    "0000 cyr_c_yus_little_iotified", {
+    "cyr_c_yus_little_iotified", {
       unicode: "{U+0468}", html: "&#1128;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2083,7 +2139,7 @@ MapInsert(Characters,
       recipe: ["ІАТ", "І" . Chr(0x0466)],
       symbol: Chr(0x0468)
     },
-    "0000 cyr_s_yus_little_iotified", {
+    "cyr_s_yus_little_iotified", {
       unicode: "{U+0469}", html: "&#1129;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2091,7 +2147,7 @@ MapInsert(Characters,
       recipe: ["іат", "і" . Chr(0x0467)],
       symbol: Chr(0x0469)
     },
-    "0000 cyr_c_yus_little_closed", {
+    "cyr_c_yus_little_closed", {
       unicode: "{U+A658}", html: "&#42584;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2099,7 +2155,7 @@ MapInsert(Characters,
       recipe: ["_АТ", "_" . Chr(0x0466)],
       symbol: Chr(0xA658)
     },
-    "0000 cyr_s_yus_little_closed", {
+    "cyr_s_yus_little_closed", {
       unicode: "{U+A659}", html: "&#42585;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2107,7 +2163,7 @@ MapInsert(Characters,
       recipe: ["_ат", "_" . Chr(0x0467)],
       symbol: Chr(0xA659)
     },
-    "0000 cyr_c_yus_little_closed_iotified", {
+    "cyr_c_yus_little_closed_iotified", {
       unicode: "{U+A65C}", html: "&#42588;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2115,7 +2171,7 @@ MapInsert(Characters,
       recipe: ["І_АТ", "І_" . Chr(0x0466)],
       symbol: Chr(0xA65C)
     },
-    "0000 cyr_s_yus_little_closed_iotified", {
+    "cyr_s_yus_little_closed_iotified", {
       unicode: "{U+A65D}", html: "&#42589;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2123,7 +2179,7 @@ MapInsert(Characters,
       recipe: ["і_ат", "і_" . Chr(0x0467)],
       symbol: Chr(0xA65D)
     },
-    "0000 cyr_c_yus_blended", {
+    "cyr_c_yus_blended", {
       unicode: "{U+A65A}", html: "&#42586;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2131,7 +2187,7 @@ MapInsert(Characters,
       recipe: ["УЖАТ", Chr(0x046A) . Chr(0x0466)],
       symbol: Chr(0xA65A)
     },
-    "0000 cyr_s_yus_blended", {
+    "cyr_s_yus_blended", {
       unicode: "{U+A65B}", html: "&#42587;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
@@ -2139,7 +2195,7 @@ MapInsert(Characters,
       recipe: ["ужат", Chr(0x046B) . Chr(0x0467)],
       symbol: Chr(0xA65B)
     },
-    "0000 cyr_c_let_i", {
+    "cyr_c_let_i", {
       unicode: "{U+0406}", html: "&#1030;",
       altCode: "0178 RU" . Chr(0x2328),
       titlesAlt: True,
@@ -2148,7 +2204,7 @@ MapInsert(Characters,
       tags: ["И десятиричное", "I cyrillic"],
       symbol: Chr(0x0406)
     },
-    "0000 cyr_s_let_i", {
+    "cyr_s_let_i", {
       unicode: "{U+0456}", html: "&#1110;",
       altCode: "0179 RU" . Chr(0x2328),
       titlesAlt: True,
@@ -2160,21 +2216,21 @@ MapInsert(Characters,
     ;
     ;
     ; * Wallet Signs
-    "0000 wallet_eur", {
+    "wallet_eur", {
       unicode: "{U+20AC}", html: "&#8364;",
       group: ["Wallet Signs"],
       tags: ["евро", "euro"],
       recipe: "eur",
       symbol: Chr(0x20AC)
     },
-    "0000 wallet_rub", {
+    "wallet_rub", {
       unicode: "{U+20BD}", html: "&#8381;",
       group: ["Wallet Signs"],
       tags: ["рубль", "ruble"],
       recipe: ["rub", "руб"],
       symbol: Chr(0x20BD)
     },
-    "0000 wallet_pound", {
+    "wallet_pound", {
       unicode: "{U+00A3}", html: "&#163;", entity: "&pound;",
       group: ["Wallet Signs"],
       tags: ["фунт", "pound"],
@@ -2191,7 +2247,7 @@ CommandList := Map(
     preview: "",
     ui_set: {}
   },
-    "0000 go_symbol_page", {},
+    "go_symbol_page", {},
 )
 
 
