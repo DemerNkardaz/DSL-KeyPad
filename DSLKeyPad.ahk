@@ -2859,10 +2859,29 @@ SendAltNumpad(CharacterCode) {
   Send("{Alt Up}")
 }
 
+RecipeValidatorArray := []
+for chracterEntry, value in Characters {
+  if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+    continue
+  } else {
+    Recipe := value.recipe
+    if IsObject(Recipe) {
+      for _, recipe in Recipe {
+        RecipeValidatorArray.Push(GetUnicodeString(recipe))
+      }
+    } else {
+      RecipeValidatorArray.Push(GetUnicodeString(Recipe))
+    }
+  }
+}
+
 
 Ligaturise(SmeltingMode := "InputBox") {
   LanguageCode := GetLanguageCode()
   BackupClipboard := ""
+
+  Found := False
+
 
   if (SmeltingMode = "InputBox") {
     PromptValue := IniRead(ConfigFile, "LatestPrompts", "Ligature", "")
@@ -2921,23 +2940,6 @@ Ligaturise(SmeltingMode := "InputBox") {
 
     GetUnicodeSymbol := ""
     IsValidateBreak := False
-    Found := False
-
-    ValidatorArray := []
-    for chracterEntry, value in Characters {
-      if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
-        continue
-      } else {
-        Recipe := value.recipe
-        if IsObject(Recipe) {
-          for _, recipe in Recipe {
-            ValidatorArray.Push(GetUnicodeString(recipe))
-          }
-        } else {
-          ValidatorArray.Push(GetUnicodeString(Recipe))
-        }
-      }
-    }
 
     Loop {
       Input := ih.Input
@@ -2945,7 +2947,7 @@ Ligaturise(SmeltingMode := "InputBox") {
         LastInput := Input
 
         IsValidateBreak := True
-        for validatingValue in ValidatorArray {
+        for validatingValue in RecipeValidatorArray {
           if RegExMatch(validatingValue, "^" . GetUnicodeString(Input)) {
             IsValidateBreak := False
             break
@@ -2986,7 +2988,11 @@ Ligaturise(SmeltingMode := "InputBox") {
 
     ih.Stop()
     if (!Found) {
-      MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
+      if (SmeltingMode = "Compose") {
+        ShowInfoMessage("warning_recipe_absent")
+      } else {
+        MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
+      }
     } else {
       SendText(GetUnicodeSymbol)
     }
@@ -2994,8 +3000,6 @@ Ligaturise(SmeltingMode := "InputBox") {
     return
   }
 
-
-  Found := False
   OriginalValue := PromptValue
   NewValue := ""
 
