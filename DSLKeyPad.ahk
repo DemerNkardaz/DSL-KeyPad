@@ -628,7 +628,6 @@ MapInsert(MapObj, Pairs*) {
   for i, pair in Pairs {
     if (Mod(i, 2) == 1) {
       key := pair
-      ; Форматируем число с ведущими нулями
       numberStr := "0" . startNumber
       while (StrLen(numberStr) < numberLength) {
         numberStr := "0" . numberStr
@@ -687,6 +686,9 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
     }
 
     GroupValid := False
+    if (ShowRecipes && !HasProp(value, "recipe")) {
+      continue
+    }
 
     if (HasProp(value, "group") && value.group[1] == GroupName) {
       GroupValid := True
@@ -1459,6 +1461,15 @@ MapInsert(Characters,
       group: ["Special Characters", ["g", "п"]],
       symbol: DottedCircle . Chr(0x034F)
     },
+    "multiplication", {
+      unicode: "{U+00D7}", html: "&#215;", entity: "&times;",
+      altcode: "0215",
+      tags: ["multiplication", "умножение"],
+      group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "8"],
+      show_on_fast_keys: True,
+      recipe: "-x",
+      symbol: Chr(0x00D7)
+    },
     "prime_single", {
       unicode: "{U+2032}", html: "&#8242;", entity: "&prime;",
       LaTeX: "\prime",
@@ -1490,12 +1501,102 @@ MapInsert(Characters,
       group: ["Special Characters", "%"],
       symbol: Chr(0x2031)
     },
+    "noequals", {
+      unicode: "{U+2260}", html: "&#8800;", entity: "&ne;",
+      tags: ["plus minus", "плюс-минус"],
+      group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "="],
+      show_on_fast_keys: True,
+      recipe: "+\",
+      symbol: Chr(0x2260)
+    },
+    "almostequals", {
+      unicode: "{U+2248}", html: "&#8776;", entity: "&asymp;",
+      tags: ["almost equals", "примерно равно"],
+      group: [["Smelting Special", "Special Fast Secondary"], "="],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [=]",
+      recipe: "~=",
+      symbol: Chr(0x2248)
+    },
+    "plusminus", {
+      unicode: "{U+00B1}", html: "&#177;", entity: "&plusmn;",
+      altcode: "0177",
+      tags: ["plus minus", "плюс-минус"],
+      group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "+"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [=]",
+      recipe: "+-",
+      symbol: Chr(0x00B1)
+    },
     "dotted_circle", {
       unicode: "{U+25CC}", html: "&#9676;",
       tags: ["пунктирный круг", "dottet circle"],
       group: ["Special Fast Primary", "Num0"],
       show_on_fast_keys: True,
       symbol: DottedCircle
+    },
+    "ellipsis", {
+      unicode: "{U+2026}", html: "&#8230;", entity: "&hellip;",
+      altcode: "0133",
+      tags: ["ellipsis", "многоточие"],
+      group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "."],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[/]",
+      recipe: "...",
+      symbol: Chr(0x2026)
+    },
+    "two_dot_leader", {
+      unicode: "{U+2025}", html: "&#8229;",
+      tags: ["two dot leader", "двухточечный пунктир"],
+      group: [["Smelting Special", "Special Fast Secondary"], "."],
+      recipe: "..",
+      symbol: Chr(0x2025)
+    },
+    "emdash", {
+      unicode: "{U+2014}", html: "&#8212;", entity: "&mdash;",
+      altcode: "0151",
+      tags: ["em dash", "длинное тире"],
+      group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "-"],
+      show_on_fast_keys: True,
+      recipe: "---",
+      symbol: Chr(0x2014)
+    },
+    "endash", {
+      unicode: "{U+2013}", html: "&#8211;", entity: "&ndash;",
+      altcode: "0150",
+      tags: ["en dash", "короткое тире"],
+      group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "_"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [-]",
+      recipe: "--",
+      symbol: Chr(0x2013)
+    },
+    "softhyphen", {
+      unicode: "{U+00AD}", html: "&#173;", entity: "&shy;",
+      altcode: "0173",
+      tags: ["soft hyphen", "мягкий перенос"],
+      group: [["Smelting Special", "Special Fast Primary"], "-"],
+      show_on_fast_keys: True,
+      recipe: ".-",
+      symbol: Chr(0x00AD)
+    },
+    "hyphen", {
+      unicode: "{U+2010}", html: "&#8208;", entity: "&hyphen;",
+      tags: ["hyphen", "дефис"],
+      group: [["Smelting Special", "Special Fast Secondary"], "-"],
+      modifier: "RShift",
+      show_on_fast_keys: True,
+      recipe: "-",
+      symbol: Chr(0x2010)
+    },
+    "minus", {
+      unicode: "{U+2212}", html: "&#8722;", entity: "&minus;",
+      tags: ["minus", "минус"],
+      group: [["Smelting Special", "Special Fast Primary"], "-"],
+      modifier: "LShift",
+      show_on_fast_keys: True,
+      recipe: "m-",
+      symbol: Chr(0x2212)
     },
 )
 MapInsert(Characters,
@@ -1758,6 +1859,30 @@ MapInsert(Characters,
       recipe: "oe",
       symbol: Chr(0x0153)
     },
+    "lat_c_lig_oo", {
+      unicode: "{U+A74E}", html: "&#42830;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!oo", "лигатура OO", "ligature OO"],
+      recipe: "OO",
+      symbol: Chr(0xA74E)
+    },
+    "lat_s_lig_oo", {
+      unicode: "{U+A74F}", html: "&#42831;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".oo", "лигатура oo", "ligature oo"],
+      recipe: "oo",
+      symbol: Chr(0xA74F)
+    },
+    "lat_s_lig_ue", {
+      unicode: "{U+1D6B}", html: "&#7531;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ue", "лигатура ue", "ligature ue"],
+      recipe: "ue",
+      symbol: Chr(0x1D6B)
+    },
     "lat_c_lig_eszett", {
       unicode: "{U+1E9E}", html: "&#7838;",
       titlesAlt: True,
@@ -1944,20 +2069,36 @@ MapInsert(Characters,
     ;
     ;
     ; * Latin Letters
+    "lat_s_let_i_dotless", {
+      unicode: "{U+0131}", html: "&#305;", entity: "&imath;",
+      titlesAlt: True,
+      group: ["Latin Extended", "i"],
+      show_on_fast_keys: True,
+      tags: ["і без точки", "i dotless"],
+      symbol: Chr(0x0131)
+    },
+    "lat_s_let_ie", {
+      unicode: "{U+AB61}", html: "&#43873;;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: ["строчная ie", "small ie"],
+      recipe: "ie",
+      symbol: Chr(0xAB61)
+    },
     "lat_c_let_th", {
       unicode: "{U+00DE}", html: "&#222;", entity: "&THORN;",
       titlesAlt: True,
       group: ["Latin Extended"],
-      tags: ["!thp", "прописной торн", "capital thorn"],
-      recipe: "THP",
+      tags: ["!th", "прописной торн", "capital thorn"],
+      recipe: "TH",
       symbol: Chr(0x00DE)
     },
     "lat_s_let_th", {
       unicode: "{U+00FE}", html: "&#254;", entity: "&thorn;",
       titlesAlt: True,
       group: ["Latin Extended"],
-      tags: [".thp", "строчный торн", "small thorn"],
-      recipe: "thp",
+      tags: [".th", "строчный торн", "small thorn"],
+      recipe: "th",
       symbol: Chr(0x00FE)
     },
     "lat_c_let_nj", {
@@ -1975,21 +2116,6 @@ MapInsert(Characters,
       tags: [".nj", "строчный энг", "small eng"],
       recipe: "nj",
       symbol: Chr(0x014B)
-    },
-    "lat_s_let_i_dotless", {
-      unicode: "{U+0131}", html: "&#305;", entity: "&imath;",
-      titlesAlt: True,
-      group: ["Latin Extended", "i"],
-      show_on_fast_keys: True,
-      tags: ["і без точки", "i dotless"],
-      symbol: Chr(0x0131)
-    },
-    "lat_s_let_ie", {
-      unicode: "{U+AB61}", html: "&#43873;;",
-      titlesAlt: True,
-      group: ["Latin Extended"],
-      tags: ["строчная ie", "small ie"],
-      symbol: Chr(0xAB61)
     },
     ;
     ;
@@ -2071,7 +2197,7 @@ MapInsert(Characters,
       unicode: "{U+0464}", html: "&#1124;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
-      tags: ["!йэ", "!ie", "А йотированное", "E iotified"],
+      tags: ["!йэ", "!ie", "Е йотированное", "E iotified"],
       recipe: ["ІЕ", "ІЄ"],
       symbol: Chr(0x0464)
     },
@@ -2079,8 +2205,8 @@ MapInsert(Characters,
       unicode: "{U+0465}", html: "&#1125;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
-      tags: [".йэ", ".ie", "а йотированное", "e iotified"],
-      recipe: ["іе", "є"],
+      tags: [".йэ", ".ie", "е йотированное", "e iotified"],
+      recipe: ["іе", "іє"],
       symbol: Chr(0x0465)
     },
     "cyr_c_yus_big", {
@@ -2195,6 +2321,23 @@ MapInsert(Characters,
       recipe: ["ужат", Chr(0x046B) . Chr(0x0467)],
       symbol: Chr(0xA65B)
     },
+    "cyr_c_yat_iotified", {
+      unicode: "{U+A652}", html: "&#42578;",
+      titlesAlt: True,
+      group: ["Cyrillic Ligatures & Letters", "Е"],
+      tags: ["Ять йотированный", "Yat iotified"],
+      recipe: ["ІТЬ", "І" . Chr(0x0462)],
+      symbol: Chr(0xA652)
+    },
+    "cyr_s_yat_iotified", {
+      unicode: "{U+A653}", html: "&#42579;",
+      titlesAlt: True,
+      group: ["Cyrillic Ligatures & Letters", "е"],
+      show_on_fast_keys: True,
+      tags: ["ять йотированный", "yat iotified"],
+      recipe: ["іть", "і" . Chr(0x0463)],
+      symbol: Chr(0xA653)
+    },
     "cyr_c_let_i", {
       unicode: "{U+0406}", html: "&#1030;",
       altCode: "0178 RU" . Chr(0x2328),
@@ -2212,6 +2355,40 @@ MapInsert(Characters,
       show_on_fast_keys: True,
       tags: ["и десятиричное", "i cyrillic"],
       symbol: Chr(0x0456)
+    },
+    "cyr_c_let_ukr_e", {
+      unicode: "{U+0404}", html: "&#1028;",
+      titlesAlt: True,
+      group: ["Cyrillic Letters", "Э"],
+      show_on_fast_keys: True,
+      tags: ["Э якорное", "E ukrainian"],
+      symbol: Chr(0x0404)
+    },
+    "cyr_s_let_ukr_e", {
+      unicode: "{U+0454}", html: "&#1108;",
+      titlesAlt: True,
+      group: ["Cyrillic Letters", "э"],
+      show_on_fast_keys: True,
+      tags: ["э якорное", "e ukrainian"],
+      symbol: Chr(0x0454)
+    },
+    "cyr_c_let_yat", {
+      unicode: "{U+0462}", html: "&#1122;",
+      titlesAlt: True,
+      group: ["Cyrillic Letters", "Е"],
+      show_on_fast_keys: True,
+      tags: ["Ять", "Yat"],
+      recipe: "ТЬ",
+      symbol: Chr(0x0462)
+    },
+    "cyr_s_let_yat", {
+      unicode: "{U+0463}", html: "&#1123;",
+      titlesAlt: True,
+      group: ["Cyrillic Letters", "е"],
+      show_on_fast_keys: True,
+      tags: ["ять", "yat"],
+      recipe: "ть",
+      symbol: Chr(0x0463)
     },
     ;
     ;
@@ -2996,8 +3173,13 @@ Ligaturise(SmeltingMode := "InputBox") {
 
     GetUnicodeSymbol := ""
     IsValidateBreak := False
+    IsCancelledByUser := False
 
     Loop {
+      if GetKeyState("Escape", "P") {
+        IsCancelledByUser := True
+        break
+      }
       Input := ih.Input
       if (Input != LastInput) {
         LastInput := Input
@@ -3043,7 +3225,7 @@ Ligaturise(SmeltingMode := "InputBox") {
     }
 
     ih.Stop()
-    if (!Found) {
+    if (!Found && !IsCancelledByUser) {
       if (SmeltingMode = "Compose") {
         ShowInfoMessage("warning_recipe_absent")
       } else {
@@ -3669,61 +3851,6 @@ Constructor()
 
   Tab.UseTab(5)
   DSLContent["BindList"].LigaturesInput := [
-    [Map("ru", "Латинская заглавная буква AA", "en", "Latin Capital Letter Aa"), "AA", "Ꜳ", UniTrim(CharCodes.smelter.latin_Capital_AA[1])],
-    [Map("ru", "Латинская строчная буква aa", "en", "Latin Small Letter Aa"), "aa", "ꜳ", UniTrim(CharCodes.smelter.latin_Small_AA[1])],
-    [Map("ru", "Латинская заглавная буква AE", "en", "Latin Capital Letter Ae"), "AE", "Æ", UniTrim(CharCodes.smelter.latin_Capital_AE[1])],
-    [Map("ru", "Латинская строчная буква ae", "en", "Latin Small Letter Ae"), "ae", "æ", UniTrim(CharCodes.smelter.latin_Small_AE[1])],
-    [Map("ru", "Латинская заглавная буква AU", "en", "Latin Capital Letter Au"), "AU", "Ꜷ", UniTrim(CharCodes.smelter.latin_Capital_AU[1])],
-    [Map("ru", "Латинская строчная буква au", "en", "Latin Small Letter Au"), "au", "ꜷ", UniTrim(CharCodes.smelter.latin_Small_AU[1])],
-    [Map("ru", "Латинская заглавная буква OE", "en", "Latin Capital Letter Oe"), "OE", "Œ", UniTrim(CharCodes.smelter.latin_Capital_OE[1])],
-    [Map("ru", "Латинская строчная буква oe", "en", "Latin Small Letter Oe"), "oe", "œ", UniTrim(CharCodes.smelter.latin_Small_OE[1])],
-    [Map("ru", "Латинская строчная буква ff", "en", "Latin Small Letter Ff"), "ff", "ﬀ", UniTrim(CharCodes.smelter.ff[1])],
-    [Map("ru", "Латинская строчная буква fl", "en", "Latin Small Letter Fl"), "fl", "ﬂ", UniTrim(CharCodes.smelter.fl[1])],
-    [Map("ru", "Латинская строчная буква fi", "en", "Latin Small Letter Fi"), "fi", "ﬁ", UniTrim(CharCodes.smelter.fi[1])],
-    [Map("ru", "Латинская строчная буква ft", "en", "Latin Small Letter Ft"), "ft", "ﬅ", UniTrim(CharCodes.smelter.ft[1])],
-    [Map("ru", "Латинская строчная буква ffi", "en", "Latin Small Letter Ffi"), "ffi", "ﬃ", UniTrim(CharCodes.smelter.ffi[1])],
-    [Map("ru", "Латинская строчная буква ffl", "en", "Latin Small Letter Ffl"), "ffl", "ﬄ", UniTrim(CharCodes.smelter.ffl[1])],
-    [Map("ru", "Латинская строчная буква st", "en", "Latin Small Letter St"), "st", "ﬆ", UniTrim(CharCodes.smelter.st[1])],
-    [Map("ru", "Латинская строчная буква ts", "en", "Latin Small Letter Ts"), "ts", "ʦ", UniTrim(CharCodes.smelter.ts[1])],
-    [Map("ru", "Латинская заглавная буква IJ", "en", "Latin Capital Letter Ij"), "IJ", "Ĳ", UniTrim(CharCodes.smelter.latin_Capital_ij[1])],
-    [Map("ru", "Латинская строчная буква ij", "en", "Latin Small Letter Ij"), "ij", "ĳ", UniTrim(CharCodes.smelter.latin_Small_ij[1])],
-    [Map("ru", "Латинская заглавная буква LJ", "en", "Latin Capital Letter LJ"), "LJ", "Ǉ", UniTrim(CharCodes.smelter.latin_Capital_LJ[1])],
-    [Map("ru", "Латинская заглавная буква L со строчной буквой j", "en", "Latin Capital Letter L with Small Letter J"), "Lj", "ǈ", UniTrim(CharCodes.smelter.latin_Capital_L_Small_j[1])],
-    [Map("ru", "Латинская заглавная буква lj", "en", "Latin Capital Letter Lj"), "lj", "ǉ", UniTrim(CharCodes.smelter.latin_Small_LJ[1])],
-    [Map("ru", "Латинская заглавная буква эсцет (S острое)", "en", "Latin Capital Letter Sharp S"), "FS", "ẞ", UniTrim(CharCodes.smelter.latin_Capital_Fs[1])],
-    [Map("ru", "Латинская строчная буква эсцет (S острое)", "en", "Latin Small Letter Sharp S"), "fs", "ß", UniTrim(CharCodes.smelter.latin_Small_Fs[1])],
-    [Map("ru", "Латинская строчная буква ue", "en", "Latin Small Letter Ue"), "ue", "ᵫ", UniTrim(CharCodes.smelter.latin_Small_UE[1])],
-    [Map("ru", "Латинская заглавная буква OO", "en", "Latin Capital Letter Oo"), "OO", "Ꝏ", UniTrim(CharCodes.smelter.latin_Capital_OO[1])],
-    [Map("ru", "Латинская строчная буква oo", "en", "Latin Small Letter Oo"), "oo", "ꝏ", UniTrim(CharCodes.smelter.latin_Small_OO[1])],
-    [Map("ru", "Латинская строчная буква e йотированное", "en", "Latin Small Letter Iotified E"), "ie", "ꭡ", UniTrim(CharCodes.smelter.latin_Small_ie[1])],
-    ["", "", "", ""],
-    [Map("ru", "Кириллическая заглавная буква якорное Е", "en", "Cyrillic Capital Letter Ukrainian Ie"), "Э", "Є", UniTrim(CharCodes.smelter.cyrillic_Capital_Ukraine_E[1])],
-    [Map("ru", "Кириллическая строчная буква якорное е", "en", "Cyrillic Small Letter Ukrainian Ie"), "э", "є", UniTrim(CharCodes.smelter.cyrillic_Small_Ukraine_E[1])],
-    [Map("ru", "Кириллическая заглавная буква Ять", "en", "Cyrillic Capital Letter Yat"), "ТЬ", "Ѣ", UniTrim(CharCodes.smelter.cyrillic_Captial_Yat[1])],
-    [Map("ru", "Кириллическая строчная буква ять", "en", "Cyrillic Small Letter Yat"), "ть", "ѣ", UniTrim(CharCodes.smelter.cyrillic_Small_Yar[1])],
-    [Map("ru", "Кириллическая заглавная буква большой Юс", "en", "Cyrillic Capital Letter Big Yus"), "УЖ", "Ѫ", UniTrim(CharCodes.smelter.cyrillic_Capital_Big_Yus[1])],
-    [Map("ru", "Кириллическая строчная буква большой юс", "en", "Cyrillic Small Letter Big Yus"), "уж", "ѫ", UniTrim(CharCodes.smelter.cyrillic_Small_Big_Yus[1])],
-    [Map("ru", "Кириллическая заглавная буква малый Юс", "en", "Cyrillic Capital Letter Little Yus"), "АТ", "Ѧ", UniTrim(CharCodes.smelter.cyrillic_Capital_Little_Yus[1])],
-    [Map("ru", "Кириллическая строчная буква малый юс", "en", "Cyrillic Small Letter Little Yus"), "ат", "ѧ", UniTrim(CharCodes.smelter.cyrillic_Small_Little_Yus[1])],
-    [Map("ru", "Кириллическая заглавная буква Е йотированное", "en", "Cyrillic Capital Letter Iotified E"), "ІЄ, ІЭ", "Ѥ", UniTrim(CharCodes.smelter.cyrillic_Capital_ie[1])],
-    [Map("ru", "Кириллическая строчная буква е йотированное", "en", "Cyrillic Small Letter Iotified E"), "іє, іэ", "ѥ", UniTrim(CharCodes.smelter.cyrillic_Small_ie[1])],
-    [Map("ru", "Кириллическая заглавная буква Ять йотированный", "en", "Cyrillic Capital Letter Iotified Yat"), "Іѣ, ІТЬ", "Ꙓ", UniTrim(CharCodes.smelter.cyrillic_Captial_Yat_Iotified[1])],
-    [Map("ru", "Кириллическая строчная буква ять йотированный", "en", "Cyrillic Small Letter Iotified Yat"), "іѣ, іть", "ꙓ", UniTrim(CharCodes.smelter.cyrillic_Small_Yat_Iotified[1])],
-    [Map("ru", "Кириллическая заглавная буква А йотированное", "en", "Cyrillic Capital Letter Iotified A"), "ІА", "Ꙗ", UniTrim(CharCodes.smelter.cyrillic_Captial_A_Iotified[1])],
-    [Map("ru", "Кириллическая строчная буква а йотированное", "en", "Cyrillic Small Letter Iotified A"), "іа", "ꙗ", UniTrim(CharCodes.smelter.cyrillic_Small_A_Iotified[1])],
-    [Map("ru", "Кириллическая заглавная буква йотированный большой Юс", "en", "Cyrillic Capital Letter Iotified Big Yus"), "ІѪ, ІУЖ", "Ѭ", UniTrim(CharCodes.smelter.cyrillic_Captial_Big_Yus_Iotified[1])],
-    [Map("ru", "Кириллическая строчная буква йотированный большой юс", "en", "Cyrillic Small Letter Iotified Big Yus"), "іѫ, іуж", "ѭ", UniTrim(CharCodes.smelter.cyrillic_Small_Big_Yus_Iotified[1])],
-    [Map("ru", "Кириллическая заглавная буква йотированный малый Юс", "en", "Cyrillic Capital Letter Iotified Little Yus"), "ІѦ, ІАТ", "Ѩ", UniTrim(CharCodes.smelter.cyrillic_Captial_Little_Yus_Iotified[1])],
-    [Map("ru", "Кириллическая строчная буква йотированный малый юс", "en", "Cyrillic Small Letter Iotified Little Yus"), "іѧ, іат", "ѩ", UniTrim(CharCodes.smelter.cyrillic_Small_Little_Yus_Iotified[1])],
-    ["", "", "", ""],
-    [Map("ru", "Плюс-минус", "en", "Plus minus"), "-+", "±", UniTrim(CharCodes.plusminus[1])],
-    [Map("ru", "Умножение", "en", "Multiplication"), "-*", "×", UniTrim(CharCodes.multiplication[1])],
-    [Map("ru", "Нижний астериск", "en", "Low Asterisk"), "*", "⁎", UniTrim(CharCodes.lowasterisk[1])],
-    [Map("ru", "Два астериска", "en", "Two Asterisks"), "**", "⁑", UniTrim(CharCodes.twoasterisks[1])],
-    [Map("ru", "Астеризм", "en", "Asterism"), "***", "⁂", UniTrim(CharCodes.asterism[1])],
-    [Map("ru", "Двухточечный пунктир", "en", "Two Dot Leader"), "..", "‥", UniTrim(CharCodes.twodotleader[1])],
-    [Map("ru", "Многоточие", "en", "Horizontal Ellipsis"), "...", "…", UniTrim(CharCodes.ellipsis[1])],
-    [Map("ru", "Мягкий перенос", "en", "Soft Hyphen"), "-", "", UniTrim(CharCodes.softhyphen[1])],
     [Map("ru", "Дефис", "en", "Hyphen"), ".-", "‐", UniTrim(CharCodes.dash[1])],
     [Map("ru", "Цифровое тире", "en", "Figure Dash"), "n-", "‒", UniTrim(CharCodes.numdash[1])],
     [Map("ru", "Короткое тире", "en", "En Dash"), "--", "–", UniTrim(CharCodes.endash[1])],
@@ -3740,9 +3867,10 @@ Constructor()
 
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, , True)
-  InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, , True)
+  InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, , True, ["lat_s_let_i_dotless"])
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, , True)
+  InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Letters", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, , True)
 
@@ -4575,6 +4703,9 @@ FastKeysList :=
     "<^<!<+x", (*) => HandleFastKey("x_below"),
     "<^<!z", (*) => HandleFastKey("zigzag_above"),
     ;
+    "<^<!-", (*) => HandleFastKey("softhyphen"),
+    "<^<!<+-", (*) => HandleFastKey("minus"),
+    ;
     "<^>!+,", (*) => HandleFastKey("comma_above_right"),
     "<^>!>+c", (*) => HandleFastKey("cedilla"),
     ;
@@ -4599,11 +4730,21 @@ FastKeysList :=
     "<^>!<+NumpadMult", (*) => HandleFastKey("asterisk_low"),
     "<^>!NumpadDiv", (*) => HandleFastKey("dagger"),
     "<^>!>+NumpadDiv", (*) => HandleFastKey("dagger_double"),
-    "<^>!>+/", (*) => HandleFastKey("fraction_slasр"),
     ;
+    "<^>!t", (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
+    "<^>!'", (*) => LangSeparatedKey(["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
     "<^>!i", (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_i", "cyr_s_let_i"], True),
     "<^>!p", (*) => HandleFastKey("prime_single"),
     "<^>!+p", (*) => HandleFastKey("prime_double"),
+    "<^>!=", (*) => HandleFastKey("noequals"),
+    "<^>!>+=", (*) => HandleFastKey("almostequals"),
+    "<^>!<+=", (*) => HandleFastKey("plusminus"),
+    "<^>!-", (*) => HandleFastKey("emdash"),
+    "<^>!<+-", (*) => HandleFastKey("endash"),
+    "<^>!>+-", (*) => HandleFastKey("hyphen"),
+    "<^>!/", (*) => HandleFastKey("ellipsis"),
+    "<^>!>+/", (*) => HandleFastKey("fraction_slash"),
+    "<^>!8", (*) => HandleFastKey("multiplication"),
     ;
     "RAlt", (*) => ProceedCompose(),
   ]
