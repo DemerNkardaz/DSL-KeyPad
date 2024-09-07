@@ -209,7 +209,7 @@ SetPreviousLayout(Timing := 150) {
   if (PreviousLayout != "") {
     Sleep Timing
     ChangeKeyboardLayout(PreviousLayout, 2)
-    IniWrite("", ConfigFile, "ServiceFields", "PrevLayout")
+    ;IniWrite("", ConfigFile, "ServiceFields", "PrevLayout")
   }
 }
 
@@ -809,19 +809,19 @@ Characters := Map(
     },
     ;
     ;
-    "0000 bridge_above", {
+    "0010 bridge_above", {
       unicode: "{U+0346}", html: "&#838;",
       tags: ["bridge above", "мостик сверху"],
       group: ["Diacritics Tertiary", ["b", "и"]],
       symbol: DottedCircle . Chr(0x0346)
     },
-    "0000 bridge_below", {
+    "0011 bridge_below", {
       unicode: "{U+032A}", html: "&#810;",
       tags: ["bridge below", "мостик снизу"],
       group: ["Diacritics Tertiary", ["B", "И"]],
       symbol: DottedCircle . Chr(0x032A)
     },
-    "0000 bridge_inverted_below", {
+    "0012 bridge_inverted_below", {
       unicode: "{U+033A}", html: "&#825;",
       tags: ["inverted bridge below", "перевёрнутый мостик снизу"],
       group: ["Diacritics Tertiary", CtrlB],
@@ -829,7 +829,7 @@ Characters := Map(
     },
     ;
     ;
-    "0000 circumflex", {
+    "0013 circumflex", {
       unicode: "{U+0302}", html: "&#770;",
       LaTeX: ["\^", "\hat"],
       tags: ["circumflex", "циркумфлекс"],
@@ -837,7 +837,7 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0302)
     },
-    "0000 caron", {
+    "0014 caron", {
       unicode: "{U+030C}", html: "&#780;",
       LaTeX: "\v",
       tags: ["caron", "hachek", "карон", "гачек"],
@@ -845,27 +845,56 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x030C)
     },
-    "0000 circumflex_below", {
+    "0015 circumflex_below", {
       unicode: "{U+032D}", html: "&#813;",
       tags: ["circumflex below", "циркумфлекс снизу"],
       group: ["Diacritics Secondary", ["c", "с"]],
       symbol: DottedCircle . Chr(0x032D)
     },
-    "0000 caron_below", {
+    "0016 caron_below", {
       unicode: "{U+032C}", html: "&#812;",
       tags: ["caron below", "карон снизу", "гачек снизу"],
       group: ["Diacritics Secondary", ["C", "С"]],
       symbol: DottedCircle . Chr(0x032C)
     },
-    "0000 cedilla", {
+    "0017 cedilla", {
       unicode: "{U+0327}", html: "&#807;",
       LaTeX: "\c",
-      titles: Map("ru", "Седиль", "en", "Cedilla"),
       tags: ["cedilla", "седиль"],
       group: ["Diacritics Tertiary", ["c", "с"]],
       symbol: DottedCircle . Chr(0x0327)
     },
-    "0000 candrabindu", {
+    "0018 comma_above", {
+      unicode: "{U+0313}", html: "&#787;",
+      tags: ["comma above", "запятая сверху"],
+      group: ["Diacritics Primary", [",", "б"]],
+      symbol: DottedCircle . Chr(0x0313)
+    },
+    "0019 comma_below", {
+      unicode: "{U+0326}", html: "&#806;",
+      tags: ["comma below", "запятая снизу"],
+      group: ["Diacritics Primary", ["<", "Б"]],
+      symbol: DottedCircle . Chr(0x0326)
+    },
+    "0020 comma_above_turned", {
+      unicode: "{U+0312}", html: "&#786;",
+      tags: ["turned comma above", "перевёрнутая запятая сверху"],
+      group: ["Diacritics Secondary", [",", "б"]],
+      symbol: DottedCircle . Chr(0x0312)
+    },
+    "0021 comma_above_reversed", {
+      unicode: "{U+0314}", html: "&#788;",
+      tags: ["reversed comma above", "зеркальная запятая сверху"],
+      group: ["Diacritics Secondary", ["<", "Б"]],
+      symbol: DottedCircle . Chr(0x0314)
+    },
+    "0022 comma_above_right", {
+      unicode: "{U+0315}", html: "&#789;",
+      tags: ["comma above right", "запятая сверху справа"],
+      group: ["Diacritics Tertiary", [",", "б"]],
+      symbol: DottedCircle . Chr(0x0315)
+    },
+    "0023 candrabindu", {
       unicode: "{U+0310}", html: "&#784;",
       tags: ["candrabindu", "карон снизу"],
       group: ["Diacritics Tertiary", ["C", "С"]],
@@ -873,7 +902,7 @@ Characters := Map(
     },
     ;
     ;
-    "0000 dot_above", {
+    "0024 dot_above", {
       unicode: "{U+0307}", html: "&#775;",
       LaTeX: ["\.", "\dot"],
       tags: ["dot above", "точка сверху"],
@@ -881,7 +910,7 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0307)
     },
-    "0000 diaeresis", {
+    "0025 diaeresis", {
       unicode: "{U+0308}", html: "&#776;",
       LaTeX: ["\" . QuotationDouble, "\ddot"],
       tags: ["diaeresis", "диерезис"],
@@ -889,13 +918,13 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0308)
     },
-    "0000 dot_below", {
+    "0026 dot_below", {
       unicode: "{U+0323}", html: "&#803;",
       tags: ["dot below", "точка снизу"],
       group: ["Diacritics Secondary", ["d", "в"]],
       symbol: DottedCircle . Chr(0x0323)
     },
-    "0000 diaeresis_below", {
+    "0027 diaeresis_below", {
       unicode: "{U+0324}", html: "&#804;",
       tags: ["diaeresis below", "диерезис снизу"],
       group: ["Diacritics Secondary", ["D", "В"]],
@@ -903,7 +932,7 @@ Characters := Map(
     },
     ;
     ;
-    "0000 fermata", {
+    "0028 fermata", {
       unicode: "{U+0352}", html: "&#850;",
       tags: ["fermata", "фермата"],
       group: ["Diacritics Tertiary", ["F", "А"]],
@@ -912,7 +941,7 @@ Characters := Map(
     },
     ;
     ;
-    "0000 grave", {
+    "0029 grave", {
       unicode: "{U+0300}", html: "&#768;",
       LaTeX: ["\" . Backquote, "\grave"],
       tags: ["grave", "гравис"],
@@ -920,20 +949,20 @@ Characters := Map(
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0300)
     },
-    "0000 grave_double", {
+    "0030 grave_double", {
       unicode: "{U+030F}", html: "&#783;",
       tags: ["double grave", "двойной гравис"],
       group: ["Diacritics Primary", ["G", "П"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x030F)
     },
-    "0000 grave_below", {
+    "0031 grave_below", {
       unicode: "{U+0316}", html: "&#790;",
       tags: ["grave below", "гравис снизу"],
       group: ["Diacritics Secondary", ["g", "п"]],
       symbol: DottedCircle . Chr(0x0316)
     },
-    "0000 grave_tone_vietnamese", {
+    "0032 grave_tone_vietnamese", {
       unicode: "{U+0340}", html: "&#832;",
       tags: ["grave tone", "гравис тона"],
       group: ["Diacritics Secondary", ["G", "П"]],
@@ -941,27 +970,27 @@ Characters := Map(
     },
     ;
     ;
-    "0000 hook_above", {
+    "0033 hook_above", {
       unicode: "{U+0309}", html: "&#777;",
       tags: ["hook above", "хвостик сверху"],
       group: ["Diacritics Primary", ["h", "р"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0309)
     },
-    "0000 horn", {
+    "0034 horn", {
       unicode: "{U+031B}", html: "&#795;",
       tags: ["horn", "рожок"],
       group: ["Diacritics Primary", ["H", "Р"]],
       show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x031B)
     },
-    "0000 palatalized_hook_below", {
+    "0035 palatalized_hook_below", {
       unicode: "{U+0321}", html: "&#801;",
       tags: ["palatalized hook below", "палатальный крюк"],
       group: ["Diacritics Secondary", ["h", "р"]],
       symbol: DottedCircle . Chr(0x0321)
     },
-    "0000 retroflex_hook_below", {
+    "0036 retroflex_hook_below", {
       unicode: "{U+0322}", html: "&#802;",
       tags: ["retroflex hook below", "ретрофлексный крюк"],
       group: ["Diacritics Secondary", ["H", "Р"]],
@@ -969,16 +998,166 @@ Characters := Map(
     },
     ;
     ;
-    "0000 macron", {
+    "0037 macron", {
       unicode: "{U+0304}", html: "&#772;",
       tags: ["macron", "макрон"],
       group: ["Diacritics Primary", ["m", "ь"]],
       symbol: DottedCircle . Chr(0x0304)
     },
+    "0038 macron_below", {
+      unicode: "{U+0331}", html: "&#817;",
+      tags: ["macron below", "макрон снизу"],
+      group: ["Diacritics Primary", ["M", "Ь"]],
+      symbol: DottedCircle . Chr(0x0331)
+    },
+    "0039 ogonek", {
+      unicode: "{U+0328}", html: "&#808;",
+      tags: ["ogonek", "огонэк"],
+      group: ["Diacritics Primary", ["o", "щ"]],
+      symbol: DottedCircle . Chr(0x0328)
+    },
+    "0040 overline", {
+      unicode: "{U+0305}", html: "&#773;",
+      tags: ["overline", "черта сверху"],
+      group: ["Diacritics Secondary", ["o", "щ"]],
+      symbol: DottedCircle . Chr(0x0305)
+    },
+    "0041 overline_double", {
+      unicode: "{U+033F}", html: "&#831;",
+      tags: ["overline", "черта сверху"],
+      group: ["Diacritics Secondary", ["O", "Щ"]],
+      symbol: DottedCircle . Chr(0x033F)
+    },
+    "0042 low_line", {
+      unicode: "{U+0332}", html: "&#818;",
+      tags: ["low line", "черта снизу"],
+      group: ["Diacritics Tertiary", ["o", "щ"]],
+      symbol: DottedCircle . Chr(0x0332)
+    },
+    "0043 low_line_double", {
+      unicode: "{U+0333}", html: "&#819;",
+      tags: ["dobule low line", "двойная черта снизу"],
+      group: ["Diacritics Tertiary", ["O", "Щ"]],
+      symbol: DottedCircle . Chr(0x0333)
+    },
+    "0044 ring_above", {
+      unicode: "{U+030A}", html: "&#778;",
+      tags: ["ring above", "кольцо сверху"],
+      group: ["Diacritics Primary", ["r", "к"]],
+      symbol: DottedCircle . Chr(0x030A)
+    },
+    "0045 ring_below", {
+      unicode: "{U+0325}", html: "&#805;",
+      tags: ["ring below", "кольцо снизу"],
+      group: ["Diacritics Primary", ["R", "К"]],
+      symbol: DottedCircle . Chr(0x0325)
+    },
+    "0046 ring_below_double", {
+      unicode: "{U+035A}", html: "&#858;",
+      tags: ["double ring below", "двойное кольцо снизу"],
+      group: ["Diacritics Primary", CtrlR],
+      symbol: DottedCircle . Chr(0x035A)
+    },
+    "0047 line_vertical", {
+      unicode: "{U+030D}", html: "&#781;",
+      tags: ["vertical line", "вертикальная черта"],
+      group: ["Diacritics Primary", ["v", "м"]],
+      symbol: DottedCircle . Chr(0x030D)
+    },
+    "0048 line_vertical_double", {
+      unicode: "{U+030E}", html: "&#782;",
+      tags: ["double vertical line", "двойная вертикальная черта"],
+      group: ["Diacritics Primary", ["V", "М"]],
+      symbol: DottedCircle . Chr(0x030E)
+    },
+    "0049 line_vertical_below", {
+      unicode: "{U+0329}", html: "&#809;",
+      tags: ["vertical line below", "вертикальная черта снизу"],
+      group: ["Diacritics Secondary", ["v", "м"]],
+      symbol: DottedCircle . Chr(0x0329)
+    },
+    "0050 line_vertical_double_below", {
+      unicode: "{U+0348}", html: "&#840;",
+      tags: ["dobule vertical line below", "двойная вертикальная черта снизу"],
+      group: ["Diacritics Secondary", ["V", "М"]],
+      symbol: DottedCircle . Chr(0x0348)
+    },
+    "0051 stroke_short", {
+      unicode: "{U+0335}", html: "&#821;",
+      tags: ["short stroke", "короткое перечёркивание"],
+      group: ["Diacritics Quatemary", ["s", "ы"]],
+      symbol: DottedCircle . Chr(0x0335)
+    },
+    "0052 stroke_long", {
+      unicode: "{U+0336}", html: "&#822;",
+      tags: ["long stroke", "длинное перечёркивание"],
+      group: ["Diacritics Quatemary", ["S", "Ы"]],
+      symbol: DottedCircle . Chr(0x0336)
+    },
+    "0053 solidus_short", {
+      unicode: "{U+0337}", html: "&#823;",
+      tags: ["short solidus", "короткая косая черта"],
+      group: ["Diacritics Quatemary", "\"],
+      symbol: DottedCircle . Chr(0x0337)
+    },
+    "0054 solidus_long", {
+      unicode: "{U+0338}", html: "&#824;",
+      tags: ["long solidus", "длинная косая черта"],
+      group: ["Diacritics Quatemary", "/"],
+      symbol: DottedCircle . Chr(0x0338)
+    },
+    "0055 tilde", {
+      unicode: "{U+0303}", html: "&#771;",
+      tags: ["tilde", "тильда"],
+      group: ["Diacritics Primary", ["t", "е"]],
+      symbol: DottedCircle . Chr(0x0303)
+    },
+    "0056 tilde_vertical", {
+      unicode: "{U+033E}", html: "&#830;",
+      tags: ["tilde vertical", "вертикальная тильда"],
+      group: ["Diacritics Primary", ["T", "Е"]],
+      symbol: DottedCircle . Chr(0x033E)
+    },
+    "0057 tilde_below", {
+      unicode: "{U+0330}", html: "&#816;",
+      tags: ["tilde below", "тильда снизу"],
+      group: ["Diacritics Secondary", ["t", "е"]],
+      symbol: DottedCircle . Chr(0x0330)
+    },
+    "0058 tilde_not", {
+      unicode: "{U+034A}", html: "&#842;",
+      tags: ["not tilde", "перечёрнутая тильда"],
+      group: ["Diacritics Secondary", ["T", "Е"]],
+      symbol: DottedCircle . Chr(0x034A)
+    },
+    "0059 tilde_overline", {
+      unicode: "{U+0334}", html: "&#820;",
+      tags: ["tilde overline", "тильда посередине"],
+      group: ["Diacritics Quatemary", ["t", "е"]],
+      symbol: DottedCircle . Chr(0x0334)
+    },
+    "0060 x_above", {
+      unicode: "{U+033D}", html: "&#829;",
+      tags: ["x above", "x сверху"],
+      group: ["Diacritics Primary", ["x", "ч"]],
+      symbol: DottedCircle . Chr(0x033D)
+    },
+    "0061 x_below", {
+      unicode: "{U+0353}", html: "&#851;",
+      tags: ["x below", "x снизу"],
+      group: ["Diacritics Primary", ["X", "Ч"]],
+      symbol: DottedCircle . Chr(0x0353)
+    },
+    "0062 zigzag_above", {
+      unicode: "{U+035B}", html: "&#859;",
+      tags: ["zigzag above", "зигзаг сверху"],
+      group: ["Diacritics Primary", ["z", "я"]],
+      symbol: DottedCircle . Chr(0x035B)
+    },
     ;
     ;
     ; ? Шпации
-    "0000 emsp", {
+    "0063 emsp", {
       unicode: "{U+2003}", html: "&#8195;", entity: "&emsp;",
       tags: ["em space", "emspace", "emsp", "круглая шпация"],
       group: ["Spaces", "1"],
@@ -987,7 +1166,7 @@ Characters := Map(
       symbolAlt: Chr(0x2003),
       symbolCustom: "underline"
     },
-    "0000 ensp", {
+    "0064 ensp", {
       unicode: "{U+2002}", html: "&#8194;", entity: "&ensp;",
       tags: ["en space", "enspace", "ensp", "полукруглая шпация"],
       group: ["Spaces", "2"],
@@ -995,7 +1174,7 @@ Characters := Map(
       symbolAlt: Chr(0x2002),
       symbolCustom: "underline"
     },
-    "0000 emsp13", {
+    "0065 emsp13", {
       unicode: "{U+2004}", html: "&#8196;", entity: "&emsp13;",
       tags: ["emsp13", "1/3emsp", "1/3 круглой Шпации"],
       group: ["Spaces", "3"],
@@ -1003,7 +1182,7 @@ Characters := Map(
       symbolAlt: Chr(0x2004),
       symbolCustom: "underline"
     },
-    "0000 emsp14", {
+    "0066 emsp14", {
       unicode: "{U+2005}", html: "&#8196;", entity: "&emsp14;",
       tags: ["emsp14", "1/4emsp", "1/4 круглой Шпации"],
       group: ["Spaces", "4"],
@@ -1011,7 +1190,7 @@ Characters := Map(
       symbolAlt: Chr(0x2005),
       symbolCustom: "underline"
     },
-    "0000 thinspace", {
+    "0067 thinspace", {
       unicode: "{U+2009}", html: "&#8201;", entity: "&thinsp;",
       tags: ["thinsp", "thin space", "узкий пробел", "тонкий пробел"],
       group: ["Spaces", "5"],
@@ -1019,7 +1198,7 @@ Characters := Map(
       symbolAlt: Chr(0x2009),
       symbolCustom: "underline"
     },
-    "0000 emsp16", {
+    "0068 emsp16", {
       unicode: "{U+2006}", html: "&#8198;", entity: "&emsp16;",
       tags: ["emsp16", "1/6emsp", "1/6 круглой Шпации"],
       group: ["Spaces", "6"],
@@ -1027,7 +1206,7 @@ Characters := Map(
       symbolAlt: Chr(0x2006),
       symbolCustom: "underline"
     },
-    "0000 narrow_no_break_space", {
+    "0069 narrow_no_break_space", {
       unicode: "{U+202F}", html: "&#8239;",
       tags: ["nnbsp", "narrow no-break space", "узкий неразрывный пробел", "тонкий неразрывный пробел"],
       group: ["Spaces", "7"],
@@ -1035,7 +1214,7 @@ Characters := Map(
       symbolAlt: Chr(0x202F),
       symbolCustom: "underline"
     },
-    "0000 hairspace", {
+    "0070 hairspace", {
       unicode: "{U+200A}", html: "&#8202;", entity: "&hairsp;",
       tags: ["hsp", "hairsp", "hair space", "волосяная шпация"],
       group: ["Spaces", "8"],
@@ -1043,7 +1222,7 @@ Characters := Map(
       symbolAlt: Chr(0x200A),
       symbolCustom: "underline"
     },
-    "0000 punctuation_space", {
+    "0071 punctuation_space", {
       unicode: "{U+2008}", html: "&#8200;", entity: "&puncsp;",
       tags: ["psp", "puncsp", "punctuation space", "пунктуационный пробел"],
       group: ["Spaces", "9"],
@@ -1051,7 +1230,7 @@ Characters := Map(
       symbolAlt: Chr(0x2008),
       symbolCustom: "underline"
     },
-    "0000 zero_width_space", {
+    "0072 zero_width_space", {
       unicode: "{U+200B}", html: "&#8200;", entity: "&NegativeVeryThinSpace;",
       tags: ["zwsp", "zero-width space", "пробел нулевой ширины"],
       group: ["Spaces", "0"],
@@ -1059,7 +1238,7 @@ Characters := Map(
       symbolAlt: Chr(0x200B),
       symbolCustom: "underline"
     },
-    "0000 word_joiner", {
+    "0073 word_joiner", {
       unicode: "{U+2060}", html: "&#8288;", entity: "&NoBreak;",
       tags: ["wj", "word joiner", "соединитель слов"],
       group: ["Spaces", "-"],
@@ -1067,7 +1246,7 @@ Characters := Map(
       symbolAlt: Chr(0x2060),
       symbolCustom: "underline"
     },
-    "0000 figure_space", {
+    "0074 figure_space", {
       unicode: "{U+2007}", html: "&#8199;", entity: "&numsp;",
       tags: ["nsp", "numsp", "figure space", "цифровой пробел"],
       group: ["Spaces", "="],
@@ -1075,7 +1254,7 @@ Characters := Map(
       symbolAlt: Chr(0x2007),
       symbolCustom: "underline"
     },
-    "0000 no_break_space", {
+    "0075 no_break_space", {
       unicode: "{U+00A0}", html: "&#160;", entity: "&nbsp;",
       altcode: "0160",
       LaTeX: "~",
@@ -1085,7 +1264,7 @@ Characters := Map(
       symbolAlt: Chr(0x00A0),
       symbolCustom: "underline"
     },
-    "0000 emquad", {
+    "0076 emquad", {
       unicode: "{U+2001}", html: "&#8193;",
       LaTeX: "\qquad",
       tags: ["em quad", "emquad", "emqd", "em-квадрат"],
@@ -1095,7 +1274,7 @@ Characters := Map(
       symbolAlt: Chr(0x2001),
       symbolCustom: "underline"
     },
-    "0000 enquad", {
+    "0077 enquad", {
       unicode: "{U+2000}", html: "&#8192;",
       LaTeX: "\quad",
       tags: ["en quad", "enquad", "enqd", "en-квадрат"],
@@ -1146,15 +1325,21 @@ Characters := Map(
       group: ["Special Characters", [":", "Ж"]],
       symbol: Chr(0x02D1)
     },
+    "0000 degree", {
+      unicode: "{U+00B0}", html: "&#176;", entity: "&deg;",
+      tags: ["degree", "градус"],
+      group: ["Special Characters", ["d", "в"]],
+      symbol: Chr(0x00B0)
+    },
     "0000 dagger", {
-      unicode: "{U+2020}", html: "&dagger;",
+      unicode: "{U+2020}", html: "&#8224;", entity: "&dagger;",
       LaTeX: "\dagger",
       tags: ["dagger", "даггер", "крест"],
       group: ["Special Characters", ["t", "е"]],
       symbol: Chr(0x2020)
     },
     "0000 dagger_double", {
-      unicode: "{U+2021}", html: "&Dagger;",
+      unicode: "{U+2021}", html: "&#8225;", entity: "&Dagger;",
       LaTeX: "\ddagger",
       tags: ["double dagger", "двойной даггер", "двойной крест"],
       group: ["Special Characters", ["T", "Е"]],
@@ -2688,7 +2873,11 @@ Ligaturise(SmeltingMode := "InputBox") {
   InputBridge("Diacritics Tertiary")
 }
 <#<!F6:: {
-  ShowInfoMessage(["Активна группа специальных символов", "Special characters group has been activated"], "[F6] " . DSLPadTitle, , SkipGroupMessage)
+  ShowInfoMessage(["Активна четвёртая группа диакритики", "Quatemary diacritics group has been activated"], "[F6] " . DSLPadTitle, , SkipGroupMessage)
+  InputBridge("Diacritics Quatemary")
+}
+<#<!F7:: {
+  ShowInfoMessage(["Активна группа специальных символов", "Special characters group has been activated"], "[F7] " . DSLPadTitle, , SkipGroupMessage)
   InputBridge("Special Characters")
 }
 <#<!Space:: {
@@ -2701,7 +2890,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 <#<!l:: Ligaturise()
 >+l:: Ligaturise("Clipboard")
 >+Backspace:: Ligaturise("Backspace")
->+c:: Ligaturise("Compose")
+;>+c:: Ligaturise("Compose")
 <#<!1:: SwitchToScript("sup")
 <#<^>!1:: SwitchToScript("sub")
 <#<^>!2:: SwitchToRoman()
@@ -2901,6 +3090,7 @@ Constructor()
   InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Primary", "Win Alt F1", False)
   InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Secondary", "Win Alt F2")
   InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Tertiary", "Win Alt F3")
+  InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Quatemary", "Win Alt F6")
 
   for item in DSLContent["BindList"].TabDiacritics
   {
@@ -3020,7 +3210,7 @@ Constructor()
     [Map("ru", "Цифровой пробел", "en", "Figure Space"), "[=]", "[ ]", UniTrim(CharCodes.numsp[1])],
     [Map("ru", "Неразрывный пробел", "en", "No-Break Space"), "[Space]", "[ ]", UniTrim(CharCodes.nbsp[1])],
     ["", "", "", ""],
-    ["", "Win Alt F6", "", ""],
+    ["", "Win Alt F7", "", ""],
     [Map("ru", "Низкий астериск", "en", "Low Asterisk"), "[a][ф]", "⁎", UniTrim(CharCodes.lowasterisk[1])],
     [Map("ru", "Два астериска", "en", "Two Asterisk"), "[A][Ф]", "⁑", UniTrim(CharCodes.twoasterisks[1])],
     [Map("ru", "Астеризм", "en", "Asterism"), "LCtrl [a][ф]", "⁂", UniTrim(CharCodes.asterism[1])],
@@ -3030,7 +3220,7 @@ Constructor()
 
   DSLContent["BindList"].TabSpaces := []
   InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Spaces", "Win Alt Space", False)
-  InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Special Characters", "Win Alt F6")
+  InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Special Characters", "Win Alt F7")
 
   SpacesLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
   SpacesLV.ModifyCol(1, ColumnWidths[1])
@@ -3959,8 +4149,8 @@ ToggleInputMode()
 }
 
 CheckLayoutValid() {
-  layoutHex := GetLayoutLocale()
-  if (layoutHex == CodeEn || layoutHex == CodeRu) {
+  GetCurrentLayout := GetLayoutLocale()
+  if (GetCurrentLayout == CodeEn || GetCurrentLayout == CodeRu) {
     return True
   }
   return False
@@ -4000,6 +4190,16 @@ HandleFastKey(CharacterName)
   return
 }
 
+LangSeparatedKey(LatinCharacter, CyrillicCharacter) {
+  GetCurrentLayout := GetLayoutLocale()
+  if (GetCurrentLayout == CodeEn) {
+    HandleFastKey(LatinCharacter)
+  } else if (GetCurrentLayout == CodeRu) {
+    HandleFastKey(CyrillicCharacter)
+  }
+  return
+}
+
 RegFastKeys(Bindings) {
   global FastKeysIsActive
 
@@ -4015,7 +4215,6 @@ RegFastKeys(Bindings) {
     }
   }
 }
-
 FastKeysList :=
   [
     "<^<!a", (*) => HandleFastKey("acute"),
@@ -4024,12 +4223,35 @@ FastKeysList :=
     "<^<+<!b", (*) => HandleFastKey("breve_inverted"),
     "<^<!c", (*) => HandleFastKey("circumflex"),
     "<^<+<!c", (*) => HandleFastKey("caron"),
+    "<^>!>+c", (*) => HandleFastKey("сedilla"),
+    "<^<!,", (*) => HandleFastKey("comma_above"),
+    "<^<+<!,", (*) => HandleFastKey("comma_below"),
+    "<^>!+,", (*) => HandleFastKey("comma_above_right"),
     "<^<!d", (*) => HandleFastKey("dot_above"),
     "<^<+<!d", (*) => HandleFastKey("diaeresis"),
+    "<^<!f", (*) => HandleFastKey("fermata"),
     "<^<!g", (*) => HandleFastKey("grave"),
     "<^<+<!g", (*) => HandleFastKey("grave_double"),
+    "<^<!h", (*) => HandleFastKey("hook_above"),
+    "<^<+<!h", (*) => HandleFastKey("horn"),
+    ">+h", (*) => HandleFastKey("palatalized_hook_below"),
+    "<^>!>+h", (*) => HandleFastKey("retroflex_hook_below"),
     "<^<!m", (*) => HandleFastKey("macron"),
     "<^<+<!m", (*) => HandleFastKey("macron_below"),
+    "<^<!o", (*) => HandleFastKey("ogonek"),
+    "<^<!r", (*) => HandleFastKey("ring_above"),
+    "<^<!<+r", (*) => HandleFastKey("ring_below"),
+    "<^<!v", (*) => HandleFastKey("line_vertical"),
+    "<^<!<+v", (*) => HandleFastKey("line_vertical_double"),
+    "<^<!t", (*) => HandleFastKey("tilde"),
+    "<^<!<+t", (*) => HandleFastKey("tilde_overline"),
+    "<^<!s", (*) => HandleFastKey("stroke_short"),
+    "<^<!<+s", (*) => HandleFastKey("stroke_long"),
+    "<^<!/", (*) => HandleFastKey("solidus_short"),
+    "<^<!<+/", (*) => HandleFastKey("solidus_long"),
+    "<^<!x", (*) => HandleFastKey("x_above"),
+    "<^<!<+x", (*) => HandleFastKey("x_below"),
+    "<^<!z", (*) => HandleFastKey("zigzag_above"),
     ;
     "<^>!>+1", (*) => HandleFastKey("emsp"),
     "<^>!>+2", (*) => HandleFastKey("ensp"),
@@ -4051,6 +4273,9 @@ FastKeysList :=
     "<^>!<+NumpadMult", (*) => HandleFastKey("asterisk_low"),
     "<^>!NumpadDiv", (*) => HandleFastKey("dagger"),
     "<^>!>+NumpadDiv", (*) => HandleFastKey("dagger_double"),
+    ;
+    "<^>!p", (*) => HandleFastKey("prime_single"),
+    "<^>!+p", (*) => HandleFastKey("prime_double"),
   ]
 
 if CurrentLayout = CodeEn {
