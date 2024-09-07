@@ -2966,7 +2966,7 @@ Ligaturise(SmeltingMode := "InputBox") {
                   GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
                   IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
                   Found := True
-                  break 2
+                  break 3
                 }
               }
             } else if (Input == Recipe) {
