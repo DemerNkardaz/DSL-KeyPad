@@ -2494,6 +2494,28 @@ MapInsert(Characters,
       tags: ["и десятиричное", "i cyrillic"],
       symbol: Chr(0x0456)
     },
+    "cyr_c_let_yi", {
+      unicode: "{U+0407}", html: "&#1031;",
+      titlesAlt: True,
+      group: ["Cyrillic Letters", "Ш"],
+      modifier: "LShift",
+      show_on_fast_keys: True,
+      tags: ["ЙИ десятиричное", "YI cyrillic"],
+      recipe: "І" . GetChar("diaeresis"),
+      recipeAlt: "І" . DottedCircle . GetChar("diaeresis"),
+      symbol: Chr(0x0407)
+    },
+    "cyr_s_let_yi", {
+      unicode: "{U+0457}", html: "&#1111;",
+      titlesAlt: True,
+      group: ["Cyrillic Letters", "ш"],
+      modifier: "LShift",
+      show_on_fast_keys: True,
+      tags: ["йи десятиричное", "yi cyrillic"],
+      recipe: "і" . GetChar("diaeresis"),
+      recipeAlt: "і" . DottedCircle . GetChar("diaeresis"),
+      symbol: Chr(0x0457)
+    },
     "cyr_c_let_ukr_e", {
       unicode: "{U+0404}", html: "&#1028;",
       titlesAlt: True,
@@ -4907,6 +4929,7 @@ FastKeysList :=
     "<^>!" SCKeys["T"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
     "<^>!" SCKeys["Apostrophe"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
     "<^>!" SCKeys["I"], (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_i", "cyr_s_let_i"], True),
+    "<^>!<+" SCKeys["I"], (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
     "<^>!" SCKeys["C"], (*) => CapsSeparatedKey("registered", "copyright"),
     "<^>!<+" SCKeys["C"], (*) => CapsSeparatedKey("servicemark", "trademark"),
     "<^>!" SCKeys["P"], (*) => HandleFastKey("prime_single"),
