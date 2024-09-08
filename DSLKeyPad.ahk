@@ -1556,8 +1556,9 @@ MapInsert(Characters,
       unicode: "{U+2014}", html: "&#8212;", entity: "&mdash;",
       altcode: "0151",
       tags: ["em dash", "длинное тире"],
-      group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "-"],
+      group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "1"],
       show_on_fast_keys: True,
+      alt_on_fast_keys: "[-]",
       recipe: "---",
       symbol: Chr(0x2014)
     },
@@ -1565,38 +1566,80 @@ MapInsert(Characters,
       unicode: "{U+2013}", html: "&#8211;", entity: "&ndash;",
       altcode: "0150",
       tags: ["en dash", "короткое тире"],
-      group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "_"],
+      group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "2"],
       show_on_fast_keys: True,
       alt_on_fast_keys: "LShift [-]",
       recipe: "--",
       symbol: Chr(0x2013)
     },
+    "three_emdash", {
+      unicode: "{U+2E3B}", html: "&#11835;",
+      tags: ["three-em dash", "тройное тире"],
+      group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "3"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "CapsLock [-]",
+      recipe: ["-----", "3-"],
+      symbol: Chr(0x2E3B)
+    },
+    "two_emdash", {
+      unicode: "{U+2E3A}", html: "&#11834;",
+      tags: ["two-em dash", "двойное тире"],
+      group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "4"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "CapsLock LShift [-]",
+      recipe: ["----", "2-"],
+      symbol: Chr(0x2E3A)
+    },
     "softhyphen", {
       unicode: "{U+00AD}", html: "&#173;", entity: "&shy;",
       altcode: "0173",
       tags: ["soft hyphen", "мягкий перенос"],
-      group: [["Smelting Special", "Special Fast Primary"], "-"],
+      group: [["Dashes", "Smelting Special", "Special Fast Primary"], "5"],
       show_on_fast_keys: True,
+      alt_on_fast_keys: "[-]",
       recipe: ".-",
       symbol: Chr(0x00AD)
+    },
+    "figure_dash", {
+      unicode: "{U+2012}", html: "&#8210;",
+      tags: ["figure dash", "цифровое тире"],
+      group: [["Dashes", "Smelting Special"], "6"],
+      recipe: "n-",
+      symbol: Chr(0x2012)
     },
     "hyphen", {
       unicode: "{U+2010}", html: "&#8208;", entity: "&hyphen;",
       tags: ["hyphen", "дефис"],
-      group: [["Smelting Special", "Special Fast Secondary"], "-"],
-      modifier: "RShift",
+      group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "7"],
       show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [-]",
       recipe: "-",
       symbol: Chr(0x2010)
+    },
+    "no_break_hyphen", {
+      unicode: "{U+2011}", html: "&#8209;",
+      tags: ["no-break hyphen", "неразрывный дефис"],
+      group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "8"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "CapsLock RShift [-]",
+      recipe: "0-",
+      symbol: Chr(0x2011)
     },
     "minus", {
       unicode: "{U+2212}", html: "&#8722;", entity: "&minus;",
       tags: ["minus", "минус"],
-      group: [["Smelting Special", "Special Fast Primary"], "-"],
-      modifier: "LShift",
+      group: [["Dashes", "Smelting Special", "Special Fast Primary"], "9"],
       show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [-]",
       recipe: "m-",
       symbol: Chr(0x2212)
+    },
+    "horbar", {
+      unicode: "{U+2015}", html: "&#8213;", entity: "&horbar;",
+      tags: ["horbar", "горизонтальная черта"],
+      group: [["Dashes", "Smelting Special"], "0"],
+      recipe: "h-",
+      symbol: Chr(0x2015)
     },
 )
 MapInsert(Characters,
@@ -1792,7 +1835,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: [".ft", "лигатура ft", "ligature ft"],
-      recipe: "ft",
+      recipe: ["ft", Chr(0x017F) . "t"],
       symbol: Chr(0xFB05)
     },
     "lat_s_lig_ffi", {
@@ -1888,7 +1931,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: ["!ss", "лигатура SS", "ligature SS", "прописной эсцет", "capital eszett"],
-      recipe: "SS",
+      recipe: ["SS", Chr(0x017F) . "S"],
       symbol: Chr(0x1E9E)
     },
     "lat_s_lig_eszett", {
@@ -1896,7 +1939,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: [".ss", "лигатура ss", "ligature ss", "строчный эсцет", "small eszett"],
-      recipe: "ss",
+      recipe: ["ss", Chr(0x017F) . "s"],
       symbol: Chr(0x00DF)
     },
     ;
@@ -2117,6 +2160,14 @@ MapInsert(Characters,
       recipe: "nj",
       symbol: Chr(0x014B)
     },
+    "lat_s_let_s_long", {
+      unicode: "{U+017F}", html: "&#383;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: ["строчное s длинное", "small s long"],
+      recipe: "fs",
+      symbol: Chr(0x017F)
+    },
     ;
     ;
     ; * Accented Latin Letters
@@ -2261,7 +2312,7 @@ MapInsert(Characters,
       unicode: "{U+0468}", html: "&#1128;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
-      tags: ["!йюсм", "!йюсм", "Юс малый йотированный", "little Yus iotified"],
+      tags: ["!йюсм", "!iyusm", "Юс малый йотированный", "little Yus iotified"],
       recipe: ["ІАТ", "І" . Chr(0x0466)],
       symbol: Chr(0x0468)
     },
@@ -2269,7 +2320,7 @@ MapInsert(Characters,
       unicode: "{U+0469}", html: "&#1129;",
       titlesAlt: True,
       group: ["Cyrillic Ligatures & Letters"],
-      tags: [".йюсм", ".йюсм", "юс малый йотированный", "little yus iotified"],
+      tags: [".йюсм", ".iyusm", "юс малый йотированный", "little yus iotified"],
       recipe: ["іат", "і" . Chr(0x0467)],
       symbol: Chr(0x0469)
     },
@@ -2413,6 +2464,43 @@ MapInsert(Characters,
       tags: ["фунт", "pound"],
       recipe: "gbp",
       symbol: Chr(0x00A3)
+    },
+    ;
+    "copyright", {
+      unicode: "{U+00A9}", html: "&#169;", entity: "&copy;",
+      altCode: "0169",
+      group: ["Other Signs", ["c", "с"]],
+      show_on_fast_keys: True,
+      tags: ["копирайт", "copyright"],
+      recipe: ["copy", "cri"],
+      symbol: Chr(0x00A9)
+    },
+    "copyleft", {
+      unicode: "{U+1F12F}", html: "&#127279;",
+      group: ["Other Signs"],
+      tags: ["копилефт", "copyleft"],
+      recipe: "cft",
+      symbol: Chr(0x1F12F)
+    },
+    "registered", {
+      unicode: "{U+00AE}", html: "&#174;", entity: "&reg;",
+      altCode: "0174",
+      group: ["Other Signs", ["c", "с"]],
+      modifier: "CapsLock",
+      show_on_fast_keys: True,
+      tags: ["зарегистрированный", "registered"],
+      recipe: "reg",
+      symbol: Chr(0x00AE)
+    },
+    "trademark", {
+      unicode: "{U+2122}", html: "&#8482;", entity: "&trade;",
+      altCode: "0153",
+      group: ["Other Signs", ["c", "с"]],
+      modifier: "LShift",
+      show_on_fast_keys: True,
+      tags: ["торговый знак", "trademark"],
+      recipe: ["TM", "tm"],
+      symbol: Chr(0x2122)
     },
 )
 
@@ -3338,6 +3426,10 @@ Ligaturise(SmeltingMode := "InputBox") {
   ShowInfoMessage(["Активна группа шпаций", "Space group has been activated"], "[Space] " . DSLPadTitle, , SkipGroupMessage)
   InputBridge("Spaces")
 }
+<#<!-:: {
+  ShowInfoMessage(["Активна группа тире", "Dashes group has been activated"], "[-] " . DSLPadTitle, , SkipGroupMessage)
+  InputBridge("Dashes")
+}
 <#<!f:: SearchKey()
 <#<!u:: InsertUnicodeKey()
 <#<!a:: InsertAltCodeKey()
@@ -3673,32 +3765,10 @@ Constructor()
 
 
   Tab.UseTab(3)
-  DSLContent["BindList"].Spaces := [
-    ["", "Win Alt Space", "", ""],
-    [Map("ru", "Круглая шпация", "en", "Em Space"), "[1]", "[ ]", UniTrim(CharCodes.emsp[1])],
-    [Map("ru", "Полукруглая шпация", "en", "En Space"), "[2]", "[ ]", UniTrim(CharCodes.ensp[1])],
-    [Map("ru", "⅓ Круглой шпации", "en", "⅓ Em Space"), "[3]", "[ ]", UniTrim(CharCodes.emsp13[1])],
-    [Map("ru", "¼ Круглой шпации", "en", "¼ Em Space"), "[4]", "[ ]", UniTrim(CharCodes.emsp14[1])],
-    [Map("ru", "Узкий пробел", "en", "Thin Space"), "[5]", "[ ]", UniTrim(CharCodes.thinsp[1])],
-    [Map("ru", "⅙ Круглой шпации", "en", "⅙ Em Space"), "[6]", "[ ]", UniTrim(CharCodes.emsp16[1])],
-    [Map("ru", "Узкий неразрывный пробел", "en", "Narrow No-Break Space"), "[7]", "[ ]", UniTrim(CharCodes.nnbsp[1])],
-    [Map("ru", "Волосяная шпация", "en", "Hair Space"), "[8]", "[ ]", UniTrim(CharCodes.hairsp[1])],
-    [Map("ru", "Пунктуационный пробел", "en", "Punctuation Space"), "[9]", "[ ]", UniTrim(CharCodes.puncsp[1])],
-    [Map("ru", "Пробел нулевой ширины", "en", "Zero-Width Space"), "[0]", "[​]", UniTrim(CharCodes.zwsp[1])],
-    [Map("ru", "Соединитель слов", "en", "Word Joiner"), "[-]", "[⁠]", UniTrim(CharCodes.wj[1])],
-    [Map("ru", "Цифровой пробел", "en", "Figure Space"), "[=]", "[ ]", UniTrim(CharCodes.numsp[1])],
-    [Map("ru", "Неразрывный пробел", "en", "No-Break Space"), "[Space]", "[ ]", UniTrim(CharCodes.nbsp[1])],
-    ["", "", "", ""],
-    ["", "Win Alt F7", "", ""],
-    [Map("ru", "Низкий астериск", "en", "Low Asterisk"), "[a][ф]", "⁎", UniTrim(CharCodes.lowasterisk[1])],
-    [Map("ru", "Два астериска", "en", "Two Asterisk"), "[A][Ф]", "⁑", UniTrim(CharCodes.twoasterisks[1])],
-    [Map("ru", "Астеризм", "en", "Asterism"), "LCtrl [a][ф]", "⁂", UniTrim(CharCodes.asterism[1])],
-  ]
-
-  LocaliseArrayKeys(DSLContent["BindList"].Spaces)
 
   DSLContent["BindList"].TabSpaces := []
   InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Spaces", "Win Alt Space", False)
+  InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Dashes", "Win Alt -")
   InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Special Characters", "Win Alt F7")
 
   SpacesLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
@@ -3851,12 +3921,6 @@ Constructor()
 
   Tab.UseTab(5)
   DSLContent["BindList"].LigaturesInput := [
-    [Map("ru", "Дефис", "en", "Hyphen"), ".-", "‐", UniTrim(CharCodes.dash[1])],
-    [Map("ru", "Цифровое тире", "en", "Figure Dash"), "n-", "‒", UniTrim(CharCodes.numdash[1])],
-    [Map("ru", "Короткое тире", "en", "En Dash"), "--", "–", UniTrim(CharCodes.endash[1])],
-    [Map("ru", "Длинное тире", "en", "Em Dash"), "---", "—", UniTrim(CharCodes.emdash[1])],
-    [Map("ru", "Двойное тире", "en", "Two-Em Dash"), "----, 2-", "⸺", UniTrim(CharCodes.twoemdash[1])],
-    [Map("ru", "Тройное тире", "en", "Three-Em Dash"), "-----, 3-", "⸻", UniTrim(CharCodes.threemdash[1])],
     [Map("ru", "Неразрывный дефис", "en", "Non-Breaking Hyphen"), "0-", "‑", UniTrim(CharCodes.nbdash[1])],
   ]
 
@@ -3873,6 +3937,7 @@ Constructor()
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Letters", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, , True)
   InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, , True)
+  InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, , True)
 
 
   LigaturesLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.smelting)
@@ -3973,6 +4038,7 @@ Constructor()
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Primary", "", True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Diacritics Fast Secondary", "RAlt", True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Secondary", "", True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Other Signs", "", True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Spaces", "", True, True,)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Latin Extended", "", True, True,)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Letters", "", True, True,)
@@ -4638,6 +4704,14 @@ HandleFastKey(CharacterName)
 
 CapsSeparatedKey(CapitalCharacter, SmallCharacter) {
   if (GetKeyState("CapsLock", "T")) {
+    HandleFastKey(CapitalCharacter)
+  } else {
+    HandleFastKey(SmallCharacter)
+  }
+}
+
+CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
+  if (GetKeyState("CapsLock", "T")) {
     GetKeyState("LShift", "P") ? HandleFastKey(SmallCharacter) : HandleFastKey(CapitalCharacter)
   } else {
     GetKeyState("LShift", "P") ? HandleFastKey(CapitalCharacter) : HandleFastKey(SmallCharacter)
@@ -4734,14 +4808,16 @@ FastKeysList :=
     "<^>!t", (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
     "<^>!'", (*) => LangSeparatedKey(["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
     "<^>!i", (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_i", "cyr_s_let_i"], True),
+    "<^>!c", (*) => CapsSeparatedKey("registered", "copyright"),
+    "<^>!<+c", (*) => HandleFastKey("trademark"),
     "<^>!p", (*) => HandleFastKey("prime_single"),
     "<^>!+p", (*) => HandleFastKey("prime_double"),
     "<^>!=", (*) => HandleFastKey("noequals"),
     "<^>!>+=", (*) => HandleFastKey("almostequals"),
     "<^>!<+=", (*) => HandleFastKey("plusminus"),
-    "<^>!-", (*) => HandleFastKey("emdash"),
-    "<^>!<+-", (*) => HandleFastKey("endash"),
-    "<^>!>+-", (*) => HandleFastKey("hyphen"),
+    "<^>!-", (*) => CapsSeparatedKey("three_emdash", "emdash"),
+    "<^>!<+-", (*) => CapsSeparatedKey("two_emdash", "endash"),
+    "<^>!>+-", (*) => CapsSeparatedKey("no_break_hyphen", "hyphen"),
     "<^>!/", (*) => HandleFastKey("ellipsis"),
     "<^>!>+/", (*) => HandleFastKey("fraction_slash"),
     "<^>!8", (*) => HandleFastKey("multiplication"),
