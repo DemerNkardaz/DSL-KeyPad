@@ -526,6 +526,93 @@ Tabulation := Chr(0x0009)
 NbrSpace := Chr(0x00A0)
 DottedCircle := Chr(0x25CC)
 
+SCKeys := Map(
+  "semicolon", "SC027",
+  "apostrophe", "SC028",
+  "lsqbracket", "SC01A",
+  "rsqbracket", "SC01B",
+  "backtick", "SC029",
+  "minus", "SC00C",
+  "equals", "SC00D",
+  "comma", "SC033",
+  "dot", "SC034",
+  "slash", "SC035",
+  "backslash", "SC02B",
+  "space", "SC039",
+  "A", "SC01E",
+  "B", "SC030",
+  "C", "SC02E",
+  "D", "SC020",
+  "E", "SC012",
+  "F", "SC021",
+  "G", "SC022",
+  "H", "SC023",
+  "I", "SC017",
+  "J", "SC024",
+  "K", "SC025",
+  "L", "SC026",
+  "M", "SC032",
+  "N", "SC031",
+  "O", "SC018",
+  "P", "SC019",
+  "Q", "SC010",
+  "R", "SC013",
+  "S", "SC01F",
+  "T", "SC014",
+  "U", "SC016",
+  "V", "SC02F",
+  "W", "SC011",
+  "X", "SC02D",
+  "Y", "SC015",
+  "Z", "SC02C",
+  "0", "SC00B",
+  "1", "SC002",
+  "2", "SC003",
+  "3", "SC004",
+  "4", "SC005",
+  "5", "SC006",
+  "6", "SC007",
+  "7", "SC008",
+  "8", "SC009",
+  "9", "SC00A",
+  "Numpad0", "SC052",
+  "Numpad1", "SC04F",
+  "Numpad2", "SC050",
+  "Numpad3", "SC051",
+  "Numpad4", "SC04B",
+  "Numpad5", "SC04C",
+  "Numpad6", "SC04D",
+  "Numpad7", "SC047",
+  "Numpad8", "SC048",
+  "Numpad9", "SC049",
+  "NumpadMult", "SC037",
+  "NumpadAdd", "SC04E",
+  "NumpadSub", "SC04A",
+  "NumpadDot", "SC053",
+  "NumpadDiv", "SC135",
+  "NumpadEnter", "SC11C",
+  "Left", "SC14B",
+  "Up", "SC148",
+  "Right", "SC14D",
+  "Down", "SC150",
+  "PgUp", "SC149",
+  "PgDn", "SC151",
+  "End", "SC14F",
+  "Home", "SC147",
+  "Ins", "SC152",
+  "Del", "SC153",
+  "Shift", "SC02A",
+  "Ctrl", "SC01D",
+  "Alt", "SC038",
+  "LShift", "SC02A",
+  "RShift", "SC036",
+  "LCtrl", "SC01D",
+  "RCtrl", "SC11D",
+  "RAlt", "SC138",
+  "Backspace", "SC00E",
+)
+
+
 RoNum := Map(
   "00-HundredM", Chr(0x2188),
   "01-FiftyTenM", Chr(0x2187),
@@ -2502,6 +2589,15 @@ MapInsert(Characters,
       recipe: ["TM", "tm"],
       symbol: Chr(0x2122)
     },
+    "servicemark", {
+      unicode: "{U+2120}", html: "&#8480;",
+      group: ["Other Signs", ["c", "с"]],
+      modifier: "CapsLock LShift",
+      show_on_fast_keys: True,
+      tags: ["знак обслуживания", "servicemark"],
+      recipe: ["SM", "sm"],
+      symbol: Chr(0x2120)
+    },
 )
 
 
@@ -3430,20 +3526,18 @@ Ligaturise(SmeltingMode := "InputBox") {
   ShowInfoMessage(["Активна группа тире", "Dashes group has been activated"], "[-] " . DSLPadTitle, , SkipGroupMessage)
   InputBridge("Dashes")
 }
-<#<!f:: SearchKey()
-<#<!u:: InsertUnicodeKey()
-<#<!a:: InsertAltCodeKey()
-<#<!l:: Ligaturise()
->+l:: Ligaturise("Clipboard")
->+Backspace:: Ligaturise("Backspace")
-;>+c:: Ligaturise("Compose")
-<#<!1:: SwitchToScript("sup")
-<#<^>!1:: SwitchToScript("sub")
-<#<^>!2:: SwitchToRoman()
 
-<#<!m:: ToggleGroupMessage()
-
-<#<!PgUp:: FindCharacterPage()
+Hotkey("<#<!" SCKeys["F"], (*) => SearchKey())
+Hotkey("<#<!" SCKeys["U"], (*) => InsertUnicodeKey())
+Hotkey("<#<!" SCKeys["A"], (*) => InsertAltCodeKey())
+Hotkey("<#<!" SCKeys["L"], (*) => Ligaturise())
+Hotkey(">+" SCKeys["L"], (*) => Ligaturise("Clipboard"))
+Hotkey(">+" SCKeys["Backspace"], (*) => Ligaturise("Backspace"))
+Hotkey("<#<^>!" SCKeys["1"], (*) => SwitchToScript("sup"))
+Hotkey("<#<^>!" SCKeys["2"], (*) => SwitchToScript("sub"))
+Hotkey("<#<^>!" SCKeys["3"], (*) => SwitchToRoman())
+Hotkey("<#<!" SCKeys["M"], (*) => ToggleGroupMessage())
+Hotkey("<#<!" SCKeys["PgUp"], (*) => FindCharacterPage())
 
 
 GetCharacterUnicode(symbol) {
@@ -3837,9 +3931,9 @@ Constructor()
     [Map("ru", " (выделить)", "en", " (select)"), "RShift L", "ІУЖ → Ѭ, ІЭ → Ѥ"],
     [Map("ru", " (установить курсор справа от символов)", "en", " (set cursor to the right of the symbols)"), "RShift Backspace", "st → ﬆ, іат → ѩ"],
     [Map("ru", " Режиме «Compose»", "en", " “Compose” mode"), "RAlt×2", ""],
-    [Map("ru", "Конвертировать в верхний индекс", "en", "Convert into superscript"), "Win LAlt 1", "‌¹‌²‌³‌⁴‌⁵‌⁶‌⁷‌⁸‌⁹‌⁰‌⁽‌⁻‌⁼‌⁾"],
-    [Map("ru", "Конвертировать в нижний индекс", "en", "Convert into subscript"), "Win RAlt 1", "‌₁‌₂‌₃‌₄‌₅‌₆‌₇‌₈‌₉‌₀‌₍‌₋‌₌‌₎"],
-    [Map("ru", "Конвертировать в Римские цифры", "en", "Convert into Roman Numerals"), "Win RAlt 2", "15128 → ↂↁⅭⅩⅩⅧ"],
+    [Map("ru", "Конвертировать в верхний индекс", "en", "Convert into superscript"), "Win RAlt 1", "‌¹‌²‌³‌⁴‌⁵‌⁶‌⁷‌⁸‌⁹‌⁰‌⁽‌⁻‌⁼‌⁾"],
+    [Map("ru", "Конвертировать в нижний индекс", "en", "Convert into subscript"), "Win RAlt 2", "‌₁‌₂‌₃‌₄‌₅‌₆‌₇‌₈‌₉‌₀‌₍‌₋‌₌‌₎"],
+    [Map("ru", "Конвертировать в Римские цифры", "en", "Convert into Roman Numerals"), "Win RAlt 3", "15128 → ↂↁⅭⅩⅩⅧ"],
     [Map("ru", "Активация «Быстрых ключей»", "en", "Toggle FastKeys"), "RAlt Home", ""],
     [Map("ru", "Переключение ввода HTML/LaTeX/Символ", "en", "Toggle of HTML/LaTeX/Symbol input"), "RAlt RShift Home", "a&#769; | \'{a} | á"],
     [Map("ru", "Оповещения активации групп", "en", "Groups activation notification toggle"), "Win Alt M", ""],
@@ -4734,10 +4828,15 @@ RegFastKeys(Bindings) {
     if (Mod(index, 2) = 1) {
       key := pair
       value := Bindings[index + 1]
-      if (FastKeysIsActive) {
-        HotKey(key, value, "On")
-      } else {
-        HotKey(key, value, "Off")
+
+      try {
+        if (FastKeysIsActive) {
+          HotKey(key, value, "On")
+        } else {
+          HotKey(key, value, "Off")
+        }
+      } catch {
+        MsgBox "Error registering hotkey: " key
       }
     }
   }
@@ -4745,82 +4844,82 @@ RegFastKeys(Bindings) {
 
 FastKeysList :=
   [
-    "<^<!a", (*) => HandleFastKey("acute"),
-    "<^<+<!a", (*) => HandleFastKey("acute_double"),
-    "<^<!b", (*) => HandleFastKey("breve"),
-    "<^<+<!b", (*) => HandleFastKey("breve_inverted"),
-    "<^<!c", (*) => HandleFastKey("circumflex"),
-    "<^<+<!c", (*) => HandleFastKey("caron"),
-    "<^<!,", (*) => HandleFastKey("comma_above"),
-    "<^<+<!,", (*) => HandleFastKey("comma_below"),
-    "<^<!d", (*) => HandleFastKey("dot_above"),
-    "<^<+<!d", (*) => HandleFastKey("diaeresis"),
-    "<^<!f", (*) => HandleFastKey("fermata"),
-    "<^<!g", (*) => HandleFastKey("grave"),
-    "<^<+<!g", (*) => HandleFastKey("grave_double"),
-    "<^<!h", (*) => HandleFastKey("hook_above"),
-    "<^<+<!h", (*) => HandleFastKey("horn"),
-    "<^<!m", (*) => HandleFastKey("macron"),
-    "<^<+<!m", (*) => HandleFastKey("macron_below"),
-    "<^<!o", (*) => HandleFastKey("ogonek"),
-    "<^<!r", (*) => HandleFastKey("ring_above"),
-    "<^<!<+r", (*) => HandleFastKey("ring_below"),
-    "<^<!v", (*) => HandleFastKey("line_vertical"),
-    "<^<!<+v", (*) => HandleFastKey("line_vertical_double"),
-    "<^<!t", (*) => HandleFastKey("tilde"),
-    "<^<!<+t", (*) => HandleFastKey("tilde_overline"),
-    "<^<!s", (*) => HandleFastKey("stroke_short"),
-    "<^<!<+s", (*) => HandleFastKey("stroke_long"),
-    "<^<!/", (*) => HandleFastKey("solidus_short"),
-    "<^<!<+/", (*) => HandleFastKey("solidus_long"),
-    "<^<!x", (*) => HandleFastKey("x_above"),
-    "<^<!<+x", (*) => HandleFastKey("x_below"),
-    "<^<!z", (*) => HandleFastKey("zigzag_above"),
+    "<^<!" SCKeys["A"], (*) => HandleFastKey("acute"),
+    "<^<+<!" SCKeys["A"], (*) => HandleFastKey("acute_double"),
+    "<^<!" SCKeys["B"], (*) => HandleFastKey("breve"),
+    "<^<+<!" SCKeys["B"], (*) => HandleFastKey("breve_inverted"),
+    "<^<!" SCKeys["C"], (*) => HandleFastKey("circumflex"),
+    "<^<+<!" SCKeys["C"], (*) => HandleFastKey("caron"),
+    "<^<!" SCKeys["comma"], (*) => HandleFastKey("comma_above"),
+    "<^<+<!" SCKeys["comma"], (*) => HandleFastKey("comma_below"),
+    "<^<!" SCKeys["D"], (*) => HandleFastKey("dot_above"),
+    "<^<+<!" SCKeys["D"], (*) => HandleFastKey("diaeresis"),
+    "<^<!" SCKeys["F"], (*) => HandleFastKey("fermata"),
+    "<^<!" SCKeys["G"], (*) => HandleFastKey("grave"),
+    "<^<+<!" SCKeys["G"], (*) => HandleFastKey("grave_double"),
+    "<^<!" SCKeys["H"], (*) => HandleFastKey("hook_above"),
+    "<^<+<!" SCKeys["H"], (*) => HandleFastKey("horn"),
+    "<^<!" SCKeys["M"], (*) => HandleFastKey("macron"),
+    "<^<+<!" SCKeys["M"], (*) => HandleFastKey("macron_below"),
+    "<^<!" SCKeys["O"], (*) => HandleFastKey("ogonek"),
+    "<^<!" SCKeys["R"], (*) => HandleFastKey("ring_above"),
+    "<^<!<+" SCKeys["R"], (*) => HandleFastKey("ring_below"),
+    "<^<!" SCKeys["V"], (*) => HandleFastKey("line_vertical"),
+    "<^<!<+" SCKeys["V"], (*) => HandleFastKey("line_vertical_double"),
+    "<^<!" SCKeys["T"], (*) => HandleFastKey("tilde"),
+    "<^<!<+" SCKeys["T"], (*) => HandleFastKey("tilde_overline"),
+    "<^<!" SCKeys["S"], (*) => HandleFastKey("stroke_short"),
+    "<^<!<+" SCKeys["S"], (*) => HandleFastKey("stroke_long"),
+    "<^<!" SCKeys["slash"], (*) => HandleFastKey("solidus_short"),
+    "<^<!<+" SCKeys["slash"], (*) => HandleFastKey("solidus_long"),
+    "<^<!" SCKeys["X"], (*) => HandleFastKey("x_above"),
+    "<^<!<+" SCKeys["X"], (*) => HandleFastKey("x_below"),
+    "<^<!" SCKeys["Z"], (*) => HandleFastKey("zigzag_above"),
     ;
-    "<^<!-", (*) => HandleFastKey("softhyphen"),
-    "<^<!<+-", (*) => HandleFastKey("minus"),
+    "<^<!" SCKeys["minus"], (*) => HandleFastKey("softhyphen"),
+    "<^<!<+" SCKeys["minus"], (*) => HandleFastKey("minus"),
     ;
-    "<^>!+,", (*) => HandleFastKey("comma_above_right"),
-    "<^>!>+c", (*) => HandleFastKey("cedilla"),
+    "<^>!+" SCKeys["comma"], (*) => HandleFastKey("comma_above_right"),
+    "<^>!>+" SCKeys["C"], (*) => HandleFastKey("cedilla"),
     ;
-    "<^>!>+1", (*) => HandleFastKey("emsp"),
-    "<^>!>+2", (*) => HandleFastKey("ensp"),
-    "<^>!>+3", (*) => HandleFastKey("emsp13"),
-    "<^>!>+4", (*) => HandleFastKey("emsp14"),
-    "<^>!>+5", (*) => HandleFastKey("thinspace"),
-    "<^>!>+6", (*) => HandleFastKey("emsp16"),
-    "<^>!>+7", (*) => HandleFastKey("narrow_no_break_space"),
-    "<^>!>+8", (*) => HandleFastKey("hairspace"),
-    "<^>!>+9", (*) => HandleFastKey("punctuation_space"),
-    "<^>!>+0", (*) => HandleFastKey("zero_width_space"),
-    "<^>!>+-", (*) => HandleFastKey("word_joiner"),
-    "<^>!>+=", (*) => HandleFastKey("figure_space"),
+    "<^>!>+" SCKeys["1"], (*) => HandleFastKey("emsp"),
+    "<^>!>+" SCKeys["2"], (*) => HandleFastKey("ensp"),
+    "<^>!>+" SCKeys["3"], (*) => HandleFastKey("emsp13"),
+    "<^>!>+" SCKeys["4"], (*) => HandleFastKey("emsp14"),
+    "<^>!>+" SCKeys["5"], (*) => HandleFastKey("thinspace"),
+    "<^>!>+" SCKeys["6"], (*) => HandleFastKey("emsp16"),
+    "<^>!>+" SCKeys["7"], (*) => HandleFastKey("narrow_no_break_space"),
+    "<^>!>+" SCKeys["8"], (*) => HandleFastKey("hairspace"),
+    "<^>!>+" SCKeys["9"], (*) => HandleFastKey("punctuation_space"),
+    "<^>!>+" SCKeys["0"], (*) => HandleFastKey("zero_width_space"),
+    "<^>!>+" SCKeys["minus"], (*) => HandleFastKey("word_joiner"),
+    "<^>!>+" SCKeys["equals"], (*) => HandleFastKey("figure_space"),
     ;
-    "<^>!Space", (*) => HandleFastKey("no_break_space"),
+    "<^>!" SCKeys["space"], (*) => HandleFastKey("no_break_space"),
     ;
-    "<^<!Numpad0", (*) => HandleFastKey("dotted_circle"),
-    "<^>!NumpadMult", (*) => HandleFastKey("asterisk_two"),
-    "<^>!>+NumpadMult", (*) => HandleFastKey("asterism"),
-    "<^>!<+NumpadMult", (*) => HandleFastKey("asterisk_low"),
-    "<^>!NumpadDiv", (*) => HandleFastKey("dagger"),
-    "<^>!>+NumpadDiv", (*) => HandleFastKey("dagger_double"),
+    "<^<!" SCKeys["Numpad0"], (*) => HandleFastKey("dotted_circle"),
+    "<^>!" SCKeys["NumpadMult"], (*) => HandleFastKey("asterisk_two"),
+    "<^>!>+" SCKeys["NumpadMult"], (*) => HandleFastKey("asterism"),
+    "<^>!<+" SCKeys["NumpadMult"], (*) => HandleFastKey("asterisk_low"),
+    "<^>!" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger"),
+    "<^>!>+" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger_double"),
     ;
-    "<^>!t", (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
-    "<^>!'", (*) => LangSeparatedKey(["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
-    "<^>!i", (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_i", "cyr_s_let_i"], True),
-    "<^>!c", (*) => CapsSeparatedKey("registered", "copyright"),
-    "<^>!<+c", (*) => HandleFastKey("trademark"),
-    "<^>!p", (*) => HandleFastKey("prime_single"),
-    "<^>!+p", (*) => HandleFastKey("prime_double"),
-    "<^>!=", (*) => HandleFastKey("noequals"),
-    "<^>!>+=", (*) => HandleFastKey("almostequals"),
-    "<^>!<+=", (*) => HandleFastKey("plusminus"),
-    "<^>!-", (*) => CapsSeparatedKey("three_emdash", "emdash"),
-    "<^>!<+-", (*) => CapsSeparatedKey("two_emdash", "endash"),
-    "<^>!>+-", (*) => CapsSeparatedKey("no_break_hyphen", "hyphen"),
-    "<^>!/", (*) => HandleFastKey("ellipsis"),
-    "<^>!>+/", (*) => HandleFastKey("fraction_slash"),
-    "<^>!8", (*) => HandleFastKey("multiplication"),
+    "<^>!" SCKeys["T"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
+    "<^>!" SCKeys["apostrophe"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
+    "<^>!" SCKeys["I"], (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_i", "cyr_s_let_i"], True),
+    "<^>!" SCKeys["C"], (*) => CapsSeparatedKey("registered", "copyright"),
+    "<^>!<+" SCKeys["C"], (*) => CapsSeparatedKey("servicemark", "trademark"),
+    "<^>!" SCKeys["P"], (*) => HandleFastKey("prime_single"),
+    "<^>!+" SCKeys["P"], (*) => HandleFastKey("prime_double"),
+    "<^>!" SCKeys["equals"], (*) => HandleFastKey("noequals"),
+    "<^>!>+" SCKeys["equals"], (*) => HandleFastKey("almostequals"),
+    "<^>!<+" SCKeys["equals"], (*) => HandleFastKey("plusminus"),
+    "<^>!" SCKeys["minus"], (*) => CapsSeparatedKey("three_emdash", "emdash"),
+    "<^>!<+" SCKeys["minus"], (*) => CapsSeparatedKey("two_emdash", "endash"),
+    "<^>!>+" SCKeys["minus"], (*) => CapsSeparatedKey("no_break_hyphen", "hyphen"),
+    "<^>!" SCKeys["slash"], (*) => HandleFastKey("ellipsis"),
+    "<^>!>+" SCKeys["slash"], (*) => HandleFastKey("fraction_slash"),
+    "<^>!" SCKeys["8"], (*) => HandleFastKey("multiplication"),
     ;
     "RAlt", (*) => ProceedCompose(),
   ]
@@ -4828,7 +4927,6 @@ FastKeysList :=
 RAltsCount := 0
 RAltsTimerEnds := False
 RAltsTimer := ""
-
 ProceedCompose() {
   global RAltsTimerEnds, RAltsCount
 
