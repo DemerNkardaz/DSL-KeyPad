@@ -44,6 +44,12 @@ For using the “DSL KeyPad” you need to simply [download the .ahk file](https
 
 ![](Images/20240905_1.png)
 
+![](Images/20240910_0.png)
+
+![](Images/20240910_1.png)
+
+![](Images/20240910_3.png)
+
 # License
 
 All own code source (i.e. exclude third-party code parts) is licensed under the [MIT License](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/LICENSE)
