@@ -15,7 +15,7 @@ The main panel of the program can be opened using the combination **Win Alt Ho
 
 Most combinations are divided into “activation groups” and you need to first activate the desired group, for example, “Win Alt F1” for “First Diacritic Group,” and then press the key for the desired mark, for example, “a” for acute \[á\].
 
-You can activate “Quick Keys” via RAlt Home, the simplified combinations for a limited set of characters, such as “Ctrl Alt a” for entering the same acute mark; strict on the Russian keyboard: “Ctrl Alt е” for entering “ѣ”, Alt ш” for entering the Cyrillic “і”, “Alt э” for entering “є”, etc.
+You can activate “Quick Keys” via RAlt Home, the simplified combinations for a limited set of characters, such as “Ctrl Alt a” for entering the same acute mark; strict on the Russian keyboard: “RAlt е” for entering “ѣ”, “RAlt ш” for entering the Cyrillic “і”, “RAlt э” for entering “є”, etc.
 
 For using the “DSL KeyPad” you need to simply [download the .ahk file](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk) and run it. In the program also there is the system of updates and you do not need to go to the repository again for getting the latest version.
 
@@ -34,7 +34,7 @@ For using the “DSL KeyPad” you need to simply [download the .ahk file](https
 
 Большинство комбинаций разделено на «группы активаций» — необходимо сначала активировать нужную группу, например, «Win Alt F1» для «Первой группы диакритики», а затем нажать на ключ нужного знака, например «ф» для акута \[á\].
 
-Нажав **RAlt Home** можно активировать «Быстрые ключи» — упрощённые комбинации ограниченного ряда знаков, например, «Ctrl Alt ф» для ввода того же акута; строго на русской раскладке: «Ctrl Alt е» для ввода «ѣ», «Alt ш» для ввода кириллической «і», «Alt э» для ввода «є» и т.д.
+Нажав **RAlt Home** можно активировать «Быстрые ключи» — упрощённые комбинации ограниченного ряда знаков, например, «Ctrl Alt ф» для ввода того же акута; строго на русской раскладке: «RAlt е» для ввода «ѣ», «RAlt ш» для ввода кириллической «і», «RAlt э» для ввода «є» и т.д.
 
 Для использования «DSL KeyPad» требуется просто [скачать .ahk файл](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk) и запустить. В программе так же предусмотрена система обновлений, и вам не потребуется вновь заходить в репозиторий для получения свежей версии.
 
