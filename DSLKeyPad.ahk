@@ -2499,16 +2499,18 @@ MapInsert(Characters,
     "cyr_c_yus_big", {
       unicode: "{U+046A}", html: "&#1130;",
       titlesAlt: True,
-      group: ["Cyrillic Ligatures & Letters"],
+      group: ["Cyrillic Ligatures & Letters", "У"],
       tags: ["!юсб", "!yusb", "Юс большой", "big Yus"],
+      show_on_fast_keys: True,
       recipe: "УЖ",
       symbol: Chr(0x046A)
     },
     "cyr_s_yus_big", {
       unicode: "{U+046B}", html: "&#046B;",
       titlesAlt: True,
-      group: ["Cyrillic Ligatures & Letters"],
+      group: ["Cyrillic Ligatures & Letters", "у"],
       tags: [".юсб", ".yusb", "юс большой", "big yus"],
+      show_on_fast_keys: True,
       recipe: "уж",
       symbol: Chr(0x046B)
     },
@@ -2531,16 +2533,18 @@ MapInsert(Characters,
     "cyr_c_yus_little", {
       unicode: "{U+0466}", html: "&#1126;",
       titlesAlt: True,
-      group: ["Cyrillic Ligatures & Letters"],
+      group: ["Cyrillic Ligatures & Letters", "Я"],
       tags: ["!юсм", "!yusm", "Юс малый", "little Yus"],
+      show_on_fast_keys: True,
       recipe: "АТ",
       symbol: Chr(0x0466)
     },
     "cyr_s_yus_little", {
       unicode: "{U+0467}", html: "&#1127;",
       titlesAlt: True,
-      group: ["Cyrillic Ligatures & Letters"],
+      group: ["Cyrillic Ligatures & Letters", "я"],
       tags: [".юсм", ".yusm", "юс малый", "little yus"],
+      show_on_fast_keys: True,
       recipe: "ат",
       symbol: Chr(0x0467)
     },
@@ -2611,7 +2615,7 @@ MapInsert(Characters,
     "cyr_c_yat_iotified", {
       unicode: "{U+A652}", html: "&#42578;",
       titlesAlt: True,
-      group: ["Cyrillic Ligatures & Letters", "Е"],
+      group: ["Cyrillic Ligatures & Letters"],
       tags: ["Ять йотированный", "Yat iotified"],
       recipe: ["ІТЬ", "І" . Chr(0x0462)],
       symbol: Chr(0xA652)
@@ -2619,8 +2623,7 @@ MapInsert(Characters,
     "cyr_s_yat_iotified", {
       unicode: "{U+A653}", html: "&#42579;",
       titlesAlt: True,
-      group: ["Cyrillic Ligatures & Letters", "е"],
-      show_on_fast_keys: True,
+      group: ["Cyrillic Ligatures & Letters"],
       tags: ["ять йотированный", "yat iotified"],
       recipe: ["іть", "і" . Chr(0x0463)],
       symbol: Chr(0xA653)
@@ -3506,7 +3509,7 @@ Ligaturise(SmeltingMode := "InputBox") {
     PromptValue := A_Clipboard
     Sleep 50
   } else if (SmeltingMode = "Compose") {
-    ShowInfoMessage("message_compose")
+    ShowInfoMessage("message_compose", , , SkipGroupMessage, True)
 
     ih := InputHook("C", "L")
     ih.MaxLen := 6
@@ -3571,7 +3574,7 @@ Ligaturise(SmeltingMode := "InputBox") {
     ih.Stop()
     if (!Found && !IsCancelledByUser) {
       if (SmeltingMode = "Compose") {
-        ShowInfoMessage("warning_recipe_absent")
+        ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
       } else {
         MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
       }
@@ -3671,10 +3674,9 @@ GroupActivator(GroupName, KeyValue := "") {
   LocaleMark := KeyValue != "" && RegExMatch(KeyValue, "^F") ? KeyValue : GroupName
   MsgTitle := "[" LocaleMark "] " DSLPadTitle
 
-  ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, SkipGroupMessage)
+  ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, SkipGroupMessage, True)
   InputBridge(GroupName)
 }
-
 
 Hotkey("<#<!" SCKeys["F"], (*) => SearchKey())
 Hotkey("<#<!" SCKeys["U"], (*) => InsertUnicodeKey())
@@ -4268,7 +4270,8 @@ Constructor()
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Other Signs", "", True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Spaces", "", True, True,)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Latin Extended", "", True, True,)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Letters", "", True, True,)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Ligatures & Letters", "", True, True,)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Letters", "", False, True,)
 
 
   FastKeysLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
@@ -5077,6 +5080,8 @@ FastKeysList :=
     "<^>!" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger"),
     "<^>!>+" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger_double"),
     ;
+    "<^>!" SCKeys["E"], (*) => LangSeparatedKey(["", ""], ["cyr_c_yus_big", "cyr_s_yus_big"], True),
+    "<^>!" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_yus_little", "cyr_s_yus_little"], True),
     "<^>!" SCKeys["T"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
     "<^>!" SCKeys["Apostrophe"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
     "<^>!" SCKeys["I"], (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_i", "cyr_s_let_i"], True),
@@ -5194,14 +5199,15 @@ RegFastKeys(FastKeysList)
 ;<^<!NumpadDiv:: HandleFastKey(CharCodes.fractionslash[1], True)
 
 
-ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False) {
+ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False) {
   if SkipMessage == True
     return
   LanguageCode := GetLanguageCode()
+  Muting := Mute ? " Mute" : ""
   Ico := MessageIcon == "Info" ? "Iconi" :
     MessageIcon == "Warning" ? "Icon!" :
       MessageIcon == "Error" ? "Iconx" : 0x0
-  TrayTip ReadLocale(MessagePost), MessageTitle, Ico
+  TrayTip(ReadLocale(MessagePost), MessageTitle, Ico . Muting)
 
 }
 
