@@ -507,6 +507,7 @@ CtrlW := Chr(23)
 CtrlX := Chr(24)
 CtrlY := Chr(25)
 CtrlZ := Chr(26)
+CtrlTilde := Chr(30)
 EscapeKey := Chr(27)
 SpaceKey := Chr(32)
 ExclamationMark := Chr(33)
@@ -528,7 +529,7 @@ SCKeys := Map(
   "Apostrophe", "SC028",
   "LSquareBracket", "SC01A",
   "RSquareBracket", "SC01B",
-  "Backtick", "SC029",
+  "Tilde", "SC029",
   "Minus", "SC00C",
   "Equals", "SC00D",
   "Comma", "SC033",
@@ -1530,6 +1531,23 @@ MapInsert(Characters,
       alt_on_fast_keys: "RShift [Num*]",
       recipe: ["***", "3*"],
       symbol: Chr(0x2042)
+    },
+    "bullet", {
+      unicode: "{U+2022}", html: "&#8226;", entity: "&bull;",
+      altCode: "0149 7",
+      tags: ["bullet", "булит"],
+      group: [["Special Characters", "Special Fast Secondary"], Backquote],
+      show_on_fast_keys: True,
+      symbol: Chr(0x2022)
+    },
+    "interpunct", {
+      unicode: "{U+00B7}", html: "&#183;", entity: "&middot;",
+      altCode: "0183 250",
+      tags: ["middle dot", "точка по центру", "интерпункт"],
+      group: [["Special Characters", "Special Fast Secondary"], '~'],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [" Backquote "]",
+      symbol: Chr(0x00B7)
     },
     "colon_triangle", {
       unicode: "{U+02D0}", html: "&#720;",
@@ -2705,12 +2723,33 @@ MapInsert(Characters,
     ;
     ;
     ; * Wallet Signs
+    "wallet_cent", {
+      unicode: "{U+00A2}", html: "&cent;",
+      group: ["Wallet Signs"],
+      tags: ["цент", "cent"],
+      recipe: "cnt",
+      symbol: Chr(0x00A2)
+    },
+    "wallet_pound", {
+      unicode: "{U+00A3}", html: "&#163;", entity: "&pound;",
+      group: ["Wallet Signs"],
+      tags: ["фунт", "pound"],
+      recipe: "gbp",
+      symbol: Chr(0x00A3)
+    },
     "wallet_eur", {
       unicode: "{U+20AC}", html: "&#8364;",
       group: ["Wallet Signs"],
       tags: ["евро", "euro"],
       recipe: "eur",
       symbol: Chr(0x20AC)
+    },
+    "wallet_franc", {
+      unicode: "{U+20A3}", html: "&#8353;",
+      group: ["Wallet Signs"],
+      tags: ["франк", "franc"],
+      recipe: ["frf", "FRF"],
+      symbol: Chr(0x20A3)
     },
     "wallet_rub", {
       unicode: "{U+20BD}", html: "&#8381;",
@@ -2719,12 +2758,103 @@ MapInsert(Characters,
       recipe: ["rub", "руб"],
       symbol: Chr(0x20BD)
     },
-    "wallet_pound", {
-      unicode: "{U+00A3}", html: "&#163;", entity: "&pound;",
+    "wallet_hryvnia", {
+      unicode: "{U+20B4}", html: "&#8372;",
       group: ["Wallet Signs"],
-      tags: ["фунт", "pound"],
-      recipe: "gbp",
-      symbol: Chr(0x00A3)
+      tags: ["гривна", "hryvnia"],
+      recipe: ["uah", "UAH", "грн", "ГРН"],
+      symbol: Chr(0x20B4)
+    },
+    "wallet_lira", {
+      unicode: "{U+20A4}", html: "&#8356;",
+      group: ["Wallet Signs"],
+      tags: ["лира", "lira"],
+      recipe: ["lir", "LIR"],
+      symbol: Chr(0x20A4)
+    },
+    "wallet_turkish_lira", {
+      unicode: "{U+20BA}", html: "&#8378;",
+      group: ["Wallet Signs"],
+      tags: ["лира", "lira"],
+      recipe: ["try", "TRY"],
+      symbol: Chr(0x20BA)
+    },
+    "wallet_rupee", {
+      unicode: "{U+20B9}", html: "&#8377;",
+      group: ["Wallet Signs"],
+      tags: ["рупия", "rupee"],
+      recipe: ["inr", "INR", "rup", "RUP"],
+      symbol: Chr(0x20B9)
+    },
+    "wallet_won", {
+      unicode: "{U+20A9}", html: "&#8361;",
+      group: ["Wallet Signs"],
+      tags: ["вон", "won"],
+      recipe: ["won", "WON", "krw", "KRW"],
+      symbol: Chr(0x20A9)
+    },
+    "wallet_yen", {
+      unicode: "{U+00A5}", html: "&#165;", entity: "&yen;",
+      group: ["Wallet Signs"],
+      tags: ["знак йены", "yen sign"],
+      recipe: ["yen", "YEN"],
+      symbol: Chr(0x00A5)
+    },
+    "wallet_jpy_yen", {
+      unicode: "{U+5186}", html: "&#20870;",
+      group: ["Wallet Signs"],
+      tags: ["йена", "yen"],
+      recipe: ["jpy", "JPY"],
+      symbol: Chr(0x5186)
+    },
+    "wallet_cny_yuan", {
+      unicode: "{U+5143}", html: "&#20803;",
+      group: ["Wallet Signs"],
+      tags: ["юань", "yuan"],
+      recipe: ["cny", "CNY"],
+      symbol: Chr(0x5143)
+    },
+    "wallet_viet_dong", {
+      unicode: "{U+20AB}", html: "&#8363;",
+      group: ["Wallet Signs"],
+      tags: ["вьетнамский донг", "vietnamese dong"],
+      recipe: ["vnd", "VND", "dng", "DNG"],
+      symbol: Chr(0x20AB)
+    },
+    "wallet_mongol_tugrik", {
+      unicode: "{U+20AE}", html: "&#8366;",
+      group: ["Wallet Signs"],
+      tags: ["монгольский тугрик", "mongolian tugrik"],
+      recipe: ["mnt", "MNT", "tgk", "TGK"],
+      symbol: Chr(0x20AE)
+    },
+    "wallet_qazaq_tenge", {
+      unicode: "{U+20B8}", html: "&#8376;",
+      group: ["Wallet Signs"],
+      tags: ["казахский тенге", "kazakh tenge"],
+      recipe: ["kzt", "KZT", "tng", "TNG"],
+      symbol: Chr(0x20B8)
+    },
+    "wallet_new_sheqel", {
+      unicode: "{U+20AA}", html: "&#8362;",
+      group: ["Wallet Signs"],
+      tags: ["новый шекель", "new sheqel"],
+      recipe: ["nzd", "NZD", "shq", "SHQ"],
+      symbol: Chr(0x20AA)
+    },
+    "wallet_philippine_peso", {
+      unicode: "{U+20B1}", html: "&#8369;",
+      group: ["Wallet Signs"],
+      tags: ["филиппинский песо", "philippine peso"],
+      recipe: ["php", "PHP"],
+      symbol: Chr(0x20B1)
+    },
+    "wallet_bitcoin", {
+      unicode: "{U+20BF}", html: "&#8383;",
+      group: ["Wallet Signs"],
+      tags: ["биткоин", "bitcoin"],
+      recipe: "btc",
+      symbol: Chr(0x20BF)
     },
     ;
     "copyright", {
@@ -2773,50 +2903,35 @@ MapInsert(Characters,
       symbol: Chr(0x2120)
     },
 )
-
-
 CharCodes := {}
 CharCodes.acute := ["{U+0301}", "&#769;"]
 CharCodes.dacute := ["{U+030B}", "&#779;"]
 CharCodes.acutebelow := ["{U+0317}", "&#791;"]
-
 CharCodes.asteriskabove := ["{U+20F0}", "&#8432;"]
 CharCodes.asteriskbelow := ["{U+0359}", "&#857;"]
-
 CharCodes.breve := ["{U+0306}", "&#774;"]
 CharCodes.brevebelow := ["{U+032E}", "&#814;"]
 CharCodes.ibreve := ["{U+0311}", "&#785;"]
 CharCodes.ibrevebelow := ["{U+032F}", "&#815;"]
-
 CharCodes.circumflex := ["{U+0302}", "&#770;"]
 CharCodes.circumflexbelow := ["{U+032D}", "&#813;"]
-
-
 CharCodes.caron := ["{U+030C}", "&#780;"]
 CharCodes.caronbelow := ["{U+032C}", "&#812;"]
-
 CharCodes.diaeresis := ["{U+0308}", "&#776;"]
 CharCodes.dotabove := ["{U+0307}", "&#775;"]
-
 CharCodes.fermata := ["{U+0352}", "&#850;"]
-
 CharCodes.grave := ["{U+0300}", "&#768;"]
 CharCodes.dgrave := ["{U+030F}", "&#783;"]
 CharCodes.gravebelow := ["{U+0316}", "&#790;"]
-
 CharCodes.hookabove := ["{U+0309}", "&#777;"]
 CharCodes.horn := ["{U+031B}", "&#795;"]
-
 CharCodes.phookbelow := ["{U+0321}", "&#801;"]
 CharCodes.rhookbelow := ["{U+0322}", "&#802;"]
-
 CharCodes.bridgeabove := ["{U+0346}", "&#838;"]
 CharCodes.bridgebelow := ["{U+032A}", "&#810;"]
 CharCodes.ibridgebelow := ["{U+033A}", "&#825;"]
-
 CharCodes.macron := ["{U+0304}", "&#772;"]
 CharCodes.macronbelow := ["{U+0331}", "&#817;"]
-
 CharCodes.grapjoiner := ["{U+034F}", "&#847;"]
 CharCodes.fractionslash := ["{U+2044}", "&#8260;"]
 CharCodes.dagger := ["{U+2020}", "&#8224;"]
@@ -2832,7 +2947,6 @@ CharCodes.numdash := ["{U+2012}", "&#8210;"]
 CharCodes.twoemdash := ["{U+2E3A}", "&#11834;"]
 CharCodes.threemdash := ["{U+2E3B}", "&#11835;"]
 CharCodes.nbdash := ["{U+2011}", "&#8209;"]
-
 CharCodes.emsp := ["{U+2003}", "&emsp;"]
 CharCodes.ensp := ["{U+2002}", "&ensp;"]
 CharCodes.emsp13 := ["{U+2004}", "&emsp13;"]
@@ -2846,12 +2960,10 @@ CharCodes.zwsp := ["{U+200B}", "&#8203;"]
 CharCodes.wj := ["{U+2060}", "&NoBreak;"]
 CharCodes.numsp := ["{U+2007}", "&numsp;"]
 CharCodes.nbsp := ["{U+00A0}", "&nbsp;"]
-
 CharCodes.plusminus := ["{U+00B1}", "&#177;"]
 CharCodes.multiplication := ["{U+00D7}", "&#215;"]
 CharCodes.twodotleader := ["{U+2025}", "&nldr;"]
 CharCodes.ellipsis := ["{U+2026}", "&mldr;"]
-
 CharCodes.smelter := {}
 CharCodes.smelter.latin_Capital_AA := ["{U+A732}", "&#42802;"]
 CharCodes.smelter.latin_Small_AA := ["{U+A733}", "&#42803;"]
@@ -2869,7 +2981,6 @@ CharCodes.smelter.ffi := ["{U+FB03}", "&#64259;"]
 CharCodes.smelter.ffl := ["{U+FB04}", "&#64260;"]
 CharCodes.smelter.st := ["{U+FB06}", "&#64262;"]
 CharCodes.smelter.ts := ["{U+02A6}", "&#678;"]
-
 CharCodes.smelter.latin_Capital_ij := ["{U+0132}", "&#306;"]
 CharCodes.smelter.latin_Small_ij := ["{U+0133}", "&#307;"]
 CharCodes.smelter.latin_Capital_LJ := ["{U+01C7}", "&#455;"]
@@ -2881,8 +2992,6 @@ CharCodes.smelter.latin_Small_UE := ["{U+1D6B}", "&#7531;"]
 CharCodes.smelter.latin_Capital_OO := ["{U+A74E}", "&#42830;"]
 CharCodes.smelter.latin_Small_OO := ["{U+A74F}", "&#42831;"]
 CharCodes.smelter.latin_Small_ie := ["{U+AB61}", "&#43873;"]
-
-
 CharCodes.smelter.cyrillic_Capital_ie := ["{U+0464}", "&#1124;"]
 CharCodes.smelter.cyrillic_Small_ie := ["{U+0465}", "&#1125;"]
 CharCodes.smelter.cyrillic_Capital_Ukraine_E := ["{U+0404}", "&#1028;"]
@@ -2908,7 +3017,6 @@ CharCodes.smelter.cyrillic_Small_Closed_Little_Yus_Iotified := ["{U+A65D}", "&#4
 CharCodes.smelter.cyrillic_Captial_Blended_Yus := ["{U+A65A}", "&#42586;"]
 CharCodes.smelter.cyrillic_Small_Blended_Yus := ["{U+A65B}", "&#42587;"]
 CharCodes.smelter.cyrillic_Multiocular_O := ["{U+A66E}", "&#42606;"]
-
 UniTrim(str) {
   return SubStr(str, 4, StrLen(str) - 4)
 }
@@ -2929,7 +3037,6 @@ BindDiacriticF1 := [
   [["H", "Р"], CharCodes.horn, ["Рожок", "Horn"]],
 ]
 */
-
 BindDiacriticF2 := [
   [["a", "ф"], CharCodes.acutebelow, ["Акут снизу", "Acute Below", "Ударение снизу"]],
   [["b", "и"], CharCodes.brevebelow, ["Бреве снизу", "Бревис снизу", "Breve Below", "Кратка снизу"]],
@@ -2940,7 +3047,6 @@ BindDiacriticF2 := [
   [["h", "р"], CharCodes.phookbelow, ["Палатальный крюк", "Palatalized Hook Below"]],
   [["H", "Р"], CharCodes.rhookbelow, ["Ретрофлексный крюк", "Retroflex Hook Below"]],
 ]
-
 BindDiacriticF3 := [
   [["a", "ф"], CharCodes.asteriskabove, ["Астериск сверху", "Asterisk Above"]],
   [["A", "Ф"], CharCodes.asteriskbelow, ["Астериск снизу", "Asterisk Below"]],
@@ -2948,7 +3054,6 @@ BindDiacriticF3 := [
   [["B", "И"], CharCodes.bridgebelow, ["Мостик снизу", "Bridge Below"]],
   [CtrlB, CharCodes.ibridgebelow, ["Перевёрнутый мостик снизу", "Inverted Bridge Below"]],
 ]
-
 BindSpaces := [
   ["1", CharCodes.emsp, ["Em Space", "EmSP", "EM_SPACE", "Круглая Шпация"]],
   ["2", CharCodes.ensp, ["En Space", "EnSP", "EN_SPACE", "Полукруглая Шпация"]],
@@ -2964,14 +3069,11 @@ BindSpaces := [
   ["=", CharCodes.numsp, ["Number Space", "NumSP", "Figure Space", "FigureSP", "Цифровой пробел"]],
   [SpaceKey, CharCodes.nbsp, ["No-Break Space", "NBSP", "Неразрывный Пробел"]],
 ]
-
 BindSpecialF6 := [
   [["a", "ф"], CharCodes.lowasterisk, ["Низкий астериск", "Low Asterisk"]],
   [["A", "Ф"], CharCodes.twoasterisks, ["Два астериска", "Two Asterisks"]],
   [CtrlA, CharCodes.asterism, ["Астеризм", "Asterism"]],
 ]
-
-
 SuperscriptDictionary := [
   ["1", "{U+00B9}"],
   ["2", "{U+00B2}"],
@@ -3024,7 +3126,6 @@ SuperscriptDictionary := [
   ["U", "{U+1D41}"],
   ["W", "{U+1D42}"],
 ]
-
 SubscriptDictionary := [
   ["1", "{U+2081}"],
   ["2", "{U+2082}"],
@@ -3045,7 +3146,6 @@ SubscriptDictionary := [
   ["e", "{U+2091}"],
   ["i", "{U+1D62}"],
 ]
-
 LigaturesDictionary := [
   ["AA", CharCodes.smelter.latin_Capital_AA[1]],
   ["aa", CharCodes.smelter.latin_Small_AA[1]],
@@ -3137,7 +3237,6 @@ LigaturesDictionary := [
   ["n-", CharCodes.numdash[1]],
   ["0-", CharCodes.nbdash[1]],
 ]
-
 InputBridge(GroupKey) {
   ih := InputHook("L1 C M", "L")
   ih.Start()
@@ -3155,7 +3254,6 @@ InputBridge(GroupKey) {
   ih.Stop()
   return
 }
-
 ProceedEntriesHandle(keyPressed, GroupKey) {
   for characterEntry, value in Characters {
     GroupValid := False
@@ -3217,8 +3315,6 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
     }
   }
 }
-
-
 CombineArrays(destinationArray, sourceArray*)
 {
   for array in sourceArray
@@ -3229,7 +3325,6 @@ CombineArrays(destinationArray, sourceArray*)
     }
   }
 }
-
 SearchKey() {
 
   PromptValue := IniRead(ConfigFile, "LatestPrompts", "Search", "")
@@ -3284,8 +3379,6 @@ SearchKey() {
     MsgBox "Знак не найден."
   }
 }
-
-
 InsertUnicodeKey() {
   PromptValue := IniRead(ConfigFile, "LatestPrompts", "Unicode", "")
   IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_unicode"), "w256 h92", PromptValue)
@@ -3305,7 +3398,6 @@ InsertUnicodeKey() {
   Send(Output)
   IniWrite PromptValue, ConfigFile, "LatestPrompts", "Unicode"
 }
-
 ScriptConverter(Dictionary, FromValue) {
   if (FromValue = "")
     return
@@ -3328,7 +3420,6 @@ ScriptConverter(Dictionary, FromValue) {
   }
   return ConvertedText
 }
-
 SwitchToScript(scriptMode) {
   LanguageCode := GetLanguageCode()
   Labels := {}
@@ -3362,7 +3453,6 @@ SwitchToScript(scriptMode) {
 
   Send(PromptValue)
 }
-
 ToRomanNumeral(IntValue, CapitalLetters := True) {
   IntValue := Integer(IntValue)
   if (IntValue < 1 || IntValue > 2000000) {
@@ -3388,7 +3478,6 @@ ToRomanNumeral(IntValue, CapitalLetters := True) {
   }
   return RomanStr
 }
-
 SwitchToRoman() {
   LanguageCode := GetLanguageCode()
 
@@ -3408,8 +3497,6 @@ SwitchToRoman() {
   }
   SendText(PromptValue)
 }
-
-
 InsertAltCodeKey() {
   PromptValue := IniRead(ConfigFile, "LatestPrompts", "Altcode", "")
   IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_altcode"), "w256 h92", PromptValue)
@@ -3431,14 +3518,12 @@ InsertAltCodeKey() {
 
   IniWrite PromptValue, ConfigFile, "LatestPrompts", "Altcode"
 }
-
 SendAltNumpad(CharacterCode) {
   Send("{Alt Down}")
   Loop Parse, CharacterCode
     Send("{Numpad" A_LoopField "}")
   Send("{Alt Up}")
 }
-
 RecipeValidatorArray := []
 for chracterEntry, value in Characters {
   if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
@@ -3454,8 +3539,6 @@ for chracterEntry, value in Characters {
     }
   }
 }
-
-
 Ligaturise(SmeltingMode := "InputBox") {
   LanguageCode := GetLanguageCode()
   BackupClipboard := ""
@@ -3678,7 +3761,6 @@ Ligaturise(SmeltingMode := "InputBox") {
   }
   return
 }
-
 Hotkey("<#<!" SCKeys["F1"], (*) => GroupActivator("Diacritics Primary", "F1"))
 Hotkey("<#<!" SCKeys["F2"], (*) => GroupActivator("Diacritics Secondary", "F2"))
 Hotkey("<#<!" SCKeys["F3"], (*) => GroupActivator("Diacritics Tertiary", "F3"))
@@ -3687,7 +3769,6 @@ Hotkey("<#<!" SCKeys["F7"], (*) => GroupActivator("Special Characters", "F7"))
 Hotkey("<#<!" SCKeys["Space"], (*) => GroupActivator("Spaces"))
 Hotkey("<#<!" SCKeys["Minus"], (*) => GroupActivator("Dashes", "-"))
 Hotkey("<#<!" SCKeys["Apostrophe"], (*) => GroupActivator("Quotes", "'"))
-
 GroupActivator(GroupName, KeyValue := "") {
   LocaleMark := KeyValue != "" && RegExMatch(KeyValue, "^F") ? KeyValue : GroupName
   MsgTitle := "[" LocaleMark "] " DSLPadTitle
@@ -3695,7 +3776,6 @@ GroupActivator(GroupName, KeyValue := "") {
   ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, SkipGroupMessage, True)
   InputBridge(GroupName)
 }
-
 Hotkey("<#<!" SCKeys["F"], (*) => SearchKey())
 Hotkey("<#<!" SCKeys["U"], (*) => InsertUnicodeKey())
 Hotkey("<#<!" SCKeys["A"], (*) => InsertAltCodeKey())
@@ -3707,12 +3787,9 @@ Hotkey("<#<^>!" SCKeys["2"], (*) => SwitchToScript("sub"))
 Hotkey("<#<^>!" SCKeys["3"], (*) => SwitchToRoman())
 Hotkey("<#<!" SCKeys["M"], (*) => ToggleGroupMessage())
 Hotkey("<#<!" SCKeys["PgUp"], (*) => FindCharacterPage())
-
-
 GetCharacterUnicode(symbol) {
   return format("{:x}", ord(symbol))
 }
-
 GetUnicodeString(str) {
   unicodeArray := []
 
@@ -3737,7 +3814,6 @@ GetUnicodeString(str) {
 
   return unicodeString
 }
-
 FindCharacterPage() {
   BackupClipboard := A_Clipboard
   PromptValue := ""
@@ -3756,8 +3832,6 @@ FindCharacterPage() {
 
   A_Clipboard := BackupClipboard
 }
-
-
 ToggleGroupMessage()
 {
   LanguageCode := GetLanguageCode()
@@ -3777,9 +3851,7 @@ ToggleGroupMessage()
 
   return
 }
-
 ; Setting up of Diacritics-Spaces-Letters KeyPad
-
 LocaliseArrayKeys(ObjectPath) {
   for index, item in ObjectPath {
     if IsObject(item[1]) {
@@ -3787,9 +3859,7 @@ LocaliseArrayKeys(ObjectPath) {
     }
   }
 }
-
 <#<!Home:: OpenPanel()
-
 OpenPanel(*)
 {
   if (IsGuiOpen(DSLPadTitle))
@@ -3802,15 +3872,12 @@ OpenPanel(*)
     DSLPadGUI.Show()
   }
 }
-
-
 CommonInfoFonts := {
   preview: "Cambria",
   previewSize: "s72",
   previewSmaller: "s40",
   titleSize: "s14",
 }
-
 SwitchLanguage(LanguageCode) {
   IniWrite LanguageCode, ConfigFile, "Settings", "UserLanguage"
 
@@ -3824,7 +3891,6 @@ SwitchLanguage(LanguageCode) {
 
   ManageTrayItems()
 }
-
 Constructor()
 {
   CheckUpdate()
@@ -4515,15 +4581,12 @@ Constructor()
 
   return DSLPadGUI
 }
-
-
 PopulateListView(LV, DataList) {
   LV.Delete()
   for item in DataList {
     LV.Add(, item[1], item[2], item[3], item[4])
   }
 }
-
 FilterListView(GuiFrame, FilterField, LV, DataList) {
   FilterText := StrLower(GuiFrame[FilterField].Text)
   LV.Delete()
@@ -4560,7 +4623,6 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
     }
   }
 }
-
 GetRandomByGroups(GroupNames) {
   TemporaryStorage := []
   for characterEntry, value in Characters {
@@ -4579,8 +4641,6 @@ GetRandomByGroups(GroupNames) {
     return TemporaryStorage[randomIndex]
   }
 }
-
-
 SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroup) {
   LanguageCode := GetLanguageCode()
 
@@ -4718,7 +4778,6 @@ SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, Prev
     }
   }
 }
-
 TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
   if !Item {
     return
@@ -4752,8 +4811,6 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
   }
 
 }
-
-
 LV_CharacterDetails(LV, RowNumber, SetupArray) {
   UnicodeKey := LV.GetText(RowNumber, 4)
   SetCharacterInfoPanel(UnicodeKey,
@@ -4762,8 +4819,6 @@ LV_CharacterDetails(LV, RowNumber, SetupArray) {
     SetupArray[7], SetupArray[8], SetupArray[9],
     SetupArray[10])
 }
-
-
 LV_OpenUnicodeWebsite(LV, RowNumber)
 {
   LanguageCode := GetLanguageCode()
@@ -4802,8 +4857,6 @@ LV_OpenUnicodeWebsite(LV, RowNumber)
     }
   }
 }
-
-
 LV_RunCommand(LV, RowNumber)
 {
   Shortcut := LV.GetText(RowNumber, 2)
@@ -4838,7 +4891,6 @@ LV_RunCommand(LV, RowNumber)
   if (Shortcut = "RAlt RShift Home")
     ToggleInputMode()
 }
-
 LV_MouseMove(Control, x, y) {
   RowNumber := Control.GetItemAt(x, y)
 
@@ -4850,7 +4902,6 @@ LV_MouseMove(Control, x, y) {
     Tooltip
   }
 }
-
 AddScriptToAutoload(*) {
   global DSLPadTitleDefault, AppIcoFile
   LanguageCode := GetLanguageCode()
@@ -4873,16 +4924,12 @@ AddScriptToAutoload(*) {
 
   MsgBox(Labels[LanguageCode].Success, DSLPadTitle, 0x40)
 }
-
 IsGuiOpen(title)
 {
   return WinExist(title) != 0
 }
-
 ; Fastkeys
-
 <^>!Home:: ToggleFastKeys()
-
 ToggleFastKeys()
 {
   LanguageCode := GetLanguageCode()
@@ -4904,9 +4951,7 @@ ToggleFastKeys()
   RegFastKeys(FastKeysList)
   return
 }
-
 <^>!>+Home:: ToggleInputMode()
-
 ToggleInputMode()
 {
   LanguageCode := GetLanguageCode()
@@ -4942,7 +4987,6 @@ ToggleInputMode()
 
   return
 }
-
 CheckLayoutValid() {
   GetCurrentLayout := GetLayoutLocale()
   if (GetCurrentLayout == CodeEn || GetCurrentLayout == CodeRu) {
@@ -4950,7 +4994,6 @@ CheckLayoutValid() {
   }
   return False
 }
-
 HandleFastKey(CharacterName)
 {
   global FastKeysIsActive
@@ -4984,7 +5027,6 @@ HandleFastKey(CharacterName)
   }
   return
 }
-
 CapsSeparatedKey(CapitalCharacter, SmallCharacter) {
   if (GetKeyState("CapsLock", "T")) {
     HandleFastKey(CapitalCharacter)
@@ -4992,7 +5034,6 @@ CapsSeparatedKey(CapitalCharacter, SmallCharacter) {
     HandleFastKey(SmallCharacter)
   }
 }
-
 CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
   if (GetKeyState("CapsLock", "T")) {
     GetKeyState("LShift", "P") ? HandleFastKey(SmallCharacter) : HandleFastKey(CapitalCharacter)
@@ -5000,7 +5041,6 @@ CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
     GetKeyState("LShift", "P") ? HandleFastKey(CapitalCharacter) : HandleFastKey(SmallCharacter)
   }
 }
-
 LangSeparatedKey(LatinCharacter, CyrillicCharacter, UseCaps := False) {
   Character := (GetLayoutLocale() == CodeEn) ? LatinCharacter : CyrillicCharacter
   if IsObject(Character) && UseCaps {
@@ -5009,7 +5049,6 @@ LangSeparatedKey(LatinCharacter, CyrillicCharacter, UseCaps := False) {
     HandleFastKey(Character)
   }
 }
-
 RegFastKeys(Bindings) {
   global FastKeysIsActive
 
@@ -5030,7 +5069,6 @@ RegFastKeys(Bindings) {
     }
   }
 }
-
 FastKeysList :=
   [
     "<^<!" SCKeys["A"], (*) => HandleFastKey("acute"),
@@ -5117,6 +5155,8 @@ FastKeysList :=
     "<^>!" SCKeys["Slash"], (*) => HandleFastKey("ellipsis"),
     "<^>!>+" SCKeys["Slash"], (*) => HandleFastKey("fraction_slash"),
     "<^>!" SCKeys["8"], (*) => HandleFastKey("multiplication"),
+    "<^>!" SCKeys["Tilde"], (*) => HandleFastKey("bullet"),
+    "<^>!<+" SCKeys["Tilde"], (*) => HandleFastKey("interpunct"),
     ;
     "<^>!" SCKeys["ArrLeft"], (*) => HandleFastKey("arrow_left"),
     "<^>!" SCKeys["ArrRight"], (*) => HandleFastKey("arrow_right"),
@@ -5125,7 +5165,6 @@ FastKeysList :=
     ;
     "RAlt", (*) => ProceedCompose(),
   ]
-
 RAltsCount := 0
 RAltsTimerEnds := False
 RAltsTimer := ""
@@ -5145,7 +5184,6 @@ ProceedCompose() {
     RAltsEndingTimer()
   }
 }
-
 RAltsEndingTimer() {
   global RAltsTimer
   if (RAltsTimer != "") {
@@ -5155,7 +5193,6 @@ RAltsEndingTimer() {
 
   return SetTimer(RAltsSetStats, -300)
 }
-
 RAltsSetStats() {
   global RAltsCount, RAltsTimerEnds
   RAltsCount := 0
@@ -5163,8 +5200,6 @@ RAltsSetStats() {
   Sleep 100
   RAltsTimerEnds := False
 }
-
-
 if CurrentLayout = CodeEn {
   Hotkey("<#" SCKeys["LSquareBracket"], (*) => Send("{U+300C}"))
   Hotkey("<#<+" SCKeys["LSquareBracket"], (*) => Send("{U+300E}"))
@@ -5176,10 +5211,7 @@ if CurrentLayout = CodeEn {
   Hotkey("<#<^" SCKeys["RSquareBracket"], (*) => Send("{U+FE42}"))
   Hotkey("<#<^<+" SCKeys["RSquareBracket"], (*) => Send("{U+FE44}"))
 }
-
 RegFastKeys(FastKeysList)
-
-
 ;<^<!1:: HandleFastKey("{U+00B9}") ; Superscript 1
 ;<^<!2:: HandleFastKey("{U+00B2}") ; Superscript 2
 ;<^<!3:: HandleFastKey("{U+00B3}") ; Superscript 3
@@ -5200,23 +5232,16 @@ RegFastKeys(FastKeysList)
 ;<^<+<!8:: HandleFastKey("{U+2088}") ; Subscript 8
 ;<^<+<!9:: HandleFastKey("{U+2089}") ; Subscript 9
 ;<^<+<!0:: HandleFastKey("{U+2080}") ; Subscript 0
-
-
 ;<^<!e:: Send("{U+045E}") ; Cyrillic u with breve
 ;<^<+<!e:: Send("{U+040E}") ; Cyrillic cap u with breve
 ;<^<!w:: Send("{U+04EF}") ; Cyrillic u with macron
 ;<^<+<!w:: Send("{U+04EE}") ; Cyrillic cap u with macron
 ;<^<!q:: Send("{U+04E3}") ; Cyrillic i with macron
 ;<^<+<!q:: Send("{U+04E2}") ; Cyrillic cap i with macron
-
 ;<^<!x:: Send("{U+04AB}") ; CYRILLIC SMALL LETTER ES WITH DESCENDER
 ;<^<+<!x:: Send("{U+04AA}") ; CYRILLIC CAPITAL LETTER ES WITH DESCENDER
-
-
 ;>+<+g:: HandleFastKey(CharCodes.grapjoiner[1], True)
 ;<^<!NumpadDiv:: HandleFastKey(CharCodes.fractionslash[1], True)
-
-
 ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False) {
   if SkipMessage == True
     return
@@ -5228,23 +5253,18 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle,
   TrayTip(ReadLocale(MessagePost), MessageTitle, Ico . Muting)
 
 }
-
 TraySetIcon(AppIcoFile)
 A_IconTip := DSLPadTitle
-
 DSLTray := A_TrayMenu
-
 ReloadApplication(*) {
   Reload
 }
 ExitApplication(*) {
   ExitApp
 }
-
 OpenScriptFolder(*) {
   Run A_ScriptDir
 }
-
 ManageTrayItems() {
   LanguageCode := GetLanguageCode()
   Labels := Map()
@@ -5318,15 +5338,10 @@ ManageTrayItems() {
   DSLTray.SetIcon(Labels[LanguageCode].Exit, ImageRes, 085)
 }
 ManageTrayItems()
-
 ShowInfoMessage("tray_app_started")
-
 <^Esc:: ExitApp
-
 SetPreviousLayout()
-
 ;! Third Party Functions
-
 ;{ [Function] GuiButtonIcon
 ;{
 ; Fanatic Guru
@@ -5388,8 +5403,6 @@ GuiButtonIcon(Handle, File, Index := 1, Options := '')
   Return IL_Add(normal_il, File, Index)
 }
 ;}
-
-
 ;Don’t remove ↓ or update duplication repair will not work
 ;This is marker for trim update file to avoid receiving multiple update code at once
 ;ApplicationEnd
