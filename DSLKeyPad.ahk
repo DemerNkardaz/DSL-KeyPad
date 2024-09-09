@@ -1931,7 +1931,7 @@ MapInsert(Characters,
       tags: ["asian double left quote", "левая двойная азиатская кавычка"],
       group: ["Asian Quotes"],
       show_on_fast_keys: True,
-      alt_on_fast_keys: "RShift [Num4]",
+      alt_on_fast_keys: "CapsLock [Num4]",
       symbol: Chr(0x300E)
     },
     "asian_double_right_quote", {
@@ -1939,7 +1939,7 @@ MapInsert(Characters,
       tags: ["asian double right quote", "правая двойная азиатская кавычка"],
       group: ["Asian Quotes"],
       show_on_fast_keys: True,
-      alt_on_fast_keys: "RShift [Num6]",
+      alt_on_fast_keys: "CapsLock [Num6]",
       symbol: Chr(0x300F)
     },
     "asian_double_up_quote", {
@@ -1947,7 +1947,7 @@ MapInsert(Characters,
       tags: ["asian double up quote", "верхняя двойная азиатская кавычка"],
       group: ["Asian Quotes"],
       show_on_fast_keys: True,
-      alt_on_fast_keys: "RShift [Num8]",
+      alt_on_fast_keys: "CapsLock [Num8]",
       symbol: Chr(0xFE43)
     },
     "asian_double_down_quote", {
@@ -1955,8 +1955,40 @@ MapInsert(Characters,
       tags: ["asian double down quote", "нижняя двойная азиатская кавычка"],
       group: ["Asian Quotes"],
       show_on_fast_keys: True,
-      alt_on_fast_keys: "RShift [Num2]",
+      alt_on_fast_keys: "CapsLock [Num2]",
       symbol: Chr(0xFE44)
+    },
+    "asian_double_left_title", {
+      unicode: "{U+300A}", html: "&#12298;",
+      tags: ["asian double left title", "двойная левая титульная кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [<][Б]",
+      symbol: Chr(0x300A)
+    },
+    "asian_double_right_title", {
+      unicode: "{U+300B}", html: "&#12299;",
+      tags: ["asian double right title", "двойная правая титульная кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [>][Ю]",
+      symbol: Chr(0x300B)
+    },
+    "asian_left_title", {
+      unicode: "{U+3008}", html: "&#12296;",
+      tags: ["asian left title", "левая титульная кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt LShift [<][Б]",
+      symbol: Chr(0x3008)
+    },
+    "asian_right_title", {
+      unicode: "{U+3009}", html: "&#12297;",
+      tags: ["asian right title", "правая титульная кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt LShift [>][Ю]",
+      symbol: Chr(0x3009)
     },
 )
 
@@ -5250,14 +5282,14 @@ FastKeysList :=
     "<^>!" SCKeys["ArrUp"], (*) => HandleFastKey("arrow_up"),
     "<^>!" SCKeys["ArrDown"], (*) => HandleFastKey("arrow_down"),
     ;
-    "<^>!" SCKeys["Numpad4"], (*) => HandleFastKey("asian_left_quote"),
-    "<^>!" SCKeys["Numpad6"], (*) => HandleFastKey("asian_right_quote"),
-    "<^>!" SCKeys["Numpad8"], (*) => HandleFastKey("asian_up_quote"),
-    "<^>!" SCKeys["Numpad2"], (*) => HandleFastKey("asian_down_quote"),
-    "<^>!>+" SCKeys["Numpad4"], (*) => HandleFastKey("asian_double_left_quote"),
-    "<^>!>+" SCKeys["Numpad6"], (*) => HandleFastKey("asian_double_right_quote"),
-    "<^>!>+" SCKeys["Numpad8"], (*) => HandleFastKey("asian_double_up_quote"),
-    "<^>!>+" SCKeys["Numpad2"], (*) => HandleFastKey("asian_double_down_quote"),
+    "<^>!" SCKeys["Numpad4"], (*) => CapsSeparatedKey("asian_double_left_quote", "asian_left_quote"),
+    "<^>!" SCKeys["Numpad6"], (*) => CapsSeparatedKey("asian_double_right_quote", "asian_right_quote"),
+    "<^>!" SCKeys["Numpad8"], (*) => CapsSeparatedKey("asian_double_up_quote", "asian_up_quote"),
+    "<^>!" SCKeys["Numpad2"], (*) => CapsSeparatedKey("asian_double_down_quote", "asian_down_quote"),
+    "<^>!<!" SCKeys["Comma"], (*) => HandleFastKey("asian_double_left_title"),
+    "<^>!<!<+" SCKeys["Comma"], (*) => HandleFastKey("asian_left_title"),
+    "<^>!<!" SCKeys["Dot"], (*) => HandleFastKey("asian_double_right_title"),
+    "<^>!<!<+" SCKeys["Dot"], (*) => HandleFastKey("asian_right_title"),
     ;
     "RAlt", (*) => ProceedCompose(),
   ]
