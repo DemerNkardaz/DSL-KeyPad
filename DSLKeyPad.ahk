@@ -1256,7 +1256,6 @@ MapInsert(Characters,
       group: [["Diacritics Quatemary", "Diacritics Fast Primary"], "/"],
       modifier: "LShift",
       show_on_fast_keys: True,
-      alt_on_fast_keys: "[/]",
       symbol: DottedCircle . Chr(0x0338)
     },
     "tilde", {
@@ -3904,9 +3903,37 @@ Hotkey("<#<^>!" SCKeys["2"], (*) => SwitchToScript("sub"))
 Hotkey("<#<^>!" SCKeys["3"], (*) => SwitchToRoman())
 Hotkey("<#<!" SCKeys["M"], (*) => ToggleGroupMessage())
 Hotkey("<#<!" SCKeys["PgUp"], (*) => FindCharacterPage())
-GetCharacterUnicode(symbol) {
-  return format("{:x}", ord(symbol))
+Hotkey("<#<!" SCKeys["PgDn"], (*) => ReplaceWithUnicode())
+Hotkey("<#<+" SCKeys["PgDn"], (*) => ReplaceWithUnicode("Hex"))
+Hotkey("<#<!" SCKeys["Home"], (*) => OpenPanel())
+
+ReplaceWithUnicode(Mode := "") {
+  BackupClipboard := A_Clipboard
+  PromptValue := ""
+  A_Clipboard := ""
+
+  Send("^c")
+  Sleep 120
+  PromptValue := A_Clipboard
+  Sleep 50
+  PromptValue := GetCharacterUnicode(PromptValue)
+
+  if (PromptValue != "") {
+    if Mode == "Hex" {
+      SendText("0x" . PromptValue)
+    } else {
+      SendText(PromptValue)
+    }
+  }
+
+  A_Clipboard := BackupClipboard
 }
+
+GetCharacterUnicode(symbol) {
+  return Format("{:04X}", Ord(symbol))
+}
+
+
 GetUnicodeString(str) {
   unicodeArray := []
 
@@ -3968,7 +3995,7 @@ ToggleGroupMessage()
 
   return
 }
-; Setting up of Diacritics-Spaces-Letters KeyPad
+
 LocaliseArrayKeys(ObjectPath) {
   for index, item in ObjectPath {
     if IsObject(item[1]) {
@@ -3976,7 +4003,7 @@ LocaliseArrayKeys(ObjectPath) {
     }
   }
 }
-<#<!Home:: OpenPanel()
+
 OpenPanel(*)
 {
   if (IsGuiOpen(DSLPadTitle))
@@ -3989,12 +4016,14 @@ OpenPanel(*)
     DSLPadGUI.Show()
   }
 }
+
 CommonInfoFonts := {
   preview: "Cambria",
   previewSize: "s72",
   previewSmaller: "s40",
   titleSize: "s14",
 }
+
 SwitchLanguage(LanguageCode) {
   IniWrite LanguageCode, ConfigFile, "Settings", "UserLanguage"
 
