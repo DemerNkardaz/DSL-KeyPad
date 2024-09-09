@@ -397,9 +397,6 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
         DuplicatedCount++
       }
     }
-    if (DuplicatedCount > 1) {
-      ;ShowInfoMessage([Messages2["ru"].ErrorDuplicated, DSLPadTitle, Messages2["en"].ErrorDuplicated], "Warning")
-    }
 
     for line in SplitContent {
       if (InStr(line, ";Application" . "End")) {
@@ -424,7 +421,6 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
     }
 
     if (DuplicatedCount > 1) {
-      ;ShowInfoMessage([Messages2["ru"].ErrorOccured, DSLPadTitle, Messages2["en"].ErrorOccured], "Warning")
       FileDelete(UpdateFilePath)
       Sleep 500
       GetUpdate(1500)
@@ -3673,42 +3669,21 @@ Ligaturise(SmeltingMode := "InputBox") {
   return
 }
 
-Hotkey("<#<!" SCKeys["F1"], (*) => GroupActivator("Diacritics Primary"))
-Hotkey("<#<!" SCKeys["F2"], (*) => GroupActivator("Diacritics Secondary"))
-Hotkey("<#<!" SCKeys["F3"], (*) => GroupActivator("Diacritics Tertiary"))
-Hotkey("<#<!" SCKeys["F6"], (*) => GroupActivator("Diacritics Quatemary"))
-Hotkey("<#<!" SCKeys["F7"], (*) => GroupActivator("Special Characters"))
+Hotkey("<#<!" SCKeys["F1"], (*) => GroupActivator("Diacritics Primary", "F1"))
+Hotkey("<#<!" SCKeys["F2"], (*) => GroupActivator("Diacritics Secondary", "F2"))
+Hotkey("<#<!" SCKeys["F3"], (*) => GroupActivator("Diacritics Tertiary", "F3"))
+Hotkey("<#<!" SCKeys["F6"], (*) => GroupActivator("Diacritics Quatemary", "F6"))
+Hotkey("<#<!" SCKeys["F7"], (*) => GroupActivator("Special Characters", "F7"))
 Hotkey("<#<!" SCKeys["Space"], (*) => GroupActivator("Spaces"))
-Hotkey("<#<!" SCKeys["Minus"], (*) => GroupActivator("Dashes"))
-Hotkey("<#<!" SCKeys["Apostrophe"], (*) => GroupActivator("Quotes"))
+Hotkey("<#<!" SCKeys["Minus"], (*) => GroupActivator("Dashes", "-"))
+Hotkey("<#<!" SCKeys["Apostrophe"], (*) => GroupActivator("Quotes", "'"))
 
-GroupActivator(GroupName) {
-  if (GroupName = "Diacritics Primary") {
-    ShowInfoMessage(["Активна первая группа диакритики", "Primary diacritics group has been activated"], "[F1] " . DSLPadTitle, , SkipGroupMessage)
-    InputBridge("Diacritics Primary")
-  } else if (GroupName = "Diacritics Secondary") {
-    ShowInfoMessage(["Активна вторая группа диакритики", "Secondary diacritics group has been activated"], "[F2] " . DSLPadTitle, , SkipGroupMessage)
-    InputBridge("Diacritics Secondary")
-  } else if (GroupName = "Diacritics Tertiary") {
-    ShowInfoMessage(["Активна третья группа диакритики", "Tertiary diacritics group has been activated"], "[F3] " . DSLPadTitle, , SkipGroupMessage)
-    InputBridge("Diacritics Tertiary")
-  } else if (GroupName = "Diacritics Quatemary") {
-    ShowInfoMessage(["Активна четвёртая группа диакритики", "Quatemary diacritics group has been activated"], "[F6] " . DSLPadTitle, , SkipGroupMessage)
-    InputBridge("Diacritics Quatemary")
-  } else if (GroupName = "Special Characters") {
-    ShowInfoMessage(["Активна группа специальных символов", "Special characters group has been activated"], "[F7] " . DSLPadTitle, , SkipGroupMessage)
-    InputBridge("Special Characters")
-  } else if (GroupName = "Spaces") {
-    ShowInfoMessage(["Активна группа шпаций", "Space group has been activated"], "[Space] " . DSLPadTitle, , SkipGroupMessage)
-    InputBridge("Spaces")
-  } else if (GroupName = "Dashes") {
-    ShowInfoMessage(["Активна группа тире", "Dashes group has been activated"], "[-] " . DSLPadTitle, , SkipGroupMessage)
-    InputBridge("Dashes")
-  } else if (GroupName = "Quotes") {
-    ShowInfoMessage(["Активна группа кавычек", "Quotes group has been activated"], "['] " . DSLPadTitle, , SkipGroupMessage)
-    InputBridge("Quotes")
-  }
+GroupActivator(GroupName, KeyValue := "") {
+  LocaleMark := KeyValue != "" && RegExMatch(KeyValue, "^F") ? KeyValue : GroupName
+  MsgTitle := "[" LocaleMark "] " DSLPadTitle
 
+  ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, SkipGroupMessage)
+  InputBridge(GroupName)
 }
 
 
@@ -5175,43 +5150,6 @@ if CurrentLayout = CodeEn {
 RegFastKeys(FastKeysList)
 
 
-<^<!t:: Send("{U+0303}") ; Combining tilde
-<^<+<!t:: Send("{U+0330}") ; Combining tilde below
-<^<!r:: Send("{U+030A}") ; Combining ring above
-<^<+<!r:: Send("{U+0325}") ; Combining ring below
-
-<^<!l:: Send("{U+0332}") ; Combining low line
-<^<+<!l:: Send("{U+0333}") ; Combining double low line
-
-<^<!p:: Send("{U+0321}") ; Combining palatilized hook below
-<^<+<!p:: Send("{U+0322}") ; Combining retroflex hood below
-
-<^<!o:: Send("{U+0305}") ; Combining overline
-<^<!h:: Send("{U+0309}") ; Combining hook above
-<^<+<!h:: Send("{U+031B}") ; Combining horn
-<^<!v:: Send("{U+030D}") ; Combining vertical line above
-<^<+<!v:: Send("{U+030E}") ; Combining double vertical line above
-
-<^<!,:: Send("{U+0326}") ; Combining comma below
->^>!,:: Send("{U+0313}") ; Combining comma above
->^>+>!,:: Send("{U+0314}") ; Combining reversed comma aboves
-<^<!/:: Send("{U+0312}") ; Combining turned comma above
-
-<^<!.:: Send("{U+0323}") ; Combining dot belowВ
-<^<+<!.:: Send("{U+0324}") ; Combining diaeresis below
-
->^>!x:: Send("{U+0327}") ; Combining cedilla
->^>!c:: Send("{U+032D}") ; Combining circumflex
->^>+>!c:: Send("{U+032C}") ; Combining caron
->^>!o:: Send("{U+0327}") ; Combining ogonek
->^>!b:: Send("{U+032E}") ; Combining breve below
->^>+>!b:: Send("{U+032F}") ; Combining inverted breve below
->^>!v:: Send("{U+0329}") ; Combining vertical line below
->^>+>!v:: Send("{U+030E}") ; Combining double vertical line below
-
->^b:: Send("{U+0346}") ; Combining bridge above
->^>+b:: Send("{U+032A}") ; Combining bridge below
-
 ;<^<!1:: HandleFastKey("{U+00B9}") ; Superscript 1
 ;<^<!2:: HandleFastKey("{U+00B2}") ; Superscript 2
 ;<^<!3:: HandleFastKey("{U+00B3}") ; Superscript 3
@@ -5232,12 +5170,6 @@ RegFastKeys(FastKeysList)
 ;<^<+<!8:: HandleFastKey("{U+2088}") ; Subscript 8
 ;<^<+<!9:: HandleFastKey("{U+2089}") ; Subscript 9
 ;<^<+<!0:: HandleFastKey("{U+2080}") ; Subscript 0
-
-
-<^>!m:: Send("{U+2212}") ; Minus
-
-
-<^>!NumpadSub:: Send("{U+00AD}") ; Soft hyphenation
 
 
 <^<!e:: Send("{U+045E}") ; Cyrillic u with breve
@@ -5262,17 +5194,7 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle,
   Ico := MessageIcon == "Info" ? "Iconi" :
     MessageIcon == "Warning" ? "Icon!" :
       MessageIcon == "Error" ? "Iconx" : 0x0
-  if IsObject(MessagePost) {
-    Labels := {}
-    Labels[] := Map()
-    Labels["ru"] := {}
-    Labels["en"] := {}
-    Labels["ru"].RunMessage := MessagePost[1]
-    Labels["en"].RunMessage := MessagePost[2]
-    TrayTip Labels[LanguageCode].RunMessage, MessageTitle, Ico
-  } else {
-    TrayTip ReadLocale(MessagePost), MessageTitle, Ico
-  }
+  TrayTip ReadLocale(MessagePost), MessageTitle, Ico
 
 }
 
@@ -5366,7 +5288,7 @@ ManageTrayItems() {
 }
 ManageTrayItems()
 
-ShowInfoMessage(["Приложение запущено`nНажмите Win Alt Home для расширенных сведений.", "Application started`nPress Win Alt Home for extended information."])
+ShowInfoMessage("tray_app_started")
 
 <^Esc:: ExitApp
 
