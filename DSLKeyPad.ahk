@@ -516,6 +516,7 @@ SpaceKey := Chr(32)
 ExclamationMark := Chr(33)
 CommercialAt := Chr(64)
 QuotationDouble := Chr(34)
+ApostropheMark := Chr(39)
 Backquote := Chr(96)
 Solidus := Chr(47)
 ReverseSolidus := Chr(92)
@@ -610,8 +611,19 @@ SCKeys := Map(
   "ArrUp", "SC148",
   "ArrRight", "SC14D",
   "ArrDown", "SC150",
+  "F1", "SC03B",
+  "F2", "SC03C",
+  "F3", "SC03D",
+  "F4", "SC03E",
+  "F5", "SC03F",
+  "F6", "SC040",
+  "F7", "SC041",
+  "F8", "SC042",
+  "F9", "SC043",
+  "F10", "SC044",
+  "F11", "SC057",
+  "F12", "SC058",
 )
-
 
 RoNum := Map(
   "00-HundredM", Chr(0x2188),
@@ -1009,14 +1021,12 @@ MapInsert(Characters,
       unicode: "{U+0314}", html: "&#788;",
       tags: ["reversed comma above", "зеркальная запятая сверху"],
       group: [["Diacritics Secondary", "Diacritics Fast Secondary"], ["<", "Б"]],
-      modifier: "RShift",
-      show_on_fast_keys: True,
       symbol: DottedCircle . Chr(0x0314)
     },
     "comma_above_right", {
       unicode: "{U+0315}", html: "&#789;",
       tags: ["comma above right", "запятая сверху справа"],
-      group: ["Diacritics Tertiary", [",", "б"]],
+      group: [["Diacritics Tertiary", "Diacritics Fast Secondary"], [",", "б"]],
       symbol: DottedCircle . Chr(0x0315)
     },
     "candrabindu", {
@@ -1761,7 +1771,117 @@ MapInsert(Characters,
       recipe: "h-",
       symbol: Chr(0x2015)
     },
+    ;
+    ;
+    ; * Quotation Marks
+    "france_left", {
+      unicode: "{U+00AB}", html: "&#171;", entity: "&laquo;",
+      altcode: "0171",
+      tags: ["left guillemets", "левая ёлочка"],
+      group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "1"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[б]",
+      recipe: ["<<", "2<"],
+      symbol: Chr(0x00AB)
+    },
+    "france_right", {
+      unicode: "{U+00BB}", html: "&#187;", entity: "&raquo;",
+      altcode: "0172",
+      tags: ["right guillemets", "правая ёлочка"],
+      group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "2"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[ю]",
+      recipe: [">>", "2>"],
+      symbol: Chr(0x00BB)
+    },
+    "france_single_left", {
+      unicode: "{U+2039}", html: "&#8249;", entity: "&lsaquo;",
+      altcode: "0139",
+      tags: ["left single guillemet", "левая одиночная ёлочка"],
+      group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "2"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [Б]",
+      recipe: "<",
+      symbol: Chr(0x2039)
+    },
+    "france_single_right", {
+      unicode: "{U+203A}", html: "&#8250;", entity: "&rsaquo;",
+      altcode: "0155",
+      tags: ["right single guillemet", "правая одиночная ёлочка"],
+      group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "3"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [Ю]",
+      recipe: ">",
+      symbol: Chr(0x203A)
+    },
+    "quote_left_double", {
+      unicode: "{U+201C}", html: "&#8220;", entity: "&ldquo;",
+      altcode: "0147",
+      tags: ["left quotes", "левая кавычка"],
+      group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "4"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[<]",
+      recipe: QuotationDouble . "<",
+      symbol: Chr(0x201C)
+    },
+    "quote_right_double", {
+      unicode: "{U+201D}", html: "&#8221;", entity: "&rdquo;",
+      altcode: "0148",
+      tags: ["right quotes", "правая кавычка"],
+      group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "5"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[>]",
+      recipe: QuotationDouble . ">",
+      symbol: Chr(0x201D)
+    },
+    "quote_left_single", {
+      unicode: "{U+2018}", html: "&#8216;", entity: "&lsquo;",
+      altcode: "0145",
+      tags: ["left quote", "левая одинарная кавычка"],
+      group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "6"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [<]",
+      recipe: ApostropheMark . "<",
+      symbol: Chr(0x2018)
+    },
+    "quote_right_single", {
+      unicode: "{U+2019}", html: "&#8217;", entity: "&rsquo;",
+      altcode: "0146",
+      tags: ["right quote", "правая одинарная кавычка"],
+      group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "7"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [>]",
+      recipe: ApostropheMark . ">",
+      symbol: Chr(0x2019)
+    },
+    "quote_left_low_double", {
+      unicode: "{U+201E}", html: "&#8222;", entity: "&bdquo;",
+      altcode: "0132",
+      tags: ["left low quotes", "левая нижняя кавычка"],
+      group: [["Quotes", "Smelting Special"], "8"],
+      recipe: QuotationDouble . Chr(0x2193) . "<",
+      symbol: Chr(0x201E)
+    },
+    "quote_left_low_double_ghost_ru", {
+      unicode: "{U+201E}", html: "&#8222;", entity: "&bdquo;",
+      altcode: "0132",
+      tags: ["left low quotes", "левая нижняя кавычка"],
+      group: ["Special Fast Secondary"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [Б]",
+      symbol: Chr(0x201E)
+    },
+    "quote_left_double_ghost_ru", {
+      unicode: "{U+201C}", html: "&#8220;", entity: "&ldquo;",
+      altcode: "0147",
+      tags: ["left quotes", "левая кавычка"],
+      group: ["Special Fast Secondary"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [Ю]",
+      symbol: Chr(0x201C)
+    },
 )
+
 MapInsert(Characters,
   ;
   ;
@@ -3062,7 +3182,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
       }
     }
 
-    if GroupValid {
+    if GroupValid && value.group.Has(2) {
       characterKeys := value.group[2]
       characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
       characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
@@ -3553,34 +3673,44 @@ Ligaturise(SmeltingMode := "InputBox") {
   return
 }
 
-<#<!F1:: {
-  ShowInfoMessage(["Активна первая группа диакритики", "Primary diacritics group has been activated"], "[F1] " . DSLPadTitle, , SkipGroupMessage)
-  InputBridge("Diacritics Primary")
+Hotkey("<#<!" SCKeys["F1"], (*) => GroupActivator("Diacritics Primary"))
+Hotkey("<#<!" SCKeys["F2"], (*) => GroupActivator("Diacritics Secondary"))
+Hotkey("<#<!" SCKeys["F3"], (*) => GroupActivator("Diacritics Tertiary"))
+Hotkey("<#<!" SCKeys["F6"], (*) => GroupActivator("Diacritics Quatemary"))
+Hotkey("<#<!" SCKeys["F7"], (*) => GroupActivator("Special Characters"))
+Hotkey("<#<!" SCKeys["Space"], (*) => GroupActivator("Spaces"))
+Hotkey("<#<!" SCKeys["Minus"], (*) => GroupActivator("Dashes"))
+Hotkey("<#<!" SCKeys["Apostrophe"], (*) => GroupActivator("Quotes"))
+
+GroupActivator(GroupName) {
+  if (GroupName = "Diacritics Primary") {
+    ShowInfoMessage(["Активна первая группа диакритики", "Primary diacritics group has been activated"], "[F1] " . DSLPadTitle, , SkipGroupMessage)
+    InputBridge("Diacritics Primary")
+  } else if (GroupName = "Diacritics Secondary") {
+    ShowInfoMessage(["Активна вторая группа диакритики", "Secondary diacritics group has been activated"], "[F2] " . DSLPadTitle, , SkipGroupMessage)
+    InputBridge("Diacritics Secondary")
+  } else if (GroupName = "Diacritics Tertiary") {
+    ShowInfoMessage(["Активна третья группа диакритики", "Tertiary diacritics group has been activated"], "[F3] " . DSLPadTitle, , SkipGroupMessage)
+    InputBridge("Diacritics Tertiary")
+  } else if (GroupName = "Diacritics Quatemary") {
+    ShowInfoMessage(["Активна четвёртая группа диакритики", "Quatemary diacritics group has been activated"], "[F6] " . DSLPadTitle, , SkipGroupMessage)
+    InputBridge("Diacritics Quatemary")
+  } else if (GroupName = "Special Characters") {
+    ShowInfoMessage(["Активна группа специальных символов", "Special characters group has been activated"], "[F7] " . DSLPadTitle, , SkipGroupMessage)
+    InputBridge("Special Characters")
+  } else if (GroupName = "Spaces") {
+    ShowInfoMessage(["Активна группа шпаций", "Space group has been activated"], "[Space] " . DSLPadTitle, , SkipGroupMessage)
+    InputBridge("Spaces")
+  } else if (GroupName = "Dashes") {
+    ShowInfoMessage(["Активна группа тире", "Dashes group has been activated"], "[-] " . DSLPadTitle, , SkipGroupMessage)
+    InputBridge("Dashes")
+  } else if (GroupName = "Quotes") {
+    ShowInfoMessage(["Активна группа кавычек", "Quotes group has been activated"], "['] " . DSLPadTitle, , SkipGroupMessage)
+    InputBridge("Quotes")
+  }
+
 }
-<#<!F2:: {
-  ShowInfoMessage(["Активна вторая группа диакритики", "Secondary diacritics group has been activated"], "[F2] " . DSLPadTitle, , SkipGroupMessage)
-  InputBridge("Diacritics Secondary")
-}
-<#<!F3:: {
-  ShowInfoMessage(["Активна третья группа диакритики", "Tertiary diacritics group has been activated"], "[F3] " . DSLPadTitle, , SkipGroupMessage)
-  InputBridge("Diacritics Tertiary")
-}
-<#<!F6:: {
-  ShowInfoMessage(["Активна четвёртая группа диакритики", "Quatemary diacritics group has been activated"], "[F6] " . DSLPadTitle, , SkipGroupMessage)
-  InputBridge("Diacritics Quatemary")
-}
-<#<!F7:: {
-  ShowInfoMessage(["Активна группа специальных символов", "Special characters group has been activated"], "[F7] " . DSLPadTitle, , SkipGroupMessage)
-  InputBridge("Special Characters")
-}
-<#<!Space:: {
-  ShowInfoMessage(["Активна группа шпаций", "Space group has been activated"], "[Space] " . DSLPadTitle, , SkipGroupMessage)
-  InputBridge("Spaces")
-}
-<#<!-:: {
-  ShowInfoMessage(["Активна группа тире", "Dashes group has been activated"], "[-] " . DSLPadTitle, , SkipGroupMessage)
-  InputBridge("Dashes")
-}
+
 
 Hotkey("<#<!" SCKeys["F"], (*) => SearchKey())
 Hotkey("<#<!" SCKeys["U"], (*) => InsertUnicodeKey())
@@ -3918,6 +4048,7 @@ Constructor()
   DSLContent["BindList"].TabSpaces := []
   InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Spaces", "Win Alt Space", False)
   InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Dashes", "Win Alt -")
+  InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Quotes", "Win Alt " . QuotationDouble)
   InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Special Characters", "Win Alt F7")
 
   SpacesLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
@@ -4934,7 +5065,12 @@ FastKeysList :=
     "<^<!" SCKeys["Minus"], (*) => HandleFastKey("softhyphen"),
     "<^<!<+" SCKeys["Minus"], (*) => HandleFastKey("minus"),
     ;
-    "<^>!+" SCKeys["Comma"], (*) => HandleFastKey("comma_above_right"),
+    "<^>!" SCKeys["Comma"], (*) => LangSeparatedKey("quote_left_double", "france_left"),
+    "<^>!" SCKeys["Dot"], (*) => LangSeparatedKey("quote_right_double", "france_right"),
+    "<^>!<+" SCKeys["Comma"], (*) => LangSeparatedKey("quote_left_single", "quote_left_low_double"),
+    "<^>!<+" SCKeys["Dot"], (*) => LangSeparatedKey("quote_right_single", "quote_left_double"),
+    "<^>!>+" SCKeys["Comma"], (*) => LangSeparatedKey("", "france_single_left"),
+    "<^>!>+" SCKeys["Dot"], (*) => LangSeparatedKey("", "france_single_right"),
     "<^>!>+" SCKeys["C"], (*) => HandleFastKey("cedilla"),
     ;
     "<^>!>+" SCKeys["1"], (*) => HandleFastKey("emsp"),
