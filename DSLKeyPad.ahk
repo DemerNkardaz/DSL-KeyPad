@@ -3521,12 +3521,29 @@ Ligaturise(SmeltingMode := "InputBox") {
     GetUnicodeSymbol := ""
     IsValidateBreak := False
     IsCancelledByUser := False
+    IsForceWaiting := False
 
     Loop {
       if GetKeyState("Escape", "P") {
         IsCancelledByUser := True
         break
       }
+      if GetKeyState("Pause", "P") {
+        if IsForceWaiting == False {
+          IsForceWaiting := True
+          ShowInfoMessage("message_compose_waiting", , , SkipGroupMessage, True)
+        } else {
+          IsForceWaiting := False
+          LastInput := ""
+        }
+      }
+
+      if IsForceWaiting == True {
+        TempInput := ih.Input
+        Sleep 10
+        continue
+      }
+
       Input := ih.Input
       if (Input != LastInput) {
         LastInput := Input
@@ -3570,6 +3587,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 
       Sleep 10
     }
+
 
     ih.Stop()
     if (!Found && !IsCancelledByUser) {
