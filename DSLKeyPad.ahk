@@ -2772,17 +2772,6 @@ MapInsert(Characters,
 )
 
 
-CommandList := Map(
-  "", {
-    title: "",
-    key: "",
-    preview: "",
-    ui_set: {}
-  },
-    "go_symbol_page", {},
-)
-
-
 CharCodes := {}
 CharCodes.acute := ["{U+0301}", "&#769;"]
 CharCodes.dacute := ["{U+030B}", "&#779;"]
@@ -4075,44 +4064,36 @@ Constructor()
   GrouBoxSpaces.tags.SetFont("s9")
 
   Tab.UseTab(4)
-  DSLContent["ru"].EntrydblClick := "2×ЛКМ"
-  DSLContent["en"].EntrydblClick := "2×LMB"
-  DSLContent["ru"].CommandsNote := "Unicode/Alt-code поддерживает ввод множества кодов через пробел, например «44F2 5607 9503» → «䓲嘇锃».`nРежим ввода HTML-кодов не влияет на «Быстрые ключи».`n«Плавильня» может создавать не только лигатуры, например «-+» → «±», «-*» → «×», «***» → «⁂»."
-  DSLContent["en"].CommandsNote := "Unicode/Alt-code supports input of multiple codes separated by spaces, for example “44F2 5607 9503” → “䓲嘇锃.”`nHTML entities mode does not affect “Fast keys.”`n“Smelter” can to smelt no only ligatures, for example “-+” → “±”, “-*” → “×”, “***” → “⁂”."
+  CommandsTree := DSLPadGUI.AddTreeView("x25 y43 w256 h510 -HScroll")
 
-  DSLContent["BindList"].Commands := [
-    [Map("ru", "Перейти на страницу символа", "en", "Go to symbol page"), DSLContent[LanguageCode].EntrydblClick, ""],
-    [Map("ru", "Копировать символ из списка", "en", "Copy from list"), "Ctrl " . DSLContent[LanguageCode].EntrydblClick, ""],
-    [Map("ru", "Поиск по тегу", "en", "Find by name"), "Win Alt F", ""],
-    [Map("ru", "Открыть страницу выделенного символа", "en", "Open selected symbol Web"), "Win Alt PgUp", "風 → symbl.cc/" . LanguageCode . "/98A8"],
-    [Map("ru", "Вставить по Unicode", "en", "Unicode insertion"), "Win Alt U", "8F2A → 輪"],
-    [Map("ru", "Вставить по Альт-коду", "en", "Alt-code insertion"), "Win Alt A", "0171 0187 → «»"],
-    [Map("ru", "Выплавка символа", "en", "Symbol Smelter"), "Win Alt L", "AE → Æ, OE → Œ"],
-    [Map("ru", "Выплавка символа в тексте", "en", "Melt symbol in text"), "", ""],
-    [Map("ru", " (выделить)", "en", " (select)"), "RShift L", "ІУЖ → Ѭ, ІЭ → Ѥ"],
-    [Map("ru", " (установить курсор справа от символов)", "en", " (set cursor to the right of the symbols)"), "RShift Backspace", "st → ﬆ, іат → ѩ"],
-    [Map("ru", " Режиме «Compose»", "en", " “Compose” mode"), "RAlt×2", ""],
-    [Map("ru", "Конвертировать в верхний индекс", "en", "Convert into superscript"), "Win RAlt 1", "‌¹‌²‌³‌⁴‌⁵‌⁶‌⁷‌⁸‌⁹‌⁰‌⁽‌⁻‌⁼‌⁾"],
-    [Map("ru", "Конвертировать в нижний индекс", "en", "Convert into subscript"), "Win RAlt 2", "‌₁‌₂‌₃‌₄‌₅‌₆‌₇‌₈‌₉‌₀‌₍‌₋‌₌‌₎"],
-    [Map("ru", "Конвертировать в Римские цифры", "en", "Convert into Roman Numerals"), "Win RAlt 3", "15128 → ↂↁⅭⅩⅩⅧ"],
-    [Map("ru", "Активация «Быстрых ключей»", "en", "Toggle FastKeys"), "RAlt Home", ""],
-    [Map("ru", "Переключение ввода HTML/LaTeX/Символ", "en", "Toggle of HTML/LaTeX/Symbol input"), "RAlt RShift Home", "a&#769; | \'{a} | á"],
-    [Map("ru", "Оповещения активации групп", "en", "Groups activation notification toggle"), "Win Alt M", ""],
-  ]
+  CommandsTree.OnEvent("ItemSelect", (TV, Item) => TV_InsertCommandsDesc(TV, Item, GrouBoxCommands.text))
 
-  LocaliseArrayKeys(DSLContent["BindList"].Commands)
-
-  CommandsLV := DSLPadGUI.Add("ListView", ColumnAreaWidth . " h450 " . ColumnAreaRules, TrimArray(DSLCols.default, 3))
-
-
-  CommandsLV.ModifyCol(1, ThreeColumnWidths[1])
-  CommandsLV.ModifyCol(2, ThreeColumnWidths[2])
-  CommandsLV.ModifyCol(3, ThreeColumnWidths[3])
-
-  for item in DSLContent["BindList"].Commands
-  {
-    CommandsLV.Add(, item[1], item[2], item[3])
+  CommandsInfoBox := {
+    body: "x300 y35 w540 h450",
+    bodyText: Map("ru", "Команда", "en", "Command"),
+    text: "vCommandDescription x310 y65 w530 h400 BackgroundTrans",
   }
+
+  GrouBoxCommands := {
+    group: DSLPadGUI.Add("GroupBox", CommandsInfoBox.body, CommandsInfoBox.bodyText[LanguageCode]),
+    text: DSLPadGUI.Add("Text", CommandsInfoBox.text),
+  }
+
+  Command_gotopage := CommandsTree.Add(ReadLocale("func_label_gotopage"))
+  Command_selgoto := CommandsTree.Add(ReadLocale("func_label_selgoto"))
+  Command_copylist := CommandsTree.Add(ReadLocale("func_label_copylist"))
+  Command_uninsert := CommandsTree.Add(ReadLocale("func_label_uninsert"))
+  Command_altcode := CommandsTree.Add(ReadLocale("func_label_altcode"))
+  Command_smelter := CommandsTree.Add(ReadLocale("func_label_smelter"), , "Expand")
+  Command_smelter_sel := CommandsTree.Add(ReadLocale("func_label_smelter_sel"), Command_Smelter)
+  Command_smelter_carr := CommandsTree.Add(ReadLocale("func_label_smelter_carr"), Command_Smelter)
+  Command_compose := CommandsTree.Add(ReadLocale("func_label_compose"), Command_smelter)
+  Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
+  Command_num_subscript := CommandsTree.Add(ReadLocale("func_label_num_subscript"))
+  Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
+  Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
+  Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
+  Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
 
 
   DSLContent["ru"].AutoLoadAdd := "Добавить в автозагрузку"
@@ -4123,37 +4104,36 @@ Constructor()
   DSLContent["en"].UpdateAvailable := "Update available: version " . UpdateVersionString
 
   DSLPadGUI.SetFont("s9")
-  ;DSLPadGUI.Add("Text", "w600", DSLContent[LanguageCode].CommandsNote)
 
-  BtnAutoLoad := DSLPadGUI.Add("Button", "x379 y527 w200 h32", DSLContent[LanguageCode].AutoLoadAdd)
+  BtnAutoLoad := DSLPadGUI.Add("Button", "x577 y527 w200 h32", DSLContent[LanguageCode].AutoLoadAdd)
   BtnAutoLoad.OnEvent("Click", AddScriptToAutoload)
 
-  BtnSwitchRU := DSLPadGUI.Add("Button", "x21 y527 w32 h32", "РУ")
+  BtnSwitchRU := DSLPadGUI.Add("Button", "x300 y527 w32 h32", "РУ")
   BtnSwitchRU.OnEvent("Click", (*) => SwitchLanguage("ru"))
 
-  BtnSwitchEN := DSLPadGUI.Add("Button", "x53 y527 w32 h32", "EN")
+  BtnSwitchEN := DSLPadGUI.Add("Button", "x332 y527 w32 h32", "EN")
   BtnSwitchEN.OnEvent("Click", (*) => SwitchLanguage("en"))
 
-  UpdateBtn := DSLPadGUI.Add("Button", "x611 y495 w32 h32")
+  UpdateBtn := DSLPadGUI.Add("Button", "x809 y495 w32 h32")
   UpdateBtn.OnEvent("Click", (*) => GetUpdate())
   GuiButtonIcon(UpdateBtn, ImageRes, 176, "w24 h24")
 
-  RepairBtn := DSLPadGUI.Add("Button", "x579 y495 w32 h32", "🛠️")
+  RepairBtn := DSLPadGUI.Add("Button", "x777 y495 w32 h32", "🛠️")
   RepairBtn.SetFont("s16")
   RepairBtn.OnEvent("Click", (*) => GetUpdate(0, True))
 
-  ConfigFileBtn := DSLPadGUI.Add("Button", "x611 y527 w32 h32")
+  ConfigFileBtn := DSLPadGUI.Add("Button", "x809 y527 w32 h32")
   ConfigFileBtn.OnEvent("Click", (*) => OpenConfigFile())
   GuiButtonIcon(ConfigFileBtn, ImageRes, 065)
 
-  LocalesFileBtn := DSLPadGUI.Add("Button", "x579 y527 w32 h32")
+  LocalesFileBtn := DSLPadGUI.Add("Button", "x777 y527 w32 h32")
   LocalesFileBtn.OnEvent("Click", (*) => OpenLocalesFile())
   GuiButtonIcon(LocalesFileBtn, ImageRes, 015)
 
 
-  UpdateNewIcon := DSLPadGUI.Add("Text", "vNewVersionIcon x22 y484 w40 h40 BackgroundTrans", "")
+  UpdateNewIcon := DSLPadGUI.Add("Text", "vNewVersionIcon x300 y484 w40 h40 BackgroundTrans", "")
   UpdateNewIcon.SetFont("s16")
-  UpdateNewVersion := DSLPadGUI.Add("Link", "vNewVersionAlert x38 y492 w300", "")
+  UpdateNewVersion := DSLPadGUI.Add("Link", "vNewVersionAlert x316 y492 w300", "")
   UpdateNewVersion.SetFont("s9")
 
   if UpdateAvailable
@@ -4164,14 +4144,6 @@ Constructor()
   }
 
   DSLPadGUI.SetFont("s11")
-
-  CommandsInfoBox := {
-    bodyText: Map("ru", "Команда", "en", "Command"),
-  }
-
-  GrouBoxCommands := {
-    group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommandsInfoBox.bodyText[LanguageCode]),
-  }
 
 
   Tab.UseTab(5)
@@ -4429,7 +4401,7 @@ Constructor()
   SpacesLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
   FastKeysLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
   LigaturesLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
-  CommandsLV.OnEvent("DoubleClick", LV_RunCommand)
+  ;CommandsLV.OnEvent("DoubleClick", LV_RunCommand)
 
   DiacriticLV.OnEvent("ItemFocus", (LV, RowNumber) =>
     LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -4725,6 +4697,41 @@ SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, Prev
     }
   }
 }
+
+TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
+  if !Item {
+    return
+  }
+
+  LabelValidator := [
+    "func_label_gotopage",
+    "func_label_selgoto",
+    "func_label_copylist",
+    "func_label_tagsearch",
+    "func_label_uninsert",
+    "func_label_altcode",
+    "func_label_smelter",
+    "func_label_smelter_sel",
+    "func_label_smelter_carr",
+    "func_label_compose",
+    "func_label_num_superscript",
+    "func_label_num_subscript",
+    "func_label_num_roman",
+    "func_label_fastkeys",
+    "func_label_inputtoggle",
+    "func_label_notifs",
+  ]
+
+  SelectedLabel := TV.GetText(Item)
+
+  for label in LabelValidator
+  {
+    if (ReadLocale(label) = SelectedLabel)
+      TargetTextBox.Text := ReadLocale(label . "_description")
+  }
+
+}
+
 
 LV_CharacterDetails(LV, RowNumber, SetupArray) {
   UnicodeKey := LV.GetText(RowNumber, 4)
@@ -5172,15 +5179,15 @@ RegFastKeys(FastKeysList)
 ;<^<+<!0:: HandleFastKey("{U+2080}") ; Subscript 0
 
 
-<^<!e:: Send("{U+045E}") ; Cyrillic u with breve
-<^<+<!e:: Send("{U+040E}") ; Cyrillic cap u with breve
-<^<!w:: Send("{U+04EF}") ; Cyrillic u with macron
-<^<+<!w:: Send("{U+04EE}") ; Cyrillic cap u with macron
-<^<!q:: Send("{U+04E3}") ; Cyrillic i with macron
-<^<+<!q:: Send("{U+04E2}") ; Cyrillic cap i with macron
+;<^<!e:: Send("{U+045E}") ; Cyrillic u with breve
+;<^<+<!e:: Send("{U+040E}") ; Cyrillic cap u with breve
+;<^<!w:: Send("{U+04EF}") ; Cyrillic u with macron
+;<^<+<!w:: Send("{U+04EE}") ; Cyrillic cap u with macron
+;<^<!q:: Send("{U+04E3}") ; Cyrillic i with macron
+;<^<+<!q:: Send("{U+04E2}") ; Cyrillic cap i with macron
 
-<^<!x:: Send("{U+04AB}") ; CYRILLIC SMALL LETTER ES WITH DESCENDER
-<^<+<!x:: Send("{U+04AA}") ; CYRILLIC CAPITAL LETTER ES WITH DESCENDER
+;<^<!x:: Send("{U+04AB}") ; CYRILLIC SMALL LETTER ES WITH DESCENDER
+;<^<+<!x:: Send("{U+04AA}") ; CYRILLIC CAPITAL LETTER ES WITH DESCENDER
 
 
 ;>+<+g:: HandleFastKey(CharCodes.grapjoiner[1], True)
