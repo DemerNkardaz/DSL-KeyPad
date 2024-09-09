@@ -1894,6 +1894,70 @@ MapInsert(Characters,
       alt_on_fast_keys: "LShift [Ю]",
       symbol: Chr(0x201C)
     },
+    "asian_left_quote", {
+      unicode: "{U+300C}", html: "#12300;",
+      tags: ["asian left quote", "левая азиатская кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[Num4]",
+      symbol: Chr(0x300C)
+    },
+    "asian_right_quote", {
+      unicode: "{U+300D}", html: "#12301;",
+      tags: ["asian right quote", "правая азиатская кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[Num6]",
+      symbol: Chr(0x300D)
+    },
+    "asian_up_quote", {
+      unicode: "{U+FE41}", html: "&#65089;",
+      tags: ["asian up quote", "верхняя азиатская кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[Num8]",
+      symbol: Chr(0xFE41)
+    },
+    "asian_down_quote", {
+      unicode: "{U+FE42}", html: "&#65090;",
+      tags: ["asian down quote", "нижняя азиатская кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[Num2]",
+      symbol: Chr(0xFE42)
+    },
+    "asian_double_left_quote", {
+      unicode: "{U+300E}", html: "&#12302;",
+      tags: ["asian double left quote", "левая двойная азиатская кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [Num4]",
+      symbol: Chr(0x300E)
+    },
+    "asian_double_right_quote", {
+      unicode: "{U+300F}", html: "&#12303;",
+      tags: ["asian double right quote", "правая двойная азиатская кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [Num6]",
+      symbol: Chr(0x300F)
+    },
+    "asian_double_up_quote", {
+      unicode: "{U+FE43}", html: "&#65091;",
+      tags: ["asian double up quote", "верхняя двойная азиатская кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [Num8]",
+      symbol: Chr(0xFE43)
+    },
+    "asian_double_down_quote", {
+      unicode: "{U+FE44}", html: "&#65092;",
+      tags: ["asian double down quote", "нижняя двойная азиатская кавычка"],
+      group: ["Asian Quotes"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [Num2]",
+      symbol: Chr(0xFE44)
+    },
 )
 
 MapInsert(Characters,
@@ -4372,6 +4436,7 @@ Constructor()
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Primary", "", True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Diacritics Fast Secondary", "RAlt", True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Secondary", "", True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Asian Quotes", "", True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Other Signs", "", True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Spaces", "", True, True,)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Latin Extended", "", True, True,)
@@ -5185,6 +5250,15 @@ FastKeysList :=
     "<^>!" SCKeys["ArrUp"], (*) => HandleFastKey("arrow_up"),
     "<^>!" SCKeys["ArrDown"], (*) => HandleFastKey("arrow_down"),
     ;
+    "<^>!" SCKeys["Numpad4"], (*) => HandleFastKey("asian_left_quote"),
+    "<^>!" SCKeys["Numpad6"], (*) => HandleFastKey("asian_right_quote"),
+    "<^>!" SCKeys["Numpad8"], (*) => HandleFastKey("asian_up_quote"),
+    "<^>!" SCKeys["Numpad2"], (*) => HandleFastKey("asian_down_quote"),
+    "<^>!>+" SCKeys["Numpad4"], (*) => HandleFastKey("asian_double_left_quote"),
+    "<^>!>+" SCKeys["Numpad6"], (*) => HandleFastKey("asian_double_right_quote"),
+    "<^>!>+" SCKeys["Numpad8"], (*) => HandleFastKey("asian_double_up_quote"),
+    "<^>!>+" SCKeys["Numpad2"], (*) => HandleFastKey("asian_double_down_quote"),
+    ;
     "RAlt", (*) => ProceedCompose(),
   ]
 RAltsCount := 0
@@ -5222,17 +5296,7 @@ RAltsSetStats() {
   Sleep 100
   RAltsTimerEnds := False
 }
-if CurrentLayout = CodeEn {
-  Hotkey("<#" SCKeys["LSquareBracket"], (*) => Send("{U+300C}"))
-  Hotkey("<#<+" SCKeys["LSquareBracket"], (*) => Send("{U+300E}"))
-  Hotkey("<#" SCKeys["RSquareBracket"], (*) => Send("{U+300D}"))
-  Hotkey("<#<+" SCKeys["RSquareBracket"], (*) => Send("{U+300F}"))
 
-  Hotkey("<#<^" SCKeys["LSquareBracket"], (*) => Send("{U+FE41}"))
-  Hotkey("<#<^<+" SCKeys["LSquareBracket"], (*) => Send("{U+FE43}"))
-  Hotkey("<#<^" SCKeys["RSquareBracket"], (*) => Send("{U+FE42}"))
-  Hotkey("<#<^<+" SCKeys["RSquareBracket"], (*) => Send("{U+FE44}"))
-}
 RegFastKeys(FastKeysList)
 ;<^<!1:: HandleFastKey("{U+00B9}") ; Superscript 1
 ;<^<!2:: HandleFastKey("{U+00B2}") ; Superscript 2
@@ -5359,10 +5423,15 @@ ManageTrayItems() {
   DSLTray.SetIcon(Labels[LanguageCode].Locale, ImageRes, 015)
   DSLTray.SetIcon(Labels[LanguageCode].Exit, ImageRes, 085)
 }
+
 ManageTrayItems()
+
 ShowInfoMessage("tray_app_started")
+
 <^Esc:: ExitApp
+
 SetPreviousLayout()
+
 ;! Third Party Functions
 ;{ [Function] GuiButtonIcon
 ;{
