@@ -773,7 +773,10 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
     }
 
     GroupValid := False
-    if (ShowRecipes && !HasProp(value, "recipe")) {
+
+    IsDefault := !ShowOnFastKeys && !ShowRecipes
+
+    if (ShowRecipes && !HasProp(value, "recipe")) || (IsDefault && HasProp(value, "group") && !value.group.Has(2)) {
       continue
     }
 
@@ -1461,9 +1464,39 @@ MapInsert(Characters,
     ; ? Special Characters
     "arrow_left", {
       unicode: "{U+2190}", html: "&#8592;",
+      altCode: "27",
       tags: ["left arrow", "стрелка влево"],
-      group: ["Special Characters", ["RShift+A"]],
+      group: [["Special Characters", "Special Fast Secondary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[" Chr(0x2190) "]",
       symbol: Chr(0x2190)
+    },
+    "arrow_right", {
+      unicode: "{U+2192}", html: "&#8594;",
+      altCode: "26",
+      tags: ["right arrow", "стрелка вправо"],
+      group: [["Special Characters", "Special Fast Secondary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[" Chr(0x2192) "]",
+      symbol: Chr(0x2192)
+    },
+    "arrow_up", {
+      unicode: "{U+2191}", html: "&#8593;",
+      altCode: "25",
+      tags: ["up arrow", "стрелка вверх"],
+      group: [["Special Characters", "Special Fast Secondary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[" Chr(0x2191) "]",
+      symbol: Chr(0x2191)
+    },
+    "arrow_down", {
+      unicode: "{U+2193}", html: "&#8595;",
+      altCode: "24",
+      tags: ["down arrow", "стрелка вниз"],
+      group: [["Special Characters", "Special Fast Secondary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[" Chr(0x2193) "]",
+      symbol: Chr(0x2193)
     },
     "asterisk_low", {
       unicode: "{U+204E}", html: "&#8270;",
@@ -4943,6 +4976,11 @@ FastKeysList :=
     "<^>!" SCKeys["Slash"], (*) => HandleFastKey("ellipsis"),
     "<^>!>+" SCKeys["Slash"], (*) => HandleFastKey("fraction_slash"),
     "<^>!" SCKeys["8"], (*) => HandleFastKey("multiplication"),
+    ;
+    "<^>!" SCKeys["ArrLeft"], (*) => HandleFastKey("arrow_left"),
+    "<^>!" SCKeys["ArrRight"], (*) => HandleFastKey("arrow_right"),
+    "<^>!" SCKeys["ArrUp"], (*) => HandleFastKey("arrow_up"),
+    "<^>!" SCKeys["ArrDown"], (*) => HandleFastKey("arrow_down"),
     ;
     "RAlt", (*) => ProceedCompose(),
   ]
