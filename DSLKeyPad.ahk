@@ -1864,7 +1864,7 @@ MapInsert(Characters,
       tags: ["right quote", "правая одинарная кавычка"],
       group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "7"],
       show_on_fast_keys: True,
-      alt_on_fast_keys: "LShift [>]",
+      alt_on_fast_keys: "LShift [>] RShift [" Backquote "][Ё]",
       recipe: ApostropheMark . ">",
       symbol: Chr(0x2019)
     },
@@ -2723,25 +2723,39 @@ MapInsert(Characters,
     ;
     ;
     ; * Wallet Signs
+    "wallet_sign", {
+      unicode: "{U+00A4}", html: "&#164;", entity: "&curren;",
+      group: ["Wallet Signs"],
+      tags: ["знак валюты", "currency sign"],
+      recipe: ["xo", "XO"],
+      symbol: Chr(0x00A4)
+    },
+    "wallet_dollar", {
+      unicode: "{U+0024}", html: "&#36;", entity: "&dollar;",
+      group: ["Wallet Signs"],
+      tags: ["доллар", "dollar"],
+      recipe: ["usd", "USD", "dlr", "DLR"],
+      symbol: Chr(0x0024)
+    },
     "wallet_cent", {
       unicode: "{U+00A2}", html: "&cent;",
       group: ["Wallet Signs"],
       tags: ["цент", "cent"],
-      recipe: "cnt",
+      recipe: ["cnt", "CNT"],
       symbol: Chr(0x00A2)
     },
     "wallet_pound", {
       unicode: "{U+00A3}", html: "&#163;", entity: "&pound;",
       group: ["Wallet Signs"],
       tags: ["фунт", "pound"],
-      recipe: "gbp",
+      recipe: ["gbp", "GBP"],
       symbol: Chr(0x00A3)
     },
     "wallet_eur", {
       unicode: "{U+20AC}", html: "&#8364;",
       group: ["Wallet Signs"],
       tags: ["евро", "euro"],
-      recipe: "eur",
+      recipe: ["eur", "EUR"],
       symbol: Chr(0x20AC)
     },
     "wallet_franc", {
@@ -2848,6 +2862,13 @@ MapInsert(Characters,
       tags: ["филиппинский песо", "philippine peso"],
       recipe: ["php", "PHP"],
       symbol: Chr(0x20B1)
+    },
+    "wallet_roman_denarius", {
+      unicode: "{U+10196}", html: "&#65942;",
+      group: ["Wallet Signs"],
+      tags: ["римский денарий", "roman denarius"],
+      recipe: ["din", "DIN"],
+      symbol: Chr(0x10196)
     },
     "wallet_bitcoin", {
       unicode: "{U+20BF}", html: "&#8383;",
@@ -5112,6 +5133,7 @@ FastKeysList :=
     "<^>!<+" SCKeys["Dot"], (*) => LangSeparatedKey("quote_right_single", "quote_left_double"),
     "<^>!>+" SCKeys["Comma"], (*) => LangSeparatedKey("", "france_single_left"),
     "<^>!>+" SCKeys["Dot"], (*) => LangSeparatedKey("", "france_single_right"),
+    "<^>!>+" SCKeys["Tilde"], (*) => HandleFastKey("quote_right_single"),
     "<^>!>+" SCKeys["C"], (*) => HandleFastKey("cedilla"),
     ;
     "<^>!>+" SCKeys["1"], (*) => HandleFastKey("emsp"),
