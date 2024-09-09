@@ -2836,76 +2836,76 @@ MapInsert(Characters,
       unicode: "{U+00A2}", html: "&cent;",
       group: ["Wallet Signs"],
       tags: ["цент", "cent"],
-      recipe: ["cnt", "CNT"],
+      recipe: ["c|", "cnt", "CNT"],
       symbol: Chr(0x00A2)
     },
     "wallet_pound", {
       unicode: "{U+00A3}", html: "&#163;", entity: "&pound;",
       group: ["Wallet Signs"],
       tags: ["фунт", "pound"],
-      recipe: ["gbp", "GBP"],
+      recipe: ["f_", "gbp", "GBP"],
       symbol: Chr(0x00A3)
     },
     "wallet_eur", {
       unicode: "{U+20AC}", html: "&#8364;",
       group: ["Wallet Signs"],
       tags: ["евро", "euro"],
-      recipe: ["eur", "EUR"],
+      recipe: ["C=", "eur", "EUR"],
       symbol: Chr(0x20AC)
     },
     "wallet_franc", {
       unicode: "{U+20A3}", html: "&#8353;",
       group: ["Wallet Signs"],
       tags: ["франк", "franc"],
-      recipe: ["frf", "FRF"],
+      recipe: ["F=", "frf", "FRF"],
       symbol: Chr(0x20A3)
     },
     "wallet_rub", {
       unicode: "{U+20BD}", html: "&#8381;",
       group: ["Wallet Signs"],
       tags: ["рубль", "ruble"],
-      recipe: ["rub", "руб"],
+      recipe: ["Р=", "rub", "руб"],
       symbol: Chr(0x20BD)
     },
     "wallet_hryvnia", {
       unicode: "{U+20B4}", html: "&#8372;",
       group: ["Wallet Signs"],
       tags: ["гривна", "hryvnia"],
-      recipe: ["uah", "UAH", "грн", "ГРН"],
+      recipe: ["S=", "uah", "UAH", "грн", "ГРН"],
       symbol: Chr(0x20B4)
     },
     "wallet_lira", {
       unicode: "{U+20A4}", html: "&#8356;",
       group: ["Wallet Signs"],
       tags: ["лира", "lira"],
-      recipe: ["lir", "LIR"],
+      recipe: ["f=", "lir", "LIR"],
       symbol: Chr(0x20A4)
     },
     "wallet_turkish_lira", {
       unicode: "{U+20BA}", html: "&#8378;",
       group: ["Wallet Signs"],
       tags: ["лира", "lira"],
-      recipe: ["try", "TRY"],
+      recipe: ["L=", "try", "TRY"],
       symbol: Chr(0x20BA)
     },
     "wallet_rupee", {
       unicode: "{U+20B9}", html: "&#8377;",
       group: ["Wallet Signs"],
       tags: ["рупия", "rupee"],
-      recipe: ["inr", "INR", "rup", "RUP"],
+      recipe: ["R=", "inr", "INR", "rup", "RUP"],
       symbol: Chr(0x20B9)
     },
     "wallet_won", {
       unicode: "{U+20A9}", html: "&#8361;",
       group: ["Wallet Signs"],
       tags: ["вон", "won"],
-      recipe: ["won", "WON", "krw", "KRW"],
+      recipe: ["W=", "won", "WON", "krw", "KRW"],
       symbol: Chr(0x20A9)
     },
     "wallet_yen", {
       unicode: "{U+00A5}", html: "&#165;", entity: "&yen;",
       group: ["Wallet Signs"],
-      tags: ["знак йены", "yen sign"],
+      tags: ["Y=", "знак йены", "yen sign"],
       recipe: ["yen", "YEN"],
       symbol: Chr(0x00A5)
     },
@@ -2934,14 +2934,14 @@ MapInsert(Characters,
       unicode: "{U+20AE}", html: "&#8366;",
       group: ["Wallet Signs"],
       tags: ["монгольский тугрик", "mongolian tugrik"],
-      recipe: ["mnt", "MNT", "tgk", "TGK"],
+      recipe: ["T//", "mnt", "MNT", "tgk", "TGK"],
       symbol: Chr(0x20AE)
     },
     "wallet_qazaq_tenge", {
       unicode: "{U+20B8}", html: "&#8376;",
       group: ["Wallet Signs"],
       tags: ["казахский тенге", "kazakh tenge"],
-      recipe: ["kzt", "KZT", "tng", "TNG"],
+      recipe: ["T=", "kzt", "KZT", "tng", "TNG"],
       symbol: Chr(0x20B8)
     },
     "wallet_new_sheqel", {
@@ -2955,21 +2955,21 @@ MapInsert(Characters,
       unicode: "{U+20B1}", html: "&#8369;",
       group: ["Wallet Signs"],
       tags: ["филиппинский песо", "philippine peso"],
-      recipe: ["php", "PHP"],
+      recipe: ["P=", "php", "PHP"],
       symbol: Chr(0x20B1)
     },
     "wallet_roman_denarius", {
       unicode: "{U+10196}", html: "&#65942;",
       group: ["Wallet Signs"],
       tags: ["римский денарий", "roman denarius"],
-      recipe: ["din", "DIN"],
+      recipe: ["X-", "din", "DIN"],
       symbol: Chr(0x10196)
     },
     "wallet_bitcoin", {
       unicode: "{U+20BF}", html: "&#8383;",
       group: ["Wallet Signs"],
       tags: ["биткоин", "bitcoin"],
-      recipe: "btc",
+      recipe: ["B||", "btc"],
       symbol: Chr(0x20BF)
     },
     ;
@@ -5216,6 +5216,7 @@ RegFastKeys(Bindings) {
     }
   }
 }
+
 FastKeysList :=
   [
     "<^<!" SCKeys["A"], (*) => HandleFastKey("acute"),
