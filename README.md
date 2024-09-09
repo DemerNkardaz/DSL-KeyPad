@@ -48,7 +48,7 @@ For using the “DSL KeyPad” you need to simply [download the .ahk file](https
 
 ![](Images/20240910_1.png)
 
-![](Images/20240910_3.png)
+![](Images/20240910_2.png)
 
 # License
 
