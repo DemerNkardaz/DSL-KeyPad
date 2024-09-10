@@ -2905,8 +2905,8 @@ MapInsert(Characters,
     "wallet_yen", {
       unicode: "{U+00A5}", html: "&#165;", entity: "&yen;",
       group: ["Wallet Signs"],
-      tags: ["Y=", "знак йены", "yen sign"],
-      recipe: ["YEN"],
+      tags: ["знак йены", "yen sign"],
+      recipe: ["Y=", "YEN"],
       symbol: Chr(0x00A5)
     },
     "wallet_jpy_yen", {
@@ -4333,7 +4333,7 @@ Constructor()
   CommandsInfoBox := {
     body: "x300 y35 w540 h450",
     bodyText: Map("ru", "Команда", "en", "Command"),
-    text: "vCommandDescription x310 y65 w530 h400 BackgroundTrans",
+    text: "vCommandDescription x310 y65 w520 h400 BackgroundTrans",
   }
 
   GrouBoxCommands := {
