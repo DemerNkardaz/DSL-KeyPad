@@ -2822,154 +2822,154 @@ MapInsert(Characters,
       unicode: "{U+00A4}", html: "&#164;", entity: "&curren;",
       group: ["Wallet Signs"],
       tags: ["знак валюты", "currency sign"],
-      recipe: ["xo", "XO"],
+      recipe: ["XO"],
       symbol: Chr(0x00A4)
     },
     "wallet_dollar", {
       unicode: "{U+0024}", html: "&#36;", entity: "&dollar;",
       group: ["Wallet Signs"],
       tags: ["доллар", "dollar"],
-      recipe: ["usd", "USD", "dlr", "DLR"],
+      recipe: ["USD", "DLR"],
       symbol: Chr(0x0024)
     },
     "wallet_cent", {
       unicode: "{U+00A2}", html: "&cent;",
       group: ["Wallet Signs"],
       tags: ["цент", "cent"],
-      recipe: ["c|", "cnt", "CNT"],
+      recipe: ["c|", "CNT"],
       symbol: Chr(0x00A2)
     },
     "wallet_pound", {
       unicode: "{U+00A3}", html: "&#163;", entity: "&pound;",
       group: ["Wallet Signs"],
       tags: ["фунт", "pound"],
-      recipe: ["f_", "gbp", "GBP"],
+      recipe: ["f_", "GBP"],
       symbol: Chr(0x00A3)
     },
     "wallet_eur", {
       unicode: "{U+20AC}", html: "&#8364;",
       group: ["Wallet Signs"],
       tags: ["евро", "euro"],
-      recipe: ["C=", "eur", "EUR"],
+      recipe: ["C=", "EUR"],
       symbol: Chr(0x20AC)
     },
     "wallet_franc", {
       unicode: "{U+20A3}", html: "&#8353;",
       group: ["Wallet Signs"],
       tags: ["франк", "franc"],
-      recipe: ["F=", "frf", "FRF"],
+      recipe: ["F=", "FRF"],
       symbol: Chr(0x20A3)
     },
     "wallet_rub", {
       unicode: "{U+20BD}", html: "&#8381;",
       group: ["Wallet Signs"],
       tags: ["рубль", "ruble"],
-      recipe: ["Р=", "rub", "руб"],
+      recipe: ["Р=", "RUB", "РУБ"],
       symbol: Chr(0x20BD)
     },
     "wallet_hryvnia", {
       unicode: "{U+20B4}", html: "&#8372;",
       group: ["Wallet Signs"],
       tags: ["гривна", "hryvnia"],
-      recipe: ["S=", "uah", "UAH", "грн", "ГРН"],
+      recipe: ["S=", "UAH", "ГРН"],
       symbol: Chr(0x20B4)
     },
     "wallet_lira", {
       unicode: "{U+20A4}", html: "&#8356;",
       group: ["Wallet Signs"],
       tags: ["лира", "lira"],
-      recipe: ["f=", "lir", "LIR"],
+      recipe: ["f=", "LIR"],
       symbol: Chr(0x20A4)
     },
     "wallet_turkish_lira", {
       unicode: "{U+20BA}", html: "&#8378;",
       group: ["Wallet Signs"],
       tags: ["лира", "lira"],
-      recipe: ["L=", "try", "TRY"],
+      recipe: ["L=", "TRY"],
       symbol: Chr(0x20BA)
     },
     "wallet_rupee", {
       unicode: "{U+20B9}", html: "&#8377;",
       group: ["Wallet Signs"],
       tags: ["рупия", "rupee"],
-      recipe: ["R=", "inr", "INR", "rup", "RUP"],
+      recipe: ["R=", "INR", "RUP"],
       symbol: Chr(0x20B9)
     },
     "wallet_won", {
       unicode: "{U+20A9}", html: "&#8361;",
       group: ["Wallet Signs"],
       tags: ["вон", "won"],
-      recipe: ["W=", "won", "WON", "krw", "KRW"],
+      recipe: ["W=", "WON", "KRW"],
       symbol: Chr(0x20A9)
     },
     "wallet_yen", {
       unicode: "{U+00A5}", html: "&#165;", entity: "&yen;",
       group: ["Wallet Signs"],
       tags: ["Y=", "знак йены", "yen sign"],
-      recipe: ["yen", "YEN"],
+      recipe: ["YEN"],
       symbol: Chr(0x00A5)
     },
     "wallet_jpy_yen", {
       unicode: "{U+5186}", html: "&#20870;",
       group: ["Wallet Signs"],
       tags: ["йена", "yen"],
-      recipe: ["jpy", "JPY"],
+      recipe: ["JPY"],
       symbol: Chr(0x5186)
     },
     "wallet_cny_yuan", {
       unicode: "{U+5143}", html: "&#20803;",
       group: ["Wallet Signs"],
       tags: ["юань", "yuan"],
-      recipe: ["cny", "CNY"],
+      recipe: ["CNY"],
       symbol: Chr(0x5143)
     },
     "wallet_viet_dong", {
       unicode: "{U+20AB}", html: "&#8363;",
       group: ["Wallet Signs"],
       tags: ["вьетнамский донг", "vietnamese dong"],
-      recipe: ["vnd", "VND", "dng", "DNG"],
+      recipe: ["VND", "DNG"],
       symbol: Chr(0x20AB)
     },
     "wallet_mongol_tugrik", {
       unicode: "{U+20AE}", html: "&#8366;",
       group: ["Wallet Signs"],
       tags: ["монгольский тугрик", "mongolian tugrik"],
-      recipe: ["T//", "mnt", "MNT", "tgk", "TGK"],
+      recipe: ["T//", "MNT", "TGK"],
       symbol: Chr(0x20AE)
     },
     "wallet_qazaq_tenge", {
       unicode: "{U+20B8}", html: "&#8376;",
       group: ["Wallet Signs"],
       tags: ["казахский тенге", "kazakh tenge"],
-      recipe: ["T=", "kzt", "KZT", "tng", "TNG"],
+      recipe: ["T=", "KZT", "TNG"],
       symbol: Chr(0x20B8)
     },
     "wallet_new_sheqel", {
       unicode: "{U+20AA}", html: "&#8362;",
       group: ["Wallet Signs"],
       tags: ["новый шекель", "new sheqel"],
-      recipe: ["nzd", "NZD", "shq", "SHQ"],
+      recipe: ["NZD", "SHQ"],
       symbol: Chr(0x20AA)
     },
     "wallet_philippine_peso", {
       unicode: "{U+20B1}", html: "&#8369;",
       group: ["Wallet Signs"],
       tags: ["филиппинский песо", "philippine peso"],
-      recipe: ["P=", "php", "PHP"],
+      recipe: ["P=", "PHP"],
       symbol: Chr(0x20B1)
     },
     "wallet_roman_denarius", {
       unicode: "{U+10196}", html: "&#65942;",
       group: ["Wallet Signs"],
       tags: ["римский денарий", "roman denarius"],
-      recipe: ["X-", "din", "DIN"],
+      recipe: ["X-", "DIN"],
       symbol: Chr(0x10196)
     },
     "wallet_bitcoin", {
       unicode: "{U+20BF}", html: "&#8383;",
       group: ["Wallet Signs"],
       tags: ["биткоин", "bitcoin"],
-      recipe: ["B||", "btc"],
+      recipe: ["B||", "BTC"],
       symbol: Chr(0x20BF)
     },
     ;
@@ -3648,13 +3648,15 @@ for chracterEntry, value in Characters {
     Recipe := value.recipe
     if IsObject(Recipe) {
       for _, recipe in Recipe {
-        RecipeValidatorArray.Push(GetUnicodeString(recipe))
+        RecipeValidatorArray.Push(recipe)
       }
     } else {
-      RecipeValidatorArray.Push(GetUnicodeString(Recipe))
+      RecipeValidatorArray.Push(Recipe)
     }
   }
 }
+
+
 Ligaturise(SmeltingMode := "InputBox") {
   LanguageCode := GetLanguageCode()
   BackupClipboard := ""
@@ -3719,6 +3721,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 
     GetUnicodeSymbol := ""
     IsValidateBreak := False
+    IsSingleCase := False
     IsCancelledByUser := False
     IsForceWaiting := False
 
@@ -3746,12 +3749,23 @@ Ligaturise(SmeltingMode := "InputBox") {
       Input := ih.Input
       if (Input != LastInput) {
         LastInput := Input
-
+        InputValidator := RegExEscape(Input)
         IsValidateBreak := True
+
         for validatingValue in RecipeValidatorArray {
-          if RegExMatch(validatingValue, "^" . GetUnicodeString(Input)) {
+          if (RegExMatch(validatingValue, "^" . InputValidator)) {
             IsValidateBreak := False
             break
+          }
+        }
+
+        if IsValidateBreak {
+          for validatingValue in RecipeValidatorArray {
+            if (RegExMatch(StrLower(validatingValue), "^" . StrLower(InputValidator))) {
+              IsSingleCase := True
+              IsValidateBreak := False
+              break
+            }
           }
         }
 
@@ -3762,15 +3776,17 @@ Ligaturise(SmeltingMode := "InputBox") {
             Recipe := value.recipe
 
             if IsObject(Recipe) {
-              for _, recipe in Recipe {
-                if (Input == recipe) {
+              for _, recipeEntry in Recipe {
+                if (!IsSingleCase && Input == recipeEntry) ||
+                  (IsSingleCase && Input = recipeEntry) {
                   GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
                   IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
                   Found := True
                   break 3
                 }
               }
-            } else if (Input == Recipe) {
+            } else if (!IsSingleCase && Input == Recipe) ||
+              (IsSingleCase && Input = Recipe) {
               GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
               IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
               Found := True
@@ -3786,7 +3802,6 @@ Ligaturise(SmeltingMode := "InputBox") {
 
       Sleep 10
     }
-
 
     ih.Stop()
     if (!Found && !IsCancelledByUser) {
@@ -3877,6 +3892,7 @@ Ligaturise(SmeltingMode := "InputBox") {
   }
   return
 }
+
 Hotkey("<#<!" SCKeys["F1"], (*) => GroupActivator("Diacritics Primary", "F1"))
 Hotkey("<#<!" SCKeys["F2"], (*) => GroupActivator("Diacritics Secondary", "F2"))
 Hotkey("<#<!" SCKeys["F3"], (*) => GroupActivator("Diacritics Tertiary", "F3"))
@@ -3931,6 +3947,20 @@ ReplaceWithUnicode(Mode := "") {
 
 GetCharacterUnicode(symbol) {
   return Format("{:04X}", Ord(symbol))
+}
+
+RegExEscape(str) {
+  static specialChars := "\.*+?^${}()[]|/"
+
+  newStr := ""
+  for k, char in StrSplit(str) {
+    if InStr(specialChars, char) {
+      newStr .= "\" char
+    } else {
+      newStr .= char
+    }
+  }
+  return newStr
 }
 
 
