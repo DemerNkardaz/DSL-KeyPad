@@ -3237,6 +3237,43 @@ MapInsert(Characters,
       symbol: Chr(0x0183)
     },
     ;
+    "lat_c_let_c_acute", {
+      unicode: "{U+0106}", html: "&#262;", entity: "&Cacute;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная C с акутом", "capital C with acute"],
+      recipe: "C" . GetChar("acute"),
+      recipeAlt: "C" . DottedCircle . GetChar("acute"),
+      symbol: Chr(0x0106)
+    },
+    "lat_s_let_c_acute", {
+      unicode: "{U+0107}", html: "&#263;", entity: "&cacute;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная c с акутом", "small c with acute"],
+      recipe: "c" . GetChar("acute"),
+      recipeAlt: "c" . DottedCircle . GetChar("acute"),
+      symbol: Chr(0x0107)
+    },
+    "lat_c_let_c_circumflex", {
+      unicode: "{U+0108}", html: "&#264;", entity: "&Ccirc;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная C с циркумфлексом", "capital C with circumflex"],
+      recipe: "C" . GetChar("circumflex"),
+      recipeAlt: "C" . DottedCircle . GetChar("circumflex"),
+      symbol: Chr(0x0108)
+    },
+    "lat_s_let_c_circumflex", {
+      unicode: "{U+0109}", html: "&#265;", entity: "&ccirc;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная c с циркумфлексом", "small c with circumflex"],
+      recipe: "c" . GetChar("circumflex"),
+      recipeAlt: "c" . DottedCircle . GetChar("circumflex"),
+      symbol: Chr(0x0109)
+    },
+    ;
     ;
     ; * Letters Cyriillic
     "cyr_c_a_iotified", {
@@ -6253,6 +6290,66 @@ GuiButtonIcon(Handle, File, Index := 1, Options := '')
   Return IL_Add(normal_il, File, Index)
 }
 ;}
+;
+;? Special
+
+GetUnicodeName(char) {
+  char := SubStr(char, 1, 1)
+  python := ""
+  python .= "import unicodedata`n"
+  python .= "def get_unicode_name(char):`n"
+  python .= "    try:`n"
+  python .= "        return unicodedata.name(char)`n"
+  python .= "    except ValueError:`n"
+  python .= "        return 'Unknown character'`n`n"
+  python .= "with open('unicode_result.txt', 'w') as f:`n"
+  python .= "    f.write(get_unicode_name('" char "'))"
+
+  FileAppend(python, "temp_unicode.py", "UTF-8")
+  Sleep 25
+
+  RunWait("python temp_unicode.py", , "Hide")
+
+  Sleep 25
+
+  result := FileRead("unicode_result.txt", "UTF-8")
+
+  Sleep 25
+
+  FileDelete("unicode_result.txt")
+  FileDelete("temp_unicode.py")
+
+  return result
+}
+
+SendCharToPy(Mode := "") {
+  BackupClipboard := A_Clipboard
+  PromptValue := ""
+  A_Clipboard := ""
+
+  Send("^c")
+  Sleep 120
+  PromptValue := A_Clipboard
+
+  if (PromptValue != "") {
+    PromptValue := GetUnicodeName(PromptValue)
+    Sleep 50
+    if (Mode == "Copy") {
+      A_Clipboard := PromptValue
+      return
+    } else {
+      SendText(PromptValue)
+    }
+  }
+
+  A_Clipboard := BackupClipboard
+}
+
+
+HotKey("<#<+" SCKeys["PgUp"], (*) => SendCharToPy())
+HotKey("<#<^<+" SCKeys["PgUp"], (*) => SendCharToPy("Copy"))
+
+;
 ;Don’t remove ↓ or update duplication repair will not work
 ;This is marker for trim update file to avoid receiving multiple update code at once
 ;ApplicationEnd
