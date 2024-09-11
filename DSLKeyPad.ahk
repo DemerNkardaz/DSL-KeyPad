@@ -6302,22 +6302,22 @@ GetUnicodeName(char) {
   python .= "        return unicodedata.name(char)`n"
   python .= "    except ValueError:`n"
   python .= "        return 'Unknown character'`n`n"
-  python .= "with open('unicode_result.txt', 'w') as f:`n"
+  python .= "with open('DSL_temp-uniName.txt', 'w') as f:`n"
   python .= "    f.write(get_unicode_name('" char "'))"
 
-  FileAppend(python, "temp_unicode.py", "UTF-8")
+  FileAppend(python, "DSL_temp-uniName.py", "UTF-8")
   Sleep 25
 
-  RunWait("python temp_unicode.py", , "Hide")
-
-  Sleep 25
-
-  result := FileRead("unicode_result.txt", "UTF-8")
+  RunWait("python DSL_temp-uniName.py", , "Hide")
 
   Sleep 25
 
-  FileDelete("unicode_result.txt")
-  FileDelete("temp_unicode.py")
+  result := FileRead("DSL_temp-uniName.txt", "UTF-8")
+
+  Sleep 25
+
+  FileDelete("DSL_temp-uniName.txt")
+  FileDelete("DSL_temp-uniName.py")
 
   return result
 }
