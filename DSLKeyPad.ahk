@@ -548,6 +548,7 @@ SCKeys := Map(
   "Slash", "SC035",
   "Backslash", "SC02B",
   "Space", "SC039",
+  "Tab", "SC00F",
   "A", "SC01E",
   "B", "SC030",
   "C", "SC02E",
@@ -684,7 +685,7 @@ FormatHotKey(HKey, Modifier := "") {
     CtrlA, "LCtrl [a][ф]", CtrlB, "LCtrl [b][и]", CtrlC, "LCtrl [c][с]", CtrlD, "LCtrl [d][в]", CtrlE, "LCtrl [e][у]", CtrlF, "LCtrl [f][а]", CtrlG, "LCtrl [g][п]",
     CtrlH, "LCtrl [h][р]", CtrlI, "LCtrl [i][ш]", CtrlJ, "LCtrl [j][о]", CtrlK, "LCtrl [k][л]", CtrlL, "LCtrl [l][д]", CtrlM, "LCtrl [m][ь]", CtrlN, "LCtrl [n][т]",
     CtrlO, "LCtrl [o][щ]", CtrlP, "LCtrl [p][з]", CtrlQ, "LCtrl [q][й]", CtrlR, "LCtrl [r][к]", CtrlS, "LCtrl [s][ы]", CtrlT, "LCtrl [t][е]", CtrlU, "LCtrl [u][г]",
-    CtrlV, "LCtrl [v][м]", CtrlW, "LCtrl [w][ц]", CtrlX, "LCtrl [x][ч]", CtrlY, "LCtrl [y][н]", CtrlZ, "LCtrl [z][я]", SpaceKey, "[Space]", ExclamationMark, "[!]", CommercialAt, "[@]", QuotationDouble, "[" . QuotationDouble . "]",
+    CtrlV, "LCtrl [v][м]", CtrlW, "LCtrl [w][ц]", CtrlX, "LCtrl [x][ч]", CtrlY, "LCtrl [y][н]", CtrlZ, "LCtrl [z][я]", SpaceKey, "[Space]", ExclamationMark, "[!]", CommercialAt, "[@]", QuotationDouble, "[" . QuotationDouble . "]", Tabulation, "[Tab]"
   )
   for key, value in SpecialCommandsMap {
     if (HKey = key)
@@ -1499,6 +1500,15 @@ MapInsert(Characters,
       symbolAlt: Chr(0x00A0),
       symbolCustom: "underline"
     },
+    "tabulation", {
+      unicode: "{U+0009}", html: "&#9;", entity: "&Tab;",
+      tags: ["tab", "tabulation", "табуляция"],
+      group: ["Spaces", Tabulation],
+      show_on_fast_keys: True,
+      symbol: "[" . Chr(0x0009) . "]",
+      symbolAlt: Chr(0x0009),
+      symbolCustom: "underline"
+    },
     "emquad", {
       unicode: "{U+2001}", html: "&#8193;",
       LaTeX: "\qquad",
@@ -1638,6 +1648,15 @@ MapInsert(Characters,
       group: [["Special Characters", "Special Fast Secondary"], Backquote],
       show_on_fast_keys: True,
       symbol: Chr(0x2022)
+    },
+    "bullet_hyphen", {
+      unicode: "{U+2043}", html: "&#8259;", entity: "&hybull;",
+      altCode: "0149 7",
+      tags: ["hyphen bullet", "чёрточный булит"],
+      group: [["Special Characters", "Special Fast Secondary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [" Backquote "]",
+      symbol: Chr(0x2043)
     },
     "interpunct", {
       unicode: "{U+00B7}", html: "&#183;", entity: "&middot;",
@@ -1791,7 +1810,7 @@ MapInsert(Characters,
       group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "+"],
       show_on_fast_keys: True,
       alt_on_fast_keys: "LShift [=]",
-      recipe: "+-",
+      recipe: ["+-", "+" Chr(0x2212)],
       symbol: Chr(0x00B1)
     },
     "dotted_circle", {
@@ -1869,7 +1888,9 @@ MapInsert(Characters,
     "figure_dash", {
       unicode: "{U+2012}", html: "&#8210;",
       tags: ["figure dash", "цифровое тире"],
-      group: [["Dashes", "Smelting Special"], "6"],
+      group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "6"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt RShift [-]",
       recipe: "n-",
       symbol: Chr(0x2012)
     },
@@ -1878,7 +1899,7 @@ MapInsert(Characters,
       tags: ["hyphen", "дефис"],
       group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "7"],
       show_on_fast_keys: True,
-      alt_on_fast_keys: "RShift [-]",
+      alt_on_fast_keys: "LAlt [-]",
       recipe: "-",
       symbol: Chr(0x2010)
     },
@@ -1887,7 +1908,7 @@ MapInsert(Characters,
       tags: ["no-break hyphen", "неразрывный дефис"],
       group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "8"],
       show_on_fast_keys: True,
-      alt_on_fast_keys: "CapsLock RShift [-]",
+      alt_on_fast_keys: "LAlt LShift [-]",
       recipe: "0-",
       symbol: Chr(0x2011)
     },
@@ -2286,6 +2307,24 @@ MapInsert(Characters,
       recipe: "db",
       symbol: Chr(0x0238)
     },
+    "lat_s_lig_et", {
+      unicode: "{U+0026}", html: "&#38;", entity: "&amp;",
+      altCode: "38",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".et", "лигатура et", "ligature et", "амперсанд", "ampersand"],
+      recipe: "et",
+      symbol: Chr(0x0026)
+    },
+    "lat_s_lig_et_turned", {
+      unicode: "{U+214B}", html: "&#8523;",
+      altCode: "38",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".ett", "лигатура перевёрнутый et", "ligature turned et", "перевёрнутый амперсанд", "turned ampersand"],
+      recipe: ["et" . Chr(0x21BA), "&" . Chr(0x21BA)],
+      symbol: Chr(0x214B)
+    },
     "lat_s_lig_ff", {
       unicode: "{U+FB00}", html: "&#64256;",
       titlesAlt: True,
@@ -2435,16 +2474,36 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Ligatures"],
       tags: ["!ss", "лигатура SS", "ligature SS", "прописной эсцет", "capital eszett"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[S]",
       recipe: ["SS", Chr(0x017F) . "S"],
       symbol: Chr(0x1E9E)
     },
     "lat_s_lig_eszett", {
       unicode: "{U+00DF}", html: "&#223;", entity: "&szlig;",
       titlesAlt: True,
-      group: ["Latin Ligatures"],
+      group: [["Latin Ligatures"]],
       tags: [".ss", "лигатура ss", "ligature ss", "строчный эсцет", "small eszett"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[s]",
       recipe: ["ss", Chr(0x017F) . "s"],
       symbol: Chr(0x00DF)
+    },
+    "lat_c_lig_vy", {
+      unicode: "{U+A760}", html: "&#42848;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!vy", "лигатура VY", "ligature VY"],
+      recipe: "VY",
+      symbol: Chr(0xA760)
+    },
+    "lat_s_lig_vy", {
+      unicode: "{U+A761}", html: "&#42849;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".vy", "лигатура vy", "ligature vy"],
+      recipe: "vy",
+      symbol: Chr(0xA761)
     },
     ;
     ;
@@ -2882,7 +2941,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с циркумфлексом и акутом", "capital A with circumflex and acute"],
-      recipe: ["A" . GetChar("circumflex") . GetChar("acute"), Chr(0x0102) . GetChar("acute")],
+      recipe: ["A" . GetChar("circumflex") . GetChar("acute"), Chr(0x00C2) . GetChar("acute")],
       recipeAlt: ["A" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("acute"), Chr(0x00C2) . DottedCircle . GetChar("acute")],
       symbol: Chr(0x1EA4)
     },
@@ -2891,7 +2950,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с циркумфлексом и акутом", "small a with circumflex and acute"],
-      recipe: ["a" . GetChar("circumflex") . GetChar("acute"), Chr(0x0103) . GetChar("acute")],
+      recipe: ["a" . GetChar("circumflex") . GetChar("acute"), Chr(0x00E2) . GetChar("acute")],
       recipeAlt: ["a" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("acute"), Chr(0x00E2) . DottedCircle . GetChar("acute")],
       symbol: Chr(0x1EA5)
     },
@@ -2900,7 +2959,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с циркумфлексом и точкой снизу", "capital A with circumflex and dot below"],
-      recipe: ["A" . GetChar("circumflex") . GetChar("dot_below"), Chr(0x0102) . GetChar("dot_below")],
+      recipe: ["A" . GetChar("circumflex") . GetChar("dot_below"), Chr(0x00C2) . GetChar("dot_below")],
       recipeAlt: ["A" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("dot_below"), Chr(0x00C2) . DottedCircle . GetChar("dot_below")],
       symbol: Chr(0x1EAC)
     },
@@ -2909,7 +2968,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с циркумфлексом и точкой снизу", "small a with circumflex and dot below"],
-      recipe: ["a" . GetChar("circumflex") . GetChar("dot_below"), Chr(0x0103) . GetChar("dot_below")],
+      recipe: ["a" . GetChar("circumflex") . GetChar("dot_below"), Chr(0x00E2) . GetChar("dot_below")],
       recipeAlt: ["a" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("dot_below"), Chr(0x00E2) . DottedCircle . GetChar("dot_below")],
       symbol: Chr(0x1EAD)
     },
@@ -2918,7 +2977,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с циркумфлексом и грависом", "capital A with circumflex and grave"],
-      recipe: ["A" . GetChar("circumflex") . GetChar("grave"), Chr(0x0102) . GetChar("grave")],
+      recipe: ["A" . GetChar("circumflex") . GetChar("grave"), Chr(0x00C2) . GetChar("grave")],
       recipeAlt: ["A" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("grave"), Chr(0x00C2) . DottedCircle . GetChar("grave")],
       symbol: Chr(0x1EA6)
     },
@@ -2927,7 +2986,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с циркумфлексом и грависом", "small a with circumflex and grave"],
-      recipe: ["a" . GetChar("circumflex") . GetChar("grave"), Chr(0x0103) . GetChar("grave")],
+      recipe: ["a" . GetChar("circumflex") . GetChar("grave"), Chr(0x00E2) . GetChar("grave")],
       recipeAlt: ["a" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("grave"), Chr(0x00E2) . DottedCircle . GetChar("grave")],
       symbol: Chr(0x1EA7)
     },
@@ -2936,7 +2995,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с циркумфлексом и хвостиком сверху", "capital A with circumflex and hook above"],
-      recipe: ["A" . GetChar("circumflex") . GetChar("hook_above"), Chr(0x0102) . GetChar("hook_above")],
+      recipe: ["A" . GetChar("circumflex") . GetChar("hook_above"), Chr(0x00C2) . GetChar("hook_above")],
       recipeAlt: ["A" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("hook_above"), Chr(0x00C2) . DottedCircle . GetChar("hook_above")],
       symbol: Chr(0x1EA8)
     },
@@ -2945,7 +3004,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с циркумфлексом и хвостиком сверху", "small a with circumflex and hook above"],
-      recipe: ["a" . GetChar("circumflex") . GetChar("hook_above"), Chr(0x0103) . GetChar("hook_above")],
+      recipe: ["a" . GetChar("circumflex") . GetChar("hook_above"), Chr(0x00E2) . GetChar("hook_above")],
       recipeAlt: ["a" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("hook_above"), Chr(0x00E2) . DottedCircle . GetChar("hook_above")],
       symbol: Chr(0x1EA9)
     },
@@ -2954,7 +3013,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с циркумфлексом и тильдой", "capital A with circumflex and tilde"],
-      recipe: ["A" . GetChar("circumflex") . GetChar("tilde"), Chr(0x0102) . GetChar("tilde")],
+      recipe: ["A" . GetChar("circumflex") . GetChar("tilde"), Chr(0x00C2) . GetChar("tilde")],
       recipeAlt: ["A" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("tilde"), Chr(0x00C2) . DottedCircle . GetChar("tilde")],
       symbol: Chr(0x1EAA)
     },
@@ -2963,7 +3022,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с циркумфлексом и тильдой", "small a with circumflex and tilde"],
-      recipe: ["a" . GetChar("circumflex") . GetChar("tilde"), Chr(0x0103) . GetChar("tilde")],
+      recipe: ["a" . GetChar("circumflex") . GetChar("tilde"), Chr(0x00E2) . GetChar("tilde")],
       recipeAlt: ["a" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("tilde"), Chr(0x00E2) . DottedCircle . GetChar("tilde")],
       symbol: Chr(0x1EAB)
     },
@@ -3012,7 +3071,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с точкой сверху и макроном", "capital A with dot above and macron"],
-      recipe: ["A" . GetChar("dot_above") . GetChar("macron"), Chr(0x0102) . GetChar("macron")],
+      recipe: ["A" . GetChar("dot_above") . GetChar("macron"), Chr(0x0226) . GetChar("macron")],
       recipeAlt: ["A" . DottedCircle . GetChar("dot_above") . DottedCircle . GetChar("macron"), Chr(0x0226) . DottedCircle . GetChar("macron")],
       symbol: Chr(0x01E0)
     },
@@ -3021,7 +3080,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с точкой сверху и макроном", "small a with dot above and macron"],
-      recipe: ["a" . GetChar("dot_above") . GetChar("macron"), Chr(0x0103) . GetChar("macron")],
+      recipe: ["a" . GetChar("dot_above") . GetChar("macron"), Chr(0x0227) . GetChar("macron")],
       recipeAlt: ["a" . DottedCircle . GetChar("dot_above") . DottedCircle . GetChar("macron"), Chr(0x0227) . DottedCircle . GetChar("macron")],
       symbol: Chr(0x01E1)
     },
@@ -3070,7 +3129,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с диерезисом и макроном", "capital A with diaeresis and macron"],
-      recipe: ["A" . GetChar("diaeresis") . GetChar("macron"), Chr(0x0102) . GetChar("macron")],
+      recipe: ["A" . GetChar("diaeresis") . GetChar("macron"), Chr(0x00C4) . GetChar("macron")],
       recipeAlt: ["A" . DottedCircle . GetChar("diaeresis") . DottedCircle . GetChar("macron"), Chr(0x00C4) . DottedCircle . GetChar("macron")],
       symbol: Chr(0x01DE)
     },
@@ -3079,7 +3138,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с диерезисом и макроном", "small a with diaeresis and macron"],
-      recipe: ["a" . GetChar("diaeresis") . GetChar("macron"), Chr(0x0103) . GetChar("macron")],
+      recipe: ["a" . GetChar("diaeresis") . GetChar("macron"), Chr(0x00E4) . GetChar("macron")],
       recipeAlt: ["a" . DottedCircle . GetChar("diaeresis") . DottedCircle . GetChar("macron"), Chr(0x00E4) . DottedCircle . GetChar("macron")],
       symbol: Chr(0x01DF)
     },
@@ -3191,7 +3250,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с кольцом сверху и акутом", "capital A with ring above and acute"],
-      recipe: ["A" . GetChar("ring_above") . GetChar("acute"), Chr(0x0102) . GetChar("acute")],
+      recipe: ["A" . GetChar("ring_above") . GetChar("acute"), Chr(0x00C5) . GetChar("acute")],
       recipeAlt: ["A" . DottedCircle . GetChar("ring_above") . DottedCircle . GetChar("acute"), Chr(0x00C5) . DottedCircle . GetChar("acute")],
       symbol: Chr(0x01FA)
     },
@@ -3200,7 +3259,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с кольцом сверху и акутом", "small a with ring above and acute"],
-      recipe: ["a" . GetChar("ring_above") . GetChar("acute"), Chr(0x0103) . GetChar("acute")],
+      recipe: ["a" . GetChar("ring_above") . GetChar("acute"), Chr(0x00E5) . GetChar("acute")],
       recipeAlt: ["a" . DottedCircle . GetChar("ring_above") . DottedCircle . GetChar("acute"), Chr(0x00E5) . DottedCircle . GetChar("acute")],
       symbol: Chr(0x01FB)
     },
@@ -3451,6 +3510,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная C с циркумфлексом", "capital C with circumflex"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [C]",
       recipe: "C" . GetChar("circumflex"),
       recipeAlt: "C" . DottedCircle . GetChar("circumflex"),
       symbol: Chr(0x0108)
@@ -3460,6 +3521,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная c с циркумфлексом", "small c with circumflex"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [c]",
       recipe: "c" . GetChar("circumflex"),
       recipeAlt: "c" . DottedCircle . GetChar("circumflex"),
       symbol: Chr(0x0109)
@@ -3469,6 +3532,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная C с гачеком", "capital C with caron"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt LShift [C]",
       recipe: "C" . GetChar("caron"),
       recipeAlt: "C" . DottedCircle . GetChar("caron"),
       symbol: Chr(0x010C)
@@ -3478,6 +3543,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная c с гачеком", "small c with caron"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt LShift [c]",
       recipe: "c" . GetChar("caron"),
       recipeAlt: "c" . DottedCircle . GetChar("caron"),
       symbol: Chr(0x010D)
@@ -3487,6 +3554,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная C с седилью", "capital C with cedilla"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt RShift [C]",
       recipe: "C" . GetChar("cedilla"),
       recipeAlt: "C" . DottedCircle . GetChar("cedilla"),
       symbol: Chr(0x00C7)
@@ -3496,6 +3565,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная c с седилью", "small c with cedilla"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt RShift [c]",
       recipe: "c" . GetChar("cedilla"),
       recipeAlt: "c" . DottedCircle . GetChar("cedilla"),
       symbol: Chr(0x00E7)
@@ -3505,7 +3576,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная C с седилью", "capital C with cedilla"],
-      recipe: ["C" . GetChar("cedilla") . GetChar("acute"), Chr(0x0102) . GetChar("acute")],
+      recipe: ["C" . GetChar("cedilla") . GetChar("acute"), Chr(0x00C7) . GetChar("acute")],
       recipeAlt: ["C" . DottedCircle . GetChar("cedilla") . DottedCircle . GetChar("acute"), Chr(0x00C7) . DottedCircle . GetChar("acute")],
       symbol: Chr(0x1E08)
     },
@@ -3514,7 +3585,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная c с седилью", "small c with cedilla"],
-      recipe: ["c" . GetChar("cedilla") . GetChar("acute"), Chr(0x0102) . GetChar("acute")],
+      recipe: ["c" . GetChar("cedilla") . GetChar("acute"), Chr(0x00E7) . GetChar("acute")],
       recipeAlt: ["c" . DottedCircle . GetChar("cedilla") . DottedCircle . GetChar("acute"), Chr(0x00E7) . DottedCircle . GetChar("acute")],
       symbol: Chr(0x1E09)
     },
@@ -3845,6 +3916,28 @@ MapInsert(Characters,
       recipeAlt: "d" . DottedCircle . GetChar("stroke_short"),
       symbol: Chr(0x0111)
     },
+    "lat_c_let_d_stroke_s2", {
+      unicode: "{U+A7C7}", html: "&#42951;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная D со штрихом посередине", "capital D with short stroke overlay"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[D]",
+      recipe: "D" . GetChar("stroke_long"),
+      recipeAlt: "D" . DottedCircle . GetChar("stroke_long"),
+      symbol: Chr(0xA7C7)
+    },
+    "lat_s_let_d_stroke_s2", {
+      unicode: "{U+A7C8}", html: "&#42952;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная d со штрихом посередине", "small d with short stroke overlay"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[d]",
+      recipe: "d" . GetChar("stroke_long"),
+      recipeAlt: "d" . DottedCircle . GetChar("stroke_long"),
+      symbol: Chr(0xA7C8)
+    },
     "lat_s_let_d_tilde_overlay", {
       unicode: "{U+1D6D}", html: "&#7533;",
       titlesAlt: True,
@@ -3869,6 +3962,473 @@ MapInsert(Characters,
       tags: ["строчная d с чертой сверху", "small d with topbar"],
       recipe: "d" . GetChar("arrow_up"),
       symbol: Chr(0x018C)
+    },
+    "lat_c_let_e_acute", {
+      unicode: "{U+00C9}", html: "&#201;", entity: "&Eacute;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с акутом", "capital E with acute"],
+      recipe: "E" . GetChar("acute"),
+      recipeAlt: "E" . DottedCircle . GetChar("acute"),
+      symbol: Chr(0x00C9)
+    },
+    "lat_s_let_e_acute", {
+      unicode: "{U+00E9}", html: "&#233;", entity: "&eacute;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с акутом", "small e with acute"],
+      recipe: "e" . GetChar("acute"),
+      recipeAlt: "e" . DottedCircle . GetChar("acute"),
+      symbol: Chr(0x00E9)
+    },
+    "lat_c_let_e_breve", {
+      unicode: "{U+0114}", html: "&#276;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с краткой", "capital E with breve"],
+      recipe: "E" . GetChar("breve"),
+      recipeAlt: "E" . DottedCircle . GetChar("breve"),
+      symbol: Chr(0x0114)
+    },
+    "lat_s_let_e_breve", {
+      unicode: "{U+0115}", html: "&#277;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с краткой", "small e with breve"],
+      recipe: "e" . GetChar("breve"),
+      recipeAlt: "e" . DottedCircle . GetChar("breve"),
+      symbol: Chr(0x0115)
+    },
+    "lat_c_let_e_breve_cedilla", {
+      unicode: "{U+1E1C}", html: "&#7708;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с краткой и акутом", "capital E with breve and cedilla"],
+      recipe: ["E" . GetChar("breve") . GetChar("cedilla"), Chr(0x0114) . GetChar("cedilla")],
+      recipeAlt: ["E" . DottedCircle . GetChar("breve") . DottedCircle . GetChar("cedilla"), Chr(0x0114) . DottedCircle . GetChar("cedilla")],
+      symbol: Chr(0x1E1C)
+    },
+    "lat_s_let_e_breve_cedilla", {
+      unicode: "{U+1E1D}", html: "&#7709;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с краткой и акутом", "small e with breve and cedilla"],
+      recipe: ["e" . GetChar("breve") . GetChar("cedilla"), Chr(0x0115) . GetChar("cedilla")],
+      recipeAlt: ["e" . DottedCircle . GetChar("breve") . DottedCircle . GetChar("cedilla"), Chr(0x0115) . DottedCircle . GetChar("cedilla")],
+      symbol: Chr(0x1E1D)
+    },
+    "lat_c_let_e_breve_inverted", {
+      unicode: "{U+0206}", html: "&#518;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с перевёрнутой краткой", "capital E with inverted breve"],
+      recipe: "E" . GetChar("breve_inverted"),
+      recipeAlt: "E" . DottedCircle . GetChar("breve_inverted"),
+      symbol: Chr(0x0206)
+    },
+    "lat_s_let_e_breve_inverted", {
+      unicode: "{U+0207}", html: "&#519;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с перевёрнутой краткой", "small e with inverted breve"],
+      recipe: "e" . GetChar("breve_inverted"),
+      recipeAlt: "e" . DottedCircle . GetChar("breve_inverted"),
+      symbol: Chr(0x0207)
+    },
+    "lat_c_let_e_circumflex", {
+      unicode: "{U+00CA}", html: "&#202;", entity: "&Ecirc;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с циркумфлексом", "capital E with circumflex"],
+      recipe: "E" . GetChar("circumflex"),
+      recipeAlt: "E" . DottedCircle . GetChar("circumflex"),
+      symbol: Chr(0x00CA)
+    },
+    "lat_s_let_e_circumflex", {
+      unicode: "{U+00EA}", html: "&#234;", entity: "&ecirc;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с циркумфлексом", "small e with circumflex"],
+      recipe: "e" . GetChar("circumflex"),
+      recipeAlt: "e" . DottedCircle . GetChar("circumflex"),
+      symbol: Chr(0x00EA)
+    },
+    "lat_c_let_e_circumflex_acute", {
+      unicode: "{U+1EBE}", html: "&#7870;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с циркумфлексом и акутом", "capital E with circumflex and acute"],
+      recipe: ["E" . GetChar("circumflex") . GetChar("acute"), Chr(0x00CA) . GetChar("acute")],
+      recipeAlt: ["E" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("acute"), Chr(0x00CA) . DottedCircle . GetChar("acute")],
+      symbol: Chr(0x1EBE)
+    },
+    "lat_s_let_e_circumflex_acute", {
+      unicode: "{U+1EBF}", html: "&#7871;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с циркумфлексом и акутом", "small e with circumflex and acute"],
+      recipe: ["e" . GetChar("circumflex") . GetChar("acute"), Chr(0x00EA) . GetChar("acute")],
+      recipeAlt: ["e" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("acute"), Chr(0x00EA) . DottedCircle . GetChar("acute")],
+      symbol: Chr(0x1EBF)
+    },
+    "lat_c_let_e_circumflex_dot_below", {
+      unicode: "{U+1EC6}", html: "&#7878;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с циркумфлексом и точкой снизу", "capital E with circumflex and dot below"],
+      recipe: ["E" . GetChar("circumflex") . GetChar("dot_below"), Chr(0x00CA) . GetChar("dot_below")],
+      recipeAlt: ["E" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("dot_below"), Chr(0x00CA) . DottedCircle . GetChar("dot_below")],
+      symbol: Chr(0x1EC6)
+    },
+    "lat_s_let_e_circumflex_dot_below", {
+      unicode: "{U+1EC7}", html: "&#7879;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с циркумфлексом и точкой снизу", "small e with circumflex and dot below"],
+      recipe: ["e" . GetChar("circumflex") . GetChar("dot_below"), Chr(0x00EA) . GetChar("dot_below")],
+      recipeAlt: ["e" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("dot_below"), Chr(0x00EA) . DottedCircle . GetChar("dot_below")],
+      symbol: Chr(0x1EC7)
+    },
+    "lat_c_let_e_circumflex_grave", {
+      unicode: "{U+1EC0}", html: "&#7872;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с циркумфлексом и грависом", "capital E with circumflex and grave"],
+      recipe: ["E" . GetChar("circumflex") . GetChar("grave"), Chr(0x00CA) . GetChar("grave")],
+      recipeAlt: ["E" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("grave"), Chr(0x00CA) . DottedCircle . GetChar("grave")],
+      symbol: Chr(0x1EC0)
+    },
+    "lat_s_let_e_circumflex_grave", {
+      unicode: "{U+1EC1}", html: "&#7873;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с циркумфлексом и грависом", "small e with circumflex and grave"],
+      recipe: ["e" . GetChar("circumflex") . GetChar("grave"), Chr(0x00EA) . GetChar("grave")],
+      recipeAlt: ["e" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("grave"), Chr(0x00EA) . DottedCircle . GetChar("grave")],
+      symbol: Chr(0x1EC1)
+    },
+    "lat_c_let_e_circumflex_hook_above", {
+      unicode: "{U+1EC2}", html: "&#7874;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с циркумфлексом и хвостиком сверху", "capital E with circumflex and hook above"],
+      recipe: ["E" . GetChar("circumflex") . GetChar("hook_above"), Chr(0x00CA) . GetChar("hook_above")],
+      recipeAlt: ["E" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("hook_above"), Chr(0x00CA) . DottedCircle . GetChar("hook_above")],
+      symbol: Chr(0x1EC2)
+    },
+    "lat_s_let_e_circumflex_hook_above", {
+      unicode: "{U+1EC3}", html: "&#7875;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с циркумфлексом и хвостиком сверху", "small e with circumflex and hook above"],
+      recipe: ["e" . GetChar("circumflex") . GetChar("hook_above"), Chr(0x00EA) . GetChar("hook_above")],
+      recipeAlt: ["e" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("hook_above"), Chr(0x00EA) . DottedCircle . GetChar("hook_above")],
+      symbol: Chr(0x1EC3)
+    },
+    "lat_c_let_e_circumflex_tilde", {
+      unicode: "{U+1EC4}", html: "&#7876;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с циркумфлексом и тильдой", "capital E with circumflex and tilde"],
+      recipe: ["E" . GetChar("circumflex") . GetChar("tilde"), Chr(0x00CA) . GetChar("tilde")],
+      recipeAlt: ["E" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("tilde"), Chr(0x00CA) . DottedCircle . GetChar("tilde")],
+      symbol: Chr(0x1EC4)
+    },
+    "lat_s_let_e_circumflex_tilde", {
+      unicode: "{U+1EC5}", html: "&#7877;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с циркумфлексом и тильдой", "small e with circumflex and tilde"],
+      recipe: ["e" . GetChar("circumflex") . GetChar("tilde"), Chr(0x00EA) . GetChar("tilde")],
+      recipeAlt: ["e" . DottedCircle . GetChar("circumflex") . DottedCircle . GetChar("tilde"), Chr(0x00EA) . DottedCircle . GetChar("tilde")],
+      symbol: Chr(0x1EC5)
+    },
+    "lat_c_let_e_caron", {
+      unicode: "{U+011A}", html: "&#282;", entity: "&Ecaron;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с гачеком", "capital E with caron"],
+      recipe: "E" . GetChar("caron"),
+      recipeAlt: "E" . DottedCircle . GetChar("caron"),
+      symbol: Chr(0x011A)
+    },
+    "lat_s_let_e_caron", {
+      unicode: "{U+011B}", html: "&#283;", entity: "&ecaron;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с гачеком", "small e with caron"],
+      recipe: "e" . GetChar("caron"),
+      recipeAlt: "e" . DottedCircle . GetChar("caron"),
+      symbol: Chr(0x011B)
+    },
+    "lat_c_let_e_cedilla", {
+      unicode: "{U+0228}", html: "&#552;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с седилью", "capital E with cedilla"],
+      recipe: "E" . GetChar("cedilla"),
+      recipeAlt: "E" . DottedCircle . GetChar("cedilla"),
+      symbol: Chr(0x0228)
+    },
+    "lat_s_let_e_cedilla", {
+      unicode: "{U+0229}", html: "&#553;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с седилью", "small e with cedilla"],
+      recipe: "e" . GetChar("cedilla"),
+      recipeAlt: "e" . DottedCircle . GetChar("cedilla"),
+      symbol: Chr(0x0229)
+    },
+    "lat_c_let_e_dot_above", {
+      unicode: "{U+0116}", html: "&#278;", entity: "&Edot;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с точкой сверху", "capital E with dot above"],
+      recipe: "E" . GetChar("dot_above"),
+      recipeAlt: "E" . DottedCircle . GetChar("dot_above"),
+      symbol: Chr(0x0116)
+    },
+    "lat_s_let_e_dot_above", {
+      unicode: "{U+0117}", html: "&#279;", entity: "&edot;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с точкой сверху", "small e with dot above"],
+      recipe: "e" . GetChar("dot_above"),
+      recipeAlt: "e" . DottedCircle . GetChar("dot_above"),
+      symbol: Chr(0x0117)
+    },
+    "lat_c_let_e_dot_below", {
+      unicode: "{U+1EB8}", html: "&#7864;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с точкой снизу", "capital E with dot below"],
+      recipe: "E" . GetChar("dot_below"),
+      recipeAlt: "E" . DottedCircle . GetChar("dot_below"),
+      symbol: Chr(0x1EB8)
+    },
+    "lat_s_let_e_dot_below", {
+      unicode: "{U+1EB9}", html: "&#7865;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с точкой снизу", "small e with dot below"],
+      recipe: "e" . GetChar("dot_below"),
+      recipeAlt: "e" . DottedCircle . GetChar("dot_below"),
+      symbol: Chr(0x1EB9)
+    },
+    "lat_c_let_e_diaeresis", {
+      unicode: "{U+00CB}", html: "&#203;", entity: "&Euml;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с диерезисом", "capital EA with diaeresis"],
+      recipe: "E" . GetChar("diaeresis"),
+      recipeAlt: "E" . DottedCircle . GetChar("diaeresis"),
+      symbol: Chr(0x00CB)
+    },
+    "lat_s_let_e_diaeresis", {
+      unicode: "{U+00EB}", html: "&#235;", entity: "&euml;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с диерезисом", "small e with diaeresis"],
+      recipe: "e" . GetChar("diaeresis"),
+      recipeAlt: "e" . DottedCircle . GetChar("diaeresis"),
+      symbol: Chr(0x00EB)
+    },
+    "lat_c_let_e_grave", {
+      unicode: "{U+00C8}", html: "&#200;", entity: "&Egrave;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с грависом", "capital E with grave"],
+      recipe: "E" . GetChar("grave"),
+      recipeAlt: "E" . DottedCircle . GetChar("grave"),
+      symbol: Chr(0x00C8)
+    },
+    "lat_s_let_e_grave", {
+      unicode: "{U+00E8}", html: "&#232;", entity: "&egrave;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с грависом", "small e with grave"],
+      recipe: "e" . GetChar("grave"),
+      recipeAlt: "e" . DottedCircle . GetChar("grave"),
+      symbol: Chr(0x00E8)
+    },
+    "lat_c_let_e_grave_double", {
+      unicode: "{U+0204}", html: "&#516;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с двойным грависом", "capital E with double grave"],
+      recipe: "E" . GetChar("grave_double"),
+      recipeAlt: "E" . DottedCircle . GetChar("grave_double"),
+      symbol: Chr(0x0204)
+    },
+    "lat_s_let_e_grave_double", {
+      unicode: "{U+0205}", html: "&#517;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с двойным грависом", "small e with double grave"],
+      recipe: "e" . GetChar("grave_double"),
+      recipeAlt: "e" . DottedCircle . GetChar("grave_double"),
+      symbol: Chr(0x0205)
+    },
+    "lat_c_let_e_hook_above", {
+      unicode: "{U+1EBA}", html: "&#7866;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с хвостиком сверху", "capital E with hook above"],
+      recipe: "E" . GetChar("hook_above"),
+      recipeAlt: "E" . DottedCircle . GetChar("hook_above"),
+      symbol: Chr(0x1EBA)
+    },
+    "lat_s_let_e_hook_above", {
+      unicode: "{U+1EBB}", html: "&#7867;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с хвостиком сверху", "small e with hook above"],
+      recipe: "e" . GetChar("hook_above"),
+      recipeAlt: "e" . DottedCircle . GetChar("hook_above"),
+      symbol: Chr(0x1EBB)
+    },
+    "lat_s_let_e_retroflex_hook", {
+      unicode: "{U+1D92}", html: "&#7570;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с ретрофлексным крюком", "small e with retroflex hook"],
+      recipe: "e" . GetChar("retroflex_hook_below"),
+      recipeAlt: "e" . DottedCircle . GetChar("retroflex_hook_below"),
+      symbol: Chr(0x1D92)
+    },
+    "lat_s_let_e_notch", {
+      unicode: "{U+2C78}", html: "&#11384;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с бороздой", "small e with notch"],
+      recipe: "e" . GetChar("arrow_right"),
+      symbol: Chr(0x2C78)
+    },
+    "lat_c_let_e_macron", {
+      unicode: "{U+0112}", html: "&#274;", entity: "&Emacr;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с макроном", "capital E with macron"],
+      recipe: "E" . GetChar("macron"),
+      recipeAlt: "E" . DottedCircle . GetChar("macron"),
+      symbol: Chr(0x0112)
+    },
+    "lat_s_let_e_macron", {
+      unicode: "{U+0113}", html: "&#275;", entity: "&emacr;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с макроном", "small e with macron"],
+      recipe: "e" . GetChar("macron"),
+      recipeAlt: "e" . DottedCircle . GetChar("macron"),
+      symbol: Chr(0x0113)
+    },
+    "lat_c_let_e_macron_acute", {
+      unicode: "{U+1E16}", html: "&#7702;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с макроном и акутом", "capital E with macron and acute"],
+      recipe: ["E" . GetChar("macron") . GetChar("acute"), Chr(0x0112) . GetChar("acute")],
+      recipeAlt: ["E" . DottedCircle . GetChar("macron") . DottedCircle . GetChar("acute"), Chr(0x0112) . DottedCircle . GetChar("acute")],
+      symbol: Chr(0x1E16)
+    },
+    "lat_s_let_e_macron_acute", {
+      unicode: "{U+1E17}", html: "&#7703;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с макроном и акутом", "small e with macron and acute"],
+      recipe: ["e" . GetChar("macron") . GetChar("acute"), Chr(0x0113) . GetChar("acute")],
+      recipeAlt: ["e" . DottedCircle . GetChar("macron") . DottedCircle . GetChar("acute"), Chr(0x0113) . DottedCircle . GetChar("acute")],
+      symbol: Chr(0x1E17)
+    },
+    "lat_c_let_e_macron_grave", {
+      unicode: "{U+1E14}", html: "&#7700;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с макроном и грависом", "capital E with macron and grave"],
+      recipe: ["E" . GetChar("macron") . GetChar("grave"), Chr(0x0112) . GetChar("grave")],
+      recipeAlt: ["E" . DottedCircle . GetChar("macron") . DottedCircle . GetChar("grave"), Chr(0x0112) . DottedCircle . GetChar("grave")],
+      symbol: Chr(0x1E14)
+    },
+    "lat_s_let_e_macron_grave", {
+      unicode: "{U+1E15}", html: "&#7701;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с макроном и грависом", "small e with macron and grave"],
+      recipe: ["e" . GetChar("macron") . GetChar("grave"), Chr(0x0113) . GetChar("grave")],
+      recipeAlt: ["e" . DottedCircle . GetChar("macron") . DottedCircle . GetChar("grave"), Chr(0x0113) . DottedCircle . GetChar("grave")],
+      symbol: Chr(0x1E15)
+    },
+    "lat_c_let_e_solidus_long", {
+      unicode: "{U+0246}", html: "&#582;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с наклонной чертой", "capital E with solidus"],
+      recipe: "E" . GetChar("solidus_long"),
+      recipeAlt: "E" . DottedCircle . GetChar("solidus_long"),
+      symbol: Chr(0x0246)
+    },
+    "lat_s_let_e_solidus_long", {
+      unicode: "{U+0247}", html: "&#583;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с наклонной чертой", "small e with solidus"],
+      recipe: "e" . GetChar("solidus_long"),
+      recipeAlt: "e" . DottedCircle . GetChar("solidus_long"),
+      symbol: Chr(0x0247)
+    },
+    "lat_c_let_e_ogonek", {
+      unicode: "{U+0118}", html: "&#280;", entity: "&Eogon;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с огонэком", "capital E with ogonek"],
+      recipe: "E" . GetChar("ogonek"),
+      recipeAlt: "E" . DottedCircle . GetChar("ogonek"),
+      symbol: Chr(0x0118)
+    },
+    "lat_s_let_e_ogonek", {
+      unicode: "{U+0119}", html: "&#281;", entity: "&eogon;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с огонэком", "small e with ogonek"],
+      recipe: "e" . GetChar("ogonek"),
+      recipeAlt: "e" . DottedCircle . GetChar("ogonek"),
+      symbol: Chr(0x0119)
+    },
+    "lat_c_let_e_tilde", {
+      unicode: "{U+1EBC}", html: "&#7868;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с тильдой", "capital E with tilde"],
+      recipe: "A" . GetChar("tilde"),
+      recipeAlt: "E" . DottedCircle . GetChar("tilde"),
+      symbol: Chr(0x1EBC)
+    },
+    "lat_s_let_e_tilde", {
+      unicode: "{U+1EBD}", html: "&#7869;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с тильдой", "small e with tilde"],
+      recipe: "e" . GetChar("tilde"),
+      recipeAlt: "e" . DottedCircle . GetChar("tilde"),
+      symbol: Chr(0x1EBD)
+    },
+    "lat_c_let_e_tilde_below", {
+      unicode: "{U+1E1A}", html: "&#7706;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["прописная E с тильдой", "capital E with tilde"],
+      recipe: "A" . GetChar("tilde_below"),
+      recipeAlt: "E" . DottedCircle . GetChar("tilde_below"),
+      symbol: Chr(0x1E1A)
+    },
+    "lat_s_let_e_tilde_below", {
+      unicode: "{U+1E1B}", html: "&#7707;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная e с тильдой", "small e with tilde"],
+      recipe: "e" . GetChar("tilde_below"),
+      recipeAlt: "e" . DottedCircle . GetChar("tilde_below"),
+      symbol: Chr(0x1E1B)
     },
     ;
     ;
@@ -5783,17 +6343,25 @@ Constructor()
 
   DSLContent["BindList"].TabFastKeys := []
 
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Diacritics Fast Primary", "LCtrl LAlt", False, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Primary", , True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Diacritics Fast Secondary", "RAlt", True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Secondary", , True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Asian Quotes", , True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Other Signs", , True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Spaces", , True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Latin Extended", , True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Latin Accented", , True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Ligatures & Letters", , True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Letters", , False, True)
+  for groupName in [
+    "Diacritics Fast Primary",
+    "Special Fast Primary",
+    "Diacritics Fast Secondary",
+    "Special Fast Secondary",
+    "Asian Quotes",
+    "Other Signs",
+    "Spaces",
+    "Latin Extended",
+    "Latin Ligatures",
+    "Latin Accented",
+    "Cyrillic Ligatures & Letters",
+    "Cyrillic Letters",
+  ] {
+    AddSeparator := (groupName = "Diacritics Fast Primary" || groupName = "Latin Ligatures") ? False : True
+    GroupKey := (groupName = "Diacritics Fast Primary") ? "LCtrl LAlt" : (groupName = "Diacritics Fast Secondary") ? "RAlt" : ""
+
+    InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, groupName, GroupKey, AddSeparator, True)
+  }
 
 
   FastKeysLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
@@ -6567,6 +7135,7 @@ FastKeysList :=
     "<^>!>+" SCKeys["0"], (*) => HandleFastKey("zero_width_space"),
     "<^>!>+" SCKeys["Minus"], (*) => HandleFastKey("word_joiner"),
     "<^>!>+" SCKeys["Equals"], (*) => HandleFastKey("figure_space"),
+    "<^>!>+" SCKeys["Tab"], (*) => HandleFastKey("tabulation"),
     ;
     "<^>!" SCKeys["Space"], (*) => HandleFastKey("no_break_space"),
     ;
@@ -6586,6 +7155,10 @@ FastKeysList :=
     "<^>!<+>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_tilde", "lat_s_let_a_tilde"], ["", ""], True),
     ;
     "<^>!" SCKeys["B"], (*) => LangSeparatedKey(["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"], ["", ""], True),
+    ;
+    "<^>!<!" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"], ["", ""], True),
+    "<^>!<!<+" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_caron", "lat_s_let_c_caron"], ["", ""], True),
+    "<^>!<!>+" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"], ["", ""], True),
     ;
     "<^>!" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"], ["", ""], True),
     "<^>!<!" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_eth", "lat_s_let_d_eth"], ["", ""], True),
@@ -6611,11 +7184,14 @@ FastKeysList :=
     "<^>!<+" SCKeys["Equals"], (*) => HandleFastKey("plusminus"),
     "<^>!" SCKeys["Minus"], (*) => CapsSeparatedKey("three_emdash", "emdash"),
     "<^>!<+" SCKeys["Minus"], (*) => CapsSeparatedKey("two_emdash", "endash"),
-    "<^>!>+" SCKeys["Minus"], (*) => CapsSeparatedKey("no_break_hyphen", "hyphen"),
+    "<^>!<!" SCKeys["Minus"], (*) => CapsSeparatedKey("", "hyphen"),
+    "<^>!<!<+" SCKeys["Minus"], (*) => CapsSeparatedKey("", "no_break_hyphen"),
+    "<^>!<!>+" SCKeys["Minus"], (*) => CapsSeparatedKey("", "figure_dash"),
     "<^>!" SCKeys["Slash"], (*) => HandleFastKey("ellipsis"),
     "<^>!>+" SCKeys["Slash"], (*) => HandleFastKey("fraction_slash"),
     "<^>!" SCKeys["8"], (*) => HandleFastKey("multiplication"),
     "<^>!" SCKeys["Tilde"], (*) => HandleFastKey("bullet"),
+    "<^>!<!" SCKeys["Tilde"], (*) => HandleFastKey("bullet_hyphen"),
     "<^>!<+" SCKeys["Tilde"], (*) => HandleFastKey("interpunct"),
     ;
     "<^>!" SCKeys["ArrLeft"], (*) => HandleFastKey("arrow_left"),
@@ -6877,33 +7453,34 @@ GuiButtonIcon(Handle, File, Index := 1, Options := '')
 ;
 ;? Special
 
-GetUnicodeName(char) {
-  char := SubStr(char, 1, 1)
-  python := ""
-  python .= "import unicodedata`n"
-  python .= "def get_unicode_name(char):`n"
-  python .= "    try:`n"
-  python .= "        return unicodedata.name(char)`n"
-  python .= "    except ValueError:`n"
-  python .= "        return 'Unknown character'`n`n"
-  python .= "with open('DSL_temp-uniName.txt', 'w') as f:`n"
-  python .= "    f.write(get_unicode_name('" char "'))"
 
-  FileAppend(python, "DSL_temp-uniName.py", "UTF-8")
+GetUnicodeName(Char) {
+  Char := SubStr(Char, 1, 1)
+  Python := ""
+  Python .= "import unicodedata`n"
+  Python .= "def get_unicode_name(char):`n"
+  Python .= "    try:`n"
+  Python .= "        return unicodedata.name(char)`n"
+  Python .= "    except ValueError:`n"
+  Python .= "        return 'Unknown character'`n`n"
+  Python .= "with open('DSL_temp-uniName.txt', 'w') as f:`n"
+  Python .= "    f.write(get_unicode_name('" Char "'))"
+
+  FileAppend(Python, "DSL_temp-uniName.py", "UTF-8")
   Sleep 25
 
   RunWait("python DSL_temp-uniName.py", , "Hide")
 
   Sleep 25
 
-  result := FileRead("DSL_temp-uniName.txt", "UTF-8")
+  Result := FileRead("DSL_temp-uniName.txt", "UTF-8")
 
   Sleep 25
 
   FileDelete("DSL_temp-uniName.txt")
   FileDelete("DSL_temp-uniName.py")
 
-  return result
+  return Result
 }
 
 SendCharToPy(Mode := "") {
