@@ -8,7 +8,6 @@ CodeRu := "00000419"
 
 ChangeKeyboardLayout(LocaleID, LayoutID := 1) {
   LanguageCode := ""
-
   if LocaleID == "en" {
     LanguageCode := CodeEn
   } else if LocaleID == "ru" {
@@ -1664,8 +1663,31 @@ MapInsert(Characters,
     "degree", {
       unicode: "{U+00B0}", html: "&#176;", entity: "&deg;",
       tags: ["degree", "градус"],
-      group: ["Special Characters", ["d", "в"]],
+      group: [["Special Characters", "Special Fast Secondary"], ["d", "в"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[0]",
       symbol: Chr(0x00B0)
+    },
+    "celsius", {
+      unicode: "{U+2103}", html: "&#8451;",
+      tags: ["celsius", "градус Цельсия"],
+      group: [["Special Characters", "Smelting Special"]],
+      recipe: Chr(0x00B0) . "C",
+      symbol: Chr(0x2103)
+    },
+    "fahrenheit", {
+      unicode: "{U+2109}", html: "&#8457;",
+      tags: ["fahrenheit", "градус по Фаренгейту"],
+      group: [["Special Characters", "Smelting Special"]],
+      recipe: Chr(0x00B0) . "F",
+      symbol: Chr(0x2109)
+    },
+    "kelvin", {
+      unicode: "{U+212A}", html: "&#8490;",
+      tags: ["kelvin", "Кельвин"],
+      group: [["Special Characters", "Smelting Special"]],
+      recipe: Chr(0x00B0) . "K",
+      symbol: Chr(0x212A)
     },
     "dagger", {
       unicode: "{U+2020}", html: "&#8224;", entity: "&dagger;",
@@ -2256,6 +2278,14 @@ MapInsert(Characters,
       recipe: "ay",
       symbol: Chr(0xA73D)
     },
+    "lat_s_lig_db", {
+      unicode: "{U+0238}", html: "&#568;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".db", "лигатура db", "ligature db"],
+      recipe: "db",
+      symbol: Chr(0x0238)
+    },
     "lat_s_lig_ff", {
       unicode: "{U+FB00}", html: "&#64256;",
       titlesAlt: True,
@@ -2320,6 +2350,14 @@ MapInsert(Characters,
       recipe: "ij",
       symbol: Chr(0x0133)
     },
+    "lat_s_lig_lb", {
+      unicode: "{U+2114}", html: "&#8468;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".lb", "лигатура lb", "ligature lb"],
+      recipe: "lb",
+      symbol: Chr(0x2114)
+    },
     "lat_c_lig_ll", {
       unicode: "{U+1EFA}", html: "&#7930;",
       titlesAlt: True,
@@ -2335,6 +2373,22 @@ MapInsert(Characters,
       tags: [".ll", "лигатура ll", "ligature ll"],
       recipe: "ll",
       symbol: Chr(0x1EFB)
+    },
+    "lat_c_lig_oi", {
+      unicode: "{U+01A2}", html: "&#418;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: ["!oi", "лигатура OI", "ligature OI"],
+      recipe: "OI",
+      symbol: Chr(0x01A2)
+    },
+    "lat_s_lig_oi", {
+      unicode: "{U+01A3}", html: "&#419;",
+      titlesAlt: True,
+      group: ["Latin Ligatures"],
+      tags: [".oi", "лигатура oi", "ligature oi"],
+      recipe: "oi",
+      symbol: Chr(0x01A3)
     },
     "lat_c_lig_oe", {
       unicode: "{U+0152}", html: "&#338;", entity: "&OElig;",
@@ -2594,7 +2648,7 @@ MapInsert(Characters,
       recipe: "ie",
       symbol: Chr(0xAB61)
     },
-    "lat_c_let_th", {
+    "lat_c_let_thorn", {
       unicode: "{U+00DE}", html: "&#222;", entity: "&THORN;",
       titlesAlt: True,
       group: ["Latin Extended"],
@@ -2602,13 +2656,29 @@ MapInsert(Characters,
       recipe: "TH",
       symbol: Chr(0x00DE)
     },
-    "lat_s_let_th", {
+    "lat_s_let_thorn", {
       unicode: "{U+00FE}", html: "&#254;", entity: "&thorn;",
       titlesAlt: True,
       group: ["Latin Extended"],
       tags: [".th", "строчный торн", "small thorn"],
       recipe: "th",
       symbol: Chr(0x00FE)
+    },
+    "lat_c_let_wynn", {
+      unicode: "{U+01F7}", html: "&#503;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: ["!wy", "прописной винн", "capital wynn"],
+      recipe: "WY",
+      symbol: Chr(0x01F7)
+    },
+    "lat_s_let_wynn", {
+      unicode: "{U+01BF}", html: "&#447;",
+      titlesAlt: True,
+      group: ["Latin Extended"],
+      tags: [".wy", "строчный винн", "small wynn"],
+      recipe: "wy",
+      symbol: Chr(0x01BF)
     },
     "lat_c_let_nj", {
       unicode: "{U+014A}", html: "&#330;", entity: "&ENG;",
@@ -2660,6 +2730,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с краткой", "capital A with breve"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[A]",
       recipe: "A" . GetChar("breve"),
       recipeAlt: "A" . DottedCircle . GetChar("breve"),
       symbol: Chr(0x0102)
@@ -2669,6 +2741,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с краткой", "small a with breve"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[a]",
       recipe: "a" . GetChar("breve"),
       recipeAlt: "a" . DottedCircle . GetChar("breve"),
       symbol: Chr(0x0103)
@@ -2786,6 +2860,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с циркумфлексом", "capital A with circumflex"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [A]",
       recipe: "A" . GetChar("circumflex"),
       recipeAlt: "A" . DottedCircle . GetChar("circumflex"),
       symbol: Chr(0x00C2)
@@ -2795,6 +2871,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с циркумфлексом", "small a with circumflex"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [a]",
       recipe: "a" . GetChar("circumflex"),
       recipeAlt: "a" . DottedCircle . GetChar("circumflex"),
       symbol: Chr(0x00E2)
@@ -2894,6 +2972,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с гачеком", "capital A with caron"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt LShift [A]",
       recipe: "A" . GetChar("caron"),
       recipeAlt: "A" . DottedCircle . GetChar("caron"),
       symbol: Chr(0x01CD)
@@ -2903,6 +2983,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с гачеком", "small a with caron"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt LShift [a]",
       recipe: "a" . GetChar("caron"),
       recipeAlt: "a" . DottedCircle . GetChar("caron"),
       symbol: Chr(0x01CE)
@@ -2966,6 +3048,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с диерезисом", "capital A with diaeresis"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [A]",
       recipe: "A" . GetChar("diaeresis"),
       recipeAlt: "A" . DottedCircle . GetChar("diaeresis"),
       symbol: Chr(0x00C4)
@@ -2975,6 +3059,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с диерезисом", "small a with diaeresis"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [a]",
       recipe: "a" . GetChar("diaeresis"),
       recipeAlt: "a" . DottedCircle . GetChar("diaeresis"),
       symbol: Chr(0x00E4)
@@ -3065,6 +3151,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с макроном", "capital A with macron"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [A]",
       recipe: "A" . GetChar("macron"),
       recipeAlt: "A" . DottedCircle . GetChar("macron"),
       symbol: Chr(0x0100)
@@ -3074,6 +3162,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с макроном", "small a with macron"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "RShift [a]",
       recipe: "a" . GetChar("macron"),
       recipeAlt: "a" . DottedCircle . GetChar("macron"),
       symbol: Chr(0x0101)
@@ -3155,6 +3245,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с огонэком", "capital A with ogonek"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt RShift [A]",
       recipe: "A" . GetChar("ogonek"),
       recipeAlt: "A" . DottedCircle . GetChar("ogonek"),
       symbol: Chr(0x0104)
@@ -3164,6 +3256,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с огонэком", "small a with ogonek"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt RShift [a]",
       recipe: "a" . GetChar("ogonek"),
       recipeAlt: "a" . DottedCircle . GetChar("ogonek"),
       symbol: Chr(0x0105)
@@ -3173,6 +3267,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с тильдой", "capital A with tilde"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift RShift [A]",
       recipe: "A" . GetChar("tilde"),
       recipeAlt: "A" . DottedCircle . GetChar("tilde"),
       symbol: Chr(0x00C3)
@@ -3182,6 +3278,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с тильдой", "small a with tilde"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift RShift [a]",
       recipe: "a" . GetChar("tilde"),
       recipeAlt: "a" . DottedCircle . GetChar("tilde"),
       symbol: Chr(0x00E3)
@@ -3248,6 +3346,22 @@ MapInsert(Characters,
       recipeAlt: "b" . DottedCircle . GetChar("palatalized_hook_below"),
       symbol: Chr(0x1D80)
     },
+    "lat_c_let_b_flourish", {
+      unicode: "{U+A796}", html: "&#42902;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная B с завитком", "small B with flourish"],
+      recipe: "B" . GetChar("arrow_left_ushaped"),
+      symbol: Chr(0xA796)
+    },
+    "lat_s_let_b_flourish", {
+      unicode: "{U+A797}", html: "&#42903;",
+      titlesAlt: True,
+      group: ["Latin Accented"],
+      tags: ["строчная b с завитком", "small b with flourish"],
+      recipe: "b" . GetChar("arrow_left_ushaped"),
+      symbol: Chr(0xA797)
+    },
     "lat_c_let_b_line_below", {
       unicode: "{U+1E06}", html: "&#7686;",
       titlesAlt: True,
@@ -3271,6 +3385,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная B со штрихом", "capital B with stroke"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[B]",
       recipe: "B" . GetChar("stroke_short"),
       recipeAlt: "B" . DottedCircle . GetChar("stroke_short"),
       symbol: Chr(0x0243)
@@ -3280,6 +3396,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная b со штрихом", "small b with stroke"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[b]",
       recipe: "b" . GetChar("stroke_short"),
       recipeAlt: "b" . DottedCircle . GetChar("stroke_short"),
       symbol: Chr(0x0180)
@@ -3609,6 +3727,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная Эт", "capital Eth"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [D]",
       recipe: "D" . GetChar("solidus_short"),
       recipeAlt: "D" . DottedCircle . GetChar("solidus_short"),
       symbol: Chr(0x00D0)
@@ -3618,6 +3738,8 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная эт", "small eth"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LAlt [d]",
       recipe: "d" . GetChar("solidus_short"),
       recipeAlt: "d" . DottedCircle . GetChar("solidus_short"),
       symbol: Chr(0x00F0)
@@ -3706,15 +3828,19 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная D со штрихом", "capital D with stroke"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[D]",
       recipe: "D" . GetChar("stroke_short"),
       recipeAlt: "D" . DottedCircle . GetChar("stroke_short"),
       symbol: Chr(0x0110)
     },
-    "lat_s_let_b_stroke_short", {
+    "lat_s_let_d_stroke_short", {
       unicode: "{U+0111}", html: "&#273;", entity: "&dstrok;",
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная d со штрихом", "small d with stroke"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "[d]",
       recipe: "d" . GetChar("stroke_short"),
       recipeAlt: "d" . DottedCircle . GetChar("stroke_short"),
       symbol: Chr(0x0111)
@@ -5654,59 +5780,20 @@ Constructor()
 
 
   Tab.UseTab(6)
-  DSLContent["BindList"].FastKeysLV := [
-    ["", "LCtrl LAlt", "", ""],
-    [Map("ru", "Акут", "en", "Acute"), "[a][ф]", "◌́", UniTrim(CharCodes.acute[1])],
-    [Map("ru", "Двойной Акут", "en", "Double Acute"), "LShift [a][ф]", "◌̋", UniTrim(CharCodes.dacute[1])],
-    [Map("ru", "Кратка", "en", "Breve"), "[b][и]", "◌̆", UniTrim(CharCodes.breve[1])],
-    [Map("ru", "Перевёрнутая кратка", "en", "Inverted Breve"), "LShift [b][и]", "◌̑", UniTrim(CharCodes.ibreve[1])],
-    [Map("ru", "Циркумфлекс", "en", "Circumflex"), "[c][с]", "◌̂", UniTrim(CharCodes.circumflex[1])],
-    [Map("ru", "Гачек", "en", "Caron"), "LShift [c][с]", "◌̌", UniTrim(CharCodes.caron[1])],
-    [Map("ru", "Точка сверху", "en", "Dot Above"), "[d][в]", "◌̇", UniTrim(CharCodes.dotabove[1])],
-    [Map("ru", "Диерезис", "en", "Diaeresis"), "LShift [d][в]", "◌̈", UniTrim(CharCodes.diaeresis[1])],
-    [Map("ru", "Гравис", "en", "Grave"), "[g][п]", "◌̀", UniTrim(CharCodes.grave[1])],
-    [Map("ru", "Двойной гравис", "en", "Double Grave"), "LShift [g][п]", "◌̏", UniTrim(CharCodes.dgrave[1])],
-    [Map("ru", "Хвостик сверху", "en", "Hook Above"), "[h][р]", "◌̉", UniTrim(CharCodes.hookabove[1])],
-    [Map("ru", "Рожок", "en", "Horn"), "LShift [h][р]", "◌̛", UniTrim(CharCodes.horn[1])],
-    ["", "", "", ""],
-    ["", "RAlt RShift", "", ""],
-    [Map("ru", "Круглая шпация", "en", "Em Space"), "[1]", "[ ]", UniTrim(CharCodes.emsp[1])],
-    [Map("ru", "Полукруглая шпация", "en", "En Space"), "[2]", "[ ]", UniTrim(CharCodes.ensp[1])],
-    [Map("ru", "⅓ Круглой шпации", "en", "⅓ Em Space"), "[3]", "[ ]", UniTrim(CharCodes.emsp13[1])],
-    [Map("ru", "¼ Круглой шпации", "en", "¼ Em Space"), "[4]", "[ ]", UniTrim(CharCodes.emsp13[1])],
-    [Map("ru", "Узкий пробел", "en", "Thin Space"), "[5]", "[ ]", UniTrim(CharCodes.thinsp[1])],
-    [Map("ru", "⅙ Круглой шпации", "en", "⅙ Em Space"), "[6]", "[ ]", UniTrim(CharCodes.emsp16[1])],
-    [Map("ru", "Узкий неразрывный пробел", "en", "Narrow No-Break Space"), "[7]", "[ ]", UniTrim(CharCodes.nnbsp[1])],
-    [Map("ru", "Волосяная шпация", "en", "Hair Space"), "[8]", "[ ]", UniTrim(CharCodes.hairsp[1])],
-    [Map("ru", "Пунктуационный пробел", "en", "Punctuation Space"), "[9]", "[ ]", UniTrim(CharCodes.puncsp[1])],
-    [Map("ru", "Пробел нулевой ширины", "en", "Zero-Width Space"), "[0]", "[​]", UniTrim(CharCodes.zwsp[1])],
-    [Map("ru", "Соединитель слов", "en", "Word Joiner"), "[-]", "[⁠]", UniTrim(CharCodes.wj[1])],
-    [Map("ru", "Цифровой пробел", "en", "Figure Space"), "[=]", "[ ]", UniTrim(CharCodes.numsp[1])],
-    [Map("ru", "Неразрывный пробел", "en", "No-Break Space"), "[Space]", "[ ]", UniTrim(CharCodes.nbsp[1])],
-    ["", "", "", ""],
-    [Map("ru", "Верхний индекс", "en", "Superscript"), "LCtrl LAlt [1…0]", "¹²³⁴⁵⁶⁷⁸⁹⁰", ""],
-    [Map("ru", "Нижний индекс", "en", "Subscript"), "LCtrl LAlt [1…0]", "₁₂₃₄₅₆₇₈₉₀", ""],
-    ["", "", "", ""],
-    [Map("ru", "Дробная черта ✅", "en", "Fraction Slash ✅"), "LCtrl LAlt [Num/]", "⁄", UniTrim(CharCodes.fractionslash[1])],
-    [Map("ru", "Даггер ✅", "en", "Dagger ✅"), "RAlt [Num/]", "†", UniTrim(CharCodes.dagger[1])],
-    [Map("ru", "Двойной даггер ✅", "en", "Double Dagger ✅"), "RAlt RShift [Num/]", "‡", UniTrim(CharCodes.ddagger[1])],
-    [Map("ru", "Соединитель графем ✅", "en", "Grapheme Joiner ✅"), "LShift RShift [g]", "◌͏", UniTrim(CharCodes.grapjoiner[1])],
-  ]
-
-  LocaliseArrayKeys(DSLContent["BindList"].FastKeysLV)
 
   DSLContent["BindList"].TabFastKeys := []
 
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Diacritics Fast Primary", "LCtrl LAlt", False, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Primary", "", True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Primary", , True, True)
   InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Diacritics Fast Secondary", "RAlt", True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Secondary", "", True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Asian Quotes", "", True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Other Signs", "", True, True)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Spaces", "", True, True,)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Latin Extended", "", True, True,)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Ligatures & Letters", "", True, True,)
-  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Letters", "", False, True,)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Special Fast Secondary", , True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Asian Quotes", , True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Other Signs", , True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Spaces", , True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Latin Extended", , True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Latin Accented", , True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Ligatures & Letters", , True, True)
+  InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, "Cyrillic Letters", , False, True)
 
 
   FastKeysLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
@@ -6490,8 +6577,27 @@ FastKeysList :=
     "<^>!" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger"),
     "<^>!>+" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger_double"),
     ;
+    "<^>!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_breve", "lat_s_let_a_breve"], ["", ""], True),
+    "<^>!<!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"], ["", ""], True),
+    "<^>!<!<+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_caron", "lat_s_let_a_caron"], ["", ""], True),
+    "<^>!<!>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"], ["", ""], True),
+    "<^>!>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_macron", "lat_s_let_a_macron"], ["", ""], True),
+    "<^>!<+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"], ["", ""], True),
+    "<^>!<+>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_tilde", "lat_s_let_a_tilde"], ["", ""], True),
+    ;
+    "<^>!" SCKeys["B"], (*) => LangSeparatedKey(["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"], ["", ""], True),
+    ;
+    "<^>!" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"], ["", ""], True),
+    "<^>!<!" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_eth", "lat_s_let_d_eth"], ["", ""], True),
+    "<^>!>+" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_cedilla", "lat_s_let_d_cedilla"], ["", ""], True),
+    "<^>!<+" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_caron", "lat_s_let_d_caron"], ["", ""], True),
+    "<^>!<+>+" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"], ["", ""], True),
+    ;
+    "<^>!<+" SCKeys["S"], (*) => LangSeparatedKey(["lat_c_lig_eszett", "lat_s_lig_eszett"], ["", ""], True),
+    ;
     "<^>!" SCKeys["E"], (*) => LangSeparatedKey(["", ""], ["cyr_c_yus_big", "cyr_s_yus_big"], True),
     "<^>!" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_yus_little", "cyr_s_yus_little"], True),
+    "<^>!<+" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_a_iotified", "cyr_s_a_iotified"], True),
     "<^>!" SCKeys["T"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
     "<^>!" SCKeys["Apostrophe"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
     "<^>!" SCKeys["I"], (*) => LangSeparatedKey(["", "lat_s_let_i_dotless"], ["cyr_c_let_i", "cyr_s_let_i"], True),
@@ -6531,6 +6637,7 @@ FastKeysList :=
     "<^>!<!<+" SCKeys["Comma"], (*) => HandleFastKey("asian_left_title"),
     "<^>!<!" SCKeys["Dot"], (*) => HandleFastKey("asian_double_right_title"),
     "<^>!<!<+" SCKeys["Dot"], (*) => HandleFastKey("asian_right_title"),
+    "<^>!" SCKeys["0"], (*) => HandleFastKey("degree"),
     ;
     "RAlt", (*) => ProceedCompose(),
   ]
