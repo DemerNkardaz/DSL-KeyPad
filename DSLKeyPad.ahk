@@ -709,18 +709,24 @@ FormatHotKey(HKey, Modifier := "") {
   return MakeString
 }
 
-GetChar(CharacterName) {
-  Result := ""
+GetChar(CharacterNames*) {
+  Output := ""
 
-  for characterEntry, value in Characters {
-    TrimValue := RegExReplace(characterEntry, "^\S+\s+")
-    if (TrimValue = CharacterName) {
-      Result := Chr("0x" . UniTrim(value.unicode))
-      break
+  for _, Character in CharacterNames {
+    GetCharacterSequence(Character)
+  }
+
+  GetCharacterSequence(CharacterName) {
+    for characterEntry, value in Characters {
+      TrimValue := RegExReplace(characterEntry, "^\S+\s+")
+      if (TrimValue = CharacterName) {
+        Output .= PasteUnicode(value.unicode)
+        break
+      }
     }
   }
 
-  return Result
+  return Output
 }
 
 CallChar(CharacterName, GetValue) {
@@ -2839,7 +2845,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["прописная A с краткой и акутом", "capital A with breve and acute"],
-      recipe: ["A" . GetChar("breve") . GetChar("acute"), Chr(0x0102) . GetChar("acute")],
+      recipe: ["A" . GetChar("breve", "acute"), Chr(0x0102) . GetChar("acute")],
       recipeAlt: ["A" . DottedCircle . GetChar("breve") . DottedCircle . GetChar("acute"), Chr(0x0102) . DottedCircle . GetChar("acute")],
       symbol: Chr(0x1EAE)
     },
@@ -2848,7 +2854,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Latin Accented"],
       tags: ["строчная a с краткой и акутом", "small a with breve and acute"],
-      recipe: ["a" . GetChar("breve") . GetChar("acute"), Chr(0x0103) . GetChar("acute")],
+      recipe: ["a" . GetChar("breve", "acute"), Chr(0x0103) . GetChar("acute")],
       recipeAlt: ["a" . DottedCircle . GetChar("breve") . DottedCircle . GetChar("acute"), Chr(0x0103) . DottedCircle . GetChar("acute")],
       symbol: Chr(0x1EAF)
     },
@@ -5557,29 +5563,92 @@ SendAltNumpad(CharacterCode) {
   Send("{Alt Up}")
 }
 
+ParagraphizeSelection(Mode) {
+  BackupClipboard := A_Clipboard
+  PromptValue := ""
+  A_Clipboard := ""
+
+  Send("^c")
+  ClipWait(50, 1)
+  PromptValue := A_Clipboard
+  A_Clipboard := ""
+
+  if (PromptValue != "") {
+    TotalLines := 0
+    ModifiedValue := ""
+    SplittedLines := StrSplit(PromptValue, "`r`n")
+
+    for index in SplittedLines {
+      TotalLines++
+    }
+
+    CurrentLine := 0
+    for line in SplittedLines {
+      CurrentLine++
+      EndLine := CurrentLine < TotalLines ? "`r`n" : ""
+      if Mode = "Emspace" {
+        ModifiedValue .= GetChar("emsp") . line . EndLine
+      }
+    }
+
+    A_Clipboard := ModifiedValue
+    ClipWait(250, 1)
+    Sleep 1000
+    Send("^v")
+
+    ;SendText(ModifiedValue)
+  }
+
+  Sleep 1000
+  A_Clipboard := BackupClipboard
+}
+
+
 QuotatizeSelection(Mode) {
   BackupClipboard := A_Clipboard
   PromptValue := ""
   A_Clipboard := ""
 
   Send("^c")
-  Sleep 120
+  ClipWait(50, 1)
   PromptValue := A_Clipboard
+  A_Clipboard := ""
 
   if (PromptValue != "") {
+    france_left := GetChar("france_left")
+    france_right := GetChar("france_right")
+    quote_left_low_double := GetChar("quote_left_low_double")
+    quote_left_double := GetChar("quote_left_double")
+    quote_right_double := GetChar("quote_right_double")
+    quote_left_single := GetChar("quote_left_single")
+    quote_right_single := GetChar("quote_right_single")
+
+
     if Mode = "France" {
-      PromptValue := GetChar("france_left") . PromptValue . GetChar("france_right")
+      PromptValue := RegExReplace(PromptValue, RegExEscape(france_left), quote_left_low_double)
+      PromptValue := RegExReplace(PromptValue, RegExEscape(france_right), quote_left_double)
+
+      PromptValue := france_left . PromptValue . france_right
     } else if Mode = "Paw" {
-      PromptValue := GetChar("quote_left_low_double") . PromptValue . GetChar("quote_left_double")
+      PromptValue := quote_left_low_double . PromptValue . quote_left_double
     } else if Mode = "Double" {
-      PromptValue := GetChar("quote_left_double") . PromptValue . GetChar("quote_right_double")
+      PromptValue := RegExReplace(PromptValue, RegExEscape(quote_left_double), quote_left_single)
+      PromptValue := RegExReplace(PromptValue, RegExEscape(quote_right_double), quote_right_single)
+
+      PromptValue := quote_left_double . PromptValue . quote_right_double
     } else if Mode = "Single" {
-      PromptValue := GetChar("quote_left_single") . PromptValue . GetChar("quote_right_single")
+      PromptValue := quote_left_single . PromptValue . quote_right_single
     }
 
-    SendText(PromptValue)
+    A_Clipboard := PromptValue
+    ClipWait(250, 1)
+    Sleep 250
+    Send("^v")
+
+    ;SendText(PromptValue)
   }
 
+  Sleep 1000
   A_Clipboard := BackupClipboard
 }
 
@@ -6296,6 +6365,8 @@ Constructor() {
   Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
   Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
   Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
+  Command_textprocessing := CommandsTree.Add(ReadLocale("func_label_textprocessing"))
+  Command_tp_quotes := CommandsTree.Add(ReadLocale("func_label_tp_quotes"), Command_textprocessing)
   Command_lcoverage := CommandsTree.Add(ReadLocale("func_label_coverage"))
   Command_lro := CommandsTree.Add(ReadLocale("func_label_coverage_ro"), Command_lcoverage)
 
@@ -6889,6 +6960,8 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
     "func_label_fastkeys",
     "func_label_inputtoggle",
     "func_label_notifs",
+    "func_label_textprocessing",
+    "func_label_tp_quotes",
     "func_label_coverage",
     "func_label_coverage_ro",
   ]
@@ -7212,6 +7285,7 @@ FastKeysList :=
     "<^<!" SCKeys["Numpad2"], (*) => QuotatizeSelection("Paw"),
     "<^<!" SCKeys["Numpad3"], (*) => QuotatizeSelection("Double"),
     "<^<!" SCKeys["Numpad4"], (*) => QuotatizeSelection("Single"),
+    "<^<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection("Emspace"),
     ;
     "<^<!" SCKeys["Minus"], (*) => HandleFastKey("softhyphen"),
     "<^<!<+" SCKeys["Minus"], (*) => HandleFastKey("minus"),
