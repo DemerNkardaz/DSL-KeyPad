@@ -186,6 +186,8 @@ DefaultConfig := [
 	["Settings", "UserLanguage", ""],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
+	["CustomRules", "GREPDialogAttribution", ""],
+	["CustomRules", "GREPThisEmdash", ""],
 	["LatestPrompts", "LaTeX", ""],
 	["LatestPrompts", "Unicode", ""],
 	["LatestPrompts", "Altcode", ""],
@@ -5570,19 +5572,23 @@ SendAltNumpad(CharacterCode) {
 
 }
 
-GREPRules := Map(
-	"dialogue_emdash", {
-		grep: "([.,!?…])\s—\s",
-		replace: "$1" . GetChar("no_break_space", "emdash", "no_break_space")
-	},
-		"this_emdash", {
-			grep: "([^.,!?…])\s—\s",
-			replace: "$1" . GetChar("no_break_space", "emdash", "space")
-		}
-)
-
 
 GREPizeSelection(GetCollaborative := False) {
+	CustomDialogue := (IniRead(ConfigFile, "CustomRules", "GREPDialogAttribution", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPDialogAttribution", "") : "no_break_space"
+	CustomThsiEmdash := (IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") : "no_break_space"
+
+	GREPRules := Map(
+		"dialogue_emdash", {
+			grep: "([.,!?" GetChar("ellipsis") "])\s" GetChar("emdash") "\s",
+			replace: "$1" . GetChar(CustomDialogue, "emdash", CustomDialogue)
+		},
+			"this_emdash", {
+				grep: "([^.,!?" GetChar("ellipsis") "…])\s" GetChar("emdash") "\s",
+				replace: "$1" . GetChar(CustomThsiEmdash, "emdash", "space")
+			}
+	)
+
+
 	BackupClipboard := A_Clipboard
 	if !GetCollaborative {
 		PromptValue := ""
@@ -6479,6 +6485,7 @@ Constructor() {
 	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
 	Command_textprocessing := CommandsTree.Add(ReadLocale("func_label_textprocessing"))
 	Command_tp_paragraph := CommandsTree.Add(ReadLocale("func_label_tp_paragraph"), Command_textprocessing)
+	Command_tp_grep := CommandsTree.Add(ReadLocale("func_label_tp_grep"), Command_textprocessing)
 	Command_tp_quotes := CommandsTree.Add(ReadLocale("func_label_tp_quotes"), Command_textprocessing)
 	Command_lcoverage := CommandsTree.Add(ReadLocale("func_label_coverage"))
 	Command_lro := CommandsTree.Add(ReadLocale("func_label_coverage_ro"), Command_lcoverage)
@@ -7079,6 +7086,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_textprocessing",
 		"func_label_tp_quotes",
 		"func_label_tp_paragraph",
+		"func_label_tp_grep",
 		"func_label_coverage",
 		"func_label_coverage_ro",
 	]
