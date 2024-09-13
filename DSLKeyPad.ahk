@@ -1388,6 +1388,10 @@ MapInsert(Characters,
 		;
 		;
 		; ? Шпации
+		"space", {
+			unicode: "{U+0020}", html: "&#32;",
+			symbol: Chr(0x0020)
+		},
 		"emsp", {
 			unicode: "{U+2003}", html: "&#8195;", entity: "&emsp;",
 			tags: ["em space", "emspace", "emsp", "круглая шпация"],
@@ -5567,8 +5571,16 @@ SendAltNumpad(CharacterCode) {
 }
 
 GREPRules := Map(
-	"dialogue_emdash", ""
+	"dialogue_emdash", {
+		grep: "([.,!?…])\s—\s",
+		replace: "$1" . GetChar("no_break_space", "emdash", "no_break_space")
+	},
+		"this_emdash", {
+			grep: "([^.,!?…])\s—\s",
+			replace: "$1" . GetChar("no_break_space", "emdash", "space")
+		}
 )
+
 
 GREPizeSelection(GetCollaborative := False) {
 	BackupClipboard := A_Clipboard
@@ -5587,6 +5599,14 @@ GREPizeSelection(GetCollaborative := False) {
 
 	if (PromptValue != "") {
 
+		for _, rule in GREPRules {
+			PromptValue := RegExReplace(PromptValue, rule.grep, rule.replace)
+		}
+
+		A_Clipboard := PromptValue
+		ClipWait(250, 1)
+		Sleep 1000
+		Send("^v")
 	}
 
 	Sleep 1000
@@ -6023,6 +6043,8 @@ Hotkey("<#<!<+" SCKeys["Q"], (*) => LangSeparatedCall(
 	() => QuotatizeSelection("Single"),
 	() => QuotatizeSelection("Paw")))
 Hotkey("<#<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection("Emspace"))
+Hotkey("<#<!" SCKeys["NumpadDot"], (*) => GREPizeSelection())
+Hotkey("<^>!" SCKeys["NumpadDot"], (*) => GREPizeSelection(True))
 
 
 ReplaceWithUnicode(Mode := "") {
