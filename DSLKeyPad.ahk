@@ -5678,6 +5678,31 @@ QuotatizeSelection(Mode) {
 		quote_right_single := GetChar("quote_right_single")
 
 
+		TempSpace := ""
+		CheckFor := [
+			SpaceKey,
+			GetChar("emsp"),
+			GetChar("ensp"),
+			GetChar("emsp13"),
+			GetChar("emsp14"),
+			GetChar("thinspace"),
+			GetChar("emsp16"),
+			GetChar("narrow_no_break_space"),
+			GetChar("hairspace"),
+			GetChar("punctuation_space"),
+			GetChar("figure_space"),
+			GetChar("tabulation"),
+			GetChar("no_break_space"),
+		]
+
+		for space in CheckFor {
+			if (PromptValue ~= space . "$") {
+				TempSpace := space
+				PromptValue := RegExReplace(PromptValue, space . "$", "")
+				break
+			}
+		}
+
 		if Mode = "France" {
 			PromptValue := RegExReplace(PromptValue, RegExEscape(france_left), quote_left_low_double)
 			PromptValue := RegExReplace(PromptValue, RegExEscape(france_right), quote_left_double)
@@ -5694,7 +5719,7 @@ QuotatizeSelection(Mode) {
 			PromptValue := quote_left_single . PromptValue . quote_right_single
 		}
 
-		A_Clipboard := PromptValue
+		A_Clipboard := PromptValue . TempSpace
 		ClipWait(250, 1)
 		Sleep 250
 		Send("^v")
@@ -5989,6 +6014,16 @@ Hotkey("<#<!" SCKeys["PgUp"], (*) => FindCharacterPage())
 Hotkey("<#<!" SCKeys["PgDn"], (*) => ReplaceWithUnicode())
 Hotkey("<#<+" SCKeys["PgDn"], (*) => ReplaceWithUnicode("Hex"))
 Hotkey("<#<!" SCKeys["Home"], (*) => OpenPanel())
+
+
+Hotkey("<#<!" SCKeys["Q"], (*) => LangSeparatedCall(
+	() => QuotatizeSelection("Double"),
+	() => QuotatizeSelection("France")))
+Hotkey("<#<!<+" SCKeys["Q"], (*) => LangSeparatedCall(
+	() => QuotatizeSelection("Single"),
+	() => QuotatizeSelection("Paw")))
+Hotkey("<#<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection("Emspace"))
+
 
 ReplaceWithUnicode(Mode := "") {
 	BackupClipboard := A_Clipboard
@@ -7349,17 +7384,10 @@ FastKeysList :=
 		"<^<!<+" SCKeys["X"], (*) => HandleFastKey("x_below"),
 		"<^<!" SCKeys["Z"], (*) => HandleFastKey("zigzag_above"),
 		;
-		"<#<!" SCKeys["Q"], (*) => LangSeparatedCall(
-			() => QuotatizeSelection("Double"),
-			() => QuotatizeSelection("France")),
-		"<#<!<+" SCKeys["Q"], (*) => LangSeparatedCall(
-			() => QuotatizeSelection("Single"),
-			() => QuotatizeSelection("Paw")),
 		;"<^<!" SCKeys["Numpad1"], (*) => QuotatizeSelection("France"),
 		;"<^<!" SCKeys["Numpad2"], (*) => QuotatizeSelection("Paw"),
 		;"<^<!" SCKeys["Numpad3"], (*) => QuotatizeSelection("Double"),
 		;"<^<!" SCKeys["Numpad4"], (*) => QuotatizeSelection("Single"),
-		"<#<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection("Emspace"),
 		;
 		"<^<!" SCKeys["Minus"], (*) => HandleFastKey("softhyphen"),
 		"<^<!<+" SCKeys["Minus"], (*) => HandleFastKey("minus"),
