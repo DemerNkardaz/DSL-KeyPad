@@ -614,6 +614,7 @@ SCKeys := Map(
   "RCtrl", "SC11D",
   "RAlt", "SC138",
   "Backspace", "SC00E",
+  "Enter", "SC01C",
   "ArrLeft", "SC14B",
   "ArrUp", "SC148",
   "ArrRight", "SC14D",
@@ -719,6 +720,18 @@ GetChar(CharacterName) {
     }
   }
 
+  return Result
+}
+
+CallChar(CharacterName, GetValue) {
+  Result := ""
+  for characterEntry, value in Characters {
+    TrimValue := RegExReplace(characterEntry, "^\S+\s+")
+    if (TrimValue = CharacterName) {
+      Result := value.%GetValue%
+      break
+    }
+  }
   return Result
 }
 
@@ -1524,6 +1537,23 @@ MapInsert(Characters,
       symbol: "[" . Chr(0x2000) . "]",
       symbolAlt: Chr(0x2000),
       symbolCustom: "underline"
+    },
+    ;
+    ;
+    ; ? Sys Group
+    "carriage_return", {
+      unicode: "{U+000D}", html: "&#13;",
+      tags: ["carriage return", "возврат каретки"],
+      group: ["Sys Group"],
+      show_on_fast_keys: True,
+      symbol: Chr(0x21B5),
+    },
+    "new_line", {
+      unicode: "{U+000A}", html: "&#10;",
+      tags: ["new line", "перевод строки"],
+      group: ["Sys Group"],
+      show_on_fast_keys: True,
+      symbol: Chr(0x21B4),
     },
     ;
     ;
@@ -4876,6 +4906,27 @@ MapInsert(Characters,
 
 CharactersCount := GetMapCount(Characters) - 2
 
+MapInsert(Characters,
+  "misc_crlf_emspace", {
+    unicode: CallChar("carriage_return", "unicode"), html:
+      CallChar("carriage_return", "html") .
+      CallChar("new_line", "html") .
+      CallChar("emsp", "html"),
+    group: ["Misc"],
+    show_on_fast_keys: True,
+    alt_on_fast_keys: "[Enter]",
+    symbol: CallChar("carriage_return", "symbol")
+  },
+    "misc_lf_emspace", {
+      unicode: CallChar("new_line", "unicode"), html:
+        CallChar("new_line", "html") .
+        CallChar("emsp", "html"),
+      group: ["Misc"],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "LShift [Enter]",
+      symbol: CallChar("new_line", "symbol")
+    },
+)
 
 CharCodes := {}
 CharCodes.acute := ["{U+0301}", "&#769;"]
@@ -4991,8 +5042,8 @@ CharCodes.smelter.cyrillic_Small_Closed_Little_Yus_Iotified := ["{U+A65D}", "&#4
 CharCodes.smelter.cyrillic_Captial_Blended_Yus := ["{U+A65A}", "&#42586;"]
 CharCodes.smelter.cyrillic_Small_Blended_Yus := ["{U+A65B}", "&#42587;"]
 CharCodes.smelter.cyrillic_Multiocular_O := ["{U+A66E}", "&#42606;"]
-UniTrim(str) {
-  return SubStr(str, 4, StrLen(str) - 4)
+UniTrim(Str) {
+  return SubStr(Str, 4, StrLen(Str) - 4)
 }
 /*
 BindDiacriticF1 := [
@@ -5352,6 +5403,14 @@ SearchKey() {
     MsgBox "Знак не найден."
   }
 }
+PasteUnicode(Unicode) {
+  HexStr := UniTrim(Unicode)
+  if HexStr != "" {
+    Num := Format("0x" HexStr, "d")
+    return Chr(Num)
+  }
+  return
+}
 InsertUnicodeKey() {
   PromptValue := IniRead(ConfigFile, "LatestPrompts", "Unicode", "")
   IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_unicode"), "w256 h92", PromptValue)
@@ -5497,6 +5556,33 @@ SendAltNumpad(CharacterCode) {
     Send("{Numpad" A_LoopField "}")
   Send("{Alt Up}")
 }
+
+QuotatizeSelection(Mode) {
+  BackupClipboard := A_Clipboard
+  PromptValue := ""
+  A_Clipboard := ""
+
+  Send("^c")
+  Sleep 120
+  PromptValue := A_Clipboard
+
+  if (PromptValue != "") {
+    if Mode = "France" {
+      PromptValue := GetChar("france_left") . PromptValue . GetChar("france_right")
+    } else if Mode = "Paw" {
+      PromptValue := GetChar("quote_left_low_double") . PromptValue . GetChar("quote_left_double")
+    } else if Mode = "Double" {
+      PromptValue := GetChar("quote_left_double") . PromptValue . GetChar("quote_right_double")
+    } else if Mode = "Single" {
+      PromptValue := GetChar("quote_left_single") . PromptValue . GetChar("quote_right_single")
+    }
+
+    SendText(PromptValue)
+  }
+
+  A_Clipboard := BackupClipboard
+}
+
 RecipeValidatorArray := []
 for chracterEntry, value in Characters {
   if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
@@ -6347,6 +6433,7 @@ Constructor() {
     "Asian Quotes",
     "Other Signs",
     "Spaces",
+    "Misc",
     "Latin Extended",
     "Latin Ligatures",
     "Latin Accented",
@@ -6993,39 +7080,56 @@ CheckLayoutValid() {
   }
   return False
 }
+SendPaste(SendKey, Callback := "") {
+  Send(SendKey)
 
-HandleFastKey(CharacterName) {
+  if Callback != "" {
+    Sleep 50
+    Callback()
+  }
+}
+HandleFastKey(CharacterNames*) {
   global FastKeysIsActive
   IsLayoutValid := CheckLayoutValid()
 
   if IsLayoutValid {
-    for characterEntry, value in Characters {
-      entryName := RegExReplace(characterEntry, "^\S+\s+")
+    Output := ""
 
-      if (entryName = CharacterName) {
-        characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
-        characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
+    for _, Character in CharacterNames {
+      GetCharacterSequence(Character)
+    }
 
-        if InputMode = "HTML" {
-          SendText(characterEntity)
-        } else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-          if IsObject(characterLaTeX) {
-            if LaTeXMode = "common"
-              SendText(characterLaTeX[1])
-            else if LaTeXMode = "math"
-              SendText(characterLaTeX[2])
-          } else {
-            SendText(characterLaTeX)
+    GetCharacterSequence(CharacterName) {
+      for characterEntry, value in Characters {
+        entryName := RegExReplace(characterEntry, "^\S+\s+")
+
+        if (entryName = CharacterName) {
+          characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
+          characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
+
+          if InputMode = "HTML" {
+            Output .= characterEntity
+          } else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+            if IsObject(characterLaTeX) {
+              if LaTeXMode = "common"
+                Output .= characterLaTeX[1]
+              else if LaTeXMode = "math"
+                Output .= characterLaTeX[2]
+            } else {
+              Output .= characterLaTeX
+            }
           }
-        }
-        else {
-          Send(value.unicode)
+          else {
+            Output .= PasteUnicode(value.unicode)
+          }
         }
       }
     }
+    SendText(Output)
   }
   return
 }
+
 CapsSeparatedKey(CapitalCharacter, SmallCharacter) {
   if (GetKeyState("CapsLock", "T")) {
     HandleFastKey(CapitalCharacter)
@@ -7103,6 +7207,11 @@ FastKeysList :=
     "<^<!" SCKeys["X"], (*) => HandleFastKey("x_above"),
     "<^<!<+" SCKeys["X"], (*) => HandleFastKey("x_below"),
     "<^<!" SCKeys["Z"], (*) => HandleFastKey("zigzag_above"),
+    ;
+    "<^<!" SCKeys["Numpad1"], (*) => QuotatizeSelection("France"),
+    "<^<!" SCKeys["Numpad2"], (*) => QuotatizeSelection("Paw"),
+    "<^<!" SCKeys["Numpad3"], (*) => QuotatizeSelection("Double"),
+    "<^<!" SCKeys["Numpad4"], (*) => QuotatizeSelection("Single"),
     ;
     "<^<!" SCKeys["Minus"], (*) => HandleFastKey("softhyphen"),
     "<^<!<+" SCKeys["Minus"], (*) => HandleFastKey("minus"),
@@ -7208,8 +7317,14 @@ FastKeysList :=
     "<^>!<!<+" SCKeys["Dot"], (*) => HandleFastKey("asian_right_title"),
     "<^>!" SCKeys["0"], (*) => HandleFastKey("degree"),
     ;
+    "<^>!" SCKeys["Enter"], (*) => HandleFastKey("carriage_return", "new_line", "emsp"),
+    "<^>!<+" SCKeys["Enter"], (*) => SendPaste("+{Enter}", (*) => HandleFastKey("emsp")),
+    "<^>!>+" SCKeys["Enter"], (*) => HandleFastKey("carriage_return", "new_line", "emsp", "emsp"),
+    ;
     "RAlt", (*) => ProceedCompose(),
   ]
+
+
 RAltsCount := 0
 RAltsTimerEnds := False
 RAltsTimer := ""
