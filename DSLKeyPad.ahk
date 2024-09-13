@@ -247,9 +247,7 @@ SupportedLanguages := [
   "ru",
 ]
 
-GetLanguageCode()
-{
-
+GetLanguageCode() {
   ValidateLanguage(LanguageSource) {
     for language in SupportedLanguages {
       if (LanguageSource = language) {
@@ -4998,19 +4996,19 @@ UniTrim(str) {
 }
 /*
 BindDiacriticF1 := [
-  [["a", "ф"], [Characters["acute"].unicode, Characters["acute"].html], Characters["acute"].tags],
-  [["A", "Ф"], [Characters["acute_double"].unicode, Characters["acute_double"].html], Characters["acute_double"].tags],
-  [["b", "и"], [Characters["breve"].unicode, Characters["breve"].html], Characters["breve"].tags],
-  [["B", "И"], [Characters["breve_inverted"].unicode, Characters["breve_inverted"].html], Characters["breve_inverted"].tags],
-  [["c", "с"], CharCodes.circumflex, ["Циркумфлекс", "Circumflex", "Крышечка", "Домик"]],
-  [["C", "С"], CharCodes.caron, ["Карон", "Caron", "Гачек", "Hachek", "Hacek"]],
-  [["d", "в"], CharCodes.dotabove, ["Точка сверху", "Dot Above"]],
-  [["D", "В"], CharCodes.diaeresis, ["Диерезис", "Diaeresis", "Умлаут", "Umlaut"]],
-  [["f", "а"], CharCodes.fermata, ["Фермата", "Fermata"]],
-  [["g", "п"], CharCodes.grave, ["Гравис", "Grave"]],
-  [["G", "П"], CharCodes.dgrave, ["2Гравис", "Двойной Гравис", "2Grave", "Double Grave"]],
-  [["h", "р"], CharCodes.hookabove, ["Хвостик сверху", "Hook Above"]],
-  [["H", "Р"], CharCodes.horn, ["Рожок", "Horn"]],
+	[["a", "ф"], [Characters["acute"].unicode, Characters["acute"].html], Characters["acute"].tags],
+	[["A", "Ф"], [Characters["acute_double"].unicode, Characters["acute_double"].html], Characters["acute_double"].tags],
+	[["b", "и"], [Characters["breve"].unicode, Characters["breve"].html], Characters["breve"].tags],
+	[["B", "И"], [Characters["breve_inverted"].unicode, Characters["breve_inverted"].html], Characters["breve_inverted"].tags],
+	[["c", "с"], CharCodes.circumflex, ["Циркумфлекс", "Circumflex", "Крышечка", "Домик"]],
+	[["C", "С"], CharCodes.caron, ["Карон", "Caron", "Гачек", "Hachek", "Hacek"]],
+	[["d", "в"], CharCodes.dotabove, ["Точка сверху", "Dot Above"]],
+	[["D", "В"], CharCodes.diaeresis, ["Диерезис", "Diaeresis", "Умлаут", "Umlaut"]],
+	[["f", "а"], CharCodes.fermata, ["Фермата", "Fermata"]],
+	[["g", "п"], CharCodes.grave, ["Гравис", "Grave"]],
+	[["G", "П"], CharCodes.dgrave, ["2Гравис", "Двойной Гравис", "2Grave", "Double Grave"]],
+	[["h", "р"], CharCodes.hookabove, ["Хвостик сверху", "Hook Above"]],
+	[["H", "Р"], CharCodes.horn, ["Рожок", "Horn"]],
 ]
 */
 BindDiacriticF2 := [
@@ -5291,8 +5289,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
     }
   }
 }
-CombineArrays(destinationArray, sourceArray*)
-{
+CombineArrays(destinationArray, sourceArray*) {
   for array in sourceArray
   {
     for value in array
@@ -5866,8 +5863,7 @@ FindCharacterPage() {
 
   A_Clipboard := BackupClipboard
 }
-ToggleGroupMessage()
-{
+ToggleGroupMessage() {
   LanguageCode := GetLanguageCode()
   global SkipGroupMessage, ConfigFile
   SkipGroupMessage := !SkipGroupMessage
@@ -5894,8 +5890,7 @@ LocaliseArrayKeys(ObjectPath) {
   }
 }
 
-OpenPanel(*)
-{
+OpenPanel(*) {
   if (IsGuiOpen(DSLPadTitle))
   {
     WinActivate(DSLPadTitle)
@@ -5927,8 +5922,7 @@ SwitchLanguage(LanguageCode) {
 
   ManageTrayItems()
 }
-Constructor()
-{
+Constructor() {
   CheckUpdate()
   ManageTrayItems()
 
@@ -6216,6 +6210,8 @@ Constructor()
   Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
   Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
   Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
+  Command_lcoverage := CommandsTree.Add(ReadLocale("func_label_coverage"))
+  Command_lro := CommandsTree.Add(ReadLocale("func_label_coverage_ro"), Command_lcoverage)
 
 
   DSLContent["ru"].AutoLoadAdd := "Добавить в автозагрузку"
@@ -6806,8 +6802,9 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
     "func_label_fastkeys",
     "func_label_inputtoggle",
     "func_label_notifs",
+    "func_label_coverage",
+    "func_label_coverage_ro",
   ]
-
   SelectedLabel := TV.GetText(Item)
 
   for label in LabelValidator
@@ -6825,8 +6822,7 @@ LV_CharacterDetails(LV, RowNumber, SetupArray) {
     SetupArray[7], SetupArray[8], SetupArray[9],
     SetupArray[10])
 }
-LV_OpenUnicodeWebsite(LV, RowNumber)
-{
+LV_OpenUnicodeWebsite(LV, RowNumber) {
   LanguageCode := GetLanguageCode()
   SelectedRow := LV.GetText(RowNumber, 4)
   URIComponent := "https://symbl.cc/" . LanguageCode . "/" . SelectedRow
@@ -6863,8 +6859,7 @@ LV_OpenUnicodeWebsite(LV, RowNumber)
     }
   }
 }
-LV_RunCommand(LV, RowNumber)
-{
+LV_RunCommand(LV, RowNumber) {
   Shortcut := LV.GetText(RowNumber, 2)
 
   if (Shortcut = "Win Alt F")
@@ -6930,14 +6925,12 @@ AddScriptToAutoload(*) {
 
   MsgBox(Labels[LanguageCode].Success, DSLPadTitle, 0x40)
 }
-IsGuiOpen(title)
-{
+IsGuiOpen(title) {
   return WinExist(title) != 0
 }
 ; Fastkeys
 <^>!Home:: ToggleFastKeys()
-ToggleFastKeys()
-{
+ToggleFastKeys() {
   LanguageCode := GetLanguageCode()
   global FastKeysIsActive, ConfigFile
   FastKeysIsActive := !FastKeysIsActive
@@ -6958,8 +6951,7 @@ ToggleFastKeys()
   return
 }
 <^>!>+Home:: ToggleInputMode()
-ToggleInputMode()
-{
+ToggleInputMode() {
   LanguageCode := GetLanguageCode()
 
   ActivationMessage := {}
@@ -6993,6 +6985,7 @@ ToggleInputMode()
 
   return
 }
+
 CheckLayoutValid() {
   GetCurrentLayout := GetLayoutLocale()
   if (GetCurrentLayout == CodeEn || GetCurrentLayout == CodeRu) {
@@ -7000,8 +6993,8 @@ CheckLayoutValid() {
   }
   return False
 }
-HandleFastKey(CharacterName)
-{
+
+HandleFastKey(CharacterName) {
   global FastKeysIsActive
   IsLayoutValid := CheckLayoutValid()
 
@@ -7427,8 +7420,7 @@ SetPreviousLayout()
 ; GuiButtonIcon(MyButton, 'shell32.dll', 259, 's32 a1 r2')
 ; MyGui.Show
 ;}
-GuiButtonIcon(Handle, File, Index := 1, Options := '')
-{
+GuiButtonIcon(Handle, File, Index := 1, Options := '') {
   RegExMatch(Options, 'i)w\K\d+', &W) ? W := W.0 : W := 16
   RegExMatch(Options, 'i)h\K\d+', &H) ? H := H.0 : H := 16
   RegExMatch(Options, 'i)s\K\d+', &S) ? W := H := S.0 : ''
