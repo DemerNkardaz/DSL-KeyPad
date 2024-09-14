@@ -5580,17 +5580,19 @@ GREPizeSelection(GetCollaborative := False) {
 	CustomThisEmdash := (IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") : "no_break_space"
 	CustomInitials := (IniRead(ConfigFile, "CustomRules", "GREPInitials", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPInitials", "") : "thinspace"
 
+	Punctuations := "[.,!?…”’»›“]"
+
 	GREPRules := Map(
 		"start_emdash", {
 			grep: "^" GetChar("emdash") "\s",
 			replace: GetChar("emdash", CustomAfterStartEmdash)
 		},
 			"dialogue_emdash", {
-				grep: "(?<=[.,!?" GetChar("ellipsis") "])\s" GetChar("emdash") "\s",
+				grep: "(?<=" Punctuations ")\s" GetChar("emdash") "\s",
 				replace: GetChar(CustomDialogue, "emdash", CustomDialogue)
 			},
 			"this_emdash", {
-				grep: "(?<![.,!?" GetChar("ellipsis") "])\s" GetChar("emdash") "\s",
+				grep: "(?<!" Punctuations ")\s" GetChar("emdash") "\s",
 				replace: GetChar(CustomThisEmdash, "emdash", "space")
 			},
 			"nums", {
@@ -5602,12 +5604,16 @@ GREPizeSelection(GetCollaborative := False) {
 				replace: "$1" . GetChar(CustomInitials) . "$2" . GetChar(CustomInitials) . "$3"
 			},
 			"single_letter", {
-				grep: "(?<![a-zA-Z]|[а-яА-Я])([a-zA-Z]|[а-яА-Я])\s",
+				grep: "(?<![a-zA-Zа-яА-Я])([a-zA-Zа-яА-Я])\s",
 				replace: "$1" GetChar("no_break_space")
 			},
 			"russian_conjunctions", {
 				grep: "\s(бы|ли|то|же)(?![а-яА-Я])",
 				replace: GetChar("no_break_space") "$1"
+			},
+			"russian_conjunctions_2", {
+				grep: "\s(до|для|на|но|не|ни|то|по|со|До|Для|На|Но|Не|Ни|То|По|Со)\s|)\s",
+				replace: GetChar("space") "$1" GetChar("no_break_space")
 			},
 	)
 
