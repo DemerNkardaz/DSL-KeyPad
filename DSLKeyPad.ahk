@@ -1789,6 +1789,14 @@ MapInsert(Characters,
 			group: ["Special Characters", ["g", "п"]],
 			symbol: DottedCircle . Chr(0x034F)
 		},
+		"infinity", {
+			unicode: "{U+221E}", html: "&#8734;", entity: "&infin;",
+			tags: ["fraction slash", "дробная черта"],
+			group: [["Special Characters", "Special Fast Secondary"], "9"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LAlt [8]",
+			symbol: Chr(0x221E)
+		},
 		"multiplication", {
 			unicode: "{U+00D7}", html: "&#215;", entity: "&times;",
 			altcode: "0215",
@@ -5599,12 +5607,20 @@ GREPizeSelection(GetCollaborative := False) {
 				grep: "(?<=\d)\s(?=\d{3})",
 				replace: GetChar("no_break_space")
 			},
+			"paragraph_end", {
+				grep: "(?<=[а-яА-ЯёЁa-zA-Z])\s(?=[а-яА-ЯёЁa-zA-Z]{1,12}[" Punctuations "]*$)",
+				replace: GetChar("no_break_space")
+			},
 			"initials", {
-				grep: "([A-ZА-Я]\.)\s([A-ZА-Я]\.)\s([A-ZА-Я][a-zа-я]+)",
+				grep: "([A-ZА-ЯЁ]\.)\s([A-ZА-ЯЁ]\.)\s([A-ZА-ЯЁ][a-zа-яё]+)",
+				replace: "$1" . GetChar(CustomInitials) . "$2" . GetChar(CustomInitials) . "$3"
+			},
+			"initials_reversed", {
+				grep: "([A-ZА-ЯЁ][a-zа-яё]+)\s([A-ZА-Яё]\.)\s([A-ZА-ЯЁ]\.)",
 				replace: "$1" . GetChar(CustomInitials) . "$2" . GetChar(CustomInitials) . "$3"
 			},
 			"single_letter", {
-				grep: "(?<![a-zA-Zа-яА-Я])([a-zA-Zа-яА-Я])\s",
+				grep: "(?<![а-яА-ЯёЁa-zA-Z])([а-яА-ЯёЁa-zA-Z])\s",
 				replace: "$1" GetChar("no_break_space")
 			},
 			"russian_conjunctions", {
@@ -5612,7 +5628,7 @@ GREPizeSelection(GetCollaborative := False) {
 				replace: GetChar("no_break_space") "$1"
 			},
 			"russian_conjunctions_2", {
-				grep: "\s(до|для|на|но|не|ни|то|по|со|До|Для|На|Но|Не|Ни|То|По|Со)\s|)\s",
+				grep: "\s(из|до|для|на|но|не|ни|то|по|со|Из|До|Для|На|Но|Не|Ни|То|По|Со)\s",
 				replace: GetChar("space") "$1" GetChar("no_break_space")
 			},
 	)
@@ -5628,7 +5644,7 @@ GREPizeSelection(GetCollaborative := False) {
 		PromptValue := A_Clipboard
 		A_Clipboard := ""
 	} else {
-		PromptValue := ParagraphizeSelection("Emspace", True)
+		PromptValue := ParagraphizeSelection(True)
 		Sleep 100
 	}
 
@@ -5664,7 +5680,7 @@ GREPizeSelection(GetCollaborative := False) {
 	A_Clipboard := BackupClipboard
 }
 
-ParagraphizeSelection(Mode, SendCollaborative := False) {
+ParagraphizeSelection(SendCollaborative := False) {
 	BackupClipboard := A_Clipboard
 	PromptValue := ""
 	A_Clipboard := ""
@@ -5701,14 +5717,12 @@ ParagraphizeSelection(Mode, SendCollaborative := False) {
 		for line in SplittedLines {
 			CurrentLine++
 			EndLine := CurrentLine < TotalLines ? "`r`n" : ""
-			if Mode = "Emspace" {
-				LocalModify := RegExReplace(
-					line,
-					"^" . GetChar("emdash") . "\s+",
-					GetChar("emdash") . GetChar(CustomAfterStartEmdash)
-				)
-				ModifiedValue .= GetChar(CustomParagraphBeginning) . LocalModify . EndLine
-			}
+			LocalModify := RegExReplace(
+				line, "^" . GetChar("emdash") . "\s+",
+				GetChar("emdash") . GetChar(CustomAfterStartEmdash)
+			)
+			ModifiedValue .= GetChar(CustomParagraphBeginning) . LocalModify . EndLine
+
 		}
 
 		if !SendCollaborative {
@@ -6093,7 +6107,7 @@ Hotkey("<#<!" SCKeys["Q"], (*) => LangSeparatedCall(
 Hotkey("<#<!<+" SCKeys["Q"], (*) => LangSeparatedCall(
 	() => QuotatizeSelection("Single"),
 	() => QuotatizeSelection("Paw")))
-Hotkey("<#<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection("Emspace"))
+Hotkey("<#<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection())
 Hotkey("<#<!" SCKeys["NumpadDot"], (*) => GREPizeSelection())
 Hotkey("<^>!" SCKeys["NumpadDot"], (*) => GREPizeSelection(True))
 
@@ -7567,6 +7581,7 @@ FastKeysList :=
 		"<^>!<!" SCKeys["Dot"], (*) => HandleFastKey("asian_double_right_title"),
 		"<^>!<!<+" SCKeys["Dot"], (*) => HandleFastKey("asian_right_title"),
 		"<^>!" SCKeys["0"], (*) => HandleFastKey("degree"),
+		"<^>!<!" SCKeys["0"], (*) => HandleFastKey("infinity"),
 		;
 		"<^>!" SCKeys["Enter"], (*) => HandleFastKey("carriage_return", "new_line", "emsp"),
 		"<^>!<+" SCKeys["Enter"], (*) => SendPaste("+{Enter}", (*) => HandleFastKey("emsp")),
