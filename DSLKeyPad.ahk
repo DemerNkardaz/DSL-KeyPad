@@ -5575,18 +5575,27 @@ SendAltNumpad(CharacterCode) {
 
 
 GREPizeSelection(GetCollaborative := False) {
+	CustomAfterStartEmdash := (IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") : "ensp"
 	CustomDialogue := (IniRead(ConfigFile, "CustomRules", "GREPDialogAttribution", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPDialogAttribution", "") : "no_break_space"
 	CustomThisEmdash := (IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") : "no_break_space"
 	CustomInitials := (IniRead(ConfigFile, "CustomRules", "GREPInitials", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPInitials", "") : "thinspace"
 
 	GREPRules := Map(
-		"dialogue_emdash", {
-			grep: "([.,!?" GetChar("ellipsis") "])\s" GetChar("emdash") "\s",
-			replace: "$1" . GetChar(CustomDialogue, "emdash", CustomDialogue)
+		"start_emdash", {
+			grep: "^" GetChar("emdash") "\s",
+			replace: GetChar("emdash", CustomAfterStartEmdash)
 		},
+			"dialogue_emdash", {
+				grep: "(?<=[.,!?" GetChar("ellipsis") "])\s" GetChar("emdash") "\s",
+				replace: GetChar(CustomDialogue, "emdash", CustomDialogue)
+			},
 			"this_emdash", {
-				grep: "([^.,!?" GetChar("ellipsis") "…])\s" GetChar("emdash") "\s",
-				replace: "$1" . GetChar(CustomThisEmdash, "emdash", "space")
+				grep: "(?<![.,!?" GetChar("ellipsis") "])\s" GetChar("emdash") "\s",
+				replace: GetChar(CustomThisEmdash, "emdash", "space")
+			},
+			"nums", {
+				grep: "(?<=\d)\s(?=\d{3})",
+				replace: GetChar("no_break_space")
 			},
 			"initials", {
 				grep: "([A-ZА-Я]\.)\s([A-ZА-Я]\.)\s([A-ZА-Я][a-zа-я]+)",
@@ -5618,12 +5627,28 @@ GREPizeSelection(GetCollaborative := False) {
 	}
 
 	if (PromptValue != "") {
+		TotalLines := 0
+		SplittedLines := StrSplit(PromptValue, "`r`n")
+		ModifiedValue := ""
 
-		for _, rule in GREPRules {
-			PromptValue := RegExReplace(PromptValue, rule.grep, rule.replace)
+		for index in SplittedLines {
+			TotalLines++
 		}
 
-		A_Clipboard := PromptValue
+		CurrentLine := 0
+		for _, rule in GREPRules {
+			for i, line in SplittedLines {
+				SplittedLines[i] := RegExReplace(line, rule.grep, rule.replace)
+			}
+		}
+
+		for line in SplittedLines {
+			CurrentLine++
+			EndLine := CurrentLine < TotalLines ? "`r`n" : ""
+			ModifiedValue .= line . EndLine
+		}
+
+		A_Clipboard := ModifiedValue
 		ClipWait(250, 1)
 		Sleep 1000
 		Send("^v")
