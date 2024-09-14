@@ -1888,6 +1888,78 @@ MapInsert(Characters,
 			recipe: "..",
 			symbol: Chr(0x2025)
 		},
+		"exclamation", {
+			unicode: "{U+0021}", html: "&#33;", entity: "&excl;",
+			symbol: Chr(0x0021)
+		},
+		"question", {
+			unicode: "{U+003F}", html: "&#63;", entity: "&quest;",
+			symbol: Chr(0x003F)
+		},
+		"reversed_question", {
+			unicode: "{U+2E2E}", html: "&#11822;",
+			tags: ["reversed ?", "обратный ?"],
+			group: ["Smelting Special"],
+			recipe: Chr(0x2B8C) "?",
+			symbol: Chr(0x2E2E)
+		},
+		"inverted_exclamation", {
+			unicode: "{U+00A1}", html: "&#161;", entity: "&iexcl;",
+			tags: ["inverted !", "перевёрнутый !"],
+			group: ["Smelting Special"],
+			recipe: Chr(0x2B8F) "!",
+			symbol: Chr(0x00A1)
+		},
+		"inverted_question", {
+			unicode: "{U+00BF}", html: "&#191;", entity: "&iquest;",
+			tags: ["inverted ?", "перевёрнутый ?"],
+			group: ["Smelting Special"],
+			recipe: Chr(0x2B8F) "?",
+			symbol: Chr(0x00BF)
+		},
+		"double_exclamation", {
+			unicode: "{U+203C}", html: "&#8252;",
+			altcode: "19",
+			tags: ["double !!", "двойной !!"],
+			group: ["Smelting Special"],
+			recipe: "!!",
+			symbol: Chr(0x203C)
+		},
+		"double_exclamation_question", {
+			unicode: "{U+2049}", html: "&#8265;",
+			tags: ["double !?", "двойной !?"],
+			group: ["Smelting Special"],
+			recipe: "!?",
+			symbol: Chr(0x2049)
+		},
+		"double_question", {
+			unicode: "{U+2047}", html: "&#8263;",
+			tags: ["double ??", "двойной ??"],
+			group: ["Smelting Special"],
+			recipe: "??",
+			symbol: Chr(0x2047)
+		},
+		"double_question_exclamation", {
+			unicode: "{U+2048}", html: "&#8264;",
+			tags: ["double ?!", "двойной ?!"],
+			group: ["Smelting Special"],
+			recipe: "?!",
+			symbol: Chr(0x2048)
+		},
+		"interrobang", {
+			unicode: "{U+203D}", html: "&#8253;",
+			tags: ["interrobang", "интерробанг", "лигатура !?", "ligature !?"],
+			group: ["Smelting Special"],
+			recipe: "!+?",
+			symbol: Chr(0x203D)
+		},
+		"interrobang_inverted", {
+			unicode: "{U+2E18}", html: "&#11800;",
+			tags: ["inverted interrobang", "перевёрнутый интерробанг", "лигатура перевёрнутый !?", "ligature inverted !?"],
+			group: ["Smelting Special"],
+			recipe: Chr(0x2B8F) "!+?",
+			symbol: Chr(0x2E18)
+		},
 		"emdash", {
 			unicode: "{U+2014}", html: "&#8212;", entity: "&mdash;",
 			altcode: "0151",
@@ -1898,6 +1970,13 @@ MapInsert(Characters,
 			recipe: "---",
 			symbol: Chr(0x2014)
 		},
+		"emdash_vertical", {
+			unicode: "{U+FE31}", html: "&#65073;",
+			tags: ["vertical em dash", "вертикальное длинное тире"],
+			group: ["Smelting Special"],
+			recipe: Chr(0x2B8F) "—",
+			symbol: Chr(0xFE31)
+		},
 		"endash", {
 			unicode: "{U+2013}", html: "&#8211;", entity: "&ndash;",
 			altcode: "0150",
@@ -1907,6 +1986,13 @@ MapInsert(Characters,
 			alt_on_fast_keys: "LShift [-]",
 			recipe: "--",
 			symbol: Chr(0x2013)
+		},
+		"endash_vertical", {
+			unicode: "{U+FE32}", html: "&#65074;",
+			tags: ["vertical en dash", "вертикальное короткое тире"],
+			group: ["Smelting Special"],
+			recipe: Chr(0x2B8F) "–",
+			symbol: Chr(0xFE32)
 		},
 		"three_emdash", {
 			unicode: "{U+2E3B}", html: "&#11835;",
@@ -5588,7 +5674,7 @@ GREPizeSelection(GetCollaborative := False) {
 	CustomThisEmdash := (IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") : "no_break_space"
 	CustomInitials := (IniRead(ConfigFile, "CustomRules", "GREPInitials", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPInitials", "") : "thinspace"
 
-	Punctuations := "[.,!?…”’»›“]"
+	Punctuations := "[" GetChar("reversed_question", "inverted_exclamation", "inverted_question", "double_exclamation", "double_exclamation_question", "double_question", "double_question_exclamation", "interrobang", "interrobang_inverted") ".,!?…”’»›“]"
 
 	GREPRules := Map(
 		"start_emdash", {
