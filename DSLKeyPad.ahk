@@ -376,7 +376,7 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 
 		Download(RawSource, UpdateFilePath)
 
-		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup" GetTimeString())
+		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup-" GetTimeString())
 
 		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
 
@@ -396,21 +396,6 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		MsgBox(ReadLocale("update_absent"), DSLPadTitle)
 	}
 	return
-}
-
-RemoveOldBackups(directory, prefix := "ahk-Backup") {
-	files := []
-	for fileObj in Directory(directory "\*-" prefix "*") {
-		if RegExMatch(fileObj.Name, ".*-" prefix "-(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})", &match) {
-			files.Push({ path: fileObj.Path, date: match[1] })
-		}
-	}
-
-	files.Sort("date")
-
-	while files.MaxIndex() > 5 {
-		;FileDelete(files.Pop().path)
-	}
 }
 
 
