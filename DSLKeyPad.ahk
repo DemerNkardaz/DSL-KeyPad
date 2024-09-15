@@ -6,29 +6,6 @@
 CodeEn := "00000409"
 CodeRu := "00000419"
 
-ChangeKeyboardLayout(LocaleID, LayoutID := 1) {
-	LanguageCode := ""
-	if LocaleID == "en" {
-		LanguageCode := CodeEn
-	} else if LocaleID == "ru" {
-		LanguageCode := CodeRu
-	} else {
-		LanguageCode := LocaleID
-	}
-
-	layout := DllCall("LoadKeyboardLayout", "Str", LanguageCode, "Int", LayoutID)
-	hwnd := DllCall("GetForegroundWindow")
-	pid := DllCall("GetWindowThreadProcessId", "UInt", hwnd, "Ptr", 0)
-	DllCall("PostMessage", "UInt", hwnd, "UInt", 0x50, "UInt", 0, "UInt", layout)
-}
-
-GetLayoutLocale() {
-	threadId := DllCall("GetWindowThreadProcessId", "UInt", DllCall("GetForegroundWindow", "UInt"), "UInt", 0)
-	layout := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
-	layoutHex := Format("{:08X}", layout & 0xFFFF)
-	return layoutHex
-}
-
 ChracterMap := "C:\Windows\System32\charmap.exe"
 ImageRes := "C:\Windows\System32\imageres.dll"
 Shell32 := "C:\Windows\SysWOW64\shell32.dll"
@@ -55,7 +32,6 @@ AppIcoRaw := RawRepoFiles . "DSLKeyPad.app.ico"
 WorkingDir := A_MyDocuments . "\DSLKeyPad"
 DirCreate(WorkingDir)
 
-
 ConfigFile := WorkingDir . "\DSLKeyPad.config.ini"
 LocalesFile := WorkingDir . "\DSLKeyPad.locales.ini"
 AppIcoFile := WorkingDir . "\DSLKeyPad.app.ico"
@@ -76,7 +52,7 @@ GetLocales() {
 	http.WaitForResponse()
 
 	if http.Status != 200 {
-		MsgBox(ErrMessages[GetLanguageCode()])
+		MsgBox(ErrMessages[GetLanguageCode()] "`nHTTP Status: " http.Status, DSLPadTitle)
 		return
 	}
 
@@ -150,12 +126,11 @@ GetAppIco() {
 	http.WaitForResponse()
 
 	if http.Status != 200 {
-		MsgBox(ErrMessages[GetLanguageCode()])
+		MsgBox(ErrMessages[GetLanguageCode()] "`nHTTP Status: " http.Status, DSLPadTitle)
 		return
 	}
 
 	Download(AppIcoRaw, AppIcoFile)
-
 }
 
 if !FileExist(AppIcoFile) {
@@ -210,6 +185,29 @@ if FileExist(ConfigFile) {
 	for index, config in DefaultConfig {
 		IniWrite config[3], ConfigFile, config[1], config[2]
 	}
+}
+
+ChangeKeyboardLayout(LocaleID, LayoutID := 1) {
+	LanguageCode := ""
+	if LocaleID == "en" {
+		LanguageCode := CodeEn
+	} else if LocaleID == "ru" {
+		LanguageCode := CodeRu
+	} else {
+		LanguageCode := LocaleID
+	}
+
+	layout := DllCall("LoadKeyboardLayout", "Str", LanguageCode, "Int", LayoutID)
+	hwnd := DllCall("GetForegroundWindow")
+	pid := DllCall("GetWindowThreadProcessId", "UInt", hwnd, "Ptr", 0)
+	DllCall("PostMessage", "UInt", hwnd, "UInt", 0x50, "UInt", 0, "UInt", layout)
+}
+
+GetLayoutLocale() {
+	threadId := DllCall("GetWindowThreadProcessId", "UInt", DllCall("GetForegroundWindow", "UInt"), "UInt", 0)
+	layout := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
+	layoutHex := Format("{:08X}", layout & 0xFFFF)
+	return layoutHex
 }
 
 CurrentLayout := GetLayoutLocale()
@@ -346,124 +344,75 @@ InsertChangesList(TargetGUI) {
 	}
 }
 
+GetTimeString() {
+	return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
+}
+
 GetUpdate(TimeOut := 0, RepairMode := False) {
 	Sleep TimeOut
 	global AppVersion, RawSource
-	LanguageCode := GetLanguageCode()
-	Messages := {
-		updateSucces: SetStringVars(ReadLocale("update_successful"), CurrentVersionString, UpdateVersionString),
-	}
-
-	RepairLabels := Map()
-	RepairLabels["ru"] := {
-		title: "Восстановление",
-		description: "Введите y/n что бы продолжить или отменить восстановление программы.`nОна будет заново скачана из репозитория, включая сопутствующие файлы.",
-		success: "Восстановление завершено успешно.",
-	}
-	RepairLabels["en"] := {
-		title: "Restore",
-		description: "Enter y/n to continue or cancel the restore program.`nIt will be downloaded from the repository, including other files.",
-		success: "Restore completed successfully.",
-	}
 
 	if RepairMode == True {
-		IB := InputBox(RepairLabels[LanguageCode].description, RepairLabels[LanguageCode].title, "w256", "")
+		IB := InputBox(ReadLocale("update_repair"), ReadLocale("update_repair_title"), "w256", "")
 		if IB.Result = "Cancel" || IB.Value != "y" {
 			return
 		}
 	}
 
-	CurrentFilePath := A_ScriptFullPath
-	CurrentFileName := StrSplit(CurrentFilePath, "\").Pop()
-	UpdateFilePath := A_ScriptDir "\DSLKeyPad.ahk-GettingUpdate"
-
-	UpdatingFileContent := ""
-
-	http := ComObject("WinHttp.WinHttpRequest.5.1")
-	http.Open("GET", RawSource, true)
-	http.Send()
-	http.WaitForResponse()
-
-	if http.Status != 200 {
-		MsgBox(ReadLocale("update_failed"), DSLPadTitle)
-		return
-	}
-
-	UpdatingFileContent := http.ResponseText
-
-	Sleep 50
-	FileAppend("", UpdateFilePath, "UTF-8")
-	GettingUpdateFile := FileOpen(UpdateFilePath, "w", "UTF-8")
-	GettingUpdateFile.Write(UpdatingFileContent)
-	GettingUpdateFile.Close()
-
-	Sleep 50
-	UpdatingFileContent := FileRead(UpdateFilePath, "UTF-8")
-	Sleep 50
-
 	if UpdateAvailable || RepairMode == True {
-		DuplicatedCount := 0
-		SplitContent := StrSplit(UpdatingFileContent, "`n")
-		FixTrimmedContent := ""
+		http := ComObject("WinHttp.WinHttpRequest.5.1")
+		http.Open("GET", RawSource, true)
+		http.Send()
+		http.WaitForResponse()
 
-		for line in SplitContent {
-			if InStr(line, "DuplicateResolver := 'Bad Http…'") {
-				DuplicatedCount++
-			}
-		}
-
-		for line in SplitContent {
-			if (InStr(line, ";Application" . "End")) {
-				break
-			}
-			FixTrimmedContent .= line . "`n"
-		}
-
-		FixTrimmedContent := RTrim(FixTrimmedContent, "`n")
-		GettingUpdateFile := FileOpen(UpdateFilePath, "w", "UTF-8")
-		GettingUpdateFile.Write(FixTrimmedContent)
-		GettingUpdateFile.Close()
-
-		FileAppend("`n;Application" . "End`n", UpdateFilePath, "UTF-8")
-		UpdatingFileContent := FileRead(UpdateFilePath, "UTF-8")
-
-		DuplicatedCount := 0
-		for line in SplitContent {
-			if InStr(line, "DuplicateResolver := 'The Second Gate…'") {
-				DuplicatedCount++
-			}
-		}
-
-		if (DuplicatedCount > 1) {
-			FileDelete(UpdateFilePath)
-			Sleep 500
-			GetUpdate(1500)
+		if http.Status != 200 {
+			MsgBox(ReadLocale("update_failed") "`nHTTP Status: " http.Status, DSLPadTitle)
 			return
 		}
 
-		if FileExist(CurrentFilePath . "-Backup") {
-			FileDelete(CurrentFilePath . "-Backup")
-			Sleep 100
-		}
+		CurrentFilePath := A_ScriptFullPath
+		CurrentFileName := StrSplit(CurrentFilePath, "\").Pop()
+		UpdateFilePath := A_ScriptDir "\DSLKeyPad.ahk-GettingUpdate"
 
-		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName . "-Backup")
-		Sleep 200
+		Download(RawSource, UpdateFilePath)
+
+		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup" GetTimeString())
+
 		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
-		Sleep 200
+
 		GetLocales()
 		GetAppIco()
+
 		if RepairMode == True {
-			MsgBox(RepairLabels[LanguageCode].success, DSLPadTitle)
+			MsgBox(ReadLocale("update_repair_success"), DSLPadTitle)
 		} else {
-			MsgBox(Messages.updateSucces, DSLPadTitle)
+			MsgBox(SetStringVars(ReadLocale("update_successful"), CurrentVersionString, UpdateVersionString), DSLPadTitle)
 		}
 
 		Reload
 		return
+	} else {
+		FileDelete(UpdateFilePath)
+		MsgBox(ReadLocale("update_absent"), DSLPadTitle)
 	}
-	FileDelete(UpdateFilePath)
-	MsgBox(ReadLocale("update_absent"), DSLPadTitle)
+	return
 }
+
+RemoveOldBackups(directory, prefix := "ahk-Backup") {
+	files := []
+	for fileObj in Directory(directory "\*-" prefix "*") {
+		if RegExMatch(fileObj.Name, ".*-" prefix "-(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})", &match) {
+			files.Push({ path: fileObj.Path, date: match[1] })
+		}
+	}
+
+	files.Sort("date")
+
+	while files.MaxIndex() > 5 {
+		;FileDelete(files.Pop().path)
+	}
+}
+
 
 CheckUpdate() {
 	global AppVersion, RawSource, UpdateAvailable, UpdateVersionString
@@ -5719,7 +5668,6 @@ GREPizeSelection(GetCollaborative := False) {
 			},
 	)
 
-
 	BackupClipboard := A_Clipboard
 	if !GetCollaborative {
 		PromptValue := ""
@@ -6185,6 +6133,8 @@ Hotkey("<#<!" SCKeys["PgUp"], (*) => FindCharacterPage())
 Hotkey("<#<!" SCKeys["PgDn"], (*) => ReplaceWithUnicode())
 Hotkey("<#<+" SCKeys["PgDn"], (*) => ReplaceWithUnicode("Hex"))
 Hotkey("<#<!" SCKeys["Home"], (*) => OpenPanel())
+Hotkey("<^>!>+" SCKeys["Home"], (*) => ToggleInputMode())
+Hotkey("<^>!" SCKeys["Home"], (*) => ToggleFastKeys())
 
 
 Hotkey("<#<!" SCKeys["Q"], (*) => LangSeparatedCall(
@@ -7355,11 +7305,11 @@ AddScriptToAutoload(*) {
 
 	MsgBox(Labels[LanguageCode].Success, DSLPadTitle, 0x40)
 }
+
 IsGuiOpen(title) {
 	return WinExist(title) != 0
 }
-; Fastkeys
-<^>!Home:: ToggleFastKeys()
+
 ToggleFastKeys() {
 	LanguageCode := GetLanguageCode()
 	global FastKeysIsActive, ConfigFile
@@ -7380,7 +7330,7 @@ ToggleFastKeys() {
 	RegFastKeys(FastKeysList)
 	return
 }
-<^>!>+Home:: ToggleInputMode()
+
 ToggleInputMode() {
 	LanguageCode := GetLanguageCode()
 
@@ -7423,6 +7373,7 @@ CheckLayoutValid() {
 	}
 	return False
 }
+
 SendPaste(SendKey, Callback := "") {
 	Send(SendKey)
 
@@ -7431,6 +7382,7 @@ SendPaste(SendKey, Callback := "") {
 		Callback()
 	}
 }
+
 HandleFastKey(CharacterNames*) {
 	global FastKeysIsActive
 	IsLayoutValid := CheckLayoutValid()
@@ -7480,6 +7432,7 @@ CapsSeparatedKey(CapitalCharacter, SmallCharacter) {
 		HandleFastKey(SmallCharacter)
 	}
 }
+
 CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
 	if (GetKeyState("CapsLock", "T")) {
 		GetKeyState("LShift", "P") ? HandleFastKey(SmallCharacter) : HandleFastKey(CapitalCharacter)
@@ -7487,6 +7440,7 @@ CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
 		GetKeyState("LShift", "P") ? HandleFastKey(CapitalCharacter) : HandleFastKey(SmallCharacter)
 	}
 }
+
 LangSeparatedCall(LatinCallback, CyrillicCallback) {
 	if GetLayoutLocale() == CodeEn {
 		LatinCallback()
@@ -7495,6 +7449,7 @@ LangSeparatedCall(LatinCallback, CyrillicCallback) {
 	}
 	return
 }
+
 LangSeparatedKey(LatinCharacter, CyrillicCharacter, UseCaps := False) {
 	Character := (GetLayoutLocale() == CodeEn) ? LatinCharacter : CyrillicCharacter
 	if IsObject(Character) && UseCaps {
@@ -7503,6 +7458,7 @@ LangSeparatedKey(LatinCharacter, CyrillicCharacter, UseCaps := False) {
 		HandleFastKey(Character)
 	}
 }
+
 RegFastKeys(Bindings) {
 	global FastKeysIsActive
 
