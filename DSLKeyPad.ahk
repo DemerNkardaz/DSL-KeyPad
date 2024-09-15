@@ -337,7 +337,8 @@ InsertChangesList(TargetGUI) {
 		if language = LanguageCode {
 			content := RegExReplace(content, "m)^## " . Labels.ver . " (.*) — (.*)", Labels.ver . ": $1`n" . Labels.date . ": $2")
 			content := RegExReplace(content, "m)^- (.*)", " • $1")
-			content := RegExReplace(content, "m)^\s+- (.*)", " ‣ $1")
+			content := RegExReplace(content, "m)^\s\s- (.*)", "  ‣ $1")
+			content := RegExReplace(content, "m)^\s\s\s- (.*)", "   ⁃ $1")
 			content := RegExReplace(content, "m)^---", " " . StrRepeat("—", 84))
 
 			TargetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", content)
@@ -653,14 +654,25 @@ GetChar(CharacterNames*) {
 	Output := ""
 
 	for _, Character in CharacterNames {
-		GetCharacterSequence(Character)
+		CharacterRepeat := 1
+		if RegExMatch(Character, "(.+?)×(\d+)$", &match) {
+			Character := match[1]
+			CharacterRepeat := match[2]
+		}
+		GetCharacterSequence(Character, CharacterRepeat)
 	}
 
-	GetCharacterSequence(CharacterName) {
+	GetCharacterSequence(CharacterName, CharacterRepeat) {
 		for characterEntry, value in Characters {
 			TrimValue := RegExReplace(characterEntry, "^\S+\s+")
 			if (TrimValue = CharacterName) {
-				Output .= PasteUnicode(value.unicode)
+				if CharacterRepeat > 1 {
+					Loop CharacterRepeat {
+						Output .= PasteUnicode(value.unicode)
+					}
+				} else {
+					Output .= PasteUnicode(value.unicode)
+				}
 				break
 			}
 		}
