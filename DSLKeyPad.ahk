@@ -337,6 +337,7 @@ InsertChangesList(TargetGUI) {
 		if language = LanguageCode {
 			content := RegExReplace(content, "m)^## " . Labels.ver . " (.*) — (.*)", Labels.ver . ": $1`n" . Labels.date . ": $2")
 			content := RegExReplace(content, "m)^- (.*)", " • $1")
+			content := RegExReplace(content, "m)^\s+- (.*)", " ‣ $1")
 			content := RegExReplace(content, "m)^---", " " . StrRepeat("—", 84))
 
 			TargetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", content)
