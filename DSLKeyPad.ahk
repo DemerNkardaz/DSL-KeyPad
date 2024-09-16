@@ -3,6 +3,12 @@
 
 ; Only EN US & RU RU Keyboard Layout
 
+
+SupportedLanguages := [
+	"en",
+	"ru",
+]
+
 CodeEn := "00000409"
 CodeRu := "00000419"
 
@@ -187,6 +193,76 @@ if FileExist(ConfigFile) {
 	}
 }
 
+FontFace := Map(
+	"sans", {
+		name: "Noto Sans",
+		source: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSans/googlefonts/variable-ttf/NotoSans%5Bwdth%2Cwght%5D.ttf"
+	},
+		"serif", {
+			name: "Noto Serif",
+			source: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerif/googlefonts/variable-ttf/NotoSerif%5Bwdth%2Cwght%5D.ttf"
+		},
+)
+
+IsFont(FontName)
+{
+	Loop Reg, "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" {
+
+		if (RegExMatch(A_LoopRegName, "^" FontName "(?:\sRegular)")) {
+			return true
+		}
+	}
+
+	return false
+}
+
+FontValidate() {
+	NamesToBeInstalled := "`n"
+	SourcesToBeInstalled := []
+	FoundNotInstalled := False
+	for _, font in FontFace {
+		if !IsFont(font.name) {
+			SourcesToBeInstalled.Push(font.source)
+			NamesToBeInstalled .= font.name "`n"
+			FoundNotInstalled := True
+		} else {
+			continue
+		}
+	}
+
+	if FoundNotInstalled {
+		MsgBox(ReadLocale("prepare_fonts") NamesToBeInstalled, DSLPadTitle)
+
+		for _, fontSource in SourcesToBeInstalled {
+			FontInstall(fontSource)
+		}
+	}
+}
+
+FontInstall(FontSource) {
+	TempFolder := A_Temp "\DSLTemp"
+	DirCreate(TempFolder)
+
+	http := ComObject("WinHttp.WinHttpRequest.5.1")
+	http.Open("GET", FontSource, true)
+	http.Send()
+	http.WaitForResponse()
+
+	if (http.Status != 200) {
+		MsgBox("Can’t download font.`nHTTP Status: " http.Status, "Font Installer")
+		return
+	}
+
+	FontTitle := RegExReplace(StrSplit(FontSource, "/").Pop(), "[^a-zA-Z]+.*$", "") ".ttf"
+	FontPath := TempFolder "\" FontTitle
+	Download(FontSource, FontPath)
+	RunWait(FontPath)
+	FileDelete(FontPath)
+}
+
+FontValidate()
+
+
 ChangeKeyboardLayout(LocaleID, LayoutID := 1) {
 	LanguageCode := ""
 	if LocaleID == "en" {
@@ -243,12 +319,6 @@ TrimArray(From, Count) {
 	}
 	return result
 }
-
-
-SupportedLanguages := [
-	"en",
-	"ru",
-]
 
 GetLanguageCode() {
 	ValidateLanguage(LanguageSource) {
@@ -339,7 +409,7 @@ InsertChangesList(TargetGUI) {
 			content := RegExReplace(content, "m)^- (.*)", " • $1")
 			content := RegExReplace(content, "m)^\s\s- (.*)", "  ‣ $1")
 			content := RegExReplace(content, "m)^\s\s\s- (.*)", "   ⁃ $1")
-			content := RegExReplace(content, "m)^---", " " . StrRepeat("—", 84))
+			content := RegExReplace(content, "m)^---", " " . GetChar("emdash×84"))
 
 			TargetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", content)
 		}
@@ -652,28 +722,67 @@ FormatHotKey(HKey, Modifier := "") {
 
 GetChar(CharacterNames*) {
 	Output := ""
+	IndexMap := Map()
 
+	CharacterIndex := 0
 	for _, Character in CharacterNames {
+		CharacterIndex++
 		CharacterRepeat := 1
-		if RegExMatch(Character, "(.+?)×(\d+)$", &match) {
-			Character := match[1]
-			CharacterRepeat := match[2]
+		CharacterMatch := Character
+
+		if !IsObject(Character) {
+			if RegExMatch(CharacterMatch, "(.+?)\[(\d+(?:,\d+)*)\]$", &match) {
+				if RegExMatch(match[1], "(.+?)×(\d+)$", &subMatch) {
+					Character := subMatch[1]
+					CharacterRepeat := subMatch[2]
+				} else {
+					Character := match[1]
+				}
+				Positions := StrSplit(match[2], ",")
+				for _, Position in Positions {
+					Position := Number(Position)
+					if !IndexMap.Has(Position) {
+						IndexMap[Position] := []
+					}
+					IndexMap[Position].Push([Character, CharacterRepeat])
+				}
+				continue
+			}
+
+			if RegExMatch(CharacterMatch, "(.+?)×(\d+)$", &match) {
+				Character := match[1]
+				CharacterRepeat := match[2]
+			}
 		}
-		GetCharacterSequence(Character, CharacterRepeat)
+
+		if !IndexMap.Has(CharacterIndex) {
+			IndexMap[CharacterIndex] := []
+		}
+		IndexMap[CharacterIndex].Push([Character, CharacterRepeat])
+	}
+
+	for indexEntry, value in IndexMap {
+		for _, charData in value {
+			GetCharacterSequence(charData[1], charData[2])
+		}
 	}
 
 	GetCharacterSequence(CharacterName, CharacterRepeat) {
-		for characterEntry, value in Characters {
-			TrimValue := RegExReplace(characterEntry, "^\S+\s+")
-			if (TrimValue = CharacterName) {
-				if CharacterRepeat > 1 {
-					Loop CharacterRepeat {
+		if IsObject(CharacterName) {
+			Output .= CharacterName()
+		} else {
+			for characterEntry, value in Characters {
+				TrimValue := RegExReplace(characterEntry, "^\S+\s+")
+				if (TrimValue = CharacterName) {
+					if CharacterRepeat > 1 {
+						Loop CharacterRepeat {
+							Output .= PasteUnicode(value.unicode)
+						}
+					} else {
 						Output .= PasteUnicode(value.unicode)
 					}
-				} else {
-					Output .= PasteUnicode(value.unicode)
+					break
 				}
-				break
 			}
 		}
 	}
@@ -882,7 +991,9 @@ MapInsert(Characters,
 		tags: ["acute", "акут", "ударение"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["a", "ф"]],
 		show_on_fast_keys: True,
-		symbol: DottedCircle . Chr(0x0301)
+		symbol: DottedCircle . Chr(0x0301),
+		symbolCustom: "s72",
+		symbolFont: "Cambria"
 	},
 		"acute_double", {
 			unicode: "{U+030B}", html: "&#779;",
@@ -890,19 +1001,25 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["A", "Ф"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x030B)
+			symbol: DottedCircle . Chr(0x030B),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"acute_below", {
 			unicode: "{U+0317}", html: "&#791;",
 			tags: ["acute below", "акут снизу"],
 			group: ["Diacritics Secondary", ["a", "ф"]],
-			symbol: DottedCircle . Chr(0x0317)
+			symbol: DottedCircle . Chr(0x0317),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"acute_tone_vietnamese", {
 			unicode: "{U+0341}", html: "&#833;",
 			tags: ["acute tone", "акут тона"],
 			group: ["Diacritics Secondary", ["A", "Ф"]],
-			symbol: DottedCircle . Chr(0x0341)
+			symbol: DottedCircle . Chr(0x0341),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -910,13 +1027,17 @@ MapInsert(Characters,
 			unicode: "{U+20F0}", html: "&#8432;",
 			tags: ["asterisk above", "астериск сверху"],
 			group: ["Diacritics Tertiary", ["a", "ф"]],
-			symbol: DottedCircle . Chr(0x20F0)
+			symbol: DottedCircle . Chr(0x20F0),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"asterisk_below", {
 			unicode: "{U+0359}", html: "&#857;",
 			tags: ["asterisk below", "астериск снизу"],
 			group: ["Diacritics Tertiary", ["A", "Ф"]],
-			symbol: DottedCircle . Chr(0x0359)
+			symbol: DottedCircle . Chr(0x0359),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -926,7 +1047,9 @@ MapInsert(Characters,
 			tags: ["breve", "бреве", "кратка"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["b", "и"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0306)
+			symbol: DottedCircle . Chr(0x0306),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"breve_inverted", {
 			unicode: "{U+0311}", html: "&#785;",
@@ -934,19 +1057,25 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["B", "И"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0311)
+			symbol: DottedCircle . Chr(0x0311),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"breve_below", {
 			unicode: "{U+032E}", html: "&#814;",
 			tags: ["breve below", "бреве снизу", "кратка снизу"],
 			group: ["Diacritics Secondary", ["b", "и"]],
-			symbol: DottedCircle . Chr(0x032E)
+			symbol: DottedCircle . Chr(0x032E),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"breve_inverted_below", {
 			unicode: "{U+032F}", html: "&#815;",
 			tags: ["inverted breve below", "перевёрнутое бреве снизу", "перевёрнутая кратка снизу"],
 			group: ["Diacritics Secondary", ["B", "И"]],
-			symbol: DottedCircle . Chr(0x032F)
+			symbol: DottedCircle . Chr(0x032F),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -954,19 +1083,25 @@ MapInsert(Characters,
 			unicode: "{U+0346}", html: "&#838;",
 			tags: ["bridge above", "мостик сверху"],
 			group: ["Diacritics Tertiary", ["b", "и"]],
-			symbol: DottedCircle . Chr(0x0346)
+			symbol: DottedCircle . Chr(0x0346),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"bridge_below", {
 			unicode: "{U+032A}", html: "&#810;",
 			tags: ["bridge below", "мостик снизу"],
 			group: ["Diacritics Tertiary", ["B", "И"]],
-			symbol: DottedCircle . Chr(0x032A)
+			symbol: DottedCircle . Chr(0x032A),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"bridge_inverted_below", {
 			unicode: "{U+033A}", html: "&#825;",
 			tags: ["inverted bridge below", "перевёрнутый мостик снизу"],
 			group: ["Diacritics Tertiary", CtrlB],
-			symbol: DottedCircle . Chr(0x033A)
+			symbol: DottedCircle . Chr(0x033A),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -976,7 +1111,9 @@ MapInsert(Characters,
 			tags: ["circumflex", "циркумфлекс"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["c", "с"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0302)
+			symbol: DottedCircle . Chr(0x0302),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"caron", {
 			unicode: "{U+030C}", html: "&#780;",
@@ -985,19 +1122,25 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["C", "С"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x030C)
+			symbol: DottedCircle . Chr(0x030C),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"circumflex_below", {
 			unicode: "{U+032D}", html: "&#813;",
 			tags: ["circumflex below", "циркумфлекс снизу"],
 			group: ["Diacritics Secondary", ["c", "с"]],
-			symbol: DottedCircle . Chr(0x032D)
+			symbol: DottedCircle . Chr(0x032D),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"caron_below", {
 			unicode: "{U+032C}", html: "&#812;",
 			tags: ["caron below", "карон снизу", "гачек снизу"],
 			group: ["Diacritics Secondary", ["C", "С"]],
-			symbol: DottedCircle . Chr(0x032C)
+			symbol: DottedCircle . Chr(0x032C),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"cedilla", {
 			unicode: "{U+0327}", html: "&#807;",
@@ -1006,14 +1149,18 @@ MapInsert(Characters,
 			group: [["Diacritics Tertiary", "Diacritics Fast Secondary"], ["c", "с"]],
 			modifier: "RShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0327)
+			symbol: DottedCircle . Chr(0x0327),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"comma_above", {
 			unicode: "{U+0313}", html: "&#787;",
 			tags: ["comma above", "запятая сверху"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], [",", "б"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0313)
+			symbol: DottedCircle . Chr(0x0313),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"comma_below", {
 			unicode: "{U+0326}", html: "&#806;",
@@ -1021,31 +1168,41 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["<", "Б"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0326)
+			symbol: DottedCircle . Chr(0x0326),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"comma_above_turned", {
 			unicode: "{U+0312}", html: "&#786;",
 			tags: ["turned comma above", "перевёрнутая запятая сверху"],
 			group: ["Diacritics Secondary", [",", "б"]],
-			symbol: DottedCircle . Chr(0x0312)
+			symbol: DottedCircle . Chr(0x0312),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"comma_above_reversed", {
 			unicode: "{U+0314}", html: "&#788;",
 			tags: ["reversed comma above", "зеркальная запятая сверху"],
 			group: [["Diacritics Secondary", "Diacritics Fast Secondary"], ["<", "Б"]],
-			symbol: DottedCircle . Chr(0x0314)
+			symbol: DottedCircle . Chr(0x0314),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"comma_above_right", {
 			unicode: "{U+0315}", html: "&#789;",
 			tags: ["comma above right", "запятая сверху справа"],
 			group: [["Diacritics Tertiary", "Diacritics Fast Secondary"], [",", "б"]],
-			symbol: DottedCircle . Chr(0x0315)
+			symbol: DottedCircle . Chr(0x0315),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"candrabindu", {
 			unicode: "{U+0310}", html: "&#784;",
 			tags: ["candrabindu", "карон снизу"],
 			group: ["Diacritics Tertiary", ["C", "С"]],
-			symbol: DottedCircle . Chr(0x0310)
+			symbol: DottedCircle . Chr(0x0310),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -1055,7 +1212,9 @@ MapInsert(Characters,
 			tags: ["dot above", "точка сверху"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["d", "в"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0307)
+			symbol: DottedCircle . Chr(0x0307),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"diaeresis", {
 			unicode: "{U+0308}", html: "&#776;",
@@ -1064,19 +1223,25 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["D", "В"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0308)
+			symbol: DottedCircle . Chr(0x0308),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"dot_below", {
 			unicode: "{U+0323}", html: "&#803;",
 			tags: ["dot below", "точка снизу"],
 			group: ["Diacritics Secondary", ["d", "в"]],
-			symbol: DottedCircle . Chr(0x0323)
+			symbol: DottedCircle . Chr(0x0323),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"diaeresis_below", {
 			unicode: "{U+0324}", html: "&#804;",
 			tags: ["diaeresis below", "диерезис снизу"],
 			group: ["Diacritics Secondary", ["D", "В"]],
-			symbol: DottedCircle . Chr(0x0324)
+			symbol: DottedCircle . Chr(0x0324),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -1085,7 +1250,9 @@ MapInsert(Characters,
 			tags: ["fermata", "фермата"],
 			group: [["Diacritics Tertiary", "Diacritics Fast Primary"], ["F", "А"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0352)
+			symbol: DottedCircle . Chr(0x0352),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -1095,7 +1262,9 @@ MapInsert(Characters,
 			tags: ["grave", "гравис"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["g", "п"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0300)
+			symbol: DottedCircle . Chr(0x0300),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"grave_double", {
 			unicode: "{U+030F}", html: "&#783;",
@@ -1103,19 +1272,25 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["G", "П"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x030F)
+			symbol: DottedCircle . Chr(0x030F),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"grave_below", {
 			unicode: "{U+0316}", html: "&#790;",
 			tags: ["grave below", "гравис снизу"],
 			group: ["Diacritics Secondary", ["g", "п"]],
-			symbol: DottedCircle . Chr(0x0316)
+			symbol: DottedCircle . Chr(0x0316),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"grave_tone_vietnamese", {
 			unicode: "{U+0340}", html: "&#832;",
 			tags: ["grave tone", "гравис тона"],
 			group: ["Diacritics Secondary", ["G", "П"]],
-			symbol: DottedCircle . Chr(0x0340)
+			symbol: DottedCircle . Chr(0x0340),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -1124,7 +1299,9 @@ MapInsert(Characters,
 			tags: ["hook above", "хвостик сверху"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["h", "р"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0309)
+			symbol: DottedCircle . Chr(0x0309),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"horn", {
 			unicode: "{U+031B}", html: "&#795;",
@@ -1132,19 +1309,25 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["H", "Р"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x031B)
+			symbol: DottedCircle . Chr(0x031B),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"palatalized_hook_below", {
 			unicode: "{U+0321}", html: "&#801;",
 			tags: ["palatalized hook below", "палатальный крюк"],
 			group: ["Diacritics Secondary", ["h", "р"]],
-			symbol: DottedCircle . Chr(0x0321)
+			symbol: DottedCircle . Chr(0x0321),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"retroflex_hook_below", {
 			unicode: "{U+0322}", html: "&#802;",
 			tags: ["retroflex hook below", "ретрофлексный крюк"],
 			group: ["Diacritics Secondary", ["H", "Р"]],
-			symbol: DottedCircle . Chr(0x0322)
+			symbol: DottedCircle . Chr(0x0322),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -1153,7 +1336,9 @@ MapInsert(Characters,
 			tags: ["macron", "макрон"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["m", "ь"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0304)
+			symbol: DottedCircle . Chr(0x0304),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"macron_below", {
 			unicode: "{U+0331}", html: "&#817;",
@@ -1161,14 +1346,18 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["M", "Ь"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0331)
+			symbol: DottedCircle . Chr(0x0331),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"ogonek", {
 			unicode: "{U+0328}", html: "&#808;",
 			tags: ["ogonek", "огонэк"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["o", "щ"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0328)
+			symbol: DottedCircle . Chr(0x0328),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"ogonek_above", {
 			unicode: "{U+1DCE}", html: "&#7630;",
@@ -1181,32 +1370,42 @@ MapInsert(Characters,
 			unicode: "{U+0305}", html: "&#773;",
 			tags: ["overline", "черта сверху"],
 			group: ["Diacritics Secondary", ["o", "щ"]],
-			symbol: DottedCircle . Chr(0x0305)
+			symbol: DottedCircle . Chr(0x0305),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"overline_double", {
 			unicode: "{U+033F}", html: "&#831;",
 			tags: ["overline", "черта сверху"],
 			group: ["Diacritics Secondary", ["O", "Щ"]],
-			symbol: DottedCircle . Chr(0x033F)
+			symbol: DottedCircle . Chr(0x033F),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"low_line", {
 			unicode: "{U+0332}", html: "&#818;",
 			tags: ["low line", "черта снизу"],
 			group: ["Diacritics Tertiary", ["o", "щ"]],
-			symbol: DottedCircle . Chr(0x0332)
+			symbol: DottedCircle . Chr(0x0332),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"low_line_double", {
 			unicode: "{U+0333}", html: "&#819;",
 			tags: ["dobule low line", "двойная черта снизу"],
 			group: ["Diacritics Tertiary", ["O", "Щ"]],
-			symbol: DottedCircle . Chr(0x0333)
+			symbol: DottedCircle . Chr(0x0333),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"ring_above", {
 			unicode: "{U+030A}", html: "&#778;",
 			tags: ["ring above", "кольцо сверху"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["r", "к"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x030A)
+			symbol: DottedCircle . Chr(0x030A),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"ring_below", {
 			unicode: "{U+0325}", html: "&#805;",
@@ -1214,20 +1413,26 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["R", "К"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0325)
+			symbol: DottedCircle . Chr(0x0325),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"ring_below_double", {
 			unicode: "{U+035A}", html: "&#858;",
 			tags: ["double ring below", "двойное кольцо снизу"],
 			group: ["Diacritics Primary", CtrlR],
-			symbol: DottedCircle . Chr(0x035A)
+			symbol: DottedCircle . Chr(0x035A),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"line_vertical", {
 			unicode: "{U+030D}", html: "&#781;",
 			tags: ["vertical line", "вертикальная черта"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["v", "м"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x030D)
+			symbol: DottedCircle . Chr(0x030D),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"line_vertical_double", {
 			unicode: "{U+030E}", html: "&#782;",
@@ -1235,26 +1440,34 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["V", "М"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x030E)
+			symbol: DottedCircle . Chr(0x030E),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"line_vertical_below", {
 			unicode: "{U+0329}", html: "&#809;",
 			tags: ["vertical line below", "вертикальная черта снизу"],
 			group: ["Diacritics Secondary", ["v", "м"]],
-			symbol: DottedCircle . Chr(0x0329)
+			symbol: DottedCircle . Chr(0x0329),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"line_vertical_double_below", {
 			unicode: "{U+0348}", html: "&#840;",
 			tags: ["dobule vertical line below", "двойная вертикальная черта снизу"],
 			group: ["Diacritics Secondary", ["V", "М"]],
-			symbol: DottedCircle . Chr(0x0348)
+			symbol: DottedCircle . Chr(0x0348),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"stroke_short", {
 			unicode: "{U+0335}", html: "&#821;",
 			tags: ["short stroke", "короткое перечёркивание"],
 			group: [["Diacritics Quatemary", "Diacritics Fast Primary"], ["s", "ы"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0335)
+			symbol: DottedCircle . Chr(0x0335),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"stroke_long", {
 			unicode: "{U+0336}", html: "&#822;",
@@ -1262,7 +1475,9 @@ MapInsert(Characters,
 			group: [["Diacritics Quatemary", "Diacritics Fast Primary"], ["S", "Ы"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0336)
+			symbol: DottedCircle . Chr(0x0336),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"solidus_short", {
 			unicode: "{U+0337}", html: "&#823;",
@@ -1270,7 +1485,9 @@ MapInsert(Characters,
 			group: [["Diacritics Quatemary", "Diacritics Fast Primary"], "\"],
 			show_on_fast_keys: True,
 			alt_on_fast_keys: "[/]",
-			symbol: DottedCircle . Chr(0x0337)
+			symbol: DottedCircle . Chr(0x0337),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"solidus_long", {
 			unicode: "{U+0338}", html: "&#824;",
@@ -1278,14 +1495,18 @@ MapInsert(Characters,
 			group: [["Diacritics Quatemary", "Diacritics Fast Primary"], "/"],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0338)
+			symbol: DottedCircle . Chr(0x0338),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"tilde", {
 			unicode: "{U+0303}", html: "&#771;",
 			tags: ["tilde", "тильда"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["t", "е"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0303)
+			symbol: DottedCircle . Chr(0x0303),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"tilde_vertical", {
 			unicode: "{U+033E}", html: "&#830;",
@@ -1293,32 +1514,42 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["T", "Е"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x033E)
+			symbol: DottedCircle . Chr(0x033E),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"tilde_below", {
 			unicode: "{U+0330}", html: "&#816;",
 			tags: ["tilde below", "тильда снизу"],
 			group: ["Diacritics Secondary", ["t", "е"]],
-			symbol: DottedCircle . Chr(0x0330)
+			symbol: DottedCircle . Chr(0x0330),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"tilde_not", {
 			unicode: "{U+034A}", html: "&#842;",
 			tags: ["not tilde", "перечёрнутая тильда"],
 			group: ["Diacritics Secondary", ["T", "Е"]],
-			symbol: DottedCircle . Chr(0x034A)
+			symbol: DottedCircle . Chr(0x034A),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"tilde_overlay", {
 			unicode: "{U+0334}", html: "&#820;",
 			tags: ["tilde overlay", "тильда посередине"],
 			group: ["Diacritics Quatemary", ["t", "е"]],
-			symbol: DottedCircle . Chr(0x0334)
+			symbol: DottedCircle . Chr(0x0334),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"x_above", {
 			unicode: "{U+033D}", html: "&#829;",
 			tags: ["x above", "x сверху"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["x", "ч"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x033D)
+			symbol: DottedCircle . Chr(0x033D),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"x_below", {
 			unicode: "{U+0353}", html: "&#851;",
@@ -1326,14 +1557,18 @@ MapInsert(Characters,
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["X", "Ч"]],
 			modifier: "LShift",
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x0353)
+			symbol: DottedCircle . Chr(0x0353),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		"zigzag_above", {
 			unicode: "{U+035B}", html: "&#859;",
 			tags: ["zigzag above", "зигзаг сверху"],
 			group: [["Diacritics Primary", "Diacritics Fast Primary"], ["z", "я"]],
 			show_on_fast_keys: True,
-			symbol: DottedCircle . Chr(0x035B)
+			symbol: DottedCircle . Chr(0x035B),
+			symbolCustom: "s72",
+			symbolFont: "Cambria"
 		},
 		;
 		;
@@ -2261,9 +2496,8 @@ MapInsert(Characters,
 			group: ["Latin Ligatures"],
 			tags: ["!aea", "лигатура AE с акутом", "ligature AE with acute"],
 			recipe: ["AE" . GetChar("acute"), Chr(0x00C6) . GetChar("acute")],
-			recipeAlt: [
-				"AE" . DottedCircle . GetChar("acute"),
-				Chr(0x00C6) . DottedCircle . GetChar("acute")
+			recipeAlt: ["AE" GetChar("dotted_circle", "acute"),
+				Chr(0x00C6) GetChar("dotted_circle", "acute")
 			],
 			symbol: Chr(0x01FC)
 		},
@@ -2271,11 +2505,9 @@ MapInsert(Characters,
 			unicode: "{U+01FD}", html: "&#509;",
 			titlesAlt: True,
 			group: ["Latin Ligatures"],
-			tags: [".aea", "лигатура ae с акутом", "ligature ae with acute"],
-			recipe: ["ae" . GetChar("acute"), Chr(0x00E6) . GetChar("acute")],
-			recipeAlt: [
-				"ae" . DottedCircle . GetChar("acute"),
-				Chr(0x00E6) . DottedCircle . GetChar("acute")
+			tags: [".aea", "лигатура ae с акутом", "ligature ae with acute"], recipe: ["ae" . GetChar("acute"), Chr(0x00E6) . GetChar("acute")],
+			recipeAlt: ["ae" GetChar("dotted_circle", "acute"),
+				Chr(0x00E6) GetChar("dotted_circle", "acute")
 			],
 			symbol: Chr(0x01FD)
 		},
@@ -2285,9 +2517,8 @@ MapInsert(Characters,
 			group: ["Latin Ligatures"],
 			tags: ["!aem", "лигатура AE с макроном", "ligature AE with macron"],
 			recipe: ["AE" . GetChar("macron"), Chr(0x00C6) . GetChar("macron")],
-			recipeAlt: [
-				"AE" . DottedCircle . GetChar("macron"),
-				Chr(0x00C6) . DottedCircle . GetChar("macron")
+			recipeAlt: ["AE" GetChar("dotted_circle", "macron"),
+				Chr(0x00C6) GetChar("dotted_circle", "macron")
 			],
 			symbol: Chr(0x01E2)
 		},
@@ -2297,9 +2528,8 @@ MapInsert(Characters,
 			group: ["Latin Ligatures"],
 			tags: [".aem", "лигатура ae с макроном", "ligature ae with macron"],
 			recipe: ["ae" . GetChar("macron"), Chr(0x00E6) . GetChar("macron")],
-			recipeAlt: [
-				"ae" . DottedCircle . GetChar("macron"),
-				Chr(0x00E6) . DottedCircle . GetChar("macron")
+			recipeAlt: ["ae" GetChar("dotted_circle", "macron"),
+				Chr(0x00E6) GetChar("dotted_circle", "macron")
 			],
 			symbol: Chr(0x01E3)
 		},
@@ -5630,7 +5860,7 @@ GREPizeSelection(GetCollaborative := False) {
 		},
 			"dialogue_emdash", {
 				grep: "(?<=" Punctuations ")\s" GetChar("emdash") "\s",
-				replace: GetChar(CustomDialogue, "emdash", CustomDialogue)
+				replace: GetChar(CustomDialogue "[1,3]", "emdash")
 			},
 			"this_emdash", {
 				grep: "(?<!" Punctuations ")\s" GetChar("emdash") "\s",
@@ -6269,8 +6499,8 @@ OpenPanel(*) {
 }
 
 CommonInfoFonts := {
-	preview: "Cambria",
-	previewSize: "s72",
+	preview: "Noto Serif",
+	previewSize: "s70",
 	previewSmaller: "s40",
 	titleSize: "s14",
 }
@@ -6425,8 +6655,8 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vDiacriticTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxDiacritic.preview.SetFont(CommonInfoFonts.previewSize, CommonInfoFonts.preview)
-	GrouBoxDiacritic.title.SetFont(CommonInfoFonts.titleSize, CommonInfoFonts.preview)
+	GrouBoxDiacritic.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GrouBoxDiacritic.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
 	GrouBoxDiacritic.LaTeX.SetFont("s12")
 	GrouBoxDiacritic.alt.SetFont("s12")
 	GrouBoxDiacritic.unicode.SetFont("s12")
@@ -6480,8 +6710,8 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vLettersTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxLetters.preview.SetFont(CommonInfoFonts.previewSize, CommonInfoFonts.preview)
-	GrouBoxLetters.title.SetFont(CommonInfoFonts.titleSize, CommonInfoFonts.preview)
+	GrouBoxLetters.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GrouBoxLetters.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
 	GrouBoxLetters.LaTeX.SetFont("s12")
 	GrouBoxLetters.alt.SetFont("s12")
 	GrouBoxLetters.unicode.SetFont("s12")
@@ -6537,8 +6767,8 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vSpacesTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxSpaces.preview.SetFont(CommonInfoFonts.previewSize, CommonInfoFonts.preview)
-	GrouBoxSpaces.title.SetFont(CommonInfoFonts.titleSize, CommonInfoFonts.preview)
+	GrouBoxSpaces.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GrouBoxSpaces.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
 	GrouBoxSpaces.LaTeX.SetFont("s12")
 	GrouBoxSpaces.alt.SetFont("s12")
 	GrouBoxSpaces.unicode.SetFont("s12")
@@ -6696,8 +6926,8 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vLigaturesTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxLigatures.preview.SetFont(CommonInfoFonts.previewSize, CommonInfoFonts.preview)
-	GrouBoxLigatures.title.SetFont(CommonInfoFonts.titleSize, CommonInfoFonts.preview)
+	GrouBoxLigatures.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GrouBoxLigatures.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
 	GrouBoxLigatures.LaTeX.SetFont("s12")
 	GrouBoxLigatures.alt.SetFont("s12")
 	GrouBoxLigatures.unicode.SetFont("s12")
@@ -6773,8 +7003,8 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vFastKeysTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxFastKeys.preview.SetFont(CommonInfoFonts.previewSize, CommonInfoFonts.preview)
-	GrouBoxFastKeys.title.SetFont(CommonInfoFonts.titleSize, CommonInfoFonts.preview)
+	GrouBoxFastKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GrouBoxFastKeys.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
 	GrouBoxFastKeys.LaTeX.SetFont("s12")
 	GrouBoxFastKeys.alt.SetFont("s12")
 	GrouBoxFastKeys.unicode.SetFont("s12")
@@ -7044,6 +7274,12 @@ SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, Prev
 					}
 				}
 
+
+				if (HasProp(value, "symbolFont")) {
+					PreviewGroup.preview.SetFont(, value.symbolFont)
+				} else {
+					PreviewGroup.preview.SetFont(, FontFace["serif"].name)
+				}
 
 				if HasProp(value, "symbolCustom") {
 					PreviewGroup.preview.SetFont(
