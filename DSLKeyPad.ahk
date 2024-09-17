@@ -2327,18 +2327,39 @@ MapInsert(Characters,
 			group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "7"],
 			show_on_fast_keys: True,
 			alt_on_fast_keys: "LShift [>] RShift [" Backquote "][Ё]",
-			recipe: ApostropheMark . ">",
+			recipe: ApostropheMark ">",
 			symbol: Chr(0x2019)
 		},
-		"quote_left_low_double", {
+		"quote_low_9_single", {
+			unicode: "{U+201A}", html: "&#8218;", entity: "&sbquo;",
+			altcode: "0146",
+			tags: ["single low-9", "нижняя открывающая кавычка"],
+			group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "8"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LShift RShift [<]",
+			recipe: ApostropheMark Chr(0x2193) "<",
+			symbol: Chr(0x201A)
+		},
+		"quote_low_9_double", {
 			unicode: "{U+201E}", html: "&#8222;", entity: "&bdquo;",
 			altcode: "0132",
-			tags: ["left low quotes", "левая нижняя кавычка"],
-			group: [["Quotes", "Smelting Special"], "8"],
-			recipe: QuotationDouble . Chr(0x2193) . "<",
+			tags: ["low-9 quotes", "нижняя открывающая двойная кавычка"],
+			group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "0"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "RShift [<]",
+			recipe: QuotationDouble Chr(0x2193) "<",
 			symbol: Chr(0x201E)
 		},
-		"quote_left_low_double_ghost_ru", {
+		"quote_low_9_double_reversed", {
+			unicode: "{U+2E42}", html: "&#11842;",
+			tags: ["low-9 reversed quotes", "нижняя двойная кавычка"],
+			group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "-"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "RShift [>]",
+			recipe: QuotationDouble Chr(0x2193) ">",
+			symbol: Chr(0x2E42)
+		},
+		"quote_left_double_ghost_ru", {
 			unicode: "{U+201E}", html: "&#8222;", entity: "&bdquo;",
 			altcode: "0132",
 			tags: ["left low quotes", "левая нижняя кавычка"],
@@ -2347,7 +2368,7 @@ MapInsert(Characters,
 			alt_on_fast_keys: "LShift [Б]",
 			symbol: Chr(0x201E)
 		},
-		"quote_left_double_ghost_ru", {
+		"quote_right_double_ghost_ru", {
 			unicode: "{U+201C}", html: "&#8220;", entity: "&ldquo;",
 			altcode: "0147",
 			tags: ["left quotes", "левая кавычка"],
@@ -4752,6 +4773,8 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Cyrillic Ligatures & Letters"],
 			tags: ["!йа", "!ia", "А йотированное", "A iotified"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LShift [Я]",
 			recipe: "ІА",
 			symbol: Chr(0xA656)
 		},
@@ -4760,6 +4783,8 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Cyrillic Ligatures & Letters"],
 			tags: [".йа", ".ia", "а йотированное", "a iotified"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LShift [я]",
 			recipe: "іа",
 			symbol: Chr(0xA657)
 		},
@@ -6018,7 +6043,7 @@ QuotatizeSelection(Mode) {
 	if (PromptValue != "") {
 		france_left := GetChar("france_left")
 		france_right := GetChar("france_right")
-		quote_left_low_double := GetChar("quote_left_low_double")
+		quote_low_9_double := GetChar("quote_low_9_double")
 		quote_left_double := GetChar("quote_left_double")
 		quote_right_double := GetChar("quote_right_double")
 		quote_left_single := GetChar("quote_left_single")
@@ -6051,12 +6076,12 @@ QuotatizeSelection(Mode) {
 		}
 
 		if Mode = "France" {
-			PromptValue := RegExReplace(PromptValue, RegExEscape(france_left), quote_left_low_double)
+			PromptValue := RegExReplace(PromptValue, RegExEscape(france_left), quote_low_9_double)
 			PromptValue := RegExReplace(PromptValue, RegExEscape(france_right), quote_left_double)
 
 			PromptValue := france_left . PromptValue . france_right
 		} else if Mode = "Paw" {
-			PromptValue := quote_left_low_double . PromptValue . quote_left_double
+			PromptValue := quote_low_9_double . PromptValue . quote_left_double
 		} else if Mode = "Double" {
 			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_left_double), quote_left_single)
 			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_right_double), quote_right_single)
@@ -7261,9 +7286,7 @@ SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, Prev
 			}
 
 
-			if (
-				(UnicodeKey == UniTrim(value.unicode)) ||
-				(UnicodeKey == value.unicode)) {
+			if ((UnicodeKey == UniTrim(value.unicode)) || (UnicodeKey == value.unicode)) {
 				if (HasProp(value, "symbol")) {
 					if (HasProp(value, "symbolAlt")) {
 						TargetGroup[PreviewObject].Text := value.symbolAlt
@@ -7386,10 +7409,13 @@ SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, Prev
 				} else {
 					PreviewGroup.latex.SetFont("s12")
 				}
+				break
 			}
 		}
 	}
 }
+
+
 TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 	if !Item {
 		return
@@ -7759,10 +7785,11 @@ FastKeysList :=
 		;
 		"<^>!" SCKeys["Comma"], (*) => LangSeparatedKey("quote_left_double", "france_left"),
 		"<^>!" SCKeys["Dot"], (*) => LangSeparatedKey("quote_right_double", "france_right"),
-		"<^>!<+" SCKeys["Comma"], (*) => LangSeparatedKey("quote_left_single", "quote_left_low_double"),
+		"<^>!<+" SCKeys["Comma"], (*) => LangSeparatedKey("quote_left_single", "quote_low_9_double"),
 		"<^>!<+" SCKeys["Dot"], (*) => LangSeparatedKey("quote_right_single", "quote_left_double"),
-		"<^>!>+" SCKeys["Comma"], (*) => LangSeparatedKey("", "france_single_left"),
-		"<^>!>+" SCKeys["Dot"], (*) => LangSeparatedKey("", "france_single_right"),
+		"<^>!>+" SCKeys["Comma"], (*) => LangSeparatedKey("quote_low_9_double", "france_single_left"),
+		"<^>!<+>+" SCKeys["Comma"], (*) => LangSeparatedKey("quote_low_9_single", ""),
+		"<^>!>+" SCKeys["Dot"], (*) => LangSeparatedKey("quote_low_9_double_reversed", "france_single_right"),
 		"<^>!>+" SCKeys["Tilde"], (*) => HandleFastKey("quote_right_single"),
 		"<^>!>+" SCKeys["C"], (*) => HandleFastKey("cedilla"),
 		;
