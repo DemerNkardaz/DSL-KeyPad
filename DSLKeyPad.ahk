@@ -6606,7 +6606,7 @@ Constructor() {
 	DSLTabs := []
 	DSLCols := { default: [], smelting: [] }
 
-	for _, localeKey in ["diacritics", "letters", "spaces", "commands", "smelting", "fastkeys", "about", "useful", "changelog"] {
+	for _, localeKey in ["diacritics", "spaces", "commands", "smelting", "fastkeys", "about", "useful", "changelog"] {
 		DSLTabs.Push(ReadLocale("tab_" . localeKey))
 	}
 
@@ -6666,7 +6666,7 @@ Constructor() {
 
 	DSLPadGUI := Gui()
 
-	ColumnWidths := [300, 140, 60, 85, 85]
+	ColumnWidths := [300, 150, 60, 85, 0]
 	ColumnAreaWidth := "w620"
 	ColumnAreaHeight := "h480"
 	ColumnAreaRules := "+NoSort -Multi"
@@ -6739,62 +6739,6 @@ Constructor() {
 
 	Tab.UseTab(2)
 
-	LettersLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
-	LettersLV.ModifyCol(1, ColumnWidths[1])
-	LettersLV.ModifyCol(2, ColumnWidths[2])
-	LettersLV.ModifyCol(3, ColumnWidths[3])
-	LettersLV.ModifyCol(4, ColumnWidths[4])
-	LettersLV.ModifyCol(5, ColumnWidths[5])
-
-	DSLContent["BindList"].TabLetters := []
-
-	for item in DSLContent["BindList"].TabLetters
-	{
-		LettersLV.Add(, item[1], item[2], item[3], item[4], item[5])
-	}
-
-
-	LettersFilterIcon := DSLPadGUI.Add("Button", CommonFilter.icon)
-	GuiButtonIcon(LettersFilterIcon, ImageRes, 169)
-	LettersFilter := DSLPadGUI.Add("Edit", CommonFilter.field . "LettersFilter", "")
-	LettersFilter.SetFont("s10")
-	LettersFilter.OnEvent("Change", (*) => FilterListView(DSLPadGUI, "LettersFilter", LettersLV, DSLContent["BindList"].TabLetters))
-
-
-	GrouBoxLetters := {
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
-		preview: DSLPadGUI.Add("Edit", "vLettersSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
-		title: DSLPadGUI.Add("Text", "vLettersTitle " . commonInfoBox.title, CommonInfoBox.titleText),
-		;
-		LaTeXTitleLTX: DSLPadGUI.Add("Text", CommonInfoBox.LaTeXTitleLTX, CommonInfoBox.LaTeXTitleLTXText).SetFont("s10", "Cambria"),
-		LaTeXTitleA: DSLPadGUI.Add("Text", CommonInfoBox.LaTeXTitleA, CommonInfoBox.LaTeXTitleAText).SetFont("s9", "Cambria"),
-		LaTeXTitleE: DSLPadGUI.Add("Text", CommonInfoBox.LaTeXTitleE, CommonInfoBox.LaTeXTitleEText).SetFont("s10", "Cambria"),
-		LaTeXPackage: DSLPadGUI.Add("Text", "vLettersLaTeXPackage " . CommonInfoBox.LaTeXPackage, CommonInfoBox.LaTeXPackageText).SetFont("s9"),
-		LaTeX: DSLPadGUI.Add("Edit", "vLettersLaTeX " . commonInfoBox.LaTeX, CommonInfoBox.LaTeXText),
-		;
-		altTitle: DSLPadGUI.Add("Text", CommonInfoBox.altTitle, CommonInfoBox.altTitleText[LanguageCode]).SetFont("s9"),
-		alt: DSLPadGUI.Add("Edit", "vLettersAlt " . commonInfoBox.alt, CommonInfoBox.altText),
-		;
-		unicodeTitle: DSLPadGUI.Add("Text", CommonInfoBox.unicodeTitle, CommonInfoBox.unicodeTitleText[LanguageCode]).SetFont("s9"),
-		unicode: DSLPadGUI.Add("Edit", "vLettersUnicode " . commonInfoBox.unicode, CommonInfoBox.unicodeText),
-		;
-		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
-		html: DSLPadGUI.Add("Edit", "vLettersHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
-		tags: DSLPadGUI.Add("Edit", "vLettersTags " . commonInfoBox.tags),
-	}
-
-	GrouBoxLetters.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GrouBoxLetters.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
-	GrouBoxLetters.LaTeX.SetFont("s12")
-	GrouBoxLetters.alt.SetFont("s12")
-	GrouBoxLetters.unicode.SetFont("s12")
-	GrouBoxLetters.html.SetFont("s12")
-	GrouBoxLetters.tags.SetFont("s9")
-
-
-	Tab.UseTab(3)
-
 	DSLContent["BindList"].TabSpaces := []
 	InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Spaces", "Win Alt Space", False)
 	InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Dashes", "Win Alt -")
@@ -6850,7 +6794,7 @@ Constructor() {
 	GrouBoxSpaces.html.SetFont("s12")
 	GrouBoxSpaces.tags.SetFont("s9")
 
-	Tab.UseTab(4)
+	Tab.UseTab(3)
 	CommandsTree := DSLPadGUI.AddTreeView("x25 y43 w256 h510 -HScroll")
 
 	CommandsTree.OnEvent("ItemSelect", (TV, Item) => TV_InsertCommandsDesc(TV, Item, GrouBoxCommands.text))
@@ -6939,7 +6883,7 @@ Constructor() {
 	DSLPadGUI.SetFont("s11")
 
 
-	Tab.UseTab(5)
+	Tab.UseTab(4)
 	DSLContent["BindList"].LigaturesInput := [
 		[Map("ru", "Неразрывный дефис", "en", "Non-Breaking Hyphen"), "0-", "‑", UniTrim(CharCodes.nbdash[1])],
 	]
@@ -7011,7 +6955,7 @@ Constructor() {
 	GrouBoxLigatures.tags.SetFont("s9")
 
 
-	Tab.UseTab(6)
+	Tab.UseTab(5)
 
 	DSLContent["BindList"].TabFastKeys := []
 
@@ -7093,7 +7037,7 @@ Constructor() {
 	GrouBoxFastKeys.tags.SetFont("s9")
 
 
-	Tab.UseTab(7)
+	Tab.UseTab(6)
 	AboutLeftBox := DSLPadGUI.Add("GroupBox", "x23 y34 w280 h520",)
 	DSLPadGUI.Add("GroupBox", "x75 y65 w170 h170")
 	DSLPadGUI.Add("Picture", "x98 y89 w128 h128", AppIcoFile)
@@ -7127,7 +7071,7 @@ Constructor() {
 	AboutDescription.SetFont("s12 c333333", "Cambria")
 
 
-	Tab.UseTab(8)
+	Tab.UseTab(7)
 	DSLContent["ru"].Useful := {}
 	DSLContent["ru"].Useful.Typography := "Типографика"
 	DSLContent["ru"].Useful.TypographyLayout := '<a href="https://ilyabirman.ru/typography-layout/">«Типографская раскладка»</a>'
@@ -7162,13 +7106,12 @@ Constructor() {
 	DSLPadGUI.Add("Link", "w600", DSLContent[LanguageCode].Useful.CHnese . '<a href="https://bkrs.info">БКРС</a>')
 	DSLPadGUI.Add("Link", "w600", DSLContent[LanguageCode].Useful.VTnese . '<a href="https://chunom.org">Chữ Nôm</a>')
 
-	Tab.UseTab(9)
+	Tab.UseTab(8)
 	DSLPadGUI.Add("GroupBox", "w825 h520", "🌐 " . ReadLocale("tab_changelog"))
 	InsertChangesList(DSLPadGUI)
 
 
 	DiacriticLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
-	LettersLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
 	SpacesLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
 	FastKeysLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
 	LigaturesLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
@@ -7185,18 +7128,6 @@ Constructor() {
 			"DiacriticHTML",
 			"DiacriticTags",
 			GrouBoxDiacritic]
-		))
-	LettersLV.OnEvent("ItemFocus", (LV, RowNumber) =>
-		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
-			"LettersSymbol",
-			"LettersTitle",
-			"LettersLaTeX",
-			"LettersLaTeXPackage",
-			"LettersAlt",
-			"LettersUnicode",
-			"LettersHTML",
-			"LettersTags",
-			GrouBoxLetters]
 		))
 	SpacesLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
