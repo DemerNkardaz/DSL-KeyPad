@@ -893,12 +893,18 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 
 
 	if AddSeparator
-		TermporaryArray.Push(["", "", "", ""])
+		TermporaryArray.Push(["", "", "", "", ""])
 	if GroupHotKey != ""
-		TermporaryArray.Push(["", GroupHotKey, "", ""])
+		TermporaryArray.Push(["", GroupHotKey, "", "", ""])
 
 	for characterEntry, value in Characters {
-		entryName := RegExReplace(characterEntry, "^\S+\s+")
+		entryID := ""
+		entryName := ""
+		if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
+			entryID := match[1]
+			entryName := match[2]
+		}
+
 		for blackListEntry in BlackList {
 			if (blackListEntry = entryName) {
 				continue 2
@@ -925,6 +931,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 		}
 
 		if GroupValid {
+
 			characterTitle := ""
 			if (HasProp(value, "titles")) {
 				characterTitle := value.titles[LanguageCode]
@@ -953,7 +960,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			}
 
 			if !ShowOnFastKeys || ShowOnFastKeys && (HasProp(value, "show_on_fast_keys") && value.show_on_fast_keys) {
-				TermporaryArray.Push([characterTitle, characterBinding, characterSymbol, UniTrim(value.unicode)])
+				TermporaryArray.Push([characterTitle, characterBinding, characterSymbol, UniTrim(value.unicode), entryID])
 			}
 		}
 	}
@@ -2810,7 +2817,7 @@ MapInsert(Characters,
 			group: ["Latin Ligatures"],
 			tags: ["!ss", "лигатура SS", "ligature SS", "прописной эсцет", "capital eszett"],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: "[S]",
+			alt_on_fast_keys: "LShift [S]",
 			recipe: ["SS", Chr(0x017F) . "S"],
 			symbol: Chr(0x1E9E)
 		},
@@ -2820,7 +2827,7 @@ MapInsert(Characters,
 			group: [["Latin Ligatures"]],
 			tags: [".ss", "лигатура ss", "ligature ss", "строчный эсцет", "small eszett"],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: "[s]",
+			alt_on_fast_keys: "LShift [s]",
 			recipe: ["ss", Chr(0x017F) . "s"],
 			symbol: Chr(0x00DF)
 		},
@@ -6603,11 +6610,11 @@ Constructor() {
 		DSLTabs.Push(ReadLocale("tab_" . localeKey))
 	}
 
-	for _, localeKey in ["name", "key", "view", "unicode"] {
+	for _, localeKey in ["name", "key", "view", "unicode", "entryid"] {
 		DSLCols.default.Push(ReadLocale("col_" . localeKey))
 	}
 
-	for _, localeKey in ["name", "recipe", "result", "unicode"] {
+	for _, localeKey in ["name", "recipe", "result", "unicode", "entryid"] {
 		DSLCols.smelting.Push(ReadLocale("col_" . localeKey))
 	}
 
@@ -6659,8 +6666,7 @@ Constructor() {
 
 	DSLPadGUI := Gui()
 
-	ColumnWidths := [300, 140, 60, 85]
-	ThreeColumnWidths := [300, 150, 160]
+	ColumnWidths := [300, 140, 60, 85, 85]
 	ColumnAreaWidth := "w620"
 	ColumnAreaHeight := "h480"
 	ColumnAreaRules := "+NoSort -Multi"
@@ -6675,6 +6681,7 @@ Constructor() {
 	DiacriticLV.ModifyCol(2, ColumnWidths[2])
 	DiacriticLV.ModifyCol(3, ColumnWidths[3])
 	DiacriticLV.ModifyCol(4, ColumnWidths[4])
+	DiacriticLV.ModifyCol(5, ColumnWidths[5])
 
 
 	DSLContent["BindList"].TabDiacritics := []
@@ -6686,7 +6693,7 @@ Constructor() {
 
 	for item in DSLContent["BindList"].TabDiacritics
 	{
-		DiacriticLV.Add(, item[1], item[2], item[3], item[4])
+		DiacriticLV.Add(, item[1], item[2], item[3], item[4], item[5])
 	}
 
 
@@ -6737,12 +6744,13 @@ Constructor() {
 	LettersLV.ModifyCol(2, ColumnWidths[2])
 	LettersLV.ModifyCol(3, ColumnWidths[3])
 	LettersLV.ModifyCol(4, ColumnWidths[4])
+	LettersLV.ModifyCol(5, ColumnWidths[5])
 
 	DSLContent["BindList"].TabLetters := []
 
 	for item in DSLContent["BindList"].TabLetters
 	{
-		LettersLV.Add(, item[1], item[2], item[3], item[4])
+		LettersLV.Add(, item[1], item[2], item[3], item[4], item[5])
 	}
 
 
@@ -6798,10 +6806,11 @@ Constructor() {
 	SpacesLV.ModifyCol(2, ColumnWidths[2])
 	SpacesLV.ModifyCol(3, ColumnWidths[3])
 	SpacesLV.ModifyCol(4, ColumnWidths[4])
+	SpacesLV.ModifyCol(5, ColumnWidths[5])
 
 	for item in DSLContent["BindList"].TabSpaces
 	{
-		SpacesLV.Add(, item[1], item[2], item[3], item[4])
+		SpacesLV.Add(, item[1], item[2], item[3], item[4], item[5])
 	}
 
 	SpacesFilterIcon := DSLPadGUI.Add("Button", CommonFilter.icon)
@@ -6956,10 +6965,11 @@ Constructor() {
 	LigaturesLV.ModifyCol(2, 110)
 	LigaturesLV.ModifyCol(3, 100)
 	LigaturesLV.ModifyCol(4, ColumnWidths[4])
+	LigaturesLV.ModifyCol(5, ColumnWidths[5])
 
 	for item in DSLContent["BindList"].TabSmelter
 	{
-		LigaturesLV.Add(, item[1], item[2], item[3], item[4])
+		LigaturesLV.Add(, item[1], item[2], item[3], item[4], item[5])
 	}
 
 	LigaturesFilterIcon := DSLPadGUI.Add("Button", CommonFilter.icon)
@@ -7036,10 +7046,11 @@ Constructor() {
 	FastKeysLV.ModifyCol(2, ColumnWidths[2])
 	FastKeysLV.ModifyCol(3, ColumnWidths[3])
 	FastKeysLV.ModifyCol(4, ColumnWidths[4])
+	FastKeysLV.ModifyCol(5, ColumnWidths[5])
 
 	for item in DSLContent["BindList"].TabFastKeys
 	{
-		FastKeysLV.Add(, item[1], item[2], item[3], item[4])
+		FastKeysLV.Add(, item[1], item[2], item[3], item[4], item[5])
 	}
 
 
@@ -7225,28 +7236,17 @@ Constructor() {
 		))
 
 
-	CharacterPreviewRandomCode := ""
+	RandPreview := Map(
+		"Diacritics", GetRandomByGroups(["Diacritics Primary", "Diacritics Secondary", "Diacritics Tertiary"]),
+		"Spaces", GetRandomByGroups(["Spaces", "Dashes", "Quotes", "Special Characters"]),
+		"Ligatures", GetRandomByGroups(["Latin Ligatures", "Cyrillic Ligatures & Letters", "Latin Accented", "Dashes", "Asian Quotes", "Quotes"]),
+		"FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
+	)
 
-	uniStore := []
-	for characterEntry, value in Characters {
-		uniStore.Push(value.unicode)
-	}
-	CharacterPreviewRandomCode := uniStore[Random(uniStore.Length)]
-
-	CharacterPreviewRandomCodes := []
-
-	CharacterPreviewRandomCodes.Push(GetRandomByGroups(["Diacritics Primary", "Diacritics Secondary", "Diacritics Tertiary"]))
-	CharacterPreviewRandomCodes.Push("")
-	CharacterPreviewRandomCodes.Push(GetRandomByGroups(["Spaces", "Special Characters"]))
-	CharacterPreviewRandomCodes.Push("")
-	CharacterPreviewRandomCodes.Push(GetRandomByGroups(["Diacritics Primary", "Spaces", "Special Characters"]))
-
-
-	SetCharacterInfoPanel(CharacterPreviewRandomCodes[1], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", GrouBoxDiacritic)
-	SetCharacterInfoPanel(CharacterPreviewRandomCode, DSLPadGUI, "LettersSymbol", "LettersTitle", "LettersLaTeX", "LettersLaTeXPackage", "LettersAlt", "LettersUnicode", "LettersHTML", "LettersTags", GrouBoxLetters)
-	SetCharacterInfoPanel(CharacterPreviewRandomCodes[3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", GrouBoxSpaces)
-	SetCharacterInfoPanel(CharacterPreviewRandomCodes[5], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", GrouBoxFastKeys)
-	SetCharacterInfoPanel(CharacterPreviewRandomCode, DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", GrouBoxLigatures)
+	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", GrouBoxDiacritic)
+	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", GrouBoxSpaces)
+	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", GrouBoxFastKeys)
+	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", GrouBoxLigatures)
 
 	DSLPadGUI.Title := DSLPadTitle
 
@@ -7257,7 +7257,7 @@ Constructor() {
 PopulateListView(LV, DataList) {
 	LV.Delete()
 	for item in DataList {
-		LV.Add(, item[1], item[2], item[3], item[4])
+		LV.Add(, item[1], item[2], item[3], item[4], item[5])
 	}
 }
 FilterListView(GuiFrame, FilterField, LV, DataList) {
@@ -7271,13 +7271,13 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 		PreviousGroupName := ""
 		for item in DataList {
 			if StrLower(item[1]) = "" {
-				LV.Add(, item[1], item[2], item[3], item[4])
+				LV.Add(, item[1], item[2], item[3], item[4], item[5])
 				GroupStarted := true
 			} else if InStr(StrLower(item[1]), FilterText) {
 				if !GroupStarted {
 					GroupStarted := true
 				}
-				LV.Add(, item[1], item[2], item[3], item[4])
+				LV.Add(, item[1], item[2], item[3], item[4], item[5])
 			} else if GroupStarted {
 				GroupStarted := false
 			}
@@ -7296,14 +7296,39 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 		}
 	}
 }
+
 GetRandomByGroups(GroupNames) {
 	TemporaryStorage := []
 	for characterEntry, value in Characters {
 		if (HasProp(value, "group")) {
-			for group in GroupNames {
-				if (value.group[1] == group) {
-					TemporaryStorage.Push(value.unicode)
-					break
+			groups := value.group[1]
+			if IsObject(groups) {
+				for group in GroupNames {
+					for item in groups {
+						if (item == group) {
+							entryID := ""
+							entryName := ""
+							if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
+								entryID := match[1]
+								entryName := match[2]
+							}
+							TemporaryStorage.Push([entryID, entryName, value.unicode])
+							break 2
+						}
+					}
+				}
+			} else {
+				for group in GroupNames {
+					if (groups == group) {
+						entryID := ""
+						entryName := ""
+						if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
+							entryID := match[1]
+							entryName := match[2]
+						}
+						TemporaryStorage.Push([entryID, entryName, value.unicode])
+						break
+					}
 				}
 			}
 		}
@@ -7314,12 +7339,19 @@ GetRandomByGroups(GroupNames) {
 		return TemporaryStorage[randomIndex]
 	}
 }
-SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroup) {
+
+
+SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroup) {
 	LanguageCode := GetLanguageCode()
 
 	if (UnicodeKey != "") {
 		for characterEntry, value in Characters {
-			entryName := RegExReplace(characterEntry, "^\S+\s+")
+			entryID := ""
+			entryName := ""
+			if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
+				entryID := match[1]
+				entryName := match[2]
+			}
 			characterTitle := ""
 			if (HasProp(value, "titles") &&
 				(!HasProp(value, "titlesAlt") || HasProp(value, "titlesAlt") && value.titlesAlt == True)) {
@@ -7331,7 +7363,7 @@ SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, Prev
 			}
 
 
-			if ((UnicodeKey == UniTrim(value.unicode)) || (UnicodeKey == value.unicode)) {
+			if entryID == EntryIDKey && ((UnicodeKey == UniTrim(value.unicode)) || (UnicodeKey == value.unicode)) {
 				if (HasProp(value, "symbol")) {
 					if (HasProp(value, "symbolAlt")) {
 						TargetGroup[PreviewObject].Text := value.symbolAlt
@@ -7454,7 +7486,6 @@ SetCharacterInfoPanel(UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, Prev
 				} else {
 					PreviewGroup.latex.SetFont("s12")
 				}
-				break
 			}
 		}
 	}
@@ -7501,7 +7532,8 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 }
 LV_CharacterDetails(LV, RowNumber, SetupArray) {
 	UnicodeKey := LV.GetText(RowNumber, 4)
-	SetCharacterInfoPanel(UnicodeKey,
+	EntryIDKey := LV.GetText(RowNumber, 5)
+	SetCharacterInfoPanel(EntryIDKey, UnicodeKey,
 		SetupArray[1], SetupArray[2], SetupArray[3],
 		SetupArray[4], SetupArray[5], SetupArray[6],
 		SetupArray[7], SetupArray[8], SetupArray[9],
