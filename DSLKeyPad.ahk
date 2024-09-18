@@ -2015,7 +2015,8 @@ MapInsert(Characters,
 			LaTeX: "\permil",
 			LaTeXPackage: "wasysym",
 			tags: ["per mille", "промилле"],
-			group: ["Special Characters", "5"],
+			group: [["Special Characters", "Special Fast Secondary"], "5"],
+			show_on_fast_keys: True,
 			symbol: Chr(0x2030)
 		},
 		"pertenthousand", {
@@ -2023,15 +2024,25 @@ MapInsert(Characters,
 			LaTeX: "\textpertenthousand",
 			LaTeXPackage: "textcomp",
 			tags: ["per ten thousand", "промилле", "базисный пункт", "basis point"],
-			group: ["Special Characters", "%"],
+			group: [["Special Characters", "Special Fast Secondary"], "%"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LShift [5]",
 			symbol: Chr(0x2031)
+		},
+		"section", {
+			unicode: "{U+00A7}", html: "&#167;", entity: "&sect;",
+			altCode: "21",
+			tags: ["section", "параграф"],
+			group: [["Special Characters", "Special Fast Secondary"], ["s", "ы"]],
+			show_on_fast_keys: True,
+			symbol: Chr(0x00A7)
 		},
 		"noequals", {
 			unicode: "{U+2260}", html: "&#8800;", entity: "&ne;",
 			tags: ["plus minus", "плюс-минус"],
 			group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "="],
 			show_on_fast_keys: True,
-			recipe: "+\",
+			recipe: "/=",
 			symbol: Chr(0x2260)
 		},
 		"almostequals", {
@@ -2088,21 +2099,27 @@ MapInsert(Characters,
 		"reversed_question", {
 			unicode: "{U+2E2E}", html: "&#11822;",
 			tags: ["reversed ?", "обратный ?"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LAlt [1]",
 			recipe: Chr(0x2B8C) "?",
 			symbol: Chr(0x2E2E)
 		},
 		"inverted_exclamation", {
 			unicode: "{U+00A1}", html: "&#161;", entity: "&iexcl;",
 			tags: ["inverted !", "перевёрнутый !"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[1]",
 			recipe: Chr(0x2B8F) "!",
 			symbol: Chr(0x00A1)
 		},
 		"inverted_question", {
 			unicode: "{U+00BF}", html: "&#191;", entity: "&iquest;",
 			tags: ["inverted ?", "перевёрнутый ?"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[7]",
 			recipe: Chr(0x2B8F) "?",
 			symbol: Chr(0x00BF)
 		},
@@ -2110,42 +2127,54 @@ MapInsert(Characters,
 			unicode: "{U+203C}", html: "&#8252;",
 			altcode: "19",
 			tags: ["double !!", "двойной !!"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "RShift [1]",
 			recipe: "!!",
 			symbol: Chr(0x203C)
 		},
 		"double_exclamation_question", {
 			unicode: "{U+2049}", html: "&#8265;",
 			tags: ["double !?", "двойной !?"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LShift [1]",
 			recipe: "!?",
 			symbol: Chr(0x2049)
 		},
 		"double_question", {
 			unicode: "{U+2047}", html: "&#8263;",
 			tags: ["double ??", "двойной ??"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "RShift [7]",
 			recipe: "??",
 			symbol: Chr(0x2047)
 		},
 		"double_question_exclamation", {
 			unicode: "{U+2048}", html: "&#8264;",
 			tags: ["double ?!", "двойной ?!"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LShift [7]",
 			recipe: "?!",
 			symbol: Chr(0x2048)
 		},
 		"interrobang", {
 			unicode: "{U+203D}", html: "&#8253;",
 			tags: ["interrobang", "интерробанг", "лигатура !?", "ligature !?"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "LShift RShift [1]",
 			recipe: "!+?",
 			symbol: Chr(0x203D)
 		},
 		"interrobang_inverted", {
 			unicode: "{U+2E18}", html: "&#11800;",
 			tags: ["inverted interrobang", "перевёрнутый интерробанг", "лигатура перевёрнутый !?", "ligature inverted !?"],
-			group: ["Smelting Special"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "CapsLock LShift RShift [1]",
 			recipe: Chr(0x2B8F) "!+?",
 			symbol: Chr(0x2E18)
 		},
@@ -2339,7 +2368,6 @@ MapInsert(Characters,
 		},
 		"quote_low_9_single", {
 			unicode: "{U+201A}", html: "&#8218;", entity: "&sbquo;",
-			altcode: "0146",
 			tags: ["single low-9", "нижняя открывающая кавычка"],
 			group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "8"],
 			show_on_fast_keys: True,
@@ -2523,9 +2551,10 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Latin Ligatures"],
 			tags: ["!aea", "лигатура AE с акутом", "ligature AE with acute"],
-			recipe: ["AE" . GetChar("acute"), Chr(0x00C6) . GetChar("acute")],
+			recipe: ["AE" . GetChar("acute"), Chr(0x00C6) GetChar("acute"), "A" Chr(0x00C9)],
 			recipeAlt: ["AE" GetChar("dotted_circle", "acute"),
-				Chr(0x00C6) GetChar("dotted_circle", "acute")
+				Chr(0x00C6) GetChar("dotted_circle", "acute"),
+				"A" Chr(0x00C9)
 			],
 			symbol: Chr(0x01FC)
 		},
@@ -2533,9 +2562,10 @@ MapInsert(Characters,
 			unicode: "{U+01FD}", html: "&#509;",
 			titlesAlt: True,
 			group: ["Latin Ligatures"],
-			tags: [".aea", "лигатура ae с акутом", "ligature ae with acute"], recipe: ["ae" . GetChar("acute"), Chr(0x00E6) . GetChar("acute")],
+			tags: [".aea", "лигатура ae с акутом", "ligature ae with acute"], recipe: ["ae" . GetChar("acute"), Chr(0x00E6) GetChar("acute"), "a" Chr(0x00E9)],
 			recipeAlt: ["ae" GetChar("dotted_circle", "acute"),
-				Chr(0x00E6) GetChar("dotted_circle", "acute")
+				Chr(0x00E6) GetChar("dotted_circle", "acute"),
+				"a" Chr(0x00E9)
 			],
 			symbol: Chr(0x01FD)
 		},
@@ -2544,9 +2574,10 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Latin Ligatures"],
 			tags: ["!aem", "лигатура AE с макроном", "ligature AE with macron"],
-			recipe: ["AE" . GetChar("macron"), Chr(0x00C6) . GetChar("macron")],
+			recipe: ["AE" . GetChar("macron"), Chr(0x00C6) GetChar("macron"), "A" Chr(0x0112)],
 			recipeAlt: ["AE" GetChar("dotted_circle", "macron"),
-				Chr(0x00C6) GetChar("dotted_circle", "macron")
+				Chr(0x00C6) GetChar("dotted_circle", "macron"),
+				"A" Chr(0x0112)
 			],
 			symbol: Chr(0x01E2)
 		},
@@ -2555,9 +2586,10 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Latin Ligatures"],
 			tags: [".aem", "лигатура ae с макроном", "ligature ae with macron"],
-			recipe: ["ae" . GetChar("macron"), Chr(0x00E6) . GetChar("macron")],
+			recipe: ["ae" . GetChar("macron"), Chr(0x00E6) GetChar("macron"), "a" Chr(0x0113)],
 			recipeAlt: ["ae" GetChar("dotted_circle", "macron"),
-				Chr(0x00E6) GetChar("dotted_circle", "macron")
+				Chr(0x00E6) GetChar("dotted_circle", "macron"),
+				"a" Chr(0x0113)
 			],
 			symbol: Chr(0x01E3)
 		},
@@ -4909,7 +4941,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Cyrillic Ligatures & Letters"],
 			tags: ["!йюсм", "!iyusm", "Юс малый йотированный", "little Yus iotified"],
-			recipe: ["ІАТ", "І" . Chr(0x0466)],
+			recipe: ["ІАТ", "І" Chr(0x0466)],
 			symbol: Chr(0x0468)
 		},
 		"cyr_s_yus_little_iotified", {
@@ -4917,7 +4949,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Cyrillic Ligatures & Letters"],
 			tags: [".йюсм", ".iyusm", "юс малый йотированный", "little yus iotified"],
-			recipe: ["іат", "і" . Chr(0x0467)],
+			recipe: ["іат", "і" Chr(0x0467)],
 			symbol: Chr(0x0469)
 		},
 		"cyr_c_yus_little_closed", {
@@ -4925,7 +4957,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Cyrillic Ligatures & Letters"],
 			tags: ["!юсмз", "!yusmz", "Юс малый закрытый", "little Yus closed"],
-			recipe: ["_АТ", "_" . Chr(0x0466)],
+			recipe: ["_АТ", "_" Chr(0x0466)],
 			symbol: Chr(0xA658)
 		},
 		"cyr_s_yus_little_closed", {
@@ -4933,7 +4965,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Cyrillic Ligatures & Letters"],
 			tags: [".юсмз", ".yusmz", "юс малый закрытый", "little yus closed"],
-			recipe: ["_ат", "_" . Chr(0x0467)],
+			recipe: ["_ат", "_" Chr(0x0467)],
 			symbol: Chr(0xA659)
 		},
 		"cyr_c_yus_little_closed_iotified", {
@@ -4941,7 +4973,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Cyrillic Ligatures & Letters"],
 			tags: ["!йюсмз", "!iyusmz", "Юс малый закрытый йотированный", "little Yus closed iotified"],
-			recipe: ["І_АТ", "І_" . Chr(0x0466)],
+			recipe: ["І_АТ", "І" Chr(0xA658), "І_" Chr(0x0466)],
 			symbol: Chr(0xA65C)
 		},
 		"cyr_s_yus_little_closed_iotified", {
@@ -4949,7 +4981,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Cyrillic Ligatures & Letters"],
 			tags: [".йюсмз", ".iyusmz", "юс малый закрытый йотированный", "little yus closed iotified"],
-			recipe: ["і_ат", "і_" . Chr(0x0467)],
+			recipe: ["і_ат", "І" Chr(0xA659), "і_" Chr(0x0467)],
 			symbol: Chr(0xA65D)
 		},
 		"cyr_c_yus_blended", {
@@ -7846,6 +7878,7 @@ FastKeysList :=
 		"<^>!<+" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_caron", "lat_s_let_d_caron"], ["", ""], True),
 		"<^>!<+>+" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"], ["", ""], True),
 		;
+		"<^>!" SCKeys["S"], (*) => HandleFastKey("section"),
 		"<^>!<+" SCKeys["S"], (*) => LangSeparatedKey(["lat_c_lig_eszett", "lat_s_lig_eszett"], ["", ""], True),
 		;
 		"<!" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_acute", "lat_s_let_e_acute"], ["", ""], True),
@@ -7907,6 +7940,17 @@ FastKeysList :=
 		"<^>!" SCKeys["Enter"], (*) => HandleFastKey("carriage_return", "new_line", "emsp"),
 		"<^>!<+" SCKeys["Enter"], (*) => SendPaste("+{Enter}", (*) => HandleFastKey("emsp")),
 		"<^>!>+" SCKeys["Enter"], (*) => HandleFastKey("carriage_return", "new_line", "emsp", "emsp"),
+		;
+		"<^>!" SCKeys["1"], (*) => HandleFastKey("inverted_exclamation"),
+		"<^>!>+" SCKeys["1"], (*) => HandleFastKey("double_exclamation"),
+		"<^>!<+" SCKeys["1"], (*) => HandleFastKey("double_exclamation_question"),
+		"<^>!<+>+" SCKeys["1"], (*) => CapsSeparatedKey("interrobang_inverted", "interrobang"),
+		"<^>!" SCKeys["5"], (*) => HandleFastKey("permille"),
+		"<^>!<+" SCKeys["5"], (*) => HandleFastKey("pertenthousand"),
+		"<^>!" SCKeys["7"], (*) => HandleFastKey("inverted_question"),
+		"<^>!>+" SCKeys["7"], (*) => HandleFastKey("double_question"),
+		"<^>!<+" SCKeys["7"], (*) => HandleFastKey("double_question_exclamation"),
+		"<^>!<!" SCKeys["7"], (*) => HandleFastKey("reversed_question"),
 		;
 		"RAlt", (*) => ProceedCompose(),
 	]
