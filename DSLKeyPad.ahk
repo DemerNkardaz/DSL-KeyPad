@@ -2063,9 +2063,10 @@ MapInsert(Characters,
 		"almostequals", {
 			unicode: "{U+2248}", html: "&#8776;", entity: "&asymp;",
 			tags: ["almost equals", "примерно равно"],
-			group: [["Smelting Special", "Special Fast Secondary"], "="],
+			group: [["Smelting Special", "Special Fast Secondary", "Special Fast"], "="],
 			show_on_fast_keys: True,
 			alt_on_fast_keys: RightShift " [=]",
+			alt_special: "[``=]",
 			recipe: "~=",
 			symbol: Chr(0x2248)
 		},
@@ -7940,18 +7941,15 @@ FastKeysList :=
 		"<^>!<+" SCKeys["7"], (*) => HandleFastKey("double_question_exclamation"),
 		"<^>!<!" SCKeys["7"], (*) => HandleFastKey("reversed_question"),
 		;
-		SCKeys["NumpadAdd"], (*) => RecoveryKey("NumpadAdd"),
-		"+" SCKeys["NumpadAdd"], (*) => RecoveryKey("NumpadAdd"),
-		SCKeys["NumpadSub"], (*) => HandleFastKey("minus"),
-		"+" SCKeys["NumpadSub"], (*) => RecoveryKey("NumpadSub"),
-		SCKeys["NumpadSub"] " & " SCKeys["NumpadAdd"], (*) => HandleFastKey("plusminus"),
-		SCKeys["NumpadAdd"] " & " SCKeys["NumpadSub"], (*) => HandleFastKey("plusminus"),
-		SCKeys["Equals"], (*) => RecoveryKey("Equals"),
-		SCKeys["Slash"], (*) => RecoveryKey("Slash"),
-		"+" SCKeys["Equals"], (*) => RecoveryKey("Equals", True),
-		"+" SCKeys["Slash"], (*) => RecoveryKey("Slash", True),
-		SCKeys["Equals"] " & " SCKeys["Slash"], (*) => HandleFastKey("noequals"),
-		SCKeys["Slash"] " & " SCKeys["Equals"], (*) => HandleFastKey("noequals"),
+		SCKeys["NumpadSub"], (*) => TimedKeyCombinations("NumpadSub", SCKeys["NumpadAdd"], (*) => HandleFastKey("plusminus"), (*) => HandleFastKey("minus")),
+		SCKeys["NumpadAdd"], (*) => TimedKeyCombinations("NumpadAdd", SCKeys["NumpadSub"], (*) => HandleFastKey("plusminus")),
+		SCKeys["Equals"], (*) =>
+			TimedKeyCombinations("Equals",
+				[SCKeys["Slash"], SCKeys["Tilde"]],
+				[(*) => HandleFastKey("noequals"), (*) => HandleFastKey("almostequals")],
+			),
+		SCKeys["Slash"], (*) => TimedKeyCombinations("Slash", SCKeys["Equals"], (*) => HandleFastKey("noequals")),
+		SCKeys["Tilde"], (*) => TimedKeyCombinations("Tilde", SCKeys["Equals"], (*) => HandleFastKey("almostequals")),
 		;
 		"RAlt", (*) => ProceedCompose(),
 	]
@@ -7965,6 +7963,47 @@ RecoveryKey(KeySC, Shift := False) {
 		Send("{Blind}{sc" KeySCCode "}")
 	}
 }
+
+TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False) {
+	global IsCombinationPressed
+	SCEntry := RegExReplace(StartKey, "^\+")
+	IsShiftOn := RegExMatch(StartKey, "^\+")
+	IsCombinationPressed := False
+
+	if IsObject(SecondKeys) {
+		for i, SecondKey in SecondKeys {
+			if (GetKeyState(SecondKey, "P")) {
+				Callbacks[i]()
+				IsCombinationPressed := True
+				SetTimer(ResetDefault, 0)
+				return
+			}
+		}
+	} else {
+		if (GetKeyState(SecondKeys, "P")) {
+			Callbacks()
+			IsCombinationPressed := True
+			SetTimer(ResetDefault, 0)
+			return
+		}
+	}
+
+	SetTimer(ResetDefault, -25)
+
+	ResetDefault() {
+		global IsCombinationPressed
+		if !IsCombinationPressed {
+			if !DefaultCallback {
+				RecoveryKey(SCEntry, IsShiftOn)
+			} else {
+				DefaultCallback()
+			}
+		}
+		IsCombinationPressed := False
+		return
+	}
+}
+
 
 RAltsCount := 0
 RAltsTimerEnds := False
