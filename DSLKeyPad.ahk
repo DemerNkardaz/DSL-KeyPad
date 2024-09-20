@@ -5679,6 +5679,38 @@ MapInsert(Characters,
 			recipe: ["ужат", Chr(0x046B) . Chr(0x0467)],
 			symbol: Chr(0xA65B)
 		},
+		"cyr_c_tse", {
+			unicode: "{U+04B4}", html: "&#1204;",
+			titlesAlt: True,
+			group: ["Cyrillic Ligatures & Letters"],
+			tags: ["Тцэ", "Tse cyrillic"],
+			recipe: "ТЦ",
+			symbol: Chr(0x04B4)
+		},
+		"cyr_s_tse", {
+			unicode: "{U+04B5}", html: "&#1205;",
+			titlesAlt: True,
+			group: ["Cyrillic Ligatures & Letters"],
+			tags: ["тцэ", "tse cyrillic"],
+			recipe: "тц",
+			symbol: Chr(0x04B5)
+		},
+		"cyr_c_tche", {
+			unicode: "{U+A692}", html: "&#42642;",
+			titlesAlt: True,
+			group: ["Cyrillic Ligatures & Letters"],
+			tags: ["Тчэ", "Tche cyrillic"],
+			recipe: "ТЧ",
+			symbol: Chr(0xA692)
+		},
+		"cyr_s_tche", {
+			unicode: "{U+A693}", html: "&#42643;",
+			titlesAlt: True,
+			group: ["Cyrillic Ligatures & Letters"],
+			tags: ["тчэ", "tche cyrillic"],
+			recipe: "тч",
+			symbol: Chr(0xA693)
+		},
 		"cyr_c_yat_iotified", {
 			unicode: "{U+A652}", html: "&#42578;",
 			titlesAlt: True,
@@ -5694,6 +5726,22 @@ MapInsert(Characters,
 			tags: ["ять йотированный", "yat iotified"],
 			recipe: ["іть", "і" . Chr(0x0463)],
 			symbol: Chr(0xA653)
+		},
+		"cyr_c_let_dzhe", {
+			unicode: "{U+040F}", html: "&#1039;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters"],
+			tags: ["Дже", "Dzhe cyrillic"],
+			recipe: "ДЖ",
+			symbol: Chr(0x040F)
+		},
+		"cyr_s_let_dzhe", {
+			unicode: "{U+045F}", html: "&#1119;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters"],
+			tags: ["дже", "dzhe cyrillic"],
+			recipe: "дж",
+			symbol: Chr(0x045F)
 		},
 		"cyr_c_let_i", {
 			unicode: "{U+0406}", html: "&#1030;",
@@ -5712,6 +5760,24 @@ MapInsert(Characters,
 			show_on_fast_keys: True,
 			tags: ["и десятиричное", "i cyrillic"],
 			symbol: Chr(0x0456)
+		},
+		"cyr_c_let_izhitsa", {
+			unicode: "{U+0474}", html: "&#1140;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters", "И"],
+			modifier: LeftAlt,
+			show_on_fast_keys: True,
+			tags: ["Ижица", "Izhitsa cyrillic"],
+			symbol: Chr(0x0474)
+		},
+		"cyr_s_let_izhitsa", {
+			unicode: "{U+0475}", html: "&#1141;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters", "и"],
+			modifier: LeftAlt,
+			show_on_fast_keys: True,
+			tags: ["ижица", "izhitsa cyrillic"],
+			symbol: Chr(0x0475)
 		},
 		"cyr_c_let_yi", {
 			unicode: "{U+0407}", html: "&#1031;",
@@ -5733,23 +5799,23 @@ MapInsert(Characters,
 			recipeAlt: "і" GetChar("dotted_circle", "diaeresis"),
 			symbol: Chr(0x0457)
 		},
-		"cyr_c_let_izhitsa", {
-			unicode: "{U+0474}", html: "&#1140;",
+		"cyr_c_let_j", {
+			unicode: "{U+0408}", html: "&#1032;",
 			titlesAlt: True,
-			group: ["Cyrillic Letters", "И"],
+			group: ["Cyrillic Letters", "Й"],
 			modifier: LeftAlt,
 			show_on_fast_keys: True,
-			tags: ["Ижица", "Izhitsa cyrillic"],
-			symbol: Chr(0x0474)
+			tags: ["ЙЕ", "J cyrillic"],
+			symbol: Chr(0x0408)
 		},
-		"cyr_s_let_izhitsa", {
-			unicode: "{U+0475}", html: "&#1141;",
+		"cyr_s_let_j", {
+			unicode: "{U+0458}", html: "&#1112;",
 			titlesAlt: True,
-			group: ["Cyrillic Letters", "и"],
+			group: ["Cyrillic Letters", "й"],
 			modifier: LeftAlt,
 			show_on_fast_keys: True,
-			tags: ["ижица", "izhitsa cyrillic"],
-			symbol: Chr(0x0475)
+			tags: ["йе", "j cyrillic"],
+			symbol: Chr(0x0458)
 		},
 		"cyr_c_let_ksi", {
 			unicode: "{U+046E}", html: "&#1134;",
@@ -6413,7 +6479,7 @@ LigaturesDictionary := [
 	["0-", CharCodes.nbdash[1]],
 ]
 InputBridge(GroupKey) {
-	ih := InputHook("L1 C M", "L")
+	ih := InputHook("L1 C M")
 	ih.Start()
 	ih.Wait()
 	keyPressed := ""
@@ -7015,7 +7081,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 	} else if (SmeltingMode = "Compose") {
 		ShowInfoMessage("message_compose", , , SkipGroupMessage, True)
 
-		ih := InputHook("C", "L")
+		ih := InputHook("C")
 		ih.MaxLen := 6
 		ih.Start()
 
@@ -8645,6 +8711,7 @@ FastKeysList :=
 		"<^>!" SCKeys["J"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
 		;
 		"<^>!" SCKeys["Q"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
+		"<^>!<!" SCKeys["Q"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_j", "cyr_s_let_j"], True),
 		;
 		"<^>!" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_yus_little", "cyr_s_yus_little"], True),
 		"<^>!<+" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_a_iotified", "cyr_s_a_iotified"], True),
