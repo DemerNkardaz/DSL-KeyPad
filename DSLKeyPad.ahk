@@ -5697,7 +5697,7 @@ MapInsert(Characters,
 		},
 		"cyr_c_let_i", {
 			unicode: "{U+0406}", html: "&#1030;",
-			altCode: "0178 RU" . Chr(0x2328),
+			altCode: "0178 RU" Chr(0x2328),
 			titlesAlt: True,
 			group: ["Cyrillic Letters", "И"],
 			show_on_fast_keys: True,
@@ -5706,7 +5706,7 @@ MapInsert(Characters,
 		},
 		"cyr_s_let_i", {
 			unicode: "{U+0456}", html: "&#1110;",
-			altCode: "0179 RU" . Chr(0x2328),
+			altCode: "0179 RU" Chr(0x2328),
 			titlesAlt: True,
 			group: ["Cyrillic Letters", "и"],
 			show_on_fast_keys: True,
@@ -5716,8 +5716,7 @@ MapInsert(Characters,
 		"cyr_c_let_yi", {
 			unicode: "{U+0407}", html: "&#1031;",
 			titlesAlt: True,
-			group: ["Cyrillic Letters", "И"],
-			modifier: LeftShift,
+			group: ["Cyrillic Letters", "Й"],
 			show_on_fast_keys: True,
 			tags: ["ЙИ десятиричное", "YI cyrillic"],
 			recipe: "І" GetChar("diaeresis"),
@@ -5727,13 +5726,94 @@ MapInsert(Characters,
 		"cyr_s_let_yi", {
 			unicode: "{U+0457}", html: "&#1111;",
 			titlesAlt: True,
-			group: ["Cyrillic Letters", "и"],
-			modifier: LeftShift,
+			group: ["Cyrillic Letters", "й"],
 			show_on_fast_keys: True,
 			tags: ["йи десятиричное", "yi cyrillic"],
 			recipe: "і" GetChar("diaeresis"),
 			recipeAlt: "і" GetChar("dotted_circle", "diaeresis"),
 			symbol: Chr(0x0457)
+		},
+		"cyr_c_let_izhitsa", {
+			unicode: "{U+0474}", html: "&#1140;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters", "И"],
+			modifier: LeftAlt,
+			show_on_fast_keys: True,
+			tags: ["Ижица", "Izhitsa cyrillic"],
+			symbol: Chr(0x0474)
+		},
+		"cyr_s_let_izhitsa", {
+			unicode: "{U+0475}", html: "&#1141;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters", "и"],
+			modifier: LeftAlt,
+			show_on_fast_keys: True,
+			tags: ["ижица", "izhitsa cyrillic"],
+			symbol: Chr(0x0475)
+		},
+		"cyr_c_let_ksi", {
+			unicode: "{U+046E}", html: "&#1134;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters"],
+			tags: ["Кси", "Ksi cyrillic"],
+			recipe: "КС",
+			symbol: Chr(0x046E)
+		},
+		"cyr_s_let_ksi", {
+			unicode: "{U+046F}", html: "&#1135;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters"],
+			tags: ["кси", "ksi cyrillic"],
+			recipe: "кс",
+			symbol: Chr(0x046F)
+		},
+		"cyr_c_let_omega", {
+			unicode: "{U+0460}", html: "&#1120;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters", "О"],
+			show_on_fast_keys: True,
+			tags: ["Омега", "Omega cyrillic"],
+			symbol: Chr(0x0460)
+		},
+		"cyr_s_let_omega", {
+			unicode: "{U+0461}", html: "&#1121;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters", "о"],
+			show_on_fast_keys: True,
+			tags: ["омега", "omega cyrillic"],
+			symbol: Chr(0x0461)
+		},
+		"cyr_c_let_psi", {
+			unicode: "{U+0470}", html: "&#1136;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters"],
+			tags: ["Пси", "Psi cyrillic"],
+			recipe: "ПС",
+			symbol: Chr(0x0470)
+		},
+		"cyr_s_let_psi", {
+			unicode: "{U+0471}", html: "&#1137;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters"],
+			tags: ["пси", "psi cyrillic"],
+			recipe: "пс",
+			symbol: Chr(0x0471)
+		},
+		"cyr_c_let_fita", {
+			unicode: "{U+0472}", html: "&#1138;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters", "Ф"],
+			show_on_fast_keys: True,
+			tags: ["Фита", "Fita cyrillic"],
+			symbol: Chr(0x0472)
+		},
+		"cyr_s_let_fita", {
+			unicode: "{U+0473}", html: "&#1139;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters", "ф"],
+			show_on_fast_keys: True,
+			tags: ["фита", "fita cyrillic"],
+			symbol: Chr(0x0473)
 		},
 		"cyr_c_let_ukr_e", {
 			unicode: "{U+0404}", html: "&#1028;",
@@ -8509,7 +8589,7 @@ FastKeysList :=
 		"<^>!>+" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger_double"),
 		;
 		"<!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_acute", "lat_s_let_a_acute"], ["", ""], True),
-		"<^>!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_breve", "lat_s_let_a_breve"], ["", ""], True),
+		"<^>!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_breve", "lat_s_let_a_breve"], ["cyr_c_let_fita", "cyr_s_let_fita"], True),
 		"<^>!<!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"], ["", ""], True),
 		"<^>!<!<+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_caron", "lat_s_let_a_caron"], ["", ""], True),
 		"<^>!<!>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"], ["", ""], True),
@@ -8518,7 +8598,7 @@ FastKeysList :=
 		"<^>!<+>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_tilde", "lat_s_let_a_tilde"], ["", ""], True),
 		;
 		"<^>!" SCKeys["B"], (*) => LangSeparatedKey(["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"], ["cyr_c_let_i", "cyr_s_let_i"], True),
-		"<^>!<+" SCKeys["B"], (*) => LangSeparatedKey(["lat_c_let_b_hook", "lat_s_let_b_hook"], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
+		"<^>!<+" SCKeys["B"], (*) => LangSeparatedKey(["lat_c_let_b_hook", "lat_s_let_b_hook"], ["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], True),
 		;
 		"<!" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_acute", "lat_s_let_c_acute"], ["", ""], True),
 		"<^>!<!" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"], ["", ""], True),
@@ -8561,6 +8641,10 @@ FastKeysList :=
 		"<^>!<!" SCKeys["I"], (*) => LangSeparatedKey(["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"], ["", ""], True),
 		"<^>!<!<+" SCKeys["I"], (*) => LangSeparatedKey(["lat_c_let_i_caron", "lat_s_let_i_caron"], ["", ""], True),
 		"<^>!<+" SCKeys["I"], (*) => LangSeparatedKey(["", ""], ["", ""], True),
+		;
+		"<^>!" SCKeys["J"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
+		;
+		"<^>!" SCKeys["Q"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
 		;
 		"<^>!" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_yus_little", "cyr_s_yus_little"], True),
 		"<^>!<+" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_a_iotified", "cyr_s_a_iotified"], True),
