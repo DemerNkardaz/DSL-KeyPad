@@ -157,6 +157,7 @@ EscapePressed := False
 
 FastKeysIsActive := False
 SkipGroupMessage := False
+GlagoFutharkActive := False
 InputMode := "Default"
 LaTeXMode := "common"
 
@@ -165,6 +166,7 @@ DefaultConfig := [
 	["Settings", "SkipGroupMessage", "False"],
 	["Settings", "InputMode", "Default"],
 	["Settings", "ScriptInput", "Default"],
+	["Settings", "GlagoliticFuthark", "False"],
 	["Settings", "UserLanguage", ""],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
@@ -183,11 +185,13 @@ DefaultConfig := [
 if FileExist(ConfigFile) {
 	isFastKeysEnabled := IniRead(ConfigFile, "Settings", "FastKeysIsActive", "False")
 	isSkipGroupMessage := IniRead(ConfigFile, "Settings", "SkipGroupMessage", "False")
+	isGlagoliticFuthark := IniRead(ConfigFile, "Settings", "GlagoliticFuthark", "False")
 	InputMode := IniRead(ConfigFile, "Settings", "InputMode", "Default")
 	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXMode", "common")
 
 	FastKeysIsActive := (isFastKeysEnabled = "True")
 	SkipGroupMessage := (isSkipGroupMessage = "True")
+	GlagoFutharkActive := (isGlagoliticFuthark = "True")
 } else {
 	for index, config in DefaultConfig {
 		IniWrite config[3], ConfigFile, config[1], config[2]
@@ -5925,6 +5929,66 @@ MapInsert(Characters,
 		},
 		;
 		;
+		"glagolitic_c_let_az", {
+			unicode: "{U+2C00}", html: "&#11264;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			tags: ["прописной Аз глаголицы", "capital Az glagolitic"],
+			symbol: Chr(0x2C00)
+		},
+		"glagolitic_s_let_az", {
+			unicode: "{U+2C30}", html: "&#11312;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			tags: ["строчный аз глаголицы", "small az glagolitic"],
+			symbol: Chr(0x2C30)
+		},
+		"glagolitic_c_let_fritu", {
+			unicode: "{U+2C17}", html: "&#11287;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			tags: ["прописной Ферт глаголицы", "capital Fritu glagolitic"],
+			symbol: Chr(0x2C17)
+		},
+		"glagolitic_s_let_fritu", {
+			unicode: "{U+2C47}", html: "&#11335;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			tags: ["строчный ферт глаголицы", "small fritu glagolitic"],
+			symbol: Chr(0x2C47)
+		},
+		"glagolitic_c_let_fita", {
+			unicode: "{U+2C2A}", html: "&#11306;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			tags: ["прописная Фита глаголицы", "capital Fita glagolitic"],
+			symbol: Chr(0x2C2A)
+		},
+		"glagolitic_s_let_fita", {
+			unicode: "{U+2C5A}", html: "&#11354;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			tags: ["строчная Фита глаголицы", "small fita glagolitic"],
+			symbol: Chr(0x2C5A)
+		},
+		;
+		;
+		"futhark_ansuz", {
+			unicode: "{U+16A8}", html: "&#5800;",
+			titlesAlt: True,
+			group: ["Futhark Runes"],
+			tags: ["ансуз", "ansuz"],
+			symbol: Chr(0x16A8)
+		},
+		"futhark_fehu", {
+			unicode: "{U+16A0}", html: "&#5792;",
+			titlesAlt: True,
+			group: ["Futhark Runes"],
+			tags: ["феху", "fehu"],
+			symbol: Chr(0x16A0)
+		},
+		;
+		;
 		; * Wallet Signs
 		"wallet_sign", {
 			unicode: "{U+00A4}", html: "&#164;", entity: "&curren;",
@@ -6449,24 +6513,93 @@ SwitchToScript(scriptMode) {
 	return
 }
 
+; Glagolitic, Fuþark
+
+ToggleLetterScript() {
+	KeysArray := [
+		SCKeys["A"], (*) => EmptyFunc(),
+		SCKeys["B"], (*) => EmptyFunc(),
+		SCKeys["C"], (*) => EmptyFunc(),
+		SCKeys["D"], (*) => EmptyFunc(),
+		SCKeys["E"], (*) => EmptyFunc(),
+		SCKeys["F"], (*) => EmptyFunc(),
+		SCKeys["G"], (*) => EmptyFunc(),
+		SCKeys["H"], (*) => EmptyFunc(),
+		SCKeys["I"], (*) => EmptyFunc(),
+		SCKeys["J"], (*) => EmptyFunc(),
+		SCKeys["K"], (*) => EmptyFunc(),
+		SCKeys["L"], (*) => EmptyFunc(),
+		SCKeys["M"], (*) => EmptyFunc(),
+		SCKeys["N"], (*) => EmptyFunc(),
+		SCKeys["O"], (*) => EmptyFunc(),
+		SCKeys["P"], (*) => EmptyFunc(),
+		SCKeys["Q"], (*) => EmptyFunc(),
+		SCKeys["R"], (*) => EmptyFunc(),
+		SCKeys["S"], (*) => EmptyFunc(),
+		SCKeys["T"], (*) => EmptyFunc(),
+		SCKeys["U"], (*) => EmptyFunc(),
+		SCKeys["V"], (*) => EmptyFunc(),
+		SCKeys["W"], (*) => EmptyFunc(),
+		SCKeys["X"], (*) => EmptyFunc(),
+		SCKeys["Y"], (*) => EmptyFunc(),
+		SCKeys["Z"], (*) => EmptyFunc(),
+		SCKeys["LSquareBracket"], (*) => EmptyFunc(),
+		SCKeys["RSquareBracket"], (*) => EmptyFunc(),
+		SCKeys["Tilde"], (*) => EmptyFunc(),
+		SCKeys["Comma"], (*) => EmptyFunc(),
+		SCKeys["Dot"], (*) => EmptyFunc(),
+		SCKeys["Semicolon"], (*) => EmptyFunc(),
+		SCKeys["Apostrophe"], (*) => EmptyFunc(),
+	]
+	LanguageCode := GetLanguageCode()
+	global GlagoFutharkActive, ConfigFile
+	GlagoFutharkActive := !GlagoFutharkActive
+	IniWrite (GlagoFutharkActive ? "True" : "False"), ConfigFile, "Settings", "GlagoFutharkActive"
+
+	ActivationMessage := {}
+	ActivationMessage[] := Map()
+	ActivationMessage["ru"] := {}
+	ActivationMessage["en"] := {}
+	ActivationMessage["ru"].Active := "Ввод глаголицы/футарка активирован"
+	ActivationMessage["ru"].Deactive := "Ввод глаголицы/футарка деактивирован"
+	ActivationMessage["en"].Active := "Glagolitic/Futhark activated"
+	ActivationMessage["en"].Deactive := "Glagolitic/Futhark deactivated"
+	MsgBox(GlagoFutharkActive ? ActivationMessage[LanguageCode].Active : ActivationMessage[LanguageCode].Deactive, "Glagolitic/Futhark", 0x40)
+
+
+	Sleep 25
+	RegisterHotKeys(GlagoliticFuthark, GlagoFutharkActive)
+	if !GlagoFutharkActive {
+		Sleep 25
+		RegisterHotKeys(FastKeysList)
+	}
+	return
+}
+
+GlagoliticFuthark := [
+	SCKeys["A"], (*) => LangSeparatedKey(["futhark_ansuz", "futhark_ansuz"], ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], True),
+	"<^>!" SCKeys["A"], (*) => LangSeparatedKey(["futhark_ansuz", "futhark_ansuz"], ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
+	SCKeys["F"], (*) => LangSeparatedKey(["futhark_fehu", "futhark_fehu"], ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
+]
+
 ChangeScriptInput(ScriptMode) {
 	PreviousScriptMode := IniRead(ConfigFile, "Settings", "ScriptInput", "Default")
 	KeysArray := [
-		SCKeys["1"], "",
-		SCKeys["2"], "",
-		SCKeys["3"], "",
-		SCKeys["4"], "",
-		SCKeys["5"], "",
-		SCKeys["6"], "",
-		SCKeys["7"], "",
-		SCKeys["8"], "",
-		SCKeys["9"], "",
-		SCKeys["0"], "",
-		SCKeys["Minus"], "",
-		SCKeys["Equals"], "",
-		"<+" SCKeys["9"], "",
-		"<+" SCKeys["0"], "",
-		"<+" SCKeys["Equals"], "",
+		SCKeys["1"], (*) => EmptyFunc(),
+		SCKeys["2"], (*) => EmptyFunc(),
+		SCKeys["3"], (*) => EmptyFunc(),
+		SCKeys["4"], (*) => EmptyFunc(),
+		SCKeys["5"], (*) => EmptyFunc(),
+		SCKeys["6"], (*) => EmptyFunc(),
+		SCKeys["7"], (*) => EmptyFunc(),
+		SCKeys["8"], (*) => EmptyFunc(),
+		SCKeys["9"], (*) => EmptyFunc(),
+		SCKeys["0"], (*) => EmptyFunc(),
+		SCKeys["Minus"], (*) => EmptyFunc(),
+		SCKeys["Equals"], (*) => EmptyFunc(),
+		"<+" SCKeys["9"], (*) => EmptyFunc(),
+		"<+" SCKeys["0"], (*) => EmptyFunc(),
+		"<+" SCKeys["Equals"], (*) => EmptyFunc(),
 	]
 
 	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
@@ -7141,8 +7274,9 @@ Hotkey("<#<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection())
 Hotkey("<#<!" SCKeys["NumpadDot"], (*) => GREPizeSelection())
 Hotkey("<^>!" SCKeys["NumpadDot"], (*) => GREPizeSelection(True))
 
-HotKey("<!" SCKeys["ArrUp"], (*) => ChangeScriptInput("sup"))
-HotKey("<!" SCKeys["ArrDown"], (*) => ChangeScriptInput("sub"))
+HotKey("<#<!" SCKeys["ArrUp"], (*) => ChangeScriptInput("sup"))
+HotKey("<#<!" SCKeys["ArrDown"], (*) => ChangeScriptInput("sub"))
+HotKey("<#<!" SCKeys["RCtrl"], (*) => ToggleLetterScript())
 
 ReplaceWithUnicode(Mode := "") {
 	BackupClipboard := A_Clipboard
