@@ -192,7 +192,7 @@ if FileExist(ConfigFile) {
 		IniWrite config[3], ConfigFile, config[1], config[2]
 	}
 }
-
+/*
 FontFace := Map(
 	"sans", {
 		name: "Noto Sans",
@@ -202,6 +202,13 @@ FontFace := Map(
 			name: "Noto Serif",
 			source: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerif/googlefonts/variable-ttf/NotoSerif%5Bwdth%2Cwght%5D.ttf"
 		},
+)
+*/
+FontFace := Map(
+	"serif", {
+		name: "Noto Serif",
+		source: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerif/googlefonts/variable-ttf/NotoSerif%5Bwdth%2Cwght%5D.ttf"
+	},
 )
 
 IsFont(FontName)
