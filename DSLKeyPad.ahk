@@ -1657,7 +1657,7 @@ MapInsert(Characters,
 			symbolCustom: "underline"
 		},
 		"emsp16", {
-			unicode: "{U+2006}", html: "&#8198;", entity: "&emsp16;",
+			unicode: "{U+2006}", html: "&#8198;",
 			tags: ["emsp16", "1/6emsp", "1/6 круглой Шпации"],
 			group: ["Spaces", "6"],
 			modifier: RightShift,
@@ -6151,177 +6151,13 @@ MapInsert(Characters,
 		},
 )
 
-CharCodes := {}
-CharCodes.acute := ["{U+0301}", "&#769;"]
-CharCodes.dacute := ["{U+030B}", "&#779;"]
-CharCodes.acutebelow := ["{U+0317}", "&#791;"]
-CharCodes.asteriskabove := ["{U+20F0}", "&#8432;"]
-CharCodes.asteriskbelow := ["{U+0359}", "&#857;"]
-CharCodes.breve := ["{U+0306}", "&#774;"]
-CharCodes.brevebelow := ["{U+032E}", "&#814;"]
-CharCodes.ibreve := ["{U+0311}", "&#785;"]
-CharCodes.ibrevebelow := ["{U+032F}", "&#815;"]
-CharCodes.circumflex := ["{U+0302}", "&#770;"]
-CharCodes.circumflexbelow := ["{U+032D}", "&#813;"]
-CharCodes.caron := ["{U+030C}", "&#780;"]
-CharCodes.caronbelow := ["{U+032C}", "&#812;"]
-CharCodes.diaeresis := ["{U+0308}", "&#776;"]
-CharCodes.dotabove := ["{U+0307}", "&#775;"]
-CharCodes.fermata := ["{U+0352}", "&#850;"]
-CharCodes.grave := ["{U+0300}", "&#768;"]
-CharCodes.dgrave := ["{U+030F}", "&#783;"]
-CharCodes.gravebelow := ["{U+0316}", "&#790;"]
-CharCodes.hookabove := ["{U+0309}", "&#777;"]
-CharCodes.horn := ["{U+031B}", "&#795;"]
-CharCodes.phookbelow := ["{U+0321}", "&#801;"]
-CharCodes.rhookbelow := ["{U+0322}", "&#802;"]
-CharCodes.bridgeabove := ["{U+0346}", "&#838;"]
-CharCodes.bridgebelow := ["{U+032A}", "&#810;"]
-CharCodes.ibridgebelow := ["{U+033A}", "&#825;"]
-CharCodes.macron := ["{U+0304}", "&#772;"]
-CharCodes.macronbelow := ["{U+0331}", "&#817;"]
-CharCodes.grapjoiner := ["{U+034F}", "&#847;"]
-CharCodes.fractionslash := ["{U+2044}", "&#8260;"]
-CharCodes.dagger := ["{U+2020}", "&#8224;"]
-CharCodes.ddagger := ["{U+2021}", "&#8225;"]
-CharCodes.asterism := ["{U+2042}", "&#8258;"]
-CharCodes.twoasterisks := ["{U+2051}", "&#8273;"]
-CharCodes.lowasterisk := ["{U+204E}", "&#8270;"]
-CharCodes.dash := ["{U+2010}", "&dash;"]
-CharCodes.softhyphen := ["{U+00AD}", "&shy;"]
-CharCodes.emdash := ["{U+2014}", "&mdash;"]
-CharCodes.endash := ["{U+2013}", "&ndash;"]
-CharCodes.numdash := ["{U+2012}", "&#8210;"]
-CharCodes.twoemdash := ["{U+2E3A}", "&#11834;"]
-CharCodes.threemdash := ["{U+2E3B}", "&#11835;"]
-CharCodes.nbdash := ["{U+2011}", "&#8209;"]
-CharCodes.emsp := ["{U+2003}", "&emsp;"]
-CharCodes.ensp := ["{U+2002}", "&ensp;"]
-CharCodes.emsp13 := ["{U+2004}", "&emsp13;"]
-CharCodes.emsp14 := ["{U+2005}", "&emsp14;"]
-CharCodes.emsp16 := ["{U+2006}", "&#8198;"]
-CharCodes.nnbsp := ["{U+202F}", "&#8239;"]
-CharCodes.thinsp := ["{U+2009}", "&#ThinSpace;"]
-CharCodes.hairsp := ["{U+200A}", "&#8202;"]
-CharCodes.puncsp := ["{U+2008}", "&puncsp;"]
-CharCodes.zwsp := ["{U+200B}", "&#8203;"]
-CharCodes.wj := ["{U+2060}", "&NoBreak;"]
-CharCodes.numsp := ["{U+2007}", "&numsp;"]
-CharCodes.nbsp := ["{U+00A0}", "&nbsp;"]
-CharCodes.plusminus := ["{U+00B1}", "&#177;"]
-CharCodes.multiplication := ["{U+00D7}", "&#215;"]
-CharCodes.twodotleader := ["{U+2025}", "&nldr;"]
-CharCodes.ellipsis := ["{U+2026}", "&mldr;"]
-CharCodes.smelter := {}
-CharCodes.smelter.latin_Capital_AA := ["{U+A732}", "&#42802;"]
-CharCodes.smelter.latin_Small_AA := ["{U+A733}", "&#42803;"]
-CharCodes.smelter.latin_Capital_AE := ["{U+00C6}", "&#198;"]
-CharCodes.smelter.latin_Small_AE := ["{U+00E6}", "U+00E6"]
-CharCodes.smelter.latin_Capital_AU := ["{U+A736}", "&#42806;"]
-CharCodes.smelter.latin_Small_AU := ["{U+A737}", "&#42807;"]
-CharCodes.smelter.latin_Capital_OE := ["{U+0152}", "&#338;"]
-CharCodes.smelter.latin_Small_OE := ["{U+0153}", "&#339;"]
-CharCodes.smelter.ff := ["{U+FB00}", "&#64256;"]
-CharCodes.smelter.fl := ["{U+FB02}", "&#64258;"]
-CharCodes.smelter.fi := ["{U+FB01}", "&#64257;"]
-CharCodes.smelter.ft := ["{U+FB05}", "&#64261;"]
-CharCodes.smelter.ffi := ["{U+FB03}", "&#64259;"]
-CharCodes.smelter.ffl := ["{U+FB04}", "&#64260;"]
-CharCodes.smelter.st := ["{U+FB06}", "&#64262;"]
-CharCodes.smelter.ts := ["{U+02A6}", "&#678;"]
-CharCodes.smelter.latin_Capital_ij := ["{U+0132}", "&#306;"]
-CharCodes.smelter.latin_Small_ij := ["{U+0133}", "&#307;"]
-CharCodes.smelter.latin_Capital_LJ := ["{U+01C7}", "&#455;"]
-CharCodes.smelter.latin_Capital_L_Small_j := ["{U+01C8}", "&#456;"]
-CharCodes.smelter.latin_Small_LJ := ["{U+01C9}", "&#457;"]
-CharCodes.smelter.latin_Capital_Fs := ["{U+1E9E}", "&#7838;"]
-CharCodes.smelter.latin_Small_Fs := ["{U+00DF}", "&#223;"]
-CharCodes.smelter.latin_Small_UE := ["{U+1D6B}", "&#7531;"]
-CharCodes.smelter.latin_Capital_OO := ["{U+A74E}", "&#42830;"]
-CharCodes.smelter.latin_Small_OO := ["{U+A74F}", "&#42831;"]
-CharCodes.smelter.latin_Small_ie := ["{U+AB61}", "&#43873;"]
-CharCodes.smelter.cyrillic_Capital_ie := ["{U+0464}", "&#1124;"]
-CharCodes.smelter.cyrillic_Small_ie := ["{U+0465}", "&#1125;"]
-CharCodes.smelter.cyrillic_Capital_Ukraine_E := ["{U+0404}", "&#1028;"]
-CharCodes.smelter.cyrillic_Small_Ukraine_E := ["{U+0454}", "&#1108;"]
-CharCodes.smelter.cyrillic_Captial_Yat := ["{U+0462}", "&#1122;"]
-CharCodes.smelter.cyrillic_Small_Yar := ["{U+0463}", "&#1123;"]
-CharCodes.smelter.cyrillic_Capital_Big_Yus := ["{U+046A}", "&#1130;"]
-CharCodes.smelter.cyrillic_Small_Big_Yus := ["{U+046B}", "&#1131;"]
-CharCodes.smelter.cyrillic_Capital_Little_Yus := ["{U+0466}", "&#1126;"]
-CharCodes.smelter.cyrillic_Small_Little_Yus := ["{U+0467}", "&#1127;"]
-CharCodes.smelter.cyrillic_Captial_Yat_Iotified := ["{U+A652}", "&#42578;"]
-CharCodes.smelter.cyrillic_Small_Yat_Iotified := ["{U+A653}", "&#42579;"]
-CharCodes.smelter.cyrillic_Captial_A_Iotified := ["{U+A656}", "&#42582;"]
-CharCodes.smelter.cyrillic_Small_A_Iotified := ["{U+A657}", "&#42583;"]
-CharCodes.smelter.cyrillic_Captial_Big_Yus_Iotified := ["{U+046C}", "&#1132;"]
-CharCodes.smelter.cyrillic_Small_Big_Yus_Iotified := ["{U+046D}", "&#1133;"]
-CharCodes.smelter.cyrillic_Captial_Little_Yus_Iotified := ["{U+0468}", "&#1128;"]
-CharCodes.smelter.cyrillic_Small_Little_Yus_Iotified := ["{U+0469}", "&#1129;"]
-CharCodes.smelter.cyrillic_Captial_Closed_Little_Yus := ["{U+A658}", "&#42584;"]
-CharCodes.smelter.cyrillic_Small_Closed_Little_Yus := ["{U+A659}", "&#42585;"]
-CharCodes.smelter.cyrillic_Captial_Closed_Little_Yus_Iotified := ["{U+A65C}", "&#42588;"]
-CharCodes.smelter.cyrillic_Small_Closed_Little_Yus_Iotified := ["{U+A65D}", "&#42589;"]
-CharCodes.smelter.cyrillic_Captial_Blended_Yus := ["{U+A65A}", "&#42586;"]
-CharCodes.smelter.cyrillic_Small_Blended_Yus := ["{U+A65B}", "&#42587;"]
-CharCodes.smelter.cyrillic_Multiocular_O := ["{U+A66E}", "&#42606;"]
+;CharCodes.smelter.cyrillic_Multiocular_O := ["{U+A66E}", "&#42606;"]
+
 UniTrim(Str) {
 	return SubStr(Str, 4, StrLen(Str) - 4)
 }
-/*
-BindDiacriticF1 := [
-	[["a", "ф"], [Characters["acute"].unicode, Characters["acute"].html], Characters["acute"].tags],
-	[["A", "Ф"], [Characters["acute_double"].unicode, Characters["acute_double"].html], Characters["acute_double"].tags],
-	[["b", "и"], [Characters["breve"].unicode, Characters["breve"].html], Characters["breve"].tags],
-	[["B", "И"], [Characters["breve_inverted"].unicode, Characters["breve_inverted"].html], Characters["breve_inverted"].tags],
-	[["c", "с"], CharCodes.circumflex, ["Циркумфлекс", "Circumflex", "Крышечка", "Домик"]],
-	[["C", "С"], CharCodes.caron, ["Карон", "Caron", "Гачек", "Hachek", "Hacek"]],
-	[["d", "в"], CharCodes.dotabove, ["Точка сверху", "Dot Above"]],
-	[["D", "В"], CharCodes.diaeresis, ["Диерезис", "Diaeresis", "Умлаут", "Umlaut"]],
-	[["f", "а"], CharCodes.fermata, ["Фермата", "Fermata"]],
-	[["g", "п"], CharCodes.grave, ["Гравис", "Grave"]],
-	[["G", "П"], CharCodes.dgrave, ["2Гравис", "Двойной Гравис", "2Grave", "Double Grave"]],
-	[["h", "р"], CharCodes.hookabove, ["Хвостик сверху", "Hook Above"]],
-	[["H", "Р"], CharCodes.horn, ["Рожок", "Horn"]],
-]
-*/
-BindDiacriticF2 := [
-	[["a", "ф"], CharCodes.acutebelow, ["Акут снизу", "Acute Below", "Ударение снизу"]],
-	[["b", "и"], CharCodes.brevebelow, ["Бреве снизу", "Бревис снизу", "Breve Below", "Кратка снизу"]],
-	[["B", "И"], CharCodes.ibrevebelow, ["Перевёрнутый бреве снизу", "Перевёрнутый бревис снизу", "Inverted Breve Below", "Перевёрнутая кратка снизу"]],
-	[["c", "с"], CharCodes.circumflexbelow, ["Циркумфлекс снизу", "Circumflex Below", "Крышечка снизу", "Домик снизу"]],
-	[["C", "С"], CharCodes.caronbelow, ["Карон снизу", "Caron Below", "Гачек снизу", "Hachek Below", "Hacek below"]],
-	[["g", "п"], CharCodes.gravebelow, ["Гравис снизу", "Grave Below"]],
-	[["h", "р"], CharCodes.phookbelow, ["Палатальный крюк", "palatal Hook Below"]],
-	[["H", "Р"], CharCodes.rhookbelow, ["Ретрофлексный крюк", "Retroflex Hook Below"]],
-]
-BindDiacriticF3 := [
-	[["a", "ф"], CharCodes.asteriskabove, ["Астериск сверху", "Asterisk Above"]],
-	[["A", "Ф"], CharCodes.asteriskbelow, ["Астериск снизу", "Asterisk Below"]],
-	[["b", "и"], CharCodes.bridgeabove, ["Мостик сверху", "Bridge Above"]],
-	[["B", "И"], CharCodes.bridgebelow, ["Мостик снизу", "Bridge Below"]],
-	[CtrlB, CharCodes.ibridgebelow, ["Перевёрнутый мостик снизу", "Inverted Bridge Below"]],
-]
-BindSpaces := [
-	["1", CharCodes.emsp, ["Em Space", "EmSP", "EM_SPACE", "Круглая Шпация"]],
-	["2", CharCodes.ensp, ["En Space", "EnSP", "EN_SPACE", "Полукруглая Шпация"]],
-	["3", CharCodes.emsp13, ["1/3 Em Space", "1/3EmSP", "13 Em Space", "EmSP13", "1/3_SPACE", "1/3 Круглой Шпация"]],
-	["4", CharCodes.emsp14, ["1/4 Em Space", "1/4EmSP", "14 Em Space", "EmSP14", "1/4_SPACE", "1/4 Круглой Шпация"]],
-	["5", CharCodes.thinsp, ["Thin Space", "ThinSP", "Тонкий Пробел", "Узкий Пробел"]],
-	["6", CharCodes.emsp16, ["1/6 Em Space", "1/6EmSP", "16 Em Space", "EmSP16", "1/6_SPACE", "1/6 Круглой Шпация"]],
-	["7", CharCodes.nnbsp, ["Thin No-Break Space", "ThinNoBreakSP", "Тонкий Неразрывный Пробел", "Узкий Неразрывный Пробел"]],
-	["8", CharCodes.hairsp, ["Hair Space", "HairSP", "Волосяная Шпация"]],
-	["9", CharCodes.puncsp, ["Punctuation Space", "PunctuationSP", "Пунктуационный Пробел"]],
-	["0", CharCodes.zwsp, ["Zero-Width Space", "ZeroWidthSP", "Пробел Нулевой Ширины"]],
-	["-", CharCodes.wj, ["Zero-Width No-Break Space", "ZeroWidthSP", "Word Joiner", "WJoiner", "Неразрывный Пробел Нулевой Ширины", "Соединитель слов"]],
-	["=", CharCodes.numsp, ["Number Space", "NumSP", "Figure Space", "FigureSP", "Цифровой пробел"]],
-	[SpaceKey, CharCodes.nbsp, ["No-Break Space", "NBSP", "Неразрывный Пробел"]],
-]
-BindSpecialF6 := [
-	[["a", "ф"], CharCodes.lowasterisk, ["Низкий астериск", "Low Asterisk"]],
-	[["A", "Ф"], CharCodes.twoasterisks, ["Два астериска", "Two Asterisks"]],
-	[CtrlA, CharCodes.asterism, ["Астеризм", "Asterism"]],
-]
+
+
 SuperscriptDictionary := [
 	["1", "{U+00B9}"],
 	["2", "{U+00B2}"],
@@ -6394,97 +6230,7 @@ SubscriptDictionary := [
 	["e", "{U+2091}"],
 	["i", "{U+1D62}"],
 ]
-LigaturesDictionary := [
-	["AA", CharCodes.smelter.latin_Capital_AA[1]],
-	["aa", CharCodes.smelter.latin_Small_AA[1]],
-	["AE", CharCodes.smelter.latin_Capital_AE[1]],
-	["ae", CharCodes.smelter.latin_Small_AE[1]],
-	["AU", CharCodes.smelter.latin_Capital_AU[1]],
-	["au", CharCodes.smelter.latin_Small_AU[1]],
-	["OE", CharCodes.smelter.latin_Capital_OE[1]],
-	["oe", CharCodes.smelter.latin_Small_OE[1]],
-	["ff", CharCodes.smelter.ff[1]],
-	["fl", CharCodes.smelter.fl[1]],
-	["fi", CharCodes.smelter.fi[1]],
-	["ft", CharCodes.smelter.ft[1]],
-	["ffi", CharCodes.smelter.ffi[1]],
-	["ffl", CharCodes.smelter.ffl[1]],
-	["st", CharCodes.smelter.st[1]],
-	["ts", CharCodes.smelter.ts[1]],
-	["IJ", CharCodes.smelter.latin_Capital_ij[1]],
-	["ij", CharCodes.smelter.latin_Small_ij[1]],
-	["LJ", CharCodes.smelter.latin_Capital_LJ[1]],
-	["Lj", CharCodes.smelter.latin_Capital_L_Small_j[1]],
-	["lj", CharCodes.smelter.latin_Small_LJ[1]],
-	["FS", CharCodes.smelter.latin_Capital_Fs[1]],
-	["fs", CharCodes.smelter.latin_Small_Fs[1]],
-	["ue", CharCodes.smelter.latin_Small_UE[1]],
-	["OO", CharCodes.smelter.latin_Capital_OO[1]],
-	["oo", CharCodes.smelter.latin_Small_OO[1]],
-	["ie", CharCodes.smelter.latin_Small_ie[1]],
-	; Cyrillic
-	["Э", CharCodes.smelter.cyrillic_Capital_Ukraine_E[1]],
-	["э", CharCodes.smelter.cyrillic_Small_Ukraine_E[1]],
-	[["ІЄ", "ІЭ"], CharCodes.smelter.cyrillic_Capital_ie[1]],
-	[["іє", "іэ"], CharCodes.smelter.cyrillic_Small_ie[1]],
-	["ТЬ", CharCodes.smelter.cyrillic_Captial_Yat[1]],
-	["ть", CharCodes.smelter.cyrillic_Small_Yar[1]],
-	["УЖ", CharCodes.smelter.cyrillic_Capital_Big_Yus[1]],
-	["уж", CharCodes.smelter.cyrillic_Small_Big_Yus[1]],
-	["АТ", CharCodes.smelter.cyrillic_Capital_Little_Yus[1]],
-	["ат", CharCodes.smelter.cyrillic_Small_Little_Yus[1]],
-	[["ІѢ", "ІТЬ"], CharCodes.smelter.cyrillic_Captial_Yat_Iotified[1]],
-	[["іѣ", "іть"], CharCodes.smelter.cyrillic_Small_Yat_Iotified[1]],
-	["ІА", CharCodes.smelter.cyrillic_Captial_A_Iotified[1]],
-	["іа", CharCodes.smelter.cyrillic_Small_A_Iotified[1]],
-	[["ІѪ", "ІУЖ"], CharCodes.smelter.cyrillic_Captial_Big_Yus_Iotified[1]],
-	[["іѫ", "іуж"], CharCodes.smelter.cyrillic_Small_Big_Yus_Iotified[1]],
-	[["ІѦ", "ІАТ"], CharCodes.smelter.cyrillic_Captial_Little_Yus_Iotified[1]],
-	[["іѧ", "іат"], CharCodes.smelter.cyrillic_Small_Little_Yus_Iotified[1]],
-	[["_Ѧ", "_АТ"], CharCodes.smelter.cyrillic_Captial_Closed_Little_Yus[1]],
-	[["_ѧ", "_ат"], CharCodes.smelter.cyrillic_Small_Closed_Little_Yus[1]],
-	[["І_Ѧ", "І_АТ", "ІꙘ"], CharCodes.smelter.cyrillic_Captial_Closed_Little_Yus_Iotified[1]],
-	[["і_ѧ", "і_ат", "іꙙ"], CharCodes.smelter.cyrillic_Small_Closed_Little_Yus_Iotified[1]],
-	[["УЖАТ", "ѪѦ"], CharCodes.smelter.cyrillic_Captial_Blended_Yus[1]],
-	[["ужат", "ѫѧ"], CharCodes.smelter.cyrillic_Small_Blended_Yus[1]],
-	["о+", CharCodes.smelter.cyrillic_Multiocular_O[1]],
-	["ЛЬ", "{U+0409}"],
-	["ль", "{U+0459}"],
-	["НЬ", "{U+040A}"],
-	["нь", "{U+045A}"],
-	["Ц←", "{U+040F}"],
-	["ц←", "{U+045F}"],
-	["-Ь", "{U+048C}"],
-	["-ь", "{U+048D}"],
-	["Ж,", "{U+0496}"],
-	["ж,", "{U+0497}"],
-	["К,", "{U+049A}"],
-	["к,", "{U+049B}"],
-	["Х,", "{U+04B2}"],
-	["х,", "{U+04B3}"],
-	["Ч,", "{U+04B6}"],
-	["ч,", "{U+04B7}"],
-	["ТЦ", "{U+04B4}"],
-	["тц", "{U+04B5}"],
-	["Ж" . GetChar("breve"), "{U+04C1}"],
-	["ж" . GetChar("breve"), "{U+04C2}"],
-	; Other
-	[["-----", "3-"], CharCodes.threemdash[1]],
-	[["----", "2-"], CharCodes.twoemdash[1]],
-	["---", CharCodes.emdash[1]],
-	["--", CharCodes.endash[1]],
-	["-+", CharCodes.plusminus[1]],
-	["-*", CharCodes.multiplication[1]],
-	["***", CharCodes.asterism[1]],
-	["**", CharCodes.twoasterisks[1]],
-	["*", CharCodes.lowasterisk[1]],
-	["...", CharCodes.ellipsis[1]],
-	["..", CharCodes.twodotleader[1]],
-	["-", CharCodes.softhyphen[1]],
-	[".-", CharCodes.dash[1]],
-	["n-", CharCodes.numdash[1]],
-	["0-", CharCodes.nbdash[1]],
-]
+
 InputBridge(GroupKey) {
 	ih := InputHook("L1 C M")
 	ih.Start()
@@ -7155,7 +6901,13 @@ Ligaturise(SmeltingMode := "InputBox") {
 							for _, recipeEntry in Recipe {
 								if (!IsSingleCase && Input == recipeEntry) ||
 									(IsSingleCase && Input = recipeEntry) {
-									GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+									if InputMode = "HTML" {
+										GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
+									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+										GetUnicodeSymbol := value.LaTeX
+									} else {
+										GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+									}
 									IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
 									Found := True
 									break 3
@@ -7163,7 +6915,13 @@ Ligaturise(SmeltingMode := "InputBox") {
 							}
 						} else if (!IsSingleCase && Input == Recipe) ||
 							(IsSingleCase && Input = Recipe) {
-							GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+							if InputMode = "HTML" {
+								GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
+							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+								GetUnicodeSymbol := value.LaTeX
+							} else {
+								GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+							}
 							IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
 							Found := True
 							break 2
@@ -7205,13 +6963,25 @@ Ligaturise(SmeltingMode := "InputBox") {
 			if IsObject(Recipe) {
 				for _, recipe in Recipe {
 					if (recipe == PromptValue) {
-						Send(value.unicode)
+						if InputMode = "HTML" {
+							value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+							SendText(value.LaTeX)
+						} else {
+							Send(value.unicode)
+						}
 						IniWrite PromptValue, ConfigFile, "LatestPrompts", "Ligature"
 						Found := True
 					}
 				}
 			} else if (Recipe == PromptValue) {
-				Send(value.unicode)
+				if InputMode = "HTML" {
+					value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+					SendText(value.LaTeX)
+				} else {
+					Send(value.unicode)
+				}
 				IniWrite PromptValue, ConfigFile, "LatestPrompts", "Ligature"
 				Found := True
 			}
@@ -7749,11 +7519,6 @@ Constructor() {
 
 
 	Tab.UseTab(4)
-	DSLContent["BindList"].LigaturesInput := [
-		[Map("ru", "Неразрывный дефис", "en", "Non-Breaking Hyphen"), "0-", "‑", UniTrim(CharCodes.nbdash[1])],
-	]
-
-	LocaliseArrayKeys(DSLContent["BindList"].LigaturesInput)
 
 
 	DSLContent["BindList"].TabSmelter := []
@@ -8487,6 +8252,7 @@ SendPaste(SendKey, Callback := "") {
 		Callback()
 	}
 }
+
 
 HandleFastKey(CharacterNames*) {
 	global FastKeysIsActive

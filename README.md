@@ -1,27 +1,60 @@
 # DSL KeyPad \*in dev
 
-## On English
+## In English
 
-This tool provides simplified access to various “special characters” such as spaces, diacritical marks, ligatures, special symbols (⁂‡‰250⁄250, etc.) via hotkeys or other auxiliary tools.
+This utility allows you to input a wide range of various symbols without the need to use “character maps” or other sources for copying. It includes diacritical marks (◌́◌̋◌̆◌̑◌̀◌̏◌̄◌̱), space/spacing variations (&#8198;<ins>&emsp;</ins> <ins>&ensp;</ins>&emsp13;<ins> </ins>&emsp14;<ins> </ins>&thinsp;<ins>&#8198;</ins>&#8198;) and dashes/hyphens (⸻, ⸺, —, –, ‐), quotation marks («Русские „Кавычки“», “English ‘Quotation Marks’”, „«Ghilimele» Românești”,「東アジアの『引用符』」), punctuation marks (…, ¡, ¿, ⁉, ⁈, ‼, ⁇, ‽, ⸘), ligatures (ꜲÆꜶꜸꜴꜼƢꝠꙖꙒ), letters (ĂÂǍɃḈðɆǶÞǷꝹѪѦЄҴ), currencies (₽¥₩€£₸₪), and special symbols (§′″°∞≠≈×−±⁑⁂†‡‰‱←↓↑→↺↻⮌⮏⮍⮎250⁄250), typically unavailable on a keyboard. You can view the full list of symbols in the *Panel*, which can be opened with **Win Alt Home**, or from the tray menu options.
 
-The main panel of the program can be opened using the combination **Win Alt Home**, it lists all existing combinations and commands, including:
+## Input Methods
 
-- Inserting a character by Unicode/Alt-code or its “tag”.
-- Converting numbers to Roman Numerals (17489 → ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ) or to superscript/subscript numbers.
-- The “Smelter” of characters **Win Alt L**: it allows you to create a specific symbol/ligature by combining available keyboard symbols, for example: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ, gbp → £. If the resource does not support combining characters (á = 2 symbols, a◌́, and may turn out to be as “a ́  ”), then some letters can be melted into one mark (á = 1 symbol).
-  - Melt selected symbols: **RShift L**.
-  - Melt symbols on left of caret cursor: **RShift Backspace**.
-  - “Compose” Mode **RAlt×2**: inserts the result of the input sequence as soon as an exact match with one of the “recipes” is detected during input.
+- **Groups** — the primary method, covering diacritical marks, spaces, dashes/hyphens, quotation marks, and special symbols. You need to activate a group of symbols and then press the key corresponding to the desired character. For example, **Win Alt F1** activates the "Basic Diacritics Group", after which pressing “a” will input the acute accent [á] or “m” will input a macron [m̄]. There are eight groups in total: Diacritics (F1, F2, F3, F6), Special Symbols (F7), Spaces (Space), Dashes (-), and Quotes (").
 
-Most combinations are divided into “activation groups” and you need to first activate the desired group, for example, “Win Alt F1” for “First Diacritic Group,” and then press the key for the desired mark, for example, “a” for acute \[á\].
+- **Fast Keys** — uses **LCtrl LAlt**, **LAlt**, or **RAlt** as “initial” keys for quick access to chosen symbols. It includes more symbols than the “Groups”.
 
-You can activate “Quick Keys” via RAlt Home, the simplified combinations for a limited set of characters, such as “Ctrl Alt a” for entering the same acute mark; strict on the Russian keyboard: “RAlt е” for entering “ѣ”, “RAlt и” for entering the Cyrillic “і”, “RAlt э” for entering “є”, etc.
+  Diacritical marks are mostly accessed through **LCtrl LAlt** combinations. For example, the same acute accent and macron can be entered using **LCtrl LAlt a** and **LCtrl LAlt m**, respectively.
 
-For using the “DSL KeyPad” you need to simply [download the .ahk file](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/Install.KeyPad.ahk) and run it in the directory where you want to have the main file of this tool. In the program also there is the system of updates and you do not need to go to the repository again for getting the latest version.
+  **RAlt** combinations are primarily used for letters and special symbols. For example, **RAlt E** on an English layout will type “Ĕ”, and on a Russian layout “Ѫ”. The combination **RAlt A** types “Ă” or “Ѳ” depending on the layout. Additionally, there are a few "simple combinations" — **NumpadSub** will insert the minus sign (−) instead of the hyphen-minus (-), and **NumpadAdd NumpadSub** will insert the plus-minus symbol (±).
+
+  **Note:** This function is disabled by default and can be enabled with **RAlt Home**.
+
+- **"Smelter"** — converts a sequence of characters (“recipe”) into another character, allowing the creation of ligatures (“AE” → “Æ”, “ІѪ” → “Ѭ”), accented letters (“Ă” *two characters* → “Ă” _one character_), or even letters (“ПС” → “Ѱ”, “КС” → “Ѯ”, “ДЖ” → “Џ”) and other symbols (“+−” → “±”, “\*\*\*” → “⁂”, “YEN” → “¥”, “°C” *two characters* → “℃” _one character_).
+
+  The Smelter has four ways to use it:
+
+  - Through the pop-up window, **Win Alt L**.
+  - In text via recipe selection, **RShift L**.
+  - In text, by placing the caret cursor after the recipe, **RShift Backspace**.
+  - In “Compose” mode — allows you to "fuse" characters during typing, **RAlt×2**. It immediately inserts the first exact match for the entered sequence. There is an option to enable/disable waiting with **PauseBreak** (as some recipes start the same way), so “Compose” will not immediately insert the first match.
+
+## Auxiliary Functions
+
+- Insert a character by Unicode ID or Alt-code, **Win Alt U**/**A**.
+- Insert a character by its internal tag in the utility, **Win Alt F**.
+- Convert numbers into Roman Numerals (“17489” → “ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ”) or superscript/subscript digits, **Win RAlt 3**/**1**/**2**.
+- Switch between input methods (Character → HTML Code/Mnemonic → LaTeX → Character), **RAlt RShift Home**. If you switch input from "Character" to "HTML", the corresponding code will be entered, for example, instead of quotes “”, _\&ldquo;\&rdquo;_ will be entered, or instead of Æ → *\&AElig;*.
+
+  **Note:** LaTeX codes are not available for all characters, and some codes are from external packages (which are listed above the LaTeX code in the Panel).
+
+- Text Processors:
+
+  - “Quotationizing” — wraps selected text in quotation marks (depending on the active layout): Gaius Tiberius, Executioner of the Gauls → “Gaius Tiberius, Executioner of the Gauls”, or Gaius Tiberius, “Executioner of the Gauls” → “Gaius Tiberius, ‘Executioner of the Gauls’”.
+
+  - “GREP”-Replacements — replaces regular spaces in the selected text with their variants, for example, non-breaking spaces after one/two-letter words (а, в, не) and some three-letter words (для), or in numbers (1 000, 10 000, 100 000...); thin spaces in initials (I. O. Surname); and so on.
+
+    **Note:** Based on typography rules for Russian.
+
+  - Paragraph indentation — adds an Em-space at the beginning of paragraphs to simulate first-line indentation. This is especially useful for places where you cannot create paragraph indentation in a “civilized” way. Additionally, in paragraphs starting with an em-dash (russian dialogue paragraphs), it replaces the space after the dash with a en-space.
+
+## Limitations
+
+The utility can be used _(reliably)_ only on English or Russian layouts (including [the “Typography Layout”](https://ilyabirman.net/typography-layout/)), as it is based specifically on their keys for combinations. The use of “Fast Key” combinations outside these layouts is ignored, but “Groups” remain available.
+
+## Installation
+
+To use “DSL KeyPad”, simply [download the .ahk file](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/Install.KeyPad.ahk) and run it. The main file of the utility will be downloaded to the location where you run the “installer”, and the other files will be placed in “My Documents\DSLKeyPad”.
 
 ## На русском
 
-Эта утилита позволяет вводить широкий спектр различных символов без надобности использования «карт символов» или других источников для копирования. Она включает в себя диакритические знаки (◌́◌̋◌̆◌̑◌̀◌̏◌̄◌̱), разновидности пробелов/шпаций ( <ins> </ins>, <ins> </ins>, <ins> </ins>, <ins> </ins>, <ins> </ins> ) и тире/дефисов (⸻, ⸺, —, –, ‐), кавычки («Русские „Кавычки“», “English ‘Quotation Marks’”, „«Ghilimele» Românești”,「東アジアの『引用符』」), пунктуацию (…, ¡, ¿, ⁉, ⁈, ‼, ⁇, ‽, ⸘), лигатуры (ꜲÆꜶꜸꜴꜼƢꝠꙖꙒ), буквы (ĂÂǍɃḈðɆǶÞǷꝹѪѦЄҴ), валюты (₽¥₩€£₸₪) и специальные символы (§′″°∞≠≈×−±⁑⁂†‡‰‱←↓↑→↺↻⮌⮏⮍⮎250⁄250), обычно недоступные на клавиатуре. С полным перечнем символов можно ознакомиться в *Панели*, открывающуюся комбинацией **Win Alt Home** или в пунктах меню в трее.
+Эта утилита позволяет вводить широкий спектр различных символов без надобности использования «карт символов» или других источников для копирования. Она включает в себя диакритические знаки (◌́◌̋◌̆◌̑◌̀◌̏◌̄◌̱), разновидности пробелов/шпаций (&#8198;<ins>&emsp;</ins> <ins>&ensp;</ins>&emsp13;<ins> </ins>&emsp14;<ins> </ins>&thinsp;<ins>&#8198;</ins>&#8198;) и тире/дефисов (⸻, ⸺, —, –, ‐), кавычки («Русские „Кавычки“», “English ‘Quotation Marks’”, „«Ghilimele» Românești”,「東アジアの『引用符』」), пунктуацию (…, ¡, ¿, ⁉, ⁈, ‼, ⁇, ‽, ⸘), лигатуры (ꜲÆꜶꜸꜴꜼƢꝠꙖꙒ), буквы (ĂÂǍɃḈðɆǶÞǷꝹѪѦЄҴ), валюты (₽¥₩€£₸₪) и специальные символы (§′″°∞≠≈×−±⁑⁂†‡‰‱←↓↑→↺↻⮌⮏⮍⮎250⁄250), обычно недоступные на клавиатуре. С полным перечнем символов можно ознакомиться в *Панели*, открывающуюся комбинацией **Win Alt Home** или в пунктах меню в трее.
 
 ## Методы ввода
 
@@ -48,7 +81,7 @@ For using the “DSL KeyPad” you need to simply [download the .ahk file](https
 - Вставка символа по ID Юникода или по Alt‐коду, **Win Alt U**/**A**.
 - Вставка символа по внутреннему тегу в утилите, **Win Alt F**.
 - Конвертация числа в Римские Цифры («17489» → «ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ») или в надстрочные/подстрочные цифры, **Win RAlt 3**/**1**/**2**.
-- Изменение ввода «Символ → HTML‐код/Мнемоника → LaTeX → Символ», **RAlt RShift Home**. Если переключить ввод с «Символ» на «HTML», тогда будет вводиться соответствующий код, например: вместо кавычек «» будет введено _\&laquo;\&raquo;_, или вместо Ѫ → *\&#1130;*.
+- Изменение ввода «Символ → HTML‐код/Мнемоника → LaTeX → Символ», **RAlt RShift Home**. Если переключить ввод с «Символ» на «HTML», тогда будет вводиться соответствующий код, например: вместо кавычек «» будет введено _\&laquo;\&raquo;_, или вместо Ѫ → *\&#1130;*.
 
   **Примечание:** LaTeX коды доступны не для всех символов, а некоторые коды указаны из подключаемых пакетов (которые указываются над кодом LaTeX в Панели).
 
