@@ -9065,7 +9065,7 @@ GuiButtonIcon(Handle, File, Index := 1, Options := '') {
 ;
 ;? Special
 
-
+;* Ultra Super Duper Puper Dev’s Secret Function
 GetUnicodeName(Char) {
 	Char := SubStr(Char, 1, 1)
 	Python := ""
@@ -9122,7 +9122,4 @@ SendCharToPy(Mode := "") {
 HotKey("<#<+" SCKeys["PgUp"], (*) => SendCharToPy())
 HotKey("<#<^<+" SCKeys["PgUp"], (*) => SendCharToPy("Copy"))
 
-;
-;Don’t remove ↓ or update duplication repair will not work
-;This is marker for trim update file to avoid receiving multiple update code at once
 ;ApplicationEnd
