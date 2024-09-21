@@ -10,14 +10,14 @@ The main panel of the program can be opened using the combination **Win Alt Ho
 - Converting numbers to Roman Numerals (17489 → ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ) or to superscript/subscript numbers.
 - The “Smelter” of characters **Win Alt L**: it allows you to create a specific symbol/ligature by combining available keyboard symbols, for example: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ, gbp → £. If the resource does not support combining characters (á = 2 symbols, a◌́, and may turn out to be as “a ́  ”), then some letters can be melted into one mark (á = 1 symbol).
   - Melt selected symbols: **RShift L**.
-  - Melt symbols on left of carriage cursor: **RShift Backspace**.
-  - “Compose” Mode **RAlt×2**: inserts the result of the combination as soon as an exact match with one of the “recipes” is detected during input.
+  - Melt symbols on left of caret cursor: **RShift Backspace**.
+  - “Compose” Mode **RAlt×2**: inserts the result of the input sequence as soon as an exact match with one of the “recipes” is detected during input.
 
 Most combinations are divided into “activation groups” and you need to first activate the desired group, for example, “Win Alt F1” for “First Diacritic Group,” and then press the key for the desired mark, for example, “a” for acute \[á\].
 
 You can activate “Quick Keys” via RAlt Home, the simplified combinations for a limited set of characters, such as “Ctrl Alt a” for entering the same acute mark; strict on the Russian keyboard: “RAlt е” for entering “ѣ”, “RAlt ш” for entering the Cyrillic “і”, “RAlt э” for entering “є”, etc.
 
-For using the “DSL KeyPad” you need to simply [download the .ahk file](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/Install.KeyPad.ahk) and run it. In the program also there is the system of updates and you do not need to go to the repository again for getting the latest version.
+For using the “DSL KeyPad” you need to simply [download the .ahk file](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/Install.KeyPad.ahk) and run it in the directory where you want to have the main file of this tool. In the program also there is the system of updates and you do not need to go to the repository again for getting the latest version.
 
 ### На русском
 
@@ -30,13 +30,13 @@ For using the “DSL KeyPad” you need to simply [download the .ahk file](https
 - «Плавильня» символов **Win Alt L** — позволяет через комбинацию доступных на клавиатуре символов получить тот или иной знак/лигатуру, например: ІУЖ → Ѭ, ІА → Ꙗ, AV → Ꜹ, AE◌́ → Ǽ, gbp → £. Если на ресурсе, где вы вводите текст, не поддерживаются комбинируемые знаки (á = 2 символа, a◌́, и может отобразиться как «a ́  »), то некоторые буквы с ними можно «сплавить» в один знак (á = 1 символ).
   - Сплавить выделенные символы — **RShift L**.
   - Сплавить символы левее курсора каретки — **RShift Backspace**.
-  - Режим «Compose» **RAlt×2** — вставляет результат комбинации сразу, как только при вводе обнаружится точное совпадение с один из «рецептов».
+  - Режим «Compose» **RAlt×2** — вставляет результат вводимой комбинации сразу, как только обнаружится точное совпадение с один из «рецептов».
 
 Большинство комбинаций разделено на «группы активаций» — необходимо сначала активировать нужную группу, например, «Win Alt F1» для «Первой группы диакритики», а затем нажать на ключ нужного знака, например «ф» для акута \[á\].
 
 Нажав **RAlt Home** можно активировать «Быстрые ключи» — упрощённые комбинации ограниченного ряда знаков, например, «Ctrl Alt ф» для ввода того же акута; строго на русской раскладке: «RAlt е» для ввода «ѣ», «RAlt ш» для ввода кириллической «і», «RAlt э» для ввода «є» и т.д.
 
-Для использования «DSL KeyPad» требуется просто [скачать .ahk файл](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/Install.KeyPad.ahk) и запустить. В программе так же предусмотрена система обновлений, и вам не потребуется вновь заходить в репозиторий для получения свежей версии.
+Для использования «DSL KeyPad» требуется просто [скачать .ahk файл](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/Install.KeyPad.ahk) и запустить в директории, где будет располагаться главный файл утилиты. В программе так же предусмотрена система обновлений, и вам не потребуется вновь заходить в репозиторий для получения свежей версии.
 
 ---
 
