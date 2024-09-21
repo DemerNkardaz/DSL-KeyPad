@@ -164,6 +164,7 @@ DefaultConfig := [
 	["Settings", "FastKeysIsActive", "False"],
 	["Settings", "SkipGroupMessage", "False"],
 	["Settings", "InputMode", "Default"],
+	["Settings", "ScriptInput", "Default"],
 	["Settings", "UserLanguage", ""],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
@@ -6454,6 +6455,72 @@ SwitchToScript(scriptMode) {
 
 	Send(PromptValue)
 }
+
+ChangeScriptInput(ScriptMode) {
+	PreviousScriptMode := IniRead(ConfigFile, "Settings", "ScriptInput", "Default")
+	KeysArray := [
+		SCKeys["1"], "",
+		SCKeys["2"], "",
+		SCKeys["3"], "",
+		SCKeys["4"], "",
+		SCKeys["5"], "",
+		SCKeys["6"], "",
+		SCKeys["7"], "",
+		SCKeys["8"], "",
+		SCKeys["9"], "",
+		SCKeys["0"], "",
+		SCKeys["Minus"], "",
+		SCKeys["Equals"], "",
+		"<+" SCKeys["9"], "",
+		"<+" SCKeys["0"], "",
+	]
+
+	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
+		IniWrite("Default", ConfigFile, "Settings", "ScriptInput")
+		RegisterHotKeys(KeysArray, False)
+	} else {
+		IniWrite(ScriptMode, ConfigFile, "Settings", "ScriptInput")
+		RegisterHotKeys(ScriptMode == "sup" ? SuperscriptList : SubscriptList, True)
+	}
+}
+
+HotKey("<!" SCKeys["ArrUp"], (*) => ChangeScriptInput("sup"))
+HotKey("<!" SCKeys["ArrDown"], (*) => ChangeScriptInput("sub"))
+
+SuperscriptList := [
+	SCKeys["1"], (*) => Send("{U+00B9}"),
+	SCKeys["2"], (*) => Send("{U+00B2}"),
+	SCKeys["3"], (*) => Send("{U+00B3}"),
+	SCKeys["4"], (*) => Send("{U+2074}"),
+	SCKeys["5"], (*) => Send("{U+2075}"),
+	SCKeys["6"], (*) => Send("{U+2076}"),
+	SCKeys["7"], (*) => Send("{U+2077}"),
+	SCKeys["8"], (*) => Send("{U+2078}"),
+	SCKeys["9"], (*) => Send("{U+2079}"),
+	SCKeys["0"], (*) => Send("{U+2070}"),
+	SCKeys["Minus"], (*) => Send("{U+207B}"),
+	SCKeys["Equals"], (*) => Send("{U+207C}"),
+	"<+" SCKeys["9"], (*) => Send("{U+207D}"),
+	"<+" SCKeys["0"], (*) => Send("{U+207E}"),
+]
+
+SubscriptList := [
+	SCKeys["1"], (*) => Send("{U+2081}"),
+	SCKeys["2"], (*) => Send("{U+2082}"),
+	SCKeys["3"], (*) => Send("{U+2083}"),
+	SCKeys["4"], (*) => Send("{U+2084}"),
+	SCKeys["5"], (*) => Send("{U+2085}"),
+	SCKeys["6"], (*) => Send("{U+2086}"),
+	SCKeys["7"], (*) => Send("{U+2087}"),
+	SCKeys["8"], (*) => Send("{U+2088}"),
+	SCKeys["9"], (*) => Send("{U+2089}"),
+	SCKeys["0"], (*) => Send("{U+2080}"),
+	SCKeys["Minus"], (*) => Send("{U+208B}"),
+	SCKeys["Equals"], (*) => Send("{U+208C}"),
+	"<+" SCKeys["9"], (*) => Send("{U+208D}"),
+	"<+" SCKeys["0"], (*) => Send("{U+208E}"),
+]
+
 ToRomanNumeral(IntValue, CapitalLetters := True) {
 	IntValue := Integer(IntValue)
 	if (IntValue < 1 || IntValue > 2000000) {
@@ -6686,7 +6753,6 @@ ParagraphizeSelection(SendCollaborative := False) {
 	Sleep 1000
 	A_Clipboard := BackupClipboard
 }
-
 
 QuotatizeSelection(Mode) {
 	BackupClipboard := A_Clipboard
@@ -7455,7 +7521,6 @@ Constructor() {
 	Command_smelter_carr := CommandsTree.Add(ReadLocale("func_label_smelter_carr"), Command_Smelter)
 	Command_compose := CommandsTree.Add(ReadLocale("func_label_compose"), Command_smelter)
 	Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
-	Command_num_subscript := CommandsTree.Add(ReadLocale("func_label_num_subscript"))
 	Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
 	Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
 	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
@@ -8074,7 +8139,6 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_smelter_carr",
 		"func_label_compose",
 		"func_label_num_superscript",
-		"func_label_num_subscript",
 		"func_label_num_roman",
 		"func_label_fastkeys",
 		"func_label_inputtoggle",
@@ -8197,7 +8261,7 @@ ToggleFastKeys() {
 	MsgBox(FastKeysIsActive ? ActivationMessage[LanguageCode].Active : ActivationMessage[LanguageCode].Deactive, "FastKeys", 0x40)
 
 	Sleep 25
-	RegFastKeys(FastKeysList)
+	RegisterHotKeys(FastKeysList)
 	return
 }
 
@@ -8330,16 +8394,14 @@ LangSeparatedKey(LatinCharacter, CyrillicCharacter, UseCaps := False) {
 	}
 }
 
-RegFastKeys(Bindings) {
-	global FastKeysIsActive
-
+RegisterHotKeys(Bindings, CheckRule := FastKeysIsActive) {
 	for index, pair in Bindings {
 		if (Mod(index, 2) = 1) {
 			key := pair
 			value := Bindings[index + 1]
 
 			try {
-				if (FastKeysIsActive) {
+				if (CheckRule) {
 					HotKey(key, value, "On")
 				} else {
 					HotKey(key, value, "Off")
@@ -8648,7 +8710,7 @@ RAltsSetStats() {
 	RAltsTimerEnds := False
 }
 
-RegFastKeys(FastKeysList)
+RegisterHotKeys(FastKeysList)
 ;<^<!1:: HandleFastKey("{U+00B9}") ; Superscript 1
 ;<^<!2:: HandleFastKey("{U+00B2}") ; Superscript 2
 ;<^<!3:: HandleFastKey("{U+00B3}") ; Superscript 3
