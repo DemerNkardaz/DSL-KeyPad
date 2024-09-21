@@ -8931,39 +8931,23 @@ OpenScriptFolder(*) {
 }
 ManageTrayItems() {
 	LanguageCode := GetLanguageCode()
-	Labels := Map()
-	Labels["ru"] := {}
-	Labels["en"] := {}
-
-	Labels["ru"].Reload := "Перезапустить"
-	Labels["ru"].Config := "Файл конфига"
-	Labels["ru"].Locale := "Файл локализации"
-	Labels["ru"].Exit := "Закрыть"
-	Labels["ru"].Panel := "Открыть панель"
-	Labels["ru"].Install := "Установить"
-	Labels["ru"].Search := "Поиск знака…"
-	Labels["ru"].Folder := "Открыть папку"
-	Labels["ru"].Smelter := "Сплавить знаки"
-	Labels["ru"].Unicode := "Вставить по Юникоду"
-	Labels["ru"].Altcode := "Вставить по Альт-коду"
-	Labels["ru"].Notifications := "Вкл/выкл Уведомления групп"
-
-
-	Labels["en"].Reload := "Reload"
-	Labels["en"].Config := "Config file"
-	Labels["en"].Locale := "Locale file"
-	Labels["en"].Exit := "Exit"
-	Labels["en"].Panel := "Open panel"
-	Labels["en"].Install := "Install"
-	Labels["en"].Search := "Search symbol…"
-	Labels["en"].Folder := "Open folder"
-	Labels["en"].Smelter := "Symbols melt"
-	Labels["en"].Unicode := "Insert by Unicode"
-	Labels["en"].Altcode := "Insert by Alt-code"
-	Labels["en"].Notifications := "On/Off Group Notifications"
+	Labels := Map(
+		"reload", ReadLocale("tray_func_reload"),
+		"config", ReadLocale("tray_func_config"),
+		"locale", ReadLocale("tray_func_locale"),
+		"exit", ReadLocale("tray_func_exit") "`t" LeftControl "Esc",
+		"panel", ReadLocale("tray_func_panel") "`t" Window LeftAlt "Home",
+		"install", ReadLocale("tray_func_install"),
+		"search", ReadLocale("tray_func_search") "`t" Window LeftAlt "F",
+		"open_folder", ReadLocale("tray_func_open_folder"),
+		"smelter", ReadLocale("tray_func_smelter") "`t" Window LeftAlt "L",
+		"unicode", ReadLocale("tray_func_unicode") "`t" Window LeftAlt "U",
+		"altcode", ReadLocale("tray_func_altcode") "`t" Window LeftAlt "A",
+		"notif", ReadLocale("tray_func_notif") "`t" Window LeftAlt "M"
+	)
 
 	CurrentApp := "DSL KeyPad " . CurrentVersionString
-	UpdateEntry := Labels[LanguageCode].Install . " " . UpdateVersionString
+	UpdateEntry := Labels["install"] . " " . UpdateVersionString
 
 	DSLTray.Delete()
 	DSLTray.Add(CurrentApp, (*) => {})
@@ -8972,34 +8956,34 @@ ManageTrayItems() {
 		DSLTray.SetIcon(UpdateEntry, ImageRes, 176)
 	}
 	DSLTray.Add()
-	DSLTray.Add(Labels[LanguageCode].Panel, OpenPanel)
+	DSLTray.Add(Labels["panel"], OpenPanel)
 	DSLTray.Add()
-	DSLTray.Add(Labels[LanguageCode].Search, (*) => SearchKey())
-	DSLTray.Add(Labels[LanguageCode].Unicode, (*) => InsertUnicodeKey())
-	DSLTray.Add(Labels[LanguageCode].Altcode, (*) => InsertAltCodeKey())
-	DSLTray.Add(Labels[LanguageCode].Smelter, (*) => Ligaturise())
-	DSLTray.Add(Labels[LanguageCode].Folder, OpenScriptFolder)
+	DSLTray.Add(Labels["search"], (*) => SearchKey())
+	DSLTray.Add(Labels["unicode"], (*) => InsertUnicodeKey())
+	DSLTray.Add(Labels["altcode"], (*) => InsertAltCodeKey())
+	DSLTray.Add(Labels["smelter"], (*) => Ligaturise())
+	DSLTray.Add(Labels["open_folder"], OpenScriptFolder)
 	DSLTray.Add()
-	DSLTray.Add(Labels[LanguageCode].Notifications, (*) => ToggleGroupMessage())
+	DSLTray.Add(Labels["notif"], (*) => ToggleGroupMessage())
 	DSLTray.Add()
-	DSLTray.Add(Labels[LanguageCode].Reload, ReloadApplication)
-	DSLTray.Add(Labels[LanguageCode].Config, OpenConfigFile)
-	DSLTray.Add(Labels[LanguageCode].Locale, OpenLocalesFile)
+	DSLTray.Add(Labels["reload"], ReloadApplication)
+	DSLTray.Add(Labels["config"], OpenConfigFile)
+	DSLTray.Add(Labels["locale"], OpenLocalesFile)
 	DSLTray.Add()
-	DSLTray.Add(Labels[LanguageCode].Exit, ExitApplication)
+	DSLTray.Add(Labels["exit"], ExitApplication)
 	DSLTray.Add()
 
-	DSLTray.SetIcon(Labels[LanguageCode].Panel, AppIcoFile)
-	DSLTray.SetIcon(Labels[LanguageCode].Search, ImageRes, 169)
-	DSLTray.SetIcon(Labels[LanguageCode].Unicode, Shell32, 225)
-	DSLTray.SetIcon(Labels[LanguageCode].Altcode, Shell32, 313)
-	DSLTray.SetIcon(Labels[LanguageCode].Smelter, ImageRes, 151)
-	DSLTray.SetIcon(Labels[LanguageCode].Folder, ImageRes, 180)
-	DSLTray.SetIcon(Labels[LanguageCode].Notifications, ImageRes, 016)
-	DSLTray.SetIcon(Labels[LanguageCode].Reload, ImageRes, 229)
-	DSLTray.SetIcon(Labels[LanguageCode].Config, ImageRes, 065)
-	DSLTray.SetIcon(Labels[LanguageCode].Locale, ImageRes, 015)
-	DSLTray.SetIcon(Labels[LanguageCode].Exit, ImageRes, 085)
+	DSLTray.SetIcon(Labels["panel"], AppIcoFile)
+	DSLTray.SetIcon(Labels["search"], ImageRes, 169)
+	DSLTray.SetIcon(Labels["unicode"], Shell32, 225)
+	DSLTray.SetIcon(Labels["altcode"], Shell32, 313)
+	DSLTray.SetIcon(Labels["smelter"], ImageRes, 151)
+	DSLTray.SetIcon(Labels["open_folder"], ImageRes, 180)
+	DSLTray.SetIcon(Labels["notif"], ImageRes, 016)
+	DSLTray.SetIcon(Labels["reload"], ImageRes, 229)
+	DSLTray.SetIcon(Labels["config"], ImageRes, 065)
+	DSLTray.SetIcon(Labels["locale"], ImageRes, 015)
+	DSLTray.SetIcon(Labels["exit"], ImageRes, 085)
 }
 
 ManageTrayItems()
