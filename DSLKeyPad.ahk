@@ -6128,7 +6128,58 @@ MapInsert(Characters,
 		},
 )
 
-CharactersCount := GetMapCount(Characters) - 2
+MapInsert(Characters,
+	"num_sup_0", { unicode: "{U+2070}", html: "&#8304;", symbol: Chr(0x2070) },
+		"num_sup_1", { unicode: "{U+00B9}", html: "&#185;", entity: "&sup1;", symbol: Chr(0x00B9) },
+		"num_sup_2", { unicode: "{U+00B2}", html: "&#178;", entity: "&sup2;", symbol: Chr(0x00B2) },
+		"num_sup_3", { unicode: "{U+00B3}", html: "&#179;", entity: "&sup3;", symbol: Chr(0x00B3) },
+		"num_sup_4", { unicode: "{U+2074}", html: "&#8308;", symbol: Chr(0x2074) },
+		"num_sup_5", { unicode: "{U+2075}", html: "&#8309;", symbol: Chr(0x2075) },
+		"num_sup_6", { unicode: "{U+2076}", html: "&#8310;", symbol: Chr(0x2076) },
+		"num_sup_7", { unicode: "{U+2077}", html: "&#8311;", symbol: Chr(0x2077) },
+		"num_sup_8", { unicode: "{U+2078}", html: "&#8312;", symbol: Chr(0x2078) },
+		"num_sup_9", { unicode: "{U+2079}", html: "&#8313;", symbol: Chr(0x2079) },
+		"num_sup_minus", { unicode: "{U+207B}", html: "&#8315;", symbol: Chr(0x207B) },
+		"num_sup_equals", { unicode: "{U+207C}", html: "&#8316;", symbol: Chr(0x207C) },
+		"num_sup_plus", { unicode: "{U+207A}", html: "&#8314;", symbol: Chr(0x207A) },
+		"num_sup_left_parenthesis", { unicode: "{U+207D}", html: "&#8317;", symbol: Chr(0x207D) },
+		"num_sup_right_parenthesis", { unicode: "{U+207E}", html: "&#8318;", symbol: Chr(0x207E) },
+		"num_sub_0", { unicode: "{U+2080}", html: "&#8320;", symbol: Chr(0x2080) },
+		"num_sub_1", { unicode: "{U+2081}", html: "&#8321;", symbol: Chr(0x2081) },
+		"num_sub_2", { unicode: "{U+2082}", html: "&#8322;", symbol: Chr(0x2082) },
+		"num_sub_3", { unicode: "{U+2083}", html: "&#8323;", symbol: Chr(0x2083) },
+		"num_sub_4", { unicode: "{U+2084}", html: "&#8324;", symbol: Chr(0x2084) },
+		"num_sub_5", { unicode: "{U+2085}", html: "&#8325;", symbol: Chr(0x2085) },
+		"num_sub_6", { unicode: "{U+2086}", html: "&#8326;", symbol: Chr(0x2086) },
+		"num_sub_7", { unicode: "{U+2087}", html: "&#8327;", symbol: Chr(0x2087) },
+		"num_sub_8", { unicode: "{U+2088}", html: "&#8328;", symbol: Chr(0x2088) },
+		"num_sub_9", { unicode: "{U+2089}", html: "&#8329;", symbol: Chr(0x2089) },
+		"num_sub_minus", { unicode: "{U+208B}", html: "&#8331;", symbol: Chr(0x208B) },
+		"num_sub_equals", { unicode: "{U+208C}", html: "&#8332;", symbol: Chr(0x208C) },
+		"num_sub_plus", { unicode: "{U+208A}", html: "&#8330;", symbol: Chr(0x208A) },
+		"num_sub_left_parenthesis", { unicode: "{U+208D}", html: "&#8333;", symbol: Chr(0x208D) },
+		"num_sub_right_parenthesis", { unicode: "{U+208E}", html: "&#8334;", symbol: Chr(0x208E) },
+)
+
+MapInsert(Characters,
+	"kkey_0", { unicode: "{U+0030}", html: "&#48;", sup: "num_sup_0", sub: "num_sub_0", symbol: "0" },
+		"kkey_1", { unicode: "{U+0031}", html: "&#49;", sup: "num_sup_1", sub: "num_sub_1", symbol: "1" },
+		"kkey_2", { unicode: "{U+0032}", html: "&#50;", sup: "num_sup_2", sub: "num_sub_2", symbol: "2" },
+		"kkey_3", { unicode: "{U+0033}", html: "&#51;", sup: "num_sup_3", sub: "num_sub_3", symbol: "3" },
+		"kkey_4", { unicode: "{U+0034}", html: "&#52;", sup: "num_sup_4", sub: "num_sub_4", symbol: "4" },
+		"kkey_5", { unicode: "{U+0035}", html: "&#53;", sup: "num_sup_5", sub: "num_sub_5", symbol: "5" },
+		"kkey_6", { unicode: "{U+0036}", html: "&#54;", sup: "num_sup_6", sub: "num_sub_6", symbol: "6" },
+		"kkey_7", { unicode: "{U+0037}", html: "&#55;", sup: "num_sup_7", sub: "num_sub_7", symbol: "7" },
+		"kkey_8", { unicode: "{U+0038}", html: "&#56;", sup: "num_sup_8", sub: "num_sub_8", symbol: "8" },
+		"kkey_9", { unicode: "{U+0039}", html: "&#57;", sup: "num_sup_9", sub: "num_sub_9", symbol: "9" },
+		"kkey_minus", { unicode: "{U+002D}", html: "&#45;", sup: "num_sup_minus", sub: "num_sub_minus", symbol: "-" },
+		"kkey_equals", { unicode: "{U+003D}", html: "&#61;", sup: "num_sup_equals", sub: "num_sub_equals", symbol: "=" },
+		"kkey_plus", { unicode: "{U+002B}", html: "&#43;", sup: "num_sup_plus", sub: "num_sub_plus", symbol: "+" },
+		"kkey_left_parenthesis", { unicode: "{U+0028}", html: "&#40;", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", symbol: "(" },
+		"kkey_right_parenthesis", { unicode: "{U+0029}", html: "&#41;", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", symbol: ")" },
+)
+
+CharactersCount := GetMapCount(Characters) - 2 - 15
 
 MapInsert(Characters,
 	"misc_crlf_emspace", {
@@ -6158,79 +6209,6 @@ UniTrim(Str) {
 	return SubStr(Str, 4, StrLen(Str) - 4)
 }
 
-
-SuperscriptDictionary := [
-	["1", "{U+00B9}"],
-	["2", "{U+00B2}"],
-	["3", "{U+00B3}"],
-	["4", "{U+2074}"],
-	["5", "{U+2075}"],
-	["6", "{U+2076}"],
-	["7", "{U+2077}"],
-	["8", "{U+2078}"],
-	["9", "{U+2079}"],
-	["0", "{U+2070}"],
-	["+", "{U+207A}"],
-	["-", "{U+207B}"],
-	["=", "{U+207C}"],
-	["(", "{U+207D}"],
-	[")", "{U+207E}"],
-	["a", "{U+1D43}"],
-	["b", "{U+1D47}"],
-	["c", "{U+1D9C}"],
-	["d", "{U+1D48}"],
-	["e", "{U+1D49}"],
-	["f", "{U+1DA0}"],
-	["g", "{U+1DA2}"],
-	["k", "{U+1D4F}"],
-	["m", "{U+1D50}"],
-	["n", "{U+207F}"],
-	["o", "{U+1D52}"],
-	["p", "{U+1D56}"],
-	["r", "{U+1D63}"],
-	["t", "{U+1D57}"],
-	["u", "{U+1D58}"],
-	["v", "{U+1D5B}"],
-	["x", "{U+1D61}"],
-	["z", "{U+1DBB}"],
-	["A", "{U+1D2C}"],
-	["B", "{U+1D2E}"],
-	["D", "{U+1D30}"],
-	["E", "{U+1D31}"],
-	["H", "{U+1D34}"],
-	["J", "{U+1D36}"],
-	["I", "{U+1D35}"],
-	["K", "{U+1D37}"],
-	["L", "{U+1D38}"],
-	["M", "{U+1D39}"],
-	["N", "{U+1D3A}"],
-	["O", "{U+1D3C}"],
-	["P", "{U+1D3E}"],
-	["R", "{U+1D3F}"],
-	["T", "{U+1D40}"],
-	["U", "{U+1D41}"],
-	["W", "{U+1D42}"],
-]
-SubscriptDictionary := [
-	["1", "{U+2081}"],
-	["2", "{U+2082}"],
-	["3", "{U+2083}"],
-	["4", "{U+2084}"],
-	["5", "{U+2085}"],
-	["6", "{U+2086}"],
-	["7", "{U+2087}"],
-	["8", "{U+2088}"],
-	["9", "{U+2089}"],
-	["0", "{U+2080}"],
-	["+", "{U+208A}"],
-	["-", "{U+208B}"],
-	["=", "{U+208C}"],
-	["(", "{U+208D}"],
-	[")", "{U+208E}"],
-	["a", "{U+2090}"],
-	["e", "{U+2091}"],
-	["i", "{U+1D62}"],
-]
 
 InputBridge(GroupKey) {
 	ih := InputHook("L1 C M")
@@ -6373,6 +6351,7 @@ SearchKey() {
 		MsgBox "Знак не найден."
 	}
 }
+
 PasteUnicode(Unicode) {
 	HexStr := UniTrim(Unicode)
 	if HexStr != "" {
@@ -6381,6 +6360,7 @@ PasteUnicode(Unicode) {
 	}
 	return
 }
+
 InsertUnicodeKey() {
 	PromptValue := IniRead(ConfigFile, "LatestPrompts", "Unicode", "")
 	IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_unicode"), "w256 h92", PromptValue)
@@ -6400,28 +6380,7 @@ InsertUnicodeKey() {
 	Send(Output)
 	IniWrite PromptValue, ConfigFile, "LatestPrompts", "Unicode"
 }
-ScriptConverter(Dictionary, FromValue) {
-	if (FromValue = "")
-		return
 
-	ConvertedText := ""
-	for index, char in StrSplit(FromValue)
-	{
-		Found := False
-		for pair in Dictionary
-		{
-			if (char = pair[1])
-			{
-				ConvertedText .= Chr(0x200C) . pair[2]
-				Found := True
-				break
-			}
-		}
-		if (!Found)
-			ConvertedText .= char
-	}
-	return ConvertedText
-}
 SwitchToScript(scriptMode) {
 	LanguageCode := GetLanguageCode()
 	Labels := {}
@@ -6446,14 +6405,48 @@ SwitchToScript(scriptMode) {
 		return
 	else {
 		PromptValue := IB.Value
-		if (scriptMode = "sup") {
-			PromptValue := ScriptConverter(SuperscriptDictionary, PromptValue)
-		} else if (scriptMode = "sub") {
-			PromptValue := ScriptConverter(SubscriptDictionary, PromptValue)
+		CharArray := []
+		for promptCharacters in StrSplit(PromptValue) {
+			CharArray.Push(GetCharacterUnicode(promptCharacters))
+		}
+
+		for index, char in CharArray {
+			for characterEntry, value in Characters {
+				entryID := ""
+				entryName := ""
+				if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
+					entryID := match[1]
+					entryName := match[2]
+				}
+
+				if (scriptMode = "sup" && !HasProp(value, "sup")) || (scriptMode = "sub" && !HasProp(value, "sub")) {
+					continue
+				}
+
+				if (char = UniTrim(value.unicode)) {
+					ScriptObj := scriptMode = "sup" ? value.sup : value.sub
+					for scriptEntry, scriptValue in Characters {
+						scriptEntryID := ""
+						scriptEntryName := ""
+						if RegExMatch(scriptEntry, "^\s*(\d+)\s+(.+)", &match) {
+							scriptEntryID := match[1]
+							scriptEntryName := match[2]
+						}
+
+						if (scriptEntryName = ScriptObj) {
+							PromptValue := StrReplace(PromptValue, Chr("0x" char), Chr("0x" UniTrim(scriptValue.unicode)))
+							break
+						} else {
+							continue
+						}
+					}
+				}
+			}
 		}
 	}
 
-	Send(PromptValue)
+	SendText(PromptValue)
+	return
 }
 
 ChangeScriptInput(ScriptMode) {
@@ -6473,6 +6466,7 @@ ChangeScriptInput(ScriptMode) {
 		SCKeys["Equals"], "",
 		"<+" SCKeys["9"], "",
 		"<+" SCKeys["0"], "",
+		"<+" SCKeys["Equals"], "",
 	]
 
 	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
@@ -6484,41 +6478,40 @@ ChangeScriptInput(ScriptMode) {
 	}
 }
 
-HotKey("<!" SCKeys["ArrUp"], (*) => ChangeScriptInput("sup"))
-HotKey("<!" SCKeys["ArrDown"], (*) => ChangeScriptInput("sub"))
-
 SuperscriptList := [
-	SCKeys["1"], (*) => Send("{U+00B9}"),
-	SCKeys["2"], (*) => Send("{U+00B2}"),
-	SCKeys["3"], (*) => Send("{U+00B3}"),
-	SCKeys["4"], (*) => Send("{U+2074}"),
-	SCKeys["5"], (*) => Send("{U+2075}"),
-	SCKeys["6"], (*) => Send("{U+2076}"),
-	SCKeys["7"], (*) => Send("{U+2077}"),
-	SCKeys["8"], (*) => Send("{U+2078}"),
-	SCKeys["9"], (*) => Send("{U+2079}"),
-	SCKeys["0"], (*) => Send("{U+2070}"),
-	SCKeys["Minus"], (*) => Send("{U+207B}"),
-	SCKeys["Equals"], (*) => Send("{U+207C}"),
-	"<+" SCKeys["9"], (*) => Send("{U+207D}"),
-	"<+" SCKeys["0"], (*) => Send("{U+207E}"),
+	SCKeys["1"], (*) => HandleFastKey("num_sup_1"),
+	SCKeys["2"], (*) => HandleFastKey("num_sup_2"),
+	SCKeys["3"], (*) => HandleFastKey("num_sup_3"),
+	SCKeys["4"], (*) => HandleFastKey("num_sup_4"),
+	SCKeys["5"], (*) => HandleFastKey("num_sup_5"),
+	SCKeys["6"], (*) => HandleFastKey("num_sup_6"),
+	SCKeys["7"], (*) => HandleFastKey("num_sup_7"),
+	SCKeys["8"], (*) => HandleFastKey("num_sup_8"),
+	SCKeys["9"], (*) => HandleFastKey("num_sup_9"),
+	SCKeys["0"], (*) => HandleFastKey("num_sup_0"),
+	SCKeys["Minus"], (*) => HandleFastKey("num_sup_minus"),
+	SCKeys["Equals"], (*) => HandleFastKey("num_sup_equals"),
+	"<+" SCKeys["9"], (*) => HandleFastKey("num_sup_left_parenthesis"),
+	"<+" SCKeys["0"], (*) => HandleFastKey("num_sup_right_parenthesis"),
+	"<+" SCKeys["Equals"], (*) => HandleFastKey("num_sup_plus"),
 ]
 
 SubscriptList := [
-	SCKeys["1"], (*) => Send("{U+2081}"),
-	SCKeys["2"], (*) => Send("{U+2082}"),
-	SCKeys["3"], (*) => Send("{U+2083}"),
-	SCKeys["4"], (*) => Send("{U+2084}"),
-	SCKeys["5"], (*) => Send("{U+2085}"),
-	SCKeys["6"], (*) => Send("{U+2086}"),
-	SCKeys["7"], (*) => Send("{U+2087}"),
-	SCKeys["8"], (*) => Send("{U+2088}"),
-	SCKeys["9"], (*) => Send("{U+2089}"),
-	SCKeys["0"], (*) => Send("{U+2080}"),
-	SCKeys["Minus"], (*) => Send("{U+208B}"),
-	SCKeys["Equals"], (*) => Send("{U+208C}"),
-	"<+" SCKeys["9"], (*) => Send("{U+208D}"),
-	"<+" SCKeys["0"], (*) => Send("{U+208E}"),
+	SCKeys["1"], (*) => HandleFastKey("num_sub_1"),
+	SCKeys["2"], (*) => HandleFastKey("num_sub_2"),
+	SCKeys["3"], (*) => HandleFastKey("num_sub_3"),
+	SCKeys["4"], (*) => HandleFastKey("num_sub_4"),
+	SCKeys["5"], (*) => HandleFastKey("num_sub_5"),
+	SCKeys["6"], (*) => HandleFastKey("num_sub_6"),
+	SCKeys["7"], (*) => HandleFastKey("num_sub_7"),
+	SCKeys["8"], (*) => HandleFastKey("num_sub_8"),
+	SCKeys["9"], (*) => HandleFastKey("num_sub_9"),
+	SCKeys["0"], (*) => HandleFastKey("num_sub_0"),
+	SCKeys["Minus"], (*) => HandleFastKey("num_sub_minus"),
+	SCKeys["Equals"], (*) => HandleFastKey("num_sub_equals"),
+	"<+" SCKeys["9"], (*) => HandleFastKey("num_sub_left_parenthesis"),
+	"<+" SCKeys["0"], (*) => HandleFastKey("num_sub_right_parenthesis"),
+	"<+" SCKeys["Equals"], (*) => HandleFastKey("num_sub_plus"),
 ]
 
 ToRomanNumeral(IntValue, CapitalLetters := True) {
@@ -7148,6 +7141,8 @@ Hotkey("<#<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection())
 Hotkey("<#<!" SCKeys["NumpadDot"], (*) => GREPizeSelection())
 Hotkey("<^>!" SCKeys["NumpadDot"], (*) => GREPizeSelection(True))
 
+HotKey("<!" SCKeys["ArrUp"], (*) => ChangeScriptInput("sup"))
+HotKey("<!" SCKeys["ArrDown"], (*) => ChangeScriptInput("sub"))
 
 ReplaceWithUnicode(Mode := "") {
 	BackupClipboard := A_Clipboard
@@ -7174,6 +7169,7 @@ ReplaceWithUnicode(Mode := "") {
 GetCharacterUnicode(symbol) {
 	return Format("{:04X}", Ord(symbol))
 }
+
 
 RegExEscape(str) {
 	static specialChars := "\.*+?^${}()[]|/"
