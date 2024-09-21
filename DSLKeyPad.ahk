@@ -73,7 +73,6 @@ ReadLocale(EntryName, Prefix := "") {
 	global LocalesFile
 	Section := Prefix != "" ? Prefix . "_" . GetLanguageCode() : GetLanguageCode()
 	Intermediate := IniRead(LocalesFile, Section, EntryName, "")
-	Intermediate := StrReplace(Intermediate, "\n", "`n")
 
 	while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
 		Unicode := match[1]
@@ -108,6 +107,7 @@ ReadLocale(EntryName, Prefix := "") {
 	}
 
 
+	Intermediate := StrReplace(Intermediate, "\n", "`n")
 	Intermediate := Intermediate != "" ? Intermediate : "KEY (" . EntryName . "): NOT FOUND"
 	return Intermediate
 }
