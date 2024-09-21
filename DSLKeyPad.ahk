@@ -965,7 +965,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			}
 
 			characterSymbol := HasProp(value, "symbol") ? value.symbol : ""
-			characterModifier := (HasProp(value, "modifier") && ShowOnFastKeys) ? value.modifier : ""
+			characterModifier := (HasProp(value, "modifier") && ShowOnFastKeys) ? value.modifier : HasProp(value, "defaultModifier") ? value.defaultModifier : ""
 			characterBinding := ""
 
 			if (ShowRecipes) {
@@ -5932,42 +5932,58 @@ MapInsert(Characters,
 		"glagolitic_c_let_az", {
 			unicode: "{U+2C00}", html: "&#11264;",
 			titlesAlt: True,
-			group: ["Glagolitic Letters"],
+			group: ["Glagolitic Letters", "А"],
 			tags: ["прописной Аз глаголицы", "capital Az glagolitic"],
 			symbol: Chr(0x2C00)
 		},
 		"glagolitic_s_let_az", {
 			unicode: "{U+2C30}", html: "&#11312;",
 			titlesAlt: True,
-			group: ["Glagolitic Letters"],
+			group: ["Glagolitic Letters", "а"],
 			tags: ["строчный аз глаголицы", "small az glagolitic"],
 			symbol: Chr(0x2C30)
+		},
+		"glagolitic_c_let_buky", {
+			unicode: "{U+2C01}", html: "&#11265;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Б"],
+			tags: ["прописной Буки глаголицы", "capital Buky glagolitic"],
+			symbol: Chr(0x2C01)
+		},
+		"glagolitic_s_let_buky", {
+			unicode: "{U+2C31}", html: "&#11313;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "б"],
+			tags: ["строчный буки глаголицы", "small buky glagolitic"],
+			symbol: Chr(0x2C31)
 		},
 		"glagolitic_c_let_fritu", {
 			unicode: "{U+2C17}", html: "&#11287;",
 			titlesAlt: True,
-			group: ["Glagolitic Letters"],
+			group: ["Glagolitic Letters", "Ф"],
 			tags: ["прописной Ферт глаголицы", "capital Fritu glagolitic"],
 			symbol: Chr(0x2C17)
 		},
 		"glagolitic_s_let_fritu", {
 			unicode: "{U+2C47}", html: "&#11335;",
 			titlesAlt: True,
-			group: ["Glagolitic Letters"],
+			group: ["Glagolitic Letters", "ф"],
 			tags: ["строчный ферт глаголицы", "small fritu glagolitic"],
 			symbol: Chr(0x2C47)
 		},
 		"glagolitic_c_let_fita", {
 			unicode: "{U+2C2A}", html: "&#11306;",
 			titlesAlt: True,
-			group: ["Glagolitic Letters"],
+			group: ["Glagolitic Letters", "Ф"],
+			defaultModifier: RightAlt,
 			tags: ["прописная Фита глаголицы", "capital Fita glagolitic"],
 			symbol: Chr(0x2C2A)
 		},
 		"glagolitic_s_let_fita", {
 			unicode: "{U+2C5A}", html: "&#11354;",
 			titlesAlt: True,
-			group: ["Glagolitic Letters"],
+			group: ["Glagolitic Letters", "ф"],
+			defaultModifier: RightAlt,
 			tags: ["строчная Фита глаголицы", "small fita glagolitic"],
 			symbol: Chr(0x2C5A)
 		},
@@ -5976,14 +5992,14 @@ MapInsert(Characters,
 		"futhark_ansuz", {
 			unicode: "{U+16A8}", html: "&#5800;",
 			titlesAlt: True,
-			group: ["Futhark Runes"],
+			group: ["Futhark Runes", "A"],
 			tags: ["ансуз", "ansuz"],
 			symbol: Chr(0x16A8)
 		},
 		"futhark_fehu", {
 			unicode: "{U+16A0}", html: "&#5792;",
 			titlesAlt: True,
-			group: ["Futhark Runes"],
+			group: ["Futhark Runes", "F"],
 			tags: ["феху", "fehu"],
 			symbol: Chr(0x16A0)
 		},
@@ -6580,6 +6596,7 @@ GlagoliticFuthark := [
 	SCKeys["A"], (*) => LangSeparatedKey(["futhark_ansuz", "futhark_ansuz"], ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], True),
 	"<^>!" SCKeys["A"], (*) => LangSeparatedKey(["futhark_ansuz", "futhark_ansuz"], ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
 	SCKeys["F"], (*) => LangSeparatedKey(["futhark_fehu", "futhark_fehu"], ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
+	SCKeys["Comma"], (*) => LangSeparatedKey(["", ""], ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
 ]
 
 ChangeScriptInput(ScriptMode) {
@@ -7436,7 +7453,7 @@ Constructor() {
 	DSLTabs := []
 	DSLCols := { default: [], smelting: [] }
 
-	for _, localeKey in ["diacritics", "spaces", "commands", "smelting", "fastkeys", "about", "useful", "changelog"] {
+	for _, localeKey in ["diacritics", "spaces", "commands", "smelting", "fastkeys", "runica", "about", "useful", "changelog"] {
 		DSLTabs.Push(ReadLocale("tab_" . localeKey))
 	}
 
@@ -7534,7 +7551,7 @@ Constructor() {
 	DiacriticsFilter.OnEvent("Change", (*) => FilterListView(DSLPadGUI, "DiacriticsFilter", DiacriticLV, DSLContent["BindList"].TabDiacritics))
 
 
-	GrouBoxDiacritic := {
+	GroupBoxDiacritic := {
 		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
 		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vDiacriticSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
@@ -7558,13 +7575,13 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vDiacriticTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxDiacritic.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GrouBoxDiacritic.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
-	GrouBoxDiacritic.LaTeX.SetFont("s12")
-	GrouBoxDiacritic.alt.SetFont("s12")
-	GrouBoxDiacritic.unicode.SetFont("s12")
-	GrouBoxDiacritic.html.SetFont("s12")
-	GrouBoxDiacritic.tags.SetFont("s9")
+	GroupBoxDiacritic.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GroupBoxDiacritic.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxDiacritic.LaTeX.SetFont("s12")
+	GroupBoxDiacritic.alt.SetFont("s12")
+	GroupBoxDiacritic.unicode.SetFont("s12")
+	GroupBoxDiacritic.html.SetFont("s12")
+	GroupBoxDiacritic.tags.SetFont("s9")
 
 
 	Tab.UseTab(2)
@@ -7593,7 +7610,7 @@ Constructor() {
 	SpacesFilter.SetFont("s10")
 	SpacesFilter.OnEvent("Change", (*) => FilterListView(DSLPadGUI, "SpaceFilter", SpacesLV, DSLContent["BindList"].TabSpaces))
 
-	GrouBoxSpaces := {
+	GroupBoxSpaces := {
 		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
 		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vSpacesSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
@@ -7616,18 +7633,18 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vSpacesTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxSpaces.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GrouBoxSpaces.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
-	GrouBoxSpaces.LaTeX.SetFont("s12")
-	GrouBoxSpaces.alt.SetFont("s12")
-	GrouBoxSpaces.unicode.SetFont("s12")
-	GrouBoxSpaces.html.SetFont("s12")
-	GrouBoxSpaces.tags.SetFont("s9")
+	GroupBoxSpaces.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GroupBoxSpaces.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxSpaces.LaTeX.SetFont("s12")
+	GroupBoxSpaces.alt.SetFont("s12")
+	GroupBoxSpaces.unicode.SetFont("s12")
+	GroupBoxSpaces.html.SetFont("s12")
+	GroupBoxSpaces.tags.SetFont("s9")
 
 	Tab.UseTab(3)
 	CommandsTree := DSLPadGUI.AddTreeView("x25 y43 w256 h510 -HScroll")
 
-	CommandsTree.OnEvent("ItemSelect", (TV, Item) => TV_InsertCommandsDesc(TV, Item, GrouBoxCommands.text))
+	CommandsTree.OnEvent("ItemSelect", (TV, Item) => TV_InsertCommandsDesc(TV, Item, GroupBoxCommands.text))
 
 	CommandsInfoBox := {
 		body: "x300 y35 w540 h450",
@@ -7635,7 +7652,7 @@ Constructor() {
 		text: "vCommandDescription x310 y65 w520 h400 BackgroundTrans",
 	}
 
-	GrouBoxCommands := {
+	GroupBoxCommands := {
 		group: DSLPadGUI.Add("GroupBox", CommandsInfoBox.body, CommandsInfoBox.bodyText[LanguageCode]),
 		text: DSLPadGUI.Add("Text", CommandsInfoBox.text),
 	}
@@ -7653,6 +7670,7 @@ Constructor() {
 	Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
 	Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
 	Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
+	Command_glagokeys := CommandsTree.Add(ReadLocale("func_label_glagokeys"))
 	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
 	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
 	Command_textprocessing := CommandsTree.Add(ReadLocale("func_label_textprocessing"))
@@ -7748,7 +7766,7 @@ Constructor() {
 	LigaturesFilter.OnEvent("Change", (*) => FilterListView(DSLPadGUI, "LigFilter", LigaturesLV, DSLContent["BindList"].TabSmelter))
 
 
-	GrouBoxLigatures := {
+	GroupBoxLigatures := {
 		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
 		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vLigaturesSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
@@ -7771,13 +7789,13 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vLigaturesTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxLigatures.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GrouBoxLigatures.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
-	GrouBoxLigatures.LaTeX.SetFont("s12")
-	GrouBoxLigatures.alt.SetFont("s12")
-	GrouBoxLigatures.unicode.SetFont("s12")
-	GrouBoxLigatures.html.SetFont("s12")
-	GrouBoxLigatures.tags.SetFont("s9")
+	GroupBoxLigatures.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GroupBoxLigatures.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxLigatures.LaTeX.SetFont("s12")
+	GroupBoxLigatures.alt.SetFont("s12")
+	GroupBoxLigatures.unicode.SetFont("s12")
+	GroupBoxLigatures.html.SetFont("s12")
+	GroupBoxLigatures.tags.SetFont("s9")
 
 
 	Tab.UseTab(5)
@@ -7834,7 +7852,7 @@ Constructor() {
 	FastKeysFilter.OnEvent("Change", (*) => FilterListView(DSLPadGUI, "FastFilter", FastKeysLV, DSLContent["BindList"].TabFastKeys))
 
 
-	GrouBoxFastKeys := {
+	GroupBoxFastKeys := {
 		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
 		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vFastKeysSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
@@ -7857,16 +7875,75 @@ Constructor() {
 		tags: DSLPadGUI.Add("Edit", "vFastKeysTags " . commonInfoBox.tags),
 	}
 
-	GrouBoxFastKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GrouBoxFastKeys.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
-	GrouBoxFastKeys.LaTeX.SetFont("s12")
-	GrouBoxFastKeys.alt.SetFont("s12")
-	GrouBoxFastKeys.unicode.SetFont("s12")
-	GrouBoxFastKeys.html.SetFont("s12")
-	GrouBoxFastKeys.tags.SetFont("s9")
-
+	GroupBoxFastKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GroupBoxFastKeys.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxFastKeys.LaTeX.SetFont("s12")
+	GroupBoxFastKeys.alt.SetFont("s12")
+	GroupBoxFastKeys.unicode.SetFont("s12")
+	GroupBoxFastKeys.html.SetFont("s12")
+	GroupBoxFastKeys.tags.SetFont("s9")
 
 	Tab.UseTab(6)
+
+	DSLContent["BindList"].TabGlagoKeys := []
+
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Glagolitic Letters", ReadLocale("symbol_glagolitic"))
+
+	GlagoLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
+	GlagoLV.ModifyCol(1, ColumnWidths[1])
+	GlagoLV.ModifyCol(2, ColumnWidths[2])
+	GlagoLV.ModifyCol(3, ColumnWidths[3])
+	GlagoLV.ModifyCol(4, ColumnWidths[4])
+	GlagoLV.ModifyCol(5, ColumnWidths[5])
+
+	for item in DSLContent["BindList"].TabGlagoKeys
+	{
+		GlagoLV.Add(, item[1], item[2], item[3], item[4], item[5])
+	}
+
+
+	GlagoFilterIcon := DSLPadGUI.Add("Button", CommonFilter.icon)
+	GuiButtonIcon(GlagoFilterIcon, ImageRes, 169)
+	GlagoFilter := DSLPadGUI.Add("Edit", CommonFilter.field . "GlagoFilter", "")
+	GlagoFilter.SetFont("s10")
+	GlagoFilter.OnEvent("Change", (*) => FilterListView(DSLPadGUI, "GlagoFilter", GlagoLV, DSLContent["BindList"].TabGlagoKeys))
+
+
+	GroupBoxGlagoKeys := {
+		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
+		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
+		preview: DSLPadGUI.Add("Edit", "vGlagoKeysSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
+		title: DSLPadGUI.Add("Text", "vGlagoKeysTitle " . commonInfoBox.title, CommonInfoBox.titleText),
+		;
+		LaTeXTitleLTX: DSLPadGUI.Add("Text", CommonInfoBox.LaTeXTitleLTX, CommonInfoBox.LaTeXTitleLTXText).SetFont("s10", "Cambria"),
+		LaTeXTitleA: DSLPadGUI.Add("Text", CommonInfoBox.LaTeXTitleA, CommonInfoBox.LaTeXTitleAText).SetFont("s9", "Cambria"),
+		LaTeXTitleE: DSLPadGUI.Add("Text", CommonInfoBox.LaTeXTitleE, CommonInfoBox.LaTeXTitleEText).SetFont("s10", "Cambria"),
+		LaTeXPackage: DSLPadGUI.Add("Text", "vGlagoKeysLaTeXPackage " . CommonInfoBox.LaTeXPackage, CommonInfoBox.LaTeXPackageText).SetFont("s9"),
+		LaTeX: DSLPadGUI.Add("Edit", "vGlagoKeysLaTeX " . commonInfoBox.LaTeX, CommonInfoBox.LaTeXText),
+		;
+		altTitle: DSLPadGUI.Add("Text", CommonInfoBox.altTitle, CommonInfoBox.altTitleText[LanguageCode]).SetFont("s9"),
+		alt: DSLPadGUI.Add("Edit", "vGlagoKeysAlt " . commonInfoBox.alt, CommonInfoBox.altText),
+		;
+		unicodeTitle: DSLPadGUI.Add("Text", CommonInfoBox.unicodeTitle, CommonInfoBox.unicodeTitleText[LanguageCode]).SetFont("s9"),
+		unicode: DSLPadGUI.Add("Edit", "vGlagoKeysUnicode " . commonInfoBox.unicode, CommonInfoBox.unicodeText),
+		;
+		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
+		html: DSLPadGUI.Add("Edit", "vGlagoKeysHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
+		tags: DSLPadGUI.Add("Edit", "vGlagoKeysTags " . commonInfoBox.tags),
+	}
+
+	GroupBoxGlagoKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
+	GroupBoxGlagoKeys.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxGlagoKeys.LaTeX.SetFont("s12")
+	GroupBoxGlagoKeys.alt.SetFont("s12")
+	GroupBoxGlagoKeys.unicode.SetFont("s12")
+	GroupBoxGlagoKeys.html.SetFont("s12")
+	GroupBoxGlagoKeys.tags.SetFont("s9")
+
+
+	Tab.UseTab(7)
+
 	AboutLeftBox := DSLPadGUI.Add("GroupBox", "x23 y34 w280 h520",)
 	DSLPadGUI.Add("GroupBox", "x75 y65 w170 h170")
 	DSLPadGUI.Add("Picture", "x98 y89 w128 h128", AppIcoFile)
@@ -7900,7 +7977,7 @@ Constructor() {
 	AboutDescription.SetFont("s12 c333333", "Cambria")
 
 
-	Tab.UseTab(7)
+	Tab.UseTab(8)
 	DSLContent["ru"].Useful := {}
 	DSLContent["ru"].Useful.Typography := "Типографика"
 	DSLContent["ru"].Useful.TypographyLayout := '<a href="https://ilyabirman.ru/typography-layout/">«Типографская раскладка»</a>'
@@ -7935,7 +8012,7 @@ Constructor() {
 	DSLPadGUI.Add("Link", "w600", DSLContent[LanguageCode].Useful.CHnese . '<a href="https://bkrs.info">БКРС</a>')
 	DSLPadGUI.Add("Link", "w600", DSLContent[LanguageCode].Useful.VTnese . '<a href="https://chunom.org">Chữ Nôm</a>')
 
-	Tab.UseTab(8)
+	Tab.UseTab(9)
 	DSLPadGUI.Add("GroupBox", "w825 h520", "🌐 " . ReadLocale("tab_changelog"))
 	InsertChangesList(DSLPadGUI)
 
@@ -7944,6 +8021,7 @@ Constructor() {
 	SpacesLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
 	FastKeysLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
 	LigaturesLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
+	GlagoLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)
 
 	DiacriticLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -7955,7 +8033,7 @@ Constructor() {
 			"DiacriticUnicode",
 			"DiacriticHTML",
 			"DiacriticTags",
-			GrouBoxDiacritic]
+			GroupBoxDiacritic]
 		))
 	SpacesLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -7967,7 +8045,7 @@ Constructor() {
 			"SpacesUnicode",
 			"SpacesHTML",
 			"SpacesTags",
-			GrouBoxSpaces]
+			GroupBoxSpaces]
 		))
 	FastKeysLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -7979,7 +8057,19 @@ Constructor() {
 			"FastKeysUnicode",
 			"FastKeysHTML",
 			"FastKeysTags",
-			GrouBoxFastKeys]
+			GroupBoxFastKeys]
+		))
+	GlagoLV.OnEvent("ItemFocus", (LV, RowNumber) =>
+		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
+			"GlagoKeysSymbol",
+			"GlagoKeysTitle",
+			"GlagoKeysLaTeX",
+			"GlagoKeysLaTeXPackage",
+			"GlagoKeysAlt",
+			"GlagoKeysUnicode",
+			"GlagoKeysHTML",
+			"GlagoKeysTags",
+			GroupBoxGlagoKeys]
 		))
 	LigaturesLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -7991,7 +8081,7 @@ Constructor() {
 			"LigaturesUnicode",
 			"LigaturesHTML",
 			"LigaturesTags",
-			GrouBoxLigatures]
+			GroupBoxLigatures]
 		))
 
 
@@ -8000,12 +8090,14 @@ Constructor() {
 		"Spaces", GetRandomByGroups(["Spaces", "Dashes", "Quotes", "Special Characters"]),
 		"Ligatures", GetRandomByGroups(["Latin Ligatures", "Cyrillic Ligatures & Letters", "Latin Accented", "Dashes", "Asian Quotes", "Quotes"]),
 		"FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
+		"GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters"]),
 	)
 
-	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", GrouBoxDiacritic)
-	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", GrouBoxSpaces)
-	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", GrouBoxFastKeys)
-	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", GrouBoxLigatures)
+	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", GroupBoxDiacritic)
+	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", GroupBoxSpaces)
+	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", GroupBoxFastKeys)
+	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", GroupBoxLigatures)
+	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][3], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", GroupBoxGlagoKeys)
 
 	DSLPadGUI.Title := DSLPadTitle
 
@@ -8271,6 +8363,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_num_superscript",
 		"func_label_num_roman",
 		"func_label_fastkeys",
+		"func_label_glagokeys",
 		"func_label_inputtoggle",
 		"func_label_notifs",
 		"func_label_textprocessing",
