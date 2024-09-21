@@ -25,6 +25,10 @@ This utility allows you to input a wide range of various symbols without the 
   - In text, by placing the caret cursor after the recipe, <kbd>RShift Backspace</kbd>.
   - In “Compose” mode — allows you to "fuse" characters during typing, <kbd>RAlt×2</kbd>. It immediately inserts the first exact match for the entered sequence. There is an option to enable/disable waiting with <kbd>PauseBreak</kbd> (as some recipes start the same way), so “Compose” will not immediately insert the first match.
 
+## Input Layout Alternatives
+
+<kbd>Win Alt RCtrl</kbd> switches input from Russian/English to Glagolitic/Scandinavian runes. Pressing <kbd>А</kbd><kbd>Б</kbd> or <kbd>RAlt Ф</kbd>, for example, will input Ⰰ, Ⰱ, or Ⱚ, while pressing <kbd>A</kbd>, <kbd>W</kbd>, <kbd>F</kbd> will input ᚨ, ᚠ, ᚹ.
+
 ## Auxiliary Functions
 
 - Insert a character by Unicode ID or Alt-code, <kbd>Win Alt <kbd>U</kbd>/<kbd>A</kbd></kbd>.
@@ -75,6 +79,10 @@ To use “DSL KeyPad”, simply [download the .ahk file](https://github.com/Deme
   - В тексте через выделение рецепта, <kbd>RShift L</kbd>.
   - В тексте, установив курсор каретки после рецепта, <kbd>RShift Backspace</kbd>.
   - Режиме «Compose» — даёт возможность использовать «сплавку» знаков прямо при вводе, <kbd>RAlt×2</kbd>. Сразу вставляет в поле ввода первое точное совпадение с вводимой последовательностью. Есть возможность включить/отключить ожидание через <kbd>PauseBreak</kbd> (так как ряд рецептов начинаются одинакого), и «Compose» не будет сразу вставлять первое совпадение.
+
+## Альтернативные раскладки ввода
+
+<kbd>Win Alt RCtrl</kbd> активирует переключение ввода с Русского/Английского на ввод Глаголицы/Скандинавских рун. Нажатие <kbd>А</kbd><kbd>Б</kbd> или <kbd>RAlt Ф</kbd>, например, введёт Ⰰ, Ⰱ или Ⱚ, а нажатие <kbd>A</kbd>,<kbd>W</kbd>,<kbd>F</kbd> введёт ᚨ, ᚠ, ᚹ.
 
 ## Вспомогательные функции
 
