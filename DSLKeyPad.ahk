@@ -795,10 +795,22 @@ GetChar(CharacterNames*) {
 				if (TrimValue = CharacterName) {
 					if CharacterRepeat > 1 {
 						Loop CharacterRepeat {
-							Output .= PasteUnicode(value.unicode)
+							if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+								for unicode in value.uniSequence {
+									Output .= PasteUnicode(unicode)
+								}
+							} else {
+								Output .= PasteUnicode(value.unicode)
+							}
 						}
 					} else {
-						Output .= PasteUnicode(value.unicode)
+						if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+							for unicode in value.uniSequence {
+								Output .= PasteUnicode(unicode)
+							}
+						} else {
+							Output .= PasteUnicode(value.unicode)
+						}
 					}
 					break
 				}
@@ -6029,6 +6041,254 @@ MapInsert(Characters,
 			tags: ["строчный живете глаголицы", "small zhivete glagolitic"],
 			symbol: Chr(0x2C36)
 		},
+		"glagolitic_c_let_dzelo", {
+			unicode: "{U+2C07}", html: "&#11271;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			tags: ["прописной Зело глаголицы", "capital Dzelo glagolitic"],
+			alt_layout: RightAlt " [С]",
+			symbol: Chr(0x2C07)
+		},
+		"glagolitic_s_let_dzelo", {
+			unicode: "{U+2C37}", html: "&#11319;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			tags: ["строчный зело глаголицы", "small dzelo glagolitic"],
+			alt_layout: RightAlt " [с]",
+			symbol: Chr(0x2C37)
+		},
+		"glagolitic_c_let_zemlja", {
+			unicode: "{U+2C08}", html: "&#11272;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "З"],
+			tags: ["прописная Земля глаголицы", "capital Zemlja glagolitic"],
+			symbol: Chr(0x2C08)
+		},
+		"glagolitic_s_let_zemlja", {
+			unicode: "{U+2C38}", html: "&#11320;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "з"],
+			tags: ["строчная земля глаголицы", "small zemlja glagolitic"],
+			symbol: Chr(0x2C38)
+		},
+		"glagolitic_c_let_initial_izhe", {
+			unicode: "{U+2C0A}", html: "&#11274;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [И]",
+			tags: ["прописное начальное Иже глаголицы", "capital initial Izhe glagolitic"],
+			symbol: Chr(0x2C0A)
+		},
+		"glagolitic_s_let_initial_izhe", {
+			unicode: "{U+2C3A}", html: "&#11322;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [и]",
+			tags: ["строчное начальное иже глаголицы", "small initial izhe glagolitic"],
+			symbol: Chr(0x2C3A)
+		},
+		"glagolitic_c_let_izhe", {
+			unicode: "{U+2C09}", html: "&#11273;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: LeftShift " [И]",
+			tags: ["прописная Иже глаголицы", "capital Izhe glagolitic"],
+			symbol: Chr(0x2C09)
+		},
+		"glagolitic_s_let_izhe", {
+			unicode: "{U+2C39}", html: "&#11321;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: LeftShift " [и]",
+			tags: ["строчная иже глаголицы", "small izhe glagolitic"],
+			symbol: Chr(0x2C39)
+		},
+		"glagolitic_c_let_i", {
+			unicode: "{U+2C0B}", html: "&#11275;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "И"],
+			tags: ["прописная Ие глаголицы", "capital I glagolitic"],
+			symbol: Chr(0x2C0B)
+		},
+		"glagolitic_s_let_i", {
+			unicode: "{U+2C3B}", html: "&#11323;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "и"],
+			tags: ["строчная и глаголицы", "small i glagolitic"],
+			symbol: Chr(0x2C3B)
+		},
+		"glagolitic_c_let_djervi", {
+			unicode: "{U+2C0C}", html: "&#11276;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [Ж]",
+			tags: ["прописной Гюрв глаголицы", "capital Djervi glagolitic"],
+			symbol: Chr(0x2C0C)
+		},
+		"glagolitic_s_let_djervi", {
+			unicode: "{U+2C3C}", html: "&#11324;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [ж]",
+			tags: ["строчной гюрв глаголицы", "small djervi glagolitic"],
+			symbol: Chr(0x2C3C)
+		},
+		"glagolitic_c_let_kako", {
+			unicode: "{U+2C0D}", html: "&#11277;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "К"],
+			tags: ["прописная Како глаголицы", "capital Kako glagolitic"],
+			symbol: Chr(0x2C0D)
+		},
+		"glagolitic_s_let_kako", {
+			unicode: "{U+2C3D}", html: "&#11325;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "к"],
+			tags: ["строчная како глаголицы", "small kako glagolitic"],
+			symbol: Chr(0x2C3D)
+		},
+		"glagolitic_c_let_ljudije", {
+			unicode: "{U+2C0E}", html: "&#11278;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Л"],
+			tags: ["прописная Люди глаголицы", "capital Ljudije glagolitic"],
+			symbol: Chr(0x2C0E)
+		},
+		"glagolitic_s_let_ljudije", {
+			unicode: "{U+2C3E}", html: "&#11326;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "л"],
+			tags: ["строчная люди глаголицы", "small ljudije glagolitic"],
+			symbol: Chr(0x2C3E)
+		},
+		"glagolitic_c_let_myslite", {
+			unicode: "{U+2C0F}", html: "&#11279;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "М"],
+			tags: ["прописная Мыслете глаголицы", "capital Myslite glagolitic"],
+			symbol: Chr(0x2C0F)
+		},
+		"glagolitic_s_let_myslite", {
+			unicode: "{U+2C3F}", html: "&#11327;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "м"],
+			tags: ["строчная мыслете глаголицы", "small myslite glagolitic"],
+			symbol: Chr(0x2C3F)
+		},
+		"glagolitic_c_let_nashi", {
+			unicode: "{U+2C10}", html: "&#11280;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Н"],
+			tags: ["прописная Наш глаголицы", "capital Nashi glagolitic"],
+			symbol: Chr(0x2C10)
+		},
+		"glagolitic_s_let_nashi", {
+			unicode: "{U+2C40}", html: "&#11328;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "н"],
+			tags: ["строчная наш глаголицы", "small nashi glagolitic"],
+			symbol: Chr(0x2C40)
+		},
+		"glagolitic_c_let_onu", {
+			unicode: "{U+2C11}", html: "&#11281;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "О"],
+			tags: ["прописная Он глаголицы", "capital Onu glagolitic"],
+			symbol: Chr(0x2C11)
+		},
+		"glagolitic_s_let_onu", {
+			unicode: "{U+2C41}", html: "&#11329;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "о"],
+			tags: ["строчная он глаголицы", "small onu glagolitic"],
+			symbol: Chr(0x2C41)
+		},
+		"glagolitic_c_let_pokoji", {
+			unicode: "{U+2C12}", html: "&#11282;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "П"],
+			tags: ["прописная Покой глаголицы", "capital Pokoji glagolitic"],
+			symbol: Chr(0x2C12)
+		},
+		"glagolitic_s_let_pokoji", {
+			unicode: "{U+2C42}", html: "&#11330;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "п"],
+			tags: ["строчная покой глаголицы", "small pokoji glagolitic"],
+			symbol: Chr(0x2C42)
+		},
+		"glagolitic_c_let_ritsi", {
+			unicode: "{U+2C13}", html: "&#11283;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Р"],
+			tags: ["прописная Рцы глаголицы", "capital Ritsi glagolitic"],
+			symbol: Chr(0x2C13)
+		},
+		"glagolitic_s_let_ritsi", {
+			unicode: "{U+2C43}", html: "&#11331;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "р"],
+			tags: ["строчная рцы глаголицы", "small ritsi glagolitic"],
+			symbol: Chr(0x2C43)
+		},
+		"glagolitic_c_let_slovo", {
+			unicode: "{U+2C14}", html: "&#11284;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "С"],
+			tags: ["прописная Слово глаголицы", "capital Slovo glagolitic"],
+			symbol: Chr(0x2C14)
+		},
+		"glagolitic_s_let_slovo", {
+			unicode: "{U+2C44}", html: "&#11332;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "с"],
+			tags: ["строчная слово глаголицы", "small slovo glagolitic"],
+			symbol: Chr(0x2C44)
+		},
+		"glagolitic_c_let_tvrido", {
+			unicode: "{U+2C15}", html: "&#11285;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Т"],
+			tags: ["прописная Твердо глаголицы", "capital Tvrido glagolitic"],
+			symbol: Chr(0x2C15)
+		},
+		"glagolitic_s_let_tvrido", {
+			unicode: "{U+2C45}", html: "&#11333;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "т"],
+			tags: ["строчная твердо глаголицы", "small tvrido glagolitic"],
+			symbol: Chr(0x2C45)
+		},
+		"glagolitic_c_let_izhitsa", {
+			unicode: "{U+2C2B}", html: "&#11307;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt LeftShift " [И]",
+			tags: ["прописное начальное Иже глаголицы", "capital Izhitsae glagolitic"],
+			symbol: Chr(0x2C2B)
+		},
+		"glagolitic_s_let_izhitsa", {
+			unicode: "{U+2C5B}", html: "&#11355;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt LeftShift " [и]",
+			tags: ["строчное начальное иже глаголицы", "small izhitsa glagolitic"],
+			symbol: Chr(0x2C5B)
+		},
+		"glagolitic_c_let_uku", {
+			unicode: "{U+2C16}", html: "&#11286;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "У"],
+			tags: ["прописная Ук глаголицы", "capital Uku glagolitic"],
+			symbol: Chr(0x2C16)
+		},
+		"glagolitic_s_let_uku", {
+			unicode: "{U+2C46}", html: "&#11334;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "у"],
+			tags: ["строчная ук глаголицы", "small uku glagolitic"],
+			symbol: Chr(0x2C46)
+		},
 		"glagolitic_c_let_fritu", {
 			unicode: "{U+2C17}", html: "&#11287;",
 			titlesAlt: True,
@@ -6043,6 +6303,141 @@ MapInsert(Characters,
 			tags: ["строчный ферт глаголицы", "small fritu glagolitic"],
 			symbol: Chr(0x2C47)
 		},
+		"glagolitic_c_let_heru", {
+			unicode: "{U+2C18}", html: "&#11288;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Х"],
+			tags: ["прописной Хер глаголицы", "capital Heru glagolitic"],
+			symbol: Chr(0x2C18)
+		},
+		"glagolitic_s_let_heru", {
+			unicode: "{U+2C48}", html: "&#11336;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "х"],
+			tags: ["строчный хер глаголицы", "small heru glagolitic"],
+			symbol: Chr(0x2C48)
+		},
+		"glagolitic_c_let_otu", {
+			unicode: "{U+2C19}", html: "&#11289;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [О]",
+			tags: ["прописная От глаголицы", "capital Otu glagolitic"],
+			symbol: Chr(0x2C19)
+		},
+		"glagolitic_s_let_otu", {
+			unicode: "{U+2C49}", html: "&#11337;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [о]",
+			tags: ["строчная от глаголицы", "small otu glagolitic"],
+			symbol: Chr(0x2C49)
+		},
+		"glagolitic_c_let_pe", {
+			unicode: "{U+2C1A}", html: "&#11290;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [П]",
+			tags: ["прописная Пе глаголицы", "capital Pe glagolitic"],
+			symbol: Chr(0x2C1A)
+		},
+		"glagolitic_s_let_pe", {
+			unicode: "{U+2C4A}", html: "&#11338;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [п]",
+			tags: ["строчная пе глаголицы", "small pe glagolitic"],
+			symbol: Chr(0x2C4A)
+		},
+		"glagolitic_c_let_tsi", {
+			unicode: "{U+2C1C}", html: "&#11292;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Ц"],
+			tags: ["прописная Цы глаголицы", "capital Tsi glagolitic"],
+			symbol: Chr(0x2C1C)
+		},
+		"glagolitic_s_let_tsi", {
+			unicode: "{U+2C4C}", html: "&#11340;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "ц"],
+			tags: ["строчная цы глаголицы", "small tsi glagolitic"],
+			symbol: Chr(0x2C4C)
+		},
+		"glagolitic_c_let_chrivi", {
+			unicode: "{U+2C1D}", html: "&#11293;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Ч"],
+			tags: ["прописная Червь глаголицы", "capital Chrivi glagolitic"],
+			symbol: Chr(0x2C1D)
+		},
+		"glagolitic_s_let_chrivi", {
+			unicode: "{U+2C4D}", html: "&#11341;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "ч"],
+			tags: ["строчная червь глаголицы", "small chrivi glagolitic"],
+			symbol: Chr(0x2C4D)
+		},
+		"glagolitic_c_let_sha", {
+			unicode: "{U+2C1E}", html: "&#11294;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Ш"],
+			tags: ["прописная Ша глаголицы", "capital Sha glagolitic"],
+			symbol: Chr(0x2C1E)
+		},
+		"glagolitic_s_let_sha", {
+			unicode: "{U+2C4E}", html: "&#11342;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "ш"],
+			tags: ["строчная ша глаголицы", "small sha glagolitic"],
+			symbol: Chr(0x2C4E)
+		},
+		"glagolitic_c_let_shta", {
+			unicode: "{U+2C1B}", html: "&#11291;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Щ"],
+			tags: ["прописная Шта глаголицы", "capital Shta glagolitic"],
+			symbol: Chr(0x2C1B)
+		},
+		"glagolitic_s_let_shta", {
+			unicode: "{U+2C4B}", html: "&#11339;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "щ"],
+			tags: ["строчная шта глаголицы", "small shta glagolitic"],
+			symbol: Chr(0x2C4B)
+		},
+		"glagolitic_c_let_yeru", {
+			unicode: "{U+2C1F}", html: "&#11295;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Ъ"],
+			tags: ["прописная Ер глаголицы", "capital Yeru glagolitic"],
+			symbol: Chr(0x2C1F)
+		},
+		"glagolitic_s_let_yeru", {
+			unicode: "{U+2C4F}", html: "&#11343;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "ъ"],
+			tags: ["строчная ер глаголицы", "small yeru glagolitic"],
+			symbol: Chr(0x2C4F)
+		},
+		"glagolitic_c_let_yery", {
+			unicode: "{U+2C1F}", html: "&#11295;&#11274;",
+			uniSequence: ["{U+2C1F}", "{U+2C0A}"],
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Ы"],
+			tags: ["прописная Еры глаголицы", "capital Yery glagolitic"],
+			symbol: Chr(0x2C1F) Chr(0x2C0A),
+			symbolCustom: "s36"
+		},
+		"glagolitic_s_let_yery", {
+			unicode: "{U+2C4F}", html: "&#11343;&#11322;",
+			uniSequence: ["{U+2C4F}", "{U+2C3A}"],
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "ы"],
+			tags: ["строчная еры глаголицы", "small yery glagolitic"],
+			symbol: Chr(0x2C4F) Chr(0x2C3A),
+			symbolCustom: "s36"
+		},
+		;
 		"glagolitic_c_let_fita", {
 			unicode: "{U+2C2A}", html: "&#11306;",
 			titlesAlt: True,
@@ -6056,7 +6451,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: RightAlt " [ф]",
-			tags: ["строчная Фита глаголицы", "small fita glagolitic"],
+			tags: ["строчная фита глаголицы", "small fita glagolitic"],
 			symbol: Chr(0x2C5A)
 		},
 		;
@@ -6995,8 +7390,17 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 								SendText(characterLaTeX)
 							}
 						}
-						else
-							Send(value.unicode)
+						else {
+							if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+								TempValue := ""
+								for unicode in value.uniSequence {
+									TempValue .= PasteUnicode(unicode)
+								}
+								SendText(TempValue)
+							} else {
+								Send(value.unicode)
+							}
+						}
 						break
 					}
 				}
@@ -7014,8 +7418,17 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 							SendText(characterLaTeX)
 						}
 					}
-					else
-						Send(value.unicode)
+					else {
+						if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+							TempValue := ""
+							for unicode in value.uniSequence {
+								TempValue .= PasteUnicode(unicode)
+							}
+							SendText(TempValue)
+						} else {
+							Send(value.unicode)
+						}
+					}
 					break
 				}
 			}
@@ -7072,8 +7485,17 @@ SearchKey() {
 						SendText(characterLaTeX)
 					}
 				}
-				else
-					Send(value.unicode)
+				else {
+					if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+						TempValue := ""
+						for unicode in value.uniSequence {
+							TempValue .= PasteUnicode(unicode)
+						}
+						SendText(TempValue)
+					} else {
+						Send(value.unicode)
+					}
+				}
 				IniWrite !IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
 				Found := True
 				break 2
@@ -7157,7 +7579,7 @@ SwitchToScript(scriptMode) {
 					continue
 				}
 
-				if (char = UniTrim(value.unicode)) {
+				if (!IsObject(value.unicode) && char = UniTrim(value.unicode)) {
 					ScriptObj := scriptMode = "sup" ? value.sup : value.sub
 					for scriptEntry, scriptValue in Characters {
 						scriptEntryID := ""
@@ -7251,32 +7673,37 @@ GlagoliticFuthark := [
 	">+" SCKeys["A"], (*) => LangSeparatedKey("futhork_aesc", ["", ""], True),
 	"<^>!" SCKeys["A"], (*) => LangSeparatedKey("futhark_younger_jera", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
 	"<^>!<+" SCKeys["A"], (*) => LangSeparatedKey("futhark_younger_jera_short_twig", ["", ""], True),
-	SCKeys["B"], (*) => LangSeparatedKey("futhark_bjarkan", ["", ""], True),
-	"<^>!<+" SCKeys["B"], (*) => LangSeparatedKey("futhark_younger_bjarkan_short_twig", ["", ""], True),
-	SCKeys["C"], (*) => LangSeparatedKey("futhork_cen", ["", ""], True),
+	SCKeys["B"], (*) => LangSeparatedKey("futhark_bjarkan", ["glagolitic_c_let_i", "glagolitic_s_let_i"], True),
+	"<^>!" SCKeys["B"], (*) => LangSeparatedKey("", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"], True),
+	"<+" SCKeys["B"], (*) => LangSeparatedKey("", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], True),
+	"<^>!<+" SCKeys["B"], (*) => LangSeparatedKey("futhark_younger_bjarkan_short_twig", ["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"], True),
+	SCKeys["C"], (*) => LangSeparatedKey("futhork_cen", ["glagolitic_c_let_slovo", "glagolitic_s_let_slovo"], True),
+	"<^>!" SCKeys["C"], (*) => LangSeparatedKey("", ["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"], True),
 	"<^>!<!" SCKeys["C"], (*) => LangSeparatedKey("medieval_c", ["", ""], True),
 	SCKeys["D"], (*) => LangSeparatedKey("futhark_dagaz", ["glagolitic_c_let_vede", "glagolitic_s_let_vede"], True),
 	"<^>!" SCKeys["D"], (*) => LangSeparatedKey("futhark_younger_later_eth", ["", ""], True),
 	"<^>!<+" SCKeys["D"], (*) => LangSeparatedKey("futhark_younger_later_d", ["", ""], True),
-	SCKeys["E"], (*) => LangSeparatedKey("futhark_ehwaz", ["", ""], True),
+	SCKeys["E"], (*) => LangSeparatedKey("futhark_ehwaz", ["glagolitic_c_let_uku", "glagolitic_s_let_uku"], True),
 	"<+" SCKeys["E"], (*) => LangSeparatedKey("futhork_ear", ["", ""], True),
 	"<^>!" SCKeys["E"], (*) => LangSeparatedKey("futhark_younger_later_e", ["", ""], True),
 	"<^>!<!" SCKeys["E"], (*) => LangSeparatedKey("medieval_en", ["", ""], True),
 	SCKeys["F"], (*) => LangSeparatedKey("futhark_fehu", ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
-	SCKeys["G"], (*) => LangSeparatedKey("futhark_gebo", ["", ""], True),
+	SCKeys["G"], (*) => LangSeparatedKey("futhark_gebo", ["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"], True),
+	"<^>!" SCKeys["G"], (*) => LangSeparatedKey("", ["glagolitic_c_let_pe", "glagolitic_s_let_pe"], True),
 	"<+" SCKeys["G"], (*) => LangSeparatedKey("futhork_gar", ["", ""], True),
-	SCKeys["H"], (*) => LangSeparatedKey("futhark_haglaz", ["", ""], True),
+	SCKeys["H"], (*) => LangSeparatedKey("futhark_haglaz", ["glagolitic_c_let_ritsi", "glagolitic_s_let_ritsi"], True),
 	"<+" SCKeys["H"], (*) => LangSeparatedKey("futhork_haegl", ["", ""], True),
 	"<^>!" SCKeys["H"], (*) => LangSeparatedKey("futhark_younger_hagall", ["", ""], True),
 	"<^>!<+" SCKeys["H"], (*) => LangSeparatedKey("futhark_younger_hagall_short_twig", ["", ""], True),
-	SCKeys["I"], (*) => LangSeparatedKey("futhark_isaz", ["", ""], True),
+	SCKeys["I"], (*) => LangSeparatedKey("futhark_isaz", ["glagolitic_c_let_sha", "glagolitic_s_let_sha"], True),
 	">+" SCKeys["I"], (*) => LangSeparatedKey("futhark_eihwaz", ["", ""], True),
-	SCKeys["J"], (*) => LangSeparatedKey("futhark_jeran", ["", ""], True),
+	"<^>!" SCKeys["J"], (*) => LangSeparatedKey("", ["glagolitic_c_let_otu", "glagolitic_s_let_otu"], True),
+	SCKeys["J"], (*) => LangSeparatedKey("futhark_jeran", ["glagolitic_c_let_onu", "glagolitic_s_let_onu"], True),
 	"<+" SCKeys["J"], (*) => LangSeparatedKey("futhork_ger", ["", ""], True),
 	">+" SCKeys["J"], (*) => LangSeparatedKey("futhork_ior", ["", ""], True),
 	SCKeys["L"], (*) => LangSeparatedKey("futhark_laguz", ["glagolitic_c_let_dobro", "glagolitic_s_let_dobro"], True),
 	"<^>!" SCKeys["L"], (*) => LangSeparatedKey("futhark_younger_later_l", ["", ""], True),
-	SCKeys["K"], (*) => LangSeparatedKey("futhark_kauna", ["", ""], True),
+	SCKeys["K"], (*) => LangSeparatedKey("futhark_kauna", ["glagolitic_c_let_ljudije", "glagolitic_s_let_ljudije"], True),
 	"<+" SCKeys["K"], (*) => LangSeparatedKey("futhork_cealc", ["", ""], True),
 	">+" SCKeys["K"], (*) => LangSeparatedKey("futhork_calc", ["", ""], True),
 	"<^>!" SCKeys["K"], (*) => LangSeparatedKey("futhark_younger_kaun", ["", ""], True),
@@ -7284,11 +7711,11 @@ GlagoliticFuthark := [
 	SCKeys["M"], (*) => LangSeparatedKey("futhark_mannaz", ["", ""], True),
 	"<^>!" SCKeys["M"], (*) => LangSeparatedKey("futhark_younger_madr", ["", ""], True),
 	"<^>!<+" SCKeys["M"], (*) => LangSeparatedKey("futhark_younger_madr_short_twig", ["", ""], True),
-	SCKeys["N"], (*) => LangSeparatedKey("futhark_naudiz", ["", ""], True),
+	SCKeys["N"], (*) => LangSeparatedKey("futhark_naudiz", ["glagolitic_c_let_tvrido", "glagolitic_s_let_tvrido"], True),
 	">+" SCKeys["N"], (*) => LangSeparatedKey("futhark_ingwaz", ["", ""], True),
 	"<+" SCKeys["N"], (*) => LangSeparatedKey("futhork_ing", ["", ""], True),
 	"<^>!<+" SCKeys["N"], (*) => LangSeparatedKey("futhark_younger_naud_short_twig", ["", ""], True),
-	SCKeys["O"], (*) => LangSeparatedKey("futhark_odal", ["", ""], True),
+	SCKeys["O"], (*) => LangSeparatedKey("futhark_odal", ["glagolitic_c_let_shta", "glagolitic_s_let_shta"], True),
 	"<+" SCKeys["O"], (*) => LangSeparatedKey("futhork_os", ["", ""], True),
 	"<^>!" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss", ["", ""], True),
 	"<^>!<+" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss_short_twig", ["", ""], True),
@@ -7297,8 +7724,8 @@ GlagoliticFuthark := [
 	SCKeys["P"], (*) => LangSeparatedKey("futhark_pertho", ["", ""], True),
 	"<^>!" SCKeys["P"], (*) => LangSeparatedKey("futhark_younger_later_p", ["", ""], True),
 	SCKeys["Q"], (*) => LangSeparatedKey("futhork_cweorth", ["", ""], True),
-	SCKeys["R"], (*) => LangSeparatedKey("futhark_raido", ["", ""], True),
-	SCKeys["S"], (*) => LangSeparatedKey("futhark_sowilo", ["", ""], True),
+	SCKeys["R"], (*) => LangSeparatedKey("futhark_raido", ["glagolitic_c_let_kako", "glagolitic_s_let_kako"], True),
+	SCKeys["S"], (*) => LangSeparatedKey("futhark_sowilo", ["glagolitic_c_let_yery", "glagolitic_s_let_yery"], True),
 	"<+" SCKeys["S"], (*) => LangSeparatedKey("futhork_sigel", ["", ""], True),
 	">+" SCKeys["S"], (*) => LangSeparatedKey("futhork_stan", ["", ""], True),
 	"<^>!<+" SCKeys["S"], (*) => LangSeparatedKey("futhark_younger_sol_short_twig", ["", ""], True),
@@ -7306,15 +7733,16 @@ GlagoliticFuthark := [
 	">+" SCKeys["T"], (*) => LangSeparatedKey("futhark_thurisaz", ["", ""], True),
 	"<^>!<+" SCKeys["T"], (*) => LangSeparatedKey("futhark_younger_tyr_short_twig", ["", ""], True),
 	SCKeys["U"], (*) => LangSeparatedKey("futhark_uruz", ["glagolitic_c_let_glagoli", "glagolitic_s_let_glagoli"], True),
-	SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_ur", ["", ""], True),
+	SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_ur", ["glagolitic_c_let_nashi", "glagolitic_s_let_nashi"], True),
 	">+" SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_icelandic_yr", ["", ""], True),
 	"<^>!" SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_yr", ["", ""], True),
 	"<^>!<+" SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_yr_short_twig", ["", ""], True),
 	"<+" SCKeys["Y"], (*) => LangSeparatedKey("futhork_yr", ["", ""], True),
-	SCKeys["V"], (*) => LangSeparatedKey("futhark_younger_later_v", ["", ""], True),
-	SCKeys["W"], (*) => LangSeparatedKey("futhark_wunjo", ["", ""], True),
+	SCKeys["V"], (*) => LangSeparatedKey("futhark_younger_later_v", ["glagolitic_c_let_myslite", "glagolitic_s_let_myslite"], True),
+	SCKeys["W"], (*) => LangSeparatedKey("futhark_wunjo", ["glagolitic_c_let_tsi", "glagolitic_s_let_tsi"], True),
 	SCKeys["Z"], (*) => LangSeparatedKey("futhark_algiz", ["", ""], True),
 	"<^>!<!" SCKeys["Z"], (*) => LangSeparatedKey("medieval_x", ["", ""], True),
+	SCKeys["X"], (*) => LangSeparatedKey("", ["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"], True),
 	"<^>!<!" SCKeys["X"], (*) => LangSeparatedKey("medieval_z", ["", ""], True),
 	;
 	SCKeys["Comma"], (*) => LangSeparatedKey("kkey_comma", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
@@ -7323,9 +7751,10 @@ GlagoliticFuthark := [
 	"<^>!" SCKeys["Dot"], (*) => LangSeparatedKey("runic_single_punctuation", ["", ""], True),
 	"<^>!" SCKeys["Space"], (*) => LangSeparatedKey("runic_multiple_punctuation", ["", ""], True),
 	SCKeys["Semicolon"], (*) => LangSeparatedKey("kkey_semicolon", ["glagolitic_c_let_zhivete", "glagolitic_s_let_zhivete"], True),
+	"<^>!" SCKeys["Semicolon"], (*) => LangSeparatedKey("kkey_semicolon", ["glagolitic_c_let_djervi", "glagolitic_s_let_djervi"], True),
 	SCKeys["Apostrophe"], (*) => LangSeparatedKey("kkey_apostrophe", ["", ""], True),
-	SCKeys["LSquareBracket"], (*) => LangSeparatedKey("kkey_l_square_bracket", ["", ""], True),
-	SCKeys["RSquareBracket"], (*) => LangSeparatedKey("kkey_r_square_bracket", ["", ""], True),
+	SCKeys["LSquareBracket"], (*) => LangSeparatedKey("kkey_l_square_bracket", ["glagolitic_c_let_heru", "glagolitic_s_let_heru"], True),
+	SCKeys["RSquareBracket"], (*) => LangSeparatedKey("kkey_r_square_bracket", ["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"], True),
 	;
 	"<^>!" SCKeys["7"], (*) => LangSeparatedKey("futhark_almanac_arlaug", ["", ""], True),
 	"<^>!" SCKeys["8"], (*) => LangSeparatedKey("futhark_almanac_tvimadur", ["", ""], True),
@@ -8980,9 +9409,9 @@ SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, Previe
 						CommonInfoFonts.previewSize . " norm cDefault"
 					)
 					TargetGroup[PreviewObject].SetFont(
-						CommonInfoFonts.previewSize . " " . value.symbolCustom
+						value.symbolCustom
 					)
-				} else if (StrLen(TargetGroup[PreviewObject].Text) > 2) {
+				} else if (StrLen(TargetGroup[PreviewObject].Text) >= 2) {
 					PreviewGroup.preview.SetFont(
 						CommonInfoFonts.previewSmaller . " norm cDefault"
 					)
@@ -9316,7 +9745,13 @@ HandleFastKey(CharacterNames*) {
 						}
 					}
 					else {
-						Output .= PasteUnicode(value.unicode)
+						if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+							for unicode in value.uniSequence {
+								Output .= PasteUnicode(unicode)
+							}
+						} else {
+							Output .= PasteUnicode(value.unicode)
+						}
 					}
 				}
 			}
