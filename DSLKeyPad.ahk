@@ -6432,13 +6432,37 @@ MapInsert(Characters,
 			tags: ["исладнский тис", "icelandic yr"],
 			symbol: Chr(0x16E8)
 		},
-		"futhark_younger_later_l", {
-			unicode: "{U+16DB}", html: "&#5851;",
+		"futhark_almanac_arlaug", {
+			unicode: "{U+16EE}", html: "&#5870;",
 			titlesAlt: True,
-			group: ["Later Younger Futhark Runes", "L"],
+			group: ["Almanac Runes", "7"],
 			defaultModifier: RightAlt,
-			tags: ["младший поздний л", "younger later l"],
-			symbol: Chr(0x16DB)
+			tags: ["арлауг", "arlaug"],
+			symbol: Chr(0x16EE)
+		},
+		"futhark_almanac_tvimadur", {
+			unicode: "{U+16EF}", html: "&#5871;",
+			titlesAlt: True,
+			group: ["Almanac Runes", "8"],
+			defaultModifier: RightAlt,
+			tags: ["твимадур", "tvimadur"],
+			symbol: Chr(0x16EF)
+		},
+		"futhark_almanac_belgthor", {
+			unicode: "{U+16F0}", html: "&#5872;",
+			titlesAlt: True,
+			group: ["Almanac Runes", "9"],
+			defaultModifier: RightAlt,
+			tags: ["белгтор", "belgthor"],
+			symbol: Chr(0x16F0)
+		},
+		"futhark_younger_later_e", {
+			unicode: "{U+16C2}", html: "&#5826;",
+			titlesAlt: True,
+			group: ["Later Younger Futhark Runes", "E"],
+			defaultModifier: RightAlt,
+			tags: ["младшяя поздняя е", "younger later e"],
+			symbol: Chr(0x16C2)
 		},
 		"futhark_younger_later_eth", {
 			unicode: "{U+16A7}", html: "&#5799;",
@@ -6456,6 +6480,22 @@ MapInsert(Characters,
 			tags: ["младший поздний д", "younger later d"],
 			symbol: Chr(0x16D1)
 		},
+		"futhark_younger_later_l", {
+			unicode: "{U+16DB}", html: "&#5851;",
+			titlesAlt: True,
+			group: ["Later Younger Futhark Runes", "L"],
+			defaultModifier: RightAlt,
+			tags: ["младший поздний л", "younger later l"],
+			symbol: Chr(0x16DB)
+		},
+		"futhark_younger_later_p", {
+			unicode: "{U+16D4}", html: "&#5844;",
+			titlesAlt: True,
+			group: ["Later Younger Futhark Runes", "P"],
+			defaultModifier: RightAlt,
+			tags: ["младшяя поздняя п", "younger later p"],
+			symbol: Chr(0x16D4)
+		},
 		"futhark_younger_later_v", {
 			unicode: "{U+16A1}", html: "&#5793;",
 			titlesAlt: True,
@@ -6463,13 +6503,77 @@ MapInsert(Characters,
 			tags: ["младший поздний в", "younger later v"],
 			symbol: Chr(0x16A1)
 		},
+		"medieval_c", {
+			unicode: "{U+16CD}", html: "&#5837;",
+			titlesAlt: True,
+			group: ["Medieval Runes", "C"],
+			defaultModifier: RightAlt LeftAlt,
+			tags: ["средневековый си", "medieval с"],
+			symbol: Chr(0x16CD)
+		},
+		"medieval_en", {
+			unicode: "{U+16C0}", html: "&#5824;",
+			titlesAlt: True,
+			group: ["Medieval Runes", "N"],
+			defaultModifier: RightAlt LeftAlt,
+			tags: ["средневековый эн", "medieval en"],
+			symbol: Chr(0x16C0)
+		},
+		"medieval_on", {
+			unicode: "{U+16B0}", html: "&#5808;",
+			titlesAlt: True,
+			group: ["Medieval Runes", "O"],
+			defaultModifier: RightAlt LeftAlt,
+			tags: ["средневековый он", "medieval on"],
+			symbol: Chr(0x16B0)
+		},
+		"medieval_o", {
+			unicode: "{U+16AE}", html: "&#5806;",
+			titlesAlt: True,
+			group: ["Medieval Runes", "O"],
+			defaultModifier: RightAlt LeftAlt RightShift,
+			tags: ["средневековый о", "medieval o"],
+			symbol: Chr(0x16AE)
+		},
 		"medieval_x", {
 			unicode: "{U+16EA}", html: "&#5866;",
 			titlesAlt: True,
 			group: ["Medieval Runes", "X"],
 			defaultModifier: RightAlt LeftAlt,
-			tags: ["средневековый кс", "medieval x"],
+			tags: ["средневековый экс", "medieval ex"],
 			symbol: Chr(0x16EA)
+		},
+		"medieval_z", {
+			unicode: "{U+16CE}", html: "&#5838;",
+			titlesAlt: True,
+			group: ["Medieval Runes", "Z"],
+			defaultModifier: RightAlt LeftAlt,
+			tags: ["средневековый зе", "medieval ze"],
+			symbol: Chr(0x16CE)
+		},
+		"runic_single_punctuation", {
+			unicode: "{U+16EB}", html: "&#5867;",
+			titlesAlt: True,
+			group: ["Runic Punctuation", "."],
+			defaultModifier: RightAlt,
+			tags: ["руническая одиночное препинание", "runic single punctuation"],
+			symbol: Chr(0x16EB)
+		},
+		"runic_multiple_punctuation", {
+			unicode: "{U+16EC}", html: "&#5868;",
+			titlesAlt: True,
+			group: ["Runic Punctuation", "Space"],
+			defaultModifier: RightAlt,
+			tags: ["руническое двойное препинание", "runic multiple punctuation"],
+			symbol: Chr(0x16EC)
+		},
+		"runic_cruciform_punctuation", {
+			unicode: "{U+16ED}", html: "&#5869;",
+			titlesAlt: True,
+			group: ["Runic Punctuation", ","],
+			defaultModifier: RightAlt,
+			tags: ["руническое крестовидное препинание", "runic cruciform punctuation"],
+			symbol: Chr(0x16ED)
 		},
 		;
 		;
@@ -7074,11 +7178,14 @@ GlagoliticFuthark := [
 	SCKeys["B"], (*) => LangSeparatedKey("futhark_bjarkan", ["", ""], True),
 	"<^>!<+" SCKeys["B"], (*) => LangSeparatedKey("futhark_younger_bjarkan_short_twig", ["", ""], True),
 	SCKeys["C"], (*) => LangSeparatedKey("futhork_cen", ["", ""], True),
+	"<^>!<!" SCKeys["C"], (*) => LangSeparatedKey("medieval_c", ["", ""], True),
 	SCKeys["D"], (*) => LangSeparatedKey("futhark_dagaz", ["glagolitic_c_let_vede", "glagolitic_s_let_vede"], True),
 	"<^>!" SCKeys["D"], (*) => LangSeparatedKey("futhark_younger_later_eth", ["", ""], True),
 	"<^>!<+" SCKeys["D"], (*) => LangSeparatedKey("futhark_younger_later_d", ["", ""], True),
 	SCKeys["E"], (*) => LangSeparatedKey("futhark_ehwaz", ["", ""], True),
 	"<+" SCKeys["E"], (*) => LangSeparatedKey("futhork_ear", ["", ""], True),
+	"<^>!" SCKeys["E"], (*) => LangSeparatedKey("futhark_younger_later_e", ["", ""], True),
+	"<^>!<!" SCKeys["E"], (*) => LangSeparatedKey("medieval_en", ["", ""], True),
 	SCKeys["F"], (*) => LangSeparatedKey("futhark_fehu", ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
 	SCKeys["G"], (*) => LangSeparatedKey("futhark_gebo", ["", ""], True),
 	"<+" SCKeys["G"], (*) => LangSeparatedKey("futhork_gar", ["", ""], True),
@@ -7108,7 +7215,10 @@ GlagoliticFuthark := [
 	SCKeys["O"], (*) => LangSeparatedKey("futhark_odal", ["", ""], True),
 	"<^>!" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss", ["", ""], True),
 	"<^>!<+" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss_short_twig", ["", ""], True),
+	"<^>!<!" SCKeys["O"], (*) => LangSeparatedKey("medieval_on", ["", ""], True),
+	"<^>!<!>+" SCKeys["O"], (*) => LangSeparatedKey("medieval_o", ["", ""], True),
 	SCKeys["P"], (*) => LangSeparatedKey("futhark_pertho", ["", ""], True),
+	"<^>!" SCKeys["P"], (*) => LangSeparatedKey("futhark_younger_later_p", ["", ""], True),
 	SCKeys["Q"], (*) => LangSeparatedKey("futhork_cweorth", ["", ""], True),
 	SCKeys["R"], (*) => LangSeparatedKey("futhark_raido", ["", ""], True),
 	SCKeys["S"], (*) => LangSeparatedKey("futhark_sowilo", ["", ""], True),
@@ -7127,14 +7237,22 @@ GlagoliticFuthark := [
 	SCKeys["V"], (*) => LangSeparatedKey("futhark_younger_later_v", ["", ""], True),
 	SCKeys["W"], (*) => LangSeparatedKey("futhark_wunjo", ["", ""], True),
 	SCKeys["Z"], (*) => LangSeparatedKey("futhark_algiz", ["", ""], True),
-	"<^>!<!" SCKeys["X"], (*) => LangSeparatedKey("medieval_x", ["", ""], True),
+	"<^>!<!" SCKeys["Z"], (*) => LangSeparatedKey("medieval_x", ["", ""], True),
+	"<^>!<!" SCKeys["X"], (*) => LangSeparatedKey("medieval_z", ["", ""], True),
 	;
 	SCKeys["Comma"], (*) => LangSeparatedKey("kkey_comma", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
 	SCKeys["Dot"], (*) => LangSeparatedKey("kkey_dot", ["", ""], True),
+	"<^>!" SCKeys["Comma"], (*) => LangSeparatedKey("runic_cruciform_punctuation", ["", ""], True),
+	"<^>!" SCKeys["Dot"], (*) => LangSeparatedKey("runic_single_punctuation", ["", ""], True),
+	"<^>!" SCKeys["Space"], (*) => LangSeparatedKey("runic_multiple_punctuation", ["", ""], True),
 	SCKeys["Semicolon"], (*) => LangSeparatedKey("kkey_semicolon", ["", ""], True),
 	SCKeys["Apostrophe"], (*) => LangSeparatedKey("kkey_apostrophe", ["", ""], True),
 	SCKeys["LSquareBracket"], (*) => LangSeparatedKey("kkey_l_square_bracket", ["", ""], True),
 	SCKeys["RSquareBracket"], (*) => LangSeparatedKey("kkey_r_square_bracket", ["", ""], True),
+	;
+	"<^>!" SCKeys["7"], (*) => LangSeparatedKey("futhark_almanac_arlaug", ["", ""], True),
+	"<^>!" SCKeys["8"], (*) => LangSeparatedKey("futhark_almanac_tvimadur", ["", ""], True),
+	"<^>!" SCKeys["9"], (*) => LangSeparatedKey("futhark_almanac_belgthor", ["", ""], True),
 ]
 
 ChangeScriptInput(ScriptMode) {
@@ -8429,8 +8547,10 @@ Constructor() {
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhork Runes", ReadLocale("symbol_futhork"),)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Younger Futhark Runes", ReadLocale("symbol_futhark_younger"),)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Almanac Runes", ReadLocale("symbol_futhark_almanac"),)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"),)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Medieval Runes", ReadLocale("symbol_medieval_runes"),)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Runic Punctuation", ReadLocale("symbol_runic_punctuation"),)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Glagolitic Letters", ReadLocale("symbol_glagolitic"))
 
 	GlagoLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
