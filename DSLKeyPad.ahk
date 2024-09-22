@@ -880,7 +880,7 @@ GetMapCount(MapObj, SortGroups := "") {
 }
 
 
-InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", AddSeparator := True, ShowOnFastKeys := False, ShowRecipes := False, BlackList := [], FastSpecial := False) {
+InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", AddSeparator := True, ShowOnFastKeys := False, ShowRecipes := False, BlackList := [], FastSpecial := False, AlternativeLayout := False) {
 	if GroupName == "" {
 		return
 	}
@@ -932,7 +932,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 
 		GroupValid := False
 
-		IsDefault := !ShowOnFastKeys && !ShowRecipes
+		IsDefault := !ShowOnFastKeys && !ShowRecipes && !AlternativeLayout
 
 		if (ShowRecipes && !HasProp(value, "recipe")) || (IsDefault && HasProp(value, "group") && !value.group.Has(2)) {
 			continue
@@ -962,7 +962,9 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			}
 
 			characterSymbol := HasProp(value, "symbol") ? value.symbol : ""
-			characterModifier := (HasProp(value, "modifier") && ShowOnFastKeys) ? value.modifier : HasProp(value, "defaultModifier") ? value.defaultModifier : ""
+			characterModifier :=
+				(HasProp(value, "modifier") && ShowOnFastKeys) ? value.modifier :
+					HasProp(value, "defaultModifier") ? value.defaultModifier : ""
 			characterBinding := ""
 
 			if (ShowRecipes) {
@@ -973,6 +975,8 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 				} else {
 					characterBinding := ""
 				}
+			} else if (AlternativeLayout && HasProp(value, "alt_layout")) {
+				characterBinding := value.alt_layout
 			} else if (ShowOnFastKeys && FastSpecial && HasProp(value, "alt_special")) {
 				characterBinding := value.alt_special
 			} else if (ShowOnFastKeys && HasProp(value, "alt_on_fast_keys")) {
@@ -2014,8 +2018,9 @@ MapInsert(Characters,
 			unicode: "{U+00D7}", html: "&#215;", entity: "&times;",
 			altcode: "0215",
 			tags: ["multiplication", "умножение"],
-			group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "8"],
+			group: [["Special Characters", "Smelting Special", "Special Fast Secondary", "Special Fast"], "8"],
 			show_on_fast_keys: True,
+			alt_special: "[Num*]",
 			recipe: "-x",
 			symbol: Chr(0x00D7)
 		},
@@ -5962,11 +5967,67 @@ MapInsert(Characters,
 			symbol: Chr(0x2C02)
 		},
 		"glagolitic_s_let_vede", {
-			unicode: "{U+2C32}", html: "&#11314;−",
+			unicode: "{U+2C32}", html: "&#11314;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "в"],
 			tags: ["строчный веди глаголицы", "small vede glagolitic"],
 			symbol: Chr(0x2C32)
+		},
+		"glagolitic_c_let_glagoli", {
+			unicode: "{U+2C03}", html: "&#11267;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Г"],
+			tags: ["прописной Глаголи глаголицы", "capital Glagoli glagolitic"],
+			symbol: Chr(0x2C03)
+		},
+		"glagolitic_s_let_glagoli", {
+			unicode: "{U+2C33}", html: "&#11315;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "г"],
+			tags: ["строчный глаголи глаголицы", "small glagoli glagolitic"],
+			symbol: Chr(0x2C33)
+		},
+		"glagolitic_c_let_dobro", {
+			unicode: "{U+2C04}", html: "&#11268;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Д"],
+			tags: ["прописной Добро глаголицы", "capital Dobro glagolitic"],
+			symbol: Chr(0x2C04)
+		},
+		"glagolitic_s_let_dobro", {
+			unicode: "{U+2C34}", html: "&#11316;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "д"],
+			tags: ["строчный добро глаголицы", "small dobro glagolitic"],
+			symbol: Chr(0x2C34)
+		},
+		"glagolitic_c_let_yestu", {
+			unicode: "{U+2C05}", html: "&#11269;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Е"],
+			tags: ["прописной Есть глаголицы", "capital Yestu glagolitic"],
+			symbol: Chr(0x2C05)
+		},
+		"glagolitic_s_let_yestu", {
+			unicode: "{U+2C35}", html: "&#11317;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "е"],
+			tags: ["строчный есть глаголицы", "small yestu glagolitic"],
+			symbol: Chr(0x2C35)
+		},
+		"glagolitic_c_let_zhivete", {
+			unicode: "{U+2C06}", html: "&#11270;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "Ж"],
+			tags: ["прописной Живете глаголицы", "capital Zhivete glagolitic"],
+			symbol: Chr(0x2C06)
+		},
+		"glagolitic_s_let_zhivete", {
+			unicode: "{U+2C36}", html: "&#11318;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "ж"],
+			tags: ["строчный живете глаголицы", "small zhivete glagolitic"],
+			symbol: Chr(0x2C36)
 		},
 		"glagolitic_c_let_fritu", {
 			unicode: "{U+2C17}", html: "&#11287;",
@@ -5985,18 +6046,33 @@ MapInsert(Characters,
 		"glagolitic_c_let_fita", {
 			unicode: "{U+2C2A}", html: "&#11306;",
 			titlesAlt: True,
-			group: ["Glagolitic Letters", "Ф"],
-			defaultModifier: RightAlt,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [Ф]",
 			tags: ["прописная Фита глаголицы", "capital Fita glagolitic"],
 			symbol: Chr(0x2C2A)
 		},
 		"glagolitic_s_let_fita", {
 			unicode: "{U+2C5A}", html: "&#11354;",
 			titlesAlt: True,
-			group: ["Glagolitic Letters", "ф"],
-			defaultModifier: RightAlt,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [ф]",
 			tags: ["строчная Фита глаголицы", "small fita glagolitic"],
 			symbol: Chr(0x2C5A)
+		},
+		;
+		"cyr_com_vzmet", {
+			unicode: "{U+A66F}", html: "&#42607;",
+			group: [["Diacritics Primary", "Cyrillic Diacritics"], CtrlD],
+			alt_layout: LeftControl LeftAlt " [в]",
+			tags: ["взмет", "vzmet"],
+			symbol: DottedCircle Chr(0xA66F)
+		},
+		"cyr_com_titlo", {
+			unicode: "{U+0483}", html: "&#1155;",
+			group: [["Diacritics Primary", "Cyrillic Diacritics"], ["n", "т"]],
+			alt_layout: LeftControl LeftAlt " [т]",
+			tags: ["титло", "titlo"],
+			symbol: DottedCircle Chr(0x0483)
 		},
 		;
 		;
@@ -6059,8 +6135,8 @@ MapInsert(Characters,
 		"futhark_eihwaz", {
 			unicode: "{U+16C7}", html: "&#5831;",
 			titlesAlt: True,
-			group: ["Futhark Runes", "I"],
-			defaultModifier: RightShift,
+			group: ["Futhark Runes"],
+			alt_layout: RightShift " [I]",
 			tags: ["эваз", "eihwaz"],
 			symbol: Chr(0x16C7)
 		},
@@ -6102,8 +6178,8 @@ MapInsert(Characters,
 		"futhark_ingwaz", {
 			unicode: "{U+16DC}", html: "&#5852;",
 			titlesAlt: True,
-			group: ["Futhark Runes", "N"],
-			defaultModifier: RightShift,
+			group: ["Futhark Runes"],
+			alt_layout: RightShift " [N]",
 			tags: ["ингваз", "ingwaz"],
 			symbol: Chr(0x16DC)
 		},
@@ -6145,8 +6221,8 @@ MapInsert(Characters,
 		"futhark_thurisaz", {
 			unicode: "{U+16A6}", html: "&#5798;",
 			titlesAlt: True,
-			group: ["Futhark Runes", "T"],
-			defaultModifier: RightShift,
+			group: ["Futhark Runes"],
+			alt_layout: RightShift "[T]",
 			tags: ["турисаз", "thurisaz"],
 			symbol: Chr(0x16A6)
 		},
@@ -6174,16 +6250,16 @@ MapInsert(Characters,
 		"futhork_as", {
 			unicode: "{U+16AA}", html: "&#5802;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "A"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [A]",
 			tags: ["ас", "as"],
 			symbol: Chr(0x16AA)
 		},
 		"futhork_aesc", {
 			unicode: "{U+16AB}", html: "&#5803;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "A"],
-			defaultModifier: RightShift,
+			group: ["Futhork Runes"],
+			alt_layout: RightShift " [A]",
 			tags: ["эск", "aesc"],
 			symbol: Chr(0x16AB)
 		},
@@ -6197,72 +6273,72 @@ MapInsert(Characters,
 		"futhork_ear", {
 			unicode: "{U+16E0}", html: "&#5820;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "E"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [E]",
 			tags: ["эар", "ear"],
 			symbol: Chr(0x16E0)
 		},
 		"futhork_gar", {
 			unicode: "{U+16B8}", html: "&#5816;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "G"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [G]",
 			tags: ["гар", "gar"],
 			symbol: Chr(0x16B8)
 		},
 		"futhork_haegl", {
 			unicode: "{U+16BB}", html: "&#5819;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "H"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [H]",
 			tags: ["хегль", "haegl"],
 			symbol: Chr(0x16BB)
 		},
 		"futhork_ger", {
 			unicode: "{U+16C4}", html: "&#5828;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "J"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [J]",
 			tags: ["гер", "ger"],
 			symbol: Chr(0x16C4)
 		},
 		"futhork_ior", {
 			unicode: "{U+16E1}", html: "&#5857;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "J"],
-			defaultModifier: RightShift,
+			group: ["Futhork Runes"],
+			alt_layout: RightShift "[J]",
 			tags: ["йор", "ior"],
 			symbol: Chr(0x16E1)
 		},
 		"futhork_cealc", {
 			unicode: "{U+16E4}", html: "&#5860;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "K"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [K]",
 			tags: ["келк", "cealc"],
 			symbol: Chr(0x16E4)
 		},
 		"futhork_calc", {
 			unicode: "{U+16E3}", html: "&#5859;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "K"],
-			defaultModifier: RightShift,
+			group: ["Futhork Runes"],
+			alt_layout: RightShift " [K]",
 			tags: ["калк", "calc"],
 			symbol: Chr(0x16E3)
 		},
 		"futhork_ing", {
 			unicode: "{U+16DD}", html: "&#5853;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "N"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [N]",
 			tags: ["инг", "ing"],
 			symbol: Chr(0x16DD)
 		},
 		"futhork_os", {
 			unicode: "{U+16A9}", html: "&#5801;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "O"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [O]",
 			tags: ["ос", "os"],
 			symbol: Chr(0x16A9)
 		},
@@ -6276,128 +6352,128 @@ MapInsert(Characters,
 		"futhork_sigel", {
 			unicode: "{U+16CB}", html: "&#5835;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "S"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [S]",
 			tags: ["сигель", "sigel"],
 			symbol: Chr(0x16CB)
 		},
 		"futhork_stan", {
 			unicode: "{U+16E5}", html: "&#5861;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "S"],
-			defaultModifier: RightShift,
+			group: ["Futhork Runes"],
+			alt_layout: RightShift " [S]",
 			tags: ["стан", "stan"],
 			symbol: Chr(0x16E5)
 		},
 		"futhork_yr", {
 			unicode: "{U+16A3}", html: "&#5795;",
 			titlesAlt: True,
-			group: ["Futhork Runes", "Y"],
-			defaultModifier: LeftShift,
+			group: ["Futhork Runes"],
+			alt_layout: LeftShift " [Y]",
 			tags: ["ир", "yr"],
 			symbol: Chr(0x16A3)
 		},
 		"futhark_younger_jera", {
 			unicode: "{U+16C5}", html: "&#5829;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "A"],
-			defaultModifier: RightAlt,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt " [A]",
 			tags: ["младшая йера", "younger jera"],
 			symbol: Chr(0x16C5)
 		},
 		"futhark_younger_jera_short_twig", {
 			unicode: "{U+16C6}", html: "&#5830;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "A"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [A]",
 			tags: ["младшая короткая йера", "younger short twig jera"],
 			symbol: Chr(0x16C6)
 		},
 		"futhark_younger_bjarkan_short_twig", {
 			unicode: "{U+16D3}", html: "&#5843;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "B"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [B]",
 			tags: ["младшая короткая беркана", "younger short twig bjarkan"],
 			symbol: Chr(0x16D3)
 		},
 		"futhark_younger_hagall", {
 			unicode: "{U+16BC}", html: "&#5820;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "H"],
-			defaultModifier: RightAlt,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt " [H]",
 			tags: ["младшая хагал", "younger hagall"],
 			symbol: Chr(0x16BC)
 		},
 		"futhark_younger_hagall_short_twig", {
 			unicode: "{U+16BD}", html: "&#5821;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "H"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [H]",
 			tags: ["младший короткий хагал", "younger short twig hagall"],
 			symbol: Chr(0x16BD)
 		},
 		"futhark_younger_kaun", {
 			unicode: "{U+16B4}", html: "&#5812;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "K"],
-			defaultModifier: RightAlt,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt " [K]",
 			tags: ["младший каун", "younger kaun"],
 			symbol: Chr(0x16B4)
 		},
 		"futhark_younger_madr", {
 			unicode: "{U+16D8}", html: "&#5848;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "M"],
-			defaultModifier: RightAlt,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt " [M]",
 			tags: ["младший мадр", "younger madr"],
 			symbol: Chr(0x16D8)
 		},
 		"futhark_younger_madr_short_twig", {
 			unicode: "{U+16D9}", html: "&#5849;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "M"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [M]",
 			tags: ["младший короткий мадр", "younger short twig madr"],
 			symbol: Chr(0x16D9)
 		},
 		"futhark_younger_naud_short_twig", {
 			unicode: "{U+16BF}", html: "&#5823;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "N"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [N]",
 			tags: ["младший короткий науд", "younger short twig naud"],
 			symbol: Chr(0x16BF)
 		},
 		"futhark_younger_oss", {
 			unicode: "{U+16AC}", html: "&#5804;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "O"],
-			defaultModifier: RightAlt,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt " [O]",
 			tags: ["младший осс", "younger oss"],
 			symbol: Chr(0x16AC)
 		},
 		"futhark_younger_oss_short_twig", {
 			unicode: "{U+16AD}", html: "&#5805;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "O"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [O]",
 			tags: ["младший короткий осс", "younger short twig oss"],
 			symbol: Chr(0x16AD)
 		},
 		"futhark_younger_sol_short_twig", {
 			unicode: "{U+16CC}", html: "&#5836;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "S"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [S]",
 			tags: ["младший короткий сол", "younger short twig sol"],
 			symbol: Chr(0x16CC)
 		},
 		"futhark_younger_tyr_short_twig", {
 			unicode: "{U+16D0}", html: "&#5840;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "T"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [T]",
 			tags: ["младший короткий тир", "younger short twig tyr"],
 			symbol: Chr(0x16D0)
 		},
@@ -6411,88 +6487,88 @@ MapInsert(Characters,
 		"futhark_younger_yr", {
 			unicode: "{U+16E6}", html: "&#5862;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "Y"],
-			defaultModifier: RightAlt,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt "[Y]",
 			tags: ["младший короткий тис", "younger yr"],
 			symbol: Chr(0x16E6)
 		},
 		"futhark_younger_yr_short_twig", {
 			unicode: "{U+16E7}", html: "&#5863;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "Y"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [Y]",
 			tags: ["младший короткий тис", "younger short twig yr"],
 			symbol: Chr(0x16E7)
 		},
 		"futhark_younger_icelandic_yr", {
 			unicode: "{U+16E8}", html: "&#5864;",
 			titlesAlt: True,
-			group: ["Younger Futhark Runes", "Y"],
-			defaultModifier: RightShift,
+			group: ["Younger Futhark Runes"],
+			alt_layout: RightShift " [Y]",
 			tags: ["исладнский тис", "icelandic yr"],
 			symbol: Chr(0x16E8)
 		},
 		"futhark_almanac_arlaug", {
 			unicode: "{U+16EE}", html: "&#5870;",
 			titlesAlt: True,
-			group: ["Almanac Runes", "7"],
-			defaultModifier: RightAlt,
+			group: ["Almanac Runes"],
+			alt_layout: RightAlt " [7]",
 			tags: ["арлауг", "arlaug"],
 			symbol: Chr(0x16EE)
 		},
 		"futhark_almanac_tvimadur", {
 			unicode: "{U+16EF}", html: "&#5871;",
 			titlesAlt: True,
-			group: ["Almanac Runes", "8"],
-			defaultModifier: RightAlt,
+			group: ["Almanac Runes"],
+			alt_layout: RightAlt " [8]",
 			tags: ["твимадур", "tvimadur"],
 			symbol: Chr(0x16EF)
 		},
 		"futhark_almanac_belgthor", {
 			unicode: "{U+16F0}", html: "&#5872;",
 			titlesAlt: True,
-			group: ["Almanac Runes", "9"],
-			defaultModifier: RightAlt,
+			group: ["Almanac Runes"],
+			alt_layout: RightAlt " [9]",
 			tags: ["белгтор", "belgthor"],
 			symbol: Chr(0x16F0)
 		},
 		"futhark_younger_later_e", {
 			unicode: "{U+16C2}", html: "&#5826;",
 			titlesAlt: True,
-			group: ["Later Younger Futhark Runes", "E"],
-			defaultModifier: RightAlt,
+			group: ["Later Younger Futhark Runes"],
+			alt_layout: RightAlt " [E]",
 			tags: ["младшяя поздняя е", "younger later e"],
 			symbol: Chr(0x16C2)
 		},
 		"futhark_younger_later_eth", {
 			unicode: "{U+16A7}", html: "&#5799;",
 			titlesAlt: True,
-			group: ["Later Younger Futhark Runes", "D"],
-			defaultModifier: RightAlt,
+			group: ["Later Younger Futhark Runes"],
+			alt_layout: RightAlt " [D]",
 			tags: ["младший поздний эт", "younger later eth"],
 			symbol: Chr(0x16A7)
 		},
 		"futhark_younger_later_d", {
 			unicode: "{U+16D1}", html: "&#5841;",
 			titlesAlt: True,
-			group: ["Later Younger Futhark Runes", "D"],
-			defaultModifier: RightAlt LeftShift,
+			group: ["Later Younger Futhark Runes"],
+			alt_layout: RightAlt LeftShift " [D]",
 			tags: ["младший поздний д", "younger later d"],
 			symbol: Chr(0x16D1)
 		},
 		"futhark_younger_later_l", {
 			unicode: "{U+16DB}", html: "&#5851;",
 			titlesAlt: True,
-			group: ["Later Younger Futhark Runes", "L"],
-			defaultModifier: RightAlt,
+			group: ["Later Younger Futhark Runes"],
+			alt_layout: RightAlt " [L]",
 			tags: ["младший поздний л", "younger later l"],
 			symbol: Chr(0x16DB)
 		},
 		"futhark_younger_later_p", {
 			unicode: "{U+16D4}", html: "&#5844;",
 			titlesAlt: True,
-			group: ["Later Younger Futhark Runes", "P"],
-			defaultModifier: RightAlt,
+			group: ["Later Younger Futhark Runes"],
+			alt_layout: RightAlt " [P]",
 			tags: ["младшяя поздняя п", "younger later p"],
 			symbol: Chr(0x16D4)
 		},
@@ -6506,72 +6582,72 @@ MapInsert(Characters,
 		"medieval_c", {
 			unicode: "{U+16CD}", html: "&#5837;",
 			titlesAlt: True,
-			group: ["Medieval Runes", "C"],
-			defaultModifier: RightAlt LeftAlt,
+			group: ["Medieval Runes"],
+			alt_layout: RightAlt LeftAlt " [C]",
 			tags: ["средневековый си", "medieval с"],
 			symbol: Chr(0x16CD)
 		},
 		"medieval_en", {
 			unicode: "{U+16C0}", html: "&#5824;",
 			titlesAlt: True,
-			group: ["Medieval Runes", "N"],
-			defaultModifier: RightAlt LeftAlt,
+			group: ["Medieval Runes"],
+			alt_layout: RightAlt LeftAlt " [N]",
 			tags: ["средневековый эн", "medieval en"],
 			symbol: Chr(0x16C0)
 		},
 		"medieval_on", {
 			unicode: "{U+16B0}", html: "&#5808;",
 			titlesAlt: True,
-			group: ["Medieval Runes", "O"],
-			defaultModifier: RightAlt LeftAlt,
+			group: ["Medieval Runes"],
+			alt_layout: RightAlt LeftAlt " [O]",
 			tags: ["средневековый он", "medieval on"],
 			symbol: Chr(0x16B0)
 		},
 		"medieval_o", {
 			unicode: "{U+16AE}", html: "&#5806;",
 			titlesAlt: True,
-			group: ["Medieval Runes", "O"],
-			defaultModifier: RightAlt LeftAlt RightShift,
+			group: ["Medieval Runes"],
+			alt_layout: RightAlt LeftAlt RightShift " [O]",
 			tags: ["средневековый о", "medieval o"],
 			symbol: Chr(0x16AE)
 		},
 		"medieval_x", {
 			unicode: "{U+16EA}", html: "&#5866;",
 			titlesAlt: True,
-			group: ["Medieval Runes", "X"],
-			defaultModifier: RightAlt LeftAlt,
+			group: ["Medieval Runes"],
+			alt_layout: RightAlt LeftAlt " [X]",
 			tags: ["средневековый экс", "medieval ex"],
 			symbol: Chr(0x16EA)
 		},
 		"medieval_z", {
 			unicode: "{U+16CE}", html: "&#5838;",
 			titlesAlt: True,
-			group: ["Medieval Runes", "Z"],
-			defaultModifier: RightAlt LeftAlt,
+			group: ["Medieval Runes"],
+			alt_layout: RightAlt LeftAlt " [Z]",
 			tags: ["средневековый зе", "medieval ze"],
 			symbol: Chr(0x16CE)
 		},
 		"runic_single_punctuation", {
 			unicode: "{U+16EB}", html: "&#5867;",
 			titlesAlt: True,
-			group: ["Runic Punctuation", "."],
-			defaultModifier: RightAlt,
+			group: ["Runic Punctuation"],
+			alt_layout: RightAlt " [.]",
 			tags: ["руническая одиночное препинание", "runic single punctuation"],
 			symbol: Chr(0x16EB)
 		},
 		"runic_multiple_punctuation", {
 			unicode: "{U+16EC}", html: "&#5868;",
 			titlesAlt: True,
-			group: ["Runic Punctuation", "Space"],
-			defaultModifier: RightAlt,
+			group: ["Runic Punctuation"],
+			alt_layout: RightAlt " [Space]",
 			tags: ["руническое двойное препинание", "runic multiple punctuation"],
 			symbol: Chr(0x16EC)
 		},
 		"runic_cruciform_punctuation", {
 			unicode: "{U+16ED}", html: "&#5869;",
 			titlesAlt: True,
-			group: ["Runic Punctuation", ","],
-			defaultModifier: RightAlt,
+			group: ["Runic Punctuation"],
+			alt_layout: RightAlt " [,]",
 			tags: ["руническое крестовидное препинание", "runic cruciform punctuation"],
 			symbol: Chr(0x16ED)
 		},
@@ -7198,7 +7274,7 @@ GlagoliticFuthark := [
 	SCKeys["J"], (*) => LangSeparatedKey("futhark_jeran", ["", ""], True),
 	"<+" SCKeys["J"], (*) => LangSeparatedKey("futhork_ger", ["", ""], True),
 	">+" SCKeys["J"], (*) => LangSeparatedKey("futhork_ior", ["", ""], True),
-	SCKeys["L"], (*) => LangSeparatedKey("futhark_laguz", ["", ""], True),
+	SCKeys["L"], (*) => LangSeparatedKey("futhark_laguz", ["glagolitic_c_let_dobro", "glagolitic_s_let_dobro"], True),
 	"<^>!" SCKeys["L"], (*) => LangSeparatedKey("futhark_younger_later_l", ["", ""], True),
 	SCKeys["K"], (*) => LangSeparatedKey("futhark_kauna", ["", ""], True),
 	"<+" SCKeys["K"], (*) => LangSeparatedKey("futhork_cealc", ["", ""], True),
@@ -7226,10 +7302,10 @@ GlagoliticFuthark := [
 	"<+" SCKeys["S"], (*) => LangSeparatedKey("futhork_sigel", ["", ""], True),
 	">+" SCKeys["S"], (*) => LangSeparatedKey("futhork_stan", ["", ""], True),
 	"<^>!<+" SCKeys["S"], (*) => LangSeparatedKey("futhark_younger_sol_short_twig", ["", ""], True),
-	SCKeys["T"], (*) => LangSeparatedKey("futhark_tiwaz", ["", ""], True),
+	SCKeys["T"], (*) => LangSeparatedKey("futhark_tiwaz", ["glagolitic_c_let_yestu", "glagolitic_s_let_yestu"], True),
 	">+" SCKeys["T"], (*) => LangSeparatedKey("futhark_thurisaz", ["", ""], True),
 	"<^>!<+" SCKeys["T"], (*) => LangSeparatedKey("futhark_younger_tyr_short_twig", ["", ""], True),
-	SCKeys["U"], (*) => LangSeparatedKey("futhark_uruz", ["", ""], True),
+	SCKeys["U"], (*) => LangSeparatedKey("futhark_uruz", ["glagolitic_c_let_glagoli", "glagolitic_s_let_glagoli"], True),
 	SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_ur", ["", ""], True),
 	">+" SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_icelandic_yr", ["", ""], True),
 	"<^>!" SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_yr", ["", ""], True),
@@ -7246,7 +7322,7 @@ GlagoliticFuthark := [
 	"<^>!" SCKeys["Comma"], (*) => LangSeparatedKey("runic_cruciform_punctuation", ["", ""], True),
 	"<^>!" SCKeys["Dot"], (*) => LangSeparatedKey("runic_single_punctuation", ["", ""], True),
 	"<^>!" SCKeys["Space"], (*) => LangSeparatedKey("runic_multiple_punctuation", ["", ""], True),
-	SCKeys["Semicolon"], (*) => LangSeparatedKey("kkey_semicolon", ["", ""], True),
+	SCKeys["Semicolon"], (*) => LangSeparatedKey("kkey_semicolon", ["glagolitic_c_let_zhivete", "glagolitic_s_let_zhivete"], True),
 	SCKeys["Apostrophe"], (*) => LangSeparatedKey("kkey_apostrophe", ["", ""], True),
 	SCKeys["LSquareBracket"], (*) => LangSeparatedKey("kkey_l_square_bracket", ["", ""], True),
 	SCKeys["RSquareBracket"], (*) => LangSeparatedKey("kkey_r_square_bracket", ["", ""], True),
@@ -7254,6 +7330,8 @@ GlagoliticFuthark := [
 	"<^>!" SCKeys["7"], (*) => LangSeparatedKey("futhark_almanac_arlaug", ["", ""], True),
 	"<^>!" SCKeys["8"], (*) => LangSeparatedKey("futhark_almanac_tvimadur", ["", ""], True),
 	"<^>!" SCKeys["9"], (*) => LangSeparatedKey("futhark_almanac_belgthor", ["", ""], True),
+	;
+	"<^<!" SCKeys["D"], (*) => HandleFastKey("cyr_com_vzmet"),
 ]
 
 ChangeScriptInput(ScriptMode) {
@@ -8545,14 +8623,15 @@ Constructor() {
 	DSLContent["BindList"].TabGlagoKeys := []
 
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Fake", RightControl " 1", False)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhork Runes", ReadLocale("symbol_futhork"),)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Younger Futhark Runes", ReadLocale("symbol_futhark_younger"),)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Almanac Runes", ReadLocale("symbol_futhark_almanac"),)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"),)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Medieval Runes", ReadLocale("symbol_medieval_runes"),)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Runic Punctuation", ReadLocale("symbol_runic_punctuation"),)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Glagolitic Letters", ReadLocale("symbol_glagolitic"))
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False, , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhork Runes", ReadLocale("symbol_futhork"), , , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Younger Futhark Runes", ReadLocale("symbol_futhark_younger"), , , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Almanac Runes", ReadLocale("symbol_futhark_almanac"), , , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"), , , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Medieval Runes", ReadLocale("symbol_medieval_runes"), , , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Runic Punctuation", ReadLocale("symbol_runic_punctuation"), , , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Glagolitic Letters", ReadLocale("symbol_glagolitic"), , , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Cyrillic Diacritics", , , , , , , True)
 
 	GlagoLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
 	GlagoLV.ModifyCol(1, ColumnWidths[1])
@@ -9319,6 +9398,7 @@ FastKeysList :=
 		"<^<+<!" SCKeys["H"], (*) => HandleFastKey("horn"),
 		"<^<!" SCKeys["M"], (*) => HandleFastKey("macron"),
 		"<^<+<!" SCKeys["M"], (*) => HandleFastKey("macron_below"),
+		"<^<!" SCKeys["N"], (*) => HandleFastKey("cyr_com_titlo"),
 		"<^<!" SCKeys["O"], (*) => HandleFastKey("ogonek"),
 		"<^<!<+" SCKeys["O"], (*) => HandleFastKey("ogonek_above"),
 		"<^<!" SCKeys["R"], (*) => HandleFastKey("ring_above"),
@@ -9493,6 +9573,7 @@ FastKeysList :=
 		"<^>!<+" SCKeys["7"], (*) => HandleFastKey("double_question_exclamation"),
 		"<^>!<!" SCKeys["7"], (*) => HandleFastKey("reversed_question"),
 		;
+		SCKeys["NumpadMult"], (*) => HandleFastKey("multiplication"),
 		SCKeys["NumpadSub"], (*) => TimedKeyCombinations("NumpadSub", SCKeys["NumpadAdd"], (*) => HandleFastKey("plusminus"), (*) => HandleFastKey("minus")),
 		SCKeys["NumpadAdd"], (*) => TimedKeyCombinations("NumpadAdd", SCKeys["NumpadSub"], (*) => EmptyFunc()),
 		SCKeys["Equals"], (*) =>
