@@ -6725,9 +6725,15 @@ MapInsert(Characters,
 		"kkey_plus", { unicode: "{U+002B}", html: "&#43;", sup: "num_sup_plus", sub: "num_sub_plus", symbol: "+" },
 		"kkey_left_parenthesis", { unicode: "{U+0028}", html: "&#40;", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", symbol: "(" },
 		"kkey_right_parenthesis", { unicode: "{U+0029}", html: "&#41;", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", symbol: ")" },
+		"kkey_comma", { unicode: "{U+002C}", html: "&#44;", symbol: "," },
+		"kkey_dot", { unicode: "{U+002E}", html: "&#46;", symbol: "." },
+		"kkey_semicolon", { unicode: "{U+003B}", html: "&#59;", symbol: ";" },
+		"kkey_apostrophe", { unicode: "{U+0027}", html: "&#39;", symbol: "'" },
+		"kkey_l_square_bracket", { unicode: "{U+005B}", html: "&#91;", symbol: "[" },
+		"kkey_r_square_bracket", { unicode: "{U+005D}", html: "&#93;", symbol: "]" },
 )
 
-CharactersCount := GetMapCount(Characters) - 2 - 15
+CharactersCount := GetMapCount(Characters) - 2 - 21
 
 MapInsert(Characters,
 	"misc_crlf_emspace", {
@@ -7123,7 +7129,12 @@ GlagoliticFuthark := [
 	SCKeys["Z"], (*) => LangSeparatedKey("futhark_algiz", ["", ""], True),
 	"<^>!<!" SCKeys["X"], (*) => LangSeparatedKey("medieval_x", ["", ""], True),
 	;
-	SCKeys["Comma"], (*) => LangSeparatedKey("", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
+	SCKeys["Comma"], (*) => LangSeparatedKey("kkey_comma", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
+	SCKeys["Dot"], (*) => LangSeparatedKey("kkey_dot", ["", ""], True),
+	SCKeys["Semicolon"], (*) => LangSeparatedKey("kkey_semicolon", ["", ""], True),
+	SCKeys["Apostrophe"], (*) => LangSeparatedKey("kkey_apostrophe", ["", ""], True),
+	SCKeys["LSquareBracket"], (*) => LangSeparatedKey("kkey_l_square_bracket", ["", ""], True),
+	SCKeys["RSquareBracket"], (*) => LangSeparatedKey("kkey_r_square_bracket", ["", ""], True),
 ]
 
 ChangeScriptInput(ScriptMode) {
@@ -8414,6 +8425,7 @@ Constructor() {
 
 	DSLContent["BindList"].TabGlagoKeys := []
 
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Fake", RightControl " 1", False)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhork Runes", ReadLocale("symbol_futhork"),)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Younger Futhark Runes", ReadLocale("symbol_futhark_younger"),)
