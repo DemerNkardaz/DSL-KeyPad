@@ -6593,6 +6593,38 @@ MapInsert(Characters,
 			tags: ["строчная фита глаголицы", "small fita glagolitic"],
 			symbol: Chr(0x2C5A)
 		},
+		"glagolitic_c_let_shtapic", {
+			unicode: "{U+2C2C}", html: "&#11308;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [Ъ]",
+			tags: ["прописной Штапик глаголицы", "capital Shtapic glagolitic"],
+			symbol: Chr(0x2C2C)
+		},
+		"glagolitic_s_let_shtapic", {
+			unicode: "{U+2C5C}", html: "&#11356;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [ъ]",
+			tags: ["строчной штапик глаголицы", "small shtapic glagolitic"],
+			symbol: Chr(0x2C5C)
+		},
+		"glagolitic_c_let_trokutasti_a", {
+			unicode: "{U+2C2D}", html: "&#11309;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [А]",
+			tags: ["прописная треугольная А глаголицы", "capital trokutasti A glagolitic"],
+			symbol: Chr(0x2C2D)
+		},
+		"glagolitic_s_let_trokutasti_a", {
+			unicode: "{U+2C5D}", html: "&#11357;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters"],
+			alt_layout: RightAlt " [А]",
+			tags: ["строчная треугольная a глаголицы", "small trokutasti a glagolitic"],
+			symbol: Chr(0x2C5D)
+		},
 		;
 		"cyr_com_vzmet", {
 			unicode: "{U+A66F}", html: "&#42607;",
@@ -7605,6 +7637,9 @@ SearchKey() {
 
 	Found := False
 	for characterEntry, value in Characters {
+		if !HasProp(value, "tags") {
+			continue
+		}
 		characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
 		characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
@@ -7828,6 +7863,7 @@ GlagoliticFuthark := [
 	"<^>!" SCKeys["E"], (*) => LangSeparatedKey("futhark_younger_later_e", ["", ""], True),
 	"<^>!<!" SCKeys["E"], (*) => LangSeparatedKey("medieval_en", ["", ""], True),
 	SCKeys["F"], (*) => LangSeparatedKey("futhark_fehu", ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
+	"<^>!" SCKeys["F"], (*) => LangSeparatedKey("", ["glagolitic_c_let_trokutasti_a", "glagolitic_s_let_trokutasti_a"], True),
 	SCKeys["G"], (*) => LangSeparatedKey("futhark_gebo", ["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"], True),
 	"<^>!" SCKeys["G"], (*) => LangSeparatedKey("", ["glagolitic_c_let_pe", "glagolitic_s_let_pe"], True),
 	"<+" SCKeys["G"], (*) => LangSeparatedKey("futhork_gar", ["", ""], True),
@@ -7900,6 +7936,7 @@ GlagoliticFuthark := [
 	SCKeys["LSquareBracket"], (*) => LangSeparatedKey("kkey_l_square_bracket", ["glagolitic_c_let_heru", "glagolitic_s_let_heru"], True),
 	"<^>!" SCKeys["LSquareBracket"], (*) => LangSeparatedKey("", ["glagolitic_c_let_spider_ha", "glagolitic_s_let_spider_ha"], True),
 	SCKeys["RSquareBracket"], (*) => LangSeparatedKey("kkey_r_square_bracket", ["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"], True),
+	"<^>!" SCKeys["RSquareBracket"], (*) => LangSeparatedKey("", ["glagolitic_c_let_shtapic", "glagolitic_s_let_shtapic"], True),
 	;
 	"<^>!" SCKeys["7"], (*) => LangSeparatedKey("futhark_almanac_arlaug", ["", ""], True),
 	"<^>!" SCKeys["8"], (*) => LangSeparatedKey("futhark_almanac_tvimadur", ["", ""], True),
