@@ -6059,6 +6059,79 @@ MapInsert(Characters,
 			tags: ["исаз", "isaz"],
 			symbol: Chr(0x16C1)
 		},
+		"futhark_jeran", {
+			unicode: "{U+16C3}", html: "&#5827;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "J"],
+			tags: ["йера", "jeran"],
+			symbol: Chr(0x16C3)
+		},
+		"futhark_kauna", {
+			unicode: "{U+16B2}", html: "&#5810;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "K"],
+			tags: ["кеназ", "kauna"],
+			symbol: Chr(0x16B2)
+		},
+		"futhark_laguz", {
+			unicode: "{U+16DA}", html: "&#5850;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "L"],
+			tags: ["лагуз", "laukaz"],
+			symbol: Chr(0x16DA)
+		},
+		"futhark_mannaz", {
+			unicode: "{U+16D7}", html: "&#5847;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "M"],
+			tags: ["манназ", "mannaz"],
+			symbol: Chr(0x16D7)
+		},
+		"futhark_naudiz", {
+			unicode: "{U+16BE}", html: "&#5822;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "N"],
+			tags: ["наудиз", "naudiz"],
+			symbol: Chr(0x16BE)
+		},
+		"futhark_ingwaz", {
+			unicode: "{U+16DC}", html: "&#5852;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "N"],
+			defaultModifier: RightShift,
+			tags: ["ингваз", "ingwaz"],
+			symbol: Chr(0x16DC)
+		},
+		"futhark_odal", {
+			unicode: "{U+16DF}", html: "&#5855;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "O"],
+			tags: ["одал", "odal"],
+			symbol: Chr(0x16DF)
+		},
+		"futhark_pertho", {
+			unicode: "{U+16C8}", html: "&#5832;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "P"],
+			tags: ["одал", "pertho"],
+			symbol: Chr(0x16C8)
+		},
+		"futhork_as", {
+			unicode: "{U+16AA}", html: "&#5802;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "A"],
+			defaultModifier: LeftShift,
+			tags: ["ас", "as"],
+			symbol: Chr(0x16AA)
+		},
+		"futhork_aesc", {
+			unicode: "{U+16AB}", html: "&#5803;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "A"],
+			defaultModifier: RightShift,
+			tags: ["эск", "aesc"],
+			symbol: Chr(0x16AB)
+		},
 		"futhork_cen", {
 			unicode: "{U+16B3}", html: "&#5811;",
 			titlesAlt: True,
@@ -6074,6 +6147,45 @@ MapInsert(Characters,
 			tags: ["хегль", "haegl"],
 			symbol: Chr(0x16BB)
 		},
+		"futhork_ger", {
+			unicode: "{U+16C4}", html: "&#5828;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "J"],
+			defaultModifier: LeftShift,
+			tags: ["гер", "ger"],
+			symbol: Chr(0x16C4)
+		},
+		"futhork_ior", {
+			unicode: "{U+16E1}", html: "&#5857;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "J"],
+			defaultModifier: RightShift,
+			tags: ["йор", "ior"],
+			symbol: Chr(0x16E1)
+		},
+		"futhork_ing", {
+			unicode: "{U+16DD}", html: "&#5853;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "N"],
+			defaultModifier: LeftShift,
+			tags: ["инг", "ing"],
+			symbol: Chr(0x16DD)
+		},
+		"futhork_os", {
+			unicode: "{U+16A9}", html: "&#5801;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "O"],
+			defaultModifier: LeftShift,
+			tags: ["ос", "os"],
+			symbol: Chr(0x16A9)
+		},
+		"futhork_cweorth", {
+			unicode: "{U+16E2}", html: "&#5801;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "Q"],
+			tags: ["квирд", "cweorth"],
+			symbol: Chr(0x16E2)
+		},
 		"futhark_younger_jera", {
 			unicode: "{U+16C5}", html: "&#5829;",
 			titlesAlt: True,
@@ -6081,6 +6193,14 @@ MapInsert(Characters,
 			defaultModifier: RightAlt,
 			tags: ["младшая йера", "younger jera"],
 			symbol: Chr(0x16C5)
+		},
+		"futhark_younger_jera_short_twig", {
+			unicode: "{U+16C6}", html: "&#5830;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "A"],
+			defaultModifier: RightAlt LeftShift,
+			tags: ["младшая короткая йера", "younger short twig jera"],
+			symbol: Chr(0x16C6)
 		},
 		"futhark_younger_hagall", {
 			unicode: "{U+16BC}", html: "&#5820;",
@@ -6094,9 +6214,57 @@ MapInsert(Characters,
 			unicode: "{U+16BD}", html: "&#5821;",
 			titlesAlt: True,
 			group: ["Younger Futhark Runes", "H"],
-			defaultModifier: LeftShift RightAlt,
+			defaultModifier: RightAlt LeftShift,
 			tags: ["младшая короткая хагал", "younger short twig hagall"],
 			symbol: Chr(0x16BD)
+		},
+		"futhark_younger_kaun", {
+			unicode: "{U+16B4}", html: "&#5812;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "K"],
+			defaultModifier: RightAlt,
+			tags: ["младший каун", "younger kaun"],
+			symbol: Chr(0x16B4)
+		},
+		"futhark_younger_madr", {
+			unicode: "{U+16D8}", html: "&#5848;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "M"],
+			defaultModifier: RightAlt,
+			tags: ["младший мадр", "younger madr"],
+			symbol: Chr(0x16D8)
+		},
+		"futhark_younger_madr_short_twig", {
+			unicode: "{U+16D9}", html: "&#5849;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "M"],
+			defaultModifier: RightAlt LeftShift,
+			tags: ["младший короткий мадр", "younger short twig madr"],
+			symbol: Chr(0x16D9)
+		},
+		"futhark_younger_naud_short_twig", {
+			unicode: "{U+16BF}", html: "&#5823;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "N"],
+			defaultModifier: RightAlt LeftShift,
+			tags: ["младший короткий науд", "younger short twig naud"],
+			symbol: Chr(0x16BF)
+		},
+		"futhark_younger_oss", {
+			unicode: "{U+16AC}", html: "&#5804;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "O"],
+			defaultModifier: RightAlt,
+			tags: ["младший осс", "younger oss"],
+			symbol: Chr(0x16AC)
+		},
+		"futhark_younger_oss_short_twig", {
+			unicode: "{U+16AD}", html: "&#5805;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "O"],
+			defaultModifier: RightAlt LeftShift,
+			tags: ["младший короткий осс", "younger short twig oss"],
+			symbol: Chr(0x16AD)
 		},
 		;
 		;
@@ -6688,20 +6856,42 @@ ToggleLetterScript() {
 }
 
 GlagoliticFuthark := [
-	SCKeys["A"], (*) => LangSeparatedKey(["futhark_ansuz", "futhark_ansuz"], ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], True),
-	"<^>!" SCKeys["A"], (*) => LangSeparatedKey(["futhark_younger_jera", "futhark_younger_jera"], ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
-	SCKeys["B"], (*) => LangSeparatedKey(["futhark_bjarkan", "futhark_bjarkan"], ["", ""], True),
-	SCKeys["C"], (*) => LangSeparatedKey(["futhork_cen", "futhork_cen"], ["", ""], True),
-	SCKeys["D"], (*) => LangSeparatedKey(["futhark_dagaz", "futhark_dagaz"], ["glagolitic_c_let_vede", "glagolitic_s_let_vede"], True),
-	SCKeys["E"], (*) => LangSeparatedKey(["futhark_ehwaz", "futhark_ehwaz"], ["", ""], True),
-	SCKeys["F"], (*) => LangSeparatedKey(["futhark_fehu", "futhark_fehu"], ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
-	SCKeys["G"], (*) => LangSeparatedKey(["futhark_gebo", "futhark_gebo"], ["", ""], True),
-	SCKeys["H"], (*) => LangSeparatedKey(["futhark_haglaz", "futhark_haglaz"], ["", ""], True),
-	"<+" SCKeys["H"], (*) => LangSeparatedKey(["futhork_haegl", "futhork_haegl"], ["", ""], True),
-	"<^>!" SCKeys["H"], (*) => LangSeparatedKey(["futhark_younger_hagall", "futhark_younger_hagall"], ["", ""], True),
-	"<^>!<+" SCKeys["H"], (*) => LangSeparatedKey(["futhark_younger_hagall_short_twig", "futhark_younger_hagall_short_twig"], ["", ""], True),
-	SCKeys["I"], (*) => LangSeparatedKey(["futhark_isaz", "futhark_isaz"], ["", ""], True),
-	SCKeys["Comma"], (*) => LangSeparatedKey(["", ""], ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
+	SCKeys["A"], (*) => LangSeparatedKey("futhark_ansuz", ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], True),
+	"<+" SCKeys["A"], (*) => LangSeparatedKey("futhork_as", ["", ""], True),
+	">+" SCKeys["A"], (*) => LangSeparatedKey("futhork_aesc", ["", ""], True),
+	"<^>!" SCKeys["A"], (*) => LangSeparatedKey("futhark_younger_jera", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
+	"<^>!<+" SCKeys["A"], (*) => LangSeparatedKey("futhark_younger_jera_short_twig", ["", ""], True),
+	SCKeys["B"], (*) => LangSeparatedKey("futhark_bjarkan", ["", ""], True),
+	SCKeys["C"], (*) => LangSeparatedKey("futhork_cen", ["", ""], True),
+	SCKeys["D"], (*) => LangSeparatedKey("futhark_dagaz", ["glagolitic_c_let_vede", "glagolitic_s_let_vede"], True),
+	SCKeys["E"], (*) => LangSeparatedKey("futhark_ehwaz", ["", ""], True),
+	SCKeys["F"], (*) => LangSeparatedKey("futhark_fehu", ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
+	SCKeys["G"], (*) => LangSeparatedKey("futhark_gebo", ["", ""], True),
+	SCKeys["H"], (*) => LangSeparatedKey("futhark_haglaz", ["", ""], True),
+	"<+" SCKeys["H"], (*) => LangSeparatedKey("futhork_haegl", ["", ""], True),
+	"<^>!" SCKeys["H"], (*) => LangSeparatedKey("futhark_younger_hagall", ["", ""], True),
+	"<^>!<+" SCKeys["H"], (*) => LangSeparatedKey("futhark_younger_hagall_short_twig", ["", ""], True),
+	SCKeys["I"], (*) => LangSeparatedKey("futhark_isaz", ["", ""], True),
+	SCKeys["J"], (*) => LangSeparatedKey("futhark_jeran", ["", ""], True),
+	"<+" SCKeys["J"], (*) => LangSeparatedKey("futhork_ger", ["", ""], True),
+	">+" SCKeys["J"], (*) => LangSeparatedKey("futhork_ior", ["", ""], True),
+	SCKeys["K"], (*) => LangSeparatedKey("futhark_kauna", ["", ""], True),
+	"<^>!" SCKeys["K"], (*) => LangSeparatedKey("futhark_younger_kaun", ["", ""], True),
+	"<^>!" SCKeys["K"], (*) => LangSeparatedKey("futhark_younger_kaun", ["", ""], True),
+	SCKeys["M"], (*) => LangSeparatedKey("futhark_mannaz", ["", ""], True),
+	"<^>!" SCKeys["M"], (*) => LangSeparatedKey("futhark_younger_madr", ["", ""], True),
+	"<^>!<+" SCKeys["M"], (*) => LangSeparatedKey("futhark_younger_madr_short_twig", ["", ""], True),
+	SCKeys["N"], (*) => LangSeparatedKey("futhark_naudiz", ["", ""], True),
+	">+" SCKeys["N"], (*) => LangSeparatedKey("futhark_ingwaz", ["", ""], True),
+	"<+" SCKeys["N"], (*) => LangSeparatedKey("futhork_ing", ["", ""], True),
+	"<^>!<+" SCKeys["N"], (*) => LangSeparatedKey("futhark_younger_naud_short_twig", ["", ""], True),
+	SCKeys["O"], (*) => LangSeparatedKey("futhark_odal", ["", ""], True),
+	"<^>!" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss", ["", ""], True),
+	"<^>!<+" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss_short_twig", ["", ""], True),
+	SCKeys["P"], (*) => LangSeparatedKey("futhark_pertho", ["", ""], True),
+	SCKeys["Q"], (*) => LangSeparatedKey("futhork_cweorth", ["", ""], True),
+	;
+	SCKeys["Comma"], (*) => LangSeparatedKey("", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
 ]
 
 ChangeScriptInput(ScriptMode) {
@@ -8717,10 +8907,10 @@ LangSeparatedCall(LatinCallback, CyrillicCallback) {
 
 LangSeparatedKey(LatinCharacter, CyrillicCharacter, UseCaps := False) {
 	Character := (GetLayoutLocale() == CodeEn) ? LatinCharacter : CyrillicCharacter
-	if IsObject(Character) && UseCaps {
-		HandleFastKey(CapsSeparatedKey(Character[1], Character[2]))
+	if UseCaps {
+		HandleFastKey(CapsSeparatedKey(IsObject(Character) ? Character[1] : Character, IsObject(Character) ? Character[2] : Character))
 	} else {
-		HandleFastKey(Character)
+		HandleFastKey(IsObject(Character) ? Character[1] : Character)
 	}
 }
 
