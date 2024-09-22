@@ -5957,6 +5957,20 @@ MapInsert(Characters,
 			tags: ["строчный буки глаголицы", "small buky glagolitic"],
 			symbol: Chr(0x2C31)
 		},
+		"glagolitic_c_let_vede", {
+			unicode: "{U+2C02}", html: "&#11266;",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "В"],
+			tags: ["прописной Веди глаголицы", "capital Vede glagolitic"],
+			symbol: Chr(0x2C02)
+		},
+		"glagolitic_s_let_vede", {
+			unicode: "{U+2C32}", html: "&#11314;−",
+			titlesAlt: True,
+			group: ["Glagolitic Letters", "в"],
+			tags: ["строчный веди глаголицы", "small vede glagolitic"],
+			symbol: Chr(0x2C32)
+		},
 		"glagolitic_c_let_fritu", {
 			unicode: "{U+2C17}", html: "&#11287;",
 			titlesAlt: True,
@@ -5996,12 +6010,93 @@ MapInsert(Characters,
 			tags: ["ансуз", "ansuz"],
 			symbol: Chr(0x16A8)
 		},
+		"futhark_bjarkan", {
+			unicode: "{U+16D2}", html: "&#5842;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "B"],
+			tags: ["беркана", "bjarkan"],
+			symbol: Chr(0x16D2)
+		},
+		"futhark_dagaz", {
+			unicode: "{U+16DE}", html: "&#5854;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "D"],
+			tags: ["дагаз", "dagaz"],
+			symbol: Chr(0x16DE)
+		},
+		"futhark_ehwaz", {
+			unicode: "{U+16D6}", html: "&#5846;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "E"],
+			tags: ["эваз", "ehwaz"],
+			symbol: Chr(0x16D6)
+		},
 		"futhark_fehu", {
 			unicode: "{U+16A0}", html: "&#5792;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "F"],
 			tags: ["феху", "fehu"],
 			symbol: Chr(0x16A0)
+		},
+		"futhark_gebo", {
+			unicode: "{U+16B7}", html: "&#5815;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "G"],
+			tags: ["гебо", "gebo"],
+			symbol: Chr(0x16B7)
+		},
+		"futhark_haglaz", {
+			unicode: "{U+16BA}", html: "&#5818;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "H"],
+			tags: ["хагалаз", "haglaz"],
+			symbol: Chr(0x16BA)
+		},
+		"futhark_isaz", {
+			unicode: "{U+16C1}", html: "&#5825;",
+			titlesAlt: True,
+			group: ["Futhark Runes", "I"],
+			tags: ["исаз", "isaz"],
+			symbol: Chr(0x16C1)
+		},
+		"futhork_cen", {
+			unicode: "{U+16B3}", html: "&#5811;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "C"],
+			tags: ["кен", "cen"],
+			symbol: Chr(0x16B3)
+		},
+		"futhork_haegl", {
+			unicode: "{U+16BB}", html: "&#5819;",
+			titlesAlt: True,
+			group: ["Futhork Runes", "H"],
+			defaultModifier: LeftShift,
+			tags: ["хегль", "haegl"],
+			symbol: Chr(0x16BB)
+		},
+		"futhark_younger_jera", {
+			unicode: "{U+16C5}", html: "&#5829;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "A"],
+			defaultModifier: RightAlt,
+			tags: ["младшая йера", "younger jera"],
+			symbol: Chr(0x16C5)
+		},
+		"futhark_younger_hagall", {
+			unicode: "{U+16BC}", html: "&#5820;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "H"],
+			defaultModifier: RightAlt,
+			tags: ["младшая хагал", "younger hagall"],
+			symbol: Chr(0x16BC)
+		},
+		"futhark_younger_hagall_short_twig", {
+			unicode: "{U+16BD}", html: "&#5821;",
+			titlesAlt: True,
+			group: ["Younger Futhark Runes", "H"],
+			defaultModifier: LeftShift RightAlt,
+			tags: ["младшая короткая хагал", "younger short twig hagall"],
+			symbol: Chr(0x16BD)
 		},
 		;
 		;
@@ -6594,8 +6689,18 @@ ToggleLetterScript() {
 
 GlagoliticFuthark := [
 	SCKeys["A"], (*) => LangSeparatedKey(["futhark_ansuz", "futhark_ansuz"], ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], True),
-	"<^>!" SCKeys["A"], (*) => LangSeparatedKey(["futhark_ansuz", "futhark_ansuz"], ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
+	"<^>!" SCKeys["A"], (*) => LangSeparatedKey(["futhark_younger_jera", "futhark_younger_jera"], ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
+	SCKeys["B"], (*) => LangSeparatedKey(["futhark_bjarkan", "futhark_bjarkan"], ["", ""], True),
+	SCKeys["C"], (*) => LangSeparatedKey(["futhork_cen", "futhork_cen"], ["", ""], True),
+	SCKeys["D"], (*) => LangSeparatedKey(["futhark_dagaz", "futhark_dagaz"], ["glagolitic_c_let_vede", "glagolitic_s_let_vede"], True),
+	SCKeys["E"], (*) => LangSeparatedKey(["futhark_ehwaz", "futhark_ehwaz"], ["", ""], True),
 	SCKeys["F"], (*) => LangSeparatedKey(["futhark_fehu", "futhark_fehu"], ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
+	SCKeys["G"], (*) => LangSeparatedKey(["futhark_gebo", "futhark_gebo"], ["", ""], True),
+	SCKeys["H"], (*) => LangSeparatedKey(["futhark_haglaz", "futhark_haglaz"], ["", ""], True),
+	"<+" SCKeys["H"], (*) => LangSeparatedKey(["futhork_haegl", "futhork_haegl"], ["", ""], True),
+	"<^>!" SCKeys["H"], (*) => LangSeparatedKey(["futhark_younger_hagall", "futhark_younger_hagall"], ["", ""], True),
+	"<^>!<+" SCKeys["H"], (*) => LangSeparatedKey(["futhark_younger_hagall_short_twig", "futhark_younger_hagall_short_twig"], ["", ""], True),
+	SCKeys["I"], (*) => LangSeparatedKey(["futhark_isaz", "futhark_isaz"], ["", ""], True),
 	SCKeys["Comma"], (*) => LangSeparatedKey(["", ""], ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
 ]
 
@@ -7888,6 +7993,8 @@ Constructor() {
 	DSLContent["BindList"].TabGlagoKeys := []
 
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhork Runes", ReadLocale("symbol_futhork"),)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Younger Futhark Runes", ReadLocale("symbol_futhark_younger"),)
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Glagolitic Letters", ReadLocale("symbol_glagolitic"))
 
 	GlagoLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
