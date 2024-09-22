@@ -7213,6 +7213,7 @@ GlagoliticFuthark := [
 	"<+" SCKeys["N"], (*) => LangSeparatedKey("futhork_ing", ["", ""], True),
 	"<^>!<+" SCKeys["N"], (*) => LangSeparatedKey("futhark_younger_naud_short_twig", ["", ""], True),
 	SCKeys["O"], (*) => LangSeparatedKey("futhark_odal", ["", ""], True),
+	"<+" SCKeys["O"], (*) => LangSeparatedKey("futhork_os", ["", ""], True),
 	"<^>!" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss", ["", ""], True),
 	"<^>!<+" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss_short_twig", ["", ""], True),
 	"<^>!<!" SCKeys["O"], (*) => LangSeparatedKey("medieval_on", ["", ""], True),
