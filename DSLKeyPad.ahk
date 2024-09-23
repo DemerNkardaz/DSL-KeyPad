@@ -8053,106 +8053,106 @@ ToggleLetterScript() {
 }
 
 GlagoliticFuthark := [
-	SCKeys["A"], (*) => LangSeparatedKey("futhark_ansuz", ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], True),
-	"<+" SCKeys["A"], (*) => LangSeparatedKey("futhork_as", ["", ""], True),
-	">+" SCKeys["A"], (*) => LangSeparatedKey("futhork_aesc", ["", ""], True),
-	"<^>!" SCKeys["A"], (*) => LangSeparatedKey("futhark_younger_jera", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
-	"<^>!<+" SCKeys["A"], (*) => LangSeparatedKey("futhark_younger_jera_short_twig", ["", ""], True),
-	SCKeys["B"], (*) => LangSeparatedKey("futhark_bjarkan", ["glagolitic_c_let_i", "glagolitic_s_let_i"], True),
-	"<^>!" SCKeys["B"], (*) => LangSeparatedKey("", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"], True),
-	"<+" SCKeys["B"], (*) => LangSeparatedKey("", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], True),
-	"<^>!<+" SCKeys["B"], (*) => LangSeparatedKey("futhark_younger_bjarkan_short_twig", ["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"], True),
-	SCKeys["C"], (*) => LangSeparatedKey("futhork_cen", ["glagolitic_c_let_slovo", "glagolitic_s_let_slovo"], True),
-	"<^>!" SCKeys["C"], (*) => LangSeparatedKey("", ["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"], True),
-	"<^>!<!" SCKeys["C"], (*) => LangSeparatedKey("medieval_c", ["", ""], True),
-	SCKeys["D"], (*) => LangSeparatedKey("futhark_dagaz", ["glagolitic_c_let_vede", "glagolitic_s_let_vede"], True),
-	"<^>!" SCKeys["D"], (*) => LangSeparatedKey("futhark_younger_later_eth", ["", ""], True),
-	"<^>!<+" SCKeys["D"], (*) => LangSeparatedKey("futhark_younger_later_d", ["", ""], True),
-	SCKeys["E"], (*) => LangSeparatedKey("futhark_ehwaz", ["glagolitic_c_let_uku", "glagolitic_s_let_uku"], True),
-	"<+" SCKeys["E"], (*) => LangSeparatedKey("futhork_ear", ["", ""], True),
-	"<^>!" SCKeys["E"], (*) => LangSeparatedKey("futhark_younger_later_e", ["", ""], True),
-	"<^>!<!" SCKeys["E"], (*) => LangSeparatedKey("medieval_en", ["", ""], True),
-	SCKeys["F"], (*) => LangSeparatedKey("futhark_fehu", ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
-	"<^>!" SCKeys["F"], (*) => LangSeparatedKey("", ["glagolitic_c_let_trokutasti_a", "glagolitic_s_let_trokutasti_a"], True),
-	SCKeys["G"], (*) => LangSeparatedKey("futhark_gebo", ["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"], True),
-	"<^>!" SCKeys["G"], (*) => LangSeparatedKey("", ["glagolitic_c_let_pe", "glagolitic_s_let_pe"], True),
-	"<+" SCKeys["G"], (*) => LangSeparatedKey("futhork_gar", ["", ""], True),
-	SCKeys["H"], (*) => LangSeparatedKey("futhark_haglaz", ["glagolitic_c_let_ritsi", "glagolitic_s_let_ritsi"], True),
-	"<+" SCKeys["H"], (*) => LangSeparatedKey("futhork_haegl", ["", ""], True),
-	"<^>!" SCKeys["H"], (*) => LangSeparatedKey("futhark_younger_hagall", ["", ""], True),
-	"<^>!<+" SCKeys["H"], (*) => LangSeparatedKey("futhark_younger_hagall_short_twig", ["", ""], True),
-	SCKeys["I"], (*) => LangSeparatedKey("futhark_isaz", ["glagolitic_c_let_sha", "glagolitic_s_let_sha"], True),
-	">+" SCKeys["I"], (*) => LangSeparatedKey("futhark_eihwaz", ["", ""], True),
-	"<^>!" SCKeys["J"], (*) => LangSeparatedKey("", ["glagolitic_c_let_otu", "glagolitic_s_let_otu"], True),
-	SCKeys["J"], (*) => LangSeparatedKey("futhark_jeran", ["glagolitic_c_let_onu", "glagolitic_s_let_onu"], True),
-	"<!" SCKeys["J"], (*) => LangSeparatedKey("", ["glagolitic_c_let_big_yus", "glagolitic_s_let_big_yus"], True),
-	"<+" SCKeys["J"], (*) => LangSeparatedKey("futhork_ger", ["", ""], True),
-	">+" SCKeys["J"], (*) => LangSeparatedKey("futhork_ior", ["", ""], True),
-	SCKeys["L"], (*) => LangSeparatedKey("futhark_laguz", ["glagolitic_c_let_dobro", "glagolitic_s_let_dobro"], True),
-	"<^>!" SCKeys["L"], (*) => LangSeparatedKey("futhark_younger_later_l", ["", ""], True),
-	SCKeys["K"], (*) => LangSeparatedKey("futhark_kauna", ["glagolitic_c_let_ljudije", "glagolitic_s_let_ljudije"], True),
-	"<+" SCKeys["K"], (*) => LangSeparatedKey("futhork_cealc", ["", ""], True),
-	">+" SCKeys["K"], (*) => LangSeparatedKey("futhork_calc", ["", ""], True),
-	"<^>!" SCKeys["K"], (*) => LangSeparatedKey("futhark_younger_kaun", ["", ""], True),
-	"<^>!" SCKeys["K"], (*) => LangSeparatedKey("futhark_younger_kaun", ["", ""], True),
-	SCKeys["M"], (*) => LangSeparatedKey("futhark_mannaz", ["glagolitic_c_let_yeri", "glagolitic_s_let_yeri"], True),
-	"<^>!" SCKeys["M"], (*) => LangSeparatedKey("futhark_younger_madr", ["", ""], True),
-	"<^>!<+" SCKeys["M"], (*) => LangSeparatedKey("futhark_younger_madr_short_twig", ["", ""], True),
-	SCKeys["N"], (*) => LangSeparatedKey("futhark_naudiz", ["glagolitic_c_let_tvrido", "glagolitic_s_let_tvrido"], True),
-	">+" SCKeys["N"], (*) => LangSeparatedKey("futhark_ingwaz", ["", ""], True),
-	"<+" SCKeys["N"], (*) => LangSeparatedKey("futhork_ing", ["", ""], True),
-	"<^>!<+" SCKeys["N"], (*) => LangSeparatedKey("futhark_younger_naud_short_twig", ["", ""], True),
-	SCKeys["O"], (*) => LangSeparatedKey("futhark_odal", ["glagolitic_c_let_shta", "glagolitic_s_let_shta"], True),
-	"<+" SCKeys["O"], (*) => LangSeparatedKey("futhork_os", ["", ""], True),
-	"<^>!" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss", ["", ""], True),
-	"<^>!<+" SCKeys["O"], (*) => LangSeparatedKey("futhark_younger_oss_short_twig", ["", ""], True),
-	"<^>!<!" SCKeys["O"], (*) => LangSeparatedKey("medieval_on", ["", ""], True),
-	"<^>!<!>+" SCKeys["O"], (*) => LangSeparatedKey("medieval_o", ["", ""], True),
-	SCKeys["P"], (*) => LangSeparatedKey("futhark_pertho", ["glagolitic_c_let_zemlja", "glagolitic_c_let_zemlja"], True),
-	"<^>!" SCKeys["P"], (*) => LangSeparatedKey("futhark_younger_later_p", ["", ""], True),
-	SCKeys["Q"], (*) => LangSeparatedKey("futhork_cweorth", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], True),
-	SCKeys["R"], (*) => LangSeparatedKey("futhark_raido", ["glagolitic_c_let_kako", "glagolitic_s_let_kako"], True),
-	SCKeys["S"], (*) => LangSeparatedKey("futhark_sowilo", ["glagolitic_c_let_yery", "glagolitic_s_let_yery"], True),
-	"<+" SCKeys["S"], (*) => LangSeparatedKey("futhork_sigel", ["", ""], True),
-	">+" SCKeys["S"], (*) => LangSeparatedKey("futhork_stan", ["", ""], True),
-	"<^>!<+" SCKeys["S"], (*) => LangSeparatedKey("futhark_younger_sol_short_twig", ["", ""], True),
-	SCKeys["T"], (*) => LangSeparatedKey("futhark_tiwaz", ["glagolitic_c_let_yestu", "glagolitic_s_let_yestu"], True),
-	">+" SCKeys["T"], (*) => LangSeparatedKey("futhark_thurisaz", ["", ""], True),
-	"<^>!<+" SCKeys["T"], (*) => LangSeparatedKey("futhark_younger_tyr_short_twig", ["", ""], True),
-	SCKeys["U"], (*) => LangSeparatedKey("futhark_uruz", ["glagolitic_c_let_glagoli", "glagolitic_s_let_glagoli"], True),
-	SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_ur", ["glagolitic_c_let_nashi", "glagolitic_s_let_nashi"], True),
-	">+" SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_icelandic_yr", ["", ""], True),
-	"<^>!" SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_yr", ["", ""], True),
-	"<^>!<+" SCKeys["Y"], (*) => LangSeparatedKey("futhark_younger_yr_short_twig", ["", ""], True),
-	"<+" SCKeys["Y"], (*) => LangSeparatedKey("futhork_yr", ["", ""], True),
-	SCKeys["V"], (*) => LangSeparatedKey("futhark_younger_later_v", ["glagolitic_c_let_myslite", "glagolitic_s_let_myslite"], True),
-	SCKeys["W"], (*) => LangSeparatedKey("futhark_wunjo", ["glagolitic_c_let_tsi", "glagolitic_s_let_tsi"], True),
-	SCKeys["Z"], (*) => LangSeparatedKey("futhark_algiz", ["glagolitic_c_let_yati", "glagolitic_s_let_yati"], True),
-	"<^>!<!" SCKeys["Z"], (*) => LangSeparatedKey("medieval_x", ["", ""], True),
-	SCKeys["X"], (*) => LangSeparatedKey("", ["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"], True),
-	"<^>!<!" SCKeys["X"], (*) => LangSeparatedKey("medieval_z", ["", ""], True),
+	SCKeys["A"], (K) => LangSeparatedKey(K, "futhark_ansuz", ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], True),
+	"<+" SCKeys["A"], (K) => LangSeparatedKey(K, "futhork_as", ["", ""], True),
+	">+" SCKeys["A"], (K) => LangSeparatedKey(K, "futhork_aesc", ["", ""], True),
+	"<^>!" SCKeys["A"], (K) => LangSeparatedKey(K, "futhark_younger_jera", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
+	"<^>!<+" SCKeys["A"], (K) => LangSeparatedKey(K, "futhark_younger_jera_short_twig", ["", ""], True),
+	SCKeys["B"], (K) => LangSeparatedKey(K, "futhark_bjarkan", ["glagolitic_c_let_i", "glagolitic_s_let_i"], True),
+	"<^>!" SCKeys["B"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"], True),
+	"<+" SCKeys["B"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], True),
+	"<^>!<+" SCKeys["B"], (K) => LangSeparatedKey(K, "futhark_younger_bjarkan_short_twig", ["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"], True),
+	SCKeys["C"], (K) => LangSeparatedKey(K, "futhork_cen", ["glagolitic_c_let_slovo", "glagolitic_s_let_slovo"], True),
+	"<^>!" SCKeys["C"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"], True),
+	"<^>!<!" SCKeys["C"], (K) => LangSeparatedKey(K, "medieval_c", ["", ""], True),
+	SCKeys["D"], (K) => LangSeparatedKey(K, "futhark_dagaz", ["glagolitic_c_let_vede", "glagolitic_s_let_vede"], True),
+	"<^>!" SCKeys["D"], (K) => LangSeparatedKey(K, "futhark_younger_later_eth", ["", ""], True),
+	"<^>!<+" SCKeys["D"], (K) => LangSeparatedKey(K, "futhark_younger_later_d", ["", ""], True),
+	SCKeys["E"], (K) => LangSeparatedKey(K, "futhark_ehwaz", ["glagolitic_c_let_uku", "glagolitic_s_let_uku"], True),
+	"<+" SCKeys["E"], (K) => LangSeparatedKey(K, "futhork_ear", ["", ""], True),
+	"<^>!" SCKeys["E"], (K) => LangSeparatedKey(K, "futhark_younger_later_e", ["", ""], True),
+	"<^>!<!" SCKeys["E"], (K) => LangSeparatedKey(K, "medieval_en", ["", ""], True),
+	SCKeys["F"], (K) => LangSeparatedKey(K, "futhark_fehu", ["glagolitic_c_let_az", "glagolitic_s_let_az"], True),
+	"<^>!" SCKeys["F"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_trokutasti_a", "glagolitic_s_let_trokutasti_a"], True),
+	SCKeys["G"], (K) => LangSeparatedKey(K, "futhark_gebo", ["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"], True),
+	"<^>!" SCKeys["G"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_pe", "glagolitic_s_let_pe"], True),
+	"<+" SCKeys["G"], (K) => LangSeparatedKey(K, "futhork_gar", ["", ""], True),
+	SCKeys["H"], (K) => LangSeparatedKey(K, "futhark_haglaz", ["glagolitic_c_let_ritsi", "glagolitic_s_let_ritsi"], True),
+	"<+" SCKeys["H"], (K) => LangSeparatedKey(K, "futhork_haegl", ["", ""], True),
+	"<^>!" SCKeys["H"], (K) => LangSeparatedKey(K, "futhark_younger_hagall", ["", ""], True),
+	"<^>!<+" SCKeys["H"], (K) => LangSeparatedKey(K, "futhark_younger_hagall_short_twig", ["", ""], True),
+	SCKeys["I"], (K) => LangSeparatedKey(K, "futhark_isaz", ["glagolitic_c_let_sha", "glagolitic_s_let_sha"], True),
+	">+" SCKeys["I"], (K) => LangSeparatedKey(K, "futhark_eihwaz", ["", ""], True),
+	"<^>!" SCKeys["J"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_otu", "glagolitic_s_let_otu"], True),
+	SCKeys["J"], (K) => LangSeparatedKey(K, "futhark_jeran", ["glagolitic_c_let_onu", "glagolitic_s_let_onu"], True),
+	"<!" SCKeys["J"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_big_yus", "glagolitic_s_let_big_yus"], True),
+	"<+" SCKeys["J"], (K) => LangSeparatedKey(K, "futhork_ger", ["", ""], True),
+	">+" SCKeys["J"], (K) => LangSeparatedKey(K, "futhork_ior", ["", ""], True),
+	SCKeys["L"], (K) => LangSeparatedKey(K, "futhark_laguz", ["glagolitic_c_let_dobro", "glagolitic_s_let_dobro"], True),
+	"<^>!" SCKeys["L"], (K) => LangSeparatedKey(K, "futhark_younger_later_l", ["", ""], True),
+	SCKeys["K"], (K) => LangSeparatedKey(K, "futhark_kauna", ["glagolitic_c_let_ljudije", "glagolitic_s_let_ljudije"], True),
+	"<+" SCKeys["K"], (K) => LangSeparatedKey(K, "futhork_cealc", ["", ""], True),
+	">+" SCKeys["K"], (K) => LangSeparatedKey(K, "futhork_calc", ["", ""], True),
+	"<^>!" SCKeys["K"], (K) => LangSeparatedKey(K, "futhark_younger_kaun", ["", ""], True),
+	"<^>!" SCKeys["K"], (K) => LangSeparatedKey(K, "futhark_younger_kaun", ["", ""], True),
+	SCKeys["M"], (K) => LangSeparatedKey(K, "futhark_mannaz", ["glagolitic_c_let_yeri", "glagolitic_s_let_yeri"], True),
+	"<^>!" SCKeys["M"], (K) => LangSeparatedKey(K, "futhark_younger_madr", ["", ""], True),
+	"<^>!<+" SCKeys["M"], (K) => LangSeparatedKey(K, "futhark_younger_madr_short_twig", ["", ""], True),
+	SCKeys["N"], (K) => LangSeparatedKey(K, "futhark_naudiz", ["glagolitic_c_let_tvrido", "glagolitic_s_let_tvrido"], True),
+	">+" SCKeys["N"], (K) => LangSeparatedKey(K, "futhark_ingwaz", ["", ""], True),
+	"<+" SCKeys["N"], (K) => LangSeparatedKey(K, "futhork_ing", ["", ""], True),
+	"<^>!<+" SCKeys["N"], (K) => LangSeparatedKey(K, "futhark_younger_naud_short_twig", ["", ""], True),
+	SCKeys["O"], (K) => LangSeparatedKey(K, "futhark_odal", ["glagolitic_c_let_shta", "glagolitic_s_let_shta"], True),
+	"<+" SCKeys["O"], (K) => LangSeparatedKey(K, "futhork_os", ["", ""], True),
+	"<^>!" SCKeys["O"], (K) => LangSeparatedKey(K, "futhark_younger_oss", ["", ""], True),
+	"<^>!<+" SCKeys["O"], (K) => LangSeparatedKey(K, "futhark_younger_oss_short_twig", ["", ""], True),
+	"<^>!<!" SCKeys["O"], (K) => LangSeparatedKey(K, "medieval_on", ["", ""], True),
+	"<^>!<!>+" SCKeys["O"], (K) => LangSeparatedKey(K, "medieval_o", ["", ""], True),
+	SCKeys["P"], (K) => LangSeparatedKey(K, "futhark_pertho", ["glagolitic_c_let_zemlja", "glagolitic_c_let_zemlja"], True),
+	"<^>!" SCKeys["P"], (K) => LangSeparatedKey(K, "futhark_younger_later_p", ["", ""], True),
+	SCKeys["Q"], (K) => LangSeparatedKey(K, "futhork_cweorth", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], True),
+	SCKeys["R"], (K) => LangSeparatedKey(K, "futhark_raido", ["glagolitic_c_let_kako", "glagolitic_s_let_kako"], True),
+	SCKeys["S"], (K) => LangSeparatedKey(K, "futhark_sowilo", ["glagolitic_c_let_yery", "glagolitic_s_let_yery"], True),
+	"<+" SCKeys["S"], (K) => LangSeparatedKey(K, "futhork_sigel", ["", ""], True),
+	">+" SCKeys["S"], (K) => LangSeparatedKey(K, "futhork_stan", ["", ""], True),
+	"<^>!<+" SCKeys["S"], (K) => LangSeparatedKey(K, "futhark_younger_sol_short_twig", ["", ""], True),
+	SCKeys["T"], (K) => LangSeparatedKey(K, "futhark_tiwaz", ["glagolitic_c_let_yestu", "glagolitic_s_let_yestu"], True),
+	">+" SCKeys["T"], (K) => LangSeparatedKey(K, "futhark_thurisaz", ["", ""], True),
+	"<^>!<+" SCKeys["T"], (K) => LangSeparatedKey(K, "futhark_younger_tyr_short_twig", ["", ""], True),
+	SCKeys["U"], (K) => LangSeparatedKey(K, "futhark_uruz", ["glagolitic_c_let_glagoli", "glagolitic_s_let_glagoli"], True),
+	SCKeys["Y"], (K) => LangSeparatedKey(K, "futhark_younger_ur", ["glagolitic_c_let_nashi", "glagolitic_s_let_nashi"], True),
+	">+" SCKeys["Y"], (K) => LangSeparatedKey(K, "futhark_younger_icelandic_yr", ["", ""], True),
+	"<^>!" SCKeys["Y"], (K) => LangSeparatedKey(K, "futhark_younger_yr", ["", ""], True),
+	"<^>!<+" SCKeys["Y"], (K) => LangSeparatedKey(K, "futhark_younger_yr_short_twig", ["", ""], True),
+	"<+" SCKeys["Y"], (K) => LangSeparatedKey(K, "futhork_yr", ["", ""], True),
+	SCKeys["V"], (K) => LangSeparatedKey(K, "futhark_younger_later_v", ["glagolitic_c_let_myslite", "glagolitic_s_let_myslite"], True),
+	SCKeys["W"], (K) => LangSeparatedKey(K, "futhark_wunjo", ["glagolitic_c_let_tsi", "glagolitic_s_let_tsi"], True),
+	SCKeys["Z"], (K) => LangSeparatedKey(K, "futhark_algiz", ["glagolitic_c_let_yati", "glagolitic_s_let_yati"], True),
+	"<^>!<!" SCKeys["Z"], (K) => LangSeparatedKey(K, "medieval_x", ["", ""], True),
+	SCKeys["X"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"], True),
+	"<^>!<!" SCKeys["X"], (K) => LangSeparatedKey(K, "medieval_z", ["", ""], True),
 	;
-	SCKeys["Tilde"], (*) => LangSeparatedKey("kkey_grave_accent", ["glagolitic_c_let_yo", "glagolitic_s_let_yo"], True),
-	"<!" SCKeys["Tilde"], (*) => LangSeparatedKey("", ["glagolitic_c_let_big_yus_iotified", "glagolitic_s_let_big_yus_iotified"], True),
-	SCKeys["Comma"], (*) => LangSeparatedKey("kkey_comma", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
-	SCKeys["Dot"], (*) => LangSeparatedKey("kkey_dot", ["glagolitic_c_let_yu", "glagolitic_s_let_yu"], True),
-	"<^>!" SCKeys["Comma"], (*) => LangSeparatedKey("runic_cruciform_punctuation", ["", ""], True),
-	"<^>!" SCKeys["Dot"], (*) => LangSeparatedKey("runic_single_punctuation", ["", ""], True),
-	"<^>!" SCKeys["Space"], (*) => LangSeparatedKey("runic_multiple_punctuation", ["", ""], True),
-	SCKeys["Semicolon"], (*) => LangSeparatedKey("kkey_semicolon", ["glagolitic_c_let_zhivete", "glagolitic_s_let_zhivete"], True),
-	"<^>!" SCKeys["Semicolon"], (*) => LangSeparatedKey("kkey_semicolon", ["glagolitic_c_let_djervi", "glagolitic_s_let_djervi"], True),
-	SCKeys["Apostrophe"], (*) => LangSeparatedKey("kkey_apostrophe", ["glagolitic_c_let_small_yus", "glagolitic_s_let_small_yus"], True),
-	"<^>!" SCKeys["Apostrophe"], (*) => LangSeparatedKey("kkey_apostrophe", ["glagolitic_c_let_small_yus_iotified", "glagolitic_s_let_small_yus_iotified"], True),
-	SCKeys["LSquareBracket"], (*) => LangSeparatedKey("kkey_l_square_bracket", ["glagolitic_c_let_heru", "glagolitic_s_let_heru"], True),
-	"<^>!" SCKeys["LSquareBracket"], (*) => LangSeparatedKey("", ["glagolitic_c_let_spider_ha", "glagolitic_s_let_spider_ha"], True),
-	SCKeys["RSquareBracket"], (*) => LangSeparatedKey("kkey_r_square_bracket", ["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"], True),
-	"<^>!" SCKeys["RSquareBracket"], (*) => LangSeparatedKey("", ["glagolitic_c_let_shtapic", "glagolitic_s_let_shtapic"], True),
+	SCKeys["Tilde"], (K) => LangSeparatedKey(K, "kkey_grave_accent", ["glagolitic_c_let_yo", "glagolitic_s_let_yo"], True),
+	"<!" SCKeys["Tilde"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_big_yus_iotified", "glagolitic_s_let_big_yus_iotified"], True),
+	SCKeys["Comma"], (K) => LangSeparatedKey(K, "kkey_comma", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"], True),
+	SCKeys["Dot"], (K) => LangSeparatedKey(K, "kkey_dot", ["glagolitic_c_let_yu", "glagolitic_s_let_yu"], True),
+	"<^>!" SCKeys["Comma"], (K) => LangSeparatedKey(K, "runic_cruciform_punctuation", ["", ""], True),
+	"<^>!" SCKeys["Dot"], (K) => LangSeparatedKey(K, "runic_single_punctuation", ["", ""], True),
+	"<^>!" SCKeys["Space"], (K) => LangSeparatedKey(K, "runic_multiple_punctuation", ["", ""], True),
+	SCKeys["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", ["glagolitic_c_let_zhivete", "glagolitic_s_let_zhivete"], True),
+	"<^>!" SCKeys["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", ["glagolitic_c_let_djervi", "glagolitic_s_let_djervi"], True),
+	SCKeys["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", ["glagolitic_c_let_small_yus", "glagolitic_s_let_small_yus"], True),
+	"<^>!" SCKeys["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", ["glagolitic_c_let_small_yus_iotified", "glagolitic_s_let_small_yus_iotified"], True),
+	SCKeys["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_square_bracket", ["glagolitic_c_let_heru", "glagolitic_s_let_heru"], True),
+	"<^>!" SCKeys["LSquareBracket"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_spider_ha", "glagolitic_s_let_spider_ha"], True),
+	SCKeys["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", ["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"], True),
+	"<^>!" SCKeys["RSquareBracket"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_shtapic", "glagolitic_s_let_shtapic"], True),
 	;
-	"<^>!" SCKeys["7"], (*) => LangSeparatedKey("futhark_almanac_arlaug", ["", ""], True),
-	"<^>!" SCKeys["8"], (*) => LangSeparatedKey("futhark_almanac_tvimadur", ["", ""], True),
-	"<^>!" SCKeys["9"], (*) => LangSeparatedKey("futhark_almanac_belgthor", ["", ""], True),
+	"<^>!" SCKeys["7"], (K) => LangSeparatedKey(K, "futhark_almanac_arlaug", ["", ""], True),
+	"<^>!" SCKeys["8"], (K) => LangSeparatedKey(K, "futhark_almanac_tvimadur", ["", ""], True),
+	"<^>!" SCKeys["9"], (K) => LangSeparatedKey(K, "futhark_almanac_belgthor", ["", ""], True),
 	;
-	"<^<!" SCKeys["D"], (*) => HandleFastKey("cyr_com_vzmet"),
+	"<^<!" SCKeys["D"], (K) => HandleFastKey(K, "cyr_com_vzmet"),
 ]
 
 ChangeScriptInput(ScriptMode) {
@@ -8185,39 +8185,39 @@ ChangeScriptInput(ScriptMode) {
 }
 
 SuperscriptList := [
-	SCKeys["1"], (*) => HandleFastKey("num_sup_1"),
-	SCKeys["2"], (*) => HandleFastKey("num_sup_2"),
-	SCKeys["3"], (*) => HandleFastKey("num_sup_3"),
-	SCKeys["4"], (*) => HandleFastKey("num_sup_4"),
-	SCKeys["5"], (*) => HandleFastKey("num_sup_5"),
-	SCKeys["6"], (*) => HandleFastKey("num_sup_6"),
-	SCKeys["7"], (*) => HandleFastKey("num_sup_7"),
-	SCKeys["8"], (*) => HandleFastKey("num_sup_8"),
-	SCKeys["9"], (*) => HandleFastKey("num_sup_9"),
-	SCKeys["0"], (*) => HandleFastKey("num_sup_0"),
-	SCKeys["Minus"], (*) => HandleFastKey("num_sup_minus"),
-	SCKeys["Equals"], (*) => HandleFastKey("num_sup_equals"),
-	"<+" SCKeys["9"], (*) => HandleFastKey("num_sup_left_parenthesis"),
-	"<+" SCKeys["0"], (*) => HandleFastKey("num_sup_right_parenthesis"),
-	"<+" SCKeys["Equals"], (*) => HandleFastKey("num_sup_plus"),
+	SCKeys["1"], (K) => HandleFastKey(K, "num_sup_1"),
+	SCKeys["2"], (K) => HandleFastKey(K, "num_sup_2"),
+	SCKeys["3"], (K) => HandleFastKey(K, "num_sup_3"),
+	SCKeys["4"], (K) => HandleFastKey(K, "num_sup_4"),
+	SCKeys["5"], (K) => HandleFastKey(K, "num_sup_5"),
+	SCKeys["6"], (K) => HandleFastKey(K, "num_sup_6"),
+	SCKeys["7"], (K) => HandleFastKey(K, "num_sup_7"),
+	SCKeys["8"], (K) => HandleFastKey(K, "num_sup_8"),
+	SCKeys["9"], (K) => HandleFastKey(K, "num_sup_9"),
+	SCKeys["0"], (K) => HandleFastKey(K, "num_sup_0"),
+	SCKeys["Minus"], (K) => HandleFastKey(K, "num_sup_minus"),
+	SCKeys["Equals"], (K) => HandleFastKey(K, "num_sup_equals"),
+	"<+" SCKeys["9"], (K) => HandleFastKey(K, "num_sup_left_parenthesis"),
+	"<+" SCKeys["0"], (K) => HandleFastKey(K, "num_sup_right_parenthesis"),
+	"<+" SCKeys["Equals"], (K) => HandleFastKey(K, "num_sup_plus"),
 ]
 
 SubscriptList := [
-	SCKeys["1"], (*) => HandleFastKey("num_sub_1"),
-	SCKeys["2"], (*) => HandleFastKey("num_sub_2"),
-	SCKeys["3"], (*) => HandleFastKey("num_sub_3"),
-	SCKeys["4"], (*) => HandleFastKey("num_sub_4"),
-	SCKeys["5"], (*) => HandleFastKey("num_sub_5"),
-	SCKeys["6"], (*) => HandleFastKey("num_sub_6"),
-	SCKeys["7"], (*) => HandleFastKey("num_sub_7"),
-	SCKeys["8"], (*) => HandleFastKey("num_sub_8"),
-	SCKeys["9"], (*) => HandleFastKey("num_sub_9"),
-	SCKeys["0"], (*) => HandleFastKey("num_sub_0"),
-	SCKeys["Minus"], (*) => HandleFastKey("num_sub_minus"),
-	SCKeys["Equals"], (*) => HandleFastKey("num_sub_equals"),
-	"<+" SCKeys["9"], (*) => HandleFastKey("num_sub_left_parenthesis"),
-	"<+" SCKeys["0"], (*) => HandleFastKey("num_sub_right_parenthesis"),
-	"<+" SCKeys["Equals"], (*) => HandleFastKey("num_sub_plus"),
+	SCKeys["1"], (K) => HandleFastKey(K, "num_sub_1"),
+	SCKeys["2"], (K) => HandleFastKey(K, "num_sub_2"),
+	SCKeys["3"], (K) => HandleFastKey(K, "num_sub_3"),
+	SCKeys["4"], (K) => HandleFastKey(K, "num_sub_4"),
+	SCKeys["5"], (K) => HandleFastKey(K, "num_sub_5"),
+	SCKeys["6"], (K) => HandleFastKey(K, "num_sub_6"),
+	SCKeys["7"], (K) => HandleFastKey(K, "num_sub_7"),
+	SCKeys["8"], (K) => HandleFastKey(K, "num_sub_8"),
+	SCKeys["9"], (K) => HandleFastKey(K, "num_sub_9"),
+	SCKeys["0"], (K) => HandleFastKey(K, "num_sub_0"),
+	SCKeys["Minus"], (K) => HandleFastKey(K, "num_sub_minus"),
+	SCKeys["Equals"], (K) => HandleFastKey(K, "num_sub_equals"),
+	"<+" SCKeys["9"], (K) => HandleFastKey(K, "num_sub_left_parenthesis"),
+	"<+" SCKeys["0"], (K) => HandleFastKey(K, "num_sub_right_parenthesis"),
+	"<+" SCKeys["Equals"], (K) => HandleFastKey(K, "num_sub_plus"),
 ]
 
 ToRomanNumeral(IntValue, CapitalLetters := True) {
@@ -10120,70 +10120,90 @@ SendPaste(SendKey, Callback := "") {
 }
 
 
-HandleFastKey(CharacterNames*) {
+HandleFastKey(Combo := "", CharacterNames*) {
 	global FastKeysIsActive
 	IsLayoutValid := CheckLayoutValid()
+
 
 	if IsLayoutValid {
 		Output := ""
 
 		for _, Character in CharacterNames {
-			GetCharacterSequence(Character)
+			Output .= GetCharacterSequence(Character)
 		}
 
-		GetCharacterSequence(CharacterName) {
-			for characterEntry, value in Characters {
-				entryName := RegExReplace(characterEntry, "^\S+\s+")
-
-				if (entryName = CharacterName) {
-					characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
-					characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
-
-					if InputMode = "HTML" {
-						Output .= CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
-					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-						if IsObject(characterLaTeX) {
-							if LaTeXMode = "common"
-								Output .= characterLaTeX[1]
-							else if LaTeXMode = "math"
-								Output .= characterLaTeX[2]
-						} else {
-							Output .= characterLaTeX
-						}
-					}
-					else {
-						if CombiningEnabled && HasProp(value, "combiningForm") {
-							if IsObject(value.combiningForm) {
-								TempValue := ""
-								for combining in value.combiningForm {
-									TempValue .= PasteUnicode(combining)
-								}
-								SendText(TempValue)
-							} else {
-								Send(value.combiningForm)
-							}
-						}
-						else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
-							for unicode in value.uniSequence {
-								Output .= PasteUnicode(unicode)
-							}
-						} else {
-							Output .= PasteUnicode(value.unicode)
-						}
-					}
-				}
-			}
-		}
 		SendText(Output)
+	} else {
+		if Combo != " " {
+			Combo := RegExReplace(Combo, "<\^>!", "{RAlt}")
+			Combo := RegExReplace(Combo, "<\^", "{LCtrl}")
+			Combo := RegExReplace(Combo, ">\^", "{RCtrl}")
+			Combo := RegExReplace(Combo, "\^", "{LCtrl}")
+			Combo := RegExReplace(Combo, "<!", "{LAlt}")
+			Combo := RegExReplace(Combo, "!", "{LAlt}")
+			Combo := RegExReplace(Combo, "<\+", "{LShift}")
+			Combo := RegExReplace(Combo, ">\+", "{RShift}")
+			Combo := RegExReplace(Combo, "<#", "{LWin}")
+			Combo := RegExReplace(Combo, ">#", "{RWin}")
+			Combo := RegExReplace(Combo, "#", "{LWin}")
+			Combo := RegExReplace(Combo, "SC(.*)", "{sc$1}")
+			Send(Combo)
+		}
 	}
 	return
 }
 
-CapsSeparatedKey(CapitalCharacter, SmallCharacter) {
+GetCharacterSequence(CharacterName) {
+	Output := ""
+	for characterEntry, value in Characters {
+		entryName := RegExReplace(characterEntry, "^\S+\s+")
+
+		if (entryName = CharacterName) {
+			characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
+			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
+
+			if InputMode = "HTML" {
+				Output .= CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
+			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+				if IsObject(characterLaTeX) {
+					if LaTeXMode = "common"
+						Output .= characterLaTeX[1]
+					else if LaTeXMode = "math"
+						Output .= characterLaTeX[2]
+				} else {
+					Output .= characterLaTeX
+				}
+			}
+			else {
+				if CombiningEnabled && HasProp(value, "combiningForm") {
+					if IsObject(value.combiningForm) {
+						TempValue := ""
+						for combining in value.combiningForm {
+							TempValue .= PasteUnicode(combining)
+						}
+						SendText(TempValue)
+					} else {
+						Send(value.combiningForm)
+					}
+				}
+				else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+					for unicode in value.uniSequence {
+						Output .= PasteUnicode(unicode)
+					}
+				} else {
+					Output .= PasteUnicode(value.unicode)
+				}
+			}
+		}
+	}
+	return Output
+}
+
+CapsSeparatedKey(Combo, CapitalCharacter, SmallCharacter) {
 	if (GetKeyState("CapsLock", "T")) {
-		HandleFastKey(CapitalCharacter)
+		HandleFastKey(Combo, CapitalCharacter)
 	} else {
-		HandleFastKey(SmallCharacter)
+		HandleFastKey(Combo, SmallCharacter)
 	}
 }
 
@@ -10204,12 +10224,12 @@ LangSeparatedCall(LatinCallback, CyrillicCallback) {
 	return
 }
 
-LangSeparatedKey(LatinCharacter, CyrillicCharacter, UseCaps := False) {
+LangSeparatedKey(Combo, LatinCharacter, CyrillicCharacter, UseCaps := False) {
 	Character := (GetLayoutLocale() == CodeEn) ? LatinCharacter : CyrillicCharacter
 	if UseCaps {
-		HandleFastKey(CapsSeparatedKey(IsObject(Character) ? Character[1] : Character, IsObject(Character) ? Character[2] : Character))
+		CapsSeparatedKey(Combo, IsObject(Character) ? Character[1] : Character, IsObject(Character) ? Character[2] : Character)
 	} else {
-		HandleFastKey(IsObject(Character) ? Character[1] : Character)
+		HandleFastKey(Combo, IsObject(Character) ? Character[1] : Character)
 	}
 }
 
@@ -10234,208 +10254,208 @@ RegisterHotKeys(Bindings, CheckRule := FastKeysIsActive) {
 
 FastKeysList :=
 	[
-		"<^<!" SCKeys["A"], (*) => HandleFastKey("acute"),
-		"<^<+<!" SCKeys["A"], (*) => HandleFastKey("acute_double"),
-		"<^<!" SCKeys["B"], (*) => HandleFastKey("breve"),
-		"<^<+<!" SCKeys["B"], (*) => HandleFastKey("breve_inverted"),
-		"<^<!" SCKeys["C"], (*) => HandleFastKey("circumflex"),
-		"<^<+<!" SCKeys["C"], (*) => HandleFastKey("caron"),
-		"<^<!" SCKeys["Comma"], (*) => HandleFastKey("comma_above"),
-		"<^<+<!" SCKeys["Comma"], (*) => HandleFastKey("comma_below"),
-		"<^<!" SCKeys["D"], (*) => HandleFastKey("dot_above"),
-		"<^<+<!" SCKeys["D"], (*) => HandleFastKey("diaeresis"),
-		"<^<!" SCKeys["F"], (*) => HandleFastKey("fermata"),
-		"<^<!" SCKeys["G"], (*) => HandleFastKey("grave"),
-		"<^<+<!" SCKeys["G"], (*) => HandleFastKey("grave_double"),
-		"<^<!" SCKeys["H"], (*) => HandleFastKey("hook_above"),
-		"<^<+<!" SCKeys["H"], (*) => HandleFastKey("horn"),
-		"<^<!" SCKeys["M"], (*) => HandleFastKey("macron"),
-		"<^<+<!" SCKeys["M"], (*) => HandleFastKey("macron_below"),
-		"<^<!" SCKeys["N"], (*) => HandleFastKey("cyr_com_titlo"),
-		"<^<!" SCKeys["O"], (*) => HandleFastKey("ogonek"),
-		"<^<!<+" SCKeys["O"], (*) => HandleFastKey("ogonek_above"),
-		"<^<!" SCKeys["R"], (*) => HandleFastKey("ring_above"),
-		"<^<!<+" SCKeys["R"], (*) => HandleFastKey("ring_below"),
-		"<^<!" SCKeys["V"], (*) => HandleFastKey("line_vertical"),
-		"<^<!<+" SCKeys["V"], (*) => HandleFastKey("line_vertical_double"),
-		"<^<!" SCKeys["T"], (*) => HandleFastKey("tilde"),
-		"<^<!<+" SCKeys["T"], (*) => HandleFastKey("tilde_overlay"),
-		"<^<!" SCKeys["S"], (*) => HandleFastKey("stroke_short"),
-		"<^<!<+" SCKeys["S"], (*) => HandleFastKey("stroke_long"),
-		"<^<!" SCKeys["Slash"], (*) => HandleFastKey("solidus_short"),
-		"<^<!<+" SCKeys["Slash"], (*) => HandleFastKey("solidus_long"),
-		"<^<!" SCKeys["X"], (*) => HandleFastKey("x_above"),
-		"<^<!<+" SCKeys["X"], (*) => HandleFastKey("x_below"),
-		"<^<!" SCKeys["Z"], (*) => HandleFastKey("zigzag_above"),
+		"<^<!" SCKeys["A"], (K) => HandleFastKey(K, "acute"),
+		"<^<+<!" SCKeys["A"], (K) => HandleFastKey(K, "acute_double"),
+		"<^<!" SCKeys["B"], (K) => HandleFastKey(K, "breve"),
+		"<^<+<!" SCKeys["B"], (K) => HandleFastKey(K, "breve_inverted"),
+		"<^<!" SCKeys["C"], (K) => HandleFastKey(K, "circumflex"),
+		"<^<+<!" SCKeys["C"], (K) => HandleFastKey(K, "caron"),
+		"<^<!" SCKeys["Comma"], (K) => HandleFastKey(K, "comma_above"),
+		"<^<+<!" SCKeys["Comma"], (K) => HandleFastKey(K, "comma_below"),
+		"<^<!" SCKeys["D"], (K) => HandleFastKey(K, "dot_above"),
+		"<^<+<!" SCKeys["D"], (K) => HandleFastKey(K, "diaeresis"),
+		"<^<!" SCKeys["F"], (K) => HandleFastKey(K, "fermata"),
+		"<^<!" SCKeys["G"], (K) => HandleFastKey(K, "grave"),
+		"<^<+<!" SCKeys["G"], (K) => HandleFastKey(K, "grave_double"),
+		"<^<!" SCKeys["H"], (K) => HandleFastKey(K, "hook_above"),
+		"<^<+<!" SCKeys["H"], (K) => HandleFastKey(K, "horn"),
+		"<^<!" SCKeys["M"], (K) => HandleFastKey(K, "macron"),
+		"<^<+<!" SCKeys["M"], (K) => HandleFastKey(K, "macron_below"),
+		"<^<!" SCKeys["N"], (K) => HandleFastKey(K, "cyr_com_titlo"),
+		"<^<!" SCKeys["O"], (K) => HandleFastKey(K, "ogonek"),
+		"<^<!<+" SCKeys["O"], (K) => HandleFastKey(K, "ogonek_above"),
+		"<^<!" SCKeys["R"], (K) => HandleFastKey(K, "ring_above"),
+		"<^<!<+" SCKeys["R"], (K) => HandleFastKey(K, "ring_below"),
+		"<^<!" SCKeys["V"], (K) => HandleFastKey(K, "line_vertical"),
+		"<^<!<+" SCKeys["V"], (K) => HandleFastKey(K, "line_vertical_double"),
+		"<^<!" SCKeys["T"], (K) => HandleFastKey(K, "tilde"),
+		"<^<!<+" SCKeys["T"], (K) => HandleFastKey(K, "tilde_overlay"),
+		"<^<!" SCKeys["S"], (K) => HandleFastKey(K, "stroke_short"),
+		"<^<!<+" SCKeys["S"], (K) => HandleFastKey(K, "stroke_long"),
+		"<^<!" SCKeys["Slash"], (K) => HandleFastKey(K, "solidus_short"),
+		"<^<!<+" SCKeys["Slash"], (K) => HandleFastKey(K, "solidus_long"),
+		"<^<!" SCKeys["X"], (K) => HandleFastKey(K, "x_above"),
+		"<^<!<+" SCKeys["X"], (K) => HandleFastKey(K, "x_below"),
+		"<^<!" SCKeys["Z"], (K) => HandleFastKey(K, "zigzag_above"),
 		;
 		;"<^<!" SCKeys["Numpad1"], (*) => QuotatizeSelection("France"),
 		;"<^<!" SCKeys["Numpad2"], (*) => QuotatizeSelection("Paw"),
 		;"<^<!" SCKeys["Numpad3"], (*) => QuotatizeSelection("Double"),
 		;"<^<!" SCKeys["Numpad4"], (*) => QuotatizeSelection("Single"),
 		;
-		"<^<!" SCKeys["Minus"], (*) => HandleFastKey("softhyphen"),
-		"<^<!<+" SCKeys["Minus"], (*) => HandleFastKey("minus"),
+		"<^<!" SCKeys["Minus"], (K) => HandleFastKey(K, "softhyphen"),
+		"<^<!<+" SCKeys["Minus"], (K) => HandleFastKey(K, "minus"),
 		;
-		"<^>!" SCKeys["Comma"], (*) => LangSeparatedKey("quote_left_double", "france_left"),
-		"<^>!" SCKeys["Dot"], (*) => LangSeparatedKey("quote_right_double", "france_right"),
-		"<^>!<+" SCKeys["Comma"], (*) => LangSeparatedKey("quote_left_single", "quote_low_9_double"),
-		"<^>!<+" SCKeys["Dot"], (*) => LangSeparatedKey("quote_right_single", "quote_left_double"),
-		"<^>!>+" SCKeys["Comma"], (*) => LangSeparatedKey("quote_low_9_double", "france_single_left"),
-		"<^>!<+>+" SCKeys["Comma"], (*) => LangSeparatedKey("quote_low_9_single", ""),
-		"<^>!>+" SCKeys["Dot"], (*) => LangSeparatedKey("quote_low_9_double_reversed", "france_single_right"),
-		"<^>!>+" SCKeys["Tilde"], (*) => HandleFastKey("quote_right_single"),
-		"<^>!>+" SCKeys["C"], (*) => HandleFastKey("cedilla"),
+		"<^>!" SCKeys["Comma"], (K) => LangSeparatedKey(K, "quote_left_double", "france_left"),
+		"<^>!" SCKeys["Dot"], (K) => LangSeparatedKey(K, "quote_right_double", "france_right"),
+		"<^>!<+" SCKeys["Comma"], (K) => LangSeparatedKey(K, "quote_left_single", "quote_low_9_double"),
+		"<^>!<+" SCKeys["Dot"], (K) => LangSeparatedKey(K, "quote_right_single", "quote_left_double"),
+		"<^>!>+" SCKeys["Comma"], (K) => LangSeparatedKey(K, "quote_low_9_double", "france_single_left"),
+		"<^>!<+>+" SCKeys["Comma"], (K) => LangSeparatedKey(K, "quote_low_9_single", ""),
+		"<^>!>+" SCKeys["Dot"], (K) => LangSeparatedKey(K, "quote_low_9_double_reversed", "france_single_right"),
+		"<^>!>+" SCKeys["Tilde"], (K) => HandleFastKey(K, "quote_right_single"),
+		"<^>!>+" SCKeys["C"], (K) => HandleFastKey(K, "cedilla"),
 		;
-		"<^>!>+" SCKeys["1"], (*) => CapsSeparatedKey("double_exclamation", "emsp"),
-		"<^>!>+" SCKeys["2"], (*) => HandleFastKey("ensp"),
-		"<^>!>+" SCKeys["3"], (*) => HandleFastKey("emsp13"),
-		"<^>!>+" SCKeys["4"], (*) => HandleFastKey("emsp14"),
-		"<^>!>+" SCKeys["5"], (*) => HandleFastKey("thinspace"),
-		"<^>!>+" SCKeys["6"], (*) => HandleFastKey("emsp16"),
-		"<^>!>+" SCKeys["7"], (*) => CapsSeparatedKey("double_question", "narrow_no_break_space"),
-		"<^>!>+" SCKeys["8"], (*) => HandleFastKey("hairspace"),
-		"<^>!>+" SCKeys["9"], (*) => HandleFastKey("punctuation_space"),
-		"<^>!>+" SCKeys["0"], (*) => HandleFastKey("zero_width_space"),
-		"<^>!>+" SCKeys["Minus"], (*) => HandleFastKey("word_joiner"),
-		"<^>!>+" SCKeys["Equals"], (*) => HandleFastKey("figure_space"),
-		"<^>!>+" SCKeys["Tab"], (*) => HandleFastKey("tabulation"),
+		"<^>!>+" SCKeys["1"], (K) => CapsSeparatedKey(K, "double_exclamation", "emsp"),
+		"<^>!>+" SCKeys["2"], (K) => HandleFastKey(K, "ensp"),
+		"<^>!>+" SCKeys["3"], (K) => HandleFastKey(K, "emsp13"),
+		"<^>!>+" SCKeys["4"], (K) => HandleFastKey(K, "emsp14"),
+		"<^>!>+" SCKeys["5"], (K) => HandleFastKey(K, "thinspace"),
+		"<^>!>+" SCKeys["6"], (K) => HandleFastKey(K, "emsp16"),
+		"<^>!>+" SCKeys["7"], (K) => CapsSeparatedKey(K, "double_question", "narrow_no_break_space"),
+		"<^>!>+" SCKeys["8"], (K) => HandleFastKey(K, "hairspace"),
+		"<^>!>+" SCKeys["9"], (K) => HandleFastKey(K, "punctuation_space"),
+		"<^>!>+" SCKeys["0"], (K) => HandleFastKey(K, "zero_width_space"),
+		"<^>!>+" SCKeys["Minus"], (K) => HandleFastKey(K, "word_joiner"),
+		"<^>!>+" SCKeys["Equals"], (K) => HandleFastKey(K, "figure_space"),
+		"<^>!>+" SCKeys["Tab"], (K) => HandleFastKey(K, "tabulation"),
 		;
-		"<^>!" SCKeys["Space"], (*) => HandleFastKey("no_break_space"),
+		"<^>!" SCKeys["Space"], (K) => HandleFastKey(K, "no_break_space"),
 		;
-		"<^<!" SCKeys["Numpad0"], (*) => HandleFastKey("dotted_circle"),
-		"<^>!" SCKeys["NumpadMult"], (*) => HandleFastKey("asterisk_two"),
-		"<^>!>+" SCKeys["NumpadMult"], (*) => HandleFastKey("asterism"),
-		"<^>!<+" SCKeys["NumpadMult"], (*) => HandleFastKey("asterisk_low"),
-		"<^>!" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger"),
-		"<^>!>+" SCKeys["NumpadDiv"], (*) => HandleFastKey("dagger_double"),
+		"<^<!" SCKeys["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
+		"<^>!" SCKeys["NumpadMult"], (K) => HandleFastKey(K, "asterisk_two"),
+		"<^>!>+" SCKeys["NumpadMult"], (K) => HandleFastKey(K, "asterism"),
+		"<^>!<+" SCKeys["NumpadMult"], (K) => HandleFastKey(K, "asterisk_low"),
+		"<^>!" SCKeys["NumpadDiv"], (K) => HandleFastKey(K, "dagger"),
+		"<^>!>+" SCKeys["NumpadDiv"], (K) => HandleFastKey(K, "dagger_double"),
 		;
-		"<!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_acute", "lat_s_let_a_acute"], ["", ""], True),
-		"<^>!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_breve", "lat_s_let_a_breve"], ["cyr_c_let_fita", "cyr_s_let_fita"], True),
-		"<^>!<!" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"], ["", ""], True),
-		"<^>!<!<+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_caron", "lat_s_let_a_caron"], ["", ""], True),
-		"<^>!<!>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"], ["", ""], True),
-		"<^>!>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_macron", "lat_s_let_a_macron"], ["", ""], True),
-		"<^>!<+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"], ["", ""], True),
-		"<^>!<+>+" SCKeys["A"], (*) => LangSeparatedKey(["lat_c_let_a_tilde", "lat_s_let_a_tilde"], ["", ""], True),
+		"<!" SCKeys["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_acute", "lat_s_let_a_acute"], ["", ""], True),
+		"<^>!" SCKeys["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_breve", "lat_s_let_a_breve"], ["cyr_c_let_fita", "cyr_s_let_fita"], True),
+		"<^>!<!" SCKeys["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"], ["", ""], True),
+		"<^>!<!<+" SCKeys["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_caron", "lat_s_let_a_caron"], ["", ""], True),
+		"<^>!<!>+" SCKeys["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"], ["", ""], True),
+		"<^>!>+" SCKeys["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_macron", "lat_s_let_a_macron"], ["", ""], True),
+		"<^>!<+" SCKeys["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"], ["", ""], True),
+		"<^>!<+>+" SCKeys["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_tilde", "lat_s_let_a_tilde"], ["", ""], True),
 		;
-		"<^>!" SCKeys["B"], (*) => LangSeparatedKey(["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"], ["cyr_c_let_i", "cyr_s_let_i"], True),
-		"<^>!<+" SCKeys["B"], (*) => LangSeparatedKey(["lat_c_let_b_hook", "lat_s_let_b_hook"], ["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], True),
+		"<^>!" SCKeys["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"], ["cyr_c_let_i", "cyr_s_let_i"], True),
+		"<^>!<+" SCKeys["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b_hook", "lat_s_let_b_hook"], ["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], True),
 		;
-		"<!" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_acute", "lat_s_let_c_acute"], ["", ""], True),
-		"<^>!<!" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"], ["", ""], True),
-		"<^>!<!<+" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_caron", "lat_s_let_c_caron"], ["", ""], True),
-		"<^>!<!>+" SCKeys["C"], (*) => LangSeparatedKey(["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"], ["", ""], True),
+		"<!" SCKeys["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c_acute", "lat_s_let_c_acute"], ["", ""], True),
+		"<^>!<!" SCKeys["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"], ["", ""], True),
+		"<^>!<!<+" SCKeys["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c_caron", "lat_s_let_c_caron"], ["", ""], True),
+		"<^>!<!>+" SCKeys["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"], ["", ""], True),
 		;
-		"<^>!" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"], ["", ""], True),
-		"<^>!<!" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_eth", "lat_s_let_d_eth"], ["", ""], True),
-		"<^>!<!>+" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_cedilla", "lat_s_let_d_cedilla"], ["", ""], True),
-		"<^>!<!<+" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_caron", "lat_s_let_d_caron"], ["", ""], True),
-		"<^>!<+>+" SCKeys["D"], (*) => LangSeparatedKey(["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"], ["", ""], True),
+		"<^>!" SCKeys["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"], ["", ""], True),
+		"<^>!<!" SCKeys["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_eth", "lat_s_let_d_eth"], ["", ""], True),
+		"<^>!<!>+" SCKeys["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_cedilla", "lat_s_let_d_cedilla"], ["", ""], True),
+		"<^>!<!<+" SCKeys["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_caron", "lat_s_let_d_caron"], ["", ""], True),
+		"<^>!<+>+" SCKeys["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"], ["", ""], True),
 		;
-		"<^>!" SCKeys["S"], (*) => HandleFastKey("section"),
-		"<^>!<+" SCKeys["S"], (*) => LangSeparatedKey(["lat_c_lig_eszett", "lat_s_lig_eszett"], ["", ""], True),
+		"<^>!" SCKeys["S"], (K) => HandleFastKey(K, "section"),
+		"<^>!<+" SCKeys["S"], (K) => LangSeparatedKey(K, ["lat_c_lig_eszett", "lat_s_lig_eszett"], ["", ""], True),
 		;
-		"<!" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_acute", "lat_s_let_e_acute"], ["", ""], True),
-		"<^>!" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_breve", "lat_s_let_e_breve"], ["cyr_c_yus_big", "cyr_s_yus_big"], True),
-		"<^>!<!" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_circumflex", "lat_s_let_e_circumflex"], ["", ""], True),
-		"<^>!<!<+" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_caron", "lat_s_let_e_caron"], ["", ""], True),
-		"<^>!<!>+" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_ogonek", "lat_s_let_e_ogonek"], ["", ""], True),
-		"<^>!>+" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_macron", "lat_s_let_e_macron"], ["", ""], True),
-		"<^>!<+" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_diaeresis", "lat_s_let_e_diaeresis"], ["", ""], True),
-		"<^>!<+>+" SCKeys["E"], (*) => LangSeparatedKey(["lat_c_let_e_tilde", "lat_s_let_e_tilde"], ["", ""], True),
+		"<!" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_acute", "lat_s_let_e_acute"], ["", ""], True),
+		"<^>!" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_breve", "lat_s_let_e_breve"], ["cyr_c_yus_big", "cyr_s_yus_big"], True),
+		"<^>!<!" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_circumflex", "lat_s_let_e_circumflex"], ["", ""], True),
+		"<^>!<!<+" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_caron", "lat_s_let_e_caron"], ["", ""], True),
+		"<^>!<!>+" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_ogonek", "lat_s_let_e_ogonek"], ["", ""], True),
+		"<^>!>+" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_macron", "lat_s_let_e_macron"], ["", ""], True),
+		"<^>!<+" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_diaeresis", "lat_s_let_e_diaeresis"], ["", ""], True),
+		"<^>!<+>+" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_tilde", "lat_s_let_e_tilde"], ["", ""], True),
 		;
-		"<!" SCKeys["G"], (*) => LangSeparatedKey(["lat_c_let_g_acute", "lat_s_let_g_acute"], ["", ""], True),
-		"<^>!" SCKeys["G"], (*) => LangSeparatedKey(["lat_c_let_g_breve", "lat_s_let_g_breve"], ["", ""], True),
-		"<^>!<!" SCKeys["G"], (*) => LangSeparatedKey(["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"], ["", ""], True),
-		"<^>!<!<+" SCKeys["G"], (*) => LangSeparatedKey(["lat_c_let_g_caron", "lat_s_let_g_caron"], ["", ""], True),
-		"<^>!<!>+" SCKeys["G"], (*) => LangSeparatedKey(["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"], ["", ""], True),
-		"<^>!>+" SCKeys["G"], (*) => LangSeparatedKey(["lat_c_let_g_macron", "lat_s_let_g_macron"], ["", ""], True),
+		"<!" SCKeys["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_acute", "lat_s_let_g_acute"], ["", ""], True),
+		"<^>!" SCKeys["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_breve", "lat_s_let_g_breve"], ["", ""], True),
+		"<^>!<!" SCKeys["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"], ["", ""], True),
+		"<^>!<!<+" SCKeys["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_caron", "lat_s_let_g_caron"], ["", ""], True),
+		"<^>!<!>+" SCKeys["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"], ["", ""], True),
+		"<^>!>+" SCKeys["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_macron", "lat_s_let_g_macron"], ["", ""], True),
 		;
-		"<^>!" SCKeys["H"], (*) => LangSeparatedKey(["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"], ["", ""], True),
-		"<^>!<!" SCKeys["H"], (*) => LangSeparatedKey(["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"], ["", ""], True),
-		"<^>!<!<+" SCKeys["H"], (*) => LangSeparatedKey(["lat_c_let_h_caron", "lat_s_let_h_caron"], ["", ""], True),
-		"<^>!<!>+" SCKeys["H"], (*) => LangSeparatedKey(["lat_c_let_h_cedilla", "lat_s_let_h_cedilla"], ["", ""], True),
-		"<^>!<+" SCKeys["H"], (*) => LangSeparatedKey(["lat_c_let_h_diaeresis", "lat_s_let_h_diaeresis"], ["", ""], True),
+		"<^>!" SCKeys["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"], ["", ""], True),
+		"<^>!<!" SCKeys["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"], ["", ""], True),
+		"<^>!<!<+" SCKeys["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_caron", "lat_s_let_h_caron"], ["", ""], True),
+		"<^>!<!>+" SCKeys["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_cedilla", "lat_s_let_h_cedilla"], ["", ""], True),
+		"<^>!<+" SCKeys["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_diaeresis", "lat_s_let_h_diaeresis"], ["", ""], True),
 		;
-		"<!" SCKeys["I"], (*) => LangSeparatedKey(["lat_c_let_i_acute", "lat_s_let_i_acute"], ["", ""], True),
-		"<^>!" SCKeys["I"], (*) => LangSeparatedKey(["lat_c_let_i_breve", "lat_s_let_i_breve"], ["", ""], True),
-		"<^>!<!" SCKeys["I"], (*) => LangSeparatedKey(["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"], ["", ""], True),
-		"<^>!<!<+" SCKeys["I"], (*) => LangSeparatedKey(["lat_c_let_i_caron", "lat_s_let_i_caron"], ["", ""], True),
-		"<^>!<+" SCKeys["I"], (*) => LangSeparatedKey(["", ""], ["", ""], True),
+		"<!" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_acute", "lat_s_let_i_acute"], ["", ""], True),
+		"<^>!" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_breve", "lat_s_let_i_breve"], ["", ""], True),
+		"<^>!<!" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"], ["", ""], True),
+		"<^>!<!<+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_caron", "lat_s_let_i_caron"], ["", ""], True),
+		"<^>!<+" SCKeys["I"], (K) => LangSeparatedKey(K, ["", ""], ["", ""], True),
 		;
-		"<^>!" SCKeys["J"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
+		"<^>!" SCKeys["J"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
 		;
-		"<^>!" SCKeys["Q"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
-		"<^>!<!" SCKeys["Q"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_j", "cyr_s_let_j"], True),
+		"<^>!" SCKeys["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
+		"<^>!<!" SCKeys["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_j", "cyr_s_let_j"], True),
 		;
-		"<^>!" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_yus_little", "cyr_s_yus_little"], True),
-		"<^>!<+" SCKeys["Z"], (*) => LangSeparatedKey(["", ""], ["cyr_c_a_iotified", "cyr_s_a_iotified"], True),
-		"<^>!" SCKeys["T"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
-		"<^>!" SCKeys["Apostrophe"], (*) => LangSeparatedKey(["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
-		"<^>!" SCKeys["C"], (*) => CapsSeparatedKey("registered", "copyright"),
-		"<^>!<+" SCKeys["C"], (*) => CapsSeparatedKey("servicemark", "trademark"),
-		"<^>!" SCKeys["P"], (*) => HandleFastKey("prime_single"),
-		"<^>!+" SCKeys["P"], (*) => HandleFastKey("prime_double"),
-		"<^>!" SCKeys["Equals"], (*) => HandleFastKey("noequals"),
-		"<^>!>+" SCKeys["Equals"], (*) => HandleFastKey("almostequals"),
-		"<^>!<+" SCKeys["Equals"], (*) => HandleFastKey("plusminus"),
-		"<^>!" SCKeys["Minus"], (*) => CapsSeparatedKey("three_emdash", "emdash"),
-		"<^>!<+" SCKeys["Minus"], (*) => CapsSeparatedKey("two_emdash", "endash"),
-		"<^>!<!" SCKeys["Minus"], (*) => CapsSeparatedKey("", "hyphen"),
-		"<^>!<!<+" SCKeys["Minus"], (*) => CapsSeparatedKey("", "no_break_hyphen"),
-		"<^>!<!>+" SCKeys["Minus"], (*) => CapsSeparatedKey("", "figure_dash"),
-		"<^>!" SCKeys["Slash"], (*) => HandleFastKey("ellipsis"),
-		"<^>!>+" SCKeys["Slash"], (*) => HandleFastKey("fraction_slash"),
-		"<^>!" SCKeys["8"], (*) => HandleFastKey("multiplication"),
-		"<^>!" SCKeys["Tilde"], (*) => HandleFastKey("bullet"),
-		"<^>!<!" SCKeys["Tilde"], (*) => HandleFastKey("bullet_hyphen"),
-		"<^>!<+" SCKeys["Tilde"], (*) => HandleFastKey("interpunct"),
+		"<^>!" SCKeys["Z"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_yus_little", "cyr_s_yus_little"], True),
+		"<^>!<+" SCKeys["Z"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_a_iotified", "cyr_s_a_iotified"], True),
+		"<^>!" SCKeys["T"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
+		"<^>!" SCKeys["Apostrophe"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
+		"<^>!" SCKeys["C"], (K) => CapsSeparatedKey(K, "registered", "copyright"),
+		"<^>!<+" SCKeys["C"], (K) => CapsSeparatedKey(K, "servicemark", "trademark"),
+		"<^>!" SCKeys["P"], (K) => HandleFastKey(K, "prime_single"),
+		"<^>!+" SCKeys["P"], (K) => HandleFastKey(K, "prime_double"),
+		"<^>!" SCKeys["Equals"], (K) => HandleFastKey(K, "noequals"),
+		"<^>!>+" SCKeys["Equals"], (K) => HandleFastKey(K, "almostequals"),
+		"<^>!<+" SCKeys["Equals"], (K) => HandleFastKey(K, "plusminus"),
+		"<^>!" SCKeys["Minus"], (K) => CapsSeparatedKey(K, "three_emdash", "emdash"),
+		"<^>!<+" SCKeys["Minus"], (K) => CapsSeparatedKey(K, "two_emdash", "endash"),
+		"<^>!<!" SCKeys["Minus"], (K) => CapsSeparatedKey(K, "", "hyphen"),
+		"<^>!<!<+" SCKeys["Minus"], (K) => CapsSeparatedKey(K, "", "no_break_hyphen"),
+		"<^>!<!>+" SCKeys["Minus"], (K) => CapsSeparatedKey(K, "", "figure_dash"),
+		"<^>!" SCKeys["Slash"], (K) => HandleFastKey(K, "ellipsis"),
+		"<^>!>+" SCKeys["Slash"], (K) => HandleFastKey(K, "fraction_slash"),
+		"<^>!" SCKeys["8"], (K) => HandleFastKey(K, "multiplication"),
+		"<^>!" SCKeys["Tilde"], (K) => HandleFastKey(K, "bullet"),
+		"<^>!<!" SCKeys["Tilde"], (K) => HandleFastKey(K, "bullet_hyphen"),
+		"<^>!<+" SCKeys["Tilde"], (K) => HandleFastKey(K, "interpunct"),
 		;
-		"<^>!" SCKeys["ArrLeft"], (*) => HandleFastKey("arrow_left"),
-		"<^>!" SCKeys["ArrRight"], (*) => HandleFastKey("arrow_right"),
-		"<^>!" SCKeys["ArrUp"], (*) => HandleFastKey("arrow_up"),
-		"<^>!" SCKeys["ArrDown"], (*) => HandleFastKey("arrow_down"),
-		"<^>!<+" SCKeys["ArrLeft"], (*) => HandleFastKey("arrow_left_ushaped"),
-		"<^>!<+" SCKeys["ArrRight"], (*) => HandleFastKey("arrow_right_ushaped"),
-		"<^>!<+" SCKeys["ArrUp"], (*) => HandleFastKey("arrow_up_ushaped"),
-		"<^>!<+" SCKeys["ArrDown"], (*) => HandleFastKey("arrow_down_ushaped"),
-		"<^>!>+" SCKeys["ArrLeft"], (*) => HandleFastKey("arrow_left_circle"),
-		"<^>!>+" SCKeys["ArrRight"], (*) => HandleFastKey("arrow_right_circle"),
+		"<^>!" SCKeys["ArrLeft"], (K) => HandleFastKey(K, "arrow_left"),
+		"<^>!" SCKeys["ArrRight"], (K) => HandleFastKey(K, "arrow_right"),
+		"<^>!" SCKeys["ArrUp"], (K) => HandleFastKey(K, "arrow_up"),
+		"<^>!" SCKeys["ArrDown"], (K) => HandleFastKey(K, "arrow_down"),
+		"<^>!<+" SCKeys["ArrLeft"], (K) => HandleFastKey(K, "arrow_left_ushaped"),
+		"<^>!<+" SCKeys["ArrRight"], (K) => HandleFastKey(K, "arrow_right_ushaped"),
+		"<^>!<+" SCKeys["ArrUp"], (K) => HandleFastKey(K, "arrow_up_ushaped"),
+		"<^>!<+" SCKeys["ArrDown"], (K) => HandleFastKey(K, "arrow_down_ushaped"),
+		"<^>!>+" SCKeys["ArrLeft"], (K) => HandleFastKey(K, "arrow_left_circle"),
+		"<^>!>+" SCKeys["ArrRight"], (K) => HandleFastKey(K, "arrow_right_circle"),
 		;
-		"<^>!" SCKeys["Numpad4"], (*) => CapsSeparatedKey("asian_double_left_quote", "asian_left_quote"),
-		"<^>!" SCKeys["Numpad6"], (*) => CapsSeparatedKey("asian_double_right_quote", "asian_right_quote"),
-		"<^>!" SCKeys["Numpad8"], (*) => CapsSeparatedKey("asian_double_up_quote", "asian_up_quote"),
-		"<^>!" SCKeys["Numpad2"], (*) => CapsSeparatedKey("asian_double_down_quote", "asian_down_quote"),
-		"<^>!<!" SCKeys["Comma"], (*) => HandleFastKey("asian_double_left_title"),
-		"<^>!<!<+" SCKeys["Comma"], (*) => HandleFastKey("asian_left_title"),
-		"<^>!<!" SCKeys["Dot"], (*) => HandleFastKey("asian_double_right_title"),
-		"<^>!<!<+" SCKeys["Dot"], (*) => HandleFastKey("asian_right_title"),
-		"<^>!" SCKeys["0"], (*) => HandleFastKey("degree"),
-		"<^>!<!" SCKeys["0"], (*) => HandleFastKey("infinity"),
+		"<^>!" SCKeys["Numpad4"], (K) => CapsSeparatedKey(K, "asian_double_left_quote", "asian_left_quote"),
+		"<^>!" SCKeys["Numpad6"], (K) => CapsSeparatedKey(K, "asian_double_right_quote", "asian_right_quote"),
+		"<^>!" SCKeys["Numpad8"], (K) => CapsSeparatedKey(K, "asian_double_up_quote", "asian_up_quote"),
+		"<^>!" SCKeys["Numpad2"], (K) => CapsSeparatedKey(K, "asian_double_down_quote", "asian_down_quote"),
+		"<^>!<!" SCKeys["Comma"], (K) => HandleFastKey(K, "asian_double_left_title"),
+		"<^>!<!<+" SCKeys["Comma"], (K) => HandleFastKey(K, "asian_left_title"),
+		"<^>!<!" SCKeys["Dot"], (K) => HandleFastKey(K, "asian_double_right_title"),
+		"<^>!<!<+" SCKeys["Dot"], (K) => HandleFastKey(K, "asian_right_title"),
+		"<^>!" SCKeys["0"], (K) => HandleFastKey(K, "degree"),
+		"<^>!<!" SCKeys["0"], (K) => HandleFastKey(K, "infinity"),
 		;
-		"<^>!" SCKeys["Enter"], (*) => HandleFastKey("carriage_return", "new_line", "emsp"),
-		"<^>!<+" SCKeys["Enter"], (*) => SendPaste("+{Enter}", (*) => HandleFastKey("emsp")),
-		"<^>!>+" SCKeys["Enter"], (*) => HandleFastKey("carriage_return", "new_line", "emsp", "emsp"),
+		"<^>!" SCKeys["Enter"], (K) => HandleFastKey(K, "carriage_return", "new_line", "emsp"),
+		"<^>!<+" SCKeys["Enter"], (K) => SendPaste("+{Enter}", (K) => HandleFastKey(K, "emsp")),
+		"<^>!>+" SCKeys["Enter"], (K) => HandleFastKey(K, "carriage_return", "new_line", "emsp", "emsp"),
 		;
-		"<^>!" SCKeys["1"], (*) => HandleFastKey("inverted_exclamation"),
-		"<^>!<+" SCKeys["1"], (*) => HandleFastKey("double_exclamation_question"),
-		"<^>!<+>+" SCKeys["1"], (*) => CapsSeparatedKey("interrobang_inverted", "interrobang"),
-		"<^>!" SCKeys["5"], (*) => HandleFastKey("permille"),
-		"<^>!<+" SCKeys["5"], (*) => HandleFastKey("pertenthousand"),
-		"<^>!" SCKeys["7"], (*) => HandleFastKey("inverted_question"),
-		"<^>!<+" SCKeys["7"], (*) => HandleFastKey("double_question_exclamation"),
-		"<^>!<!" SCKeys["7"], (*) => HandleFastKey("reversed_question"),
+		"<^>!" SCKeys["1"], (K) => HandleFastKey(K, "inverted_exclamation"),
+		"<^>!<+" SCKeys["1"], (K) => HandleFastKey(K, "double_exclamation_question"),
+		"<^>!<+>+" SCKeys["1"], (K) => CapsSeparatedKey(K, "interrobang_inverted", "interrobang"),
+		"<^>!" SCKeys["5"], (K) => HandleFastKey(K, "permille"),
+		"<^>!<+" SCKeys["5"], (K) => HandleFastKey(K, "pertenthousand"),
+		"<^>!" SCKeys["7"], (K) => HandleFastKey(K, "inverted_question"),
+		"<^>!<+" SCKeys["7"], (K) => HandleFastKey(K, "double_question_exclamation"),
+		"<^>!<!" SCKeys["7"], (K) => HandleFastKey(K, "reversed_question"),
 		;
-		SCKeys["NumpadMult"], (*) => HandleFastKey("multiplication"),
-		SCKeys["NumpadSub"], (*) => TimedKeyCombinations("NumpadSub", SCKeys["NumpadAdd"], (*) => HandleFastKey("plusminus"), (*) => HandleFastKey("minus")),
-		SCKeys["NumpadAdd"], (*) => TimedKeyCombinations("NumpadAdd", SCKeys["NumpadSub"], (*) => EmptyFunc()),
-		SCKeys["Equals"], (*) =>
+		SCKeys["NumpadMult"], (K) => HandleFastKey(K, "multiplication"),
+		SCKeys["NumpadSub"], (K) => TimedKeyCombinations("NumpadSub", SCKeys["NumpadAdd"], (K) => HandleFastKey(K, "plusminus"), (K) => HandleFastKey(K, "minus")),
+		SCKeys["NumpadAdd"], (K) => TimedKeyCombinations("NumpadAdd", SCKeys["NumpadSub"], (K) => EmptyFunc()),
+		SCKeys["Equals"], (K) =>
 			TimedKeyCombinations("Equals",
 				[SCKeys["Slash"], SCKeys["Tilde"]],
-				[(*) => HandleFastKey("noequals"), (*) => HandleFastKey("almostequals")],
+				[(K) => HandleFastKey(K, "noequals"), (K) => HandleFastKey(K, "almostequals")],
 			),
-		SCKeys["Slash"], (*) => TimedKeyCombinations("Slash", SCKeys["Equals"], (*) => EmptyFunc()),
-		SCKeys["Tilde"], (*) => TimedKeyCombinations("Tilde", SCKeys["Equals"], (*) => EmptyFunc()),
+		SCKeys["Slash"], (K) => TimedKeyCombinations("Slash", SCKeys["Equals"], (K) => EmptyFunc()),
+		SCKeys["Tilde"], (K) => TimedKeyCombinations("Tilde", SCKeys["Equals"], (K) => EmptyFunc()),
 		;
 		"RAlt", (*) => ProceedCompose(),
 		"RCtrl", (*) => ProceedCombining(),
