@@ -6598,7 +6598,7 @@ MapInsert(Characters,
 			combiningHTML: "&#122911;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ъ"],
-			tags: ["прописный Ер глаголицы", "capital Yeru glagolitic"],
+			tags: ["прописной Ер глаголицы", "capital Yeru glagolitic"],
 			symbol: Chr(0x2C1F)
 		},
 		"glagolitic_s_let_yeru", {
@@ -6617,7 +6617,7 @@ MapInsert(Characters,
 			combiningHTML: "&#122911;&#122889;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ы"],
-			tags: ["прописные Еры глаголицы", "capital Yery glagolitic"],
+			tags: ["прописной Еры глаголицы", "capital Yery glagolitic"],
 			symbol: Chr(0x2C1F) Chr(0x2C0A),
 			symbolCustom: "s36"
 		},
@@ -6628,7 +6628,7 @@ MapInsert(Characters,
 			combiningHTML: "&#122911;&#122889;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ы"],
-			tags: ["строчные еры глаголицы", "small yery glagolitic"],
+			tags: ["строчный еры глаголицы", "small yery glagolitic"],
 			symbol: Chr(0x2C4F) Chr(0x2C3A),
 			symbolCustom: "s36"
 		},
@@ -6638,7 +6638,7 @@ MapInsert(Characters,
 			combiningHTML: "&#122912;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ь"],
-			tags: ["прописный Ерь глаголицы", "capital Yeri glagolitic"],
+			tags: ["прописной Ерь глаголицы", "capital Yeri glagolitic"],
 			symbol: Chr(0x2C20)
 		},
 		"glagolitic_s_let_yeri", {
@@ -6654,7 +6654,7 @@ MapInsert(Characters,
 			combiningHTML: "&#122913;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Я"],
-			tags: ["прописный Ять глаголицы", "capital Yati glagolitic"],
+			tags: ["прописной Ять глаголицы", "capital Yati glagolitic"],
 			symbol: Chr(0x2C21)
 		},
 		"glagolitic_s_let_yati", {
@@ -6688,7 +6688,7 @@ MapInsert(Characters,
 			unicode: "{U+2C22}", html: "&#11298;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
-			tags: ["прописный Хлъмъ глаголицы", "capital spider Ha glagolitic"],
+			tags: ["прописной Хлъмъ глаголицы", "capital spider Ha glagolitic"],
 			alt_layout: RightAlt " [Х]",
 			symbol: Chr(0x2C22)
 		},
@@ -6875,56 +6875,56 @@ MapInsert(Characters,
 			unicode: "{U+16A8}", html: "&#5800;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "A"],
-			tags: ["ансуз", "ansuz"],
+			tags: ["старший футарк ансуз", "elder futhark ansuz"],
 			symbol: Chr(0x16A8)
 		},
-		"futhark_bjarkan", {
+		"futhark_berkanan", {
 			unicode: "{U+16D2}", html: "&#5842;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "B"],
-			tags: ["беркана", "bjarkan"],
+			tags: ["старший футарк беркана", "elder futhark berkanan", "futhork beorc", "younger futhark bjarkan"],
 			symbol: Chr(0x16D2)
 		},
 		"futhark_dagaz", {
 			unicode: "{U+16DE}", html: "&#5854;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "D"],
-			tags: ["дагаз", "dagaz"],
+			tags: ["старший футарк дагаз", "elder futhark dagaz", "futhork daeg", "futhork dæg"],
 			symbol: Chr(0x16DE)
 		},
 		"futhark_ehwaz", {
 			unicode: "{U+16D6}", html: "&#5846;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "E"],
-			tags: ["эваз", "ehwaz"],
+			tags: ["старший футарк эваз", "elder futhark ehwaz", "futhork eh"],
 			symbol: Chr(0x16D6)
 		},
 		"futhark_fehu", {
 			unicode: "{U+16A0}", html: "&#5792;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "F"],
-			tags: ["феху", "fehu"],
+			tags: ["старший футарк феху", "elder futhark fehu", "futhork feoh", "younger futhark fe", "younger futhark fé"],
 			symbol: Chr(0x16A0)
 		},
 		"futhark_gebo", {
 			unicode: "{U+16B7}", html: "&#5815;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "G"],
-			tags: ["гебо", "gebo"],
+			tags: ["старший футарк гебо", "elder futhark gebo", "futhork gyfu", "elder futhark gebō"],
 			symbol: Chr(0x16B7)
 		},
 		"futhark_haglaz", {
 			unicode: "{U+16BA}", html: "&#5818;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "H"],
-			tags: ["хагалаз", "haglaz"],
+			tags: ["старший футарк хагалаз", "elder futhark hagalaz"],
 			symbol: Chr(0x16BA)
 		},
 		"futhark_isaz", {
 			unicode: "{U+16C1}", html: "&#5825;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "I"],
-			tags: ["исаз", "isaz"],
+			tags: ["старший футарк исаз", "elder futhark isaz", "futhork is", "younger futhark iss", "futhork īs", "younger futhark íss"],
 			symbol: Chr(0x16C1)
 		},
 		"futhark_eihwaz", {
@@ -6932,42 +6932,42 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhark Runes"],
 			alt_layout: RightShift " [I]",
-			tags: ["эваз", "eihwaz"],
+			tags: ["старший футарк эваз", "elder futhark eihwaz", "elder futhark iwaz", "elder futhark ēihwaz", "futhork eoh", "futhork ēoh"],
 			symbol: Chr(0x16C7)
 		},
 		"futhark_jeran", {
 			unicode: "{U+16C3}", html: "&#5827;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "J"],
-			tags: ["йера", "jeran"],
+			tags: ["старший футарк йера", "elder futhark jeran", "elder futhark jēra"],
 			symbol: Chr(0x16C3)
 		},
 		"futhark_kauna", {
 			unicode: "{U+16B2}", html: "&#5810;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "K"],
-			tags: ["кеназ", "kauna"],
+			tags: ["старший футарк кеназ", "elder futhark kauna", "elder futhark kenaz", "elder futhark kauną"],
 			symbol: Chr(0x16B2)
 		},
 		"futhark_laguz", {
 			unicode: "{U+16DA}", html: "&#5850;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "L"],
-			tags: ["лагуз", "laukaz"],
+			tags: ["старший футарк лагуз", "elder futhark laukaz", "elder futhark laguz", "futhork lagu", "futhork logr", "futhork lögr"],
 			symbol: Chr(0x16DA)
 		},
 		"futhark_mannaz", {
 			unicode: "{U+16D7}", html: "&#5847;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "M"],
-			tags: ["манназ", "mannaz"],
+			tags: ["старший футарк манназ", "elder futhark mannaz", "futhork mann"],
 			symbol: Chr(0x16D7)
 		},
 		"futhark_naudiz", {
 			unicode: "{U+16BE}", html: "&#5822;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "N"],
-			tags: ["наудиз", "naudiz"],
+			tags: ["старший футарк наудиз", "elder futhark naudiz", "futhork nyd", "younger futhark naudr", "younger futhark nauðr"],
 			symbol: Chr(0x16BE)
 		},
 		"futhark_ingwaz", {
@@ -6975,42 +6975,42 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhark Runes"],
 			alt_layout: RightShift " [N]",
-			tags: ["ингваз", "ingwaz"],
+			tags: ["старший футарк ингваз", "elder futhark ingwaz"],
 			symbol: Chr(0x16DC)
 		},
 		"futhark_odal", {
 			unicode: "{U+16DF}", html: "&#5855;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "O"],
-			tags: ["одал", "odal"],
+			tags: ["старший футарк одал", "elder futhark othala", "futhork edel", "tlder futhark ōþala", "futhork ēðel"],
 			symbol: Chr(0x16DF)
 		},
 		"futhark_pertho", {
 			unicode: "{U+16C8}", html: "&#5832;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "P"],
-			tags: ["одал", "pertho"],
+			tags: ["старший футарк перто", "elder futhark pertho", "futhork peord", "elder futhark perþō", "futhork peorð"],
 			symbol: Chr(0x16C8)
 		},
 		"futhark_raido", {
 			unicode: "{U+16B1}", html: "&#5809;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "R"],
-			tags: ["райдо", "raido"],
+			tags: ["старший футарк райдо", "elder futhark raido", "futhork rad", "younger futhark reid", "elder futhark raidō", "futhork rād", "younger futhark reið"],
 			symbol: Chr(0x16B1)
 		},
 		"futhark_sowilo", {
 			unicode: "{U+16CA}", html: "&#5834;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "S"],
-			tags: ["совило", "sowilo"],
+			tags: ["старший футарк совило", "elder futhark sowilo", "elder futhark sōwilō"],
 			symbol: Chr(0x16CA)
 		},
 		"futhark_tiwaz", {
 			unicode: "{U+16CF}", html: "&#5839;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "T"],
-			tags: ["тейваз", "tiwaz"],
+			tags: ["старший футарк тейваз", "elder futhark tiwaz", "futhork ti", "futhork tir", "younger futhark tyr", "elder futhark tēwaz", "futhork tī", "futhork tīr", "younger futhark týr"],
 			symbol: Chr(0x16CF)
 		},
 		"futhark_thurisaz", {
@@ -7018,28 +7018,28 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhark Runes"],
 			alt_layout: RightShift "[T]",
-			tags: ["турисаз", "thurisaz"],
+			tags: ["старший футарк турисаз", "elder futhark thurisaz", "futhork thorn", "younger futhark thurs", "elder futhark þurisaz", "futhork þorn", "younger futhark þurs"],
 			symbol: Chr(0x16A6)
 		},
 		"futhark_uruz", {
 			unicode: "{U+16A2}", html: "&#5794;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "U"],
-			tags: ["уруз", "uruz"],
+			tags: ["старший футарк уруз", "elder futhark uruz", "elder futhark ura", "futhork ur", "younger futhark ur", "elder futhark ūrą", "elder futhark ūruz", "futhork ūr", "younger futhark úr"],
 			symbol: Chr(0x16A2)
 		},
 		"futhark_wunjo", {
 			unicode: "{U+16B9}", html: "&#5817;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "W"],
-			tags: ["вуньо", "wunjo"],
+			tags: ["старший футарк вуньо", "elder futhark wunjo", "futhork wynn", "elder futhark wunjō", "elder futhark ƿunjō", "futhorh ƿynn"],
 			symbol: Chr(0x16B9)
 		},
 		"futhark_algiz", {
 			unicode: "{U+16C9}", html: "&#5833;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "Z"],
-			tags: ["альгиз", "algiz"],
+			tags: ["старший футарк альгиз", "elder futhark algiz", "futhork eolhx"],
 			symbol: Chr(0x16C9)
 		},
 		"futhork_as", {
@@ -7047,7 +7047,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [A]",
-			tags: ["ас", "as"],
+			tags: ["футорк ас", "futhork as", "futhork ās"],
 			symbol: Chr(0x16AA)
 		},
 		"futhork_aesc", {
@@ -7055,14 +7055,14 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: RightShift " [A]",
-			tags: ["эск", "aesc"],
+			tags: ["футорк эск", "futhork aesc", "futhork æsc"],
 			symbol: Chr(0x16AB)
 		},
 		"futhork_cen", {
 			unicode: "{U+16B3}", html: "&#5811;",
 			titlesAlt: True,
 			group: ["Futhork Runes", "C"],
-			tags: ["кен", "cen"],
+			tags: ["футорк кен", "futhork cen", "futhork cēn"],
 			symbol: Chr(0x16B3)
 		},
 		"futhork_ear", {
@@ -7070,7 +7070,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [E]",
-			tags: ["эар", "ear"],
+			tags: ["футорк эар", "ear"],
 			symbol: Chr(0x16E0)
 		},
 		"futhork_gar", {
@@ -7078,7 +7078,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [G]",
-			tags: ["гар", "gar"],
+			tags: ["футорк гар", "futhork gar", "futhork gār"],
 			symbol: Chr(0x16B8)
 		},
 		"futhork_haegl", {
@@ -7086,7 +7086,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [H]",
-			tags: ["хегль", "haegl"],
+			tags: ["футорк хегль", "futhork haegl", "futhork hægl"],
 			symbol: Chr(0x16BB)
 		},
 		"futhork_ger", {
@@ -7094,7 +7094,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [J]",
-			tags: ["гер", "ger"],
+			tags: ["футорк гер", "futhork ger", "futhork gēr"],
 			symbol: Chr(0x16C4)
 		},
 		"futhork_ior", {
@@ -7102,7 +7102,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: RightShift "[J]",
-			tags: ["йор", "ior"],
+			tags: ["футорк йор", "futhork gerx", "futhork ior", "younger futhark arx", "futhork gērx", "futhork īor", "youner futhark árx"],
 			symbol: Chr(0x16E1)
 		},
 		"futhork_cealc", {
@@ -7110,7 +7110,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [K]",
-			tags: ["келк", "cealc"],
+			tags: ["футорк келк", "futhork cealc"],
 			symbol: Chr(0x16E4)
 		},
 		"futhork_calc", {
@@ -7118,7 +7118,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: RightShift " [K]",
-			tags: ["калк", "calc"],
+			tags: ["футорк калк", "futhork calc"],
 			symbol: Chr(0x16E3)
 		},
 		"futhork_ing", {
@@ -7126,7 +7126,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [N]",
-			tags: ["инг", "ing"],
+			tags: ["футорк инг", "futhork ing"],
 			symbol: Chr(0x16DD)
 		},
 		"futhork_os", {
@@ -7134,14 +7134,14 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [O]",
-			tags: ["ос", "os"],
+			tags: ["футорк ос", "futhork os", "futhork ōs"],
 			symbol: Chr(0x16A9)
 		},
 		"futhork_cweorth", {
 			unicode: "{U+16E2}", html: "&#5801;",
 			titlesAlt: True,
 			group: ["Futhork Runes", "Q"],
-			tags: ["квирд", "cweorth"],
+			tags: ["футорк квирд", "futhark cweorth", "futhork cƿeorð"],
 			symbol: Chr(0x16E2)
 		},
 		"futhork_sigel", {
@@ -7149,7 +7149,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [S]",
-			tags: ["сигель", "sigel"],
+			tags: ["футорк сигель", "futhork sigel", "younger futhark sól"],
 			symbol: Chr(0x16CB)
 		},
 		"futhork_stan", {
@@ -7157,7 +7157,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: RightShift " [S]",
-			tags: ["стан", "stan"],
+			tags: ["футорк стан", "futhork stan"],
 			symbol: Chr(0x16E5)
 		},
 		"futhork_yr", {
@@ -7165,7 +7165,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Futhork Runes"],
 			alt_layout: LeftShift " [Y]",
-			tags: ["ир", "yr"],
+			tags: ["футорк ир", "futhork yr", "futhork ȳr"],
 			symbol: Chr(0x16A3)
 		},
 		"futhark_younger_jera", {
@@ -7173,7 +7173,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt " [A]",
-			tags: ["младшая йера", "younger jera"],
+			tags: ["младший футарк йера", "younger futhark jera", "younger futhark ar", "younger futhark ár"],
 			symbol: Chr(0x16C5)
 		},
 		"futhark_younger_jera_short_twig", {
@@ -7181,7 +7181,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [A]",
-			tags: ["младшая короткая йера", "younger short twig jera"],
+			tags: ["младший футарк короткая йера", "younger futhark short twig jera"],
 			symbol: Chr(0x16C6)
 		},
 		"futhark_younger_bjarkan_short_twig", {
@@ -7189,7 +7189,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [B]",
-			tags: ["младшая короткая беркана", "younger short twig bjarkan"],
+			tags: ["младший футарк короткая беркана", "younger futhark short twig bjarkan"],
 			symbol: Chr(0x16D3)
 		},
 		"futhark_younger_hagall", {
@@ -7197,7 +7197,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt " [H]",
-			tags: ["младшая хагал", "younger hagall"],
+			tags: ["младший футарк хагал", "younger futhark hagall"],
 			symbol: Chr(0x16BC)
 		},
 		"futhark_younger_hagall_short_twig", {
@@ -7205,7 +7205,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [H]",
-			tags: ["младший короткий хагал", "younger short twig hagall"],
+			tags: ["младший футарк короткий хагал", "younger futhark short twig hagall"],
 			symbol: Chr(0x16BD)
 		},
 		"futhark_younger_kaun", {
@@ -7213,7 +7213,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt " [K]",
-			tags: ["младший каун", "younger kaun"],
+			tags: ["младший футарк каун", "younger futhark kaun"],
 			symbol: Chr(0x16B4)
 		},
 		"futhark_younger_madr", {
@@ -7221,7 +7221,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt " [M]",
-			tags: ["младший мадр", "younger madr"],
+			tags: ["младший футарк мадр", "younger futhark madr", "younger futhark maðr"],
 			symbol: Chr(0x16D8)
 		},
 		"futhark_younger_madr_short_twig", {
@@ -7229,7 +7229,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [M]",
-			tags: ["младший короткий мадр", "younger short twig madr"],
+			tags: ["младший футарк короткий мадр", "younger futhark short twig madr", "younger futhark short twig maðr"],
 			symbol: Chr(0x16D9)
 		},
 		"futhark_younger_naud_short_twig", {
@@ -7237,7 +7237,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [N]",
-			tags: ["младший короткий науд", "younger short twig naud"],
+			tags: ["младший футарк короткий науд", "younger futhark short twig naud", "younger futhark short twig nauðr"],
 			symbol: Chr(0x16BF)
 		},
 		"futhark_younger_oss", {
@@ -7245,7 +7245,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt " [O]",
-			tags: ["младший осс", "younger oss"],
+			tags: ["младший футарк осс", "younger futhark oss", "younger futhark óss"],
 			symbol: Chr(0x16AC)
 		},
 		"futhark_younger_oss_short_twig", {
@@ -7253,7 +7253,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [O]",
-			tags: ["младший короткий осс", "younger short twig oss"],
+			tags: ["младший футарк короткий осс", "younger futhark short twig oss", "younger futhark short twig óss"],
 			symbol: Chr(0x16AD)
 		},
 		"futhark_younger_sol_short_twig", {
@@ -7261,7 +7261,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [S]",
-			tags: ["младший короткий сол", "younger short twig sol"],
+			tags: ["младший футарк короткий сол", "younger futhark short twig sol", "younger futhark short twig sól"],
 			symbol: Chr(0x16CC)
 		},
 		"futhark_younger_tyr_short_twig", {
@@ -7269,14 +7269,14 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [T]",
-			tags: ["младший короткий тир", "younger short twig tyr"],
+			tags: ["младший футарк короткий тир", "younger futhark short twig tyr", "younger futhark short twig týr"],
 			symbol: Chr(0x16D0)
 		},
 		"futhark_younger_ur", {
 			unicode: "{U+16A4}", html: "&#5804;",
 			titlesAlt: True,
 			group: ["Younger Futhark Runes", "Y"],
-			tags: ["младший ур", "younger ur"],
+			tags: ["младший футарк ур", "younger futhark ur"],
 			symbol: Chr(0x16A4)
 		},
 		"futhark_younger_yr", {
@@ -7284,7 +7284,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt "[Y]",
-			tags: ["младший короткий тис", "younger yr"],
+			tags: ["младший футарк короткий тис", "younger futhark yr"],
 			symbol: Chr(0x16E6)
 		},
 		"futhark_younger_yr_short_twig", {
@@ -7292,7 +7292,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [Y]",
-			tags: ["младший короткий тис", "younger short twig yr"],
+			tags: ["младший футарк короткий тис", "younger futhark short twig yr"],
 			symbol: Chr(0x16E7)
 		},
 		"futhark_younger_icelandic_yr", {
@@ -7300,7 +7300,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Younger Futhark Runes"],
 			alt_layout: RightShift " [Y]",
-			tags: ["исладнский тис", "icelandic yr"],
+			tags: ["младший футарк исладнский тис", "younger futhark icelandic yr"],
 			symbol: Chr(0x16E8)
 		},
 		"futhark_almanac_arlaug", {
@@ -7308,7 +7308,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Almanac Runes"],
 			alt_layout: RightAlt " [7]",
-			tags: ["арлауг", "arlaug"],
+			tags: ["золотой номер 17 арлауг", "golden number 17 arlaug"],
 			symbol: Chr(0x16EE)
 		},
 		"futhark_almanac_tvimadur", {
@@ -7316,7 +7316,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Almanac Runes"],
 			alt_layout: RightAlt " [8]",
-			tags: ["твимадур", "tvimadur"],
+			tags: ["золотой номер 18 твимадур", "golden number 18 tvimadur", "golden number 18 tvímaður"],
 			symbol: Chr(0x16EF)
 		},
 		"futhark_almanac_belgthor", {
@@ -7324,7 +7324,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Almanac Runes"],
 			alt_layout: RightAlt " [9]",
-			tags: ["белгтор", "belgthor"],
+			tags: ["золотой номер 19 белгтор", "golden number 19 belgthor"],
 			symbol: Chr(0x16F0)
 		},
 		"futhark_younger_later_e", {
@@ -7332,7 +7332,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Later Younger Futhark Runes"],
 			alt_layout: RightAlt " [E]",
-			tags: ["младшяя поздняя е", "younger later e"],
+			tags: ["младшяя поздняя е", "later younger futhark e"],
 			symbol: Chr(0x16C2)
 		},
 		"futhark_younger_later_eth", {
@@ -7340,7 +7340,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Later Younger Futhark Runes"],
 			alt_layout: RightAlt " [D]",
-			tags: ["младший поздний эт", "younger later eth"],
+			tags: ["поздний младший футарк эт", "later younger futhark eth"],
 			symbol: Chr(0x16A7)
 		},
 		"futhark_younger_later_d", {
@@ -7348,7 +7348,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Later Younger Futhark Runes"],
 			alt_layout: RightAlt LeftShift " [D]",
-			tags: ["младший поздний д", "younger later d"],
+			tags: ["поздний младший футарк д", "later younger futhark d"],
 			symbol: Chr(0x16D1)
 		},
 		"futhark_younger_later_l", {
@@ -7356,7 +7356,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Later Younger Futhark Runes"],
 			alt_layout: RightAlt " [L]",
-			tags: ["младший поздний л", "younger later l"],
+			tags: ["поздний младший футарк л", "later younger futhark l"],
 			symbol: Chr(0x16DB)
 		},
 		"futhark_younger_later_p", {
@@ -7364,14 +7364,14 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Later Younger Futhark Runes"],
 			alt_layout: RightAlt " [P]",
-			tags: ["младшяя поздняя п", "younger later p"],
+			tags: ["младшяя поздняя п", "later younger futhark p"],
 			symbol: Chr(0x16D4)
 		},
 		"futhark_younger_later_v", {
 			unicode: "{U+16A1}", html: "&#5793;",
 			titlesAlt: True,
 			group: ["Later Younger Futhark Runes", "V"],
-			tags: ["младший поздний в", "younger later v"],
+			tags: ["поздний младший футарк в", "later younger futhark v"],
 			symbol: Chr(0x16A1)
 		},
 		"medieval_c", {
@@ -8186,7 +8186,7 @@ GlagoliticFuthark := [
 	">+" SCKeys["A"], (K) => LangSeparatedKey(K, "futhork_aesc", ["", ""], True),
 	"<^>!" SCKeys["A"], (K) => LangSeparatedKey(K, "futhark_younger_jera", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"], True),
 	"<^>!<+" SCKeys["A"], (K) => LangSeparatedKey(K, "futhark_younger_jera_short_twig", ["", ""], True),
-	SCKeys["B"], (K) => LangSeparatedKey(K, "futhark_bjarkan", ["glagolitic_c_let_i", "glagolitic_s_let_i"], True),
+	SCKeys["B"], (K) => LangSeparatedKey(K, "futhark_berkanan", ["glagolitic_c_let_i", "glagolitic_s_let_i"], True),
 	"<^>!" SCKeys["B"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"], True),
 	"<+" SCKeys["B"], (K) => LangSeparatedKey(K, "", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], True),
 	"<^>!<+" SCKeys["B"], (K) => LangSeparatedKey(K, "futhark_younger_bjarkan_short_twig", ["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"], True),
