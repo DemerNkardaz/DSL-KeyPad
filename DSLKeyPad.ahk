@@ -9594,7 +9594,7 @@ SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, Previe
 					TargetGroup[PreviewObject].SetFont(
 						value.symbolCustom
 					)
-				} else if (StrLen(TargetGroup[PreviewObject].Text) >= 2) {
+				} else if (StrLen(TargetGroup[PreviewObject].Text) > 2) {
 					PreviewGroup.preview.SetFont(
 						CommonInfoFonts.previewSmaller . " norm cDefault"
 					)
