@@ -7845,7 +7845,10 @@ SearchKey() {
 			IsEqualNonSensitive := IsSensitive && (StrLower(PromptValue) = StrLower(tag))
 			IsEqualSensitive := !IsSensitive && (PromptValue == tag)
 
-			if (IsEqualSensitive || IsEqualNonSensitive) {
+			IsPartiallyEqualSensitive := !IsSensitive && RegExMatch(tag, PromptValue)
+			IsPartiallyEqual := IsSensitive && RegExMatch(StrLower(tag), StrLower(PromptValue))
+
+			if (IsEqualSensitive || IsEqualNonSensitive) || (IsPartiallyEqual || IsPartiallyEqualSensitive) {
 				if InputMode = "HTML" {
 					SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
 					SendText(SendValue)
