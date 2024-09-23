@@ -2102,7 +2102,7 @@ MapInsert(Characters,
 		},
 		"noequals", {
 			unicode: "{U+2260}", html: "&#8800;", entity: "&ne;",
-			tags: ["plus minus", "плюс-минус"],
+			tags: ["no equals", "не равно"],
 			group: [["Special Characters", "Smelting Special", "Special Fast Secondary", "Special Fast"], "="],
 			show_on_fast_keys: True,
 			alt_special: "[/=]",
@@ -7814,6 +7814,17 @@ CombineArrays(destinationArray, sourceArray*) {
 		}
 	}
 }
+
+
+HasAllCharacters(str, pattern) {
+	for char in StrSplit(pattern) {
+		if !InStr(str, char)
+			return false
+	}
+	return true
+}
+
+
 SearchKey() {
 
 	PromptValue := IniRead(ConfigFile, "LatestPrompts", "Search", "")
@@ -7848,7 +7859,11 @@ SearchKey() {
 			IsPartiallyEqualSensitive := !IsSensitive && RegExMatch(tag, PromptValue)
 			IsPartiallyEqual := IsSensitive && RegExMatch(StrLower(tag), StrLower(PromptValue))
 
-			if (IsEqualSensitive || IsEqualNonSensitive) || (IsPartiallyEqual || IsPartiallyEqualSensitive) {
+			IsLowAccSensitive := !IsSensitive && HasAllCharacters(tag, PromptValue)
+			IsLowAcc := IsSensitive && HasAllCharacters(StrLower(tag), StrLower(PromptValue))
+
+
+			if (IsEqualSensitive || IsEqualNonSensitive) || (IsPartiallyEqual || IsPartiallyEqualSensitive) || (IsLowAcc || IsLowAccSensitive) {
 				if InputMode = "HTML" {
 					SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
 					SendText(SendValue)
