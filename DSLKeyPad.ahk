@@ -6016,6 +6016,26 @@ MapInsert(Characters,
 			recipe: "ть",
 			symbol: Chr(0x0463)
 		},
+		"cyr_c_let_yeru_back_yer", {
+			unicode: "{U+A650}", html: "&#42576;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftShift " [Ы]",
+			tags: ["древняя Ы", "Ы с твёрдым знаком", "cyrillic Yeru with back Yer"],
+			recipe: "ЪІ",
+			symbol: Chr(0xA650)
+		},
+		"cyr_s_let_yeru_back_yer", {
+			unicode: "{U+A651}", html: "&#42577;",
+			titlesAlt: True,
+			group: ["Cyrillic Letters"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftShift " [ы]",
+			tags: ["древняя ы", "ы с твёрдым знаком", "cyrillic yeru with back yer"],
+			recipe: "ъі",
+			symbol: Chr(0xA651)
+		},
 		;
 		;
 		"glagolitic_c_let_az", {
@@ -10515,7 +10535,7 @@ FastKeysList :=
 		"<^>!<+>+" SCKeys["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"], ["", ""], True),
 		;
 		"<^>!" SCKeys["S"], (K) => HandleFastKey(K, "section"),
-		"<^>!<+" SCKeys["S"], (K) => LangSeparatedKey(K, ["lat_c_lig_eszett", "lat_s_lig_eszett"], ["", ""], True),
+		"<^>!<+" SCKeys["S"], (K) => LangSeparatedKey(K, ["lat_c_lig_eszett", "lat_s_lig_eszett"], ["cyr_c_let_yeru_back_yer", "cyr_s_let_yeru_back_yer"], True),
 		;
 		"<!" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_acute", "lat_s_let_e_acute"], ["", ""], True),
 		"<^>!" SCKeys["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_breve", "lat_s_let_e_breve"], ["cyr_c_yus_big", "cyr_s_yus_big"], True),
