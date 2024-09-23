@@ -3213,7 +3213,7 @@ MapInsert(Characters,
 			unicode: "{U+00DE}", html: "&#222;", entity: "&THORN;",
 			titlesAlt: True,
 			group: ["Latin Extended"],
-			tags: ["!th", "прописной торн", "capital thorn"],
+			tags: ["!th", "прописной Торн", "capital Thorn"],
 			recipe: "TH",
 			symbol: Chr(0x00DE)
 		},
@@ -7056,6 +7056,7 @@ MapInsert(Characters,
 			group: ["Futhork Runes"],
 			alt_layout: RightShift " [A]",
 			tags: ["футорк эск", "futhork aesc", "futhork æsc"],
+			recipe: Chr(0x16A8) Chr(0x16D6),
 			symbol: Chr(0x16AB)
 		},
 		"futhork_cen", {
@@ -7717,6 +7718,11 @@ MapInsert(Characters,
 			CallChar("carriage_return", "html") .
 			CallChar("new_line", "html") .
 			CallChar("emsp", "html"),
+		uniSequence: [
+			CallChar("carriage_return", "unicode"),
+			CallChar("new_line", "unicode"),
+			CallChar("emsp", "unicode"),
+		],
 		group: ["Misc"],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "[Enter]",
@@ -9428,6 +9434,7 @@ Constructor() {
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Letters", , True, , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Futhork Runes", , True, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Glagolitic Letters", , True, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, , True)
@@ -9952,7 +9959,32 @@ SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, Previe
 
 				TargetGroup[PreviewTitle].Text := characterTitle
 
-				TargetGroup[PreviewUnicode].Text := SubStr(value.unicode, 2, StrLen(value.unicode) - 2)
+				if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+					TempValue := ""
+					TotalIndex := 0
+					for index in value.uniSequence {
+						TotalIndex++
+					}
+					CurrentIndex := 0
+					for unicode in value.uniSequence {
+						CurrentIndex++
+						TempValue .= SubStr(unicode, 2, StrLen(unicode) - 2)
+						TempValue .= CurrentIndex < TotalIndex ? " " : ""
+					}
+					TargetGroup[PreviewUnicode].Text := TempValue
+				} else {
+					TargetGroup[PreviewUnicode].Text := SubStr(value.unicode, 2, StrLen(value.unicode) - 2)
+				}
+
+				if (StrLen(TargetGroup[PreviewUnicode].Text) > 9
+					&& StrLen(TargetGroup[PreviewUnicode].Text) < 15) {
+					PreviewGroup.unicode.SetFont("s10")
+				} else if (StrLen(TargetGroup[PreviewUnicode].Text) > 14) {
+					PreviewGroup.unicode.SetFont("s9")
+				} else {
+					PreviewGroup.unicode.SetFont("s12")
+				}
+
 
 				if (HasProp(value, "entity")) {
 					TargetGroup[PreviewHTML].Text := value.html . " " . value.entity
@@ -10565,9 +10597,9 @@ FastKeysList :=
 		"<^>!" SCKeys["9"], (K) => HandleFastKey(K, "bracket_angle_math_left"),
 		"<^>!" SCKeys["0"], (K) => HandleFastKey(K, "bracket_angle_math_right"),
 		;
-		"<^>!" SCKeys["Enter"], (K) => HandleFastKey(K, "carriage_return", "new_line", "emsp"),
-		"<^>!<+" SCKeys["Enter"], (K) => SendPaste("+{Enter}", (K) => HandleFastKey(K, "emsp")),
-		"<^>!>+" SCKeys["Enter"], (K) => HandleFastKey(K, "carriage_return", "new_line", "emsp", "emsp"),
+		"<^>!" SCKeys["Enter"], (K) => HandleFastKey(K, "misc_crlf_emspace"),
+		"<^>!<+" SCKeys["Enter"], (K) => SendPaste("+{Enter}", (*) => HandleFastKey(K, "emsp")),
+		"<^>!>+" SCKeys["Enter"], (K) => HandleFastKey(K, "misc_crlf_emspace", "emsp"),
 		;
 		"<^>!" SCKeys["1"], (K) => HandleFastKey(K, "inverted_exclamation"),
 		"<^>!<+" SCKeys["1"], (K) => HandleFastKey(K, "double_exclamation_question"),
