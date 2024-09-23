@@ -10521,15 +10521,15 @@ FastKeysList :=
 		"<^>!<!" SCKeys["7"], (K) => HandleFastKey(K, "reversed_question"),
 		;
 		SCKeys["NumpadMult"], (K) => HandleFastKey(K, "multiplication"),
-		SCKeys["NumpadSub"], (K) => TimedKeyCombinations("NumpadSub", SCKeys["NumpadAdd"], (K) => HandleFastKey(K, "plusminus"), (K) => HandleFastKey(K, "minus")),
-		SCKeys["NumpadAdd"], (K) => TimedKeyCombinations("NumpadAdd", SCKeys["NumpadSub"], (K) => EmptyFunc()),
+		SCKeys["NumpadSub"], (K) => TimedKeyCombinations("NumpadSub", SCKeys["NumpadAdd"], (*) => HandleFastKey(K, "plusminus"), (*) => HandleFastKey(K, "minus")),
+		SCKeys["NumpadAdd"], (K) => TimedKeyCombinations("NumpadAdd", SCKeys["NumpadSub"], (*) => EmptyFunc()),
 		SCKeys["Equals"], (K) =>
 			TimedKeyCombinations("Equals",
 				[SCKeys["Slash"], SCKeys["Tilde"]],
-				[(K) => HandleFastKey(K, "noequals"), (K) => HandleFastKey(K, "almostequals")],
+				[(*) => HandleFastKey(K, "noequals"), (*) => HandleFastKey(K, "almostequals")],
 			),
-		SCKeys["Slash"], (K) => TimedKeyCombinations("Slash", SCKeys["Equals"], (K) => EmptyFunc()),
-		SCKeys["Tilde"], (K) => TimedKeyCombinations("Tilde", SCKeys["Equals"], (K) => EmptyFunc()),
+		SCKeys["Slash"], (K) => TimedKeyCombinations("Slash", SCKeys["Equals"], (*) => EmptyFunc()),
+		SCKeys["Tilde"], (K) => TimedKeyCombinations("Tilde", SCKeys["Equals"], (*) => EmptyFunc()),
 		;
 		"<^>!" SCKeys["LSquareBracket"], (K) => HandleFastKey(K, "bracket_square_left"),
 		"<^>!" SCKeys["RSquareBracket"], (K) => HandleFastKey(K, "bracket_square_right"),
