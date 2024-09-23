@@ -2090,7 +2090,8 @@ MapInsert(Characters,
 			group: [["Special Characters", "Special Fast Secondary"], "%"],
 			show_on_fast_keys: True,
 			alt_on_fast_keys: LeftShift " [5]",
-			symbol: Chr(0x2031)
+			symbol: Chr(0x2031),
+			symbolCustom: "s40"
 		},
 		"section", {
 			unicode: "{U+00A7}", html: "&#167;", entity: "&sect;",
@@ -7867,13 +7868,30 @@ CombineArrays(destinationArray, sourceArray*) {
 	}
 }
 
-
 HasAllCharacters(str, pattern) {
-	for char in StrSplit(pattern) {
-		if !InStr(str, char)
-			return false
+	WordBoundary := "[^a-zA-Zа-яА-ЯёЁ]"
+
+	if RegExMatch(pattern, "\s") {
+		WordSplit := StrSplit(pattern, " ")
+		for word in WordSplit {
+			if StrLen(word) < 3 {
+				pattern := "(^|" . WordBoundary . ")" . word . "($|" . WordBoundary . ")"
+				if !RegExMatch(str, pattern)
+					return false
+			} else {
+				if !InStr(str, word)
+					return false
+			}
+		}
+		return true
+	} else {
+		; Если нет пробела, ищем по символам
+		for char in StrSplit(pattern) {
+			if !InStr(str, char)
+				return false
+		}
+		return true
 	}
-	return true
 }
 
 
@@ -7897,6 +7915,47 @@ SearchKey() {
 		PromptValue := SubStr(PromptValue, 2)
 
 	Found := False
+
+	ProceedSearch(value) {
+		if InputMode = "HTML" {
+			SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
+			SendText(SendValue)
+		} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+			if IsObject(characterLaTeX) {
+				if LaTeXMode = "common"
+					SendText(characterLaTeX[1])
+				else if LaTeXMode = "math"
+					SendText(characterLaTeX[2])
+			} else {
+				SendText(characterLaTeX)
+			}
+		}
+		else {
+			if CombiningEnabled && HasProp(value, "combiningForm") {
+				if IsObject(value.combiningForm) {
+					TempValue := ""
+					for combining in value.combiningForm {
+						TempValue .= PasteUnicode(combining)
+					}
+					SendText(TempValue)
+				} else {
+					Send(value.combiningForm)
+				}
+			}
+			else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+				TempValue := ""
+				for unicode in value.uniSequence {
+					TempValue .= PasteUnicode(unicode)
+				}
+				SendText(TempValue)
+			} else {
+				Send(value.unicode)
+			}
+		}
+		IniWrite !IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
+		Found := True
+	}
+
 	for characterEntry, value in Characters {
 		if !HasProp(value, "tags") {
 			continue
@@ -7908,52 +7967,51 @@ SearchKey() {
 			IsEqualNonSensitive := IsSensitive && (StrLower(PromptValue) = StrLower(tag))
 			IsEqualSensitive := !IsSensitive && (PromptValue == tag)
 
-			IsPartiallyEqualSensitive := !IsSensitive && RegExMatch(tag, PromptValue)
-			IsPartiallyEqual := IsSensitive && RegExMatch(StrLower(tag), StrLower(PromptValue))
-
-			IsLowAccSensitive := !IsSensitive && HasAllCharacters(tag, PromptValue)
-			IsLowAcc := IsSensitive && HasAllCharacters(StrLower(tag), StrLower(PromptValue))
-
-
-			if (IsEqualSensitive || IsEqualNonSensitive) || (IsPartiallyEqual || IsPartiallyEqualSensitive) || (IsLowAcc || IsLowAccSensitive) {
-				if InputMode = "HTML" {
-					SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
-					SendText(SendValue)
-				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-					if IsObject(characterLaTeX) {
-						if LaTeXMode = "common"
-							SendText(characterLaTeX[1])
-						else if LaTeXMode = "math"
-							SendText(characterLaTeX[2])
-					} else {
-						SendText(characterLaTeX)
-					}
-				}
-				else {
-					if CombiningEnabled && HasProp(value, "combiningForm") {
-						if IsObject(value.combiningForm) {
-							TempValue := ""
-							for combining in value.combiningForm {
-								TempValue .= PasteUnicode(combining)
-							}
-							SendText(TempValue)
-						} else {
-							Send(value.combiningForm)
-						}
-					}
-					else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
-						TempValue := ""
-						for unicode in value.uniSequence {
-							TempValue .= PasteUnicode(unicode)
-						}
-						SendText(TempValue)
-					} else {
-						Send(value.unicode)
-					}
-				}
-				IniWrite !IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
-				Found := True
+			if (IsEqualSensitive || IsEqualNonSensitive) {
+				ProceedSearch(value)
 				break 2
+			}
+		}
+	}
+
+	if !Found {
+		for characterEntry, value in Characters {
+			if !HasProp(value, "tags") {
+				continue
+			}
+			characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
+			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
+
+			for _, tag in value.tags {
+
+				IsPartiallyEqualSensitive := !IsSensitive && RegExMatch(tag, PromptValue)
+				IsPartiallyEqual := IsSensitive && RegExMatch(StrLower(tag), StrLower(PromptValue))
+
+				if (IsPartiallyEqual || IsPartiallyEqualSensitive) {
+					ProceedSearch(value)
+					break 2
+				}
+			}
+		}
+	}
+
+	if !Found {
+		for characterEntry, value in Characters {
+			if !HasProp(value, "tags") {
+				continue
+			}
+			characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
+			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
+
+			for _, tag in value.tags {
+				IsLowAccSensitive := !IsSensitive && HasAllCharacters(tag, PromptValue)
+				IsLowAcc := IsSensitive && HasAllCharacters(StrLower(tag), StrLower(PromptValue))
+
+				if (IsLowAcc || IsLowAccSensitive) {
+					ProceedSearch(value)
+					break 2
+				}
+
 			}
 		}
 	}
