@@ -8054,10 +8054,11 @@ SearchKey(CycleSend := "") {
 		}
 	}
 
-	if InStr(PromptValue, ",") {
+	if InStr(PromptValue, ", ") && StrSplit(PromptValue, ", ")[2] != "" {
 		IniWrite !IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
 		WordSplit := StrSplit(PromptValue, ", ")
 		for word in WordSplit {
+			Sleep 10
 			SearchKey(word)
 		}
 	} else {
