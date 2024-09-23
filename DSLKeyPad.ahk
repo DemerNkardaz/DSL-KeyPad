@@ -158,6 +158,7 @@ EscapePressed := False
 FastKeysIsActive := False
 SkipGroupMessage := False
 GlagoFutharkActive := False
+CombiningEnabled := False
 InputMode := "Default"
 LaTeXMode := "common"
 
@@ -5945,6 +5946,8 @@ MapInsert(Characters,
 		;
 		"glagolitic_c_let_az", {
 			unicode: "{U+2C00}", html: "&#11264;",
+			combiningForm: "{U+1E000}",
+			combiningHTML: "&#122880;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "А"],
 			tags: ["прописной Аз глаголицы", "capital Az glagolitic"],
@@ -5952,6 +5955,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_az", {
 			unicode: "{U+2C30}", html: "&#11312;",
+			combiningForm: "{U+1E000}",
+			combiningHTML: "&#122880;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "а"],
 			tags: ["строчный аз глаголицы", "small az glagolitic"],
@@ -5959,6 +5964,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_buky", {
 			unicode: "{U+2C01}", html: "&#11265;",
+			combiningForm: "{U+1E001}",
+			combiningHTML: "&#122881;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Б"],
 			tags: ["прописной Буки глаголицы", "capital Buky glagolitic"],
@@ -5966,6 +5973,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_buky", {
 			unicode: "{U+2C31}", html: "&#11313;",
+			combiningForm: "{U+1E001}",
+			combiningHTML: "&#122881;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "б"],
 			tags: ["строчный буки глаголицы", "small buky glagolitic"],
@@ -5973,6 +5982,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_vede", {
 			unicode: "{U+2C02}", html: "&#11266;",
+			combiningForm: "{U+1E002}",
+			combiningHTML: "&#122882;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "В"],
 			tags: ["прописной Веди глаголицы", "capital Vede glagolitic"],
@@ -5980,6 +5991,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_vede", {
 			unicode: "{U+2C32}", html: "&#11314;",
+			combiningForm: "{U+1E002}",
+			combiningHTML: "&#122882;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "в"],
 			tags: ["строчный веди глаголицы", "small vede glagolitic"],
@@ -5987,6 +6000,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_glagoli", {
 			unicode: "{U+2C03}", html: "&#11267;",
+			combiningForm: "{U+1E003}",
+			combiningHTML: "&#122883;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Г"],
 			tags: ["прописной Глаголи глаголицы", "capital Glagoli glagolitic"],
@@ -5994,6 +6009,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_glagoli", {
 			unicode: "{U+2C33}", html: "&#11315;",
+			combiningForm: "{U+1E003}",
+			combiningHTML: "&#122883;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "г"],
 			tags: ["строчный глаголи глаголицы", "small glagoli glagolitic"],
@@ -6001,6 +6018,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_dobro", {
 			unicode: "{U+2C04}", html: "&#11268;",
+			combiningForm: "{U+1E004}",
+			combiningHTML: "&#122884;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Д"],
 			tags: ["прописной Добро глаголицы", "capital Dobro glagolitic"],
@@ -6008,6 +6027,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_dobro", {
 			unicode: "{U+2C34}", html: "&#11316;",
+			combiningForm: "{U+1E004}",
+			combiningHTML: "&#122884;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "д"],
 			tags: ["строчный добро глаголицы", "small dobro glagolitic"],
@@ -6015,6 +6036,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_yestu", {
 			unicode: "{U+2C05}", html: "&#11269;",
+			combiningForm: "{U+1E005}",
+			combiningHTML: "&#122885;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Е"],
 			tags: ["прописной Есть глаголицы", "capital Yestu glagolitic"],
@@ -6022,6 +6045,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_yestu", {
 			unicode: "{U+2C35}", html: "&#11317;",
+			combiningForm: "{U+1E005}",
+			combiningHTML: "&#122885;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "е"],
 			tags: ["строчный есть глаголицы", "small yestu glagolitic"],
@@ -6029,6 +6054,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_zhivete", {
 			unicode: "{U+2C06}", html: "&#11270;",
+			combiningForm: "{U+1E006}",
+			combiningHTML: "&#122886;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ж"],
 			tags: ["прописной Живете глаголицы", "capital Zhivete glagolitic"],
@@ -6036,6 +6063,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_zhivete", {
 			unicode: "{U+2C36}", html: "&#11318;",
+			combiningForm: "{U+1E006}",
+			combiningHTML: "&#122886;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ж"],
 			tags: ["строчный живете глаголицы", "small zhivete glagolitic"],
@@ -6059,6 +6088,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_zemlja", {
 			unicode: "{U+2C08}", html: "&#11272;",
+			combiningForm: "{U+1E008}",
+			combiningHTML: "&#122888;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "З"],
 			tags: ["прописная Земля глаголицы", "capital Zemlja glagolitic"],
@@ -6066,6 +6097,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_zemlja", {
 			unicode: "{U+2C38}", html: "&#11320;",
+			combiningForm: "{U+1E008}",
+			combiningHTML: "&#122888;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "з"],
 			tags: ["строчная земля глаголицы", "small zemlja glagolitic"],
@@ -6073,6 +6106,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_initial_izhe", {
 			unicode: "{U+2C0A}", html: "&#11274;",
+			combiningForm: "{U+1E00A}",
+			combiningHTML: "&#122889;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: RightAlt " [И]",
@@ -6081,6 +6116,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_initial_izhe", {
 			unicode: "{U+2C3A}", html: "&#11322;",
+			combiningForm: "{U+1E00A}",
+			combiningHTML: "&#122890;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: RightAlt " [и]",
@@ -6089,6 +6126,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_izhe", {
 			unicode: "{U+2C09}", html: "&#11273;",
+			combiningForm: "{U+1E009}",
+			combiningHTML: "&#122889;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: LeftShift " [И], [Й]",
@@ -6097,6 +6136,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_izhe", {
 			unicode: "{U+2C39}", html: "&#11321;",
+			combiningForm: "{U+1E009}",
+			combiningHTML: "&#122889;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: LeftShift " [и], [й]",
@@ -6105,6 +6146,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_i", {
 			unicode: "{U+2C0B}", html: "&#11275;",
+			combiningForm: "{U+1E00B}",
+			combiningHTML: "&#122891;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "И"],
 			tags: ["прописная Ие глаголицы", "capital I glagolitic"],
@@ -6112,6 +6155,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_i", {
 			unicode: "{U+2C3B}", html: "&#11323;",
+			combiningForm: "{U+1E00B}",
+			combiningHTML: "&#122891;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "и"],
 			tags: ["строчная и глаголицы", "small i glagolitic"],
@@ -6119,6 +6164,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_djervi", {
 			unicode: "{U+2C0C}", html: "&#11276;",
+			combiningForm: "{U+1E00C}",
+			combiningHTML: "&#122892;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: RightAlt " [Ж]",
@@ -6127,6 +6174,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_djervi", {
 			unicode: "{U+2C3C}", html: "&#11324;",
+			combiningForm: "{U+1E00C}",
+			combiningHTML: "&#122892;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: RightAlt " [ж]",
@@ -6135,6 +6184,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_kako", {
 			unicode: "{U+2C0D}", html: "&#11277;",
+			combiningForm: "{U+1E00D}",
+			combiningHTML: "&#122893;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "К"],
 			tags: ["прописная Како глаголицы", "capital Kako glagolitic"],
@@ -6142,6 +6193,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_kako", {
 			unicode: "{U+2C3D}", html: "&#11325;",
+			combiningForm: "{U+1E00D}",
+			combiningHTML: "&#122893;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "к"],
 			tags: ["строчная како глаголицы", "small kako glagolitic"],
@@ -6149,6 +6202,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_ljudije", {
 			unicode: "{U+2C0E}", html: "&#11278;",
+			combiningForm: "{U+1E00E}",
+			combiningHTML: "&#122894;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Л"],
 			tags: ["прописная Люди глаголицы", "capital Ljudije glagolitic"],
@@ -6156,6 +6211,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_ljudije", {
 			unicode: "{U+2C3E}", html: "&#11326;",
+			combiningForm: "{U+1E00E}",
+			combiningHTML: "&#122894;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "л"],
 			tags: ["строчная люди глаголицы", "small ljudije glagolitic"],
@@ -6163,6 +6220,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_myslite", {
 			unicode: "{U+2C0F}", html: "&#11279;",
+			combiningForm: "{U+1E00F}",
+			combiningHTML: "&#122895;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "М"],
 			tags: ["прописная Мыслете глаголицы", "capital Myslite glagolitic"],
@@ -6170,6 +6229,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_myslite", {
 			unicode: "{U+2C3F}", html: "&#11327;",
+			combiningForm: "{U+1E00F}",
+			combiningHTML: "&#122895;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "м"],
 			tags: ["строчная мыслете глаголицы", "small myslite glagolitic"],
@@ -6177,6 +6238,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_nashi", {
 			unicode: "{U+2C10}", html: "&#11280;",
+			combiningForm: "{U+1E010}",
+			combiningHTML: "&#122896;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Н"],
 			tags: ["прописная Наш глаголицы", "capital Nashi glagolitic"],
@@ -6184,6 +6247,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_nashi", {
 			unicode: "{U+2C40}", html: "&#11328;",
+			combiningForm: "{U+1E010}",
+			combiningHTML: "&#122896;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "н"],
 			tags: ["строчная наш глаголицы", "small nashi glagolitic"],
@@ -6191,6 +6256,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_onu", {
 			unicode: "{U+2C11}", html: "&#11281;",
+			combiningForm: "{U+1E011}",
+			combiningHTML: "&#122897;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "О"],
 			tags: ["прописная Он глаголицы", "capital Onu glagolitic"],
@@ -6198,6 +6265,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_onu", {
 			unicode: "{U+2C41}", html: "&#11329;",
+			combiningForm: "{U+1E011}",
+			combiningHTML: "&#122897;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "о"],
 			tags: ["строчная он глаголицы", "small onu glagolitic"],
@@ -6205,6 +6274,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_pokoji", {
 			unicode: "{U+2C12}", html: "&#11282;",
+			combiningForm: "{U+1E012}",
+			combiningHTML: "&#122898;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "П"],
 			tags: ["прописная Покой глаголицы", "capital Pokoji glagolitic"],
@@ -6212,6 +6283,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_pokoji", {
 			unicode: "{U+2C42}", html: "&#11330;",
+			combiningForm: "{U+1E012}",
+			combiningHTML: "&#122898;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "п"],
 			tags: ["строчная покой глаголицы", "small pokoji glagolitic"],
@@ -6219,6 +6292,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_ritsi", {
 			unicode: "{U+2C13}", html: "&#11283;",
+			combiningForm: "{U+1E013}",
+			combiningHTML: "&#122899;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Р"],
 			tags: ["прописная Рцы глаголицы", "capital Ritsi glagolitic"],
@@ -6226,6 +6301,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_ritsi", {
 			unicode: "{U+2C43}", html: "&#11331;",
+			combiningForm: "{U+1E013}",
+			combiningHTML: "&#122899;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "р"],
 			tags: ["строчная рцы глаголицы", "small ritsi glagolitic"],
@@ -6233,6 +6310,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_slovo", {
 			unicode: "{U+2C14}", html: "&#11284;",
+			combiningForm: "{U+1E014}",
+			combiningHTML: "&#122900;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "С"],
 			tags: ["прописная Слово глаголицы", "capital Slovo glagolitic"],
@@ -6240,6 +6319,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_slovo", {
 			unicode: "{U+2C44}", html: "&#11332;",
+			combiningForm: "{U+1E014}",
+			combiningHTML: "&#122900;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "с"],
 			tags: ["строчная слово глаголицы", "small slovo glagolitic"],
@@ -6247,6 +6328,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_tvrido", {
 			unicode: "{U+2C15}", html: "&#11285;",
+			combiningForm: "{U+1E015}",
+			combiningHTML: "&#122901;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Т"],
 			tags: ["прописная Твердо глаголицы", "capital Tvrido glagolitic"],
@@ -6254,6 +6337,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_tvrido", {
 			unicode: "{U+2C45}", html: "&#11333;",
+			combiningForm: "{U+1E015}",
+			combiningHTML: "&#122901;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "т"],
 			tags: ["строчная твердо глаголицы", "small tvrido glagolitic"],
@@ -6277,6 +6362,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_uku", {
 			unicode: "{U+2C16}", html: "&#11286;",
+			combiningForm: "{U+1E016}",
+			combiningHTML: "&#122902;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "У"],
 			tags: ["прописная Ук глаголицы", "capital Uku glagolitic"],
@@ -6284,6 +6371,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_uku", {
 			unicode: "{U+2C46}", html: "&#11334;",
+			combiningForm: "{U+1E016}",
+			combiningHTML: "&#122902;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "у"],
 			tags: ["строчная ук глаголицы", "small uku glagolitic"],
@@ -6291,6 +6380,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_fritu", {
 			unicode: "{U+2C17}", html: "&#11287;",
+			combiningForm: "{U+1E017}",
+			combiningHTML: "&#122903;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ф"],
 			tags: ["прописной Ферт глаголицы", "capital Fritu glagolitic"],
@@ -6298,6 +6389,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_fritu", {
 			unicode: "{U+2C47}", html: "&#11335;",
+			combiningForm: "{U+1E017}",
+			combiningHTML: "&#122903;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ф"],
 			tags: ["строчный ферт глаголицы", "small fritu glagolitic"],
@@ -6305,6 +6398,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_heru", {
 			unicode: "{U+2C18}", html: "&#11288;",
+			combiningForm: "{U+1E018}",
+			combiningHTML: "&#122904;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Х"],
 			tags: ["прописной Хер глаголицы", "capital Heru glagolitic"],
@@ -6312,6 +6407,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_heru", {
 			unicode: "{U+2C48}", html: "&#11336;",
+			combiningForm: "{U+1E018}",
+			combiningHTML: "&#122904;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "х"],
 			tags: ["строчный хер глаголицы", "small heru glagolitic"],
@@ -6351,6 +6448,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_tsi", {
 			unicode: "{U+2C1C}", html: "&#11292;",
+			combiningForm: "{U+1E01C}",
+			combiningHTML: "&#122908;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ц"],
 			tags: ["прописная Цы глаголицы", "capital Tsi glagolitic"],
@@ -6358,6 +6457,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_tsi", {
 			unicode: "{U+2C4C}", html: "&#11340;",
+			combiningForm: "{U+1E01C}",
+			combiningHTML: "&#122908;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ц"],
 			tags: ["строчная цы глаголицы", "small tsi glagolitic"],
@@ -6365,6 +6466,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_chrivi", {
 			unicode: "{U+2C1D}", html: "&#11293;",
+			combiningForm: "{U+1E01D}",
+			combiningHTML: "&#122909;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ч"],
 			tags: ["прописная Червь глаголицы", "capital Chrivi glagolitic"],
@@ -6372,6 +6475,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_chrivi", {
 			unicode: "{U+2C4D}", html: "&#11341;",
+			combiningForm: "{U+1E01D}",
+			combiningHTML: "&#122909;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ч"],
 			tags: ["строчная червь глаголицы", "small chrivi glagolitic"],
@@ -6379,6 +6484,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_sha", {
 			unicode: "{U+2C1E}", html: "&#11294;",
+			combiningForm: "{U+1E01E}",
+			combiningHTML: "&#122910;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ш"],
 			tags: ["прописная Ша глаголицы", "capital Sha glagolitic"],
@@ -6386,6 +6493,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_sha", {
 			unicode: "{U+2C4E}", html: "&#11342;",
+			combiningForm: "{U+1E01E}",
+			combiningHTML: "&#122910;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ш"],
 			tags: ["строчная ша глаголицы", "small sha glagolitic"],
@@ -6393,6 +6502,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_shta", {
 			unicode: "{U+2C1B}", html: "&#11291;",
+			combiningForm: "{U+1E01B}",
+			combiningHTML: "&#122907;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Щ"],
 			tags: ["прописная Шта глаголицы", "capital Shta glagolitic"],
@@ -6400,6 +6511,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_shta", {
 			unicode: "{U+2C4B}", html: "&#11339;",
+			combiningForm: "{U+1E01B}",
+			combiningHTML: "&#122907;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "щ"],
 			tags: ["строчная шта глаголицы", "small shta glagolitic"],
@@ -6407,6 +6520,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_yeru", {
 			unicode: "{U+2C1F}", html: "&#11295;",
+			combiningForm: "{U+1E01F}",
+			combiningHTML: "&#122911;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ъ"],
 			tags: ["прописный Ер глаголицы", "capital Yeru glagolitic"],
@@ -6414,6 +6529,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_yeru", {
 			unicode: "{U+2C4F}", html: "&#11343;",
+			combiningForm: "{U+1E01F}",
+			combiningHTML: "&#122911;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ъ"],
 			tags: ["строчный ер глаголицы", "small yeru glagolitic"],
@@ -6422,6 +6539,8 @@ MapInsert(Characters,
 		"glagolitic_c_let_yery", {
 			unicode: "{U+2C1F}", html: "&#11295;&#11274;",
 			uniSequence: ["{U+2C1F}", "{U+2C0A}"],
+			combiningForm: ["{U+1E01F}", "{U+1E00A}"],
+			combiningHTML: "&#122911;&#122889;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ы"],
 			tags: ["прописные Еры глаголицы", "capital Yery glagolitic"],
@@ -6431,6 +6550,8 @@ MapInsert(Characters,
 		"glagolitic_s_let_yery", {
 			unicode: "{U+2C4F}", html: "&#11343;&#11322;",
 			uniSequence: ["{U+2C4F}", "{U+2C3A}"],
+			combiningForm: ["{U+1E01F}", "{U+1E00A}"],
+			combiningHTML: "&#122911;&#122889;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ы"],
 			tags: ["строчные еры глаголицы", "small yery glagolitic"],
@@ -6439,6 +6560,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_yeri", {
 			unicode: "{U+2C20}", html: "&#11296;",
+			combiningForm: "{U+1E020}",
+			combiningHTML: "&#122912;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ь"],
 			tags: ["прописный Ерь глаголицы", "capital Yeri glagolitic"],
@@ -6453,6 +6576,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_yati", {
 			unicode: "{U+2C21}", html: "&#11297;",
+			combiningForm: "{U+1E021}",
+			combiningHTML: "&#122913;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Я"],
 			tags: ["прописный Ять глаголицы", "capital Yati glagolitic"],
@@ -6460,6 +6585,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_yati", {
 			unicode: "{U+2C51}", html: "&#11345;",
+			combiningForm: "{U+1E021}",
+			combiningHTML: "&#122913;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "я"],
 			tags: ["строчный ять глаголицы", "small yati glagolitic"],
@@ -6467,6 +6594,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_yo", {
 			unicode: "{U+2C26}", html: "&#11302;",
+			combiningForm: "{U+1E026}",
+			combiningHTML: "&#122918;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ё"],
 			tags: ["прописная Ё глаголицы", "capital Yo glagolitic"],
@@ -6474,6 +6603,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_yo", {
 			unicode: "{U+2C56}", html: "&#11350;",
+			combiningForm: "{U+1E026}",
+			combiningHTML: "&#122918;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ё"],
 			tags: ["строчная ё глаголицы", "small yo glagolitic"],
@@ -6497,6 +6628,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_yu", {
 			unicode: "{U+2C23}", html: "&#11299;",
+			combiningForm: "{U+1E023}",
+			combiningHTML: "&#122915;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ю"],
 			tags: ["прописная Ю глаголицы", "capital Yu glagolitic"],
@@ -6504,6 +6637,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_yu", {
 			unicode: "{U+2C53}", html: "&#11347;",
+			combiningForm: "{U+1E023}",
+			combiningHTML: "&#122915;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ю"],
 			tags: ["строчная ю глаголицы", "small yu glagolitic"],
@@ -6511,6 +6646,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_small_yus", {
 			unicode: "{U+2C24}", html: "&#11300;",
+			combiningForm: "{U+1E024}",
+			combiningHTML: "&#122916;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Э"],
 			tags: ["прописной малый Юс глаголицы", "capital small Yus glagolitic"],
@@ -6518,6 +6655,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_small_yus", {
 			unicode: "{U+2C54}", html: "&#11348;",
+			combiningForm: "{U+1E024}",
+			combiningHTML: "&#122916;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "э"],
 			tags: ["прописной малый юс глаголицы", "capital small yus glagolitic"],
@@ -6525,6 +6664,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_small_yus_iotified", {
 			unicode: "{U+2C27}", html: "&#11303;",
+			combiningForm: "{U+1E027}",
+			combiningHTML: "&#122919;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			tags: ["прописной малый Юс йотированный глаголицы", "capital small Yus iotified glagolitic"],
@@ -6534,6 +6675,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_small_yus_iotified", {
 			unicode: "{U+2C57}", html: "&#11351;",
+			combiningForm: "{U+1E027}",
+			combiningHTML: "&#122919;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			tags: ["прописной малый юс йотированный глаголицы", "capital small yus iotified glagolitic"],
@@ -6543,6 +6686,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_big_yus", {
 			unicode: "{U+2C28}", html: "&#11304;",
+			combiningForm: "{U+1E028}",
+			combiningHTML: "&#122920;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			tags: ["прописной большой Юс глаголицы", "capital big Yus glagolitic"],
@@ -6552,6 +6697,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_big_yus", {
 			unicode: "{U+2C58}", html: "&#11352;",
+			combiningForm: "{U+1E028}",
+			combiningHTML: "&#122920;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			tags: ["прописной большой юс глаголицы", "capital big yus glagolitic"],
@@ -6561,6 +6708,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_big_yus_iotified", {
 			unicode: "{U+2C29}", html: "&#11305;",
+			combiningForm: "{U+1E029}",
+			combiningHTML: "&#122921;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			tags: ["прописной большой Юс йотированный глаголицы", "capital big Yus iotified glagolitic"],
@@ -6570,6 +6719,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_big_yus_iotified", {
 			unicode: "{U+2C59}", html: "&#11353;",
+			combiningForm: "{U+1E029}",
+			combiningHTML: "&#122921;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			tags: ["прописной большой юс йотированный глаголицы", "capital big yus iotified glagolitic"],
@@ -6579,6 +6730,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_c_let_fita", {
 			unicode: "{U+2C2A}", html: "&#11306;",
+			combiningForm: "{U+1E02A}",
+			combiningHTML: "&#122922;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: RightAlt " [Ф]",
@@ -6587,6 +6740,8 @@ MapInsert(Characters,
 		},
 		"glagolitic_s_let_fita", {
 			unicode: "{U+2C5A}", html: "&#11354;",
+			combiningForm: "{U+1E02A}",
+			combiningHTML: "&#122922;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters"],
 			alt_layout: RightAlt " [ф]",
@@ -7563,7 +7718,18 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 							}
 						}
 						else {
-							if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+							if CombiningEnabled && HasProp(value, "combiningForm") {
+								if IsObject(value.combiningForm) {
+									TempValue := ""
+									for combining in value.combiningForm {
+										TempValue .= PasteUnicode(combining)
+									}
+									SendText(TempValue)
+								} else {
+									Send(value.combiningForm)
+								}
+							}
+							else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
 								TempValue := ""
 								for unicode in value.uniSequence {
 									TempValue .= PasteUnicode(unicode)
@@ -7591,7 +7757,18 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 						}
 					}
 					else {
-						if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+						if CombiningEnabled && HasProp(value, "combiningForm") {
+							if IsObject(value.combiningForm) {
+								TempValue := ""
+								for combining in value.combiningForm {
+									TempValue .= PasteUnicode(combining)
+								}
+								SendText(TempValue)
+							} else {
+								Send(value.combiningForm)
+							}
+						}
+						else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
 							TempValue := ""
 							for unicode in value.uniSequence {
 								TempValue .= PasteUnicode(unicode)
@@ -7649,7 +7826,8 @@ SearchKey() {
 
 			if (IsEqualSensitive || IsEqualNonSensitive) {
 				if InputMode = "HTML" {
-					SendText(characterEntity)
+					SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
+					SendText(SendValue)
 				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 					if IsObject(characterLaTeX) {
 						if LaTeXMode = "common"
@@ -7661,7 +7839,18 @@ SearchKey() {
 					}
 				}
 				else {
-					if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+					if CombiningEnabled && HasProp(value, "combiningForm") {
+						if IsObject(value.combiningForm) {
+							TempValue := ""
+							for combining in value.combiningForm {
+								TempValue .= PasteUnicode(combining)
+							}
+							SendText(TempValue)
+						} else {
+							Send(value.combiningForm)
+						}
+					}
+					else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
 						TempValue := ""
 						for unicode in value.uniSequence {
 							TempValue .= PasteUnicode(unicode)
@@ -8898,8 +9087,8 @@ Constructor() {
 
 
 	GroupBoxDiacritic := {
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
+		group: DSLPadGUI.Add("GroupBox", "vDiacriticGroup " . CommonInfoBox.body, CommonInfoBox.bodyText),
+		groupFrame: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vDiacriticSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
 		title: DSLPadGUI.Add("Text", "vDiacriticTitle " . commonInfoBox.title, CommonInfoBox.titleText),
 		;
@@ -8957,8 +9146,8 @@ Constructor() {
 	SpacesFilter.OnEvent("Change", (*) => FilterListView(DSLPadGUI, "SpaceFilter", SpacesLV, DSLContent["BindList"].TabSpaces))
 
 	GroupBoxSpaces := {
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
+		group: DSLPadGUI.Add("GroupBox", "vSpacesGroup " . CommonInfoBox.body, CommonInfoBox.bodyText),
+		groupFrame: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vSpacesSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
 		title: DSLPadGUI.Add("Text", "vSpacesTitle " . commonInfoBox.title, CommonInfoBox.titleText),
 		;
@@ -9016,6 +9205,7 @@ Constructor() {
 	Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
 	Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
 	Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
+	Command_combining := CommandsTree.Add(ReadLocale("func_label_combining"))
 	Command_glagokeys := CommandsTree.Add(ReadLocale("func_label_glagokeys"))
 	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
 	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
@@ -9114,8 +9304,8 @@ Constructor() {
 
 
 	GroupBoxLigatures := {
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
+		group: DSLPadGUI.Add("GroupBox", "vLigaturesGroup " . CommonInfoBox.body, CommonInfoBox.bodyText),
+		groupFrame: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vLigaturesSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
 		title: DSLPadGUI.Add("Text", "vLigaturesTitle " . commonInfoBox.title, CommonInfoBox.titleText),
 		;
@@ -9200,8 +9390,8 @@ Constructor() {
 
 
 	GroupBoxFastKeys := {
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
+		group: DSLPadGUI.Add("GroupBox", "vFastKeysGroup " . CommonInfoBox.body, CommonInfoBox.bodyText),
+		groupFrame: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vFastKeysSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
 		title: DSLPadGUI.Add("Text", "vFastKeysTitle " . commonInfoBox.title, CommonInfoBox.titleText),
 		;
@@ -9266,8 +9456,8 @@ Constructor() {
 
 
 	GroupBoxGlagoKeys := {
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.body, CommonInfoBox.bodyText),
-		group: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
+		group: DSLPadGUI.Add("GroupBox", "vGlagoKeysGroup " . CommonInfoBox.body, CommonInfoBox.bodyText),
+		groupFrame: DSLPadGUI.Add("GroupBox", CommonInfoBox.previewFrame),
 		preview: DSLPadGUI.Add("Edit", "vGlagoKeysSymbol " . commonInfoBox.preview, CommonInfoBox.previewText),
 		title: DSLPadGUI.Add("Text", "vGlagoKeysTitle " . commonInfoBox.title, CommonInfoBox.titleText),
 		;
@@ -9388,6 +9578,7 @@ Constructor() {
 			"DiacriticUnicode",
 			"DiacriticHTML",
 			"DiacriticTags",
+			"DiacriticGroup",
 			GroupBoxDiacritic]
 		))
 	SpacesLV.OnEvent("ItemFocus", (LV, RowNumber) =>
@@ -9400,6 +9591,7 @@ Constructor() {
 			"SpacesUnicode",
 			"SpacesHTML",
 			"SpacesTags",
+			"SpacesGroup",
 			GroupBoxSpaces]
 		))
 	FastKeysLV.OnEvent("ItemFocus", (LV, RowNumber) =>
@@ -9412,6 +9604,7 @@ Constructor() {
 			"FastKeysUnicode",
 			"FastKeysHTML",
 			"FastKeysTags",
+			"FastKeysGroup",
 			GroupBoxFastKeys]
 		))
 	GlagoLV.OnEvent("ItemFocus", (LV, RowNumber) =>
@@ -9424,6 +9617,7 @@ Constructor() {
 			"GlagoKeysUnicode",
 			"GlagoKeysHTML",
 			"GlagoKeysTags",
+			"GlagoKeysGroup",
 			GroupBoxGlagoKeys]
 		))
 	LigaturesLV.OnEvent("ItemFocus", (LV, RowNumber) =>
@@ -9436,6 +9630,7 @@ Constructor() {
 			"LigaturesUnicode",
 			"LigaturesHTML",
 			"LigaturesTags",
+			"LigaturesGroup",
 			GroupBoxLigatures]
 		))
 
@@ -9448,11 +9643,11 @@ Constructor() {
 		"GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters"]),
 	)
 
-	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", GroupBoxDiacritic)
-	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", GroupBoxSpaces)
-	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", GroupBoxFastKeys)
-	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", GroupBoxLigatures)
-	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][3], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", GroupBoxGlagoKeys)
+	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", "DiacriticGroup", GroupBoxDiacritic)
+	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", "SpacesGroup", GroupBoxSpaces)
+	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", "FastKeysGroup", GroupBoxFastKeys)
+	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", "LigaturesGroup", GroupBoxLigatures)
+	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][3], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", "GlagoKeysGroup", GroupBoxGlagoKeys)
 
 	DSLPadGUI.Title := DSLPadTitle
 
@@ -9547,7 +9742,7 @@ GetRandomByGroups(GroupNames) {
 }
 
 
-SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroup) {
+SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup) {
 	LanguageCode := GetLanguageCode()
 
 	if (UnicodeKey != "") {
@@ -9646,6 +9841,11 @@ SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, Previe
 				}
 				TargetGroup[PreviewTags].Text := EntryString . GetChar("ensp") . TagsString
 
+				if (HasProp(value, "combiningForm")) {
+					TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_combining")
+				} else {
+					TargetGroup[PreviewGroupTitle].Text := ReadLocale("character")
+				}
 
 				if (HasProp(value, "altcode")) {
 					TargetGroup[PreviewAlt].Text := value.altcode
@@ -9718,6 +9918,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_num_superscript",
 		"func_label_num_roman",
 		"func_label_fastkeys",
+		"func_label_combining",
 		"func_label_glagokeys",
 		"func_label_inputtoggle",
 		"func_label_notifs",
@@ -9744,7 +9945,7 @@ LV_CharacterDetails(LV, RowNumber, SetupArray) {
 		SetupArray[1], SetupArray[2], SetupArray[3],
 		SetupArray[4], SetupArray[5], SetupArray[6],
 		SetupArray[7], SetupArray[8], SetupArray[9],
-		SetupArray[10])
+		SetupArray[10], SetupArray[11])
 }
 LV_OpenUnicodeWebsite(LV, RowNumber) {
 	LanguageCode := GetLanguageCode()
@@ -9916,7 +10117,7 @@ HandleFastKey(CharacterNames*) {
 					characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
 					if InputMode = "HTML" {
-						Output .= characterEntity
+						Output .= CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
 					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 						if IsObject(characterLaTeX) {
 							if LaTeXMode = "common"
@@ -9928,7 +10129,18 @@ HandleFastKey(CharacterNames*) {
 						}
 					}
 					else {
-						if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+						if CombiningEnabled && HasProp(value, "combiningForm") {
+							if IsObject(value.combiningForm) {
+								TempValue := ""
+								for combining in value.combiningForm {
+									TempValue .= PasteUnicode(combining)
+								}
+								SendText(TempValue)
+							} else {
+								Send(value.combiningForm)
+							}
+						}
+						else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
 							for unicode in value.uniSequence {
 								Output .= PasteUnicode(unicode)
 							}
@@ -10203,6 +10415,7 @@ FastKeysList :=
 		SCKeys["Tilde"], (*) => TimedKeyCombinations("Tilde", SCKeys["Equals"], (*) => EmptyFunc()),
 		;
 		"RAlt", (*) => ProceedCompose(),
+		"RCtrl", (*) => ProceedCombining(),
 	]
 
 RecoveryKey(KeySC, Shift := False) {
@@ -10263,6 +10476,7 @@ TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False) 
 RAltsCount := 0
 RAltsTimerEnds := False
 RAltsTimer := ""
+
 ProceedCompose() {
 	global RAltsTimerEnds, RAltsCount
 
@@ -10288,12 +10502,49 @@ RAltsEndingTimer() {
 
 	return SetTimer(RAltsSetStats, -300)
 }
+
 RAltsSetStats() {
 	global RAltsCount, RAltsTimerEnds
 	RAltsCount := 0
 	RAltsTimerEnds := True
 	Sleep 100
 	RAltsTimerEnds := False
+}
+
+RCtrlCount := 0
+RCtrlTimerEnds := False
+RCtrlTimer := ""
+
+ProceedCombining() {
+	global RCtrlTimerEnds, RCtrlCount, CombiningEnabled
+
+	if (RCtrlTimerEnds) {
+		return
+	}
+
+	if RCtrlCount = 1 {
+		RCtrlCount := 0
+		CombiningEnabled := !CombiningEnabled ? True : False
+		if CombiningEnabled {
+			ShowInfoMessage("message_combining", , , SkipGroupMessage, True)
+		} else {
+			ShowInfoMessage("message_combining_disabled", , , SkipGroupMessage, True)
+		}
+		return
+	} else {
+		RCtrlCount++
+		RCtrlEndingTimer()
+	}
+}
+
+RCtrlEndingTimer() {
+	global RCtrlTimer
+	if (RCtrlTimer != "") {
+		SetTimer(RAltsSetStats, 0)
+		RCtrlTimer := ""
+	}
+
+	return SetTimer(RAltsSetStats, -300)
 }
 
 RegisterHotKeys(FastKeysList)
