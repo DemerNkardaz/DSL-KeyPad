@@ -860,7 +860,18 @@ MapInsert(MapObj, Pairs*) {
 
 GetMapCount(MapObj, SortGroups := "") {
 	if !IsObject(SortGroups) {
-		return MapObj.Count
+		keyCount := MapObj.Count
+
+		for characterEntry, value in MapObj {
+			if HasProp(value, "calcOff") {
+				keyCount--
+			}
+			if HasProp(value, "combiningForm") {
+				keyCount++
+			}
+		}
+
+		return keyCount
 	} else {
 		keyCount := 0
 		for characterEntry, value in MapObj {
@@ -868,28 +879,38 @@ GetMapCount(MapObj, SortGroups := "") {
 				groupsEntry := value.group[1]
 
 				if IsObject(groupsEntry) {
-					for subGroup in groupsEntry {
-						if IsObject(subGroup) {
-							for nestedGroup in subGroup {
-								if (nestedGroup = group) {
-									keyCount++
-									break
-								}
-							}
-						} else if (subGroup = group) {
-							keyCount++
-							break
-						}
+					if CheckGroupMatch(groupsEntry, group) {
+						keyCount++
+						break
 					}
 				} else if (groupsEntry = group) {
 					keyCount++
 					break
 				}
 			}
-		}
 
+			if HasProp(value, "combiningForm") {
+				keyCount++
+			}
+		}
 		return keyCount
 	}
+}
+
+
+CheckGroupMatch(groupsEntry, targetGroup) {
+	for subGroup in groupsEntry {
+		if IsObject(subGroup) {
+			for nestedGroup in subGroup {
+				if (nestedGroup = targetGroup) {
+					return true
+				}
+			}
+		} else if (subGroup = targetGroup) {
+			return true
+		}
+	}
+	return false
 }
 
 
@@ -7611,31 +7632,31 @@ MapInsert(Characters,
 )
 
 MapInsert(Characters,
-	"kkey_0", { unicode: "{U+0030}", html: "&#48;", sup: "num_sup_0", sub: "num_sub_0", symbol: "0" },
-		"kkey_1", { unicode: "{U+0031}", html: "&#49;", sup: "num_sup_1", sub: "num_sub_1", symbol: "1" },
-		"kkey_2", { unicode: "{U+0032}", html: "&#50;", sup: "num_sup_2", sub: "num_sub_2", symbol: "2" },
-		"kkey_3", { unicode: "{U+0033}", html: "&#51;", sup: "num_sup_3", sub: "num_sub_3", symbol: "3" },
-		"kkey_4", { unicode: "{U+0034}", html: "&#52;", sup: "num_sup_4", sub: "num_sub_4", symbol: "4" },
-		"kkey_5", { unicode: "{U+0035}", html: "&#53;", sup: "num_sup_5", sub: "num_sub_5", symbol: "5" },
-		"kkey_6", { unicode: "{U+0036}", html: "&#54;", sup: "num_sup_6", sub: "num_sub_6", symbol: "6" },
-		"kkey_7", { unicode: "{U+0037}", html: "&#55;", sup: "num_sup_7", sub: "num_sub_7", symbol: "7" },
-		"kkey_8", { unicode: "{U+0038}", html: "&#56;", sup: "num_sup_8", sub: "num_sub_8", symbol: "8" },
-		"kkey_9", { unicode: "{U+0039}", html: "&#57;", sup: "num_sup_9", sub: "num_sub_9", symbol: "9" },
-		"kkey_minus", { unicode: "{U+002D}", html: "&#45;", sup: "num_sup_minus", sub: "num_sub_minus", symbol: "-" },
-		"kkey_equals", { unicode: "{U+003D}", html: "&#61;", sup: "num_sup_equals", sub: "num_sub_equals", symbol: "=" },
-		"kkey_plus", { unicode: "{U+002B}", html: "&#43;", sup: "num_sup_plus", sub: "num_sub_plus", symbol: "+" },
-		"kkey_left_parenthesis", { unicode: "{U+0028}", html: "&#40;", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", symbol: "(" },
-		"kkey_right_parenthesis", { unicode: "{U+0029}", html: "&#41;", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", symbol: ")" },
-		"kkey_comma", { unicode: "{U+002C}", html: "&#44;", symbol: "," },
-		"kkey_dot", { unicode: "{U+002E}", html: "&#46;", symbol: "." },
-		"kkey_semicolon", { unicode: "{U+003B}", html: "&#59;", symbol: ";" },
-		"kkey_apostrophe", { unicode: "{U+0027}", html: "&#39;", symbol: "'" },
-		"kkey_l_square_bracket", { unicode: "{U+005B}", html: "&#91;", symbol: "[" },
-		"kkey_r_square_bracket", { unicode: "{U+005D}", html: "&#93;", symbol: "]" },
-		"kkey_grave_accent", { unicode: "{U+0060}", html: "&#96;", symbol: "``" },
+	"kkey_0", { calcOff: "", unicode: "{U+0030}", html: "&#48;", sup: "num_sup_0", sub: "num_sub_0", symbol: "0" },
+		"kkey_1", { calcOff: "", unicode: "{U+0031}", html: "&#49;", sup: "num_sup_1", sub: "num_sub_1", symbol: "1" },
+		"kkey_2", { calcOff: "", unicode: "{U+0032}", html: "&#50;", sup: "num_sup_2", sub: "num_sub_2", symbol: "2" },
+		"kkey_3", { calcOff: "", unicode: "{U+0033}", html: "&#51;", sup: "num_sup_3", sub: "num_sub_3", symbol: "3" },
+		"kkey_4", { calcOff: "", unicode: "{U+0034}", html: "&#52;", sup: "num_sup_4", sub: "num_sub_4", symbol: "4" },
+		"kkey_5", { calcOff: "", unicode: "{U+0035}", html: "&#53;", sup: "num_sup_5", sub: "num_sub_5", symbol: "5" },
+		"kkey_6", { calcOff: "", unicode: "{U+0036}", html: "&#54;", sup: "num_sup_6", sub: "num_sub_6", symbol: "6" },
+		"kkey_7", { calcOff: "", unicode: "{U+0037}", html: "&#55;", sup: "num_sup_7", sub: "num_sub_7", symbol: "7" },
+		"kkey_8", { calcOff: "", unicode: "{U+0038}", html: "&#56;", sup: "num_sup_8", sub: "num_sub_8", symbol: "8" },
+		"kkey_9", { calcOff: "", unicode: "{U+0039}", html: "&#57;", sup: "num_sup_9", sub: "num_sub_9", symbol: "9" },
+		"kkey_minus", { calcOff: "", unicode: "{U+002D}", html: "&#45;", sup: "num_sup_minus", sub: "num_sub_minus", symbol: "-" },
+		"kkey_equals", { calcOff: "", unicode: "{U+003D}", html: "&#61;", sup: "num_sup_equals", sub: "num_sub_equals", symbol: "=" },
+		"kkey_plus", { calcOff: "", unicode: "{U+002B}", html: "&#43;", sup: "num_sup_plus", sub: "num_sub_plus", symbol: "+" },
+		"kkey_left_parenthesis", { calcOff: "", unicode: "{U+0028}", html: "&#40;", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", symbol: "(" },
+		"kkey_right_parenthesis", { calcOff: "", unicode: "{U+0029}", html: "&#41;", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", symbol: ")" },
+		"kkey_comma", { calcOff: "", unicode: "{U+002C}", html: "&#44;", symbol: "," },
+		"kkey_dot", { calcOff: "", unicode: "{U+002E}", html: "&#46;", symbol: "." },
+		"kkey_semicolon", { calcOff: "", unicode: "{U+003B}", html: "&#59;", symbol: ";" },
+		"kkey_apostrophe", { calcOff: "", unicode: "{U+0027}", html: "&#39;", symbol: "'" },
+		"kkey_l_square_bracket", { calcOff: "", unicode: "{U+005B}", html: "&#91;", symbol: "[" },
+		"kkey_r_square_bracket", { calcOff: "", unicode: "{U+005D}", html: "&#93;", symbol: "]" },
+		"kkey_grave_accent", { calcOff: "", unicode: "{U+0060}", html: "&#96;", symbol: "``" },
 )
 
-CharactersCount := GetMapCount(Characters) - 2 - 21
+CharactersCount := GetMapCount(Characters)
 
 MapInsert(Characters,
 	"misc_crlf_emspace", {
