@@ -9863,6 +9863,8 @@ SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, Previe
 				TargetGroup[PreviewTags].Text := EntryString . GetChar("ensp") . TagsString
 
 				if (HasProp(value, "combiningForm")) {
+					TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_have_combining")
+				} else if RegExMatch(value.symbol, "^" DottedCircle "\S") {
 					TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_combining")
 				} else {
 					TargetGroup[PreviewGroupTitle].Text := ReadLocale("character")
