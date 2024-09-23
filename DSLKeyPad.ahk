@@ -1976,9 +1976,9 @@ MapInsert(Characters,
 		"degree", {
 			unicode: "{U+00B0}", html: "&#176;", entity: "&deg;",
 			tags: ["degree", "градус"],
-			group: [["Special Characters", "Special Fast Secondary"], ["d", "в"]],
+			group: [["Special Characters", "Special Fast Left"], ["d", "в"]],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: "[0]",
+			alt_on_fast_keys: "[D]",
 			symbol: Chr(0x00B0)
 		},
 		"celsius", {
@@ -2244,6 +2244,58 @@ MapInsert(Characters,
 			recipe: Chr(0x2B8F) "!+?",
 			symbol: Chr(0x2E18)
 		},
+		;
+		"bracket_square_left", {
+			unicode: "{U+005B}", html: "&#91;", entity: "&lbrack;",
+			altCode: "91",
+			tags: ["left square bracket", "левая квадратная скобка"],
+			group: [["Brackets", "Special Fast Secondary"], "["],
+			show_on_fast_keys: True,
+			symbol: Chr(0x005B)
+		},
+		"bracket_square_right", {
+			unicode: "{U+005D}", html: "&#93;", entity: "&rbrack;",
+			altCode: "123",
+			tags: ["right square bracket", "правая квадратная скобка"],
+			group: [["Brackets", "Special Fast Secondary"], "]"],
+			show_on_fast_keys: True,
+			symbol: Chr(0x005D)
+		},
+		"bracket_curly_left", {
+			unicode: "{U+007B}", html: "&#123;", entity: "&lbrace;",
+			altCode: "123",
+			tags: ["left curly bracket", "левая фигурная скобка"],
+			group: [["Brackets", "Special Fast Secondary"]],
+			alt_on_fast_keys: RightShift " [[]",
+			show_on_fast_keys: True,
+			symbol: Chr(0x007B)
+		},
+		"bracket_curly_right", {
+			unicode: "{U+007D}", html: "&#125;", entity: "&rbrace;",
+			altCode: "125",
+			tags: ["right curly bracket", "правая фигурная скобка"],
+			group: [["Brackets", "Special Fast Secondary"]],
+			alt_on_fast_keys: RightShift " []]",
+			show_on_fast_keys: True,
+			symbol: Chr(0x007D)
+		},
+		"bracket_angle_math_left", {
+			unicode: "{U+27E8}", html: "&#10216;",
+			altCode: "123",
+			tags: ["left angle math bracket", "левая угловая математическая скобка"],
+			group: [["Brackets", "Special Fast Secondary"], "[9]"],
+			show_on_fast_keys: True,
+			symbol: Chr(0x27E8)
+		},
+		"bracket_angle_math_right", {
+			unicode: "{U+27E9}", html: "&#10217;",
+			altCode: "125",
+			tags: ["right angle math bracket", "правая угловая математическая скобка"],
+			group: [["Brackets", "Special Fast Secondary"], "[0]"],
+			show_on_fast_keys: True,
+			symbol: Chr(0x27E9)
+		},
+		;
 		"emdash", {
 			unicode: "{U+2014}", html: "&#8212;", entity: "&mdash;",
 			altcode: "0151",
@@ -9235,6 +9287,7 @@ Constructor() {
 	Command_gotopage := CommandsTree.Add(ReadLocale("func_label_gotopage"))
 	Command_selgoto := CommandsTree.Add(ReadLocale("func_label_selgoto"))
 	Command_copylist := CommandsTree.Add(ReadLocale("func_label_copylist"))
+	Command_tagsearch := CommandsTree.Add(ReadLocale("func_label_tagsearch"))
 	Command_uninsert := CommandsTree.Add(ReadLocale("func_label_uninsert"))
 	Command_altcode := CommandsTree.Add(ReadLocale("func_label_altcode"))
 	Command_smelter := CommandsTree.Add(ReadLocale("func_label_smelter"), , "Expand")
@@ -9381,6 +9434,7 @@ Constructor() {
 	for groupName in [
 		"Diacritics Fast Primary",
 		"Special Fast Primary",
+		"Special Fast Left",
 		"Latin Accented Primary",
 		"Diacritics Fast Secondary",
 		"Special Fast Secondary",
@@ -9397,7 +9451,7 @@ Constructor() {
 	] {
 		AddSeparator := (groupName = "Diacritics Fast Primary" || groupName = "Latin Ligatures") ? False : True
 		GroupHotKey := (groupName = "Diacritics Fast Primary") ? LeftControl LeftAlt
-			: (groupName = "Latin Accented Primary") ? LeftAlt
+			: (groupName = "Special Fast Left") ? LeftAlt
 				: (groupName = "Diacritics Fast Secondary") ? RightAlt
 					: (groupName = "Special Fast") ? ReadLocale("symbol_special_key")
 						: ""
@@ -9678,7 +9732,7 @@ Constructor() {
 		"Diacritics", GetRandomByGroups(["Diacritics Primary", "Diacritics Secondary", "Diacritics Tertiary"]),
 		"Spaces", GetRandomByGroups(["Spaces", "Dashes", "Quotes", "Special Characters"]),
 		"Ligatures", GetRandomByGroups(["Latin Ligatures", "Cyrillic Ligatures & Letters", "Latin Accented", "Dashes", "Asian Quotes", "Quotes"]),
-		"FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
+		"FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Special Fast Left", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
 		"GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters"]),
 	)
 
@@ -10448,8 +10502,10 @@ FastKeysList :=
 		"<^>!<!<+" SCKeys["Comma"], (K) => HandleFastKey(K, "asian_left_title"),
 		"<^>!<!" SCKeys["Dot"], (K) => HandleFastKey(K, "asian_double_right_title"),
 		"<^>!<!<+" SCKeys["Dot"], (K) => HandleFastKey(K, "asian_right_title"),
-		"<^>!" SCKeys["0"], (K) => HandleFastKey(K, "degree"),
+		"<!" SCKeys["D"], (K) => HandleFastKey(K, "degree"),
 		"<^>!<!" SCKeys["0"], (K) => HandleFastKey(K, "infinity"),
+		"<^>!" SCKeys["9"], (K) => HandleFastKey(K, "bracket_angle_math_left"),
+		"<^>!" SCKeys["0"], (K) => HandleFastKey(K, "bracket_angle_math_right"),
 		;
 		"<^>!" SCKeys["Enter"], (K) => HandleFastKey(K, "carriage_return", "new_line", "emsp"),
 		"<^>!<+" SCKeys["Enter"], (K) => SendPaste("+{Enter}", (K) => HandleFastKey(K, "emsp")),
@@ -10474,6 +10530,11 @@ FastKeysList :=
 			),
 		SCKeys["Slash"], (K) => TimedKeyCombinations("Slash", SCKeys["Equals"], (K) => EmptyFunc()),
 		SCKeys["Tilde"], (K) => TimedKeyCombinations("Tilde", SCKeys["Equals"], (K) => EmptyFunc()),
+		;
+		"<^>!" SCKeys["LSquareBracket"], (K) => HandleFastKey(K, "bracket_square_left"),
+		"<^>!" SCKeys["RSquareBracket"], (K) => HandleFastKey(K, "bracket_square_right"),
+		"<^>!>+" SCKeys["LSquareBracket"], (K) => HandleFastKey(K, "bracket_curly_left"),
+		"<^>!>+" SCKeys["RSquareBracket"], (K) => HandleFastKey(K, "bracket_curly_right"),
 		;
 		"RAlt", (*) => ProceedCompose(),
 		"RCtrl", (*) => ProceedCombining(),
