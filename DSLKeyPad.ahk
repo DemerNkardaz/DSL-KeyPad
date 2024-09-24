@@ -5573,6 +5573,28 @@ MapInsert(Characters,
 			recipeAlt: "i" GetChar("dotted_circle", "breve"),
 			symbol: Chr(0x012D)
 		},
+		"lat_c_let_i_breve_inverted", {
+			unicode: "{U+020A}", html: "&#523;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная I с перевёрнутой краткой", "capital I with interted breve"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[I]",
+			recipe: "I" GetChar("breve_inverted"),
+			recipeAlt: "I" GetChar("dotted_circle", "breve_inverted"),
+			symbol: Chr(0x020A)
+		},
+		"lat_s_let_i_breve_inverted", {
+			unicode: "{U+020B}", html: "&#301;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная i с перевёрнутой краткой", "small i with interted breve"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[i]",
+			recipe: "i" GetChar("breve_inverted"),
+			recipeAlt: "i" GetChar("dotted_circle", "breve_inverted"),
+			symbol: Chr(0x020B)
+		},
 		"lat_c_let_i_circumflex", {
 			unicode: "{U+00CE}", html: "&#206;", entity: "&Icirc;",
 			titlesAlt: True,
@@ -5616,6 +5638,158 @@ MapInsert(Characters,
 			recipe: "i" GetChar("caron"),
 			recipeAlt: "i" GetChar("dotted_circle", "caron"),
 			symbol: Chr(0x01D0)
+		},
+		"lat_c_let_i_dot_above", {
+			unicode: "{U+0130}", html: "&#304;", entity: "&Idot;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная I с точкой сверху", "capital I with dot above"],
+			recipe: "I" GetChar("dot_above"),
+			recipeAlt: "I" GetChar("dotted_circle", "dot_above"),
+			symbol: Chr(0x0130)
+		},
+		"lat_c_let_i_dot_below", {
+			unicode: "{U+1ECA}", html: "&#7882;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная I с точкой снизу", "capital I with dot below"],
+			recipe: "I" GetChar("dot_below"),
+			recipeAlt: "I" GetChar("dotted_circle", "dot_below"),
+			symbol: Chr(0x1ECA)
+		},
+		"lat_s_let_i_dot_below", {
+			unicode: "{U+1ECB}", html: "&#7883;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i с точкой снизу", "small i with dot below"],
+			recipe: "i" GetChar("dot_below"),
+			recipeAlt: "i" GetChar("dotted_circle", "dot_below"),
+			symbol: Chr(0x1ECB)
+		},
+		"lat_c_let_i_diaeresis", {
+			unicode: "{U+00CF}", html: "&#207;", entity: "&Iuml;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная I с диерезисом", "capital I with diaeresis"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftShift " [I]",
+			recipe: "I" GetChar("diaeresis"),
+			recipeAlt: "I" GetChar("dotted_circle", "diaeresis"),
+			symbol: Chr(0x00CF)
+		},
+		"lat_s_let_i_diaeresis", {
+			unicode: "{U+00EF}", html: "&#239;", entity: "&iuml;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная i с диерезисом", "small i with diaeresis"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftShift " [i]",
+			recipe: "i" GetChar("diaeresis"),
+			recipeAlt: "i" GetChar("dotted_circle", "diaeresis"),
+			symbol: Chr(0x00EF)
+		},
+		"lat_c_let_i_grave", {
+			unicode: "{U+00CC}", html: "&#204;", entity: "&Igrave;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная I с грависом", "capital I with grave"],
+			recipe: "I" GetChar("grave"),
+			recipeAlt: "I" GetChar("dotted_circle", "grave"),
+			symbol: Chr(0x00CC)
+		},
+		"lat_s_let_i_grave", {
+			unicode: "{U+00EC}", html: "&#236;", entity: "&igrave;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i с грависом", "small i with grave"],
+			recipe: "i" GetChar("grave"),
+			recipeAlt: "i" GetChar("dotted_circle", "grave"),
+			symbol: Chr(0x00EC)
+		},
+		"lat_c_let_i_grave_double", {
+			unicode: "{U+0208}", html: "&#520;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная I с двойным грависом", "capital I with double grave"],
+			recipe: "I" GetChar("grave_double"),
+			recipeAlt: "I" GetChar("dotted_circle", "grave_double"),
+			symbol: Chr(0x0208)
+		},
+		"lat_s_let_i_grave_double", {
+			unicode: "{U+0209}", html: "&#513;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i с двойным грависом", "small i with double grave"],
+			recipe: "i" GetChar("grave_double"),
+			recipeAlt: "i" GetChar("dotted_circle", "grave_double"),
+			symbol: Chr(0x0209)
+		},
+		"lat_c_let_i_hook_above", {
+			unicode: "{U+1EC8}", html: "&#7880;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная I с хвостиком сверху", "capital I with hook above"],
+			recipe: "I" GetChar("hook_above"),
+			recipeAlt: "I" GetChar("dotted_circle", "hook_above"),
+			symbol: Chr(0x1EC8)
+		},
+		"lat_s_let_i_hook_above", {
+			unicode: "{U+1EC9}", html: "&#7881;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i с хвостиком сверху", "small i with hook above"],
+			recipe: "i" GetChar("hook_above"),
+			recipeAlt: "i" GetChar("dotted_circle", "hook_above"),
+			symbol: Chr(0x1EC9)
+		},
+		"lat_s_let_i_retroflex_hook", {
+			unicode: "{U+1D96}", html: "&#7574;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i с ретрофлексным крюком", "small i with retroflex hook"],
+			recipe: "i" GetChar("retroflex_hook_below"),
+			recipeAlt: "i" GetChar("dotted_circle", "retroflex_hook_below"),
+			symbol: Chr(0x1D96)
+		},
+		"lat_c_let_i_macron", {
+			unicode: "{U+012A}", html: "&#298;", entity: "&Imacr;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная I с макроном", "capital I with macron"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: RightShift " [I]",
+			recipe: "I" GetChar("macron"),
+			recipeAlt: "I" GetChar("dotted_circle", "macron"),
+			symbol: Chr(0x012A)
+		},
+		"lat_s_let_i_macron", {
+			unicode: "{U+012B}", html: "&#299;", entity: "&imacr;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная i с макроном", "small i with macron"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: RightShift " [i]",
+			recipe: "i" GetChar("macron"),
+			recipeAlt: "i" GetChar("dotted_circle", "macron"),
+			symbol: Chr(0x012B)
+		},
+		"lat_c_let_i_stroke_short", {
+			unicode: "{U+0197}", html: "&#407;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная I с наклонной чертой", "capital I with solidus"],
+			recipe: "I" GetChar("stroke_short"),
+			recipeAlt: "I" GetChar("dotted_circle", "stroke_short"),
+			symbol: Chr(0x0197)
+		},
+		"lat_s_let_i_stroke_short", {
+			unicode: "{U+0268}", html: "&#616;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i с наклонной чертой", "small i with solidus"],
+			recipe: "i" GetChar("stroke_short"),
+			recipeAlt: "i" GetChar("dotted_circle", "stroke_short"),
+			symbol: Chr(0x0268)
 		},
 		;
 		;
@@ -5831,16 +6005,18 @@ MapInsert(Characters,
 		"cyr_c_let_dzhe", {
 			unicode: "{U+040F}", html: "&#1039;",
 			titlesAlt: True,
-			group: ["Cyrillic Letters"],
+			group: ["Cyrillic Letters", "Д"],
 			tags: ["Дже", "Dzhe cyrillic"],
+			show_on_fast_keys: True,
 			recipe: "ДЖ",
 			symbol: Chr(0x040F)
 		},
 		"cyr_s_let_dzhe", {
 			unicode: "{U+045F}", html: "&#1119;",
 			titlesAlt: True,
-			group: ["Cyrillic Letters"],
+			group: ["Cyrillic Letters", "д"],
 			tags: ["дже", "dzhe cyrillic"],
+			show_on_fast_keys: True,
 			recipe: "дж",
 			symbol: Chr(0x045F)
 		},
@@ -6618,7 +6794,7 @@ MapInsert(Characters,
 			combiningHTML: "&#122911;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "Ъ"],
-			tags: ["прописной Ер глаголицы", "capital Yeru glagolitic"],
+			tags: ["прописной Еръ глаголицы", "capital Yeru glagolitic"],
 			symbol: Chr(0x2C1F)
 		},
 		"glagolitic_s_let_yeru", {
@@ -6627,7 +6803,7 @@ MapInsert(Characters,
 			combiningHTML: "&#122911;",
 			titlesAlt: True,
 			group: ["Glagolitic Letters", "ъ"],
-			tags: ["строчный ер глаголицы", "small yeru glagolitic"],
+			tags: ["строчный еръ глаголицы", "small yeru glagolitic"],
 			symbol: Chr(0x2C4F)
 		},
 		"glagolitic_c_let_yery", {
@@ -10574,9 +10750,12 @@ FastKeysList :=
 		"<^>!" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_breve", "lat_s_let_i_breve"], ["", ""], True),
 		"<^>!<!" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"], ["", ""], True),
 		"<^>!<!<+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_caron", "lat_s_let_i_caron"], ["", ""], True),
-		"<^>!<+" SCKeys["I"], (K) => LangSeparatedKey(K, ["", ""], ["", ""], True),
+		"<^>!>+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_macron", "lat_s_let_i_macron"], ["", ""], True),
+		"<^>!<+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_diaeresis", "lat_s_let_i_diaeresis"], ["", ""], True),
 		;
 		"<^>!" SCKeys["J"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
+		;
+		"<^>!" SCKeys["L"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_dzhe", "cyr_s_let_dzhe"], True),
 		;
 		"<^>!" SCKeys["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
 		"<^>!<!" SCKeys["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_j", "cyr_s_let_j"], True),
