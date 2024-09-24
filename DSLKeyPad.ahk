@@ -872,18 +872,19 @@ GetSettingsLayout := IniRead(ConfigFile, "Settings", "Layout", "QWERTY")
 SCKeys := LayoutsPresets.Has(GetSettingsLayout) ? LayoutsPresets[GetSettingsLayout] : "QWERTY"
 
 RegisterLayout(LayoutName := "QWERTY") {
+	global SCKeys, GlagoFutharkActive
 	SCKeys := LayoutsPresets[LayoutName]
 	IniWrite LayoutName, ConfigFile, "Settings", "Layout"
 
+	UnregisterKeysLayout()
+
 	IsLettersModeEnabled := GlagoFutharkActive
-	if IsLettersModeEnabled {
-		ToggleLetterScript(True)
-	}
 
 	Sleep 10
 	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 
 	if IsLettersModeEnabled {
+		GlagoFutharkActive := False
 		ToggleLetterScript(True)
 	}
 }
@@ -4463,7 +4464,7 @@ MapInsert(Characters,
 			group: [["Latin Accented", "Latin Accented Secondary"]],
 			tags: ["прописная D с циркумфлексом снизу", "capital D with circumflex below"],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: LeftAlt LeftShift RightShift " [D]",
+			alt_on_fast_keys: LeftShift RightShift " [D]",
 			recipe: "D" GetChar("circumflex_below"),
 			recipeAlt: "D" GetChar("dotted_circle", "circumflex_below"),
 			symbol: Chr(0x1E12)
@@ -4474,7 +4475,7 @@ MapInsert(Characters,
 			group: [["Latin Accented", "Latin Accented Secondary"]],
 			tags: ["строчная d с циркумфлексом снизу", "small d with circumflex below"],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: LeftAlt LeftShift RightShift " [d]",
+			alt_on_fast_keys: LeftShift RightShift " [d]",
 			recipe: "d" GetChar("circumflex_below"),
 			recipeAlt: "d" GetChar("dotted_circle", "circumflex_below"),
 			symbol: Chr(0x1E13)
@@ -8924,21 +8925,21 @@ ToggleLetterScript(HideMessage := False) {
 ChangeScriptInput(ScriptMode) {
 	PreviousScriptMode := IniRead(ConfigFile, "Settings", "ScriptInput", "Default")
 	KeysArray := [
-		SCKeys["1"], (*) => EmptyFunc(),
-		SCKeys["2"], (*) => EmptyFunc(),
-		SCKeys["3"], (*) => EmptyFunc(),
-		SCKeys["4"], (*) => EmptyFunc(),
-		SCKeys["5"], (*) => EmptyFunc(),
-		SCKeys["6"], (*) => EmptyFunc(),
-		SCKeys["7"], (*) => EmptyFunc(),
-		SCKeys["8"], (*) => EmptyFunc(),
-		SCKeys["9"], (*) => EmptyFunc(),
-		SCKeys["0"], (*) => EmptyFunc(),
-		SCKeys["Minus"], (*) => EmptyFunc(),
-		SCKeys["Equals"], (*) => EmptyFunc(),
-		"<+" SCKeys["9"], (*) => EmptyFunc(),
-		"<+" SCKeys["0"], (*) => EmptyFunc(),
-		"<+" SCKeys["Equals"], (*) => EmptyFunc(),
+		SCKeys["1"], "Off",
+		SCKeys["2"], "Off",
+		SCKeys["3"], "Off",
+		SCKeys["4"], "Off",
+		SCKeys["7"], "Off",
+		SCKeys["5"], "Off",
+		SCKeys["6"], "Off",
+		SCKeys["8"], "Off",
+		SCKeys["9"], "Off",
+		SCKeys["0"], "Off",
+		SCKeys["Minus"], "Off",
+		SCKeys["Equals"], "Off",
+		"<+" SCKeys["9"], "Off",
+		"<+" SCKeys["0"], "Off",
+		"<+" SCKeys["Equals"], "Off",
 	]
 
 	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
@@ -10052,10 +10053,12 @@ Constructor() {
 		DSLPadGUI["NewVersionIcon"].Text := InformationSymbol
 	}
 
-	LatinLayoutSelector := DSLPadGUI.AddComboBox("vLatLayout w74 x500 y537", GetLayoutsList)
+	LatinLayoutSelector := DSLPadGUI.AddDropDownList("vLatLayout w74 x502 y528", GetLayoutsList)
+	PostMessage(0x0153, -1, 24, LatinLayoutSelector)
+
 	LayoutName := IniRead(ConfigFile, "Settings", "Layout", "QWERTY")
 
-	LatinLayoutSelector.Text := LayoutsPresets.Has(LayoutName) ? LayoutName : "QWERTY"
+	LatinLayoutSelector.Text := LayoutName
 
 	LatinLayoutSelector.OnEvent("Change", (CB, Zero) => ChangeQWERTY(CB))
 
@@ -10852,7 +10855,7 @@ IsGuiOpen(title) {
 }
 
 CheckQWERTY() {
-	return CheckQWERTY := LayoutsPresets.Has(IniRead(ConfigFile, "Settings", "Layout", "QWERTY")) ? IniRead(ConfigFile, "Settings", "Layout", "QWERTY") : "QWERTY"
+	return LayoutsPresets.Has(IniRead(ConfigFile, "Settings", "Layout", "QWERTY")) ? IniRead(ConfigFile, "Settings", "Layout", "QWERTY") : "QWERTY"
 }
 ToggleFastKeys() {
 	LanguageCode := GetLanguageCode()
@@ -11055,6 +11058,32 @@ RegisterHotKeys(Bindings, CheckRule := FastKeysIsActive) {
 				}
 			} catch {
 				MsgBox "Error registering hotkey: " key
+			}
+		}
+	}
+}
+
+UnregisterKeysLayout() {
+	Keys := LayoutsPresets[CheckQWERTY()]
+	for keyName, keySC in Keys {
+		try {
+			HotKey(keySC, "Off", "Off")
+		} catch {
+			continue
+		}
+
+	}
+}
+
+UnregisterHotKeys(Bindings) {
+	for index, pair in Bindings {
+		if (Mod(index, 2) = 1) {
+			key := pair
+			value := Bindings[index + 1]
+			try {
+				HotKey(key, "Off", "Off")
+			} catch {
+				continue
 			}
 		}
 	}
@@ -11269,14 +11298,14 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			;
 			UseKey["NumpadMult"], (K) => HandleFastKey(K, "multiplication"),
 			UseKey["NumpadSub"], (K) => TimedKeyCombinations("NumpadSub", UseKey["NumpadAdd"], (*) => HandleFastKey(K, "plusminus"), (*) => HandleFastKey(K, "minus")),
-			UseKey["NumpadAdd"], (K) => TimedKeyCombinations("NumpadAdd", UseKey["NumpadSub"], (*) => EmptyFunc()),
+			UseKey["NumpadAdd"], (K) => TimedKeyCombinations("NumpadAdd", UseKey["NumpadSub"], "Off"),
 			UseKey["Equals"], (K) =>
 				TimedKeyCombinations("Equals",
 					[UseKey["Slash"], UseKey["Tilde"]],
 					[(*) => HandleFastKey(K, "noequals"), (*) => HandleFastKey(K, "almostequals")],
 				),
-			UseKey["Slash"], (K) => TimedKeyCombinations("Slash", UseKey["Equals"], (*) => EmptyFunc()),
-			UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], (*) => EmptyFunc()),
+			UseKey["Slash"], (K) => TimedKeyCombinations("Slash", UseKey["Equals"], "Off"),
+			UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], "Off"),
 			;
 			"<^>!" UseKey["LSquareBracket"], (K) => HandleFastKey(K, "bracket_square_left"),
 			"<^>!" UseKey["RSquareBracket"], (K) => HandleFastKey(K, "bracket_square_right"),
@@ -11389,42 +11418,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			;
 			"<^<!" UseKey["D"], (K) => HandleFastKey(K, "cyr_com_vzmet"),
 		]
-	} else if Combinations = "Reset Glagolitic Futhark" {
-		return [
-			UseKey["A"], (*) => EmptyFunc(),
-			UseKey["B"], (*) => EmptyFunc(),
-			UseKey["C"], (*) => EmptyFunc(),
-			UseKey["D"], (*) => EmptyFunc(),
-			UseKey["E"], (*) => EmptyFunc(),
-			UseKey["F"], (*) => EmptyFunc(),
-			UseKey["G"], (*) => EmptyFunc(),
-			UseKey["H"], (*) => EmptyFunc(),
-			UseKey["I"], (*) => EmptyFunc(),
-			UseKey["J"], (*) => EmptyFunc(),
-			UseKey["K"], (*) => EmptyFunc(),
-			UseKey["L"], (*) => EmptyFunc(),
-			UseKey["M"], (*) => EmptyFunc(),
-			UseKey["N"], (*) => EmptyFunc(),
-			UseKey["O"], (*) => EmptyFunc(),
-			UseKey["P"], (*) => EmptyFunc(),
-			UseKey["Q"], (*) => EmptyFunc(),
-			UseKey["R"], (*) => EmptyFunc(),
-			UseKey["S"], (*) => EmptyFunc(),
-			UseKey["T"], (*) => EmptyFunc(),
-			UseKey["U"], (*) => EmptyFunc(),
-			UseKey["V"], (*) => EmptyFunc(),
-			UseKey["W"], (*) => EmptyFunc(),
-			UseKey["X"], (*) => EmptyFunc(),
-			UseKey["Y"], (*) => EmptyFunc(),
-			UseKey["Z"], (*) => EmptyFunc(),
-			UseKey["LSquareBracket"], (*) => EmptyFunc(),
-			UseKey["RSquareBracket"], (*) => EmptyFunc(),
-			UseKey["Tilde"], (*) => EmptyFunc(),
-			UseKey["Comma"], (*) => EmptyFunc(),
-			UseKey["Dot"], (*) => EmptyFunc(),
-			UseKey["Semicolon"], (*) => EmptyFunc(),
-			UseKey["Apostrophe"], (*) => EmptyFunc(),
-		]
 	} else if Combinations = "Utility" {
 
 	}
@@ -11454,6 +11447,8 @@ TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False) 
 	if IsObject(SecondKeys) {
 		for i, SecondKey in SecondKeys {
 			if (GetKeyState(SecondKey, "P")) {
+				if Callbacks = "Off"
+					return
 				Callbacks[i]()
 				IsCombinationPressed := True
 				SetTimer(ResetDefault, 0)
@@ -11462,6 +11457,8 @@ TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False) 
 		}
 	} else {
 		if (GetKeyState(SecondKeys, "P")) {
+			if Callbacks = "Off"
+				return
 			Callbacks()
 			IsCombinationPressed := True
 			SetTimer(ResetDefault, 0)
