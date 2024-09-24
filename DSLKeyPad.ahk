@@ -7951,7 +7951,7 @@ SearchKey(CycleSend := "") {
 	Found := False
 
 	SymbolSearching(SearchingPrompt) {
-		ProceedSearch(value) {
+		ProceedSearch(value, characterEntity, characterLaTeX) {
 			OutputValue := ""
 			if InputMode = "HTML" {
 				SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
@@ -7995,25 +7995,25 @@ SearchKey(CycleSend := "") {
 			return OutputValue
 		}
 
-
-		for characterEntry, value in Characters {
-			if !HasProp(value, "tags") {
-				continue
-			}
-			characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
-			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
-
-			for _, tag in value.tags {
-				IsEqualNonSensitive := IsSensitive && (StrLower(SearchingPrompt) = StrLower(tag))
-				IsEqualSensitive := !IsSensitive && (SearchingPrompt == tag)
-
-				if (IsEqualSensitive || IsEqualNonSensitive) {
-					return ProceedSearch(value)
-				}
-			}
+		CheckTagExact(value, tag, SearchingPrompt, IsSensitive) {
+			IsEqualSensitive := !IsSensitive && (SearchingPrompt == tag)
+			IsEqualNonSensitive := IsSensitive && (StrLower(SearchingPrompt) = StrLower(tag))
+			return IsEqualSensitive || IsEqualNonSensitive
 		}
 
-		if !Found {
+		CheckTagPartial(value, tag, SearchingPrompt, IsSensitive) {
+			IsPartiallyEqualSensitive := !IsSensitive && RegExMatch(tag, SearchingPrompt)
+			IsPartiallyEqual := IsSensitive && RegExMatch(StrLower(tag), StrLower(SearchingPrompt))
+			return IsPartiallyEqual || IsPartiallyEqualSensitive
+		}
+
+		CheckTagLowAcc(value, tag, SearchingPrompt, IsSensitive) {
+			IsLowAccSensitive := !IsSensitive && HasAllCharacters(tag, SearchingPrompt)
+			IsLowAcc := IsSensitive && HasAllCharacters(StrLower(tag), StrLower(SearchingPrompt))
+			return IsLowAcc || IsLowAccSensitive
+		}
+
+		MapProcess(CheckingRule) {
 			for characterEntry, value in Characters {
 				if !HasProp(value, "tags") {
 					continue
@@ -8022,44 +8022,30 @@ SearchKey(CycleSend := "") {
 				characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
 				for _, tag in value.tags {
-
-					IsPartiallyEqualSensitive := !IsSensitive && RegExMatch(tag, SearchingPrompt)
-					IsPartiallyEqual := IsSensitive && RegExMatch(StrLower(tag), StrLower(SearchingPrompt))
-
-					if (IsPartiallyEqual || IsPartiallyEqualSensitive) {
-						return ProceedSearch(value)
+					if CheckingRule(value, tag, SearchingPrompt, IsSensitive) {
+						return ProceedSearch(value, characterEntity, characterLaTeX)
 					}
 				}
 			}
 		}
 
-		if !Found {
-			for characterEntry, value in Characters {
-				if !HasProp(value, "tags") {
-					continue
-				}
-				characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
-				characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
+		Output := MapProcess(CheckTagExact)
+		if !Found
+			Output := MapProcess(CheckTagPartial)
+		if !Found
+			Output := MapProcess(CheckTagLowAcc)
 
-				for _, tag in value.tags {
-					IsLowAccSensitive := !IsSensitive && HasAllCharacters(tag, SearchingPrompt)
-					IsLowAcc := IsSensitive && HasAllCharacters(StrLower(tag), StrLower(SearchingPrompt))
-
-					if (IsLowAcc || IsLowAccSensitive) {
-						return ProceedSearch(value)
-					}
-
-				}
-			}
-		}
+		return Output
 	}
 
 	if InStr(PromptValue, ", ") && StrSplit(PromptValue, ", ")[2] != "" {
 		IniWrite !IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
 		WordSplit := StrSplit(PromptValue, ", ")
-		for word in WordSplit {
+		Count := WordSplit.Length
+
+		loop Count {
 			Sleep 10
-			SearchKey(word)
+			SearchKey(WordSplit[A_Index])
 		}
 	} else {
 		SendText(SymbolSearching(PromptValue))
