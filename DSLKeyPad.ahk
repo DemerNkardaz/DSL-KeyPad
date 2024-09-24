@@ -3196,9 +3196,10 @@ MapInsert(Characters,
 		"lat_s_let_i_dotless", {
 			unicode: "{U+0131}", html: "&#305;", entity: "&imath;",
 			titlesAlt: True,
-			group: ["Latin Extended", "i"],
+			group: ["Latin Extended"],
 			show_on_fast_keys: False,
 			tags: ["і без точки", "i dotless"],
+			recipe: "i/",
 			symbol: Chr(0x0131)
 		},
 		"lat_s_let_ie", {
@@ -4974,7 +4975,7 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Latin Accented"],
 			tags: ["прописная E с тильдой", "capital E with tilde"],
-			recipe: "A" GetChar("tilde_below"),
+			recipe: "E" GetChar("tilde_below"),
 			recipeAlt: "E" GetChar("dotted_circle", "tilde_below"),
 			symbol: Chr(0x1E1A)
 		},
@@ -5688,6 +5689,24 @@ MapInsert(Characters,
 			recipeAlt: "i" GetChar("dotted_circle", "diaeresis"),
 			symbol: Chr(0x00EF)
 		},
+		"lat_c_let_i_diaeresis_acute", {
+			unicode: "{U+1E2F}", html: "&#7727;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная I с диерезисом и акутом", "capital I with diaeresis and acute"],
+			recipe: ["I" GetChar("diaeresis", "acute"), Chr(0x00CF) GetChar("diaeresis")],
+			recipeAlt: ["I" GetChar("dotted_circle", "diaeresis", "dotted_circle", "acute"), Chr(0x00CF) GetChar("dotted_circle", "acute")],
+			symbol: Chr(0x1E2F)
+		},
+		"lat_s_let_i_diaeresis_acute", {
+			unicode: "{U+1E2E}", html: "&#7726;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i с диерезисом и акутом", "small i with diaeresis and acute"],
+			recipe: ["i" GetChar("diaeresis", "acute"), Chr(0x00EF) GetChar("diaeresis")],
+			recipeAlt: ["i" GetChar("dotted_circle", "diaeresis", "dotted_circle", "acute"), Chr(0x00EF) GetChar("dotted_circle", "acute")],
+			symbol: Chr(0x1E2E)
+		},
 		"lat_c_let_i_grave", {
 			unicode: "{U+00CC}", html: "&#204;", entity: "&Igrave;",
 			titlesAlt: True,
@@ -5777,7 +5796,7 @@ MapInsert(Characters,
 			unicode: "{U+0197}", html: "&#407;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["прописная I с наклонной чертой", "capital I with solidus"],
+			tags: ["прописная I со штрихом", "capital I with stroke"],
 			recipe: "I" GetChar("stroke_short"),
 			recipeAlt: "I" GetChar("dotted_circle", "stroke_short"),
 			symbol: Chr(0x0197)
@@ -5786,12 +5805,144 @@ MapInsert(Characters,
 			unicode: "{U+0268}", html: "&#616;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["строчная i с наклонной чертой", "small i with solidus"],
+			tags: ["строчная i со штрихом", "small i with stroke"],
 			recipe: "i" GetChar("stroke_short"),
 			recipeAlt: "i" GetChar("dotted_circle", "stroke_short"),
 			symbol: Chr(0x0268)
 		},
+		"lat_s_c_let_i_stroke_short", {
+			unicode: "{U+1D7B}", html: "&#7547;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["капитель I со штрихом", "small capital I with stroke"],
+			recipe: "I↓" GetChar("stroke_short"),
+			recipeAlt: "I↓" GetChar("dotted_circle", "stroke_short"),
+			symbol: Chr(0x1D7B)
+		},
+		"lat_s_let_i_stroke_short_retroflex_hook", {
+			unicode: "{U+1DF1A}", html: "&#122650;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i со штрихом и ретрофлексным крюком", "small i with stroke and retroflex hook"],
+			recipe: ["i" GetChar("stroke_short", "retroflex_hook_below"), Chr(0x0268) GetChar("retroflex_hook_below")],
+			recipeAlt: ["i" GetChar("dotted_circle", "stroke_short", "dotted_circle", "retroflex_hook_below"), Chr(0x0268) GetChar("dotted_circle", "retroflex_hook_below")],
+			symbol: Chr(0x1DF1A)
+		},
+		"lat_c_let_i_ogonek", {
+			unicode: "{U+012E}", html: "&#302;", entity: "&Iogon;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная I с огонэком", "capital I with ogonek"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftAlt RightShift " [I]",
+			recipe: "I" GetChar("ogonek"),
+			recipeAlt: "I" GetChar("dotted_circle", "ogonek"),
+			symbol: Chr(0x012E)
+		},
+		"lat_s_let_i_ogonek", {
+			unicode: "{U+012F}", html: "&#303;", entity: "&iogon;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная i с огонэком", "small i with ogonek"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftAlt RightShift " [i]",
+			recipe: "i" GetChar("ogonek"),
+			recipeAlt: "i" GetChar("dotted_circle", "ogonek"),
+			symbol: Chr(0x012F)
+		},
+		"lat_c_let_i_tilde", {
+			unicode: "{U+0128}", html: "&#296;", entity: "&Itilde;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная I с тильдой", "capital I with tilde"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftShift RightShift " [I]",
+			recipe: "I" GetChar("tilde"),
+			recipeAlt: "I" GetChar("dotted_circle", "tilde"),
+			symbol: Chr(0x0128)
+		},
+		"lat_s_let_i_tilde", {
+			unicode: "{U+0129}", html: "&#297;", entity: "&itilde;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная i с тильдой", "small i with tilde"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftShift RightShift " [i]",
+			recipe: "i" GetChar("tilde"),
+			recipeAlt: "i" GetChar("dotted_circle", "tilde"),
+			symbol: Chr(0x0129)
+		},
+		"lat_c_let_i_tilde_below", {
+			unicode: "{U+1E2C}", html: "&#7724;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная I с тильдой", "capital I with tilde"],
+			recipe: "I" GetChar("tilde_below"),
+			recipeAlt: "I" GetChar("dotted_circle", "tilde_below"),
+			symbol: Chr(0x1E2C)
+		},
+		"lat_s_let_i_tilde_below", {
+			unicode: "{U+1E2D}", html: "&#7725;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная i с тильдой", "small i with tilde"],
+			recipe: "i" GetChar("tilde_below"),
+			recipeAlt: "i" GetChar("dotted_circle", "tilde_below"),
+			symbol: Chr(0x1E2D)
+		},
 		;
+		"lat_c_let_j_circumflex", {
+			unicode: "{U+0134}", html: "&#308;", entity: "&Jcirc;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная J с циркумфлексом", "capital J with circumflex"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftAlt " [J]",
+			recipe: "J" GetChar("circumflex"),
+			recipeAlt: "J" GetChar("dotted_circle", "circumflex"),
+			symbol: Chr(0x0134)
+		},
+		"lat_s_let_j_circumflex", {
+			unicode: "{U+0135}", html: "&#309;", entity: "&jcirc;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная j с циркумфлексом", "small j with circumflex"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftAlt " [j]",
+			recipe: "j" GetChar("circumflex"),
+			recipeAlt: "j" GetChar("dotted_circle", "circumflex"),
+			symbol: Chr(0x0135)
+		},
+		"lat_c_let_j_crossed_tail", {
+			unicode: "{U+A7B2}", html: "&#42930;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная J с завитком", "small J with crossed tail"],
+			recipe: "J" GetChar("arrow_right_ushaped"),
+			symbol: Chr(0xA7B2)
+		},
+		"lat_c_let_j_stroke_short", {
+			unicode: "{U+0248}", html: "&#584;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная J со штрихом", "capital J with stroke"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[J]",
+			recipe: "J" GetChar("stroke_short"),
+			recipeAlt: "J" GetChar("dotted_circle", "stroke_short"),
+			symbol: Chr(0x0248)
+		},
+		"lat_s_let_j_stroke_short", {
+			unicode: "{U+0249}", html: "&#585;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная j со штрихом", "small j with stroke"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[j]",
+			recipe: "j" GetChar("stroke_short"),
+			recipeAlt: "j" GetChar("dotted_circle", "stroke_short"),
+			symbol: Chr(0x0249)
+		},
 		;
 		;
 		;
@@ -9637,7 +9788,7 @@ Constructor() {
 
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, , True, ["lat_s_let_i_dotless"])
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, , True)
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Letters", , True, , True)
@@ -10750,10 +10901,13 @@ FastKeysList :=
 		"<^>!" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_breve", "lat_s_let_i_breve"], ["", ""], True),
 		"<^>!<!" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"], ["", ""], True),
 		"<^>!<!<+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_caron", "lat_s_let_i_caron"], ["", ""], True),
+		"<^>!<!>+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_ogonek", "lat_s_let_i_ogonek"], ["", ""], True),
 		"<^>!>+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_macron", "lat_s_let_i_macron"], ["", ""], True),
 		"<^>!<+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_diaeresis", "lat_s_let_i_diaeresis"], ["", ""], True),
+		"<^>!<+>+" SCKeys["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_tilde", "lat_s_let_i_tilde"], ["", ""], True),
 		;
-		"<^>!" SCKeys["J"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
+		"<^>!" SCKeys["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
+		"<^>!<!" SCKeys["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"], ["", ""], True),
 		;
 		"<^>!" SCKeys["L"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_dzhe", "cyr_s_let_dzhe"], True),
 		;
