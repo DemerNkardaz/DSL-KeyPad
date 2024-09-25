@@ -660,9 +660,9 @@ LayoutsPresets := Map(
 		"2", "SC003",
 		"3", "SC004",
 		"4", "SC005",
+		"7", "SC008",
 		"5", "SC006",
 		"6", "SC007",
-		"7", "SC008",
 		"8", "SC009",
 		"9", "SC00A",
 	),
@@ -883,10 +883,12 @@ RegisterLayout(LayoutName := "QWERTY") {
 
 	IsLettersModeEnabled := GlagoFutharkActive
 
-	Sleep 10
+	Sleep 250
+	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
 	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 
 	if IsLettersModeEnabled {
+		Sleep 50
 		GlagoFutharkActive := False
 		ToggleLetterScript(True)
 	}
@@ -8582,6 +8584,7 @@ MapInsert(Characters,
 		"kkey_9", { calcOff: "", unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", symbol: "9" },
 		"kkey_minus", { calcOff: "", unicode: "{U+002D}", sup: "num_sup_minus", sub: "num_sub_minus", symbol: "-" },
 		"kkey_equals", { calcOff: "", unicode: "{U+003D}", sup: "num_sup_equals", sub: "num_sub_equals", symbol: "=" },
+		"kkey_underscore", { calcOff: "", unicode: "{U+005F}", symbol: "_" },
 		"kkey_hyphen_minus", { calcOff: "", unicode: "{U+002D}", symbol: "-" },
 		"kkey_plus", { calcOff: "", unicode: "{U+002B}", sup: "num_sup_plus", sub: "num_sub_plus", symbol: "+" },
 		"kkey_left_parenthesis", { calcOff: "", unicode: "{U+0028}", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", symbol: "(" },
@@ -8589,13 +8592,18 @@ MapInsert(Characters,
 		"kkey_comma", { calcOff: "", unicode: "{U+002C}", symbol: "," },
 		"kkey_dot", { calcOff: "", unicode: "{U+002E}", symbol: "." },
 		"kkey_semicolon", { calcOff: "", unicode: "{U+003B}", symbol: ";" },
+		"kkey_colon", { calcOff: "", unicode: "{U+003A}", symbol: ":" },
 		"kkey_apostrophe", { calcOff: "", unicode: "{U+0027}", symbol: "'" },
+		"kkey_quotation", { calcOff: "", unicode: "{U+0022}", symbol: "`"" },
 		"kkey_l_square_bracket", { calcOff: "", unicode: "{U+005B}", symbol: "[" },
 		"kkey_r_square_bracket", { calcOff: "", unicode: "{U+005D}", symbol: "]" },
 		"kkey_grave_accent", { calcOff: "", unicode: "{U+0060}", symbol: "``" },
+		"kkey_tilde", { calcOff: "", unicode: "{U+007E}", symbol: "~" },
 		"kkey_slash", { calcOff: "", unicode: "{U+002F}", symbol: "/" },
 		"kkey_backslash", { calcOff: "", unicode: "{U+005C}", symbol: "\" },
 		"kkey_verticalline", { calcOff: "", unicode: "{U+007C}", symbol: "|" },
+		"kkey_lessthan", { calcOff: "", unicode: "{U+003C}", symbol: "<" },
+		"kkey_greaterthan", { calcOff: "", unicode: "{U+003E}", symbol: ">" },
 )
 
 CharactersCount := GetMapCount(Characters)
@@ -9053,68 +9061,16 @@ ToggleLetterScript(HideMessage := False) {
 
 ChangeScriptInput(ScriptMode) {
 	PreviousScriptMode := IniRead(ConfigFile, "Settings", "ScriptInput", "Default")
-	KeysArray := [
-		SCKeys["1"], "Off",
-		SCKeys["2"], "Off",
-		SCKeys["3"], "Off",
-		SCKeys["4"], "Off",
-		SCKeys["7"], "Off",
-		SCKeys["5"], "Off",
-		SCKeys["6"], "Off",
-		SCKeys["8"], "Off",
-		SCKeys["9"], "Off",
-		SCKeys["0"], "Off",
-		SCKeys["Minus"], "Off",
-		SCKeys["Equals"], "Off",
-		"<+" SCKeys["9"], "Off",
-		"<+" SCKeys["0"], "Off",
-		"<+" SCKeys["Equals"], "Off",
-	]
 
 	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
 		IniWrite("Default", ConfigFile, "Settings", "ScriptInput")
-		RegisterHotKeys(KeysArray, False)
+		UnregisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Cleanscript"))
 	} else {
 		IniWrite(ScriptMode, ConfigFile, "Settings", "ScriptInput")
-		RegisterHotKeys(ScriptMode == "sup" ? SuperscriptList : SubscriptList, True)
+		RegisterHotKeys(ScriptMode == "sup" ? GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Supercript") : GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Subscript"), True)
 	}
 }
 
-SuperscriptList := [
-	SCKeys["1"], (K) => HandleFastKey(K, "num_sup_1"),
-	SCKeys["2"], (K) => HandleFastKey(K, "num_sup_2"),
-	SCKeys["3"], (K) => HandleFastKey(K, "num_sup_3"),
-	SCKeys["4"], (K) => HandleFastKey(K, "num_sup_4"),
-	SCKeys["5"], (K) => HandleFastKey(K, "num_sup_5"),
-	SCKeys["6"], (K) => HandleFastKey(K, "num_sup_6"),
-	SCKeys["7"], (K) => HandleFastKey(K, "num_sup_7"),
-	SCKeys["8"], (K) => HandleFastKey(K, "num_sup_8"),
-	SCKeys["9"], (K) => HandleFastKey(K, "num_sup_9"),
-	SCKeys["0"], (K) => HandleFastKey(K, "num_sup_0"),
-	SCKeys["Minus"], (K) => HandleFastKey(K, "num_sup_minus"),
-	SCKeys["Equals"], (K) => HandleFastKey(K, "num_sup_equals"),
-	"<+" SCKeys["9"], (K) => HandleFastKey(K, "num_sup_left_parenthesis"),
-	"<+" SCKeys["0"], (K) => HandleFastKey(K, "num_sup_right_parenthesis"),
-	"<+" SCKeys["Equals"], (K) => HandleFastKey(K, "num_sup_plus"),
-]
-
-SubscriptList := [
-	SCKeys["1"], (K) => HandleFastKey(K, "num_sub_1"),
-	SCKeys["2"], (K) => HandleFastKey(K, "num_sub_2"),
-	SCKeys["3"], (K) => HandleFastKey(K, "num_sub_3"),
-	SCKeys["4"], (K) => HandleFastKey(K, "num_sub_4"),
-	SCKeys["5"], (K) => HandleFastKey(K, "num_sub_5"),
-	SCKeys["6"], (K) => HandleFastKey(K, "num_sub_6"),
-	SCKeys["7"], (K) => HandleFastKey(K, "num_sub_7"),
-	SCKeys["8"], (K) => HandleFastKey(K, "num_sub_8"),
-	SCKeys["9"], (K) => HandleFastKey(K, "num_sub_9"),
-	SCKeys["0"], (K) => HandleFastKey(K, "num_sub_0"),
-	SCKeys["Minus"], (K) => HandleFastKey(K, "num_sub_minus"),
-	SCKeys["Equals"], (K) => HandleFastKey(K, "num_sub_equals"),
-	"<+" SCKeys["9"], (K) => HandleFastKey(K, "num_sub_left_parenthesis"),
-	"<+" SCKeys["0"], (K) => HandleFastKey(K, "num_sub_right_parenthesis"),
-	"<+" SCKeys["Equals"], (K) => HandleFastKey(K, "num_sub_plus"),
-]
 
 ToRomanNumeral(IntValue, CapitalLetters := True) {
 	IntValue := Integer(IntValue)
@@ -9700,14 +9656,6 @@ Ligaturise(SmeltingMode := "InputBox") {
 	return
 }
 
-Hotkey("<#<!" SCKeys["F1"], (*) => GroupActivator("Diacritics Primary", "F1"))
-Hotkey("<#<!" SCKeys["F2"], (*) => GroupActivator("Diacritics Secondary", "F2"))
-Hotkey("<#<!" SCKeys["F3"], (*) => GroupActivator("Diacritics Tertiary", "F3"))
-Hotkey("<#<!" SCKeys["F6"], (*) => GroupActivator("Diacritics Quatemary", "F6"))
-Hotkey("<#<!" SCKeys["F7"], (*) => GroupActivator("Special Characters", "F7"))
-Hotkey("<#<!" SCKeys["Space"], (*) => GroupActivator("Spaces"))
-Hotkey("<#<!" SCKeys["Minus"], (*) => GroupActivator("Dashes", "-"))
-Hotkey("<#<!" SCKeys["Apostrophe"], (*) => GroupActivator("Quotes", "'"))
 GroupActivator(GroupName, KeyValue := "") {
 	LocaleMark := KeyValue != "" && RegExMatch(KeyValue, "^F") ? KeyValue : GroupName
 	MsgTitle := "[" LocaleMark "] " DSLPadTitle
@@ -9715,37 +9663,7 @@ GroupActivator(GroupName, KeyValue := "") {
 	ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, SkipGroupMessage, True)
 	InputBridge(GroupName)
 }
-Hotkey("<#<!" SCKeys["F"], (*) => SearchKey())
-Hotkey("<#<!" SCKeys["U"], (*) => InsertUnicodeKey())
-Hotkey("<#<!" SCKeys["A"], (*) => InsertAltCodeKey())
-Hotkey("<#<!" SCKeys["L"], (*) => Ligaturise())
-Hotkey(">+" SCKeys["L"], (*) => Ligaturise("Clipboard"))
-Hotkey(">+" SCKeys["Backspace"], (*) => Ligaturise("Backspace"))
-Hotkey("<#<^>!" SCKeys["1"], (*) => SwitchToScript("sup"))
-Hotkey("<#<^>!" SCKeys["2"], (*) => SwitchToScript("sub"))
-Hotkey("<#<^>!" SCKeys["3"], (*) => SwitchToRoman())
-Hotkey("<#<!" SCKeys["M"], (*) => ToggleGroupMessage())
-Hotkey("<#<!" SCKeys["PgUp"], (*) => FindCharacterPage())
-Hotkey("<#<!" SCKeys["PgDn"], (*) => ReplaceWithUnicode())
-Hotkey("<#<+" SCKeys["PgDn"], (*) => ReplaceWithUnicode("Hex"))
-Hotkey("<#<!" SCKeys["Home"], (*) => OpenPanel())
-Hotkey("<^>!>+" SCKeys["Home"], (*) => ToggleInputMode())
-Hotkey("<^>!" SCKeys["Home"], (*) => ToggleFastKeys())
 
-
-Hotkey("<#<!" SCKeys["Q"], (*) => LangSeparatedCall(
-	() => QuotatizeSelection("Double"),
-	() => QuotatizeSelection("France")))
-Hotkey("<#<!<+" SCKeys["Q"], (*) => LangSeparatedCall(
-	() => QuotatizeSelection("Single"),
-	() => QuotatizeSelection("Paw")))
-Hotkey("<#<!" SCKeys["NumpadEnter"], (*) => ParagraphizeSelection())
-Hotkey("<#<!" SCKeys["NumpadDot"], (*) => GREPizeSelection())
-Hotkey("<^>!" SCKeys["NumpadDot"], (*) => GREPizeSelection(True))
-
-HotKey("<#<!" SCKeys["ArrUp"], (*) => ChangeScriptInput("sup"))
-HotKey("<#<!" SCKeys["ArrDown"], (*) => ChangeScriptInput("sub"))
-HotKey(">^" SCKeys["1"], (*) => ToggleLetterScript())
 
 ReplaceWithUnicode(Mode := "") {
 	BackupClipboard := A_Clipboard
@@ -11139,11 +11057,11 @@ GetCharacterSequence(CharacterName) {
 	return Output
 }
 
-CapsSeparatedKey(Combo, CapitalCharacter, SmallCharacter) {
+CapsSeparatedKey(Combo, CapitalCharacter, SmallCharacter, Reverse := False) {
 	if (GetKeyState("CapsLock", "T")) {
-		HandleFastKey(Combo, CapitalCharacter)
+		HandleFastKey(Combo, Reverse ? SmallCharacter : CapitalCharacter)
 	} else {
-		HandleFastKey(Combo, SmallCharacter)
+		HandleFastKey(Combo, Reverse ? CapitalCharacter : SmallCharacter)
 	}
 }
 
@@ -11164,10 +11082,10 @@ LangSeparatedCall(LatinCallback, CyrillicCallback) {
 	return
 }
 
-LangSeparatedKey(Combo, LatinCharacter, CyrillicCharacter, UseCaps := False) {
+LangSeparatedKey(Combo, LatinCharacter, CyrillicCharacter, UseCaps := False, Reverse := False) {
 	Character := (GetLayoutLocale() == CodeEn) ? LatinCharacter : CyrillicCharacter
 	if UseCaps {
-		CapsSeparatedKey(Combo, IsObject(Character) ? Character[1] : Character, IsObject(Character) ? Character[2] : Character)
+		CapsSeparatedKey(Combo, IsObject(Character) ? Character[1] : Character, IsObject(Character) ? Character[2] : Character, Reverse)
 	} else {
 		HandleFastKey(Combo, IsObject(Character) ? Character[1] : Character)
 	}
@@ -11195,12 +11113,28 @@ RegisterHotKeys(Bindings, CheckRule := FastKeysIsActive) {
 UnregisterKeysLayout() {
 	Keys := LayoutsPresets[CheckQWERTY()]
 	for keyName, keySC in Keys {
-		try {
-			HotKey(keySC, "Off", "Off")
-		} catch {
-			continue
-		}
+		Patterns := [
+			keySC,
+			"+" keySC, "<+" keySC, ">+" keySC, "<+>+" keySC, ,
+			"!" keySC, "<!" keySC, ">!" keySC, "<!>!" keySC,
+			"^" keySC, "<^" keySC, ">^" keySC, "<^>^" keySC,
+			"^!" keySC, "<^>!" keySC, "<^<!" keySC, ">^<!" keySC,
+			"<^>!+" keySC, "<^>!<+" keySC, "<^>!>+" keySC,
+			"<^>!<+>+" keySC, "<^>!<!+" keySC, "<^>!<!<+" keySC,
+			"<^>!<!<+>+" keySC,
+			"#" keySC, "<#" keySC, ">#" keySC,
+			"<#<!" keySC, ">#<!" keySC, "<#>!" keySC, ">#>!" keySC,
+			"<#<!+" keySC, ">#<!+" keySC, "<#>!+" keySC, ">#>!+" keySC,
+			"<#<!>+" keySC, ">#<!>+" keySC, "<#>!>+" keySC, ">#>!>+" keySC,
+		]
 
+		for pattern in Patterns {
+			try {
+				HotKey(pattern, "Off", "Off")
+			} catch {
+				continue
+			}
+		}
 	}
 }
 
@@ -11440,9 +11374,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["RSquareBracket"], (K) => HandleFastKey(K, "bracket_square_right"),
 			"<^>!>+" UseKey["LSquareBracket"], (K) => HandleFastKey(K, "bracket_curly_left"),
 			"<^>!>+" UseKey["RSquareBracket"], (K) => HandleFastKey(K, "bracket_curly_right"),
-			;
-			"RAlt", (*) => ProceedCompose(),
-			"RCtrl", (*) => ProceedCombining(),
 		]
 	} else if Combinations = "Glagolitic Futhark" {
 		return [
@@ -11547,53 +11478,182 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			;
 			"<^<!" UseKey["D"], (K) => HandleFastKey(K, "cyr_com_vzmet"),
 		]
-	} else if Combinations = "Utility" {
-
 	} else if Combinations = "NonQWERTY" {
 		return [
 			UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], ["cyr_c_let_f", "cyr_s_let_f"], True),
+			"+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], ["cyr_c_let_f", "cyr_s_let_f"], True, True),
 			UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_i", "cyr_s_let_i"], True),
+			"+" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_i", "cyr_s_let_i"], True, True),
 			UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], ["cyr_c_let_s", "cyr_s_let_s"], True),
+			"+" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], ["cyr_c_let_s", "cyr_s_let_s"], True, True),
 			UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], ["cyr_c_let_v", "cyr_s_let_v"], True),
+			"+" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], ["cyr_c_let_v", "cyr_s_let_v"], True, True),
 			UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], ["cyr_c_let_u", "cyr_s_let_u"], True),
+			"+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], ["cyr_c_let_u", "cyr_s_let_u"], True, True),
 			UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], ["cyr_c_let_a", "cyr_s_let_a"], True),
+			"+" UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], ["cyr_c_let_a", "cyr_s_let_a"], True, True),
 			UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], ["cyr_c_let_p", "cyr_s_let_p"], True),
+			"+" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], ["cyr_c_let_p", "cyr_s_let_p"], True, True),
 			UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], ["cyr_c_let_r", "cyr_s_let_r"], True),
+			"+" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], ["cyr_c_let_r", "cyr_s_let_r"], True, True),
 			UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], ["cyr_c_let_sh", "cyr_s_let_sh"], True),
+			"+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], ["cyr_c_let_sh", "cyr_s_let_sh"], True, True),
 			UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], ["cyr_c_let_o", "cyr_s_let_o"], True),
+			"+" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], ["cyr_c_let_o", "cyr_s_let_o"], True, True),
 			UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], ["cyr_c_let_l", "cyr_s_let_l"], True),
+			"+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], ["cyr_c_let_l", "cyr_s_let_l"], True, True),
 			UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], ["cyr_c_let_d", "cyr_s_let_d"], True),
+			"+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], ["cyr_c_let_d", "cyr_s_let_d"], True, True),
 			UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], ["cyr_c_let_yeri", "cyr_s_let_yeri"], True),
+			"+" UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], ["cyr_c_let_yeri", "cyr_s_let_yeri"], True, True),
 			UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], ["cyr_c_let_t", "cyr_s_let_t"], True),
+			"+" UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], ["cyr_c_let_t", "cyr_s_let_t"], True, True),
 			UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], ["cyr_c_let_shch", "cyr_s_let_shch"], True),
+			"+" UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], ["cyr_c_let_shch", "cyr_s_let_shch"], True, True),
 			UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], ["cyr_c_let_z", "cyr_s_let_z"], True),
+			"+" UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], ["cyr_c_let_z", "cyr_s_let_z"], True, True),
 			UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], ["cyr_c_let_iy", "cyr_s_let_iy"], True),
-			UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], ["cyr_c_let_k", "cyr_s_let_k"], True),
+			"+" UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], ["cyr_c_let_iy", "cyr_s_let_iy"], True, True),
+			UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], ["cyr_c_let_u", "cyr_s_let_u"], True),
+			"+" UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], ["cyr_c_let_k", "cyr_s_let_k"], True, True),
 			UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], ["cyr_c_let_yery", "cyr_s_let_yery"], True),
+			"+" UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], ["cyr_c_let_yery", "cyr_s_let_yery"], True, True),
 			UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], ["cyr_c_let_e", "cyr_s_let_e"], True),
+			"+" UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], ["cyr_c_let_e", "cyr_s_let_e"], True, True),
 			UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], ["cyr_c_let_g", "cyr_s_let_g"], True),
+			"+" UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], ["cyr_c_let_g", "cyr_s_let_g"], True, True),
 			UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], ["cyr_c_let_m", "cyr_s_let_m"], True),
+			"+" UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], ["cyr_c_let_m", "cyr_s_let_m"], True, True),
 			UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], ["cyr_c_let_ts", "cyr_s_let_ts"], True),
+			"+" UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], ["cyr_c_let_ts", "cyr_s_let_ts"], True, True),
 			UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], ["cyr_c_let_ch", "cyr_s_let_ch"], True),
+			"+" UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], ["cyr_c_let_ch", "cyr_s_let_ch"], True, True),
 			UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], ["cyr_c_let_ya", "cyr_s_let_ya"], True),
+			"+" UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], ["cyr_c_let_ya", "cyr_s_let_ya"], True, True),
 			;
 			UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_comma", ["cyr_c_let_b", "cyr_s_let_b"], True),
+			"+" UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_lessthan", ["cyr_s_let_b", "cyr_c_let_b"], True),
 			UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_dot", ["cyr_c_let_yu", "cyr_s_let_yu"], True),
+			"+" UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_greaterthan", ["cyr_s_let_yu", "cyr_c_let_yu"], True),
 			UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", ["cyr_c_let_zh", "cyr_s_let_zh"], True),
+			"+" UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_colon", ["cyr_s_let_zh", "cyr_c_let_zh"], True),
 			UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", ["cyr_c_let_э", "cyr_s_let_э"], True),
+			"+" UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_quotation", ["cyr_s_let_э", "cyr_c_let_э"], True),
 			UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_square_bracket", ["cyr_c_let_h", "cyr_s_let_h"], True),
 			UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", ["cyr_c_let_yeru", "cyr_s_let_yeru"], True),
 			UseKey["Equals"], (K) => HandleFastKey(K, "kkey_equals"),
+			"+" UseKey["Equals"], (K) => HandleFastKey(K, "kkey_plus"),
 			UseKey["Minus"], (K) => HandleFastKey(K, "kkey_hyphen_minus"),
+			"+" UseKey["Minus"], (K) => HandleFastKey(K, "kkey_underscore"),
 			UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_grave_accent", ["cyr_c_let_yo", "cyr_s_let_yo"]),
+			"+" UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_tilde", ["cyr_s_let_yo", "cyr_c_let_yo"]),
 			UseKey["Slash"], (K) => LangSeparatedKey(K, "kkey_slash", "kkey_dot"),
 			"+" UseKey["Slash"], (K) => LangSeparatedKey(K, "question", "kkey_comma"),
 			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", "kkey_slash"),
 			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", "kkey_backslash"),
 		]
+	} else if Combinations = "Cleanscript" {
+		return [
+			UseKey["1"], "Off",
+			UseKey["2"], "Off",
+			UseKey["3"], "Off",
+			UseKey["4"], "Off",
+			UseKey["7"], "Off",
+			UseKey["5"], "Off",
+			UseKey["6"], "Off",
+			UseKey["8"], "Off",
+			UseKey["9"], "Off",
+			UseKey["0"], "Off",
+			UseKey["Minus"], "Off",
+			UseKey["Equals"], "Off",
+			"<+" UseKey["9"], "Off",
+			"<+" UseKey["0"], "Off",
+			"<+" UseKey["Equals"], "Off",
+		]
+	} else if Combinations = "Supercript" {
+		return [
+			UseKey["1"], (K) => HandleFastKey(K, "num_sup_1"),
+			UseKey["2"], (K) => HandleFastKey(K, "num_sup_2"),
+			UseKey["3"], (K) => HandleFastKey(K, "num_sup_3"),
+			UseKey["4"], (K) => HandleFastKey(K, "num_sup_4"),
+			UseKey["5"], (K) => HandleFastKey(K, "num_sup_5"),
+			UseKey["6"], (K) => HandleFastKey(K, "num_sup_6"),
+			UseKey["7"], (K) => HandleFastKey(K, "num_sup_7"),
+			UseKey["8"], (K) => HandleFastKey(K, "num_sup_8"),
+			UseKey["9"], (K) => HandleFastKey(K, "num_sup_9"),
+			UseKey["0"], (K) => HandleFastKey(K, "num_sup_0"),
+			UseKey["Minus"], (K) => HandleFastKey(K, "num_sup_minus"),
+			UseKey["Equals"], (K) => HandleFastKey(K, "num_sup_equals"),
+			"<+" UseKey["9"], (K) => HandleFastKey(K, "num_sup_left_parenthesis"),
+			"<+" UseKey["0"], (K) => HandleFastKey(K, "num_sup_right_parenthesis"),
+			"<+" UseKey["Equals"], (K) => HandleFastKey(K, "num_sup_plus"),
+		]
+	} else if Combinations = "Subscript" {
+		return [
+			UseKey["1"], (K) => HandleFastKey(K, "num_sub_1"),
+			UseKey["2"], (K) => HandleFastKey(K, "num_sub_2"),
+			UseKey["3"], (K) => HandleFastKey(K, "num_sub_3"),
+			UseKey["4"], (K) => HandleFastKey(K, "num_sub_4"),
+			UseKey["5"], (K) => HandleFastKey(K, "num_sub_5"),
+			UseKey["6"], (K) => HandleFastKey(K, "num_sub_6"),
+			UseKey["7"], (K) => HandleFastKey(K, "num_sub_7"),
+			UseKey["8"], (K) => HandleFastKey(K, "num_sub_8"),
+			UseKey["9"], (K) => HandleFastKey(K, "num_sub_9"),
+			UseKey["0"], (K) => HandleFastKey(K, "num_sub_0"),
+			UseKey["Minus"], (K) => HandleFastKey(K, "num_sub_minus"),
+			UseKey["Equals"], (K) => HandleFastKey(K, "num_sub_equals"),
+			"<+" UseKey["9"], (K) => HandleFastKey(K, "num_sub_left_parenthesis"),
+			"<+" UseKey["0"], (K) => HandleFastKey(K, "num_sub_right_parenthesis"),
+			"<+" UseKey["Equals"], (K) => HandleFastKey(K, "num_sub_plus"),
+		]
+	} else if Combinations = "Utility" {
+		return [
+			"<#<!" UseKey["F1"], (*) => GroupActivator("Diacritics Primary", "F1"),
+			"<#<!" UseKey["F2"], (*) => GroupActivator("Diacritics Secondary", "F2"),
+			"<#<!" UseKey["F3"], (*) => GroupActivator("Diacritics Tertiary", "F3"),
+			"<#<!" UseKey["F6"], (*) => GroupActivator("Diacritics Quatemary", "F6"),
+			"<#<!" UseKey["F7"], (*) => GroupActivator("Special Characters", "F7"),
+			"<#<!" UseKey["Space"], (*) => GroupActivator("Spaces"),
+			"<#<!" UseKey["Minus"], (*) => GroupActivator("Dashes", "-"),
+			"<#<!" UseKey["Apostrophe"], (*) => GroupActivator("Quotes", "'"),
+			;
+			"<#<!" UseKey["F"], (*) => SearchKey(),
+			"<#<!" UseKey["U"], (*) => InsertUnicodeKey(),
+			"<#<!" UseKey["A"], (*) => InsertAltCodeKey(),
+			"<#<!" UseKey["L"], (*) => Ligaturise(),
+			">+" UseKey["L"], (*) => Ligaturise("Clipboard"),
+			">+" UseKey["Backspace"], (*) => Ligaturise("Backspace"),
+			"<#<^>!" UseKey["1"], (*) => SwitchToScript("sup"),
+			"<#<^>!" UseKey["2"], (*) => SwitchToScript("sub"),
+			"<#<^>!" UseKey["3"], (*) => SwitchToRoman(),
+			"<#<!" UseKey["M"], (*) => ToggleGroupMessage(),
+			"<#<!" UseKey["PgUp"], (*) => FindCharacterPage(),
+			"<#<!" UseKey["PgDn"], (*) => ReplaceWithUnicode(),
+			"<#<+" UseKey["PgDn"], (*) => ReplaceWithUnicode("Hex"),
+			"<#<!" UseKey["Home"], (*) => OpenPanel(),
+			"<^>!>+" UseKey["Home"], (*) => ToggleInputMode(),
+			"<^>!" UseKey["Home"], (*) => ToggleFastKeys(),
+			"<#<!" UseKey["Q"], (*) => LangSeparatedCall(
+				() => QuotatizeSelection("Double"),
+				() => QuotatizeSelection("France")),
+			"<#<!<+" UseKey["Q"], (*) => LangSeparatedCall(
+				() => QuotatizeSelection("Single"),
+				() => QuotatizeSelection("Paw")),
+			"<#<!" UseKey["NumpadEnter"], (*) => ParagraphizeSelection(),
+			"<#<!" UseKey["NumpadDot"], (*) => GREPizeSelection(),
+			"<^>!" UseKey["NumpadDot"], (*) => GREPizeSelection(True),
+			"<#<!" UseKey["ArrUp"], (*) => ChangeScriptInput("sup"),
+			"<#<!" UseKey["ArrDown"], (*) => ChangeScriptInput("sub"),
+			">^" UseKey["1"], (*) => ToggleLetterScript(),
+			;
+			"RAlt", (*) => ProceedCompose(),
+			"RCtrl", (*) => ProceedCombining(),
+			;
+			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
+			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
+		]
 	}
 }
-
 
 RecoveryKey(KeySC, Shift := False) {
 	KeySCCode := RegExReplace(LayoutsPresets[CheckQWERTY()][KeySC], "SC")
@@ -11729,6 +11789,7 @@ RCtrlEndingTimer() {
 }
 
 Sleep 25
+RegisterHotKeys(GetKeyBindings(SCKeys, "Utility"))
 RegisterHotKeys(GetKeyBindings(SCKeys))
 ;<^<!1:: HandleFastKey("{U+00B9}") ; Superscript 1
 ;<^<!2:: HandleFastKey("{U+00B2}") ; Superscript 2
@@ -11965,8 +12026,5 @@ SendCharToPy(Mode := "") {
 	A_Clipboard := BackupClipboard
 }
 
-
-HotKey("<#<+" SCKeys["PgUp"], (*) => SendCharToPy())
-HotKey("<#<^<+" SCKeys["PgUp"], (*) => SendCharToPy("Copy"))
 
 ;ApplicationEnd
