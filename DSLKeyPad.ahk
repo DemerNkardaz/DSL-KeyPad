@@ -868,12 +868,8 @@ LayoutsPresets := Map(
 	),
 )
 
-GetSettingsLayout := IniRead(ConfigFile, "Settings", "Layout", "QWERTY")
-SCKeys := LayoutsPresets.Has(GetSettingsLayout) ? LayoutsPresets[GetSettingsLayout] : "QWERTY"
-
 RegisterLayout(LayoutName := "QWERTY") {
-	global SCKeys, GlagoFutharkActive
-	SCKeys := LayoutsPresets[LayoutName]
+	global GlagoFutharkActive
 	IniWrite LayoutName, ConfigFile, "Settings", "Layout"
 
 	UnregisterKeysLayout()
@@ -11801,40 +11797,19 @@ RCtrlEndingTimer() {
 	return SetTimer(RAltsSetStats, -300)
 }
 
-Sleep 125
-RegisterHotKeys(GetKeyBindings(SCKeys, "Utility"))
-Sleep 25
-RegisterHotKeys(GetKeyBindings(SCKeys))
-;<^<!1:: HandleFastKey("{U+00B9}") ; Superscript 1
-;<^<!2:: HandleFastKey("{U+00B2}") ; Superscript 2
-;<^<!3:: HandleFastKey("{U+00B3}") ; Superscript 3
-;<^<!4:: HandleFastKey("{U+2074}") ; Superscript 4
-;<^<!5:: HandleFastKey("{U+2075}") ; Superscript 5
-;<^<!6:: HandleFastKey("{U+2076}") ; Superscript 6
-;<^<!7:: HandleFastKey("{U+2077}") ; Superscript 7
-;<^<!8:: HandleFastKey("{U+2078}") ; Superscript 8
-;<^<!9:: HandleFastKey("{U+2079}") ; Superscript 9
-;<^<!0:: HandleFastKey("{U+2070}") ; Superscript 0
-;<^<+<!1:: HandleFastKey("{U+2081}") ; Subscript 1
-;<^<+<!2:: HandleFastKey("{U+2082}") ; Subscript 2
-;<^<+<!3:: HandleFastKey("{U+2083}") ; Subscript 3
-;<^<+<!4:: HandleFastKey("{U+2084}") ; Subscript 4
-;<^<+<!5:: HandleFastKey("{U+2085}") ; Subscript 5
-;<^<+<!6:: HandleFastKey("{U+2086}") ; Subscript 6
-;<^<+<!7:: HandleFastKey("{U+2087}") ; Subscript 7
-;<^<+<!8:: HandleFastKey("{U+2088}") ; Subscript 8
-;<^<+<!9:: HandleFastKey("{U+2089}") ; Subscript 9
-;<^<+<!0:: HandleFastKey("{U+2080}") ; Subscript 0
-;<^<!e:: Send("{U+045E}") ; Cyrillic u with breve
-;<^<+<!e:: Send("{U+040E}") ; Cyrillic cap u with breve
-;<^<!w:: Send("{U+04EF}") ; Cyrillic u with macron
-;<^<+<!w:: Send("{U+04EE}") ; Cyrillic cap u with macron
-;<^<!q:: Send("{U+04E3}") ; Cyrillic i with macron
-;<^<+<!q:: Send("{U+04E2}") ; Cyrillic cap i with macron
-;<^<!x:: Send("{U+04AB}") ; CYRILLIC SMALL LETTER ES WITH DESCENDER
-;<^<+<!x:: Send("{U+04AA}") ; CYRILLIC CAPITAL LETTER ES WITH DESCENDER
-;>+<+g:: HandleFastKey(CharCodes.grapjoiner[1], True)
-;<^<!NumpadDiv:: HandleFastKey(CharCodes.fractionslash[1], True)
+
+LaunchRegistry(LayoutName := LayoutsPresets[CheckQWERTY()]) {
+	if LayoutName != "QWERTY" {
+		RegisterHotKeys(GetKeyBindings(LayoutName, "NonQWERTY"))
+	}
+	Sleep 125
+	RegisterHotKeys(GetKeyBindings(LayoutName, "Utility"))
+	Sleep 25
+	RegisterHotKeys(GetKeyBindings(LayoutName))
+}
+
+LaunchRegistry()
+
 ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False) {
 	if SkipMessage == True
 		return
