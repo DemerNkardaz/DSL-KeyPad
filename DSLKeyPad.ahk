@@ -159,6 +159,7 @@ FastKeysIsActive := False
 SkipGroupMessage := False
 GlagoFutharkActive := False
 CombiningEnabled := False
+DisabledAllKeys := False
 InputMode := "Default"
 LaTeXMode := "common"
 
@@ -477,7 +478,6 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		Reload
 		return
 	} else {
-		FileDelete(UpdateFilePath)
 		MsgBox(ReadLocale("update_absent"), DSLPadTitle)
 	}
 	return
@@ -2571,7 +2571,7 @@ MapInsert(Characters,
 			unicode: "{U+27E8}", html: "&#10216;",
 			altCode: "123",
 			tags: ["left angle math bracket", "левая угловая математическая скобка"],
-			group: [["Brackets", "Special Fast Secondary"], "[9]"],
+			group: [["Brackets", "Special Fast Secondary"], "9"],
 			show_on_fast_keys: True,
 			symbol: Chr(0x27E8)
 		},
@@ -2579,7 +2579,7 @@ MapInsert(Characters,
 			unicode: "{U+27E9}", html: "&#10217;",
 			altCode: "125",
 			tags: ["right angle math bracket", "правая угловая математическая скобка"],
-			group: [["Brackets", "Special Fast Secondary"], "[0]"],
+			group: [["Brackets", "Special Fast Secondary"], "0"],
 			show_on_fast_keys: True,
 			symbol: Chr(0x27E9)
 		},
@@ -10129,6 +10129,7 @@ Constructor() {
 	}
 
 	Command_controls := CommandsTree.Add(ReadLocale("func_label_controls"))
+	Command_disable := CommandsTree.Add(ReadLocale("func_label_disable"))
 	Command_gotopage := CommandsTree.Add(ReadLocale("func_label_gotopage"))
 	Command_selgoto := CommandsTree.Add(ReadLocale("func_label_selgoto"))
 	Command_copylist := CommandsTree.Add(ReadLocale("func_label_copylist"))
@@ -10890,6 +10891,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 
 	LabelValidator := [
 		"func_label_controls",
+		"func_label_disable",
 		"func_label_gotopage",
 		"func_label_selgoto",
 		"func_label_copylist",
@@ -11091,9 +11093,25 @@ SendPaste(SendKey, Callback := "") {
 }
 
 
+DisableAllKeys() {
+	global DisabledAllKeys
+	DisabledAllKeys := !DisabledAllKeys
+
+	if DisabledAllKeys {
+		UnregisterKeysLayout()
+	} else {
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+	}
+}
+>^F10:: DisableAllKeys()
+
+
 HandleFastKey(Combo := "", CharacterNames*) {
 	global FastKeysIsActive
 	IsLayoutValid := CheckLayoutValid()
+	ActiveWindowClass := WinGetClass("A")
+	FocusedControl := ControlGetFocus("A")
+	FieldValid := InStr(FocusedControl, "Edit") || InStr(FocusedControl, "RichEdit") || InStr(FocusedControl, "Text")
 
 
 	if IsLayoutValid {
@@ -11106,20 +11124,36 @@ HandleFastKey(Combo := "", CharacterNames*) {
 		SendText(Output)
 	} else {
 		if Combo != "" {
-			Combo := RegExReplace(Combo, "<\^>!", "{RAlt}")
-			Combo := RegExReplace(Combo, "<\^", "{LCtrl}")
-			Combo := RegExReplace(Combo, ">\^", "{RCtrl}")
-			Combo := RegExReplace(Combo, "\^", "{Ctrl}")
-			Combo := RegExReplace(Combo, "<!", "{LAlt}")
-			Combo := RegExReplace(Combo, "!", "{Alt}")
-			Combo := RegExReplace(Combo, "<\+", "{LShift}")
-			Combo := RegExReplace(Combo, ">\+", "{RShift}")
-			Combo := RegExReplace(Combo, "+", "{Shift}")
-			Combo := RegExReplace(Combo, "<#", "{LWin}")
-			Combo := RegExReplace(Combo, ">#", "{RWin}")
-			Combo := RegExReplace(Combo, "#", "{Win}")
-			Combo := RegExReplace(Combo, "SC(.*)", "{sc$1}")
-			Combo := RegExReplace(Combo, "VK(.*)", "{vk$1}")
+			Patterns := [
+				"<\^>!", "{RAlt}",
+				"<\^", "{LCtrl}",
+				">\^", "{RCtrl}",
+				"\^", "{Ctrl}",
+				"<!", "{LAlt}",
+				"!", "{Alt}",
+				"<\+", "{LShift}",
+				">\+", "{RShift}",
+				"+", "{Shift}",
+				"<#", "{LWin}",
+				">#", "{RWin}",
+				"#", "{Win}",
+				"SC(.*)", "{sc$1}",
+				"VK(.*)", "{vk$1}",
+			]
+
+
+			for index, pair in Patterns {
+				if (Mod(index, 2) = 1) {
+					key := pair
+					replacement := Patterns[index + 1]
+					try {
+						Combo := RegExReplace(Combo, key, replacement)
+					} catch {
+						continue
+					}
+				}
+			}
+
 			Send(Combo)
 		}
 	}
