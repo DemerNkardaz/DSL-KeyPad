@@ -9016,6 +9016,48 @@ InsertUnicodeKey() {
 	IniWrite PromptValue, ConfigFile, "LatestPrompts", "Unicode"
 }
 
+
+SwitchQWERTY_YITSUKEN(Script := "Latin") {
+
+	if (Script == "Latin") {
+		LayoutName := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
+
+
+		LayoutItems := GetLayoutsList.Length
+		loop LayoutItems {
+			if GetLayoutsList[A_Index] == LayoutName {
+				if A_Index + 1 > LayoutItems {
+					NextLayout := GetLayoutsList[1]
+				} else {
+					NextLayout := GetLayoutsList[A_Index + 1]
+				}
+			}
+		}
+	} else if (Script == "Cyrillic") {
+		LayoutName := IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")
+
+		LayoutItems := CyrillicLayoutsList.Length
+		loop LayoutItems {
+			if CyrillicLayoutsList[A_Index] == LayoutName {
+				if A_Index + 1 > LayoutItems {
+					NextLayout := CyrillicLayoutsList[1]
+				} else {
+					NextLayout := CyrillicLayoutsList[A_Index + 1]
+				}
+				break
+			}
+		}
+
+	} else {
+		return
+	}
+
+	if NextLayout {
+		RegisterLayout(NextLayout)
+	}
+}
+
+
 SwitchToScript(scriptMode) {
 	LanguageCode := GetLanguageCode()
 	Labels := {}
@@ -10103,6 +10145,7 @@ Constructor() {
 	Command_combining := CommandsTree.Add(ReadLocale("func_label_combining"))
 	Command_glagokeys := CommandsTree.Add(ReadLocale("func_label_glagokeys"))
 	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
+	Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layouttoggle"))
 	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
 	Command_textprocessing := CommandsTree.Add(ReadLocale("func_label_textprocessing"))
 	Command_tp_paragraph := CommandsTree.Add(ReadLocale("func_label_tp_paragraph"), Command_textprocessing)
@@ -10863,6 +10906,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_combining",
 		"func_label_glagokeys",
 		"func_label_inputtoggle",
+		"func_label_layouttoggle",
 		"func_label_notifs",
 		"func_label_textprocessing",
 		"func_label_tp_quotes",
@@ -11871,6 +11915,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
+			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
 				() => QuotatizeSelection("Double"),
 				() => QuotatizeSelection("France")),
