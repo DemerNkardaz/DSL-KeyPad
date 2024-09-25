@@ -877,6 +877,9 @@ RegisterLayout(LayoutName := "QWERTY") {
 	IniWrite LayoutName, ConfigFile, "Settings", "Layout"
 
 	UnregisterKeysLayout()
+	if LayoutName != "QWERTY" {
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+	}
 
 	IsLettersModeEnabled := GlagoFutharkActive
 
@@ -8412,6 +8415,128 @@ MapInsert(Characters,
 )
 
 MapInsert(Characters,
+	"lat_c_let_a", { calcOff: "", unicode: "{U+0041}", symbol: Chr(0x0041) },
+		"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", symbol: Chr(0x0061) },
+		"lat_c_let_b", { calcOff: "", unicode: "{U+0042}", symbol: Chr(0x0042) },
+		"lat_s_let_b", { calcOff: "", unicode: "{U+0062}", symbol: Chr(0x0062) },
+		"lat_c_let_c", { calcOff: "", unicode: "{U+0043}", symbol: Chr(0x0043) },
+		"lat_s_let_c", { calcOff: "", unicode: "{U+0063}", symbol: Chr(0x0063) },
+		"lat_c_let_d", { calcOff: "", unicode: "{U+0044}", symbol: Chr(0x0044) },
+		"lat_s_let_d", { calcOff: "", unicode: "{U+0064}", symbol: Chr(0x0064) },
+		"lat_c_let_e", { calcOff: "", unicode: "{U+0045}", symbol: Chr(0x0045) },
+		"lat_s_let_e", { calcOff: "", unicode: "{U+0065}", symbol: Chr(0x0065) },
+		"lat_c_let_f", { calcOff: "", unicode: "{U+0046}", symbol: Chr(0x0046) },
+		"lat_s_let_f", { calcOff: "", unicode: "{U+0066}", symbol: Chr(0x0066) },
+		"lat_c_let_g", { calcOff: "", unicode: "{U+0047}", symbol: Chr(0x0047) },
+		"lat_s_let_g", { calcOff: "", unicode: "{U+0067}", symbol: Chr(0x0067) },
+		"lat_c_let_h", { calcOff: "", unicode: "{U+0048}", symbol: Chr(0x0048) },
+		"lat_s_let_h", { calcOff: "", unicode: "{U+0068}", symbol: Chr(0x0068) },
+		"lat_c_let_i", { calcOff: "", unicode: "{U+0049}", symbol: Chr(0x0049) },
+		"lat_s_let_i", { calcOff: "", unicode: "{U+0069}", symbol: Chr(0x0069) },
+		"lat_c_let_j", { calcOff: "", unicode: "{U+004A}", symbol: Chr(0x004A) },
+		"lat_s_let_j", { calcOff: "", unicode: "{U+006A}", symbol: Chr(0x006A) },
+		"lat_c_let_k", { calcOff: "", unicode: "{U+004B}", symbol: Chr(0x004B) },
+		"lat_s_let_k", { calcOff: "", unicode: "{U+006B}", symbol: Chr(0x006B) },
+		"lat_c_let_l", { calcOff: "", unicode: "{U+004C}", symbol: Chr(0x004C) },
+		"lat_s_let_l", { calcOff: "", unicode: "{U+006C}", symbol: Chr(0x006C) },
+		"lat_c_let_m", { calcOff: "", unicode: "{U+004D}", symbol: Chr(0x004D) },
+		"lat_s_let_m", { calcOff: "", unicode: "{U+006D}", symbol: Chr(0x006D) },
+		"lat_c_let_n", { calcOff: "", unicode: "{U+004E}", symbol: Chr(0x004E) },
+		"lat_s_let_n", { calcOff: "", unicode: "{U+006E}", symbol: Chr(0x006E) },
+		"lat_c_let_o", { calcOff: "", unicode: "{U+004F}", symbol: Chr(0x004F) },
+		"lat_s_let_o", { calcOff: "", unicode: "{U+006F}", symbol: Chr(0x006F) },
+		"lat_c_let_p", { calcOff: "", unicode: "{U+0050}", symbol: Chr(0x0050) },
+		"lat_s_let_p", { calcOff: "", unicode: "{U+0070}", symbol: Chr(0x0070) },
+		"lat_c_let_q", { calcOff: "", unicode: "{U+0051}", symbol: Chr(0x0051) },
+		"lat_s_let_q", { calcOff: "", unicode: "{U+0071}", symbol: Chr(0x0071) },
+		"lat_c_let_r", { calcOff: "", unicode: "{U+0052}", symbol: Chr(0x0052) },
+		"lat_s_let_r", { calcOff: "", unicode: "{U+0072}", symbol: Chr(0x0072) },
+		"lat_c_let_s", { calcOff: "", unicode: "{U+0053}", symbol: Chr(0x0053) },
+		"lat_s_let_s", { calcOff: "", unicode: "{U+0073}", symbol: Chr(0x0073) },
+		"lat_c_let_t", { calcOff: "", unicode: "{U+0054}", symbol: Chr(0x0054) },
+		"lat_s_let_t", { calcOff: "", unicode: "{U+0074}", symbol: Chr(0x0074) },
+		"lat_c_let_u", { calcOff: "", unicode: "{U+0055}", symbol: Chr(0x0055) },
+		"lat_s_let_u", { calcOff: "", unicode: "{U+0075}", symbol: Chr(0x0075) },
+		"lat_c_let_v", { calcOff: "", unicode: "{U+0056}", symbol: Chr(0x0056) },
+		"lat_s_let_v", { calcOff: "", unicode: "{U+0076}", symbol: Chr(0x0076) },
+		"lat_c_let_w", { calcOff: "", unicode: "{U+0057}", symbol: Chr(0x0057) },
+		"lat_s_let_w", { calcOff: "", unicode: "{U+0077}", symbol: Chr(0x0077) },
+		"lat_c_let_x", { calcOff: "", unicode: "{U+0058}", symbol: Chr(0x0058) },
+		"lat_s_let_x", { calcOff: "", unicode: "{U+0078}", symbol: Chr(0x0078) },
+		"lat_c_let_y", { calcOff: "", unicode: "{U+0059}", symbol: Chr(0x0059) },
+		"lat_s_let_y", { calcOff: "", unicode: "{U+0079}", symbol: Chr(0x0079) },
+		"lat_c_let_z", { calcOff: "", unicode: "{U+005A}", symbol: Chr(0x005A) },
+		"lat_s_let_z", { calcOff: "", unicode: "{U+007A}", symbol: Chr(0x007A) },
+		;
+		"cyr_c_let_a", { calcOff: "", unicode: "{U+0410}", symbol: Chr(0x0410) }, ; А
+		"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}", symbol: Chr(0x0430) }, ; а
+		"cyr_c_let_b", { calcOff: "", unicode: "{U+0411}", symbol: Chr(0x0411) }, ; Б
+		"cyr_s_let_b", { calcOff: "", unicode: "{U+0431}", symbol: Chr(0x0431) }, ; б
+		"cyr_c_let_v", { calcOff: "", unicode: "{U+0412}", symbol: Chr(0x0412) }, ; В
+		"cyr_s_let_v", { calcOff: "", unicode: "{U+0432}", symbol: Chr(0x0432) }, ; в
+		"cyr_c_let_g", { calcOff: "", unicode: "{U+0413}", symbol: Chr(0x0413) }, ; Г
+		"cyr_s_let_g", { calcOff: "", unicode: "{U+0433}", symbol: Chr(0x0433) }, ; г
+		"cyr_c_let_d", { calcOff: "", unicode: "{U+0414}", symbol: Chr(0x0414) }, ; Д
+		"cyr_s_let_d", { calcOff: "", unicode: "{U+0434}", symbol: Chr(0x0434) }, ; д
+		"cyr_c_let_e", { calcOff: "", unicode: "{U+0415}", symbol: Chr(0x0415) }, ; Е
+		"cyr_s_let_e", { calcOff: "", unicode: "{U+0435}", symbol: Chr(0x0435) }, ; е
+		"cyr_c_let_yo", { calcOff: "", unicode: "{U+0401}", symbol: Chr(0x0401) }, ; Ё
+		"cyr_s_let_yo", { calcOff: "", unicode: "{U+0451}", symbol: Chr(0x0451) }, ; ё
+		"cyr_c_let_zh", { calcOff: "", unicode: "{U+0416}", symbol: Chr(0x0416) }, ; Ж
+		"cyr_s_let_zh", { calcOff: "", unicode: "{U+0436}", symbol: Chr(0x0436) }, ; ж
+		"cyr_c_let_z", { calcOff: "", unicode: "{U+0417}", symbol: Chr(0x0417) }, ; З
+		"cyr_s_let_z", { calcOff: "", unicode: "{U+0437}", symbol: Chr(0x0437) }, ; з
+		"cyr_c_let_i", { calcOff: "", unicode: "{U+0418}", symbol: Chr(0x0418) }, ; И
+		"cyr_s_let_i", { calcOff: "", unicode: "{U+0438}", symbol: Chr(0x0438) }, ; и
+		"cyr_c_let_iy", { calcOff: "", unicode: "{U+0419}", symbol: Chr(0x0419) }, ; Й
+		"cyr_s_let_iy", { calcOff: "", unicode: "{U+0439}", symbol: Chr(0x0439) }, ; й
+		"cyr_c_let_k", { calcOff: "", unicode: "{U+041A}", symbol: Chr(0x041A) }, ; К
+		"cyr_s_let_k", { calcOff: "", unicode: "{U+043A}", symbol: Chr(0x043A) }, ; к
+		"cyr_c_let_l", { calcOff: "", unicode: "{U+041B}", symbol: Chr(0x041B) }, ; Л
+		"cyr_s_let_l", { calcOff: "", unicode: "{U+043B}", symbol: Chr(0x043B) }, ; л
+		"cyr_c_let_m", { calcOff: "", unicode: "{U+041C}", symbol: Chr(0x041C) }, ; М
+		"cyr_s_let_m", { calcOff: "", unicode: "{U+043C}", symbol: Chr(0x043C) }, ; м
+		"cyr_c_let_n", { calcOff: "", unicode: "{U+041D}", symbol: Chr(0x041D) }, ; Н
+		"cyr_s_let_n", { calcOff: "", unicode: "{U+043D}", symbol: Chr(0x043D) }, ; н
+		"cyr_c_let_o", { calcOff: "", unicode: "{U+041E}", symbol: Chr(0x041E) }, ; О
+		"cyr_s_let_o", { calcOff: "", unicode: "{U+043E}", symbol: Chr(0x043E) }, ; о
+		"cyr_c_let_p", { calcOff: "", unicode: "{U+041F}", symbol: Chr(0x041F) }, ; П
+		"cyr_s_let_p", { calcOff: "", unicode: "{U+043F}", symbol: Chr(0x043F) }, ; п
+		"cyr_c_let_r", { calcOff: "", unicode: "{U+0420}", symbol: Chr(0x0420) }, ; Р
+		"cyr_s_let_r", { calcOff: "", unicode: "{U+0440}", symbol: Chr(0x0440) }, ; р
+		"cyr_c_let_s", { calcOff: "", unicode: "{U+0421}", symbol: Chr(0x0421) }, ; С
+		"cyr_s_let_s", { calcOff: "", unicode: "{U+0441}", symbol: Chr(0x0441) }, ; с
+		"cyr_c_let_t", { calcOff: "", unicode: "{U+0422}", symbol: Chr(0x0422) }, ; Т
+		"cyr_s_let_t", { calcOff: "", unicode: "{U+0442}", symbol: Chr(0x0442) }, ; т
+		"cyr_c_let_u", { calcOff: "", unicode: "{U+0423}", symbol: Chr(0x0423) }, ; У
+		"cyr_s_let_u", { calcOff: "", unicode: "{U+0443}", symbol: Chr(0x0443) }, ; у
+		"cyr_c_let_f", { calcOff: "", unicode: "{U+0424}", symbol: Chr(0x0424) }, ; Ф
+		"cyr_s_let_f", { calcOff: "", unicode: "{U+0444}", symbol: Chr(0x0444) }, ; ф
+		"cyr_c_let_h", { calcOff: "", unicode: "{U+0425}", symbol: Chr(0x0425) }, ; Х
+		"cyr_s_let_h", { calcOff: "", unicode: "{U+0445}", symbol: Chr(0x0445) }, ; х
+		"cyr_c_let_ts", { calcOff: "", unicode: "{U+0426}", symbol: Chr(0x0426) }, ; Ц
+		"cyr_s_let_ts", { calcOff: "", unicode: "{U+0446}", symbol: Chr(0x0446) }, ; ц
+		"cyr_c_let_ch", { calcOff: "", unicode: "{U+0427}", symbol: Chr(0x0427) }, ; Ч
+		"cyr_s_let_ch", { calcOff: "", unicode: "{U+0447}", symbol: Chr(0x0447) }, ; ч
+		"cyr_c_let_sh", { calcOff: "", unicode: "{U+0428}", symbol: Chr(0x0428) }, ; Ш
+		"cyr_s_let_sh", { calcOff: "", unicode: "{U+0448}", symbol: Chr(0x0448) }, ; ш
+		"cyr_c_let_shch", { calcOff: "", unicode: "{U+0429}", symbol: Chr(0x0429) }, ; Щ
+		"cyr_s_let_shch", { calcOff: "", unicode: "{U+0449}", symbol: Chr(0x0449) }, ; щ
+		"cyr_c_let_yeru", { calcOff: "", unicode: "{U+042A}", symbol: Chr(0x042A) }, ; Ъ
+		"cyr_s_let_yeru", { calcOff: "", unicode: "{U+044A}", symbol: Chr(0x044A) }, ; ъ
+		"cyr_c_let_yery", { calcOff: "", unicode: "{U+042B}", symbol: Chr(0x042B) }, ; Ы
+		"cyr_s_let_yery", { calcOff: "", unicode: "{U+044B}", symbol: Chr(0x044B) }, ; ы
+		"cyr_c_let_yeri", { calcOff: "", unicode: "{U+042C}", symbol: Chr(0x042C) }, ; Ь
+		"cyr_s_let_yeri", { calcOff: "", unicode: "{U+044C}", symbol: Chr(0x044C) }, ; ь
+		"cyr_c_let_э", { calcOff: "", unicode: "{U+042D}", symbol: Chr(0x042D) }, ; Э
+		"cyr_s_let_э", { calcOff: "", unicode: "{U+044D}", symbol: Chr(0x044D) }, ; э
+		"cyr_c_let_yu", { calcOff: "", unicode: "{U+042E}", symbol: Chr(0x042E) }, ; Ю
+		"cyr_s_let_yu", { calcOff: "", unicode: "{U+044E}", symbol: Chr(0x044E) }, ; ю
+		"cyr_c_let_ya", { calcOff: "", unicode: "{U+042F}", symbol: Chr(0x042F) }, ; Я
+		"cyr_s_let_ya", { calcOff: "", unicode: "{U+044F}", symbol: Chr(0x044F) } ; я
+)
+
+MapInsert(Characters,
 	"num_sup_0", { unicode: "{U+2070}", html: "&#8304;", symbol: Chr(0x2070) },
 		"num_sup_1", { unicode: "{U+00B9}", html: "&#185;", entity: "&sup1;", symbol: Chr(0x00B9) },
 		"num_sup_2", { unicode: "{U+00B2}", html: "&#178;", entity: "&sup2;", symbol: Chr(0x00B2) },
@@ -8445,28 +8570,32 @@ MapInsert(Characters,
 )
 
 MapInsert(Characters,
-	"kkey_0", { calcOff: "", unicode: "{U+0030}", html: "&#48;", sup: "num_sup_0", sub: "num_sub_0", symbol: "0" },
-		"kkey_1", { calcOff: "", unicode: "{U+0031}", html: "&#49;", sup: "num_sup_1", sub: "num_sub_1", symbol: "1" },
-		"kkey_2", { calcOff: "", unicode: "{U+0032}", html: "&#50;", sup: "num_sup_2", sub: "num_sub_2", symbol: "2" },
-		"kkey_3", { calcOff: "", unicode: "{U+0033}", html: "&#51;", sup: "num_sup_3", sub: "num_sub_3", symbol: "3" },
-		"kkey_4", { calcOff: "", unicode: "{U+0034}", html: "&#52;", sup: "num_sup_4", sub: "num_sub_4", symbol: "4" },
-		"kkey_5", { calcOff: "", unicode: "{U+0035}", html: "&#53;", sup: "num_sup_5", sub: "num_sub_5", symbol: "5" },
-		"kkey_6", { calcOff: "", unicode: "{U+0036}", html: "&#54;", sup: "num_sup_6", sub: "num_sub_6", symbol: "6" },
-		"kkey_7", { calcOff: "", unicode: "{U+0037}", html: "&#55;", sup: "num_sup_7", sub: "num_sub_7", symbol: "7" },
-		"kkey_8", { calcOff: "", unicode: "{U+0038}", html: "&#56;", sup: "num_sup_8", sub: "num_sub_8", symbol: "8" },
-		"kkey_9", { calcOff: "", unicode: "{U+0039}", html: "&#57;", sup: "num_sup_9", sub: "num_sub_9", symbol: "9" },
-		"kkey_minus", { calcOff: "", unicode: "{U+002D}", html: "&#45;", sup: "num_sup_minus", sub: "num_sub_minus", symbol: "-" },
-		"kkey_equals", { calcOff: "", unicode: "{U+003D}", html: "&#61;", sup: "num_sup_equals", sub: "num_sub_equals", symbol: "=" },
-		"kkey_plus", { calcOff: "", unicode: "{U+002B}", html: "&#43;", sup: "num_sup_plus", sub: "num_sub_plus", symbol: "+" },
-		"kkey_left_parenthesis", { calcOff: "", unicode: "{U+0028}", html: "&#40;", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", symbol: "(" },
-		"kkey_right_parenthesis", { calcOff: "", unicode: "{U+0029}", html: "&#41;", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", symbol: ")" },
-		"kkey_comma", { calcOff: "", unicode: "{U+002C}", html: "&#44;", symbol: "," },
-		"kkey_dot", { calcOff: "", unicode: "{U+002E}", html: "&#46;", symbol: "." },
-		"kkey_semicolon", { calcOff: "", unicode: "{U+003B}", html: "&#59;", symbol: ";" },
-		"kkey_apostrophe", { calcOff: "", unicode: "{U+0027}", html: "&#39;", symbol: "'" },
-		"kkey_l_square_bracket", { calcOff: "", unicode: "{U+005B}", html: "&#91;", symbol: "[" },
-		"kkey_r_square_bracket", { calcOff: "", unicode: "{U+005D}", html: "&#93;", symbol: "]" },
-		"kkey_grave_accent", { calcOff: "", unicode: "{U+0060}", html: "&#96;", symbol: "``" },
+	"kkey_0", { calcOff: "", unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", symbol: "0" },
+		"kkey_1", { calcOff: "", unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", symbol: "1" },
+		"kkey_2", { calcOff: "", unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", symbol: "2" },
+		"kkey_3", { calcOff: "", unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", symbol: "3" },
+		"kkey_4", { calcOff: "", unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", symbol: "4" },
+		"kkey_5", { calcOff: "", unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", symbol: "5" },
+		"kkey_6", { calcOff: "", unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", symbol: "6" },
+		"kkey_7", { calcOff: "", unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", symbol: "7" },
+		"kkey_8", { calcOff: "", unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", symbol: "8" },
+		"kkey_9", { calcOff: "", unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", symbol: "9" },
+		"kkey_minus", { calcOff: "", unicode: "{U+002D}", sup: "num_sup_minus", sub: "num_sub_minus", symbol: "-" },
+		"kkey_equals", { calcOff: "", unicode: "{U+003D}", sup: "num_sup_equals", sub: "num_sub_equals", symbol: "=" },
+		"kkey_hyphen_minus", { calcOff: "", unicode: "{U+002D}", symbol: "-" },
+		"kkey_plus", { calcOff: "", unicode: "{U+002B}", sup: "num_sup_plus", sub: "num_sub_plus", symbol: "+" },
+		"kkey_left_parenthesis", { calcOff: "", unicode: "{U+0028}", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", symbol: "(" },
+		"kkey_right_parenthesis", { calcOff: "", unicode: "{U+0029}", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", symbol: ")" },
+		"kkey_comma", { calcOff: "", unicode: "{U+002C}", symbol: "," },
+		"kkey_dot", { calcOff: "", unicode: "{U+002E}", symbol: "." },
+		"kkey_semicolon", { calcOff: "", unicode: "{U+003B}", symbol: ";" },
+		"kkey_apostrophe", { calcOff: "", unicode: "{U+0027}", symbol: "'" },
+		"kkey_l_square_bracket", { calcOff: "", unicode: "{U+005B}", symbol: "[" },
+		"kkey_r_square_bracket", { calcOff: "", unicode: "{U+005D}", symbol: "]" },
+		"kkey_grave_accent", { calcOff: "", unicode: "{U+0060}", symbol: "``" },
+		"kkey_slash", { calcOff: "", unicode: "{U+002F}", symbol: "/" },
+		"kkey_backslash", { calcOff: "", unicode: "{U+005C}", symbol: "\" },
+		"kkey_verticalline", { calcOff: "", unicode: "{U+007C}", symbol: "|" },
 )
 
 CharactersCount := GetMapCount(Characters)
@@ -8538,13 +8667,13 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 
 		if GroupValid && value.group.Has(2) {
 			characterKeys := value.group[2]
-			characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
+			characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "html")) ? value.html : ""
 			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
 			if IsObject(characterKeys) {
 				for _, key in characterKeys {
 					if (keyPressed == key) {
-						if InputMode = "HTML" {
+						if InputMode = "HTML" && HasProp(value, "html") {
 							SendText(characterEntity)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							if IsObject(characterLaTeX) {
@@ -8583,7 +8712,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 				}
 			} else {
 				if (keyPressed == characterKeys) {
-					if InputMode = "HTML" {
+					if InputMode = "HTML" && HasProp(value, "html") {
 						SendText(characterEntity)
 					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 						if IsObject(characterLaTeX) {
@@ -8692,7 +8821,7 @@ SearchKey(CycleSend := "") {
 	SymbolSearching(SearchingPrompt) {
 		ProceedSearch(value, characterEntity, characterLaTeX) {
 			OutputValue := ""
-			if InputMode = "HTML" {
+			if InputMode = "HTML" && HasProp(value, "html") {
 				SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
 				OutputValue := SendValue
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
@@ -8757,7 +8886,7 @@ SearchKey(CycleSend := "") {
 				if !HasProp(value, "tags") {
 					continue
 				}
-				characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
+				characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "entity")) ? value.html : ""
 				characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
 				for _, tag in value.tags {
@@ -9433,7 +9562,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 							for _, recipeEntry in Recipe {
 								if (!IsSingleCase && Input == recipeEntry) ||
 									(IsSingleCase && Input = recipeEntry) {
-									if InputMode = "HTML" {
+									if InputMode = "HTML" && HasProp(value, "html") {
 										GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
 									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 										GetUnicodeSymbol := value.LaTeX
@@ -9447,7 +9576,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 							}
 						} else if (!IsSingleCase && Input == Recipe) ||
 							(IsSingleCase && Input = Recipe) {
-							if InputMode = "HTML" {
+							if InputMode = "HTML" && HasProp(value, "html") {
 								GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
 							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 								GetUnicodeSymbol := value.LaTeX
@@ -9495,7 +9624,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 			if IsObject(Recipe) {
 				for _, recipe in Recipe {
 					if (recipe == PromptValue) {
-						if InputMode = "HTML" {
+						if InputMode = "HTML" && HasProp(value, "html") {
 							value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							SendText(value.LaTeX)
@@ -9507,7 +9636,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 					}
 				}
 			} else if (Recipe == PromptValue) {
-				if InputMode = "HTML" {
+				if InputMode = "HTML" && HasProp(value, "html") {
 					value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 					SendText(value.LaTeX)
@@ -10788,7 +10917,7 @@ LV_OpenUnicodeWebsite(LV, RowNumber) {
 			if (InputMode = "HTML" || InputMode = "LaTeX") {
 				for characterEntry, value in Characters {
 					if (SelectedRow = UniTrim(value.unicode)) {
-						if InputMode = "HTML" {
+						if InputMode = "HTML" && HasProp(value, "html") {
 							A_Clipboard := HasProp(value, "entity") ? value.entity : value.html
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							if IsObject(value.LaTeX) {
@@ -10970,10 +11099,10 @@ GetCharacterSequence(CharacterName) {
 		entryName := RegExReplace(characterEntry, "^\S+\s+")
 
 		if (entryName = CharacterName) {
-			characterEntity := (HasProp(value, "entity")) ? value.entity : value.html
+			characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "html")) ? value.html : ""
 			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
-			if InputMode = "HTML" {
+			if InputMode = "HTML" && HasProp(value, "html") {
 				Output .= CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				if IsObject(characterLaTeX) {
@@ -11420,6 +11549,48 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		]
 	} else if Combinations = "Utility" {
 
+	} else if Combinations = "NonQWERTY" {
+		return [
+			UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], ["cyr_c_let_f", "cyr_s_let_f"], True),
+			UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_i", "cyr_s_let_i"], True),
+			UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], ["cyr_c_let_s", "cyr_s_let_s"], True),
+			UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], ["cyr_c_let_v", "cyr_s_let_v"], True),
+			UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], ["cyr_c_let_u", "cyr_s_let_u"], True),
+			UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], ["cyr_c_let_a", "cyr_s_let_a"], True),
+			UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], ["cyr_c_let_p", "cyr_s_let_p"], True),
+			UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], ["cyr_c_let_r", "cyr_s_let_r"], True),
+			UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], ["cyr_c_let_sh", "cyr_s_let_sh"], True),
+			UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], ["cyr_c_let_o", "cyr_s_let_o"], True),
+			UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], ["cyr_c_let_l", "cyr_s_let_l"], True),
+			UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], ["cyr_c_let_d", "cyr_s_let_d"], True),
+			UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], ["cyr_c_let_yeri", "cyr_s_let_yeri"], True),
+			UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], ["cyr_c_let_t", "cyr_s_let_t"], True),
+			UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], ["cyr_c_let_shch", "cyr_s_let_shch"], True),
+			UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], ["cyr_c_let_z", "cyr_s_let_z"], True),
+			UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], ["cyr_c_let_iy", "cyr_s_let_iy"], True),
+			UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], ["cyr_c_let_k", "cyr_s_let_k"], True),
+			UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], ["cyr_c_let_yery", "cyr_s_let_yery"], True),
+			UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], ["cyr_c_let_e", "cyr_s_let_e"], True),
+			UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], ["cyr_c_let_g", "cyr_s_let_g"], True),
+			UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], ["cyr_c_let_m", "cyr_s_let_m"], True),
+			UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], ["cyr_c_let_ts", "cyr_s_let_ts"], True),
+			UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], ["cyr_c_let_ch", "cyr_s_let_ch"], True),
+			UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], ["cyr_c_let_ya", "cyr_s_let_ya"], True),
+			;
+			UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_comma", ["cyr_c_let_b", "cyr_s_let_b"], True),
+			UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_dot", ["cyr_c_let_yu", "cyr_s_let_yu"], True),
+			UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", ["cyr_c_let_zh", "cyr_s_let_zh"], True),
+			UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", ["cyr_c_let_э", "cyr_s_let_э"], True),
+			UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_square_bracket", ["cyr_c_let_h", "cyr_s_let_h"], True),
+			UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", ["cyr_c_let_yeru", "cyr_s_let_yeru"], True),
+			UseKey["Equals"], (K) => HandleFastKey(K, "kkey_equals"),
+			UseKey["Minus"], (K) => HandleFastKey(K, "kkey_hyphen_minus"),
+			UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_grave_accent", ["cyr_c_let_yo", "cyr_s_let_yo"]),
+			UseKey["Slash"], (K) => LangSeparatedKey(K, "kkey_slash", "kkey_dot"),
+			"+" UseKey["Slash"], (K) => LangSeparatedKey(K, "question", "kkey_comma"),
+			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", "kkey_slash"),
+			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", "kkey_backslash"),
+		]
 	}
 }
 
