@@ -885,6 +885,7 @@ RegisterLayout(LayoutName := "QWERTY") {
 
 	Sleep 250
 	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
+	Sleep 25
 	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 
 	if IsLettersModeEnabled {
@@ -8488,8 +8489,8 @@ MapInsert(Characters,
 		"cyr_s_let_zh", { calcOff: "", unicode: "{U+0436}", symbol: Chr(0x0436) }, ; ж
 		"cyr_c_let_z", { calcOff: "", unicode: "{U+0417}", symbol: Chr(0x0417) }, ; З
 		"cyr_s_let_z", { calcOff: "", unicode: "{U+0437}", symbol: Chr(0x0437) }, ; з
-		"cyr_c_let_i", { calcOff: "", unicode: "{U+0418}", symbol: Chr(0x0418) }, ; И
-		"cyr_s_let_i", { calcOff: "", unicode: "{U+0438}", symbol: Chr(0x0438) }, ; и
+		"cyr_c_let_и", { calcOff: "", unicode: "{U+0418}", symbol: Chr(0x0418) }, ; И
+		"cyr_s_let_и", { calcOff: "", unicode: "{U+0438}", symbol: Chr(0x0438) }, ; и
 		"cyr_c_let_iy", { calcOff: "", unicode: "{U+0419}", symbol: Chr(0x0419) }, ; Й
 		"cyr_s_let_iy", { calcOff: "", unicode: "{U+0439}", symbol: Chr(0x0439) }, ; й
 		"cyr_c_let_k", { calcOff: "", unicode: "{U+041A}", symbol: Chr(0x041A) }, ; К
@@ -8597,6 +8598,8 @@ MapInsert(Characters,
 		"kkey_quotation", { calcOff: "", unicode: "{U+0022}", symbol: "`"" },
 		"kkey_l_square_bracket", { calcOff: "", unicode: "{U+005B}", symbol: "[" },
 		"kkey_r_square_bracket", { calcOff: "", unicode: "{U+005D}", symbol: "]" },
+		"kkey_l_curly_bracket", { calcOff: "", unicode: "{U+007B}", symbol: "{" },
+		"kkey_r_curly_bracket", { calcOff: "", unicode: "{U+007D}", symbol: "}" },
 		"kkey_grave_accent", { calcOff: "", unicode: "{U+0060}", symbol: "``" },
 		"kkey_tilde", { calcOff: "", unicode: "{U+007E}", symbol: "~" },
 		"kkey_slash", { calcOff: "", unicode: "{U+002F}", symbol: "/" },
@@ -9203,7 +9206,7 @@ GREPizeSelection(GetCollaborative := False) {
 		A_Clipboard := ""
 
 		Send("^c")
-		ClipWait(50, 1)
+		ClipWait(0.50, 1)
 		PromptValue := A_Clipboard
 		A_Clipboard := ""
 	} else {
@@ -9234,7 +9237,7 @@ GREPizeSelection(GetCollaborative := False) {
 		}
 
 		A_Clipboard := ModifiedValue
-		ClipWait(250, 1)
+		ClipWait(0.250, 1)
 		Sleep 1000
 		Send("^v")
 	}
@@ -9249,7 +9252,7 @@ ParagraphizeSelection(SendCollaborative := False) {
 	A_Clipboard := ""
 
 	Send("^c")
-	ClipWait(50, 1)
+	ClipWait(0.50, 1)
 	PromptValue := A_Clipboard
 	A_Clipboard := ""
 
@@ -9290,7 +9293,7 @@ ParagraphizeSelection(SendCollaborative := False) {
 
 		if !SendCollaborative {
 			A_Clipboard := ModifiedValue
-			ClipWait(250, 1)
+			ClipWait(0.250, 1)
 			Sleep 1000
 			Send("^v")
 		} else {
@@ -9306,16 +9309,22 @@ ParagraphizeSelection(SendCollaborative := False) {
 }
 
 QuotatizeSelection(Mode) {
+	RegEx := "[a-zA-Zа-яА-ЯёЁ0-9.,:;!?()\`"'-+=/\\]"
+
 	BackupClipboard := A_Clipboard
 	PromptValue := ""
 	A_Clipboard := ""
 
 	Send("^c")
-	ClipWait(50, 1)
+	ClipWait(0.5, 0)
 	PromptValue := A_Clipboard
+	if !RegExMatch(PromptValue, RegEx) {
+		A_Clipboard := BackupClipboard
+		return
+	}
 	A_Clipboard := ""
 
-	if (PromptValue != "") {
+	if RegExMatch(PromptValue, RegEx) {
 		france_left := GetChar("france_left")
 		france_right := GetChar("france_right")
 		quote_low_9_double := GetChar("quote_low_9_double")
@@ -9367,7 +9376,7 @@ QuotatizeSelection(Mode) {
 		}
 
 		A_Clipboard := PromptValue . TempSpace
-		ClipWait(250, 1)
+		ClipWait(0.250, 0)
 		Sleep 250
 		Send("^v")
 
@@ -10992,19 +11001,21 @@ HandleFastKey(Combo := "", CharacterNames*) {
 
 		SendText(Output)
 	} else {
-		if Combo != " " {
+		if Combo != "" {
 			Combo := RegExReplace(Combo, "<\^>!", "{RAlt}")
 			Combo := RegExReplace(Combo, "<\^", "{LCtrl}")
 			Combo := RegExReplace(Combo, ">\^", "{RCtrl}")
-			Combo := RegExReplace(Combo, "\^", "{LCtrl}")
+			Combo := RegExReplace(Combo, "\^", "{Ctrl}")
 			Combo := RegExReplace(Combo, "<!", "{LAlt}")
-			Combo := RegExReplace(Combo, "!", "{LAlt}")
+			Combo := RegExReplace(Combo, "!", "{Alt}")
 			Combo := RegExReplace(Combo, "<\+", "{LShift}")
 			Combo := RegExReplace(Combo, ">\+", "{RShift}")
+			Combo := RegExReplace(Combo, "+", "{Shift}")
 			Combo := RegExReplace(Combo, "<#", "{LWin}")
 			Combo := RegExReplace(Combo, ">#", "{RWin}")
-			Combo := RegExReplace(Combo, "#", "{LWin}")
+			Combo := RegExReplace(Combo, "#", "{Win}")
 			Combo := RegExReplace(Combo, "SC(.*)", "{sc$1}")
+			Combo := RegExReplace(Combo, "VK(.*)", "{vk$1}")
 			Send(Combo)
 		}
 	}
@@ -11482,8 +11493,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		return [
 			UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], ["cyr_c_let_f", "cyr_s_let_f"], True),
 			"+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], ["cyr_c_let_f", "cyr_s_let_f"], True, True),
-			UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_i", "cyr_s_let_i"], True),
-			"+" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_i", "cyr_s_let_i"], True, True),
+			UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_и", "cyr_s_let_и"], True),
+			"+" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_и", "cyr_s_let_и"], True, True),
 			UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], ["cyr_c_let_s", "cyr_s_let_s"], True),
 			"+" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], ["cyr_c_let_s", "cyr_s_let_s"], True, True),
 			UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], ["cyr_c_let_v", "cyr_s_let_v"], True),
@@ -11540,7 +11551,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", ["cyr_c_let_э", "cyr_s_let_э"], True),
 			"+" UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_quotation", ["cyr_s_let_э", "cyr_c_let_э"], True),
 			UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_square_bracket", ["cyr_c_let_h", "cyr_s_let_h"], True),
+			"+" UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_curly_bracket", ["cyr_s_let_h", "cyr_c_let_h"], True),
 			UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", ["cyr_c_let_yeru", "cyr_s_let_yeru"], True),
+			"+" UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_curly_bracket", ["cyr_s_let_yeru", "cyr_c_let_yeru"], True),
 			UseKey["Equals"], (K) => HandleFastKey(K, "kkey_equals"),
 			"+" UseKey["Equals"], (K) => HandleFastKey(K, "kkey_plus"),
 			UseKey["Minus"], (K) => HandleFastKey(K, "kkey_hyphen_minus"),
@@ -11631,12 +11644,12 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["PgDn"], (*) => ReplaceWithUnicode(),
 			"<#<+" UseKey["PgDn"], (*) => ReplaceWithUnicode("Hex"),
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
-			"<^>!>+" UseKey["Home"], (*) => ToggleInputMode(),
-			"<^>!" UseKey["Home"], (*) => ToggleFastKeys(),
-			"<#<!" UseKey["Q"], (*) => LangSeparatedCall(
+			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
+			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
+			"<!" UseKey["Q"], (*) => LangSeparatedCall(
 				() => QuotatizeSelection("Double"),
 				() => QuotatizeSelection("France")),
-			"<#<!<+" UseKey["Q"], (*) => LangSeparatedCall(
+			"<!<+" UseKey["Q"], (*) => LangSeparatedCall(
 				() => QuotatizeSelection("Single"),
 				() => QuotatizeSelection("Paw")),
 			"<#<!" UseKey["NumpadEnter"], (*) => ParagraphizeSelection(),
@@ -11788,8 +11801,9 @@ RCtrlEndingTimer() {
 	return SetTimer(RAltsSetStats, -300)
 }
 
-Sleep 25
+Sleep 125
 RegisterHotKeys(GetKeyBindings(SCKeys, "Utility"))
+Sleep 25
 RegisterHotKeys(GetKeyBindings(SCKeys))
 ;<^<!1:: HandleFastKey("{U+00B9}") ; Superscript 1
 ;<^<!2:: HandleFastKey("{U+00B2}") ; Superscript 2
