@@ -422,7 +422,7 @@ InsertChangesList(TargetGUI) {
 			content := RegExReplace(content, "m)^## " . Labels.ver . " (.*) — (.*)", Labels.ver . ": $1`n" . Labels.date . ": $2")
 			content := RegExReplace(content, "m)^- (.*)", " • $1")
 			content := RegExReplace(content, "m)^\s\s- (.*)", "  ‣ $1")
-			content := RegExReplace(content, "m)^\s\s\s- (.*)", "   ⁃ $1")
+			content := RegExReplace(content, "m)^\s\s\s\s- (.*)", "   ⁃ $1")
 			content := RegExReplace(content, "m)^---", " " . GetChar("emdash×84"))
 
 			TargetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", content)
@@ -873,6 +873,8 @@ RegisterLayout(LayoutName := "QWERTY") {
 	global GlagoFutharkActive
 	IsLatin := False
 	IsCyrillic := False
+	ActiveLatin := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
+	ActiveCyrillic := IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")
 
 	for key in GetLayoutsList {
 		if LayoutName == key {
@@ -893,7 +895,7 @@ RegisterLayout(LayoutName := "QWERTY") {
 		IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
 
 		UnregisterKeysLayout()
-		if LayoutName != "QWERTY" {
+		if (LayoutName != "QWERTY") {
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
 		}
 
@@ -912,9 +914,11 @@ RegisterLayout(LayoutName := "QWERTY") {
 	} else if IsCyrillic {
 		IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
 		UnregisterKeysLayout()
-		if LayoutName != "ЙЦУКЕН" {
+
+		if (ActiveLatin != "QWERTY") || (LayoutName != "ЙЦУКЕН") {
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
 		}
+
 		IsLettersModeEnabled := GlagoFutharkActive
 
 		Sleep 250
@@ -9126,6 +9130,7 @@ SwitchToScript(scriptMode) {
 	return
 }
 
+
 ; Glagolitic, Fuþark
 
 ToggleLetterScript(HideMessage := False) {
@@ -9918,13 +9923,31 @@ Constructor() {
 
 	windowWidth := 850
 	windowHeight := 560
+
+
+	resolutions := [
+		[1080, 1920],
+		[1440, 2560],
+		[1800, 3200],
+		[2160, 3840],
+		[2880, 5120],
+		[4320, 7680]
+	]
+
+	for res in resolutions {
+		if screenHeight = res[1] && screenWidth > res[2] {
+			screenWidth := res[2]
+			break
+		}
+	}
+
 	xPos := screenWidth - windowWidth - 45
 	yPos := screenHeight - windowHeight - 90
 
 	DSLTabs := []
 	DSLCols := { default: [], smelting: [] }
 
-	for _, localeKey in ["diacritics", "spaces", "commands", "smelting", "fastkeys", "runica", "about", "useful", "changelog"] {
+	for _, localeKey in ["diacritics", "spaces", "smelting", "fastkeys", "runica", "commands", "about", "useful", "changelog"] {
 		DSLTabs.Push(ReadLocale("tab_" . localeKey))
 	}
 
@@ -10112,7 +10135,7 @@ Constructor() {
 	GroupBoxSpaces.html.SetFont("s12")
 	GroupBoxSpaces.tags.SetFont("s9")
 
-	Tab.UseTab(3)
+	Tab.UseTab(6)
 	CommandsTree := DSLPadGUI.AddTreeView("x25 y43 w256 h510 -HScroll")
 
 	CommandsTree.OnEvent("ItemSelect", (TV, Item) => TV_InsertCommandsDesc(TV, Item, GroupBoxCommands.text))
@@ -10220,7 +10243,7 @@ Constructor() {
 	DSLPadGUI.SetFont("s11")
 
 
-	Tab.UseTab(4)
+	Tab.UseTab(3)
 
 
 	DSLContent["BindList"].TabSmelter := []
@@ -10289,7 +10312,7 @@ Constructor() {
 	GroupBoxLigatures.tags.SetFont("s9")
 
 
-	Tab.UseTab(5)
+	Tab.UseTab(4)
 
 	DSLContent["BindList"].TabFastKeys := []
 
@@ -10375,7 +10398,7 @@ Constructor() {
 	GroupBoxFastKeys.html.SetFont("s12")
 	GroupBoxFastKeys.tags.SetFont("s9")
 
-	Tab.UseTab(6)
+	Tab.UseTab(5)
 
 	DSLContent["BindList"].TabGlagoKeys := []
 
@@ -11106,12 +11129,41 @@ DisableAllKeys() {
 >^F10:: DisableAllKeys()
 
 
+ConvertComboKeys(Output) {
+	Patterns := [
+		"<\^>!", "{RAlt}",
+		"<\^", "{LCtrl}",
+		">\^", "{RCtrl}",
+		"\^", "{Ctrl}",
+		"<!", "{LAlt}",
+		"!", "{Alt}",
+		"<\+", "{LShift}",
+		">\+", "{RShift}",
+		"+", "{Shift}",
+		"<#", "{LWin}",
+		">#", "{RWin}",
+		"#", "{Win}",
+		"SC(.*)", "{sc$1}",
+		"VK(.*)", "{vk$1}",
+	]
+
+	for index, pair in Patterns {
+		if (Mod(index, 2) = 1) {
+			key := pair
+			replacement := Patterns[index + 1]
+			try {
+				Output := RegExReplace(Output, key, replacement)
+			} catch {
+				continue
+			}
+		}
+	}
+	return Output
+}
+
 HandleFastKey(Combo := "", CharacterNames*) {
 	global FastKeysIsActive
 	IsLayoutValid := CheckLayoutValid()
-	ActiveWindowClass := WinGetClass("A")
-	FocusedControl := ControlGetFocus("A")
-	FieldValid := InStr(FocusedControl, "Edit") || InStr(FocusedControl, "RichEdit") || InStr(FocusedControl, "Text")
 
 
 	if IsLayoutValid {
@@ -11120,41 +11172,11 @@ HandleFastKey(Combo := "", CharacterNames*) {
 		for _, Character in CharacterNames {
 			Output .= GetCharacterSequence(Character)
 		}
-
 		SendText(Output)
+
 	} else {
 		if Combo != "" {
-			Patterns := [
-				"<\^>!", "{RAlt}",
-				"<\^", "{LCtrl}",
-				">\^", "{RCtrl}",
-				"\^", "{Ctrl}",
-				"<!", "{LAlt}",
-				"!", "{Alt}",
-				"<\+", "{LShift}",
-				">\+", "{RShift}",
-				"+", "{Shift}",
-				"<#", "{LWin}",
-				">#", "{RWin}",
-				"#", "{Win}",
-				"SC(.*)", "{sc$1}",
-				"VK(.*)", "{vk$1}",
-			]
-
-
-			for index, pair in Patterns {
-				if (Mod(index, 2) = 1) {
-					key := pair
-					replacement := Patterns[index + 1]
-					try {
-						Combo := RegExReplace(Combo, key, replacement)
-					} catch {
-						continue
-					}
-				}
-			}
-
-			Send(Combo)
+			Send(ConvertComboKeys(Combo))
 		}
 	}
 	return
@@ -11340,11 +11362,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^<!<+" UseKey["X"], (K) => HandleFastKey(K, "x_below"),
 			"<^<!" UseKey["Z"], (K) => HandleFastKey(K, "zigzag_above"),
 			;
-			;"<^<!" UseKey["Numpad1"], (*) => QuotatizeSelection("France"),
-			;"<^<!" UseKey["Numpad2"], (*) => QuotatizeSelection("Paw"),
-			;"<^<!" UseKey["Numpad3"], (*) => QuotatizeSelection("Double"),
-			;"<^<!" UseKey["Numpad4"], (*) => QuotatizeSelection("Single"),
-			;
 			"<^<!" UseKey["Minus"], (K) => HandleFastKey(K, "softhyphen"),
 			"<^<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "minus"),
 			;
@@ -11441,7 +11458,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
 			"<^>!<!" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"], ["", ""], True),
 			;
-			"<^>!<!<+" UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_k_caron", "lat_s_let_k_caron"], ["", ""], True),
 			"<^>!<!<+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k_caron", "lat_s_let_k_caron"], ["", ""], True),
 			"<^>!<!>+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"], ["", ""], True),
 			;
@@ -12106,17 +12122,7 @@ RCtrlEndingTimer() {
 }
 
 
-LaunchRegistry(LayoutName := LayoutsPresets[CheckQWERTY()]) {
-	if LayoutName != "QWERTY" {
-		RegisterHotKeys(GetKeyBindings(LayoutName, "NonQWERTY"))
-	}
-	Sleep 125
-	RegisterHotKeys(GetKeyBindings(LayoutName, "Utility"))
-	Sleep 25
-	RegisterHotKeys(GetKeyBindings(LayoutName))
-}
-
-LaunchRegistry()
+RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 
 ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False) {
 	if SkipMessage == True
