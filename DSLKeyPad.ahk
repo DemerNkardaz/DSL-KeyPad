@@ -168,7 +168,8 @@ DefaultConfig := [
 	["Settings", "InputMode", "Default"],
 	["Settings", "ScriptInput", "Default"],
 	["Settings", "UserLanguage", ""],
-	["Settings", "Layout", "QWERTY"],
+	["Settings", "LatinLayout", "QWERTY"],
+	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
 	["CustomRules", "GREPDialogAttribution", ""],
@@ -870,24 +871,64 @@ LayoutsPresets := Map(
 
 RegisterLayout(LayoutName := "QWERTY") {
 	global GlagoFutharkActive
-	IniWrite LayoutName, ConfigFile, "Settings", "Layout"
+	IsLatin := False
+	IsCyrillic := False
 
-	UnregisterKeysLayout()
-	if LayoutName != "QWERTY" {
-		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+	for key in GetLayoutsList {
+		if LayoutName == key {
+			IsLatin := True
+			break
+		}
+	}
+	if !IsLatin {
+		for key in CyrillicLayoutsList {
+			if LayoutName == key {
+				IsCyrillic := True
+				break
+			}
+		}
 	}
 
-	IsLettersModeEnabled := GlagoFutharkActive
+	if IsLatin {
+		IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
 
-	Sleep 250
-	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
-	Sleep 25
-	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
+		UnregisterKeysLayout()
+		if LayoutName != "QWERTY" {
+			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+		}
 
-	if IsLettersModeEnabled {
-		Sleep 50
-		GlagoFutharkActive := False
-		ToggleLetterScript(True)
+		IsLettersModeEnabled := GlagoFutharkActive
+
+		Sleep 250
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
+		Sleep 25
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
+
+		if IsLettersModeEnabled {
+			Sleep 50
+			GlagoFutharkActive := False
+			ToggleLetterScript(True)
+		}
+	} else if IsCyrillic {
+		IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
+		UnregisterKeysLayout()
+		if LayoutName != "ЙЦУКЕН" {
+			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+		}
+		IsLettersModeEnabled := GlagoFutharkActive
+
+		Sleep 250
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
+		Sleep 25
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
+
+		if IsLettersModeEnabled {
+			Sleep 50
+			GlagoFutharkActive := False
+			ToggleLetterScript(True)
+		}
+	} else {
+		return
 	}
 }
 
@@ -895,6 +936,8 @@ GetLayoutsList := []
 for layout in LayoutsPresets {
 	GetLayoutsList.Push(layout)
 }
+
+CyrillicLayoutsList := ["ЙЦУКЕН"]
 
 
 RoNum := Map(
@@ -1090,6 +1133,17 @@ MapInsert(MapObj, Pairs*) {
 		}
 	}
 }
+
+MapPush(MapObj, Pairs*) {
+	for i, pair in Pairs {
+		if (Mod(i, 2) == 1) {
+			key := pair
+		} else {
+			MapObj[key] := pair
+		}
+	}
+}
+
 
 GetMapCount(MapObj, SortGroups := "") {
 	if !IsObject(SortGroups) {
@@ -10108,11 +10162,16 @@ Constructor() {
 	LatinLayoutSelector := DSLPadGUI.AddDropDownList("vLatLayout w74 x502 y528", GetLayoutsList)
 	PostMessage(0x0153, -1, 24, LatinLayoutSelector)
 
-	LayoutName := IniRead(ConfigFile, "Settings", "Layout", "QWERTY")
-
-	LatinLayoutSelector.Text := LayoutName
-
+	LatinLayoutName := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
+	LatinLayoutSelector.Text := LatinLayoutName
 	LatinLayoutSelector.OnEvent("Change", (CB, Zero) => ChangeQWERTY(CB))
+
+	CyrillicLayoutSelector := DSLPadGUI.AddDropDownList("vCyrLayout w74 x426 y528", CyrillicLayoutsList)
+	PostMessage(0x0153, -1, 24, CyrillicLayoutSelector)
+
+	CyrillicLayoutName := IniRead(ConfigFile, "Settings", "CyrillicLayout", "QWERTY")
+	CyrillicLayoutSelector.Text := CyrillicLayoutName
+	CyrillicLayoutSelector.OnEvent("Change", (CB, Zero) => ChangeQWERTY(CB))
 
 	DSLPadGUI.SetFont("s11")
 
@@ -10907,8 +10966,13 @@ IsGuiOpen(title) {
 }
 
 CheckQWERTY() {
-	return LayoutsPresets.Has(IniRead(ConfigFile, "Settings", "Layout", "QWERTY")) ? IniRead(ConfigFile, "Settings", "Layout", "QWERTY") : "QWERTY"
+	return LayoutsPresets.Has(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")) ? IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY") : "QWERTY"
 }
+
+CheckYITSUKEN() {
+	return LayoutsPresets.Has(IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")) ? IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН") : "ЙЦУКЕН"
+}
+
 ToggleFastKeys() {
 	LanguageCode := GetLanguageCode()
 	global FastKeysIsActive, ConfigFile
@@ -11091,8 +11155,8 @@ LangSeparatedCall(LatinCallback, CyrillicCallback) {
 
 LangSeparatedKey(Combo, LatinCharacter, CyrillicCharacter, UseCaps := False, Reverse := False) {
 	Character := (GetLayoutLocale() == CodeEn) ? LatinCharacter : CyrillicCharacter
-	if UseCaps {
-		CapsSeparatedKey(Combo, IsObject(Character) ? Character[1] : Character, IsObject(Character) ? Character[2] : Character, Reverse)
+	if UseCaps && IsObject(Character) {
+		CapsSeparatedKey(Combo, Character[1], Character[2], Reverse)
 	} else {
 		HandleFastKey(Combo, IsObject(Character) ? Character[1] : Character)
 	}
@@ -11160,6 +11224,8 @@ UnregisterHotKeys(Bindings) {
 }
 
 GetKeyBindings(UseKey, Combinations := "FastKeys") {
+	LatinLayout := CheckQWERTY()
+	CyrillicLayout := CheckYITSUKEN()
 	if Combinations = "FastKeys" {
 		return [
 			"<^<!" UseKey["A"], (K) => HandleFastKey(K, "acute"),
@@ -11486,80 +11552,243 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^<!" UseKey["D"], (K) => HandleFastKey(K, "cyr_com_vzmet"),
 		]
 	} else if Combinations = "NonQWERTY" {
+		Slots := Map()
+
+		if CyrillicLayout = "ЙЦУКЕН" {
+			if LatinLayout = "QWERTY" {
+				MapPush(Slots,
+					"A", ["cyr_c_let_f", "cyr_s_let_f"],
+					"B", ["cyr_c_let_и", "cyr_s_let_и"],
+					"C", ["cyr_c_let_s", "cyr_s_let_s"],
+					"D", ["cyr_c_let_v", "cyr_s_let_v"],
+					"E", ["cyr_c_let_u", "cyr_s_let_u"],
+					"F", ["cyr_c_let_a", "cyr_s_let_a"],
+					"G", ["cyr_c_let_p", "cyr_s_let_p"],
+					"H", ["cyr_c_let_r", "cyr_s_let_r"],
+					"I", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"J", ["cyr_c_let_o", "cyr_s_let_o"],
+					"K", ["cyr_c_let_l", "cyr_s_let_l"],
+					"L", ["cyr_c_let_d", "cyr_s_let_d"],
+					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
+					"N", ["cyr_c_let_t", "cyr_s_let_t"],
+					"O", ["cyr_c_let_shch", "cyr_s_let_shch"],
+					"P", ["cyr_c_let_z", "cyr_s_let_z"],
+					"Q", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"R", ["cyr_c_let_k", "cyr_s_let_k"],
+					"S", ["cyr_c_let_yery", "cyr_s_let_yery"],
+					"T", ["cyr_c_let_e", "cyr_s_let_e"],
+					"U", ["cyr_c_let_g", "cyr_s_let_g"],
+					"V", ["cyr_c_let_m", "cyr_s_let_m"],
+					"W", ["cyr_c_let_ts", "cyr_s_let_ts"],
+					"X", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"Y", ["cyr_c_let_n", "cyr_s_let_n"],
+					"Z", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					"+Z", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					",", ["cyr_c_let_b", "cyr_s_let_b"],
+					"+,", ["cyr_c_let_b", "cyr_s_let_b"],
+					".", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"+.", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					";", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"+;", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"'", ["cyr_c_let_э", "cyr_s_let_э"],
+					"+'", ["cyr_c_let_э", "cyr_s_let_э"],
+					"[", ["cyr_c_let_h", "cyr_s_let_h"],
+					"+[", ["cyr_c_let_h", "cyr_s_let_h"],
+					"]", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"+]", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"+~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"/", "kkey_dot",
+					"+/", "kkey_comma",
+					"\", "kkey_slash",
+					"+\", "kkey_backslash",
+					"=", "kkey_equals",
+					"+=", "kkey_plus",
+					"-", "kkey_hyphen_minus",
+					"+-", "kkey_underscore",
+				)
+			} else if LatinLayout = "Dvorak" {
+				MapPush(Slots,
+					"A", ["cyr_c_let_f", "cyr_s_let_f"],
+					"X", ["cyr_c_let_и", "cyr_s_let_и"],
+					"J", ["cyr_c_let_s", "cyr_s_let_s"],
+					"E", ["cyr_c_let_v", "cyr_s_let_v"],
+					".", ["cyr_c_let_u", "cyr_s_let_u"],
+					"+.", ["cyr_c_let_u", "cyr_s_let_u"],
+					"U", ["cyr_c_let_a", "cyr_s_let_a"],
+					"I", ["cyr_c_let_p", "cyr_s_let_p"],
+					"D", ["cyr_c_let_r", "cyr_s_let_r"],
+					"C", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"H", ["cyr_c_let_o", "cyr_s_let_o"],
+					"T", ["cyr_c_let_l", "cyr_s_let_l"],
+					"N", ["cyr_c_let_d", "cyr_s_let_d"],
+					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
+					"B", ["cyr_c_let_t", "cyr_s_let_t"],
+					"R", ["cyr_c_let_shch", "cyr_s_let_shch"],
+					"L", ["cyr_c_let_z", "cyr_s_let_z"],
+					"'", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"+'", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"P", ["cyr_c_let_k", "cyr_s_let_k"],
+					"O", ["cyr_c_let_yery", "cyr_s_let_yery"],
+					"Y", ["cyr_c_let_e", "cyr_s_let_e"],
+					"G", ["cyr_c_let_g", "cyr_s_let_g"],
+					"K", ["cyr_c_let_m", "cyr_s_let_m"],
+					",", ["cyr_c_let_ts", "cyr_s_let_ts"],
+					"+,", ["cyr_c_let_ts", "cyr_s_let_ts"],
+					"Q", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"F", ["cyr_c_let_n", "cyr_s_let_n"],
+					";", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					"+;", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					"W", ["cyr_c_let_b", "cyr_s_let_b"],
+					"V", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"S", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"-", ["cyr_c_let_э", "cyr_s_let_э"],
+					"+-", ["cyr_c_let_э", "cyr_s_let_э"],
+					"/", ["cyr_c_let_h", "cyr_s_let_h"],
+					"+/", ["cyr_c_let_h", "cyr_s_let_h"],
+					"=", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"+=", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"Z", "kkey_dot",
+					"+Z", "kkey_comma",
+					"\", "kkey_slash",
+					"+\", "kkey_backslash",
+					"]", "kkey_equals",
+					"+]", "kkey_plus",
+					"[", "kkey_hyphen_minus",
+					"+[", "kkey_underscore",
+				)
+			} else if LatinLayout = "Colemak" {
+				MapPush(Slots,
+					"A", ["cyr_c_let_f", "cyr_s_let_f"],
+					"B", ["cyr_c_let_и", "cyr_s_let_и"],
+					"C", ["cyr_c_let_s", "cyr_s_let_s"],
+					"S", ["cyr_c_let_v", "cyr_s_let_v"],
+					"F", ["cyr_c_let_u", "cyr_s_let_u"],
+					"T", ["cyr_c_let_a", "cyr_s_let_a"],
+					"D", ["cyr_c_let_p", "cyr_s_let_p"],
+					"H", ["cyr_c_let_r", "cyr_s_let_r"],
+					"U", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"N", ["cyr_c_let_o", "cyr_s_let_o"],
+					"E", ["cyr_c_let_l", "cyr_s_let_l"],
+					"I", ["cyr_c_let_d", "cyr_s_let_d"],
+					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
+					"K", ["cyr_c_let_t", "cyr_s_let_t"],
+					"Y", ["cyr_c_let_shch", "cyr_s_let_shch"],
+					";", ["cyr_c_let_z", "cyr_s_let_z"],
+					"+;", ["cyr_c_let_z", "cyr_s_let_z"],
+					"Q", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"P", ["cyr_c_let_k", "cyr_s_let_k"],
+					"R", ["cyr_c_let_yery", "cyr_s_let_yery"],
+					"G", ["cyr_c_let_e", "cyr_s_let_e"],
+					"L", ["cyr_c_let_g", "cyr_s_let_g"],
+					"V", ["cyr_c_let_m", "cyr_s_let_m"],
+					"W", ["cyr_c_let_ts", "cyr_s_let_ts"],
+					"X", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"J", ["cyr_c_let_n", "cyr_s_let_n"],
+					"Z", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					"+Z", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					",", ["cyr_c_let_b", "cyr_s_let_b"],
+					"+,", ["cyr_c_let_b", "cyr_s_let_b"],
+					".", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"+.", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"O", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"'", ["cyr_c_let_э", "cyr_s_let_э"],
+					"+'", ["cyr_c_let_э", "cyr_s_let_э"],
+					"[", ["cyr_c_let_h", "cyr_s_let_h"],
+					"+[", ["cyr_c_let_h", "cyr_s_let_h"],
+					"]", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"+]", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"+~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"/", "kkey_dot",
+					"+/", "kkey_comma",
+					"\", "kkey_slash",
+					"+\", "kkey_backslash",
+					"=", "kkey_equals",
+					"+=", "kkey_plus",
+					"-", "kkey_hyphen_minus",
+					"+-", "kkey_underscore",
+				)
+			}
+		}
+
 		return [
-			UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], ["cyr_c_let_f", "cyr_s_let_f"], True),
-			"+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], ["cyr_c_let_f", "cyr_s_let_f"], True, True),
-			UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_и", "cyr_s_let_и"], True),
-			"+" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], ["cyr_c_let_и", "cyr_s_let_и"], True, True),
-			UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], ["cyr_c_let_s", "cyr_s_let_s"], True),
-			"+" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], ["cyr_c_let_s", "cyr_s_let_s"], True, True),
-			UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], ["cyr_c_let_v", "cyr_s_let_v"], True),
-			"+" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], ["cyr_c_let_v", "cyr_s_let_v"], True, True),
-			UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], ["cyr_c_let_u", "cyr_s_let_u"], True),
-			"+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], ["cyr_c_let_u", "cyr_s_let_u"], True, True),
-			UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], ["cyr_c_let_a", "cyr_s_let_a"], True),
-			"+" UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], ["cyr_c_let_a", "cyr_s_let_a"], True, True),
-			UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], ["cyr_c_let_p", "cyr_s_let_p"], True),
-			"+" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], ["cyr_c_let_p", "cyr_s_let_p"], True, True),
-			UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], ["cyr_c_let_r", "cyr_s_let_r"], True),
-			"+" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], ["cyr_c_let_r", "cyr_s_let_r"], True, True),
-			UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], ["cyr_c_let_sh", "cyr_s_let_sh"], True),
-			"+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], ["cyr_c_let_sh", "cyr_s_let_sh"], True, True),
-			UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], ["cyr_c_let_o", "cyr_s_let_o"], True),
-			"+" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], ["cyr_c_let_o", "cyr_s_let_o"], True, True),
-			UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], ["cyr_c_let_l", "cyr_s_let_l"], True),
-			"+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], ["cyr_c_let_l", "cyr_s_let_l"], True, True),
-			UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], ["cyr_c_let_d", "cyr_s_let_d"], True),
-			"+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], ["cyr_c_let_d", "cyr_s_let_d"], True, True),
-			UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], ["cyr_c_let_yeri", "cyr_s_let_yeri"], True),
-			"+" UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], ["cyr_c_let_yeri", "cyr_s_let_yeri"], True, True),
-			UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], ["cyr_c_let_t", "cyr_s_let_t"], True),
-			"+" UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], ["cyr_c_let_t", "cyr_s_let_t"], True, True),
-			UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], ["cyr_c_let_shch", "cyr_s_let_shch"], True),
-			"+" UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], ["cyr_c_let_shch", "cyr_s_let_shch"], True, True),
-			UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], ["cyr_c_let_z", "cyr_s_let_z"], True),
-			"+" UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], ["cyr_c_let_z", "cyr_s_let_z"], True, True),
-			UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], ["cyr_c_let_iy", "cyr_s_let_iy"], True),
-			"+" UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], ["cyr_c_let_iy", "cyr_s_let_iy"], True, True),
-			UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], ["cyr_c_let_u", "cyr_s_let_u"], True),
-			"+" UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], ["cyr_c_let_k", "cyr_s_let_k"], True, True),
-			UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], ["cyr_c_let_yery", "cyr_s_let_yery"], True),
-			"+" UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], ["cyr_c_let_yery", "cyr_s_let_yery"], True, True),
-			UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], ["cyr_c_let_e", "cyr_s_let_e"], True),
-			"+" UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], ["cyr_c_let_e", "cyr_s_let_e"], True, True),
-			UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], ["cyr_c_let_g", "cyr_s_let_g"], True),
-			"+" UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], ["cyr_c_let_g", "cyr_s_let_g"], True, True),
-			UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], ["cyr_c_let_m", "cyr_s_let_m"], True),
-			"+" UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], ["cyr_c_let_m", "cyr_s_let_m"], True, True),
-			UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], ["cyr_c_let_ts", "cyr_s_let_ts"], True),
-			"+" UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], ["cyr_c_let_ts", "cyr_s_let_ts"], True, True),
-			UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], ["cyr_c_let_ch", "cyr_s_let_ch"], True),
-			"+" UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], ["cyr_c_let_ch", "cyr_s_let_ch"], True, True),
-			UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], ["cyr_c_let_ya", "cyr_s_let_ya"], True),
-			"+" UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], ["cyr_c_let_ya", "cyr_s_let_ya"], True, True),
+			UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], Slots["A"], True),
+			"+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], Slots["A"], True, True),
+			UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], Slots["B"], True),
+			"+" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], Slots["B"], True, True),
+			UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], Slots["C"], True),
+			"+" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], Slots["C"], True, True),
+			UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], Slots["V"], True),
+			"+" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], Slots["V"], True, True),
+			UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], Slots["E"], True),
+			"+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], Slots["E"], True, True),
+			UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], Slots["F"], True),
+			"+" UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], Slots["F"], True, True),
+			UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], Slots["G"], True),
+			"+" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], Slots["G"], True, True),
+			UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], Slots["H"], True),
+			"+" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], Slots["H"], True, True),
+			UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], Slots["I"], True),
+			"+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], Slots["I"], True, True),
+			UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], Slots["J"], True),
+			"+" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], Slots["J"], True, True),
+			UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], Slots["K"], True),
+			"+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], Slots["K"], True, True),
+			UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], Slots["L"], True),
+			"+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], Slots["L"], True, True),
+			UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], Slots["M"], True),
+			"+" UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], Slots["M"], True, True),
+			UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], Slots["N"], True),
+			"+" UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], Slots["N"], True, True),
+			UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], Slots["O"], True),
+			"+" UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], Slots["O"], True, True),
+			UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], Slots["P"], True),
+			"+" UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], Slots["P"], True, True),
+			UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], Slots["Q"], True),
+			"+" UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], Slots["Q"], True, True),
+			UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], Slots["R"], True),
+			"+" UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], Slots["R"], True, True),
+			UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], Slots["S"], True),
+			"+" UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], Slots["S"], True, True),
+			UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], Slots["T"], True),
+			"+" UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], Slots["T"], True, True),
+			UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], Slots["U"], True),
+			"+" UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], Slots["U"], True, True),
+			UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], Slots["V"], True),
+			"+" UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], Slots["V"], True, True),
+			UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], Slots["W"], True),
+			"+" UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], Slots["W"], True, True),
+			UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], Slots["X"], True),
+			"+" UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], Slots["X"], True, True),
+			UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], Slots["Y"], True),
+			"+" UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], Slots["Y"], True, True),
+			UseKey["Z"], (K) => LangSeparatedKey(K, ["lat_c_let_z", "lat_s_let_z"], Slots["Z"], True),
+			"+" UseKey["Z"], (K) => LangSeparatedKey(K, ["lat_c_let_z", "lat_s_let_z"], Slots["+Z"], True, True),
 			;
-			UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_comma", ["cyr_c_let_b", "cyr_s_let_b"], True),
-			"+" UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_lessthan", ["cyr_s_let_b", "cyr_c_let_b"], True),
-			UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_dot", ["cyr_c_let_yu", "cyr_s_let_yu"], True),
-			"+" UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_greaterthan", ["cyr_s_let_yu", "cyr_c_let_yu"], True),
-			UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", ["cyr_c_let_zh", "cyr_s_let_zh"], True),
-			"+" UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_colon", ["cyr_s_let_zh", "cyr_c_let_zh"], True),
-			UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", ["cyr_c_let_э", "cyr_s_let_э"], True),
-			"+" UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_quotation", ["cyr_s_let_э", "cyr_c_let_э"], True),
-			UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_square_bracket", ["cyr_c_let_h", "cyr_s_let_h"], True),
-			"+" UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_curly_bracket", ["cyr_s_let_h", "cyr_c_let_h"], True),
-			UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", ["cyr_c_let_yeru", "cyr_s_let_yeru"], True),
-			"+" UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_curly_bracket", ["cyr_s_let_yeru", "cyr_c_let_yeru"], True),
-			UseKey["Equals"], (K) => HandleFastKey(K, "kkey_equals"),
-			"+" UseKey["Equals"], (K) => HandleFastKey(K, "kkey_plus"),
-			UseKey["Minus"], (K) => HandleFastKey(K, "kkey_hyphen_minus"),
-			"+" UseKey["Minus"], (K) => HandleFastKey(K, "kkey_underscore"),
-			UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_grave_accent", ["cyr_c_let_yo", "cyr_s_let_yo"]),
-			"+" UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_tilde", ["cyr_s_let_yo", "cyr_c_let_yo"]),
-			UseKey["Slash"], (K) => LangSeparatedKey(K, "kkey_slash", "kkey_dot"),
-			"+" UseKey["Slash"], (K) => LangSeparatedKey(K, "question", "kkey_comma"),
-			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", "kkey_slash"),
-			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", "kkey_backslash"),
+			UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_comma", Slots[","], True),
+			"+" UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_lessthan", Slots["+,"], True, True),
+			UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_dot", Slots["."], True),
+			"+" UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_greaterthan", Slots["+."], True, True),
+			UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", Slots[";"], True),
+			"+" UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_colon", Slots["+;"], True, True),
+			UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", Slots["'"], True),
+			"+" UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_quotation", Slots["+'"], True, True),
+			UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_square_bracket", Slots["["], True),
+			"+" UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_curly_bracket", Slots["+["], True, True),
+			UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", Slots["]"], True),
+			"+" UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_curly_bracket", Slots["+]"], True, True),
+			UseKey["Equals"], (K) => LangSeparatedKey(K, "kkey_equals", Slots["="], True),
+			"+" UseKey["Equals"], (K) => LangSeparatedKey(K, "kkey_plus", Slots["+="], True, True),
+			UseKey["Minus"], (K) => LangSeparatedKey(K, "kkey_hyphen_minus", Slots["-"], True),
+			"+" UseKey["Minus"], (K) => LangSeparatedKey(K, "kkey_underscore", Slots["+-"], True, True),
+			UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_grave_accent", Slots["~"], True),
+			"+" UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_tilde", Slots["+~"], True, True),
+			UseKey["Slash"], (K) => LangSeparatedKey(K, "kkey_slash", Slots["/"], True),
+			"+" UseKey["Slash"], (K) => LangSeparatedKey(K, "question", Slots["+/"], True, True),
+			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", Slots["\"], True),
+			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", Slots["+\"], True, True),
 		]
 	} else if Combinations = "Cleanscript" {
 		return [
