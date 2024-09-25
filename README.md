@@ -16,9 +16,9 @@ This utility allows you to input a wide range of various symbols without the 
 
   **Note:** This function is disabled by default and can be enabled with **RAlt Home**.
 
-- **"Smelter"** — converts a sequence of characters (“recipe”) into another character, allowing the creation of ligatures (“AE” → “Æ”, “ІѪ” → “Ѭ”), accented letters (“Ă” *two characters* → “Ă” _one character_), or even letters (“ПС” → “Ѱ”, “КС” → “Ѯ”, “ДЖ” → “Џ”) and other symbols (“+−” → “±”, “\*\*\*” → “⁂”, “YEN” → “¥”, “°C” *two characters* → “℃” _one character_).
+- **“Forge”** — converts a sequence of characters (“recipe”) into another character, allowing the creation of ligatures (“AE” → “Æ”, “ІѪ” → “Ѭ”), accented letters (“Ă” *two characters* → “Ă” _one character_), or even letters (“ПС” → “Ѱ”, “КС” → “Ѯ”, “ДЖ” → “Џ”) and other symbols (“+−” → “±”, “\*\*\*” → “⁂”, “YEN” → “¥”, “°C” *two characters* → “℃” _one character_).
 
-  The Smelter has four ways to use it:
+  The Forge has four ways to use it:
 
   - Through the pop-up window, <kbd>Win Alt L</kbd>.
   - In text via recipe selection, <kbd>RShift L</kbd>.
