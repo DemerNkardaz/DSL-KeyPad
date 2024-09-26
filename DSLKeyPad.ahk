@@ -2207,7 +2207,6 @@ MapInsert(Characters,
 		},
 		"arrow_rightup", {
 			unicode: "{U+2197}", html: "&#8599;",
-			altCode: "24",
 			tags: ["right up arrow", "стрелка вправо-вверх"],
 			group: [["Special Characters", "Special Fast Secondary"]],
 			show_on_fast_keys: True,
@@ -2216,7 +2215,6 @@ MapInsert(Characters,
 		},
 		"arrow_leftdown", {
 			unicode: "{U+2199}", html: "&#8601;",
-			altCode: "24",
 			tags: ["left down arrow", "стрелка влево-вниз"],
 			group: [["Special Characters", "Special Fast Secondary"]],
 			show_on_fast_keys: True,
@@ -2225,12 +2223,28 @@ MapInsert(Characters,
 		},
 		"arrow_rightdown", {
 			unicode: "{U+2198}", html: "&#8600;",
-			altCode: "24",
 			tags: ["right down arrow", "стрелка вправо-вниз"],
 			group: [["Special Characters", "Special Fast Secondary"]],
 			show_on_fast_keys: True,
 			alt_on_fast_keys: "[" Chr(0x2193) "][" Chr(0x2192) "]",
 			symbol: Chr(0x2198)
+		},
+		"arrow_leftright", {
+			unicode: "{U+2194}", html: "&#8597;",
+			tags: ["right down arrow", "стрелка вправо-вниз"],
+			group: [["Special Characters", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[" Chr(0x2190) "][" Chr(0x2192) "]",
+			symbol: Chr(0x2194)
+		},
+		"arrow_updown", {
+			unicode: "{U+2195}", html: "&#8597;",
+			altCode: "18",
+			tags: ["right down arrow", "стрелка вправо-вниз"],
+			group: [["Special Characters", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[" Chr(0x2191) "][" Chr(0x2193) "]",
+			symbol: Chr(0x2195)
 		},
 		"arrow_left_circle", {
 			unicode: "{U+21BA}", html: "&#8634;", entity: "&olarr;",
@@ -11618,16 +11632,24 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			;"<^>!" UseKey["ArrLeft"], (K) => TimedKeyCombinations("ArrLeft", UseKey["ArrUp"], (*) => HandleFastKey(K, "arrow_leftup"), (*) => HandleFastKey(K, "arrow_left")),
 			"<^>!" UseKey["ArrLeft"], (K) =>
 				TimedKeyCombinations("ArrLeft",
-					[UseKey["ArrUp"], UseKey["ArrDown"]],
-					[(*) => HandleFastKey(K, "arrow_leftup"), (*) => HandleFastKey(K, "arrow_leftdown")], (*) => HandleFastKey(K, "arrow_left"), -75
+					[UseKey["ArrUp"], UseKey["ArrDown"], UseKey["ArrRight"]],
+					[(*) => HandleFastKey(K, "arrow_leftup"), (*) => HandleFastKey(K, "arrow_leftdown"), (*) => HandleFastKey(K, "arrow_leftright")], (*) => HandleFastKey(K, "arrow_left"), -75
 				),
 			"<^>!" UseKey["ArrRight"], (K) =>
 				TimedKeyCombinations("ArrRight",
-					[UseKey["ArrUp"], UseKey["ArrDown"]],
-					[(*) => HandleFastKey(K, "arrow_rightup"), (*) => HandleFastKey(K, "arrow_rightdown")], (*) => HandleFastKey(K, "arrow_right"), -75
+					[UseKey["ArrLeft"], UseKey["ArrUp"], UseKey["ArrDown"]],
+					["Off", (*) => HandleFastKey(K, "arrow_rightup"), (*) => HandleFastKey(K, "arrow_rightdown")], (*) => HandleFastKey(K, "arrow_right"), -75
 				),
-			"<^>!" UseKey["ArrUp"], (K) => TimedKeyCombinations("ArrUp", UseKey["ArrLeft"], "Off", (*) => HandleFastKey(K, "arrow_up"), -75),
-			"<^>!" UseKey["ArrDown"], (K) => TimedKeyCombinations("ArrUp", UseKey["ArrLeft"], "Off", (*) => HandleFastKey(K, "arrow_down"), -75),
+			"<^>!" UseKey["ArrUp"], (K) =>
+				TimedKeyCombinations("ArrUp",
+					[UseKey["ArrLeft"], UseKey["ArrRight"], UseKey["ArrDown"]],
+					["Off", "Off", (*) => HandleFastKey(K, "arrow_updown")], (*) => HandleFastKey(K, "arrow_up"), -75
+				),
+			"<^>!" UseKey["ArrDown"], (K) =>
+				TimedKeyCombinations("ArrDown",
+					[UseKey["ArrUp"], UseKey["ArrLeft"], UseKey["ArrRight"]],
+					["Off", "Off", "Off"], (*) => HandleFastKey(K, "arrow_down"), -75
+				),
 			"<^>!<+" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left_ushaped"),
 			"<^>!<+" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right_ushaped"),
 			"<^>!<+" UseKey["ArrUp"], (K) => HandleFastKey(K, "arrow_up_ushaped"),
@@ -12137,21 +12159,29 @@ EmptyFunc() {
 	return
 }
 
+TimedKeyCombinationsIH(StartKey, SecondKeys, Callbacks, DefaultCallback := False, TimerLimit := -25) {
+
+}
+
+
 TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False, TimerLimit := -25) {
 	global IsCombinationPressed
 	SCEntry := RegExReplace(StartKey, "^\+")
 	IsShiftOn := RegExMatch(StartKey, "^\+")
 	IsCombinationPressed := False
 
+
 	if IsObject(SecondKeys) {
 		for i, SecondKey in SecondKeys {
 			if (GetKeyState(SecondKey, "P")) {
-				if Callbacks = "Off"
+				if Callbacks[i] = "Off" {
 					return
-				Callbacks[i]()
-				IsCombinationPressed := True
-				SetTimer(ResetDefault, 0)
-				return
+				} else {
+					Callbacks[i]()
+					IsCombinationPressed := True
+					SetTimer(ResetDefault, 0)
+					return
+				}
 			}
 		}
 	} else {
