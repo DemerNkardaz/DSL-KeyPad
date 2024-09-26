@@ -54,11 +54,16 @@ GetLocales() {
 	)
 	http := ComObject("WinHttp.WinHttpRequest.5.1")
 	http.Open("GET", LocalesRaw, true)
-	http.Send()
-	http.WaitForResponse()
+	try {
+		http.Send()
+		http.WaitForResponse()
+	} catch {
+		MsgBox(ErrMessages[GetLanguageCode()], DSLPadTitle)
+		return
+	}
 
 	if http.Status != 200 {
-		MsgBox(ErrMessages[GetLanguageCode()] "`nHTTP Status: " http.Status, DSLPadTitle)
+		MsgBox(ErrMessages[GetLanguageCode()], DSLPadTitle)
 		return
 	}
 
@@ -128,11 +133,16 @@ GetAppIco() {
 	)
 	http := ComObject("WinHttp.WinHttpRequest.5.1")
 	http.Open("GET", AppIcoRaw, true)
-	http.Send()
-	http.WaitForResponse()
+	try {
+		http.Send()
+		http.WaitForResponse()
+	} catch {
+		MsgBox(ErrMessages[GetLanguageCode()], DSLPadTitle)
+		return
+	}
 
 	if http.Status != 200 {
-		MsgBox(ErrMessages[GetLanguageCode()] "`nHTTP Status: " http.Status, DSLPadTitle)
+		MsgBox(ErrMessages[GetLanguageCode()], DSLPadTitle)
 		return
 	}
 
@@ -258,11 +268,15 @@ FontInstall(FontSource) {
 
 	http := ComObject("WinHttp.WinHttpRequest.5.1")
 	http.Open("GET", FontSource, true)
-	http.Send()
-	http.WaitForResponse()
+	try {
+		http.Send()
+		http.WaitForResponse()
+	} catch {
+		MsgBox("Can’t download font.`n" ReadLocale("prepare_fonts"), "Font Installer")
+	}
 
 	if (http.Status != 200) {
-		MsgBox("Can’t download font.`nHTTP Status: " http.Status, "Font Installer")
+		MsgBox("Can’t download font.", "Font Installer")
 		return
 	}
 
@@ -372,17 +386,23 @@ GetChangeLog() {
 
 	SetTimer(CancelHttp, TimeOut)
 	if Cancelled {
-		return
+		return ReadLocale("warning_nointernet")
 	}
 
 	for language, url in ChangeLogRaw {
 		http.Open("GET", url, true)
-		http.Send()
-		http.WaitForResponse()
+		try {
+			http.Send()
+			http.WaitForResponse()
+		} catch {
+			return ReadLocale("warning_nointernet")
+		}
 
 		if http.Status != 200 || Cancelled {
-			if Cancelled
+			if Cancelled {
 				http.Abort()
+				return ReadLocale("warning_nointernet")
+			}
 			continue
 		}
 
@@ -402,9 +422,14 @@ InsertChangesList(TargetGUI) {
 	Changes := GetChangeLog()
 	IsEmpty := True
 
-	for language, _ in Changes {
-		IsEmpty := False
-		break
+	if IsObject(Changes) {
+		for language, _ in Changes {
+			IsEmpty := False
+			break
+		}
+	} else if Changes != "" {
+		TargetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", Changes)
+		return
 	}
 
 	if IsEmpty {
@@ -434,9 +459,12 @@ GetTimeString() {
 	return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
 }
 
+CheckUpdateError := ""
 GetUpdate(TimeOut := 0, RepairMode := False) {
 	Sleep TimeOut
 	global AppVersion, RawSource
+	ErrorOccured := False
+	ErroMessage := ""
 
 	if RepairMode == True {
 		IB := InputBox(ReadLocale("update_repair"), ReadLocale("update_repair_title"), "w256", "")
@@ -448,11 +476,16 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 	if UpdateAvailable || RepairMode == True {
 		http := ComObject("WinHttp.WinHttpRequest.5.1")
 		http.Open("GET", RawSource, true)
-		http.Send()
-		http.WaitForResponse()
+		try {
+			http.Send()
+			http.WaitForResponse()
+		} catch {
+			MsgBox(ReadLocale("update_failed"), DSLPadTitle)
+			return
+		}
 
 		if http.Status != 200 {
-			MsgBox(ReadLocale("update_failed") "`nHTTP Status: " http.Status, DSLPadTitle)
+			MsgBox(ReadLocale("update_failed"), DSLPadTitle)
 			return
 		}
 
@@ -478,20 +511,30 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		Reload
 		return
 	} else {
-		MsgBox(ReadLocale("update_absent"), DSLPadTitle)
+		if CheckUpdateError != "" {
+			MsgBox(CheckUpdateError, DSLPadTitle)
+		} else {
+			MsgBox(ReadLocale("update_absent"), DSLPadTitle)
+		}
 	}
 	return
 }
 
 
 CheckUpdate() {
-	global AppVersion, RawSource, UpdateAvailable, UpdateVersionString
+	global AppVersion, RawSource, UpdateAvailable, UpdateVersionString, CheckUpdateError
 	http := ComObject("WinHttp.WinHttpRequest.5.1")
 	http.Open("GET", RawSource, true)
-	http.Send()
-	http.WaitForResponse()
+	try {
+		http.Send()
+		http.WaitForResponse()
+	} catch {
+		CheckUpdateError := ReadLocale("update_failed")
+		return
+	}
 
 	if http.Status != 200 {
+		CheckUpdateError := ReadLocale("update_failed")
 		return
 	}
 
@@ -511,7 +554,9 @@ CheckUpdate() {
 			return
 		}
 	}
+	CheckUpdateError := ""
 }
+
 CheckUpdate()
 
 CtrlA := Chr(1)
@@ -9408,6 +9453,15 @@ ParagraphizeSelection(SendCollaborative := False) {
 QuotatizeSelection(Mode) {
 	RegEx := "[a-zA-Zа-яА-ЯёЁ0-9.,:;!?()\`"'-+=/\\]"
 
+	france_left := GetChar("france_left")
+	france_right := GetChar("france_right")
+	quote_low_9_double := GetChar("quote_low_9_double")
+	quote_left_double := GetChar("quote_left_double")
+	quote_right_double := GetChar("quote_right_double")
+	quote_left_single := GetChar("quote_left_single")
+	quote_right_single := GetChar("quote_right_single")
+
+
 	BackupClipboard := A_Clipboard
 	PromptValue := ""
 	A_Clipboard := ""
@@ -9417,18 +9471,20 @@ QuotatizeSelection(Mode) {
 	PromptValue := A_Clipboard
 	if !RegExMatch(PromptValue, RegEx) {
 		A_Clipboard := BackupClipboard
+		if Mode = "France" {
+			SendText(france_left france_right)
+		} else if Mode = "Paw" {
+			SendText(quote_low_9_double quote_left_double)
+		} else if Mode = "Double" {
+			SendText(quote_left_double quote_right_double)
+		} else if Mode = "Single" {
+			SendText(quote_left_single quote_right_single)
+		}
 		return
 	}
 	A_Clipboard := ""
 
 	if RegExMatch(PromptValue, RegEx) {
-		france_left := GetChar("france_left")
-		france_right := GetChar("france_right")
-		quote_low_9_double := GetChar("quote_low_9_double")
-		quote_left_double := GetChar("quote_left_double")
-		quote_right_double := GetChar("quote_right_double")
-		quote_left_single := GetChar("quote_left_single")
-		quote_right_single := GetChar("quote_right_single")
 
 
 		TempSpace := ""
@@ -9476,8 +9532,6 @@ QuotatizeSelection(Mode) {
 		ClipWait(0.250, 0)
 		Sleep 250
 		Send("^v")
-
-		;SendText(PromptValue)
 	}
 
 	Sleep 500
@@ -9941,8 +9995,8 @@ Constructor() {
 		}
 	}
 
-	xPos := screenWidth - windowWidth - 45
-	yPos := screenHeight - windowHeight - 90
+	xPos := screenWidth - windowWidth - 50
+	yPos := screenHeight - windowHeight - 92
 
 	DSLTabs := []
 	DSLCols := { default: [], smelting: [] }
@@ -11202,8 +11256,7 @@ GetCharacterSequence(CharacterName) {
 				} else {
 					Output .= characterLaTeX
 				}
-			}
-			else {
+			} else {
 				if CombiningEnabled && HasProp(value, "combiningForm") {
 					if IsObject(value.combiningForm) {
 						TempValue := ""
@@ -11214,8 +11267,7 @@ GetCharacterSequence(CharacterName) {
 					} else {
 						Send(value.combiningForm)
 					}
-				}
-				else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+				} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
 					for unicode in value.uniSequence {
 						Output .= PasteUnicode(unicode)
 					}
