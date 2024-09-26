@@ -2196,6 +2196,42 @@ MapInsert(Characters,
 			alt_on_fast_keys: "[" Chr(0x2193) "]",
 			symbol: Chr(0x2193)
 		},
+		"arrow_leftup", {
+			unicode: "{U+2196}", html: "&#8598;",
+			altCode: "24",
+			tags: ["left up arrow", "стрелка влево-вверх"],
+			group: [["Special Characters", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[" Chr(0x2191) "][" Chr(0x2190) "]",
+			symbol: Chr(0x2196)
+		},
+		"arrow_rightup", {
+			unicode: "{U+2197}", html: "&#8599;",
+			altCode: "24",
+			tags: ["right up arrow", "стрелка вправо-вверх"],
+			group: [["Special Characters", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[" Chr(0x2191) "][" Chr(0x2192) "]",
+			symbol: Chr(0x2197)
+		},
+		"arrow_leftdown", {
+			unicode: "{U+2199}", html: "&#8601;",
+			altCode: "24",
+			tags: ["left down arrow", "стрелка влево-вниз"],
+			group: [["Special Characters", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[" Chr(0x2193) "][" Chr(0x2190) "]",
+			symbol: Chr(0x2199)
+		},
+		"arrow_rightdown", {
+			unicode: "{U+2198}", html: "&#8600;",
+			altCode: "24",
+			tags: ["right down arrow", "стрелка вправо-вниз"],
+			group: [["Special Characters", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[" Chr(0x2193) "][" Chr(0x2192) "]",
+			symbol: Chr(0x2198)
+		},
 		"arrow_left_circle", {
 			unicode: "{U+21BA}", html: "&#8634;", entity: "&olarr;",
 			tags: ["left circle arrow", "округлая стрелка влево"],
@@ -6459,6 +6495,40 @@ MapInsert(Characters,
 			recipe: "k" GetChar("stroke_short", "solidus_short"),
 			recipeAlt: "k" GetChar("dotted_circle", "stroke_short", "dotted_circle", "solidus_short"),
 			symbol: Chr(0xA745)
+		},
+		"lat_c_let_k_line_below", {
+			unicode: "{U+1E34}", html: "&#7732;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная K с чертой снизу", "capital K with line below"],
+			recipe: "K" GetChar("macron_below"),
+			recipeAlt: "K" GetChar("dotted_circle", "macron_below"),
+			symbol: Chr(0x1E34)
+		},
+		"lat_s_let_k_line_below", {
+			unicode: "{U+1E35}", html: "&#7733;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная k с чертой снизу", "small k with line below"],
+			recipe: "k" GetChar("macron_below"),
+			recipeAlt: "k" GetChar("dotted_circle", "macron_below"),
+			symbol: Chr(0x1E35)
+		},
+		"lat_c_let_k_descender", {
+			unicode: "{U+2C69}", html: "&#11369;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная K с нижним выносным элементом", "capital K with descender"],
+			recipe: "K" GetChar("arrow_down"),
+			symbol: Chr(0x2C69)
+		},
+		"lat_s_let_k_descender", {
+			unicode: "{U+2C6A}", html: "&#11370;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная k с нижним выносным элементом", "small k with descender"],
+			recipe: "k" . GetChar("arrow_down"),
+			symbol: Chr(0x2C6A)
 		},
 		;
 		;
@@ -11541,10 +11611,23 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!<!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet_hyphen"),
 			"<^>!<+" UseKey["Tilde"], (K) => HandleFastKey(K, "interpunct"),
 			;
-			"<^>!" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left"),
-			"<^>!" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right"),
-			"<^>!" UseKey["ArrUp"], (K) => HandleFastKey(K, "arrow_up"),
-			"<^>!" UseKey["ArrDown"], (K) => HandleFastKey(K, "arrow_down"),
+			;"<^>!" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left"),
+			;"<^>!" UseKey["ArrUp"], (K) => HandleFastKey(K, "arrow_up"),
+			;"<^>!" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right"),
+			;"<^>!" UseKey["ArrDown"], (K) => HandleFastKey(K, "arrow_down"),
+			;"<^>!" UseKey["ArrLeft"], (K) => TimedKeyCombinations("ArrLeft", UseKey["ArrUp"], (*) => HandleFastKey(K, "arrow_leftup"), (*) => HandleFastKey(K, "arrow_left")),
+			"<^>!" UseKey["ArrLeft"], (K) =>
+				TimedKeyCombinations("ArrLeft",
+					[UseKey["ArrUp"], UseKey["ArrDown"]],
+					[(*) => HandleFastKey(K, "arrow_leftup"), (*) => HandleFastKey(K, "arrow_leftdown")], (*) => HandleFastKey(K, "arrow_left"), -75
+				),
+			"<^>!" UseKey["ArrRight"], (K) =>
+				TimedKeyCombinations("ArrRight",
+					[UseKey["ArrUp"], UseKey["ArrDown"]],
+					[(*) => HandleFastKey(K, "arrow_rightup"), (*) => HandleFastKey(K, "arrow_rightdown")], (*) => HandleFastKey(K, "arrow_right"), -75
+				),
+			"<^>!" UseKey["ArrUp"], (K) => TimedKeyCombinations("ArrUp", UseKey["ArrLeft"], "Off", (*) => HandleFastKey(K, "arrow_up"), -75),
+			"<^>!" UseKey["ArrDown"], (K) => TimedKeyCombinations("ArrUp", UseKey["ArrLeft"], "Off", (*) => HandleFastKey(K, "arrow_down"), -75),
 			"<^>!<+" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left_ushaped"),
 			"<^>!<+" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right_ushaped"),
 			"<^>!<+" UseKey["ArrUp"], (K) => HandleFastKey(K, "arrow_up_ushaped"),
@@ -12054,7 +12137,7 @@ EmptyFunc() {
 	return
 }
 
-TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False) {
+TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False, TimerLimit := -25) {
 	global IsCombinationPressed
 	SCEntry := RegExReplace(StartKey, "^\+")
 	IsShiftOn := RegExMatch(StartKey, "^\+")
@@ -12082,7 +12165,7 @@ TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False) 
 		}
 	}
 
-	SetTimer(ResetDefault, -25)
+	SetTimer(ResetDefault, TimerLimit)
 
 	ResetDefault() {
 		global IsCombinationPressed
