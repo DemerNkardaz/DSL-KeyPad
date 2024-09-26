@@ -6576,6 +6576,28 @@ MapInsert(Characters,
 			recipeAlt: "l" GetChar("dotted_circle", "acute"),
 			symbol: Chr(0x1E31)
 		},
+		"lat_c_let_l_cedilla", {
+			unicode: "{U+013B}", html: "&#315;", entity: "&Lcedil;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная L с седилью", "capital L with cedilla"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftAlt RightShift " [L]",
+			recipe: "L" GetChar("cedilla"),
+			recipeAlt: "L" GetChar("dotted_circle", "cedilla"),
+			symbol: Chr(0x013B)
+		},
+		"lat_s_let_l_cedilla", {
+			unicode: "{U+013C}", html: "&#316;", entity: "&lcedil;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная l с седилью", "small l with cedilla"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftAlt RightShift " [l]",
+			recipe: "l" GetChar("cedilla"),
+			recipeAlt: "l" GetChar("dotted_circle", "cedilla"),
+			symbol: Chr(0x013C)
+		},
 		"lat_c_let_l_caron", {
 			unicode: "{U+013D}", html: "&#488;", entity: "&Lcaron;",
 			titlesAlt: True,
@@ -6597,6 +6619,14 @@ MapInsert(Characters,
 			recipe: "l" GetChar("caron"),
 			recipeAlt: "l" GetChar("dotted_circle", "caron"),
 			symbol: Chr(0x013E)
+		},
+		"lat_s_let_l_curl", {
+			unicode: "{U+0234}", html: "&#564;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l с завитком", "small l with curl"],
+			recipe: "l" GetChar("arrow_left_ushaped"),
+			symbol: Chr(0x0234)
 		},
 		"lat_c_let_l_dot_below", {
 			unicode: "{U+1E36}", html: "&#7734;",
@@ -11817,6 +11847,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<!" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_acute", "lat_s_let_l_acute"], ["", ""], True),
 			"<^>!" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"], ["cyr_c_let_dzhe", "cyr_s_let_dzhe"], True),
 			"<^>!<!<+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_caron", "lat_s_let_l_caron"], ["", ""], True),
+			"<^>!<!>+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_cedilla", "lat_s_let_l_cedilla"], ["", ""], True),
 			;
 			;
 			"<^>!" UseKey["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
