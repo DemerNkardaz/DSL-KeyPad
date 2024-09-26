@@ -915,7 +915,8 @@ LayoutsPresets := Map(
 )
 
 RegisterLayout(LayoutName := "QWERTY") {
-	global GlagoFutharkActive
+	global GlagoFutharkActive, DisabledAllKeys
+
 	IsLatin := False
 	IsCyrillic := False
 	ActiveLatin := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
@@ -936,48 +937,57 @@ RegisterLayout(LayoutName := "QWERTY") {
 		}
 	}
 
-	if IsLatin {
-		IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
-
-		UnregisterKeysLayout()
-		if (LayoutName != "QWERTY") {
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+	if DisabledAllKeys {
+		if IsLatin {
+			IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
+		} else if IsCyrillic {
+			IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
 		}
-
-		IsLettersModeEnabled := GlagoFutharkActive
-
-		Sleep 250
-		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
-		Sleep 25
-		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-
-		if IsLettersModeEnabled {
-			Sleep 50
-			GlagoFutharkActive := False
-			ToggleLetterScript(True)
-		}
-	} else if IsCyrillic {
-		IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
-		UnregisterKeysLayout()
-
-		if (ActiveLatin != "QWERTY") || (LayoutName != "ЙЦУКЕН") {
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
-		}
-
-		IsLettersModeEnabled := GlagoFutharkActive
-
-		Sleep 250
-		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
-		Sleep 25
-		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-
-		if IsLettersModeEnabled {
-			Sleep 50
-			GlagoFutharkActive := False
-			ToggleLetterScript(True)
-		}
-	} else {
 		return
+	} else {
+		if IsLatin {
+			IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
+
+			UnregisterKeysLayout()
+			if (LayoutName != "QWERTY") {
+				RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+			}
+
+			IsLettersModeEnabled := GlagoFutharkActive
+
+			Sleep 250
+			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
+			Sleep 25
+			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
+
+			if IsLettersModeEnabled {
+				Sleep 50
+				GlagoFutharkActive := False
+				ToggleLetterScript(True)
+			}
+		} else if IsCyrillic {
+			IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
+			UnregisterKeysLayout()
+
+			if (ActiveLatin != "QWERTY") || (LayoutName != "ЙЦУКЕН") {
+				RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+			}
+
+			IsLettersModeEnabled := GlagoFutharkActive
+
+			Sleep 250
+			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
+			Sleep 25
+			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
+
+			if IsLettersModeEnabled {
+				Sleep 50
+				GlagoFutharkActive := False
+				ToggleLetterScript(True)
+			}
+		} else {
+			return
+		}
 	}
 }
 
@@ -4362,7 +4372,7 @@ MapInsert(Characters,
 			unicode: "{U+1D6C}", html: "&#7532;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["строчная b со тильдой посередине", "small b with middle tilde"],
+			tags: ["строчная b с тильдой посередине", "small b with middle tilde"],
 			recipe: "b" GetChar("tilde_overlay"),
 			recipeAlt: "b" GetChar("dotted_circle", "tilde_overlay"),
 			symbol: Chr(0x1D6C)
@@ -4580,7 +4590,7 @@ MapInsert(Characters,
 			unicode: "{U+023B}", html: "&#571;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["прописная C с косой чертой", "capital C with solidus"],
+			tags: ["прописная C с косым штрихом", "capital C with solidus"],
 			recipe: "C" GetChar("solidus_long"),
 			recipeAlt: "C" GetChar("dotted_circle", "solidus_long"),
 			symbol: Chr(0x023B)
@@ -4589,7 +4599,7 @@ MapInsert(Characters,
 			unicode: "{U+023C}", html: "&#572;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["строчная c с косой чертой", "small c with solidus"],
+			tags: ["строчная c с косым штрихом", "small c with solidus"],
 			recipe: "c" GetChar("solidus_long"),
 			recipeAlt: "c" GetChar("dotted_circle", "solidus_long"),
 			symbol: Chr(0x023C)
@@ -4854,7 +4864,7 @@ MapInsert(Characters,
 			unicode: "{U+1D6D}", html: "&#7533;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["строчная d со тильдой посередине", "small d with middle tilde"],
+			tags: ["строчная d с тильдой посередине", "small d with middle tilde"],
 			recipe: "d" GetChar("tilde_overlay"),
 			recipeAlt: "d" GetChar("dotted_circle", "tilde_overlay"),
 			symbol: Chr(0x1D6D)
@@ -5606,7 +5616,7 @@ MapInsert(Characters,
 			unicode: "{U+A7A0}", html: "&#42912;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["прописная G с косой чертой", "capital G with solidus"],
+			tags: ["прописная G с косым штрихом", "capital G with solidus"],
 			recipe: "G" GetChar("solidus_long"),
 			recipeAlt: "G" GetChar("dotted_circle", "solidus_long"),
 			symbol: Chr(0xA7A0)
@@ -5615,7 +5625,7 @@ MapInsert(Characters,
 			unicode: "{U+A7A1}", html: "&#42913;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["строчная g с косой чертой", "small g with solidus"],
+			tags: ["строчная g с косым штрихом", "small g with solidus"],
 			recipe: "g" GetChar("solidus_long"),
 			recipeAlt: "g" GetChar("dotted_circle", "solidus_long"),
 			symbol: Chr(0xA7A1)
@@ -6442,7 +6452,7 @@ MapInsert(Characters,
 			unicode: "{U+A7A2}", html: "&#42914;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["прописная K с косой чертой", "capital K with solidus"],
+			tags: ["прописная K с косым штрихом", "capital K with solidus"],
 			recipe: "K" GetChar("solidus_long"),
 			recipeAlt: "K" GetChar("dotted_circle", "solidus_long"),
 			symbol: Chr(0xA7A2)
@@ -6451,7 +6461,7 @@ MapInsert(Characters,
 			unicode: "{U+A7A3}", html: "&#42915;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["строчная k с косой чертой", "small k with solidus"],
+			tags: ["строчная k с косым штрихом", "small k with solidus"],
 			recipe: "k" GetChar("solidus_long"),
 			recipeAlt: "k" GetChar("dotted_circle", "solidus_long"),
 			symbol: Chr(0xA7A3)
@@ -6460,7 +6470,7 @@ MapInsert(Characters,
 			unicode: "{U+A742}", html: "&#42818;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["прописная K с диагональной чертой", "capital K with short solidus"],
+			tags: ["прописная K с диагональным штрихом", "capital K with short solidus"],
 			recipe: "K" GetChar("solidus_short"),
 			recipeAlt: "K" GetChar("dotted_circle", "solidus_short"),
 			symbol: Chr(0xA742)
@@ -6469,7 +6479,7 @@ MapInsert(Characters,
 			unicode: "{U+A743}", html: "&#42819;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["строчная k с диагональной чертой", "small k with short solidus"],
+			tags: ["строчная k с диагональным штрихом", "small k with short solidus"],
 			recipe: "k" GetChar("solidus_short"),
 			recipeAlt: "k" GetChar("dotted_circle", "solidus_short"),
 			symbol: Chr(0xA743)
@@ -6496,7 +6506,7 @@ MapInsert(Characters,
 			unicode: "{U+A744}", html: "&#42820;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["прописная K со штрихом и диагональной чертой", "capital K with stroke and short solidus"],
+			tags: ["прописная K со штрихом и диагональным штрихом", "capital K with stroke and short solidus"],
 			recipe: "K" GetChar("stroke_short", "solidus_short"),
 			recipeAlt: "K" GetChar("dotted_circle", "stroke_short", "dotted_circle", "solidus_short"),
 			symbol: Chr(0xA744)
@@ -6505,7 +6515,7 @@ MapInsert(Characters,
 			unicode: "{U+A745}", html: "&#42821;",
 			titlesAlt: True,
 			group: ["Latin Accented"],
-			tags: ["строчная k со штрихом и диагональной чертой", "small k with stroke and short solidus"],
+			tags: ["строчная k со штрихом и диагональным штрихом", "small k with stroke and short solidus"],
 			recipe: "k" GetChar("stroke_short", "solidus_short"),
 			recipeAlt: "k" GetChar("dotted_circle", "stroke_short", "dotted_circle", "solidus_short"),
 			symbol: Chr(0xA745)
@@ -6543,6 +6553,197 @@ MapInsert(Characters,
 			tags: ["строчная k с нижним выносным элементом", "small k with descender"],
 			recipe: "k" . GetChar("arrow_down"),
 			symbol: Chr(0x2C6A)
+		},
+		"lat_c_let_l_acute", {
+			unicode: "{U+0139}", html: "&#313;", entity: "&Lacute;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Primary"]],
+			tags: ["прописная L с акутом", "capital L with acute"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[L]",
+			recipe: "L" GetChar("acute"),
+			recipeAlt: "L" GetChar("dotted_circle", "acute"),
+			symbol: Chr(0x0139)
+		},
+		"lat_s_let_l_acute", {
+			unicode: "{U+013A}", html: "&#314;", entity: "&lacute;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Primary"]],
+			tags: ["строчная l с акутом", "small l with acute"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[l]",
+			recipe: "l" GetChar("acute"),
+			recipeAlt: "l" GetChar("dotted_circle", "acute"),
+			symbol: Chr(0x1E31)
+		},
+		"lat_c_let_l_caron", {
+			unicode: "{U+013D}", html: "&#488;", entity: "&Lcaron;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная L с гачеком", "capital L with caron"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftAlt LeftShift " [L]",
+			recipe: "L" GetChar("caron"),
+			recipeAlt: "L" GetChar("dotted_circle", "caron"),
+			symbol: Chr(0x013D)
+		},
+		"lat_s_let_l_caron", {
+			unicode: "{U+013E}", html: "&#318;", entity: "&lcaron;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная l с гачеком", "small l with caron"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: LeftAlt LeftShift " [l]",
+			recipe: "l" GetChar("caron"),
+			recipeAlt: "l" GetChar("dotted_circle", "caron"),
+			symbol: Chr(0x013E)
+		},
+		"lat_c_let_l_dot_below", {
+			unicode: "{U+1E36}", html: "&#7734;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная L с точкой снизу", "capital L with dot below"],
+			recipe: "L" GetChar("dot_below"),
+			recipeAlt: "L" GetChar("dotted_circle", "dot_below"),
+			symbol: Chr(0x1E36)
+		},
+		"lat_s_let_l_dot_below", {
+			unicode: "{U+1E37}", html: "&#7735;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l с точкой снизу", "small l with dot below"],
+			recipe: "l" GetChar("dot_below"),
+			recipeAlt: "l" GetChar("dotted_circle", "dot_below"),
+			symbol: Chr(0x1E37)
+		},
+		"lat_c_let_l_solidus_short", {
+			unicode: "{U+0141}", html: "&#321;", entity: "&Lstrok;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["прописная L с диагональным штрихом", "capital L with short solidus"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[L]",
+			recipe: "L" GetChar("solidus_short"),
+			recipeAlt: "L" GetChar("dotted_circle", "solidus_short"),
+			symbol: Chr(0x0141)
+		},
+		"lat_s_let_l_solidus_short", {
+			unicode: "{U+0142}", html: "&#322;", entity: "&lstrok;",
+			titlesAlt: True,
+			group: [["Latin Accented", "Latin Accented Secondary"]],
+			tags: ["строчная l с диагональным штрихом", "small l with short solidus"],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "[l]",
+			recipe: "l" GetChar("solidus_short"),
+			recipeAlt: "l" GetChar("dotted_circle", "solidus_short"),
+			symbol: Chr(0x0142)
+		},
+		"lat_c_let_l_stroke_short", {
+			unicode: "{U+023D}", html: "&#573;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная L со штрихом", "capital L with stroke"],
+			recipe: "L" GetChar("stroke_short"),
+			recipeAlt: "L" GetChar("dotted_circle", "stroke_short"),
+			symbol: Chr(0x023D)
+		},
+		"lat_s_let_l_stroke_short", {
+			unicode: "{U+019A}", html: "&#410;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l со штрихом", "small l with stroke"],
+			recipe: "l" GetChar("stroke_short"),
+			recipeAlt: "l" GetChar("dotted_circle", "stroke_short"),
+			symbol: Chr(0x019A)
+		},
+		"lat_c_let_l_stroke_short_high", {
+			unicode: "{U+A748}", html: "&#42824;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная L с высоким штрихом", "capital L with high stroke"],
+			recipe: "L" GetChar("stroke_short"),
+			recipeAlt: "L" GetChar("arrow_up", "dotted_circle", "stroke_short"),
+			symbol: Chr(0xA748)
+		},
+		"lat_s_let_l_stroke_short_high", {
+			unicode: "{U+A749}", html: "&#42825;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l с высоким штрихом", "small l with high stroke"],
+			recipe: "l" GetChar("stroke_short"),
+			recipeAlt: "l" GetChar("arrow_up", "dotted_circle", "stroke_short"),
+			symbol: Chr(0xA749)
+		},
+		"lat_c_let_l_stroke_short_double", {
+			unicode: "{U+2C60}", html: "&#11360;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная L с двойным штрихом", "capital L with double stroke"],
+			recipe: "L" GetChar("stroke_short", "stroke_short"),
+			recipeAlt: "L" GetChar("dotted_circle", "stroke_short", "dotted_circle", "stroke_short"),
+			symbol: Chr(0x2C60)
+		},
+		"lat_s_let_l_stroke_short_double", {
+			unicode: "{U+2C61}", html: "&#11361;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l с двойным штрихом", "small l with double stroke"],
+			recipe: "l" GetChar("stroke_short", "stroke_short"),
+			recipeAlt: "l" GetChar("dotted_circle", "stroke_short", "dotted_circle", "stroke_short"),
+			symbol: Chr(0x2C61)
+		},
+		"lat_c_let_l_macron_dot_below", {
+			unicode: "{U+1E38}", html: "&#7736;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["прописная L с макроном и точкой снизу", "capital L with macron and dot below"],
+			recipe: "L" GetChar("macron", "dot_below"),
+			recipeAlt: "L" GetChar("dotted_circle", "macron", "dotted_circle", "dot_below"),
+			symbol: Chr(0x1E38)
+		},
+		"lat_s_let_l_macron_dot_below", {
+			unicode: "{U+1E39}", html: "&#7737;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l с макроном и точкой снизу", "small l with macron and dot below"],
+			recipe: "l" GetChar("macron", "dot_below"),
+			recipeAlt: "l" GetChar("dotted_circle", "macron", "dotted_circle", "dot_below"),
+			symbol: Chr(0x1E39)
+		},
+		"lat_s_let_l_tilde_overlay", {
+			unicode: "{U+2C62}", html: "&#11362;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная L с тильдой посередине", "small L with middle tilde"],
+			recipe: "L" GetChar("tilde_overlay"),
+			recipeAlt: "L" GetChar("dotted_circle", "tilde_overlay"),
+			symbol: Chr(0x2C62)
+		},
+		"lat_s_let_l_tilde_overlay", {
+			unicode: "{U+026B}", html: "&#619;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l с тильдой посередине", "small l with middle tilde"],
+			recipe: "l" GetChar("tilde_overlay"),
+			recipeAlt: "l" GetChar("dotted_circle", "tilde_overlay"),
+			symbol: Chr(0x026B)
+		},
+		"lat_s_let_l_tilde_overlay_double", {
+			unicode: "{U+AB38}", html: "&#43832;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l с двойной тильдой посередине", "small l with double middle tilde"],
+			recipe: "l" GetChar("tilde_overlay", "tilde_overlay"),
+			recipeAlt: "l" GetChar("dotted_circle", "tilde_overlay", "dotted_circle", "tilde_overlay"),
+			symbol: Chr(0xAB38)
+		},
+		"lat_s_let_l_inverted_lazy_s", {
+			unicode: "{U+AB37}", html: "&#43831;",
+			titlesAlt: True,
+			group: ["Latin Accented"],
+			tags: ["строчная l с повёрнутой s", "small l with inverted lazy s"],
+			recipe: "l" GetChar("arrow_right_circle") "s",
+			symbol: Chr(0xAB37)
 		},
 		;
 		;
@@ -7930,7 +8131,7 @@ MapInsert(Characters,
 			unicode: "{U+16DF}", html: "&#5855;",
 			titlesAlt: True,
 			group: ["Futhark Runes", "O"],
-			tags: ["старший футарк одал", "elder futhark othala", "futhork edel", "tlder futhark ōþala", "futhork ēðel"],
+			tags: ["старший футарк одал", "elder futhark othala", "futhork edel", "elder futhark ōþala", "futhork ēðel"],
 			symbol: Chr(0x16DF)
 		},
 		"futhark_pertho", {
@@ -8405,11 +8606,18 @@ MapInsert(Characters,
 			recipe: ["XO"],
 			symbol: Chr(0x00A4)
 		},
+		"wallet_austral", {
+			unicode: "{U+20B3}", html: "&#8371;",
+			group: ["Wallet Signs"],
+			tags: ["аустраль", "austral"],
+			recipe: ["A=", "ARA"],
+			symbol: Chr(0x20B3)
+		},
 		"wallet_dollar", {
 			unicode: "{U+0024}", html: "&#36;", entity: "&dollar;",
 			group: ["Wallet Signs"],
 			tags: ["доллар", "dollar"],
-			recipe: ["USD", "DLR"],
+			recipe: ["S|", "USD", "DLR"],
 			symbol: Chr(0x0024)
 		},
 		"wallet_cent", {
@@ -8434,11 +8642,18 @@ MapInsert(Characters,
 			symbol: Chr(0x20AC)
 		},
 		"wallet_franc", {
-			unicode: "{U+20A3}", html: "&#8353;",
+			unicode: "{U+20A3}", html: "&#8374;",
 			group: ["Wallet Signs"],
 			tags: ["франк", "franc"],
 			recipe: ["F=", "FRF"],
 			symbol: Chr(0x20A3)
+		},
+		"wallet_tournois", {
+			unicode: "{U+20B6}", html: "&#8353;",
+			group: ["Wallet Signs"],
+			tags: ["турский ливр", "tournois"],
+			recipe: ["lt", "LTF"],
+			symbol: Chr(0x20B6)
 		},
 		"wallet_rub", {
 			unicode: "{U+20BD}", html: "&#8381;",
@@ -9006,8 +9221,8 @@ SearchKey(CycleSend := "") {
 	}
 
 
-	IsSensitive := !(SubStr(PromptValue, 1, 1) = "*")
-	if !IsSensitive
+	IsSensitive := (SubStr(PromptValue, 1, 1) = "*")
+	if IsSensitive
 		PromptValue := SubStr(PromptValue, 2)
 
 	Found := False
@@ -9052,26 +9267,26 @@ SearchKey(CycleSend := "") {
 			}
 			Found := True
 			if !CyclingSearch {
-				IniWrite !IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
+				IniWrite IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
 			}
 			return OutputValue
 		}
 
 		CheckTagExact(value, tag, SearchingPrompt, IsSensitive) {
-			IsEqualSensitive := !IsSensitive && (SearchingPrompt == tag)
-			IsEqualNonSensitive := IsSensitive && (StrLower(SearchingPrompt) = StrLower(tag))
+			IsEqualNonSensitive := !IsSensitive && (StrLower(SearchingPrompt) = StrLower(tag))
+			IsEqualSensitive := IsSensitive && (SearchingPrompt == tag)
 			return IsEqualSensitive || IsEqualNonSensitive
 		}
 
 		CheckTagPartial(value, tag, SearchingPrompt, IsSensitive) {
-			IsPartiallyEqualSensitive := !IsSensitive && RegExMatch(tag, SearchingPrompt)
-			IsPartiallyEqual := IsSensitive && RegExMatch(StrLower(tag), StrLower(SearchingPrompt))
+			IsPartiallyEqual := !IsSensitive && RegExMatch(StrLower(tag), StrLower(SearchingPrompt))
+			IsPartiallyEqualSensitive := IsSensitive && RegExMatch(tag, SearchingPrompt)
 			return IsPartiallyEqual || IsPartiallyEqualSensitive
 		}
 
 		CheckTagLowAcc(value, tag, SearchingPrompt, IsSensitive) {
-			IsLowAccSensitive := !IsSensitive && HasAllCharacters(tag, SearchingPrompt)
-			IsLowAcc := IsSensitive && HasAllCharacters(StrLower(tag), StrLower(SearchingPrompt))
+			IsLowAcc := !IsSensitive && HasAllCharacters(StrLower(tag), StrLower(SearchingPrompt))
+			IsLowAccSensitive := IsSensitive && HasAllCharacters(tag, SearchingPrompt)
 			return IsLowAcc || IsLowAccSensitive
 		}
 
@@ -9101,7 +9316,7 @@ SearchKey(CycleSend := "") {
 	}
 
 	if InStr(PromptValue, ", ") && StrSplit(PromptValue, ", ")[2] != "" {
-		IniWrite !IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
+		IniWrite IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
 		WordSplit := StrSplit(PromptValue, ", ")
 		Count := WordSplit.Length
 
@@ -11261,6 +11476,7 @@ DisableAllKeys() {
 	if DisabledAllKeys {
 		UnregisterKeysLayout()
 	} else {
+		Sleep 50
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 	}
 }
@@ -11594,10 +11810,14 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
 			"<^>!<!" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"], ["", ""], True),
 			;
+			"<!" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k_acute", "lat_s_let_k_acute"], ["", ""], True),
 			"<^>!<!<+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k_caron", "lat_s_let_k_caron"], ["", ""], True),
 			"<^>!<!>+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"], ["", ""], True),
 			;
-			"<^>!" UseKey["L"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_dzhe", "cyr_s_let_dzhe"], True),
+			"<!" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_acute", "lat_s_let_l_acute"], ["", ""], True),
+			"<^>!" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"], ["cyr_c_let_dzhe", "cyr_s_let_dzhe"], True),
+			"<^>!<!<+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_caron", "lat_s_let_l_caron"], ["", ""], True),
+			;
 			;
 			"<^>!" UseKey["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
 			"<^>!<!" UseKey["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_j", "cyr_s_let_j"], True),
@@ -11633,7 +11853,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["ArrLeft"], (K) =>
 				TimedKeyCombinations("ArrLeft",
 					[UseKey["ArrUp"], UseKey["ArrDown"], UseKey["ArrRight"]],
-					[(*) => HandleFastKey(K, "arrow_leftup"), (*) => HandleFastKey(K, "arrow_leftdown"), (*) => HandleFastKey(K, "arrow_leftright")], (*) => HandleFastKey(K, "arrow_left"), -75
+					[
+						(*) => HandleFastKey(K, "arrow_leftup"),
+						(*) => HandleFastKey(K, "arrow_leftdown"),
+						(*) => HandleFastKey(K, "arrow_leftright")
+					], (*) => HandleFastKey(K, "arrow_left"), -75
 				),
 			"<^>!" UseKey["ArrRight"], (K) =>
 				TimedKeyCombinations("ArrRight",
