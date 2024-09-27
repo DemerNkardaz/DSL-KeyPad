@@ -7924,6 +7924,13 @@ MapInsert(Characters,
 			alt_on_fast_keys: "<+ [Enter]",
 			symbolAlt: CallChar("new_line", "symbolAlt")
 		},
+		"ipa_a-z", {
+			unicode: "{U+0041}", html: "N/A",
+			uniSequence: ["{U+0061}", "{U+0062}", "{U+0063}", "{U+0064}", "{U+0065}", "{U+0066}", "{U+0067}", "{U+0068}", "{U+0069}", "{U+006A}", "{U+006B}", "{U+006C}", "{U+006D}", "{U+006E}", "{U+006F}", "{U+0070}", "{U+0071}", "{U+0072}", "{U+0073}", "{U+0074}", "{U+0075}", "{U+0076}", "{U+0077}", "{U+0078}", "{U+0079}", "{U+007A}"],
+			group: ["IPA"],
+			alt_layout: "<+ [a-z]",
+			symbolAlt: "a-z",
+		}
 )
 
 ReplaceModifierKeys(Input) {
@@ -8096,15 +8103,17 @@ ProcessMapAfter() {
 			}
 		}
 
-		if HasProp(value, "symbolClass") {
-			if value.symbolClass = "Diacritic Mark" {
-				value.symbol := GetChar("dotted_circle") EntryCharacter
-			} else if value.symbolClass = "Spaces" {
-				value.symbol := "[" EntryCharacter "]"
-				value.symbolCustom := "underline"
+		if !HasProp(value, "value.symbol") {
+			if HasProp(value, "symbolClass") {
+				if value.symbolClass = "Diacritic Mark" {
+					value.symbol := GetChar("dotted_circle") EntryCharacter
+				} else if value.symbolClass = "Spaces" {
+					value.symbol := "[" EntryCharacter "]"
+					value.symbolCustom := "underline"
+				}
+			} else {
+				value.symbol := EntryCharacter
 			}
-		} else {
-			value.symbol := EntryCharacter
 		}
 
 
@@ -11597,11 +11606,22 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 	} else if Combinations = "Old Turkic Old Permic" {
 		return []
 	} else if Combinations = "IPA" {
-		return [
+		IPAArray := [
 			UseKey["C"], (K) => HandleFastKey(K, "lat_s_let_c_curl"),
 			UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle"),
 			"<^>!" UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle_half"),
 		]
+		Loop 26
+		{
+			Letter := Chr(65 + A_Index - 1)
+			IPAArray.Push("<+" UseKey[Letter])
+			IPAArray.Push(CreateFastKeyHandler(Letter))
+		}
+		CreateFastKeyHandler(Letter) {
+			return (K) => HandleFastKey(K, "lat_s_let_" StrLower(Letter))
+		}
+
+		return IPAArray
 	} else if Combinations = "Cleanscript" {
 		return [
 			UseKey["1"], "Off",
