@@ -8737,32 +8737,44 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	ActivationMessage["en"].Active := ScriptName . " activated"
 	ActivationMessage["en"].Deactive := ScriptName . " deactivated"
 
-	if !HideMessage {
-		MsgBox(CurrentActive ? ActivationMessage[LanguageCode].Deactive : ActivationMessage[LanguageCode].Active, ScriptName, 0x40)
-	}
+	LocalesPairs := [
+		"Glagolitic Futhark", "script_glagolitic_futhark",
+		"Old Trukic Old Permic", "script_turkic_perimc",
+		"IPA", "script_ipa",
+	]
 
-	Sleep 25
 	if !CurrentActive {
 		UnregisterKeysLayout()
 		ActiveScriptName := ""
-		Sleep 100
+		Sleep 10
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		Sleep 25
+		Sleep 10
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-		Sleep 25
+		Sleep 10
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], ScriptName), True)
 		ActiveScriptName := ScriptName
 	} else {
 
 		UnregisterKeysLayout()
 		ActiveScriptName := ""
-		Sleep 100
+		Sleep 10
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		Sleep 25
+		Sleep 10
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 	}
 
-
+	if !HideMessage {
+		for i, pair in LocalesPairs {
+			if (Mod(i, 2) == 1) {
+				key := pair
+				locale := LocalesPairs[i + 1]
+				if ScriptName = key {
+					MsgBox(CurrentActive ? SetStringVars(ReadLocale("scipr_mode_deactivated"), ReadLocale(locale)) : SetStringVars(ReadLocale("scipr_mode_activated"), ReadLocale(locale)), DSLPadTitle, 0x40)
+					break
+				}
+			}
+		}
+	}
 	return
 }
 
@@ -11546,6 +11558,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", Slots["\"], True),
 			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", Slots["+\"], True, True),
 		]
+	} else if Combinations = "Old Turkic Old Permic" {
+		return []
 	} else if Combinations = "IPA" {
 		return [
 			UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle"),
