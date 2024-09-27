@@ -10036,21 +10036,34 @@ Constructor() {
 
 	DSLContent["BindList"].TabGlagoKeys := []
 
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Fake", RightControl " 1", False)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False, "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhork Runes", ReadLocale("symbol_futhork"), , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Younger Futhark Runes", ReadLocale("symbol_futhark_younger"), , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Almanac Runes", ReadLocale("symbol_futhark_almanac"), , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"), , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Medieval Runes", ReadLocale("symbol_medieval_runes"), , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Runic Punctuation", ReadLocale("symbol_runic_punctuation"), , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Glagolitic Letters", ReadLocale("symbol_glagolitic"), , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Cyrillic Diacritics", , , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Fake", RightControl " 2")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Old Turkic", ReadLocale("symbol_turkic"), False, "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Old Permic", ReadLocale("symbol_permic"), , "Alternative Layout")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Fake", RightControl " 0")
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "IPA", ReadLocale("symbol_ipa"), False, "Alternative Layout")
+	AltLayouts := [
+		"Fake GlagoRunes", RightControl " 1",
+		"Futhark Runes", ReadLocale("symbol_futhark"),
+		"Futhork Runes", ReadLocale("symbol_futhork"),
+		"Younger Futhark Runes", ReadLocale("symbol_futhark_younger"),
+		"Almanac Runes", ReadLocale("symbol_futhark_almanac"),
+		"Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"),
+		"Medieval Runes", ReadLocale("symbol_medieval_runes"),
+		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
+		"Glagolitic Letters", ReadLocale("symbol_glagolitic"),
+		"Cyrillic Diacritics", "",
+		"Fake TurkoPermic", RightControl " 2",
+		"Old Turkic", ReadLocale("symbol_turkic"),
+		"Old Permic", ReadLocale("symbol_permic"),
+		"Fake IPA", RightControl " 0",
+		"IPA", ReadLocale("symbol_ipa"),
+	]
+
+	for i, groupName in AltLayouts {
+		if Mod(i, 2) = 1 {
+			AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "IPA") ? False : True
+			GroupHotKey := AltLayouts[i + 1]
+
+
+			InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, groupName, GroupHotKey, AddSeparator, "Alternative Layout")
+		}
+	}
+
 
 	GlagoLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
 	GlagoLV.ModifyCol(1, ColumnWidths[1])
