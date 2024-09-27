@@ -957,13 +957,13 @@ RegisterLayout(LayoutName := "QWERTY") {
 
 			IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
 
-			Sleep 250
+			Sleep 10
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
-			Sleep 25
+			Sleep 10
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 
 			if IsLettersModeEnabled {
-				Sleep 50
+				Sleep 10
 				ActiveScriptName := ""
 				ToggleLetterScript(True, IsLettersModeEnabled)
 			}
@@ -977,13 +977,13 @@ RegisterLayout(LayoutName := "QWERTY") {
 
 			IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
 
-			Sleep 250
+			Sleep 10
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
-			Sleep 25
+			Sleep 10
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 
 			if IsLettersModeEnabled {
-				Sleep 50
+				Sleep 10
 				ActiveScriptName := ""
 				ToggleLetterScript(True, IsLettersModeEnabled)
 			}
@@ -1262,8 +1262,7 @@ CheckGroupMatch(groupsEntry, targetGroup) {
 	return False
 }
 
-
-InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", AddSeparator := True, ShowOnFastKeys := False, ShowRecipes := False, BlackList := [], FastSpecial := False, AlternativeLayout := False) {
+InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", AddSeparator := True, InsertingOption := "", BlackList := []) {
 	if GroupName == "" {
 		return
 	}
@@ -1315,9 +1314,9 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 
 		GroupValid := False
 
-		IsDefault := !ShowOnFastKeys && !ShowRecipes && !AlternativeLayout
+		IsDefault := InsertingOption = ""
 
-		if (ShowRecipes && !HasProp(value, "recipe")) || (IsDefault && HasProp(value, "group") && !value.group.Has(2)) {
+		if (InsertingOption = "Recipes" && !HasProp(value, "recipe")) || (IsDefault && HasProp(value, "group") && !value.group.Has(2)) {
 			continue
 		}
 
@@ -1333,7 +1332,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 		}
 
 		if GroupValid {
-			if (ShowOnFastKeys && FastSpecial && !HasProp(value, "alt_special")) {
+			if (InsertingOption = "Fast Special" && !HasProp(value, "alt_special")) {
 				continue
 			}
 
@@ -1346,11 +1345,11 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 
 			characterSymbol := HasProp(value, "symbol") ? value.symbol : ""
 			characterModifier :=
-				(HasProp(value, "modifier") && ShowOnFastKeys) ? value.modifier :
+				(HasProp(value, "modifier") && (InsertingOption = "Fast Special" || InsertingOption = "Fast Keys")) ? value.modifier :
 					HasProp(value, "defaultModifier") ? value.defaultModifier : ""
 			characterBinding := ""
 
-			if (ShowRecipes) {
+			if (InsertingOption = "Recipes") {
 				if (HasProp(value, "recipeAlt")) {
 					characterBinding := RecipesMicroController(value.recipeAlt)
 				} else if (HasProp(value, "recipe")) {
@@ -1358,11 +1357,11 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 				} else {
 					characterBinding := ""
 				}
-			} else if (AlternativeLayout && HasProp(value, "alt_layout")) {
+			} else if (InsertingOption = "Alternative Layout" && HasProp(value, "alt_layout")) {
 				characterBinding := value.alt_layout
-			} else if (ShowOnFastKeys && FastSpecial && HasProp(value, "alt_special")) {
+			} else if (InsertingOption = "Fast Special" && HasProp(value, "alt_special")) {
 				characterBinding := value.alt_special
-			} else if (ShowOnFastKeys && HasProp(value, "alt_on_fast_keys")) {
+			} else if (InsertingOption = "Fast Keys" && HasProp(value, "alt_on_fast_keys")) {
 				characterBinding := value.alt_on_fast_keys
 			} else {
 				if value.group.Has(2) {
@@ -1370,7 +1369,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 				}
 			}
 
-			if !ShowOnFastKeys || ShowOnFastKeys && (HasProp(value, "show_on_fast_keys") && value.show_on_fast_keys) {
+			if InsertingOption != "Fast Keys" || InsertingOption = "Fast Keys" && (HasProp(value, "show_on_fast_keys") && value.show_on_fast_keys) {
 				TermporaryArray.Push([characterTitle, characterBinding, characterSymbol, UniTrim(value.unicode), entryID])
 			}
 		}
@@ -1384,6 +1383,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 		}
 	}
 }
+
 
 Characters := Map(
 	"", {
@@ -2332,12 +2332,14 @@ MapInsert(Characters,
 		"colon_triangle", {
 			unicode: "{U+02D0}", html: "&#720;",
 			tags: ["triangle colon", "знак долготы"],
-			group: ["Special Characters", [";", "ж"]],
+			group: [["Special Characters", "IPA"], [";", "ж"]],
+			alt_layout: "[;]",
 		},
 		"colon_triangle_half", {
 			unicode: "{U+02D1}", html: "&#721;",
 			tags: ["half triangle colon", "знак полудолготы"],
-			group: ["Special Characters", [":", "Ж"]],
+			group: [["Special Characters", "IPA"], [":", "Ж"]],
+			alt_layout: ">! [;]",
 		},
 		"degree", {
 			unicode: "{U+00B0}", html: "&#176;", entity: "&deg;",
@@ -9880,18 +9882,17 @@ Constructor() {
 
 	DSLContent["BindList"].TabSmelter := []
 
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Letters", , True, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Futhork Runes", , True, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Glagolitic Letters", , True, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, , True)
-
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Letters", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Futhork Runes", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Glagolitic Letters", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, "Recipes")
 
 	LigaturesLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.smelting)
 	LigaturesLV.ModifyCol(1, ColumnWidths[1])
@@ -9966,6 +9967,7 @@ Constructor() {
 		"Cyrillic Letters",
 		"Special Fast",
 	] {
+		InsertingOption := groupName = "Special Fast" ? "Fast Special" : "Fast Keys"
 		AddSeparator := (groupName = "Diacritics Fast Primary" || groupName = "Latin Ligatures") ? False : True
 		GroupHotKey := (groupName = "Diacritics Fast Primary") ? LeftControl LeftAlt
 			: (groupName = "Special Fast Left") ? LeftAlt
@@ -9975,7 +9977,7 @@ Constructor() {
 
 		FastSpecial := groupName = "Special Fast" ? True : False
 
-		InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, groupName, GroupHotKey, AddSeparator, True, , , FastSpecial)
+		InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, groupName, GroupHotKey, AddSeparator, InsertingOption)
 	}
 
 
@@ -10035,15 +10037,20 @@ Constructor() {
 	DSLContent["BindList"].TabGlagoKeys := []
 
 	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Fake", RightControl " 1", False)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False, , , , , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhork Runes", ReadLocale("symbol_futhork"), , , , , , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Younger Futhark Runes", ReadLocale("symbol_futhark_younger"), , , , , , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Almanac Runes", ReadLocale("symbol_futhark_almanac"), , , , , , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"), , , , , , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Medieval Runes", ReadLocale("symbol_medieval_runes"), , , , , , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Runic Punctuation", ReadLocale("symbol_runic_punctuation"), , , , , , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Glagolitic Letters", ReadLocale("symbol_glagolitic"), , , , , , True)
-	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Cyrillic Diacritics", , , , , , , True)
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhark Runes", ReadLocale("symbol_futhark"), False, "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Futhork Runes", ReadLocale("symbol_futhork"), , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Younger Futhark Runes", ReadLocale("symbol_futhark_younger"), , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Almanac Runes", ReadLocale("symbol_futhark_almanac"), , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"), , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Medieval Runes", ReadLocale("symbol_medieval_runes"), , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Runic Punctuation", ReadLocale("symbol_runic_punctuation"), , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Glagolitic Letters", ReadLocale("symbol_glagolitic"), , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Cyrillic Diacritics", , , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Fake", RightControl " 2")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Old Turkic", ReadLocale("symbol_turkic"), False, "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Old Permic", ReadLocale("symbol_permic"), , "Alternative Layout")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "Fake", RightControl " 0")
+	InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, "IPA", ReadLocale("symbol_ipa"), False, "Alternative Layout")
 
 	GlagoLV := DSLPadGUI.Add("ListView", ColumnListStyle, DSLCols.default)
 	GlagoLV.ModifyCol(1, ColumnWidths[1])
