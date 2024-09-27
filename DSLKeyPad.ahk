@@ -1336,8 +1336,16 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 				continue
 			}
 
+			if InsertingOption = "Alternative Layout" && HasProp(value, "alt_layout") {
+				value.alt_layout_options := True
+			} else {
+				value.alt_layout_options := False
+			}
+
 			characterTitle := ""
-			if !InStr(ReadLocale(entryName, "chars"), "NOT FOUND") {
+			if InsertingOption = "Alternative Layout" && HasProp(value, "alt_layout_title") && value.alt_layout_title && !InStr(ReadLocale(entryName "_layout", "chars"), "NOT FOUND") {
+				characterTitle := ReadLocale(entryName "_layout", "chars")
+			} else if !InStr(ReadLocale(entryName, "chars"), "NOT FOUND") {
 				characterTitle := ReadLocale(entryName, "chars")
 			} else if (HasProp(value, "titles")) {
 				characterTitle := value.titles[LanguageCode]
@@ -4169,8 +4177,11 @@ MapInsert(Characters,
 		"lat_s_let_c_curl", {
 			unicode: "{U+0255}", html: "&#597;",
 			titlesAlt: True,
-			group: ["Latin Accented"],
+			group: [["Latin Accented", "IPA"]],
+			tags: ["R^$", "E^$", "глухой альвеоло-палатальный сибилянт", "voiceless alveolo-palatal fricative"],
 			recipe: "$" GetChar("arrow_left_ushaped"),
+			alt_layout: "[C]",
+			alt_layout_title: true,
 		},
 		"lat_c_let_c_dot_above", {
 			unicode: "{U+010A}", html: "&#266;", entity: "&Cdot;",
@@ -7203,7 +7214,7 @@ MapInsert(Characters,
 			unicode: "{U+16E1}", html: "&#5857;",
 			titlesAlt: True,
 			group: ["Futhork Runes"],
-			alt_layout: ">+[J]",
+			alt_layout: ">+ [J]",
 			tags: ["футорк йор", "futhork gerx", "futhork ior", "younger futhark arx", "futhork gērx", "futhork īor", "youner futhark árx"],
 		},
 		"futhork_cealc", {
@@ -8252,15 +8263,20 @@ ProcessMapAfter() {
 
 				TitleSequence.ru := RegExReplace(TitleSequence.ru, "\s\sс", "")
 
+
+				FullTagRu := CaseRu " буква " PreletterSequence.ru LetterVar TitleSequence.ru
+				FullTagEn := CaseEn " letter " PreletterSequence.en LetterVar TitleSequence.en
 				if HasProp(value, "tags") {
 
 					for index, tag in value.tags {
+						tag := RegExReplace(tag, "R\^\$", FullTagRu)
+						tag := RegExReplace(tag, "E\^\$", FullTagEn)
 						tag := RegExReplace(tag, "R\$", CaseRu " буква " LetterVar)
 						tag := RegExReplace(tag, "E\$", CaseEn " letter " LetterVar)
 						value.tags[index] := tag
 					}
 				} else {
-					value.tags := [CaseRu " буква " PreletterSequence.ru LetterVar TitleSequence.ru, CaseEn " letter " PreletterSequence.en LetterVar TitleSequence.en]
+					value.tags := [FullTagRu, FullTagEn]
 				}
 
 				if (!HasProp(value, "forceINI") || (HasProp(value, "forceINI") && value.forceINI != True)) {
@@ -11582,6 +11598,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		return []
 	} else if Combinations = "IPA" {
 		return [
+			UseKey["C"], (K) => HandleFastKey(K, "lat_s_let_c_curl"),
 			UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle"),
 			"<^>!" UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle_half"),
 		]
