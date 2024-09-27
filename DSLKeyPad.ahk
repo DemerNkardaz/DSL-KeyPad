@@ -170,6 +170,8 @@ SkipGroupMessage := False
 GlagoFutharkActive := False
 CombiningEnabled := False
 DisabledAllKeys := False
+ActiveScriptName := ""
+PreviousScriptName := ""
 InputMode := "Default"
 LaTeXMode := "common"
 
@@ -915,7 +917,7 @@ LayoutsPresets := Map(
 )
 
 RegisterLayout(LayoutName := "QWERTY") {
-	global GlagoFutharkActive, DisabledAllKeys
+	global DisabledAllKeys, ActiveScriptName
 
 	IsLatin := False
 	IsCyrillic := False
@@ -953,7 +955,7 @@ RegisterLayout(LayoutName := "QWERTY") {
 				RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
 			}
 
-			IsLettersModeEnabled := GlagoFutharkActive
+			IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
 
 			Sleep 250
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
@@ -962,8 +964,8 @@ RegisterLayout(LayoutName := "QWERTY") {
 
 			if IsLettersModeEnabled {
 				Sleep 50
-				GlagoFutharkActive := False
-				ToggleLetterScript(True)
+				ActiveScriptName := ""
+				ToggleLetterScript(True, IsLettersModeEnabled)
 			}
 		} else if IsCyrillic {
 			IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
@@ -973,7 +975,7 @@ RegisterLayout(LayoutName := "QWERTY") {
 				RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
 			}
 
-			IsLettersModeEnabled := GlagoFutharkActive
+			IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
 
 			Sleep 250
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
@@ -982,8 +984,8 @@ RegisterLayout(LayoutName := "QWERTY") {
 
 			if IsLettersModeEnabled {
 				Sleep 50
-				GlagoFutharkActive := False
-				ToggleLetterScript(True)
+				ActiveScriptName := ""
+				ToggleLetterScript(True, IsLettersModeEnabled)
 			}
 		} else {
 			return
@@ -8721,30 +8723,46 @@ SwitchToScript(scriptMode) {
 
 
 ; Glagolitic, Fuþark
-
-ToggleLetterScript(HideMessage := False) {
+ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	LanguageCode := GetLanguageCode()
-	global GlagoFutharkActive, ConfigFile
-	GlagoFutharkActive := !GlagoFutharkActive
+	global ActiveScriptName, ConfigFile, PreviousScriptName
+	CurrentActive := ScriptName = ActiveScriptName
 
 	ActivationMessage := {}
 	ActivationMessage[] := Map()
 	ActivationMessage["ru"] := {}
 	ActivationMessage["en"] := {}
-	ActivationMessage["ru"].Active := "Ввод глаголицы/футарка активирован"
-	ActivationMessage["ru"].Deactive := "Ввод глаголицы/футарка деактивирован"
-	ActivationMessage["en"].Active := "Glagolitic/Futhark activated"
-	ActivationMessage["en"].Deactive := "Glagolitic/Futhark deactivated"
+	ActivationMessage["ru"].Active := "Ввод " . ScriptName . " активирован"
+	ActivationMessage["ru"].Deactive := "Ввод " . ScriptName . " деактивирован"
+	ActivationMessage["en"].Active := ScriptName . " activated"
+	ActivationMessage["en"].Deactive := ScriptName . " deactivated"
+
 	if !HideMessage {
-		MsgBox(GlagoFutharkActive ? ActivationMessage[LanguageCode].Active : ActivationMessage[LanguageCode].Deactive, "Glagolitic/Futhark", 0x40)
+		MsgBox(CurrentActive ? ActivationMessage[LanguageCode].Deactive : ActivationMessage[LanguageCode].Active, ScriptName, 0x40)
 	}
 
 	Sleep 25
-	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Glagolitic Futhark"), GlagoFutharkActive)
-	if !GlagoFutharkActive {
+	if !CurrentActive {
+		UnregisterKeysLayout()
+		ActiveScriptName := ""
+		Sleep 100
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		Sleep 25
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
+		Sleep 25
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], ScriptName), True)
+		ActiveScriptName := ScriptName
+	} else {
+
+		UnregisterKeysLayout()
+		ActiveScriptName := ""
+		Sleep 100
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 		Sleep 25
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 	}
+
+
 	return
 }
 
@@ -11528,6 +11546,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", Slots["\"], True),
 			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", Slots["+\"], True, True),
 		]
+	} else if Combinations = "IPA" {
+		return [
+			UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle"),
+			"<^>!" UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle_half"),
+		]
 	} else if Combinations = "Cleanscript" {
 		return [
 			UseKey["1"], "Off",
@@ -11621,7 +11644,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["NumpadDot"], (*) => GREPizeSelection(True),
 			"<#<!" UseKey["ArrUp"], (*) => ChangeScriptInput("sup"),
 			"<#<!" UseKey["ArrDown"], (*) => ChangeScriptInput("sub"),
-			">^" UseKey["1"], (*) => ToggleLetterScript(),
+			">^" UseKey["1"], (*) => ToggleLetterScript(, "Glagolitic Futhark"),
+			">^" UseKey["0"], (*) => ToggleLetterScript(, "IPA"),
 			;
 			"RAlt", (*) => ProceedCompose(),
 			"RCtrl", (*) => ProceedCombining(),
