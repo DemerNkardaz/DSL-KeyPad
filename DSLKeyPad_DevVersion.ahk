@@ -79,12 +79,6 @@ ReadLocale(EntryName, Prefix := "") {
   Section := Prefix != "" ? Prefix . "_" . GetLanguageCode() : GetLanguageCode()
   Intermediate := IniRead(LocalesFile, Section, EntryName, "")
 
-  while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
-    Unicode := match[1]
-    Replacement := Chr("0x" . Unicode)
-    Intermediate := StrReplace(Intermediate, match[0], Replacement)
-  }
-
   while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
     LangCode := match[1]
     SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
@@ -98,6 +92,12 @@ ReadLocale(EntryName, Prefix := "") {
     CustomEntry := match[3]
     SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
     Replacement := IniRead(LocalesFile, SectionOverride, CustomEntry, "")
+    Intermediate := StrReplace(Intermediate, match[0], Replacement)
+  }
+
+  while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
+    Unicode := match[1]
+    Replacement := Chr("0x" . Unicode)
     Intermediate := StrReplace(Intermediate, match[0], Replacement)
   }
 
@@ -3954,13 +3954,17 @@ MapInsert(Characters,
     "lat_c_let_a_grave_double", {
       unicode: "{U+0200}", html: "&#512;",
       titlesAlt: True,
-      group: ["Latin Accented"],
+      group: [["Latin Accented", "Latin Accented Tertiary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "<+ $",
       recipe: "$" GetChar("grave_double"),
     },
     "lat_s_let_a_grave_double", {
       unicode: "{U+0201}", html: "&#513;",
       titlesAlt: True,
-      group: ["Latin Accented"],
+      group: [["Latin Accented", "Latin Accented Tertiary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "<+ $",
       recipe: "$" GetChar("grave_double"),
     },
     "lat_c_let_a_hook_above", {
@@ -4772,13 +4776,17 @@ MapInsert(Characters,
     "lat_c_let_e_grave_double", {
       unicode: "{U+0204}", html: "&#516;",
       titlesAlt: True,
-      group: ["Latin Accented"],
+      group: [["Latin Accented", "Latin Accented Tertiary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "<+ $",
       recipe: "$" GetChar("grave_double"),
     },
     "lat_s_let_e_grave_double", {
       unicode: "{U+0205}", html: "&#517;",
       titlesAlt: True,
-      group: ["Latin Accented"],
+      group: [["Latin Accented", "Latin Accented Tertiary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "<+ $",
       recipe: "$" GetChar("grave_double"),
     },
     "lat_c_let_e_hook_above", {
@@ -5430,13 +5438,17 @@ MapInsert(Characters,
     "lat_c_let_i_grave_double", {
       unicode: "{U+0208}", html: "&#520;",
       titlesAlt: True,
-      group: ["Latin Accented"],
+      group: [["Latin Accented", "Latin Accented Tertiary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "<+ $",
       recipe: "$" GetChar("grave_double"),
     },
     "lat_s_let_i_grave_double", {
       unicode: "{U+0209}", html: "&#513;",
       titlesAlt: True,
-      group: ["Latin Accented"],
+      group: [["Latin Accented", "Latin Accented Tertiary"]],
+      show_on_fast_keys: True,
+      alt_on_fast_keys: "<+ $",
       recipe: "$" GetChar("grave_double"),
     },
     "lat_c_let_i_hook_above", {
@@ -7882,7 +7894,7 @@ MapInsert(Characters,
       unicode: "{U+1036A}", html: "&#66410;",
       titlesAlt: True,
       group: ["Old Permic"],
-      alt_layout: ">!<+ [О]",
+      alt_layout: "[Ё]",
       tags: ["древнепермская буква оо", "old permic letter oo"],
     },
     "permic_ef", {
@@ -7961,6 +7973,196 @@ MapInsert(Characters,
       group: ["Old Permic"],
       alt_layout: ">! [Я]",
       tags: ["древнепермская буква я", "old permic letter ya"],
+    },
+    ;
+    "gothic_ahza", {
+      unicode: "{U+10330}", html: "&#66352;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[A]",
+      tags: ["готская буква аза", "gothic letter ahsa"],
+    },
+    "gothic_bairkan", {
+      unicode: "{U+10331}", html: "&#66353;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[B]",
+      tags: ["готская буква беркна", "gothic letter bairkan", "gothic letter baírkan"],
+    },
+    "gothic_giba", {
+      unicode: "{U+10332}", html: "&#66354;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[G]",
+      tags: ["готская буква гиба", "gothic letter giba"],
+    },
+    "gothic_dags", {
+      unicode: "{U+10333}", html: "&#66355;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[D]",
+      tags: ["готская буква дааз", "gothic letter dags"],
+    },
+    "gothic_aihvus", {
+      unicode: "{U+10334}", html: "&#66356;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[E]",
+      tags: ["готская буква эзй", "gothic letter aihvus", "gothic letter eíƕs"],
+    },
+    "gothic_qairthra", {
+      unicode: "{U+10335}", html: "&#66357;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[Q]",
+      tags: ["готская буква квертра", "gothic letter qairthra", "gothic letter qaírþra"],
+    },
+    "gothic_ezek", {
+      unicode: "{U+10336}", html: "&#66358;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[Z]",
+      tags: ["готская буква эзек", "gothic letter ezek"],
+    },
+    "gothic_hagl", {
+      unicode: "{U+10337}", html: "&#66359;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[H]",
+      tags: ["готская буква хаал", "gothic letter hagl"],
+    },
+    "gothic_thiuth", {
+      unicode: "{U+10338}", html: "&#66360;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: ">! [T]",
+      tags: ["готская буква сюс", "gothic letter thiuth", "gothic letter þiuþ"],
+    },
+    "gothic_eis", {
+      unicode: "{U+10339}", html: "&#66361;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[I]",
+      tags: ["готская буква ииз", "gothic letter eis"],
+    },
+    "gothic_kusma", {
+      unicode: "{U+1033A}", html: "&#66362;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[K]",
+      tags: ["готская буква козма", "gothic letter kusma"],
+    },
+    "gothic_lagus", {
+      unicode: "{U+1033B}", html: "&#66363;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[L]",
+      tags: ["готская буква лааз", "gothic letter lagus"],
+    },
+    "gothic_manna", {
+      unicode: "{U+1033C}", html: "&#66364;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[M]",
+      tags: ["готская буква манна", "gothic letter manna"],
+    },
+    "gothic_nauths", {
+      unicode: "{U+1033D}", html: "&#66365;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[N]",
+      tags: ["готская буква нойкз", "gothic letter nauths", "gothic letter nauþs"],
+    },
+    "gothic_jer", {
+      unicode: "{U+1033E}", html: "&#66366;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[J]",
+      tags: ["готская буква гаар", "gothic letter jer", "gothic letter jēr"],
+    },
+    "gothic_urus", {
+      unicode: "{U+1033F}", html: "&#66367;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[U]",
+      tags: ["готская буква ураз", "gothic letter urus", "gothic letter ūrus"],
+    },
+    "gothic_pairthra", {
+      unicode: "{U+10340}", html: "&#66368;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[P]",
+      tags: ["готская буква пертра", "gothic letter pairthra", "gothic letter ūrus"],
+    },
+    "gothic_ninety", {
+      unicode: "{U+10341}", html: "&#66369;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: ">! [P]",
+      tags: ["готская буква-число 90", "gothic letter ninety"],
+    },
+    "gothic_raida", {
+      unicode: "{U+10342}", html: "&#66370;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[R]",
+      tags: ["готская буква райда", "gothic letter raida"],
+    },
+    "gothic_sugil", {
+      unicode: "{U+10343}", html: "&#66371;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[S]",
+      tags: ["готская буква сугил", "gothic letter sugil"],
+    },
+    "gothic_teiws", {
+      unicode: "{U+10344}", html: "&#66372;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[T]",
+      tags: ["готская буква тюз", "gothic letter teiws"],
+    },
+    "gothic_winja", {
+      unicode: "{U+10345}", html: "&#66373;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[W], [Y]",
+      tags: ["готская буква винья", "gothic letter winja"],
+    },
+    "gothic_faihu", {
+      unicode: "{U+10346}", html: "&#66374;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[F]",
+      tags: ["готская буква файху", "gothic letter faihu"],
+    },
+    "gothic_iggws", {
+      unicode: "{U+10347}", html: "&#66375;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[F]",
+      tags: ["готская буква файху", "gothic letter iggws"],
+    },
+    "gothic_hwair", {
+      unicode: "{U+10348}", html: "&#66376;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: ">! [H]",
+      tags: ["готская буква хвайр", "gothic letter hwair", "gothic letter ƕaír"],
+    },
+    "gothic_othal", {
+      unicode: "{U+10349}", html: "&#66377;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: "[O]",
+      tags: ["готская буква хвайр", "gothic letter othal", "gothic letter ōþal"],
+    },
+    "gothic_nine_hundred", {
+      unicode: "{U+1034A}", html: "&#66378;",
+      titlesAlt: True,
+      group: ["Gothic Alphabet"],
+      alt_layout: ">! [S]",
+      tags: ["готская буква-число 900", "gothic letter nine hundred"],
     },
     ;
     ;
@@ -9211,6 +9413,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
   LocalesPairs := [
     "Glagolitic Futhark", "script_glagolitic_futhark",
     "Old Turkic Old Permic", "script_turkic_perimc",
+    "Gothic", "script_gothic",
     "IPA", "script_ipa",
   ]
 
@@ -9240,7 +9443,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
         key := pair
         locale := LocalesPairs[i + 1]
         if ScriptName = key {
-          MsgBox(CurrentActive ? SetStringVars(ReadLocale("scipr_mode_deactivated"), ReadLocale(locale)) : SetStringVars(ReadLocale("scipr_mode_activated"), ReadLocale(locale)), DSLPadTitle, 0x40)
+          MsgBox(CurrentActive ? SetStringVars(ReadLocale("script_mode_deactivated"), ReadLocale(locale)) : SetStringVars(ReadLocale("script_mode_activated"), ReadLocale(locale)), DSLPadTitle, 0x40)
           break
         }
       }
@@ -10275,6 +10478,7 @@ Constructor() {
   Command_glagokeys := CommandsTree.Add(ReadLocale("func_label_glagokeys"), Command_extralayouts)
   Command_oldturkic := CommandsTree.Add(ReadLocale("func_label_oldturkic"), Command_extralayouts)
   Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_oldhungary"), Command_extralayouts)
+  Command_gothic := CommandsTree.Add(ReadLocale("func_label_gothic"), Command_extralayouts)
   Command_func_label_ipa := CommandsTree.Add(ReadLocale("func_label_ipa"), Command_extralayouts)
   Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
   Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layouttoggle"))
@@ -10441,6 +10645,7 @@ Constructor() {
     "Latin Accented Secondary",
     "Cyrillic Ligatures & Letters",
     "Cyrillic Letters",
+    "Latin Accented Tertiary",
     "Special Fast",
   ] {
     InsertingOption := groupName = "Special Fast" ? "Fast Special" : "Fast Keys"
@@ -10448,8 +10653,9 @@ Constructor() {
     GroupHotKey := (groupName = "Diacritics Fast Primary") ? LeftControl LeftAlt
       : (groupName = "Special Fast Left") ? LeftAlt
         : (groupName = "Diacritics Fast Secondary") ? RightAlt
-          : (groupName = "Special Fast") ? ReadLocale("symbol_special_key")
-            : ""
+          : (groupName = "Latin Accented Tertiary") ? RightShift
+            : (groupName = "Special Fast") ? ReadLocale("symbol_special_key")
+              : ""
 
     FastSpecial := groupName = "Special Fast" ? True : False
 
@@ -10530,6 +10736,8 @@ Constructor() {
     "Old Turkic Orkhon", ReadLocale("symbol_turkic_orkhon"),
     "Old Turkic Yenisei", ReadLocale("symbol_turkic_yenisei"),
     "Old Permic", ReadLocale("symbol_permic"),
+    "Fake Gothic", RightControl " 4",
+    "Gothic Alphabet", ReadLocale("symbol_gothic"),
     "Fake IPA", RightControl " 0",
     "IPA", ReadLocale("symbol_ipa"),
   ]
@@ -10762,7 +10970,7 @@ Constructor() {
     "Spaces", GetRandomByGroups(["Spaces", "Dashes", "Quotes", "Special Characters"]),
     "Ligatures", GetRandomByGroups(["Latin Ligatures", "Cyrillic Ligatures & Letters", "Latin Accented", "Dashes", "Asian Quotes", "Quotes"]),
     "FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Special Fast Left", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
-    "GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters"]),
+    "GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters", "Old Turkic Orkhon", "Old Turkic Yenisei", "Old Permic"]),
   )
 
   SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", "DiacriticGroup", GroupBoxDiacritic, "DiacriticAlert")
@@ -11091,6 +11299,8 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
     "func_label_glagokeys",
     "func_label_oldturkic",
     "func_label_oldhungary",
+    "func_label_oldhungary",
+    "func_label_gothic",
     "func_label_ipa",
     "func_label_inputtoggle",
     "func_label_layouttoggle",
@@ -11567,6 +11777,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       "<^>!>+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_macron", "lat_s_let_a_macron"], ["", ""], True),
       "<^>!<+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"], ["", ""], True),
       "<^>!<+>+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_tilde", "lat_s_let_a_tilde"], ["", ""], True),
+      "<+>+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_grave_double", "lat_s_let_a_grave_double"], ["", ""], True),
       ;
       "<^>!" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"], ["cyr_c_let_i", "cyr_s_let_i"], True),
       "<^>!<+" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b_common_hook", "lat_s_let_b_common_hook"], ["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], True),
@@ -11593,6 +11804,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       "<^>!>+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_macron", "lat_s_let_e_macron"], ["", ""], True),
       "<^>!<+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_diaeresis", "lat_s_let_e_diaeresis"], ["", ""], True),
       "<^>!<+>+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_tilde", "lat_s_let_e_tilde"], ["", ""], True),
+      "<+>+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_grave_double", "lat_s_let_e_grave_double"], ["", ""], True),
       ;
       "<!" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_acute", "lat_s_let_g_acute"], ["", ""], True),
       "<^>!" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_breve", "lat_s_let_g_breve"], ["", ""], True),
@@ -11615,6 +11827,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       "<^>!>+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_macron", "lat_s_let_i_macron"], ["", ""], True),
       "<^>!<+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_diaeresis", "lat_s_let_i_diaeresis"], ["", ""], True),
       "<^>!<+>+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_tilde", "lat_s_let_i_tilde"], ["", ""], True),
+      "<+>+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_grave_double", "lat_s_let_i_grave_double"], ["", ""], True),
       ;
       "<^>!" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
       "<^>!<!" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"], ["", ""], True),
@@ -12386,6 +12599,38 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       "<^>!" UseKey["O"], (K) => LangSeparatedKey(K, ["turkic_yenisei_oe", "turkic_orkhon_oe"], "", True),
     ]
     return LayoutArray
+  } else if Combinations = "Gothic" {
+    LayoutArray := [
+      UseKey["A"], (K) => LangSeparatedKey(K, "gothic_ahza", "", True),
+      UseKey["B"], (K) => LangSeparatedKey(K, "gothic_bairkan", "", True),
+      UseKey["D"], (K) => LangSeparatedKey(K, "gothic_dags", "", True),
+      UseKey["E"], (K) => LangSeparatedKey(K, "gothic_aihvus", "", True),
+      UseKey["F"], (K) => LangSeparatedKey(K, "gothic_faihu", "", True),
+      UseKey["G"], (K) => LangSeparatedKey(K, "gothic_giba", "", True),
+      UseKey["H"], (K) => LangSeparatedKey(K, "gothic_hagl", "", True),
+      "<^>!" UseKey["H"], (K) => LangSeparatedKey(K, "gothic_hwair", "", True),
+      UseKey["I"], (K) => LangSeparatedKey(K, "gothic_eis", "", True),
+      UseKey["J"], (K) => LangSeparatedKey(K, "gothic_jer", "", True),
+      UseKey["K"], (K) => LangSeparatedKey(K, "gothic_kusma", "", True),
+      "<^>!" UseKey["K"], (K) => LangSeparatedKey(K, "gothic_ninety", "", True),
+      UseKey["L"], (K) => LangSeparatedKey(K, "gothic_lagus", "", True),
+      UseKey["M"], (K) => LangSeparatedKey(K, "gothic_manna", "", True),
+      UseKey["N"], (K) => LangSeparatedKey(K, "gothic_nauths", "", True),
+      UseKey["O"], (K) => LangSeparatedKey(K, "gothic_othal", "", True),
+      UseKey["P"], (K) => LangSeparatedKey(K, "gothic_pairthra", "", True),
+      UseKey["Q"], (K) => LangSeparatedKey(K, "gothic_qairthra", "", True),
+      UseKey["R"], (K) => LangSeparatedKey(K, "gothic_raida", "", True),
+      UseKey["S"], (K) => LangSeparatedKey(K, "gothic_sugil", "", True),
+      "<^>!" UseKey["S"], (K) => LangSeparatedKey(K, "gothic_nine_hundred", "", True),
+      UseKey["T"], (K) => LangSeparatedKey(K, "gothic_teiws", "", True),
+      "<^>!" UseKey["T"], (K) => LangSeparatedKey(K, "gothic_thiuth", "", True),
+      UseKey["U"], (K) => LangSeparatedKey(K, "gothic_urus", "", True),
+      UseKey["W"], (K) => LangSeparatedKey(K, "gothic_winja", "", True),
+      UseKey["X"], (K) => LangSeparatedKey(K, "gothic_iggws", "", True),
+      UseKey["Y"], (K) => LangSeparatedKey(K, "gothic_winja", "", True),
+      UseKey["Z"], (K) => LangSeparatedKey(K, "gothic_ezek", "", True),
+    ]
+    return LayoutArray
   } else if Combinations = "IPA" {
     IPAArray := [
       UseKey["C"], (K) => HandleFastKey(K, "lat_s_let_c_curl"),
@@ -12501,6 +12746,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       "<#<!" UseKey["ArrDown"], (*) => ChangeScriptInput("sub"),
       ">^" UseKey["1"], (*) => ToggleLetterScript(, "Glagolitic Futhark"),
       ">^" UseKey["2"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"),
+      ">^" UseKey["4"], (*) => ToggleLetterScript(, "Gothic"),
       ">^" UseKey["0"], (*) => ToggleLetterScript(, "IPA"),
       ;
       "RAlt", (*) => ProceedCompose(),
