@@ -616,6 +616,7 @@ CapsLock := Chr(0x2B9D)
 CyrllicLayouts := Map(
 	"ЙЦУКЕН", Map(),
 	"Диктор", Map(),
+	"ЙІУКЕН (1907)", Map(),
 )
 LayoutsPresets := Map(
 	"QWERTY", Map(
@@ -7557,6 +7558,29 @@ MapInsert(Characters,
 			tags: ["руническое крестовидное препинание", "runic cruciform punctuation"],
 		},
 		;
+		"turkic_orkhon_a", {
+			unicode: "{U+10C00}", html: "&#68608;",
+			titlesAlt: True,
+			group: ["Old Turkic Orkhon"],
+			alt_layout: "[A]",
+			tags: ["древнетюркская орхонская буква a", "old turkic orkhon letter a"],
+		},
+		"turkic_yenisei_a", {
+			unicode: "{U+10C01}", html: "&#68609;",
+			titlesAlt: True,
+			group: ["Old Turkic Yenisei"],
+			alt_layout: "c* [A]",
+			tags: ["древнетюркская енисейская буква a", "old turkic yenisei letter a"],
+		},
+		;
+		"permic_an", {
+			unicode: "{U+10350}", html: "&#66384;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[A]",
+			tags: ["древнепермская буква ан", "old permic letter an"],
+		},
+		;
 		;
 		; * Wallet Signs
 		"wallet_sign", {
@@ -8100,6 +8124,12 @@ ProcessMapAfter() {
 		PreletterSequence := { ru: "", en: "" }
 		RegExMatch(EntryName, "^(.+)_(.)_let_([^\W_]+)", &EntryExpression)
 		LetterVar := EntryExpression ? (EntryExpression[2] = "c" ? StrUpper(EntryExpression[3]) : EntryExpression[3]) : ""
+
+		if RegExMatch(EntryName, "^permic") {
+			value.symbolFont := "Noto Sans Old Permic"
+		} else if RegExMatch(EntryName, "^turkic") {
+			;value.symbolFont := "Noto Sans Old Turkic"
+		}
 
 		if HasProp(value, "alt_on_fast_keys") {
 			if EntryExpression {
@@ -8796,18 +8826,9 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	global ActiveScriptName, ConfigFile, PreviousScriptName
 	CurrentActive := ScriptName = ActiveScriptName
 
-	ActivationMessage := {}
-	ActivationMessage[] := Map()
-	ActivationMessage["ru"] := {}
-	ActivationMessage["en"] := {}
-	ActivationMessage["ru"].Active := "Ввод " . ScriptName . " активирован"
-	ActivationMessage["ru"].Deactive := "Ввод " . ScriptName . " деактивирован"
-	ActivationMessage["en"].Active := ScriptName . " activated"
-	ActivationMessage["en"].Deactive := ScriptName . " deactivated"
-
 	LocalesPairs := [
 		"Glagolitic Futhark", "script_glagolitic_futhark",
-		"Old Trukic Old Permic", "script_turkic_perimc",
+		"Old Turkic Old Permic", "script_turkic_perimc",
 		"IPA", "script_ipa",
 	]
 
@@ -9933,7 +9954,7 @@ Constructor() {
 	LatinLayoutSelector.Text := LatinLayoutName
 	LatinLayoutSelector.OnEvent("Change", (CB, Zero) => ChangeQWERTY(CB))
 
-	CyrillicLayoutSelector := DSLPadGUI.AddDropDownList("vCyrLayout w74 x426 y528", CyrillicLayoutsList)
+	CyrillicLayoutSelector := DSLPadGUI.AddDropDownList("vCyrLayout w82 x418 y528", CyrillicLayoutsList)
 	PostMessage(0x0153, -1, 24, CyrillicLayoutSelector)
 
 	CyrillicLayoutName := IniRead(ConfigFile, "Settings", "CyrillicLayout", "QWERTY")
@@ -10115,6 +10136,8 @@ Constructor() {
 		"Cyrillic Diacritics", "",
 		"Fake TurkoPermic", RightControl " 2",
 		"Old Turkic", ReadLocale("symbol_turkic"),
+		"Old Turkic Orkhon", ReadLocale("symbol_turkic_orkhon"),
+		"Old Turkic Yenisei", ReadLocale("symbol_turkic_yenisei"),
 		"Old Permic", ReadLocale("symbol_permic"),
 		"Fake IPA", RightControl " 0",
 		"IPA", ReadLocale("symbol_ipa"),
@@ -10122,7 +10145,7 @@ Constructor() {
 
 	for i, groupName in AltLayouts {
 		if Mod(i, 2) = 1 {
-			AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "IPA") ? False : True
+			AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "Old Turkic Orkhon" || groupName = "IPA") ? False : True
 			GroupHotKey := AltLayouts[i + 1]
 
 
@@ -11543,7 +11566,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 					"R", ["cyr_c_let_yery", "cyr_s_let_yery"],
 					"G", ["cyr_c_let_e", "cyr_s_let_e"],
 					"L", ["cyr_c_let_g", "cyr_s_let_g"],
-					"V", ["cyr_c_let_e", "cyr_s_let_e"],
+					"V", ["cyr_c_let_m", "cyr_s_let_m"],
 					"W", ["cyr_c_let_ts", "cyr_s_let_ts"],
 					"X", ["cyr_c_let_ch", "cyr_s_let_ch"],
 					"J", ["cyr_c_let_n", "cyr_s_let_n"],
@@ -11717,7 +11740,139 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 					"+-", "kkey_underscore",
 				)
 			}
+		} else if CyrillicLayout = "ЙІУКЕН (1907)" {
+			if LatinLayout = "QWERTY" {
+				MapPush(Slots,
+					"A", ["cyr_c_let_f", "cyr_s_let_f"],
+					"B", ["cyr_c_let_m", "cyr_s_let_m"],
+					"C", ["cyr_c_let_yat", "cyr_s_let_yat"],
+					"D", ["cyr_c_let_v", "cyr_s_let_v"],
+					"E", ["cyr_c_let_u", "cyr_s_let_u"],
+					"F", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"G", ["cyr_c_let_a", "cyr_s_let_a"],
+					"H", ["cyr_c_let_p", "cyr_s_let_p"],
+					"I", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"J", ["cyr_c_let_r", "cyr_s_let_r"],
+					"K", ["cyr_c_let_o", "cyr_s_let_o"],
+					"L", ["cyr_c_let_l", "cyr_s_let_l"],
+					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
+					"N", ["cyr_c_let_и", "cyr_s_let_и"],
+					"O", ["cyr_c_let_shch", "cyr_s_let_shch"],
+					"P", ["cyr_c_let_z", "cyr_s_let_z"],
+					"Q", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"R", ["cyr_c_let_k", "cyr_s_let_k"],
+					"S", ["cyr_c_let_yery", "cyr_s_let_yery"],
+					"T", ["cyr_c_let_e", "cyr_s_let_e"],
+					"U", ["cyr_c_let_g", "cyr_s_let_g"],
+					"V", ["cyr_c_let_s", "cyr_s_let_s"],
+					"W", ["cyr_c_let_i", "cyr_s_let_i"],
+					"X", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"Y", ["cyr_c_let_n", "cyr_s_let_n"],
+					"Z", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					",", ["cyr_c_let_b", "cyr_s_let_b"],
+					".", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					";", ["cyr_c_let_d", "cyr_s_let_d"],
+					"'", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"[", ["cyr_c_let_h", "cyr_s_let_h"],
+					"]", "kkey_hyphen_minus",
+					"+]", "kkey_underscore",
+					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"/", "kkey_dot",
+					"+/", "kkey_comma",
+					"\", "kkey_slash",
+					"+\", "kkey_backslash",
+					"=", ["cyr_c_let_э", "cyr_s_let_э"],
+					"-", ["cyr_c_let_ts", "cyr_s_let_ts"],
+				)
+			} else if LatinLayout = "Dvorak" {
+				MapPush(Slots,
+					"A", ["cyr_c_let_f", "cyr_s_let_f"],
+					"X", ["cyr_c_let_m", "cyr_s_let_m"],
+					"J", ["cyr_c_let_yat", "cyr_s_let_yat"],
+					"E", ["cyr_c_let_v", "cyr_s_let_v"],
+					".", ["cyr_c_let_u", "cyr_s_let_u"],
+					"U", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"I", ["cyr_c_let_a", "cyr_s_let_a"],
+					"D", ["cyr_c_let_p", "cyr_s_let_p"],
+					"C", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"H", ["cyr_c_let_r", "cyr_s_let_r"],
+					"T", ["cyr_c_let_o", "cyr_s_let_o"],
+					"N", ["cyr_c_let_l", "cyr_s_let_l"],
+					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
+					"B", ["cyr_c_let_и", "cyr_s_let_и"],
+					"R", ["cyr_c_let_shch", "cyr_s_let_shch"],
+					"L", ["cyr_c_let_z", "cyr_s_let_z"],
+					"'", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"P", ["cyr_c_let_k", "cyr_s_let_k"],
+					"O", ["cyr_c_let_yery", "cyr_s_let_yery"],
+					"Y", ["cyr_c_let_e", "cyr_s_let_e"],
+					"G", ["cyr_c_let_g", "cyr_s_let_g"],
+					"K", ["cyr_c_let_s", "cyr_s_let_s"],
+					",", ["cyr_c_let_i", "cyr_s_let_i"],
+					"Q", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"F", ["cyr_c_let_n", "cyr_s_let_n"],
+					";", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					"W", ["cyr_c_let_b", "cyr_s_let_b"],
+					"V", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"S", ["cyr_c_let_d", "cyr_s_let_d"],
+					"-", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"/", ["cyr_c_let_h", "cyr_s_let_h"],
+					"=", "kkey_hyphen_minus",
+					"+=", "kkey_underscore",
+					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"Z", "kkey_dot",
+					"+/", "kkey_comma",
+					"\", "kkey_slash",
+					"+\", "kkey_backslash",
+					"]", ["cyr_c_let_э", "cyr_s_let_э"],
+					"[", ["cyr_c_let_ts", "cyr_s_let_ts"],
+				)
+			} else if LatinLayout = "Colemak" {
+				MapPush(Slots,
+					"A", ["cyr_c_let_f", "cyr_s_let_f"],
+					"B", ["cyr_c_let_m", "cyr_s_let_m"],
+					"C", ["cyr_c_let_yat", "cyr_s_let_yat"],
+					"S", ["cyr_c_let_v", "cyr_s_let_v"],
+					"F", ["cyr_c_let_u", "cyr_s_let_u"],
+					"T", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"D", ["cyr_c_let_a", "cyr_s_let_a"],
+					"H", ["cyr_c_let_p", "cyr_s_let_p"],
+					"U", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"N", ["cyr_c_let_r", "cyr_s_let_r"],
+					"E", ["cyr_c_let_o", "cyr_s_let_o"],
+					"I", ["cyr_c_let_l", "cyr_s_let_l"],
+					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
+					"K", ["cyr_c_let_и", "cyr_s_let_и"],
+					"Y", ["cyr_c_let_shch", "cyr_s_let_shch"],
+					";", ["cyr_c_let_z", "cyr_s_let_z"],
+					"Q", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"P", ["cyr_c_let_k", "cyr_s_let_k"],
+					"R", ["cyr_c_let_yery", "cyr_s_let_yery"],
+					"G", ["cyr_c_let_e", "cyr_s_let_e"],
+					"L", ["cyr_c_let_g", "cyr_s_let_g"],
+					"V", ["cyr_c_let_s", "cyr_s_let_s"],
+					"W", ["cyr_c_let_i", "cyr_s_let_i"],
+					"X", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"J", ["cyr_c_let_n", "cyr_s_let_n"],
+					"Z", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					",", ["cyr_c_let_b", "cyr_s_let_b"],
+					".", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"O", ["cyr_c_let_d", "cyr_s_let_d"],
+					"'", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"[", ["cyr_c_let_h", "cyr_s_let_h"],
+					"]", "kkey_hyphen_minus",
+					"+]", "kkey_underscore",
+					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"/", "kkey_dot",
+					"+/", "kkey_comma",
+					"\", "kkey_slash",
+					"+\", "kkey_backslash",
+					"=", ["cyr_c_let_э", "cyr_s_let_э"],
+					"-", ["cyr_c_let_ts", "cyr_s_let_ts"],
+				)
+			}
 		}
+
 
 		LayoutArray := [
 			UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], Slots["A"], True),
@@ -11804,7 +11959,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 		return LayoutArray
 	} else if Combinations = "Old Turkic Old Permic" {
-		return []
+		Slots := Map()
+		LayoutArray := [
+			UseKey["A"], (K) => LangSeparatedKey(K, ["turkic_yenisei_a", "turkic_orkhon_a"], "permic_an", True),
+		]
+		return LayoutArray
 	} else if Combinations = "IPA" {
 		IPAArray := [
 			UseKey["C"], (K) => HandleFastKey(K, "lat_s_let_c_curl"),
@@ -11919,6 +12078,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["ArrUp"], (*) => ChangeScriptInput("sup"),
 			"<#<!" UseKey["ArrDown"], (*) => ChangeScriptInput("sub"),
 			">^" UseKey["1"], (*) => ToggleLetterScript(, "Glagolitic Futhark"),
+			">^" UseKey["2"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"),
 			">^" UseKey["0"], (*) => ToggleLetterScript(, "IPA"),
 			;
 			"RAlt", (*) => ProceedCompose(),
