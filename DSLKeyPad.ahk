@@ -614,8 +614,8 @@ Window := Chr(0x229E)
 CapsLock := Chr(0x2B9D)
 
 CyrllicLayouts := Map(
-	"ЙЦУКЕН", "",
-	"Диктор", "",
+	"ЙЦУКЕН", Map(),
+	"Диктор", Map(),
 )
 LayoutsPresets := Map(
 	"QWERTY", Map(
@@ -920,7 +920,7 @@ LayoutsPresets := Map(
 	),
 )
 
-RegisterLayout(LayoutName := "QWERTY") {
+RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY") {
 	global DisabledAllKeys, ActiveScriptName
 
 	IsLatin := False
@@ -953,46 +953,28 @@ RegisterLayout(LayoutName := "QWERTY") {
 	} else {
 		if IsLatin {
 			IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
-
-			UnregisterKeysLayout()
-			if (LayoutName != "QWERTY") {
-				RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
-			}
-
-			IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
-
-			Sleep 10
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
-			Sleep 10
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-
-			if IsLettersModeEnabled {
-				Sleep 10
-				ActiveScriptName := ""
-				ToggleLetterScript(True, IsLettersModeEnabled)
-			}
 		} else if IsCyrillic {
 			IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
-			UnregisterKeysLayout()
+		}
 
-			if (ActiveLatin != "QWERTY") || (LayoutName != "ЙЦУКЕН") {
-				RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
-			}
+		UnregisterKeysLayout()
 
-			IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
+		if (IsLatin && LayoutName != "QWERTY") || (IsCyrillic && LayoutName != "ЙЦУКЕН") || (IsLatin && ActiveCyrillic != "ЙЦУКЕН") || (IsCyrillic && ActiveLatin != "QWERTY") {
+			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+		}
 
+
+		IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
+
+		Sleep 10
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
+		Sleep 10
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
+
+		if IsLettersModeEnabled {
 			Sleep 10
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
-			Sleep 10
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-
-			if IsLettersModeEnabled {
-				Sleep 10
-				ActiveScriptName := ""
-				ToggleLetterScript(True, IsLettersModeEnabled)
-			}
-		} else {
-			return
+			ActiveScriptName := ""
+			ToggleLetterScript(True, IsLettersModeEnabled)
 		}
 	}
 }
@@ -11638,99 +11620,105 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				)
 			} else if LatinLayout = "Dvorak" {
 				MapPush(Slots,
-					"A", ["cyr_c_let_f", "cyr_s_let_f"],
-					"X", ["cyr_c_let_и", "cyr_s_let_и"],
-					"J", ["cyr_c_let_s", "cyr_s_let_s"],
-					"E", ["cyr_c_let_v", "cyr_s_let_v"],
-					".", ["cyr_c_let_u", "cyr_s_let_u"],
-					"+.", ["cyr_c_let_u", "cyr_s_let_u"],
-					"U", ["cyr_c_let_a", "cyr_s_let_a"],
-					"I", ["cyr_c_let_p", "cyr_s_let_p"],
-					"D", ["cyr_c_let_r", "cyr_s_let_r"],
-					"C", ["cyr_c_let_sh", "cyr_s_let_sh"],
-					"H", ["cyr_c_let_o", "cyr_s_let_o"],
-					"T", ["cyr_c_let_l", "cyr_s_let_l"],
-					"N", ["cyr_c_let_d", "cyr_s_let_d"],
-					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
-					"B", ["cyr_c_let_t", "cyr_s_let_t"],
-					"R", ["cyr_c_let_shch", "cyr_s_let_shch"],
-					"L", ["cyr_c_let_z", "cyr_s_let_z"],
+					"A", ["cyr_c_let_u", "cyr_s_let_u"],
+					"B", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"C", ["cyr_c_let_h", "cyr_s_let_h"],
+					"D", ["cyr_c_let_e", "cyr_s_let_e"],
+					"E", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					"F", ["cyr_c_let_o", "cyr_s_let_o"],
+					"G", ["cyr_c_let_a", "cyr_s_let_a"],
+					"H", ["cyr_c_let_l", "cyr_s_let_l"],
+					"I", ["cyr_c_let_k", "cyr_s_let_k"],
+					"J", ["cyr_c_let_n", "cyr_s_let_n"],
+					"K", ["cyr_c_let_t", "cyr_s_let_t"],
+					"L", ["cyr_c_let_s", "cyr_s_let_s"],
+					"M", ["cyr_c_let_m", "cyr_s_let_m"],
+					"N", ["cyr_c_let_b", "cyr_s_let_b"],
+					"O", ["cyr_c_let_d", "cyr_s_let_d"],
+					"P", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"Q", ["cyr_c_let_ts", "cyr_s_let_ts"],
+					"R", "kkey_comma",
+					"+R", "question",
+					"S", ["cyr_c_let_и", "cyr_s_let_и"],
+					"T", "kkey_dot",
+					"+T", "exclamation",
+					"U", ["cyr_c_let_v", "cyr_s_let_v"],
+					"V", ["cyr_c_let_yery", "cyr_s_let_yery"],
+					"W", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
+					"+W", ["cyr_s_let_yeru", "cyr_c_let_yeru"],
+					"X", ["cyr_c_let_э", "cyr_s_let_э"],
+					"Y", ["cyr_c_let_z", "cyr_s_let_z"],
+					"Z", ["cyr_c_let_f", "cyr_s_let_f"],
+					",", ["cyr_c_let_p", "cyr_s_let_p"],
+					"+,", ["cyr_c_let_p", "cyr_s_let_p"],
+					".", ["cyr_c_let_g", "cyr_s_let_g"],
+					"+.", ["cyr_c_let_g", "cyr_s_let_g"],
+					";", ["cyr_c_let_r", "cyr_s_let_r"],
+					"+;", ["cyr_c_let_r", "cyr_s_let_r"],
 					"'", ["cyr_c_let_iy", "cyr_s_let_iy"],
 					"+'", ["cyr_c_let_iy", "cyr_s_let_iy"],
-					"P", ["cyr_c_let_k", "cyr_s_let_k"],
-					"O", ["cyr_c_let_yery", "cyr_s_let_yery"],
-					"Y", ["cyr_c_let_e", "cyr_s_let_e"],
-					"G", ["cyr_c_let_g", "cyr_s_let_g"],
-					"K", ["cyr_c_let_m", "cyr_s_let_m"],
-					",", ["cyr_c_let_ts", "cyr_s_let_ts"],
-					"+,", ["cyr_c_let_ts", "cyr_s_let_ts"],
-					"Q", ["cyr_c_let_ch", "cyr_s_let_ch"],
-					"F", ["cyr_c_let_n", "cyr_s_let_n"],
-					";", ["cyr_c_let_ya", "cyr_s_let_ya"],
-					"+;", ["cyr_c_let_ya", "cyr_s_let_ya"],
-					"W", ["cyr_c_let_b", "cyr_s_let_b"],
-					"V", ["cyr_c_let_yu", "cyr_s_let_yu"],
-					"S", ["cyr_c_let_zh", "cyr_s_let_zh"],
-					"-", ["cyr_c_let_э", "cyr_s_let_э"],
-					"+-", ["cyr_c_let_э", "cyr_s_let_э"],
-					"/", ["cyr_c_let_h", "cyr_s_let_h"],
-					"+/", ["cyr_c_let_h", "cyr_s_let_h"],
-					"=", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
-					"+=", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"[", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"+[", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"]", ["cyr_c_let_shch", "cyr_s_let_shch"],
+					"+]", ["cyr_c_let_shch", "cyr_s_let_shch"],
 					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
-					"Z", "kkey_dot",
-					"+Z", "kkey_comma",
+					"+~", ["cyr_c_let_yo", "cyr_s_let_yo"],
+					"/", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"+/", ["cyr_c_let_zh", "cyr_s_let_zh"],
 					"\", "kkey_slash",
 					"+\", "kkey_backslash",
-					"]", "kkey_equals",
-					"+]", "kkey_plus",
-					"[", "kkey_hyphen_minus",
-					"+[", "kkey_underscore",
+					"=", "kkey_equals",
+					"+=", "kkey_plus",
+					"-", "kkey_hyphen_minus",
+					"+-", "kkey_underscore",
 				)
 			} else if LatinLayout = "Colemak" {
 				MapPush(Slots,
-					"A", ["cyr_c_let_f", "cyr_s_let_f"],
-					"B", ["cyr_c_let_и", "cyr_s_let_и"],
-					"C", ["cyr_c_let_s", "cyr_s_let_s"],
-					"S", ["cyr_c_let_v", "cyr_s_let_v"],
-					"F", ["cyr_c_let_u", "cyr_s_let_u"],
-					"T", ["cyr_c_let_a", "cyr_s_let_a"],
-					"D", ["cyr_c_let_p", "cyr_s_let_p"],
-					"H", ["cyr_c_let_r", "cyr_s_let_r"],
-					"U", ["cyr_c_let_sh", "cyr_s_let_sh"],
-					"N", ["cyr_c_let_o", "cyr_s_let_o"],
-					"E", ["cyr_c_let_l", "cyr_s_let_l"],
-					"I", ["cyr_c_let_d", "cyr_s_let_d"],
-					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
-					"K", ["cyr_c_let_t", "cyr_s_let_t"],
-					"Y", ["cyr_c_let_shch", "cyr_s_let_shch"],
-					";", ["cyr_c_let_z", "cyr_s_let_z"],
-					"+;", ["cyr_c_let_z", "cyr_s_let_z"],
-					"Q", ["cyr_c_let_iy", "cyr_s_let_iy"],
-					"P", ["cyr_c_let_k", "cyr_s_let_k"],
-					"R", ["cyr_c_let_yery", "cyr_s_let_yery"],
-					"G", ["cyr_c_let_e", "cyr_s_let_e"],
-					"L", ["cyr_c_let_g", "cyr_s_let_g"],
-					"V", ["cyr_c_let_m", "cyr_s_let_m"],
-					"W", ["cyr_c_let_ts", "cyr_s_let_ts"],
-					"X", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"A", ["cyr_c_let_u", "cyr_s_let_u"],
+					"B", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"C", ["cyr_c_let_h", "cyr_s_let_h"],
+					"D", ["cyr_c_let_e", "cyr_s_let_e"],
+					"E", ["cyr_c_let_ya", "cyr_s_let_ya"],
+					"F", ["cyr_c_let_o", "cyr_s_let_o"],
+					"G", ["cyr_c_let_a", "cyr_s_let_a"],
+					"H", ["cyr_c_let_l", "cyr_s_let_l"],
+					"I", ["cyr_c_let_k", "cyr_s_let_k"],
 					"J", ["cyr_c_let_n", "cyr_s_let_n"],
-					"Z", ["cyr_c_let_ya", "cyr_s_let_ya"],
-					",", ["cyr_c_let_b", "cyr_s_let_b"],
-					"+,", ["cyr_c_let_b", "cyr_s_let_b"],
-					".", ["cyr_c_let_yu", "cyr_s_let_yu"],
-					"+.", ["cyr_c_let_yu", "cyr_s_let_yu"],
-					"O", ["cyr_c_let_zh", "cyr_s_let_zh"],
-					"'", ["cyr_c_let_э", "cyr_s_let_э"],
-					"+'", ["cyr_c_let_э", "cyr_s_let_э"],
-					"[", ["cyr_c_let_h", "cyr_s_let_h"],
-					"+[", ["cyr_c_let_h", "cyr_s_let_h"],
-					"]", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
-					"+]", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
+					"K", ["cyr_c_let_t", "cyr_s_let_t"],
+					"L", ["cyr_c_let_s", "cyr_s_let_s"],
+					"M", ["cyr_c_let_m", "cyr_s_let_m"],
+					"N", ["cyr_c_let_b", "cyr_s_let_b"],
+					"O", ["cyr_c_let_d", "cyr_s_let_d"],
+					"P", ["cyr_c_let_ch", "cyr_s_let_ch"],
+					"Q", ["cyr_c_let_ts", "cyr_s_let_ts"],
+					"R", "kkey_comma",
+					"+R", "question",
+					"S", ["cyr_c_let_и", "cyr_s_let_и"],
+					"T", "kkey_dot",
+					"+T", "exclamation",
+					"U", ["cyr_c_let_v", "cyr_s_let_v"],
+					"V", ["cyr_c_let_yery", "cyr_s_let_yery"],
+					"W", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
+					"+W", ["cyr_s_let_yeru", "cyr_c_let_yeru"],
+					"X", ["cyr_c_let_э", "cyr_s_let_э"],
+					"Y", ["cyr_c_let_z", "cyr_s_let_z"],
+					"Z", ["cyr_c_let_f", "cyr_s_let_f"],
+					",", ["cyr_c_let_p", "cyr_s_let_p"],
+					"+,", ["cyr_c_let_p", "cyr_s_let_p"],
+					".", ["cyr_c_let_g", "cyr_s_let_g"],
+					"+.", ["cyr_c_let_g", "cyr_s_let_g"],
+					";", ["cyr_c_let_r", "cyr_s_let_r"],
+					"+;", ["cyr_c_let_r", "cyr_s_let_r"],
+					"'", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"+'", ["cyr_c_let_iy", "cyr_s_let_iy"],
+					"[", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"+[", ["cyr_c_let_sh", "cyr_s_let_sh"],
+					"]", ["cyr_c_let_shch", "cyr_s_let_shch"],
+					"+]", ["cyr_c_let_shch", "cyr_s_let_shch"],
 					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
 					"+~", ["cyr_c_let_yo", "cyr_s_let_yo"],
-					"/", "kkey_dot",
-					"+/", "kkey_comma",
+					"/", ["cyr_c_let_zh", "cyr_s_let_zh"],
+					"+/", ["cyr_c_let_zh", "cyr_s_let_zh"],
 					"\", "kkey_slash",
 					"+\", "kkey_backslash",
 					"=", "kkey_equals",
@@ -11928,6 +11916,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
+			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
 				() => QuotatizeSelection("Double"),
 				() => QuotatizeSelection("France")),
