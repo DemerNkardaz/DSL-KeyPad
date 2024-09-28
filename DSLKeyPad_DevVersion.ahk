@@ -8035,7 +8035,7 @@ MapInsert(Characters,
       unicode: "{U+10338}", html: "&#66360;",
       titlesAlt: True,
       group: ["Gothic Alphabet"],
-      alt_layout: ">! [T]",
+      alt_layout: ">! [T], [C]",
       tags: ["готская буква сюс", "gothic letter thiuth", "gothic letter þiuþ"],
     },
     "gothic_eis", {
@@ -8147,7 +8147,7 @@ MapInsert(Characters,
       unicode: "{U+10348}", html: "&#66376;",
       titlesAlt: True,
       group: ["Gothic Alphabet"],
-      alt_layout: ">! [H]",
+      alt_layout: ">! [H], [V]",
       tags: ["готская буква хвайр", "gothic letter hwair", "gothic letter ƕaír"],
     },
     "gothic_othal", {
@@ -10735,9 +10735,11 @@ Constructor() {
     "Old Turkic", ReadLocale("symbol_turkic"),
     "Old Turkic Orkhon", ReadLocale("symbol_turkic_orkhon"),
     "Old Turkic Yenisei", ReadLocale("symbol_turkic_yenisei"),
+    "Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
     "Old Permic", ReadLocale("symbol_permic"),
     "Fake Gothic", RightControl " 4",
     "Gothic Alphabet", ReadLocale("symbol_gothic"),
+    "Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
     "Fake IPA", RightControl " 0",
     "IPA", ReadLocale("symbol_ipa"),
   ]
@@ -12597,12 +12599,17 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       UseKey["I"], (K) => LangSeparatedKey(K, "turkic_yenisei_e", "", True),
       UseKey["O"], (K) => LangSeparatedKey(K, "turkic_yenisei_o", "", True),
       "<^>!" UseKey["O"], (K) => LangSeparatedKey(K, ["turkic_yenisei_oe", "turkic_orkhon_oe"], "", True),
+      ;
+      "<^>!" UseKey["Comma"], (K) => LangSeparatedKey(K, "runic_cruciform_punctuation", ["", ""], True),
+      "<^>!" UseKey["Dot"], (K) => LangSeparatedKey(K, "runic_single_punctuation", ["", ""], True),
+      "<^>!" UseKey["Space"], (K) => LangSeparatedKey(K, "runic_multiple_punctuation", ["", ""], True),
     ]
     return LayoutArray
   } else if Combinations = "Gothic" {
     LayoutArray := [
       UseKey["A"], (K) => LangSeparatedKey(K, "gothic_ahza", "", True),
       UseKey["B"], (K) => LangSeparatedKey(K, "gothic_bairkan", "", True),
+      UseKey["C"], (K) => LangSeparatedKey(K, "gothic_thiuth", "", True),
       UseKey["D"], (K) => LangSeparatedKey(K, "gothic_dags", "", True),
       UseKey["E"], (K) => LangSeparatedKey(K, "gothic_aihvus", "", True),
       UseKey["F"], (K) => LangSeparatedKey(K, "gothic_faihu", "", True),
@@ -12625,10 +12632,15 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       UseKey["T"], (K) => LangSeparatedKey(K, "gothic_teiws", "", True),
       "<^>!" UseKey["T"], (K) => LangSeparatedKey(K, "gothic_thiuth", "", True),
       UseKey["U"], (K) => LangSeparatedKey(K, "gothic_urus", "", True),
+      UseKey["V"], (K) => LangSeparatedKey(K, "gothic_hwair", "", True),
       UseKey["W"], (K) => LangSeparatedKey(K, "gothic_winja", "", True),
       UseKey["X"], (K) => LangSeparatedKey(K, "gothic_iggws", "", True),
       UseKey["Y"], (K) => LangSeparatedKey(K, "gothic_winja", "", True),
       UseKey["Z"], (K) => LangSeparatedKey(K, "gothic_ezek", "", True),
+      ;
+      "<^>!" UseKey["Comma"], (K) => LangSeparatedKey(K, "runic_cruciform_punctuation", ["", ""], True),
+      "<^>!" UseKey["Dot"], (K) => LangSeparatedKey(K, "runic_single_punctuation", ["", ""], True),
+      "<^>!" UseKey["Space"], (K) => LangSeparatedKey(K, "runic_multiple_punctuation", ["", ""], True),
     ]
     return LayoutArray
   } else if Combinations = "IPA" {
