@@ -222,6 +222,8 @@ FontFace := Map(
 		},
 )
 */
+
+
 FontFace := Map(
 	"serif", {
 		name: "Noto Serif",
@@ -229,17 +231,48 @@ FontFace := Map(
 	},
 )
 
+PowerShell_UserSID() {
+	PShell := "$id = [System.Security.Principal.WindowsIdentity]::GetCurrent()`n"
+	PShell .= "$path = `"DSL_temp-usrSID.txt`"`n"
+	PShell .= "$id.User.Value | Out-File -FilePath $path -Encoding UTF8"
+
+	FileAppend(PShell, "DSL_temp-usrSID.ps1", "UTF-8")
+	Sleep 100
+	RunWait("powershell powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & `"" A_ScriptDir "\DSL_temp-usrSID.ps1`"", , "Hide")
+
+	Sleep 25
+
+	Result := FileRead("DSL_temp-usrSID.txt", "UTF-8")
+
+	Sleep 25
+
+	FileDelete("DSL_temp-usrSID.txt")
+	FileDelete("DSL_temp-usrSID.ps1")
+
+	return Result
+}
+
 IsFont(FontName)
 {
-	Loop Reg, "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" {
+	RegExMatch(PowerShell_UserSID(), "^(\S+)$", &UserSID)
 
+	Loop Reg, "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" {
 		if (RegExMatch(A_LoopRegName, "^" FontName "(?:\sRegular)")) {
-			return true
+			return True
 		}
 	}
 
+	if UserSID[1] != "" {
+		RegPath := "HKEY_USERS\" UserSID[1] "\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+		Loop Reg, RegPath {
+			if (RegExMatch(A_LoopRegName, "^" FontName "(?:\sRegular)")) {
+				return True
+			}
+		}
+	}
 	return False
 }
+
 
 FontValidate() {
 	NamesToBeInstalled := "`n"
@@ -9784,6 +9817,7 @@ Constructor() {
 		html: DSLPadGUI.Add("Edit", "vDiacriticHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		;
 		tags: DSLPadGUI.Add("Edit", "vDiacriticTags " . commonInfoBox.tags),
+		alert: DSLPadGUI.Add("Edit", "vDiacriticAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
 	}
 
 	GroupBoxDiacritic.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -9842,6 +9876,7 @@ Constructor() {
 		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
 		html: DSLPadGUI.Add("Edit", "vSpacesHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		tags: DSLPadGUI.Add("Edit", "vSpacesTags " . commonInfoBox.tags),
+		alert: DSLPadGUI.Add("Edit", "vSpacesAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
 	}
 
 	GroupBoxSpaces.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -10021,6 +10056,7 @@ Constructor() {
 		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
 		html: DSLPadGUI.Add("Edit", "vLigaturesHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		tags: DSLPadGUI.Add("Edit", "vLigaturesTags " . commonInfoBox.tags),
+		alert: DSLPadGUI.Add("Edit", "vLigaturesAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
 	}
 
 	GroupBoxLigatures.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -10109,6 +10145,7 @@ Constructor() {
 		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
 		html: DSLPadGUI.Add("Edit", "vFastKeysHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		tags: DSLPadGUI.Add("Edit", "vFastKeysTags " . commonInfoBox.tags),
+		alert: DSLPadGUI.Add("Edit", "vFastAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
 	}
 
 	GroupBoxFastKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -10195,6 +10232,7 @@ Constructor() {
 		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
 		html: DSLPadGUI.Add("Edit", "vGlagoKeysHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		tags: DSLPadGUI.Add("Edit", "vGlagoKeysTags " . commonInfoBox.tags),
+		alert: DSLPadGUI.Add("Edit", "vGlagoAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
 	}
 
 	GroupBoxGlagoKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -10204,6 +10242,7 @@ Constructor() {
 	GroupBoxGlagoKeys.unicode.SetFont("s12")
 	GroupBoxGlagoKeys.html.SetFont("s12")
 	GroupBoxGlagoKeys.tags.SetFont("s9")
+	GroupBoxGlagoKeys.alert.SetFont("s9")
 
 
 	Tab.UseTab(7)
@@ -10298,7 +10337,9 @@ Constructor() {
 			"DiacriticHTML",
 			"DiacriticTags",
 			"DiacriticGroup",
-			GroupBoxDiacritic]
+			GroupBoxDiacritic,
+			"DiacriticAlert"
+		]
 		))
 	SpacesLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -10311,7 +10352,9 @@ Constructor() {
 			"SpacesHTML",
 			"SpacesTags",
 			"SpacesGroup",
-			GroupBoxSpaces]
+			GroupBoxSpaces,
+			"SpacesAlert"
+		]
 		))
 	FastKeysLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -10324,7 +10367,9 @@ Constructor() {
 			"FastKeysHTML",
 			"FastKeysTags",
 			"FastKeysGroup",
-			GroupBoxFastKeys]
+			GroupBoxFastKeys,
+			"FastAlert"
+		]
 		))
 	GlagoLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -10337,7 +10382,9 @@ Constructor() {
 			"GlagoKeysHTML",
 			"GlagoKeysTags",
 			"GlagoKeysGroup",
-			GroupBoxGlagoKeys]
+			GroupBoxGlagoKeys,
+			"GlagoAlert"
+		]
 		))
 	LigaturesLV.OnEvent("ItemFocus", (LV, RowNumber) =>
 		LV_CharacterDetails(LV, RowNumber, [DSLPadGUI,
@@ -10350,7 +10397,9 @@ Constructor() {
 			"LigaturesHTML",
 			"LigaturesTags",
 			"LigaturesGroup",
-			GroupBoxLigatures]
+			GroupBoxLigatures,
+			"LigaturesAlert"
+		]
 		))
 
 
@@ -10362,11 +10411,11 @@ Constructor() {
 		"GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters"]),
 	)
 
-	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", "DiacriticGroup", GroupBoxDiacritic)
-	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", "SpacesGroup", GroupBoxSpaces)
-	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", "FastKeysGroup", GroupBoxFastKeys)
-	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", "LigaturesGroup", GroupBoxLigatures)
-	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][3], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", "GlagoKeysGroup", GroupBoxGlagoKeys)
+	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", "DiacriticGroup", GroupBoxDiacritic, "DiacriticAlert")
+	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", "SpacesGroup", GroupBoxSpaces, "SpacesAlert")
+	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", "FastKeysGroup", GroupBoxFastKeys, "FastAlert")
+	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", "LigaturesGroup", GroupBoxLigatures, "LigaturesAlert")
+	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][3], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", "GlagoKeysGroup", GroupBoxGlagoKeys, "GlagoAlert")
 
 	DSLPadGUI.Title := DSLPadTitle
 
@@ -10460,9 +10509,11 @@ GetRandomByGroups(GroupNames) {
 	}
 }
 
+HasPermicFont := IsFont("Noto Sans Old Permic") ? True : "Noto Sans Old Permic"
 
-SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup) {
+SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup, PreviewAlert := "") {
 	LanguageCode := GetLanguageCode()
+
 
 	if (UnicodeKey != "") {
 		for characterEntry, value in Characters {
@@ -10472,6 +10523,8 @@ SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, Previe
 				entryID := match[1]
 				entryName := match[2]
 			}
+
+
 			characterTitle := ""
 			if (HasProp(value, "titlesAlt") && value.titlesAlt == True && !InStr(ReadLocale(entryName "_alt", "chars"), "NOT FOUND")) {
 				characterTitle := ReadLocale(entryName . "_alt", "chars")
@@ -10640,6 +10693,12 @@ SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, Previe
 				} else {
 					PreviewGroup.latex.SetFont("s12")
 				}
+
+				if RegExMatch(entryName, "^permic") && HasPermicFont = "Noto Sans Old Permic" {
+					TargetGroup[PreviewAlert].Text := SetStringVars(ReadLocale("warning_nofont"), HasPermicFont)
+				} else {
+					TargetGroup[PreviewAlert].Text := ""
+				}
 			}
 		}
 	}
@@ -10703,7 +10762,7 @@ LV_CharacterDetails(LV, RowNumber, SetupArray) {
 		SetupArray[1], SetupArray[2], SetupArray[3],
 		SetupArray[4], SetupArray[5], SetupArray[6],
 		SetupArray[7], SetupArray[8], SetupArray[9],
-		SetupArray[10], SetupArray[11])
+		SetupArray[10], SetupArray[11], SetupArray.Has(12) ? SetupArray[12] : "")
 }
 LV_OpenUnicodeWebsite(LV, RowNumber) {
 	LanguageCode := GetLanguageCode()
@@ -12323,6 +12382,7 @@ ShowInfoMessage("tray_app_started")
 SetPreviousLayout()
 
 ;! Third Party Functions
+
 ;{ [Function] GuiButtonIcon
 ;{
 ; Fanatic Guru
