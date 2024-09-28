@@ -237,14 +237,12 @@ PowerShell_UserSID() {
 	PShell .= "$id.User.Value | Out-File -FilePath $path -Encoding UTF8"
 
 	FileAppend(PShell, "DSL_temp-usrSID.ps1", "UTF-8")
-	Sleep 100
+	Sleep 2
 	RunWait("powershell powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & `"" A_ScriptDir "\DSL_temp-usrSID.ps1`"", , "Hide")
 
-	Sleep 25
+	Sleep 5
 
 	Result := FileRead("DSL_temp-usrSID.txt", "UTF-8")
-
-	Sleep 25
 
 	FileDelete("DSL_temp-usrSID.txt")
 	FileDelete("DSL_temp-usrSID.ps1")
@@ -252,22 +250,35 @@ PowerShell_UserSID() {
 	return Result
 }
 
-IsFont(FontName)
-{
-	RegExMatch(PowerShell_UserSID(), "^(\S+)$", &UserSID)
+IsFont(FontName) {
+	UserSID := PowerShell_UserSID()
+	UserSID := StrReplace(UserSID, " ")
+	UserSID := StrReplace(UserSID, "`n")
+	UserSID := StrReplace(UserSID, "`r")
 
-	Loop Reg, "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" {
-		if (RegExMatch(A_LoopRegName, "^" FontName "(?:\sRegular)")) {
-			return True
-		}
-	}
+	Suffixes := ["", " Regular", " Regular (TrueType)"]
 
-	if UserSID[1] != "" {
-		RegPath := "HKEY_USERS\" UserSID[1] "\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
-		Loop Reg, RegPath {
-			if (RegExMatch(A_LoopRegName, "^" FontName "(?:\sRegular)")) {
+	for Suffix in Suffixes {
+		FullKeyName := FontName Suffix
+
+		try {
+			RegPath := "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+			if RegRead(RegPath, FullKeyName) {
 				return True
 			}
+		}
+		catch {
+		}
+
+		try {
+			if UserSID != "" {
+				RegPath := "HKEY_USERS\" UserSID "\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+				if RegRead(RegPath, FullKeyName) {
+					return True
+				}
+			}
+		}
+		catch {
 		}
 	}
 	return False
@@ -349,7 +360,7 @@ GetLayoutLocale() {
 }
 
 CurrentLayout := GetLayoutLocale()
-Sleep 150
+Sleep 25
 PreviousLayout := IniRead(ConfigFile, "ServiceFields", "PrevLayout", "")
 if (CurrentLayout != CodeEn) {
 	IniWrite(CurrentLayout, ConfigFile, "ServiceFields", "PrevLayout")
@@ -1000,13 +1011,13 @@ RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY") {
 
 		IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
 
-		Sleep 10
+		Sleep 5
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
-		Sleep 10
+		Sleep 5
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 
 		if IsLettersModeEnabled {
-			Sleep 10
+			Sleep 5
 			ActiveScriptName := ""
 			ToggleLetterScript(True, IsLettersModeEnabled)
 		}
@@ -7692,6 +7703,265 @@ MapInsert(Characters,
 			alt_layout: "[A]",
 			tags: ["древнепермская буква ан", "old permic letter an"],
 		},
+		"permic_bur", {
+			unicode: "{U+10351}", html: "&#66385;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Б]",
+			tags: ["древнепермская буква бур", "old permic letter bur"],
+		},
+		"permic_gai", {
+			unicode: "{U+10352}", html: "&#66386;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Г]",
+			tags: ["древнепермская буква гай", "old permic letter gai"],
+		},
+		"permic_doi", {
+			unicode: "{U+10353}", html: "&#66387;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Д]",
+			tags: ["древнепермская буква дой", "old permic letter doi"],
+		},
+		"permic_e", {
+			unicode: "{U+10354}", html: "&#66388;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Е]",
+			tags: ["древнепермская буква э", "old permic letter e"],
+		},
+		"permic_zhoi", {
+			unicode: "{U+10355}", html: "&#66389;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ж]",
+			tags: ["древнепермская буква жой", "old permic letter zhoi"],
+		},
+		"permic_dzhoi", {
+			unicode: "{U+10356}", html: "&#66390;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: ">! [Ж]",
+			tags: ["древнепермская буква джой", "old permic letter dzhoi"],
+		},
+		"permic_zata", {
+			unicode: "{U+10357}", html: "&#66391;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[З]",
+			tags: ["древнепермская буква зата", "old permic letter zata"],
+		},
+		"permic_dzita", {
+			unicode: "{U+10358}", html: "&#66392;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: ">! [З]",
+			tags: ["древнепермская буква дзита", "old permic letter dzita"],
+		},
+		"permic_i", {
+			unicode: "{U+10359}", html: "&#66393;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[И]",
+			tags: ["древнепермская буква и", "old permic letter i"],
+		},
+		"permic_koke", {
+			unicode: "{U+1035A}", html: "&#66394;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[К]",
+			tags: ["древнепермская буква кокэ", "old permic letter koke"],
+		},
+		"permic_lei", {
+			unicode: "{U+1035B}", html: "&#66395;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Л]",
+			tags: ["древнепермская буква лэй", "old permic letter lei"],
+		},
+		"permic_menoe", {
+			unicode: "{U+1035C}", html: "&#66396;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[М]",
+			tags: ["древнепермская буква мэно", "древнепермская буква мэнӧ", "old permic letter menoe"],
+		},
+		"permic_nenoe", {
+			unicode: "{U+1035D}", html: "&#66397;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Н]",
+			tags: ["древнепермская буква нэно", "древнепермская буква нэнӧ", "old permic letter nenoe"],
+		},
+		"permic_vooi", {
+			unicode: "{U+1035E}", html: "&#66398;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[О]",
+			tags: ["древнепермская буква вой", "древнепермская буква во̂й", "old permic letter vooi"],
+		},
+		"permic_peei", {
+			unicode: "{U+1035F}", html: "&#66399;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[П]",
+			tags: ["древнепермская буква пэй", "древнепермская буква пэ̂й", "old permic letter peei"],
+		},
+		"permic_rei", {
+			unicode: "{U+10360}", html: "&#66400;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Р]",
+			tags: ["древнепермская буква пэй", "old permic letter rei"],
+		},
+		"permic_sii", {
+			unicode: "{U+10361}", html: "&#66401;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[С]",
+			tags: ["древнепермская буква сий", "old permic letter sii"],
+		},
+		"permic_tai", {
+			unicode: "{U+10362}", html: "&#66402;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Т]",
+			tags: ["древнепермская буква тай", "old permic letter tai"],
+		},
+		"permic_u", {
+			unicode: "{U+10363}", html: "&#66403;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[У]",
+			tags: ["древнепермская буква у", "old permic letter u"],
+		},
+		"permic_chery", {
+			unicode: "{U+10364}", html: "&#66404;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ч]",
+			tags: ["древнепермская буква чэры", "old permic letter chery"],
+		},
+		"permic_shooi", {
+			unicode: "{U+10365}", html: "&#66405;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ш]",
+			tags: ["древнепермская буква шой", "древнепермская буква шо̂й", "old permic letter shooi"],
+		},
+		"permic_shchooi", {
+			unicode: "{U+10366}", html: "&#66406;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Щ]",
+			tags: ["древнепермская буква тшой", "древнепермская буква тшо̂й", "old permic letter shchooi"],
+		},
+		"permic_yery", {
+			unicode: "{U+10368}", html: "&#66408;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ы]",
+			tags: ["древнепермская буква еры", "old permic letter yery"],
+		},
+		"permic_yry", {
+			unicode: "{U+10367}", html: "&#66407;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: ">! [Ы]",
+			tags: ["древнепермская буква ыры", "old permic letter yry"],
+		},
+		"permic_o", {
+			unicode: "{U+10369}", html: "&#66409;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: ">! [О]",
+			tags: ["древнепермская буква о", "old permic letter o"],
+		},
+		"permic_oo", {
+			unicode: "{U+1036A}", html: "&#66410;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: ">!<+ [О]",
+			tags: ["древнепермская буква оо", "old permic letter oo"],
+		},
+		"permic_ef", {
+			unicode: "{U+1036B}", html: "&#66411;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ф]",
+			tags: ["древнепермская буква эф", "old permic letter ef"],
+		},
+		"permic_ha", {
+			unicode: "{U+1036C}", html: "&#66412;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Х]",
+			tags: ["древнепермская буква ха", "old permic letter ha"],
+		},
+		"permic_tsiu", {
+			unicode: "{U+1036D}", html: "&#66413;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ц]",
+			tags: ["древнепермская буква цю", "old permic letter tsiu"],
+		},
+		"permic_ver", {
+			unicode: "{U+1036E}", html: "&#66414;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[В]",
+			tags: ["древнепермская буква вэр", "old permic letter ver"],
+		},
+		"permic_yeru", {
+			unicode: "{U+1036F}", html: "&#66415;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ъ]",
+			tags: ["древнепермская буква ер", "old permic letter yeru"],
+		},
+		"permic_yeri", {
+			unicode: "{U+10370}", html: "&#66416;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ь]",
+			tags: ["древнепермская буква ери", "old permic letter yeri"],
+		},
+		"permic_yat", {
+			unicode: "{U+10371}", html: "&#66417;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Э]",
+			tags: ["древнепермская буква ять", "old permic letter yat"],
+		},
+		"permic_ie", {
+			unicode: "{U+10372}", html: "&#66418;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Й]",
+			tags: ["древнепермская буква йэ", "old permic letter ie"],
+		},
+		"permic_yu", {
+			unicode: "{U+10373}", html: "&#66419;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Ю]",
+			tags: ["древнепермская буква ю", "old permic letter yu"],
+		},
+		"permic_ia", {
+			unicode: "{U+10375}", html: "&#66421;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: "[Я]",
+			tags: ["древнепермская буква йа", "old permic letter ia"],
+		},
+		"permic_ya", {
+			unicode: "{U+10374}", html: "&#66420;",
+			titlesAlt: True,
+			group: ["Old Permic"],
+			alt_layout: ">! [Я]",
+			tags: ["древнепермская буква я", "old permic letter ya"],
+		},
 		;
 		;
 		; * Wallet Signs
@@ -8947,20 +9217,20 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	if !CurrentActive {
 		UnregisterKeysLayout()
 		ActiveScriptName := ""
-		Sleep 10
+		Sleep 5
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		Sleep 10
+		Sleep 5
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-		Sleep 10
+		Sleep 5
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], ScriptName), True)
 		ActiveScriptName := ScriptName
 	} else {
 
 		UnregisterKeysLayout()
 		ActiveScriptName := ""
-		Sleep 10
+		Sleep 5
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		Sleep 10
+		Sleep 5
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 	}
 
@@ -9825,6 +10095,7 @@ Constructor() {
 		htmlTitle: "x685 y495 w128 h24 BackgroundTrans",
 		htmlTitleText: Map("ru", "HTML-Код/Мнемоника", "en", "HTML/Entity"),
 		tags: "x21 y546 w800 h24 readonly -VScroll -HScroll -E0x200",
+		alert: "x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200",
 	}
 
 	CommonFilter := {
@@ -9896,7 +10167,7 @@ Constructor() {
 		html: DSLPadGUI.Add("Edit", "vDiacriticHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		;
 		tags: DSLPadGUI.Add("Edit", "vDiacriticTags " . commonInfoBox.tags),
-		alert: DSLPadGUI.Add("Edit", "vDiacriticAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
+		alert: DSLPadGUI.Add("Edit", "vDiacriticAlert " commonInfoBox.alert),
 	}
 
 	GroupBoxDiacritic.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -9906,6 +10177,7 @@ Constructor() {
 	GroupBoxDiacritic.unicode.SetFont("s12")
 	GroupBoxDiacritic.html.SetFont("s12")
 	GroupBoxDiacritic.tags.SetFont("s9")
+	GroupBoxDiacritic.alert.SetFont("s9")
 
 
 	Tab.UseTab(2)
@@ -9955,7 +10227,7 @@ Constructor() {
 		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
 		html: DSLPadGUI.Add("Edit", "vSpacesHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		tags: DSLPadGUI.Add("Edit", "vSpacesTags " . commonInfoBox.tags),
-		alert: DSLPadGUI.Add("Edit", "vSpacesAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
+		alert: DSLPadGUI.Add("Edit", "vSpacesAlert " commonInfoBox.alert),
 	}
 
 	GroupBoxSpaces.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -9965,6 +10237,7 @@ Constructor() {
 	GroupBoxSpaces.unicode.SetFont("s12")
 	GroupBoxSpaces.html.SetFont("s12")
 	GroupBoxSpaces.tags.SetFont("s9")
+	GroupBoxSpaces.alert.SetFont("s9")
 
 	Tab.UseTab(6)
 	CommandsTree := DSLPadGUI.AddTreeView("x25 y43 w256 h510 -HScroll")
@@ -10135,7 +10408,7 @@ Constructor() {
 		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
 		html: DSLPadGUI.Add("Edit", "vLigaturesHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		tags: DSLPadGUI.Add("Edit", "vLigaturesTags " . commonInfoBox.tags),
-		alert: DSLPadGUI.Add("Edit", "vLigaturesAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
+		alert: DSLPadGUI.Add("Edit", "vLigaturesAlert " commonInfoBox.alert),
 	}
 
 	GroupBoxLigatures.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -10145,6 +10418,7 @@ Constructor() {
 	GroupBoxLigatures.unicode.SetFont("s12")
 	GroupBoxLigatures.html.SetFont("s12")
 	GroupBoxLigatures.tags.SetFont("s9")
+	GroupBoxLigatures.alert.SetFont("s9")
 
 
 	Tab.UseTab(4)
@@ -10224,7 +10498,7 @@ Constructor() {
 		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
 		html: DSLPadGUI.Add("Edit", "vFastKeysHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		tags: DSLPadGUI.Add("Edit", "vFastKeysTags " . commonInfoBox.tags),
-		alert: DSLPadGUI.Add("Edit", "vFastAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
+		alert: DSLPadGUI.Add("Edit", "vFastAlert " commonInfoBox.alert),
 	}
 
 	GroupBoxFastKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -10234,6 +10508,7 @@ Constructor() {
 	GroupBoxFastKeys.unicode.SetFont("s12")
 	GroupBoxFastKeys.html.SetFont("s12")
 	GroupBoxFastKeys.tags.SetFont("s9")
+	GroupBoxFastKeys.alert.SetFont("s9")
 
 	Tab.UseTab(5)
 
@@ -10311,7 +10586,7 @@ Constructor() {
 		htmlTitle: DSLPadGUI.Add("Text", CommonInfoBox.htmlTitle, CommonInfoBox.htmlTitleText[LanguageCode]).SetFont("s9"),
 		html: DSLPadGUI.Add("Edit", "vGlagoKeysHTML " . commonInfoBox.html, CommonInfoBox.htmlText),
 		tags: DSLPadGUI.Add("Edit", "vGlagoKeysTags " . commonInfoBox.tags),
-		alert: DSLPadGUI.Add("Edit", "vGlagoAlert x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200"),
+		alert: DSLPadGUI.Add("Edit", "vGlagoAlert " commonInfoBox.alert),
 	}
 
 	GroupBoxGlagoKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
@@ -10945,7 +11220,7 @@ ToggleFastKeys() {
 	ActivationMessage["en"].Deactive := "Fast keys deactivated"
 	MsgBox(FastKeysIsActive ? ActivationMessage[LanguageCode].Active : ActivationMessage[LanguageCode].Deactive, "FastKeys", 0x40)
 
-	Sleep 25
+	Sleep 5
 	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 	return
 }
