@@ -1405,6 +1405,8 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 				characterTitle := ReadLocale(entryName, "chars")
 			} else if (HasProp(value, "titles")) {
 				characterTitle := value.titles[LanguageCode]
+			} else {
+				characterTitle := ReadLocale(entryName, "chars")
 			}
 
 			characterSymbol := HasProp(value, "symbol") ? value.symbol : ""
@@ -7605,6 +7607,83 @@ MapInsert(Characters,
 			alt_layout: "c* [A]",
 			tags: ["древнетюркская енисейская буква a", "old turkic yenisei letter a"],
 		},
+		"turkic_yenisei_ae", {
+			unicode: "{U+10C02}", html: "&#68610;",
+			titlesAlt: True,
+			group: ["Old Turkic Yenisei"],
+			alt_layout: ">! [A]",
+			tags: ["древнетюркская енисейская буква ae", "old turkic yenisei letter ae"],
+		},
+		"turkic_orkhon_ab", {
+			unicode: "{U+10C09}", html: "&#68617;",
+			titlesAlt: True,
+			group: ["Old Turkic Orkhon"],
+			alt_layout: "[B]",
+			tags: ["древнетюркская орхонская буква ab", "old turkic orkhon letter ab"],
+		},
+		"turkic_yenisei_ab", {
+			unicode: "{U+10C0A}", html: "&#68618;",
+			titlesAlt: True,
+			group: ["Old Turkic Yenisei"],
+			alt_layout: "c* [B]",
+			tags: ["древнетюркская енисейская буква ab", "old turkic yenisei letter ab"],
+		},
+		"turkic_orkhon_aeb", {
+			unicode: "{U+10C0B}", html: "&#68619;",
+			titlesAlt: True,
+			group: ["Old Turkic Orkhon"],
+			alt_layout: ">! [B]",
+			tags: ["древнетюркская орхонская буква aeb", "old turkic orkhon letter aeb"],
+		},
+		"turkic_yenisei_aeb", {
+			unicode: "{U+10C0C}", html: "&#68620;",
+			titlesAlt: True,
+			group: ["Old Turkic Yenisei"],
+			alt_layout: "c*>! [B]",
+			tags: ["древнетюркская енисейская буква aeb", "old turkic yenisei letter aeb"],
+		},
+		"turkic_yenisei_e", {
+			unicode: "{U+10C05}", html: "&#68613;",
+			titlesAlt: True,
+			group: ["Old Turkic Yenisei"],
+			alt_layout: "[E]",
+			tags: ["древнетюркская енисейская буква e", "old turkic yenisei letter e"],
+		},
+		"turkic_orkhon_i", {
+			unicode: "{U+10C03}", html: "&#68611;",
+			titlesAlt: True,
+			group: ["Old Turkic Orkhon"],
+			alt_layout: "[I]",
+			tags: ["древнетюркская орхонская буква i", "old turkic orkhon letter i"],
+		},
+		"turkic_yenisei_i", {
+			unicode: "{U+10C04}", html: "&#68612;",
+			titlesAlt: True,
+			group: ["Old Turkic Yenisei"],
+			alt_layout: "c* [I]",
+			tags: ["древнетюркская енисейская буква i", "old turkic yenisei letter i"],
+		},
+		"turkic_orkhon_o", {
+			unicode: "{U+10C06}", html: "&#68614;",
+			titlesAlt: True,
+			group: ["Old Turkic Orkhon"],
+			alt_layout: "[O]",
+			tags: ["древнетюркская орхонская буква o", "old turkic orkhon letter o"],
+		},
+		"turkic_orkhon_oe", {
+			unicode: "{U+10C07}", html: "&#68615;",
+			titlesAlt: True,
+			group: ["Old Turkic Orkhon"],
+			alt_layout: "<^>! [I]",
+			tags: ["древнетюркская орхонская буква oe", "old turkic orkhon letter oe"],
+		},
+		"turkic_yenisei_oe", {
+			unicode: "{U+10C08}", html: "&#68616;",
+			titlesAlt: True,
+			group: ["Old Turkic Yenisei"],
+			alt_layout: "c*<^>! [I]",
+			tags: ["древнетюркская енисейская буква oe", "old turkic yenisei letter oe"],
+		},
 		;
 		"permic_an", {
 			unicode: "{U+10350}", html: "&#66384;",
@@ -10535,6 +10614,8 @@ SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, Previe
 			} else if (HasProp(value, "titles") &&
 				(!HasProp(value, "titlesAlt") || HasProp(value, "titlesAlt") && value.titlesAlt == True)) {
 				characterTitle := value.titles[LanguageCode]
+			} else {
+				characterTitle := ReadLocale(entryName, "chars")
 			}
 
 
@@ -12021,6 +12102,13 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		Slots := Map()
 		LayoutArray := [
 			UseKey["A"], (K) => LangSeparatedKey(K, ["turkic_yenisei_a", "turkic_orkhon_a"], "permic_an", True),
+			"<^>!" UseKey["A"], (K) => LangSeparatedKey(K, "turkic_yenisei_ae", "", True),
+			UseKey["B"], (K) => LangSeparatedKey(K, ["turkic_yenisei_ab", "turkic_orkhon_ab"], "", True),
+			"<^>!" UseKey["B"], (K) => LangSeparatedKey(K, ["turkic_yenisei_aeb", "turkic_orkhon_aeb"], "", True),
+			UseKey["E"], (K) => LangSeparatedKey(K, ["turkic_yenisei_i", "turkic_orkhon_i"], "", True),
+			UseKey["I"], (K) => LangSeparatedKey(K, "turkic_yenisei_e", "", True),
+			UseKey["O"], (K) => LangSeparatedKey(K, "turkic_yenisei_o", "", True),
+			"<^>!" UseKey["O"], (K) => LangSeparatedKey(K, ["turkic_yenisei_oe", "turkic_orkhon_oe"], "", True),
 		]
 		return LayoutArray
 	} else if Combinations = "IPA" {
