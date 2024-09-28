@@ -11,5 +11,7 @@
   - Text processing functions that partially format selected text‑replacing spaces with non‑breaking spaces or varieties of spaces where “necessary”; applying indentation to paragraphs with a round space or wrapping selection in quotes.
   - Addition of a “super-layout” for writing in Germanic/Anglo‑Saxon runes and Glagolitic.
     - Includes support for Combining Glagolitic input.
+  - Addition of a “super-layout” for Old Turkic and Olrd Permic scripts.
+  - Addition of a “super-layout” for Gothic Alphabet.
   - Implementation of the “Dvorak” and “Colemak” layouts for the Latin Script.
   - A system for updates and change logs.
