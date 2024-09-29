@@ -10340,8 +10340,6 @@ for _, localeKey in ["name", "recipe", "result", "unicode", "entryid"] {
 DSLContent := {}
 DSLContent[] := Map()
 DSLContent["BindList"] := {}
-DSLContent["ru"] := {}
-DSLContent["en"] := {}
 
 CommonInfoBox := {
   body: "x650 y35 w200 h510",
@@ -10499,31 +10497,6 @@ RandPreview := Map(
   "FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Special Fast Left", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
   "GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters", "Old Turkic Orkhon", "Old Turkic Yenisei", "Old Permic"]),
 )
-
-DSLContent["ru"].AutoLoadAdd := "Добавить в автозагрузку"
-DSLContent["en"].AutoLoadAdd := "Add to Autoload"
-DSLContent["ru"].GetUpdate := "Обновить"
-DSLContent["en"].GetUpdate := "Get Update"
-DSLContent["ru"].UpdateAvailable := "Доступно обновление: версия " . UpdateVersionString
-DSLContent["en"].UpdateAvailable := "Update available: version " . UpdateVersionString
-
-DSLContent["ru"].Useful := {}
-DSLContent["ru"].Useful.Typography := "Типографика"
-DSLContent["ru"].Useful.TypographyLayout := '<a href="https://ilyabirman.ru/typography-layout/">«Типографская раскладка»</a>'
-DSLContent["ru"].Useful.Unicode := "Unicode-ресурсы"
-DSLContent["ru"].Useful.Dictionaries := "Словари"
-DSLContent["ru"].Useful.JPnese := "Японский: "
-DSLContent["ru"].Useful.CHnese := "Китайский: "
-DSLContent["ru"].Useful.VTnese := "Вьетнамский: "
-
-DSLContent["en"].Useful := {}
-DSLContent["en"].Useful.Typography := "Typography"
-DSLContent["en"].Useful.TypographyLayout := '<a href="https://ilyabirman.net/typography-layout/">“Typography Layout”</a>'
-DSLContent["en"].Useful.Unicode := "Unicode-Resources"
-DSLContent["en"].Useful.Dictionaries := "Dictionaries"
-DSLContent["en"].Useful.JPnese := "Japanese: "
-DSLContent["en"].Useful.CHnese := "Chinese: "
-DSLContent["en"].Useful.VTnese := "Vietnamese: "
 
 Constructor() {
   CheckUpdate()
@@ -10702,7 +10675,7 @@ Constructor() {
 
   DSLPadGUI.SetFont("s9")
 
-  BtnAutoLoad := DSLPadGUI.Add("Button", "x577 y527 w200 h32", DSLContent[LanguageCode].AutoLoadAdd)
+  BtnAutoLoad := DSLPadGUI.Add("Button", "x577 y527 w200 h32", ReadLocale("autoload_add"))
   BtnAutoLoad.OnEvent("Click", AddScriptToAutoload)
 
   BtnSwitchRU := DSLPadGUI.Add("Button", "x300 y527 w32 h32", "РУ")
@@ -10736,7 +10709,7 @@ Constructor() {
   if UpdateAvailable
   {
     DSLPadGUI["NewVersionAlert"].Text :=
-      DSLContent[LanguageCode].UpdateAvailable . ' (<a href="' . RepoSource . '">GitHub</a>)'
+      SetStringVars(ReadLocale("update_available"), UpdateVersionString) ' (<a href="' RepoSource '">GitHub</a>)'
     DSLPadGUI["NewVersionIcon"].Text := InformationSymbol
   }
 
@@ -10961,19 +10934,19 @@ Constructor() {
   Tab.UseTab(8)
 
   DSLPadGUI.SetFont("s13")
-  DSLPadGUI.Add("Text", , DSLContent[LanguageCode].Useful.Typography)
+  DSLPadGUI.Add("Text", , ReadLocale("typography"))
   DSLPadGUI.SetFont("s11")
-  DSLPadGUI.Add("Link", "w600", DSLContent[LanguageCode].Useful.TypographyLayout)
+  DSLPadGUI.Add("Link", "w600", ReadLocale("typography_layout"))
   DSLPadGUI.SetFont("s13")
-  DSLPadGUI.Add("Text", , DSLContent[LanguageCode].Useful.Unicode)
+  DSLPadGUI.Add("Text", , ReadLocale("unicode_resources"))
   DSLPadGUI.SetFont("s11")
   DSLPadGUI.Add("Link", "w600", '<a href="https://symbl.cc/">Symbl.cc</a> <a href="https://www.compart.com/en/unicode/">Compart</a>')
   DSLPadGUI.SetFont("s13")
-  DSLPadGUI.Add("Text", , DSLContent[LanguageCode].Useful.Dictionaries)
+  DSLPadGUI.Add("Text", , ReadLocale("dictionaries"))
   DSLPadGUI.SetFont("s11")
-  DSLPadGUI.Add("Link", "w600", DSLContent[LanguageCode].Useful.JPnese . '<a href="https://yarxi.ru">ЯРКСИ</a> <a href="https://www.warodai.ruu">Warodai</a>')
-  DSLPadGUI.Add("Link", "w600", DSLContent[LanguageCode].Useful.CHnese . '<a href="https://bkrs.info">БКРС</a>')
-  DSLPadGUI.Add("Link", "w600", DSLContent[LanguageCode].Useful.VTnese . '<a href="https://chunom.org">Chữ Nôm</a>')
+  DSLPadGUI.Add("Link", "w600", ReadLocale("dictionaries_japanese") '<a href="https://yarxi.ru">ЯРКСИ</a> <a href="https://www.warodai.ruu">Warodai</a>')
+  DSLPadGUI.Add("Link", "w600", ReadLocale("dictionaries_chinese") '<a href="https://bkrs.info">БКРС</a>')
+  DSLPadGUI.Add("Link", "w600", ReadLocale("dictionaries_vietnamese") '<a href="https://chunom.org">Chữ Nôm</a>')
 
   Tab.UseTab(9)
   DSLPadGUI.Add("GroupBox", "w825 h520", "🌐 " . ReadLocale("tab_changelog"))
