@@ -8147,8 +8147,8 @@ MapInsert(Characters,
       unicode: "{U+10347}", html: "&#66375;",
       titlesAlt: True,
       group: ["Gothic Alphabet"],
-      alt_layout: "[F]",
-      tags: ["готская буква файху", "gothic letter iggws"],
+      alt_layout: "[X]",
+      tags: ["готская буква энкуз", "gothic letter iggws"],
     },
     "gothic_hwair", {
       unicode: "{U+10348}", html: "&#66376;",
@@ -8162,7 +8162,7 @@ MapInsert(Characters,
       titlesAlt: True,
       group: ["Gothic Alphabet"],
       alt_layout: "[O]",
-      tags: ["готская буква хвайр", "gothic letter othal", "gothic letter ōþal"],
+      tags: ["готская буква отал", "gothic letter othal", "gothic letter ōþal"],
     },
     "gothic_nine_hundred", {
       unicode: "{U+1034A}", html: "&#66378;",
@@ -11592,6 +11592,7 @@ DisableAllKeys() {
     Sleep 50
     RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
   }
+  ManageTrayItems()
 }
 >^F10:: DisableAllKeys()
 
@@ -12850,6 +12851,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       "<#<!" UseKey["ArrDown"], (*) => ChangeScriptInput("sub"),
       ">^" UseKey["1"], (*) => ToggleLetterScript(, "Glagolitic Futhark"),
       ">^" UseKey["2"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"),
+      ">^" UseKey["3"], (*) => ToggleLetterScript(, "Old Hungarian"),
       ">^" UseKey["4"], (*) => ToggleLetterScript(, "Gothic"),
       ">^" UseKey["0"], (*) => ToggleLetterScript(, "IPA"),
       ;
@@ -13044,7 +13046,15 @@ ManageTrayItems() {
     "smelter", ReadLocale("tray_func_smelter") "`t" Window LeftAlt "L",
     "unicode", ReadLocale("tray_func_unicode") "`t" Window LeftAlt "U",
     "altcode", ReadLocale("tray_func_altcode") "`t" Window LeftAlt "A",
-    "notif", ReadLocale("tray_func_notif") "`t" Window LeftAlt "M"
+    "notif", ReadLocale("tray_func_notif") "`t" Window LeftAlt "M",
+    "disable", ReadLocale("tray_func_disable") "`t" RightControl "F10",
+    "enable", ReadLocale("tray_func_enable") "`t" RightControl "F10",
+    "glagolitic", ReadLocale("tray_func_glagolitic_runic") "`t" RightControl "1",
+    "turkic", ReadLocale("tray_func_tukic_permic") "`t" RightControl "2",
+    "hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "2",
+    "gothic", ReadLocale("tray_func_gothic") "`t" RightControl "4",
+    "ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
+    "script", ReadLocale("func_label_extralayouts")
   )
 
   CurrentApp := "DSL KeyPad " . CurrentVersionString
@@ -13059,6 +13069,23 @@ ManageTrayItems() {
   DSLTray.Add()
   DSLTray.Add(Labels["panel"], OpenPanel)
   DSLTray.Add()
+
+  ScriptsSubMenu := Menu()
+  ScriptsSubMenu.Add(Labels["glagolitic"], (*) => ToggleLetterScript(, "Glagolitic Futhark"))
+  ScriptsSubMenu.Add(Labels["turkic"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"))
+  ScriptsSubMenu.Add(Labels["hungarian"], (*) => ToggleLetterScript(, "Old Hungarian"))
+  ScriptsSubMenu.Add(Labels["gothic"], (*) => ToggleLetterScript(, "Gothic"))
+  ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
+
+  ScriptsSubMenu.SetIcon(Labels["glagolitic"], AppIcosDLLFile, 2)
+  ScriptsSubMenu.SetIcon(Labels["turkic"], AppIcosDLLFile, 4)
+  ScriptsSubMenu.SetIcon(Labels["hungarian"], AppIcosDLLFile, 6)
+  ScriptsSubMenu.SetIcon(Labels["gothic"], AppIcosDLLFile, 7)
+  ScriptsSubMenu.SetIcon(Labels["ipa"], AppIcosDLLFile, 8)
+
+  DSLTray.Add(Labels["script"], ScriptsSubMenu)
+
+  DSLTray.Add()
   DSLTray.Add(Labels["search"], (*) => SearchKey())
   DSLTray.Add(Labels["unicode"], (*) => InsertUnicodeKey())
   DSLTray.Add(Labels["altcode"], (*) => InsertAltCodeKey())
@@ -13070,6 +13097,15 @@ ManageTrayItems() {
   DSLTray.Add(Labels["reload"], ReloadApplication)
   DSLTray.Add(Labels["config"], OpenConfigFile)
   DSLTray.Add(Labels["locale"], OpenLocalesFile)
+  DSLTray.Add()
+  if DisabledAllKeys {
+    DSLTray.Add(Labels["enable"], (*) => DisableAllKeys())
+    DSLTray.SetIcon(Labels["enable"], AppIcosDLLFile, 9)
+  } else {
+
+    DSLTray.Add(Labels["disable"], (*) => DisableAllKeys())
+    DSLTray.SetIcon(Labels["disable"], AppIcosDLLFile, 9)
+  }
   DSLTray.Add()
   DSLTray.Add(Labels["exit"], ExitApplication)
   DSLTray.Add()
@@ -13085,6 +13121,7 @@ ManageTrayItems() {
   DSLTray.SetIcon(Labels["config"], ImageRes, 065)
   DSLTray.SetIcon(Labels["locale"], ImageRes, 015)
   DSLTray.SetIcon(Labels["exit"], ImageRes, 085)
+
 }
 
 ManageTrayItems()
