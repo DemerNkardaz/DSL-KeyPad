@@ -13051,7 +13051,7 @@ ManageTrayItems() {
     "enable", ReadLocale("tray_func_enable") "`t" RightControl "F10",
     "glagolitic", ReadLocale("tray_func_glagolitic_runic") "`t" RightControl "1",
     "turkic", ReadLocale("tray_func_tukic_permic") "`t" RightControl "2",
-    "hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "2",
+    "hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "3",
     "gothic", ReadLocale("tray_func_gothic") "`t" RightControl "4",
     "ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
     "script", ReadLocale("func_label_extralayouts")
