@@ -9423,8 +9423,14 @@ ChangeTrayIconOnLanguage() {
 
   if DisabledAllKeys {
     TraySetIcon(AppIcosDLLFile, 9)
+    A_IconTip := DSLPadTitle " (" ReadLocale("tray_tooltip_disabled") ")"
     return
   }
+
+  ActiveLatin := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
+  ActiveCyrillic := IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")
+
+  TitleCompose := DSLPadTitle "`n" ActiveLatin " – " ActiveCyrillic
 
   IconMap := Map(
     "Glagolitic Futhark", {
@@ -9455,13 +9461,13 @@ ChangeTrayIconOnLanguage() {
   )
 
   if IconMap.Has(ActiveScriptName) {
-    TrayTitle := DSLPadTitle (CurrentLayout = CodeEn ? " — " IconMap[ActiveScriptName].TitleEn :
-      CurrentLayout = CodeRu ? " — " IconMap[ActiveScriptName].TitleRu : 1)
+    TrayTitle := TitleCompose (CurrentLayout = CodeEn ? "`n" IconMap[ActiveScriptName].TitleEn :
+      CurrentLayout = CodeRu ? "`n" IconMap[ActiveScriptName].TitleRu : 1)
 
     IconCode := (CurrentLayout = CodeEn ? IconMap[ActiveScriptName].CodeEn :
       CurrentLayout = CodeRu ? IconMap[ActiveScriptName].CodeRu : 1)
   } else {
-    TrayTitle := DSLPadTitle
+    TrayTitle := TitleCompose
     IconCode := 1
   }
 
