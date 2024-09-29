@@ -10298,7 +10298,7 @@ Constructor() {
     htmlTitle: "x685 y495 w128 h24 BackgroundTrans",
     htmlTitleText: Map("ru", "HTML-Код/Мнемоника", "en", "HTML/Entity"),
     tags: "x21 y546 w800 h24 readonly -VScroll -HScroll -E0x200",
-    alert: "x655 y300 w195 h50 readonly Center -VScroll -HScroll -E0x200",
+    alert: "x655 y333 w190 h40 readonly Center -VScroll -HScroll -E0x200",
   }
 
   CommonFilter := {
@@ -10746,7 +10746,7 @@ Constructor() {
 
   for i, groupName in AltLayouts {
     if Mod(i, 2) = 1 {
-      AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "Old Turkic Orkhon" || groupName = "IPA") ? False : True
+      AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "Old Turkic Orkhon" || groupName = "Gothic Alphabet" || groupName = "IPA") ? False : True
       GroupHotKey := AltLayouts[i + 1]
 
 

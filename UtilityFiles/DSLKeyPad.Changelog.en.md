@@ -14,4 +14,5 @@
   - Addition of a “super-layout” for Old Turkic and Olrd Permic scripts.
   - Addition of a “super-layout” for Gothic Alphabet.
   - Implementation of the “Dvorak” and “Colemak” layouts for the Latin Script.
+  - Implementation of the “ЙІУКЕН (1970)” and “Diktor” layouts for the Cyrillic Script.
   - A system for updates and change logs.
