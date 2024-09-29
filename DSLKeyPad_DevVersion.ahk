@@ -9427,22 +9427,46 @@ ChangeTrayIconOnLanguage() {
   }
 
   IconMap := Map(
-    "Glagolitic Futhark", { CodeEn: 2, CodeRu: 3, Default: 1 },
-      "Old Turkic Old Permic", { CodeEn: 4, CodeRu: 5, Default: 1 },
-      "Old Hungarian", { CodeEn: 6, CodeRu: 6, Default: 1 },
-      "Gothic", { CodeEn: 7, CodeRu: 7, Default: 1 },
-      "IPA", { CodeEn: 8, CodeRu: 8, Default: 1 }
+    "Glagolitic Futhark", {
+      CodeEn: 2, CodeRu: 3, Default: 1,
+      TitleEn: ReadLocale("tray_tooltip_futhark"),
+      TitleRu: ReadLocale("tray_tooltip_glagolitic"),
+    },
+      "Old Turkic Old Permic", {
+        CodeEn: 4, CodeRu: 5, Default: 1,
+        TitleEn: ReadLocale("tray_tooltip_turkic"),
+        TitleRu: ReadLocale("tray_tooltip_permic"),
+      },
+      "Old Hungarian", {
+        CodeEn: 6, CodeRu: 6, Default: 1,
+        TitleEn: ReadLocale("tray_tooltip_hungarian"),
+        TitleRu: ReadLocale("tray_tooltip_hungarian"),
+      },
+      "Gothic", {
+        CodeEn: 7, CodeRu: 7, Default: 1,
+        TitleEn: ReadLocale("tray_tooltip_gothic"),
+        TitleRu: ReadLocale("tray_tooltip_gothic"),
+      },
+      "IPA", {
+        CodeEn: 8, CodeRu: 8, Default: 1,
+        TitleEn: ReadLocale("tray_tooltip_ipa"),
+        TitleRu: ReadLocale("tray_tooltip_ipa"),
+      }
   )
 
   if IconMap.Has(ActiveScriptName) {
+    TrayTitle := DSLPadTitle (CurrentLayout = CodeEn ? " — " IconMap[ActiveScriptName].TitleEn :
+      CurrentLayout = CodeRu ? " — " IconMap[ActiveScriptName].TitleRu : 1)
+
     IconCode := (CurrentLayout = CodeEn ? IconMap[ActiveScriptName].CodeEn :
-      CurrentLayout = CodeRu ? IconMap[ActiveScriptName].CodeRu :
-        IconMap[ActiveScriptName].Default)
+      CurrentLayout = CodeRu ? IconMap[ActiveScriptName].CodeRu : 1)
   } else {
+    TrayTitle := DSLPadTitle
     IconCode := 1
   }
 
   TraySetIcon(AppIcosDLLFile, IconCode)
+  A_IconTip := TrayTitle
 }
 
 OnMessage(0x0051, On_WM_INPUTLANGCHANGE)
