@@ -34,6 +34,7 @@ ChangeLogRaw := Map(
 
 LocalesRaw := RawRepoFiles . "DSLKeyPad.locales.ini"
 AppIcoRaw := RawRepoFiles . "DSLKeyPad.app.ico"
+AppIcosDLLRaw := RawRepoFiles . "DSLKeyPad_App_Icons.dll"
 
 WorkingDir := A_MyDocuments . "\DSLKeyPad"
 DirCreate(WorkingDir)
@@ -41,6 +42,7 @@ DirCreate(WorkingDir)
 ConfigFile := WorkingDir . "\DSLKeyPad.config.ini"
 LocalesFile := WorkingDir . "\DSLKeyPad.locales.ini"
 AppIcoFile := WorkingDir . "\DSLKeyPad.app.ico"
+AppIcosDLLFile := WorkingDir . "\DSLKeyPad_App_Icons.dll"
 
 DSLPadTitle := "DSL KeyPad (αλφα)" . " — " . CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
@@ -73,6 +75,8 @@ GetLocales() {
 if !FileExist(LocalesFile) {
   GetLocales()
 }
+
+TraySetIcon(AppIcosDLLFile, 1)
 
 ReadLocale(EntryName, Prefix := "") {
   global LocalesFile
@@ -126,11 +130,12 @@ SetStringVars(StringVar, SetVars*) {
 }
 
 GetAppIco() {
-  global AppIcoRaw, AppIcoFile
+  global AppIcoRaw, AppIcoFile, AppIcosDLLRaw, AppIcosDLLFile
   ErrMessages := Map(
     "ru", "Произошла ошибка при получении иконки приложения.`nСервер недоступен или ошибка соединения с интернетом.",
     "en", "An error occured during receiving app icon.`nServer unavailable or internet connection error."
   )
+
   http := ComObject("WinHttp.WinHttpRequest.5.1")
   http.Open("GET", AppIcoRaw, true)
   try {
@@ -146,10 +151,12 @@ GetAppIco() {
     return
   }
 
+
+  Download(AppIcosDLLRaw, AppIcosDLLFile)
   Download(AppIcoRaw, AppIcoFile)
 }
 
-if !FileExist(AppIcoFile) {
+if !FileExist(AppIcoFile) || !FileExist(AppIcosDLLFile) {
   GetAppIco()
 }
 
@@ -9405,8 +9412,50 @@ SwitchToScript(scriptMode) {
 
 
 ; Glagolitic, Fuþark
+CallBuffer(Time := -25, Callback := "") {
+  if Callback != ""
+    SetTimer(Callback, Time)
+}
+
+ChangeTrayIconOnLanguage() {
+  LanguageCode := GetLanguageCode()
+  CurrentLayout := GetLayoutLocale()
+
+  if DisabledAllKeys {
+    TraySetIcon(AppIcosDLLFile, 9)
+    return
+  }
+
+  IconMap := Map(
+    "Glagolitic Futhark", { CodeEn: 2, CodeRu: 3, Default: 1 },
+      "Old Turkic Old Permic", { CodeEn: 4, CodeRu: 5, Default: 1 },
+      "Old Hungarian", { CodeEn: 6, CodeRu: 6, Default: 1 },
+      "Gothic", { CodeEn: 7, CodeRu: 7, Default: 1 },
+      "IPA", { CodeEn: 8, CodeRu: 8, Default: 1 }
+  )
+
+  if IconMap.Has(ActiveScriptName) {
+    IconCode := (CurrentLayout = CodeEn ? IconMap[ActiveScriptName].CodeEn :
+      CurrentLayout = CodeRu ? IconMap[ActiveScriptName].CodeRu :
+        IconMap[ActiveScriptName].Default)
+  } else {
+    IconCode := 1
+  }
+
+  TraySetIcon(AppIcosDLLFile, IconCode)
+}
+
+OnMessage(0x0051, On_WM_INPUTLANGCHANGE)
+
+On_WM_INPUTLANGCHANGE(wParam, lParam, msg, hwnd) {
+  ChangeTrayIconOnLanguage()
+}
+
+SetTimer(ChangeTrayIconOnLanguage, 1000)
+
 ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
   LanguageCode := GetLanguageCode()
+  CurrentLayout := GetLayoutLocale()
   global ActiveScriptName, ConfigFile, PreviousScriptName
   CurrentActive := ScriptName = ActiveScriptName
 
@@ -9418,6 +9467,19 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
   ]
 
   if !CurrentActive {
+    if ScriptName = "Glagolitic Futhark" {
+      TraySetIcon(AppIcosDLLFile, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
+    } else if ScriptName = "Old Turkic Old Permic" {
+      TraySetIcon(AppIcosDLLFile, CurrentLayout = CodeEn ? 4 : CurrentLayout = CodeRu ? 5 : 1)
+    } else if ScriptName = "Old Hungarian" {
+      TraySetIcon(AppIcosDLLFile, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 6 : 1)
+    } else if ScriptName = "Gothic" {
+      TraySetIcon(AppIcosDLLFile, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 7 : 1)
+    } else if ScriptName = "IPA" {
+      TraySetIcon(AppIcosDLLFile, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 8 : 1)
+    } else {
+      TraySetIcon(AppIcosDLLFile, 1)
+    }
     UnregisterKeysLayout()
     ActiveScriptName := ""
     Sleep 5
@@ -9428,7 +9490,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
     RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], ScriptName), True)
     ActiveScriptName := ScriptName
   } else {
-
+    TraySetIcon(AppIcosDLLFile, 1)
     UnregisterKeysLayout()
     ActiveScriptName := ""
     Sleep 5
@@ -10473,13 +10535,13 @@ Constructor() {
   Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
   Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
   Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
-  Command_combining := CommandsTree.Add(ReadLocale("func_label_combining"))
   Command_extralayouts := CommandsTree.Add(ReadLocale("func_label_extralayouts"))
   Command_glagokeys := CommandsTree.Add(ReadLocale("func_label_glagokeys"), Command_extralayouts)
   Command_oldturkic := CommandsTree.Add(ReadLocale("func_label_oldturkic"), Command_extralayouts)
   Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_oldhungary"), Command_extralayouts)
   Command_gothic := CommandsTree.Add(ReadLocale("func_label_gothic"), Command_extralayouts)
   Command_func_label_ipa := CommandsTree.Add(ReadLocale("func_label_ipa"), Command_extralayouts)
+  Command_combining := CommandsTree.Add(ReadLocale("func_label_combining"))
   Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
   Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layouttoggle"))
   Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
@@ -11296,8 +11358,8 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
     "func_label_num_superscript",
     "func_label_num_roman",
     "func_label_fastkeys",
-    "func_label_combining",
     "func_label_extralayouts",
+    "func_label_combining",
     "func_label_glagokeys",
     "func_label_oldturkic",
     "func_label_oldhungary",
@@ -12766,6 +12828,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
       ;
       "<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
       "<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
+      ;
     ]
   }
 }
@@ -12925,7 +12988,7 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle,
   TrayTip(ReadLocale(MessagePost), MessageTitle, Ico . Muting)
 
 }
-TraySetIcon(AppIcoFile)
+
 A_IconTip := DSLPadTitle
 DSLTray := A_TrayMenu
 ReloadApplication(*) {

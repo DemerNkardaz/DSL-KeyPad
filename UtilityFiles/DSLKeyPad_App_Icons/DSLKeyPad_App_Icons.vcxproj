@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="DSLKeyPad.app.ico" />
+    <Image Include="DSLKeyPad.app_disabled.ico" />
     <Image Include="DSLKeyPad.app_glagolitic.ico" />
     <Image Include="DSLKeyPad.app_gothic.ico" />
     <Image Include="DSLKeyPad.app_hungarian.ico" />
