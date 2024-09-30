@@ -11851,12 +11851,16 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		return SlotKey
 	}
 
-	GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, SlotKeys := "", SlotMods := "") {
+	GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, CommonMode := False, ReverseCaps := False, SlotKeys := "", SlotMods := "") {
 		if SlotKeys = ""
 			SlotKeys := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ",", ".", "~", "-", "=", "[", "]", "'", "/", "\", "Space", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
-		if SlotMods = ""
-			SlotMods := ["<!", "<+", ">+", "+", "<^>!", "<^>!<+", "<^>!<!", "<^>!<!>+"]
+		if SlotMods = "" {
+			SlotMods := ["+"]
+			if !CommonMode {
+				SlotMods.Push("<!", "<+", ">+", "<^>!", "<^>!<+", "<^>!<!", "<^>!<!>+")
+			}
+		}
 
 		TempArray := []
 		for label, value in SlotMapping {
@@ -11870,7 +11874,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		for slotLabel, value in SlotModdedMapping {
 			for moddedSlot, subValue in value {
 				try {
-					SlotMappingBridge(slotLabel, subValue, moddedSlot)
+					SlotMappingBridge(slotLabel, subValue, moddedSlot, ReverseCaps)
 				} catch {
 					continue
 				}
@@ -11904,11 +11908,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			}
 		}
 
-		SlotMappingBridge(SlotLabel, SlotValue, SlotModifier := "") {
+		SlotMappingBridge(SlotLabel, SlotValue, SlotModifier := "", ReverseCaps := False) {
 			ValidateLabel := ValidateSlotPairs(SlotLabel)
 			Label := SlotModifier != "" ? SlotModifier UseKey[ValidateLabel] : UseKey[ValidateLabel]
 			Slot := SlotModifier != "" ? SlotMod(SlotLabel, Slots, SlotModifier) : Slots.Has(SlotLabel) ? Slots[SlotLabel] : ""
-			TempArray.Push(Label, (K) => LangSeparatedKey(K, SlotValue, Slot, True))
+			TempArray.Push(Label, (K) => LangSeparatedKey(K, SlotValue, Slot, True, ReverseCaps))
 		}
 
 		return TempArray
@@ -12311,13 +12315,17 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"ЙЦУКЕН", KeySeq["7"], "Диктор", KeySeq["R"], "ЙІУКЕН (1907)", KeySeq["7"]),
 			["kkey_hyphen_minus", "kkey_hyphen_minus"], Map("Modifier:ЙІУКЕН", ">+",
 				"ЙЦУКЕН", KeySeq["-"], "Диктор", KeySeq["-"], "ЙІУКЕН (1907)", KeySeq["-"]),
+			["kkey_underscore", "kkey_underscore"], Map("Modifier", "+", "Modifier:ЙІУКЕН", "<+>+",
+				"ЙЦУКЕН", KeySeq["-"], "Диктор", KeySeq["-"], "ЙІУКЕН (1907)", KeySeq["-"]),
 			["kkey_equals", "kkey_equals"], Map("Modifier:ЙІУКЕН", ">+",
+				"ЙЦУКЕН", KeySeq["="], "Диктор", KeySeq["="], "ЙІУКЕН (1907)", KeySeq["="]),
+			["kkey_plus", "kkey_plus"], Map("Modifier", "+", "Modifier:ЙІУКЕН", "<+>+",
 				"ЙЦУКЕН", KeySeq["="], "Диктор", KeySeq["="], "ЙІУКЕН (1907)", KeySeq["="]),
 		])
 
 
 		if CyrillicLayout = "ЙІУКЕН (1907)" {
-			MapPush(Slots, LatinLayout = "Dvorak" ? "," : LatinLayout = "Colemak" ? "W" : "W", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"])
+			MapPush(Slots, LatinLayout = "Dvorak" ? "," : "W", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"])
 		}
 
 		SlotMapping := Map(
@@ -12366,6 +12374,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"D", Map("<^>!", "futhark_younger_later_eth", "<^>!<+", "futhark_younger_later_d", "<^<!", "cyr_com_vzmet"),
 			"E", Map("<+", "futhork_ear", "<^>!", "futhark_younger_later_e", "<^>!<!", "medieval_en"),
 			"G", Map("<+", "futhork_gar"),
+			;"F", Map("", ""),
 			"H", Map("<+", "futhork_haegl", "<^>!", "futhark_younger_hagall", "<^>!<+", "futhark_younger_hagall_short_twig"),
 			"I", Map(">+", "futhark_eihwaz"),
 			"J", Map("<+", "futhork_ger", ">+", "futhork_futhork_iorger"),
@@ -12838,83 +12847,86 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			}
 		}
 
-		LayoutArray := [
-			UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], Slots["A"], True),
-			"+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a", "lat_s_let_a"], SlotMod("A", Slots), True, True),
-			UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], Slots["B"], True),
-			"+" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b", "lat_s_let_b"], SlotMod("B", Slots), True, True),
-			UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], Slots["C"], True),
-			"+" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c", "lat_s_let_c"], SlotMod("C", Slots), True, True),
-			UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], Slots["D"], True),
-			"+" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d", "lat_s_let_d"], SlotMod("D", Slots), True, True),
-			UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], Slots["E"], True),
-			"+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e", "lat_s_let_e"], SlotMod("E", Slots), True, True),
-			UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], Slots["F"], True),
-			"+" UseKey["F"], (K) => LangSeparatedKey(K, ["lat_c_let_f", "lat_s_let_f"], SlotMod("F", Slots), True, True),
-			UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], Slots["G"], True),
-			"+" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g", "lat_s_let_g"], SlotMod("G", Slots), True, True),
-			UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], Slots["H"], True),
-			"+" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h", "lat_s_let_h"], SlotMod("H", Slots), True, True),
-			UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], Slots["I"], True),
-			"+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i", "lat_s_let_i"], SlotMod("I", Slots), True, True),
-			UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], Slots["J"], True),
-			"+" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j", "lat_s_let_j"], SlotMod("J", Slots), True, True),
-			UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], Slots["K"], True),
-			"+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k", "lat_s_let_k"], SlotMod("K", Slots), True, True),
-			UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], Slots["L"], True),
-			"+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l", "lat_s_let_l"], SlotMod("L", Slots), True, True),
-			UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], Slots["M"], True),
-			"+" UseKey["M"], (K) => LangSeparatedKey(K, ["lat_c_let_m", "lat_s_let_m"], SlotMod("M", Slots), True, True),
-			UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], Slots["N"], True),
-			"+" UseKey["N"], (K) => LangSeparatedKey(K, ["lat_c_let_n", "lat_s_let_n"], SlotMod("N", Slots), True, True),
-			UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], Slots["O"], True),
-			"+" UseKey["O"], (K) => LangSeparatedKey(K, ["lat_c_let_o", "lat_s_let_o"], SlotMod("O", Slots), True, True),
-			UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], Slots["P"], True),
-			"+" UseKey["P"], (K) => LangSeparatedKey(K, ["lat_c_let_p", "lat_s_let_p"], SlotMod("P", Slots), True, True),
-			UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], Slots["Q"], True),
-			"+" UseKey["Q"], (K) => LangSeparatedKey(K, ["lat_c_let_q", "lat_s_let_q"], SlotMod("Q", Slots), True, True),
-			UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], Slots["R"], True),
-			"+" UseKey["R"], (K) => LangSeparatedKey(K, ["lat_c_let_r", "lat_s_let_r"], SlotMod("R", Slots), True, True),
-			UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], Slots["S"], True),
-			"+" UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_let_s", "lat_s_let_s"], SlotMod("S", Slots), True, True),
-			UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], Slots["T"], True),
-			"+" UseKey["T"], (K) => LangSeparatedKey(K, ["lat_c_let_t", "lat_s_let_t"], SlotMod("T", Slots), True, True),
-			UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], Slots["U"], True),
-			"+" UseKey["U"], (K) => LangSeparatedKey(K, ["lat_c_let_u", "lat_s_let_u"], SlotMod("U", Slots), True, True),
-			UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], Slots["V"], True),
-			"+" UseKey["V"], (K) => LangSeparatedKey(K, ["lat_c_let_v", "lat_s_let_v"], SlotMod("V", Slots), True, True),
-			UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], Slots["W"], True),
-			"+" UseKey["W"], (K) => LangSeparatedKey(K, ["lat_c_let_w", "lat_s_let_w"], SlotMod("W", Slots), True, True),
-			UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], Slots["X"], True),
-			"+" UseKey["X"], (K) => LangSeparatedKey(K, ["lat_c_let_x", "lat_s_let_x"], SlotMod("X", Slots), True, True),
-			UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], Slots["Y"], True),
-			"+" UseKey["Y"], (K) => LangSeparatedKey(K, ["lat_c_let_y", "lat_s_let_y"], SlotMod("Y", Slots), True, True),
-			UseKey["Z"], (K) => LangSeparatedKey(K, ["lat_c_let_z", "lat_s_let_z"], Slots["Z"], True),
-			"+" UseKey["Z"], (K) => LangSeparatedKey(K, ["lat_c_let_z", "lat_s_let_z"], SlotMod("Z", Slots), True, True),
-			;
-			UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_comma", Slots[","], True),
-			"+" UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_lessthan", SlotMod(",", Slots), True, True),
-			UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_dot", Slots["."], True),
-			"+" UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_greaterthan", SlotMod(".", Slots), True, True),
-			UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", Slots[";"], True),
-			"+" UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_colon", SlotMod(";", Slots), True, True),
-			UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", Slots["'"], True),
-			"+" UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_quotation", SlotMod("'", Slots), True, True),
-			UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_square_bracket", Slots["["], True),
-			"+" UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_curly_bracket", SlotMod("[", Slots), True, True),
-			UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", Slots["]"], True),
-			"+" UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_curly_bracket", SlotMod("]", Slots), True, True),
-			UseKey["Equals"], (K) => LangSeparatedKey(K, "kkey_equals", Slots["="], True),
-			"+" UseKey["Equals"], (K) => LangSeparatedKey(K, "kkey_plus", SlotMod("=", Slots), True, True),
-			UseKey["Minus"], (K) => LangSeparatedKey(K, "kkey_hyphen_minus", Slots["-"], True),
-			"+" UseKey["Minus"], (K) => LangSeparatedKey(K, "kkey_underscore", SlotMod("-", Slots), True, True),
-			UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_grave_accent", Slots["~"], True),
-			"+" UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_tilde", SlotMod("~", Slots), True, True),
-			UseKey["Slash"], (K) => LangSeparatedKey(K, "kkey_slash", Slots["/"], True),
-			"+" UseKey["Slash"], (K) => LangSeparatedKey(K, "question", SlotMod("/", Slots), True, True),
-			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", Slots["\"], True),
-			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", SlotMod("\", Slots), True, True),
-		]
+		SlotMapping := Map(
+			"A", ["lat_c_let_a", "lat_s_let_a"],
+			"B", ["lat_c_let_b", "lat_s_let_b"],
+			"C", ["lat_c_let_c", "lat_s_let_c"],
+			"D", ["lat_c_let_d", "lat_s_let_d"],
+			"E", ["lat_c_let_e", "lat_s_let_e"],
+			"F", ["lat_c_let_f", "lat_s_let_f"],
+			"G", ["lat_c_let_g", "lat_s_let_g"],
+			"H", ["lat_c_let_h", "lat_s_let_h"],
+			"I", ["lat_c_let_i", "lat_s_let_i"],
+			"J", ["lat_c_let_j", "lat_s_let_j"],
+			"K", ["lat_c_let_k", "lat_s_let_k"],
+			"L", ["lat_c_let_l", "lat_s_let_l"],
+			"M", ["lat_c_let_m", "lat_s_let_m"],
+			"N", ["lat_c_let_n", "lat_s_let_n"],
+			"O", ["lat_c_let_o", "lat_s_let_o"],
+			"P", ["lat_c_let_p", "lat_s_let_p"],
+			"Q", ["lat_c_let_q", "lat_s_let_q"],
+			"R", ["lat_c_let_r", "lat_s_let_r"],
+			"S", ["lat_c_let_s", "lat_s_let_s"],
+			"T", ["lat_c_let_t", "lat_s_let_t"],
+			"U", ["lat_c_let_u", "lat_s_let_u"],
+			"V", ["lat_c_let_v", "lat_s_let_v"],
+			"W", ["lat_c_let_w", "lat_s_let_w"],
+			"X", ["lat_c_let_x", "lat_s_let_x"],
+			"Y", ["lat_c_let_y", "lat_s_let_y"],
+			"Z", ["lat_c_let_z", "lat_s_let_z"],
+			"~", "kkey_grave_accent",
+			",", "kkey_comma",
+			".", "kkey_dot",
+			";", "kkey_semicolon",
+			"'", "kkey_apostrophe",
+			"[", "kkey_l_square_bracket",
+			"]", "kkey_r_square_bracket",
+			"=", "kkey_equals",
+			"-", "kkey_hyphen_minus",
+			"/", "kkey_slash",
+		)
+
+		SlotModdedMapping := Map(
+			"A", Map("+", ["lat_c_let_a", "lat_s_let_a"]),
+			"B", Map("+", ["lat_c_let_b", "lat_s_let_b"]),
+			"C", Map("+", ["lat_c_let_c", "lat_s_let_c"]),
+			"D", Map("+", ["lat_c_let_d", "lat_s_let_d"]),
+			"E", Map("+", ["lat_c_let_e", "lat_s_let_e"]),
+			"F", Map("+", ["lat_c_let_f", "lat_s_let_f"]),
+			"G", Map("+", ["lat_c_let_g", "lat_s_let_g"]),
+			"H", Map("+", ["lat_c_let_h", "lat_s_let_h"]),
+			"I", Map("+", ["lat_c_let_i", "lat_s_let_i"]),
+			"J", Map("+", ["lat_c_let_j", "lat_s_let_j"]),
+			"K", Map("+", ["lat_c_let_k", "lat_s_let_k"]),
+			"L", Map("+", ["lat_c_let_l", "lat_s_let_l"]),
+			"M", Map("+", ["lat_c_let_m", "lat_s_let_m"]),
+			"N", Map("+", ["lat_c_let_n", "lat_s_let_n"]),
+			"O", Map("+", ["lat_c_let_o", "lat_s_let_o"]),
+			"P", Map("+", ["lat_c_let_p", "lat_s_let_p"]),
+			"Q", Map("+", ["lat_c_let_q", "lat_s_let_q"]),
+			"R", Map("+", ["lat_c_let_r", "lat_s_let_r"]),
+			"S", Map("+", ["lat_c_let_s", "lat_s_let_s"]),
+			"T", Map("+", ["lat_c_let_t", "lat_s_let_t"]),
+			"U", Map("+", ["lat_c_let_u", "lat_s_let_u"]),
+			"V", Map("+", ["lat_c_let_v", "lat_s_let_v"]),
+			"W", Map("+", ["lat_c_let_w", "lat_s_let_w"]),
+			"X", Map("+", ["lat_c_let_x", "lat_s_let_x"]),
+			"Y", Map("+", ["lat_c_let_y", "lat_s_let_y"]),
+			"Z", Map("+", ["lat_c_let_z", "lat_s_let_z"]),
+			",", Map("+", "kkey_lessthan"),
+			".", Map("+", "kkey_greaterthan"),
+			";", Map("+", "kkey_colon"),
+			"'", Map("+", "kkey_quotation"),
+			"~", Map("+", "kkey_grave_accent"),
+			"=", Map("+", "kkey_plus"),
+			"-", Map("+", "kkey_underscore"),
+			"[", Map("+", "kkey_l_curly_bracket"),
+			"]", Map("+", "kkey_r_curly_bracket"),
+			"/", Map("+", "question"),
+			"\", Map("+", "kkey_verticalline"),
+		)
+
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, True, True)
 	} else if Combinations = "Old Turkic Old Permic" {
 		Slots := Map()
 		LayoutArray := [
