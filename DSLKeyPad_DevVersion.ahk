@@ -11834,8 +11834,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				}
 				if (!Found) {
 					try {
-						;if modifier != ""
-						;SlotMappingBridge(label, "", modifier)
+						if modifier != ""
+							SlotMappingBridge(label, "", modifier)
 					} catch {
 						continue
 					}
@@ -11846,11 +11846,26 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		SlotMappingBridge(SlotLabel, SlotValue, SlotModifier := "") {
 			ValidateLabel := ValidateSlotPairs(SlotLabel)
 			Label := SlotModifier != "" ? SlotModifier UseKey[ValidateLabel] : UseKey[ValidateLabel]
-			Slot := SlotModifier != "" ? SlotMod(SlotLabel, Slots, SlotModifier) : Slots[SlotLabel]
+			Slot := SlotModifier != "" ? SlotMod(SlotLabel, Slots, SlotModifier) : Slots.Has(SlotLabel) ? Slots[SlotLabel] : ""
 			TempArray.Push(Label, (K) => LangSeparatedKey(K, SlotValue, Slot, True))
 		}
 
 		return TempArray
+	}
+
+	GetLayoutImprovedCyrillic(CyrillicSlots) {
+		TempMap := Map()
+		LetterID := LatinLayout = "QWERTY" ? 1 : LatinLayout = "Dvorak" ? 2 : LatinLayout = "Colemak" ? 3 : 1
+
+		for i, pair in CyrillicSlots {
+			if Mod(i, 2) = 1 {
+				Characters := pair
+				InsertingSlot := CyrillicSlots[i + 1][CyrillicLayout][LetterID]
+				MapPush(TempMap, InsertingSlot, Characters)
+			}
+		}
+
+		return TempMap
 	}
 
 
@@ -12119,11 +12134,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 		return FastArray
 	} else if Combinations = "Glagolitic Futhark" {
-		Slots := Map()
+		Slots3 := Map()
 
 		if CyrillicLayout = "ЙЦУКЕН" {
 			if LatinLayout = "QWERTY" {
-				MapPush(Slots,
+				MapPush(Slots3,
 					"A", ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"],
 					"<^>!A", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"],
 					"B", ["glagolitic_c_let_i", "glagolitic_s_let_i"],
@@ -12176,33 +12191,22 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				)
 			}
 		}
-		TestIingSlots := Map()
 
 
-		CyrillicSlots := [
+		Slots := GetLayoutImprovedCyrillic([
 			["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], Map(
 				"ЙЦУКЕН", ["A", "A", "A"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
 			["glagolitic_c_let_fita", "glagolitic_s_let_fita"], Map(
 				"ЙЦУКЕН", ["<^>!A", "<^>!A", "<^>!A"], "Диктор", ["<^>!G", "<^>!I", "<^>!D"], "ЙІУКЕН (1907)", ["<^>!G", "<^>!I", "<^>!D"]),
-		]
-
-		GetLayoutImprovedCyrillic(CyrillicSlots) {
-			TempMap := Map()
-			LatinLayout := CheckQWERTY()
-			CyrillicLayout := CheckYITSUKEN()
-			LetterID := LatinLayout = "QWERTY" ? 1 : LatinLayout = "Dvorak" ? 2 : LatinLayout = "Dvorak" ? 3 : 1
-
-			for i, pair in CyrillicSlots {
-				if Mod(i, 2) = 1 {
-					Characters := pair
-					InsertingSlot := CyrillicSlots[i + 1][CyrillicLayout][LetterID]
-
-					TempMap.Push(InsertingSlot, Characters)
-				}
-			}
-
-			return TempMap
-		}
+			["glagolitic_c_let_i", "glagolitic_s_let_i"], Map(
+				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
+			["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"], Map(
+				"ЙЦУКЕН", ["<^>!B", "<^>!X", "<^>!B"], "Диктор", ["<^>!S", "<^>!O", "<^>!R"], "ЙІУКЕН (1907)", ["<^>!N", "<^>!B", "<^>!K"]),
+			["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], Map(
+				"ЙЦУКЕН", ["<+B", "<+X", "<+B"], "Диктор", ["<+S", "<+O", "<+R"], "ЙІУКЕН (1907)", ["<+N", "<+B", "<+K"]),
+			["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"], Map(
+				"ЙЦУКЕН", ["<^>!<+B", "<^>!<+X", "<^>!<+B"], "Диктор", ["<^>!<+S", "<^>!<+O", "<^>!<+R"], "ЙІУКЕН (1907)", ["<^>!<+N", "<^>!<+B", "<^>!<+K"]),
+		])
 
 		SlotMapping := Map(
 			"A", "futhark_ansuz",
