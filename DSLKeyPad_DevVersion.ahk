@@ -11770,6 +11770,55 @@ UnregisterHotKeys(Bindings) {
 	}
 }
 
+KeySeq := Map(
+	"A", ["A", "A", "A"],
+	"B", ["B", "X", "B"],
+	"C", ["C", "J", "C"],
+	"D", ["D", "E", "S"],
+	"E", ["E", ".", "F"],
+	"F", ["F", "U", "T"],
+	"G", ["G", "I", "D"],
+	"H", ["H", "D", "H"],
+	"I", ["I", "C", "U"],
+	"J", ["J", "H", "N"],
+	"K", ["K", "T", "E"],
+	"L", ["L", "N", "I"],
+	"M", ["M", "M", "M"],
+	"N", ["N", "B", "K"],
+	"O", ["O", "R", "Y"],
+	"P", ["P", "L", ";"],
+	"Q", ["Q", "'", "Q"],
+	"R", ["R", "P", "P"],
+	"S", ["S", "O", "R"],
+	"T", ["T", "Y", "G"],
+	"U", ["U", "G", "L"],
+	"V", ["V", "K", "V"],
+	"W", ["W", ",", "W"],
+	"X", ["X", "Q", "X"],
+	"Y", ["Y", "F", "J"],
+	"Z", ["Z", ";", "Z"],
+	",", [",", "W", ","],
+	".", [".", "V", "."],
+	";", [";", "S", "O"],
+	"'", ["'", "-", "'"],
+	"[", ["[", "/", "["],
+	"]", ["]", "=", "]"],
+	"~", ["~", "~", "~"],
+	"-", ["-", "[", "-"],
+	"=", ["=", "]", "="],
+	"/", ["/", "Z", "/"],
+	"\", ["\", "\", "\"],
+	"1", ["1", "1", "1"],
+	"2", ["2", "2", "2"],
+	"3", ["3", "3", "3"],
+	"4", ["4", "4", "4"],
+	"5", ["5", "5", "5"],
+	"6", ["6", "6", "6"],
+	"7", ["7", "7", "7"],
+	"8", ["8", "8", "8"],
+	"9", ["9", "9", "9"],
+	"0", ["0", "0", "0"],
+)
 
 GetKeyBindings(UseKey, Combinations := "FastKeys") {
 	LatinLayout := CheckQWERTY()
@@ -11873,7 +11922,18 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			if Mod(i, 2) = 1 {
 				Characters := pair
 				InsertingSlot := CyrillicSlots[i + 1][CyrillicLayout][LetterID]
-				Modifier := CyrillicSlots[i + 1].Has("Modifier") ? CyrillicSlots[i + 1]["Modifier"] : ""
+				Modifier := ""
+
+				if CyrillicLayout = "Диктор" && CyrillicSlots[i + 1].Has("Modifier:Диктор") {
+					Modifier := CyrillicSlots[i + 1]["Modifier:Диктор"]
+				} else if CyrillicLayout = "ЙЦУКЕН" && CyrillicSlots[i + 1].Has("Modifier:ЙЦУКЕН") {
+					Modifier := CyrillicSlots[i + 1]["Modifier:ЙЦУКЕН"]
+				} else if CyrillicLayout = "ЙІУКЕН (1907)" && CyrillicSlots[i + 1].Has("Modifier:ЙІУКЕН") {
+					Modifier := CyrillicSlots[i + 1]["Modifier:ЙІУКЕН"]
+				} else {
+					Modifier := CyrillicSlots[i + 1].Has("Modifier") ? CyrillicSlots[i + 1]["Modifier"] : ""
+				}
+
 				MapPush(TempMap, Modifier InsertingSlot, Characters)
 			}
 		}
@@ -12146,80 +12206,113 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			LayoutArray.Push()
 		}
 	} else if Combinations = "Glagolitic Futhark" {
-		Slots3 := Map()
-
-		if CyrillicLayout = "ЙЦУКЕН" {
-			if LatinLayout = "QWERTY" {
-				MapPush(Slots3,
-					"H", ["glagolitic_c_let_ritsi", "glagolitic_s_let_ritsi"],
-					"I", ["glagolitic_c_let_sha", "glagolitic_s_let_sha"],
-					"J", ["glagolitic_c_let_onu", "glagolitic_s_let_onu"],
-					"<^>!J", ["glagolitic_c_let_otu", "glagolitic_s_let_otu"],
-					"<!J", ["glagolitic_c_let_big_yus", "glagolitic_s_let_big_yus"],
-					"K", ["glagolitic_c_let_ljudije", "glagolitic_s_let_ljudije"],
-					"L", ["glagolitic_c_let_dobro", "glagolitic_s_let_dobro"],
-					"M", ["glagolitic_c_let_yeri", "glagolitic_s_let_yeri"],
-					"N", ["glagolitic_c_let_tvrido", "glagolitic_s_let_tvrido"],
-					"O", ["glagolitic_c_let_shta", "glagolitic_s_let_shta"],
-					"P", ["glagolitic_c_let_zemlja", "glagolitic_c_let_zemlja"],
-					"Q", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"],
-					"R", ["glagolitic_c_let_kako", "glagolitic_s_let_kako"],
-					"S", ["glagolitic_c_let_yery", "glagolitic_s_let_yery"],
-					"T", ["glagolitic_c_let_yestu", "glagolitic_s_let_yestu"],
-					"U", ["glagolitic_c_let_glagoli", "glagolitic_s_let_glagoli"],
-					"V", ["glagolitic_c_let_myslite", "glagolitic_s_let_myslite"],
-					"W", ["glagolitic_c_let_tsi", "glagolitic_s_let_tsi"],
-					"X", ["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"],
-					"Y", ["glagolitic_c_let_nashi", "glagolitic_s_let_nashi"],
-					"Z", ["glagolitic_c_let_yati", "glagolitic_s_let_yati"],
-					",", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"],
-					"+,", ["cyr_c_let_b", "cyr_s_let_b"],
-					".", ["glagolitic_c_let_yu", "glagolitic_s_let_yu"],
-					"+.", ["cyr_c_let_yu", "cyr_s_let_yu"],
-					";", ["glagolitic_c_let_zhivete", "glagolitic_s_let_zhivete"],
-					"<^>!;", ["glagolitic_c_let_djervi", "glagolitic_s_let_djervi"],
-					"'", ["glagolitic_c_let_small_yus", "glagolitic_s_let_small_yus"],
-					"<^>!'", ["glagolitic_c_let_small_yus_iotified", "glagolitic_s_let_small_yus_iotified"],
-					"[", ["glagolitic_c_let_heru", "glagolitic_s_let_heru"],
-					"<^>![", ["glagolitic_c_let_spider_ha", "glagolitic_s_let_spider_ha"],
-					"]", ["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"],
-					"<^>!]", ["glagolitic_c_let_shtapic", "glagolitic_s_let_shtapic"],
-					"~", ["glagolitic_c_let_yo", "glagolitic_s_let_yo"],
-					"<!~", ["glagolitic_c_let_big_yus_iotified", "glagolitic_s_let_big_yus_iotified"],
-				)
-			}
-		}
-
-
 		Slots := GetLayoutImprovedCyrillic([
 			["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], Map(
-				"ЙЦУКЕН", ["A", "A", "A"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
+				"ЙЦУКЕН", KeySeq["A"], "Диктор", KeySeq["Z"], "ЙІУКЕН (1907)", KeySeq["A"]),
 			["glagolitic_c_let_fita", "glagolitic_s_let_fita"], Map("Modifier", "<^>!",
-				"ЙЦУКЕН", ["A", "A", "A"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
+				"ЙЦУКЕН", KeySeq["A"], "Диктор", KeySeq["Z"], "ЙІУКЕН (1907)", KeySeq["A"]),
 			["glagolitic_c_let_i", "glagolitic_s_let_i"], Map(
-				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
+				"ЙЦУКЕН", KeySeq["B"], "Диктор", KeySeq["S"], "ЙІУКЕН (1907)", KeySeq["N"]),
 			["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"], Map("Modifier", "<^>!",
-				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
+				"ЙЦУКЕН", KeySeq["B"], "Диктор", KeySeq["S"], "ЙІУКЕН (1907)", KeySeq["N"]),
 			["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], Map("Modifier", "<+",
-				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
+				"ЙЦУКЕН", KeySeq["B"], "Диктор", KeySeq["S"], "ЙІУКЕН (1907)", KeySeq["N"]),
 			["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"], Map("Modifier", "<^>!<+",
-				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
+				"ЙЦУКЕН", KeySeq["B"], "Диктор", KeySeq["S"], "ЙІУКЕН (1907)", KeySeq["N"]),
 			["glagolitic_c_let_slovo", "glagolitic_s_let_slovo"], Map(
-				"ЙЦУКЕН", ["C", "J", "C"], "Диктор", ["L", "N", "I"], "ЙІУКЕН (1907)", ["V", "K", "V"]),
+				"ЙЦУКЕН", KeySeq["C"], "Диктор", KeySeq["L"], "ЙІУКЕН (1907)", KeySeq["V"]),
 			["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"], Map("Modifier", "<^>!",
-				"ЙЦУКЕН", ["C", "J", "C"], "Диктор", ["L", "N", "I"], "ЙІУКЕН (1907)", ["V", "K", "V"]),
+				"ЙЦУКЕН", KeySeq["C"], "Диктор", KeySeq["L"], "ЙІУКЕН (1907)", KeySeq["V"]),
 			["glagolitic_c_let_vede", "glagolitic_c_let_vede"], Map(
-				"ЙЦУКЕН", ["D", "E", "S"], "Диктор", ["U", "G", "L"], "ЙІУКЕН (1907)", ["D", "E", "S"]),
+				"ЙЦУКЕН", KeySeq["D"], "Диктор", KeySeq["U"], "ЙІУКЕН (1907)", KeySeq["D"]),
 			["glagolitic_c_let_uku", "glagolitic_s_let_uku"], Map(
-				"ЙЦУКЕН", ["E", ".", "F"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["E", ".", "F"]),
+				"ЙЦУКЕН", KeySeq["E"], "Диктор", KeySeq["A"], "ЙІУКЕН (1907)", KeySeq["E"]),
 			["glagolitic_c_let_az", "glagolitic_s_let_az"], Map(
-				"ЙЦУКЕН", ["F", "U", "T"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
+				"ЙЦУКЕН", KeySeq["F"], "Диктор", KeySeq["G"], "ЙІУКЕН (1907)", KeySeq["G"]),
 			["glagolitic_c_let_trokutasti_a", "glagolitic_s_let_trokutasti_a"], Map("Modifier", "<^>!",
-				"ЙЦУКЕН", ["F", "U", "T"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
+				"ЙЦУКЕН", KeySeq["F"], "Диктор", KeySeq["G"], "ЙІУКЕН (1907)", KeySeq["G"]),
 			["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"], Map(
-				"ЙЦУКЕН", ["G", "I", "D"], "Диктор", [",", "W", ","], "ЙІУКЕН (1907)", ["H", "D", "H"]),
+				"ЙЦУКЕН", KeySeq["G"], "Диктор", KeySeq[","], "ЙІУКЕН (1907)", KeySeq["H"]),
 			["glagolitic_c_let_pe", "glagolitic_s_let_pe"], Map("Modifier", "<^>!",
-				"ЙЦУКЕН", ["G", "I", "D"], "Диктор", [",", "W", ","], "ЙІУКЕН (1907)", ["H", "D", "H"]),
+				"ЙЦУКЕН", KeySeq["G"], "Диктор", KeySeq[","], "ЙІУКЕН (1907)", KeySeq["H"]),
+			["glagolitic_c_let_ritsi", "glagolitic_s_let_ritsi"], Map(
+				"ЙЦУКЕН", KeySeq["H"], "Диктор", KeySeq[";"], "ЙІУКЕН (1907)", KeySeq["J"]),
+			["glagolitic_c_let_sha", "glagolitic_s_let_sha"], Map(
+				"ЙЦУКЕН", KeySeq["I"], "Диктор", KeySeq["["], "ЙІУКЕН (1907)", KeySeq["I"]),
+			["glagolitic_c_let_onu", "glagolitic_s_let_onu"], Map(
+				"ЙЦУКЕН", KeySeq["J"], "Диктор", KeySeq["F"], "ЙІУКЕН (1907)", KeySeq["K"]),
+			["glagolitic_c_let_otu", "glagolitic_s_let_otu"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", KeySeq["J"], "Диктор", KeySeq["F"], "ЙІУКЕН (1907)", KeySeq["K"]),
+			["glagolitic_c_let_big_yus", "glagolitic_s_let_big_yus"], Map("Modifier", "<!",
+				"ЙЦУКЕН", KeySeq["J"], "Диктор", KeySeq["F"], "ЙІУКЕН (1907)", KeySeq["K"]),
+			["glagolitic_c_let_ljudije", "glagolitic_s_let_ljudije"], Map(
+				"ЙЦУКЕН", KeySeq["K"], "Диктор", KeySeq["H"], "ЙІУКЕН (1907)", KeySeq["L"]),
+			["glagolitic_c_let_dobro", "glagolitic_s_let_dobro"], Map(
+				"ЙЦУКЕН", KeySeq["L"], "Диктор", KeySeq["O"], "ЙІУКЕН (1907)", KeySeq[";"]),
+			["glagolitic_c_let_yeri", "glagolitic_s_let_yeri"], Map(
+				"ЙЦУКЕН", KeySeq["M"], "Диктор", KeySeq["W"], "ЙІУКЕН (1907)", KeySeq[","]),
+			["glagolitic_c_let_tvrido", "glagolitic_s_let_tvrido"], Map(
+				"ЙЦУКЕН", KeySeq["N"], "Диктор", KeySeq["K"], "ЙІУКЕН (1907)", KeySeq["M"]),
+			["glagolitic_c_let_shta", "glagolitic_s_let_shta"], Map(
+				"ЙЦУКЕН", KeySeq["O"], "Диктор", KeySeq["]"], "ЙІУКЕН (1907)", KeySeq["O"]),
+			["glagolitic_c_let_zemlja", "glagolitic_s_let_zemlja"], Map(
+				"ЙЦУКЕН", KeySeq["P"], "Диктор", KeySeq["Y"], "ЙІУКЕН (1907)", KeySeq["P"]),
+			["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], Map(
+				"ЙЦУКЕН", KeySeq["Q"], "Диктор", KeySeq["'"], "ЙІУКЕН (1907)", KeySeq["Q"]),
+			["glagolitic_c_let_kako", "glagolitic_c_let_kako"], Map(
+				"ЙЦУКЕН", KeySeq["R"], "Диктор", KeySeq["I"], "ЙІУКЕН (1907)", KeySeq["R"]),
+			["glagolitic_c_let_yery", "glagolitic_s_let_yery"], Map(
+				"ЙЦУКЕН", KeySeq["S"], "Диктор", KeySeq["V"], "ЙІУКЕН (1907)", KeySeq["S"]),
+			["glagolitic_c_let_yestu", "glagolitic_s_let_yestu"], Map(
+				"ЙЦУКЕН", KeySeq["T"], "Диктор", KeySeq["D"], "ЙІУКЕН (1907)", KeySeq["T"]),
+			["glagolitic_c_let_glagoli", "glagolitic_s_let_glagoli"], Map(
+				"ЙЦУКЕН", KeySeq["U"], "Диктор", KeySeq["."], "ЙІУКЕН (1907)", KeySeq["U"]),
+			["glagolitic_c_let_myslite", "glagolitic_s_let_myslite"], Map(
+				"ЙЦУКЕН", KeySeq["V"], "Диктор", KeySeq["M"], "ЙІУКЕН (1907)", KeySeq["B"]),
+			["glagolitic_c_let_tsi", "glagolitic_s_let_tsi"], Map(
+				"ЙЦУКЕН", KeySeq["W"], "Диктор", KeySeq["Q"], "ЙІУКЕН (1907)", KeySeq["-"]),
+			["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"], Map(
+				"ЙЦУКЕН", KeySeq["X"], "Диктор", KeySeq["P"], "ЙІУКЕН (1907)", KeySeq["X"]),
+			["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"], Map(
+				"ЙЦУКЕН", KeySeq["Y"], "Диктор", KeySeq["J"], "ЙІУКЕН (1907)", KeySeq["Y"]),
+			["glagolitic_c_let_yati", "glagolitic_s_let_yati"], Map(
+				"ЙЦУКЕН", KeySeq["Z"], "Диктор", KeySeq["E"], "ЙІУКЕН (1907)", KeySeq["Z"]),
+			["glagolitic_c_let_buky", "glagolitic_s_let_buky"], Map(
+				"ЙЦУКЕН", KeySeq[","], "Диктор", KeySeq["N"], "ЙІУКЕН (1907)", KeySeq["."]),
+			["glagolitic_c_let_yu", "glagolitic_s_let_yu"], Map(
+				"ЙЦУКЕН", KeySeq["."], "Диктор", KeySeq["B"], "ЙІУКЕН (1907)", KeySeq["/"]),
+			["glagolitic_c_let_zhivete", "glagolitic_s_let_zhivete"], Map(
+				"ЙЦУКЕН", KeySeq[";"], "Диктор", KeySeq["/"], "ЙІУКЕН (1907)", KeySeq["'"]),
+			["glagolitic_c_let_djervi", "glagolitic_s_let_djervi"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", KeySeq[";"], "Диктор", KeySeq["/"], "ЙІУКЕН (1907)", KeySeq["'"]),
+			["glagolitic_c_let_small_yus", "glagolitic_s_let_small_yus"], Map(
+				"ЙЦУКЕН", KeySeq["'"], "Диктор", KeySeq["X"], "ЙІУКЕН (1907)", KeySeq["="]),
+			["glagolitic_c_let_small_yus_iotified", "glagolitic_s_let_small_yus_iotified"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", KeySeq["'"], "Диктор", KeySeq["X"], "ЙІУКЕН (1907)", KeySeq["="]),
+			["glagolitic_c_let_heru", "glagolitic_s_let_heru"], Map(
+				"ЙЦУКЕН", KeySeq["["], "Диктор", KeySeq["C"], "ЙІУКЕН (1907)", KeySeq["["]),
+			["glagolitic_c_let_spider_ha", "glagolitic_s_let_spider_ha"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", KeySeq["["], "Диктор", KeySeq["C"], "ЙІУКЕН (1907)", KeySeq["["]),
+			["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"], Map("Modifier:Диктор", "<+",
+				"ЙЦУКЕН", KeySeq["]"], "Диктор", KeySeq["W"], "ЙІУКЕН (1907)", KeySeq["C"]),
+			["glagolitic_c_let_shtapic", "glagolitic_s_let_shtapic"], Map("Modifier", "<^>!", "Modifier:Диктор", "<^>!<+",
+				"ЙЦУКЕН", KeySeq["]"], "Диктор", KeySeq["W"], "ЙІУКЕН (1907)", KeySeq["C"]),
+			["glagolitic_c_let_yo", "glagolitic_s_let_yo"], Map(
+				"ЙЦУКЕН", KeySeq["~"], "Диктор", KeySeq["~"], "ЙІУКЕН (1907)", KeySeq["~"]),
+			["glagolitic_c_let_big_yus_iotified", "glagolitic_s_let_big_yus_iotified"], Map("Modifier", "<!",
+				"ЙЦУКЕН", KeySeq["~"], "Диктор", KeySeq["~"], "ЙІУКЕН (1907)", KeySeq["~"]),
+			["kkey_dot", "kkey_dot"], Map(
+				"ЙЦУКЕН", KeySeq["/"], "Диктор", KeySeq["T"], "ЙІУКЕН (1907)", KeySeq["]"]),
+			["kkey_comma", "kkey_comma"], Map("Modifier:ЙЦУКЕН", "<+", "Modifier:ЙІУКЕН", "<+",
+				"ЙЦУКЕН", KeySeq["/"], "Диктор", KeySeq["R"], "ЙІУКЕН (1907)", KeySeq["]"]),
+			["exclamation", "exclamation"], Map("Modifier", "<+",
+				"ЙЦУКЕН", KeySeq["1"], "Диктор", KeySeq["T"], "ЙІУКЕН (1907)", KeySeq["1"]),
+			["question", "question"], Map("Modifier", "<+",
+				"ЙЦУКЕН", KeySeq["7"], "Диктор", KeySeq["R"], "ЙІУКЕН (1907)", KeySeq["7"]),
+			["kkey_hyphen_minus", "kkey_hyphen_minus"], Map("Modifier:ЙІУКЕН", ">+",
+				"ЙЦУКЕН", KeySeq["-"], "Диктор", KeySeq["-"], "ЙІУКЕН (1907)", KeySeq["-"]),
+			["kkey_equals", "kkey_equals"], Map("Modifier:ЙІУКЕН", ">+",
+				"ЙЦУКЕН", KeySeq["="], "Диктор", KeySeq["="], "ЙІУКЕН (1907)", KeySeq["="]),
 		])
 
 		SlotMapping := Map(
