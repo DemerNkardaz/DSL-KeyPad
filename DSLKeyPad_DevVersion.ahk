@@ -1012,14 +1012,14 @@ RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY") {
 		UnregisterKeysLayout()
 
 		if (IsLatin && LayoutName != "QWERTY") || (IsCyrillic && LayoutName != "ЙЦУКЕН") || (IsLatin && ActiveCyrillic != "ЙЦУКЕН") || (IsCyrillic && ActiveLatin != "QWERTY") {
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"))
+			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"), True)
 		}
 
 
 		IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
 
 
-		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"))
+		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"), True)
 		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 
 		if IsLettersModeEnabled {
@@ -1274,6 +1274,14 @@ MapPush(MapObj, Pairs*) {
 			key := pair
 		} else {
 			MapObj[key] := pair
+		}
+	}
+}
+
+MapMerge(TargetMap, MapObjects*) {
+	for mapObj in MapObjects {
+		for entry, value in mapObj {
+			TargetMap[entry] := value
 		}
 	}
 }
@@ -2855,17 +2863,17 @@ MapInsert(Characters,
 		"three_emdash", {
 			unicode: "{U+2E3B}", html: "&#11835;",
 			tags: ["three-em dash", "тройное тире"],
-			group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "3"],
+			group: [["Dashes", "Smelting Special", "Special Fast Left"], "3"],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: "c* [-]",
+			alt_on_fast_keys: "[-]",
 			recipe: ["-----", "3-"],
 		},
 		"two_emdash", {
 			unicode: "{U+2E3A}", html: "&#11834;",
 			tags: ["two-em dash", "двойное тире"],
-			group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "4"],
+			group: [["Dashes", "Smelting Special", "Special Fast Left"], "4"],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: "c*<+ [-]",
+			alt_on_fast_keys: "c* [-]",
 			recipe: ["----", "2-"],
 		},
 		"softhyphen", {
@@ -10656,17 +10664,17 @@ Constructor() {
 	Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
 	Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
 	Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
-	Command_extralayouts := CommandsTree.Add(ReadLocale("func_label_extralayouts"))
-	Command_glagokeys := CommandsTree.Add(ReadLocale("func_label_glagokeys"), Command_extralayouts)
-	Command_oldturkic := CommandsTree.Add(ReadLocale("func_label_oldturkic"), Command_extralayouts)
-	Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_oldhungary"), Command_extralayouts)
+	Command_extralayouts := CommandsTree.Add(ReadLocale("func_label_scripts"))
+	Command_glagokeys := CommandsTree.Add(ReadLocale("func_label_glagolitic_futhark"), Command_extralayouts)
+	Command_oldturkic := CommandsTree.Add(ReadLocale("func_label_old_permic_old_turkic"), Command_extralayouts)
+	Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_old_hungarian"), Command_extralayouts)
 	Command_gothic := CommandsTree.Add(ReadLocale("func_label_gothic"), Command_extralayouts)
 	Command_func_label_ipa := CommandsTree.Add(ReadLocale("func_label_ipa"), Command_extralayouts)
 	Command_combining := CommandsTree.Add(ReadLocale("func_label_combining"))
-	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_inputtoggle"))
-	Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layouttoggle"))
-	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifs"))
-	Command_textprocessing := CommandsTree.Add(ReadLocale("func_label_textprocessing"))
+	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_input_toggle"))
+	Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layout_toggle"))
+	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifications"))
+	Command_textprocessing := CommandsTree.Add(ReadLocale("func_label_text_processing"))
 	Command_tp_paragraph := CommandsTree.Add(ReadLocale("func_label_tp_paragraph"), Command_textprocessing)
 	Command_tp_grep := CommandsTree.Add(ReadLocale("func_label_tp_grep"), Command_textprocessing)
 	Command_tp_quotes := CommandsTree.Add(ReadLocale("func_label_tp_quotes"), Command_textprocessing)
@@ -11358,18 +11366,17 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_num_superscript",
 		"func_label_num_roman",
 		"func_label_fastkeys",
-		"func_label_extralayouts",
+		"func_label_scripts",
 		"func_label_combining",
-		"func_label_glagokeys",
-		"func_label_oldturkic",
-		"func_label_oldhungary",
-		"func_label_oldhungary",
+		"func_label_glagolitic_futhark",
+		"func_label_old_permic_old_turkic",
+		"func_label_old_hungarian",
 		"func_label_gothic",
 		"func_label_ipa",
-		"func_label_inputtoggle",
-		"func_label_layouttoggle",
-		"func_label_notifs",
-		"func_label_textprocessing",
+		"func_label_input_toggle",
+		"func_label_layout_toggle",
+		"func_label_notifications",
+		"func_label_text_processing",
 		"func_label_tp_quotes",
 		"func_label_tp_paragraph",
 		"func_label_tp_grep",
@@ -11480,7 +11487,7 @@ CheckYITSUKEN() {
 
 ToggleFastKeys() {
 	LanguageCode := GetLanguageCode()
-	global FastKeysIsActive, ConfigFile
+	global FastKeysIsActive, ActiveScriptName, ConfigFile
 	FastKeysIsActive := !FastKeysIsActive
 	IniWrite (FastKeysIsActive ? "True" : "False"), ConfigFile, "Settings", "FastKeysIsActive"
 
@@ -11496,6 +11503,11 @@ ToggleFastKeys() {
 
 	Sleep 5
 	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
+	IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
+	if IsLettersModeEnabled {
+		ActiveScriptName := ""
+		ToggleLetterScript(True, IsLettersModeEnabled)
+	}
 	return
 }
 
@@ -12029,11 +12041,12 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["Equals"], (K) => HandleFastKey(K, "noequals"),
 			"<^>!>+" UseKey["Equals"], (K) => HandleFastKey(K, "almostequals"),
 			"<^>!<+" UseKey["Equals"], (K) => HandleFastKey(K, "plusminus"),
-			"<^>!" UseKey["Minus"], (K) => CapsSeparatedKey(K, "three_emdash", "emdash"),
-			"<^>!<+" UseKey["Minus"], (K) => CapsSeparatedKey(K, "two_emdash", "endash"),
-			"<^>!<!" UseKey["Minus"], (K) => CapsSeparatedKey(K, "", "hyphen"),
-			"<^>!<!<+" UseKey["Minus"], (K) => CapsSeparatedKey(K, "", "no_break_hyphen"),
-			"<^>!<!>+" UseKey["Minus"], (K) => CapsSeparatedKey(K, "", "figure_dash"),
+			"<^>!" UseKey["Minus"], (K) => HandleFastKey(K, "emdash"),
+			"<^>!<+" UseKey["Minus"], (K) => HandleFastKey(K, "endash"),
+			"<!" UseKey["Minus"], (K) => CapsSeparatedKey(K, "two_emdash", "three_emdash"),
+			"<^>!<!" UseKey["Minus"], (K) => HandleFastKey(K, "hyphen"),
+			"<^>!<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "no_break_hyphen"),
+			"<^>!<!>+" UseKey["Minus"], (K) => HandleFastKey(K, "figure_dash"),
 			"<^>!" UseKey["Slash"], (K) => HandleFastKey(K, "ellipsis"),
 			"<^>!>+" UseKey["Slash"], (K) => HandleFastKey(K, "fraction_slash"),
 			"<^>!" UseKey["8"], (K) => HandleFastKey(K, "multiplication"),
@@ -12289,6 +12302,34 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 
 		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots)
+
+		if FastKeysIsActive {
+			LayoutArray.Push(
+				"<^<!" UseKey["Minus"], (K) => HandleFastKey(K, "softhyphen"),
+				"<^<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "minus"),
+				"<^>!" UseKey["Minus"], (K) => HandleFastKey(K, "emdash"),
+				"<^>!<+" UseKey["Minus"], (K) => HandleFastKey(K, "endash"),
+				"<!" UseKey["Minus"], (K) => CapsSeparatedKey(K, "two_emdash", "three_emdash"),
+				"<^>!" UseKey["Equals"], (K) => HandleFastKey(K, "noequals"),
+				"<^>!>+" UseKey["Equals"], (K) => HandleFastKey(K, "almostequals"),
+				"<^>!<+" UseKey["Equals"], (K) => HandleFastKey(K, "plusminus"),
+				"<^>!<!" UseKey["Minus"], (K) => HandleFastKey(K, "hyphen"),
+				"<^>!<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "no_break_hyphen"),
+				"<^>!<!>+" UseKey["Minus"], (K) => HandleFastKey(K, "figure_dash"),
+				"<^>!" UseKey["Slash"], (K) => HandleFastKey(K, "ellipsis"),
+				"<^>!>+" UseKey["Slash"], (K) => HandleFastKey(K, "fraction_slash"),
+				"<^>!" UseKey["8"], (K) => HandleFastKey(K, "multiplication"),
+				"<^>!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet"),
+				"<^>!<!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet_hyphen"),
+				"<^>!<+" UseKey["Tilde"], (K) => HandleFastKey(K, "interpunct"),
+				"<^>!<!>+" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet_white"),
+				"<!" UseKey["D"], (K) => HandleFastKey(K, "degree"),
+				"<^>!<!" UseKey["0"], (K) => HandleFastKey(K, "infinity"),
+				"<^>!" UseKey["5"], (K) => HandleFastKey(K, "permille"),
+				"<^>!<+" UseKey["5"], (K) => HandleFastKey(K, "pertenthousand"),
+				">+" UseKey["Tilde"], (K) => HandleFastKey(K, "tilde_reversed"),
+			)
+		}
 
 		return LayoutArray
 	} else if Combinations = "NonQWERTY" {
@@ -13180,7 +13221,7 @@ ManageTrayItems() {
 		"hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "3",
 		"gothic", ReadLocale("tray_func_gothic") "`t" RightControl "4",
 		"ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
-		"script", ReadLocale("func_label_extralayouts")
+		"script", ReadLocale("func_label_scripts")
 	)
 
 	CurrentApp := "DSL KeyPad " . CurrentVersionString
