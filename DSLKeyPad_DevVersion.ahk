@@ -11851,9 +11851,10 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		return SlotKey
 	}
 
-	GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, CommonMode := False, ReverseCaps := False, SlotKeys := "", SlotMods := "") {
-		if SlotKeys = ""
+	GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, CommonMode := False, SetReverseCaps := False, SlotKeys := "", SlotMods := "") {
+		if SlotKeys = "" {
 			SlotKeys := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ",", ".", "~", "-", "=", "[", "]", "'", "/", "\", "Space", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+		}
 
 		if SlotMods = "" {
 			SlotMods := ["+"]
@@ -11863,44 +11864,21 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		}
 
 		TempArray := []
-		for label, value in SlotMapping {
-			try {
-				SlotMappingBridge(label, value)
-			} catch {
-				continue
-			}
-		}
-
-		for slotLabel, value in SlotModdedMapping {
-			for moddedSlot, subValue in value {
+		if IsObject(SlotMapping) {
+			for label, value in SlotMapping {
 				try {
-					SlotMappingBridge(slotLabel, subValue, moddedSlot, ReverseCaps)
+					SlotMappingBridge(label, value)
 				} catch {
 					continue
 				}
 			}
 		}
 
-		for label in SlotKeys {
-			for modifier in SlotMods {
-
-				Found := False
-				for i, pair in TempArray {
-					if Mod(i, 2) == 1 {
-						try {
-							if pair = modifier UseKey[ValidateSlotPairs(label)] {
-								Found := True
-								break
-							}
-						} catch {
-							continue
-						}
-					}
-				}
-				if (!Found) {
+		if IsObject(SlotModdedMapping) {
+			for slotLabel, value in SlotModdedMapping {
+				for moddedSlot, subValue in value {
 					try {
-						if modifier != ""
-							SlotMappingBridge(label, "", modifier)
+						SlotMappingBridge(slotLabel, subValue, moddedSlot, SetReverseCaps)
 					} catch {
 						continue
 					}
@@ -11908,11 +11886,51 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			}
 		}
 
-		SlotMappingBridge(SlotLabel, SlotValue, SlotModifier := "", ReverseCaps := False) {
+		if IsObject(SlotKeys) && IsObject(SlotMods) {
+			for label in SlotKeys {
+				for modifier in SlotMods {
+
+					Found := False
+					for i, pair in TempArray {
+						if Mod(i, 2) == 1 {
+							try {
+								if pair = modifier UseKey[ValidateSlotPairs(label)] {
+									Found := True
+									break
+								}
+							} catch {
+								continue
+							}
+						}
+					}
+					if (!Found) {
+						try {
+							if modifier != ""
+								SlotMappingBridge(label, "", modifier)
+						} catch {
+							continue
+						}
+					}
+				}
+			}
+		}
+
+		SlotMappingBridge(SlotLabel, SlotValue, SlotModifier := "", ReverseCaps := False, HotKeyVariant := "") {
 			ValidateLabel := ValidateSlotPairs(SlotLabel)
 			Label := SlotModifier != "" ? SlotModifier UseKey[ValidateLabel] : UseKey[ValidateLabel]
 			Slot := SlotModifier != "" ? SlotMod(SlotLabel, Slots, SlotModifier) : Slots.Has(SlotLabel) ? Slots[SlotLabel] : ""
-			TempArray.Push(Label, (K) => LangSeparatedKey(K, SlotValue, Slot, True, ReverseCaps))
+
+			if HotKeyVariant = "Flat" {
+				if IsObject(Slot) {
+					GetCount := Slot.Length
+
+				} else {
+					TempArray.Push(Label, (K) => HandleFastKey(K, Slot))
+				}
+			} else if HotKeyVariant = "Caps" {
+			} else {
+				TempArray.Push(Label, (K) => LangSeparatedKey(K, SlotValue, Slot, True, ReverseCaps))
+			}
 		}
 
 		return TempArray
