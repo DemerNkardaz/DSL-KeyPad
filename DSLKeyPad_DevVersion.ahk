@@ -11873,7 +11873,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			if Mod(i, 2) = 1 {
 				Characters := pair
 				InsertingSlot := CyrillicSlots[i + 1][CyrillicLayout][LetterID]
-				MapPush(TempMap, InsertingSlot, Characters)
+				Modifier := CyrillicSlots[i + 1].Has("Modifier") ? CyrillicSlots[i + 1]["Modifier"] : ""
+				MapPush(TempMap, Modifier InsertingSlot, Characters)
 			}
 		}
 
@@ -11882,7 +11883,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 
 	if Combinations = "FastKeys" {
-		FastArray := [
+		LayoutArray := [
 			"<^<!" UseKey["A"], (K) => HandleFastKey(K, "acute"),
 			"<^<+<!" UseKey["A"], (K) => HandleFastKey(K, "acute_double"),
 			"<^<!" UseKey["B"], (K) => HandleFastKey(K, "breve"),
@@ -12141,31 +12142,15 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		]
 
 		if CyrillicLayout = "Диктор" {
-			FastArray.Push()
-			FastArray.Push()
+			LayoutArray.Push()
+			LayoutArray.Push()
 		}
-
-		return FastArray
 	} else if Combinations = "Glagolitic Futhark" {
 		Slots3 := Map()
 
 		if CyrillicLayout = "ЙЦУКЕН" {
 			if LatinLayout = "QWERTY" {
 				MapPush(Slots3,
-					"A", ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"],
-					"<^>!A", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"],
-					"B", ["glagolitic_c_let_i", "glagolitic_s_let_i"],
-					"<^>!B", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"],
-					"<+B", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"],
-					"<^>!<+B", ["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"],
-					"C", ["glagolitic_c_let_slovo", "glagolitic_s_let_slovo"],
-					"<^>!C", ["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"],
-					"D", ["glagolitic_c_let_vede", "glagolitic_s_let_vede"],
-					"E", ["glagolitic_c_let_uku", "glagolitic_s_let_uku"],
-					"F", ["glagolitic_c_let_az", "glagolitic_s_let_az"],
-					"<^>!F", ["glagolitic_c_let_trokutasti_a", "glagolitic_s_let_trokutasti_a"],
-					"G", ["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"],
-					"<^>!G", ["glagolitic_c_let_pe", "glagolitic_s_let_pe"],
 					"H", ["glagolitic_c_let_ritsi", "glagolitic_s_let_ritsi"],
 					"I", ["glagolitic_c_let_sha", "glagolitic_s_let_sha"],
 					"J", ["glagolitic_c_let_onu", "glagolitic_s_let_onu"],
@@ -12209,16 +12194,32 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		Slots := GetLayoutImprovedCyrillic([
 			["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], Map(
 				"ЙЦУКЕН", ["A", "A", "A"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
-			["glagolitic_c_let_fita", "glagolitic_s_let_fita"], Map(
-				"ЙЦУКЕН", ["<^>!A", "<^>!A", "<^>!A"], "Диктор", ["<^>!G", "<^>!I", "<^>!D"], "ЙІУКЕН (1907)", ["<^>!G", "<^>!I", "<^>!D"]),
+			["glagolitic_c_let_fita", "glagolitic_s_let_fita"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", ["A", "A", "A"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
 			["glagolitic_c_let_i", "glagolitic_s_let_i"], Map(
 				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
-			["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"], Map(
-				"ЙЦУКЕН", ["<^>!B", "<^>!X", "<^>!B"], "Диктор", ["<^>!S", "<^>!O", "<^>!R"], "ЙІУКЕН (1907)", ["<^>!N", "<^>!B", "<^>!K"]),
-			["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], Map(
-				"ЙЦУКЕН", ["<+B", "<+X", "<+B"], "Диктор", ["<+S", "<+O", "<+R"], "ЙІУКЕН (1907)", ["<+N", "<+B", "<+K"]),
-			["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"], Map(
-				"ЙЦУКЕН", ["<^>!<+B", "<^>!<+X", "<^>!<+B"], "Диктор", ["<^>!<+S", "<^>!<+O", "<^>!<+R"], "ЙІУКЕН (1907)", ["<^>!<+N", "<^>!<+B", "<^>!<+K"]),
+			["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
+			["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], Map("Modifier", "<+",
+				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
+			["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"], Map("Modifier", "<^>!<+",
+				"ЙЦУКЕН", ["B", "X", "B"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["N", "B", "K"]),
+			["glagolitic_c_let_slovo", "glagolitic_s_let_slovo"], Map(
+				"ЙЦУКЕН", ["C", "J", "C"], "Диктор", ["L", "N", "I"], "ЙІУКЕН (1907)", ["V", "K", "V"]),
+			["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", ["C", "J", "C"], "Диктор", ["L", "N", "I"], "ЙІУКЕН (1907)", ["V", "K", "V"]),
+			["glagolitic_c_let_vede", "glagolitic_c_let_vede"], Map(
+				"ЙЦУКЕН", ["D", "E", "S"], "Диктор", ["U", "G", "L"], "ЙІУКЕН (1907)", ["D", "E", "S"]),
+			["glagolitic_c_let_uku", "glagolitic_s_let_uku"], Map(
+				"ЙЦУКЕН", ["E", ".", "F"], "Диктор", ["S", "O", "R"], "ЙІУКЕН (1907)", ["E", ".", "F"]),
+			["glagolitic_c_let_az", "glagolitic_s_let_az"], Map(
+				"ЙЦУКЕН", ["F", "U", "T"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
+			["glagolitic_c_let_trokutasti_a", "glagolitic_s_let_trokutasti_a"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", ["F", "U", "T"], "Диктор", ["G", "I", "D"], "ЙІУКЕН (1907)", ["G", "I", "D"]),
+			["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"], Map(
+				"ЙЦУКЕН", ["G", "I", "D"], "Диктор", [",", "W", ","], "ЙІУКЕН (1907)", ["H", "D", "H"]),
+			["glagolitic_c_let_pe", "glagolitic_s_let_pe"], Map("Modifier", "<^>!",
+				"ЙЦУКЕН", ["G", "I", "D"], "Диктор", [",", "W", ","], "ЙІУКЕН (1907)", ["H", "D", "H"]),
 		])
 
 		SlotMapping := Map(
@@ -12302,36 +12303,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 
 		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots)
-
-		if FastKeysIsActive {
-			LayoutArray.Push(
-				"<^<!" UseKey["Minus"], (K) => HandleFastKey(K, "softhyphen"),
-				"<^<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "minus"),
-				"<^>!" UseKey["Minus"], (K) => HandleFastKey(K, "emdash"),
-				"<^>!<+" UseKey["Minus"], (K) => HandleFastKey(K, "endash"),
-				"<!" UseKey["Minus"], (K) => CapsSeparatedKey(K, "two_emdash", "three_emdash"),
-				"<^>!" UseKey["Equals"], (K) => HandleFastKey(K, "noequals"),
-				"<^>!>+" UseKey["Equals"], (K) => HandleFastKey(K, "almostequals"),
-				"<^>!<+" UseKey["Equals"], (K) => HandleFastKey(K, "plusminus"),
-				"<^>!<!" UseKey["Minus"], (K) => HandleFastKey(K, "hyphen"),
-				"<^>!<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "no_break_hyphen"),
-				"<^>!<!>+" UseKey["Minus"], (K) => HandleFastKey(K, "figure_dash"),
-				"<^>!" UseKey["Slash"], (K) => HandleFastKey(K, "ellipsis"),
-				"<^>!>+" UseKey["Slash"], (K) => HandleFastKey(K, "fraction_slash"),
-				"<^>!" UseKey["8"], (K) => HandleFastKey(K, "multiplication"),
-				"<^>!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet"),
-				"<^>!<!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet_hyphen"),
-				"<^>!<+" UseKey["Tilde"], (K) => HandleFastKey(K, "interpunct"),
-				"<^>!<!>+" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet_white"),
-				"<!" UseKey["D"], (K) => HandleFastKey(K, "degree"),
-				"<^>!<!" UseKey["0"], (K) => HandleFastKey(K, "infinity"),
-				"<^>!" UseKey["5"], (K) => HandleFastKey(K, "permille"),
-				"<^>!<+" UseKey["5"], (K) => HandleFastKey(K, "pertenthousand"),
-				">+" UseKey["Tilde"], (K) => HandleFastKey(K, "tilde_reversed"),
-			)
-		}
-
-		return LayoutArray
 	} else if Combinations = "NonQWERTY" {
 		Slots := Map()
 
@@ -12846,8 +12817,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", Slots["\"], True),
 			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", SlotMod("\", Slots), True, True),
 		]
-
-		return LayoutArray
 	} else if Combinations = "Old Turkic Old Permic" {
 		Slots := Map()
 		LayoutArray := [
@@ -12864,7 +12833,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["Dot"], (K) => LangSeparatedKey(K, "runic_single_punctuation", ["", ""], True),
 			"<^>!" UseKey["Space"], (K) => LangSeparatedKey(K, "runic_multiple_punctuation", ["", ""], True),
 		]
-		return LayoutArray
 	} else if Combinations = "Gothic" {
 		LayoutArray := [
 			UseKey["A"], (K) => LangSeparatedKey(K, "gothic_ahza", "", True),
@@ -12902,9 +12870,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["Dot"], (K) => LangSeparatedKey(K, "runic_single_punctuation", ["", ""], True),
 			"<^>!" UseKey["Space"], (K) => LangSeparatedKey(K, "runic_multiple_punctuation", ["", ""], True),
 		]
-		return LayoutArray
 	} else if Combinations = "IPA" {
-		IPAArray := [
+		LayoutArray := [
 			UseKey["C"], (K) => HandleFastKey(K, "lat_s_let_c_curl"),
 			UseKey["D"], (K) => HandleFastKey(K, "lat_s_let_d_eth"),
 			UseKey["I"], (K) => HandleFastKey(K, "lat_s_c_let_i"),
@@ -12914,16 +12881,14 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		Loop 26
 		{
 			Letter := Chr(65 + A_Index - 1)
-			IPAArray.Push("<+" UseKey[Letter])
-			IPAArray.Push(CreateFastKeyHandler(Letter))
+			LayoutArray.Push("<+" UseKey[Letter])
+			LayoutArray.Push(CreateFastKeyHandler(Letter))
 		}
 		CreateFastKeyHandler(Letter) {
 			return (K) => HandleFastKey(K, "lat_s_let_" StrLower(Letter))
 		}
-
-		return IPAArray
 	} else if Combinations = "Cleanscript" {
-		return [
+		LayoutArray := [
 			UseKey["1"], "Off",
 			UseKey["2"], "Off",
 			UseKey["3"], "Off",
@@ -12941,7 +12906,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<+" UseKey["Equals"], "Off",
 		]
 	} else if Combinations = "Supercript" {
-		return [
+		LayoutArray := [
 			UseKey["1"], (K) => HandleFastKey(K, "num_sup_1"),
 			UseKey["2"], (K) => HandleFastKey(K, "num_sup_2"),
 			UseKey["3"], (K) => HandleFastKey(K, "num_sup_3"),
@@ -12959,7 +12924,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<+" UseKey["Equals"], (K) => HandleFastKey(K, "num_sup_plus"),
 		]
 	} else if Combinations = "Subscript" {
-		return [
+		LayoutArray := [
 			UseKey["1"], (K) => HandleFastKey(K, "num_sub_1"),
 			UseKey["2"], (K) => HandleFastKey(K, "num_sub_2"),
 			UseKey["3"], (K) => HandleFastKey(K, "num_sub_3"),
@@ -12977,7 +12942,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<+" UseKey["Equals"], (K) => HandleFastKey(K, "num_sub_plus"),
 		]
 	} else if Combinations = "Utility" {
-		return [
+		LayoutArray := [
 			"<#<!" UseKey["F1"], (*) => GroupActivator("Diacritics Primary", "F1"),
 			"<#<!" UseKey["F2"], (*) => GroupActivator("Diacritics Secondary", "F2"),
 			"<#<!" UseKey["F3"], (*) => GroupActivator("Diacritics Tertiary", "F3"),
@@ -13030,6 +12995,36 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			;
 		]
 	}
+
+	if FastKeysIsActive && Combinations != "FastKeys" {
+		LayoutArray.Push(
+			"<^<!" UseKey["Minus"], (K) => HandleFastKey(K, "softhyphen"),
+			"<^<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "minus"),
+			"<^>!" UseKey["Minus"], (K) => HandleFastKey(K, "emdash"),
+			"<^>!<+" UseKey["Minus"], (K) => HandleFastKey(K, "endash"),
+			"<!" UseKey["Minus"], (K) => CapsSeparatedKey(K, "two_emdash", "three_emdash"),
+			"<^>!" UseKey["Equals"], (K) => HandleFastKey(K, "noequals"),
+			"<^>!>+" UseKey["Equals"], (K) => HandleFastKey(K, "almostequals"),
+			"<^>!<+" UseKey["Equals"], (K) => HandleFastKey(K, "plusminus"),
+			"<^>!<!" UseKey["Minus"], (K) => HandleFastKey(K, "hyphen"),
+			"<^>!<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "no_break_hyphen"),
+			"<^>!<!>+" UseKey["Minus"], (K) => HandleFastKey(K, "figure_dash"),
+			"<^>!" UseKey["Slash"], (K) => HandleFastKey(K, "ellipsis"),
+			"<^>!>+" UseKey["Slash"], (K) => HandleFastKey(K, "fraction_slash"),
+			"<^>!" UseKey["8"], (K) => HandleFastKey(K, "multiplication"),
+			"<^>!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet"),
+			"<^>!<!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet_hyphen"),
+			"<^>!<+" UseKey["Tilde"], (K) => HandleFastKey(K, "interpunct"),
+			"<^>!<!>+" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet_white"),
+			"<!" UseKey["D"], (K) => HandleFastKey(K, "degree"),
+			"<^>!<!" UseKey["0"], (K) => HandleFastKey(K, "infinity"),
+			"<^>!" UseKey["5"], (K) => HandleFastKey(K, "permille"),
+			"<^>!<+" UseKey["5"], (K) => HandleFastKey(K, "pertenthousand"),
+			">+" UseKey["Tilde"], (K) => HandleFastKey(K, "tilde_reversed"),
+		)
+	}
+
+	return LayoutArray
 }
 
 RecoveryKey(KeySC, Shift := False) {
