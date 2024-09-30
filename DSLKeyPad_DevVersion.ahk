@@ -12245,7 +12245,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"ЙЦУКЕН", KeySeq["C"], "Диктор", KeySeq["L"], "ЙІУКЕН (1907)", KeySeq["V"]),
 			["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"], Map("Modifier", "<^>!",
 				"ЙЦУКЕН", KeySeq["C"], "Диктор", KeySeq["L"], "ЙІУКЕН (1907)", KeySeq["V"]),
-			["glagolitic_c_let_vede", "glagolitic_c_let_vede"], Map(
+			["glagolitic_c_let_vede", "glagolitic_s_let_vede"], Map(
 				"ЙЦУКЕН", KeySeq["D"], "Диктор", KeySeq["U"], "ЙІУКЕН (1907)", KeySeq["D"]),
 			["glagolitic_c_let_uku", "glagolitic_s_let_uku"], Map(
 				"ЙЦУКЕН", KeySeq["E"], "Диктор", KeySeq["A"], "ЙІУКЕН (1907)", KeySeq["E"]),
@@ -12281,7 +12281,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"ЙЦУКЕН", KeySeq["P"], "Диктор", KeySeq["Y"], "ЙІУКЕН (1907)", KeySeq["P"]),
 			["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"], Map(
 				"ЙЦУКЕН", KeySeq["Q"], "Диктор", KeySeq["'"], "ЙІУКЕН (1907)", KeySeq["Q"]),
-			["glagolitic_c_let_kako", "glagolitic_c_let_kako"], Map(
+			["glagolitic_c_let_kako", "glagolitic_s_let_kako"], Map(
 				"ЙЦУКЕН", KeySeq["R"], "Диктор", KeySeq["I"], "ЙІУКЕН (1907)", KeySeq["R"]),
 			["glagolitic_c_let_yery", "glagolitic_s_let_yery"], Map(
 				"ЙЦУКЕН", KeySeq["S"], "Диктор", KeySeq["V"], "ЙІУКЕН (1907)", KeySeq["S"]),
@@ -12295,7 +12295,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"ЙЦУКЕН", KeySeq["W"], "Диктор", KeySeq["Q"], "ЙІУКЕН (1907)", KeySeq["-"]),
 			["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"], Map(
 				"ЙЦУКЕН", KeySeq["X"], "Диктор", KeySeq["P"], "ЙІУКЕН (1907)", KeySeq["X"]),
-			["glagolitic_c_let_nash", "glagolitic_s_let_nash"], Map(
+			["glagolitic_c_let_nashi", "glagolitic_s_let_nashi"], Map(
 				"ЙЦУКЕН", KeySeq["Y"], "Диктор", KeySeq["J"], "ЙІУКЕН (1907)", KeySeq["Y"]),
 			["glagolitic_c_let_yati", "glagolitic_s_let_yati"], Map(
 				"ЙЦУКЕН", KeySeq["Z"], "Диктор", KeySeq["E"], "ЙІУКЕН (1907)", KeySeq["Z"]),
