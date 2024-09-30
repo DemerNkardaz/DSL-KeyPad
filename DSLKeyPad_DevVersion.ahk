@@ -11757,12 +11757,61 @@ UnregisterHotKeys(Bindings) {
 	}
 }
 
+
 GetKeyBindings(UseKey, Combinations := "FastKeys") {
 	LatinLayout := CheckQWERTY()
 	CyrillicLayout := CheckYITSUKEN()
+
 	SlotMod(SlotsKey, Mode := "+") {
 		return Slots.Has(Mode SlotsKey) ? Slots[Mode SlotsKey] : Slots[SlotsKey]
 	}
+
+	GetBindingsArray(SlotMapping, SlotModdedMapping, SlotKeys := "", SlotMods := "") {
+		if SlotKeys = ""
+			SlotKeys := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ",", ".", "~", "-", "=", "[", "]", "'"]
+
+		if SlotMods = ""
+			SlotMods := ["<!", "<+", ">+", "<^>!", "<^>!<+", "<^>!<!", "<^>!<!>+"]
+
+		TempArray := []
+		for label, value in SlotMapping {
+			SlotMappingBridge(label, value)
+		}
+
+		for slotLabel, value in SlotModdedMapping {
+			for moddedSlot, subValue in value {
+				SlotMappingBridge(slotLabel, subValue, moddedSlot)
+			}
+		}
+
+		for label in SlotKeys {
+			for modifier in SlotMods {
+
+				Found := False
+				for i, pair in TempArray {
+					if Mod(i, 2) == 1 {
+						if pair = modifier UseKey[label] {
+							Found := True
+							break
+						}
+					}
+				}
+				if (!Found) {
+					SlotMappingBridge(label, "", modifier)
+				}
+			}
+		}
+
+		SlotMappingBridge(SlotLabel, SlotValue, SlotModifier := "") {
+			Label := SlotModifier != "" ? SlotModifier UseKey[SlotLabel] : UseKey[SlotLabel]
+			Slot := SlotModifier != "" ? SlotMod(SlotLabel, SlotModifier) : Slots[SlotLabel]
+			TempArray.Push(Label, (K) => LangSeparatedKey(K, SlotValue, Slot, True))
+		}
+
+		return TempArray
+	}
+
+
 	if Combinations = "FastKeys" {
 		FastArray := [
 			"<^<!" UseKey["A"], (K) => HandleFastKey(K, "acute"),
@@ -12085,54 +12134,63 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				)
 			} else if LatinLayout = "Dvorak" {
 				MapPush(Slots,
-					"A", ["cyr_c_let_f", "cyr_s_let_f"],
-					"X", ["cyr_c_let_и", "cyr_s_let_и"],
-					"J", ["cyr_c_let_s", "cyr_s_let_s"],
-					"E", ["cyr_c_let_v", "cyr_s_let_v"],
-					".", ["cyr_c_let_u", "cyr_s_let_u"],
-					"+.", ["cyr_c_let_u", "cyr_s_let_u"],
-					"U", ["cyr_c_let_a", "cyr_s_let_a"],
-					"I", ["cyr_c_let_p", "cyr_s_let_p"],
-					"D", ["cyr_c_let_r", "cyr_s_let_r"],
-					"C", ["cyr_c_let_sh", "cyr_s_let_sh"],
-					"H", ["cyr_c_let_o", "cyr_s_let_o"],
-					"T", ["cyr_c_let_l", "cyr_s_let_l"],
-					"N", ["cyr_c_let_d", "cyr_s_let_d"],
-					"M", ["cyr_c_let_yeri", "cyr_s_let_yeri"],
-					"B", ["cyr_c_let_t", "cyr_s_let_t"],
-					"R", ["cyr_c_let_shch", "cyr_s_let_shch"],
-					"L", ["cyr_c_let_z", "cyr_s_let_z"],
-					"'", ["cyr_c_let_iy", "cyr_s_let_iy"],
-					"+'", ["cyr_c_let_iy", "cyr_s_let_iy"],
-					"P", ["cyr_c_let_k", "cyr_s_let_k"],
-					"O", ["cyr_c_let_yery", "cyr_s_let_yery"],
-					"Y", ["cyr_c_let_e", "cyr_s_let_e"],
-					"G", ["cyr_c_let_g", "cyr_s_let_g"],
-					"K", ["cyr_c_let_m", "cyr_s_let_m"],
-					",", ["cyr_c_let_ts", "cyr_s_let_ts"],
-					"+,", ["cyr_c_let_ts", "cyr_s_let_ts"],
-					"Q", ["cyr_c_let_ch", "cyr_s_let_ch"],
-					"F", ["cyr_c_let_n", "cyr_s_let_n"],
-					";", ["cyr_c_let_ya", "cyr_s_let_ya"],
-					"+;", ["cyr_c_let_ya", "cyr_s_let_ya"],
-					"W", ["cyr_c_let_b", "cyr_s_let_b"],
-					"V", ["cyr_c_let_yu", "cyr_s_let_yu"],
-					"S", ["cyr_c_let_zh", "cyr_s_let_zh"],
-					"-", ["cyr_c_let_э", "cyr_s_let_э"],
-					"+-", ["cyr_c_let_э", "cyr_s_let_э"],
-					"/", ["cyr_c_let_h", "cyr_s_let_h"],
-					"+/", ["cyr_c_let_h", "cyr_s_let_h"],
-					"=", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
-					"+=", ["cyr_c_let_yeru", "cyr_s_let_yeru"],
-					"~", ["cyr_c_let_yo", "cyr_s_let_yo"],
-					"Z", "kkey_dot",
-					"+Z", "kkey_comma",
+					"A", ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"],
+					"<^>!A", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"],
+					"X", ["glagolitic_c_let_i", "glagolitic_s_let_i"],
+					"<^>!X", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"],
+					"<+X", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"],
+					"<^>!<+X", ["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"],
+					"J", ["glagolitic_c_let_slovo", "glagolitic_s_let_slovo"],
+					"<^>!J", ["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"],
+					"E", ["glagolitic_c_let_vede", "glagolitic_s_let_vede"],
+					".", ["glagolitic_c_let_uku", "glagolitic_s_let_uku"],
+					"U", ["glagolitic_c_let_az", "glagolitic_s_let_az"],
+					"<^>!U", ["glagolitic_c_let_trokutasti_a", "glagolitic_s_let_trokutasti_a"],
+					"I", ["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"],
+					"<^>!I", ["glagolitic_c_let_pe", "glagolitic_s_let_pe"],
+					"D", ["glagolitic_c_let_ritsi", "glagolitic_s_let_ritsi"],
+					"C", ["glagolitic_c_let_sha", "glagolitic_s_let_sha"],
+					"H", ["glagolitic_c_let_onu", "glagolitic_s_let_onu"],
+					"<^>!H", ["glagolitic_c_let_otu", "glagolitic_s_let_otu"],
+					"<!H", ["glagolitic_c_let_big_yus", "glagolitic_s_let_big_yus"],
+					"T", ["glagolitic_c_let_ljudije", "glagolitic_s_let_ljudije"],
+					"N", ["glagolitic_c_let_dobro", "glagolitic_s_let_dobro"],
+					"M", ["glagolitic_c_let_yeri", "glagolitic_s_let_yeri"],
+					"B", ["glagolitic_c_let_tvrido", "glagolitic_s_let_tvrido"],
+					"R", ["glagolitic_c_let_shta", "glagolitic_s_let_shta"],
+					"L", ["glagolitic_c_let_zemlja", "glagolitic_c_let_zemlja"],
+					"'", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"],
+					"P", ["glagolitic_c_let_kako", "glagolitic_s_let_kako"],
+					"O", ["glagolitic_c_let_yery", "glagolitic_s_let_yery"],
+					"Y", ["glagolitic_c_let_yestu", "glagolitic_s_let_yestu"],
+					"G", ["glagolitic_c_let_glagoli", "glagolitic_s_let_glagoli"],
+					"K", ["glagolitic_c_let_myslite", "glagolitic_s_let_myslite"],
+					",", ["glagolitic_c_let_tsi", "glagolitic_s_let_tsi"],
+					"Q", ["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"],
+					"F", ["glagolitic_c_let_nashi", "glagolitic_s_let_nashi"],
+					";", ["glagolitic_c_let_yati", "glagolitic_s_let_yati"],
+					"W", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"],
+					"+W", ["cyr_c_let_b", "cyr_s_let_b"],
+					"V", ["glagolitic_c_let_yu", "glagolitic_s_let_yu"],
+					"+V", ["cyr_c_let_yu", "cyr_s_let_yu"],
+					"S", ["glagolitic_c_let_zhivete", "glagolitic_s_let_zhivete"],
+					"<^>!S", ["glagolitic_c_let_djervi", "glagolitic_s_let_djervi"],
+					"-", ["glagolitic_c_let_small_yus", "glagolitic_s_let_small_yus"],
+					"<^>!-", ["glagolitic_c_let_small_yus_iotified", "glagolitic_s_let_small_yus_iotified"],
+					"/", ["glagolitic_c_let_heru", "glagolitic_s_let_heru"],
+					"<^>!/", ["glagolitic_c_let_spider_ha", "glagolitic_s_let_spider_ha"],
+					"=", ["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"],
+					"<^>!=", ["glagolitic_c_let_shtapic", "glagolitic_s_let_shtapic"],
+					"~", ["glagolitic_c_let_yo", "glagolitic_s_let_yo"],
+					"<!~", ["glagolitic_c_let_big_yus_iotified", "glagolitic_s_let_big_yus_iotified"],
+					"/", "kkey_dot",
+					"+/", "kkey_comma",
 					"\", "kkey_slash",
 					"+\", "kkey_backslash",
-					"]", "kkey_equals",
-					"+]", "kkey_plus",
-					"[", "kkey_hyphen_minus",
-					"+[", "kkey_underscore",
+					"=", "kkey_equals",
+					"+=", "kkey_plus",
+					"-", "kkey_hyphen_minus",
+					"+-", "kkey_underscore",
 				)
 			} else if LatinLayout = "Colemak" {
 				MapPush(Slots,
@@ -12465,35 +12523,45 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			}
 		}
 
+		TestIingSlots := Map()
+
+		CyrillicSlots := [
+			["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], Map("ЙЦУКЕН", Map("QWERTY", "A")),
+		]
+
+		GetLayoutImprovedCyrillic(CyrillicSlots) {
+			TempMap := Map()
+
+
+			return TempMap
+		}
+
+		SlotMapping := Map(
+			"A", "futhark_ansuz",
+			"B", "futhark_berkanan",
+			"C", "futhork_cen",
+			"D", "futhark_dagaz",
+			"E", "futhark_ehwaz",
+			"F", "futhark_fehu",
+			"G", "futhark_gebo",
+			"H", "futhark_haglaz",
+			"I", "futhark_isaz",
+		)
+
+		SlotModdedMapping := Map(
+			"A", Map("<+", "futhork_as", ">+", "futhork_aesc", "<^>!", "futhark_younger_jera", "<^>!<+", "futhark_younger_jera_short_twig"),
+			"B", Map("<^>!<+", "futhark_younger_bjarkan_short_twig"),
+			"C", Map("<^>!<!", "medieval_c"),
+			"D", Map("<^>!", "futhark_younger_later_eth", "<^>!<+", "futhark_younger_later_d"),
+			"E", Map("<+", "futhork_ear", "<^>!", "futhark_younger_later_e", "<^>!<!", "medieval_en"),
+			"G", Map("<+", "futhork_gar"),
+			"H", Map("<+", "futhork_haegl", "<^>!", "futhark_younger_hagall", "<^>!<+", "futhark_younger_hagall_short_twig"),
+		)
+
+		TestingArray := GetBindingsArray(SlotMapping, SlotModdedMapping)
+
+
 		LayoutArray := [
-			UseKey["A"], (K) => LangSeparatedKey(K, "futhark_ansuz", Slots["A"], True),
-			"<+" UseKey["A"], (K) => LangSeparatedKey(K, "futhork_as", SlotMod("A", "<+"), True),
-			">+" UseKey["A"], (K) => LangSeparatedKey(K, "futhork_aesc", SlotMod("A", ">+"), True),
-			"<^>!" UseKey["A"], (K) => LangSeparatedKey(K, "futhark_younger_jera", SlotMod("A", "<^>!"), True),
-			"<^>!<+" UseKey["A"], (K) => LangSeparatedKey(K, "futhark_younger_jera_short_twig", SlotMod("A", "<^>!<+"), True),
-			UseKey["B"], (K) => LangSeparatedKey(K, "futhark_berkanan", Slots["B"], True),
-			"<^>!" UseKey["B"], (K) => LangSeparatedKey(K, "", SlotMod("B", "<^>!"), True),
-			"<+" UseKey["B"], (K) => LangSeparatedKey(K, "", SlotMod("B", "<+"), True),
-			"<^>!<+" UseKey["B"], (K) => LangSeparatedKey(K, "futhark_younger_bjarkan_short_twig", SlotMod("B", "<^>!<+"), True),
-			UseKey["C"], (K) => LangSeparatedKey(K, "futhork_cen", Slots["C"], True),
-			"<^>!" UseKey["C"], (K) => LangSeparatedKey(K, "", SlotMod("C", "<^>!"), True),
-			"<^>!<!" UseKey["C"], (K) => LangSeparatedKey(K, "medieval_c", SlotMod("C", "<^>!<!"), True),
-			UseKey["D"], (K) => LangSeparatedKey(K, "futhark_dagaz", Slots["D"], True),
-			"<^>!" UseKey["D"], (K) => LangSeparatedKey(K, "futhark_younger_later_eth", SlotMod("D", "<^>!"), True),
-			"<^>!<+" UseKey["D"], (K) => LangSeparatedKey(K, "futhark_younger_later_d", SlotMod("D", "<^>!<+"), True),
-			UseKey["E"], (K) => LangSeparatedKey(K, "futhark_ehwaz", Slots["E"], True),
-			"<+" UseKey["E"], (K) => LangSeparatedKey(K, "futhork_ear", SlotMod("E", "<+"), True),
-			"<^>!" UseKey["E"], (K) => LangSeparatedKey(K, "futhark_younger_later_e", SlotMod("E", "<^>!"), True),
-			"<^>!<!" UseKey["E"], (K) => LangSeparatedKey(K, "medieval_en", SlotMod("E", "<^>!<!"), True),
-			UseKey["F"], (K) => LangSeparatedKey(K, "futhark_fehu", Slots["F"], True),
-			"<^>!" UseKey["F"], (K) => LangSeparatedKey(K, "", SlotMod("F", "<^>!"), True),
-			UseKey["G"], (K) => LangSeparatedKey(K, "futhark_gebo", Slots["G"], True),
-			"<^>!" UseKey["G"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!"), True),
-			"<+" UseKey["G"], (K) => LangSeparatedKey(K, "futhork_gar", SlotMod("G", "<+"), True),
-			UseKey["H"], (K) => LangSeparatedKey(K, "futhark_haglaz", Slots["H"], True),
-			"<+" UseKey["H"], (K) => LangSeparatedKey(K, "futhork_haegl", SlotMod("H", "<+"), True),
-			"<^>!" UseKey["H"], (K) => LangSeparatedKey(K, "futhark_younger_hagall", SlotMod("H", "<^>!"), True),
-			"<^>!<+" UseKey["H"], (K) => LangSeparatedKey(K, "futhark_younger_hagall_short_twig", SlotMod("H", "<^>!<+"), True),
 			UseKey["I"], (K) => LangSeparatedKey(K, "futhark_isaz", Slots["I"], True),
 			">+" UseKey["I"], (K) => LangSeparatedKey(K, "futhark_eihwaz", SlotMod("I", ">+"), True),
 			UseKey["J"], (K) => LangSeparatedKey(K, "futhark_jeran", Slots["J"], True),
@@ -12560,6 +12628,15 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", Slots["]"], True),
 			"<^>!" UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "", SlotMod("]", "<^>!"), True),
 			;
+			UseKey["Equals"], (K) => LangSeparatedKey(K, "kkey_equals", Slots["="], True),
+			"+" UseKey["Equals"], (K) => LangSeparatedKey(K, "kkey_plus", SlotMod("="), True, True),
+			UseKey["Minus"], (K) => LangSeparatedKey(K, "kkey_hyphen_minus", Slots["-"], True),
+			"+" UseKey["Minus"], (K) => LangSeparatedKey(K, "kkey_underscore", SlotMod("-"), True, True),
+			UseKey["Slash"], (K) => LangSeparatedKey(K, "kkey_slash", Slots["/"], True),
+			"+" UseKey["Slash"], (K) => LangSeparatedKey(K, "question", SlotMod("/"), True, True),
+			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", Slots["\"], True),
+			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", SlotMod("\"), True, True),
+			;
 			"<^>!" UseKey["7"], (K) => LangSeparatedKey(K, "futhark_almanac_arlaug", ["", ""], True),
 			"<^>!" UseKey["8"], (K) => LangSeparatedKey(K, "futhark_almanac_tvimadur", ["", ""], True),
 			"<^>!" UseKey["9"], (K) => LangSeparatedKey(K, "futhark_almanac_belgthor", ["", ""], True),
@@ -12567,7 +12644,186 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^<!" UseKey["D"], (K) => HandleFastKey(K, "cyr_com_vzmet"),
 		]
 
-		return LayoutArray
+		LayoutArray2 := [
+			UseKey["A"], (K) => LangSeparatedKey(K, "futhark_ansuz", Slots["A"], True),
+			"<!" UseKey["A"], (K) => LangSeparatedKey(K, "", SlotMod("A", "<!"), True),
+			"<+" UseKey["A"], (K) => LangSeparatedKey(K, "futhork_as", SlotMod("A", "<+"), True),
+			">+" UseKey["A"], (K) => LangSeparatedKey(K, "futhork_aesc", SlotMod("A", ">+"), True),
+			"<^>!" UseKey["A"], (K) => LangSeparatedKey(K, "futhark_younger_jera", SlotMod("A", "<^>!"), True),
+			"<^>!<+" UseKey["A"], (K) => LangSeparatedKey(K, "futhark_younger_jera_short_twig", SlotMod("A", "<^>!<+"), True),
+			"<^>!<!" UseKey["A"], (K) => LangSeparatedKey(K, "", SlotMod("A", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["A"], (K) => LangSeparatedKey(K, "", SlotMod("A", "<^>!<!>+"), True),
+			UseKey["B"], (K) => LangSeparatedKey(K, "futhark_berkanan", Slots["B"], True),
+			"<!" UseKey["B"], (K) => LangSeparatedKey(K, "", SlotMod("B", "<!"), True),
+			"<+" UseKey["B"], (K) => LangSeparatedKey(K, "", SlotMod("B", "<+"), True),
+			">+" UseKey["B"], (K) => LangSeparatedKey(K, "", SlotMod("B", "<+"), True),
+			"<^>!" UseKey["B"], (K) => LangSeparatedKey(K, "", SlotMod("B", "<^>!"), True),
+			"<^>!<+" UseKey["B"], (K) => LangSeparatedKey(K, "futhark_younger_bjarkan_short_twig", SlotMod("B", "<^>!<!"), True),
+			"<^>!<!" UseKey["B"], (K) => LangSeparatedKey(K, "", SlotMod("B", "<^>!<!>+"), True),
+			"<^>!<!>+" UseKey["B"], (K) => LangSeparatedKey(K, "", SlotMod("B", "<^>!<+"), True),
+			UseKey["C"], (K) => LangSeparatedKey(K, "futhork_cen", Slots["C"], True),
+			"<!" UseKey["C"], (K) => LangSeparatedKey(K, "", SlotMod("C", "<!"), True),
+			"<+" UseKey["C"], (K) => LangSeparatedKey(K, "", SlotMod("C", "<+"), True),
+			">+" UseKey["C"], (K) => LangSeparatedKey(K, "", SlotMod("C", ">+"), True),
+			"<^>!" UseKey["C"], (K) => LangSeparatedKey(K, "", SlotMod("C", "<^>!"), True),
+			"<^>!<+" UseKey["C"], (K) => LangSeparatedKey(K, "", SlotMod("C", "<^>!<+"), True),
+			"<^>!<!" UseKey["C"], (K) => LangSeparatedKey(K, "medieval_c", SlotMod("C", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["C"], (K) => LangSeparatedKey(K, "", SlotMod("C", "<^>!<!>+"), True),
+			UseKey["D"], (K) => LangSeparatedKey(K, "futhark_dagaz", Slots["D"], True),
+			"<!" UseKey["D"], (K) => LangSeparatedKey(K, "", SlotMod("D", "<!"), True),
+			"<+" UseKey["D"], (K) => LangSeparatedKey(K, "", SlotMod("D", "<+"), True),
+			">+" UseKey["D"], (K) => LangSeparatedKey(K, "", SlotMod("D", ">+"), True),
+			"<^>!" UseKey["D"], (K) => LangSeparatedKey(K, "futhark_younger_later_eth", SlotMod("D", "<^>!"), True),
+			"<^>!<+" UseKey["D"], (K) => LangSeparatedKey(K, "futhark_younger_later_d", SlotMod("D", "<^>!<+"), True),
+			"<^>!<!" UseKey["D"], (K) => LangSeparatedKey(K, "", SlotMod("D", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["D"], (K) => LangSeparatedKey(K, "", SlotMod("D", "<^>!<!>+"), True),
+			UseKey["E"], (K) => LangSeparatedKey(K, "futhark_ehwaz", Slots["E"], True),
+			"<!" UseKey["E"], (K) => LangSeparatedKey(K, "futhork_ear", SlotMod("E", "<!"), True),
+			"<+" UseKey["E"], (K) => LangSeparatedKey(K, "futhork_ear", SlotMod("E", "<+"), True),
+			">+" UseKey["E"], (K) => LangSeparatedKey(K, "", SlotMod("E", ">+"), True),
+			"<^>!" UseKey["E"], (K) => LangSeparatedKey(K, "futhark_younger_later_e", SlotMod("E", "<^>!"), True),
+			"<^>!<+" UseKey["E"], (K) => LangSeparatedKey(K, "", SlotMod("E", "<^>!<+"), True),
+			"<^>!<!" UseKey["E"], (K) => LangSeparatedKey(K, "medieval_en", SlotMod("E", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["E"], (K) => LangSeparatedKey(K, "", SlotMod("E", "<^>!<!>+"), True),
+			UseKey["F"], (K) => LangSeparatedKey(K, "futhark_fehu", Slots["F"], True),
+			"<!" UseKey["F"], (K) => LangSeparatedKey(K, "", SlotMod("F", "<!"), True),
+			"<+" UseKey["F"], (K) => LangSeparatedKey(K, "", SlotMod("F", "<+"), True),
+			">+" UseKey["F"], (K) => LangSeparatedKey(K, "", SlotMod("F", "<+"), True),
+			"<^>!" UseKey["F"], (K) => LangSeparatedKey(K, "", SlotMod("F", "<^>!"), True),
+			"<^>!<+" UseKey["F"], (K) => LangSeparatedKey(K, "", SlotMod("F", "<^>!<+"), True),
+			"<^>!<!" UseKey["F"], (K) => LangSeparatedKey(K, "", SlotMod("F", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["F"], (K) => LangSeparatedKey(K, "", SlotMod("F", "<^>!<!>+"), True),
+			UseKey["G"], (K) => LangSeparatedKey(K, "futhark_gebo", Slots["G"], True),
+			"<!" UseKey["G"], (K) => LangSeparatedKey(K, "futhork_gar", SlotMod("G", "<!"), True),
+			"<+" UseKey["G"], (K) => LangSeparatedKey(K, "futhork_gar", SlotMod("G", "<+"), True),
+			">+" UseKey["G"], (K) => LangSeparatedKey(K, "", SlotMod("G", ">+"), True),
+			"<^>!" UseKey["G"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!"), True),
+			"<^>!<+" UseKey["G"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!<+"), True),
+			"<^>!<!" UseKey["G"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["G"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!<!>+"), True),
+			UseKey["H"], (K) => LangSeparatedKey(K, "futhark_haglaz", Slots["H"], True),
+			"<!" UseKey["H"], (K) => LangSeparatedKey(K, "futhork_haegl", SlotMod("H", "<!"), True),
+			"<+" UseKey["H"], (K) => LangSeparatedKey(K, "futhork_haegl", SlotMod("H", "<+"), True),
+			">+" UseKey["H"], (K) => LangSeparatedKey(K, "futhork_haegl", SlotMod("H", ">+"), True),
+			"<^>!" UseKey["H"], (K) => LangSeparatedKey(K, "futhark_younger_hagall", SlotMod("H", "<^>!"), True),
+			"<^>!<+" UseKey["H"], (K) => LangSeparatedKey(K, "futhark_younger_hagall_short_twig", SlotMod("H", "<^>!<+"), True),
+			"<^>!<!" UseKey["H"], (K) => LangSeparatedKey(K, "", SlotMod("H", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["H"], (K) => LangSeparatedKey(K, "", SlotMod("H", "<^>!<!>+"), True),
+			UseKey["I"], (K) => LangSeparatedKey(K, "futhark_isaz", Slots["I"], True),
+			"<!" UseKey["I"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<!"), True),
+			"<+" UseKey["I"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<+"), True),
+			">+" UseKey["I"], (K) => LangSeparatedKey(K, "futhark_eihwaz", SlotMod("G", ">+"), True),
+			"<^>!" UseKey["I"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!"), True),
+			"<^>!<+" UseKey["I"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!<+"), True),
+			"<^>!<!" UseKey["I"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["I"], (K) => LangSeparatedKey(K, "", SlotMod("G", "<^>!<!>+"), True),
+			UseKey["J"], (K) => LangSeparatedKey(K, "futhark_jeran", Slots["J"], True),
+			"<!" UseKey["J"], (K) => LangSeparatedKey(K, "", SlotMod("J", "<!"), True),
+			"<+" UseKey["J"], (K) => LangSeparatedKey(K, "futhork_ger", SlotMod("J", "<+"), True),
+			">+" UseKey["J"], (K) => LangSeparatedKey(K, "futhork_ior", SlotMod("J", ">+"), True),
+			"<^>!" UseKey["J"], (K) => LangSeparatedKey(K, "", SlotMod("J", "<^>!"), True),
+			"<^>!<+" UseKey["J"], (K) => LangSeparatedKey(K, "", SlotMod("J", "<^>!<+"), True),
+			"<^>!<!" UseKey["J"], (K) => LangSeparatedKey(K, "", SlotMod("J", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["J"], (K) => LangSeparatedKey(K, "", SlotMod("J", "<^>!<!>+"), True),
+			UseKey["K"], (K) => LangSeparatedKey(K, "futhark_kauna", Slots["K"], True),
+			"<!" UseKey["K"], (K) => LangSeparatedKey(K, "", SlotMod("K", "<!"), True),
+			"<+" UseKey["K"], (K) => LangSeparatedKey(K, "futhork_cealc", SlotMod("K", "<+"), True),
+			">+" UseKey["K"], (K) => LangSeparatedKey(K, "futhork_calc", SlotMod("K", ">+"), True),
+			"<^>!" UseKey["K"], (K) => LangSeparatedKey(K, "futhark_younger_kaun", SlotMod("K", "<^>!"), True),
+			"<^>!<+" UseKey["K"], (K) => LangSeparatedKey(K, "futhark_younger_kaun", SlotMod("K", "<^>!<+"), True),
+			"<^>!<!" UseKey["K"], (K) => LangSeparatedKey(K, "futhark_younger_kaun", SlotMod("K", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["K"], (K) => LangSeparatedKey(K, "futhark_younger_kaun", SlotMod("K", "<^>!<!>+"), True),
+			UseKey["L"], (K) => LangSeparatedKey(K, "futhark_laguz", Slots["L"], True),
+			"<!" UseKey["L"], (K) => LangSeparatedKey(K, "", SlotMod("K", "<!"), True),
+			"<+" UseKey["L"], (K) => LangSeparatedKey(K, "", SlotMod("K", "<+"), True),
+			">+" UseKey["L"], (K) => LangSeparatedKey(K, "", SlotMod("K", ">+"), True),
+			"<^>!" UseKey["L"], (K) => LangSeparatedKey(K, "futhark_younger_later_l", SlotMod("K", "<^>!"), True),
+			"<^>!<+" UseKey["L"], (K) => LangSeparatedKey(K, "", SlotMod("K", "<^>!<+"), True),
+			"<^>!<!" UseKey["L"], (K) => LangSeparatedKey(K, "", SlotMod("K", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["L"], (K) => LangSeparatedKey(K, "", SlotMod("K", "<^>!<!>+"), True),
+			UseKey["M"], (K) => LangSeparatedKey(K, "futhark_mannaz", Slots["M"], True),
+			"<!" UseKey["M"], (K) => LangSeparatedKey(K, "", SlotMod("M", "<!"), True),
+			"<+" UseKey["M"], (K) => LangSeparatedKey(K, "", SlotMod("M", "<+"), True),
+			">+" UseKey["M"], (K) => LangSeparatedKey(K, "", SlotMod("M", ">+"), True),
+			"<^>!" UseKey["M"], (K) => LangSeparatedKey(K, "futhark_younger_madr", SlotMod("M", "<^>!"), True),
+			"<^>!<+" UseKey["M"], (K) => LangSeparatedKey(K, "futhark_younger_madr_short_twig", SlotMod("M", "<^>!<+"), True),
+			"<^>!<!" UseKey["M"], (K) => LangSeparatedKey(K, "", SlotMod("M", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["M"], (K) => LangSeparatedKey(K, "", SlotMod("M", "<^>!<!>+"), True),
+			UseKey["N"], (K) => LangSeparatedKey(K, "futhark_naudiz", Slots["N"], True),
+			"<!" UseKey["N"], (K) => LangSeparatedKey(K, "", SlotMod("N", "<!"), True),
+			"<+" UseKey["N"], (K) => LangSeparatedKey(K, "futhork_ing", SlotMod("N", "<+"), True),
+			">+" UseKey["N"], (K) => LangSeparatedKey(K, "futhark_ingwaz", SlotMod("N", ">+"), True),
+			"<^>!" UseKey["N"], (K) => LangSeparatedKey(K, "", SlotMod("N", "<^>!"), True),
+			"<^>!<+" UseKey["N"], (K) => LangSeparatedKey(K, "futhark_younger_naud_short_twig", SlotMod("N", "<^>!<+"), True),
+			"<^>!<!" UseKey["N"], (K) => LangSeparatedKey(K, "", SlotMod("N", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["N"], (K) => LangSeparatedKey(K, "", SlotMod("N", "<^>!<!>+"), True),
+			UseKey["O"], (K) => LangSeparatedKey(K, "futhark_odal", Slots["O"], True),
+			"<!" UseKey["O"], (K) => LangSeparatedKey(K, "", SlotMod("O", "<!"), True),
+			"<+" UseKey["O"], (K) => LangSeparatedKey(K, "futhork_os", SlotMod("O", "<+"), True),
+			">+" UseKey["O"], (K) => LangSeparatedKey(K, "", SlotMod("O", "Ю+"), True),
+			"<^>!" UseKey["O"], (K) => LangSeparatedKey(K, "futhark_younger_oss", SlotMod("O", "<^>!"), True),
+			"<^>!<+" UseKey["O"], (K) => LangSeparatedKey(K, "futhark_younger_oss_short_twig", SlotMod("O", "<^>!<+"), True),
+			"<^>!<!" UseKey["O"], (K) => LangSeparatedKey(K, "medieval_on", SlotMod("O", "<^>!<!"), True),
+			"<^>!<!>+" UseKey["O"], (K) => LangSeparatedKey(K, "medieval_o", SlotMod("O", "<^>!<!>+"), True),
+			UseKey["P"], (K) => LangSeparatedKey(K, "futhark_pertho", Slots["P"], True),
+			"<^>!" UseKey["P"], (K) => LangSeparatedKey(K, "futhark_younger_later_p", SlotMod("P", "<^>!"), True),
+			"<+" UseKey["P"], (K) => LangSeparatedKey(K, "", SlotMod("P", "<+"), True),
+			">+" UseKey["P"], (K) => LangSeparatedKey(K, "", SlotMod("P", ">+"), True),
+			UseKey["Q"], (K) => LangSeparatedKey(K, "futhork_cweorth", Slots["Q"], True),
+			UseKey["R"], (K) => LangSeparatedKey(K, "futhark_raido", Slots["R"], True),
+			UseKey["S"], (K) => LangSeparatedKey(K, "futhark_sowilo", Slots["S"], True),
+			"<+" UseKey["S"], (K) => LangSeparatedKey(K, "futhork_sigel", SlotMod("S", "<+"), True),
+			">+" UseKey["S"], (K) => LangSeparatedKey(K, "futhork_stan", SlotMod("S", ">+"), True),
+			"<^>!<+" UseKey["S"], (K) => LangSeparatedKey(K, "futhark_younger_sol_short_twig", SlotMod("S", "<^>!<+"), True),
+			UseKey["T"], (K) => LangSeparatedKey(K, "futhark_tiwaz", Slots["T"], True),
+			">+" UseKey["T"], (K) => LangSeparatedKey(K, "futhark_thurisaz", SlotMod("T", ">+"), True),
+			"<^>!<+" UseKey["T"], (K) => LangSeparatedKey(K, "futhark_younger_tyr_short_twig", SlotMod("T", "<^>!<+"), True),
+			UseKey["U"], (K) => LangSeparatedKey(K, "futhark_uruz", Slots["U"], True),
+			UseKey["Y"], (K) => LangSeparatedKey(K, "futhark_younger_ur", Slots["Y"], True),
+			">+" UseKey["Y"], (K) => LangSeparatedKey(K, "futhark_younger_icelandic_yr", SlotMod("Y", ">+"), True),
+			"<^>!" UseKey["Y"], (K) => LangSeparatedKey(K, "futhark_younger_yr", SlotMod("Y", "<^>!"), True),
+			"<^>!<+" UseKey["Y"], (K) => LangSeparatedKey(K, "futhark_younger_yr_short_twig", SlotMod("Y", "<^>!<+"), True),
+			"<+" UseKey["Y"], (K) => LangSeparatedKey(K, "futhork_yr", SlotMod("Y", "<+"), True),
+			UseKey["V"], (K) => LangSeparatedKey(K, "futhark_younger_later_v", Slots["V"], True),
+			UseKey["W"], (K) => LangSeparatedKey(K, "futhark_wunjo", Slots["W"], True),
+			UseKey["Z"], (K) => LangSeparatedKey(K, "futhark_algiz", Slots["Z"], True),
+			"<^>!<!" UseKey["Z"], (K) => LangSeparatedKey(K, "medieval_x", SlotMod("Z", "<^>!<!"), True),
+			UseKey["X"], (K) => LangSeparatedKey(K, "", Slots["X"], True),
+			"<^>!<!" UseKey["X"], (K) => LangSeparatedKey(K, "medieval_z", SlotMod("X", "<^>!<!"), True),
+			;
+			UseKey["Tilde"], (K) => LangSeparatedKey(K, "kkey_grave_accent", Slots["~"], True),
+			"<!" UseKey["Tilde"], (K) => LangSeparatedKey(K, "", SlotMod("~", "<!"), True),
+			UseKey["Comma"], (K) => LangSeparatedKey(K, "kkey_comma", Slots[","], True),
+			UseKey["Dot"], (K) => LangSeparatedKey(K, "kkey_dot", Slots["."], True),
+			"<^>!" UseKey["Comma"], (K) => LangSeparatedKey(K, "runic_cruciform_punctuation", SlotMod(",", "<^>!"), True),
+			"<^>!" UseKey["Dot"], (K) => LangSeparatedKey(K, "runic_single_punctuation", SlotMod(".", "<^>!"), True),
+			"<^>!" UseKey["Space"], (K) => LangSeparatedKey(K, "runic_multiple_punctuation", ["", ""], True),
+			UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", Slots[";"], True),
+			"<^>!" UseKey["Semicolon"], (K) => LangSeparatedKey(K, "kkey_semicolon", SlotMod(";", "<^>!"), True),
+			UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", Slots["'"], True),
+			"<^>!" UseKey["Apostrophe"], (K) => LangSeparatedKey(K, "kkey_apostrophe", SlotMod("'", "<^>!"), True),
+			UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "kkey_l_square_bracket", Slots["["], True),
+			"<^>!" UseKey["LSquareBracket"], (K) => LangSeparatedKey(K, "", SlotMod("[", "<^>!"), True),
+			UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "kkey_r_square_bracket", Slots["]"], True),
+			"<^>!" UseKey["RSquareBracket"], (K) => LangSeparatedKey(K, "", SlotMod("]", "<^>!"), True),
+			;
+			UseKey["Equals"], (K) => LangSeparatedKey(K, "kkey_equals", Slots["="], True),
+			"+" UseKey["Equals"], (K) => LangSeparatedKey(K, "kkey_plus", SlotMod("="), True, True),
+			UseKey["Minus"], (K) => LangSeparatedKey(K, "kkey_hyphen_minus", Slots["-"], True),
+			"+" UseKey["Minus"], (K) => LangSeparatedKey(K, "kkey_underscore", SlotMod("-"), True, True),
+			UseKey["Slash"], (K) => LangSeparatedKey(K, "kkey_slash", Slots["/"], True),
+			"+" UseKey["Slash"], (K) => LangSeparatedKey(K, "question", SlotMod("/"), True, True),
+			UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_backslash", Slots["\"], True),
+			"+" UseKey["Backslash"], (K) => LangSeparatedKey(K, "kkey_verticalline", SlotMod("\"), True, True),
+			;
+			"<^>!" UseKey["7"], (K) => LangSeparatedKey(K, "futhark_almanac_arlaug", ["", ""], True),
+			"<^>!" UseKey["8"], (K) => LangSeparatedKey(K, "futhark_almanac_tvimadur", ["", ""], True),
+			"<^>!" UseKey["9"], (K) => LangSeparatedKey(K, "futhark_almanac_belgthor", ["", ""], True),
+			;
+			"<^<!" UseKey["D"], (K) => HandleFastKey(K, "cyr_com_vzmet"),
+		]
+
+		return TestingArray
 	} else if Combinations = "NonQWERTY" {
 		Slots := Map()
 
