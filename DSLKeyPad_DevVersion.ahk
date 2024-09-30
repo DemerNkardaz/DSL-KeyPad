@@ -12294,9 +12294,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["glagolitic_c_let_spider_ha", "glagolitic_s_let_spider_ha"], Map("Modifier", "<^>!",
 				"ЙЦУКЕН", KeySeq["["], "Диктор", KeySeq["C"], "ЙІУКЕН (1907)", KeySeq["["]),
 			["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"], Map("Modifier:Диктор", "<+",
-				"ЙЦУКЕН", KeySeq["]"], "Диктор", KeySeq["W"], "ЙІУКЕН (1907)", KeySeq["C"]),
+				"ЙЦУКЕН", KeySeq["]"], "Диктор", KeySeq["W"], "ЙІУКЕН (1907)", KeySeq["F"]),
 			["glagolitic_c_let_shtapic", "glagolitic_s_let_shtapic"], Map("Modifier", "<^>!", "Modifier:Диктор", "<^>!<+",
-				"ЙЦУКЕН", KeySeq["]"], "Диктор", KeySeq["W"], "ЙІУКЕН (1907)", KeySeq["C"]),
+				"ЙЦУКЕН", KeySeq["]"], "Диктор", KeySeq["W"], "ЙІУКЕН (1907)", KeySeq["F"]),
 			["glagolitic_c_let_yo", "glagolitic_s_let_yo"], Map(
 				"ЙЦУКЕН", KeySeq["~"], "Диктор", KeySeq["~"], "ЙІУКЕН (1907)", KeySeq["~"]),
 			["glagolitic_c_let_big_yus_iotified", "glagolitic_s_let_big_yus_iotified"], Map("Modifier", "<!",
@@ -12314,6 +12314,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["kkey_equals", "kkey_equals"], Map("Modifier:ЙІУКЕН", ">+",
 				"ЙЦУКЕН", KeySeq["="], "Диктор", KeySeq["="], "ЙІУКЕН (1907)", KeySeq["="]),
 		])
+
+
+		if CyrillicLayout = "ЙІУКЕН (1907)" {
+			MapPush(Slots, LatinLayout = "Dvorak" ? "," : LatinLayout = "Colemak" ? "W" : "W", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"])
+		}
 
 		SlotMapping := Map(
 			"A", "futhark_ansuz",
