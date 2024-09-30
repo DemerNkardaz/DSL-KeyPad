@@ -11940,7 +11940,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		return SlotKey
 	}
 
-	GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, CommonMode := False, SetReverseCaps := False, SlotKeys := "", SlotMods := "") {
+	GetBindingsArray(SlotMapping, SlotModdedMapping, Slots := Map(), CommonMode := False, SetReverseCaps := False, HotKeyMode := "", SlotKeys := "", SlotMods := "") {
 		if SlotKeys = "" {
 			SlotKeys := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ",", ".", "~", "-", "=", "[", "]", "'", "/", "\", "Space", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 		}
@@ -12005,7 +12005,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		}
 
 		SlotMappingBridge(SlotLabel, SlotValue, SlotModifier := "", ReverseCaps := False) {
-			HotKeyVariant := RegExMatch(SlotLabel, "^(.+):", &match) ? match[1] : ""
+			HotKeyVariant := HotKeyMode != "" ? HotKeyMode : RegExMatch(SlotLabel, "^(.+):", &match) ? match[1] : ""
 			SlotLabel := RegExReplace(SlotLabel, "^(.+):", "")
 
 			ValidateLabel := ValidateSlotPairs(SlotLabel)
@@ -12611,42 +12611,65 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["Space"], (K) => LangSeparatedKey(K, "runic_multiple_punctuation", ["", ""], True),
 		]
 	} else if Combinations = "Gothic" {
-		LayoutArray := [
-			UseKey["A"], (K) => LangSeparatedKey(K, "gothic_ahza", "", True),
-			UseKey["B"], (K) => LangSeparatedKey(K, "gothic_bairkan", "", True),
-			UseKey["C"], (K) => LangSeparatedKey(K, "gothic_thiuth", "", True),
-			UseKey["D"], (K) => LangSeparatedKey(K, "gothic_dags", "", True),
-			UseKey["E"], (K) => LangSeparatedKey(K, "gothic_aihvus", "", True),
-			UseKey["F"], (K) => LangSeparatedKey(K, "gothic_faihu", "", True),
-			UseKey["G"], (K) => LangSeparatedKey(K, "gothic_giba", "", True),
-			UseKey["H"], (K) => LangSeparatedKey(K, "gothic_hagl", "", True),
-			"<^>!" UseKey["H"], (K) => LangSeparatedKey(K, "gothic_hwair", "", True),
-			UseKey["I"], (K) => LangSeparatedKey(K, "gothic_eis", "", True),
-			UseKey["J"], (K) => LangSeparatedKey(K, "gothic_jer", "", True),
-			UseKey["K"], (K) => LangSeparatedKey(K, "gothic_kusma", "", True),
-			"<^>!" UseKey["K"], (K) => LangSeparatedKey(K, "gothic_ninety", "", True),
-			UseKey["L"], (K) => LangSeparatedKey(K, "gothic_lagus", "", True),
-			UseKey["M"], (K) => LangSeparatedKey(K, "gothic_manna", "", True),
-			UseKey["N"], (K) => LangSeparatedKey(K, "gothic_nauths", "", True),
-			UseKey["O"], (K) => LangSeparatedKey(K, "gothic_othal", "", True),
-			UseKey["P"], (K) => LangSeparatedKey(K, "gothic_pairthra", "", True),
-			UseKey["Q"], (K) => LangSeparatedKey(K, "gothic_qairthra", "", True),
-			UseKey["R"], (K) => LangSeparatedKey(K, "gothic_raida", "", True),
-			UseKey["S"], (K) => LangSeparatedKey(K, "gothic_sugil", "", True),
-			"<^>!" UseKey["S"], (K) => LangSeparatedKey(K, "gothic_nine_hundred", "", True),
-			UseKey["T"], (K) => LangSeparatedKey(K, "gothic_teiws", "", True),
-			"<^>!" UseKey["T"], (K) => LangSeparatedKey(K, "gothic_thiuth", "", True),
-			UseKey["U"], (K) => LangSeparatedKey(K, "gothic_urus", "", True),
-			UseKey["V"], (K) => LangSeparatedKey(K, "gothic_hwair", "", True),
-			UseKey["W"], (K) => LangSeparatedKey(K, "gothic_winja", "", True),
-			UseKey["X"], (K) => LangSeparatedKey(K, "gothic_iggws", "", True),
-			UseKey["Y"], (K) => LangSeparatedKey(K, "gothic_winja", "", True),
-			UseKey["Z"], (K) => LangSeparatedKey(K, "gothic_ezek", "", True),
-			;
-			"<^>!" UseKey["Comma"], (K) => LangSeparatedKey(K, "runic_cruciform_punctuation", ["", ""], True),
-			"<^>!" UseKey["Dot"], (K) => LangSeparatedKey(K, "runic_single_punctuation", ["", ""], True),
-			"<^>!" UseKey["Space"], (K) => LangSeparatedKey(K, "runic_multiple_punctuation", ["", ""], True),
-		]
+		SlotMapping := Map(
+			"A", "gothic_ahza",
+			"B", "gothic_bairkan",
+			"C", "gothic_thiuth",
+			"D", "gothic_dags",
+			"E", "gothic_aihvus",
+			"F", "gothic_faihu",
+			"G", "gothic_giba",
+			"H", "gothic_hagl",
+			"I", "gothic_eis",
+			"J", "gothic_jer",
+			"K", "gothic_kusma",
+			"L", "gothic_lagus",
+			"M", "gothic_manna",
+			"N", "gothic_nauths",
+			"O", "gothic_othal",
+			"P", "gothic_pairthra",
+			"Q", "gothic_qairthra",
+			"R", "gothic_raida",
+			"S", "gothic_sugil",
+			"T", "gothic_teiws",
+			"U", "gothic_urus",
+			"V", "gothic_hwair",
+			"W", "gothic_winja",
+			"X", "gothic_iggws",
+			"Y", "gothic_winja",
+			"Z", "gothic_ezek",
+			"~", "kkey_grave_accent",
+			",", "kkey_comma",
+			".", "kkey_dot",
+			";", "kkey_semicolon",
+			"'", "kkey_apostrophe",
+			"[", "kkey_l_square_bracket",
+			"]", "kkey_r_square_bracket",
+			"=", "kkey_equals",
+			"-", "kkey_hyphen_minus",
+			"/", "kkey_slash",
+		)
+
+		SlotModdedMapping := Map(
+			"H", Map("<^>!", "gothic_hwair"),
+			"K", Map("<^>!", "gothic_ninety"),
+			"S", Map("<^>!", "gothic_nine_hundred"),
+			"T", Map("<^>!", "gothic_thiuth"),
+			",", Map("<+", "kkey_lessthan", "<^>!", "runic_cruciform_punctuation"),
+			".", Map("<+", "kkey_greaterthan", "<^>!", "runic_single_punctuation"),
+			";", Map("<+", "kkey_colon"),
+			"Space", Map("<^>!", "runic_multiple_punctuation"),
+			"'", Map("<+", "kkey_quotation"),
+			"~", Map("<+", "kkey_grave_accent"),
+			"=", Map("<+", "kkey_plus"),
+			"-", Map("<+", "kkey_underscore"),
+			"[", Map("<+", "kkey_l_curly_bracket"),
+			"]", Map("<+", "kkey_r_curly_bracket"),
+			"/", Map("<+", "question"),
+			"\", Map("<+", "kkey_verticalline"),
+		)
+
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , , "Flat")
 	} else if Combinations = "IPA" {
 		LayoutArray := [
 			UseKey["C"], (K) => HandleFastKey(K, "lat_s_let_c_curl"),
@@ -12977,7 +13000,7 @@ ManageTrayItems() {
 		"reload", ReadLocale("tray_func_reload"),
 		"config", ReadLocale("tray_func_config"),
 		"locale", ReadLocale("tray_func_locale"),
-		"exit", ReadLocale("tray_func_exit") "`t" "<^Esc",
+		"exit", ReadLocale("tray_func_exit") "`t" LeftControl RightShift "Esc",
 		"panel", ReadLocale("tray_func_panel") "`t" Window LeftAlt "Home",
 		"install", ReadLocale("tray_func_install"),
 		"search", ReadLocale("tray_func_search") "`t" Window LeftAlt "F",
@@ -13067,7 +13090,7 @@ ManageTrayItems()
 
 ShowInfoMessage("tray_app_started")
 
-<^Esc:: ExitApp
+<^>+Esc:: ExitApp
 
 SetPreviousLayout()
 
