@@ -11834,8 +11834,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				}
 				if (!Found) {
 					try {
-						if modifier != ""
-							SlotMappingBridge(label, "", modifier)
+						;if modifier != ""
+						;SlotMappingBridge(label, "", modifier)
 					} catch {
 						continue
 					}
@@ -12177,6 +12177,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			}
 		}
 		TestIingSlots := Map()
+
 
 		CyrillicSlots := [
 			["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], Map(
