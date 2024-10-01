@@ -11958,17 +11958,15 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		return SlotKey
 	}
 
-	GetBindingsArray(SlotMapping := Map(), SlotModdedMapping := Map(), Slots := Map(), CommonMode := False, SetReverseCaps := False, HotKeyMode := "", SlotKeys := "", SlotMods := "") {
-		if SlotKeys = "" {
-			SlotKeys := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ",", ".", ";", "~", "-", "=", "[", "]", "'", "/", "\", "Space", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+	GetBindingsArray(SlotMapping := Map(), SlotModdedMapping := Map(), Slots := Map(), SetReverseCaps := False, HotKeyMode := "", ProceedRegistryAll := False, CommonMode := False) {
+
+		SlotKeys := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ",", ".", ";", "~", "-", "=", "[", "]", "'", "/", "\", "Space", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+
+		SlotMods := ["+"]
+		if !CommonMode {
+			SlotMods.Push("<!", "<!<+", ">!<+", "<+", ">+", "<+>+", "<^>!", "<^>!<+", "<^>!>+", "<^>!<!", "<^>!<!>+", "<^>!<!<+>+")
 		}
 
-		if SlotMods = "" {
-			SlotMods := ["+"]
-			if !CommonMode {
-				SlotMods.Push("<!", "<!<+", ">!<+", "<+", ">+", "<+>+", "<^>!", "<^>!<+", "<^>!>+", "<^>!<!", "<^>!<!>+", "<^>!<!<+>+")
-			}
-		}
 
 		TempArray := []
 		if IsObject(SlotMapping) && SlotMapping.Count > 0 {
@@ -11993,7 +11991,41 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			}
 		}
 
-		if IsObject(SlotKeys) && IsObject(SlotMods) && SlotKeys.Length > 0 && SlotMods.Length > 0 {
+		if IsObject(Slots) && Slots.Count > 0 {
+			for slotEntry, slotValue in Slots {
+				if (RegExMatch(slotEntry, "^(.*)(.)$", &match)) {
+					EntryModifier := match[1]
+					EntryKey := match[2]
+				} else {
+					EntryModifier := ""
+					EntryKey := slotEntry
+				}
+				Found := False
+
+				for i, pair in TempArray {
+					if Mod(i, 2) == 1 {
+						try {
+							if pair = EntryModifier UseKey[ValidateSlotPairs(EntryKey)] {
+								Found := True
+								break
+							}
+						} catch {
+							continue
+						}
+					}
+				}
+				if (!Found) {
+					try {
+						if EntryModifier != ""
+							SlotMappingBridge(EntryKey, "", EntryModifier)
+					} catch {
+						continue
+					}
+				}
+			}
+		}
+
+		if ProceedRegistryAll {
 			for label in SlotKeys {
 				for modifier in SlotMods {
 
@@ -12094,7 +12126,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			".", Map("Flat:<^<!", "dot_above", "Flat:<^<+<!", "diaeresis"),
 		)
 		LayoutArray := ArrayMerge(
-			GetBindingsArray(, SlotDiacritics, , , , , "Off"),
+			GetBindingsArray(, SlotDiacritics),
 		)
 		LayoutArray.Push(
 			"<^<!" UseKey["Minus"], (K) => HandleFastKey(K, "softhyphen"),
@@ -12430,26 +12462,20 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"D", Map("<^>!", "futhark_younger_later_eth", "<^>!<+", "futhark_younger_later_d", "<^<!", "cyr_com_vzmet"),
 			"E", Map("<+", "futhork_ear", "<^>!", "futhark_younger_later_e", "<^>!<!", "medieval_en"),
 			"G", Map("<+", "futhork_gar"),
-			;"F", Map("", ""),
 			"H", Map("<+", "futhork_haegl", "<^>!", "futhark_younger_hagall", "<^>!<+", "futhark_younger_hagall_short_twig"),
 			"I", Map(">+", "futhark_eihwaz"),
-			"J", Map("<+", "futhork_ger", ">+", "futhork_futhork_iorger"),
+			"J", Map("<+", "futhork_ger", ">+", "futhork_ior"),
 			"K", Map("<+", "futhork_cealc", ">+", "futhork_calc", "<^>!", "futhark_younger_kaun"),
 			"L", Map("<^>!", "futhark_younger_later_l"),
 			"M", Map("<^>!", "futhark_younger_madr", "<^>!<+", "futhark_younger_madr_short_twig"),
-			"N", Map(">+", "futhark_ingwaz", "<+", "futhork_ing", "<^>!<+", "futhark_younger_naud_short_twig"),
+			"N", Map(">+", "futhark_ingwaz", "<+", "futhork_ing", "<^>!<+", "futhark_younger_naud_short_twig", "<^>!<!", "medieval_en"),
 			"O", Map("<+", "futhork_os", "<^>!", "futhark_younger_oss", "<^>!<+", "futhark_younger_oss_short_twig", "<^>!<!", "medieval_on", "<^>!<!>+", "medieval_o"),
 			"P", Map("<^>!", "futhark_younger_later_p"),
-			;"Q", Map("", "",),
-			;"R", Map("", "",),
 			"S", Map("<+", "futhork_sigel", ">+", "futhork_stan", "<^>!<+", "futhark_younger_sol_short_twig"),
 			"T", Map(">+", "futhark_thurisaz", "<^>!<+", "futhark_younger_tyr_short_twig"),
-			;"U", Map("", "",),
-			;"V", Map("", "",),
-			;"W", Map("", "",),
-			"X", Map("<^>!<!", "medieval_z"),
+			"X", Map("<^>!<!", "medieval_x"),
 			"Y", Map(">+", "futhark_younger_icelandic_yr", "<^>!", "futhark_younger_yr", "<^>!<+", "futhark_younger_yr_short_twig", "<+", "futhork_yr"),
-			"Z", Map("<^>!<!", "medieval_x"),
+			"Z", Map("<^>!<!", "medieval_z"),
 			",", Map("<^>!", "runic_cruciform_punctuation"),
 			".", Map("<^>!", "runic_single_punctuation"),
 			"Space", Map("<^>!", "runic_multiple_punctuation"),
@@ -12458,11 +12484,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"/", Map("<+", "question", ">+", "question"),
 			"\", Map("<+", "kkey_verticalline", ">+", "kkey_verticalline"),
 			;
-			"1", Map("<+", "exclamation", ">+", "exclamation"),
-			"7", Map("<^>!", "futhark_almanac_arlaug"),
-			"8", Map("<^>!", "futhark_almanac_tvimadur", "<+", "kkey_asterisk", ">+", "kkey_asterisk"),
-			"9", Map("<^>!", "futhark_almanac_belgthor", "<+", "kkey_left_parenthesis", ">+", "kkey_left_parenthesis"),
-			"0", Map("<+", "kkey_left_pkkey_right_parenthesisarenthesis", ">+", "kkey_right_parenthesis"),
+			"1", Map("+", "exclamation"),
+			"7", Map("<^>!", "futhark_almanac_arlaug", "+", "question"),
+			"8", Map("<^>!", "futhark_almanac_tvimadur", "+", "kkey_asterisk"),
+			"9", Map("<^>!", "futhark_almanac_belgthor", "+", "kkey_left_parenthesis"),
+			"0", Map("+", "kkey_right_parenthesis"),
 		)
 
 		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots)
@@ -12597,7 +12623,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"\", Map("<+", "kkey_verticalline"),
 		)
 
-		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, False, True)
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, True)
 	} else if Combinations = "Old Turkic Old Permic" {
 		Slots := GetLayoutImprovedCyrillic([
 			"permic_ef", KeySeqSlot["A"],
@@ -12705,7 +12731,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"\", Map("<+", "kkey_verticalline"),
 		)
 
-		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, False, True)
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, True)
 	} else if Combinations = "Gothic" {
 		SlotMapping := Map(
 			"A", "gothic_ahza",
@@ -12765,7 +12791,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"\", Map("<+", "kkey_verticalline"),
 		)
 
-		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , , "Flat")
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
 	} else if Combinations = "IPA" {
 		LayoutArray := [
 			UseKey["C"], (K) => HandleFastKey(K, "lat_s_let_c_curl"),
@@ -12907,7 +12933,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!<!>+" UseKey["Minus"], (K) => HandleFastKey(K, "figure_dash"),
 			"<^>!" UseKey["Slash"], (K) => HandleFastKey(K, "ellipsis"),
 			"<^>!>+" UseKey["Slash"], (K) => HandleFastKey(K, "fraction_slash"),
-			"<^>!" UseKey["8"], (K) => HandleFastKey(K, "multiplication"),
 			"<^>!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet"),
 			"<^>!<!" UseKey["Tilde"], (K) => HandleFastKey(K, "bullet_hyphen"),
 			"<^>!<+" UseKey["Tilde"], (K) => HandleFastKey(K, "interpunct"),
