@@ -11937,7 +11937,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 	CheckPairs := [
 		",", "Comma",
+		"CommaRu", "Comma",
 		".", "Dot",
+		"DotRu", "Dot",
 		"~", "Tilde",
 		"-", "Minus",
 		"=", "Equals",
@@ -11983,7 +11985,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			for slotLabel, value in SlotModdedMapping {
 				for moddedSlot, subValue in value {
 					try {
+
 						SlotMappingBridge(slotLabel, subValue, moddedSlot, SetReverseCaps)
+
 					} catch {
 						continue
 					}
@@ -12104,7 +12108,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 
 	if Combinations = "FastKeys" {
-		SlotDiacritics := Map(
+		SlotModdedDiacritics := Map(
 			"A", Map("Flat:<^<!", "acute", "Flat:<^<+<!", "acute_double"),
 			"B", Map("Flat:<^<!", "breve", "Flat:<^<+<!", "breve_inverted"),
 			"C", Map("Flat:<^<!", "circumflex", "Flat:<^<+<!", "caron", "Flat:<^>!>+", "cedilla"),
@@ -12125,21 +12129,26 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			",", Map("Flat:<^<!", "comma_above", "Flat:<^<+<!", "comma_below"),
 			".", Map("Flat:<^<!", "dot_above", "Flat:<^<+<!", "diaeresis"),
 		)
+		QuotesSlots := GetLayoutImprovedCyrillic([
+			"france_left", MapMerge(GetModifiers("<^>!"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
+			"france_right", MapMerge(GetModifiers("<^>!"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "." : "DotRu"]),
+			"quote_low_9_double", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
+			"quote_left_double", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "." : "DotRu"]),
+			"france_single_left", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
+			"france_single_right", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "." : "DotRu"]),
+		])
+		SlotModdedQuotes := Map(
+			",", Map("<^>!", "quote_left_double", "<^>!<+", "quote_left_single", "<^>!>+", "quote_low_9_double", "<^>!<+>+", "quote_low_9_single"),
+			".", Map("<^>!", "quote_right_double", "<^>!<+", "quote_right_single", "<^>!>+", "quote_low_9_double_reversed"),
+			"~", Map("Flat:<^>!>+", "quote_right_single"),
+		)
 		LayoutArray := ArrayMerge(
-			GetBindingsArray(, SlotDiacritics),
+			GetBindingsArray(, SlotModdedDiacritics),
+			GetBindingsArray(, SlotModdedQuotes, QuotesSlots),
 		)
 		LayoutArray.Push(
 			"<^<!" UseKey["Minus"], (K) => HandleFastKey(K, "softhyphen"),
 			"<^<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "minus"),
-			;
-			"<^>!" UseKey["Comma"], (K) => LangSeparatedKey(K, "quote_left_double", "france_left"),
-			"<^>!" UseKey["Dot"], (K) => LangSeparatedKey(K, "quote_right_double", "france_right"),
-			"<^>!<+" UseKey["Comma"], (K) => LangSeparatedKey(K, "quote_left_single", "quote_low_9_double"),
-			"<^>!<+" UseKey["Dot"], (K) => LangSeparatedKey(K, "quote_right_single", "quote_left_double"),
-			"<^>!>+" UseKey["Comma"], (K) => LangSeparatedKey(K, "quote_low_9_double", "france_single_left"),
-			"<^>!<+>+" UseKey["Comma"], (K) => LangSeparatedKey(K, "quote_low_9_single", ""),
-			"<^>!>+" UseKey["Dot"], (K) => LangSeparatedKey(K, "quote_low_9_double_reversed", "france_single_right"),
-			"<^>!>+" UseKey["Tilde"], (K) => HandleFastKey(K, "quote_right_single"),
 			;
 			"<^>!>+" UseKey["1"], (K) => CapsSeparatedKey(K, "double_exclamation", "emsp"),
 			"<^>!>+" UseKey["2"], (K) => HandleFastKey(K, "ensp"),
