@@ -6216,7 +6216,7 @@ MapInsert(Characters,
 		"cyr_c_let_dzhe", {
 			unicode: "{U+040F}", html: "&#1039;",
 			titlesAlt: True,
-			group: ["Cyrillic Letters", "Д"],
+			group: ["Cyrillic Letters", "Ж"],
 			tags: ["прописная буква Дже", "cyrillic capital letter Dzhe"],
 			show_on_fast_keys: True,
 			recipe: "ДЖ",
@@ -6224,7 +6224,7 @@ MapInsert(Characters,
 		"cyr_s_let_dzhe", {
 			unicode: "{U+045F}", html: "&#1119;",
 			titlesAlt: True,
-			group: ["Cyrillic Letters", "д"],
+			group: ["Cyrillic Letters", "ж"],
 			tags: ["строчная буква дже", "cyrillic small letter dzhe"],
 			show_on_fast_keys: True,
 			recipe: "дж",
@@ -12177,15 +12177,15 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"=", Map("<^>!>+", "figure_space"),
 		)
 		SpecialsSlots := GetLayoutImprovedCyrillic([
-			"bracket_square_left", MapMerge(GetModifiers("<^>!"), KeySeqSlot["["]),
-			"bracket_curly_left", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["["]),
-			"bracket_square_right", MapMerge(GetModifiers("<^>!"), KeySeqSlot["]"]),
-			"bracket_curly_right", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["]"]),
 			"noequals", MapMerge(GetModifiers("<^>!"), KeySeqSlot["="]),
 			"almostequals", MapMerge(GetModifiers("<^>!<+>+"), KeySeqSlot["="]),
 			"plusminus", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["="]),
 			"ellipsis", MapMerge(GetModifiers("<^>!"), KeySeqSlot["DotRu"]),
 			"fraction_slash", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["DotRu"]),
+			"bracket_square_left", MapMerge(GetModifiers("<^>!"), KeySeqSlot["["]),
+			"bracket_curly_left", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["["]),
+			"bracket_square_right", MapMerge(GetModifiers("<^>!"), KeySeqSlot["]"]),
+			"bracket_curly_right", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["]"]),
 		])
 		SlotModdedSpecials := Map(
 			"D", Map("Flat:<!", "degree"),
@@ -12200,172 +12200,168 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"9", Map("Flat:<^>!", "bracket_angle_math_left"),
 			"0", Map("Flat:<^>!", "bracket_angle_math_right", "Flat:<^>!<!", "infinity"),
 			"~", Map("Flat:<^>!", "bullet", "Flat:<^>!<!", "bullet_hyphen", "Flat:<^>!<+", "interpunct", "Flat:<^>!<!>+", "bullet_white", "Flat:>+", "tilde_reversed"),
-			"[", Map("Flat:<^>!", "bracket_square_left", "Flat:<^>!>+", "bracket_curly_left"),
-			"]", Map("Flat:<^>!", "bracket_square_right", "Flat:<^>!>+", "bracket_curly_right"),
+			"[", Map("<^>!", "bracket_square_left", "<^>!>+", "bracket_curly_left"),
+			"]", Map("<^>!", "bracket_square_right", "<^>!>+", "bracket_curly_right"),
 			"=", Map("<^>!", "noequals", "<^>!<+>+", "almostequals", "<^>!<+", "plusminus"),
 			"/", Map("<^>!", "ellipsis", "<^>!>+", "fraction_slash"),
+		)
+		LettersSlots := GetLayoutImprovedCyrillic([
+			["cyr_c_let_fita", "cyr_s_let_fita"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["A"]),
+			["cyr_c_let_i", "cyr_s_let_i"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["B"]),
+			["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["B"]),
+			["cyr_c_let_yeru_back_yer", "cyr_s_let_yeru_back_yer"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["S"]),
+			["cyr_c_let_yus_big", "cyr_s_let_yus_big"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["E"]),
+			["cyr_c_let_omega", "cyr_s_let_omega"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["J"]),
+			["cyr_c_let_yat", "cyr_s_let_yat"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["T"]),
+			["cyr_c_let_yi", "cyr_s_let_yi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Q"]),
+			["cyr_c_let_j", "cyr_s_let_j"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["Q"]),
+			["cyr_c_let_yus_little", "cyr_s_let_yus_little"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Z"]),
+			["cyr_c_let_a_iotified", "cyr_s_let_a_iotified"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["Z"]),
+			["cyr_c_let_dzhe", "cyr_s_let_dzhe"], MapMerge(GetModifiers("<^>!"), KeySeqSlot[";"]),
+			["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["'"]),
+		])
+		SlotModdedLetters := Map(
+			"A", Map("<!", ["lat_c_let_a_acute", "lat_s_let_a_acute"],
+				"<^>!", ["lat_c_let_a_breve", "lat_s_let_a_breve"],
+				"<^>!<!", ["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"],
+				"<^>!<!<+", ["lat_c_let_a_caron", "lat_s_let_a_caron"],
+				"<^>!<!>+", ["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"],
+				"<^>!>+", ["lat_c_let_a_macron", "lat_s_let_a_macron"],
+				"<^>!<+", ["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_a_tilde", "lat_s_let_a_tilde"],
+				"<+>+", ["lat_c_let_a_grave_double", "lat_s_let_a_grave_double"]),
+			"B", Map(
+				"<^>!", ["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"],
+				"<^>!<+", ["lat_c_let_b_common_hook", "lat_s_let_b_common_hook"]),
+			"C", Map("<!", ["lat_c_let_c_acute", "lat_s_let_c_acute"],
+				"<^>!<!", ["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"],
+				"<^>!<!<+", ["lat_c_let_c_caron", "lat_s_let_c_caron"],
+				"<^>!<!>+", ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"]),
+			"D", Map(
+				"<^>!", ["lat_c_let_d_eth", "lat_s_let_d_eth"],
+				"<^>!<!", ["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"],
+				"<^>!<!<+", ["lat_c_let_d_caron", "lat_s_let_d_caron"],
+				"<^>!<!>+", ["lat_c_let_d_cedilla", "lat_s_let_d_cedilla"],
+				"<^>!<+>+", ["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"],
+				"<+>+", ["lat_c_let_a_grave_double", "lat_s_let_a_grave_double"]),
+			"S", Map(
+				"<^>!<+", ["lat_c_lig_eszett", "lat_s_lig_eszett"]),
+			"E", Map("<!", ["lat_c_let_e_acute", "lat_s_let_e_acute"],
+				"<^>!", ["lat_c_let_e_breve", "lat_s_let_e_breve"],
+				"<^>!<!", ["lat_c_let_e_circumflex", "lat_s_let_e_circumflex"],
+				"<^>!<!<+", ["lat_c_let_e_caron", "lat_s_let_e_caron"],
+				"<^>!<!>+", ["lat_c_let_e_ogonek", "lat_s_let_e_ogonek"],
+				"<^>!>+", ["lat_c_let_e_macron", "lat_s_let_e_macron"],
+				"<^>!<+", ["lat_c_let_e_diaeresis", "lat_s_let_e_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_e_tilde", "lat_s_let_e_tilde"],
+				"<+>+", ["lat_c_let_e_grave_double", "lat_s_let_e_grave_double"]),
+			"G", Map("<!", ["lat_c_let_g_acute", "lat_s_let_g_acute"],
+				"<^>!", ["lat_c_let_g_breve", "lat_s_let_g_breve"],
+				"<^>!<!", ["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"],
+				"<^>!<!<+", ["lat_c_let_g_caron", "lat_s_let_g_caron"],
+				"<^>!<!>+", ["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"],
+				"<^>!>+", ["lat_c_let_g_macron", "lat_s_let_g_macron"]),
+			"H", Map(
+				"<^>!", ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"],
+				"<^>!<!", ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"],
+				"<^>!<!<+", ["lat_c_let_h_caron", "lat_s_let_h_caron"],
+				"<^>!<!>+", ["lat_c_let_h_cedilla", "lat_s_let_h_cedilla"],
+				"<^>!<+", ["lat_c_let_h_diaeresis", "lat_s_let_h_diaeresis"]),
+			"I", Map("<!", ["lat_c_let_i_acute", "lat_s_let_i_acute"],
+				"<^>!", ["lat_c_let_i_breve", "lat_s_let_i_breve"],
+				"<^>!<!", ["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"],
+				"<^>!<!<+", ["lat_c_let_i_caron", "lat_s_let_i_caron"],
+				"<^>!<!>+", ["lat_c_let_i_ogonek", "lat_s_let_i_ogonek"],
+				"<^>!>+", ["lat_c_let_i_macron", "lat_s_let_i_macron"],
+				"<^>!<+", ["lat_c_let_i_diaeresis", "lat_s_let_i_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_i_tilde", "lat_s_let_i_tilde"],
+				"<+>+", ["lat_c_let_i_grave_double", "lat_s_let_i_grave_double"]),
+			"J", Map(
+				"<^>!", ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"],
+				"<^>!<!", ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"]),
+			"K", Map("<!", ["lat_c_let_k_acute", "lat_s_let_k_acute"],
+				"<^>!<!<+", ["lat_c_let_k_caron", "lat_s_let_k_caron"],
+				"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"]),
+			"L", Map("<!", ["lat_c_let_l_acute", "lat_s_let_l_acute"],
+				"<^>!", ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"],
+				"<^>!<!<+", ["lat_c_let_l_caron", "lat_s_let_l_caron"],
+				"<^>!<!>+", ["lat_c_let_l_cedilla", "lat_s_let_l_cedilla"],
+				"<^>!<+>+", ["lat_c_let_l_circumflex_below", "lat_s_let_l_circumflex_below"]),
 		)
 		LayoutArray := ArrayMerge(
 			GetBindingsArray(, SlotModdedDiacritics),
 			GetBindingsArray(, SlotModdedQuotes, QuotesSlots),
-			GetBindingsArray(, SlotModdedDashes, DashesSlots),
 			GetBindingsArray(, SlotModdedSpaces, SpacesSlots),
 			GetBindingsArray(, SlotModdedSpecials, SpecialsSlots),
-		)
-		LayoutArray.Push(
-			;
-			"<^<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
-			"<^>!" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_two"),
-			"<^>!>+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterism"),
-			"<^>!<+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_low"),
-			"<^>!" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "dagger"),
-			"<^>!>+" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "dagger_double"),
-			;
-			"<!" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_acute", "lat_s_let_a_acute"], ["", ""], True),
-			"<^>!" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_breve", "lat_s_let_a_breve"], ["cyr_c_let_fita", "cyr_s_let_fita"], True),
-			"<^>!<!" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"], ["", ""], True),
-			"<^>!<!<+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_caron", "lat_s_let_a_caron"], ["", ""], True),
-			"<^>!<!>+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"], ["", ""], True),
-			"<^>!>+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_macron", "lat_s_let_a_macron"], ["", ""], True),
-			"<^>!<+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"], ["", ""], True),
-			"<^>!<+>+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_tilde", "lat_s_let_a_tilde"], ["", ""], True),
-			"<+>+" UseKey["A"], (K) => LangSeparatedKey(K, ["lat_c_let_a_grave_double", "lat_s_let_a_grave_double"], ["", ""], True),
-			;
-			"<^>!" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"], ["cyr_c_let_i", "cyr_s_let_i"], True),
-			"<^>!<+" UseKey["B"], (K) => LangSeparatedKey(K, ["lat_c_let_b_common_hook", "lat_s_let_b_common_hook"], ["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], True),
-			;
-			"<!" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c_acute", "lat_s_let_c_acute"], ["", ""], True),
-			"<^>!<!" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"], ["", ""], True),
-			"<^>!<!<+" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c_caron", "lat_s_let_c_caron"], ["", ""], True),
-			"<^>!<!>+" UseKey["C"], (K) => LangSeparatedKey(K, ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"], ["", ""], True),
-			;
-			"<^>!" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_eth", "lat_s_let_d_eth"], ["", ""], True),
-			"<^>!<!" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"], ["", ""], True),
-			"<^>!<!>+" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_cedilla", "lat_s_let_d_cedilla"], ["", ""], True),
-			"<^>!<!<+" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_caron", "lat_s_let_d_caron"], ["", ""], True),
-			"<^>!<+>+" UseKey["D"], (K) => LangSeparatedKey(K, ["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"], ["", ""], True),
-			;
-			"<^>!<+" UseKey["S"], (K) => LangSeparatedKey(K, ["lat_c_lig_eszett", "lat_s_lig_eszett"], ["cyr_c_let_yeru_back_yer", "cyr_s_let_yeru_back_yer"], True),
-			;
-			"<!" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_acute", "lat_s_let_e_acute"], ["", ""], True),
-			"<^>!" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_breve", "lat_s_let_e_breve"], ["cyr_c_let_yus_big", "cyr_s_let_yus_big"], True),
-			"<^>!<!" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_circumflex", "lat_s_let_e_circumflex"], ["", ""], True),
-			"<^>!<!<+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_caron", "lat_s_let_e_caron"], ["", ""], True),
-			"<^>!<!>+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_ogonek", "lat_s_let_e_ogonek"], ["", ""], True),
-			"<^>!>+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_macron", "lat_s_let_e_macron"], ["", ""], True),
-			"<^>!<+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_diaeresis", "lat_s_let_e_diaeresis"], ["", ""], True),
-			"<^>!<+>+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_tilde", "lat_s_let_e_tilde"], ["", ""], True),
-			"<+>+" UseKey["E"], (K) => LangSeparatedKey(K, ["lat_c_let_e_grave_double", "lat_s_let_e_grave_double"], ["", ""], True),
-			;
-			"<!" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_acute", "lat_s_let_g_acute"], ["", ""], True),
-			"<^>!" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_breve", "lat_s_let_g_breve"], ["", ""], True),
-			"<^>!<!" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"], ["", ""], True),
-			"<^>!<!<+" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_caron", "lat_s_let_g_caron"], ["", ""], True),
-			"<^>!<!>+" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"], ["", ""], True),
-			"<^>!>+" UseKey["G"], (K) => LangSeparatedKey(K, ["lat_c_let_g_macron", "lat_s_let_g_macron"], ["", ""], True),
-			;
-			"<^>!" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"], ["", ""], True),
-			"<^>!<!" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"], ["", ""], True),
-			"<^>!<!<+" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_caron", "lat_s_let_h_caron"], ["", ""], True),
-			"<^>!<!>+" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_cedilla", "lat_s_let_h_cedilla"], ["", ""], True),
-			"<^>!<+" UseKey["H"], (K) => LangSeparatedKey(K, ["lat_c_let_h_diaeresis", "lat_s_let_h_diaeresis"], ["", ""], True),
-			;
-			"<!" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_acute", "lat_s_let_i_acute"], ["", ""], True),
-			"<^>!" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_breve", "lat_s_let_i_breve"], ["", ""], True),
-			"<^>!<!" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"], ["", ""], True),
-			"<^>!<!<+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_caron", "lat_s_let_i_caron"], ["", ""], True),
-			"<^>!<!>+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_ogonek", "lat_s_let_i_ogonek"], ["", ""], True),
-			"<^>!>+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_macron", "lat_s_let_i_macron"], ["", ""], True),
-			"<^>!<+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_diaeresis", "lat_s_let_i_diaeresis"], ["", ""], True),
-			"<^>!<+>+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_tilde", "lat_s_let_i_tilde"], ["", ""], True),
-			"<+>+" UseKey["I"], (K) => LangSeparatedKey(K, ["lat_c_let_i_grave_double", "lat_s_let_i_grave_double"], ["", ""], True),
-			;
-			"<^>!" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"], ["cyr_c_let_omega", "cyr_s_let_omega"], True),
-			"<^>!<!" UseKey["J"], (K) => LangSeparatedKey(K, ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"], ["", ""], True),
-			;
-			"<!" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k_acute", "lat_s_let_k_acute"], ["", ""], True),
-			"<^>!<!<+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k_caron", "lat_s_let_k_caron"], ["", ""], True),
-			"<^>!<!>+" UseKey["K"], (K) => LangSeparatedKey(K, ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"], ["", ""], True),
-			;
-			"<!" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_acute", "lat_s_let_l_acute"], ["", ""], True),
-			"<^>!" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"], ["cyr_c_let_dzhe", "cyr_s_let_dzhe"], True),
-			"<^>!<!<+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_caron", "lat_s_let_l_caron"], ["", ""], True),
-			"<^>!<!>+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_cedilla", "lat_s_let_l_cedilla"], ["", ""], True),
-			"<^>!<+>+" UseKey["L"], (K) => LangSeparatedKey(K, ["lat_c_let_l_circumflex_below", "lat_s_let_l_circumflex_below"], ["", ""], True),
-			;
-			;
-			"<^>!" UseKey["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_yi", "cyr_s_let_yi"], True),
-			"<^>!<!" UseKey["Q"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_j", "cyr_s_let_j"], True),
-			;
-			"<^>!" UseKey["Z"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_yus_little", "cyr_s_let_yus_little"], True),
-			"<^>!<+" UseKey["Z"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_a_iotified", "cyr_s_let_a_iotified"], True),
-			"<^>!" UseKey["T"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_yat", "cyr_s_let_yat"], True),
-			"<^>!" UseKey["Apostrophe"], (K) => LangSeparatedKey(K, ["", ""], ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], True),
-			;
-			;"<^>!" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left"),
-			;"<^>!" UseKey["ArrUp"], (K) => HandleFastKey(K, "arrow_up"),
-			;"<^>!" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right"),
-			;"<^>!" UseKey["ArrDown"], (K) => HandleFastKey(K, "arrow_down"),
-			;"<^>!" UseKey["ArrLeft"], (K) => TimedKeyCombinations("ArrLeft", UseKey["ArrUp"], (*) => HandleFastKey(K, "arrow_leftup"), (*) => HandleFastKey(K, "arrow_left")),
-			"<^>!" UseKey["ArrLeft"], (K) =>
-				TimedKeyCombinations("ArrLeft",
-					[UseKey["ArrUp"], UseKey["ArrDown"], UseKey["ArrRight"]],
-					[
-						(*) => HandleFastKey(K, "arrow_leftup"),
-						(*) => HandleFastKey(K, "arrow_leftdown"),
-						(*) => HandleFastKey(K, "arrow_leftright")
-					], (*) => HandleFastKey(K, "arrow_left"), -75
-				),
-			"<^>!" UseKey["ArrRight"], (K) =>
-				TimedKeyCombinations("ArrRight",
-					[UseKey["ArrLeft"], UseKey["ArrUp"], UseKey["ArrDown"]],
-					["Off", (*) => HandleFastKey(K, "arrow_rightup"), (*) => HandleFastKey(K, "arrow_rightdown")], (*) => HandleFastKey(K, "arrow_right"), -75
-				),
-			"<^>!" UseKey["ArrUp"], (K) =>
-				TimedKeyCombinations("ArrUp",
-					[UseKey["ArrLeft"], UseKey["ArrRight"], UseKey["ArrDown"]],
-					["Off", "Off", (*) => HandleFastKey(K, "arrow_updown")], (*) => HandleFastKey(K, "arrow_up"), -75
-				),
-			"<^>!" UseKey["ArrDown"], (K) =>
-				TimedKeyCombinations("ArrDown",
-					[UseKey["ArrUp"], UseKey["ArrLeft"], UseKey["ArrRight"]],
-					["Off", "Off", "Off"], (*) => HandleFastKey(K, "arrow_down"), -75
-				),
-			"<^>!<+" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left_ushaped"),
-			"<^>!<+" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right_ushaped"),
-			"<^>!<+" UseKey["ArrUp"], (K) => HandleFastKey(K, "arrow_up_ushaped"),
-			"<^>!<+" UseKey["ArrDown"], (K) => HandleFastKey(K, "arrow_down_ushaped"),
-			"<^>!>+" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left_circle"),
-			"<^>!>+" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right_circle"),
-			;
-			"<^>!" UseKey["Numpad4"], (K) => CapsSeparatedKey(K, "asian_double_left_quote", "asian_left_quote"),
-			"<^>!" UseKey["Numpad6"], (K) => CapsSeparatedKey(K, "asian_double_right_quote", "asian_right_quote"),
-			"<^>!" UseKey["Numpad8"], (K) => CapsSeparatedKey(K, "asian_double_up_quote", "asian_up_quote"),
-			"<^>!" UseKey["Numpad2"], (K) => CapsSeparatedKey(K, "asian_double_down_quote", "asian_down_quote"),
-			"<^>!<!" UseKey["Comma"], (K) => HandleFastKey(K, "asian_double_left_title"),
-			"<^>!<!<+" UseKey["Comma"], (K) => HandleFastKey(K, "asian_left_title"),
-			"<^>!<!" UseKey["Dot"], (K) => HandleFastKey(K, "asian_double_right_title"),
-			"<^>!<!<+" UseKey["Dot"], (K) => HandleFastKey(K, "asian_right_title"),
-			;
-			"<^>!" UseKey["Enter"], (K) => HandleFastKey(K, "misc_crlf_emspace"),
-			"<^>!<+" UseKey["Enter"], (K) => SendPaste("+{Enter}", (*) => HandleFastKey(K, "emsp")),
-			"<^>!>+" UseKey["Enter"], (K) => HandleFastKey(K, "misc_crlf_emspace", "emsp"),
-			;
-			"<^<!" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "asterisk_operator"),
-			"<^<!<+" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "bullet_operator"),
-			UseKey["NumpadMult"], (K) => TimedKeyCombinations("NumpadMult", UseKey["NumpadDiv"], (*) => HandleFastKey(K, "division_times"), (*) => HandleFastKey(K, "multiplication"), -75),
-			UseKey["NumpadDiv"], (K) => TimedKeyCombinations("NumpadDiv", UseKey["NumpadMult"], "Off", (*) => HandleFastKey(K, "division"), -75),
-			UseKey["NumpadSub"], (K) => TimedKeyCombinations("NumpadSub", UseKey["NumpadAdd"], (*) => HandleFastKey(K, "plusminus"), (*) => HandleFastKey(K, "minus"), -75),
-			UseKey["NumpadAdd"], (K) => TimedKeyCombinations("NumpadAdd", UseKey["NumpadSub"], (*) => HandleFastKey(K, "minusplus"), , -75),
-			/*
-			UseKey["Equals"], (K) =>
-				TimedKeyCombinations("Equals",
-					[UseKey["Slash"], UseKey["Tilde"]],
-					[(*) => HandleFastKey(K, "noequals"), (*) => HandleFastKey(K, "almostequals")]
-			),*/
-			;UseKey["Slash"], (K) => TimedKeyCombinations("Slash", UseKey["Equals"], "Off"),
-			UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], "Off"),
-		)
+			GetBindingsArray(, SlotModdedDashes, DashesSlots),
+			GetBindingsArray(, SlotModdedLetters, LettersSlots),
+			[
+				"<^>!" UseKey["ArrLeft"], (K) =>
+					TimedKeyCombinations("ArrLeft",
+						[UseKey["ArrUp"], UseKey["ArrDown"], UseKey["ArrRight"]],
+						[
+							(*) => HandleFastKey(K, "arrow_leftup"),
+							(*) => HandleFastKey(K, "arrow_leftdown"),
+							(*) => HandleFastKey(K, "arrow_leftright")
+						], (*) => HandleFastKey(K, "arrow_left"), -75
+					),
+				"<^>!" UseKey["ArrRight"], (K) =>
+					TimedKeyCombinations("ArrRight",
+						[UseKey["ArrLeft"], UseKey["ArrUp"], UseKey["ArrDown"]],
+						["Off", (*) => HandleFastKey(K, "arrow_rightup"), (*) => HandleFastKey(K, "arrow_rightdown")], (*) => HandleFastKey(K, "arrow_right"), -75
+					),
+				"<^>!" UseKey["ArrUp"], (K) =>
+					TimedKeyCombinations("ArrUp",
+						[UseKey["ArrLeft"], UseKey["ArrRight"], UseKey["ArrDown"]],
+						["Off", "Off", (*) => HandleFastKey(K, "arrow_updown")], (*) => HandleFastKey(K, "arrow_up"), -75
+					),
+				"<^>!" UseKey["ArrDown"], (K) =>
+					TimedKeyCombinations("ArrDown",
+						[UseKey["ArrUp"], UseKey["ArrLeft"], UseKey["ArrRight"]],
+						["Off", "Off", "Off"], (*) => HandleFastKey(K, "arrow_down"), -75
+					),
+				"<^>!<+" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left_ushaped"),
+				"<^>!<+" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right_ushaped"),
+				"<^>!<+" UseKey["ArrUp"], (K) => HandleFastKey(K, "arrow_up_ushaped"),
+				"<^>!<+" UseKey["ArrDown"], (K) => HandleFastKey(K, "arrow_down_ushaped"),
+				"<^>!>+" UseKey["ArrLeft"], (K) => HandleFastKey(K, "arrow_left_circle"),
+				"<^>!>+" UseKey["ArrRight"], (K) => HandleFastKey(K, "arrow_right_circle"),
+				;
+				"<^>!" UseKey["Numpad4"], (K) => CapsSeparatedKey(K, "asian_double_left_quote", "asian_left_quote"),
+				"<^>!" UseKey["Numpad6"], (K) => CapsSeparatedKey(K, "asian_double_right_quote", "asian_right_quote"),
+				"<^>!" UseKey["Numpad8"], (K) => CapsSeparatedKey(K, "asian_double_up_quote", "asian_up_quote"),
+				"<^>!" UseKey["Numpad2"], (K) => CapsSeparatedKey(K, "asian_double_down_quote", "asian_down_quote"),
+				"<^>!<!" UseKey["Comma"], (K) => HandleFastKey(K, "asian_double_left_title"),
+				"<^>!<!<+" UseKey["Comma"], (K) => HandleFastKey(K, "asian_left_title"),
+				"<^>!<!" UseKey["Dot"], (K) => HandleFastKey(K, "asian_double_right_title"),
+				"<^>!<!<+" UseKey["Dot"], (K) => HandleFastKey(K, "asian_right_title"),
+				;
+				"<^>!" UseKey["Enter"], (K) => HandleFastKey(K, "misc_crlf_emspace"),
+				"<^>!<+" UseKey["Enter"], (K) => SendPaste("+{Enter}", (*) => HandleFastKey(K, "emsp")),
+				"<^>!>+" UseKey["Enter"], (K) => HandleFastKey(K, "misc_crlf_emspace", "emsp"),
+				;
+				"<^<!" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "asterisk_operator"),
+				"<^<!<+" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "bullet_operator"),
+				UseKey["NumpadMult"], (K) => TimedKeyCombinations("NumpadMult", UseKey["NumpadDiv"], (*) => HandleFastKey(K, "division_times"), (*) => HandleFastKey(K, "multiplication"), -75),
+				UseKey["NumpadDiv"], (K) => TimedKeyCombinations("NumpadDiv", UseKey["NumpadMult"], "Off", (*) => HandleFastKey(K, "division"), -75),
+				UseKey["NumpadSub"], (K) => TimedKeyCombinations("NumpadSub", UseKey["NumpadAdd"], (*) => HandleFastKey(K, "plusminus"), (*) => HandleFastKey(K, "minus"), -75),
+				UseKey["NumpadAdd"], (K) => TimedKeyCombinations("NumpadAdd", UseKey["NumpadSub"], (*) => HandleFastKey(K, "minusplus"), , -75),
+				/*
+				UseKey["Equals"], (K) =>
+					TimedKeyCombinations("Equals",
+						[UseKey["Slash"], UseKey["Tilde"]],
+						[(*) => HandleFastKey(K, "noequals"), (*) => HandleFastKey(K, "almostequals")]
+				),*/
+				;UseKey["Slash"], (K) => TimedKeyCombinations("Slash", UseKey["Equals"], "Off"),
+				UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], "Off"),
+				;
+				"<^<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
+				"<^>!" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_two"),
+				"<^>!>+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterism"),
+				"<^>!<+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_low"),
+				"<^>!" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "dagger"),
+				"<^>!>+" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "dagger_double"),
+			])
 
 
 	} else if Combinations = "Glagolitic Futhark" {
