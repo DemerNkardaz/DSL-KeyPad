@@ -1291,8 +1291,6 @@ MapMergeTo(TargetMap, MapObjects*) {
 MapMerge(MapObjects*) {
 	TempMap := Map()
 	for mapObj in MapObjects {
-		if !IsObject(mapObj)
-			continue
 		for entry, value in mapObj {
 			TempMap[entry] := value
 		}
@@ -1300,6 +1298,27 @@ MapMerge(MapObjects*) {
 	return TempMap
 }
 
+ArrayMergeTo(TargetArray, Arrays*) {
+	for arrayItem in Arrays {
+		if !IsObject(arrayItem)
+			continue
+		for element in arrayItem {
+			TargetArray.Push(element)
+		}
+	}
+}
+
+ArrayMerge(Arrays*) {
+	TempArray := []
+	for arrayItem in Arrays {
+		if !IsObject(arrayItem)
+			continue
+		for element in arrayItem {
+			TempArray.Push(element)
+		}
+	}
+	return TempArray
+}
 
 GetMapCount(MapObj, SortGroups := "") {
 	if !IsObject(SortGroups) {
@@ -11902,7 +11921,6 @@ GetModifiers(Modifiers*) {
 		ModifierKey := RegExReplace(modifier, "^(.+):", "")
 
 		ModifierType := ModifiersRules.Has(ModifierType) ? ModifiersRules[ModifierType] : ModifierType
-
 		TempMap[ModifierType] := ModifierKey
 	}
 
@@ -11940,20 +11958,20 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		return SlotKey
 	}
 
-	GetBindingsArray(SlotMapping, SlotModdedMapping, Slots := Map(), CommonMode := False, SetReverseCaps := False, HotKeyMode := "", SlotKeys := "", SlotMods := "") {
+	GetBindingsArray(SlotMapping := Map(), SlotModdedMapping := Map(), Slots := Map(), CommonMode := False, SetReverseCaps := False, HotKeyMode := "", SlotKeys := "", SlotMods := "") {
 		if SlotKeys = "" {
-			SlotKeys := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ",", ".", "~", "-", "=", "[", "]", "'", "/", "\", "Space", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+			SlotKeys := ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", ",", ".", ";", "~", "-", "=", "[", "]", "'", "/", "\", "Space", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 		}
 
 		if SlotMods = "" {
 			SlotMods := ["+"]
 			if !CommonMode {
-				SlotMods.Push("<!", "<+", ">+", "<+>+", "<^>!", "<^>!<+", "<^>!<!", "<^>!<!>+")
+				SlotMods.Push("<!", "<!<+", ">!<+", "<+", ">+", "<+>+", "<^>!", "<^>!<+", "<^>!>+", "<^>!<!", "<^>!<!>+", "<^>!<!<+>+")
 			}
 		}
 
 		TempArray := []
-		if IsObject(SlotMapping) {
+		if IsObject(SlotMapping) && SlotMapping.Count > 0 {
 			for label, value in SlotMapping {
 				try {
 					SlotMappingBridge(label, value)
@@ -11963,7 +11981,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			}
 		}
 
-		if IsObject(SlotModdedMapping) {
+		if IsObject(SlotModdedMapping) && SlotModdedMapping.Count > 0 {
 			for slotLabel, value in SlotModdedMapping {
 				for moddedSlot, subValue in value {
 					try {
@@ -11975,7 +11993,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			}
 		}
 
-		if IsObject(SlotKeys) && IsObject(SlotMods) {
+		if IsObject(SlotKeys) && IsObject(SlotMods) && SlotKeys.Length > 0 && SlotMods.Length > 0 {
 			for label in SlotKeys {
 				for modifier in SlotMods {
 
@@ -12005,8 +12023,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		}
 
 		SlotMappingBridge(SlotLabel, SlotValue, SlotModifier := "", ReverseCaps := False) {
-			HotKeyVariant := HotKeyMode != "" ? HotKeyMode : RegExMatch(SlotLabel, "^(.+):", &match) ? match[1] : ""
-			SlotLabel := RegExReplace(SlotLabel, "^(.+):", "")
+			HotKeyVariant := HotKeyMode != "" ? HotKeyMode : RegExMatch(SlotModifier, "^(.+):", &match) ? match[1] : ""
+			SlotModifier := RegExReplace(SlotModifier, "^(.+):", "")
 
 			ValidateLabel := ValidateSlotPairs(SlotLabel)
 			Label := SlotModifier != "" ? SlotModifier UseKey[ValidateLabel] : UseKey[ValidateLabel]
@@ -12054,41 +12072,31 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 
 	if Combinations = "FastKeys" {
-		LayoutArray := [
-			"<^<!" UseKey["A"], (K) => HandleFastKey(K, "acute"),
-			"<^<+<!" UseKey["A"], (K) => HandleFastKey(K, "acute_double"),
-			"<^<!" UseKey["B"], (K) => HandleFastKey(K, "breve"),
-			"<^<+<!" UseKey["B"], (K) => HandleFastKey(K, "breve_inverted"),
-			"<^<!" UseKey["C"], (K) => HandleFastKey(K, "circumflex"),
-			"<^<+<!" UseKey["C"], (K) => HandleFastKey(K, "caron"),
-			"<^<!" UseKey["Comma"], (K) => HandleFastKey(K, "comma_above"),
-			"<^<+<!" UseKey["Comma"], (K) => HandleFastKey(K, "comma_below"),
-			"<^<!" UseKey["D"], (K) => HandleFastKey(K, "dot_above"),
-			"<^<+<!" UseKey["D"], (K) => HandleFastKey(K, "diaeresis"),
-			"<^<!" UseKey["F"], (K) => HandleFastKey(K, "fermata"),
-			"<^<!" UseKey["G"], (K) => HandleFastKey(K, "grave"),
-			"<^<+<!" UseKey["G"], (K) => HandleFastKey(K, "grave_double"),
-			"<^<!" UseKey["H"], (K) => HandleFastKey(K, "hook_above"),
-			"<^<+<!" UseKey["H"], (K) => HandleFastKey(K, "horn"),
-			"<^<!" UseKey["M"], (K) => HandleFastKey(K, "macron"),
-			"<^<+<!" UseKey["M"], (K) => HandleFastKey(K, "macron_below"),
-			"<^<!" UseKey["N"], (K) => HandleFastKey(K, "cyr_com_titlo"),
-			"<^<!" UseKey["O"], (K) => HandleFastKey(K, "ogonek"),
-			"<^<!<+" UseKey["O"], (K) => HandleFastKey(K, "ogonek_above"),
-			"<^<!" UseKey["R"], (K) => HandleFastKey(K, "ring_above"),
-			"<^<!<+" UseKey["R"], (K) => HandleFastKey(K, "ring_below"),
-			"<^<!" UseKey["V"], (K) => HandleFastKey(K, "line_vertical"),
-			"<^<!<+" UseKey["V"], (K) => HandleFastKey(K, "line_vertical_double"),
-			"<^<!" UseKey["T"], (K) => HandleFastKey(K, "tilde"),
-			"<^<!<+" UseKey["T"], (K) => HandleFastKey(K, "tilde_overlay"),
-			"<^<!" UseKey["S"], (K) => HandleFastKey(K, "stroke_short"),
-			"<^<!<+" UseKey["S"], (K) => HandleFastKey(K, "stroke_long"),
-			"<^<!" UseKey["Slash"], (K) => HandleFastKey(K, "solidus_short"),
-			"<^<!<+" UseKey["Slash"], (K) => HandleFastKey(K, "solidus_long"),
-			"<^<!" UseKey["X"], (K) => HandleFastKey(K, "x_above"),
-			"<^<!<+" UseKey["X"], (K) => HandleFastKey(K, "x_below"),
-			"<^<!" UseKey["Z"], (K) => HandleFastKey(K, "zigzag_above"),
-			;
+		SlotDiacritics := Map(
+			"A", Map("Flat:<^<!", "acute", "Flat:<^<+<!", "acute_double"),
+			"B", Map("Flat:<^<!", "breve", "Flat:<^<+<!", "breve_inverted"),
+			"C", Map("Flat:<^<!", "circumflex", "Flat:<^<+<!", "caron", "Flat:<^>!>+", "cedilla"),
+			"D", Map("Flat:<^<!", "dot_above", "Flat:<^<+<!", "diaeresis"),
+			"F", Map("Flat:<^<!", "fermata"),
+			"G", Map("Flat:<^<!", "grave", "Flat:<^<+<!", "grave_double"),
+			"H", Map("Flat:<^<!", "hook_above", "Flat:<^<+<!", "horn"),
+			"M", Map("Flat:<^<!", "macron", "Flat:<^<+<!", "macron_below"),
+			"N", Map("Flat:<^<!", "cyr_com_titlo"),
+			"O", Map("Flat:<^<!", "ogonek", "Flat:<^<+<!", "ogonek_above"),
+			"R", Map("Flat:<^<!", "ring_above", "Flat:<^<+<!", "ring_below"),
+			"V", Map("Flat:<^<!", "line_vertical", "Flat:<^<+<!", "line_vertical_double"),
+			"T", Map("Flat:<^<!", "tilde", "Flat:<^<+<!", "tilde_overlay"),
+			"S", Map("Flat:<^<!", "stroke_short", "Flat:<^<+<!", "stroke_long"),
+			"X", Map("Flat:<^<!", "x_above", "Flat:<^<+<!", "x_below"),
+			"Z", Map("Flat:<^<!", "zigzag_above"),
+			"/", Map("Flat:<^<!", "solidus_short", "Flat:<^<+<!", "solidus_long"),
+			",", Map("Flat:<^<!", "comma_above", "Flat:<^<+<!", "comma_below"),
+			".", Map("Flat:<^<!", "dot_above", "Flat:<^<+<!", "diaeresis"),
+		)
+		LayoutArray := ArrayMerge(
+			GetBindingsArray(, SlotDiacritics, , , , , "Off"),
+		)
+		LayoutArray.Push(
 			"<^<!" UseKey["Minus"], (K) => HandleFastKey(K, "softhyphen"),
 			"<^<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "minus"),
 			;
@@ -12100,7 +12108,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!<+>+" UseKey["Comma"], (K) => LangSeparatedKey(K, "quote_low_9_single", ""),
 			"<^>!>+" UseKey["Dot"], (K) => LangSeparatedKey(K, "quote_low_9_double_reversed", "france_single_right"),
 			"<^>!>+" UseKey["Tilde"], (K) => HandleFastKey(K, "quote_right_single"),
-			"<^>!>+" UseKey["C"], (K) => HandleFastKey(K, "cedilla"),
 			;
 			"<^>!>+" UseKey["1"], (K) => CapsSeparatedKey(K, "double_exclamation", "emsp"),
 			"<^>!>+" UseKey["2"], (K) => HandleFastKey(K, "ensp"),
@@ -12310,12 +12317,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["RSquareBracket"], (K) => HandleFastKey(K, "bracket_square_right"),
 			"<^>!>+" UseKey["LSquareBracket"], (K) => HandleFastKey(K, "bracket_curly_left"),
 			"<^>!>+" UseKey["RSquareBracket"], (K) => HandleFastKey(K, "bracket_curly_right"),
-		]
+		)
 
-		if CyrillicLayout = "Диктор" {
-			LayoutArray.Push()
-			LayoutArray.Push()
-		}
+
 	} else if Combinations = "Glagolitic Futhark" {
 		Slots := GetLayoutImprovedCyrillic([
 			["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"], KeySeqSlot["A"],
