@@ -2621,7 +2621,7 @@ MapInsert(Characters,
 			tags: ["almost equals", "примерно равно"],
 			group: [["Smelting Special", "Special Fast Secondary", "Special Fast"], "="],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: ">+ [=]",
+			alt_on_fast_keys: "<+>+ [=]",
 			alt_special: "[``=]",
 			recipe: "~=",
 		},
@@ -11851,6 +11851,7 @@ KeySeq := Map(
 	"8", ["8", "8", "8"],
 	"9", ["9", "9", "9"],
 	"0", ["0", "0", "0"],
+	"Tab", ["Tab", "Tab", "Tab"],
 )
 
 KeySeqSlot := Map(
@@ -11906,6 +11907,7 @@ KeySeqSlot := Map(
 	"?", Map("ЙЦУКЕН", KeySeq["7"], "Диктор", KeySeq["R"], "ЙІУКЕН (1907)", KeySeq["7"]),
 	"DotRu", Map("ЙЦУКЕН", KeySeq["/"], "Диктор", KeySeq["T"], "ЙІУКЕН (1907)", KeySeq["]"]),
 	"CommaRu", Map("ЙЦУКЕН", KeySeq["/"], "Диктор", KeySeq["R"], "ЙІУКЕН (1907)", KeySeq["]"]),
+	"Tab", Map("ЙЦУКЕН", KeySeq["Tab"], "Диктор", KeySeq["Tab"], "ЙІУКЕН (1907)", KeySeq["Tab"]),
 )
 
 ModifiersRules := Map(
@@ -12142,29 +12144,39 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			".", Map("<^>!", "quote_right_double", "<^>!<+", "quote_right_single", "<^>!>+", "quote_low_9_double_reversed"),
 			"~", Map("Flat:<^>!>+", "quote_right_single"),
 		)
+		DashesSlots := GetLayoutImprovedCyrillic([
+			"softhyphen", MapMerge(GetModifiers("<^<!"), KeySeqSlot["-"]),
+			"minus", MapMerge(GetModifiers("<^<!<+"), KeySeqSlot["-"]),
+		])
+		SlotModdedDashes := Map(
+			"-", Map("<^<!", "softhyphen", "<^<!<+", "minus"),
+		)
+		SpacesSlots := GetLayoutImprovedCyrillic([
+			"word_joiner", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["-"]),
+			"figure_space", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["="]),
+		])
+		SlotModdedSpaces := Map(
+			"1", Map("Caps:<^>!>+", ["double_exclamation", "emsp"]),
+			"2", Map("Flat:<^>!>+", "ensp"),
+			"3", Map("Flat:<^>!>+", "emsp13"),
+			"4", Map("Flat:<^>!>+", "emsp14"),
+			"5", Map("Flat:<^>!>+", "thinspace"),
+			"6", Map("Flat:<^>!>+", "emsp16"),
+			"7", Map("Caps:<^>!>+", ["double_question", "narrow_no_break_space"]),
+			"8", Map("Flat:<^>!>+", "hairspace"),
+			"9", Map("Flat:<^>!>+", "punctuation_space"),
+			"0", Map("Flat:<^>!>+", "zero_width_space"),
+			"Tab", Map("Flat:<^>!>+", "tabulation"),
+			"-", Map("<^>!>+", "word_joiner"),
+			"=", Map("<^>!>+", "figure_space"),
+		)
 		LayoutArray := ArrayMerge(
 			GetBindingsArray(, SlotModdedDiacritics),
 			GetBindingsArray(, SlotModdedQuotes, QuotesSlots),
+			GetBindingsArray(, SlotModdedDashes, DashesSlots),
+			GetBindingsArray(, SlotModdedSpaces, SpacesSlots),
 		)
 		LayoutArray.Push(
-			"<^<!" UseKey["Minus"], (K) => HandleFastKey(K, "softhyphen"),
-			"<^<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "minus"),
-			;
-			"<^>!>+" UseKey["1"], (K) => CapsSeparatedKey(K, "double_exclamation", "emsp"),
-			"<^>!>+" UseKey["2"], (K) => HandleFastKey(K, "ensp"),
-			"<^>!>+" UseKey["3"], (K) => HandleFastKey(K, "emsp13"),
-			"<^>!>+" UseKey["4"], (K) => HandleFastKey(K, "emsp14"),
-			"<^>!>+" UseKey["5"], (K) => HandleFastKey(K, "thinspace"),
-			"<^>!>+" UseKey["6"], (K) => HandleFastKey(K, "emsp16"),
-			"<^>!>+" UseKey["7"], (K) => CapsSeparatedKey(K, "double_question", "narrow_no_break_space"),
-			"<^>!>+" UseKey["8"], (K) => HandleFastKey(K, "hairspace"),
-			"<^>!>+" UseKey["9"], (K) => HandleFastKey(K, "punctuation_space"),
-			"<^>!>+" UseKey["0"], (K) => HandleFastKey(K, "zero_width_space"),
-			"<^>!>+" UseKey["Minus"], (K) => HandleFastKey(K, "word_joiner"),
-			"<^>!>+" UseKey["Equals"], (K) => HandleFastKey(K, "figure_space"),
-			"<^>!>+" UseKey["Tab"], (K) => HandleFastKey(K, "tabulation"),
-			;
-			"<^>!" UseKey["Space"], (K) => HandleFastKey(K, "no_break_space"),
 			;
 			"<^<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
 			"<^>!" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_two"),
@@ -12259,7 +12271,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["P"], (K) => HandleFastKey(K, "prime_single"),
 			"<^>!+" UseKey["P"], (K) => HandleFastKey(K, "prime_double"),
 			"<^>!" UseKey["Equals"], (K) => HandleFastKey(K, "noequals"),
-			"<^>!>+" UseKey["Equals"], (K) => HandleFastKey(K, "almostequals"),
+			"<^>!<+>+" UseKey["Equals"], (K) => HandleFastKey(K, "almostequals"),
 			"<^>!<+" UseKey["Equals"], (K) => HandleFastKey(K, "plusminus"),
 			"<^>!" UseKey["Minus"], (K) => HandleFastKey(K, "emdash"),
 			"<^>!<+" UseKey["Minus"], (K) => HandleFastKey(K, "endash"),
@@ -12936,7 +12948,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!<+" UseKey["Minus"], (K) => HandleFastKey(K, "endash"),
 			"<!" UseKey["Minus"], (K) => CapsSeparatedKey(K, "two_emdash", "three_emdash"),
 			"<^>!" UseKey["Equals"], (K) => HandleFastKey(K, "noequals"),
-			"<^>!>+" UseKey["Equals"], (K) => HandleFastKey(K, "almostequals"),
+			"<^>!<+>+" UseKey["Equals"], (K) => HandleFastKey(K, "almostequals"),
 			"<^>!<+" UseKey["Equals"], (K) => HandleFastKey(K, "plusminus"),
 			"<^>!<!" UseKey["Minus"], (K) => HandleFastKey(K, "hyphen"),
 			"<^>!<!<+" UseKey["Minus"], (K) => HandleFastKey(K, "no_break_hyphen"),
