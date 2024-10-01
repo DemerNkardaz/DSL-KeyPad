@@ -12414,6 +12414,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 		if CyrillicLayout = "ЙІУКЕН (1907)" {
 			MapPush(Slots, LatinLayout = "Dvorak" ? "," : "W", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"])
+			MapPush(Slots, LatinLayout = "Dvorak" ? "J" : "C", ["glagolitic_c_let_yati", "glagolitic_s_let_yati"])
 		}
 
 		SlotMapping := Map(
