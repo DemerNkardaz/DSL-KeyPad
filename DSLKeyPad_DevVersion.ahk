@@ -13099,7 +13099,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"kkey_equals", MapMerge(GetModifiers("I:>+"), KeySeqSlot["="]),
 			"kkey_plus", MapMerge(GetModifiers("<+", "I:<+>+"), KeySeqSlot["="]),
 		])
-
 		SlotMapping := Map(
 			"A", ["turkic_yenisei_a", "turkic_orkhon_a"],
 			"B", ["turkic_yenisei_ab", "turkic_orkhon_ab"],
@@ -13119,7 +13118,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"P", "turkic_orkhon_ep",
 			"Q", ["turkic_yenisei_oq", "turkic_orkhon_oq"],
 			"R", ["turkic_yenisei_ar", "turkic_orkhon_ar"],
-			"S", ["", ""],
+			"S", "turkic_orkhon_as",
 			"T", ["turkic_yenisei_at", "turkic_orkhon_at"],
 			"U", ["", ""],
 			"V", ["", ""],
