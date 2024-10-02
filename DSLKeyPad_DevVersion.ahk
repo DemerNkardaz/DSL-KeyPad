@@ -190,6 +190,7 @@ DefaultConfig := [
 	["Settings", "UserLanguage", ""],
 	["Settings", "LatinLayout", "QWERTY"],
 	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
+	["Settings", "CharacterWebResource", "SymblCC"],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
 	["CustomRules", "GREPDialogAttribution", ""],
@@ -6241,7 +6242,7 @@ MapInsert(Characters,
 			recipe: ["іть", "і" . Chr(0x0463)],
 		},
 		"cyr_c_let_dzhe", {
-			unicode: "{U+040F}", html: "&#1039;",
+			unicode: "{U+040F}", html: "&#1039;", entity: "&DZcy;",
 			titlesAlt: True,
 			group: ["Cyrillic Letters", "Ж"],
 			tags: ["прописная буква Дже", "cyrillic capital letter Dzhe"],
@@ -6249,7 +6250,7 @@ MapInsert(Characters,
 			recipe: "ДЖ",
 		},
 		"cyr_s_let_dzhe", {
-			unicode: "{U+045F}", html: "&#1119;",
+			unicode: "{U+045F}", html: "&#1119;", entity: "&dzcy;",
 			titlesAlt: True,
 			group: ["Cyrillic Letters", "ж"],
 			tags: ["строчная буква дже", "cyrillic small letter dzhe"],
@@ -11358,7 +11359,6 @@ GetCharacterUnicode(symbol) {
 	return Format("{:04X}", Ord(symbol))
 }
 
-
 RegExEscape(str) {
 	static specialChars := "\.*+?^${}()[]|/"
 
@@ -11372,7 +11372,6 @@ RegExEscape(str) {
 	}
 	return newStr
 }
-
 
 GetUnicodeString(str) {
 	unicodeArray := []
@@ -11398,24 +11397,46 @@ GetUnicodeString(str) {
 
 	return unicodeString
 }
-FindCharacterPage() {
-	BackupClipboard := A_Clipboard
-	PromptValue := ""
-	A_Clipboard := ""
 
-	Send("^c")
-	Sleep 120
-	PromptValue := A_Clipboard
-	Sleep 50
-	PromptValue := GetCharacterUnicode(PromptValue)
+FindCharacterPage(InputCode := "", IsReturn := False) {
+	CharacterWebResource := IniRead(ConfigFile, "Settings", "CharacterWebResource", "Symblcc")
+	if InputCode = "" {
+		BackupClipboard := A_Clipboard
+		PromptValue := ""
+		A_Clipboard := ""
 
-	if (PromptValue != "") {
-		Sleep 100
-		Run("https://symbl.cc/" . GetLanguageCode() . "/" . PromptValue)
+		Send("^c")
+		ClipWait(0.10, 1)
+		PromptValue := A_Clipboard
+		PromptValue := GetCharacterUnicode(PromptValue)
+	} else {
+		PromptValue := StrLen(InputCode) >= 4 ? InputCode : GetCharacterUnicode(InputCode)
 	}
 
-	A_Clipboard := BackupClipboard
+	resources := Map(
+		"Compart", "https://www.compart.com/en/unicode/U+" PromptValue,
+		"Codepoints", "https://codepoints.net/U+" PromptValue,
+		"UnicodePlus", "https://unicodeplus.com/U+" PromptValue,
+		"DecodeUnicode", "https://decodeunicode.org/en/u+" PromptValue,
+		"UtilUnicode", "https://util.unicode.org/UnicodeJsps/character.jsp?a=" PromptValue,
+		"Wiktionary", "https://en.wiktionary.org/wiki/" Chr("0x" PromptValue),
+		"Wikipedia", "https://en.wikipedia.org/wiki/" Chr("0x" PromptValue),
+		"SymblCC", "https://symbl.cc/" GetLanguageCode() "/" PromptValue,
+	)
+
+	URIComponent := resources.Has(CharacterWebResource) ? resources[CharacterWebResource] : resources["SymblCC"]
+
+	if (PromptValue != "" && !IsReturn) {
+		Run(URIComponent)
+	} else if (PromptValue != "" && IsReturn) {
+		return URIComponent
+	}
+
+	if InputCode = "" {
+		A_Clipboard := BackupClipboard
+	}
 }
+
 ToggleGroupMessage() {
 	LanguageCode := GetLanguageCode()
 	global SkipGroupMessage, ConfigFile
@@ -12563,9 +12584,8 @@ LV_CharacterDetails(LV, RowNumber, SetupArray) {
 		SetupArray[10], SetupArray[11], SetupArray.Has(12) ? SetupArray[12] : "")
 }
 LV_OpenUnicodeWebsite(LV, RowNumber) {
-	LanguageCode := GetLanguageCode()
 	SelectedRow := LV.GetText(RowNumber, 4)
-	URIComponent := "https://symbl.cc/" . LanguageCode . "/" . SelectedRow
+	URIComponent := FindCharacterPage(SelectedRow, True)
 	if (SelectedRow != "") {
 		IsCtrlDown := GetKeyState("LControl")
 		if (IsCtrlDown) {
