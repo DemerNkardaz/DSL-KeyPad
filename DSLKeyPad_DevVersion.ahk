@@ -8525,7 +8525,7 @@ MapInsert(Characters,
 			group: ["Old Hungarian", "D"],
 			tags: ["прописная руна Эд секельская", "capital rune Ed old hungarian"],
 		},
-		"hungarian_s_let_ec", {
+		"hungarian_s_let_ed", {
 			unicode: "{U+10CC7}", html: "&#68807;",
 			titlesAlt: True,
 			group: ["Old Hungarian", "d"],
@@ -13890,7 +13890,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"A", ["hungarian_c_let_a", "hungarian_s_let_a"],
 			"B", ["hungarian_c_let_eb", "hungarian_s_let_eb"],
 			"C", ["hungarian_c_let_ec", "hungarian_s_let_ec"],
-			"D", ["hungarian_c_let_ed", "hungarian_s_let_ec"],
+			"D", ["hungarian_c_let_ed", "hungarian_s_let_ed"],
 			"E", ["hungarian_c_let_e", "hungarian_s_let_e"],
 			"F", ["hungarian_c_let_ef", "hungarian_s_let_ef"],
 			"G", ["hungarian_c_let_eg", "hungarian_s_let_eg"],
