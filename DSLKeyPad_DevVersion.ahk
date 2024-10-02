@@ -2745,6 +2745,22 @@ MapInsert(Characters,
 			show_on_fast_keys: True,
 			recipe: "..",
 		},
+		"tricolon", {
+			unicode: "{U+205D}", html: "&#8285;",
+			tags: ["tricolon", "троеточие"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "<+ [/][.]",
+			recipe: ":↑.",
+		},
+		"quartocolon", {
+			unicode: "{U+205E}", html: "&#8286;",
+			tags: ["vertical four dots", "четвероточие"],
+			group: [["Smelting Special", "Special Fast Secondary"]],
+			show_on_fast_keys: True,
+			alt_on_fast_keys: "<+>+ [/][.]",
+			recipe: ":↑:",
+		},
 		"exclamation", {
 			unicode: "{U+0021}", html: "&#33;", entity: "&excl;",
 		},
@@ -13299,6 +13315,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"ellipsis", MapMerge(GetModifiers("<^>!"), KeySeqSlot["DotRu"]),
 			"two_dot_punctuation", MapMerge(GetModifiers("<!"), KeySeqSlot["DotRu"]),
 			"fraction_slash", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["DotRu"]),
+			"tricolon", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["DotRu"]),
+			"quartocolon", MapMerge(GetModifiers("<^>!<+>+"), KeySeqSlot["DotRu"]),
 		])
 		SlotModdedSpecials := Map(
 			"D", Map("Flat:<!", "degree"),
@@ -13314,7 +13332,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"0", Map("Flat:<^>!", "bracket_angle_math_right", "Flat:<^>!<!", "infinity", "Flat:<!", "bracket_square_right", "Flat:<!<+", "bracket_curly_right"),
 			"~", Map("Flat:<^>!", "bullet", "Flat:<^>!<!", "bullet_hyphen", "Flat:<^>!<+", "interpunct", "Flat:<^>!<!>+", "bullet_white", "Flat:>+", "tilde_reversed"),
 			"=", Map("<^>!", "noequals", "<^>!<+>+", "almostequals", "<^>!<+", "plusminus"),
-			"/", Map("<^>!", "ellipsis", "<!", "two_dot_punctuation", "<^>!>+", "fraction_slash"),
+			"/", Map("<^>!", "ellipsis", "<^>!<+", "tricolon", "<^>!<+>+", "quartocolon", "<!", "two_dot_punctuation", "<^>!>+", "fraction_slash"),
 		)
 		LettersSlots := GetLayoutImprovedCyrillic([
 			["cyr_c_let_fita", "cyr_s_let_fita"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["A"]),
