@@ -11446,203 +11446,25 @@ SwitchLanguage(LanguageCode) {
 	ManageTrayItems()
 }
 
-windowWidth := 850
-windowHeight := 560
-
-resolutions := [
-	[1080, 1920],
-	[1440, 2560],
-	[1800, 3200],
-	[2160, 3840],
-	[2880, 5120],
-	[4320, 7680]
-]
-
-DSLTabs := []
-DSLCols := { default: [], smelting: [] }
-
-for _, localeKey in ["diacritics", "spaces", "smelting", "fastkeys", "scripts", "commands", "about", "useful", "changelog"] {
-	DSLTabs.Push(ReadLocale("tab_" . localeKey))
-}
-
-for _, localeKey in ["name", "key", "view", "unicode", "entryid"] {
-	DSLCols.default.Push(ReadLocale("col_" . localeKey))
-}
-
-for _, localeKey in ["name", "recipe", "result", "unicode", "entryid"] {
-	DSLCols.smelting.Push(ReadLocale("col_" . localeKey))
-}
-
-DSLContent := {}
-DSLContent[] := Map()
-DSLContent["BindList"] := {}
-
-CommonInfoBox := {
-	body: "x650 y35 w200 h510",
-	bodyText: ReadLocale("character"),
-	previewFrame: "x685 y80 w128 h128 Center",
-	preview: "x685 y80 w128 h128 readonly Center -VScroll -HScroll",
-	previewText: "◌͏",
-	title: "x655 y215 w190 h150 Center BackgroundTrans",
-	titleText: "N/A",
-	LaTeXTitleA: "x689 y371 w128 h24 BackgroundTrans",
-	LaTeXTitleAText: "A",
-	LaTeXTitleE: "x703 y375 w128 h24 BackgroundTrans",
-	LaTeXTitleEText: "E",
-	LaTeXTitleLTX: "x685 y373 w128 h24 BackgroundTrans",
-	LaTeXTitleLTXText: "L T  X",
-	LaTeXPackage: "x685 y373 w128 h24 BackgroundTrans Right",
-	LaTeXPackageText: "",
-	LaTeX: "x685 y390 w128 h24 readonly Center -VScroll -HScroll",
-	LaTeXText: "N/A",
-	alt: "x685 y430 w128 h24 readonly Center -VScroll -HScroll",
-	altTitle: "x685 y415 w128 h24 BackgroundTrans",
-	altTitleText: Map("ru", "Альт-код", "en", "Alt-code"),
-	altText: "N/A",
-	unicode: "x685 y470 w128 h24 readonly Center -VScroll -HScroll",
-	unicodeTitle: "x685 y455 w128 h24 BackgroundTrans",
-	unicodeTitleText: Map("ru", "Юникод", "en", "Unicode"),
-	unicodeText: "U+0000",
-	html: "x685 y510 w128 h24 readonly Center -VScroll -HScroll",
-	htmlText: "&#x0000;",
-	htmlTitle: "x685 y495 w128 h24 BackgroundTrans",
-	htmlTitleText: Map("ru", "HTML-Код/Мнемоника", "en", "HTML/Entity"),
-	tags: "x21 y546 w800 h24 readonly -VScroll -HScroll -E0x200",
-	alert: "x655 y333 w190 h40 readonly Center -VScroll -HScroll -E0x200",
-}
-
-CommandsInfoBox := {
-	body: "x300 y35 w540 h450",
-	bodyText: Map("ru", "Команда", "en", "Command"),
-	text: "vCommandDescription x310 y65 w520 h400",
-}
-
-CommonFilter := {
-	icon: "x21 y520 h24 w24",
-	field: "x49 y520 w593 h24 v",
-}
-
-ColumnWidths := [300, 150, 60, 85, 0]
-ColumnAreaWidth := "w620"
-ColumnAreaHeight := "h480"
-ColumnAreaRules := "+NoSort -Multi"
-ColumnListStyle := ColumnAreaWidth . " " . ColumnAreaHeight . " " . ColumnAreaRules
-
-DSLContent["BindList"].TabDiacritics := []
-
-InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Primary", Window LeftAlt " F1", False)
-InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Secondary", Window LeftAlt " F2")
-InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Tertiary", Window LeftAlt " F3")
-InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Quatemary", Window LeftAlt " F6")
-
-DSLContent["BindList"].TabSpaces := []
-InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Spaces", Window LeftAlt " Space", False)
-InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Dashes", Window LeftAlt " -")
-InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Quotes", Window LeftAlt QuotationDouble)
-InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Special Characters", Window LeftAlt " F7")
-
-DSLContent["BindList"].TabSmelter := []
-
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Letters", , True, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Futhork Runes", , True, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Glagolitic Letters", , True, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, "Recipes")
-InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, "Recipes")
-
-DSLContent["BindList"].TabFastKeys := []
-
-for groupName in [
-	"Diacritics Fast Primary",
-	"Special Fast Primary",
-	"Special Fast Left",
-	"Latin Accented Primary",
-	"Diacritics Fast Secondary",
-	"Special Fast Secondary",
-	"Asian Quotes",
-	"Other Signs",
-	"Spaces",
-	"Misc",
-	"Latin Extended",
-	"Latin Ligatures",
-	"Latin Accented Secondary",
-	"Cyrillic Ligatures & Letters",
-	"Cyrillic Letters",
-	"Latin Accented Tertiary",
-	"Special Fast",
-] {
-	InsertingOption := groupName = "Special Fast" ? "Fast Special" : "Fast Keys"
-	AddSeparator := (groupName = "Diacritics Fast Primary" || groupName = "Latin Ligatures") ? False : True
-	GroupHotKey := (groupName = "Diacritics Fast Primary") ? LeftControl LeftAlt
-		: (groupName = "Special Fast Left") ? LeftAlt
-			: (groupName = "Diacritics Fast Secondary") ? RightAlt
-				: (groupName = "Latin Accented Tertiary") ? RightShift
-					: (groupName = "Special Fast") ? ReadLocale("symbol_special_key")
-						: ""
-
-	FastSpecial := groupName = "Special Fast" ? True : False
-
-	InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, groupName, GroupHotKey, AddSeparator, InsertingOption)
-}
-
-DSLContent["BindList"].TabGlagoKeys := []
-
-AltLayouts := [
-	"Fake GlagoRunes", RightControl " 1",
-	"Futhark Runes", ReadLocale("symbol_futhark"),
-	"Futhork Runes", ReadLocale("symbol_futhork"),
-	"Younger Futhark Runes", ReadLocale("symbol_futhark_younger"),
-	"Almanac Runes", ReadLocale("symbol_futhark_almanac"),
-	"Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"),
-	"Medieval Runes", ReadLocale("symbol_medieval_runes"),
-	"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
-	"Glagolitic Letters", ReadLocale("symbol_glagolitic"),
-	"Cyrillic Diacritics", "",
-	"Fake TurkoPermic", RightControl " 2",
-	"Old Turkic", ReadLocale("symbol_turkic"),
-	"Old Turkic Orkhon", ReadLocale("symbol_turkic_orkhon"),
-	"Old Turkic Yenisei", ReadLocale("symbol_turkic_yenisei"),
-	"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
-	"Old Permic", ReadLocale("symbol_permic"),
-	"Fake Hungarian", RightControl " 3",
-	"Old Hungarian", ReadLocale("symbol_hungarian"),
-	"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
-	"Fake Gothic", RightControl " 4",
-	"Gothic Alphabet", ReadLocale("symbol_gothic"),
-	"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
-	"Fake IPA", RightControl " 0",
-	"IPA", ReadLocale("symbol_ipa"),
-]
-
-for i, groupName in AltLayouts {
-	if Mod(i, 2) = 1 {
-		AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "Old Turkic Orkhon" || groupName = "Old Hungarian" || groupName = "Gothic Alphabet" || groupName = "IPA") ? False : True
-		GroupHotKey := AltLayouts[i + 1]
-
-
-		InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, groupName, GroupHotKey, AddSeparator, "Alternative Layout")
-	}
-}
-
-RandPreview := Map(
-	"Diacritics", GetRandomByGroups(["Diacritics Primary", "Diacritics Secondary", "Diacritics Tertiary"]),
-	"Spaces", GetRandomByGroups(["Spaces", "Dashes", "Quotes", "Special Characters"]),
-	"Ligatures", GetRandomByGroups(["Latin Ligatures", "Cyrillic Ligatures & Letters", "Latin Accented", "Dashes", "Asian Quotes", "Quotes"]),
-	"FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Special Fast Left", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
-	"GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters", "Old Turkic Orkhon", "Old Turkic Yenisei", "Old Permic"]),
-)
-
 Constructor() {
 	CheckUpdate()
 	ManageTrayItems()
 
 	screenWidth := A_ScreenWidth
 	screenHeight := A_ScreenHeight
+
+
+	windowWidth := 850
+	windowHeight := 560
+
+	resolutions := [
+		[1080, 1920],
+		[1440, 2560],
+		[1800, 3200],
+		[2160, 3840],
+		[2880, 5120],
+		[4320, 7680]
+	]
 
 	for res in resolutions {
 		if screenHeight = res[1] && screenWidth > res[2] {
@@ -11657,6 +11479,185 @@ Constructor() {
 	LanguageCode := GetLanguageCode()
 
 	DSLPadGUI := Gui()
+
+	DSLTabs := []
+	DSLCols := { default: [], smelting: [] }
+
+	for _, localeKey in ["diacritics", "spaces", "smelting", "fastkeys", "scripts", "commands", "about", "useful", "changelog"] {
+		DSLTabs.Push(ReadLocale("tab_" . localeKey))
+	}
+
+	for _, localeKey in ["name", "key", "view", "unicode", "entryid"] {
+		DSLCols.default.Push(ReadLocale("col_" . localeKey))
+	}
+
+	for _, localeKey in ["name", "recipe", "result", "unicode", "entryid"] {
+		DSLCols.smelting.Push(ReadLocale("col_" . localeKey))
+	}
+
+	DSLContent := {}
+	DSLContent[] := Map()
+	DSLContent["BindList"] := {}
+
+	CommonInfoBox := {
+		body: "x650 y35 w200 h510",
+		bodyText: ReadLocale("character"),
+		previewFrame: "x685 y80 w128 h128 Center",
+		preview: "x685 y80 w128 h128 readonly Center -VScroll -HScroll",
+		previewText: "◌͏",
+		title: "x655 y215 w190 h150 Center BackgroundTrans",
+		titleText: "N/A",
+		LaTeXTitleA: "x689 y371 w128 h24 BackgroundTrans",
+		LaTeXTitleAText: "A",
+		LaTeXTitleE: "x703 y375 w128 h24 BackgroundTrans",
+		LaTeXTitleEText: "E",
+		LaTeXTitleLTX: "x685 y373 w128 h24 BackgroundTrans",
+		LaTeXTitleLTXText: "L T  X",
+		LaTeXPackage: "x685 y373 w128 h24 BackgroundTrans Right",
+		LaTeXPackageText: "",
+		LaTeX: "x685 y390 w128 h24 readonly Center -VScroll -HScroll",
+		LaTeXText: "N/A",
+		alt: "x685 y430 w128 h24 readonly Center -VScroll -HScroll",
+		altTitle: "x685 y415 w128 h24 BackgroundTrans",
+		altTitleText: Map("ru", "Альт-код", "en", "Alt-code"),
+		altText: "N/A",
+		unicode: "x685 y470 w128 h24 readonly Center -VScroll -HScroll",
+		unicodeTitle: "x685 y455 w128 h24 BackgroundTrans",
+		unicodeTitleText: Map("ru", "Юникод", "en", "Unicode"),
+		unicodeText: "U+0000",
+		html: "x685 y510 w128 h24 readonly Center -VScroll -HScroll",
+		htmlText: "&#x0000;",
+		htmlTitle: "x685 y495 w128 h24 BackgroundTrans",
+		htmlTitleText: Map("ru", "HTML-Код/Мнемоника", "en", "HTML/Entity"),
+		tags: "x21 y546 w800 h24 readonly -VScroll -HScroll -E0x200",
+		alert: "x655 y333 w190 h40 readonly Center -VScroll -HScroll -E0x200",
+	}
+
+	CommandsInfoBox := {
+		body: "x300 y35 w540 h450",
+		bodyText: Map("ru", "Команда", "en", "Command"),
+		text: "vCommandDescription x310 y65 w520 h400",
+	}
+
+	CommonFilter := {
+		icon: "x21 y520 h24 w24",
+		field: "x49 y520 w593 h24 v",
+	}
+
+	ColumnWidths := [300, 150, 60, 85, 0]
+	ColumnAreaWidth := "w620"
+	ColumnAreaHeight := "h480"
+	ColumnAreaRules := "+NoSort -Multi"
+	ColumnListStyle := ColumnAreaWidth . " " . ColumnAreaHeight . " " . ColumnAreaRules
+
+	DSLContent["BindList"].TabDiacritics := []
+
+	InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Primary", Window LeftAlt " F1", False)
+	InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Secondary", Window LeftAlt " F2")
+	InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Tertiary", Window LeftAlt " F3")
+	InsertCharactersGroups(DSLContent["BindList"].TabDiacritics, "Diacritics Quatemary", Window LeftAlt " F6")
+
+	DSLContent["BindList"].TabSpaces := []
+	InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Spaces", Window LeftAlt " Space", False)
+	InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Dashes", Window LeftAlt " -")
+	InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Quotes", Window LeftAlt QuotationDouble)
+	InsertCharactersGroups(DSLContent["BindList"].TabSpaces, "Special Characters", Window LeftAlt " F7")
+
+	DSLContent["BindList"].TabSmelter := []
+
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Ligatures", , False, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Digraphs", , False, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Extended", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Latin Accented", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Ligatures & Letters", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Cyrillic Letters", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Futhork Runes", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Glagolitic Letters", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, "Recipes")
+
+	DSLContent["BindList"].TabFastKeys := []
+
+	for groupName in [
+		"Diacritics Fast Primary",
+		"Special Fast Primary",
+		"Special Fast Left",
+		"Latin Accented Primary",
+		"Diacritics Fast Secondary",
+		"Special Fast Secondary",
+		"Asian Quotes",
+		"Other Signs",
+		"Spaces",
+		"Misc",
+		"Latin Extended",
+		"Latin Ligatures",
+		"Latin Accented Secondary",
+		"Cyrillic Ligatures & Letters",
+		"Cyrillic Letters",
+		"Latin Accented Tertiary",
+		"Special Fast",
+	] {
+		InsertingOption := groupName = "Special Fast" ? "Fast Special" : "Fast Keys"
+		AddSeparator := (groupName = "Diacritics Fast Primary" || groupName = "Latin Ligatures") ? False : True
+		GroupHotKey := (groupName = "Diacritics Fast Primary") ? LeftControl LeftAlt
+			: (groupName = "Special Fast Left") ? LeftAlt
+				: (groupName = "Diacritics Fast Secondary") ? RightAlt
+					: (groupName = "Latin Accented Tertiary") ? RightShift
+						: (groupName = "Special Fast") ? ReadLocale("symbol_special_key")
+							: ""
+
+		FastSpecial := groupName = "Special Fast" ? True : False
+
+		InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, groupName, GroupHotKey, AddSeparator, InsertingOption)
+	}
+
+	DSLContent["BindList"].TabGlagoKeys := []
+
+	AltLayouts := [
+		"Fake GlagoRunes", RightControl " 1",
+		"Futhark Runes", ReadLocale("symbol_futhark"),
+		"Futhork Runes", ReadLocale("symbol_futhork"),
+		"Younger Futhark Runes", ReadLocale("symbol_futhark_younger"),
+		"Almanac Runes", ReadLocale("symbol_futhark_almanac"),
+		"Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"),
+		"Medieval Runes", ReadLocale("symbol_medieval_runes"),
+		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
+		"Glagolitic Letters", ReadLocale("symbol_glagolitic"),
+		"Cyrillic Diacritics", "",
+		"Fake TurkoPermic", RightControl " 2",
+		"Old Turkic", ReadLocale("symbol_turkic"),
+		"Old Turkic Orkhon", ReadLocale("symbol_turkic_orkhon"),
+		"Old Turkic Yenisei", ReadLocale("symbol_turkic_yenisei"),
+		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
+		"Old Permic", ReadLocale("symbol_permic"),
+		"Fake Hungarian", RightControl " 3",
+		"Old Hungarian", ReadLocale("symbol_hungarian"),
+		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
+		"Fake Gothic", RightControl " 4",
+		"Gothic Alphabet", ReadLocale("symbol_gothic"),
+		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
+		"Fake IPA", RightControl " 0",
+		"IPA", ReadLocale("symbol_ipa"),
+	]
+
+	for i, groupName in AltLayouts {
+		if Mod(i, 2) = 1 {
+			AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "Old Turkic Orkhon" || groupName = "Old Hungarian" || groupName = "Gothic Alphabet" || groupName = "IPA") ? False : True
+			GroupHotKey := AltLayouts[i + 1]
+
+
+			InsertCharactersGroups(DSLContent["BindList"].TabGlagoKeys, groupName, GroupHotKey, AddSeparator, "Alternative Layout")
+		}
+	}
+
+	RandPreview := Map(
+		"Diacritics", GetRandomByGroups(["Diacritics Primary", "Diacritics Secondary", "Diacritics Tertiary"]),
+		"Spaces", GetRandomByGroups(["Spaces", "Dashes", "Quotes", "Special Characters"]),
+		"Ligatures", GetRandomByGroups(["Latin Ligatures", "Cyrillic Ligatures & Letters", "Latin Accented", "Dashes", "Asian Quotes", "Quotes"]),
+		"FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Special Fast Left", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
+		"GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters", "Old Turkic Orkhon", "Old Turkic Yenisei", "Old Permic"]),
+	)
 
 	Tab := DSLPadGUI.Add("Tab3", "w" windowWidth " h" windowHeight, DSLTabs)
 	DSLPadGUI.SetFont("s11")
