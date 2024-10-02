@@ -2729,13 +2729,20 @@ MapInsert(Characters,
 			tags: ["ellipsis", "многоточие"],
 			group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "."],
 			show_on_fast_keys: True,
-			alt_on_fast_keys: "[/]",
+			alt_on_fast_keys: "[/][.]",
 			recipe: "...",
 		},
 		"two_dot_leader", {
 			unicode: "{U+2025}", html: "&#8229;",
 			tags: ["two dot leader", "двухточечный пунктир"],
-			group: [["Smelting Special", "Special Fast Secondary"], "."],
+			group: ["Smelting Special"],
+			recipe: "/..",
+		},
+		"two_dot_punctuation", {
+			unicode: "{U+205A}", html: "&#8282;",
+			tags: ["two dot punctuation", "двухточечная пунктуация"],
+			group: [["Smelting Special", "Special Fast Left"], ["/", "."]],
+			show_on_fast_keys: True,
 			recipe: "..",
 		},
 		"exclamation", {
@@ -12592,6 +12599,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"almostequals", MapMerge(GetModifiers("<^>!<+>+"), KeySeqSlot["="]),
 			"plusminus", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["="]),
 			"ellipsis", MapMerge(GetModifiers("<^>!"), KeySeqSlot["DotRu"]),
+			"two_dot_punctuation", MapMerge(GetModifiers("<!"), KeySeqSlot["DotRu"]),
 			"fraction_slash", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["DotRu"]),
 		])
 		SlotModdedSpecials := Map(
@@ -12608,7 +12616,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"0", Map("Flat:<^>!", "bracket_angle_math_right", "Flat:<^>!<!", "infinity", "Flat:<!", "bracket_square_right", "Flat:<!<+", "bracket_curly_right"),
 			"~", Map("Flat:<^>!", "bullet", "Flat:<^>!<!", "bullet_hyphen", "Flat:<^>!<+", "interpunct", "Flat:<^>!<!>+", "bullet_white", "Flat:>+", "tilde_reversed"),
 			"=", Map("<^>!", "noequals", "<^>!<+>+", "almostequals", "<^>!<+", "plusminus"),
-			"/", Map("<^>!", "ellipsis", "<^>!>+", "fraction_slash"),
+			"/", Map("<^>!", "ellipsis", "<!", "two_dot_punctuation", "<^>!>+", "fraction_slash"),
 		)
 		LettersSlots := GetLayoutImprovedCyrillic([
 			["cyr_c_let_fita", "cyr_s_let_fita"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["A"]),
@@ -13107,7 +13115,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"L", ["turkic_yenisei_al", "turkic_orkhon_al"],
 			"M", "turkic_orkhon_em",
 			"N", "turkic_orkhon_an",
-			"O", "turkic_yenisei_o",
+			"O", "turkic_orkhon_o",
 			"P", "turkic_orkhon_ep",
 			"Q", ["turkic_yenisei_oq", "turkic_orkhon_oq"],
 			"R", ["turkic_yenisei_ar", "turkic_orkhon_ar"],
@@ -13132,8 +13140,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 
 		SlotModdedMapping := Map(
-			"A", Map("<^>!", "turkic_yenisei_ae"),
-			"B", Map("<^>!", ["turkic_yenisei_aeb", "turkic_orkhon_aeb"], "<!", ["turkic_yenisei_ash", "turkic_orkhon_ash"]),
+			"A", Map("<^>!", "turkic_yenisei_ae", "<!", ["turkic_yenisei_ash", "turkic_orkhon_ash"]),
+			"B", Map("<^>!", ["turkic_yenisei_aeb", "turkic_orkhon_aeb"]),
 			"C", Map("<^>!", "turkic_orkhon_ic"),
 			"D", Map("<^>!", "turkic_orkhon_aed"),
 			"G", Map("<^>!", ["turkic_yenisei_aeg", "turkic_orkhon_aeg"]),
@@ -13141,7 +13149,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"L", Map("<^>!", "turkic_orkhon_ael"),
 			"N", Map("<^>!>+", ["turkic_yenisei_ent", "turkic_orkhon_ent"], "<^>!", ["turkic_yenisei_aen", "turkic_orkhon_aen"], ">+", ["turkic_yenisei_enc", "turkic_orkhon_enc"], ">+", ["turkic_yenisei_eny", "turkic_orkhon_eny"], "<!", "turkic_orkhon_eng"),
 			"O", Map("<^>!", ["turkic_yenisei_oe", "turkic_orkhon_oe"]),
-			"З", Map("<!", "turkic_orkhon_op"),
+			"P", Map("<!", "turkic_orkhon_op"),
 			"Q", Map("<^>!", ["turkic_yenisei_oek", "turkic_orkhon_oek"], "<!", ["turkic_yenisei_iq", "turkic_orkhon_iq"]),
 			"R", Map("<^>!", "turkic_orkhon_aer", "<!", "turkic_orkhon_bash"),
 			"S", Map("<^>!", "turkic_orkhon_aes", "<!", ["turkic_yenisei_esh", "turkic_orkhon_esh"]),
@@ -13161,7 +13169,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"\", Map("<+", "kkey_verticalline"),
 		)
 
-		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots, True)
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots)
 	} else if Combinations = "Gothic" {
 		SlotMapping := Map(
 			"A", "gothic_ahza",
