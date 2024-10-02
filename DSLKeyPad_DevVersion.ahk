@@ -8617,6 +8617,108 @@ MapInsert(Characters,
 			alt_layout: ">! [i]",
 			tags: ["строчная руна ии секельская", "small rune ii old hungarian"],
 		},
+		"hungarian_c_let_ej", {
+			unicode: "{U+10C92}", html: "&#68754;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "J"],
+			tags: ["прописная руна Эј секельская", "capital rune Ej old hungarian"],
+		},
+		"hungarian_s_let_ej", {
+			unicode: "{U+10CD2}", html: "&#68818;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "j"],
+			tags: ["строчная руна эј секельская", "small rune ej old hungarian"],
+		},
+		"hungarian_c_let_ek", {
+			unicode: "{U+10C93}", html: "&#68755;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "K"],
+			tags: ["прописная руна Эк секельская", "capital rune Ek old hungarian"],
+		},
+		"hungarian_s_let_ek", {
+			unicode: "{U+10CD3}", html: "&#68819;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "k"],
+			tags: ["строчная руна эк секельская", "small rune ek old hungarian"],
+		},
+		"hungarian_c_let_ak", {
+			unicode: "{U+10C94}", html: "&#68756;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [K]",
+			tags: ["прописная руна Ак секельская", "capital rune Ak old hungarian"],
+		},
+		"hungarian_s_let_ak", {
+			unicode: "{U+10CD4}", html: "&#68820;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [k]",
+			tags: ["строчная руна ак секельская", "small rune ak old hungarian"],
+		},
+		"hungarian_c_let_el", {
+			unicode: "{U+10C96}", html: "&#68758;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "L"],
+			tags: ["прописная руна Эл секельская", "capital rune El old hungarian"],
+		},
+		"hungarian_s_let_el", {
+			unicode: "{U+10CD6}", html: "&#68822;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "l"],
+			tags: ["строчная руна эл секельская", "small rune el old hungarian"],
+		},
+		"hungarian_c_let_ely", {
+			unicode: "{U+10C97}", html: "&#68759;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [L]",
+			tags: ["прописная руна Элй секельская", "capital rune Ely old hungarian"],
+		},
+		"hungarian_s_let_ely", {
+			unicode: "{U+10CD7}", html: "&#68823;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [l]",
+			tags: ["строчная руна элй секельская", "small rune ely old hungarian"],
+		},
+		"hungarian_c_let_em", {
+			unicode: "{U+10C98}", html: "&#68760;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "M"],
+			tags: ["прописная руна Эм секельская", "capital rune Em old hungarian"],
+		},
+		"hungarian_s_let_em", {
+			unicode: "{U+10CD8}", html: "&#68824;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "m"],
+			tags: ["строчная руна эм секельская", "small rune em old hungarian"],
+		},
+		"hungarian_c_let_en", {
+			unicode: "{U+10C99}", html: "&#68761;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "N"],
+			tags: ["прописная руна Эн секельская", "capital rune En old hungarian"],
+		},
+		"hungarian_s_let_en", {
+			unicode: "{U+10CD9}", html: "&#68825;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "n"],
+			tags: ["строчная руна эн секельская", "small rune en old hungarian"],
+		},
+		"hungarian_c_let_eny", {
+			unicode: "{U+10C9A}", html: "&#68762;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [N]",
+			tags: ["прописная руна Энй секельская", "capital rune Eny old hungarian"],
+		},
+		"hungarian_s_let_eny", {
+			unicode: "{U+10CDA}", html: "&#68826;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [n]",
+			tags: ["строчная руна энй секельская", "small rune eny old hungarian"],
+		},
 		;
 		;
 		"gothic_ahza", {
@@ -10132,7 +10234,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	LocalesPairs := [
 		"Glagolitic Futhark", "script_glagolitic_futhark",
 		"Old Turkic Old Permic", "script_turkic_perimc",
-		"Old Hungarian", "script_turkic_perimc",
+		"Old Hungarian", "script_hungarian",
 		"Gothic", "script_gothic",
 		"IPA", "script_ipa",
 	]
@@ -12677,7 +12779,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			if HotKeyVariant = "Flat" {
 				TempArray.Push(Label, (K) => HandleFastKey(K, SlotValue))
 			} else if HotKeyVariant = "Caps" {
-				TempArray.Push(Label, (K) => CapsSeparatedKey(K, SlotValue[1], SlotValue[2]))
+				if IsObject(SlotValue) {
+					TempArray.Push(Label, (K) => CapsSeparatedKey(K, SlotValue[1], SlotValue[2]))
+				} else {
+					TempArray.Push(Label, (K) => HandleFastKey(K, SlotValue))
+				}
 			} else {
 				TempArray.Push(Label, (K) => LangSeparatedKey(K, SlotValue, Slot, True, ReverseCaps))
 			}
@@ -13367,11 +13473,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"G", ["hungarian_c_let_eg", "hungarian_s_let_eg"],
 			"H", ["hungarian_c_let_eh", "hungarian_s_let_eh"],
 			"I", ["hungarian_c_let_i", "hungarian_s_let_i"],
-			"J", ["", ""],
-			"K", ["", ""],
-			"L", ["", ""],
-			"M", ["", ""],
-			"N", ["", ""],
+			"J", ["hungarian_c_let_ej", "hungarian_s_let_ej"],
+			"K", ["hungarian_c_let_ek", "hungarian_s_let_ek"],
+			"L", ["hungarian_c_let_el", "hungarian_s_let_el"],
+			"M", ["hungarian_c_let_em", "hungarian_s_let_em"],
+			"N", ["hungarian_c_let_en", "hungarian_s_let_en"],
 			"O", ["", ""],
 			"P", ["", ""],
 			"Q", ["", ""],
@@ -13402,7 +13508,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"E", Map("<^>!", ["hungarian_c_let_ee", "hungarian_s_let_ee"]),
 			"G", Map("<^>!", ["hungarian_c_let_egy", "hungarian_s_let_egy"]),
 			"I", Map("<^>!", ["hungarian_c_let_ii", "hungarian_s_let_ii"]),
-			"K", Map("<^>!", ["", ""]),
+			"K", Map("<^>!", ["hungarian_c_let_ak", "hungarian_s_let_ak"]),
+			"L", Map("<^>!", ["hungarian_c_let_ely", "hungarian_s_let_ely"]),
+			"N", Map("<^>!", ["hungarian_c_let_eny", "hungarian_s_let_eny"]),
 			"S", Map("<^>!", ["", ""]),
 			"T", Map("<^>!", ["", ""]),
 			",", Map("<+", "kkey_lessthan", "<^>!", "runic_cruciform_punctuation"),
@@ -13419,7 +13527,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"\", Map("<+", "kkey_verticalline"),
 		)
 
-		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Caps")
 	} else if Combinations = "Gothic" {
 		SlotMapping := Map(
 			"A", "gothic_ahza",
