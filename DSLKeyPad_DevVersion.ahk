@@ -7671,91 +7671,91 @@ MapInsert(Characters,
 			titlesAlt: True,
 			group: ["Old Turkic Orkhon"],
 			alt_layout: "[A]",
-			tags: ["древнетюркская орхонская буква a", "old turkic orkhon letter a"],
+			tags: ["древнетюркская орхонская буква а", "old turkic orkhon letter a"],
 		},
 		"turkic_yenisei_a", {
 			unicode: "{U+10C01}", html: "&#68609;",
 			titlesAlt: True,
 			group: ["Old Turkic Yenisei"],
 			alt_layout: "c* [A]",
-			tags: ["древнетюркская енисейская буква a", "old turkic yenisei letter a"],
+			tags: ["древнетюркская енисейская буква а", "old turkic yenisei letter a"],
 		},
 		"turkic_yenisei_ae", {
 			unicode: "{U+10C02}", html: "&#68610;",
 			titlesAlt: True,
 			group: ["Old Turkic Yenisei"],
 			alt_layout: ">! [A]",
-			tags: ["древнетюркская енисейская буква ae", "old turkic yenisei letter ae"],
+			tags: ["древнетюркская енисейская буква я", "old turkic yenisei letter ae"],
 		},
 		"turkic_orkhon_ab", {
 			unicode: "{U+10C09}", html: "&#68617;",
 			titlesAlt: True,
 			group: ["Old Turkic Orkhon"],
 			alt_layout: "[B]",
-			tags: ["древнетюркская орхонская буква ab", "old turkic orkhon letter ab"],
+			tags: ["древнетюркская орхонская буква аб", "old turkic orkhon letter ab"],
 		},
 		"turkic_yenisei_ab", {
 			unicode: "{U+10C0A}", html: "&#68618;",
 			titlesAlt: True,
 			group: ["Old Turkic Yenisei"],
 			alt_layout: "c* [B]",
-			tags: ["древнетюркская енисейская буква ab", "old turkic yenisei letter ab"],
+			tags: ["древнетюркская енисейская буква аб", "old turkic yenisei letter ab"],
 		},
 		"turkic_orkhon_aeb", {
 			unicode: "{U+10C0B}", html: "&#68619;",
 			titlesAlt: True,
 			group: ["Old Turkic Orkhon"],
 			alt_layout: ">! [B]",
-			tags: ["древнетюркская орхонская буква aeb", "old turkic orkhon letter aeb"],
+			tags: ["древнетюркская орхонская буква ябь", "old turkic orkhon letter aeb"],
 		},
 		"turkic_yenisei_aeb", {
 			unicode: "{U+10C0C}", html: "&#68620;",
 			titlesAlt: True,
 			group: ["Old Turkic Yenisei"],
 			alt_layout: "c*>! [B]",
-			tags: ["древнетюркская енисейская буква aeb", "old turkic yenisei letter aeb"],
+			tags: ["древнетюркская енисейская буква ябь", "old turkic yenisei letter aeb"],
 		},
 		"turkic_yenisei_e", {
 			unicode: "{U+10C05}", html: "&#68613;",
 			titlesAlt: True,
 			group: ["Old Turkic Yenisei"],
 			alt_layout: "[E]",
-			tags: ["древнетюркская енисейская буква e", "old turkic yenisei letter e"],
+			tags: ["древнетюркская енисейская буква е", "old turkic yenisei letter e"],
 		},
 		"turkic_orkhon_i", {
 			unicode: "{U+10C03}", html: "&#68611;",
 			titlesAlt: True,
 			group: ["Old Turkic Orkhon"],
 			alt_layout: "[I]",
-			tags: ["древнетюркская орхонская буква i", "old turkic orkhon letter i"],
+			tags: ["древнетюркская орхонская буква и", "old turkic orkhon letter i"],
 		},
 		"turkic_yenisei_i", {
 			unicode: "{U+10C04}", html: "&#68612;",
 			titlesAlt: True,
 			group: ["Old Turkic Yenisei"],
 			alt_layout: "c* [I]",
-			tags: ["древнетюркская енисейская буква i", "old turkic yenisei letter i"],
+			tags: ["древнетюркская енисейская буква и", "old turkic yenisei letter i"],
 		},
 		"turkic_orkhon_o", {
 			unicode: "{U+10C06}", html: "&#68614;",
 			titlesAlt: True,
 			group: ["Old Turkic Orkhon"],
 			alt_layout: "[O]",
-			tags: ["древнетюркская орхонская буква o", "old turkic orkhon letter o"],
+			tags: ["древнетюркская орхонская буква о", "old turkic orkhon letter o"],
 		},
 		"turkic_orkhon_oe", {
 			unicode: "{U+10C07}", html: "&#68615;",
 			titlesAlt: True,
 			group: ["Old Turkic Orkhon"],
 			alt_layout: ">! [I]",
-			tags: ["древнетюркская орхонская буква oe", "old turkic orkhon letter oe"],
+			tags: ["древнетюркская орхонская буква ё", "old turkic orkhon letter oe"],
 		},
 		"turkic_yenisei_oe", {
 			unicode: "{U+10C08}", html: "&#68616;",
 			titlesAlt: True,
 			group: ["Old Turkic Yenisei"],
 			alt_layout: "c*>! [I]",
-			tags: ["древнетюркская енисейская буква oe", "old turkic yenisei letter oe"],
+			tags: ["древнетюркская енисейская буква ё", "old turkic yenisei letter oe"],
 		},
 		;
 		"permic_an", {
@@ -9597,6 +9597,7 @@ ChangeScriptInput(ScriptMode) {
 	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
 		IniWrite("Default", ConfigFile, "Settings", "ScriptInput")
 		UnregisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Cleanscript"))
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 	} else {
 		IniWrite(ScriptMode, ConfigFile, "Settings", "ScriptInput")
 		RegisterHotKeys(ScriptMode == "sup" ? GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Supercript") : GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Subscript"), True)
@@ -12839,41 +12840,39 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<+" UseKey["Equals"], "Off",
 		]
 	} else if Combinations = "Supercript" {
-		LayoutArray := [
-			UseKey["1"], (K) => HandleFastKey(K, "num_sup_1"),
-			UseKey["2"], (K) => HandleFastKey(K, "num_sup_2"),
-			UseKey["3"], (K) => HandleFastKey(K, "num_sup_3"),
-			UseKey["4"], (K) => HandleFastKey(K, "num_sup_4"),
-			UseKey["5"], (K) => HandleFastKey(K, "num_sup_5"),
-			UseKey["6"], (K) => HandleFastKey(K, "num_sup_6"),
-			UseKey["7"], (K) => HandleFastKey(K, "num_sup_7"),
-			UseKey["8"], (K) => HandleFastKey(K, "num_sup_8"),
-			UseKey["9"], (K) => HandleFastKey(K, "num_sup_9"),
-			UseKey["0"], (K) => HandleFastKey(K, "num_sup_0"),
-			UseKey["Minus"], (K) => HandleFastKey(K, "num_sup_minus"),
-			UseKey["Equals"], (K) => HandleFastKey(K, "num_sup_equals"),
-			"<+" UseKey["9"], (K) => HandleFastKey(K, "num_sup_left_parenthesis"),
-			"<+" UseKey["0"], (K) => HandleFastKey(K, "num_sup_right_parenthesis"),
-			"<+" UseKey["Equals"], (K) => HandleFastKey(K, "num_sup_plus"),
-		]
+
+		SlotModdedMapping := Map(
+			"1", Map("Caps:", ["num_sub_1", "num_sup_1"]),
+			"2", Map("Caps:", ["num_sub_2", "num_sup_2"]),
+			"3", Map("Caps:", ["num_sub_3", "num_sup_3"]),
+			"4", Map("Caps:", ["num_sub_4", "num_sup_4"]),
+			"5", Map("Caps:", ["num_sub_5", "num_sup_5"]),
+			"6", Map("Caps:", ["num_sub_6", "num_sup_6"]),
+			"7", Map("Caps:", ["num_sub_7", "num_sup_7"]),
+			"8", Map("Caps:", ["num_sub_8", "num_sup_8"]),
+			"9", Map("Caps:", ["num_sub_9", "num_sup_9"], "Caps:<+", ["num_sub_left_parenthesis", "num_sup_left_parenthesis"]),
+			"0", Map("Caps:", ["num_sub_0", "num_sup_0"], "Caps:<+", ["num_sub_right_parenthesis", "num_sup_right_parenthesis"]),
+			"-", Map("Caps:", ["num_sub_minus", "num_sup_minus"]),
+			"=", Map("Caps:", ["num_sub_equals", "num_sup_equals"], "Caps:<+", ["num_sub_plus", "num_sup_plus"]),
+		)
+		LayoutArray := GetBindingsArray(, SlotModdedMapping)
+
 	} else if Combinations = "Subscript" {
-		LayoutArray := [
-			UseKey["1"], (K) => HandleFastKey(K, "num_sub_1"),
-			UseKey["2"], (K) => HandleFastKey(K, "num_sub_2"),
-			UseKey["3"], (K) => HandleFastKey(K, "num_sub_3"),
-			UseKey["4"], (K) => HandleFastKey(K, "num_sub_4"),
-			UseKey["5"], (K) => HandleFastKey(K, "num_sub_5"),
-			UseKey["6"], (K) => HandleFastKey(K, "num_sub_6"),
-			UseKey["7"], (K) => HandleFastKey(K, "num_sub_7"),
-			UseKey["8"], (K) => HandleFastKey(K, "num_sub_8"),
-			UseKey["9"], (K) => HandleFastKey(K, "num_sub_9"),
-			UseKey["0"], (K) => HandleFastKey(K, "num_sub_0"),
-			UseKey["Minus"], (K) => HandleFastKey(K, "num_sub_minus"),
-			UseKey["Equals"], (K) => HandleFastKey(K, "num_sub_equals"),
-			"<+" UseKey["9"], (K) => HandleFastKey(K, "num_sub_left_parenthesis"),
-			"<+" UseKey["0"], (K) => HandleFastKey(K, "num_sub_right_parenthesis"),
-			"<+" UseKey["Equals"], (K) => HandleFastKey(K, "num_sub_plus"),
-		]
+		SlotModdedMapping := Map(
+			"1", Map("Caps:", ["num_sup_1", "num_sub_1"]),
+			"2", Map("Caps:", ["num_sup_2", "num_sub_2"]),
+			"3", Map("Caps:", ["num_sup_3", "num_sub_3"]),
+			"4", Map("Caps:", ["num_sup_4", "num_sub_4"]),
+			"5", Map("Caps:", ["num_sup_5", "num_sub_5"]),
+			"6", Map("Caps:", ["num_sup_6", "num_sub_6"]),
+			"7", Map("Caps:", ["num_sup_7", "num_sub_7"]),
+			"8", Map("Caps:", ["num_sup_8", "num_sub_8"]),
+			"9", Map("Caps:", ["num_sup_9", "num_sub_9"], "Caps:<+", ["num_sup_left_parenthesis", "num_sub_left_parenthesis"]),
+			"0", Map("Caps:", ["num_sup_0", "num_sub_0"], "Caps:<+", ["num_sup_right_parenthesis", "num_sub_right_parenthesis"]),
+			"-", Map("Caps:", ["num_sup_minus", "num_sub_minus"]),
+			"=", Map("Caps:", ["num_sup_equals", "num_sub_equals"], "Caps:<+", ["num_sup_plus", "num_sub_plus"]),
+		)
+		LayoutArray := GetBindingsArray(, SlotModdedMapping)
 	} else if Combinations = "Utility" {
 		LayoutArray := [
 			"<#<!" UseKey["F1"], (*) => GroupActivator("Diacritics Primary", "F1"),
