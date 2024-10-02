@@ -8438,6 +8438,187 @@ MapInsert(Characters,
 			tags: ["древнепермская буква я", "old permic letter ya"],
 		},
 		;
+		;
+		"hungarian_c_let_a", {
+			unicode: "{U+10C80}", html: "&#68736;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "A"],
+			tags: ["прописная руна А секельская", "capital rune A old hungarian"],
+		},
+		"hungarian_s_let_a", {
+			unicode: "{U+10CC0}", html: "&#68800;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "a"],
+			tags: ["строчная руна а секельская", "small rune a old hungarian"],
+		},
+		"hungarian_c_let_aa", {
+			unicode: "{U+10C81}", html: "&#68737;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [A]",
+			tags: ["прописная руна Аа секельская", "capital rune Aa old hungarian"],
+		},
+		"hungarian_s_let_aa", {
+			unicode: "{U+10CC1}", html: "&#68801;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [a]",
+			tags: ["строчная руна аа секельская", "small rune aa old hungarian"],
+		},
+		"hungarian_c_let_eb", {
+			unicode: "{U+10C82}", html: "&#68738;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "B"],
+			tags: ["прописная руна Эб секельская", "capital rune Eb old hungarian"],
+		},
+		"hungarian_s_let_eb", {
+			unicode: "{U+10CC2}", html: "&#68802;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "b"],
+			tags: ["строчная руна эб секельская", "small rune eb old hungarian"],
+		},
+		"hungarian_c_let_ec", {
+			unicode: "{U+10C84}", html: "&#68740;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "C"],
+			tags: ["прописная руна Эц секельская", "capital rune Ec old hungarian"],
+		},
+		"hungarian_s_let_ec", {
+			unicode: "{U+10CC4}", html: "&#68804;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "c"],
+			tags: ["строчная руна эц секельская", "small rune ec old hungarian"],
+		},
+		"hungarian_c_let_ecs", {
+			unicode: "{U+10C86}", html: "&#68742;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [C]",
+			tags: ["прописная руна Эч секельская", "capital rune Ecs old hungarian"],
+		},
+		"hungarian_s_let_ecs", {
+			unicode: "{U+10CC6}", html: "&#68806;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [c]",
+			tags: ["строчная руна эч секельская", "small rune ecs old hungarian"],
+		},
+		"hungarian_c_let_ed", {
+			unicode: "{U+10C87}", html: "&#68743;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "D"],
+			tags: ["прописная руна Эд секельская", "capital rune Ed old hungarian"],
+		},
+		"hungarian_s_let_ec", {
+			unicode: "{U+10CC7}", html: "&#68807;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "d"],
+			tags: ["строчная руна эд секельская", "small rune ed old hungarian"],
+		},
+		"hungarian_c_let_e", {
+			unicode: "{U+10C89}", html: "&#68745;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "E"],
+			tags: ["прописная руна Е секельская", "capital rune E old hungarian"],
+		},
+		"hungarian_s_let_e", {
+			unicode: "{U+10CC9}", html: "&#68809;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "e"],
+			tags: ["строчная руна е секельская", "small rune e old hungarian"],
+		},
+		"hungarian_c_let_ee", {
+			unicode: "{U+10C8B}", html: "&#68747;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [E]",
+			tags: ["прописная руна Ее секельская", "capital rune Ee old hungarian"],
+		},
+		"hungarian_s_let_ee", {
+			unicode: "{U+10CCB}", html: "&#68811;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [e]",
+			tags: ["строчная руна ее секельская", "small rune ee old hungarian"],
+		},
+		"hungarian_c_let_ef", {
+			unicode: "{U+10C8C}", html: "&#68748;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "F"],
+			tags: ["прописная руна Эф секельская", "capital rune Ef old hungarian"],
+		},
+		"hungarian_s_let_ef", {
+			unicode: "{U+10CCC}", html: "&#68812;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "f"],
+			tags: ["строчная руна эф секельская", "small rune ef old hungarian"],
+		},
+		"hungarian_c_let_eg", {
+			unicode: "{U+10C8D}", html: "&#68749;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "G"],
+			tags: ["прописная руна Эг секельская", "capital rune Eg old hungarian"],
+		},
+		"hungarian_s_let_eg", {
+			unicode: "{U+10CCD}", html: "&#68813;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "g"],
+			tags: ["строчная руна эг секельская", "small rune eg old hungarian"],
+		},
+		"hungarian_c_let_egy", {
+			unicode: "{U+10C8E}", html: "&#68750;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [G]",
+			tags: ["прописная руна Эгй секельская", "capital rune Egy old hungarian"],
+		},
+		"hungarian_s_let_egy", {
+			unicode: "{U+10CCE}", html: "&#68814;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [g]",
+			tags: ["строчная руна эгй секельская", "small rune egy old hungarian"],
+		},
+		"hungarian_c_let_eh", {
+			unicode: "{U+10C8F}", html: "&#68751;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "H"],
+			tags: ["прописная руна Эх секельская", "capital rune Eh old hungarian"],
+		},
+		"hungarian_s_let_eh", {
+			unicode: "{U+10CCF}", html: "&#68815;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "h"],
+			tags: ["строчная руна эх секельская", "small rune eh old hungarian"],
+		},
+		"hungarian_c_let_i", {
+			unicode: "{U+10C90}", html: "&#68752;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "I"],
+			tags: ["прописная руна и секельская", "capital rune I old hungarian"],
+		},
+		"hungarian_s_let_i", {
+			unicode: "{U+10CD0}", html: "&#68816;",
+			titlesAlt: True,
+			group: ["Old Hungarian", "i"],
+			tags: ["строчная руна и секельская", "small rune i old hungarian"],
+		},
+		"hungarian_c_let_ii", {
+			unicode: "{U+10C91}", html: "&#68753;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [I]",
+			tags: ["прописная руна Ии секельская", "capital rune Ii old hungarian"],
+		},
+		"hungarian_s_let_ii", {
+			unicode: "{U+10CD1}", html: "&#68817;",
+			titlesAlt: True,
+			group: ["Old Hungarian"],
+			alt_layout: ">! [i]",
+			tags: ["строчная руна ии секельская", "small rune ii old hungarian"],
+		},
+		;
+		;
 		"gothic_ahza", {
 			unicode: "{U+10330}", html: "&#66352;",
 			titlesAlt: True,
@@ -9177,6 +9358,8 @@ ProcessMapAfter() {
 			value.symbolFont := "Noto Sans Old Permic"
 		} else if RegExMatch(EntryName, "^turkic") {
 			;value.symbolFont := "Noto Sans Old Turkic"
+		} else if RegExMatch(EntryName, "^hungarian") {
+			value.symbolFont := "Noto Sans Old Hungarian"
 		}
 
 		if HasProp(value, "alt_on_fast_keys") {
@@ -9949,6 +10132,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	LocalesPairs := [
 		"Glagolitic Futhark", "script_glagolitic_futhark",
 		"Old Turkic Old Permic", "script_turkic_perimc",
+		"Old Hungarian", "script_turkic_perimc",
 		"Gothic", "script_gothic",
 		"IPA", "script_ipa",
 	]
@@ -10933,6 +11117,9 @@ AltLayouts := [
 	"Old Turkic Yenisei", ReadLocale("symbol_turkic_yenisei"),
 	"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
 	"Old Permic", ReadLocale("symbol_permic"),
+	"Fake Hungarian", RightControl " 3",
+	"Old Hungarian", ReadLocale("symbol_hungarian"),
+	"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
 	"Fake Gothic", RightControl " 4",
 	"Gothic Alphabet", ReadLocale("symbol_gothic"),
 	"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
@@ -10942,7 +11129,7 @@ AltLayouts := [
 
 for i, groupName in AltLayouts {
 	if Mod(i, 2) = 1 {
-		AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "Old Turkic Orkhon" || groupName = "Gothic Alphabet" || groupName = "IPA") ? False : True
+		AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "Old Turkic Orkhon" || groupName = "Old Hungarian" || groupName = "Gothic Alphabet" || groupName = "IPA") ? False : True
 		GroupHotKey := AltLayouts[i + 1]
 
 
@@ -13169,6 +13356,70 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 
 		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, Slots)
+	} else if Combinations = "Old Hungarian" {
+		SlotMapping := Map(
+			"A", ["hungarian_c_let_a", "hungarian_s_let_a"],
+			"B", ["hungarian_c_let_eb", "hungarian_s_let_eb"],
+			"C", ["hungarian_c_let_ec", "hungarian_s_let_ec"],
+			"D", ["hungarian_c_let_ed", "hungarian_s_let_ec"],
+			"E", ["hungarian_c_let_e", "hungarian_s_let_e"],
+			"F", ["hungarian_c_let_ef", "hungarian_s_let_ef"],
+			"G", ["hungarian_c_let_eg", "hungarian_s_let_eg"],
+			"H", ["hungarian_c_let_eh", "hungarian_s_let_eh"],
+			"I", ["hungarian_c_let_i", "hungarian_s_let_i"],
+			"J", ["", ""],
+			"K", ["", ""],
+			"L", ["", ""],
+			"M", ["", ""],
+			"N", ["", ""],
+			"O", ["", ""],
+			"P", ["", ""],
+			"Q", ["", ""],
+			"R", ["", ""],
+			"S", ["", ""],
+			"T", ["", ""],
+			"U", ["", ""],
+			"V", ["", ""],
+			"W", ["", ""],
+			"X", ["", ""],
+			"Y", ["", ""],
+			"Z", ["", ""],
+			"~", "kkey_grave_accent",
+			",", "kkey_comma",
+			".", "kkey_dot",
+			";", "kkey_semicolon",
+			"'", "kkey_apostrophe",
+			"[", "kkey_l_square_bracket",
+			"]", "kkey_r_square_bracket",
+			"=", "kkey_equals",
+			"-", "kkey_hyphen_minus",
+			"/", "kkey_slash",
+		)
+
+		SlotModdedMapping := Map(
+			"A", Map("<^>!", ["hungarian_c_let_aa", "hungarian_s_let_aa"]),
+			"C", Map("<^>!", ["hungarian_c_let_ecs", "hungarian_s_let_ecs"]),
+			"E", Map("<^>!", ["hungarian_c_let_ee", "hungarian_s_let_ee"]),
+			"G", Map("<^>!", ["hungarian_c_let_egy", "hungarian_s_let_egy"]),
+			"I", Map("<^>!", ["hungarian_c_let_ii", "hungarian_s_let_ii"]),
+			"K", Map("<^>!", ["", ""]),
+			"S", Map("<^>!", ["", ""]),
+			"T", Map("<^>!", ["", ""]),
+			",", Map("<+", "kkey_lessthan", "<^>!", "runic_cruciform_punctuation"),
+			".", Map("<+", "kkey_greaterthan", "<^>!", "runic_single_punctuation"),
+			";", Map("<+", "kkey_colon"),
+			"Space", Map("<^>!", "runic_multiple_punctuation"),
+			"'", Map("<+", "kkey_quotation"),
+			"~", Map("<+", "kkey_grave_accent"),
+			"=", Map("<+", "kkey_plus"),
+			"-", Map("<+", "kkey_underscore"),
+			"[", Map("<+", "kkey_l_curly_bracket"),
+			"]", Map("<+", "kkey_r_curly_bracket"),
+			"/", Map("<+", "question"),
+			"\", Map("<+", "kkey_verticalline"),
+		)
+
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
 	} else if Combinations = "Gothic" {
 		SlotMapping := Map(
 			"A", "gothic_ahza",
