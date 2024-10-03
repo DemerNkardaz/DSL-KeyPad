@@ -10540,21 +10540,55 @@ InsertUnicodeKey() {
 	PromptValue := IB.Value
 	UnicodeCodes := StrSplit(PromptValue, " ")
 
-	Output := ""
-	for code in UnicodeCodes {
-		if code != "" {
-			Num := Format("0x" RegExReplace(code, "^(U\+|u\+)", ""), "d")
-			Output .= Chr(Num)
+	try {
+		Output := ""
+		for code in UnicodeCodes {
+			if code != "" {
+				Num := Format("0x" RegExReplace(code, "^(U\+|u\+)", ""), "d")
+				Output .= Chr(Num)
+			}
 		}
-	}
 
-	Send(Output)
-	IniWrite(PromptValue, ConfigFile, "LatestPrompts", "Unicode")
+		Send(Output)
+		IniWrite(PromptValue, ConfigFile, "LatestPrompts", "Unicode")
+	} catch {
+		MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_unicode"), DSLPadTitle, "Icon!")
+	}
+}
+
+InsertAltCodeKey() {
+	PromptValue := IniRead(ConfigFile, "LatestPrompts", "Altcode", "")
+	IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_altcode"), "w256 h92", PromptValue)
+	if IB.Result = "Cancel"
+		return
+	else
+		PromptValue := IB.Value
+
+	AltCodes := StrSplit(PromptValue, " ")
+
+	try {
+		Output := ""
+		for code in AltCodes {
+			if code != "" {
+				code := RegExReplace(code, "^(Alt\+|alt\+)", "")
+				if (IsInteger(code)) {
+					Output .= "{ASC " code "}"
+				} else {
+					MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_altcode"), DSLPadTitle, "Icon!")
+					return
+				}
+			}
+		}
+
+		Send(Output)
+		IniWrite(PromptValue, ConfigFile, "LatestPrompts", "Altcode")
+	} catch {
+		MsgBox(ReadLocale("message_wrong_format") "`n" ReadLocale("message_wrong_format_altcode"), DSLPadTitle, "Icon!")
+	}
 }
 
 
 SwitchQWERTY_YITSUKEN(Script := "Latin") {
-
 	if (Script == "Latin") {
 		LayoutName := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
 
@@ -10592,7 +10626,6 @@ SwitchQWERTY_YITSUKEN(Script := "Latin") {
 		RegisterLayout(NextLayout)
 	}
 }
-
 
 SwitchToScript(scriptMode) {
 	LanguageCode := GetLanguageCode()
@@ -10821,7 +10854,6 @@ ChangeScriptInput(ScriptMode) {
 	}
 }
 
-
 ToRomanNumeral(IntValue, CapitalLetters := True) {
 	IntValue := Integer(IntValue)
 	if (IntValue < 1 || IntValue > 2000000) {
@@ -10866,27 +10898,8 @@ SwitchToRoman() {
 	}
 	SendText(PromptValue)
 }
-InsertAltCodeKey() {
-	PromptValue := IniRead(ConfigFile, "LatestPrompts", "Altcode", "")
-	IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_altcode"), "w256 h92", PromptValue)
-	if IB.Result = "Cancel"
-		return
-	else
-		PromptValue := IB.Value
 
-	AltCodes := StrSplit(PromptValue, " ")
 
-	for code in AltCodes {
-		if (code ~= "^\d+$") {
-			SendAltNumpad(code)
-		} else {
-			MsgBox(ReadLocale("warning_only_nums"), ReadLocale("symbol_altcode"), 0x30)
-			return
-		}
-	}
-
-	IniWrite PromptValue, ConfigFile, "LatestPrompts", "Altcode"
-}
 SendAltNumpad(CharacterCode) {
 	Send("{Alt Down}")
 	Loop Parse, CharacterCode
