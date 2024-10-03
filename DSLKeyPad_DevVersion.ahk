@@ -10542,12 +10542,14 @@ InsertUnicodeKey() {
 
 	Output := ""
 	for code in UnicodeCodes {
-		if code
-			Output .= Chr("0x" . code)
+		if code != "" {
+			Num := Format("0x" RegExReplace(code, "^(U\+|u\+)", ""), "d")
+			Output .= Chr(Num)
+		}
 	}
 
 	Send(Output)
-	IniWrite PromptValue, ConfigFile, "LatestPrompts", "Unicode"
+	IniWrite(PromptValue, ConfigFile, "LatestPrompts", "Unicode")
 }
 
 
