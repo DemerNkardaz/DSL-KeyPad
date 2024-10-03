@@ -162,6 +162,7 @@
     <Image Include="DSLKeyPad.app_gothic.ico" />
     <Image Include="DSLKeyPad.app_hungarian.ico" />
     <Image Include="DSLKeyPad.app_ipa.ico" />
+    <Image Include="DSLKeyPad.app_math.ico" />
     <Image Include="DSLKeyPad.app_norse.ico" />
     <Image Include="DSLKeyPad.app_permic.ico" />
     <Image Include="DSLKeyPad.app_turkic.ico" />
