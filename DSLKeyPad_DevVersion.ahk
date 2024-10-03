@@ -1408,9 +1408,9 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 
 
 	if AddSeparator
-		TermporaryArray.Push(["", "", "", "", ""])
+		TermporaryArray.Push(["", "", "", "", "", ""])
 	if GroupHotKey != ""
-		TermporaryArray.Push(["", GroupHotKey, "", "", ""])
+		TermporaryArray.Push(["", GroupHotKey, "", "", "", ""])
 
 	for characterEntry, value in Characters {
 		entryID := ""
@@ -1494,7 +1494,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			}
 
 			if InsertingOption != "Fast Keys" || InsertingOption = "Fast Keys" && (HasProp(value, "show_on_fast_keys") && value.show_on_fast_keys) {
-				TermporaryArray.Push([characterTitle, characterBinding, characterSymbol, UniTrim(value.unicode), entryID])
+				TermporaryArray.Push([characterTitle, characterBinding, characterSymbol, UniTrim(value.unicode), entryID, entryName])
 			}
 		}
 	}
@@ -11546,11 +11546,11 @@ Constructor() {
 		DSLTabs.Push(ReadLocale("tab_" . localeKey))
 	}
 
-	for _, localeKey in ["name", "key", "view", "unicode", "entryid"] {
+	for _, localeKey in ["name", "key", "view", "unicode", "entryid", "entry_title"] {
 		DSLCols.default.Push(ReadLocale("col_" . localeKey))
 	}
 
-	for _, localeKey in ["name", "recipe", "result", "unicode", "entryid"] {
+	for _, localeKey in ["name", "recipe", "result", "unicode", "entryid", "entry_title"] {
 		DSLCols.smelting.Push(ReadLocale("col_" . localeKey))
 	}
 
@@ -11603,7 +11603,7 @@ Constructor() {
 		field: "x49 y520 w593 h24 v",
 	}
 
-	ColumnWidths := [300, 150, 60, 85, 0]
+	ColumnWidths := [300, 150, 60, 85, 0, 0]
 	ColumnAreaWidth := "w620"
 	ColumnAreaHeight := "h480"
 	ColumnAreaRules := "+NoSort -Multi"
@@ -11730,10 +11730,11 @@ Constructor() {
 	DiacriticLV.ModifyCol(3, ColumnWidths[3])
 	DiacriticLV.ModifyCol(4, ColumnWidths[4])
 	DiacriticLV.ModifyCol(5, ColumnWidths[5])
+	DiacriticLV.ModifyCol(6, ColumnWidths[6])
 
 	for item in DSLContent["BindList"].TabDiacritics
 	{
-		DiacriticLV.Add(, item[1], item[2], item[3], item[4], item[5])
+		DiacriticLV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 	}
 
 
@@ -11786,10 +11787,11 @@ Constructor() {
 	SpacesLV.ModifyCol(3, ColumnWidths[3])
 	SpacesLV.ModifyCol(4, ColumnWidths[4])
 	SpacesLV.ModifyCol(5, ColumnWidths[5])
+	SpacesLV.ModifyCol(6, ColumnWidths[6])
 
 	for item in DSLContent["BindList"].TabSpaces
 	{
-		SpacesLV.Add(, item[1], item[2], item[3], item[4], item[5])
+		SpacesLV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 	}
 
 	SpacesFilterIcon := DSLPadGUI.Add("Button", CommonFilter.icon)
@@ -11939,10 +11941,11 @@ Constructor() {
 	LigaturesLV.ModifyCol(3, 100)
 	LigaturesLV.ModifyCol(4, ColumnWidths[4])
 	LigaturesLV.ModifyCol(5, ColumnWidths[5])
+	LigaturesLV.ModifyCol(6, ColumnWidths[6])
 
 	for item in DSLContent["BindList"].TabSmelter
 	{
-		LigaturesLV.Add(, item[1], item[2], item[3], item[4], item[5])
+		LigaturesLV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 	}
 
 	LigaturesFilterIcon := DSLPadGUI.Add("Button", CommonFilter.icon)
@@ -11994,10 +11997,11 @@ Constructor() {
 	FastKeysLV.ModifyCol(3, ColumnWidths[3])
 	FastKeysLV.ModifyCol(4, ColumnWidths[4])
 	FastKeysLV.ModifyCol(5, ColumnWidths[5])
+	FastKeysLV.ModifyCol(6, ColumnWidths[6])
 
 	for item in DSLContent["BindList"].TabFastKeys
 	{
-		FastKeysLV.Add(, item[1], item[2], item[3], item[4], item[5])
+		FastKeysLV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 	}
 
 
@@ -12049,10 +12053,11 @@ Constructor() {
 	GlagoLV.ModifyCol(3, ColumnWidths[3])
 	GlagoLV.ModifyCol(4, ColumnWidths[4])
 	GlagoLV.ModifyCol(5, ColumnWidths[5])
+	GlagoLV.ModifyCol(6, ColumnWidths[6])
 
 	for item in DSLContent["BindList"].TabGlagoKeys
 	{
-		GlagoLV.Add(, item[1], item[2], item[3], item[4], item[5])
+		GlagoLV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 	}
 
 
@@ -12231,11 +12236,11 @@ Constructor() {
 			"LigaturesAlert"
 		]))
 
-	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", "DiacriticGroup", GroupBoxDiacritic, "DiacriticAlert")
-	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", "SpacesGroup", GroupBoxSpaces, "SpacesAlert")
-	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", "FastKeysGroup", GroupBoxFastKeys, "FastAlert")
-	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", "LigaturesGroup", GroupBoxLigatures, "LigaturesAlert")
-	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][3], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", "GlagoKeysGroup", GroupBoxGlagoKeys, "GlagoAlert")
+	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][2], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", "DiacriticGroup", GroupBoxDiacritic, "DiacriticAlert")
+	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][2], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", "SpacesGroup", GroupBoxSpaces, "SpacesAlert")
+	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][2], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", "FastKeysGroup", GroupBoxFastKeys, "FastAlert")
+	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][2], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", "LigaturesGroup", GroupBoxLigatures, "LigaturesAlert")
+	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][2], RandPreview["GlagoKeys"][3], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", "GlagoKeysGroup", GroupBoxGlagoKeys, "GlagoAlert")
 
 	DSLPadGUI.Title := DSLPadTitle
 
@@ -12247,7 +12252,7 @@ Constructor() {
 PopulateListView(LV, DataList) {
 	LV.Delete()
 	for item in DataList {
-		LV.Add(, item[1], item[2], item[3], item[4], item[5])
+		LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 	}
 }
 FilterListView(GuiFrame, FilterField, LV, DataList) {
@@ -12261,13 +12266,13 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 		PreviousGroupName := ""
 		for item in DataList {
 			if StrLower(item[1]) = "" {
-				LV.Add(, item[1], item[2], item[3], item[4], item[5])
+				LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 				GroupStarted := true
 			} else if InStr(StrLower(item[1]), FilterText) {
 				if !GroupStarted {
 					GroupStarted := true
 				}
-				LV.Add(, item[1], item[2], item[3], item[4], item[5])
+				LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 			} else if GroupStarted {
 				GroupStarted := False
 			}
@@ -12331,198 +12336,183 @@ GetRandomByGroups(GroupNames) {
 }
 
 HasPermicFont := IsFont("Noto Sans Old Permic") ? True : "Noto Sans Old Permic"
+HasHungarianFont := IsFont("Noto Sans Old Hungarian") ? True : "Noto Sans Old Hungarian"
 
-SetCharacterInfoPanel(EntryIDKey, UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup, PreviewAlert := "") {
+
+SetCharacterInfoPanel(EntryIDKey, EntryNameKey, UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup, PreviewAlert := "") {
 	LanguageCode := GetLanguageCode()
+	if (EntryNameKey != "" && EntryIDKey != "") {
+		GetEntry := Characters[EntryIDKey " " EntryNameKey]
 
+		characterTitle := ""
+		if (HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True && !InStr(ReadLocale(EntryNameKey "_alt", "chars"), "NOT FOUND")) {
+			characterTitle := ReadLocale(EntryNameKey . "_alt", "chars")
+		} else if !InStr(ReadLocale(EntryNameKey, "chars"), "NOT FOUND") {
+			characterTitle := ReadLocale(EntryNameKey, "chars")
+		} else if (HasProp(GetEntry, "titlesAltOnEntry")) {
+			characterTitle := GetEntry.titlesAltOnEntry[LanguageCode]
+		} else if (HasProp(GetEntry, "titles") &&
+		(!HasProp(GetEntry, "titlesAlt") || HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True)) {
+			characterTitle := GetEntry.titles[LanguageCode]
+		} else {
+			characterTitle := ReadLocale(EntryNameKey, "chars")
+		}
 
-	if (UnicodeKey != "") {
-		for characterEntry, value in Characters {
-			entryID := ""
-			entryName := ""
-			if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
-				entryID := match[1]
-				entryName := match[2]
-			}
-
-
-			characterTitle := ""
-			if (HasProp(value, "titlesAlt") && value.titlesAlt == True && !InStr(ReadLocale(entryName "_alt", "chars"), "NOT FOUND")) {
-				characterTitle := ReadLocale(entryName . "_alt", "chars")
-			} else if !InStr(ReadLocale(entryName, "chars"), "NOT FOUND") {
-				characterTitle := ReadLocale(entryName, "chars")
-			} else if (HasProp(value, "titlesAltOnEntry")) {
-				characterTitle := value.titlesAltOnEntry[LanguageCode]
-			} else if (HasProp(value, "titles") &&
-			(!HasProp(value, "titlesAlt") || HasProp(value, "titlesAlt") && value.titlesAlt == True)) {
-				characterTitle := value.titles[LanguageCode]
+		if (HasProp(GetEntry, "symbol")) {
+			if (HasProp(GetEntry, "symbolAlt")) {
+				TargetGroup[PreviewObject].Text := GetEntry.symbolAlt
+			} else if (StrLen(GetEntry.symbol) > 3) {
+				TargetGroup[PreviewObject].Text := SubStr(GetEntry.symbol, 1, 1)
 			} else {
-				characterTitle := ReadLocale(entryName, "chars")
+				TargetGroup[PreviewObject].Text := GetEntry.symbol
+			}
+		}
+
+		if (HasProp(GetEntry, "symbolFont")) {
+			PreviewGroup.preview.SetFont(, GetEntry.symbolFont)
+		} else {
+			PreviewGroup.preview.SetFont(, FontFace["serif"].name)
+		}
+
+		if HasProp(GetEntry, "symbolCustom") {
+			PreviewGroup.preview.SetFont(
+				CommonInfoFonts.previewSize . " norm cDefault"
+			)
+			TargetGroup[PreviewObject].SetFont(
+				GetEntry.symbolCustom
+			)
+		} else if (StrLen(TargetGroup[PreviewObject].Text) > 2) {
+			PreviewGroup.preview.SetFont(
+				CommonInfoFonts.previewSmaller . " norm cDefault"
+			)
+		} else {
+			PreviewGroup.preview.SetFont(
+				CommonInfoFonts.previewSize . " norm cDefault"
+			)
+		}
+
+		TargetGroup[PreviewTitle].Text := characterTitle
+
+		if HasProp(GetEntry, "uniSequence") && IsObject(GetEntry.uniSequence) {
+			TempValue := ""
+			TotalIndex := 0
+			for index in GetEntry.uniSequence {
+				TotalIndex++
+			}
+			CurrentIndex := 0
+			for unicode in GetEntry.uniSequence {
+				CurrentIndex++
+				TempValue .= SubStr(unicode, 2, StrLen(unicode) - 2)
+				TempValue .= CurrentIndex < TotalIndex ? " " : ""
+			}
+			TargetGroup[PreviewUnicode].Text := TempValue
+		} else {
+			TargetGroup[PreviewUnicode].Text := SubStr(GetEntry.unicode, 2, StrLen(GetEntry.unicode) - 2)
+		}
+
+		if (StrLen(TargetGroup[PreviewUnicode].Text) > 9
+		&& StrLen(TargetGroup[PreviewUnicode].Text) < 15) {
+			PreviewGroup.unicode.SetFont("s10")
+		} else if (StrLen(TargetGroup[PreviewUnicode].Text) > 14) {
+			PreviewGroup.unicode.SetFont("s9")
+		} else {
+			PreviewGroup.unicode.SetFont("s12")
+		}
+
+		if (HasProp(GetEntry, "entity")) {
+			TargetGroup[PreviewHTML].Text := GetEntry.html " " GetEntry.entity
+		} else {
+			TargetGroup[PreviewHTML].Text := GetEntry.html
+		}
+
+		if (StrLen(TargetGroup[PreviewHTML].Text) > 9
+		&& StrLen(TargetGroup[PreviewHTML].Text) < 15) {
+			PreviewGroup.html.SetFont("s10")
+		} else if (StrLen(TargetGroup[PreviewHTML].Text) > 14) {
+			PreviewGroup.html.SetFont("s9")
+		} else {
+			PreviewGroup.html.SetFont("s12")
+		}
+
+		EntryString := ReadLocale("entry") ": " EntryNameKey
+		TagsString := ""
+		if (HasProp(GetEntry, "tags")) {
+			TagsString := ReadLocale("tags") . ": "
+
+			totalCount := 0
+			for index in GetEntry.tags {
+				totalCount++
 			}
 
-
-			if entryID == EntryIDKey && ((UnicodeKey == UniTrim(value.unicode)) || (UnicodeKey == value.unicode)) {
-				if (HasProp(value, "symbol")) {
-					if (HasProp(value, "symbolAlt")) {
-						TargetGroup[PreviewObject].Text := value.symbolAlt
-					} else if (StrLen(value.symbol) > 3) {
-						TargetGroup[PreviewObject].Text := SubStr(value.symbol, 1, 1)
-					} else {
-						TargetGroup[PreviewObject].Text := value.symbol
-					}
-				}
-
-
-				if (HasProp(value, "symbolFont")) {
-					PreviewGroup.preview.SetFont(, value.symbolFont)
-				} else {
-					PreviewGroup.preview.SetFont(, FontFace["serif"].name)
-				}
-
-				if HasProp(value, "symbolCustom") {
-					PreviewGroup.preview.SetFont(
-						CommonInfoFonts.previewSize . " norm cDefault"
-					)
-					TargetGroup[PreviewObject].SetFont(
-						value.symbolCustom
-					)
-				} else if (StrLen(TargetGroup[PreviewObject].Text) > 2) {
-					PreviewGroup.preview.SetFont(
-						CommonInfoFonts.previewSmaller . " norm cDefault"
-					)
-				} else {
-					PreviewGroup.preview.SetFont(
-						CommonInfoFonts.previewSize . " norm cDefault"
-					)
-				}
-
-				TargetGroup[PreviewTitle].Text := characterTitle
-
-				if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
-					TempValue := ""
-					TotalIndex := 0
-					for index in value.uniSequence {
-						TotalIndex++
-					}
-					CurrentIndex := 0
-					for unicode in value.uniSequence {
-						CurrentIndex++
-						TempValue .= SubStr(unicode, 2, StrLen(unicode) - 2)
-						TempValue .= CurrentIndex < TotalIndex ? " " : ""
-					}
-					TargetGroup[PreviewUnicode].Text := TempValue
-				} else {
-					TargetGroup[PreviewUnicode].Text := SubStr(value.unicode, 2, StrLen(value.unicode) - 2)
-				}
-
-				if (StrLen(TargetGroup[PreviewUnicode].Text) > 9
-				&& StrLen(TargetGroup[PreviewUnicode].Text) < 15) {
-					PreviewGroup.unicode.SetFont("s10")
-				} else if (StrLen(TargetGroup[PreviewUnicode].Text) > 14) {
-					PreviewGroup.unicode.SetFont("s9")
-				} else {
-					PreviewGroup.unicode.SetFont("s12")
-				}
-
-
-				if (HasProp(value, "entity")) {
-					TargetGroup[PreviewHTML].Text := value.html . " " . value.entity
-				} else {
-					TargetGroup[PreviewHTML].Text := value.html
-				}
-
-				if (StrLen(TargetGroup[PreviewHTML].Text) > 9
-				&& StrLen(TargetGroup[PreviewHTML].Text) < 15) {
-					PreviewGroup.html.SetFont("s10")
-				} else if (StrLen(TargetGroup[PreviewHTML].Text) > 14) {
-					PreviewGroup.html.SetFont("s9")
-				} else {
-					PreviewGroup.html.SetFont("s12")
-				}
-
-
-				EntryString := ReadLocale("entry") . ": " . entryName
-				TagsString := ""
-				if (HasProp(value, "tags")) {
-					TagsString := ReadLocale("tags") . ": "
-
-					totalCount := 0
-					for index in value.tags {
-						totalCount++
-					}
-
-					currentIndex := 0
-					for index, tag in value.tags {
-						TagsString .= tag
-						currentIndex++
-						if (currentIndex < totalCount) {
-							TagsString .= ", "
-						}
-					}
-
-				}
-				TargetGroup[PreviewTags].Text := EntryString . GetChar("ensp") . TagsString
-
-				if (HasProp(value, "combiningForm")) {
-					TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_have_combining")
-				} else if RegExMatch(value.symbol, "^" DottedCircle "\S") {
-					TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_combining")
-				} else {
-					TargetGroup[PreviewGroupTitle].Text := ReadLocale("character")
-				}
-
-				if (HasProp(value, "altcode")) {
-					TargetGroup[PreviewAlt].Text := value.altcode
-				} else {
-					TargetGroup[PreviewAlt].Text := "N/A"
-				}
-
-				if (HasProp(value, "LaTeXPackage")) {
-					TargetGroup[PreviewLaTeXPackage].Text := "📦 " . value.LaTeXPackage
-				} else {
-					TargetGroup[PreviewLaTeXPackage].Text := ""
-				}
-
-				if (HasProp(value, "LaTeX")) {
-					if IsObject(value.LaTeX) {
-						LaTeXString := ""
-						totalCount := 0
-						for index in value.LaTeX {
-							totalCount++
-						}
-						currentIndex := 0
-						for index, latex in value.LaTeX {
-							LaTeXString .= latex
-							currentIndex++
-							if (currentIndex < totalCount) {
-								LaTeXString .= " "
-							}
-						}
-						TargetGroup[PreviewLaTeX].Text := LaTeXString
-
-					} else {
-						TargetGroup[PreviewLaTeX].Text := value.LaTeX
-					}
-
-				} else {
-					TargetGroup[PreviewLaTeX].Text := "N/A"
-				}
-
-				if (StrLen(TargetGroup[PreviewLaTeX].Text) > 9
-				&& StrLen(TargetGroup[PreviewLaTeX].Text) < 15) {
-					PreviewGroup.latex.SetFont("s10")
-				} else if (StrLen(TargetGroup[PreviewLaTeX].Text) > 14) {
-					PreviewGroup.latex.SetFont("s9")
-				} else {
-					PreviewGroup.latex.SetFont("s12")
-				}
-
-				if RegExMatch(entryName, "^permic") && HasPermicFont = "Noto Sans Old Permic" {
-					TargetGroup[PreviewAlert].Text := SetStringVars(ReadLocale("warning_nofont"), HasPermicFont)
-				} else {
-					TargetGroup[PreviewAlert].Text := ""
+			currentIndex := 0
+			for index, tag in GetEntry.tags {
+				TagsString .= tag
+				currentIndex++
+				if (currentIndex < totalCount) {
+					TagsString .= ", "
 				}
 			}
+
+		}
+		TargetGroup[PreviewTags].Text := EntryString GetChar("ensp") TagsString
+
+		if (HasProp(GetEntry, "combiningForm")) {
+			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_have_combining")
+		} else if RegExMatch(GetEntry.symbol, "^" DottedCircle "\S") {
+			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_combining")
+		} else {
+			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character")
+		}
+
+		if (HasProp(GetEntry, "altcode")) {
+			TargetGroup[PreviewAlt].Text := GetEntry.altcode
+		} else {
+			TargetGroup[PreviewAlt].Text := "N/A"
+		}
+
+		if (HasProp(GetEntry, "LaTeXPackage")) {
+			TargetGroup[PreviewLaTeXPackage].Text := "📦 " GetEntry.LaTeXPackage
+		} else {
+			TargetGroup[PreviewLaTeXPackage].Text := ""
+		}
+
+		if (HasProp(GetEntry, "LaTeX")) {
+			if IsObject(GetEntry.LaTeX) {
+				LaTeXString := ""
+				totalCount := 0
+				for index in GetEntry.LaTeX {
+					totalCount++
+				}
+				currentIndex := 0
+				for index, latex in GetEntry.LaTeX {
+					LaTeXString .= latex
+					currentIndex++
+					if (currentIndex < totalCount) {
+						LaTeXString .= " "
+					}
+				}
+				TargetGroup[PreviewLaTeX].Text := LaTeXString
+
+			} else {
+				TargetGroup[PreviewLaTeX].Text := GetEntry.LaTeX
+			}
+		} else {
+			TargetGroup[PreviewLaTeX].Text := "N/A"
+		}
+
+		if (StrLen(TargetGroup[PreviewLaTeX].Text) > 9
+		&& StrLen(TargetGroup[PreviewLaTeX].Text) < 15) {
+			PreviewGroup.latex.SetFont("s10")
+		} else if (StrLen(TargetGroup[PreviewLaTeX].Text) > 14) {
+			PreviewGroup.latex.SetFont("s9")
+		} else {
+			PreviewGroup.latex.SetFont("s12")
+		}
+
+		if (RegExMatch(EntryNameKey, "^permic") && HasPermicFont = "Noto Sans Old Permic") || (RegExMatch(EntryNameKey, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian") {
+			TargetGroup[PreviewAlert].Text := SetStringVars(ReadLocale("warning_nofont"), HasPermicFont)
+		} else {
+			TargetGroup[PreviewAlert].Text := ""
 		}
 	}
 }
@@ -12582,7 +12572,8 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 LV_CharacterDetails(LV, RowNumber, SetupArray) {
 	UnicodeKey := LV.GetText(RowNumber, 4)
 	EntryIDKey := LV.GetText(RowNumber, 5)
-	SetCharacterInfoPanel(EntryIDKey, UnicodeKey,
+	EntryNameKey := LV.GetText(RowNumber, 6)
+	SetCharacterInfoPanel(EntryIDKey, EntryNameKey, UnicodeKey,
 		SetupArray[1], SetupArray[2], SetupArray[3],
 		SetupArray[4], SetupArray[5], SetupArray[6],
 		SetupArray[7], SetupArray[8], SetupArray[9],
