@@ -2238,6 +2238,14 @@ MapInsert(Characters,
 		show_on_fast_keys: True,
 		symbolAlt: Chr(0x00A0),
 	},
+	"medium_math_space", {
+		unicode: "{U+205F}", html: "&#8287;",
+		tags: ["mmsp", "mathsp", "medium math space", "средний математический пробел"],
+		group: ["Math Spaces"],
+		symbolClass: "Spaces",
+		alt_layout: "<! [Space]",
+		symbolAlt: Chr(0x205F),
+	},
 	"tabulation", {
 		unicode: "{U+0009}", html: "&#9;", entity: "&Tab;",
 		tags: ["tab", "tabulation", "табуляция"],
@@ -11721,6 +11729,7 @@ Constructor() {
 		"IPA", ReadLocale("symbol_ipa"),
 		"Fake Math", RightControl RightShift " 0",
 		"Mathematical", ReadLocale("symbol_maths"),
+		"Math Spaces", "",
 	]
 
 	for i, groupName in AltLayouts {
@@ -14082,7 +14091,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 	} else if Combinations = "Maths" {
 		SlotMapping := Map()
 
-		SlotModdedMapping := Map()
+		SlotModdedMapping := Map(
+			"Space", Map(
+				"Flat:<!", "medium_math_space",
+			),
+		)
 
 		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
 	} else if Combinations = "Cleanscript" {
