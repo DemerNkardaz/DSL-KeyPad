@@ -12236,11 +12236,11 @@ Constructor() {
 			"LigaturesAlert"
 		]))
 
-	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][2], RandPreview["Diacritics"][3], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", "DiacriticGroup", GroupBoxDiacritic, "DiacriticAlert")
-	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][2], RandPreview["Spaces"][3], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", "SpacesGroup", GroupBoxSpaces, "SpacesAlert")
-	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][2], RandPreview["FastKeys"][3], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", "FastKeysGroup", GroupBoxFastKeys, "FastAlert")
-	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][2], RandPreview["Ligatures"][3], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", "LigaturesGroup", GroupBoxLigatures, "LigaturesAlert")
-	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][2], RandPreview["GlagoKeys"][3], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", "GlagoKeysGroup", GroupBoxGlagoKeys, "GlagoAlert")
+	SetCharacterInfoPanel(RandPreview["Diacritics"][1], RandPreview["Diacritics"][2], DSLPadGUI, "DiacriticSymbol", "DiacriticTitle", "DiacriticLaTeX", "DiacriticLaTeXPackage", "DiacriticAlt", "DiacriticUnicode", "DiacriticHTML", "DiacriticTags", "DiacriticGroup", GroupBoxDiacritic, "DiacriticAlert")
+	SetCharacterInfoPanel(RandPreview["Spaces"][1], RandPreview["Spaces"][2], DSLPadGUI, "SpacesSymbol", "SpacesTitle", "SpacesLaTeX", "SpacesLaTeXPackage", "SpacesAlt", "SpacesUnicode", "SpacesHTML", "SpacesTags", "SpacesGroup", GroupBoxSpaces, "SpacesAlert")
+	SetCharacterInfoPanel(RandPreview["FastKeys"][1], RandPreview["FastKeys"][2], DSLPadGUI, "FastKeysSymbol", "FastKeysTitle", "FastKeysLaTeX", "FastKeysLaTeXPackage", "FastKeysAlt", "FastKeysUnicode", "FastKeysHTML", "FastKeysTags", "FastKeysGroup", GroupBoxFastKeys, "FastAlert")
+	SetCharacterInfoPanel(RandPreview["Ligatures"][1], RandPreview["Ligatures"][2], DSLPadGUI, "LigaturesSymbol", "LigaturesTitle", "LigaturesLaTeX", "LigaturesLaTeXPackage", "LigaturesAlt", "LigaturesUnicode", "LigaturesHTML", "LigaturesTags", "LigaturesGroup", GroupBoxLigatures, "LigaturesAlert")
+	SetCharacterInfoPanel(RandPreview["GlagoKeys"][1], RandPreview["GlagoKeys"][2], DSLPadGUI, "GlagoKeysSymbol", "GlagoKeysTitle", "GlagoKeysLaTeX", "GlagoKeysLaTeXPackage", "GlagoKeysAlt", "GlagoKeysUnicode", "GlagoKeysHTML", "GlagoKeysTags", "GlagoKeysGroup", GroupBoxGlagoKeys, "GlagoAlert")
 
 	DSLPadGUI.Title := DSLPadTitle
 
@@ -12338,8 +12338,7 @@ GetRandomByGroups(GroupNames) {
 HasPermicFont := IsFont("Noto Sans Old Permic") ? True : "Noto Sans Old Permic"
 HasHungarianFont := IsFont("Noto Sans Old Hungarian") ? True : "Noto Sans Old Hungarian"
 
-
-SetCharacterInfoPanel(EntryIDKey, EntryNameKey, UnicodeKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup, PreviewAlert := "") {
+SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup, PreviewAlert := "") {
 	LanguageCode := GetLanguageCode()
 	if (EntryNameKey != "" && EntryIDKey != "") {
 		GetEntry := Characters[EntryIDKey " " EntryNameKey]
@@ -12509,8 +12508,11 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, UnicodeKey, TargetGroup, Preview
 			PreviewGroup.latex.SetFont("s12")
 		}
 
-		if (RegExMatch(EntryNameKey, "^permic") && HasPermicFont = "Noto Sans Old Permic") || (RegExMatch(EntryNameKey, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian") {
+		if RegExMatch(EntryNameKey, "^permic") && HasPermicFont = "Noto Sans Old Permic" {
 			TargetGroup[PreviewAlert].Text := SetStringVars(ReadLocale("warning_nofont"), HasPermicFont)
+		}
+		else if RegExMatch(EntryNameKey, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" {
+			TargetGroup[PreviewAlert].Text := SetStringVars(ReadLocale("warning_nofont"), HasHungarianFont)
 		} else {
 			TargetGroup[PreviewAlert].Text := ""
 		}
@@ -12570,10 +12572,10 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 
 }
 LV_CharacterDetails(LV, RowNumber, SetupArray) {
-	UnicodeKey := LV.GetText(RowNumber, 4)
+	;UnicodeKey := LV.GetText(RowNumber, 4)
 	EntryIDKey := LV.GetText(RowNumber, 5)
 	EntryNameKey := LV.GetText(RowNumber, 6)
-	SetCharacterInfoPanel(EntryIDKey, EntryNameKey, UnicodeKey,
+	SetCharacterInfoPanel(EntryIDKey, EntryNameKey,
 		SetupArray[1], SetupArray[2], SetupArray[3],
 		SetupArray[4], SetupArray[5], SetupArray[6],
 		SetupArray[7], SetupArray[8], SetupArray[9],
