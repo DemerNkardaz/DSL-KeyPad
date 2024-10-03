@@ -2474,7 +2474,22 @@ MapInsert(Characters,
 	"bullet_white", {
 		unicode: "{U+25E6}", html: "&#9702;",
 		tags: ["white bullet", "прозрачный булит"],
-		group: [["Special Characters", "Special Fast Secondary"], Backquote],
+		group: [["Special Fast Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ [" Backquote "]",
+	},
+	"bullet_triangle", {
+		unicode: "{U+2023}", html: "&#8227;",
+		tags: ["triangular bullet", "треугольный булит"],
+		group: [["Special Fast Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!<+ [" Backquote "]",
+	},
+	"hyphenation_point", {
+		unicode: "{U+2027}", html: "&#8231;",
+		tags: ["hyphenation point", "точка переноса"],
+		group: [["Special Characters", "Special Fast Secondary"], "-"],
+		modifier: RightShift,
 		show_on_fast_keys: True,
 	},
 	"colon_triangle", {
@@ -13364,6 +13379,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"fraction_slash", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["DotRu"]),
 			"tricolon", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["DotRu"]),
 			"quartocolon", MapMerge(GetModifiers("<^>!<+>+"), KeySeqSlot["DotRu"]),
+			"hyphenation_point", MapMerge(GetModifiers("<^>!+"), KeySeqSlot["-"]),
 		])
 		SlotModdedSpecials := Map(
 			"D", Map("Flat:<!", "degree"),
@@ -13377,8 +13393,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"8", Map("Flat:<^>!", "multiplication"),
 			"9", Map("Flat:<^>!", "bracket_angle_math_left", "Flat:<!", "bracket_square_left", "Flat:<!<+", "bracket_curly_left"),
 			"0", Map("Flat:<^>!", "bracket_angle_math_right", "Flat:<^>!<!", "infinity", "Flat:<!", "bracket_square_right", "Flat:<!<+", "bracket_curly_right"),
-			"~", Map("Flat:<^>!", "bullet", "Flat:<^>!<!", "bullet_hyphen", "Flat:<^>!<+", "interpunct", "Flat:<^>!<!>+", "bullet_white", "Flat:>+", "tilde_reversed"),
+			"~", Map("Flat:<^>!", "bullet", "Flat:<^>!<!", "bullet_hyphen", "Flat:<^>!<+", "interpunct", "Flat:<^>!<!<+", "bullet_triangle", "Flat:<^>!<!>+", "bullet_white", "Flat:>+", "tilde_reversed"),
 			"=", Map("<^>!", "noequals", "<^>!<+>+", "almostequals", "<^>!<+", "plusminus"),
+			"-", Map("<^>!>+", "hyphenation_point"),
 			"/", Map("<^>!", "ellipsis", "<^>!<+", "tricolon", "<^>!<+>+", "quartocolon", "<!", "two_dot_punctuation", "<^>!>+", "fraction_slash"),
 		)
 		LettersSlots := GetLayoutImprovedCyrillic([
