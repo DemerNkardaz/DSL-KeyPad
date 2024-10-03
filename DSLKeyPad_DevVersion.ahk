@@ -14373,7 +14373,9 @@ ManageTrayItems() {
 		"hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "3",
 		"gothic", ReadLocale("tray_func_gothic") "`t" RightControl "4",
 		"ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
-		"script", ReadLocale("func_label_scripts")
+		"maths", ReadLocale("tray_func_maths") "`t" RightControl RightShift "0",
+		"script", ReadLocale("func_label_scripts"),
+		"layouts", ReadLocale("func_label_layouts"),
 	)
 
 	CurrentApp := "DSL KeyPad " . CurrentVersionString
@@ -14395,14 +14397,27 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["hungarian"], (*) => ToggleLetterScript(, "Old Hungarian"))
 	ScriptsSubMenu.Add(Labels["gothic"], (*) => ToggleLetterScript(, "Gothic"))
 	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
+	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
 	ScriptsSubMenu.SetIcon(Labels["glagolitic"], AppIcosDLLFile, 2)
 	ScriptsSubMenu.SetIcon(Labels["turkic"], AppIcosDLLFile, 4)
 	ScriptsSubMenu.SetIcon(Labels["hungarian"], AppIcosDLLFile, 6)
 	ScriptsSubMenu.SetIcon(Labels["gothic"], AppIcosDLLFile, 7)
 	ScriptsSubMenu.SetIcon(Labels["ipa"], AppIcosDLLFile, 8)
+	ScriptsSubMenu.SetIcon(Labels["maths"], AppIcosDLLFile, 10)
 
 	DSLTray.Add(Labels["script"], ScriptsSubMenu)
+
+	LayoutsSubMenu := Menu()
+	LayoutsSubMenu.Add("QWERTY", (*) => RegisterLayout("QWERTY"))
+	LayoutsSubMenu.Add("Dvorak", (*) => RegisterLayout("Dvorak"))
+	LayoutsSubMenu.Add("Colemak", (*) => RegisterLayout("Colemak"))
+	LayoutsSubMenu.Add()
+	LayoutsSubMenu.Add("ЙЦУКЕН", (*) => RegisterLayout("ЙЦУКЕН"))
+	LayoutsSubMenu.Add("Диктор", (*) => RegisterLayout("Диктор"))
+	LayoutsSubMenu.Add("ЙІУКЕН (1907)", (*) => RegisterLayout("ЙІУКЕН (1907)"))
+
+	DSLTray.Add(Labels["layouts"], LayoutsSubMenu)
 
 	DSLTray.Add()
 	DSLTray.Add(Labels["search"], (*) => SearchKey())
