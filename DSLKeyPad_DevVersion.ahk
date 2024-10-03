@@ -11167,7 +11167,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 
 
 	if (SmeltingMode = "InputBox") {
-		PromptValue := IniRead(ConfigFile, "LatestPrompts", "Ligature", "")
+		PromptValue := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
 		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", PromptValue)
 		if IB.Result = "Cancel"
 			return
@@ -11288,7 +11288,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 									} else {
 										GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
 									}
-									IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
+									IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
 									Found := True
 									break 3
 								}
@@ -11302,7 +11302,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 							} else {
 								GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
 							}
-							IniWrite Input, ConfigFile, "LatestPrompts", "Ligature"
+							IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
 							Found := True
 							break 2
 						}
@@ -11350,7 +11350,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 						} else {
 							Send(value.unicode)
 						}
-						IniWrite PromptValue, ConfigFile, "LatestPrompts", "Ligature"
+						IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
 						Found := True
 					}
 				}
@@ -11362,7 +11362,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 				} else {
 					Send(value.unicode)
 				}
-				IniWrite PromptValue, ConfigFile, "LatestPrompts", "Ligature"
+				IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
 				Found := True
 			}
 		}
@@ -11441,7 +11441,7 @@ ReplaceWithUnicode(Mode := "") {
 
 	if (PromptValue != "") {
 		if Mode == "Hex" {
-			SendText("0x" . PromptValue)
+			SendText("0x" PromptValue)
 		} else {
 			SendText(PromptValue)
 		}
@@ -11450,8 +11450,59 @@ ReplaceWithUnicode(Mode := "") {
 	A_Clipboard := BackupClipboard
 }
 
-GetCharacterUnicode(symbol) {
-	return Format("{:04X}", Ord(symbol))
+GetCharacterUnicode(Symbol, StartFormat := "") {
+	Code := Ord(Symbol)
+
+	if (Code >= 0xD800 && Code <= 0xDBFF) {
+		nextSymbol := SubStr(Symbol, 2, 1)
+		NextCode := Ord(nextSymbol)
+
+		if (NextCode >= 0xDC00 && NextCode <= 0xDFFF) {
+			HighSurrogate := Code - 0xD800
+			LowSurrogate := NextCode - 0xDC00
+			FullCodePoint := (HighSurrogate << 10) + LowSurrogate + 0x10000
+			return StartFormat Format("{:06X}", FullCodePoint)
+		}
+	}
+
+	return StartFormat Format("{:04X}", Code)
+}
+
+ConvertToHexaDecimal(StringInput) {
+	if StringInput != "" {
+		Output := ""
+		i := 1
+
+		while (i <= StrLen(StringInput)) {
+			Symbol := SubStr(StringInput, i, 1)
+			Code := Ord(Symbol)
+
+			if (Code >= 0xD800 && Code <= 0xDBFF) {
+				NextSymbol := SubStr(StringInput, i + 1, 1)
+				Symbol .= NextSymbol
+				i += 1
+			}
+
+			Output .= GetCharacterUnicode(Symbol, "0x") "-"
+			i += 1
+		}
+
+		return RegExReplace(Output, "-$", "")
+	} else {
+		return StringInput
+	}
+}
+
+ConvertFromHexaDecimal(StringInput) {
+	if StringInput != "" {
+		Output := ""
+		for symbol in StrSplit(StringInput, "-") {
+			Output .= Chr(symbol)
+		}
+		return Output
+	} else {
+		return StringInput
+	}
 }
 
 RegExEscape(str) {
