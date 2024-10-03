@@ -11173,6 +11173,137 @@ for chracterEntry, value in Characters {
 	}
 }
 
+ConvertToDecimalUnicode(Symbol) {
+	HexCode := GetCharacterUnicode(Symbol)
+	return Format("{:d}", "0x" HexCode)
+}
+
+LocalEntitiesLibrary := [
+	Chr(0x0024), "&dollar;",
+	Chr(0x00A2), "&cent;",
+	Chr(0x0026), "&amp;",
+	Chr(0x00A3), "&pound;",
+	Chr(0x00A4), "&curren;",
+	Chr(0x00A5), "&yen;",
+	Chr(0x00A9), "&copy;",
+	Chr(0x00AE), "&reg;",
+	Chr(0x2122), "&trade;",
+	Chr(0x0040), "&commat;",
+	Chr(0x2102), "&Copf;",
+	Chr(0x2105), "&incare;",
+	Chr(0x210A), "&gscr;",
+	Chr(0x210B), "&hamilt;",
+	Chr(0x210C), "&Hfr;",
+	Chr(0x210D), "&Hopf;",
+	Chr(0x210E), "&planckh;",
+	Chr(0x2110), "&Iscr;",
+	Chr(0x2111), "&image;",
+	Chr(0x2112), "&Lscr;",
+	Chr(0x2113), "&ell;",
+	Chr(0x2115), "&Nopf;",
+	Chr(0x2116), "&numero;",
+	Chr(0x2117), "&copysr;",
+	Chr(0x2118), "&weierp;",
+	Chr(0x2119), "&Popf;",
+	Chr(0x211A), "&Qopf;",
+	Chr(0x211B), "&Rscr;",
+	Chr(0x211C), "&real;",
+	Chr(0x211D), "&Ropf;",
+	Chr(0x211E), "&rx;",
+	Chr(0x2124), "&Zopf;",
+	Chr(0x2127), "&mho;",
+	Chr(0x2128), "&Zfr;",
+	Chr(0x2129), "&iiota;",
+	Chr(0x212C), "&bernou;",
+	Chr(0x212D), "&Cfr;",
+	Chr(0x212F), "&escr;",
+	Chr(0x2130), "&Escr;",
+	Chr(0x2131), "&Fscr;",
+	Chr(0x2133), "&Mscr;",
+	Chr(0x2134), "&oscr;",
+	Chr(0x2135), "&alefsym;",
+	Chr(0x2136), "&beth;",
+	Chr(0x2137), "&gimel;",
+	Chr(0x2138), "&daleth;",
+	Chr(0x2145), "&DD;",
+	Chr(0x2146), "&dd;",
+	Chr(0x2147), "&ee;",
+	Chr(0x2148), "&ii;",
+	Chr(0x2605), "&starf;",
+	Chr(0x2606), "&star;",
+	Chr(0x260E), "&phone;",
+	Chr(0x2640), "&female;",
+	Chr(0x2642), "&male;",
+	Chr(0x2660), "&spades;",
+	Chr(0x2663), "&clubs;",
+	Chr(0x2665), "&hearts;",
+	Chr(0x2666), "&diams;",
+	Chr(0x25CA), "&loz;",
+	Chr(0x266A), "&sung;",
+	Chr(0x266D), "&flat;",
+	Chr(0x266E), "&natural;",
+	Chr(0x266F), "&sharp;",
+	Chr(0x2713), "&check;",
+	Chr(0x2717), "&cross;",
+	Chr(0x2720), "&malt;",
+	Chr(0x2736), "&sext;",
+	Chr(0x2758), "&VerticalSeparator;",
+	Chr(0x2772), "&lbbrk;",
+	Chr(0x2773), "&rbbrk;",
+]
+
+TranslateSelectionToHTML(Mode := "") {
+	BackupClipboard := A_Clipboard
+	A_Clipboard := ""
+
+	Send("^c")
+	ClipWait(0.5, 1)
+	PromptValue := A_Clipboard
+	A_Clipboard := ""
+
+	if PromptValue != "" {
+		Output := ""
+
+		i := 1
+		while (i <= StrLen(PromptValue)) {
+			Symbol := SubStr(PromptValue, i, 1)
+			Code := Ord(Symbol)
+
+			if (Code >= 0xD800 && Code <= 0xDBFF) {
+				NextSymbol := SubStr(PromptValue, i + 1, 1)
+				Symbol .= NextSymbol
+				i += 1
+			}
+
+			if (Mode = "Entities") {
+				Found := false
+				for j, entity in LocalEntitiesLibrary {
+					if (Mod(j, 2) = 1 && entity = Symbol) {
+						Output .= LocalEntitiesLibrary[j + 1]
+						Found := true
+						break
+					}
+				}
+
+				if (!Found) {
+					Output .= "&#" ConvertToDecimalUnicode(Symbol) ";"
+				}
+			} else {
+				Output .= "&#" ConvertToDecimalUnicode(Symbol) ";"
+			}
+
+			i += 1
+		}
+
+		A_Clipboard := Output
+		ClipWait(0.250, 1)
+		Send("^v")
+	}
+
+	Sleep 500
+	A_Clipboard := BackupClipboard
+	return
+}
 
 Ligaturise(SmeltingMode := "InputBox") {
 	LanguageCode := GetLanguageCode()
@@ -12031,6 +12162,7 @@ Constructor() {
 	Command_tp_paragraph := CommandsTree.Add(ReadLocale("func_label_tp_paragraph"), Command_textprocessing)
 	Command_tp_grep := CommandsTree.Add(ReadLocale("func_label_tp_grep"), Command_textprocessing)
 	Command_tp_quotes := CommandsTree.Add(ReadLocale("func_label_tp_quotes"), Command_textprocessing)
+	Command_tp_html := CommandsTree.Add(ReadLocale("func_label_tp_html"), Command_textprocessing)
 	Command_lcoverage := CommandsTree.Add(ReadLocale("func_label_coverage"))
 	Command_lro := CommandsTree.Add(ReadLocale("func_label_coverage_ro"), Command_lcoverage)
 
@@ -12718,6 +12850,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_tp_quotes",
 		"func_label_tp_paragraph",
 		"func_label_tp_grep",
+		"func_label_tp_html",
 		"func_label_coverage",
 		"func_label_coverage_ro",
 	]
@@ -14298,6 +14431,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["L"], (*) => Ligaturise(),
 			">+" UseKey["L"], (*) => Ligaturise("Clipboard"),
 			">+" UseKey["Backspace"], (*) => Ligaturise("Backspace"),
+			">^" UseKey["H"], (*) => TranslateSelectionToHTML("Entities"),
+			">^>+" UseKey["H"], (*) => TranslateSelectionToHTML(),
 			"<#<^>!" UseKey["1"], (*) => SwitchToScript("sup"),
 			"<#<^>!" UseKey["2"], (*) => SwitchToScript("sub"),
 			"<#<^>!" UseKey["3"], (*) => SwitchToRoman(),
