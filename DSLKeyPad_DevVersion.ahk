@@ -2125,8 +2125,8 @@ MapInsert(Characters,
 		tags: ["em space", "emspace", "emsp", "круглая шпация"],
 		group: ["Spaces", "1"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: ">+ [Space]",
 		symbolAlt: Chr(0x2003),
 	},
 	"ensp", {
@@ -2134,26 +2134,26 @@ MapInsert(Characters,
 		tags: ["en space", "enspace", "ensp", "полукруглая шпация"],
 		group: ["Spaces", "2"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ [Space]",
 		symbolAlt: Chr(0x2002),
 	},
 	"emsp13", {
 		unicode: "{U+2004}", html: "&#8196;", entity: "&emsp13;",
 		tags: ["emsp13", "1/3emsp", "1/3 круглой Шпации"],
-		group: ["Spaces", "3"],
+		group: [["Spaces", "Spaces Left Alt"], "3"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "[Space]",
 		symbolAlt: Chr(0x2004),
 	},
 	"emsp14", {
 		unicode: "{U+2005}", html: "&#8196;", entity: "&emsp14;",
 		tags: ["emsp14", "1/4emsp", "1/4 круглой Шпации"],
-		group: ["Spaces", "4"],
+		group: [["Spaces", "Spaces Left Shift"], "4"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "[Space]",
 		symbolAlt: Chr(0x2005),
 	},
 	"thinspace", {
@@ -2161,26 +2161,26 @@ MapInsert(Characters,
 		tags: ["thinsp", "thin space", "узкий пробел", "тонкий пробел"],
 		group: ["Spaces", "5"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "<! [Space]",
 		symbolAlt: Chr(0x2009),
 	},
 	"emsp16", {
 		unicode: "{U+2006}", html: "&#8198;",
 		tags: ["emsp16", "1/6emsp", "1/6 круглой Шпации"],
-		group: ["Spaces", "6"],
+		group: [["Spaces", "Spaces Right Shift"], "6"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "[Space]",
 		symbolAlt: Chr(0x2006),
 	},
 	"narrow_no_break_space", {
 		unicode: "{U+202F}", html: "&#8239;",
 		tags: ["nnbsp", "narrow no-break space", "узкий неразрывный пробел", "тонкий неразрывный пробел"],
-		group: ["Spaces", "7"],
+		group: [["Spaces", "Spaces Right Shift"], "7"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ [Space]",
 		symbolAlt: Chr(0x202F),
 	},
 	"hairspace", {
@@ -2188,8 +2188,8 @@ MapInsert(Characters,
 		tags: ["hsp", "hairsp", "hair space", "волосяная шпация"],
 		group: ["Spaces", "8"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!<+ [Space]",
 		symbolAlt: Chr(0x200A),
 	},
 	"punctuation_space", {
@@ -2197,8 +2197,8 @@ MapInsert(Characters,
 		tags: ["psp", "puncsp", "punctuation space", "пунктуационный пробел"],
 		group: ["Spaces", "9"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ [Space]",
 		symbolAlt: Chr(0x2008),
 	},
 	"zero_width_space", {
@@ -2206,8 +2206,8 @@ MapInsert(Characters,
 		tags: ["zwsp", "zero-width space", "пробел нулевой ширины"],
 		group: ["Spaces", "0"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!<+>+ [Space]",
 		symbolAlt: Chr(0x200B),
 	},
 	"word_joiner", {
@@ -2215,8 +2215,8 @@ MapInsert(Characters,
 		tags: ["wj", "word joiner", "соединитель слов"],
 		group: ["Spaces", "-"],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ [Tab]",
 		symbolAlt: Chr(0x2060),
 	},
 	"figure_space", {
@@ -2224,8 +2224,8 @@ MapInsert(Characters,
 		tags: ["nsp", "numsp", "figure space", "цифровой пробел"],
 		group: ["Spaces", "="],
 		symbolClass: "Spaces",
-		modifier: RightShift,
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+>+ [Space]",
 		symbolAlt: Chr(0x2007),
 	},
 	"no_break_space", {
@@ -2241,9 +2241,8 @@ MapInsert(Characters,
 	"tabulation", {
 		unicode: "{U+0009}", html: "&#9;", entity: "&Tab;",
 		tags: ["tab", "tabulation", "табуляция"],
-		group: ["Spaces", Tabulation],
+		group: ["Spaces"],
 		symbolClass: "Spaces",
-		show_on_fast_keys: True,
 		symbolAlt: Chr(0x0009),
 	},
 	"emquad", {
@@ -2261,6 +2260,23 @@ MapInsert(Characters,
 		group: ["Spaces", [CommercialAt, QuotationDouble]],
 		symbolClass: "Spaces",
 		symbolAlt: Chr(0x2000),
+	},
+	"zero_width_joiner", {
+		unicode: "{U+200D}", html: "&#8205;", entity: "&zwj;",
+		tags: ["zwj", "zero-width joiner", "соединитель нулевой ширины"],
+		group: ["Format Characters", "Tab"],
+		symbolClass: "Spaces",
+		show_on_fast_keys: True,
+		symbolAlt: Chr(0x200D),
+	},
+	"zero_width_non_joiner", {
+		unicode: "{U+200C}", html: "&#8204;", entity: "&zwjn;",
+		tags: ["zwj", "zero-width non-joiner", "разъединитель нулевой ширины"],
+		group: ["Format Characters", "Tab"],
+		modifier: RightShift,
+		symbolClass: "Spaces",
+		show_on_fast_keys: True,
+		symbolAlt: Chr(0x200C),
 	},
 	;
 	;
@@ -11642,33 +11658,38 @@ Constructor() {
 		"Diacritics Fast Primary",
 		"Special Fast Primary",
 		"Special Fast Left",
+		"Spaces Left Alt",
 		"Latin Accented Primary",
-		"Diacritics Fast Secondary",
 		"Special Fast Secondary",
 		"Asian Quotes",
 		"Other Signs",
 		"Spaces",
+		"Format Characters",
 		"Misc",
 		"Latin Extended",
 		"Latin Ligatures",
 		"Latin Accented Secondary",
 		"Cyrillic Ligatures & Letters",
 		"Cyrillic Letters",
+		"Spaces Right Shift",
 		"Latin Accented Tertiary",
+		"Spaces Left Shift",
 		"Special Fast",
 	] {
 		InsertingOption := groupName = "Special Fast" ? "Fast Special" : "Fast Keys"
 		AddSeparator := (groupName = "Diacritics Fast Primary" || groupName = "Latin Ligatures") ? False : True
 		GroupHotKey := (groupName = "Diacritics Fast Primary") ? LeftControl LeftAlt
 			: (groupName = "Special Fast Left") ? LeftAlt
-				: (groupName = "Diacritics Fast Secondary") ? RightAlt
-					: (groupName = "Latin Accented Tertiary") ? RightShift
-						: (groupName = "Special Fast") ? ReadLocale("symbol_special_key")
-							: ""
+				: (groupName = "Special Fast Secondary") ? RightAlt
+					: (groupName = "Spaces Right Shift") ? RightShift
+						: (groupName = "Spaces Left Shift") ? LeftShift
+							: (groupName = "Special Fast") ? ReadLocale("symbol_special_key")
+								: ""
 
+		BlackList := groupName = "Spaces" ? ["emsp13", "emsp14", "emsp16", "narrow_no_break_space"] : []
 		FastSpecial := groupName = "Special Fast" ? True : False
 
-		InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, groupName, GroupHotKey, AddSeparator, InsertingOption)
+		InsertCharactersGroups(DSLContent["BindList"].TabFastKeys, groupName, GroupHotKey, AddSeparator, InsertingOption, BlackList)
 	}
 
 	DSLContent["BindList"].TabGlagoKeys := []
@@ -11714,7 +11735,7 @@ Constructor() {
 
 	RandPreview := Map(
 		"Diacritics", GetRandomByGroups(["Diacritics Primary", "Diacritics Secondary", "Diacritics Tertiary"]),
-		"Spaces", GetRandomByGroups(["Spaces", "Dashes", "Quotes", "Special Characters"]),
+		"Spaces", GetRandomByGroups(["Format Characters", "Spaces", "Dashes", "Quotes", "Special Characters"]),
 		"Ligatures", GetRandomByGroups(["Latin Ligatures", "Cyrillic Ligatures & Letters", "Latin Accented", "Dashes", "Asian Quotes", "Quotes"]),
 		"FastKeys", GetRandomByGroups(["Diacritics Fast Primary", "Special Fast Primary", "Special Fast Left", "Latin Accented Primary", "Latin Accented Secondary", "Diacritics Fast Secondary", "Asian Quotes"]),
 		"GlagoKeys", GetRandomByGroups(["Futhark Runes", "Glagolitic Letters", "Old Turkic Orkhon", "Old Turkic Yenisei", "Old Permic"]),
@@ -13307,24 +13328,23 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		SlotModdedDashes := Map(
 			"-", Map("<^<!", "softhyphen", "<^<!<+", "minus", "<^>!", "emdash", "<^>!<+", "endash", "<!", ["two_emdash", "three_emdash"], "<^>!<!", "hyphen", "<^>!<!<+", "no_break_hyphen", "<^>!<!>+", "figure_dash"),
 		)
-		SpacesSlots := GetLayoutImprovedCyrillic([
-			"word_joiner", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["-"]),
-			"figure_space", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["="]),
-		])
+		SpacesSlots := GetLayoutImprovedCyrillic([])
 		SlotModdedSpaces := Map(
-			"1", Map("Caps:<^>!>+", ["double_exclamation", "emsp"]),
-			"2", Map("Flat:<^>!>+", "ensp"),
-			"3", Map("Flat:<^>!>+", "emsp13"),
-			"4", Map("Flat:<^>!>+", "emsp14"),
-			"5", Map("Flat:<^>!>+", "thinspace"),
-			"6", Map("Flat:<^>!>+", "emsp16"),
-			"7", Map("Caps:<^>!>+", ["double_question", "narrow_no_break_space"]),
-			"8", Map("Flat:<^>!>+", "hairspace"),
-			"9", Map("Flat:<^>!>+", "punctuation_space"),
-			"0", Map("Flat:<^>!>+", "zero_width_space"),
-			"Tab", Map("Flat:<^>!>+", "tabulation"),
-			"-", Map("<^>!>+", "word_joiner"),
-			"=", Map("<^>!>+", "figure_space"),
+			"Tab", Map("Flat:<^>!", "zero_width_joiner", "Flat:<^>!>+", "zero_width_non_joiner", "Flat:<^>!<+", "word_joiner"),
+			"Space", Map(
+				"Flat:<^>!", "no_break_space",
+				"Flat:<^>!>+", "emsp",
+				"Flat:<^>!<+", "ensp",
+				"Flat:<^>!<+>+", "figure_space",
+				"Flat:<^>!<!", "thinspace",
+				"Flat:<^>!<!<+", "hairspace",
+				"Flat:<^>!<!>+", "punctuation_space",
+				"Flat:<^>!<!<+>+", "zero_width_space",
+				"Flat:<!", "emsp13",
+				"Flat:<+", "emsp14",
+				"Flat:>+", "emsp16",
+				"Flat:<+>+", "narrow_no_break_space",
+			),
 		)
 		SpecialsSlots := GetLayoutImprovedCyrillic([
 			"noequals", MapMerge(GetModifiers("<^>!"), KeySeqSlot["="]),
@@ -13340,11 +13360,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"D", Map("Flat:<!", "degree"),
 			"P", Map("Flat:<^>!", "prime_single", "Flat:<^>!<+", "prime_double"),
 			"S", Map("Flat:<^>!", "section"),
-			"1", Map("Flat:<^>!", "inverted_exclamation", "Flat:<^>!<+", "double_exclamation_question", "Caps:<^>!<+>+", ["interrobang_inverted", "interrobang"]),
+			"1", Map("Flat:<^>!", "inverted_exclamation", "Flat:<^>!<+", "double_exclamation_question", "Flat:<^>!>+", "double_exclamation", "Caps:<^>!<+>+", ["interrobang_inverted", "interrobang"]),
 			"2", Map("Caps:<^>!", ["registered", "copyright"], "Caps:<^>!<+", ["servicemark", "trademark"]),
 			"4", Map("Flat:<^>!", "division"),
 			"5", Map("Flat:<^>!", "permille", "Flat:<^>!<+", "pertenthousand"),
-			"7", Map("Flat:<^>!", "inverted_question", "Flat:<^>!<+", "double_question_exclamation", "Flat:<^>!<!", "reversed_question"),
+			"7", Map("Flat:<^>!", "inverted_question", "Flat:<^>!>+", "double_question", "Flat:<^>!<+", "double_question_exclamation", "Flat:<^>!<!", "reversed_question"),
 			"8", Map("Flat:<^>!", "multiplication"),
 			"9", Map("Flat:<^>!", "bracket_angle_math_left", "Flat:<!", "bracket_square_left", "Flat:<!<+", "bracket_curly_left"),
 			"0", Map("Flat:<^>!", "bracket_angle_math_right", "Flat:<^>!<!", "infinity", "Flat:<!", "bracket_square_right", "Flat:<!<+", "bracket_curly_right"),
