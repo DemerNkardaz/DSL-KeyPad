@@ -11580,19 +11580,41 @@ ReplaceWithUnicode(Mode := "") {
 	A_Clipboard := ""
 
 	Send("^c")
-	Sleep 120
+	ClipWait(0.5, 1)
 	PromptValue := A_Clipboard
-	Sleep 50
-	PromptValue := GetCharacterUnicode(PromptValue)
+	A_Clipboard := ""
 
-	if (PromptValue != "") {
-		if Mode == "Hex" {
-			SendText("0x" PromptValue)
-		} else {
-			SendText(PromptValue)
+	if PromptValue != "" {
+		Output := ""
+
+		i := 1
+		while (i <= StrLen(PromptValue)) {
+			Symbol := SubStr(PromptValue, i, 1)
+			Code := Ord(Symbol)
+			Surrogated := Code >= 0xD800 && Code <= 0xDBFF
+
+			if (Surrogated) {
+				NextSymbol := SubStr(PromptValue, i + 1, 1)
+				Symbol .= NextSymbol
+				i += 1
+			}
+
+			if Mode == "Hex" {
+				Output .= "0x" GetCharacterUnicode(Symbol) " "
+			} else if Mode == "CSS" {
+				Output .= Surrogated ? "\u{" GetCharacterUnicode(Symbol) "} " : "\u" GetCharacterUnicode(Symbol) " "
+			} else {
+				Output .= GetCharacterUnicode(Symbol) " "
+			}
+
+			i += 1
 		}
-	}
 
+		A_Clipboard := RegExReplace(Output, "\s$", "")
+		ClipWait(0.250, 1)
+		Send("^v")
+	}
+	Sleep 500
 	A_Clipboard := BackupClipboard
 }
 
@@ -12163,6 +12185,7 @@ Constructor() {
 	Command_tp_grep := CommandsTree.Add(ReadLocale("func_label_tp_grep"), Command_textprocessing)
 	Command_tp_quotes := CommandsTree.Add(ReadLocale("func_label_tp_quotes"), Command_textprocessing)
 	Command_tp_html := CommandsTree.Add(ReadLocale("func_label_tp_html"), Command_textprocessing)
+	Command_tp_unicode := CommandsTree.Add(ReadLocale("func_label_tp_unicode"), Command_textprocessing)
 	Command_lcoverage := CommandsTree.Add(ReadLocale("func_label_coverage"))
 	Command_lro := CommandsTree.Add(ReadLocale("func_label_coverage_ro"), Command_lcoverage)
 
@@ -12851,6 +12874,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_tp_paragraph",
 		"func_label_tp_grep",
 		"func_label_tp_html",
+		"func_label_tp_unicode",
 		"func_label_coverage",
 		"func_label_coverage_ro",
 	]
@@ -14438,8 +14462,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<^>!" UseKey["3"], (*) => SwitchToRoman(),
 			"<#<!" UseKey["M"], (*) => ToggleGroupMessage(),
 			"<#<!" UseKey["PgUp"], (*) => FindCharacterPage(),
-			"<#<!" UseKey["PgDn"], (*) => ReplaceWithUnicode(),
-			"<#<+" UseKey["PgDn"], (*) => ReplaceWithUnicode("Hex"),
+			">^" UseKey["U"], (*) => ReplaceWithUnicode(),
+			">^" UseKey["Y"], (*) => ReplaceWithUnicode("CSS"),
+			">^" UseKey["I"], (*) => ReplaceWithUnicode("Hex"),
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
@@ -14451,8 +14476,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<!<+" UseKey["Q"], (*) => LangSeparatedCall(
 				() => QuotatizeSelection("Single"),
 				() => QuotatizeSelection("Paw")),
-			"<#<!" UseKey["NumpadEnter"], (*) => ParagraphizeSelection(),
-			"<#<!" UseKey["NumpadDot"], (*) => GREPizeSelection(),
+			">^" UseKey["NumpadEnter"], (*) => ParagraphizeSelection(),
+			">^" UseKey["NumpadDot"], (*) => GREPizeSelection(),
 			"<^>!" UseKey["NumpadDot"], (*) => GREPizeSelection(True),
 			"<#<!" UseKey["ArrUp"], (*) => ChangeScriptInput("sup"),
 			"<#<!" UseKey["ArrDown"], (*) => ChangeScriptInput("sub"),
