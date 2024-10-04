@@ -17,7 +17,7 @@ https.get(url, (response) => {
 
 	response.on('end', () => {
 		const entities = JSON.parse(data);
-		let result = '';
+		const resultMap = new Map();
 
 		for (const entity in entities) {
 			if (!entity.endsWith(';')) {
@@ -25,9 +25,19 @@ https.get(url, (response) => {
 			}
 			const char = entities[entity].characters;
 			const unicodeHex = char.codePointAt(0).toString(16).toUpperCase();
-			result += `${unicodeHex}\t${entity.replace(/;/g, '').replace(/&/g, '')}\n`;
+			const cleanEntity = entity.replace(/;/g, '').replace(/&/g, '');
+
+			if (!resultMap.has(unicodeHex) || cleanEntity.length < resultMap.get(unicodeHex).length) {
+				resultMap.set(unicodeHex, cleanEntity);
+			}
 		}
 
+		const resultArray = [];
+		for (const [unicodeHex, entity] of resultMap.entries()) {
+			resultArray.push(`${unicodeHex}\t${entity}`);
+		}
+
+		const result = resultArray.join('\n');
 		saveToFile(result, 'entities_list.txt');
 	});
 }).on('error', (err) => {
