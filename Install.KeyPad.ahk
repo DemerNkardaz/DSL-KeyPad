@@ -8,7 +8,8 @@ RawSource := RawRepo "DSLKeyPad.ahk"
 LocalesRaw := RawRepoFiles "DSLKeyPad.locales.ini"
 AppIcoRaw := RawRepoFiles "DSLKeyPad.app.ico"
 AppIcosDLLRaw := RawRepoFiles "DSLKeyPad_App_Icons.dll"
-HTMLEntitiesListRaw := RawRepoFiles "NodeJS/entities_list.txt"
+HTMLEntitiesListRaw := RawRepoFiles "entities_list.txt"
+AltCodesListRaw := RawRepoFiles "alt_codes_list.txt"
 
 WorkingDir := A_MyDocuments "\DSLKeyPad"
 DirCreate(WorkingDir)
@@ -17,9 +18,12 @@ LocalesFile := WorkingDir "\DSLKeyPad.locales.ini"
 AppIcoFile := WorkingDir "\DSLKeyPad.app.ico"
 AppIcosDLLFile := WorkingDir "\DSLKeyPad_App_Icons.dll"
 HTMLEntitiesListFile := WorkingDir "\entities_list.txt"
+AltCodesListFile := WorkingDir "\alt_codes_list.txt"
 AppDestination := A_ScriptDir "\DSLKeyPad.ahk"
 
 Download(LocalesRaw, LocalesFile)
+Download(HTMLEntitiesListRaw, HTMLEntitiesListFile)
+Download(AltCodesListRaw, AltCodesListFile)
 Download(AppIcoRaw, AppIcoFile)
 Download(AppIcosDLLRaw, AppIcosDLLFile)
 Download(RawSource, AppDestination)
