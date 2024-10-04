@@ -35,7 +35,8 @@ ChangeLogRaw := Map(
 LocalesRaw := RawRepoFiles "DSLKeyPad.locales.ini"
 AppIcoRaw := RawRepoFiles "DSLKeyPad.app.ico"
 AppIcosDLLRaw := RawRepoFiles "DSLKeyPad_App_Icons.dll"
-HTMLEntitiesListRaw := RawRepoFiles "NodeJS/entities_list.txt"
+HTMLEntitiesListRaw := RawRepoFiles "entities_list.txt"
+AltCodesListRaw := RawRepoFiles "alt_codes_list.txt"
 
 WorkingDir := A_MyDocuments "\DSLKeyPad"
 DirCreate(WorkingDir)
@@ -44,6 +45,7 @@ ConfigFile := WorkingDir "\DSLKeyPad.config.ini"
 LocalesFile := WorkingDir "\DSLKeyPad.locales.ini"
 AppIcoFile := WorkingDir "\DSLKeyPad.app.ico"
 HTMLEntitiesListFile := WorkingDir "\entities_list.txt"
+AltCodesListFile := WorkingDir "\alt_codes_list.txt"
 AppIcosDLLFile := WorkingDir "\DSLKeyPad_App_Icons.dll"
 
 DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
@@ -165,6 +167,11 @@ if !FileExist(AppIcoFile) || !FileExist(AppIcosDLLFile) {
 if !FileExist(HTMLEntitiesListFile) {
 	Download(HTMLEntitiesListRaw, HTMLEntitiesListFile)
 }
+
+if !FileExist(AltCodesListFile) {
+	Download(AltCodesListRaw, AltCodesListFile)
+}
+
 
 OpenConfigFile(*) {
 	global ConfigFile
@@ -1514,17 +1521,19 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 	}
 }
 
-LocalEntitiesLibrary := FillEntitiesFromFile()
+LocalEntitiesLibrary := FillCodesFromFile()
+LocalAltCodesLibrary := FillCodesFromFile(AltCodesListFile)
 
-FillEntitiesFromFile(FilePath := HTMLEntitiesListFile) {
+FillCodesFromFile(FilePath := HTMLEntitiesListFile) {
 	TempArray := []
 	EntitiesList := FileRead(FilePath, "UTF-8")
 
 	for line in StrSplit(EntitiesList, "`n") {
 		RegExMatch(line, '^(.+)\t(.+)', &match)
 		EntityCode := Format("0x{1}", match[1])
-		EntityName := match[2]
-		TempArray.Push(Chr(EntityCode), "&" EntityName ";")
+		EntityName := FilePath = AltCodesListFile ? match[2] : "&" match[2] ";"
+		TempArray.Push(Chr(EntityCode), EntityName)
+
 	}
 
 	return TempArray
@@ -2252,7 +2261,6 @@ MapInsert(Characters,
 	},
 	"no_break_space", {
 		unicode: "{U+00A0}",
-		altcode: "0160",
 		LaTeX: "~",
 		tags: ["nbsp", "no-break space", "неразрывный пробел"],
 		group: ["Spaces", SpaceKey],
@@ -2330,7 +2338,6 @@ MapInsert(Characters,
 	; ? Special Characters
 	"arrow_left", {
 		unicode: "{U+2190}",
-		altCode: "27",
 		tags: ["left arrow", "стрелка влево"],
 		group: [["Special Characters", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
@@ -2338,7 +2345,6 @@ MapInsert(Characters,
 	},
 	"arrow_right", {
 		unicode: "{U+2192}",
-		altCode: "26",
 		tags: ["right arrow", "стрелка вправо"],
 		group: [["Special Characters", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
@@ -2346,7 +2352,6 @@ MapInsert(Characters,
 	},
 	"arrow_up", {
 		unicode: "{U+2191}",
-		altCode: "25",
 		tags: ["up arrow", "стрелка вверх"],
 		group: [["Special Characters", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
@@ -2354,7 +2359,6 @@ MapInsert(Characters,
 	},
 	"arrow_down", {
 		unicode: "{U+2193}",
-		altCode: "24",
 		tags: ["down arrow", "стрелка вниз"],
 		group: [["Special Characters", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
@@ -2362,7 +2366,6 @@ MapInsert(Characters,
 	},
 	"arrow_leftup", {
 		unicode: "{U+2196}",
-		altCode: "24",
 		tags: ["left up arrow", "стрелка влево-вверх"],
 		group: [["Special Characters", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
@@ -2398,7 +2401,6 @@ MapInsert(Characters,
 	},
 	"arrow_updown", {
 		unicode: "{U+2195}",
-		altCode: "18",
 		tags: ["right down arrow", "стрелка вправо-вниз"],
 		group: [["Special Characters", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
@@ -2472,14 +2474,12 @@ MapInsert(Characters,
 	},
 	"bullet", {
 		unicode: "{U+2022}",
-		altCode: "0149 7",
 		tags: ["bullet", "булит"],
 		group: [["Special Characters", "Special Fast Secondary"], Backquote],
 		show_on_fast_keys: True,
 	},
 	"bullet_hyphen", {
 		unicode: "{U+2043}",
-		altCode: "0149 7",
 		tags: ["hyphen bullet", "чёрточный булит"],
 		group: [["Special Characters", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
@@ -2487,7 +2487,6 @@ MapInsert(Characters,
 	},
 	"interpunct", {
 		unicode: "{U+00B7}",
-		altCode: "0183 250",
 		tags: ["middle dot", "точка по центру", "интерпункт"],
 		group: [["Special Characters", "Special Fast Secondary"], '~'],
 		show_on_fast_keys: True,
@@ -2600,7 +2599,7 @@ MapInsert(Characters,
 		recipe: "^*",
 	},
 	"bullet_operator", {
-		unicode: "{U+2219}", altCode: "249",
+		unicode: "{U+2219}",
 		tags: ["оператор буллит", "bullet operator"],
 		group: [["Special Characters", "Smelting Special", "Special Fast"]],
 		show_on_fast_keys: True,
@@ -2609,7 +2608,6 @@ MapInsert(Characters,
 	},
 	"multiplication", {
 		unicode: "{U+00D7}",
-		altcode: "0215",
 		tags: ["multiplication", "умножение"],
 		group: [["Special Characters", "Smelting Special", "Special Fast Secondary", "Special Fast"], "8"],
 		show_on_fast_keys: True,
@@ -2694,7 +2692,6 @@ MapInsert(Characters,
 	},
 	"permille", {
 		unicode: "{U+2030}",
-		altcode: "0137",
 		LaTeX: "\permil",
 		LaTeXPackage: "wasysym",
 		tags: ["per mille", "промилле"],
@@ -2713,7 +2710,6 @@ MapInsert(Characters,
 	},
 	"section", {
 		unicode: "{U+00A7}", LaTeX: "\S",
-		altCode: "21",
 		tags: ["section", "параграф"],
 		group: [["Special Characters", "Special Fast Secondary"], ["s", "ы"]],
 		show_on_fast_keys: True,
@@ -2737,7 +2733,6 @@ MapInsert(Characters,
 	},
 	"plusminus", {
 		unicode: "{U+00B1}",
-		altcode: "0177",
 		tags: ["plus minus", "плюс-минус"],
 		group: [["Special Characters", "Smelting Special", "Special Fast Secondary", "Special Fast"], "+"],
 		show_on_fast_keys: True,
@@ -2835,7 +2830,6 @@ MapInsert(Characters,
 	},
 	"ellipsis", {
 		unicode: "{U+2026}",
-		altcode: "0133",
 		tags: ["ellipsis", "многоточие"],
 		group: [["Special Characters", "Smelting Special", "Special Fast Secondary"], "."],
 		show_on_fast_keys: True,
@@ -2903,7 +2897,6 @@ MapInsert(Characters,
 	},
 	"double_exclamation", {
 		unicode: "{U+203C}",
-		altcode: "19",
 		tags: ["double !!", "двойной !!"],
 		group: [["Smelting Special", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
@@ -2953,21 +2946,18 @@ MapInsert(Characters,
 	;
 	"bracket_square_left", {
 		unicode: "{U+005B}",
-		altCode: "91",
 		tags: ["left square bracket", "левая квадратная скобка"],
 		group: [["Brackets", "Special Fast Left"], "9"],
 		show_on_fast_keys: True,
 	},
 	"bracket_square_right", {
 		unicode: "{U+005D}",
-		altCode: "123",
 		tags: ["right square bracket", "правая квадратная скобка"],
 		group: [["Brackets", "Special Fast Left"], "0"],
 		show_on_fast_keys: True,
 	},
 	"bracket_curly_left", {
 		unicode: "{U+007B}",
-		altCode: "123",
 		tags: ["left curly bracket", "левая фигурная скобка"],
 		group: [["Brackets", "Special Fast Left"]],
 		alt_on_fast_keys: "<+ [9]",
@@ -2975,7 +2965,6 @@ MapInsert(Characters,
 	},
 	"bracket_curly_right", {
 		unicode: "{U+007D}",
-		altCode: "125",
 		tags: ["right curly bracket", "правая фигурная скобка"],
 		group: [["Brackets", "Special Fast Left"]],
 		alt_on_fast_keys: "<+ [0]",
@@ -2983,14 +2972,12 @@ MapInsert(Characters,
 	},
 	"bracket_angle_math_left", {
 		unicode: "{U+27E8}",
-		altCode: "123",
 		tags: ["left angle math bracket", "левая угловая математическая скобка"],
 		group: [["Brackets", "Special Fast Secondary"], "9"],
 		show_on_fast_keys: True,
 	},
 	"bracket_angle_math_right", {
 		unicode: "{U+27E9}",
-		altCode: "125",
 		tags: ["right angle math bracket", "правая угловая математическая скобка"],
 		group: [["Brackets", "Special Fast Secondary"], "0"],
 		show_on_fast_keys: True,
@@ -2998,7 +2985,6 @@ MapInsert(Characters,
 	;
 	"emdash", {
 		unicode: "{U+2014}", LaTeX: "---",
-		altcode: "0151",
 		tags: ["em dash", "длинное тире"],
 		group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "1"],
 		show_on_fast_keys: True,
@@ -3013,7 +2999,6 @@ MapInsert(Characters,
 	},
 	"endash", {
 		unicode: "{U+2013}",
-		altcode: "0150",
 		tags: ["en dash", "короткое тире"],
 		group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "2"],
 		show_on_fast_keys: True,
@@ -3044,7 +3029,6 @@ MapInsert(Characters,
 	},
 	"softhyphen", {
 		unicode: "{U+00AD}",
-		altcode: "0173",
 		tags: ["soft hyphen", "мягкий перенос"],
 		group: [["Dashes", "Smelting Special", "Special Fast Primary"], "5"],
 		show_on_fast_keys: True,
@@ -3107,7 +3091,6 @@ MapInsert(Characters,
 	; * Quotation Marks
 	"france_left", {
 		unicode: "{U+00AB}", LaTeX: "`"<",
-		altcode: "0171",
 		tags: ["left guillemets", "левая ёлочка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "1"],
 		show_on_fast_keys: True,
@@ -3116,7 +3099,6 @@ MapInsert(Characters,
 	},
 	"france_right", {
 		unicode: "{U+00BB}", LaTeX: "`">",
-		altcode: "0172",
 		tags: ["right guillemets", "правая ёлочка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "2"],
 		show_on_fast_keys: True,
@@ -3125,7 +3107,6 @@ MapInsert(Characters,
 	},
 	"france_single_left", {
 		unicode: "{U+2039}",
-		altcode: "0139",
 		tags: ["left single guillemet", "левая одиночная ёлочка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "2"],
 		show_on_fast_keys: True,
@@ -3134,7 +3115,6 @@ MapInsert(Characters,
 	},
 	"france_single_right", {
 		unicode: "{U+203A}",
-		altcode: "0155",
 		tags: ["right single guillemet", "правая одиночная ёлочка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "3"],
 		show_on_fast_keys: True,
@@ -3143,7 +3123,6 @@ MapInsert(Characters,
 	},
 	"quote_left_double", {
 		unicode: "{U+201C}", LaTeX: "````",
-		altcode: "0147",
 		tags: ["left quotes", "левая кавычка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "4"],
 		show_on_fast_keys: True,
@@ -3152,7 +3131,6 @@ MapInsert(Characters,
 	},
 	"quote_right_double", {
 		unicode: "{U+201D}", LaTeX: "''",
-		altcode: "0148",
 		tags: ["right quotes", "правая кавычка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "5"],
 		show_on_fast_keys: True,
@@ -3161,7 +3139,6 @@ MapInsert(Characters,
 	},
 	"quote_left_single", {
 		unicode: "{U+2018}", LaTeX: "``",
-		altcode: "0145",
 		tags: ["left quote", "левая одинарная кавычка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "6"],
 		show_on_fast_keys: True,
@@ -3170,7 +3147,6 @@ MapInsert(Characters,
 	},
 	"quote_right_single", {
 		unicode: "{U+2019}", LaTeX: "'",
-		altcode: "0146",
 		tags: ["right quote", "правая одинарная кавычка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "7"],
 		show_on_fast_keys: True,
@@ -3187,7 +3163,6 @@ MapInsert(Characters,
 	},
 	"quote_low_9_double", {
 		unicode: "{U+201E}", LaTeX: "`"``",
-		altcode: "0132",
 		tags: ["low-9 quotes", "нижняя открывающая двойная кавычка"],
 		group: [["Quotes", "Smelting Special", "Special Fast Secondary"], "0"],
 		show_on_fast_keys: True,
@@ -3204,7 +3179,6 @@ MapInsert(Characters,
 	},
 	"quote_left_double_ghost_ru", {
 		unicode: "{U+201E}", LaTeX: "`"``",
-		altcode: "0132",
 		tags: ["left low quotes", "левая нижняя кавычка"],
 		group: ["Special Fast Secondary"],
 		show_on_fast_keys: True,
@@ -3212,7 +3186,6 @@ MapInsert(Characters,
 	},
 	"quote_right_double_ghost_ru", {
 		unicode: "{U+201C}", LaTeX: "`"'",
-		altcode: "0147",
 		tags: ["left quotes", "левая кавычка"],
 		group: ["Special Fast Secondary"],
 		show_on_fast_keys: True,
@@ -3442,7 +3415,6 @@ MapInsert(Characters,
 	},
 	"lat_s_lig_et", {
 		unicode: "{U+0026}",
-		altCode: "38",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: [".et", "лигатура et", "ligature et", "амперсанд", "ampersand"],
@@ -3450,7 +3422,6 @@ MapInsert(Characters,
 	},
 	"lat_s_lig_et_turned", {
 		unicode: "{U+214B}",
-		altCode: "38",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: [".ett", "лигатура перевёрнутый et", "ligature turned et", "перевёрнутый амперсанд", "turned ampersand"],
@@ -6380,7 +6351,6 @@ MapInsert(Characters,
 	},
 	"cyr_c_let_i", {
 		unicode: "{U+0406}",
-		altCode: "0178 RU" Chr(0x2328),
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "И"],
 		show_on_fast_keys: True,
@@ -6388,7 +6358,6 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_i", {
 		unicode: "{U+0456}",
-		altCode: "0179 RU" Chr(0x2328),
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "и"],
 		show_on_fast_keys: True,
@@ -9525,7 +9494,6 @@ MapInsert(Characters,
 	;
 	"copyright", {
 		unicode: "{U+00A9}",
-		altCode: "0169",
 		group: ["Other Signs", "2"],
 		show_on_fast_keys: True,
 		tags: ["копирайт", "copyright"],
@@ -9539,7 +9507,6 @@ MapInsert(Characters,
 	},
 	"registered", {
 		unicode: "{U+00AE}",
-		altCode: "0174",
 		group: ["Other Signs", "2"],
 		modifier: CapsLock,
 		show_on_fast_keys: True,
@@ -9548,7 +9515,6 @@ MapInsert(Characters,
 	},
 	"trademark", {
 		unicode: "{U+2122}",
-		altCode: "0153",
 		group: ["Other Signs", "2"],
 		modifier: LeftShift,
 		show_on_fast_keys: True,
@@ -9935,6 +9901,27 @@ ProcessMapAfter() {
 					break
 				}
 			}
+		}
+
+		for i, pair in LocalAltCodesLibrary {
+			if Mod(i, 2) = 1 {
+				Symbol := pair
+				AltCode := LocalAltCodesLibrary[i + 1]
+
+				if EntryCharacter = Symbol {
+					if !HasProp(value, "altCode") {
+						value.altCode := ""
+					}
+
+					if !InStr(value.altCode, AltCode) {
+						value.altCode .= AltCode " "
+					}
+				}
+			}
+		}
+
+		if HasProp(value, "altCode") {
+			value.altCode := RegExReplace(value.altCode, "\s$", "")
 		}
 
 		if !HasProp(value, "html") {
