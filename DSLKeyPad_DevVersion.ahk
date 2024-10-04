@@ -12027,7 +12027,7 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 			if (IgnoreDefaultSymbols && RegExMatch(Symbol, DefaultSymbols)) {
 				Output .= Symbol
 			} else {
-				if (Mode = "Entities") {
+				if InStr(Mode, "Entities") {
 					Found := false
 					for j, entity in LocalEntitiesLibrary {
 						if (Mod(j, 2) = 1 && entity = Symbol) {
@@ -12038,10 +12038,10 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 					}
 
 					if (!Found) {
-						Output .= "&#" ConvertToDecimalUnicode(Symbol) ";"
+						Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimalUnicode(Symbol)) ";"
 					}
 				} else {
-					Output .= "&#" ConvertToDecimalUnicode(Symbol) ";"
+					Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimalUnicode(Symbol)) ";"
 				}
 			}
 
@@ -12055,6 +12055,7 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 
 	Sleep 500
 	A_Clipboard := BackupClipboard
+	Send("{Control Up}")
 	return
 }
 
@@ -12389,7 +12390,7 @@ GetCharacterUnicode(Symbol, StartFormat := "") {
 	return StartFormat Format("{:04X}", Code)
 }
 
-ConvertToHexaDecimal(StringInput) {
+ConvertToHexaDecimal(StringInput, StartFromat := "0x") {
 	if StringInput != "" {
 		Output := ""
 		i := 1
@@ -12404,7 +12405,7 @@ ConvertToHexaDecimal(StringInput) {
 				i += 1
 			}
 
-			Output .= GetCharacterUnicode(Symbol, "0x") "-"
+			Output .= GetCharacterUnicode(Symbol, StartFromat) "-"
 			i += 1
 		}
 
