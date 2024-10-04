@@ -2326,7 +2326,7 @@ Characters := Map(
 	})
 MapInsert(Characters,
 	"acute", {
-		unicode: "{U+0301}", html: "&#769;",
+		unicode: "{U+0301}", ;html: "&#769;",
 		LaTeX: ["\'", "\acute"],
 		tags: ["acute", "акут", "ударение"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["a", "ф"]],
@@ -7835,7 +7835,7 @@ MapInsert(Characters,
 		tags: ["строчная буква шта глаголицы", "small letter shta glagolitic"],
 	},
 	"glagolitic_c_let_yeru", {
-		unicode: "{U+2C1F}", html: "&#11295;",
+		unicode: "{U+2C1F}",
 		combiningForm: "{U+1E01F}",
 		combiningHTML: "&#122911;",
 		titlesAlt: True,
@@ -7843,28 +7843,25 @@ MapInsert(Characters,
 		tags: ["прописная буква Еръ глаголицы", "capital letter Yeru glagolitic"],
 	},
 	"glagolitic_s_let_yeru", {
-		unicode: "{U+2C4F}", html: "&#11343;",
+		unicode: "{U+2C4F}",
 		combiningForm: "{U+1E01F}",
-		combiningHTML: "&#122911;",
 		titlesAlt: True,
 		group: ["Glagolitic Letters", "ъ"],
 		tags: ["строчная буква еръ глаголицы", "small letter yeru glagolitic"],
 	},
 	"glagolitic_c_let_yery", {
-		unicode: "{U+2C1F}", html: "&#11295;&#11274;",
+		unicode: "{U+2C1F}",
 		uniSequence: ["{U+2C1F}", "{U+2C0A}"],
 		combiningForm: ["{U+1E01F}", "{U+1E00A}"],
-		combiningHTML: "&#122911;&#122889;",
 		titlesAlt: True,
 		group: ["Glagolitic Letters", "Ы"],
 		tags: ["прописная буква Еры глаголицы", "capital letter Yery glagolitic"],
 		symbolCustom: "s36"
 	},
 	"glagolitic_s_let_yery", {
-		unicode: "{U+2C4F}", html: "&#11343;&#11322;",
+		unicode: "{U+2C4F}",
 		uniSequence: ["{U+2C4F}", "{U+2C3A}"],
 		combiningForm: ["{U+1E01F}", "{U+1E00A}"],
-		combiningHTML: "&#122911;&#122889;",
 		titlesAlt: True,
 		group: ["Glagolitic Letters", "ы"],
 		tags: ["строчная буква еры глаголицы", "small letter yery glagolitic"],
@@ -7873,7 +7870,6 @@ MapInsert(Characters,
 	"glagolitic_c_let_yeri", {
 		unicode: "{U+2C20}", html: "&#11296;",
 		combiningForm: "{U+1E020}",
-		combiningHTML: "&#122912;",
 		titlesAlt: True,
 		group: ["Glagolitic Letters", "Ь"],
 		tags: ["прописная буква Ерь глаголицы", "capital letter Yeri glagolitic"],
@@ -10794,6 +10790,30 @@ ProcessMapAfter() {
 			}
 		}
 
+		if HasProp(value, "uniSequence") {
+			if !HasProp(value, "html") {
+				value.html := ""
+			}
+			for uniSequence in value.uniSequence {
+				value.html .= "&#" ConvertToDecimal(PasteUnicode(uniSequence)) ";"
+			}
+		} else {
+			value.html := "&#" ConvertToDecimal(EntryCharacter) ";"
+		}
+
+		if HasProp(value, "combiningForm") {
+			if !HasProp(value, "combiningHTML") {
+				value.combiningHTML := ""
+			}
+			if IsObject(value.combiningForm) {
+				for combining in value.combiningForm {
+					value.combiningHTML .= "&#" ConvertToDecimal(PasteUnicode(combining)) ";"
+				}
+			} else {
+				value.combiningHTML := "&#" ConvertToDecimal(PasteUnicode(value.combiningForm)) ";"
+			}
+		}
+
 		if HasProp(value, "alt_on_fast_keys") {
 			if EntryExpression {
 				value.alt_on_fast_keys := RegExReplace(value.alt_on_fast_keys, "\$", "[" LetterVar "]")
@@ -11995,10 +12015,6 @@ for chracterEntry, value in Characters {
 	}
 }
 
-ConvertToDecimalUnicode(Symbol) {
-	HexCode := GetCharacterUnicode(Symbol)
-	return Format("{:d}", "0x" HexCode)
-}
 
 TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 	DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
@@ -12038,10 +12054,10 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 					}
 
 					if (!Found) {
-						Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimalUnicode(Symbol)) ";"
+						Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimal(Symbol)) ";"
 					}
 				} else {
-					Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimalUnicode(Symbol)) ";"
+					Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimal(Symbol)) ";"
 				}
 			}
 
@@ -12388,6 +12404,11 @@ GetCharacterUnicode(Symbol, StartFormat := "") {
 	}
 
 	return StartFormat Format("{:04X}", Code)
+}
+
+ConvertToDecimal(Symbol) {
+	HexCode := GetCharacterUnicode(Symbol)
+	return Format("{:d}", "0x" HexCode)
 }
 
 ConvertToHexaDecimal(StringInput, StartFromat := "0x") {
