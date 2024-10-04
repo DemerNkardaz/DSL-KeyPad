@@ -568,6 +568,8 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 
 		GetLocales()
 		GetAppIco()
+		Download(HTMLEntitiesListRaw, HTMLEntitiesListFile)
+		Download(AltCodesListRaw, AltCodesListFile)
 
 		if RepairMode == True {
 			MsgBox(ReadLocale("update_repair_success"), DSLPadTitle)
