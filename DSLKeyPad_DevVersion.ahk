@@ -51,14 +51,14 @@ DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
 DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
 
-GetUtilityFiles() {
+GetUtilityFiles(ForceDownload := False) {
 	ErrMessages := Map(
 		"ru", "Произошла ошибка при получении файла перевода.`nСервер недоступен или ошибка соединения с интернетом.",
 		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
 	)
 
 	for fileEntry, value in InternalFiles {
-		if !FileExist(value.File) {
+		if !FileExist(value.File) || ForceDownload {
 			try {
 				Download(value.Repo, value.File)
 			} catch {
@@ -69,6 +69,7 @@ GetUtilityFiles() {
 	return
 }
 
+GetUtilityFiles()
 
 TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 
@@ -507,14 +508,18 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		CurrentFilePath := A_ScriptFullPath
 		CurrentFileName := StrSplit(CurrentFilePath, "\").Pop()
 		UpdateFilePath := A_ScriptDir "\DSLKeyPad.ahk-GettingUpdate"
+		BackupsDir := A_ScriptDir "\Backups"
+		if !DirExist(BackupsDir) {
+			DirCreate(BackupsDir)
+		}
 
 		Download(RawSource, UpdateFilePath)
 
-		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup-" GetTimeString())
+		FileMove(CurrentFilePath, BackupsDir "\" CurrentFileName "-Backup-" GetTimeString())
 
 		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
 
-		GetUtilityFiles()
+		GetUtilityFiles(True)
 
 		if RepairMode == True {
 			MsgBox(ReadLocale("update_repair_success"), DSLPadTitle)
