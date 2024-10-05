@@ -1,7 +1,7 @@
 #Requires Autohotkey v2
 #SingleInstance Force
 
-GetCharacterUnicode(Symbol) {
+GetCharacterUnicodeRefine(Symbol) {
   Code := Ord(Symbol)
 
   if (Code >= 0xD800 && Code <= 0xDBFF) {
@@ -16,7 +16,7 @@ GetCharacterUnicode(Symbol) {
     }
   }
 
-  return Format("{:04X}", Code)
+  return Format("{:X}", Code)
 }
 
 GetList := FileRead("alt_codes_list_source.txt", "UTF-8")
@@ -32,7 +32,7 @@ for line in StrSplit(GetList, "`n") {
   RegExMatch(line, '^(.+)\t(.+)', &match)
   match1 := match[1]
   match2 := match[2]
-  match1 := GetCharacterUnicode(match1)
+  match1 := StrLen(match1) = 1 ? GetCharacterUnicodeRefine(match1) : match1
   endLine := curr_i < total_i ? "`n" : ""
   FileAppend(match1 "`t" match2 endLine, "alt_codes_list.txt", "UTF-8")
 }
