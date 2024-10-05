@@ -935,7 +935,7 @@ LayoutsPresets := Map(
 	),
 )
 
-RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY") {
+RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY", ForceApply := False) {
 	global DisabledAllKeys, ActiveScriptName
 
 	IsLatin := False
@@ -974,7 +974,7 @@ RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY") {
 
 		UnregisterKeysLayout()
 
-		if (IsLatin && LayoutName != "QWERTY") || (IsCyrillic && LayoutName != "ЙЦУКЕН") || (IsLatin && ActiveCyrillic != "ЙЦУКЕН") || (IsCyrillic && ActiveLatin != "QWERTY") {
+		if (IsLatin && LayoutName != "QWERTY") || (IsCyrillic && LayoutName != "ЙЦУКЕН") || (IsLatin && ActiveCyrillic != "ЙЦУКЕН") || (IsCyrillic && ActiveLatin != "QWERTY") || ForceApply {
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"), True)
 		}
 
@@ -3253,6 +3253,8 @@ MapInsert(Characters,
 	},
 	"lat_s_lig_ae", {
 		unicode: "{U+00E6}",
+		combiningForm: "{U+1DD4}",
+		modifierForm: "{U+10783}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: [".ae", "лигатура ae", "ligature ae"],
@@ -12744,13 +12746,20 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 		TargetGroup[PreviewTags].Text := EntryString GetChar("ensp") TagsString
 
-		if (HasProp(GetEntry, "combiningForm")) {
-			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_have_combining")
-		} else if RegExMatch(GetEntry.symbol, "^" DottedCircle "\S") {
-			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_combining")
-		} else {
-			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character")
+		GroupTitle := ""
+		IsDiacritic := RegExMatch(GetEntry.symbol, "^" DottedCircle "\S")
+		IsCombining := IsDiacritic || HasProp(GetEntry, "combiningForm")
+		IsModifier := HasProp(GetEntry, "modifierForm")
+
+		if IsModifier {
+			GroupTitle .= GetChar("dotted_circle") Chr(0x02B0) " "
 		}
+
+		if IsCombining {
+			GroupTitle .= GetChar("dotted_circle") Chr(0x036A) " "
+		}
+
+		TargetGroup[PreviewGroupTitle].Text := GroupTitle (IsDiacritic ? ReadLocale("character_combining") : ReadLocale("character"))
 
 		if (HasProp(GetEntry, "altcode")) {
 			TargetGroup[PreviewAlt].Text := GetEntry.altcode
@@ -14449,6 +14458,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
+			"<^>!" UseKey["F2"], (*) => ProceedCombining(),
+			"<^>!" UseKey["F3"], (*) => ProceedModifiers(),
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
@@ -14470,8 +14481,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^>+" UseKey["0"], (*) => ToggleLetterScript(, "Maths"),
 			;
 			"RAlt", (*) => ProceedCompose(),
-			"RCtrl", (*) => ProceedCombining(),
-			"RShift", (*) => ProceedModifiers(),
+			;"RCtrl", (*) => ProceedCombining(),
+			;"RShift", (*) => ProceedModifiers(),
 			;
 			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
 			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
@@ -14587,65 +14598,28 @@ RAltsSetStats() {
 	RAltsTimerEnds := False
 }
 
-RCtrlCount := 0
-RCtrlTimerEnds := False
-RCtrlTimer := ""
 
 ProceedCombining() {
-	global RCtrlTimerEnds, RCtrlCount, CombiningEnabled
-
-	if (RCtrlTimerEnds) {
-		return
-	}
-
-	if RCtrlCount = 1 {
-		RCtrlCount := 0
-		CombiningEnabled := !CombiningEnabled ? True : False
-		if CombiningEnabled {
-			ShowInfoMessage("message_combining", , , SkipGroupMessage, True)
-		} else {
-			ShowInfoMessage("message_combining_disabled", , , SkipGroupMessage, True)
-		}
-		return
+	global CombiningEnabled
+	CombiningEnabled := !CombiningEnabled ? True : False
+	if CombiningEnabled {
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
+		ShowInfoMessage("message_combining", , , SkipGroupMessage, True)
 	} else {
-		RCtrlCount++
-		RCtrlEndingTimer()
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		ShowInfoMessage("message_combining_disabled", , , SkipGroupMessage, True)
 	}
 }
-
-RCtrlEndingTimer() {
-	global RCtrlTimer
-	if (RCtrlTimer != "") {
-		SetTimer(RAltsSetStats, 0)
-		RCtrlTimer := ""
-	}
-
-	return SetTimer(RAltsSetStats, -300)
-}
-
-RShiftCount := 0
-RShiftTimerEnds := False
-RShiftTimer := ""
 
 ProceedModifiers() {
-	global RShiftTimerEnds, RShiftCount, ModifiersEnabled
-
-	if (RShiftTimerEnds) {
-		return
-	}
-
-	if RShiftCount = 1 {
-		RShiftCount := 0
-		ModifiersEnabled := !ModifiersEnabled ? True : False
-		if ModifiersEnabled {
-			ShowInfoMessage("message_modifier", , , SkipGroupMessage, True)
-		} else {
-			ShowInfoMessage("message_modifier_disabled", , , SkipGroupMessage, True)
-		}
-		return
+	global ModifiersEnabled
+	ModifiersEnabled := !ModifiersEnabled ? True : False
+	if ModifiersEnabled {
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
+		ShowInfoMessage("message_modifier", , , SkipGroupMessage, True)
 	} else {
-		RShiftCount++
-		RShiftEndingTimer()
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		ShowInfoMessage("message_modifier_disabled", , , SkipGroupMessage, True)
 	}
 }
 
