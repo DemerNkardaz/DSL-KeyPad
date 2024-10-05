@@ -38,15 +38,14 @@ AppIcosDLLRaw := RawRepoFiles "DSLKeyPad_App_Icons.dll"
 HTMLEntitiesListRaw := RawRepoFiles "entities_list.txt"
 AltCodesListRaw := RawRepoFiles "alt_codes_list.txt"
 
-WorkingDir := A_MyDocuments "\DSLKeyPad"
-DirCreate(WorkingDir)
+WorkingDir := A_ScriptDir
 
 ConfigFile := WorkingDir "\DSLKeyPad.config.ini"
-LocalesFile := WorkingDir "\DSLKeyPad.locales.ini"
-AppIcoFile := WorkingDir "\DSLKeyPad.app.ico"
-HTMLEntitiesListFile := WorkingDir "\entities_list.txt"
-AltCodesListFile := WorkingDir "\alt_codes_list.txt"
-AppIcosDLLFile := WorkingDir "\DSLKeyPad_App_Icons.dll"
+LocalesFile := WorkingDir "\UtilityFiles\DSLKeyPad.locales.ini"
+AppIcoFile := WorkingDir "\UtilityFiles\DSLKeyPad.app.ico"
+HTMLEntitiesListFile := WorkingDir "\UtilityFiles\entities_list.txt"
+AltCodesListFile := WorkingDir "\UtilityFiles\alt_codes_list.txt"
+AppIcosDLLFile := WorkingDir "\UtilityFiles\DSLKeyPad_App_Icons.dll"
 
 DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
