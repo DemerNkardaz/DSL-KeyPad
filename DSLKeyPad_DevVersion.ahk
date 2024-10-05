@@ -137,17 +137,19 @@ FastKeysIsActive := False
 SkipGroupMessage := False
 GlagoFutharkActive := False
 CombiningEnabled := False
+ModifiersEnabled := False
 DisabledAllKeys := False
 ActiveScriptName := ""
 PreviousScriptName := ""
 InputMode := "Default"
-LaTeXMode := "common"
+LaTeXMode := "Default"
 
 DefaultConfig := [
 	["Settings", "FastKeysIsActive", "False"],
 	["Settings", "SkipGroupMessage", "False"],
 	["Settings", "InputMode", "Default"],
 	["Settings", "ScriptInput", "Default"],
+	["Settings", "LaTeXInput", "Default"],
 	["Settings", "UserLanguage", ""],
 	["Settings", "LatinLayout", "QWERTY"],
 	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
@@ -170,7 +172,7 @@ if FileExist(ConfigFile) {
 	isFastKeysEnabled := IniRead(ConfigFile, "Settings", "FastKeysIsActive", "False")
 	isSkipGroupMessage := IniRead(ConfigFile, "Settings", "SkipGroupMessage", "False")
 	InputMode := IniRead(ConfigFile, "Settings", "InputMode", "Default")
-	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXMode", "common")
+	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
 
 	FastKeysIsActive := (isFastKeysEnabled = "True")
 	SkipGroupMessage := (isSkipGroupMessage = "True")
@@ -1289,6 +1291,9 @@ GetMapCount(MapObj, SortGroups := "") {
 				keyCount--
 			}
 			if HasProp(value, "combiningForm") {
+				keyCount++
+			}
+			if HasProp(value, "modifierForm") {
 				keyCount++
 			}
 		}
@@ -3240,6 +3245,7 @@ MapInsert(Characters,
 	},
 	"lat_c_lig_ae", {
 		unicode: "{U+00C6}",
+		modifierForm: "{U+1D2D}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: ["!ae", "лигатура AE", "ligature AE"],
@@ -5930,9 +5936,16 @@ MapInsert(Characters,
 	},
 	"lat_s_let_l_belt", {
 		unicode: "{U+026C}",
+		modifierForm: "{U+1079B}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("arrow_right_ushaped"),
+	},
+	"lat_s_let_l_belt_palatal_hook", {
+		unicode: "{U+1DF13}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: "$" GetChar("arrow_right_ushaped", "palatal_hook_below"),
 	},
 	"lat_s_let_l_belt_retroflex_hook", {
 		unicode: "{U+A78E}",
@@ -6064,7 +6077,7 @@ MapInsert(Characters,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("macron_below"),
 	},
-	"lat_s_let_l_tilde_overlay", {
+	"lat_c_let_l_tilde_overlay", {
 		unicode: "{U+2C62}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
@@ -6078,6 +6091,7 @@ MapInsert(Characters,
 	},
 	"lat_s_let_l_tilde_overlay_double", {
 		unicode: "{U+AB38}",
+		combiningForm: "{U+1DEC}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("tilde_overlay", "tilde_overlay"),
@@ -9495,13 +9509,13 @@ MapInsert(Characters,
 	"lat_c_let_g", { calcOff: "", unicode: "{U+0047}" },
 	"lat_s_let_g", { calcOff: "", unicode: "{U+0067}" },
 	"lat_c_let_h", { calcOff: "", unicode: "{U+0048}" },
-	"lat_s_let_h", { calcOff: "", unicode: "{U+0068}" },
+	"lat_s_let_h", { calcOff: "", unicode: "{U+0068}", modifierForm: "{U+02B0}" },
 	"lat_c_let_i", { calcOff: "", unicode: "{U+0049}" },
 	"lat_s_let_i", { calcOff: "", unicode: "{U+0069}" },
 	"lat_c_let_j", { calcOff: "", unicode: "{U+004A}" },
-	"lat_s_let_j", { calcOff: "", unicode: "{U+006A}" },
+	"lat_s_let_j", { calcOff: "", unicode: "{U+006A}", modifierForm: "{U+02B2}" },
 	"lat_c_let_k", { calcOff: "", unicode: "{U+004B}" },
-	"lat_s_let_k", { calcOff: "", unicode: "{U+006B}" },
+	"lat_s_let_k", { calcOff: "", unicode: "{U+006B}", modifierForm: "{U+1D4F}" },
 	"lat_c_let_l", { calcOff: "", unicode: "{U+004C}" },
 	"lat_s_let_l", { calcOff: "", unicode: "{U+006C}" },
 	"lat_c_let_m", { calcOff: "", unicode: "{U+004D}" },
@@ -9515,9 +9529,9 @@ MapInsert(Characters,
 	"lat_c_let_q", { calcOff: "", unicode: "{U+0051}" },
 	"lat_s_let_q", { calcOff: "", unicode: "{U+0071}" },
 	"lat_c_let_r", { calcOff: "", unicode: "{U+0052}" },
-	"lat_s_let_r", { calcOff: "", unicode: "{U+0072}" },
+	"lat_s_let_r", { calcOff: "", unicode: "{U+0072}", modifierForm: "{U+02B3}" },
 	"lat_c_let_s", { calcOff: "", unicode: "{U+0053}" },
-	"lat_s_let_s", { calcOff: "", unicode: "{U+0073}" },
+	"lat_s_let_s", { calcOff: "", unicode: "{U+0073}", modifierForm: "{U+02E2}" },
 	"lat_c_let_t", { calcOff: "", unicode: "{U+0054}" },
 	"lat_s_let_t", { calcOff: "", unicode: "{U+0074}" },
 	"lat_c_let_u", { calcOff: "", unicode: "{U+0055}" },
@@ -9525,13 +9539,13 @@ MapInsert(Characters,
 	"lat_c_let_v", { calcOff: "", unicode: "{U+0056}" },
 	"lat_s_let_v", { calcOff: "", unicode: "{U+0076}" },
 	"lat_c_let_w", { calcOff: "", unicode: "{U+0057}" },
-	"lat_s_let_w", { calcOff: "", unicode: "{U+0077}" },
+	"lat_s_let_w", { calcOff: "", unicode: "{U+0077}", modifierForm: "{U+02B7}" },
 	"lat_c_let_x", { calcOff: "", unicode: "{U+0058}" },
 	"lat_s_let_x", { calcOff: "", unicode: "{U+0078}" },
 	"lat_c_let_y", { calcOff: "", unicode: "{U+0059}" },
-	"lat_s_let_y", { calcOff: "", unicode: "{U+0079}" },
+	"lat_s_let_y", { calcOff: "", unicode: "{U+0079}", modifierForm: "{U+02B8}" },
 	"lat_c_let_z", { calcOff: "", unicode: "{U+005A}" },
-	"lat_s_let_z", { calcOff: "", unicode: "{U+007A}" },
+	"lat_s_let_z", { calcOff: "", unicode: "{U+007A}", modifierForm: "{U+02E3}" },
 	;
 	"cyr_c_let_a", { calcOff: "", unicode: "{U+0410}" }, ; А
 	"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}" }, ; а
@@ -9896,6 +9910,19 @@ ProcessMapAfter() {
 			}
 		}
 
+		if HasProp(value, "modifierForm") {
+			if !HasProp(value, "modifierHTML") {
+				value.modifierHTML := ""
+			}
+			if IsObject(value.modifierForm) {
+				for combining in value.modifierForm {
+					value.modifierHTML .= "&#" ConvertToDecimal(PasteUnicode(combining)) ";"
+				}
+			} else {
+				value.modifierHTML := "&#" ConvertToDecimal(PasteUnicode(value.modifierForm)) ";"
+			}
+		}
+
 		if HasProp(value, "alt_on_fast_keys") {
 			if EntryExpression {
 				value.alt_on_fast_keys := RegExReplace(value.alt_on_fast_keys, "\$", "[" LetterVar "]")
@@ -10208,20 +10235,25 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 			if IsObject(characterKeys) {
 				for _, key in characterKeys {
 					if (keyPressed == key) {
-						if InputMode = "HTML" && HasProp(value, "html") {
+						if ModifiersEnabled && HasProp(value, "modifierForm") {
+							InputMode = "HTML" ? SendText(value.modifierHTML) : Send(value.modifierForm)
+						} else if InputMode = "HTML" && HasProp(value, "html") {
 							SendText(characterEntity)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-							if IsObject(characterLaTeX) {
-								if LaTeXMode = "common"
-									SendText(characterLaTeX[1])
-								else if LaTeXMode = "math"
-									SendText(characterLaTeX[2])
-							} else {
-								SendText(characterLaTeX)
-							}
+							SendText(IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX)
 						}
 						else {
-							if CombiningEnabled && HasProp(value, "combiningForm") {
+							if ModifiersEnabled && HasProp(value, "modifierForm") {
+								if IsObject(value.modifierForm) {
+									TempValue := ""
+									for modifier in value.modifierForm {
+										TempValue .= PasteUnicode(modifier)
+									}
+									SendText(TempValue)
+								} else {
+									Send(value.modifierForm)
+								}
+							} else if CombiningEnabled && HasProp(value, "combiningForm") {
 								if IsObject(value.combiningForm) {
 									TempValue := ""
 									for combining in value.combiningForm {
@@ -10247,7 +10279,9 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 				}
 			} else {
 				if (keyPressed == characterKeys) {
-					if InputMode = "HTML" && HasProp(value, "html") {
+					if ModifiersEnabled && HasProp(value, "modifierForm") {
+						InputMode = "HTML" ? SendText(value.modifierHTML) : Send(value.modifierForm)
+					} else if InputMode = "HTML" && HasProp(value, "html") {
 						SendText(characterEntity)
 					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 						if IsObject(characterLaTeX) {
@@ -10260,7 +10294,17 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 						}
 					}
 					else {
-						if CombiningEnabled && HasProp(value, "combiningForm") {
+						if ModifiersEnabled && HasProp(value, "modifierForm") {
+							if IsObject(value.modifierForm) {
+								TempValue := ""
+								for modifier in value.modifierForm {
+									TempValue .= PasteUnicode(modifier)
+								}
+								SendText(TempValue)
+							} else {
+								Send(value.modifierForm)
+							}
+						} else if CombiningEnabled && HasProp(value, "combiningForm") {
 							if IsObject(value.combiningForm) {
 								TempValue := ""
 								for combining in value.combiningForm {
@@ -10325,6 +10369,7 @@ HasAllCharacters(str, pattern) {
 
 SearchKey(CycleSend := "") {
 	CyclingSearch := False
+	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
 
 	if StrLen(CycleSend) > 0 {
 		PromptValue := CycleSend
@@ -10356,21 +10401,26 @@ SearchKey(CycleSend := "") {
 	SymbolSearching(SearchingPrompt) {
 		ProceedSearch(value, characterEntity, characterLaTeX) {
 			OutputValue := ""
-			if InputMode = "HTML" && HasProp(value, "html") {
+			if ModifiersEnabled && HasProp(value, "modifierForm") {
+				OutputValue := InputMode = "HTML" ? value.modifierHTML : PasteUnicode(value.modifierForm)
+			} else if InputMode = "HTML" && HasProp(value, "html") {
 				SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
 				OutputValue := SendValue
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-				if IsObject(characterLaTeX) {
-					if LaTeXMode = "common"
-						OutputValue := characterLaTeX[1]
-					else if LaTeXMode = "math"
-						OutputValue := characterLaTeX[2]
-				} else {
-					OutputValue := characterLaTeX
-				}
+				OutputValue := IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			}
 			else {
-				if CombiningEnabled && HasProp(value, "combiningForm") {
+				if ModifiersEnabled && HasProp(value, "modifierForm") {
+					if IsObject(value.modifierForm) {
+						TempValue := ""
+						for modifier in value.modifierForm {
+							TempValue .= PasteUnicode(modifier)
+						}
+						OutputValue := TempValue
+					} else {
+						OutputValue := Chr("0x" UniTrim(value.modifierForm))
+					}
+				} else if CombiningEnabled && HasProp(value, "combiningForm") {
 					if IsObject(value.combiningForm) {
 						TempValue := ""
 						for combining in value.combiningForm {
@@ -10422,7 +10472,7 @@ SearchKey(CycleSend := "") {
 					continue
 				}
 				characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "entity")) ? value.html : ""
-				characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
+				characterLaTeX := (HasProp(value, "LaTeX")) ? (IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX) : ""
 
 				for _, tag in value.tags {
 					if CheckingRule(value, tag, SearchingPrompt, IsSensitive) {
@@ -11175,10 +11225,41 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 
 Ligaturise(SmeltingMode := "InputBox") {
 	LanguageCode := GetLanguageCode()
+	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
 	BackupClipboard := ""
 
 	Found := False
-
+	GetUniChar(value) {
+		Output := ""
+		if ModifiersEnabled && HasProp(value, "modifierForm") {
+			if IsObject(value.modifierForm) {
+				TempValue := ""
+				for modifier in value.modifierForm {
+					TempValue .= PasteUnicode(modifier)
+				}
+				Output := TempValue
+			} else {
+				Output := PasteUnicode(value.modifierForm)
+			}
+		} else if CombiningEnabled && HasProp(value, "combiningForm") {
+			if IsObject(value.combiningForm) {
+				TempValue := ""
+				for combining in value.combiningForm {
+					TempValue .= PasteUnicode(combining)
+				}
+				Output := TempValue
+			} else {
+				Output := PasteUnicode(value.combiningForm)
+			}
+		} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+			for unicode in value.uniSequence {
+				Output .= PasteUnicode(unicode)
+			}
+		} else {
+			Output := PasteUnicode(value.unicode)
+		}
+		return Output
+	}
 
 	if (SmeltingMode = "InputBox") {
 		PromptValue := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
@@ -11295,26 +11376,29 @@ Ligaturise(SmeltingMode := "InputBox") {
 							for _, recipeEntry in Recipe {
 								if (!IsSingleCase && Input == recipeEntry) ||
 								(IsSingleCase && Input = recipeEntry) {
-									if InputMode = "HTML" && HasProp(value, "html") {
+									if ModifiersEnabled && HasProp(value, "modifierForm") {
+										GetUnicodeSymbol := InputMode = "HTML" ? value.modifierHTML : PasteUnicode(value.modifierForm)
+									} else if InputMode = "HTML" && HasProp(value, "html") {
 										GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
 									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-										GetUnicodeSymbol := value.LaTeX
+										GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 									} else {
-										GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+										GetUnicodeSymbol := GetUniChar(value)
 									}
 									IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
 									Found := True
 									break 3
 								}
 							}
-						} else if (!IsSingleCase && Input == Recipe) ||
-						(IsSingleCase && Input = Recipe) {
-							if InputMode = "HTML" && HasProp(value, "html") {
+						} else if (!IsSingleCase && Input == Recipe) || (IsSingleCase && Input = Recipe) {
+							if ModifiersEnabled && HasProp(value, "modifierForm") {
+								GetUnicodeSymbol := InputMode = "HTML" ? value.modifierHTML : PasteUnicode(value.modifierForm)
+							} else if InputMode = "HTML" && HasProp(value, "html") {
 								GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
 							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-								GetUnicodeSymbol := value.LaTeX
+								GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 							} else {
-								GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+								GetUnicodeSymbol := GetUniChar(value)
 							}
 							IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
 							Found := True
@@ -11357,24 +11441,29 @@ Ligaturise(SmeltingMode := "InputBox") {
 			if IsObject(Recipe) {
 				for _, recipe in Recipe {
 					if (recipe == PromptValue) {
-						if InputMode = "HTML" && HasProp(value, "html") {
+						if ModifiersEnabled && HasProp(value, "modifierForm") {
+							InputMode = "HTML" ? SendText(value.modifierHTML) : Send(value.modifierForm)
+						} else if InputMode = "HTML" && HasProp(value, "html") {
 							value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-							SendText(value.LaTeX)
+							SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
 						} else {
-							Send(value.unicode)
+							SendText(GetUniChar(value))
 						}
 						IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
 						Found := True
 					}
 				}
 			} else if (Recipe == PromptValue) {
-				if InputMode = "HTML" && HasProp(value, "html") {
+				if ModifiersEnabled && HasProp(value, "modifierForm") {
+					InputMode = "HTML" ? SendText(value.modifierHTML) : Send(value.modifierForm)
+				} else if InputMode = "HTML" && HasProp(value, "html") {
 					value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-					SendText(value.LaTeX)
+					SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
+
 				} else {
-					Send(value.unicode)
+					SendText(GetUniChar(value))
 				}
 				IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
 				Found := True
@@ -12779,17 +12868,12 @@ LV_OpenUnicodeWebsite(LV, RowNumber) {
 			if (InputMode = "HTML" || InputMode = "LaTeX") {
 				for characterEntry, value in Characters {
 					if (SelectedRow = UniTrim(value.unicode)) {
-						if InputMode = "HTML" && HasProp(value, "html") {
+						if ModifiersEnabled && HasProp(value, "modifierForm") {
+							A_Clipboard := value.modifierForm
+						} else if InputMode = "HTML" && HasProp(value, "html") {
 							A_Clipboard := HasProp(value, "entity") ? value.entity : value.html
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-							if IsObject(value.LaTeX) {
-								if LaTeXMode = "common"
-									A_Clipboard := value.LaTeX[1]
-								else if LaTeXMode = "math"
-									A_Clipboard := value.LaTeX[2]
-							} else {
-								A_Clipboard := value.LaTeX
-							}
+							A_Clipboard := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 						}
 					}
 				}
@@ -13008,19 +13092,24 @@ GetCharacterSequence(CharacterName) {
 			characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "html")) ? value.html : ""
 			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
-			if InputMode = "HTML" && HasProp(value, "html") {
+			if ModifiersEnabled && HasProp(value, "modifierForm") {
+				Output := InputMode = "HTML" ? value.modifierHTML : PasteUnicode(value.modifierForm)
+			} else if InputMode = "HTML" && HasProp(value, "html") {
 				Output .= CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-				if IsObject(characterLaTeX) {
-					if LaTeXMode = "common"
-						Output .= characterLaTeX[1]
-					else if LaTeXMode = "math"
-						Output .= characterLaTeX[2]
-				} else {
-					Output .= characterLaTeX
-				}
+				Output .= IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			} else {
-				if CombiningEnabled && HasProp(value, "combiningForm") {
+				if ModifiersEnabled && HasProp(value, "modifierForm") {
+					if IsObject(value.modifierForm) {
+						TempValue := ""
+						for modifier in value.modifierForm {
+							TempValue .= PasteUnicode(modifier)
+						}
+						SendText(TempValue)
+					} else {
+						Send(value.modifierForm)
+					}
+				} else if CombiningEnabled && HasProp(value, "combiningForm") {
 					if IsObject(value.combiningForm) {
 						TempValue := ""
 						for combining in value.combiningForm {
@@ -14369,6 +14458,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			;
 			"RAlt", (*) => ProceedCompose(),
 			"RCtrl", (*) => ProceedCombining(),
+			"RShift", (*) => ProceedModifiers(),
 			;
 			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
 			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
@@ -14397,7 +14487,6 @@ EmptyFunc() {
 TimedKeyCombinationsIH(StartKey, SecondKeys, Callbacks, DefaultCallback := False, TimerLimit := -25) {
 
 }
-
 
 TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False, TimerLimit := -25) {
 	global IsCombinationPressed
@@ -14512,6 +14601,42 @@ ProceedCombining() {
 }
 
 RCtrlEndingTimer() {
+	global RCtrlTimer
+	if (RCtrlTimer != "") {
+		SetTimer(RAltsSetStats, 0)
+		RCtrlTimer := ""
+	}
+
+	return SetTimer(RAltsSetStats, -300)
+}
+
+RShiftCount := 0
+RShiftTimerEnds := False
+RShiftTimer := ""
+
+ProceedModifiers() {
+	global RShiftTimerEnds, RShiftCount, ModifiersEnabled
+
+	if (RShiftTimerEnds) {
+		return
+	}
+
+	if RShiftCount = 1 {
+		RShiftCount := 0
+		ModifiersEnabled := !ModifiersEnabled ? True : False
+		if ModifiersEnabled {
+			ShowInfoMessage("message_modifier", , , SkipGroupMessage, True)
+		} else {
+			ShowInfoMessage("message_modifier_disabled", , , SkipGroupMessage, True)
+		}
+		return
+	} else {
+		RShiftCount++
+		RShiftEndingTimer()
+	}
+}
+
+RShiftEndingTimer() {
 	global RCtrlTimer
 	if (RCtrlTimer != "") {
 		SetTimer(RAltsSetStats, 0)
