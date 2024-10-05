@@ -9714,7 +9714,21 @@ MapInsert(Characters,
 		group: ["IPA"],
 		alt_layout: "<+ [a-z]",
 		symbolAlt: "a-z",
-	}
+	},
+	"ipa_a-z_cap", {
+		unicode: "{U+0041}", html: "N/A",
+		uniSequence: ["{U+0041}", "{U+0042}", "{U+0043}", "{U+0044}", "{U+0045}", "{U+0046}", "{U+0047}", "{U+0048}", "{U+0049}", "{U+004A}", "{U+004B}", "{U+004C}", "{U+004D}", "{U+004E}", "{U+004F}", "{U+0050}", "{U+0051}", "{U+0052}", "{U+0053}", "{U+0054}", "{U+0055}", "{U+0056}", "{U+0057}", "{U+0058}", "{U+0059}", "{U+005A}"],
+		group: ["IPA"],
+		alt_layout: "c*<+ [a-z]",
+		symbolAlt: "A-Z",
+	},
+	"ipa_modifiers_mode", {
+		unicode: "{U+0041}", html: "N/A",
+		uniSequence: ["{U+02B0}", "{U+02B1}", "{U+02B2}", "{U+02B3}", "{U+02B7}", "{U+02B8}"],
+		group: ["IPA"],
+		alt_layout: "RShift×2",
+		symbolAlt: Chr(0x02B0) "-" Chr(0x02B8),
+	},
 )
 
 ReplaceModifierKeys(Input) {
@@ -10235,10 +10249,9 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 			if IsObject(characterKeys) {
 				for _, key in characterKeys {
 					if (keyPressed == key) {
-						if ModifiersEnabled && HasProp(value, "modifierForm") {
-							InputMode = "HTML" ? SendText(value.modifierHTML) : Send(value.modifierForm)
-						} else if InputMode = "HTML" && HasProp(value, "html") {
-							SendText(characterEntity)
+						if InputMode = "HTML" && HasProp(value, "html") {
+							(ModifiersEnabled && HasProp(value, "modifierForm")) ? SendText(value.modifierHTML) :
+								(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							SendText(IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX)
 						}
@@ -10279,10 +10292,9 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 				}
 			} else {
 				if (keyPressed == characterKeys) {
-					if ModifiersEnabled && HasProp(value, "modifierForm") {
-						InputMode = "HTML" ? SendText(value.modifierHTML) : Send(value.modifierForm)
-					} else if InputMode = "HTML" && HasProp(value, "html") {
-						SendText(characterEntity)
+					if InputMode = "HTML" && HasProp(value, "html") {
+						(ModifiersEnabled && HasProp(value, "modifierForm")) ? SendText(value.modifierHTML) :
+							(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
 					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 						if IsObject(characterLaTeX) {
 							if LaTeXMode = "common"
@@ -10401,10 +10413,10 @@ SearchKey(CycleSend := "") {
 	SymbolSearching(SearchingPrompt) {
 		ProceedSearch(value, characterEntity, characterLaTeX) {
 			OutputValue := ""
-			if ModifiersEnabled && HasProp(value, "modifierForm") {
-				OutputValue := InputMode = "HTML" ? value.modifierHTML : PasteUnicode(value.modifierForm)
-			} else if InputMode = "HTML" && HasProp(value, "html") {
-				SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
+			if InputMode = "HTML" && HasProp(value, "html") {
+				SendValue :=
+					(ModifiersEnabled && HasProp(value, "modifierForm")) ? value.modifierHTML :
+						(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
 				OutputValue := SendValue
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				OutputValue := IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
@@ -11376,10 +11388,10 @@ Ligaturise(SmeltingMode := "InputBox") {
 							for _, recipeEntry in Recipe {
 								if (!IsSingleCase && Input == recipeEntry) ||
 								(IsSingleCase && Input = recipeEntry) {
-									if ModifiersEnabled && HasProp(value, "modifierForm") {
-										GetUnicodeSymbol := InputMode = "HTML" ? value.modifierHTML : PasteUnicode(value.modifierForm)
-									} else if InputMode = "HTML" && HasProp(value, "html") {
-										GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
+									if InputMode = "HTML" && HasProp(value, "html") {
+										GetUnicodeSymbol := (ModifiersEnabled && HasProp(value, "modifierForm")) ? value.modifierHTML :
+											(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
+												(value.HasProp("entity") ? value.entity : value.html)
 									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 										GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 									} else {
@@ -11391,10 +11403,10 @@ Ligaturise(SmeltingMode := "InputBox") {
 								}
 							}
 						} else if (!IsSingleCase && Input == Recipe) || (IsSingleCase && Input = Recipe) {
-							if ModifiersEnabled && HasProp(value, "modifierForm") {
-								GetUnicodeSymbol := InputMode = "HTML" ? value.modifierHTML : PasteUnicode(value.modifierForm)
-							} else if InputMode = "HTML" && HasProp(value, "html") {
-								GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
+							if InputMode = "HTML" && HasProp(value, "html") {
+								GetUnicodeSymbol := (ModifiersEnabled && HasProp(value, "modifierForm")) ? value.modifierHTML :
+									(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
+										(value.HasProp("entity") ? value.entity : value.html)
 							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 								GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 							} else {
@@ -11441,10 +11453,11 @@ Ligaturise(SmeltingMode := "InputBox") {
 			if IsObject(Recipe) {
 				for _, recipe in Recipe {
 					if (recipe == PromptValue) {
-						if ModifiersEnabled && HasProp(value, "modifierForm") {
-							InputMode = "HTML" ? SendText(value.modifierHTML) : Send(value.modifierForm)
-						} else if InputMode = "HTML" && HasProp(value, "html") {
-							value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+						if InputMode = "HTML" && HasProp(value, "html") {
+							(ModifiersEnabled && HasProp(value, "modifierForm")) ? SendText(value.modifierHTML) :
+								(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
+									value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
 						} else {
@@ -11455,10 +11468,10 @@ Ligaturise(SmeltingMode := "InputBox") {
 					}
 				}
 			} else if (Recipe == PromptValue) {
-				if ModifiersEnabled && HasProp(value, "modifierForm") {
-					InputMode = "HTML" ? SendText(value.modifierHTML) : Send(value.modifierForm)
-				} else if InputMode = "HTML" && HasProp(value, "html") {
-					value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+				if InputMode = "HTML" && HasProp(value, "html") {
+					(ModifiersEnabled && HasProp(value, "modifierForm")) ? SendText(value.modifierHTML) :
+						(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
+							value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 					SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
 
@@ -13092,10 +13105,10 @@ GetCharacterSequence(CharacterName) {
 			characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "html")) ? value.html : ""
 			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
-			if ModifiersEnabled && HasProp(value, "modifierForm") {
-				Output := InputMode = "HTML" ? value.modifierHTML : PasteUnicode(value.modifierForm)
-			} else if InputMode = "HTML" && HasProp(value, "html") {
-				Output .= CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
+			if InputMode = "HTML" && HasProp(value, "html") {
+				Output .=
+					(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+						(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				Output .= IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			} else {
@@ -14341,7 +14354,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			LayoutArray.Push(CreateFastKeyHandler(Letter))
 		}
 		CreateFastKeyHandler(Letter) {
-			return (K) => HandleFastKey(K, "lat_s_let_" StrLower(Letter))
+			return (K) => CapsSeparatedKey(K, "lat_c_let_" StrLower(Letter), "lat_s_let_" StrLower(Letter))
 		}
 	} else if Combinations = "Maths" {
 		SlotMapping := Map()
