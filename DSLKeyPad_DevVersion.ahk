@@ -51,14 +51,14 @@ DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
 DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
 
-GetUtilityFiles(ForceDownload := False) {
+GetUtilityFiles() {
 	ErrMessages := Map(
 		"ru", "Произошла ошибка при получении файла перевода.`nСервер недоступен или ошибка соединения с интернетом.",
 		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
 	)
 
 	for fileEntry, value in InternalFiles {
-		if !FileExist(value.File) || ForceDownload {
+		if !FileExist(value.File) {
 			try {
 				Download(value.Repo, value.File)
 			} catch {
@@ -69,7 +69,6 @@ GetUtilityFiles(ForceDownload := False) {
 	return
 }
 
-GetUtilityFiles()
 
 TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 
@@ -508,18 +507,14 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		CurrentFilePath := A_ScriptFullPath
 		CurrentFileName := StrSplit(CurrentFilePath, "\").Pop()
 		UpdateFilePath := A_ScriptDir "\DSLKeyPad.ahk-GettingUpdate"
-		BackupsDir := A_ScriptDir "\Backups"
-		if !DirExist(BackupsDir) {
-			DirCreate(BackupsDir)
-		}
 
 		Download(RawSource, UpdateFilePath)
 
-		FileMove(CurrentFilePath, BackupsDir "\" CurrentFileName "-Backup-" GetTimeString())
+		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup-" GetTimeString())
 
 		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
 
-		GetUtilityFiles(True)
+		GetUtilityFiles()
 
 		if RepairMode == True {
 			MsgBox(ReadLocale("update_repair_success"), DSLPadTitle)
@@ -6366,14 +6361,16 @@ MapInsert(Characters,
 	"cyr_c_let_ksi", {
 		unicode: "{U+046E}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: ["Cyrillic Letters", "К"],
+		show_on_fast_keys: True,
 		tags: ["прописная буква Кси", "cyrillic capital letter Ksi"],
 		recipe: "КС",
 	},
 	"cyr_s_let_ksi", {
 		unicode: "{U+046F}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: ["Cyrillic Letters", "к"],
+		show_on_fast_keys: True,
 		tags: ["строчная буква кси", "cyrillic small letter ksi"],
 		recipe: "кс",
 	},
@@ -6394,14 +6391,16 @@ MapInsert(Characters,
 	"cyr_c_let_psi", {
 		unicode: "{U+0470}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: ["Cyrillic Letters", "П"],
+		show_on_fast_keys: True,
 		tags: ["прописная буква Пси", "cyrillic capital letter Psi"],
 		recipe: "ПС",
 	},
 	"cyr_s_let_psi", {
 		unicode: "{U+0471}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: ["Cyrillic Letters", "п"],
+		show_on_fast_keys: True,
 		tags: ["строчная буква пси", "cyrillic small letter psi"],
 		recipe: "пс",
 	},
@@ -13537,10 +13536,12 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["B"]),
 			["cyr_c_let_yeru_back_yer", "cyr_s_let_yeru_back_yer"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["S"]),
 			["cyr_c_let_yus_big", "cyr_s_let_yus_big"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["E"]),
+			["cyr_c_let_psi", "cyr_s_let_psi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["G"]),
 			["cyr_c_let_omega", "cyr_s_let_omega"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["J"]),
 			["cyr_c_let_yat", "cyr_s_let_yat"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["T"]),
 			["cyr_c_let_yi", "cyr_s_let_yi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Q"]),
 			["cyr_c_let_j", "cyr_s_let_j"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["Q"]),
+			["cyr_c_let_ksi", "cyr_s_let_ksi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["R"]),
 			["cyr_c_let_yus_little", "cyr_s_let_yus_little"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Z"]),
 			["cyr_c_let_a_iotified", "cyr_s_let_a_iotified"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["Z"]),
 			["cyr_c_let_dzhe", "cyr_s_let_dzhe"], MapMerge(GetModifiers("<^>!"), KeySeqSlot[";"]),
