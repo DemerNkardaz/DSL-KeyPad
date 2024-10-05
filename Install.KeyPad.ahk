@@ -53,7 +53,7 @@ Download(HTMLEntitiesListRaw, HTMLEntitiesListFile)
 Download(AltCodesListRaw, AltCodesListFile)
 Download(AppIcoRaw, AppIcoFile)
 Download(AppIcosDLLRaw, AppIcosDLLFile)
-Download(RepoSource, ExecutableFile)
+Download(ExecutableRaw, ExecutableFile)
 Download(RawSource, AppDestination)
 Run(ExecutableFile)
 
