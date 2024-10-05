@@ -37,6 +37,7 @@ AppIcoRaw := RawRepoFiles "DSLKeyPad.app.ico"
 AppIcosDLLRaw := RawRepoFiles "DSLKeyPad_App_Icons.dll"
 HTMLEntitiesListRaw := RawRepoFiles "entities_list.txt"
 AltCodesListRaw := RawRepoFiles "alt_codes_list.txt"
+ExecutableRaw := RawRepoFiles "DSLKeyPad.exe"
 
 WorkingDir := A_ScriptDir
 
@@ -46,6 +47,7 @@ AppIcoFile := WorkingDir "\UtilityFiles\DSLKeyPad.app.ico"
 HTMLEntitiesListFile := WorkingDir "\UtilityFiles\entities_list.txt"
 AltCodesListFile := WorkingDir "\UtilityFiles\alt_codes_list.txt"
 AppIcosDLLFile := WorkingDir "\UtilityFiles\DSLKeyPad_App_Icons.dll"
+ExecutableFile := WorkingDir "\DSLKeyPad.exe"
 
 DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
@@ -157,6 +159,10 @@ GetAppIco() {
 
 	Download(AppIcosDLLRaw, AppIcosDLLFile)
 	Download(AppIcoRaw, AppIcoFile)
+}
+
+if !FileExist(ExecutableFile) {
+	Download(ExecutableRaw, ExecutableFile)
 }
 
 if !FileExist(AppIcoFile) || !FileExist(AppIcosDLLFile) {
@@ -12865,7 +12871,7 @@ AddScriptToAutoload(*) {
 	Labels["en"] := {}
 	Labels["ru"].Success := "Ярлык для автозагрузки создан или обновлен."
 	Labels["en"].Success := "Shortcut for autoloading created or updated."
-	CurrentScriptPath := A_ScriptFullPath
+	CurrentScriptPath := A_ScriptDir "\DSLKeyPad.exe"
 	AutoloadFolder := A_StartMenu "\Programs\Startup"
 	ShortcutPath := AutoloadFolder "\DSLKeyPad.lnk"
 
