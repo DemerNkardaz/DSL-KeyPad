@@ -6318,6 +6318,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_dzhe", {
 		unicode: "{U+045F}",
+		subscriptForm: "{U+1E06A}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "ж"],
 		tags: ["строчная буква дже", "cyrillic small letter dzhe"],
@@ -6333,7 +6334,9 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_i", {
 		unicode: "{U+0456}",
+		combiningForm: "{U+1E08F}",
 		modifierForm: "{U+1E04C}",
+		subscriptForm: "{U+1E068}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "и"],
 		show_on_fast_keys: True,
@@ -9574,63 +9577,63 @@ MapInsert(Characters,
 	"lat_s_let_z", { calcOff: "", unicode: "{U+007A}", combiningForm: "{U+1DE6}", modifierForm: "{U+02E3}" },
 	;
 	"cyr_c_let_a", { calcOff: "", unicode: "{U+0410}" }, ; А
-	"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}", combiningForm: "{U+2DF6}", modifierForm: "{U+1E030}" }, ; а
+	"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}", combiningForm: "{U+2DF6}", modifierForm: "{U+1E030}", subscriptForm: "{U+1E051}" }, ; а
 	"cyr_c_let_b", { calcOff: "", unicode: "{U+0411}" }, ; Б
-	"cyr_s_let_b", { calcOff: "", unicode: "{U+0431}", combiningForm: "{U+2DE0}", modifierForm: "{U+1E031}" }, ; б
+	"cyr_s_let_b", { calcOff: "", unicode: "{U+0431}", combiningForm: "{U+2DE0}", modifierForm: "{U+1E031}", subscriptForm: "{U+1E052}" }, ; б
 	"cyr_c_let_v", { calcOff: "", unicode: "{U+0412}" }, ; В
-	"cyr_s_let_v", { calcOff: "", unicode: "{U+0432}", combiningForm: "{U+2DE1}", modifierForm: "{U+1E032}" }, ; в
+	"cyr_s_let_v", { calcOff: "", unicode: "{U+0432}", combiningForm: "{U+2DE1}", modifierForm: "{U+1E032}", subscriptForm: "{U+1E053}" }, ; в
 	"cyr_c_let_g", { calcOff: "", unicode: "{U+0413}" }, ; Г
-	"cyr_s_let_g", { calcOff: "", unicode: "{U+0433}", combiningForm: "{U+2DE2}", modifierForm: "{U+1E033}" }, ; г
+	"cyr_s_let_g", { calcOff: "", unicode: "{U+0433}", combiningForm: "{U+2DE2}", modifierForm: "{U+1E033}", subscriptForm: "{U+1E054}" }, ; г
 	"cyr_c_let_d", { calcOff: "", unicode: "{U+0414}" }, ; Д
-	"cyr_s_let_d", { calcOff: "", unicode: "{U+0434}", combiningForm: "{U+2DE3}", modifierForm: "{U+1E034}" }, ; д
+	"cyr_s_let_d", { calcOff: "", unicode: "{U+0434}", combiningForm: "{U+2DE3}", modifierForm: "{U+1E034}", subscriptForm: "{U+1E055}" }, ; д
 	"cyr_c_let_e", { calcOff: "", unicode: "{U+0415}" }, ; Е
-	"cyr_s_let_e", { calcOff: "", unicode: "{U+0435}", combiningForm: "{U+2DF7}", modifierForm: "{U+1E035}" }, ; е
+	"cyr_s_let_e", { calcOff: "", unicode: "{U+0435}", combiningForm: "{U+2DF7}", modifierForm: "{U+1E035}", subscriptForm: "{U+1E056}" }, ; е
 	"cyr_c_let_yo", { calcOff: "", unicode: "{U+0401}" }, ; Ё
 	"cyr_s_let_yo", { calcOff: "", unicode: "{U+0451}" }, ; ё
 	"cyr_c_let_zh", { calcOff: "", unicode: "{U+0416}" }, ; Ж
-	"cyr_s_let_zh", { calcOff: "", unicode: "{U+0436}", combiningForm: "{U+2DE4}", modifierForm: "{U+1E036}" }, ; ж
+	"cyr_s_let_zh", { calcOff: "", unicode: "{U+0436}", combiningForm: "{U+2DE4}", modifierForm: "{U+1E036}", subscriptForm: "{U+1E057}" }, ; ж
 	"cyr_c_let_z", { calcOff: "", unicode: "{U+0417}" }, ; З
-	"cyr_s_let_z", { calcOff: "", unicode: "{U+0437}", combiningForm: "{U+2DE5}", modifierForm: "{U+1E037}" }, ; з
+	"cyr_s_let_z", { calcOff: "", unicode: "{U+0437}", combiningForm: "{U+2DE5}", modifierForm: "{U+1E037}", subscriptForm: "{U+1E058}" }, ; з
 	"cyr_c_let_и", { calcOff: "", unicode: "{U+0418}" }, ; И
-	"cyr_s_let_и", { calcOff: "", unicode: "{U+0438}", combiningForm: "{U+A675}", modifierForm: "{U+1E038}" }, ; и
+	"cyr_s_let_и", { calcOff: "", unicode: "{U+0438}", combiningForm: "{U+A675}", modifierForm: "{U+1E038}", subscriptForm: "{U+1E059}" }, ; и
 	"cyr_c_let_iy", { calcOff: "", unicode: "{U+0419}" }, ; Й
 	"cyr_s_let_iy", { calcOff: "", unicode: "{U+0439}" }, ; й
 	"cyr_c_let_k", { calcOff: "", unicode: "{U+041A}" }, ; К
-	"cyr_s_let_k", { calcOff: "", unicode: "{U+043A}", combiningForm: "{U+2DE6}", modifierForm: "{U+1E039}" }, ; к
+	"cyr_s_let_k", { calcOff: "", unicode: "{U+043A}", combiningForm: "{U+2DE6}", modifierForm: "{U+1E039}", subscriptForm: "{U+1E05A}" }, ; к
 	"cyr_c_let_l", { calcOff: "", unicode: "{U+041B}" }, ; Л
-	"cyr_s_let_l", { calcOff: "", unicode: "{U+043B}", combiningForm: "{U+2DE7}", modifierForm: "{U+1E03A}" }, ; л
+	"cyr_s_let_l", { calcOff: "", unicode: "{U+043B}", combiningForm: "{U+2DE7}", modifierForm: "{U+1E03A}", subscriptForm: "{U+1E05B}" }, ; л
 	"cyr_c_let_m", { calcOff: "", unicode: "{U+041C}" }, ; М
 	"cyr_s_let_m", { calcOff: "", unicode: "{U+043C}", combiningForm: "{U+2DE8}", modifierForm: "{U+1E03B}" }, ; м
 	"cyr_c_let_n", { calcOff: "", unicode: "{U+041D}" }, ; Н
 	"cyr_s_let_n", { calcOff: "", unicode: "{U+043D}", combiningForm: "{U+2DE9}", modifierForm: "{U+1D78}" }, ; н
 	"cyr_c_let_o", { calcOff: "", unicode: "{U+041E}" }, ; О
-	"cyr_s_let_o", { calcOff: "", unicode: "{U+043E}", combiningForm: "{U+2DEA}", modifierForm: "{U+1E03C}" }, ; о
+	"cyr_s_let_o", { calcOff: "", unicode: "{U+043E}", combiningForm: "{U+2DEA}", modifierForm: "{U+1E03C}", subscriptForm: "{U+1E05C}" }, ; о
 	"cyr_c_let_p", { calcOff: "", unicode: "{U+041F}" }, ; П
-	"cyr_s_let_p", { calcOff: "", unicode: "{U+043F}", combiningForm: "{U+2DEB}", modifierForm: "{U+1E03D}" }, ; п
+	"cyr_s_let_p", { calcOff: "", unicode: "{U+043F}", combiningForm: "{U+2DEB}", modifierForm: "{U+1E03D}", subscriptForm: "{U+1E05D}" }, ; п
 	"cyr_c_let_r", { calcOff: "", unicode: "{U+0420}" }, ; Р
 	"cyr_s_let_r", { calcOff: "", unicode: "{U+0440}", combiningForm: "{U+2DEC}", modifierForm: "{U+1E03E}" }, ; р
 	"cyr_c_let_s", { calcOff: "", unicode: "{U+0421}" }, ; С
-	"cyr_s_let_s", { calcOff: "", unicode: "{U+0441}", combiningForm: "{U+2DED}", modifierForm: "{U+1E03F}" }, ; с
+	"cyr_s_let_s", { calcOff: "", unicode: "{U+0441}", combiningForm: "{U+2DED}", modifierForm: "{U+1E03F}", subscriptForm: "{U+1E05E}" }, ; с
 	"cyr_c_let_t", { calcOff: "", unicode: "{U+0422}" }, ; Т
 	"cyr_s_let_t", { calcOff: "", unicode: "{U+0442}", combiningForm: "{U+2DEE}", modifierForm: "{U+1E040}" }, ; т
 	"cyr_c_let_u", { calcOff: "", unicode: "{U+0423}" }, ; У
-	"cyr_s_let_u", { calcOff: "", unicode: "{U+0443}", combiningForm: "{U+A677}", modifierForm: "{U+1E041}" }, ; у
+	"cyr_s_let_u", { calcOff: "", unicode: "{U+0443}", combiningForm: "{U+A677}", modifierForm: "{U+1E041}", subscriptForm: "{U+1E05F}" }, ; у
 	"cyr_c_let_f", { calcOff: "", unicode: "{U+0424}" }, ; Ф
-	"cyr_s_let_f", { calcOff: "", unicode: "{U+0444}", combiningForm: "{U+A69E}", modifierForm: "{U+1E042}" }, ; ф
+	"cyr_s_let_f", { calcOff: "", unicode: "{U+0444}", combiningForm: "{U+A69E}", modifierForm: "{U+1E042}", subscriptForm: "{U+1E060}" }, ; ф
 	"cyr_c_let_h", { calcOff: "", unicode: "{U+0425}" }, ; Х
-	"cyr_s_let_h", { calcOff: "", unicode: "{U+0445}", combiningForm: "{U+2DEF}", modifierForm: "{U+1E043}" }, ; х
+	"cyr_s_let_h", { calcOff: "", unicode: "{U+0445}", combiningForm: "{U+2DEF}", modifierForm: "{U+1E043}", subscriptForm: "{U+1E061}" }, ; х
 	"cyr_c_let_ts", { calcOff: "", unicode: "{U+0426}" }, ; Ц
-	"cyr_s_let_ts", { calcOff: "", unicode: "{U+0446}", combiningForm: "{U+2DF0}", modifierForm: "{U+1E044}" }, ; ц
+	"cyr_s_let_ts", { calcOff: "", unicode: "{U+0446}", combiningForm: "{U+2DF0}", modifierForm: "{U+1E044}", subscriptForm: "{U+1E062}" }, ; ц
 	"cyr_c_let_ch", { calcOff: "", unicode: "{U+0427}" }, ; Ч
-	"cyr_s_let_ch", { calcOff: "", unicode: "{U+0447}", combiningForm: "{U+2DF1}", modifierForm: "{U+1E045}" }, ; ч
+	"cyr_s_let_ch", { calcOff: "", unicode: "{U+0447}", combiningForm: "{U+2DF1}", modifierForm: "{U+1E045}", subscriptForm: "{U+1E063}" }, ; ч
 	"cyr_c_let_sh", { calcOff: "", unicode: "{U+0428}" }, ; Ш
-	"cyr_s_let_sh", { calcOff: "", unicode: "{U+0448}", combiningForm: "{U+2DF2}", modifierForm: "{U+1E046}" }, ; ш
+	"cyr_s_let_sh", { calcOff: "", unicode: "{U+0448}", combiningForm: "{U+2DF2}", modifierForm: "{U+1E046}", subscriptForm: "{U+1E064}" }, ; ш
 	"cyr_c_let_shch", { calcOff: "", unicode: "{U+0429}" }, ; Щ
 	"cyr_s_let_shch", { calcOff: "", unicode: "{U+0449}", combiningForm: "{U+2DF3}" }, ; щ
 	"cyr_c_let_yeru", { calcOff: "", unicode: "{U+042A}" }, ; Ъ
-	"cyr_s_let_yeru", { calcOff: "", unicode: "{U+044A}", combiningForm: "{U+A678}", modifierForm: "{U+A69C}" }, ; ъ
+	"cyr_s_let_yeru", { calcOff: "", unicode: "{U+044A}", combiningForm: "{U+A678}", modifierForm: "{U+A69C}", subscriptForm: "{U+1E065}" }, ; ъ
 	"cyr_c_let_yery", { calcOff: "", unicode: "{U+042B}" }, ; Ы
-	"cyr_s_let_yery", { calcOff: "", unicode: "{U+044B}", combiningForm: "{U+A679}", modifierForm: "{U+1E047}" }, ; ы
+	"cyr_s_let_yery", { calcOff: "", unicode: "{U+044B}", combiningForm: "{U+A679}", modifierForm: "{U+1E047}", subscriptForm: "{U+1E066}" }, ; ы
 	"cyr_c_let_yeri", { calcOff: "", unicode: "{U+042C}" }, ; Ь
 	"cyr_s_let_yeri", { calcOff: "", unicode: "{U+044C}", combiningForm: "{U+A67A}", modifierForm: "{U+A69D}" }, ; ь
 	"cyr_c_let_э", { calcOff: "", unicode: "{U+042D}" }, ; Э
