@@ -57,10 +57,10 @@ GetUtilityFiles() {
 		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
 	)
 
-	for fileEntry in InternalFiles {
-		if !FileExist(fileEntry.File) {
+	for fileEntry, value in InternalFiles {
+		if !FileExist(value.File) {
 			try {
-				Download(fileEntry.Repo, fileEntry.File)
+				Download(value.Repo, value.File)
 			} catch {
 				Error(ErrMessages[GetLanguageCode()])
 			}
