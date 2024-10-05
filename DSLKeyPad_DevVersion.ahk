@@ -32,66 +32,54 @@ ChangeLogRaw := Map(
 	"en", RawRepoFiles "DSLKeyPad.Changelog.en.md"
 )
 
-LocalesRaw := RawRepoFiles "DSLKeyPad.locales.ini"
-AppIcoRaw := RawRepoFiles "DSLKeyPad.app.ico"
-AppIcosDLLRaw := RawRepoFiles "DSLKeyPad_App_Icons.dll"
-HTMLEntitiesListRaw := RawRepoFiles "entities_list.txt"
-AltCodesListRaw := RawRepoFiles "alt_codes_list.txt"
-ExecutableRaw := RawRepoFiles "DSLKeyPad.exe"
 
 WorkingDir := A_ScriptDir
 
 ConfigFile := WorkingDir "\DSLKeyPad.config.ini"
-LocalesFile := WorkingDir "\UtilityFiles\DSLKeyPad.locales.ini"
-AppIcoFile := WorkingDir "\UtilityFiles\DSLKeyPad.app.ico"
-HTMLEntitiesListFile := WorkingDir "\UtilityFiles\entities_list.txt"
-AltCodesListFile := WorkingDir "\UtilityFiles\alt_codes_list.txt"
-AppIcosDLLFile := WorkingDir "\UtilityFiles\DSLKeyPad_App_Icons.dll"
 ExecutableFile := WorkingDir "\DSLKeyPad.exe"
+
+InternalFiles := Map(
+	"Locales", { Repo: RawRepoFiles "DSLKeyPad.locales.ini", File: WorkingDir "\UtilityFiles\DSLKeyPad.locales.ini" },
+	"AppIco", { Repo: RawRepoFiles "DSLKeyPad.app.ico", File: WorkingDir "\UtilityFiles\DSLKeyPad.app.ico" },
+	"AppIcoDLL", { Repo: RawRepoFiles "DSLKeyPad_App_Icons.dll", File: WorkingDir "\UtilityFiles\DSLKeyPad_App_Icons.dll" },
+	"HTMLEntities", { Repo: RawRepoFiles "entities_list.txt", File: WorkingDir "\UtilityFiles\entities_list.txt" },
+	"AltCodes", { Repo: RawRepoFiles "alt_codes_list.txt", File: WorkingDir "\UtilityFiles\alt_codes_list.txt" },
+	"Exe", { Repo: RawRepoFiles "DSLKeyPad.exe", File: WorkingDir "\DSLKeyPad.exe" },
+)
 
 DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
 DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
 
-GetLocales() {
-	global LocalesRaw
+GetUtilityFiles() {
 	ErrMessages := Map(
 		"ru", "Произошла ошибка при получении файла перевода.`nСервер недоступен или ошибка соединения с интернетом.",
 		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
 	)
-	http := ComObject("WinHttp.WinHttpRequest.5.1")
-	http.Open("GET", LocalesRaw, true)
-	try {
-		http.Send()
-		http.WaitForResponse()
-	} catch {
-		MsgBox(ErrMessages[GetLanguageCode()], DSLPadTitle)
-		return
-	}
 
-	if http.Status != 200 {
-		MsgBox(ErrMessages[GetLanguageCode()], DSLPadTitle)
-		return
+	for fileEntry in InternalFiles {
+		if !FileExist(fileEntry.File) {
+			try {
+				Download(fileEntry.Repo, fileEntry.File)
+			} catch {
+				Error(ErrMessages[GetLanguageCode()])
+			}
+		}
 	}
-
-	Download(LocalesRaw, LocalesFile)
+	return
 }
 
-if !FileExist(LocalesFile) {
-	GetLocales()
-}
 
-TraySetIcon(AppIcosDLLFile, 1)
+TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 
 ReadLocale(EntryName, Prefix := "") {
-	global LocalesFile
 	Section := Prefix != "" ? Prefix . "_" . GetLanguageCode() : GetLanguageCode()
-	Intermediate := IniRead(LocalesFile, Section, EntryName, "")
+	Intermediate := IniRead(InternalFiles["Locales"].File, Section, EntryName, "")
 
 	while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
 		LangCode := match[1]
 		SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
-		Replacement := IniRead(LocalesFile, SectionOverride, EntryName, "")
+		Replacement := IniRead(InternalFiles["Locales"].File, SectionOverride, EntryName, "")
 		Intermediate := StrReplace(Intermediate, match[0], Replacement)
 	}
 
@@ -100,7 +88,7 @@ ReadLocale(EntryName, Prefix := "") {
 		LangCode := match[2]
 		CustomEntry := match[3]
 		SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
-		Replacement := IniRead(LocalesFile, SectionOverride, CustomEntry, "")
+		Replacement := IniRead(InternalFiles["Locales"].File, SectionOverride, CustomEntry, "")
 		Intermediate := StrReplace(Intermediate, match[0], Replacement)
 	}
 
@@ -134,58 +122,13 @@ SetStringVars(StringVar, SetVars*) {
 	return Result
 }
 
-GetAppIco() {
-	global AppIcoRaw, AppIcoFile, AppIcosDLLRaw, AppIcosDLLFile
-	ErrMessages := Map(
-		"ru", "Произошла ошибка при получении иконки приложения.`nСервер недоступен или ошибка соединения с интернетом.",
-		"en", "An error occured during receiving app icon.`nServer unavailable or internet connection error."
-	)
-
-	http := ComObject("WinHttp.WinHttpRequest.5.1")
-	http.Open("GET", AppIcoRaw, true)
-	try {
-		http.Send()
-		http.WaitForResponse()
-	} catch {
-		MsgBox(ErrMessages[GetLanguageCode()], DSLPadTitle)
-		return
-	}
-
-	if http.Status != 200 {
-		MsgBox(ErrMessages[GetLanguageCode()], DSLPadTitle)
-		return
-	}
-
-
-	Download(AppIcosDLLRaw, AppIcosDLLFile)
-	Download(AppIcoRaw, AppIcoFile)
-}
-
-if !FileExist(ExecutableFile) {
-	Download(ExecutableRaw, ExecutableFile)
-}
-
-if !FileExist(AppIcoFile) || !FileExist(AppIcosDLLFile) {
-	GetAppIco()
-}
-
-if !FileExist(HTMLEntitiesListFile) {
-	Download(HTMLEntitiesListRaw, HTMLEntitiesListFile)
-}
-
-if !FileExist(AltCodesListFile) {
-	Download(AltCodesListRaw, AltCodesListFile)
-}
-
 
 OpenConfigFile(*) {
-	global ConfigFile
 	Run(ConfigFile)
 }
 
 OpenLocalesFile(*) {
-	global LocalesFile
-	Run(LocalesFile)
+	Run(InternalFiles["Locales"].File)
 }
 
 EscapePressed := False
@@ -509,8 +452,8 @@ InsertChangesList(TargetGUI) {
 	}
 
 	Labels := {
-		ver: IniRead(LocalesFile, LanguageCode, "version", ""),
-		date: IniRead(LocalesFile, LanguageCode, "date", ""),
+		ver: IniRead(InternalFiles["Locales"].File, LanguageCode, "version", ""),
+		date: IniRead(InternalFiles["Locales"].File, LanguageCode, "date", ""),
 	}
 
 
@@ -571,10 +514,7 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 
 		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
 
-		GetLocales()
-		GetAppIco()
-		Download(HTMLEntitiesListRaw, HTMLEntitiesListFile)
-		Download(AltCodesListRaw, AltCodesListFile)
+		GetUtilityFiles()
 
 		if RepairMode == True {
 			MsgBox(ReadLocale("update_repair_success"), DSLPadTitle)
@@ -1529,16 +1469,16 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 }
 
 LocalEntitiesLibrary := FillCodesFromFile()
-LocalAltCodesLibrary := FillCodesFromFile(AltCodesListFile)
+LocalAltCodesLibrary := FillCodesFromFile(InternalFiles["AltCodes"].File)
 
-FillCodesFromFile(FilePath := HTMLEntitiesListFile) {
+FillCodesFromFile(FilePath := InternalFiles["HTMLEntities"].File) {
 	TempArray := []
 	EntitiesList := FileRead(FilePath, "UTF-8")
 
 	for line in StrSplit(EntitiesList, "`n") {
 		RegExMatch(line, '^(.+)\t(.+)', &match)
 		EntityCode := Format("0x{1}", match[1])
-		EntityName := FilePath = AltCodesListFile ? match[2] : "&" match[2] ";"
+		EntityName := FilePath = InternalFiles["AltCodes"].File ? match[2] : "&" match[2] ";"
 		TempArray.Push(Chr(EntityCode), EntityName)
 
 	}
@@ -10691,7 +10631,7 @@ ChangeTrayIconOnLanguage() {
 	CurrentLayout := GetLayoutLocale()
 
 	if DisabledAllKeys {
-		TraySetIcon(AppIcosDLLFile, 9)
+		TraySetIcon(InternalFiles["AppIcoDLL"].File, 9)
 		A_IconTip := DSLPadTitle " (" ReadLocale("tray_tooltip_disabled") ")"
 		return
 	}
@@ -10745,7 +10685,7 @@ ChangeTrayIconOnLanguage() {
 		IconCode := 1
 	}
 
-	TraySetIcon(AppIcosDLLFile, IconCode)
+	TraySetIcon(InternalFiles["AppIcoDLL"].File, IconCode)
 	A_IconTip := TrayTitle
 }
 
@@ -10774,19 +10714,19 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 
 	if !CurrentActive {
 		if ScriptName = "Glagolitic Futhark" {
-			TraySetIcon(AppIcosDLLFile, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
 		} else if ScriptName = "Old Turkic Old Permic" {
-			TraySetIcon(AppIcosDLLFile, CurrentLayout = CodeEn ? 4 : CurrentLayout = CodeRu ? 5 : 1)
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, CurrentLayout = CodeEn ? 4 : CurrentLayout = CodeRu ? 5 : 1)
 		} else if ScriptName = "Old Hungarian" {
-			TraySetIcon(AppIcosDLLFile, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 6 : 1)
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 6 : 1)
 		} else if ScriptName = "Gothic" {
-			TraySetIcon(AppIcosDLLFile, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 7 : 1)
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 7 : 1)
 		} else if ScriptName = "IPA" {
-			TraySetIcon(AppIcosDLLFile, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 8 : 1)
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 8 : 1)
 		} else if ScriptName = "Maths" {
-			TraySetIcon(AppIcosDLLFile, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 10 : 1)
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 10 : 1)
 		} else {
-			TraySetIcon(AppIcosDLLFile, 1)
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 		}
 		if !DisabledAllKeys {
 			UnregisterKeysLayout()
@@ -10799,7 +10739,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		}
 		ActiveScriptName := ScriptName
 	} else {
-		TraySetIcon(AppIcosDLLFile, 1)
+		TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 		if !DisabledAllKeys {
 			UnregisterKeysLayout()
 		}
@@ -12337,7 +12277,7 @@ Constructor() {
 
 	AboutLeftBox := DSLPadGUI.Add("GroupBox", "x23 y34 w280 h520",)
 	DSLPadGUI.Add("GroupBox", "x75 y65 w170 h170")
-	DSLPadGUI.Add("Picture", "x98 y89 w128 h128", AppIcoFile)
+	DSLPadGUI.Add("Picture", "x98 y89 w128 h128", InternalFiles["AppIco"].File)
 
 	AboutTitle := DSLPadGUI.Add("Text", "x75 y245 w170 h32 Center BackgroundTrans", DSLPadTitleDefault)
 	AboutTitle.SetFont("s20 c333333", "Cambria")
@@ -12862,8 +12802,8 @@ LV_MouseMove(Control, x, y) {
 		Tooltip
 	}
 }
+
 AddScriptToAutoload(*) {
-	global DSLPadTitleDefault, AppIcoFile
 	LanguageCode := GetLanguageCode()
 	Labels := {}
 	Labels[] := Map()
@@ -12879,7 +12819,7 @@ AddScriptToAutoload(*) {
 		FileDelete(ShortcutPath)
 	}
 
-	Command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" ShortcutPath "'); $shortcut.TargetPath = '" CurrentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" AppIcoFile "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()" ""
+	Command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" ShortcutPath "'); $shortcut.TargetPath = '" CurrentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" InternalFiles["AppIco"].File "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()" ""
 	RunWait(Command, , "Hide")
 
 	MsgBox(Labels[LanguageCode].Success, DSLPadTitle, 0x40)
@@ -14637,12 +14577,12 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
 	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
-	ScriptsSubMenu.SetIcon(Labels["glagolitic"], AppIcosDLLFile, 2)
-	ScriptsSubMenu.SetIcon(Labels["turkic"], AppIcosDLLFile, 4)
-	ScriptsSubMenu.SetIcon(Labels["hungarian"], AppIcosDLLFile, 6)
-	ScriptsSubMenu.SetIcon(Labels["gothic"], AppIcosDLLFile, 7)
-	ScriptsSubMenu.SetIcon(Labels["ipa"], AppIcosDLLFile, 8)
-	ScriptsSubMenu.SetIcon(Labels["maths"], AppIcosDLLFile, 10)
+	ScriptsSubMenu.SetIcon(Labels["glagolitic"], InternalFiles["AppIcoDLL"].File, 2)
+	ScriptsSubMenu.SetIcon(Labels["turkic"], InternalFiles["AppIcoDLL"].File, 4)
+	ScriptsSubMenu.SetIcon(Labels["hungarian"], InternalFiles["AppIcoDLL"].File, 6)
+	ScriptsSubMenu.SetIcon(Labels["gothic"], InternalFiles["AppIcoDLL"].File, 7)
+	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
+	ScriptsSubMenu.SetIcon(Labels["maths"], InternalFiles["AppIcoDLL"].File, 10)
 
 	DSLTray.Add(Labels["script"], ScriptsSubMenu)
 
@@ -14672,17 +14612,17 @@ ManageTrayItems() {
 	DSLTray.Add()
 	if DisabledAllKeys {
 		DSLTray.Add(Labels["enable"], (*) => DisableAllKeys())
-		DSLTray.SetIcon(Labels["enable"], AppIcosDLLFile, 9)
+		DSLTray.SetIcon(Labels["enable"], InternalFiles["AppIcoDLL"].File, 9)
 	} else {
 
 		DSLTray.Add(Labels["disable"], (*) => DisableAllKeys())
-		DSLTray.SetIcon(Labels["disable"], AppIcosDLLFile, 9)
+		DSLTray.SetIcon(Labels["disable"], InternalFiles["AppIcoDLL"].File, 9)
 	}
 	DSLTray.Add()
 	DSLTray.Add(Labels["exit"], ExitApplication)
 	DSLTray.Add()
 
-	DSLTray.SetIcon(Labels["panel"], AppIcoFile)
+	DSLTray.SetIcon(Labels["panel"], InternalFiles["AppIco"].File)
 	DSLTray.SetIcon(Labels["search"], ImageRes, 169)
 	DSLTray.SetIcon(Labels["unicode"], Shell32, 225)
 	DSLTray.SetIcon(Labels["altcode"], Shell32, 313)
