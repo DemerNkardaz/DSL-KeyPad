@@ -207,7 +207,7 @@ PowerShell_UserSID() {
 
 	FileAppend(PShell, "DSL_temp-usrSID.ps1", "UTF-8")
 	Sleep 2
-	RunWait("powershell powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & `"" A_ScriptDir "\DSL_temp-usrSID.ps1`"", , "Hide")
+	RunWait("powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & `"" A_ScriptDir "\DSL_temp-usrSID.ps1`"", , "Hide")
 
 	Sleep 5
 
@@ -219,12 +219,12 @@ PowerShell_UserSID() {
 	return Result
 }
 
-IsFont(FontName) {
-	UserSID := PowerShell_UserSID()
-	UserSID := StrReplace(UserSID, " ")
-	UserSID := StrReplace(UserSID, "`n")
-	UserSID := StrReplace(UserSID, "`r")
+UserSID := PowerShell_UserSID()
+UserSID := StrReplace(UserSID, " ")
+UserSID := StrReplace(UserSID, "`n")
+UserSID := StrReplace(UserSID, "`r")
 
+IsFont(FontName) {
 	Suffixes := ["", " Regular", " Regular (TrueType)"]
 
 	for Suffix in Suffixes {
@@ -1197,14 +1197,13 @@ CallChar(CharacterName, GetValue) {
 	Result := ""
 	for characterEntry, value in Characters {
 		TrimValue := RegExReplace(characterEntry, "^\S+\s+")
-		if (TrimValue = CharacterName) {
+		if (TrimValue = CharacterName) && HasProp(value, GetValue) {
 			Result := value.%GetValue%
 			break
 		}
 	}
 	return Result
 }
-
 MapInsert(MapObj, Pairs*) {
 	keyCount := 0
 	for index in MapObj {
@@ -1506,8 +1505,7 @@ Characters := Map(
 	})
 MapInsert(Characters,
 	"acute", {
-		unicode: "{U+0301}",
-		LaTeX: ["\'", "\acute"],
+		unicode: "{U+0301}", LaTeX: ["\'", "\acute"],
 		tags: ["acute", "акут", "ударение"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["a", "ф"]],
 		show_on_fast_keys: True,
@@ -1516,7 +1514,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"acute_double", {
-		unicode: "{U+030B}",
+		unicode: "{U+030B}", LaTeX: "\H",
 		tags: ["double acute", "двойной акут", "двойное ударение"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["A", "Ф"]],
 		modifier: LeftShift,
@@ -1636,8 +1634,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"caron", {
-		unicode: "{U+030C}",
-		LaTeX: "\v",
+		unicode: "{U+030C}", LaTeX: ["\v", "\check"],
 		tags: ["caron", "hachek", "карон", "гачек"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["C", "С"]],
 		symbolClass: "Diacritic Mark",
@@ -1663,8 +1660,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"cedilla", {
-		unicode: "{U+0327}",
-		LaTeX: "\c",
+		unicode: "{U+0327}", LaTeX: "\c",
 		tags: ["cedilla", "седиль"],
 		group: [["Diacritics Tertiary", "Diacritics Fast Primary"], ["c", "с"]],
 		symbolClass: "Diacritic Mark",
@@ -1738,7 +1734,7 @@ MapInsert(Characters,
 	},
 	"diaeresis", {
 		unicode: "{U+0308}",
-		LaTeX: ["\" . QuotationDouble, "\ddot"],
+		LaTeX: ["\" QuotationDouble, "\ddot"],
 		tags: ["diaeresis", "диерезис"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["D", "В"]],
 		symbolClass: "Diacritic Mark",
@@ -1748,7 +1744,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"dot_below", {
-		unicode: "{U+0323}",
+		unicode: "{U+0323}", LaTeX: "\d",
 		tags: ["dot below", "точка снизу"],
 		group: ["Diacritics Secondary", ["d", "в"]],
 		symbolClass: "Diacritic Mark",
@@ -1852,7 +1848,7 @@ MapInsert(Characters,
 	;
 	;
 	"macron", {
-		unicode: "{U+0304}",
+		unicode: "{U+0304}", LaTeX: ["\=", "\bar"],
 		tags: ["macron", "макрон"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["m", "ь"]],
 		symbolClass: "Diacritic Mark",
@@ -1871,7 +1867,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"ogonek", {
-		unicode: "{U+0328}",
+		unicode: "{U+0328}", LaTeX: "\k",
 		tags: ["ogonek", "огонэк"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["o", "щ"]],
 		symbolClass: "Diacritic Mark",
@@ -2021,7 +2017,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"tilde", {
-		unicode: "{U+0303}", LaTeX: "\~",
+		unicode: "{U+0303}", LaTeX: ["\~", "\tilde"],
 		tags: ["tilde", "тильда"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["t", "е"]],
 		symbolClass: "Diacritic Mark",
@@ -9943,7 +9939,7 @@ ProcessMapAfter() {
 			}
 		}
 
-		if !HasProp(value, "value.symbol") {
+		if !HasProp(value, "symbol") {
 			if HasProp(value, "symbolClass") {
 				if value.symbolClass = "Diacritic Mark" {
 					value.symbol := GetChar("dotted_circle") EntryCharacter
@@ -10011,10 +10007,10 @@ ProcessMapAfter() {
 					for k, char in StrSplit(recipe) {
 						foundMatch := False
 
-						for index, pair in Library["Diacritic Mark"] {
-							if (Mod(index, 2) = 1) {
+						for i, pair in Library["Diacritic Mark"] {
+							if (Mod(i, 2) = 1) {
 								SymbolName := pair
-								SymbolChar := Library["Diacritic Mark"][index + 1]
+								SymbolChar := Library["Diacritic Mark"][i + 1]
 
 								if InStr(char, SymbolChar) {
 									ModifiedRecipe .= GetChar("dotted_circle") SymbolChar
@@ -10038,6 +10034,8 @@ ProcessMapAfter() {
 						value.recipeAlt.Push(ModifiedRecipe)
 					}
 				}
+
+
 			} else {
 				if EntryExpression {
 					LetterVar := EntryExpression[2] = "c" ? StrUpper(EntryExpression[3]) : EntryExpression[3]
@@ -10046,6 +10044,8 @@ ProcessMapAfter() {
 
 				ModifiedRecipe := ""
 				RecipeModified := False
+
+				FirstChar := SubStr(value.recipe, 1, 1)
 
 				for k, char in StrSplit(value.recipe) {
 					foundMatch := False
@@ -10076,6 +10076,18 @@ ProcessMapAfter() {
 								ModifiedRecipe .= GetChar("dotted_circle") SymbolChar
 								RecipeModified := true
 								foundMatch := true
+
+								if !HasProp(value, "LaTeX") {
+									if CallChar(SymbolName, "LaTeX") != "" && !IsObject(CallChar(SymbolName, "LaTeX")) {
+										value.LaTeX := CallChar(SymbolName, "LaTeX") "{" FirstChar "}"
+									} else if IsObject(CallChar(SymbolName, "LaTeX")) {
+										value.LaTeX := []
+										for i, LaTeX in CallChar(SymbolName, "LaTeX") {
+											value.LaTeX.Push(LaTeX "{" FirstChar "}")
+										}
+									}
+								}
+
 								break
 							}
 						}

@@ -51,14 +51,14 @@ DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
 DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
 
-GetUtilityFiles(ForceDownload := False) {
+GetUtilityFiles() {
 	ErrMessages := Map(
 		"ru", "Произошла ошибка при получении файла перевода.`nСервер недоступен или ошибка соединения с интернетом.",
 		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
 	)
 
 	for fileEntry, value in InternalFiles {
-		if !FileExist(value.File) || ForceDownload {
+		if !FileExist(value.File) {
 			try {
 				Download(value.Repo, value.File)
 			} catch {
@@ -69,7 +69,6 @@ GetUtilityFiles(ForceDownload := False) {
 	return
 }
 
-GetUtilityFiles()
 
 TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 
@@ -208,7 +207,7 @@ PowerShell_UserSID() {
 
 	FileAppend(PShell, "DSL_temp-usrSID.ps1", "UTF-8")
 	Sleep 2
-	RunWait("powershell powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & `"" A_ScriptDir "\DSL_temp-usrSID.ps1`"", , "Hide")
+	RunWait("powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & `"" A_ScriptDir "\DSL_temp-usrSID.ps1`"", , "Hide")
 
 	Sleep 5
 
@@ -220,12 +219,12 @@ PowerShell_UserSID() {
 	return Result
 }
 
-IsFont(FontName) {
-	UserSID := PowerShell_UserSID()
-	UserSID := StrReplace(UserSID, " ")
-	UserSID := StrReplace(UserSID, "`n")
-	UserSID := StrReplace(UserSID, "`r")
+UserSID := PowerShell_UserSID()
+UserSID := StrReplace(UserSID, " ")
+UserSID := StrReplace(UserSID, "`n")
+UserSID := StrReplace(UserSID, "`r")
 
+IsFont(FontName) {
 	Suffixes := ["", " Regular", " Regular (TrueType)"]
 
 	for Suffix in Suffixes {
@@ -508,18 +507,14 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		CurrentFilePath := A_ScriptFullPath
 		CurrentFileName := StrSplit(CurrentFilePath, "\").Pop()
 		UpdateFilePath := A_ScriptDir "\DSLKeyPad.ahk-GettingUpdate"
-		BackupsDir := A_ScriptDir "\Backups"
-		if !DirExist(BackupsDir) {
-			DirCreate(BackupsDir)
-		}
 
 		Download(RawSource, UpdateFilePath)
 
-		FileMove(CurrentFilePath, BackupsDir "\" CurrentFileName "-Backup-" GetTimeString())
+		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup-" GetTimeString())
 
 		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
 
-		GetUtilityFiles(True)
+		GetUtilityFiles()
 
 		if RepairMode == True {
 			MsgBox(ReadLocale("update_repair_success"), DSLPadTitle)
@@ -1202,14 +1197,13 @@ CallChar(CharacterName, GetValue) {
 	Result := ""
 	for characterEntry, value in Characters {
 		TrimValue := RegExReplace(characterEntry, "^\S+\s+")
-		if (TrimValue = CharacterName) {
+		if (TrimValue = CharacterName) && HasProp(value, GetValue) {
 			Result := value.%GetValue%
 			break
 		}
 	}
 	return Result
 }
-
 MapInsert(MapObj, Pairs*) {
 	keyCount := 0
 	for index in MapObj {
@@ -1511,8 +1505,7 @@ Characters := Map(
 	})
 MapInsert(Characters,
 	"acute", {
-		unicode: "{U+0301}",
-		LaTeX: ["\'", "\acute"],
+		unicode: "{U+0301}", LaTeX: ["\'", "\acute"],
 		tags: ["acute", "акут", "ударение"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["a", "ф"]],
 		show_on_fast_keys: True,
@@ -1521,7 +1514,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"acute_double", {
-		unicode: "{U+030B}",
+		unicode: "{U+030B}", LaTeX: "\H",
 		tags: ["double acute", "двойной акут", "двойное ударение"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["A", "Ф"]],
 		modifier: LeftShift,
@@ -1641,8 +1634,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"caron", {
-		unicode: "{U+030C}",
-		LaTeX: "\v",
+		unicode: "{U+030C}", LaTeX: ["\v", "\check"],
 		tags: ["caron", "hachek", "карон", "гачек"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["C", "С"]],
 		symbolClass: "Diacritic Mark",
@@ -1668,8 +1660,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"cedilla", {
-		unicode: "{U+0327}",
-		LaTeX: "\c",
+		unicode: "{U+0327}", LaTeX: "\c",
 		tags: ["cedilla", "седиль"],
 		group: [["Diacritics Tertiary", "Diacritics Fast Primary"], ["c", "с"]],
 		symbolClass: "Diacritic Mark",
@@ -1743,7 +1734,7 @@ MapInsert(Characters,
 	},
 	"diaeresis", {
 		unicode: "{U+0308}",
-		LaTeX: ["\" . QuotationDouble, "\ddot"],
+		LaTeX: ["\" QuotationDouble, "\ddot"],
 		tags: ["diaeresis", "диерезис"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["D", "В"]],
 		symbolClass: "Diacritic Mark",
@@ -1753,7 +1744,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"dot_below", {
-		unicode: "{U+0323}",
+		unicode: "{U+0323}", LaTeX: "\d",
 		tags: ["dot below", "точка снизу"],
 		group: ["Diacritics Secondary", ["d", "в"]],
 		symbolClass: "Diacritic Mark",
@@ -1857,7 +1848,7 @@ MapInsert(Characters,
 	;
 	;
 	"macron", {
-		unicode: "{U+0304}",
+		unicode: "{U+0304}", LaTeX: ["\=", "\bar"],
 		tags: ["macron", "макрон"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["m", "ь"]],
 		symbolClass: "Diacritic Mark",
@@ -1876,7 +1867,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"ogonek", {
-		unicode: "{U+0328}",
+		unicode: "{U+0328}", LaTeX: "\k",
 		tags: ["ogonek", "огонэк"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["o", "щ"]],
 		symbolClass: "Diacritic Mark",
@@ -2026,7 +2017,7 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	"tilde", {
-		unicode: "{U+0303}", LaTeX: "\~",
+		unicode: "{U+0303}", LaTeX: ["\~", "\tilde"],
 		tags: ["tilde", "тильда"],
 		group: [["Diacritics Primary", "Diacritics Fast Primary"], ["t", "е"]],
 		symbolClass: "Diacritic Mark",
@@ -6366,14 +6357,16 @@ MapInsert(Characters,
 	"cyr_c_let_ksi", {
 		unicode: "{U+046E}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: ["Cyrillic Letters", "К"],
+		show_on_fast_keys: True,
 		tags: ["прописная буква Кси", "cyrillic capital letter Ksi"],
 		recipe: "КС",
 	},
 	"cyr_s_let_ksi", {
 		unicode: "{U+046F}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: ["Cyrillic Letters", "к"],
+		show_on_fast_keys: True,
 		tags: ["строчная буква кси", "cyrillic small letter ksi"],
 		recipe: "кс",
 	},
@@ -6394,14 +6387,16 @@ MapInsert(Characters,
 	"cyr_c_let_psi", {
 		unicode: "{U+0470}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: ["Cyrillic Letters", "П"],
+		show_on_fast_keys: True,
 		tags: ["прописная буква Пси", "cyrillic capital letter Psi"],
 		recipe: "ПС",
 	},
 	"cyr_s_let_psi", {
 		unicode: "{U+0471}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: ["Cyrillic Letters", "п"],
+		show_on_fast_keys: True,
 		tags: ["строчная буква пси", "cyrillic small letter psi"],
 		recipe: "пс",
 	},
@@ -9944,7 +9939,7 @@ ProcessMapAfter() {
 			}
 		}
 
-		if !HasProp(value, "value.symbol") {
+		if !HasProp(value, "symbol") {
 			if HasProp(value, "symbolClass") {
 				if value.symbolClass = "Diacritic Mark" {
 					value.symbol := GetChar("dotted_circle") EntryCharacter
@@ -10012,10 +10007,10 @@ ProcessMapAfter() {
 					for k, char in StrSplit(recipe) {
 						foundMatch := False
 
-						for index, pair in Library["Diacritic Mark"] {
-							if (Mod(index, 2) = 1) {
+						for i, pair in Library["Diacritic Mark"] {
+							if (Mod(i, 2) = 1) {
 								SymbolName := pair
-								SymbolChar := Library["Diacritic Mark"][index + 1]
+								SymbolChar := Library["Diacritic Mark"][i + 1]
 
 								if InStr(char, SymbolChar) {
 									ModifiedRecipe .= GetChar("dotted_circle") SymbolChar
@@ -10039,6 +10034,8 @@ ProcessMapAfter() {
 						value.recipeAlt.Push(ModifiedRecipe)
 					}
 				}
+
+
 			} else {
 				if EntryExpression {
 					LetterVar := EntryExpression[2] = "c" ? StrUpper(EntryExpression[3]) : EntryExpression[3]
@@ -10047,6 +10044,8 @@ ProcessMapAfter() {
 
 				ModifiedRecipe := ""
 				RecipeModified := False
+
+				FirstChar := SubStr(value.recipe, 1, 1)
 
 				for k, char in StrSplit(value.recipe) {
 					foundMatch := False
@@ -10077,6 +10076,18 @@ ProcessMapAfter() {
 								ModifiedRecipe .= GetChar("dotted_circle") SymbolChar
 								RecipeModified := true
 								foundMatch := true
+
+								if !HasProp(value, "LaTeX") {
+									if CallChar(SymbolName, "LaTeX") != "" && !IsObject(CallChar(SymbolName, "LaTeX")) {
+										value.LaTeX := CallChar(SymbolName, "LaTeX") "{" FirstChar "}"
+									} else if IsObject(CallChar(SymbolName, "LaTeX")) {
+										value.LaTeX := []
+										for i, LaTeX in CallChar(SymbolName, "LaTeX") {
+											value.LaTeX.Push(LaTeX "{" FirstChar "}")
+										}
+									}
+								}
+
 								break
 							}
 						}
@@ -13537,10 +13548,12 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["B"]),
 			["cyr_c_let_yeru_back_yer", "cyr_s_let_yeru_back_yer"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["S"]),
 			["cyr_c_let_yus_big", "cyr_s_let_yus_big"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["E"]),
+			["cyr_c_let_psi", "cyr_s_let_psi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["G"]),
 			["cyr_c_let_omega", "cyr_s_let_omega"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["J"]),
 			["cyr_c_let_yat", "cyr_s_let_yat"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["T"]),
 			["cyr_c_let_yi", "cyr_s_let_yi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Q"]),
 			["cyr_c_let_j", "cyr_s_let_j"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["Q"]),
+			["cyr_c_let_ksi", "cyr_s_let_ksi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["R"]),
 			["cyr_c_let_yus_little", "cyr_s_let_yus_little"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Z"]),
 			["cyr_c_let_a_iotified", "cyr_s_let_a_iotified"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["Z"]),
 			["cyr_c_let_dzhe", "cyr_s_let_dzhe"], MapMerge(GetModifiers("<^>!"), KeySeqSlot[";"]),
