@@ -138,6 +138,7 @@ SkipGroupMessage := False
 GlagoFutharkActive := False
 CombiningEnabled := False
 ModifiersEnabled := False
+SubscriptCharsEnabled := False
 DisabledAllKeys := False
 ActiveScriptName := ""
 PreviousScriptName := ""
@@ -1294,6 +1295,9 @@ GetMapCount(MapObj, SortGroups := "") {
 				keyCount++
 			}
 			if HasProp(value, "modifierForm") {
+				keyCount++
+			}
+			if HasProp(value, "subscriptForm") {
 				keyCount++
 			}
 		}
@@ -6133,6 +6137,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_a_iotified", {
 		unicode: "{U+A657}",
+		combiningForm: "{U+2DFC}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
 		tags: [".йа", "строчная буква А йотированное", "cyrillic capital letter A iotified"],
@@ -6150,6 +6155,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_e_iotified", {
 		unicode: "{U+0465}",
+		combiningForm: "{U+A69F}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
 		tags: [".йэ", ".ie", "строчная буква е йотированное", "cyrillic small letter e iotified"],
@@ -6165,6 +6171,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_yus_big", {
 		unicode: "{U+046B}",
+		combiningForm: "{U+2DFE}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters", "у"],
 		tags: [".юсб", ".yusb", "строчная буква юс большой", "cyrillic small letter big yus"],
@@ -6180,6 +6187,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_yus_big_iotified", {
 		unicode: "{U+046D}",
+		combiningForm: "{U+2DFF}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
 		tags: [".йюсб", ".iyusb", "строчная буква юс большой йотированный", "cyrillic small letter big yus iotified"],
@@ -6195,6 +6203,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_yus_little", {
 		unicode: "{U+0467}",
+		combiningForm: "{U+2DFD}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters", "я"],
 		tags: [".юсм", ".yusm", "строчная буква юс малый", "cyrillic small letter little yus"],
@@ -6324,6 +6333,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_i", {
 		unicode: "{U+0456}",
+		modifierForm: "{U+1E04C}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "и"],
 		show_on_fast_keys: True,
@@ -6355,6 +6365,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_yi", {
 		unicode: "{U+0457}",
+		combiningForm: "{U+A676}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "й"],
 		show_on_fast_keys: True,
@@ -6371,6 +6382,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_j", {
 		unicode: "{U+0458}",
+		modifierForm: "{U+1E04D}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "й"],
 		modifier: LeftAlt,
@@ -6402,6 +6414,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_omega", {
 		unicode: "{U+0461}",
+		combiningForm: "{U+A67B}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "о"],
 		show_on_fast_keys: True,
@@ -6432,6 +6445,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_fita", {
 		unicode: "{U+0473}",
+		combiningForm: "{U+2DF4}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "ф"],
 		show_on_fast_keys: True,
@@ -6446,6 +6460,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_ukr_e", {
 		unicode: "{U+0454}",
+		combiningForm: "{U+A674}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "э"],
 		show_on_fast_keys: True,
@@ -6461,6 +6476,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_yat", {
 		unicode: "{U+0463}",
+		combiningForm: "{U+2DFA}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters", "е"],
 		show_on_fast_keys: True,
@@ -6478,6 +6494,7 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_yeru_back_yer", {
 		unicode: "{U+A651}",
+		modifierForm: "{U+1E06C}",
 		titlesAlt: True,
 		group: ["Cyrillic Letters"],
 		show_on_fast_keys: True,
@@ -9504,7 +9521,7 @@ MapInsert(Characters,
 
 MapInsert(Characters,
 	"lat_c_let_a", { calcOff: "", unicode: "{U+0041}", modifierForm: "{U+1D2C}" },
-	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}" },
+	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}", subscriptForm: "{U+2090}" },
 	"lat_c_let_b", { calcOff: "", unicode: "{U+0042}", modifierForm: "{U+1D2E}" },
 	"lat_s_let_b", { calcOff: "", unicode: "{U+0062}", combiningForm: "{U+1DE8}", modifierForm: "{U+1D47}" },
 	"lat_c_let_c", { calcOff: "", unicode: "{U+0043}", modifierForm: "{U+A7F2}" },
@@ -9512,114 +9529,114 @@ MapInsert(Characters,
 	"lat_c_let_d", { calcOff: "", unicode: "{U+0044}", modifierForm: "{U+1D30}" },
 	"lat_s_let_d", { calcOff: "", unicode: "{U+0064}", combiningForm: "{U+0369}", modifierForm: "{U+1D48}" },
 	"lat_c_let_e", { calcOff: "", unicode: "{U+0045}", modifierForm: "{U+1D31}" },
-	"lat_s_let_e", { calcOff: "", unicode: "{U+0065}", combiningForm: "{U+0364}", modifierForm: "{U+1D49}" },
+	"lat_s_let_e", { calcOff: "", unicode: "{U+0065}", combiningForm: "{U+0364}", modifierForm: "{U+1D49}", subscriptForm: "{U+2091}" },
 	"lat_c_let_f", { calcOff: "", unicode: "{U+0046}", modifierForm: "{U+A7F3}" },
 	"lat_s_let_f", { calcOff: "", unicode: "{U+0066}", combiningForm: "{U+1DEB}", modifierForm: "{U+1DA0}" },
 	"lat_c_let_g", { calcOff: "", unicode: "{U+0047}", combiningForm: "{U+1DDB}", modifierForm: "{U+1D33}" },
 	"lat_s_let_g", { calcOff: "", unicode: "{U+0067}", combiningForm: "{U+1DDA}", modifierForm: "{U+1D4D}" },
 	"lat_c_let_h", { calcOff: "", unicode: "{U+0048}", modifierForm: "{U+1D34}" },
-	"lat_s_let_h", { calcOff: "", unicode: "{U+0068}", combiningForm: "{U+036A}", modifierForm: "{U+02B0}" },
+	"lat_s_let_h", { calcOff: "", unicode: "{U+0068}", combiningForm: "{U+036A}", modifierForm: "{U+02B0}", subscriptForm: "{U+2095}" },
 	"lat_c_let_i", { calcOff: "", unicode: "{U+0049}", modifierForm: "{U+1D35}" },
-	"lat_s_let_i", { calcOff: "", unicode: "{U+0069}", combiningForm: "{U+0365}" },
+	"lat_s_let_i", { calcOff: "", unicode: "{U+0069}", combiningForm: "{U+0365}", subscriptForm: "{U+1D62}" },
 	"lat_c_let_j", { calcOff: "", unicode: "{U+004A}", modifierForm: "{U+1D36}" },
-	"lat_s_let_j", { calcOff: "", unicode: "{U+006A}", modifierForm: "{U+02B2}" },
+	"lat_s_let_j", { calcOff: "", unicode: "{U+006A}", modifierForm: "{U+02B2}", subscriptForm: "{U+2C7C}" },
 	"lat_c_let_k", { calcOff: "", unicode: "{U+004B}", modifierForm: "{U+1D37}" },
-	"lat_s_let_k", { calcOff: "", unicode: "{U+006B}", combiningForm: "{U+1DDC}", modifierForm: "{U+1D4F}" },
+	"lat_s_let_k", { calcOff: "", unicode: "{U+006B}", combiningForm: "{U+1DDC}", modifierForm: "{U+1D4F}", subscriptForm: "{U+2096}" },
 	"lat_c_let_l", { calcOff: "", unicode: "{U+004C}", combiningForm: "{U+1DDE}", modifierForm: "{U+1D38}" },
-	"lat_s_let_l", { calcOff: "", unicode: "{U+006C}", combiningForm: "{U+1DDD}", modifierForm: "{U+02E1}" },
+	"lat_s_let_l", { calcOff: "", unicode: "{U+006C}", combiningForm: "{U+1DDD}", modifierForm: "{U+02E1}", subscriptForm: "{U+2097}" },
 	"lat_c_let_m", { calcOff: "", unicode: "{U+004D}", combiningForm: "{U+1DDF}", modifierForm: "{U+1D39}" },
-	"lat_s_let_m", { calcOff: "", unicode: "{U+006D}", combiningForm: "{U+036B}", modifierForm: "{U+1D50}" },
+	"lat_s_let_m", { calcOff: "", unicode: "{U+006D}", combiningForm: "{U+036B}", modifierForm: "{U+1D50}", subscriptForm: "{U+2098}" },
 	"lat_c_let_n", { calcOff: "", unicode: "{U+004E}", combiningForm: "{U+1DE1}", modifierForm: "{U+1D3A}" },
-	"lat_s_let_n", { calcOff: "", unicode: "{U+006E}", combiningForm: "{U+1DE0}" },
+	"lat_s_let_n", { calcOff: "", unicode: "{U+006E}", combiningForm: "{U+1DE0}", subscriptForm: "{U+2099}" },
 	"lat_c_let_o", { calcOff: "", unicode: "{U+004F}", modifierForm: "{U+1D3C}" },
-	"lat_s_let_o", { calcOff: "", unicode: "{U+006F}", combiningForm: "{U+0366}", modifierForm: "{U+1D52}" },
+	"lat_s_let_o", { calcOff: "", unicode: "{U+006F}", combiningForm: "{U+0366}", modifierForm: "{U+1D52}", subscriptForm: "{U+2092}" },
 	"lat_c_let_p", { calcOff: "", unicode: "{U+0050}", modifierForm: "{U+1D3E}" },
-	"lat_s_let_p", { calcOff: "", unicode: "{U+0070}", combiningForm: "{U+1DEE}", modifierForm: "{U+1D56}" },
+	"lat_s_let_p", { calcOff: "", unicode: "{U+0070}", combiningForm: "{U+1DEE}", modifierForm: "{U+1D56}", subscriptForm: "{U+209A}" },
 	"lat_c_let_q", { calcOff: "", unicode: "{U+0051}", modifierForm: "{U+A7F4}" },
 	"lat_s_let_q", { calcOff: "", unicode: "{U+0071}" },
 	"lat_c_let_r", { calcOff: "", unicode: "{U+0052}", combiningForm: "{U+1DE2}", modifierForm: "{U+1D3F}" },
-	"lat_s_let_r", { calcOff: "", unicode: "{U+0072}", combiningForm: "{U+036C}", modifierForm: "{U+02B3}" },
+	"lat_s_let_r", { calcOff: "", unicode: "{U+0072}", combiningForm: "{U+036C}", modifierForm: "{U+02B3}", subscriptForm: "{U+1D63}" },
 	"lat_c_let_s", { calcOff: "", unicode: "{U+0053}" },
-	"lat_s_let_s", { calcOff: "", unicode: "{U+0073}", combiningForm: "{U+1DE4}", modifierForm: "{U+02E2}" },
+	"lat_s_let_s", { calcOff: "", unicode: "{U+0073}", combiningForm: "{U+1DE4}", modifierForm: "{U+02E2}", subscriptForm: "{U+209B}" },
 	"lat_c_let_t", { calcOff: "", unicode: "{U+0054}", modifierForm: "{U+1D40}" },
-	"lat_s_let_t", { calcOff: "", unicode: "{U+0074}", combiningForm: "{U+036D}", modifierForm: "{U+1D57}" },
+	"lat_s_let_t", { calcOff: "", unicode: "{U+0074}", combiningForm: "{U+036D}", modifierForm: "{U+1D57}", subscriptForm: "{U+209C}" },
 	"lat_c_let_u", { calcOff: "", unicode: "{U+0055}", modifierForm: "{U+1D41}" },
-	"lat_s_let_u", { calcOff: "", unicode: "{U+0075}", combiningForm: "{U+0367}", modifierForm: "{U+1D58}" },
+	"lat_s_let_u", { calcOff: "", unicode: "{U+0075}", combiningForm: "{U+0367}", modifierForm: "{U+1D58}", subscriptForm: "{U+1D64}" },
 	"lat_c_let_v", { calcOff: "", unicode: "{U+0056}", modifierForm: "{U+2C7D}" },
-	"lat_s_let_v", { calcOff: "", unicode: "{U+0076}", combiningForm: "{U+036E}", modifierForm: "{U+1D5B}" },
+	"lat_s_let_v", { calcOff: "", unicode: "{U+0076}", combiningForm: "{U+036E}", modifierForm: "{U+1D5B}", subscriptForm: "{U+1D65}" },
 	"lat_c_let_w", { calcOff: "", unicode: "{U+0057}", modifierForm: "{U+1D42}" },
 	"lat_s_let_w", { calcOff: "", unicode: "{U+0077}", combiningForm: "{U+1DF1}", modifierForm: "{U+02B7}" },
 	"lat_c_let_x", { calcOff: "", unicode: "{U+0058}" },
-	"lat_s_let_x", { calcOff: "", unicode: "{U+0078}", combiningForm: "{U+036F}", modifierForm: "{U+02E3}" },
+	"lat_s_let_x", { calcOff: "", unicode: "{U+0078}", combiningForm: "{U+036F}", modifierForm: "{U+02E3}", subscriptForm: "{U+2093}" },
 	"lat_c_let_y", { calcOff: "", unicode: "{U+0059}" },
 	"lat_s_let_y", { calcOff: "", unicode: "{U+0079}", modifierForm: "{U+02B8}" },
 	"lat_c_let_z", { calcOff: "", unicode: "{U+005A}" },
 	"lat_s_let_z", { calcOff: "", unicode: "{U+007A}", combiningForm: "{U+1DE6}", modifierForm: "{U+02E3}" },
 	;
 	"cyr_c_let_a", { calcOff: "", unicode: "{U+0410}" }, ; А
-	"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}" }, ; а
+	"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}", combiningForm: "{U+2DF6}", modifierForm: "{U+1E030}" }, ; а
 	"cyr_c_let_b", { calcOff: "", unicode: "{U+0411}" }, ; Б
-	"cyr_s_let_b", { calcOff: "", unicode: "{U+0431}" }, ; б
+	"cyr_s_let_b", { calcOff: "", unicode: "{U+0431}", combiningForm: "{U+2DE0}", modifierForm: "{U+1E031}" }, ; б
 	"cyr_c_let_v", { calcOff: "", unicode: "{U+0412}" }, ; В
-	"cyr_s_let_v", { calcOff: "", unicode: "{U+0432}" }, ; в
+	"cyr_s_let_v", { calcOff: "", unicode: "{U+0432}", combiningForm: "{U+2DE1}", modifierForm: "{U+1E032}" }, ; в
 	"cyr_c_let_g", { calcOff: "", unicode: "{U+0413}" }, ; Г
-	"cyr_s_let_g", { calcOff: "", unicode: "{U+0433}" }, ; г
+	"cyr_s_let_g", { calcOff: "", unicode: "{U+0433}", combiningForm: "{U+2DE2}", modifierForm: "{U+1E033}" }, ; г
 	"cyr_c_let_d", { calcOff: "", unicode: "{U+0414}" }, ; Д
-	"cyr_s_let_d", { calcOff: "", unicode: "{U+0434}" }, ; д
+	"cyr_s_let_d", { calcOff: "", unicode: "{U+0434}", combiningForm: "{U+2DE3}", modifierForm: "{U+1E034}" }, ; д
 	"cyr_c_let_e", { calcOff: "", unicode: "{U+0415}" }, ; Е
-	"cyr_s_let_e", { calcOff: "", unicode: "{U+0435}" }, ; е
+	"cyr_s_let_e", { calcOff: "", unicode: "{U+0435}", combiningForm: "{U+2DF7}", modifierForm: "{U+1E035}" }, ; е
 	"cyr_c_let_yo", { calcOff: "", unicode: "{U+0401}" }, ; Ё
 	"cyr_s_let_yo", { calcOff: "", unicode: "{U+0451}" }, ; ё
 	"cyr_c_let_zh", { calcOff: "", unicode: "{U+0416}" }, ; Ж
-	"cyr_s_let_zh", { calcOff: "", unicode: "{U+0436}" }, ; ж
+	"cyr_s_let_zh", { calcOff: "", unicode: "{U+0436}", combiningForm: "{U+2DE4}", modifierForm: "{U+1E036}" }, ; ж
 	"cyr_c_let_z", { calcOff: "", unicode: "{U+0417}" }, ; З
-	"cyr_s_let_z", { calcOff: "", unicode: "{U+0437}" }, ; з
+	"cyr_s_let_z", { calcOff: "", unicode: "{U+0437}", combiningForm: "{U+2DE5}", modifierForm: "{U+1E037}" }, ; з
 	"cyr_c_let_и", { calcOff: "", unicode: "{U+0418}" }, ; И
-	"cyr_s_let_и", { calcOff: "", unicode: "{U+0438}" }, ; и
+	"cyr_s_let_и", { calcOff: "", unicode: "{U+0438}", combiningForm: "{U+A675}", modifierForm: "{U+1E038}" }, ; и
 	"cyr_c_let_iy", { calcOff: "", unicode: "{U+0419}" }, ; Й
 	"cyr_s_let_iy", { calcOff: "", unicode: "{U+0439}" }, ; й
 	"cyr_c_let_k", { calcOff: "", unicode: "{U+041A}" }, ; К
-	"cyr_s_let_k", { calcOff: "", unicode: "{U+043A}" }, ; к
+	"cyr_s_let_k", { calcOff: "", unicode: "{U+043A}", combiningForm: "{U+2DE6}", modifierForm: "{U+1E039}" }, ; к
 	"cyr_c_let_l", { calcOff: "", unicode: "{U+041B}" }, ; Л
-	"cyr_s_let_l", { calcOff: "", unicode: "{U+043B}" }, ; л
+	"cyr_s_let_l", { calcOff: "", unicode: "{U+043B}", combiningForm: "{U+2DE7}", modifierForm: "{U+1E03A}" }, ; л
 	"cyr_c_let_m", { calcOff: "", unicode: "{U+041C}" }, ; М
-	"cyr_s_let_m", { calcOff: "", unicode: "{U+043C}" }, ; м
+	"cyr_s_let_m", { calcOff: "", unicode: "{U+043C}", combiningForm: "{U+2DE8}", modifierForm: "{U+1E03B}" }, ; м
 	"cyr_c_let_n", { calcOff: "", unicode: "{U+041D}" }, ; Н
-	"cyr_s_let_n", { calcOff: "", unicode: "{U+043D}" }, ; н
+	"cyr_s_let_n", { calcOff: "", unicode: "{U+043D}", combiningForm: "{U+2DE9}", modifierForm: "{U+1D78}" }, ; н
 	"cyr_c_let_o", { calcOff: "", unicode: "{U+041E}" }, ; О
-	"cyr_s_let_o", { calcOff: "", unicode: "{U+043E}" }, ; о
+	"cyr_s_let_o", { calcOff: "", unicode: "{U+043E}", combiningForm: "{U+2DEA}", modifierForm: "{U+1E03C}" }, ; о
 	"cyr_c_let_p", { calcOff: "", unicode: "{U+041F}" }, ; П
-	"cyr_s_let_p", { calcOff: "", unicode: "{U+043F}" }, ; п
+	"cyr_s_let_p", { calcOff: "", unicode: "{U+043F}", combiningForm: "{U+2DEB}", modifierForm: "{U+1E03D}" }, ; п
 	"cyr_c_let_r", { calcOff: "", unicode: "{U+0420}" }, ; Р
-	"cyr_s_let_r", { calcOff: "", unicode: "{U+0440}" }, ; р
+	"cyr_s_let_r", { calcOff: "", unicode: "{U+0440}", combiningForm: "{U+2DEC}", modifierForm: "{U+1E03E}" }, ; р
 	"cyr_c_let_s", { calcOff: "", unicode: "{U+0421}" }, ; С
-	"cyr_s_let_s", { calcOff: "", unicode: "{U+0441}" }, ; с
+	"cyr_s_let_s", { calcOff: "", unicode: "{U+0441}", combiningForm: "{U+2DED}", modifierForm: "{U+1E03F}" }, ; с
 	"cyr_c_let_t", { calcOff: "", unicode: "{U+0422}" }, ; Т
-	"cyr_s_let_t", { calcOff: "", unicode: "{U+0442}" }, ; т
+	"cyr_s_let_t", { calcOff: "", unicode: "{U+0442}", combiningForm: "{U+2DEE}", modifierForm: "{U+1E040}" }, ; т
 	"cyr_c_let_u", { calcOff: "", unicode: "{U+0423}" }, ; У
-	"cyr_s_let_u", { calcOff: "", unicode: "{U+0443}" }, ; у
+	"cyr_s_let_u", { calcOff: "", unicode: "{U+0443}", combiningForm: "{U+A677}", modifierForm: "{U+1E041}" }, ; у
 	"cyr_c_let_f", { calcOff: "", unicode: "{U+0424}" }, ; Ф
-	"cyr_s_let_f", { calcOff: "", unicode: "{U+0444}" }, ; ф
+	"cyr_s_let_f", { calcOff: "", unicode: "{U+0444}", combiningForm: "{U+A69E}", modifierForm: "{U+1E042}" }, ; ф
 	"cyr_c_let_h", { calcOff: "", unicode: "{U+0425}" }, ; Х
-	"cyr_s_let_h", { calcOff: "", unicode: "{U+0445}" }, ; х
+	"cyr_s_let_h", { calcOff: "", unicode: "{U+0445}", combiningForm: "{U+2DEF}", modifierForm: "{U+1E043}" }, ; х
 	"cyr_c_let_ts", { calcOff: "", unicode: "{U+0426}" }, ; Ц
-	"cyr_s_let_ts", { calcOff: "", unicode: "{U+0446}" }, ; ц
+	"cyr_s_let_ts", { calcOff: "", unicode: "{U+0446}", combiningForm: "{U+2DF0}", modifierForm: "{U+1E044}" }, ; ц
 	"cyr_c_let_ch", { calcOff: "", unicode: "{U+0427}" }, ; Ч
-	"cyr_s_let_ch", { calcOff: "", unicode: "{U+0447}" }, ; ч
+	"cyr_s_let_ch", { calcOff: "", unicode: "{U+0447}", combiningForm: "{U+2DF1}", modifierForm: "{U+1E045}" }, ; ч
 	"cyr_c_let_sh", { calcOff: "", unicode: "{U+0428}" }, ; Ш
-	"cyr_s_let_sh", { calcOff: "", unicode: "{U+0448}" }, ; ш
+	"cyr_s_let_sh", { calcOff: "", unicode: "{U+0448}", combiningForm: "{U+2DF2}", modifierForm: "{U+1E046}" }, ; ш
 	"cyr_c_let_shch", { calcOff: "", unicode: "{U+0429}" }, ; Щ
-	"cyr_s_let_shch", { calcOff: "", unicode: "{U+0449}" }, ; щ
+	"cyr_s_let_shch", { calcOff: "", unicode: "{U+0449}", combiningForm: "{U+2DF3}" }, ; щ
 	"cyr_c_let_yeru", { calcOff: "", unicode: "{U+042A}" }, ; Ъ
-	"cyr_s_let_yeru", { calcOff: "", unicode: "{U+044A}" }, ; ъ
+	"cyr_s_let_yeru", { calcOff: "", unicode: "{U+044A}", combiningForm: "{U+A678}", modifierForm: "{U+A69C}" }, ; ъ
 	"cyr_c_let_yery", { calcOff: "", unicode: "{U+042B}" }, ; Ы
-	"cyr_s_let_yery", { calcOff: "", unicode: "{U+044B}" }, ; ы
+	"cyr_s_let_yery", { calcOff: "", unicode: "{U+044B}", combiningForm: "{U+A679}", modifierForm: "{U+1E047}" }, ; ы
 	"cyr_c_let_yeri", { calcOff: "", unicode: "{U+042C}" }, ; Ь
-	"cyr_s_let_yeri", { calcOff: "", unicode: "{U+044C}" }, ; ь
+	"cyr_s_let_yeri", { calcOff: "", unicode: "{U+044C}", combiningForm: "{U+A67A}", modifierForm: "{U+A69D}" }, ; ь
 	"cyr_c_let_э", { calcOff: "", unicode: "{U+042D}" }, ; Э
-	"cyr_s_let_э", { calcOff: "", unicode: "{U+044D}" }, ; э
+	"cyr_s_let_э", { calcOff: "", unicode: "{U+044D}", modifierForm: "{U+1E048}" }, ; э
 	"cyr_c_let_yu", { calcOff: "", unicode: "{U+042E}" }, ; Ю
-	"cyr_s_let_yu", { calcOff: "", unicode: "{U+044E}" }, ; ю
+	"cyr_s_let_yu", { calcOff: "", unicode: "{U+044E}", combiningForm: "{U+2DFB}", modifierForm: "{U+1E049}" }, ; ю
 	"cyr_c_let_ya", { calcOff: "", unicode: "{U+042F}" }, ; Я
 	"cyr_s_let_ya", { calcOff: "", unicode: "{U+044F}" } ; я
 )
@@ -9946,6 +9963,19 @@ ProcessMapAfter() {
 			}
 		}
 
+		if HasProp(value, "subscriptForm") {
+			if !HasProp(value, "subscriptHTML") {
+				value.subscriptHTML := ""
+			}
+			if IsObject(value.subscriptForm) {
+				for combining in value.subscriptForm {
+					value.subscriptHTML .= "&#" ConvertToDecimal(PasteUnicode(combining)) ";"
+				}
+			} else {
+				value.subscriptHTML := "&#" ConvertToDecimal(PasteUnicode(value.subscriptForm)) ";"
+			}
+		}
+
 		if HasProp(value, "alt_on_fast_keys") {
 			if EntryExpression {
 				value.alt_on_fast_keys := RegExReplace(value.alt_on_fast_keys, "\$", "[" LetterVar "]")
@@ -10259,13 +10289,24 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 				for _, key in characterKeys {
 					if (keyPressed == key) {
 						if InputMode = "HTML" && HasProp(value, "html") {
-							(ModifiersEnabled && HasProp(value, "modifierForm")) ? SendText(value.modifierHTML) :
-								(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
+							(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+								(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+									(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							SendText(IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX)
 						}
 						else {
-							if ModifiersEnabled && HasProp(value, "modifierForm") {
+							if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+								if IsObject(value.subscriptForm) {
+									TempValue := ""
+									for modifier in value.subscriptForm {
+										TempValue .= PasteUnicode(modifier)
+									}
+									SendText(TempValue)
+								} else {
+									Send(value.subscriptForm)
+								}
+							} else if ModifiersEnabled && HasProp(value, "modifierForm") {
 								if IsObject(value.modifierForm) {
 									TempValue := ""
 									for modifier in value.modifierForm {
@@ -10302,8 +10343,9 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 			} else {
 				if (keyPressed == characterKeys) {
 					if InputMode = "HTML" && HasProp(value, "html") {
-						(ModifiersEnabled && HasProp(value, "modifierForm")) ? SendText(value.modifierHTML) :
-							(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
+						(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.modifiesubscriptHTMLrHTML) :
+							(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+								(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
 					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 						if IsObject(characterLaTeX) {
 							if LaTeXMode = "common"
@@ -10315,7 +10357,17 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 						}
 					}
 					else {
-						if ModifiersEnabled && HasProp(value, "modifierForm") {
+						if ModifiersEnabled && HasProp(value, "subscriptForm") {
+							if IsObject(value.subscriptForm) {
+								TempValue := ""
+								for modifier in value.subscriptForm {
+									TempValue .= PasteUnicode(modifier)
+								}
+								SendText(TempValue)
+							} else {
+								Send(value.modsubscriptFormifierForm)
+							}
+						} else if ModifiersEnabled && HasProp(value, "modifierForm") {
 							if IsObject(value.modifierForm) {
 								TempValue := ""
 								for modifier in value.modifierForm {
@@ -10424,14 +10476,25 @@ SearchKey(CycleSend := "") {
 			OutputValue := ""
 			if InputMode = "HTML" && HasProp(value, "html") {
 				SendValue :=
-					(ModifiersEnabled && HasProp(value, "modifierForm")) ? value.modifierHTML :
-						(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
+					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+							(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
 				OutputValue := SendValue
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				OutputValue := IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			}
 			else {
-				if ModifiersEnabled && HasProp(value, "modifierForm") {
+				if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+					if IsObject(value.subscriptForm) {
+						TempValue := ""
+						for modifier in value.subscriptForm {
+							TempValue .= PasteUnicode(modifier)
+						}
+						OutputValue := TempValue
+					} else {
+						OutputValue := Chr("0x" UniTrim(value.subscriptForm))
+					}
+				} else if ModifiersEnabled && HasProp(value, "modifierForm") {
 					if IsObject(value.modifierForm) {
 						TempValue := ""
 						for modifier in value.modifierForm {
@@ -11252,7 +11315,17 @@ Ligaturise(SmeltingMode := "InputBox") {
 	Found := False
 	GetUniChar(value) {
 		Output := ""
-		if ModifiersEnabled && HasProp(value, "modifierForm") {
+		if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+			if IsObject(value.subscriptForm) {
+				TempValue := ""
+				for modifier in value.subscriptForm {
+					TempValue .= PasteUnicode(modifier)
+				}
+				Output := TempValue
+			} else {
+				Output := PasteUnicode(value.subscriptForm)
+			}
+		} else if ModifiersEnabled && HasProp(value, "modifierForm") {
 			if IsObject(value.modifierForm) {
 				TempValue := ""
 				for modifier in value.modifierForm {
@@ -11398,9 +11471,11 @@ Ligaturise(SmeltingMode := "InputBox") {
 								if (!IsSingleCase && Input == recipeEntry) ||
 								(IsSingleCase && Input = recipeEntry) {
 									if InputMode = "HTML" && HasProp(value, "html") {
-										GetUnicodeSymbol := (ModifiersEnabled && HasProp(value, "modifierForm")) ? value.modifierHTML :
-											(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
-												(value.HasProp("entity") ? value.entity : value.html)
+										GetUnicodeSymbol :=
+											(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+												(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+													(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
+														(value.HasProp("entity") ? value.entity : value.html)
 									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 										GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 									} else {
@@ -11413,9 +11488,11 @@ Ligaturise(SmeltingMode := "InputBox") {
 							}
 						} else if (!IsSingleCase && Input == Recipe) || (IsSingleCase && Input = Recipe) {
 							if InputMode = "HTML" && HasProp(value, "html") {
-								GetUnicodeSymbol := (ModifiersEnabled && HasProp(value, "modifierForm")) ? value.modifierHTML :
-									(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
-										(value.HasProp("entity") ? value.entity : value.html)
+								GetUnicodeSymbol :=
+									(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+										(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+											(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
+												(value.HasProp("entity") ? value.entity : value.html)
 							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 								GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 							} else {
@@ -11463,9 +11540,10 @@ Ligaturise(SmeltingMode := "InputBox") {
 				for _, recipe in Recipe {
 					if (recipe == PromptValue) {
 						if InputMode = "HTML" && HasProp(value, "html") {
-							(ModifiersEnabled && HasProp(value, "modifierForm")) ? SendText(value.modifierHTML) :
-								(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
-									value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+							(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+								(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+									(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
+										value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
@@ -11478,9 +11556,10 @@ Ligaturise(SmeltingMode := "InputBox") {
 				}
 			} else if (Recipe == PromptValue) {
 				if InputMode = "HTML" && HasProp(value, "html") {
-					(ModifiersEnabled && HasProp(value, "modifierForm")) ? SendText(value.modifierHTML) :
-						(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
-							value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+							(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
+								value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 					SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
 
@@ -12757,9 +12836,14 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		IsDiacritic := RegExMatch(GetEntry.symbol, "^" DottedCircle "\S")
 		IsCombining := IsDiacritic || HasProp(GetEntry, "combiningForm")
 		IsModifier := HasProp(GetEntry, "modifierForm")
+		IsSubscript := HasProp(GetEntry, "subscriptForm")
 
 		if IsModifier {
 			GroupTitle .= GetChar("dotted_circle") Chr(0x02B0) " "
+		}
+
+		if IsSubscript {
+			GroupTitle .= GetChar("dotted_circle") Chr(0x2095) " "
 		}
 
 		if IsCombining {
@@ -12897,7 +12981,9 @@ LV_OpenUnicodeWebsite(LV, RowNumber) {
 			if (InputMode = "HTML" || InputMode = "LaTeX") {
 				for characterEntry, value in Characters {
 					if (SelectedRow = UniTrim(value.unicode)) {
-						if ModifiersEnabled && HasProp(value, "modifierForm") {
+						if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+							A_Clipboard := value.subscriptForm
+						} else if ModifiersEnabled && HasProp(value, "modifierForm") {
 							A_Clipboard := value.modifierForm
 						} else if InputMode = "HTML" && HasProp(value, "html") {
 							A_Clipboard := HasProp(value, "entity") ? value.entity : value.html
@@ -13123,12 +13209,23 @@ GetCharacterSequence(CharacterName) {
 
 			if InputMode = "HTML" && HasProp(value, "html") {
 				Output .=
-					(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
-						(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
+					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+							(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				Output .= IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			} else {
-				if ModifiersEnabled && HasProp(value, "modifierForm") {
+				if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+					if IsObject(value.subscriptForm) {
+						TempValue := ""
+						for modifier in value.subscriptForm {
+							TempValue .= PasteUnicode(modifier)
+						}
+						SendText(TempValue)
+					} else {
+						Send(value.subscriptForm)
+					}
+				} else if ModifiersEnabled && HasProp(value, "modifierForm") {
 					if IsObject(value.modifierForm) {
 						TempValue := ""
 						for modifier in value.modifierForm {
@@ -14465,8 +14562,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
-			"<^>!" UseKey["F2"], (*) => ProceedCombining(),
-			"<^>!" UseKey["F3"], (*) => ProceedModifiers(),
+			"<^>!" UseKey["F2"], (*) => SetModifiedCharsInput(),
+			"<^>!" UseKey["F3"], (*) => SetModifiedCharsInput("modifier"),
+			"<^>!>+" UseKey["F3"], (*) => SetModifiedCharsInput("subscript"),
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
@@ -14606,30 +14704,24 @@ RAltsSetStats() {
 }
 
 
-ProceedCombining() {
-	global CombiningEnabled, ModifiersEnabled
-	ModifiersEnabled := False
-	CombiningEnabled := !CombiningEnabled ? True : False
-	if CombiningEnabled {
-		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
-		ShowInfoMessage("message_combining", , , SkipGroupMessage, True)
-	} else {
-		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		ShowInfoMessage("message_combining_disabled", , , SkipGroupMessage, True)
-	}
-}
+SetModifiedCharsInput(ModeName := "combining") {
+	global ModifiersEnabled, SubscriptCharsEnabled, CombiningEnabled
+	IsToRegister := False
 
-ProceedModifiers() {
-	global ModifiersEnabled, CombiningEnabled
-	CombiningEnabled := False
-	ModifiersEnabled := !ModifiersEnabled ? True : False
-	if ModifiersEnabled {
+	CombiningEnabled := ModeName = "combining" ? (!CombiningEnabled ? True : False) : False
+	ModifiersEnabled := ModeName = "modifier" ? (!ModifiersEnabled ? True : False) : False
+	SubscriptCharsEnabled := ModeName = "subscript" ? (!SubscriptCharsEnabled ? True : False) : False
+
+	IsToRegister := ModeName = "combining" ? CombiningEnabled : ModeName = "modifier" ? ModifiersEnabled : ModeName = "subscript" ? SubscriptCharsEnabled : False
+
+	if IsToRegister {
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
-		ShowInfoMessage("message_modifier", , , SkipGroupMessage, True)
+		ShowInfoMessage("message_" ModeName, , , SkipGroupMessage, True)
 	} else {
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		ShowInfoMessage("message_modifier_disabled", , , SkipGroupMessage, True)
+		ShowInfoMessage("message_" ModeName "_disabled", , , SkipGroupMessage, True)
 	}
+
 }
 
 RShiftEndingTimer() {
