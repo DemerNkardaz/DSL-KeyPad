@@ -132,6 +132,10 @@ OpenLocalesFile(*) {
 	Run(InternalFiles["Locales"].File)
 }
 
+OpenRecipesFile(*) {
+	Run(CustomComposeFile)
+}
+
 EscapePressed := False
 
 FastKeysIsActive := False
@@ -15935,6 +15939,7 @@ ManageTrayItems() {
 		"reload", ReadLocale("tray_func_reload"),
 		"config", ReadLocale("tray_func_config"),
 		"locale", ReadLocale("tray_func_locale"),
+		"custom_compose", ReadLocale("tray_func_custom_compose"),
 		"exit", ReadLocale("tray_func_exit") "`t" LeftControl RightShift "Esc",
 		"panel", ReadLocale("tray_func_panel") "`t" Window LeftAlt "Home",
 		"install", ReadLocale("tray_func_install"),
@@ -16009,6 +16014,7 @@ ManageTrayItems() {
 	DSLTray.Add(Labels["reload"], ReloadApplication)
 	DSLTray.Add(Labels["config"], OpenConfigFile)
 	DSLTray.Add(Labels["locale"], OpenLocalesFile)
+	DSLTray.Add(Labels["custom_compose"], OpenRecipesFile)
 	DSLTray.Add()
 	if DisabledAllKeys {
 		DSLTray.Add(Labels["enable"], (*) => DisableAllKeys())
@@ -16032,6 +16038,7 @@ ManageTrayItems() {
 	DSLTray.SetIcon(Labels["reload"], ImageRes, 229)
 	DSLTray.SetIcon(Labels["config"], ImageRes, 065)
 	DSLTray.SetIcon(Labels["locale"], ImageRes, 015)
+	DSLTray.SetIcon(Labels["custom_compose"], ImageRes, 188)
 	DSLTray.SetIcon(Labels["exit"], ImageRes, 085)
 
 }
