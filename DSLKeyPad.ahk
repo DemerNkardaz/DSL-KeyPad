@@ -110,6 +110,7 @@ ReadLocale(EntryName, Prefix := "") {
 
 
 	Intermediate := StrReplace(Intermediate, "\n", "`n")
+	Intermediate := StrReplace(Intermediate, "\t", "`t")
 	Intermediate := Intermediate != "" ? Intermediate : "KEY (" . EntryName . "): NOT FOUND"
 	return Intermediate
 }
@@ -2097,6 +2098,53 @@ MapInsert(Characters,
 		symbolFont: "Cambria"
 	},
 	;
+	"cyr_com_vzmet", {
+		unicode: "{U+A66F}",
+		group: [["Diacritics Primary", "Cyrillic Diacritics"], CtrlD],
+		alt_layout: "<^<! [в]",
+		tags: ["взмет кириллицы", "cyrillic vzmet"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_titlo", {
+		unicode: "{U+0483}",
+		group: [["Diacritics Primary", "Cyrillic Diacritics"], ["n", "т"]],
+		alt_layout: "<^<! [т]",
+		tags: ["титло кириллицы", "cyrillic titlo"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_palatalization", {
+		unicode: "{U+0484}",
+		group: [["Diacritics Tertiary", "Cyrillic Diacritics"], ["g", "п"]],
+		alt_layout: "<^<! [п]",
+		tags: ["палатализация кириллицы", "cyrillic palatalization"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_pokrytie", {
+		unicode: "{U+0487}",
+		group: [["Diacritics Tertiary", "Cyrillic Diacritics"], ["G", "П"]],
+		alt_layout: "<^<!<+ [g][п]",
+		tags: ["покрытие кириллицы", "cyrillic pokrytie"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_dasia_pneumata", {
+		unicode: "{U+0485}",
+		group: [["Diacritics Quatemary", "Cyrillic Diacritics", "Diacritics Fast Primary"], ["g", "п"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: ">+ [g][п]",
+		alt_layout: "<^<!>+ [п]",
+		tags: ["густое придыхание кириллицы", "cyrillic dasia pneumata"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_psili_pneumata", {
+		unicode: "{U+0486}",
+		group: [["Diacritics Quatemary", "Cyrillic Diacritics", "Diacritics Fast Primary"], ["G", "П"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+>+ [п]",
+		alt_layout: "<^<!<+>+ [п]",
+		tags: ["тонкое придыхание кириллицы", "cyrillic psili pneumata"],
+		symbolClass: "Diacritic Mark",
+	},
+	;
 	;
 	; ? Шпации
 	"space", {
@@ -2663,8 +2711,9 @@ MapInsert(Characters,
 	"section", {
 		unicode: "{U+00A7}", LaTeX: "\S",
 		tags: ["section", "параграф"],
-		group: [["Special Characters", "Special Fast Secondary"], ["s", "ы"]],
+		group: [["Special Characters", "Special Fast Primary"], ["s", "с"]],
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "[1]",
 	},
 	"noequals", {
 		unicode: "{U+2260}",
@@ -6496,7 +6545,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_s_let_zhe_diaeresis", { letter: "ж",
 		unicode: "{U+04DD}",
@@ -6504,7 +6553,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_c_let_zhe_descender", { letter: "ж",
 		unicode: "{U+0496}",
@@ -6528,7 +6577,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_s_let_z_diaeresis", { letter: "з",
 		unicode: "{U+04DF}",
@@ -6536,7 +6585,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_c_let_z_descender", { letter: "з",
 		unicode: "{U+0498}",
@@ -6554,13 +6603,41 @@ MapInsert(Characters,
 		alt_on_fast_keys: "<! $",
 		recipe: "$" GetChar("arrow_down"),
 	},
+	"cyr_c_let_i_breve", { letter: "и",
+		unicode: "{U+0419}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		recipe: "$" GetChar("breve"),
+	},
+	"cyr_s_let_i_breve", { letter: "и",
+		unicode: "{U+0439}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		recipe: "$" GetChar("breve"),
+	},
+	"cyr_c_let_i_breve_tail", {
+		unicode: "{U+048A}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ [Й]",
+		recipe: ["И" GetChar("breve", "arrow_leftdown"), "Й" GetChar("arrow_leftdown")],
+	},
+	"cyr_s_let_i_breve_tail", {
+		unicode: "{U+048B}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ [й]",
+		recipe: ["и" GetChar("breve", "arrow_leftdown"), "й" GetChar("arrow_leftdown")],
+	},
 	"cyr_c_let_i_diaeresis", { letter: "и",
 		unicode: "{U+04E4}",
 		titlesAlt: True,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_s_let_i_diaeresis", { letter: "и",
 		unicode: "{U+04E5}",
@@ -6568,7 +6645,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_c_let_i_macron", { letter: "и",
 		unicode: "{U+04E2}",
@@ -6634,6 +6711,50 @@ MapInsert(Characters,
 		alt_on_fast_keys: "<! $",
 		recipe: "$" GetChar("arrow_down"),
 	},
+	"cyr_c_let_l_tail", { letter: "л",
+		unicode: "{U+04C5}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ $",
+		recipe: "$" GetChar("arrow_leftdown"),
+	},
+	"cyr_s_let_l_tail", { letter: "л",
+		unicode: "{U+04C6}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ $",
+		recipe: "$" GetChar("arrow_leftdown"),
+	},
+	"cyr_c_let_m_tail", { letter: "м",
+		unicode: "{U+04CD}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ $",
+		recipe: "$" GetChar("arrow_leftdown"),
+	},
+	"cyr_s_let_m_tail", { letter: "м",
+		unicode: "{U+04CE}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ $",
+		recipe: "$" GetChar("arrow_leftdown"),
+	},
+	"cyr_c_let_soft_em", { letter: "м",
+		unicode: "{U+A666}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		recipe: "$" GetChar("cyr_com_palatalization"),
+	},
+	"cyr_s_let_soft_em", { letter: "м",
+		unicode: "{U+A667}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		recipe: "$" GetChar("cyr_com_palatalization"),
+	},
 	"cyr_c_let_n_descender", { letter: "н",
 		unicode: "{U+04A2}",
 		titlesAlt: True,
@@ -6650,13 +6771,29 @@ MapInsert(Characters,
 		alt_on_fast_keys: "<! $",
 		recipe: "$" GetChar("arrow_down"),
 	},
+	"cyr_c_let_n_tail", { letter: "н",
+		unicode: "{U+04C9}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ $",
+		recipe: "$" GetChar("arrow_leftdown"),
+	},
+	"cyr_s_let_n_tail", { letter: "н",
+		unicode: "{U+04CA}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<!>+ $",
+		recipe: "$" GetChar("arrow_leftdown"),
+	},
 	"cyr_c_let_o_diaeresis", { letter: "о",
 		unicode: "{U+04E6}",
 		titlesAlt: True,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_s_let_o_diaeresis", { letter: "о",
 		unicode: "{U+04E7}",
@@ -6664,7 +6801,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_c_let_p_descender", { letter: "п",
 		unicode: "{U+0524}",
@@ -6830,7 +6967,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "$",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_s_let_ch_diaeresis", { letter: "ч",
 		unicode: "{U+04F5}",
@@ -6838,7 +6975,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "$",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_c_let_yery_diaeresis", { letter: "ы",
 		unicode: "{U+04F8}",
@@ -6846,7 +6983,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_s_let_yery_diaeresis", { letter: "ы",
 		unicode: "{U+04F9}",
@@ -6854,7 +6991,23 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
-		recipe: "$" GetChar("breve"),
+		recipe: "$" GetChar("diaeresis"),
+	},
+	"cyr_c_let_ye_diaeresis", { letter: "Э",
+		unicode: "{U+04EC}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ $",
+		recipe: "$" GetChar("diaeresis"),
+	},
+	"cyr_s_let_ye_diaeresis", { letter: "Э",
+		unicode: "{U+04ED}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ $",
+		recipe: "$" GetChar("diaeresis"),
 	},
 	"cyr_c_let_dzhe", {
 		unicode: "{U+040F}",
@@ -7283,18 +7436,18 @@ MapInsert(Characters,
 	"cyr_c_let_schwa_diaeresis", {
 		unicode: "{U+04DA}",
 		titlesAlt: True,
-		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Э"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
-		modifier: LeftShift,
+		alt_on_fast_keys: "<+>+ [Э]",
 		tags: ["прописная буква Шва с диерезисом кириллицы", "cyrillic capital letter Schwa with diaeresis"],
 		recipe: ["Е" GetChar("arrow_left_circle", "diaeresis"), Chr(0x04D8) GetChar("diaeresis")],
 	},
 	"cyr_s_let_schwa_diaeresis", {
 		unicode: "{U+04DB}",
 		titlesAlt: True,
-		group: [["Cyrillic Letters", "Cyrillic Secondary"], "э"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
-		modifier: LeftShift,
+		alt_on_fast_keys: "<+>+ [э]",
 		tags: ["строчная буква шва с диерезисом кириллицы", "cyrillic small letter schwa with diaeresis"],
 		recipe: ["e" GetChar("arrow_left_circle", "diaeresis"), Chr(0x04D9) GetChar("diaeresis")],
 	},
@@ -7333,6 +7486,25 @@ MapInsert(Characters,
 		alt_on_fast_keys: ">+ [ы]",
 		tags: ["строчная буква древняя ы кириллицы", "ы с твёрдым знаком кириллицы", "cyrillic small letter yeru with back yer"],
 		recipe: "ъі",
+	},
+	"cyr_c_let_semiyeri", {
+		unicode: "{U+048C}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "[Ь]",
+		tags: ["прописная буква Полумягкий знак кириллицы", "cyrillic capital letter Semisoft sign"],
+		recipe: "Ь" GetChar("stroke_short"),
+	},
+	"cyr_s_let_semiyeri", {
+		unicode: "{U+048D}",
+		modifierForm: "{U+1E06C}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "[ь]",
+		tags: ["строчная буква полумягкий знак кириллицы", "cyrillic small letter semisoft sign"],
+		recipe: "ь" GetChar("stroke_short"),
 	},
 	"cyr_c_let_yn", {
 		unicode: "{U+A65E}",
@@ -8059,52 +8231,6 @@ MapInsert(Characters,
 		tags: ["строчная треугольная a глаголицы", "small letter trokutasti a glagolitic"],
 	},
 	;
-	"cyr_com_vzmet", {
-		unicode: "{U+A66F}",
-		group: [["Diacritics Primary", "Cyrillic Diacritics"], CtrlD],
-		alt_layout: "<^<! [в]",
-		tags: ["взмет кириллицы", "cyrillic vzmet"],
-		symbolClass: "Diacritic Mark",
-	},
-	"cyr_com_titlo", {
-		unicode: "{U+0483}",
-		group: [["Diacritics Primary", "Cyrillic Diacritics"], ["n", "т"]],
-		alt_layout: "<^<! [т]",
-		tags: ["титло кириллицы", "cyrillic titlo"],
-		symbolClass: "Diacritic Mark",
-	},
-	"cyr_com_palatalization", {
-		unicode: "{U+0484}",
-		group: [["Diacritics Tertiary", "Cyrillic Diacritics"], ["g", "п"]],
-		alt_layout: "<^<! [п]",
-		tags: ["палатализация кириллицы", "cyrillic palatalization"],
-		symbolClass: "Diacritic Mark",
-	},
-	"cyr_com_pokrytie", {
-		unicode: "{U+0487}",
-		group: [["Diacritics Tertiary", "Cyrillic Diacritics"], ["G", "П"]],
-		alt_layout: "<^<!<+ [g][п]",
-		tags: ["покрытие кириллицы", "cyrillic pokrytie"],
-		symbolClass: "Diacritic Mark",
-	},
-	"cyr_com_dasia_pneumata", {
-		unicode: "{U+0485}",
-		group: [["Diacritics Quatemary", "Cyrillic Diacritics", "Diacritics Fast Primary"], ["g", "п"]],
-		show_on_fast_keys: True,
-		alt_on_fast_keys: ">+ [g][п]",
-		alt_layout: "<^<!>+ [п]",
-		tags: ["густое придыхание кириллицы", "cyrillic dasia pneumata"],
-		symbolClass: "Diacritic Mark",
-	},
-	"cyr_com_psili_pneumata", {
-		unicode: "{U+0486}",
-		group: [["Diacritics Quatemary", "Cyrillic Diacritics", "Diacritics Fast Primary"], ["G", "П"]],
-		show_on_fast_keys: True,
-		alt_on_fast_keys: "<+>+ [п]",
-		alt_layout: "<^<!<+>+ [п]",
-		tags: ["тонкое придыхание кириллицы", "cyrillic psili pneumata"],
-		symbolClass: "Diacritic Mark",
-	},
 	;
 	;
 	"futhark_ansuz", {
@@ -10676,6 +10802,55 @@ MapInsert(Characters,
 	},
 )
 
+CustomComposeFile := WorkingDir "\CustomCompose.ini"
+if !FileExist(CustomComposeFile) {
+	IniWrite("Символ кандзи «Ёси»", CustomComposeFile, "kanji_yoshi", "name")
+	IniWrite("ёси", CustomComposeFile, "kanji_yoshi", "recipe")
+	IniWrite(Chr(0x7FA9), CustomComposeFile, "kanji_yoshi", "result")
+}
+
+FillWithCustomRecipes() {
+	try {
+		ComposesFile := FileRead(CustomComposeFile, "UTF-8")
+		Sections := []
+
+		for line in StrSplit(ComposesFile, "`n") {
+			if RegExMatch(line, "^\[(.*)\]$", &match) {
+				Sections.Push(match[1])
+			}
+		}
+
+		for section in Sections {
+			try {
+				RecipeTitle := IniRead(CustomComposeFile, section, "name")
+				Recipe := IniRead(CustomComposeFile, section, "recipe")
+				RecipeResult := IniRead(CustomComposeFile, section, "result")
+
+				RefinedResult := []
+				for k, char in StrSplit(RecipeResult) {
+					RefinedResult.Push("{U+" GetCharacterUnicode(char) "}")
+				}
+
+				MapInsert(Characters,
+					section, {
+						unicode: RefinedResult[1],
+						uniSequence: RefinedResult,
+						titles: Map("ru", RecipeTitle, "en", RecipeTitle),
+						recipe: Recipe,
+						group: ["Custom Composes"],
+					}
+				)
+			} catch {
+				continue
+			}
+		}
+	} catch {
+		return
+	}
+}
+
+FillWithCustomRecipes()
+
 ReplaceModifierKeys(Input) {
 	Output := Input
 	if IsObject(Output) {
@@ -10771,6 +10946,7 @@ ProcessMapAfter() {
 		"flourish", "flourish", "завитком",
 		"notch", "notch", "бороздой",
 		"descender", "descender", "нижним выносным элементом",
+		"tail", "tail", "хвостиком",
 		"upturn", "upturn", "подъёмом",
 		"halfleft", "half", "половинная",
 		"halfright", "turned half", "перевёрнутая половинная",
@@ -12799,6 +12975,7 @@ SwitchLanguage(LanguageCode) {
 	ManageTrayItems()
 }
 
+AlphabetCoverage := ["pl", "ro", "es"]
 Constructor() {
 	CheckUpdate()
 	ManageTrayItems()
@@ -12929,6 +13106,7 @@ Constructor() {
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, "Recipes")
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, "Recipes")
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Custom Composes", ReadLocale("symbol_custom_compose"), True, "Recipes")
 
 	DSLContent["BindList"].TabFastKeys := []
 
@@ -13177,7 +13355,11 @@ Constructor() {
 	Command_tp_html := CommandsTree.Add(ReadLocale("func_label_tp_html"), Command_textprocessing)
 	Command_tp_unicode := CommandsTree.Add(ReadLocale("func_label_tp_unicode"), Command_textprocessing)
 	Command_lcoverage := CommandsTree.Add(ReadLocale("func_label_coverage"))
-	Command_lro := CommandsTree.Add(ReadLocale("func_label_coverage_ro"), Command_lcoverage)
+
+
+	for coverage in AlphabetCoverage {
+		CommandsTree.Add(ReadLocale("func_label_coverage_" coverage), Command_lcoverage)
+	}
 
 
 	DSLPadGUI.SetFont("s9")
@@ -13839,7 +14021,6 @@ ChangeQWERTY(CB) {
 	RegisterLayout(CB.Text)
 }
 
-
 TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 	if !Item {
 		return
@@ -13878,14 +14059,24 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_tp_html",
 		"func_label_tp_unicode",
 		"func_label_coverage",
-		"func_label_coverage_ro",
 	]
+
+	for coverage in AlphabetCoverage {
+		LabelValidator.Push("func_label_coverage_" coverage)
+	}
+
 	SelectedLabel := TV.GetText(Item)
 
 	for label in LabelValidator
 	{
-		if (ReadLocale(label) = SelectedLabel)
+		if (ReadLocale(label) = SelectedLabel) {
 			TargetTextBox.Text := ReadLocale(label . "_description")
+			if InStr(label, "coverage_") {
+				TargetTextBox.SetFont("s16", FontFace["serif"].name)
+			} else {
+				TargetTextBox.SetFont("s10", "Segoe UI")
+			}
+		}
 	}
 
 }
@@ -14669,8 +14860,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		])
 		SlotModdedSpecials := Map(
 			"D", Map("Flat:<!", "degree"),
-			"S", Map("Flat:<^>!", "section"),
-			"1", Map("Flat:<^>!", "inverted_exclamation", "Flat:<^>!<+", "double_exclamation_question", "Flat:<^>!>+", "double_exclamation", "Caps:<^>!<+>+", ["interrobang_inverted", "interrobang"]),
+			"S", Map(),
+			"1", Map("Flat:<!", "section", "Flat:<^>!", "inverted_exclamation", "Flat:<^>!<+", "double_exclamation_question", "Flat:<^>!>+", "double_exclamation", "Caps:<^>!<+>+", ["interrobang_inverted", "interrobang"]),
 			"2", Map("Caps:<^>!", ["registered", "copyright"], "Caps:<^>!<+", ["servicemark", "trademark"]),
 			"3", Map("Flat:<^>!", "prime_single", "Flat:<^>!>+", "prime_double", "Flat:<^>!<+", "prime_triple", "Flat:<^>!<+>+", "prime_quadruple", "Flat:<!", "prime_reversed_single", "Flat:<!>+", "prime_reversed_double", "Flat:<!<+", "prime_reversed_triple"),
 			"4", Map("Flat:<^>!", "division"),
@@ -14706,9 +14897,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_p_descender", "cyr_s_let_p_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["G"]),
 			["cyr_c_let_omega", "cyr_s_let_omega"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["J"]),
 			["cyr_c_let_o_diaeresis", "cyr_s_let_o_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["J"]),
+			["cyr_c_let_semiyeri", "cyr_s_let_semiyeri"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["M"]),
 			["cyr_c_let_t_descender", "cyr_s_let_t_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["N"]),
 			["cyr_c_let_lje", "cyr_s_let_lje"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["K"]),
 			["cyr_c_let_l_descender", "cyr_s_let_l_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["K"]),
+			["cyr_c_let_l_tail", "cyr_s_let_l_tail"], MapMerge(GetModifiers("<^>!<!>+"), KeySeqSlot["K"]),
 			["cyr_c_let_palochka", "cyr_s_let_palochka"], MapMerge(GetModifiers("<^>!<!<+"), KeySeqSlot["K"]),
 			["cyr_c_let_yat", "cyr_s_let_yat"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["T"]),
 			["cyr_c_let_e_breve", "cyr_s_let_e_breve"], MapMerge(GetModifiers("<!"), KeySeqSlot["T"]),
@@ -14717,11 +14910,13 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_g_upturn", "cyr_s_let_g_upturn"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["U"]),
 			["cyr_c_let_g_stroke_short", "cyr_s_let_g_stroke_short"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["U"]),
 			["cyr_c_let_g_descender", "cyr_s_let_g_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["U"]),
+			["cyr_c_let_m_tail", "cyr_s_let_m_tail"], MapMerge(GetModifiers("<^>!<!>+"), KeySeqSlot["V"]),
 			["cyr_c_let_dzelo", "cyr_s_let_dzelo"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["P"]),
 			["cyr_c_let_z_diaeresis", "cyr_s_let_z_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["P"]),
 			["cyr_c_let_z_descender", "cyr_s_let_z_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["P"]),
 			["cyr_c_let_yi", "cyr_s_let_yi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Q"]),
 			["cyr_c_let_j", "cyr_s_let_j"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["Q"]),
+			["cyr_c_let_i_breve_tail", "cyr_s_let_i_breve_tail"], MapMerge(GetModifiers("<^>!<!>+"), KeySeqSlot["Q"]),
 			["cyr_c_let_ksi", "cyr_s_let_ksi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["R"]),
 			["cyr_c_let_k_descender", "cyr_s_let_k_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["R"]),
 			["cyr_c_let_k_acute", "cyr_s_let_k_acute"], MapMerge(GetModifiers("<!"), KeySeqSlot["R"]),
@@ -14733,6 +14928,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_djerv", "cyr_s_let_djerv"], MapMerge(GetModifiers("<^>!<!<+"), KeySeqSlot["X"]),
 			["cyr_c_let_nje", "cyr_s_let_nje"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Y"]),
 			["cyr_c_let_n_descender", "cyr_s_let_n_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["Y"]),
+			["cyr_c_let_n_tail", "cyr_s_let_n_tail"], MapMerge(GetModifiers("<^>!<!>+"), KeySeqSlot["Y"]),
 			["cyr_c_let_dzhe", "cyr_s_let_dzhe"], MapMerge(GetModifiers("<^>!"), KeySeqSlot[";"]),
 			["cyr_c_let_zhe_breve", "cyr_s_let_zhe_breve"], MapMerge(GetModifiers("<!"), KeySeqSlot[";"]),
 			["cyr_c_let_zhe_diaeresis", "cyr_s_let_zhe_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot[";"]),
@@ -14740,7 +14936,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_dje", "cyr_s_let_dje"], MapMerge(GetModifiers("<^>!>+"), KeySeqSlot[";"]),
 			["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["'"]),
 			["cyr_c_let_schwa", "cyr_s_let_schwa"], MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["'"]),
-			["cyr_c_let_schwa_diaeresis", "cyr_s_let_schwa_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["'"]),
+			["cyr_c_let_ye_diaeresis", "cyr_s_let_ye_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["'"]),
+			["cyr_c_let_schwa_diaeresis", "cyr_s_let_schwa_diaeresis"], MapMerge(GetModifiers("<^>!<+>+"), KeySeqSlot["'"]),
 			["cyr_c_let_shha", "cyr_s_let_shha"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["["]),
 			["cyr_c_let_h_descender", "cyr_s_let_h_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["["]),
 			["cyr_c_let_u_straight", "cyr_s_let_u_straight"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["]"]),

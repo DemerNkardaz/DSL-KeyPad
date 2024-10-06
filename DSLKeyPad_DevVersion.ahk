@@ -2711,8 +2711,9 @@ MapInsert(Characters,
 	"section", {
 		unicode: "{U+00A7}", LaTeX: "\S",
 		tags: ["section", "параграф"],
-		group: [["Special Characters", "Special Fast Secondary"], ["s", "ы"]],
+		group: [["Special Characters", "Special Fast Primary"], ["s", "с"]],
 		show_on_fast_keys: True,
+		alt_on_fast_keys: "[1]",
 	},
 	"noequals", {
 		unicode: "{U+2260}",
@@ -10801,6 +10802,55 @@ MapInsert(Characters,
 	},
 )
 
+CustomComposeFile := WorkingDir "\CustomCompose.ini"
+if !FileExist(CustomComposeFile) {
+	IniWrite("Символ кандзи «Ёси»", CustomComposeFile, "kanji_yoshi", "name")
+	IniWrite("ёси", CustomComposeFile, "kanji_yoshi", "recipe")
+	IniWrite(Chr(0x7FA9), CustomComposeFile, "kanji_yoshi", "result")
+}
+
+FillWithCustomRecipes() {
+	try {
+		ComposesFile := FileRead(CustomComposeFile, "UTF-8")
+		Sections := []
+
+		for line in StrSplit(ComposesFile, "`n") {
+			if RegExMatch(line, "^\[(.*)\]$", &match) {
+				Sections.Push(match[1])
+			}
+		}
+
+		for section in Sections {
+			try {
+				RecipeTitle := IniRead(CustomComposeFile, section, "name")
+				Recipe := IniRead(CustomComposeFile, section, "recipe")
+				RecipeResult := IniRead(CustomComposeFile, section, "result")
+
+				RefinedResult := []
+				for k, char in StrSplit(RecipeResult) {
+					RefinedResult.Push("{U+" GetCharacterUnicode(char) "}")
+				}
+
+				MapInsert(Characters,
+					section, {
+						unicode: RefinedResult[1],
+						uniSequence: RefinedResult,
+						titles: Map("ru", RecipeTitle, "en", RecipeTitle),
+						recipe: Recipe,
+						group: ["Custom Composes"],
+					}
+				)
+			} catch {
+				continue
+			}
+		}
+	} catch {
+		return
+	}
+}
+
+FillWithCustomRecipes()
+
 ReplaceModifierKeys(Input) {
 	Output := Input
 	if IsObject(Output) {
@@ -13056,6 +13106,7 @@ Constructor() {
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, "Recipes")
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, "Recipes")
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Custom Composes", ReadLocale("symbol_custom_compose"), True, "Recipes")
 
 	DSLContent["BindList"].TabFastKeys := []
 
@@ -14809,8 +14860,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		])
 		SlotModdedSpecials := Map(
 			"D", Map("Flat:<!", "degree"),
-			"S", Map("Flat:<^>!", "section"),
-			"1", Map("Flat:<^>!", "inverted_exclamation", "Flat:<^>!<+", "double_exclamation_question", "Flat:<^>!>+", "double_exclamation", "Caps:<^>!<+>+", ["interrobang_inverted", "interrobang"]),
+			"S", Map(),
+			"1", Map("Flat:<!", "section", "Flat:<^>!", "inverted_exclamation", "Flat:<^>!<+", "double_exclamation_question", "Flat:<^>!>+", "double_exclamation", "Caps:<^>!<+>+", ["interrobang_inverted", "interrobang"]),
 			"2", Map("Caps:<^>!", ["registered", "copyright"], "Caps:<^>!<+", ["servicemark", "trademark"]),
 			"3", Map("Flat:<^>!", "prime_single", "Flat:<^>!>+", "prime_double", "Flat:<^>!<+", "prime_triple", "Flat:<^>!<+>+", "prime_quadruple", "Flat:<!", "prime_reversed_single", "Flat:<!>+", "prime_reversed_double", "Flat:<!<+", "prime_reversed_triple"),
 			"4", Map("Flat:<^>!", "division"),
