@@ -10797,12 +10797,26 @@ MapInsert(Characters,
 		alt_layout: "c*<+ [a-z]",
 		symbolAlt: "A-Z",
 	},
+	"ipa_combining_mode", {
+		unicode: "{U+0041}", html: "N/A",
+		uniSequence: ["{U+25CC}", "{U+0363}", "{U+25CC}", "{U+1DE8}", "{U+25CC}", "{U+0369}", "{U+25CC}", "{U+1DF1}"],
+		group: ["IPA"],
+		alt_layout: "RAlt F2",
+		symbolAlt: GetChar("dotted_circle") Chr(0x0363) "-" GetChar("dotted_circle") Chr(0x1DE6),
+	},
 	"ipa_modifiers_mode", {
 		unicode: "{U+0041}", html: "N/A",
 		uniSequence: ["{U+02B0}", "{U+02B1}", "{U+02B2}", "{U+02B3}", "{U+02B7}", "{U+02B8}"],
 		group: ["IPA"],
-		alt_layout: "RShift×2",
+		alt_layout: "RAlt F3",
 		symbolAlt: Chr(0x02B0) "-" Chr(0x02B8),
+	},
+	"ipa_subscript_mode", {
+		unicode: "{U+0041}", html: "N/A",
+		uniSequence: ["{U+2090}", "{U+2091}", "{U+2095}", "{U+2C7C}", "{U+2096}", "{U+2097}"],
+		group: ["IPA"],
+		alt_layout: "RAlt RShift F3",
+		symbolAlt: Chr(0x2090) "-" Chr(0x2095),
 	},
 )
 
