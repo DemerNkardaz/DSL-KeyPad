@@ -137,17 +137,20 @@ FastKeysIsActive := False
 SkipGroupMessage := False
 GlagoFutharkActive := False
 CombiningEnabled := False
+ModifiersEnabled := False
+SubscriptCharsEnabled := False
 DisabledAllKeys := False
 ActiveScriptName := ""
 PreviousScriptName := ""
 InputMode := "Default"
-LaTeXMode := "common"
+LaTeXMode := "Default"
 
 DefaultConfig := [
 	["Settings", "FastKeysIsActive", "False"],
 	["Settings", "SkipGroupMessage", "False"],
 	["Settings", "InputMode", "Default"],
 	["Settings", "ScriptInput", "Default"],
+	["Settings", "LaTeXInput", "Default"],
 	["Settings", "UserLanguage", ""],
 	["Settings", "LatinLayout", "QWERTY"],
 	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
@@ -170,7 +173,7 @@ if FileExist(ConfigFile) {
 	isFastKeysEnabled := IniRead(ConfigFile, "Settings", "FastKeysIsActive", "False")
 	isSkipGroupMessage := IniRead(ConfigFile, "Settings", "SkipGroupMessage", "False")
 	InputMode := IniRead(ConfigFile, "Settings", "InputMode", "Default")
-	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXMode", "common")
+	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
 
 	FastKeysIsActive := (isFastKeysEnabled = "True")
 	SkipGroupMessage := (isSkipGroupMessage = "True")
@@ -933,7 +936,7 @@ LayoutsPresets := Map(
 	),
 )
 
-RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY") {
+RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY", ForceApply := False) {
 	global DisabledAllKeys, ActiveScriptName
 
 	IsLatin := False
@@ -972,7 +975,7 @@ RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY") {
 
 		UnregisterKeysLayout()
 
-		if (IsLatin && LayoutName != "QWERTY") || (IsCyrillic && LayoutName != "ЙЦУКЕН") || (IsLatin && ActiveCyrillic != "ЙЦУКЕН") || (IsCyrillic && ActiveLatin != "QWERTY") {
+		if (IsLatin && LayoutName != "QWERTY") || (IsCyrillic && LayoutName != "ЙЦУКЕН") || (IsLatin && ActiveCyrillic != "ЙЦУКЕН") || (IsCyrillic && ActiveLatin != "QWERTY") || ForceApply {
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"), True)
 		}
 
@@ -1289,6 +1292,12 @@ GetMapCount(MapObj, SortGroups := "") {
 				keyCount--
 			}
 			if HasProp(value, "combiningForm") {
+				keyCount++
+			}
+			if HasProp(value, "modifierForm") {
+				keyCount++
+			}
+			if HasProp(value, "subscriptForm") {
 				keyCount++
 			}
 		}
@@ -3240,6 +3249,7 @@ MapInsert(Characters,
 	},
 	"lat_c_lig_ae", {
 		unicode: "{U+00C6}",
+		modifierForm: "{U+1D2D}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: ["!ae", "лигатура AE", "ligature AE"],
@@ -3247,6 +3257,8 @@ MapInsert(Characters,
 	},
 	"lat_s_lig_ae", {
 		unicode: "{U+00E6}",
+		combiningForm: "{U+1DD4}",
+		modifierForm: "{U+10783}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: [".ae", "лигатура ae", "ligature ae"],
@@ -3288,6 +3300,7 @@ MapInsert(Characters,
 	},
 	"lat_s_lig_ao", {
 		unicode: "{U+A735}",
+		combiningForm: "{U+1DD5}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: [".ao", "лигатура ao", "ligature ao"],
@@ -3309,6 +3322,7 @@ MapInsert(Characters,
 	},
 	"lat_c_lig_av", {
 		unicode: "{U+A738}",
+		combiningForm: "{U+1DD6}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: ["!av", "лигатура AV", "ligature AV"],
@@ -3690,6 +3704,7 @@ MapInsert(Characters,
 	},
 	"lat_s_let_d_insular", {
 		unicode: "{U+A77A}",
+		combiningForm: "{U+1DD8}",
 		titlesAlt: True,
 		group: ["Latin Extended"],
 		tags: ["строчная замкнутая d", "small insular d"],
@@ -4014,6 +4029,7 @@ MapInsert(Characters,
 	},
 	"lat_s_let_a_diaeresis", {
 		unicode: "{U+00E4}",
+		combiningForm: "{U+1DF2}",
 		titlesAlt: True,
 		group: [["Latin Accented", "Latin Accented Secondary"]],
 		show_on_fast_keys: True,
@@ -4343,6 +4359,7 @@ MapInsert(Characters,
 	},
 	"lat_s_let_c_cedilla", {
 		unicode: "{U+00E7}",
+		combiningForm: "{U+1DD7}",
 		titlesAlt: True,
 		group: [["Latin Accented", "Latin Accented Secondary"]],
 		show_on_fast_keys: True,
@@ -4528,6 +4545,8 @@ MapInsert(Characters,
 	},
 	"lat_s_let_d_eth", {
 		unicode: "{U+00F0}",
+		combiningForm: "{U+1DD9}",
+		modifierForm: "{U+1D9E}",
 		titlesAlt: True,
 		group: [["Latin Accented", "Latin Accented Secondary", "IPA"]],
 		tags: ["строчная буква эт", "small letter eth", "звонкий зубной щелевой согласный", "voiced dental fricative"],
@@ -5324,7 +5343,7 @@ MapInsert(Characters,
 		unicode: "{U+2C68}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: "h" . GetChar("arrow_down"),
+		recipe: "h" GetChar("arrow_down"),
 	},
 	"lat_c_let_h_common_hook", {
 		unicode: "{U+A7AA}",
@@ -5930,9 +5949,16 @@ MapInsert(Characters,
 	},
 	"lat_s_let_l_belt", {
 		unicode: "{U+026C}",
+		modifierForm: "{U+1079B}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("arrow_right_ushaped"),
+	},
+	"lat_s_let_l_belt_palatal_hook", {
+		unicode: "{U+1DF13}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: "$" GetChar("arrow_right_ushaped", "palatal_hook_below"),
 	},
 	"lat_s_let_l_belt_retroflex_hook", {
 		unicode: "{U+A78E}",
@@ -6064,7 +6090,7 @@ MapInsert(Characters,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("macron_below"),
 	},
-	"lat_s_let_l_tilde_overlay", {
+	"lat_c_let_l_tilde_overlay", {
 		unicode: "{U+2C62}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
@@ -6078,6 +6104,7 @@ MapInsert(Characters,
 	},
 	"lat_s_let_l_tilde_overlay_double", {
 		unicode: "{U+AB38}",
+		combiningForm: "{U+1DEC}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("tilde_overlay", "tilde_overlay"),
@@ -6102,7 +6129,7 @@ MapInsert(Characters,
 		unicode: "{U+A656}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["!йа", "прописная буква А йотированное", "cyrillic capital letter A iotified"],
+		tags: ["!йа", "прописная буква А йотированное кириллицы", "cyrillic capital letter A iotified"],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ [Я]",
 		recipe: "ІА",
@@ -6110,9 +6137,10 @@ MapInsert(Characters,
 	},
 	"cyr_s_let_a_iotified", {
 		unicode: "{U+A657}",
+		combiningForm: "{U+2DFC}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: [".йа", "строчная буква А йотированное", "cyrillic capital letter A iotified"],
+		tags: [".йа", "строчная буква А йотированное кириллицы", "cyrillic capital letter A iotified"],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ [я]",
 		recipe: "іа",
@@ -6122,29 +6150,31 @@ MapInsert(Characters,
 		unicode: "{U+0464}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["!йэ", "!ie", "прописная буква Е йотированное", "cyrillic capital letter E iotified"],
+		tags: ["!йэ", "!ie", "прописная буква Е йотированное кириллицы", "cyrillic capital letter E iotified"],
 		recipe: ["ІЕ", "ІЄ"],
 	},
 	"cyr_s_let_e_iotified", {
 		unicode: "{U+0465}",
+		combiningForm: "{U+A69F}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: [".йэ", ".ie", "строчная буква е йотированное", "cyrillic small letter e iotified"],
+		tags: [".йэ", ".ie", "строчная буква е йотированное кириллицы", "cyrillic small letter e iotified"],
 		recipe: ["іе", "іє"],
 	},
 	"cyr_c_let_yus_big", {
 		unicode: "{U+046A}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters", "У"],
-		tags: ["!юсб", "!yusb", "прописная буква Юс большой", "cyrillic capital letter big Yus"],
+		tags: ["!юсб", "!yusb", "прописная буква Юс большой кириллицы", "cyrillic capital letter big Yus"],
 		show_on_fast_keys: True,
 		recipe: "УЖ",
 	},
 	"cyr_s_let_yus_big", {
 		unicode: "{U+046B}",
+		combiningForm: "{U+2DFE}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters", "у"],
-		tags: [".юсб", ".yusb", "строчная буква юс большой", "cyrillic small letter big yus"],
+		tags: [".юсб", ".yusb", "строчная буква юс большой кириллицы", "cyrillic small letter big yus"],
 		show_on_fast_keys: True,
 		recipe: "уж",
 	},
@@ -6152,29 +6182,31 @@ MapInsert(Characters,
 		unicode: "{U+046C}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["!йюсб", "!iyusb", "прописная буква Юс большой йотированный", "cyrillic capital letter big Yus iotified"],
+		tags: ["!йюсб", "!iyusb", "прописная буква Юс большой йотированный кириллицы", "cyrillic capital letter big Yus iotified"],
 		recipe: ["ІУЖ", "І" . Chr(0x046A)],
 	},
 	"cyr_s_let_yus_big_iotified", {
 		unicode: "{U+046D}",
+		combiningForm: "{U+2DFF}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: [".йюсб", ".iyusb", "строчная буква юс большой йотированный", "cyrillic small letter big yus iotified"],
+		tags: [".йюсб", ".iyusb", "строчная буква юс большой йотированный кириллицы", "cyrillic small letter big yus iotified"],
 		recipe: ["іуж", "і" . Chr(0x046B)],
 	},
 	"cyr_c_let_yus_little", {
 		unicode: "{U+0466}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters", "Я"],
-		tags: ["!юсм", "!yusm", "прописная буква Юс малый", "cyrillic capital letter little Yus"],
+		tags: ["!юсм", "!yusm", "прописная буква Юс малый кириллицы", "cyrillic capital letter little Yus"],
 		show_on_fast_keys: True,
 		recipe: "АТ",
 	},
 	"cyr_s_let_yus_little", {
 		unicode: "{U+0467}",
+		combiningForm: "{U+2DFD}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters", "я"],
-		tags: [".юсм", ".yusm", "строчная буква юс малый", "cyrillic small letter little yus"],
+		tags: [".юсм", ".yusm", "строчная буква юс малый кириллицы", "cyrillic small letter little yus"],
 		show_on_fast_keys: True,
 		recipe: "ат",
 	},
@@ -6182,285 +6214,729 @@ MapInsert(Characters,
 		unicode: "{U+0468}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["!йюсм", "!iyusm", "прописная буква Юс малый йотированный", "cyrillic capital letter little Yus iotified"],
+		tags: ["!йюсм", "!iyusm", "прописная буква Юс малый йотированный кириллицы", "cyrillic capital letter little Yus iotified"],
 		recipe: ["ІАТ", "І" Chr(0x0466)],
 	},
 	"cyr_s_let_yus_little_iotified", {
 		unicode: "{U+0469}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: [".йюсм", ".iyusm", "строчная буква юс малый йотированный", "cyrillic small letter little yus iotified"],
+		tags: [".йюсм", ".iyusm", "строчная буква юс малый йотированный кириллицы", "cyrillic small letter little yus iotified"],
 		recipe: ["іат", "і" Chr(0x0467)],
 	},
 	"cyr_c_let_yus_little_closed", {
 		unicode: "{U+A658}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["!юсмз", "!yusmz", "прописная буква Юс малый закрытый", "cyrillic capital letter little Yus closed"],
+		tags: ["!юсмз", "!yusmz", "прописная буква Юс малый закрытый кириллицы", "cyrillic capital letter little Yus closed"],
 		recipe: ["_АТ", "_" Chr(0x0466)],
 	},
 	"cyr_s_let_yus_little_closed", {
 		unicode: "{U+A659}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: [".юсмз", ".yusmz", "строчная буква юс малый закрытый", "cyrillic small letter little yus closed"],
+		tags: [".юсмз", ".yusmz", "строчная буква юс малый закрытый кириллицы", "cyrillic small letter little yus closed"],
 		recipe: ["_ат", "_" Chr(0x0467)],
 	},
 	"cyr_c_let_yus_little_closed_iotified", {
 		unicode: "{U+A65C}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["!йюсмз", "!iyusmz", "прописная буква Юс малый закрытый йотированный", "cyrillic capital letter little Yus closed iotified"],
+		tags: ["!йюсмз", "!iyusmz", "прописная буква Юс малый закрытый йотированный кириллицы", "cyrillic capital letter little Yus closed iotified"],
 		recipe: ["І_АТ", "І" Chr(0xA658), "І_" Chr(0x0466)],
 	},
 	"cyr_s_let_yus_little_closed_iotified", {
 		unicode: "{U+A65D}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: [".йюсмз", ".iyusmz", "строчная буква юс малый закрытый йотированный", "cyrillic small letter little yus closed iotified"],
+		tags: [".йюсмз", ".iyusmz", "строчная буква юс малый закрытый йотированный кириллицы", "cyrillic small letter little yus closed iotified"],
 		recipe: ["і_ат", "І" Chr(0xA659), "і_" Chr(0x0467)],
 	},
 	"cyr_c_let_yus_blended", {
 		unicode: "{U+A65A}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["!юсс", "!yuss", "прописная буква Юс смешанный", "cyrillic capital letter blended Yus"],
+		tags: ["!юсс", "!yuss", "прописная буква Юс смешанный кириллицы", "cyrillic capital letter blended Yus"],
 		recipe: ["УЖАТ", Chr(0x046A) . Chr(0x0466)],
 	},
 	"cyr_s_let_yus_blended", {
 		unicode: "{U+A65B}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: [".юсс", ".yuss", "строчная буква юс смешанный", "cyrillic small letter blended yus"],
+		tags: [".юсс", ".yuss", "строчная буква юс смешанный кириллицы", "cyrillic small letter blended yus"],
 		recipe: ["ужат", Chr(0x046B) . Chr(0x0467)],
 	},
 	"cyr_c_let_tse", {
 		unicode: "{U+04B4}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["прописная буква Тцэ", "cyrillic capital letter Tse cyrillic"],
+		tags: ["прописная буква Тцэ кириллицы", "cyrillic capital letter Tse cyrillic"],
 		recipe: "ТЦ",
 	},
 	"cyr_s_let_tse", {
 		unicode: "{U+04B5}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["строчная буква тцэ", "cyrillic small letter tse cyrillic"],
+		tags: ["строчная буква тцэ кириллицы", "cyrillic small letter tse cyrillic"],
 		recipe: "тц",
 	},
 	"cyr_c_let_tche", {
 		unicode: "{U+A692}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["прописная буква Тчэ", "cyrillic capital letter Tche cyrillic"],
+		tags: ["прописная буква Тчэ кириллицы", "cyrillic capital letter Tche cyrillic"],
 		recipe: "ТЧ",
 	},
 	"cyr_s_let_tche", {
 		unicode: "{U+A693}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["строчная буква тчэ", "cyrillic small letter tche cyrillic"],
+		tags: ["строчная буква тчэ кириллицы", "cyrillic small letter tche cyrillic"],
 		recipe: "тч",
 	},
 	"cyr_c_let_yat_iotified", {
 		unicode: "{U+A652}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["прописная буква Ять йотированный", "cyrillic capital letter Yat iotified"],
+		tags: ["прописная буква Ять йотированный кириллицы", "cyrillic capital letter Yat iotified"],
 		recipe: ["ІТЬ", "І" . Chr(0x0462)],
 	},
 	"cyr_s_let_yat_iotified", {
 		unicode: "{U+A653}",
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
-		tags: ["строчная буква ять йотированный", "cyrillic small letter yat iotified"],
+		tags: ["строчная буква ять йотированный кириллицы", "cyrillic small letter yat iotified"],
 		recipe: ["іть", "і" . Chr(0x0463)],
+	},
+	;
+	"cyr_c_let_a_breve", { letter: "а",
+		unicode: "{U+04D0}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
+		recipe: "$" GetChar("breve"),
+	},
+	"cyr_s_let_a_breve", { letter: "а",
+		unicode: "{U+04D1}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
+		recipe: "$" GetChar("breve"),
+	},
+	"cyr_c_let_a_diaeresis", { letter: "а",
+		unicode: "{U+04D2}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ $",
+		recipe: "$" GetChar("diaeresis"),
+	},
+	"cyr_s_let_a_diaeresis", { letter: "а",
+		unicode: "{U+04D3}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ $",
+		recipe: "$" GetChar("diaeresis"),
+	},
+	"cyr_c_let_g_acute", { letter: "г",
+		unicode: "{U+0403}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Primary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
+		recipe: "$" GetChar("acute"),
+	},
+	"cyr_s_let_g_acute", { letter: "г",
+		unicode: "{U+0453}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Primary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
+		recipe: "$" GetChar("acute"),
+	},
+	"cyr_c_let_e_grave", { letter: "е",
+		unicode: "{U+0400}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Tertiary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
+		recipe: "$" GetChar("grave"),
+	},
+	"cyr_s_let_e_grave", { letter: "е",
+		unicode: "{U+0450}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Tertiary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
+		recipe: "$" GetChar("grave"),
+	},
+	"cyr_c_let_e_diaeresis", { letter: "е",
+		unicode: "{U+0401}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		recipe: "$" GetChar("diaeresis"),
+	},
+	"cyr_s_let_e_diaeresis", { letter: "е",
+		unicode: "{U+0451}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		recipe: "$" GetChar("diaeresis"),
+	},
+	"cyr_c_let_k_acute", { letter: "к",
+		unicode: "{U+040C}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Primary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
+		recipe: "$" GetChar("acute"),
+	},
+	"cyr_s_let_k_acute", { letter: "к",
+		unicode: "{U+045C}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Primary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
+		recipe: "$" GetChar("acute"),
+	},
+	"cyr_c_let_k_descender", { letter: "к",
+		unicode: "{U+049A}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<! $",
+		recipe: "$" GetChar("arrow_down"),
+	},
+	"cyr_s_let_k_descender", { letter: "к",
+		unicode: "{U+049B}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<! $",
+		recipe: "$" GetChar("arrow_down"),
 	},
 	"cyr_c_let_dzhe", {
 		unicode: "{U+040F}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "Ж"],
-		tags: ["прописная буква Дже", "cyrillic capital letter Dzhe"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Ж"],
+		tags: ["прописная буква Дже кириллицы", "cyrillic capital letter Dzhe"],
 		show_on_fast_keys: True,
 		recipe: "ДЖ",
 	},
 	"cyr_s_let_dzhe", {
 		unicode: "{U+045F}",
+		subscriptForm: "{U+1E06A}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "ж"],
-		tags: ["строчная буква дже", "cyrillic small letter dzhe"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "ж"],
+		tags: ["строчная буква дже кириллицы", "cyrillic small letter dzhe"],
 		show_on_fast_keys: True,
 		recipe: "дж",
+	},
+	"cyr_c_let_lje", {
+		unicode: "{U+0409}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Л"],
+		tags: ["прописная буква Ле (лигатура ЛЬ) кириллицы", "cyrillic capital letter Lje"],
+		show_on_fast_keys: True,
+		recipe: "ЛЬ",
+	},
+	"cyr_s_let_lje", {
+		unicode: "{U+0459}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "л"],
+		tags: ["строчная буква ле (лигатура ль) кириллицы", "cyrillic small letter lje"],
+		show_on_fast_keys: True,
+		recipe: "ль",
+	},
+	"cyr_c_let_nje", {
+		unicode: "{U+040A}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Н"],
+		tags: ["прописная буква Не (лигатура НЬ) кириллицы", "cyrillic capital letter Nje"],
+		show_on_fast_keys: True,
+		recipe: "НЬ",
+	},
+	"cyr_s_let_nje", {
+		unicode: "{U+045A}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "н"],
+		tags: ["строчная буква не (лигатура нь) кириллицы", "cyrillic small letter nje"],
+		show_on_fast_keys: True,
+		recipe: "нь",
+	},
+	"cyr_c_let_tshe", {
+		unicode: "{U+040B}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Ч"],
+		tags: ["прописная буква Гервь кириллицы", "cyrillic capital letter Tshe"],
+		show_on_fast_keys: True,
+		recipe: ["ТЬЧ", "Т" Chr(0x04BA)],
+	},
+	"cyr_s_let_tshe", {
+		unicode: "{U+045B}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "ч"],
+		tags: ["строчная буква гервь кириллицы", "cyrillic small letter tshe"],
+		show_on_fast_keys: True,
+		recipe: ["тьч", "т" Chr(0x04BB)],
+	},
+	"cyr_c_let_djerv", {
+		unicode: "{U+A648}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Ч"],
+		tags: ["прописная буква Джье кириллицы", "cyrillic capital letter Djerv"],
+		show_on_fast_keys: True,
+		modifier: LeftAlt,
+		recipe: "ЧДЖ",
+	},
+	"cyr_s_let_djerv", {
+		unicode: "{U+A649}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "ч"],
+		tags: ["строчная буква джье кириллицы", "cyrillic small letter djerv"],
+		show_on_fast_keys: True,
+		modifier: LeftAlt,
+		recipe: "чдж",
+	},
+	"cyr_c_let_dje", {
+		unicode: "{U+0402}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Ж"],
+		tags: ["прописная буква Джье кириллицы", "cyrillic capital letter Dje"],
+		show_on_fast_keys: True,
+		modifier: RightShift,
+		recipe: "ДЬЖ",
+	},
+	"cyr_s_let_dje", {
+		unicode: "{U+0452}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "ж"],
+		tags: ["строчная буква джье кириллицы", "cyrillic small letter dje"],
+		show_on_fast_keys: True,
+		modifier: RightShift,
+		recipe: "дьж",
+	},
+	"cyr_c_let_dzelo", {
+		unicode: "{U+0405}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "З"],
+		tags: ["прописная буква Дзе (Зело) кириллицы", "cyrillic capital letter Dzelo"],
+		show_on_fast_keys: True,
+		recipe: "ДЗ",
+	},
+	"cyr_s_let_dzelo", {
+		unicode: "{U+0455}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "з"],
+		tags: ["строчная буква дзе (зело) кириллицы", "cyrillic small letter dzelo"],
+		show_on_fast_keys: True,
+		recipe: "дз",
+	},
+	"cyr_c_let_dzelo_reversed", {
+		unicode: "{U+A644}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["прописная буква обратное Дзе (Зело) кириллицы", "cyrillic capital letter reversed Dzelo"],
+		recipe: ["ДЗ" GetChar("arrow_left"), Chr(0x0405) GetChar("arrow_left")],
+	},
+	"cyr_s_let_dzelo_reversed", {
+		unicode: "{U+A645}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["строчная буква обратное дзе (зело) кириллицы", "cyrillic small letter reversed dzelo"],
+		recipe: ["дз" GetChar("arrow_left"), Chr(0x0455) GetChar("arrow_left")],
+	},
+	"cyr_c_let_shha", {
+		unicode: "{U+04BA}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Х"],
+		tags: ["прописная буква Шха кириллицы", "cyrillic capital letter Shha"],
+		show_on_fast_keys: True,
+		recipe: "ХХ",
+	},
+	"cyr_s_let_shha", {
+		unicode: "{U+04BB}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "х"],
+		tags: ["строчная буква шха кириллицы", "cyrillic small letter shha"],
+		show_on_fast_keys: True,
+		recipe: "хх",
+	},
+	"cyr_c_let_palochka", {
+		unicode: "{U+04C0}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Л"],
+		tags: ["прописная буква Палочка кириллицы", "cyrillic capital letter Palochka"],
+		show_on_fast_keys: True,
+		modifier: LeftAlt,
+	},
+	"cyr_s_let_palochka", {
+		unicode: "{U+04CF}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "л"],
+		tags: ["строчная буква палочка кириллицы", "cyrillic small letter palochka"],
+		show_on_fast_keys: True,
+		modifier: LeftAlt,
 	},
 	"cyr_c_let_i", {
 		unicode: "{U+0406}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "И"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "И"],
 		show_on_fast_keys: True,
-		tags: ["прописная буква И десятиричное", "cyrillic capital letter I"],
+		tags: ["прописная буква И десятиричное кириллицы", "cyrillic capital letter I"],
 	},
 	"cyr_s_let_i", {
 		unicode: "{U+0456}",
+		combiningForm: "{U+1E08F}",
+		modifierForm: "{U+1E04C}",
+		subscriptForm: "{U+1E068}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "и"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "и"],
 		show_on_fast_keys: True,
-		tags: ["строчная буква и десятиричное", "cyrillic small letter i"],
-	},
-	"cyr_c_let_izhitsa", {
-		unicode: "{U+0474}",
-		titlesAlt: True,
-		group: ["Cyrillic Letters", "И"],
-		modifier: LeftAlt,
-		show_on_fast_keys: True,
-		tags: ["прописная буква Ижица", "cyrillic capital letter Izhitsa"],
-	},
-	"cyr_s_let_izhitsa", {
-		unicode: "{U+0475}",
-		titlesAlt: True,
-		group: ["Cyrillic Letters", "и"],
-		modifier: LeftAlt,
-		show_on_fast_keys: True,
-		tags: ["строчная буква ижица", "cyrillic small letter izhitsa"],
+		tags: ["строчная буква и десятиричное кириллицы", "cyrillic small letter i"],
 	},
 	"cyr_c_let_yi", {
 		unicode: "{U+0407}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "Й"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Й"],
 		show_on_fast_keys: True,
-		tags: ["прописная буква ЙИ десятиричное", "cyrillic capital letter YI"],
+		tags: ["прописная буква ЙИ десятиричное кириллицы", "cyrillic capital letter YI"],
 		recipe: "І" GetChar("diaeresis"),
 	},
 	"cyr_s_let_yi", {
 		unicode: "{U+0457}",
+		combiningForm: "{U+A676}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "й"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "й"],
 		show_on_fast_keys: True,
-		tags: ["строчная буква йи десятиричное", "cyrillic small letter yi"],
+		tags: ["строчная буква йи десятиричное кириллицы", "cyrillic small letter yi"],
 		recipe: "і" GetChar("diaeresis"),
+	},
+	"cyr_c_let_iota", {
+		unicode: "{U+A646}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "И"],
+		show_on_fast_keys: True,
+		modifier: LeftAlt,
+		tags: ["прописная буква Йота кириллицы", "cyrillic capital letter Iota"],
+	},
+	"cyr_s_let_iota", {
+		unicode: "{U+A647}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "и"],
+		show_on_fast_keys: True,
+		modifier: LeftAlt,
+		tags: ["строчная буква йота кириллицы", "cyrillic small letter iota"],
+	},
+	"cyr_c_let_izhitsa", {
+		unicode: "{U+0474}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "И"],
+		modifier: LeftAlt,
+		show_on_fast_keys: True,
+		tags: ["прописная буква Ижица кириллицы", "cyrillic capital letter Izhitsa"],
+	},
+	"cyr_s_let_izhitsa", {
+		unicode: "{U+0475}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "и"],
+		modifier: LeftAlt,
+		show_on_fast_keys: True,
+		tags: ["строчная буква ижица кириллицы", "cyrillic small letter izhitsa"],
+	},
+	"cyr_c_let_izhitsa_kendema", {
+		unicode: "{U+0476}", LaTeX: "N/A",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["прописная буква Ижица с кендемой кириллицы", "cyrillic capital letter Izhitsa with kendema"],
+		recipe: Chr(0x0474) GetChar("grave_double"),
+	},
+	"cyr_s_let_izhitsa_kendema", {
+		unicode: "{U+0477}", LaTeX: "N/A",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["строчная буква ижица с кендемой кириллицы", "cyrillic small letter izhitsa with kendema"],
+		recipe: Chr(0x0475) GetChar("grave_double"),
 	},
 	"cyr_c_let_j", {
 		unicode: "{U+0408}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "Й"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Й"],
 		modifier: LeftAlt,
 		show_on_fast_keys: True,
-		tags: ["прописная буква ЙЕ", "cyrillic capital letter J"],
+		tags: ["прописная буква ЙЕ кириллицы", "cyrillic capital letter J"],
 	},
 	"cyr_s_let_j", {
 		unicode: "{U+0458}",
+		modifierForm: "{U+1E04D}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "й"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "й"],
 		modifier: LeftAlt,
 		show_on_fast_keys: True,
-		tags: ["строчная буква йе", "cyrillic small letter j"],
+		tags: ["строчная буква йе кириллицы", "cyrillic small letter j"],
 	},
 	"cyr_c_let_ksi", {
 		unicode: "{U+046E}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "К"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "К"],
 		show_on_fast_keys: True,
-		tags: ["прописная буква Кси", "cyrillic capital letter Ksi"],
+		tags: ["прописная буква Кси кириллицы", "cyrillic capital letter Ksi"],
 		recipe: "КС",
 	},
 	"cyr_s_let_ksi", {
 		unicode: "{U+046F}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "к"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "к"],
 		show_on_fast_keys: True,
-		tags: ["строчная буква кси", "cyrillic small letter ksi"],
+		tags: ["строчная буква кси кириллицы", "cyrillic small letter ksi"],
 		recipe: "кс",
 	},
 	"cyr_c_let_omega", {
 		unicode: "{U+0460}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "О"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "О"],
 		show_on_fast_keys: True,
-		tags: ["прописная буква Омега", "cyrillic capital letter Omega"],
+		tags: ["прописная буква Омега кириллицы", "cyrillic capital letter Omega"],
 	},
 	"cyr_s_let_omega", {
 		unicode: "{U+0461}",
+		combiningForm: "{U+A67B}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "о"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "о"],
 		show_on_fast_keys: True,
-		tags: ["строчная буква омега", "cyrillic small letter omega"],
+		tags: ["строчная буква омега кириллицы", "cyrillic small letter omega"],
+	},
+	"cyr_c_let_omega_titlo", {
+		unicode: "{U+047C}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["прописная буква Омега с титло кириллицы", "cyrillic capital letter Omega with titlo"],
+		recipe: Chr(0x0460) Chr(0x0483),
+	},
+	"cyr_s_let_omega_titlo", {
+		unicode: "{U+047D}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["строчная буква омега с титло кириллицы", "cyrillic small letter omega with titlo"],
+		recipe: Chr(0x0461) Chr(0x0483),
+	},
+	"cyr_c_let_ot", {
+		unicode: "{U+047E}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["прописная буква От кириллицы", "cyrillic capital letter Ot"],
+		recipe: Chr(0x0460) "Т",
+	},
+	"cyr_s_let_ot", {
+		unicode: "{U+047F}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["строчная буква от кириллицы", "cyrillic small letter ot"],
+		recipe: Chr(0x0461) "т",
+	},
+	"cyr_c_let_omega_round", {
+		unicode: "{U+047A}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["прописная буква широкая О кириллицы", "cyrillic capital letter broad On"],
+		recipe: ["О:", ".О."],
+	},
+	"cyr_s_let_omega_round", {
+		unicode: "{U+047B}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["строчная буква широкая о кириллицы", "cyrillic small letter broad on"],
+		recipe: ["о:", ".о."],
 	},
 	"cyr_c_let_psi", {
 		unicode: "{U+0470}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "П"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "П"],
 		show_on_fast_keys: True,
-		tags: ["прописная буква Пси", "cyrillic capital letter Psi"],
+		tags: ["прописная буква Пси кириллицы", "cyrillic capital letter Psi"],
 		recipe: "ПС",
 	},
 	"cyr_s_let_psi", {
 		unicode: "{U+0471}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "п"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "п"],
 		show_on_fast_keys: True,
-		tags: ["строчная буква пси", "cyrillic small letter psi"],
+		tags: ["строчная буква пси кириллицы", "cyrillic small letter psi"],
 		recipe: "пс",
+	},
+	"cyr_c_let_koppa", {
+		unicode: "{U+0480}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["прописная буква коппа кириллицы", "cyrillic capital letter Koppa"],
+		recipe: "КО",
+	},
+	"cyr_s_let_koppa", {
+		unicode: "{U+0481}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["строчная буква коппа кириллицы", "cyrillic small letter koppa"],
+		recipe: "ко",
 	},
 	"cyr_c_let_fita", {
 		unicode: "{U+0472}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "Ф"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Ф"],
 		show_on_fast_keys: True,
-		tags: ["прописная буква Фита", "cyrillic capital letter Fita"],
+		tags: ["прописная буква Фита кириллицы", "cyrillic capital letter Fita"],
 	},
 	"cyr_s_let_fita", {
 		unicode: "{U+0473}",
+		combiningForm: "{U+2DF4}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "ф"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "ф"],
 		show_on_fast_keys: True,
-		tags: ["строчная буква фита", "cyrillic small letter fita"],
+		tags: ["строчная буква фита кириллицы", "cyrillic small letter fita"],
 	},
 	"cyr_c_let_ukr_e", {
 		unicode: "{U+0404}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "Э"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Э"],
 		show_on_fast_keys: True,
-		tags: ["прописная буква Э якорное", "cyrillic capital letter E ukrainian"],
+		tags: ["прописная буква Э якорное кириллицы", "cyrillic capital letter E ukrainian"],
 	},
 	"cyr_s_let_ukr_e", {
 		unicode: "{U+0454}",
+		combiningForm: "{U+A674}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "э"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "э"],
 		show_on_fast_keys: True,
-		tags: ["строчная буква э якорное", "cyrillic small letter e ukrainian"],
+		tags: ["строчная буква э якорное кириллицы", "cyrillic small letter e ukrainian"],
+	},
+	"cyr_c_let_schwa", {
+		unicode: "{U+04D8}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Э"],
+		show_on_fast_keys: True,
+		modifier: RightShift,
+		tags: ["прописная буква Шва кириллицы", "cyrillic capital letter Schwa"],
+		recipe: "Е" GetChar("arrow_left_circle"),
+	},
+	"cyr_s_let_schwa", {
+		unicode: "{U+04D9}",
+		modifierForm: "{U+1E04B}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "э"],
+		show_on_fast_keys: True,
+		modifier: RightShift,
+		tags: ["строчная буква шва с кириллицы", "cyrillic small letter schwa"],
+		recipe: "e" GetChar("arrow_left_circle"),
+	},
+	"cyr_c_let_schwa_diaeresis", {
+		unicode: "{U+04DA}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Э"],
+		show_on_fast_keys: True,
+		modifier: LeftShift,
+		tags: ["прописная буква Шва с диерезисом кириллицы", "cyrillic capital letter Schwa with diaeresis"],
+		recipe: ["Е" GetChar("arrow_left_circle", "diaeresis"), Chr(0x04D8) GetChar("diaeresis")],
+	},
+	"cyr_s_let_schwa_diaeresis", {
+		unicode: "{U+04DB}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "э"],
+		show_on_fast_keys: True,
+		modifier: LeftShift,
+		tags: ["строчная буква шва с диерезисом кириллицы", "cyrillic small letter schwa with diaeresis"],
+		recipe: ["e" GetChar("arrow_left_circle", "diaeresis"), Chr(0x04D9) GetChar("diaeresis")],
 	},
 	"cyr_c_let_yat", {
 		unicode: "{U+0462}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "Е"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "Е"],
 		show_on_fast_keys: True,
-		tags: ["прописная буква Ять", "cyrillic capital letter Yat"],
+		tags: ["прописная буква Ять кириллицы", "cyrillic capital letter Yat"],
 		recipe: "ТЬ",
 	},
 	"cyr_s_let_yat", {
 		unicode: "{U+0463}",
+		combiningForm: "{U+2DFA}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters", "е"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "е"],
 		show_on_fast_keys: True,
-		tags: ["строчная буква ять", "cyrillic small letter yat"],
+		tags: ["строчная буква ять кириллицы", "cyrillic small letter yat"],
 		recipe: "ть",
 	},
 	"cyr_c_let_yeru_back_yer", {
 		unicode: "{U+A650}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ [Ы]",
-		tags: ["прописная буква древняя Ы", "Ы с твёрдым знаком", "cyrillic capital letter Yeru with back Yer"],
+		tags: ["прописная буква древняя Ы кириллицы", "Ы с твёрдым знаком кириллицы", "cyrillic capital letter Yeru with back Yer"],
 		recipe: "ЪІ",
 	},
 	"cyr_s_let_yeru_back_yer", {
 		unicode: "{U+A651}",
+		modifierForm: "{U+1E06C}",
 		titlesAlt: True,
-		group: ["Cyrillic Letters"],
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ [ы]",
-		tags: ["строчная буква древняя ы", "ы с твёрдым знаком", "cyrillic small letter yeru with back yer"],
+		tags: ["строчная буква древняя ы кириллицы", "ы с твёрдым знаком кириллицы", "cyrillic small letter yeru with back yer"],
 		recipe: "ъі",
+	},
+	"cyr_c_let_yn", {
+		unicode: "{U+A65E}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<! [Ы]",
+		tags: ["прописная буква валахо-молдавская Ын кириллицы" "cyrillic capital letter romanian Yn"],
+		recipe: "ІѴ",
+	},
+	"cyr_s_let_yn", {
+		unicode: "{U+A65F}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<! [ы]",
+		tags: ["строчная буква валахо-молдавская ын кириллицы", "cyrillic small letter romanian yn"],
+		recipe: "іѵ",
+	},
+	"cyr_c_dig_uk", {
+		unicode: "{U+0478}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["прописная диграф Ук кириллицы", "cyrillic capital letter digraph Uk"],
+		recipe: ["Оу", "Оѵ"],
+	},
+	"cyr_s_dig_uk", {
+		unicode: "{U+0479}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["строчная диграф ук кириллицы", "cyrillic small letter digraph uk"],
+		recipe: ["оу", "оѵ"],
+	},
+	"cyr_c_let_uk_monograph", {
+		unicode: "{U+A64A}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "У"],
+		show_on_fast_keys: True,
+		modifier: LeftAlt,
+		tags: ["прописная буква Ук кириллицы", "cyrillic capital letter monograph Uk"],
+	},
+	"cyr_s_let_uk_monograph", {
+		unicode: "{U+A64B}",
+		titlesAlt: True,
+		group: [["Cyrillic Letters", "Cyrillic Secondary"], "У"],
+		show_on_fast_keys: True,
+		modifier: LeftAlt,
+		tags: ["строчная буква ук кириллицы", "cyrillic small letter monograph uk"],
+	},
+	"cyr_s_let_uk_unblended", {
+		unicode: "{U+1C88}",
+		titlesAlt: True,
+		group: ["Cyrillic Letters"],
+		tags: ["строчная буква ук кириллицы", "cyrillic small letter unblended uk"],
+		recipe: ["о↑у", "о↑ѵ"],
 	},
 	;
 	;
@@ -7136,14 +7612,46 @@ MapInsert(Characters,
 		unicode: "{U+A66F}",
 		group: [["Diacritics Primary", "Cyrillic Diacritics"], CtrlD],
 		alt_layout: "<^<! [в]",
-		tags: ["взмет", "vzmet"],
+		tags: ["взмет кириллицы", "cyrillic vzmet"],
 		symbolClass: "Diacritic Mark",
 	},
 	"cyr_com_titlo", {
 		unicode: "{U+0483}",
 		group: [["Diacritics Primary", "Cyrillic Diacritics"], ["n", "т"]],
 		alt_layout: "<^<! [т]",
-		tags: ["титло", "titlo"],
+		tags: ["титло кириллицы", "cyrillic titlo"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_palatalization", {
+		unicode: "{U+0484}",
+		group: [["Diacritics Tertiary", "Cyrillic Diacritics"], ["g", "п"]],
+		alt_layout: "<^<! [п]",
+		tags: ["палатализация кириллицы", "cyrillic palatalization"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_pokrytie", {
+		unicode: "{U+0487}",
+		group: [["Diacritics Tertiary", "Cyrillic Diacritics"], ["G", "П"]],
+		alt_layout: "<^<!<+ [g][п]",
+		tags: ["покрытие кириллицы", "cyrillic pokrytie"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_dasia_pneumata", {
+		unicode: "{U+0485}",
+		group: [["Diacritics Quatemary", "Cyrillic Diacritics", "Diacritics Fast Primary"], ["g", "п"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: ">+ [g][п]",
+		alt_layout: "<^<!>+ [п]",
+		tags: ["густое придыхание кириллицы", "cyrillic dasia pneumata"],
+		symbolClass: "Diacritic Mark",
+	},
+	"cyr_com_psili_pneumata", {
+		unicode: "{U+0486}",
+		group: [["Diacritics Quatemary", "Cyrillic Diacritics", "Diacritics Fast Primary"], ["G", "П"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+>+ [п]",
+		alt_layout: "<^<!<+>+ [п]",
+		tags: ["тонкое придыхание кириллицы", "cyrillic psili pneumata"],
 		symbolClass: "Diacritic Mark",
 	},
 	;
@@ -9480,123 +9988,123 @@ MapInsert(Characters,
 
 
 MapInsert(Characters,
-	"lat_c_let_a", { calcOff: "", unicode: "{U+0041}" },
-	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}" },
-	"lat_c_let_b", { calcOff: "", unicode: "{U+0042}" },
-	"lat_s_let_b", { calcOff: "", unicode: "{U+0062}" },
-	"lat_c_let_c", { calcOff: "", unicode: "{U+0043}" },
-	"lat_s_let_c", { calcOff: "", unicode: "{U+0063}" },
-	"lat_c_let_d", { calcOff: "", unicode: "{U+0044}" },
-	"lat_s_let_d", { calcOff: "", unicode: "{U+0064}" },
-	"lat_c_let_e", { calcOff: "", unicode: "{U+0045}" },
-	"lat_s_let_e", { calcOff: "", unicode: "{U+0065}" },
-	"lat_c_let_f", { calcOff: "", unicode: "{U+0046}" },
-	"lat_s_let_f", { calcOff: "", unicode: "{U+0066}" },
-	"lat_c_let_g", { calcOff: "", unicode: "{U+0047}" },
-	"lat_s_let_g", { calcOff: "", unicode: "{U+0067}" },
-	"lat_c_let_h", { calcOff: "", unicode: "{U+0048}" },
-	"lat_s_let_h", { calcOff: "", unicode: "{U+0068}" },
-	"lat_c_let_i", { calcOff: "", unicode: "{U+0049}" },
-	"lat_s_let_i", { calcOff: "", unicode: "{U+0069}" },
-	"lat_c_let_j", { calcOff: "", unicode: "{U+004A}" },
-	"lat_s_let_j", { calcOff: "", unicode: "{U+006A}" },
-	"lat_c_let_k", { calcOff: "", unicode: "{U+004B}" },
-	"lat_s_let_k", { calcOff: "", unicode: "{U+006B}" },
-	"lat_c_let_l", { calcOff: "", unicode: "{U+004C}" },
-	"lat_s_let_l", { calcOff: "", unicode: "{U+006C}" },
-	"lat_c_let_m", { calcOff: "", unicode: "{U+004D}" },
-	"lat_s_let_m", { calcOff: "", unicode: "{U+006D}" },
-	"lat_c_let_n", { calcOff: "", unicode: "{U+004E}" },
-	"lat_s_let_n", { calcOff: "", unicode: "{U+006E}" },
-	"lat_c_let_o", { calcOff: "", unicode: "{U+004F}" },
-	"lat_s_let_o", { calcOff: "", unicode: "{U+006F}" },
-	"lat_c_let_p", { calcOff: "", unicode: "{U+0050}" },
-	"lat_s_let_p", { calcOff: "", unicode: "{U+0070}" },
-	"lat_c_let_q", { calcOff: "", unicode: "{U+0051}" },
+	"lat_c_let_a", { calcOff: "", unicode: "{U+0041}", modifierForm: "{U+1D2C}" },
+	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}", subscriptForm: "{U+2090}" },
+	"lat_c_let_b", { calcOff: "", unicode: "{U+0042}", modifierForm: "{U+1D2E}" },
+	"lat_s_let_b", { calcOff: "", unicode: "{U+0062}", combiningForm: "{U+1DE8}", modifierForm: "{U+1D47}" },
+	"lat_c_let_c", { calcOff: "", unicode: "{U+0043}", modifierForm: "{U+A7F2}" },
+	"lat_s_let_c", { calcOff: "", unicode: "{U+0063}", combiningForm: "{U+0368}", modifierForm: "{U+1D9C}" },
+	"lat_c_let_d", { calcOff: "", unicode: "{U+0044}", modifierForm: "{U+1D30}" },
+	"lat_s_let_d", { calcOff: "", unicode: "{U+0064}", combiningForm: "{U+0369}", modifierForm: "{U+1D48}" },
+	"lat_c_let_e", { calcOff: "", unicode: "{U+0045}", modifierForm: "{U+1D31}" },
+	"lat_s_let_e", { calcOff: "", unicode: "{U+0065}", combiningForm: "{U+0364}", modifierForm: "{U+1D49}", subscriptForm: "{U+2091}" },
+	"lat_c_let_f", { calcOff: "", unicode: "{U+0046}", modifierForm: "{U+A7F3}" },
+	"lat_s_let_f", { calcOff: "", unicode: "{U+0066}", combiningForm: "{U+1DEB}", modifierForm: "{U+1DA0}" },
+	"lat_c_let_g", { calcOff: "", unicode: "{U+0047}", combiningForm: "{U+1DDB}", modifierForm: "{U+1D33}" },
+	"lat_s_let_g", { calcOff: "", unicode: "{U+0067}", combiningForm: "{U+1DDA}", modifierForm: "{U+1D4D}" },
+	"lat_c_let_h", { calcOff: "", unicode: "{U+0048}", modifierForm: "{U+1D34}" },
+	"lat_s_let_h", { calcOff: "", unicode: "{U+0068}", combiningForm: "{U+036A}", modifierForm: "{U+02B0}", subscriptForm: "{U+2095}" },
+	"lat_c_let_i", { calcOff: "", unicode: "{U+0049}", modifierForm: "{U+1D35}" },
+	"lat_s_let_i", { calcOff: "", unicode: "{U+0069}", combiningForm: "{U+0365}", subscriptForm: "{U+1D62}" },
+	"lat_c_let_j", { calcOff: "", unicode: "{U+004A}", modifierForm: "{U+1D36}" },
+	"lat_s_let_j", { calcOff: "", unicode: "{U+006A}", modifierForm: "{U+02B2}", subscriptForm: "{U+2C7C}" },
+	"lat_c_let_k", { calcOff: "", unicode: "{U+004B}", modifierForm: "{U+1D37}" },
+	"lat_s_let_k", { calcOff: "", unicode: "{U+006B}", combiningForm: "{U+1DDC}", modifierForm: "{U+1D4F}", subscriptForm: "{U+2096}" },
+	"lat_c_let_l", { calcOff: "", unicode: "{U+004C}", combiningForm: "{U+1DDE}", modifierForm: "{U+1D38}" },
+	"lat_s_let_l", { calcOff: "", unicode: "{U+006C}", combiningForm: "{U+1DDD}", modifierForm: "{U+02E1}", subscriptForm: "{U+2097}" },
+	"lat_c_let_m", { calcOff: "", unicode: "{U+004D}", combiningForm: "{U+1DDF}", modifierForm: "{U+1D39}" },
+	"lat_s_let_m", { calcOff: "", unicode: "{U+006D}", combiningForm: "{U+036B}", modifierForm: "{U+1D50}", subscriptForm: "{U+2098}" },
+	"lat_c_let_n", { calcOff: "", unicode: "{U+004E}", combiningForm: "{U+1DE1}", modifierForm: "{U+1D3A}" },
+	"lat_s_let_n", { calcOff: "", unicode: "{U+006E}", combiningForm: "{U+1DE0}", subscriptForm: "{U+2099}" },
+	"lat_c_let_o", { calcOff: "", unicode: "{U+004F}", modifierForm: "{U+1D3C}" },
+	"lat_s_let_o", { calcOff: "", unicode: "{U+006F}", combiningForm: "{U+0366}", modifierForm: "{U+1D52}", subscriptForm: "{U+2092}" },
+	"lat_c_let_p", { calcOff: "", unicode: "{U+0050}", modifierForm: "{U+1D3E}" },
+	"lat_s_let_p", { calcOff: "", unicode: "{U+0070}", combiningForm: "{U+1DEE}", modifierForm: "{U+1D56}", subscriptForm: "{U+209A}" },
+	"lat_c_let_q", { calcOff: "", unicode: "{U+0051}", modifierForm: "{U+A7F4}" },
 	"lat_s_let_q", { calcOff: "", unicode: "{U+0071}" },
-	"lat_c_let_r", { calcOff: "", unicode: "{U+0052}" },
-	"lat_s_let_r", { calcOff: "", unicode: "{U+0072}" },
+	"lat_c_let_r", { calcOff: "", unicode: "{U+0052}", combiningForm: "{U+1DE2}", modifierForm: "{U+1D3F}" },
+	"lat_s_let_r", { calcOff: "", unicode: "{U+0072}", combiningForm: "{U+036C}", modifierForm: "{U+02B3}", subscriptForm: "{U+1D63}" },
 	"lat_c_let_s", { calcOff: "", unicode: "{U+0053}" },
-	"lat_s_let_s", { calcOff: "", unicode: "{U+0073}" },
-	"lat_c_let_t", { calcOff: "", unicode: "{U+0054}" },
-	"lat_s_let_t", { calcOff: "", unicode: "{U+0074}" },
-	"lat_c_let_u", { calcOff: "", unicode: "{U+0055}" },
-	"lat_s_let_u", { calcOff: "", unicode: "{U+0075}" },
-	"lat_c_let_v", { calcOff: "", unicode: "{U+0056}" },
-	"lat_s_let_v", { calcOff: "", unicode: "{U+0076}" },
-	"lat_c_let_w", { calcOff: "", unicode: "{U+0057}" },
-	"lat_s_let_w", { calcOff: "", unicode: "{U+0077}" },
+	"lat_s_let_s", { calcOff: "", unicode: "{U+0073}", combiningForm: "{U+1DE4}", modifierForm: "{U+02E2}", subscriptForm: "{U+209B}" },
+	"lat_c_let_t", { calcOff: "", unicode: "{U+0054}", modifierForm: "{U+1D40}" },
+	"lat_s_let_t", { calcOff: "", unicode: "{U+0074}", combiningForm: "{U+036D}", modifierForm: "{U+1D57}", subscriptForm: "{U+209C}" },
+	"lat_c_let_u", { calcOff: "", unicode: "{U+0055}", modifierForm: "{U+1D41}" },
+	"lat_s_let_u", { calcOff: "", unicode: "{U+0075}", combiningForm: "{U+0367}", modifierForm: "{U+1D58}", subscriptForm: "{U+1D64}" },
+	"lat_c_let_v", { calcOff: "", unicode: "{U+0056}", modifierForm: "{U+2C7D}" },
+	"lat_s_let_v", { calcOff: "", unicode: "{U+0076}", combiningForm: "{U+036E}", modifierForm: "{U+1D5B}", subscriptForm: "{U+1D65}" },
+	"lat_c_let_w", { calcOff: "", unicode: "{U+0057}", modifierForm: "{U+1D42}" },
+	"lat_s_let_w", { calcOff: "", unicode: "{U+0077}", combiningForm: "{U+1DF1}", modifierForm: "{U+02B7}" },
 	"lat_c_let_x", { calcOff: "", unicode: "{U+0058}" },
-	"lat_s_let_x", { calcOff: "", unicode: "{U+0078}" },
+	"lat_s_let_x", { calcOff: "", unicode: "{U+0078}", combiningForm: "{U+036F}", modifierForm: "{U+02E3}", subscriptForm: "{U+2093}" },
 	"lat_c_let_y", { calcOff: "", unicode: "{U+0059}" },
-	"lat_s_let_y", { calcOff: "", unicode: "{U+0079}" },
+	"lat_s_let_y", { calcOff: "", unicode: "{U+0079}", modifierForm: "{U+02B8}" },
 	"lat_c_let_z", { calcOff: "", unicode: "{U+005A}" },
-	"lat_s_let_z", { calcOff: "", unicode: "{U+007A}" },
+	"lat_s_let_z", { calcOff: "", unicode: "{U+007A}", combiningForm: "{U+1DE6}", modifierForm: "{U+02E3}" },
 	;
 	"cyr_c_let_a", { calcOff: "", unicode: "{U+0410}" }, ; А
-	"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}" }, ; а
+	"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}", combiningForm: "{U+2DF6}", modifierForm: "{U+1E030}", subscriptForm: "{U+1E051}" }, ; а
 	"cyr_c_let_b", { calcOff: "", unicode: "{U+0411}" }, ; Б
-	"cyr_s_let_b", { calcOff: "", unicode: "{U+0431}" }, ; б
+	"cyr_s_let_b", { calcOff: "", unicode: "{U+0431}", combiningForm: "{U+2DE0}", modifierForm: "{U+1E031}", subscriptForm: "{U+1E052}" }, ; б
 	"cyr_c_let_v", { calcOff: "", unicode: "{U+0412}" }, ; В
-	"cyr_s_let_v", { calcOff: "", unicode: "{U+0432}" }, ; в
+	"cyr_s_let_v", { calcOff: "", unicode: "{U+0432}", combiningForm: "{U+2DE1}", modifierForm: "{U+1E032}", subscriptForm: "{U+1E053}" }, ; в
 	"cyr_c_let_g", { calcOff: "", unicode: "{U+0413}" }, ; Г
-	"cyr_s_let_g", { calcOff: "", unicode: "{U+0433}" }, ; г
+	"cyr_s_let_g", { calcOff: "", unicode: "{U+0433}", combiningForm: "{U+2DE2}", modifierForm: "{U+1E033}", subscriptForm: "{U+1E054}" }, ; г
 	"cyr_c_let_d", { calcOff: "", unicode: "{U+0414}" }, ; Д
-	"cyr_s_let_d", { calcOff: "", unicode: "{U+0434}" }, ; д
+	"cyr_s_let_d", { calcOff: "", unicode: "{U+0434}", combiningForm: "{U+2DE3}", modifierForm: "{U+1E034}", subscriptForm: "{U+1E055}" }, ; д
 	"cyr_c_let_e", { calcOff: "", unicode: "{U+0415}" }, ; Е
-	"cyr_s_let_e", { calcOff: "", unicode: "{U+0435}" }, ; е
+	"cyr_s_let_e", { calcOff: "", unicode: "{U+0435}", combiningForm: "{U+2DF7}", modifierForm: "{U+1E035}", subscriptForm: "{U+1E056}" }, ; е
 	"cyr_c_let_yo", { calcOff: "", unicode: "{U+0401}" }, ; Ё
 	"cyr_s_let_yo", { calcOff: "", unicode: "{U+0451}" }, ; ё
 	"cyr_c_let_zh", { calcOff: "", unicode: "{U+0416}" }, ; Ж
-	"cyr_s_let_zh", { calcOff: "", unicode: "{U+0436}" }, ; ж
+	"cyr_s_let_zh", { calcOff: "", unicode: "{U+0436}", combiningForm: "{U+2DE4}", modifierForm: "{U+1E036}", subscriptForm: "{U+1E057}" }, ; ж
 	"cyr_c_let_z", { calcOff: "", unicode: "{U+0417}" }, ; З
-	"cyr_s_let_z", { calcOff: "", unicode: "{U+0437}" }, ; з
+	"cyr_s_let_z", { calcOff: "", unicode: "{U+0437}", combiningForm: "{U+2DE5}", modifierForm: "{U+1E037}", subscriptForm: "{U+1E058}" }, ; з
 	"cyr_c_let_и", { calcOff: "", unicode: "{U+0418}" }, ; И
-	"cyr_s_let_и", { calcOff: "", unicode: "{U+0438}" }, ; и
+	"cyr_s_let_и", { calcOff: "", unicode: "{U+0438}", combiningForm: "{U+A675}", modifierForm: "{U+1E038}", subscriptForm: "{U+1E059}" }, ; и
 	"cyr_c_let_iy", { calcOff: "", unicode: "{U+0419}" }, ; Й
 	"cyr_s_let_iy", { calcOff: "", unicode: "{U+0439}" }, ; й
 	"cyr_c_let_k", { calcOff: "", unicode: "{U+041A}" }, ; К
-	"cyr_s_let_k", { calcOff: "", unicode: "{U+043A}" }, ; к
+	"cyr_s_let_k", { calcOff: "", unicode: "{U+043A}", combiningForm: "{U+2DE6}", modifierForm: "{U+1E039}", subscriptForm: "{U+1E05A}" }, ; к
 	"cyr_c_let_l", { calcOff: "", unicode: "{U+041B}" }, ; Л
-	"cyr_s_let_l", { calcOff: "", unicode: "{U+043B}" }, ; л
+	"cyr_s_let_l", { calcOff: "", unicode: "{U+043B}", combiningForm: "{U+2DE7}", modifierForm: "{U+1E03A}", subscriptForm: "{U+1E05B}" }, ; л
 	"cyr_c_let_m", { calcOff: "", unicode: "{U+041C}" }, ; М
-	"cyr_s_let_m", { calcOff: "", unicode: "{U+043C}" }, ; м
+	"cyr_s_let_m", { calcOff: "", unicode: "{U+043C}", combiningForm: "{U+2DE8}", modifierForm: "{U+1E03B}" }, ; м
 	"cyr_c_let_n", { calcOff: "", unicode: "{U+041D}" }, ; Н
-	"cyr_s_let_n", { calcOff: "", unicode: "{U+043D}" }, ; н
+	"cyr_s_let_n", { calcOff: "", unicode: "{U+043D}", combiningForm: "{U+2DE9}", modifierForm: "{U+1D78}" }, ; н
 	"cyr_c_let_o", { calcOff: "", unicode: "{U+041E}" }, ; О
-	"cyr_s_let_o", { calcOff: "", unicode: "{U+043E}" }, ; о
+	"cyr_s_let_o", { calcOff: "", unicode: "{U+043E}", combiningForm: "{U+2DEA}", modifierForm: "{U+1E03C}", subscriptForm: "{U+1E05C}" }, ; о
 	"cyr_c_let_p", { calcOff: "", unicode: "{U+041F}" }, ; П
-	"cyr_s_let_p", { calcOff: "", unicode: "{U+043F}" }, ; п
+	"cyr_s_let_p", { calcOff: "", unicode: "{U+043F}", combiningForm: "{U+2DEB}", modifierForm: "{U+1E03D}", subscriptForm: "{U+1E05D}" }, ; п
 	"cyr_c_let_r", { calcOff: "", unicode: "{U+0420}" }, ; Р
-	"cyr_s_let_r", { calcOff: "", unicode: "{U+0440}" }, ; р
+	"cyr_s_let_r", { calcOff: "", unicode: "{U+0440}", combiningForm: "{U+2DEC}", modifierForm: "{U+1E03E}" }, ; р
 	"cyr_c_let_s", { calcOff: "", unicode: "{U+0421}" }, ; С
-	"cyr_s_let_s", { calcOff: "", unicode: "{U+0441}" }, ; с
+	"cyr_s_let_s", { calcOff: "", unicode: "{U+0441}", combiningForm: "{U+2DED}", modifierForm: "{U+1E03F}", subscriptForm: "{U+1E05E}" }, ; с
 	"cyr_c_let_t", { calcOff: "", unicode: "{U+0422}" }, ; Т
-	"cyr_s_let_t", { calcOff: "", unicode: "{U+0442}" }, ; т
+	"cyr_s_let_t", { calcOff: "", unicode: "{U+0442}", combiningForm: "{U+2DEE}", modifierForm: "{U+1E040}" }, ; т
 	"cyr_c_let_u", { calcOff: "", unicode: "{U+0423}" }, ; У
-	"cyr_s_let_u", { calcOff: "", unicode: "{U+0443}" }, ; у
+	"cyr_s_let_u", { calcOff: "", unicode: "{U+0443}", combiningForm: "{U+A677}", modifierForm: "{U+1E041}", subscriptForm: "{U+1E05F}" }, ; у
 	"cyr_c_let_f", { calcOff: "", unicode: "{U+0424}" }, ; Ф
-	"cyr_s_let_f", { calcOff: "", unicode: "{U+0444}" }, ; ф
+	"cyr_s_let_f", { calcOff: "", unicode: "{U+0444}", combiningForm: "{U+A69E}", modifierForm: "{U+1E042}", subscriptForm: "{U+1E060}" }, ; ф
 	"cyr_c_let_h", { calcOff: "", unicode: "{U+0425}" }, ; Х
-	"cyr_s_let_h", { calcOff: "", unicode: "{U+0445}" }, ; х
+	"cyr_s_let_h", { calcOff: "", unicode: "{U+0445}", combiningForm: "{U+2DEF}", modifierForm: "{U+1E043}", subscriptForm: "{U+1E061}" }, ; х
 	"cyr_c_let_ts", { calcOff: "", unicode: "{U+0426}" }, ; Ц
-	"cyr_s_let_ts", { calcOff: "", unicode: "{U+0446}" }, ; ц
+	"cyr_s_let_ts", { calcOff: "", unicode: "{U+0446}", combiningForm: "{U+2DF0}", modifierForm: "{U+1E044}", subscriptForm: "{U+1E062}" }, ; ц
 	"cyr_c_let_ch", { calcOff: "", unicode: "{U+0427}" }, ; Ч
-	"cyr_s_let_ch", { calcOff: "", unicode: "{U+0447}" }, ; ч
+	"cyr_s_let_ch", { calcOff: "", unicode: "{U+0447}", combiningForm: "{U+2DF1}", modifierForm: "{U+1E045}", subscriptForm: "{U+1E063}" }, ; ч
 	"cyr_c_let_sh", { calcOff: "", unicode: "{U+0428}" }, ; Ш
-	"cyr_s_let_sh", { calcOff: "", unicode: "{U+0448}" }, ; ш
+	"cyr_s_let_sh", { calcOff: "", unicode: "{U+0448}", combiningForm: "{U+2DF2}", modifierForm: "{U+1E046}", subscriptForm: "{U+1E064}" }, ; ш
 	"cyr_c_let_shch", { calcOff: "", unicode: "{U+0429}" }, ; Щ
-	"cyr_s_let_shch", { calcOff: "", unicode: "{U+0449}" }, ; щ
+	"cyr_s_let_shch", { calcOff: "", unicode: "{U+0449}", combiningForm: "{U+2DF3}" }, ; щ
 	"cyr_c_let_yeru", { calcOff: "", unicode: "{U+042A}" }, ; Ъ
-	"cyr_s_let_yeru", { calcOff: "", unicode: "{U+044A}" }, ; ъ
+	"cyr_s_let_yeru", { calcOff: "", unicode: "{U+044A}", combiningForm: "{U+A678}", modifierForm: "{U+A69C}", subscriptForm: "{U+1E065}" }, ; ъ
 	"cyr_c_let_yery", { calcOff: "", unicode: "{U+042B}" }, ; Ы
-	"cyr_s_let_yery", { calcOff: "", unicode: "{U+044B}" }, ; ы
+	"cyr_s_let_yery", { calcOff: "", unicode: "{U+044B}", combiningForm: "{U+A679}", modifierForm: "{U+1E047}", subscriptForm: "{U+1E066}" }, ; ы
 	"cyr_c_let_yeri", { calcOff: "", unicode: "{U+042C}" }, ; Ь
-	"cyr_s_let_yeri", { calcOff: "", unicode: "{U+044C}" }, ; ь
+	"cyr_s_let_yeri", { calcOff: "", unicode: "{U+044C}", combiningForm: "{U+A67A}", modifierForm: "{U+A69D}" }, ; ь
 	"cyr_c_let_э", { calcOff: "", unicode: "{U+042D}" }, ; Э
-	"cyr_s_let_э", { calcOff: "", unicode: "{U+044D}" }, ; э
+	"cyr_s_let_э", { calcOff: "", unicode: "{U+044D}", modifierForm: "{U+1E048}" }, ; э
 	"cyr_c_let_yu", { calcOff: "", unicode: "{U+042E}" }, ; Ю
-	"cyr_s_let_yu", { calcOff: "", unicode: "{U+044E}" }, ; ю
+	"cyr_s_let_yu", { calcOff: "", unicode: "{U+044E}", combiningForm: "{U+2DFB}", modifierForm: "{U+1E049}" }, ; ю
 	"cyr_c_let_ya", { calcOff: "", unicode: "{U+042F}" }, ; Я
 	"cyr_s_let_ya", { calcOff: "", unicode: "{U+044F}" } ; я
 )
@@ -9700,7 +10208,21 @@ MapInsert(Characters,
 		group: ["IPA"],
 		alt_layout: "<+ [a-z]",
 		symbolAlt: "a-z",
-	}
+	},
+	"ipa_a-z_cap", {
+		unicode: "{U+0041}", html: "N/A",
+		uniSequence: ["{U+0041}", "{U+0042}", "{U+0043}", "{U+0044}", "{U+0045}", "{U+0046}", "{U+0047}", "{U+0048}", "{U+0049}", "{U+004A}", "{U+004B}", "{U+004C}", "{U+004D}", "{U+004E}", "{U+004F}", "{U+0050}", "{U+0051}", "{U+0052}", "{U+0053}", "{U+0054}", "{U+0055}", "{U+0056}", "{U+0057}", "{U+0058}", "{U+0059}", "{U+005A}"],
+		group: ["IPA"],
+		alt_layout: "c*<+ [a-z]",
+		symbolAlt: "A-Z",
+	},
+	"ipa_modifiers_mode", {
+		unicode: "{U+0041}", html: "N/A",
+		uniSequence: ["{U+02B0}", "{U+02B1}", "{U+02B2}", "{U+02B3}", "{U+02B7}", "{U+02B8}"],
+		group: ["IPA"],
+		alt_layout: "RShift×2",
+		symbolAlt: Chr(0x02B0) "-" Chr(0x02B8),
+	},
 )
 
 ReplaceModifierKeys(Input) {
@@ -9828,7 +10350,8 @@ ProcessMapAfter() {
 		TitleSequence := { ru: "", en: "" }
 		PreletterSequence := { ru: "", en: "" }
 		RegExMatch(EntryName, "^(.+)_(.)_let_([^\W_]+)", &EntryExpression)
-		LetterVar := EntryExpression ? (EntryExpression[2] = "c" ? StrUpper(EntryExpression[3]) : EntryExpression[3]) : ""
+		ValueLetter := HasProp(value, "letter") ? value.letter : EntryExpression ? EntryExpression[3] : ""
+		LetterVar := EntryExpression ? (EntryExpression[2] = "c" ? StrUpper(ValueLetter) : ValueLetter) : ""
 
 		if RegExMatch(EntryName, "^permic") {
 			value.symbolFont := "Noto Sans Old Permic"
@@ -9893,6 +10416,32 @@ ProcessMapAfter() {
 				}
 			} else {
 				value.combiningHTML := "&#" ConvertToDecimal(PasteUnicode(value.combiningForm)) ";"
+			}
+		}
+
+		if HasProp(value, "modifierForm") {
+			if !HasProp(value, "modifierHTML") {
+				value.modifierHTML := ""
+			}
+			if IsObject(value.modifierForm) {
+				for combining in value.modifierForm {
+					value.modifierHTML .= "&#" ConvertToDecimal(PasteUnicode(combining)) ";"
+				}
+			} else {
+				value.modifierHTML := "&#" ConvertToDecimal(PasteUnicode(value.modifierForm)) ";"
+			}
+		}
+
+		if HasProp(value, "subscriptForm") {
+			if !HasProp(value, "subscriptHTML") {
+				value.subscriptHTML := ""
+			}
+			if IsObject(value.subscriptForm) {
+				for combining in value.subscriptForm {
+					value.subscriptHTML .= "&#" ConvertToDecimal(PasteUnicode(combining)) ";"
+				}
+			} else {
+				value.subscriptHTML := "&#" ConvertToDecimal(PasteUnicode(value.subscriptForm)) ";"
 			}
 		}
 
@@ -10038,7 +10587,8 @@ ProcessMapAfter() {
 
 			} else {
 				if EntryExpression {
-					LetterVar := EntryExpression[2] = "c" ? StrUpper(EntryExpression[3]) : EntryExpression[3]
+					ValueLetter := HasProp(value, "letter") ? value.letter : EntryExpression[3]
+					LetterVar := EntryExpression[2] = "c" ? StrUpper(ValueLetter) : ValueLetter
 					value.recipe := RegExReplace(value.recipe, "^\$", LetterVar)
 				}
 
@@ -10114,7 +10664,10 @@ ProcessMapAfter() {
 				ValueLetter := HasProp(value, "letter") ? value.letter : EntryExpression[3]
 				LetterVar := EntryExpression[2] = "c" ? StrUpper(ValueLetter) : ValueLetter
 				CaseRu := EntryExpression[2] = "c" ? "прописная" : "строчная"
-				CaseEn := EntryExpression[2] = "c" ? "capital" : "small"
+				CaseEn := EntryExpression[2] = "c" ? "Capital" : "Small"
+
+				Prefix := EntryExpression[1] = "cyr" ? "cyrillic " : ""
+				Postfix := EntryExpression[1] = "cyr" ? " кириллицы" : ""
 
 				TitleSequence.ru := RegExReplace(TitleSequence.ru, ",\s$", "")
 				TitleSequence.en := RegExReplace(TitleSequence.en, ",\s$", "")
@@ -10125,8 +10678,8 @@ ProcessMapAfter() {
 				TitleSequence.ru := RegExReplace(TitleSequence.ru, "\s\sс", "")
 
 
-				FullTagRu := CaseRu " буква " PreletterSequence.ru LetterVar TitleSequence.ru
-				FullTagEn := CaseEn " letter " PreletterSequence.en LetterVar TitleSequence.en
+				FullTagRu := CaseRu " буква " PreletterSequence.ru LetterVar TitleSequence.ru Postfix
+				FullTagEn := Prefix CaseEn " letter " PreletterSequence.en LetterVar TitleSequence.en
 				if HasProp(value, "tags") {
 
 					for index, tag in value.tags {
@@ -10209,19 +10762,34 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 				for _, key in characterKeys {
 					if (keyPressed == key) {
 						if InputMode = "HTML" && HasProp(value, "html") {
-							SendText(characterEntity)
+							(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+								(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+									(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-							if IsObject(characterLaTeX) {
-								if LaTeXMode = "common"
-									SendText(characterLaTeX[1])
-								else if LaTeXMode = "math"
-									SendText(characterLaTeX[2])
-							} else {
-								SendText(characterLaTeX)
-							}
+							SendText(IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX)
 						}
 						else {
-							if CombiningEnabled && HasProp(value, "combiningForm") {
+							if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+								if IsObject(value.subscriptForm) {
+									TempValue := ""
+									for modifier in value.subscriptForm {
+										TempValue .= PasteUnicode(modifier)
+									}
+									SendText(TempValue)
+								} else {
+									Send(value.subscriptForm)
+								}
+							} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+								if IsObject(value.modifierForm) {
+									TempValue := ""
+									for modifier in value.modifierForm {
+										TempValue .= PasteUnicode(modifier)
+									}
+									SendText(TempValue)
+								} else {
+									Send(value.modifierForm)
+								}
+							} else if CombiningEnabled && HasProp(value, "combiningForm") {
 								if IsObject(value.combiningForm) {
 									TempValue := ""
 									for combining in value.combiningForm {
@@ -10248,7 +10816,9 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 			} else {
 				if (keyPressed == characterKeys) {
 					if InputMode = "HTML" && HasProp(value, "html") {
-						SendText(characterEntity)
+						(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.modifiesubscriptHTMLrHTML) :
+							(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+								(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
 					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 						if IsObject(characterLaTeX) {
 							if LaTeXMode = "common"
@@ -10260,7 +10830,27 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 						}
 					}
 					else {
-						if CombiningEnabled && HasProp(value, "combiningForm") {
+						if ModifiersEnabled && HasProp(value, "subscriptForm") {
+							if IsObject(value.subscriptForm) {
+								TempValue := ""
+								for modifier in value.subscriptForm {
+									TempValue .= PasteUnicode(modifier)
+								}
+								SendText(TempValue)
+							} else {
+								Send(value.modsubscriptFormifierForm)
+							}
+						} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+							if IsObject(value.modifierForm) {
+								TempValue := ""
+								for modifier in value.modifierForm {
+									TempValue .= PasteUnicode(modifier)
+								}
+								SendText(TempValue)
+							} else {
+								Send(value.modifierForm)
+							}
+						} else if CombiningEnabled && HasProp(value, "combiningForm") {
 							if IsObject(value.combiningForm) {
 								TempValue := ""
 								for combining in value.combiningForm {
@@ -10325,6 +10915,7 @@ HasAllCharacters(str, pattern) {
 
 SearchKey(CycleSend := "") {
 	CyclingSearch := False
+	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
 
 	if StrLen(CycleSend) > 0 {
 		PromptValue := CycleSend
@@ -10357,20 +10948,36 @@ SearchKey(CycleSend := "") {
 		ProceedSearch(value, characterEntity, characterLaTeX) {
 			OutputValue := ""
 			if InputMode = "HTML" && HasProp(value, "html") {
-				SendValue := CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
+				SendValue :=
+					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+							(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
 				OutputValue := SendValue
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-				if IsObject(characterLaTeX) {
-					if LaTeXMode = "common"
-						OutputValue := characterLaTeX[1]
-					else if LaTeXMode = "math"
-						OutputValue := characterLaTeX[2]
-				} else {
-					OutputValue := characterLaTeX
-				}
+				OutputValue := IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			}
 			else {
-				if CombiningEnabled && HasProp(value, "combiningForm") {
+				if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+					if IsObject(value.subscriptForm) {
+						TempValue := ""
+						for modifier in value.subscriptForm {
+							TempValue .= PasteUnicode(modifier)
+						}
+						OutputValue := TempValue
+					} else {
+						OutputValue := Chr("0x" UniTrim(value.subscriptForm))
+					}
+				} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+					if IsObject(value.modifierForm) {
+						TempValue := ""
+						for modifier in value.modifierForm {
+							TempValue .= PasteUnicode(modifier)
+						}
+						OutputValue := TempValue
+					} else {
+						OutputValue := Chr("0x" UniTrim(value.modifierForm))
+					}
+				} else if CombiningEnabled && HasProp(value, "combiningForm") {
 					if IsObject(value.combiningForm) {
 						TempValue := ""
 						for combining in value.combiningForm {
@@ -10422,7 +11029,7 @@ SearchKey(CycleSend := "") {
 					continue
 				}
 				characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "entity")) ? value.html : ""
-				characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
+				characterLaTeX := (HasProp(value, "LaTeX")) ? (IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX) : ""
 
 				for _, tag in value.tags {
 					if CheckingRule(value, tag, SearchingPrompt, IsSensitive) {
@@ -11175,10 +11782,51 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 
 Ligaturise(SmeltingMode := "InputBox") {
 	LanguageCode := GetLanguageCode()
+	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
 	BackupClipboard := ""
 
 	Found := False
-
+	GetUniChar(value) {
+		Output := ""
+		if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+			if IsObject(value.subscriptForm) {
+				TempValue := ""
+				for modifier in value.subscriptForm {
+					TempValue .= PasteUnicode(modifier)
+				}
+				Output := TempValue
+			} else {
+				Output := PasteUnicode(value.subscriptForm)
+			}
+		} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+			if IsObject(value.modifierForm) {
+				TempValue := ""
+				for modifier in value.modifierForm {
+					TempValue .= PasteUnicode(modifier)
+				}
+				Output := TempValue
+			} else {
+				Output := PasteUnicode(value.modifierForm)
+			}
+		} else if CombiningEnabled && HasProp(value, "combiningForm") {
+			if IsObject(value.combiningForm) {
+				TempValue := ""
+				for combining in value.combiningForm {
+					TempValue .= PasteUnicode(combining)
+				}
+				Output := TempValue
+			} else {
+				Output := PasteUnicode(value.combiningForm)
+			}
+		} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+			for unicode in value.uniSequence {
+				Output .= PasteUnicode(unicode)
+			}
+		} else {
+			Output := PasteUnicode(value.unicode)
+		}
+		return Output
+	}
 
 	if (SmeltingMode = "InputBox") {
 		PromptValue := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
@@ -11296,25 +11944,32 @@ Ligaturise(SmeltingMode := "InputBox") {
 								if (!IsSingleCase && Input == recipeEntry) ||
 								(IsSingleCase && Input = recipeEntry) {
 									if InputMode = "HTML" && HasProp(value, "html") {
-										GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
+										GetUnicodeSymbol :=
+											(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+												(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+													(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
+														(value.HasProp("entity") ? value.entity : value.html)
 									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-										GetUnicodeSymbol := value.LaTeX
+										GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 									} else {
-										GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+										GetUnicodeSymbol := GetUniChar(value)
 									}
 									IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
 									Found := True
 									break 3
 								}
 							}
-						} else if (!IsSingleCase && Input == Recipe) ||
-						(IsSingleCase && Input = Recipe) {
+						} else if (!IsSingleCase && Input == Recipe) || (IsSingleCase && Input = Recipe) {
 							if InputMode = "HTML" && HasProp(value, "html") {
-								GetUnicodeSymbol := value.HasProp("entity") ? value.entity : value.html
+								GetUnicodeSymbol :=
+									(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+										(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+											(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
+												(value.HasProp("entity") ? value.entity : value.html)
 							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-								GetUnicodeSymbol := value.LaTeX
+								GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 							} else {
-								GetUnicodeSymbol := Chr("0x" . UniTrim(value.unicode))
+								GetUnicodeSymbol := GetUniChar(value)
 							}
 							IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
 							Found := True
@@ -11358,11 +12013,15 @@ Ligaturise(SmeltingMode := "InputBox") {
 				for _, recipe in Recipe {
 					if (recipe == PromptValue) {
 						if InputMode = "HTML" && HasProp(value, "html") {
-							value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+							(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+								(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+									(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
+										value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-							SendText(value.LaTeX)
+							SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
 						} else {
-							Send(value.unicode)
+							SendText(GetUniChar(value))
 						}
 						IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
 						Found := True
@@ -11370,11 +12029,15 @@ Ligaturise(SmeltingMode := "InputBox") {
 				}
 			} else if (Recipe == PromptValue) {
 				if InputMode = "HTML" && HasProp(value, "html") {
-					value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+							(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
+								value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-					SendText(value.LaTeX)
+					SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
+
 				} else {
-					Send(value.unicode)
+					SendText(GetUniChar(value))
 				}
 				IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
 				Found := True
@@ -11823,6 +12486,7 @@ Constructor() {
 		"Special Fast Left",
 		"Spaces Left Alt",
 		"Latin Accented Primary",
+		"Cyrillic Primary",
 		"Special Fast Secondary",
 		"Asian Quotes",
 		"Other Signs",
@@ -11833,9 +12497,10 @@ Constructor() {
 		"Latin Ligatures",
 		"Latin Accented Secondary",
 		"Cyrillic Ligatures & Letters",
-		"Cyrillic Letters",
+		"Cyrillic Secondary",
 		"Spaces Right Shift",
 		"Latin Accented Tertiary",
+		"Cyrillic Tertiary",
 		"Spaces Left Shift",
 		"Special Fast",
 	] {
@@ -12642,13 +13307,25 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 		TargetGroup[PreviewTags].Text := EntryString GetChar("ensp") TagsString
 
-		if (HasProp(GetEntry, "combiningForm")) {
-			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_have_combining")
-		} else if RegExMatch(GetEntry.symbol, "^" DottedCircle "\S") {
-			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character_combining")
-		} else {
-			TargetGroup[PreviewGroupTitle].Text := ReadLocale("character")
+		GroupTitle := ""
+		IsDiacritic := RegExMatch(GetEntry.symbol, "^" DottedCircle "\S")
+		IsCombining := IsDiacritic || HasProp(GetEntry, "combiningForm")
+		IsModifier := HasProp(GetEntry, "modifierForm")
+		IsSubscript := HasProp(GetEntry, "subscriptForm")
+
+		if IsModifier {
+			GroupTitle .= GetChar("dotted_circle") Chr(0x02B0) " "
 		}
+
+		if IsSubscript {
+			GroupTitle .= GetChar("dotted_circle") Chr(0x2095) " "
+		}
+
+		if IsCombining {
+			GroupTitle .= GetChar("dotted_circle") Chr(0x036A) " "
+		}
+
+		TargetGroup[PreviewGroupTitle].Text := GroupTitle (IsDiacritic ? ReadLocale("character_combining") : ReadLocale("character"))
 
 		if (HasProp(GetEntry, "altcode")) {
 			TargetGroup[PreviewAlt].Text := GetEntry.altcode
@@ -12779,17 +13456,14 @@ LV_OpenUnicodeWebsite(LV, RowNumber) {
 			if (InputMode = "HTML" || InputMode = "LaTeX") {
 				for characterEntry, value in Characters {
 					if (SelectedRow = UniTrim(value.unicode)) {
-						if InputMode = "HTML" && HasProp(value, "html") {
+						if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+							A_Clipboard := value.subscriptForm
+						} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+							A_Clipboard := value.modifierForm
+						} else if InputMode = "HTML" && HasProp(value, "html") {
 							A_Clipboard := HasProp(value, "entity") ? value.entity : value.html
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-							if IsObject(value.LaTeX) {
-								if LaTeXMode = "common"
-									A_Clipboard := value.LaTeX[1]
-								else if LaTeXMode = "math"
-									A_Clipboard := value.LaTeX[2]
-							} else {
-								A_Clipboard := value.LaTeX
-							}
+							A_Clipboard := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 						}
 					}
 				}
@@ -13009,18 +13683,34 @@ GetCharacterSequence(CharacterName) {
 			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
 			if InputMode = "HTML" && HasProp(value, "html") {
-				Output .= CombiningEnabled && HasProp(value, "combiningHTML") ? value.combiningHTML : characterEntity
+				Output .=
+					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+							(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-				if IsObject(characterLaTeX) {
-					if LaTeXMode = "common"
-						Output .= characterLaTeX[1]
-					else if LaTeXMode = "math"
-						Output .= characterLaTeX[2]
-				} else {
-					Output .= characterLaTeX
-				}
+				Output .= IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			} else {
-				if CombiningEnabled && HasProp(value, "combiningForm") {
+				if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+					if IsObject(value.subscriptForm) {
+						TempValue := ""
+						for modifier in value.subscriptForm {
+							TempValue .= PasteUnicode(modifier)
+						}
+						SendText(TempValue)
+					} else {
+						Send(value.subscriptForm)
+					}
+				} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+					if IsObject(value.modifierForm) {
+						TempValue := ""
+						for modifier in value.modifierForm {
+							TempValue .= PasteUnicode(modifier)
+						}
+						SendText(TempValue)
+					} else {
+						Send(value.modifierForm)
+					}
+				} else if CombiningEnabled && HasProp(value, "combiningForm") {
 					if IsObject(value.combiningForm) {
 						TempValue := ""
 						for combining in value.combiningForm {
@@ -13455,7 +14145,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"C", Map("Flat:<^<!", "circumflex", "Flat:<^<!<+", "caron", "Flat:<^<!>+", "cedilla"),
 			"D", Map("Flat:<^<!", "dot_above", "Flat:<^<!<+", "diaeresis"),
 			"F", Map("Flat:<^<!", "fermata"),
-			"G", Map("Flat:<^<!", "grave", "Flat:<^<!<+", "grave_double"),
+			"G", Map("Flat:<^<!", "grave", "Flat:<^<!<+", "grave_double", "<^<!>+", "cyr_com_dasia_pneumata", "<^<!<+>+", "cyr_com_psili_pneumata"),
 			"H", Map("Flat:<^<!", "hook_above", "Flat:<^<!<+", "horn"),
 			"M", Map("Flat:<^<!", "macron", "Flat:<^<!<+", "macron_below"),
 			"N", Map("Flat:<^<!", "cyr_com_titlo"),
@@ -13546,18 +14236,37 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_fita", "cyr_s_let_fita"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["A"]),
 			["cyr_c_let_i", "cyr_s_let_i"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["B"]),
 			["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["B"]),
+			["cyr_c_let_iota", "cyr_s_let_iota"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["B"]),
 			["cyr_c_let_yeru_back_yer", "cyr_s_let_yeru_back_yer"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["S"]),
+			["cyr_c_let_yn", "cyr_s_let_yn"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["S"]),
 			["cyr_c_let_yus_big", "cyr_s_let_yus_big"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["E"]),
+			["cyr_c_let_uk_monograph", "cyr_s_let_uk_monograph"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["E"]),
+			["cyr_c_let_a_breve", "cyr_s_let_a_breve"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["F"]),
+			["cyr_c_let_a_diaeresis", "cyr_s_let_a_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["F"]),
 			["cyr_c_let_psi", "cyr_s_let_psi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["G"]),
 			["cyr_c_let_omega", "cyr_s_let_omega"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["J"]),
 			["cyr_c_let_yat", "cyr_s_let_yat"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["T"]),
+			["cyr_c_let_e_grave", "cyr_s_let_e_grave"], MapMerge(GetModifiers(">+"), KeySeqSlot["T"]),
+			["cyr_c_let_g_acute", "cyr_s_let_g_acute"], MapMerge(GetModifiers("<!"), KeySeqSlot["U"]),
+			["cyr_c_let_dzelo", "cyr_s_let_dzelo"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["P"]),
 			["cyr_c_let_yi", "cyr_s_let_yi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Q"]),
 			["cyr_c_let_j", "cyr_s_let_j"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["Q"]),
 			["cyr_c_let_ksi", "cyr_s_let_ksi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["R"]),
+			["cyr_c_let_k_descender", "cyr_s_let_k_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["R"]),
+			["cyr_c_let_k_acute", "cyr_s_let_k_acute"], MapMerge(GetModifiers("<!"), KeySeqSlot["R"]),
 			["cyr_c_let_yus_little", "cyr_s_let_yus_little"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Z"]),
 			["cyr_c_let_a_iotified", "cyr_s_let_a_iotified"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["Z"]),
+			["cyr_c_let_lje", "cyr_s_let_lje"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["K"]),
+			["cyr_c_let_palochka", "cyr_s_let_palochka"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["K"]),
+			["cyr_c_let_tshe", "cyr_s_let_tshe"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["X"]),
+			["cyr_c_let_djerv", "cyr_s_let_djerv"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["X"]),
+			["cyr_c_let_nje", "cyr_s_let_nje"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Y"]),
 			["cyr_c_let_dzhe", "cyr_s_let_dzhe"], MapMerge(GetModifiers("<^>!"), KeySeqSlot[";"]),
+			["cyr_c_let_dje", "cyr_s_let_dje"], MapMerge(GetModifiers("<^>!>+"), KeySeqSlot[";"]),
 			["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["'"]),
+			["cyr_c_let_schwa", "cyr_s_let_schwa"], MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["'"]),
+			["cyr_c_let_schwa_diaeresis", "cyr_s_let_schwa_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["'"]),
+			["cyr_c_let_shha", "cyr_s_let_shha"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["["]),
 		])
 		SlotModdedLetters := Map(
 			"A", Map("<!", ["lat_c_let_a_acute", "lat_s_let_a_acute"],
@@ -13816,7 +14525,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"C", Map("<^>!<!", "medieval_c"),
 			"D", Map("<^>!", "futhark_younger_later_eth", "<^>!<+", "futhark_younger_later_d", "<^<!", "cyr_com_vzmet"),
 			"E", Map("<+", "futhork_ear", "<^>!", "futhark_younger_later_e", "<^>!<!", "medieval_en"),
-			"G", Map("<+", "futhork_gar"),
+			"G", Map("<+", "futhork_gar", "<^<!", "cyr_com_palatalization", "<^<!<+", "cyr_com_pokrytie", "<^<!>+", "cyr_com_dasia_pneumata", "<^<!<+>+", "cyr_com_psili_pneumata"),
 			"H", Map("<+", "futhork_haegl", "<^>!", "futhark_younger_hagall", "<^>!<+", "futhark_younger_hagall_short_twig"),
 			"I", Map(">+", "futhark_eihwaz"),
 			"J", Map("<+", "futhork_ger", ">+", "futhork_ior"),
@@ -14252,7 +14961,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			LayoutArray.Push(CreateFastKeyHandler(Letter))
 		}
 		CreateFastKeyHandler(Letter) {
-			return (K) => HandleFastKey(K, "lat_s_let_" StrLower(Letter))
+			return (K) => CapsSeparatedKey(K, "lat_c_let_" StrLower(Letter), "lat_s_let_" StrLower(Letter))
 		}
 	} else if Combinations = "Maths" {
 		SlotMapping := Map()
@@ -14347,6 +15056,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
+			"<^>!" UseKey["F2"], (*) => SetModifiedCharsInput(),
+			"<^>!" UseKey["F3"], (*) => SetModifiedCharsInput("modifier"),
+			"<^>!>+" UseKey["F3"], (*) => SetModifiedCharsInput("subscript"),
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
@@ -14368,7 +15080,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^>+" UseKey["0"], (*) => ToggleLetterScript(, "Maths"),
 			;
 			"RAlt", (*) => ProceedCompose(),
-			"RCtrl", (*) => ProceedCombining(),
+			;"RCtrl", (*) => ProceedCombining(),
+			;"RShift", (*) => ProceedModifiers(),
 			;
 			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
 			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
@@ -14397,7 +15110,6 @@ EmptyFunc() {
 TimedKeyCombinationsIH(StartKey, SecondKeys, Callbacks, DefaultCallback := False, TimerLimit := -25) {
 
 }
-
 
 TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False, TimerLimit := -25) {
 	global IsCombinationPressed
@@ -14485,33 +15197,28 @@ RAltsSetStats() {
 	RAltsTimerEnds := False
 }
 
-RCtrlCount := 0
-RCtrlTimerEnds := False
-RCtrlTimer := ""
 
-ProceedCombining() {
-	global RCtrlTimerEnds, RCtrlCount, CombiningEnabled
+SetModifiedCharsInput(ModeName := "combining") {
+	global ModifiersEnabled, SubscriptCharsEnabled, CombiningEnabled
+	IsToRegister := False
 
-	if (RCtrlTimerEnds) {
-		return
-	}
+	CombiningEnabled := ModeName = "combining" ? (!CombiningEnabled ? True : False) : False
+	ModifiersEnabled := ModeName = "modifier" ? (!ModifiersEnabled ? True : False) : False
+	SubscriptCharsEnabled := ModeName = "subscript" ? (!SubscriptCharsEnabled ? True : False) : False
 
-	if RCtrlCount = 1 {
-		RCtrlCount := 0
-		CombiningEnabled := !CombiningEnabled ? True : False
-		if CombiningEnabled {
-			ShowInfoMessage("message_combining", , , SkipGroupMessage, True)
-		} else {
-			ShowInfoMessage("message_combining_disabled", , , SkipGroupMessage, True)
-		}
-		return
+	IsToRegister := ModeName = "combining" ? CombiningEnabled : ModeName = "modifier" ? ModifiersEnabled : ModeName = "subscript" ? SubscriptCharsEnabled : False
+
+	if IsToRegister {
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
+		ShowInfoMessage("message_" ModeName, , , SkipGroupMessage, True)
 	} else {
-		RCtrlCount++
-		RCtrlEndingTimer()
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		ShowInfoMessage("message_" ModeName "_disabled", , , SkipGroupMessage, True)
 	}
+
 }
 
-RCtrlEndingTimer() {
+RShiftEndingTimer() {
 	global RCtrlTimer
 	if (RCtrlTimer != "") {
 		SetTimer(RAltsSetStats, 0)
