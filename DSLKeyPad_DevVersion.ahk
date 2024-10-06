@@ -3268,27 +3268,27 @@ MapInsert(Characters,
 		unicode: "{U+01FC}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
-		tags: ["!aea", "лигатура AE с акутом", "ligature AE with acute"],
+		tags: ["!aea", "лигатура AE с акутом", "capital ligature AE with acute"],
 		recipe: ["AE" . GetChar("acute"), Chr(0x00C6) GetChar("acute"), "A" Chr(0x00C9)],
 	},
 	"lat_s_lig_ae_acute", {
 		unicode: "{U+01FD}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
-		tags: [".aea", "лигатура ae с акутом", "ligature ae with acute"], recipe: ["ae" . GetChar("acute"), Chr(0x00E6) GetChar("acute"), "a" Chr(0x00E9)],
+		tags: [".aea", "лигатура ae с акутом", "small ligature ae with acute"], recipe: ["ae" . GetChar("acute"), Chr(0x00E6) GetChar("acute"), "a" Chr(0x00E9)],
 	},
 	"lat_c_lig_ae_macron", {
 		unicode: "{U+01E2}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
-		tags: ["!aem", "лигатура AE с макроном", "ligature AE with macron"],
+		tags: ["!aem", "лигатура AE с макроном", "capital ligature AE with macron"],
 		recipe: ["AE" . GetChar("macron"), Chr(0x00C6) GetChar("macron"), "A" Chr(0x0112)],
 	},
 	"lat_s_lig_ae_macron", {
 		unicode: "{U+01E3}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
-		tags: [".aem", "лигатура ae с макроном", "ligature ae with macron"],
+		tags: [".aem", "лигатура ae с макроном", "small ligature ae with macron"],
 		recipe: ["ae" . GetChar("macron"), Chr(0x00E6) GetChar("macron"), "a" Chr(0x0113)],
 	},
 	"lat_c_lig_ao", {
@@ -11498,7 +11498,7 @@ SearchKey(CycleSend := "") {
 	}
 
 	if !Found && !InStr(PromptValue, ",") {
-		MsgBox "Знак не найден."
+		MsgBox(ReadLocale("message_character_not_found"), DSLPadTitle, "Icon!")
 	}
 
 
