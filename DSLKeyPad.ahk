@@ -51,14 +51,14 @@ DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
 DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
 
-GetUtilityFiles() {
+GetUtilityFiles(ForceUpdate := False) {
 	ErrMessages := Map(
 		"ru", "Произошла ошибка при получении файла перевода.`nСервер недоступен или ошибка соединения с интернетом.",
 		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
 	)
 
 	for fileEntry, value in InternalFiles {
-		if !FileExist(value.File) {
+		if !FileExist(value.File) || ForceUpdate {
 			try {
 				Download(value.Repo, value.File)
 			} catch {
@@ -522,7 +522,7 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 
 		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
 
-		GetUtilityFiles()
+		GetUtilityFiles(True)
 
 		if RepairMode == True {
 			MsgBox(ReadLocale("update_repair_success"), DSLPadTitle)
