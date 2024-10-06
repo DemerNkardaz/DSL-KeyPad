@@ -110,6 +110,7 @@ ReadLocale(EntryName, Prefix := "") {
 
 
 	Intermediate := StrReplace(Intermediate, "\n", "`n")
+	Intermediate := StrReplace(Intermediate, "\t", "`t")
 	Intermediate := Intermediate != "" ? Intermediate : "KEY (" . EntryName . "): NOT FOUND"
 	return Intermediate
 }
@@ -12799,6 +12800,7 @@ SwitchLanguage(LanguageCode) {
 	ManageTrayItems()
 }
 
+AlphabetCoverage := ["pl", "ro", "es"]
 Constructor() {
 	CheckUpdate()
 	ManageTrayItems()
@@ -13177,7 +13179,11 @@ Constructor() {
 	Command_tp_html := CommandsTree.Add(ReadLocale("func_label_tp_html"), Command_textprocessing)
 	Command_tp_unicode := CommandsTree.Add(ReadLocale("func_label_tp_unicode"), Command_textprocessing)
 	Command_lcoverage := CommandsTree.Add(ReadLocale("func_label_coverage"))
-	Command_lro := CommandsTree.Add(ReadLocale("func_label_coverage_ro"), Command_lcoverage)
+
+
+	for coverage in AlphabetCoverage {
+		CommandsTree.Add(ReadLocale("func_label_coverage_" coverage), Command_lcoverage)
+	}
 
 
 	DSLPadGUI.SetFont("s9")
@@ -13839,7 +13845,6 @@ ChangeQWERTY(CB) {
 	RegisterLayout(CB.Text)
 }
 
-
 TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 	if !Item {
 		return
@@ -13878,14 +13883,24 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_tp_html",
 		"func_label_tp_unicode",
 		"func_label_coverage",
-		"func_label_coverage_ro",
 	]
+
+	for coverage in AlphabetCoverage {
+		LabelValidator.Push("func_label_coverage_" coverage)
+	}
+
 	SelectedLabel := TV.GetText(Item)
 
 	for label in LabelValidator
 	{
-		if (ReadLocale(label) = SelectedLabel)
+		if (ReadLocale(label) = SelectedLabel) {
 			TargetTextBox.Text := ReadLocale(label . "_description")
+			if InStr(label, "coverage_") {
+				TargetTextBox.SetFont("s16", FontFace["serif"].name)
+			} else {
+				TargetTextBox.SetFont("s10", "Segoe UI")
+			}
+		}
 	}
 
 }
