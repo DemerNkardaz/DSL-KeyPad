@@ -10761,10 +10761,21 @@ MapInsert(Characters,
 	"kkey_greaterthan", { calcOff: "", unicode: "{U+003E}" },
 )
 
-CharactersCount := GetMapCount(Characters)
+StaticCount := GetMapCount(Characters)
+CharactersCount := StaticCount
+
+GetCountDifference() {
+	Output := StaticCount
+	CurrentCount := GetMapCount(Characters)
+	if CurrentCount > StaticCount {
+		Output := StaticCount " +" (CurrentCount - StaticCount) " " ReadLocale("with_my_recipes")
+	}
+	return Output
+}
 
 MapInsert(Characters,
 	"misc_crlf_emspace", {
+		calcOff: "",
 		unicode: CallChar("carriage_return", "unicode"),
 		uniSequence: [
 			CallChar("carriage_return", "unicode"),
@@ -10777,6 +10788,7 @@ MapInsert(Characters,
 		symbolAlt: CallChar("carriage_return", "symbolAlt")
 	},
 	"misc_lf_emspace", {
+		calcOff: "",
 		unicode: CallChar("new_line", "unicode"),
 		group: ["Misc"],
 		show_on_fast_keys: True,
@@ -10784,6 +10796,7 @@ MapInsert(Characters,
 		symbolAlt: CallChar("new_line", "symbolAlt")
 	},
 	"ipa_a-z", {
+		calcOff: "",
 		unicode: "{U+0041}", html: "N/A",
 		uniSequence: ["{U+0061}", "{U+0062}", "{U+0063}", "{U+0064}", "{U+0065}", "{U+0066}", "{U+0067}", "{U+0068}", "{U+0069}", "{U+006A}", "{U+006B}", "{U+006C}", "{U+006D}", "{U+006E}", "{U+006F}", "{U+0070}", "{U+0071}", "{U+0072}", "{U+0073}", "{U+0074}", "{U+0075}", "{U+0076}", "{U+0077}", "{U+0078}", "{U+0079}", "{U+007A}"],
 		group: ["IPA"],
@@ -10791,6 +10804,7 @@ MapInsert(Characters,
 		symbolAlt: "a-z",
 	},
 	"ipa_a-z_cap", {
+		calcOff: "",
 		unicode: "{U+0041}", html: "N/A",
 		uniSequence: ["{U+0041}", "{U+0042}", "{U+0043}", "{U+0044}", "{U+0045}", "{U+0046}", "{U+0047}", "{U+0048}", "{U+0049}", "{U+004A}", "{U+004B}", "{U+004C}", "{U+004D}", "{U+004E}", "{U+004F}", "{U+0050}", "{U+0051}", "{U+0052}", "{U+0053}", "{U+0054}", "{U+0055}", "{U+0056}", "{U+0057}", "{U+0058}", "{U+0059}", "{U+005A}"],
 		group: ["IPA"],
@@ -10798,6 +10812,7 @@ MapInsert(Characters,
 		symbolAlt: "A-Z",
 	},
 	"ipa_combining_mode", {
+		calcOff: "",
 		unicode: "{U+0041}", html: "N/A",
 		uniSequence: ["{U+25CC}", "{U+0363}", "{U+25CC}", "{U+1DE8}", "{U+25CC}", "{U+0369}", "{U+25CC}", "{U+1DF1}"],
 		group: ["IPA"],
@@ -10805,6 +10820,7 @@ MapInsert(Characters,
 		symbolAlt: GetChar("dotted_circle") Chr(0x0363) "-" GetChar("dotted_circle") Chr(0x1DE6),
 	},
 	"ipa_modifiers_mode", {
+		calcOff: "",
 		unicode: "{U+0041}", html: "N/A",
 		uniSequence: ["{U+02B0}", "{U+02B1}", "{U+02B2}", "{U+02B3}", "{U+02B7}", "{U+02B8}"],
 		group: ["IPA"],
@@ -10812,6 +10828,7 @@ MapInsert(Characters,
 		symbolAlt: Chr(0x02B0) "-" Chr(0x02B8),
 	},
 	"ipa_subscript_mode", {
+		calcOff: "",
 		unicode: "{U+0041}", html: "N/A",
 		uniSequence: ["{U+2090}", "{U+2091}", "{U+2095}", "{U+2C7C}", "{U+2096}", "{U+2097}"],
 		group: ["IPA"],
@@ -10828,7 +10845,7 @@ if !FileExist(CustomComposeFile) {
 }
 
 FillWithCustomRecipes() {
-	global Characters
+	global Characters, CharactersCount
 	try {
 		ComposesFile := FileRead(CustomComposeFile, "UTF-8")
 		Sections := []
@@ -10880,6 +10897,7 @@ FillWithCustomRecipes() {
 				continue
 			}
 		}
+		CharactersCount := GetCountDifference()
 	} catch {
 		return
 	}
