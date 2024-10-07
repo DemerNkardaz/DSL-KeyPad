@@ -10828,6 +10828,7 @@ if !FileExist(CustomComposeFile) {
 }
 
 FillWithCustomRecipes() {
+	global Characters
 	try {
 		ComposesFile := FileRead(CustomComposeFile, "UTF-8")
 		Sections := []
@@ -10859,6 +10860,7 @@ FillWithCustomRecipes() {
 					}
 				)
 			} catch {
+				MsgBox()
 				continue
 			}
 		}
@@ -10868,6 +10870,28 @@ FillWithCustomRecipes() {
 }
 
 FillWithCustomRecipes()
+
+UpdateCustomRecipes(*) {
+	global Characters
+	toDelete := []
+
+	try {
+		for characterEntry, value in Characters {
+			if HasProp(value, "group") && value.group[1] = "Custom Composes" {
+				toDelete.Push(characterEntry)
+			}
+		}
+
+		for key in toDelete {
+			Characters.Delete(key)
+		}
+
+	} finally {
+		FillWithCustomRecipes()
+		ProcessMapAfter("Custom Composes")
+	}
+}
+
 
 ReplaceModifierKeys(Input) {
 	Output := Input
@@ -10887,7 +10911,7 @@ ReplaceModifierKeys(Input) {
 	return Output
 }
 
-ProcessMapAfter() {
+ProcessMapAfter(GroupLimited := "") {
 	global Characters
 	Translations := [
 		"acute", "acute", "акутом",
@@ -10991,6 +11015,28 @@ ProcessMapAfter() {
 
 
 	for characterEntry, value in Characters {
+		if GroupLimited != "" {
+			FoundGroup := False
+
+			if HasProp(value, "group") {
+				if IsObject(value.group[1]) {
+					for group in value.group[1] {
+						if (group = GroupLimited) {
+							FoundGroup := True
+						}
+					}
+				} else {
+					if (value.group[1] = GroupLimited) {
+						FoundGroup := True
+					}
+				}
+			}
+
+			if !FoundGroup {
+				continue
+			}
+		}
+
 		EntryName := RegExReplace(characterEntry, "^\S+\s+")
 		EntryCharacter := GetChar(EntryName)
 		TitleSequence := { ru: "", en: "" }
@@ -15954,6 +16000,7 @@ ManageTrayItems() {
 		"config", ReadLocale("tray_func_config"),
 		"locale", ReadLocale("tray_func_locale"),
 		"custom_compose", ReadLocale("tray_func_custom_compose"),
+		"custom_compose_update", ReadLocale("tray_func_custom_compose_update"),
 		"exit", ReadLocale("tray_func_exit") "`t" LeftControl RightShift "Esc",
 		"panel", ReadLocale("tray_func_panel") "`t" Window LeftAlt "Home",
 		"install", ReadLocale("tray_func_install"),
@@ -16028,7 +16075,9 @@ ManageTrayItems() {
 	DSLTray.Add(Labels["reload"], ReloadApplication)
 	DSLTray.Add(Labels["config"], OpenConfigFile)
 	DSLTray.Add(Labels["locale"], OpenLocalesFile)
+	DSLTray.Add()
 	DSLTray.Add(Labels["custom_compose"], OpenRecipesFile)
+	DSLTray.Add(Labels["custom_compose_update"], UpdateCustomRecipes)
 	DSLTray.Add()
 	if DisabledAllKeys {
 		DSLTray.Add(Labels["enable"], (*) => DisableAllKeys())
@@ -16053,6 +16102,7 @@ ManageTrayItems() {
 	DSLTray.SetIcon(Labels["config"], ImageRes, 065)
 	DSLTray.SetIcon(Labels["locale"], ImageRes, 015)
 	DSLTray.SetIcon(Labels["custom_compose"], ImageRes, 188)
+	DSLTray.SetIcon(Labels["custom_compose_update"], ImageRes, 268)
 	DSLTray.SetIcon(Labels["exit"], ImageRes, 085)
 
 }
