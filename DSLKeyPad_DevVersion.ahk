@@ -13712,7 +13712,7 @@ Constructor() {
 
 	AboutRepoLinkX := LanguageCode == "ru" ? "x114" : "x123"
 	AboutRepoLink := DSLPadGUI.Add("Link", AboutRepoLinkX " y320 w150 h20 Center",
-		'<a href="https://github.com/DemerNkardaz/Misc-Scripts/tree/main/AutoHotkey2.0/">' ReadLocale("about_repository") '</a>'
+		'<a href="https://github.com/DemerNkardaz/DSL-KeyPad">' ReadLocale("about_repository") '</a>'
 	)
 	AboutRepoLink.SetFont("s12", "Cambria")
 
