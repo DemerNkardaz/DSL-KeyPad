@@ -10889,6 +10889,7 @@ UpdateCustomRecipes(*) {
 	} finally {
 		FillWithCustomRecipes()
 		ProcessMapAfter("Custom Composes")
+		UpdateRecipeValidator()
 	}
 }
 
@@ -12397,21 +12398,25 @@ QuotatizeSelection(Mode) {
 }
 
 RecipeValidatorArray := []
-for chracterEntry, value in Characters {
-	if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
-		continue
-	} else {
-		Recipe := value.recipe
-		if IsObject(Recipe) {
-			for _, recipe in Recipe {
-				RecipeValidatorArray.Push(recipe)
-			}
+UpdateRecipeValidator() {
+	global RecipeValidatorArray
+	RecipeValidatorArray := []
+	for chracterEntry, value in Characters {
+		if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+			continue
 		} else {
-			RecipeValidatorArray.Push(Recipe)
+			Recipe := value.recipe
+			if IsObject(Recipe) {
+				for _, recipe in Recipe {
+					RecipeValidatorArray.Push(recipe)
+				}
+			} else {
+				RecipeValidatorArray.Push(Recipe)
+			}
 		}
 	}
 }
-
+UpdateRecipeValidator()
 
 TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 	DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
