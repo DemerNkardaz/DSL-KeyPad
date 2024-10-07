@@ -209,28 +209,30 @@ FontFace := Map(
 )
 
 PowerShell_UserSID() {
-	PShell := "$id = [System.Security.Principal.WindowsIdentity]::GetCurrent()`n"
-	PShell .= "$path = `"DSL_temp-usrSID.txt`"`n"
-	PShell .= "$id.User.Value | Out-File -FilePath $path -Encoding UTF8"
+	GetScriptPath := A_ScriptDir "\DSL_temp-usrSID.ps1"
+	GetTXTPath := A_ScriptDir "\DSL_temp-usrSID.txt"
 
-	FileAppend(PShell, "DSL_temp-usrSID.ps1", "UTF-8")
-	Sleep 2
-	RunWait("powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & `"" A_ScriptDir "\DSL_temp-usrSID.ps1`"", , "Hide")
+	PShell := '$id = [System.Security.Principal.WindowsIdentity]::GetCurrent()`n'
+	PShell .= '$path = "' GetTXTPath '"`n'
+	PShell .= '$id.User.Value | Out-File -FilePath $path -Encoding UTF8'
 
-	Sleep 5
-
-	Result := FileRead("DSL_temp-usrSID.txt", "UTF-8")
-
-	FileDelete("DSL_temp-usrSID.txt")
-	FileDelete("DSL_temp-usrSID.ps1")
-
+	try {
+		FileAppend(PShell, GetScriptPath, "UTF-8")
+		Sleep 25
+		RunWait('powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & "' GetScriptPath '"', , "Hide")
+		Sleep 25
+		Result := FileRead(GetTXTPath, "UTF-8")
+	} finally {
+		FileDelete(GetTXTPath)
+		FileDelete(GetScriptPath)
+	}
+	for replaces in [" ", "`n", "`r"] {
+		Result := StrReplace(Result, replaces)
+	}
 	return Result
 }
 
 UserSID := PowerShell_UserSID()
-UserSID := StrReplace(UserSID, " ")
-UserSID := StrReplace(UserSID, "`n")
-UserSID := StrReplace(UserSID, "`r")
 
 IsFont(FontName) {
 	Suffixes := ["", " Regular", " Regular (TrueType)"]
