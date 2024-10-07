@@ -10823,7 +10823,7 @@ MapInsert(Characters,
 CustomComposeFile := WorkingDir "\CustomCompose.ini"
 if !FileExist(CustomComposeFile) {
 	IniWrite("Символ кандзи «Ёси»", CustomComposeFile, "kanji_yoshi", "name")
-	IniWrite("ёси", CustomComposeFile, "kanji_yoshi", "recipe")
+	IniWrite("ёси|yoshi", CustomComposeFile, "kanji_yoshi", "recipe")
 	IniWrite(Chr(0x7FA9), CustomComposeFile, "kanji_yoshi", "result")
 }
 
@@ -10845,9 +10845,25 @@ FillWithCustomRecipes() {
 				Recipe := IniRead(CustomComposeFile, section, "recipe")
 				RecipeResult := IniRead(CustomComposeFile, section, "result")
 
+
+				if InStr(Recipe, "|") {
+					Recipe := StrSplit(Recipe, "|")
+				}
+
 				RefinedResult := []
-				for k, char in StrSplit(RecipeResult) {
+				i := 1
+				while (i <= StrLen(RecipeResult)) {
+					char := SubStr(RecipeResult, i, 1)
+					code := Ord(char)
+
+					if (code >= 0xD800 && code <= 0xDBFF) {
+						nextChar := SubStr(RecipeResult, i + 1, 1)
+						char .= nextChar
+						i += 1
+					}
+
 					RefinedResult.Push("{U+" GetCharacterUnicode(char) "}")
+					i += 1
 				}
 
 				MapInsert(Characters,
@@ -10868,6 +10884,7 @@ FillWithCustomRecipes() {
 		return
 	}
 }
+
 
 FillWithCustomRecipes()
 
@@ -13044,6 +13061,12 @@ SwitchLanguage(LanguageCode) {
 	ManageTrayItems()
 }
 
+ContainsEmoji(StringInput) {
+	EmojisPattern := "[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F900}-\x{1F9FF}\x{2700}-\x{27BF}\x{1F1E6}-\x{1F1FF}]"
+	return RegExMatch(StringInput, EmojisPattern)
+}
+
+
 AlphabetCoverage := ["pl", "ro", "es"]
 Constructor() {
 	CheckUpdate()
@@ -13915,8 +13938,6 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		if (HasProp(GetEntry, "symbol")) {
 			if (HasProp(GetEntry, "symbolAlt")) {
 				TargetGroup[PreviewObject].Text := GetEntry.symbolAlt
-			} else if (StrLen(GetEntry.symbol) > 3) {
-				TargetGroup[PreviewObject].Text := SubStr(GetEntry.symbol, 1, 1)
 			} else {
 				TargetGroup[PreviewObject].Text := GetEntry.symbol
 			}
@@ -13935,7 +13956,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 			TargetGroup[PreviewObject].SetFont(
 				GetEntry.symbolCustom
 			)
-		} else if (StrLen(TargetGroup[PreviewObject].Text) > 2) {
+		} else if (StrLen(TargetGroup[PreviewObject].Text) > 2) || ContainsEmoji(TargetGroup[PreviewObject].Text) {
 			PreviewGroup.preview.SetFont(
 				CommonInfoFonts.previewSmaller . " norm cDefault"
 			)
