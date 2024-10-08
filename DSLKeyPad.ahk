@@ -219,7 +219,7 @@ PowerShell_UserSID() {
 	try {
 		FileAppend(PShell, GetScriptPath, "UTF-8")
 		Sleep 25
-		RunWait('powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & "' GetScriptPath '"', , "Hide")
+		RunWait("powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & " StrReplace(GetScriptPath, " ", "`` "), , "Hide")
 		Sleep 25
 		Result := FileRead(GetTXTPath, "UTF-8")
 	} finally {
@@ -10868,6 +10868,14 @@ FillWithCustomRecipes() {
 				if InStr(Recipe, "|") {
 					Recipe := StrSplit(Recipe, "|")
 				}
+
+				Escapes := ["\n", "`n", "\r", "`r", "\t", "`t"]
+				for i, replaces in Escapes {
+					if Mod(i, 2) = 1 {
+						RecipeResult := StrReplace(RecipeResult, replaces, Escapes[i + 1])
+					}
+				}
+
 
 				RefinedResult := []
 				i := 1
