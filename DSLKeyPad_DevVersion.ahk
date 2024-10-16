@@ -2872,6 +2872,12 @@ MapInsert(Characters,
 		alt_on_fast_keys: "<+>+ [/][.]",
 		recipe: ":↑:",
 	},
+	"reference_mark", {
+		unicode: "{U+203B}",
+		tags: ["reference mark", "знак сноски", "komejirushi", "комэдзируси"],
+		group: [["Special Characters", "Smelting Special"]],
+		recipe: ["..×..", ":×:"],
+	},
 	"exclamation", {
 		unicode: "{U+0021}",
 	},
@@ -6009,13 +6015,13 @@ MapInsert(Characters,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("arrow_right_ushaped"),
 	},
-	"lat_s_let_l_belt_palatal_hook", {
+	"lat_s_let_l_palatal_hook_belt", {
 		unicode: "{U+1DF13}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("arrow_right_ushaped", "palatal_hook_below"),
 	},
-	"lat_s_let_l_belt_retroflex_hook", {
+	"lat_s_let_l_retroflex_hook_belt", {
 		unicode: "{U+A78E}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
@@ -13986,11 +13992,11 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 			)
 		} else if (StrLen(TargetGroup[PreviewObject].Text) > 2) || ContainsEmoji(TargetGroup[PreviewObject].Text) {
 			PreviewGroup.preview.SetFont(
-				CommonInfoFonts.previewSmaller . " norm cDefault"
+				CommonInfoFonts.previewSmaller " norm cDefault"
 			)
 		} else {
 			PreviewGroup.preview.SetFont(
-				CommonInfoFonts.previewSize . " norm cDefault"
+				CommonInfoFonts.previewSize " norm cDefault"
 			)
 		}
 
