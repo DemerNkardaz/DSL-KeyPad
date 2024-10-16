@@ -3845,6 +3845,22 @@ MapInsert(Characters,
 		tags: ["строчное s длинное", "small s long"],
 		recipe: "fs",
 	},
+	"lat_c_let_upsilon", {
+		unicode: "{U+01B1}",
+		titlesAlt: True,
+		group: [["Latin Extended", "IPA"]],
+		tags: ["прописная буква перевёрнутая Омега", "capital letter inverted Omega"],
+		alt_layout: "<!>! [U]",
+		recipe: "-U-",
+	},
+	"lat_s_let_upsilon", {
+		unicode: "{U+028A}",
+		titlesAlt: True,
+		group: [["Latin Extended", "IPA"]],
+		tags: ["строчная буква перевёрнутая Омега", "small letter inverted Omega"],
+		alt_layout: "<!>! [u]",
+		recipe: "-u-",
+	},
 	;
 	;
 	; * Accented Latin Letters
@@ -7524,7 +7540,7 @@ MapInsert(Characters,
 		group: [["Cyrillic Letters", "Cyrillic Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<! [Ы]",
-		tags: ["прописная буква валахо-молдавская Ын кириллицы" "cyrillic capital letter romanian Yn"],
+		tags: ["прописная буква валахо-молдавская Ын кириллицы", "cyrillic capital letter romanian Yn"],
 		recipe: "ІѴ",
 	},
 	"cyr_s_let_yn", {
@@ -11422,8 +11438,8 @@ ProcessMapAfter(GroupLimited := "") {
 				TitleSequence.ru := RegExReplace(TitleSequence.ru, "\s\sс", "")
 
 
-				FullTagRu := CaseRu " буква " PreletterSequence.ru LetterVar TitleSequence.ru Postfix
-				FullTagEn := Prefix CaseEn " letter " PreletterSequence.en LetterVar TitleSequence.en
+				FullTagRu := StrLower(CaseRu) " буква " PreletterSequence.ru LetterVar TitleSequence.ru Postfix
+				FullTagEn := Prefix StrLower(CaseEn) " letter " PreletterSequence.en LetterVar TitleSequence.en
 				if HasProp(value, "tags") {
 
 					for index, tag in value.tags {
@@ -14862,7 +14878,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 
 			if HotKeyVariant = "Flat" {
-				TempArray.Push(Label, (K) => HandleFastKey(K, SlotValue))
+				if IsObject(SlotValue) {
+					TempArray.Push(Label, (K) => CapsSeparatedKey(K, SlotValue[1], SlotValue[2]))
+				} else {
+					TempArray.Push(Label, (K) => HandleFastKey(K, SlotValue))
+				}
 			} else if HotKeyVariant = "Caps" {
 				if IsObject(SlotValue) {
 					TempArray.Push(Label, (K) => CapsSeparatedKey(K, SlotValue[1], SlotValue[2]))
@@ -15746,13 +15766,52 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
 	} else if Combinations = "IPA" {
-		LayoutArray := [
-			UseKey["C"], (K) => HandleFastKey(K, "lat_s_let_c_curl"),
-			UseKey["D"], (K) => HandleFastKey(K, "lat_s_let_d_eth"),
-			UseKey["I"], (K) => HandleFastKey(K, "lat_s_c_let_i"),
-			UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle"),
-			"<^>!" UseKey["Semicolon"], (K) => HandleFastKey(K, "colon_triangle_half"),
-		]
+		SlotMapping := Map(
+			"A", "",
+			"B", "",
+			"C", "lat_s_let_c_curl",
+			"D", "lat_s_let_d_eth",
+			"E", "",
+			"F", "",
+			"G", "",
+			"H", "",
+			"I", "lat_s_c_let_i",
+			"J", "",
+			"K", "",
+			"L", "",
+			"M", "",
+			"N", "",
+			"O", "",
+			"P", "",
+			"Q", "",
+			"R", "",
+			"S", "",
+			"T", "",
+			"U", "",
+			"V", "",
+			"W", "",
+			"X", "",
+			"Y", "",
+			"Z", "",
+			"~", "kkey_grave_accent",
+			",", "kkey_comma",
+			".", "kkey_dot",
+			";", "colon_triangle",
+			"'", "kkey_apostrophe",
+			"[", "kkey_l_square_bracket",
+			"]", "kkey_r_square_bracket",
+			"=", "kkey_equals",
+			"-", "kkey_hyphen_minus",
+			"/", "kkey_slash",
+		)
+
+		SlotModdedMapping := Map(
+			"U", Map("<^>!<!", ["lat_c_let_upsilon", "lat_s_let_upsilon"]),
+			";", Map("<^>!", "colon_triangle_half"),
+		)
+
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
+
 		Loop 26
 		{
 			Letter := Chr(65 + A_Index - 1)
