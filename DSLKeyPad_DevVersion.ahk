@@ -17936,6 +17936,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"france_single_left", MapMerge(GetModifiers("<^>!<!<+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
 			"france_single_right", MapMerge(GetModifiers("<^>!<!<+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "." : "DotRu"]),
 			"quote_low_9_single", MapMerge(GetModifiers("<^>!<+>+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
+			"quote_low_9_double", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
 			"quote_low_9_double", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
 			"quote_low_9_double_reversed", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "." : "DotRu"]),
 		])
