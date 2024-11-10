@@ -141,12 +141,10 @@ EscapePressed := False
 FastKeysIsActive := False
 SkipGroupMessage := False
 GlagoFutharkActive := False
-CombiningEnabled := False
-ModifiersEnabled := False
-SubscriptCharsEnabled := False
 DisabledAllKeys := False
 ActiveScriptName := ""
 PreviousScriptName := ""
+AlterationActiveName := ""
 InputMode := "Default"
 LaTeXMode := "Default"
 
@@ -14482,14 +14480,14 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 				for _, key in characterKeys {
 					if (keyPressed == key) {
 						if InputMode = "HTML" && HasProp(value, "html") {
-							(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
-								(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
-									(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
+							(AlterationActiveName = "subscript" && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+								(AlterationActiveName = "modifier" && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+									(AlterationActiveName = "combining" && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							SendText(IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX)
 						}
 						else {
-							if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+							if AlterationActiveName = "subscript" && HasProp(value, "subscriptForm") {
 								if IsObject(value.subscriptForm) {
 									TempValue := ""
 									for modifier in value.subscriptForm {
@@ -14499,7 +14497,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 								} else {
 									Send(value.subscriptForm)
 								}
-							} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+							} else if AlterationActiveName = "modifier" && HasProp(value, "modifierForm") {
 								if IsObject(value.modifierForm) {
 									TempValue := ""
 									for modifier in value.modifierForm {
@@ -14509,7 +14507,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 								} else {
 									Send(value.modifierForm)
 								}
-							} else if CombiningEnabled && HasProp(value, "combiningForm") {
+							} else if AlterationActiveName = "combining" && HasProp(value, "combiningForm") {
 								if IsObject(value.combiningForm) {
 									TempValue := ""
 									for combining in value.combiningForm {
@@ -14536,9 +14534,9 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 			} else {
 				if (keyPressed == characterKeys) {
 					if InputMode = "HTML" && HasProp(value, "html") {
-						(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.modifiesubscriptHTMLrHTML) :
-							(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
-								(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
+						(AlterationActiveName = "subscript" && HasProp(value, "subscriptHTML")) ? SendText(value.modifiesubscriptHTMLrHTML) :
+							(AlterationActiveName = "modifier" && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+								(AlterationActiveName = "combining" && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) : SendText(characterEntity)
 					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 						if IsObject(characterLaTeX) {
 							if LaTeXMode = "common"
@@ -14550,7 +14548,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 						}
 					}
 					else {
-						if ModifiersEnabled && HasProp(value, "subscriptForm") {
+						if AlterationActiveName = "subscript" && HasProp(value, "subscriptForm") {
 							if IsObject(value.subscriptForm) {
 								TempValue := ""
 								for modifier in value.subscriptForm {
@@ -14560,7 +14558,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 							} else {
 								Send(value.modsubscriptFormifierForm)
 							}
-						} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+						} else if AlterationActiveName = "modifier" && HasProp(value, "modifierForm") {
 							if IsObject(value.modifierForm) {
 								TempValue := ""
 								for modifier in value.modifierForm {
@@ -14570,7 +14568,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 							} else {
 								Send(value.modifierForm)
 							}
-						} else if CombiningEnabled && HasProp(value, "combiningForm") {
+						} else if AlterationActiveName = "combining" && HasProp(value, "combiningForm") {
 							if IsObject(value.combiningForm) {
 								TempValue := ""
 								for combining in value.combiningForm {
@@ -14669,15 +14667,15 @@ SearchKey(CycleSend := "") {
 			OutputValue := ""
 			if InputMode = "HTML" && HasProp(value, "html") {
 				SendValue :=
-					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
-						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
-							(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
+					(AlterationActiveName = "subscript" && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+						(AlterationActiveName = "modifier" && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+							(AlterationActiveName = "combining" && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
 				OutputValue := SendValue
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				OutputValue := IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			}
 			else {
-				if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+				if AlterationActiveName = "subscript" && HasProp(value, "subscriptForm") {
 					if IsObject(value.subscriptForm) {
 						TempValue := ""
 						for modifier in value.subscriptForm {
@@ -14687,7 +14685,7 @@ SearchKey(CycleSend := "") {
 					} else {
 						OutputValue := Chr("0x" UniTrim(value.subscriptForm))
 					}
-				} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+				} else if AlterationActiveName = "modifier" && HasProp(value, "modifierForm") {
 					if IsObject(value.modifierForm) {
 						TempValue := ""
 						for modifier in value.modifierForm {
@@ -14697,7 +14695,7 @@ SearchKey(CycleSend := "") {
 					} else {
 						OutputValue := Chr("0x" UniTrim(value.modifierForm))
 					}
-				} else if CombiningEnabled && HasProp(value, "combiningForm") {
+				} else if AlterationActiveName = "combining" && HasProp(value, "combiningForm") {
 					if IsObject(value.combiningForm) {
 						TempValue := ""
 						for combining in value.combiningForm {
@@ -15512,7 +15510,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 	Found := False
 	GetUniChar(value) {
 		Output := ""
-		if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+		if AlterationActiveName = "subscript" && HasProp(value, "subscriptForm") {
 			if IsObject(value.subscriptForm) {
 				TempValue := ""
 				for modifier in value.subscriptForm {
@@ -15522,7 +15520,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 			} else {
 				Output := PasteUnicode(value.subscriptForm)
 			}
-		} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+		} else if AlterationActiveName = "modifier" && HasProp(value, "modifierForm") {
 			if IsObject(value.modifierForm) {
 				TempValue := ""
 				for modifier in value.modifierForm {
@@ -15532,7 +15530,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 			} else {
 				Output := PasteUnicode(value.modifierForm)
 			}
-		} else if CombiningEnabled && HasProp(value, "combiningForm") {
+		} else if AlterationActiveName = "combining" && HasProp(value, "combiningForm") {
 			if IsObject(value.combiningForm) {
 				TempValue := ""
 				for combining in value.combiningForm {
@@ -15669,9 +15667,9 @@ Ligaturise(SmeltingMode := "InputBox") {
 								(IsSingleCase && Input = recipeEntry) {
 									if InputMode = "HTML" && HasProp(value, "html") {
 										GetUnicodeSymbol :=
-											(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
-												(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
-													(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
+											(AlterationActiveName = "subscript" && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+												(AlterationActiveName = "modifier" && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+													(AlterationActiveName = "combining" && HasProp(value, "combiningHTML")) ? value.combiningHTML :
 														(value.HasProp("entity") ? value.entity : value.html)
 									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 										GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
@@ -15686,9 +15684,9 @@ Ligaturise(SmeltingMode := "InputBox") {
 						} else if (!IsSingleCase && Input == Recipe) || (IsSingleCase && Input = Recipe) {
 							if InputMode = "HTML" && HasProp(value, "html") {
 								GetUnicodeSymbol :=
-									(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
-										(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
-											(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML :
+									(AlterationActiveName = "subscript" && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+										(AlterationActiveName = "modifier" && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+											(AlterationActiveName = "combining" && HasProp(value, "combiningHTML")) ? value.combiningHTML :
 												(value.HasProp("entity") ? value.entity : value.html)
 							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 								GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
@@ -15737,9 +15735,9 @@ Ligaturise(SmeltingMode := "InputBox") {
 				for _, recipe in Recipe {
 					if (recipe == PromptValue) {
 						if InputMode = "HTML" && HasProp(value, "html") {
-							(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
-								(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
-									(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
+							(AlterationActiveName = "subscript" && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+								(AlterationActiveName = "modifier" && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+									(AlterationActiveName = "combining" && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
 										value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
@@ -15753,9 +15751,9 @@ Ligaturise(SmeltingMode := "InputBox") {
 				}
 			} else if (Recipe == PromptValue) {
 				if InputMode = "HTML" && HasProp(value, "html") {
-					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
-						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
-							(CombiningEnabled && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
+					(AlterationActiveName = "subscript" && HasProp(value, "subscriptHTML")) ? SendText(value.subscriptHTML) :
+						(AlterationActiveName = "modifier" && HasProp(value, "modifierHTML")) ? SendText(value.modifierHTML) :
+							(AlterationActiveName = "combining" && HasProp(value, "combiningHTML")) ? SendText(value.combiningHTML) :
 								value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
 				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 					SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
@@ -17199,10 +17197,12 @@ LV_OpenUnicodeWebsite(LV, RowNumber) {
 			if (InputMode = "HTML" || InputMode = "LaTeX") {
 				for characterEntry, value in Characters {
 					if (SelectedRow = UniTrim(value.unicode)) {
-						if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+						if AlterationActiveName = "subscript" && HasProp(value, "subscriptForm") {
 							A_Clipboard := value.subscriptForm
-						} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+						} else if AlterationActiveName = "modifier" && HasProp(value, "modifierForm") {
 							A_Clipboard := value.modifierForm
+						} else if AlterationActiveName = "combining" && HasProp(value, "combiningForm") {
+							A_Clipboard := value.combiningForm
 						} else if InputMode = "HTML" && HasProp(value, "html") {
 							A_Clipboard := HasProp(value, "entity") ? value.entity : value.html
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
@@ -17427,13 +17427,13 @@ GetCharacterSequence(CharacterName) {
 
 			if InputMode = "HTML" && HasProp(value, "html") {
 				Output .=
-					(SubscriptCharsEnabled && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
-						(ModifiersEnabled && HasProp(value, "modifierHTML")) ? value.modifierHTML :
-							(CombiningEnabled && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
+					(AlterationActiveName = "subscript" && HasProp(value, "subscriptHTML")) ? value.subscriptHTML :
+						(AlterationActiveName = "modifier" && HasProp(value, "modifierHTML")) ? value.modifierHTML :
+							(AlterationActiveName = "combining" && HasProp(value, "combiningHTML")) ? value.combiningHTML : characterEntity
 			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				Output .= IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			} else {
-				if SubscriptCharsEnabled && HasProp(value, "subscriptForm") {
+				if AlterationActiveName = "subscript" && HasProp(value, "subscriptForm") {
 					if IsObject(value.subscriptForm) {
 						TempValue := ""
 						for modifier in value.subscriptForm {
@@ -17443,7 +17443,7 @@ GetCharacterSequence(CharacterName) {
 					} else {
 						Send(value.subscriptForm)
 					}
-				} else if ModifiersEnabled && HasProp(value, "modifierForm") {
+				} else if AlterationActiveName = "modifier" && HasProp(value, "modifierForm") {
 					if IsObject(value.modifierForm) {
 						TempValue := ""
 						for modifier in value.modifierForm {
@@ -17453,7 +17453,7 @@ GetCharacterSequence(CharacterName) {
 					} else {
 						Send(value.modifierForm)
 					}
-				} else if CombiningEnabled && HasProp(value, "combiningForm") {
+				} else if AlterationActiveName = "combining" && HasProp(value, "combiningForm") {
 					if IsObject(value.combiningForm) {
 						TempValue := ""
 						for combining in value.combiningForm {
@@ -19125,16 +19125,11 @@ RAltsSetStats() {
 
 
 SetModifiedCharsInput(ModeName := "combining") {
-	global ModifiersEnabled, SubscriptCharsEnabled, CombiningEnabled
-	IsToRegister := False
+	global AlterationActiveName
 
-	CombiningEnabled := ModeName = "combining" ? (!CombiningEnabled ? True : False) : False
-	ModifiersEnabled := ModeName = "modifier" ? (!ModifiersEnabled ? True : False) : False
-	SubscriptCharsEnabled := ModeName = "subscript" ? (!SubscriptCharsEnabled ? True : False) : False
+	AlterationActiveName := ModeName = AlterationActiveName ? "" : ModeName
 
-	IsToRegister := ModeName = "combining" ? CombiningEnabled : ModeName = "modifier" ? ModifiersEnabled : ModeName = "subscript" ? SubscriptCharsEnabled : False
-
-	if IsToRegister {
+	if AlterationActiveName != "" {
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
 		ShowInfoMessage("message_" ModeName, , , SkipGroupMessage, True)
 	} else {
