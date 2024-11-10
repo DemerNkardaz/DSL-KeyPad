@@ -1293,7 +1293,7 @@ ArrayMerge(Arrays*) {
 }
 
 GetMapCount(MapObj, SortGroups := "") {
-	properties := ["combiningForm", "modifierForm", "italicForm", "italicBoldForm", "boldForm", "subscriptForm"]
+	properties := ["combiningForm", "modifierForm", "italicForm", "italicBoldForm", "boldForm", "subscriptForm", "scriptForm", "frakturForm", "scriptBoldForm", "frakturBoldForm"]
 	if !IsObject(SortGroups) {
 		keyCount := MapObj.Count
 
@@ -13533,9 +13533,13 @@ MapInsert(Characters,
 
 MapInsert(Characters,
 	"lat_c_let_a", { group: ["Default Letters"], calcOff: "", unicode: "{U+0041}", modifierForm: "{U+1D2C}",
-		italicForm: "{U+1D434}", italicBoldForm: "{U+1D468}", boldForm: "{U+1D400}" },
+		italicForm: "{U+1D434}", italicBoldForm: "{U+1D468}", boldForm: "{U+1D400}",
+		frakturForm: "{U+1D504}", frakturBoldForm: "{U+1D56C}",
+		scriptForm: "{U+1D49C}", scriptBoldForm: "{U+1D4D0}" },
 	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}", subscriptForm: "{U+2090}",
-		italicForm: "{U+1D44E}", italicBoldForm: "{U+1D482}", boldForm: "{U+1D41A}" },
+		italicForm: "{U+1D44E}", italicBoldForm: "{U+1D482}", boldForm: "{U+1D41A}",
+		frakturForm: "{U+1D51E}", frakturBoldForm: "{U+1D586}",
+		scriptForm: "{U+1D4B6}", scriptBoldForm: "{U+1D4EA}" },
 	"lat_c_let_b", { calcOff: "", unicode: "{U+0042}", modifierForm: "{U+1D2E}",
 		italicForm: "{U+1D435}", italicBoldForm: "{U+1D469}", boldForm: "{U+1D401}" },
 	"lat_s_let_b", { calcOff: "", unicode: "{U+0062}", combiningForm: "{U+1DE8}", modifierForm: "{U+1D47}",
@@ -14179,7 +14183,7 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 		}
 
-		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold"]
+		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold"]
 
 		for alteration in Alterations {
 			if HasProp(value, alteration "Form") {
@@ -18930,6 +18934,10 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["F5"], (*) => SetModifiedCharsInput("italic"),
 			"<^>!>+" UseKey["F5"], (*) => SetModifiedCharsInput("italicBold"),
 			"<^>!<+" UseKey["F5"], (*) => SetModifiedCharsInput("bold"),
+			"<^>!" UseKey["F6"], (*) => SetModifiedCharsInput("fraktur"),
+			"<^>!>+" UseKey["F6"], (*) => SetModifiedCharsInput("frakturBold"),
+			"<^>!" UseKey["F7"], (*) => SetModifiedCharsInput("script"),
+			"<^>!>+" UseKey["F7"], (*) => SetModifiedCharsInput("scriptBold"),
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
