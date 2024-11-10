@@ -1298,18 +1298,16 @@ GetMapCount(MapObj, SortGroups := "") {
 	if !IsObject(SortGroups) {
 		keyCount := MapObj.Count
 
+		properties := ["combiningForm", "modifierForm", "italicForm", "subscriptForm"]
+
 		for characterEntry, value in MapObj {
 			if HasProp(value, "calcOff") {
 				keyCount--
 			}
-			if HasProp(value, "combiningForm") {
-				keyCount++
-			}
-			if HasProp(value, "modifierForm") {
-				keyCount++
-			}
-			if HasProp(value, "subscriptForm") {
-				keyCount++
+			for property in properties {
+				if HasProp(value, property) {
+					keyCount++
+				}
 			}
 		}
 
@@ -13532,8 +13530,8 @@ MapInsert(Characters,
 
 
 MapInsert(Characters,
-	"lat_c_let_a", { calcOff: "", unicode: "{U+0041}", modifierForm: "{U+1D2C}" },
-	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}", subscriptForm: "{U+2090}" },
+	"lat_c_let_a", { calcOff: "", unicode: "{U+0041}", modifierForm: "{U+1D2C}", italicForm: "{U+1D434}" },
+	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}", subscriptForm: "{U+2090}", italicForm: "{U+1D44E}" },
 	"lat_c_let_b", { calcOff: "", unicode: "{U+0042}", modifierForm: "{U+1D2E}" },
 	"lat_s_let_b", { calcOff: "", unicode: "{U+0062}", combiningForm: "{U+1DE8}", modifierForm: "{U+1D47}" },
 	"lat_c_let_c", { calcOff: "", unicode: "{U+0043}", modifierForm: "{U+A7F2}" },
@@ -14128,42 +14126,28 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 		}
 
-		if HasProp(value, "combiningForm") {
-			if !HasProp(value, "combiningHTML") {
-				value.combiningHTML := ""
-			}
-			if IsObject(value.combiningForm) {
-				for combining in value.combiningForm {
-					value.combiningHTML .= "&#" ConvertToDecimal(PasteUnicode(combining)) ";"
+		Alterations := ["combining", "modifier", "subscript"]
+
+		for alteration in Alterations {
+			if HasProp(value, alteration "Form") {
+				if !HasProp(value, alteration "HTML") {
+					value.%alteration%HTML := ""
 				}
-			} else {
-				value.combiningHTML := "&#" ConvertToDecimal(PasteUnicode(value.combiningForm)) ";"
+				if IsObject(value.%alteration%Form) {
+					for FormUnicodeKey in value.%alteration%Form {
+						value.%alteration%HTML .= "&#" ConvertToDecimal(PasteUnicode(FormUnicodeKey)) ";"
+					}
+				} else {
+					value.%alteration%HTML := "&#" ConvertToDecimal(PasteUnicode(value.%alteration%Form)) ";"
+				}
 			}
 		}
 
-		if HasProp(value, "modifierForm") {
-			if !HasProp(value, "modifierHTML") {
-				value.modifierHTML := ""
-			}
-			if IsObject(value.modifierForm) {
-				for combining in value.modifierForm {
-					value.modifierHTML .= "&#" ConvertToDecimal(PasteUnicode(combining)) ";"
-				}
-			} else {
-				value.modifierHTML := "&#" ConvertToDecimal(PasteUnicode(value.modifierForm)) ";"
-			}
-		}
+		ModifierReplacements := ["alt_special", "modifier", "alt_layout"]
 
-		if HasProp(value, "subscriptForm") {
-			if !HasProp(value, "subscriptHTML") {
-				value.subscriptHTML := ""
-			}
-			if IsObject(value.subscriptForm) {
-				for combining in value.subscriptForm {
-					value.subscriptHTML .= "&#" ConvertToDecimal(PasteUnicode(combining)) ";"
-				}
-			} else {
-				value.subscriptHTML := "&#" ConvertToDecimal(PasteUnicode(value.subscriptForm)) ";"
+		for modifierReplace in ModifierReplacements {
+			if HasProp(value, modifierReplace) {
+				value.%modifierReplace% := ReplaceModifierKeys(value.%modifierReplace%)
 			}
 		}
 
@@ -14173,17 +14157,8 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 			value.alt_on_fast_keys := ReplaceModifierKeys(value.alt_on_fast_keys)
 		}
-		if HasProp(value, "alt_special") {
-			value.alt_special := ReplaceModifierKeys(value.alt_special)
-		}
-		if HasProp(value, "modifier") {
-			value.modifier := ReplaceModifierKeys(value.modifier)
-		}
 		if (HasProp(value, "group") && value.group.Has(2)) {
 			value.group[2] := ReplaceModifierKeys(value.group[2])
-		}
-		if HasProp(value, "alt_layout") {
-			value.alt_layout := ReplaceModifierKeys(value.alt_layout)
 		}
 
 
