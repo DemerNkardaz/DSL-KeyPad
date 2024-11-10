@@ -1293,7 +1293,7 @@ ArrayMerge(Arrays*) {
 }
 
 GetMapCount(MapObj, SortGroups := "") {
-	properties := ["combiningForm", "modifierForm", "italicForm", "italicBoldForm", "boldForm", "subscriptForm", "scriptForm", "frakturForm", "scriptBoldForm", "frakturBoldForm"]
+	properties := ["combiningForm", "modifierForm", "italicForm", "italicBoldForm", "boldForm", "subscriptForm", "scriptForm", "frakturForm", "scriptBoldForm", "frakturBoldForm", "doubleStruckForm", "doubleStruckBoldForm", "doubleStruckItalicForm", "doubleStruckItalicBoldForm"]
 	if !IsObject(SortGroups) {
 		keyCount := MapObj.Count
 
@@ -13535,27 +13535,53 @@ MapInsert(Characters,
 	"lat_c_let_a", { group: ["Default Letters"], calcOff: "", unicode: "{U+0041}", modifierForm: "{U+1D2C}",
 		italicForm: "{U+1D434}", italicBoldForm: "{U+1D468}", boldForm: "{U+1D400}",
 		frakturForm: "{U+1D504}", frakturBoldForm: "{U+1D56C}",
-		scriptForm: "{U+1D49C}", scriptBoldForm: "{U+1D4D0}" },
+		scriptForm: "{U+1D49C}", scriptBoldForm: "{U+1D4D0}",
+		doubleStruckForm: "{U+1D538}" },
 	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}", subscriptForm: "{U+2090}",
 		italicForm: "{U+1D44E}", italicBoldForm: "{U+1D482}", boldForm: "{U+1D41A}",
 		frakturForm: "{U+1D51E}", frakturBoldForm: "{U+1D586}",
-		scriptForm: "{U+1D4B6}", scriptBoldForm: "{U+1D4EA}" },
+		scriptForm: "{U+1D4B6}", scriptBoldForm: "{U+1D4EA}",
+		doubleStruckForm: "{U+1D552}" },
 	"lat_c_let_b", { calcOff: "", unicode: "{U+0042}", modifierForm: "{U+1D2E}",
-		italicForm: "{U+1D435}", italicBoldForm: "{U+1D469}", boldForm: "{U+1D401}" },
+		italicForm: "{U+1D435}", italicBoldForm: "{U+1D469}", boldForm: "{U+1D401}",
+		frakturForm: "{U+1D505}", frakturBoldForm: "{U+1D56D}",
+		scriptForm: "{U+212C}", scriptBoldForm: "{U+1D4D1}",
+		doubleStruckForm: "{U+1D539}" },
 	"lat_s_let_b", { calcOff: "", unicode: "{U+0062}", combiningForm: "{U+1DE8}", modifierForm: "{U+1D47}",
-		italicForm: "{U+1D44F}", italicBoldForm: "{U+1D483}", boldForm: "{U+1D41B}" },
+		italicForm: "{U+1D44F}", italicBoldForm: "{U+1D483}", boldForm: "{U+1D41B}",
+		frakturForm: "{U+1D51F}", frakturBoldForm: "{U+1D587}",
+		scriptForm: "{U+1D4B7}", scriptBoldForm: "{U+1D4EB}",
+		doubleStruckForm: "{U+1D553}" },
 	"lat_c_let_c", { calcOff: "", unicode: "{U+0043}", modifierForm: "{U+A7F2}",
-		italicForm: "{U+1D436}", italicBoldForm: "{U+1D46A}", boldForm: "{U+1D402}" },
+		italicForm: "{U+1D436}", italicBoldForm: "{U+1D46A}", boldForm: "{U+1D402}",
+		frakturForm: "{U+212D}", frakturBoldForm: "{U+1D56E}",
+		scriptForm: "{U+1D49E}", scriptBoldForm: "{U+1D4D2}",
+		doubleStruckForm: "{U+2102}" },
 	"lat_s_let_c", { calcOff: "", unicode: "{U+0063}", combiningForm: "{U+0368}", modifierForm: "{U+1D9C}",
-		italicForm: "{U+1D450}", italicBoldForm: "{U+1D484}", boldForm: "{U+1D41C}" },
+		italicForm: "{U+1D450}", italicBoldForm: "{U+1D484}", boldForm: "{U+1D41C}",
+		frakturForm: "{U+1D520}", frakturBoldForm: "{U+1D588}",
+		scriptForm: "{U+1D4B8}", scriptBoldForm: "{U+1D4EC}",
+		doubleStruckForm: "{U+1D554}" },
 	"lat_c_let_d", { calcOff: "", unicode: "{U+0044}", modifierForm: "{U+1D30}",
-		italicForm: "{U+1D437}", italicBoldForm: "{U+1D46B}", boldForm: "{U+1D403}" },
+		italicForm: "{U+1D437}", italicBoldForm: "{U+1D46B}", boldForm: "{U+1D403}",
+		frakturForm: "{U+1D507}", frakturBoldForm: "{U+1D56F}",
+		scriptForm: "{U+1D49F}", scriptBoldForm: "{U+1D4D3}",
+		doubleStruckForm: "{U+1D53B}", doubleStruckItalicForm: "{U+2145}" },
 	"lat_s_let_d", { calcOff: "", unicode: "{U+0064}", combiningForm: "{U+0369}", modifierForm: "{U+1D48}",
-		italicForm: "{U+1D451}", italicBoldForm: "{U+1D485}", boldForm: "{U+1D41D}" },
+		italicForm: "{U+1D451}", italicBoldForm: "{U+1D485}", boldForm: "{U+1D41D}",
+		frakturForm: "{U+1D521}", frakturBoldForm: "{U+1D589}",
+		scriptForm: "{U+1D4B9}", scriptBoldForm: "{U+1D4ED}",
+		doubleStruckForm: "{U+1D555}", doubleStruckItalicForm: "{U+2146}" },
 	"lat_c_let_e", { calcOff: "", unicode: "{U+0045}", modifierForm: "{U+1D31}",
-		italicForm: "{U+1D438}", italicBoldForm: "{U+1D46C}", boldForm: "{U+1D404}" },
+		italicForm: "{U+1D438}", italicBoldForm: "{U+1D46C}", boldForm: "{U+1D404}",
+		frakturForm: "{U+1D508}", frakturBoldForm: "{U+1D589}",
+		scriptForm: "{U+2130}", scriptBoldForm: "{U+1D570}",
+		doubleStruckForm: "{U+1D53C}" },
 	"lat_s_let_e", { calcOff: "", unicode: "{U+0065}", combiningForm: "{U+0364}", modifierForm: "{U+1D49}", subscriptForm: "{U+2091}",
-		italicForm: "{U+1D452}", italicBoldForm: "{U+1D486}", boldForm: "{U+1D41E}" },
+		italicForm: "{U+1D452}", italicBoldForm: "{U+1D486}", boldForm: "{U+1D41E}",
+		frakturForm: "{U+1D522}", frakturBoldForm: "{U+1D58A}",
+		scriptForm: "{U+212F}", scriptBoldForm: "{U+1D4EE}",
+		doubleStruckForm: "{U+1D556}", doubleStruckItalicForm: "{U+2147}" },
 	"lat_c_let_f", { calcOff: "", unicode: "{U+0046}", modifierForm: "{U+A7F3}",
 		italicForm: "{U+1D439}", italicBoldForm: "{U+1D46D}", boldForm: "{U+1D405}" },
 	"lat_s_let_f", { calcOff: "", unicode: "{U+0066}", combiningForm: "{U+1DEB}", modifierForm: "{U+1DA0}",
@@ -14183,7 +14209,7 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 		}
 
-		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold"]
+		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold"]
 
 		for alteration in Alterations {
 			if HasProp(value, alteration "Form") {
@@ -18938,6 +18964,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!>+" UseKey["F6"], (*) => SetModifiedCharsInput("frakturBold"),
 			"<^>!" UseKey["F7"], (*) => SetModifiedCharsInput("script"),
 			"<^>!>+" UseKey["F7"], (*) => SetModifiedCharsInput("scriptBold"),
+			"<^>!" UseKey["F8"], (*) => SetModifiedCharsInput("doubleStruck"),
+			"<^>!>+" UseKey["F8"], (*) => SetModifiedCharsInput("doubleStruckItalic"),
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
