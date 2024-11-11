@@ -2209,7 +2209,7 @@ MapInsert(Characters,
 		tags: ["emsp14", "1/4emsp", "1/4 круглой Шпации"],
 		group: [["Spaces", "Spaces Left Shift"], "4"],
 		symbolClass: "Spaces",
-		show_on_fast_keys: True,
+		show_on_fast_keys: False,
 		alt_on_fast_keys: "[Space]",
 		symbolAlt: Chr(0x2005),
 	},
@@ -16576,7 +16576,11 @@ Constructor() {
 	Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_old_hungarian"), Command_extralayouts)
 	Command_gothic := CommandsTree.Add(ReadLocale("func_label_gothic"), Command_extralayouts)
 	Command_func_label_ipa := CommandsTree.Add(ReadLocale("func_label_ipa"), Command_extralayouts)
-	Command_combining := CommandsTree.Add(ReadLocale("func_label_combining"))
+	Command_combining := CommandsTree.Add(ReadLocale("func_label_alterations"))
+	Command_combining_combining := CommandsTree.Add(ReadLocale("func_label_alterations_combining"), Command_combining)
+	Command_combining_modifier := CommandsTree.Add(ReadLocale("func_label_alterations_modifier"), Command_combining)
+	Command_combining_italic_to_bold := CommandsTree.Add(ReadLocale("func_label_alterations_italic_to_bold"), Command_combining)
+	Command_combining_fraktur_script_struck := CommandsTree.Add(ReadLocale("func_label_alterations_fraktur_script_struck"), Command_combining)
 	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_input_toggle"))
 	Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layout_toggle"))
 	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifications"))
@@ -17173,21 +17177,28 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 
 		GroupTitle := ""
 		IsDiacritic := RegExMatch(GetEntry.symbol, "^" DottedCircle "\S")
-		IsCombining := IsDiacritic || HasProp(GetEntry, "combiningForm")
-		IsModifier := HasProp(GetEntry, "modifierForm")
-		IsSubscript := HasProp(GetEntry, "subscriptForm")
 
-		if IsModifier {
-			GroupTitle .= GetChar("dotted_circle") Chr(0x02B0) " "
+		AlterationsValidator := Map(
+			"IsModifier", [HasProp(GetEntry, "modifierForm"), 0x02B0],
+			"IsSubscript", [HasProp(GetEntry, "subscriptForm"), 0x2095],
+			"IsCombining", [IsDiacritic || HasProp(GetEntry, "combiningForm"), 0x036A],
+			"IsItalic", [HasProp(GetEntry, "italicForm"), 0x210E],
+			"IsItalicBold", [HasProp(GetEntry, "italicBoldForm"), 0x1D489],
+			"IsBold", [HasProp(GetEntry, "boldForm"), 0x1D421],
+			"IsFraktur", [HasProp(GetEntry, "frakturForm"), 0x1D525],
+			"IsFrakturBold", [HasProp(GetEntry, "frakturBoldForm"), 0x1D58D],
+			"IsScript", [HasProp(GetEntry, "scriptForm"), 0x1D4BD],
+			"IsScriptBold", [HasProp(GetEntry, "scriptBoldForm"), 0x1D4F1],
+			"IsDoubleStruck", [HasProp(GetEntry, "doubleStruckForm"), 0x1D559],
+			"IsDoubleStruckItalic", [HasProp(GetEntry, "doubleStruckItalicForm"), 0x2148],
+		)
+
+		for entry, value in AlterationsValidator {
+			if (value[1]) {
+				GroupTitle .= GetChar("dotted_circle") Chr(value[2]) " "
+			}
 		}
 
-		if IsSubscript {
-			GroupTitle .= GetChar("dotted_circle") Chr(0x2095) " "
-		}
-
-		if IsCombining {
-			GroupTitle .= GetChar("dotted_circle") Chr(0x036A) " "
-		}
 
 		TargetGroup[PreviewGroupTitle].Text := GroupTitle (IsDiacritic ? ReadLocale("character_combining") : ReadLocale("character"))
 
@@ -17273,7 +17284,11 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_num_roman",
 		"func_label_fastkeys",
 		"func_label_scripts",
-		"func_label_combining",
+		"func_label_alterations",
+		"func_label_alterations_combining",
+		"func_label_alterations_modifier",
+		"func_label_alterations_italic_to_bold",
+		"func_label_alterations_fraktur_script_struck",
 		"func_label_glagolitic_futhark",
 		"func_label_old_permic_old_turkic",
 		"func_label_old_hungarian",
@@ -18057,7 +18072,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"Flat:<^>!<!>+", "punctuation_space",
 				"Flat:<^>!<!<+>+", "zero_width_space",
 				"Flat:<!", "emsp13",
-				"Flat:<+", "emsp14",
+				;"Flat:<+", "emsp14",
 				"Flat:>+", "emsp16",
 				"Flat:<+>+", "narrow_no_break_space",
 			),
