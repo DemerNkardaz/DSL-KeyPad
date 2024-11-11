@@ -15264,7 +15264,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 ChangeScriptInput(ScriptMode) {
 	PreviousScriptMode := IniRead(ConfigFile, "Settings", "ScriptInput", "Default")
 
-	IsAlterationsActive := GetModifiedCharsType() ? True : False
+	IsAlterationsActive := AlterationActiveName != "" ? True : False
 
 	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
 		IniWrite("Default", ConfigFile, "Settings", "ScriptInput")
