@@ -13895,16 +13895,16 @@ MapInsert(Characters,
 )
 
 MapInsert(Characters,
-	"kkey_0", { calcOff: "", unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", doubleStruckForm: "{U+1D7D8}" },
-	"kkey_1", { calcOff: "", unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", doubleStruckForm: "{U+1D7D9}" },
-	"kkey_2", { calcOff: "", unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", doubleStruckForm: "{U+1D7DA}" },
-	"kkey_3", { calcOff: "", unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", doubleStruckForm: "{U+1D7DB}" },
-	"kkey_4", { calcOff: "", unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", doubleStruckForm: "{U+1D7DC}" },
-	"kkey_5", { calcOff: "", unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", doubleStruckForm: "{U+1D7DD}" },
-	"kkey_6", { calcOff: "", unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", doubleStruckForm: "{U+1D7DE}" },
-	"kkey_7", { calcOff: "", unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", doubleStruckForm: "{U+1D7DF}" },
-	"kkey_8", { calcOff: "", unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", doubleStruckForm: "{U+1D7E0}" },
-	"kkey_9", { calcOff: "", unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", doubleStruckForm: "{U+1D7E1}" },
+	"kkey_0", { calcOff: "", unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", doubleStruckForm: "{U+1D7D8}", boldForm: "{U+1D7CE}" },
+	"kkey_1", { calcOff: "", unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", doubleStruckForm: "{U+1D7D9}", boldForm: "{U+1D7CF}" },
+	"kkey_2", { calcOff: "", unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", doubleStruckForm: "{U+1D7DA}", boldForm: "{U+1D7D0}" },
+	"kkey_3", { calcOff: "", unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", doubleStruckForm: "{U+1D7DB}", boldForm: "{U+1D7D1}" },
+	"kkey_4", { calcOff: "", unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", doubleStruckForm: "{U+1D7DC}", boldForm: "{U+1D7D2}" },
+	"kkey_5", { calcOff: "", unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", doubleStruckForm: "{U+1D7DD}", boldForm: "{U+1D7D3}" },
+	"kkey_6", { calcOff: "", unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", doubleStruckForm: "{U+1D7DE}", boldForm: "{U+1D7D4}" },
+	"kkey_7", { calcOff: "", unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", doubleStruckForm: "{U+1D7DF}", boldForm: "{U+1D7D5}" },
+	"kkey_8", { calcOff: "", unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", doubleStruckForm: "{U+1D7E0}", boldForm: "{U+1D7D6}" },
+	"kkey_9", { calcOff: "", unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", doubleStruckForm: "{U+1D7E1}", boldForm: "{U+1D7D7}" },
 	"kkey_minus", { calcOff: "", unicode: "{U+002D}", sup: "num_sup_minus", sub: "num_sub_minus" },
 	"kkey_equals", { calcOff: "", unicode: "{U+003D}", sup: "num_sup_equals", sub: "num_sub_equals" },
 	"kkey_asterisk", { calcOff: "", unicode: "{U+002A}" },
@@ -15264,12 +15264,17 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 ChangeScriptInput(ScriptMode) {
 	PreviousScriptMode := IniRead(ConfigFile, "Settings", "ScriptInput", "Default")
 
+	IsAlterationsActive := GetModifiedCharsType() ? True : False
+
 	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
 		IniWrite("Default", ConfigFile, "Settings", "ScriptInput")
 		UnregisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Cleanscript"))
-		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , IsAlterationsActive)
 	} else {
 		IniWrite(ScriptMode, ConfigFile, "Settings", "ScriptInput")
+		if IsAlterationsActive {
+			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
+		}
 		RegisterHotKeys(ScriptMode == "sup" ? GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Supercript") : GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Subscript"), True)
 	}
 }
