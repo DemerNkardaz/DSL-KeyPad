@@ -19137,18 +19137,20 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
-			"<^>!" UseKey["F2"], (*) => SetModifiedCharsInput(),
-			"<^>!" UseKey["F3"], (*) => SetModifiedCharsInput("modifier"),
-			"<^>!>+" UseKey["F3"], (*) => SetModifiedCharsInput("subscript"),
-			"<^>!" UseKey["F5"], (*) => SetModifiedCharsInput("italic"),
-			"<^>!>+" UseKey["F5"], (*) => SetModifiedCharsInput("italicBold"),
-			"<^>!<+" UseKey["F5"], (*) => SetModifiedCharsInput("bold"),
-			"<^>!" UseKey["F6"], (*) => SetModifiedCharsInput("fraktur"),
-			"<^>!>+" UseKey["F6"], (*) => SetModifiedCharsInput("frakturBold"),
-			"<^>!" UseKey["F7"], (*) => SetModifiedCharsInput("script"),
-			"<^>!>+" UseKey["F7"], (*) => SetModifiedCharsInput("scriptBold"),
-			"<^>!" UseKey["F8"], (*) => SetModifiedCharsInput("doubleStruck"),
-			"<^>!>+" UseKey["F8"], (*) => SetModifiedCharsInput("doubleStruckItalic"),
+			;
+			">^" UseKey["Numpad1"], (*) => SetModifiedCharsInput(),
+			">^<+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("modifier"),
+			">^>+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("subscript"),
+			">^" UseKey["Numpad2"], (*) => SetModifiedCharsInput("italic"),
+			">^>+" UseKey["Numpad2"], (*) => SetModifiedCharsInput("italicBold"),
+			">^<+" UseKey["Numpad2"], (*) => SetModifiedCharsInput("bold"),
+			">^" UseKey["Numpad3"], (*) => SetModifiedCharsInput("fraktur"),
+			">^>+" UseKey["Numpad3"], (*) => SetModifiedCharsInput("frakturBold"),
+			">^" UseKey["Numpad4"], (*) => SetModifiedCharsInput("script"),
+			">^>+" UseKey["Numpad4"], (*) => SetModifiedCharsInput("scriptBold"),
+			">^" UseKey["Numpad5"], (*) => SetModifiedCharsInput("doubleStruck"),
+			">^>+" UseKey["Numpad5"], (*) => SetModifiedCharsInput("doubleStruckItalic"),
+			;
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
@@ -19370,6 +19372,19 @@ ManageTrayItems() {
 		"maths", ReadLocale("tray_func_maths") "`t" RightControl RightShift "0",
 		"script", ReadLocale("func_label_scripts"),
 		"layouts", ReadLocale("func_label_layouts"),
+		"alterations", ReadLocale("func_label_alterations"),
+		"combining_alteration", ReadLocale("tray_func_combining_alteration") "`t" RightControl "Num1",
+		"modifier_alteration", ReadLocale("tray_func_modifier_alteration") "`t" RightControl LeftShift "Num1",
+		"subscript_alteration", ReadLocale("tray_func_subscript_alteration") "`t" RightControl RightShift "Num1",
+		"italic_alteration", ReadLocale("tray_func_italic_alteration") "`t" RightControl "Num2",
+		"italic_bold_alteration", ReadLocale("tray_func_italic_bold_alteration") "`t" RightControl RightShift "Num2",
+		"bold_alteration", ReadLocale("tray_func_bold_alteration") "`t" RightControl LeftShift "Num2",
+		"fraktur_alteration", ReadLocale("tray_func_fraktur_alteration") "`t" RightControl "Num3",
+		"fraktur_bold_alteration", ReadLocale("tray_func_fraktur_bold_alteration") "`t" RightControl RightShift "Num3",
+		"script_alteration", ReadLocale("tray_func_script_alteration") "`t" RightControl "Num4",
+		"script_bold_alteration", ReadLocale("tray_func_script_bold_alteration") "`t" RightControl RightShift "Num4",
+		"double_struck_alteration", ReadLocale("tray_func_double_struck_alteration") "`t" RightControl "Num5",
+		"double_struck_italic_alteration", ReadLocale("tray_func_double_struck_italic_alteration") "`t" RightControl RightShift "Num5",
 	)
 
 	CurrentApp := "DSL KeyPad " . CurrentVersionString
@@ -19401,6 +19416,26 @@ ManageTrayItems() {
 	ScriptsSubMenu.SetIcon(Labels["maths"], InternalFiles["AppIcoDLL"].File, 10)
 
 	DSLTray.Add(Labels["script"], ScriptsSubMenu)
+
+	AlterationSubMenu := Menu()
+	AlterationSubMenu.Add(Labels["combining_alteration"], (*) => SetModifiedCharsInput())
+	AlterationSubMenu.Add(Labels["modifier_alteration"], (*) => SetModifiedCharsInput("modifier"))
+	AlterationSubMenu.Add(Labels["subscript_alteration"], (*) => SetModifiedCharsInput("subscript"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["italic_alteration"], (*) => SetModifiedCharsInput("italic"))
+	AlterationSubMenu.Add(Labels["italic_bold_alteration"], (*) => SetModifiedCharsInput("italicBold"))
+	AlterationSubMenu.Add(Labels["bold_alteration"], (*) => SetModifiedCharsInput("bold"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["fraktur_alteration"], (*) => SetModifiedCharsInput("fraktur"))
+	AlterationSubMenu.Add(Labels["fraktur_bold_alteration"], (*) => SetModifiedCharsInput("frakturBold"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["script_alteration"], (*) => SetModifiedCharsInput("script"))
+	AlterationSubMenu.Add(Labels["script_bold_alteration"], (*) => SetModifiedCharsInput("scriptBold"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["double_struck_alteration"], (*) => SetModifiedCharsInput("doubleStruck"))
+	AlterationSubMenu.Add(Labels["double_struck_italic_alteration"], (*) => SetModifiedCharsInput("doubleStruckItalic"))
+
+	DSLTray.Add(Labels["alterations"], AlterationSubMenu)
 
 	LayoutsSubMenu := Menu()
 	LayoutsSubMenu.Add("QWERTY", (*) => RegisterLayout("QWERTY"))
