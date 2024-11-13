@@ -11,6 +11,21 @@ SupportedLanguages := [
 
 CodeEn := "00000409"
 CodeRu := "00000419"
+CodeGr := "00000408"
+
+CodeLang := Map(
+	"en", "00000409",
+	"ru", "00000419",
+	"gr", "00000408")
+
+CompareLangCode(CodeInput) {
+	for lang, value in CodeLang {
+		if (value = CodeInput) {
+			return True
+		}
+	}
+	return False
+}
 
 ChracterMap := "C:\Windows\System32\charmap.exe"
 ImageRes := "C:\Windows\System32\imageres.dll"
@@ -3558,6 +3573,7 @@ MapInsert(Characters,
 	},
 	"lat_c_lig_oe", {
 		unicode: "{U+0152}",
+		modifierForm: "{U+A7F9}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: ["!oe", "прописная лигатура OE", "capital ligature OE"],
@@ -4106,6 +4122,25 @@ MapInsert(Characters,
 		alt_on_fast_keys: ">+ $",
 		tags: ["строчная буква s длинное", "small letter s long"],
 		recipe: "fs",
+	},
+	"lat_c_let_gamma", {
+		unicode: "{U+0194}",
+		titlesAlt: True,
+		group: ["Latin Extended"],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+>+ [G]",
+		tags: ["прописная буква Гамма", "capital letter Gamma"],
+		recipe: "V0",
+	},
+	"lat_s_let_gamma", {
+		unicode: "{U+0263}",
+		modifierForm: "{U+02E0}",
+		titlesAlt: True,
+		group: ["Latin Extended"],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+>+ [g]",
+		tags: ["строчныая буква гамма", "small letter gamma"],
+		recipe: "v0",
 	},
 	"lat_c_let_upsilon", {
 		unicode: "{U+01B1}",
@@ -18358,7 +18393,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!<!<+", ["lat_c_let_g_caron", "lat_s_let_g_caron"],
 			"<^>!<!>+", ["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"],
 			"<^>!<+", ["lat_c_let_g_insular", "lat_s_let_g_insular"],
-			"<^>!>+", ["lat_c_let_g_macron", "lat_s_let_g_macron"]),
+			"<^>!>+", ["lat_c_let_g_macron", "lat_s_let_g_macron"],
+			"<^>!<+>+", ["lat_c_let_gamma", "lat_s_let_gamma"]),
 			"H", Map("<!", ["lat_c_let_h_hwair", "lat_s_let_h_hwair"],
 			"<^>!", ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"],
 			"<^>!<!", ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"],
