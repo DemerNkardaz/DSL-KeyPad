@@ -1293,7 +1293,7 @@ ArrayMerge(Arrays*) {
 }
 
 GetMapCount(MapObj, SortGroups := "") {
-	properties := ["combiningForm", "modifierForm", "italicForm", "italicBoldForm", "boldForm", "subscriptForm", "scriptForm", "frakturForm", "scriptBoldForm", "frakturBoldForm", "doubleStruckForm", "doubleStruckBoldForm", "doubleStruckItalicForm", "doubleStruckItalicBoldForm"]
+	properties := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
 	if !IsObject(SortGroups) {
 		keyCount := MapObj.Count
 
@@ -1302,7 +1302,7 @@ GetMapCount(MapObj, SortGroups := "") {
 				keyCount--
 			}
 			for property in properties {
-				if HasProp(value, property) {
+				if HasProp(value, property "Form") {
 					keyCount++
 				}
 			}
@@ -13536,32 +13536,44 @@ MapInsert(Characters,
 		italicForm: "{U+1D434}", italicBoldForm: "{U+1D468}", boldForm: "{U+1D400}",
 		frakturForm: "{U+1D504}", frakturBoldForm: "{U+1D56C}",
 		scriptForm: "{U+1D49C}", scriptBoldForm: "{U+1D4D0}",
-		doubleStruckForm: "{U+1D538}" },
+		doubleStruckForm: "{U+1D538}",
+		sansSerifForm: "{U+1D5A0}", sansSerifItalicForm: "{U+1D608}", sansSerifItalicBoldForm: "{U+1D63C}", sansSerifBoldForm: "{U+1D5D4}",
+		monospaceForm: "{U+1D670}" },
 	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}", subscriptForm: "{U+2090}",
 		italicForm: "{U+1D44E}", italicBoldForm: "{U+1D482}", boldForm: "{U+1D41A}",
 		frakturForm: "{U+1D51E}", frakturBoldForm: "{U+1D586}",
 		scriptForm: "{U+1D4B6}", scriptBoldForm: "{U+1D4EA}",
-		doubleStruckForm: "{U+1D552}" },
+		doubleStruckForm: "{U+1D552}",
+		sansSerifForm: "{U+1D5BA}", sansSerifItalicForm: "{U+1D622}", sansSerifItalicBoldForm: "{U+1D656}", sansSerifBoldForm: "{U+1D5EE}",
+		monospaceForm: "{U+1D68A}" },
 	"lat_c_let_b", { calcOff: "", unicode: "{U+0042}", modifierForm: "{U+1D2E}",
 		italicForm: "{U+1D435}", italicBoldForm: "{U+1D469}", boldForm: "{U+1D401}",
 		frakturForm: "{U+1D505}", frakturBoldForm: "{U+1D56D}",
 		scriptForm: "{U+212C}", scriptBoldForm: "{U+1D4D1}",
-		doubleStruckForm: "{U+1D539}" },
+		doubleStruckForm: "{U+1D539}",
+		sansSerifForm: "{U+1D5A1}", sansSerifItalicForm: "{U+1D609}", sansSerifItalicBoldForm: "{U+1D63D}", sansSerifBoldForm: "{U+1D5D5}",
+		monospaceForm: "{U+1D671}" },
 	"lat_s_let_b", { calcOff: "", unicode: "{U+0062}", combiningForm: "{U+1DE8}", modifierForm: "{U+1D47}",
 		italicForm: "{U+1D44F}", italicBoldForm: "{U+1D483}", boldForm: "{U+1D41B}",
 		frakturForm: "{U+1D51F}", frakturBoldForm: "{U+1D587}",
 		scriptForm: "{U+1D4B7}", scriptBoldForm: "{U+1D4EB}",
-		doubleStruckForm: "{U+1D553}" },
+		doubleStruckForm: "{U+1D553}",
+		sansSerifForm: "{U+1D5BB}", sansSerifItalicForm: "{U+1D623}", sansSerifItalicBoldForm: "{U+1D657}", sansSerifBoldForm: "{U+1D5EF}",
+		monospaceForm: "{U+1D68B}" },
 	"lat_c_let_c", { calcOff: "", unicode: "{U+0043}", modifierForm: "{U+A7F2}",
 		italicForm: "{U+1D436}", italicBoldForm: "{U+1D46A}", boldForm: "{U+1D402}",
 		frakturForm: "{U+212D}", frakturBoldForm: "{U+1D56E}",
 		scriptForm: "{U+1D49E}", scriptBoldForm: "{U+1D4D2}",
-		doubleStruckForm: "{U+2102}" },
+		doubleStruckForm: "{U+2102}",
+		sansSerifForm: "{U+1D5A2}", sansSerifItalicForm: "{U+1D60A}", sansSerifItalicBoldForm: "{U+1D63E}", sansSerifBoldForm: "{U+1D5D6}",
+		monospaceForm: "{U+1D672}" },
 	"lat_s_let_c", { calcOff: "", unicode: "{U+0063}", combiningForm: "{U+0368}", modifierForm: "{U+1D9C}",
 		italicForm: "{U+1D450}", italicBoldForm: "{U+1D484}", boldForm: "{U+1D41C}",
 		frakturForm: "{U+1D520}", frakturBoldForm: "{U+1D588}",
 		scriptForm: "{U+1D4B8}", scriptBoldForm: "{U+1D4EC}",
-		doubleStruckForm: "{U+1D554}" },
+		doubleStruckForm: "{U+1D554}",
+		sansSerifForm: "{U+1D5BC}", sansSerifItalicForm: "{U+1D624}", sansSerifItalicBoldForm: "{U+1D658}", sansSerifBoldForm: "{U+1D5F0}",
+		monospaceForm: "{U+1D68C}" },
 	"lat_c_let_d", { calcOff: "", unicode: "{U+0044}", modifierForm: "{U+1D30}",
 		italicForm: "{U+1D437}", italicBoldForm: "{U+1D46B}", boldForm: "{U+1D403}",
 		frakturForm: "{U+1D507}", frakturBoldForm: "{U+1D56F}",
@@ -14340,7 +14352,7 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 		}
 
-		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold"]
+		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
 
 		for alteration in Alterations {
 			if HasProp(value, alteration "Form") {
@@ -16576,11 +16588,13 @@ Constructor() {
 	Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_old_hungarian"), Command_extralayouts)
 	Command_gothic := CommandsTree.Add(ReadLocale("func_label_gothic"), Command_extralayouts)
 	Command_func_label_ipa := CommandsTree.Add(ReadLocale("func_label_ipa"), Command_extralayouts)
-	Command_combining := CommandsTree.Add(ReadLocale("func_label_alterations"))
-	Command_combining_combining := CommandsTree.Add(ReadLocale("func_label_alterations_combining"), Command_combining)
-	Command_combining_modifier := CommandsTree.Add(ReadLocale("func_label_alterations_modifier"), Command_combining)
-	Command_combining_italic_to_bold := CommandsTree.Add(ReadLocale("func_label_alterations_italic_to_bold"), Command_combining)
-	Command_combining_fraktur_script_struck := CommandsTree.Add(ReadLocale("func_label_alterations_fraktur_script_struck"), Command_combining)
+	Command_alterations := CommandsTree.Add(ReadLocale("func_label_alterations"))
+	Command_alterations_combining := CommandsTree.Add(ReadLocale("func_label_alterations_combining"), Command_alterations)
+	Command_alterations_modifier := CommandsTree.Add(ReadLocale("func_label_alterations_modifier"), Command_alterations)
+	Command_alterations_italic_to_bold := CommandsTree.Add(ReadLocale("func_label_alterations_italic_to_bold"), Command_alterations)
+	Command_alterations_fraktur_script_struck := CommandsTree.Add(ReadLocale("func_label_alterations_fraktur_script_struck"), Command_alterations)
+	Command_alterations_sans_serif := CommandsTree.Add(ReadLocale("func_label_alterations_sans_serif"), Command_alterations)
+	Command_alterations_monospace := CommandsTree.Add(ReadLocale("func_label_alterations_monospace"), Command_alterations)
 	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_input_toggle"))
 	Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layout_toggle"))
 	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifications"))
@@ -17289,6 +17303,8 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_alterations_modifier",
 		"func_label_alterations_italic_to_bold",
 		"func_label_alterations_fraktur_script_struck",
+		"func_label_alterations_sans_serif",
+		"func_label_alterations_monospace",
 		"func_label_glagolitic_futhark",
 		"func_label_old_permic_old_turkic",
 		"func_label_old_hungarian",
@@ -19150,6 +19166,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^>+" UseKey["Numpad4"], (*) => SetModifiedCharsInput("scriptBold"),
 			">^" UseKey["Numpad5"], (*) => SetModifiedCharsInput("doubleStruck"),
 			">^>+" UseKey["Numpad5"], (*) => SetModifiedCharsInput("doubleStruckItalic"),
+			">^" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifItalic"),
+			">^>+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifItalicBold"),
+			">^<+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifBold"),
+			">^<+>+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerif"),
+			">^" UseKey["Numpad7"], (*) => SetModifiedCharsInput("monospace"),
 			;
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
@@ -19385,6 +19406,11 @@ ManageTrayItems() {
 		"script_bold_alteration", ReadLocale("tray_func_script_bold_alteration") "`t" RightControl RightShift "Num4",
 		"double_struck_alteration", ReadLocale("tray_func_double_struck_alteration") "`t" RightControl "Num5",
 		"double_struck_italic_alteration", ReadLocale("tray_func_double_struck_italic_alteration") "`t" RightControl RightShift "Num5",
+		"sans_serif_italic_alteration", ReadLocale("tray_func_sans_serif_italic_alteration") "`t" RightControl "Num6",
+		"sans_serif_italic_bold_alteration", ReadLocale("tray_func_sans_serif_italic_bold_alteration") "`t" RightControl RightShift "Num6",
+		"sans_serif_bold_alteration", ReadLocale("tray_func_sans_serif_bold_alteration") "`t" RightControl LeftShift "Num6",
+		"sans_serif_alteration", ReadLocale("tray_func_sans_serif_alteration") "`t" RightControl LeftShift RightShift "Num6",
+		"monospace_alteration", ReadLocale("tray_func_monospace_alteration") "`t" RightControl "Num7",
 	)
 
 	CurrentApp := "DSL KeyPad " . CurrentVersionString
@@ -19434,6 +19460,13 @@ ManageTrayItems() {
 	AlterationSubMenu.Add()
 	AlterationSubMenu.Add(Labels["double_struck_alteration"], (*) => SetModifiedCharsInput("doubleStruck"))
 	AlterationSubMenu.Add(Labels["double_struck_italic_alteration"], (*) => SetModifiedCharsInput("doubleStruckItalic"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["sans_serif_italic_alteration"], (*) => SetModifiedCharsInput("sansSerifItalic"))
+	AlterationSubMenu.Add(Labels["sans_serif_italic_bold_alteration"], (*) => SetModifiedCharsInput("sansSerifItalicBold"))
+	AlterationSubMenu.Add(Labels["sans_serif_bold_alteration"], (*) => SetModifiedCharsInput("sansSerifBold"))
+	AlterationSubMenu.Add(Labels["sans_serif_alteration"], (*) => SetModifiedCharsInput("sansSerif"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["monospace_alteration"], (*) => SetModifiedCharsInput("monospace"))
 
 	DSLTray.Add(Labels["alterations"], AlterationSubMenu)
 
