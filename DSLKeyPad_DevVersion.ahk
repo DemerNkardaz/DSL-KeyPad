@@ -2671,6 +2671,14 @@ MapInsert(Characters,
 		alt_special: "[Num/] [Num*]",
 		recipe: ["-:x", Chr(0x2212) ":" Chr(0x00D7), Chr(0x00F7) Chr(0x00D7)],
 	},
+	"empty_set", {
+		unicode: "{U+2205}",
+		tags: ["пустое множество", "empty set"],
+		group: [["Smelting Special", "Special Fast Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "[Num0]",
+		recipe: "0/",
+	},
 	"prime_single", {
 		unicode: "{U+2032}",
 		LaTeX: "\prime",
@@ -18368,7 +18376,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!", ["lat_c_let_c_dot_above", "lat_s_let_c_dot_above"],
 			"<^>!<!", ["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"],
 			"<^>!<!<+", ["lat_c_let_c_caron", "lat_s_let_c_caron"],
-			"<^>!<!>+", ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"]),
+			"<^>!<!>+", ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"],
+			"Flat:>+", "celsius"),
 			"D", Map(
 				"<^>!", ["lat_c_let_d_eth", "lat_s_let_d_eth"],
 				"<^>!<!", ["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"],
@@ -18386,7 +18395,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">+", ["lat_c_let_e_grave", "lat_s_let_e_grave"],
 			"<+>+", ["lat_c_let_e_grave_double", "lat_s_let_e_grave_double"]),
 			"F", Map(
-				"<^>!", ["lat_c_let_f_dot_above", "lat_s_let_f_dot_above"]),
+				"<^>!", ["lat_c_let_f_dot_above", "lat_s_let_f_dot_above"],
+				"Flat:>+", "fahrenheit"),
 			"G", Map("<!", ["lat_c_let_g_acute", "lat_s_let_g_acute"],
 			"<^>!", ["lat_c_let_g_breve", "lat_s_let_g_breve"],
 			"<^>!<!", ["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"],
@@ -18419,7 +18429,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"K", Map("<!", ["lat_c_let_k_acute", "lat_s_let_k_acute"],
 			"<^>!<!", ["lat_c_let_k_dot_below", "lat_s_let_k_dot_below"],
 			"<^>!<!<+", ["lat_c_let_k_caron", "lat_s_let_k_caron"],
-			"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"]),
+			"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"],
+			"Flat:>+", "kelvin"),
 			"L", Map("<!", ["lat_c_let_l_acute", "lat_s_let_l_acute"],
 			"<^>!", ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"],
 			"<^>!<!<+", ["lat_c_let_l_caron", "lat_s_let_l_caron"],
@@ -18589,12 +18600,16 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				;UseKey["Slash"], (K) => TimedKeyCombinations("Slash", UseKey["Equals"], "Off"),
 				UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], "Off"),
 				;
+				"<^>!" UseKey["Numpad0"], (K) => HandleFastKey(K, "empty_set"),
 				"<^<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
 				"<^>!" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_two"),
 				"<^>!>+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterism"),
 				"<^>!<+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_low"),
 				"<^>!" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "dagger"),
 				"<^>!>+" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "dagger_double"),
+			],
+			[
+				"<!>^" UseKey["A"], (K) => HandleFastKey(K, "dagger_double"),
 			])
 
 
