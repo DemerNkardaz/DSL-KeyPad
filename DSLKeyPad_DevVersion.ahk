@@ -173,6 +173,8 @@ DefaultConfig := [
 	["Settings", "LatinLayout", "QWERTY"],
 	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
 	["Settings", "CharacterWebResource", "SymblCC"],
+	["Settings", "TemperatureCalcExtendedFormatting", "True"],
+	["Settings", "TemperatureCalcDedicatedUnicodeChars", "True"],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
 	["CustomRules", "GREPDialogAttribution", ""],
@@ -15521,48 +15523,25 @@ SendAltNumpad(CharacterCode) {
 }
 
 RegistryTemperaturesHotString() {
-	HotStringsMap := Map(
-		"cf", (D) => TemperaturesConversionsInputHook("CtF", D),
-		"fc", (D) => TemperaturesConversionsInputHook("FtC", D),
-		"ck", (D) => TemperaturesConversionsInputHook("CtK", D),
-		"kc", (D) => TemperaturesConversionsInputHook("KtC", D),
-		"fk", (D) => TemperaturesConversionsInputHook("FtK", D),
-		"kf", (D) => TemperaturesConversionsInputHook("KtF", D),
-		"kr", (D) => TemperaturesConversionsInputHook("KtR", D),
-		"rk", (D) => TemperaturesConversionsInputHook("RtK", D),
-		"fr", (D) => TemperaturesConversionsInputHook("FtR", D),
-		"rf", (D) => TemperaturesConversionsInputHook("RtF", D),
-		"cr", (D) => TemperaturesConversionsInputHook("CtR", D),
-		"rc", (D) => TemperaturesConversionsInputHook("RtC", D),
-		"cn", (D) => TemperaturesConversionsInputHook("CtN", D),
-		"nc", (D) => TemperaturesConversionsInputHook("NtC", D),
-		"fn", (D) => TemperaturesConversionsInputHook("FtN", D),
-		"nf", (D) => TemperaturesConversionsInputHook("NtF", D),
-		"kn", (D) => TemperaturesConversionsInputHook("KtN", D),
-		"nk", (D) => TemperaturesConversionsInputHook("NtK", D),
-		"rn", (D) => TemperaturesConversionsInputHook("RtN", D),
-		"nr", (D) => TemperaturesConversionsInputHook("NtR", D)
-	)
-
-	HotStringsArray := ["cf", "fc", "ck", "kc", "fk", "kf", "kr", "rk", "fr", "rf", "cr", "rc", "cn", "nc", "fn", "nf", "kn", "nk", "rn", "nr"]
+	HotStringsEntries := ["cf", "fc", "ck", "kc", "fk", "kf", "kr", "rk", "fr", "rf", "cr", "rc", "cn", "nc", "fn", "nf", "kn", "nk", "rn", "nr"]
 
 	ShortCutConverter(InputString) {
 		InputString := StrUpper(InputString)
 		return SubStr(InputString, 1, 1) "t" SubStr(InputString, 2, 1)
 	}
 
-	;for shortcut in HotStringsArray {
-	;	HotString(":C?0:ct" shortcut, (D) => TemperaturesConversionsInputHook(ShortCutConverter(shortcut), D))
-	;}
-	for shortcut, value in HotStringsMap {
-		HotString(":C?0:ct" shortcut, value)
+	RegistryBridge(conversionLabel) {
+		HotString(":C?0:ct" conversionLabel, (D) => TemperaturesConversionsInputHook(ShortCutConverter(conversionLabel), D))
+	}
+
+	for conversionLabel in HotStringsEntries {
+		RegistryBridge(conversionLabel)
 	}
 } RegistryTemperaturesHotString()
 
 
-TemperaturesConversionsInputHook(ConversionType, FallBackSring := "") {
-
-	FallBackSring := RegExReplace(FallBackSring, ".*:(.*)", "$1")
+TemperaturesConversionsInputHook(ConversionType, FallBackString := "") {
+	FallBackString := RegExReplace(FallBackString, ".*:(.*)", "$1")
 
 	IH := InputHook("C")
 	IH.KeyOpt("{Space}{Enter}{Tab}", "E")
@@ -15577,20 +15556,48 @@ TemperaturesConversionsInputHook(ConversionType, FallBackSring := "") {
 	try {
 		Output := TemperaturesConversion(ConversionType, TemperatureValue)
 	} catch {
-		Output := FallBackSring
+		Output := FallBackString
 	}
 
 	SendText(Output)
 }
 
 TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
+	IsExtendedFormattingEnabled := IniRead(ConfigFile, "Settings", "TemperatureCalcExtendedFormatting", "True")
+	IsExtendedFormattingEnabled := (IsExtendedFormattingEnabled = "True")
+
+	IsDedicatedUnicodeChars := IniRead(ConfigFile, "Settings", "TemperatureCalcDedicatedUnicodeChars", "True")
+	IsDedicatedUnicodeChars := (IsDedicatedUnicodeChars = "True")
+
 	ConversionTo := SubStr(ConversionType, -1)
 	ConversionsSymbols := Map(
-		"C", "celsius",
-		"F", "fahrenheit",
-		"K", "kelvin",
-		"R", "rankine",
-		"N", "newton"
+		"C", ["celsius", GetChar("degree") "C"],
+		"F", ["fahrenheit", GetChar("degree") "F"],
+		"K", ["kelvin", "K"],
+		"R", ["rankine", GetChar("degree") "R"],
+		"N", ["newton", GetChar("degree") "N"],
+	)
+	ConversionsValues := Map(
+		"CtF", (GetConverted) => (GetConverted * 9 / 5) + 32,
+		"FtC", (GetConverted) => (GetConverted - 32) * 5 / 9,
+		"CtK", (GetConverted) => GetConverted + 273.15,
+		"KtC", (GetConverted) => GetConverted - 273.15,
+		"FtK", (GetConverted) => (GetConverted - 32) * 5 / 9 + 273.15,
+		"KtF", (GetConverted) => (GetConverted - 273.15) * 9 / 5 + 32,
+		"KtR", (GetConverted) => GetConverted * 1.8,
+		"RtK", (GetConverted) => GetConverted / 1.8,
+		"FtR", (GetConverted) => GetConverted + 459.67,
+		"RtF", (GetConverted) => GetConverted - 459.67,
+		"CtR", (GetConverted) => (GetConverted + 273.15) * 1.8,
+		"RtC", (GetConverted) => (GetConverted / 1.8) - 273.15,
+		"CtN", (GetConverted) => GetConverted * 33 / 100,
+		"NtC", (GetConverted) => GetConverted * 100 / 33,
+		"NtF", (GetConverted) => (GetConverted * 60 / 11) + 32,
+		"FtN", (GetConverted) => (GetConverted - 32) * 11 / 60,
+		"NtK", (GetConverted) => (GetConverted * 100 / 33) + 273.15,
+		"KtN", (GetConverted) => (GetConverted - 273.15) * 33 / 100,
+		"NtR", (GetConverted) => (GetConverted * 100 / 33 + 273.15) * 1.8,
+		"RtN", (GetConverted) => (GetConverted / 1.8 - 273.15) * 33 / 100
 	)
 
 	ConvertedTemperatureValue := 0
@@ -15605,75 +15612,43 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 		UseComma := True
 	}
 
-	Switch ConversionType {
-		Case "CtF":
-			ConvertedTemperatureValue := (TemperatureValue * 9 / 5) + 32
-		Case "FtC":
-			ConvertedTemperatureValue := (TemperatureValue - 32) * 5 / 9
-		Case "CtK":
-			ConvertedTemperatureValue := TemperatureValue + 273.15
-		Case "KtC":
-			ConvertedTemperatureValue := TemperatureValue - 273.15
-		Case "FtK":
-			ConvertedTemperatureValue := (TemperatureValue - 32) * 5 / 9 + 273.15
-		Case "KtF":
-			ConvertedTemperatureValue := (TemperatureValue - 273.15) * 9 / 5 + 32
-		Case "KtR":
-			ConvertedTemperatureValue := TemperatureValue * 1.8
-		Case "RtK":
-			ConvertedTemperatureValue := TemperatureValue / 1.8
-		Case "FtR":
-			ConvertedTemperatureValue := TemperatureValue + 459.67
-		Case "RtF":
-			ConvertedTemperatureValue := TemperatureValue - 459.67
-		Case "CtR":
-			ConvertedTemperatureValue := (TemperatureValue + 273.15) * 1.8
-		Case "RtC":
-			ConvertedTemperatureValue := (TemperatureValue / 1.8) - 273.15
-		Case "CtN":
-			ConvertedTemperatureValue := TemperatureValue * 33 / 100
-		Case "NtC":
-			ConvertedTemperatureValue := TemperatureValue * 100 / 33
-		Case "NtF":
-			ConvertedTemperatureValue := (TemperatureValue * 60 / 11) + 32
-		Case "FtN":
-			ConvertedTemperatureValue := (TemperatureValue - 32) * 11 / 60
-		Case "NtK":
-			ConvertedTemperatureValue := (TemperatureValue * 100 / 33) + 273.15
-		Case "KtN":
-			ConvertedTemperatureValue := (TemperatureValue - 273.15) * 33 / 100
-		Case "NtR":
-			ConvertedTemperatureValue := (TemperatureValue * 100 / 33 + 273.15) * 1.8
-		Case "RtN":
-			ConvertedTemperatureValue := (TemperatureValue / 1.8 - 273.15) * 33 / 100
-
-		Default:
-			Throw Error("Неверный тип конвертации: " ConversionType)
+	if (ConversionsValues.Has(ConversionType)) {
+		ConvertedTemperatureValue := ConversionsValues[ConversionType](TemperatureValue)
+	} else {
+		Throw Error("Неверный тип конвертации: " ConversionType)
 	}
 
-
-	if !(GetKeyState("CapsLock", "T")) {
+	if !(GetKeyState("CapsLock", "T"))
 		ConvertedTemperatureValue := Round(ConvertedTemperatureValue, 2)
-	}
 
-	if (Mod(ConvertedTemperatureValue, 1) = 0) {
+	if (Mod(ConvertedTemperatureValue, 1) = 0)
 		ConvertedTemperatureValue := Round(ConvertedTemperatureValue)
-	}
 
-	if (SubStr(ConvertedTemperatureValue, 1, 1) = "-") {
+	if (SubStr(ConvertedTemperatureValue, 1, 1) = "-")
 		ConvertedTemperatureValue := GetChar("minus") SubStr(ConvertedTemperatureValue, 2)
-	}
 
-	if (UseComma) {
+	if (UseComma)
 		ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "\.", ",")
+
+	if (IsExtendedFormattingEnabled) {
+		IntegerPart := RegExReplace(ConvertedTemperatureValue, "(\..*)|([,].*)", "")
+		FractionPart := RegExReplace(ConvertedTemperatureValue, "^[^,\.]*([,\.].*)$", "$1")
+
+		if (UseComma) {
+			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", GetChar("no_break_space"))
+		} else {
+			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", ",")
+		}
+
+		ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "^\d+", IntegerPart)
+
+		;ConvertedTemperatureValue .= FractionPart
 	}
 
-	ConvertedTemperatureValue .= GetChar("narrow_no_break_space", ConversionsSymbols[ConversionTo])
+	ConvertedTemperatureValue .= GetChar("narrow_no_break_space")
+	ConvertedTemperatureValue .= IsDedicatedUnicodeChars ? GetChar(ConversionsSymbols[ConversionTo][1]) : ConversionsSymbols[ConversionTo][2]
 	return ConvertedTemperatureValue
 }
-
-
-; MsgBox TemperaturesConversion("CtF", "25") "`n" TemperaturesConversion("CtK", 0.01) "`n" TemperaturesConversion("CtR", 32)
 
 
 GREPizeSelection(GetCollaborative := False) {
