@@ -180,6 +180,8 @@ DefaultConfig := [
 	["CustomRules", "GREPDialogAttribution", ""],
 	["CustomRules", "GREPThisEmdash", ""],
 	["CustomRules", "GREPInitials", ""],
+	["CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"],
+	["CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "narrow_no_break_space"],
 	["LatestPrompts", "LaTeX", ""],
 	["LatestPrompts", "Unicode", ""],
 	["LatestPrompts", "Altcode", ""],
@@ -15569,6 +15571,11 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	IsDedicatedUnicodeChars := IniRead(ConfigFile, "Settings", "TemperatureCalcDedicatedUnicodeChars", "True")
 	IsDedicatedUnicodeChars := (IsDedicatedUnicodeChars = "True")
 
+	RulesChars := Map(
+		"Space", IniRead(ConfigFile, "CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"),
+		"SpaceExtendedFormatting", IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "narrow_no_break_space"),
+	)
+
 	ConversionTo := SubStr(ConversionType, -1)
 	ConversionsSymbols := Map(
 		"C", ["celsius", GetChar("degree") "C"],
@@ -15635,7 +15642,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 		FractionPart := RegExReplace(ConvertedTemperatureValue, "^[^,\.]*([,\.].*)$", "$1")
 
 		if (UseComma) {
-			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", GetChar("no_break_space"))
+			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", GetChar(RulesChars["SpaceExtendedFormatting"]))
 		} else {
 			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", ",")
 		}
@@ -15645,7 +15652,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 		;ConvertedTemperatureValue .= FractionPart
 	}
 
-	ConvertedTemperatureValue .= GetChar("narrow_no_break_space")
+	ConvertedTemperatureValue .= GetChar(RulesChars["Space"])
 	ConvertedTemperatureValue .= IsDedicatedUnicodeChars ? GetChar(ConversionsSymbols[ConversionTo][1]) : ConversionsSymbols[ConversionTo][2]
 	return ConvertedTemperatureValue
 }
