@@ -15611,15 +15611,19 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	)
 
 	ConvertedTemperatureValue := 0
-	UseComma := False
 
 	if (InStr(TemperatureValue, "−")) {
 		TemperatureValue := RegExReplace(TemperatureValue, "−", "-")
 	}
 
-	if (InStr(TemperatureValue, ",")) {
+	if (InStr(TemperatureValue, ".,")) {
+		TemperatureValue := RegExReplace(TemperatureValue, "\.,", ".")
+		TypographyRule := "Deutsch"
+	} else if (InStr(TemperatureValue, ",")) {
 		TemperatureValue := RegExReplace(TemperatureValue, ",", ".")
-		UseComma := True
+		TypographyRule := "Russian"
+	} else {
+		TypographyRule := "English"
 	}
 
 	if (ConversionsValues.Has(ConversionType)) {
@@ -15637,20 +15641,20 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	if (SubStr(ConvertedTemperatureValue, 1, 1) = "-")
 		ConvertedTemperatureValue := GetChar("minus") SubStr(ConvertedTemperatureValue, 2)
 
-	if (UseComma)
+	if (TypographyRule = "Russian" || TypographyRule = "Deutsch")
 		ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "\.", ",")
 
 	if (IsExtendedFormattingEnabled) {
 		IntegerPart := RegExReplace(ConvertedTemperatureValue, "(\..*)|([,].*)", "")
 
 		if (StrLen(IntegerPart) >= ExtendedFormattingFromCount) {
+			DecimalSeparators := Map(
+				"English", ",",
+				"Deutsch", ".",
+				"Russian", GetChar(RulesChars["SpaceExtendedFormatting"]),
+			)
 
-			if (UseComma) {
-				IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", GetChar(RulesChars["SpaceExtendedFormatting"]))
-			} else {
-				IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", ",")
-			}
-
+			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", DecimalSeparators[TypographyRule])
 			ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "^\d+", IntegerPart)
 		}
 
