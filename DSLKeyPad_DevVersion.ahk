@@ -17964,6 +17964,14 @@ GetCharacterSequence(CharacterName) {
 	return Output
 }
 
+CapsSeparatedCall(DefaultAction, AdvancedAction) {
+	if (GetKeyState("CapsLock", "T")) {
+		AdvancedAction()
+	} else {
+		DefaultAction()
+	}
+}
+
 CapsSeparatedKey(Combo, CapitalCharacter, SmallCharacter, Reverse := False) {
 	if (GetKeyState("CapsLock", "T")) {
 		HandleFastKey(Combo, Reverse ? SmallCharacter : CapitalCharacter)
@@ -19480,7 +19488,20 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 		LayoutArray := GetBindingsArray(, SlotModdedMapping)
 	} else if Combinations = "Utility" {
-		LayoutArray := [
+		FunctionKeysExtraLayer := []
+
+		FunctionKeysBridge(numberValue) {
+			DefaultKey := "F" numberValue
+			AdvancedKey := "F" (numberValue + 12)
+			FunctionKeysExtraLayer.Push(UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{" DefaultKey "}"), (*) => Send("{" AdvancedKey "}")))
+		}
+
+		for numberValue in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] {
+			FunctionKeysBridge(numberValue)
+		}
+
+		LayoutArray := ArrayMerge(FunctionKeysExtraLayer, [
+			;
 			"<#<!" UseKey["F1"], (*) => GroupActivator("Diacritics Primary", "F1"),
 			"<#<!" UseKey["F2"], (*) => GroupActivator("Diacritics Secondary", "F2"),
 			"<#<!" UseKey["F3"], (*) => GroupActivator("Diacritics Tertiary", "F3"),
@@ -19556,7 +19577,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
 			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
 			;
-		]
+		])
 	}
 
 
@@ -19885,7 +19906,6 @@ ManageTrayItems() {
 ManageTrayItems()
 
 ShowInfoMessage("tray_app_started")
-
 
 <^>+Esc:: ExitApp
 
