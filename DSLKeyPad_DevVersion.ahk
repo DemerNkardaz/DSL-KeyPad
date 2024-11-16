@@ -15611,28 +15611,27 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	)
 
 	ConvertedTemperatureValue := 0
+	NegativePoint := False
 
 	if (InStr(TemperatureValue, "−")) {
 		TemperatureValue := RegExReplace(TemperatureValue, "−", "-")
 	}
 
-	if (InStr(TemperatureValue, ".,")) {
-		TemperatureValue := RegExReplace(TemperatureValue, "\.,", ".")
-		TypographyRule := "Deutsch"
-	} else if (InStr(TemperatureValue, "..")) {
-		TemperatureValue := RegExReplace(TemperatureValue, "\.\.", ".")
-		TypographyRule := "Albania"
-	} else if (InStr(TemperatureValue, "''")) {
-		TemperatureValue := RegExReplace(TemperatureValue, "\'\'", ".")
-		TypographyRule := "Switzerland-Comma"
-	} else if (InStr(TemperatureValue, "'")) {
-		TemperatureValue := RegExReplace(TemperatureValue, "\'", ".")
-		TypographyRule := "Switzerland-Dot"
-	} else if (InStr(TemperatureValue, ",")) {
-		TemperatureValue := RegExReplace(TemperatureValue, ",", ".")
-		TypographyRule := "Russian"
-	} else {
-		TypographyRule := "English"
+	TypographyRule := "English"
+	TypographyTypes := Map(
+		"Deutsch", [".,", (T) => RegExReplace(T, "\.,", ".")],
+		"Albania", ["..", (T) => RegExReplace(T, "\.\.", ".")],
+		"Switzerland-Comma", ["''", (T) => RegExReplace(T, "\'\'", ".")],
+		"Switzerland-Dot", ["'", (T) => RegExReplace(T, "\'", ".")],
+		"Russian", [",", (T) => RegExReplace(T, ",", ".")],
+	)
+
+	for regionalType, value in TypographyTypes {
+		if InStr(TemperatureValue, value[1]) {
+			TemperatureValue := value[2](TemperatureValue)
+			TypographyRule := regionalType
+			break
+		}
 	}
 
 	if (ConversionsValues.Has(ConversionType)) {
@@ -15647,8 +15646,10 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	if (Mod(ConvertedTemperatureValue, 1) = 0)
 		ConvertedTemperatureValue := Round(ConvertedTemperatureValue)
 
-	if (SubStr(ConvertedTemperatureValue, 1, 1) = "-")
-		ConvertedTemperatureValue := GetChar("minus") SubStr(ConvertedTemperatureValue, 2)
+	if (SubStr(ConvertedTemperatureValue, 1, 1) = "-") {
+		ConvertedTemperatureValue := SubStr(ConvertedTemperatureValue, 2)
+		NegativePoint := True
+	}
 
 	if (TypographyRule = "Russian" || TypographyRule = "Deutsch" || TypographyRule = "Switzerland-Comma")
 		ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "\.", ",")
@@ -15669,12 +15670,9 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", DecimalSeparators[TypographyRule])
 			ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "^\d+", IntegerPart)
 		}
-
-		;ConvertedTemperatureValue .= FractionPart
 	}
 
-	ConvertedTemperatureValue .= GetChar(RulesChars["Space"])
-	ConvertedTemperatureValue .= IsDedicatedUnicodeChars ? GetChar(ConversionsSymbols[ConversionTo][1]) : ConversionsSymbols[ConversionTo][2]
+	ConvertedTemperatureValue := (NegativePoint ? GetChar("minus") : "") ConvertedTemperatureValue GetChar(RulesChars["Space"]) (IsDedicatedUnicodeChars ? GetChar(ConversionsSymbols[ConversionTo][1]) : ConversionsSymbols[ConversionTo][2])
 	return ConvertedTemperatureValue
 }
 
