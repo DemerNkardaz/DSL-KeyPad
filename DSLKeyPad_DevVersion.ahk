@@ -15535,20 +15535,14 @@ SendAltNumpad(CharacterCode) {
 RegistryTemperaturesHotString() {
 	HotStringsEntries := ["cf", "fc", "ck", "kc", "fk", "kf", "kr", "rk", "fr", "rf", "cr", "rc", "cn", "nc", "fn", "nf", "kn", "nk", "rn", "nr", "cd", "dc", "fd", "df", "kd", "dk", "rd", "dr", "nd", "dn"]
 
-	ShortCutConverter(InputString) {
-		InputString := StrUpper(InputString)
-		return SubStr(InputString, 1, 1) "t" SubStr(InputString, 2, 1)
-	}
-
 	RegistryBridge(conversionLabel) {
-		HotString(":C?0:ct" conversionLabel, (D) => TemperaturesConversionsInputHook(ShortCutConverter(conversionLabel), D))
+		HotString(":C?0:ct" conversionLabel, (D) => TemperaturesConversionsInputHook(StrUpper(conversionLabel), D))
 	}
 
 	for conversionLabel in HotStringsEntries {
 		RegistryBridge(conversionLabel)
 	}
 } RegistryTemperaturesHotString()
-
 
 TemperaturesConversionsInputHook(ConversionType, FallBackString := "") {
 	FallBackString := RegExReplace(FallBackString, ".*:(.*)", "$1")
@@ -15572,7 +15566,57 @@ TemperaturesConversionsInputHook(ConversionType, FallBackString := "") {
 	SendText(Output)
 }
 
-TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
+Class TemperatureConversion {
+	static converter(conversionType, inputValue) {
+		numValue := %conversionType%(inputValue)
+
+		return numValue
+
+		; Celsius
+		CF(G) => (G * 9 / 5) + 32
+		CK(G) => G + 273.15
+		CR(G) => (G + 273.15) * 1.8
+		CN(G) => G * 33 / 100
+		CD(G) => (100 - G) * 3 / 2
+
+		; Fahrenheit
+		FC(G) => (G - 32) * 5 / 9
+		FK(G) => (G - 32) * 5 / 9 + 273.15
+		FR(G) => G + 459.67
+		FN(G) => (G - 32) * 11 / 60
+		FD(G) => (212 - G) * 5 / 6
+
+		; Kelvin
+		KC(G) => G - 273.15
+		KF(G) => (G - 273.15) * 9 / 5 + 32
+		KR(G) => G * 1.8
+		KN(G) => (G - 273.15) * 33 / 100
+		KD(G) => (373.15 - G) * 3 / 2
+
+		; Rankine
+		RC(G) => (G / 1.8) - 273.15
+		RF(G) => G - 459.67
+		RK(G) => G / 1.8
+		RN(G) => (G / 1.8 - 273.15) * 33 / 100
+		RD(G) => (671.67 - G) * 5 / 6
+
+		; Newton
+		NC(G) => G * 100 / 33
+		NF(G) => (G * 60 / 11) + 32
+		NK(G) => (G * 100 / 33) + 273.15
+		NR(G) => (G * 100 / 33 + 273.15) * 1.8
+		ND(G) => (33 - G) * 50 / 11
+
+		; Delisle
+		DC(G) => 100 - (G * 2 / 3)
+		DF(G) => 212 - (G * 6 / 5)
+		DK(G) => 373.15 - (G * 2 / 3)
+		DR(G) => 671.67 - (G * 6 / 5)
+		DN(G) => 33 - (G * 11 / 50)
+	}
+}
+
+TemperaturesConversion(ConversionType := "CF", TemperatureValue := 0.00) {
 	IsExtendedFormattingEnabled := IniRead(ConfigFile, "Settings", "TemperatureCalcExtendedFormatting", "True")
 	IsExtendedFormattingEnabled := (IsExtendedFormattingEnabled = "True")
 
@@ -15629,6 +15673,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 		"DtN", (GetConverted) => 33 - (GetConverted * 11 / 50),
 	)
 
+
 	ConvertedTemperatureValue := 0
 	NegativePoint := False
 
@@ -15653,11 +15698,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 		}
 	}
 
-	if (ConversionsValues.Has(ConversionType)) {
-		ConvertedTemperatureValue := ConversionsValues[ConversionType](TemperatureValue)
-	} else {
-		Throw Error("Wrong conversion type: " ConversionType)
-	}
+	ConvertedTemperatureValue := TemperatureConversion.converter(ConversionType, TemperatureValue)
 
 	if !(GetKeyState("CapsLock", "T"))
 		ConvertedTemperatureValue := Round(ConvertedTemperatureValue, Integer(CalcRoundValue))
