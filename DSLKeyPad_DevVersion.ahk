@@ -173,6 +173,7 @@ DefaultConfig := [
 	["Settings", "LatinLayout", "QWERTY"],
 	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
 	["Settings", "CharacterWebResource", "SymblCC"],
+	["Settings", "F13F24", "True"],
 	["Settings", "TemperatureCalcExtendedFormatting", "True"],
 	["Settings", "TemperatureCalcDedicatedUnicodeChars", "True"],
 	["CustomRules", "ParagraphBeginning", ""],
@@ -19488,16 +19489,28 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 		LayoutArray := GetBindingsArray(, SlotModdedMapping)
 	} else if Combinations = "Utility" {
+		IsF13F24Enabled := IniRead(ConfigFile, "Settings", "F13F24", "True")
+		IsF13F24Enabled := (IsF13F24Enabled = "True")
+
 		FunctionKeysExtraLayer := []
 
-		FunctionKeysBridge(numberValue) {
-			DefaultKey := "F" numberValue
-			AdvancedKey := "F" (numberValue + 12)
-			FunctionKeysExtraLayer.Push(UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{" DefaultKey "}"), (*) => Send("{" AdvancedKey "}")))
-		}
+		if (IsF13F24Enabled) {
+			FunctionKeysBridge(numberValue) {
+				DefaultKey := "F" numberValue
+				AdvancedKey := "F" (numberValue + 12)
+				FunctionKeysExtraLayer.Push(
+					UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{" DefaultKey "}"), (*) => Send("{" AdvancedKey "}")),
+					"+" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Shift}{" DefaultKey "}"), (*) => Send("{Shift}{" AdvancedKey "}")),
+					"^" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Ctrl}{" DefaultKey "}"), (*) => Send("{Ctrl}{" AdvancedKey "}")),
+					"!" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Alt}{" DefaultKey "}"), (*) => Send("{Alt}{" AdvancedKey "}")),
+					"<#" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{LWin}{" DefaultKey "}"), (*) => Send("{LWin}{" AdvancedKey "}")),
+					">#" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{RWin}{" DefaultKey "}"), (*) => Send("{RWin}{" AdvancedKey "}")),
+				)
+			}
 
-		for numberValue in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] {
-			FunctionKeysBridge(numberValue)
+			for numberValue in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] {
+				FunctionKeysBridge(numberValue)
+			}
 		}
 
 		LayoutArray := ArrayMerge(FunctionKeysExtraLayer, [
