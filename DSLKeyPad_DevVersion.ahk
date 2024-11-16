@@ -180,6 +180,7 @@ DefaultConfig := [
 	["CustomRules", "GREPDialogAttribution", ""],
 	["CustomRules", "GREPThisEmdash", ""],
 	["CustomRules", "GREPInitials", ""],
+	["CustomRules", "TemperatureCalcRoundValue", "2"],
 	["CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"],
 	["CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"],
 	["CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace"],
@@ -15578,6 +15579,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	IsDedicatedUnicodeChars := (IsDedicatedUnicodeChars = "True")
 
 	ExtendedFormattingFromCount := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"))
+	CalcRoundValue := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcRoundValue", "2"))
 
 	RulesChars := Map(
 		"Space", IniRead(ConfigFile, "CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"),
@@ -15657,7 +15659,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	}
 
 	if !(GetKeyState("CapsLock", "T"))
-		ConvertedTemperatureValue := Round(ConvertedTemperatureValue, 2)
+		ConvertedTemperatureValue := Round(ConvertedTemperatureValue, Integer(CalcRoundValue))
 
 	if (Mod(ConvertedTemperatureValue, 1) = 0)
 		ConvertedTemperatureValue := Round(ConvertedTemperatureValue)
