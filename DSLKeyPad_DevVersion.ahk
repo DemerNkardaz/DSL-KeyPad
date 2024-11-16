@@ -15552,7 +15552,7 @@ TemperaturesConversionsInputHook(ConversionType, FallBackString := "") {
 	IH.Wait()
 
 	TemperatureValue := IH.Input
-	TemperatureValue := RegExReplace(TemperatureValue, "[^\d.,-−]")
+	TemperatureValue := RegExReplace(TemperatureValue, "[^\d.,'-−]")
 
 	Output := ""
 
@@ -15619,6 +15619,15 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	if (InStr(TemperatureValue, ".,")) {
 		TemperatureValue := RegExReplace(TemperatureValue, "\.,", ".")
 		TypographyRule := "Deutsch"
+	} else if (InStr(TemperatureValue, "..")) {
+		TemperatureValue := RegExReplace(TemperatureValue, "\.\.", ".")
+		TypographyRule := "Albania"
+	} else if (InStr(TemperatureValue, "''")) {
+		TemperatureValue := RegExReplace(TemperatureValue, "\'\'", ".")
+		TypographyRule := "Switzerland-Comma"
+	} else if (InStr(TemperatureValue, "'")) {
+		TemperatureValue := RegExReplace(TemperatureValue, "\'", ".")
+		TypographyRule := "Switzerland-Dot"
 	} else if (InStr(TemperatureValue, ",")) {
 		TemperatureValue := RegExReplace(TemperatureValue, ",", ".")
 		TypographyRule := "Russian"
@@ -15641,7 +15650,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	if (SubStr(ConvertedTemperatureValue, 1, 1) = "-")
 		ConvertedTemperatureValue := GetChar("minus") SubStr(ConvertedTemperatureValue, 2)
 
-	if (TypographyRule = "Russian" || TypographyRule = "Deutsch")
+	if (TypographyRule = "Russian" || TypographyRule = "Deutsch" || TypographyRule = "Switzerland-Comma")
 		ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "\.", ",")
 
 	if (IsExtendedFormattingEnabled) {
@@ -15652,6 +15661,9 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 				"English", ",",
 				"Deutsch", ".",
 				"Russian", GetChar(RulesChars["SpaceExtendedFormatting"]),
+				"Albania", GetChar(RulesChars["SpaceExtendedFormatting"]),
+				"Switzerland-Comma", GetChar("quote_right_single"),
+				"Switzerland-Dot", GetChar("quote_right_single"),
 			)
 
 			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", DecimalSeparators[TypographyRule])
