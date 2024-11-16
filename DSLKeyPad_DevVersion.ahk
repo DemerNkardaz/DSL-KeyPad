@@ -2596,6 +2596,11 @@ MapInsert(Characters,
 		unicode: "{U+0052}",
 		uniSequence: ["{U+00B0}", "{U+0052}"],
 	},
+	"newton", {
+		calcOff: "",
+		unicode: "{U+004E}",
+		uniSequence: ["{U+00B0}", "{U+004E}"],
+	},
 	"dagger", {
 		unicode: "{U+2020}",
 		LaTeX: "\dagger",
@@ -15513,27 +15518,44 @@ SendAltNumpad(CharacterCode) {
 	Loop Parse, CharacterCode
 		Send("{Numpad" A_LoopField "}")
 	Send("{Alt Up}")
-
 }
 
 RegistryTemperaturesHotString() {
 	HotStringsMap := Map(
-		"ctcf", (D) => TemperaturesConversionsInputHook("CtF", D),
-		"ctfc", (D) => TemperaturesConversionsInputHook("FtC", D),
-		"ctck", (D) => TemperaturesConversionsInputHook("CtK", D),
-		"ctkc", (D) => TemperaturesConversionsInputHook("KtC", D),
-		"ctfk", (D) => TemperaturesConversionsInputHook("FtK", D),
-		"ctkf", (D) => TemperaturesConversionsInputHook("KtF", D),
-		"ctkr", (D) => TemperaturesConversionsInputHook("KtR", D),
-		"ctrk", (D) => TemperaturesConversionsInputHook("RtK", D),
-		"ctfr", (D) => TemperaturesConversionsInputHook("FtR", D),
-		"ctrf", (D) => TemperaturesConversionsInputHook("RtF", D),
-		"ctcr", (D) => TemperaturesConversionsInputHook("CtR", D),
-		"ctrc", (D) => TemperaturesConversionsInputHook("RtC", D),
+		"cf", (D) => TemperaturesConversionsInputHook("CtF", D),
+		"fc", (D) => TemperaturesConversionsInputHook("FtC", D),
+		"ck", (D) => TemperaturesConversionsInputHook("CtK", D),
+		"kc", (D) => TemperaturesConversionsInputHook("KtC", D),
+		"fk", (D) => TemperaturesConversionsInputHook("FtK", D),
+		"kf", (D) => TemperaturesConversionsInputHook("KtF", D),
+		"kr", (D) => TemperaturesConversionsInputHook("KtR", D),
+		"rk", (D) => TemperaturesConversionsInputHook("RtK", D),
+		"fr", (D) => TemperaturesConversionsInputHook("FtR", D),
+		"rf", (D) => TemperaturesConversionsInputHook("RtF", D),
+		"cr", (D) => TemperaturesConversionsInputHook("CtR", D),
+		"rc", (D) => TemperaturesConversionsInputHook("RtC", D),
+		"cn", (D) => TemperaturesConversionsInputHook("CtN", D),
+		"nc", (D) => TemperaturesConversionsInputHook("NtC", D),
+		"fn", (D) => TemperaturesConversionsInputHook("FtN", D),
+		"nf", (D) => TemperaturesConversionsInputHook("NtF", D),
+		"kn", (D) => TemperaturesConversionsInputHook("KtN", D),
+		"nk", (D) => TemperaturesConversionsInputHook("NtK", D),
+		"rn", (D) => TemperaturesConversionsInputHook("RtN", D),
+		"nr", (D) => TemperaturesConversionsInputHook("NtR", D)
 	)
 
-	for key, value in HotStringsMap {
-		HotString(":C?0:" key, value)
+	HotStringsArray := ["cf", "fc", "ck", "kc", "fk", "kf", "kr", "rk", "fr", "rf", "cr", "rc", "cn", "nc", "fn", "nf", "kn", "nk", "rn", "nr"]
+
+	ShortCutConverter(InputString) {
+		InputString := StrUpper(InputString)
+		return SubStr(InputString, 1, 1) "t" SubStr(InputString, 2, 1)
+	}
+
+	;for shortcut in HotStringsArray {
+	;	HotString(":C?0:ct" shortcut, (D) => TemperaturesConversionsInputHook(ShortCutConverter(shortcut), D))
+	;}
+	for shortcut, value in HotStringsMap {
+		HotString(":C?0:ct" shortcut, value)
 	}
 } RegistryTemperaturesHotString()
 
@@ -15548,13 +15570,13 @@ TemperaturesConversionsInputHook(ConversionType, FallBackSring := "") {
 	IH.Wait()
 
 	TemperatureValue := IH.Input
-	TemperatureValue := RegExReplace(TemperatureValue, "[^\d.-]")
+	TemperatureValue := RegExReplace(TemperatureValue, "[^\d.,-−]")
 
 	Output := ""
 
-	if (TemperatureValue != "") {
+	try {
 		Output := TemperaturesConversion(ConversionType, TemperatureValue)
-	} else {
+	} catch {
 		Output := FallBackSring
 	}
 
@@ -15567,10 +15589,21 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 		"C", "celsius",
 		"F", "fahrenheit",
 		"K", "kelvin",
-		"R", "rankine"
+		"R", "rankine",
+		"N", "newton"
 	)
 
 	ConvertedTemperatureValue := 0
+	UseComma := False
+
+	if (InStr(TemperatureValue, "−")) {
+		TemperatureValue := RegExReplace(TemperatureValue, "−", "-")
+	}
+
+	if (InStr(TemperatureValue, ",")) {
+		TemperatureValue := RegExReplace(TemperatureValue, ",", ".")
+		UseComma := True
+	}
 
 	Switch ConversionType {
 		Case "CtF":
@@ -15597,14 +15630,43 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 			ConvertedTemperatureValue := (TemperatureValue + 273.15) * 1.8
 		Case "RtC":
 			ConvertedTemperatureValue := (TemperatureValue / 1.8) - 273.15
+		Case "CtN":
+			ConvertedTemperatureValue := TemperatureValue * 33 / 100
+		Case "NtC":
+			ConvertedTemperatureValue := TemperatureValue * 100 / 33
+		Case "NtF":
+			ConvertedTemperatureValue := (TemperatureValue * 60 / 11) + 32
+		Case "FtN":
+			ConvertedTemperatureValue := (TemperatureValue - 32) * 11 / 60
+		Case "NtK":
+			ConvertedTemperatureValue := (TemperatureValue * 100 / 33) + 273.15
+		Case "KtN":
+			ConvertedTemperatureValue := (TemperatureValue - 273.15) * 33 / 100
+		Case "NtR":
+			ConvertedTemperatureValue := (TemperatureValue * 100 / 33 + 273.15) * 1.8
+		Case "RtN":
+			ConvertedTemperatureValue := (TemperatureValue / 1.8 - 273.15) * 33 / 100
+
 		Default:
 			Throw Error("Неверный тип конвертации: " ConversionType)
 	}
 
-	ConvertedTemperatureValue := Round(ConvertedTemperatureValue, 2)
 
-	if (Mod(ConvertedTemperatureValue, 1) = 0)
+	if !(GetKeyState("CapsLock", "T")) {
+		ConvertedTemperatureValue := Round(ConvertedTemperatureValue, 2)
+	}
+
+	if (Mod(ConvertedTemperatureValue, 1) = 0) {
 		ConvertedTemperatureValue := Round(ConvertedTemperatureValue)
+	}
+
+	if (SubStr(ConvertedTemperatureValue, 1, 1) = "-") {
+		ConvertedTemperatureValue := GetChar("minus") SubStr(ConvertedTemperatureValue, 2)
+	}
+
+	if (UseComma) {
+		ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "\.", ",")
+	}
 
 	ConvertedTemperatureValue .= GetChar("narrow_no_break_space", ConversionsSymbols[ConversionTo])
 	return ConvertedTemperatureValue
