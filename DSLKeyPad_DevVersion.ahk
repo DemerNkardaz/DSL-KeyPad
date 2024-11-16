@@ -2591,6 +2591,11 @@ MapInsert(Characters,
 		group: [["Special Characters", "Smelting Special"]],
 		recipe: Chr(0x00B0) . "K",
 	},
+	"rankine", {
+		calcOff: "",
+		unicode: "{U+0052}",
+		uniSequence: ["{U+00B0}", "{U+0052}"],
+	},
 	"dagger", {
 		unicode: "{U+2020}",
 		LaTeX: "\dagger",
@@ -15481,6 +15486,7 @@ ToRomanNumeral(IntValue, CapitalLetters := True) {
 	}
 	return RomanStr
 }
+
 SwitchToRoman() {
 	LanguageCode := GetLanguageCode()
 
@@ -15509,6 +15515,58 @@ SendAltNumpad(CharacterCode) {
 	Send("{Alt Up}")
 
 }
+
+TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
+	ConversionTo := SubStr(ConversionType, -1)
+	ConversionsSymbols := Map(
+		"C", "celsius",
+		"F", "fahrenheit",
+		"K", "kelvin",
+		"R", "rankine"
+	)
+
+	ConvertedTemperatureValue := 0
+
+	Switch ConversionType {
+		Case "CtF":
+			ConvertedTemperatureValue := (TemperatureValue * 9 / 5) + 32
+		Case "FtC":
+			ConvertedTemperatureValue := (TemperatureValue - 32) * 5 / 9
+		Case "CtK":
+			ConvertedTemperatureValue := TemperatureValue + 273.15
+		Case "KtC":
+			ConvertedTemperatureValue := TemperatureValue - 273.15
+		Case "FtK":
+			ConvertedTemperatureValue := (TemperatureValue - 32) * 5 / 9 + 273.15
+		Case "KtF":
+			ConvertedTemperatureValue := (TemperatureValue - 273.15) * 9 / 5 + 32
+		Case "KtR":
+			ConvertedTemperatureValue := TemperatureValue * 1.8
+		Case "RtK":
+			ConvertedTemperatureValue := TemperatureValue / 1.8
+		Case "FtR":
+			ConvertedTemperatureValue := TemperatureValue + 459.67
+		Case "RtF":
+			ConvertedTemperatureValue := TemperatureValue - 459.67
+		Case "CtR":
+			ConvertedTemperatureValue := (TemperatureValue + 273.15) * 1.8
+		Case "RtC":
+			ConvertedTemperatureValue := (TemperatureValue / 1.8) - 273.15
+		Default:
+			Throw Error("Неверный тип конвертации: " ConversionType)
+	}
+
+	ConvertedTemperatureValue := Round(ConvertedTemperatureValue, 2)
+
+	if (Mod(ConvertedTemperatureValue, 1) = 0)
+		ConvertedTemperatureValue := Round(ConvertedTemperatureValue)
+
+	ConvertedTemperatureValue .= GetChar("narrow_no_break_space", ConversionsSymbols[ConversionTo])
+	return ConvertedTemperatureValue
+}
+
+
+; MsgBox TemperaturesConversion("CtF", "25") "`n" TemperaturesConversion("CtK", 0.01) "`n" TemperaturesConversion("CtR", 32)
 
 
 GREPizeSelection(GetCollaborative := False) {
