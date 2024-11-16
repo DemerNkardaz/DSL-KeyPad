@@ -2606,6 +2606,11 @@ MapInsert(Characters,
 		unicode: "{U+004E}",
 		uniSequence: ["{U+00B0}", "{U+004E}"],
 	},
+	"delisle", {
+		calcOff: "",
+		unicode: "{U+0044}",
+		uniSequence: ["{U+00B0}", "{U+0044}"],
+	},
 	"dagger", {
 		unicode: "{U+2020}",
 		LaTeX: "\dagger",
@@ -15526,7 +15531,7 @@ SendAltNumpad(CharacterCode) {
 }
 
 RegistryTemperaturesHotString() {
-	HotStringsEntries := ["cf", "fc", "ck", "kc", "fk", "kf", "kr", "rk", "fr", "rf", "cr", "rc", "cn", "nc", "fn", "nf", "kn", "nk", "rn", "nr"]
+	HotStringsEntries := ["cf", "fc", "ck", "kc", "fk", "kf", "kr", "rk", "fr", "rf", "cr", "rc", "cn", "nc", "fn", "nf", "kn", "nk", "rn", "nr", "cd", "dc", "fd", "df", "kd", "dk", "rd", "dr", "nd", "dn"]
 
 	ShortCutConverter(InputString) {
 		InputString := StrUpper(InputString)
@@ -15586,6 +15591,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 		"K", ["kelvin", "K"],
 		"R", ["rankine", GetChar("degree") "R"],
 		"N", ["newton", GetChar("degree") "N"],
+		"D", ["delisle", GetChar("degree") "D"],
 	)
 	ConversionsValues := Map(
 		"CtF", (GetConverted) => (GetConverted * 9 / 5) + 32,
@@ -15607,7 +15613,17 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 		"NtK", (GetConverted) => (GetConverted * 100 / 33) + 273.15,
 		"KtN", (GetConverted) => (GetConverted - 273.15) * 33 / 100,
 		"NtR", (GetConverted) => (GetConverted * 100 / 33 + 273.15) * 1.8,
-		"RtN", (GetConverted) => (GetConverted / 1.8 - 273.15) * 33 / 100
+		"RtN", (GetConverted) => (GetConverted / 1.8 - 273.15) * 33 / 100,
+		"CtD", (GetConverted) => (100 - GetConverted) * 3 / 2,
+		"DtC", (GetConverted) => 100 - (GetConverted * 2 / 3),
+		"FtD", (GetConverted) => (212 - GetConverted) * 5 / 6,
+		"DtF", (GetConverted) => 212 - (GetConverted * 6 / 5),
+		"KtD", (GetConverted) => (373.15 - GetConverted) * 3 / 2,
+		"DtK", (GetConverted) => 373.15 - (GetConverted * 2 / 3),
+		"RtD", (GetConverted) => (671.67 - GetConverted) * 5 / 6,
+		"DtR", (GetConverted) => 671.67 - (GetConverted * 6 / 5),
+		"NtD", (GetConverted) => (33 - GetConverted) * 50 / 11,
+		"DtN", (GetConverted) => 33 - (GetConverted * 11 / 50),
 	)
 
 	ConvertedTemperatureValue := 0
