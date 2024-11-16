@@ -181,7 +181,8 @@ DefaultConfig := [
 	["CustomRules", "GREPThisEmdash", ""],
 	["CustomRules", "GREPInitials", ""],
 	["CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"],
-	["CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "narrow_no_break_space"],
+	["CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"],
+	["CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace"],
 	["LatestPrompts", "LaTeX", ""],
 	["LatestPrompts", "Unicode", ""],
 	["LatestPrompts", "Altcode", ""],
@@ -15571,9 +15572,11 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	IsDedicatedUnicodeChars := IniRead(ConfigFile, "Settings", "TemperatureCalcDedicatedUnicodeChars", "True")
 	IsDedicatedUnicodeChars := (IsDedicatedUnicodeChars = "True")
 
+	ExtendedFormattingFromCount := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"))
+
 	RulesChars := Map(
 		"Space", IniRead(ConfigFile, "CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"),
-		"SpaceExtendedFormatting", IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "narrow_no_break_space"),
+		"SpaceExtendedFormatting", IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace"),
 	)
 
 	ConversionTo := SubStr(ConversionType, -1)
@@ -15622,7 +15625,7 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	if (ConversionsValues.Has(ConversionType)) {
 		ConvertedTemperatureValue := ConversionsValues[ConversionType](TemperatureValue)
 	} else {
-		Throw Error("Неверный тип конвертации: " ConversionType)
+		Throw Error("Wrong conversion type: " ConversionType)
 	}
 
 	if !(GetKeyState("CapsLock", "T"))
@@ -15639,15 +15642,17 @@ TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 
 	if (IsExtendedFormattingEnabled) {
 		IntegerPart := RegExReplace(ConvertedTemperatureValue, "(\..*)|([,].*)", "")
-		FractionPart := RegExReplace(ConvertedTemperatureValue, "^[^,\.]*([,\.].*)$", "$1")
 
-		if (UseComma) {
-			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", GetChar(RulesChars["SpaceExtendedFormatting"]))
-		} else {
-			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", ",")
+		if (StrLen(IntegerPart) >= ExtendedFormattingFromCount) {
+
+			if (UseComma) {
+				IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", GetChar(RulesChars["SpaceExtendedFormatting"]))
+			} else {
+				IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", ",")
+			}
+
+			ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "^\d+", IntegerPart)
 		}
-
-		ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "^\d+", IntegerPart)
 
 		;ConvertedTemperatureValue .= FractionPart
 	}
