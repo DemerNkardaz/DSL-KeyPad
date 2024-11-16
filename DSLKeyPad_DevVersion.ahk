@@ -15516,6 +15516,51 @@ SendAltNumpad(CharacterCode) {
 
 }
 
+RegistryTemperaturesHotString() {
+	HotStringsMap := Map(
+		"ctcf", (D) => TemperaturesConversionsInputHook("CtF", D),
+		"ctfc", (D) => TemperaturesConversionsInputHook("FtC", D),
+		"ctck", (D) => TemperaturesConversionsInputHook("CtK", D),
+		"ctkc", (D) => TemperaturesConversionsInputHook("KtC", D),
+		"ctfk", (D) => TemperaturesConversionsInputHook("FtK", D),
+		"ctkf", (D) => TemperaturesConversionsInputHook("KtF", D),
+		"ctkr", (D) => TemperaturesConversionsInputHook("KtR", D),
+		"ctrk", (D) => TemperaturesConversionsInputHook("RtK", D),
+		"ctfr", (D) => TemperaturesConversionsInputHook("FtR", D),
+		"ctrf", (D) => TemperaturesConversionsInputHook("RtF", D),
+		"ctcr", (D) => TemperaturesConversionsInputHook("CtR", D),
+		"ctrc", (D) => TemperaturesConversionsInputHook("RtC", D),
+	)
+
+	for key, value in HotStringsMap {
+		HotString(":C?0:" key, value)
+	}
+} RegistryTemperaturesHotString()
+
+
+TemperaturesConversionsInputHook(ConversionType, FallBackSring := "") {
+
+	FallBackSring := RegExReplace(FallBackSring, ".*:(.*)", "$1")
+
+	IH := InputHook("C")
+	IH.KeyOpt("{Space}{Enter}{Tab}", "E")
+	IH.Start()
+	IH.Wait()
+
+	TemperatureValue := IH.Input
+	TemperatureValue := RegExReplace(TemperatureValue, "[^\d.-]")
+
+	Output := ""
+
+	if (TemperatureValue != "") {
+		Output := TemperaturesConversion(ConversionType, TemperatureValue)
+	} else {
+		Output := FallBackSring
+	}
+
+	SendText(Output)
+}
+
 TemperaturesConversion(ConversionType := "CtF", TemperatureValue := 0.00) {
 	ConversionTo := SubStr(ConversionType, -1)
 	ConversionsSymbols := Map(
