@@ -15547,7 +15547,6 @@ Class TemperatureConversion {
 		W: "W",
 		RO: "R" GetChar("lat_s_let_o_solidus_long"),
 		RE: "R" GetChar("lat_s_let_e_acute"),
-		P: [Chr(0x1D447) Chr(0x209A), "Tp"],
 	}
 
 	static typographyTypes := Map(
@@ -15564,17 +15563,16 @@ Class TemperatureConversion {
 
 	static RegistryHotstrings() {
 		hsKeys := [
-			'cd', 'cf', 'ck', 'cn', 'cr', "cl", "cw", "cro", "cre", "cp", 'ch', ; Celsius
-			'fc', 'fd', 'fk', 'fn', 'fr', 'fl', 'fw', 'fro', 'fre', 'fp', ; Fahrenheit
-			'kc', 'kd', 'kf', 'kn', 'kr', 'kl', 'kw', 'kro', 'kre', 'kp', ; Kelvin
-			'nc', 'nd', 'nf', 'nk', 'nr', 'nl', 'nw', 'nro', 'nre', 'np', ; Newton
-			'rc', 'rd', 'rf', 'rk', 'rn', 'rl', 'rw', 'rro', 'rre', 'rp', ; Rankine
-			'dc', 'df', 'dk', 'dn', 'dr', 'dl', 'dw', 'dro', 'dre', 'dp', ; Delisle
-			'lc', 'lf', 'lk', 'ln', 'lr', 'ld', 'lw', 'lro', 'lre', 'lp', ; Leiden
-			'wc', 'wf', 'wk', 'wn', 'wr', 'wd', 'wl', 'wro', 'wre', 'wp', ; Wedgwood
-			'roc', 'rof', 'rok', 'ron', 'ror', 'rod', 'rol', 'row', 'rore', 'rop', ; Romer
-			'rec', 'ref', 'rek', 'ren', 'rer', 'red', 'rel', 'rew', 'rero', 'rep', ; Reaumur
-			'pc', 'pf', 'pk', 'pn', 'pr', 'pd', 'pl', 'pw', 'pro', 'pre', ; Plancks
+			'cd', 'cf', 'ck', 'cn', 'cr', "cl", "cw", "cro", "cre", 'ch', ; Celsius
+			'fc', 'fd', 'fk', 'fn', 'fr', 'fl', 'fw', 'fro', 'fre', ; Fahrenheit
+			'kc', 'kd', 'kf', 'kn', 'kr', 'kl', 'kw', 'kro', 'kre', ; Kelvin
+			'nc', 'nd', 'nf', 'nk', 'nr', 'nl', 'nw', 'nro', 'nre', ; Newton
+			'rc', 'rd', 'rf', 'rk', 'rn', 'rl', 'rw', 'rro', 'rre', ; Rankine
+			'dc', 'df', 'dk', 'dn', 'dr', 'dl', 'dw', 'dro', 'dre', ; Delisle
+			'lc', 'lf', 'lk', 'ln', 'lr', 'ld', 'lw', 'lro', 'lre', ; Leiden
+			'wc', 'wf', 'wk', 'wn', 'wr', 'wd', 'wl', 'wro', 'wre', ; Wedgwood
+			'roc', 'rof', 'rok', 'ron', 'ror', 'rod', 'rol', 'row', 'rore', ; Romer
+			'rec', 'ref', 'rek', 'ren', 'rer', 'red', 'rel', 'rew', 'rero', ; Reaumur
 			'hc', ; Hooke
 		]
 
@@ -15636,7 +15634,6 @@ Class TemperatureConversion {
 		CW(G) => (G / 24.857191) - 10.821818
 		CRO(G) => (G / 1.904762) + 7.5
 		CRE(G) => G / 1.25
-		CP(G) => (G / 1.416785E+32) + 1.9279566059776E-30
 
 		; Fahrenheit
 		FC(G) => (G - 32) * 5 / 9
@@ -15739,9 +15736,6 @@ Class TemperatureConversion {
 		REL(G) => (1.25 * G) + 253
 		REW(G) => (G / 19.885753) - 10.821818
 		RERO(G) => (G / 1.52381) + 7.5
-
-		; Plancks
-		PC(G) => 1.416785E+32 * G
 	}
 
 	static GetNumber(conversionLabel) {
