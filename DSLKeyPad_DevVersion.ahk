@@ -15545,6 +15545,7 @@ Class TemperatureConversion {
 		H: "H",
 		L: "L",
 		W: "W",
+		RO: "R" GetChar("lat_s_let_o_solidus_long"),
 	}
 
 	static typographyTypes := Map(
@@ -15561,15 +15562,16 @@ Class TemperatureConversion {
 
 	static RegistryHotstrings() {
 		hsKeys := [
-			'cd', 'cf', 'ck', 'cn', 'cr', "cl", "cw", 'ch', ; Celsius
-			'fc', 'fd', 'fk', 'fn', 'fr', 'fl', 'fw', ; Fahrenheit
-			'kc', 'kd', 'kf', 'kn', 'kr', 'kl', 'kw', ; Kelvin
-			'nc', 'nd', 'nf', 'nk', 'nr', 'nl', 'nw', ; Newton
-			'rc', 'rd', 'rf', 'rk', 'rn', 'rl', 'rw', ; Rankine
-			'dc', 'df', 'dk', 'dn', 'dr', 'dl', 'dw', ; Delisle
+			'cd', 'cf', 'ck', 'cn', 'cr', "cl", "cw", "cro", 'ch', ; Celsius
+			'fc', 'fd', 'fk', 'fn', 'fr', 'fl', 'fw', 'fro', ; Fahrenheit
+			'kc', 'kd', 'kf', 'kn', 'kr', 'kl', 'kw', 'kro', ; Kelvin
+			'nc', 'nd', 'nf', 'nk', 'nr', 'nl', 'nw', 'nro', ; Newton
+			'rc', 'rd', 'rf', 'rk', 'rn', 'rl', 'rw', 'rro', ; Rankine
+			'dc', 'df', 'dk', 'dn', 'dr', 'dl', 'dw', 'dro', ; Delisle
+			'lc', 'lf', 'lk', 'ln', 'lr', 'ld', 'lw', 'lro', ; Leiden
+			'wc', 'wf', 'wk', 'wn', 'wr', 'wd', 'wl', 'wro', ; Wedgewood
+			'roc', 'rof', 'rok', 'ron', 'ror', 'rod', 'rol', 'row', ; Romer
 			'hc', ; Hooke
-			'lc', 'lf', 'lk', 'ln', 'lr', 'ld', 'lw', ; Leiden
-			'wc', 'wf', 'wk', 'wn', 'wr', 'wd', 'wl', ; Wedgewood
 		]
 
 		callback := ObjBindMethod(this, 'Converter')
@@ -15582,12 +15584,13 @@ Class TemperatureConversion {
 	static Converter(conversionType) {
 		hwnd := WinActive('A')
 
-		conversionFromTo := SubStr(conversionType, -2)
+		conversionFromTo := RegExReplace(conversionType, "^.*t", "")
 
-		labelFrom := SubStr(conversionFromTo, 1, 1)
-		labelTo := SubStr(conversionFromTo, 2, 1)
+		labelFrom := (RegExMatch(conversionFromTo, "^ro|^re")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
+		labelTo := (RegExMatch(conversionFromTo, "ro$|re$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
 
-		conversionLabel := StrUpper("[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]")
+
+		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]"
 
 		numberValue := this.GetNumber(conversionLabel)
 
@@ -15614,7 +15617,7 @@ Class TemperatureConversion {
 
 			SendText(temperatureValue)
 		} catch {
-			SendText(SubStr(conversionType, -4))
+			SendText(RegExReplace(conversionType, "^.*?:.*?:", ""))
 		}
 		return
 
@@ -15627,6 +15630,7 @@ Class TemperatureConversion {
 		CH(G) => G * 5 / 12
 		CL(G) => G + 253
 		CW(G) => (G / 24.857191) - 10.821818
+		CRO(G) => (G / 1.904762) + 7.5
 
 		; Fahrenheit
 		FC(G) => (G - 32) * 5 / 9
@@ -15662,7 +15666,7 @@ Class TemperatureConversion {
 		NR(G) => (G * 100 / 33 + 273.15) * 1.8
 		ND(G) => (33 - G) * 50 / 11
 		NL(G) => (3.030303 * G) + 253
-		NW(G) => G
+		NW(G) => (G / 8.202873) - 10.821818
 
 		; Delisle
 		DC(G) => 100 - (G * 2 / 3)
@@ -15671,7 +15675,7 @@ Class TemperatureConversion {
 		DR(G) => 671.67 - (G * 6 / 5)
 		DN(G) => 33 - (G * 11 / 50)
 		DL(G) => (-G / 1.5) + 353
-		DW(G) => G
+		DW(G) => (-G / 37.285786) - 6.798838
 
 		; Hooke
 		HC(G) => (G * 12 / 5)
@@ -15683,13 +15687,19 @@ Class TemperatureConversion {
 		LR(G) => (1.8 * G) + 36.27
 		LN(G) => (G / 3.030303) - 83.49
 		LD(G) => (-1.5 * G) + 529.5
-		LW(G) => G
+		LW(G) => (G / 24.857191) - 21
 
 		; Wedgwood
 		WC(G) => (24.857191 * G) + 269
 		WF(G) => (44.742943 * G) + 516.2
 		WK(G) => (24.857191 * G) + 542.15
 		WR(G) => (44.742943 * G) + 975.87
+		WD(G) => (-37.285786 * G) - 253.5
+		WN(G) => (8.202873 * G) + 88.77
+		WL(G) => (24.857191 * G) + 522
+
+		; Romer
+		ROC(G) => (1.904762 * G) - 14.285714
 	}
 
 	static GetNumber(conversionLabel) {
