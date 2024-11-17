@@ -15539,9 +15539,12 @@ Class TemperatureConversion {
 		C: [GetChar("celsius"), GetChar("degree") "C"],
 		F: [GetChar("fahrenheit"), GetChar("degree") "F"],
 		K: [GetChar("kelvin"), "K"],
-		R: GetChar("degree") "R",
-		N: GetChar("degree") "N",
-		D: GetChar("degree") "D",
+		R: "R",
+		N: "N",
+		D: "D",
+		H: "H",
+		L: "L",
+		W: "W",
 	}
 
 	static typographyTypes := Map(
@@ -15558,12 +15561,15 @@ Class TemperatureConversion {
 
 	static RegistryHotstrings() {
 		hsKeys := [
-			'cd', 'cf', 'ck', 'cn', 'cr', ; Celsius
-			'fc', 'fd', 'fk', 'fn', 'fr', ; Fahrenheit
-			'kc', 'kd', 'kf', 'kn', 'kr', ; Kelvin
-			'nc', 'nd', 'nf', 'nk', 'nr', ; Newton
-			'rc', 'rd', 'rf', 'rk', 'rn', ; Rankine
-			'dc', 'df', 'dk', 'dn', 'dr', ; Delisle
+			'cd', 'cf', 'ck', 'cn', 'cr', "cl", "cw", 'ch', ; Celsius
+			'fc', 'fd', 'fk', 'fn', 'fr', 'fl', 'fw', ; Fahrenheit
+			'kc', 'kd', 'kf', 'kn', 'kr', 'kl', 'kw', ; Kelvin
+			'nc', 'nd', 'nf', 'nk', 'nr', 'nl', 'nw', ; Newton
+			'rc', 'rd', 'rf', 'rk', 'rn', 'rl', 'rw', ; Rankine
+			'dc', 'df', 'dk', 'dn', 'dr', 'dl', 'dw', ; Delisle
+			'hc', ; Hooke
+			'lc', 'lf', 'lk', 'ln', 'lr', 'ld', 'lw', ; Leiden
+			'wc', 'wf', 'wk', 'wn', 'wr', 'wd', 'wl', ; Wedgewood
 		]
 
 		callback := ObjBindMethod(this, 'Converter')
@@ -15581,7 +15587,7 @@ Class TemperatureConversion {
 		labelFrom := SubStr(conversionFromTo, 1, 1)
 		labelTo := SubStr(conversionFromTo, 2, 1)
 
-		conversionLabel := StrUpper("[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : this.scales.%labelTo%) "]")
+		conversionLabel := StrUpper("[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]")
 
 		numberValue := this.GetNumber(conversionLabel)
 
@@ -15618,6 +15624,9 @@ Class TemperatureConversion {
 		CR(G) => (G + 273.15) * 1.8
 		CN(G) => G * 33 / 100
 		CD(G) => (100 - G) * 3 / 2
+		CH(G) => G * 5 / 12
+		CL(G) => G + 253
+		CW(G) => (G / 24.857191) - 10.821818
 
 		; Fahrenheit
 		FC(G) => (G - 32) * 5 / 9
@@ -15625,6 +15634,8 @@ Class TemperatureConversion {
 		FR(G) => G + 459.67
 		FN(G) => (G - 32) * 11 / 60
 		FD(G) => (212 - G) * 5 / 6
+		FL(G) => (G / 1.8) + 235.222222
+		FW(G) => (G / 44.742943) - 11.537015
 
 		; Kelvin
 		KC(G) => G - 273.15
@@ -15632,6 +15643,8 @@ Class TemperatureConversion {
 		KR(G) => G * 1.8
 		KN(G) => (G - 273.15) * 33 / 100
 		KD(G) => (373.15 - G) * 3 / 2
+		KL(G) => G - 20.15
+		KW(G) => (G / 24.857191) - 21.81059
 
 		; Rankine
 		RC(G) => (G / 1.8) - 273.15
@@ -15639,6 +15652,8 @@ Class TemperatureConversion {
 		RK(G) => G / 1.8
 		RN(G) => (G / 1.8 - 273.15) * 33 / 100
 		RD(G) => (671.67 - G) * 5 / 6
+		RL(G) => (G / 1.8) - 20.15
+		RW(G) => (G / 44.742943) - 21.81059
 
 		; Newton
 		NC(G) => G * 100 / 33
@@ -15646,6 +15661,8 @@ Class TemperatureConversion {
 		NK(G) => (G * 100 / 33) + 273.15
 		NR(G) => (G * 100 / 33 + 273.15) * 1.8
 		ND(G) => (33 - G) * 50 / 11
+		NL(G) => (3.030303 * G) + 253
+		NW(G) => G
 
 		; Delisle
 		DC(G) => 100 - (G * 2 / 3)
@@ -15653,6 +15670,26 @@ Class TemperatureConversion {
 		DK(G) => 373.15 - (G * 2 / 3)
 		DR(G) => 671.67 - (G * 6 / 5)
 		DN(G) => 33 - (G * 11 / 50)
+		DL(G) => (-G / 1.5) + 353
+		DW(G) => G
+
+		; Hooke
+		HC(G) => (G * 12 / 5)
+
+		; Leiden
+		LC(G) => G - 253
+		LF(G) => (1.8 * G) - 423.4
+		LK(G) => G + 20.15
+		LR(G) => (1.8 * G) + 36.27
+		LN(G) => (G / 3.030303) - 83.49
+		LD(G) => (-1.5 * G) + 529.5
+		LW(G) => G
+
+		; Wedgwood
+		WC(G) => (24.857191 * G) + 269
+		WF(G) => (44.742943 * G) + 516.2
+		WK(G) => (24.857191 * G) + 542.15
+		WR(G) => (44.742943 * G) + 975.87
 	}
 
 	static GetNumber(conversionLabel) {
@@ -15718,7 +15755,7 @@ Class TemperatureConversion {
 			temperatureValue := RegExReplace(temperatureValue, "^\d+", integerPart)
 		}
 
-		temperatureValue := (negativePoint ? GetChar("minus") : "") temperatureValue chars.degreeSpace (IsObject(this.scales.%scale%) ? (isDedicatedUnicodeChars ? this.scales.%scale%[1] : this.scales.%scale%[2]) : this.scales.%scale%)
+		temperatureValue := (negativePoint ? GetChar("minus") : "") temperatureValue chars.degreeSpace (IsObject(this.scales.%scale%) ? (isDedicatedUnicodeChars ? this.scales.%scale%[1] : this.scales.%scale%[2]) : GetChar("degree") this.scales.%scale%)
 		return temperatureValue
 	}
 }
@@ -19516,8 +19553,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 		LayoutArray := GetBindingsArray(, SlotModdedMapping)
 	} else if Combinations = "Utility" {
-		IsF13F24Enabled := IniRead(ConfigFile, "Settings", "F13F24", "True")
-		IsF13F24Enabled := (IsF13F24Enabled = "True")
+		;IsF13F24Enabled := IniRead(ConfigFile, "Settings", "F13F24", "True")
+		IsF13F24Enabled := False ;(IsF13F24Enabled = "True")
 
 		FunctionKeysExtraLayer := []
 
@@ -19527,11 +19564,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				AdvancedKey := "F" (numberValue + 12)
 				FunctionKeysExtraLayer.Push(
 					UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{" DefaultKey "}"), (*) => Send("{" AdvancedKey "}")),
-					"+" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Shift}{" DefaultKey "}"), (*) => Send("{Shift}{" AdvancedKey "}")),
-					"^" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Ctrl}{" DefaultKey "}"), (*) => Send("{Ctrl}{" AdvancedKey "}")),
-					"!" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Alt}{" DefaultKey "}"), (*) => Send("{Alt}{" AdvancedKey "}")),
-					"<#" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{LWin}{" DefaultKey "}"), (*) => Send("{LWin}{" AdvancedKey "}")),
-					">#" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{RWin}{" DefaultKey "}"), (*) => Send("{RWin}{" AdvancedKey "}")),
+					;"+" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Shift}{" DefaultKey "}"), (*) => Send("{Shift}{" AdvancedKey "}")),
+					;"^" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Ctrl}{" DefaultKey "}"), (*) => Send("{Ctrl}{" AdvancedKey "}")),
+					;"!" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Alt}{" DefaultKey "}"), (*) => Send("{Alt}{" AdvancedKey "}")),
+					;"<#" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{LWin}{" DefaultKey "}"), (*) => Send("{LWin}{" AdvancedKey "}")),
+					;">#" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{RWin}{" DefaultKey "}"), (*) => Send("{RWin}{" AdvancedKey "}")),
 				)
 			}
 
