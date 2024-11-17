@@ -15532,45 +15532,85 @@ SendAltNumpad(CharacterCode) {
 	Send("{Alt Up}")
 }
 
-RegistryTemperaturesHotString() {
-	HotStringsEntries := ["cf", "fc", "ck", "kc", "fk", "kf", "kr", "rk", "fr", "rf", "cr", "rc", "cn", "nc", "fn", "nf", "kn", "nk", "rn", "nr", "cd", "dc", "fd", "df", "kd", "dk", "rd", "dr", "nd", "dn"]
-
-	RegistryBridge(conversionLabel) {
-		HotString(":C?0:ct" conversionLabel, (D) => TemperaturesConversionsInputHook(StrUpper(conversionLabel), D))
-	}
-
-	for conversionLabel in HotStringsEntries {
-		RegistryBridge(conversionLabel)
-	}
-} RegistryTemperaturesHotString()
-
-TemperaturesConversionsInputHook(ConversionType, FallBackString := "") {
-	FallBackString := RegExReplace(FallBackString, ".*:(.*)", "$1")
-
-	IH := InputHook("C")
-	IH.KeyOpt("{Space}{Enter}{Tab}", "E")
-	IH.Start()
-	IH.Wait()
-
-	TemperatureValue := IH.Input
-	TemperatureValue := RegExReplace(TemperatureValue, "[^\d.,'-−]")
-
-	Output := ""
-
-	try {
-		Output := TemperaturesConversion(ConversionType, TemperatureValue)
-	} catch {
-		Output := FallBackString
-	}
-
-	SendText(Output)
-}
-
 Class TemperatureConversion {
-	static converter(conversionType, inputValue) {
-		numValue := %conversionType%(inputValue)
+	#Requires Autohotkey v2.0+
 
-		return numValue
+	static scales := {
+		C: [GetChar("celsius"), GetChar("degree") "C"],
+		F: [GetChar("fahrenheit"), GetChar("degree") "F"],
+		K: [GetChar("kelvin"), "K"],
+		R: GetChar("degree") "R",
+		N: GetChar("degree") "N",
+		D: GetChar("degree") "D",
+	}
+
+	static typographyTypes := Map(
+		"Deutsch", [".,", (T) => RegExReplace(T, "\.,", ".")],
+		"Albania", ["..", (T) => RegExReplace(T, "\.\.", ".")],
+		"Switzerland-Comma", ["''", (T) => RegExReplace(T, "\'\'", ".")],
+		"Switzerland-Dot", ["'", (T) => RegExReplace(T, "\'", ".")],
+		"Russian", [",", (T) => RegExReplace(T, ",", ".")],
+	)
+
+	static __New() {
+		this.RegistryHotstrings()
+	}
+
+	static RegistryHotstrings() {
+		hsKeys := [
+			'cd', 'cf', 'ck', 'cn', 'cr', ; Celsius
+			'fc', 'fd', 'fk', 'fn', 'fr', ; Fahrenheit
+			'kc', 'kd', 'kf', 'kn', 'kr', ; Kelvin
+			'nc', 'nd', 'nf', 'nk', 'nr', ; Newton
+			'rc', 'rd', 'rf', 'rk', 'rn', ; Rankine
+			'dc', 'df', 'dk', 'dn', 'dr', ; Delisle
+		]
+
+		callback := ObjBindMethod(this, 'Converter')
+
+		for hsKey in hsKeys {
+			HotString(":C?0:ct" hsKey, callback)
+		}
+	}
+
+	static Converter(conversionType) {
+		hwnd := WinActive('A')
+
+		conversionFromTo := SubStr(conversionType, -2)
+
+		labelFrom := SubStr(conversionFromTo, 1, 1)
+		labelTo := SubStr(conversionFromTo, 2, 1)
+
+		conversionLabel := StrUpper("[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : this.scales.%labelTo%) "]")
+
+		numberValue := this.GetNumber(conversionLabel)
+
+		try {
+			regionalType := "English"
+			for region, value in this.typographyTypes {
+				if InStr(numberValue, value[1]) {
+					numberValue := value[2](numberValue)
+					regionalType := region
+					break
+				}
+			}
+
+			numberValue := %conversionFromTo%(StrReplace(numberValue, GetChar("minus"), "-"))
+
+			(SubStr(numberValue, 1, 1) = "-") ? (numberValue := SubStr(numberValue, 2), negativePoint := True) : (negativePoint := False)
+
+			temperatureValue := this.PostFormatting(numberValue, labelTo, negativePoint, regionalType)
+
+			if !WinActive('ahk_id ' hwnd) {
+				WinActivate('ahk_id ' hwnd)
+				WinWaitActive(hwnd)
+			}
+
+			SendText(temperatureValue)
+		} catch {
+			SendText(SubStr(conversionType, -4))
+		}
+		return
 
 		; Celsius
 		CF(G) => (G * 9 / 5) + 32
@@ -15614,128 +15654,70 @@ Class TemperatureConversion {
 		DR(G) => 671.67 - (G * 6 / 5)
 		DN(G) => 33 - (G * 11 / 50)
 	}
-}
 
-TemperaturesConversion(ConversionType := "CF", TemperatureValue := 0.00) {
-	IsExtendedFormattingEnabled := IniRead(ConfigFile, "Settings", "TemperatureCalcExtendedFormatting", "True")
-	IsExtendedFormattingEnabled := (IsExtendedFormattingEnabled = "True")
+	static GetNumber(conversionLabel) {
+		static validator := "1234567890,.-'" GetChar("minus")
 
-	IsDedicatedUnicodeChars := IniRead(ConfigFile, "Settings", "TemperatureCalcDedicatedUnicodeChars", "True")
-	IsDedicatedUnicodeChars := (IsDedicatedUnicodeChars = "True")
+		numberValue := ""
 
-	ExtendedFormattingFromCount := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"))
-	CalcRoundValue := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcRoundValue", "2"))
+		Loop {
+			IH := InputHook("L1", "{Escape}")
+			IH.Start(), IH.Wait()
 
-	RulesChars := Map(
-		"Space", IniRead(ConfigFile, "CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"),
-		"SpaceExtendedFormatting", IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace"),
-	)
-
-	ConversionTo := SubStr(ConversionType, -1)
-	ConversionsSymbols := Map(
-		"C", ["celsius", GetChar("degree") "C"],
-		"F", ["fahrenheit", GetChar("degree") "F"],
-		"K", ["kelvin", "K"],
-		"R", ["rankine", GetChar("degree") "R"],
-		"N", ["newton", GetChar("degree") "N"],
-		"D", ["delisle", GetChar("degree") "D"],
-	)
-	ConversionsValues := Map(
-		"CtF", (GetConverted) => (GetConverted * 9 / 5) + 32,
-		"FtC", (GetConverted) => (GetConverted - 32) * 5 / 9,
-		"CtK", (GetConverted) => GetConverted + 273.15,
-		"KtC", (GetConverted) => GetConverted - 273.15,
-		"FtK", (GetConverted) => (GetConverted - 32) * 5 / 9 + 273.15,
-		"KtF", (GetConverted) => (GetConverted - 273.15) * 9 / 5 + 32,
-		"KtR", (GetConverted) => GetConverted * 1.8,
-		"RtK", (GetConverted) => GetConverted / 1.8,
-		"FtR", (GetConverted) => GetConverted + 459.67,
-		"RtF", (GetConverted) => GetConverted - 459.67,
-		"CtR", (GetConverted) => (GetConverted + 273.15) * 1.8,
-		"RtC", (GetConverted) => (GetConverted / 1.8) - 273.15,
-		"CtN", (GetConverted) => GetConverted * 33 / 100,
-		"NtC", (GetConverted) => GetConverted * 100 / 33,
-		"NtF", (GetConverted) => (GetConverted * 60 / 11) + 32,
-		"FtN", (GetConverted) => (GetConverted - 32) * 11 / 60,
-		"NtK", (GetConverted) => (GetConverted * 100 / 33) + 273.15,
-		"KtN", (GetConverted) => (GetConverted - 273.15) * 33 / 100,
-		"NtR", (GetConverted) => (GetConverted * 100 / 33 + 273.15) * 1.8,
-		"RtN", (GetConverted) => (GetConverted / 1.8 - 273.15) * 33 / 100,
-		"CtD", (GetConverted) => (100 - GetConverted) * 3 / 2,
-		"DtC", (GetConverted) => 100 - (GetConverted * 2 / 3),
-		"FtD", (GetConverted) => (212 - GetConverted) * 5 / 6,
-		"DtF", (GetConverted) => 212 - (GetConverted * 6 / 5),
-		"KtD", (GetConverted) => (373.15 - GetConverted) * 3 / 2,
-		"DtK", (GetConverted) => 373.15 - (GetConverted * 2 / 3),
-		"RtD", (GetConverted) => (671.67 - GetConverted) * 5 / 6,
-		"DtR", (GetConverted) => 671.67 - (GetConverted * 6 / 5),
-		"NtD", (GetConverted) => (33 - GetConverted) * 50 / 11,
-		"DtN", (GetConverted) => 33 - (GetConverted * 11 / 50),
-	)
-
-
-	ConvertedTemperatureValue := 0
-	NegativePoint := False
-
-	if (InStr(TemperatureValue, "−")) {
-		TemperatureValue := RegExReplace(TemperatureValue, "−", "-")
-	}
-
-	TypographyRule := "English"
-	TypographyTypes := Map(
-		"Deutsch", [".,", (T) => RegExReplace(T, "\.,", ".")],
-		"Albania", ["..", (T) => RegExReplace(T, "\.\.", ".")],
-		"Switzerland-Comma", ["''", (T) => RegExReplace(T, "\'\'", ".")],
-		"Switzerland-Dot", ["'", (T) => RegExReplace(T, "\'", ".")],
-		"Russian", [",", (T) => RegExReplace(T, ",", ".")],
-	)
-
-	for regionalType, value in TypographyTypes {
-		if InStr(TemperatureValue, value[1]) {
-			TemperatureValue := value[2](TemperatureValue)
-			TypographyRule := regionalType
-			break
+			if (IH.EndKey = "Escape") {
+				numberValue := ""
+				break
+			} else if InStr(validator, IH.Input) {
+				numberValue .= IH.Input
+				Tooltip(conversionLabel " " numberValue)
+			} else break
 		}
+
+		ToolTip()
+
+		return numberValue
 	}
 
-	ConvertedTemperatureValue := TemperatureConversion.converter(ConversionType, TemperatureValue)
+	static PostFormatting(temperatureValue, scale, negativePoint := False, regionalType := "English") {
+		chars := {
+			numberSpace: GetChar(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace")),
+			degreeSpace: GetChar(IniRead(ConfigFile, "CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space")),
+		}
 
-	if !(GetKeyState("CapsLock", "T"))
-		ConvertedTemperatureValue := Round(ConvertedTemperatureValue, Integer(CalcRoundValue))
+		isDedicatedUnicodeChars := IniRead(ConfigFile, "Settings", "TemperatureCalcDedicatedUnicodeChars", "True") = "True"
+		isExtendedFormattingEnabled := IniRead(ConfigFile, "Settings", "TemperatureCalcExtendedFormatting", "True") = "True"
+		extendedFormattingFromCount := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"))
+		calcRoundValue := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcRoundValue", "2"))
 
-	if (Mod(ConvertedTemperatureValue, 1) = 0)
-		ConvertedTemperatureValue := Round(ConvertedTemperatureValue)
+		if !(GetKeyState("CapsLock", "T"))
+			temperatureValue := Round(temperatureValue, Integer(calcRoundValue))
 
-	if (SubStr(ConvertedTemperatureValue, 1, 1) = "-") {
-		ConvertedTemperatureValue := SubStr(ConvertedTemperatureValue, 2)
-		NegativePoint := True
-	}
+		if (Mod(temperatureValue, 1) = 0)
+			temperatureValue := Round(temperatureValue)
 
-	if (TypographyRule = "Russian" || TypographyRule = "Deutsch" || TypographyRule = "Switzerland-Comma")
-		ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "\.", ",")
+		if (regionalType = "Russian" || regionalType = "Deutsch" || regionalType = "Switzerland-Comma")
+			temperatureValue := RegExReplace(temperatureValue, "\.", ",")
 
-	if (IsExtendedFormattingEnabled) {
-		IntegerPart := RegExReplace(ConvertedTemperatureValue, "(\..*)|([,].*)", "")
+		integerPart := RegExReplace(temperatureValue, "(\..*)|([,].*)", "")
 
-		if (StrLen(IntegerPart) >= ExtendedFormattingFromCount) {
-			DecimalSeparators := Map(
+		if (isExtendedFormattingEnabled && StrLen(integerPart) >= extendedFormattingFromCount) {
+			decimalSeparators := Map(
 				"English", ",",
 				"Deutsch", ".",
-				"Russian", GetChar(RulesChars["SpaceExtendedFormatting"]),
-				"Albania", GetChar(RulesChars["SpaceExtendedFormatting"]),
+				"Russian", chars.numberSpace,
+				"Albania", chars.numberSpace,
 				"Switzerland-Comma", GetChar("quote_right_single"),
 				"Switzerland-Dot", GetChar("quote_right_single"),
 			)
 
-			IntegerPart := RegExReplace(IntegerPart, "\B(?=(\d{3})+(?!\d))", DecimalSeparators[TypographyRule])
-			ConvertedTemperatureValue := RegExReplace(ConvertedTemperatureValue, "^\d+", IntegerPart)
+			integerPart := RegExReplace(integerPart, "\B(?=(\d{3})+(?!\d))", decimalSeparators[regionalType])
+			temperatureValue := RegExReplace(temperatureValue, "^\d+", integerPart)
 		}
+
+		temperatureValue := (negativePoint ? GetChar("minus") : "") temperatureValue chars.degreeSpace (IsObject(this.scales.%scale%) ? (isDedicatedUnicodeChars ? this.scales.%scale%[1] : this.scales.%scale%[2]) : this.scales.%scale%)
+		return temperatureValue
 	}
-
-	ConvertedTemperatureValue := (NegativePoint ? GetChar("minus") : "") ConvertedTemperatureValue GetChar(RulesChars["Space"]) (IsDedicatedUnicodeChars ? GetChar(ConversionsSymbols[ConversionTo][1]) : ConversionsSymbols[ConversionTo][2])
-	return ConvertedTemperatureValue
 }
-
 
 GREPizeSelection(GetCollaborative := False) {
 	CustomAfterStartEmdash := (IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") : "ensp"
