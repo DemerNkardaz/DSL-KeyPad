@@ -15661,12 +15661,16 @@ Class TemperatureConversion {
 		numberValue := ""
 
 		Loop {
-			IH := InputHook("L1", "{Escape}")
+			IH := InputHook("L1", "{Escape}{Backspace}")
 			IH.Start(), IH.Wait()
 
 			if (IH.EndKey = "Escape") {
 				numberValue := ""
 				break
+			} else if (IH.EndKey = "Backspace") {
+				if StrLen(numberValue) > 0
+					numberValue := SubStr(numberValue, 1, -1)
+				Tooltip(conversionLabel " " numberValue)
 			} else if InStr(validator, IH.Input) {
 				numberValue .= IH.Input
 				Tooltip(conversionLabel " " numberValue)
