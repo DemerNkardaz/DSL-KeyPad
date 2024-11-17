@@ -15545,6 +15545,7 @@ Class TemperatureConversion {
 		H: "H",
 		L: "L",
 		W: "W",
+		Q: "Q",
 		RO: "R" GetChar("lat_s_let_o_solidus_long"),
 		RE: "R" GetChar("lat_s_let_e_acute"),
 	}
@@ -15574,6 +15575,7 @@ Class TemperatureConversion {
 			'roc', 'rof', 'rok', 'ron', 'ror', 'rod', 'rol', 'row', 'rore', ; Romer
 			'rec', 'ref', 'rek', 'ren', 'rer', 'red', 'rel', 'rew', 'rero', ; Reaumur
 			'hc', ; Hooke
+			'qc', 'cq', ; Special Custom, Mercuric
 		]
 
 		callback := ObjBindMethod(this, 'Converter')
@@ -15594,6 +15596,7 @@ Class TemperatureConversion {
 
 		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]"
 
+		Tooltip(conversionLabel)
 		numberValue := this.GetNumber(conversionLabel)
 
 		try {
@@ -15736,10 +15739,15 @@ Class TemperatureConversion {
 		REL(G) => (1.25 * G) + 253
 		REW(G) => (G / 19.885753) - 10.821818
 		RERO(G) => (G / 1.52381) + 7.5
+
+		; Special Custom, Mercuric
+		QC(G) => (G / 100) * 356.7
+		CQ(G) => (G / 356.7) * 100
 	}
 
 	static GetNumber(conversionLabel) {
-		static validator := "1234567890,.-'" GetChar("minus")
+		static validator := "v1234567890,.-'" GetChar("minus")
+		static expression := "^[1234567890,.'\- " GetChar("minus") "]+$"
 
 		numberValue := ""
 
@@ -15753,11 +15761,17 @@ Class TemperatureConversion {
 			} else if (IH.EndKey = "Backspace") {
 				if StrLen(numberValue) > 0
 					numberValue := SubStr(numberValue, 1, -1)
-				Tooltip(conversionLabel " " numberValue)
 			} else if InStr(validator, IH.Input) {
-				numberValue .= IH.Input
-				Tooltip(conversionLabel " " numberValue)
+				if InStr(IH.Input, "v") {
+					ClipWait(0.5, 1)
+					if RegExMatch(A_Clipboard, expression) {
+						numberValue .= A_Clipboard
+					}
+				} else
+					numberValue .= IH.Input
 			} else break
+
+			Tooltip(conversionLabel " " numberValue)
 		}
 
 		ToolTip()
