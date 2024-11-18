@@ -504,6 +504,33 @@ GetTimeString() {
 	return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
 }
 
+
+GetDate(DateStyle := "YYYYMMDDhhmmss") {
+	CurrentTime := A_Now
+	TimeFormat := Map(
+		"YYYY", SubStr(CurrentTime, 1, 4),
+		"MM", SubStr(CurrentTime, 5, 2),
+		"DD", SubStr(CurrentTime, 7, 2),
+		"hh", SubStr(CurrentTime, 9, 2),
+		"mm", SubStr(CurrentTime, 11, 2),
+		"ss", SubStr(CurrentTime, 13, 2)
+	)
+	for Key, Value in TimeFormat {
+		DateStyle := StrReplace(DateStyle, Key, Value, True)
+	}
+	CurrentTime := DateStyle
+	return CurrentTime
+}
+
+SendDate(DateStyle := "YYYYMMDDhhmmss") {
+	SendText(GetDate(DateStyle))
+}
+
+HotString(":C?0:gtsd", (D) => SendDate())
+HotString(":C?0:gtdd", (D) => SendDate("YYYY–MM–DD"))
+HotString(":C?0:gtfd", (D) => SendDate("YYYY–MM–DD hh:mm:ss"))
+HotString(":C?0:gtfh", (D) => SendDate("hh:mm:ss"))
+
 CheckUpdateError := ""
 GetUpdate(TimeOut := 0, RepairMode := False) {
 	Sleep TimeOut
@@ -2942,6 +2969,12 @@ MapInsert(Characters,
 		tags: ["reference mark", "знак сноски", "komejirushi", "комэдзируси"],
 		group: [["Special Characters", "Smelting Special"]],
 		recipe: ["..×..", ":×:"],
+	},
+	"numero_sign", {
+		unicode: "{U+2116}",
+		tags: ["numero sign", "знак номера"],
+		group: ["Smelting Special"],
+		recipe: "no",
 	},
 	"exclamation", {
 		unicode: "{U+0021}",
@@ -15552,7 +15585,7 @@ Class TemperatureConversion {
 
 	static typographyTypes := Map(
 		"Deutsch", [".,", (T) => RegExReplace(T, "\.,", ".")],
-		"Albania", ["..", (T) => RegExReplace(T, "\.\.", ".")],
+		"Canada", ["..", (T) => RegExReplace(T, "\.\.", ".")],
 		"Switzerland-Comma", ["''", (T) => RegExReplace(T, "\'\'", ".")],
 		"Switzerland-Dot", ["'", (T) => RegExReplace(T, "\'", ".")],
 		"Russian", [",", (T) => RegExReplace(T, ",", ".")],
@@ -15808,7 +15841,7 @@ Class TemperatureConversion {
 				"English", ",",
 				"Deutsch", ".",
 				"Russian", chars.numberSpace,
-				"Albania", chars.numberSpace,
+				"Canada", chars.numberSpace,
 				"Switzerland-Comma", GetChar("quote_right_single"),
 				"Switzerland-Dot", GetChar("quote_right_single"),
 			)
