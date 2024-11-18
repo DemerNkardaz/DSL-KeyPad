@@ -15545,7 +15545,7 @@ Class TemperatureConversion {
 		H: "H",
 		L: "L",
 		W: "W",
-		Q: "Q",
+		ME: "Me",
 		RO: "R" GetChar("lat_s_let_o_solidus_long"),
 		RE: "R" GetChar("lat_s_let_e_acute"),
 	}
@@ -15575,7 +15575,7 @@ Class TemperatureConversion {
 			'roc', 'rof', 'rok', 'ron', 'ror', 'rod', 'rol', 'row', 'rore', ; Romer
 			'rec', 'ref', 'rek', 'ren', 'rer', 'red', 'rel', 'rew', 'rero', ; Reaumur
 			'hc', ; Hooke
-			'qc', 'cq', ; Special Custom, Mercuric
+			'mec', 'cme', 'mek', 'kme', ; Special Custom, Mercuric
 		]
 
 		callback := ObjBindMethod(this, 'Converter')
@@ -15590,8 +15590,8 @@ Class TemperatureConversion {
 
 		conversionFromTo := RegExReplace(conversionType, "^.*t", "")
 
-		labelFrom := (RegExMatch(conversionFromTo, "^ro|^re")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
-		labelTo := (RegExMatch(conversionFromTo, "ro$|re$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
+		labelFrom := (RegExMatch(conversionFromTo, "^ro|^re|^me")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
+		labelTo := (RegExMatch(conversionFromTo, "ro$|re$|me$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
 
 
 		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]"
@@ -15741,8 +15741,10 @@ Class TemperatureConversion {
 		RERO(G) => (G / 1.52381) + 7.5
 
 		; Special Custom, Mercuric
-		QC(G) => (G / 100) * 356.7
-		CQ(G) => (G / 356.7) * 100
+		MEC(G) => (G / 100) * 395.56 - 38.83
+		MEK(G) => (G / 100) * 395.56 + 234.32
+		CME(G) => (G + 38.83) * 100 / 395.56
+		KME(G) => (G - 234.32) * 100 / 395.56
 	}
 
 	static GetNumber(conversionLabel) {
