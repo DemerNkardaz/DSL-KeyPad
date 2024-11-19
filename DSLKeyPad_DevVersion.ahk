@@ -2983,7 +2983,8 @@ MapInsert(Characters,
 		unicode: "{U+2211}",
 		doubleStruckForm: "{U+2140}",
 		tags: ["n-ary summation", "summation", "знак суммирования"],
-		group: ["Smelting Special"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[s]",
 		recipe: ["sum", "сум"],
 	},
 	"modulo_two_sum", {
@@ -2995,19 +2996,36 @@ MapInsert(Characters,
 	"n_ary_product", {
 		unicode: "{U+220F}",
 		tags: ["n-ary product", "product", "знак произведения"],
-		group: ["Smelting Special"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: ">+ [P]",
 		recipe: ["prod", "прод"],
 	},
 	"n_ary_union", {
 		unicode: "{U+222A}",
 		tags: ["n-ary union", "union", "знак объединения"],
-		group: ["Smelting Special"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[u]",
 		recipe: ["uni", "обд"],
+	},
+	"delta", {
+		unicode: "{U+2206}",
+		tags: ["increment", "delta", "дельта"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[d]",
+		recipe: ["del", "дел"],
+	},
+	"nabla", {
+		unicode: "{U+2207}",
+		tags: ["nabla", "набла"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[n]",
+		recipe: ["nab", "наб"],
 	},
 	"integral", {
 		unicode: "{U+222B}", LaTeX: "\int",
 		tags: ["integral", "интеграл"],
-		group: ["Smelting Special"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[i]",
 		recipe: ["int", "инт"],
 	},
 	"integral_double", {
@@ -3031,7 +3049,8 @@ MapInsert(Characters,
 	"contour_integral", {
 		unicode: "{U+222E}", LaTeX: "\oint",
 		tags: ["contour integral", "интеграл по контуру"],
-		group: ["Smelting Special"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[I]",
 		recipe: ["oint", "кинт"],
 	},
 	"surface_integral", {
@@ -3051,6 +3070,25 @@ MapInsert(Characters,
 		tags: ["summation with integral", "суммирования с интегралом"],
 		group: ["Smelting Special"],
 		recipe: ["sumint", "суминт", Chrs(0x2211, 0x222B)],
+	},
+	"square_root", {
+		unicode: "{U+221A}", LaTeX: "\sqrt",
+		tags: ["square root", "квадратный корень"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[r]",
+		recipe: ["sqrt", "квкр"],
+	},
+	"cube_root", {
+		unicode: "{U+221B}", LaTeX: "\sqrt[3]",
+		tags: ["cube root", "кубический корень"],
+		group: ["Smelting Special"],
+		recipe: ["cbrt", "кубкр"],
+	},
+	"fourth_root", {
+		unicode: "{U+221C}", LaTeX: "\sqrt[4]",
+		tags: ["fourth root", "корень четвёртой степени"],
+		group: ["Smelting Special"],
+		recipe: ["qurt", "чткр"],
 	},
 	"dotted_circle", {
 		unicode: "{U+25CC}",
@@ -10754,7 +10792,7 @@ MapInsert(Characters,
 	;
 	;
 	;
-	; * Greek Cyriillic
+	; * Greek Letters
 	"gre_c_let_pi", {
 		unicode: "{U+03A0}",
 		titlesAlt: True,
@@ -10764,8 +10802,10 @@ MapInsert(Characters,
 	"gre_s_let_pi", {
 		unicode: "{U+03C0}",
 		titlesAlt: True,
-		group: [["Greek Letters", "Smelting Special"]],
+		group: [["Greek Letters", "Smelting Special", "Math"]],
 		tags: ["строчная буква пи греческая", "greek small letter pi"],
+		alt_layout: "[p]",
+		alt_layout_title: true,
 		recipe: ["pi", "пи"],
 	},
 	;
@@ -17247,6 +17287,7 @@ Constructor() {
 	Command_oldturkic := CommandsTree.Add(ReadLocale("func_label_old_permic_old_turkic"), Command_extralayouts)
 	Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_old_hungarian"), Command_extralayouts)
 	Command_gothic := CommandsTree.Add(ReadLocale("func_label_gothic"), Command_extralayouts)
+	Command_func_label_maths := CommandsTree.Add(ReadLocale("func_label_maths"), Command_extralayouts)
 	Command_func_label_ipa := CommandsTree.Add(ReadLocale("func_label_ipa"), Command_extralayouts)
 	Command_alterations := CommandsTree.Add(ReadLocale("func_label_alterations"))
 	Command_alterations_combining := CommandsTree.Add(ReadLocale("func_label_alterations_combining"), Command_alterations)
@@ -17969,6 +18010,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_old_permic_old_turkic",
 		"func_label_old_hungarian",
 		"func_label_gothic",
+		"func_label_maths",
 		"func_label_ipa",
 		"func_label_input_toggle",
 		"func_label_layout_toggle",
@@ -19737,9 +19779,20 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			return (K) => CapsSeparatedKey(K, "lat_c_let_" StrLower(Letter), "lat_s_let_" StrLower(Letter))
 		}
 	} else if Combinations = "Maths" {
-		SlotMapping := Map()
+		SlotMapping := Map(
+			"D", "delta",
+			"I", ["contour_integral", "integral"],
+			"N", "nabla",
+			"P", "gre_s_let_pi",
+			"R", "square_root",
+			"S", "n_ary_summation",
+			"U", "n_ary_union",
+		)
 
 		SlotModdedMapping := Map(
+			"P", Map(
+				"Flat:>+", "n_ary_product",
+			),
 			"Space", Map(
 				"Flat:<!", "medium_math_space",
 			),
@@ -19897,7 +19950,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["3"], (*) => ToggleLetterScript(, "Old Hungarian"),
 			">^" UseKey["4"], (*) => ToggleLetterScript(, "Gothic"),
 			">^" UseKey["0"], (*) => ToggleLetterScript(, "IPA"),
-			">^>+" UseKey["0"], (*) => ToggleLetterScript(, "Maths"),
+			">^" UseKey["9"], (*) => ToggleLetterScript(, "Maths"),
 			;
 			"RAlt", (*) => ProceedCompose(),
 			;"RCtrl", (*) => ProceedCombining(),
@@ -20096,8 +20149,8 @@ ManageTrayItems() {
 		"turkic", ReadLocale("tray_func_tukic_permic") "`t" RightControl "2",
 		"hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "3",
 		"gothic", ReadLocale("tray_func_gothic") "`t" RightControl "4",
+		"maths", ReadLocale("tray_func_maths") "`t" RightControl "9",
 		"ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
-		"maths", ReadLocale("tray_func_maths") "`t" RightControl RightShift "0",
 		"script", ReadLocale("func_label_scripts"),
 		"layouts", ReadLocale("func_label_layouts"),
 		"alterations", ReadLocale("func_label_alterations"),
@@ -20145,8 +20198,8 @@ ManageTrayItems() {
 	ScriptsSubMenu.SetIcon(Labels["turkic"], InternalFiles["AppIcoDLL"].File, 4)
 	ScriptsSubMenu.SetIcon(Labels["hungarian"], InternalFiles["AppIcoDLL"].File, 6)
 	ScriptsSubMenu.SetIcon(Labels["gothic"], InternalFiles["AppIcoDLL"].File, 7)
-	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
 	ScriptsSubMenu.SetIcon(Labels["maths"], InternalFiles["AppIcoDLL"].File, 10)
+	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
 
 	DSLTray.Add(Labels["script"], ScriptsSubMenu)
 
