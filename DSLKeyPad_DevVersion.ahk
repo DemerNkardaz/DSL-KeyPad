@@ -15411,10 +15411,7 @@ Class CharacterInserter {
 				if charCode != "" {
 					charCode := RegExReplace(charCode, "^(U\+|u\+|Alt\+|alt\+)", "")
 
-					AltcodeRule := IsInteger(charCode)
-					UnicodeRule := RegExMatch(charCode, "^[0-9a-fA-F]+$")
-
-					if !%this.insertType%Rule
+					if !%this.insertType%Validate(charCode)
 						throw
 
 					output .= %this.insertType%(charCode)
@@ -15444,6 +15441,14 @@ Class CharacterInserter {
 		Unicode(charCode) {
 			charCode := Format("0x" charCode, "d")
 			return Chr(charCode)
+		}
+
+		AltcodeValidate(charCode) {
+			return IsInteger(charCode) && ((RegExMatch(charCode, "^0") ? charCode >= 160 : charCode > 0) && charCode <= 255)
+		}
+
+		UnicodeValidate(charCode) {
+			return RegExMatch(charCode, "^[0-9a-fA-F]+$")
 		}
 	}
 }
