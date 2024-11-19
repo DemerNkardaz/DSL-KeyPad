@@ -1168,6 +1168,24 @@ FormatHotKey(HKey, Modifier := "") {
 	return MakeString
 }
 
+Chrs(CharacterEntries*) {
+	Output := ""
+
+	for entryArray in CharacterEntries {
+		if IsObject(entryArray) {
+			charCode := entryArray[1]
+			charRepeats := entryArray.Has(2) ? entryArray[2] : 1
+
+			Loop charRepeats
+				Output .= Chr(charCode)
+		} else {
+			Output .= Chr(entryArray)
+		}
+	}
+
+	return Output
+}
+
 GetChar(CharacterNames*) {
 	Output := ""
 	IndexMap := Map()
@@ -2414,16 +2432,18 @@ MapInsert(Characters,
 	"arrow_left", {
 		unicode: "{U+2190}",
 		tags: ["left arrow", "стрелка влево"],
-		group: [["Special Characters", "Special Fast Secondary"]],
+		group: [["Special Characters", "Smelting Special", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "[" Chr(0x2190) "]",
+		recipe: "<-",
 	},
 	"arrow_right", {
 		unicode: "{U+2192}",
 		tags: ["right arrow", "стрелка вправо"],
-		group: [["Special Characters", "Special Fast Secondary"]],
+		group: [["Special Characters", "Smelting Special", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "[" Chr(0x2192) "]",
+		recipe: "->",
 	},
 	"arrow_up", {
 		unicode: "{U+2191}",
@@ -2925,7 +2945,73 @@ MapInsert(Characters,
 		unicode: "{U+2211}",
 		tags: ["n-ary summation", "summation", "знак суммирования"],
 		group: ["Smelting Special"],
-		recipe: "sum",
+		recipe: ["sum", "сум"],
+	},
+	"modulo_two_sum", {
+		unicode: "{U+2A0A}",
+		tags: ["modulo two sum"],
+		group: ["Smelting Special"],
+		recipe: ["msum", "мсум"],
+	},
+	"n_ary_product", {
+		unicode: "{U+220F}",
+		tags: ["n-ary product", "product", "знак произведения"],
+		group: ["Smelting Special"],
+		recipe: ["prod", "прод"],
+	},
+	"n_ary_union", {
+		unicode: "{U+222A}",
+		tags: ["n-ary union", "union", "знак объединения"],
+		group: ["Smelting Special"],
+		recipe: ["uni", "обд"],
+	},
+	"integral", {
+		unicode: "{U+222B}", LaTeX: "\int",
+		tags: ["integral", "интеграл"],
+		group: ["Smelting Special"],
+		recipe: ["int", "инт"],
+	},
+	"integral_double", {
+		unicode: "{U+222C}", LaTeX: "\iint",
+		tags: ["double integral", "двойной интеграл"],
+		group: ["Smelting Special"],
+		recipe: ["iint", "иинт", Chrs([0x222B, 2])],
+	},
+	"integral_triple", {
+		unicode: "{U+222D}", LaTeX: "\iiint",
+		tags: ["triple integral", "тройной интеграл"],
+		group: ["Smelting Special"],
+		recipe: ["tint", "тинт", Chrs([0x222B, 3])],
+	},
+	"intergral_quadruple", {
+		unicode: "{U+2A0C}",
+		tags: ["quadruple integral", "четверной интеграл"],
+		group: ["Smelting Special"],
+		recipe: ["qint", "чинт", Chrs([0x222B, 4])],
+	},
+	"contour_integral", {
+		unicode: "{U+222E}", LaTeX: "\oint",
+		tags: ["contour integral", "интеграл по контуру"],
+		group: ["Smelting Special"],
+		recipe: ["oint", "кинт"],
+	},
+	"surface_integral", {
+		unicode: "{U+222F}", LaTeX: "\oiint", LaTeXPackage: "esint",
+		tags: ["surface integral", "интеграл по поверхности"],
+		group: ["Smelting Special"],
+		recipe: ["oiint", "киинт", Chrs([0x222E, 2])],
+	},
+	"volume_integral", {
+		unicode: "{U+2230}", LaTeX: "\oiiint", LaTeXPackage: "esint",
+		tags: ["volume integral", "тройной по объёму"],
+		group: ["Smelting Special"],
+		recipe: ["otint", "ктинт", Chrs([0x222E, 3])],
+	},
+	"summation_integral", {
+		unicode: "{U+2A0B}",
+		tags: ["summation with integral", "суммирования с интегралом"],
+		group: ["Smelting Special"],
+		recipe: ["sumint", "суминт", Chrs(0x2211, 0x222B)],
 	},
 	"dotted_circle", {
 		unicode: "{U+25CC}",
@@ -10623,6 +10709,25 @@ MapInsert(Characters,
 		group: ["Cyrillic Letters"],
 		tags: ["строчная буква ук кириллицы", "cyrillic small letter unblended uk"],
 		recipe: ["о↑у", "о↑ѵ"],
+	},
+	;
+	;
+	;
+	;
+	;
+	; * Greek Cyriillic
+	"gre_c_let_pi", {
+		unicode: "{U+03A0}",
+		titlesAlt: True,
+		group: ["Greek Letters"],
+		tags: ["прописная буква Пи греческая", "greek capital letter Pi"],
+	},
+	"gre_s_let_pi", {
+		unicode: "{U+03C0}",
+		titlesAlt: True,
+		group: [["Greek Letters", "Smelting Special"]],
+		tags: ["строчная буква пи греческая", "greek small letter pi"],
+		recipe: ["pi", "пи"],
 	},
 	;
 	;
