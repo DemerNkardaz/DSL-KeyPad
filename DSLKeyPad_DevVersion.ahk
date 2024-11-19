@@ -15842,7 +15842,7 @@ Class TemperatureConversion {
 
 		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]"
 
-		this.CaretTooltip(conversionLabel)
+		CaretTooltip(conversionLabel)
 		numberValue := this.GetNumber(conversionLabel)
 
 		try {
@@ -16020,19 +16020,12 @@ Class TemperatureConversion {
 					numberValue .= IH.Input
 			} else break
 
-			this.CaretTooltip(conversionLabel " " numberValue)
+			CaretTooltip(conversionLabel " " numberValue)
 		}
 
 		ToolTip()
 		HotKey("Backspace", "Off")
 		return numberValue
-	}
-
-	static CaretTooltip(tooltipText) {
-		if CaretGetPos(&x, &y)
-			ToolTip(tooltipText, x, y + 20)
-		else
-			ToolTip(tooltipText)
 	}
 
 	static PostFormatting(temperatureValue, scale, negativePoint := False, regionalType := "English") {
@@ -16608,7 +16601,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 			SendText(GetUnicodeSymbol)
 		}
 
-		SetTimer((*) => ToolTip(), 250)
+		SetTimer((*) => ToolTip(), -250)
 		return
 	}
 
