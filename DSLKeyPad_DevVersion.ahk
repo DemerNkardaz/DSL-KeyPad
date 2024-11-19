@@ -16408,8 +16408,141 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 
 Class Ligaturiser {
 
-	__New() {
+	__New(compositingMode := "InputBox") {
+		this.compositingMode := compositingMode
+		this.modifiedCharsType := GetModifiedCharsType()
 
+		this.backupClipboard := ""
+		this.charFound := False
+
+		this.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
+
+		try {
+			%this.compositingMode%Mode()
+		} catch {
+			compositingMode = "InputBox"
+				? MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
+					: ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
+		}
+	}
+
+	InputBoxMode() {
+		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", this.prompt)
+		if IB.Result = "Cancel"
+			return
+		else
+			this.prompt := IB.Value
+
+		if this.prompt != "" {
+			try {
+				output := ""
+				for prompt in StrSplit(this.prompt, " ") {
+					output .= this.EntriesWalk(prompt)
+				}
+
+				if !this.charFound
+					throw
+
+				Send(output)
+			} catch {
+				throw
+			}
+		}
+
+		return
+	}
+
+	ComposeMode() {
+
+	}
+
+
+	EntriesWalk(prompt) {
+		promptBackup := prompt
+		output := ""
+
+		promptValidator := RegExEscape(prompt)
+		breakValidate := True
+		monoCaseRecipe := False
+
+		for validatingValue in RecipeValidatorArray {
+			if (RegExMatch(validatingValue, "^" promptValidator)) {
+				breakValidate := False
+				break
+			}
+		}
+
+		if breakValidate {
+			for validatingValue in RecipeValidatorArray {
+				if (RegExMatch(StrLower(validatingValue), "^" StrLower(promptValidator))) {
+					monoCaseRecipe := True
+					breakValidate := False
+					break
+				}
+			}
+		}
+
+		for chracterEntry, value in Characters {
+			if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+				continue
+			} else {
+				recipe := value.recipe
+
+				if IsObject(recipe) {
+					for _, recipeEntry in recipe {
+						if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
+							output := this.GetComparedChar(value)
+							this.charFound := True
+							break 2
+						}
+					}
+				} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
+					output := this.GetComparedChar(value)
+					this.charFound := True
+					break
+				}
+			}
+		}
+
+		return output
+	}
+
+	GetComparedChar(value) {
+		output := ""
+		if InputMode = "HTML" && HasProp(value, "html") {
+			output :=
+				(this.modifiedCharsType && HasProp(value, this.modifiedCharsType "HTML")) ? value.%this.modifiedCharsType%HTML :
+					(value.HasProp("entity") ? value.entity : value.html)
+
+		} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+			output := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
+
+		} else {
+			output := this.GetUniChar(value)
+		}
+		return output
+	}
+
+	GetUniChar(value, ForceDefault := False) {
+		output := ""
+		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType "Form") && !ForceDefault {
+			if IsObject(value.%this.modifiedCharsType%Form) {
+				TempValue := ""
+				for modifier in value.%this.modifiedCharsType%Form {
+					TempValue .= PasteUnicode(modifier)
+				}
+				output := TempValue
+			} else {
+				output := PasteUnicode(value.%this.modifiedCharsType%Form)
+			}
+		} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+			for unicode in value.uniSequence {
+				output .= PasteUnicode(unicode)
+			}
+		} else {
+			output := PasteUnicode(value.unicode)
+		}
+		return output
 	}
 }
 
@@ -16576,7 +16709,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 				IsValidateBreak := True
 
 				for validatingValue in RecipeValidatorArray {
-					if (RegExMatch(validatingValue, "^" . InputValidator)) {
+					if (RegExMatch(validatingValue, "^" InputValidator)) {
 						IsValidateBreak := False
 						break
 					}
@@ -16584,7 +16717,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 
 				if IsValidateBreak {
 					for validatingValue in RecipeValidatorArray {
-						if (RegExMatch(StrLower(validatingValue), "^" . StrLower(InputValidator))) {
+						if (RegExMatch(StrLower(validatingValue), "^" StrLower(InputValidator))) {
 							IsSingleCase := True
 							IsValidateBreak := False
 							break
@@ -16617,7 +16750,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 									break 3
 								}
 							}
-						} else if (!IsSingleCase && Input == Recipe) || (IsSingleCase && Input = Recipe) {
+						} else if (!IsSingleCase && Input == recipe) || (IsSingleCase && Input = recipe) {
 							if InputMode = "HTML" && HasProp(value, "html") {
 								GetUnicodeSymbol :=
 									(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? value.%ModifiedCharsType%HTML :
@@ -19985,6 +20118,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["F"], (*) => SearchKey(),
 			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
 			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
+			"<#<!" UseKey["K"], (*) => Ligaturiser(),
 			"<#<!" UseKey["L"], (*) => Ligaturise(),
 			">+" UseKey["L"], (*) => Ligaturise("Clipboard"),
 			">+" UseKey["Backspace"], (*) => Ligaturise("Backspace"),
