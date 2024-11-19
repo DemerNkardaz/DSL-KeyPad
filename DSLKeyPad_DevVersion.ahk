@@ -16076,6 +16076,14 @@ Class TemperatureConversion {
 	}
 }
 
+CaretTooltip(tooltipText) {
+	if CaretGetPos(&x, &y)
+		ToolTip(tooltipText, x, y + 20)
+	else
+		ToolTip(tooltipText)
+}
+
+
 GREPizeSelection(GetCollaborative := False) {
 	CustomAfterStartEmdash := (IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") : "ensp"
 	CustomDialogue := (IniRead(ConfigFile, "CustomRules", "GREPDialogAttribution", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPDialogAttribution", "") : "no_break_space"
@@ -16511,11 +16519,13 @@ Ligaturise(SmeltingMode := "InputBox") {
 
 			if IsForceWaiting == True {
 				TempInput := ih.Input
+				CaretTooltip(Chr(0x23F8) " " TempInput)
 				Sleep 10
 				continue
 			}
 
 			Input := ih.Input
+			CaretTooltip(Input)
 			if (Input != LastInput) {
 				LastInput := Input
 				InputValidator := RegExEscape(Input)
@@ -16598,6 +16608,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 			SendText(GetUnicodeSymbol)
 		}
 
+		SetTimer((*) => ToolTip(), 250)
 		return
 	}
 
