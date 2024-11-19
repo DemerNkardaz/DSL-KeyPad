@@ -2850,6 +2850,44 @@ MapInsert(Characters,
 		alt_special: "[``=]",
 		recipe: "~=",
 	},
+	"less_or_equals", {
+		unicode: "{U+2264}",
+		tags: ["less than or equals", "меньше или равно"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: ">+ [<]",
+		recipe: "<=",
+	},
+	"greater_or_equals", {
+		unicode: "{U+2265}",
+		tags: ["greater than or equals", "больше или равно"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: ">+ [>]",
+		recipe: ">=",
+	},
+	"neither_less_nor_equals", {
+		unicode: "{U+2270}",
+		tags: ["neither less than nor equals", "ни меньше ни равно"],
+		group: [["Smelting Special"]],
+		recipe: "/<=",
+	},
+	"neither_greater_nor_equals", {
+		unicode: "{U+2271}",
+		tags: ["neither greater than nor equals", "ни больше ни равно"],
+		group: [["Smelting Special"]],
+		recipe: "/>=",
+	},
+	"less_over_equals", {
+		unicode: "{U+2266}",
+		tags: ["less than over equals", "меньше над равно"],
+		group: [["Smelting Special"]],
+		recipe: ["<==", Chr(0x2264) "="],
+	},
+	"greater_over_equals", {
+		unicode: "{U+2267}",
+		tags: ["greater than over equals", "больше над равно"],
+		group: [["Smelting Special"]],
+		recipe: [">==", Chr(0x2265) "="],
+	},
 	"plusminus", {
 		unicode: "{U+00B1}",
 		tags: ["plus minus", "плюс-минус"],
@@ -2943,6 +2981,7 @@ MapInsert(Characters,
 	},
 	"n_ary_summation", {
 		unicode: "{U+2211}",
+		doubleStruckForm: "{U+2140}",
 		tags: ["n-ary summation", "summation", "знак суммирования"],
 		group: ["Smelting Special"],
 		recipe: ["sum", "сум"],
@@ -17044,6 +17083,7 @@ Constructor() {
 		"IPA", ReadLocale("symbol_ipa"),
 		"Fake Math", RightControl RightShift " 0",
 		"Mathematical", ReadLocale("symbol_maths"),
+		"Math", "",
 		"Math Spaces", "",
 	]
 
@@ -19702,6 +19742,12 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		SlotModdedMapping := Map(
 			"Space", Map(
 				"Flat:<!", "medium_math_space",
+			),
+			",", Map(
+				"Flat:>+", "less_or_equals",
+			),
+			".", Map(
+				"Flat:>+", "greater_or_equals",
 			),
 		)
 
