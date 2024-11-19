@@ -16405,6 +16405,14 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 	return
 }
 
+
+Class Ligaturiser {
+
+	__New() {
+
+	}
+}
+
 Ligaturise(SmeltingMode := "InputBox") {
 	LanguageCode := GetLanguageCode()
 	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
@@ -16412,9 +16420,9 @@ Ligaturise(SmeltingMode := "InputBox") {
 	BackupClipboard := ""
 
 	Found := False
-	GetUniChar(value) {
+	GetUniChar(value, ForceDefault := False) {
 		Output := ""
-		if ModifiedCharsType && HasProp(value, ModifiedCharsType "Form") {
+		if ModifiedCharsType && HasProp(value, ModifiedCharsType "Form") && !ForceDefault {
 			if IsObject(value.%ModifiedCharsType%Form) {
 				TempValue := ""
 				for modifier in value.%ModifiedCharsType%Form {
@@ -16479,6 +16487,9 @@ Ligaturise(SmeltingMode := "InputBox") {
 		Sleep 120
 		PromptValue := A_Clipboard
 		Sleep 50
+	} else if (SmeltingMode = "ComposeRe") {
+		ShowInfoMessage("message_compose", , , SkipGroupMessage, True)
+
 	} else if (SmeltingMode = "Compose") {
 		ShowInfoMessage("message_compose", , , SkipGroupMessage, True)
 
@@ -16495,7 +16506,46 @@ Ligaturise(SmeltingMode := "InputBox") {
 		IsCancelledByUser := False
 		IsForceWaiting := False
 
+		GetSuggestions(inputPrompt) {
+			output := ""
+
+			for characterEntry, value in Characters {
+				if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+					continue
+				} else {
+					recipe := value.recipe
+
+					if IsObject(recipe) {
+						validRecipe := False
+						subOutput := ""
+						for recipeEntry in recipe {
+							if RegExMatch(RegExEscape(recipeEntry), "^" RegExEscape(inputPrompt)) {
+								subOutput .= " " recipeEntry " |"
+								validRecipe := True
+							}
+						}
+						output .= GetUniChar(value, True) " (" RegExReplace(subOutput, "\|$", "") "), "
+
+					} else if RegExMatch(RegExEscape(recipe), "^" inputPrompt) {
+						output .= GetUniChar(value, True) " (" recipe "), "
+					}
+				}
+			}
+
+			return RegExReplace(output, ",\s$", "")
+		}
+
+		tooltipSuggestions := ""
+
+		SetSuggestions() {
+			tooltipSuggestions := GetSuggestions(ih.Input)
+		}
+
+		;SetTimer((*) => SetSuggestions(), 1000)
+
 		Loop {
+
+
 			if GetKeyState("Escape", "P") {
 				IsCancelledByUser := True
 				break
@@ -16510,15 +16560,16 @@ Ligaturise(SmeltingMode := "InputBox") {
 				}
 			}
 
+
 			if IsForceWaiting == True {
 				TempInput := ih.Input
-				CaretTooltip(Chr(0x23F8) " " TempInput)
+				CaretTooltip(Chr(0x23F8) " " TempInput (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
 				Sleep 10
 				continue
 			}
 
 			Input := ih.Input
-			CaretTooltip(Input)
+			CaretTooltip(Chr(0x2B1C) " " Input (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
 			if (Input != LastInput) {
 				LastInput := Input
 				InputValidator := RegExEscape(Input)
@@ -16540,6 +16591,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 						}
 					}
 				}
+
 
 				for chracterEntry, value in Characters {
 					if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
@@ -16581,6 +16633,7 @@ Ligaturise(SmeltingMode := "InputBox") {
 						}
 					}
 				}
+
 			}
 
 			if (StrLen(Input) >= 6 || IsValidateBreak) {
