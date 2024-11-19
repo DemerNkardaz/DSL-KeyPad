@@ -10793,6 +10793,21 @@ MapInsert(Characters,
 	;
 	;
 	; * Greek Letters
+	"gre_c_let_lamda", {
+		unicode: "{U+039B}",
+		titlesAlt: True,
+		group: ["Greek Letters"],
+		tags: ["прописная буква Лямбда греческая", "greek capital letter Lamda"],
+	},
+	"gre_s_let_lamda", {
+		unicode: "{U+03BB}",
+		titlesAlt: True,
+		group: [["Greek Letters", "Smelting Special", "Math"]],
+		tags: ["строчная буква лямбда греческая", "greek small letter lamda"],
+		alt_layout: "[l]",
+		alt_layout_title: true,
+		recipe: ["lam", "лям"],
+	},
 	"gre_c_let_pi", {
 		unicode: "{U+03A0}",
 		titlesAlt: True,
@@ -15372,63 +15387,66 @@ PasteUnicode(Unicode) {
 	return
 }
 
-InsertUnicodeKey() {
-	PromptValue := IniRead(ConfigFile, "LatestPrompts", "Unicode", "")
-	IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_unicode"), "w256 h92", PromptValue)
+Class CharacterInserter {
 
-	if IB.Result = "Cancel"
-		return
-
-	PromptValue := IB.Value
-	UnicodeCodes := StrSplit(PromptValue, " ")
-
-	try {
-		Output := ""
-		for code in UnicodeCodes {
-			if code != "" {
-				Num := Format("0x" RegExReplace(code, "^(U\+|u\+)", ""), "d")
-				Output .= Chr(Num)
-			}
-		}
-
-		Send(Output)
-		IniWrite(PromptValue, ConfigFile, "LatestPrompts", "Unicode")
-	} catch {
-		MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_unicode"), DSLPadTitle, "Icon!")
+	__New(insertType) {
+		this.insertType := insertType
+		this.lastPrompt := IniRead(ConfigFile, "LatestPrompts", insertType, "")
 	}
-}
 
-InsertAltCodeKey() {
-	PromptValue := IniRead(ConfigFile, "LatestPrompts", "Altcode", "")
-	IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_altcode"), "w256 h92", PromptValue)
-	if IB.Result = "Cancel"
-		return
-	else
-		PromptValue := IB.Value
+	InputDialog(UseHWND := True) {
+		hwnd := WinActive('A')
 
-	AltCodes := StrSplit(PromptValue, " ")
+		IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_" StrLower(this.insertType)), "w256 h92", this.lastPrompt)
+		this.lastPrompt := IB.Value
 
-	try {
-		Output := ""
-		for code in AltCodes {
-			if code != "" {
-				code := RegExReplace(code, "^(Alt\+|alt\+)", "")
-				if (IsInteger(code)) {
-					Output .= "{ASC " code "}"
-				} else {
-					MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_altcode"), DSLPadTitle, "Icon!")
-					return
+		if IB.Result = "Cancel"
+			return
+
+		output := ""
+		try {
+
+			splittedPrompt := StrSplit(this.lastPrompt, " ")
+			for charCode in splittedPrompt {
+				if charCode != "" {
+					charCode := RegExReplace(charCode, "^(U\+|u\+|Alt\+|alt\+)", "")
+
+					AltcodeRule := IsInteger(charCode)
+					UnicodeRule := RegExMatch(charCode, "^[0-9a-fA-F]+$")
+
+					if !%this.insertType%Rule
+						throw
+
+					output .= %this.insertType%(charCode)
+
 				}
 			}
+			IniWrite(this.lastPrompt, ConfigFile, "LatestPrompts", this.insertType)
+		} catch {
+			MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_" StrLower(this.insertType)), DSLPadTitle, "Icon!")
+			return
 		}
 
-		Send(Output)
-		IniWrite(PromptValue, ConfigFile, "LatestPrompts", "Altcode")
-	} catch {
-		MsgBox(ReadLocale("message_wrong_format") "`n" ReadLocale("message_wrong_format_altcode"), DSLPadTitle, "Icon!")
+		try {
+			if UseHWND && !WinActive('ahk_id ' hwnd) {
+				WinActivate('ahk_id ' hwnd)
+				WinWaitActive(hwnd)
+			}
+
+			Send(output)
+		}
+		return
+
+		Altcode(charCode) {
+			return "{ASC " charCode "}"
+		}
+
+		Unicode(charCode) {
+			charCode := Format("0x" charCode, "d")
+			return Chr(charCode)
+		}
 	}
 }
-
 
 SwitchQWERTY_YITSUKEN(Script := "Latin") {
 	if (Script == "Latin") {
@@ -19783,6 +19801,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"D", "delta",
 			"I", ["contour_integral", "integral"],
 			"N", "nabla",
+			"L", "gre_s_let_lambda",
 			"P", "gre_s_let_pi",
 			"R", "square_root",
 			"S", "n_ary_summation",
@@ -19894,8 +19913,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Apostrophe"], (*) => GroupActivator("Quotes", "'"),
 			;
 			"<#<!" UseKey["F"], (*) => SearchKey(),
-			"<#<!" UseKey["U"], (*) => InsertUnicodeKey(),
-			"<#<!" UseKey["A"], (*) => InsertAltCodeKey(),
+			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
+			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
 			"<#<!" UseKey["L"], (*) => Ligaturise(),
 			">+" UseKey["L"], (*) => Ligaturise("Clipboard"),
 			">+" UseKey["Backspace"], (*) => Ligaturise("Backspace"),
@@ -20243,8 +20262,8 @@ ManageTrayItems() {
 
 	DSLTray.Add()
 	DSLTray.Add(Labels["search"], (*) => SearchKey())
-	DSLTray.Add(Labels["unicode"], (*) => InsertUnicodeKey())
-	DSLTray.Add(Labels["altcode"], (*) => InsertAltCodeKey())
+	DSLTray.Add(Labels["unicode"], (*) => CharacterInserter("Unicode").InputDialog(False))
+	DSLTray.Add(Labels["altcode"], (*) => CharacterInserter("Altcode").InputDialog(False))
 	DSLTray.Add(Labels["smelter"], (*) => Ligaturise())
 	DSLTray.Add(Labels["open_folder"], OpenScriptFolder)
 	DSLTray.Add()
