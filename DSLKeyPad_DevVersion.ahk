@@ -16413,18 +16413,19 @@ Class Ligaturiser {
 		this.modifiedCharsType := GetModifiedCharsType()
 
 		this.backupClipboard := ""
-		this.charFound := False
 
 		this.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
 
 		try {
-			%this.compositingMode%Mode()
+			this.%this.compositingMode%Mode()
 		} catch {
-			compositingMode = "InputBox"
-				? MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
-					: ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
+			if this.compositingMode = "InputBox"
+				MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
+			else
+				ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
 		}
 	}
+
 
 	InputBoxMode() {
 		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", this.prompt)
@@ -16437,12 +16438,13 @@ Class Ligaturiser {
 			try {
 				output := ""
 				for prompt in StrSplit(this.prompt, " ") {
-					output .= this.EntriesWalk(prompt)
+					output .= this.EntriesWalk(prompt) " "
 				}
 
-				if !this.charFound
+				if output = "" || RegExMatch(output, "^\s+$")
 					throw
 
+				output := RegExReplace(output, "\s+$", "")
 				Send(output)
 			} catch {
 				throw
@@ -16465,6 +16467,8 @@ Class Ligaturiser {
 		breakValidate := True
 		monoCaseRecipe := False
 
+		charFound := False
+
 		for validatingValue in RecipeValidatorArray {
 			if (RegExMatch(validatingValue, "^" promptValidator)) {
 				breakValidate := False
@@ -16482,7 +16486,7 @@ Class Ligaturiser {
 			}
 		}
 
-		for chracterEntry, value in Characters {
+		for characterEntry, value in Characters {
 			if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
 				continue
 			} else {
@@ -16492,15 +16496,43 @@ Class Ligaturiser {
 					for _, recipeEntry in recipe {
 						if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
 							output := this.GetComparedChar(value)
-							this.charFound := True
+							charFound := True
 							break 2
 						}
 					}
 				} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
 					output := this.GetComparedChar(value)
-					this.charFound := True
+					charFound := True
 					break
 				}
+			}
+		}
+
+		if !charFound {
+			IntermediateValue := prompt
+			for characterEntry, value in Characters {
+				if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+					continue
+				} else {
+					recipe := value.recipe
+
+					if IsObject(recipe) {
+						for _, recipeEntry in recipe {
+							if InStr(IntermediateValue, recipeEntry, true) {
+								IntermediateValue := StrReplace(IntermediateValue, recipeEntry, this.GetComparedChar(value))
+							}
+						}
+					} else {
+						if InStr(IntermediateValue, recipe, true) {
+							IntermediateValue := StrReplace(IntermediateValue, recipe, this.GetComparedChar(value))
+						}
+					}
+				}
+			}
+
+			if IntermediateValue != prompt {
+				output := IntermediateValue
+				charFound := True
 			}
 		}
 
@@ -16523,9 +16555,9 @@ Class Ligaturiser {
 		return output
 	}
 
-	GetUniChar(value, ForceDefault := False) {
+	GetUniChar(value, forceDefault := False) {
 		output := ""
-		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType "Form") && !ForceDefault {
+		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType "Form") && !forceDefault {
 			if IsObject(value.%this.modifiedCharsType%Form) {
 				TempValue := ""
 				for modifier in value.%this.modifiedCharsType%Form {
