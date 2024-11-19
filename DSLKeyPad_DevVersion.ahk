@@ -15444,7 +15444,7 @@ Class CharacterInserter {
 		}
 
 		AltcodeValidate(charCode) {
-			return IsInteger(charCode) && ((RegExMatch(charCode, "^0") ? charCode >= 160 : charCode > 0) && charCode <= 255)
+			return IsInteger(charCode) && ((RegExMatch(charCode, "^0") ? charCode >= 128 : charCode > 0) && charCode <= 255)
 		}
 
 		UnicodeValidate(charCode) {
