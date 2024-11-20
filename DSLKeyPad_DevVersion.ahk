@@ -7602,13 +7602,13 @@ MapInsert(Characters,
 		alt_on_fast_keys: "<+>+ $",
 		recipe: "$" GetChar("tilde"),
 	},
-	"lat_c_let_a_tilde_acute", {
+	"lat_c_let_o_tilde_acute", {
 		unicode: "{U+1E4C}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: ["$" GetChar("tilde", "acute"), Chr(0x00D5) GetChar("acute")],
 	},
-	"lat_s_let_a_tilde_acute", {
+	"lat_s_let_o_tilde_acute", {
 		unicode: "{U+1E4D}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
@@ -16486,7 +16486,7 @@ Class Ligaturiser {
 				output .= IH.Input
 			}
 
-			tooltipSuggestions := output != "" ? this.EntriesWalk(output, True) : ""
+			tooltipSuggestions := output != "" ? this.FormatSuggestions(this.EntriesWalk(output, True)) : ""
 
 			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
 
@@ -16613,10 +16613,35 @@ Class Ligaturiser {
 		return output
 	}
 
+	FormatSuggestions(suggestions, maxLength := 72) {
+		output := ""
+		currentLine := ""
+		parts := StrSplit(suggestions, "), ")
+
+		for index, part in parts {
+			; Добавляем текущее значение к строке
+			if (StrLen(currentLine) + StrLen(part) + 3 <= maxLength) {
+				currentLine .= part "), "
+			} else {
+				; Если строка превышает допустимую длину, добавляем её в output и начинаем новую строку
+				output .= currentLine "`n"
+				currentLine := part "), "
+			}
+		}
+
+		; Добавляем оставшуюся строку, если она не пустая
+		if (currentLine != "") {
+			output .= currentLine
+		}
+
+		return output
+	}
+
+
 	GetRecipesString(value) {
 		output := ""
 
-		recipe := value.recipe
+		recipe := HasProp(value, "recipeAlt") ? value.recipeAlt : value.recipe
 
 		if IsObject(recipe) {
 			intermediateValue := ""
@@ -16625,7 +16650,7 @@ Class Ligaturiser {
 				intermediateValue .= " " recipeEntry " |"
 			}
 
-			output .= this.GetUniChar(value, True) " (" RegExReplace(intermediateValue, "\|$", "") "), "
+			output .= this.GetUniChar(value, True) " (" RegExReplace(intermediateValue, "(^\s|\s\|$)", "") "), "
 		} else {
 			output .= this.GetUniChar(value, True) " (" recipe "), "
 		}
