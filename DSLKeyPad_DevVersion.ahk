@@ -16556,7 +16556,7 @@ Class Ligaturiser {
 		output := ""
 		tooltipSuggestions := ""
 		favoriteSuggestions := this.ReadFavorites()
-		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" favoriteSuggestions "`n" Chrs([0x2E3B, 10])) : ""
+		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",$", "") "`n" Chrs([0x2E3B, 10])) : ""
 
 		pauseOn := False
 
@@ -17449,6 +17449,7 @@ Constructor() {
 	Command_disable := CommandsTree.Add(ReadLocale("func_label_disable"))
 	Command_gotopage := CommandsTree.Add(ReadLocale("func_label_gotopage"))
 	Command_selgoto := CommandsTree.Add(ReadLocale("func_label_selgoto"))
+	Command_copylist := CommandsTree.Add(ReadLocale("func_label_favorites"))
 	Command_copylist := CommandsTree.Add(ReadLocale("func_label_copylist"))
 	Command_tagsearch := CommandsTree.Add(ReadLocale("func_label_tagsearch"))
 	Command_uninsert := CommandsTree.Add(ReadLocale("func_label_uninsert"))
@@ -18171,6 +18172,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_disable",
 		"func_label_gotopage",
 		"func_label_selgoto",
+		"func_label_favorites",
 		"func_label_copylist",
 		"func_label_tagsearch",
 		"func_label_uninsert",
