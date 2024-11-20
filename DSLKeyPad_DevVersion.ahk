@@ -16562,6 +16562,7 @@ Class Ligaturiser {
 		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
 
 		pauseOn := False
+		cleanPastInput := False
 
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
@@ -16590,14 +16591,21 @@ Class Ligaturiser {
 				if isVietnameseInput && StrLen(input) > 1 {
 					charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
 					telexChar := VietnameseTelex.TelexReturn(charPair)
-					msgbox(charPair)
+
 					if telexChar != charPair {
-						input := SubStr(input, 1, -2) telexChar
+						input := SubStr(input, 1, previousInput = "\" ? -3 : -2) telexChar
+						cleanPastInput := True
 					}
 				}
 
 				pastInput := previousInput
 				previousInput := IH.Input
+			}
+
+			if cleanPastInput {
+				pastInput := ""
+				previousInput := ""
+				cleanPastInput := False
 			}
 
 			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.EntriesWalk(input, True)) : ""
@@ -16959,7 +16967,7 @@ Class VietnameseTelex {
 			if (input == key) {
 				output := value
 				break
-			} else if InStr(input, "\") && (input == SubStr(key, 1, 1) SubStr(key, 2)) {
+			} else if InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3))) {
 				output := key
 				break
 			}
