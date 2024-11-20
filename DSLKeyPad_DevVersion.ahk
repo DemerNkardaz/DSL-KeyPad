@@ -16486,6 +16486,8 @@ Class Ligaturiser {
 				output .= IH.Input
 			}
 
+			tooltipSuggestions := output != "" ? this.EntriesWalk(output, True) : ""
+
 			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
 
 			if !pauseOn || (IH.EndKey = "Enter") {
@@ -16503,7 +16505,7 @@ Class Ligaturiser {
 
 		if output = "N/A" {
 			CaretTooltip(ReadLocale("warning_recipe_absent"))
-			SetTimer((*) => ToolTip(), -1350)
+			SetTimer((*) => ToolTip(), -2350)
 
 		} else {
 			SetTimer((*) => ToolTip(), -350)
@@ -16550,16 +16552,28 @@ Class Ligaturiser {
 
 				if IsObject(recipe) {
 					for _, recipeEntry in recipe {
-						if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
-							output := this.GetComparedChar(value)
+						if (getSuggestions && RegExMatch(recipeEntry, "^" prompt)) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
 							charFound := True
-							break 2
+
+							if getSuggestions {
+								output .= this.GetRecipesString(value)
+
+							} else {
+								output := this.GetComparedChar(value)
+								break 2
+							}
 						}
 					}
-				} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
-					output := this.GetComparedChar(value)
+				} else if (getSuggestions && RegExMatch(recipe, "^" prompt)) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
 					charFound := True
-					break
+
+					if getSuggestions {
+						output .= this.GetRecipesString(value)
+
+					} else {
+						output := this.GetComparedChar(value)
+						break
+					}
 				}
 			}
 		}
@@ -16590,6 +16604,30 @@ Class Ligaturiser {
 				output := IntermediateValue
 				charFound := True
 			}
+		}
+
+		if getSuggestions {
+			output := RegExReplace(output, ",\s$", "")
+		}
+
+		return output
+	}
+
+	GetRecipesString(value) {
+		output := ""
+
+		recipe := value.recipe
+
+		if IsObject(recipe) {
+			intermediateValue := ""
+
+			for _, recipeEntry in recipe {
+				intermediateValue .= " " recipeEntry " |"
+			}
+
+			output .= this.GetUniChar(value, True) " (" RegExReplace(intermediateValue, "\|$", "") "), "
+		} else {
+			output .= this.GetUniChar(value, True) " (" recipe "), "
 		}
 
 		return output
