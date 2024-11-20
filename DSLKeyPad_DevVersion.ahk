@@ -16879,12 +16879,34 @@ Class VietnameseTelex {
 	static telexReplaces := Map(
 		"aa", Chr(0x00E2),
 		"AA", Chr(0x00C2),
-		"ee", Chr(0x00EA),
-		"EE", Chr(0x00CA),
-		"uw", Chr(0x01B0),
-		"UW", Chr(0x01AF),
 		"dd", Chr(0x0111),
 		"DD", Chr(0x0110),
+		"ee", Chr(0x00EA),
+		"EE", Chr(0x00CA),
+		"oo", Chr(0x00F4),
+		"OO", Chr(0x00D4),
+		"af", Chr(0x00E0),
+		"AF", Chr(0x00C0),
+		"if", Chr(0x00EC),
+		"IF", Chr(0x00CC),
+		"of", Chr(0x00F2),
+		"OF", Chr(0x00D2),
+		"uf", Chr(0x00F9),
+		"UF", Chr(0x00D9),
+		"ef", Chr(0x00E8),
+		"EF", Chr(0x00C8),
+		"uw", Chr(0x01B0),
+		"UW", Chr(0x01AF),
+		"ow", Chr(0x01A1),
+		"OW", Chr(0x01A0),
+		"ax", Chr(0x00E3),
+		"AX", Chr(0x00C3),
+		"ex", Chr(0x1EBD),
+		"EX", Chr(0x1EBC),
+		"ox", Chr(0x00F5),
+		"OX", Chr(0x00D5),
+		"ix", Chr(0x0129),
+		"IX", Chr(0x0128),
 	)
 
 	static RegistryHotstrings() {
@@ -18547,7 +18569,6 @@ ConvertComboKeys(Output) {
 HandleFastKey(Combo := "", CharacterNames*) {
 	global FastKeysIsActive
 	IsLayoutValid := CheckLayoutValid()
-
 
 	if IsLayoutValid {
 		Output := ""
