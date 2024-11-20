@@ -16722,10 +16722,6 @@ Class Ligaturiser {
 			}
 		}
 
-		if getSuggestions {
-			output := RegExReplace(output, ",\s$", "")
-		}
-
 		return output
 	}
 
@@ -16758,12 +16754,29 @@ Class Ligaturiser {
 		currentLine := ""
 		parts := StrSplit(suggestions, "), ")
 
+		uniqueParts := []
 		for index, part in parts {
-			if (StrLen(currentLine) + StrLen(part) + 3 <= maxLength) {
-				currentLine .= part "), "
+			part := part ")"
+
+			isUnique := true
+			for uniquePart in uniqueParts {
+				if (part == uniquePart) {
+					isUnique := false
+					break
+				}
+			}
+
+			if StrLen(part) > 2 && (isUnique) {
+				uniqueParts.Push(part)
+			}
+		}
+
+		for part in uniqueParts {
+			if (StrLen(currentLine) + StrLen(part) + 2 <= maxLength) {
+				currentLine .= part ", "
 			} else {
 				output .= currentLine "`n"
-				currentLine := part "), "
+				currentLine := part ", "
 			}
 		}
 
@@ -16771,10 +16784,11 @@ Class Ligaturiser {
 			output .= currentLine
 		}
 
-		output := RegExReplace(output, "\),\s$", "")
+		output := RegExReplace(output, ",\s$", "")
 
 		return output
 	}
+
 
 	FormatSingleString(str, maxLength := 32) {
 		return StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ]" : str
