@@ -16412,8 +16412,6 @@ Class Ligaturiser {
 		this.compositingMode := compositingMode
 		this.modifiedCharsType := GetModifiedCharsType()
 
-		this.backupClipboard := ""
-
 		this.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
 
 		try {
@@ -16438,7 +16436,7 @@ Class Ligaturiser {
 			try {
 				output := ""
 				for prompt in StrSplit(this.prompt, " ") {
-					output .= this.EntriesWalk(prompt) " "
+					output .= this.EntriesWalk(prompt, , True) " "
 				}
 
 				if output = "" || RegExMatch(output, "^\s+$")
@@ -16514,7 +16512,7 @@ Class Ligaturiser {
 		return
 	}
 
-	EntriesWalk(prompt, getSuggestions := False) {
+	EntriesWalk(prompt, getSuggestions := False, breakSkip := False) {
 		promptBackup := prompt
 		output := ""
 
@@ -16541,7 +16539,7 @@ Class Ligaturiser {
 			}
 		}
 
-		if breakValidate
+		if breakValidate && !breakSkip
 			return "N/A"
 
 		for characterEntry, value in Characters {
@@ -16694,343 +16692,6 @@ Class Ligaturiser {
 		}
 		return output
 	}
-}
-
-Ligaturise(SmeltingMode := "InputBox") {
-	LanguageCode := GetLanguageCode()
-	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
-	ModifiedCharsType := GetModifiedCharsType()
-	BackupClipboard := ""
-
-	Found := False
-	GetUniChar(value, ForceDefault := False) {
-		Output := ""
-		if ModifiedCharsType && HasProp(value, ModifiedCharsType "Form") && !ForceDefault {
-			if IsObject(value.%ModifiedCharsType%Form) {
-				TempValue := ""
-				for modifier in value.%ModifiedCharsType%Form {
-					TempValue .= PasteUnicode(modifier)
-				}
-				Output := TempValue
-			} else {
-				Output := PasteUnicode(value.%ModifiedCharsType%Form)
-			}
-		} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
-			for unicode in value.uniSequence {
-				Output .= PasteUnicode(unicode)
-			}
-		} else {
-			Output := PasteUnicode(value.unicode)
-		}
-		return Output
-	}
-
-	if (SmeltingMode = "InputBox") {
-		PromptValue := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
-		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", PromptValue)
-		if IB.Result = "Cancel"
-			return
-		else
-			PromptValue := IB.Value
-	} else if (SmeltingMode = "Clipboard" || SmeltingMode = "Backspace") {
-		BackupClipboard := A_Clipboard
-		A_Clipboard := ""
-
-		if (SmeltingMode = "Backspace") {
-			;Send("^+{Left}")
-			BufferValue := ""
-			Loop 20 {
-				Send("^+{Left}")
-				Sleep 75
-				Send("^c")
-				Sleep 75
-				ClipWait(0.25, 1)
-
-				if (A_Clipboard = BufferValue) {
-					break
-				}
-
-				BufferValue := A_Clipboard
-
-				if RegExMatch(A_Clipboard, "(\s|`n|`r|`t)") {
-					Send("^+{Right}")
-					Send("^c")
-					Sleep 75
-					if RegExMatch(A_Clipboard, "(\s|`n|`r|`t)") {
-						Send("+{Right}")
-						Send("^c")
-						Sleep 75
-					}
-					break
-				}
-			}
-			Sleep 120
-		}
-		Send("^c")
-		Sleep 120
-		PromptValue := A_Clipboard
-		Sleep 50
-	} else if (SmeltingMode = "ComposeRe") {
-		ShowInfoMessage("message_compose", , , SkipGroupMessage, True)
-
-	} else if (SmeltingMode = "Compose") {
-		ShowInfoMessage("message_compose", , , SkipGroupMessage, True)
-
-		ih := InputHook("C")
-		ih.MaxLen := 6
-		ih.Start()
-
-		Input := ""
-		LastInput := ""
-
-		GetUnicodeSymbol := ""
-		IsValidateBreak := False
-		IsSingleCase := False
-		IsCancelledByUser := False
-		IsForceWaiting := False
-
-		GetSuggestions(inputPrompt) {
-			output := ""
-
-			for characterEntry, value in Characters {
-				if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
-					continue
-				} else {
-					recipe := value.recipe
-
-					if IsObject(recipe) {
-						validRecipe := False
-						subOutput := ""
-						for recipeEntry in recipe {
-							if RegExMatch(RegExEscape(recipeEntry), "^" RegExEscape(inputPrompt)) {
-								subOutput .= " " recipeEntry " |"
-								validRecipe := True
-							}
-						}
-						output .= GetUniChar(value, True) " (" RegExReplace(subOutput, "\|$", "") "), "
-
-					} else if RegExMatch(RegExEscape(recipe), "^" inputPrompt) {
-						output .= GetUniChar(value, True) " (" recipe "), "
-					}
-				}
-			}
-
-			return RegExReplace(output, ",\s$", "")
-		}
-
-		tooltipSuggestions := ""
-
-		SetSuggestions() {
-			tooltipSuggestions := GetSuggestions(ih.Input)
-		}
-
-		;SetTimer((*) => SetSuggestions(), 1000)
-
-		Loop {
-
-
-			if GetKeyState("Escape", "P") {
-				IsCancelledByUser := True
-				break
-			}
-			if GetKeyState("Pause", "P") {
-				if IsForceWaiting == False {
-					IsForceWaiting := True
-					ShowInfoMessage("message_compose_waiting", , , SkipGroupMessage, True)
-				} else {
-					IsForceWaiting := False
-					LastInput := ""
-				}
-			}
-
-
-			if IsForceWaiting == True {
-				TempInput := ih.Input
-				CaretTooltip(Chr(0x23F8) " " TempInput (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
-				Sleep 10
-				continue
-			}
-
-			Input := ih.Input
-			CaretTooltip(Chr(0x2B1C) " " Input (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
-			if (Input != LastInput) {
-				LastInput := Input
-				InputValidator := RegExEscape(Input)
-				IsValidateBreak := True
-
-				for validatingValue in RecipeValidatorArray {
-					if (RegExMatch(validatingValue, "^" InputValidator)) {
-						IsValidateBreak := False
-						break
-					}
-				}
-
-				if IsValidateBreak {
-					for validatingValue in RecipeValidatorArray {
-						if (RegExMatch(StrLower(validatingValue), "^" StrLower(InputValidator))) {
-							IsSingleCase := True
-							IsValidateBreak := False
-							break
-						}
-					}
-				}
-
-
-				for chracterEntry, value in Characters {
-					if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
-						continue
-					} else {
-						Recipe := value.recipe
-
-						if IsObject(Recipe) {
-							for _, recipeEntry in Recipe {
-								if (!IsSingleCase && Input == recipeEntry) ||
-								(IsSingleCase && Input = recipeEntry) {
-									if InputMode = "HTML" && HasProp(value, "html") {
-										GetUnicodeSymbol :=
-											(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? value.%ModifiedCharsType%HTML :
-												(value.HasProp("entity") ? value.entity : value.html)
-									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-										GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
-									} else {
-										GetUnicodeSymbol := GetUniChar(value)
-									}
-									IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
-									Found := True
-									break 3
-								}
-							}
-						} else if (!IsSingleCase && Input == recipe) || (IsSingleCase && Input = recipe) {
-							if InputMode = "HTML" && HasProp(value, "html") {
-								GetUnicodeSymbol :=
-									(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? value.%ModifiedCharsType%HTML :
-										(value.HasProp("entity") ? value.entity : value.html)
-							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-								GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
-							} else {
-								GetUnicodeSymbol := GetUniChar(value)
-							}
-							IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
-							Found := True
-							break 2
-						}
-					}
-				}
-
-			}
-
-			if (StrLen(Input) >= 6 || IsValidateBreak) {
-				break
-			}
-
-			Sleep 10
-		}
-
-		ih.Stop()
-		if (!Found && !IsCancelledByUser) {
-			if (SmeltingMode = "Compose") {
-				ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
-			} else {
-				MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
-			}
-		} else {
-			SendText(GetUnicodeSymbol)
-		}
-
-		SetTimer((*) => ToolTip(), -250)
-		return
-	}
-
-	OriginalValue := PromptValue
-	NewValue := ""
-
-	for chracterEntry, value in Characters {
-		if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
-			continue
-		} else {
-			Recipe := value.recipe
-
-			if IsObject(Recipe) {
-				for _, recipe in Recipe {
-					if (recipe == PromptValue) {
-						if InputMode = "HTML" && HasProp(value, "html") {
-							(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? SendText(value.%ModifiedCharsType%HTML) :
-								value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
-
-						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-							SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
-						} else {
-							SendText(GetUniChar(value))
-						}
-						IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
-						Found := True
-					}
-				}
-			} else if (Recipe == PromptValue) {
-				if InputMode = "HTML" && HasProp(value, "html") {
-					(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? SendText(value.%ModifiedCharsType%HTML) :
-						value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
-				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-					SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
-
-				} else {
-					SendText(GetUniChar(value))
-				}
-				IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
-				Found := True
-			}
-		}
-	}
-
-	if (!Found) {
-		SplitWords := StrSplit(OriginalValue, " ")
-
-		for i, word in SplitWords {
-			TempValue := word
-			for chracterEntry, value in Characters {
-				if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
-					continue
-				} else {
-					Recipe := value.recipe
-
-					if IsObject(Recipe) {
-						for _, recipe in Recipe {
-							if InStr(TempValue, recipe, true) {
-								TempValue := StrReplace(TempValue, recipe, value.unicode)
-							}
-						}
-					} else {
-						if InStr(TempValue, Recipe, true) {
-							TempValue := StrReplace(TempValue, Recipe, value.unicode)
-						}
-					}
-				}
-			}
-			NewValue .= TempValue . (i < SplitWords.Length - 0 ? " " : "")
-
-		}
-
-		NewValue := RTrim(NewValue)
-
-		if (NewValue != OriginalValue) {
-			Send(NewValue)
-			Found := True
-		}
-	}
-
-
-	if !Found {
-		if !SmeltingMode = "InputBox" {
-			Send("^{Right}")
-			Sleep 400
-		}
-		MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
-	}
-
-	if (SmeltingMode = "Clipboard" || SmeltingMode = "Backspace") {
-		A_Clipboard := BackupClipboard
-	}
-	return
 }
 
 GroupActivator(GroupName, KeyValue := "") {
@@ -17647,8 +17308,6 @@ Constructor() {
 	Command_uninsert := CommandsTree.Add(ReadLocale("func_label_uninsert"))
 	Command_altcode := CommandsTree.Add(ReadLocale("func_label_altcode"))
 	Command_smelter := CommandsTree.Add(ReadLocale("func_label_smelter"), , "Expand")
-	Command_smelter_sel := CommandsTree.Add(ReadLocale("func_label_smelter_sel"), Command_Smelter)
-	Command_smelter_carr := CommandsTree.Add(ReadLocale("func_label_smelter_carr"), Command_Smelter)
 	Command_compose := CommandsTree.Add(ReadLocale("func_label_compose"), Command_smelter)
 	Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
 	Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
@@ -18363,8 +18022,6 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_uninsert",
 		"func_label_altcode",
 		"func_label_smelter",
-		"func_label_smelter_sel",
-		"func_label_smelter_carr",
 		"func_label_compose",
 		"func_label_num_superscript",
 		"func_label_num_roman",
@@ -20269,8 +19926,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
 			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
 			"<#<!" UseKey["L"], (*) => Ligaturiser(),
-			">+" UseKey["L"], (*) => Ligaturise("Clipboard"),
-			">+" UseKey["Backspace"], (*) => Ligaturise("Backspace"),
 			">^" UseKey["H"], (*) => TranslateSelectionToHTML("Entities"),
 			">^" UseKey["J"], (*) => TranslateSelectionToHTML("Entities", True),
 			">^>+" UseKey["H"], (*) => TranslateSelectionToHTML(),
@@ -20617,7 +20272,7 @@ ManageTrayItems() {
 	DSLTray.Add(Labels["search"], (*) => SearchKey())
 	DSLTray.Add(Labels["unicode"], (*) => CharacterInserter("Unicode").InputDialog(False))
 	DSLTray.Add(Labels["altcode"], (*) => CharacterInserter("Altcode").InputDialog(False))
-	DSLTray.Add(Labels["smelter"], (*) => Ligaturise())
+	DSLTray.Add(Labels["smelter"], (*) => Ligaturiser())
 	DSLTray.Add(Labels["open_folder"], OpenScriptFolder)
 	DSLTray.Add()
 	DSLTray.Add(Labels["notif"], (*) => ToggleGroupMessage())
