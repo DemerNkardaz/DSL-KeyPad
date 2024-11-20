@@ -16555,7 +16555,8 @@ Class Ligaturiser {
 
 		output := ""
 		input := ""
-		previousCharacter := ""
+		previousInput := ""
+		pastInput := ""
 		tooltipSuggestions := ""
 		favoriteSuggestions := this.ReadFavorites()
 		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
@@ -16587,15 +16588,16 @@ Class Ligaturiser {
 				input .= IH.Input
 
 				if isVietnameseInput && StrLen(input) > 1 {
-					charPair := previousCharacter IH.Input
+					charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
 					telexChar := VietnameseTelex.TelexReturn(charPair)
-
+					msgbox(charPair)
 					if telexChar != charPair {
 						input := SubStr(input, 1, -2) telexChar
 					}
 				}
 
-				previousCharacter := IH.Input
+				pastInput := previousInput
+				previousInput := IH.Input
 			}
 
 			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.EntriesWalk(input, True)) : ""
@@ -16907,6 +16909,16 @@ Class VietnameseTelex {
 		"OX", Chr(0x00D5),
 		"ix", Chr(0x0129),
 		"IX", Chr(0x0128),
+		"aj", Chr(0x1EA1),
+		"AJ", Chr(0x1EA0),
+		"ej", Chr(0x1EB9),
+		"EJ", Chr(0x1EB8),
+		"ij", Chr(0x1ECB),
+		"IJ", Chr(0x1ECA),
+		"oj", Chr(0x1ECD),
+		"OJ", Chr(0x1ECC),
+		"uj", Chr(0x1EE5),
+		"UJ", Chr(0x1EE4),
 	)
 
 	static RegistryHotstrings() {
@@ -16916,6 +16928,7 @@ Class VietnameseTelex {
 
 		for key, value in VietnameseTelex.telexReplaces {
 			HotString(":*C?:" key, ObjBindMethod(VietnameseTelex, "Telexiser", value), isVietnameseInput ? True : False)
+			HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), ObjBindMethod(VietnameseTelex, "Telexiser", value), isVietnameseInput ? True : False)
 		}
 
 		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isVietnameseInput ? "" : "de") "activated")), ReadLocale("script_vietnamese")), , , SkipGroupMessage, True, True)
@@ -16923,6 +16936,12 @@ Class VietnameseTelex {
 
 	static Telexiser(_, input) {
 		input := RegExReplace(input, "^.*?:.*?:", "")
+
+		if InStr(input, "\") {
+			SendText(RegExReplace(input, "\\", ""))
+			return
+		}
+
 		for key, value in VietnameseTelex.telexReplaces {
 			if (input == key) {
 
@@ -16935,9 +16954,13 @@ Class VietnameseTelex {
 
 	static TelexReturn(input) {
 		output := input
+
 		for key, value in VietnameseTelex.telexReplaces {
 			if (input == key) {
 				output := value
+				break
+			} else if InStr(input, "\") && (input == SubStr(key, 1, 1) SubStr(key, 2)) {
+				output := key
 				break
 			}
 		}
