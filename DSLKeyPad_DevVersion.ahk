@@ -16446,6 +16446,8 @@ Class Ligaturiser {
 
 				output := RegExReplace(output, "\s+$", "")
 				Send(output)
+
+				IniWrite(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), ConfigFile, "LatestPrompts", "Ligature")
 			} catch {
 				throw
 			}
@@ -16455,7 +16457,41 @@ Class Ligaturiser {
 	}
 
 	ComposeMode() {
+		output := ""
+		pauseOn := False
 
+		PH := InputHook("L0", "{Escape}")
+		PH.Start()
+
+		CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output)
+
+		Loop {
+
+			IH := InputHook("L1", "{Escape}{Backspace}{Enter}{Pause}")
+			IH.Start(), IH.Wait()
+
+			if (IH.EndKey = "Escape") {
+				output := ""
+				break
+
+			} else if (IH.EndKey = "Pause") {
+				pauseOn := pauseOn ? False : True
+
+			} else if (IH.EndKey = "Backspace") {
+				if StrLen(output) > 0
+					output := SubStr(output, 1, -1)
+
+			} else if IH.Input != "" {
+				output .= IH.Input
+			}
+
+
+			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output)
+		}
+
+		ToolTip()
+		PH.Stop()
+		return output
 	}
 
 
@@ -20150,8 +20186,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["F"], (*) => SearchKey(),
 			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
 			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
-			"<#<!" UseKey["K"], (*) => Ligaturiser(),
-			"<#<!" UseKey["L"], (*) => Ligaturise(),
+			"<#<!" UseKey["K"], (*) => Ligaturiser("Compose"),
+			"<#<!" UseKey["L"], (*) => Ligaturiser(),
 			">+" UseKey["L"], (*) => Ligaturise("Clipboard"),
 			">+" UseKey["Backspace"], (*) => Ligaturise("Backspace"),
 			">^" UseKey["H"], (*) => TranslateSelectionToHTML("Entities"),
