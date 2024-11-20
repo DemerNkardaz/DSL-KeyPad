@@ -16554,6 +16554,7 @@ Class Ligaturiser {
 	ComposeMode() {
 
 		output := ""
+		input := ""
 		tooltipSuggestions := ""
 		favoriteSuggestions := this.ReadFavorites()
 		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
@@ -16563,7 +16564,7 @@ Class Ligaturiser {
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
 
-		CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output (favoriteSuggestions))
+		CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions))
 
 		Loop {
 
@@ -16571,28 +16572,28 @@ Class Ligaturiser {
 			IH.Start(), IH.Wait()
 
 			if (IH.EndKey = "Escape") {
-				output := ""
+				input := ""
 				break
 
 			} else if (IH.EndKey = "Pause") {
 				pauseOn := pauseOn ? False : True
 
 			} else if (IH.EndKey = "Backspace") {
-				if StrLen(output) > 0
-					output := SubStr(output, 1, -1)
+				if StrLen(input) > 0
+					input := SubStr(input, 1, -1)
 
 			} else if IH.Input != "" {
-				output .= IH.Input
+				input .= IH.Input
 			}
 
-			tooltipSuggestions := output != "" ? this.FormatSuggestions(this.EntriesWalk(output, True)) : ""
+			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.EntriesWalk(input, True)) : ""
 
 
-			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output (favoriteSuggestions) (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
+			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions) (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
 
 			if !pauseOn || (IH.EndKey = "Enter") {
 				try {
-					intermediateValue := this.EntriesWalk(output)
+					intermediateValue := this.EntriesWalk(input)
 					if intermediateValue != "" {
 						output := intermediateValue
 						break
@@ -16604,11 +16605,12 @@ Class Ligaturiser {
 		PH.Stop()
 
 		if output = "N/A" {
-			CaretTooltip(ReadLocale("warning_recipe_absent"))
-			SetTimer(Tooltip, -2350)
+			CaretTooltip(Chr(0x26A0) " " ReadLocale("warning_recipe_absent"))
+			SetTimer(Tooltip, -1000)
 
 		} else {
-			SetTimer(Tooltip, -350)
+			CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " this.FormatSingleString(output))
+			SetTimer(Tooltip, -500)
 			this.SendOutput(output)
 		}
 		return
@@ -16727,7 +16729,6 @@ Class Ligaturiser {
 		return output
 	}
 
-
 	ReadFavorites() {
 		output := ""
 
@@ -16775,16 +16776,15 @@ Class Ligaturiser {
 		return output
 	}
 
+	FormatSingleString(str, maxLength := 32) {
+		return StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ]" : str
+	}
 
 	GetRecipesString(value) {
 		output := ""
 
 		recipe := HasProp(value, "recipeAlt") ? value.recipeAlt : value.recipe
-		uniSequence := this.GetUniChar(value, True)
-
-		if StrLen(uniSequence) > 32 {
-			uniSequence := "[ " SubStr(uniSequence, 1, 32) " " Chr(0x2026) " ]"
-		}
+		uniSequence := this.FormatSingleString(this.GetUniChar(value, True))
 
 		if IsObject(recipe) {
 			intermediateValue := ""
