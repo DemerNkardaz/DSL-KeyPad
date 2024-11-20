@@ -16467,7 +16467,7 @@ Class Ligaturiser {
 
 		Loop {
 
-			IH := InputHook("L1", "{Escape}{Backspace}{Enter}{Pause}")
+			IH := InputHook("L1", "{Escape}{Backspace}{Enter}{Pause}{Tab}")
 			IH.Start(), IH.Wait()
 
 			if (IH.EndKey = "Escape") {
@@ -16485,13 +16485,24 @@ Class Ligaturiser {
 				output .= IH.Input
 			}
 
-
 			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output)
+
+			if !pauseOn || (IH.EndKey = "Enter") {
+				try {
+					intermediateValue := this.EntriesWalk(output)
+					if intermediateValue != "" {
+						output := intermediateValue
+						break
+					}
+				}
+			}
 		}
 
-		ToolTip()
 		PH.Stop()
-		return output
+
+		SetTimer((*) => ToolTip(), -350)
+		SendText(output)
+		return
 	}
 
 
@@ -20186,7 +20197,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["F"], (*) => SearchKey(),
 			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
 			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
-			"<#<!" UseKey["K"], (*) => Ligaturiser("Compose"),
 			"<#<!" UseKey["L"], (*) => Ligaturiser(),
 			">+" UseKey["L"], (*) => Ligaturise("Clipboard"),
 			">+" UseKey["Backspace"], (*) => Ligaturise("Backspace"),
@@ -20336,7 +20346,7 @@ ProceedCompose() {
 
 	if RAltsCount = 1 {
 		RAltsCount := 0
-		Ligaturise("Compose")
+		Ligaturiser("Compose")
 		return
 	} else {
 		RAltsCount++
