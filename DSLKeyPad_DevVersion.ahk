@@ -1466,6 +1466,8 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			entryName := match[2]
 		}
 
+		isFavorite := FavoriteChars.CheckVar(characterEntry)
+
 		for blackListEntry in BlackList {
 			if (blackListEntry = entryName) {
 				continue 2
@@ -1511,6 +1513,10 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 				characterTitle := value.titles[LanguageCode]
 			} else {
 				characterTitle := ReadLocale(entryName, "chars")
+			}
+
+			if isFavorite {
+				characterTitle .= " " Chr(0x2605)
 			}
 
 			characterSymbol := HasProp(value, "symbol") ? value.symbol : ""
@@ -15999,8 +16005,10 @@ Class TemperatureConversion {
 
 		numberValue := ""
 
+		PH := InputHook("L0", "{Escape}")
+		PH.Start()
+
 		Loop {
-			HotKey("Backspace", (*) => "")
 			IH := InputHook("L1", "{Escape}{Backspace}")
 			IH.Start(), IH.Wait()
 
@@ -16024,7 +16032,9 @@ Class TemperatureConversion {
 		}
 
 		ToolTip()
-		HotKey("Backspace", "Off")
+
+		PH.Stop()
+
 		return numberValue
 	}
 
@@ -16068,6 +16078,93 @@ Class TemperatureConversion {
 		return temperatureValue
 	}
 }
+
+favoriteCharsList := Map()
+
+Class FavoriteChars {
+
+	static favesPath := A_ScriptDir "/FavoriteChars.txt"
+
+	static __New() {
+		if !FileExist(this.favesPath) {
+			FileAppend("", this.favesPath, "UTF-8")
+		}
+
+		this.UpdateVar()
+	}
+
+	static Add(fave) {
+		newContent := ""
+		alreadyExists := false
+
+		for line in this.ReadList() {
+			if line == fave {
+				alreadyExists := true
+			}
+			newContent .= line "`n"
+		}
+
+		if !alreadyExists {
+			newContent .= fave "`n"
+		}
+
+		FileDelete(this.favesPath)
+		FileAppend(Sort(RTrim(newContent, "`n")), this.favesPath, "UTF-8")
+
+		Sleep 100
+
+		if !favoriteCharsList.Has(fave) {
+			favoriteCharsList.Set(fave, True)
+		}
+	}
+
+	static Remove(fave) {
+		newContent := ""
+		for line in this.ReadList() {
+			if line != fave {
+				newContent .= line "`n"
+			}
+		}
+
+		FileDelete(this.favesPath)
+		FileAppend(RTrim(newContent, "`n"), this.favesPath, "UTF-8")
+
+		Sleep 100
+
+		if favoriteCharsList.Has(fave) {
+			favoriteCharsList.Delete(fave)
+		}
+	}
+
+	static Check(fave) {
+		for line in this.ReadList() {
+			if line == fave {
+				return True
+			}
+		}
+
+		return False
+	}
+
+	static ReadList() {
+		fileContent := FileRead(this.favesPath, "UTF-8")
+		return StrSplit(fileContent, "`n", "`r")
+	}
+
+	static CheckVar(fave) {
+		return favoriteCharsList.Has(fave)
+	}
+
+	static UpdateVar() {
+		global favoriteCharsList
+		faveList := FavoriteChars.ReadList()
+
+		for fave in faveList {
+			favoriteCharsList.Set(fave, True)
+		}
+	}
+}
+
 
 CaretTooltip(tooltipText) {
 	if CaretGetPos(&x, &y)
@@ -16408,6 +16505,7 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 
 Class Ligaturiser {
 
+
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 		this.modifiedCharsType := GetModifiedCharsType()
@@ -16423,7 +16521,6 @@ Class Ligaturiser {
 				ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
 		}
 	}
-
 
 	InputBoxMode() {
 		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", this.prompt)
@@ -16443,7 +16540,7 @@ Class Ligaturiser {
 					throw
 
 				output := RegExReplace(output, "\s+$", "")
-				Send(output)
+				this.SendOutput(output)
 
 				IniWrite(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), ConfigFile, "LatestPrompts", "Ligature")
 			} catch {
@@ -16455,14 +16552,18 @@ Class Ligaturiser {
 	}
 
 	ComposeMode() {
+
 		output := ""
 		tooltipSuggestions := ""
+		favoriteSuggestions := this.ReadFavorites()
+		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" favoriteSuggestions "`n" Chrs([0x2E3B, 10])) : ""
+
 		pauseOn := False
 
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
 
-		CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output)
+		CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output (favoriteSuggestions))
 
 		Loop {
 
@@ -16486,7 +16587,8 @@ Class Ligaturiser {
 
 			tooltipSuggestions := output != "" ? this.FormatSuggestions(this.EntriesWalk(output, True)) : ""
 
-			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
+
+			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output (favoriteSuggestions) (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
 
 			if !pauseOn || (IH.EndKey = "Enter") {
 				try {
@@ -16503,13 +16605,27 @@ Class Ligaturiser {
 
 		if output = "N/A" {
 			CaretTooltip(ReadLocale("warning_recipe_absent"))
-			SetTimer((*) => ToolTip(), -2350)
+			SetTimer(Tooltip, -2350)
 
 		} else {
-			SetTimer((*) => ToolTip(), -350)
-			SendText(output)
+			SetTimer(Tooltip, -350)
+			this.SendOutput(output)
 		}
 		return
+	}
+
+	SendOutput(output) {
+		if StrLen(output) > 36 {
+			clipboardBackup := A_Clipboard
+			A_Clipboard := output
+			ClipWait(0.5, 1)
+			Send("^v")
+
+			Sleep(500)
+			A_Clipboard := clipboardBackup
+
+		} else
+			SendText(output)
 	}
 
 	EntriesWalk(prompt, getSuggestions := False, breakSkip := False) {
@@ -16611,6 +16727,31 @@ Class Ligaturiser {
 		return output
 	}
 
+
+	ReadFavorites() {
+		output := ""
+
+		getList := FavoriteChars.ReadList()
+
+		for line in getList {
+			if StrLen(line) > 0 {
+				characterEntry := Characters[line]
+
+				if !HasProp(characterEntry, "recipe") || (HasProp(characterEntry, "recipe") && characterEntry.recipe == "") {
+					continue
+				} else {
+					output .= this.GetRecipesString(characterEntry)
+				}
+			}
+		}
+
+		if StrLen(output) > 0 {
+			output := this.FormatSuggestions(output)
+		}
+
+		return output
+	}
+
 	FormatSuggestions(suggestions, maxLength := 72) {
 		output := ""
 		currentLine := ""
@@ -16639,6 +16780,11 @@ Class Ligaturiser {
 		output := ""
 
 		recipe := HasProp(value, "recipeAlt") ? value.recipeAlt : value.recipe
+		uniSequence := this.GetUniChar(value, True)
+
+		if StrLen(uniSequence) > 32 {
+			uniSequence := "[ " SubStr(uniSequence, 1, 32) " " Chr(0x2026) " ]"
+		}
 
 		if IsObject(recipe) {
 			intermediateValue := ""
@@ -16647,9 +16793,9 @@ Class Ligaturiser {
 				intermediateValue .= " " recipeEntry " |"
 			}
 
-			output .= this.GetUniChar(value, True) " (" RegExReplace(intermediateValue, "(^\s|\s\|$)", "") "), "
+			output .= uniSequence " (" RegExReplace(intermediateValue, "(^\s|\s\|$)", "") "), "
 		} else {
-			output .= this.GetUniChar(value, True) " (" recipe "), "
+			output .= uniSequence " (" recipe "), "
 		}
 
 		return output
@@ -16808,7 +16954,7 @@ ConvertFromHexaDecimal(StringInput) {
 }
 
 RegExEscape(str) {
-	static specialChars := "\.*+?^${}()[]|/"
+	static specialChars := "\.-*+?^${}()[]|/"
 
 	newStr := ""
 	for k, char in StrSplit(str) {
@@ -17722,6 +17868,7 @@ PopulateListView(LV, DataList) {
 		LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 	}
 }
+
 FilterListView(GuiFrame, FilterField, LV, DataList) {
 	FilterText := StrLower(GuiFrame[FilterField].Text)
 	LV.Delete()
@@ -17732,10 +17879,16 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 		GroupStarted := False
 		PreviousGroupName := ""
 		for item in DataList {
-			if StrLower(item[1]) = "" {
+			ItemText := StrLower(item[1])
+
+			IsFavorite := (ItemText ~= "\Q★")
+			IsMatch := InStr(ItemText, FilterText)
+			|| (IsFavorite && (InStr("избранное", FilterText) || InStr("favorite", FilterText)))
+
+			if ItemText = "" {
 				LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 				GroupStarted := true
-			} else if InStr(StrLower(item[1]), FilterText) {
+			} else if IsMatch {
 				if !GroupStarted {
 					GroupStarted := true
 				}
@@ -17744,8 +17897,8 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 				GroupStarted := False
 			}
 
-			if StrLower(item[1]) != "" and StrLower(item[1]) != PreviousGroupName {
-				PreviousGroupName := StrLower(item[1])
+			if ItemText != "" and ItemText != PreviousGroupName {
+				PreviousGroupName := ItemText
 			}
 		}
 
@@ -17758,6 +17911,7 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 		}
 	}
 }
+
 
 GetRandomByGroups(GroupNames) {
 	TemporaryStorage := []
@@ -18072,22 +18226,28 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 
 }
 LV_CharacterDetails(LV, RowNumber, SetupArray) {
+	EntryTitle := LV.GetText(RowNumber, 1)
 	;UnicodeKey := LV.GetText(RowNumber, 4)
 	EntryIDKey := LV.GetText(RowNumber, 5)
 	EntryNameKey := LV.GetText(RowNumber, 6)
+
 	SetCharacterInfoPanel(EntryIDKey, EntryNameKey,
 		SetupArray[1], SetupArray[2], SetupArray[3],
 		SetupArray[4], SetupArray[5], SetupArray[6],
 		SetupArray[7], SetupArray[8], SetupArray[9],
 		SetupArray[10], SetupArray[11], SetupArray.Has(12) ? SetupArray[12] : "")
 }
+
 LV_OpenUnicodeWebsite(LV, RowNumber) {
+	EntryTitle := LV.GetText(RowNumber, 1)
 	SelectedRow := LV.GetText(RowNumber, 4)
+
 	URIComponent := FindCharacterPage(SelectedRow, True)
 	if (SelectedRow != "") {
-		IsCtrlDown := GetKeyState("LControl")
+		isCtrlDown := GetKeyState("LControl")
+		isShiftDown := GetKeyState("LShift")
 		ModifiedCharsType := GetModifiedCharsType()
-		if (IsCtrlDown) {
+		if (isCtrlDown) {
 			if (InputMode = "HTML" || InputMode = "LaTeX") {
 				for characterEntry, value in Characters {
 					if (SelectedRow = UniTrim(value.unicode)) {
@@ -18107,8 +18267,21 @@ LV_OpenUnicodeWebsite(LV, RowNumber) {
 
 
 			SoundPlay("C:\Windows\Media\Speech On.wav")
-		}
-		else {
+		} else if isShiftDown {
+			for characterEntry, value in Characters {
+				if (SelectedRow = UniTrim(value.unicode)) {
+					if !FavoriteChars.CheckVar(characterEntry) {
+						FavoriteChars.Add(characterEntry)
+						LV.Modify(RowNumber, , EntryTitle " " Chr(0x2605))
+					} else {
+						FavoriteChars.Remove(characterEntry)
+						LV.Modify(RowNumber, , StrReplace(EntryTitle, " " Chr(0x2605)))
+					}
+				}
+			}
+
+			SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
+		} else {
 			Run(URIComponent)
 		}
 	}
