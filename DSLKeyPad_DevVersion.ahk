@@ -9525,7 +9525,7 @@ MapInsert(Characters,
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
 		tags: [".йюсмз", ".iyusmz", "строчная буква юс малый закрытый йотированный кириллицы", "cyrillic small letter little yus closed iotified"],
-		recipe: ["і_ат", "І" Chr(0xA659), "і_" Chr(0x0467)],
+		recipe: ["і_ат", "i" Chr(0xA659), "і_" Chr(0x0467)],
 	},
 	"cyr_c_let_yus_blended", {
 		unicode: "{U+A65A}",
@@ -16552,7 +16552,7 @@ Class Ligaturiser {
 
 				if IsObject(recipe) {
 					for _, recipeEntry in recipe {
-						if (getSuggestions && RegExMatch(recipeEntry, "^" prompt)) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
+						if (getSuggestions && RegExMatch(recipeEntry, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
 							charFound := True
 
 							if getSuggestions {
@@ -16564,7 +16564,7 @@ Class Ligaturiser {
 							}
 						}
 					}
-				} else if (getSuggestions && RegExMatch(recipe, "^" prompt)) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
+				} else if (getSuggestions && RegExMatch(recipe, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
 					charFound := True
 
 					if getSuggestions {
@@ -16619,20 +16619,19 @@ Class Ligaturiser {
 		parts := StrSplit(suggestions, "), ")
 
 		for index, part in parts {
-			; Добавляем текущее значение к строке
 			if (StrLen(currentLine) + StrLen(part) + 3 <= maxLength) {
 				currentLine .= part "), "
 			} else {
-				; Если строка превышает допустимую длину, добавляем её в output и начинаем новую строку
 				output .= currentLine "`n"
 				currentLine := part "), "
 			}
 		}
 
-		; Добавляем оставшуюся строку, если она не пустая
 		if (currentLine != "") {
 			output .= currentLine
 		}
+
+		output := RegExReplace(output, "\),\s$", "")
 
 		return output
 	}
