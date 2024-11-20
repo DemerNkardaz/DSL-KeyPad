@@ -11,6 +11,21 @@ SupportedLanguages := [
 
 CodeEn := "00000409"
 CodeRu := "00000419"
+CodeGr := "00000408"
+
+CodeLang := Map(
+	"en", "00000409",
+	"ru", "00000419",
+	"gr", "00000408")
+
+CompareLangCode(CodeInput) {
+	for lang, value in CodeLang {
+		if (value = CodeInput) {
+			return True
+		}
+	}
+	return False
+}
 
 ChracterMap := "C:\Windows\System32\charmap.exe"
 ImageRes := "C:\Windows\System32\imageres.dll"
@@ -158,11 +173,18 @@ DefaultConfig := [
 	["Settings", "LatinLayout", "QWERTY"],
 	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
 	["Settings", "CharacterWebResource", "SymblCC"],
+	["Settings", "F13F24", "True"],
+	["Settings", "TemperatureCalcExtendedFormatting", "True"],
+	["Settings", "TemperatureCalcDedicatedUnicodeChars", "True"],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
 	["CustomRules", "GREPDialogAttribution", ""],
 	["CustomRules", "GREPThisEmdash", ""],
 	["CustomRules", "GREPInitials", ""],
+	["CustomRules", "TemperatureCalcRoundValue", "2"],
+	["CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"],
+	["CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"],
+	["CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace"],
 	["LatestPrompts", "LaTeX", ""],
 	["LatestPrompts", "Unicode", ""],
 	["LatestPrompts", "Altcode", ""],
@@ -481,6 +503,33 @@ InsertChangesList(TargetGUI) {
 GetTimeString() {
 	return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
 }
+
+
+GetDate(DateStyle := "YYYYMMDDhhmmss") {
+	CurrentTime := A_Now
+	TimeFormat := Map(
+		"YYYY", SubStr(CurrentTime, 1, 4),
+		"MM", SubStr(CurrentTime, 5, 2),
+		"DD", SubStr(CurrentTime, 7, 2),
+		"hh", SubStr(CurrentTime, 9, 2),
+		"mm", SubStr(CurrentTime, 11, 2),
+		"ss", SubStr(CurrentTime, 13, 2)
+	)
+	for Key, Value in TimeFormat {
+		DateStyle := StrReplace(DateStyle, Key, Value, True)
+	}
+	CurrentTime := DateStyle
+	return CurrentTime
+}
+
+SendDate(DateStyle := "YYYYMMDDhhmmss") {
+	SendText(GetDate(DateStyle))
+}
+
+HotString(":C?0:gtsd", (D) => SendDate())
+HotString(":C?0:gtdd", (D) => SendDate("YYYY–MM–DD"))
+HotString(":C?0:gtfd", (D) => SendDate("YYYY–MM–DD hh:mm:ss"))
+HotString(":C?0:gtfh", (D) => SendDate("hh:mm:ss"))
 
 CheckUpdateError := ""
 GetUpdate(TimeOut := 0, RepairMode := False) {
@@ -1119,6 +1168,24 @@ FormatHotKey(HKey, Modifier := "") {
 	return MakeString
 }
 
+Chrs(CharacterEntries*) {
+	Output := ""
+
+	for entryArray in CharacterEntries {
+		if IsObject(entryArray) {
+			charCode := entryArray[1]
+			charRepeats := entryArray.Has(2) ? entryArray[2] : 1
+
+			Loop charRepeats
+				Output .= Chr(charCode)
+		} else {
+			Output .= Chr(entryArray)
+		}
+	}
+
+	return Output
+}
+
 GetChar(CharacterNames*) {
 	Output := ""
 	IndexMap := Map()
@@ -1293,7 +1360,7 @@ ArrayMerge(Arrays*) {
 }
 
 GetMapCount(MapObj, SortGroups := "") {
-	properties := ["combiningForm", "modifierForm", "italicForm", "italicBoldForm", "boldForm", "subscriptForm", "scriptForm", "frakturForm", "scriptBoldForm", "frakturBoldForm", "doubleStruckForm", "doubleStruckBoldForm", "doubleStruckItalicForm", "doubleStruckItalicBoldForm"]
+	properties := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
 	if !IsObject(SortGroups) {
 		keyCount := MapObj.Count
 
@@ -1302,7 +1369,7 @@ GetMapCount(MapObj, SortGroups := "") {
 				keyCount--
 			}
 			for property in properties {
-				if HasProp(value, property) {
+				if HasProp(value, property "Form") {
 					keyCount++
 				}
 			}
@@ -1399,6 +1466,8 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			entryName := match[2]
 		}
 
+		isFavorite := FavoriteChars.CheckVar(characterEntry)
+
 		for blackListEntry in BlackList {
 			if (blackListEntry = entryName) {
 				continue 2
@@ -1444,6 +1513,10 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 				characterTitle := value.titles[LanguageCode]
 			} else {
 				characterTitle := ReadLocale(entryName, "chars")
+			}
+
+			if isFavorite {
+				characterTitle .= " " Chr(0x2605)
 			}
 
 			characterSymbol := HasProp(value, "symbol") ? value.symbol : ""
@@ -2365,16 +2438,18 @@ MapInsert(Characters,
 	"arrow_left", {
 		unicode: "{U+2190}",
 		tags: ["left arrow", "стрелка влево"],
-		group: [["Special Characters", "Special Fast Secondary"]],
+		group: [["Special Characters", "Smelting Special", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "[" Chr(0x2190) "]",
+		recipe: "<-",
 	},
 	"arrow_right", {
 		unicode: "{U+2192}",
 		tags: ["right arrow", "стрелка вправо"],
-		group: [["Special Characters", "Special Fast Secondary"]],
+		group: [["Special Characters", "Smelting Special", "Special Fast Secondary"]],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "[" Chr(0x2192) "]",
+		recipe: "->",
 	},
 	"arrow_up", {
 		unicode: "{U+2191}",
@@ -2576,6 +2651,21 @@ MapInsert(Characters,
 		group: [["Special Characters", "Smelting Special"]],
 		recipe: Chr(0x00B0) . "K",
 	},
+	"rankine", {
+		calcOff: "",
+		unicode: "{U+0052}",
+		uniSequence: ["{U+00B0}", "{U+0052}"],
+	},
+	"newton", {
+		calcOff: "",
+		unicode: "{U+004E}",
+		uniSequence: ["{U+00B0}", "{U+004E}"],
+	},
+	"delisle", {
+		calcOff: "",
+		unicode: "{U+0044}",
+		uniSequence: ["{U+00B0}", "{U+0044}"],
+	},
 	"dagger", {
 		unicode: "{U+2020}",
 		LaTeX: "\dagger",
@@ -2655,6 +2745,14 @@ MapInsert(Characters,
 		show_on_fast_keys: True,
 		alt_special: "[Num/] [Num*]",
 		recipe: ["-:x", Chr(0x2212) ":" Chr(0x00D7), Chr(0x00F7) Chr(0x00D7)],
+	},
+	"empty_set", {
+		unicode: "{U+2205}",
+		tags: ["пустое множество", "empty set"],
+		group: [["Smelting Special", "Special Fast Secondary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "[Num0]",
+		recipe: "0/",
 	},
 	"prime_single", {
 		unicode: "{U+2032}",
@@ -2758,6 +2856,44 @@ MapInsert(Characters,
 		alt_special: "[``=]",
 		recipe: "~=",
 	},
+	"less_or_equals", {
+		unicode: "{U+2264}",
+		tags: ["less than or equals", "меньше или равно"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: ">+ [<]",
+		recipe: "<=",
+	},
+	"greater_or_equals", {
+		unicode: "{U+2265}",
+		tags: ["greater than or equals", "больше или равно"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: ">+ [>]",
+		recipe: ">=",
+	},
+	"neither_less_nor_equals", {
+		unicode: "{U+2270}",
+		tags: ["neither less than nor equals", "ни меньше ни равно"],
+		group: [["Smelting Special"]],
+		recipe: "/<=",
+	},
+	"neither_greater_nor_equals", {
+		unicode: "{U+2271}",
+		tags: ["neither greater than nor equals", "ни больше ни равно"],
+		group: [["Smelting Special"]],
+		recipe: "/>=",
+	},
+	"less_over_equals", {
+		unicode: "{U+2266}",
+		tags: ["less than over equals", "меньше над равно"],
+		group: [["Smelting Special"]],
+		recipe: ["<==", Chr(0x2264) "="],
+	},
+	"greater_over_equals", {
+		unicode: "{U+2267}",
+		tags: ["greater than over equals", "больше над равно"],
+		group: [["Smelting Special"]],
+		recipe: [">==", Chr(0x2265) "="],
+	},
 	"plusminus", {
 		unicode: "{U+00B1}",
 		tags: ["plus minus", "плюс-минус"],
@@ -2847,7 +2983,118 @@ MapInsert(Characters,
 		unicode: "{U+223E}",
 		tags: ["inverted lazy s", "перевёрнутая плавная s"],
 		group: [["Special Characters", "Smelting Special"]],
-		recipe: "s↻",
+		recipe: "s" Chr(0x21BB),
+	},
+	"n_ary_summation", {
+		unicode: "{U+2211}",
+		doubleStruckForm: "{U+2140}",
+		tags: ["n-ary summation", "summation", "знак суммирования"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[s]",
+		recipe: ["sum", "сум"],
+	},
+	"modulo_two_sum", {
+		unicode: "{U+2A0A}",
+		tags: ["modulo two sum"],
+		group: ["Smelting Special"],
+		recipe: ["msum", "мсум"],
+	},
+	"n_ary_product", {
+		unicode: "{U+220F}",
+		tags: ["n-ary product", "product", "знак произведения"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: ">+ [P]",
+		recipe: ["prod", "прод"],
+	},
+	"n_ary_union", {
+		unicode: "{U+222A}",
+		tags: ["n-ary union", "union", "знак объединения"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[u]",
+		recipe: ["uni", "обд"],
+	},
+	"delta", {
+		unicode: "{U+2206}",
+		tags: ["increment", "delta", "дельта"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[d]",
+		recipe: ["del", "дел"],
+	},
+	"nabla", {
+		unicode: "{U+2207}",
+		tags: ["nabla", "набла"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[n]",
+		recipe: ["nab", "наб"],
+	},
+	"integral", {
+		unicode: "{U+222B}", LaTeX: "\int",
+		tags: ["integral", "интеграл"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[i]",
+		recipe: ["int", "инт"],
+	},
+	"integral_double", {
+		unicode: "{U+222C}", LaTeX: "\iint",
+		tags: ["double integral", "двойной интеграл"],
+		group: ["Smelting Special"],
+		recipe: ["iint", "иинт", Chrs([0x222B, 2])],
+	},
+	"integral_triple", {
+		unicode: "{U+222D}", LaTeX: "\iiint",
+		tags: ["triple integral", "тройной интеграл"],
+		group: ["Smelting Special"],
+		recipe: ["tint", "тинт", Chrs([0x222B, 3])],
+	},
+	"intergral_quadruple", {
+		unicode: "{U+2A0C}",
+		tags: ["quadruple integral", "четверной интеграл"],
+		group: ["Smelting Special"],
+		recipe: ["qint", "чинт", Chrs([0x222B, 4])],
+	},
+	"contour_integral", {
+		unicode: "{U+222E}", LaTeX: "\oint",
+		tags: ["contour integral", "интеграл по контуру"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[I]",
+		recipe: ["oint", "кинт"],
+	},
+	"surface_integral", {
+		unicode: "{U+222F}", LaTeX: "\oiint", LaTeXPackage: "esint",
+		tags: ["surface integral", "интеграл по поверхности"],
+		group: ["Smelting Special"],
+		recipe: ["oiint", "киинт", Chrs([0x222E, 2])],
+	},
+	"volume_integral", {
+		unicode: "{U+2230}", LaTeX: "\oiiint", LaTeXPackage: "esint",
+		tags: ["volume integral", "тройной по объёму"],
+		group: ["Smelting Special"],
+		recipe: ["otint", "ктинт", Chrs([0x222E, 3])],
+	},
+	"summation_integral", {
+		unicode: "{U+2A0B}",
+		tags: ["summation with integral", "суммирования с интегралом"],
+		group: ["Smelting Special"],
+		recipe: ["sumint", "суминт", Chrs(0x2211, 0x222B)],
+	},
+	"square_root", {
+		unicode: "{U+221A}", LaTeX: "\sqrt",
+		tags: ["square root", "квадратный корень"],
+		group: [["Smelting Special", "Math"]],
+		alt_layout: "[r]",
+		recipe: ["sqrt", "квкр"],
+	},
+	"cube_root", {
+		unicode: "{U+221B}", LaTeX: "\sqrt[3]",
+		tags: ["cube root", "кубический корень"],
+		group: ["Smelting Special"],
+		recipe: ["cbrt", "кубкр"],
+	},
+	"fourth_root", {
+		unicode: "{U+221C}", LaTeX: "\sqrt[4]",
+		tags: ["fourth root", "корень четвёртой степени"],
+		group: ["Smelting Special"],
+		recipe: ["qurt", "чткр"],
 	},
 	"dotted_circle", {
 		unicode: "{U+25CC}",
@@ -2897,6 +3144,12 @@ MapInsert(Characters,
 		tags: ["reference mark", "знак сноски", "komejirushi", "комэдзируси"],
 		group: [["Special Characters", "Smelting Special"]],
 		recipe: ["..×..", ":×:"],
+	},
+	"numero_sign", {
+		unicode: "{U+2116}",
+		tags: ["numero sign", "знак номера"],
+		group: ["Smelting Special"],
+		recipe: "no",
 	},
 	"exclamation", {
 		unicode: "{U+0021}",
@@ -3558,6 +3811,7 @@ MapInsert(Characters,
 	},
 	"lat_c_lig_oe", {
 		unicode: "{U+0152}",
+		modifierForm: "{U+A7F9}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		tags: ["!oe", "прописная лигатура OE", "capital ligature OE"],
@@ -4106,6 +4360,25 @@ MapInsert(Characters,
 		alt_on_fast_keys: ">+ $",
 		tags: ["строчная буква s длинное", "small letter s long"],
 		recipe: "fs",
+	},
+	"lat_c_let_gamma", {
+		unicode: "{U+0194}",
+		titlesAlt: True,
+		group: ["Latin Extended"],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+>+ [G]",
+		tags: ["прописная буква Гамма", "capital letter Gamma"],
+		recipe: "V0",
+	},
+	"lat_s_let_gamma", {
+		unicode: "{U+0263}",
+		modifierForm: "{U+02E0}",
+		titlesAlt: True,
+		group: ["Latin Extended"],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+>+ [g]",
+		tags: ["строчныая буква гамма", "small letter gamma"],
+		recipe: "v0",
 	},
 	"lat_c_let_upsilon", {
 		unicode: "{U+01B1}",
@@ -7335,13 +7608,13 @@ MapInsert(Characters,
 		alt_on_fast_keys: "<+>+ $",
 		recipe: "$" GetChar("tilde"),
 	},
-	"lat_c_let_a_tilde_acute", {
+	"lat_c_let_o_tilde_acute", {
 		unicode: "{U+1E4C}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: ["$" GetChar("tilde", "acute"), Chr(0x00D5) GetChar("acute")],
 	},
-	"lat_s_let_a_tilde_acute", {
+	"lat_s_let_o_tilde_acute", {
 		unicode: "{U+1E4D}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
@@ -9258,7 +9531,7 @@ MapInsert(Characters,
 		titlesAlt: True,
 		group: ["Cyrillic Ligatures & Letters"],
 		tags: [".йюсмз", ".iyusmz", "строчная буква юс малый закрытый йотированный кириллицы", "cyrillic small letter little yus closed iotified"],
-		recipe: ["і_ат", "І" Chr(0xA659), "і_" Chr(0x0467)],
+		recipe: ["і_ат", "i" Chr(0xA659), "і_" Chr(0x0467)],
 	},
 	"cyr_c_let_yus_blended", {
 		unicode: "{U+A65A}",
@@ -10519,6 +10792,42 @@ MapInsert(Characters,
 		group: ["Cyrillic Letters"],
 		tags: ["строчная буква ук кириллицы", "cyrillic small letter unblended uk"],
 		recipe: ["о↑у", "о↑ѵ"],
+	},
+	;
+	;
+	;
+	;
+	;
+	; * Greek Letters
+	"gre_c_let_lamda", {
+		unicode: "{U+039B}",
+		titlesAlt: True,
+		group: ["Greek Letters"],
+		tags: ["прописная буква Лямбда греческая", "greek capital letter Lamda"],
+	},
+	"gre_s_let_lamda", {
+		unicode: "{U+03BB}",
+		titlesAlt: True,
+		group: [["Greek Letters", "Smelting Special", "Math"]],
+		tags: ["строчная буква лямбда греческая", "greek small letter lamda"],
+		alt_layout: "[l]",
+		alt_layout_title: true,
+		recipe: ["lam", "лям"],
+	},
+	"gre_c_let_pi", {
+		unicode: "{U+03A0}",
+		titlesAlt: True,
+		group: ["Greek Letters"],
+		tags: ["прописная буква Пи греческая", "greek capital letter Pi"],
+	},
+	"gre_s_let_pi", {
+		unicode: "{U+03C0}",
+		titlesAlt: True,
+		group: [["Greek Letters", "Smelting Special", "Math"]],
+		tags: ["строчная буква пи греческая", "greek small letter pi"],
+		alt_layout: "[p]",
+		alt_layout_title: true,
+		recipe: ["pi", "пи"],
 	},
 	;
 	;
@@ -13536,262 +13845,366 @@ MapInsert(Characters,
 		italicForm: "{U+1D434}", italicBoldForm: "{U+1D468}", boldForm: "{U+1D400}",
 		frakturForm: "{U+1D504}", frakturBoldForm: "{U+1D56C}",
 		scriptForm: "{U+1D49C}", scriptBoldForm: "{U+1D4D0}",
-		doubleStruckForm: "{U+1D538}" },
+		doubleStruckForm: "{U+1D538}",
+		sansSerifForm: "{U+1D5A0}", sansSerifItalicForm: "{U+1D608}", sansSerifItalicBoldForm: "{U+1D63C}", sansSerifBoldForm: "{U+1D5D4}",
+		monospaceForm: "{U+1D670}" },
 	"lat_s_let_a", { calcOff: "", unicode: "{U+0061}", combiningForm: "{U+0363}", modifierForm: "{U+1D43}", subscriptForm: "{U+2090}",
 		italicForm: "{U+1D44E}", italicBoldForm: "{U+1D482}", boldForm: "{U+1D41A}",
 		frakturForm: "{U+1D51E}", frakturBoldForm: "{U+1D586}",
 		scriptForm: "{U+1D4B6}", scriptBoldForm: "{U+1D4EA}",
-		doubleStruckForm: "{U+1D552}" },
+		doubleStruckForm: "{U+1D552}",
+		sansSerifForm: "{U+1D5BA}", sansSerifItalicForm: "{U+1D622}", sansSerifItalicBoldForm: "{U+1D656}", sansSerifBoldForm: "{U+1D5EE}",
+		monospaceForm: "{U+1D68A}" },
 	"lat_c_let_b", { calcOff: "", unicode: "{U+0042}", modifierForm: "{U+1D2E}",
 		italicForm: "{U+1D435}", italicBoldForm: "{U+1D469}", boldForm: "{U+1D401}",
 		frakturForm: "{U+1D505}", frakturBoldForm: "{U+1D56D}",
 		scriptForm: "{U+212C}", scriptBoldForm: "{U+1D4D1}",
-		doubleStruckForm: "{U+1D539}" },
+		doubleStruckForm: "{U+1D539}",
+		sansSerifForm: "{U+1D5A1}", sansSerifItalicForm: "{U+1D609}", sansSerifItalicBoldForm: "{U+1D63D}", sansSerifBoldForm: "{U+1D5D5}",
+		monospaceForm: "{U+1D671}" },
 	"lat_s_let_b", { calcOff: "", unicode: "{U+0062}", combiningForm: "{U+1DE8}", modifierForm: "{U+1D47}",
 		italicForm: "{U+1D44F}", italicBoldForm: "{U+1D483}", boldForm: "{U+1D41B}",
 		frakturForm: "{U+1D51F}", frakturBoldForm: "{U+1D587}",
 		scriptForm: "{U+1D4B7}", scriptBoldForm: "{U+1D4EB}",
-		doubleStruckForm: "{U+1D553}" },
+		doubleStruckForm: "{U+1D553}",
+		sansSerifForm: "{U+1D5BB}", sansSerifItalicForm: "{U+1D623}", sansSerifItalicBoldForm: "{U+1D657}", sansSerifBoldForm: "{U+1D5EF}",
+		monospaceForm: "{U+1D68B}" },
 	"lat_c_let_c", { calcOff: "", unicode: "{U+0043}", modifierForm: "{U+A7F2}",
 		italicForm: "{U+1D436}", italicBoldForm: "{U+1D46A}", boldForm: "{U+1D402}",
 		frakturForm: "{U+212D}", frakturBoldForm: "{U+1D56E}",
 		scriptForm: "{U+1D49E}", scriptBoldForm: "{U+1D4D2}",
-		doubleStruckForm: "{U+2102}" },
+		doubleStruckForm: "{U+2102}",
+		sansSerifForm: "{U+1D5A2}", sansSerifItalicForm: "{U+1D60A}", sansSerifItalicBoldForm: "{U+1D63E}", sansSerifBoldForm: "{U+1D5D6}",
+		monospaceForm: "{U+1D672}" },
 	"lat_s_let_c", { calcOff: "", unicode: "{U+0063}", combiningForm: "{U+0368}", modifierForm: "{U+1D9C}",
 		italicForm: "{U+1D450}", italicBoldForm: "{U+1D484}", boldForm: "{U+1D41C}",
 		frakturForm: "{U+1D520}", frakturBoldForm: "{U+1D588}",
 		scriptForm: "{U+1D4B8}", scriptBoldForm: "{U+1D4EC}",
-		doubleStruckForm: "{U+1D554}" },
+		doubleStruckForm: "{U+1D554}",
+		sansSerifForm: "{U+1D5BC}", sansSerifItalicForm: "{U+1D624}", sansSerifItalicBoldForm: "{U+1D658}", sansSerifBoldForm: "{U+1D5F0}",
+		monospaceForm: "{U+1D68C}" },
 	"lat_c_let_d", { calcOff: "", unicode: "{U+0044}", modifierForm: "{U+1D30}",
 		italicForm: "{U+1D437}", italicBoldForm: "{U+1D46B}", boldForm: "{U+1D403}",
 		frakturForm: "{U+1D507}", frakturBoldForm: "{U+1D56F}",
 		scriptForm: "{U+1D49F}", scriptBoldForm: "{U+1D4D3}",
-		doubleStruckForm: "{U+1D53B}", doubleStruckItalicForm: "{U+2145}" },
+		doubleStruckForm: "{U+1D53B}", doubleStruckItalicForm: "{U+2145}",
+		sansSerifForm: "{U+1D5A3}", sansSerifItalicForm: "{U+1D60B}", sansSerifItalicBoldForm: "{U+1D63F}", sansSerifBoldForm: "{U+1D5D7}",
+		monospaceForm: "{U+1D673}" },
 	"lat_s_let_d", { calcOff: "", unicode: "{U+0064}", combiningForm: "{U+0369}", modifierForm: "{U+1D48}",
 		italicForm: "{U+1D451}", italicBoldForm: "{U+1D485}", boldForm: "{U+1D41D}",
 		frakturForm: "{U+1D521}", frakturBoldForm: "{U+1D589}",
 		scriptForm: "{U+1D4B9}", scriptBoldForm: "{U+1D4ED}",
-		doubleStruckForm: "{U+1D555}", doubleStruckItalicForm: "{U+2146}" },
+		doubleStruckForm: "{U+1D555}", doubleStruckItalicForm: "{U+2146}",
+		sansSerifForm: "{U+1D5BD}", sansSerifItalicForm: "{U+1D625}", sansSerifItalicBoldForm: "{U+1D659}", sansSerifBoldForm: "{U+1D5F1}",
+		monospaceForm: "{U+1D68D}" },
 	"lat_c_let_e", { calcOff: "", unicode: "{U+0045}", modifierForm: "{U+1D31}",
 		italicForm: "{U+1D438}", italicBoldForm: "{U+1D46C}", boldForm: "{U+1D404}",
 		frakturForm: "{U+1D508}", frakturBoldForm: "{U+1D570}",
 		scriptForm: "{U+2130}", scriptBoldForm: "{U+1D4D4}",
-		doubleStruckForm: "{U+1D53C}" },
+		doubleStruckForm: "{U+1D53C}",
+		sansSerifForm: "{U+1D5A4}", sansSerifItalicForm: "{U+1D60C}", sansSerifItalicBoldForm: "{U+1D640}", sansSerifBoldForm: "{U+1D5D8}",
+		monospaceForm: "{U+1D674}" },
 	"lat_s_let_e", { calcOff: "", unicode: "{U+0065}", combiningForm: "{U+0364}", modifierForm: "{U+1D49}", subscriptForm: "{U+2091}",
 		italicForm: "{U+1D452}", italicBoldForm: "{U+1D486}", boldForm: "{U+1D41E}",
 		frakturForm: "{U+1D522}", frakturBoldForm: "{U+1D58A}",
 		scriptForm: "{U+212F}", scriptBoldForm: "{U+1D4EE}",
-		doubleStruckForm: "{U+1D556}", doubleStruckItalicForm: "{U+2147}" },
+		doubleStruckForm: "{U+1D556}", doubleStruckItalicForm: "{U+2147}",
+		sansSerifForm: "{U+1D5BE}", sansSerifItalicForm: "{U+1D626}", sansSerifItalicBoldForm: "{U+1D65A}", sansSerifBoldForm: "{U+1D5F2}",
+		monospaceForm: "{U+1D68E}" },
 	"lat_c_let_f", { calcOff: "", unicode: "{U+0046}", modifierForm: "{U+A7F3}",
 		italicForm: "{U+1D439}", italicBoldForm: "{U+1D46D}", boldForm: "{U+1D405}",
 		frakturForm: "{U+1D509}", frakturBoldForm: "{U+1D571}",
 		scriptForm: "{U+2131}", scriptBoldForm: "{U+1D4D5}",
-		doubleStruckForm: "{U+1D53D}" },
+		doubleStruckForm: "{U+1D53D}",
+		sansSerifForm: "{U+1D5A5}", sansSerifItalicForm: "{U+1D60D}", sansSerifItalicBoldForm: "{U+1D641}", sansSerifBoldForm: "{U+1D5D9}",
+		monospaceForm: "{U+1D675}" },
 	"lat_s_let_f", { calcOff: "", unicode: "{U+0066}", combiningForm: "{U+1DEB}", modifierForm: "{U+1DA0}",
 		italicForm: "{U+1D453}", italicBoldForm: "{U+1D487}", boldForm: "{U+1D41F}",
 		frakturForm: "{U+1D523}", frakturBoldForm: "{U+1D58B}",
 		scriptForm: "{U+1D4BB}", scriptBoldForm: "{U+1D4EF}",
-		doubleStruckForm: "{U+1D557}" },
+		doubleStruckForm: "{U+1D557}",
+		sansSerifForm: "{U+1D5BF}", sansSerifItalicForm: "{U+1D627}", sansSerifItalicBoldForm: "{U+1D65B}", sansSerifBoldForm: "{U+1D5F3}",
+		monospaceForm: "{U+1D68F}" },
 	"lat_c_let_g", { calcOff: "", unicode: "{U+0047}", combiningForm: "{U+1DDB}", modifierForm: "{U+1D33}",
 		italicForm: "{U+1D43A}", italicBoldForm: "{U+1D46E}", boldForm: "{U+1D406}",
 		frakturForm: "{U+1D50A}", frakturBoldForm: "{U+1D572}",
 		scriptForm: "{U+1D4A2}", scriptBoldForm: "{U+1D4D6}",
-		doubleStruckForm: "{U+1D53E}" },
+		doubleStruckForm: "{U+1D53E}",
+		sansSerifForm: "{U+1D5A6}", sansSerifItalicForm: "{U+1D60E}", sansSerifItalicBoldForm: "{U+1D642}", sansSerifBoldForm: "{U+1D5DA}",
+		monospaceForm: "{U+1D676}" },
 	"lat_s_let_g", { calcOff: "", unicode: "{U+0067}", combiningForm: "{U+1DDA}", modifierForm: "{U+1D4D}",
 		italicForm: "{U+1D454}", italicBoldForm: "{U+1D488}", boldForm: "{U+1D420}",
 		frakturForm: "{U+1D524}", frakturBoldForm: "{U+1D58C}",
 		scriptForm: "{U+210A}", scriptBoldForm: "{U+1D4F0}",
-		doubleStruckForm: "{U+1D558}" },
+		doubleStruckForm: "{U+1D558}",
+		sansSerifForm: "{U+1D5C0}", sansSerifItalicForm: "{U+1D628}", sansSerifItalicBoldForm: "{U+1D65C}", sansSerifBoldForm: "{U+1D5F4}",
+		monospaceForm: "{U+1D690}" },
 	"lat_c_let_h", { calcOff: "", unicode: "{U+0048}", modifierForm: "{U+1D34}",
 		italicForm: "{U+1D43B}", italicBoldForm: "{U+1D46F}", boldForm: "{U+1D407}",
 		frakturForm: "{U+210C}", frakturBoldForm: "{U+1D573}",
 		scriptForm: "{U+210B}", scriptBoldForm: "{U+1D4D7}",
-		doubleStruckForm: "{U+210D}" },
+		doubleStruckForm: "{U+210D}",
+		sansSerifForm: "{U+1D5A7}", sansSerifItalicForm: "{U+1D60F}", sansSerifItalicBoldForm: "{U+1D643}", sansSerifBoldForm: "{U+1D5DB}",
+		monospaceForm: "{U+1D677}" },
 	"lat_s_let_h", { calcOff: "", unicode: "{U+0068}", combiningForm: "{U+036A}", modifierForm: "{U+02B0}", subscriptForm: "{U+2095}",
 		italicForm: "{U+210E}", italicBoldForm: "{U+1D489}", boldForm: "{U+1D421}",
 		frakturForm: "{U+1D525}", frakturBoldForm: "{U+1D58D}",
 		scriptForm: "{U+1D4BD}", scriptBoldForm: "{U+1D4F1}",
-		doubleStruckForm: "{U+1D559}" },
+		doubleStruckForm: "{U+1D559}",
+		sansSerifForm: "{U+1D5C1}", sansSerifItalicForm: "{U+1D629}", sansSerifItalicBoldForm: "{U+1D65D}", sansSerifBoldForm: "{U+1D5F5}",
+		monospaceForm: "{U+1D691}" },
 	"lat_c_let_i", { calcOff: "", unicode: "{U+0049}", modifierForm: "{U+1D35}",
 		italicForm: "{U+1D43C}", italicBoldForm: "{U+1D470}", boldForm: "{U+1D408}",
 		frakturForm: "{U+2111}", frakturBoldForm: "{U+1D574}",
 		scriptForm: "{U+2110}", scriptBoldForm: "{U+1D4D8}",
-		doubleStruckForm: "{U+1D540}" },
+		doubleStruckForm: "{U+1D540}",
+		sansSerifForm: "{U+1D5A8}", sansSerifItalicForm: "{U+1D610}", sansSerifItalicBoldForm: "{U+1D644}", sansSerifBoldForm: "{U+1D5DC}",
+		monospaceForm: "{U+1D678}" },
 	"lat_s_let_i", { calcOff: "", unicode: "{U+0069}", combiningForm: "{U+0365}", subscriptForm: "{U+1D62}",
 		italicForm: "{U+1D456}", italicBoldForm: "{U+1D48A}", boldForm: "{U+1D422}",
 		frakturForm: "{U+1D526}", frakturBoldForm: "{U+1D58E}",
 		scriptForm: "{U+1D4BE}", scriptBoldForm: "{U+1D4F2}",
-		doubleStruckForm: "{U+1D55A}", doubleStruckItalicForm: "{U+2148}" },
+		doubleStruckForm: "{U+1D55A}", doubleStruckItalicForm: "{U+2148}",
+		sansSerifForm: "{U+1D5C2}", sansSerifItalicForm: "{U+1D62A}", sansSerifItalicBoldForm: "{U+1D65E}", sansSerifBoldForm: "{U+1D5F6}",
+		monospaceForm: "{U+1D692}" },
 	"lat_c_let_j", { calcOff: "", unicode: "{U+004A}", modifierForm: "{U+1D36}",
 		italicForm: "{U+1D43D}", italicBoldForm: "{U+1D471}", boldForm: "{U+1D409}",
 		frakturForm: "{U+1D50D}", frakturBoldForm: "{U+1D575}",
 		scriptForm: "{U+1D4A5}", scriptBoldForm: "{U+1D4D9}",
-		doubleStruckForm: "{U+1D541}" },
+		doubleStruckForm: "{U+1D541}",
+		sansSerifForm: "{U+1D5A9}", sansSerifItalicForm: "{U+1D611}", sansSerifItalicBoldForm: "{U+1D645}", sansSerifBoldForm: "{U+1D5DD}",
+		monospaceForm: "{U+1D679}" },
 	"lat_s_let_j", { calcOff: "", unicode: "{U+006A}", modifierForm: "{U+02B2}", subscriptForm: "{U+2C7C}",
 		italicForm: "{U+1D457}", italicBoldForm: "{U+1D48B}", boldForm: "{U+1D423}",
 		frakturForm: "{U+1D527}", frakturBoldForm: "{U+1D58F}",
 		scriptForm: "{U+1D4BF}", scriptBoldForm: "{U+1D4F3}",
-		doubleStruckForm: "{U+1D55B}", doubleStruckItalicForm: "{U+2149}" },
+		doubleStruckForm: "{U+1D55B}", doubleStruckItalicForm: "{U+2149}",
+		sansSerifForm: "{U+1D5C3}", sansSerifItalicForm: "{U+1D62B}", sansSerifItalicBoldForm: "{U+1D65F}", sansSerifBoldForm: "{U+1D5F7}",
+		monospaceForm: "{U+1D693}" },
 	"lat_c_let_k", { calcOff: "", unicode: "{U+004B}", modifierForm: "{U+1D37}",
 		italicForm: "{U+1D43E}", italicBoldForm: "{U+1D472}", boldForm: "{U+1D40A}",
 		frakturForm: "{U+1D50E}", frakturBoldForm: "{U+1D576}",
 		scriptForm: "{U+1D4A6}", scriptBoldForm: "{U+1D4DA}",
-		doubleStruckForm: "{U+1D542}" },
+		doubleStruckForm: "{U+1D542}",
+		sansSerifForm: "{U+1D5AA}", sansSerifItalicForm: "{U+1D612}", sansSerifItalicBoldForm: "{U+1D646}", sansSerifBoldForm: "{U+1D5DE}",
+		monospaceForm: "{U+1D67A}" },
 	"lat_s_let_k", { calcOff: "", unicode: "{U+006B}", combiningForm: "{U+1DDC}", modifierForm: "{U+1D4F}", subscriptForm: "{U+2096}",
 		italicForm: "{U+1D458}", italicBoldForm: "{U+1D48C}", boldForm: "{U+1D424}",
 		frakturForm: "{U+1D528}", frakturBoldForm: "{U+1D590}",
 		scriptForm: "{U+1D4C0}", scriptBoldForm: "{U+1D4F4}",
-		doubleStruckForm: "{U+1D55C}" },
+		doubleStruckForm: "{U+1D55C}",
+		sansSerifForm: "{U+1D5C4}", sansSerifItalicForm: "{U+1D62C}", sansSerifItalicBoldForm: "{U+1D660}", sansSerifBoldForm: "{U+1D5F8}",
+		monospaceForm: "{U+1D694}" },
 	"lat_c_let_l", { calcOff: "", unicode: "{U+004C}", combiningForm: "{U+1DDE}", modifierForm: "{U+1D38}",
 		italicForm: "{U+1D43F}", italicBoldForm: "{U+1D473}", boldForm: "{U+1D40B}",
 		frakturForm: "{U+1D50F}", frakturBoldForm: "{U+1D577}",
 		scriptForm: "{U+2112}", scriptBoldForm: "{U+1D4DB}",
-		doubleStruckForm: "{U+1D543}" },
+		doubleStruckForm: "{U+1D543}",
+		sansSerifForm: "{U+1D5AB}", sansSerifItalicForm: "{U+1D613}", sansSerifItalicBoldForm: "{U+1D647}", sansSerifBoldForm: "{U+1D5DF}",
+		monospaceForm: "{U+1D67B}" },
 	"lat_s_let_l", { calcOff: "", unicode: "{U+006C}", combiningForm: "{U+1DDD}", modifierForm: "{U+02E1}", subscriptForm: "{U+2097}",
 		italicForm: "{U+1D459}", italicBoldForm: "{U+1D48D}", boldForm: "{U+1D425}",
 		frakturForm: "{U+1D529}", frakturBoldForm: "{U+1D591}",
 		scriptForm: "{U+1D4C1}", scriptBoldForm: "{U+1D4F5}",
-		doubleStruckForm: "{U+1D55D}" },
+		doubleStruckForm: "{U+1D55D}",
+		sansSerifForm: "{U+1D5C5}", sansSerifItalicForm: "{U+1D62D}", sansSerifItalicBoldForm: "{U+1D661}", sansSerifBoldForm: "{U+1D5F9}",
+		monospaceForm: "{U+1D695}" },
 	"lat_c_let_m", { calcOff: "", unicode: "{U+004D}", combiningForm: "{U+1DDF}", modifierForm: "{U+1D39}",
 		italicForm: "{U+1D440}", italicBoldForm: "{U+1D474}", boldForm: "{U+1D40C}",
 		frakturForm: "{U+1D510}", frakturBoldForm: "{U+1D578}",
 		scriptForm: "{U+2133}", scriptBoldForm: "{U+1D4DC}",
-		doubleStruckForm: "{U+1D544}" },
+		doubleStruckForm: "{U+1D544}",
+		sansSerifForm: "{U+1D5AC}", sansSerifItalicForm: "{U+1D614}", sansSerifItalicBoldForm: "{U+1D648}", sansSerifBoldForm: "{U+1D5E0}",
+		monospaceForm: "{U+1D67C}" },
 	"lat_s_let_m", { calcOff: "", unicode: "{U+006D}", combiningForm: "{U+036B}", modifierForm: "{U+1D50}", subscriptForm: "{U+2098}",
 		italicForm: "{U+1D45A}", italicBoldForm: "{U+1D48E}", boldForm: "{U+1D426}",
 		frakturForm: "{U+1D52A}", frakturBoldForm: "{U+1D592}",
 		scriptForm: "{U+1D4C2}", scriptBoldForm: "{U+1D4F6}",
-		doubleStruckForm: "{U+1D55E}" },
+		doubleStruckForm: "{U+1D55E}",
+		sansSerifForm: "{U+1D5C6}", sansSerifItalicForm: "{U+1D62E}", sansSerifItalicBoldForm: "{U+1D662}", sansSerifBoldForm: "{U+1D5FA}",
+		monospaceForm: "{U+1D696}" },
 	"lat_c_let_n", { calcOff: "", unicode: "{U+004E}", combiningForm: "{U+1DE1}", modifierForm: "{U+1D3A}",
 		italicForm: "{U+1D441}", italicBoldForm: "{U+1D475}", boldForm: "{U+1D40D}",
 		frakturForm: "{U+1D511}", frakturBoldForm: "{U+1D579}",
 		scriptForm: "{U+1D4A9}", scriptBoldForm: "{U+1D4DD}",
-		doubleStruckForm: "{U+2115}" },
+		doubleStruckForm: "{U+2115}",
+		sansSerifForm: "{U+1D5AD}", sansSerifItalicForm: "{U+1D615}", sansSerifItalicBoldForm: "{U+1D649}", sansSerifBoldForm: "{U+1D5E1}",
+		monospaceForm: "{U+1D67D}" },
 	"lat_s_let_n", { calcOff: "", unicode: "{U+006E}", combiningForm: "{U+1DE0}", subscriptForm: "{U+2099}",
 		italicForm: "{U+1D45B}", italicBoldForm: "{U+1D48F}", boldForm: "{U+1D427}",
 		frakturForm: "{U+1D52B}", frakturBoldForm: "{U+1D593}",
 		scriptForm: "{U+1D4C3}", scriptBoldForm: "{U+1D4F7}",
-		doubleStruckForm: "{U+1D55F}" },
+		doubleStruckForm: "{U+1D55F}",
+		sansSerifForm: "{U+1D5C7}", sansSerifItalicForm: "{U+1D62F}", sansSerifItalicBoldForm: "{U+1D663}", sansSerifBoldForm: "{U+1D5FB}",
+		monospaceForm: "{U+1D697}" },
 	"lat_c_let_o", { calcOff: "", unicode: "{U+004F}", modifierForm: "{U+1D3C}",
 		italicForm: "{U+1D442}", italicBoldForm: "{U+1D476}", boldForm: "{U+1D40E}",
 		frakturForm: "{U+1D512}", frakturBoldForm: "{U+1D57A}",
 		scriptForm: "{U+1D4AA}", scriptBoldForm: "{U+1D4DE}",
-		doubleStruckForm: "{U+1D546}" },
+		doubleStruckForm: "{U+1D546}",
+		sansSerifForm: "{U+1D5AE}", sansSerifItalicForm: "{U+1D616}", sansSerifItalicBoldForm: "{U+1D64A}", sansSerifBoldForm: "{U+1D5E2}",
+		monospaceForm: "{U+1D67E}" },
 	"lat_s_let_o", { calcOff: "", unicode: "{U+006F}", combiningForm: "{U+0366}", modifierForm: "{U+1D52}", subscriptForm: "{U+2092}",
 		italicForm: "{U+1D45C}", italicBoldForm: "{U+1D490}", boldForm: "{U+1D428}",
 		frakturForm: "{U+1D52C}", frakturBoldForm: "{U+1D594}",
 		scriptForm: "{U+2134}", scriptBoldForm: "{U+1D4F8}",
-		doubleStruckForm: "{U+1D560}" },
+		doubleStruckForm: "{U+1D560}",
+		sansSerifForm: "{U+1D5C8}", sansSerifItalicForm: "{U+1D630}", sansSerifItalicBoldForm: "{U+1D664}", sansSerifBoldForm: "{U+1D5FC}",
+		monospaceForm: "{U+1D698}" },
 	"lat_c_let_p", { calcOff: "", unicode: "{U+0050}", modifierForm: "{U+1D3E}",
 		italicForm: "{U+1D443}", italicBoldForm: "{U+1D477}", boldForm: "{U+1D40F}",
 		frakturForm: "{U+1D513}", frakturBoldForm: "{U+1D57B}",
 		scriptForm: "{U+1D4AB}", scriptBoldForm: "{U+1D4DF}",
-		doubleStruckForm: "{U+2119}" },
+		doubleStruckForm: "{U+2119}",
+		sansSerifForm: "{U+1D5AF}", sansSerifItalicForm: "{U+1D617}", sansSerifItalicBoldForm: "{U+1D64B}", sansSerifBoldForm: "{U+1D5E3}",
+		monospaceForm: "{U+1D67F}" },
 	"lat_s_let_p", { calcOff: "", unicode: "{U+0070}", combiningForm: "{U+1DEE}", modifierForm: "{U+1D56}", subscriptForm: "{U+209A}",
 		italicForm: "{U+1D45D}", italicBoldForm: "{U+1D491}", boldForm: "{U+1D429}",
 		frakturForm: "{U+1D52D}", frakturBoldForm: "{U+1D595}",
 		scriptForm: "{U+1D4C5}", scriptBoldForm: "{U+1D4F9}",
-		doubleStruckForm: "{U+1D561}" },
+		doubleStruckForm: "{U+1D561}",
+		sansSerifForm: "{U+1D5C9}", sansSerifItalicForm: "{U+1D631}", sansSerifItalicBoldForm: "{U+1D665}", sansSerifBoldForm: "{U+1D5FD}",
+		monospaceForm: "{U+1D699}" },
 	"lat_c_let_q", { calcOff: "", unicode: "{U+0051}", modifierForm: "{U+A7F4}",
 		italicForm: "{U+1D444}", italicBoldForm: "{U+1D478}", boldForm: "{U+1D410}",
 		frakturForm: "{U+1D514}", frakturBoldForm: "{U+1D57C}",
 		scriptForm: "{U+1D4AC}", scriptBoldForm: "{U+1D4E0}",
-		doubleStruckForm: "{U+211A}" },
+		doubleStruckForm: "{U+211A}",
+		sansSerifForm: "{U+1D5B0}", sansSerifItalicForm: "{U+1D618}", sansSerifItalicBoldForm: "{U+1D64C}", sansSerifBoldForm: "{U+1D5E4}",
+		monospaceForm: "{U+1D680}" },
 	"lat_s_let_q", { calcOff: "", unicode: "{U+0071}",
 		italicForm: "{U+1D45E}", italicBoldForm: "{U+1D492}", boldForm: "{U+1D42A}",
 		frakturForm: "{U+1D52E}", frakturBoldForm: "{U+1D596}",
 		scriptForm: "{U+1D4C6}", scriptBoldForm: "{U+1D4FA}",
-		doubleStruckForm: "{U+1D562}" },
+		doubleStruckForm: "{U+1D562}",
+		sansSerifForm: "{U+1D5CA}", sansSerifItalicForm: "{U+1D632}", sansSerifItalicBoldForm: "{U+1D666}", sansSerifBoldForm: "{U+1D5FE}",
+		monospaceForm: "{U+1D69A}" },
 	"lat_c_let_r", { calcOff: "", unicode: "{U+0052}", combiningForm: "{U+1DE2}", modifierForm: "{U+1D3F}",
 		italicForm: "{U+1D445}", italicBoldForm: "{U+1D479}", boldForm: "{U+1D411}",
 		frakturForm: "{U+211C}", frakturBoldForm: "{U+1D57D}",
 		scriptForm: "{U+211B}", scriptBoldForm: "{U+1D4E1}",
-		doubleStruckForm: "{U+211D}" },
+		doubleStruckForm: "{U+211D}",
+		sansSerifForm: "{U+1D5B1}", sansSerifItalicForm: "{U+1D619}", sansSerifItalicBoldForm: "{U+1D64D}", sansSerifBoldForm: "{U+1D5E5}",
+		monospaceForm: "{U+1D681}" },
 	"lat_s_let_r", { calcOff: "", unicode: "{U+0072}", combiningForm: "{U+036C}", modifierForm: "{U+02B3}", subscriptForm: "{U+1D63}",
 		italicForm: "{U+1D45F}", italicBoldForm: "{U+1D493}", boldForm: "{U+1D42B}",
 		frakturForm: "{U+1D52F}", frakturBoldForm: "{U+1D597}",
 		scriptForm: "{U+1D4C7}", scriptBoldForm: "{U+1D4FB}",
-		doubleStruckForm: "{U+1D563}" },
+		doubleStruckForm: "{U+1D563}",
+		sansSerifForm: "{U+1D5CB}", sansSerifItalicForm: "{U+1D633}", sansSerifItalicBoldForm: "{U+1D667}", sansSerifBoldForm: "{U+1D5FF}",
+		monospaceForm: "{U+1D69B}" },
 	"lat_c_let_s", { calcOff: "", unicode: "{U+0053}",
 		italicForm: "{U+1D446}", italicBoldForm: "{U+1D47A}", boldForm: "{U+1D412}",
 		frakturForm: "{U+1D516}", frakturBoldForm: "{U+1D57E}",
 		scriptForm: "{U+1D4AE}", scriptBoldForm: "{U+1D4E2}",
-		doubleStruckForm: "{U+1D54A}" },
+		doubleStruckForm: "{U+1D54A}",
+		sansSerifForm: "{U+1D5B2}", sansSerifItalicForm: "{U+1D61A}", sansSerifItalicBoldForm: "{U+1D64E}", sansSerifBoldForm: "{U+1D5E6}",
+		monospaceForm: "{U+1D682}" },
 	"lat_s_let_s", { calcOff: "", unicode: "{U+0073}", combiningForm: "{U+1DE4}", modifierForm: "{U+02E2}", subscriptForm: "{U+209B}",
 		italicForm: "{U+1D460}", italicBoldForm: "{U+1D494}", boldForm: "{U+1D42C}",
 		frakturForm: "{U+1D530}", frakturBoldForm: "{U+1D598}",
 		scriptForm: "{U+1D4C8}", scriptBoldForm: "{U+1D4FC}",
-		doubleStruckForm: "{U+1D564}" },
+		doubleStruckForm: "{U+1D564}",
+		sansSerifForm: "{U+1D5CC}", sansSerifItalicForm: "{U+1D634}", sansSerifItalicBoldForm: "{U+1D668}", sansSerifBoldForm: "{U+1D600}",
+		monospaceForm: "{U+1D69C}" },
 	"lat_c_let_t", { calcOff: "", unicode: "{U+0054}", modifierForm: "{U+1D40}",
 		italicForm: "{U+1D447}", italicBoldForm: "{U+1D47B}", boldForm: "{U+1D413}",
 		frakturForm: "{U+1D517}", frakturBoldForm: "{U+1D57F}",
 		scriptForm: "{U+1D4AF}", scriptBoldForm: "{U+1D4E3}",
-		doubleStruckForm: "{U+1D54B}" },
+		doubleStruckForm: "{U+1D54B}",
+		sansSerifForm: "{U+1D5B3}", sansSerifItalicForm: "{U+1D61B}", sansSerifItalicBoldForm: "{U+1D64F}", sansSerifBoldForm: "{U+1D5E7}",
+		monospaceForm: "{U+1D683}" },
 	"lat_s_let_t", { calcOff: "", unicode: "{U+0074}", combiningForm: "{U+036D}", modifierForm: "{U+1D57}", subscriptForm: "{U+209C}",
 		italicForm: "{U+1D461}", italicBoldForm: "{U+1D495}", boldForm: "{U+1D42D}",
 		frakturForm: "{U+1D531}", frakturBoldForm: "{U+1D599}",
 		scriptForm: "{U+1D4C9}", scriptBoldForm: "{U+1D4FD}",
-		doubleStruckForm: "{U+1D565}" },
+		doubleStruckForm: "{U+1D565}",
+		sansSerifForm: "{U+1D5CD}", sansSerifItalicForm: "{U+1D635}", sansSerifItalicBoldForm: "{U+1D669}", sansSerifBoldForm: "{U+1D601}",
+		monospaceForm: "{U+1D69D}" },
 	"lat_c_let_u", { calcOff: "", unicode: "{U+0055}", modifierForm: "{U+1D41}",
 		italicForm: "{U+1D448}", italicBoldForm: "{U+1D47C}", boldForm: "{U+1D414}",
 		frakturForm: "{U+1D518}", frakturBoldForm: "{U+1D580}",
 		scriptForm: "{U+1D4B0}", scriptBoldForm: "{U+1D4E4}",
-		doubleStruckForm: "{U+1D54C}" },
+		doubleStruckForm: "{U+1D54C}",
+		sansSerifForm: "{U+1D5B4}", sansSerifItalicForm: "{U+1D61C}", sansSerifItalicBoldForm: "{U+1D650}", sansSerifBoldForm: "{U+1D5E8}",
+		monospaceForm: "{U+1D684}" },
 	"lat_s_let_u", { calcOff: "", unicode: "{U+0075}", combiningForm: "{U+0367}", modifierForm: "{U+1D58}", subscriptForm: "{U+1D64}",
 		italicForm: "{U+1D462}", italicBoldForm: "{U+1D496}", boldForm: "{U+1D42E}",
 		frakturForm: "{U+1D532}", frakturBoldForm: "{U+1D59A}",
 		scriptForm: "{U+1D4CA}", scriptBoldForm: "{U+1D4FE}",
-		doubleStruckForm: "{U+1D566}" },
+		doubleStruckForm: "{U+1D566}",
+		sansSerifForm: "{U+1D5CE}", sansSerifItalicForm: "{U+1D636}", sansSerifItalicBoldForm: "{U+1D66A}", sansSerifBoldForm: "{U+1D602}",
+		monospaceForm: "{U+1D69E}" },
 	"lat_c_let_v", { calcOff: "", unicode: "{U+0056}", modifierForm: "{U+2C7D}",
 		italicForm: "{U+1D449}", italicBoldForm: "{U+1D47D}", boldForm: "{U+1D415}",
 		frakturForm: "{U+1D519}", frakturBoldForm: "{U+1D581}",
 		scriptForm: "{U+1D4B1}", scriptBoldForm: "{U+1D4E5}",
-		doubleStruckForm: "{U+1D54D}" },
+		doubleStruckForm: "{U+1D54D}",
+		sansSerifForm: "{U+1D5B5}", sansSerifItalicForm: "{U+1D61D}", sansSerifItalicBoldForm: "{U+1D651}", sansSerifBoldForm: "{U+1D5E9}",
+		monospaceForm: "{U+1D685}" },
 	"lat_s_let_v", { calcOff: "", unicode: "{U+0076}", combiningForm: "{U+036E}", modifierForm: "{U+1D5B}", subscriptForm: "{U+1D65}",
 		italicForm: "{U+1D463}", italicBoldForm: "{U+1D497}", boldForm: "{U+1D42F}",
 		frakturForm: "{U+1D533}", frakturBoldForm: "{U+1D59B}",
 		scriptForm: "{U+1D4CB}", scriptBoldForm: "{U+1D4FF}",
-		doubleStruckForm: "{U+1D567}" },
+		doubleStruckForm: "{U+1D567}",
+		sansSerifForm: "{U+1D5CF}", sansSerifItalicForm: "{U+1D637}", sansSerifItalicBoldForm: "{U+1D66B}", sansSerifBoldForm: "{U+1D603}",
+		monospaceForm: "{U+1D69F}" },
 	"lat_c_let_w", { calcOff: "", unicode: "{U+0057}", modifierForm: "{U+1D42}",
 		italicForm: "{U+1D44A}", italicBoldForm: "{U+1D47E}", boldForm: "{U+1D416}",
 		frakturForm: "{U+1D51A}", frakturBoldForm: "{U+1D582}",
 		scriptForm: "{U+1D4B2}", scriptBoldForm: "{U+1D4E6}",
-		doubleStruckForm: "{U+1D54E}" },
+		doubleStruckForm: "{U+1D54E}",
+		sansSerifForm: "{U+1D5B6}", sansSerifItalicForm: "{U+1D61E}", sansSerifItalicBoldForm: "{U+1D652}", sansSerifBoldForm: "{U+1D5EA}",
+		monospaceForm: "{U+1D686}" },
 	"lat_s_let_w", { calcOff: "", unicode: "{U+0077}", combiningForm: "{U+1DF1}", modifierForm: "{U+02B7}",
 		italicForm: "{U+1D464}", italicBoldForm: "{U+1D498}", boldForm: "{U+1D430}",
 		frakturForm: "{U+1D534}", frakturBoldForm: "{U+1D59C}",
 		scriptForm: "{U+1D4CC}", scriptBoldForm: "{U+1D500}",
-		doubleStruckForm: "{U+1D568}" },
+		doubleStruckForm: "{U+1D568}",
+		sansSerifForm: "{U+1D5D0}", sansSerifItalicForm: "{U+1D638}", sansSerifItalicBoldForm: "{U+1D66C}", sansSerifBoldForm: "{U+1D604}",
+		monospaceForm: "{U+1D6A0}" },
 	"lat_c_let_x", { calcOff: "", unicode: "{U+0058}",
 		italicForm: "{U+1D44B}", italicBoldForm: "{U+1D47F}", boldForm: "{U+1D417}",
 		frakturForm: "{U+1D51B}", frakturBoldForm: "{U+1D583}",
 		scriptForm: "{U+1D4B3}", scriptBoldForm: "{U+1D4E7}",
-		doubleStruckForm: "{U+1D54F}" },
+		doubleStruckForm: "{U+1D54F}",
+		sansSerifForm: "{U+1D5B7}", sansSerifItalicForm: "{U+1D61F}", sansSerifItalicBoldForm: "{U+1D653}", sansSerifBoldForm: "{U+1D5EB}",
+		monospaceForm: "{U+1D687}" },
 	"lat_s_let_x", { calcOff: "", unicode: "{U+0078}", combiningForm: "{U+036F}", modifierForm: "{U+02E3}", subscriptForm: "{U+2093}",
 		italicForm: "{U+1D465}", italicBoldForm: "{U+1D499}", boldForm: "{U+1D431}",
 		frakturForm: "{U+1D535}", frakturBoldForm: "{U+1D59D}",
 		scriptForm: "{U+1D4CD}", scriptBoldForm: "{U+1D501}",
-		doubleStruckForm: "{U+1D569}" },
+		doubleStruckForm: "{U+1D569}",
+		sansSerifForm: "{U+1D5D1}", sansSerifItalicForm: "{U+1D639}", sansSerifItalicBoldForm: "{U+1D66D}", sansSerifBoldForm: "{U+1D605}",
+		monospaceForm: "{U+1D6A1}" },
 	"lat_c_let_y", { calcOff: "", unicode: "{U+0059}",
 		italicForm: "{U+1D44C}", italicBoldForm: "{U+1D480}", boldForm: "{U+1D418}",
 		frakturForm: "{U+1D51C}", frakturBoldForm: "{U+1D584}",
 		scriptForm: "{U+1D4B4}", scriptBoldForm: "{U+1D4E8}",
-		doubleStruckForm: "{U+1D550}" },
+		doubleStruckForm: "{U+1D550}",
+		sansSerifForm: "{U+1D5B8}", sansSerifItalicForm: "{U+1D620}", sansSerifItalicBoldForm: "{U+1D654}", sansSerifBoldForm: "{U+1D5EC}",
+		monospaceForm: "{U+1D688}" },
 	"lat_s_let_y", { calcOff: "", unicode: "{U+0079}", modifierForm: "{U+02B8}",
 		italicForm: "{U+1D466}", italicBoldForm: "{U+1D49A}", boldForm: "{U+1D432}",
 		frakturForm: "{U+1D536}", frakturBoldForm: "{U+1D59E}",
 		scriptForm: "{U+1D4CE}", scriptBoldForm: "{U+1D502}",
-		doubleStruckForm: "{U+1D56A}" },
+		doubleStruckForm: "{U+1D56A}",
+		sansSerifForm: "{U+1D5D2}", sansSerifItalicForm: "{U+1D63A}", sansSerifItalicBoldForm: "{U+1D66E}", sansSerifBoldForm: "{U+1D606}",
+		monospaceForm: "{U+1D6A2}" },
 	"lat_c_let_z", { calcOff: "", unicode: "{U+005A}",
 		italicForm: "{U+1D44D}", italicBoldForm: "{U+1D481}", boldForm: "{U+1D419}",
 		frakturForm: "{U+2128}", frakturBoldForm: "{U+1D585}",
 		scriptForm: "{U+1D4B5}", scriptBoldForm: "{U+1D4E9}",
-		doubleStruckForm: "{U+2124}" },
+		doubleStruckForm: "{U+2124}",
+		sansSerifForm: "{U+1D5B9}", sansSerifItalicForm: "{U+1D621}", sansSerifItalicBoldForm: "{U+1D655}", sansSerifBoldForm: "{U+1D5ED}",
+		monospaceForm: "{U+1D689}" },
 	"lat_s_let_z", { calcOff: "", unicode: "{U+007A}", combiningForm: "{U+1DE6}", modifierForm: "{U+02E3}",
 		italicForm: "{U+1D467}", italicBoldForm: "{U+1D49B}", boldForm: "{U+1D433}",
 		frakturForm: "{U+1D537}", frakturBoldForm: "{U+1D59F}",
 		scriptForm: "{U+1D4CF}", scriptBoldForm: "{U+1D503}",
-		doubleStruckForm: "{U+1D56B}" },
+		doubleStruckForm: "{U+1D56B}",
+		sansSerifForm: "{U+1D5D3}", sansSerifItalicForm: "{U+1D63B}", sansSerifItalicBoldForm: "{U+1D66F}", sansSerifBoldForm: "{U+1D607}",
+		monospaceForm: "{U+1D6A3}" },
 	;
 	"cyr_c_let_a", { calcOff: "", unicode: "{U+0410}" }, ; А
 	"cyr_s_let_a", { calcOff: "", unicode: "{U+0430}", combiningForm: "{U+2DF6}", modifierForm: "{U+1E030}", subscriptForm: "{U+1E051}" }, ; а
@@ -13895,16 +14308,46 @@ MapInsert(Characters,
 )
 
 MapInsert(Characters,
-	"kkey_0", { calcOff: "", unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", doubleStruckForm: "{U+1D7D8}", boldForm: "{U+1D7CE}" },
-	"kkey_1", { calcOff: "", unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", doubleStruckForm: "{U+1D7D9}", boldForm: "{U+1D7CF}" },
-	"kkey_2", { calcOff: "", unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", doubleStruckForm: "{U+1D7DA}", boldForm: "{U+1D7D0}" },
-	"kkey_3", { calcOff: "", unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", doubleStruckForm: "{U+1D7DB}", boldForm: "{U+1D7D1}" },
-	"kkey_4", { calcOff: "", unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", doubleStruckForm: "{U+1D7DC}", boldForm: "{U+1D7D2}" },
-	"kkey_5", { calcOff: "", unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", doubleStruckForm: "{U+1D7DD}", boldForm: "{U+1D7D3}" },
-	"kkey_6", { calcOff: "", unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", doubleStruckForm: "{U+1D7DE}", boldForm: "{U+1D7D4}" },
-	"kkey_7", { calcOff: "", unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", doubleStruckForm: "{U+1D7DF}", boldForm: "{U+1D7D5}" },
-	"kkey_8", { calcOff: "", unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", doubleStruckForm: "{U+1D7E0}", boldForm: "{U+1D7D6}" },
-	"kkey_9", { calcOff: "", unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", doubleStruckForm: "{U+1D7E1}", boldForm: "{U+1D7D7}" },
+	"kkey_0", { calcOff: "", unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", doubleStruckForm: "{U+1D7D8}", boldForm: "{U+1D7CE}",
+		sansSerifForm: "{U+1D7E2}",
+		sansSerifBoldForm: "{U+1D7EC}",
+		monospaceForm: "{U+1D7F6}" },
+	"kkey_1", { calcOff: "", unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", doubleStruckForm: "{U+1D7D9}", boldForm: "{U+1D7CF}",
+		sansSerifForm: "{U+1D7E3}",
+		sansSerifBoldForm: "{U+1D7ED}",
+		monospaceForm: "{U+1D7F7}" },
+	"kkey_2", { calcOff: "", unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", doubleStruckForm: "{U+1D7DA}", boldForm: "{U+1D7D0}",
+		sansSerifForm: "{U+1D7E4}",
+		sansSerifBoldForm: "{U+1D7EE}",
+		monospaceForm: "{U+1D7F8}" },
+	"kkey_3", { calcOff: "", unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", doubleStruckForm: "{U+1D7DB}", boldForm: "{U+1D7D1}",
+		sansSerifForm: "{U+1D7E5}",
+		sansSerifBoldForm: "{U+1D7EF}",
+		monospaceForm: "{U+1D7F9}" },
+	"kkey_4", { calcOff: "", unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", doubleStruckForm: "{U+1D7DC}", boldForm: "{U+1D7D2}",
+		sansSerifForm: "{U+1D7E6}",
+		sansSerifBoldForm: "{U+1D7F0}",
+		monospaceForm: "{U+1D7FA}" },
+	"kkey_5", { calcOff: "", unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", doubleStruckForm: "{U+1D7DD}", boldForm: "{U+1D7D3}",
+		sansSerifForm: "{U+1D7E7}",
+		sansSerifBoldForm: "{U+1D7F1}",
+		monospaceForm: "{U+1D7FB}" },
+	"kkey_6", { calcOff: "", unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", doubleStruckForm: "{U+1D7DE}", boldForm: "{U+1D7D4}",
+		sansSerifForm: "{U+1D7E8}",
+		sansSerifBoldForm: "{U+1D7F2}",
+		monospaceForm: "{U+1D7FC}" },
+	"kkey_7", { calcOff: "", unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", doubleStruckForm: "{U+1D7DF}", boldForm: "{U+1D7D5}",
+		sansSerifForm: "{U+1D7E9}",
+		sansSerifBoldForm: "{U+1D7F3}",
+		monospaceForm: "{U+1D7FD}" },
+	"kkey_8", { calcOff: "", unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", doubleStruckForm: "{U+1D7E0}", boldForm: "{U+1D7D6}",
+		sansSerifForm: "{U+1D7EA}",
+		sansSerifBoldForm: "{U+1D7F4}",
+		monospaceForm: "{U+1D7FE}" },
+	"kkey_9", { calcOff: "", unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", doubleStruckForm: "{U+1D7E1}", boldForm: "{U+1D7D7}",
+		sansSerifForm: "{U+1D7EB}",
+		sansSerifBoldForm: "{U+1D7F5}",
+		monospaceForm: "{U+1D7FF}" },
 	"kkey_minus", { calcOff: "", unicode: "{U+002D}", sup: "num_sup_minus", sub: "num_sub_minus" },
 	"kkey_equals", { calcOff: "", unicode: "{U+003D}", sup: "num_sup_equals", sub: "num_sub_equals" },
 	"kkey_asterisk", { calcOff: "", unicode: "{U+002A}" },
@@ -14340,7 +14783,7 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 		}
 
-		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold"]
+		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
 
 		for alteration in Alterations {
 			if HasProp(value, alteration "Form") {
@@ -14950,63 +15393,71 @@ PasteUnicode(Unicode) {
 	return
 }
 
-InsertUnicodeKey() {
-	PromptValue := IniRead(ConfigFile, "LatestPrompts", "Unicode", "")
-	IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_unicode"), "w256 h92", PromptValue)
+Class CharacterInserter {
 
-	if IB.Result = "Cancel"
-		return
-
-	PromptValue := IB.Value
-	UnicodeCodes := StrSplit(PromptValue, " ")
-
-	try {
-		Output := ""
-		for code in UnicodeCodes {
-			if code != "" {
-				Num := Format("0x" RegExReplace(code, "^(U\+|u\+)", ""), "d")
-				Output .= Chr(Num)
-			}
-		}
-
-		Send(Output)
-		IniWrite(PromptValue, ConfigFile, "LatestPrompts", "Unicode")
-	} catch {
-		MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_unicode"), DSLPadTitle, "Icon!")
+	__New(insertType) {
+		this.insertType := insertType
+		this.lastPrompt := IniRead(ConfigFile, "LatestPrompts", insertType, "")
 	}
-}
 
-InsertAltCodeKey() {
-	PromptValue := IniRead(ConfigFile, "LatestPrompts", "Altcode", "")
-	IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_altcode"), "w256 h92", PromptValue)
-	if IB.Result = "Cancel"
-		return
-	else
-		PromptValue := IB.Value
+	InputDialog(UseHWND := True) {
+		hwnd := WinActive('A')
 
-	AltCodes := StrSplit(PromptValue, " ")
+		IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_" StrLower(this.insertType)), "w256 h92", this.lastPrompt)
+		this.lastPrompt := IB.Value
 
-	try {
-		Output := ""
-		for code in AltCodes {
-			if code != "" {
-				code := RegExReplace(code, "^(Alt\+|alt\+)", "")
-				if (IsInteger(code)) {
-					Output .= "{ASC " code "}"
-				} else {
-					MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_altcode"), DSLPadTitle, "Icon!")
-					return
+		if IB.Result = "Cancel"
+			return
+
+		output := ""
+		try {
+
+			splittedPrompt := StrSplit(this.lastPrompt, " ")
+			for charCode in splittedPrompt {
+				if charCode != "" {
+					charCode := RegExReplace(charCode, "^(U\+|u\+|Alt\+|alt\+)", "")
+
+					if !%this.insertType%Validate(charCode)
+						throw
+
+					output .= %this.insertType%(charCode)
+
 				}
 			}
+			IniWrite(this.lastPrompt, ConfigFile, "LatestPrompts", this.insertType)
+		} catch {
+			MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_" StrLower(this.insertType)), DSLPadTitle, "Icon!")
+			return
 		}
 
-		Send(Output)
-		IniWrite(PromptValue, ConfigFile, "LatestPrompts", "Altcode")
-	} catch {
-		MsgBox(ReadLocale("message_wrong_format") "`n" ReadLocale("message_wrong_format_altcode"), DSLPadTitle, "Icon!")
+		try {
+			if UseHWND && !WinActive('ahk_id ' hwnd) {
+				WinActivate('ahk_id ' hwnd)
+				WinWaitActive(hwnd)
+			}
+
+			Send(output)
+		}
+		return
+
+		Altcode(charCode) {
+			return "{ASC " charCode "}"
+		}
+
+		Unicode(charCode) {
+			charCode := Format("0x" charCode, "d")
+			return Chr(charCode)
+		}
+
+		AltcodeValidate(charCode) {
+			return IsInteger(charCode) && ((RegExMatch(charCode, "^0") ? charCode >= 128 : charCode > 0) && charCode <= 255)
+		}
+
+		UnicodeValidate(charCode) {
+			return RegExMatch(charCode, "^[0-9a-fA-F]+$")
+		}
 	}
 }
-
 
 SwitchQWERTY_YITSUKEN(Script := "Latin") {
 	if (Script == "Latin") {
@@ -15304,6 +15755,7 @@ ToRomanNumeral(IntValue, CapitalLetters := True) {
 	}
 	return RomanStr
 }
+
 SwitchToRoman() {
 	LanguageCode := GetLanguageCode()
 
@@ -15330,9 +15782,397 @@ SendAltNumpad(CharacterCode) {
 	Loop Parse, CharacterCode
 		Send("{Numpad" A_LoopField "}")
 	Send("{Alt Up}")
-
 }
 
+Class TemperatureConversion {
+	#Requires Autohotkey v2.0+
+
+	static scales := {
+		C: [GetChar("celsius"), GetChar("degree") "C"],
+		F: [GetChar("fahrenheit"), GetChar("degree") "F"],
+		K: [GetChar("kelvin"), "K"],
+		R: "R",
+		N: "N",
+		D: "D",
+		H: "H",
+		L: "L",
+		W: "W",
+		ME: "Me",
+		RO: "R" GetChar("lat_s_let_o_solidus_long"),
+		RE: "R" GetChar("lat_s_let_e_acute"),
+	}
+
+	static typographyTypes := Map(
+		"Deutsch", [".,", (T) => RegExReplace(T, "\.,", ".")],
+		"Canada", ["..", (T) => RegExReplace(T, "\.\.", ".")],
+		"Switzerland-Comma", ["''", (T) => RegExReplace(T, "\'\'", ".")],
+		"Switzerland-Dot", ["'", (T) => RegExReplace(T, "\'", ".")],
+		"Russian", [",", (T) => RegExReplace(T, ",", ".")],
+	)
+
+	static __New() {
+		this.RegistryHotstrings()
+	}
+
+	static RegistryHotstrings() {
+		hsKeys := [
+			'cd', 'cf', 'ck', 'cn', 'cr', "cl", "cw", "cro", "cre", 'ch', ; Celsius
+			'fc', 'fd', 'fk', 'fn', 'fr', 'fl', 'fw', 'fro', 'fre', ; Fahrenheit
+			'kc', 'kd', 'kf', 'kn', 'kr', 'kl', 'kw', 'kro', 'kre', ; Kelvin
+			'nc', 'nd', 'nf', 'nk', 'nr', 'nl', 'nw', 'nro', 'nre', ; Newton
+			'rc', 'rd', 'rf', 'rk', 'rn', 'rl', 'rw', 'rro', 'rre', ; Rankine
+			'dc', 'df', 'dk', 'dn', 'dr', 'dl', 'dw', 'dro', 'dre', ; Delisle
+			'lc', 'lf', 'lk', 'ln', 'lr', 'ld', 'lw', 'lro', 'lre', ; Leiden
+			'wc', 'wf', 'wk', 'wn', 'wr', 'wd', 'wl', 'wro', 'wre', ; Wedgwood
+			'roc', 'rof', 'rok', 'ron', 'ror', 'rod', 'rol', 'row', 'rore', ; Romer
+			'rec', 'ref', 'rek', 'ren', 'rer', 'red', 'rel', 'rew', 'rero', ; Reaumur
+			'hc', ; Hooke
+			'mec', 'cme', 'mek', 'kme', ; Special Custom, Mercuric
+		]
+
+		callback := ObjBindMethod(this, 'Converter')
+
+		for hsKey in hsKeys {
+			HotString(":C?0:ct" hsKey, callback)
+		}
+	}
+
+	static Converter(conversionType) {
+		hwnd := WinActive('A')
+
+		conversionFromTo := RegExReplace(conversionType, "^.*t", "")
+
+		labelFrom := (RegExMatch(conversionFromTo, "^ro|^re|^me")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
+		labelTo := (RegExMatch(conversionFromTo, "ro$|re$|me$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
+
+
+		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]"
+
+		CaretTooltip(conversionLabel)
+		numberValue := this.GetNumber(conversionLabel)
+
+		try {
+			regionalType := "English"
+			for region, value in this.typographyTypes {
+				if InStr(numberValue, value[1]) {
+					numberValue := value[2](numberValue)
+					regionalType := region
+					break
+				}
+			}
+
+			numberValue := %conversionFromTo%(StrReplace(numberValue, GetChar("minus"), "-"))
+
+			(SubStr(numberValue, 1, 1) = "-") ? (numberValue := SubStr(numberValue, 2), negativePoint := True) : (negativePoint := False)
+
+			temperatureValue := this.PostFormatting(numberValue, labelTo, negativePoint, regionalType)
+
+			if !WinActive('ahk_id ' hwnd) {
+				WinActivate('ahk_id ' hwnd)
+				WinWaitActive(hwnd)
+			}
+
+			SendText(temperatureValue)
+		} catch {
+			SendText(RegExReplace(conversionType, "^.*?:.*?:", ""))
+		}
+		return
+
+		; Celsius
+		CF(G) => (G * 9 / 5) + 32
+		CK(G) => G + 273.15
+		CR(G) => (G + 273.15) * 1.8
+		CN(G) => G * 33 / 100
+		CD(G) => (100 - G) * 3 / 2
+		CH(G) => G * 5 / 12
+		CL(G) => G + 253
+		CW(G) => (G / 24.857191) - 10.821818
+		CRO(G) => (G / 1.904762) + 7.5
+		CRE(G) => G / 1.25
+
+		; Fahrenheit
+		FC(G) => (G - 32) * 5 / 9
+		FK(G) => (G - 32) * 5 / 9 + 273.15
+		FR(G) => G + 459.67
+		FN(G) => (G - 32) * 11 / 60
+		FD(G) => (212 - G) * 5 / 6
+		FL(G) => (G / 1.8) + 235.222222
+		FW(G) => (G / 44.742943) - 11.537015
+		FRO(G) => (G / 3.428571) - 1.833333
+		FRE(G) => (G / 2.25) - 14.222222
+
+		; Kelvin
+		KC(G) => G - 273.15
+		KF(G) => (G - 273.15) * 9 / 5 + 32
+		KR(G) => G * 1.8
+		KN(G) => (G - 273.15) * 33 / 100
+		KD(G) => (373.15 - G) * 3 / 2
+		KL(G) => G - 20.15
+		KW(G) => (G / 24.857191) - 21.81059
+		KRO(G) => (G / 1.904762) - 135.90375
+		KRE(G) => (G / 1.25) - 218.52
+
+		; Rankine
+		RC(G) => (G / 1.8) - 273.15
+		RF(G) => G - 459.67
+		RK(G) => G / 1.8
+		RN(G) => (G / 1.8 - 273.15) * 33 / 100
+		RD(G) => (671.67 - G) * 5 / 6
+		RL(G) => (G / 1.8) - 20.15
+		RW(G) => (G / 44.742943) - 21.81059
+		RRO(G) => (G / 3.428571) - 135.90375
+		RRE(G) => (G / 2.25) - 218.52
+
+		; Newton
+		NC(G) => G * 100 / 33
+		NF(G) => (G * 60 / 11) + 32
+		NK(G) => (G * 100 / 33) + 273.15
+		NR(G) => (G * 100 / 33 + 273.15) * 1.8
+		ND(G) => (33 - G) * 50 / 11
+		NL(G) => (3.030303 * G) + 253
+		NW(G) => (G / 8.202873) - 10.821818
+		NRO(G) => (1.590909 * G) + 7.5
+		NRE(G) => 2.424242 * G
+
+		; Delisle
+		DC(G) => 100 - (G * 2 / 3)
+		DF(G) => 212 - (G * 6 / 5)
+		DK(G) => 373.15 - (G * 2 / 3)
+		DR(G) => 671.67 - (G * 6 / 5)
+		DN(G) => 33 - (G * 11 / 50)
+		DL(G) => (-G / 1.5) + 353
+		DW(G) => (-G / 37.285786) - 6.798838
+		DRO(G) => (-G / 2.857143) + 60
+		DRE(G) => (-G / 1.875) + 80
+
+		; Hooke
+		HC(G) => (G * 12 / 5)
+
+		; Leiden
+		LC(G) => G - 253
+		LF(G) => (1.8 * G) - 423.4
+		LK(G) => G + 20.15
+		LR(G) => (1.8 * G) + 36.27
+		LN(G) => (G / 3.030303) - 83.49
+		LD(G) => (-1.5 * G) + 529.5
+		LW(G) => (G / 24.857191) - 21
+		LRO(G) => (G / 1.904762) - 125.325
+		LRE(G) => (G / 1.25) - 202.4
+
+		; Wedgwood
+		WC(G) => (24.857191 * G) + 269
+		WF(G) => (44.742943 * G) + 516.2
+		WK(G) => (24.857191 * G) + 542.15
+		WR(G) => (44.742943 * G) + 975.87
+		WD(G) => (-37.285786 * G) - 253.5
+		WN(G) => (8.202873 * G) + 88.77
+		WL(G) => (24.857191 * G) + 522
+		WRO(G) => (13.050025 * G) + 148.725
+		WRE(G) => (19.885753 * G) + 215.2
+
+		; Romer
+		ROC(G) => (1.904762 * G) - 14.285714
+		ROF(G) => (3.428571 * G) + 6.285714
+		ROK(G) => (1.904762 * G) + 258.864286
+		ROR(G) => (3.428571 * G) + 465.955714
+		RON(G) => (G / 1.590909) - 4.714286
+		ROD(G) => (-2.857143 * G) + 171.428571
+		ROL(G) => (1.904762 * G) + 238.7142861
+		ROW(G) => (G / 13.050025) - 11.39653
+		RORE(G) => (1.52381 * G) - 11.428571
+
+		; Reaumur
+		REC(G) => 1.25 * G
+		REF(G) => (2.25 * G) + 32
+		REK(G) => (1.25 * G) + 273.15
+		RER(G) => (2.25 * G) + 491.67
+		REN(G) => G / 2.424242
+		RED(G) => (-1.875 * G) + 150
+		REL(G) => (1.25 * G) + 253
+		REW(G) => (G / 19.885753) - 10.821818
+		RERO(G) => (G / 1.52381) + 7.5
+
+		; Special Custom, Mercuric
+		MEC(G) => (G / 100) * 395.56 - 38.83
+		MEK(G) => (G / 100) * 395.56 + 234.32
+		CME(G) => (G + 38.83) * 100 / 395.56
+		KME(G) => (G - 234.32) * 100 / 395.56
+	}
+
+	static GetNumber(conversionLabel) {
+		static validator := "v1234567890,.-'" GetChar("minus")
+		static expression := "^[1234567890,.'\- " GetChar("minus") "]+$"
+
+		numberValue := ""
+
+		PH := InputHook("L0", "{Escape}")
+		PH.Start()
+
+		Loop {
+			IH := InputHook("L1", "{Escape}{Backspace}")
+			IH.Start(), IH.Wait()
+
+			if (IH.EndKey = "Escape") {
+				numberValue := ""
+				break
+			} else if (IH.EndKey = "Backspace") {
+				if StrLen(numberValue) > 0
+					numberValue := SubStr(numberValue, 1, -1)
+			} else if InStr(validator, IH.Input) {
+				if InStr(IH.Input, "v") {
+					ClipWait(0.5, 1)
+					if RegExMatch(A_Clipboard, expression) {
+						numberValue .= A_Clipboard
+					}
+				} else
+					numberValue .= IH.Input
+			} else break
+
+			CaretTooltip(conversionLabel " " numberValue)
+		}
+
+		ToolTip()
+
+		PH.Stop()
+
+		return numberValue
+	}
+
+	static PostFormatting(temperatureValue, scale, negativePoint := False, regionalType := "English") {
+		chars := {
+			numberSpace: GetChar(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace")),
+			degreeSpace: GetChar(IniRead(ConfigFile, "CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space")),
+		}
+
+		isDedicatedUnicodeChars := IniRead(ConfigFile, "Settings", "TemperatureCalcDedicatedUnicodeChars", "True") = "True"
+		isExtendedFormattingEnabled := IniRead(ConfigFile, "Settings", "TemperatureCalcExtendedFormatting", "True") = "True"
+		extendedFormattingFromCount := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"))
+		calcRoundValue := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcRoundValue", "2"))
+
+		if !(GetKeyState("CapsLock", "T"))
+			temperatureValue := Round(temperatureValue, Integer(calcRoundValue))
+
+		if (Mod(temperatureValue, 1) = 0)
+			temperatureValue := Round(temperatureValue)
+
+		if (regionalType = "Russian" || regionalType = "Deutsch" || regionalType = "Switzerland-Comma")
+			temperatureValue := RegExReplace(temperatureValue, "\.", ",")
+
+		integerPart := RegExReplace(temperatureValue, "(\..*)|([,].*)", "")
+
+		if (isExtendedFormattingEnabled && StrLen(integerPart) >= extendedFormattingFromCount) {
+			decimalSeparators := Map(
+				"English", ",",
+				"Deutsch", ".",
+				"Russian", chars.numberSpace,
+				"Canada", chars.numberSpace,
+				"Switzerland-Comma", GetChar("quote_right_single"),
+				"Switzerland-Dot", GetChar("quote_right_single"),
+			)
+
+			integerPart := RegExReplace(integerPart, "\B(?=(\d{3})+(?!\d))", decimalSeparators[regionalType])
+			temperatureValue := RegExReplace(temperatureValue, "^\d+", integerPart)
+		}
+
+		temperatureValue := (negativePoint ? GetChar("minus") : "") temperatureValue chars.degreeSpace (IsObject(this.scales.%scale%) ? (isDedicatedUnicodeChars ? this.scales.%scale%[1] : this.scales.%scale%[2]) : GetChar("degree") this.scales.%scale%)
+		return temperatureValue
+	}
+}
+
+favoriteCharsList := Map()
+
+Class FavoriteChars {
+
+	static favesPath := A_ScriptDir "/FavoriteChars.txt"
+
+	static __New() {
+		if !FileExist(this.favesPath) {
+			FileAppend("", this.favesPath, "UTF-8")
+		}
+
+		this.UpdateVar()
+	}
+
+	static Add(fave) {
+		newContent := ""
+		alreadyExists := false
+
+		for line in this.ReadList() {
+			if line == fave {
+				alreadyExists := true
+			}
+			newContent .= line "`n"
+		}
+
+		if !alreadyExists {
+			newContent .= fave "`n"
+		}
+
+		FileDelete(this.favesPath)
+		FileAppend(Sort(RTrim(newContent, "`n")), this.favesPath, "UTF-8")
+
+		Sleep 100
+
+		if !favoriteCharsList.Has(fave) {
+			favoriteCharsList.Set(fave, True)
+		}
+	}
+
+	static Remove(fave) {
+		newContent := ""
+		for line in this.ReadList() {
+			if line != fave {
+				newContent .= line "`n"
+			}
+		}
+
+		FileDelete(this.favesPath)
+		FileAppend(RTrim(newContent, "`n"), this.favesPath, "UTF-8")
+
+		Sleep 100
+
+		if favoriteCharsList.Has(fave) {
+			favoriteCharsList.Delete(fave)
+		}
+	}
+
+	static Check(fave) {
+		for line in this.ReadList() {
+			if line == fave {
+				return True
+			}
+		}
+
+		return False
+	}
+
+	static ReadList() {
+		fileContent := FileRead(this.favesPath, "UTF-8")
+		return StrSplit(fileContent, "`n", "`r")
+	}
+
+	static CheckVar(fave) {
+		return favoriteCharsList.Has(fave)
+	}
+
+	static UpdateVar() {
+		global favoriteCharsList
+		faveList := FavoriteChars.ReadList()
+
+		for fave in faveList {
+			favoriteCharsList.Set(fave, True)
+		}
+	}
+}
+
+CaretTooltip(tooltipText) {
+	if CaretGetPos(&x, &y)
+		ToolTip(tooltipText, x, y + 20)
+	else if CaretGetPosAlternative(&x, &y)
+		ToolTip(tooltipText, x, y + 20)
+	else
+		ToolTip(tooltipText)
+}
 
 GREPizeSelection(GetCollaborative := False) {
 	CustomAfterStartEmdash := (IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") : "ensp"
@@ -15662,293 +16502,359 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 	return
 }
 
-Ligaturise(SmeltingMode := "InputBox") {
-	LanguageCode := GetLanguageCode()
-	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
-	ModifiedCharsType := GetModifiedCharsType()
-	BackupClipboard := ""
 
-	Found := False
-	GetUniChar(value) {
-		Output := ""
-		if ModifiedCharsType && HasProp(value, ModifiedCharsType "Form") {
-			if IsObject(value.%ModifiedCharsType%Form) {
-				TempValue := ""
-				for modifier in value.%ModifiedCharsType%Form {
-					TempValue .= PasteUnicode(modifier)
-				}
-				Output := TempValue
-			} else {
-				Output := PasteUnicode(value.%ModifiedCharsType%Form)
-			}
-		} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
-			for unicode in value.uniSequence {
-				Output .= PasteUnicode(unicode)
-			}
-		} else {
-			Output := PasteUnicode(value.unicode)
+Class Ligaturiser {
+
+
+	__New(compositingMode := "InputBox") {
+		this.compositingMode := compositingMode
+		this.modifiedCharsType := GetModifiedCharsType()
+
+		this.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
+
+		try {
+			this.%this.compositingMode%Mode()
+		} catch {
+			if this.compositingMode = "InputBox"
+				MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
+			else
+				ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
 		}
-		return Output
 	}
 
-	if (SmeltingMode = "InputBox") {
-		PromptValue := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
-		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", PromptValue)
+	InputBoxMode() {
+		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", this.prompt)
 		if IB.Result = "Cancel"
 			return
 		else
-			PromptValue := IB.Value
-	} else if (SmeltingMode = "Clipboard" || SmeltingMode = "Backspace") {
-		BackupClipboard := A_Clipboard
-		A_Clipboard := ""
+			this.prompt := IB.Value
 
-		if (SmeltingMode = "Backspace") {
-			;Send("^+{Left}")
-			BufferValue := ""
-			Loop 20 {
-				Send("^+{Left}")
-				Sleep 75
-				Send("^c")
-				Sleep 75
-				ClipWait(0.25, 1)
-
-				if (A_Clipboard = BufferValue) {
-					break
+		if this.prompt != "" {
+			try {
+				output := ""
+				for prompt in StrSplit(this.prompt, " ") {
+					output .= this.EntriesWalk(prompt, , True) " "
 				}
 
-				BufferValue := A_Clipboard
+				if output = "" || RegExMatch(output, "^\s+$")
+					throw
 
-				if RegExMatch(A_Clipboard, "(\s|`n|`r|`t)") {
-					Send("^+{Right}")
-					Send("^c")
-					Sleep 75
-					if RegExMatch(A_Clipboard, "(\s|`n|`r|`t)") {
-						Send("+{Right}")
-						Send("^c")
-						Sleep 75
-					}
-					break
-				}
+				output := RegExReplace(output, "\s+$", "")
+				this.SendOutput(RegExReplace(output, "#", ""))
+
+				IniWrite(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), ConfigFile, "LatestPrompts", "Ligature")
+			} catch {
+				throw
 			}
-			Sleep 120
-		}
-		Send("^c")
-		Sleep 120
-		PromptValue := A_Clipboard
-		Sleep 50
-	} else if (SmeltingMode = "Compose") {
-		ShowInfoMessage("message_compose", , , SkipGroupMessage, True)
-
-		ih := InputHook("C")
-		ih.MaxLen := 6
-		ih.Start()
-
-		Input := ""
-		LastInput := ""
-
-		GetUnicodeSymbol := ""
-		IsValidateBreak := False
-		IsSingleCase := False
-		IsCancelledByUser := False
-		IsForceWaiting := False
-
-		Loop {
-			if GetKeyState("Escape", "P") {
-				IsCancelledByUser := True
-				break
-			}
-			if GetKeyState("Pause", "P") {
-				if IsForceWaiting == False {
-					IsForceWaiting := True
-					ShowInfoMessage("message_compose_waiting", , , SkipGroupMessage, True)
-				} else {
-					IsForceWaiting := False
-					LastInput := ""
-				}
-			}
-
-			if IsForceWaiting == True {
-				TempInput := ih.Input
-				Sleep 10
-				continue
-			}
-
-			Input := ih.Input
-			if (Input != LastInput) {
-				LastInput := Input
-				InputValidator := RegExEscape(Input)
-				IsValidateBreak := True
-
-				for validatingValue in RecipeValidatorArray {
-					if (RegExMatch(validatingValue, "^" . InputValidator)) {
-						IsValidateBreak := False
-						break
-					}
-				}
-
-				if IsValidateBreak {
-					for validatingValue in RecipeValidatorArray {
-						if (RegExMatch(StrLower(validatingValue), "^" . StrLower(InputValidator))) {
-							IsSingleCase := True
-							IsValidateBreak := False
-							break
-						}
-					}
-				}
-
-				for chracterEntry, value in Characters {
-					if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
-						continue
-					} else {
-						Recipe := value.recipe
-
-						if IsObject(Recipe) {
-							for _, recipeEntry in Recipe {
-								if (!IsSingleCase && Input == recipeEntry) ||
-								(IsSingleCase && Input = recipeEntry) {
-									if InputMode = "HTML" && HasProp(value, "html") {
-										GetUnicodeSymbol :=
-											(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? value.%ModifiedCharsType%HTML :
-												(value.HasProp("entity") ? value.entity : value.html)
-									} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-										GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
-									} else {
-										GetUnicodeSymbol := GetUniChar(value)
-									}
-									IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
-									Found := True
-									break 3
-								}
-							}
-						} else if (!IsSingleCase && Input == Recipe) || (IsSingleCase && Input = Recipe) {
-							if InputMode = "HTML" && HasProp(value, "html") {
-								GetUnicodeSymbol :=
-									(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? value.%ModifiedCharsType%HTML :
-										(value.HasProp("entity") ? value.entity : value.html)
-							} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-								GetUnicodeSymbol := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
-							} else {
-								GetUnicodeSymbol := GetUniChar(value)
-							}
-							IniWrite(ConvertToHexaDecimal(Input), ConfigFile, "LatestPrompts", "Ligature")
-							Found := True
-							break 2
-						}
-					}
-				}
-			}
-
-			if (StrLen(Input) >= 6 || IsValidateBreak) {
-				break
-			}
-
-			Sleep 10
-		}
-
-		ih.Stop()
-		if (!Found && !IsCancelledByUser) {
-			if (SmeltingMode = "Compose") {
-				ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
-			} else {
-				MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
-			}
-		} else {
-			SendText(GetUnicodeSymbol)
 		}
 
 		return
 	}
 
-	OriginalValue := PromptValue
-	NewValue := ""
+	ComposeMode() {
 
-	for chracterEntry, value in Characters {
-		if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
-			continue
-		} else {
-			Recipe := value.recipe
+		output := ""
+		input := ""
+		tooltipSuggestions := ""
+		favoriteSuggestions := this.ReadFavorites()
+		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
 
-			if IsObject(Recipe) {
-				for _, recipe in Recipe {
-					if (recipe == PromptValue) {
-						if InputMode = "HTML" && HasProp(value, "html") {
-							(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? SendText(value.%ModifiedCharsType%HTML) :
-								value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
+		pauseOn := False
 
-						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-							SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
-						} else {
-							SendText(GetUniChar(value))
-						}
-						IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
-						Found := True
+		PH := InputHook("L0", "{Escape}")
+		PH.Start()
+
+		CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions))
+
+		Loop {
+
+			IH := InputHook("L1", "{Escape}{Backspace}{Enter}{Pause}{Tab}")
+			IH.Start(), IH.Wait()
+
+			if (IH.EndKey = "Escape") {
+				input := ""
+				break
+
+			} else if (IH.EndKey = "Pause") {
+				pauseOn := pauseOn ? False : True
+
+			} else if (IH.EndKey = "Backspace") {
+				if StrLen(input) > 0
+					input := SubStr(input, 1, -1)
+
+			} else if IH.Input != "" {
+				input .= IH.Input
+			}
+
+			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.EntriesWalk(input, True)) : ""
+
+
+			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+
+			if !pauseOn || (IH.EndKey = "Enter") {
+				try {
+					intermediateValue := this.EntriesWalk(RegExReplace(input, "^\(\~\)\s", ""), , RegExMatch(input, "^\(\~\)\s"))
+					if intermediateValue != "" {
+						output := intermediateValue
+						break
 					}
 				}
-			} else if (Recipe == PromptValue) {
-				if InputMode = "HTML" && HasProp(value, "html") {
-					(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? SendText(value.%ModifiedCharsType%HTML) :
-						value.HasProp("entity") ? SendText(value.entity) : SendText(value.html)
-				} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-					SendText(IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX)
-
-				} else {
-					SendText(GetUniChar(value))
-				}
-				IniWrite(ConvertToHexaDecimal(PromptValue), ConfigFile, "LatestPrompts", "Ligature")
-				Found := True
 			}
 		}
+
+		PH.Stop()
+
+		if output = "N/A" {
+			CaretTooltip(Chr(0x26A0) " " ReadLocale("warning_recipe_absent"))
+			SetTimer(Tooltip, -1000)
+
+		} else {
+			CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " this.FormatSingleString(output))
+			SetTimer(Tooltip, -500)
+			this.SendOutput(RegExReplace(output, "#", ""))
+		}
+		return
 	}
 
-	if (!Found) {
-		SplitWords := StrSplit(OriginalValue, " ")
+	SendOutput(output) {
+		if StrLen(output) > 36 {
+			clipboardBackup := A_Clipboard
+			A_Clipboard := output
+			ClipWait(0.5, 1)
+			Send("^v")
 
-		for i, word in SplitWords {
-			TempValue := word
-			for chracterEntry, value in Characters {
+			Sleep(500)
+			A_Clipboard := clipboardBackup
+
+		} else
+			SendText(output)
+	}
+
+	EntriesWalk(prompt, getSuggestions := False, breakSkip := False) {
+		promptBackup := prompt
+		output := ""
+
+		promptValidator := RegExEscape(prompt)
+		breakValidate := True
+		monoCaseRecipe := False
+
+		charFound := False
+
+		for validatingValue in RecipeValidatorArray {
+			if (RegExMatch(validatingValue, "^" promptValidator)) {
+				breakValidate := False
+				break
+			}
+		}
+
+		if breakValidate {
+			for validatingValue in RecipeValidatorArray {
+				if (RegExMatch(StrLower(validatingValue), "^" StrLower(promptValidator))) {
+					monoCaseRecipe := True
+					breakValidate := False
+					break
+				}
+			}
+		}
+
+		if breakValidate && !breakSkip
+			return "N/A"
+
+		for characterEntry, value in Characters {
+			if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+				continue
+			} else {
+				recipe := value.recipe
+
+				if IsObject(recipe) {
+					for _, recipeEntry in recipe {
+						if (getSuggestions && RegExMatch(recipeEntry, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
+							charFound := True
+
+							if getSuggestions {
+								output .= this.GetRecipesString(value)
+
+							} else {
+								output := this.GetComparedChar(value)
+								break 2
+							}
+						}
+					}
+				} else if (getSuggestions && RegExMatch(recipe, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
+					charFound := True
+
+					if getSuggestions {
+						output .= this.GetRecipesString(value)
+
+					} else {
+						output := this.GetComparedChar(value)
+						break
+					}
+				}
+			}
+		}
+
+		if !charFound {
+			IntermediateValue := prompt
+			for characterEntry, value in Characters {
 				if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
 					continue
 				} else {
-					Recipe := value.recipe
+					recipe := value.recipe
 
-					if IsObject(Recipe) {
-						for _, recipe in Recipe {
-							if InStr(TempValue, recipe, true) {
-								TempValue := StrReplace(TempValue, recipe, value.unicode)
+					if IsObject(recipe) {
+						for _, recipeEntry in recipe {
+							if InStr(IntermediateValue, recipeEntry, true) {
+								IntermediateValue := StrReplace(IntermediateValue, recipeEntry, this.GetComparedChar(value))
 							}
 						}
 					} else {
-						if InStr(TempValue, Recipe, true) {
-							TempValue := StrReplace(TempValue, Recipe, value.unicode)
+						if InStr(IntermediateValue, recipe, true) {
+							IntermediateValue := StrReplace(IntermediateValue, recipe, this.GetComparedChar(value))
 						}
 					}
 				}
 			}
-			NewValue .= TempValue . (i < SplitWords.Length - 0 ? " " : "")
 
+			if IntermediateValue != prompt {
+				output := IntermediateValue
+				charFound := True
+			}
 		}
 
-		NewValue := RTrim(NewValue)
+		return output
+	}
 
-		if (NewValue != OriginalValue) {
-			Send(NewValue)
-			Found := True
+	ReadFavorites() {
+		output := ""
+
+		getList := FavoriteChars.ReadList()
+
+		for line in getList {
+			if StrLen(line) > 0 {
+				characterEntry := Characters[line]
+
+				if !HasProp(characterEntry, "recipe") || (HasProp(characterEntry, "recipe") && characterEntry.recipe == "") {
+					continue
+				} else {
+					output .= this.GetRecipesString(characterEntry)
+				}
+			}
 		}
+
+		if StrLen(output) > 0 {
+			output := this.FormatSuggestions(output)
+		}
+
+		return output
+	}
+
+	FormatSuggestions(suggestions, maxLength := 72) {
+		if suggestions = "N/A"
+			return suggestions
+
+		output := ""
+		currentLine := ""
+		parts := StrSplit(suggestions, "), ")
+
+		uniqueParts := []
+		for index, part in parts {
+			part := part ")"
+
+			isUnique := true
+			for uniquePart in uniqueParts {
+				if (part == uniquePart) {
+					isUnique := false
+					break
+				}
+			}
+
+			if StrLen(part) > 2 && (isUnique) {
+				uniqueParts.Push(part)
+			}
+		}
+
+		for part in uniqueParts {
+			if (StrLen(currentLine) + StrLen(part) + 2 <= maxLength) {
+				currentLine .= part ", "
+			} else {
+				output .= currentLine "`n"
+				currentLine := part ", "
+			}
+		}
+
+		if (currentLine != "") {
+			output .= currentLine
+		}
+
+		output := RegExReplace(output, ",\s$", "")
+
+		return output
 	}
 
 
-	if !Found {
-		if !SmeltingMode = "InputBox" {
-			Send("^{Right}")
-			Sleep 400
-		}
-		MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
+	FormatSingleString(str, maxLength := 32) {
+		return StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ]" : str
 	}
 
-	if (SmeltingMode = "Clipboard" || SmeltingMode = "Backspace") {
-		A_Clipboard := BackupClipboard
+	GetRecipesString(value) {
+		output := ""
+
+		recipe := HasProp(value, "recipeAlt") ? value.recipeAlt : value.recipe
+		uniSequence := this.FormatSingleString(this.GetUniChar(value, True))
+
+		if IsObject(recipe) {
+			intermediateValue := ""
+
+			for _, recipeEntry in recipe {
+				intermediateValue .= " " recipeEntry " |"
+			}
+
+			output .= uniSequence " (" RegExReplace(intermediateValue, "(^\s|\s\|$)", "") "), "
+		} else {
+			output .= uniSequence " (" recipe "), "
+		}
+
+		return output
 	}
-	return
+
+	GetComparedChar(value) {
+		output := ""
+		if InputMode = "HTML" && HasProp(value, "html") {
+			output :=
+				(this.modifiedCharsType && HasProp(value, this.modifiedCharsType "HTML")) ? value.%this.modifiedCharsType%HTML :
+					(value.HasProp("entity") ? value.entity : value.html)
+
+		} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+			output := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
+
+		} else {
+			output := this.GetUniChar(value)
+		}
+		return output
+	}
+
+	GetUniChar(value, forceDefault := False) {
+		output := ""
+		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType "Form") && !forceDefault {
+			if IsObject(value.%this.modifiedCharsType%Form) {
+				TempValue := ""
+				for modifier in value.%this.modifiedCharsType%Form {
+					TempValue .= PasteUnicode(modifier)
+				}
+				output := TempValue
+			} else {
+				output := PasteUnicode(value.%this.modifiedCharsType%Form)
+			}
+		} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
+			for unicode in value.uniSequence {
+				output .= PasteUnicode(unicode)
+			}
+		} else {
+			output := PasteUnicode(value.unicode)
+		}
+		return output
+	}
 }
 
 GroupActivator(GroupName, KeyValue := "") {
@@ -16065,7 +16971,7 @@ ConvertFromHexaDecimal(StringInput) {
 }
 
 RegExEscape(str) {
-	static specialChars := "\.*+?^${}()[]|/"
+	static specialChars := "\.-*+?^${}()[]|/"
 
 	newStr := ""
 	for k, char in StrSplit(str) {
@@ -16412,6 +17318,7 @@ Constructor() {
 		"IPA", ReadLocale("symbol_ipa"),
 		"Fake Math", RightControl RightShift " 0",
 		"Mathematical", ReadLocale("symbol_maths"),
+		"Math", "",
 		"Math Spaces", "",
 	]
 
@@ -16559,13 +17466,12 @@ Constructor() {
 	Command_disable := CommandsTree.Add(ReadLocale("func_label_disable"))
 	Command_gotopage := CommandsTree.Add(ReadLocale("func_label_gotopage"))
 	Command_selgoto := CommandsTree.Add(ReadLocale("func_label_selgoto"))
+	Command_copylist := CommandsTree.Add(ReadLocale("func_label_favorites"))
 	Command_copylist := CommandsTree.Add(ReadLocale("func_label_copylist"))
 	Command_tagsearch := CommandsTree.Add(ReadLocale("func_label_tagsearch"))
 	Command_uninsert := CommandsTree.Add(ReadLocale("func_label_uninsert"))
 	Command_altcode := CommandsTree.Add(ReadLocale("func_label_altcode"))
 	Command_smelter := CommandsTree.Add(ReadLocale("func_label_smelter"), , "Expand")
-	Command_smelter_sel := CommandsTree.Add(ReadLocale("func_label_smelter_sel"), Command_Smelter)
-	Command_smelter_carr := CommandsTree.Add(ReadLocale("func_label_smelter_carr"), Command_Smelter)
 	Command_compose := CommandsTree.Add(ReadLocale("func_label_compose"), Command_smelter)
 	Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
 	Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
@@ -16575,12 +17481,15 @@ Constructor() {
 	Command_oldturkic := CommandsTree.Add(ReadLocale("func_label_old_permic_old_turkic"), Command_extralayouts)
 	Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_old_hungarian"), Command_extralayouts)
 	Command_gothic := CommandsTree.Add(ReadLocale("func_label_gothic"), Command_extralayouts)
+	Command_func_label_maths := CommandsTree.Add(ReadLocale("func_label_maths"), Command_extralayouts)
 	Command_func_label_ipa := CommandsTree.Add(ReadLocale("func_label_ipa"), Command_extralayouts)
-	Command_combining := CommandsTree.Add(ReadLocale("func_label_alterations"))
-	Command_combining_combining := CommandsTree.Add(ReadLocale("func_label_alterations_combining"), Command_combining)
-	Command_combining_modifier := CommandsTree.Add(ReadLocale("func_label_alterations_modifier"), Command_combining)
-	Command_combining_italic_to_bold := CommandsTree.Add(ReadLocale("func_label_alterations_italic_to_bold"), Command_combining)
-	Command_combining_fraktur_script_struck := CommandsTree.Add(ReadLocale("func_label_alterations_fraktur_script_struck"), Command_combining)
+	Command_alterations := CommandsTree.Add(ReadLocale("func_label_alterations"))
+	Command_alterations_combining := CommandsTree.Add(ReadLocale("func_label_alterations_combining"), Command_alterations)
+	Command_alterations_modifier := CommandsTree.Add(ReadLocale("func_label_alterations_modifier"), Command_alterations)
+	Command_alterations_italic_to_bold := CommandsTree.Add(ReadLocale("func_label_alterations_italic_to_bold"), Command_alterations)
+	Command_alterations_fraktur_script_struck := CommandsTree.Add(ReadLocale("func_label_alterations_fraktur_script_struck"), Command_alterations)
+	Command_alterations_sans_serif := CommandsTree.Add(ReadLocale("func_label_alterations_sans_serif"), Command_alterations)
+	Command_alterations_monospace := CommandsTree.Add(ReadLocale("func_label_alterations_monospace"), Command_alterations)
 	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_input_toggle"))
 	Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layout_toggle"))
 	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifications"))
@@ -16977,6 +17886,7 @@ PopulateListView(LV, DataList) {
 		LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 	}
 }
+
 FilterListView(GuiFrame, FilterField, LV, DataList) {
 	FilterText := StrLower(GuiFrame[FilterField].Text)
 	LV.Delete()
@@ -16987,10 +17897,16 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 		GroupStarted := False
 		PreviousGroupName := ""
 		for item in DataList {
-			if StrLower(item[1]) = "" {
+			ItemText := StrLower(item[1])
+
+			IsFavorite := (ItemText ~= "\Q★")
+			IsMatch := InStr(ItemText, FilterText)
+			|| (IsFavorite && (InStr("избранное", FilterText) || InStr("favorite", FilterText)))
+
+			if ItemText = "" {
 				LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 				GroupStarted := true
-			} else if InStr(StrLower(item[1]), FilterText) {
+			} else if IsMatch {
 				if !GroupStarted {
 					GroupStarted := true
 				}
@@ -16999,8 +17915,8 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 				GroupStarted := False
 			}
 
-			if StrLower(item[1]) != "" and StrLower(item[1]) != PreviousGroupName {
-				PreviousGroupName := StrLower(item[1])
+			if ItemText != "" and ItemText != PreviousGroupName {
+				PreviousGroupName := ItemText
 			}
 		}
 
@@ -17013,6 +17929,7 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 		}
 	}
 }
+
 
 GetRandomByGroups(GroupNames) {
 	TemporaryStorage := []
@@ -17272,13 +18189,12 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_disable",
 		"func_label_gotopage",
 		"func_label_selgoto",
+		"func_label_favorites",
 		"func_label_copylist",
 		"func_label_tagsearch",
 		"func_label_uninsert",
 		"func_label_altcode",
 		"func_label_smelter",
-		"func_label_smelter_sel",
-		"func_label_smelter_carr",
 		"func_label_compose",
 		"func_label_num_superscript",
 		"func_label_num_roman",
@@ -17289,10 +18205,13 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_alterations_modifier",
 		"func_label_alterations_italic_to_bold",
 		"func_label_alterations_fraktur_script_struck",
+		"func_label_alterations_sans_serif",
+		"func_label_alterations_monospace",
 		"func_label_glagolitic_futhark",
 		"func_label_old_permic_old_turkic",
 		"func_label_old_hungarian",
 		"func_label_gothic",
+		"func_label_maths",
 		"func_label_ipa",
 		"func_label_input_toggle",
 		"func_label_layout_toggle",
@@ -17326,22 +18245,28 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 
 }
 LV_CharacterDetails(LV, RowNumber, SetupArray) {
+	EntryTitle := LV.GetText(RowNumber, 1)
 	;UnicodeKey := LV.GetText(RowNumber, 4)
 	EntryIDKey := LV.GetText(RowNumber, 5)
 	EntryNameKey := LV.GetText(RowNumber, 6)
+
 	SetCharacterInfoPanel(EntryIDKey, EntryNameKey,
 		SetupArray[1], SetupArray[2], SetupArray[3],
 		SetupArray[4], SetupArray[5], SetupArray[6],
 		SetupArray[7], SetupArray[8], SetupArray[9],
 		SetupArray[10], SetupArray[11], SetupArray.Has(12) ? SetupArray[12] : "")
 }
+
 LV_OpenUnicodeWebsite(LV, RowNumber) {
+	EntryTitle := LV.GetText(RowNumber, 1)
 	SelectedRow := LV.GetText(RowNumber, 4)
+
 	URIComponent := FindCharacterPage(SelectedRow, True)
 	if (SelectedRow != "") {
-		IsCtrlDown := GetKeyState("LControl")
+		isCtrlDown := GetKeyState("LControl")
+		isShiftDown := GetKeyState("LShift")
 		ModifiedCharsType := GetModifiedCharsType()
-		if (IsCtrlDown) {
+		if (isCtrlDown) {
 			if (InputMode = "HTML" || InputMode = "LaTeX") {
 				for characterEntry, value in Characters {
 					if (SelectedRow = UniTrim(value.unicode)) {
@@ -17361,8 +18286,21 @@ LV_OpenUnicodeWebsite(LV, RowNumber) {
 
 
 			SoundPlay("C:\Windows\Media\Speech On.wav")
-		}
-		else {
+		} else if isShiftDown {
+			for characterEntry, value in Characters {
+				if (SelectedRow = UniTrim(value.unicode)) {
+					if !FavoriteChars.CheckVar(characterEntry) {
+						FavoriteChars.Add(characterEntry)
+						LV.Modify(RowNumber, , EntryTitle " " Chr(0x2605))
+					} else {
+						FavoriteChars.Remove(characterEntry)
+						LV.Modify(RowNumber, , StrReplace(EntryTitle, " " Chr(0x2605)))
+					}
+				}
+			}
+
+			SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
+		} else {
 			Run(URIComponent)
 		}
 	}
@@ -17597,6 +18535,14 @@ GetCharacterSequence(CharacterName) {
 		}
 	}
 	return Output
+}
+
+CapsSeparatedCall(DefaultAction, AdvancedAction) {
+	if (GetKeyState("CapsLock", "T")) {
+		AdvancedAction()
+	} else {
+		DefaultAction()
+	}
 }
 
 CapsSeparatedKey(Combo, CapitalCharacter, SmallCharacter, Reverse := False) {
@@ -18195,7 +19141,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!", ["lat_c_let_c_dot_above", "lat_s_let_c_dot_above"],
 			"<^>!<!", ["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"],
 			"<^>!<!<+", ["lat_c_let_c_caron", "lat_s_let_c_caron"],
-			"<^>!<!>+", ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"]),
+			"<^>!<!>+", ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"],
+			"Flat:>+", "celsius"),
 			"D", Map(
 				"<^>!", ["lat_c_let_d_eth", "lat_s_let_d_eth"],
 				"<^>!<!", ["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"],
@@ -18213,14 +19160,16 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">+", ["lat_c_let_e_grave", "lat_s_let_e_grave"],
 			"<+>+", ["lat_c_let_e_grave_double", "lat_s_let_e_grave_double"]),
 			"F", Map(
-				"<^>!", ["lat_c_let_f_dot_above", "lat_s_let_f_dot_above"]),
+				"<^>!", ["lat_c_let_f_dot_above", "lat_s_let_f_dot_above"],
+				"Flat:>+", "fahrenheit"),
 			"G", Map("<!", ["lat_c_let_g_acute", "lat_s_let_g_acute"],
 			"<^>!", ["lat_c_let_g_breve", "lat_s_let_g_breve"],
 			"<^>!<!", ["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"],
 			"<^>!<!<+", ["lat_c_let_g_caron", "lat_s_let_g_caron"],
 			"<^>!<!>+", ["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"],
 			"<^>!<+", ["lat_c_let_g_insular", "lat_s_let_g_insular"],
-			"<^>!>+", ["lat_c_let_g_macron", "lat_s_let_g_macron"]),
+			"<^>!>+", ["lat_c_let_g_macron", "lat_s_let_g_macron"],
+			"<^>!<+>+", ["lat_c_let_gamma", "lat_s_let_gamma"]),
 			"H", Map("<!", ["lat_c_let_h_hwair", "lat_s_let_h_hwair"],
 			"<^>!", ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"],
 			"<^>!<!", ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"],
@@ -18245,7 +19194,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"K", Map("<!", ["lat_c_let_k_acute", "lat_s_let_k_acute"],
 			"<^>!<!", ["lat_c_let_k_dot_below", "lat_s_let_k_dot_below"],
 			"<^>!<!<+", ["lat_c_let_k_caron", "lat_s_let_k_caron"],
-			"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"]),
+			"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"],
+			"Flat:>+", "kelvin"),
 			"L", Map("<!", ["lat_c_let_l_acute", "lat_s_let_l_acute"],
 			"<^>!", ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"],
 			"<^>!<!<+", ["lat_c_let_l_caron", "lat_s_let_l_caron"],
@@ -18415,12 +19365,16 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				;UseKey["Slash"], (K) => TimedKeyCombinations("Slash", UseKey["Equals"], "Off"),
 				UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], "Off"),
 				;
+				"<^>!" UseKey["Numpad0"], (K) => HandleFastKey(K, "empty_set"),
 				"<^<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
 				"<^>!" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_two"),
 				"<^>!>+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterism"),
 				"<^>!<+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_low"),
 				"<^>!" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "dagger"),
 				"<^>!>+" UseKey["NumpadDiv"], (K) => HandleFastKey(K, "dagger_double"),
+			],
+			[
+				"<!>^" UseKey["A"], (K) => HandleFastKey(K, "dagger_double"),
 			])
 
 
@@ -19045,11 +19999,29 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			return (K) => CapsSeparatedKey(K, "lat_c_let_" StrLower(Letter), "lat_s_let_" StrLower(Letter))
 		}
 	} else if Combinations = "Maths" {
-		SlotMapping := Map()
+		SlotMapping := Map(
+			"D", "delta",
+			"I", ["contour_integral", "integral"],
+			"N", "nabla",
+			"L", "gre_s_let_lambda",
+			"P", "gre_s_let_pi",
+			"R", "square_root",
+			"S", "n_ary_summation",
+			"U", "n_ary_union",
+		)
 
 		SlotModdedMapping := Map(
+			"P", Map(
+				"Flat:>+", "n_ary_product",
+			),
 			"Space", Map(
 				"Flat:<!", "medium_math_space",
+			),
+			",", Map(
+				"Flat:>+", "less_or_equals",
+			),
+			".", Map(
+				"Flat:>+", "greater_or_equals",
 			),
 		)
 
@@ -19107,7 +20079,32 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 		LayoutArray := GetBindingsArray(, SlotModdedMapping)
 	} else if Combinations = "Utility" {
-		LayoutArray := [
+		;IsF13F24Enabled := IniRead(ConfigFile, "Settings", "F13F24", "True")
+		IsF13F24Enabled := False ;(IsF13F24Enabled = "True")
+
+		FunctionKeysExtraLayer := []
+
+		if (IsF13F24Enabled) {
+			FunctionKeysBridge(numberValue) {
+				DefaultKey := "F" numberValue
+				AdvancedKey := "F" (numberValue + 12)
+				FunctionKeysExtraLayer.Push(
+					UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{" DefaultKey "}"), (*) => Send("{" AdvancedKey "}")),
+					;"+" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Shift}{" DefaultKey "}"), (*) => Send("{Shift}{" AdvancedKey "}")),
+					;"^" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Ctrl}{" DefaultKey "}"), (*) => Send("{Ctrl}{" AdvancedKey "}")),
+					;"!" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{Alt}{" DefaultKey "}"), (*) => Send("{Alt}{" AdvancedKey "}")),
+					;"<#" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{LWin}{" DefaultKey "}"), (*) => Send("{LWin}{" AdvancedKey "}")),
+					;">#" UseKey[DefaultKey], (*) => CapsSeparatedCall((*) => Send("{RWin}{" DefaultKey "}"), (*) => Send("{RWin}{" AdvancedKey "}")),
+				)
+			}
+
+			for numberValue in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] {
+				FunctionKeysBridge(numberValue)
+			}
+		}
+
+		LayoutArray := ArrayMerge(FunctionKeysExtraLayer, [
+			;
 			"<#<!" UseKey["F1"], (*) => GroupActivator("Diacritics Primary", "F1"),
 			"<#<!" UseKey["F2"], (*) => GroupActivator("Diacritics Secondary", "F2"),
 			"<#<!" UseKey["F3"], (*) => GroupActivator("Diacritics Tertiary", "F3"),
@@ -19118,11 +20115,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Apostrophe"], (*) => GroupActivator("Quotes", "'"),
 			;
 			"<#<!" UseKey["F"], (*) => SearchKey(),
-			"<#<!" UseKey["U"], (*) => InsertUnicodeKey(),
-			"<#<!" UseKey["A"], (*) => InsertAltCodeKey(),
-			"<#<!" UseKey["L"], (*) => Ligaturise(),
-			">+" UseKey["L"], (*) => Ligaturise("Clipboard"),
-			">+" UseKey["Backspace"], (*) => Ligaturise("Backspace"),
+			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
+			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
+			"<#<!" UseKey["L"], (*) => Ligaturiser(),
 			">^" UseKey["H"], (*) => TranslateSelectionToHTML("Entities"),
 			">^" UseKey["J"], (*) => TranslateSelectionToHTML("Entities", True),
 			">^>+" UseKey["H"], (*) => TranslateSelectionToHTML(),
@@ -19137,18 +20132,25 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
-			"<^>!" UseKey["F2"], (*) => SetModifiedCharsInput(),
-			"<^>!" UseKey["F3"], (*) => SetModifiedCharsInput("modifier"),
-			"<^>!>+" UseKey["F3"], (*) => SetModifiedCharsInput("subscript"),
-			"<^>!" UseKey["F5"], (*) => SetModifiedCharsInput("italic"),
-			"<^>!>+" UseKey["F5"], (*) => SetModifiedCharsInput("italicBold"),
-			"<^>!<+" UseKey["F5"], (*) => SetModifiedCharsInput("bold"),
-			"<^>!" UseKey["F6"], (*) => SetModifiedCharsInput("fraktur"),
-			"<^>!>+" UseKey["F6"], (*) => SetModifiedCharsInput("frakturBold"),
-			"<^>!" UseKey["F7"], (*) => SetModifiedCharsInput("script"),
-			"<^>!>+" UseKey["F7"], (*) => SetModifiedCharsInput("scriptBold"),
-			"<^>!" UseKey["F8"], (*) => SetModifiedCharsInput("doubleStruck"),
-			"<^>!>+" UseKey["F8"], (*) => SetModifiedCharsInput("doubleStruckItalic"),
+			;
+			"<^<!" UseKey["Numpad1"], (*) => SetModifiedCharsInput(),
+			"<^<!<+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("modifier"),
+			"<^<!>+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("subscript"),
+			"<^<!" UseKey["Numpad2"], (*) => SetModifiedCharsInput("italic"),
+			"<^<!>+" UseKey["Numpad2"], (*) => SetModifiedCharsInput("italicBold"),
+			"<^<!<+" UseKey["Numpad2"], (*) => SetModifiedCharsInput("bold"),
+			"<^<!" UseKey["Numpad3"], (*) => SetModifiedCharsInput("fraktur"),
+			"<^<!<+" UseKey["Numpad3"], (*) => SetModifiedCharsInput("frakturBold"),
+			"<^<!" UseKey["Numpad4"], (*) => SetModifiedCharsInput("script"),
+			"<^<!<+" UseKey["Numpad4"], (*) => SetModifiedCharsInput("scriptBold"),
+			"<^<!" UseKey["Numpad5"], (*) => SetModifiedCharsInput("doubleStruck"),
+			"<^<!<+" UseKey["Numpad5"], (*) => SetModifiedCharsInput("doubleStruckItalic"),
+			"<^<!" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifItalic"),
+			"<^<!>+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifItalicBold"),
+			"<^<!<+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifBold"),
+			"<^<!<+>+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerif"),
+			"<^<!" UseKey["Numpad7"], (*) => SetModifiedCharsInput("monospace"),
+			;
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
@@ -19167,7 +20169,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["3"], (*) => ToggleLetterScript(, "Old Hungarian"),
 			">^" UseKey["4"], (*) => ToggleLetterScript(, "Gothic"),
 			">^" UseKey["0"], (*) => ToggleLetterScript(, "IPA"),
-			">^>+" UseKey["0"], (*) => ToggleLetterScript(, "Maths"),
+			">^" UseKey["9"], (*) => ToggleLetterScript(, "Maths"),
 			;
 			"RAlt", (*) => ProceedCompose(),
 			;"RCtrl", (*) => ProceedCombining(),
@@ -19176,7 +20178,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
 			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
 			;
-		]
+		])
 	}
 
 
@@ -19262,7 +20264,7 @@ ProceedCompose() {
 
 	if RAltsCount = 1 {
 		RAltsCount := 0
-		Ligaturise("Compose")
+		Ligaturiser("Compose")
 		return
 	} else {
 		RAltsCount++
@@ -19366,10 +20368,28 @@ ManageTrayItems() {
 		"turkic", ReadLocale("tray_func_tukic_permic") "`t" RightControl "2",
 		"hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "3",
 		"gothic", ReadLocale("tray_func_gothic") "`t" RightControl "4",
+		"maths", ReadLocale("tray_func_maths") "`t" RightControl "9",
 		"ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
-		"maths", ReadLocale("tray_func_maths") "`t" RightControl RightShift "0",
 		"script", ReadLocale("func_label_scripts"),
 		"layouts", ReadLocale("func_label_layouts"),
+		"alterations", ReadLocale("func_label_alterations"),
+		"combining_alteration", ReadLocale("tray_func_combining_alteration") "`t" LeftControl LeftAlt "Num1",
+		"modifier_alteration", ReadLocale("tray_func_modifier_alteration") "`t" LeftControl LeftAlt LeftShift "Num1",
+		"subscript_alteration", ReadLocale("tray_func_subscript_alteration") "`t" LeftControl LeftAlt RightShift "Num1",
+		"italic_alteration", ReadLocale("tray_func_italic_alteration") "`t" LeftControl LeftAlt "Num2",
+		"bold_alteration", ReadLocale("tray_func_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num2",
+		"italic_bold_alteration", ReadLocale("tray_func_italic_bold_alteration") "`t" LeftControl LeftAlt RightShift "Num2",
+		"fraktur_alteration", ReadLocale("tray_func_fraktur_alteration") "`t" LeftControl LeftAlt "Num3",
+		"fraktur_bold_alteration", ReadLocale("tray_func_fraktur_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num3",
+		"script_alteration", ReadLocale("tray_func_script_alteration") "`t" LeftControl LeftAlt "Num4",
+		"script_bold_alteration", ReadLocale("tray_func_script_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num4",
+		"double_struck_alteration", ReadLocale("tray_func_double_struck_alteration") "`t" LeftControl LeftAlt "Num5",
+		"double_struck_italic_alteration", ReadLocale("tray_func_double_struck_italic_alteration") "`t" LeftControl LeftAlt LeftShift "Num5",
+		"sans_serif_italic_alteration", ReadLocale("tray_func_sans_serif_italic_alteration") "`t" LeftControl LeftAlt "Num6",
+		"sans_serif_bold_alteration", ReadLocale("tray_func_sans_serif_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num6",
+		"sans_serif_italic_bold_alteration", ReadLocale("tray_func_sans_serif_italic_bold_alteration") "`t" LeftControl LeftAlt RightShift "Num6",
+		"sans_serif_alteration", ReadLocale("tray_func_sans_serif_alteration") "`t" LeftControl LeftAlt LeftShift RightShift "Num6",
+		"monospace_alteration", ReadLocale("tray_func_monospace_alteration") "`t" LeftControl LeftAlt "Num7",
 	)
 
 	CurrentApp := "DSL KeyPad " . CurrentVersionString
@@ -19397,10 +20417,37 @@ ManageTrayItems() {
 	ScriptsSubMenu.SetIcon(Labels["turkic"], InternalFiles["AppIcoDLL"].File, 4)
 	ScriptsSubMenu.SetIcon(Labels["hungarian"], InternalFiles["AppIcoDLL"].File, 6)
 	ScriptsSubMenu.SetIcon(Labels["gothic"], InternalFiles["AppIcoDLL"].File, 7)
-	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
 	ScriptsSubMenu.SetIcon(Labels["maths"], InternalFiles["AppIcoDLL"].File, 10)
+	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
 
 	DSLTray.Add(Labels["script"], ScriptsSubMenu)
+
+	AlterationSubMenu := Menu()
+	AlterationSubMenu.Add(Labels["combining_alteration"], (*) => SetModifiedCharsInput())
+	AlterationSubMenu.Add(Labels["modifier_alteration"], (*) => SetModifiedCharsInput("modifier"))
+	AlterationSubMenu.Add(Labels["subscript_alteration"], (*) => SetModifiedCharsInput("subscript"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["italic_alteration"], (*) => SetModifiedCharsInput("italic"))
+	AlterationSubMenu.Add(Labels["italic_bold_alteration"], (*) => SetModifiedCharsInput("italicBold"))
+	AlterationSubMenu.Add(Labels["bold_alteration"], (*) => SetModifiedCharsInput("bold"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["fraktur_alteration"], (*) => SetModifiedCharsInput("fraktur"))
+	AlterationSubMenu.Add(Labels["fraktur_bold_alteration"], (*) => SetModifiedCharsInput("frakturBold"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["script_alteration"], (*) => SetModifiedCharsInput("script"))
+	AlterationSubMenu.Add(Labels["script_bold_alteration"], (*) => SetModifiedCharsInput("scriptBold"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["double_struck_alteration"], (*) => SetModifiedCharsInput("doubleStruck"))
+	AlterationSubMenu.Add(Labels["double_struck_italic_alteration"], (*) => SetModifiedCharsInput("doubleStruckItalic"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["sans_serif_italic_alteration"], (*) => SetModifiedCharsInput("sansSerifItalic"))
+	AlterationSubMenu.Add(Labels["sans_serif_italic_bold_alteration"], (*) => SetModifiedCharsInput("sansSerifItalicBold"))
+	AlterationSubMenu.Add(Labels["sans_serif_bold_alteration"], (*) => SetModifiedCharsInput("sansSerifBold"))
+	AlterationSubMenu.Add(Labels["sans_serif_alteration"], (*) => SetModifiedCharsInput("sansSerif"))
+	AlterationSubMenu.Add()
+	AlterationSubMenu.Add(Labels["monospace_alteration"], (*) => SetModifiedCharsInput("monospace"))
+
+	DSLTray.Add(Labels["alterations"], AlterationSubMenu)
 
 	LayoutsSubMenu := Menu()
 	LayoutsSubMenu.Add("QWERTY", (*) => RegisterLayout("QWERTY"))
@@ -19415,9 +20462,9 @@ ManageTrayItems() {
 
 	DSLTray.Add()
 	DSLTray.Add(Labels["search"], (*) => SearchKey())
-	DSLTray.Add(Labels["unicode"], (*) => InsertUnicodeKey())
-	DSLTray.Add(Labels["altcode"], (*) => InsertAltCodeKey())
-	DSLTray.Add(Labels["smelter"], (*) => Ligaturise())
+	DSLTray.Add(Labels["unicode"], (*) => CharacterInserter("Unicode").InputDialog(False))
+	DSLTray.Add(Labels["altcode"], (*) => CharacterInserter("Altcode").InputDialog(False))
+	DSLTray.Add(Labels["smelter"], (*) => Ligaturiser())
 	DSLTray.Add(Labels["open_folder"], OpenScriptFolder)
 	DSLTray.Add()
 	DSLTray.Add(Labels["notif"], (*) => ToggleGroupMessage())
@@ -19527,6 +20574,71 @@ GuiButtonIcon(Handle, File, Index := 1, Options := '') {
 	Return IL_Add(normal_il, File, Index)
 }
 ;}
+;
+
+;
+; Caret get from https://www.autohotkey.com/boards/viewtopic.php?t=114802
+
+CaretGetPosAlternative(&x?, &y?) {
+	static OBJID_CARET := 0xFFFFFFF8
+	CoordMode 'Caret'
+	if !CaretGetPos(&x, &y) {
+		AccObject := AccObjectFromWindow(WinExist('A'), OBJID_CARET)
+		Pos := AccLocation(AccObject)
+		try x := Pos.x, y := Pos.y
+		if !(x && y) {
+			Pos := UIA_CaretPos()
+			try x := Pos.x, y := Pos.y
+		}
+	}
+	Return !!(x && y)
+}
+
+UIA_CaretPos() {
+	static CLSID_CUIAutomation8 := '{E22AD333-B25F-460C-83D0-0581107395C9}'
+		, IID_IUIAutomation2 := '{34723AFF-0C9D-49D0-9896-7AB52DF8CD8A}'
+		, IUIA := ComObject(CLSID_CUIAutomation8, IID_IUIAutomation2)
+		, TextPatternElement2 := 10024
+
+	try {
+		ComCall(8, IUIA, 'ptr*', &FocusedEl := 0) ; GetFocusedElement
+		ComCall(16, FocusedEl, 'int', TextPatternElement2, 'ptr*', &TextPattern2 := 0) ; GetCurrentPattern
+		if TextPattern2 {
+			ComCall(10, TextPattern2, 'int*', 1, 'ptr*', &caretRange := 0) ; GetCaretRange
+			ComCall(10, caretRange, 'ptr*', &boundingRects := 0) ; GetBoundingRectangles
+			ObjRelease(FocusedEl), ObjRelease(TextPattern2), ObjRelease(caretRange)
+			Rect := ComValue(0x2005, boundingRects)
+			if Rect.MaxIndex() = 3
+				return { X: Round(Rect[0]), Y: Round(Rect[1]), W: Round(Rect[2]), H: Round(Rect[3]) }
+		}
+	}
+}
+
+AccObjectFromWindow(hWnd, idObject := 0) {
+	static IID_IDispatch := '{00020400-0000-0000-C000-000000000046}'
+		, IID_IAccessible := '{618736E0-3C3D-11CF-810C-00AA00389B71}'
+		, OBJID_NATIVEOM := 0xFFFFFFF0, VT_DISPATCH := 9, F_OWNVALUE := 1
+		, h := DllCall('LoadLibrary', 'Str', 'Oleacc', 'Ptr')
+
+	idObject &= 0xFFFFFFFF, AccObject := 0
+	DllCall('Ole32\CLSIDFromString', 'Str', idObject = OBJID_NATIVEOM ? IID_IDispatch : IID_IAccessible, 'Ptr', CLSID := Buffer(16))
+	if DllCall('Oleacc\AccessibleObjectFromWindow', 'Ptr', hWnd, 'UInt', idObject, 'Ptr', CLSID, 'PtrP', &pAcc := 0) = 0
+		AccObject := ComObjFromPtr(pAcc), ComObjFlags(AccObject, F_OWNVALUE, F_OWNVALUE)
+	return AccObject
+}
+
+AccLocation(Acc, ChildId := 0, &Position := '') {
+	static type := (VT_BYREF := 0x4000) | (VT_I4 := 3)
+	x := Buffer(4, 0), y := Buffer(4, 0), w := Buffer(4, 0), h := Buffer(4, 0)
+	try Acc.accLocation(ComValue(type, x.Ptr), ComValue(type, y.Ptr),
+	ComValue(type, w.Ptr), ComValue(type, h.Ptr), ChildId)
+	catch
+		return
+	return { x: NumGet(x, 'int'), y: NumGet(y, 'int'), w: NumGet(w, 'int'), h: NumGet(h, 'int') }
+}
+
+
+;
 ;
 ;? Special
 

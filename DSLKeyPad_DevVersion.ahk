@@ -16540,7 +16540,7 @@ Class Ligaturiser {
 					throw
 
 				output := RegExReplace(output, "\s+$", "")
-				this.SendOutput(output)
+				this.SendOutput(RegExReplace(output, "#", ""))
 
 				IniWrite(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), ConfigFile, "LatestPrompts", "Ligature")
 			} catch {
@@ -16589,11 +16589,11 @@ Class Ligaturiser {
 			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.EntriesWalk(input, True)) : ""
 
 
-			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions) (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
+			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
 			if !pauseOn || (IH.EndKey = "Enter") {
 				try {
-					intermediateValue := this.EntriesWalk(input)
+					intermediateValue := this.EntriesWalk(RegExReplace(input, "^\(\~\)\s", ""), , RegExMatch(input, "^\(\~\)\s"))
 					if intermediateValue != "" {
 						output := intermediateValue
 						break
@@ -16611,7 +16611,7 @@ Class Ligaturiser {
 		} else {
 			CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " this.FormatSingleString(output))
 			SetTimer(Tooltip, -500)
-			this.SendOutput(output)
+			this.SendOutput(RegExReplace(output, "#", ""))
 		}
 		return
 	}
@@ -16750,6 +16750,9 @@ Class Ligaturiser {
 	}
 
 	FormatSuggestions(suggestions, maxLength := 72) {
+		if suggestions = "N/A"
+			return suggestions
+
 		output := ""
 		currentLine := ""
 		parts := StrSplit(suggestions, "), ")
