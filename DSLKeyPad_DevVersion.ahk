@@ -16555,6 +16555,7 @@ Class Ligaturiser {
 
 		output := ""
 		input := ""
+		previousCharacter := ""
 		tooltipSuggestions := ""
 		favoriteSuggestions := this.ReadFavorites()
 		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
@@ -16584,6 +16585,17 @@ Class Ligaturiser {
 
 			} else if IH.Input != "" {
 				input .= IH.Input
+
+				if isVietnameseInput && StrLen(input) > 1 {
+					charPair := previousCharacter IH.Input
+					telexChar := VietnameseTelex.TelexReturn(charPair)
+
+					if telexChar != charPair {
+						input := SubStr(input, 1, -2) telexChar
+					}
+				}
+
+				previousCharacter := IH.Input
 			}
 
 			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.EntriesWalk(input, True)) : ""
@@ -16856,6 +16868,61 @@ Class Ligaturiser {
 		return output
 	}
 }
+
+Global isVietnameseInput := False
+
+Class VietnameseTelex {
+	__New() {
+		VietnameseTelex.RegistryHotstrings()
+	}
+
+	static telexReplaces := Map(
+		"aa", Chr(0x00E2),
+		"AA", Chr(0x00C2),
+		"ee", Chr(0x00EA),
+		"EE", Chr(0x00CA),
+		"uw", Chr(0x01B0),
+		"UW", Chr(0x01AF),
+		"dd", Chr(0x0111),
+		"DD", Chr(0x0110),
+	)
+
+	static RegistryHotstrings() {
+		global isVietnameseInput
+
+		isVietnameseInput := isVietnameseInput ? False : True
+
+		for key, value in VietnameseTelex.telexReplaces {
+			HotString(":*C?:" key, ObjBindMethod(VietnameseTelex, "Telexiser", value), isVietnameseInput ? True : False)
+		}
+
+		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isVietnameseInput ? "" : "de") "activated")), ReadLocale("script_vietnamese")), , , SkipGroupMessage, True, True)
+	}
+
+	static Telexiser(_, input) {
+		input := RegExReplace(input, "^.*?:.*?:", "")
+		for key, value in VietnameseTelex.telexReplaces {
+			if (input == key) {
+
+				SendText(value)
+				break
+			}
+		}
+		return ""
+	}
+
+	static TelexReturn(input) {
+		output := input
+		for key, value in VietnameseTelex.telexReplaces {
+			if (input == key) {
+				output := value
+				break
+			}
+		}
+		return output
+	}
+}
+
 
 GroupActivator(GroupName, KeyValue := "") {
 	LocaleMark := KeyValue != "" && RegExMatch(KeyValue, "^F") ? KeyValue : GroupName
@@ -20132,6 +20199,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
+			"<^>!" UseKey["F2"], (*) => VietnameseTelex(),
 			;
 			"<^<!" UseKey["Numpad1"], (*) => SetModifiedCharsInput(),
 			"<^<!<+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("modifier"),
@@ -20322,7 +20390,7 @@ RShiftEndingTimer() {
 
 RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 
-ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False) {
+ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True
 		return
 	LanguageCode := GetLanguageCode()
@@ -20330,7 +20398,7 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle,
 	Ico := MessageIcon == "Info" ? "Iconi" :
 		MessageIcon == "Warning" ? "Icon!" :
 			MessageIcon == "Error" ? "Iconx" : 0x0
-	TrayTip(ReadLocale(MessagePost), MessageTitle, Ico . Muting)
+	TrayTip(NoReadLocale ? MessagePost : ReadLocale(MessagePost), MessageTitle, Ico . Muting)
 
 }
 
