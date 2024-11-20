@@ -16458,6 +16458,7 @@ Class Ligaturiser {
 
 	ComposeMode() {
 		output := ""
+		tooltipSuggestions := ""
 		pauseOn := False
 
 		PH := InputHook("L0", "{Escape}")
@@ -16485,7 +16486,7 @@ Class Ligaturiser {
 				output .= IH.Input
 			}
 
-			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output)
+			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " output (StrLen(tooltipSuggestions) > 0 ? "`n" tooltipSuggestions : ""))
 
 			if !pauseOn || (IH.EndKey = "Enter") {
 				try {
@@ -16500,13 +16501,18 @@ Class Ligaturiser {
 
 		PH.Stop()
 
-		SetTimer((*) => ToolTip(), -350)
-		SendText(output)
+		if output = "N/A" {
+			CaretTooltip(ReadLocale("warning_recipe_absent"))
+			SetTimer((*) => ToolTip(), -1350)
+
+		} else {
+			SetTimer((*) => ToolTip(), -350)
+			SendText(output)
+		}
 		return
 	}
 
-
-	EntriesWalk(prompt) {
+	EntriesWalk(prompt, getSuggestions := False) {
 		promptBackup := prompt
 		output := ""
 
@@ -16532,6 +16538,9 @@ Class Ligaturiser {
 				}
 			}
 		}
+
+		if breakValidate
+			return "N/A"
 
 		for characterEntry, value in Characters {
 			if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
