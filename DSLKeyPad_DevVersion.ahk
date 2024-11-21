@@ -16964,14 +16964,28 @@ Class AsianInterceptionInput {
 	static pinYin := Map(
 		"aa", Chr(0x0101),
 		"AA", Chr(0x0100),
+		"av", Chr(0x01CE),
+		"AV", Chr(0x01CD),
+		"ak", Chr(0x00E1),
+		"AK", Chr(0x00C1),
+		"af", Chr(0x00E0),
+		"AF", Chr(0x00C0),
 		"ee", Chr(0x0113),
 		"EE", Chr(0x0112),
+		"ev", Chr(0x011B),
+		"EV", Chr(0x011A),
 		"ii", Chr(0x012B),
 		"II", Chr(0x012A),
+		"iv", Chr(0x01D0),
+		"IV", Chr(0x01CF),
 		"oo", Chr(0x014D),
 		"OO", Chr(0x014C),
+		"ov", Chr(0x01D2),
+		"OV", Chr(0x01D1),
 		"uu", Chr(0x016B),
 		"UU", Chr(0x016A),
+		"uv", Chr(0x01D4),
+		"UV", Chr(0x01D3),
 	)
 
 	__New(mode := "vietNam") {
@@ -18666,7 +18680,7 @@ HandleFastKey(combo := "", characterNames*) {
 		for _, character in characterNames {
 			output .= GetCharacterSequence(character)
 		}
-		SendText(output)
+		SendInput(output)
 
 	} else {
 		if combo != "" {
