@@ -16588,9 +16588,9 @@ Class Ligaturiser {
 			} else if IH.Input != "" {
 				input .= IH.Input
 
-				if isVietnameseInput && StrLen(input) > 1 {
+				if interceptionInputMode != "" && StrLen(input) > 1 {
 					charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
-					telexChar := VietnameseTelex.TelexReturn(charPair)
+					telexChar := AsianInterceptionInput.TelexReturn(charPair)
 
 					if telexChar != charPair {
 						input := SubStr(input, 1, previousInput = "\" ? -3 : -2) telexChar
@@ -16879,73 +16879,130 @@ Class Ligaturiser {
 	}
 }
 
-Global isVietnameseInput := False
+Global interceptionInputMode := ""
 
-Class VietnameseTelex {
+Class AsianInterceptionInput {
 
-	static telexReplaces := Map(
+	static vietNam := Map(
 		"aa", Chr(0x00E2),
 		"AA", Chr(0x00C2),
-		"dd", Chr(0x0111),
-		"DD", Chr(0x0110),
-		"ee", Chr(0x00EA),
-		"EE", Chr(0x00CA),
-		"oo", Chr(0x00F4),
-		"OO", Chr(0x00D4),
 		"af", Chr(0x00E0),
 		"AF", Chr(0x00C0),
-		"if", Chr(0x00EC),
-		"IF", Chr(0x00CC),
-		"of", Chr(0x00F2),
-		"OF", Chr(0x00D2),
-		"uf", Chr(0x00F9),
-		"UF", Chr(0x00D9),
-		"ef", Chr(0x00E8),
-		"EF", Chr(0x00C8),
-		"uw", Chr(0x01B0),
-		"UW", Chr(0x01AF),
-		"ow", Chr(0x01A1),
-		"OW", Chr(0x01A0),
+		"as", Chr(0x00E1),
+		"AS", Chr(0x00C1),
+		"aw", Chr(0x0103),
+		"AW", Chr(0x0102),
 		"ax", Chr(0x00E3),
 		"AX", Chr(0x00C3),
-		"ex", Chr(0x1EBD),
-		"EX", Chr(0x1EBC),
-		"ox", Chr(0x00F5),
-		"OX", Chr(0x00D5),
-		"ix", Chr(0x0129),
-		"IX", Chr(0x0128),
 		"aj", Chr(0x1EA1),
 		"AJ", Chr(0x1EA0),
-		"ej", Chr(0x1EB9),
-		"EJ", Chr(0x1EB8),
-		"ij", Chr(0x1ECB),
-		"IJ", Chr(0x1ECA),
-		"oj", Chr(0x1ECD),
-		"OJ", Chr(0x1ECC),
-		"uj", Chr(0x1EE5),
-		"UJ", Chr(0x1EE4),
+		"ar", Chr(0x1EA3),
+		"AR", Chr(0x1EA2),
+		;
 		"ăf", Chr(0x1EB1), ; ằ
 		"ĂF", Chr(0x1EB0), ; Ằ
+		"ăj", Chr(0x1EB7),
+		"ĂJ", Chr(0x1EB6),
+		"ăr", Chr(0x1EB3),
+		"ĂR", Chr(0x1EB2),
+		;
+		"dd", Chr(0x0111),
+		"DD", Chr(0x0110),
+		;
+		"ee", Chr(0x00EA),
+		"EE", Chr(0x00CA),
+		"ef", Chr(0x00E8),
+		"EF", Chr(0x00C8),
+		"es", Chr(0x00E9),
+		"ES", Chr(0x00C9),
+		"ex", Chr(0x1EBD),
+		"EX", Chr(0x1EBC),
+		"ej", Chr(0x1EB9),
+		"EJ", Chr(0x1EB8),
+		"er", Chr(0x1EBB),
+		"ER", Chr(0x1EBA),
+		;
+		"if", Chr(0x00EC),
+		"IF", Chr(0x00CC),
+		"is", Chr(0x00ED),
+		"IS", Chr(0x00CD),
+		"ix", Chr(0x0129),
+		"IX", Chr(0x0128),
+		"ij", Chr(0x1ECB),
+		"IJ", Chr(0x1ECA),
+		"ir", Chr(0x1EC9),
+		"IR", Chr(0x1EC8),
+		;
+		"oo", Chr(0x00F4),
+		"OO", Chr(0x00D4),
+		"of", Chr(0x00F2),
+		"OF", Chr(0x00D2),
+		"os", Chr(0x00F3),
+		"OS", Chr(0x00D3),
+		"ow", Chr(0x01A1),
+		"OW", Chr(0x01A0),
+		"ox", Chr(0x00F5),
+		"OX", Chr(0x00D5),
+		"oj", Chr(0x1ECD),
+		"OJ", Chr(0x1ECC),
+		"or", Chr(0x1ECF),
+		"OR", Chr(0x1ECE),
+		;
+		"uf", Chr(0x00F9),
+		"UF", Chr(0x00D9),
+		"us", Chr(0x00FA),
+		"US", Chr(0x00DA),
+		"uw", Chr(0x01B0),
+		"UW", Chr(0x01AF),
+		"uj", Chr(0x1EE5),
+		"UJ", Chr(0x1EE4),
+		"ur", Chr(0x1EE7),
+		"UR", Chr(0x1EE6),
+		;
 	)
 
-	__New() {
-		VietnameseTelex.RegistryHotstrings()
+	static pinYin := Map(
+		"aa", Chr(0x0101),
+		"AA", Chr(0x0100),
+		"ee", Chr(0x0113),
+		"EE", Chr(0x0112),
+		"ii", Chr(0x012B),
+		"II", Chr(0x012A),
+		"oo", Chr(0x014D),
+		"OO", Chr(0x014C),
+		"uu", Chr(0x016B),
+		"UU", Chr(0x016A),
+	)
+
+	__New(mode := "vietNam") {
+		this.mode := mode
+		this.RegistryHotstrings(mode)
 	}
 
-	static RegistryHotstrings() {
-		global isVietnameseInput
+	RegistryHotstrings(mode) {
+		global interceptionInputMode
 
-		isVietnameseInput := isVietnameseInput ? False : True
+		previousMode := interceptionInputMode
 
-		for key, value in VietnameseTelex.telexReplaces {
-			HotString(":*C?:" key, ObjBindMethod(VietnameseTelex, "Telexiser", value), isVietnameseInput ? True : False)
-			HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), ObjBindMethod(VietnameseTelex, "Telexiser", value), isVietnameseInput ? True : False)
+		interceptionInputMode := (mode != interceptionInputMode ? mode : "")
+		isEnabled := (interceptionInputMode != "" ? True : False)
+
+		if previousMode != "" && isEnabled {
+			for key, value in AsianInterceptionInput.%previousMode% {
+				HotString(":*C?:" key, "", False)
+				HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), "", False)
+			}
 		}
 
-		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isVietnameseInput ? "" : "de") "activated")), ReadLocale("script_vietnamese")), , , SkipGroupMessage, True, True)
+		for key, value in AsianInterceptionInput.%this.mode% {
+			HotString(":*C?:" key, ObjBindMethod(this, "Telexiser", value), isEnabled ? True : False)
+			HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), ObjBindMethod(this, "Telexiser", value), isEnabled ? True : False)
+		}
+
+		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
 	}
 
-	static Telexiser(_, input) {
+	Telexiser(_, input) {
 		input := RegExReplace(input, "^.*?:.*?:", "")
 
 		if InStr(input, "\") {
@@ -16953,7 +17010,7 @@ Class VietnameseTelex {
 			return
 		}
 
-		for key, value in VietnameseTelex.telexReplaces {
+		for key, value in AsianInterceptionInput.%this.mode% {
 			if (input == key) {
 
 				SendText(value)
@@ -16963,10 +17020,10 @@ Class VietnameseTelex {
 		return ""
 	}
 
-	static TelexReturn(input) {
+	TelexReturn(input) {
 		output := input
 
-		for key, value in VietnameseTelex.telexReplaces {
+		for key, value in AsianInterceptionInput.%this.mode% {
 			if (input == key) {
 				output := value
 				break
@@ -20253,7 +20310,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
-			"<^>!" UseKey["F2"], (*) => VietnameseTelex(),
+			"<^>!" UseKey["F2"], (*) => AsianInterceptionInput(),
+			"<^>!>+" UseKey["F2"], (*) => AsianInterceptionInput("pinYin"),
 			;
 			"<^<!" UseKey["Numpad1"], (*) => SetModifiedCharsInput(),
 			"<^<!<+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("modifier"),
