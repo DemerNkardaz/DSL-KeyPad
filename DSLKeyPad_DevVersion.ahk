@@ -17115,6 +17115,28 @@ Class AsianInterceptionInput {
 		"УЙ", Chr(0x040E),
 		"юю", Chrs(0x044E, 0x0304),
 		"ЮЮ", Chrs(0x042E, 0x0304),
+		;
+		;
+		"aa", Chr(0x0101),
+		"AA", Chr(0x0100),
+		;
+		"ee", Chr(0x0113),
+		"EE", Chr(0x0112),
+		;
+		"oo", Chr(0x014D),
+		"OO", Chr(0x014C),
+		"ov", Chr(0x00F4),
+		"OV", Chr(0x00D4),
+		;
+		"ii", Chr(0x012B),
+		"II", Chr(0x012A),
+		"iq", Chr(0x012D),
+		"IQ", Chr(0x012C),
+		;
+		"uq", Chr(0x016D),
+		"UQ", Chr(0x016C),
+		"uu", Chr(0x016B),
+		"UU", Chr(0x016A),
 	)
 
 	__New(mode := "vietNam") {
@@ -17230,7 +17252,7 @@ ReplaceWithUnicode(Mode := "") {
 		Send("{Shift Down}{Insert}{Shift Up}")
 	}
 	;if GetKeyState("Ctrl", "P")
-	SetTimer((*) => Send("{Ctrl Up}"), -250)
+	SetTimer((*) => Send("{Ctrl Up}"), -300)
 	Sleep 500
 	A_Clipboard := BackupClipboard
 
