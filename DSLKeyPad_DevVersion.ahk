@@ -17041,6 +17041,16 @@ Class AsianInterceptionInput {
 		"ur", Chr(0x1EE7),
 		"UR", Chr(0x1EE6),
 		;
+		"yf", Chr(0x1EF3),
+		"YF", Chr(0x1EF2),
+		"ys", Chr(0x00FD),
+		"YS", Chr(0x00DD),
+		"yx", Chr(0x1EF9),
+		"YX", Chr(0x1EF8),
+		"yj", Chr(0x1EF5),
+		"YJ", Chr(0x1EF4),
+		"yr", Chr(0x1EF7),
+		"YR", Chr(0x1EF6),
 	)
 
 	static pinYin := Map(
