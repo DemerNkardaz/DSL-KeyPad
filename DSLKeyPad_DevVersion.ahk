@@ -3,6 +3,9 @@
 
 ; Only EN US & RU RU Keyboard Layout
 
+Array.Prototype.DefineProp("ToString", { Call: _ArrayToString })
+Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
+
 
 SupportedLanguages := [
 	"en",
@@ -16688,16 +16691,9 @@ Class Ligaturiser {
 	}
 
 	SendOutput(output) {
-		if StrLen(output) > 36 {
-			clipboardBackup := A_Clipboard
-			A_Clipboard := output
-			ClipWait(0.5, 1)
-			Send("^v")
-
-			Sleep(500)
-			A_Clipboard := clipboardBackup
-
-		} else
+		if StrLen(output) > 36
+			ClipSend(output)
+		else
 			SendText(output)
 	}
 
@@ -17057,6 +17053,23 @@ Class AsianInterceptionInput {
 		"UV", Chr(0x01D3),
 	)
 
+	static karaShiki := Map(
+		"ее", Chrs(0x0451, 0x0304),
+		"ЕЕ", Chrs(0x0401, 0x0304),
+		"ии", Chr(0x04E3),
+		"ИИ", Chr(0x04E3),
+		"оо", Chrs(0x043E, 0x0304),
+		"ОО", Chrs(0x041E, 0x0304),
+		"сс", Chr(0x04AB),
+		"СС", Chr(0x04AA),
+		"уу", Chr(0x04EF),
+		"УУ", Chr(0x04EE),
+		"уй", Chr(0x045E),
+		"УЙ", Chr(0x040E),
+		"юю", Chrs(0x044E, 0x0304),
+		"ЮЮ", Chrs(0x042E, 0x0304),
+	)
+
 	__New(mode := "vietNam") {
 		this.mode := mode
 		this.RegistryHotstrings(mode)
@@ -17134,7 +17147,7 @@ ReplaceWithUnicode(Mode := "") {
 	PromptValue := ""
 	A_Clipboard := ""
 
-	Send("^c")
+	Send("{Shift Down}{Delete}{Shift Up}")
 	ClipWait(0.5, 1)
 	PromptValue := A_Clipboard
 	A_Clipboard := ""
@@ -17167,10 +17180,12 @@ ReplaceWithUnicode(Mode := "") {
 
 		A_Clipboard := RegExReplace(Output, "\s$", "")
 		ClipWait(0.250, 1)
-		Send("^v")
+		Send("{Shift Down}{Insert}{Shift Up}")
 	}
 	Sleep 500
 	A_Clipboard := BackupClipboard
+
+	return
 }
 
 GetCharacterUnicode(Symbol, StartFormat := "") {
@@ -20410,6 +20425,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
 			"<^>!" UseKey["F2"], (*) => AsianInterceptionInput(),
 			"<^>!>+" UseKey["F2"], (*) => AsianInterceptionInput("pinYin"),
+			"<^>!<+" UseKey["F2"], (*) => AsianInterceptionInput("karaShiki"),
 			;
 			"<^<!" UseKey["Numpad1"], (*) => SetModifiedCharsInput(),
 			"<^<!<+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("modifier"),
@@ -20914,7 +20930,56 @@ AccLocation(Acc, ChildId := 0, &Position := '') {
 		return
 	return { x: NumGet(x, 'int'), y: NumGet(y, 'int'), w: NumGet(w, 'int'), h: NumGet(h, 'int') }
 }
+;
+;
+;
+;
+;
 
+
+;
+; Code parts get from https://github.com/Axlefublr/lib-v2/tree/main
+
+
+ClipSend(toSend, endChar := "", isClipReverted := true, untilRevert := 300) {
+	if isClipReverted
+		prevClip := ClipboardAll()
+
+	A_Clipboard := ""
+	A_Clipboard := toSend endChar
+	ClipWait(1)
+	Send("{Shift Down}{Insert}{Shift Up}")
+
+	if isClipReverted
+		SetTimer(() => A_Clipboard := prevClip, -untilRevert)
+}
+
+
+GetInput(options?, endKeys?) {
+	inputHookObject := InputHook(options?, endKeys?)
+	inputHookObject.Start()
+	inputHookObject.Wait()
+	return inputHookObject
+}
+
+_ArrayToString(this, char := ", ") {
+	for index, value in this {
+		if index = this.Length {
+			str .= value
+			break
+		}
+		str .= value char
+	}
+	return str
+}
+
+_ArrayHasValue(this, valueToFind) {
+	for index, value in this {
+		if value = valueToFind
+			return true
+	}
+	return false
+}
 
 ;
 ;
