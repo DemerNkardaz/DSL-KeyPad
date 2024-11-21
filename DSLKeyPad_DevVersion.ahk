@@ -18862,7 +18862,9 @@ HandleFastKey(combo := "", characterNames*) {
 		for _, character in characterNames {
 			output .= GetCharacterSequence(character)
 		}
-		SendInput(output)
+
+		inputType := RegExMatch(output, GetChar("minus")) ? "Text" : "Input"
+		Send%inputType%(output)
 
 	} else {
 		if combo != "" {
