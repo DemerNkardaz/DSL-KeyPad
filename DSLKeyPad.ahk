@@ -3,6 +3,9 @@
 
 ; Only EN US & RU RU Keyboard Layout
 
+Array.Prototype.DefineProp("ToString", { Call: _ArrayToString })
+Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
+
 
 SupportedLanguages := [
 	"en",
@@ -3335,7 +3338,7 @@ MapInsert(Characters,
 		group: [["Dashes", "Smelting Special", "Special Fast Secondary"], "7"],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<! [-]",
-		recipe: "-",
+		recipe: "1-",
 	},
 	"no_break_hyphen", {
 		unicode: "{U+2011}",
@@ -3624,6 +3627,13 @@ MapInsert(Characters,
 		group: ["Latin Ligatures"],
 		tags: [".aem", "строчная лигатура ae с макроном", "small ligature ae with macron"],
 		recipe: ["ae" . GetChar("macron"), Chr(0x00E6) GetChar("macron"), "a" Chr(0x0113)],
+	},
+	"lat_s_lig_a_reversed_schwa", {
+		unicode: "{U+AB31}",
+		titlesAlt: True,
+		group: ["Latin Ligatures"],
+		tags: ["строчная лигатура a с перевёрнутой шва", "small ligature a with reversed schwa"],
+		recipe: "a" Chr(0x0259),
 	},
 	"lat_c_lig_ao", {
 		unicode: "{U+A734}",
@@ -4454,6 +4464,26 @@ MapInsert(Characters,
 	},
 	;
 	;
+	"lat_c_let_schwa", {
+		unicode: "{U+018F}",
+		titlesAlt: True,
+		group: [["Latin Extended"]],
+		tags: ["прописная буква Шва", "capital letter Schwa"],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "E",
+		recipe: "E" GetChar("arrow_left_circle"),
+	},
+	"lat_s_let_schwa", {
+		unicode: "{U+0259}",
+		titlesAlt: True,
+		group: [["Latin Extended"]],
+		tags: ["строчная буква шва", "small letter schwa"],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "e",
+		recipe: "e" GetChar("arrow_left_circle"),
+	},
+	;
+	;
 	; * Small Capitals
 	"lat_s_c_let_i", {
 		unicode: "{U+026A}",
@@ -4504,61 +4534,61 @@ MapInsert(Characters,
 		unicode: "{U+1EAE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "acute"), Chr(0x0102) GetChar("acute")],
+		recipe: ["$" GetChar("breve", "acute"), "$" GetChar("acute", "breve"), Chr(0x0102) GetChar("acute"), Chr(0x00C1) GetChar("breve")],
 	},
 	"lat_s_let_a_breve_acute", {
 		unicode: "{U+1EAF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "acute"), Chr(0x0103) GetChar("acute")],
+		recipe: ["$" GetChar("breve", "acute"), "$" GetChar("acute", "breve"), Chr(0x0103) GetChar("acute"), Chr(0x00E1) GetChar("breve")],
 	},
 	"lat_c_let_a_breve_dot_below", {
 		unicode: "{U+1EB6}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "dot_below"), Chr(0x0102) GetChar("dot_below")],
+		recipe: ["$" GetChar("breve", "dot_below"), "$" GetChar("dot_below", "breve"), Chr(0x0102) GetChar("dot_below"), Chr(0x1EA0) GetChar("breve")],
 	},
 	"lat_s_let_a_breve_dot_below", {
 		unicode: "{U+1EB7}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "dot_below"), Chr(0x0103) GetChar("dot_below")],
+		recipe: ["$" GetChar("breve", "dot_below"), "$" GetChar("dot_below", "breve"), Chr(0x0103) GetChar("dot_below"), Chr(0x1EA1) GetChar("breve")],
 	},
 	"lat_c_let_a_breve_grave", {
 		unicode: "{U+1EB0}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "grave"), Chr(0x0102) GetChar("grave")],
+		recipe: ["$" GetChar("breve", "grave"), "$" GetChar("grave", "breve"), Chr(0x0102) GetChar("grave"), Chr(0x00C0) GetChar("breve")],
 	},
 	"lat_s_let_a_breve_grave", {
 		unicode: "{U+1EB1}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "grave"), Chr(0x0103) GetChar("grave")],
+		recipe: ["$" GetChar("breve", "grave"), "$" GetChar("grave", "breve"), Chr(0x0103) GetChar("grave"), Chr(0x00E0) GetChar("breve")],
 	},
 	"lat_c_let_a_breve_hook_above", {
 		unicode: "{U+1EB2}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "hook_above"), Chr(0x0102) GetChar("hook_above")],
+		recipe: ["$" GetChar("breve", "hook_above"), "$" GetChar("hook_above", "breve"), Chr(0x0102) GetChar("hook_above"), Chr(0x1EA2) GetChar("breve")],
 	},
 	"lat_s_let_a_breve_hook_above", {
 		unicode: "{U+1EB3}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "hook_above"), Chr(0x0103) GetChar("hook_above")],
+		recipe: ["$" GetChar("breve", "hook_above"), "$" GetChar("hook_above", "breve"), Chr(0x0103) GetChar("hook_above"), Chr(0x1EA3) GetChar("breve")],
 	},
 	"lat_c_let_a_breve_tilde", {
 		unicode: "{U+1EB4}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "tilde"), Chr(0x0102) GetChar("tilde")],
+		recipe: ["$" GetChar("breve", "tilde"), "$" GetChar("tilde", "breve"), Chr(0x0102) GetChar("tilde"), Chr(0x00C3) GetChar("breve")],
 	},
 	"lat_s_let_a_breve_tilde", {
 		unicode: "{U+1EB5}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "tilde"), Chr(0x0103) GetChar("tilde")],
+		recipe: ["$" GetChar("breve", "tilde"), "$" GetChar("tilde", "breve"), Chr(0x0103) GetChar("tilde"), Chr(0x00E3) GetChar("breve")],
 	},
 	"lat_c_let_a_breve_inverted", {
 		unicode: "{U+0202}",
@@ -4592,61 +4622,61 @@ MapInsert(Characters,
 		unicode: "{U+1EA4}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "acute"), Chr(0x00C2) GetChar("acute")],
+		recipe: ["$" GetChar("circumflex", "acute"), "$" GetChar("acute", "circumflex"), Chr(0x00C2) GetChar("acute"), Chr(0x00C1) GetChar("circumflex")],
 	},
 	"lat_s_let_a_circumflex_acute", {
 		unicode: "{U+1EA5}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "acute"), Chr(0x00E2) GetChar("acute")],
+		recipe: ["$" GetChar("circumflex", "acute"), "$" GetChar("acute", "circumflex"), Chr(0x00E2) GetChar("acute"), Chr(0x00E1) GetChar("circumflex")],
 	},
 	"lat_c_let_a_circumflex_dot_below", {
 		unicode: "{U+1EAC}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "dot_below"), Chr(0x00C2) GetChar("dot_below")],
+		recipe: ["$" GetChar("circumflex", "dot_below"), "$" GetChar("dot_below", "circumflex"), Chr(0x00C2) GetChar("dot_below"), Chr(0x1EA0) GetChar("circumflex")],
 	},
 	"lat_s_let_a_circumflex_dot_below", {
 		unicode: "{U+1EAD}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "dot_below"), Chr(0x00E2) GetChar("dot_below")],
+		recipe: ["$" GetChar("circumflex", "dot_below"), "$" GetChar("dot_below", "circumflex"), Chr(0x00E2) GetChar("dot_below"), Chr(0x1EA1) GetChar("circumflex")],
 	},
 	"lat_c_let_a_circumflex_grave", {
 		unicode: "{U+1EA6}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "grave"), Chr(0x00C2) GetChar("grave")],
+		recipe: ["$" GetChar("circumflex", "grave"), "$" GetChar("grave", "circumflex"), Chr(0x00C2) GetChar("grave"), Chr(0x00C0) GetChar("circumflex")],
 	},
 	"lat_s_let_a_circumflex_grave", {
 		unicode: "{U+1EA7}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "grave"), Chr(0x00E2) GetChar("grave")],
+		recipe: ["$" GetChar("circumflex", "grave"), "$" GetChar("grave", "circumflex"), Chr(0x00E2) GetChar("grave"), Chr(0x00E0) GetChar("circumflex")],
 	},
 	"lat_c_let_a_circumflex_hook_above", {
 		unicode: "{U+1EA8}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "hook_above"), Chr(0x00C2) GetChar("hook_above")],
+		recipe: ["$" GetChar("circumflex", "hook_above"), "$" GetChar("hook_above", "circumflex"), Chr(0x00C2) GetChar("hook_above"), Chr(0x1EA2) GetChar("circumflex")],
 	},
 	"lat_s_let_a_circumflex_hook_above", {
 		unicode: "{U+1EA9}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "hook_above"), Chr(0x00E2) GetChar("hook_above")],
+		recipe: ["$" GetChar("circumflex", "hook_above"), "$" GetChar("hook_above", "circumflex"), Chr(0x00E2) GetChar("hook_above"), Chr(0x1EA3) GetChar("circumflex")],
 	},
 	"lat_c_let_a_circumflex_tilde", {
 		unicode: "{U+1EAA}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "tilde"), Chr(0x00C2) GetChar("tilde")],
+		recipe: ["$" GetChar("circumflex", "tilde"), "$" GetChar("tilde", "circumflex"), Chr(0x00C2) GetChar("tilde"), Chr(0x00C3) GetChar("circumflex")],
 	},
 	"lat_s_let_a_circumflex_tilde", {
 		unicode: "{U+1EAB}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "tilde"), Chr(0x00E2) GetChar("tilde")],
+		recipe: ["$" GetChar("circumflex", "tilde"), "$" GetChar("tilde", "circumflex"), Chr(0x00E2) GetChar("tilde"), Chr(0x00E3) GetChar("circumflex")],
 	},
 	"lat_c_let_a_caron", {
 		unicode: "{U+01CD}",
@@ -4676,13 +4706,13 @@ MapInsert(Characters,
 		unicode: "{U+01E0}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("dot_above", "macron"), Chr(0x0226) GetChar("macron")],
+		recipe: ["$" GetChar("dot_above", "macron"), "$" GetChar("macron", "dot_above"), Chr(0x0226) GetChar("macron"), Chr(0x0100) GetChar("dot_above")],
 	},
 	"lat_s_let_a_dot_above_macron", {
 		unicode: "{U+01E1}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("dot_above", "macron"), Chr(0x0227) GetChar("macron")],
+		recipe: ["$" GetChar("dot_above", "macron"), "$" GetChar("macron", "dot_above"), Chr(0x0227) GetChar("macron"), Chr(0x0101) GetChar("dot_above")],
 	},
 	"lat_c_let_a_dot_below", {
 		unicode: "{U+1EA0}",
@@ -4717,13 +4747,13 @@ MapInsert(Characters,
 		unicode: "{U+01DE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("diaeresis", "macron"), Chr(0x00C4) GetChar("macron")],
+		recipe: ["$" GetChar("diaeresis", "macron"), "$" GetChar("macron", "diaeresis"), Chr(0x00C4) GetChar("macron"), Chr(0x0100) GetChar("diaeresis")],
 	},
 	"lat_s_let_a_diaeresis_macron", {
 		unicode: "{U+01DF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("diaeresis", "macron"), Chr(0x00E4) GetChar("macron")],
+		recipe: ["$" GetChar("diaeresis", "macron"), "$" GetChar("macron", "diaeresis"), Chr(0x00E4) GetChar("macron"), Chr(0x0101) GetChar("diaeresis")],
 	},
 	"lat_c_let_a_grave", {
 		unicode: "{U+00C0}",
@@ -4811,13 +4841,13 @@ MapInsert(Characters,
 		unicode: "{U+01FA}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("ring_above", "acute"), Chr(0x00C5) GetChar("acute")],
+		recipe: ["$" GetChar("ring_above", "acute"), "$" GetChar("acute", "ring_above"), Chr(0x00C5) GetChar("acute"), Chr(0x00C1) GetChar("ring_above")],
 	},
 	"lat_s_let_a_ring_above_acute", {
 		unicode: "{U+01FB}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("ring_above", "acute"), Chr(0x00E5) GetChar("acute")],
+		recipe: ["$" GetChar("ring_above", "acute"), "$" GetChar("acute", "ring_above"), Chr(0x00E5) GetChar("acute"), Chr(0x00E1) GetChar("ring_above")],
 	},
 	"lat_c_let_a_ring_below", {
 		unicode: "{U+1E00}",
@@ -5063,13 +5093,13 @@ MapInsert(Characters,
 		unicode: "{U+1E08}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("cedilla", "acute"), Chr(0x00C7) GetChar("acute")],
+		recipe: ["$" GetChar("cedilla", "acute"), "$" GetChar("acute", "cedilla"), Chr(0x00C7) GetChar("acute"), Chr(0x0106) GetChar("cedilla")],
 	},
 	"lat_s_let_c_cedilla_acute", {
 		unicode: "{U+1E09}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("cedilla", "acute"), Chr(0x00E7) GetChar("acute")],
+		recipe: ["$" GetChar("cedilla", "acute"), "$" GetChar("acute", "cedilla"), Chr(0x00E7) GetChar("acute"), Chr(0x0107) GetChar("cedilla")],
 	},
 	"lat_s_let_c_curl", {
 		unicode: "{U+0255}",
@@ -5378,7 +5408,7 @@ MapInsert(Characters,
 		unicode: "{U+0114}",
 		titlesAlt: True,
 		group: [["Latin Accented", "Latin Accented Secondary"]],
-		show_on_fast_keys: True,
+		show_on_fast_keys: False,
 		alt_on_fast_keys: "$",
 		recipe: "$" GetChar("breve"),
 	},
@@ -5386,7 +5416,7 @@ MapInsert(Characters,
 		unicode: "{U+0115}",
 		titlesAlt: True,
 		group: [["Latin Accented", "Latin Accented Secondary"]],
-		show_on_fast_keys: True,
+		show_on_fast_keys: False,
 		alt_on_fast_keys: "$",
 		recipe: "$" GetChar("breve"),
 	},
@@ -5394,13 +5424,13 @@ MapInsert(Characters,
 		unicode: "{U+1E1C}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "cedilla"), Chr(0x0114) GetChar("cedilla")],
+		recipe: ["$" GetChar("breve", "cedilla"), "$" GetChar("cedilla", "breve"), Chr(0x0114) GetChar("cedilla"), Chr(0x0228) GetChar("breve")],
 	},
 	"lat_s_let_e_breve_cedilla", {
 		unicode: "{U+1E1D}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("breve", "cedilla"), Chr(0x0115) GetChar("cedilla")],
+		recipe: ["$" GetChar("breve", "cedilla"), "$" GetChar("cedilla", "breve"), Chr(0x0115) GetChar("cedilla"), Chr(0x0229) GetChar("breve")],
 	},
 	"lat_c_let_e_breve_inverted", {
 		unicode: "{U+0206}",
@@ -5434,61 +5464,61 @@ MapInsert(Characters,
 		unicode: "{U+1EBE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "acute"), Chr(0x00CA) GetChar("acute")],
+		recipe: ["$" GetChar("circumflex", "acute"), "$" GetChar("acute", "circumflex"), Chr(0x00CA) GetChar("acute"), Chr(0x00C9) GetChar("circumflex")],
 	},
 	"lat_s_let_e_circumflex_acute", {
 		unicode: "{U+1EBF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "acute"), Chr(0x00EA) GetChar("acute")],
+		recipe: ["$" GetChar("circumflex", "acute"), "$" GetChar("acute", "circumflex"), Chr(0x00EA) GetChar("acute"), Chr(0x00E9) GetChar("circumflex")],
 	},
 	"lat_c_let_e_circumflex_dot_below", {
 		unicode: "{U+1EC6}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "dot_below"), Chr(0x00CA) GetChar("dot_below")],
+		recipe: ["$" GetChar("circumflex", "dot_below"), "$" GetChar("dot_below", "circumflex"), Chr(0x00CA) GetChar("dot_below"), Chr(0x1EB8) GetChar("circumflex")],
 	},
 	"lat_s_let_e_circumflex_dot_below", {
 		unicode: "{U+1EC7}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "dot_below"), Chr(0x00EA) GetChar("dot_below")],
+		recipe: ["$" GetChar("circumflex", "dot_below"), "$" GetChar("dot_below", "circumflex"), Chr(0x00EA) GetChar("dot_below"), Chr(0x1EB9) GetChar("circumflex")],
 	},
 	"lat_c_let_e_circumflex_grave", {
 		unicode: "{U+1EC0}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "grave"), Chr(0x00CA) GetChar("grave")],
+		recipe: ["$" GetChar("circumflex", "grave"), "$" GetChar("grave", "circumflex"), Chr(0x00CA) GetChar("grave"), Chr(0x00C8) GetChar("circumflex")],
 	},
 	"lat_s_let_e_circumflex_grave", {
 		unicode: "{U+1EC1}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "grave"), Chr(0x00EA) GetChar("grave")],
+		recipe: ["$" GetChar("circumflex", "grave"), "$" GetChar("grave", "circumflex"), Chr(0x00EA) GetChar("grave"), Chr(0x00E8) GetChar("circumflex")],
 	},
 	"lat_c_let_e_circumflex_hook_above", {
 		unicode: "{U+1EC2}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "hook_above"), Chr(0x00CA) GetChar("hook_above")],
+		recipe: ["$" GetChar("circumflex", "hook_above"), "$" GetChar("hook_above", "circumflex"), Chr(0x00CA) GetChar("hook_above"), Chr(0x1EBA) GetChar("circumflex")],
 	},
 	"lat_s_let_e_circumflex_hook_above", {
 		unicode: "{U+1EC3}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "hook_above"), Chr(0x00EA) GetChar("hook_above")],
+		recipe: ["$" GetChar("circumflex", "hook_above"), "$" GetChar("hook_above", "circumflex"), Chr(0x00EA) GetChar("hook_above"), Chr(0x1EBB) GetChar("circumflex")],
 	},
 	"lat_c_let_e_circumflex_tilde", {
 		unicode: "{U+1EC4}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "tilde"), Chr(0x00CA) GetChar("tilde")],
+		recipe: ["$" GetChar("circumflex", "tilde"), "$" GetChar("tilde", "circumflex"), Chr(0x00CA) GetChar("tilde"), Chr(0x1EBC) GetChar("circumflex")],
 	},
 	"lat_s_let_e_circumflex_tilde", {
 		unicode: "{U+1EC5}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "tilde"), Chr(0x00EA) GetChar("tilde")],
+		recipe: ["$" GetChar("circumflex", "tilde"), "$" GetChar("tilde", "circumflex"), Chr(0x00EA) GetChar("tilde"), Chr(0x1EBD) GetChar("circumflex")],
 	},
 	"lat_c_let_e_circumflex_below", {
 		unicode: "{U+1E18}",
@@ -5647,25 +5677,25 @@ MapInsert(Characters,
 		unicode: "{U+1E16}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "acute"), Chr(0x0112) GetChar("acute")],
+		recipe: ["$" GetChar("macron", "acute"), "$" GetChar("acute", "macron"), Chr(0x0112) GetChar("acute"), Chr(0x00C9) GetChar("macron")],
 	},
 	"lat_s_let_e_macron_acute", {
 		unicode: "{U+1E17}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "acute"), Chr(0x0113) GetChar("acute")],
+		recipe: ["$" GetChar("macron", "acute"), "$" GetChar("acute", "macron"), Chr(0x0113) GetChar("acute"), Chr(0x00E9) GetChar("macron")],
 	},
 	"lat_c_let_e_macron_grave", {
 		unicode: "{U+1E14}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "grave"), Chr(0x0112) GetChar("grave")],
+		recipe: ["$" GetChar("macron", "grave"), "$" GetChar("grave", "macron"), Chr(0x0112) GetChar("grave"), Chr(0x00C8) GetChar("macron")],
 	},
 	"lat_s_let_e_macron_grave", {
 		unicode: "{U+1E15}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "grave"), Chr(0x0113) GetChar("grave")],
+		recipe: ["$" GetChar("macron", "grave"), "$" GetChar("grave", "macron"), Chr(0x0113) GetChar("grave"), Chr(0x00E8) GetChar("macron")],
 	},
 	"lat_c_let_e_solidus_long", {
 		unicode: "{U+0246}",
@@ -6236,16 +6266,16 @@ MapInsert(Characters,
 		recipe: "$" GetChar("diaeresis"),
 	},
 	"lat_c_let_i_diaeresis_acute", {
-		unicode: "{U+1E2F}",
-		titlesAlt: True,
-		group: ["Latin Accented"],
-		recipe: ["$" GetChar("diaeresis", "acute"), Chr(0x00CF) GetChar("diaeresis")],
-	},
-	"lat_s_let_i_diaeresis_acute", {
 		unicode: "{U+1E2E}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("diaeresis", "acute"), Chr(0x00EF) GetChar("diaeresis")],
+		recipe: ["$" GetChar("diaeresis", "acute"), "$" GetChar("acute", "diaeresis"), Chr(0x00CF) GetChar("acute"), Chr(0x00CD) GetChar("diaeresis")],
+	},
+	"lat_s_let_i_diaeresis_acute", {
+		unicode: "{U+1E2F}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "acute"), "$" GetChar("acute", "diaeresis"), Chr(0x00EF) GetChar("acute"), Chr(0x00ED) GetChar("diaeresis")],
 	},
 	"lat_c_let_i_grave", {
 		unicode: "{U+00CC}",
@@ -7166,6 +7196,18 @@ MapInsert(Characters,
 		alt_on_fast_keys: "$",
 		recipe: "$" GetChar("acute"),
 	},
+	"lat_c_let_o_acute_horn", {
+		unicode: "{U+1EDA}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("acute", "horn"), "$" GetChar("horn", "acute"), Chr(0x00D3) GetChar("horn"), Chr(0x01A0) GetChar("acute")],
+	},
+	"lat_s_let_o_acute_horn", {
+		unicode: "{U+1EDB}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("acute", "horn"), "$" GetChar("horn", "acute"), Chr(0x00F3) GetChar("horn"), Chr(0x01A1) GetChar("acute")],
+	},
 	"lat_c_let_o_acute_double", {
 		unicode: "{U+0150}",
 		titlesAlt: True,
@@ -7226,61 +7268,61 @@ MapInsert(Characters,
 		unicode: "{U+1ED0}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "acute"), Chr(0x00D4) GetChar("acute")],
+		recipe: ["$" GetChar("circumflex", "acute"), "$" GetChar("acute", "circumflex"), Chr(0x00D4) GetChar("acute"), Chr(0x00D3) GetChar("circumflex")],
 	},
 	"lat_s_let_o_circumflex_acute", {
 		unicode: "{U+1ED1}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "acute"), Chr(0x00F4) GetChar("acute")],
+		recipe: ["$" GetChar("circumflex", "acute"), "$" GetChar("acute", "circumflex"), Chr(0x00F4) GetChar("acute"), Chr(0x00F3) GetChar("circumflex")],
 	},
 	"lat_c_let_o_circumflex_dot_below", {
 		unicode: "{U+1ED8}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "dot_below"), Chr(0x00D4) GetChar("dot_below")],
+		recipe: ["$" GetChar("circumflex", "dot_below"), "$" GetChar("dot_below", "circumflex"), Chr(0x00D4) GetChar("dot_below"), Chr(0x1ECC) GetChar("circumflex")],
 	},
 	"lat_s_let_o_circumflex_dot_below", {
 		unicode: "{U+1ED9}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "dot_below"), Chr(0x00F4) GetChar("dot_below")],
+		recipe: ["$" GetChar("circumflex", "dot_below"), "$" GetChar("dot_below", "circumflex"), Chr(0x00F4) GetChar("dot_below"), Chr(0x1ECD) GetChar("circumflex")],
 	},
 	"lat_c_let_o_circumflex_grave", {
 		unicode: "{U+1ED2}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "grave"), Chr(0x00D4) GetChar("grave")],
+		recipe: ["$" GetChar("circumflex", "grave"), "$" GetChar("grave", "circumflex"), Chr(0x00D4) GetChar("grave"), Chr(0x00D2) GetChar("circumflex")],
 	},
 	"lat_s_let_o_circumflex_grave", {
 		unicode: "{U+1ED3}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "grave"), Chr(0x00F4) GetChar("grave")],
+		recipe: ["$" GetChar("circumflex", "grave"), "$" GetChar("grave", "circumflex"), Chr(0x00F4) GetChar("grave"), Chr(0x00F2) GetChar("circumflex")],
 	},
 	"lat_c_let_o_circumflex_hook_above", {
 		unicode: "{U+1ED4}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "hook_above"), Chr(0x00D4) GetChar("hook_above")],
+		recipe: ["$" GetChar("circumflex", "hook_above"), "$" GetChar("hook_above", "circumflex"), Chr(0x00D4) GetChar("hook_above"), Chr(0x1ECE) GetChar("circumflex")],
 	},
 	"lat_s_let_o_circumflex_hook_above", {
 		unicode: "{U+1ED5}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "hook_above"), Chr(0x00F4) GetChar("hook_above")],
+		recipe: ["$" GetChar("circumflex", "hook_above"), "$" GetChar("hook_above", "circumflex"), Chr(0x00F4) GetChar("hook_above"), Chr(0x1ECF) GetChar("circumflex")],
 	},
 	"lat_c_let_o_circumflex_tilde", {
 		unicode: "{U+1ED6}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "tilde"), Chr(0x00C2) GetChar("tilde")],
+		recipe: ["$" GetChar("circumflex", "tilde"), "$" GetChar("tilde", "circumflex"), Chr(0x00D4) GetChar("tilde"), Chr(0x00D5) GetChar("circumflex")],
 	},
 	"lat_s_let_o_circumflex_tilde", {
 		unicode: "{U+1ED7}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("circumflex", "tilde"), Chr(0x00E2) GetChar("tilde")],
+		recipe: ["$" GetChar("circumflex", "tilde"), "$" GetChar("tilde", "circumflex"), Chr(0x00F4) GetChar("tilde"), Chr(0x00F5) GetChar("circumflex")],
 	},
 	"lat_c_let_o_caron", {
 		unicode: "{U+01D1}",
@@ -7322,6 +7364,18 @@ MapInsert(Characters,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("dot_below"),
 	},
+	"lat_c_let_o_dot_below_horn", {
+		unicode: "{U+1EE2}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("dot_below", "horn"), "$" GetChar("horn", "dot_below"), Chr(0x1ECC) GetChar("horn"), Chr(0x01A0) GetChar("dot_below")],
+	},
+	"lat_s_let_o_dot_below_horn", {
+		unicode: "{U+1EE3}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("dot_below", "horn"), "$" GetChar("horn", "dot_below"), Chr(0x1ECD) GetChar("horn"), Chr(0x01A1) GetChar("dot_below")],
+	},
 	"lat_c_let_o_diaeresis", {
 		unicode: "{U+00D6}",
 		titlesAlt: True,
@@ -7354,6 +7408,18 @@ MapInsert(Characters,
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "$",
 		recipe: "$" GetChar("grave"),
+	},
+	"lat_c_let_o_grave_horn", {
+		unicode: "{U+1EDC}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("grave", "horn"), "$" GetChar("horn", "grave"), Chr(0x00D2) GetChar("horn"), Chr(0x01A0) GetChar("grave")],
+	},
+	"lat_s_let_o_grave_horn", {
+		unicode: "{U+1EDD}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("grave", "horn"), "$" GetChar("horn", "grave"), Chr(0x00F2) GetChar("horn"), Chr(0x01A1) GetChar("grave")],
 	},
 	"lat_c_let_o_grave_double", {
 		unicode: "{U+020C}",
@@ -7399,13 +7465,13 @@ MapInsert(Characters,
 		unicode: "{U+1EDE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: "$" GetChar("hook_above", "horn"),
+		recipe: ["$" GetChar("hook_above", "horn"), "$" GetChar("horn", "hook_above"), Chr(0x1ECE) GetChar("horn"), Chr(0x01A0) GetChar("hook_above")],
 	},
 	"lat_s_let_o_hook_above_horn", {
 		unicode: "{U+1EDF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: "$" GetChar("hook_above", "horn"),
+		recipe: ["$" GetChar("hook_above", "horn"), "$" GetChar("horn", "hook_above"), Chr(0x1ECF) GetChar("horn"), Chr(0x01A1) GetChar("hook_above")],
 	},
 	"lat_s_let_o_retroflex_hook", {
 		unicode: "{U+1DF1B}",
@@ -7451,73 +7517,73 @@ MapInsert(Characters,
 		unicode: "{U+1E52}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "acute"), Chr(0x014C) GetChar("acute")],
+		recipe: ["$" GetChar("macron", "acute"), "$" GetChar("acute", "macron"), Chr(0x014C) GetChar("acute"), Chr(0x00D3) GetChar("macron")],
 	},
 	"lat_s_let_o_macron_acute", {
 		unicode: "{U+1E53}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "acute"), Chr(0x014D) GetChar("acute")],
+		recipe: ["$" GetChar("macron", "acute"), "$" GetChar("acute", "macron"), Chr(0x014D) GetChar("acute"), Chr(0x00F3) GetChar("macron")],
 	},
 	"lat_c_let_o_macron_dot_above", {
 		unicode: "{U+0230}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "dot_above"), Chr(0x014C) GetChar("dot_above")],
+		recipe: ["$" GetChar("macron", "dot_above"), "$" GetChar("dot_above", "macron"), Chr(0x014C) GetChar("dot_above"), Chr(0x022E) GetChar("macron")],
 	},
 	"lat_s_let_o_macron_dot_above", {
 		unicode: "{U+0231}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "dot_above"), Chr(0x014D) GetChar("dot_above")],
+		recipe: ["$" GetChar("macron", "dot_above"), "$" GetChar("dot_above", "macron"), Chr(0x014D) GetChar("dot_above"), Chr(0x022F) GetChar("macron")],
 	},
 	"lat_c_let_o_macron_diaeresis", {
 		unicode: "{U+022A}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "diaeresis"), Chr(0x014C) GetChar("diaeresis")],
+		recipe: ["$" GetChar("macron", "diaeresis"), "$" GetChar("diaeresis", "macron"), Chr(0x014C) GetChar("diaeresis"), Chr(0x00D6) GetChar("macron")],
 	},
 	"lat_s_let_o_macron_diaeresis", {
 		unicode: "{U+022B}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "diaeresis"), Chr(0x014D) GetChar("diaeresis")],
+		recipe: ["$" GetChar("macron", "diaeresis"), "$" GetChar("diaeresis", "macron"), Chr(0x014D) GetChar("diaeresis"), Chr(0x00F6) GetChar("macron")],
 	},
 	"lat_c_let_o_macron_grave", {
 		unicode: "{U+1E50}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "grave"), Chr(0x014C) GetChar("grave")],
+		recipe: ["$" GetChar("macron", "grave"), "$" GetChar("grave", "macron"), Chr(0x014C) GetChar("grave"), Chr(0x00D2) GetChar("macron")],
 	},
 	"lat_s_let_o_macron_grave", {
 		unicode: "{U+1E51}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "grave"), Chr(0x014D) GetChar("grave")],
+		recipe: ["$" GetChar("macron", "grave"), "$" GetChar("grave", "macron"), Chr(0x014D) GetChar("grave"), Chr(0x00F2) GetChar("macron")],
 	},
 	"lat_c_let_o_macron_ogonek", {
 		unicode: "{U+01EC}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "ogonek"), Chr(0x014C) GetChar("ogonek")],
+		recipe: ["$" GetChar("macron", "ogonek"), "$" GetChar("ogonek", "macron"), Chr(0x014C) GetChar("ogonek"), Chr(0x01EA) GetChar("macron")],
 	},
 	"lat_s_let_o_macron_ogonek", {
 		unicode: "{U+01ED}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "ogonek"), Chr(0x014D) GetChar("ogonek")],
+		recipe: ["$" GetChar("macron", "ogonek"), "$" GetChar("ogonek", "macron"), Chr(0x014D) GetChar("ogonek"), Chr(0x01EB) GetChar("macron")],
 	},
 	"lat_c_let_o_macron_tilde", {
 		unicode: "{U+022C}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "tilde"), Chr(0x014C) GetChar("tilde")],
+		recipe: ["$" GetChar("macron", "tilde"), "$" GetChar("tilde", "macron"), Chr(0x014C) GetChar("tilde"), Chr(0x00D5) GetChar("macron")],
 	},
 	"lat_s_let_o_macron_tilde", {
 		unicode: "{U+022D}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "tilde"), Chr(0x014D) GetChar("tilde")],
+		recipe: ["$" GetChar("macron", "tilde"), "$" GetChar("tilde", "macron"), Chr(0x014D) GetChar("tilde"), Chr(0x00F5) GetChar("macron")],
 	},
 	"lat_c_let_o_solidus_long", {
 		unicode: "{U+00D8}",
@@ -7540,13 +7606,13 @@ MapInsert(Characters,
 		unicode: "{U+01FE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("solidus_long", "acute"), Chr(0x00D8) GetChar("acute")],
+		recipe: ["$" GetChar("solidus_long", "acute"), "$" GetChar("acute", "solidus_long"), Chr(0x00D8) GetChar("acute"), Chr(0x00D3) GetChar("solidus_long")],
 	},
 	"lat_s_let_o_solidus_long_acute", {
 		unicode: "{U+01FF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("solidus_long", "acute"), Chr(0x00F8) GetChar("acute")],
+		recipe: ["$" GetChar("solidus_long", "acute"), "$" GetChar("acute", "solidus_long"), Chr(0x00F8) GetChar("acute"), Chr(0x00F3) GetChar("solidus_long")],
 	},
 	"lat_s_let_o_solidus_long_open", {
 		unicode: "{U+AB3F}",
@@ -7612,37 +7678,37 @@ MapInsert(Characters,
 		unicode: "{U+1E4C}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "acute"), Chr(0x00D5) GetChar("acute")],
+		recipe: ["$" GetChar("tilde", "acute"), "$" GetChar("acute", "tilde"), Chr(0x00D5) GetChar("acute"), Chr(0x00D3) GetChar("tilde")],
 	},
 	"lat_s_let_o_tilde_acute", {
 		unicode: "{U+1E4D}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "acute"), Chr(0x00F5) GetChar("acute")],
+		recipe: ["$" GetChar("tilde", "acute"), "$" GetChar("acute", "tilde"), Chr(0x00F5) GetChar("acute"), Chr(0x00F3) GetChar("tilde")],
 	},
 	"lat_c_let_o_tilde_diaeresis", {
 		unicode: "{U+1E4E}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "diaeresis"), Chr(0x00D5) GetChar("diaeresis")],
+		recipe: ["$" GetChar("tilde", "diaeresis"), "$" GetChar("diaeresis", "tilde"), Chr(0x00D5) GetChar("diaeresis"), Chr(0x00D6) GetChar("tilde")],
 	},
 	"lat_s_let_o_tilde_diaeresis", {
 		unicode: "{U+1E4F}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "diaeresis"), Chr(0x00F5) GetChar("diaeresis")],
+		recipe: ["$" GetChar("tilde", "diaeresis"), "$" GetChar("diaeresis", "tilde"), Chr(0x00F5) GetChar("diaeresis"), Chr(0x00F6) GetChar("tilde")],
 	},
 	"lat_c_let_o_tilde_horn", {
 		unicode: "{U+1EE0}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "horn"), Chr(0x00D5) GetChar("horn")],
+		recipe: ["$" GetChar("tilde", "horn"), "$" GetChar("horn", "tilde"), Chr(0x00D5) GetChar("horn"), Chr(0x01A0) GetChar("tilde")],
 	},
 	"lat_s_let_o_tilde_horn", {
 		unicode: "{U+1EE1}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "horn"), Chr(0x00F5) GetChar("horn")],
+		recipe: ["$" GetChar("tilde", "horn"), "$" GetChar("horn", "tilde"), Chr(0x00F5) GetChar("horn"), Chr(0x01A1) GetChar("tilde")],
 	},
 	"lat_c_let_o_tilde_overlay", {
 		unicode: "{U+019F}",
@@ -8044,13 +8110,13 @@ MapInsert(Characters,
 		unicode: "{U+1E64}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("acute", "dot_above"), Chr(0x015A) GetChar("dot_above")],
+		recipe: ["$" GetChar("acute", "dot_above"), "$" GetChar("dot_above", "acute"), Chr(0x015A) GetChar("dot_above"), Chr(0x1E60) GetChar("dot_above")],
 	},
 	"lat_s_let_s_acute_dot_above", {
 		unicode: "{U+1E65}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("acute", "dot_above"), Chr(0x015B) GetChar("dot_above")],
+		recipe: ["$" GetChar("acute", "dot_above"), "$" GetChar("dot_above", "acute"), Chr(0x015B) GetChar("dot_above"), Chr(0x1E61) GetChar("dot_above")],
 	},
 	"lat_c_let_s_comma_below", {
 		unicode: "{U+0218}",
@@ -8136,13 +8202,13 @@ MapInsert(Characters,
 		recipe: "$" GetChar("arrow_right_ushaped"),
 	},
 	"lat_c_let_s_dot_above", {
-		unicode: "{U+1E62}",
+		unicode: "{U+1E60}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("dot_above"),
 	},
 	"lat_s_let_s_dot_above", {
-		unicode: "{U+1E63}",
+		unicode: "{U+1E61}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("dot_above"),
@@ -8151,13 +8217,13 @@ MapInsert(Characters,
 		unicode: "{U+1E68}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("dot_above", "dot_below"), Chr(0x1E62) GetChar("dot_below"), Chr(0x1E62) GetChar("dot_above")],
+		recipe: ["$" GetChar("dot_above", "dot_below"), "$" GetChar("dot_below", "dot_above"), Chr(0x1E62) GetChar("dot_below"), Chr(0x1E62) GetChar("dot_above")],
 	},
 	"lat_s_let_s_dot_above_dot_below", {
 		unicode: "{U+1E69}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("dot_above", "dot_below"), Chr(0x1E63) GetChar("dot_below"), Chr(0x1E63) GetChar("dot_above")],
+		recipe: ["$" GetChar("dot_above", "dot_below"), "$" GetChar("dot_below", "dot_above"), Chr(0x1E63) GetChar("dot_below"), Chr(0x1E63) GetChar("dot_above")],
 	},
 	"lat_c_let_s_dot_below", {
 		unicode: "{U+1E62}",
@@ -8439,13 +8505,13 @@ MapInsert(Characters,
 		unicode: "{U+1EE8}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("acute", "horn"), Chr(0x00DA) GetChar("horn")],
+		recipe: ["$" GetChar("acute", "horn"), "$" GetChar("horn", "acute"), Chr(0x00DA) GetChar("horn"), Chr(0x01AF) GetChar("acute")],
 	},
 	"lat_s_let_u_acute_horn", {
 		unicode: "{U+1EE9}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("acute", "horn"), Chr(0x00FA) GetChar("horn")],
+		recipe: ["$" GetChar("acute", "horn"), "$" GetChar("horn", "acute"), Chr(0x00FA) GetChar("horn"), Chr(0x01B0) GetChar("acute")],
 	},
 	"lat_c_let_u_acute_double", {
 		unicode: "{U+0170}",
@@ -8535,13 +8601,13 @@ MapInsert(Characters,
 		unicode: "{U+1EF0}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("dot_below", "horn"), Chr(0x1EE4) GetChar("horn")],
+		recipe: ["$" GetChar("dot_below", "horn"), "$" GetChar("horn", "dot_below"), Chr(0x1EE4) GetChar("horn"), Chr(0x01AF) GetChar("dot_below")],
 	},
 	"lat_s_let_u_dot_below_horn", {
 		unicode: "{U+1EF1}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("dot_below", "horn"), Chr(0x1EE5) GetChar("horn")],
+		recipe: ["$" GetChar("dot_below", "horn"), "$" GetChar("horn", "dot_below"), Chr(0x1EE5) GetChar("horn"), Chr(0x01B0) GetChar("dot_below")],
 	},
 	"lat_c_let_u_diaeresis", {
 		unicode: "{U+00DC}",
@@ -8558,6 +8624,42 @@ MapInsert(Characters,
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
 		recipe: "$" GetChar("diaeresis"),
+	},
+	"lat_c_let_u_diaeresis_acute", {
+		unicode: "{U+01D7}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "acute"), "$" GetChar("acute", "diaeresis"), Chr(0x00DC) GetChar("acute"), Chr(0x00DA) GetChar("diaeresis")],
+	},
+	"lat_s_let_u_diaeresis_acute", {
+		unicode: "{U+01D8}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "acute"), "$" GetChar("acute", "diaeresis"), Chr(0x00FC) GetChar("acute"), Chr(0x00FA) GetChar("diaeresis")],
+	},
+	"lat_c_let_u_diaeresis_caron", {
+		unicode: "{U+01D9}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "caron"), "$" GetChar("caron", "diaeresis"), Chr(0x00DC) GetChar("caron"), Chr(0x01D9) GetChar("diaeresis")],
+	},
+	"lat_s_let_u_diaeresis_caron", {
+		unicode: "{U+01DA}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "caron"), "$" GetChar("caron", "diaeresis"), Chr(0x00FC) GetChar("caron"), Chr(0x01D4) GetChar("diaeresis")],
+	},
+	"lat_c_let_u_diaeresis_grave", {
+		unicode: "{U+01DB}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "grave"), "$" GetChar("grave", "diaeresis"), Chr(0x00DC) GetChar("grave"), Chr(0x00D9) GetChar("diaeresis")],
+	},
+	"lat_s_let_u_diaeresis_grave", {
+		unicode: "{U+01DC}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "grave"), "$" GetChar("grave", "diaeresis"), Chr(0x00FC) GetChar("grave"), Chr(0x00F9) GetChar("diaeresis")],
 	},
 	"lat_c_let_u_diaeresis_below", {
 		unicode: "{U+1E72}",
@@ -8591,13 +8693,13 @@ MapInsert(Characters,
 		unicode: "{U+1EEA}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("grave", "horn"), Chr(0x00D9) GetChar("horn")],
+		recipe: ["$" GetChar("grave", "horn"), "$" GetChar("horn", "grave"), Chr(0x00D9) GetChar("horn"), Chr(0x01AF) GetChar("grave")],
 	},
 	"lat_s_let_u_grave_horn", {
 		unicode: "{U+1EEB}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("grave", "horn"), Chr(0x00F9) GetChar("horn")],
+		recipe: ["$" GetChar("grave", "horn"), "$" GetChar("horn", "grave"), Chr(0x00F9) GetChar("horn"), Chr(0x01B0) GetChar("grave")],
 	},
 	"lat_c_let_u_grave_double", {
 		unicode: "{U+0214}",
@@ -8631,13 +8733,13 @@ MapInsert(Characters,
 		unicode: "{U+1EEC}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("hook_above", "horn"), Chr(0x1EE6) GetChar("horn")],
+		recipe: ["$" GetChar("hook_above", "horn"), "$" GetChar("horn", "hook_above"), Chr(0x1EE6) GetChar("horn"), Chr(0x01AF) GetChar("hook_above")],
 	},
 	"lat_s_let_u_hook_above_horn", {
 		unicode: "{U+1EED}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("hook_above", "horn"), Chr(0x1EE7) GetChar("horn")],
+		recipe: ["$" GetChar("hook_above", "horn"), "$" GetChar("horn", "hook_above"), Chr(0x1EE7) GetChar("horn"), Chr(0x01B0) GetChar("hook_above")],
 	},
 	"lat_s_let_u_retroflex_hook", {
 		unicode: "{U+1D99}",
@@ -8673,17 +8775,23 @@ MapInsert(Characters,
 		alt_on_fast_keys: ">+ $",
 		recipe: "$" GetChar("macron"),
 	},
+	;
+	;
+	;
+	;
+	;
+	;
 	"lat_c_let_u_macron_diaeresis", {
 		unicode: "{U+01D5}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "diaeresis"), Chr(0x016A) GetChar("diaeresis")],
+		recipe: ["$" GetChar("macron", "diaeresis"), "$" GetChar("diaeresis", "macron"), Chr(0x016A) GetChar("diaeresis"), Chr(0x00DC) GetChar("macron")],
 	},
 	"lat_s_let_u_macron_diaeresis", {
 		unicode: "{U+01D6}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "diaeresis"), Chr(0x016B) GetChar("diaeresis")],
+		recipe: ["$" GetChar("macron", "diaeresis"), "$" GetChar("diaeresis", "macron"), Chr(0x016B) GetChar("diaeresis"), Chr(0x00FC) GetChar("macron")],
 	},
 	"lat_c_let_u_ring_above", {
 		unicode: "{U+016E}",
@@ -8749,25 +8857,25 @@ MapInsert(Characters,
 		unicode: "{U+1E78}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "acute"), Chr(0x0168) GetChar("acute")],
+		recipe: ["$" GetChar("tilde", "acute"), "$" GetChar("acute", "tilde"), Chr(0x0168) GetChar("acute"), Chr(0x00DA) GetChar("tilde")],
 	},
 	"lat_s_let_u_tilde_acute", {
 		unicode: "{U+1E79}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "acute"), Chr(0x0169) GetChar("acute")],
+		recipe: ["$" GetChar("tilde", "acute"), "$" GetChar("acute", "tilde"), Chr(0x0169) GetChar("acute"), Chr(0x00FA) GetChar("tilde")],
 	},
 	"lat_c_let_u_tilde_horn", {
 		unicode: "{U+1EEE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "horn"), Chr(0x0168) GetChar("horn")],
+		recipe: ["$" GetChar("tilde", "horn"), "$" GetChar("horn", "tilde"), Chr(0x0168) GetChar("horn"), Chr(0x01AF) GetChar("tilde")],
 	},
 	"lat_s_let_u_tilde_horn", {
 		unicode: "{U+1EEF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "horn"), Chr(0x0169) GetChar("horn")],
+		recipe: ["$" GetChar("tilde", "horn"), "$" GetChar("horn", "tilde"), Chr(0x0169) GetChar("horn"), Chr(0x01B0) GetChar("tilde")],
 	},
 	"lat_c_let_u_tilde_below", {
 		unicode: "{U+1E74}",
@@ -16094,6 +16202,8 @@ Class FavoriteChars {
 	}
 
 	static Add(fave) {
+		fave := RegExReplace(fave, "^.*\s", "")
+
 		newContent := ""
 		alreadyExists := false
 
@@ -16109,7 +16219,7 @@ Class FavoriteChars {
 		}
 
 		FileDelete(this.favesPath)
-		FileAppend(Sort(RTrim(newContent, "`n")), this.favesPath, "UTF-8")
+		FileAppend(RTrim(newContent, "`n"), this.favesPath, "UTF-8")
 
 		Sleep 100
 
@@ -16119,6 +16229,8 @@ Class FavoriteChars {
 	}
 
 	static Remove(fave) {
+		fave := RegExReplace(fave, "^.*\s", "")
+
 		newContent := ""
 		for line in this.ReadList() {
 			if line != fave {
@@ -16137,6 +16249,8 @@ Class FavoriteChars {
 	}
 
 	static Check(fave) {
+		fave := RegExReplace(fave, "^.*\s", "")
+
 		for line in this.ReadList() {
 			if line == fave {
 				return True
@@ -16152,6 +16266,7 @@ Class FavoriteChars {
 	}
 
 	static CheckVar(fave) {
+		fave := RegExReplace(fave, "^.*\s", "")
 		return favoriteCharsList.Has(fave)
 	}
 
@@ -16505,7 +16620,6 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 
 Class Ligaturiser {
 
-
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 		this.modifiedCharsType := GetModifiedCharsType()
@@ -16555,11 +16669,14 @@ Class Ligaturiser {
 
 		output := ""
 		input := ""
+		previousInput := ""
+		pastInput := ""
 		tooltipSuggestions := ""
 		favoriteSuggestions := this.ReadFavorites()
 		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
 
 		pauseOn := False
+		cleanPastInput := False
 
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
@@ -16584,6 +16701,25 @@ Class Ligaturiser {
 
 			} else if IH.Input != "" {
 				input .= IH.Input
+
+				if interceptionInputMode != "" && StrLen(input) > 1 {
+					charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
+					telexChar := AsianInterceptionInput.TelexReturn(charPair)
+
+					if telexChar != charPair {
+						input := SubStr(input, 1, previousInput = "\" ? -3 : -2) telexChar
+						cleanPastInput := True
+					}
+				}
+
+				pastInput := previousInput
+				previousInput := IH.Input
+			}
+
+			if cleanPastInput {
+				pastInput := ""
+				previousInput := ""
+				cleanPastInput := False
 			}
 
 			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.EntriesWalk(input, True)) : ""
@@ -16617,16 +16753,9 @@ Class Ligaturiser {
 	}
 
 	SendOutput(output) {
-		if StrLen(output) > 36 {
-			clipboardBackup := A_Clipboard
-			A_Clipboard := output
-			ClipWait(0.5, 1)
-			Send("^v")
-
-			Sleep(500)
-			A_Clipboard := clipboardBackup
-
-		} else
+		if StrLen(output) > 36
+			ClipSend(output)
+		else
 			SendText(output)
 	}
 
@@ -16732,7 +16861,7 @@ Class Ligaturiser {
 
 		for line in getList {
 			if StrLen(line) > 0 {
-				characterEntry := Characters[line]
+				characterEntry := GetCharacterEntry(line)
 
 				if !HasProp(characterEntry, "recipe") || (HasProp(characterEntry, "recipe") && characterEntry.recipe == "") {
 					continue
@@ -16857,6 +16986,349 @@ Class Ligaturiser {
 	}
 }
 
+Global interceptionInputMode := ""
+
+Class AsianInterceptionInput {
+
+	static vietNam := Map(
+		"aa", Chr(0x00E2),
+		"AA", Chr(0x00C2),
+		"af", Chr(0x00E0),
+		"AF", Chr(0x00C0),
+		"as", Chr(0x00E1),
+		"AS", Chr(0x00C1),
+		"aw", Chr(0x0103),
+		"AW", Chr(0x0102),
+		"ax", Chr(0x00E3),
+		"AX", Chr(0x00C3),
+		"aj", Chr(0x1EA1),
+		"AJ", Chr(0x1EA0),
+		"ar", Chr(0x1EA3),
+		"AR", Chr(0x1EA2),
+		;
+		"a1", Chr(0x1EA5),
+		"A1", Chr(0x1EA4),
+		"a2", Chr(0x1EA7),
+		"A2", Chr(0x1EA6),
+		"a3", Chr(0x1EA9),
+		"A3", Chr(0x1EA8),
+		"a4", Chr(0x1EAD),
+		"A4", Chr(0x1EAC),
+		"a5", Chr(0x1EAB),
+		"A5", Chr(0x1EAA),
+		;
+		"q1", Chr(0x1EAF),
+		"Q1", Chr(0x1EAE),
+		"q2", Chr(0x1EB1),
+		"Q2", Chr(0x1EB0),
+		"q3", Chr(0x1EB3),
+		"Q3", Chr(0x1EB2),
+		"q4", Chr(0x1EB7),
+		"Q4", Chr(0x1EB6),
+		"q5", Chr(0x1EB5),
+		"Q5", Chr(0x1EB4),
+		;
+		"dd", Chr(0x0111),
+		"DD", Chr(0x0110),
+		;
+		"ee", Chr(0x00EA),
+		"EE", Chr(0x00CA),
+		"ef", Chr(0x00E8),
+		"EF", Chr(0x00C8),
+		"es", Chr(0x00E9),
+		"ES", Chr(0x00C9),
+		"ex", Chr(0x1EBD),
+		"EX", Chr(0x1EBC),
+		"ej", Chr(0x1EB9),
+		"EJ", Chr(0x1EB8),
+		"er", Chr(0x1EBB),
+		"ER", Chr(0x1EBA),
+		;
+		"e1", Chr(0x1EBF),
+		"E1", Chr(0x1EBE),
+		"e2", Chr(0x1EC1),
+		"E2", Chr(0x1EC0),
+		"e3", Chr(0x1EC3),
+		"E3", Chr(0x1EC2),
+		"e4", Chr(0x1EC7),
+		"E4", Chr(0x1EC6),
+		"e5", Chr(0x1EC5),
+		"E5", Chr(0x1EC4),
+		;
+		"if", Chr(0x00EC),
+		"IF", Chr(0x00CC),
+		"is", Chr(0x00ED),
+		"IS", Chr(0x00CD),
+		"ix", Chr(0x0129),
+		"IX", Chr(0x0128),
+		"ij", Chr(0x1ECB),
+		"IJ", Chr(0x1ECA),
+		"ir", Chr(0x1EC9),
+		"IR", Chr(0x1EC8),
+		;
+		"oo", Chr(0x00F4),
+		"OO", Chr(0x00D4),
+		"of", Chr(0x00F2),
+		"OF", Chr(0x00D2),
+		"os", Chr(0x00F3),
+		"OS", Chr(0x00D3),
+		"ow", Chr(0x01A1),
+		"OW", Chr(0x01A0),
+		"ox", Chr(0x00F5),
+		"OX", Chr(0x00D5),
+		"oj", Chr(0x1ECD),
+		"OJ", Chr(0x1ECC),
+		"or", Chr(0x1ECF),
+		"OR", Chr(0x1ECE),
+		;
+		"o1", Chr(0x1ED1),
+		"O1", Chr(0x1ED0),
+		"o2", Chr(0x1ED3),
+		"O2", Chr(0x1ED2),
+		"o3", Chr(0x1ED5),
+		"O3", Chr(0x1ED4),
+		"o4", Chr(0x1ED9),
+		"O4", Chr(0x1ED8),
+		"o5", Chr(0x1ED7),
+		"O5", Chr(0x1ED6),
+		;
+		"p1", Chr(0x1EDB),
+		"P1", Chr(0x1EDA),
+		"p2", Chr(0x1EDD),
+		"P2", Chr(0x1EDC),
+		"p3", Chr(0x1EDF),
+		"P3", Chr(0x1EDE),
+		"p4", Chr(0x1EE3),
+		"P4", Chr(0x1EE2),
+		"p5", Chr(0x1EE1),
+		"P5", Chr(0x1EE0),
+		;
+		"uf", Chr(0x00F9),
+		"UF", Chr(0x00D9),
+		"us", Chr(0x00FA),
+		"US", Chr(0x00DA),
+		"uw", Chr(0x01B0),
+		"UW", Chr(0x01AF),
+		"ux", Chr(0x0169),
+		"UX", Chr(0x0168),
+		"uj", Chr(0x1EE5),
+		"UJ", Chr(0x1EE4),
+		"ur", Chr(0x1EE7),
+		"UR", Chr(0x1EE6),
+		;
+		"u1", Chr(0x1EE9),
+		"U1", Chr(0x1EE8),
+		"u2", Chr(0x1EEB),
+		"U2", Chr(0x1EEA),
+		"u3", Chr(0x1EED),
+		"U3", Chr(0x1EEC),
+		"u4", Chr(0x1EF1),
+		"U4", Chr(0x1EF0),
+		"u5", Chr(0x1EEF),
+		"U5", Chr(0x1EEE),
+		;
+		"yf", Chr(0x1EF3),
+		"YF", Chr(0x1EF2),
+		"ys", Chr(0x00FD),
+		"YS", Chr(0x00DD),
+		"yx", Chr(0x1EF9),
+		"YX", Chr(0x1EF8),
+		"yj", Chr(0x1EF5),
+		"YJ", Chr(0x1EF4),
+		"yr", Chr(0x1EF7),
+		"YR", Chr(0x1EF6),
+		;*
+		;* Gia-Rai (Jarai) Extensions
+		;*
+		"cz", Chr(0x010D),
+		"CZ", Chr(0x010C),
+		;
+		"bb", Chr(0x0180),
+		"BB", Chr(0x0243),
+		;
+		"ew", Chr(0x0115),
+		"EW", Chr(0x0114),
+		"ez", Chr(0x011B),
+		"EZ", Chr(0x011A),
+		;
+		"iw", Chr(0x012D),
+		"IW", Chr(0x012C),
+		;
+		"nn", Chr(0x00F1),
+		"NN", Chr(0x00D1),
+		;
+		"oq", Chr(0x014F),
+		"OQ", Chr(0x014E),
+		"oz", Chr(0x01D2),
+		"OZ", Chr(0x01D1),
+		"o8", Chr(0x00F6),
+		"O8", Chr(0x00D6),
+		;
+		"uq", Chr(0x016D),
+		"UQ", Chr(0x016C),
+		"u8", Chr(0x00FC),
+		"U8", Chr(0x00DC),
+	)
+
+	static pinYin := Map(
+		"aa", Chr(0x0101),
+		"AA", Chr(0x0100),
+		"af", Chr(0x00E0),
+		"AF", Chr(0x00C0),
+		"as", Chr(0x00E1),
+		"AS", Chr(0x00C1),
+		"av", Chr(0x01CE),
+		"AV", Chr(0x01CD),
+		;
+		"ee", Chr(0x0113),
+		"EE", Chr(0x0112),
+		"ef", Chr(0x00E8),
+		"EF", Chr(0x00C8),
+		"es", Chr(0x00E9),
+		"ES", Chr(0x00C9),
+		"ev", Chr(0x011B),
+		"EV", Chr(0x011A),
+		;
+		"ii", Chr(0x012B),
+		"II", Chr(0x012A),
+		"if", Chr(0x00EC),
+		"IF", Chr(0x00CC),
+		"is", Chr(0x00ED),
+		"IS", Chr(0x00CD),
+		"iv", Chr(0x01D0),
+		"IV", Chr(0x01CF),
+		;
+		"oo", Chr(0x014D),
+		"OO", Chr(0x014C),
+		"of", Chr(0x00F2),
+		"OF", Chr(0x00D2),
+		"os", Chr(0x00F3),
+		"OS", Chr(0x00D3),
+		"ov", Chr(0x01D2),
+		"OV", Chr(0x01D1),
+		;
+		"uu", Chr(0x016B),
+		"UU", Chr(0x016A),
+		"uf", Chr(0x00F9),
+		"UF", Chr(0x00D9),
+		"us", Chr(0x00FA),
+		"US", Chr(0x00DA),
+		"uv", Chr(0x01D4),
+		"UV", Chr(0x01D3),
+		"u1", Chr(0x01D8),
+		"U1", Chr(0x01D7),
+		"u2", Chr(0x01DC),
+		"U2", Chr(0x01DB),
+		"u3", Chr(0x01DA),
+		"U3", Chr(0x01D9),
+		"u4", Chr(0x01D6),
+		"U4", Chr(0x01D5),
+		"u8", Chr(0x00FC),
+		"U8", Chr(0x00DC),
+	)
+
+	static karaShiki := Map(
+		"ее", Chrs(0x0451, 0x0304),
+		"ЕЕ", Chrs(0x0401, 0x0304),
+		"ии", Chr(0x04E3),
+		"ИИ", Chr(0x04E3),
+		"оо", Chrs(0x043E, 0x0304),
+		"ОО", Chrs(0x041E, 0x0304),
+		"сс", Chr(0x04AB),
+		"СС", Chr(0x04AA),
+		"уу", Chr(0x04EF),
+		"УУ", Chr(0x04EE),
+		"уй", Chr(0x045E),
+		"УЙ", Chr(0x040E),
+		"юю", Chrs(0x044E, 0x0304),
+		"ЮЮ", Chrs(0x042E, 0x0304),
+		;
+		;
+		"aa", Chr(0x0101),
+		"AA", Chr(0x0100),
+		;
+		"ee", Chr(0x0113),
+		"EE", Chr(0x0112),
+		;
+		"oo", Chr(0x014D),
+		"OO", Chr(0x014C),
+		"ov", Chr(0x00F4),
+		"OV", Chr(0x00D4),
+		;
+		"ii", Chr(0x012B),
+		"II", Chr(0x012A),
+		"iq", Chr(0x012D),
+		"IQ", Chr(0x012C),
+		;
+		"uq", Chr(0x016D),
+		"UQ", Chr(0x016C),
+		"uu", Chr(0x016B),
+		"UU", Chr(0x016A),
+	)
+
+	__New(mode := "vietNam") {
+		this.mode := mode
+		this.RegistryHotstrings(mode)
+	}
+
+	RegistryHotstrings(mode) {
+		global interceptionInputMode
+
+		previousMode := interceptionInputMode
+
+		interceptionInputMode := (mode != interceptionInputMode ? mode : "")
+		isEnabled := (interceptionInputMode != "" ? True : False)
+
+		if previousMode != "" && isEnabled {
+			for key, value in AsianInterceptionInput.%previousMode% {
+				HotString(":*C?:" key, "", False)
+				HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), "", False)
+			}
+		}
+
+		for key, value in AsianInterceptionInput.%this.mode% {
+			HotString(":*C?:" key, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
+			HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
+		}
+
+		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
+	}
+
+	static Telexiser(_, input) {
+		input := RegExReplace(input, "^.*?:.*?:", "")
+
+		if InStr(input, "\") {
+			SendText(RegExReplace(input, "\\", ""))
+			return
+		}
+
+		for key, value in AsianInterceptionInput.%interceptionInputMode% {
+			if (input == key) {
+
+				SendText(value)
+				break
+			}
+		}
+		return ""
+	}
+
+	static TelexReturn(input) {
+		output := input
+
+		for key, value in AsianInterceptionInput.%interceptionInputMode% {
+			if (input == key) {
+				output := value
+				break
+			} else if InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3))) {
+				output := key
+				break
+			}
+		}
+		return output
+	}
+}
+
+
 GroupActivator(GroupName, KeyValue := "") {
 	LocaleMark := KeyValue != "" && RegExMatch(KeyValue, "^F") ? KeyValue : GroupName
 	MsgTitle := "[" LocaleMark "] " DSLPadTitle
@@ -16871,7 +17343,7 @@ ReplaceWithUnicode(Mode := "") {
 	PromptValue := ""
 	A_Clipboard := ""
 
-	Send("^c")
+	Send("{Shift Down}{Delete}{Shift Up}")
 	ClipWait(0.5, 1)
 	PromptValue := A_Clipboard
 	A_Clipboard := ""
@@ -16904,10 +17376,14 @@ ReplaceWithUnicode(Mode := "") {
 
 		A_Clipboard := RegExReplace(Output, "\s$", "")
 		ClipWait(0.250, 1)
-		Send("^v")
+		Send("{Shift Down}{Insert}{Shift Up}")
 	}
+	;if GetKeyState("Ctrl", "P")
+	SetTimer((*) => Send("{Ctrl Up}"), -300)
 	Sleep 500
 	A_Clipboard := BackupClipboard
+
+	return
 }
 
 GetCharacterUnicode(Symbol, StartFormat := "") {
@@ -18477,25 +18953,40 @@ ConvertComboKeys(Output) {
 	return Output
 }
 
-HandleFastKey(Combo := "", CharacterNames*) {
-	global FastKeysIsActive
-	IsLayoutValid := CheckLayoutValid()
+HandleFastKey(combo := "", characterNames*) {
+	isLayoutValid := CheckLayoutValid()
 
+	if isLayoutValid {
+		output := ""
 
-	if IsLayoutValid {
-		Output := ""
-
-		for _, Character in CharacterNames {
-			Output .= GetCharacterSequence(Character)
+		for _, character in characterNames {
+			output .= GetCharacterSequence(character)
 		}
-		SendText(Output)
+
+		inputType := RegExMatch(output, GetChar("minus")) ? "Text" : "Input"
+		Send%inputType%(output)
 
 	} else {
-		if Combo != "" {
-			Send(ConvertComboKeys(Combo))
+		if combo != "" {
+			Send(ConvertComboKeys(combo))
 		}
 	}
 	return
+}
+
+GetCharacterEntry(CharacterName) {
+	for characterEntry, value in Characters {
+		entryID := ""
+		entryName := ""
+		if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
+			entryID := match[1]
+			entryName := match[2]
+
+			if entryName == CharacterName {
+				return value
+			}
+		}
+	}
 }
 
 GetCharacterSequence(CharacterName) {
@@ -18967,9 +19458,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"N", Map("Flat:<^<!", "cyr_com_titlo"),
 			"O", Map("Flat:<^<!", "ogonek", "Flat:<^<!<+", "ogonek_above"),
 			"R", Map("Flat:<^<!", "ring_above", "Flat:<^<!<+", "ring_below"),
-			"V", Map("Flat:<^<!", "line_vertical", "Flat:<^<!<+", "line_vertical_double"),
-			"T", Map("Flat:<^<!", "tilde", "Flat:<^<!<+", "tilde_overlay"),
 			"S", Map("Flat:<^<!", "stroke_short", "Flat:<^<!<+", "stroke_long"),
+			"T", Map("Flat:<^<!", "tilde", "Flat:<^<!<+", "tilde_overlay"),
+			"V", Map("Flat:<^<!", "line_vertical", "Flat:<^<!<+", "line_vertical_double"),
 			"X", Map("Flat:<^<!", "x_above", "Flat:<^<!<+", "x_below"),
 			"Z", Map("Flat:<^<!", "zigzag_above"),
 			"/", Map("Flat:<^<!", "solidus_short", "Flat:<^<!<+", "solidus_long"),
@@ -19150,7 +19641,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<!>+", ["lat_c_let_d_cedilla", "lat_s_let_d_cedilla"],
 				"<^>!<+>+", ["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"]),
 			"E", Map("<!", ["lat_c_let_e_acute", "lat_s_let_e_acute"],
-			"<^>!", ["lat_c_let_e_breve", "lat_s_let_e_breve"],
+			"<^>!", ["lat_c_let_schwa", "lat_s_let_schwa"],
 			"<^>!<!", ["lat_c_let_e_circumflex", "lat_s_let_e_circumflex"],
 			"<^>!<!<+", ["lat_c_let_e_caron", "lat_s_let_e_caron"],
 			"<^>!<!>+", ["lat_c_let_e_ogonek", "lat_s_let_e_ogonek"],
@@ -20132,6 +20623,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
+			"<^>!" UseKey["F2"], (*) => AsianInterceptionInput(),
+			"<^>!>+" UseKey["F2"], (*) => AsianInterceptionInput("pinYin"),
+			"<^>!<+" UseKey["F2"], (*) => AsianInterceptionInput("karaShiki"),
 			;
 			"<^<!" UseKey["Numpad1"], (*) => SetModifiedCharsInput(),
 			"<^<!<+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("modifier"),
@@ -20322,7 +20816,7 @@ RShiftEndingTimer() {
 
 RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 
-ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False) {
+ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True
 		return
 	LanguageCode := GetLanguageCode()
@@ -20330,7 +20824,7 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle,
 	Ico := MessageIcon == "Info" ? "Iconi" :
 		MessageIcon == "Warning" ? "Icon!" :
 			MessageIcon == "Error" ? "Iconx" : 0x0
-	TrayTip(ReadLocale(MessagePost), MessageTitle, Ico . Muting)
+	TrayTip(NoReadLocale ? MessagePost : ReadLocale(MessagePost), MessageTitle, Ico . Muting)
 
 }
 
@@ -20636,7 +21130,56 @@ AccLocation(Acc, ChildId := 0, &Position := '') {
 		return
 	return { x: NumGet(x, 'int'), y: NumGet(y, 'int'), w: NumGet(w, 'int'), h: NumGet(h, 'int') }
 }
+;
+;
+;
+;
+;
 
+
+;
+; Code parts get from https://github.com/Axlefublr/lib-v2/tree/main
+
+
+ClipSend(toSend, endChar := "", isClipReverted := true, untilRevert := 300) {
+	if isClipReverted
+		prevClip := ClipboardAll()
+
+	A_Clipboard := ""
+	A_Clipboard := toSend endChar
+	ClipWait(1)
+	Send("{Shift Down}{Insert}{Shift Up}")
+
+	if isClipReverted
+		SetTimer(() => A_Clipboard := prevClip, -untilRevert)
+}
+
+
+GetInput(options?, endKeys?) {
+	inputHookObject := InputHook(options?, endKeys?)
+	inputHookObject.Start()
+	inputHookObject.Wait()
+	return inputHookObject
+}
+
+_ArrayToString(this, char := ", ") {
+	for index, value in this {
+		if index = this.Length {
+			str .= value
+			break
+		}
+		str .= value char
+	}
+	return str
+}
+
+_ArrayHasValue(this, valueToFind) {
+	for index, value in this {
+		if value = valueToFind
+			return true
+	}
+	return false
+}
 
 ;
 ;
