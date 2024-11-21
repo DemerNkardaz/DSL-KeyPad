@@ -16136,6 +16136,8 @@ Class FavoriteChars {
 	}
 
 	static Add(fave) {
+		fave := RegExReplace(fave, "^.*\s", "")
+
 		newContent := ""
 		alreadyExists := false
 
@@ -16151,7 +16153,7 @@ Class FavoriteChars {
 		}
 
 		FileDelete(this.favesPath)
-		FileAppend(Sort(RTrim(newContent, "`n")), this.favesPath, "UTF-8")
+		FileAppend(RTrim(newContent, "`n"), this.favesPath, "UTF-8")
 
 		Sleep 100
 
@@ -16161,6 +16163,8 @@ Class FavoriteChars {
 	}
 
 	static Remove(fave) {
+		fave := RegExReplace(fave, "^.*\s", "")
+
 		newContent := ""
 		for line in this.ReadList() {
 			if line != fave {
@@ -16179,6 +16183,8 @@ Class FavoriteChars {
 	}
 
 	static Check(fave) {
+		fave := RegExReplace(fave, "^.*\s", "")
+
 		for line in this.ReadList() {
 			if line == fave {
 				return True
@@ -16194,6 +16200,7 @@ Class FavoriteChars {
 	}
 
 	static CheckVar(fave) {
+		fave := RegExReplace(fave, "^.*\s", "")
 		return favoriteCharsList.Has(fave)
 	}
 
@@ -16796,7 +16803,7 @@ Class Ligaturiser {
 
 		for line in getList {
 			if StrLen(line) > 0 {
-				characterEntry := Characters[line]
+				characterEntry := GetCharacterEntry(line)
 
 				if !HasProp(characterEntry, "recipe") || (HasProp(characterEntry, "recipe") && characterEntry.recipe == "") {
 					continue
@@ -18750,6 +18757,21 @@ HandleFastKey(combo := "", characterNames*) {
 		}
 	}
 	return
+}
+
+GetCharacterEntry(CharacterName) {
+	for characterEntry, value in Characters {
+		entryID := ""
+		entryName := ""
+		if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
+			entryID := match[1]
+			entryName := match[2]
+
+			if entryName == CharacterName {
+				return value
+			}
+		}
+	}
 }
 
 GetCharacterSequence(CharacterName) {
