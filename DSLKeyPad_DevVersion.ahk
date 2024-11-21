@@ -16882,9 +16882,6 @@ Class Ligaturiser {
 Global isVietnameseInput := False
 
 Class VietnameseTelex {
-	__New() {
-		VietnameseTelex.RegistryHotstrings()
-	}
 
 	static telexReplaces := Map(
 		"aa", Chr(0x00E2),
@@ -16927,7 +16924,13 @@ Class VietnameseTelex {
 		"OJ", Chr(0x1ECC),
 		"uj", Chr(0x1EE5),
 		"UJ", Chr(0x1EE4),
+		"ăf", Chr(0x1EB1), ; ằ
+		"ĂF", Chr(0x1EB0), ; Ằ
 	)
+
+	__New() {
+		VietnameseTelex.RegistryHotstrings()
+	}
 
 	static RegistryHotstrings() {
 		global isVietnameseInput
@@ -18597,21 +18600,20 @@ ConvertComboKeys(Output) {
 	return Output
 }
 
-HandleFastKey(Combo := "", CharacterNames*) {
-	global FastKeysIsActive
-	IsLayoutValid := CheckLayoutValid()
+HandleFastKey(combo := "", characterNames*) {
+	isLayoutValid := CheckLayoutValid()
 
-	if IsLayoutValid {
-		Output := ""
+	if isLayoutValid {
+		output := ""
 
-		for _, Character in CharacterNames {
-			Output .= GetCharacterSequence(Character)
+		for _, character in characterNames {
+			output .= GetCharacterSequence(character)
 		}
-		SendText(Output)
+		SendText(output)
 
 	} else {
-		if Combo != "" {
-			Send(ConvertComboKeys(Combo))
+		if combo != "" {
+			Send(ConvertComboKeys(combo))
 		}
 	}
 	return
