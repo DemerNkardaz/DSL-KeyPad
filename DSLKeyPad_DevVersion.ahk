@@ -17078,6 +17078,37 @@ Class AsianInterceptionInput {
 		"YJ", Chr(0x1EF4),
 		"yr", Chr(0x1EF7),
 		"YR", Chr(0x1EF6),
+		;*
+		;* Gia-Rai (Jarai) Extensions
+		;*
+		"cz", Chr(0x010D),
+		"CZ", Chr(0x010C),
+		;
+		"bb", Chr(0x0180),
+		"BB", Chr(0x0243),
+		;
+		"ew", Chr(0x0115),
+		"EW", Chr(0x0114),
+		"ez", Chr(0x011B),
+		"EZ", Chr(0x011A),
+		;
+		"iw", Chr(0x012D),
+		"IW", Chr(0x012C),
+		;
+		"nn", Chr(0x00F1),
+		"NN", Chr(0x00D1),
+		;
+		"oq", Chr(0x014F),
+		"OQ", Chr(0x014E),
+		"oz", Chr(0x01D2),
+		"OZ", Chr(0x01D1),
+		"o8", Chr(0x00F6),
+		"O8", Chr(0x00D6),
+		;
+		"uq", Chr(0x016D),
+		"UQ", Chr(0x016C),
+		"u8", Chr(0x00FC),
+		"U8", Chr(0x00DC),
 	)
 
 	static pinYin := Map(
