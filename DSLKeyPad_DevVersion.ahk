@@ -8673,17 +8673,59 @@ MapInsert(Characters,
 		alt_on_fast_keys: ">+ $",
 		recipe: "$" GetChar("macron"),
 	},
+	;
+	;
+	;
+	"lat_c_let_u_macron_acute", {
+		unicode: "{U+01D7}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("macron", "acute"), "$" GetChar("acute", "macron"), Chr(0x016A) GetChar("acute"), Chr(0x00DA) GetChar("macron")],
+	},
+	"lat_s_let_u_macron_acute", {
+		unicode: "{U+01D8}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("macron", "acute"), "$" GetChar("acute", "macron"), Chr(0x016B) GetChar("acute"), Chr(0x00FA) GetChar("macron")],
+	},
+	"lat_c_let_u_macron_caron", {
+		unicode: "{U+01D9}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("macron", "caron"), "$" GetChar("caron", "macron"), Chr(0x016A) GetChar("caron"), Chr(0x00DB) GetChar("macron")],
+	},
+	"lat_s_let_u_macron_caron", {
+		unicode: "{U+01DA}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("macron", "caron"), "$" GetChar("caron", "macron"), Chr(0x016B) GetChar("caron"), Chr(0x00FB) GetChar("macron")],
+	},
+	"lat_c_let_u_macron_grave", {
+		unicode: "{U+01DB}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("macron", "grave"), "$" GetChar("grave", "macron"), Chr(0x016A) GetChar("grave"), Chr(0x00D9) GetChar("macron")],
+	},
+	"lat_s_let_u_macron_grave", {
+		unicode: "{U+01DC}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("macron", "grave"), "$" GetChar("grave", "macron"), Chr(0x016B) GetChar("grave"), Chr(0x00F9) GetChar("macron")],
+	},
+	;
+	;
+	;
 	"lat_c_let_u_macron_diaeresis", {
 		unicode: "{U+01D5}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "diaeresis"), Chr(0x016A) GetChar("diaeresis")],
+		recipe: ["$" GetChar("macron", "diaeresis"), "$" GetChar("diaeresis", "macron"), Chr(0x016A) GetChar("diaeresis"), Chr(0x00DC) GetChar("macron")],
 	},
 	"lat_s_let_u_macron_diaeresis", {
 		unicode: "{U+01D6}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "diaeresis"), Chr(0x016B) GetChar("diaeresis")],
+		recipe: ["$" GetChar("macron", "diaeresis"), "$" GetChar("diaeresis", "macron"), Chr(0x016B) GetChar("diaeresis"), Chr(0x00FC) GetChar("macron")],
 	},
 	"lat_c_let_u_ring_above", {
 		unicode: "{U+016E}",
@@ -16964,26 +17006,46 @@ Class AsianInterceptionInput {
 	static pinYin := Map(
 		"aa", Chr(0x0101),
 		"AA", Chr(0x0100),
-		"av", Chr(0x01CE),
-		"AV", Chr(0x01CD),
-		"ak", Chr(0x00E1),
-		"AK", Chr(0x00C1),
 		"af", Chr(0x00E0),
 		"AF", Chr(0x00C0),
+		"as", Chr(0x00E1),
+		"AS", Chr(0x00C1),
+		"av", Chr(0x01CE),
+		"AV", Chr(0x01CD),
+		;
 		"ee", Chr(0x0113),
 		"EE", Chr(0x0112),
+		"ef", Chr(0x00E8),
+		"EF", Chr(0x00C8),
+		"es", Chr(0x00E9),
+		"ES", Chr(0x00C9),
 		"ev", Chr(0x011B),
 		"EV", Chr(0x011A),
+		;
 		"ii", Chr(0x012B),
 		"II", Chr(0x012A),
+		"if", Chr(0x00EC),
+		"IF", Chr(0x00CC),
+		"is", Chr(0x00ED),
+		"IS", Chr(0x00CD),
 		"iv", Chr(0x01D0),
 		"IV", Chr(0x01CF),
+		;
 		"oo", Chr(0x014D),
 		"OO", Chr(0x014C),
+		"of", Chr(0x00F2),
+		"OF", Chr(0x00D2),
+		"os", Chr(0x00F3),
+		"OS", Chr(0x00D3),
 		"ov", Chr(0x01D2),
 		"OV", Chr(0x01D1),
+		;
 		"uu", Chr(0x016B),
 		"UU", Chr(0x016A),
+		"uf", Chr(0x00F9),
+		"UF", Chr(0x00D9),
+		"us", Chr(0x00FA),
+		"US", Chr(0x00DA),
 		"uv", Chr(0x01D4),
 		"UV", Chr(0x01D3),
 	)
