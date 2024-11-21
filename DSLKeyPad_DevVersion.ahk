@@ -7169,6 +7169,18 @@ MapInsert(Characters,
 		alt_on_fast_keys: "$",
 		recipe: "$" GetChar("acute"),
 	},
+	"lat_c_let_o_acute_horn", {
+		unicode: "{U+1EDA}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("acute", "horn"), "$" GetChar("horn", "acute"), Chr(0x00D3) GetChar("horn"), Chr(0x01A0) GetChar("acute")],
+	},
+	"lat_s_let_o_acute_horn", {
+		unicode: "{U+1EDB}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("acute", "horn"), "$" GetChar("horn", "acute"), Chr(0x00F3) GetChar("horn"), Chr(0x01A1) GetChar("acute")],
+	},
 	"lat_c_let_o_acute_double", {
 		unicode: "{U+0150}",
 		titlesAlt: True,
@@ -7325,6 +7337,18 @@ MapInsert(Characters,
 		group: ["Latin Accented"],
 		recipe: "$" GetChar("dot_below"),
 	},
+	"lat_c_let_o_dot_below_horn", {
+		unicode: "{U+1EDA}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("dot_below", "horn"), "$" GetChar("horn", "dot_below"), Chr(0x1ECC) GetChar("horn"), Chr(0x01A0) GetChar("dot_below")],
+	},
+	"lat_s_let_o_dot_below_horn", {
+		unicode: "{U+1EDB}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("dot_below", "horn"), "$" GetChar("horn", "dot_below"), Chr(0x1ECD) GetChar("horn"), Chr(0x01A1) GetChar("dot_below")],
+	},
 	"lat_c_let_o_diaeresis", {
 		unicode: "{U+00D6}",
 		titlesAlt: True,
@@ -7357,6 +7381,18 @@ MapInsert(Characters,
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "$",
 		recipe: "$" GetChar("grave"),
+	},
+	"lat_c_let_o_grave_horn", {
+		unicode: "{U+1EDC}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("grave", "horn"), "$" GetChar("horn", "grave"), Chr(0x00D2) GetChar("horn"), Chr(0x01A0) GetChar("grave")],
+	},
+	"lat_s_let_o_grave_horn", {
+		unicode: "{U+1EDD}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("grave", "horn"), "$" GetChar("horn", "grave"), Chr(0x00F2) GetChar("horn"), Chr(0x01A1) GetChar("grave")],
 	},
 	"lat_c_let_o_grave_double", {
 		unicode: "{U+020C}",
@@ -7402,13 +7438,13 @@ MapInsert(Characters,
 		unicode: "{U+1EDE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: "$" GetChar("hook_above", "horn"),
+		recipe: ["$" GetChar("hook_above", "horn"), "$" GetChar("horn", "hook_above"), Chr(0x1ECE) GetChar("horn"), Chr(0x01A0) GetChar("hook_above")],
 	},
 	"lat_s_let_o_hook_above_horn", {
 		unicode: "{U+1EDF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: "$" GetChar("hook_above", "horn"),
+		recipe: ["$" GetChar("hook_above", "horn"), "$" GetChar("horn", "hook_above"), Chr(0x1ECF) GetChar("horn"), Chr(0x01A1) GetChar("hook_above")],
 	},
 	"lat_s_let_o_retroflex_hook", {
 		unicode: "{U+1DF1B}",
@@ -7502,25 +7538,25 @@ MapInsert(Characters,
 		unicode: "{U+01EC}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "ogonek"), Chr(0x014C) GetChar("ogonek")],
+		recipe: ["$" GetChar("macron", "ogonek"), "$" GetChar("ogonek", "macron"), Chr(0x014C) GetChar("ogonek"), Chr(0x01EA) GetChar("macron")],
 	},
 	"lat_s_let_o_macron_ogonek", {
 		unicode: "{U+01ED}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "ogonek"), Chr(0x014D) GetChar("ogonek")],
+		recipe: ["$" GetChar("macron", "ogonek"), "$" GetChar("ogonek", "macron"), Chr(0x014D) GetChar("ogonek"), Chr(0x01EB) GetChar("macron")],
 	},
 	"lat_c_let_o_macron_tilde", {
 		unicode: "{U+022C}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "tilde"), Chr(0x014C) GetChar("tilde")],
+		recipe: ["$" GetChar("macron", "tilde"), "$" GetChar("tilde", "macron"), Chr(0x014C) GetChar("tilde"), Chr(0x00D5) GetChar("macron")],
 	},
 	"lat_s_let_o_macron_tilde", {
 		unicode: "{U+022D}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "tilde"), Chr(0x014D) GetChar("tilde")],
+		recipe: ["$" GetChar("macron", "tilde"), "$" GetChar("tilde", "macron"), Chr(0x014D) GetChar("tilde"), Chr(0x00F5) GetChar("macron")],
 	},
 	"lat_c_let_o_solidus_long", {
 		unicode: "{U+00D8}",
@@ -7543,13 +7579,13 @@ MapInsert(Characters,
 		unicode: "{U+01FE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("solidus_long", "acute"), Chr(0x00D8) GetChar("acute")],
+		recipe: ["$" GetChar("solidus_long", "acute"), "$" GetChar("acute", "solidus_long"), Chr(0x00D8) GetChar("acute"), Chr(0x00D3) GetChar("solidus_long")],
 	},
 	"lat_s_let_o_solidus_long_acute", {
 		unicode: "{U+01FF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("solidus_long", "acute"), Chr(0x00F8) GetChar("acute")],
+		recipe: ["$" GetChar("solidus_long", "acute"), "$" GetChar("acute", "solidus_long"), Chr(0x00F8) GetChar("acute"), Chr(0x00F3) GetChar("solidus_long")],
 	},
 	"lat_s_let_o_solidus_long_open", {
 		unicode: "{U+AB3F}",
@@ -7615,37 +7651,37 @@ MapInsert(Characters,
 		unicode: "{U+1E4C}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "acute"), Chr(0x00D5) GetChar("acute")],
+		recipe: ["$" GetChar("tilde", "acute"), "$" GetChar("acute", "tilde"), Chr(0x00D5) GetChar("acute"), Chr(0x00D3) GetChar("tilde")],
 	},
 	"lat_s_let_o_tilde_acute", {
 		unicode: "{U+1E4D}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "acute"), Chr(0x00F5) GetChar("acute")],
+		recipe: ["$" GetChar("tilde", "acute"), "$" GetChar("acute", "tilde"), Chr(0x00F5) GetChar("acute"), Chr(0x00F3) GetChar("tilde")],
 	},
 	"lat_c_let_o_tilde_diaeresis", {
 		unicode: "{U+1E4E}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "diaeresis"), Chr(0x00D5) GetChar("diaeresis")],
+		recipe: ["$" GetChar("tilde", "diaeresis"), "$" GetChar("diaeresis", "tilde"), Chr(0x00D5) GetChar("diaeresis"), Chr(0x00D6) GetChar("tilde")],
 	},
 	"lat_s_let_o_tilde_diaeresis", {
 		unicode: "{U+1E4F}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "diaeresis"), Chr(0x00F5) GetChar("diaeresis")],
+		recipe: ["$" GetChar("tilde", "diaeresis"), "$" GetChar("diaeresis", "tilde"), Chr(0x00F5) GetChar("diaeresis"), Chr(0x00F6) GetChar("tilde")],
 	},
 	"lat_c_let_o_tilde_horn", {
 		unicode: "{U+1EE0}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "horn"), Chr(0x00D5) GetChar("horn")],
+		recipe: ["$" GetChar("tilde", "horn"), "$" GetChar("horn", "tilde"), Chr(0x00D5) GetChar("horn"), Chr(0x01A0) GetChar("tilde")],
 	},
 	"lat_s_let_o_tilde_horn", {
 		unicode: "{U+1EE1}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "horn"), Chr(0x00F5) GetChar("horn")],
+		recipe: ["$" GetChar("tilde", "horn"), "$" GetChar("horn", "tilde"), Chr(0x00F5) GetChar("horn"), Chr(0x01A1) GetChar("tilde")],
 	},
 	"lat_c_let_o_tilde_overlay", {
 		unicode: "{U+019F}",
@@ -8442,13 +8478,13 @@ MapInsert(Characters,
 		unicode: "{U+1EE8}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("acute", "horn"), Chr(0x00DA) GetChar("horn")],
+		recipe: ["$" GetChar("acute", "horn"), "$" GetChar("horn", "acute"), Chr(0x00DA) GetChar("horn"), Chr(0x01AF) GetChar("acute")],
 	},
 	"lat_s_let_u_acute_horn", {
 		unicode: "{U+1EE9}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("acute", "horn"), Chr(0x00FA) GetChar("horn")],
+		recipe: ["$" GetChar("acute", "horn"), "$" GetChar("horn", "acute"), Chr(0x00FA) GetChar("horn"), Chr(0x01B0) GetChar("acute")],
 	},
 	"lat_c_let_u_acute_double", {
 		unicode: "{U+0170}",
@@ -8578,13 +8614,13 @@ MapInsert(Characters,
 		unicode: "{U+01D9}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("diaeresis", "caron"), "$" GetChar("caron", "diaeresis"), Chr(0x00DC) GetChar("caron"), Chr(0x00DB) GetChar("diaeresis")],
+		recipe: ["$" GetChar("diaeresis", "caron"), "$" GetChar("caron", "diaeresis"), Chr(0x00DC) GetChar("caron"), Chr(0x01D9) GetChar("diaeresis")],
 	},
 	"lat_s_let_u_diaeresis_caron", {
 		unicode: "{U+01DA}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("diaeresis", "caron"), "$" GetChar("caron", "diaeresis"), Chr(0x00FC) GetChar("caron"), Chr(0x00FB) GetChar("diaeresis")],
+		recipe: ["$" GetChar("diaeresis", "caron"), "$" GetChar("caron", "diaeresis"), Chr(0x00FC) GetChar("caron"), Chr(0x01D4) GetChar("diaeresis")],
 	},
 	"lat_c_let_u_diaeresis_grave", {
 		unicode: "{U+01DB}",
@@ -8670,13 +8706,13 @@ MapInsert(Characters,
 		unicode: "{U+1EEC}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("hook_above", "horn"), Chr(0x1EE6) GetChar("horn")],
+		recipe: ["$" GetChar("hook_above", "horn"), "$" GetChar("horn", "hook_above"), Chr(0x1EE6) GetChar("horn"), Chr(0x01AF) GetChar("hook_above")],
 	},
 	"lat_s_let_u_hook_above_horn", {
 		unicode: "{U+1EED}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("hook_above", "horn"), Chr(0x1EE7) GetChar("horn")],
+		recipe: ["$" GetChar("hook_above", "horn"), "$" GetChar("horn", "hook_above"), Chr(0x1EE7) GetChar("horn"), Chr(0x01B0) GetChar("hook_above")],
 	},
 	"lat_s_let_u_retroflex_hook", {
 		unicode: "{U+1D99}",
@@ -8794,25 +8830,25 @@ MapInsert(Characters,
 		unicode: "{U+1E78}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "acute"), Chr(0x0168) GetChar("acute")],
+		recipe: ["$" GetChar("tilde", "acute"), "$" GetChar("acute", "tilde"), Chr(0x0168) GetChar("acute"), Chr(0x00DA) GetChar("tilde")],
 	},
 	"lat_s_let_u_tilde_acute", {
 		unicode: "{U+1E79}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "acute"), Chr(0x0169) GetChar("acute")],
+		recipe: ["$" GetChar("tilde", "acute"), "$" GetChar("acute", "tilde"), Chr(0x0169) GetChar("acute"), Chr(0x00FA) GetChar("tilde")],
 	},
 	"lat_c_let_u_tilde_horn", {
 		unicode: "{U+1EEE}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "horn"), Chr(0x0168) GetChar("horn")],
+		recipe: ["$" GetChar("tilde", "horn"), "$" GetChar("horn", "tilde"), Chr(0x0168) GetChar("horn"), Chr(0x01AF) GetChar("tilde")],
 	},
 	"lat_s_let_u_tilde_horn", {
 		unicode: "{U+1EEF}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("tilde", "horn"), Chr(0x0169) GetChar("horn")],
+		recipe: ["$" GetChar("tilde", "horn"), "$" GetChar("horn", "tilde"), Chr(0x0169) GetChar("horn"), Chr(0x01B0) GetChar("tilde")],
 	},
 	"lat_c_let_u_tilde_below", {
 		unicode: "{U+1E74}",
@@ -16557,7 +16593,6 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 
 Class Ligaturiser {
 
-
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 		this.modifiedCharsType := GetModifiedCharsType()
@@ -16999,6 +17034,8 @@ Class AsianInterceptionInput {
 		"US", Chr(0x00DA),
 		"uw", Chr(0x01B0),
 		"UW", Chr(0x01AF),
+		"ux", Chr(0x0169),
+		"UX", Chr(0x0168),
 		"uj", Chr(0x1EE5),
 		"UJ", Chr(0x1EE4),
 		"ur", Chr(0x1EE7),
@@ -17091,14 +17128,14 @@ Class AsianInterceptionInput {
 		}
 
 		for key, value in AsianInterceptionInput.%this.mode% {
-			HotString(":*C?:" key, ObjBindMethod(this, "Telexiser", value), isEnabled ? True : False)
-			HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), ObjBindMethod(this, "Telexiser", value), isEnabled ? True : False)
+			HotString(":*C?:" key, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
+			HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
 		}
 
 		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
 	}
 
-	Telexiser(_, input) {
+	static Telexiser(_, input) {
 		input := RegExReplace(input, "^.*?:.*?:", "")
 
 		if InStr(input, "\") {
@@ -17106,7 +17143,7 @@ Class AsianInterceptionInput {
 			return
 		}
 
-		for key, value in AsianInterceptionInput.%this.mode% {
+		for key, value in AsianInterceptionInput.%interceptionInputMode% {
 			if (input == key) {
 
 				SendText(value)
@@ -17116,10 +17153,10 @@ Class AsianInterceptionInput {
 		return ""
 	}
 
-	TelexReturn(input) {
+	static TelexReturn(input) {
 		output := input
 
-		for key, value in AsianInterceptionInput.%this.mode% {
+		for key, value in AsianInterceptionInput.%interceptionInputMode% {
 			if (input == key) {
 				output := value
 				break
@@ -17182,6 +17219,8 @@ ReplaceWithUnicode(Mode := "") {
 		ClipWait(0.250, 1)
 		Send("{Shift Down}{Insert}{Shift Up}")
 	}
+	;if GetKeyState("Ctrl", "P")
+	SetTimer((*) => Send("{Ctrl Up}"), -250)
 	Sleep 500
 	A_Clipboard := BackupClipboard
 
