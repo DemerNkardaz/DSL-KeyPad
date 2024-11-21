@@ -8535,13 +8535,13 @@ MapInsert(Characters,
 		unicode: "{U+1EF0}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("dot_below", "horn"), Chr(0x1EE4) GetChar("horn")],
+		recipe: ["$" GetChar("dot_below", "horn"), "$" GetChar("horn", "dot_below"), Chr(0x1EE4) GetChar("horn"), Chr(0x01AF) GetChar("dot_below")],
 	},
 	"lat_s_let_u_dot_below_horn", {
 		unicode: "{U+1EF1}",
 		titlesAlt: True,
 		group: ["Latin Accented"],
-		recipe: ["$" GetChar("dot_below", "horn"), Chr(0x1EE5) GetChar("horn")],
+		recipe: ["$" GetChar("dot_below", "horn"), "$" GetChar("horn", "dot_below"), Chr(0x1EE5) GetChar("horn"), Chr(0x01B0) GetChar("dot_below")],
 	},
 	"lat_c_let_u_diaeresis", {
 		unicode: "{U+00DC}",
@@ -8558,6 +8558,42 @@ MapInsert(Characters,
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ $",
 		recipe: "$" GetChar("diaeresis"),
+	},
+	"lat_c_let_u_diaeresis_acute", {
+		unicode: "{U+01D7}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "acute"), "$" GetChar("acute", "diaeresis"), Chr(0x00DC) GetChar("acute"), Chr(0x00DA) GetChar("diaeresis")],
+	},
+	"lat_s_let_u_diaeresis_acute", {
+		unicode: "{U+01D8}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "acute"), "$" GetChar("acute", "diaeresis"), Chr(0x00FC) GetChar("acute"), Chr(0x00FA) GetChar("diaeresis")],
+	},
+	"lat_c_let_u_diaeresis_caron", {
+		unicode: "{U+01D9}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "caron"), "$" GetChar("caron", "diaeresis"), Chr(0x00DC) GetChar("caron"), Chr(0x00DB) GetChar("diaeresis")],
+	},
+	"lat_s_let_u_diaeresis_caron", {
+		unicode: "{U+01DA}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "caron"), "$" GetChar("caron", "diaeresis"), Chr(0x00FC) GetChar("caron"), Chr(0x00FB) GetChar("diaeresis")],
+	},
+	"lat_c_let_u_diaeresis_grave", {
+		unicode: "{U+01DB}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "grave"), "$" GetChar("grave", "diaeresis"), Chr(0x00DC) GetChar("grave"), Chr(0x00D9) GetChar("diaeresis")],
+	},
+	"lat_s_let_u_diaeresis_grave", {
+		unicode: "{U+01DC}",
+		titlesAlt: True,
+		group: ["Latin Accented"],
+		recipe: ["$" GetChar("diaeresis", "grave"), "$" GetChar("grave", "diaeresis"), Chr(0x00FC) GetChar("grave"), Chr(0x00F9) GetChar("diaeresis")],
 	},
 	"lat_c_let_u_diaeresis_below", {
 		unicode: "{U+1E72}",
@@ -8676,42 +8712,6 @@ MapInsert(Characters,
 	;
 	;
 	;
-	"lat_c_let_u_macron_acute", {
-		unicode: "{U+01D7}",
-		titlesAlt: True,
-		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "acute"), "$" GetChar("acute", "macron"), Chr(0x016A) GetChar("acute"), Chr(0x00DA) GetChar("macron")],
-	},
-	"lat_s_let_u_macron_acute", {
-		unicode: "{U+01D8}",
-		titlesAlt: True,
-		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "acute"), "$" GetChar("acute", "macron"), Chr(0x016B) GetChar("acute"), Chr(0x00FA) GetChar("macron")],
-	},
-	"lat_c_let_u_macron_caron", {
-		unicode: "{U+01D9}",
-		titlesAlt: True,
-		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "caron"), "$" GetChar("caron", "macron"), Chr(0x016A) GetChar("caron"), Chr(0x00DB) GetChar("macron")],
-	},
-	"lat_s_let_u_macron_caron", {
-		unicode: "{U+01DA}",
-		titlesAlt: True,
-		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "caron"), "$" GetChar("caron", "macron"), Chr(0x016B) GetChar("caron"), Chr(0x00FB) GetChar("macron")],
-	},
-	"lat_c_let_u_macron_grave", {
-		unicode: "{U+01DB}",
-		titlesAlt: True,
-		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "grave"), "$" GetChar("grave", "macron"), Chr(0x016A) GetChar("grave"), Chr(0x00D9) GetChar("macron")],
-	},
-	"lat_s_let_u_macron_grave", {
-		unicode: "{U+01DC}",
-		titlesAlt: True,
-		group: ["Latin Accented"],
-		recipe: ["$" GetChar("macron", "grave"), "$" GetChar("grave", "macron"), Chr(0x016B) GetChar("grave"), Chr(0x00F9) GetChar("macron")],
-	},
 	;
 	;
 	;
