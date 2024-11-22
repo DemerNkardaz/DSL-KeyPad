@@ -16723,9 +16723,9 @@ Class Ligaturiser {
 			} else if IH.Input != "" {
 				input .= IH.Input
 
-				if interceptionInputMode != "" && StrLen(input) > 1 {
+				if InputScriptProcessor.options.interceptionInputMode != "" && StrLen(input) > 1 {
 					charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
-					telexChar := AsianInterceptionInput.TelexReturn(charPair)
+					telexChar := InputScriptProcessor.TelexReturn(charPair)
 
 					if telexChar != charPair {
 						input := SubStr(input, 1, previousInput = "\" ? -3 : -2) telexChar
@@ -17007,9 +17007,13 @@ Class Ligaturiser {
 	}
 }
 
-Global interceptionInputMode := ""
 
-Class AsianInterceptionInput {
+Class InputScriptProcessor {
+
+	static options := {
+		interceptionInputMode: "",
+		advancedMode: IniRead(ConfigFile, "Settings", "ScriptProcessorAdvancedMode", "False") = "True",
+	}
 
 	static locLib := {
 		lat: {
@@ -17074,6 +17078,19 @@ Class AsianInterceptionInput {
 		this.locLib.lat.c.a_bre "J", Chr(0x1EB6),
 		this.locLib.lat.s.a_bre "x", Chr(0x1EB5),
 		this.locLib.lat.c.a_bre "X", Chr(0x1EB4),
+		;
+		;*
+		this.locLib.lat.s.a_cir "w", this.locLib.lat.s.a_bre,
+		this.locLib.lat.c.a_cir "W", this.locLib.lat.c.a_bre,
+		this.locLib.lat.s.a_cir "z", "a",
+		this.locLib.lat.c.a_cir "Z", "A",
+		;
+		this.locLib.lat.s.a_bre "a", this.locLib.lat.s.a_cir,
+		this.locLib.lat.c.a_bre "A", this.locLib.lat.c.a_cir,
+		this.locLib.lat.s.a_bre "z", "a",
+		this.locLib.lat.c.a_bre "Z", "A",
+		;
+		;
 		;
 		"a1", Chr(0x1EA5),
 		"A1", Chr(0x1EA4),
@@ -17529,20 +17546,23 @@ Class AsianInterceptionInput {
 	)
 
 	__New(mode := "vietNam", reloadHs := False) {
+		InputScriptProcessor.options.advancedMode := IniRead(ConfigFile, "Settings", "ScriptProcessorAdvancedMode", "False") = "True"
+
 		this.mode := mode
-		this.RegistryHotstrings(mode, reloadHs)
+		this.previousMode := InputScriptProcessor.options.interceptionInputMode
+		this.RegistryHotstrings(reloadHs)
 	}
 
-	RegistryHotstrings(mode, reloadHs) {
-		global interceptionInputMode
+	RegistryHotstrings(reloadHs) {
 
-		previousMode := interceptionInputMode
+		InputScriptProcessor.options.interceptionInputMode := reloadHs
+			? this.mode
+				: (this.mode != InputScriptProcessor.options.interceptionInputMode ? this.mode : "")
 
-		interceptionInputMode := reloadHs ? mode : (mode != interceptionInputMode ? mode : "")
-		isEnabled := (interceptionInputMode != "" ? True : False)
+		isEnabled := (InputScriptProcessor.options.interceptionInputMode != "" ? True : False)
 
-		if previousMode != "" && (reloadHs || isEnabled) {
-			for key, value in AsianInterceptionInput.%previousMode% {
+		if this.previousMode != "" && (reloadHs || isEnabled) {
+			for key, value in InputScriptProcessor.%this.previousMode% {
 				keyLength := StrLen(key)
 				escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
 				HotString(":*C?:" key, "", False)
@@ -17550,19 +17570,19 @@ Class AsianInterceptionInput {
 			}
 		}
 
-		for key, value in AsianInterceptionInput.%this.mode% {
+		for key, value in InputScriptProcessor.%this.mode% {
 			keyLength := StrLen(key)
 			escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
-			HotString(":*C?:" key, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
-			HotString(":*C?:" escapingSequence, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
+			HotString(":*C?:" key, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
+			HotString(":*C?:" escapingSequence, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
 		}
 
 		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
 	}
 
 	static PostHook(intercepted) {
-		if intercepted = "" || interceptionInputMode = "" {
-			AsianInterceptionInput(interceptionInputMode, True)
+		if intercepted = "" || this.options.interceptionInputMode = "" {
+			InputScriptProcessor(this.options.interceptionInputMode, True)
 			return
 		}
 
@@ -17589,11 +17609,13 @@ Class AsianInterceptionInput {
 			if input != "" {
 				input := intercepted input
 				try {
-					for key, value in this.%interceptionInputMode% {
+					for key, value in this.%this.options.interceptionInputMode% {
 						if (input == key) {
 							charFound := True
 							Send(backspaces)
 							SendText(value)
+							if this.options.advancedMode
+								this.PostHook(value)
 							break
 						}
 					}
@@ -17604,7 +17626,8 @@ Class AsianInterceptionInput {
 
 			if !charFound {
 				SendInput(PsH.Input)
-				AsianInterceptionInput(interceptionInputMode, True)
+				;this.PostHook(PsH.Input)
+				InputScriptProcessor(this.options.interceptionInputMode, True)
 			}
 
 			return
@@ -17621,7 +17644,7 @@ Class AsianInterceptionInput {
 
 		inputLength := StrLen(input)
 
-		for key, value in this.%interceptionInputMode% {
+		for key, value in this.%this.options.interceptionInputMode% {
 			if (input == key) {
 				SendText(value)
 				if inputLength >= 2 && inputLength <= 7 {
@@ -17638,7 +17661,7 @@ Class AsianInterceptionInput {
 	static TelexReturn(input) {
 		output := input
 
-		for key, value in this.%interceptionInputMode% {
+		for key, value in this.%this.options.interceptionInputMode% {
 			isValid := input == key || InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3)))
 			if isValid {
 				getValue := input == key ? value : key
@@ -20945,9 +20968,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
 			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
-			"<^>!" UseKey["F2"], (*) => AsianInterceptionInput(),
-			"<^>!>+" UseKey["F2"], (*) => AsianInterceptionInput("pinYin"),
-			"<^>!<+" UseKey["F2"], (*) => AsianInterceptionInput("karaShiki"),
+			"<^>!" UseKey["F2"], (*) => InputScriptProcessor(),
+			"<^>!>+" UseKey["F2"], (*) => InputScriptProcessor("pinYin"),
+			"<^>!<+" UseKey["F2"], (*) => InputScriptProcessor("karaShiki"),
 			;
 			"<^<!" UseKey["Numpad1"], (*) => SetModifiedCharsInput(),
 			"<^<!<+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("modifier"),
