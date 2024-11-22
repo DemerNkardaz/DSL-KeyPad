@@ -17549,39 +17549,39 @@ Class AsianInterceptionInput {
 		PsH := InputHook("L1 C T5", "{Escape}{Backspace}")
 		PsH.Start(), PsH.Wait(5)
 
-		if (PsH.Input == "{Escape}" || PsH.Input == "{Backspace}") {
-			if (PsH.Input == "{Backspace}")
+		if (PsH.EndKey == "{Escape}" || PsH.EndKey == "{Backspace}") {
+			if (PsH.EndKey == "{Backspace}")
 				Send("{Backspace}")
 			PsH.Stop()
 			return
-		}
+		} else {
 
-		input := PsH.Input
-		charFound := False
+			input := PsH.Input
+			charFound := False
 
-		if input != "" {
-			input := intercepted input
-			try {
-				for key, value in this.%interceptionInputMode% {
-					if (input == key) {
-						charFound := True
-						Send(backspaces)
-						SendText(value)
-						break
+			if input != "" {
+				input := intercepted input
+				try {
+					for key, value in this.%interceptionInputMode% {
+						if (input == key) {
+							charFound := True
+							Send(backspaces)
+							SendText(value)
+							break
+						}
 					}
 				}
 			}
+
+			PsH.Stop()
+
+			if !charFound {
+				SendInput(PsH.Input)
+				this.PostHook(PsH.Input)
+			}
+
+			return
 		}
-
-
-		PsH.Stop()
-
-		if !charFound {
-			SendInput(PsH.Input)
-			this.PostHook(PsH.Input)
-		}
-
-		return
 	}
 
 	static Telexiser(_, input) {
