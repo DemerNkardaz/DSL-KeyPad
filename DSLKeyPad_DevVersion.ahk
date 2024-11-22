@@ -17175,6 +17175,56 @@ Class AsianInterceptionInput {
 		"Wuo", Chrs(0x01AF, 0x01A1),
 		"WUo", Chrs(0x01AF, 0x01A1),
 		;
+		"uocw", Chrs(0x01B0, 0x00F4) "c",
+		"UOCW", Chrs(0x01AF, 0x00D4) "C",
+		"Uocw", Chrs(0x01AF, 0x00F4) "c",
+		;
+		"uoc1", Chrs(0x01B0, 0x1ED1) "c",
+		"UOC1", Chrs(0x01AF, 0x1ED0) "C",
+		"Uoc1", Chrs(0x01AF, 0x1ED1) "c",
+		;
+		"uoc2", Chrs(0x01B0, 0x1ED3) "c",
+		"UOC2", Chrs(0x01AF, 0x1ED2) "C",
+		"Uoc2", Chrs(0x01AF, 0x1ED3) "c",
+		;
+		"uoc3", Chrs(0x01B0, 0x1ED5) "c",
+		"UOC3", Chrs(0x01AF, 0x1ED4) "C",
+		"Uoc3", Chrs(0x01AF, 0x1ED5) "c",
+		;
+		"uoc4", Chrs(0x01B0, 0x1ED9) "c",
+		"UOC4", Chrs(0x01AF, 0x1ED8) "C",
+		"Uoc4", Chrs(0x01AF, 0x1ED9) "c",
+		;
+		"uoc5", Chrs(0x01B0, 0x1ED7) "c",
+		"UOC5", Chrs(0x01AF, 0x1ED6) "C",
+		"Uoc5", Chrs(0x01AF, 0x1ED7) "c",
+		;
+		;
+		"upcw", Chrs(0x01B0, 0x01A1) "c",
+		"UPCW", Chrs(0x01AF, 0x01A0) "C",
+		"Upcw", Chrs(0x01AF, 0x01A1) "c",
+		;
+		"upc1", Chrs(0x01B0, 0x1EDB) "c",
+		"UPC1", Chrs(0x01AF, 0x1EDA) "C",
+		"Upc1", Chrs(0x01AF, 0x1EDB) "c",
+		;
+		"upc2", Chrs(0x01B0, 0x1EDD) "c",
+		"UPC2", Chrs(0x01AF, 0x1EDC) "C",
+		"Upc2", Chrs(0x01AF, 0x1EDD) "c",
+		;
+		"upc3", Chrs(0x01B0, 0x1EDF) "c",
+		"UPC3", Chrs(0x01AF, 0x1EDE) "C",
+		"Upc3", Chrs(0x01AF, 0x1EDF) "c",
+		;
+		"upc4", Chrs(0x01B0, 0x1EE3) "c",
+		"UPC4", Chrs(0x01AF, 0x1EE2) "C",
+		"Upc4", Chrs(0x01AF, 0x1EE3) "c",
+		;
+		"upc5", Chrs(0x01B0, 0x1EE1) "c",
+		"UPC5", Chrs(0x01AF, 0x1EE0) "C",
+		"Upc5", Chrs(0x01AF, 0x1EE1) "c",
+		;
+		;
 		"uongw", Chrs(0x01B0, 0x01A1) "ng",
 		"UONGW", Chrs(0x01AF, 0x01A0) "NG",
 		"UongW", Chrs(0x01AF, 0x01A1) "ng",
