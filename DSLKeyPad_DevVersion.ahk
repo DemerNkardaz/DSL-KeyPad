@@ -17011,44 +17011,69 @@ Global interceptionInputMode := ""
 
 Class AsianInterceptionInput {
 
+	static locLib := {
+		lat: {
+			c: {
+				a_acu: GetChar("lat_c_let_a_acute"),
+				a_bre: GetChar("lat_c_let_a_breve"),
+				a_cir: GetChar("lat_c_let_a_circumflex"),
+				a_dot_bel: GetChar("lat_c_let_a_dot_below"),
+				a_gra: GetChar("lat_c_let_a_grave"),
+				a_hoo_abo: GetChar("lat_c_let_a_hook_above"),
+				a_til: GetChar("lat_c_let_a_tilde"),
+			},
+			s: {
+				a_acu: GetChar("lat_s_let_a_acute"),
+				a_bre: GetChar("lat_s_let_a_breve"),
+				a_dot_bel: GetChar("lat_s_let_a_dot_below"),
+				a_cir: GetChar("lat_s_let_a_circumflex"),
+				a_gra: GetChar("lat_s_let_a_grave"),
+				a_hoo_abo: GetChar("lat_s_let_a_hook_above"),
+				a_til: GetChar("lat_s_let_a_tilde"),
+			},
+		},
+	}
+
+	static autoDiacritics := Map()
+
 	static vietNam := Map(
 		;
-		"aa", Chr(0x00E2),
-		"AA", Chr(0x00C2),
-		"af", Chr(0x00E0),
-		"AF", Chr(0x00C0),
-		"as", Chr(0x00E1),
-		"AS", Chr(0x00C1),
-		"aw", Chr(0x0103),
-		"AW", Chr(0x0102),
-		"ax", Chr(0x00E3),
-		"AX", Chr(0x00C3),
-		"aj", Chr(0x1EA1),
-		"AJ", Chr(0x1EA0),
-		"ar", Chr(0x1EA3),
-		"AR", Chr(0x1EA2),
+		"aa", this.locLib.lat.s.a_cir,
+		"AA", this.locLib.lat.c.a_cir,
+		"af", this.locLib.lat.s.a_gra,
+		"AF", this.locLib.lat.c.a_gra,
+		"as", this.locLib.lat.s.a_acu,
+		"AS", this.locLib.lat.c.a_acu,
+		"aw", this.locLib.lat.s.a_bre,
+		"AW", this.locLib.lat.c.a_bre,
+		"ax", this.locLib.lat.s.a_til,
+		"AX", this.locLib.lat.c.a_til,
+		"aj", this.locLib.lat.s.a_dot_bel,
+		"AJ", this.locLib.lat.c.a_dot_bel,
+		"ar", this.locLib.lat.s.a_hoo_abo,
+		"AR", this.locLib.lat.c.a_hoo_abo,
 		;
-		Chr(0x00E2) "s", Chr(0x1EA5),
-		Chr(0x00C2) "S", Chr(0x1EA4),
-		Chr(0x00E2) "f", Chr(0x1EA7),
-		Chr(0x00C2) "F", Chr(0x1EA6),
-		Chr(0x00E2) "r", Chr(0x1EA9),
-		Chr(0x00C2) "R", Chr(0x1EA8),
-		Chr(0x00E2) "j", Chr(0x1EAD),
-		Chr(0x00C2) "J", Chr(0x1EAC),
-		Chr(0x00E2) "x", Chr(0x1EAB),
-		Chr(0x00C2) "X", Chr(0x1EAA),
+		this.locLib.lat.s.a_cir "s", Chr(0x1EA5),
+		this.locLib.lat.c.a_cir "S", Chr(0x1EA4),
+		this.locLib.lat.s.a_cir "f", Chr(0x1EA7),
+		this.locLib.lat.c.a_cir "F", Chr(0x1EA6),
+		this.locLib.lat.s.a_cir "r", Chr(0x1EA9),
+		this.locLib.lat.c.a_cir "R", Chr(0x1EA8),
+		this.locLib.lat.s.a_cir "j", Chr(0x1EAD),
+		this.locLib.lat.c.a_cir "J", Chr(0x1EAC),
+		this.locLib.lat.s.a_cir "x", Chr(0x1EAB),
+		this.locLib.lat.c.a_cir "X", Chr(0x1EAA),
 		;
-		Chr(0x0103) "s", Chr(0x1EAF),
-		Chr(0x0102) "S", Chr(0x1EAE),
-		Chr(0x0103) "f", Chr(0x1EB1),
-		Chr(0x0102) "F", Chr(0x1EB0),
-		Chr(0x0103) "r", Chr(0x1EB3),
-		Chr(0x0102) "R", Chr(0x1EB2),
-		Chr(0x0103) "j", Chr(0x1EB7),
-		Chr(0x0102) "J", Chr(0x1EB6),
-		Chr(0x0103) "x", Chr(0x1EB5),
-		Chr(0x0102) "X", Chr(0x1EB4),
+		this.locLib.lat.s.a_bre "s", Chr(0x1EAF),
+		this.locLib.lat.c.a_bre "S", Chr(0x1EAE),
+		this.locLib.lat.s.a_bre "f", Chr(0x1EB1),
+		this.locLib.lat.c.a_bre "F", Chr(0x1EB0),
+		this.locLib.lat.s.a_bre "r", Chr(0x1EB3),
+		this.locLib.lat.c.a_bre "R", Chr(0x1EB2),
+		this.locLib.lat.s.a_bre "j", Chr(0x1EB7),
+		this.locLib.lat.c.a_bre "J", Chr(0x1EB6),
+		this.locLib.lat.s.a_bre "x", Chr(0x1EB5),
+		this.locLib.lat.c.a_bre "X", Chr(0x1EB4),
 		;
 		"a1", Chr(0x1EA5),
 		"A1", Chr(0x1EA4),
@@ -17516,7 +17541,7 @@ Class AsianInterceptionInput {
 		interceptionInputMode := reloadHs ? mode : (mode != interceptionInputMode ? mode : "")
 		isEnabled := (interceptionInputMode != "" ? True : False)
 
-		if reloadHs || previousMode != "" && isEnabled {
+		if previousMode != "" && (reloadHs || isEnabled) {
 			for key, value in AsianInterceptionInput.%previousMode% {
 				keyLength := StrLen(key)
 				escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
