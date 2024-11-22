@@ -17503,20 +17503,20 @@ Class AsianInterceptionInput {
 		"UU", Chr(0x016A),
 	)
 
-	__New(mode := "vietNam") {
+	__New(mode := "vietNam", reloadHs := False) {
 		this.mode := mode
-		this.RegistryHotstrings(mode)
+		this.RegistryHotstrings(mode, reloadHs)
 	}
 
-	RegistryHotstrings(mode) {
+	RegistryHotstrings(mode, reloadHs) {
 		global interceptionInputMode
 
 		previousMode := interceptionInputMode
 
-		interceptionInputMode := (mode != interceptionInputMode ? mode : "")
+		interceptionInputMode := reloadHs ? mode : (mode != interceptionInputMode ? mode : "")
 		isEnabled := (interceptionInputMode != "" ? True : False)
 
-		if previousMode != "" && isEnabled {
+		if reloadHs || previousMode != "" && isEnabled {
 			for key, value in AsianInterceptionInput.%previousMode% {
 				keyLength := StrLen(key)
 				escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
@@ -17532,12 +17532,14 @@ Class AsianInterceptionInput {
 			HotString(":*C?:" escapingSequence, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
 		}
 
-		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
+		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
 	}
 
 	static PostHook(intercepted) {
-		if intercepted = "" || interceptionInputMode = ""
+		if intercepted = "" || interceptionInputMode = "" {
+			AsianInterceptionInput(interceptionInputMode, True)
 			return
+		}
 
 		interceptedLength := StrLen(intercepted)
 		backspaces := ""
@@ -17546,12 +17548,12 @@ Class AsianInterceptionInput {
 			backspaces .= "{Backspace}"
 		}
 
-		PsH := InputHook("L1 C T5", "{Escape}{Backspace}")
-		PsH.Start(), PsH.Wait(5)
+		PsH := InputHook("L1 C T150", "{Escape}{Backspace}")
+		PsH.Start(), PsH.Wait(150)
 
 		if (PsH.EndKey == "{Escape}" || PsH.EndKey == "{Backspace}") {
-			if (PsH.EndKey == "{Backspace}")
-				Send("{Backspace}")
+			if (PsH.EndKey != "{Escape}")
+				Send(PsH.EndKey)
 			PsH.Stop()
 			return
 		} else {
@@ -17577,7 +17579,7 @@ Class AsianInterceptionInput {
 
 			if !charFound {
 				SendInput(PsH.Input)
-				this.PostHook(PsH.Input)
+				AsianInterceptionInput(interceptionInputMode, True)
 			}
 
 			return
