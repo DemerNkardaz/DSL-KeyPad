@@ -16991,6 +16991,7 @@ Global interceptionInputMode := ""
 Class AsianInterceptionInput {
 
 	static vietNam := Map(
+		;
 		"aa", Chr(0x00E2),
 		"AA", Chr(0x00C2),
 		"af", Chr(0x00E0),
@@ -17168,6 +17169,9 @@ Class AsianInterceptionInput {
 		"UQ", Chr(0x016C),
 		"u8", Chr(0x00FC),
 		"U8", Chr(0x00DC),
+		;
+		"wuo", Chrs(0x01B0, 0x01A1),
+		"WUO", Chrs(0x01AF, 0x01A0),
 	)
 
 	static pinYin := Map(
@@ -17281,14 +17285,16 @@ Class AsianInterceptionInput {
 
 		if previousMode != "" && isEnabled {
 			for key, value in AsianInterceptionInput.%previousMode% {
+				escapingSequence := StrLen(key) = 3 ? SubStr(key, 1, 2) "\" SubStr(key, 3) : SubStr(key, 1, 1) "\" SubStr(key, 2)
 				HotString(":*C?:" key, "", False)
-				HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), "", False)
+				HotString(":*C?:" escapingSequence, "", False)
 			}
 		}
 
 		for key, value in AsianInterceptionInput.%this.mode% {
+			escapingSequence := StrLen(key) = 3 ? SubStr(key, 1, 2) "\" SubStr(key, 3) : SubStr(key, 1, 1) "\" SubStr(key, 2)
 			HotString(":*C?:" key, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
-			HotString(":*C?:" SubStr(key, 1, 1) "\" SubStr(key, 2), ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
+			HotString(":*C?:" escapingSequence, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
 		}
 
 		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
@@ -17378,10 +17384,10 @@ ReplaceWithUnicode(Mode := "") {
 		ClipWait(0.250, 1)
 		Send("{Shift Down}{Insert}{Shift Up}")
 	}
-	;if GetKeyState("Ctrl", "P")
-	SetTimer((*) => Send("{Ctrl Up}"), -300)
 	Sleep 500
 	A_Clipboard := BackupClipboard
+
+	Send("{Ctrl Up}")
 
 	return
 }
