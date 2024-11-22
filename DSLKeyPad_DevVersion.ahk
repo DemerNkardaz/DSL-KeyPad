@@ -30,6 +30,27 @@ CompareLangCode(CodeInput) {
 	return False
 }
 
+Class Language {
+
+	static supported := Map(
+		"en", { code: "00000409" },
+		"ru", { code: "00000419" },
+		"gr", { code: "00000408" },
+	)
+
+	static compare(input, mode := "Code") {
+		if (mode = "Code") {
+			for key, value in Language.supported {
+				return input == value.code
+			}
+		}
+	}
+
+	static getSys() {
+
+	}
+}
+
 ChracterMap := "C:\Windows\System32\charmap.exe"
 ImageRes := "C:\Windows\System32\imageres.dll"
 Shell32 := "C:\Windows\SysWOW64\shell32.dll"
@@ -17007,6 +17028,28 @@ Class AsianInterceptionInput {
 		"ar", Chr(0x1EA3),
 		"AR", Chr(0x1EA2),
 		;
+		Chr(0x00E2) "s", Chr(0x1EA5),
+		Chr(0x00C2) "S", Chr(0x1EA4),
+		Chr(0x00E2) "f", Chr(0x1EA7),
+		Chr(0x00C2) "F", Chr(0x1EA6),
+		Chr(0x00E2) "r", Chr(0x1EA9),
+		Chr(0x00C2) "R", Chr(0x1EA8),
+		Chr(0x00E2) "j", Chr(0x1EAD),
+		Chr(0x00C2) "J", Chr(0x1EAC),
+		Chr(0x00E2) "x", Chr(0x1EAB),
+		Chr(0x00C2) "X", Chr(0x1EAA),
+		;
+		Chr(0x0103) "s", Chr(0x1EAF),
+		Chr(0x0102) "S", Chr(0x1EAE),
+		Chr(0x0103) "f", Chr(0x1EB1),
+		Chr(0x0102) "F", Chr(0x1EB0),
+		Chr(0x0103) "r", Chr(0x1EB3),
+		Chr(0x0102) "R", Chr(0x1EB2),
+		Chr(0x0103) "j", Chr(0x1EB7),
+		Chr(0x0102) "J", Chr(0x1EB6),
+		Chr(0x0103) "x", Chr(0x1EB5),
+		Chr(0x0102) "X", Chr(0x1EB4),
+		;
 		"a1", Chr(0x1EA5),
 		"A1", Chr(0x1EA4),
 		"a2", Chr(0x1EA7),
@@ -17045,6 +17088,17 @@ Class AsianInterceptionInput {
 		"er", Chr(0x1EBB),
 		"ER", Chr(0x1EBA),
 		;
+		Chr(0x00EA) "s", Chr(0x1EBF),
+		Chr(0x00CA) "S", Chr(0x1EBE),
+		Chr(0x00EA) "f", Chr(0x1EC1),
+		Chr(0x00CA) "F", Chr(0x1EC0),
+		Chr(0x00EA) "r", Chr(0x1EC3),
+		Chr(0x00CA) "R", Chr(0x1EC2),
+		Chr(0x00EA) "j", Chr(0x1EC7),
+		Chr(0x00CA) "J", Chr(0x1EC6),
+		Chr(0x00EA) "x", Chr(0x1EC5),
+		Chr(0x00CA) "X", Chr(0x1EC4),
+		;
 		"e1", Chr(0x1EBF),
 		"E1", Chr(0x1EBE),
 		"e2", Chr(0x1EC1),
@@ -17082,6 +17136,28 @@ Class AsianInterceptionInput {
 		"or", Chr(0x1ECF),
 		"OR", Chr(0x1ECE),
 		;
+		Chr(0x00F4) "s", Chr(0x1ED1),
+		Chr(0x00D4) "S", Chr(0x1ED0),
+		Chr(0x00F4) "f", Chr(0x1ED3),
+		Chr(0x00D4) "F", Chr(0x1ED2),
+		Chr(0x00F4) "r", Chr(0x1ED5),
+		Chr(0x00D4) "R", Chr(0x1ED4),
+		Chr(0x00F4) "j", Chr(0x1ED9),
+		Chr(0x00D4) "J", Chr(0x1ED8),
+		Chr(0x00F4) "x", Chr(0x1ED7),
+		Chr(0x00D4) "X", Chr(0x1ED6),
+		;
+		Chr(0x01A1) "s", Chr(0x1EDB),
+		Chr(0x01A0) "S", Chr(0x1EDA),
+		Chr(0x01A1) "f", Chr(0x1EDD),
+		Chr(0x01A0) "F", Chr(0x1EDC),
+		Chr(0x01A1) "r", Chr(0x1EDF),
+		Chr(0x01A0) "R", Chr(0x1EDE),
+		Chr(0x01A1) "j", Chr(0x1EE3),
+		Chr(0x01A0) "J", Chr(0x1EE2),
+		Chr(0x01A1) "x", Chr(0x1EE1),
+		Chr(0x01A0) "X", Chr(0x1EE0),
+		;
 		"o1", Chr(0x1ED1),
 		"O1", Chr(0x1ED0),
 		"o2", Chr(0x1ED3),
@@ -17116,6 +17192,17 @@ Class AsianInterceptionInput {
 		"UJ", Chr(0x1EE4),
 		"ur", Chr(0x1EE7),
 		"UR", Chr(0x1EE6),
+		;
+		Chr(0x01B0) "s", Chr(0x1EE9),
+		Chr(0x01AF) "S", Chr(0x1EE8),
+		Chr(0x01B0) "f", Chr(0x1EEB),
+		Chr(0x01AF) "F", Chr(0x1EEA),
+		Chr(0x01B0) "r", Chr(0x1EED),
+		Chr(0x01AF) "R", Chr(0x1EEC),
+		Chr(0x01B0) "j", Chr(0x1EF1),
+		Chr(0x01AF) "J", Chr(0x1EF0),
+		Chr(0x01B0) "x", Chr(0x1EEF),
+		Chr(0x01AF) "X", Chr(0x1EEE),
 		;
 		"u1", Chr(0x1EE9),
 		"U1", Chr(0x1EE8),
@@ -17295,6 +17382,16 @@ Class AsianInterceptionInput {
 		"US", Chr(0x00DA),
 		"uv", Chr(0x01D4),
 		"UV", Chr(0x01D3),
+		;
+		Chr(0x00FC) "s", Chr(0x01D8),
+		Chr(0x00DC) "S", Chr(0x01D7),
+		Chr(0x00FC) "f", Chr(0x01DC),
+		Chr(0x00DC) "F", Chr(0x01DB),
+		Chr(0x00FC) "v", Chr(0x01DA),
+		Chr(0x00DC) "V", Chr(0x01D9),
+		Chr(0x00FC) "u", Chr(0x01D6),
+		Chr(0x00DC) "U", Chr(0x01D5),
+		;
 		"u1", Chr(0x01D8),
 		"U1", Chr(0x01D7),
 		"u2", Chr(0x01DC),
@@ -17378,6 +17475,47 @@ Class AsianInterceptionInput {
 		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
 	}
 
+	static PostHook(inputCharacter) {
+		if inputCharacter = "" || interceptionInputMode = ""
+			return
+		PsH := InputHook("L1 C T5", "{Escape}{Backspace}")
+		PsH.Start(), PsH.Wait(5)
+
+		if (PsH.Input == "{Escape}" || PsH.Input == "{Backspace}") {
+			if (PsH.Input == "{Backspace}")
+				Send("{Backspace}")
+			PsH.Stop()
+			return
+		}
+
+		input := PsH.Input
+		charFound := False
+
+		if input != "" {
+			input := inputCharacter input
+			try {
+				for key, value in this.%interceptionInputMode% {
+					if (input == key) {
+						charFound := True
+						Send("{Backspace}")
+						SendText(value)
+						break
+					}
+				}
+			}
+		}
+
+
+		PsH.Stop()
+
+		if !charFound {
+			SendInput(PsH.Input)
+			this.PostHook(PsH.Input)
+		}
+
+		return
+	}
+
 	static Telexiser(_, input) {
 		input := RegExReplace(input, "^.*?:.*?:", "")
 
@@ -17386,20 +17524,26 @@ Class AsianInterceptionInput {
 			return
 		}
 
-		for key, value in AsianInterceptionInput.%interceptionInputMode% {
-			if (input == key) {
+		inputLength := StrLen(input)
 
+		for key, value in this.%interceptionInputMode% {
+			if (input == key) {
 				SendText(value)
+				if inputLength = 2 {
+					this.PostHook(value)
+				}
 				break
 			}
 		}
+
+
 		return ""
 	}
 
 	static TelexReturn(input) {
 		output := input
 
-		for key, value in AsianInterceptionInput.%interceptionInputMode% {
+		for key, value in this.%interceptionInputMode% {
 			if (input == key) {
 				output := value
 				break
