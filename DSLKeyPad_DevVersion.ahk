@@ -17172,6 +17172,9 @@ Class AsianInterceptionInput {
 		;
 		"wuo", Chrs(0x01B0, 0x01A1),
 		"WUO", Chrs(0x01AF, 0x01A0),
+		"Wuo", Chrs(0x01AF, 0x01A1),
+		"WUo", Chrs(0x01AF, 0x01A1),
+		;
 		"uongw", Chrs(0x01B0, 0x01A1) "ng",
 		"UONGW", Chrs(0x01AF, 0x01A0) "NG",
 		"UongW", Chrs(0x01AF, 0x01A1) "ng",
