@@ -17266,6 +17266,26 @@ Class AsianInterceptionInput {
 		"UOCW", Chrs(0x01AF, 0x00D4) "C",
 		"Uocw", Chrs(0x01AF, 0x00F4) "c",
 		;
+		Chrs(0x01B0, 0x00F4) "cs", Chrs(0x01B0, 0x1ED1) "c",
+		Chrs(0x01AF, 0x00D4) "CS", Chrs(0x01AF, 0x1ED0) "C",
+		Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED1) "c",
+		;
+		Chrs(0x01B0, 0x00F4) "cf", Chrs(0x01B0, 0x1ED3) "c",
+		Chrs(0x01AF, 0x00D4) "CF", Chrs(0x01AF, 0x1ED2) "C",
+		Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED3) "c",
+		;
+		Chrs(0x01B0, 0x00F4) "cr", Chrs(0x01B0, 0x1ED5) "c",
+		Chrs(0x01AF, 0x00D4) "CR", Chrs(0x01AF, 0x1ED4) "C",
+		Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED5) "c",
+		;
+		Chrs(0x01B0, 0x00F4) "cj", Chrs(0x01B0, 0x1ED9) "c",
+		Chrs(0x01AF, 0x00D4) "CJ", Chrs(0x01AF, 0x1ED8) "C",
+		Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED9) "c",
+		;
+		Chrs(0x01B0, 0x00F4) "cx", Chrs(0x01B0, 0x1ED7) "c",
+		Chrs(0x01AF, 0x00D4) "CX", Chrs(0x01AF, 0x1ED6) "C",
+		Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED7) "c",
+		;
 		"uoc1", Chrs(0x01B0, 0x1ED1) "c",
 		"UOC1", Chrs(0x01AF, 0x1ED0) "C",
 		"Uoc1", Chrs(0x01AF, 0x1ED1) "c",
@@ -17291,6 +17311,26 @@ Class AsianInterceptionInput {
 		"UPCW", Chrs(0x01AF, 0x01A0) "C",
 		"Upcw", Chrs(0x01AF, 0x01A1) "c",
 		;
+		Chrs(0x01B0, 0x01A1) "cs", Chrs(0x01B0, 0x1EDB) "c",
+		Chrs(0x01AF, 0x01A0) "CS", Chrs(0x01AF, 0x1EDA) "C",
+		Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDB) "c",
+		;
+		Chrs(0x01B0, 0x01A1) "cf", Chrs(0x01B0, 0x1EDD) "c",
+		Chrs(0x01AF, 0x01A0) "CF", Chrs(0x01AF, 0x1EDC) "C",
+		Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDD) "c",
+		;
+		Chrs(0x01B0, 0x01A1) "cr", Chrs(0x01B0, 0x1EDF) "c",
+		Chrs(0x01AF, 0x01A0) "CR", Chrs(0x01AF, 0x1EDE) "C",
+		Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDF) "c",
+		;
+		Chrs(0x01B0, 0x01A1) "cj", Chrs(0x01B0, 0x1EE3) "c",
+		Chrs(0x01AF, 0x01A0) "CJ", Chrs(0x01AF, 0x1EE2) "C",
+		Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EE3) "c",
+		;
+		Chrs(0x01B0, 0x01A1) "cx", Chrs(0x01B0, 0x1EE1) "c",
+		Chrs(0x01AF, 0x01A0) "CX", Chrs(0x01AF, 0x1EE0) "C",
+		Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EE1) "c",
+		;
 		"upc1", Chrs(0x01B0, 0x1EDB) "c",
 		"UPC1", Chrs(0x01AF, 0x1EDA) "C",
 		"Upc1", Chrs(0x01AF, 0x1EDB) "c",
@@ -17314,7 +17354,27 @@ Class AsianInterceptionInput {
 		;
 		"uongw", Chrs(0x01B0, 0x01A1) "ng",
 		"UONGW", Chrs(0x01AF, 0x01A0) "NG",
-		"UongW", Chrs(0x01AF, 0x01A1) "ng",
+		"Uongw", Chrs(0x01AF, 0x01A1) "ng",
+		;
+		Chrs(0x01B0, 0x01A1) "ngs", Chrs(0x01B0, 0x1EDB) "ng",
+		Chrs(0x01AF, 0x01A0) "NGS", Chrs(0x01AF, 0x1EDA) "NG",
+		Chrs(0x01AF, 0x01A1) "ngs", Chrs(0x01AF, 0x1EDB) "ng",
+		;
+		Chrs(0x01B0, 0x01A1) "ngf", Chrs(0x01B0, 0x1EDD) "ng",
+		Chrs(0x01AF, 0x01A0) "NGF", Chrs(0x01AF, 0x1EDC) "NG",
+		Chrs(0x01AF, 0x01A1) "ngf", Chrs(0x01AF, 0x1EDD) "ng",
+		;
+		Chrs(0x01B0, 0x01A1) "ngr", Chrs(0x01B0, 0x1EDF) "ng",
+		Chrs(0x01AF, 0x01A0) "NGR", Chrs(0x01AF, 0x1EDE) "NG",
+		Chrs(0x01AF, 0x01A1) "ngr", Chrs(0x01AF, 0x1EDF) "ng",
+		;
+		Chrs(0x01B0, 0x01A1) "ngj", Chrs(0x01B0, 0x1EE3) "ng",
+		Chrs(0x01AF, 0x01A0) "NGJ", Chrs(0x01AF, 0x1EE2) "NG",
+		Chrs(0x01AF, 0x01A1) "ngj", Chrs(0x01AF, 0x1EE3) "ng",
+		;
+		Chrs(0x01B0, 0x01A1) "ngx", Chrs(0x01B0, 0x1EE1) "ng",
+		Chrs(0x01AF, 0x01A0) "NGX", Chrs(0x01AF, 0x1EE0) "NG",
+		Chrs(0x01AF, 0x01A1) "ngx", Chrs(0x01AF, 0x1EE1) "ng",
 		;
 		"uong1", Chrs(0x01B0, 0x1EDB) "ng",
 		"UONG1", Chrs(0x01AF, 0x1EDA) "NG",
@@ -17475,9 +17535,17 @@ Class AsianInterceptionInput {
 		ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
 	}
 
-	static PostHook(inputCharacter) {
-		if inputCharacter = "" || interceptionInputMode = ""
+	static PostHook(intercepted) {
+		if intercepted = "" || interceptionInputMode = ""
 			return
+
+		interceptedLength := StrLen(intercepted)
+		backspaces := ""
+
+		Loop (interceptedLength) {
+			backspaces .= "{Backspace}"
+		}
+
 		PsH := InputHook("L1 C T5", "{Escape}{Backspace}")
 		PsH.Start(), PsH.Wait(5)
 
@@ -17492,12 +17560,12 @@ Class AsianInterceptionInput {
 		charFound := False
 
 		if input != "" {
-			input := inputCharacter input
+			input := intercepted input
 			try {
 				for key, value in this.%interceptionInputMode% {
 					if (input == key) {
 						charFound := True
-						Send("{Backspace}")
+						Send(backspaces)
 						SendText(value)
 						break
 					}
@@ -17529,7 +17597,7 @@ Class AsianInterceptionInput {
 		for key, value in this.%interceptionInputMode% {
 			if (input == key) {
 				SendText(value)
-				if inputLength = 2 {
+				if inputLength >= 2 && inputLength <= 7 {
 					this.PostHook(value)
 				}
 				break
@@ -17544,11 +17612,10 @@ Class AsianInterceptionInput {
 		output := input
 
 		for key, value in this.%interceptionInputMode% {
-			if (input == key) {
-				output := value
-				break
-			} else if InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3))) {
-				output := key
+			isValid := input == key || InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3)))
+			if isValid {
+				getValue := input == key ? value : key
+				output := getValue
 				break
 			}
 		}
