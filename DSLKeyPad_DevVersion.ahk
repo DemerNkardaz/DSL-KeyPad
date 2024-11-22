@@ -17172,6 +17172,29 @@ Class AsianInterceptionInput {
 		;
 		"wuo", Chrs(0x01B0, 0x01A1),
 		"WUO", Chrs(0x01AF, 0x01A0),
+		"uongw", Chrs(0x01B0, 0x01A1) "ng",
+		"UONGW", Chrs(0x01AF, 0x01A0) "NG",
+		"UongW", Chrs(0x01AF, 0x01A1) "ng",
+		;
+		"uong1", Chrs(0x01B0, 0x1EDB) "ng",
+		"UONG1", Chrs(0x01AF, 0x1EDA) "NG",
+		"Uong1", Chrs(0x01AF, 0x1EDB) "ng",
+		;
+		"uong2", Chrs(0x01B0, 0x1EDD) "ng",
+		"UONG2", Chrs(0x01AF, 0x1EDC) "NG",
+		"Uong2", Chrs(0x01AF, 0x1EDD) "ng",
+		;
+		"uong3", Chrs(0x01B0, 0x1EDF) "ng",
+		"UONG3", Chrs(0x01AF, 0x1EDE) "NG",
+		"Uong3", Chrs(0x01AF, 0x1EDF) "ng",
+		;
+		"uong4", Chrs(0x01B0, 0x1EE3) "ng",
+		"UONG4", Chrs(0x01AF, 0x1EE2) "NG",
+		"Uong4", Chrs(0x01AF, 0x1EE3) "ng",
+		;
+		"uong5", Chrs(0x01B0, 0x1EE1) "ng",
+		"UONG5", Chrs(0x01AF, 0x1EE0) "NG",
+		"Uong5", Chrs(0x01AF, 0x1EE1) "ng",
 	)
 
 	static pinYin := Map(
@@ -17285,14 +17308,16 @@ Class AsianInterceptionInput {
 
 		if previousMode != "" && isEnabled {
 			for key, value in AsianInterceptionInput.%previousMode% {
-				escapingSequence := StrLen(key) = 3 ? SubStr(key, 1, 2) "\" SubStr(key, 3) : SubStr(key, 1, 1) "\" SubStr(key, 2)
+				keyLength := StrLen(key)
+				escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
 				HotString(":*C?:" key, "", False)
 				HotString(":*C?:" escapingSequence, "", False)
 			}
 		}
 
 		for key, value in AsianInterceptionInput.%this.mode% {
-			escapingSequence := StrLen(key) = 3 ? SubStr(key, 1, 2) "\" SubStr(key, 3) : SubStr(key, 1, 1) "\" SubStr(key, 2)
+			keyLength := StrLen(key)
+			escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
 			HotString(":*C?:" key, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
 			HotString(":*C?:" escapingSequence, ObjBindMethod(AsianInterceptionInput, "Telexiser", value), isEnabled ? True : False)
 		}
