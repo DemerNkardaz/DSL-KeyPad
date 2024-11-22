@@ -200,6 +200,7 @@ DefaultConfig := [
 	["Settings", "F13F24", "True"],
 	["Settings", "TemperatureCalcExtendedFormatting", "True"],
 	["Settings", "TemperatureCalcDedicatedUnicodeChars", "True"],
+	["Settings", "ScriptProcessorAdvancedMode", "True"],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
 	["CustomRules", "GREPDialogAttribution", ""],
@@ -17040,520 +17041,520 @@ Class InputScriptProcessor {
 
 	static autoDiacritics := Map()
 
-	static vietNam := Map(
-		"Advanced", Map(
-			;*
-			this.locLib.lat.s.a_cir "w", this.locLib.lat.s.a_bre,
-			this.locLib.lat.c.a_cir "W", this.locLib.lat.c.a_bre,
-			this.locLib.lat.s.a_cir "z", "a",
-			this.locLib.lat.c.a_cir "Z", "A",
-			;
-			this.locLib.lat.s.a_bre "a", this.locLib.lat.s.a_cir,
-			this.locLib.lat.c.a_bre "A", this.locLib.lat.c.a_cir,
-			this.locLib.lat.s.a_bre "z", "a",
-			this.locLib.lat.c.a_bre "Z", "A",
+	static scriptSequences := {
+		vietNam: Map(
+			"Advanced", Map(
+				;* Advanced A
+				this.locLib.lat.s.a_cir "w", this.locLib.lat.s.a_bre,
+				this.locLib.lat.c.a_cir "W", this.locLib.lat.c.a_bre,
+				this.locLib.lat.s.a_cir "z", "a",
+				this.locLib.lat.c.a_cir "Z", "A",
+				;
+				this.locLib.lat.s.a_bre "a", this.locLib.lat.s.a_cir,
+				this.locLib.lat.c.a_bre "A", this.locLib.lat.c.a_cir,
+				this.locLib.lat.s.a_bre "z", "a",
+				this.locLib.lat.c.a_bre "Z", "A",
+			),
+			"Default", Map(
+				;
+				"aa", this.locLib.lat.s.a_cir,
+				"AA", this.locLib.lat.c.a_cir,
+				"af", this.locLib.lat.s.a_gra,
+				"AF", this.locLib.lat.c.a_gra,
+				"as", this.locLib.lat.s.a_acu,
+				"AS", this.locLib.lat.c.a_acu,
+				"aw", this.locLib.lat.s.a_bre,
+				"AW", this.locLib.lat.c.a_bre,
+				"ax", this.locLib.lat.s.a_til,
+				"AX", this.locLib.lat.c.a_til,
+				"aj", this.locLib.lat.s.a_dot_bel,
+				"AJ", this.locLib.lat.c.a_dot_bel,
+				"ar", this.locLib.lat.s.a_hoo_abo,
+				"AR", this.locLib.lat.c.a_hoo_abo,
+				;
+				"a1", Chr(0x1EA5),
+				"A1", Chr(0x1EA4),
+				"a2", Chr(0x1EA7),
+				"A2", Chr(0x1EA6),
+				"a3", Chr(0x1EA9),
+				"A3", Chr(0x1EA8),
+				"a4", Chr(0x1EAD),
+				"A4", Chr(0x1EAC),
+				"a5", Chr(0x1EAB),
+				"A5", Chr(0x1EAA),
+				;
+				"q1", Chr(0x1EAF),
+				"Q1", Chr(0x1EAE),
+				"q2", Chr(0x1EB1),
+				"Q2", Chr(0x1EB0),
+				"q3", Chr(0x1EB3),
+				"Q3", Chr(0x1EB2),
+				"q4", Chr(0x1EB7),
+				"Q4", Chr(0x1EB6),
+				"q5", Chr(0x1EB5),
+				"Q5", Chr(0x1EB4),
+				;
+				"dd", Chr(0x0111),
+				"DD", Chr(0x0110),
+				;
+				"ee", Chr(0x00EA),
+				"EE", Chr(0x00CA),
+				"ef", Chr(0x00E8),
+				"EF", Chr(0x00C8),
+				"es", Chr(0x00E9),
+				"ES", Chr(0x00C9),
+				"ex", Chr(0x1EBD),
+				"EX", Chr(0x1EBC),
+				"ej", Chr(0x1EB9),
+				"EJ", Chr(0x1EB8),
+				"er", Chr(0x1EBB),
+				"ER", Chr(0x1EBA),
+				;
+				Chr(0x00EA) "s", Chr(0x1EBF),
+				Chr(0x00CA) "S", Chr(0x1EBE),
+				Chr(0x00EA) "f", Chr(0x1EC1),
+				Chr(0x00CA) "F", Chr(0x1EC0),
+				Chr(0x00EA) "r", Chr(0x1EC3),
+				Chr(0x00CA) "R", Chr(0x1EC2),
+				Chr(0x00EA) "j", Chr(0x1EC7),
+				Chr(0x00CA) "J", Chr(0x1EC6),
+				Chr(0x00EA) "x", Chr(0x1EC5),
+				Chr(0x00CA) "X", Chr(0x1EC4),
+				;
+				"e1", Chr(0x1EBF),
+				"E1", Chr(0x1EBE),
+				"e2", Chr(0x1EC1),
+				"E2", Chr(0x1EC0),
+				"e3", Chr(0x1EC3),
+				"E3", Chr(0x1EC2),
+				"e4", Chr(0x1EC7),
+				"E4", Chr(0x1EC6),
+				"e5", Chr(0x1EC5),
+				"E5", Chr(0x1EC4),
+				;
+				"if", Chr(0x00EC),
+				"IF", Chr(0x00CC),
+				"is", Chr(0x00ED),
+				"IS", Chr(0x00CD),
+				"ix", Chr(0x0129),
+				"IX", Chr(0x0128),
+				"ij", Chr(0x1ECB),
+				"IJ", Chr(0x1ECA),
+				"ir", Chr(0x1EC9),
+				"IR", Chr(0x1EC8),
+				;
+				"oo", Chr(0x00F4),
+				"OO", Chr(0x00D4),
+				"of", Chr(0x00F2),
+				"OF", Chr(0x00D2),
+				"os", Chr(0x00F3),
+				"OS", Chr(0x00D3),
+				"ow", Chr(0x01A1),
+				"OW", Chr(0x01A0),
+				"ox", Chr(0x00F5),
+				"OX", Chr(0x00D5),
+				"oj", Chr(0x1ECD),
+				"OJ", Chr(0x1ECC),
+				"or", Chr(0x1ECF),
+				"OR", Chr(0x1ECE),
+				;
+				Chr(0x00F4) "s", Chr(0x1ED1),
+				Chr(0x00D4) "S", Chr(0x1ED0),
+				Chr(0x00F4) "f", Chr(0x1ED3),
+				Chr(0x00D4) "F", Chr(0x1ED2),
+				Chr(0x00F4) "r", Chr(0x1ED5),
+				Chr(0x00D4) "R", Chr(0x1ED4),
+				Chr(0x00F4) "j", Chr(0x1ED9),
+				Chr(0x00D4) "J", Chr(0x1ED8),
+				Chr(0x00F4) "x", Chr(0x1ED7),
+				Chr(0x00D4) "X", Chr(0x1ED6),
+				;
+				Chr(0x01A1) "s", Chr(0x1EDB),
+				Chr(0x01A0) "S", Chr(0x1EDA),
+				Chr(0x01A1) "f", Chr(0x1EDD),
+				Chr(0x01A0) "F", Chr(0x1EDC),
+				Chr(0x01A1) "r", Chr(0x1EDF),
+				Chr(0x01A0) "R", Chr(0x1EDE),
+				Chr(0x01A1) "j", Chr(0x1EE3),
+				Chr(0x01A0) "J", Chr(0x1EE2),
+				Chr(0x01A1) "x", Chr(0x1EE1),
+				Chr(0x01A0) "X", Chr(0x1EE0),
+				;
+				"o1", Chr(0x1ED1),
+				"O1", Chr(0x1ED0),
+				"o2", Chr(0x1ED3),
+				"O2", Chr(0x1ED2),
+				"o3", Chr(0x1ED5),
+				"O3", Chr(0x1ED4),
+				"o4", Chr(0x1ED9),
+				"O4", Chr(0x1ED8),
+				"o5", Chr(0x1ED7),
+				"O5", Chr(0x1ED6),
+				;
+				"p1", Chr(0x1EDB),
+				"P1", Chr(0x1EDA),
+				"p2", Chr(0x1EDD),
+				"P2", Chr(0x1EDC),
+				"p3", Chr(0x1EDF),
+				"P3", Chr(0x1EDE),
+				"p4", Chr(0x1EE3),
+				"P4", Chr(0x1EE2),
+				"p5", Chr(0x1EE1),
+				"P5", Chr(0x1EE0),
+				;
+				"uf", Chr(0x00F9),
+				"UF", Chr(0x00D9),
+				"us", Chr(0x00FA),
+				"US", Chr(0x00DA),
+				"uw", Chr(0x01B0),
+				"UW", Chr(0x01AF),
+				"ux", Chr(0x0169),
+				"UX", Chr(0x0168),
+				"uj", Chr(0x1EE5),
+				"UJ", Chr(0x1EE4),
+				"ur", Chr(0x1EE7),
+				"UR", Chr(0x1EE6),
+				;
+				Chr(0x01B0) "s", Chr(0x1EE9),
+				Chr(0x01AF) "S", Chr(0x1EE8),
+				Chr(0x01B0) "f", Chr(0x1EEB),
+				Chr(0x01AF) "F", Chr(0x1EEA),
+				Chr(0x01B0) "r", Chr(0x1EED),
+				Chr(0x01AF) "R", Chr(0x1EEC),
+				Chr(0x01B0) "j", Chr(0x1EF1),
+				Chr(0x01AF) "J", Chr(0x1EF0),
+				Chr(0x01B0) "x", Chr(0x1EEF),
+				Chr(0x01AF) "X", Chr(0x1EEE),
+				;
+				"u1", Chr(0x1EE9),
+				"U1", Chr(0x1EE8),
+				"u2", Chr(0x1EEB),
+				"U2", Chr(0x1EEA),
+				"u3", Chr(0x1EED),
+				"U3", Chr(0x1EEC),
+				"u4", Chr(0x1EF1),
+				"U4", Chr(0x1EF0),
+				"u5", Chr(0x1EEF),
+				"U5", Chr(0x1EEE),
+				;
+				"yf", Chr(0x1EF3),
+				"YF", Chr(0x1EF2),
+				"ys", Chr(0x00FD),
+				"YS", Chr(0x00DD),
+				"yx", Chr(0x1EF9),
+				"YX", Chr(0x1EF8),
+				"yj", Chr(0x1EF5),
+				"YJ", Chr(0x1EF4),
+				"yr", Chr(0x1EF7),
+				"YR", Chr(0x1EF6),
+				;*
+				;* Gia-Rai (Jarai) Extensions
+				;*
+				"cz", Chr(0x010D),
+				"CZ", Chr(0x010C),
+				;
+				"bb", Chr(0x0180),
+				"BB", Chr(0x0243),
+				;
+				"ew", Chr(0x0115),
+				"EW", Chr(0x0114),
+				"ez", Chr(0x011B),
+				"EZ", Chr(0x011A),
+				;
+				"iw", Chr(0x012D),
+				"IW", Chr(0x012C),
+				;
+				"nn", Chr(0x00F1),
+				"NN", Chr(0x00D1),
+				;
+				"oq", Chr(0x014F),
+				"OQ", Chr(0x014E),
+				"oz", Chr(0x01D2),
+				"OZ", Chr(0x01D1),
+				"o8", Chr(0x00F6),
+				"O8", Chr(0x00D6),
+				;
+				"uq", Chr(0x016D),
+				"UQ", Chr(0x016C),
+				"u8", Chr(0x00FC),
+				"U8", Chr(0x00DC),
+				;
+				"wuo", Chrs(0x01B0, 0x01A1),
+				"WUO", Chrs(0x01AF, 0x01A0),
+				"Wuo", Chrs(0x01AF, 0x01A1),
+				"WUo", Chrs(0x01AF, 0x01A1),
+				;
+				"uocw", Chrs(0x01B0, 0x00F4) "c",
+				"UOCW", Chrs(0x01AF, 0x00D4) "C",
+				"Uocw", Chrs(0x01AF, 0x00F4) "c",
+				;
+				Chrs(0x01B0, 0x00F4) "cs", Chrs(0x01B0, 0x1ED1) "c",
+				Chrs(0x01AF, 0x00D4) "CS", Chrs(0x01AF, 0x1ED0) "C",
+				Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED1) "c",
+				;
+				Chrs(0x01B0, 0x00F4) "cf", Chrs(0x01B0, 0x1ED3) "c",
+				Chrs(0x01AF, 0x00D4) "CF", Chrs(0x01AF, 0x1ED2) "C",
+				Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED3) "c",
+				;
+				Chrs(0x01B0, 0x00F4) "cr", Chrs(0x01B0, 0x1ED5) "c",
+				Chrs(0x01AF, 0x00D4) "CR", Chrs(0x01AF, 0x1ED4) "C",
+				Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED5) "c",
+				;
+				Chrs(0x01B0, 0x00F4) "cj", Chrs(0x01B0, 0x1ED9) "c",
+				Chrs(0x01AF, 0x00D4) "CJ", Chrs(0x01AF, 0x1ED8) "C",
+				Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED9) "c",
+				;
+				Chrs(0x01B0, 0x00F4) "cx", Chrs(0x01B0, 0x1ED7) "c",
+				Chrs(0x01AF, 0x00D4) "CX", Chrs(0x01AF, 0x1ED6) "C",
+				Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED7) "c",
+				;
+				"uoc1", Chrs(0x01B0, 0x1ED1) "c",
+				"UOC1", Chrs(0x01AF, 0x1ED0) "C",
+				"Uoc1", Chrs(0x01AF, 0x1ED1) "c",
+				;
+				"uoc2", Chrs(0x01B0, 0x1ED3) "c",
+				"UOC2", Chrs(0x01AF, 0x1ED2) "C",
+				"Uoc2", Chrs(0x01AF, 0x1ED3) "c",
+				;
+				"uoc3", Chrs(0x01B0, 0x1ED5) "c",
+				"UOC3", Chrs(0x01AF, 0x1ED4) "C",
+				"Uoc3", Chrs(0x01AF, 0x1ED5) "c",
+				;
+				"uoc4", Chrs(0x01B0, 0x1ED9) "c",
+				"UOC4", Chrs(0x01AF, 0x1ED8) "C",
+				"Uoc4", Chrs(0x01AF, 0x1ED9) "c",
+				;
+				"uoc5", Chrs(0x01B0, 0x1ED7) "c",
+				"UOC5", Chrs(0x01AF, 0x1ED6) "C",
+				"Uoc5", Chrs(0x01AF, 0x1ED7) "c",
+				;
+				;
+				"upcw", Chrs(0x01B0, 0x01A1) "c",
+				"UPCW", Chrs(0x01AF, 0x01A0) "C",
+				"Upcw", Chrs(0x01AF, 0x01A1) "c",
+				;
+				Chrs(0x01B0, 0x01A1) "cs", Chrs(0x01B0, 0x1EDB) "c",
+				Chrs(0x01AF, 0x01A0) "CS", Chrs(0x01AF, 0x1EDA) "C",
+				Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDB) "c",
+				;
+				Chrs(0x01B0, 0x01A1) "cf", Chrs(0x01B0, 0x1EDD) "c",
+				Chrs(0x01AF, 0x01A0) "CF", Chrs(0x01AF, 0x1EDC) "C",
+				Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDD) "c",
+				;
+				Chrs(0x01B0, 0x01A1) "cr", Chrs(0x01B0, 0x1EDF) "c",
+				Chrs(0x01AF, 0x01A0) "CR", Chrs(0x01AF, 0x1EDE) "C",
+				Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDF) "c",
+				;
+				Chrs(0x01B0, 0x01A1) "cj", Chrs(0x01B0, 0x1EE3) "c",
+				Chrs(0x01AF, 0x01A0) "CJ", Chrs(0x01AF, 0x1EE2) "C",
+				Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EE3) "c",
+				;
+				Chrs(0x01B0, 0x01A1) "cx", Chrs(0x01B0, 0x1EE1) "c",
+				Chrs(0x01AF, 0x01A0) "CX", Chrs(0x01AF, 0x1EE0) "C",
+				Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EE1) "c",
+				;
+				"upc1", Chrs(0x01B0, 0x1EDB) "c",
+				"UPC1", Chrs(0x01AF, 0x1EDA) "C",
+				"Upc1", Chrs(0x01AF, 0x1EDB) "c",
+				;
+				"upc2", Chrs(0x01B0, 0x1EDD) "c",
+				"UPC2", Chrs(0x01AF, 0x1EDC) "C",
+				"Upc2", Chrs(0x01AF, 0x1EDD) "c",
+				;
+				"upc3", Chrs(0x01B0, 0x1EDF) "c",
+				"UPC3", Chrs(0x01AF, 0x1EDE) "C",
+				"Upc3", Chrs(0x01AF, 0x1EDF) "c",
+				;
+				"upc4", Chrs(0x01B0, 0x1EE3) "c",
+				"UPC4", Chrs(0x01AF, 0x1EE2) "C",
+				"Upc4", Chrs(0x01AF, 0x1EE3) "c",
+				;
+				"upc5", Chrs(0x01B0, 0x1EE1) "c",
+				"UPC5", Chrs(0x01AF, 0x1EE0) "C",
+				"Upc5", Chrs(0x01AF, 0x1EE1) "c",
+				;
+				;
+				"uongw", Chrs(0x01B0, 0x01A1) "ng",
+				"UONGW", Chrs(0x01AF, 0x01A0) "NG",
+				"Uongw", Chrs(0x01AF, 0x01A1) "ng",
+				;
+				Chrs(0x01B0, 0x01A1) "ngs", Chrs(0x01B0, 0x1EDB) "ng",
+				Chrs(0x01AF, 0x01A0) "NGS", Chrs(0x01AF, 0x1EDA) "NG",
+				Chrs(0x01AF, 0x01A1) "ngs", Chrs(0x01AF, 0x1EDB) "ng",
+				;
+				Chrs(0x01B0, 0x01A1) "ngf", Chrs(0x01B0, 0x1EDD) "ng",
+				Chrs(0x01AF, 0x01A0) "NGF", Chrs(0x01AF, 0x1EDC) "NG",
+				Chrs(0x01AF, 0x01A1) "ngf", Chrs(0x01AF, 0x1EDD) "ng",
+				;
+				Chrs(0x01B0, 0x01A1) "ngr", Chrs(0x01B0, 0x1EDF) "ng",
+				Chrs(0x01AF, 0x01A0) "NGR", Chrs(0x01AF, 0x1EDE) "NG",
+				Chrs(0x01AF, 0x01A1) "ngr", Chrs(0x01AF, 0x1EDF) "ng",
+				;
+				Chrs(0x01B0, 0x01A1) "ngj", Chrs(0x01B0, 0x1EE3) "ng",
+				Chrs(0x01AF, 0x01A0) "NGJ", Chrs(0x01AF, 0x1EE2) "NG",
+				Chrs(0x01AF, 0x01A1) "ngj", Chrs(0x01AF, 0x1EE3) "ng",
+				;
+				Chrs(0x01B0, 0x01A1) "ngx", Chrs(0x01B0, 0x1EE1) "ng",
+				Chrs(0x01AF, 0x01A0) "NGX", Chrs(0x01AF, 0x1EE0) "NG",
+				Chrs(0x01AF, 0x01A1) "ngx", Chrs(0x01AF, 0x1EE1) "ng",
+				;
+				"uong1", Chrs(0x01B0, 0x1EDB) "ng",
+				"UONG1", Chrs(0x01AF, 0x1EDA) "NG",
+				"Uong1", Chrs(0x01AF, 0x1EDB) "ng",
+				;
+				"uong2", Chrs(0x01B0, 0x1EDD) "ng",
+				"UONG2", Chrs(0x01AF, 0x1EDC) "NG",
+				"Uong2", Chrs(0x01AF, 0x1EDD) "ng",
+				;
+				"uong3", Chrs(0x01B0, 0x1EDF) "ng",
+				"UONG3", Chrs(0x01AF, 0x1EDE) "NG",
+				"Uong3", Chrs(0x01AF, 0x1EDF) "ng",
+				;
+				"uong4", Chrs(0x01B0, 0x1EE3) "ng",
+				"UONG4", Chrs(0x01AF, 0x1EE2) "NG",
+				"Uong4", Chrs(0x01AF, 0x1EE3) "ng",
+				;
+				"uong5", Chrs(0x01B0, 0x1EE1) "ng",
+				"UONG5", Chrs(0x01AF, 0x1EE0) "NG",
+				"Uong5", Chrs(0x01AF, 0x1EE1) "ng",
+			),
+			"Extended", Map(
+				;* Extended A
+				this.locLib.lat.s.a_cir "s", Chr(0x1EA5),
+				this.locLib.lat.c.a_cir "S", Chr(0x1EA4),
+				this.locLib.lat.s.a_cir "f", Chr(0x1EA7),
+				this.locLib.lat.c.a_cir "F", Chr(0x1EA6),
+				this.locLib.lat.s.a_cir "r", Chr(0x1EA9),
+				this.locLib.lat.c.a_cir "R", Chr(0x1EA8),
+				this.locLib.lat.s.a_cir "j", Chr(0x1EAD),
+				this.locLib.lat.c.a_cir "J", Chr(0x1EAC),
+				this.locLib.lat.s.a_cir "x", Chr(0x1EAB),
+				this.locLib.lat.c.a_cir "X", Chr(0x1EAA),
+				;
+				this.locLib.lat.s.a_bre "s", Chr(0x1EAF),
+				this.locLib.lat.c.a_bre "S", Chr(0x1EAE),
+				this.locLib.lat.s.a_bre "f", Chr(0x1EB1),
+				this.locLib.lat.c.a_bre "F", Chr(0x1EB0),
+				this.locLib.lat.s.a_bre "r", Chr(0x1EB3),
+				this.locLib.lat.c.a_bre "R", Chr(0x1EB2),
+				this.locLib.lat.s.a_bre "j", Chr(0x1EB7),
+				this.locLib.lat.c.a_bre "J", Chr(0x1EB6),
+				this.locLib.lat.s.a_bre "x", Chr(0x1EB5),
+				this.locLib.lat.c.a_bre "X", Chr(0x1EB4),
+				;
+			),
 		),
-		"Default", Map(
-			;
-			"aa", this.locLib.lat.s.a_cir,
-			"AA", this.locLib.lat.c.a_cir,
-			"af", this.locLib.lat.s.a_gra,
-			"AF", this.locLib.lat.c.a_gra,
-			"as", this.locLib.lat.s.a_acu,
-			"AS", this.locLib.lat.c.a_acu,
-			"aw", this.locLib.lat.s.a_bre,
-			"AW", this.locLib.lat.c.a_bre,
-			"ax", this.locLib.lat.s.a_til,
-			"AX", this.locLib.lat.c.a_til,
-			"aj", this.locLib.lat.s.a_dot_bel,
-			"AJ", this.locLib.lat.c.a_dot_bel,
-			"ar", this.locLib.lat.s.a_hoo_abo,
-			"AR", this.locLib.lat.c.a_hoo_abo,
-			;
-			this.locLib.lat.s.a_cir "s", Chr(0x1EA5),
-			this.locLib.lat.c.a_cir "S", Chr(0x1EA4),
-			this.locLib.lat.s.a_cir "f", Chr(0x1EA7),
-			this.locLib.lat.c.a_cir "F", Chr(0x1EA6),
-			this.locLib.lat.s.a_cir "r", Chr(0x1EA9),
-			this.locLib.lat.c.a_cir "R", Chr(0x1EA8),
-			this.locLib.lat.s.a_cir "j", Chr(0x1EAD),
-			this.locLib.lat.c.a_cir "J", Chr(0x1EAC),
-			this.locLib.lat.s.a_cir "x", Chr(0x1EAB),
-			this.locLib.lat.c.a_cir "X", Chr(0x1EAA),
-			;
-			this.locLib.lat.s.a_bre "s", Chr(0x1EAF),
-			this.locLib.lat.c.a_bre "S", Chr(0x1EAE),
-			this.locLib.lat.s.a_bre "f", Chr(0x1EB1),
-			this.locLib.lat.c.a_bre "F", Chr(0x1EB0),
-			this.locLib.lat.s.a_bre "r", Chr(0x1EB3),
-			this.locLib.lat.c.a_bre "R", Chr(0x1EB2),
-			this.locLib.lat.s.a_bre "j", Chr(0x1EB7),
-			this.locLib.lat.c.a_bre "J", Chr(0x1EB6),
-			this.locLib.lat.s.a_bre "x", Chr(0x1EB5),
-			this.locLib.lat.c.a_bre "X", Chr(0x1EB4),
-			;
-			;
-			;
-			;
-			"a1", Chr(0x1EA5),
-			"A1", Chr(0x1EA4),
-			"a2", Chr(0x1EA7),
-			"A2", Chr(0x1EA6),
-			"a3", Chr(0x1EA9),
-			"A3", Chr(0x1EA8),
-			"a4", Chr(0x1EAD),
-			"A4", Chr(0x1EAC),
-			"a5", Chr(0x1EAB),
-			"A5", Chr(0x1EAA),
-			;
-			"q1", Chr(0x1EAF),
-			"Q1", Chr(0x1EAE),
-			"q2", Chr(0x1EB1),
-			"Q2", Chr(0x1EB0),
-			"q3", Chr(0x1EB3),
-			"Q3", Chr(0x1EB2),
-			"q4", Chr(0x1EB7),
-			"Q4", Chr(0x1EB6),
-			"q5", Chr(0x1EB5),
-			"Q5", Chr(0x1EB4),
-			;
-			"dd", Chr(0x0111),
-			"DD", Chr(0x0110),
-			;
-			"ee", Chr(0x00EA),
-			"EE", Chr(0x00CA),
-			"ef", Chr(0x00E8),
-			"EF", Chr(0x00C8),
-			"es", Chr(0x00E9),
-			"ES", Chr(0x00C9),
-			"ex", Chr(0x1EBD),
-			"EX", Chr(0x1EBC),
-			"ej", Chr(0x1EB9),
-			"EJ", Chr(0x1EB8),
-			"er", Chr(0x1EBB),
-			"ER", Chr(0x1EBA),
-			;
-			Chr(0x00EA) "s", Chr(0x1EBF),
-			Chr(0x00CA) "S", Chr(0x1EBE),
-			Chr(0x00EA) "f", Chr(0x1EC1),
-			Chr(0x00CA) "F", Chr(0x1EC0),
-			Chr(0x00EA) "r", Chr(0x1EC3),
-			Chr(0x00CA) "R", Chr(0x1EC2),
-			Chr(0x00EA) "j", Chr(0x1EC7),
-			Chr(0x00CA) "J", Chr(0x1EC6),
-			Chr(0x00EA) "x", Chr(0x1EC5),
-			Chr(0x00CA) "X", Chr(0x1EC4),
-			;
-			"e1", Chr(0x1EBF),
-			"E1", Chr(0x1EBE),
-			"e2", Chr(0x1EC1),
-			"E2", Chr(0x1EC0),
-			"e3", Chr(0x1EC3),
-			"E3", Chr(0x1EC2),
-			"e4", Chr(0x1EC7),
-			"E4", Chr(0x1EC6),
-			"e5", Chr(0x1EC5),
-			"E5", Chr(0x1EC4),
-			;
-			"if", Chr(0x00EC),
-			"IF", Chr(0x00CC),
-			"is", Chr(0x00ED),
-			"IS", Chr(0x00CD),
-			"ix", Chr(0x0129),
-			"IX", Chr(0x0128),
-			"ij", Chr(0x1ECB),
-			"IJ", Chr(0x1ECA),
-			"ir", Chr(0x1EC9),
-			"IR", Chr(0x1EC8),
-			;
-			"oo", Chr(0x00F4),
-			"OO", Chr(0x00D4),
-			"of", Chr(0x00F2),
-			"OF", Chr(0x00D2),
-			"os", Chr(0x00F3),
-			"OS", Chr(0x00D3),
-			"ow", Chr(0x01A1),
-			"OW", Chr(0x01A0),
-			"ox", Chr(0x00F5),
-			"OX", Chr(0x00D5),
-			"oj", Chr(0x1ECD),
-			"OJ", Chr(0x1ECC),
-			"or", Chr(0x1ECF),
-			"OR", Chr(0x1ECE),
-			;
-			Chr(0x00F4) "s", Chr(0x1ED1),
-			Chr(0x00D4) "S", Chr(0x1ED0),
-			Chr(0x00F4) "f", Chr(0x1ED3),
-			Chr(0x00D4) "F", Chr(0x1ED2),
-			Chr(0x00F4) "r", Chr(0x1ED5),
-			Chr(0x00D4) "R", Chr(0x1ED4),
-			Chr(0x00F4) "j", Chr(0x1ED9),
-			Chr(0x00D4) "J", Chr(0x1ED8),
-			Chr(0x00F4) "x", Chr(0x1ED7),
-			Chr(0x00D4) "X", Chr(0x1ED6),
-			;
-			Chr(0x01A1) "s", Chr(0x1EDB),
-			Chr(0x01A0) "S", Chr(0x1EDA),
-			Chr(0x01A1) "f", Chr(0x1EDD),
-			Chr(0x01A0) "F", Chr(0x1EDC),
-			Chr(0x01A1) "r", Chr(0x1EDF),
-			Chr(0x01A0) "R", Chr(0x1EDE),
-			Chr(0x01A1) "j", Chr(0x1EE3),
-			Chr(0x01A0) "J", Chr(0x1EE2),
-			Chr(0x01A1) "x", Chr(0x1EE1),
-			Chr(0x01A0) "X", Chr(0x1EE0),
-			;
-			"o1", Chr(0x1ED1),
-			"O1", Chr(0x1ED0),
-			"o2", Chr(0x1ED3),
-			"O2", Chr(0x1ED2),
-			"o3", Chr(0x1ED5),
-			"O3", Chr(0x1ED4),
-			"o4", Chr(0x1ED9),
-			"O4", Chr(0x1ED8),
-			"o5", Chr(0x1ED7),
-			"O5", Chr(0x1ED6),
-			;
-			"p1", Chr(0x1EDB),
-			"P1", Chr(0x1EDA),
-			"p2", Chr(0x1EDD),
-			"P2", Chr(0x1EDC),
-			"p3", Chr(0x1EDF),
-			"P3", Chr(0x1EDE),
-			"p4", Chr(0x1EE3),
-			"P4", Chr(0x1EE2),
-			"p5", Chr(0x1EE1),
-			"P5", Chr(0x1EE0),
-			;
-			"uf", Chr(0x00F9),
-			"UF", Chr(0x00D9),
-			"us", Chr(0x00FA),
-			"US", Chr(0x00DA),
-			"uw", Chr(0x01B0),
-			"UW", Chr(0x01AF),
-			"ux", Chr(0x0169),
-			"UX", Chr(0x0168),
-			"uj", Chr(0x1EE5),
-			"UJ", Chr(0x1EE4),
-			"ur", Chr(0x1EE7),
-			"UR", Chr(0x1EE6),
-			;
-			Chr(0x01B0) "s", Chr(0x1EE9),
-			Chr(0x01AF) "S", Chr(0x1EE8),
-			Chr(0x01B0) "f", Chr(0x1EEB),
-			Chr(0x01AF) "F", Chr(0x1EEA),
-			Chr(0x01B0) "r", Chr(0x1EED),
-			Chr(0x01AF) "R", Chr(0x1EEC),
-			Chr(0x01B0) "j", Chr(0x1EF1),
-			Chr(0x01AF) "J", Chr(0x1EF0),
-			Chr(0x01B0) "x", Chr(0x1EEF),
-			Chr(0x01AF) "X", Chr(0x1EEE),
-			;
-			"u1", Chr(0x1EE9),
-			"U1", Chr(0x1EE8),
-			"u2", Chr(0x1EEB),
-			"U2", Chr(0x1EEA),
-			"u3", Chr(0x1EED),
-			"U3", Chr(0x1EEC),
-			"u4", Chr(0x1EF1),
-			"U4", Chr(0x1EF0),
-			"u5", Chr(0x1EEF),
-			"U5", Chr(0x1EEE),
-			;
-			"yf", Chr(0x1EF3),
-			"YF", Chr(0x1EF2),
-			"ys", Chr(0x00FD),
-			"YS", Chr(0x00DD),
-			"yx", Chr(0x1EF9),
-			"YX", Chr(0x1EF8),
-			"yj", Chr(0x1EF5),
-			"YJ", Chr(0x1EF4),
-			"yr", Chr(0x1EF7),
-			"YR", Chr(0x1EF6),
-			;*
-			;* Gia-Rai (Jarai) Extensions
-			;*
-			"cz", Chr(0x010D),
-			"CZ", Chr(0x010C),
-			;
-			"bb", Chr(0x0180),
-			"BB", Chr(0x0243),
-			;
-			"ew", Chr(0x0115),
-			"EW", Chr(0x0114),
-			"ez", Chr(0x011B),
-			"EZ", Chr(0x011A),
-			;
-			"iw", Chr(0x012D),
-			"IW", Chr(0x012C),
-			;
-			"nn", Chr(0x00F1),
-			"NN", Chr(0x00D1),
-			;
-			"oq", Chr(0x014F),
-			"OQ", Chr(0x014E),
-			"oz", Chr(0x01D2),
-			"OZ", Chr(0x01D1),
-			"o8", Chr(0x00F6),
-			"O8", Chr(0x00D6),
-			;
-			"uq", Chr(0x016D),
-			"UQ", Chr(0x016C),
-			"u8", Chr(0x00FC),
-			"U8", Chr(0x00DC),
-			;
-			"wuo", Chrs(0x01B0, 0x01A1),
-			"WUO", Chrs(0x01AF, 0x01A0),
-			"Wuo", Chrs(0x01AF, 0x01A1),
-			"WUo", Chrs(0x01AF, 0x01A1),
-			;
-			"uocw", Chrs(0x01B0, 0x00F4) "c",
-			"UOCW", Chrs(0x01AF, 0x00D4) "C",
-			"Uocw", Chrs(0x01AF, 0x00F4) "c",
-			;
-			Chrs(0x01B0, 0x00F4) "cs", Chrs(0x01B0, 0x1ED1) "c",
-			Chrs(0x01AF, 0x00D4) "CS", Chrs(0x01AF, 0x1ED0) "C",
-			Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED1) "c",
-			;
-			Chrs(0x01B0, 0x00F4) "cf", Chrs(0x01B0, 0x1ED3) "c",
-			Chrs(0x01AF, 0x00D4) "CF", Chrs(0x01AF, 0x1ED2) "C",
-			Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED3) "c",
-			;
-			Chrs(0x01B0, 0x00F4) "cr", Chrs(0x01B0, 0x1ED5) "c",
-			Chrs(0x01AF, 0x00D4) "CR", Chrs(0x01AF, 0x1ED4) "C",
-			Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED5) "c",
-			;
-			Chrs(0x01B0, 0x00F4) "cj", Chrs(0x01B0, 0x1ED9) "c",
-			Chrs(0x01AF, 0x00D4) "CJ", Chrs(0x01AF, 0x1ED8) "C",
-			Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED9) "c",
-			;
-			Chrs(0x01B0, 0x00F4) "cx", Chrs(0x01B0, 0x1ED7) "c",
-			Chrs(0x01AF, 0x00D4) "CX", Chrs(0x01AF, 0x1ED6) "C",
-			Chrs(0x01AF, 0x00F4) "cs", Chrs(0x01AF, 0x1ED7) "c",
-			;
-			"uoc1", Chrs(0x01B0, 0x1ED1) "c",
-			"UOC1", Chrs(0x01AF, 0x1ED0) "C",
-			"Uoc1", Chrs(0x01AF, 0x1ED1) "c",
-			;
-			"uoc2", Chrs(0x01B0, 0x1ED3) "c",
-			"UOC2", Chrs(0x01AF, 0x1ED2) "C",
-			"Uoc2", Chrs(0x01AF, 0x1ED3) "c",
-			;
-			"uoc3", Chrs(0x01B0, 0x1ED5) "c",
-			"UOC3", Chrs(0x01AF, 0x1ED4) "C",
-			"Uoc3", Chrs(0x01AF, 0x1ED5) "c",
-			;
-			"uoc4", Chrs(0x01B0, 0x1ED9) "c",
-			"UOC4", Chrs(0x01AF, 0x1ED8) "C",
-			"Uoc4", Chrs(0x01AF, 0x1ED9) "c",
-			;
-			"uoc5", Chrs(0x01B0, 0x1ED7) "c",
-			"UOC5", Chrs(0x01AF, 0x1ED6) "C",
-			"Uoc5", Chrs(0x01AF, 0x1ED7) "c",
-			;
-			;
-			"upcw", Chrs(0x01B0, 0x01A1) "c",
-			"UPCW", Chrs(0x01AF, 0x01A0) "C",
-			"Upcw", Chrs(0x01AF, 0x01A1) "c",
-			;
-			Chrs(0x01B0, 0x01A1) "cs", Chrs(0x01B0, 0x1EDB) "c",
-			Chrs(0x01AF, 0x01A0) "CS", Chrs(0x01AF, 0x1EDA) "C",
-			Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDB) "c",
-			;
-			Chrs(0x01B0, 0x01A1) "cf", Chrs(0x01B0, 0x1EDD) "c",
-			Chrs(0x01AF, 0x01A0) "CF", Chrs(0x01AF, 0x1EDC) "C",
-			Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDD) "c",
-			;
-			Chrs(0x01B0, 0x01A1) "cr", Chrs(0x01B0, 0x1EDF) "c",
-			Chrs(0x01AF, 0x01A0) "CR", Chrs(0x01AF, 0x1EDE) "C",
-			Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EDF) "c",
-			;
-			Chrs(0x01B0, 0x01A1) "cj", Chrs(0x01B0, 0x1EE3) "c",
-			Chrs(0x01AF, 0x01A0) "CJ", Chrs(0x01AF, 0x1EE2) "C",
-			Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EE3) "c",
-			;
-			Chrs(0x01B0, 0x01A1) "cx", Chrs(0x01B0, 0x1EE1) "c",
-			Chrs(0x01AF, 0x01A0) "CX", Chrs(0x01AF, 0x1EE0) "C",
-			Chrs(0x01AF, 0x01A1) "cs", Chrs(0x01AF, 0x1EE1) "c",
-			;
-			"upc1", Chrs(0x01B0, 0x1EDB) "c",
-			"UPC1", Chrs(0x01AF, 0x1EDA) "C",
-			"Upc1", Chrs(0x01AF, 0x1EDB) "c",
-			;
-			"upc2", Chrs(0x01B0, 0x1EDD) "c",
-			"UPC2", Chrs(0x01AF, 0x1EDC) "C",
-			"Upc2", Chrs(0x01AF, 0x1EDD) "c",
-			;
-			"upc3", Chrs(0x01B0, 0x1EDF) "c",
-			"UPC3", Chrs(0x01AF, 0x1EDE) "C",
-			"Upc3", Chrs(0x01AF, 0x1EDF) "c",
-			;
-			"upc4", Chrs(0x01B0, 0x1EE3) "c",
-			"UPC4", Chrs(0x01AF, 0x1EE2) "C",
-			"Upc4", Chrs(0x01AF, 0x1EE3) "c",
-			;
-			"upc5", Chrs(0x01B0, 0x1EE1) "c",
-			"UPC5", Chrs(0x01AF, 0x1EE0) "C",
-			"Upc5", Chrs(0x01AF, 0x1EE1) "c",
-			;
-			;
-			"uongw", Chrs(0x01B0, 0x01A1) "ng",
-			"UONGW", Chrs(0x01AF, 0x01A0) "NG",
-			"Uongw", Chrs(0x01AF, 0x01A1) "ng",
-			;
-			Chrs(0x01B0, 0x01A1) "ngs", Chrs(0x01B0, 0x1EDB) "ng",
-			Chrs(0x01AF, 0x01A0) "NGS", Chrs(0x01AF, 0x1EDA) "NG",
-			Chrs(0x01AF, 0x01A1) "ngs", Chrs(0x01AF, 0x1EDB) "ng",
-			;
-			Chrs(0x01B0, 0x01A1) "ngf", Chrs(0x01B0, 0x1EDD) "ng",
-			Chrs(0x01AF, 0x01A0) "NGF", Chrs(0x01AF, 0x1EDC) "NG",
-			Chrs(0x01AF, 0x01A1) "ngf", Chrs(0x01AF, 0x1EDD) "ng",
-			;
-			Chrs(0x01B0, 0x01A1) "ngr", Chrs(0x01B0, 0x1EDF) "ng",
-			Chrs(0x01AF, 0x01A0) "NGR", Chrs(0x01AF, 0x1EDE) "NG",
-			Chrs(0x01AF, 0x01A1) "ngr", Chrs(0x01AF, 0x1EDF) "ng",
-			;
-			Chrs(0x01B0, 0x01A1) "ngj", Chrs(0x01B0, 0x1EE3) "ng",
-			Chrs(0x01AF, 0x01A0) "NGJ", Chrs(0x01AF, 0x1EE2) "NG",
-			Chrs(0x01AF, 0x01A1) "ngj", Chrs(0x01AF, 0x1EE3) "ng",
-			;
-			Chrs(0x01B0, 0x01A1) "ngx", Chrs(0x01B0, 0x1EE1) "ng",
-			Chrs(0x01AF, 0x01A0) "NGX", Chrs(0x01AF, 0x1EE0) "NG",
-			Chrs(0x01AF, 0x01A1) "ngx", Chrs(0x01AF, 0x1EE1) "ng",
-			;
-			"uong1", Chrs(0x01B0, 0x1EDB) "ng",
-			"UONG1", Chrs(0x01AF, 0x1EDA) "NG",
-			"Uong1", Chrs(0x01AF, 0x1EDB) "ng",
-			;
-			"uong2", Chrs(0x01B0, 0x1EDD) "ng",
-			"UONG2", Chrs(0x01AF, 0x1EDC) "NG",
-			"Uong2", Chrs(0x01AF, 0x1EDD) "ng",
-			;
-			"uong3", Chrs(0x01B0, 0x1EDF) "ng",
-			"UONG3", Chrs(0x01AF, 0x1EDE) "NG",
-			"Uong3", Chrs(0x01AF, 0x1EDF) "ng",
-			;
-			"uong4", Chrs(0x01B0, 0x1EE3) "ng",
-			"UONG4", Chrs(0x01AF, 0x1EE2) "NG",
-			"Uong4", Chrs(0x01AF, 0x1EE3) "ng",
-			;
-			"uong5", Chrs(0x01B0, 0x1EE1) "ng",
-			"UONG5", Chrs(0x01AF, 0x1EE0) "NG",
-			"Uong5", Chrs(0x01AF, 0x1EE1) "ng",
-		)
-	)
-
-	static pinYin := Map(
-		"Advanced", Map(),
-		"Default", Map(
-			"aa", Chr(0x0101),
-			"AA", Chr(0x0100),
-			"af", Chr(0x00E0),
-			"AF", Chr(0x00C0),
-			"as", Chr(0x00E1),
-			"AS", Chr(0x00C1),
-			"av", Chr(0x01CE),
-			"AV", Chr(0x01CD),
-			;
-			"ee", Chr(0x0113),
-			"EE", Chr(0x0112),
-			"ef", Chr(0x00E8),
-			"EF", Chr(0x00C8),
-			"es", Chr(0x00E9),
-			"ES", Chr(0x00C9),
-			"ev", Chr(0x011B),
-			"EV", Chr(0x011A),
-			;
-			"ii", Chr(0x012B),
-			"II", Chr(0x012A),
-			"if", Chr(0x00EC),
-			"IF", Chr(0x00CC),
-			"is", Chr(0x00ED),
-			"IS", Chr(0x00CD),
-			"iv", Chr(0x01D0),
-			"IV", Chr(0x01CF),
-			;
-			"oo", Chr(0x014D),
-			"OO", Chr(0x014C),
-			"of", Chr(0x00F2),
-			"OF", Chr(0x00D2),
-			"os", Chr(0x00F3),
-			"OS", Chr(0x00D3),
-			"ov", Chr(0x01D2),
-			"OV", Chr(0x01D1),
-			;
-			"uu", Chr(0x016B),
-			"UU", Chr(0x016A),
-			"uf", Chr(0x00F9),
-			"UF", Chr(0x00D9),
-			"us", Chr(0x00FA),
-			"US", Chr(0x00DA),
-			"uv", Chr(0x01D4),
-			"UV", Chr(0x01D3),
-			;
-			Chr(0x00FC) "s", Chr(0x01D8),
-			Chr(0x00DC) "S", Chr(0x01D7),
-			Chr(0x00FC) "f", Chr(0x01DC),
-			Chr(0x00DC) "F", Chr(0x01DB),
-			Chr(0x00FC) "v", Chr(0x01DA),
-			Chr(0x00DC) "V", Chr(0x01D9),
-			Chr(0x00FC) "u", Chr(0x01D6),
-			Chr(0x00DC) "U", Chr(0x01D5),
-			;
-			"u1", Chr(0x01D8),
-			"U1", Chr(0x01D7),
-			"u2", Chr(0x01DC),
-			"U2", Chr(0x01DB),
-			"u3", Chr(0x01DA),
-			"U3", Chr(0x01D9),
-			"u4", Chr(0x01D6),
-			"U4", Chr(0x01D5),
-			"u8", Chr(0x00FC),
-			"U8", Chr(0x00DC),
-		)
-	)
-
-	static karaShiki := Map(
-		"Advanced", Map(),
-		"Default", Map(
-			"ее", Chrs(0x0451, 0x0304),
-			"ЕЕ", Chrs(0x0401, 0x0304),
-			"ии", Chr(0x04E3),
-			"ИИ", Chr(0x04E3),
-			"оо", Chrs(0x043E, 0x0304),
-			"ОО", Chrs(0x041E, 0x0304),
-			"сс", Chr(0x04AB),
-			"СС", Chr(0x04AA),
-			"уу", Chr(0x04EF),
-			"УУ", Chr(0x04EE),
-			"уй", Chr(0x045E),
-			"УЙ", Chr(0x040E),
-			"юю", Chrs(0x044E, 0x0304),
-			"ЮЮ", Chrs(0x042E, 0x0304),
-			;
-			;
-			"aa", Chr(0x0101),
-			"AA", Chr(0x0100),
-			;
-			"ee", Chr(0x0113),
-			"EE", Chr(0x0112),
-			;
-			"oo", Chr(0x014D),
-			"OO", Chr(0x014C),
-			"ov", Chr(0x00F4),
-			"OV", Chr(0x00D4),
-			;
-			"ii", Chr(0x012B),
-			"II", Chr(0x012A),
-			"iq", Chr(0x012D),
-			"IQ", Chr(0x012C),
-			;
-			"uq", Chr(0x016D),
-			"UQ", Chr(0x016C),
-			"uu", Chr(0x016B),
-			"UU", Chr(0x016A),
-		)
-	)
+		pinYin: Map(
+			"Advanced", Map(),
+			"Default", Map(
+				"aa", Chr(0x0101),
+				"AA", Chr(0x0100),
+				"af", Chr(0x00E0),
+				"AF", Chr(0x00C0),
+				"as", Chr(0x00E1),
+				"AS", Chr(0x00C1),
+				"av", Chr(0x01CE),
+				"AV", Chr(0x01CD),
+				;
+				"ee", Chr(0x0113),
+				"EE", Chr(0x0112),
+				"ef", Chr(0x00E8),
+				"EF", Chr(0x00C8),
+				"es", Chr(0x00E9),
+				"ES", Chr(0x00C9),
+				"ev", Chr(0x011B),
+				"EV", Chr(0x011A),
+				;
+				"ii", Chr(0x012B),
+				"II", Chr(0x012A),
+				"if", Chr(0x00EC),
+				"IF", Chr(0x00CC),
+				"is", Chr(0x00ED),
+				"IS", Chr(0x00CD),
+				"iv", Chr(0x01D0),
+				"IV", Chr(0x01CF),
+				;
+				"oo", Chr(0x014D),
+				"OO", Chr(0x014C),
+				"of", Chr(0x00F2),
+				"OF", Chr(0x00D2),
+				"os", Chr(0x00F3),
+				"OS", Chr(0x00D3),
+				"ov", Chr(0x01D2),
+				"OV", Chr(0x01D1),
+				;
+				"uu", Chr(0x016B),
+				"UU", Chr(0x016A),
+				"uf", Chr(0x00F9),
+				"UF", Chr(0x00D9),
+				"us", Chr(0x00FA),
+				"US", Chr(0x00DA),
+				"uv", Chr(0x01D4),
+				"UV", Chr(0x01D3),
+				;
+				Chr(0x00FC) "s", Chr(0x01D8),
+				Chr(0x00DC) "S", Chr(0x01D7),
+				Chr(0x00FC) "f", Chr(0x01DC),
+				Chr(0x00DC) "F", Chr(0x01DB),
+				Chr(0x00FC) "v", Chr(0x01DA),
+				Chr(0x00DC) "V", Chr(0x01D9),
+				Chr(0x00FC) "u", Chr(0x01D6),
+				Chr(0x00DC) "U", Chr(0x01D5),
+				;
+				"u1", Chr(0x01D8),
+				"U1", Chr(0x01D7),
+				"u2", Chr(0x01DC),
+				"U2", Chr(0x01DB),
+				"u3", Chr(0x01DA),
+				"U3", Chr(0x01D9),
+				"u4", Chr(0x01D6),
+				"U4", Chr(0x01D5),
+				"u8", Chr(0x00FC),
+				"U8", Chr(0x00DC),
+			),
+		),
+		karaShiki: Map(
+			"Advanced", Map(),
+			"Default", Map(
+				"ее", Chrs(0x0451, 0x0304),
+				"ЕЕ", Chrs(0x0401, 0x0304),
+				"ии", Chr(0x04E3),
+				"ИИ", Chr(0x04E3),
+				"оо", Chrs(0x043E, 0x0304),
+				"ОО", Chrs(0x041E, 0x0304),
+				"сс", Chr(0x04AB),
+				"СС", Chr(0x04AA),
+				"уу", Chr(0x04EF),
+				"УУ", Chr(0x04EE),
+				"уй", Chr(0x045E),
+				"УЙ", Chr(0x040E),
+				"юю", Chrs(0x044E, 0x0304),
+				"ЮЮ", Chrs(0x042E, 0x0304),
+				;
+				;
+				"aa", Chr(0x0101),
+				"AA", Chr(0x0100),
+				;
+				"ee", Chr(0x0113),
+				"EE", Chr(0x0112),
+				;
+				"oo", Chr(0x014D),
+				"OO", Chr(0x014C),
+				"ov", Chr(0x00F4),
+				"OV", Chr(0x00D4),
+				;
+				"ii", Chr(0x012B),
+				"II", Chr(0x012A),
+				"iq", Chr(0x012D),
+				"IQ", Chr(0x012C),
+				;
+				"uq", Chr(0x016D),
+				"UQ", Chr(0x016C),
+				"uu", Chr(0x016B),
+				"UU", Chr(0x016A),
+			),
+		),
+	}
 
 	__New(mode := "vietNam", reloadHs := False) {
 		InputScriptProcessor.options.advancedMode := IniRead(ConfigFile, "Settings", "ScriptProcessorAdvancedMode", "False") = "True"
@@ -17572,7 +17573,7 @@ Class InputScriptProcessor {
 		isEnabled := (InputScriptProcessor.options.interceptionInputMode != "" ? True : False)
 
 		if this.previousMode != "" && (reloadHs || isEnabled) {
-			for subMap, entries in InputScriptProcessor.%this.previousMode% {
+			for subMap, entries in InputScriptProcessor.scriptSequences.%this.previousMode% {
 				for key, value in entries {
 					keyLength := StrLen(key)
 					escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
@@ -17582,7 +17583,7 @@ Class InputScriptProcessor {
 			}
 		}
 
-		for subMap, entries in InputScriptProcessor.%this.mode%{
+		for subMap, entries in InputScriptProcessor.scriptSequences.%this.mode%{
 			if !InputScriptProcessor.options.advancedMode && subMap = "Advanced"
 				continue
 			for key, value in entries {
@@ -17622,10 +17623,10 @@ Class InputScriptProcessor {
 			input := PsH.Input
 			charFound := False
 
-			if input != "" {
+			if RegExMatch(input, "^[a-zA-Z0-9]+$") {
 				input := intercepted input
 				try {
-					for subMap, entries in this.%this.options.interceptionInputMode% {
+					for subMap, entries in this.scriptSequences.%this.options.interceptionInputMode% {
 						if !this.options.advancedMode && subMap = "Advanced"
 							continue
 						for key, value in entries {
@@ -17664,7 +17665,7 @@ Class InputScriptProcessor {
 
 		inputLength := StrLen(input)
 
-		for subMap, entries in this.%this.options.interceptionInputMode% {
+		for subMap, entries in this.scriptSequences.%this.options.interceptionInputMode% {
 			if !this.options.advancedMode && subMap = "Advanced"
 				continue
 			for key, value in entries {
@@ -17684,7 +17685,7 @@ Class InputScriptProcessor {
 	static TelexReturn(input) {
 		output := input
 
-		for key, value in this.%this.options.interceptionInputMode% {
+		for key, value in this.scriptSequences.%this.options.interceptionInputMode% {
 			isValid := input == key || InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3)))
 			if isValid {
 				getValue := input == key ? value : key
