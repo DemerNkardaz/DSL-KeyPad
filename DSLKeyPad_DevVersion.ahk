@@ -17723,7 +17723,7 @@ Class InputScriptProcessor {
 	static InH := InputHook("V")
 	static inputLogger := ""
 
-	static SequenceHandler(input) {
+	static SequenceHandler(input := "", backspaceOn := False) {
 		IPS := InputScriptProcessor
 
 		inputCut := (str, len := 7) => StrLen(str) > len ? SubStr(str, StrLen(str) - (len - 1)) : str
@@ -17793,12 +17793,12 @@ Class InputScriptProcessor {
 
 	static backspaceLock := False
 	static Backspacer(ih, vk, sc) {
+		IPS := InputScriptProcessor
 		backspaceCode := "14"
 
-		if sc = backspaceCode && !InputScriptProcessor.backspaceLock {
-			InputScriptProcessor.InH.Stop()
-			InputScriptProcessor.inputLogger := SubStr(InputScriptProcessor.inputLogger, 1, -1)
-			InputScriptProcessor.InH.Start()
+		if StrLen(IPS.inputLogger) > 0 && sc = backspaceCode && !InputScriptProcessor.backspaceLock {
+			IPS.inputLogger := SubStr(IPS.inputLogger, 1, -1)
+			CaretTooltip(IPS.inputLogger)
 		}
 
 		return
@@ -17806,10 +17806,11 @@ Class InputScriptProcessor {
 
 	static InitHook() {
 		this.InH.Start()
-		this.InH.NotifyNonText := True
+		;this.InH.NotifyNonText := True
 		this.InH.KeyOpt("{Backspace}", "N")
 		this.InH.OnChar := this.SequenceHandler
-		;this.InH.OnKeyDown := ObjBindMethod(this, "Backspacer") ; Исправлено
+		this.InH.OnKeyDown := ObjBindMethod(this, "Backspacer") ; Исправлено
+
 
 		return
 	}
