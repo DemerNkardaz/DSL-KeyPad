@@ -69,5 +69,14 @@
     <Image Include="DSLKeyPad.app_math.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="icon11.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_viet.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_pinyin.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

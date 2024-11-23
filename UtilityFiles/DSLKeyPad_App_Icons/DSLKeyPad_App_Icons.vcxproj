@@ -165,7 +165,10 @@
     <Image Include="DSLKeyPad.app_math.ico" />
     <Image Include="DSLKeyPad.app_norse.ico" />
     <Image Include="DSLKeyPad.app_permic.ico" />
+    <Image Include="DSLKeyPad.app_pinyin.ico" />
     <Image Include="DSLKeyPad.app_turkic.ico" />
+    <Image Include="DSLKeyPad.app_viet.ico" />
+    <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

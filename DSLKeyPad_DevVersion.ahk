@@ -15748,15 +15748,39 @@ ChangeTrayIconOnLanguage() {
 			CodeEn: 10, CodeRu: 10, Default: 1,
 			TitleEn: ReadLocale("tray_tooltip_maths"),
 			TitleRu: ReadLocale("tray_tooltip_maths"),
-		}
+		},
 	)
+
+	ISPEntries := Map(
+		"vietNam", {
+			CodeEn: 11, CodeRu: 11, Default: 1,
+			TitleEn: ReadLocale("tray_tooltip_vietNam"),
+			TitleRu: ReadLocale("tray_tooltip_vietNam"),
+		},
+		"pinYin", {
+			CodeEn: 12, CodeRu: 12, Default: 1,
+			TitleEn: ReadLocale("tray_tooltip_pinYin"),
+			TitleRu: ReadLocale("tray_tooltip_pinYin"),
+		},
+	)
+
+	ISPActive := ISPEntries.Has(InputScriptProcessor.options.interceptionInputMode)
+	ISPMode := InputScriptProcessor.options.interceptionInputMode
 
 	if IconMap.Has(ActiveScriptName) {
 		TrayTitle := TitleCompose (CurrentLayout = CodeEn ? "`n" IconMap[ActiveScriptName].TitleEn :
-			CurrentLayout = CodeRu ? "`n" IconMap[ActiveScriptName].TitleRu : 1)
+			CurrentLayout = CodeRu ? "`n" IconMap[ActiveScriptName].TitleRu : 1) (ISPActive
+				? "`n" (CurrentLayout = CodeEn ? "`n" ISPEntries[ISPMode].TitleEn :
+					CurrentLayout = CodeRu ? "`n" ISPEntries[ISPMode].TitleRu : 1) : "")
 
 		IconCode := (CurrentLayout = CodeEn ? IconMap[ActiveScriptName].CodeEn :
 			CurrentLayout = CodeRu ? IconMap[ActiveScriptName].CodeRu : 1)
+	} else if ISPActive {
+		TrayTitle := TitleCompose (CurrentLayout = CodeEn ? "`n" ISPEntries[ISPMode].TitleEn :
+			CurrentLayout = CodeRu ? "`n" ISPEntries[ISPMode].TitleRu : 1)
+
+		IconCode := (CurrentLayout = CodeEn ? ISPEntries[ISPMode].CodeEn :
+			CurrentLayout = CodeRu ? ISPEntries[ISPMode].CodeRu : 1)
 	} else {
 		TrayTitle := TitleCompose
 		IconCode := 1
@@ -20312,7 +20336,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 					TimedKeyCombinations("Equals",
 						[UseKey["Slash"], UseKey["Tilde"]],
 						[(*) => HandleFastKey(K, "noequals"), (*) => HandleFastKey(K, "almostequals")]
-				),*/
+				),
+				*/
 				;UseKey["Slash"], (K) => TimedKeyCombinations("Slash", UseKey["Equals"], "Off"),
 				UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], "Off"),
 				;
