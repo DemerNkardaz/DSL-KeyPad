@@ -19409,7 +19409,21 @@ HandleFastKey(combo := "", characterNames*) {
 			output .= GetCharacterSequence(character)
 		}
 
-		inputType := RegExMatch(output, GetChar("minus")) ? "Text" : "Input"
+		charsValidation := "" GetChar(
+			"minus",
+			"arrow_left",
+			"arrow_right",
+			"arrow_up",
+			"arrow_down",
+			"arrow_left_ushaped",
+			"arrow_right_ushaped",
+			"arrow_up_ushaped",
+			"arrow_down_ushaped",
+			"arrow_left_circle",
+			"arrow_right_circle",
+		)
+
+		inputType := RegExMatch(output, "[" RegExReplace(RegExReplace(charsValidation, "(.)", "$1|"), "|$", "") "]") ? "Text" : "Input"
 		Send%inputType%(output)
 
 	} else {
