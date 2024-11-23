@@ -17782,9 +17782,9 @@ Class InputScriptProcessor {
 					continue
 				for key, value in entries {
 					if (RegExMatch(key, "^" RegExEscape(input))) {
-						output .= key "(" value "), "
-					} else if IPS.SteppedComparator(input, key, True) {
-						output .= key "(" value "), "
+						output .= RegExReplace(key, "^" RegExEscape(input), "-") "(" value "), "
+					} else if IPS.SteppedComparator(input, key, True, &a, &b) {
+						output .= RegExReplace(b, "^" RegExEscape(a), "-") "(" value "), "
 					}
 				}
 			}
@@ -17793,10 +17793,13 @@ Class InputScriptProcessor {
 		return output
 	}
 
-	static SteppedComparator(a, b, partial := False) {
+	static SteppedComparator(a, b, partial := False, &c?, &d?) {
 		while (StrLen(a) > 0) {
-			if partial && RegExMatch(b, "^" RegExEscape(a)) || (a == b)
+			if partial && RegExMatch(b, "^" RegExEscape(a)) || (a == b) {
+				c := a
+				d := b
 				return True
+			}
 			a := SubStr(a, 2)
 		}
 		return False
