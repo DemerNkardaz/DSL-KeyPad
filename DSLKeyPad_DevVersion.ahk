@@ -200,7 +200,7 @@ DefaultConfig := [
 	["Settings", "F13F24", "True"],
 	["Settings", "TemperatureCalcExtendedFormatting", "True"],
 	["Settings", "TemperatureCalcDedicatedUnicodeChars", "True"],
-	["Settings", "ScriptProcessorAdvancedMode", "True"],
+	["Settings", "ScriptProcessorAdvancedMode", "False"],
 	["CustomRules", "ParagraphBeginning", ""],
 	["CustomRules", "ParagraphAfterStartEmdash", ""],
 	["CustomRules", "GREPDialogAttribution", ""],
@@ -17021,17 +17021,37 @@ Class InputScriptProcessor {
 			c: {
 				a_acu: GetChar("lat_c_let_a_acute"),
 				a_bre: GetChar("lat_c_let_a_breve"),
+				a_bre_acu: GetChar("lat_c_let_a_breve_acute"),
+				a_bre_gra: GetChar("lat_c_let_a_breve_grave"),
+				a_bre_til: GetChar("lat_c_let_a_breve_tilde"),
+				a_bre_dot_bel: GetChar("lat_c_let_a_breve_dot_below"),
+				a_bre_hoo_abo: GetChar("lat_c_let_a_breve_hook_above"),
 				a_cir: GetChar("lat_c_let_a_circumflex"),
-				a_dot_bel: GetChar("lat_c_let_a_dot_below"),
+				a_cir_acu: GetChar("lat_c_let_a_circumflex_acute"),
+				a_cir_gra: GetChar("lat_c_let_a_circumflex_grave"),
+				a_cir_til: GetChar("lat_c_let_a_circumflex_tilde"),
+				a_cir_dot_bel: GetChar("lat_c_let_a_circumflex_dot_below"),
+				a_cir_hoo_abo: GetChar("lat_c_let_a_circumflex_hook_above"),
 				a_gra: GetChar("lat_c_let_a_grave"),
-				a_hoo_abo: GetChar("lat_c_let_a_hook_above"),
 				a_til: GetChar("lat_c_let_a_tilde"),
+				a_dot_bel: GetChar("lat_c_let_a_dot_below"),
+				a_hoo_abo: GetChar("lat_c_let_a_hook_above"),
 			},
 			s: {
 				a_acu: GetChar("lat_s_let_a_acute"),
 				a_bre: GetChar("lat_s_let_a_breve"),
+				a_bre_acu: GetChar("lat_s_let_a_breve_acute"),
+				a_bre_gra: GetChar("lat_s_let_a_breve_grave"),
+				a_bre_til: GetChar("lat_s_let_a_breve_tilde"),
+				a_bre_dot_bel: GetChar("lat_s_let_a_breve_dot_below"),
+				a_bre_hoo_abo: GetChar("lat_s_let_a_breve_hook_above"),
 				a_dot_bel: GetChar("lat_s_let_a_dot_below"),
 				a_cir: GetChar("lat_s_let_a_circumflex"),
+				a_cir_acu: GetChar("lat_s_let_a_circumflex_acute"),
+				a_cir_gra: GetChar("lat_s_let_a_circumflex_grave"),
+				a_cir_til: GetChar("lat_s_let_a_circumflex_tilde"),
+				a_cir_dot_bel: GetChar("lat_s_let_a_circumflex_dot_below"),
+				a_cir_hoo_abo: GetChar("lat_s_let_a_circumflex_hook_above"),
 				a_gra: GetChar("lat_s_let_a_grave"),
 				a_hoo_abo: GetChar("lat_s_let_a_hook_above"),
 				a_til: GetChar("lat_s_let_a_tilde"),
@@ -17041,19 +17061,73 @@ Class InputScriptProcessor {
 
 	static autoDiacritics := Map()
 
+	static generateSequences(libLink, ending?, replaceWith?) {
+		output := Map()
+		if IsObject(libLink) {
+			tempArray := []
+			for i, key in libLink {
+				if Mod(i, 3) = 1 {
+					link := libLink[i]
+					ending := libLink[i + 1]
+					replaceWith := libLink[i + 2]
+
+					output := MapMerge(output, this.generateSequences(link, ending, replaceWith))
+				}
+			}
+
+		} else {
+			RegExMatch(libLink, "^(.*?):(.*?)\[(.*?)\]$", &match)
+
+			category := match[1]
+			libChar := match[2]
+			inputVariations := StrSplit(match[3], ", ")
+
+			for variation in inputVariations {
+				output.Set(
+					this.locLib.%category%.s.%libChar%_%variation% ending[1], this.locLib.%category%.s.%(InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith)%,
+					this.locLib.%category%.c.%libChar%_%variation% ending[2], this.locLib.%category%.c.%(InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith)%,
+				)
+			}
+		}
+
+		return output
+	}
+
 	static scriptSequences := {
 		vietNam: Map(
-			"Advanced", Map(
-				;* Advanced A
-				this.locLib.lat.s.a_cir "w", this.locLib.lat.s.a_bre,
-				this.locLib.lat.c.a_cir "W", this.locLib.lat.c.a_bre,
-				this.locLib.lat.s.a_cir "z", "a",
-				this.locLib.lat.c.a_cir "Z", "A",
-				;
-				this.locLib.lat.s.a_bre "a", this.locLib.lat.s.a_cir,
-				this.locLib.lat.c.a_bre "A", this.locLib.lat.c.a_cir,
-				this.locLib.lat.s.a_bre "z", "a",
-				this.locLib.lat.c.a_bre "Z", "A",
+			"Advanced", MapMerge(
+				this.generateSequences([
+					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_cir",
+					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_bre",
+					;
+					"lat:a_cir[acu, til, dot_bel, hoo_abo]", ["f", "F"], "a_cir_gra",
+					"lat:a_cir[gra, til, dot_bel, hoo_abo]", ["s", "S"], "a_cir_acu",
+					"lat:a_cir[acu, gra, dot_bel, hoo_abo]", ["x", "X"], "a_cir_til",
+					"lat:a_cir[acu, gra, til, hoo_abo]", ["j", "J"], "a_cir_dot_bel",
+					"lat:a_cir[acu, gra, til, dot_bel]", ["r", "R"], "a_cir_hoo_abo",
+					;
+					"lat:a_bre[acu, til, dot_bel, hoo_abo]", ["f", "F"], "a_bre_gra",
+					"lat:a_bre[gra, til, dot_bel, hoo_abo]", ["s", "S"], "a_bre_acu",
+					"lat:a_bre[acu, gra, dot_bel, hoo_abo]", ["x", "X"], "a_bre_til",
+					"lat:a_bre[acu, gra, til, hoo_abo]", ["j", "J"], "a_bre_dot_bel",
+					"lat:a_bre[acu, gra, til, dot_bel]", ["r", "R"], "a_bre_hoo_abo",
+					;
+					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "a_bre[*]",
+					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["a", "A"], "a_cir[*]",
+					;
+				]),
+				Map(
+					;* Advanced A
+					this.locLib.lat.s.a_cir "w", this.locLib.lat.s.a_bre,
+					this.locLib.lat.c.a_cir "W", this.locLib.lat.c.a_bre,
+					this.locLib.lat.s.a_cir "z", "a",
+					this.locLib.lat.c.a_cir "Z", "A",
+					;
+					this.locLib.lat.s.a_bre "a", this.locLib.lat.s.a_cir,
+					this.locLib.lat.c.a_bre "A", this.locLib.lat.c.a_cir,
+					this.locLib.lat.s.a_bre "z", "a",
+					this.locLib.lat.c.a_bre "Z", "A",
+				),
 			),
 			"Default", Map(
 				;
