@@ -17716,6 +17716,7 @@ Class InputScriptProcessor {
 			InputScriptProcessor.InitHook()
 		}
 
+
 		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
 	}
 
@@ -17725,19 +17726,18 @@ Class InputScriptProcessor {
 	static SequenceHandler(input) {
 		IPS := InputScriptProcessor
 
-		if IPS.options.interceptionInputMode = "" {
-			IPS.InH.Stop()
-			Tooltip()
-		}
 
 		inputCut := (str, len := 7) => StrLen(str) > len ? SubStr(str, StrLen(str) - (len - 1)) : str
 
-		if StrLen(input) > 0 {
+		if StrLen(input) > 0 && IPS.options.interceptionInputMode != "" {
 			IPS.inputLogger .= input
 			IPS.inputLogger := inputCut(IPS.inputLogger)
 			Tooltip(IPS.inputLogger)
 
 
+		} else {
+			IPS.InH.Stop()
+			Tooltip()
 		}
 
 		return
