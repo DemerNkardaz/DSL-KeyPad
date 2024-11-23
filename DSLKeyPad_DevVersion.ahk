@@ -17040,7 +17040,6 @@ Class InputScriptProcessor {
 		advancedMode: IniRead(ConfigFile, "Settings", "ScriptProcessorAdvancedMode", "False") = "True",
 	}
 
-	static inputLogger := ""
 
 	static locLib := {
 		lat: {
@@ -17720,25 +17719,34 @@ Class InputScriptProcessor {
 		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
 	}
 
-	static InitHook() {
+	static InH := InputHook("V")
+	static inputLogger := ""
 
-		InH := InputHook("V")
-		InH.Start()
+	static SequenceHandler(input) {
+		IPS := InputScriptProcessor
 
-		inputCut := (str, len := 6) => SubStr(str, StrLen(str) - len)
-
-		Loop {
-			if this.options.interceptionInputMode = ""
-				break
-
-			input := inputCut(InH.Input)
-			if StrLen(input) > 0 {
-				Tooltip(input)
-			}
+		if IPS.options.interceptionInputMode = "" {
+			IPS.InH.Stop()
+			Tooltip()
 		}
 
-		InH.Stop()
-		Tooltip()
+		inputCut := (str, len := 7) => StrLen(str) > len ? SubStr(str, StrLen(str) - (len - 1)) : str
+
+		if StrLen(input) > 0 {
+			IPS.inputLogger .= input
+			IPS.inputLogger := inputCut(IPS.inputLogger)
+			Tooltip(IPS.inputLogger)
+
+
+		}
+
+		return
+	}
+
+	static InitHook() {
+		this.InH.Start()
+		this.InH.OnChar := this.SequenceHandler
+
 		return
 	}
 
