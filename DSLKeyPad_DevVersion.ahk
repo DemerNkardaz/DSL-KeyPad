@@ -17696,8 +17696,8 @@ Class InputScriptProcessor {
 				for key, value in entries {
 					keyLength := StrLen(key)
 					escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
-					HotString(":*C?:" key, "", False)
-					HotString(":*C?:" escapingSequence, "", False)
+					;HotString(":*C?:" key, "", False)
+					;HotString(":*C?:" escapingSequence, "", False)
 				}
 			}
 		}
@@ -17709,8 +17709,8 @@ Class InputScriptProcessor {
 				for key, value in entries {
 					keyLength := StrLen(key)
 					escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
-					HotString(":*C?:" key, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
-					HotString(":*C?:" escapingSequence, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
+					;HotString(":*C?:" key, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
+					;HotString(":*C?:" escapingSequence, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
 				}
 			}
 			InputScriptProcessor.InitHook()
@@ -17726,18 +17726,79 @@ Class InputScriptProcessor {
 	static SequenceHandler(input) {
 		IPS := InputScriptProcessor
 
-
 		inputCut := (str, len := 7) => StrLen(str) > len ? SubStr(str, StrLen(str) - (len - 1)) : str
+		forbiddenChars := "[`n|\s]"
 
 		if StrLen(input) > 0 && IPS.options.interceptionInputMode != "" {
-			IPS.inputLogger .= input
-			IPS.inputLogger := inputCut(IPS.inputLogger)
-			Tooltip(IPS.inputLogger)
+			if !RegExMatch(input, forbiddenChars) {
+				IPS.inputLogger .= input
+				IPS.inputLogger := inputCut(IPS.inputLogger)
 
+				;try {
+				for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
+					if !IPS.options.advancedMode && subMap = "Advanced"
+						continue
+					for key, value in entries {
 
+						if IPS.steppedComparator(IPS.inputLogger, key) {
+
+							try {
+								IPS.backspaceLock := True
+								Loop StrLen(key) {
+									Send("{Backspace}")
+								}
+							} finally {
+								SendText(value)
+								IPS.InH.Stop()
+								IPS.inputLogger := value
+								IPS.InH.Start()
+								IPS.backspaceLock := False
+							}
+							break 2
+						}
+					}
+				}
+				;}
+
+			} else {
+				IPS.inputLogger := ""
+			}
+			CaretTooltip(IPS.inputLogger)
 		} else {
 			IPS.InH.Stop()
+			IPS.inputLogger := ""
 			Tooltip()
+		}
+
+		return
+	}
+
+	static SteppedComparator(a, b, &outputLen := 0) {
+		lenA := StrLen(a)
+		lenB := StrLen(b)
+
+		Loop (lenA) {
+			subStrA := SubStr(a, A_Index)
+
+			if (subStrA == b) {
+				outputLen := A_Index
+				outputCompared := b
+				return True
+			}
+
+		}
+
+		return False
+	}
+
+	static backspaceLock := False
+	static Backspacer(ih, vk, sc) {
+		backspaceCode := "14"
+
+		if sc = backspaceCode && !InputScriptProcessor.backspaceLock {
+			InputScriptProcessor.InH.Stop()
+			InputScriptProcessor.inputLogger := SubStr(InputScriptProcessor.inputLogger, 1, -1)
+			InputScriptProcessor.InH.Start()
 		}
 
 		return
@@ -17745,10 +17806,14 @@ Class InputScriptProcessor {
 
 	static InitHook() {
 		this.InH.Start()
+		this.InH.NotifyNonText := True
+		this.InH.KeyOpt("{Backspace}", "N")
 		this.InH.OnChar := this.SequenceHandler
+		;this.InH.OnKeyDown := ObjBindMethod(this, "Backspacer") ; Исправлено
 
 		return
 	}
+
 
 	static PostHook(intercepted) {
 		if intercepted = "" || this.options.interceptionInputMode = "" {
