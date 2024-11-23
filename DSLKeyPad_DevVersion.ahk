@@ -17040,6 +17040,8 @@ Class InputScriptProcessor {
 		advancedMode: IniRead(ConfigFile, "Settings", "ScriptProcessorAdvancedMode", "False") = "True",
 	}
 
+	static inputLogger := ""
+
 	static locLib := {
 		lat: {
 			c: {
@@ -17060,6 +17062,10 @@ Class InputScriptProcessor {
 				a_til: GetChar("lat_c_let_a_tilde"),
 				a_dot_bel: GetChar("lat_c_let_a_dot_below"),
 				a_hoo_abo: GetChar("lat_c_let_a_hook_above"),
+				;
+				b_sto: GetChar("lat_c_let_b_stroke_short"),
+				;
+				d_sto: GetChar("lat_c_let_d_stroke_short"),
 			},
 			s: {
 				a_acu: GetChar("lat_s_let_a_acute"),
@@ -17069,7 +17075,6 @@ Class InputScriptProcessor {
 				a_bre_til: GetChar("lat_s_let_a_breve_tilde"),
 				a_bre_dot_bel: GetChar("lat_s_let_a_breve_dot_below"),
 				a_bre_hoo_abo: GetChar("lat_s_let_a_breve_hook_above"),
-				a_dot_bel: GetChar("lat_s_let_a_dot_below"),
 				a_cir: GetChar("lat_s_let_a_circumflex"),
 				a_cir_acu: GetChar("lat_s_let_a_circumflex_acute"),
 				a_cir_gra: GetChar("lat_s_let_a_circumflex_grave"),
@@ -17077,8 +17082,13 @@ Class InputScriptProcessor {
 				a_cir_dot_bel: GetChar("lat_s_let_a_circumflex_dot_below"),
 				a_cir_hoo_abo: GetChar("lat_s_let_a_circumflex_hook_above"),
 				a_gra: GetChar("lat_s_let_a_grave"),
-				a_hoo_abo: GetChar("lat_s_let_a_hook_above"),
 				a_til: GetChar("lat_s_let_a_tilde"),
+				a_dot_bel: GetChar("lat_s_let_a_dot_below"),
+				a_hoo_abo: GetChar("lat_s_let_a_hook_above"),
+				;
+				b_sto: GetChar("lat_s_let_b_stroke_short"),
+				;
+				d_sto: GetChar("lat_s_let_d_stroke_short"),
 			},
 		},
 	}
@@ -17100,17 +17110,27 @@ Class InputScriptProcessor {
 			}
 
 		} else {
-			RegExMatch(libLink, "^(.*?):(.*?)\[(.*?)\]$", &match)
+			RegExMatch(libLink, "^(.*?):(.*?)(?:\[(.*?)\])?$", &match)
 
 			category := match[1]
 			libChar := match[2]
-			inputVariations := StrSplit(match[3], ", ")
+			inputVariations := match[3] = "" ? [""] : StrSplit(match[3], ", ")
 
 			for variation in inputVariations {
-				variationsReplace := InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith
+				sequenceIn := [this.locLib.%category%.s.%libChar%_%variation%, this.locLib.%category%.c.%libChar%_%variation%]
+
+				if !IsObject(replaceWith) {
+					variationsReplace := (InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith)
+					sequenceOut := [this.locLib.%category%.s.%variationsReplace%, this.locLib.%category%.c.%variationsReplace%]
+				} else {
+					sequenceOut := replaceWith
+				}
+
 				output.Set(
-					this.locLib.%category%.s.%libChar%_%variation% ending[1], this.locLib.%category%.s.%variationsReplace%,
-					this.locLib.%category%.c.%libChar%_%variation% ending[2], this.locLib.%category%.c.%variationsReplace%,
+					sequenceIn[1] ending[1], sequenceOut[1],
+					sequenceIn[2] ending[2], sequenceOut[2],
+					sequenceIn[1] "\" ending[1], sequenceIn[1],
+					sequenceIn[2] "\" ending[2], sequenceIn[2],
 				)
 			}
 		}
@@ -17124,6 +17144,7 @@ Class InputScriptProcessor {
 				this.generateSequences([
 					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_cir",
 					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_bre",
+					"lat:a[cir, bre, acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], ["a", "A"],
 					;
 					"lat:a_cir[acu, til, dot_bel, hoo_abo]", ["f", "F"], "a_cir_gra",
 					"lat:a_cir[gra, til, dot_bel, hoo_abo]", ["s", "S"], "a_cir_acu",
@@ -17140,18 +17161,18 @@ Class InputScriptProcessor {
 					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "a_bre[*]",
 					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["a", "A"], "a_cir[*]",
 					;
+					"lat:a[bre]", ["a", "A"], "a_cir",
+					"lat:a[cir]", ["w", "W"], "a_bre",
+					"lat:a[acu, til, dot_bel, hoo_abo]", ["f", "F"], "a_gra",
+					"lat:a[gra, til, dot_bel, hoo_abo]", ["s", "S"], "a_acu",
+					"lat:a[acu, gra, dot_bel, hoo_abo]", ["x", "X"], "a_til",
+					"lat:a[acu, gra, til, hoo_abo]", ["j", "J"], "a_dot_bel",
+					"lat:a[acu, gra, til, dot_bel]", ["r", "R"], "a_hoo_abo",
+					;
+					;
 				]),
 				Map(
 					;* Advanced A
-					this.locLib.lat.s.a_cir "w", this.locLib.lat.s.a_bre,
-					this.locLib.lat.c.a_cir "W", this.locLib.lat.c.a_bre,
-					this.locLib.lat.s.a_cir "z", "a",
-					this.locLib.lat.c.a_cir "Z", "A",
-					;
-					this.locLib.lat.s.a_bre "a", this.locLib.lat.s.a_cir,
-					this.locLib.lat.c.a_bre "A", this.locLib.lat.c.a_cir,
-					this.locLib.lat.s.a_bre "z", "a",
-					this.locLib.lat.c.a_bre "Z", "A",
 				),
 			),
 			"Default", Map(
@@ -17171,27 +17192,27 @@ Class InputScriptProcessor {
 				"ar", this.locLib.lat.s.a_hoo_abo,
 				"AR", this.locLib.lat.c.a_hoo_abo,
 				;
-				"a1", Chr(0x1EA5),
-				"A1", Chr(0x1EA4),
-				"a2", Chr(0x1EA7),
-				"A2", Chr(0x1EA6),
-				"a3", Chr(0x1EA9),
-				"A3", Chr(0x1EA8),
-				"a4", Chr(0x1EAD),
-				"A4", Chr(0x1EAC),
-				"a5", Chr(0x1EAB),
-				"A5", Chr(0x1EAA),
+				"a1", this.locLib.lat.s.a_cir_acu,
+				"A1", this.locLib.lat.c.a_cir_acu,
+				"a2", this.locLib.lat.s.a_cir_gra,
+				"A2", this.locLib.lat.c.a_cir_gra,
+				"a3", this.locLib.lat.s.a_cir_hoo_abo,
+				"A3", this.locLib.lat.c.a_cir_hoo_abo,
+				"a4", this.locLib.lat.s.a_cir_dot_bel,
+				"A4", this.locLib.lat.c.a_cir_dot_bel,
+				"a5", this.locLib.lat.s.a_cir_til,
+				"A5", this.locLib.lat.c.a_cir_til,
 				;
-				"q1", Chr(0x1EAF),
-				"Q1", Chr(0x1EAE),
-				"q2", Chr(0x1EB1),
-				"Q2", Chr(0x1EB0),
-				"q3", Chr(0x1EB3),
-				"Q3", Chr(0x1EB2),
-				"q4", Chr(0x1EB7),
-				"Q4", Chr(0x1EB6),
-				"q5", Chr(0x1EB5),
-				"Q5", Chr(0x1EB4),
+				"q1", this.locLib.lat.s.a_bre_acu,
+				"Q1", this.locLib.lat.c.a_bre_acu,
+				"q2", this.locLib.lat.s.a_bre_gra,
+				"Q2", this.locLib.lat.c.a_bre_gra,
+				"q3", this.locLib.lat.s.a_bre_hoo_abo,
+				"Q3", this.locLib.lat.c.a_bre_hoo_abo,
+				"q4", this.locLib.lat.s.a_bre_dot_bel,
+				"Q4", this.locLib.lat.c.a_bre_dot_bel,
+				"q5", this.locLib.lat.s.a_bre_til,
+				"Q5", this.locLib.lat.c.a_bre_til,
 				;
 				"dd", Chr(0x0111),
 				"DD", Chr(0x0110),
@@ -17693,9 +17714,32 @@ Class InputScriptProcessor {
 					HotString(":*C?:" escapingSequence, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
 				}
 			}
+			InputScriptProcessor.InitHook()
 		}
 
 		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
+	}
+
+	static InitHook() {
+
+		InH := InputHook("V")
+		InH.Start()
+
+		inputCut := (str, len := 6) => SubStr(str, StrLen(str) - len)
+
+		Loop {
+			if this.options.interceptionInputMode = ""
+				break
+
+			input := inputCut(InH.Input)
+			if StrLen(input) > 0 {
+				Tooltip(input)
+			}
+		}
+
+		InH.Stop()
+		Tooltip()
+		return
 	}
 
 	static PostHook(intercepted) {
