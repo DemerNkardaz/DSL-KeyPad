@@ -17083,9 +17083,10 @@ Class InputScriptProcessor {
 			inputVariations := StrSplit(match[3], ", ")
 
 			for variation in inputVariations {
+				variationsReplace := InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith
 				output.Set(
-					this.locLib.%category%.s.%libChar%_%variation% ending[1], this.locLib.%category%.s.%(InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith)%,
-					this.locLib.%category%.c.%libChar%_%variation% ending[2], this.locLib.%category%.c.%(InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith)%,
+					this.locLib.%category%.s.%libChar%_%variation% ending[1], this.locLib.%category%.s.%variationsReplace%,
+					this.locLib.%category%.c.%libChar%_%variation% ending[2], this.locLib.%category%.c.%variationsReplace%,
 				)
 			}
 		}
@@ -17657,14 +17658,16 @@ Class InputScriptProcessor {
 			}
 		}
 
-		for subMap, entries in InputScriptProcessor.scriptSequences.%this.mode%{
-			if !InputScriptProcessor.options.advancedMode && subMap = "Advanced"
-				continue
-			for key, value in entries {
-				keyLength := StrLen(key)
-				escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
-				HotString(":*C?:" key, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
-				HotString(":*C?:" escapingSequence, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
+		if this.mode != "" {
+			for subMap, entries in InputScriptProcessor.scriptSequences.%this.mode%{
+				if !InputScriptProcessor.options.advancedMode && subMap = "Advanced"
+					continue
+				for key, value in entries {
+					keyLength := StrLen(key)
+					escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
+					HotString(":*C?:" key, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
+					HotString(":*C?:" escapingSequence, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
+				}
 			}
 		}
 
