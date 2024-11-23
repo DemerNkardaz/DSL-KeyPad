@@ -16768,7 +16768,7 @@ Class Ligaturiser {
 				cleanPastInput := False
 			}
 
-			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.EntriesWalk(input, True)) : ""
+			tooltipSuggestions := input != "" ? Ligaturiser.FormatSuggestions(this.EntriesWalk(input, True)) : ""
 
 
 			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
@@ -16918,13 +16918,13 @@ Class Ligaturiser {
 		}
 
 		if StrLen(output) > 0 {
-			output := this.FormatSuggestions(output)
+			output := Ligaturiser.FormatSuggestions(output)
 		}
 
 		return output
 	}
 
-	FormatSuggestions(suggestions, maxLength := 72) {
+	static FormatSuggestions(suggestions, maxLength := 72) {
 		if suggestions = "N/A"
 			return suggestions
 
@@ -17762,7 +17762,8 @@ Class InputScriptProcessor {
 			} else {
 				IPS.inputLogger := ""
 			}
-			CaretTooltip(IPS.inputLogger)
+			suggestions := IPS.GetSuggestions(IPS.inputLogger)
+			CaretTooltip(IPS.inputLogger (suggestions != "" ? "`n" Ligaturiser.FormatSuggestions(suggestions) : ""))
 		} else {
 			IPS.InH.Stop()
 			IPS.inputLogger := ""
@@ -17772,9 +17773,29 @@ Class InputScriptProcessor {
 		return
 	}
 
-	static SteppedComparator(a, b) {
+	static GetSuggestions(input) {
+		IPS := InputScriptProcessor
+		output := ""
+		if input != "" {
+			for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
+				if !IPS.options.advancedMode && subMap = "Advanced"
+					continue
+				for key, value in entries {
+					if (RegExMatch(key, "^" RegExEscape(input))) {
+						output .= key "(" value "), "
+					} else if IPS.SteppedComparator(input, key, True) {
+						output .= key "(" value "), "
+					}
+				}
+			}
+		}
+
+		return output
+	}
+
+	static SteppedComparator(a, b, partial := False) {
 		while (StrLen(a) > 0) {
-			if (a == b)
+			if partial && RegExMatch(b, "^" a) || (a == b)
 				return True
 			a := SubStr(a, 2)
 		}
