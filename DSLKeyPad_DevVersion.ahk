@@ -17398,10 +17398,9 @@ Class InputScriptProcessor {
 				"u8", Chr(0x00FC),
 				"U8", Chr(0x00DC),
 				;
-				"wuo", Chrs(0x01B0, 0x01A1),
-				"WUO", Chrs(0x01AF, 0x01A0),
-				"Wuo", Chrs(0x01AF, 0x01A1),
-				"WUo", Chrs(0x01AF, 0x01A1),
+				"uow", Chrs(0x01B0, 0x01A1),
+				"UOW", Chrs(0x01AF, 0x01A0),
+				"Uow", Chrs(0x01AF, 0x01A1),
 				;
 				"uocw", Chrs(0x01B0, 0x00F4) "c",
 				"UOCW", Chrs(0x01AF, 0x00D4) "C",
@@ -17773,23 +17772,15 @@ Class InputScriptProcessor {
 		return
 	}
 
-	static SteppedComparator(a, b, &outputLen := 0) {
-		lenA := StrLen(a)
-		lenB := StrLen(b)
-
-		Loop (lenA) {
-			subStrA := SubStr(a, A_Index)
-
-			if (subStrA == b) {
-				outputLen := A_Index
-				outputCompared := b
+	static SteppedComparator(a, b) {
+		while (StrLen(a) > 0) {
+			if (a == b)
 				return True
-			}
-
+			a := SubStr(a, 2)
 		}
-
 		return False
 	}
+
 
 	static backspaceLock := False
 	static Backspacer(ih, vk, sc) {
