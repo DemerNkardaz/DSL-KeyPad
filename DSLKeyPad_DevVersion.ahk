@@ -21343,6 +21343,7 @@ ManageTrayItems() {
 		"notif", ReadLocale("tray_func_notif") "`t" Window LeftAlt "M",
 		"disable", ReadLocale("tray_func_disable") "`t" RightControl "F10",
 		"enable", ReadLocale("tray_func_enable") "`t" RightControl "F10",
+		"altInput", ReadLocale("tray_func_altInput"),
 		"glagolitic", ReadLocale("tray_func_glagolitic_runic") "`t" RightControl "1",
 		"turkic", ReadLocale("tray_func_tukic_permic") "`t" RightControl "2",
 		"hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "3",
@@ -21350,6 +21351,9 @@ ManageTrayItems() {
 		"maths", ReadLocale("tray_func_maths") "`t" RightControl "9",
 		"ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
 		"script", ReadLocale("func_label_scripts"),
+		"telexInput", ReadLocale("tray_func_telexlike"),
+		"vietNam", ReadLocale("tray_func_vietNam") "`t" RightAlt "F2",
+		"pinYin", ReadLocale("tray_func_pinYin") "`t" RightAlt RightShift "F2",
 		"layouts", ReadLocale("func_label_layouts"),
 		"alterations", ReadLocale("func_label_alterations"),
 		"combining_alteration", ReadLocale("tray_func_combining_alteration") "`t" LeftControl LeftAlt "Num1",
@@ -21375,7 +21379,7 @@ ManageTrayItems() {
 	UpdateEntry := Labels["install"] . " " . UpdateVersionString
 
 	DSLTray.Delete()
-	DSLTray.Add(CurrentApp, (*) => {})
+	DSLTray.Add(CurrentApp, (*) => Run("https://github.com/DemerNkardaz/DSL-KeyPad/tree/main"))
 	if UpdateAvailable {
 		DSLTray.Add(UpdateEntry, (*) => GetUpdate())
 		DSLTray.SetIcon(UpdateEntry, ImageRes, 176)
@@ -21385,6 +21389,11 @@ ManageTrayItems() {
 	DSLTray.Add()
 
 	ScriptsSubMenu := Menu()
+	ScriptsSubMenu.Add(Labels["telexInput"], (*) => "")
+	ScriptsSubMenu.Add(Labels["vietNam"], (*) => InputScriptProcessor())
+	ScriptsSubMenu.Add(Labels["pinYin"], (*) => InputScriptProcessor("pinYin"))
+	ScriptsSubMenu.Add()
+	ScriptsSubMenu.Add(Labels["altInput"], (*) => "")
 	ScriptsSubMenu.Add(Labels["glagolitic"], (*) => ToggleLetterScript(, "Glagolitic Futhark"))
 	ScriptsSubMenu.Add(Labels["turkic"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"))
 	ScriptsSubMenu.Add(Labels["hungarian"], (*) => ToggleLetterScript(, "Old Hungarian"))
@@ -21392,12 +21401,17 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
 	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
+	ScriptsSubMenu.SetIcon(Labels["vietNam"], InternalFiles["AppIcoDLL"].File, 11)
+	ScriptsSubMenu.SetIcon(Labels["pinYin"], InternalFiles["AppIcoDLL"].File, 12)
 	ScriptsSubMenu.SetIcon(Labels["glagolitic"], InternalFiles["AppIcoDLL"].File, 2)
 	ScriptsSubMenu.SetIcon(Labels["turkic"], InternalFiles["AppIcoDLL"].File, 4)
 	ScriptsSubMenu.SetIcon(Labels["hungarian"], InternalFiles["AppIcoDLL"].File, 6)
 	ScriptsSubMenu.SetIcon(Labels["gothic"], InternalFiles["AppIcoDLL"].File, 7)
 	ScriptsSubMenu.SetIcon(Labels["maths"], InternalFiles["AppIcoDLL"].File, 10)
 	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
+
+	ScriptsSubMenu.Disable(Labels["telexInput"])
+	ScriptsSubMenu.Disable(Labels["altInput"])
 
 	DSLTray.Add(Labels["script"], ScriptsSubMenu)
 
@@ -21467,7 +21481,7 @@ ManageTrayItems() {
 	DSLTray.Add(Labels["exit"], ExitApplication)
 	DSLTray.Add()
 
-	DSLTray.SetIcon(Labels["panel"], InternalFiles["AppIco"].File)
+	DSLTray.SetIcon(CurrentApp, InternalFiles["AppIco"].File)
 	DSLTray.SetIcon(Labels["search"], ImageRes, 169)
 	DSLTray.SetIcon(Labels["unicode"], Shell32, 225)
 	DSLTray.SetIcon(Labels["altcode"], Shell32, 313)
