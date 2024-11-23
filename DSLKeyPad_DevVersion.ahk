@@ -16328,9 +16328,9 @@ Class FavoriteChars {
 
 CaretTooltip(tooltipText) {
 	if CaretGetPos(&x, &y)
-		ToolTip(tooltipText, x, y + 20)
+		ToolTip(tooltipText, x, y + 30)
 	else if CaretGetPosAlternative(&x, &y)
-		ToolTip(tooltipText, x, y + 20)
+		ToolTip(tooltipText, x, y + 30)
 	else
 		ToolTip(tooltipText)
 }
@@ -17128,8 +17128,8 @@ Class InputScriptProcessor {
 				output.Set(
 					sequenceIn[1] ending[1], sequenceOut[1],
 					sequenceIn[2] ending[2], sequenceOut[2],
-					sequenceIn[1] "\" ending[1], sequenceIn[1],
-					sequenceIn[2] "\" ending[2], sequenceIn[2],
+					sequenceIn[1] "\" ending[1], ending[1],
+					sequenceIn[2] "\" ending[2], ending[2],
 				)
 			}
 		}
@@ -17743,7 +17743,7 @@ Class InputScriptProcessor {
 
 							try {
 								IPS.backspaceLock := True
-								Loop StrLen(key) {
+								Loop StrLen(key) - (InStr(key, "\") ? 1 : 0) {
 									Send("{Backspace}")
 								}
 							} finally {
@@ -17795,7 +17795,7 @@ Class InputScriptProcessor {
 
 	static SteppedComparator(a, b, partial := False) {
 		while (StrLen(a) > 0) {
-			if partial && RegExMatch(b, "^" a) || (a == b)
+			if partial && RegExMatch(b, "^" RegExEscape(a)) || (a == b)
 				return True
 			a := SubStr(a, 2)
 		}
