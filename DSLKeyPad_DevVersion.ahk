@@ -244,15 +244,15 @@ Class Language {
 	static supported := Map(
 		"en", { code: "00000409" },
 		"ru", { code: "00000419" },
-		"gr", { code: "00000408", noLocale: True },
+		;"gr", { code: "00000408", noLocale: True },
 	)
 
 	static __New() {
 		this.InitialValidator()
 	}
 
-	static Compare(input, mode := "Code") {
-		if (mode = "Code") {
+	static Compare(input) {
+		if StrLen(input) > 5 {
 			for key, value in this.supported {
 				if input == value.code
 					return True
@@ -312,8 +312,12 @@ Class Language {
 			return False
 		} else {
 			for key, value in this.supported {
-				if code == value.code
+				if code == value.code {
 					%abbr% := key
+					break
+				} else {
+					%abbr% := ""
+				}
 			}
 		}
 	}
@@ -19730,30 +19734,17 @@ ConvertComboKeys(Output) {
 }
 
 HandleFastKey(combo := "", characterNames*) {
-	isLayoutValid := CheckLayoutValid()
+	Language.CheckLayout(&lang)
 
-	if isLayoutValid {
+	if Language.Compare(lang) {
 		output := ""
 
 		for _, character in characterNames {
 			output .= GetCharacterSequence(character)
 		}
+		keysValidation := "[SC14B|SC148|SC14D|SC150|SC04A]"
 
-		charsValidation := "" GetChar(
-			"minus",
-			"arrow_left",
-			"arrow_right",
-			"arrow_up",
-			"arrow_down",
-			"arrow_left_ushaped",
-			"arrow_right_ushaped",
-			"arrow_up_ushaped",
-			"arrow_down_ushaped",
-			"arrow_left_circle",
-			"arrow_right_circle",
-		)
-
-		inputType := RegExMatch(output, "[" RegExReplace(RegExReplace(charsValidation, "(.)", "$1|"), "|$", "") "]") ? "Text" : "Input"
+		inputType := RegExMatch(combo, keysValidation) ? "Text" : "Input"
 		Send%inputType%(output)
 
 	} else {
@@ -19842,24 +19833,21 @@ CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
 	}
 }
 
-LangSeparatedCall(LatinCallback, CyrillicCallback) {
+LangSeparatedCall(enCallback, ruCallback) {
 	Language.CheckLayout(&lang)
 
-	if lang = "en" {
-		LatinCallback()
-	} else {
-		CyrillicCallback()
-	}
+	if IsSet(%lang%Callback)
+		%lang%Callback()
 	return
 }
-LangSeparatedKey(Combo, LatinCharacter, CyrillicCharacter, UseCaps := False, Reverse := False) {
+
+LangSeparatedKey(Combo, enChar, ruChar, UseCaps := False, Reverse := False) {
 	Language.CheckLayout(&lang)
 
-	Character := (lang = "en") ? LatinCharacter : CyrillicCharacter
-	if UseCaps && IsObject(Character) {
-		CapsSeparatedKey(Combo, Character[1], Character[2], Reverse)
+	if UseCaps && IsObject(%lang%Char) {
+		CapsSeparatedKey(Combo, %lang%Char[1], %lang%Char[2], Reverse)
 	} else {
-		HandleFastKey(Combo, IsObject(Character) ? Character[1] : Character)
+		HandleFastKey(Combo, IsObject(%lang%Char) ? %lang%Char[1] : %lang%Char)
 	}
 }
 
