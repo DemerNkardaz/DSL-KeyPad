@@ -5,6 +5,16 @@
 
 Array.Prototype.DefineProp("ToString", { Call: _ArrayToString })
 Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
+Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
+
+_ArrayMaxIndex(this) {
+	indexes := 0
+	for i, v in this {
+		indexes++
+	}
+
+	return indexes
+}
 
 
 SupportedLanguages := [
@@ -178,7 +188,7 @@ OpenRecipesFile(*) {
 EscapePressed := False
 
 FastKeysIsActive := False
-SkipGroupMessage := False
+;SkipGroupMessage := False
 GlagoFutharkActive := False
 DisabledAllKeys := False
 ActiveScriptName := ""
@@ -219,14 +229,178 @@ DefaultConfig := [
 	["ServiceFields", "PrevLayout", ""],
 ]
 
+global_ := {}
+Class INIConfig {
+	static ini := WorkingDir "\DSLKeyPad.configtest.ini"
+	static sections := [
+		"Settings", [
+			"UserLanguage", "",
+			"FastKeys", "False",
+			"SkipGroupMessage", "False",
+			"InputMode", "Default",
+			"ScriptInput", "Default",
+			"LatinLayout", "QWERTY",
+			"CyrillicLayout", "ЙЦУКЕН",
+			"CharacterWebResource", "SymblCC",
+			"F13F24", "False",
+			"F13F24", "False",
+		],
+		"ScriptProcessor", [
+			"AdvancedMode", "False",
+		],
+		"TemperatureCalc", [
+			"ExtendedFormatting", "True",
+			"DedicatedUnicodeChars", "True",
+			"RoundValue", 2,
+			"FormattingFrom", 4,
+			"SpaceType", "narrow_no_break_space",
+			"FormattingSpaceType", "thinspace",
+		],
+		"CustomRules", [
+			"ParagraphBeginning", "",
+			"ParagraphAfterStartEmdash", "",
+			"GREPDialogAttribution", "",
+			"GREPThisEmdash", "",
+			"GREPInitials", "",
+			"GREPInitials", "",
+		],
+		"LatestPrompts", [
+			"LaTeX", "",
+			"Unicode", "",
+			"Altcode", "",
+			"Search", "",
+			"Ligature", "",
+			"RomanNumeral", "",
+		],
+		"ServiceFields", [
+			"PrevLayout", "",
+		],
+	]
+
+	static BindedVars() {
+		return [
+			;"InputScriptProcessor.options.advancedMode", this.Get("AdvancedMode", "ScriptProcessor", False, "bool"),
+			"SkipGroupMessage", this.Get("SkipGroupMessage", "Settings", False, "bool"),
+		]
+	}
+
+	static __New() {
+		this.Init()
+	}
+
+	static Init() {
+		for i, section in this.sections {
+			if Mod(i, 2) == 1 {
+				entries := this.sections[i + 1]
+				for j, entry in entries {
+					if Mod(j, 2) == 1 && !this.Get(entry, section) {
+						value := entries[j + 1]
+
+						this.Set(value, entry, section)
+					}
+				}
+			}
+		}
+	}
+
+	static Set(value, entry, section := "Settings", options := "") {
+		if this.sections.HasValue(section) {
+			this.OptionsHandler(value, options, &value)
+
+			IniWrite(value, this.ini, section, entry)
+
+			this.BindedVarsHandler()
+		} else {
+			throw Error("Unknown config section: " . section)
+		}
+	}
+
+	static Get(entry, section := "Settings", default := "", options := "") {
+		if this.sections.HasValue(section) {
+			value := IniRead(this.ini, section, entry, default)
+
+			this.OptionsHandler(value, options, &value)
+		} else {
+			throw Error("Unknown config section: " section)
+		}
+		return value
+	}
+
+	static SwitchSet(valuesEntry, entry, section := "Settings", options := "") {
+		currentValue := this.Get(entry, section)
+		found := false
+
+		for i, value in valuesEntry {
+			if (value = currentValue) {
+				nextIndex := (i = valuesEntry.MaxIndex()) ? 1 : i + 1
+				this.Set(valuesEntry[nextIndex], entry, section, options)
+				found := true
+				break
+			}
+		}
+
+		if (!found) {
+			this.Set(valuesEntry[1], entry, section, options)
+		}
+	}
+
+	static OptionsHandler(value, options := "", &output := value) {
+		if InStr(options, "toHex")
+			value := ConvertToHexaDecimal(value)
+		if InStr(options, "fromHex")
+			value := ConvertFromHexaDecimal(value)
+		if InStr(options, "bool")
+			value := (value = "True")
+		if InStr(options, "int")
+			value := Integer(value)
+
+		output := value
+	}
+
+	static BindedVarsHandler() {
+		bindedVars := this.BindedVars()
+
+		for i, variable in bindedVars {
+			if Mod(i, 2) == 1 {
+				value := bindedVars[i + 1]
+				if InStr(variable, ".") {
+					variableEntry := StrSplit(variable, ".")
+
+					try {
+						variableLink := %variableEntry[1]%
+
+						for j, entry in variableEntry {
+							if j > 1 {
+								variableLink := variableLink.%entry%
+							}
+						}
+						variableLink := value
+					} catch {
+						continue
+					}
+				} else {
+					try {
+						if IsSet(%variable%)
+							%variable% := value
+						else {
+							global_.%variable% := value
+						}
+					} catch {
+						continue
+					}
+				}
+			}
+		}
+	}
+}
+
+
 if FileExist(ConfigFile) {
 	isFastKeysEnabled := IniRead(ConfigFile, "Settings", "FastKeysIsActive", "False")
-	isSkipGroupMessage := IniRead(ConfigFile, "Settings", "SkipGroupMessage", "False")
 	InputMode := IniRead(ConfigFile, "Settings", "InputMode", "Default")
 	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
 
 	FastKeysIsActive := (isFastKeysEnabled = "True")
-	SkipGroupMessage := (isSkipGroupMessage = "True")
 } else {
 	for index, config in DefaultConfig {
 		IniWrite config[3], ConfigFile, config[1], config[2]
@@ -16678,7 +16852,7 @@ Class Ligaturiser {
 			if this.compositingMode = "InputBox"
 				MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
 			else
-				ShowInfoMessage("warning_recipe_absent", , , SkipGroupMessage, True)
+				ShowInfoMessage("warning_recipe_absent", , , global_.SkipGroupMessage, True)
 		}
 	}
 
@@ -17037,7 +17211,7 @@ Class InputScriptProcessor {
 
 	static options := {
 		interceptionInputMode: "",
-		advancedMode: IniRead(ConfigFile, "Settings", "ScriptProcessorAdvancedMode", "False") = "True",
+		advancedMode: INIConfig.Get("AdvancedMode", "ScriptProcessor", False, "bool"),
 	}
 
 
@@ -17675,48 +17849,24 @@ Class InputScriptProcessor {
 	}
 
 	__New(mode := "vietNam", reloadHs := False) {
-		InputScriptProcessor.options.advancedMode := IniRead(ConfigFile, "Settings", "ScriptProcessorAdvancedMode", "False") = "True"
-
 		this.mode := mode
 		this.previousMode := InputScriptProcessor.options.interceptionInputMode
 		this.RegistryHotstrings(reloadHs)
 	}
 
 	RegistryHotstrings(reloadHs) {
-
 		InputScriptProcessor.options.interceptionInputMode := reloadHs
 			? this.mode
 				: (this.mode != InputScriptProcessor.options.interceptionInputMode ? this.mode : "")
 
 		isEnabled := (InputScriptProcessor.options.interceptionInputMode != "" ? True : False)
 
-		if this.previousMode != "" && (reloadHs || isEnabled) {
-			for subMap, entries in InputScriptProcessor.scriptSequences.%this.previousMode% {
-				for key, value in entries {
-					keyLength := StrLen(key)
-					escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
-					;HotString(":*C?:" key, "", False)
-					;HotString(":*C?:" escapingSequence, "", False)
-				}
-			}
-		}
-
 		if this.mode != "" {
-			for subMap, entries in InputScriptProcessor.scriptSequences.%this.mode%{
-				if !InputScriptProcessor.options.advancedMode && subMap = "Advanced"
-					continue
-				for key, value in entries {
-					keyLength := StrLen(key)
-					escapingSequence := SubStr(key, 1, keyLength - 1) "\" SubStr(key, keyLength)
-					;HotString(":*C?:" key, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
-					;HotString(":*C?:" escapingSequence, ObjBindMethod(InputScriptProcessor, "Telexiser", value), isEnabled ? True : False)
-				}
-			}
 			InputScriptProcessor.InitHook()
 		}
 
 
-		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , SkipGroupMessage, True, True)
+		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , global_.SkipGroupMessage, True, True)
 	}
 
 	static InH := InputHook("V")
@@ -17735,7 +17885,7 @@ Class InputScriptProcessor {
 
 				;try {
 				for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
-					if !IPS.options.advancedMode && subMap = "Advanced"
+					if !INIConfig.Get("AdvancedMode", "ScriptProcessor", False, "bool") && subMap = "Advanced"
 						continue
 
 					IPS.EntriesComparator(IPS.inputLogger, entries, &foundKey, &foundValue)
@@ -17777,7 +17927,7 @@ Class InputScriptProcessor {
 		output := ""
 		if input != "" {
 			for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
-				if !IPS.options.advancedMode && subMap = "Advanced"
+				if !INIConfig.Get("AdvancedMode", "ScriptProcessor", False, "bool") && subMap = "Advanced"
 					continue
 				for key, value in entries {
 					if (RegExMatch(key, "^" RegExEscape(input))) {
@@ -17832,96 +17982,9 @@ Class InputScriptProcessor {
 		;this.InH.NotifyNonText := True
 		this.InH.KeyOpt("{Backspace}", "N")
 		this.InH.OnChar := this.SequenceHandler
-		this.InH.OnKeyDown := ObjBindMethod(this, "Backspacer") ; Исправлено
-
+		this.InH.OnKeyDown := ObjBindMethod(this, "Backspacer")
 
 		return
-	}
-
-
-	static PostHook(intercepted) {
-		if intercepted = "" || this.options.interceptionInputMode = "" {
-			InputScriptProcessor(this.options.interceptionInputMode, True)
-			return
-		}
-
-		interceptedLength := StrLen(intercepted)
-		backspaces := ""
-
-		Loop (interceptedLength) {
-			backspaces .= "{Backspace}"
-		}
-
-		PsH := InputHook("L1 C T150", "{Escape}{Backspace}")
-		PsH.Start(), PsH.Wait(150)
-
-		if (PsH.EndKey == "{Escape}" || PsH.EndKey == "{Backspace}") {
-			if (PsH.EndKey != "{Escape}")
-				Send(PsH.EndKey)
-			PsH.Stop()
-			return
-		} else {
-
-			input := PsH.Input
-			charFound := False
-
-			if RegExMatch(input, "^[a-zA-Z0-9]+$") {
-				input := intercepted input
-				try {
-					for subMap, entries in this.scriptSequences.%this.options.interceptionInputMode% {
-						if !this.options.advancedMode && subMap = "Advanced"
-							continue
-						for key, value in entries {
-							if (input == key) {
-								charFound := True
-								Send(backspaces)
-								SendText(value)
-								if this.options.advancedMode
-									this.PostHook(value)
-								break
-							}
-						}
-					}
-				}
-			}
-
-			PsH.Stop()
-
-			if !charFound {
-				SendInput(PsH.Input)
-				;this.PostHook(PsH.Input)
-				InputScriptProcessor(this.options.interceptionInputMode, True)
-			}
-
-			return
-		}
-	}
-
-	static Telexiser(_, input) {
-		input := RegExReplace(input, "^.*?:.*?:", "")
-
-		if InStr(input, "\") {
-			SendText(RegExReplace(input, "\\", ""))
-			return
-		}
-
-		inputLength := StrLen(input)
-
-		for subMap, entries in this.scriptSequences.%this.options.interceptionInputMode% {
-			if !this.options.advancedMode && subMap = "Advanced"
-				continue
-			for key, value in entries {
-				if (input == key) {
-					SendText(value)
-					if inputLength >= 2 && inputLength <= 7 {
-						this.PostHook(value)
-					}
-					break
-				}
-			}
-		}
-
-		return ""
 	}
 
 	static TelexReturn(input) {
@@ -17944,7 +18007,7 @@ GroupActivator(GroupName, KeyValue := "") {
 	LocaleMark := KeyValue != "" && RegExMatch(KeyValue, "^F") ? KeyValue : GroupName
 	MsgTitle := "[" LocaleMark "] " DSLPadTitle
 
-	ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, SkipGroupMessage, True)
+	ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, global_.SkipGroupMessage, True)
 	InputBridge(GroupName)
 }
 
@@ -18137,9 +18200,9 @@ FindCharacterPage(InputCode := "", IsReturn := False) {
 
 ToggleGroupMessage() {
 	LanguageCode := GetLanguageCode()
-	global SkipGroupMessage, ConfigFile
-	SkipGroupMessage := !SkipGroupMessage
-	IniWrite (SkipGroupMessage ? "True" : "False"), ConfigFile, "Settings", "SkipGroupMessage"
+	global global_, ConfigFile
+	global_.SkipGroupMessage := !global_.SkipGroupMessage
+	INIConfig.SwitchSet(["True", "False"], "SkipGroupMessage")
 
 	ActivationMessage := {}
 	ActivationMessage[] := Map()
@@ -18149,7 +18212,7 @@ ToggleGroupMessage() {
 	ActivationMessage["ru"].Deactive := "Сообщения активации групп отключены"
 	ActivationMessage["en"].Active := "Activation messages for groups enabled"
 	ActivationMessage["en"].Deactive := "Activation messages for groups disabled"
-	MsgBox(SkipGroupMessage ? ActivationMessage[LanguageCode].Deactive : ActivationMessage[LanguageCode].Active, DSLPadTitle, 0x40)
+	MsgBox(global_.SkipGroupMessage ? ActivationMessage[LanguageCode].Deactive : ActivationMessage[LanguageCode].Active, DSLPadTitle, 0x40)
 
 	return
 }
@@ -21417,10 +21480,10 @@ SetModifiedCharsInput(ModeName := "combining") {
 
 	if AlterationActiveName != "" {
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
-		ShowInfoMessage("message_" ModeName, , , SkipGroupMessage, True)
+		ShowInfoMessage("message_" ModeName, , , global_.SkipGroupMessage, True)
 	} else {
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		ShowInfoMessage("message_" ModeName "_disabled", , , SkipGroupMessage, True)
+		ShowInfoMessage("message_" ModeName "_disabled", , , global_.SkipGroupMessage, True)
 	}
 
 }
@@ -21493,6 +21556,7 @@ ManageTrayItems() {
 		"ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
 		"script", ReadLocale("func_label_scripts"),
 		"telexInput", ReadLocale("tray_func_telexlike"),
+		"telex_advanced_mode", ReadLocale("tray_func_telex_advanced_mode"),
 		"vietNam", ReadLocale("tray_func_vietNam") "`t" RightAlt "F2",
 		"pinYin", ReadLocale("tray_func_pinYin") "`t" RightAlt RightShift "F2",
 		"layouts", ReadLocale("func_label_layouts"),
@@ -21531,6 +21595,7 @@ ManageTrayItems() {
 
 	ScriptsSubMenu := Menu()
 	ScriptsSubMenu.Add(Labels["telexInput"], (*) => "")
+	ScriptsSubMenu.Add(Labels["telex_advanced_mode"], (*) => INIConfig.SwitchSet(["True", "False"], "AdvancedMode", "ScriptProcessor", "bind"))
 	ScriptsSubMenu.Add(Labels["vietNam"], (*) => InputScriptProcessor())
 	ScriptsSubMenu.Add(Labels["pinYin"], (*) => InputScriptProcessor("pinYin"))
 	ScriptsSubMenu.Add()
