@@ -7,6 +7,8 @@
 #Include <External\fnc_clip_send>
 #Include <External\fnc_caret_pos>
 #Include <External\fnc_gui_button_icon>
+#Include <chr_alt_codes>
+#Include <chr_entities>
 #Include <utils>
 #Include <supplement_pshell>
 #Include <supplement_python>
@@ -71,8 +73,8 @@ InternalFiles := Map(
 	"Locales", { Repo: RawRepoFiles "DSLKeyPad.locales.ini", File: WorkingDir "\UtilityFiles\DSLKeyPad.locales.ini" },
 	"AppIco", { Repo: RawRepoFiles "DSLKeyPad.app.ico", File: WorkingDir "\UtilityFiles\DSLKeyPad.app.ico" },
 	"AppIcoDLL", { Repo: RawRepoFiles "DSLKeyPad_App_Icons.dll", File: WorkingDir "\UtilityFiles\DSLKeyPad_App_Icons.dll" },
-	"HTMLEntities", { Repo: RawRepoFiles "entities_list.txt", File: WorkingDir "\UtilityFiles\entities_list.txt" },
-	"AltCodes", { Repo: RawRepoFiles "alt_codes_list.txt", File: WorkingDir "\UtilityFiles\alt_codes_list.txt" },
+	"HTMLEntities", { Repo: RawRepoLib "chr_entities.ahk", File: WorkingDir "\Lib\chr_entities.ahk" },
+	"AltCodes", { Repo: RawRepoLib "chr_alt_codes.ahk", File: WorkingDir "\Lib\chr_alt_codes.ahk" },
 	"Exe", { Repo: RawRepoFiles "DSLKeyPad.exe", File: WorkingDir "\DSLKeyPad.exe" },
 	"LibClsCfg", { Repo: RawRepoLib "cls_cfg.ahk", File: WorkingDir "\Lib\cls_cfg.ahk" },
 	"LibClsLang", { Repo: RawRepoLib "cls_language.ahk", File: WorkingDir "\Lib\cls_language.ahk" },
@@ -1570,24 +1572,6 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 	}
 }
 
-LocalEntitiesLibrary := FillCodesFromFile()
-LocalAltCodesLibrary := FillCodesFromFile(InternalFiles["AltCodes"].File)
-
-FillCodesFromFile(FilePath := InternalFiles["HTMLEntities"].File) {
-	TempArray := []
-	EntitiesList := FileRead(FilePath, "UTF-8")
-
-	for line in StrSplit(EntitiesList, "`n") {
-		RegExMatch(line, '^(.+)\t(.+)', &match)
-		EntityCode := Format("0x{1}", match[1])
-		EntityName := FilePath = InternalFiles["AltCodes"].File ? match[2] : "&" match[2] ";"
-		TempArray.Push(Chr(EntityCode), EntityName)
-
-	}
-
-	return TempArray
-}
-
 #Include <chr_lib>
 #Include <cls_tempature_converter>
 
@@ -1882,10 +1866,10 @@ ProcessMapAfter(GroupLimited := "") {
 			value.symbolFont := "Noto Sans Old Hungarian"
 		}
 
-		for i, pair in LocalEntitiesLibrary {
+		for i, pair in EntitiesLibrary {
 			if Mod(i, 2) = 1 {
 				Symbol := pair
-				Entity := LocalEntitiesLibrary[i + 1]
+				Entity := EntitiesLibrary[i + 1]
 
 				if EntryCharacter = Symbol {
 					value.entity := Entity
@@ -1894,10 +1878,10 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 		}
 
-		for i, pair in LocalAltCodesLibrary {
+		for i, pair in AltCodesLibrary {
 			if Mod(i, 2) = 1 {
 				Symbol := pair
-				AltCode := LocalAltCodesLibrary[i + 1]
+				AltCode := AltCodesLibrary[i + 1]
 
 				if EntryCharacter = Symbol {
 					if !HasProp(value, "altCode") {
@@ -3218,9 +3202,9 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 			} else {
 				if InStr(Mode, "Entities") {
 					Found := false
-					for j, entity in LocalEntitiesLibrary {
+					for j, entity in EntitiesLibrary {
 						if (Mod(j, 2) = 1 && entity = Symbol) {
-							Output .= LocalEntitiesLibrary[j + 1]
+							Output .= EntitiesLibrary[j + 1]
 							Found := true
 							break
 						}
