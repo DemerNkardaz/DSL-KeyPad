@@ -39,6 +39,7 @@ GetInstall() {
 		DirCreate(WorkingDir)
 		DirCreate(WorkingDir "\UtilityFiles")
 		DirCreate(WorkingDir "\Lib")
+		DirCreate(WorkingDir "\Lib\External")
 
 
 		InternalFiles := Map(
