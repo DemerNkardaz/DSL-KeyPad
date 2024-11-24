@@ -68,14 +68,16 @@ UpdateVersionString := ""
 
 RawRepo := "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/main/"
 RawRepoFiles := RawRepo . "UtilityFiles/"
+RawRepoLib := RawRepo . "Lib/"
+RawRepoInfo := RawRepo . "__info/"
 RepoSource := "https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk"
 
 RawSource := RawRepo "DSLKeyPad.ahk"
 UpdateAvailable := False
 
 ChangeLogRaw := Map(
-	"ru", RawRepoFiles "DSLKeyPad.Changelog.ru.md",
-	"en", RawRepoFiles "DSLKeyPad.Changelog.en.md"
+	"ru", RawRepoInfo "DSLKeyPad.Changelog.ru.md",
+	"en", RawRepoInfo "DSLKeyPad.Changelog.en.md"
 )
 
 WorkingDir := A_ScriptDir
@@ -90,6 +92,8 @@ InternalFiles := Map(
 	"HTMLEntities", { Repo: RawRepoFiles "entities_list.txt", File: WorkingDir "\UtilityFiles\entities_list.txt" },
 	"AltCodes", { Repo: RawRepoFiles "alt_codes_list.txt", File: WorkingDir "\UtilityFiles\alt_codes_list.txt" },
 	"Exe", { Repo: RawRepoFiles "DSLKeyPad.exe", File: WorkingDir "\DSLKeyPad.exe" },
+	"LibClsCfg", { Repo: RawRepoLib "cls_cfg.ahk", File: WorkingDir "\Lib\cls_cfg.ahk" },
+	"LibClsLang", { Repo: RawRepoLib "cls_language.ahk", File: WorkingDir "\Lib\cls_language.ahk" },
 )
 
 
@@ -125,7 +129,7 @@ Class App {
 		)
 
 		this.icos := Map(
-			"app", [this.internal["ico_dll"].file, 1],
+			"app", [this.internal["ico_dll"].file, 0],
 		)
 
 		this.Init()
