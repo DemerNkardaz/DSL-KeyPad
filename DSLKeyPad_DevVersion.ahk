@@ -339,9 +339,55 @@ Class Language {
 
 Class App {
 
+	static title := "DSL KeyPad (αλφα)"
+	static version := [0, 1, 1, 0]
+	static versionText := this.formatVersion(this.version)
+
+	static git := {
+		repo: "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/main/",
+		;: "https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk",
+	}
+
+	static paths := {
+		dir: A_ScriptDir,
+	}
+
 
 	static __New() {
+		this.git.src := this.git.repo "DSLKeyPad.ahk"
+		this.git.files := this.git.repo "UtilityFiles/"
 
+		this.internal := Map(
+			"locales", { repo: this.git.files "DSLKeyPad.locales.ini", file: this.paths.dir "\UtilityFiles\DSLKeyPad.locales.ini" },
+			"app_ico", { repo: this.git.files "DSLKeyPad.app.ico", file: this.paths.dir "\UtilityFiles\DSLKeyPad.app.ico" },
+			"ico_dll", { repo: this.git.files "DSLKeyPad_App_Icons.dll", file: this.paths.dir "\UtilityFiles\DSLKeyPad_App_Icons.dll" },
+			"HTML_entities", { repo: this.git.files "entities_list.txt", file: this.paths.dir "\UtilityFiles\entities_list.txt" },
+			"alt_codes", { repo: this.git.files "alt_codes_list.txt", file: this.paths.dir "\UtilityFiles\alt_codes_list.txt" },
+			"exe", { repo: this.git.files "DSLKeyPad.exe", file: this.paths.dir "\DSLKeyPad.exe" },
+		)
+
+		this.Init()
+	}
+
+	static Init() {
+
+	}
+
+	static Update(timeOut := 0, forceUpdate := False) {
+
+	}
+
+	static CheckUpdate() {
+
+	}
+
+	static formatVersion(arr, length := 3) {
+		for i, value in arr {
+			if i > length
+				break
+			result .= (i > 1 ? "." : "") value
+		}
+		return result
 	}
 }
 
@@ -16206,7 +16252,7 @@ Class TemperatureConversion {
 		C: [GetChar("celsius"), GetChar("degree") "C"],
 		F: [GetChar("fahrenheit"), GetChar("degree") "F"],
 		K: [GetChar("kelvin"), "K"],
-		R: "R",
+		RA: "R",
 		N: "N",
 		D: "D",
 		H: "H",
@@ -16231,16 +16277,16 @@ Class TemperatureConversion {
 
 	static RegistryHotstrings() {
 		hsKeys := [
-			'cd', 'cf', 'ck', 'cn', 'cr', "cl", "cw", "cro", "cre", 'ch', ; Celsius
-			'fc', 'fd', 'fk', 'fn', 'fr', 'fl', 'fw', 'fro', 'fre', ; Fahrenheit
-			'kc', 'kd', 'kf', 'kn', 'kr', 'kl', 'kw', 'kro', 'kre', ; Kelvin
-			'nc', 'nd', 'nf', 'nk', 'nr', 'nl', 'nw', 'nro', 'nre', ; Newton
-			'rc', 'rd', 'rf', 'rk', 'rn', 'rl', 'rw', 'rro', 'rre', ; Rankine
-			'dc', 'df', 'dk', 'dn', 'dr', 'dl', 'dw', 'dro', 'dre', ; Delisle
-			'lc', 'lf', 'lk', 'ln', 'lr', 'ld', 'lw', 'lro', 'lre', ; Leiden
-			'wc', 'wf', 'wk', 'wn', 'wr', 'wd', 'wl', 'wro', 'wre', ; Wedgwood
-			'roc', 'rof', 'rok', 'ron', 'ror', 'rod', 'rol', 'row', 'rore', ; Romer
-			'rec', 'ref', 'rek', 'ren', 'rer', 'red', 'rel', 'rew', 'rero', ; Reaumur
+			'cd', 'cf', 'ck', 'cn', 'cra', "cl", "cw", "cro", "cre", 'ch', ; Celsius
+			'fc', 'fd', 'fk', 'fn', 'fra', 'fl', 'fw', 'fro', 'fre', ; Fahrenheit
+			'kc', 'kd', 'kf', 'kn', 'kra', 'kl', 'kw', 'kro', 'kre', ; Kelvin
+			'nc', 'nd', 'nf', 'nk', 'nra', 'nl', 'nw', 'nro', 'nre', ; Newton
+			'rac', 'rad', 'raf', 'rak', 'ran', 'ral', 'raw', 'raro', 'rare', ; Rankine
+			'dc', 'df', 'dk', 'dn', 'dra', 'dl', 'dw', 'dro', 'dre', ; Delisle
+			'lc', 'lf', 'lk', 'ln', 'lra', 'ld', 'lw', 'lro', 'lre', ; Leiden
+			'wc', 'wf', 'wk', 'wn', 'wra', 'wd', 'wl', 'wro', 'wre', ; Wedgwood
+			'roc', 'rof', 'rok', 'ron', 'rora', 'rod', 'rol', 'row', 'rore', ; Romer
+			'rec', 'ref', 'rek', 'ren', 'rera', 'red', 'rel', 'rew', 'rero', ; Reaumur
 			'hc', ; Hooke
 			'mec', 'cme', 'mek', 'kme', ; Special Custom, Mercuric
 		]
@@ -16257,8 +16303,8 @@ Class TemperatureConversion {
 
 		conversionFromTo := RegExReplace(conversionType, "^.*t", "")
 
-		labelFrom := (RegExMatch(conversionFromTo, "^ro|^re|^me")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
-		labelTo := (RegExMatch(conversionFromTo, "ro$|re$|me$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
+		labelFrom := (RegExMatch(conversionFromTo, "^(ra|ro|re|me)")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
+		labelTo := (RegExMatch(conversionFromTo, "(ra|ro|re|me)$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
 
 
 		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]"
@@ -16296,7 +16342,7 @@ Class TemperatureConversion {
 		; Celsius
 		CF(G) => (G * 9 / 5) + 32
 		CK(G) => G + 273.15
-		CR(G) => (G + 273.15) * 1.8
+		CRA(G) => (G + 273.15) * 1.8
 		CN(G) => G * 33 / 100
 		CD(G) => (100 - G) * 3 / 2
 		CH(G) => G * 5 / 12
@@ -16308,7 +16354,7 @@ Class TemperatureConversion {
 		; Fahrenheit
 		FC(G) => (G - 32) * 5 / 9
 		FK(G) => (G - 32) * 5 / 9 + 273.15
-		FR(G) => G + 459.67
+		FRA(G) => G + 459.67
 		FN(G) => (G - 32) * 11 / 60
 		FD(G) => (212 - G) * 5 / 6
 		FL(G) => (G / 1.8) + 235.222222
@@ -16319,7 +16365,7 @@ Class TemperatureConversion {
 		; Kelvin
 		KC(G) => G - 273.15
 		KF(G) => (G - 273.15) * 9 / 5 + 32
-		KR(G) => G * 1.8
+		KRA(G) => G * 1.8
 		KN(G) => (G - 273.15) * 33 / 100
 		KD(G) => (373.15 - G) * 3 / 2
 		KL(G) => G - 20.15
@@ -16328,21 +16374,21 @@ Class TemperatureConversion {
 		KRE(G) => (G / 1.25) - 218.52
 
 		; Rankine
-		RC(G) => (G / 1.8) - 273.15
-		RF(G) => G - 459.67
-		RK(G) => G / 1.8
-		RN(G) => (G / 1.8 - 273.15) * 33 / 100
-		RD(G) => (671.67 - G) * 5 / 6
-		RL(G) => (G / 1.8) - 20.15
-		RW(G) => (G / 44.742943) - 21.81059
-		RRO(G) => (G / 3.428571) - 135.90375
-		RRE(G) => (G / 2.25) - 218.52
+		RAC(G) => (G / 1.8) - 273.15
+		RAF(G) => G - 459.67
+		RAK(G) => G / 1.8
+		RAN(G) => (G / 1.8 - 273.15) * 33 / 100
+		RAD(G) => (671.67 - G) * 5 / 6
+		RAL(G) => (G / 1.8) - 20.15
+		RAW(G) => (G / 44.742943) - 21.81059
+		RARO(G) => (G / 3.428571) - 135.90375
+		RARE(G) => (G / 2.25) - 218.52
 
 		; Newton
 		NC(G) => G * 100 / 33
 		NF(G) => (G * 60 / 11) + 32
 		NK(G) => (G * 100 / 33) + 273.15
-		NR(G) => (G * 100 / 33 + 273.15) * 1.8
+		NRA(G) => (G * 100 / 33 + 273.15) * 1.8
 		ND(G) => (33 - G) * 50 / 11
 		NL(G) => (3.030303 * G) + 253
 		NW(G) => (G / 8.202873) - 10.821818
@@ -16353,7 +16399,7 @@ Class TemperatureConversion {
 		DC(G) => 100 - (G * 2 / 3)
 		DF(G) => 212 - (G * 6 / 5)
 		DK(G) => 373.15 - (G * 2 / 3)
-		DR(G) => 671.67 - (G * 6 / 5)
+		DRA(G) => 671.67 - (G * 6 / 5)
 		DN(G) => 33 - (G * 11 / 50)
 		DL(G) => (-G / 1.5) + 353
 		DW(G) => (-G / 37.285786) - 6.798838
@@ -16367,7 +16413,7 @@ Class TemperatureConversion {
 		LC(G) => G - 253
 		LF(G) => (1.8 * G) - 423.4
 		LK(G) => G + 20.15
-		LR(G) => (1.8 * G) + 36.27
+		LRA(G) => (1.8 * G) + 36.27
 		LN(G) => (G / 3.030303) - 83.49
 		LD(G) => (-1.5 * G) + 529.5
 		LW(G) => (G / 24.857191) - 21
@@ -16378,7 +16424,7 @@ Class TemperatureConversion {
 		WC(G) => (24.857191 * G) + 269
 		WF(G) => (44.742943 * G) + 516.2
 		WK(G) => (24.857191 * G) + 542.15
-		WR(G) => (44.742943 * G) + 975.87
+		WRA(G) => (44.742943 * G) + 975.87
 		WD(G) => (-37.285786 * G) - 253.5
 		WN(G) => (8.202873 * G) + 88.77
 		WL(G) => (24.857191 * G) + 522
@@ -16389,7 +16435,7 @@ Class TemperatureConversion {
 		ROC(G) => (1.904762 * G) - 14.285714
 		ROF(G) => (3.428571 * G) + 6.285714
 		ROK(G) => (1.904762 * G) + 258.864286
-		ROR(G) => (3.428571 * G) + 465.955714
+		RORA(G) => (3.428571 * G) + 465.955714
 		RON(G) => (G / 1.590909) - 4.714286
 		ROD(G) => (-2.857143 * G) + 171.428571
 		ROL(G) => (1.904762 * G) + 238.7142861
@@ -16400,7 +16446,7 @@ Class TemperatureConversion {
 		REC(G) => 1.25 * G
 		REF(G) => (2.25 * G) + 32
 		REK(G) => (1.25 * G) + 273.15
-		RER(G) => (2.25 * G) + 491.67
+		RERA(G) => (2.25 * G) + 491.67
 		REN(G) => G / 2.424242
 		RED(G) => (-1.875 * G) + 150
 		REL(G) => (1.25 * G) + 253
@@ -19742,7 +19788,7 @@ HandleFastKey(combo := "", characterNames*) {
 		for _, character in characterNames {
 			output .= GetCharacterSequence(character)
 		}
-		keysValidation := "[SC14B|SC148|SC14D|SC150|SC04A]"
+		keysValidation := "SC(14B|148|14D|150|04A)"
 
 		inputType := RegExMatch(combo, keysValidation) ? "Text" : "Input"
 		Send%inputType%(output)
