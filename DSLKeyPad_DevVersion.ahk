@@ -7,7 +7,9 @@
 #Include <External\fnc_clip_send>
 #Include <External\fnc_caret_pos>
 #Include <External\fnc_gui_button_icon>
-#Include <Utils>
+#Include <utils>
+#Include <supplement_pshell>
+#Include <supplement_python>
 
 
 ;InstallKeybdHook(True, True)
@@ -256,37 +258,7 @@ FontFace := Map(
 	},
 )
 
-PowerShell_UserSID() {
-	GetScriptPath := A_ScriptDir "\DSL_temp-usrSID.ps1"
-	GetTXTPath := A_ScriptDir "\DSL_temp-usrSID.txt"
 
-	PShell := '$id = [System.Security.Principal.WindowsIdentity]::GetCurrent()`n'
-	PShell .= '$path = "' GetTXTPath '"`n'
-	PShell .= '$id.User.Value | Out-File -FilePath $path -Encoding UTF8'
-
-	Result := ""
-
-	try {
-		if !FileExist(GetScriptPath) {
-			FileAppend(PShell, GetScriptPath, "UTF-8")
-			Sleep 25
-		}
-		RunWait("powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & " StrReplace(GetScriptPath, " ", "`` "), , "Hide")
-		Sleep 50
-		Result := FileRead(GetTXTPath, "UTF-8")
-	} finally {
-		if FileExist(GetTXTPath)
-			FileDelete(GetTXTPath)
-		if FileExist(GetScriptPath)
-			FileDelete(GetScriptPath)
-	}
-	for replaces in [" ", "`n", "`r"] {
-		Result := StrReplace(Result, replaces)
-	}
-	return Result
-}
-
-Sleep 10
 UserSID := PowerShell_UserSID()
 
 IsFont(FontName) {
@@ -6978,61 +6950,5 @@ ManageTrayItems()
 ShowInfoMessage("tray_app_started")
 
 <^>+Esc:: ExitApp
-
-
-;? Special
-
-;* Ultra Super Duper Puper Dev’s Secret Function
-GetUnicodeName(Char) {
-	Char := SubStr(Char, 1, 1)
-	Python := ""
-	Python .= "import unicodedata`n"
-	Python .= "def get_unicode_name(char):`n"
-	Python .= "    try:`n"
-	Python .= "        return unicodedata.name(char)`n"
-	Python .= "    except ValueError:`n"
-	Python .= "        return 'Unknown character'`n`n"
-	Python .= "with open('DSL_temp-uniName.txt', 'w') as f:`n"
-	Python .= "    f.write(get_unicode_name('" Char "'))"
-
-	FileAppend(Python, "DSL_temp-uniName.py", "UTF-8")
-	Sleep 25
-
-	RunWait("python DSL_temp-uniName.py", , "Hide")
-
-	Sleep 25
-
-	Result := FileRead("DSL_temp-uniName.txt", "UTF-8")
-
-	Sleep 25
-
-	FileDelete("DSL_temp-uniName.txt")
-	FileDelete("DSL_temp-uniName.py")
-
-	return Result
-}
-
-SendCharToPy(Mode := "") {
-	BackupClipboard := A_Clipboard
-	PromptValue := ""
-	A_Clipboard := ""
-
-	Send("^c")
-	Sleep 120
-	PromptValue := A_Clipboard
-
-	if (PromptValue != "") {
-		PromptValue := GetUnicodeName(PromptValue)
-		Sleep 50
-		if (Mode == "Copy") {
-			A_Clipboard := PromptValue
-			return
-		} else {
-			SendText(PromptValue)
-		}
-	}
-
-	A_Clipboard := BackupClipboard
-}
 
 ;ApplicationEnd

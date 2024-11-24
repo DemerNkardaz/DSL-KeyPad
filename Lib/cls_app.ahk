@@ -13,6 +13,7 @@ Class App {
 		dir: A_ScriptDir,
 		lib: A_ScriptDir "\Lib",
 		ufile: A_ScriptDir "\UtilityFiles",
+		temp: A_Temp "\DSLKeyPad",
 	}
 
 
@@ -37,6 +38,8 @@ Class App {
 	}
 
 	static Init() {
+		if !DirExist(this.paths.temp)
+			DirCreate(this.paths.temp)
 
 	}
 
