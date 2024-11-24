@@ -41,7 +41,6 @@ GetInstall() {
 		DirCreate(WorkingDir "\Lib")
 		DirCreate(WorkingDir "\Lib\External")
 
-
 		InternalFiles := Map(
 			"Locales", { Repo: RawRepoFiles "DSLKeyPad.locales.ini", File: WorkingDir "\UtilityFiles\DSLKeyPad.locales.ini" },
 			"AppIco", { Repo: RawRepoFiles "DSLKeyPad.app.ico", File: WorkingDir "\UtilityFiles\DSLKeyPad.app.ico" },
@@ -63,6 +62,7 @@ GetInstall() {
 			"ExternalFncClSend", { Repo: RawRepoLib "External\fnc_clip_send.ahk", File: WorkingDir "\Lib\External\fnc_clip_send.ahk" },
 			"ExternalFncCarPos", { Repo: RawRepoLib "External\fnc_caret_pos.ahk", File: WorkingDir "\Lib\External\fnc_caret_pos.ahk" },
 			"ExternalFncGuiBtnClr", { Repo: RawRepoLib "External\fnc_gui_button_icon.ahk", File: WorkingDir "\Lib\External\fnc_gui_button_icon.ahk" },
+			"LibUtils", { Repo: RawRepoLib "utils.ahk", File: WorkingDir "\Lib\utils.ahk" },
 		)
 
 		for fileEntry, value in InternalFiles {

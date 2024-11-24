@@ -2,10 +2,12 @@
 #SingleInstance Force
 #MaxThreads 2
 ;#UseHook
+
 #Include <External\prt_array>
 #Include <External\fnc_clip_send>
 #Include <External\fnc_caret_pos>
 #Include <External\fnc_gui_button_icon>
+#Include <Utils>
 
 
 ;InstallKeybdHook(True, True)
@@ -27,17 +29,6 @@ SetTimer((*) => idller(), 10000)
 
 ; Only EN US & RU RU Keyboard Layout
 
-Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
-
-_ArrayMaxIndex(this) {
-	indexes := 0
-	for i, v in this {
-		indexes++
-	}
-
-	return indexes
-}
-
 SupportedLanguages := [
 	"en",
 	"ru",
@@ -46,20 +37,6 @@ SupportedLanguages := [
 CodeEn := "00000409"
 CodeRu := "00000419"
 CodeGr := "00000408"
-
-CodeLang := Map(
-	"en", "00000409",
-	"ru", "00000419",
-	"gr", "00000408")
-
-CompareLangCode(CodeInput) {
-	for lang, value in CodeLang {
-		if (value = CodeInput) {
-			return True
-		}
-	}
-	return False
-}
 
 ChracterMap := "C:\Windows\System32\charmap.exe"
 ImageRes := "C:\Windows\System32\imageres.dll"
@@ -108,6 +85,7 @@ InternalFiles := Map(
 	"ExternalFncClSend", { Repo: RawRepoLib "External\fnc_clip_send.ahk", File: WorkingDir "\Lib\External\fnc_clip_send.ahk" },
 	"ExternalFncCarPos", { Repo: RawRepoLib "External\fnc_caret_pos.ahk", File: WorkingDir "\Lib\External\fnc_caret_pos.ahk" },
 	"ExternalFncGuiBtnClr", { Repo: RawRepoLib "External\fnc_gui_button_icon.ahk", File: WorkingDir "\Lib\External\fnc_gui_button_icon.ahk" },
+	"LibUtils", { Repo: RawRepoLib "utils.ahk", File: WorkingDir "\Lib\utils.ahk" },
 )
 
 #Include <cls_app>
