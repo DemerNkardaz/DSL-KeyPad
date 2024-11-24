@@ -2,6 +2,8 @@
 
 <img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128"><img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_norse.ico" alt="" width="100"><img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_glagolitic.ico" alt="" width="100"><img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_turkic.ico" alt="" width="100"><img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_permic.ico" alt="" width="100"><img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_hungarian.ico" alt="" width="100"><img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_gothic.ico" alt="" width="100"><img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_ipa.ico" alt="" width="100">
 
+<img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="100"> <img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="100">
+
 ## In English
 
 This utility allows you to input a wide range of various symbols without the need to use “character maps” or other sources for copying. It includes diacritical marks (◌́◌̋◌̆◌̑◌̀◌̏◌̄◌̱), space/spacing variations (&#8198;<ins>&emsp;</ins> <ins>&ensp;</ins>&emsp13;<ins> </ins>&emsp14;<ins> </ins>&thinsp;<ins>&#8198;</ins>&#8198;) and dashes/hyphens (⸻, ⸺, —, –, ‐), quotation marks («Русские „Кавычки“», “English ‘Quotation Marks’”, „«Ghilimele» Românești”,「東アジアの『引用符』」), punctuation marks (…, ¡, ¿, ⁉, ⁈, ‼, ⁇, ‽, ⸘), ligatures (ꜲÆꜶꜸꜴꜼƢꝠꙖꙒ), letters (ĂÂǍɃḈðɆǶÞǷꝹѪѦЄҴ), currencies (₽¥₩€£₸₪), and special symbols (§′″°∞≠≈×−±⁑⁂†‡‰‱←↓↑→↺↻⮌⮏⮍⮎250⁄250), typically unavailable on a keyboard. You can view the full list of symbols in the *Panel*, which can be opened with <kbd>Win Alt Home</kbd>, or from the tray menu options.
