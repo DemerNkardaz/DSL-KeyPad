@@ -52,7 +52,11 @@ GetInstall() {
 			"LibClsCfg", { Repo: RawRepoLib "cls_cfg.ahk", File: WorkingDir "\Lib\cls_cfg.ahk" },
 			"LibClsLang", { Repo: RawRepoLib "cls_language.ahk", File: WorkingDir "\Lib\cls_language.ahk" },
 			"LibClsApp", { Repo: RawRepoLib "cls_app.ahk", File: WorkingDir "\Lib\cls_app.ahk" },
+			"LibClsLigs", { Repo: RawRepoLib "cls_ligaturiser.ahk", File: WorkingDir "\Lib\cls_ligaturiser.ahk" },
 			"LibClsScrPrc", { Repo: RawRepoLib "cls_script_processor.ahk", File: WorkingDir "\Lib\cls_script_processor.ahk" },
+			"LibClsChrInsert", { Repo: RawRepoLib "cls_chr_inserter.ahk", File: WorkingDir "\Lib\cls_chr_inserter.ahk" },
+			"LibClsFavs", { Repo: RawRepoLib "cls_favorites.ahk", File: WorkingDir "\Lib\cls_favorites.ahk" },
+			"LibClsTConv", { Repo: RawRepoLib "cls_tempature_converter.ahk", File: WorkingDir "\Lib\cls_tempature_converter.ahk" },
 			"LibChrLib", { Repo: RawRepoLib "chr_lib.ahk", File: WorkingDir "\Lib\chr_lib.ahk" },
 		)
 
