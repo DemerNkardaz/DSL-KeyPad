@@ -4,6 +4,21 @@
 
 <img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="62"> <img src="UtilityFiles/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="62">
 
+# Contents
+
+- [In English](#in-english)
+  - [Input Methods](#input-methods)
+  - [Alternative Layouts](#alternative-layouts)
+  - [Auxiliary Features](#auxiliary-features)
+  - [Limitations](#limitations)
+  - [Installation](#installation)
+- [На Русском](#на-русском)
+  - [Методы ввода](#методы-ввода)
+  - [Альтернативные раскладки](#алтернативные-раскладки)
+  - [Вспомогательные функции](#вспомогательные-функции)
+  - [Ограничения](#ограничения)
+  - [Установка](#установка)
+
 ## In English
 
 This utility allows you to input a wide range of various symbols without the need to use “character maps” or other sources for copying. It includes diacritical marks (◌́◌̋◌̆◌̑◌̀◌̏◌̄◌̱), space/spacing variations (&#8198;<ins>&emsp;</ins> <ins>&ensp;</ins>&emsp13;<ins> </ins>&emsp14;<ins> </ins>&thinsp;<ins>&#8198;</ins>&#8198;) and dashes/hyphens (⸻, ⸺, —, –, ‐), quotation marks («Русские „Кавычки“», “English ‘Quotation Marks’”, „«Ghilimele» Românești”,「東アジアの『引用符』」), punctuation marks (…, ¡, ¿, ⁉, ⁈, ‼, ⁇, ‽, ⸘), ligatures (ꜲÆꜶꜸꜴꜼƢꝠꙖꙒ), letters (ĂÂǍɃḈðɆǶÞǷꝹѪѦЄҴ), currencies (₽¥₩€£₸₪), and special symbols (§′″°∞≠≈×−±⁑⁂†‡‰‱←↓↑→↺↻⮌⮏⮍⮎250⁄250), typically unavailable on a keyboard. You can view the full list of symbols in the *Panel*, which can be opened with <kbd>Win Alt Home</kbd>, or from the tray menu options.
@@ -31,7 +46,7 @@ Note: use it on pair QWERTY‐ЙЦУКЕН of English & Russian layouts, compa
   - In text, by placing the caret cursor after the recipe, <kbd>RShift Backspace</kbd>.
   - In “Compose” mode — allows you to "fuse" characters during typing, <kbd>RAlt×2</kbd>. It immediately inserts the first exact match for the entered sequence. There is an option to enable/disable waiting with <kbd>PauseBreak</kbd> (as some recipes start the same way), so “Compose” will not immediately insert the first match.
 
-## Input Layout Alternatives
+## Alternative Layouts
 
 <kbd>RCtrl 1</kbd> switches input from Russian/English to Glagolitic/Germanic‐Norse, Anglo‐Saxon runes. Pressing <kbd>А</kbd><kbd>Б</kbd> or <kbd>RAlt Ф</kbd>, for example, will input Ⰰ, Ⰱ, or Ⱚ, while pressing <kbd>A</kbd>, <kbd>W</kbd>, <kbd>F</kbd> will input ᚨ, ᚹ, ᚠ.
 
@@ -39,7 +54,7 @@ Note: use it on pair QWERTY‐ЙЦУКЕН of English & Russian layouts, compa
 
 <kbd>RCtrl 4</kbd> activates the input of Gothic script, “𐌱𐌴𐍂𐌺𐌰𐌹𐌽𐌰 𐍉𐌸𐌰𐌻𐌰 𐍅𐌿𐌽𐌾𐌰 𐍄𐍅𐌶”.
 
-## Auxiliary Functions
+## Auxiliary Features
 
 - Insert a character by Unicode ID or Alt-code, <kbd>Win Alt <kbd>U</kbd>/<kbd>A</kbd></kbd>.
 - Insert a character by its internal tag in the utility, <kbd>Win Alt F</kbd>.
@@ -92,7 +107,7 @@ To use “DSL KeyPad”, simply [download the .ahk file](https://github.com/Deme
   - В тексте, установив курсор каретки после рецепта, <kbd>RShift Backspace</kbd>.
   - Режиме «Compose» — даёт возможность использовать «сплавку» знаков прямо при вводе, <kbd>RAlt×2</kbd>. Сразу вставляет в поле ввода первое точное совпадение с вводимой последовательностью. Есть возможность включить/отключить ожидание через <kbd>PauseBreak</kbd> (так как ряд рецептов начинаются одинакого), и «Compose» не будет сразу вставлять первое совпадение.
 
-## Альтернативные раскладки ввода
+## Альтернативные раскладки
 
 <kbd>RCtrl 1</kbd> активирует переключение ввода с Русского/Английского на ввод Глаголицы/Германо‐скандинавских, Англосаксонских Рун. Нажатие <kbd>А</kbd><kbd>Б</kbd> или <kbd>RAlt Ф</kbd>, например, введёт Ⰰ, Ⰱ или Ⱚ, а нажатие <kbd>A</kbd>,<kbd>W</kbd>,<kbd>F</kbd> введёт ᚨ, ᚹ, ᚠ.
 
