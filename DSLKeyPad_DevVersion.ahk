@@ -88,6 +88,8 @@ InternalFiles := Map(
 	"ExternalFncCarPos", { Repo: RawRepoLib "External\fnc_caret_pos.ahk", File: WorkingDir "\Lib\External\fnc_caret_pos.ahk" },
 	"ExternalFncGuiBtnClr", { Repo: RawRepoLib "External\fnc_gui_button_icon.ahk", File: WorkingDir "\Lib\External\fnc_gui_button_icon.ahk" },
 	"LibUtils", { Repo: RawRepoLib "utils.ahk", File: WorkingDir "\Lib\utils.ahk" },
+	"pyUniName", { Repo: RawRepoLib ".py/unicodeName.py", File: WorkingDir "\Lib\.py\unicodeName.py" },
+	"psSID", { Repo: RawRepoLib ".ps/usrSID.ps1", File: WorkingDir "\Lib\.ps\usrSID.ps1" },
 )
 
 #Include <cls_app>
