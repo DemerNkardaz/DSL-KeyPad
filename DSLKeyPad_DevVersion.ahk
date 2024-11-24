@@ -39,27 +39,6 @@ CompareLangCode(CodeInput) {
 	return False
 }
 
-Class Language {
-
-	static supported := Map(
-		"en", { code: "00000409" },
-		"ru", { code: "00000419" },
-		"gr", { code: "00000408" },
-	)
-
-	static compare(input, mode := "Code") {
-		if (mode = "Code") {
-			for key, value in Language.supported {
-				return input == value.code
-			}
-		}
-	}
-
-	static getSys() {
-
-	}
-}
-
 ChracterMap := "C:\Windows\System32\charmap.exe"
 ImageRes := "C:\Windows\System32\imageres.dll"
 Shell32 := "C:\Windows\SysWOW64\shell32.dll"
@@ -80,7 +59,6 @@ ChangeLogRaw := Map(
 	"en", RawRepoFiles "DSLKeyPad.Changelog.en.md"
 )
 
-
 WorkingDir := A_ScriptDir
 
 ConfigFile := WorkingDir "\DSLKeyPad.config.ini"
@@ -94,137 +72,6 @@ InternalFiles := Map(
 	"AltCodes", { Repo: RawRepoFiles "alt_codes_list.txt", File: WorkingDir "\UtilityFiles\alt_codes_list.txt" },
 	"Exe", { Repo: RawRepoFiles "DSLKeyPad.exe", File: WorkingDir "\DSLKeyPad.exe" },
 )
-
-DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
-DSLPadTitleDefault := "DSL KeyPad"
-DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
-
-GetUtilityFiles(ForceUpdate := False) {
-	ErrMessages := Map(
-		"ru", "Произошла ошибка при получении файла перевода.`nСервер недоступен или ошибка соединения с интернетом.",
-		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
-	)
-
-	for fileEntry, value in InternalFiles {
-		if !FileExist(value.File) || ForceUpdate {
-			try {
-				Download(value.Repo, value.File)
-			} catch {
-				Error(ErrMessages[GetLanguageCode()])
-			}
-		}
-	}
-	return
-}
-
-
-TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
-
-ReadLocale(EntryName, Prefix := "") {
-	Section := Prefix != "" ? Prefix . "_" . GetLanguageCode() : GetLanguageCode()
-	Intermediate := IniRead(InternalFiles["Locales"].File, Section, EntryName, "")
-
-	while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
-		LangCode := match[1]
-		SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
-		Replacement := IniRead(InternalFiles["Locales"].File, SectionOverride, EntryName, "")
-		Intermediate := StrReplace(Intermediate, match[0], Replacement)
-	}
-
-	while (RegExMatch(Intermediate, "\{(?:([^\}_]+)_)?([a-zA-Z]{2}):([^\}]+)\}", &match)) {
-		CustomPrefix := match[1] ? match[1] : ""
-		LangCode := match[2]
-		CustomEntry := match[3]
-		SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
-		Replacement := IniRead(InternalFiles["Locales"].File, SectionOverride, CustomEntry, "")
-		Intermediate := StrReplace(Intermediate, match[0], Replacement)
-	}
-
-	while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
-		Unicode := match[1]
-		Replacement := Chr("0x" . Unicode)
-		Intermediate := StrReplace(Intermediate, match[0], Replacement)
-	}
-
-	while (RegExMatch(Intermediate, "\{var:([^\}]+)\}", &match)) {
-		Varname := match[1]
-		if IsSet(%Varname%) {
-			Replacement := %Varname%
-		} else {
-			Replacement := "VAR (" . Varname . "): NOT FOUND"
-		}
-		Intermediate := StrReplace(Intermediate, match[0], Replacement)
-	}
-
-
-	Intermediate := StrReplace(Intermediate, "\n", "`n")
-	Intermediate := StrReplace(Intermediate, "\t", "`t")
-	Intermediate := Intermediate != "" ? Intermediate : "KEY (" . EntryName . "): NOT FOUND"
-	return Intermediate
-}
-
-SetStringVars(StringVar, SetVars*) {
-	Result := StringVar
-	for index, value in SetVars {
-		Result := StrReplace(Result, "{" (index - 1) "}", value)
-	}
-	return Result
-}
-
-
-OpenConfigFile(*) {
-	Run(ConfigFile)
-}
-
-OpenLocalesFile(*) {
-	Run(InternalFiles["Locales"].File)
-}
-
-OpenRecipesFile(*) {
-	Run(CustomComposeFile)
-}
-
-EscapePressed := False
-
-FastKeysIsActive := False
-DisabledAllKeys := False
-ActiveScriptName := ""
-PreviousScriptName := ""
-AlterationActiveName := ""
-InputMode := "Default"
-LaTeXMode := "Default"
-
-DefaultConfig := [
-	["Settings", "FastKeysIsActive", "False"],
-	["Settings", "SkipGroupMessage", "False"],
-	["Settings", "InputMode", "Default"],
-	["Settings", "ScriptInput", "Default"],
-	["Settings", "LaTeXInput", "Default"],
-	["Settings", "UserLanguage", ""],
-	["Settings", "LatinLayout", "QWERTY"],
-	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
-	["Settings", "CharacterWebResource", "SymblCC"],
-	["Settings", "F13F24", "True"],
-	["Settings", "TemperatureCalcExtendedFormatting", "True"],
-	["Settings", "TemperatureCalcDedicatedUnicodeChars", "True"],
-	["Settings", "ScriptProcessorAdvancedMode", "False"],
-	["CustomRules", "ParagraphBeginning", ""],
-	["CustomRules", "ParagraphAfterStartEmdash", ""],
-	["CustomRules", "GREPDialogAttribution", ""],
-	["CustomRules", "GREPThisEmdash", ""],
-	["CustomRules", "GREPInitials", ""],
-	["CustomRules", "TemperatureCalcRoundValue", "2"],
-	["CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"],
-	["CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"],
-	["CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace"],
-	["LatestPrompts", "LaTeX", ""],
-	["LatestPrompts", "Unicode", ""],
-	["LatestPrompts", "Altcode", ""],
-	["LatestPrompts", "Search", ""],
-	["LatestPrompts", "Ligature", ""],
-	["LatestPrompts", "RomanNumeral", ""],
-	["ServiceFields", "PrevLayout", ""],
-]
 
 Class Cfg {
 	static ini := WorkingDir "\DSLKeyPad.configtest.ini"
@@ -392,6 +239,238 @@ Class Cfg {
 	}
 }
 
+Class Language {
+
+	static supported := Map(
+		"en", { code: "00000409" },
+		"ru", { code: "00000419" },
+		"gr", { code: "00000408", noLocale: True },
+	)
+
+	static __New() {
+		this.InitialValidator()
+	}
+
+	static Compare(input, mode := "Code") {
+		if (mode = "Code") {
+			for key, value in this.supported {
+				if input == value.code
+					return True
+			}
+		} else {
+			if this.supported.Has(input)
+				return True
+		}
+
+		return False
+	}
+
+	static Set(value) {
+		if this.Compare(value)
+			Cfg.Set(value, "User_Language")
+	}
+
+	static Get() {
+		userLanguage := Cfg.Get("User_Language")
+		userLanguage := userLanguage != "" ? userLanguage : this.GetSys()
+
+		if this.Compare(userLanguage)
+			return userLanguage
+		else
+			return "en"
+	}
+
+	static GetSys() {
+		return SubStr(RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName"), 1, 2)
+	}
+
+	static CurrentLayout(&layoutHex?) {
+		threadId := DllCall("GetWindowThreadProcessId", "UInt", DllCall("GetForegroundWindow", "UInt"), "UInt", 0)
+		layout := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
+		layoutHex := Format("{:08X}", layout & 0xFFFF)
+		return layoutHex
+	}
+
+	static SwitchLayout(code, id := 1, timer := 1) {
+		SetTimer((*) => SwitchCall(), -timer)
+		SwitchCall() {
+			layout := DllCall("LoadKeyboardLayout", "Str", code, "Int", id)
+			hwnd := DllCall("GetForegroundWindow")
+			pid := DllCall("GetWindowThreadProcessId", "UInt", hwnd, "Ptr", 0)
+			DllCall("PostMessage", "UInt", hwnd, "UInt", 0x50, "UInt", 0, "UInt", layout)
+		}
+	}
+
+	static CheckLayout(abbr) {
+		this.CurrentLayout(&code)
+
+		if !IsObject(abbr) {
+			for key, value in this.supported {
+				if abbr == key && code == value.code
+					return True
+			}
+			return False
+		} else {
+			for key, value in this.supported {
+				if code == value.code
+					%abbr% := key
+			}
+		}
+	}
+
+	static InitialValidator() {
+		currentLayout := this.CurrentLayout()
+		previousLeyout := Cfg.Get("Prev_Layout", "ServiceFields")
+
+		if currentLayout != this.supported["en"].code {
+			Cfg.Set(currentLayout, "Prev_Layout", "ServiceFields")
+			this.SwitchLayout(this.supported["en"].code, 2)
+			Reload
+		} else if StrLen(previousLeyout) > 0 {
+			this.SwitchLayout(previousLeyout, 2, 150)
+			Cfg.Set("", "Prev_Layout", "ServiceFields")
+		}
+	}
+}
+
+Class App {
+
+
+	static __New() {
+
+	}
+}
+
+DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
+DSLPadTitleDefault := "DSL KeyPad"
+DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
+
+GetUtilityFiles(ForceUpdate := False) {
+	ErrMessages := Map(
+		"ru", "Произошла ошибка при получении файла перевода.`nСервер недоступен или ошибка соединения с интернетом.",
+		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
+	)
+
+	for fileEntry, value in InternalFiles {
+		if !FileExist(value.File) || ForceUpdate {
+			try {
+				Download(value.Repo, value.File)
+			} catch {
+				Error(ErrMessages[GetLanguageCode()])
+			}
+		}
+	}
+	return
+}
+
+
+TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
+
+ReadLocale(EntryName, Prefix := "") {
+	Section := Prefix != "" ? Prefix . "_" . GetLanguageCode() : GetLanguageCode()
+	Intermediate := IniRead(InternalFiles["Locales"].File, Section, EntryName, "")
+
+	while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
+		LangCode := match[1]
+		SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
+		Replacement := IniRead(InternalFiles["Locales"].File, SectionOverride, EntryName, "")
+		Intermediate := StrReplace(Intermediate, match[0], Replacement)
+	}
+
+	while (RegExMatch(Intermediate, "\{(?:([^\}_]+)_)?([a-zA-Z]{2}):([^\}]+)\}", &match)) {
+		CustomPrefix := match[1] ? match[1] : ""
+		LangCode := match[2]
+		CustomEntry := match[3]
+		SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
+		Replacement := IniRead(InternalFiles["Locales"].File, SectionOverride, CustomEntry, "")
+		Intermediate := StrReplace(Intermediate, match[0], Replacement)
+	}
+
+	while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
+		Unicode := match[1]
+		Replacement := Chr("0x" . Unicode)
+		Intermediate := StrReplace(Intermediate, match[0], Replacement)
+	}
+
+	while (RegExMatch(Intermediate, "\{var:([^\}]+)\}", &match)) {
+		Varname := match[1]
+		if IsSet(%Varname%) {
+			Replacement := %Varname%
+		} else {
+			Replacement := "VAR (" . Varname . "): NOT FOUND"
+		}
+		Intermediate := StrReplace(Intermediate, match[0], Replacement)
+	}
+
+
+	Intermediate := StrReplace(Intermediate, "\n", "`n")
+	Intermediate := StrReplace(Intermediate, "\t", "`t")
+	Intermediate := Intermediate != "" ? Intermediate : "KEY (" . EntryName . "): NOT FOUND"
+	return Intermediate
+}
+
+SetStringVars(StringVar, SetVars*) {
+	Result := StringVar
+	for index, value in SetVars {
+		Result := StrReplace(Result, "{" (index - 1) "}", value)
+	}
+	return Result
+}
+
+
+OpenConfigFile(*) {
+	Run(ConfigFile)
+}
+
+OpenLocalesFile(*) {
+	Run(InternalFiles["Locales"].File)
+}
+
+OpenRecipesFile(*) {
+	Run(CustomComposeFile)
+}
+
+EscapePressed := False
+
+FastKeysIsActive := False
+DisabledAllKeys := False
+ActiveScriptName := ""
+PreviousScriptName := ""
+AlterationActiveName := ""
+InputMode := "Default"
+LaTeXMode := "Default"
+
+DefaultConfig := [
+	["Settings", "FastKeysIsActive", "False"],
+	["Settings", "SkipGroupMessage", "False"],
+	["Settings", "InputMode", "Default"],
+	["Settings", "ScriptInput", "Default"],
+	["Settings", "LaTeXInput", "Default"],
+	["Settings", "UserLanguage", ""],
+	["Settings", "LatinLayout", "QWERTY"],
+	["Settings", "CyrillicLayout", "ЙЦУКЕН"],
+	["Settings", "CharacterWebResource", "SymblCC"],
+	["Settings", "F13F24", "True"],
+	["Settings", "TemperatureCalcExtendedFormatting", "True"],
+	["Settings", "TemperatureCalcDedicatedUnicodeChars", "True"],
+	["Settings", "ScriptProcessorAdvancedMode", "False"],
+	["CustomRules", "ParagraphBeginning", ""],
+	["CustomRules", "ParagraphAfterStartEmdash", ""],
+	["CustomRules", "GREPDialogAttribution", ""],
+	["CustomRules", "GREPThisEmdash", ""],
+	["CustomRules", "GREPInitials", ""],
+	["CustomRules", "TemperatureCalcRoundValue", "2"],
+	["CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space"],
+	["CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"],
+	["CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace"],
+	["LatestPrompts", "LaTeX", ""],
+	["LatestPrompts", "Unicode", ""],
+	["LatestPrompts", "Altcode", ""],
+	["LatestPrompts", "Search", ""],
+	["LatestPrompts", "Ligature", ""],
+	["LatestPrompts", "RomanNumeral", ""],
+	["ServiceFields", "PrevLayout", ""],
+]
 
 if FileExist(ConfigFile) {
 	isFastKeysEnabled := IniRead(ConfigFile, "Settings", "FastKeysIsActive", "False")
@@ -431,15 +510,21 @@ PowerShell_UserSID() {
 	PShell .= '$path = "' GetTXTPath '"`n'
 	PShell .= '$id.User.Value | Out-File -FilePath $path -Encoding UTF8'
 
+	Result := ""
+
 	try {
-		FileAppend(PShell, GetScriptPath, "UTF-8")
-		Sleep 25
+		if !FileExist(GetScriptPath) {
+			FileAppend(PShell, GetScriptPath, "UTF-8")
+			Sleep 25
+		}
 		RunWait("powershell Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force; & " StrReplace(GetScriptPath, " ", "`` "), , "Hide")
-		Sleep 25
+		Sleep 50
 		Result := FileRead(GetTXTPath, "UTF-8")
 	} finally {
-		FileDelete(GetTXTPath)
-		FileDelete(GetScriptPath)
+		if FileExist(GetTXTPath)
+			FileDelete(GetTXTPath)
+		if FileExist(GetScriptPath)
+			FileDelete(GetScriptPath)
 	}
 	for replaces in [" ", "`n", "`r"] {
 		Result := StrReplace(Result, replaces)
@@ -447,6 +532,7 @@ PowerShell_UserSID() {
 	return Result
 }
 
+Sleep 10
 UserSID := PowerShell_UserSID()
 
 IsFont(FontName) {
@@ -556,6 +642,7 @@ GetLayoutLocale() {
 CurrentLayout := GetLayoutLocale()
 Sleep 25
 PreviousLayout := IniRead(ConfigFile, "ServiceFields", "PrevLayout", "")
+/*
 if (CurrentLayout != CodeEn) {
 	IniWrite(CurrentLayout, ConfigFile, "ServiceFields", "PrevLayout")
 	ChangeKeyboardLayout("en", 2)
@@ -570,7 +657,7 @@ SetPreviousLayout(Timing := 150) {
 		IniWrite("", ConfigFile, "ServiceFields", "PrevLayout")
 	}
 }
-
+*/
 StrRepeat(char, count) {
 	result := ""
 	Loop count
@@ -19756,16 +19843,19 @@ CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
 }
 
 LangSeparatedCall(LatinCallback, CyrillicCallback) {
-	if GetLayoutLocale() == CodeEn {
+	Language.CheckLayout(&lang)
+
+	if lang = "en" {
 		LatinCallback()
 	} else {
 		CyrillicCallback()
 	}
 	return
 }
-
 LangSeparatedKey(Combo, LatinCharacter, CyrillicCharacter, UseCaps := False, Reverse := False) {
-	Character := (GetLayoutLocale() == CodeEn) ? LatinCharacter : CyrillicCharacter
+	Language.CheckLayout(&lang)
+
+	Character := (lang = "en") ? LatinCharacter : CyrillicCharacter
 	if UseCaps && IsObject(Character) {
 		CapsSeparatedKey(Combo, Character[1], Character[2], Reverse)
 	} else {
@@ -21724,7 +21814,7 @@ ShowInfoMessage("tray_app_started")
 
 <^>+Esc:: ExitApp
 
-SetPreviousLayout()
+;SetPreviousLayout()
 
 ;! Third Party Functions
 
