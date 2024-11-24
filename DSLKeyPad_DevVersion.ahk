@@ -17782,7 +17782,7 @@ Class InputScriptProcessor {
 				for key, value in entries {
 					if (RegExMatch(key, "^" RegExEscape(input))) {
 						output .= RegExReplace(key, "^" RegExEscape(input), "-") "(" value "), "
-					} else if IPS.SteppedComparator(input, key, True, &a, &b) {
+					} else if IPS.EntriesComparator(input, key, &a, &b, True) {
 						output .= RegExReplace(b, "^" RegExEscape(a), "-") "(" value "), "
 					}
 				}
@@ -17792,34 +17792,27 @@ Class InputScriptProcessor {
 		return output
 	}
 
-
-	static EntriesComparator(a, entries, &foundKey := "", &foundValue := "") {
+	static EntriesComparator(a, entries, &foundKey := "", &foundValue := "", partial := False) {
 		cutA := a
-		while (StrLen(cutA) > 1) {
-			for key, value in entries {
-				if (cutA == key) {
-					foundKey := key
-					foundValue := value
-					return
+		while (StrLen(cutA) > 0) {
+			if !IsObject(entries) {
+				if partial && RegExMatch(entries, "^" RegExEscape(cutA)) || (cutA == entries) {
+					foundKey := cutA
+					foundValue := entries
+					return True
+				}
+			} else {
+				for key, value in entries {
+					if (cutA == key) {
+						foundKey := key
+						foundValue := value
+						return
+					}
 				}
 			}
 			cutA := SubStr(cutA, 2)
 		}
 	}
-
-
-	static SteppedComparator(a, b, partial := False, &c?, &d?) {
-		while (StrLen(a) > 0) {
-			if partial && RegExMatch(b, "^" RegExEscape(a)) || (a == b) {
-				c := a
-				d := b
-				return True
-			}
-			a := SubStr(a, 2)
-		}
-		return False
-	}
-
 
 	static backspaceLock := False
 	static Backspacer(ih, vk, sc) {
