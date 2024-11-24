@@ -16,7 +16,6 @@ _ArrayMaxIndex(this) {
 	return indexes
 }
 
-
 SupportedLanguages := [
 	"en",
 	"ru",
@@ -188,8 +187,6 @@ OpenRecipesFile(*) {
 EscapePressed := False
 
 FastKeysIsActive := False
-;SkipGroupMessage := False
-GlagoFutharkActive := False
 DisabledAllKeys := False
 ActiveScriptName := ""
 PreviousScriptName := ""
@@ -229,40 +226,39 @@ DefaultConfig := [
 	["ServiceFields", "PrevLayout", ""],
 ]
 
-global_ := {}
-Class INIConfig {
+Class Cfg {
 	static ini := WorkingDir "\DSLKeyPad.configtest.ini"
 	static sections := [
 		"Settings", [
-			"UserLanguage", "",
-			"FastKeys", "False",
-			"SkipGroupMessage", "False",
-			"InputMode", "Default",
-			"ScriptInput", "Default",
-			"LatinLayout", "QWERTY",
-			"CyrillicLayout", "ЙЦУКЕН",
-			"CharacterWebResource", "SymblCC",
-			"F13F24", "False",
+			"Character_Web_Resource", "SymblCC",
+			"Input_Mode", "Default",
+			"LaTeX_Mode", "Default",
+			"Input_Script", "Default",
+			"Layout_Latin", "QWERTY",
+			"Layout_Cyrillic", "ЙЦУКЕН",
+			"Mode_Fast_Keys", "False",
+			"Skip_Group_Messages", "False",
+			"User_Language", "",
 			"F13F24", "False",
 		],
 		"ScriptProcessor", [
-			"AdvancedMode", "False",
+			"Advanced_Mode", "False",
 		],
 		"TemperatureCalc", [
-			"ExtendedFormatting", "True",
-			"DedicatedUnicodeChars", "True",
-			"RoundValue", 2,
-			"FormattingFrom", 4,
-			"SpaceType", "narrow_no_break_space",
-			"FormattingSpaceType", "thinspace",
+			"Dedicated_Unicode_Chars", "True",
+			"Format_Extended", "True",
+			"Format_Min_At", 4,
+			"Round_Value_To", 2,
+			"Num_Space_Type", "narrow_no_break_space",
+			"Deg_Space_Type", "thinspace",
 		],
 		"CustomRules", [
-			"ParagraphBeginning", "",
-			"ParagraphAfterStartEmdash", "",
-			"GREPDialogAttribution", "",
-			"GREPThisEmdash", "",
-			"GREPInitials", "",
-			"GREPInitials", "",
+			"Paragraph_Beginning", "",
+			"Paragraph_After_Start_Emdash", "",
+			"GREP_Dialog_Attribution", "",
+			"GREP_ThisEmdash", "",
+			"GREP_Initials", "",
+			"GREP_Initials", "",
 		],
 		"LatestPrompts", [
 			"LaTeX", "",
@@ -270,19 +266,12 @@ Class INIConfig {
 			"Altcode", "",
 			"Search", "",
 			"Ligature", "",
-			"RomanNumeral", "",
+			"Roman_Numeral", "",
 		],
 		"ServiceFields", [
-			"PrevLayout", "",
+			"Prev_Layout", "",
 		],
 	]
-
-	static BindedVars() {
-		return [
-			;"InputScriptProcessor.options.advancedMode", this.Get("AdvancedMode", "ScriptProcessor", False, "bool"),
-			"SkipGroupMessage", this.Get("SkipGroupMessage", "Settings", False, "bool"),
-		]
-	}
 
 	static __New() {
 		this.Init()
@@ -303,6 +292,15 @@ Class INIConfig {
 		}
 	}
 
+	static BindedVars() {
+		return [
+			"FastKeysOn", this.Get("Mode_Fast_Keys", "Settings", False, "bool"),
+			"InputMode", this.Get("Input_Mode", "Settings", "Default"),
+			"LaTeXMode", this.Get("LaTeX_Mode", "Settings", "Default"),
+			"SkipGroupMessage", this.Get("Skip_Group_Messages", "Settings", False, "bool"),
+		]
+	}
+
 	static Set(value, entry, section := "Settings", options := "") {
 		if this.sections.HasValue(section) {
 			this.OptionsHandler(value, options, &value)
@@ -311,7 +309,7 @@ Class INIConfig {
 
 			this.BindedVarsHandler()
 		} else {
-			throw Error("Unknown config section: " . section)
+			throw Error("Unknown config section: " section)
 		}
 	}
 
@@ -326,21 +324,21 @@ Class INIConfig {
 		return value
 	}
 
-	static SwitchSet(valuesEntry, entry, section := "Settings", options := "") {
+	static SwitchSet(valuesVariants, entry, section := "Settings", options := "") {
 		currentValue := this.Get(entry, section)
 		found := false
 
-		for i, value in valuesEntry {
+		for i, value in valuesVariants {
 			if (value = currentValue) {
-				nextIndex := (i = valuesEntry.MaxIndex()) ? 1 : i + 1
-				this.Set(valuesEntry[nextIndex], entry, section, options)
+				nextIndex := (i = valuesVariants.MaxIndex()) ? 1 : i + 1
+				this.Set(valuesVariants[nextIndex], entry, section, options)
 				found := true
 				break
 			}
 		}
 
 		if (!found) {
-			this.Set(valuesEntry[1], entry, section, options)
+			this.Set(valuesVariants[1], entry, section, options)
 		}
 	}
 
@@ -383,7 +381,7 @@ Class INIConfig {
 						if IsSet(%variable%)
 							%variable% := value
 						else {
-							global_.%variable% := value
+							Cfg.%variable% := value
 						}
 					} catch {
 						continue
@@ -402,9 +400,7 @@ if FileExist(ConfigFile) {
 
 	FastKeysIsActive := (isFastKeysEnabled = "True")
 } else {
-	for index, config in DefaultConfig {
-		IniWrite config[3], ConfigFile, config[1], config[2]
-	}
+
 }
 /*
 FontFace := Map(
@@ -16087,7 +16083,7 @@ ToRomanNumeral(IntValue, CapitalLetters := True) {
 SwitchToRoman() {
 	LanguageCode := GetLanguageCode()
 
-	PromptValue := IniRead(ConfigFile, "LatestPrompts", "RomanNumeral", "")
+	PromptValue := Cfg.Get("Roman_Numeral", "LatestPrompts")
 
 	IB := InputBox(ReadLocale("symbol_roman_numeral_prompt"), ReadLocale("symbol_roman_numeral"), "w256 h92", PromptValue)
 	if IB.Result = "Cancel"
@@ -16099,7 +16095,7 @@ SwitchToRoman() {
 		}
 		PromptValue := ToRomanNumeral(Integer(IB.Value))
 
-		IniWrite IB.Value, ConfigFile, "LatestPrompts", "RomanNumeral"
+		Cfg.Set(IB.Value, "Roman_Numeral", "LatestPrompts")
 	}
 	SendText(PromptValue)
 }
@@ -16368,17 +16364,17 @@ Class TemperatureConversion {
 
 	static PostFormatting(temperatureValue, scale, negativePoint := False, regionalType := "English") {
 		chars := {
-			numberSpace: GetChar(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingSpaceType", "thinspace")),
-			degreeSpace: GetChar(IniRead(ConfigFile, "CustomRules", "TemperatureCalcSpaceType", "narrow_no_break_space")),
+			numberSpace: GetChar(Cfg.Get("Num_Space_Type", "TemperatureCalc", "thinspace")),
+			degreeSpace: GetChar(Cfg.Get("Deg_Space_Type", "TemperatureCalc", "narrow_no_break_space")),
 		}
 
-		isDedicatedUnicodeChars := IniRead(ConfigFile, "Settings", "TemperatureCalcDedicatedUnicodeChars", "True") = "True"
-		isExtendedFormattingEnabled := IniRead(ConfigFile, "Settings", "TemperatureCalcExtendedFormatting", "True") = "True"
-		extendedFormattingFromCount := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcExtendedFormattingFrom", "5"))
-		calcRoundValue := Integer(IniRead(ConfigFile, "CustomRules", "TemperatureCalcRoundValue", "2"))
+		useUnicode := Cfg.Get("Dedicated_Unicode_Chars", "TemperatureCalc", True)
+		extendedFormatOn := Cfg.Get("Format_Extended", "TemperatureCalc", True)
+		formatMinAt := Integer(Cfg.Get("Format_Min_At", "TemperatureCalc", 5))
+		roundValueTo := Integer(Cfg.Get("Round_Value_To", "TemperatureCalc", 2))
 
 		if !(GetKeyState("CapsLock", "T"))
-			temperatureValue := Round(temperatureValue, Integer(calcRoundValue))
+			temperatureValue := Round(temperatureValue, Integer(roundValueTo))
 
 		if (Mod(temperatureValue, 1) = 0)
 			temperatureValue := Round(temperatureValue)
@@ -16388,7 +16384,7 @@ Class TemperatureConversion {
 
 		integerPart := RegExReplace(temperatureValue, "(\..*)|([,].*)", "")
 
-		if (isExtendedFormattingEnabled && StrLen(integerPart) >= extendedFormattingFromCount) {
+		if (extendedFormatOn && StrLen(integerPart) >= formatMinAt) {
 			decimalSeparators := Map(
 				"English", ",",
 				"Deutsch", ".",
@@ -16402,7 +16398,7 @@ Class TemperatureConversion {
 			temperatureValue := RegExReplace(temperatureValue, "^\d+", integerPart)
 		}
 
-		temperatureValue := (negativePoint ? GetChar("minus") : "") temperatureValue chars.degreeSpace (IsObject(this.scales.%scale%) ? (isDedicatedUnicodeChars ? this.scales.%scale%[1] : this.scales.%scale%[2]) : GetChar("degree") this.scales.%scale%)
+		temperatureValue := (negativePoint ? GetChar("minus") : "") temperatureValue chars.degreeSpace (IsObject(this.scales.%scale%) ? (useUnicode ? this.scales.%scale%[1] : this.scales.%scale%[2]) : GetChar("degree") this.scales.%scale%)
 		return temperatureValue
 	}
 }
@@ -16852,7 +16848,7 @@ Class Ligaturiser {
 			if this.compositingMode = "InputBox"
 				MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
 			else
-				ShowInfoMessage("warning_recipe_absent", , , global_.SkipGroupMessage, True)
+				ShowInfoMessage("warning_recipe_absent", , , Cfg.SkipGroupMessage, True)
 		}
 	}
 
@@ -17211,7 +17207,6 @@ Class InputScriptProcessor {
 
 	static options := {
 		interceptionInputMode: "",
-		advancedMode: INIConfig.Get("AdvancedMode", "ScriptProcessor", False, "bool"),
 	}
 
 
@@ -17866,7 +17861,7 @@ Class InputScriptProcessor {
 		}
 
 
-		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , global_.SkipGroupMessage, True, True)
+		!reloadHs && ShowInfoMessage(SetStringVars((ReadLocale("script_mode_" (isEnabled ? "" : "de") "activated")), ReadLocale("script_" this.mode)), , , Cfg.SkipGroupMessage, True, True)
 	}
 
 	static InH := InputHook("V")
@@ -17885,7 +17880,7 @@ Class InputScriptProcessor {
 
 				;try {
 				for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
-					if !INIConfig.Get("AdvancedMode", "ScriptProcessor", False, "bool") && subMap = "Advanced"
+					if !Cfg.Get("Advanced_Mode", "ScriptProcessor", False, "bool") && subMap = "Advanced"
 						continue
 
 					IPS.EntriesComparator(IPS.inputLogger, entries, &foundKey, &foundValue)
@@ -17927,7 +17922,7 @@ Class InputScriptProcessor {
 		output := ""
 		if input != "" {
 			for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
-				if !INIConfig.Get("AdvancedMode", "ScriptProcessor", False, "bool") && subMap = "Advanced"
+				if !Cfg.Get("Advanced_Mode", "ScriptProcessor", False, "bool") && subMap = "Advanced"
 					continue
 				for key, value in entries {
 					if (RegExMatch(key, "^" RegExEscape(input))) {
@@ -18007,7 +18002,7 @@ GroupActivator(GroupName, KeyValue := "") {
 	LocaleMark := KeyValue != "" && RegExMatch(KeyValue, "^F") ? KeyValue : GroupName
 	MsgTitle := "[" LocaleMark "] " DSLPadTitle
 
-	ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, global_.SkipGroupMessage, True)
+	ShowInfoMessage("tray_active_" . StrLower(LocaleMark), , MsgTitle, Cfg.SkipGroupMessage, True)
 	InputBridge(GroupName)
 }
 
@@ -18200,9 +18195,9 @@ FindCharacterPage(InputCode := "", IsReturn := False) {
 
 ToggleGroupMessage() {
 	LanguageCode := GetLanguageCode()
-	global global_, ConfigFile
-	global_.SkipGroupMessage := !global_.SkipGroupMessage
-	INIConfig.SwitchSet(["True", "False"], "SkipGroupMessage")
+	global Cfg, ConfigFile
+	Cfg.SkipGroupMessage := !Cfg.SkipGroupMessage
+	Cfg.SwitchSet(["True", "False"], "SkipGroupMessage")
 
 	ActivationMessage := {}
 	ActivationMessage[] := Map()
@@ -18212,7 +18207,7 @@ ToggleGroupMessage() {
 	ActivationMessage["ru"].Deactive := "Сообщения активации групп отключены"
 	ActivationMessage["en"].Active := "Activation messages for groups enabled"
 	ActivationMessage["en"].Deactive := "Activation messages for groups disabled"
-	MsgBox(global_.SkipGroupMessage ? ActivationMessage[LanguageCode].Deactive : ActivationMessage[LanguageCode].Active, DSLPadTitle, 0x40)
+	MsgBox(Cfg.SkipGroupMessage ? ActivationMessage[LanguageCode].Deactive : ActivationMessage[LanguageCode].Active, DSLPadTitle, 0x40)
 
 	return
 }
@@ -21480,10 +21475,10 @@ SetModifiedCharsInput(ModeName := "combining") {
 
 	if AlterationActiveName != "" {
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
-		ShowInfoMessage("message_" ModeName, , , global_.SkipGroupMessage, True)
+		ShowInfoMessage("message_" ModeName, , , Cfg.SkipGroupMessage, True)
 	} else {
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		ShowInfoMessage("message_" ModeName "_disabled", , , global_.SkipGroupMessage, True)
+		ShowInfoMessage("message_" ModeName "_disabled", , , Cfg.SkipGroupMessage, True)
 	}
 
 }
@@ -21595,7 +21590,7 @@ ManageTrayItems() {
 
 	ScriptsSubMenu := Menu()
 	ScriptsSubMenu.Add(Labels["telexInput"], (*) => "")
-	ScriptsSubMenu.Add(Labels["telex_advanced_mode"], (*) => INIConfig.SwitchSet(["True", "False"], "AdvancedMode", "ScriptProcessor", "bind"))
+	ScriptsSubMenu.Add(Labels["telex_advanced_mode"], (*) => Cfg.SwitchSet(["True", "False"], "Advanced_Mode", "ScriptProcessor", "bind"))
 	ScriptsSubMenu.Add(Labels["vietNam"], (*) => InputScriptProcessor())
 	ScriptsSubMenu.Add(Labels["pinYin"], (*) => InputScriptProcessor("pinYin"))
 	ScriptsSubMenu.Add()
