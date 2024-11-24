@@ -17737,28 +17737,27 @@ Class InputScriptProcessor {
 				for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
 					if !IPS.options.advancedMode && subMap = "Advanced"
 						continue
-					for key, value in entries {
 
-						if IPS.steppedComparator(IPS.inputLogger, key) {
+					IPS.EntriesComparator(IPS.inputLogger, entries, &foundKey, &foundValue)
 
-							try {
-								IPS.backspaceLock := True
-								Loop StrLen(key) - (InStr(key, "\") ? 1 : 0) {
-									Send("{Backspace}")
-								}
-							} finally {
-								SendText(value)
-								IPS.InH.Stop()
-								IPS.inputLogger := value
-								IPS.InH.Start()
-								IPS.backspaceLock := False
+					if IsSet(foundKey) {
+						try {
+							IPS.backspaceLock := True
+
+							Loop StrLen(foundKey) - (InStr(foundKey, "\") ? 1 : 0) {
+								Send("{Backspace}")
 							}
-							break 2
+
+							SendText(foundValue)
+							IPS.InH.Stop()
+							IPS.inputLogger := foundValue
+							IPS.InH.Start()
+							IPS.backspaceLock := False
+							break
 						}
 					}
 				}
 				;}
-
 			} else {
 				IPS.inputLogger := ""
 			}
@@ -17792,6 +17791,22 @@ Class InputScriptProcessor {
 
 		return output
 	}
+
+
+	static EntriesComparator(a, entries, &foundKey := "", &foundValue := "") {
+		cutA := a
+		while (StrLen(cutA) > 1) {
+			for key, value in entries {
+				if (cutA == key) {
+					foundKey := key
+					foundValue := value
+					return
+				}
+			}
+			cutA := SubStr(cutA, 2)
+		}
+	}
+
 
 	static SteppedComparator(a, b, partial := False, &c?, &d?) {
 		while (StrLen(a) > 0) {
