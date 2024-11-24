@@ -17284,23 +17284,56 @@ Class InputScriptProcessor {
 			libChar := match[2]
 			inputVariations := match[3] = "" ? [""] : StrSplit(match[3], ", ")
 
-			for variation in inputVariations {
-				sequenceIn := [this.locLib.%category%.s.%libChar%_%variation%, this.locLib.%category%.c.%libChar%_%variation%]
+			if IsObject(ending[1]) {
+				deployedArray := []
+				pairs := []
 
-				if !IsObject(replaceWith) {
-					variationsReplace := (InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith)
-					sequenceOut := [this.locLib.%category%.s.%variationsReplace%, this.locLib.%category%.c.%variationsReplace%]
-				} else {
-					sequenceOut := replaceWith
+				for i, endingEntry in ending {
+					for j, variation in inputVariations {
+						if i = j {
+							pairs.Push(endingEntry, variation)
+						}
+					}
 				}
 
-				output.Set(
-					sequenceIn[1] ending[1], sequenceOut[1],
-					sequenceIn[2] ending[2], sequenceOut[2],
-					sequenceIn[1] "\" ending[1], ending[1],
-					sequenceIn[2] "\" ending[2], ending[2],
-				)
+				for i, pair in pairs {
+					if Mod(i, 2) == 1 {
+						pairEnding := pairs[i]
+						pairVariation := pairs[i + 1]
+
+						refinedLibLink := RegExReplace(libLink, pairVariation ",?\s?", "")
+						refinedLibLink := StrReplace(refinedLibLink, ", ]", "]")
+
+						deployedArray.Push(refinedLibLink, pairEnding, (InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" pairVariation) : replaceWith))
+					}
+				}
+
+				return this.generateSequences(deployedArray)
+			} else {
+
+				for variation in inputVariations {
+					sequenceIn := [this.locLib.%category%.s.%libChar%_%variation%, this.locLib.%category%.c.%libChar%_%variation%]
+
+					if !IsObject(replaceWith) {
+						variationsReplace := (InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith)
+						sequenceOut := [this.locLib.%category%.s.%variationsReplace%, this.locLib.%category%.c.%variationsReplace%]
+					} else {
+						sequenceOut := replaceWith
+					}
+
+					setSequences(sequenceIn, ending, sequenceOut)
+				}
 			}
+
+		}
+
+		setSequences(seqIn, seqEnd, seqOut) {
+			output.Set(
+				seqIn[1] seqEnd[1], seqOut[1],
+				seqIn[2] seqEnd[2], seqOut[2],
+				seqIn[1] "\" seqEnd[1], seqOut[1],
+				seqIn[2] "\" seqEnd[2], seqOut[2],
+			)
 		}
 
 		return output
@@ -17314,28 +17347,14 @@ Class InputScriptProcessor {
 					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_bre",
 					"lat:a[cir, bre, acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], ["a", "A"],
 					;
-					"lat:a_cir[acu, til, dot_bel, hoo_abo]", ["f", "F"], "a_cir_gra",
-					"lat:a_cir[gra, til, dot_bel, hoo_abo]", ["s", "S"], "a_cir_acu",
-					"lat:a_cir[acu, gra, dot_bel, hoo_abo]", ["x", "X"], "a_cir_til",
-					"lat:a_cir[acu, gra, til, hoo_abo]", ["j", "J"], "a_cir_dot_bel",
-					"lat:a_cir[acu, gra, til, dot_bel]", ["r", "R"], "a_cir_hoo_abo",
-					;
-					"lat:a_bre[acu, til, dot_bel, hoo_abo]", ["f", "F"], "a_bre_gra",
-					"lat:a_bre[gra, til, dot_bel, hoo_abo]", ["s", "S"], "a_bre_acu",
-					"lat:a_bre[acu, gra, dot_bel, hoo_abo]", ["x", "X"], "a_bre_til",
-					"lat:a_bre[acu, gra, til, hoo_abo]", ["j", "J"], "a_bre_dot_bel",
-					"lat:a_bre[acu, gra, til, dot_bel]", ["r", "R"], "a_bre_hoo_abo",
+					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", [["f", "F"], ["s", "S"], ["x", "X"], ["j", "J"], ["r", "R"]], "a_cir[*]",
+					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", [["f", "F"], ["s", "S"], ["x", "X"], ["j", "J"], ["r", "R"]], "a_bre[*]",
+					"lat:a[acu, gra, til, dot_bel, hoo_abo]", [["f", "F"], ["s", "S"], ["x", "X"], ["j", "J"], ["r", "R"]], "a[*]",
 					;
 					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "a_bre[*]",
 					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["a", "A"], "a_cir[*]",
 					;
-					"lat:a[bre]", ["a", "A"], "a_cir",
-					"lat:a[cir]", ["w", "W"], "a_bre",
-					"lat:a[acu, til, dot_bel, hoo_abo]", ["f", "F"], "a_gra",
-					"lat:a[gra, til, dot_bel, hoo_abo]", ["s", "S"], "a_acu",
-					"lat:a[acu, gra, dot_bel, hoo_abo]", ["x", "X"], "a_til",
-					"lat:a[acu, gra, til, hoo_abo]", ["j", "J"], "a_dot_bel",
-					"lat:a[acu, gra, til, dot_bel]", ["r", "R"], "a_hoo_abo",
+					"lat:a[bre, cir]", [["a", "A"], ["w", "W"]], "a[*]",
 					;
 					;
 				]),
