@@ -72,6 +72,11 @@ InternalFiles := Map(
 	"AltCodes", { Repo: RawRepoFiles "alt_codes_list.txt", File: WorkingDir "\UtilityFiles\alt_codes_list.txt" },
 	"Exe", { Repo: RawRepoFiles "DSLKeyPad.exe", File: WorkingDir "\DSLKeyPad.exe" },
 )
+/*
+#Include <cls_cfg>
+#Include <cls_language>
+*/
+
 
 Class Cfg {
 	static ini := WorkingDir "\DSLKeyPad.configtest.ini"
@@ -364,6 +369,10 @@ Class App {
 			"HTML_entities", { repo: this.git.files "entities_list.txt", file: this.paths.dir "\UtilityFiles\entities_list.txt" },
 			"alt_codes", { repo: this.git.files "alt_codes_list.txt", file: this.paths.dir "\UtilityFiles\alt_codes_list.txt" },
 			"exe", { repo: this.git.files "DSLKeyPad.exe", file: this.paths.dir "\DSLKeyPad.exe" },
+		)
+
+		this.icos := Map(
+			"app", [this.internal["ico_dll"].file, 1],
 		)
 
 		this.Init()
@@ -15709,6 +15718,21 @@ SearchKey(CycleSend := "") {
 
 		if (PromptValue = "\") {
 			Reload
+			return
+		} else if InStr(PromptValue, "=>") {
+			RegExMatch(PromptValue, "\((.+)\)", &args)
+			PromptValue := RegExReplace(PromptValue, "=>", "")
+			PromptValue := RegExReplace(PromptValue, "\((.+\))", "")
+
+			try {
+				if args[1] {
+					args := StrSplit(args[1], ",")
+					%PromptValue%(args*)
+				}
+				return
+			}
+			%PromptValue%()
+
 			return
 		}
 	}
