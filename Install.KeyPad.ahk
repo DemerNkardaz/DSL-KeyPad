@@ -22,6 +22,7 @@ LanguageCode := GetLangCode()
 
 RawRepo := "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/main/"
 RawRepoFiles := RawRepo "UtilityFiles/"
+RawRepoLib := RawRepo "Lib/"
 RepoSource := "https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk"
 
 SelectedDir := FileSelect("D", , LanguageCode = "ru" ? "Выберите директорию для утилиты, например E:\Software\" : "Choose a directory for the utility, for example E:\Software\")
@@ -37,6 +38,7 @@ GetInstall() {
 		WorkingDir := SelectedDir "\DSLKeyPad"
 		DirCreate(WorkingDir)
 		DirCreate(WorkingDir "\UtilityFiles")
+		DirCreate(WorkingDir "\Lib")
 
 
 		InternalFiles := Map(
@@ -47,6 +49,8 @@ GetInstall() {
 			"AltCodes", { Repo: RawRepoFiles "alt_codes_list.txt", File: WorkingDir "\UtilityFiles\alt_codes_list.txt" },
 			"Exe", { Repo: RawRepoFiles "DSLKeyPad.exe", File: WorkingDir "\DSLKeyPad.exe" },
 			"App", { Repo: RawRepo "DSLKeyPad.ahk", File: WorkingDir "\DSLKeyPad.ahk" },
+			"LibClsCfg", { Repo: RawRepoLib "cls_cfg.ahk", File: WorkingDir "\Lib\cls_cfg.ahk" },
+			"LibClsLang", { Repo: RawRepoLib "cls_language.ahk", File: WorkingDir "\Lib\cls_language.ahk" },
 		)
 
 		for fileEntry, value in InternalFiles {
