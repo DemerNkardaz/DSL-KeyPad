@@ -58,6 +58,10 @@ GetInstall() {
 			"LibClsFavs", { Repo: RawRepoLib "cls_favorites.ahk", File: WorkingDir "\Lib\cls_favorites.ahk" },
 			"LibClsTConv", { Repo: RawRepoLib "cls_tempature_converter.ahk", File: WorkingDir "\Lib\cls_tempature_converter.ahk" },
 			"LibChrLib", { Repo: RawRepoLib "chr_lib.ahk", File: WorkingDir "\Lib\chr_lib.ahk" },
+			"ExternalPrtArray", { Repo: RawRepoLib "External\prt_array.ahk", File: WorkingDir "\Lib\External\prt_array.ahk" },
+			"ExternalFncClSend", { Repo: RawRepoLib "External\fnc_clip_send.ahk", File: WorkingDir "\Lib\External\fnc_clip_send.ahk" },
+			"ExternalFncCarPos", { Repo: RawRepoLib "External\fnc_caret_pos.ahk", File: WorkingDir "\Lib\External\fnc_caret_pos.ahk" },
+			"ExternalFncGuiBtnClr", { Repo: RawRepoLib "External\fnc_gui_button_icon.ahk", File: WorkingDir "\Lib\External\fnc_gui_button_icon.ahk" },
 		)
 
 		for fileEntry, value in InternalFiles {

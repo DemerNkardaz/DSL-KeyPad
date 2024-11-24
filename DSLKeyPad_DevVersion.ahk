@@ -2,6 +2,11 @@
 #SingleInstance Force
 #MaxThreads 2
 ;#UseHook
+#Include <External\prt_array>
+#Include <External\fnc_clip_send>
+#Include <External\fnc_caret_pos>
+#Include <External\fnc_gui_button_icon>
+
 
 ;InstallKeybdHook(True, True)
 
@@ -22,8 +27,6 @@ SetTimer((*) => idller(), 10000)
 
 ; Only EN US & RU RU Keyboard Layout
 
-Array.Prototype.DefineProp("ToString", { Call: _ArrayToString })
-Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
 Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
 
 _ArrayMaxIndex(this) {
@@ -101,6 +104,10 @@ InternalFiles := Map(
 	"LibClsFavs", { Repo: RawRepoLib "cls_favorites.ahk", File: WorkingDir "\Lib\cls_favorites.ahk" },
 	"LibClsTConv", { Repo: RawRepoLib "cls_tempature_converter.ahk", File: WorkingDir "\Lib\cls_tempature_converter.ahk" },
 	"LibChrLib", { Repo: RawRepoLib "chr_lib.ahk", File: WorkingDir "\Lib\chr_lib.ahk" },
+	"ExternalPrtArray", { Repo: RawRepoLib "External\prt_array.ahk", File: WorkingDir "\Lib\External\prt_array.ahk" },
+	"ExternalFncClSend", { Repo: RawRepoLib "External\fnc_clip_send.ahk", File: WorkingDir "\Lib\External\fnc_clip_send.ahk" },
+	"ExternalFncCarPos", { Repo: RawRepoLib "External\fnc_caret_pos.ahk", File: WorkingDir "\Lib\External\fnc_caret_pos.ahk" },
+	"ExternalFncGuiBtnClr", { Repo: RawRepoLib "External\fnc_gui_button_icon.ahk", File: WorkingDir "\Lib\External\fnc_gui_button_icon.ahk" },
 )
 
 #Include <cls_app>
@@ -6994,185 +7001,7 @@ ShowInfoMessage("tray_app_started")
 
 <^>+Esc:: ExitApp
 
-;SetPreviousLayout()
 
-;! Third Party Functions
-
-;{ [Function] GuiButtonIcon
-;{
-; Fanatic Guru
-; Version 2023 04 08
-;
-; #Requires AutoHotkey v2.0.2+
-;
-; FUNCTION to Assign an Icon to a Gui Button
-;
-;------------------------------------------------
-;
-; Method:
-;   GuiButtonIcon(Handle, File, Index, Options)
-;
-;   Parameters:
-;   1) {Handle} 	HWND handle of Gui button or the Gui button object
-;   2) {File} 		File containing icon image
-;   3) {Index} 		Index of icon in file
-;						Optional: Default = 1
-;   4) {Options}	Single letter flag followed by a number with multiple options delimited by a space
-;						W = Width of Icon (default = 16)
-;						H = Height of Icon (default = 16)
-;						S = Size of Icon, Makes Width and Height both equal to Size
-;						L = Left Margin
-;						T = Top Margin
-;						R = Right Margin
-;						B = Botton Margin
-;						A = Alignment (0 = left, 1 = right, 2 = top, 3 = bottom, 4 = center; default = 4)
-;
-; Return:
-;   1 = icon found, 0 = icon not found
-;
-; Example:
-; MyGui := Gui()
-; MyButton := MyGui.Add('Button', 'w70 h38', 'Save')
-; GuiButtonIcon(MyButton, 'shell32.dll', 259, 's32 a1 r2')
-; MyGui.Show
-;}
-GuiButtonIcon(Handle, File, Index := 1, Options := '') {
-	RegExMatch(Options, 'i)w\K\d+', &W) ? W := W.0 : W := 16
-	RegExMatch(Options, 'i)h\K\d+', &H) ? H := H.0 : H := 16
-	RegExMatch(Options, 'i)s\K\d+', &S) ? W := H := S.0 : ''
-	RegExMatch(Options, 'i)l\K\d+', &L) ? L := L.0 : L := 0
-	RegExMatch(Options, 'i)t\K\d+', &T) ? T := T.0 : T := 0
-	RegExMatch(Options, 'i)r\K\d+', &R) ? R := R.0 : R := 0
-	RegExMatch(Options, 'i)b\K\d+', &B) ? B := B.0 : B := 0
-	RegExMatch(Options, 'i)a\K\d+', &A) ? A := A.0 : A := 4
-	W *= A_ScreenDPI / 96, H *= A_ScreenDPI / 96
-	button_il := Buffer(20 + A_PtrSize)
-	normal_il := DllCall('ImageList_Create', 'Int', W, 'Int', H, 'UInt', 0x21, 'Int', 1, 'Int', 1)
-	NumPut('Ptr', normal_il, button_il, 0)			; Width & Height
-	NumPut('UInt', L, button_il, 0 + A_PtrSize)		; Left Margin
-	NumPut('UInt', T, button_il, 4 + A_PtrSize)		; Top Margin
-	NumPut('UInt', R, button_il, 8 + A_PtrSize)		; Right Margin
-	NumPut('UInt', B, button_il, 12 + A_PtrSize)	; Bottom Margin
-	NumPut('UInt', A, button_il, 16 + A_PtrSize)	; Alignment
-	SendMessage(BCM_SETIMAGELIST := 5634, 0, button_il, Handle)
-	Return IL_Add(normal_il, File, Index)
-}
-;}
-;
-
-;
-; Caret get from https://www.autohotkey.com/boards/viewtopic.php?t=114802
-
-CaretGetPosAlternative(&x?, &y?) {
-	static OBJID_CARET := 0xFFFFFFF8
-	CoordMode 'Caret'
-	if !CaretGetPos(&x, &y) {
-		AccObject := AccObjectFromWindow(WinExist('A'), OBJID_CARET)
-		Pos := AccLocation(AccObject)
-		try x := Pos.x, y := Pos.y
-		if !(x && y) {
-			Pos := UIA_CaretPos()
-			try x := Pos.x, y := Pos.y
-		}
-	}
-	Return !!(x && y)
-}
-
-UIA_CaretPos() {
-	static CLSID_CUIAutomation8 := '{E22AD333-B25F-460C-83D0-0581107395C9}'
-		, IID_IUIAutomation2 := '{34723AFF-0C9D-49D0-9896-7AB52DF8CD8A}'
-		, IUIA := ComObject(CLSID_CUIAutomation8, IID_IUIAutomation2)
-		, TextPatternElement2 := 10024
-
-	try {
-		ComCall(8, IUIA, 'ptr*', &FocusedEl := 0) ; GetFocusedElement
-		ComCall(16, FocusedEl, 'int', TextPatternElement2, 'ptr*', &TextPattern2 := 0) ; GetCurrentPattern
-		if TextPattern2 {
-			ComCall(10, TextPattern2, 'int*', 1, 'ptr*', &caretRange := 0) ; GetCaretRange
-			ComCall(10, caretRange, 'ptr*', &boundingRects := 0) ; GetBoundingRectangles
-			ObjRelease(FocusedEl), ObjRelease(TextPattern2), ObjRelease(caretRange)
-			Rect := ComValue(0x2005, boundingRects)
-			if Rect.MaxIndex() = 3
-				return { X: Round(Rect[0]), Y: Round(Rect[1]), W: Round(Rect[2]), H: Round(Rect[3]) }
-		}
-	}
-}
-
-AccObjectFromWindow(hWnd, idObject := 0) {
-	static IID_IDispatch := '{00020400-0000-0000-C000-000000000046}'
-		, IID_IAccessible := '{618736E0-3C3D-11CF-810C-00AA00389B71}'
-		, OBJID_NATIVEOM := 0xFFFFFFF0, VT_DISPATCH := 9, F_OWNVALUE := 1
-		, h := DllCall('LoadLibrary', 'Str', 'Oleacc', 'Ptr')
-
-	idObject &= 0xFFFFFFFF, AccObject := 0
-	DllCall('Ole32\CLSIDFromString', 'Str', idObject = OBJID_NATIVEOM ? IID_IDispatch : IID_IAccessible, 'Ptr', CLSID := Buffer(16))
-	if DllCall('Oleacc\AccessibleObjectFromWindow', 'Ptr', hWnd, 'UInt', idObject, 'Ptr', CLSID, 'PtrP', &pAcc := 0) = 0
-		AccObject := ComObjFromPtr(pAcc), ComObjFlags(AccObject, F_OWNVALUE, F_OWNVALUE)
-	return AccObject
-}
-
-AccLocation(Acc, ChildId := 0, &Position := '') {
-	static type := (VT_BYREF := 0x4000) | (VT_I4 := 3)
-	x := Buffer(4, 0), y := Buffer(4, 0), w := Buffer(4, 0), h := Buffer(4, 0)
-	try Acc.accLocation(ComValue(type, x.Ptr), ComValue(type, y.Ptr),
-	ComValue(type, w.Ptr), ComValue(type, h.Ptr), ChildId)
-	catch
-		return
-	return { x: NumGet(x, 'int'), y: NumGet(y, 'int'), w: NumGet(w, 'int'), h: NumGet(h, 'int') }
-}
-;
-;
-;
-;
-;
-
-
-;
-; Code parts get from https://github.com/Axlefublr/lib-v2/tree/main
-
-
-ClipSend(toSend, endChar := "", isClipReverted := true, untilRevert := 300) {
-	if isClipReverted
-		prevClip := ClipboardAll()
-
-	A_Clipboard := ""
-	A_Clipboard := toSend endChar
-	ClipWait(1)
-	Send("{Shift Down}{Insert}{Shift Up}")
-
-	if isClipReverted
-		SetTimer(() => A_Clipboard := prevClip, -untilRevert)
-}
-
-
-GetInput(options?, endKeys?) {
-	inputHookObject := InputHook(options?, endKeys?)
-	inputHookObject.Start()
-	inputHookObject.Wait()
-	return inputHookObject
-}
-
-_ArrayToString(this, char := ", ") {
-	for index, value in this {
-		if index = this.Length {
-			str .= value
-			break
-		}
-		str .= value char
-	}
-	return str
-}
-
-_ArrayHasValue(this, valueToFind) {
-	for index, value in this {
-		if value = valueToFind
-			return true
-	}
-	return false
-}
-
-;
-;
 ;? Special
 
 ;* Ultra Super Duper Puper Dev’s Secret Function
