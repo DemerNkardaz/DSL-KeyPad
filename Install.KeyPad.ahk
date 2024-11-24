@@ -51,6 +51,9 @@ GetInstall() {
 			"App", { Repo: RawRepo "DSLKeyPad.ahk", File: WorkingDir "\DSLKeyPad.ahk" },
 			"LibClsCfg", { Repo: RawRepoLib "cls_cfg.ahk", File: WorkingDir "\Lib\cls_cfg.ahk" },
 			"LibClsLang", { Repo: RawRepoLib "cls_language.ahk", File: WorkingDir "\Lib\cls_language.ahk" },
+			"LibClsApp", { Repo: RawRepoLib "cls_app.ahk", File: WorkingDir "\Lib\cls_app.ahk" },
+			"LibClsScrPrc", { Repo: RawRepoLib "cls_script_processor.ahk", File: WorkingDir "\Lib\cls_script_processor.ahk" },
+			"LibChrLib", { Repo: RawRepoLib "chr_lib.ahk", File: WorkingDir "\Lib\chr_lib.ahk" },
 		)
 
 		for fileEntry, value in InternalFiles {
