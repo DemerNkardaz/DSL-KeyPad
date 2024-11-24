@@ -17301,6 +17301,7 @@ Class InputScriptProcessor {
 						pairEnding := pairs[i]
 						pairVariation := pairs[i + 1]
 
+
 						refinedLibLink := RegExReplace(libLink, pairVariation ",?\s?", "")
 						refinedLibLink := StrReplace(refinedLibLink, ", ]", "]")
 
@@ -17343,18 +17344,18 @@ Class InputScriptProcessor {
 		vietNam: Map(
 			"Advanced", MapMerge(
 				this.generateSequences([
-					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_cir",
-					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_bre",
+					"lat:a[bre, cir]", [["w", "W"], ["a", "A"]], "a[*]",
 					"lat:a[cir, bre, acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], ["a", "A"],
+					"lat:a[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "a[*]",
 					;
-					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", [["f", "F"], ["s", "S"], ["x", "X"], ["j", "J"], ["r", "R"]], "a_cir[*]",
-					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", [["f", "F"], ["s", "S"], ["x", "X"], ["j", "J"], ["r", "R"]], "a_bre[*]",
-					"lat:a[acu, gra, til, dot_bel, hoo_abo]", [["f", "F"], ["s", "S"], ["x", "X"], ["j", "J"], ["r", "R"]], "a[*]",
-					;
-					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "a_bre[*]",
+					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_bre",
 					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["a", "A"], "a_cir[*]",
+					"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "a_bre[*]",
 					;
-					"lat:a[bre, cir]", [["a", "A"], ["w", "W"]], "a[*]",
+					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_cir",
+					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "a_bre[*]",
+					"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "a_cir[*]",
+					;
 					;
 					;
 				]),
