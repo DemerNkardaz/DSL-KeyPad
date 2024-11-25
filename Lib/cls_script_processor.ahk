@@ -665,6 +665,8 @@ Class InputScriptProcessor {
 	}
 
 	RegistryHotstrings(reloadHs) {
+		Tooltip()
+
 		InputScriptProcessor.options.interceptionInputMode := reloadHs
 			? this.mode
 				: (this.mode != InputScriptProcessor.options.interceptionInputMode ? this.mode : "")

@@ -4476,6 +4476,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 
 		AlterationsValidator := Map(
 			"IsModifier", [HasProp(GetEntry, "modifierForm"), 0x02B0],
+			"IsUncombined", [HasProp(GetEntry, "uncombinedForm"), "(h)"],
 			"IsSubscript", [HasProp(GetEntry, "subscriptForm"), 0x2095],
 			"IsCombining", [IsDiacritic || HasProp(GetEntry, "combiningForm"), 0x036A],
 			"IsItalic", [HasProp(GetEntry, "italicForm"), 0x210E],
@@ -4491,7 +4492,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 
 		for entry, value in AlterationsValidator {
 			if (value[1]) {
-				GroupTitle .= GetChar("dotted_circle") Chr(value[2]) " "
+				GroupTitle .= (value[2] == "(h)" ? value[2] : GetChar("dotted_circle") Chr(value[2])) " "
 			}
 		}
 
