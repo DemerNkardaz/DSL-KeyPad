@@ -1,6 +1,6 @@
 Class CharacterInserter {
 
-	__New(insertType) {
+	__New(insertType := "Unicode") {
 		this.insertType := insertType
 		this.lastPrompt := IniRead(ConfigFile, "LatestPrompts", insertType, "")
 	}
@@ -22,10 +22,10 @@ Class CharacterInserter {
 				if charCode != "" {
 					charCode := RegExReplace(charCode, "^(U\+|u\+|Alt\+|alt\+)", "")
 
-					if !%this.insertType%Validate(charCode)
+					if !CharacterInserter.%this.insertType%Validate(charCode)
 						throw
 
-					output .= %this.insertType%(charCode)
+					output .= CharacterInserter.%this.insertType%(charCode)
 
 				}
 			}
@@ -45,21 +45,72 @@ Class CharacterInserter {
 		}
 		return
 
-		Altcode(charCode) {
-			return "{ASC " charCode "}"
+
+	}
+
+	static Altcode(charCode) {
+		return "{ASC " charCode "}"
+	}
+
+	static Unicode(charCode) {
+		charCode := Format("0x" charCode, "d")
+		return Chr(charCode)
+	}
+
+	static AltcodeValidate(charCode) {
+		return IsInteger(charCode) && ((RegExMatch(charCode, "^0") ? charCode >= 128 : charCode > 0) && charCode <= 255)
+	}
+
+	static UnicodeValidate(charCode) {
+		return RegExMatch(charCode, "^[0-9a-fA-F]+$")
+	}
+
+	UniNumHook() {
+		output := ""
+		input := ""
+
+		PH := InputHook("L0", "{Escape}")
+		PH.Start()
+
+		Loop {
+
+			IH := InputHook("L1", "{Backspace}{Enter}{Escape}")
+			IH.Start(), IH.Wait()
+
+			if (IH.EndKey = "Escape") {
+				input := ""
+				break
+
+			} else if (IH.EndKey = "Backspace") {
+				if StrLen(input) > 0
+					input := SubStr(input, 1, -1)
+
+			} else if IH.Input != "" && StrLen(input) < 6 && CharacterInserter.%this.insertType%Validate(IH.Input) {
+				input .= IH.Input
+			}
+
+			preview := ""
+			try {
+				preview := Chr("0x" input)
+			}
+
+			CaretTooltip("[ " preview " ]" Chr(0x2002) "U+" StrUpper(input))
+
+			if (IH.EndKey = "Enter") {
+				if StrLen(input) > 0 {
+					output := preview
+				}
+				IH.Stop()
+				break
+			}
 		}
 
-		Unicode(charCode) {
-			charCode := Format("0x" charCode, "d")
-			return Chr(charCode)
-		}
+		PH.Stop()
+		ToolTip()
 
-		AltcodeValidate(charCode) {
-			return IsInteger(charCode) && ((RegExMatch(charCode, "^0") ? charCode >= 128 : charCode > 0) && charCode <= 255)
-		}
+		if StrLen(output) > 0
+			SendText(output)
 
-		UnicodeValidate(charCode) {
-			return RegExMatch(charCode, "^[0-9a-fA-F]+$")
-		}
+		return
 	}
 }

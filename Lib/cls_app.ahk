@@ -16,6 +16,10 @@ Class App {
 		temp: A_Temp "\DSLKeyPad",
 	}
 
+	static usr := {
+		sid: PowerShell_UserSID(),
+	}
+
 
 	static __New() {
 		this.git.src := this.git.repo "DSLKeyPad.ahk"

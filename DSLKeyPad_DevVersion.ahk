@@ -263,8 +263,6 @@ FontFace := Map(
 )
 
 
-UserSID := PowerShell_UserSID()
-
 IsFont(FontName) {
 	Suffixes := ["", " Regular", " Regular (TrueType)"]
 
@@ -281,8 +279,8 @@ IsFont(FontName) {
 		}
 
 		try {
-			if UserSID != "" {
-				RegPath := "HKEY_USERS\" UserSID "\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+			if App.usr.sid != "" {
+				RegPath := "HKEY_USERS\" App.usr.sid "\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
 				if RegRead(RegPath, FullKeyName) {
 					return True
 				}
@@ -6585,6 +6583,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"RAlt", (*) => ProceedCompose(),
 			;"RCtrl", (*) => ProceedCombining(),
 			;"RShift", (*) => ProceedModifiers(),
+			;
+			"<!" UseKey["NumpadAdd"], (*) => CharacterInserter().UniNumHook(),
 			;
 			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
 			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),

@@ -12,29 +12,6 @@ GetUnicodeName(char) {
 	return result
 }
 
-
-SendCharToPy2(Mode := "") {
-	BackupClipboard := A_Clipboard
-	PromptValue := ""
-	A_Clipboard := ""
-
-	Send("^c")
-	Sleep 120
-	PromptValue := A_Clipboard
-
-	if (PromptValue != "") {
-		PromptValue := GetUnicodeName(PromptValue)
-		Sleep 50
-		if (Mode == "Copy") {
-			A_Clipboard := PromptValue
-			return
-		} else {
-			SendText(PromptValue)
-		}
-	}
-
-	A_Clipboard := BackupClipboard
-}
 SendCharToPy(Mode := "") {
 	ClipSendProcessed(GetUnicodeName, Mode == "Copy")
 }
