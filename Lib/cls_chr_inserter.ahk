@@ -48,23 +48,6 @@ Class CharacterInserter {
 
 	}
 
-	static Altcode(charCode) {
-		return "{ASC " charCode "}"
-	}
-
-	static Unicode(charCode) {
-		charCode := Format("0x" charCode, "d")
-		return Chr(charCode)
-	}
-
-	static AltcodeValidate(charCode) {
-		return IsInteger(charCode) && ((RegExMatch(charCode, "^0") ? charCode >= 128 : charCode > 0) && charCode <= 255)
-	}
-
-	static UnicodeValidate(charCode) {
-		return RegExMatch(charCode, "^[0-9a-fA-F]+$")
-	}
-
 	UniNumHook() {
 		output := ""
 		input := ""
@@ -91,7 +74,7 @@ Class CharacterInserter {
 
 			preview := ""
 			try {
-				preview := Chr("0x" input)
+				preview := CharacterInserter.%this.insertType%(input)
 			}
 
 			CaretTooltip("[ " preview " ]" Chr(0x2002) "U+" StrUpper(input))
@@ -113,4 +96,23 @@ Class CharacterInserter {
 
 		return
 	}
+
+
+	static Altcode(charCode) {
+		return "{ASC " charCode "}"
+	}
+
+	static Unicode(charCode) {
+		charCode := Format("0x" charCode, "d")
+		return Chr(charCode)
+	}
+
+	static AltcodeValidate(charCode) {
+		return IsInteger(charCode) && ((RegExMatch(charCode, "^0") ? charCode >= 128 : charCode > 0) && charCode <= 255)
+	}
+
+	static UnicodeValidate(charCode) {
+		return RegExMatch(charCode, "^[0-9a-fA-F]+$")
+	}
+
 }
