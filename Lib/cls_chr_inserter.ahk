@@ -48,9 +48,12 @@ Class CharacterInserter {
 
 	}
 
-	UniNumHook() {
+	NumHook() {
 		output := ""
 		input := ""
+
+		AltcodePrefix := "Alt+"
+		UnicodePrefix := "U+"
 
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
@@ -68,16 +71,16 @@ Class CharacterInserter {
 				if StrLen(input) > 0
 					input := SubStr(input, 1, -1)
 
-			} else if IH.Input != "" && StrLen(input) < 6 && CharacterInserter.%this.insertType%Validate(IH.Input) {
+			} else if IH.Input != "" && StrLen(input) < 6 && (this.insertType = "Unicode" ? CharacterInserter.%this.insertType%Validate(IH.Input) : IsInteger(IH.Input)) {
 				input .= IH.Input
 			}
 
 			preview := ""
 			try {
-				preview := CharacterInserter.%this.insertType%(input)
+				preview := CharacterInserter.%this.insertType%(input, True)
 			}
 
-			CaretTooltip("[ " preview " ]" Chr(0x2002) "U+" StrUpper(input))
+			CaretTooltip("[ " preview " ]" Chr(0x2002) %this.insertType%Prefix StrUpper(input))
 
 			if (IH.EndKey = "Enter") {
 				if StrLen(input) > 0 {
@@ -98,11 +101,13 @@ Class CharacterInserter {
 	}
 
 
-	static Altcode(charCode) {
+	static Altcode(charCode, isReturn := False) {
+		if isReturn
+			return Chr(charCode)
 		return "{ASC " charCode "}"
 	}
 
-	static Unicode(charCode) {
+	static Unicode(charCode, isReturn) {
 		charCode := Format("0x" charCode, "d")
 		return Chr(charCode)
 	}

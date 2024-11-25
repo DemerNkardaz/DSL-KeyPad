@@ -6584,7 +6584,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			;"RCtrl", (*) => ProceedCombining(),
 			;"RShift", (*) => ProceedModifiers(),
 			;
-			"<!" UseKey["NumpadAdd"], (*) => CharacterInserter().UniNumHook(),
+			"<!" UseKey["NumpadAdd"], (*) => CharacterInserter().NumHook(),
+			"<!" UseKey["NumpadMult"], (*) => CharacterInserter("Altcode").NumHook(),
 			;
 			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
 			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
