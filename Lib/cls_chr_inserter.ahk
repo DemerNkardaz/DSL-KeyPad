@@ -107,7 +107,7 @@ Class CharacterInserter {
 		return "{ASC " charCode "}"
 	}
 
-	static Unicode(charCode, isReturn) {
+	static Unicode(charCode, isReturn?) {
 		charCode := Format("0x" charCode, "d")
 		return Chr(charCode)
 	}

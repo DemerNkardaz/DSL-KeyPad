@@ -1370,7 +1370,7 @@ ArrayMerge(Arrays*) {
 }
 
 GetMapCount(MapObj, SortGroups := "") {
-	properties := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
+	properties := ["combining", "uncombined", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
 	if !IsObject(SortGroups) {
 		keyCount := MapObj.Count
 
@@ -1909,7 +1909,7 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 		}
 
-		Alterations := ["combining", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
+		Alterations := ["combining", "uncombined", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
 
 		for alteration in Alterations {
 			if HasProp(value, alteration "Form") {
@@ -5772,7 +5772,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], "Off"),
 				;
 				"<^>!" UseKey["Numpad0"], (K) => HandleFastKey(K, "empty_set"),
-				"<^<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
+				"<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
 				"<^>!" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_two"),
 				"<^>!>+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterism"),
 				"<^>!<+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_low"),
@@ -6559,6 +6559,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^<!<+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifBold"),
 			"<^<!<+>+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerif"),
 			"<^<!" UseKey["Numpad7"], (*) => SetModifiedCharsInput("monospace"),
+			"<^<!" UseKey["Numpad0"], (*) => SetModifiedCharsInput("uncombined"),
 			;
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
