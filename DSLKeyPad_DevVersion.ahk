@@ -5431,7 +5431,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 		SpecialsSlots := GetLayoutImprovedCyrillic([
 			"noequals", MapMerge(GetModifiers("<^>!"), KeySeqSlot["="]),
-			"almostequals", MapMerge(GetModifiers("<^>!<+>+"), KeySeqSlot["="]),
+			"almostequals", MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["="]),
 			"plusminus", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["="]),
 			"ellipsis", MapMerge(GetModifiers("<^>!"), KeySeqSlot["DotRu"]),
 			"two_dot_punctuation", MapMerge(GetModifiers("<!"), KeySeqSlot["DotRu"]),
@@ -5454,7 +5454,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"9", Map("Flat:<^>!", "bracket_angle_math_left", "Flat:<!", "bracket_square_left", "Flat:<!<+", "bracket_curly_left"),
 			"0", Map("Flat:<^>!", "bracket_angle_math_right", "Flat:<^>!<!", "infinity", "Flat:<!", "bracket_square_right", "Flat:<!<+", "bracket_curly_right"),
 			"~", Map("Flat:<^>!", "bullet", "Flat:<^>!<!", "bullet_hyphen", "Flat:<^>!<+", "interpunct", "Flat:<^>!<!<+", "bullet_triangle", "Flat:<^>!<!>+", "bullet_white", "Flat:>+", "tilde_reversed"),
-			"=", Map("<^>!", "noequals", "<^>!<+>+", "almostequals", "<^>!<+", "plusminus"),
+			"=", Map("<^>!", "noequals", "<^>!<!", "almostequals", "<^>!<+", "plusminus"),
 			"-", Map("<^>!>+", "hyphenation_point"),
 			"/", Map("<^>!", "ellipsis", "<^>!<+", "tricolon", "<^>!<+>+", "quartocolon", "<!", "two_dot_punctuation", "<^>!>+", "fraction_slash"),
 		)
