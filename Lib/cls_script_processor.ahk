@@ -800,8 +800,11 @@ Class InputScriptProcessor {
 			} else {
 				IPS.inputLogger := ""
 			}
-			suggestions := IPS.GetSuggestions(IPS.inputLogger)
-			CaretTooltip(IPS.inputLogger (suggestions != "" ? "`n" Ligaturiser.FormatSuggestions(suggestions) : ""))
+
+			if IPS.options.interceptionInputMode != "autoDiacritics" {
+				suggestions := IPS.GetSuggestions(IPS.inputLogger)
+				CaretTooltip(IPS.inputLogger (suggestions != "" ? "`n" Ligaturiser.FormatSuggestions(suggestions) : ""))
+			}
 		} else {
 			IPS.InH.Stop()
 			IPS.inputLogger := ""

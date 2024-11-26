@@ -2046,6 +2046,7 @@ ProcessMapAfter(GroupLimited := "") {
 				RecipeAltCreated := False
 				for recipe in value.recipe {
 					ModifiedRecipe := ""
+					setClass := ""
 					RecipeModified := False
 
 					for k, char in StrSplit(recipe) {
@@ -2059,6 +2060,7 @@ ProcessMapAfter(GroupLimited := "") {
 								if InStr(char, SymbolChar) {
 									ModifiedRecipe .= GetChar("dotted_circle") SymbolChar
 									RecipeModified := true
+									setClass := EntryParts.script = "lat" ? "Latin Accented" : EntryParts.script = "cyr" ? "Cyrillic Accented" : ""
 									foundMatch := true
 									break
 								}
@@ -2077,6 +2079,10 @@ ProcessMapAfter(GroupLimited := "") {
 						}
 						value.recipeAlt.Push(ModifiedRecipe)
 					}
+
+					if setClass != "" && !HasProp(value, "symbolClass") {
+						value.symbolClass := setClass
+					}
 				}
 
 
@@ -2088,6 +2094,7 @@ ProcessMapAfter(GroupLimited := "") {
 				}
 
 				ModifiedRecipe := ""
+				setClass := ""
 				RecipeModified := False
 
 				FirstChar := SubStr(value.recipe, 1, 1)
@@ -2129,6 +2136,7 @@ ProcessMapAfter(GroupLimited := "") {
 
 								ModifiedRecipe .= GetChar("dotted_circle") SymbolChar
 								RecipeModified := true
+								setClass := EntryParts.script = "lat" ? "Latin Accented" : EntryParts.script = "cyr" ? "Cyrillic Accented" : ""
 								foundMatch := true
 
 								if !HasProp(value, "LaTeX") {
@@ -2154,6 +2162,10 @@ ProcessMapAfter(GroupLimited := "") {
 
 				if RecipeModified {
 					value.recipeAlt := ModifiedRecipe
+				}
+
+				if setClass != "" && !HasProp(value, "symbolClass") {
+					value.symbolClass := setClass
 				}
 			}
 
@@ -6542,6 +6554,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["F2"], (*) => InputScriptProcessor(),
 			"<^>!>+" UseKey["F2"], (*) => InputScriptProcessor("pinYin"),
 			"<^>!<+" UseKey["F2"], (*) => InputScriptProcessor("karaShiki"),
+			"<^>!<!" UseKey["F2"], (*) => InputScriptProcessor("autoDiacritics"),
 			;
 			"<^<!" UseKey["Numpad1"], (*) => SetModifiedCharsInput(),
 			"<^<!<+" UseKey["Numpad1"], (*) => SetModifiedCharsInput("modifier"),
