@@ -860,11 +860,18 @@ Class InputScriptProcessor {
 	static Backspacer(ih, vk, sc) {
 		IPS := InputScriptProcessor
 		backspaceCode := "14"
+		resetKeys := [
+			"331", "336", "328", "333", ; Arrows
+			"327", "335", "329", "337", ; Home End PgUp PgDn
+		]
 
 		if StrLen(IPS.inputLogger) > 0 && sc = backspaceCode && !InputScriptProcessor.backspaceLock {
 			IPS.inputLogger := SubStr(IPS.inputLogger, 1, -1)
 			if IPS.options.interceptionInputMode != "autoDiacritics"
 				CaretTooltip(IPS.inputLogger)
+		} else if resetKeys.HasValue(sc) {
+			IPS.inputLogger := ""
+			Tooltip()
 		}
 
 		return
@@ -872,7 +879,7 @@ Class InputScriptProcessor {
 
 	static InitHook() {
 		this.InH.Start()
-		;this.InH.NotifyNonText := True
+		this.InH.NotifyNonText := True
 		this.InH.KeyOpt("{Backspace}", "N")
 		this.InH.OnChar := this.SequenceHandler
 		this.InH.OnKeyDown := ObjBindMethod(this, "Backspacer")

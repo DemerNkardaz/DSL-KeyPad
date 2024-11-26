@@ -7,9 +7,10 @@
 #Include <External\fnc_clip_send>
 #Include <External\fnc_caret_pos>
 #Include <External\fnc_gui_button_icon>
+#Include <utils>
 #Include <chr_alt_codes>
 #Include <chr_entities>
-#Include <utils>
+#Include <cls_layout>
 #Include <supplement_pshell>
 #Include <supplement_python>
 
@@ -692,11 +693,6 @@ RightAlt := Chr(0x2384)
 Window := Chr(0x229E)
 CapsLock := Chr(0x2B9D)
 
-CyrllicLayouts := Map(
-	"ЙЦУКЕН", Map(),
-	"Диктор", Map(),
-	"ЙІУКЕН (1907)", Map(),
-)
 LayoutsPresets := Map(
 	"QWERTY", Map(
 		"Space", "SC039",
@@ -1000,6 +996,13 @@ LayoutsPresets := Map(
 	),
 )
 
+CyrllicLayouts := Map(
+	"ЙЦУКЕН", Map(),
+	"Диктор", Map(),
+	"ЙІУКЕН (1907)", Map(),
+)
+
+
 RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY", ForceApply := False) {
 	global DisabledAllKeys, ActiveScriptName
 
@@ -1058,13 +1061,13 @@ RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY", ForceApply := Fa
 }
 
 GetLayoutsList := []
-for layout in LayoutsPresets {
-	GetLayoutsList.Push(layout)
+for keysLayout in LayoutsPresets {
+	GetLayoutsList.Push(keysLayout)
 }
 
 CyrillicLayoutsList := []
-for layout in CyrllicLayouts {
-	CyrillicLayoutsList.Push(layout)
+for keysLayout in CyrllicLayouts {
+	CyrillicLayoutsList.Push(keysLayout)
 }
 
 ChooseKeyByLayout(Script := "Latin", KeyNames*) {
