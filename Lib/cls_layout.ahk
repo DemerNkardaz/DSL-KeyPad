@@ -240,23 +240,23 @@ Class BindHandler {
 }
 
 ; TODO Как-то реализовать сбор всех хоткеев, сравнивать скан-коды для биндов разных языков и собирать готовый HotKey() с валидным биндами на правильные скан-коды
-; TODO Сначала создать общую со всеми скан-кодами, затем, определяя текущий сканд-код, указанный в «key», добавлять в значения значение в созданной карте
-; TODO После сбора всех совпадения — регистрация HotKey с правильной функцией вставки символа в зависимости от языка
-; TODO Сначала карта заполняется сканд-кодами, а затем вставляются подходящие бинды и в конце регистрируется HotKey
+;*	Сначала создать общую со всеми скан-кодами, затем, определяя текущий сканд-код, указанный в «key», добавлять в значения значение в созданной карте
+;*	После сбора всех совпадения — регистрация HotKey с правильной функцией вставки символа в зависимости от языка
+;*	Сначала карта заполняется сканд-кодами, а затем вставляются подходящие бинды и в конце регистрируется HotKey
 
-; TODO Совпадение в случае стандартной QWERTY/ЙЦУКЕН
-; TODO Латинская «T» с запятой — на букве T, а кириллическая «Ять» — на букве Е; (с AltGr)
+;*	Совпадение в случае стандартной QWERTY/ЙЦУКЕН
+;*	Латинская «T» с запятой — на букве T, а кириллическая «Ять» — на букве Е; (с AltGr)
 
-; TODO Map("SC014", Map("<^>!", {latin: ["lat_c_let_t_comma_below", "lat_s_let_t_comma_below"], cyrillic: ["cyr_c_let_yat", "cyr_s_let_yat"]}))
-; TODO => HotKey("<^>!SC014", (K) => LangSeparatedKey(K, ["lat_c_let_a_breve", "lat_s_let_a_breve"], ["cyr_c_let_fita", "cyr_s_let_fita"], True), "On")
+;*	Map("SC014", Map("<^>!", {latin: ["lat_c_let_t_comma_below", "lat_s_let_t_comma_below"], cyrillic: ["cyr_c_let_yat", "cyr_s_let_yat"]}))
+;*	=> HotKey("<^>!SC014", (K) => LangSeparatedKey(K, ["lat_c_let_a_breve", "lat_s_let_a_breve"], ["cyr_c_let_fita", "cyr_s_let_fita"], True), "On")
 
-; TODO Совпадение в случае Colemak/Диктор
-; TODO Тот же ска-код, но другие символы: «G» с краткой и „»“ кавычка; (с AltGr)
+;*	Совпадение в случае Colemak/Диктор
+;*	Тот же ска-код, но другие символы: «G» с краткой и „»“ кавычка; (с AltGr)
 
-; TODO Map("SC014", Map("<^>!", {latin: ["lat_c_let_g_breve", "lat_s_let_g_breve"], cyrillic: ["cyr_c_let_yat", "cyr_s_let_yat"]}))
-; TODO => HotKey("<^>!SC014", (K) => LangSeparatedKey(K, ["lat_c_let_g_breve", "lat_s_let_g_breve"], "france_right", True), "On")
+;*	Map("SC014", Map("<^>!", {latin: ["lat_c_let_g_breve", "lat_s_let_g_breve"], cyrillic: ["cyr_c_let_yat", "cyr_s_let_yat"]}))
+;*	=> HotKey("<^>!SC014", (K) => LangSeparatedKey(K, ["lat_c_let_g_breve", "lat_s_let_g_breve"], "france_right", True), "On")
 
-; TODO Реализовать возможность создавать кастомные раскладки через создание .ini файлов в «Layouts\» директории
+;*	Реализовать возможность создавать кастомные раскладки через создание .ini файлов в «Layouts\» директории
 ;*	[Setup]
 ;*	Title=Тестовая раскладка
 ;*	Type=Cyrillic
@@ -264,6 +264,7 @@ Class BindHandler {
 ;*	А=SC016
 ;*	Ф=SC02C
 ;*	...
+;*	\acute{a}
 
 
 justBindConcept := Map(

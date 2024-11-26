@@ -117,7 +117,7 @@ GetUtilityFiles(ForceUpdate := False) {
 			try {
 				Download(value.Repo, value.File)
 			} catch {
-				Error(ErrMessages[GetLanguageCode()])
+				Error(ErrMessages[Language.Get()])
 			}
 		}
 	}
@@ -128,7 +128,7 @@ GetUtilityFiles(ForceUpdate := False) {
 TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 
 ReadLocale(EntryName, Prefix := "") {
-	Section := Prefix != "" ? Prefix . "_" . GetLanguageCode() : GetLanguageCode()
+	Section := Prefix != "" ? Prefix . "_" . Language.Get() : Language.Get()
 	Intermediate := IniRead(InternalFiles["Locales"].File, Section, EntryName, "")
 
 	while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
@@ -1440,7 +1440,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 		return
 	}
 
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	TermporaryArray := []
 
 	RecipesMicroController(recipeEntry) {
@@ -2598,7 +2598,7 @@ SwitchQWERTY_YITSUKEN(Script := "Latin") {
 }
 
 SwitchToScript(scriptMode) {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	Labels := {}
 	Labels[] := Map()
 	Labels["ru"] := {}
@@ -2673,7 +2673,7 @@ CallBuffer(Time := -25, Callback := "") {
 }
 
 ChangeTrayIconOnLanguage() {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	CurrentLayout := GetLayoutLocale()
 
 	if DisabledAllKeys {
@@ -2768,7 +2768,7 @@ On_WM_INPUTLANGCHANGE(wParam, lParam, msg, hwnd) {
 SetTimer(ChangeTrayIconOnLanguage, 1000)
 
 ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	CurrentLayout := GetLayoutLocale()
 	global ActiveScriptName, ConfigFile, PreviousScriptName
 	CurrentActive := ScriptName = ActiveScriptName
@@ -2880,7 +2880,7 @@ ToRomanNumeral(IntValue, CapitalLetters := True) {
 }
 
 SwitchToRoman() {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 
 	PromptValue := Cfg.Get("Roman_Numeral", "LatestPrompts")
 
@@ -3364,20 +3364,6 @@ ConvertFromHexaDecimal(StringInput) {
 	}
 }
 
-RegExEscape(str) {
-	static specialChars := "\.-*+?^${}()[]|/"
-
-	newStr := ""
-	for k, char in StrSplit(str) {
-		if InStr(specialChars, char) {
-			newStr .= "\" char
-		} else {
-			newStr .= char
-		}
-	}
-	return newStr
-}
-
 GetUnicodeString(str) {
 	unicodeArray := []
 
@@ -3426,7 +3412,7 @@ FindCharacterPage(InputCode := "", IsReturn := False) {
 		"UtilUnicode", "https://util.unicode.org/UnicodeJsps/character.jsp?a=" PromptValue,
 		"Wiktionary", "https://en.wiktionary.org/wiki/" Chr("0x" PromptValue),
 		"Wikipedia", "https://en.wikipedia.org/wiki/" Chr("0x" PromptValue),
-		"SymblCC", "https://symbl.cc/" GetLanguageCode() "/" PromptValue,
+		"SymblCC", "https://symbl.cc/" Language.Get() "/" PromptValue,
 	)
 
 	URIComponent := resources.Has(CharacterWebResource) ? resources[CharacterWebResource] : resources["SymblCC"]
@@ -3443,7 +3429,7 @@ FindCharacterPage(InputCode := "", IsReturn := False) {
 }
 
 ToggleGroupMessage() {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	global Cfg, ConfigFile
 	Cfg.SkipGroupMessage := !Cfg.SkipGroupMessage
 	Cfg.SwitchSet(["True", "False"], "SkipGroupMessage")
@@ -3464,7 +3450,7 @@ ToggleGroupMessage() {
 LocaliseArrayKeys(ObjectPath) {
 	for index, item in ObjectPath {
 		if IsObject(item[1]) {
-			item[1] := item[1][GetLanguageCode()]
+			item[1] := item[1][Language.Get()]
 		}
 	}
 }
@@ -3539,7 +3525,7 @@ Constructor() {
 	xPos := screenWidth - windowWidth - 50
 	yPos := screenHeight - windowHeight - 92
 
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 
 	DSLPadGUI := Gui()
 
@@ -4372,7 +4358,7 @@ HasPermicFont := IsFont("Noto Sans Old Permic") ? True : "Noto Sans Old Permic"
 HasHungarianFont := IsFont("Noto Sans Old Hungarian") ? True : "Noto Sans Old Hungarian"
 
 SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup, PreviewAlert := "") {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	if (EntryNameKey != "" && EntryIDKey != "") {
 		GetEntry := Characters[EntryIDKey " " EntryNameKey]
 
@@ -4714,7 +4700,7 @@ LV_MouseMove(Control, x, y) {
 }
 
 AddScriptToAutoload(*) {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	Labels := {}
 	Labels[] := Map()
 	Labels["ru"] := {}
@@ -4748,7 +4734,7 @@ CheckYITSUKEN() {
 }
 
 ToggleFastKeys() {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	global FastKeysIsActive, ActiveScriptName, ConfigFile
 	FastKeysIsActive := !FastKeysIsActive
 	IniWrite (FastKeysIsActive ? "True" : "False"), ConfigFile, "Settings", "FastKeysIsActive"
@@ -4774,7 +4760,7 @@ ToggleFastKeys() {
 }
 
 ToggleInputMode() {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 
 	ActivationMessage := {}
 	ActivationMessage[] := Map()
@@ -4848,7 +4834,6 @@ DisableAllKeys(Force := False) {
 	ManageTrayItems()
 }
 >^F10:: DisableAllKeys()
-
 
 ConvertComboKeys(Output) {
 	Patterns := [
@@ -6755,7 +6740,7 @@ RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True
 		return
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	Muting := Mute ? " Mute" : ""
 	Ico := MessageIcon == "Info" ? "Iconi" :
 		MessageIcon == "Warning" ? "Icon!" :
@@ -6776,7 +6761,7 @@ OpenScriptFolder(*) {
 	Run A_ScriptDir
 }
 ManageTrayItems() {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	Labels := Map(
 		"reload", ReadLocale("tray_func_reload"),
 		"config", ReadLocale("tray_func_config"),
@@ -6785,6 +6770,7 @@ ManageTrayItems() {
 		"custom_compose_update", ReadLocale("tray_func_custom_compose_update"),
 		"exit", ReadLocale("tray_func_exit") "`t" LeftControl RightShift "Esc",
 		"panel", ReadLocale("tray_func_panel") "`t" Window LeftAlt "Home",
+		"options", ReadLocale("gui_options"),
 		"install", ReadLocale("tray_func_install"),
 		"search", ReadLocale("tray_func_search") "`t" Window LeftAlt "F",
 		"open_folder", ReadLocale("tray_func_open_folder"),
@@ -6838,7 +6824,11 @@ ManageTrayItems() {
 	}
 	DSLTray.Add()
 	DSLTray.Add(Labels["panel"], OpenPanel)
+	DSLTray.Add(Labels["options"], (*) => Cfg.Editor())
 	DSLTray.Add()
+
+
+	DSLTray.SetIcon(Labels["options"], ImageRes, 63)
 
 	ScriptsSubMenu := Menu()
 	ScriptsSubMenu.Add(Labels["telexInput"], (*) => "")

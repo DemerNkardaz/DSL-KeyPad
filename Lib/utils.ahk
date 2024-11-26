@@ -1,4 +1,5 @@
 Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
+Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 
 _ArrayMaxIndex(this) {
 	indexes := 0
@@ -7,6 +8,35 @@ _ArrayMaxIndex(this) {
 	}
 
 	return indexes
+}
+
+RegExEscape(str) {
+	static specialChars := "\.-*+?^${}()[]|/"
+
+	newStr := ""
+	for k, char in StrSplit(str) {
+		if InStr(specialChars, char) {
+			newStr .= "\" char
+		} else {
+			newStr .= char
+		}
+	}
+	return newStr
+}
+
+_MapKeys(this) {
+	keys := []
+	for k, v in this {
+		keys.Push(k)
+	}
+	return keys
+}
+
+RegExRemove(str, toRemove*) {
+	for i, v in toRemove {
+		str := RegExReplace(str, v, "")
+	}
+	return str
 }
 
 ClipSendProcessed(callback, noSendRestore := False, isClipReverted := True, untilRevert := 300) {
@@ -33,7 +63,6 @@ ClipSendProcessed(callback, noSendRestore := False, isClipReverted := True, unti
 		SendText(copyBackup)
 	}
 }
-
 
 CodesToAHK(filePath, outputFilePath := "funcOut") {
 	fullPath := A_ScriptDir "\UtilityFiles\" filePath ".txt"
