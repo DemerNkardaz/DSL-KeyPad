@@ -13,8 +13,10 @@ Class Cfg {
 			"User_Language", "",
 			"F13F24", "False",
 		],
+		"Compose", [],
 		"ScriptProcessor", [
 			"Advanced_Mode", "False",
+			"Auto_Diacritics", "True",
 		],
 		"TemperatureCalc", [
 			"Dedicated_Unicode_Chars", "True",

@@ -1,13 +1,16 @@
 Class Ligaturiser {
 
+	static modifiedCharsType := ""
+	static prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
+
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
-		this.modifiedCharsType := GetModifiedCharsType()
 
-		this.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
+		Ligaturiser.modifiedCharsType := GetModifiedCharsType()
+		Ligaturiser.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
 
+		Ligaturiser.%this.compositingMode%Mode()
 		try {
-			this.%this.compositingMode%Mode()
 		} catch {
 			if this.compositingMode = "InputBox"
 				MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
@@ -16,7 +19,7 @@ Class Ligaturiser {
 		}
 	}
 
-	InputBoxMode() {
+	static InputBoxMode() {
 		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", this.prompt)
 		if IB.Result = "Cancel"
 			return
@@ -45,7 +48,7 @@ Class Ligaturiser {
 		return
 	}
 
-	ComposeMode() {
+	static ComposeMode() {
 
 		output := ""
 		input := ""
@@ -129,17 +132,18 @@ Class Ligaturiser {
 			SetTimer(Tooltip, -500)
 			this.SendOutput(RegExReplace(output, "#", ""))
 		}
+
 		return
 	}
 
-	SendOutput(output) {
+	static SendOutput(output) {
 		if StrLen(output) > 36
 			ClipSend(output)
 		else
 			SendText(output)
 	}
 
-	EntriesWalk(prompt, getSuggestions := False, breakSkip := False) {
+	static EntriesWalk(prompt, getSuggestions := False, breakSkip := False, restrictClasses := []) {
 		promptBackup := prompt
 		output := ""
 
@@ -168,11 +172,16 @@ Class Ligaturiser {
 
 		if breakValidate && !breakSkip
 			return "N/A"
-
 		for characterEntry, value in Characters {
-			if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+			notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
+			notInRestrictClass := restrictClasses.Length > 0 && (!HasProp(value, "symbolClass") || !(restrictClasses.Contains(value.symbolClass)))
+
+			if notInRestrictClass {
+				continue
+			} else if notHasRecipe {
 				continue
 			} else {
+
 				recipe := value.recipe
 
 				if IsObject(recipe) {
@@ -206,7 +215,12 @@ Class Ligaturiser {
 		if !charFound {
 			IntermediateValue := prompt
 			for characterEntry, value in Characters {
-				if !HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == "") {
+				notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
+				notInRestrictClass := restrictClasses.Length > 0 && (!HasProp(value, "symbolClass") || !(restrictClasses.Contains(value.symbolClass)))
+
+				if notInRestrictClass {
+					continue
+				} else if notHasRecipe {
 					continue
 				} else {
 					recipe := value.recipe
@@ -234,7 +248,7 @@ Class Ligaturiser {
 		return output
 	}
 
-	ReadFavorites() {
+	static ReadFavorites() {
 		output := ""
 
 		getList := FavoriteChars.ReadList()
@@ -302,11 +316,11 @@ Class Ligaturiser {
 	}
 
 
-	FormatSingleString(str, maxLength := 32) {
+	static FormatSingleString(str, maxLength := 32) {
 		return StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ]" : str
 	}
 
-	GetRecipesString(value) {
+	static GetRecipesString(value) {
 		output := ""
 
 		recipe := HasProp(value, "recipeAlt") ? value.recipeAlt : value.recipe
@@ -327,7 +341,7 @@ Class Ligaturiser {
 		return output
 	}
 
-	GetComparedChar(value) {
+	static GetComparedChar(value) {
 		output := ""
 		if InputMode = "HTML" && HasProp(value, "html") {
 			output :=
@@ -343,7 +357,7 @@ Class Ligaturiser {
 		return output
 	}
 
-	GetUniChar(value, forceDefault := False) {
+	static GetUniChar(value, forceDefault := False) {
 		output := ""
 		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType "Form") && !forceDefault {
 			if IsObject(value.%this.modifiedCharsType%Form) {

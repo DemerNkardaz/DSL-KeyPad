@@ -2,6 +2,7 @@ Class InputScriptProcessor {
 
 	static options := {
 		interceptionInputMode: "",
+		autoDiacritics: Cfg.Get("Auto_Diacritics", "ScriptProcessor", True, "bool")
 	}
 
 
@@ -711,6 +712,8 @@ Class InputScriptProcessor {
 	}
 
 	__New(mode := "vietNam", reloadHs := False) {
+		InputScriptProcessor.autoDiacritics := Cfg.Get("Auto_Diacritics", "ScriptProcessor", True, "bool")
+
 		this.mode := mode
 		this.previousMode := InputScriptProcessor.options.interceptionInputMode
 		this.RegistryHotstrings(reloadHs)
@@ -748,27 +751,49 @@ Class InputScriptProcessor {
 				IPS.inputLogger := inputCut(IPS.inputLogger)
 
 				;try {
-				for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
-					if !Cfg.Get("Advanced_Mode", "ScriptProcessor", False, "bool") && subMap = "Advanced"
-						continue
+				if IPS.options.interceptionInputMode != "autoDiacritics" {
+					for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
+						if !Cfg.Get("Advanced_Mode", "ScriptProcessor", False, "bool") && subMap = "Advanced"
+							continue
 
-					IPS.EntriesComparator(IPS.inputLogger, entries, &foundKey, &foundValue)
+						IPS.EntriesComparator(IPS.inputLogger, entries, &foundKey, &foundValue)
 
-					if IsSet(foundKey) {
-						try {
-							IPS.backspaceLock := True
+						if IsSet(foundKey) {
+							try {
+								IPS.backspaceLock := True
 
-							Loop StrLen(foundKey) - (InStr(foundKey, "\") ? 1 : 0) {
-								Send("{Backspace}")
+								Loop StrLen(foundKey) - (InStr(foundKey, "\") ? 1 : 0) {
+									Send("{Backspace}")
+								}
+
+								SendText(foundValue)
+								IPS.InH.Stop()
+								IPS.inputLogger := foundValue
+								IPS.InH.Start()
+								IPS.backspaceLock := False
+								break
 							}
-
-							SendText(foundValue)
-							IPS.InH.Stop()
-							IPS.inputLogger := foundValue
-							IPS.InH.Start()
-							IPS.backspaceLock := False
-							break
 						}
+					}
+				}
+
+				if IPS.autoDiacritics || IPS.options.interceptionInputMode = "autoDiacritics" {
+					intermediateValue := StrLen(IPS.inputLogger) > 1 ? SubStr(IPS.inputLogger, -2, 2) : IPS.inputLogger
+					setAutoDiacritic := Ligaturiser.EntriesWalk(intermediateValue, , True, ["Latin Accented", "Latin Ligature Accented", "Cyrillic Accented", "Diacritic Mark"])
+
+					if setAutoDiacritic != "" && setAutoDiacritic != "N/A" {
+						IPS.backspaceLock := True
+
+						Loop StrLen(intermediateValue) {
+							Send("{Backspace}")
+						}
+
+						SendText(setAutoDiacritic)
+						IPS.InH.Stop()
+						IPS.inputLogger := setAutoDiacritic
+						IPS.InH.Start()
+						IPS.backspaceLock := False
+
 					}
 				}
 				;}

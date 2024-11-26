@@ -2,6 +2,7 @@
 
 Array.Prototype.DefineProp("ToString", { Call: _ArrayToString })
 Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
+Array.Prototype.DefineProp("Contains", { Call: _ArrayContains })
 
 _ArrayToString(this, char := ", ") {
 	for index, value in this {
@@ -17,6 +18,14 @@ _ArrayToString(this, char := ", ") {
 _ArrayHasValue(this, valueToFind) {
 	for index, value in this {
 		if value = valueToFind
+			return true
+	}
+	return false
+}
+
+_ArrayContains(this, valueToFind) {
+	for index, value in this {
+		if value == valueToFind
 			return true
 	}
 	return false
