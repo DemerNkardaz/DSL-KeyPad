@@ -4362,6 +4362,10 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 	if (EntryNameKey != "" && EntryIDKey != "") {
 		GetEntry := Characters[EntryIDKey " " EntryNameKey]
 
+		if !HasProp(GetEntry, "symbol") {
+			return
+		}
+
 		characterTitle := ""
 		if (HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True && !InStr(ReadLocale(EntryNameKey "_alt", "chars"), "NOT FOUND")) {
 			characterTitle := ReadLocale(EntryNameKey . "_alt", "chars")

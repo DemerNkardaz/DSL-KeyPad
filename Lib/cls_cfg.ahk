@@ -74,7 +74,8 @@ Class Cfg {
 			defaultSizes := { groupBoxW: 420, groupBoxX: (windowWidth - 420) / 2 }
 
 			optionsCommonY := 10
-			optionsCommon := (h := 300, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
+			optionsCommonH := 200
+			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
 
 			optionsPanel.AddGroupBox("vGroupCommon " optionsCommon(), ReadLocale("gui_options_common"))
 
@@ -82,42 +83,51 @@ Class Cfg {
 				"en", "English",
 				"ru", "Русский",
 			)
-			languageSelectorY := optionsCommonY + 25
-			languageSelectorX := 25
-			languageSelectorTextY := languageSelectorY + 4
-			languageSelectorTextX := languageSelectorX + 80
+			languageSelectorY := (add := 0) => optionsCommonY + 25 + add
+			languageSelectorX := (add := 0) => 25 + add
 
-			optionsPanel.AddText("vLanguageLabel x" languageSelectorTextX " y" languageSelectorTextY " w80", ReadLocale("gui_options_language"))
+			optionsPanel.AddText("vLanguageLabel x" languageSelectorX(80) " y" languageSelectorY(4) " w80 BackgroundTrans", ReadLocale("gui_options_language"))
 
-			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX " w74 y" languageSelectorY, [optionsLanguages["en"], optionsLanguages["ru"]])
+			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w74 y" languageSelectorY(), [optionsLanguages["en"], optionsLanguages["ru"]])
 			PostMessage(0x0153, -1, 15, languageSelector)
 
 			languageSelector.Text := optionsLanguages[Language.Get()]
 			languageSelector.OnEvent("Change", (CB, Zero) => Options.SwitchLanguage(CB))
 
+			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), ReadLocale("gui_options_updates"))
+
+			if UpdateAvailable {
+
+			} else {
+
+				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", ReadLocale("update_absent"))
+			}
 
 			optionsPanel.AddGroupBox(optionsCommon(55, (windowHeight - 65)))
 
 			iniFilesY := windowHeight - 50
 			iniFilesX := (add := 0) => 25 + add
 
-			configFileBtn := optionsPanel.Add("Button", "x" iniFilesX() " y" iniFilesY " w32 h32")
+			configFileBtn := optionsPanel.AddButton("x" iniFilesX() " y" iniFilesY " w32 h32")
 			configFileBtn.OnEvent("Click", (*) => OpenConfigFile())
 			GuiButtonIcon(configFileBtn, ImageRes, 065)
 
-			localesFileBtn := optionsPanel.Add("Button", "x" iniFilesX(32) " y" iniFilesY " w32 h32")
+			localesFileBtn := optionsPanel.AddButton("x" iniFilesX(32) " y" iniFilesY " w32 h32")
 			localesFileBtn.OnEvent("Click", (*) => OpenLocalesFile())
 			GuiButtonIcon(localesFileBtn, ImageRes, 015)
+
+			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", ReadLocale("autoload_add"))
+			autoloadBtn.OnEvent("Click", AddScriptToAutoload)
 
 			optionsPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return optionsPanel
 		}
 
-		this.EditorGUI := Constructor()
 
 		if IsGuiOpen(this.optionsTitle) {
 			WinActivate(this.optionsTitle)
 		} else {
+			this.EditorGUI := Constructor()
 			this.EditorGUI.Show()
 		}
 	}
@@ -258,7 +268,14 @@ Class Options {
 		if IsGuiOpen(pastOptionsTitle) {
 			Cfg.EditorGUI.Title := Cfg.optionsTitle
 			Cfg.EditorGUI["GroupCommon"].Text := ReadLocale("gui_options_common")
+			Cfg.EditorGUI["GroupUpdates"].Text := ReadLocale("gui_options_updates")
+
 			Cfg.EditorGUI["LanguageLabel"].Text := ReadLocale("gui_options_language")
+			Cfg.EditorGUI["Autoload"].Text := ReadLocale("autoload_add")
+
+			try {
+				Cfg.EditorGUI["UpdateAbsent"].Text := ReadLocale("update_absent")
+			}
 		}
 		ManageTrayItems()
 	}
