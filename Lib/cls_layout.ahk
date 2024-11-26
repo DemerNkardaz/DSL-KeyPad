@@ -251,10 +251,20 @@ Class BindHandler {
 ; TODO => HotKey("<^>!SC014", (K) => LangSeparatedKey(K, ["lat_c_let_a_breve", "lat_s_let_a_breve"], ["cyr_c_let_fita", "cyr_s_let_fita"], True), "On")
 
 ; TODO Совпадение в случае Colemak/Диктор
-; TODO Тот же ска-код, но другие символы: «G» с краткой и „»“ кавычка
+; TODO Тот же ска-код, но другие символы: «G» с краткой и „»“ кавычка; (с AltGr)
 
 ; TODO Map("SC014", Map("<^>!", {latin: ["lat_c_let_g_breve", "lat_s_let_g_breve"], cyrillic: ["cyr_c_let_yat", "cyr_s_let_yat"]}))
 ; TODO => HotKey("<^>!SC014", (K) => LangSeparatedKey(K, ["lat_c_let_g_breve", "lat_s_let_g_breve"], "france_right", True), "On")
+
+; TODO Реализовать возможность создавать кастомные раскладки через создание .ini файлов в «Layouts\» директории
+;*	[Setup]
+;*	Title=Тестовая раскладка
+;*	Type=Cyrillic
+;*	[Keys]
+;*	А=SC016
+;*	Ф=SC02C
+;*	...
+
 
 justBindConcept := Map(
 	;
