@@ -77,22 +77,33 @@ Class Cfg {
 			optionsCommonH := 200
 			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
 
-			optionsPanel.AddGroupBox("vGroupCommon " optionsCommon(), ReadLocale("gui_options_common"))
+			optionsPanel.AddGroupBox("vGroupCommon " optionsCommon())
 
 			optionsLanguages := Map(
 				"en", "English",
 				"ru", "Русский",
 			)
-			languageSelectorY := (add := 0) => optionsCommonY + 25 + add
+			languageSelectorY := (add := 0) => optionsCommonY + 30 + add
 			languageSelectorX := (add := 0) => 25 + add
 
-			optionsPanel.AddText("vLanguageLabel x" languageSelectorX(80) " y" languageSelectorY(4) " w80 BackgroundTrans", ReadLocale("gui_options_language"))
+			optionsPanel.AddText("vLanguageLabel x" languageSelectorX() " y" languageSelectorY(-17) " w80 BackgroundTrans", ReadLocale("gui_options_language"))
 
-			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w74 y" languageSelectorY(), [optionsLanguages["en"], optionsLanguages["ru"]])
+			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w80 y" languageSelectorY(), [optionsLanguages["en"], optionsLanguages["ru"]])
 			PostMessage(0x0153, -1, 15, languageSelector)
 
 			languageSelector.Text := optionsLanguages[Language.Get()]
 			languageSelector.OnEvent("Change", (CB, Zero) => Options.SwitchLanguage(CB))
+
+			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w80 y" languageSelectorY(23), GetLayoutsList)
+			PostMessage(0x0153, -1, 15, layoutLatinSelector)
+			layoutLatinSelector.Text := Cfg.Get("Layout_Latin")
+			layoutLatinSelector.OnEvent("Change", (CB, Zero) => Options.SwitchVirualLayout(CB, "Latin"))
+
+			layoutCyrillicSelector := optionsPanel.AddDropDownList("vCyrillicLayout x" languageSelectorX() " w80 y" languageSelectorY(23 * 2), CyrillicLayoutsList)
+			PostMessage(0x0153, -1, 15, layoutCyrillicSelector)
+			layoutCyrillicSelector.Text := Cfg.Get("Layout_Cyrillic")
+			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => Options.SwitchVirualLayout(CB, "Cyrillic"))
+
 
 			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), ReadLocale("gui_options_updates"))
 
@@ -249,14 +260,14 @@ Class Cfg {
 
 
 Class Options {
-	static SwitchLanguage(language) {
+	static SwitchLanguage(CB) {
 		locales := Map(
 			"en", ["English", "Английский"],
 			"ru", ["Russian", "Русский"],
 		)
 
 		for key, value in locales {
-			if value.HasValue(language.Text) || key = language.Text {
+			if value.HasValue(CB.Text) || key = CB.Text {
 				Cfg.Set(key, "User_Language")
 				break
 			}
@@ -267,7 +278,6 @@ Class Options {
 
 		if IsGuiOpen(pastOptionsTitle) {
 			Cfg.EditorGUI.Title := Cfg.optionsTitle
-			Cfg.EditorGUI["GroupCommon"].Text := ReadLocale("gui_options_common")
 			Cfg.EditorGUI["GroupUpdates"].Text := ReadLocale("gui_options_updates")
 
 			Cfg.EditorGUI["LanguageLabel"].Text := ReadLocale("gui_options_language")
@@ -278,6 +288,14 @@ Class Options {
 			}
 		}
 		ManageTrayItems()
+	}
+
+	static SwitchVirualLayout(CB, category) {
+		if category = "Cyrillic" {
+			Cfg.Set(CB.Text, "Layout_Cyrillic")
+		} else if category = "Latin" {
+			Cfg.Set(CB.Text, "Layout_Latin")
+		}
 	}
 }
 
