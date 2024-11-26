@@ -863,7 +863,8 @@ Class InputScriptProcessor {
 
 		if StrLen(IPS.inputLogger) > 0 && sc = backspaceCode && !InputScriptProcessor.backspaceLock {
 			IPS.inputLogger := SubStr(IPS.inputLogger, 1, -1)
-			CaretTooltip(IPS.inputLogger)
+			if IPS.options.interceptionInputMode != "autoDiacritics"
+				CaretTooltip(IPS.inputLogger)
 		}
 
 		return
@@ -882,12 +883,14 @@ Class InputScriptProcessor {
 	static TelexReturn(input) {
 		output := input
 
-		for key, value in this.scriptSequences.%this.options.interceptionInputMode% {
-			isValid := input == key || InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3)))
-			if isValid {
-				getValue := input == key ? value : key
-				output := getValue
-				break
+		if this.options.interceptionInputMode != "autoDiacritics" {
+			for key, value in this.scriptSequences.%this.options.interceptionInputMode% {
+				isValid := input == key || InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3)))
+				if isValid {
+					getValue := input == key ? value : key
+					output := getValue
+					break
+				}
 			}
 		}
 		return output
