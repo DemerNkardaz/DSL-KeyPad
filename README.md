@@ -46,13 +46,6 @@ Note: use it on pair QWERTY‐ЙЦУКЕН of English & Russian layouts, compa
   - In text, by placing the caret cursor after the recipe, <kbd>RShift Backspace</kbd>.
   - In “Compose” mode — allows you to "fuse" characters during typing, <kbd>RAlt×2</kbd>. It immediately inserts the first exact match for the entered sequence. There is an option to enable/disable waiting with <kbd>PauseBreak</kbd> (as some recipes start the same way), so “Compose” will not immediately insert the first match.
 
-$$
-
-\acute{a}
-
-
-$$
-
 ## Alternative Layouts
 
 <kbd>RCtrl 1</kbd> switches input from Russian/English to Glagolitic/Germanic‐Norse, Anglo‐Saxon runes. Pressing <kbd>А</kbd><kbd>Б</kbd> or <kbd>RAlt Ф</kbd>, for example, will input Ⰰ, Ⰱ, or Ⱚ, while pressing <kbd>A</kbd>, <kbd>W</kbd>, <kbd>F</kbd> will input ᚨ, ᚹ, ᚠ.
