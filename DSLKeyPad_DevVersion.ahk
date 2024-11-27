@@ -11,6 +11,7 @@
 #Include <chr_alt_codes>
 #Include <chr_entities>
 #Include <cls_layout>
+#Include <cls_my_recipes>
 #Include <supplement_pshell>
 #Include <supplement_python>
 

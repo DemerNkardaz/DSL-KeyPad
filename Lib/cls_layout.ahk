@@ -264,7 +264,6 @@ Class BindHandler {
 ;*	А=SC016
 ;*	Ф=SC02C
 ;*	...
-;*	\acute{a}
 
 
 justBindConcept := Map(

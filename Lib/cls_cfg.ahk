@@ -191,8 +191,23 @@ Class Cfg {
 			defaultSizes := { groupBoxW: 420, groupBoxX: (windowWidth - 420) / 2 }
 
 			optionsCommonY := 10
-			optionsCommonH := 200
+			optionsCommonH := 370
 			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
+
+			listViewCols := [ReadLocale("col_name"), ReadLocale("col_recipe"), ReadLocale("col_result"), ReadLocale("col_entry_title")]
+
+			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " +NoSort -Multi"
+			recipesLV := recipesPanel.AddListView("vRecipes " recipesLVStyles, listViewCols)
+			recipesLV.ModifyCol(1, 158)
+			recipesLV.ModifyCol(2, 98)
+			recipesLV.ModifyCol(3, 158)
+			recipesLV.ModifyCol(4, 0)
+
+			recipesArray := MyRecipes.Read()
+
+			for recipeEntry in recipesArray {
+				recipesLV.Add(, recipeEntry.name, RegExReplace(recipeEntry.recipe, "\|", ", "), recipeEntry.result, recipeEntry.section)
+			}
 
 			recipesPanel.AddGroupBox(optionsCommon(55, (windowHeight - 65)))
 
