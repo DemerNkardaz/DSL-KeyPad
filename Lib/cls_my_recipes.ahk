@@ -1,10 +1,43 @@
 Class MyRecipes {
 
-	static file := App.paths.dir "\CustomCompose.ini"
+	static file := App.paths.user "\CustomCompose.ini"
 	static editorTitle := App.winTitle " — " ReadLocale("gui_recipes_create")
+
+	static defaulRecipes := [
+		"kanji_yoshi", {
+			name: "Символ кандзи «Ёси»",
+			recipe: "ёси|yoshi",
+			result: Chr(0x7FA9),
+		},
+		"html_template", {
+			name: "HTML Template",
+			recipe: "html",
+			result: '<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<meta charset="UTF-8">\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t\t\n\t\t<meta name="date" content="">\n\t\t<meta name="subject" content="">\n\t\t<meta name="rating" content="">\n\t\t<meta name="theme-color" content="">\n\n\t\t<base href="/" />\n\n\t\t<meta name="referrer" content="origin">\n\t\t<meta name="referrer" content="origin-when-cross-origin">\n\t\t<meta name="referrer" content="no-referrer-when-downgrade">\n\n\t\t<meta property="og:type" content="website">\n\t\t<meta property="og:title" content=">\n\t\t<meta property="og:url" content="">\n\t\t<meta property="og:description" content="">\n\t\t<meta property="og:image" content="">\n\t\t<meta property="og:locale" content="">\n\n\t\t<meta name="twitter:card" content="summary_large_image">\n\t\t<meta property="twitter:domain" content="">\n\t\t<meta property="twitter:url" content="">\n\t\t<meta name="twitter:title" content="">\n\t\t<meta name="twitter:description" content="">\n\t\t<meta name="twitter:image" content="">\n\t\t<meta name="twitter:creator" content="">\n\n\t\t<meta http-equiv="Cache-Control" content="public">\n\t\t<meta http-equiv="X-UA-Compatible" content="ie=edge">\n\t\t<meta name="renderer" content="webkit|ie-comp|ie-stand">\n\t\t<meta name="author" content="">\n\t\t<meta content=">" name="description">\n\t\t<link rel="manifest" href="/manifest.webmanifest">\n\n\t\t<title>Index</title>\n\t\n\t\t<link rel="icon" href="/favicon.ico" type="image/x-icon">\n\t\t<link rel="stylesheet" href="/index.css" />\n\n\t\t<meta name="robots" content="index, follow">\n\t\t<meta name="revisit-after" content="7 days">\n\n\t\t<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="use-credentials">\n\t\t<link rel="preconnect" href="https://fonts.gstatic.com">\n\t</head>\n\t<body>\n\t\t<main>\n\t\t\n\t\t</main>\n\t\t<script src="/index.js"></script>\n\t</body>\n</html>',
+		},
+		"kbd", {
+			name: "Keyboard Input Tag",
+			recipe: "kbd",
+			result: "<kbd></kbd>",
+		},
+		"emoji_ice", {
+			name: "Ice",
+			recipe: "лёд|ice",
+			result: Chr(0x1F9CA),
+		},
+	]
 
 	static __New() {
 
+		if !FileExist(MyRecipes.file) {
+			for i, key in this.defaulRecipes {
+				if Mod(i, 2) == 1 {
+					value := this.defaulRecipes[i + 1]
+					this.AddEdit(key, { name: value.name, recipe: value.recipe, result: value.result })
+				}
+			}
+		}
+
+		SetTimer((*) => this.UpdateMap(), -5000)
 	}
 
 	static EditorGUI := Gui()
@@ -53,7 +86,7 @@ Class MyRecipes {
 			recipeEdit := recipeCreator.AddEdit("vRecipeEdit x" commonX() " y" commonY(110 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).recipe : "")
 
 			resultLabel := recipeCreator.AddText("vResultLabel x" commonX() " y" commonY(110 + 55) " w150 BackgroundTrans", ReadLocale("gui_recipes_create_result"))
-			resultEdit := recipeCreator.AddEdit("vResultEdit x" commonX() " y" commonY((110 + 55) + 20) " w250 h150 Multi", sectionName.Length > 0 ? RegExReplace(MyRecipes.Get(sectionName[4]).result, "\\n", "`n") : "")
+			resultEdit := recipeCreator.AddEdit("vResultEdit x" commonX() " y" commonY((110 + 55) + 20) " w250 h150 Multi", sectionName.Length > 0 ? this.FormatResult(MyRecipes.Get(sectionName[4]).result, True) : "")
 
 			if sectionName.Length > 0 {
 				data.section := sectionName[4]
@@ -95,6 +128,7 @@ Class MyRecipes {
 					}
 
 					this.AddEdit(data.section, data)
+					this.UpdateMap()
 				}
 			}
 		}
@@ -107,10 +141,15 @@ Class MyRecipes {
 		}
 	}
 
-	static FormatResult(result) {
-		result := StrReplace(result, "`r`n", "\n")
-		result := StrReplace(result, "`n", "\n")
-		result := StrReplace(result, "`t", " ")
+	static FormatResult(result, revert := False) {
+		if revert {
+			result := StrReplace(result, "\n", "`n")
+			result := StrReplace(result, "\t", "`t")
+		} else {
+			result := StrReplace(result, "`r`n", "\n")
+			result := StrReplace(result, "`n", "\n")
+			result := StrReplace(result, "`t", "\t")
+		}
 		return result
 	}
 
@@ -120,7 +159,6 @@ Class MyRecipes {
 		IniWrite(params.name, this.file, sectionName, "name")
 		IniWrite(params.recipe, this.file, sectionName, "recipe")
 		IniWrite(params.result, this.file, sectionName, "result")
-		UpdateCustomRecipes()
 		return
 	}
 
@@ -145,6 +183,7 @@ Class MyRecipes {
 	}
 
 	static Remove(sectionName) {
+		global Characters
 		filePath := this.file
 		content := FileRead(filePath, "UTF-16")
 
@@ -163,7 +202,12 @@ Class MyRecipes {
 		FileDelete(filePath)
 		FileAppend(newContent, filePath, "UTF-16")
 
-		UpdateCustomRecipes()
+		characterEntry := GetCharacterEntry(sectionName, True)
+
+		if characterEntry {
+			Characters.Delete(characterEntry)
+		}
+
 		return True
 	}
 
@@ -204,6 +248,61 @@ Class MyRecipes {
 		}
 
 		return output
+	}
+
+	static UpdateMap() {
+		global Characters, CharactersCount
+
+		recipeSections := this.Read()
+		try {
+			for section in recipeSections {
+				if InStr(section.recipe, "|") {
+					section.recipe := StrSplit(section.recipe, "|")
+				}
+
+				section.result := this.FormatResult(section.result, True)
+
+				resultToUnicode := []
+				i := 1
+				while (i <= StrLen(section.result)) {
+					char := SubStr(section.result, i, 1)
+					code := Ord(char)
+
+					if (code >= 0xD800 && code <= 0xDBFF) {
+						nextChar := SubStr(section.result, i + 1, 1)
+						char .= nextChar
+						i += 1
+					}
+
+					resultToUnicode.Push("{U+" GetCharacterUnicode(char) "}")
+					i += 1
+				}
+
+				characterEntry := GetCharacterEntry(section.section, True)
+
+				if characterEntry {
+					Characters[characterEntry].unicode = resultToUnicode[1]
+					Characters[characterEntry].uniSequence = resultToUnicode
+					Characters[characterEntry].recipe = section.recipe
+					Characters[characterEntry].titles = Map("ru", section.name, "en", section.name)
+
+				} else {
+					MapInsert(Characters,
+						section.section, {
+							unicode: resultToUnicode[1],
+							uniSequence: resultToUnicode,
+							titles: Map("ru", section.name, "en", section.name),
+							recipe: section.recipe,
+							group: ["Custom Composes"],
+						},
+					)
+				}
+			}
+		} finally {
+			CharactersCount := GetCountDifference()
+			ProcessMapAfter("Custom Composes")
+			UpdateRecipeValidator()
+		}
 	}
 
 }

@@ -188,9 +188,6 @@ OpenLocalesFile(*) {
 	Run(InternalFiles["Locales"].File)
 }
 
-OpenRecipesFile(*) {
-	Run(CustomComposeFile)
-}
 
 EscapePressed := False
 
@@ -1584,105 +1581,6 @@ GetCountDifference() {
 		Output := StaticCount " +" (CurrentCount - StaticCount) " " ReadLocale("with_my_recipes")
 	}
 	return Output
-}
-
-CustomComposeFile := WorkingDir "\CustomCompose.ini"
-if !FileExist(CustomComposeFile) {
-	IniWrite("Символ кандзи «Ёси»", CustomComposeFile, "kanji_yoshi", "name")
-	IniWrite("ёси|yoshi", CustomComposeFile, "kanji_yoshi", "recipe")
-	IniWrite(Chr(0x7FA9), CustomComposeFile, "kanji_yoshi", "result")
-}
-
-FillWithCustomRecipes() {
-	global Characters, CharactersCount
-	try {
-		ComposesFile := FileRead(CustomComposeFile, "UTF-8")
-		Sections := []
-
-		for line in StrSplit(ComposesFile, "`n") {
-			if RegExMatch(line, "^\[(.*)\]$", &match) {
-				Sections.Push(match[1])
-			}
-		}
-
-		for section in Sections {
-			try {
-				RecipeTitle := IniRead(CustomComposeFile, section, "name")
-				Recipe := IniRead(CustomComposeFile, section, "recipe")
-				RecipeResult := IniRead(CustomComposeFile, section, "result")
-
-
-				if InStr(Recipe, "|") {
-					Recipe := StrSplit(Recipe, "|")
-				}
-
-				Escapes := ["\n", "`n", "\r", "`r", "\t", "`t"]
-				for i, replaces in Escapes {
-					if Mod(i, 2) = 1 {
-						RecipeResult := StrReplace(RecipeResult, replaces, Escapes[i + 1])
-					}
-				}
-
-
-				RefinedResult := []
-				i := 1
-				while (i <= StrLen(RecipeResult)) {
-					char := SubStr(RecipeResult, i, 1)
-					code := Ord(char)
-
-					if (code >= 0xD800 && code <= 0xDBFF) {
-						nextChar := SubStr(RecipeResult, i + 1, 1)
-						char .= nextChar
-						i += 1
-					}
-
-					RefinedResult.Push("{U+" GetCharacterUnicode(char) "}")
-					i += 1
-				}
-
-				MapInsert(Characters,
-					section, {
-						unicode: RefinedResult[1],
-						uniSequence: RefinedResult,
-						titles: Map("ru", RecipeTitle, "en", RecipeTitle),
-						recipe: Recipe,
-						group: ["Custom Composes"],
-					}
-				)
-			} catch {
-				MsgBox()
-				continue
-			}
-		}
-		CharactersCount := GetCountDifference()
-	} catch {
-		return
-	}
-}
-
-
-FillWithCustomRecipes()
-
-UpdateCustomRecipes(*) {
-	global Characters
-	toDelete := []
-
-	try {
-		for characterEntry, value in Characters {
-			if HasProp(value, "group") && value.group[1] = "Custom Composes" {
-				toDelete.Push(characterEntry)
-			}
-		}
-
-		for key in toDelete {
-			Characters.Delete(key)
-		}
-
-	} finally {
-		FillWithCustomRecipes()
-		ProcessMapAfter("Custom Composes")
-		UpdateRecipeValidator()
-	}
 }
 
 
@@ -4894,7 +4792,7 @@ HandleFastKey(combo := "", characterNames*) {
 	return
 }
 
-GetCharacterEntry(CharacterName) {
+GetCharacterEntry(characterName, linkOnly := False) {
 	for characterEntry, value in Characters {
 		entryID := ""
 		entryName := ""
@@ -4902,11 +4800,13 @@ GetCharacterEntry(CharacterName) {
 			entryID := match[1]
 			entryName := match[2]
 
-			if entryName == CharacterName {
-				return value
+			if entryName == characterName {
+				return linkOnly ? entryID " " entryName : value
 			}
 		}
 	}
+
+	return False
 }
 
 GetCharacterSequence(CharacterName) {

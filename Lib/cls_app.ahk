@@ -14,6 +14,7 @@ Class App {
 		dir: A_ScriptDir,
 		lib: A_ScriptDir "\Lib",
 		ufile: A_ScriptDir "\UtilityFiles",
+		user: A_ScriptDir "\User",
 		temp: A_Temp "\DSLKeyPad",
 	}
 
@@ -43,8 +44,10 @@ Class App {
 	}
 
 	static Init() {
-		if !DirExist(this.paths.temp)
-			DirCreate(this.paths.temp)
+		for dir in ["lib", "ufile", "user", "temp"] {
+			if !DirExist(this.paths.%dir%)
+				DirCreate(this.paths.%dir%)
+		}
 
 	}
 
