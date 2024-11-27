@@ -126,19 +126,32 @@ Class Cfg {
 			optionsPanel.AddGroupBox(optionsCommon(55, (windowHeight - 65)))
 
 			iniFilesY := windowHeight - 50
-			iniFilesX := (add := 0) => 25 + add
+			iniFilesX := (add := 0, reverse := False) => reverse ? (defaultSizes.groupBoxW - 27 - add) : (25 + add)
 
-			configFileBtn := optionsPanel.AddButton("x" iniFilesX() " y" iniFilesY " w32 h32")
+			recipesPanelBtn := optionsPanel.AddButton("x" iniFilesX() " y" iniFilesY " w32 h32")
+			recipesPanelBtn.OnEvent("Click", (*) => OpenRecipesPanel())
+			GuiButtonIcon(recipesPanelBtn, ImageRes, 188)
+
+			configFileBtn := optionsPanel.AddButton("x" iniFilesX(32) " y" iniFilesY " w32 h32")
 			configFileBtn.OnEvent("Click", (*) => OpenConfigFile())
 			GuiButtonIcon(configFileBtn, ImageRes, 065)
 
-			localesFileBtn := optionsPanel.AddButton("x" iniFilesX(32) " y" iniFilesY " w32 h32")
+			localesFileBtn := optionsPanel.AddButton("x" iniFilesX(32 * 2) " y" iniFilesY " w32 h32")
 			localesFileBtn.OnEvent("Click", (*) => OpenLocalesFile())
 			GuiButtonIcon(localesFileBtn, ImageRes, 015)
 
-			recipesPanelBtn := optionsPanel.AddButton("x" iniFilesX(32 * 2) " y" iniFilesY " w32 h32")
-			recipesPanelBtn.OnEvent("Click", (*) => OpenRecipesPanel())
-			GuiButtonIcon(recipesPanelBtn, ImageRes, 188)
+
+			openFolderBtn := optionsPanel.AddButton("x" iniFilesX(, True) " y" iniFilesY " w32 h32")
+			openFolderBtn.OnEvent("Click", (*) => Run(A_ScriptDir))
+			GuiButtonIcon(openFolderBtn, ImageRes, 180)
+
+
+			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", ReadLocale("autoload_add"))
+			autoloadBtn.OnEvent("Click", AddScriptToAutoload)
+
+			optionsPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
+			return optionsPanel
+
 
 			OpenRecipesPanel() {
 				if IsGuiOpen(this.EditorSubGUIs.recipesTitle) {
@@ -148,12 +161,6 @@ Class Cfg {
 					this.EditorSubGUIs.recipes.Show()
 				}
 			}
-
-			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", ReadLocale("autoload_add"))
-			autoloadBtn.OnEvent("Click", AddScriptToAutoload)
-
-			optionsPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
-			return optionsPanel
 		}
 
 
@@ -199,12 +206,13 @@ Class Cfg {
 			listViewCols := [ReadLocale("col_name"), ReadLocale("col_recipe"), ReadLocale("col_result"), ReadLocale("col_entry_title")]
 
 			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " +NoSort -Multi"
-			recipesLV := recipesPanel.AddListView("vRecipes " recipesLVStyles, listViewCols)
+			recipesLV := recipesPanel.AddListView(recipesLVStyles, listViewCols)
 			recipesLV.ModifyCol(1, 158)
 			recipesLV.ModifyCol(2, 98)
 			recipesLV.ModifyCol(3, 158)
 			recipesLV.ModifyCol(4, 0)
 			recipesLV.OnEvent("ItemFocus", (LV, RowNumber) => setSelected(LV, RowNumber))
+			recipesLV.OnEvent("DoubleClick", (*) => createEditRecipe(currentRecipe))
 
 			recipesArray := MyRecipes.Read()
 
@@ -220,7 +228,7 @@ Class Cfg {
 
 			addRecipeBtn := recipesPanel.AddButton("x" addRemX() " y" addRemY " w64 h32", "+")
 			addRecipeBtn.SetFont("s16")
-			addRecipeBtn.OnEvent("Click", (*) => "")
+			addRecipeBtn.OnEvent("Click", (*) => createEditRecipe())
 
 			removeRecipeBtn := recipesPanel.AddButton("x" addRemX(64) " y" addRemY " w64 h32", Chr(0x2212))
 			removeRecipeBtn.SetFont("s16")
@@ -229,23 +237,30 @@ Class Cfg {
 			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return recipesPanel
 
-
 			setSelected(LV, rowNumber) {
-				entryTitle := LV.GetText(RowNumber, 1)
-				entrySectionName := LV.GetText(RowNumber, 4)
-				currentRecipe := [entryTitle, entrySectionName, rowNumber]
+				currentRecipe := [
+					LV.GetText(RowNumber, 1),
+					LV.GetText(RowNumber, 2),
+					LV.GetText(RowNumber, 3),
+					LV.GetText(RowNumber, 4),
+					rowNumber
+				]
 				return
 			}
 
-			removeSelected(sectionName) {
-				if sectionName.Length > 0 {
-					message := SetStringVars(ReadLocale("gui_recipes_remove_confirm"), sectionName[1])
+			createEditRecipe(recipeArray?) {
+				MyRecipes.Editor(recipeArray?, recipesLV)
+			}
+
+			removeSelected(recipeArray) {
+				if recipeArray.Length > 0 {
+					message := SetStringVars(ReadLocale("gui_recipes_remove_confirm"), recipeArray[1])
 					confirBox := MsgBox(message, App.title, 4)
 					if confirBox = "No" {
 						return
 					} else if confirBox = "Yes" {
-						MyRecipes.Remove(sectionName[2])
-						recipesLV.Delete(sectionName[3])
+						MyRecipes.Remove(recipeArray[4])
+						recipesLV.Delete(recipeArray[5])
 					}
 				}
 			}
