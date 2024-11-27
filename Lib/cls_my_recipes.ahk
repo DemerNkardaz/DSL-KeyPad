@@ -83,13 +83,18 @@ Class MyRecipes {
 
 			saveRecipe(data) {
 				if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
-					MyRecipes.AddEdit(data.section, data)
 					if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
-						recipesLV.Modify(data.row, , data.name, data.recipe, data.result)
+						recipesLV.Modify(data.row, , data.name, data.recipe, this.FormatResult(data.result))
 
 					} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
-						recipesLV.Add(, data.name, data.recipe, data.result, data.section)
+						if this.Check(data.section) {
+							MsgBox(ReadLocale("gui_recipes_create_exists"), App.winTitle)
+							return
+						}
+						recipesLV.Add(, data.name, data.recipe, this.FormatResult(data.result), data.section)
 					}
+
+					this.AddEdit(data.section, data)
 				}
 			}
 		}
@@ -102,12 +107,31 @@ Class MyRecipes {
 		}
 	}
 
+	static FormatResult(result) {
+		result := StrReplace(result, "`r`n", "\n")
+		result := StrReplace(result, "`n", "\n")
+		result := StrReplace(result, "`t", " ")
+		return result
+	}
+
 	static AddEdit(sectionName, params) {
+		params.result := this.FormatResult(params.result)
+
 		IniWrite(params.name, this.file, sectionName, "name")
 		IniWrite(params.recipe, this.file, sectionName, "recipe")
 		IniWrite(params.result, this.file, sectionName, "result")
 		UpdateCustomRecipes()
 		return
+	}
+
+	static Check(sectionName) {
+		content := FileRead(this.file, "UTF-16")
+
+		if InStr(content, sectionName) {
+			return True
+		}
+
+		return False
 	}
 
 	static Get(sectionName) {

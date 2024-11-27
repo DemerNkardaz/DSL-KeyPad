@@ -3626,7 +3626,7 @@ Constructor() {
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, "Recipes")
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, "Recipes")
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, "Recipes")
-	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Custom Composes", ReadLocale("symbol_custom_compose"), True, "Recipes")
+	;InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Custom Composes", ReadLocale("symbol_custom_compose"), True, "Recipes")
 
 	DSLContent["BindList"].TabFastKeys := []
 
@@ -6772,7 +6772,6 @@ ManageTrayItems() {
 		"config", ReadLocale("tray_func_config"),
 		"locale", ReadLocale("tray_func_locale"),
 		"custom_compose", ReadLocale("tray_func_custom_compose"),
-		"custom_compose_update", ReadLocale("tray_func_custom_compose_update"),
 		"exit", ReadLocale("tray_func_exit") "`t" LeftControl RightShift "Esc",
 		"panel", ReadLocale("tray_func_panel") "`t" Window LeftAlt "Home",
 		"options", ReadLocale("gui_options"),
@@ -6915,7 +6914,6 @@ ManageTrayItems() {
 	DSLTray.Add(Labels["locale"], OpenLocalesFile)
 	DSLTray.Add()
 	DSLTray.Add(Labels["custom_compose"], (*) => Cfg.SubGUIs("Recipes"))
-	DSLTray.Add(Labels["custom_compose_update"], UpdateCustomRecipes)
 	DSLTray.Add()
 	if DisabledAllKeys {
 		DSLTray.Add(Labels["enable"], (*) => DisableAllKeys())
@@ -6940,7 +6938,6 @@ ManageTrayItems() {
 	DSLTray.SetIcon(Labels["config"], ImageRes, 065)
 	DSLTray.SetIcon(Labels["locale"], ImageRes, 015)
 	DSLTray.SetIcon(Labels["custom_compose"], ImageRes, 188)
-	DSLTray.SetIcon(Labels["custom_compose_update"], ImageRes, 268)
 	DSLTray.SetIcon(Labels["exit"], ImageRes, 085)
 
 }

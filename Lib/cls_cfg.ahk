@@ -401,8 +401,13 @@ Class Options {
 
 		pastOptionsTitle := Cfg.optionsTitle
 		pastRecipesTitle := Cfg.EditorSubGUIs.recipesTitle
+		pastRecipesEditorTitle := MyRecipes.editorTitle
+
+
 		Cfg.optionsTitle := App.winTitle " — " ReadLocale("gui_options")
 		Cfg.EditorSubGUIs.recipesTitle := App.winTitle " — " ReadLocale("gui_recipes")
+
+		MyRecipes.editorTitle := App.winTitle " — " ReadLocale("gui_recipes_create")
 
 		if IsGuiOpen(pastOptionsTitle) {
 			Cfg.EditorGUI.Title := Cfg.optionsTitle
@@ -420,6 +425,18 @@ Class Options {
 		if IsGuiOpen(pastRecipesTitle) {
 			Cfg.EditorSubGUIs.recipes.Title := Cfg.EditorSubGUIs.recipesTitle
 		}
+
+		if IsGuiOpen(pastRecipesEditorTitle) {
+			MyRecipes.EditorGUI.Title := MyRecipes.editorTitle
+			MyRecipes.EditorGUI["SectionLabel"].Text := ReadLocale("gui_recipes_create_section")
+			MyRecipes.EditorGUI["NameLabel"].Text := ReadLocale("gui_recipes_create_name")
+			MyRecipes.EditorGUI["RecipeLabel"].Text := ReadLocale("gui_recipes_create_recipe")
+			MyRecipes.EditorGUI["ResultLabel"].Text := ReadLocale("gui_recipes_create_result")
+			MyRecipes.EditorGUI["SaveButton"].Text := ReadLocale("gui_save")
+			MyRecipes.EditorGUI["CancelButton"].Text := ReadLocale("gui_cancel")
+		}
+
+
 		ManageTrayItems()
 	}
 
