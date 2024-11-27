@@ -3,6 +3,7 @@ Class App {
 	static title := "DSL KeyPad (αλφα)"
 	static version := [0, 1, 1, 0]
 	static versionText := this.formatVersion(this.version)
+	static winTitle := this.title " — " this.versionText
 
 	static git := {
 		repo: "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/main/",

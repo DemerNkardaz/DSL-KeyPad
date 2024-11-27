@@ -1,7 +1,7 @@
 Class MyRecipes {
 
 	static file := App.paths.dir "\CustomCompose.ini"
-	static editorTitle := App.title " — " App.versionText " — " ReadLocale("gui_recipes_edit")
+	static editorTitle := App.winTitle " — " ReadLocale("gui_recipes_edit")
 
 	static __New() {
 

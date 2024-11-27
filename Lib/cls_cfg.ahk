@@ -51,16 +51,16 @@ Class Cfg {
 		this.Init()
 	}
 
-	static optionsTitle := App.title " — " App.versionText " — " ReadLocale("gui_options")
+	static optionsTitle := App.winTitle " — " ReadLocale("gui_options")
 
 	static EditorGUI := Gui()
 	static EditorSubGUIs := {
-		recipesTitle: App.title " — " App.versionText " — " ReadLocale("gui_recipes"),
+		recipesTitle: App.winTitle " — " ReadLocale("gui_recipes"),
 		recipes: Gui(),
 	}
 
 	static Editor() {
-		this.optionsTitle := App.title " — " App.versionText " — " ReadLocale("gui_options")
+		this.optionsTitle := App.winTitle " — " ReadLocale("gui_options")
 
 		Constructor() {
 			screenWidth := A_ScreenWidth
@@ -168,7 +168,9 @@ Class Cfg {
 	static SubGUIs(guiName) {
 
 		RecipesConstructor() {
-			this.EditorSubGUIs.recipesTitle := App.title " — " App.versionText " — " ReadLocale("gui_recipes"),
+			this.EditorSubGUIs.recipesTitle := App.winTitle " — " ReadLocale("gui_recipes"),
+			currentRecipe := []
+
 			screenWidth := A_ScreenWidth
 			screenHeight := A_ScreenHeight
 
@@ -202,12 +204,14 @@ Class Cfg {
 			recipesLV.ModifyCol(2, 98)
 			recipesLV.ModifyCol(3, 158)
 			recipesLV.ModifyCol(4, 0)
+			recipesLV.OnEvent("ItemFocus", (LV, RowNumber) => setSelected(LV, RowNumber))
 
 			recipesArray := MyRecipes.Read()
 
 			for recipeEntry in recipesArray {
 				recipesLV.Add(, recipeEntry.name, RegExReplace(recipeEntry.recipe, "\|", ", "), recipeEntry.result, recipeEntry.section)
 			}
+
 
 			recipesPanel.AddGroupBox(optionsCommon(55, (windowHeight - 65)))
 
@@ -220,10 +224,31 @@ Class Cfg {
 
 			removeRecipeBtn := recipesPanel.AddButton("x" addRemX(64) " y" addRemY " w64 h32", Chr(0x2212))
 			removeRecipeBtn.SetFont("s16")
-			removeRecipeBtn.OnEvent("Click", (*) => "")
+			removeRecipeBtn.OnEvent("Click", (*) => removeSelected(currentRecipe))
 
 			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return recipesPanel
+
+
+			setSelected(LV, rowNumber) {
+				entryTitle := LV.GetText(RowNumber, 1)
+				entrySectionName := LV.GetText(RowNumber, 4)
+				currentRecipe := [entryTitle, entrySectionName, rowNumber]
+				return
+			}
+
+			removeSelected(sectionName) {
+				if sectionName.Length > 0 {
+					message := SetStringVars(ReadLocale("gui_recipes_remove_confirm"), sectionName[1])
+					confirBox := MsgBox(message, App.title, 4)
+					if confirBox = "No" {
+						return
+					} else if confirBox = "Yes" {
+						MyRecipes.Remove(sectionName[2])
+						recipesLV.Delete(sectionName[3])
+					}
+				}
+			}
 		}
 
 		return %guiName%Constructor()
@@ -361,8 +386,8 @@ Class Options {
 
 		pastOptionsTitle := Cfg.optionsTitle
 		pastRecipesTitle := Cfg.EditorSubGUIs.recipesTitle
-		Cfg.optionsTitle := App.title " — " App.versionText " — " ReadLocale("gui_options")
-		Cfg.EditorSubGUIs.recipesTitle := App.title " — " App.versionText " — " ReadLocale("gui_recipes")
+		Cfg.optionsTitle := App.winTitle " — " ReadLocale("gui_options")
+		Cfg.EditorSubGUIs.recipesTitle := App.winTitle " — " ReadLocale("gui_recipes")
 
 		if IsGuiOpen(pastOptionsTitle) {
 			Cfg.EditorGUI.Title := Cfg.optionsTitle

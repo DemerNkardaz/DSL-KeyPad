@@ -11,7 +11,6 @@
 #Include <chr_alt_codes>
 #Include <chr_entities>
 #Include <cls_layout>
-#Include <cls_my_recipes>
 #Include <supplement_pshell>
 #Include <supplement_python>
 
@@ -98,6 +97,7 @@ InternalFiles := Map(
 
 #Include <cls_app>
 #Include <cls_cfg>
+#Include <cls_my_recipes>
 #Include <cls_language>
 #Include <cls_ligaturiser>
 #Include <cls_chr_inserter>
@@ -6914,7 +6914,7 @@ ManageTrayItems() {
 	DSLTray.Add(Labels["config"], OpenConfigFile)
 	DSLTray.Add(Labels["locale"], OpenLocalesFile)
 	DSLTray.Add()
-	DSLTray.Add(Labels["custom_compose"], OpenRecipesFile)
+	DSLTray.Add(Labels["custom_compose"], (*) => Cfg.SubGUIs("Recipes"))
 	DSLTray.Add(Labels["custom_compose_update"], UpdateCustomRecipes)
 	DSLTray.Add()
 	if DisabledAllKeys {
