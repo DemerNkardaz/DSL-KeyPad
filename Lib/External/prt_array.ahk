@@ -25,10 +25,12 @@ _ArrayHasValue(this, valueToFind, &indexID?) {
 	return false
 }
 
-_ArrayContains(this, valueToFind) {
+_ArrayContains(this, valueToFind, &indexID?) {
 	for index, value in this {
-		if value == valueToFind
+		if value == valueToFind {
+			indexID := index
 			return true
+		}
 	}
 	return false
 }

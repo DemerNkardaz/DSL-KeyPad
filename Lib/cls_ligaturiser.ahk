@@ -142,7 +142,7 @@ Class Ligaturiser {
 	}
 
 	static SendOutput(output) {
-		if StrLen(output) > 36
+		if StrLen(output) > 20
 			ClipSend(output)
 		else
 			SendText(output)

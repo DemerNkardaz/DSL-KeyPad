@@ -245,7 +245,14 @@ Class MyRecipes {
 	static Check(sectionName) {
 		content := FileRead(this.file, "UTF-16")
 
-		if InStr(content, sectionName) {
+		sections := []
+		for line in StrSplit(content, "`n") {
+			if RegExMatch(line, "^\[(.*)\]$", &match) {
+				sections.Push(match[1])
+			}
+		}
+
+		if sections.HasValue(sectionName) {
 			return True
 		}
 

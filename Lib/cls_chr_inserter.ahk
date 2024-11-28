@@ -102,9 +102,13 @@ Class CharacterInserter {
 
 
 	static Altcode(charCode, isReturn := False) {
-		if isReturn
-			return Chr(charCode)
-		return "{ASC " charCode "}"
+		if isReturn {
+			if AltCodesLibrary.HasValue(charCode, &i) {
+				return AltCodesLibrary[i - 1]
+			}
+		} else {
+			return "{ASC " charCode "}"
+		}
 	}
 
 	static Unicode(charCode, isReturn?) {
