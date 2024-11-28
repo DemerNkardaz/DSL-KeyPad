@@ -120,7 +120,8 @@ Class MyRecipes {
 
 			saveRecipe(data) {
 				if InStr(data.section, "xcompose") {
-					MsgBox(ReadLocale("gui_recipes_xcompose_break"), App.winTitle)
+					RegExMatch(data.section, "\[(.*)\]", &match)
+					MsgBox(ReadLocale("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
 					return
 				} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
 					if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
@@ -263,6 +264,62 @@ Class MyRecipes {
 		return output
 	}
 
+	static XComposePairs := [
+		"at", Chr(0x0040),
+		"minus", Chr(0x002D),
+		"plus", Chr(0x002B),
+		"equal", Chr(0x003D),
+		"underscore", Chr(0x005F),
+		"asterisk", Chr(0x002A),
+		"ampersand", Chr(0x0026),
+		"sterling", Chr(0x00A3),
+		"dollar", Chr(0x0024),
+		"EuroSign", Chr(0x20AC),
+		"yen", Chr(0x00A5),
+		"currency", Chr(0x00A4),
+		"exclam", Chr(0x0021),
+		"exclamdown", Chr(0x00A1),
+		"onesuperior", Chr(0x00B9),
+		"twosuperior", Chr(0x00B2),
+		"numbersign", Chr(0x0023),
+		"threesuperior", Chr(0x00B3),
+		"percent", Chr(0x0025),
+		"onequarter", Chr(0x00BC),
+		"onehalf", Chr(0x00BD),
+		"threequarters", Chr(0x00BE),
+		"parenleft", Chr(0x0028),
+		"leftsinglequotemark", Chr(0x2018),
+		"parenright", Chr(0x0029),
+		"rightsinglequotemark", Chr(0x2019),
+		"multiply", Chr(0x00D7),
+		"division", Chr(0x00F7),
+		"bracketleft", Chr(0x005B),
+		"bracketright", Chr(0x005D),
+		"braceleft", Chr(0x007B),
+		"braceright", Chr(0x007D),
+		"guillemotleft", Chr(0x00AB),
+		"guillemotright", Chr(0x00BB),
+		"acute", Chr(0x00B4),
+		"diaeresis", Chr(0x00A8),
+		"backslash", Chr(0x005C),
+		"bar", Chr(0x007C),
+		"notsign", Chr(0x00AC),
+		"brokenbar", Chr(0x00A6),
+		"semicolon", Chr(0x003B),
+		"colon", Chr(0x003A),
+		"paragraph", Chr(0x00B6),
+		"degree", Chr(0x00B0),
+		"comma", Chr(0x002C),
+		"period", Chr(0x002E),
+		"less", Chr(0x003C),
+		"greater", Chr(0x003E),
+		"slash", Chr(0x002F),
+		"question", Chr(0x003F),
+		"questiondown", Chr(0x00BF),
+		"Multi_key", "",
+		"Compose", "",
+	]
+
 	static XComposeRead(filePath, fileName) {
 		content := FileRead(filePath, "UTF-8")
 		splitContent := StrSplit(content, "`n")
@@ -270,18 +327,36 @@ Class MyRecipes {
 		output := []
 
 		for i, line in splitContent {
-			RegExMatch(line, "^\s*<.+>\s+<(.+?)>\s+<(.+?)>\s*:\s*`"(.+?)`"", &match)
+			;try {
+			RegExMatch(line, "^(.+?)\s*:", &recipeList)
+			RegExMatch(line, "^.+:\s*`"(.+?)`"", &result)
+
+			recipe := ""
+			matches := StrSplit(recipeList[1], ">")
+
+			for i, match in matches {
+				if StrLen(match) > 0 {
+					cutMatch := RegExReplace(match, "(\<|\s)", "")
+					if this.XComposePairs.HasValue(cutMatch, &index) {
+						recipe .= this.XComposePairs[index + 1]
+					} else {
+						recipe .= cutMatch
+					}
+				}
+			}
 
 			output.Push({
-				section: "xcompose_" Ord(match[3]) "[" StrLower(fileName) "]",
-				name: "XCompose: [" match[3] "]",
-				recipe: match[1] match[2],
-				result: match[3]
+				section: "xcompose_" Ord(result[1]) "[" fileName "]",
+				name: "XCompose: [" result[1] "]",
+				recipe: recipe,
+				result: result[1]
 			})
 		}
+		;}
 
 		return output
 	}
+
 
 	static UpdateMap() {
 		global Characters, CharactersCount

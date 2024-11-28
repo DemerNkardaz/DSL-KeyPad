@@ -253,11 +253,10 @@ Class Cfg {
 			}
 
 			createEditRecipe(recipeArray?) {
-				if IsSet(recipeArray) && recipeArray.Length > 0 {
-					if InStr(recipeArray[4], "xcompose") {
-						MsgBox(ReadLocale("gui_recipes_xcompose_break"), App.winTitle)
-						return
-					}
+				if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "xcompose") {
+					RegExMatch(recipeArray[4], "\[(.*)\]", &match)
+					MsgBox(ReadLocale("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
+					return
 				} else {
 					MyRecipes.Editor(recipeArray?, recipesLV)
 				}
@@ -266,7 +265,8 @@ Class Cfg {
 			removeSelected(recipeArray) {
 				if recipeArray.Length > 0 {
 					if InStr(recipeArray[4], "xcompose") {
-						MsgBox(ReadLocale("gui_recipes_xcompose_break"), App.winTitle)
+						RegExMatch(recipeArray[4], "\[(.*)\]", &match)
+						MsgBox(ReadLocale("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
 						return
 					} else {
 						message := SetStringVars(ReadLocale("gui_recipes_remove_confirm"), recipeArray[1])

@@ -15,10 +15,12 @@ _ArrayToString(this, char := ", ") {
 	return str
 }
 
-_ArrayHasValue(this, valueToFind) {
+_ArrayHasValue(this, valueToFind, &indexID?) {
 	for index, value in this {
-		if value = valueToFind
+		if value = valueToFind {
+			indexID := index
 			return true
+		}
 	}
 	return false
 }
