@@ -327,32 +327,32 @@ Class MyRecipes {
 		output := []
 
 		for i, line in splitContent {
-			;try {
-			RegExMatch(line, "^(.+?)\s*:", &recipeList)
-			RegExMatch(line, "^.+:\s*`"(.+?)`"", &result)
+			try {
+				RegExMatch(line, "^(.+?)\s*:", &recipeList)
+				RegExMatch(line, "^.+:\s*`"(.+?)`"", &result)
 
-			recipe := ""
-			matches := StrSplit(recipeList[1], ">")
+				recipe := ""
+				matches := StrSplit(recipeList[1], ">")
 
-			for i, match in matches {
-				if StrLen(match) > 0 {
-					cutMatch := RegExReplace(match, "(\<|\s)", "")
-					if this.XComposePairs.HasValue(cutMatch, &index) {
-						recipe .= this.XComposePairs[index + 1]
-					} else {
-						recipe .= cutMatch
+				for i, match in matches {
+					if StrLen(match) > 0 {
+						cutMatch := RegExReplace(match, "(\<|\s)", "")
+						if this.XComposePairs.HasValue(cutMatch, &index) {
+							recipe .= this.XComposePairs[index + 1]
+						} else {
+							recipe .= cutMatch
+						}
 					}
 				}
-			}
 
-			output.Push({
-				section: "xcompose_" Ord(result[1]) "[" fileName "]",
-				name: "XCompose: [" result[1] "]",
-				recipe: recipe,
-				result: result[1]
-			})
+				output.Push({
+					section: "xcompose_" Ord(result[1]) "[" fileName "]",
+					name: "XCompose: [" result[1] "]",
+					recipe: recipe,
+					result: result[1]
+				})
+			}
 		}
-		;}
 
 		return output
 	}
