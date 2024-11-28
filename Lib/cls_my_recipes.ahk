@@ -12,7 +12,7 @@ Class MyRecipes {
 		"html_template", {
 			name: "HTML Template",
 			recipe: "html",
-			result: '<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<meta charset="UTF-8">\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t\t\n\t\t<meta name="date" content="">\n\t\t<meta name="subject" content="">\n\t\t<meta name="rating" content="">\n\t\t<meta name="theme-color" content="">\n\n\t\t<base href="/" />\n\n\t\t<meta name="referrer" content="origin">\n\t\t<meta name="referrer" content="origin-when-cross-origin">\n\t\t<meta name="referrer" content="no-referrer-when-downgrade">\n\n\t\t<meta property="og:type" content="website">\n\t\t<meta property="og:title" content=">\n\t\t<meta property="og:url" content="">\n\t\t<meta property="og:description" content="">\n\t\t<meta property="og:image" content="">\n\t\t<meta property="og:locale" content="">\n\n\t\t<meta name="twitter:card" content="summary_large_image">\n\t\t<meta property="twitter:domain" content="">\n\t\t<meta property="twitter:url" content="">\n\t\t<meta name="twitter:title" content="">\n\t\t<meta name="twitter:description" content="">\n\t\t<meta name="twitter:image" content="">\n\t\t<meta name="twitter:creator" content="">\n\n\t\t<meta http-equiv="Cache-Control" content="public">\n\t\t<meta http-equiv="X-UA-Compatible" content="ie=edge">\n\t\t<meta name="renderer" content="webkit|ie-comp|ie-stand">\n\t\t<meta name="author" content="">\n\t\t<meta content=">" name="description">\n\t\t<link rel="manifest" href="/manifest.webmanifest">\n\n\t\t<title>Index</title>\n\t\n\t\t<link rel="icon" href="/favicon.ico" type="image/x-icon">\n\t\t<link rel="stylesheet" href="/index.css" />\n\n\t\t<meta name="robots" content="index, follow">\n\t\t<meta name="revisit-after" content="7 days">\n\n\t\t<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="use-credentials">\n\t\t<link rel="preconnect" href="https://fonts.gstatic.com">\n\t</head>\n\t<body>\n\t\t<main>\n\t\t\n\t\t</main>\n\t\t<script src="/index.js"></script>\n\t</body>\n</html>',
+			result: '<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<meta charset="UTF-8">\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t\t\n\t\t<meta name="date" content="">\n\t\t<meta name="subject" content="">\n\t\t<meta name="rating" content="">\n\t\t<meta name="theme-color" content="">\n\n\t\t<base href="/" />\n\n\t\t<meta name="referrer" content="origin">\n\t\t<meta name="referrer" content="origin-when-cross-origin">\n\t\t<meta name="referrer" content="no-referrer-when-downgrade">\n\n\t\t<meta property="og:type" content="website">\n\t\t<meta property="og:title" content=">\n\t\t<meta property="og:url" content="">\n\t\t<meta property="og:description" content="">\n\t\t<meta property="og:image" content="">\n\t\t<meta property="og:locale" content="">\n\n\t\t<meta name="twitter:card" content="summary_large_image">\n\t\t<meta property="twitter:domain" content="">\n\t\t<meta property="twitter:url" content="">\n\t\t<meta name="twitter:title" content="">\n\t\t<meta name="twitter:description" content="">\n\t\t<meta name="twitter:image" content="">\n\t\t<meta name="twitter:creator" content="">\n\n\t\t<meta http-equiv="Cache-Control" content="public">\n\t\t<meta http-equiv="X-UA-Compatible" content="ie=edge">\n\t\t<meta name="renderer" content="webkit|ie-comp|ie-stand">\n\t\t<meta name="author" content="">\n\t\t<meta content="" name="description">\n\t\t<link rel="manifest" href="/manifest.webmanifest">\n\n\t\t<title>Index</title>\n\t\n\t\t<link rel="icon" href="/favicon.ico" type="image/x-icon">\n\t\t<link rel="stylesheet" href="/index.css" />\n\n\t\t<meta name="robots" content="index, follow">\n\t\t<meta name="revisit-after" content="7 days">\n\n\t\t<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="use-credentials">\n\t\t<link rel="preconnect" href="https://fonts.gstatic.com">\n\t</head>\n\t<body>\n\t\t<main>\n\t\t\n\t\t</main>\n\t\t<script src="/index.js"></script>\n\t</body>\n</html>',
 		},
 		"kbd", {
 			name: "Keyboard Input Tag",
@@ -24,6 +24,62 @@ Class MyRecipes {
 			recipe: "лёд|ice",
 			result: Chr(0x1F9CA),
 		},
+	]
+
+	static XComposePairs := [
+		"at", Chr(0x0040),
+		"minus", Chr(0x002D),
+		"plus", Chr(0x002B),
+		"equal", Chr(0x003D),
+		"underscore", Chr(0x005F),
+		"asterisk", Chr(0x002A),
+		"ampersand", Chr(0x0026),
+		"sterling", Chr(0x00A3),
+		"dollar", Chr(0x0024),
+		"EuroSign", Chr(0x20AC),
+		"yen", Chr(0x00A5),
+		"currency", Chr(0x00A4),
+		"exclam", Chr(0x0021),
+		"exclamdown", Chr(0x00A1),
+		"onesuperior", Chr(0x00B9),
+		"twosuperior", Chr(0x00B2),
+		"numbersign", Chr(0x0023),
+		"threesuperior", Chr(0x00B3),
+		"percent", Chr(0x0025),
+		"onequarter", Chr(0x00BC),
+		"onehalf", Chr(0x00BD),
+		"threequarters", Chr(0x00BE),
+		"parenleft", Chr(0x0028),
+		"leftsinglequotemark", Chr(0x2018),
+		"parenright", Chr(0x0029),
+		"rightsinglequotemark", Chr(0x2019),
+		"multiply", Chr(0x00D7),
+		"division", Chr(0x00F7),
+		"bracketleft", Chr(0x005B),
+		"bracketright", Chr(0x005D),
+		"braceleft", Chr(0x007B),
+		"braceright", Chr(0x007D),
+		"guillemotleft", Chr(0x00AB),
+		"guillemotright", Chr(0x00BB),
+		"acute", Chr(0x00B4),
+		"diaeresis", Chr(0x00A8),
+		"backslash", Chr(0x005C),
+		"bar", Chr(0x007C),
+		"notsign", Chr(0x00AC),
+		"brokenbar", Chr(0x00A6),
+		"semicolon", Chr(0x003B),
+		"colon", Chr(0x003A),
+		"paragraph", Chr(0x00B6),
+		"degree", Chr(0x00B0),
+		"comma", Chr(0x002C),
+		"period", Chr(0x002E),
+		"less", Chr(0x003C),
+		"greater", Chr(0x003E),
+		"slash", Chr(0x002F),
+		"question", Chr(0x003F),
+		"questiondown", Chr(0x00BF),
+		"Multi_key", "",
+		"Compose", "",
 	]
 
 	static __New() {
@@ -68,7 +124,10 @@ Class MyRecipes {
 			yPos := screenHeight - windowHeight - 92
 
 			recipeCreator := Gui()
+			recipeCreator.Opt("+Resize +MinSize" windowWidth "x" windowHeight)
 			recipeCreator.title := this.editorTitle
+
+			recipeCreator.OnEvent("Size", panelResize)
 
 			defaultSizes := { groupBoxW: 280, groupBoxX: (windowWidth - 280) / 2 }
 
@@ -113,6 +172,16 @@ Class MyRecipes {
 
 			recipeCreator.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return recipeCreator
+
+			panelResize(guiObj, minMax, w, h) {
+				guiObj["GroupCommon"].Move(, , w - 20, h - 20)
+				guiObj["SectionEdit"].Move(, , w - 50)
+				guiObj["NameEdit"].Move(, , w - 50)
+				guiObj["RecipeEdit"].Move(, , w - 50)
+				guiObj["ResultEdit"].Move(, , w - 50, h - 300)
+				guiObj["SaveButton"].Move(, (h - 20) - 32)
+				guiObj["CancelButton"].Move(, (h - 20) - 32)
+			}
 
 			setData(CB, key) {
 				data.%key% := CB.Text
@@ -263,62 +332,6 @@ Class MyRecipes {
 
 		return output
 	}
-
-	static XComposePairs := [
-		"at", Chr(0x0040),
-		"minus", Chr(0x002D),
-		"plus", Chr(0x002B),
-		"equal", Chr(0x003D),
-		"underscore", Chr(0x005F),
-		"asterisk", Chr(0x002A),
-		"ampersand", Chr(0x0026),
-		"sterling", Chr(0x00A3),
-		"dollar", Chr(0x0024),
-		"EuroSign", Chr(0x20AC),
-		"yen", Chr(0x00A5),
-		"currency", Chr(0x00A4),
-		"exclam", Chr(0x0021),
-		"exclamdown", Chr(0x00A1),
-		"onesuperior", Chr(0x00B9),
-		"twosuperior", Chr(0x00B2),
-		"numbersign", Chr(0x0023),
-		"threesuperior", Chr(0x00B3),
-		"percent", Chr(0x0025),
-		"onequarter", Chr(0x00BC),
-		"onehalf", Chr(0x00BD),
-		"threequarters", Chr(0x00BE),
-		"parenleft", Chr(0x0028),
-		"leftsinglequotemark", Chr(0x2018),
-		"parenright", Chr(0x0029),
-		"rightsinglequotemark", Chr(0x2019),
-		"multiply", Chr(0x00D7),
-		"division", Chr(0x00F7),
-		"bracketleft", Chr(0x005B),
-		"bracketright", Chr(0x005D),
-		"braceleft", Chr(0x007B),
-		"braceright", Chr(0x007D),
-		"guillemotleft", Chr(0x00AB),
-		"guillemotright", Chr(0x00BB),
-		"acute", Chr(0x00B4),
-		"diaeresis", Chr(0x00A8),
-		"backslash", Chr(0x005C),
-		"bar", Chr(0x007C),
-		"notsign", Chr(0x00AC),
-		"brokenbar", Chr(0x00A6),
-		"semicolon", Chr(0x003B),
-		"colon", Chr(0x003A),
-		"paragraph", Chr(0x00B6),
-		"degree", Chr(0x00B0),
-		"comma", Chr(0x002C),
-		"period", Chr(0x002E),
-		"less", Chr(0x003C),
-		"greater", Chr(0x003E),
-		"slash", Chr(0x002F),
-		"question", Chr(0x003F),
-		"questiondown", Chr(0x00BF),
-		"Multi_key", "",
-		"Compose", "",
-	]
 
 	static XComposeRead(filePath, fileName) {
 		content := FileRead(filePath, "UTF-8")
