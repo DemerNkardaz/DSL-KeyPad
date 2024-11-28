@@ -87,7 +87,7 @@ Class MyRecipes {
 			for i, key in this.defaulRecipes {
 				if Mod(i, 2) == 1 {
 					value := this.defaulRecipes[i + 1]
-					this.AddEdit(key, { name: value.name, recipe: value.recipe, result: value.result })
+					this.AddEdit(key, { name: value.name, recipe: value.recipe, result: value.result }, True)
 				}
 			}
 		}
@@ -149,7 +149,7 @@ Class MyRecipes {
 			recipeEdit := recipeCreator.AddEdit("vRecipeEdit x" commonX() " y" commonY(110 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).recipe : "")
 
 			resultLabel := recipeCreator.AddText("vResultLabel x" commonX() " y" commonY(110 + 55) " w150 BackgroundTrans", ReadLocale("gui_recipes_create_result"))
-			resultEdit := recipeCreator.AddEdit("vResultEdit x" commonX() " y" commonY((110 + 55) + 20) " w250 h150 Multi", sectionName.Length > 0 ? this.FormatResult(MyRecipes.Get(sectionName[4]).result, True) : "")
+			resultEdit := recipeCreator.AddEdit("vResultEdit x" commonX() " y" commonY((110 + 55) + 20) " w250 h150 Multi WantTab", sectionName.Length > 0 ? this.FormatResult(MyRecipes.Get(sectionName[4]).result, True) : "")
 
 			if sectionName.Length > 0 {
 				data.section := sectionName[4]
@@ -205,7 +205,6 @@ Class MyRecipes {
 					}
 
 					this.AddEdit(data.section, data)
-					this.UpdateMap()
 				}
 			}
 		}
@@ -230,12 +229,16 @@ Class MyRecipes {
 		return result
 	}
 
-	static AddEdit(sectionName, params) {
+	static AddEdit(sectionName, params, noUpdate := False) {
 		params.result := this.FormatResult(params.result)
 
 		IniWrite(params.name, this.file, sectionName, "name")
 		IniWrite(params.recipe, this.file, sectionName, "recipe")
 		IniWrite(params.result, this.file, sectionName, "result")
+
+		if !noUpdate
+			this.UpdateMap()
+
 		return
 	}
 
@@ -370,7 +373,6 @@ Class MyRecipes {
 		return output
 	}
 
-
 	static UpdateMap() {
 		global Characters, CharactersCount
 
@@ -401,29 +403,24 @@ Class MyRecipes {
 
 				characterEntry := GetCharacterEntry(section.section, True)
 
-				if characterEntry {
-					Characters[characterEntry].unicode = resultToUnicode[1]
-					Characters[characterEntry].uniSequence = resultToUnicode
-					Characters[characterEntry].recipe = section.recipe
-					Characters[characterEntry].titles = Map("ru", section.name, "en", section.name)
+				if characterEntry
+					Characters.Delete(characterEntry)
 
-				} else {
-					MapInsert(Characters,
-						section.section, {
-							unicode: resultToUnicode[1],
-							uniSequence: resultToUnicode,
-							titles: Map("ru", section.name, "en", section.name),
-							recipe: section.recipe,
-							group: ["Custom Composes"],
-						},
-					)
-				}
+				MapInsert(Characters,
+					section.section, {
+						unicode: resultToUnicode[1],
+						uniSequence: resultToUnicode,
+						titles: Map("ru", section.name, "en", section.name),
+						recipe: section.recipe,
+						group: ["Custom Composes"],
+					},
+				)
 			}
-		} finally {
-			CharactersCount := GetCountDifference()
-			ProcessMapAfter("Custom Composes")
-			UpdateRecipeValidator()
 		}
-	}
 
+		CharactersCount := GetCountDifference()
+		ProcessMapAfter("Custom Composes")
+		UpdateRecipeValidator()
+
+	}
 }

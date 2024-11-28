@@ -5210,6 +5210,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			",", Map("Flat:<^<!", "comma_above", "Flat:<^<!<+", "comma_below"),
 			".", Map("Flat:<^<!", "dot_above", "Flat:<^<!<+", "diaeresis"),
 		)
+
 		QuotesSlots := GetLayoutImprovedCyrillic([
 			"france_left", MapMerge(GetModifiers("<^>!"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
 			"france_right", MapMerge(GetModifiers("<^>!"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "." : "DotRu"]),
