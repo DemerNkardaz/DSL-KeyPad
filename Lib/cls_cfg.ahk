@@ -1,3 +1,7 @@
+/*
+\\	App’s configuration class
+*/
+
 Class Cfg {
 	static ini := App.paths.dir "\DSLKeyPad.configtest.ini"
 	static sections := [
@@ -217,7 +221,7 @@ Class Cfg {
 			recipesArray := MyRecipes.Read()
 
 			for recipeEntry in recipesArray {
-				recipesLV.Add(, recipeEntry.name, RegExReplace(recipeEntry.recipe, "\|", ", "), recipeEntry.result, recipeEntry.section)
+				recipesLV.Add(, recipeEntry.name, RegExReplace(recipeEntry.recipe, "\|", ", "), Util.StrFormattedReduce(recipeEntry.result, 24), recipeEntry.section)
 			}
 
 
@@ -249,18 +253,30 @@ Class Cfg {
 			}
 
 			createEditRecipe(recipeArray?) {
-				MyRecipes.Editor(recipeArray?, recipesLV)
+				if IsSet(recipeArray) && recipeArray.Length > 0 {
+					if InStr(recipeArray[4], "xcompose") {
+						MsgBox(ReadLocale("gui_recipes_xcompose_break"), App.winTitle)
+						return
+					}
+				} else {
+					MyRecipes.Editor(recipeArray?, recipesLV)
+				}
 			}
 
 			removeSelected(recipeArray) {
 				if recipeArray.Length > 0 {
-					message := SetStringVars(ReadLocale("gui_recipes_remove_confirm"), recipeArray[1])
-					confirBox := MsgBox(message, App.title, 4)
-					if confirBox = "No" {
+					if InStr(recipeArray[4], "xcompose") {
+						MsgBox(ReadLocale("gui_recipes_xcompose_break"), App.winTitle)
 						return
-					} else if confirBox = "Yes" {
-						MyRecipes.Remove(recipeArray[4])
-						recipesLV.Delete(recipeArray[5])
+					} else {
+						message := SetStringVars(ReadLocale("gui_recipes_remove_confirm"), recipeArray[1])
+						confirBox := MsgBox(message, App.title, 4)
+						if confirBox = "No" {
+							return
+						} else if confirBox = "Yes" {
+							MyRecipes.Remove(recipeArray[4])
+							recipesLV.Delete(recipeArray[5])
+						}
 					}
 				}
 			}

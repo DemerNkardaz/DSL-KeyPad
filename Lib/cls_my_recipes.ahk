@@ -27,7 +27,6 @@ Class MyRecipes {
 	]
 
 	static __New() {
-
 		if !FileExist(MyRecipes.file) {
 			for i, key in this.defaulRecipes {
 				if Mod(i, 2) == 1 {
@@ -36,6 +35,11 @@ Class MyRecipes {
 				}
 			}
 		}
+
+		if !FileExist(App.paths.user "\demo.XCompose") {
+			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.user "\demo.XCompose", "UTF-8")
+		}
+
 
 		SetTimer((*) => this.UpdateMap(), -5000)
 	}
@@ -115,16 +119,19 @@ Class MyRecipes {
 			}
 
 			saveRecipe(data) {
-				if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
+				if InStr(data.section, "xcompose") {
+					MsgBox(ReadLocale("gui_recipes_xcompose_break"), App.winTitle)
+					return
+				} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
 					if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
-						recipesLV.Modify(data.row, , data.name, data.recipe, this.FormatResult(data.result))
+						recipesLV.Modify(data.row, , data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24))
 
 					} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
 						if this.Check(data.section) {
 							MsgBox(ReadLocale("gui_recipes_create_exists"), App.winTitle)
 							return
 						}
-						recipesLV.Add(, data.name, data.recipe, this.FormatResult(data.result), data.section)
+						recipesLV.Add(, data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24), data.section)
 					}
 
 					this.AddEdit(data.section, data)
@@ -243,8 +250,34 @@ Class MyRecipes {
 					continue
 				}
 			}
+
+			Loop Files App.paths.user "\*.XCompose" {
+				try {
+					output := ArrayMerge(output, this.XComposeRead(A_LoopFilePath, A_LoopFileName))
+				}
+			}
 		} catch {
 			return output
+		}
+
+		return output
+	}
+
+	static XComposeRead(filePath, fileName) {
+		content := FileRead(filePath, "UTF-8")
+		splitContent := StrSplit(content, "`n")
+
+		output := []
+
+		for i, line in splitContent {
+			RegExMatch(line, "^\s*<.+>\s+<(.+?)>\s+<(.+?)>\s*:\s*`"(.+?)`"", &match)
+
+			output.Push({
+				section: "xcompose_" Ord(match[3]) "[" StrLower(fileName) "]",
+				name: "XCompose: [" match[3] "]",
+				recipe: match[1] match[2],
+				result: match[3]
+			})
 		}
 
 		return output

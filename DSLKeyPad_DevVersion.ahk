@@ -8,6 +8,7 @@
 #Include <External\fnc_caret_pos>
 #Include <External\fnc_gui_button_icon>
 #Include <utils>
+#Include <cls_util>
 #Include <chr_alt_codes>
 #Include <chr_entities>
 #Include <cls_layout>
@@ -1290,85 +1291,7 @@ CallChar(CharacterName, GetValue) {
 	}
 	return Result
 }
-MapInsert(MapObj, Pairs*) {
-	keyCount := 0
-	for index in MapObj {
-		keyCount++
-	}
 
-	startNumber := keyCount + 1
-	numberLength := 10
-
-	for i, pair in Pairs {
-		if (Mod(i, 2) == 1) {
-			try {
-				key := pair
-				numberStr := "0" . startNumber
-				while (StrLen(numberStr) < numberLength) {
-					numberStr := "0" . numberStr
-				}
-				formattedKey := numberStr . " " . key
-				startNumber++
-			} catch {
-				throw Error("Failed to format key: " i " ")
-			}
-		} else {
-			MapObj[formattedKey] := pair
-		}
-	}
-}
-
-MapPush(MapObj, Pairs*) {
-	for i, pair in Pairs {
-		if (Mod(i, 2) == 1) {
-			key := pair
-		} else {
-			MapObj[key] := pair
-		}
-	}
-}
-
-MapMergeTo(TargetMap, MapObjects*) {
-	for mapObj in MapObjects {
-		if !IsObject(mapObj)
-			continue
-		for entry, value in mapObj {
-			TargetMap[entry] := value
-		}
-	}
-}
-
-MapMerge(MapObjects*) {
-	TempMap := Map()
-	for mapObj in MapObjects {
-		for entry, value in mapObj {
-			TempMap[entry] := value
-		}
-	}
-	return TempMap
-}
-
-ArrayMergeTo(TargetArray, Arrays*) {
-	for arrayItem in Arrays {
-		if !IsObject(arrayItem)
-			continue
-		for element in arrayItem {
-			TargetArray.Push(element)
-		}
-	}
-}
-
-ArrayMerge(Arrays*) {
-	TempArray := []
-	for arrayItem in Arrays {
-		if !IsObject(arrayItem)
-			continue
-		for element in arrayItem {
-			TempArray.Push(element)
-		}
-	}
-	return TempArray
-}
 
 GetMapCount(MapObj, SortGroups := "") {
 	properties := ["combining", "uncombined", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]

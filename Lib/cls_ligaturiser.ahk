@@ -1,3 +1,8 @@
+/*
+\\	App’s character compositing class
+\\	Founds matches of input and “recipes” in characters’ map to return the result instead of original input.
+*/
+
 Class Ligaturiser {
 
 	static modifiedCharsType := ""
@@ -128,7 +133,7 @@ Class Ligaturiser {
 			SetTimer(Tooltip, -1000)
 
 		} else {
-			CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " this.FormatSingleString(output))
+			CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " Util.StrFormattedReduce(output))
 			SetTimer(Tooltip, -500)
 			this.SendOutput(RegExReplace(output, "#", ""))
 		}
@@ -315,16 +320,11 @@ Class Ligaturiser {
 		return output
 	}
 
-
-	static FormatSingleString(str, maxLength := 32) {
-		return StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ]" : str
-	}
-
 	static GetRecipesString(value) {
 		output := ""
 
 		recipe := HasProp(value, "recipeAlt") ? value.recipeAlt : value.recipe
-		uniSequence := this.FormatSingleString(this.GetUniChar(value, True))
+		uniSequence := Util.StrFormattedReduce(this.GetUniChar(value, True))
 
 		if IsObject(recipe) {
 			intermediateValue := ""
