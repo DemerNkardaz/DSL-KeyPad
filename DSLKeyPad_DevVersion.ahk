@@ -2657,17 +2657,21 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	return
 }
 
-ChangeScriptInput(ScriptMode) {
-	PreviousScriptMode := IniRead(ConfigFile, "Settings", "ScriptInput", "Default")
+
+NumberStyle := ""
+
+SetNumberStyle(ScriptMode) {
+	global NumberStyle
+	PreviousScriptMode := NumberStyle
 
 	IsAlterationsActive := AlterationActiveName != "" ? True : False
 
-	if (ScriptMode != "Default" && (ScriptMode = PreviousScriptMode)) {
-		IniWrite("Default", ConfigFile, "Settings", "ScriptInput")
+	if (ScriptMode != "" && (ScriptMode = PreviousScriptMode)) {
+		NumberStyle := ""
 		UnregisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Cleanscript"))
 		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , IsAlterationsActive)
 	} else {
-		IniWrite(ScriptMode, ConfigFile, "Settings", "ScriptInput")
+		NumberStyle := ScriptMode
 		if IsAlterationsActive {
 			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
 		}
@@ -6278,9 +6282,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			UseKey["0"], "Off",
 			UseKey["Minus"], "Off",
 			UseKey["Equals"], "Off",
-			"<+" UseKey["9"], "Off",
-			"<+" UseKey["0"], "Off",
-			"<+" UseKey["Equals"], "Off",
 		]
 	} else if Combinations = "Supercript" {
 
@@ -6405,8 +6406,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["NumpadEnter"], (*) => ParagraphizeSelection(),
 			">^" UseKey["NumpadDot"], (*) => GREPizeSelection(),
 			"<^>!" UseKey["NumpadDot"], (*) => GREPizeSelection(True),
-			"<#<!" UseKey["ArrUp"], (*) => ChangeScriptInput("sup"),
-			"<#<!" UseKey["ArrDown"], (*) => ChangeScriptInput("sub"),
+			"<#<!" UseKey["ArrUp"], (*) => SetNumberStyle("sup"),
+			"<#<!" UseKey["ArrDown"], (*) => SetNumberStyle("sub"),
 			">^" UseKey["1"], (*) => ToggleLetterScript(, "Glagolitic Futhark"),
 			">^" UseKey["2"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"),
 			">^" UseKey["3"], (*) => ToggleLetterScript(, "Old Hungarian"),
