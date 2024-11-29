@@ -14,6 +14,7 @@ store(&VISUALKEYBOARD) 'dsl_latin_supplementary.kvks'
 store(&BITMAP) 'dsl_latin_supplementary.ico'
 store(&COPYRIGHT) 'Copyright © Demer Nkardaz'
 store(&KEYBOARDVERSION) '1.0'
+store(capsState) '0'
 
 begin Unicode > use(main)
 
@@ -217,8 +218,14 @@ group(main) using keys
 + [K_oE2] > U+005c
 + [SHIFT K_oE2] > U+007c
 
-
 + [NCAPS RALT K_A] > U+0103
 + [CAPS RALT K_A] > U+0102
-+ [NCAPS RALT SHIFT K_A] > U+0102
-+ [CAPS RALT SHIFT K_A] > U+0103
+
++ [NCAPS RALT SHIFT K_A] > U+00E4
++ [CAPS RALT SHIFT K_A] > U+00C4
+
++ [NCAPS LALT K_A] > U+00E1
++ [CAPS LALT K_A] > U+00C1
+
+
+if(capsState=1) + [CAPS] > set(capsState='0')

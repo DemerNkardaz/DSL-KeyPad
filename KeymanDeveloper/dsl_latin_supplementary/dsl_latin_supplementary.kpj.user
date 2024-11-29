@@ -40,7 +40,7 @@
         <CodeFont>Consolas|-9|   |0</CodeFont>
         <CharFont>Consolas|-9|   |0</CharFont>
       </IDEState>
-      <Debug>False</Debug>
+      <Debug>True</Debug>
     </FileState>
     <FileState>
       <ID>id_d0850248dc79b19f6ef2a495f5bdbf29</ID>
