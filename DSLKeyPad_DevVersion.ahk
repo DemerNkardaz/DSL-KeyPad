@@ -5221,6 +5221,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"quote_low_9_double", MapMerge(GetModifiers("<^>!<+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
 			"quote_low_9_double", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
 			"quote_low_9_double_reversed", MapMerge(GetModifiers("<^>!>+"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "." : "DotRu"]),
+			"quote_left_double", MapMerge(GetModifiers("<^>!<!"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "," : "CommaRu"]),
+			"quote_right_double", MapMerge(GetModifiers("<^>!<!"), KeySeqSlot[CyrillicLayout = "ЙЦУКЕН" ? "." : "DotRu"]),
 		])
 		SlotModdedQuotes := Map(
 			",", Map("<^>!", "quote_left_double", "<^>!<+", "quote_left_single", "<^>!>+", "quote_low_9_double", "<^>!<+>+", "quote_low_9_single", "<^>!<!", "france_left", "<^>!<!<+", "france_single_left"),
@@ -5602,7 +5604,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				UseKey["Tilde"], (K) => TimedKeyCombinations("Tilde", UseKey["Equals"], "Off"),
 				;
 				"<^>!" UseKey["Numpad0"], (K) => HandleFastKey(K, "empty_set"),
-				"<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
+				"<^<!" UseKey["Numpad0"], (K) => HandleFastKey(K, "dotted_circle"),
 				"<^>!" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_two"),
 				"<^>!>+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterism"),
 				"<^>!<+" UseKey["NumpadMult"], (K) => HandleFastKey(K, "asterisk_low"),
@@ -6390,7 +6392,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^<!<+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifBold"),
 			"<^<!<+>+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerif"),
 			"<^<!" UseKey["Numpad7"], (*) => SetModifiedCharsInput("monospace"),
-			"<^<!" UseKey["Numpad0"], (*) => SetModifiedCharsInput("uncombined"),
+			"<^<!" UseKey["Numpad8"], (*) => SetModifiedCharsInput("uncombined"),
 			;
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
