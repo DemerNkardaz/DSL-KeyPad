@@ -1295,7 +1295,7 @@ CallChar(CharacterName, GetValue) {
 
 
 GetMapCount(MapObj, SortGroups := "") {
-	properties := ["combining", "uncombined", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
+	properties := ["combining", "uncombined", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace", "smallCapital"]
 	if !IsObject(SortGroups) {
 		keyCount := MapObj.Count
 
@@ -1735,7 +1735,7 @@ ProcessMapAfter(GroupLimited := "") {
 			}
 		}
 
-		Alterations := ["combining", "uncombined", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace"]
+		Alterations := ["combining", "uncombined", "modifier", "subscript", "italic", "italicBold", "bold", "script", "fraktur", "scriptBold", "frakturBold", "doubleStruck", "doubleStruckBold", "doubleStruckItalic", "doubleStruckItalicBold", "sansSerif", "sansSerifItalic", "sansSerifItalicBold", "sansSerifBold", "monospace", "smallCapital"]
 
 		for alteration in Alterations {
 			if HasProp(value, alteration "Form") {
@@ -3697,6 +3697,7 @@ Constructor() {
 	Command_alterations_fraktur_script_struck := CommandsTree.Add(Locale.Read("func_label_alterations_fraktur_script_struck"), Command_alterations)
 	Command_alterations_sans_serif := CommandsTree.Add(Locale.Read("func_label_alterations_sans_serif"), Command_alterations)
 	Command_alterations_monospace := CommandsTree.Add(Locale.Read("func_label_alterations_monospace"), Command_alterations)
+	Command_alterations_small_capital := CommandsTree.Add(Locale.Read("func_label_alterations_small_capital"), Command_alterations)
 	Command_inputtoggle := CommandsTree.Add(Locale.Read("func_label_input_toggle"))
 	Command_layouttoggle := CommandsTree.Add(Locale.Read("func_label_layout_toggle"))
 	Command_notifs := CommandsTree.Add(Locale.Read("func_label_notifications"))
@@ -4419,6 +4420,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_alterations_fraktur_script_struck",
 		"func_label_alterations_sans_serif",
 		"func_label_alterations_monospace",
+		"func_label_alterations_small_capital",
 		"func_label_glagolitic_futhark",
 		"func_label_old_permic_old_turkic",
 		"func_label_old_hungarian",
@@ -6394,7 +6396,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^<!<+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerifBold"),
 			"<^<!<+>+" UseKey["Numpad6"], (*) => SetModifiedCharsInput("sansSerif"),
 			"<^<!" UseKey["Numpad7"], (*) => SetModifiedCharsInput("monospace"),
-			"<^<!" UseKey["Numpad8"], (*) => SetModifiedCharsInput("uncombined"),
+			"<^<!" UseKey["Numpad8"], (*) => SetModifiedCharsInput("smallCapital"),
+			"<^<!" UseKey["Numpad9"], (*) => SetModifiedCharsInput("uncombined"),
 			;
 			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
 			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
@@ -6643,6 +6646,7 @@ ManageTrayItems() {
 		"sans_serif_italic_bold_alteration", Locale.Read("tray_func_sans_serif_italic_bold_alteration") "`t" LeftControl LeftAlt RightShift "Num6",
 		"sans_serif_alteration", Locale.Read("tray_func_sans_serif_alteration") "`t" LeftControl LeftAlt LeftShift RightShift "Num6",
 		"monospace_alteration", Locale.Read("tray_func_monospace_alteration") "`t" LeftControl LeftAlt "Num7",
+		"small_capital_alteration", Locale.Read("tray_func_small_capital_alteration") "`t" LeftControl LeftAlt "Num8",
 	)
 
 	CurrentApp := "DSL KeyPad " . CurrentVersionString
@@ -6714,6 +6718,7 @@ ManageTrayItems() {
 	AlterationSubMenu.Add(Labels["sans_serif_alteration"], (*) => SetModifiedCharsInput("sansSerif"))
 	AlterationSubMenu.Add()
 	AlterationSubMenu.Add(Labels["monospace_alteration"], (*) => SetModifiedCharsInput("monospace"))
+	AlterationSubMenu.Add(Labels["small_capital_alteration"], (*) => SetModifiedCharsInput("smallCapital"))
 
 	DSLTray.Add(Labels["alterations"], AlterationSubMenu)
 
