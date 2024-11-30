@@ -8,9 +8,10 @@
 #Include <External\fnc_caret_pos>
 #Include <External\fnc_gui_button_icon>
 #Include <utils>
-#Include <cls_util>
 #Include <chr_alt_codes>
 #Include <chr_entities>
+#Include <cls_util>
+#Include <cls_key_event>
 #Include <cls_layout>
 #Include <supplement_pshell>
 #Include <supplement_python>
