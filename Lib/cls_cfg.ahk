@@ -22,6 +22,9 @@ Class Cfg {
 			"Advanced_Mode", "False",
 			"Auto_Diacritics", "True",
 		],
+		"Characters", [
+			"I_Dot_Shift_I_Dotless", "Default",
+		],
 		"TemperatureCalc", [
 			"Dedicated_Unicode_Chars", "True",
 			"Format_Extended", "True",
@@ -126,6 +129,28 @@ Class Cfg {
 
 				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", Locale.Read("update_absent"))
 			}
+
+			tabLabelChars := Locale.Read("gui_options_tab_characters")
+			tabLabels := [tabLabelChars]
+
+			optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + 75), tabLabels)
+
+			optionsTabs.UseTab(tabLabelChars)
+
+			letterI_Labels := [
+				Locale.Read("gui_options_default") " — Ii",
+				Locale.Read("gui_options_separated") " — " Chr(0x0130) "i, LShift I" Chr(0x0131),
+				Locale.Read("gui_options_hybrid") " — Ii, LShift " Chr(0x0130) Chr(0x0131),
+			]
+
+			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(290 - 17) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
+
+			letterI_Selector := optionsPanel.AddDropDownList("vLetterI_Selector x" languageSelectorX() " w128 y" languageSelectorY(290), letterI_Labels)
+			PostMessage(0x0153, -1, 15, letterI_Selector)
+			letterI_Selector.Text := letterI_Labels[1]
+			letterI_Selector.OnEvent("Change", (CB, Zero) => Options.CharacterOption(CB, "I"))
+
+			optionsTabs.UseTab()
 
 			optionsPanel.AddGroupBox(optionsCommon(55, (windowHeight - 65)))
 
@@ -462,6 +487,21 @@ Class Options {
 		} else if category = "Latin" {
 			Cfg.Set(CB.Text, "Layout_Latin")
 		}
+	}
+
+	static CharacterOption(CB, letter) {
+		if letter = "I" {
+			if InStr(CB.Text, Chr(0x0130) Chr(0x0131), True) {
+				Cfg.Set("Hybrid", "I_Dot_Shift_I_Dotless", "Characters")
+			} else if InStr(CB.Text, Chr(0x0130) "i", True) {
+				Cfg.Set("Separated", "I_Dot_Shift_I_Dotless", "Characters")
+			} else {
+				Cfg.Set("Default", "I_Dot_Shift_I_Dotless", "Characters")
+			}
+		}
+
+		UnregisterKeysLayout()
+		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 	}
 }
 

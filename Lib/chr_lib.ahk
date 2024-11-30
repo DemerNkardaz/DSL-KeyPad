@@ -2023,11 +2023,15 @@ MapInsert(Characters,
 	"lat_c_lig_ae", {
 		unicode: "{U+00C6}",
 		modifierForm: "{U+1D2D}",
+		smallCapitalForm: "{U+1D01}",
 		titlesAlt: True,
 		group: ["Latin Ligatures"],
 		symbolClass: "Latin Ligature",
 		tags: ["!ae", "прописная лигатура AE", "capital ligature AE"],
 		recipe: "AE",
+	},
+	"lat_s_c_lig_ae_hidden", {
+		calcOff: "", unicode: "{U+1D01}", symbolClass: "Latin Ligature", tags: ["капитель лигатура AE", "small capital ligature AE"], recipe: Chrs(0x1D00, 0x1D07),
 	},
 	"lat_s_lig_ae", {
 		unicode: "{U+00E6}",

@@ -5434,12 +5434,14 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"J", Map(
 				"<^>!", ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"],
 				"<^>!<!", ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"],
-				"<^>!<!<+", ["lat_c_let_j", "lat_s_let_j_caron"],),
+				"<^>!<!<+", ["lat_c_let_j", "lat_s_let_j_caron"],
+			),
 			"K", Map("<!", ["lat_c_let_k_acute", "lat_s_let_k_acute"],
 			"<^>!<!", ["lat_c_let_k_dot_below", "lat_s_let_k_dot_below"],
 			"<^>!<!<+", ["lat_c_let_k_caron", "lat_s_let_k_caron"],
 			"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"],
-			"Flat:>+", "kelvin"),
+			"Flat:>+", "kelvin"
+			),
 			"L", Map("<!", ["lat_c_let_l_acute", "lat_s_let_l_acute"],
 			"<^>!", ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"],
 			"<^>!<!<+", ["lat_c_let_l_caron", "lat_s_let_l_caron"],
@@ -5545,13 +5547,25 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!>+", ["lat_c_let_z_ezh", "lat_s_let_z_ezh"],
 			"<^>!<+", ["lat_c_let_z_stroke_short", "lat_s_let_z_stroke_short"]),
 		)
+
+		SlotMapping := Map()
+
+		letterI_Option := Cfg.Get("I_Dot_Shift_I_Dotless", "Characters", "Default")
+
+		if letterI_Option = "Separated" {
+			SlotModdedLetters["I"].Set("<+", ["lat_c_let_i", "lat_s_let_i_dotless"])
+			SlotMapping.Set("I", ["lat_c_let_i_dot_above", "lat_s_let_i"])
+		} else if letterI_Option = "Hybrid" {
+			SlotModdedLetters["I"].Set("<+", ["lat_c_let_i_dot_above", "lat_s_let_i_dotless"])
+		}
+
 		LayoutArray := ArrayMerge(
 			GetBindingsArray(, SlotModdedDiacritics),
 			GetBindingsArray(, SlotModdedQuotes, QuotesSlots),
 			GetBindingsArray(, SlotModdedSpaces, SpacesSlots),
 			GetBindingsArray(, SlotModdedSpecials, SpecialsSlots),
 			GetBindingsArray(, SlotModdedDashes, DashesSlots),
-			GetBindingsArray(, SlotModdedLetters, LettersSlots),
+			GetBindingsArray(SlotMapping, SlotModdedLetters, LettersSlots),
 			[
 				"<^>!" UseKey["ArrLeft"], (K) =>
 					TimedKeyCombinations("ArrLeft",
