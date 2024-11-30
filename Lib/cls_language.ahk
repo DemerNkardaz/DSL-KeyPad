@@ -6,6 +6,8 @@ Class Language {
 		;"gr", { code: "00000408", noLocale: True },
 	)
 
+	static locales := App.paths.ufile "\DSLKeyPad.locales.ini"
+
 	static __New() {
 		this.InitialValidator()
 	}
@@ -93,5 +95,55 @@ Class Language {
 			this.SwitchLayout(previousLeyout, 2, 150)
 			Cfg.Set("", "Prev_Layout", "ServiceFields")
 		}
+	}
+}
+
+
+Class Locale extends Language {
+
+	static __New() {
+	}
+
+	static Read(EntryName, Prefix := "") {
+		Section := Prefix != "" ? Prefix . "_" . Language.Get() : Language.Get()
+		Intermediate := IniRead(this.locales, Section, EntryName, "")
+
+		while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
+			LangCode := match[1]
+			SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
+			Replacement := IniRead(this.locales, SectionOverride, EntryName, "")
+			Intermediate := StrReplace(Intermediate, match[0], Replacement)
+		}
+
+		while (RegExMatch(Intermediate, "\{(?:([^\}_]+)_)?([a-zA-Z]{2}):([^\}]+)\}", &match)) {
+			CustomPrefix := match[1] ? match[1] : ""
+			LangCode := match[2]
+			CustomEntry := match[3]
+			SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
+			Replacement := IniRead(this.locales, SectionOverride, CustomEntry, "")
+			Intermediate := StrReplace(Intermediate, match[0], Replacement)
+		}
+
+		while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
+			Unicode := match[1]
+			Replacement := Chr("0x" . Unicode)
+			Intermediate := StrReplace(Intermediate, match[0], Replacement)
+		}
+
+		while (RegExMatch(Intermediate, "\{var:([^\}]+)\}", &match)) {
+			Varname := match[1]
+			if IsSet(%Varname%) {
+				Replacement := %Varname%
+			} else {
+				Replacement := "VAR (" . Varname . "): NOT FOUND"
+			}
+			Intermediate := StrReplace(Intermediate, match[0], Replacement)
+		}
+
+
+		Intermediate := StrReplace(Intermediate, "\n", "`n")
+		Intermediate := StrReplace(Intermediate, "\t", "`t")
+		Intermediate := Intermediate != "" ? Intermediate : "KEY (" . EntryName . "): NOT FOUND"
+		return Intermediate
 	}
 }

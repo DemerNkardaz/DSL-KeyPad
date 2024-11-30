@@ -18,14 +18,14 @@ Class Ligaturiser {
 		try {
 		} catch {
 			if this.compositingMode = "InputBox"
-				MsgBox(ReadLocale("warning_recipe_absent"), ReadLocale("symbol_smelting"), 0x30)
+				MsgBox(Locale.Read("warning_recipe_absent"), Locale.Read("symbol_smelting"), 0x30)
 			else
 				ShowInfoMessage("warning_recipe_absent", , , Cfg.SkipGroupMessage, True)
 		}
 	}
 
 	static InputBoxMode() {
-		IB := InputBox(ReadLocale("symbol_smelting_prompt"), ReadLocale("symbol_smelting"), "w256 h92", this.prompt)
+		IB := InputBox(Locale.Read("symbol_smelting_prompt"), Locale.Read("symbol_smelting"), "w256 h92", this.prompt)
 		if IB.Result = "Cancel"
 			return
 		else
@@ -61,7 +61,7 @@ Class Ligaturiser {
 		pastInput := ""
 		tooltipSuggestions := ""
 		favoriteSuggestions := this.ReadFavorites()
-		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " ReadLocale("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
+		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " Locale.Read("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
 
 		pauseOn := False
 		cleanPastInput := False
@@ -129,7 +129,7 @@ Class Ligaturiser {
 		PH.Stop()
 
 		if output = "N/A" {
-			CaretTooltip(Chr(0x26A0) " " ReadLocale("warning_recipe_absent"))
+			CaretTooltip(Chr(0x26A0) " " Locale.Read("warning_recipe_absent"))
 			SetTimer(Tooltip, -1000)
 
 		} else {

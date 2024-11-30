@@ -308,7 +308,7 @@ FontValidate() {
 	}
 
 	if FoundNotInstalled {
-		MsgBox(ReadLocale("prepare_fonts") NamesToBeInstalled, DSLPadTitle)
+		MsgBox(Locale.Read("prepare_fonts") NamesToBeInstalled, DSLPadTitle)
 
 		for _, fontSource in SourcesToBeInstalled {
 			FontInstall(fontSource)
@@ -326,7 +326,7 @@ FontInstall(FontSource) {
 		http.Send()
 		http.WaitForResponse()
 	} catch {
-		MsgBox("Can’t download font.`n" ReadLocale("prepare_fonts"), "Font Installer")
+		MsgBox("Can’t download font.`n" Locale.Read("prepare_fonts"), "Font Installer")
 	}
 
 	if (http.Status != 200) {
@@ -441,7 +441,7 @@ GetChangeLog() {
 
 	SetTimer(CancelHttp, TimeOut)
 	if Cancelled {
-		return ReadLocale("warning_nointernet")
+		return Locale.Read("warning_nointernet")
 	}
 
 	for language, url in ChangeLogRaw {
@@ -450,13 +450,13 @@ GetChangeLog() {
 			http.Send()
 			http.WaitForResponse()
 		} catch {
-			return ReadLocale("warning_nointernet")
+			return Locale.Read("warning_nointernet")
 		}
 
 		if http.Status != 200 || Cancelled {
 			if Cancelled {
 				http.Abort()
-				return ReadLocale("warning_nointernet")
+				return Locale.Read("warning_nointernet")
 			}
 			continue
 		}
@@ -549,7 +549,7 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 	ErroMessage := ""
 
 	if RepairMode == True {
-		IB := InputBox(ReadLocale("update_repair"), ReadLocale("update_repair_title"), "w256", "")
+		IB := InputBox(Locale.Read("update_repair"), Locale.Read("update_repair_title"), "w256", "")
 		if IB.Result = "Cancel" || IB.Value != "y" {
 			return
 		}
@@ -562,12 +562,12 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 			http.Send()
 			http.WaitForResponse()
 		} catch {
-			MsgBox(ReadLocale("update_failed"), DSLPadTitle)
+			MsgBox(Locale.Read("update_failed"), DSLPadTitle)
 			return
 		}
 
 		if http.Status != 200 {
-			MsgBox(ReadLocale("update_failed"), DSLPadTitle)
+			MsgBox(Locale.Read("update_failed"), DSLPadTitle)
 			return
 		}
 
@@ -584,9 +584,9 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		GetUtilityFiles(True)
 
 		if RepairMode == True {
-			MsgBox(ReadLocale("update_repair_success"), DSLPadTitle)
+			MsgBox(Locale.Read("update_repair_success"), DSLPadTitle)
 		} else {
-			MsgBox(SetStringVars(ReadLocale("update_successful"), CurrentVersionString, UpdateVersionString), DSLPadTitle)
+			MsgBox(SetStringVars(Locale.Read("update_successful"), CurrentVersionString, UpdateVersionString), DSLPadTitle)
 		}
 
 		Reload
@@ -595,7 +595,7 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		if CheckUpdateError != "" {
 			MsgBox(CheckUpdateError, DSLPadTitle)
 		} else {
-			MsgBox(ReadLocale("update_absent"), DSLPadTitle)
+			MsgBox(Locale.Read("update_absent"), DSLPadTitle)
 		}
 	}
 	return
@@ -610,12 +610,12 @@ CheckUpdate() {
 		http.Send()
 		http.WaitForResponse()
 	} catch {
-		CheckUpdateError := ReadLocale("update_failed")
+		CheckUpdateError := Locale.Read("update_failed")
 		return
 	}
 
 	if http.Status != 200 {
-		CheckUpdateError := ReadLocale("update_failed")
+		CheckUpdateError := Locale.Read("update_failed")
 		return
 	}
 
@@ -1439,14 +1439,14 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			}
 
 			characterTitle := ""
-			if InsertingOption = "Alternative Layout" && HasProp(value, "alt_layout_title") && value.alt_layout_title && !InStr(ReadLocale(entryName "_layout", "chars"), "NOT FOUND") {
-				characterTitle := ReadLocale(entryName "_layout", "chars")
-			} else if !InStr(ReadLocale(entryName, "chars"), "NOT FOUND") {
-				characterTitle := ReadLocale(entryName, "chars")
+			if InsertingOption = "Alternative Layout" && HasProp(value, "alt_layout_title") && value.alt_layout_title && !InStr(Locale.Read(entryName "_layout", "chars"), "NOT FOUND") {
+				characterTitle := Locale.Read(entryName "_layout", "chars")
+			} else if !InStr(Locale.Read(entryName, "chars"), "NOT FOUND") {
+				characterTitle := Locale.Read(entryName, "chars")
 			} else if (HasProp(value, "titles")) {
 				characterTitle := value.titles[LanguageCode]
 			} else {
-				characterTitle := ReadLocale(entryName, "chars")
+				characterTitle := Locale.Read(entryName, "chars")
 			}
 
 			if isFavorite {
@@ -1501,7 +1501,7 @@ GetCountDifference() {
 	Output := StaticCount
 	CurrentCount := GetMapCount(Characters)
 	if CurrentCount > StaticCount {
-		Output := StaticCount " +" (CurrentCount - StaticCount) " " ReadLocale("with_my_recipes")
+		Output := StaticCount " +" (CurrentCount - StaticCount) " " Locale.Read("with_my_recipes")
 	}
 	return Output
 }
@@ -2226,7 +2226,7 @@ SearchKey(CycleSend := "") {
 		PromptValue := IniRead(ConfigFile, "LatestPrompts", "Search", "")
 
 
-		IB := InputBox(ReadLocale("symbol_search_prompt"), ReadLocale("symbol_search"), "w350 h110", PromptValue)
+		IB := InputBox(Locale.Read("symbol_search_prompt"), Locale.Read("symbol_search"), "w350 h110", PromptValue)
 
 		if IB.Result = "Cancel"
 			return
@@ -2365,7 +2365,7 @@ SearchKey(CycleSend := "") {
 	}
 
 	if !Found && !InStr(PromptValue, ",") {
-		MsgBox(ReadLocale("message_character_not_found"), DSLPadTitle, "Icon!")
+		MsgBox(Locale.Read("message_character_not_found"), DSLPadTitle, "Icon!")
 	}
 
 
@@ -2500,7 +2500,7 @@ ChangeTrayIconOnLanguage() {
 
 	if DisabledAllKeys {
 		TraySetIcon(InternalFiles["AppIcoDLL"].File, 9)
-		A_IconTip := DSLPadTitle " (" ReadLocale("tray_tooltip_disabled") ")"
+		A_IconTip := DSLPadTitle " (" Locale.Read("tray_tooltip_disabled") ")"
 		return
 	}
 
@@ -2512,46 +2512,46 @@ ChangeTrayIconOnLanguage() {
 	IconMap := Map(
 		"Glagolitic Futhark", {
 			CodeEn: 2, CodeRu: 3, Default: 1,
-			TitleEn: ReadLocale("tray_tooltip_futhark"),
-			TitleRu: ReadLocale("tray_tooltip_glagolitic"),
+			TitleEn: Locale.Read("tray_tooltip_futhark"),
+			TitleRu: Locale.Read("tray_tooltip_glagolitic"),
 		},
 		"Old Turkic Old Permic", {
 			CodeEn: 4, CodeRu: 5, Default: 1,
-			TitleEn: ReadLocale("tray_tooltip_turkic"),
-			TitleRu: ReadLocale("tray_tooltip_permic"),
+			TitleEn: Locale.Read("tray_tooltip_turkic"),
+			TitleRu: Locale.Read("tray_tooltip_permic"),
 		},
 		"Old Hungarian", {
 			CodeEn: 6, CodeRu: 6, Default: 1,
-			TitleEn: ReadLocale("tray_tooltip_hungarian"),
-			TitleRu: ReadLocale("tray_tooltip_hungarian"),
+			TitleEn: Locale.Read("tray_tooltip_hungarian"),
+			TitleRu: Locale.Read("tray_tooltip_hungarian"),
 		},
 		"Gothic", {
 			CodeEn: 7, CodeRu: 7, Default: 1,
-			TitleEn: ReadLocale("tray_tooltip_gothic"),
-			TitleRu: ReadLocale("tray_tooltip_gothic"),
+			TitleEn: Locale.Read("tray_tooltip_gothic"),
+			TitleRu: Locale.Read("tray_tooltip_gothic"),
 		},
 		"IPA", {
 			CodeEn: 8, CodeRu: 8, Default: 1,
-			TitleEn: ReadLocale("tray_tooltip_ipa"),
-			TitleRu: ReadLocale("tray_tooltip_ipa"),
+			TitleEn: Locale.Read("tray_tooltip_ipa"),
+			TitleRu: Locale.Read("tray_tooltip_ipa"),
 		},
 		"Maths", {
 			CodeEn: 10, CodeRu: 10, Default: 1,
-			TitleEn: ReadLocale("tray_tooltip_maths"),
-			TitleRu: ReadLocale("tray_tooltip_maths"),
+			TitleEn: Locale.Read("tray_tooltip_maths"),
+			TitleRu: Locale.Read("tray_tooltip_maths"),
 		},
 	)
 
 	ISPEntries := Map(
 		"vietNam", {
 			CodeEn: 11, CodeRu: 11, Default: 1,
-			TitleEn: ReadLocale("tray_tooltip_vietNam"),
-			TitleRu: ReadLocale("tray_tooltip_vietNam"),
+			TitleEn: Locale.Read("tray_tooltip_vietNam"),
+			TitleRu: Locale.Read("tray_tooltip_vietNam"),
 		},
 		"pinYin", {
 			CodeEn: 12, CodeRu: 12, Default: 1,
-			TitleEn: ReadLocale("tray_tooltip_pinYin"),
-			TitleRu: ReadLocale("tray_tooltip_pinYin"),
+			TitleEn: Locale.Read("tray_tooltip_pinYin"),
+			TitleRu: Locale.Read("tray_tooltip_pinYin"),
 		},
 	)
 
@@ -2648,7 +2648,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 				key := pair
 				locale := LocalesPairs[i + 1]
 				if ScriptName = key {
-					MsgBox(CurrentActive ? SetStringVars(ReadLocale("script_mode_deactivated"), ReadLocale(locale)) : SetStringVars(ReadLocale("script_mode_activated"), ReadLocale(locale)), DSLPadTitle, 0x40)
+					MsgBox(CurrentActive ? SetStringVars(Locale.Read("script_mode_deactivated"), Locale.Read(locale)) : SetStringVars(Locale.Read("script_mode_activated"), Locale.Read(locale)), DSLPadTitle, 0x40)
 					break
 				}
 			}
@@ -2710,12 +2710,12 @@ SwitchToRoman() {
 
 	PromptValue := Cfg.Get("Roman_Numeral", "LatestPrompts")
 
-	IB := InputBox(ReadLocale("symbol_roman_numeral_prompt"), ReadLocale("symbol_roman_numeral"), "w256 h92", PromptValue)
+	IB := InputBox(Locale.Read("symbol_roman_numeral_prompt"), Locale.Read("symbol_roman_numeral"), "w256 h92", PromptValue)
 	if IB.Result = "Cancel"
 		return
 	else {
 		if (Integer(IB.Value) < 1 || Integer(IB.Value) > 2000000) {
-			MsgBox(ReadLocale("warning_roman_2m"), DSLPadTitle, "Icon!")
+			MsgBox(Locale.Read("warning_roman_2m"), DSLPadTitle, "Icon!")
 			return
 		}
 		PromptValue := ToRomanNumeral(Integer(IB.Value))
@@ -3359,15 +3359,15 @@ Constructor() {
 	DSLCols := { default: [], smelting: [] }
 
 	for _, localeKey in ["diacritics", "spaces", "smelting", "fastkeys", "scripts", "commands", "about", "useful", "changelog"] {
-		DSLTabs.Push(ReadLocale("tab_" . localeKey))
+		DSLTabs.Push(Locale.Read("tab_" . localeKey))
 	}
 
 	for _, localeKey in ["name", "key", "view", "unicode", "entryid", "entry_title"] {
-		DSLCols.default.Push(ReadLocale("col_" . localeKey))
+		DSLCols.default.Push(Locale.Read("col_" . localeKey))
 	}
 
 	for _, localeKey in ["name", "recipe", "result", "unicode", "entryid", "entry_title"] {
-		DSLCols.smelting.Push(ReadLocale("col_" . localeKey))
+		DSLCols.smelting.Push(Locale.Read("col_" . localeKey))
 	}
 
 	DSLContent := {}
@@ -3376,7 +3376,7 @@ Constructor() {
 
 	CommonInfoBox := {
 		body: "x650 y35 w200 h510",
-		bodyText: ReadLocale("character"),
+		bodyText: Locale.Read("character"),
 		previewFrame: "x685 y80 w128 h128 Center",
 		preview: "x685 y80 w128 h128 readonly Center -VScroll -HScroll",
 		previewText: "◌͏",
@@ -3486,7 +3486,7 @@ Constructor() {
 				: (groupName = "Special Fast Secondary") ? RightAlt
 					: (groupName = "Spaces Right Shift") ? RightShift
 						: (groupName = "Spaces Left Shift") ? LeftShift
-							: (groupName = "Special Fast") ? ReadLocale("symbol_special_key")
+							: (groupName = "Special Fast") ? Locale.Read("symbol_special_key")
 								: ""
 
 		BlackList := groupName = "Spaces" ? ["emsp13", "emsp14", "emsp16", "narrow_no_break_space"] : []
@@ -3499,31 +3499,31 @@ Constructor() {
 
 	AltLayouts := [
 		"Fake GlagoRunes", RightControl " 1",
-		"Futhark Runes", ReadLocale("symbol_futhark"),
-		"Futhork Runes", ReadLocale("symbol_futhork"),
-		"Younger Futhark Runes", ReadLocale("symbol_futhark_younger"),
-		"Almanac Runes", ReadLocale("symbol_futhark_almanac"),
-		"Later Younger Futhark Runes", ReadLocale("symbol_futhark_younger_later"),
-		"Medieval Runes", ReadLocale("symbol_medieval_runes"),
-		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
-		"Glagolitic Letters", ReadLocale("symbol_glagolitic"),
+		"Futhark Runes", Locale.Read("symbol_futhark"),
+		"Futhork Runes", Locale.Read("symbol_futhork"),
+		"Younger Futhark Runes", Locale.Read("symbol_futhark_younger"),
+		"Almanac Runes", Locale.Read("symbol_futhark_almanac"),
+		"Later Younger Futhark Runes", Locale.Read("symbol_futhark_younger_later"),
+		"Medieval Runes", Locale.Read("symbol_medieval_runes"),
+		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
+		"Glagolitic Letters", Locale.Read("symbol_glagolitic"),
 		"Cyrillic Diacritics", "",
 		"Fake TurkoPermic", RightControl " 2",
-		"Old Turkic", ReadLocale("symbol_turkic"),
-		"Old Turkic Orkhon", ReadLocale("symbol_turkic_orkhon"),
-		"Old Turkic Yenisei", ReadLocale("symbol_turkic_yenisei"),
-		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
-		"Old Permic", ReadLocale("symbol_permic"),
+		"Old Turkic", Locale.Read("symbol_turkic"),
+		"Old Turkic Orkhon", Locale.Read("symbol_turkic_orkhon"),
+		"Old Turkic Yenisei", Locale.Read("symbol_turkic_yenisei"),
+		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
+		"Old Permic", Locale.Read("symbol_permic"),
 		"Fake Hungarian", RightControl " 3",
-		"Old Hungarian", ReadLocale("symbol_hungarian"),
-		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
+		"Old Hungarian", Locale.Read("symbol_hungarian"),
+		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
 		"Fake Gothic", RightControl " 4",
-		"Gothic Alphabet", ReadLocale("symbol_gothic"),
-		"Runic Punctuation", ReadLocale("symbol_runic_punctuation"),
+		"Gothic Alphabet", Locale.Read("symbol_gothic"),
+		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
 		"Fake IPA", RightControl " 0",
-		"IPA", ReadLocale("symbol_ipa"),
+		"IPA", Locale.Read("symbol_ipa"),
 		"Fake Math", RightControl RightShift " 0",
-		"Mathematical", ReadLocale("symbol_maths"),
+		"Mathematical", Locale.Read("symbol_maths"),
 		"Math", "",
 		"Math Spaces", "",
 	]
@@ -3668,54 +3668,54 @@ Constructor() {
 		text: DSLPadGUI.Add("Link", CommandsInfoBox.text),
 	}
 
-	Command_controls := CommandsTree.Add(ReadLocale("func_label_controls"))
-	Command_disable := CommandsTree.Add(ReadLocale("func_label_disable"))
-	Command_gotopage := CommandsTree.Add(ReadLocale("func_label_gotopage"))
-	Command_selgoto := CommandsTree.Add(ReadLocale("func_label_selgoto"))
-	Command_copylist := CommandsTree.Add(ReadLocale("func_label_favorites"))
-	Command_copylist := CommandsTree.Add(ReadLocale("func_label_copylist"))
-	Command_tagsearch := CommandsTree.Add(ReadLocale("func_label_tagsearch"))
-	Command_uninsert := CommandsTree.Add(ReadLocale("func_label_uninsert"))
-	Command_altcode := CommandsTree.Add(ReadLocale("func_label_altcode"))
-	Command_smelter := CommandsTree.Add(ReadLocale("func_label_smelter"), , "Expand")
-	Command_compose := CommandsTree.Add(ReadLocale("func_label_compose"), Command_smelter)
-	Command_num_superscript := CommandsTree.Add(ReadLocale("func_label_num_superscript"))
-	Command_num_roman := CommandsTree.Add(ReadLocale("func_label_num_roman"))
-	Command_fastkeys := CommandsTree.Add(ReadLocale("func_label_fastkeys"))
-	Command_extralayouts := CommandsTree.Add(ReadLocale("func_label_scripts"))
-	Command_glagokeys := CommandsTree.Add(ReadLocale("func_label_glagolitic_futhark"), Command_extralayouts)
-	Command_oldturkic := CommandsTree.Add(ReadLocale("func_label_old_permic_old_turkic"), Command_extralayouts)
-	Command_oldhungary := CommandsTree.Add(ReadLocale("func_label_old_hungarian"), Command_extralayouts)
-	Command_gothic := CommandsTree.Add(ReadLocale("func_label_gothic"), Command_extralayouts)
-	Command_func_label_maths := CommandsTree.Add(ReadLocale("func_label_maths"), Command_extralayouts)
-	Command_func_label_ipa := CommandsTree.Add(ReadLocale("func_label_ipa"), Command_extralayouts)
-	Command_alterations := CommandsTree.Add(ReadLocale("func_label_alterations"))
-	Command_alterations_combining := CommandsTree.Add(ReadLocale("func_label_alterations_combining"), Command_alterations)
-	Command_alterations_modifier := CommandsTree.Add(ReadLocale("func_label_alterations_modifier"), Command_alterations)
-	Command_alterations_italic_to_bold := CommandsTree.Add(ReadLocale("func_label_alterations_italic_to_bold"), Command_alterations)
-	Command_alterations_fraktur_script_struck := CommandsTree.Add(ReadLocale("func_label_alterations_fraktur_script_struck"), Command_alterations)
-	Command_alterations_sans_serif := CommandsTree.Add(ReadLocale("func_label_alterations_sans_serif"), Command_alterations)
-	Command_alterations_monospace := CommandsTree.Add(ReadLocale("func_label_alterations_monospace"), Command_alterations)
-	Command_inputtoggle := CommandsTree.Add(ReadLocale("func_label_input_toggle"))
-	Command_layouttoggle := CommandsTree.Add(ReadLocale("func_label_layout_toggle"))
-	Command_notifs := CommandsTree.Add(ReadLocale("func_label_notifications"))
-	Command_textprocessing := CommandsTree.Add(ReadLocale("func_label_text_processing"))
-	Command_tp_paragraph := CommandsTree.Add(ReadLocale("func_label_tp_paragraph"), Command_textprocessing)
-	Command_tp_grep := CommandsTree.Add(ReadLocale("func_label_tp_grep"), Command_textprocessing)
-	Command_tp_quotes := CommandsTree.Add(ReadLocale("func_label_tp_quotes"), Command_textprocessing)
-	Command_tp_html := CommandsTree.Add(ReadLocale("func_label_tp_html"), Command_textprocessing)
-	Command_tp_unicode := CommandsTree.Add(ReadLocale("func_label_tp_unicode"), Command_textprocessing)
-	Command_lcoverage := CommandsTree.Add(ReadLocale("func_label_coverage"))
+	Command_controls := CommandsTree.Add(Locale.Read("func_label_controls"))
+	Command_disable := CommandsTree.Add(Locale.Read("func_label_disable"))
+	Command_gotopage := CommandsTree.Add(Locale.Read("func_label_gotopage"))
+	Command_selgoto := CommandsTree.Add(Locale.Read("func_label_selgoto"))
+	Command_copylist := CommandsTree.Add(Locale.Read("func_label_favorites"))
+	Command_copylist := CommandsTree.Add(Locale.Read("func_label_copylist"))
+	Command_tagsearch := CommandsTree.Add(Locale.Read("func_label_tagsearch"))
+	Command_uninsert := CommandsTree.Add(Locale.Read("func_label_uninsert"))
+	Command_altcode := CommandsTree.Add(Locale.Read("func_label_altcode"))
+	Command_smelter := CommandsTree.Add(Locale.Read("func_label_smelter"), , "Expand")
+	Command_compose := CommandsTree.Add(Locale.Read("func_label_compose"), Command_smelter)
+	Command_num_superscript := CommandsTree.Add(Locale.Read("func_label_num_superscript"))
+	Command_num_roman := CommandsTree.Add(Locale.Read("func_label_num_roman"))
+	Command_fastkeys := CommandsTree.Add(Locale.Read("func_label_fastkeys"))
+	Command_extralayouts := CommandsTree.Add(Locale.Read("func_label_scripts"))
+	Command_glagokeys := CommandsTree.Add(Locale.Read("func_label_glagolitic_futhark"), Command_extralayouts)
+	Command_oldturkic := CommandsTree.Add(Locale.Read("func_label_old_permic_old_turkic"), Command_extralayouts)
+	Command_oldhungary := CommandsTree.Add(Locale.Read("func_label_old_hungarian"), Command_extralayouts)
+	Command_gothic := CommandsTree.Add(Locale.Read("func_label_gothic"), Command_extralayouts)
+	Command_func_label_maths := CommandsTree.Add(Locale.Read("func_label_maths"), Command_extralayouts)
+	Command_func_label_ipa := CommandsTree.Add(Locale.Read("func_label_ipa"), Command_extralayouts)
+	Command_alterations := CommandsTree.Add(Locale.Read("func_label_alterations"))
+	Command_alterations_combining := CommandsTree.Add(Locale.Read("func_label_alterations_combining"), Command_alterations)
+	Command_alterations_modifier := CommandsTree.Add(Locale.Read("func_label_alterations_modifier"), Command_alterations)
+	Command_alterations_italic_to_bold := CommandsTree.Add(Locale.Read("func_label_alterations_italic_to_bold"), Command_alterations)
+	Command_alterations_fraktur_script_struck := CommandsTree.Add(Locale.Read("func_label_alterations_fraktur_script_struck"), Command_alterations)
+	Command_alterations_sans_serif := CommandsTree.Add(Locale.Read("func_label_alterations_sans_serif"), Command_alterations)
+	Command_alterations_monospace := CommandsTree.Add(Locale.Read("func_label_alterations_monospace"), Command_alterations)
+	Command_inputtoggle := CommandsTree.Add(Locale.Read("func_label_input_toggle"))
+	Command_layouttoggle := CommandsTree.Add(Locale.Read("func_label_layout_toggle"))
+	Command_notifs := CommandsTree.Add(Locale.Read("func_label_notifications"))
+	Command_textprocessing := CommandsTree.Add(Locale.Read("func_label_text_processing"))
+	Command_tp_paragraph := CommandsTree.Add(Locale.Read("func_label_tp_paragraph"), Command_textprocessing)
+	Command_tp_grep := CommandsTree.Add(Locale.Read("func_label_tp_grep"), Command_textprocessing)
+	Command_tp_quotes := CommandsTree.Add(Locale.Read("func_label_tp_quotes"), Command_textprocessing)
+	Command_tp_html := CommandsTree.Add(Locale.Read("func_label_tp_html"), Command_textprocessing)
+	Command_tp_unicode := CommandsTree.Add(Locale.Read("func_label_tp_unicode"), Command_textprocessing)
+	Command_lcoverage := CommandsTree.Add(Locale.Read("func_label_coverage"))
 
 
 	for coverage in AlphabetCoverage {
-		CommandsTree.Add(ReadLocale("func_label_coverage_" coverage), Command_lcoverage)
+		CommandsTree.Add(Locale.Read("func_label_coverage_" coverage), Command_lcoverage)
 	}
 
 
 	DSLPadGUI.SetFont("s9")
 
-	BtnAutoLoad := DSLPadGUI.Add("Button", "x577 y527 w200 h32", ReadLocale("autoload_add"))
+	BtnAutoLoad := DSLPadGUI.Add("Button", "x577 y527 w200 h32", Locale.Read("autoload_add"))
 	BtnAutoLoad.OnEvent("Click", AddScriptToAutoload)
 
 	BtnSwitchRU := DSLPadGUI.Add("Button", "x300 y527 w32 h32", "РУ")
@@ -3749,7 +3749,7 @@ Constructor() {
 	if UpdateAvailable
 	{
 		DSLPadGUI["NewVersionAlert"].Text :=
-			SetStringVars(ReadLocale("update_available"), UpdateVersionString) ' (<a href="' RepoSource '">GitHub</a>)'
+			SetStringVars(Locale.Read("update_available"), UpdateVersionString) ' (<a href="' RepoSource '">GitHub</a>)'
 		DSLPadGUI["NewVersionIcon"].Text := InformationSymbol
 	}
 
@@ -3953,11 +3953,11 @@ Constructor() {
 
 	AboutRepoLinkX := LanguageCode == "ru" ? "x114" : "x123"
 	AboutRepoLink := DSLPadGUI.Add("Link", AboutRepoLinkX " y320 w150 h20 Center",
-		'<a href="https://github.com/DemerNkardaz/DSL-KeyPad">' ReadLocale("about_repository") '</a>'
+		'<a href="https://github.com/DemerNkardaz/DSL-KeyPad">' Locale.Read("about_repository") '</a>'
 	)
 	AboutRepoLink.SetFont("s12", "Cambria")
 
-	AboutAuthor := DSLPadGUI.Add("Text", "x75 y495 w170 h16 Center BackgroundTrans", ReadLocale("about_author"))
+	AboutAuthor := DSLPadGUI.Add("Text", "x75 y495 w170 h16 Center BackgroundTrans", Locale.Read("about_author"))
 	AboutAuthor.SetFont("s11 c333333", "Cambria")
 
 	AboutAuthorLinks := DSLPadGUI.Add("Link", "x90 y525 w150 h16 Center",
@@ -3967,32 +3967,32 @@ Constructor() {
 	)
 	AboutAuthorLinks.SetFont("s9", "Cambria")
 
-	AboutDescBox := DSLPadGUI.Add("GroupBox", "x315 y34 w530 h520", ReadLocale("about_item_count") . " — " . DSLPadTitleFull)
+	AboutDescBox := DSLPadGUI.Add("GroupBox", "x315 y34 w530 h520", Locale.Read("about_item_count") . " — " . DSLPadTitleFull)
 	AboutDescBox.SetFont("s11", "Cambria")
 
-	AboutDescription := DSLPadGUI.Add("Text", "x330 y70 w505 h495 Wrap BackgroundTrans", ReadLocale("about_description"))
+	AboutDescription := DSLPadGUI.Add("Text", "x330 y70 w505 h495 Wrap BackgroundTrans", Locale.Read("about_description"))
 	AboutDescription.SetFont("s12 c333333", "Cambria")
 
 
 	Tab.UseTab(8)
 
 	DSLPadGUI.SetFont("s13")
-	DSLPadGUI.Add("Text", , ReadLocale("typography"))
+	DSLPadGUI.Add("Text", , Locale.Read("typography"))
 	DSLPadGUI.SetFont("s11")
-	DSLPadGUI.Add("Link", "w600", ReadLocale("typography_layout"))
+	DSLPadGUI.Add("Link", "w600", Locale.Read("typography_layout"))
 	DSLPadGUI.SetFont("s13")
-	DSLPadGUI.Add("Text", , ReadLocale("unicode_resources"))
+	DSLPadGUI.Add("Text", , Locale.Read("unicode_resources"))
 	DSLPadGUI.SetFont("s11")
 	DSLPadGUI.Add("Link", "w600", '<a href="https://symbl.cc/">Symbl.cc</a> <a href="https://www.compart.com/en/unicode/">Compart</a>')
 	DSLPadGUI.SetFont("s13")
-	DSLPadGUI.Add("Text", , ReadLocale("dictionaries"))
+	DSLPadGUI.Add("Text", , Locale.Read("dictionaries"))
 	DSLPadGUI.SetFont("s11")
-	DSLPadGUI.Add("Link", "w600", ReadLocale("dictionaries_japanese") '<a href="https://yarxi.ru">ЯРКСИ</a> <a href="https://www.warodai.ruu">Warodai</a>')
-	DSLPadGUI.Add("Link", "w600", ReadLocale("dictionaries_chinese") '<a href="https://bkrs.info">БКРС</a>')
-	DSLPadGUI.Add("Link", "w600", ReadLocale("dictionaries_vietnamese") '<a href="https://chunom.org">Chữ Nôm</a>')
+	DSLPadGUI.Add("Link", "w600", Locale.Read("dictionaries_japanese") '<a href="https://yarxi.ru">ЯРКСИ</a> <a href="https://www.warodai.ruu">Warodai</a>')
+	DSLPadGUI.Add("Link", "w600", Locale.Read("dictionaries_chinese") '<a href="https://bkrs.info">БКРС</a>')
+	DSLPadGUI.Add("Link", "w600", Locale.Read("dictionaries_vietnamese") '<a href="https://chunom.org">Chữ Nôm</a>')
 
 	Tab.UseTab(9)
-	DSLPadGUI.Add("GroupBox", "w825 h520", "🌐 " . ReadLocale("tab_changelog"))
+	DSLPadGUI.Add("GroupBox", "w825 h520", "🌐 " . Locale.Read("tab_changelog"))
 	InsertChangesList(DSLPadGUI)
 
 
@@ -4193,17 +4193,17 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 
 		characterTitle := ""
-		if (HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True && !InStr(ReadLocale(EntryNameKey "_alt", "chars"), "NOT FOUND")) {
-			characterTitle := ReadLocale(EntryNameKey . "_alt", "chars")
-		} else if !InStr(ReadLocale(EntryNameKey, "chars"), "NOT FOUND") {
-			characterTitle := ReadLocale(EntryNameKey, "chars")
+		if (HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True && !InStr(Locale.Read(EntryNameKey "_alt", "chars"), "NOT FOUND")) {
+			characterTitle := Locale.Read(EntryNameKey . "_alt", "chars")
+		} else if !InStr(Locale.Read(EntryNameKey, "chars"), "NOT FOUND") {
+			characterTitle := Locale.Read(EntryNameKey, "chars")
 		} else if (HasProp(GetEntry, "titlesAltOnEntry")) {
 			characterTitle := GetEntry.titlesAltOnEntry[LanguageCode]
 		} else if (HasProp(GetEntry, "titles") &&
 		(!HasProp(GetEntry, "titlesAlt") || HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True)) {
 			characterTitle := GetEntry.titles[LanguageCode]
 		} else {
-			characterTitle := ReadLocale(EntryNameKey, "chars")
+			characterTitle := Locale.Read(EntryNameKey, "chars")
 		}
 
 		if (HasProp(GetEntry, "symbol")) {
@@ -4280,10 +4280,10 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 			PreviewGroup.html.SetFont("s12")
 		}
 
-		EntryString := ReadLocale("entry") ": " EntryNameKey
+		EntryString := Locale.Read("entry") ": " EntryNameKey
 		TagsString := ""
 		if (HasProp(GetEntry, "tags")) {
-			TagsString := ReadLocale("tags") . ": "
+			TagsString := Locale.Read("tags") . ": "
 
 			totalCount := 0
 			for index in GetEntry.tags {
@@ -4328,7 +4328,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 
 
-		TargetGroup[PreviewGroupTitle].Text := GroupTitle (IsDiacritic ? ReadLocale("character_combining") : ReadLocale("character"))
+		TargetGroup[PreviewGroupTitle].Text := GroupTitle (IsDiacritic ? Locale.Read("character_combining") : Locale.Read("character"))
 
 		if (HasProp(GetEntry, "altcode")) {
 			TargetGroup[PreviewAlt].Text := GetEntry.altcode
@@ -4376,10 +4376,10 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 
 		if RegExMatch(EntryNameKey, "^permic") && HasPermicFont = "Noto Sans Old Permic" {
-			TargetGroup[PreviewAlert].Text := SetStringVars(ReadLocale("warning_nofont"), HasPermicFont)
+			TargetGroup[PreviewAlert].Text := SetStringVars(Locale.Read("warning_nofont"), HasPermicFont)
 		}
 		else if RegExMatch(EntryNameKey, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" {
-			TargetGroup[PreviewAlert].Text := SetStringVars(ReadLocale("warning_nofont"), HasHungarianFont)
+			TargetGroup[PreviewAlert].Text := SetStringVars(Locale.Read("warning_nofont"), HasHungarianFont)
 		} else {
 			TargetGroup[PreviewAlert].Text := ""
 		}
@@ -4444,8 +4444,8 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 
 	for label in LabelValidator
 	{
-		if (ReadLocale(label) = SelectedLabel) {
-			TargetTextBox.Text := ReadLocale(label . "_description")
+		if (Locale.Read(label) = SelectedLabel) {
+			TargetTextBox.Text := Locale.Read(label . "_description")
 			if InStr(label, "coverage_") {
 				TargetTextBox.SetFont("s16", FontFace["serif"].name)
 			} else {
@@ -6577,7 +6577,7 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle,
 	Ico := MessageIcon == "Info" ? "Iconi" :
 		MessageIcon == "Warning" ? "Icon!" :
 			MessageIcon == "Error" ? "Iconx" : 0x0
-	TrayTip(NoReadLocale ? MessagePost : ReadLocale(MessagePost), MessageTitle, Ico . Muting)
+	TrayTip(NoReadLocale ? MessagePost : Locale.Read(MessagePost), MessageTitle, Ico . Muting)
 
 }
 
@@ -6595,53 +6595,53 @@ OpenScriptFolder(*) {
 ManageTrayItems() {
 	LanguageCode := Language.Get()
 	Labels := Map(
-		"reload", ReadLocale("tray_func_reload"),
-		"config", ReadLocale("tray_func_config"),
-		"locale", ReadLocale("tray_func_locale"),
-		"custom_compose", ReadLocale("tray_func_custom_compose"),
-		"exit", ReadLocale("tray_func_exit") "`t" LeftControl RightShift "Esc",
-		"panel", ReadLocale("tray_func_panel") "`t" Window LeftAlt "Home",
-		"options", ReadLocale("gui_options"),
-		"install", ReadLocale("tray_func_install"),
-		"search", ReadLocale("tray_func_search") "`t" Window LeftAlt "F",
-		"open_folder", ReadLocale("tray_func_open_folder"),
-		"smelter", ReadLocale("tray_func_smelter") "`t" Window LeftAlt "L",
-		"unicode", ReadLocale("tray_func_unicode") "`t" Window LeftAlt "U",
-		"altcode", ReadLocale("tray_func_altcode") "`t" Window LeftAlt "A",
-		"notif", ReadLocale("tray_func_notif") "`t" Window LeftAlt "M",
-		"disable", ReadLocale("tray_func_disable") "`t" RightControl "F10",
-		"enable", ReadLocale("tray_func_enable") "`t" RightControl "F10",
-		"altInput", ReadLocale("tray_func_altInput"),
-		"glagolitic", ReadLocale("tray_func_glagolitic_runic") "`t" RightControl "1",
-		"turkic", ReadLocale("tray_func_tukic_permic") "`t" RightControl "2",
-		"hungarian", ReadLocale("tray_func_hungarian") "`t" RightControl "3",
-		"gothic", ReadLocale("tray_func_gothic") "`t" RightControl "4",
-		"maths", ReadLocale("tray_func_maths") "`t" RightControl "9",
-		"ipa", ReadLocale("tray_func_ipa") "`t" RightControl "0",
-		"script", ReadLocale("func_label_scripts"),
-		"telexInput", ReadLocale("tray_func_telexlike"),
-		"telex_advanced_mode", ReadLocale("tray_func_telex_advanced_mode"),
-		"vietNam", ReadLocale("tray_func_vietNam") "`t" RightAlt "F2",
-		"pinYin", ReadLocale("tray_func_pinYin") "`t" RightAlt RightShift "F2",
-		"layouts", ReadLocale("func_label_layouts"),
-		"alterations", ReadLocale("func_label_alterations"),
-		"combining_alteration", ReadLocale("tray_func_combining_alteration") "`t" LeftControl LeftAlt "Num1",
-		"modifier_alteration", ReadLocale("tray_func_modifier_alteration") "`t" LeftControl LeftAlt LeftShift "Num1",
-		"subscript_alteration", ReadLocale("tray_func_subscript_alteration") "`t" LeftControl LeftAlt RightShift "Num1",
-		"italic_alteration", ReadLocale("tray_func_italic_alteration") "`t" LeftControl LeftAlt "Num2",
-		"bold_alteration", ReadLocale("tray_func_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num2",
-		"italic_bold_alteration", ReadLocale("tray_func_italic_bold_alteration") "`t" LeftControl LeftAlt RightShift "Num2",
-		"fraktur_alteration", ReadLocale("tray_func_fraktur_alteration") "`t" LeftControl LeftAlt "Num3",
-		"fraktur_bold_alteration", ReadLocale("tray_func_fraktur_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num3",
-		"script_alteration", ReadLocale("tray_func_script_alteration") "`t" LeftControl LeftAlt "Num4",
-		"script_bold_alteration", ReadLocale("tray_func_script_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num4",
-		"double_struck_alteration", ReadLocale("tray_func_double_struck_alteration") "`t" LeftControl LeftAlt "Num5",
-		"double_struck_italic_alteration", ReadLocale("tray_func_double_struck_italic_alteration") "`t" LeftControl LeftAlt LeftShift "Num5",
-		"sans_serif_italic_alteration", ReadLocale("tray_func_sans_serif_italic_alteration") "`t" LeftControl LeftAlt "Num6",
-		"sans_serif_bold_alteration", ReadLocale("tray_func_sans_serif_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num6",
-		"sans_serif_italic_bold_alteration", ReadLocale("tray_func_sans_serif_italic_bold_alteration") "`t" LeftControl LeftAlt RightShift "Num6",
-		"sans_serif_alteration", ReadLocale("tray_func_sans_serif_alteration") "`t" LeftControl LeftAlt LeftShift RightShift "Num6",
-		"monospace_alteration", ReadLocale("tray_func_monospace_alteration") "`t" LeftControl LeftAlt "Num7",
+		"reload", Locale.Read("tray_func_reload"),
+		"config", Locale.Read("tray_func_config"),
+		"locale", Locale.Read("tray_func_locale"),
+		"custom_compose", Locale.Read("tray_func_custom_compose"),
+		"exit", Locale.Read("tray_func_exit") "`t" LeftControl RightShift "Esc",
+		"panel", Locale.Read("tray_func_panel") "`t" Window LeftAlt "Home",
+		"options", Locale.Read("gui_options"),
+		"install", Locale.Read("tray_func_install"),
+		"search", Locale.Read("tray_func_search") "`t" Window LeftAlt "F",
+		"open_folder", Locale.Read("tray_func_open_folder"),
+		"smelter", Locale.Read("tray_func_smelter") "`t" Window LeftAlt "L",
+		"unicode", Locale.Read("tray_func_unicode") "`t" Window LeftAlt "U",
+		"altcode", Locale.Read("tray_func_altcode") "`t" Window LeftAlt "A",
+		"notif", Locale.Read("tray_func_notif") "`t" Window LeftAlt "M",
+		"disable", Locale.Read("tray_func_disable") "`t" RightControl "F10",
+		"enable", Locale.Read("tray_func_enable") "`t" RightControl "F10",
+		"altInput", Locale.Read("tray_func_altInput"),
+		"glagolitic", Locale.Read("tray_func_glagolitic_runic") "`t" RightControl "1",
+		"turkic", Locale.Read("tray_func_tukic_permic") "`t" RightControl "2",
+		"hungarian", Locale.Read("tray_func_hungarian") "`t" RightControl "3",
+		"gothic", Locale.Read("tray_func_gothic") "`t" RightControl "4",
+		"maths", Locale.Read("tray_func_maths") "`t" RightControl "9",
+		"ipa", Locale.Read("tray_func_ipa") "`t" RightControl "0",
+		"script", Locale.Read("func_label_scripts"),
+		"telexInput", Locale.Read("tray_func_telexlike"),
+		"telex_advanced_mode", Locale.Read("tray_func_telex_advanced_mode"),
+		"vietNam", Locale.Read("tray_func_vietNam") "`t" RightAlt "F2",
+		"pinYin", Locale.Read("tray_func_pinYin") "`t" RightAlt RightShift "F2",
+		"layouts", Locale.Read("func_label_layouts"),
+		"alterations", Locale.Read("func_label_alterations"),
+		"combining_alteration", Locale.Read("tray_func_combining_alteration") "`t" LeftControl LeftAlt "Num1",
+		"modifier_alteration", Locale.Read("tray_func_modifier_alteration") "`t" LeftControl LeftAlt LeftShift "Num1",
+		"subscript_alteration", Locale.Read("tray_func_subscript_alteration") "`t" LeftControl LeftAlt RightShift "Num1",
+		"italic_alteration", Locale.Read("tray_func_italic_alteration") "`t" LeftControl LeftAlt "Num2",
+		"bold_alteration", Locale.Read("tray_func_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num2",
+		"italic_bold_alteration", Locale.Read("tray_func_italic_bold_alteration") "`t" LeftControl LeftAlt RightShift "Num2",
+		"fraktur_alteration", Locale.Read("tray_func_fraktur_alteration") "`t" LeftControl LeftAlt "Num3",
+		"fraktur_bold_alteration", Locale.Read("tray_func_fraktur_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num3",
+		"script_alteration", Locale.Read("tray_func_script_alteration") "`t" LeftControl LeftAlt "Num4",
+		"script_bold_alteration", Locale.Read("tray_func_script_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num4",
+		"double_struck_alteration", Locale.Read("tray_func_double_struck_alteration") "`t" LeftControl LeftAlt "Num5",
+		"double_struck_italic_alteration", Locale.Read("tray_func_double_struck_italic_alteration") "`t" LeftControl LeftAlt LeftShift "Num5",
+		"sans_serif_italic_alteration", Locale.Read("tray_func_sans_serif_italic_alteration") "`t" LeftControl LeftAlt "Num6",
+		"sans_serif_bold_alteration", Locale.Read("tray_func_sans_serif_bold_alteration") "`t" LeftControl LeftAlt LeftShift "Num6",
+		"sans_serif_italic_bold_alteration", Locale.Read("tray_func_sans_serif_italic_bold_alteration") "`t" LeftControl LeftAlt RightShift "Num6",
+		"sans_serif_alteration", Locale.Read("tray_func_sans_serif_alteration") "`t" LeftControl LeftAlt LeftShift RightShift "Num6",
+		"monospace_alteration", Locale.Read("tray_func_monospace_alteration") "`t" LeftControl LeftAlt "Num7",
 	)
 
 	CurrentApp := "DSL KeyPad " . CurrentVersionString

@@ -1,7 +1,7 @@
 Class MyRecipes {
 
 	static file := App.paths.user "\CustomCompose.ini"
-	static editorTitle := App.winTitle " — " ReadLocale("gui_recipes_create")
+	static editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
 
 	static defaulRecipes := [
 		"kanji_yoshi", {
@@ -105,7 +105,7 @@ Class MyRecipes {
 	static Editor(sectionName := [], recipesLV?) {
 
 		Constructor() {
-			this.editorTitle := App.winTitle " — " ReadLocale("gui_recipes_create")
+			this.editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
 			data := {
 				section: "",
 				name: "",
@@ -139,16 +139,16 @@ Class MyRecipes {
 
 			recipeCreator.AddGroupBox("vGroupCommon " "x" defaultSizes.groupBoxX " y" boxCommonY " w" defaultSizes.groupBoxW " h" boxCommonH)
 
-			sectionLabel := recipeCreator.AddText("vSectionLabel x" commonX() " y" commonY() " w150 BackgroundTrans", ReadLocale("gui_recipes_create_section"))
+			sectionLabel := recipeCreator.AddText("vSectionLabel x" commonX() " y" commonY() " w150 BackgroundTrans", Locale.Read("gui_recipes_create_section"))
 			sectionEdit := recipeCreator.AddEdit("vSectionEdit x" commonX() " y" commonY(20) " w250 Limit48 -Multi" (sectionName.Length > 0 ? " ReadOnly" : ""), sectionName.Length > 0 ? sectionName[4] : "")
 
-			nameLabel := recipeCreator.AddText("vNameLabel x" commonX() " y" commonY(55) " w150 BackgroundTrans", ReadLocale("gui_recipes_create_name"))
+			nameLabel := recipeCreator.AddText("vNameLabel x" commonX() " y" commonY(55) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_name"))
 			nameEdit := recipeCreator.AddEdit("vNameEdit x" commonX() " y" commonY(55 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).name : "")
 
-			recipeLabel := recipeCreator.AddText("vRecipeLabel x" commonX() " y" commonY(110) " w150 BackgroundTrans", ReadLocale("gui_recipes_create_recipe"))
+			recipeLabel := recipeCreator.AddText("vRecipeLabel x" commonX() " y" commonY(110) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_recipe"))
 			recipeEdit := recipeCreator.AddEdit("vRecipeEdit x" commonX() " y" commonY(110 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).recipe : "")
 
-			resultLabel := recipeCreator.AddText("vResultLabel x" commonX() " y" commonY(110 + 55) " w150 BackgroundTrans", ReadLocale("gui_recipes_create_result"))
+			resultLabel := recipeCreator.AddText("vResultLabel x" commonX() " y" commonY(110 + 55) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_result"))
 			resultEdit := recipeCreator.AddEdit("vResultEdit x" commonX() " y" commonY((110 + 55) + 20) " w250 h150 Multi WantTab", sectionName.Length > 0 ? this.FormatResult(MyRecipes.Get(sectionName[4]).result, True) : "")
 
 			if sectionName.Length > 0 {
@@ -159,8 +159,8 @@ Class MyRecipes {
 				data.row := sectionName[5]
 			}
 
-			saveBtn := recipeCreator.AddButton("vSaveButton x" commonX() " y" (boxCommonH) - 32 " w100 h32", ReadLocale("gui_save"))
-			cancelBtn := recipeCreator.AddButton("vCancelButton x" commonX(100) " y" (boxCommonH) - 32 " w100 h32", ReadLocale("gui_cancel"))
+			saveBtn := recipeCreator.AddButton("vSaveButton x" commonX() " y" (boxCommonH) - 32 " w100 h32", Locale.Read("gui_save"))
+			cancelBtn := recipeCreator.AddButton("vCancelButton x" commonX(100) " y" (boxCommonH) - 32 " w100 h32", Locale.Read("gui_cancel"))
 
 			sectionEdit.OnEvent("Change", (CB, Zero) => setData(CB, "section"))
 			nameEdit.OnEvent("Change", (CB, Zero) => setData(CB, "name"))
@@ -190,7 +190,7 @@ Class MyRecipes {
 			saveRecipe(data) {
 				if InStr(data.section, "xcompose") {
 					RegExMatch(data.section, "\[(.*)\]", &match)
-					MsgBox(ReadLocale("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
+					MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
 					return
 				} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
 					if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
@@ -198,7 +198,7 @@ Class MyRecipes {
 
 					} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
 						if this.Check(data.section) {
-							MsgBox(ReadLocale("gui_recipes_create_exists"), App.winTitle)
+							MsgBox(Locale.Read("gui_recipes_create_exists"), App.winTitle)
 							return
 						}
 						recipesLV.Add(, data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24), data.section)

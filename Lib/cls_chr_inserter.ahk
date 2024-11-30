@@ -8,7 +8,7 @@ Class CharacterInserter {
 	InputDialog(UseHWND := True) {
 		hwnd := WinActive('A')
 
-		IB := InputBox(ReadLocale("symbol_code_prompt"), ReadLocale("symbol_" StrLower(this.insertType)), "w256 h92", this.lastPrompt)
+		IB := InputBox(Locale.Read("symbol_code_prompt"), Locale.Read("symbol_" StrLower(this.insertType)), "w256 h92", this.lastPrompt)
 		this.lastPrompt := IB.Value
 
 		if IB.Result = "Cancel"
@@ -31,7 +31,7 @@ Class CharacterInserter {
 			}
 			IniWrite(this.lastPrompt, ConfigFile, "LatestPrompts", this.insertType)
 		} catch {
-			MsgBox(ReadLocale("message_wrong_format") "`n`n" ReadLocale("message_wrong_format_" StrLower(this.insertType)), DSLPadTitle, "Icon!")
+			MsgBox(Locale.Read("message_wrong_format") "`n`n" Locale.Read("message_wrong_format_" StrLower(this.insertType)), DSLPadTitle, "Icon!")
 			return
 		}
 

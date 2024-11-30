@@ -55,16 +55,16 @@ Class Cfg {
 		this.Init()
 	}
 
-	static optionsTitle := App.winTitle " — " ReadLocale("gui_options")
+	static optionsTitle := App.winTitle " — " Locale.Read("gui_options")
 
 	static EditorGUI := Gui()
 	static EditorSubGUIs := {
-		recipesTitle: App.winTitle " — " ReadLocale("gui_recipes"),
+		recipesTitle: App.winTitle " — " Locale.Read("gui_recipes"),
 		recipes: Gui(),
 	}
 
 	static Editor() {
-		this.optionsTitle := App.winTitle " — " ReadLocale("gui_options")
+		this.optionsTitle := App.winTitle " — " Locale.Read("gui_options")
 
 		Constructor() {
 			screenWidth := A_ScreenWidth
@@ -94,7 +94,7 @@ Class Cfg {
 			languageSelectorY := (add := 0) => optionsCommonY + 35 + add
 			languageSelectorX := (add := 0) => 25 + add
 
-			optionsPanel.AddText("vLanguageLabel x" languageSelectorX() " y" languageSelectorY(-17) " w80 BackgroundTrans", ReadLocale("gui_options_language"))
+			optionsPanel.AddText("vLanguageLabel x" languageSelectorX() " y" languageSelectorY(-17) " w80 BackgroundTrans", Locale.Read("gui_options_language"))
 
 			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w80 y" languageSelectorY(), [optionsLanguages["en"], optionsLanguages["ru"]])
 			PostMessage(0x0153, -1, 15, languageSelector)
@@ -105,7 +105,7 @@ Class Cfg {
 			layouSelectorTextY := 32
 			layouSelectorY := (add := 1) => layouSelectorTextY + (16 + add)
 
-			optionsPanel.AddText("vLayoutLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorTextY) " w80 BackgroundTrans", ReadLocale("gui_options_layout"))
+			optionsPanel.AddText("vLayoutLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorTextY) " w80 BackgroundTrans", Locale.Read("gui_options_layout"))
 
 			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w80 y" languageSelectorY(layouSelectorY()), GetLayoutsList)
 			PostMessage(0x0153, -1, 15, layoutLatinSelector)
@@ -118,13 +118,13 @@ Class Cfg {
 			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => Options.SwitchVirualLayout(CB, "Cyrillic"))
 
 
-			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), ReadLocale("gui_options_updates"))
+			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
 
 			if UpdateAvailable {
 
 			} else {
 
-				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", ReadLocale("update_absent"))
+				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", Locale.Read("update_absent"))
 			}
 
 			optionsPanel.AddGroupBox(optionsCommon(55, (windowHeight - 65)))
@@ -150,7 +150,7 @@ Class Cfg {
 			GuiButtonIcon(openFolderBtn, ImageRes, 180)
 
 
-			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", ReadLocale("autoload_add"))
+			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", Locale.Read("autoload_add"))
 			autoloadBtn.OnEvent("Click", AddScriptToAutoload)
 
 			optionsPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
@@ -179,7 +179,7 @@ Class Cfg {
 	static SubGUIs(guiName) {
 
 		RecipesConstructor() {
-			this.EditorSubGUIs.recipesTitle := App.winTitle " — " ReadLocale("gui_recipes"),
+			this.EditorSubGUIs.recipesTitle := App.winTitle " — " Locale.Read("gui_recipes"),
 			currentRecipe := []
 
 			screenWidth := A_ScreenWidth
@@ -207,7 +207,7 @@ Class Cfg {
 			optionsCommonH := 370
 			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
 
-			listViewCols := [ReadLocale("col_name"), ReadLocale("col_recipe"), ReadLocale("col_result"), ReadLocale("col_entry_title")]
+			listViewCols := [Locale.Read("col_name"), Locale.Read("col_recipe"), Locale.Read("col_result"), Locale.Read("col_entry_title")]
 
 			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " +NoSort -Multi"
 			recipesLV := recipesPanel.AddListView(recipesLVStyles, listViewCols)
@@ -255,7 +255,7 @@ Class Cfg {
 			createEditRecipe(recipeArray?) {
 				if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "xcompose") {
 					RegExMatch(recipeArray[4], "\[(.*)\]", &match)
-					MsgBox(ReadLocale("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
+					MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
 					return
 				} else {
 					MyRecipes.Editor(recipeArray?, recipesLV)
@@ -266,10 +266,10 @@ Class Cfg {
 				if recipeArray.Length > 0 {
 					if InStr(recipeArray[4], "xcompose") {
 						RegExMatch(recipeArray[4], "\[(.*)\]", &match)
-						MsgBox(ReadLocale("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
+						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
 						return
 					} else {
-						message := SetStringVars(ReadLocale("gui_recipes_remove_confirm"), recipeArray[1])
+						message := SetStringVars(Locale.Read("gui_recipes_remove_confirm"), recipeArray[1])
 						confirBox := MsgBox(message, App.title, 4)
 						if confirBox = "No" {
 							return
@@ -420,21 +420,21 @@ Class Options {
 		pastRecipesEditorTitle := MyRecipes.editorTitle
 
 
-		Cfg.optionsTitle := App.winTitle " — " ReadLocale("gui_options")
-		Cfg.EditorSubGUIs.recipesTitle := App.winTitle " — " ReadLocale("gui_recipes")
+		Cfg.optionsTitle := App.winTitle " — " Locale.Read("gui_options")
+		Cfg.EditorSubGUIs.recipesTitle := App.winTitle " — " Locale.Read("gui_recipes")
 
-		MyRecipes.editorTitle := App.winTitle " — " ReadLocale("gui_recipes_create")
+		MyRecipes.editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
 
 		if IsGuiOpen(pastOptionsTitle) {
 			Cfg.EditorGUI.Title := Cfg.optionsTitle
-			Cfg.EditorGUI["GroupUpdates"].Text := ReadLocale("gui_options_updates")
+			Cfg.EditorGUI["GroupUpdates"].Text := Locale.Read("gui_options_updates")
 
-			Cfg.EditorGUI["LanguageLabel"].Text := ReadLocale("gui_options_language")
-			Cfg.EditorGUI["LayoutLabel"].Text := ReadLocale("gui_options_layout")
-			Cfg.EditorGUI["Autoload"].Text := ReadLocale("autoload_add")
+			Cfg.EditorGUI["LanguageLabel"].Text := Locale.Read("gui_options_language")
+			Cfg.EditorGUI["LayoutLabel"].Text := Locale.Read("gui_options_layout")
+			Cfg.EditorGUI["Autoload"].Text := Locale.Read("autoload_add")
 
 			try {
-				Cfg.EditorGUI["UpdateAbsent"].Text := ReadLocale("update_absent")
+				Cfg.EditorGUI["UpdateAbsent"].Text := Locale.Read("update_absent")
 			}
 		}
 
@@ -444,12 +444,12 @@ Class Options {
 
 		if IsGuiOpen(pastRecipesEditorTitle) {
 			MyRecipes.EditorGUI.Title := MyRecipes.editorTitle
-			MyRecipes.EditorGUI["SectionLabel"].Text := ReadLocale("gui_recipes_create_section")
-			MyRecipes.EditorGUI["NameLabel"].Text := ReadLocale("gui_recipes_create_name")
-			MyRecipes.EditorGUI["RecipeLabel"].Text := ReadLocale("gui_recipes_create_recipe")
-			MyRecipes.EditorGUI["ResultLabel"].Text := ReadLocale("gui_recipes_create_result")
-			MyRecipes.EditorGUI["SaveButton"].Text := ReadLocale("gui_save")
-			MyRecipes.EditorGUI["CancelButton"].Text := ReadLocale("gui_cancel")
+			MyRecipes.EditorGUI["SectionLabel"].Text := Locale.Read("gui_recipes_create_section")
+			MyRecipes.EditorGUI["NameLabel"].Text := Locale.Read("gui_recipes_create_name")
+			MyRecipes.EditorGUI["RecipeLabel"].Text := Locale.Read("gui_recipes_create_recipe")
+			MyRecipes.EditorGUI["ResultLabel"].Text := Locale.Read("gui_recipes_create_result")
+			MyRecipes.EditorGUI["SaveButton"].Text := Locale.Read("gui_save")
+			MyRecipes.EditorGUI["CancelButton"].Text := Locale.Read("gui_cancel")
 		}
 
 
