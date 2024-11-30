@@ -5482,6 +5482,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!<!", ["lat_c_let_r_dot_below", "lat_s_let_r_dot_below"],
 			"<^>!<!<+", ["lat_c_let_r_caron", "lat_s_let_r_caron"],
 			"<^>!<!>+", ["lat_c_let_r_cedilla", "lat_s_let_r_cedilla"],
+			"<^>!<+", ["lat_c_let_yr", "lat_s_let_yr"],
 			"<^>!>+", ["lat_c_let_r_rotunda", "lat_s_let_r_rotunda"],
 			"<+>+", ["lat_c_let_r_grave_double", "lat_s_let_r_grave_double"]),
 			"S", Map("<!", ["lat_c_let_s_acute", "lat_s_let_s_acute"],

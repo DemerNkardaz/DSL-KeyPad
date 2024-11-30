@@ -2946,7 +2946,7 @@ MapInsert(Characters,
 		group: [["Latin Extended"]],
 		tags: ["прописная буква Шва", "capital letter Schwa"],
 		show_on_fast_keys: True,
-		alt_on_fast_keys: "E",
+		alt_on_fast_keys: "[E]",
 		recipe: "E" GetChar("arrow_left_circle"),
 	},
 	"lat_s_let_schwa", {
@@ -2955,14 +2955,33 @@ MapInsert(Characters,
 		group: [["Latin Extended"]],
 		tags: ["строчная буква шва", "small letter schwa"],
 		show_on_fast_keys: True,
-		alt_on_fast_keys: "e",
+		alt_on_fast_keys: "[e]",
 		recipe: "e" GetChar("arrow_left_circle"),
+	},
+	"lat_c_let_yr", {
+		unicode: "{U+01A6}",
+		titlesAlt: True,
+		group: [["Latin Extended"]],
+		tags: ["прописная буква Ир", "capital letter Yr"],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ [R]",
+		recipe: "YR",
+	},
+	"lat_s_let_yr", {
+		calcOff: "",
+		unicode: "{U+0280}",
+		titlesAlt: True,
+		group: [["Latin Extended"]],
+		tags: ["строчная буква Ир", "small letter Yr"],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "<+ [r]",
+		recipe: "yr",
 	},
 	;
 	;
-	/*
 	; * Small Capitals
 	"lat_s_c_let_i", {
+		calcOff: "",
 		unicode: "{U+026A}",
 		titlesAlt: True,
 		group: [["Latin Extended", "IPA"]],
@@ -2972,7 +2991,6 @@ MapInsert(Characters,
 		alt_layout: "[I]",
 		alt_layout_title: True,
 	},
-	*/
 	;
 	;
 	; * Accented Latin Letters
