@@ -173,14 +173,6 @@ ReadLocale(EntryName, Prefix := "") {
 	return Intermediate
 }
 
-SetStringVars(StringVar, SetVars*) {
-	Result := StringVar
-	for index, value in SetVars {
-		Result := StrReplace(Result, "{" (index - 1) "}", value)
-	}
-	return Result
-}
-
 
 OpenConfigFile(*) {
 	Run(ConfigFile)
@@ -587,7 +579,7 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 		if RepairMode == True {
 			MsgBox(Locale.Read("update_repair_success"), DSLPadTitle)
 		} else {
-			MsgBox(SetStringVars(Locale.Read("update_successful"), CurrentVersionString, UpdateVersionString), DSLPadTitle)
+			MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), CurrentVersionString, UpdateVersionString), DSLPadTitle)
 		}
 
 		Reload
@@ -2647,9 +2639,9 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		for i, pair in LocalesPairs {
 			if (Mod(i, 2) == 1) {
 				key := pair
-				locale := LocalesPairs[i + 1]
+				localePair := LocalesPairs[i + 1]
 				if ScriptName = key {
-					MsgBox(CurrentActive ? SetStringVars(Locale.Read("script_mode_deactivated"), Locale.Read(locale)) : SetStringVars(Locale.Read("script_mode_activated"), Locale.Read(locale)), DSLPadTitle, 0x40)
+					MsgBox(CurrentActive ? Util.StrVarsInject(Locale.Read("script_mode_deactivated"), Locale.Read(localePair)) : Util.StrVarsInject(Locale.Read("script_mode_activated"), Locale.Read(localePair)), DSLPadTitle, 0x40)
 					break
 				}
 			}
@@ -3751,7 +3743,7 @@ Constructor() {
 	if UpdateAvailable
 	{
 		DSLPadGUI["NewVersionAlert"].Text :=
-			SetStringVars(Locale.Read("update_available"), UpdateVersionString) ' (<a href="' RepoSource '">GitHub</a>)'
+			Util.StrVarsInject(Locale.Read("update_available"), UpdateVersionString) ' (<a href="' RepoSource '">GitHub</a>)'
 		DSLPadGUI["NewVersionIcon"].Text := InformationSymbol
 	}
 
@@ -4378,10 +4370,10 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 
 		if RegExMatch(EntryNameKey, "^permic") && HasPermicFont = "Noto Sans Old Permic" {
-			TargetGroup[PreviewAlert].Text := SetStringVars(Locale.Read("warning_nofont"), HasPermicFont)
+			TargetGroup[PreviewAlert].Text := Util.StrVarsInject(Locale.Read("warning_nofont"), HasPermicFont)
 		}
 		else if RegExMatch(EntryNameKey, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" {
-			TargetGroup[PreviewAlert].Text := SetStringVars(Locale.Read("warning_nofont"), HasHungarianFont)
+			TargetGroup[PreviewAlert].Text := Util.StrVarsInject(Locale.Read("warning_nofont"), HasHungarianFont)
 		} else {
 			TargetGroup[PreviewAlert].Text := ""
 		}

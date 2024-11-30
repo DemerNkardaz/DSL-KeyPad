@@ -294,7 +294,7 @@ Class Cfg {
 						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
 						return
 					} else {
-						message := SetStringVars(Locale.Read("gui_recipes_remove_confirm"), recipeArray[1])
+						message := Util.StrVarsInject(Locale.Read("gui_recipes_remove_confirm"), recipeArray[1])
 						confirBox := MsgBox(message, App.title, 4)
 						if confirBox = "No" {
 							return
