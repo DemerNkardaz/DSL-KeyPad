@@ -3440,6 +3440,7 @@ Constructor() {
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Smelting Special", , True, "Recipes")
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Wallet Signs", , True, "Recipes")
 	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Other Signs", , True, "Recipes")
+	InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Miscellaneous Technical", , True, "Recipes")
 	;InsertCharactersGroups(DSLContent["BindList"].TabSmelter, "Custom Composes", ReadLocale("symbol_custom_compose"), True, "Recipes")
 
 	DSLContent["BindList"].TabFastKeys := []

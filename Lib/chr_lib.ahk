@@ -2005,6 +2005,16 @@ MapInsert(Characters,
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "c* [Num9]",
 	},
+	;
+	;
+	;
+	;* Miscellaneous Technical
+	"benzene", {
+		unicode: "{U+232C}",
+		tags: ["benzene", "бензол"],
+		group: [["Miscellaneous Technical"]],
+		recipe: [Chrs(0x0043, 0x2086, 0x0048, 0x2086), "C6H6"],
+	},
 )
 
 MapInsert(Characters,
