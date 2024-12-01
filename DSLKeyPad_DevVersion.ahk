@@ -1620,6 +1620,8 @@ ProcessMapAfter(GroupLimited := "") {
 				Library["Diacritic Mark"].Push(GetChar(EntryName))
 			} else if value.symbolClass = "Spaces" {
 				Library["Spaces"].Push(GetChar(EntryName))
+			} else {
+				continue
 			}
 		}
 	}
@@ -1787,6 +1789,8 @@ ProcessMapAfter(GroupLimited := "") {
 				} else if value.symbolClass = "Spaces" {
 					value.symbol := "[" EntryCharacter "]"
 					value.symbolCustom := "underline"
+				} else {
+					value.symbol := EntryCharacter
 				}
 			} else {
 				value.symbol := EntryCharacter
@@ -3461,6 +3465,7 @@ Constructor() {
 		"Spaces Right Shift",
 		"Latin Accented Tertiary",
 		"Cyrillic Tertiary",
+		"Special Fast RShift",
 		"Spaces Left Shift",
 		"Special Fast",
 	] {
@@ -5251,7 +5256,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		SlotModdedSpecials := Map(
 			"D", Map("Flat:<!", "degree"),
 			"S", Map(),
-			"1", Map("Flat:<!", "section", "Flat:<^>!", "inverted_exclamation", "Flat:<^>!<+", "double_exclamation_question", "Flat:<^>!>+", "double_exclamation", "Caps:<^>!<+>+", ["interrobang_inverted", "interrobang"]),
+			"1", Map("Flat:<!", "section", "Flat:<^>!", "inverted_exclamation", "Flat:<^>!<+", "double_exclamation_question", "Flat:<^>!>+", "double_exclamation", "Caps:>+", ["interrobang_inverted", "interrobang"]),
 			"2", Map("Caps:<^>!", ["registered", "copyright"], "Caps:<^>!<+", ["servicemark", "trademark"], "Flat:<^>!>+", "sound_recording_copyright"),
 			"3", Map("Caps:<^>!", ["prime_reversed_single", "prime_single"], "Caps:<^>!>+", ["prime_reversed_double", "prime_double"], "Caps:<^>!<+", ["prime_reversed_triple", "prime_triple"], "Flat:<^>!<+>+", "prime_quadruple"),
 			;"3", Map("Flat:<^>!", "prime_single", "Flat:<^>!>+", "prime_double", "Flat:<^>!<+", "prime_triple", "Flat:<^>!<+>+", "prime_quadruple", "Flat:<!", "prime_reversed_single", "Flat:<!>+", "prime_reversed_double", "Flat:<!<+", "prime_reversed_triple"),
