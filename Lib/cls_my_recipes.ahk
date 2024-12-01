@@ -78,6 +78,7 @@ Class MyRecipes {
 		"slash", Chr(0x002F),
 		"question", Chr(0x003F),
 		"questiondown", Chr(0x00BF),
+		"space", Chr(0x0020),
 		"Multi_key", "",
 		"Compose", "",
 	]
