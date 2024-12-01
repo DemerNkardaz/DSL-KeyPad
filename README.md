@@ -144,6 +144,14 @@ To use “DSL KeyPad”, simply [download the .ahk file](https://github.com/Deme
 | ‐ ‑ — – ⸻ ⸺ ‒ ‧        | Диапазон чисел: 15–17,3 ℃ <br> — Ёримаса, стой! — воскликнул Тадахиса. <br> “Yorimasa, stop!” — Tadahisa exclaimed.                                             |
 | «» ‹› “” ‘’ „” „“ „⹂ ‚ | Организация «НВК „Рассвет“» отправила экспедицию. <br> The “SMC ‘Dawn’” organization sent an expedition. <br> Organizația „CȘM «Răsărit»” a trimis o expediție. |
 
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_diacritics.ico" alt="" width="62" align="right">
+
+### Комбинируемая диакритика
+
+Одна из первых категорий символов, добавленных в утилиту. Включает множество «основных» диакритических знаков, комбинируемых с другими символами и используется в ряде функций утилиты для получения акцентных знаков, например, в режиме «Compose»: <kbd>RAlt×2</kbd>, `A` + `◌̆ ` + `◌́ `= `Ắ`.
+
+<img src="Images/diacritics.png" alt="" width="600">
+
 ---
 
 ## Альтернативные режимы ввода
