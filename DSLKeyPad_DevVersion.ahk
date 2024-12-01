@@ -27,13 +27,6 @@ minute := 60 * second
 hour := 60 * minute
 
 
-idller() {
-	if A_TimeIdle > 1 * hour
-		DisableAllKeys("Force Disable")
-}
-
-SetTimer((*) => idller(), 10000)
-
 ; Only EN US & RU RU Keyboard Layout
 
 SupportedLanguages := [
@@ -186,7 +179,6 @@ OpenLocalesFile(*) {
 EscapePressed := False
 
 FastKeysIsActive := False
-DisabledAllKeys := False
 ActiveScriptName := ""
 PreviousScriptName := ""
 AlterationActiveName := ""
@@ -996,7 +988,7 @@ CyrllicLayouts := Map(
 
 
 RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY", ForceApply := False) {
-	global DisabledAllKeys, ActiveScriptName
+	global ActiveScriptName
 
 	IsLatin := False
 	IsCyrillic := False
@@ -1018,7 +1010,7 @@ RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY", ForceApply := Fa
 		}
 	}
 
-	if DisabledAllKeys {
+	if Keyboard.disabledByMonitor || Keyboard.disabledByUser {
 		if IsLatin {
 			IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
 		} else if IsCyrillic {
@@ -2491,7 +2483,7 @@ ChangeTrayIconOnLanguage() {
 	LanguageCode := Language.Get()
 	CurrentLayout := GetLayoutLocale()
 
-	if DisabledAllKeys || Keyboard.disabledByMonitor {
+	if Keyboard.disabledByMonitor || Keyboard.disabledByUser {
 		TraySetIcon(InternalFiles["AppIcoDLL"].File, 9)
 		A_IconTip := DSLPadTitle " (" Locale.Read("tray_tooltip_disabled") ")"
 		return
@@ -2613,11 +2605,11 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		} else {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 		}
-		if !DisabledAllKeys {
+		if !Keyboard.disabledByMonitor || !Keyboard.disabledByUser {
 			UnregisterKeysLayout()
 		}
 		ActiveScriptName := ""
-		if !DisabledAllKeys {
+		if !Keyboard.disabledByMonitor || !Keyboard.disabledByUser {
 			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], ScriptName), True)
@@ -2625,11 +2617,11 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		ActiveScriptName := ScriptName
 	} else {
 		TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
-		if !DisabledAllKeys {
+		if !Keyboard.disabledByMonitor || !Keyboard.disabledByUser {
 			UnregisterKeysLayout()
 		}
 		ActiveScriptName := ""
-		if !DisabledAllKeys {
+		if !Keyboard.disabledByMonitor || !Keyboard.disabledByUser {
 			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 		}
@@ -4635,34 +4627,6 @@ SendPaste(SendKey, Callback := "") {
 		Callback()
 	}
 }
-
-ForceDisabledkeys := False
-DisableAllKeys(Force := False) {
-	global DisabledAllKeys, ForceDisabledkeys
-	if !Keyboard.disabledByMonitor {
-		if Force {
-			if !ForceDisabledkeys {
-				ForceDisabledkeys := True
-				DisabledAllKeys := True
-				UnregisterKeysLayout()
-				ManageTrayItems()
-			}
-			return
-		}
-
-		DisabledAllKeys := (!DisabledAllKeys)
-
-		if DisabledAllKeys {
-			UnregisterKeysLayout()
-		} else {
-			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-		}
-		ManageTrayItems()
-	}
-}
-
-
->^F10:: DisableAllKeys()
 
 ConvertComboKeys(Output) {
 	Patterns := [
@@ -6769,12 +6733,12 @@ ManageTrayItems() {
 	DSLTray.Add()
 	DSLTray.Add(Labels["custom_compose"], (*) => Cfg.SubGUIs("Recipes"))
 	DSLTray.Add()
-	if DisabledAllKeys {
-		DSLTray.Add(Labels["enable"], (*) => DisableAllKeys())
+	if Keyboard.disabledByMonitor || Keyboard.disabledByUser {
+		DSLTray.Add(Labels["enable"], (*) => Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor"))
 		DSLTray.SetIcon(Labels["enable"], InternalFiles["AppIcoDLL"].File, 9)
 	} else {
 
-		DSLTray.Add(Labels["disable"], (*) => DisableAllKeys())
+		DSLTray.Add(Labels["disable"], (*) => Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor"))
 		DSLTray.SetIcon(Labels["disable"], InternalFiles["AppIcoDLL"].File, 9)
 	}
 	DSLTray.Add()
@@ -6800,6 +6764,6 @@ ManageTrayItems()
 
 ShowInfoMessage("tray_app_started")
 
-<^>+Esc:: ExitApp
+#Include <stc_bindings>
 
 ;ApplicationEnd
