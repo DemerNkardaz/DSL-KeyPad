@@ -2491,7 +2491,7 @@ ChangeTrayIconOnLanguage() {
 	LanguageCode := Language.Get()
 	CurrentLayout := GetLayoutLocale()
 
-	if DisabledAllKeys {
+	if DisabledAllKeys || Keyboard.disabledByMonitor {
 		TraySetIcon(InternalFiles["AppIcoDLL"].File, 9)
 		A_IconTip := DSLPadTitle " (" Locale.Read("tray_tooltip_disabled") ")"
 		return
@@ -4639,25 +4639,29 @@ SendPaste(SendKey, Callback := "") {
 ForceDisabledkeys := False
 DisableAllKeys(Force := False) {
 	global DisabledAllKeys, ForceDisabledkeys
-	if Force {
-		if !ForceDisabledkeys {
-			ForceDisabledkeys := True
-			DisabledAllKeys := True
-			UnregisterKeysLayout()
-			ManageTrayItems()
+	if !Keyboard.disabledByMonitor {
+		if Force {
+			if !ForceDisabledkeys {
+				ForceDisabledkeys := True
+				DisabledAllKeys := True
+				UnregisterKeysLayout()
+				ManageTrayItems()
+			}
+			return
 		}
-		return
-	}
 
-	DisabledAllKeys := (!DisabledAllKeys)
+		DisabledAllKeys := (!DisabledAllKeys)
 
-	if DisabledAllKeys {
-		UnregisterKeysLayout()
-	} else {
-		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		if DisabledAllKeys {
+			UnregisterKeysLayout()
+		} else {
+			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		}
+		ManageTrayItems()
 	}
-	ManageTrayItems()
 }
+
+
 >^F10:: DisableAllKeys()
 
 ConvertComboKeys(Output) {
@@ -4695,7 +4699,7 @@ ConvertComboKeys(Output) {
 HandleFastKey(combo := "", characterNames*) {
 	Keyboard.CheckLayout(&lang)
 
-	if Keyboard.Compare(lang) {
+	if Language.Validate(lang, "bindings") {
 		output := ""
 
 		for _, character in characterNames {
@@ -4797,19 +4801,29 @@ CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
 LangSeparatedCall(enCallback, ruCallback) {
 	Keyboard.CheckLayout(&lang)
 
-	if IsSet(%lang%Callback)
-		%lang%Callback()
+	if Language.Validate(lang, "bindings") {
+		if IsSet(%lang%Callback) {
+			%lang%Callback()
+		}
+	}
 	return
 }
 
-LangSeparatedKey(Combo, enChar, ruChar, UseCaps := False, Reverse := False) {
+LangSeparatedKey(combo, enChar, ruChar, useCaps := False, reverse := False) {
 	Keyboard.CheckLayout(&lang)
 
-	if UseCaps && IsObject(%lang%Char) {
-		CapsSeparatedKey(Combo, %lang%Char[1], %lang%Char[2], Reverse)
+	if Language.Validate(lang, "bindings") {
+		if useCaps && IsObject(%lang%Char) {
+			CapsSeparatedKey(combo, %lang%Char[1], %lang%Char[2], reverse)
+		} else {
+			HandleFastKey(combo, IsObject(%lang%Char) ? %lang%Char[1] : %lang%Char)
+		}
 	} else {
-		HandleFastKey(Combo, IsObject(%lang%Char) ? %lang%Char[1] : %lang%Char)
+		if combo != "" {
+			Send(ConvertComboKeys(combo))
+		}
 	}
+	return
 }
 
 RegisterHotKeys(Bindings, CheckRule := FastKeysIsActive) {

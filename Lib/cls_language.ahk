@@ -1,44 +1,86 @@
 Class Language {
 
 	static supported := Map(
-		"en", { code: "00000409" },
-		"ru", { code: "00000419" },
-		;"gr", { code: "00000408", noLocale: True },
+		"en", { code: "00000409", locale: True, bindings: True },
+		"ru", { code: "00000419", locale: True, bindings: True },
+		"gr", { code: "00000408", locale: False },
 	)
 
 	static locales := App.paths.ufile "\DSLKeyPad.locales.ini"
 
-	static Compare(input) {
+	static Validate(input, extraRule?) {
 		if StrLen(input) > 5 {
 			for key, value in this.supported {
-				if input == value.code
+				extraRuleValidate := (!IsSet(extraRule) || IsSet(extraRule) && (HasProp(value, extraRule) ? value.%extraRule% : False))
+
+				if input == value.code && extraRuleValidate {
 					return True
+				}
 			}
-		} else {
-			if this.supported.Has(input)
+		} else if StrLen(input) > 0 {
+			extraRuleValidate := (!IsSet(extraRule) || IsSet(extraRule) && (HasProp(this.supported[input], extraRule) ? this.supported[input].%extraRule% : False))
+
+			if this.supported.Has(input) && extraRuleValidate {
 				return True
+			}
 		}
 
 		return False
 	}
 
 	static Set(value) {
-		if this.Compare(value)
+		if this.Validate(value, "locale") {
 			Cfg.Set(value, "User_Language")
+		}
 	}
 
 	static Get() {
 		userLanguage := Cfg.Get("User_Language")
 		userLanguage := userLanguage != "" ? userLanguage : this.GetSys()
 
-		if this.Compare(userLanguage)
+		if this.Validate(userLanguage) {
 			return userLanguage
-		else
+		} else {
 			return "en"
+		}
 	}
 
 	static GetSys() {
 		return SubStr(RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName"), 1, 2)
+	}
+}
+
+Class Keyboard extends Language {
+
+	static disabledByMonitor := False
+
+	static __New() {
+		this.InitialValidator()
+
+		SetTimer((*) => SetTimer((*) => this.Monitor(), 1000), -10000)
+	}
+
+	static Monitor() {
+		isCurrentLanguageValid := this.Validate(this.CurrentLayout(), "bindings")
+
+		if isCurrentLanguageValid {
+			this.MonitorBindingsToggle(True)
+		} else {
+			this.MonitorBindingsToggle(False)
+		}
+	}
+
+	static MonitorBindingsToggle(enable := True) {
+		if enable {
+			this.disabledByMonitor := False
+			UnregisterKeysLayout()
+			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		} else if !this.disabledByMonitor {
+			this.disabledByMonitor := True
+			UnregisterKeysLayout()
+		}
+
+		ManageTrayItems()
 	}
 
 	static CurrentLayout(&layoutHex?) {
@@ -46,14 +88,6 @@ Class Language {
 		layout := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
 		layoutHex := Format("{:08X}", layout & 0xFFFF)
 		return layoutHex
-	}
-
-}
-
-Class Keyboard extends Language {
-
-	static __New() {
-		this.InitialValidator()
 	}
 
 	static SwitchLayout(code, id := 1, timer := 1) {
@@ -71,8 +105,9 @@ Class Keyboard extends Language {
 
 		if !IsObject(abbr) {
 			for key, value in this.supported {
-				if abbr == key && code == value.code
+				if abbr == key && code == value.code {
 					return True
+				}
 			}
 			return False
 		} else {
