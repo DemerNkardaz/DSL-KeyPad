@@ -775,6 +775,13 @@ MapInsert(Characters,
 		alt_on_fast_keys: "<!<+>+ [Space]",
 		symbolAlt: Chr(0x200B),
 	},
+	"zero_width_no_break_space", {
+		unicode: "{U+FEFF}",
+		tags: ["zwnbsp", "zero-width no-break space", "неразрывный пробел нулевой ширины"],
+		group: ["Spaces", ")"],
+		symbolClass: "Spaces",
+		symbolAlt: Chr(0xFEFF),
+	},
 	"word_joiner", {
 		unicode: "{U+2060}",
 		tags: ["wj", "word joiner", "соединитель слов"],
