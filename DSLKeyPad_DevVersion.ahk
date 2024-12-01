@@ -4693,9 +4693,9 @@ ConvertComboKeys(Output) {
 }
 
 HandleFastKey(combo := "", characterNames*) {
-	Language.CheckLayout(&lang)
+	Keyboard.CheckLayout(&lang)
 
-	if Language.Compare(lang) {
+	if Keyboard.Compare(lang) {
 		output := ""
 
 		for _, character in characterNames {
@@ -4795,7 +4795,7 @@ CapsShiftSeparatedKey(CapitalCharacter, SmallCharacter) {
 }
 
 LangSeparatedCall(enCallback, ruCallback) {
-	Language.CheckLayout(&lang)
+	Keyboard.CheckLayout(&lang)
 
 	if IsSet(%lang%Callback)
 		%lang%Callback()
@@ -4803,7 +4803,7 @@ LangSeparatedCall(enCallback, ruCallback) {
 }
 
 LangSeparatedKey(Combo, enChar, ruChar, UseCaps := False, Reverse := False) {
-	Language.CheckLayout(&lang)
+	Keyboard.CheckLayout(&lang)
 
 	if UseCaps && IsObject(%lang%Char) {
 		CapsSeparatedKey(Combo, %lang%Char[1], %lang%Char[2], Reverse)

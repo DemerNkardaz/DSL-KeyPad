@@ -137,7 +137,7 @@ Class Cfg {
 
 			optionsTabs.UseTab(tabLabelChars)
 
-			letterI_Labels := [
+			letterI_labels := [
 				Locale.Read("gui_options_default") " — Ii",
 				Locale.Read("gui_options_separated") " — " Chr(0x0130) "i, LShift I" Chr(0x0131),
 				Locale.Read("gui_options_hybrid") " — Ii, LShift " Chr(0x0130) Chr(0x0131),
@@ -145,10 +145,12 @@ Class Cfg {
 
 			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(290 - 17) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
 
-			letterI_Selector := optionsPanel.AddDropDownList("vLetterI_Selector x" languageSelectorX() " w128 y" languageSelectorY(290), letterI_Labels)
-			PostMessage(0x0153, -1, 15, letterI_Selector)
-			letterI_Selector.Text := letterI_Labels[1]
-			letterI_Selector.OnEvent("Change", (CB, Zero) => Options.CharacterOption(CB, "I"))
+			letterI_selector := optionsPanel.AddDropDownList("vLetterI_selector x" languageSelectorX() " w128 y" languageSelectorY(290), letterI_labels)
+			PostMessage(0x0153, -1, 15, letterI_selector)
+
+			letterI_savedOption := Cfg.Get("I_Dot_Shift_I_Dotless", "Characters")
+			letterI_selector.Text := letterI_savedOption = "Separated" ? letterI_labels[2] : letterI_savedOption = "Hybrid" ? letterI_labels[3] : letterI_labels[1]
+			letterI_selector.OnEvent("Change", (CB, Zero) => Options.CharacterOption(CB, "I"))
 
 			optionsTabs.UseTab()
 

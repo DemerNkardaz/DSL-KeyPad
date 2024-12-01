@@ -8,10 +8,6 @@ Class Language {
 
 	static locales := App.paths.ufile "\DSLKeyPad.locales.ini"
 
-	static __New() {
-		this.InitialValidator()
-	}
-
 	static Compare(input) {
 		if StrLen(input) > 5 {
 			for key, value in this.supported {
@@ -50,6 +46,14 @@ Class Language {
 		layout := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
 		layoutHex := Format("{:08X}", layout & 0xFFFF)
 		return layoutHex
+	}
+
+}
+
+Class Keyboard extends Language {
+
+	static __New() {
+		this.InitialValidator()
 	}
 
 	static SwitchLayout(code, id := 1, timer := 1) {
@@ -98,11 +102,7 @@ Class Language {
 	}
 }
 
-
 Class Locale extends Language {
-
-	static __New() {
-	}
 
 	static Read(EntryName, Prefix := "") {
 		Section := Prefix != "" ? Prefix . "_" . Language.Get() : Language.Get()
