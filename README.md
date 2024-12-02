@@ -1,10 +1,15 @@
 # DSL KeyPad \*αλφα, version in dev
 
+<div align="right">
+
 <img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_norse.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_glagolitic.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_turkic.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_permic.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_hungarian.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_gothic.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_italic.ico" alt="" width="100">
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_phoenician.ico" alt="" width="100">
 
-<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_ipa.ico" alt="" width="62"> <img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_math.ico" alt="" width="62"> <img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="62"> <img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="62">
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_ipa.ico" alt="" width="62"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_math.ico" alt="" width="62"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_punctuation.ico" alt="" width="62"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_diacritics.ico" alt="" width="62"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_special.ico" alt="" width="62">
 
-# Contents
+</div>
+
+# Table of Contents [Содержание]
 
 - [Overview](#overview)
   - [Input Methods](#input-methods)
@@ -13,9 +18,15 @@
   - [Limitations](#limitations)
   - [Installation](#installation)
 - [Обзор](#обзор)
-  - [Методы ввода](#методы-ввода)
-  - [Альтернативные раскладки](#альтернативные-раскладки)
+  - [Латиница, Кириллица и прочие наборы символов](#латиница)
+  - [Альтернативные режимы ввода](#альтернативные-режимы-ввода)
+  - [Важные функции](#важные-функции)
+    - [Группы активации](#группы-активации)
+    - [«Быстрые ключи»](#быстрые-ключи)
+    - [«Плавильня»](#плавильня)
+    - [Модификаторы ввода](#модификаторы-ввода)
   - [Вспомогательные функции](#вспомогательные-функции)
+  - [Интерфейс](#интерфейс)
   - [Ограничения](#ограничения)
   - [Установка](#установка)
 
@@ -83,7 +94,9 @@ To use “DSL KeyPad”, simply [download the .ahk file](https://github.com/Deme
 
 # Обзор
 
-«DSL KeyPad» — утилита на языке [AutoHotkey 2.0](https://www.autohotkey.com/) для ввода спектра символов юникода посредством горячих клавиш и вспомогательных функций. Основное направление — расширение возможностей для ввода латиницы и кириллицы, а в будущем возможно расширение и на греческие символы.
+«DSL KeyPad» — утилита на языке [AutoHotkey 2.0](https://www.autohotkey.com/) для ввода широкого спектра символов посредством горячих клавиш и вспомогательных функций. Основное направление — расширение возможностей для ввода латиницы и кириллицы, а в будущем возможно расширение и на греческие символы.
+
+Доступно более 2 900 символов юникода.
 
 <img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_latin.ico" alt="" width="62" align="right">
 
