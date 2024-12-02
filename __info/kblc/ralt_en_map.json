@@ -35,15 +35,18 @@
   [
     {
       "y": 0.5,
-      "t": "407A52\n\n#f74b03\n#a07432\n\n\n1F4788\n#008787"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787"
     },
-    "•\n\n⁃\n◦\n\n\n·\n‣",
+    "•\n’\n⁃\n◦\n\n\n·\n‣",
     {
       "t": "#407A52\n#875F9A\n\n\n\n\n#1F4788"
     },
     "¡\n‼\n\n\n\n\n⁉",
-    "©\n℗\n\n\n\n\n™",
-    "′\n″\n\n\n\n\n‴",
+    "©\n℗\n\n\n\n\n™/℠",
+    {
+      "t": "#407A52\n#875F9A\n\n\n\n\n#1F4788\n\nC3272B"
+    },
+    "′\n″\n\n\n\n\n‴\n\n⁗",
     {
       "t": "#407A52"
     },
@@ -72,9 +75,9 @@
     "⟨",
     "⟩",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n\n\n\n#1F4788"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B"
     },
-    "—\n‧\n‐\n\n\n\n–",
+    "—\n‧\n‐\n‒\n\n\n–\n‑\n‧",
     {
       "t": "#407A52\n\n#f74b03\n\n\n\n#1F4788"
     },
@@ -229,14 +232,14 @@
     {
       "x": 1.5,
       "c": "#bb1b80",
-      "t": "#ffffff\n#ffffff\n\n\n\n\n#f0f0f0",
+      "t": "#ffffff\n\n\n\n\n\n#f0f0f0",
       "a": 4,
       "w": 2
     },
     "R+L Alts +\n\n\n\n\n\nR+L Shifts",
     {
       "c": "#008787",
-      "t": "#ffffff\n#ffffff"
+      "t": "#ffffff"
     },
     "R+L Alts +\nLShift",
     {
@@ -316,7 +319,7 @@
     "↑\n\n\n\n\n\n⮍",
     {
       "c": "#a07432",
-      "t": "#ffffff\n#ffffff"
+      "t": "#ffffff"
     },
     "R+L Alts +\nRShift",
     {
@@ -353,7 +356,7 @@
       "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B\n\n#bb1b80",
       "w": 6.25
     },
-    "No-Break Space\nEm Space\nThin Space\nPunctuation SPace\n\n\nEn Space\nHair Space\nFigure Space\n\nZero-Width Space",
+    "No-Break Space\nEm Space\nThin Space\nPunctuation Space\n\n\nEn Space\nHair Space\nFigure Space\n\nZero-Width Space",
     {
       "c": "#407A52",
       "t": "#f7f7f7",

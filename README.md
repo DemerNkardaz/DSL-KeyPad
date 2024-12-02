@@ -357,6 +357,8 @@ https://www.keyboard-layout-editor.com/##@_css=* {%0A%20%20%20 font-size%2F: 11p
 <details>
 	<summary>Кириллица</summary>
 
+**RAlt Комбинации**
+
 <details>
 	<summary>Пермассылка</summary>
 
@@ -369,8 +371,6 @@ https://www.keyboard-layout-editor.com/##@_css=* {%0A%20%20%20 font-size%2F: 11p
 <img src="Images/fastkeys_layout_ralt_ru.png" alt="" width="1024">
 
 </details>
-
-<br>
 
 ### «Плавильня»
 
