@@ -337,8 +337,11 @@ _Оба режима не завершены_
 
 <details>
 	<summary>Латиница</summary>
+<br>
 
-_В будущем_
+**RAlt Комбинации**
+
+<img src="Images/fastkeys_layout_ralt_en.png" alt="" width="1024">
 
 </details>
 
