@@ -1675,6 +1675,8 @@ ProcessMapAfter(GroupLimited := "") {
 			;value.symbolFont := "Noto Sans Old Turkic"
 		} else if RegExMatch(EntryName, "^hungarian") {
 			value.symbolFont := "Noto Sans Old Hungarian"
+		} else if RegExMatch(EntryName, "^phoenician") {
+			value.symbolFont := "Segoe UI Historic"
 		}
 
 		for i, pair in EntitiesLibrary {
@@ -2525,6 +2527,11 @@ ChangeTrayIconOnLanguage() {
 			TitleEn: Locale.Read("tray_tooltip_old_italic"),
 			TitleRu: Locale.Read("tray_tooltip_old_italic"),
 		},
+		"Phoenician", {
+			CodeEn: 14, CodeRu: 14, Default: 1,
+			TitleEn: Locale.Read("tray_tooltip_phoenician"),
+			TitleRu: Locale.Read("tray_tooltip_phoenician"),
+		},
 		"IPA", {
 			CodeEn: 8, CodeRu: 8, Default: 1,
 			TitleEn: Locale.Read("tray_tooltip_ipa"),
@@ -2596,6 +2603,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		"Old Hungarian", "script_hungarian",
 		"Gothic", "script_gothic",
 		"Old Italic", "script_old_italic",
+		"Phoenician", "script_phoenician",
 		"IPA", "script_ipa",
 		"Maths", "script_maths",
 	]
@@ -2611,6 +2619,8 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 7 : 1)
 		} else if ScriptName = "Old Italic" {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 13 : 1)
+		} else if ScriptName = "Phoenician" {
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 14 : 1)
 		} else if ScriptName = "IPA" {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 8 : 1)
 		} else if ScriptName = "Maths" {
@@ -3519,7 +3529,10 @@ Constructor() {
 		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
 		"Fake Gothic", RightControl " 4",
 		"Gothic Alphabet", Locale.Read("symbol_gothic"),
+		"Fake Italic", RightControl " 5",
 		"Old Italic", Locale.Read("symbol_old_italic"),
+		"Fake Phoenician", CapsLock RightControl " 5",
+		"Phoenician", Locale.Read("symbol_phoenician"),
 		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
 		"Fake IPA", RightControl " 0",
 		"IPA", Locale.Read("symbol_ipa"),
@@ -3529,9 +3542,22 @@ Constructor() {
 		"Math Spaces", "",
 	]
 
+	noSeparatorGroups := [
+		"Fake GlagoRunes",
+		"Futhark Runes",
+		"Old Turkic",
+		"Old Turkic Orkhon",
+		"Old Hungarian",
+		"Gothic Alphabet",
+		"Old Italic",
+		"Phoenician",
+		"IPA",
+		"Mathematical",
+	]
+
 	for i, groupName in AltLayouts {
 		if Mod(i, 2) = 1 {
-			AddSeparator := (groupName = "Fake GlagoRunes" || groupName = "Futhark Runes" || groupName = "Old Turkic" || groupName = "Old Turkic Orkhon" || groupName = "Old Hungarian" || groupName = "Gothic Alphabet" || groupName = "Old Italic" || groupName = "IPA" || groupName = "Mathematical") ? False : True
+			AddSeparator := noSeparatorGroups.HasValue(groupName) ? False : True
 			GroupHotKey := AltLayouts[i + 1]
 
 
@@ -6249,11 +6275,77 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"S", Map(">+", "italic_let_esh", "<+", "italic_let_she", "<!", "italic_let_ess"),
 			"T", Map(">+", "italic_let_the"),
 			"U", Map(">+", "italic_let_uu"),
-			"W", Map(">+", "italic_let_southern_tse"),
+			"W", Map("<+", "italic_let_southern_tse"),
 			"1", Map("<^>!", "italic_let_numeral_one"),
 			"2", Map("<^>!", "italic_let_numeral_five"),
 			"3", Map("<^>!", "italic_let_numeral_ten"),
 			"4", Map("<^>!", "italic_let_numeral_fifty"),
+			",", Map("<+", "kkey_lessthan", "<^>!", ""),
+			".", Map("<+", "kkey_greaterthan", "<^>!", ""),
+			";", Map("<+", "kkey_colon"),
+			"'", Map("<+", "kkey_quotation"),
+			"~", Map("<+", "kkey_grave_accent"),
+			"=", Map("<+", "kkey_plus"),
+			"-", Map("<+", "kkey_underscore"),
+			"[", Map("<+", "kkey_l_curly_bracket"),
+			"]", Map("<+", "kkey_r_curly_bracket"),
+			"/", Map("<+", "question"),
+			"\", Map("<+", "kkey_verticalline"),
+		)
+
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
+	} else if Combinations = "Phoenician" {
+		SlotMapping := Map(
+			"A", "phoenician_let_alef",
+			"B", "phoenician_let_bet",
+			"C", "phoenician_let_sade",
+			"D", "phoenician_let_delt",
+			"E", "",
+			"F", "",
+			"G", "phoenician_let_gaml",
+			"H", "phoenician_let_he",
+			"I", "",
+			"J", "phoenician_let_yod",
+			"K", "phoenician_let_kaf",
+			"L", "phoenician_let_lamd",
+			"M", "phoenician_let_mem",
+			"N", "phoenician_let_nun",
+			"O", "phoenician_let_ain",
+			"P", "phoenician_let_pe",
+			"Q", "phoenician_let_qof",
+			"R", "phoenician_let_rosh",
+			"S", "phoenician_let_semk",
+			"T", "phoenician_let_tau",
+			"U", "",
+			"V", "",
+			"W", "phoenician_let_wau",
+			"X", "",
+			"Y", "phoenician_let_yod",
+			"Z", "phoenician_let_zai",
+			"~", "kkey_grave_accent",
+			",", "kkey_comma",
+			".", "kkey_dot",
+			";", "kkey_semicolon",
+			"'", "kkey_apostrophe",
+			"[", "kkey_l_square_bracket",
+			"]", "kkey_r_square_bracket",
+			"=", "kkey_equals",
+			"-", "kkey_hyphen_minus",
+			"/", "kkey_slash",
+		)
+
+		SlotModdedMapping := Map(
+			"A", Map("<+", "phoenician_let_ain"),
+			"H", Map(">+", "phoenician_let_het"),
+			"S", Map(">+", "phoenician_let_shin"),
+			"T", Map(">+", "phoenician_let_tet"),
+			"1", Map("<^>!", "phoenician_let_numeral_one"),
+			"2", Map("<^>!", "phoenician_let_numeral_two"),
+			"3", Map("<^>!", "phoenician_let_numeral_three"),
+			"4", Map("<^>!", "phoenician_let_numeral_ten"),
+			"5", Map("<^>!", "phoenician_let_numeral_twenty"),
+			"6", Map("<^>!", "phoenician_let_numeral_hundred"),
+			"Space", Map("<^>!", "phoenician_word_separator"),
 			",", Map("<+", "kkey_lessthan", "<^>!", ""),
 			".", Map("<+", "kkey_greaterthan", "<^>!", ""),
 			";", Map("<+", "kkey_colon"),
@@ -6498,7 +6590,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["2"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"),
 			">^" UseKey["3"], (*) => ToggleLetterScript(, "Old Hungarian"),
 			">^" UseKey["4"], (*) => ToggleLetterScript(, "Gothic"),
-			">^" UseKey["5"], (*) => ToggleLetterScript(, "Old Italic"),
+			">^" UseKey["5"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Italic"), (*) => ToggleLetterScript(, "Phoenician")),
 			">^" UseKey["0"], (*) => ToggleLetterScript(, "IPA"),
 			">^" UseKey["9"], (*) => ToggleLetterScript(, "Maths"),
 			;
@@ -6704,6 +6796,7 @@ ManageTrayItems() {
 		"hungarian", Locale.Read("tray_func_hungarian") "`t" RightControl "3",
 		"gothic", Locale.Read("tray_func_gothic") "`t" RightControl "4",
 		"italic", Locale.Read("tray_func_old_italic") "`t" RightControl "5",
+		"phoenician", Locale.Read("tray_func_phoenician") "`t" CapsLock RightControl "5",
 		"maths", Locale.Read("tray_func_maths") "`t" RightControl "9",
 		"ipa", Locale.Read("tray_func_ipa") "`t" RightControl "0",
 		"script", Locale.Read("func_label_scripts"),
@@ -6762,6 +6855,7 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["hungarian"], (*) => ToggleLetterScript(, "Old Hungarian"))
 	ScriptsSubMenu.Add(Labels["gothic"], (*) => ToggleLetterScript(, "Gothic"))
 	ScriptsSubMenu.Add(Labels["italic"], (*) => ToggleLetterScript(, "Old Italic"))
+	ScriptsSubMenu.Add(Labels["phoenician"], (*) => ToggleLetterScript(, "Phoenician"))
 	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
 	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
@@ -6772,6 +6866,7 @@ ManageTrayItems() {
 	ScriptsSubMenu.SetIcon(Labels["hungarian"], InternalFiles["AppIcoDLL"].File, 6)
 	ScriptsSubMenu.SetIcon(Labels["gothic"], InternalFiles["AppIcoDLL"].File, 7)
 	ScriptsSubMenu.SetIcon(Labels["italic"], InternalFiles["AppIcoDLL"].File, 13)
+	ScriptsSubMenu.SetIcon(Labels["phoenician"], InternalFiles["AppIcoDLL"].File, 14)
 	ScriptsSubMenu.SetIcon(Labels["maths"], InternalFiles["AppIcoDLL"].File, 10)
 	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
 

@@ -81,5 +81,8 @@
     <Image Include="DSLKeyPad.app_italic.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_phoenician.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
