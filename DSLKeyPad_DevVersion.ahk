@@ -13,6 +13,7 @@
 #Include <cls_util>
 #Include <cls_key_event>
 #Include <cls_layout>
+#Include <cls_long_press>
 #Include <supplement_pshell>
 #Include <supplement_python>
 
@@ -4675,12 +4676,22 @@ HandleFastKey(combo := "", characterNames*) {
 		for _, character in characterNames {
 			output .= GetCharacterSequence(character)
 		}
-		keysValidation := "SC(14B|148|14D|150|04A)"
 
-		inputType := RegExMatch(combo, keysValidation) ? "Text" : "Input"
+		keysValidation := "SC(14B|148|14D|150|04A)"
+		chrValidation := "(" Chr(0x00AE) ")"
+
+		if StrLen(LongPress.lastLetterInput) > 0 && output == LongPress.lastLetterInput {
+			;CaretTooltip(LongPress.lastLetterInput)
+		}
+
+		LongPress.lastLetterInput := output
+
+
+		inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation)) ? "Text" : "Input"
 		Send%inputType%(output)
 
 	} else {
+		LongPress.lastLetterInput := ""
 		if combo != "" {
 			Send(ConvertComboKeys(combo))
 		}
