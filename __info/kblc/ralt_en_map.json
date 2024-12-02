@@ -1,6 +1,6 @@
 [
   {
-    "css": "* {\n    font-size: 11px;\n}"
+    "css": "* {\n    font-size: 11px;\n}\n\n.keylabel.keylabel10 > div {\n    font-size: 9px;\n    line-height: 1em;\n    font-weight: 800;\n    color: #eee;\n}"
   },
   [
     "Esc",
@@ -37,51 +37,51 @@
       "y": 0.5,
       "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787"
     },
-    "•\n’\n⁃\n◦\n\n\n·\n‣",
+    "•\n’\n⁃\n◦\n~\n\n·\n‣",
     {
       "t": "#407A52\n#875F9A\n\n\n\n\n#1F4788"
     },
-    "¡\n‼\n\n\n\n\n⁉",
-    "©/®\n℗\n\n\n\n\n™/℠",
+    "¡\n‼\n\n\n1\n\n⁉",
+    "©/®\n℗\n\n\n2\n\n™/℠",
     {
       "t": "#407A52\n#875F9A\n\n\n\n\n#1F4788\n\nC3272B"
     },
-    "′\n″\n\n\n\n\n‴\n\n⁗",
+    "′\n″\n\n\n3\n\n‴\n\n⁗",
     {
       "t": "#407A52"
     },
-    "÷",
+    "÷\n\n\n\n4",
     {
       "t": "#407A52\n\n\n\n\n\n#1F4788"
     },
-    "‰\n\n\n\n\n\n‱",
+    "‰\n\n\n\n5\n\n‱",
     {
       "t": "#000000",
       "a": 7
     },
-    "",
+    "\n\n\n\n6",
     {
       "t": "#407A52\n#875F9A\n#f74b03\n\n\n\n#1F4788",
       "a": 4
     },
-    "¿\n⁇\n⸮\n\n\n\n⁈",
+    "¿\n⁇\n⸮\n\n7\n\n⁈",
     {
       "t": "#407A52\n\n#f74b03"
     },
-    "×\n\n∞",
+    "×\n\n∞\n\n8",
     {
       "t": "#407A52"
     },
-    "⟨",
-    "⟩",
+    "⟨\n\n\n\n9",
+    "⟩\n\n\n\n0",
     {
       "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B"
     },
-    "—\n‧\n‐\n‒\n\n\n–\n‑\n‧",
+    "—\n‧\n‐\n‒\n-\n\n–\n‑\n‧",
     {
       "t": "#407A52\n\n#f74b03\n\n\n\n#1F4788"
     },
-    "≠\n\n≈\n\n\n\n±",
+    "≠\n\n≈\n\n=\n\n±",
     {
       "t": "#000000",
       "w": 2
@@ -100,16 +100,16 @@
     {
       "t": "#407A52\n#875F9A"
     },
-    "†\n‡\n\n\n\n\n\n\n\n÷",
+    "†\n‡\n\n\n/\n\n\n\n\n÷",
     {
       "t": "#407A52\n#875F9A\n\n\n\n\n#1F4788"
     },
-    "⁑\n⁂\n\n\n\n\n⁎\n\n\n×",
+    "⁑\n⁂\n\n\n*\n\n⁎\n\n\n×",
     {
       "t": "#000000",
       "a": 7
     },
-    "−"
+    "−\n\n\n\n-"
   ],
   [
     {
@@ -117,46 +117,47 @@
       "a": 4,
       "w": 1.5
     },
-    "ZWJ\nZWNJ\n\n\n\n\nWJ",
+    "ZWJ\nZWNJ\n\n\nTab\n\nWJ",
     {
-      "t": "#000000\n#875F9A"
+      "t": "#000000\n#875F9A\n\n\n#ffffff"
     },
-    "\nɊ",
+    "\nɊ\n\n\nQ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787"
     },
-    "Ẇ\nǷ\nŴ\nꟂ\n\n\nẄ\nẈ",
+    "Ẇ\nǷ\nŴ\nꟂ\nW\n\nẄ\nẈ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787\n#C3272B"
     },
-    "Ə\nĒ\nÊ\nĘ\n\n\nË\nĚ\nẼ",
+    "Ə\nĒ\nÊ\nĘ\nE\n\nË\nĚ\nẼ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787"
     },
-    "Ṙ\nꝚ\nṚ\nŖ\n\n\nƦ\nŘ",
+    "Ṙ\nꝚ\nṚ\nŖ\nR\n\nƦ\nŘ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787\n#C3272B"
     },
-    "Ț\nÞ\nṬ\nŢ\n\n\nṪ\nŤ\n⹒",
-    "Ẏ\nȲ\nŶ\nỾ\n\n\nŸ\nɎ\nỸ",
+    "Ț\nÞ\nṬ\nŢ\nT\n\nṪ\nŤ\n⹒",
+    "Ẏ\nȲ\nŶ\nỾ\nY\n\nŸ\nɎ\nỸ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B\n\n#bb1b80"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787\n#C3272B\n\n#bb1b80"
     },
-    "Ŭ\nŪ\nÛ\nŲ\n\n\nÜ\nŮ\nŨ\n\nŰ",
-    "Ĭ\nĪ\nÎ\nĮ\n\n\nÏ\nǏ\nĨ\n\nİı",
-    "Ø\nŌ\nÔ\nǪ\n\n\nÖ\nǑ\nÕ\n\nŐ",
+    "Ŭ\nŪ\nÛ\nŲ\nU\n\nÜ\nŮ\nŨ\n\nŰ",
+    "Ĭ\nĪ\nÎ\nĮ\nI\n\nÏ\nǏ\nĨ\n\nİı",
+    "Ø\nŌ\nÔ\nǪ\nO\n\nÖ\nǑ\nÕ\n\nŐ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n\n\n\n#1F4788\n#008787"
+      "t": "#407A52\n#875F9A\n#f74b03\n\n#ffffff\n\n#1F4788\n#008787"
     },
-    "Ṗ\nƤ\nꝔ\n\n\n\nⱣ\nꝒ",
+    "Ṗ\nƤ\nꝔ\n\nP\n\nⱣ\nꝒ",
     {
-      "t": "#000000",
+      "t": "#000000\n\n\n\n#ffffff",
       "a": 7
     },
-    "",
-    "",
+    "\n\n\n\n[",
+    "\n\n\n\n]",
     {
       "x": 0.25,
+      "t": "#000000",
       "a": 4,
       "w": 1.25,
       "h": 2,
@@ -190,45 +191,49 @@
     },
     "Caps Lock",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787\n#C3272B",
+      "f": 4
     },
-    "Ă\nĀ\nÂ\nĄ\n\n\nÄ\nÅ\nÃ",
-    "Ș\nſ\nŜ\nŞ\n\n\nẞ\nŠ\nƩ",
+    "Ă\nĀ\nÂ\nĄ\nA\n\nÄ\nÅ\nÃ",
     {
-      "t": "#407A52\n\n#f74b03\n#a07432\n\n\n\n#008787\n#C3272B"
+      "f": 3
     },
-    "ð\n\nđ\nḐ\n\n\n\nĎ\nḒ",
+    "Ș\nſ\nŜ\nŞ\nS\n\nẞ\nŠ\nƩ",
     {
-      "t": "#407A52"
+      "t": "#407A52\n\n#f74b03\n#a07432\n#ffffff\n\n\n#008787\n#C3272B"
     },
-    "Ḟ",
+    "ð\n\nđ\nḐ\nD\n\n\nĎ\nḒ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B"
+      "t": "#407A52\n\n\n\n#ffffff"
     },
-    "Ğ\nḠ\nĜ\nĢ\n\n\nꝽ\nǦ\nƔ",
+    "Ḟ\n\n\n\nF",
     {
-      "t": "#407A52\n\n#f74b03\n#a07432\n\n\n#1F4788\n#008787"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787\n#C3272B"
     },
-    "Ħ\n\nĤ\nḨ\n\n\nḦ\nȞ",
+    "Ğ\nḠ\nĜ\nĢ\nG\n\nꝽ\nǦ\nƔ",
     {
-      "t": "#407A52\n\n#f74b03\n\n\n\n\n#008787"
+      "t": "#407A52\n\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787"
     },
-    "Ɉ\n\nĴ\n\n\n\n\nǰ",
+    "Ħ\n\nĤ\nḨ\nH\n\nḦ\nȞ",
     {
-      "t": "#000000\n\n#f74b03\n#a07432\n\n\n\n#008787"
+      "t": "#407A52\n\n#f74b03\n\n#ffffff\n\n\n#008787"
     },
-    "\n\nḲ\nĶ\n\n\n\nǨ",
+    "Ɉ\n\nĴ\n\nJ\n\n\nǰ",
     {
-      "t": "#407A52\n\n\n#a07432\n\n\n\n#008787\n#C3272B"
+      "t": "#000000\n\n#f74b03\n#a07432\n#ffffff\n\n\n#008787"
     },
-    "Ł\n\n\nĻ\n\n\n\nĽ\nḼ",
+    "\n\nḲ\nĶ\nK\n\n\nǨ",
     {
-      "t": "#000000",
+      "t": "#407A52\n\n\n#a07432\n#ffffff\n\n\n#008787\n#C3272B"
+    },
+    "Ł\n\n\nĻ\nL\n\n\nĽ\nḼ",
+    {
+      "t": "#000000\n\n\n\n#ffffff",
       "a": 7
     },
-    "",
-    "",
-    "",
+    "\n\n\n\n;",
+    "\n\n\n\n'",
+    "\n\n\n\n\\",
     {
       "x": 1.5,
       "c": "#bb1b80",
@@ -262,45 +267,45 @@
     "RAlt + LShift",
     {
       "c": "#cccccc",
-      "t": "#407A52\n#875F9A\n#f74b03\n\n\n\n#1F4788\n#008787"
+      "t": "#407A52\n#875F9A\n#f74b03\n\n#ffffff\n\n#1F4788\n#008787"
     },
-    "Ż\nƷ\nẐ\n\n\n\nƵ\nŽ",
+    "Ż\nƷ\nẐ\n\nZ\n\nƵ\nŽ",
     {
-      "t": "#407A52\n\n\n\n\n\n#1F4788"
+      "t": "#407A52\n\n\n\n#ffffff\n\n#1F4788"
     },
-    "Ẋ\n\n\n\n\n\nẌ",
+    "Ẋ\n\n\n\nX\n\nẌ",
     {
-      "t": "#407A52\n\n#f74b03\n#a07432\n\n\n\n#008787"
+      "t": "#407A52\n\n#f74b03\n#a07432\n#ffffff\n\n\n#008787"
     },
-    "Ċ\n\nĈ\nÇ\n\n\n\nČ",
+    "Ċ\n\nĈ\nÇ\nC\n\n\nČ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n\n\n\n#1F4788\n\n#C3272B"
+      "t": "#407A52\n#875F9A\n#f74b03\n\n#ffffff\n\n#1F4788\n\n#C3272B"
     },
-    "Ꝟ\nꝨ\nṾ\n\n\n\nỼ\n\nṼ",
+    "Ꝟ\nꝨ\nṾ\n\nV\n\nỼ\n\nṼ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n\n\n\n#1F4788\n#008787"
+      "t": "#407A52\n#875F9A\n#f74b03\n\n#ffffff\n\n#1F4788\n#008787"
     },
-    "Ḃ\nƁ\nḄ\n\n\n\nɃ\nꞖ",
+    "Ḃ\nƁ\nḄ\n\nB\n\nɃ\nꞖ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787\n#C3272B"
     },
-    "Ñ\nƝ\nṆ\nŅ\n\n\nꞐ\nŇ\nṄ",
+    "Ñ\nƝ\nṆ\nŅ\nN\n\nꞐ\nŇ\nṄ",
     {
-      "t": "#407A52\n#875F9A\n#f74b03"
+      "t": "#407A52\n#875F9A\n#f74b03\n\n#ffffff"
     },
-    "Ṁ\nⱮ\nṂ",
+    "Ṁ\nⱮ\nṂ\n\nM",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B"
+      "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n#ffffff\n\n#1F4788\n#008787\n#C3272B"
     },
-    "“\n„\n«\n„\n\n\n‘\n‹\n‚",
+    "“\n„\n«\n„\n,\n\n‘\n‹\n‚",
     {
-      "t": "#407A52\n#875F9A\n#f74b03\n\n\n\n#1F4788\n#008787"
+      "t": "#407A52\n#875F9A\n#f74b03\n\n#ffffff\n\n#1F4788\n#008787"
     },
-    "”\n⹂\n»\n\n\n\n’\n›",
+    "”\n⹂\n»\n\n.\n\n’\n›",
     {
-      "t": "#407A52\n#875F9A\n\n\n\n\n#1F4788\n\n#C3272B"
+      "t": "#407A52\n#875F9A\n\n\n#ffffff\n\n#1F4788\n\n#C3272B"
     },
-    "…\n⁄\n\n\n\n\n⁝\n\n⁞",
+    "…\n⁄\n\n\n/\n\n⁝\n\n⁞",
     {
       "c": "#875F9A",
       "t": "#ffffff",
@@ -356,7 +361,7 @@
       "t": "#407A52\n#875F9A\n#f74b03\n#a07432\n\n\n#1F4788\n#008787\n#C3272B\n\n#bb1b80",
       "w": 6.25
     },
-    "No-Break Space\nEm Space\nThin Space\nPunctuation Space\n\n\nEn Space\nHair Space\nFigure Space\n\nZero-Width Space",
+    "No-Break Space\nEm Space\nThin Space\nPunctuation Space\nSpace\n\nEn Space\nHair Space\nFigure Space\n\nZero-Width Space",
     {
       "c": "#407A52",
       "t": "#f7f7f7",
@@ -395,7 +400,7 @@
       "t": "407A52",
       "w": 2
     },
-    "∅",
+    "∅\n\n\n\n0 / Ins",
     {
       "t": "#000000",
       "a": 7
