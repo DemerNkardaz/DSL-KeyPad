@@ -2,6 +2,66 @@
 #SingleInstance Force
 #MaxThreads 2
 ;#UseHook
+;InstallKeybdHook(True, True)
+
+A_HotkeyInterval := 1000
+A_MaxHotkeysPerInterval := 50
+
+second := 1000
+minute := 60 * second
+hour := 60 * minute
+
+CtrlA := Chr(1)
+CtrlB := Chr(2)
+CtrlC := Chr(3)
+CtrlD := Chr(4)
+CtrlE := Chr(5)
+CtrlF := Chr(6)
+CtrlG := Chr(7)
+CtrlH := Chr(8)
+CtrlI := Chr(9)
+CtrlJ := Chr(10)
+CtrlK := Chr(11)
+CtrlL := Chr(12)
+CtrlM := Chr(13)
+CtrlN := Chr(14)
+CtrlO := Chr(15)
+CtrlP := Chr(16)
+CtrlQ := Chr(17)
+CtrlR := Chr(18)
+CtrlS := Chr(19)
+CtrlT := Chr(20)
+CtrlU := Chr(21)
+CtrlV := Chr(22)
+CtrlW := Chr(23)
+CtrlX := Chr(24)
+CtrlY := Chr(25)
+CtrlZ := Chr(26)
+CtrlTilde := Chr(30)
+EscapeKey := Chr(27)
+SpaceKey := Chr(32)
+ExclamationMark := Chr(33)
+CommercialAt := Chr(64)
+QuotationDouble := Chr(34)
+ApostropheMark := Chr(39)
+Backquote := Chr(96)
+Solidus := Chr(47)
+ReverseSolidus := Chr(92)
+InformationSymbol := Chr(0x24D8)
+NewLine := Chr(0x000A)
+CarriageReturn := Chr(0x000D)
+Tabulation := Chr(0x0009)
+NbrSpace := Chr(0x00A0)
+DottedCircle := Chr(0x25CC)
+
+LeftControl := Chr(0x2388)
+RightControl := Chr(0x2318)
+LeftShift := Chr(0x1F844)
+RightShift := Chr(0x1F846)
+LeftAlt := Chr(0x2387)
+RightAlt := Chr(0x2384)
+Window := Chr(0x229E)
+CapsLock := Chr(0x2B9D)
 
 #Include <External\prt_array>
 #Include <External\fnc_clip_send>
@@ -17,16 +77,6 @@
 #Include <cls_long_press>
 #Include <supplement_pshell>
 #Include <supplement_python>
-
-
-;InstallKeybdHook(True, True)
-
-A_HotkeyInterval := 1000
-A_MaxHotkeysPerInterval := 50
-
-second := 1000
-minute := 60 * second
-hour := 60 * minute
 
 
 ; Only EN US & RU RU Keyboard Layout
@@ -626,58 +676,6 @@ CheckUpdate() {
 }
 
 CheckUpdate()
-
-CtrlA := Chr(1)
-CtrlB := Chr(2)
-CtrlC := Chr(3)
-CtrlD := Chr(4)
-CtrlE := Chr(5)
-CtrlF := Chr(6)
-CtrlG := Chr(7)
-CtrlH := Chr(8)
-CtrlI := Chr(9)
-CtrlJ := Chr(10)
-CtrlK := Chr(11)
-CtrlL := Chr(12)
-CtrlM := Chr(13)
-CtrlN := Chr(14)
-CtrlO := Chr(15)
-CtrlP := Chr(16)
-CtrlQ := Chr(17)
-CtrlR := Chr(18)
-CtrlS := Chr(19)
-CtrlT := Chr(20)
-CtrlU := Chr(21)
-CtrlV := Chr(22)
-CtrlW := Chr(23)
-CtrlX := Chr(24)
-CtrlY := Chr(25)
-CtrlZ := Chr(26)
-CtrlTilde := Chr(30)
-EscapeKey := Chr(27)
-SpaceKey := Chr(32)
-ExclamationMark := Chr(33)
-CommercialAt := Chr(64)
-QuotationDouble := Chr(34)
-ApostropheMark := Chr(39)
-Backquote := Chr(96)
-Solidus := Chr(47)
-ReverseSolidus := Chr(92)
-InformationSymbol := "ⓘ"
-NewLine := Chr(0x000A)
-CarriageReturn := Chr(0x000D)
-Tabulation := Chr(0x0009)
-NbrSpace := Chr(0x00A0)
-DottedCircle := Chr(0x25CC)
-
-LeftControl := Chr(0x2388)
-RightControl := Chr(0x2318)
-LeftShift := Chr(0x1F844)
-RightShift := Chr(0x1F846)
-LeftAlt := Chr(0x2387)
-RightAlt := Chr(0x2384)
-Window := Chr(0x229E)
-CapsLock := Chr(0x2B9D)
 
 LayoutsPresets := Map(
 	"QWERTY", Map(

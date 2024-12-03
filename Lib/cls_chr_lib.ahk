@@ -89,35 +89,74 @@ class ChrLib {
 
 	static EntryPreProcessing(entryName, entry) {
 		refinedEntry := entry
+		character := Util.UnicodeToChar(refinedEntry.unicode)
+		characterSequence := Util.UnicodeToChar(refinedEntry.HasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode)
+
+		for i, altCodeSymbol in AltCodesLibrary {
+			if Mod(i, 2) = 1 {
+				AltCode := AltCodesLibrary[i + 1]
+
+				if character == altCodeSymbol {
+					if !refinedEntry.HasOwnProp("altCode") {
+						refinedEntry.altCode := ""
+					}
+
+					if !InStr(refinedEntry.altCode, AltCode) {
+						refinedEntry.altCode .= AltCode " "
+					}
+				}
+			}
+		}
+
+		for i, entitySymbol in EntitiesLibrary {
+			if Mod(i, 2) = 1 {
+				entityCode := EntitiesLibrary[i + 1]
+
+				if character == entitySymbol {
+					refinedEntry.entity := entityCode
+					break
+				}
+			}
+		}
+
+		if refinedEntry.HasOwnProp("symbol") {
+			hasSet := refinedEntry.symbol.HasOwnProp("set")
+			hasCustoms := refinedEntry.symbol.HasOwnProp("customs")
+			hasFont := refinedEntry.symbol.HasOwnProp("font")
+
+			if refinedEntry.symbol.HasOwnProp("category") {
+				category := refinedEntry.symbol.category
+
+				if category = "Diacritic Mark" {
+					if !hasSet
+						refinedEntry.symbol.set := Chr(0x25CC) characterSequence
+					if !hasCustoms
+						refinedEntry.symbol.customs := "s72"
+					if !hasFont
+						refinedEntry.symbol.font := "Cambria"
+				} else if category = "Spaces" {
+					if !hasSet
+						refinedEntry.symbol.set := characterSequence
+					if !hasCustoms
+						refinedEntry.symbol.customs := "underline"
+				}
+
+			} else {
+				refinedEntry.symbol.category := "N/A"
+				if !hasSet
+					refinedEntry.symbol.set := characterSequence
+			}
+		} else {
+			refinedEntry.symbol := { category: "N/A" }
+			if !hasSet
+				refinedEntry.symbol.set := characterSequence
+		}
 
 		return refinedEntry
 	}
 
-
-	static ConvertLegacyMap(legacyMap) {
-		for entry, value in legacyMap {
-		}
-	}
 }
 
-; TODO НЕ ЗАБЫТЬ НАПИСАТЬ КОНВЕРТЕР ИЗ ЛЕГАСИ КАРТЫ СИМВОЛОВ В НОВЫЙ ФОРМАТ ВМЕСТО РУЧНОЙ ПЕРЕПИСИ БИБЛИОТЕКИ СИМВОЛОВ. КОНВЕРТЕР ЧИТАЕТ ПЕРЕМЕННУЮ CHARACTERS И СОЗДАЁТ НОВЫЙ ФАЙЛ, ГДЕ ВСЕ СИМВОЛЫ ПЕРЕВЕДЕНЫ В НОВЫЙ ФОРМАТ.
-
-
-ChrLib.AddEntry(
-	"minus_sign", {
-		unicode: "{U+2212}",
-		modifierForm: "{U+02D7}",
-		sequence: ["{U+22f23}", "{U+55F0}", "{U+76EA}", "ACDE"],
-		tags: ["minus", "минус"],
-		groups: ["Dashes", "Smelting Special", "Special Fast Primary", "Special Fast"],
-		show_on_fast_keys: True,
-		alt_on_fast_keys: "<+ [-]",
-		alt_special: "[Num-]",
-		recipe: "m-",
-	}
-)
-
-;MsgBox(ChrLib.Get("minus_sign"))
 
 ChrLib.AddEntry(
 	"concept_c_letter_tse", {
@@ -156,6 +195,7 @@ ChrLib.AddEntry(
 			isFastKey: True,
 			isAltLayout: True,
 			groupKey: "9",
+			groupModifiers: CapsLock,
 			fastKey: "<+ [-]",
 			specialKey: "[Num-]",
 			altLayoutKey: "[A]",
@@ -172,21 +212,7 @@ ChrLib.AddEntry(
 	}
 )
 
-ChrLib.AddEntries(
-	"minusdot", {
-		unicode: "{U+2238}",
-		tags: ["dot minus", "минус с точкой"],
-		groups: ["Special Characters", "Smelting Special"],
-		recipe: ["-.", Chr(0x2212) "."],
-	},
-	"minustilde", {
-		unicode: "{U+2242}",
-		tags: ["minus tilde", "тильда с минусом"],
-		groups: ["Special Characters", "Smelting Special"],
-		recipe: ["~-", "~" Chr(0x2212)],
-		;test: ChrLib.GetValue("minusdot", "recipe")[1],
-	},
-)
+
 /*
 
 MsgBox(ChrLib.GetValue("minus_sign", "unicode") "`n" ChrLib.GetValue("minusdot", "unicode") " " ChrLib.GetValue("minustilde", "unicode") "`n" ChrLib.GetValue("minustilde", "unicode") "`n")

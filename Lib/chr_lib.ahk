@@ -13887,3 +13887,15 @@ MapInsert(Characters,
 		symbolAlt: Chr(0x2090) "-" Chr(0x2095),
 	},
 )
+
+
+ChrLib.AddEntries(
+	"acute", {
+		unicode: "{U+0301}", LaTeX: ["\'", "\acute"],
+		tags: ["acute", "акут", "ударение"],
+		groups: ["Diacritics Primary", "Diacritics Fast Primary"],
+		alterations: { uncombined: "{U+00B4}" },
+		options: { isFastKey: True, groupKey: ["a", "ф"] },
+		symbol: { category: "Diacritic Mark" },
+	},
+)
