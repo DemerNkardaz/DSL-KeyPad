@@ -327,6 +327,8 @@ _Оба режима не завершены_
 
 ---
 
+<br>
+
 ## Важные функции
 
 ### Группы активации
@@ -345,6 +347,8 @@ _Оба режима не завершены_
 | Группа шпаций               | <kbd>LWin LAlt Пробел</kbd> |
 | Группа дефисов и тире       | <kbd>LWin LAlt -</kbd>      |
 | Группа кавычек              | <kbd>LWin LAlt "</kbd>      |
+
+<br>
 
 ### «Быстрые ключи»
 
@@ -416,6 +420,8 @@ https://www.keyboard-layout-editor.com/##@_css=* {%0A%20%20%20 font-size%2F: 11p
 <img src="Images/fastkeys_layout_ralt_ru.png" alt="" width="1024">
 
 </details>
+
+<br>
 
 ### «Плавильня»
 
@@ -541,9 +547,13 @@ https://www.keyboard-layout-editor.com/##@_css=* {%0A%20%20%20 font-size%2F: 11p
 
 ---
 
+<br>
+
 ## Вспомогательные функции
 
 ---
+
+<br>
 
 ## Интерфейс
 
