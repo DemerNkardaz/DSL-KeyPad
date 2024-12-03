@@ -31,19 +31,40 @@ class ChrLib {
 		entry := this.GetEntry(entryName)
 		output := ""
 
-		if (extraRules && StrLen(AlterationActiveName) > 0) && HasProp(entry, "alterations") && HasProp(entry.alterations, AlterationActiveName) {
+		if (extraRules && StrLen(AlterationActiveName) > 0) && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(AlterationActiveName) {
 			output .= Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
 
-		} else if HasProp(entry, "sequence") {
+		} else if entry.HasOwnProp("sequence") {
 			output .= Util.UnicodeToChar(entry.sequence)
 
 		} else {
 			output .= Util.UnicodeToChar(entry.unicode)
 		}
 
-
 		return output
 	}
+
+	static Count(groupRestrict?) {
+		count := 0
+		for entry, value in this.entries.OwnProps() {
+			if !IsSet(groupRestrict) || (IsSet(groupRestrict) && value.HasOwnProp("groups") && value.groups.HasValue(groupRestrict)) {
+				if !(value.HasOwnProp("options") && value.options.HasOwnProp("noCalc") && value.options.noCalc) {
+					count++
+				}
+
+				if value.HasOwnProp("alterations") {
+					for alteration, value in value.alterations.OwnProps() {
+						if !InStr(alteration, "HTML") {
+							count++
+						}
+					}
+				}
+			}
+		}
+
+		return count
+	}
+
 
 	static ConvertLegacyMap(legacyMap) {
 		for entry, value in legacyMap {
@@ -60,7 +81,7 @@ ChrLib.AddEntry(
 		modifierForm: "{U+02D7}",
 		sequence: ["{U+22f23}", "{U+55F0}", "{U+76EA}", "ACDE"],
 		tags: ["minus", "минус"],
-		group: [["Dashes", "Smelting Special", "Special Fast Primary", "Special Fast"], "9"],
+		groups: ["Dashes", "Smelting Special", "Special Fast Primary", "Special Fast"],
 		show_on_fast_keys: True,
 		alt_on_fast_keys: "<+ [-]",
 		alt_special: "[Num-]",
@@ -126,13 +147,13 @@ ChrLib.AddEntries(
 	"minusdot", {
 		unicode: "{U+2238}",
 		tags: ["dot minus", "минус с точкой"],
-		group: [["Special Characters", "Smelting Special"]],
+		groups: ["Special Characters", "Smelting Special"],
 		recipe: ["-.", Chr(0x2212) "."],
 	},
 	"minustilde", {
 		unicode: "{U+2242}",
 		tags: ["minus tilde", "тильда с минусом"],
-		group: [["Special Characters", "Smelting Special"]],
+		groups: ["Special Characters", "Smelting Special"],
 		recipe: ["~-", "~" Chr(0x2212)],
 		;test: ChrLib.GetValue("minusdot", "recipe")[1],
 	},
