@@ -11,4 +11,36 @@ Class Util {
 		return Result
 	}
 
+	static UniTrim(Str) {
+		return SubStr(Str, 4, StrLen(Str) - 4)
+	}
+
+	static ExtractHex(Str) {
+		return RegExReplace(Str, "[^0-9A-Fa-f]", "")
+	}
+
+	static UnicodeToChar(unicode) {
+		if IsObject(unicode) {
+			hexStr := ""
+
+			for value in unicode {
+				intermediate := this.ExtractHex(value)
+				if StrLen(intermediate) > 0 {
+					num := Format("0x{1}", intermediate)
+					hexStr .= Chr(num)
+				}
+			}
+
+			if StrLen(hexStr) > 0 {
+				return hexStr
+			}
+		} else {
+			hexStr := this.ExtractHex(unicode)
+			if StrLen(hexStr) > 0 {
+				num := Format("0x{1}", hexStr)
+				return Chr(num)
+			}
+		}
+		return
+	}
 }

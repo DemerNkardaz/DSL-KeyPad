@@ -27,6 +27,24 @@ class ChrLib {
 		return this.entries.%entryName%.%value%
 	}
 
+	static Get(entryName, extraRules := False) {
+		entry := this.GetEntry(entryName)
+		output := ""
+
+		if (extraRules && StrLen(AlterationActiveName) > 0) && HasProp(entry, "alterations") && HasProp(entry.alterations, AlterationActiveName) {
+			output .= Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
+
+		} else if HasProp(entry, "sequence") {
+			output .= Util.UnicodeToChar(entry.sequence)
+
+		} else {
+			output .= Util.UnicodeToChar(entry.unicode)
+		}
+
+
+		return output
+	}
+
 	static ConvertLegacyMap(legacyMap) {
 		for entry, value in legacyMap {
 		}
@@ -40,6 +58,7 @@ ChrLib.AddEntry(
 	"minus_sign", {
 		unicode: "{U+2212}",
 		modifierForm: "{U+02D7}",
+		sequence: ["{U+22f23}", "{U+55F0}", "{U+76EA}", "ACDE"],
 		tags: ["minus", "минус"],
 		group: [["Dashes", "Smelting Special", "Special Fast Primary", "Special Fast"], "9"],
 		show_on_fast_keys: True,
@@ -48,6 +67,8 @@ ChrLib.AddEntry(
 		recipe: "m-",
 	}
 )
+
+;MsgBox(ChrLib.Get("minus_sign"))
 
 ChrLib.AddEntry(
 	"concept_c_letter_tse", {
