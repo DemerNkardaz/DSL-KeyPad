@@ -3,7 +3,7 @@ class ChrLib {
 	static entries := {}
 
 	static AddEntry(entryName, entry) {
-		ChrLib.entries.%entryName% := entry
+		this.entries.%entryName% := entry
 	}
 
 	static AddEntries(arguments*) {
@@ -12,19 +12,28 @@ class ChrLib {
 				entryName := arguments[i]
 				entryValue := arguments[i + 1]
 
-				ChrLib.AddEntry(entryName, entryValue)
+				this.AddEntry(entryName, entryValue)
 			}
 		}
+
+		return
 	}
 
 	static GetEntry(entryName) {
-		return ChrLib.entries.%entryName%
+		return this.entries.%entryName%
 	}
 
 	static GetValue(entryName, value) {
-		return ChrLib.entries.%entryName%.%value%
+		return this.entries.%entryName%.%value%
+	}
+
+	static ConvertLegacyMap(legacyMap) {
+		for entry, value in legacyMap {
+		}
 	}
 }
+
+; TODO НЕ ЗАБЫТЬ НАПИСАТЬ КОНВЕРТЕР ИЗ ЛЕГАСИ КАРТЫ СИМВОЛОВ В НОВЫЙ ФОРМАТ ВМЕСТО РУЧНОЙ ПЕРЕПИСИ БИБЛИОТЕКИ СИМВОЛОВ. КОНВЕРТЕР ЧИТАЕТ ПЕРЕМЕННУЮ CHARACTERS И СОЗДАЁТ НОВЫЙ ФАЙЛ, ГДЕ ВСЕ СИМВОЛЫ ПЕРЕВЕДЕНЫ В НОВЫЙ ФОРМАТ.
 
 
 ChrLib.AddEntry(
@@ -39,6 +48,59 @@ ChrLib.AddEntry(
 		recipe: "m-",
 	}
 )
+
+ChrLib.AddEntry(
+	"concept_c_letter_tse", {
+		titles: Map("ru", "", "en", ""),
+		unicode: "{U+0426}", html: "fills automatically", altCode: "fills automatically", LaTeX: ["\^", "\hat"],
+		sequence: ["{U+0426}", "{U+0426}", "{U+0426}"],
+		tags: ["concept", "концепт"],
+		groups: ["Concept Entry"],
+		alterations: {
+			modifier: "{U+02D7}",
+			combining: "{U+02D7}",
+			uncombined: "{U+02D7}",
+			subscript: "{U+02D7}",
+			italic: "{U+02D7}",
+			italicBold: "{U+02D7}",
+			bold: "{U+02D7}",
+			script: "{U+02D7}",
+			fraktur: "{U+02D7}",
+			scriptBold: "{U+02D7}",
+			frakturBold: "{U+02D7}",
+			doubleStruck: "{U+02D7}",
+			doubleStruckBold: "{U+02D7}",
+			doubleStruckItalic: "{U+02D7}",
+			doubleStruckItalicBold: "{U+02D7}",
+			sansSerif: "{U+02D7}",
+			sansSerifItalic: "{U+02D7}",
+			sansSerifItalicBold: "{U+02D7}",
+			sansSerifBold: "{U+02D7}",
+			monospace: "{U+02D7}",
+			smallCapital: "{U+02D7}",
+		},
+		options: {
+			noCalc: True,
+			titlesAlt: True,
+			isFastKey: True,
+			isAltLayout: True,
+			groupKey: "9",
+			fastKey: "<+ [-]",
+			specialKey: "[Num-]",
+			altLayoutKey: "[A]",
+		},
+		symbol: {
+			letter: "Ц",
+			set: Chr(0x0426),
+			alt: "[" Chr(0x0426) "]",
+			category: "Entry Concept",
+			customs: "s72 underline",
+			font: "Cambria",
+		},
+		recipe: ["m-"],
+	}
+)
+
 ChrLib.AddEntries(
 	"minusdot", {
 		unicode: "{U+2238}",
@@ -51,7 +113,15 @@ ChrLib.AddEntries(
 		tags: ["minus tilde", "тильда с минусом"],
 		group: [["Special Characters", "Smelting Special"]],
 		recipe: ["~-", "~" Chr(0x2212)],
+		;test: ChrLib.GetValue("minusdot", "recipe")[1],
 	},
 )
+/*
 
-;MsgBox(ChrLib.GetValue("minus_sign", "unicode") "`n" ChrLib.GetValue("minusdot", "unicode") " " ChrLib.GetValue("minustilde", "unicode"))
+MsgBox(ChrLib.GetValue("minus_sign", "unicode") "`n" ChrLib.GetValue("minusdot", "unicode") " " ChrLib.GetValue("minustilde", "unicode") "`n" ChrLib.GetValue("minustilde", "unicode") "`n")
+
+
+for entry, value in ChrLib.entries.OwnProps() {
+	msgbox(entry "`n" value.unicode)
+}
+*/
