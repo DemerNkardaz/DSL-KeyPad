@@ -11,6 +11,7 @@
 #Include <chr_alt_codes>
 #Include <chr_entities>
 #Include <cls_util>
+#Include <cls_chr_lib>
 #Include <cls_key_event>
 #Include <cls_layout>
 #Include <cls_long_press>
