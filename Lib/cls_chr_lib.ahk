@@ -3,7 +3,7 @@ class ChrLib {
 	static entries := {}
 
 	static AddEntry(entryName, entry) {
-		this.entries.%entryName% := entry
+		this.entries.%entryName% := this.EntryPreProcessing(entryName, entry)
 	}
 
 	static AddEntries(arguments*) {
@@ -23,22 +23,44 @@ class ChrLib {
 		return this.entries.%entryName%
 	}
 
-	static GetValue(entryName, value) {
-		return this.entries.%entryName%.%value%
+	static GetValue(entryName, value, useRef := False, &output?) {
+		if useRef {
+			if this.entries.%entryName%.HasOwnProp(value) {
+				output := this.entries.%entryName%.%value%
+				return True
+			} else {
+				return False
+			}
+		} else {
+			return this.entries.%entryName%.%value%
+		}
 	}
 
-	static Get(entryName, extraRules := False) {
+	static Get(entryName, extraRules := False, getMode := "Unicode") {
 		entry := this.GetEntry(entryName)
 		output := ""
 
-		if (extraRules && StrLen(AlterationActiveName) > 0) && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(AlterationActiveName) {
-			output .= Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
+		if getMode = "HTML" && entry.HasOwnProp("html") {
+			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(AlterationActiveName) {
+				output .= entry.alterations.%AlterationActiveName%HTML
 
-		} else if entry.HasOwnProp("sequence") {
-			output .= Util.UnicodeToChar(entry.sequence)
+			} else {
+				output .= entry.html
+			}
+
+		} else if getMode = "LaTeX" && entry.HasOwnProp("LaTeX") {
+			output .= (entry.LaTeX.Length = 2 && Cfg.Get("LaTeX_Mode") = "Math") ? entry.LaTeX[2] : entry.LaTeX[1]
 
 		} else {
-			output .= Util.UnicodeToChar(entry.unicode)
+			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(AlterationActiveName) {
+				output .= Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
+
+			} else if entry.HasOwnProp("sequence") {
+				output .= Util.UnicodeToChar(entry.sequence)
+
+			} else {
+				output .= Util.UnicodeToChar(entry.unicode)
+			}
 		}
 
 		return output
@@ -63,6 +85,12 @@ class ChrLib {
 		}
 
 		return count
+	}
+
+	static EntryPreProcessing(entryName, entry) {
+		refinedEntry := entry
+
+		return refinedEntry
 	}
 
 
@@ -123,6 +151,7 @@ ChrLib.AddEntry(
 		},
 		options: {
 			noCalc: True,
+			noHTML: False,
 			titlesAlt: True,
 			isFastKey: True,
 			isAltLayout: True,
