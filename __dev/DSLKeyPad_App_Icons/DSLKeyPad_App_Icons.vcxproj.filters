@@ -84,5 +84,11 @@
     <Image Include="DSLKeyPad.app_phoenician.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_south_arabian.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_north_arabian.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

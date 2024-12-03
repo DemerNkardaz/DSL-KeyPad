@@ -13055,7 +13055,7 @@ MapInsert(Characters,
 		unicode: "{U+1091F}",
 		titlesAlt: True,
 		group: ["Phoenician"],
-		alt_layout: "[|]",
+		alt_layout: ">! [Space]",
 		tags: ["финикийская разделитель слов", "phoenician word separator"],
 	},
 	;

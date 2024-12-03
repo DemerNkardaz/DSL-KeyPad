@@ -2532,6 +2532,16 @@ ChangeTrayIconOnLanguage() {
 			TitleEn: Locale.Read("tray_tooltip_phoenician"),
 			TitleRu: Locale.Read("tray_tooltip_phoenician"),
 		},
+		"Ancient South Arabian", {
+			CodeEn: 15, CodeRu: 15, Default: 1,
+			TitleEn: Locale.Read("tray_tooltip_ancient_south_arabian"),
+			TitleRu: Locale.Read("tray_tooltip_ancient_south_arabian"),
+		},
+		"Ancient North Arabian", {
+			CodeEn: 16, CodeRu: 16, Default: 1,
+			TitleEn: Locale.Read("tray_tooltip_ancient_north_arabian"),
+			TitleRu: Locale.Read("tray_tooltip_ancient_north_arabian"),
+		},
 		"IPA", {
 			CodeEn: 8, CodeRu: 8, Default: 1,
 			TitleEn: Locale.Read("tray_tooltip_ipa"),
@@ -2604,6 +2614,8 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		"Gothic", "script_gothic",
 		"Old Italic", "script_old_italic",
 		"Phoenician", "script_phoenician",
+		"Ancient South Arabian", "script_ancient_south_arabian",
+		"Ancient North Arabian", "script_ancient_north_arabian",
 		"IPA", "script_ipa",
 		"Maths", "script_maths",
 	]
@@ -2621,6 +2633,10 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 13 : 1)
 		} else if ScriptName = "Phoenician" {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 14 : 1)
+		} else if ScriptName = "Ancient South Arabian" {
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 15 : 1)
+		} else if ScriptName = "Ancient North Arabian" {
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 16 : 1)
 		} else if ScriptName = "IPA" {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 8 : 1)
 		} else if ScriptName = "Maths" {
@@ -3518,21 +3534,25 @@ Constructor() {
 		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
 		"Glagolitic Letters", Locale.Read("symbol_glagolitic"),
 		"Cyrillic Diacritics", "",
-		"Fake TurkoPermic", RightControl " 2",
+		"Fake TurkoPermic", CapsLock RightControl " 1",
 		"Old Turkic", Locale.Read("symbol_turkic"),
 		"Old Turkic Orkhon", Locale.Read("symbol_turkic_orkhon"),
 		"Old Turkic Yenisei", Locale.Read("symbol_turkic_yenisei"),
 		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
 		"Old Permic", Locale.Read("symbol_permic"),
-		"Fake Hungarian", RightControl " 3",
+		"Fake Hungarian", RightControl " 2",
 		"Old Hungarian", Locale.Read("symbol_hungarian"),
 		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
-		"Fake Gothic", RightControl " 4",
+		"Fake Gothic", CapsLock RightControl " 2",
 		"Gothic Alphabet", Locale.Read("symbol_gothic"),
-		"Fake Italic", RightControl " 5",
+		"Fake Italic", RightControl " 3",
 		"Old Italic", Locale.Read("symbol_old_italic"),
-		"Fake Phoenician", CapsLock RightControl " 5",
+		"Fake Phoenician", CapsLock RightControl " 3",
 		"Phoenician", Locale.Read("symbol_phoenician"),
+		"Fake South Arabian", RightControl " 4",
+		"South Arabian", Locale.Read("symbol_ancient_south_arabian"),
+		"Fake North Arabian", CapsLock RightControl " 4",
+		"North Arabian", Locale.Read("symbol_ancient_north_arabian"),
 		"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
 		"Fake IPA", RightControl " 0",
 		"IPA", Locale.Read("symbol_ipa"),
@@ -3551,6 +3571,8 @@ Constructor() {
 		"Gothic Alphabet",
 		"Old Italic",
 		"Phoenician",
+		"South Arabian",
+		"North Arabian",
 		"IPA",
 		"Mathematical",
 	]
@@ -3715,8 +3737,10 @@ Constructor() {
 	Command_oldhungary := CommandsTree.Add(Locale.Read("func_label_old_hungarian"), Command_extralayouts)
 	Command_gothic := CommandsTree.Add(Locale.Read("func_label_gothic"), Command_extralayouts)
 	Command_olditalic := CommandsTree.Add(Locale.Read("func_label_old_italic"), Command_extralayouts)
-	Command_func_label_maths := CommandsTree.Add(Locale.Read("func_label_maths"), Command_extralayouts)
+	Command_phoenician := CommandsTree.Add(Locale.Read("func_label_phoenician"), Command_extralayouts)
+	Command_southarabian := CommandsTree.Add(Locale.Read("func_label_ancient_south_arabian"), Command_extralayouts)
 	Command_func_label_ipa := CommandsTree.Add(Locale.Read("func_label_ipa"), Command_extralayouts)
+	Command_func_label_maths := CommandsTree.Add(Locale.Read("func_label_maths"), Command_extralayouts)
 	Command_alterations := CommandsTree.Add(Locale.Read("func_label_alterations"))
 	Command_alterations_combining := CommandsTree.Add(Locale.Read("func_label_alterations_combining"), Command_alterations)
 	Command_alterations_modifier := CommandsTree.Add(Locale.Read("func_label_alterations_modifier"), Command_alterations)
@@ -4453,8 +4477,10 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		"func_label_old_hungarian",
 		"func_label_gothic",
 		"func_label_old_italic",
-		"func_label_maths",
+		"func_label_phoenician",
+		"func_label_ancient_south_arabian",
 		"func_label_ipa",
+		"func_label_maths",
 		"func_label_input_toggle",
 		"func_label_layout_toggle",
 		"func_label_notifications",
@@ -6360,6 +6386,120 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 
 		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
+	} else if Combinations = "Ancient South Arabian" {
+		SlotMapping := Map(
+			"A", "",
+			"B", "",
+			"C", "",
+			"D", "",
+			"E", "",
+			"F", "",
+			"G", "",
+			"H", "",
+			"I", "",
+			"J", "",
+			"K", "",
+			"L", "",
+			"M", "",
+			"N", "",
+			"O", "",
+			"P", "",
+			"Q", "",
+			"R", "",
+			"S", "",
+			"T", "",
+			"U", "",
+			"V", "",
+			"W", "",
+			"X", "",
+			"Y", "",
+			"Z", "",
+			"~", "kkey_grave_accent",
+			",", "kkey_comma",
+			".", "kkey_dot",
+			";", "kkey_semicolon",
+			"'", "kkey_apostrophe",
+			"[", "kkey_l_square_bracket",
+			"]", "kkey_r_square_bracket",
+			"=", "kkey_equals",
+			"-", "kkey_hyphen_minus",
+			"/", "kkey_slash",
+		)
+
+		SlotModdedMapping := Map(
+			"A", Map("<+", ""),
+			"1", Map("<^>!", ""),
+			",", Map("<+", "kkey_lessthan", "<^>!", ""),
+			".", Map("<+", "kkey_greaterthan", "<^>!", ""),
+			";", Map("<+", "kkey_colon"),
+			"'", Map("<+", "kkey_quotation"),
+			"~", Map("<+", "kkey_grave_accent"),
+			"=", Map("<+", "kkey_plus"),
+			"-", Map("<+", "kkey_underscore"),
+			"[", Map("<+", "kkey_l_curly_bracket"),
+			"]", Map("<+", "kkey_r_curly_bracket"),
+			"/", Map("<+", "question"),
+			"\", Map("<+", "kkey_verticalline"),
+		)
+
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
+	} else if Combinations = "Ancient North Arabian" {
+		SlotMapping := Map(
+			"A", "",
+			"B", "",
+			"C", "",
+			"D", "",
+			"E", "",
+			"F", "",
+			"G", "",
+			"H", "",
+			"I", "",
+			"J", "",
+			"K", "",
+			"L", "",
+			"M", "",
+			"N", "",
+			"O", "",
+			"P", "",
+			"Q", "",
+			"R", "",
+			"S", "",
+			"T", "",
+			"U", "",
+			"V", "",
+			"W", "",
+			"X", "",
+			"Y", "",
+			"Z", "",
+			"~", "kkey_grave_accent",
+			",", "kkey_comma",
+			".", "kkey_dot",
+			";", "kkey_semicolon",
+			"'", "kkey_apostrophe",
+			"[", "kkey_l_square_bracket",
+			"]", "kkey_r_square_bracket",
+			"=", "kkey_equals",
+			"-", "kkey_hyphen_minus",
+			"/", "kkey_slash",
+		)
+
+		SlotModdedMapping := Map(
+			"A", Map("<+", ""),
+			"1", Map("<^>!", ""),
+			",", Map("<+", "kkey_lessthan", "<^>!", ""),
+			".", Map("<+", "kkey_greaterthan", "<^>!", ""),
+			";", Map("<+", "kkey_colon"),
+			"'", Map("<+", "kkey_quotation"),
+			"~", Map("<+", "kkey_grave_accent"),
+			"=", Map("<+", "kkey_plus"),
+			"-", Map("<+", "kkey_underscore"),
+			"[", Map("<+", "kkey_l_curly_bracket"),
+			"]", Map("<+", "kkey_r_curly_bracket"),
+			"/", Map("<+", "question"),
+			"\", Map("<+", "kkey_verticalline"),
+		)
+
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
 	} else if Combinations = "IPA" {
 		SlotMapping := Map(
 			"A", "",
@@ -6586,13 +6726,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["NumpadDot"], (*) => GREPizeSelection(True),
 			"<#<!" UseKey["ArrUp"], (*) => SetNumberStyle("sup"),
 			"<#<!" UseKey["ArrDown"], (*) => SetNumberStyle("sub"),
-			">^" UseKey["1"], (*) => ToggleLetterScript(, "Glagolitic Futhark"),
-			">^" UseKey["2"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"),
-			">^" UseKey["3"], (*) => ToggleLetterScript(, "Old Hungarian"),
-			">^" UseKey["4"], (*) => ToggleLetterScript(, "Gothic"),
-			">^" UseKey["5"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Italic"), (*) => ToggleLetterScript(, "Phoenician")),
-			">^" UseKey["0"], (*) => ToggleLetterScript(, "IPA"),
-			">^" UseKey["9"], (*) => ToggleLetterScript(, "Maths"),
+			">^" UseKey["1"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Glagolitic Futhark"), (*) => ToggleLetterScript(, "Old Turkic Old Permic")),
+			">^" UseKey["2"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Hungarian"), (*) => ToggleLetterScript(, "Gothic")),
+			">^" UseKey["3"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Italic"), (*) => ToggleLetterScript(, "Phoenician")),
+			">^" UseKey["4"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Ancient South Arabian"), (*) => ToggleLetterScript(, "Ancient North Arabian")),
+			">^" UseKey["0"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "IPA"), (*) => ToggleLetterScript(, "Maths")),
 			;
 			"RAlt", (*) => ProceedCompose(),
 			;"RCtrl", (*) => ProceedCombining(),
@@ -6792,13 +6930,15 @@ ManageTrayItems() {
 		"enable", Locale.Read("tray_func_enable") "`t" RightControl "F10",
 		"altInput", Locale.Read("tray_func_altInput"),
 		"glagolitic", Locale.Read("tray_func_glagolitic_runic") "`t" RightControl "1",
-		"turkic", Locale.Read("tray_func_tukic_permic") "`t" RightControl "2",
-		"hungarian", Locale.Read("tray_func_hungarian") "`t" RightControl "3",
-		"gothic", Locale.Read("tray_func_gothic") "`t" RightControl "4",
-		"italic", Locale.Read("tray_func_old_italic") "`t" RightControl "5",
-		"phoenician", Locale.Read("tray_func_phoenician") "`t" CapsLock RightControl "5",
-		"maths", Locale.Read("tray_func_maths") "`t" RightControl "9",
+		"turkic", Locale.Read("tray_func_tukic_permic") "`t" CapsLock RightControl "1",
+		"hungarian", Locale.Read("tray_func_hungarian") "`t" RightControl "2",
+		"gothic", Locale.Read("tray_func_gothic") "`t" CapsLock RightControl "2",
+		"italic", Locale.Read("tray_func_old_italic") "`t" RightControl "3",
+		"phoenician", Locale.Read("tray_func_phoenician") "`t" CapsLock RightControl "3",
+		"south_arabian", Locale.Read("tray_func_ancient_south_arabian") "`t" RightControl "4",
+		"north_arabian", Locale.Read("tray_func_ancient_north_arabian") "`t" CapsLock RightControl "4",
 		"ipa", Locale.Read("tray_func_ipa") "`t" RightControl "0",
+		"maths", Locale.Read("tray_func_maths") "`t" CapsLock RightControl "0",
 		"script", Locale.Read("func_label_scripts"),
 		"telexInput", Locale.Read("tray_func_telexlike"),
 		"telex_advanced_mode", Locale.Read("tray_func_telex_advanced_mode"),
@@ -6856,6 +6996,8 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["gothic"], (*) => ToggleLetterScript(, "Gothic"))
 	ScriptsSubMenu.Add(Labels["italic"], (*) => ToggleLetterScript(, "Old Italic"))
 	ScriptsSubMenu.Add(Labels["phoenician"], (*) => ToggleLetterScript(, "Phoenician"))
+	ScriptsSubMenu.Add(Labels["south_arabian"], (*) => ToggleLetterScript(, "Ancient South Arabian"))
+	ScriptsSubMenu.Add(Labels["north_arabian"], (*) => ToggleLetterScript(, "Ancient North Arabian"))
 	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
 	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
@@ -6867,6 +7009,8 @@ ManageTrayItems() {
 	ScriptsSubMenu.SetIcon(Labels["gothic"], InternalFiles["AppIcoDLL"].File, 7)
 	ScriptsSubMenu.SetIcon(Labels["italic"], InternalFiles["AppIcoDLL"].File, 13)
 	ScriptsSubMenu.SetIcon(Labels["phoenician"], InternalFiles["AppIcoDLL"].File, 14)
+	ScriptsSubMenu.SetIcon(Labels["south_arabian"], InternalFiles["AppIcoDLL"].File, 15)
+	ScriptsSubMenu.SetIcon(Labels["north_arabian"], InternalFiles["AppIcoDLL"].File, 16)
 	ScriptsSubMenu.SetIcon(Labels["maths"], InternalFiles["AppIcoDLL"].File, 10)
 	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
 
