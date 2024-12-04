@@ -354,6 +354,8 @@ Class Panel {
 			panelTabs.UseTab()
 
 			panelWindow.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
+
+
 			return panelWindow
 		}
 
@@ -362,16 +364,23 @@ Class Panel {
 		} else {
 			this.PanelGUI := Constructor()
 			this.PanelGUI.Show()
+
+			for each in ["Diacritic", "Spaces", "Smelting", "FastKeys", "Glago"] {
+				try {
+					this.LV_SetRandomPreview(each)
+				}
+			}
 		}
+
 	}
 
 	static AddCharactersTab(options) {
 		languageCode := Language.Get()
 		panelWindow := options.winObj
 
-		items_LV := panelWindow.AddListView(this.UISets.column.listStyle, options.columns)
+		items_LV := panelWindow.AddListView(this.UISets.column.listStyle " v" options.prefix "LV", options.columns)
 		items_LV.SetFont("s10")
-		items_LV.OnEvent("ItemFocus", (LV, RowNumber) => this.LV_SetCharacterPreview(LV, RowNumber, { prefix: options.prefix, groupBox: GroupBoxOptions }))
+		items_LV.OnEvent("ItemFocus", (LV, RowNumber) => this.LV_SetCharacterPreview(LV, RowNumber, { prefix: options.prefix }))
 
 		Loop options.columns.Length {
 			index := A_Index
@@ -387,7 +396,6 @@ Class Panel {
 		items_Filter := panelWindow.AddEdit(this.UISets.filter.field options.prefix "Filter", "")
 		items_Filter.SetFont("s10")
 		items_Filter.OnEvent("Change", (*) => this.LV_Filter(panelWindow, options.prefix "Filter", items_LV, options.source))
-
 
 		GroupBoxOptions := {
 			group: panelWindow.Add("GroupBox", "v" options.prefix "Group " this.UISets.infoBox.body, this.UISets.infoBox.bodyText),
@@ -422,10 +430,28 @@ Class Panel {
 		GroupBoxOptions.html.SetFont("s12")
 		GroupBoxOptions.tags.SetFont("s9")
 		GroupBoxOptions.alert.SetFont("s9")
+
+		return
 	}
 
-	static LV_SetCharacterPreview(LV, rowNumber, options) {
-		characterEntry := LV.GetText(rowNumber, 5)
+	static LV_SetRandomPreview(prefix) {
+		LV_Rows := this.PanelGUI[prefix "LV"].GetCount()
+		allowedRows := []
+
+		Loop LV_Rows {
+			if StrLen(this.PanelGUI[prefix "LV"].GetText(A_Index, 5)) > 0 {
+				allowedRows.Push(A_Index)
+			}
+		}
+
+		rand := Random(1, allowedRows.Length)
+		entryName := this.PanelGUI[prefix "LV"].GetText(allowedRows[rand], 5)
+
+		this.LV_SetCharacterPreview(this.PanelGUI[prefix "LV"], entryName, { prefix: prefix })
+	}
+
+	static LV_SetCharacterPreview(LV, rowValue, options) {
+		characterEntry := Type(rowValue) = "String" ? rowValue : LV.GetText(rowValue, 5)
 		if StrLen(characterEntry) < 1 {
 			this.PanelGUI[options.prefix "Title"].Text := "N/A"
 			this.PanelGUI[options.prefix "Symbol"].Text := ChrLib.Get("dotted_circle")
@@ -438,10 +464,10 @@ Class Panel {
 			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
 			this.PanelGUI[options.prefix "Alert"].Text := ""
 
-			options.groupBox.preview.SetFont(this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
-			options.groupBox.unicode.SetFont("s12")
-			options.groupBox.html.SetFont("s12")
-			options.groupBox.latex.SetFont("s12")
+			this.PanelGUI[options.prefix "Symbol"].SetFont(this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
+			this.PanelGUI[options.prefix "Unicode"].SetFont("s12")
+			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
+			this.PanelGUI[options.prefix "LaTeX"].SetFont("s12")
 
 			return
 		} else {
@@ -477,13 +503,13 @@ Class Panel {
 			this.PanelGUI[options.prefix "LaTeX"].Text := value.HasOwnProp("LaTeX") ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"
 			this.PanelGUI[options.prefix "LaTeXPackage"].Text := value.HasOwnProp("LaTeXPackage") ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
 
-			options.groupBox.preview.SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
-			options.groupBox.preview.SetFont(this.UISets.infoFonts.previewSize " norm cDefault")
-			options.groupBox.preview.SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? this.UISets.infoFonts.previewSmaller " norm cDefault" : this.UISets.infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
+			this.PanelGUI[options.prefix "Symbol"].SetFont(this.UISets.infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? this.UISets.infoFonts.previewSmaller " norm cDefault" : this.UISets.infoFonts.previewSize " norm cDefault")
 
-			options.groupBox.unicode.SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) ? "s9" : "s12")
-			options.groupBox.html.SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 14) ? "s9" : "s12")
-			options.groupBox.latex.SetFont((StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 14) ? "s9" : "s12")
+			this.PanelGUI[options.prefix "Unicode"].SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) ? "s9" : "s12")
+			this.PanelGUI[options.prefix "HTML"].SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 14) ? "s9" : "s12")
+			this.PanelGUI[options.prefix "LaTeX"].SetFont((StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 14) ? "s9" : "s12")
 
 			entryString := Locale.Read("entry") ": " characterEntry
 			tagsString := value.HasOwnProp("tags") ? Locale.Read("tags") ": " value.tags.ToString() : ""
