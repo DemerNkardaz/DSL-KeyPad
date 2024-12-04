@@ -66,6 +66,19 @@ class ChrLib {
 		return output
 	}
 
+	static GetMulti(entryNames*) {
+		output := ""
+		indexMap := Map()
+
+		charIndex := 0
+		for i, character in entryNames {
+			charIndex++
+			repeatCount := 1
+		}
+
+
+	}
+
 	static Count(groupRestrict?) {
 		count := 0
 		for entry, value in this.entries.OwnProps() {
