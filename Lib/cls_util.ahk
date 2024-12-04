@@ -11,6 +11,19 @@ Class Util {
 		return Result
 	}
 
+	static StrCutBrackets(Str) {
+		output := ""
+		blacklist := ["{", "}"]
+
+		for symbol in StrSplit(Str, "") {
+			if !blacklist.Contains(symbol) {
+				output .= symbol
+			}
+		}
+
+		return output
+	}
+
 	static UniTrim(Str) {
 		return SubStr(Str, 4, StrLen(Str) - 4)
 	}
@@ -43,6 +56,7 @@ Class Util {
 		}
 		return
 	}
+
 
 	static FormatHotKey(HKey, Modifier := "") {
 		MakeString := ""

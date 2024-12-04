@@ -1,6 +1,6 @@
 #Requires Autohotkey v2
 #SingleInstance Force
-#MaxThreads 2
+#MaxThreads 4
 ;#UseHook
 ;InstallKeybdHook(True, True)
 

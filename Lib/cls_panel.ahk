@@ -50,6 +50,18 @@ Class Panel {
 			areaRules: "+NoSort -Multi",
 			listStyle: "w620 h480 +NoSort -Multi",
 		},
+		infoFonts: {
+			preview: "Noto Serif",
+			previewSize: "s70",
+			previewSmaller: "s40",
+			titleSize: "s14",
+			fontFace: Map(
+				"serif", {
+					name: "Noto Serif",
+					source: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerif/googlefonts/variable-ttf/NotoSerif%5Bwdth%2Cwght%5D.ttf"
+				},
+			),
+		},
 	}
 
 	static panelTitle := App.winTitle
@@ -151,23 +163,172 @@ Class Panel {
 	}
 
 	static AddCharactersTab(options) {
-		items_LV := options.winObj.AddListView(this.UISets.column.listStyle, options.columns)
+		languageCode := Language.Get()
+		panelWindow := options.winObj
+
+		items_LV := panelWindow.AddListView(this.UISets.column.listStyle, options.columns)
+		items_LV.SetFont("s10")
+		items_LV.OnEvent("ItemFocus", (LV, RowNumber) => this.LV_SetCharacterPreview(LV, RowNumber, { prefix: options.prefix, groupBox: GroupBoxOptions }))
 
 		Loop options.columns.Length {
 			index := A_Index
 			items_LV.ModifyCol(index, options.columnWidths[index])
 		}
 
-
 		for item in options.source {
 			items_LV.Add(, item[1], item[2], item[3], item[4], item[5])
 		}
 
-		items_FilterIcon := options.winObj.AddButton(this.UISets.filter.icon)
+		items_FilterIcon := panelWindow.AddButton(this.UISets.filter.icon)
 		GuiButtonIcon(items_FilterIcon, ImageRes, 169)
-		items_Filter := options.winObj.AddEdit(this.UISets.filter.field options.prefix "Filter", "")
+		items_Filter := panelWindow.AddEdit(this.UISets.filter.field options.prefix "Filter", "")
 		items_Filter.SetFont("s10")
-		items_LV.SetFont("s10")
+		items_Filter.OnEvent("Change", (*) => this.LV_Filter(panelWindow, options.prefix "Filter", items_LV, options.source))
+
+
+		GroupBoxOptions := {
+			group: panelWindow.Add("GroupBox", "v" options.prefix "Group " this.UISets.infoBox.body, this.UISets.infoBox.bodyText),
+			groupFrame: panelWindow.Add("GroupBox", this.UISets.infoBox.previewFrame),
+			preview: panelWindow.Add("Edit", "v" options.prefix "Symbol " this.UISets.infoBox.preview, this.UISets.infoBox.previewText),
+			title: panelWindow.Add("Text", "v" options.prefix "Title " this.UISets.infoBox.title, this.UISets.infoBox.titleText),
+			;
+			LaTeXTitleLTX: panelWindow.Add("Text", this.UISets.infoBox.LaTeXTitleLTX, this.UISets.infoBox.LaTeXTitleLTXText).SetFont("s10", "Cambria"),
+			LaTeXTitleA: panelWindow.Add("Text", this.UISets.infoBox.LaTeXTitleA, this.UISets.infoBox.LaTeXTitleAText).SetFont("s9", "Cambria"),
+			LaTeXTitleE: panelWindow.Add("Text", this.UISets.infoBox.LaTeXTitleE, this.UISets.infoBox.LaTeXTitleEText).SetFont("s10", "Cambria"),
+			LaTeXPackage: panelWindow.Add("Text", "v" options.prefix "LaTeXPackage " this.UISets.infoBox.LaTeXPackage, this.UISets.infoBox.LaTeXPackageText).SetFont("s9"),
+			LaTeX: panelWindow.Add("Edit", "v" options.prefix "LaTeX " this.UISets.infoBox.LaTeX, this.UISets.infoBox.LaTeXText),
+			;
+			altTitle: panelWindow.Add("Text", this.UISets.infoBox.altTitle, this.UISets.infoBox.altTitleText[languageCode]).SetFont("s9"),
+			alt: panelWindow.Add("Edit", "v" options.prefix "Alt " this.UISets.infoBox.alt, this.UISets.infoBox.altText),
+			;
+			unicodeTitle: panelWindow.Add("Text", this.UISets.infoBox.unicodeTitle, this.UISets.infoBox.unicodeTitleText[languageCode]).SetFont("s9"),
+			unicode: panelWindow.Add("Edit", "v" options.prefix "Unicode " this.UISets.infoBox.unicode, this.UISets.infoBox.unicodeText),
+			;
+			htmlTitle: panelWindow.Add("Text", this.UISets.infoBox.htmlTitle, this.UISets.infoBox.htmlTitleText[languageCode]).SetFont("s9"),
+			html: panelWindow.Add("Edit", "v" options.prefix "HTML " this.UISets.infoBox.html, this.UISets.infoBox.htmlText),
+			;
+			tags: panelWindow.Add("Edit", "v" options.prefix "Tags " this.UISets.infoBox.tags),
+			alert: panelWindow.Add("Edit", "v" options.prefix "Alert " this.UISets.infoBox.alert),
+		}
+
+		GroupBoxOptions.preview.SetFont(this.UISets.infoFonts.previewSize, this.UISets.infoFonts.fontFace["serif"].name)
+		GroupBoxOptions.title.SetFont(this.UISets.infoFonts.titleSize, this.UISets.infoFonts.fontFace["serif"].name)
+		GroupBoxOptions.LaTeX.SetFont("s12")
+		GroupBoxOptions.alt.SetFont("s12")
+		GroupBoxOptions.unicode.SetFont("s12")
+		GroupBoxOptions.html.SetFont("s12")
+		GroupBoxOptions.tags.SetFont("s9")
+		GroupBoxOptions.alert.SetFont("s9")
+	}
+
+	static LV_CharacterDetails(LV, rowNumber, options) {
+		entryNameKey := LV.GetText(rowNumber, 5)
+	}
+
+	static LV_SetCharacterPreview(LV, rowNumber, options) {
+		characterEntry := LV.GetText(rowNumber, 5)
+		if StrLen(characterEntry) < 1 {
+			this.PanelGUI[options.prefix "Title"].Text := "N/A"
+			this.PanelGUI[options.prefix "Symbol"].Text := ChrLib.Get("dotted_circle")
+			this.PanelGUI[options.prefix "Unicode"].Text := "U+0000"
+
+			options.groupBox.preview.SetFont(this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
+			options.groupBox.unicode.SetFont("s12")
+
+			return
+		} else {
+			languageCode := Language.Get()
+			value := ChrLib.GetEntry(characterEntry)
+
+
+			characterTitle := ""
+
+			if options.HasOwnProp("type") && options.type = "Alternative Layout" &&
+			(value.options.HasOwnProp("layoutTitlesAlt") && value.options.layoutTitlesAlt) &&
+			Locale.Read(characterEntry "_layout_alt", "chars", True, &titleText) {
+				characterTitle := titleText
+
+			} else if (value.options.HasOwnProp("titlesAlt") && value.options.titlesAlt) && Locale.Read(characterEntry "_alt", "chars", True, &titleText) {
+				characterTitle := titleText
+
+			} else if Locale.Read(characterEntry, "chars", True, &titleText) {
+				characterTitle := titleText
+
+			} else if value.HasOwnProp("titles") && value.titles.HasValue(languageCode) {
+				characterTitle := value.titles[languageCode]
+
+			} else {
+				characterTitle := Locale.Read(characterEntry, "chars")
+			}
+
+			this.PanelGUI[options.prefix "Title"].Text := characterTitle
+			this.PanelGUI[options.prefix "Symbol"].Text := value.symbol.HasOwnProp("alt") ? value.symbol.alt : value.symbol.set
+			this.PanelGUI[options.prefix "Unicode"].Text := value.HasOwnProp("sequence") ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
+
+			options.groupBox.preview.SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
+			options.groupBox.preview.SetFont(this.UISets.infoFonts.previewSize " norm cDefault")
+			options.groupBox.preview.SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? this.UISets.infoFonts.previewSmaller " norm cDefault" : this.UISets.infoFonts.previewSize " norm cDefault")
+
+			if (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9
+			&& StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) {
+				options.groupBox.unicode.SetFont("s10")
+			} else if (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) {
+				options.groupBox.unicode.SetFont("s9")
+			} else {
+				options.groupBox.unicode.SetFont("s12")
+			}
+		}
+
+	}
+
+	static LV_FilterPopulate(LV, DataList) {
+		LV.Delete()
+		for item in DataList {
+			LV.Add(, item[1], item[2], item[3], item[4], item[5])
+		}
+	}
+
+	static LV_Filter(GuiFrame, FilterField, LV, DataList) {
+		FilterText := StrLower(GuiFrame[FilterField].Text)
+		LV.Delete()
+
+		if FilterText = ""
+			this.LV_FilterPopulate(LV, DataList)
+		else {
+			GroupStarted := False
+			PreviousGroupName := ""
+			for item in DataList {
+				ItemText := StrLower(item[1])
+
+				IsFavorite := (ItemText ~= "\Q★")
+				IsMatch := InStr(ItemText, FilterText)
+				|| (IsFavorite && (InStr("избранное", FilterText) || InStr("favorite", FilterText)))
+
+				if ItemText = "" {
+					LV.Add(, item[1], item[2], item[3], item[4], item[5])
+					GroupStarted := true
+				} else if IsMatch {
+					if !GroupStarted {
+						GroupStarted := true
+					}
+					LV.Add(, item[1], item[2], item[3], item[4], item[5])
+				} else if GroupStarted {
+					GroupStarted := False
+				}
+
+				if ItemText != "" and ItemText != PreviousGroupName {
+					PreviousGroupName := ItemText
+				}
+			}
+
+			if GroupStarted {
+				LV.Add(, "", "", "", "")
+			}
+
+			if PreviousGroupName != "" {
+				LV.Add(, "", "", "", "")
+			}
+		}
 	}
 
 	static LV_insertGroup(options) {
@@ -239,9 +400,9 @@ Class Panel {
 
 				if options.type = "Recipe" {
 					if value.HasOwnProp("recipeAlt")
-						characterBinding := value.recipeAlt.ArrayToString()
+						characterBinding := value.recipeAlt.ToString()
 					else if value.HasOwnProp("recipe")
-						characterBinding := value.recipe.ArrayToString()
+						characterBinding := value.recipe.ToString()
 					else
 						characterBinding := "N/A"
 				} else if options.type = "Alternative Layout" {

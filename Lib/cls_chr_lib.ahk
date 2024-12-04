@@ -147,7 +147,7 @@ class ChrLib {
 		} else if this.entries.%entryName%.HasOwnProp("recipe") {
 			output := this.entries.%entryName%.recipe
 		}
-		return formatted ? output.ArrayToString() : output
+		return formatted ? output.ToString() : output
 	}
 
 	static Count(groupRestrict?) {
