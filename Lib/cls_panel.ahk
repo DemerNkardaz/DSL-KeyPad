@@ -380,7 +380,8 @@ Class Panel {
 
 		items_LV := panelWindow.AddListView(this.UISets.column.listStyle " v" options.prefix "LV", options.columns)
 		items_LV.SetFont("s10")
-		items_LV.OnEvent("ItemFocus", (LV, RowNumber) => this.LV_SetCharacterPreview(LV, RowNumber, { prefix: options.prefix }))
+		items_LV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: options.prefix }))
+		items_LV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber))
 
 		Loop options.columns.Length {
 			index := A_Index
@@ -432,6 +433,44 @@ Class Panel {
 		GroupBoxOptions.alert.SetFont("s9")
 
 		return
+	}
+
+	static LV_DoubleClickHandler(LV, rowNumber) {
+		if StrLen(LV.GetText(rowNumber, 4)) < 1 {
+			return
+		} else {
+			entryTitle := LV.GetText(rowNumber, 1)
+			unicodeKey := LV.GetText(rowNumber, 4)
+			characterEntry := LV.GetText(rowNumber, 5)
+			value := ChrLib.GetEntry(characterEntry)
+			URIComponent := Util.OpenCharWeb(unicodeKey, True)
+
+			if StrLen(unicodeKey) > 0 {
+				isCtrlDown := GetKeyState("LControl")
+				isShiftDown := GetKeyState("LShift")
+
+				if (isCtrlDown) {
+					unicodeCodePoint := "0x" unicodeKey
+					A_Clipboard := Chr(unicodeCodePoint)
+
+					SoundPlay("C:\Windows\Media\Speech On.wav")
+				} else if isShiftDown {
+					if (unicodeKey = Util.ExtractHex(value.unicode)) {
+						if !FavoriteChars.CheckVar(characterEntry) {
+							FavoriteChars.Add(characterEntry)
+							LV.Modify(rowNumber, , entryTitle " " Chr(0x2605))
+						} else {
+							FavoriteChars.Remove(characterEntry)
+							LV.Modify(rowNumber, , StrReplace(entryTitle, " " Chr(0x2605)))
+						}
+					}
+
+					SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
+				} else {
+					Run(URIComponent)
+				}
+			}
+		}
 	}
 
 	static LV_SetRandomPreview(prefix) {

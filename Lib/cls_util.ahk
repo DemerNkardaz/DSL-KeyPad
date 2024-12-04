@@ -169,4 +169,43 @@ Class Util {
 		return Output
 	}
 
+	static OpenCharWeb(InputCode := "", IsReturn := False) {
+		CharacterWebResource := Cfg.Get("Character_Web_Resource", , "SymblCC")
+		if InputCode = "" {
+			BackupClipboard := A_Clipboard
+			PromptValue := ""
+			A_Clipboard := ""
+
+			Send("^c")
+			ClipWait(0.5, 1)
+			PromptValue := A_Clipboard
+			PromptValue := this.ChrToUnicode(PromptValue)
+		} else {
+			PromptValue := StrLen(InputCode) >= 4 ? InputCode : this.ChrToUnicode(InputCode)
+		}
+
+		resources := Map(
+			"Compart", "https://www.compart.com/en/unicode/U+" PromptValue,
+			"Codepoints", "https://codepoints.net/U+" PromptValue,
+			"UnicodePlus", "https://unicodeplus.com/U+" PromptValue,
+			"DecodeUnicode", "https://decodeunicode.org/en/u+" PromptValue,
+			"UtilUnicode", "https://util.unicode.org/UnicodeJsps/character.jsp?a=" PromptValue,
+			"Wiktionary", "https://en.wiktionary.org/wiki/" Chr("0x" PromptValue),
+			"Wikipedia", "https://en.wikipedia.org/wiki/" Chr("0x" PromptValue),
+			"SymblCC", "https://symbl.cc/" Language.Get() "/" PromptValue,
+		)
+
+		URIComponent := resources.Has(CharacterWebResource) ? resources[CharacterWebResource] : resources["SymblCC"]
+
+		if (PromptValue != "" && !IsReturn) {
+			Run(URIComponent)
+		} else if (PromptValue != "" && IsReturn) {
+			return URIComponent
+		}
+
+		if InputCode = "" {
+			A_Clipboard := BackupClipboard
+		}
+	}
+
 }
