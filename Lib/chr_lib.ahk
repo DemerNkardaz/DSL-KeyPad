@@ -1541,7 +1541,7 @@ MapInsert(Characters,
 	},
 	"dotted_circle", {
 		unicode: "{U+25CC}",
-		tags: ["пунктирный круг", "dottet circle"],
+		tags: ["пунктирный круг", "dotted circle"],
 		group: ["Special Fast Left", "Num0"],
 		show_on_fast_keys: True,
 	},
@@ -13955,7 +13955,6 @@ RegLib() {
 			unicode: "{U+0311}",
 			tags: ["inverted breve", "перевёрнутое бреве", "перевёрнутая кратка"],
 			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
-			alterations: { uncombined: "{U+02D8}" },
 			options: { isFastKey: True, groupKey: ["B", "И"], modifier: LeftShift },
 			symbol: { category: "Diacritic Mark" },
 		},
@@ -13963,7 +13962,6 @@ RegLib() {
 			unicode: "{U+032E}",
 			tags: ["breve below", "бреве снизу", "кратка снизу"],
 			groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
-			alterations: { uncombined: "{U+02D8}" },
 			options: { isFastKey: True, groupKey: ["b", "и"], modifier: RightShift },
 			symbol: { category: "Diacritic Mark" },
 		},
@@ -13971,7 +13969,6 @@ RegLib() {
 			unicode: "{U+032F}",
 			tags: ["inverted breve below", "перевёрнутое бреве снизу", "перевёрнутая кратка снизу"],
 			groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
-			alterations: { uncombined: "{U+02D8}" },
 			options: { isFastKey: True, groupKey: ["B", "И"], modifier: LeftShift RightShift },
 			symbol: { category: "Diacritic Mark" },
 			test: (E, B := "breve") => this.MakeRecipe("supet teeeee " this.Gets(D, "asterisk_below", D, B "_inverted", D, B)),
@@ -13999,14 +13996,33 @@ RegLib() {
 		},
 		;
 		;
+		; * Spaces
+		;
+		;
+		"emsp", {
+			unicode: "{U+2003}",
+			tags: ["em space", "emspace", "emsp", "круглая шпация"],
+			group: ["Spaces"],
+			options: { isFastKey: True, groupKey: ["1"], fastKey: ">+ [Space]" },
+			symbol: { category: "Spaces" },
+		},
+		"ensp", {
+			unicode: "{U+2002}",
+			tags: ["en space", "enspace", "ensp", "полукруглая шпация"],
+			group: ["Spaces"],
+			options: { isFastKey: True, groupKey: ["2"], fastKey: "<+ [Space]" },
+			symbol: { category: "Spaces" },
+		},
+		;
+		;
 		; * Special Characters
 		;
 		;
 		"dotted_circle", {
 			unicode: "{U+25CC}",
-			tags: ["пунктирный круг", "dottet circle"],
-			group: ["Special Fast Left", "Num0"],
-			options: { isFastKey: True, fastKey: "Num0" },
+			tags: ["пунктирный круг", "dotted circle"],
+			group: ["Special Fast Left"],
+			options: { isFastKey: True, fastKey: "[Num0]" },
 		},
 	)
 

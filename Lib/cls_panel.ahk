@@ -78,7 +78,7 @@ Class Panel {
 			screenWidth := A_ScreenWidth
 			screenHeight := A_ScreenHeight
 
-			windowWidth := 860
+			windowWidth := 870
 			windowHeight := 570
 
 			resolutions := [
@@ -137,7 +137,7 @@ Class Panel {
 			}
 
 
-			panelTabs := panelWindow.AddTab3("w" windowWidth - 18 " h" windowHeight - 15, panelTabList.Arr)
+			panelTabs := panelWindow.AddTab3("w" windowWidth - 15 " h" windowHeight - 12, panelTabList.Arr)
 			panelTabs.UseTab(panelTabList.Obj.diacritics)
 
 			this.AddCharactersTab({
@@ -231,9 +231,13 @@ Class Panel {
 			this.PanelGUI[options.prefix "Title"].Text := "N/A"
 			this.PanelGUI[options.prefix "Symbol"].Text := ChrLib.Get("dotted_circle")
 			this.PanelGUI[options.prefix "Unicode"].Text := "U+0000"
+			this.PanelGUI[options.prefix "HTML"].Text := "&#x0000;"
+			this.PanelGUI[options.prefix "Tags"].Text := ""
+			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
 
 			options.groupBox.preview.SetFont(this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
 			options.groupBox.unicode.SetFont("s12")
+			options.groupBox.html.SetFont("s12")
 
 			return
 		} else {
@@ -264,19 +268,47 @@ Class Panel {
 			this.PanelGUI[options.prefix "Title"].Text := characterTitle
 			this.PanelGUI[options.prefix "Symbol"].Text := value.symbol.HasOwnProp("alt") ? value.symbol.alt : value.symbol.set
 			this.PanelGUI[options.prefix "Unicode"].Text := value.HasOwnProp("sequence") ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
+			this.PanelGUI[options.prefix "HTML"].Text := value.HasOwnProp("entity") ? [value.html, value.entity].ToString(" ") : value.html
 
 			options.groupBox.preview.SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
 			options.groupBox.preview.SetFont(this.UISets.infoFonts.previewSize " norm cDefault")
 			options.groupBox.preview.SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? this.UISets.infoFonts.previewSmaller " norm cDefault" : this.UISets.infoFonts.previewSize " norm cDefault")
 
-			if (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9
-			&& StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) {
-				options.groupBox.unicode.SetFont("s10")
-			} else if (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) {
-				options.groupBox.unicode.SetFont("s9")
-			} else {
-				options.groupBox.unicode.SetFont("s12")
+			options.groupBox.unicode.SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) ? "s9" : "s12")
+			options.groupBox.html.SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 14) ? "s9" : "s12")
+
+			entryString := Locale.Read("entry") ": " characterEntry
+			tagsString := value.HasOwnProp("tags") ? Locale.Read("tags") ": " value.tags.ToString() : ""
+
+			this.PanelGUI[options.prefix "Tags"].Text := entryString ChrLib.Get("ensp") tagsString
+
+
+			groupTitle := ""
+			isDiacritic := RegExMatch(value.symbol.set, "^" ChrLib.Get("dotted_circle") "\S")
+
+			AlterationsValidator := Map(
+				"IsModifier", [value.alterations.HasOwnProp("modifier"), 0x02B0],
+				"IsUncombined", [value.alterations.HasOwnProp("uncombined"), "(h)"],
+				"IsSubscript", [value.alterations.HasOwnProp("subscript"), 0x2095],
+				"IsCombining", [isDiacritic || value.alterations.HasOwnProp("combining"), 0x036A],
+				"IsItalic", [value.alterations.HasOwnProp("italic"), 0x210E],
+				"IsItalicBold", [value.alterations.HasOwnProp("italicBold"), 0x1D489],
+				"IsBold", [value.alterations.HasOwnProp("bold"), 0x1D421],
+				"IsFraktur", [value.alterations.HasOwnProp("fraktur"), 0x1D525],
+				"IsFrakturBold", [value.alterations.HasOwnProp("frakturBold"), 0x1D58D],
+				"IsScript", [value.alterations.HasOwnProp("script"), 0x1D4BD],
+				"IsScriptBold", [value.alterations.HasOwnProp("scriptBold"), 0x1D4F1],
+				"IsDoubleStruck", [value.alterations.HasOwnProp("doubleStruck"), 0x1D559],
+				"IsDoubleStruckItalic", [value.alterations.HasOwnProp("doubleStruckItalic"), 0x2148],
+			)
+
+			for entry, value in AlterationsValidator {
+				if (value[1]) {
+					groupTitle .= (value[2] == "(h)" ? value[2] : ChrLib.Get("dotted_circle") Chr(value[2])) " "
+				}
 			}
+
+			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read("character"))
 		}
 
 	}

@@ -176,6 +176,14 @@ class ChrLib {
 		character := Util.UnicodeToChar(refinedEntry.unicode)
 		characterSequence := Util.UnicodeToChar(refinedEntry.HasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode)
 
+		if refinedEntry.hasOwnProp("sequence") {
+			for each in refinedEntry.sequence {
+				refinedEntry.html .= "&#" Util.ChrToDecimal(Util.UnicodeToChar(each)) ";"
+			}
+		} else {
+			refinedEntry.html := "&#" Util.ChrToDecimal(character) ";"
+		}
+
 		for i, altCodeSymbol in AltCodesLibrary {
 			if Mod(i, 2) = 1 {
 				AltCode := AltCodesLibrary[i + 1]
@@ -205,6 +213,10 @@ class ChrLib {
 
 		if !refinedEntry.HasOwnProp("options") {
 			refinedEntry.options := {}
+		}
+
+		if !refinedEntry.HasOwnProp("alterations") {
+			refinedEntry.alterations := {}
 		}
 
 		if refinedEntry.HasOwnProp("symbol") {

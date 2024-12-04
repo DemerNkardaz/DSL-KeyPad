@@ -57,6 +57,66 @@ Class Util {
 		return
 	}
 
+	static ChrToUnicode(Symbol, StartFormat := "") {
+		Code := Ord(Symbol)
+
+		if (Code >= 0xD800 && Code <= 0xDBFF) {
+			nextSymbol := SubStr(Symbol, 2, 1)
+			NextCode := Ord(nextSymbol)
+
+			if (NextCode >= 0xDC00 && NextCode <= 0xDFFF) {
+				HighSurrogate := Code - 0xD800
+				LowSurrogate := NextCode - 0xDC00
+				FullCodePoint := (HighSurrogate << 10) + LowSurrogate + 0x10000
+				return StartFormat Format("{:06X}", FullCodePoint)
+			}
+		}
+
+		return StartFormat Format("{:04X}", Code)
+	}
+
+	static ChrToDecimal(Symbol) {
+		HexCode := this.ChrToUnicode(Symbol)
+		return Format("{:d}", "0x" HexCode)
+	}
+
+	static ChrToHexaDecimal(StringInput, StartFromat := "0x") {
+		if StringInput != "" {
+			Output := ""
+			i := 1
+
+			while (i <= StrLen(StringInput)) {
+				Symbol := SubStr(StringInput, i, 1)
+				Code := Ord(Symbol)
+
+				if (Code >= 0xD800 && Code <= 0xDBFF) {
+					NextSymbol := SubStr(StringInput, i + 1, 1)
+					Symbol .= NextSymbol
+					i += 1
+				}
+
+				Output .= this.ChrToUnicode(Symbol, StartFromat) "-"
+				i += 1
+			}
+
+			return RegExReplace(Output, "-$", "")
+		} else {
+			return StringInput
+		}
+	}
+
+	static HexaDecimalToChr(StringInput) {
+		if StringInput != "" {
+			Output := ""
+			for symbol in StrSplit(StringInput, "-") {
+				Output .= Chr(symbol)
+			}
+			return Output
+		} else {
+			return StringInput
+		}
+	}
+
 
 	static FormatHotKey(HKey, Modifier := "") {
 		MakeString := ""
