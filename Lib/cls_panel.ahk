@@ -108,20 +108,22 @@ Class Panel {
 				panelColList.smelting.Push(Locale.Read("col_" localeKey))
 			}
 
+
 			LV_Content := {
 				diacritics: ArrayMerge(
 					this.LV_insertGroup([
 						;
-						{ type: "Group Activator", group: "Diacritics Primary", groupKey: Window LeftAlt " F1", separator: true },
+						{ type: "Group Activator", group: "Diacritics Primary", groupKey: Window LeftAlt " F1" },
 						;
-						{ type: "Group Activator", group: "Diacritics Secondary", groupKey: Window LeftAlt " F2" },
+						{ type: "Group Activator", group: "Diacritics Secondary", groupKey: Window LeftAlt " F2", separator: true },
 						;
-						{ type: "Group Activator", group: "Diacritics Tertiary", groupKey: Window LeftAlt " F3" },
+						{ type: "Group Activator", group: "Diacritics Tertiary", groupKey: Window LeftAlt " F3", separator: true },
 						;
-						{ type: "Group Activator", group: "Diacritics Quatemary", groupKey: Window LeftAlt " F6" }
+						{ type: "Group Activator", group: "Diacritics Quatemary", groupKey: Window LeftAlt " F6", separator: true }
 					]),
 				)
 			}
+
 
 			panelTabs := panelWindow.AddTab3("w" windowWidth - 18 " h" windowHeight - 15, panelTabList.Arr)
 			panelTabs.UseTab(panelTabList.Obj.diacritics)
@@ -156,6 +158,7 @@ Class Panel {
 			items_LV.ModifyCol(index, options.columnWidths[index])
 		}
 
+
 		for item in options.source {
 			items_LV.Add(, item[1], item[2], item[3], item[4], item[5])
 		}
@@ -164,13 +167,17 @@ Class Panel {
 		GuiButtonIcon(items_FilterIcon, ImageRes, 169)
 		items_Filter := options.winObj.AddEdit(this.UISets.filter.field options.prefix "Filter", "")
 		items_Filter.SetFont("s10")
+		items_LV.SetFont("s10")
 	}
 
 	static LV_insertGroup(options) {
 		if Type(options) = "Array" {
+			outputArrays := []
 			for each in options {
-				this.LV_insertGroup(each)
+				ArrayMergeTo(outputArrays, this.LV_insertGroup(each))
 			}
+
+			return outputArrays
 		} else {
 
 			if options.group == "" {
@@ -244,7 +251,7 @@ Class Panel {
 				} else if options.type = "Fast Key" {
 					characterBinding := value.options.fastKey
 				} else if options.type = "Group Activator" {
-					characterBinding := value.options.groupKey
+					characterBinding := Util.FormatHotKey(value.options.groupKey)
 				} else {
 					characterBinding := "N/A"
 				}
