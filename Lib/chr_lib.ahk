@@ -14126,6 +14126,18 @@ RegLib() {
 
 }
 
-
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.Get("dotted_circle"))
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.GetValue("acute", "symbol").font)
+/*
+
+entiesarr := []
+testffMap := Map()
+for each, value in ChrLib.entries.OwnProps() {
+	testffMap.Set(value.index, each)
+}
+for key, value in testffMap {
+	entiesarr.Push(key " " value)
+}
+
+MsgBox(entiesarr.ToString("`n"))
+*/

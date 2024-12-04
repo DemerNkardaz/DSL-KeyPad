@@ -1,5 +1,15 @@
 Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
+Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
+
+_ObjMaxIndex(this) {
+	indexes := 0
+	for k, v in this.OwnProps() {
+		indexes++
+	}
+
+	return indexes
+}
 
 _ArrayMaxIndex(this) {
 	indexes := 0

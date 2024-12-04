@@ -619,6 +619,7 @@ Class Panel {
 
 			languageCode := Language.Get()
 			outputArray := []
+			intermediateMap := Map()
 
 
 			if options.hasOwnProp("separator") && options.separator
@@ -685,9 +686,12 @@ Class Panel {
 					characterBinding := "N/A"
 				}
 
-				outputArray.Push([characterTitle, characterBinding, characterSymbol, Util.ExtractHex(value.unicode), characterEntry])
+				intermediateMap.Set(value.index, [characterTitle, characterBinding, characterSymbol, Util.ExtractHex(value.unicode), characterEntry])
 			}
 
+			for key, value in intermediateMap {
+				outputArray.Push(value)
+			}
 
 			if options.HasOwnProp("target") {
 				for each in outputArray {

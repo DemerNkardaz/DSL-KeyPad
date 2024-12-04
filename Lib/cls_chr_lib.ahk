@@ -1,8 +1,9 @@
 class ChrLib {
 
 	static entries := {}
+	static lastIndexAdded := -1
 
-	static AddEntry(entryName, entry) {
+	static AddEntry(entryName, entry, indexID?) {
 
 		this.entries.%entryName% := {}
 		for key, value in entry.OwnProps() {
@@ -11,6 +12,10 @@ class ChrLib {
 			else
 				this.entries.%entryName%.%key% := value
 		}
+
+		this.entries.%entryName%.index := this.lastIndexAdded + 1
+
+		this.lastIndexAdded := this.entries.%entryName%.index
 
 		this.EntryPostProcessing(entryName, this.entries.%entryName%)
 	}
