@@ -14002,14 +14002,14 @@ RegLib() {
 		"emsp", {
 			unicode: "{U+2003}",
 			tags: ["em space", "emspace", "emsp", "круглая шпация"],
-			group: ["Spaces"],
+			groups: ["Spaces"],
 			options: { isFastKey: True, groupKey: ["1"], fastKey: ">+ [Space]" },
 			symbol: { category: "Spaces" },
 		},
 		"ensp", {
 			unicode: "{U+2002}",
 			tags: ["en space", "enspace", "ensp", "полукруглая шпация"],
-			group: ["Spaces"],
+			groups: ["Spaces"],
 			options: { isFastKey: True, groupKey: ["2"], fastKey: "<+ [Space]" },
 			symbol: { category: "Spaces" },
 		},
@@ -14018,6 +14018,104 @@ RegLib() {
 		; * Special Characters
 		;
 		;
+		"arrow_left", {
+			unicode: "{U+2190}",
+			tags: ["left arrow", "стрелка влево"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2190) "]" },
+			recipe: ["<-"],
+		},
+		"arrow_right", {
+			unicode: "{U+2192}",
+			tags: ["right arrow", "стрелка вправо"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2190) "]" },
+			recipe: ["->"],
+		},
+		"arrow_up", {
+			unicode: "{U+2191}",
+			tags: ["up arrow", "стрелка вверх"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2191) "]" },
+		},
+		"arrow_down", {
+			unicode: "{U+2193}",
+			tags: ["down arrow", "стрелка вниз"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2193) "]" },
+		},
+		"arrow_leftup", {
+			unicode: "{U+2196}",
+			tags: ["left up arrow", "стрелка влево-вверх"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2191) "][" Chr(0x2190) "]" },
+		},
+		"arrow_rightup", {
+			unicode: "{U+2197}",
+			tags: ["right up arrow", "стрелка вправо-вверх"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2191) "][" Chr(0x2192) "]" },
+		},
+		"arrow_leftdown", {
+			unicode: "{U+2199}",
+			tags: ["left down arrow", "стрелка влево-вниз"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2193) "][" Chr(0x2190) "]" },
+		},
+		"arrow_rightdown", {
+			unicode: "{U+2198}",
+			tags: ["right down arrow", "стрелка вправо-вниз"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2193) "][" Chr(0x2192) "]" },
+		},
+		"arrow_leftright", {
+			unicode: "{U+2194}",
+			tags: ["right down arrow", "стрелка вправо-вниз"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2190) "][" Chr(0x2192) "]" },
+		},
+		"arrow_updown", {
+			unicode: "{U+2195}",
+			tags: ["right down arrow", "стрелка вправо-вниз"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "[" Chr(0x2191) "][" Chr(0x2193) "]" },
+		},
+		"arrow_left_circle", {
+			unicode: "{U+21BA}",
+			tags: ["left circle arrow", "округлая стрелка влево"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: ">+ [" Chr(0x2190) "]" },
+		},
+		"arrow_right_circle", {
+			unicode: "{U+21BB}",
+			tags: ["right circle arrow", "округлая стрелка вправо"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: ">+ [" Chr(0x2192) "]" },
+		},
+		"arrow_left_ushaped", {
+			unicode: "{U+2B8C}",
+			tags: ["left u-arrow", "u-образная стрелка влево"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "<+ [" Chr(0x2190) "]" },
+		},
+		"arrow_right_ushaped", {
+			unicode: "{U+2B8E}",
+			tags: ["right u-arrow", "u-образная стрелка вправо"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "<+ [" Chr(0x2192) "]" },
+		},
+		"arrow_up_ushaped", {
+			unicode: "{U+2B8D}",
+			tags: ["up u-arrow", "u-образная стрелка вверх"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "<+ [" Chr(0x2190) "]" },
+		},
+		"arrow_down_ushaped", {
+			unicode: "{U+2B8F}",
+			tags: ["down u-arrow", "u-образная стрелка вниз"],
+			groups: ["Special Characters", "Special Fast Secondary"],
+			options: { isFastKey: True, fastKey: "<+ [" Chr(0x2192) "]" },
+		},
 		"dotted_circle", {
 			unicode: "{U+25CC}",
 			tags: ["пунктирный круг", "dotted circle"],

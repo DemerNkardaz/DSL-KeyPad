@@ -150,4 +150,23 @@ Class Util {
 
 		return MakeString
 	}
+
+	static ReplaceModifierKeys(Input) {
+		Output := Input
+		if IsObject(Output) {
+			for i, k in Output {
+				Output[i] = ReplaceModifierKeys(k)
+			}
+		} else {
+			Output := RegExReplace(Output, "\<\!", LeftAlt)
+			Output := RegExReplace(Output, "\>\!", RightAlt)
+			Output := RegExReplace(Output, "\<\+", LeftShift)
+			Output := RegExReplace(Output, "\>\+", RightShift)
+			Output := RegExReplace(Output, "\<\^", LeftControl)
+			Output := RegExReplace(Output, "\>\^", RightControl)
+			Output := RegExReplace(Output, "c\*", CapsLock)
+		}
+		return Output
+	}
+
 }

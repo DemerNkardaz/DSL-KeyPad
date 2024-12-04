@@ -215,6 +215,12 @@ class ChrLib {
 			refinedEntry.options := {}
 		}
 
+		for each in ["fastKey", "specialKey", "altLayoutKey"] {
+			if refinedEntry.options.HasOwnProp(each) {
+				refinedEntry.options.%each% := Util.ReplaceModifierKeys(refinedEntry.options.%each%)
+			}
+		}
+
 		if !refinedEntry.HasOwnProp("alterations") {
 			refinedEntry.alterations := {}
 		}
@@ -259,7 +265,7 @@ class ChrLib {
 ChrLib.AddEntry(
 	"concept_c_letter_tse", {
 		titles: Map("ru", "", "en", ""),
-		unicode: "{U+0426}", html: "fills automatically", altCode: "fills automatically", LaTeX: ["\^", "\hat"],
+		unicode: "{U+0426}", html: "fills automatically", altCode: "fills automatically", LaTeX: ["\^", "\hat"], LaTeXPackage: "amsmath",
 		sequence: ["{U+0426}", "{U+0426}", "{U+0426}"],
 		tags: ["concept", "концепт"],
 		groups: ["Concept Entry"],

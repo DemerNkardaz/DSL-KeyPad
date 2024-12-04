@@ -45,6 +45,7 @@ Class Panel {
 		},
 		column: {
 			widths: [300, 150, 60, 85, 0],
+			widthsSmelting: [300, 110, 100, 85, 0],
 			areaWidth: "w620",
 			areaHeight: "h480",
 			areaRules: "+NoSort -Multi",
@@ -116,10 +117,9 @@ Class Panel {
 				panelColList.default.Push(Locale.Read("col_" localeKey))
 			}
 
-			for _, localeKey in ["name", "recipe", "result", "unicode", "entryid", "entry_title"] {
+			for _, localeKey in ["name", "recipe", "result", "unicode", "entry_title"] {
 				panelColList.smelting.Push(Locale.Read("col_" localeKey))
 			}
-
 
 			LV_Content := {
 				diacritics: ArrayMerge(
@@ -131,11 +131,174 @@ Class Panel {
 						;
 						{ type: "Group Activator", group: "Diacritics Tertiary", groupKey: Window LeftAlt " F3", separator: true },
 						;
-						{ type: "Group Activator", group: "Diacritics Quatemary", groupKey: Window LeftAlt " F6", separator: true }
+						{ type: "Group Activator", group: "Diacritics Quatemary", groupKey: Window LeftAlt " F6", separator: true },
 					]),
-				)
+				),
+				spaces: ArrayMerge(
+					this.LV_insertGroup([
+						;
+						{ type: "Group Activator", group: "Spaces", groupKey: Window LeftAlt " Space" },
+						;
+						{ type: "Group Activator", group: "Dashes", groupKey: Window LeftAlt " -", separator: true },
+						;
+						{ type: "Group Activator", group: "Quotes", groupKey: Window LeftAlt " `"", separator: true },
+						;
+						{ type: "Group Activator", group: "Special Characters", groupKey: Window LeftAlt " F7", separator: true },
+					]),
+				),
+				smelting: ArrayMerge(
+					this.LV_insertGroup([
+						;
+						{ type: "Recipe", group: "Latin Ligatures" },
+						;
+						{ type: "Recipe", group: "Latin Digraphs" },
+						;
+						{ type: "Recipe", group: "Latin Extended", separator: true },
+						;
+						{ type: "Recipe", group: "Latin Accented", separator: true },
+						;
+						{ type: "Recipe", group: "Cyrillic Ligatures & Letters", separator: true },
+						;
+						{ type: "Recipe", group: "Cyrillic Letters", separator: true },
+						;
+						{ type: "Recipe", group: "Futhork Runes", separator: true },
+						;
+						{ type: "Recipe", group: "Glagolitic Letters", separator: true },
+						;
+						{ type: "Recipe", group: "Smelting Special", separator: true },
+						;
+						{ type: "Recipe", group: "Wallet Signs", separator: true },
+						;
+						{ type: "Recipe", group: "Other Signs", separator: true },
+						;
+						{ type: "Recipe", group: "Miscellaneous Technical", separator: true },
+					]),
+				),
+				fastkeys: ArrayMerge(
+					this.LV_insertGroup([
+						;
+						{ type: "Fast Key", group: "Diacritics Fast Primary", groupKey: LeftControl LeftAlt },
+						;
+						{ type: "Fast Key", group: "Special Fast Primary", separator: true },
+						;
+						{ type: "Fast Key", group: "Special Fast Left", groupKey: LeftAlt, separator: true },
+						;
+						{ type: "Fast Key", group: "Spaces Left Alt", separator: true },
+						;
+						{ type: "Fast Key", group: "Latin Accented Primary", separator: true },
+						;
+						{ type: "Fast Key", group: "Cyrillic Primary", separator: true },
+						;
+						{ type: "Fast Key", group: "Special Fast Secondary", groupKey: RightAlt, separator: true },
+						;
+						{ type: "Fast Key", group: "Asian Quotes", separator: true },
+						;
+						{ type: "Fast Key", group: "Other Signs", separator: true },
+						;
+						{ type: "Fast Key", group: "Spaces", separator: true },
+						;
+						{ type: "Fast Key", group: "Format Characters", separator: true },
+						;
+						{ type: "Fast Key", group: "Misc", separator: true },
+						;
+						{ type: "Fast Key", group: "Latin Extended", separator: true },
+						;
+						{ type: "Fast Key", group: "Latin Ligatures" },
+						;
+						{ type: "Fast Key", group: "Latin Accented Secondary", separator: true },
+						;
+						{ type: "Fast Key", group: "Cyrillic Ligatures & Letters", separator: true },
+						;
+						{ type: "Fast Key", group: "Cyrillic Secondary", separator: true },
+						;
+						{ type: "Fast Key", group: "Spaces Right Shift", groupKey: RightShift, separator: true },
+						;
+						{ type: "Fast Key", group: "Latin Accented Tertiary", separator: true },
+						;
+						{ type: "Fast Key", group: "Cyrillic Tertiary", separator: true },
+						;
+						{ type: "Fast Key", group: "Special Fast RShift", separator: true },
+						;
+						{ type: "Fast Key", group: "Spaces Left Shift", groupKey: LeftShift, separator: true },
+						;
+						{ type: "Fast Key Special", group: "Special Fast", groupKey: Locale.Read("symbol_special_key"), separator: true },
+					]),
+				),
+				scripts: ArrayMerge(
+					this.LV_insertGroup([
+						;
+						{ type: "Alternative Layout", group: "Fake Futhark", groupKey: RightControl " 1" },
+						;
+						{ type: "Alternative Layout", group: "Futhark Runes", groupKey: Locale.Read("symbol_futhark") },
+						;
+						{ type: "Alternative Layout", group: "Futhork Runes", groupKey: Locale.Read("symbol_futhork"), separator: true },
+						;
+						{ type: "Alternative Layout", group: "Younger Futhark Runes", groupKey: Locale.Read("symbol_futhark_younger"), separator: true },
+						;
+						{ type: "Alternative Layout", group: "Almanac Runes", groupKey: Locale.Read("symbol_futhark_almanac"), separator: true },
+						;
+						{ type: "Alternative Layout", group: "Later Younger Futhark Runes", groupKey: Locale.Read("symbol_futhark_younger_later"), separator: true },
+						;
+						{ type: "Alternative Layout", group: "Medieval Runes", groupKey: Locale.Read("symbol_medieval_runes"), separator: true },
+						;
+						{ type: "Alternative Layout", group: "Runic Punctuation", groupKey: Locale.Read("symbol_runic_punctuation"), separator: true },
+						;
+						{ type: "Alternative Layout", group: "Fake Glagolitic", groupKey: RightControl " 1" },
+						;
+						{ type: "Alternative Layout", group: "Glagolitic Letters", groupKey: Locale.Read("symbol_glagolitic") },
+						;
+						{ type: "Alternative Layout", group: "Cyrillic Diacritics", groupKey: "", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Fake Turkic", groupKey: CapsLock RightControl " 1", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Old Turkic", groupKey: Locale.Read("symbol_turkic") },
+						;
+						{ type: "Alternative Layout", group: "Old Turkic Orkhon", groupKey: Locale.Read("symbol_turkic_orkhon") },
+						;
+						{ type: "Alternative Layout", group: "Old Turkic Yenisei", groupKey: Locale.Read("symbol_turkic_yenisei"), separator: true },
+						;
+						{ type: "Alternative Layout", group: "Fake Permic", groupKey: CapsLock RightControl " 1", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Old Permic", groupKey: Locale.Read("symbol_permic") },
+						;
+						{ type: "Alternative Layout", group: "Fake Hungarian", groupKey: RightControl " 2", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Old Hungarian", groupKey: Locale.Read("symbol_hungarian") },
+						;
+						{ type: "Alternative Layout", group: "Fake Gothic", groupKey: CapsLock RightControl " 2", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Gothic Alphabet", groupKey: Locale.Read("symbol_gothic") },
+						;
+						{ type: "Alternative Layout", group: "Fake Italic", groupKey: RightControl " 3", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Old Italic", groupKey: Locale.Read("symbol_old_italic") },
+						;
+						{ type: "Alternative Layout", group: "Fake Phoenician", groupKey: CapsLock RightControl " 3", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Phoenician", groupKey: Locale.Read("symbol_phoenician") },
+						;
+						{ type: "Alternative Layout", group: "Fake South Arabian", groupKey: RightControl " 4", separator: true },
+						;
+						{ type: "Alternative Layout", group: "South Arabian", groupKey: Locale.Read("symbol_ancient_south_arabian") },
+						;
+						{ type: "Alternative Layout", group: "Fake North Arabian", groupKey: CapsLock RightControl " 4", separator: true },
+						;
+						{ type: "Alternative Layout", group: "North Arabian", groupKey: Locale.Read("symbol_ancient_north_arabian") },
+						;
+						{ type: "Alternative Layout", group: "Fake IPA", groupKey: RightControl " 0", separator: true },
+						;
+						{ type: "Alternative Layout", group: "IPA", groupKey: Locale.Read("symbol_ipa") },
+						;
+						{ type: "Alternative Layout", group: "Fake Math", groupKey: RightControl RightShift " 0", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Mathematical", groupKey: Locale.Read("symbol_maths") },
+						;
+						{ type: "Alternative Layout", group: "Math", groupKey: "", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Math Spaces", groupKey: "", separator: true },
+					]),
+				),
 			}
-
 
 			panelTabs := panelWindow.AddTab3("w" windowWidth - 15 " h" windowHeight - 12, panelTabList.Arr)
 			panelTabs.UseTab(panelTabList.Obj.diacritics)
@@ -146,6 +309,46 @@ Class Panel {
 				columns: panelColList.default,
 				columnWidths: this.UISets.column.widths,
 				source: LV_Content.diacritics,
+			})
+
+			panelTabs.UseTab(panelTabList.Obj.spaces)
+
+			this.AddCharactersTab({
+				winObj: panelWindow,
+				prefix: "Spaces",
+				columns: panelColList.default,
+				columnWidths: this.UISets.column.widths,
+				source: LV_Content.spaces,
+			})
+
+			panelTabs.UseTab(panelTabList.Obj.smelting)
+
+			this.AddCharactersTab({
+				winObj: panelWindow,
+				prefix: "Smelting",
+				columns: panelColList.smelting,
+				columnWidths: this.UISets.column.widthsSmelting,
+				source: LV_Content.smelting,
+			})
+
+			panelTabs.UseTab(panelTabList.Obj.fastkeys)
+
+			this.AddCharactersTab({
+				winObj: panelWindow,
+				prefix: "FastKeys",
+				columns: panelColList.default,
+				columnWidths: this.UISets.column.widths,
+				source: LV_Content.fastkeys,
+			})
+
+			panelTabs.UseTab(panelTabList.Obj.scripts)
+
+			this.AddCharactersTab({
+				winObj: panelWindow,
+				prefix: "Glago",
+				columns: panelColList.default,
+				columnWidths: this.UISets.column.widths,
+				source: LV_Content.scripts,
 			})
 
 			panelTabs.UseTab()
@@ -221,10 +424,6 @@ Class Panel {
 		GroupBoxOptions.alert.SetFont("s9")
 	}
 
-	static LV_CharacterDetails(LV, rowNumber, options) {
-		entryNameKey := LV.GetText(rowNumber, 5)
-	}
-
 	static LV_SetCharacterPreview(LV, rowNumber, options) {
 		characterEntry := LV.GetText(rowNumber, 5)
 		if StrLen(characterEntry) < 1 {
@@ -232,12 +431,17 @@ Class Panel {
 			this.PanelGUI[options.prefix "Symbol"].Text := ChrLib.Get("dotted_circle")
 			this.PanelGUI[options.prefix "Unicode"].Text := "U+0000"
 			this.PanelGUI[options.prefix "HTML"].Text := "&#x0000;"
+			this.PanelGUI[options.prefix "Alt"].Text := "N/A"
+			this.PanelGUI[options.prefix "LaTeX"].Text := "N/A"
+			this.PanelGUI[options.prefix "LaTeXPackage"].Text := ""
 			this.PanelGUI[options.prefix "Tags"].Text := ""
 			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
+			this.PanelGUI[options.prefix "Alert"].Text := ""
 
 			options.groupBox.preview.SetFont(this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
 			options.groupBox.unicode.SetFont("s12")
 			options.groupBox.html.SetFont("s12")
+			options.groupBox.latex.SetFont("s12")
 
 			return
 		} else {
@@ -269,6 +473,9 @@ Class Panel {
 			this.PanelGUI[options.prefix "Symbol"].Text := value.symbol.HasOwnProp("alt") ? value.symbol.alt : value.symbol.set
 			this.PanelGUI[options.prefix "Unicode"].Text := value.HasOwnProp("sequence") ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
 			this.PanelGUI[options.prefix "HTML"].Text := value.HasOwnProp("entity") ? [value.html, value.entity].ToString(" ") : value.html
+			this.PanelGUI[options.prefix "Alt"].Text := value.HasOwnProp("altCode") ? value.altCode : "N/A"
+			this.PanelGUI[options.prefix "LaTeX"].Text := value.HasOwnProp("LaTeX") ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"
+			this.PanelGUI[options.prefix "LaTeXPackage"].Text := value.HasOwnProp("LaTeXPackage") ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
 
 			options.groupBox.preview.SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
 			options.groupBox.preview.SetFont(this.UISets.infoFonts.previewSize " norm cDefault")
@@ -276,6 +483,7 @@ Class Panel {
 
 			options.groupBox.unicode.SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) ? "s9" : "s12")
 			options.groupBox.html.SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 14) ? "s9" : "s12")
+			options.groupBox.latex.SetFont((StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 14) ? "s9" : "s12")
 
 			entryString := Locale.Read("entry") ": " characterEntry
 			tagsString := value.HasOwnProp("tags") ? Locale.Read("tags") ": " value.tags.ToString() : ""
@@ -309,6 +517,8 @@ Class Panel {
 			}
 
 			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read("character"))
+			this.PanelGUI[options.prefix "Alert"].Text := RegExMatch(characterEntry, "^permic") && HasPermicFont = "Noto Sans Old Permic" ? Util.StrVarsInject(Locale.Read("warning_nofont"), HasPermicFont) : RegExMatch(characterEntry, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" ? Util.StrVarsInject(Locale.Read("warning_nofont"), HasHungarianFont) : ""
+
 		}
 
 	}
