@@ -266,7 +266,7 @@ class ChrLib {
 	}
 }
 
-
+/*
 ChrLib.AddEntry(
 	"concept_c_letter_tse", {
 		titles: Map("ru", "", "en", ""),
@@ -321,14 +321,4 @@ ChrLib.AddEntry(
 		recipe: ["m-"],
 	}
 )
-
-
-/*
-
-MsgBox(ChrLib.GetValue("minus_sign", "unicode") "`n" ChrLib.GetValue("minusdot", "unicode") " " ChrLib.GetValue("minustilde", "unicode") "`n" ChrLib.GetValue("minustilde", "unicode") "`n")
-
-
-for entry, value in ChrLib.entries.OwnProps() {
-	msgbox(entry "`n" value.unicode)
-}
 */

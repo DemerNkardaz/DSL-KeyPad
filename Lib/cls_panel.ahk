@@ -35,9 +35,9 @@ Class Panel {
 			alert: "x655 y333 w190 h40 readonly Center -VScroll -HScroll -E0x200",
 		},
 		commandsInfoBox: {
-			body: "x300 y35 w540 h450",
+			body: "vCommandGroup x300 y36 w548 h517",
 			bodyText: Map("ru", "Команда", "en", "Command"),
-			text: "vCommandDescription x310 y65 w520 h400",
+			text: "vCommandDescription x310 y66 w528 h467",
 		},
 		filter: {
 			icon: "x21 y520 h24 w24",
@@ -65,9 +65,72 @@ Class Panel {
 		},
 	}
 
+	static commandLabels := { structured: [
+		"func_label_controls",
+		"func_label_disable",
+		"func_label_gotopage",
+		"func_label_selgoto",
+		"func_label_favorites",
+		"func_label_copylist",
+		"func_label_tagsearch",
+		"func_label_uninsert",
+		"func_label_altcode",
+		Map("func_label_smelter", [
+			"func_label_compose",
+		]),
+		"func_label_num_superscript",
+		"func_label_num_roman",
+		"func_label_fastkeys",
+		Map("func_label_alterations", [
+			"func_label_alterations_combining",
+			"func_label_alterations_modifier",
+			"func_label_alterations_italic_to_bold",
+			"func_label_alterations_fraktur_script_struck",
+			"func_label_alterations_sans_serif",
+			"func_label_alterations_monospace",
+			"func_label_alterations_small_capital",
+		]),
+		Map("func_label_scripts", [
+			"func_label_glagolitic_futhark",
+			"func_label_old_permic_old_turkic",
+			"func_label_old_hungarian",
+			"func_label_gothic",
+			"func_label_old_italic",
+			"func_label_phoenician",
+			"func_label_ancient_south_arabian",
+			"func_label_ipa",
+			"func_label_maths",
+		]),
+		"func_label_input_toggle",
+		"func_label_layout_toggle",
+		"func_label_notifications",
+		Map("func_label_text_processing", [
+			"func_label_tp_quotes",
+			"func_label_tp_paragraph",
+			"func_label_tp_grep",
+			"func_label_tp_html",
+			"func_label_tp_unicode",
+		]),
+	], flat: [] }
+
 	static panelTitle := App.winTitle
 
 	static PanelGUI := Gui()
+
+	static __New() {
+		for each in this.commandLabels.structured {
+			if Type(each) = "String" {
+				this.commandLabels.flat.Push(each)
+			} else if Type(each) = "Map" {
+				for key, value in each {
+					this.commandLabels.flat.Push(key)
+					for eachChild in value {
+						this.commandLabels.flat.Push(eachChild)
+					}
+				}
+			}
+		}
+	}
 
 	static Panel() {
 
@@ -351,6 +414,85 @@ Class Panel {
 				source: LV_Content.scripts,
 			})
 
+			panelTabs.UseTab(panelTabList.Obj.commands)
+
+			commandsTree := panelWindow.AddTreeView("x25 y43 w256 h510 -HScroll")
+			commandsTree.OnEvent("ItemSelect", (TV, Item) => this.TV_InsertCommandsDesc(TV, Item, groupBoxCommands.text))
+
+			groupBoxCommands := {
+				group: panelWindow.AddGroupBox(this.UISets.commandsInfoBox.body, this.UISets.commandsInfoBox.bodyText[languageCode]),
+				text: panelWindow.AddLink(this.UISets.commandsInfoBox.text),
+			}
+
+			for each in this.commandLabels.structured {
+				if Type(each) = "String" {
+					commandsTree.Add(Locale.Read(each))
+				} else if Type(each) = "Map" {
+					for key, value in each {
+						parentalEntry := commandsTree.Add(Locale.Read(key), , InStr(key, "smelter") ? "Expand" : "")
+						for eachChild in value {
+							commandsTree.Add(Locale.Read(eachChild), parentalEntry)
+						}
+					}
+				}
+			}
+
+			panelTabs.UseTab(panelTabList.Obj.about)
+
+			aboutLeftBox := panelWindow.Add("GroupBox", "x23 y34 w280 h520",)
+			panelWindow.Add("GroupBox", "x75 y65 w170 h170")
+			panelWindow.Add("Picture", "x98 y89 w128 h128", InternalFiles["AppIco"].File)
+
+			aboutTitle := panelWindow.Add("Text", "x75 y245 w170 h32 Center BackgroundTrans", DSLPadTitleDefault)
+			aboutTitle.SetFont("s20 c333333", "Cambria")
+
+			aboutVersion := panelWindow.Add("Text", "x75 y285 w170 h32 Center BackgroundTrans", CurrentVersionString)
+			aboutVersion.SetFont("s12 c333333", "Cambria")
+
+			aboutRepoLinkX := LanguageCode == "ru" ? "x114" : "x123"
+			aboutRepoLink := panelWindow.Add("Link", aboutRepoLinkX " y320 w150 h20 Center",
+				'<a href="https://github.com/DemerNkardaz/DSL-KeyPad">' Locale.Read("about_repository") '</a>'
+			)
+			aboutRepoLink.SetFont("s12", "Cambria")
+
+			aboutAuthor := panelWindow.Add("Text", "x75 y495 w170 h16 Center BackgroundTrans", Locale.Read("about_author"))
+			aboutAuthor.SetFont("s11 c333333", "Cambria")
+
+			aboutAuthorLinks := panelWindow.Add("Link", "x90 y525 w150 h16 Center",
+				'<a href="https://github.com/DemerNkardaz/">GitHub</a> '
+				'<a href="http://steamcommunity.com/profiles/76561198177249942">STEAM</a> '
+				'<a href="https://ficbook.net/authors/4241255">Фикбук</a>'
+			)
+			aboutAuthorLinks.SetFont("s9", "Cambria")
+
+			aboutDescBox := panelWindow.Add("GroupBox", "x315 y34 w530 h520", Locale.Read("about_item_count") . " — " . DSLPadTitleFull)
+			aboutDescBox.SetFont("s11", "Cambria")
+
+			aboutDescription := panelWindow.Add("Text", "x330 y70 w505 h495 Wrap BackgroundTrans", Locale.Read("about_description"))
+			aboutDescription.SetFont("s12 c333333", "Cambria")
+
+			panelTabs.UseTab(panelTabList.Obj.useful)
+
+			panelWindow.SetFont("s13")
+			panelWindow.Add("Text", , Locale.Read("typography"))
+			panelWindow.SetFont("s11")
+			panelWindow.Add("Link", "w600", Locale.Read("typography_layout"))
+			panelWindow.SetFont("s13")
+			panelWindow.Add("Text", , Locale.Read("unicode_resources"))
+			panelWindow.SetFont("s11")
+			panelWindow.Add("Link", "w600", '<a href="https://symbl.cc/">Symbl.cc</a> <a href="https://www.compart.com/en/unicode/">Compart</a>')
+			panelWindow.SetFont("s13")
+			panelWindow.Add("Text", , Locale.Read("dictionaries"))
+			panelWindow.SetFont("s11")
+			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_japanese") '<a href="https://yarxi.ru">ЯРКСИ</a> <a href="https://www.warodai.ruu">Warodai</a>')
+			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_chinese") '<a href="https://bkrs.info">БКРС</a>')
+			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_vietnamese") '<a href="https://chunom.org">Chữ Nôm</a>')
+
+			panelTabs.UseTab(panelTabList.Obj.changelog)
+
+			panelWindow.Add("GroupBox", "w825 h520", "🌐 " . Locale.Read("tab_changelog"))
+			InsertChangesList(panelWindow)
+
 			panelTabs.UseTab()
 
 			panelWindow.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
@@ -433,6 +575,21 @@ Class Panel {
 		GroupBoxOptions.alert.SetFont("s9")
 
 		return
+	}
+
+	static TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
+		if !Item {
+			return
+		}
+
+		selectedLabel := TV.GetText(Item)
+
+		for label in this.commandLabels.flat {
+			if (Locale.Read(label) = selectedLabel) {
+				TargetTextBox.Text := Locale.Read(label "_description")
+				TargetTextBox.SetFont("s10", "Segoe UI")
+			}
+		}
 	}
 
 	static LV_DoubleClickHandler(LV, rowNumber) {
