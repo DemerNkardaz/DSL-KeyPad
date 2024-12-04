@@ -3,20 +3,32 @@ class ChrLib {
 	static entries := {}
 
 	static AddEntry(entryName, entry) {
-		this.entries.%entryName% := this.EntryPreProcessing(entryName, entry)
+
+		this.entries.%entryName% := {}
+		for key, value in entry.OwnProps() {
+			if value is Func
+				this.entries.%entryName%.DefineProp(key, { Get: value })
+			else
+				this.entries.%entryName%.%key% := value
+		}
+
+		this.EntryPostProcessing(entryName, this.entries.%entryName%)
 	}
 
 	static AddEntries(arguments*) {
-		for i, entry in arguments {
-			if (Mod(i, 2) = 1) {
-				entryName := arguments[i]
-				entryValue := arguments[i + 1]
-
-				this.AddEntry(entryName, entryValue)
-			}
+		Loop arguments.Length // 2 {
+			index := A_Index * 2 - 1
+			entryName := arguments[index]
+			entryValue := arguments[index + 1]
+			this.AddEntry(entryName, entryValue)
 		}
-
 		return
+	}
+
+	static RemoveEntry(entryName) {
+		if this.entries.HasOwnProp(entryName) {
+			this.entries.DeleteProp(entryName)
+		}
 	}
 
 	static GetEntry(entryName) {
@@ -66,7 +78,7 @@ class ChrLib {
 		return output
 	}
 
-	static GetMulti(entryNames*) {
+	static Gets(entryNames*) {
 		output := ""
 		indexMap := Map()
 
@@ -74,9 +86,54 @@ class ChrLib {
 		for i, character in entryNames {
 			charIndex++
 			repeatCount := 1
+			characterMatch := character
+
+			if RegExMatch(characterMatch, "(.+?)\[(\d+(?:,\d+)*)\]$", &match) {
+				if RegExMatch(match[1], "(.+?)×(\d+)$", &subMatch) {
+					character := subMatch[1]
+					repeatCount := subMatch[2]
+				} else {
+					character := match[1]
+				}
+				Positions := StrSplit(match[2], ",")
+				for _, Position in Positions {
+					Position := Number(Position)
+					if !IndexMap.Has(Position) {
+						IndexMap[Position] := []
+					}
+					IndexMap[Position].Push([character, repeatCount])
+				}
+				continue
+			}
+
+			if RegExMatch(characterMatch, "(.+?)×(\d+)$", &match) {
+				character := match[1]
+				repeatCount := match[2]
+			}
 		}
 
+		for indexEntry, value in indexMap {
+			for _, charData in value {
+				setSequence(charData[1], charData[2])
+			}
+		}
 
+		setSequence(entryName, repeatCount) {
+			Loop repeatCount {
+				output .= ChrLib.Get(entryName)
+			}
+		}
+
+		return output
+	}
+
+	static MakeRecipe(recipes*) {
+		output := []
+		for recipe in recipes {
+			output.Push(recipe)
+		}
+
+		return output
 	}
 
 	static Count(groupRestrict?) {
@@ -100,7 +157,7 @@ class ChrLib {
 		return count
 	}
 
-	static EntryPreProcessing(entryName, entry) {
+	static EntryPostProcessing(entryName, entry) {
 		refinedEntry := entry
 		character := Util.UnicodeToChar(refinedEntry.unicode)
 		characterSequence := Util.UnicodeToChar(refinedEntry.HasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode)
@@ -165,9 +222,8 @@ class ChrLib {
 				refinedEntry.symbol.set := characterSequence
 		}
 
-		return refinedEntry
+		this.entries.%entryName% := refinedEntry
 	}
-
 }
 
 
