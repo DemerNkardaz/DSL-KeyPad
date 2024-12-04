@@ -13965,7 +13965,7 @@ ChrLib.AddEntries(
 		alterations: { uncombined: "{U+02D8}" },
 		options: { isFastKey: True, groupKey: ["B", "И"], modifier: LeftShift RightShift },
 		symbol: { category: "Diacritic Mark" },
-		test: (*) => ChrLib.MakeRecipe("supet teeeee " ChrLib.Gets("dotted_circle", "asterisk_below", "dotted_circle", "breve_inverted")),
+		test: (this, D := "dotted_circle", B := "breve") => ChrLib.MakeRecipe("supet teeeee " ChrLib.Gets(D, "asterisk_below", D, B "_inverted", D, B)),
 	},
 	;
 	"dotted_circle", {
@@ -13977,4 +13977,5 @@ ChrLib.AddEntries(
 )
 
 
-MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.GetValue("acute", "symbol").font)
+;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.Get("dotted_circle"))
+;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.GetValue("acute", "symbol").font)

@@ -104,12 +104,16 @@ class ChrLib {
 					IndexMap[Position].Push([character, repeatCount])
 				}
 				continue
-			}
-
-			if RegExMatch(characterMatch, "(.+?)×(\d+)$", &match) {
+			} else if RegExMatch(characterMatch, "(.+?)×(\d+)$", &match) {
 				character := match[1]
 				repeatCount := match[2]
+				continue
 			}
+
+			if !IndexMap.Has(charIndex) {
+				IndexMap[charIndex] := []
+			}
+			IndexMap[charIndex].Push([character, repeatCount])
 		}
 
 		for indexEntry, value in indexMap {
@@ -218,8 +222,7 @@ class ChrLib {
 			}
 		} else {
 			refinedEntry.symbol := { category: "N/A" }
-			if !hasSet
-				refinedEntry.symbol.set := characterSequence
+			refinedEntry.symbol.set := characterSequence
 		}
 
 		this.entries.%entryName% := refinedEntry
