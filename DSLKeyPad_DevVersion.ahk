@@ -72,6 +72,7 @@ CapsLock := Chr(0x2B9D)
 #Include <chr_entities>
 #Include <cls_util>
 #Include <cls_chr_lib>
+#Include <cls_panel>
 #Include <cls_key_event>
 #Include <cls_layout>
 #Include <cls_long_press>

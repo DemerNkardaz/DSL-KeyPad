@@ -13888,93 +13888,129 @@ MapInsert(Characters,
 	},
 )
 
+RegLib()
+RegLib() {
+	local this := ChrLib
+	local D := "dotted_circle"
 
-ChrLib.AddEntries(
-	"acute", {
-		unicode: "{U+0301}", LaTeX: ["\'", "\acute"],
-		tags: ["acute", "акут", "ударение"],
-		groups: ["Diacritics Primary", "Diacritics Fast Primary"],
-		alterations: { uncombined: "{U+00B4}" },
-		options: { isFastKey: True, groupKey: ["a", "ф"] },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"acute_double", {
-		unicode: "{U+030B}", LaTeX: ["\H"],
-		tags: ["double acute", "двойной акут", "двойное ударение"],
-		groups: ["Diacritics Primary", "Diacritics Fast Primary"],
-		alterations: { uncombined: "{U+02DD}", modifier: "{U+02F6}" },
-		options: { isFastKey: True, groupKey: ["A", "Ф"], modifier: LeftShift },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"acute_below", {
-		unicode: "{U+0317}",
-		tags: ["acute below", "акут снизу"],
-		groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
-		options: { isFastKey: True, groupKey: ["a", "ф"], modifier: RightShift },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"acute_tone_vietnamese", {
-		unicode: "{U+0341}",
-		tags: ["acute tone", "акут тона"],
-		groups: ["Diacritics Secondary"],
-		options: { groupKey: ["A", "Ф"] },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"asterisk_above", {
-		unicode: "{U+20F0}",
-		tags: ["asterisk above", "астериск сверху"],
-		groups: ["Diacritics Tertiary"],
-		options: { groupKey: ["a", "ф"] },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"asterisk_below", {
-		unicode: "{U+0359}",
-		tags: ["asterisk below", "астериск снизу"],
-		groups: ["Diacritics Tertiary"],
-		options: { groupKey: ["A", "Ф"] },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"breve", {
-		unicode: "{U+0306}", LaTeX: ["\u", "\breve"],
-		tags: ["breve", "бреве", "кратка"],
-		groups: ["Diacritics Primary", "Diacritics Fast Primary"],
-		alterations: { uncombined: "{U+02D8}" },
-		options: { isFastKey: True, groupKey: ["b", "и"] },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"breve_inverted", {
-		unicode: "{U+0311}",
-		tags: ["inverted breve", "перевёрнутое бреве", "перевёрнутая кратка"],
-		groups: ["Diacritics Primary", "Diacritics Fast Primary"],
-		alterations: { uncombined: "{U+02D8}" },
-		options: { isFastKey: True, groupKey: ["B", "И"], modifier: LeftShift },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"breve_below", {
-		unicode: "{U+032E}",
-		tags: ["breve below", "бреве снизу", "кратка снизу"],
-		groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
-		alterations: { uncombined: "{U+02D8}" },
-		options: { isFastKey: True, groupKey: ["b", "и"], modifier: RightShift },
-		symbol: { category: "Diacritic Mark" },
-	},
-	"breve_inverted_below", {
-		unicode: "{U+032F}",
-		tags: ["inverted breve below", "перевёрнутое бреве снизу", "перевёрнутая кратка снизу"],
-		groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
-		alterations: { uncombined: "{U+02D8}" },
-		options: { isFastKey: True, groupKey: ["B", "И"], modifier: LeftShift RightShift },
-		symbol: { category: "Diacritic Mark" },
-		test: (this, D := "dotted_circle", B := "breve") => ChrLib.MakeRecipe("supet teeeee " ChrLib.Gets(D, "asterisk_below", D, B "_inverted", D, B)),
-	},
-	;
-	"dotted_circle", {
-		unicode: "{U+25CC}",
-		tags: ["пунктирный круг", "dottet circle"],
-		group: ["Special Fast Left", "Num0"],
-		options: { isFastKey: True, fastKey: "Num0" },
-	},
-)
+	ChrLib.AddEntries(
+		;
+		;
+		; * Diacritics
+		;
+		;
+		"acute", {
+			unicode: "{U+0301}", LaTeX: ["\'", "\acute"],
+			tags: ["acute", "акут", "ударение"],
+			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
+			alterations: { uncombined: "{U+00B4}" },
+			options: { isFastKey: True, groupKey: ["a", "ф"] },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"acute_double", {
+			unicode: "{U+030B}", LaTeX: ["\H"],
+			tags: ["double acute", "двойной акут", "двойное ударение"],
+			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
+			alterations: { uncombined: "{U+02DD}", modifier: "{U+02F6}" },
+			options: { isFastKey: True, groupKey: ["A", "Ф"], modifier: LeftShift },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"acute_below", {
+			unicode: "{U+0317}",
+			tags: ["acute below", "акут снизу"],
+			groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
+			options: { isFastKey: True, groupKey: ["a", "ф"], modifier: RightShift },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"acute_tone_vietnamese", {
+			unicode: "{U+0341}",
+			tags: ["acute tone", "акут тона"],
+			groups: ["Diacritics Secondary"],
+			options: { groupKey: ["A", "Ф"] },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"asterisk_above", {
+			unicode: "{U+20F0}",
+			tags: ["asterisk above", "астериск сверху"],
+			groups: ["Diacritics Tertiary"],
+			options: { groupKey: ["a", "ф"] },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"asterisk_below", {
+			unicode: "{U+0359}",
+			tags: ["asterisk below", "астериск снизу"],
+			groups: ["Diacritics Tertiary"],
+			options: { groupKey: ["A", "Ф"] },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"breve", {
+			unicode: "{U+0306}", LaTeX: ["\u", "\breve"],
+			tags: ["breve", "бреве", "кратка"],
+			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
+			alterations: { uncombined: "{U+02D8}" },
+			options: { isFastKey: True, groupKey: ["b", "и"] },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"breve_inverted", {
+			unicode: "{U+0311}",
+			tags: ["inverted breve", "перевёрнутое бреве", "перевёрнутая кратка"],
+			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
+			alterations: { uncombined: "{U+02D8}" },
+			options: { isFastKey: True, groupKey: ["B", "И"], modifier: LeftShift },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"breve_below", {
+			unicode: "{U+032E}",
+			tags: ["breve below", "бреве снизу", "кратка снизу"],
+			groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
+			alterations: { uncombined: "{U+02D8}" },
+			options: { isFastKey: True, groupKey: ["b", "и"], modifier: RightShift },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"breve_inverted_below", {
+			unicode: "{U+032F}",
+			tags: ["inverted breve below", "перевёрнутое бреве снизу", "перевёрнутая кратка снизу"],
+			groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
+			alterations: { uncombined: "{U+02D8}" },
+			options: { isFastKey: True, groupKey: ["B", "И"], modifier: LeftShift RightShift },
+			symbol: { category: "Diacritic Mark" },
+			test: (E, B := "breve") => this.MakeRecipe("supet teeeee " this.Gets(D, "asterisk_below", D, B "_inverted", D, B)),
+		},
+		"bridge_above", {
+			unicode: "{U+0346}",
+			tags: ["bridge above", "мостик сверху"],
+			groups: ["Diacritics Tertiary"],
+			options: { groupKey: ["b", "и"] },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"bridge_below", {
+			unicode: "{U+032A}",
+			tags: ["bridge below", "мостик снизу"],
+			groups: ["Diacritics Tertiary"],
+			options: { groupKey: ["B", "И"] },
+			symbol: { category: "Diacritic Mark" },
+		},
+		"bridge_inverted_below", {
+			unicode: "{U+033A}",
+			tags: ["inverted bridge below", "перевёрнутый мостик снизу"],
+			groups: ["Diacritics Tertiary"],
+			options: { groupKey: CtrlB },
+			symbol: { category: "Diacritic Mark" },
+		},
+		;
+		;
+		; * Special Characters
+		;
+		;
+		"dotted_circle", {
+			unicode: "{U+25CC}",
+			tags: ["пунктирный круг", "dottet circle"],
+			group: ["Special Fast Left", "Num0"],
+			options: { isFastKey: True, fastKey: "Num0" },
+		},
+	)
+
+}
 
 
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.Get("dotted_circle"))

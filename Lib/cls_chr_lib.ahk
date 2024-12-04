@@ -140,6 +140,16 @@ class ChrLib {
 		return output
 	}
 
+	static GetRecipe(entryName, formatted := False) {
+		output := []
+		if this.entries.%entryName%.HasOwnProp("recipeAlt") {
+			output := this.entries.%entryName%.recipeAlt
+		} else if this.entries.%entryName%.HasOwnProp("recipe") {
+			output := this.entries.%entryName%.recipe
+		}
+		return formatted ? output.ArrayToString() : output
+	}
+
 	static Count(groupRestrict?) {
 		count := 0
 		for entry, value in this.entries.OwnProps() {
@@ -191,6 +201,10 @@ class ChrLib {
 					break
 				}
 			}
+		}
+
+		if !refinedEntry.HasOwnProp("options") {
+			refinedEntry.options := {}
 		}
 
 		if refinedEntry.HasOwnProp("symbol") {
