@@ -149,21 +149,21 @@ Class Panel {
 	}
 
 	static AddCharactersTab(options) {
-		%options.prefix%_LV := options.winObj.AddListView(this.UISets.column.listStyle, options.columns)
+		items_LV := options.winObj.AddListView(this.UISets.column.listStyle, options.columns)
 
 		Loop options.columns.Length {
 			index := A_Index
-			%options.prefix%_LV.ModifyCol(index, options.columnWidths[index])
+			items_LV.ModifyCol(index, options.columnWidths[index])
 		}
 
 		for item in options.source {
-			%options.prefix%_LV.Add(, item[1], item[2], item[3], item[4], item[5])
+			items_LV.Add(, item[1], item[2], item[3], item[4], item[5])
 		}
 
-		%options.prefix%FilterIcon := options.winObj.AddButton(this.UISets.filter.icon)
-		GuiButtonIcon(%options.prefix%FilterIcon, ImageRes, 169)
-		%options.prefix%Filter := options.winObj.AddEdit(this.UISets.field options.prefix "Filter", "")
-		%options.prefix%Filter.SetFont("s10")
+		items_FilterIcon := options.winObj.AddButton(this.UISets.filter.icon)
+		GuiButtonIcon(items_FilterIcon, ImageRes, 169)
+		items_Filter := options.winObj.AddEdit(this.UISets.filter.field options.prefix "Filter", "")
+		items_Filter.SetFont("s10")
 	}
 
 	static LV_insertGroup(options) {
@@ -198,18 +198,58 @@ Class Panel {
 				(value.hasOwnProp("groups") && !value.groups.HasValue(options.group)) ||
 				(options.type = "Group Activator" && !value.options.HasOwnProp("groupKey")) ||
 				(options.type = "Recipe" && !value.HasOwnProp("recipe")) ||
-				(options.type = "Fast Key" && !value.options.HasOwnProp("fastKey")) ||
+				(options.type = "Fast Key" && ((!value.options.HasOwnProp("isFastKey") || !value.options.HasOwnProp("fastKey")) || !value.options.isFastKey)) ||
 				(options.type = "Fast Key Special" && !value.options.HasOwnProp("specialKey")) ||
-				(options.type = "Alternative Layout" && !value.options.HasOwnProp("altLayoutKey"))
+				(options.type = "Alternative Layout" && ((!value.options.HasOwnProp("isAltLayout") || !value.options.HasOwnProp("altLayoutKey")) || !value.options.isAltLayout))
 				{
 					continue
 				}
 
 				characterTitle := ""
 
+				if options.type = "Alternative Layout" &&
+					(value.options.HasOwnProp("layoutTitles") && value.options.layoutTitles) &&
+					Locale.Read(characterEntry "_layout", "chars", True, &titleText) {
+					characterTitle := titleText
 
-				if !InStr(Locale.Read(characterEntry, "chars"), "NOT FOUND") {
+				} else if Locale.Read(characterEntry, "chars", True, &titleText) {
+					characterTitle := titleText
+
+				} else if value.HasOwnProp("titles") && value.titles.HasValue(languageCode) {
+					characterTitle := value.titles[languageCode]
+
+				} else {
+					characterTitle := Locale.Read(characterEntry, "chars")
 				}
+
+				if isFavorite {
+					characterTitle .= " " Chr(0x2605)
+				}
+
+				characterSymbol := value.symbol.set
+
+				characterBinding := ""
+
+				if options.type = "Recipe" {
+					if value.HasOwnProp("recipeAlt")
+						characterBinding := value.recipeAlt.ArrayToString()
+					else if value.HasOwnProp("recipe")
+						characterBinding := value.recipe.ArrayToString()
+					else
+						characterBinding := "N/A"
+				} else if options.type = "Alternative Layout" {
+					characterBinding := value.options.altLayoutKey
+				} else if options.type = "Fast Special" {
+					characterBinding := value.options.specialKey
+				} else if options.type = "Fast Key" {
+					characterBinding := value.options.fastKey
+				} else if options.type = "Group Activator" {
+					characterBinding := value.options.groupKey
+				} else {
+					characterBinding := "N/A"
+				}
+
+				outputArray.Push([characterTitle, characterBinding, characterSymbol, Util.ExtractHex(value.unicode), characterEntry])
 			}
 
 

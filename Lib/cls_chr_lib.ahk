@@ -278,6 +278,7 @@ ChrLib.AddEntry(
 			noCalc: True,
 			noHTML: False,
 			titlesAlt: True,
+			layoutTitles: True,
 			isFastKey: True,
 			isAltLayout: True,
 			groupKey: "9",
