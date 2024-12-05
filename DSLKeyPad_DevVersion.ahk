@@ -4704,7 +4704,11 @@ HandleFastKey(combo := "", characterNames*) {
 		output := ""
 
 		for _, character in characterNames {
-			output .= GetCharacterSequence(character)
+			if ChrLib.entries.HasOwnProp(character) {
+				output .= ChrLib.Get(character)
+			} else {
+				output .= GetCharacterSequence(character)
+			}
 		}
 
 		keysValidation := "SC(14B|148|14D|150|04A)"
