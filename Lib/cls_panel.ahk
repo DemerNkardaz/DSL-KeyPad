@@ -33,6 +33,9 @@ Class Panel {
 			htmlTitleText: Map("ru", "HTML-Код/Мнемоника", "en", "HTML/Entity"),
 			tags: "x21 y546 w800 h24 readonly -VScroll -HScroll -E0x200",
 			alert: "x655 y333 w190 h40 readonly Center -VScroll -HScroll -E0x200",
+			recipeTitle: "x685 y305 w128 h24 BackgroundTrans",
+			recipeTitleText: Map("ru", "Рецепт", "en", "Recipe"),
+			recipe: "x685 y320 w128 h24 readonly Center -VScroll -HScroll",
 		},
 		commandsInfoBox: {
 			body: "vCommandGroup x300 y36 w548 h517",
@@ -392,6 +395,7 @@ Class Panel {
 				columns: panelColList.smelting,
 				columnWidths: this.UISets.column.widthsSmelting,
 				source: LV_Content.smelting,
+				useRecipes: True,
 			})
 
 			panelTabs.UseTab(panelTabList.Obj.fastkeys)
@@ -577,6 +581,13 @@ Class Panel {
 		GroupBoxOptions.tags.SetFont("s9")
 		GroupBoxOptions.alert.SetFont("s9")
 
+		if options.hasOwnProp("useRecipes") && options.useRecipes {
+			GroupBoxOptions.recipeTitle := panelWindow.Add("Text", this.UISets.infoBox.recipeTitle, this.UISets.infoBox.recipeTitleText[languageCode]).SetFont("s9")
+			GroupBoxOptions.recipe := panelWindow.Add("Edit", "v" options.prefix "Recipe " this.UISets.infoBox.recipe, "N/A")
+			GroupBoxOptions.recipe.SetFont("s12")
+		}
+
+
 		return
 	}
 
@@ -668,6 +679,11 @@ Class Panel {
 			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont("s12")
 
+			try {
+				this.PanelGUI[options.prefix "Recipe"].Text := ""
+				this.PanelGUI[options.prefix "Recipe"].SetFont("s12")
+			}
+
 			return
 		} else {
 			languageCode := Language.Get()
@@ -743,6 +759,12 @@ Class Panel {
 
 			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read("character"))
 			this.PanelGUI[options.prefix "Alert"].Text := RegExMatch(characterEntry, "^permic") && HasPermicFont = "Noto Sans Old Permic" ? Util.StrVarsInject(Locale.Read("warning_nofont"), HasPermicFont) : RegExMatch(characterEntry, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" ? Util.StrVarsInject(Locale.Read("warning_nofont"), HasHungarianFont) : ""
+
+
+			try {
+				this.PanelGUI[options.prefix "Recipe"].Text := LV.GetText(rowValue, 2)
+				this.PanelGUI[options.prefix "Recipe"].SetFont((StrLen(this.PanelGUI[options.prefix "Recipe"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Recipe"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Recipe"].Text) > 14) ? "s9" : "s12")
+			}
 
 		}
 
