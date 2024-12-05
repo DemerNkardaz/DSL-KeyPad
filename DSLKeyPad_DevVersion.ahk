@@ -5319,7 +5319,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 		LettersSlots := GetLayoutImprovedCyrillic([
 			["cyr_c_let_fita", "cyr_s_let_fita"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["A"]),
-			["cyr_c_let_i", "cyr_s_let_i"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["B"]),
+			["cyr_c_let_i_decimal", "cyr_s_let_i_decimal"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["B"]),
 			["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["B"]),
 			["cyr_c_let_i_diaeresis", "cyr_s_let_i_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["B"]),
 			["cyr_c_let_i_macron", "cyr_s_let_i_macron"], MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["B"]),
@@ -5803,7 +5803,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 	} else if Combinations = "NonQWERTY" {
 		Slots := GetLayoutImprovedCyrillic([
 			["cyr_c_let_f", "cyr_s_let_f"], KeySeqSlot["A"],
-			["cyr_c_let_и", "cyr_s_let_и"], KeySeqSlot["B"],
+			["cyr_c_let_i", "cyr_s_let_i"], KeySeqSlot["B"],
 			["cyr_c_let_s", "cyr_s_let_s"], KeySeqSlot["C"],
 			["cyr_c_let_v", "cyr_s_let_v"], KeySeqSlot["D"],
 			["cyr_c_let_u", "cyr_s_let_u"], KeySeqSlot["E"],
@@ -5821,7 +5821,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_iy", "cyr_s_let_iy"], KeySeqSlot["Q"],
 			["cyr_c_let_k", "cyr_s_let_k"], KeySeqSlot["R"],
 			["cyr_c_let_yery", "cyr_s_let_yery"], KeySeqSlot["S"],
-			["cyr_c_let_e", "cyr_s_let_e"], KeySeqSlot["T"],
+			["cyr_c_let_ie", "cyr_s_let_ie"], KeySeqSlot["T"],
 			["cyr_c_let_g", "cyr_s_let_g"], KeySeqSlot["U"],
 			["cyr_c_let_m", "cyr_s_let_m"], KeySeqSlot["V"],
 			["cyr_c_let_ts", "cyr_s_let_ts"], KeySeqSlot["W"],
@@ -5831,7 +5831,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_b", "cyr_s_let_b"], KeySeqSlot[","],
 			["cyr_c_let_yu", "cyr_s_let_yu"], KeySeqSlot["."],
 			["cyr_c_let_zh", "cyr_s_let_zh"], KeySeqSlot[";"],
-			["cyr_c_let_э", "cyr_s_let_э"], KeySeqSlot["'"],
+			["cyr_c_let_e", "cyr_s_let_e"], KeySeqSlot["'"],
 			["cyr_c_let_h", "cyr_s_let_h"], KeySeqSlot["["],
 			["cyr_c_let_yeru", "cyr_s_let_yeru"], MapMerge(GetModifiers("D:<!"), KeySeqSlot["]"]),
 			["cyr_c_let_yo", "cyr_s_let_yo"], KeySeqSlot["~"],
@@ -5861,7 +5861,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 
 		if CyrillicLayout = "ЙІУКЕН (1907)" {
 			MapPush(Slots,
-				LatinLayout = "Dvorak" ? "," : "W", ["cyr_c_let_i", "cyr_s_let_i"],
+				LatinLayout = "Dvorak" ? "," : "W", ["cyr_c_let_i_decimal", "cyr_s_let_i_decimal"],
 				LatinLayout = "Dvorak" ? "J" : "C", ["cyr_c_let_yat", "cyr_s_let_yat"]
 			)
 		}
