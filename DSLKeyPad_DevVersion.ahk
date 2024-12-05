@@ -3396,7 +3396,7 @@ Constructor() {
 		htmlTitle: "x685 y495 w128 h24 BackgroundTrans",
 		htmlTitleText: Map("ru", "HTML-Код/Мнемоника", "en", "HTML/Entity"),
 		tags: "x21 y546 w800 h24 readonly -VScroll -HScroll -E0x200",
-		alert: "x655 y333 w190 h40 readonly Center -VScroll -HScroll -E0x200",
+		alert: "x655 y55 w190 h24 readonly Center -VScroll -HScroll -E0x200",
 	}
 
 	CommandsInfoBox := {
@@ -4200,8 +4200,8 @@ GetRandomByGroups(GroupNames) {
 	}
 }
 
-HasPermicFont := IsFont("Noto Sans Old Permic") ? True : "Noto Sans Old Permic"
-HasHungarianFont := IsFont("Noto Sans Old Hungarian") ? True : "Noto Sans Old Hungarian"
+HasPermicFont := IsFont("Noto Sans Old Permic2") ? True : "Noto Sans Old Permic"
+HasHungarianFont := IsFont("Noto Sans Old Hungarian2") ? True : "Noto Sans Old Hungarian"
 
 SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup, PreviewAlert := "") {
 	LanguageCode := Language.Get()

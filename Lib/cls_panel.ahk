@@ -21,21 +21,17 @@ Class Panel {
 			LaTeXText: "N/A",
 			alt: "x685 y430 w128 h24 readonly Center -VScroll -HScroll",
 			altTitle: "x685 y415 w128 h24 BackgroundTrans",
-			altTitleText: Map("ru", "Альт-код", "en", "Alt-code"),
 			altText: "N/A",
 			unicode: "x685 y470 w128 h24 readonly Center -VScroll -HScroll",
 			unicodeTitle: "x685 y455 w128 h24 BackgroundTrans",
-			unicodeTitleText: Map("ru", "Юникод", "en", "Unicode"),
 			unicodeText: "U+0000",
 			html: "x685 y510 w128 h24 readonly Center -VScroll -HScroll",
 			htmlText: "&#x0000;",
 			htmlTitle: "x685 y495 w128 h24 BackgroundTrans",
-			htmlTitleText: Map("ru", "HTML-Код/Мнемоника", "en", "HTML/Entity"),
 			tags: "x21 y546 w800 h24 readonly -VScroll -HScroll -E0x200",
-			alert: "x655 y333 w190 h40 readonly Center -VScroll -HScroll -E0x200",
-			recipeTitle: "x685 y305 w128 h24 BackgroundTrans",
-			recipeTitleText: Map("ru", "Рецепт", "en", "Recipe"),
-			recipe: "x685 y320 w128 h24 readonly Center -VScroll -HScroll",
+			alert: "x655 y55 w190 h24 readonly Center -VScroll -HScroll -E0x200",
+			keyPreviewTitle: "x685 y305 w128 h24 BackgroundTrans",
+			keyPreview: "x685 y320 w128 h24 readonly Center -VScroll -HScroll",
 		},
 		commandsInfoBox: {
 			body: "vCommandGroup x300 y36 w548 h517",
@@ -395,7 +391,7 @@ Class Panel {
 				columns: panelColList.smelting,
 				columnWidths: this.UISets.column.widthsSmelting,
 				source: LV_Content.smelting,
-				useRecipes: True,
+				previewType: "Recipe",
 			})
 
 			panelTabs.UseTab(panelTabList.Obj.fastkeys)
@@ -527,9 +523,13 @@ Class Panel {
 		languageCode := Language.Get()
 		panelWindow := options.winObj
 
+		if !options.hasOwnProp("previewType") {
+			options.previewType := "Key"
+		}
+
 		items_LV := panelWindow.AddListView(this.UISets.column.listStyle " v" options.prefix "LV", options.columns)
 		items_LV.SetFont("s10")
-		items_LV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: options.prefix }))
+		items_LV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: options.prefix, previewType: options.previewType }))
 		items_LV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber))
 
 		Loop options.columns.Length {
@@ -550,26 +550,26 @@ Class Panel {
 		GroupBoxOptions := {
 			group: panelWindow.Add("GroupBox", "v" options.prefix "Group " this.UISets.infoBox.body, this.UISets.infoBox.bodyText),
 			groupFrame: panelWindow.Add("GroupBox", this.UISets.infoBox.previewFrame),
-			preview: panelWindow.Add("Edit", "v" options.prefix "Symbol " this.UISets.infoBox.preview, this.UISets.infoBox.previewText),
-			title: panelWindow.Add("Text", "v" options.prefix "Title " this.UISets.infoBox.title, this.UISets.infoBox.titleText),
+			preview: panelWindow.AddEdit("v" options.prefix "Symbol " this.UISets.infoBox.preview, this.UISets.infoBox.previewText),
+			title: panelWindow.AddText("v" options.prefix "Title " this.UISets.infoBox.title, this.UISets.infoBox.titleText),
 			;
-			LaTeXTitleLTX: panelWindow.Add("Text", this.UISets.infoBox.LaTeXTitleLTX, this.UISets.infoBox.LaTeXTitleLTXText).SetFont("s10", "Cambria"),
-			LaTeXTitleA: panelWindow.Add("Text", this.UISets.infoBox.LaTeXTitleA, this.UISets.infoBox.LaTeXTitleAText).SetFont("s9", "Cambria"),
-			LaTeXTitleE: panelWindow.Add("Text", this.UISets.infoBox.LaTeXTitleE, this.UISets.infoBox.LaTeXTitleEText).SetFont("s10", "Cambria"),
-			LaTeXPackage: panelWindow.Add("Text", "v" options.prefix "LaTeXPackage " this.UISets.infoBox.LaTeXPackage, this.UISets.infoBox.LaTeXPackageText).SetFont("s9"),
-			LaTeX: panelWindow.Add("Edit", "v" options.prefix "LaTeX " this.UISets.infoBox.LaTeX, this.UISets.infoBox.LaTeXText),
+			LaTeXTitleLTX: panelWindow.AddText(this.UISets.infoBox.LaTeXTitleLTX, this.UISets.infoBox.LaTeXTitleLTXText).SetFont("s10", "Cambria"),
+			LaTeXTitleA: panelWindow.AddText(this.UISets.infoBox.LaTeXTitleA, this.UISets.infoBox.LaTeXTitleAText).SetFont("s9", "Cambria"),
+			LaTeXTitleE: panelWindow.AddText(this.UISets.infoBox.LaTeXTitleE, this.UISets.infoBox.LaTeXTitleEText).SetFont("s10", "Cambria"),
+			LaTeXPackage: panelWindow.AddText("v" options.prefix "LaTeXPackage " this.UISets.infoBox.LaTeXPackage, this.UISets.infoBox.LaTeXPackageText).SetFont("s9"),
+			LaTeX: panelWindow.AddEdit("v" options.prefix "LaTeX " this.UISets.infoBox.LaTeX, this.UISets.infoBox.LaTeXText),
 			;
-			altTitle: panelWindow.Add("Text", this.UISets.infoBox.altTitle, this.UISets.infoBox.altTitleText[languageCode]).SetFont("s9"),
-			alt: panelWindow.Add("Edit", "v" options.prefix "Alt " this.UISets.infoBox.alt, this.UISets.infoBox.altText),
+			altTitle: panelWindow.AddText(this.UISets.infoBox.altTitle, Locale.Read("symbol_altcode")).SetFont("s9"),
+			alt: panelWindow.AddEdit("v" options.prefix "Alt " this.UISets.infoBox.alt, this.UISets.infoBox.altText),
 			;
-			unicodeTitle: panelWindow.Add("Text", this.UISets.infoBox.unicodeTitle, this.UISets.infoBox.unicodeTitleText[languageCode]).SetFont("s9"),
-			unicode: panelWindow.Add("Edit", "v" options.prefix "Unicode " this.UISets.infoBox.unicode, this.UISets.infoBox.unicodeText),
+			unicodeTitle: panelWindow.AddText(this.UISets.infoBox.unicodeTitle, Locale.Read("preview_unicode")).SetFont("s9"),
+			unicode: panelWindow.AddEdit("v" options.prefix "Unicode " this.UISets.infoBox.unicode, this.UISets.infoBox.unicodeText),
 			;
-			htmlTitle: panelWindow.Add("Text", this.UISets.infoBox.htmlTitle, this.UISets.infoBox.htmlTitleText[languageCode]).SetFont("s9"),
-			html: panelWindow.Add("Edit", "v" options.prefix "HTML " this.UISets.infoBox.html, this.UISets.infoBox.htmlText),
+			htmlTitle: panelWindow.AddText(this.UISets.infoBox.htmlTitle, Locale.Read("preview_html")).SetFont("s9"),
+			html: panelWindow.AddEdit("v" options.prefix "HTML " this.UISets.infoBox.html, this.UISets.infoBox.htmlText),
 			;
-			tags: panelWindow.Add("Edit", "v" options.prefix "Tags " this.UISets.infoBox.tags),
-			alert: panelWindow.Add("Edit", "v" options.prefix "Alert " this.UISets.infoBox.alert),
+			tags: panelWindow.AddEdit("v" options.prefix "Tags " this.UISets.infoBox.tags),
+			alert: panelWindow.AddEdit("v" options.prefix "Alert " this.UISets.infoBox.alert),
 		}
 
 		GroupBoxOptions.preview.SetFont(this.UISets.infoFonts.previewSize, this.UISets.infoFonts.fontFace["serif"].name)
@@ -581,11 +581,9 @@ Class Panel {
 		GroupBoxOptions.tags.SetFont("s9")
 		GroupBoxOptions.alert.SetFont("s9")
 
-		if options.hasOwnProp("useRecipes") && options.useRecipes {
-			GroupBoxOptions.recipeTitle := panelWindow.Add("Text", this.UISets.infoBox.recipeTitle, this.UISets.infoBox.recipeTitleText[languageCode]).SetFont("s9")
-			GroupBoxOptions.recipe := panelWindow.Add("Edit", "v" options.prefix "Recipe " this.UISets.infoBox.recipe, "N/A")
-			GroupBoxOptions.recipe.SetFont("s12")
-		}
+		GroupBoxOptions.keyPreviewTitle := panelWindow.AddText(this.UISets.infoBox.keyPreviewTitle, options.previewType = "Recipe" ? Locale.Read("col_recipe") : Locale.Read("col_key")).SetFont("s9")
+		GroupBoxOptions.keyPreview := panelWindow.AddEdit("v" options.prefix "KeyPreview " this.UISets.infoBox.keyPreview, "N/A")
+		GroupBoxOptions.keyPreview.SetFont("s12")
 
 
 		return
@@ -662,6 +660,20 @@ Class Panel {
 
 	static LV_SetCharacterPreview(LV, rowValue, options) {
 		characterEntry := Type(rowValue) = "String" ? rowValue : LV.GetText(rowValue, 5)
+		characterRecipe := Type(rowValue) = "String" ? "N/A" : LV.GetText(rowValue, 2)
+
+		try {
+			if options.prefix = "Smelting" {
+				characterRecipe := ChrLib.GetValue(rowValue, "recipe").ToString(", ")
+			} else if options.prefix = "Diacritic" || options.prefix = "Spaces" {
+				characterRecipe := Util.FormatHotKey(ChrLib.GetValue(rowValue, "options").groupKey)
+			} else if options.prefix = "FastKeys" {
+				characterRecipe := Util.ReplaceModifierKeys(ChrLib.GetValue(rowValue, "options").fastKey)
+			} else if options.prefix = "Glago" {
+				characterRecipe := Util.ReplaceModifierKeys(ChrLib.GetValue(rowValue, "options").altLayoutKey)
+			}
+		}
+
 		if StrLen(characterEntry) < 1 {
 			this.PanelGUI[options.prefix "Title"].Text := "N/A"
 			this.PanelGUI[options.prefix "Symbol"].Text := ChrLib.Get("dotted_circle")
@@ -679,10 +691,8 @@ Class Panel {
 			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont("s12")
 
-			try {
-				this.PanelGUI[options.prefix "Recipe"].Text := ""
-				this.PanelGUI[options.prefix "Recipe"].SetFont("s12")
-			}
+			this.PanelGUI[options.prefix "KeyPreview"].Text := "N/A"
+			this.PanelGUI[options.prefix "KeyPreview"].SetFont("s12")
 
 			return
 		} else {
@@ -760,11 +770,8 @@ Class Panel {
 			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read("character"))
 			this.PanelGUI[options.prefix "Alert"].Text := RegExMatch(characterEntry, "^permic") && HasPermicFont = "Noto Sans Old Permic" ? Util.StrVarsInject(Locale.Read("warning_nofont"), HasPermicFont) : RegExMatch(characterEntry, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" ? Util.StrVarsInject(Locale.Read("warning_nofont"), HasHungarianFont) : ""
 
-
-			try {
-				this.PanelGUI[options.prefix "Recipe"].Text := LV.GetText(rowValue, 2)
-				this.PanelGUI[options.prefix "Recipe"].SetFont((StrLen(this.PanelGUI[options.prefix "Recipe"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Recipe"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Recipe"].Text) > 14) ? "s9" : "s12")
-			}
+			this.PanelGUI[options.prefix "KeyPreview"].Text := characterRecipe
+			this.PanelGUI[options.prefix "KeyPreview"].SetFont((StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 14) ? "s9" : "s12")
 
 		}
 
@@ -777,21 +784,22 @@ Class Panel {
 		}
 	}
 
-	static LV_Filter(GuiFrame, FilterField, LV, DataList) {
-		FilterText := StrLower(GuiFrame[FilterField].Text)
+	static LV_Filter(guiFrame, filterField, LV, dataList) {
+		filterText := StrLower(guiFrame[filterField].Text)
 		LV.Delete()
 
-		if FilterText = ""
-			this.LV_FilterPopulate(LV, DataList)
+		if filterText = ""
+			this.LV_FilterPopulate(LV, dataList)
 		else {
 			GroupStarted := False
 			PreviousGroupName := ""
-			for item in DataList {
+			for item in dataList {
 				ItemText := StrLower(item[1])
 
-				IsFavorite := (ItemText ~= "\Q★")
-				IsMatch := InStr(ItemText, FilterText)
-				|| (IsFavorite && (InStr("избранное", FilterText) || InStr("favorite", FilterText)))
+				;IsFavorite := (ItemText ~= "\Q" Chr(0x2605))
+				IsFavorite := InStr(ItemText, Chr(0x2605))
+				IsMatch := InStr(ItemText, filterText)
+				|| (IsFavorite && RegExMatch(filterText, "^(изб|fav|\*)"))
 
 				if ItemText = "" {
 					LV.Add(, item[1], item[2], item[3], item[4], item[5])
