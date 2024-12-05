@@ -656,15 +656,13 @@ Class Panel {
 		}
 
 		rand := Random(1, allowedRows.Length)
-		entryName := this.PanelGUI[prefix "LV"].GetText(allowedRows[rand], 5)
-
-		this.LV_SetCharacterPreview(this.PanelGUI[prefix "LV"], entryName, { prefix: prefix })
+		this.LV_SetCharacterPreview(this.PanelGUI[prefix "LV"], allowedRows[rand], { prefix: prefix })
 	}
 
 	static LV_SetCharacterPreview(LV, rowValue, options) {
-		characterEntry := Type(rowValue) = "String" ? rowValue : LV.GetText(rowValue, 5)
-		characterKey := Type(rowValue) = "String" ? "N/A" : LV.GetText(rowValue, 2)
-		characterCombinationKey := Type(rowValue) = "String" ? "" : LV.GetText(rowValue, 6)
+		characterEntry := LV.GetText(rowValue, 5)
+		characterKey := LV.GetText(rowValue, 2)
+		characterCombinationKey := LV.GetText(rowValue, 6)
 
 		try {
 			if options.prefix = "Smelting" {
