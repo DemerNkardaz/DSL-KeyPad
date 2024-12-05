@@ -89,8 +89,8 @@ Class Panel {
 			"func_label_alterations_sans_serif",
 			"func_label_alterations_monospace",
 			"func_label_alterations_small_capital",
-		]),
-		Map("func_label_scripts", [
+		],
+		"func_label_scripts", [
 			"func_label_glagolitic_futhark",
 			"func_label_old_permic_old_turkic",
 			"func_label_old_hungarian",
@@ -827,65 +827,73 @@ Class Panel {
 				outputArray.Push(["", options.groupKey, "", "", "", ""])
 
 
-			for characterEntry, value in ChrLib.entries.OwnProps() {
-				isFavorite := FavoriteChars.CheckVar(characterEntry)
-
-				if (options.hasOwnProp("blacklist") && options.blacklist.HasValue(characterEntry)) || !(value.hasOwnProp("groups")) ||
-				(value.hasOwnProp("groups") && !value.groups.HasValue(options.group)) ||
-				(options.type = "Group Activator" && !value.options.HasOwnProp("groupKey")) ||
-				(options.type = "Recipe" && !value.HasOwnProp("recipe")) ||
-				(options.type = "Fast Key" && ((!value.options.HasOwnProp("isFastKey") || !value.options.HasOwnProp("fastKey")) || !value.options.isFastKey)) ||
-				(options.type = "Fast Key Special" && !value.options.HasOwnProp("specialKey")) ||
-				(options.type = "Alternative Layout" && ((!value.options.HasOwnProp("isAltLayout") || !value.options.HasOwnProp("altLayoutKey")) || !value.options.isAltLayout))
-				{
+			for groupKey, entryNamesArray in ChrLib.entryGroups {
+				if groupKey != options.group || entryNamesArray.Length = 0 {
 					continue
-				}
-
-				characterTitle := ""
-
-				if options.type = "Alternative Layout" &&
-					(value.options.HasOwnProp("layoutTitles") && value.options.layoutTitles) &&
-					Locale.Read(characterEntry "_layout", "chars", True, &titleText) {
-					characterTitle := titleText
-
-				} else if Locale.Read(characterEntry, "chars", True, &titleText) {
-					characterTitle := titleText
-
-				} else if value.HasOwnProp("titles") && value.titles.HasValue(languageCode) {
-					characterTitle := value.titles[languageCode]
-
 				} else {
-					characterTitle := Locale.Read(characterEntry, "chars")
+					for characterEntry in entryNamesArray {
+						value := ChrLib.GetEntry(characterEntry)
+
+						isFavorite := FavoriteChars.CheckVar(characterEntry)
+
+						if (options.hasOwnProp("blacklist") && options.blacklist.HasValue(characterEntry)) || !(value.hasOwnProp("groups")) ||
+						(value.hasOwnProp("groups") && !value.groups.HasValue(options.group)) ||
+						(options.type = "Group Activator" && !value.options.HasOwnProp("groupKey")) ||
+						(options.type = "Recipe" && !value.HasOwnProp("recipe")) ||
+						(options.type = "Fast Key" && ((!value.options.HasOwnProp("isFastKey") || !value.options.HasOwnProp("fastKey")) || !value.options.isFastKey)) ||
+						(options.type = "Fast Key Special" && !value.options.HasOwnProp("specialKey")) ||
+						(options.type = "Alternative Layout" && ((!value.options.HasOwnProp("isAltLayout") || !value.options.HasOwnProp("altLayoutKey")) || !value.options.isAltLayout))
+						{
+							continue
+						}
+
+						characterTitle := ""
+
+						if options.type = "Alternative Layout" &&
+							(value.options.HasOwnProp("layoutTitles") && value.options.layoutTitles) &&
+							Locale.Read(characterEntry "_layout", "chars", True, &titleText) {
+							characterTitle := titleText
+
+						} else if Locale.Read(characterEntry, "chars", True, &titleText) {
+							characterTitle := titleText
+
+						} else if value.HasOwnProp("titles") && value.titles.HasValue(languageCode) {
+							characterTitle := value.titles[languageCode]
+
+						} else {
+							characterTitle := Locale.Read(characterEntry, "chars")
+						}
+
+						if isFavorite {
+							characterTitle .= " " Chr(0x2605)
+						}
+
+						characterSymbol := value.symbol.set
+
+						characterBinding := ""
+
+						if options.type = "Recipe" {
+							if value.HasOwnProp("recipeAlt")
+								characterBinding := value.recipeAlt.ToString()
+							else if value.HasOwnProp("recipe")
+								characterBinding := value.recipe.ToString()
+							else
+								characterBinding := "N/A"
+						} else if options.type = "Alternative Layout" {
+							characterBinding := value.options.altLayoutKey
+						} else if options.type = "Fast Special" {
+							characterBinding := value.options.specialKey
+						} else if options.type = "Fast Key" {
+							characterBinding := value.options.fastKey
+						} else if options.type = "Group Activator" {
+							characterBinding := Util.FormatHotKey(value.options.groupKey)
+						} else {
+							characterBinding := "N/A"
+						}
+
+						intermediateMap.Set(value.index, [characterTitle, characterBinding, characterSymbol, Util.ExtractHex(value.unicode), characterEntry])
+					}
 				}
-
-				if isFavorite {
-					characterTitle .= " " Chr(0x2605)
-				}
-
-				characterSymbol := value.symbol.set
-
-				characterBinding := ""
-
-				if options.type = "Recipe" {
-					if value.HasOwnProp("recipeAlt")
-						characterBinding := value.recipeAlt.ToString()
-					else if value.HasOwnProp("recipe")
-						characterBinding := value.recipe.ToString()
-					else
-						characterBinding := "N/A"
-				} else if options.type = "Alternative Layout" {
-					characterBinding := value.options.altLayoutKey
-				} else if options.type = "Fast Special" {
-					characterBinding := value.options.specialKey
-				} else if options.type = "Fast Key" {
-					characterBinding := value.options.fastKey
-				} else if options.type = "Group Activator" {
-					characterBinding := Util.FormatHotKey(value.options.groupKey)
-				} else {
-					characterBinding := "N/A"
-				}
-
-				intermediateMap.Set(value.index, [characterTitle, characterBinding, characterSymbol, Util.ExtractHex(value.unicode), characterEntry])
 			}
 
 			for key, value in intermediateMap {

@@ -1,4 +1,8 @@
+Array.Prototype.DefineProp("ToString", { Call: _ArrayToString })
+Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
+Array.Prototype.DefineProp("Contains", { Call: _ArrayContains })
 Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
+Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 
@@ -11,6 +15,37 @@ _ObjMaxIndex(this) {
 	return indexes
 }
 
+_ArrayToString(this, char := ", ") {
+	for index, value in this {
+		if index = this.Length {
+			str .= value
+			break
+		}
+		str .= value char
+	}
+	return str
+}
+
+_ArrayHasValue(this, valueToFind, &indexID?) {
+	for index, value in this {
+		if value = valueToFind {
+			indexID := index
+			return true
+		}
+	}
+	return false
+}
+
+_ArrayContains(this, valueToFind, &indexID?) {
+	for index, value in this {
+		if value == valueToFind {
+			indexID := index
+			return true
+		}
+	}
+	return false
+}
+
 _ArrayMaxIndex(this) {
 	indexes := 0
 	for i, v in this {
@@ -18,6 +53,15 @@ _ArrayMaxIndex(this) {
 	}
 
 	return indexes
+}
+
+_ArrayRemoveValue(this, valueToRemove) {
+	for index, value in this {
+		if value = valueToRemove {
+			this.RemoveAt(index)
+			break
+		}
+	}
 }
 
 ArrayMergeTo(TargetArray, Arrays*) {

@@ -1,6 +1,7 @@
 class ChrLib {
 
 	static entries := {}
+	static entryGroups := Map()
 	static lastIndexAdded := -1
 
 	static AddEntry(entryName, entry, indexID?) {
@@ -32,6 +33,20 @@ class ChrLib {
 
 	static RemoveEntry(entryName) {
 		if this.entries.HasOwnProp(entryName) {
+			entry := this.GetEntry(entryName)
+
+			if entry.HasOwnProp("groups") {
+				for group in entry.groups {
+					if this.entryGroups.Has(group) && this.entryGroups.Get(group).HasValue(entryName) {
+						intermediateArray := this.entryGroups.Get(group)
+						intermediateArray.RemoveValue(entryName)
+
+						this.entryGroups.Delete(group)
+						this.entryGroups.Set(group, intermediateArray)
+					}
+				}
+			}
+
 			this.entries.DeleteProp(entryName)
 		}
 	}
@@ -182,8 +197,8 @@ class ChrLib {
 		characterSequence := Util.UnicodeToChar(refinedEntry.HasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode)
 
 		if refinedEntry.hasOwnProp("sequence") {
-			for each in refinedEntry.sequence {
-				refinedEntry.html .= "&#" Util.ChrToDecimal(Util.UnicodeToChar(each)) ";"
+			for group in refinedEntry.sequence {
+				refinedEntry.html .= "&#" Util.ChrToDecimal(Util.UnicodeToChar(group)) ";"
 			}
 		} else {
 			refinedEntry.html := "&#" Util.ChrToDecimal(character) ";"
@@ -220,9 +235,9 @@ class ChrLib {
 			refinedEntry.options := {}
 		}
 
-		for each in ["fastKey", "specialKey", "altLayoutKey"] {
-			if refinedEntry.options.HasOwnProp(each) {
-				refinedEntry.options.%each% := Util.ReplaceModifierKeys(refinedEntry.options.%each%)
+		for group in ["fastKey", "specialKey", "altLayoutKey"] {
+			if refinedEntry.options.HasOwnProp(group) {
+				refinedEntry.options.%group% := Util.ReplaceModifierKeys(refinedEntry.options.%group%)
 			}
 		}
 
@@ -260,6 +275,16 @@ class ChrLib {
 		} else {
 			refinedEntry.symbol := { category: "N/A" }
 			refinedEntry.symbol.set := characterSequence
+		}
+
+		if refinedEntry.HasOwnProp("groups") {
+			for group in refinedEntry.groups {
+				if !this.entryGroups.Has(group)
+					this.entryGroups.Set(group, [])
+
+				if !this.entryGroups.Get(group).HasValue(entryName)
+					this.entryGroups[group].Push(entryName)
+			}
 		}
 
 		this.entries.%entryName% := refinedEntry

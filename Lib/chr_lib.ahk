@@ -14119,24 +14119,22 @@ RegLib() {
 		"dotted_circle", {
 			unicode: "{U+25CC}",
 			tags: ["пунктирный круг", "dotted circle"],
-			group: ["Special Fast Left"],
+			groups: ["Special Fast Left"],
 			options: { isFastKey: True, fastKey: "[Num0]" },
 		},
 	)
+
 }
 
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.Get("dotted_circle"))
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.GetValue("acute", "symbol").font)
-/*
 
+/*
 entiesarr := []
-testffMap := Map()
-for each, value in ChrLib.entries.OwnProps() {
-	testffMap.Set(value.index, each)
-}
-for key, value in testffMap {
-	entiesarr.Push(key " " value)
+for each in ChrLib.entryGroups.Get("Special Characters") {
+	entiesarr.Push(each)
 }
 
 MsgBox(entiesarr.ToString("`n"))
+
 */
