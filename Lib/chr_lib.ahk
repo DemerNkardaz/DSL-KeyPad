@@ -14123,7 +14123,6 @@ RegLib() {
 			options: { isFastKey: True, fastKey: "[Num0]" },
 		},
 	)
-
 }
 
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.Get("dotted_circle"))

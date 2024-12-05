@@ -439,36 +439,39 @@ Class Panel {
 
 			panelTabs.UseTab(panelTabList.Obj.about)
 
-			aboutLeftBox := panelWindow.Add("GroupBox", "x23 y34 w280 h520",)
-			panelWindow.Add("GroupBox", "x75 y65 w170 h170")
-			panelWindow.Add("Picture", "x98 y89 w128 h128", InternalFiles["AppIco"].File)
+			aboutLeftBox := panelWindow.AddGroupBox("x23 y34 w280 h520",)
+			panelWindow.AddGroupBox("x75 y65 w170 h170")
+			panelWindow.AddPicture("x98 y89 w128 h128", InternalFiles["AppIco"].File)
 
-			aboutTitle := panelWindow.Add("Text", "x75 y245 w170 h32 Center BackgroundTrans", DSLPadTitleDefault)
+			aboutTitle := panelWindow.AddText("x75 y245 w170 h32 Center BackgroundTrans", App.title)
 			aboutTitle.SetFont("s20 c333333", "Cambria")
 
-			aboutVersion := panelWindow.Add("Text", "x75 y285 w170 h32 Center BackgroundTrans", CurrentVersionString)
+			aboutVersion := panelWindow.AddText("x75 y285 w170 h32 Center BackgroundTrans", App.versionText)
 			aboutVersion.SetFont("s12 c333333", "Cambria")
 
 			aboutRepoLinkX := LanguageCode == "ru" ? "x114" : "x123"
-			aboutRepoLink := panelWindow.Add("Link", aboutRepoLinkX " y320 w150 h20 Center",
+			aboutRepoLink := panelWindow.AddLink(aboutRepoLinkX " y320 w150 h20 Center",
 				'<a href="https://github.com/DemerNkardaz/DSL-KeyPad">' Locale.Read("about_repository") '</a>'
 			)
 			aboutRepoLink.SetFont("s12", "Cambria")
 
-			aboutAuthor := panelWindow.Add("Text", "x75 y495 w170 h16 Center BackgroundTrans", Locale.Read("about_author"))
+			aboutAuthor := panelWindow.AddText("x75 y495 w170 h16 Center BackgroundTrans", Locale.Read("about_author"))
 			aboutAuthor.SetFont("s11 c333333", "Cambria")
 
-			aboutAuthorLinks := panelWindow.Add("Link", "x90 y525 w150 h16 Center",
+			aboutAuthorLinks := panelWindow.AddLink("x90 y525 w150 h16 Center",
 				'<a href="https://github.com/DemerNkardaz/">GitHub</a> '
 				'<a href="http://steamcommunity.com/profiles/76561198177249942">STEAM</a> '
 				'<a href="https://ficbook.net/authors/4241255">Фикбук</a>'
 			)
 			aboutAuthorLinks.SetFont("s9", "Cambria")
 
-			aboutDescBox := panelWindow.Add("GroupBox", "x315 y34 w530 h520", Locale.Read("about_item_count") . " — " . DSLPadTitleFull)
+			customCount := ChrLib.Count("Custom Composes")
+			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customCount), (customCount > 0 ? "+" customCount " " Locale.Read("with_my_recipes") : "") Chrs(0x2005, 0x2014, 0x2005) App.decodedTitle)
+
+			aboutDescBox := panelWindow.AddGroupBox("x315 y34 w530 h520", chrCount)
 			aboutDescBox.SetFont("s11", "Cambria")
 
-			aboutDescription := panelWindow.Add("Text", "x330 y70 w505 h495 Wrap BackgroundTrans", Locale.Read("about_description"))
+			aboutDescription := panelWindow.AddText("x330 y70 w505 h495 Wrap BackgroundTrans", Locale.Read("about_description"))
 			aboutDescription.SetFont("s12 c333333", "Cambria")
 
 			panelTabs.UseTab(panelTabList.Obj.useful)

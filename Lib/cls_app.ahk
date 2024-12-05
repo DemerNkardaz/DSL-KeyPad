@@ -1,6 +1,7 @@
 Class App {
 
 	static title := "DSL KeyPad (αλφα)"
+	static decodedTitle := "Diacritics-Spaces-Letters KeyPad"
 	static version := [0, 1, 1, 0]
 	static versionText := this.formatVersion(this.version)
 	static winTitle := this.title " — " this.versionText
