@@ -113,7 +113,7 @@ Class Panel {
 		]),
 	], flat: [] }
 
-	static panelTitle := App.winTitle
+	static panelTitle := App.winTitle " — " Locale.Read("gui_panel")
 
 	static PanelGUI := Gui()
 
@@ -135,7 +135,7 @@ Class Panel {
 	static Panel() {
 
 		Constructor() {
-			this.panelTitle := App.winTitle
+			this.panelTitle := App.winTitle " — " Locale.Read("gui_panel")
 
 			languageCode := Language.Get()
 
