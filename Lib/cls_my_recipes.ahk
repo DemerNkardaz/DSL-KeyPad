@@ -2,6 +2,7 @@ Class MyRecipes {
 
 	static file := App.paths.user "\CustomCompose.ini"
 	static editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
+	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
 
 	static defaulRecipes := [
 		"kanji_yoshi", {
@@ -99,6 +100,7 @@ Class MyRecipes {
 
 
 		SetTimer((*) => this.UpdateMap(), -5000)
+		SetTimer((*) => this.UpdateChrLib(), -5000)
 	}
 
 	static EditorGUI := Gui()
@@ -189,23 +191,27 @@ Class MyRecipes {
 			}
 
 			saveRecipe(data) {
-				if InStr(data.section, "xcompose") {
-					RegExMatch(data.section, "\[(.*)\]", &match)
-					MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
-					return
-				} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
-					if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
-						recipesLV.Modify(data.row, , data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24))
+				if RegExMatch(data.section, this.sectionValidator) {
+					if InStr(data.section, "xcompose") {
+						RegExMatch(data.section, "\[(.*)\]", &match)
+						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
+						return
+					} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
+						if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
+							recipesLV.Modify(data.row, , data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24))
 
-					} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
-						if this.Check(data.section) {
-							MsgBox(Locale.Read("gui_recipes_create_exists"), App.winTitle)
-							return
+						} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
+							if this.Check(data.section) {
+								MsgBox(Locale.Read("gui_recipes_create_exists"), App.winTitle)
+								return
+							}
+							recipesLV.Add(, data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24), data.section)
 						}
-						recipesLV.Add(, data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24), data.section)
-					}
 
-					this.AddEdit(data.section, data)
+						this.AddEdit(data.section, data)
+					}
+				} else {
+					MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.winTitle)
 				}
 			}
 		}
@@ -231,14 +237,20 @@ Class MyRecipes {
 	}
 
 	static AddEdit(sectionName, params, noUpdate := False) {
-		params.result := this.FormatResult(params.result)
+		if RegExMatch(sectionName, this.sectionValidator) {
+			params.result := this.FormatResult(params.result)
 
-		IniWrite(params.name, this.file, sectionName, "name")
-		IniWrite(params.recipe, this.file, sectionName, "recipe")
-		IniWrite(params.result, this.file, sectionName, "result")
+			IniWrite(params.name, this.file, sectionName, "name")
+			IniWrite(params.recipe, this.file, sectionName, "recipe")
+			IniWrite(params.result, this.file, sectionName, "result")
 
-		if !noUpdate
-			this.UpdateMap()
+			if !noUpdate {
+				this.UpdateMap()
+				this.UpdateChrLib()
+			}
+		} else {
+			MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.winTitle)
+		}
 
 		return
 	}
@@ -296,6 +308,9 @@ Class MyRecipes {
 			Characters.Delete(characterEntry)
 		}
 
+		if ChrLib.GetEntry(sectionName)
+			ChrLib.RemoveEntry(sectionName)
+
 		return True
 	}
 
@@ -347,35 +362,39 @@ Class MyRecipes {
 	static XComposeRead(filePath, fileName) {
 		content := FileRead(filePath, "UTF-8")
 		splitContent := StrSplit(content, "`n")
+		fileNameNoExt := StrReplace(fileName, ".XCompose", "")
 
 		output := []
+		if RegExMatch(fileNameNoExt, this.sectionValidator) || StrLen(fileNameNoExt) == 0 {
+			for i, line in splitContent {
+				try {
+					RegExMatch(line, "^(.+?)\s*:", &recipeList)
+					RegExMatch(line, "^.+:\s*`"(.+?)`"", &result)
 
-		for i, line in splitContent {
-			try {
-				RegExMatch(line, "^(.+?)\s*:", &recipeList)
-				RegExMatch(line, "^.+:\s*`"(.+?)`"", &result)
+					recipe := ""
+					matches := StrSplit(recipeList[1], ">")
 
-				recipe := ""
-				matches := StrSplit(recipeList[1], ">")
-
-				for i, match in matches {
-					if StrLen(match) > 0 {
-						cutMatch := RegExReplace(match, "(\<|\s)", "")
-						if this.XComposePairs.HasValue(cutMatch, &index) {
-							recipe .= this.XComposePairs[index + 1]
-						} else {
-							recipe .= cutMatch
+					for i, match in matches {
+						if StrLen(match) > 0 {
+							cutMatch := RegExReplace(match, "(\<|\s)", "")
+							if this.XComposePairs.HasValue(cutMatch, &index) {
+								recipe .= this.XComposePairs[index + 1]
+							} else {
+								recipe .= cutMatch
+							}
 						}
 					}
-				}
 
-				output.Push({
-					section: "xcompose_" Ord(result[1]) "[" fileName "]",
-					name: "XCompose: [" result[1] "]",
-					recipe: recipe,
-					result: result[1]
-				})
+					output.Push({
+						section: "xcompose_" Ord(recipe) Ord(result[1]) (StrLen(fileNameNoExt) == 0 ? "" : "__file_" fileNameNoExt),
+						name: "XCompose: [" result[1] "]",
+						recipe: recipe,
+						result: result[1]
+					})
+				}
 			}
+		} else {
+			MsgBox(Locale.Read("gui_recipes_create_invalid_xcompose_name"), App.winTitle)
 		}
 
 		return output
@@ -429,6 +448,49 @@ Class MyRecipes {
 		CharactersCount := GetCountDifference()
 		ProcessMapAfter("Custom Composes")
 		UpdateRecipeValidator()
+	}
 
+	static UpdateChrLib() {
+		recipeSections := this.Read()
+		try {
+			for section in recipeSections {
+				if InStr(section.recipe, "|") {
+					section.recipe := StrSplit(section.recipe, "|")
+				}
+
+				section.result := this.FormatResult(section.result, True)
+
+				resultToUnicode := []
+				i := 1
+				while (i <= StrLen(section.result)) {
+					char := SubStr(section.result, i, 1)
+					code := Ord(char)
+
+					if (code >= 0xD800 && code <= 0xDBFF) {
+						nextChar := SubStr(section.result, i + 1, 1)
+						char .= nextChar
+						i += 1
+					}
+
+					resultToUnicode.Push("{U+" GetCharacterUnicode(char) "}")
+					i += 1
+				}
+
+				characterEntry := GetCharacterEntry(section.section, True)
+
+				if ChrLib.GetEntry(section.section)
+					ChrLib.RemoveEntry(section.section)
+
+				ChrLib.AddEntry(
+					section.section, {
+						unicode: resultToUnicode[1],
+						sequence: resultToUnicode,
+						titles: Map("ru", section.name, "en", section.name),
+						recipe: section.recipe,
+						groups: ["Custom Composes"],
+					},
+				)
+			}
+		}
 	}
 }

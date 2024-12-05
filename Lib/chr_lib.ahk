@@ -14138,3 +14138,12 @@ for each in ChrLib.entryGroups.Get("Special Characters") {
 MsgBox(entiesarr.ToString("`n"))
 
 */
+
+showalll() {
+	entiesarr := []
+	for entry, value in ChrLib.entryRecipes {
+		entiesarr.Push(entry " " value.chr)
+	}
+	MsgBox(entiesarr.ToString("`n"))
+}
+;SetTimer((*) => showalll(), -1000)

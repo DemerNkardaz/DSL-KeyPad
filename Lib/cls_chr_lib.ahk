@@ -2,6 +2,7 @@ class ChrLib {
 
 	static entries := {}
 	static entryGroups := Map()
+	static entryRecipes := Map()
 	static lastIndexAdded := -1
 
 	static AddEntry(entryName, entry, indexID?) {
@@ -52,7 +53,11 @@ class ChrLib {
 	}
 
 	static GetEntry(entryName) {
-		return this.entries.%entryName%
+		if this.entries.HasOwnProp(entryName) {
+			return this.entries.%entryName%
+		} else {
+			return False
+		}
 	}
 
 	static GetValue(entryName, value, useRef := False, &output?) {
@@ -197,8 +202,10 @@ class ChrLib {
 		characterSequence := Util.UnicodeToChar(refinedEntry.HasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode)
 
 		if refinedEntry.hasOwnProp("sequence") {
-			for group in refinedEntry.sequence {
-				refinedEntry.html .= "&#" Util.ChrToDecimal(Util.UnicodeToChar(group)) ";"
+			for sequenceChr in refinedEntry.sequence {
+				if !refinedEntry.HasOwnProp("html")
+					refinedEntry.html := ""
+				refinedEntry.html .= "&#" Util.ChrToDecimal(Util.UnicodeToChar(sequenceChr)) ";"
 			}
 		} else {
 			refinedEntry.html := "&#" Util.ChrToDecimal(character) ";"
@@ -284,6 +291,16 @@ class ChrLib {
 
 				if !this.entryGroups.Get(group).HasValue(entryName)
 					this.entryGroups[group].Push(entryName)
+			}
+		}
+
+		if refinedEntry.HasOwnProp("recipe") {
+			for recipe in refinedEntry.recipe {
+				if !this.entryRecipes.Has(recipe) {
+					this.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.hasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index })
+				} else {
+					MsgBox(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), recipe), App.winTitle, "Icon!")
+				}
 			}
 		}
 
