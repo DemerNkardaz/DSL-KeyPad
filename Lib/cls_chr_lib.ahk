@@ -272,6 +272,9 @@ class ChrLib {
 						refinedEntry.symbol.set := characterSequence
 					if !hasCustoms
 						refinedEntry.symbol.customs := "underline"
+				} else {
+					if !hasSet
+						refinedEntry.symbol.set := characterSequence
 				}
 
 			} else {
@@ -344,8 +347,6 @@ ChrLib.AddEntry(
 			noHTML: False,
 			titlesAlt: True,
 			layoutTitles: True,
-			isFastKey: True,
-			isAltLayout: True,
 			groupKey: "9",
 			groupModifiers: CapsLock,
 			fastKey: "<+ [-]",

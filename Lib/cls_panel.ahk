@@ -203,6 +203,8 @@ Class Panel {
 						;
 						{ type: "Group Activator", group: "Spaces", groupKey: Window LeftAlt " Space" },
 						;
+						{ type: "Group Activator", group: "Format Characters", combinationKey: Window LeftAlt " Space" },
+						;
 						{ type: "Group Activator", group: "Dashes", groupKey: Window LeftAlt " -", separator: true },
 						;
 						{ type: "Group Activator", group: "Quotes", groupKey: Window LeftAlt " `"", separator: true },
@@ -259,7 +261,7 @@ Class Panel {
 						;
 						{ type: "Fast Key", group: "Other Signs", combinationKey: RightAlt, separator: true },
 						;
-						{ type: "Fast Key", group: "Spaces", combinationKey: RightAlt, separator: true },
+						{ type: "Fast Key", group: "Spaces", combinationKey: RightAlt, separator: true, blacklist: ["emsp13", "emsp14", "emsp16", "narrow_no_break_space"] },
 						;
 						{ type: "Fast Key", group: "Format Characters", combinationKey: RightAlt, separator: true },
 						;
@@ -775,7 +777,7 @@ Class Panel {
 
 			this.PanelGUI[options.prefix "KeyPreview"].Text := characterKey
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := StrLen(characterCombinationKey) < 10 ? characterCombinationKey : ""
-			this.PanelGUI[options.prefix "KeyPreview"].SetFont((StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 14) ? "s9" : "s12")
+			this.PanelGUI[options.prefix "KeyPreview"].SetFont((StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 12 && StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) < 18) ? "s10" : (StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 19) ? "s9" : "s12")
 
 		}
 
@@ -873,10 +875,10 @@ Class Panel {
 						if (options.hasOwnProp("blacklist") && options.blacklist.HasValue(characterEntry)) || !(value.hasOwnProp("groups")) ||
 						(value.hasOwnProp("groups") && !value.groups.HasValue(options.group)) ||
 						(options.type = "Group Activator" && !value.options.HasOwnProp("groupKey")) ||
-						(options.type = "Recipe" && !value.HasOwnProp("recipe")) ||
-						(options.type = "Fast Key" && ((!value.options.HasOwnProp("isFastKey") || !value.options.HasOwnProp("fastKey")) || !value.options.isFastKey)) ||
-						(options.type = "Fast Key Special" && !value.options.HasOwnProp("specialKey")) ||
-						(options.type = "Alternative Layout" && ((!value.options.HasOwnProp("isAltLayout") || !value.options.HasOwnProp("altLayoutKey")) || !value.options.isAltLayout))
+						(options.type = "Recipe" && (!value.HasOwnProp("recipe") || value.recipe.Length = 0)) ||
+						(options.type = "Fast Key" && (!value.options.HasOwnProp("fastKey") || StrLen(value.options.fastKey) = 0)) ||
+						(options.type = "Fast Key Special" && (!value.options.HasOwnProp("specialKey") || StrLen(value.options.specialKey) = 0)) ||
+						(options.type = "Alternative Layout" && (!value.options.HasOwnProp("altLayoutKey") || StrLen(value.options.altLayoutKey) = 0))
 						{
 							continue
 						}
