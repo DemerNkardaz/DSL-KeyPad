@@ -35,8 +35,6 @@
 
 “DSL KeyPad” is a utility written on [AutoHotkey 2.0](https://www.autohotkey.com/), designed for inputting a wide range of characters using hotkeys and auxiliary functions. Its primary focus is on enhancing input capabilities for Latin and Cyrillic scripts, allowing typing in multiple languages without the need for separate keyboard layouts for each language.
 
-<br>
-
 More than 2,900 Unicode characters are available.
 
 <img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_latin.ico" alt="" width="62" align="right">
