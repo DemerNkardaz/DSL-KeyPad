@@ -29,6 +29,126 @@
   - [Ограничения](#ограничения)
   - [Установка](#установка)
 
+# Overiew
+
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
+
+“DSL KeyPad” is a utility written on [AutoHotkey 2.0](https://www.autohotkey.com/), designed for inputting a wide range of characters using hotkeys and auxiliary functions. Its primary focus is on enhancing input capabilities for Latin and Cyrillic scripts, allowing typing in multiple languages without the need for separate keyboard layouts for each language.
+
+<br>
+
+More than 2,900 Unicode characters are available.
+
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_latin.ico" alt="" width="62" align="right">
+
+### Latin Script
+
+The utility supports input of most Latin characters, including their variations (combining, superscript, subscript, mathematical). With just a basic US keyboard layout, it allows typing in multiple languages/systems (including historical ones) based on the Latin script, for example:
+
+- [Limba Română](https://ru.wikipedia.org/wiki/Румынский_язык): Țara, Învăța, Șase.
+- [Gagauzça](https://ru.wikipedia.org/wiki/Гагаузский_язык): Sölzlük, Harţaklı, Sürçmää.
+- [Ænglisċ](https://ru.wikipedia.org/wiki/Древнеанглийский_язык): Ƿeorðmyndum, Æġhƿylc, Þeod.
+- [Norrœnt Mál](https://ru.wikipedia.org/wiki/Древнескандинавский_язык): Þrúðvangar, Mjǫðr, Kvæði.
+- [Norsk](https://ru.wikipedia.org/wiki/Норвежский_язык): Høvåg, Ærlig, Skatteøya.
+- [Deutsch](https://ru.wikipedia.org/wiki/Немецкий_язык): Straße, Österreich, Süß.
+- [Français](https://ru.wikipedia.org/wiki/Французский_язык): Déjà, Sœur, Laïque.
+- [Malti](https://ru.wikipedia.org/wiki/Мальтийский_язык): Għaqda, Iżda, Oċean.
+- [Español](https://ru.wikipedia.org/wiki/Испанский_язык): ¿Cuántos años…, Éxito, Corazón.
+- [Język polski](https://ru.wikipedia.org/wiki/Польский_язык): Wiedźmin, Żołnierz, Natknąć się.
+- [Čeština](https://ru.wikipedia.org/wiki/Чешский_язык): Zřetelně, Výpůjčka, Vyvíjí.
+- [Latviešu valoda](https://ru.wikipedia.org/wiki/Латышский_язык): Katoļu ticību, Luterāņu katķisma.
+- [<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="32" align="left"> Tiếng Việt](https://ru.wikipedia.org/wiki/Вьетнамский_язык): Thương Ưởng, Đế Chế, Rồng phương Bắc.<br>&emsp;Vietnamese TELEX/VNI‐like input mode available: <kbd>RAlt F2</kbd>
+- [<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="32" align="left"> Hànyǔ Pīnyīn「汉语拼音」](https://ru.wikipedia.org/wiki/Пиньинь): Māo「貓」, Gǔ「谷」, Gōngtíng「宮廷」.<br>&emsp;Vietnamese TELEX/VNI‐like input mode available: <kbd>RAlt RShift F2</kbd>
+
+[Here](https://github.com/DemerNkardaz/DSL-KeyPad/wiki/Languages-Input〈Fast-Keys-%25-Compose〉) located a list of tables of hints for multilingual input.
+
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_cyrillic.ico" alt="" width="62" align="right">
+
+### Cyrillic Script
+
+A wide range of Cyrillic characters is also supported, requiring a standard Russian keyboard layout. As with Latin script, it allows typing in several languages (including historical ones) that use the Cyrillic alphabet, for example:
+
+- [Словѣньскъ ѩзꙑкъ](https://ru.wikipedia.org/wiki/Старославянский_язык): Благоѫханиѥ, Бєꙁѹмьникъ, Єѵрѡпа.
+- [Лимба Рѹмѫнѣскъ](https://ru.wikipedia.org/wiki/Старорумынский_язык): Ꙟвъца.
+- [Беларуская мова](https://ru.wikipedia.org/wiki/Белорусский_язык): Драўніна, Ўніверсітэт.
+- [Українська мова](https://ru.wikipedia.org/wiki/Украинский_язык): Поїзд, Білий, Євангеліє.
+- [Црногорски језик](https://ru.wikipedia.org/wiki/Черногорский_язык): Ђетић, Ђевојка, Коштањ.
+- [Македонски јазик](https://ru.wikipedia.org/wiki/Македонский_язык): Џоконда, Луѓе, Одењето.
+- [Қазақ тілі](https://ru.wikipedia.org/wiki/Казахский_язык): Мәліметтер, Ыңғай, Көз.
+- [Забони тоҷикӣ](https://ru.wikipedia.org/wiki/Таджикский_язык): Дӯстон, Баҳри.
+
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_greek.ico" alt="" width="62" align="right">
+
+### Hellenic Script
+
+Currently, there is no support for Greek and Hellenic script languages, but plans to introduce it are in place for the future.<br><br>
+
+---
+
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_punctuation.ico" alt="" width="62" align="right">
+
+### Punctuation
+
+Utility supports the input of many punctuation marks for different languages, for example:
+
+| Symbols                | Examples                                                                                                                                                        |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ! ‼ ⁉ ¡ ? ⁇ ¿ ⸮ ⁈ ‽ ⸘  | ¿En qué dirección están las montañas? <br> ¡Madre mía, esto es un descubrimiento increíble!                                                                     |
+| … ⁚ ⁝ ⁞ ·              | Number Range: −15…17.3 ℃                                                                                                                                        |
+| ‐ ‑ — – ⸻ ⸺ ‒ ‧        | Number Range: 15–17.3 ℃ <br> — Ёримаса, стой! — воскликнул Тадахиса. <br> “Yorimasa, stop!” — Tadahisa exclaimed.                                               |
+| «» ‹› “” ‘’ „” „“ „⹂ ‚ | Организация «НВК „Рассвет“» отправила экспедицию. <br> The “SMC ‘Dawn’” organization sent an expedition. <br> Organizația „CȘM «Răsărit»” a trimis o expediție. |
+
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_diacritics.ico" alt="" width="62" align="right">
+
+### Combining Diacritics
+
+One of first added categories. Includes a lot of basic diacritics, combined with other symbols and used in some functions to get accented letters, for example, in Compose mode: <kbd>RAlt×2</kbd>, `A` + ◌̆ + ◌́ = `Ắ`.
+
+<img src="Images/diacritics.png" alt="" width="600">
+
+<br>
+
+<img src="__graphics/DSLKeyPad.app_space256.png" alt="" width="128" align="right">
+
+### Spaces
+
+Secondary added characters category includes almost all types of spaces:
+
+| Name                      | Space’s Width               |
+| ------------------------- | --------------------------- |
+| No‐Break Space            | <ins>&nbsp;</ins>           |
+| Em Space                  | <ins>&emsp;</ins>           |
+| En Space                  | <ins>&ensp;</ins>           |
+| Figure Space              | <ins>&numsp;</ins>          |
+| 1⁄3 Em Space              | <ins>&emsp13;</ins>         |
+| 1⁄4 Em Space              | <ins>&emsp14;</ins>         |
+| 1⁄6 Em Space              | <ins>&#8198;</ins>          |
+| Thin Space                | <ins>&thinsp;</ins>         |
+| Narrow No‐Break Space     | <ins>&#8239;</ins>          |
+| Hair Space                | <ins>&hairsp;</ins>         |
+| Punctuation Space         | <ins>&puncsp;</ins>         |
+| Zero‐Width Space          | <ins>&ZeroWidthSpace;</ins> |
+| Zero‐Width No‐Break Space | <ins>&#65279;</ins>         |
+| Em Quad                   | <ins>&#8193;</ins>          |
+| En Quad                   | <ins>&#8192;</ins>          |
+| Word Joiner               | <ins>&NoBreak;</ins>        |
+
+_Word Joiner_ is not a space, but it was added together with spaces in a single group.
+
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_special.ico" alt="" width="62" align="right">
+
+### …and other various symbols
+
+Включён и ряд других разных символов, как знаки валют, типографские, математические знаки, стрелки и так далее, например:
+
+| Symbols                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ←↑↓→↖↗↙↘↔↕↺↻⮌⮍⮏⮎ <br> ※ ⁑ ⁂ ⁎ † ‡ ⹋ § © 🄯 ℗ ™ ℠ ′ ″ ‴ ⁗ ° <br> ‰ ‱ ÷ × ⋇ − ± ∓ ≈ ∽ ≋ ∑ ⨋ ∏ ∪ ∫ ∬ ∰ ∆ ∇ ≤ ≧ <br> ₽ ₹ ₱ ₴ ¢ ₣ £ ₤ ₺ € ₳ ₶ ₩ ¥ 円 元 ₫ ₮ ₸ ₪ ₿ |
+
+---
+
+<br><hr>
+
 # Обзор
 
 <img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
@@ -43,7 +163,7 @@
 
 Утилита поддерживает ввод большинства символов латиницы, включая их вариации (комбинируемые, надстрочные, подстрочные, математические). Имея лишь базовую US раскладку возможно письмо на множестве языков/систем (включая исторических) на основе латиницы, например:
 
-- [Limba Românească](https://ru.wikipedia.org/wiki/Румынский_язык): Țara, Învăța, Șase.
+- [Limba Română](https://ru.wikipedia.org/wiki/Румынский_язык): Țara, Învăța, Șase.
 - [Gagauzça](https://ru.wikipedia.org/wiki/Гагаузский_язык): Sölzlük, Harţaklı, Sürçmää.
 - [Ænglisċ](https://ru.wikipedia.org/wiki/Древнеанглийский_язык): Ƿeorðmyndum, Æġhƿylc, Þeod.
 - [Norrœnt Mál](https://ru.wikipedia.org/wiki/Древнескандинавский_язык): Þrúðvangar, Mjǫðr, Kvæði.
