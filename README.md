@@ -137,7 +137,7 @@ _Word Joiner_ is not a space, but it was added together with spaces in a single 
 
 ### …and other various symbols
 
-Включён и ряд других разных символов, как знаки валют, типографские, математические знаки, стрелки и так далее, например:
+A variety of other symbols are also included, such as currency signs, typographic symbols, mathematical symbols, arrows, and more, for example:
 
 | Symbols                                                                                                                                                     |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
