@@ -3247,7 +3247,6 @@ FindCharacterPage(InputCode := "", IsReturn := False) {
 
 ToggleGroupMessage() {
 	LanguageCode := Language.Get()
-	global Cfg, ConfigFile
 	Cfg.SkipGroupMessage := !Cfg.SkipGroupMessage
 	Cfg.SwitchSet(["True", "False"], "SkipGroupMessage")
 
@@ -4127,7 +4126,7 @@ FilterListView(GuiFrame, FilterField, LV, DataList) {
 
 			IsFavorite := (ItemText ~= "\Q★")
 			IsMatch := InStr(ItemText, FilterText)
-			|| (IsFavorite && (InStr("избранное", FilterText) || InStr("favorite", FilterText)))
+				|| (IsFavorite && (InStr("избранное", FilterText) || InStr("favorite", FilterText)))
 
 			if ItemText = "" {
 				LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
@@ -4220,7 +4219,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		} else if (HasProp(GetEntry, "titlesAltOnEntry")) {
 			characterTitle := GetEntry.titlesAltOnEntry[LanguageCode]
 		} else if (HasProp(GetEntry, "titles") &&
-		(!HasProp(GetEntry, "titlesAlt") || HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True)) {
+			(!HasProp(GetEntry, "titlesAlt") || HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True)) {
 			characterTitle := GetEntry.titles[LanguageCode]
 		} else {
 			characterTitle := Locale.Read(EntryNameKey, "chars")
@@ -4277,7 +4276,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 
 		if (StrLen(TargetGroup[PreviewUnicode].Text) > 9
-		&& StrLen(TargetGroup[PreviewUnicode].Text) < 15) {
+			&& StrLen(TargetGroup[PreviewUnicode].Text) < 15) {
 			PreviewGroup.unicode.SetFont("s10")
 		} else if (StrLen(TargetGroup[PreviewUnicode].Text) > 14) {
 			PreviewGroup.unicode.SetFont("s9")
@@ -4292,7 +4291,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 
 		if (StrLen(TargetGroup[PreviewHTML].Text) > 9
-		&& StrLen(TargetGroup[PreviewHTML].Text) < 15) {
+			&& StrLen(TargetGroup[PreviewHTML].Text) < 15) {
 			PreviewGroup.html.SetFont("s10")
 		} else if (StrLen(TargetGroup[PreviewHTML].Text) > 14) {
 			PreviewGroup.html.SetFont("s9")
@@ -4387,7 +4386,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 
 		if (StrLen(TargetGroup[PreviewLaTeX].Text) > 9
-		&& StrLen(TargetGroup[PreviewLaTeX].Text) < 15) {
+			&& StrLen(TargetGroup[PreviewLaTeX].Text) < 15) {
 			PreviewGroup.latex.SetFont("s10")
 		} else if (StrLen(TargetGroup[PreviewLaTeX].Text) > 14) {
 			PreviewGroup.latex.SetFont("s9")
@@ -5387,15 +5386,15 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		])
 		SlotModdedLetters := Map(
 			"A", Map("<!", ["lat_c_let_a_acute", "lat_s_let_a_acute"],
-			"<^>!", ["lat_c_let_a_breve", "lat_s_let_a_breve"],
-			"<^>!<!", ["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"],
-			"<^>!<!<+", ["lat_c_let_a_ring_above", "lat_s_let_a_ring_above"],
-			"<^>!<!>+", ["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"],
-			"<^>!>+", ["lat_c_let_a_macron", "lat_s_let_a_macron"],
-			"<^>!<+", ["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"],
-			"<^>!<+>+", ["lat_c_let_a_tilde", "lat_s_let_a_tilde"],
-			">+", ["lat_c_let_a_grave", "lat_s_let_a_grave"],
-			"<+>+", ["lat_c_let_a_grave_double", "lat_s_let_a_grave_double"]),
+				"<^>!", ["lat_c_let_a_breve", "lat_s_let_a_breve"],
+				"<^>!<!", ["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"],
+				"<^>!<!<+", ["lat_c_let_a_ring_above", "lat_s_let_a_ring_above"],
+				"<^>!<!>+", ["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"],
+				"<^>!>+", ["lat_c_let_a_macron", "lat_s_let_a_macron"],
+				"<^>!<+", ["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_a_tilde", "lat_s_let_a_tilde"],
+				">+", ["lat_c_let_a_grave", "lat_s_let_a_grave"],
+				"<+>+", ["lat_c_let_a_grave_double", "lat_s_let_a_grave_double"]),
 			"B", Map(
 				"<^>!", ["lat_c_let_b_dot_above", "lat_s_let_b_dot_above"],
 				"<^>!<!", ["lat_c_let_b_dot_below", "lat_s_let_b_dot_below"],
@@ -5403,11 +5402,11 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<+", ["lat_c_let_b_stroke_short", "lat_s_let_b_stroke_short"],
 				"<^>!>+", ["lat_c_let_b_common_hook", "lat_s_let_b_common_hook"]),
 			"C", Map("<!", ["lat_c_let_c_acute", "lat_s_let_c_acute"],
-			"<^>!", ["lat_c_let_c_dot_above", "lat_s_let_c_dot_above"],
-			"<^>!<!", ["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"],
-			"<^>!<!<+", ["lat_c_let_c_caron", "lat_s_let_c_caron"],
-			"<^>!<!>+", ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"],
-			"Flat:>+", "celsius"),
+				"<^>!", ["lat_c_let_c_dot_above", "lat_s_let_c_dot_above"],
+				"<^>!<!", ["lat_c_let_c_circumflex", "lat_s_let_c_circumflex"],
+				"<^>!<!<+", ["lat_c_let_c_caron", "lat_s_let_c_caron"],
+				"<^>!<!>+", ["lat_c_let_c_cedilla", "lat_s_let_c_cedilla"],
+				"Flat:>+", "celsius"),
 			"D", Map(
 				"<^>!", ["lat_c_let_d_eth", "lat_s_let_d_eth"],
 				"<^>!<!", ["lat_c_let_d_stroke_short", "lat_s_let_d_stroke_short"],
@@ -5415,107 +5414,107 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<!>+", ["lat_c_let_d_cedilla", "lat_s_let_d_cedilla"],
 				"<^>!<+>+", ["lat_c_let_d_circumflex_below", "lat_s_let_d_circumflex_below"]),
 			"E", Map("<!", ["lat_c_let_e_acute", "lat_s_let_e_acute"],
-			"<^>!", ["lat_c_let_schwa", "lat_s_let_schwa"],
-			"<^>!<!", ["lat_c_let_e_circumflex", "lat_s_let_e_circumflex"],
-			"<^>!<!<+", ["lat_c_let_e_caron", "lat_s_let_e_caron"],
-			"<^>!<!>+", ["lat_c_let_e_ogonek", "lat_s_let_e_ogonek"],
-			"<^>!>+", ["lat_c_let_e_macron", "lat_s_let_e_macron"],
-			"<^>!<+", ["lat_c_let_e_diaeresis", "lat_s_let_e_diaeresis"],
-			"<^>!<+>+", ["lat_c_let_e_tilde", "lat_s_let_e_tilde"],
-			">+", ["lat_c_let_e_grave", "lat_s_let_e_grave"],
-			"<+>+", ["lat_c_let_e_grave_double", "lat_s_let_e_grave_double"]),
+				"<^>!", ["lat_c_let_schwa", "lat_s_let_schwa"],
+				"<^>!<!", ["lat_c_let_e_circumflex", "lat_s_let_e_circumflex"],
+				"<^>!<!<+", ["lat_c_let_e_caron", "lat_s_let_e_caron"],
+				"<^>!<!>+", ["lat_c_let_e_ogonek", "lat_s_let_e_ogonek"],
+				"<^>!>+", ["lat_c_let_e_macron", "lat_s_let_e_macron"],
+				"<^>!<+", ["lat_c_let_e_diaeresis", "lat_s_let_e_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_e_tilde", "lat_s_let_e_tilde"],
+				">+", ["lat_c_let_e_grave", "lat_s_let_e_grave"],
+				"<+>+", ["lat_c_let_e_grave_double", "lat_s_let_e_grave_double"]),
 			"F", Map(
 				"<^>!", ["lat_c_let_f_dot_above", "lat_s_let_f_dot_above"],
 				"Flat:>+", "fahrenheit"),
 			"G", Map("<!", ["lat_c_let_g_acute", "lat_s_let_g_acute"],
-			"<^>!", ["lat_c_let_g_breve", "lat_s_let_g_breve"],
-			"<^>!<!", ["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"],
-			"<^>!<!<+", ["lat_c_let_g_caron", "lat_s_let_g_caron"],
-			"<^>!<!>+", ["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"],
-			"<^>!<+", ["lat_c_let_g_insular", "lat_s_let_g_insular"],
-			"<^>!>+", ["lat_c_let_g_macron", "lat_s_let_g_macron"],
-			"<^>!<+>+", ["lat_c_let_gamma", "lat_s_let_gamma"]),
+				"<^>!", ["lat_c_let_g_breve", "lat_s_let_g_breve"],
+				"<^>!<!", ["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"],
+				"<^>!<!<+", ["lat_c_let_g_caron", "lat_s_let_g_caron"],
+				"<^>!<!>+", ["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"],
+				"<^>!<+", ["lat_c_let_g_insular", "lat_s_let_g_insular"],
+				"<^>!>+", ["lat_c_let_g_macron", "lat_s_let_g_macron"],
+				"<^>!<+>+", ["lat_c_let_gamma", "lat_s_let_gamma"]),
 			"H", Map("<!", ["lat_c_let_h_hwair", "lat_s_let_h_hwair"],
-			"<^>!", ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"],
-			"<^>!<!", ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"],
-			"<^>!<!<+", ["lat_c_let_h_caron", "lat_s_let_h_caron"],
-			"<^>!<!>+", ["lat_c_let_h_cedilla", "lat_s_let_h_cedilla"],
-			"<^>!<+", ["lat_c_let_h_diaeresis", "lat_s_let_h_diaeresis"]),
+				"<^>!", ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"],
+				"<^>!<!", ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"],
+				"<^>!<!<+", ["lat_c_let_h_caron", "lat_s_let_h_caron"],
+				"<^>!<!>+", ["lat_c_let_h_cedilla", "lat_s_let_h_cedilla"],
+				"<^>!<+", ["lat_c_let_h_diaeresis", "lat_s_let_h_diaeresis"]),
 			"I", Map("<!", ["lat_c_let_i_acute", "lat_s_let_i_acute"],
-			"<^>!", ["lat_c_let_i_breve", "lat_s_let_i_breve"],
-			"<^>!<!", ["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"],
-			"<^>!<!<+", ["lat_c_let_i_caron", "lat_s_let_i_caron"],
-			"<^>!<!>+", ["lat_c_let_i_ogonek", "lat_s_let_i_ogonek"],
-			"<^>!>+", ["lat_c_let_i_macron", "lat_s_let_i_macron"],
-			"<^>!<+", ["lat_c_let_i_diaeresis", "lat_s_let_i_diaeresis"],
-			"<^>!<+>+", ["lat_c_let_i_tilde", "lat_s_let_i_tilde"],
-			">+", ["lat_c_let_i_grave", "lat_s_let_i_grave"],
-			"<+>+", ["lat_c_let_i_grave_double", "lat_s_let_i_grave_double"],
-			"<^>!<!<+>+", ["lat_c_let_i_dot_above", "lat_s_let_i_dotless"]),
+				"<^>!", ["lat_c_let_i_breve", "lat_s_let_i_breve"],
+				"<^>!<!", ["lat_c_let_i_circumflex", "lat_s_let_i_circumflex"],
+				"<^>!<!<+", ["lat_c_let_i_caron", "lat_s_let_i_caron"],
+				"<^>!<!>+", ["lat_c_let_i_ogonek", "lat_s_let_i_ogonek"],
+				"<^>!>+", ["lat_c_let_i_macron", "lat_s_let_i_macron"],
+				"<^>!<+", ["lat_c_let_i_diaeresis", "lat_s_let_i_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_i_tilde", "lat_s_let_i_tilde"],
+				">+", ["lat_c_let_i_grave", "lat_s_let_i_grave"],
+				"<+>+", ["lat_c_let_i_grave_double", "lat_s_let_i_grave_double"],
+				"<^>!<!<+>+", ["lat_c_let_i_dot_above", "lat_s_let_i_dotless"]),
 			"J", Map(
 				"<^>!", ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"],
 				"<^>!<!", ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"],
 				"<^>!<!<+", ["lat_c_let_j", "lat_s_let_j_caron"],
 			),
 			"K", Map("<!", ["lat_c_let_k_acute", "lat_s_let_k_acute"],
-			"<^>!<!", ["lat_c_let_k_dot_below", "lat_s_let_k_dot_below"],
-			"<^>!<!<+", ["lat_c_let_k_caron", "lat_s_let_k_caron"],
-			"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"],
-			"Flat:>+", "kelvin"
+				"<^>!<!", ["lat_c_let_k_dot_below", "lat_s_let_k_dot_below"],
+				"<^>!<!<+", ["lat_c_let_k_caron", "lat_s_let_k_caron"],
+				"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"],
+				"Flat:>+", "kelvin"
 			),
 			"L", Map("<!", ["lat_c_let_l_acute", "lat_s_let_l_acute"],
-			"<^>!", ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"],
-			"<^>!<!<+", ["lat_c_let_l_caron", "lat_s_let_l_caron"],
-			"<^>!<!>+", ["lat_c_let_l_cedilla", "lat_s_let_l_cedilla"],
-			"<^>!<+>+", ["lat_c_let_l_circumflex_below", "lat_s_let_l_circumflex_below"]),
+				"<^>!", ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"],
+				"<^>!<!<+", ["lat_c_let_l_caron", "lat_s_let_l_caron"],
+				"<^>!<!>+", ["lat_c_let_l_cedilla", "lat_s_let_l_cedilla"],
+				"<^>!<+>+", ["lat_c_let_l_circumflex_below", "lat_s_let_l_circumflex_below"]),
 			"M", Map("<!", ["lat_c_let_m_acute", "lat_s_let_m_acute"],
-			"<^>!", ["lat_c_let_m_dot_above", "lat_s_let_m_dot_above"],
-			"<^>!<!", ["lat_c_let_m_dot_below", "lat_s_let_m_dot_below"],
-			"<^>!>+", ["lat_c_let_m_common_hook", "lat_s_let_m_common_hook"]),
+				"<^>!", ["lat_c_let_m_dot_above", "lat_s_let_m_dot_above"],
+				"<^>!<!", ["lat_c_let_m_dot_below", "lat_s_let_m_dot_below"],
+				"<^>!>+", ["lat_c_let_m_common_hook", "lat_s_let_m_common_hook"]),
 			"N", Map("<!", ["lat_c_let_n_acute", "lat_s_let_n_acute"],
-			"<^>!", ["lat_c_let_n_tilde", "lat_s_let_n_tilde"],
-			"<^>!<!", ["lat_c_let_n_dot_below", "lat_s_let_n_dot_below"],
-			"<^>!<!<+", ["lat_c_let_n_caron", "lat_s_let_n_caron"],
-			"<^>!<!>+", ["lat_c_let_n_cedilla", "lat_s_let_n_cedilla"],
-			"<^>!>+", ["lat_c_let_n_common_hook", "lat_s_let_n_common_hook"],
-			"<^>!<+", ["let_c_let_n_descender", "let_s_let_n_descender"],
-			"<^>!<+>+", ["lat_c_let_n_dot_above", "lat_s_let_n_dot_above"],
-			">+", ["lat_c_let_n_grave", "lat_s_let_n_grave"]),
+				"<^>!", ["lat_c_let_n_tilde", "lat_s_let_n_tilde"],
+				"<^>!<!", ["lat_c_let_n_dot_below", "lat_s_let_n_dot_below"],
+				"<^>!<!<+", ["lat_c_let_n_caron", "lat_s_let_n_caron"],
+				"<^>!<!>+", ["lat_c_let_n_cedilla", "lat_s_let_n_cedilla"],
+				"<^>!>+", ["lat_c_let_n_common_hook", "lat_s_let_n_common_hook"],
+				"<^>!<+", ["let_c_let_n_descender", "let_s_let_n_descender"],
+				"<^>!<+>+", ["lat_c_let_n_dot_above", "lat_s_let_n_dot_above"],
+				">+", ["lat_c_let_n_grave", "lat_s_let_n_grave"]),
 			"O", Map("<!", ["lat_c_let_o_acute", "lat_s_let_o_acute"],
-			"<^>!", ["lat_c_let_o_solidus_long", "lat_s_let_o_solidus_long"],
-			"<^>!<!", ["lat_c_let_o_circumflex", "lat_s_let_o_circumflex"],
-			"<^>!<!<+", ["lat_c_let_o_caron", "lat_s_let_o_caron"],
-			"<^>!<!>+", ["lat_c_let_o_ogonek", "lat_s_let_o_ogonek"],
-			"<^>!>+", ["lat_c_let_o_macron", "lat_s_let_o_macron"],
-			"<^>!<+", ["lat_c_let_o_diaeresis", "lat_s_let_o_diaeresis"],
-			"<^>!<+>+", ["lat_c_let_o_tilde", "lat_s_let_o_tilde"],
-			">+", ["lat_c_let_o_grave", "lat_s_let_o_grave"],
-			"<+>+", ["lat_c_let_o_grave_double", "lat_s_let_o_grave_double"],
-			"<^>!<!<+>+", ["lat_c_let_o_acute_double", "lat_s_let_o_acute_double"]),
+				"<^>!", ["lat_c_let_o_solidus_long", "lat_s_let_o_solidus_long"],
+				"<^>!<!", ["lat_c_let_o_circumflex", "lat_s_let_o_circumflex"],
+				"<^>!<!<+", ["lat_c_let_o_caron", "lat_s_let_o_caron"],
+				"<^>!<!>+", ["lat_c_let_o_ogonek", "lat_s_let_o_ogonek"],
+				"<^>!>+", ["lat_c_let_o_macron", "lat_s_let_o_macron"],
+				"<^>!<+", ["lat_c_let_o_diaeresis", "lat_s_let_o_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_o_tilde", "lat_s_let_o_tilde"],
+				">+", ["lat_c_let_o_grave", "lat_s_let_o_grave"],
+				"<+>+", ["lat_c_let_o_grave_double", "lat_s_let_o_grave_double"],
+				"<^>!<!<+>+", ["lat_c_let_o_acute_double", "lat_s_let_o_acute_double"]),
 			"P", Map("<!", ["lat_c_let_p_acute", "lat_s_let_p_acute"],
-			"<^>!", ["lat_c_let_p_dot_above", "lat_s_let_p_dot_above"],
-			"<^>!<!", ["lat_c_let_p_squirrel_tail", "lat_s_let_p_squirrel_tail"],
-			"<^>!<!<+", ["lat_c_let_p_flourish", "lat_s_let_p_flourish"],
-			"<^>!<+", ["lat_c_let_p_stroke_short", "lat_s_let_p_stroke_short"],
-			"<^>!>+", ["lat_c_let_p_common_hook", "lat_s_let_p_common_hook"]),
+				"<^>!", ["lat_c_let_p_dot_above", "lat_s_let_p_dot_above"],
+				"<^>!<!", ["lat_c_let_p_squirrel_tail", "lat_s_let_p_squirrel_tail"],
+				"<^>!<!<+", ["lat_c_let_p_flourish", "lat_s_let_p_flourish"],
+				"<^>!<+", ["lat_c_let_p_stroke_short", "lat_s_let_p_stroke_short"],
+				"<^>!>+", ["lat_c_let_p_common_hook", "lat_s_let_p_common_hook"]),
 			"Q", Map(
 				"<^>!>+", ["lat_c_let_q_common_hook", "lat_s_let_q_common_hook"]),
 			"R", Map("<!", ["lat_c_let_r_acute", "lat_s_let_r_acute"],
-			"<^>!", ["lat_c_let_r_dot_above", "lat_s_let_r_dot_above"],
-			"<^>!<!", ["lat_c_let_r_dot_below", "lat_s_let_r_dot_below"],
-			"<^>!<!<+", ["lat_c_let_r_caron", "lat_s_let_r_caron"],
-			"<^>!<!>+", ["lat_c_let_r_cedilla", "lat_s_let_r_cedilla"],
-			"<^>!<+", ["lat_c_let_yr", "lat_s_let_yr"],
-			"<^>!>+", ["lat_c_let_r_rotunda", "lat_s_let_r_rotunda"],
-			"<+>+", ["lat_c_let_r_grave_double", "lat_s_let_r_grave_double"]),
+				"<^>!", ["lat_c_let_r_dot_above", "lat_s_let_r_dot_above"],
+				"<^>!<!", ["lat_c_let_r_dot_below", "lat_s_let_r_dot_below"],
+				"<^>!<!<+", ["lat_c_let_r_caron", "lat_s_let_r_caron"],
+				"<^>!<!>+", ["lat_c_let_r_cedilla", "lat_s_let_r_cedilla"],
+				"<^>!<+", ["lat_c_let_yr", "lat_s_let_yr"],
+				"<^>!>+", ["lat_c_let_r_rotunda", "lat_s_let_r_rotunda"],
+				"<+>+", ["lat_c_let_r_grave_double", "lat_s_let_r_grave_double"]),
 			"S", Map("<!", ["lat_c_let_s_acute", "lat_s_let_s_acute"],
-			"<^>!", ["lat_c_let_s_comma_below", "lat_s_let_s_comma_below"],
-			"<^>!<!", ["lat_c_let_s_circumflex", "lat_s_let_s_circumflex"],
-			"<^>!<!<+", ["lat_c_let_s_caron", "lat_s_let_s_caron"],
-			"<^>!<!>+", ["lat_c_let_s_cedilla", "lat_s_let_s_cedilla"],
-			"<^>!>+", "lat_s_let_s_long",
-			"<^>!<+>+", ["lat_c_let_s_esh", "lat_s_let_s_esh"],
-			"<^>!<+", ["lat_c_lig_eszett", "lat_s_lig_eszett"]),
+				"<^>!", ["lat_c_let_s_comma_below", "lat_s_let_s_comma_below"],
+				"<^>!<!", ["lat_c_let_s_circumflex", "lat_s_let_s_circumflex"],
+				"<^>!<!<+", ["lat_c_let_s_caron", "lat_s_let_s_caron"],
+				"<^>!<!>+", ["lat_c_let_s_cedilla", "lat_s_let_s_cedilla"],
+				"<^>!>+", "lat_s_let_s_long",
+				"<^>!<+>+", ["lat_c_let_s_esh", "lat_s_let_s_esh"],
+				"<^>!<+", ["lat_c_lig_eszett", "lat_s_lig_eszett"]),
 			"T", Map(
 				"<^>!", ["lat_c_let_t_comma_below", "lat_s_let_t_comma_below"],
 				"<^>!<!", ["lat_c_let_t_dot_below", "lat_s_let_t_dot_below"],
@@ -5525,16 +5524,16 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<+", ["lat_c_let_t_dot_above", "lat_s_let_t_dot_above"],
 				"<^>!<+>+", ["lat_c_let_et_tironian", "lat_s_let_et_tironian"]),
 			"U", Map("<!", ["lat_c_let_u_acute", "lat_s_let_u_acute"],
-			"<^>!", ["lat_c_let_u_breve", "lat_s_let_u_breve"],
-			"<^>!<!", ["lat_c_let_u_circumflex", "lat_s_let_u_circumflex"],
-			"<^>!<!<+", ["lat_c_let_u_ring_above", "lat_s_let_u_ring_above"],
-			"<^>!<!>+", ["lat_c_let_u_ogonek", "lat_s_let_u_ogonek"],
-			"<^>!>+", ["lat_c_let_u_macron", "lat_s_let_u_macron"],
-			"<^>!<+", ["lat_c_let_u_diaeresis", "lat_s_let_u_diaeresis"],
-			"<^>!<+>+", ["lat_c_let_u_tilde", "lat_s_let_u_tilde"],
-			">+", ["lat_c_let_u_grave", "lat_s_let_u_grave"],
-			"<+>+", ["lat_c_let_u_grave_double", "lat_s_let_u_grave_double"],
-			"<^>!<!<+>+", ["lat_c_let_u_acute_double", "lat_s_let_u_acute_double"]),
+				"<^>!", ["lat_c_let_u_breve", "lat_s_let_u_breve"],
+				"<^>!<!", ["lat_c_let_u_circumflex", "lat_s_let_u_circumflex"],
+				"<^>!<!<+", ["lat_c_let_u_ring_above", "lat_s_let_u_ring_above"],
+				"<^>!<!>+", ["lat_c_let_u_ogonek", "lat_s_let_u_ogonek"],
+				"<^>!>+", ["lat_c_let_u_macron", "lat_s_let_u_macron"],
+				"<^>!<+", ["lat_c_let_u_diaeresis", "lat_s_let_u_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_u_tilde", "lat_s_let_u_tilde"],
+				">+", ["lat_c_let_u_grave", "lat_s_let_u_grave"],
+				"<+>+", ["lat_c_let_u_grave_double", "lat_s_let_u_grave_double"],
+				"<^>!<!<+>+", ["lat_c_let_u_acute_double", "lat_s_let_u_acute_double"]),
 			"V", Map(
 				"<^>!", ["lat_c_let_v_solidus_long", "lat_s_let_v_solidus_long"],
 				"<^>!<!", ["lat_c_let_v_dot_below", "lat_s_let_v_dot_below"],
@@ -5542,31 +5541,31 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!>+", ["lat_c_let_vend", "lat_s_let_vend"],
 				"<^>!<+>+", ["lat_c_let_v_tilde", "lat_s_let_v_tilde"]),
 			"W", Map("<!", ["lat_c_let_w_acute", "lat_s_let_w_acute"],
-			"<^>!", ["lat_c_let_w_dot_above", "lat_s_let_w_dot_above"],
-			"<^>!<!", ["lat_c_let_w_circumflex", "lat_s_let_w_circumflex"],
-			"<^>!<!<+", ["lat_c_let_w_dot_below", "lat_s_let_w_dot_below"],
-			"<^>!<+", ["lat_c_let_w_diaeresis", "lat_s_let_w_diaeresis"],
-			"<^>!>+", ["lat_c_let_wynn", "lat_s_let_wynn"],
-			"<^>!<!>+", ["lat_c_let_w_anglicana", "lat_s_let_w_anglicana"],
-			">+", ["lat_c_let_w_grave", "lat_s_let_w_grave"]),
+				"<^>!", ["lat_c_let_w_dot_above", "lat_s_let_w_dot_above"],
+				"<^>!<!", ["lat_c_let_w_circumflex", "lat_s_let_w_circumflex"],
+				"<^>!<!<+", ["lat_c_let_w_dot_below", "lat_s_let_w_dot_below"],
+				"<^>!<+", ["lat_c_let_w_diaeresis", "lat_s_let_w_diaeresis"],
+				"<^>!>+", ["lat_c_let_wynn", "lat_s_let_wynn"],
+				"<^>!<!>+", ["lat_c_let_w_anglicana", "lat_s_let_w_anglicana"],
+				">+", ["lat_c_let_w_grave", "lat_s_let_w_grave"]),
 			"X", Map(
 				"<^>!", ["lat_c_let_x_dot_above", "lat_s_let_x_dot_above"],
 				"<^>!<+", ["lat_c_let_x_diaeresis", "lat_s_let_x_diaeresis"]),
 			"Y", Map("<!", ["lat_c_let_y_acute", "lat_s_let_y_acute"],
-			"<^>!", ["lat_c_let_y_dot_above", "lat_s_let_y_dot_above"],
-			"<^>!<!", ["lat_c_let_y_circumflex", "lat_s_let_y_circumflex"],
-			"<^>!<!<+", ["lat_c_let_y_stroke_short", "lat_s_let_y_stroke_short"],
-			"<^>!<!>+", ["lat_c_let_y_loop", "lat_s_let_y_loop"],
-			"<^>!>+", ["lat_c_let_y_macron", "lat_s_let_y_macron"],
-			"<^>!<+", ["lat_c_let_y_diaeresis", "lat_s_let_y_diaeresis"],
-			"<^>!<+>+", ["lat_c_let_y_tilde", "lat_s_let_y_tilde"],
-			">+", ["lat_c_let_y_grave", "lat_s_let_y_grave"]),
+				"<^>!", ["lat_c_let_y_dot_above", "lat_s_let_y_dot_above"],
+				"<^>!<!", ["lat_c_let_y_circumflex", "lat_s_let_y_circumflex"],
+				"<^>!<!<+", ["lat_c_let_y_stroke_short", "lat_s_let_y_stroke_short"],
+				"<^>!<!>+", ["lat_c_let_y_loop", "lat_s_let_y_loop"],
+				"<^>!>+", ["lat_c_let_y_macron", "lat_s_let_y_macron"],
+				"<^>!<+", ["lat_c_let_y_diaeresis", "lat_s_let_y_diaeresis"],
+				"<^>!<+>+", ["lat_c_let_y_tilde", "lat_s_let_y_tilde"],
+				">+", ["lat_c_let_y_grave", "lat_s_let_y_grave"]),
 			"Z", Map("<!", ["lat_c_let_z_acute", "lat_s_let_z_acute"],
-			"<^>!", ["lat_c_let_z_dot_above", "lat_s_let_z_dot_above"],
-			"<^>!<!", ["lat_c_let_z_circumflex", "lat_s_let_z_circumflex"],
-			"<^>!<!<+", ["lat_c_let_z_caron", "lat_s_let_z_caron"],
-			"<^>!>+", ["lat_c_let_z_ezh", "lat_s_let_z_ezh"],
-			"<^>!<+", ["lat_c_let_z_stroke_short", "lat_s_let_z_stroke_short"]),
+				"<^>!", ["lat_c_let_z_dot_above", "lat_s_let_z_dot_above"],
+				"<^>!<!", ["lat_c_let_z_circumflex", "lat_s_let_z_circumflex"],
+				"<^>!<!<+", ["lat_c_let_z_caron", "lat_s_let_z_caron"],
+				"<^>!>+", ["lat_c_let_z_ezh", "lat_s_let_z_ezh"],
+				"<^>!<+", ["lat_c_let_z_stroke_short", "lat_s_let_z_stroke_short"]),
 		)
 
 		SlotMapping := Map()

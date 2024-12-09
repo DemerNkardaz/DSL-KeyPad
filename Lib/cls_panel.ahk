@@ -187,7 +187,7 @@ Class Panel {
 
 			LV_Content := {
 				diacritics: ArrayMerge(
-					this.LV_insertGroup([
+					this.LV_InsertGroup([
 						;
 						{ type: "Group Activator", group: "Diacritics Primary", groupKey: Window LeftAlt " F1" },
 						;
@@ -199,7 +199,7 @@ Class Panel {
 					]),
 				),
 				spaces: ArrayMerge(
-					this.LV_insertGroup([
+					this.LV_InsertGroup([
 						;
 						{ type: "Group Activator", group: "Spaces", groupKey: Window LeftAlt " Space" },
 						;
@@ -213,7 +213,7 @@ Class Panel {
 					]),
 				),
 				smelting: ArrayMerge(
-					this.LV_insertGroup([
+					this.LV_InsertGroup([
 						;
 						{ type: "Recipe", group: "Latin Ligatures" },
 						;
@@ -241,7 +241,7 @@ Class Panel {
 					]),
 				),
 				fastkeys: ArrayMerge(
-					this.LV_insertGroup([
+					this.LV_InsertGroup([
 						;
 						{ type: "Fast Key", group: "Diacritics Fast Primary", groupKey: LeftControl LeftAlt },
 						;
@@ -291,7 +291,7 @@ Class Panel {
 					]),
 				),
 				scripts: ArrayMerge(
-					this.LV_insertGroup([
+					this.LV_InsertGroup([
 						;
 						{ type: "Alternative Layout", group: "Fake Futhark", groupKey: RightControl " 1" },
 						;
@@ -834,11 +834,11 @@ Class Panel {
 		}
 	}
 
-	static LV_insertGroup(options) {
+	static LV_InsertGroup(options) {
 		if Type(options) = "Array" {
 			outputArrays := []
 			for each in options {
-				ArrayMergeTo(outputArrays, this.LV_insertGroup(each))
+				ArrayMergeTo(outputArrays, this.LV_InsertGroup(each))
 			}
 
 			return outputArrays
@@ -849,7 +849,7 @@ Class Panel {
 			}
 
 			if !(options.hasOwnProp("type")) {
-				throw "Type is required for LV_insertGroup"
+				throw "Type is required for LV_InsertGroup"
 			}
 
 			languageCode := Language.Get()
@@ -872,13 +872,13 @@ Class Panel {
 
 						isFavorite := FavoriteChars.CheckVar(characterEntry)
 
-						if (options.hasOwnProp("blacklist") && options.blacklist.HasValue(characterEntry)) || !(value.hasOwnProp("groups")) ||
-						(value.hasOwnProp("groups") && !value.groups.HasValue(options.group)) ||
+						if (options.hasOwnProp("blacklist") && options.blacklist.HasValue(characterEntry)) ||
+						(!value.groups.HasValue(options.group)) ||
 						(options.type = "Group Activator" && !value.options.HasOwnProp("groupKey")) ||
-						(options.type = "Recipe" && (!value.HasOwnProp("recipe") || value.recipe.Length = 0)) ||
-						(options.type = "Fast Key" && (!value.options.HasOwnProp("fastKey") || StrLen(value.options.fastKey) = 0)) ||
-						(options.type = "Fast Key Special" && (!value.options.HasOwnProp("specialKey") || StrLen(value.options.specialKey) = 0)) ||
-						(options.type = "Alternative Layout" && (!value.options.HasOwnProp("altLayoutKey") || StrLen(value.options.altLayoutKey) = 0))
+						(options.type = "Recipe" && (value.recipe.Length = 0)) ||
+						(options.type = "Fast Key" && (!value.options.HasOwnProp("fastKey") || StrLen(value.options.fastKey) < 2)) ||
+						(options.type = "Fast Key Special" && (!value.options.HasOwnProp("specialKey") || StrLen(value.options.specialKey) < 2)) ||
+						(options.type = "Alternative Layout" && (!value.options.HasOwnProp("altLayoutKey") || StrLen(value.options.altLayoutKey) < 2))
 						{
 							continue
 						}
@@ -908,24 +908,15 @@ Class Panel {
 
 						characterBinding := ""
 
-						if options.type = "Recipe" {
-							if value.HasOwnProp("recipeAlt")
-								characterBinding := value.recipeAlt.ToString()
-							else if value.HasOwnProp("recipe")
-								characterBinding := value.recipe.ToString()
-							else
-								characterBinding := "N/A"
-						} else if options.type = "Alternative Layout" {
-							characterBinding := value.options.altLayoutKey
-						} else if options.type = "Fast Special" {
-							characterBinding := value.options.specialKey
-						} else if options.type = "Fast Key" {
-							characterBinding := value.options.fastKey
-						} else if options.type = "Group Activator" {
-							characterBinding := Util.FormatHotKey(value.options.groupKey)
-						} else {
-							characterBinding := "N/A"
-						}
+						bindings := Map(
+							"Recipe", value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : value.recipe.Length > 0 ? value.recipe.ToString() : "N/A",
+							"Alternative Layout", value.options.altLayoutKey,
+							"Fast Special", value.options.specialKey,
+							"Fast Key", value.options.fastKey,
+							"Group Activator", value.options.HasOwnProp("groupKey") && Util.FormatHotKey(value.options.groupKey),
+						)
+
+						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : "N/A"
 
 						intermediateMap.Set(value.index, [characterTitle, characterBinding, characterSymbol, Util.ExtractHex(value.unicode), characterEntry, options.hasOwnProp("combinationKey") ? options.combinationKey : options.hasOwnProp("groupKey") ? options.groupKey : ""])
 					}

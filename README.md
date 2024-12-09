@@ -1,18 +1,21 @@
-# DSL KeyPad \*αλφα, version in dev
+# DSL KeyPad
 
-<div align="right">
-
-<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_norse.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_glagolitic.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_turkic.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_permic.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_hungarian.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_gothic.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_italic.ico" alt="" width="100">
-<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_north_arabian.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_south_arabian.ico" alt="" width="100"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_phoenician.ico" alt="" width="100">
-
-<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_ipa.ico" alt="" width="62"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_math.ico" alt="" width="62"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_punctuation.ico" alt="" width="62"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_diacritics.ico" alt="" width="62"><img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_special.ico" alt="" width="62">
-
-</div>
+![Static Badge](<https://img.shields.io/badge/%F0%9F%94%96-%CE%AC%CE%BB%CF%86%CE%B1%20(dev)-yellow>) ![Static Badge](https://img.shields.io/badge/AHK-v2-yellow) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/DemerNkardaz/DSL-KeyPad?color=yellow)
 
 # Table of Contents [Содержание]
 
 - [Overview](#overview)
   - [Latin, Cyrillic Scripts & Other Character Sets](#latin-script)
+  - [Alternative Input Modes](#alternative-input-modes)
+  - [Important Functions](#important-functions)
+    - [Activation Groups](#activation-groups)
+    - [“Fast Keys”](#fast-keys)
+    - [“Forge”](#forge)
+    - [Input Modifiers](#modifiers)
+  - [Auxiliary Functions](#auxiliary-functions)
+  - [Interface](#interface)
+  - [Limitations](#limitations)
+  - [Installation](#installation)
 - [Обзор](#обзор)
   - [Латиница, Кириллица и прочие наборы символов](#латиница)
   - [Альтернативные режимы ввода](#альтернативные-режимы-ввода)
@@ -26,69 +29,9 @@
   - [Ограничения](#ограничения)
   - [Установка](#установка)
 
-# Overview
-
-This utility allows you to input a wide range of various symbols without the need to use “character maps” or other sources for copying. It includes diacritical marks (◌́◌̋◌̆◌̑◌̀◌̏◌̄◌̱), space/spacing variations (&#8198;<ins>&emsp;</ins> <ins>&ensp;</ins>&emsp13;<ins> </ins>&emsp14;<ins> </ins>&thinsp;<ins>&#8198;</ins>&#8198;) and dashes/hyphens (⸻, ⸺, —, –, ‐), quotation marks («Русские „Кавычки“», “English ‘Quotation Marks’”, „«Ghilimele» Românești”,「東アジアの『引用符』」), punctuation marks (…, ¡, ¿, ⁉, ⁈, ‼, ⁇, ‽, ⸘), ligatures (ꜲÆꜶꜸꜴꜼƢꝠꙖꙒ), letters (ĂÂǍɃḈðɆǶÞǷꝹѪѦЄҴ), currencies (₽¥₩€£₸₪), and special symbols (§′″°∞≠≈×−±⁑⁂†‡‰‱←↓↑→↺↻⮌⮏⮍⮎250⁄250), typically unavailable on a keyboard. You can view the full list of symbols in the *Panel*, which can be opened with <kbd>Win Alt Home</kbd>, or from the tray menu options.
-
-Note: use it on pair QWERTY‐ЙЦУКЕН of English & Russian layouts, compatibility with another not provided.
-
-## Input Methods
-
-- **Groups** — the primary method, covering diacritical marks, spaces, dashes/hyphens, quotation marks, and special symbols. You need to activate a group of symbols and then press the key corresponding to the desired character. For example, <kbd>Win Alt F1</kbd> activates the "Basic Diacritics Group", after which pressing “a” will input the acute accent [á] or “m” will input a macron [m̄]. There are eight groups in total: Diacritics (<kbd>F1</kbd>, <kbd>F2</kbd>, <kbd>F3</kbd>, <kbd>F6</kbd>), Special Symbols (<kbd>F7</kbd>), Spaces (<kbd>Space</kbd>), Dashes (<kbd>-</kbd>), and Quotes (<kbd>"</kbd>).
-
-- **Fast Keys** — uses <kbd>LCtrl LAlt</kbd>, <kbd>LAlt</kbd>, or <kbd>RAlt</kbd> as “initial” keys for quick access to chosen symbols. It includes more symbols than the “Groups”.
-
-  Diacritical marks are mostly accessed through <kbd>LCtrl LAlt</kbd> combinations. For example, the same acute accent and macron can be entered using <kbd>LCtrl LAlt a</kbd> and <kbd>LCtrl LAlt m</kbd>, respectively.
-
-  <kbd>RAlt</kbd> combinations are primarily used for letters and special symbols. For example, <kbd>RAlt E</kbd> on an English layout will type “Ĕ”, and on a Russian layout “Ѫ”. The combination <kbd>RAlt A</kbd> types “Ă” or “Ѳ” depending on the layout. Additionally, there are a few "simple combinations" — <kbd>NumpadSub</kbd> will insert the minus sign (−) instead of the hyphen-minus (-), and <kbd>NumpadAdd NumpadSub</kbd> will insert the plus-minus symbol (±).
-
-  **Note:** This function is disabled by default and can be enabled with **RAlt Home**.
-
-- **“Forge”** — converts a sequence of characters (“recipe”) into another character, allowing the creation of ligatures (“AE” → “Æ”, “ІѪ” → “Ѭ”), accented letters (“Ă” *two characters* → “Ă” _one character_), or even letters (“ПС” → “Ѱ”, “КС” → “Ѯ”, “ДЖ” → “Џ”) and other symbols (“+−” → “±”, “\*\*\*” → “⁂”, “YEN” → “¥”, “°C” *two characters* → “℃” _one character_).
-
-  The Forge has four ways to use it:
-
-  - Through the pop-up window, <kbd>Win Alt L</kbd>.
-  - In text via recipe selection, <kbd>RShift L</kbd>.
-  - In text, by placing the caret cursor after the recipe, <kbd>RShift Backspace</kbd>.
-  - In “Compose” mode — allows you to "fuse" characters during typing, <kbd>RAlt×2</kbd>. It immediately inserts the first exact match for the entered sequence. There is an option to enable/disable waiting with <kbd>PauseBreak</kbd> (as some recipes start the same way), so “Compose” will not immediately insert the first match.
-
-## Alternative Layouts
-
-<kbd>RCtrl 1</kbd> switches input from Russian/English to Glagolitic/Germanic‐Norse, Anglo‐Saxon runes. Pressing <kbd>А</kbd><kbd>Б</kbd> or <kbd>RAlt Ф</kbd>, for example, will input Ⰰ, Ⰱ, or Ⱚ, while pressing <kbd>A</kbd>, <kbd>W</kbd>, <kbd>F</kbd> will input ᚨ, ᚹ, ᚠ.
-
-<kbd>RCtrl 2</kbd> similarly activates the input of Old Turkic and Old Permic scripts, “𐱃𐰞𐰤𐰪𐰅𐰺” “<img src="Images/old_permic.png" alt="Old Permic" width="60">”. Old Permic requires the [Noto Sans Old Permic](https://fonts.google.com/noto/specimen/Noto+Sans+Old+Permic) font.
-
-<kbd>RCtrl 4</kbd> activates the input of Gothic script, “𐌱𐌴𐍂𐌺𐌰𐌹𐌽𐌰 𐍉𐌸𐌰𐌻𐌰 𐍅𐌿𐌽𐌾𐌰 𐍄𐍅𐌶”.
-
-## Auxiliary Features
-
-- Insert a character by Unicode ID or Alt-code, <kbd>Win Alt <kbd>U</kbd>/<kbd>A</kbd></kbd>.
-- Insert a character by its internal tag in the utility, <kbd>Win Alt F</kbd>.
-- Convert numbers into Roman Numerals (“17489” → “ↂↁⅯⅯⅭⅭⅭⅭⅬⅩⅩⅩⅨ”) or superscript/subscript digits, <kbd>Win RAlt <kbd>3</kbd>/<kbd>1</kbd>/<kbd>2</kbd></kbd>.
-- Switch between input methods (Character → HTML Code/Mnemonic → LaTeX → Character), <kbd>RAlt RShift Home</kbd>. If you switch input from "Character" to "HTML", the corresponding code will be entered, for example, instead of quotes “”, _\&ldquo;\&rdquo;_ will be entered, or instead of Æ → *\&AElig;*.
-
-  **Note:** LaTeX codes are not available for all characters, and some codes are from external packages (which are listed above the LaTeX code in the Panel).
-
-- Text Processors:
-
-  - “Quotationizing” — wraps selected text in quotation marks (depending on the active layout): Gaius Tiberius, Executioner of the Gauls → “Gaius Tiberius, Executioner of the Gauls”, or Gaius Tiberius, “Executioner of the Gauls” → “Gaius Tiberius, ‘Executioner of the Gauls’”.
-
-  - “GREP”-Replacements — replaces regular spaces in the selected text with their variants, for example, non-breaking spaces after one/two-letter words (а, в, не) and some three-letter words (для), or in numbers (1 000, 10 000, 100 000...); thin spaces in initials (I. O. Surname); and so on.
-
-    **Note:** Based on typography rules for Russian.
-
-  - Paragraph indentation — adds an Em-space at the beginning of paragraphs to simulate first-line indentation. This is especially useful for places where you cannot create paragraph indentation in a “civilized” way. Additionally, in paragraphs starting with an em-dash (russian dialogue paragraphs), it replaces the space after the dash with a en-space.
-
-## Limitations
-
-The utility can be used _(reliably)_ only on English or Russian layouts (including [the “Typography Layout”](https://ilyabirman.net/typography-layout/)), as it is based specifically on their keys for combinations. The use of “Fast Key” combinations outside these layouts is ignored, but “Groups” remain available.
-
-## Installation
-
-To use “DSL KeyPad”, simply [download the .ahk file](https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/Install.KeyPad.ahk), run it and choose where utility will be installed.
-
 # Обзор
+
+<img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
 
 «DSL KeyPad» — утилита на языке [AutoHotkey 2.0](https://www.autohotkey.com/) для ввода широкого спектра символов посредством горячих клавиш и вспомогательных функций. Основное направление — расширение возможностей для ввода латиницы и кириллицы, что позволяет писать на множестве языков без использования отдельных раскладок для каждого из языков.
 

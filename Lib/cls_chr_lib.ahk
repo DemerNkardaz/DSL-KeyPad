@@ -36,15 +36,13 @@ class ChrLib {
 		if this.entries.HasOwnProp(entryName) {
 			entry := this.GetEntry(entryName)
 
-			if entry.HasOwnProp("groups") {
-				for group in entry.groups {
-					if this.entryGroups.Has(group) && this.entryGroups.Get(group).HasValue(entryName) {
-						intermediateArray := this.entryGroups.Get(group)
-						intermediateArray.RemoveValue(entryName)
+			for group in entry.groups {
+				if this.entryGroups.Has(group) && this.entryGroups.Get(group).HasValue(entryName) {
+					intermediateArray := this.entryGroups.Get(group)
+					intermediateArray.RemoveValue(entryName)
 
-						this.entryGroups.Delete(group)
-						this.entryGroups.Set(group, intermediateArray)
-					}
+					this.entryGroups.Delete(group)
+					this.entryGroups.Set(group, intermediateArray)
 				}
 			}
 
@@ -178,8 +176,8 @@ class ChrLib {
 	static Count(groupRestrict?) {
 		count := 0
 		for entry, value in this.entries.OwnProps() {
-			if !IsSet(groupRestrict) || (IsSet(groupRestrict) && value.HasOwnProp("groups") && value.groups.HasValue(groupRestrict)) {
-				if !(value.HasOwnProp("options") && value.options.HasOwnProp("noCalc") && value.options.noCalc) {
+			if !IsSet(groupRestrict) || (IsSet(groupRestrict) && value.groups.HasValue(groupRestrict)) {
+				if !(value.options.noCalc) {
 					count++
 				}
 
@@ -238,18 +236,29 @@ class ChrLib {
 			}
 		}
 
-		if !refinedEntry.HasOwnProp("options") {
-			refinedEntry.options := {}
-		}
+		if !refinedEntry.HasOwnProp("options")
+			refinedEntry.options := { noCalc: False }
+		else if !refinedEntry.options.HasOwnProp("noCalc")
+			refinedEntry.options.noCalc := False
+
+		if !refinedEntry.HasOwnProp("alterations")
+			refinedEntry.alterations := {}
+
+		if !refinedEntry.HasOwnProp("groups")
+			refinedEntry.groups := ["Default Group"]
+
+		if !refinedEntry.HasOwnProp("recipe")
+			refinedEntry.recipe := []
+		if !refinedEntry.HasOwnProp("recipeAlt")
+			refinedEntry.recipeAlt := []
+
 
 		for group in ["fastKey", "specialKey", "altLayoutKey"] {
 			if refinedEntry.options.HasOwnProp(group) {
 				refinedEntry.options.%group% := Util.ReplaceModifierKeys(refinedEntry.options.%group%)
+			} else {
+				refinedEntry.options.%group% := ""
 			}
-		}
-
-		if !refinedEntry.HasOwnProp("alterations") {
-			refinedEntry.alterations := {}
 		}
 
 		if refinedEntry.HasOwnProp("symbol") {
@@ -287,17 +296,15 @@ class ChrLib {
 			refinedEntry.symbol.set := characterSequence
 		}
 
-		if refinedEntry.HasOwnProp("groups") {
-			for group in refinedEntry.groups {
-				if !this.entryGroups.Has(group)
-					this.entryGroups.Set(group, [])
+		for group in refinedEntry.groups {
+			if !this.entryGroups.Has(group)
+				this.entryGroups.Set(group, [])
 
-				if !this.entryGroups.Get(group).HasValue(entryName)
-					this.entryGroups[group].Push(entryName)
-			}
+			if !this.entryGroups.Get(group).HasValue(entryName)
+				this.entryGroups[group].Push(entryName)
 		}
 
-		if refinedEntry.HasOwnProp("recipe") {
+		if refinedEntry.recipe.Length > 0 {
 			for recipe in refinedEntry.recipe {
 				if !this.entryRecipes.Has(recipe) {
 					this.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.hasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index })

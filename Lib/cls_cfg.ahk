@@ -51,6 +51,7 @@ Class Cfg {
 		],
 		"ServiceFields", [
 			"Prev_Layout", "",
+			"App", "Stable",
 		],
 	]
 
@@ -211,7 +212,7 @@ Class Cfg {
 
 		RecipesConstructor() {
 			this.EditorSubGUIs.recipesTitle := App.winTitle " — " Locale.Read("gui_recipes"),
-			currentRecipe := []
+				currentRecipe := []
 
 			screenWidth := A_ScreenWidth
 			screenHeight := A_ScreenHeight

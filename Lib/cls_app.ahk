@@ -6,8 +6,13 @@ Class App {
 	static versionText := this.formatVersion(this.version)
 	static winTitle := this.title " — " this.versionText
 
+	static gitBranches := Map(
+		"Stable", "main",
+		"Dev", "dev",
+	)
+
 	static git := {
-		repo: "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/main/",
+		repo: "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/" this.gitBranches[Cfg.Get("App", "ServiceFields", "Stable")] "/",
 		;: "https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk",
 	}
 
