@@ -6,16 +6,6 @@ Class App {
 	static versionText := this.formatVersion(this.version)
 	static winTitle := this.title " — " this.versionText
 
-	static gitBranches := Map(
-		"Stable", "main",
-		"Dev", "dev",
-	)
-
-	static git := {
-		repo: "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/" this.gitBranches[Cfg.Get("App", "ServiceFields", "Stable")] "/",
-		;: "https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ahk",
-	}
-
 	static paths := {
 		dir: A_ScriptDir,
 		lib: A_ScriptDir "\Lib",
@@ -28,8 +18,14 @@ Class App {
 		sid: PowerShell_UserSID(),
 	}
 
+	static gitBranches := Map(
+		"Stable", "main",
+		"Dev", "dev",
+	)
 
 	static __New() {
+		this.git := {}
+		this.git.repo := "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/" this.gitBranches.Get("Stable") "/"
 		this.git.src := this.git.repo "DSLKeyPad.ahk"
 		this.git.files := this.git.repo "UtilityFiles/"
 

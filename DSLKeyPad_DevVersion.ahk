@@ -4704,7 +4704,7 @@ HandleFastKey(combo := "", characterNames*) {
 
 		for _, character in characterNames {
 			if ChrLib.entries.HasOwnProp(character) {
-				output .= ChrLib.Get(character)
+				output .= ChrLib.Get(character, True)
 			} else {
 				output .= GetCharacterSequence(character)
 			}

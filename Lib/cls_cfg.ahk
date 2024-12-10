@@ -3,7 +3,7 @@
 */
 
 Class Cfg {
-	static ini := App.paths.dir "\DSLKeyPad.configtest.ini"
+
 	static sections := [
 		"Settings", [
 			"Character_Web_Resource", "SymblCC",
@@ -54,6 +54,8 @@ Class Cfg {
 			"App", "Stable",
 		],
 	]
+
+	static ini := App.paths.dir "\DSLKeyPad.configtest.ini"
 
 	static __New() {
 		this.Init()
