@@ -5,7 +5,7 @@ class ChrLib {
 	static entryRecipes := Map()
 	static lastIndexAdded := -1
 
-	static AddEntry(entryName, entry, indexID?) {
+	static AddEntry(entryName, entry) {
 
 		this.entries.%entryName% := {}
 		for key, value in entry.OwnProps() {
@@ -89,6 +89,9 @@ class ChrLib {
 		} else {
 			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(AlterationActiveName) {
 				output .= Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
+
+			} else if (extraRules && getMode != "Unicode") && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(getMode) {
+				output .= Util.UnicodeToChar(entry.alterations.%getMode%)
 
 			} else if entry.HasOwnProp("sequence") {
 				output .= Util.UnicodeToChar(entry.sequence)
@@ -317,6 +320,7 @@ class ChrLib {
 		this.entries.%entryName% := refinedEntry
 	}
 }
+; TODO Выделить Tags записей знаков в отдельный ini файл
 
 /*
 ChrLib.AddEntry(
