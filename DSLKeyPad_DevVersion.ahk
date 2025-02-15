@@ -5339,6 +5339,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_omega", "cyr_s_let_omega"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["J"]),
 			["cyr_c_let_o_diaeresis", "cyr_s_let_o_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["J"]),
 			["cyr_c_let_semiyeri", "cyr_s_let_semiyeri"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["M"]),
+			["cyr_c_let_tje", "cyr_s_let_tje"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["N"]),
 			["cyr_c_let_t_descender", "cyr_s_let_t_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["N"]),
 			["cyr_c_let_lje", "cyr_s_let_lje"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["K"]),
 			["cyr_c_let_l_descender", "cyr_s_let_l_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["K"]),
