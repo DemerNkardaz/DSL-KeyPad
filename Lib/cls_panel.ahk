@@ -91,17 +91,17 @@ Class Panel {
 			"func_label_alterations_monospace",
 			"func_label_alterations_small_capital",
 		],
-		"func_label_scripts", [
-			"func_label_glagolitic_futhark",
-			"func_label_old_permic_old_turkic",
-			"func_label_old_hungarian",
-			"func_label_gothic",
-			"func_label_old_italic",
-			"func_label_phoenician",
-			"func_label_ancient_south_arabian",
-			"func_label_ipa",
-			"func_label_maths",
-		]),
+			"func_label_scripts", [
+				"func_label_glagolitic_futhark",
+				"func_label_old_permic_old_turkic",
+				"func_label_old_hungarian",
+				"func_label_gothic",
+				"func_label_old_italic",
+				"func_label_phoenician",
+				"func_label_ancient_south_arabian",
+				"func_label_ipa",
+				"func_label_maths",
+			]),
 		"func_label_input_toggle",
 		"func_label_layout_toggle",
 		"func_label_notifications",
@@ -708,8 +708,8 @@ Class Panel {
 			characterTitle := ""
 
 			if options.HasOwnProp("type") && options.type = "Alternative Layout" &&
-			(value.options.HasOwnProp("layoutTitlesAlt") && value.options.layoutTitlesAlt) &&
-			Locale.Read(characterEntry "_layout_alt", "chars", True, &titleText) {
+				(value.options.HasOwnProp("layoutTitlesAlt") && value.options.layoutTitlesAlt) &&
+				Locale.Read(characterEntry "_layout_alt", "chars", True, &titleText) {
 				characterTitle := titleText
 
 			} else if (value.options.HasOwnProp("titlesAlt") && value.options.titlesAlt) && Locale.Read(characterEntry "_alt", "chars", True, &titleText) {
@@ -805,7 +805,7 @@ Class Panel {
 				;IsFavorite := (ItemText ~= "\Q" Chr(0x2605))
 				IsFavorite := InStr(ItemText, Chr(0x2605))
 				IsMatch := InStr(ItemText, filterText)
-				|| (IsFavorite && RegExMatch(filterText, "^(изб|fav|\*)"))
+					|| (IsFavorite && RegExMatch(filterText, "^(изб|fav|\*)"))
 
 				if ItemText = "" {
 					LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
@@ -873,12 +873,12 @@ Class Panel {
 						isFavorite := FavoriteChars.CheckVar(characterEntry)
 
 						if (options.hasOwnProp("blacklist") && options.blacklist.HasValue(characterEntry)) ||
-						(!value.groups.HasValue(options.group)) ||
-						(options.type = "Group Activator" && !value.options.HasOwnProp("groupKey")) ||
-						(options.type = "Recipe" && (value.recipe.Length = 0)) ||
-						(options.type = "Fast Key" && (!value.options.HasOwnProp("fastKey") || StrLen(value.options.fastKey) < 2)) ||
-						(options.type = "Fast Key Special" && (!value.options.HasOwnProp("specialKey") || StrLen(value.options.specialKey) < 2)) ||
-						(options.type = "Alternative Layout" && (!value.options.HasOwnProp("altLayoutKey") || StrLen(value.options.altLayoutKey) < 2))
+							(!value.groups.HasValue(options.group)) ||
+							(options.type = "Group Activator" && !value.options.HasOwnProp("groupKey")) ||
+							(options.type = "Recipe" && (value.recipe.Length = 0)) ||
+							(options.type = "Fast Key" && (!value.options.HasOwnProp("fastKey") || StrLen(value.options.fastKey) < 2)) ||
+							(options.type = "Fast Key Special" && (!value.options.HasOwnProp("specialKey") || StrLen(value.options.specialKey) < 2)) ||
+							(options.type = "Alternative Layout" && (!value.options.HasOwnProp("altLayoutKey") || StrLen(value.options.altLayoutKey) < 2))
 						{
 							continue
 						}

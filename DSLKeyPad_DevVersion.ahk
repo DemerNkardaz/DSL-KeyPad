@@ -1409,7 +1409,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			characterSymbol := HasProp(value, "symbol") ? value.symbol : ""
 			characterModifier :=
 				(HasProp(value, "modifier") && (InsertingOption = "Fast Special" || InsertingOption = "Fast Keys")) ? value.modifier :
-					HasProp(value, "defaultModifier") ? value.defaultModifier : ""
+				HasProp(value, "defaultModifier") ? value.defaultModifier : ""
 			characterBinding := ""
 
 			if (InsertingOption = "Recipes") {
@@ -2067,7 +2067,7 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 					if (keyPressed == key) {
 						if InputMode = "HTML" && HasProp(value, "html") {
 							(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? SendText(value.%ModifiedCharsType%HTML) :
-								SendText(characterEntity)
+							SendText(characterEntity)
 						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							SendText(IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX)
 						}
@@ -3475,11 +3475,11 @@ Constructor() {
 		AddSeparator := (groupName = "Diacritics Fast Primary" || groupName = "Latin Ligatures") ? False : True
 		GroupHotKey := (groupName = "Diacritics Fast Primary") ? LeftControl LeftAlt
 			: (groupName = "Special Fast Left") ? LeftAlt
-				: (groupName = "Special Fast Secondary") ? RightAlt
-					: (groupName = "Spaces Right Shift") ? RightShift
-						: (groupName = "Spaces Left Shift") ? LeftShift
-							: (groupName = "Special Fast") ? Locale.Read("symbol_special_key")
-								: ""
+			: (groupName = "Special Fast Secondary") ? RightAlt
+			: (groupName = "Spaces Right Shift") ? RightShift
+			: (groupName = "Spaces Left Shift") ? LeftShift
+			: (groupName = "Special Fast") ? Locale.Read("symbol_special_key")
+			: ""
 
 		BlackList := groupName = "Spaces" ? ["emsp13", "emsp14", "emsp16", "narrow_no_break_space"] : []
 		FastSpecial := groupName = "Special Fast" ? True : False
@@ -5352,7 +5352,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_g_stroke_short", "cyr_s_let_g_stroke_short"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["U"]),
 			["cyr_c_let_g_descender", "cyr_s_let_g_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["U"]),
 			["cyr_c_let_m_tail", "cyr_s_let_m_tail"], MapMerge(GetModifiers("<^>!<!>+"), KeySeqSlot["V"]),
-			["cyr_c_let_dzelo", "cyr_s_let_dzelo"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["P"]),
+			["cyr_c_let_dze", "cyr_s_let_dze"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["P"]),
+			["cyr_c_let_zemlya", "cyr_s_let_zemlya"], MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["P"]),
 			["cyr_c_let_z_diaeresis", "cyr_s_let_z_diaeresis"], MapMerge(GetModifiers("<^>!<+"), KeySeqSlot["P"]),
 			["cyr_c_let_z_descender", "cyr_s_let_z_descender"], MapMerge(GetModifiers("<^>!<!"), KeySeqSlot["P"]),
 			["cyr_c_let_yi", "cyr_s_let_yi"], MapMerge(GetModifiers("<^>!"), KeySeqSlot["Q"]),
@@ -5861,8 +5862,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		if CyrillicLayout = "ЙІУКЕН (1907)" {
 			MapPush(Slots,
 				LatinLayout = "Dvorak" ? "," : "W", ["cyr_c_let_i_decimal", "cyr_s_let_i_decimal"],
-				LatinLayout = "Dvorak" ? "J" : "C", ["cyr_c_let_yat", "cyr_s_let_yat"]
-			)
+				LatinLayout = "Dvorak" ? "J" : "C", ["cyr_c_let_yat", "cyr_s_let_yat"])
 		}
 
 		SlotMapping := Map(
@@ -6863,7 +6863,7 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle,
 	Muting := Mute ? " Mute" : ""
 	Ico := MessageIcon == "Info" ? "Iconi" :
 		MessageIcon == "Warning" ? "Icon!" :
-			MessageIcon == "Error" ? "Iconx" : 0x0
+		MessageIcon == "Error" ? "Iconx" : 0x0
 	TrayTip(NoReadLocale ? MessagePost : Locale.Read(MessagePost), MessageTitle, Ico . Muting)
 
 }
