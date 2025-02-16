@@ -34,6 +34,7 @@ Class Panel {
 			keyPreview: "x685 y320 w128 h24 readonly Center -VScroll -HScroll",
 			keyPreviewSet: "x685 y301 w128 h24 BackgroundTrans Right",
 			keyPreviewSetText: "",
+			legendButton: "x815 y79 h24 w24",
 		},
 		commandsInfoBox: {
 			body: "vCommandGroup x300 y36 w548 h517",
@@ -578,6 +579,7 @@ Class Panel {
 			keyPreviewTitle: panelWindow.AddText(this.UISets.infoBox.keyPreviewTitle, options.previewType = "Recipe" ? Locale.Read("col_recipe") : Locale.Read("col_key")).SetFont("s9"),
 			keyPreviewSet: panelWindow.AddText("v" options.prefix "KeyPreviewSet " this.UISets.infoBox.keyPreviewSet, this.UISets.infoBox.keyPreviewSetText).SetFont("s12"),
 			keyPreview: panelWindow.AddEdit("v" options.prefix "KeyPreview " this.UISets.infoBox.keyPreview, "N/A"),
+			legendButton: panelWindow.AddButton("v" options.prefix "LegendButton " this.UISets.infoBox.legendButton, Chr(0x1F4D6)),
 		}
 
 		GroupBoxOptions.preview.SetFont(this.UISets.infoFonts.previewSize, this.UISets.infoFonts.fontFace["serif"].name)
@@ -589,6 +591,8 @@ Class Panel {
 		GroupBoxOptions.tags.SetFont("s9")
 		GroupBoxOptions.alert.SetFont("s9")
 		GroupBoxOptions.keyPreview.SetFont("s12")
+		GroupBoxOptions.legendButton.SetFont("s11")
+		GroupBoxOptions.legendButton.Enabled := False
 
 
 		return
@@ -698,6 +702,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreview"].Text := "N/A"
 			this.PanelGUI[options.prefix "KeyPreview"].SetFont("s12")
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := ""
+			this.PanelGUI[options.prefix "LegendButton"].Enabled := False
 
 			return
 		} else {
@@ -779,6 +784,11 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := StrLen(characterCombinationKey) < 10 ? characterCombinationKey : ""
 			this.PanelGUI[options.prefix "KeyPreview"].SetFont((StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 12 && StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) < 18) ? "s10" : (StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 19) ? "s9" : "s12")
 
+			if value.options.HasOwnProp("legend") && StrLen(value.options.legend) > 1 {
+				this.PanelGUI[options.prefix "LegendButton"].Enabled := True
+			} else {
+				this.PanelGUI[options.prefix "LegendButton"].Enabled := False
+			}
 		}
 
 	}
