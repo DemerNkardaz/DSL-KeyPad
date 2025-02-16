@@ -160,11 +160,19 @@ class ChrLib {
 	static MakeRecipe(recipes*) {
 		output := []
 		for recipe in recipes {
+			if InStr(recipe, "${") {
+				matches := []
+				while RegExMatch(recipe, "\${(.*?)}", &match) {
+					matches.Push(match[1])
+					recipe := RegExReplace(recipe, "\${" match[1] "}", this.Get(match[1]))
+				}
+			}
 			output.Push(recipe)
 		}
 
 		return output
 	}
+
 
 	static GetRecipe(entryName, formatted := False) {
 		output := []
