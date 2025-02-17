@@ -208,4 +208,29 @@ Class Util {
 		}
 	}
 
+	static INIToObj(filePath) {
+		obj := {}
+		content := FileRead(filePath ".ini", "UTF-8")
+		lines := StrSplit(content, "`n", "`r`n")
+
+		currentSection := ""
+
+		for line in lines {
+			line := Trim(line)
+			if (line = "" or SubStr(line, 1, 1) = ";")
+				continue
+
+			if (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]") {
+				currentSection := SubStr(line, 2, -1)
+				obj.%currentSection% := {}
+			} else if (currentSection != "" && InStr(line, "=")) {
+				parts := StrSplit(line, "=", "`t ")
+				key := Trim(parts[1])
+				value := Trim(parts[2])
+				obj.%currentSection%.%key% := value
+			}
+		}
+
+		return obj
+	}
 }

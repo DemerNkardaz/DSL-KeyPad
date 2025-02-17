@@ -14855,6 +14855,27 @@ RegLib() {
 			groups: ["Special Characters", "Special Fast Secondary"],
 			options: { fastKey: "<+ [" Chr(0x2192) "]" },
 		},
+		"asterisk_low", {
+			unicode: "{U+204E}",
+			tags: ["low asterisk", "нижний астериск"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["a", "ф"], fastKey: "<+ [Num*]" },
+			recipe: ["*"],
+		},
+		"asterisk_two", {
+			unicode: "{U+2051}",
+			tags: ["two asterisks", "два астериска"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["A", "Ф"], fastKey: "[Num*]" },
+			recipe: ["**", "2*"],
+		},
+		"asterism", {
+			unicode: "{U+2042}",
+			tags: ["asterism", "астеризм"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: CtrlA, fastKey: ">+ [Num*]" },
+			recipe: ["***", "3*"],
+		},
 		"dotted_circle", {
 			unicode: "{U+25CC}",
 			tags: ["пунктирный круг", "dotted circle"],
@@ -14975,6 +14996,17 @@ RegLib() {
 			groups: ["Smelting Special", "Special Fast RShift"],
 			options: { fastKey: "c* [1]" },
 			recipe: (*) => this.MakeRecipe("${arrow_down_ushaped}${interrobang}", "${arrow_down_ushaped}!+?"),
+		},
+		;
+		;
+		; * Germanic Runes
+		;
+		;
+		"futhark_odal", {
+			unicode: "{U+16DF}",
+			tags: ["старший футарк одал", "elder futhark othala", "futhork edel", "elder futhark ōþala", "futhork ēðel"],
+			groups: ["Futhark Runes"],
+			options: { titlesAlt: True, altLayoutKey: "[O]", legend: "NorseRunes\othala" },
 		},
 		;
 		;

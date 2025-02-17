@@ -142,6 +142,16 @@ Class Keyboard extends Language {
 
 Class Locale extends Language {
 
+	static HandleString(str) {
+		str := StrReplace(str, "\R2", "`r`n`r`n", True)
+		str := StrReplace(str, "\R", "`r`n", True)
+		str := StrReplace(str, "\r", "`r", True)
+		str := StrReplace(str, "\n", "`n")
+		str := StrReplace(str, "\t", "`t")
+
+		return str
+	}
+
 	static Read(EntryName, Prefix := "", validate := False, &output?) {
 		Section := Prefix != "" ? Prefix . "_" . Language.Get() : Language.Get()
 		Intermediate := IniRead(this.locales, Section, EntryName, "")
@@ -179,8 +189,8 @@ Class Locale extends Language {
 		}
 
 
-		Intermediate := StrReplace(Intermediate, "\n", "`n")
-		Intermediate := StrReplace(Intermediate, "\t", "`t")
+		Intermediate := this.HandleString(Intermediate)
+
 		if validate {
 			output := Intermediate
 			return StrLen(Intermediate) > 0

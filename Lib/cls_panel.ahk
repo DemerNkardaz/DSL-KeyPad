@@ -55,9 +55,9 @@ Class Panel {
 		},
 		infoFonts: {
 			preview: "Noto Serif",
-			previewSize: "s70",
-			previewSmaller: "s40",
-			titleSize: "s14",
+			previewSize: 70,
+			previewSmaller: 40,
+			titleSize: 14,
 			fontFace: Map(
 				"serif", {
 					name: "Noto Serif",
@@ -582,8 +582,8 @@ Class Panel {
 			legendButton: panelWindow.AddButton("v" options.prefix "LegendButton " this.UISets.infoBox.legendButton, Chr(0x1F4D6)),
 		}
 
-		GroupBoxOptions.preview.SetFont(this.UISets.infoFonts.previewSize, this.UISets.infoFonts.fontFace["serif"].name)
-		GroupBoxOptions.title.SetFont(this.UISets.infoFonts.titleSize, this.UISets.infoFonts.fontFace["serif"].name)
+		GroupBoxOptions.preview.SetFont("s" this.UISets.infoFonts.previewSize, this.UISets.infoFonts.fontFace["serif"].name)
+		GroupBoxOptions.title.SetFont("s" this.UISets.infoFonts.titleSize, this.UISets.infoFonts.fontFace["serif"].name)
 		GroupBoxOptions.LaTeX.SetFont("s12")
 		GroupBoxOptions.alt.SetFont("s12")
 		GroupBoxOptions.unicode.SetFont("s12")
@@ -694,7 +694,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
 			this.PanelGUI[options.prefix "Alert"].Text := ""
 
-			this.PanelGUI[options.prefix "Symbol"].SetFont(this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
+			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
 			this.PanelGUI[options.prefix "Unicode"].SetFont("s12")
 			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont("s12")
@@ -703,6 +703,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreview"].SetFont("s12")
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := ""
 			this.PanelGUI[options.prefix "LegendButton"].Enabled := False
+			this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => "")
 
 			return
 		} else {
@@ -739,8 +740,8 @@ Class Panel {
 			this.PanelGUI[options.prefix "LaTeXPackage"].Text := value.HasOwnProp("LaTeXPackage") ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
 
 			this.PanelGUI[options.prefix "Symbol"].SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
-			this.PanelGUI[options.prefix "Symbol"].SetFont(this.UISets.infoFonts.previewSize " norm cDefault")
-			this.PanelGUI[options.prefix "Symbol"].SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? this.UISets.infoFonts.previewSmaller " norm cDefault" : this.UISets.infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.UISets.infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" this.UISets.infoFonts.previewSmaller " norm cDefault" : "s" this.UISets.infoFonts.previewSize " norm cDefault")
 
 			this.PanelGUI[options.prefix "Unicode"].SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) ? "s9" : "s12")
 			this.PanelGUI[options.prefix "HTML"].SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 14) ? "s9" : "s12")
@@ -786,8 +787,10 @@ Class Panel {
 
 			if value.options.HasOwnProp("legend") && StrLen(value.options.legend) > 1 {
 				this.PanelGUI[options.prefix "LegendButton"].Enabled := True
+				this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => ChrLegend({ entry: characterEntry }))
 			} else {
 				this.PanelGUI[options.prefix "LegendButton"].Enabled := False
+				this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => "")
 			}
 		}
 
