@@ -9,14 +9,18 @@ Class ChrLegend {
 			topbarEntry: "x100 y10 w320 h24 readonly -VScroll -HScroll",
 			topbarUnicode: "x425 y10 w75 h24 readonly Center -VScroll -HScroll",
 			topbarHTML: "x505 y10 w75 h24 readonly Center -VScroll -HScroll",
-			mainTitle: "x35 y75 w400 h42 readonly -VScroll -HScroll -E0x200",
-			subTitlesLabel: "x45 y135 w75 h20 BackgroundTrans",
-			subTitles: "x120 y135 w400 h20 readonly -VScroll -HScroll -E0x200",
-			IPALabel: "x45 y155 w75 h20 BackgroundTrans",
-			IPA: "x120 y155 w400 h20 readonly -VScroll -HScroll -E0x200",
-			transcriptionLabel: "x45 y175 w75 h20 BackgroundTrans",
-			transcription: "x120 y175 w400 h20 readonly -VScroll -HScroll -E0x200",
-			description: "x45 y205 w550 h320 R20 readonly +Multi +Wrap -HScroll -E0x200",
+			mainTitle: "x35 y75 w450 h42 readonly -VScroll -HScroll -E0x200",
+			unicodeLabel: "x45 y135 w75 h20 BackgroundTrans",
+			unicode: "x120 y135 w450 h20 readonly -VScroll -HScroll -E0x200",
+			subTitlesLabel: "x45 y155 w75 h20 BackgroundTrans",
+			subTitles: "x120 y155 w450 h20 readonly -VScroll -HScroll -E0x200",
+			IPALabel: "x45 y175 w75 h20 BackgroundTrans",
+			IPA: "x120 y175 w450 h20 readonly -VScroll -HScroll -E0x200",
+			transcriptionLabel: "x45 y195 w75 h20 BackgroundTrans",
+			transcription: "x120 y195 w450 h20 readonly -VScroll -HScroll -E0x200",
+			languagesLabel: "x45 y215 w75 h20 BackgroundTrans",
+			languages: "x120 y215 w450 h20 readonly -VScroll -HScroll -E0x200",
+			description: "x45 y255 w550 h320 R20 readonly +Multi +Wrap -HScroll -E0x200",
 			authorLabel: "x45 y550 w75 h20 BackgroundTrans",
 			author: "x120 y550 w600 h20 readonly -VScroll -HScroll -E0x200",
 		},
@@ -78,12 +82,16 @@ Class ChrLegend {
 				groupFrame: panelWindow.Add("GroupBox", this.UISets.infoBox.previewFrame),
 				preview: panelWindow.AddEdit("vLegendSymbol " this.UISets.infoBox.preview),
 				mainTitle: panelWindow.AddEdit("vLegendTitle " this.UISets.infoBox.mainTitle),
+				unicodeLabel: panelWindow.AddText("vLegendUnicodeLabel " this.UISets.infoBox.unicodeLabel),
+				unicode: panelWindow.AddEdit("vLegendUnicodeName " this.UISets.infoBox.unicode),
 				subTitlesLabel: panelWindow.AddText("vLegendSubTitlesLabel " this.UISets.infoBox.subTitlesLabel),
 				subTitles: panelWindow.AddEdit("vLegendSubTitles " this.UISets.infoBox.subTitles),
 				IPALabel: panelWindow.AddText("vLegendIPALabel " this.UISets.infoBox.IPALabel),
 				IPA: panelWindow.AddEdit("vLegendIPA " this.UISets.infoBox.IPA),
 				transcriptionLabel: panelWindow.AddText("vLegendTranscriptionLabel " this.UISets.infoBox.transcriptionLabel),
 				transcription: panelWindow.AddEdit("vLegendTranscription " this.UISets.infoBox.transcription),
+				languagesLabel: panelWindow.AddText("vLegendlanguagesLabel " this.UISets.infoBox.languagesLabel),
+				languages: panelWindow.AddEdit("vLegendlanguages " this.UISets.infoBox.languages),
 				description: panelWindow.AddEdit("vLegenddescription " this.UISets.infoBox.description),
 				authorLabel: panelWindow.AddText("vLegendAuthorLabel " this.UISets.infoBox.authorLabel),
 				author: panelWindow.AddLink("vLegendAuthor " this.UISets.infoBox.author),
@@ -109,6 +117,11 @@ Class ChrLegend {
 			GroupBoxOptions.mainTitle.Text := legendData.%languageCode%.title
 			GroupBoxOptions.mainTitle.SetFont("s24 bold", Panel.UISets.infoFonts.fontFace["serif"].name)
 
+			GroupBoxOptions.unicodeLabel.Text := Locale.Read("gui_legend_unicode") ChrLib.Get("emsp")
+			GroupBoxOptions.unicodeLabel.SetFont("s11 bold")
+			GroupBoxOptions.unicode.Text := legendData.legend.unicode_name
+			GroupBoxOptions.unicode.SetFont("s11")
+
 			GroupBoxOptions.subTitlesLabel.Text := Locale.Read("gui_legend_alts") ChrLib.Get("emsp")
 			GroupBoxOptions.subTitlesLabel.SetFont("s11 bold")
 			GroupBoxOptions.subTitles.Text := legendData.%languageCode%.alts
@@ -123,6 +136,11 @@ Class ChrLegend {
 			GroupBoxOptions.transcriptionLabel.SetFont("s11 bold")
 			GroupBoxOptions.transcription.Text := legendData.%languageCode%.transcription
 			GroupBoxOptions.transcription.SetFont("s11")
+
+			GroupBoxOptions.languagesLabel.Text := Locale.Read("gui_legend_langs") ChrLib.Get("emsp")
+			GroupBoxOptions.languagesLabel.SetFont("s11 bold")
+			GroupBoxOptions.languages.Text := legendData.%languageCode%.langs
+			GroupBoxOptions.languages.SetFont("s11")
 
 			GroupBoxOptions.description.Text := Locale.HandleString(legendData.%languageCode%.description)
 			GroupBoxOptions.description.SetFont("s11")
