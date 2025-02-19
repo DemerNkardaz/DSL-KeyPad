@@ -2,7 +2,7 @@
 
 **Mini Todo:**
 
-- Since [Unicode 17](https://www.unicode.org/versions/Unicode17.0.0/) (9 sep 2025), add mode for [Sidetic](https://en.wikipedia.org/wiki/Sidetic_language).
+- Once [Unicode 17](https://www.unicode.org/versions/Unicode17.0.0/) (9 sep 2025), add mode for [Sidetic](https://en.wikipedia.org/wiki/Sidetic_language).
 - Do not forgot about “Ꝥ,” “Ꝧ,” “Ȝ.”
 
 # DSL KeyPad
