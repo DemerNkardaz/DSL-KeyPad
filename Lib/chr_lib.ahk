@@ -4606,13 +4606,17 @@ MapInsert(Characters,
 	"lat_c_let_g_dot_above", {
 		unicode: "{U+0120}",
 		titlesAlt: True,
-		group: ["Latin Accented"],
+		group: [["Latin Accented", "Latin Accented Tertiary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
 		recipe: "$" GetChar("dot_above"),
 	},
 	"lat_s_let_g_dot_above", {
 		unicode: "{U+0121}",
 		titlesAlt: True,
-		group: ["Latin Accented"],
+		group: [["Latin Accented", "Latin Accented Tertiary"]],
+		show_on_fast_keys: True,
+		alt_on_fast_keys: "$",
 		recipe: "$" GetChar("dot_above"),
 	},
 	"lat_c_let_g_macron", {
@@ -14996,6 +15000,59 @@ RegLib() {
 			groups: ["Smelting Special", "Special Fast RShift"],
 			options: { fastKey: "c* [1]" },
 			recipe: (*) => this.MakeRecipe("${arrow_down_ushaped}${interrobang}", "${arrow_down_ushaped}!+?"),
+		},
+		;
+		;
+		; * Accented Latin
+		;
+		;
+		"lat_c_let_a_acute", {
+			unicode: "{U+00C1}",
+			groups: ["Latin Accented", "Latin Accented Primary"],
+			options: { titlesAlt: True, fastKey: "<! $" },
+			recipe: (*) => this.MakeRecipe("@'${acute}"),
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_s_let_a_acute", {
+			unicode: "{U+00E1}",
+			groups: ["Latin Accented", "Latin Accented Primary"],
+			options: { titlesAlt: True, fastKey: "<! $" },
+			recipe: (*) => this.MakeRecipe("@${acute}"),
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_c_let_a_circumflex", {
+			unicode: "{U+00C2}",
+			groups: ["Latin Accented", "Latin Accented Secondary"],
+			options: { titlesAlt: True, fastKey: "<! $" },
+			recipe: (*) => this.MakeRecipe("@'${circumflex}"),
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_s_let_a_circumflex", {
+			unicode: "{U+00E2}",
+			groups: ["Latin Accented", "Latin Accented Secondary"],
+			options: { titlesAlt: True, fastKey: "<! $" },
+			recipe: (*) => this.MakeRecipe("@${circumflex}"),
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_c_let_a_circumflex_acute", {
+			unicode: "{U+1EA4}",
+			groups: ["Latin Accented"],
+			options: { titlesAlt: True },
+			recipe: (*) => this.MakeRecipe(
+				"@'${circumflex}${acute}", "${lat_c_let_a_circumflex}${acute}",
+				"@'${acute}${circumflex}", "${lat_c_let_a_acute}${circumflex}",
+			),
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_s_let_a_circumflex_acute", {
+			unicode: "{U+1EA5}",
+			groups: ["Latin Accented"],
+			options: { titlesAlt: True },
+			recipe: (*) => this.MakeRecipe(
+				"@${circumflex}${acute}", "${lat_s_let_a_circumflex}${acute}",
+				"@${acute}${circumflex}", "${lat_s_let_a_acute}${circumflex}",
+			),
+			symbol: { category: "Latin Accented" },
 		},
 		;
 		;
