@@ -4593,15 +4593,7 @@ ToggleFastKeys() {
 	FastKeysIsActive := !FastKeysIsActive
 	IniWrite (FastKeysIsActive ? "True" : "False"), ConfigFile, "Settings", "FastKeysIsActive"
 
-	ActivationMessage := {}
-	ActivationMessage[] := Map()
-	ActivationMessage["ru"] := {}
-	ActivationMessage["en"] := {}
-	ActivationMessage["ru"].Active := "Быстрые ключи активированы"
-	ActivationMessage["ru"].Deactive := "Быстрые ключи деактивированы"
-	ActivationMessage["en"].Active := "Fast keys activated"
-	ActivationMessage["en"].Deactive := "Fast keys deactivated"
-	MsgBox(FastKeysIsActive ? ActivationMessage[LanguageCode].Active : ActivationMessage[LanguageCode].Deactive, "FastKeys", 0x40)
+	MsgBox(Locale.Read("message_fastkeys_" (!FastKeysIsActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 	Sleep 5
 	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
@@ -5436,7 +5428,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<!>+", ["lat_c_let_g_cedilla", "lat_s_let_g_cedilla"],
 				"<^>!<+", ["lat_c_let_g_insular", "lat_s_let_g_insular"],
 				"<^>!>+", ["lat_c_let_g_macron", "lat_s_let_g_macron"],
-				"<^>!<+>+", ["lat_c_let_gamma", "lat_s_let_gamma"]),
+				"<^>!<+>+", ["lat_c_let_gamma", "lat_s_let_gamma"],
+				">+", ["lat_c_let_g_dot_above", "lat_s_let_g_dot_above"]),
 			"H", Map("<!", ["lat_c_let_h_hwair", "lat_s_let_h_hwair"],
 				"<^>!", ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"],
 				"<^>!<!", ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"],
