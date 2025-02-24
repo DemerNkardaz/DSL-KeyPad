@@ -1,6 +1,7 @@
 Class MyRecipes {
 
-	static file := App.paths.user "\CustomCompose.ini"
+	static file := App.paths.user "\CustomRecipes.ini"
+	static attachments := App.paths.user "\Attachments.ini"
 	static editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
 	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
 
@@ -85,13 +86,17 @@ Class MyRecipes {
 	]
 
 	static __New() {
-		if !FileExist(MyRecipes.file) {
+		if !FileExist(this.file) {
 			for i, key in this.defaulRecipes {
 				if Mod(i, 2) == 1 {
 					value := this.defaulRecipes[i + 1]
 					this.AddEdit(key, { name: value.name, recipe: value.recipe, result: value.result }, True)
 				}
 			}
+		}
+
+		if !FileExist(this.attachments) {
+			FileAppend("[attach]", this.attachments, "UTF-16")
 		}
 
 		if !FileExist(App.paths.user "\demo.XCompose") {
@@ -101,6 +106,28 @@ Class MyRecipes {
 
 		SetTimer((*) => this.UpdateMap(), -5000)
 		SetTimer((*) => this.UpdateChrLib(), -5000)
+	}
+
+	static AddAttachment(attachment) {
+		IniWrite(attachment, this.attachments, "attach", Util.EscapePathChars(attachment))
+	}
+
+	static ReadAttachmentList() {
+		attachments := []
+
+		content := FileRead(this.attachments, "UTF-16")
+		splitContent := StrSplit(content, "`n")
+
+		for i, line in splitContent {
+			line := Trim(line)
+			if (line = "" || SubStr(line, 1, 1) = ";" || (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]"))
+				continue
+
+			if (RegExMatch(line, "^[^=]*=(.*)$", &result))
+				attachments.Push(Trim(result[1]))
+		}
+
+		return attachments
 	}
 
 	static EditorGUI := Gui()
@@ -318,32 +345,42 @@ Class MyRecipes {
 		output := []
 
 		try {
-			content := FileRead(this.file, "UTF-16")
-			if !content {
-				return output
-			}
+			pushRecipes(filePath := this.file, postfix := "") {
+				content := FileRead(filePath, "UTF-16")
+				if !content {
+					return output
+				}
 
-			sections := []
-			for line in StrSplit(content, "`n") {
-				if RegExMatch(line, "^\[(.*)\]$", &match) {
-					sections.Push(match[1])
+				sections := []
+				for line in StrSplit(content, "`n") {
+					if RegExMatch(line, "^\[(.*)\]$", &match) {
+						sections.Push(match[1])
+					}
+				}
+
+				for section in sections {
+					try {
+						name := IniRead(filePath, section, "name")
+						recipe := IniRead(filePath, section, "recipe")
+						result := IniRead(filePath, section, "result")
+
+						output.Push({
+							section: section postfix,
+							name: name,
+							recipe: recipe,
+							result: result
+						})
+					} catch {
+						continue
+					}
 				}
 			}
 
-			for section in sections {
-				try {
-					name := IniRead(this.file, section, "name")
-					recipe := IniRead(this.file, section, "recipe")
-					result := IniRead(this.file, section, "result")
+			pushRecipes()
 
-					output.Push({
-						section: section,
-						name: name,
-						recipe: recipe,
-						result: result
-					})
-				} catch {
-					continue
+			for attachment in this.ReadAttachmentList() {
+				try {
+					pushRecipes(App.paths.user "\" attachment, "__attachment_from__" Util.EscapePathChars(attachment))
 				}
 			}
 
@@ -494,3 +531,5 @@ Class MyRecipes {
 		}
 	}
 }
+
+MyRecipes.ReadAttachmentList()

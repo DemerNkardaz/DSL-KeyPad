@@ -208,6 +208,21 @@ Class Util {
 		}
 	}
 
+	static EscapePathChars(str) {
+		str := StrReplace(str, " ", "_")
+		str := StrReplace(str, "\", "____")
+		str := StrReplace(str, "/", "____")
+		dotPos := InStr(str, ".", , -1)
+		if (dotPos) {
+			ext := SubStr(str, dotPos)
+			str := SubStr(str, 1, dotPos - 1)
+		}
+
+		str := StrReplace(str, ".", "_")
+
+		return str
+	}
+
 	static INIToObj(filePath) {
 		obj := {}
 		content := FileRead(filePath ".ini", "UTF-8")

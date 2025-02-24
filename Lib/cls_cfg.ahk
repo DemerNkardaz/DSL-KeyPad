@@ -272,8 +272,37 @@ Class Cfg {
 			removeRecipeBtn.SetFont("s16")
 			removeRecipeBtn.OnEvent("Click", (*) => removeSelected(currentRecipe))
 
+			attachRecipesListBtn := recipesPanel.AddButton("x" addRemX(128) " y" addRemY " w128 h32", Locale.Read("gui_recipes_attach_list"))
+			attachRecipesListBtn.SetFont("s9")
+			attachRecipesListBtn.OnEvent("Click", (*) => attachList())
+
 			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return recipesPanel
+
+			attachList() {
+				attachmentFiles := FileSelect("M", App.paths.user, Locale.Read("gui_recipes_attach_list"), "*.ini")
+
+				if (!attachmentFiles)
+					return []
+
+				trimmedFiles := []
+				basePath := App.paths.user "\"
+
+				for filePath in attachmentFiles {
+					if (InStr(filePath, basePath) == 1) {
+						trimmedFiles.Push(SubStr(filePath, StrLen(basePath) + 1))
+					}
+				}
+
+				if trimmedFiles.Length == 0 {
+					return
+				}
+
+				;MsgBox(trimmedFiles.ToString("`n"))
+				for trimmedFile in trimmedFiles {
+					MyRecipes.AddAttachment(trimmedFile)
+				}
+			}
 
 			setSelected(LV, rowNumber) {
 				currentRecipe := [
@@ -288,8 +317,17 @@ Class Cfg {
 
 			createEditRecipe(recipeArray?) {
 				if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "xcompose") {
-					RegExMatch(recipeArray[4], "\[(.*)\]", &match)
-					MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
+					fileName := ".XCompose"
+					if InStr(recipeArray[4], "__file_") {
+						RegExMatch(recipeArray[4], "__file_(.+?)(?=\s|$)", &match)
+						fileName := match[1] fileName
+					}
+					MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" fileName, App.winTitle)
+					return
+				} else if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "__attachment_from__") {
+					RegExMatch(recipeArray[4], "__attachment_from__(.+?)(?=\s|$)", &match)
+					attachmentName := IniRead(App.paths.user "\Attachments.ini", "attach", match[1])
+					MsgBox(Locale.Read("gui_recipes_attach_edit_unable") "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
 					return
 				} else {
 					MyRecipes.Editor(recipeArray?, recipesLV)
@@ -299,8 +337,17 @@ Class Cfg {
 			removeSelected(recipeArray) {
 				if recipeArray.Length > 0 {
 					if InStr(recipeArray[4], "xcompose") {
-						RegExMatch(recipeArray[4], "\[(.*)\]", &match)
-						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
+						fileName := ".XCompose"
+						if InStr(recipeArray[4], "__file_") {
+							RegExMatch(recipeArray[4], "__file_(.+?)(?=\s|$)", &match)
+							fileName := match[1] fileName
+						}
+						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" fileName, App.winTitle)
+						return
+					} else if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "__attachment_from__") {
+						RegExMatch(recipeArray[4], "__attachment_from__(.+?)(?=\s|$)", &match)
+						attachmentName := match[1] ".ini"
+						MsgBox(Locale.Read("gui_recipes_attach_edit_unable") "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
 						return
 					} else {
 						message := Util.StrVarsInject(Locale.Read("gui_recipes_remove_confirm"), recipeArray[1])
