@@ -123,7 +123,18 @@ Class Ligaturiser {
 						intermediateValue := ""
 
 						Loop repeatCount {
-							intermediateValue .= this.EntriesWalk(postInput, , RegExMatch(input, "^\(\d+~\)\s"))
+							tempValue := this.EntriesWalk(postInput, , RegExMatch(input, "^\(\d+~\)\s"))
+							intermediateValue .= tempValue
+
+							len := StrLen(intermediateValue)
+							if (len >= 2) {
+								reduction := 1 + Floor(len / 2)
+								repeatCount := Max(1, repeatCount - reduction)
+							}
+
+							if (len >= 200) {
+								break
+							}
 						}
 
 						if intermediateValue != "" {

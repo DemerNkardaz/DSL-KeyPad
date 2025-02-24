@@ -243,7 +243,7 @@ Class Cfg {
 
 			listViewCols := [Locale.Read("col_name"), Locale.Read("col_recipe"), Locale.Read("col_result"), Locale.Read("col_entry_title")]
 
-			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " +NoSort -Multi"
+			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " -Multi"
 			recipesLV := recipesPanel.AddListView(recipesLVStyles, listViewCols)
 			recipesLV.ModifyCol(1, 158)
 			recipesLV.ModifyCol(2, 98)
@@ -276,6 +276,10 @@ Class Cfg {
 			attachRecipesListBtn.SetFont("s9")
 			attachRecipesListBtn.OnEvent("Click", (*) => attachList())
 
+			attachListBtn := recipesPanel.AddButton("x" addRemX(256) " y" addRemY " w32 h32", Chr(0x1F5D2))
+			attachListBtn.SetFont("s16")
+			attachListBtn.OnEvent("Click", (*) => Run(App.paths.user "\Attachments.ini"))
+
 			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return recipesPanel
 
@@ -302,6 +306,9 @@ Class Cfg {
 				for trimmedFile in trimmedFiles {
 					MyRecipes.AddAttachment(trimmedFile)
 				}
+
+				MyRecipes.UpdateMap()
+				MyRecipes.UpdateChrLib()
 			}
 
 			setSelected(LV, rowNumber) {
@@ -346,7 +353,7 @@ Class Cfg {
 						return
 					} else if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "__attachment_from__") {
 						RegExMatch(recipeArray[4], "__attachment_from__(.+?)(?=\s|$)", &match)
-						attachmentName := match[1] ".ini"
+						attachmentName := IniRead(App.paths.user "\Attachments.ini", "attach", match[1])
 						MsgBox(Locale.Read("gui_recipes_attach_edit_unable") "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
 						return
 					} else {

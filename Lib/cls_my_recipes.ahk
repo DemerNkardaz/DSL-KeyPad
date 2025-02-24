@@ -108,28 +108,6 @@ Class MyRecipes {
 		SetTimer((*) => this.UpdateChrLib(), -5000)
 	}
 
-	static AddAttachment(attachment) {
-		IniWrite(attachment, this.attachments, "attach", Util.EscapePathChars(attachment))
-	}
-
-	static ReadAttachmentList() {
-		attachments := []
-
-		content := FileRead(this.attachments, "UTF-16")
-		splitContent := StrSplit(content, "`n")
-
-		for i, line in splitContent {
-			line := Trim(line)
-			if (line = "" || SubStr(line, 1, 1) = ";" || (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]"))
-				continue
-
-			if (RegExMatch(line, "^[^=]*=(.*)$", &result))
-				attachments.Push(Trim(result[1]))
-		}
-
-		return attachments
-	}
-
 	static EditorGUI := Gui()
 
 	static Editor(sectionName := [], recipesLV?) {
@@ -394,6 +372,28 @@ Class MyRecipes {
 		}
 
 		return output
+	}
+
+	static AddAttachment(attachment) {
+		IniWrite(attachment, this.attachments, "attach", Util.EscapePathChars(attachment))
+	}
+
+	static ReadAttachmentList() {
+		attachments := []
+
+		content := FileRead(this.attachments, "UTF-16")
+		splitContent := StrSplit(content, "`n")
+
+		for i, line in splitContent {
+			line := Trim(line)
+			if (line = "" || SubStr(line, 1, 1) = ";" || (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]"))
+				continue
+
+			if (RegExMatch(line, "^[^=]*=(.*)$", &result))
+				attachments.Push(Trim(result[1]))
+		}
+
+		return attachments
 	}
 
 	static XComposeRead(filePath, fileName) {
