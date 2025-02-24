@@ -117,10 +117,25 @@ Class Ligaturiser {
 
 			if !pauseOn || (IH.EndKey = "Enter") {
 				try {
-					intermediateValue := this.EntriesWalk(RegExReplace(input, "^\(\~\)\s", ""), , RegExMatch(input, "^\(\~\)\s"))
-					if intermediateValue != "" {
-						output := intermediateValue
-						break
+					if (RegExMatch(input, "\((\d+)[\~]?\)\s+(.*)", &match)) {
+						repeatCount := (Number(match[1]) <= 100 && Number(match[1]) > 0) ? match[1] : 1
+						postInput := match[2]
+						intermediateValue := ""
+
+						Loop repeatCount {
+							intermediateValue .= this.EntriesWalk(postInput, , RegExMatch(input, "^\(\d+~\)\s"))
+						}
+
+						if intermediateValue != "" {
+							output := intermediateValue
+							break
+						}
+					} else {
+						intermediateValue := this.EntriesWalk(RegExReplace(input, "^\(\~\)\s", ""), , RegExMatch(input, "^\(\~\)\s"))
+						if intermediateValue != "" {
+							output := intermediateValue
+							break
+						}
 					}
 				}
 			}
@@ -346,7 +361,7 @@ Class Ligaturiser {
 		if InputMode = "HTML" && HasProp(value, "html") {
 			output :=
 				(this.modifiedCharsType && HasProp(value, this.modifiedCharsType "HTML")) ? value.%this.modifiedCharsType%HTML :
-					(value.HasProp("entity") ? value.entity : value.html)
+				(value.HasProp("entity") ? value.entity : value.html)
 
 		} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
 			output := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
