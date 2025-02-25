@@ -326,18 +326,9 @@ Class Cfg {
 			}
 
 			createEditRecipe(recipeArray?) {
-				if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "xcompose") {
-					fileName := ".XCompose"
-					if InStr(recipeArray[4], "__file_") {
-						RegExMatch(recipeArray[4], "__file_(.+?)(?=\s|$)", &match)
-						fileName := match[1] fileName
-					}
-					MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\Autoimport.unix\" fileName, App.winTitle)
-					return
-				} else if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "__attachment_from__") {
-					RegExMatch(recipeArray[4], "__attachment_from__(.+?)(?=\s|$)", &match)
+				if IsSet(recipeArray) && recipeArray.Length > 0 && (InStr(recipeArray[4], "xcompose") || InStr(recipeArray[4], "__attachment_from__")) {
 					attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
-					MsgBox(Locale.Read("gui_recipes_attach_edit_unable") "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
+					MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
 					return
 				} else {
 					MyRecipes.Editor(recipeArray?, recipesLV)
@@ -346,18 +337,9 @@ Class Cfg {
 
 			removeSelected(recipeArray) {
 				if recipeArray.Length > 0 {
-					if InStr(recipeArray[4], "xcompose") {
-						fileName := ".XCompose"
-						if InStr(recipeArray[4], "__file_") {
-							RegExMatch(recipeArray[4], "__file_(.+?)(?=\s|$)", &match)
-							fileName := match[1] fileName
-						}
-						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\Autoimport.unix\" fileName, App.winTitle)
-						return
-					} else if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "__attachment_from__") {
-						RegExMatch(recipeArray[4], "__attachment_from__(.+?)(?=\s|$)", &match)
+					if (InStr(recipeArray[4], "xcompose") || InStr(recipeArray[4], "__attachment_from__")) {
 						attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
-						MsgBox(Locale.Read("gui_recipes_attach_edit_unable") "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
+						MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
 						return
 					} else {
 						message := Util.StrVarsInject(Locale.Read("gui_recipes_remove_confirm"), recipeArray[1])
