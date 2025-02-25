@@ -42,6 +42,12 @@ Class Language {
 			}
 		}
 
+		Loop Files App.paths.loc "\Automated\*", "D" {
+			Loop Files A_LoopFileFullPath "\*.ini" {
+				pathsArray.Push(A_LoopFileFullPath)
+			}
+		}
+
 		Loop Files App.paths.loc "\Automated\*.ini" {
 			pathsArray.Push(A_LoopFileFullPath)
 		}
