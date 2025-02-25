@@ -2,6 +2,7 @@ Class MyRecipes {
 
 	static file := App.paths.user "\CustomRecipes.ini"
 	static attachments := App.paths.user "\Attachments.ini"
+	static autoimport := { unix: App.paths.user "\Autoimport.unix", ini: App.paths.user "\Autoimport.ini" }
 	static editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
 	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
 
@@ -99,9 +100,13 @@ Class MyRecipes {
 			FileAppend("[attach]", this.attachments, "UTF-16")
 		}
 
-		if !FileExist(App.paths.user "\demo.XCompose") {
-			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.user "\demo.XCompose", "UTF-8")
+		for key, value in this.autoimport.OwnProps() {
+			if !DirExist(value)
+				DirCreate(value)
 		}
+
+		if !FileExist(App.paths.user "\Autoimport.unix\demo.XCompose")
+			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.user "\Autoimport.unix\demo.XCompose", "UTF-8")
 
 
 		SetTimer((*) => this.UpdateMap(), -5000)
@@ -346,7 +351,8 @@ Class MyRecipes {
 							section: section postfix,
 							name: name,
 							recipe: recipe,
-							result: result
+							result: result,
+							filePath: Util.TrimBasePath(filePath)
 						})
 					} catch {
 						continue
@@ -362,7 +368,13 @@ Class MyRecipes {
 				}
 			}
 
-			Loop Files App.paths.user "\*.XCompose" {
+			Loop Files this.autoimport.ini "\*.ini" {
+				try {
+					pushRecipes(A_LoopFileDir "\" A_LoopFileName, "__attachment_from__Autoimport_ini____" A_LoopFileName)
+				}
+			}
+
+			Loop Files this.autoimport.unix "\*.XCompose" {
 				try {
 					output := ArrayMerge(output, this.XComposeRead(A_LoopFilePath, A_LoopFileName))
 				}

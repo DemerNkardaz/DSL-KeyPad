@@ -9,6 +9,7 @@ Class App {
 	static paths := {
 		dir: A_ScriptDir,
 		lib: A_ScriptDir "\Lib",
+		loc: A_ScriptDir "\Locale",
 		ufile: A_ScriptDir "\UtilityFiles",
 		user: A_ScriptDir "\User",
 		temp: A_Temp "\DSLKeyPad",

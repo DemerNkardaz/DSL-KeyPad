@@ -31,7 +31,7 @@ Class ChrLegend {
 	}
 
 	static ReadLegend(path) {
-		Legend := Util.INIToObj(A_ScriptDir "\UtilityFiles\ChrLegend\" path)
+		Legend := Util.INIToObj(A_ScriptDir "\Locale\ChrLegend\" path)
 
 		return Legend
 	}

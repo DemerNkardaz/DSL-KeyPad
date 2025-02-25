@@ -7,6 +7,11 @@ Class Language {
 	)
 
 	static locales := App.paths.ufile "\DSLKeyPad.locales.ini"
+	static localeObj := {}
+
+	static __New() {
+		this.FillLocalizedObject()
+	}
 
 	static Validate(input, extraRule?) {
 		if StrLen(input) > 5 {
@@ -26,6 +31,22 @@ Class Language {
 		}
 
 		return False
+	}
+
+	static FillLocalizedObject() {
+		pathsArray := []
+
+		for lang, value in this.supported {
+			if value.locale {
+				pathsArray.Push(App.paths.loc "\" lang ".ini")
+			}
+		}
+
+		Loop Files App.paths.loc "\Automated\*.ini" {
+			pathsArray.Push(A_LoopFileFullPath)
+		}
+
+		this.localeObj := Util.MultiINIToObj(pathsArray)
 	}
 
 	static Set(value) {
@@ -152,44 +173,52 @@ Class Locale extends Language {
 		return str
 	}
 
+	static ReadStr(section, entry) {
+		return (this.localeObj.HasOwnProp(section) && this.localeObj.%section%.HasOwnProp(entry))
+			? this.localeObj.%section%.%entry% : ""
+	}
+
 	static Read(EntryName, Prefix := "", validate := False, &output?) {
-		Section := Prefix != "" ? Prefix . "_" . Language.Get() : Language.Get()
-		Intermediate := IniRead(this.locales, Section, EntryName, "")
+		Intermediate := ""
+		Section := Prefix != "" ? Prefix . "_" . this.Get() : this.Get()
+		try {
+			;Intermediate := IniRead(this.locales, Section, EntryName, "")
+			Intermediate := this.ReadStr(Section, EntryName)
 
-		while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
-			LangCode := match[1]
-			SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
-			Replacement := IniRead(this.locales, SectionOverride, EntryName, "")
-			Intermediate := StrReplace(Intermediate, match[0], Replacement)
-		}
-
-		while (RegExMatch(Intermediate, "\{(?:([^\}_]+)_)?([a-zA-Z]{2}):([^\}]+)\}", &match)) {
-			CustomPrefix := match[1] ? match[1] : ""
-			LangCode := match[2]
-			CustomEntry := match[3]
-			SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
-			Replacement := IniRead(this.locales, SectionOverride, CustomEntry, "")
-			Intermediate := StrReplace(Intermediate, match[0], Replacement)
-		}
-
-		while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
-			Unicode := match[1]
-			Replacement := Chr("0x" . Unicode)
-			Intermediate := StrReplace(Intermediate, match[0], Replacement)
-		}
-
-		while (RegExMatch(Intermediate, "\{var:([^\}]+)\}", &match)) {
-			Varname := match[1]
-			if IsSet(%Varname%) {
-				Replacement := %Varname%
-			} else {
-				Replacement := "VAR (" . Varname . "): NOT FOUND"
+			while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
+				LangCode := match[1]
+				SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
+				Replacement := this.ReadStr(SectionOverride, EntryName)
+				Intermediate := StrReplace(Intermediate, match[0], Replacement)
 			}
-			Intermediate := StrReplace(Intermediate, match[0], Replacement)
+
+			while (RegExMatch(Intermediate, "\{(?:([^\}_]+)_)?([a-zA-Z]{2}):([^\}]+)\}", &match)) {
+				CustomPrefix := match[1] ? match[1] : ""
+				LangCode := match[2]
+				CustomEntry := match[3]
+				SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
+				Replacement := this.ReadStr(SectionOverride, CustomEntry)
+				Intermediate := StrReplace(Intermediate, match[0], Replacement)
+			}
+
+			while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
+				Unicode := match[1]
+				Replacement := Chr("0x" . Unicode)
+				Intermediate := StrReplace(Intermediate, match[0], Replacement)
+			}
+
+			while (RegExMatch(Intermediate, "\{var:([^\}]+)\}", &match)) {
+				Varname := match[1]
+				if IsSet(%Varname%) {
+					Replacement := %Varname%
+				} else {
+					Replacement := "VAR (" . Varname . "): NOT FOUND"
+				}
+				Intermediate := StrReplace(Intermediate, match[0], Replacement)
+			}
+			Intermediate := this.HandleString(Intermediate)
 		}
 
-
-		Intermediate := this.HandleString(Intermediate)
 
 		if validate {
 			output := Intermediate

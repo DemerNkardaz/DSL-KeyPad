@@ -241,7 +241,7 @@ Class Cfg {
 			optionsCommonH := 370
 			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
 
-			listViewCols := [Locale.Read("col_name"), Locale.Read("col_recipe"), Locale.Read("col_result"), Locale.Read("col_entry_title")]
+			listViewCols := [Locale.Read("col_name"), Locale.Read("col_recipe"), Locale.Read("col_result"), Locale.Read("col_entry_title"), ""]
 
 			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " -Multi"
 			recipesLV := recipesPanel.AddListView(recipesLVStyles, listViewCols)
@@ -249,13 +249,15 @@ Class Cfg {
 			recipesLV.ModifyCol(2, 98)
 			recipesLV.ModifyCol(3, 158)
 			recipesLV.ModifyCol(4, 0)
+			recipesLV.ModifyCol(5, 0)
 			recipesLV.OnEvent("ItemFocus", (LV, RowNumber) => setSelected(LV, RowNumber))
 			recipesLV.OnEvent("DoubleClick", (*) => createEditRecipe(currentRecipe))
 
 			recipesArray := MyRecipes.Read()
 
 			for recipeEntry in recipesArray {
-				recipesLV.Add(, recipeEntry.name, RegExReplace(recipeEntry.recipe, "\|", ", "), Util.StrFormattedReduce(recipeEntry.result, 24), recipeEntry.section)
+				recipeFilePath := recipeEntry.HasOwnProp("filePath") ? recipeEntry.filePath : ""
+				recipesLV.Add(, recipeEntry.name, RegExReplace(recipeEntry.recipe, "\|", ", "), Util.StrFormattedReduce(recipeEntry.result, 24), recipeEntry.section, recipeFilePath)
 			}
 
 
@@ -293,8 +295,9 @@ Class Cfg {
 				basePath := App.paths.user "\"
 
 				for filePath in attachmentFiles {
-					if (InStr(filePath, basePath) == 1) {
-						trimmedFiles.Push(SubStr(filePath, StrLen(basePath) + 1))
+					trimmedPath := Util.TrimBasePath(filePath)
+					if (trimmedPath != filePath) {
+						trimmedFiles.Push(trimmedPath)
 					}
 				}
 
@@ -302,7 +305,6 @@ Class Cfg {
 					return
 				}
 
-				;MsgBox(trimmedFiles.ToString("`n"))
 				for trimmedFile in trimmedFiles {
 					MyRecipes.AddAttachment(trimmedFile)
 				}
@@ -317,7 +319,8 @@ Class Cfg {
 					LV.GetText(RowNumber, 2),
 					LV.GetText(RowNumber, 3),
 					LV.GetText(RowNumber, 4),
-					rowNumber
+					rowNumber,
+					LV.GetText(RowNumber, 5),
 				]
 				return
 			}
@@ -329,11 +332,11 @@ Class Cfg {
 						RegExMatch(recipeArray[4], "__file_(.+?)(?=\s|$)", &match)
 						fileName := match[1] fileName
 					}
-					MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" fileName, App.winTitle)
+					MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\Autoimport.unix\" fileName, App.winTitle)
 					return
 				} else if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "__attachment_from__") {
 					RegExMatch(recipeArray[4], "__attachment_from__(.+?)(?=\s|$)", &match)
-					attachmentName := IniRead(App.paths.user "\Attachments.ini", "attach", match[1])
+					attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
 					MsgBox(Locale.Read("gui_recipes_attach_edit_unable") "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
 					return
 				} else {
@@ -349,11 +352,11 @@ Class Cfg {
 							RegExMatch(recipeArray[4], "__file_(.+?)(?=\s|$)", &match)
 							fileName := match[1] fileName
 						}
-						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" fileName, App.winTitle)
+						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\Autoimport.unix\" fileName, App.winTitle)
 						return
 					} else if IsSet(recipeArray) && recipeArray.Length > 0 && InStr(recipeArray[4], "__attachment_from__") {
 						RegExMatch(recipeArray[4], "__attachment_from__(.+?)(?=\s|$)", &match)
-						attachmentName := IniRead(App.paths.user "\Attachments.ini", "attach", match[1])
+						attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
 						MsgBox(Locale.Read("gui_recipes_attach_edit_unable") "`n`n" Chr(0x2026) "\User\" attachmentName, App.winTitle)
 						return
 					} else {

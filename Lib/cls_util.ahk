@@ -223,9 +223,17 @@ Class Util {
 		return str
 	}
 
+	static TrimBasePath(filePath, basePath := App.paths.user "\") {
+		if (InStr(filePath, basePath) == 1) {
+			return SubStr(filePath, StrLen(basePath) + 1)
+		}
+		return filePath
+	}
+
+
 	static INIToObj(filePath) {
 		obj := {}
-		content := FileRead(filePath ".ini", "UTF-8")
+		content := FileRead(filePath (!InStr(filePath, ".ini") ? ".ini" : ""), "UTF-8")
 		lines := StrSplit(content, "`n", "`r`n")
 
 		currentSection := ""
@@ -247,5 +255,37 @@ Class Util {
 		}
 
 		return obj
+	}
+
+	static MultiINIToObj(pathsArray) {
+		bufferArray := []
+		bufferObject := {}
+
+		for path in pathsArray {
+			bufferArray.Push(this.INIToObj(path))
+		}
+
+		for obj in bufferArray {
+			for localeKey, value in obj.OwnProps() {
+				if !bufferObject.HasOwnProp(localeKey)
+					bufferObject.%localeKey% := {}
+
+				for key, value in obj.%localeKey%.OwnProps() {
+					bufferObject.%localeKey%.%key% := value
+				}
+			}
+		}
+
+		return bufferObject
+	}
+
+	static ObjToINI(obj, filePath) {
+
+		for localeKey, dict in obj.OwnProps() {
+			for key, value in obj.%localeKey%.OwnProps() {
+				IniWrite(value, filePath, localeKey, key)
+			}
+		}
+
 	}
 }

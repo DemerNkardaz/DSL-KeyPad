@@ -715,20 +715,20 @@ Class Panel {
 
 			if options.HasOwnProp("type") && options.type = "Alternative Layout" &&
 				(value.options.HasOwnProp("layoutTitlesAlt") && value.options.layoutTitlesAlt) &&
-				Locale.Read(characterEntry "_layout_alt", "chars", True, &titleText) {
+				Locale.Read(characterEntry "_layout_alt", , True, &titleText) {
 				characterTitle := titleText
 
-			} else if (value.options.HasOwnProp("titlesAlt") && value.options.titlesAlt) && Locale.Read(characterEntry "_alt", "chars", True, &titleText) {
+			} else if (value.options.HasOwnProp("titlesAlt") && value.options.titlesAlt) && Locale.Read(characterEntry "_alt", , True, &titleText) {
 				characterTitle := titleText
 
-			} else if Locale.Read(characterEntry, "chars", True, &titleText) {
+			} else if Locale.Read(characterEntry, , True, &titleText) {
 				characterTitle := titleText
 
 			} else if value.HasOwnProp("titles") && value.titles.HasValue(languageCode) {
 				characterTitle := value.titles[languageCode]
 
 			} else {
-				characterTitle := Locale.Read(characterEntry, "chars")
+				characterTitle := Locale.Read(characterEntry)
 			}
 
 			this.PanelGUI[options.prefix "Title"].Text := characterTitle
@@ -900,17 +900,17 @@ Class Panel {
 
 						if options.type = "Alternative Layout" &&
 							(value.options.HasOwnProp("layoutTitles") && value.options.layoutTitles) &&
-							Locale.Read(characterEntry "_layout", "chars", True, &titleText) {
+							Locale.Read(characterEntry "_layout", , True, &titleText) {
 							characterTitle := titleText
 
-						} else if Locale.Read(characterEntry, "chars", True, &titleText) {
+						} else if Locale.Read(characterEntry, , True, &titleText) {
 							characterTitle := titleText
 
 						} else if value.HasOwnProp("titles") && value.titles.HasValue(languageCode) {
 							characterTitle := value.titles[languageCode]
 
 						} else {
-							characterTitle := Locale.Read(characterEntry, "chars")
+							characterTitle := Locale.Read(characterEntry)
 						}
 
 						if isFavorite {

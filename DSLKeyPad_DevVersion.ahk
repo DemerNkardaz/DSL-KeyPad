@@ -1393,14 +1393,14 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 			}
 
 			characterTitle := ""
-			if InsertingOption = "Alternative Layout" && HasProp(value, "alt_layout_title") && value.alt_layout_title && !InStr(Locale.Read(entryName "_layout", "chars"), "NOT FOUND") {
-				characterTitle := Locale.Read(entryName "_layout", "chars")
-			} else if !InStr(Locale.Read(entryName, "chars"), "NOT FOUND") {
-				characterTitle := Locale.Read(entryName, "chars")
+			if InsertingOption = "Alternative Layout" && HasProp(value, "alt_layout_title") && value.alt_layout_title && !InStr(Locale.Read(entryName "_layout"), "NOT FOUND") {
+				characterTitle := Locale.Read(entryName "_layout")
+			} else if !InStr(Locale.Read(entryName), "NOT FOUND") {
+				characterTitle := Locale.Read(entryName)
 			} else if (HasProp(value, "titles")) {
 				characterTitle := value.titles[LanguageCode]
 			} else {
-				characterTitle := Locale.Read(entryName, "chars")
+				characterTitle := Locale.Read(entryName)
 			}
 
 			if isFavorite {
@@ -4213,17 +4213,17 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		}
 
 		characterTitle := ""
-		if (HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True && !InStr(Locale.Read(EntryNameKey "_alt", "chars"), "NOT FOUND")) {
-			characterTitle := Locale.Read(EntryNameKey . "_alt", "chars")
-		} else if !InStr(Locale.Read(EntryNameKey, "chars"), "NOT FOUND") {
-			characterTitle := Locale.Read(EntryNameKey, "chars")
+		if (HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True && !InStr(Locale.Read(EntryNameKey "_alt"), "NOT FOUND")) {
+			characterTitle := Locale.Read(EntryNameKey . "_alt")
+		} else if !InStr(Locale.Read(EntryNameKey), "NOT FOUND") {
+			characterTitle := Locale.Read(EntryNameKey)
 		} else if (HasProp(GetEntry, "titlesAltOnEntry")) {
 			characterTitle := GetEntry.titlesAltOnEntry[LanguageCode]
 		} else if (HasProp(GetEntry, "titles") &&
 			(!HasProp(GetEntry, "titlesAlt") || HasProp(GetEntry, "titlesAlt") && GetEntry.titlesAlt == True)) {
 			characterTitle := GetEntry.titles[LanguageCode]
 		} else {
-			characterTitle := Locale.Read(EntryNameKey, "chars")
+			characterTitle := Locale.Read(EntryNameKey)
 		}
 
 		if (HasProp(GetEntry, "symbol")) {
