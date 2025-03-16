@@ -248,6 +248,8 @@ Class Panel {
 						;
 						{ type: "Fast Key", group: "Special Fast Primary", combinationKey: LeftControl LeftAlt, separator: true },
 						;
+						{ type: "Fast Key", group: "Spaces Primary", combinationKey: LeftControl LeftAlt, separator: true },
+						;
 						{ type: "Fast Key", group: "Special Fast Left", groupKey: LeftAlt, separator: true },
 						;
 						{ type: "Fast Key", group: "Spaces Left Alt", combinationKey: LeftAlt, separator: true },

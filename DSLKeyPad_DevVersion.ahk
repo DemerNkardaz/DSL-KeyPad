@@ -579,6 +579,7 @@ HotString(":C?0:gtsd", (D) => SendDate())
 HotString(":C?0:gtdd", (D) => SendDate("YYYY–MM–DD"))
 HotString(":C?0:gtfd", (D) => SendDate("YYYY–MM–DD hh:mm:ss"))
 HotString(":C?0:gtfh", (D) => SendDate("hh:mm:ss"))
+HotString(":C?0:gtfl", (D) => SendDate("YYYY_MM_DD-hh_mm_ss"))
 
 CheckUpdateError := ""
 GetUpdate(TimeOut := 0, RepairMode := False) {
@@ -5273,8 +5274,10 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"Flat:<^>!<!", "thinspace",
 				"Flat:<^>!<!<+", "hairspace",
 				"Flat:<^>!<!>+", "punctuation_space",
-				"Flat:<^>!<!<+>+", "zero_width_space",
+				;"Flat:<^>!<!<+>+", "zero_width_space",
 				"Flat:<!", "emsp13",
+				"Flat:<^>!>^", "zero_width_space",
+				"Flat:<^<!", "zero_width_no_break_space",
 				;"Flat:<+", "emsp14",
 				"Flat:>+", "emsp16",
 				"Flat:<+>+", "narrow_no_break_space",

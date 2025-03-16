@@ -26,14 +26,22 @@ Class ChrLegend {
 		},
 	}
 
+	static RelativeUISet() {
+		sizes := {}
+		sizes.body := { x: 20, y: 35, w: 830, h: 510 }
+		sizes.previewFrame := { x: 621, y: 80, w: 192, h: 192, options: "Center" }
+		sizes.preview := { x: sizes.previewFrame.x, y: sizes.previewFrame.y, w: sizes.previewFrame.w, h: sizes.previewFrame.h, options: "readonly Center -VScroll -HScroll" }
+
+	}
+
 	__New(data) {
 		ChrLegend.Panel(data)
 	}
 
 	static ReadLegend(path) {
-		Legend := Util.INIToObj(A_ScriptDir "\Locale\ChrLegend\" path)
+		legend := Util.INIToObj(A_ScriptDir "\Locale\ChrLegend\" path)
 
-		return Legend
+		return legend
 	}
 
 	static Panel(data) {
@@ -42,7 +50,7 @@ Class ChrLegend {
 			legendData := this.ReadLegend(value.options.legend)
 			languageCode := Language.Get()
 
-			panelTitle := App.winTitle " — " Util.StrVarsInject(Locale.Read("gui_legend"), Locale.Read(data.entry, "chars"))
+			panelTitle := App.winTitle " — " Util.StrVarsInject(Locale.Read("gui_legend"), Locale.Read(data.entry))
 
 			screenWidth := A_ScreenWidth
 			screenHeight := A_ScreenHeight
