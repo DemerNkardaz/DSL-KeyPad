@@ -234,6 +234,8 @@ Class Panel {
 						;
 						{ type: "Recipe", group: "Smelting Special", separator: true },
 						;
+						{ type: "Recipe", group: "Extra Symbolistics", separator: true },
+						;
 						{ type: "Recipe", group: "Alchemical", separator: true },
 						;
 						{ type: "Recipe", group: "Astrology", separator: true },

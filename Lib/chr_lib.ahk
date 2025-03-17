@@ -15031,6 +15031,35 @@ RegLib(this) {
 		},
 		;
 		;
+		; * Extra Symbolistics
+		;
+		;
+		"symbolistics_rod_of_asclepius", {
+			unicode: "{U+2695}",
+			tags: ["rod of Asclepius", "посох Асклепия"],
+			groups: ["Extra Symbolistics"],
+			recipe: ["ascl", "аскл"],
+		},
+		"symbolistics_caduceus", {
+			unicode: "{U+2624}",
+			tags: ["Caduceus", "Кадуцей"],
+			groups: ["Extra Symbolistics"],
+			recipe: ["cadu", "каду"],
+		},
+		"symbolistics_staff_of_hermes", {
+			unicode: "{U+269A}",
+			tags: ["staff of Hermes", "посох Гермеса"],
+			groups: ["Extra Symbolistics"],
+			recipe: ["herms", "гермс"],
+		},
+		"symbolistics_ankh", {
+			unicode: "{U+2625}",
+			tags: ["Ankh", "Анх"],
+			groups: ["Extra Symbolistics"],
+			recipe: ["ankh", "анх"],
+		},
+		;
+		;
 		; * Alchemical
 		;
 		;
@@ -15159,7 +15188,7 @@ RegLib(this) {
 			unicode: "{U+1F719}",
 			tags: ["alchemical rock salt-2", "алхимическая каменная соль-2"],
 			groups: ["Alchemical"],
-			recipe: ["alc rock salt-2", "alc bismuth"],
+			recipe: ["alc rock salt-2"],
 		},
 		"alchemical_gold", {
 			unicode: "{U+1F71A}",
@@ -15220,6 +15249,96 @@ RegLib(this) {
 			groups: ["Astrology"],
 			recipe: ["astrol Earth", "alc cop acetate"],
 		},
+		"astrological_neptune", {
+			unicode: "{U+2646}",
+			tags: ["astrological Neptune", "астрологический Нептун"],
+			groups: ["Astrology"],
+			recipe: ["astrol Neptune"],
+		},
+		"astrological_uranus", {
+			unicode: "{U+2645}",
+			tags: ["astrological Uranus", "астрологический Уран"],
+			groups: ["Astrology"],
+			recipe: ["astrol Uranus"],
+		},
+		"astrological_pluto_1", {
+			unicode: "{U+2647}",
+			tags: ["astrological Pluto-1", "астрологическая Плутон-1"],
+			groups: ["Astrology"],
+			recipe: ["astrol Pluto-1"],
+		},
+		"astrological_pluto_2", {
+			unicode: "{U+2BD3}",
+			tags: ["astrological Pluto-2", "астрологическая Плутон-2"],
+			groups: ["Astrology"],
+			recipe: ["astrol Pluto-2"],
+		},
+		"astrological_pluto_3", {
+			unicode: "{U+2BD4}",
+			tags: ["astrological Pluto-3", "астрологическая Плутон-3"],
+			groups: ["Astrology"],
+			recipe: ["astrol Pluto-3"],
+		},
+		"astrological_pluto_4", {
+			unicode: "{U+2BD5}",
+			tags: ["astrological Pluto-4", "астрологическая Плутон-4"],
+			groups: ["Astrology"],
+			recipe: ["astrol Pluto-4"],
+		},
+		"astrological_pluto_5", {
+			unicode: "{U+2BD6}",
+			tags: ["astrological Pluto-5", "астрологическая Плутон-5"],
+			groups: ["Astrology"],
+			recipe: ["astrol Pluto-5"],
+		},
+		"astrological_transpluto", {
+			unicode: "{U+2BD7}",
+			tags: ["astrological Transpluto", "астрологическая Трансплутон"],
+			groups: ["Astrology"],
+			recipe: ["astrol Transpluto"],
+		},
+		"astrological_vesta", {
+			unicode: "{U+26B6}",
+			tags: ["astrological Vesta", "астрологическая Веста"],
+			groups: ["Astrology"],
+			recipe: ["astrol Vesta"],
+		},
+		"astrological_chiron", {
+			unicode: "{U+26B7}",
+			tags: ["astrological Chiron", "астрологическая Хирон"],
+			groups: ["Astrology"],
+			recipe: ["astrol Chiron"],
+		},
+		"astrological_proserpina", {
+			unicode: "{U+2BD8}",
+			tags: ["astrological Proserpina", "астрологическая Прозерпина"],
+			groups: ["Astrology"],
+			recipe: ["astrol Proserpina"],
+		},
+		"astrological_astraea", {
+			unicode: "{U+2BD9}",
+			tags: ["astrological Astraea", "астрологическая Астрея"],
+			groups: ["Astrology"],
+			recipe: ["astrol Astraea"],
+		},
+		"astrological_hygiea", {
+			unicode: "{U+2BDA}",
+			tags: ["astrological Hygiea", "астрологическая Гигея"],
+			groups: ["Astrology"],
+			recipe: ["astrol Hygiea"],
+		},
+		"astrological_pholus", {
+			unicode: "{U+2BDB}",
+			tags: ["astrological Pholus", "астрологическая Фол"],
+			groups: ["Astrology"],
+			recipe: ["astrol Pholus"],
+		},
+		"astrological_nessus", {
+			unicode: "{U+2BDC}",
+			tags: ["astrological Nessus", "астрологическая Несс"],
+			groups: ["Astrology"],
+			recipe: ["astrol Nessus"],
+		},
 		;
 		;
 		; * Astronomy
@@ -15230,6 +15349,18 @@ RegLib(this) {
 			tags: ["alchemical antimony trisulfide", "alchemical stibnite", "astronomical Earth", "алхимический стибнит", "алхимический сульфид сурьмы", "астрономическая Земля"],
 			groups: ["Astronomy"],
 			recipe: ["astron Earth", "alc stibnite"],
+		},
+		"astronomical_neptune", {
+			unicode: "{U+2BC9}",
+			tags: ["astronomical Neptune", "астрономический Нептун"],
+			groups: ["Astrology"],
+			recipe: ["astron Neptune"],
+		},
+		"astronomical_uranus", {
+			unicode: "{U+26E2}",
+			tags: ["astronomical Uranus", "астрономический Уран"],
+			groups: ["Astronomy"],
+			recipe: ["astron Uranus"],
 		},
 		;
 		;
