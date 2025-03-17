@@ -202,6 +202,9 @@ Class Ligaturiser {
 		}
 		if breakValidate && !breakSkip
 			return "N/A"
+
+		indexedValueResult := Map()
+
 		for characterEntry, value in ChrLib.entries.OwnProps() {
 			notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
 			notInRestrictClass := restrictClasses.Length > 0 && !(restrictClasses.Contains(value.symbol.category))
@@ -219,26 +222,24 @@ Class Ligaturiser {
 						if (getSuggestions && RegExMatch(recipeEntry, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
 							charFound := True
 
-							if getSuggestions {
-								output .= this.GetRecipesString_NEW(characterEntry)
-
-							} else {
-								output := this.GetComparedChar(value)
+							indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : this.GetComparedChar(value))
+							if !getSuggestions
 								break 2
-							}
 						}
 					}
 				} else if (getSuggestions && RegExMatch(recipe, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
 					charFound := True
 
-					if getSuggestions {
-						output .= this.GetRecipesString_NEW(characterEntry)
-
-					} else {
-						output := this.GetComparedChar(value)
+					indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : this.GetComparedChar(value))
+					if !getSuggestions
 						break
-					}
 				}
+			}
+		}
+
+		if charFound {
+			for key, recipe in indexedValueResult {
+				output .= recipe
 			}
 		}
 

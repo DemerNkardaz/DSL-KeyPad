@@ -15064,23 +15064,72 @@ RegLib() {
 			groups: ["Alchemical"],
 			recipe: ["alc nitric acid", "alc aqua fortis"],
 		},
+		"alchemical_acid_nitrohydrochloric", {
+			unicode: "{U+1F706}",
+			tags: ["alchemical nitrohydrochloric acid", "alchemical aqua regia", "алхимическая царская водка"],
+			groups: ["Alchemical"],
+			options: { titlesAlt: True },
+			recipe: ["alc aqua regia"],
+		},
+		"alchemical_acid_vinegar", {
+			unicode: "{U+1F70A}",
+			tags: ["alchemical acetic acid", "alchemical vinegar", "алхимическая уксусная кислота"],
+			groups: ["Alchemical"],
+			recipe: ["alc acetic acid", "alc vinegar"],
+		},
+		"alchemical_acid_vinegar_distilled_1", {
+			unicode: "{U+1F70B}",
+			tags: ["alchemical distilled acetic acid-1", "alchemical distilled vinegar-1", "алхимическая дистилированная уксусная кислота-1"],
+			groups: ["Alchemical"],
+			recipe: ["alc dis vinegar-1"],
+		},
+		"alchemical_acid_vinegar_distilled_2", {
+			unicode: "{U+1F70C}",
+			tags: ["alchemical distilled acetic acid-2", "alchemical distilled vinegar-2", "алхимическая дистилированная уксусная кислота-2"],
+			groups: ["Alchemical"],
+			recipe: ["alc dis vinegar-2"],
+		},
+		"alchemical_sand_bath", {
+			unicode: "{U+1F707}",
+			tags: ["alchemical sand bath", "alchemical aqua regia-2", "алхимическая песчаная баня", "алхимическая царская водка-2"],
+			groups: ["Alchemical"],
+			recipe: ["alc sand bath"],
+		},
+		"alchemical_ethanol_1", {
+			unicode: "{U+1F708}",
+			tags: ["alchemical ethanol-1", "alchemical aqua vitae-1", "алхимический этанол-1"],
+			groups: ["Alchemical"],
+			recipe: ["alc ethanol-1"],
+		},
+		"alchemical_ethanol_2", {
+			unicode: "{U+1F709}",
+			tags: ["alchemical ethanol-2", "alchemical aqua vitae-2", "алхимический этанол-2"],
+			groups: ["Alchemical"],
+			recipe: ["alc ethanol-2"],
+		},
 		"alchemical_brimstone", {
 			unicode: "{U+1F70D}",
-			tags: ["brimstone", "sulfur", "sulphur", "сера"],
+			tags: ["alchemical brimstone", "alchemical sulfur", "alchemical sulphur", "алхимическая сера"],
 			groups: ["Alchemical"],
 			recipe: ["alc sulfur"],
 		},
+		"alchemical_brimstone_philosophers", {
+			unicode: "{U+1F70E}",
+			tags: ["alchemical philosophers brimstone", "alchemical philosophers sulfur", "alchemical philosophers sulphur", "алхимическая философская сера"],
+			groups: ["Alchemical"],
+			recipe: ["alc phi sulfur"],
+		},
 		"alchemical_brimstone_black", {
 			unicode: "{U+1F70F}",
-			tags: ["black brimstone", "black sulfur", "black sulphur", "чёрная сера"],
+			tags: ["alchemical black brimstone", "alchemical black sulfur", "alchemical black sulphur", "алхимическая чёрная сера"],
 			groups: ["Alchemical"],
 			recipe: ["alc black sulfur"],
 		},
-		"alchemical_brimstone_philosophers", {
-			unicode: "{U+1F70E}",
-			tags: ["philosophers brimstone", "philosophers sulfur", "philosophers sulphur", "философская сера"],
+		"alchemical_salt", {
+			unicode: "{U+1F714}",
+			tags: ["alchemical salt", "алхимическая соль"],
 			groups: ["Alchemical"],
-			recipe: ["alc phi sulfur"],
+			recipe: ["alc salt"],
 		},
 		;
 		;
