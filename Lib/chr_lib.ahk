@@ -15149,6 +15149,66 @@ RegLib(this) {
 			groups: ["Alchemical"],
 			recipe: ["alc vitriol-2"],
 		},
+		"alchemical_rock_salt_1", {
+			unicode: "{U+1F718}",
+			tags: ["alchemical rock salt-1", "alchemical bismuth", "алхимическая каменная соль-1", "алхимический висмут"],
+			groups: ["Alchemical"],
+			recipe: ["alc rock salt-1", "alc bismuth"],
+		},
+		"alchemical_rock_salt_2", {
+			unicode: "{U+1F719}",
+			tags: ["alchemical rock salt-2", "алхимическая каменная соль-2"],
+			groups: ["Alchemical"],
+			recipe: ["alc rock salt-2", "alc bismuth"],
+		},
+		"alchemical_gold", {
+			unicode: "{U+1F71A}",
+			tags: ["alchemical gold", "алхимическое золото"],
+			groups: ["Alchemical"],
+			recipe: ["alc gold"],
+		},
+		"alchemical_silver", {
+			unicode: "{U+1F71B}",
+			tags: ["alchemical silver", "алхимическое серебро"],
+			groups: ["Alchemical"],
+			recipe: ["alc silver"],
+		},
+		"alchemical_iron_ore_1", {
+			unicode: "{U+1F71C}",
+			tags: ["alchemical iron ore-1", "алхимическая железая руда-1"],
+			groups: ["Alchemical"],
+			recipe: ["alc iron ore-1"],
+		},
+		"alchemical_iron_ore_2", {
+			unicode: "{U+1F71D}",
+			tags: ["alchemical iron ore-2", "алхимическая железая руда-2"],
+			groups: ["Alchemical"],
+			recipe: ["alc iron ore-2"],
+		},
+		"alchemical_copper_ore", {
+			unicode: "{U+1F720}",
+			tags: ["alchemical copper ore", "алхимическая медная руда"],
+			groups: ["Alchemical"],
+			recipe: ["alc cop ore"],
+		},
+		"alchemical_iron_copper_ore", {
+			unicode: "{U+1F721}",
+			tags: ["alchemical iron-copper ore", "алхимическая медно-железная руда"],
+			groups: ["Alchemical"],
+			recipe: ["alc iron cop ore"],
+		},
+		"alchemical_crocus_of_iron", {
+			unicode: "{U+1F71E}",
+			tags: ["alchemical crocus of iron", "алхимический крокус железа"],
+			groups: ["Alchemical"],
+			recipe: ["alc iron croc"],
+		},
+		"alchemical_regulus_of_iron", {
+			unicode: "{U+1F71F}",
+			tags: ["alchemical regulus of iron", "алхимический регулус железа"],
+			groups: ["Alchemical"],
+			recipe: ["alc iron regu"],
+		},
 		;
 		;
 		; * Astrology
