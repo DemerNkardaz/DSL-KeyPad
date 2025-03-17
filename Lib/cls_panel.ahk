@@ -236,6 +236,10 @@ Class Panel {
 						;
 						{ type: "Recipe", group: "Alchemical", separator: true },
 						;
+						{ type: "Recipe", group: "Astrology", separator: true },
+						;
+						{ type: "Recipe", group: "Astronomy", separator: true },
+						;
 						{ type: "Recipe", group: "Wallet Signs", separator: true },
 						;
 						{ type: "Recipe", group: "Other Signs", separator: true },

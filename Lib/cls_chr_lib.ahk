@@ -3,6 +3,7 @@ class ChrLib {
 	static entries := {}
 	static entryGroups := Map()
 	static entryRecipes := Map()
+	static duplicatesList := []
 	static lastIndexAdded := -1
 
 	static AddEntry(entryName, entry) {
@@ -322,7 +323,7 @@ class ChrLib {
 				if !this.entryRecipes.Has(recipe) {
 					this.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.hasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index })
 				} else {
-					MsgBox(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), recipe), App.winTitle, "Icon!")
+					this.duplicatesList.Push(recipe)
 				}
 			}
 		}

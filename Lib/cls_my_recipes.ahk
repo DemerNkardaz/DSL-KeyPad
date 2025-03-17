@@ -508,6 +508,10 @@ Class MyRecipes {
 					section.recipe := StrSplit(section.recipe, "|")
 				}
 
+				if !IsObject(section.recipe) {
+					section.recipe := [section.recipe]
+				}
+
 				section.result := this.FormatResult(section.result, True)
 
 				resultToUnicode := []

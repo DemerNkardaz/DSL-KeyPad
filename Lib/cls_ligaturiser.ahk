@@ -111,9 +111,10 @@ Class Ligaturiser {
 			}
 
 			tooltipSuggestions := input != "" ? Ligaturiser.FormatSuggestions(this.ValidateRecipes(input, True)) : ""
+			currentInputMode := Util.StrVarsInject(Locale.Read("tooltip_input_mode"), "[" Cfg.Get("Input_Mode") "]")
 
 
-			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
 			if !pauseOn || (IH.EndKey = "Enter") {
 				try {
@@ -222,7 +223,7 @@ Class Ligaturiser {
 						if (getSuggestions && RegExMatch(recipeEntry, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
 							charFound := True
 
-							indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : this.GetComparedChar(value))
+							indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, , Cfg.Get("Input_Mode")))
 							if !getSuggestions
 								break 2
 						}
@@ -230,7 +231,7 @@ Class Ligaturiser {
 				} else if (getSuggestions && RegExMatch(recipe, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
 					charFound := True
 
-					indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : this.GetComparedChar(value))
+					indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, , Cfg.Get("Input_Mode")))
 					if !getSuggestions
 						break
 				}
@@ -238,8 +239,8 @@ Class Ligaturiser {
 		}
 
 		if charFound {
-			for key, recipe in indexedValueResult {
-				output .= recipe
+			for key, value in indexedValueResult {
+				output .= value
 			}
 		}
 
@@ -455,7 +456,7 @@ Class Ligaturiser {
 		output := ""
 
 		recipe := ChrLib.GetRecipe(entryName, True, " | ")
-		uniSequence := Util.StrFormattedReduce(ChrLib.Get(entryName))
+		uniSequence := Util.StrFormattedReduce(ChrLib.Get(entryName), , True)
 
 		output .= uniSequence " (" (IsObject(recipe) ? recipe.ToString(" | ") : recipe) "), "
 

@@ -14080,9 +14080,9 @@ MapInsert(Characters,
 	},
 )
 
-RegLib()
-RegLib() {
-	local this := ChrLib
+ChrLib.base.DefineProp("RegLib", { Call: ObjBindMethod(RegLib) })
+ChrLib.RegLib()
+RegLib(this) {
 	local D := "dotted_circle"
 
 	ChrLib.AddEntries(
@@ -15127,9 +15127,31 @@ RegLib() {
 		},
 		"alchemical_salt", {
 			unicode: "{U+1F714}",
-			tags: ["alchemical salt", "алхимическая соль"],
+			tags: ["alchemical salt", "archaic astrological Earth", "алхимическая соль", "архаичное астрологическая Земля"],
 			groups: ["Alchemical"],
-			recipe: ["alc salt"],
+			recipe: ["alc salt", "astrol arc Earth"],
+		},
+		;
+		;
+		; * Astrology
+		;
+		;
+		"astrological_earth", {
+			unicode: "{U+1F728}",
+			tags: ["alchemical copper acetate", "alchemical aes viride", "astrological Earth", "алхимический ацетат меди", "астрологическая Земля"],
+			groups: ["Astrology"],
+			recipe: ["astrol Earth", "alc copper acetate"],
+		},
+		;
+		;
+		; * Astronomy
+		;
+		;
+		"astronomical_earth", {
+			unicode: "{U+2641}",
+			tags: ["alchemical antimony trisulfide", "alchemical stibnite", "astronomical Earth", "алхимический стибнит", "алхимический сульфид сурьмы", "астрономическая Земля"],
+			groups: ["Astronomy"],
+			recipe: ["astron Earth", "alc stibnite"],
 		},
 		;
 		;
@@ -16958,6 +16980,8 @@ RegLib() {
 		},
 	)
 
+	if this.duplicatesList.Length > 0
+		TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), this.duplicatesList.ToString()), App.winTitle, "Icon! Mute")
 }
 
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.Get("dotted_circle"))
@@ -16980,4 +17004,11 @@ showalll() {
 	}
 	MsgBox(entiesarr.ToString("`n"))
 }
-;SetTimer((*) => showalll(), -1000)
+showalll2() {
+	entiesarr := []
+	for entry, value in ChrLib.entries.OwnProps() {
+		entiesarr.Push(entry)
+	}
+	MsgBox(entiesarr.ToString("  "))
+}
+;SetTimer((*) => showalll2(), -5000)

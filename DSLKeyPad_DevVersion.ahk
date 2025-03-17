@@ -4615,22 +4615,23 @@ ToggleInputMode() {
 	ActivationMessage["en"] := {}
 
 	InputModeLabel := Map(
-		"Default", Map("ru", "символов юникода", "en", "unicode symbols"),
+		"Unicode", Map("ru", "символов юникода", "en", "unicode symbols"),
 		"HTML", Map("ru", "HTML-кодов", "en", "HTML codes"),
 		"LaTeX", Map("ru", "LaTeX-кодов", "en", "LaTeX codes")
 	)
 
 	global InputMode, ConfigFile
 
-	if (InputMode = "Default") {
+	if (InputMode = "Unicode") {
 		InputMode := "HTML"
 	} else if (InputMode = "HTML") {
 		InputMode := "LaTeX"
 	} else if (InputMode = "LaTeX") {
-		InputMode := "Default"
+		InputMode := "Unicode"
 	}
 
 	IniWrite InputMode, ConfigFile, "Settings", "InputMode"
+	Cfg.Set(InputMode, "Input_Mode")
 
 
 	ActivationMessage["ru"].Active := "Ввод " . InputModeLabel[InputMode][LanguageCode] . " активирован"
@@ -4714,7 +4715,7 @@ HandleFastKey(combo := "", characterNames*) {
 		LongPress.lastLetterInput := output
 
 
-		inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation)) ? "Text" : "Input"
+		inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") == "LaTeX" || Cfg.Get("Input_Mode") == "HTML") ? "Text" : "Input"
 		Send%inputType%(output)
 
 	} else {
