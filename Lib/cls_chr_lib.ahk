@@ -174,14 +174,16 @@ class ChrLib {
 	}
 
 
-	static GetRecipe(entryName, formatted := False) {
+	static GetRecipe(entryName, formatted := False, formatChar := ", ") {
 		output := []
-		if this.entries.%entryName%.HasOwnProp("recipeAlt") {
+		if this.entries.%entryName%.HasOwnProp("recipeAlt") && this.entries.%entryName%.recipeAlt.Length > 0 {
 			output := this.entries.%entryName%.recipeAlt
-		} else if this.entries.%entryName%.HasOwnProp("recipe") {
+		} else if this.entries.%entryName%.HasOwnProp("recipe") && this.entries.%entryName%.recipe.Length > 0 {
 			output := this.entries.%entryName%.recipe
 		}
-		return formatted ? output.ToString() : output
+
+		output := formatted && output.length > 0 ? output.ToString(formatChar) : output
+		return output
 	}
 
 	static Count(groupRestrict?) {

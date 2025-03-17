@@ -35,7 +35,7 @@ Class Ligaturiser {
 			try {
 				output := ""
 				for prompt in StrSplit(this.prompt, " ") {
-					output .= this.EntriesWalk(prompt, , True) " "
+					output .= this.ValidateRecipes(prompt, , True) " "
 				}
 
 				if output = "" || RegExMatch(output, "^\s+$")
@@ -110,7 +110,7 @@ Class Ligaturiser {
 				cleanPastInput := False
 			}
 
-			tooltipSuggestions := input != "" ? Ligaturiser.FormatSuggestions(this.EntriesWalk(input, True)) : ""
+			tooltipSuggestions := input != "" ? Ligaturiser.FormatSuggestions(this.ValidateRecipes(input, True)) : ""
 
 
 			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
@@ -123,7 +123,7 @@ Class Ligaturiser {
 						intermediateValue := ""
 
 						Loop repeatCount {
-							tempValue := this.EntriesWalk(postInput, , RegExMatch(input, "^\(\d+~\)\s"))
+							tempValue := this.ValidateRecipes(postInput, , RegExMatch(input, "^\(\d+~\)\s"))
 							intermediateValue .= tempValue
 
 							len := StrLen(intermediateValue)
@@ -142,7 +142,7 @@ Class Ligaturiser {
 							break
 						}
 					} else {
-						intermediateValue := this.EntriesWalk(RegExReplace(input, "^\(\~\)\s", ""), , RegExMatch(input, "^\(\~\)\s"))
+						intermediateValue := this.ValidateRecipes(RegExReplace(input, "^\(\~\)\s", ""), , RegExMatch(input, "^\(\~\)\s"))
 						if intermediateValue != "" {
 							output := intermediateValue
 							break
@@ -172,6 +172,110 @@ Class Ligaturiser {
 			ClipSend(output)
 		else
 			SendText(output)
+	}
+
+	static ValidateRecipes(prompt, getSuggestions := False, breakSkip := False, restrictClasses := []) {
+		promptBackup := prompt
+		output := ""
+
+		promptValidator := RegExEscape(prompt)
+		breakValidate := True
+		monoCaseRecipe := False
+
+		charFound := False
+
+		for validatingValue in ChrLib.entryRecipes {
+			if (RegExMatch(validatingValue, "^" promptValidator)) {
+				breakValidate := False
+				break
+			}
+		}
+
+		if breakValidate {
+			for validatingValue in ChrLib.entryRecipes {
+				if (RegExMatch(StrLower(validatingValue), "^" StrLower(promptValidator))) {
+					monoCaseRecipe := True
+					breakValidate := False
+					break
+				}
+			}
+		}
+		if breakValidate && !breakSkip
+			return "N/A"
+		for characterEntry, value in ChrLib.entries.OwnProps() {
+			notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
+			notInRestrictClass := restrictClasses.Length > 0 && !(restrictClasses.Contains(value.symbol.category))
+
+			if notInRestrictClass {
+				continue
+			} else if notHasRecipe {
+				continue
+			} else {
+
+				recipe := value.recipe
+
+				if IsObject(recipe) {
+					for _, recipeEntry in recipe {
+						if (getSuggestions && RegExMatch(recipeEntry, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
+							charFound := True
+
+							if getSuggestions {
+								output .= this.GetRecipesString_NEW(characterEntry)
+
+							} else {
+								output := this.GetComparedChar(value)
+								break 2
+							}
+						}
+					}
+				} else if (getSuggestions && RegExMatch(recipe, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
+					charFound := True
+
+					if getSuggestions {
+						output .= this.GetRecipesString_NEW(characterEntry)
+
+					} else {
+						output := this.GetComparedChar(value)
+						break
+					}
+				}
+			}
+		}
+
+		if !charFound {
+			IntermediateValue := prompt
+			for characterEntry, value in ChrLib.entries.OwnProps() {
+				notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
+				notInRestrictClass := restrictClasses.Length > 0 && !(restrictClasses.Contains(value.symbol.category))
+
+				if notInRestrictClass {
+					continue
+				} else if notHasRecipe {
+					continue
+				} else {
+					recipe := value.recipe
+
+					if IsObject(recipe) {
+						for _, recipeEntry in recipe {
+							if InStr(IntermediateValue, recipeEntry, true) {
+								IntermediateValue := StrReplace(IntermediateValue, recipeEntry, this.GetComparedChar(value))
+							}
+						}
+					} else {
+						if InStr(IntermediateValue, recipe, true) {
+							IntermediateValue := StrReplace(IntermediateValue, recipe, this.GetComparedChar(value))
+						}
+					}
+				}
+			}
+
+			if IntermediateValue != prompt {
+				output := IntermediateValue
+				charFound := True
+			}
+		}
+
+		return output
 	}
 
 	static EntriesWalk(prompt, getSuggestions := False, breakSkip := False, restrictClasses := []) {
@@ -342,6 +446,17 @@ Class Ligaturiser {
 		}
 
 		output := RegExReplace(output, ",\s$", "")
+
+		return output
+	}
+
+	static GetRecipesString_NEW(entryName) {
+		output := ""
+
+		recipe := ChrLib.GetRecipe(entryName, True, " | ")
+		uniSequence := Util.StrFormattedReduce(ChrLib.Get(entryName))
+
+		output .= uniSequence " (" (IsObject(recipe) ? recipe.ToString(" | ") : recipe) "), "
 
 		return output
 	}

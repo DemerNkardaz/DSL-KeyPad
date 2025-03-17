@@ -15031,6 +15031,59 @@ RegLib() {
 		},
 		;
 		;
+		; * Alchemical
+		;
+		;
+		"alchemical_element_air", {
+			unicode: "{U+1F701}",
+			tags: ["alchemical air", "алхимический воздух"],
+			groups: ["Alchemical"],
+			recipe: ["alc air"],
+		},
+		"alchemical_element_fire", {
+			unicode: "{U+1F702}",
+			tags: ["alchemical fire", "алхимический огонь"],
+			groups: ["Alchemical"],
+			recipe: ["alc fire"],
+		},
+		"alchemical_element_earth", {
+			unicode: "{U+1F703}",
+			tags: ["alchemical earth", "алхимическая земля"],
+			groups: ["Alchemical"],
+			recipe: ["alc earth"],
+		},
+		"alchemical_element_water", {
+			unicode: "{U+1F704}",
+			tags: ["alchemical water", "алхимическая вода"],
+			groups: ["Alchemical"],
+			recipe: ["alc water"],
+		},
+		"alchemical_acid_nitric", {
+			unicode: "{U+1F705}",
+			tags: ["alchemical nitric acid", "alchemical aqua fortis", "алхимическая азотная кислота"],
+			groups: ["Alchemical"],
+			recipe: ["alc nitric acid", "alc aqua fortis"],
+		},
+		"alchemical_brimstone", {
+			unicode: "{U+1F70D}",
+			tags: ["brimstone", "sulfur", "sulphur", "сера"],
+			groups: ["Alchemical"],
+			recipe: ["alc sulfur"],
+		},
+		"alchemical_brimstone_black", {
+			unicode: "{U+1F70F}",
+			tags: ["black brimstone", "black sulfur", "black sulphur", "чёрная сера"],
+			groups: ["Alchemical"],
+			recipe: ["alc black sulfur"],
+		},
+		"alchemical_brimstone_philosophers", {
+			unicode: "{U+1F70E}",
+			tags: ["philosophers brimstone", "philosophers sulfur", "philosophers sulphur", "философская сера"],
+			groups: ["Alchemical"],
+			recipe: ["alc phi sulfur"],
+		},
+		;
+		;
 		; * Accented Latin
 		;
 		;
