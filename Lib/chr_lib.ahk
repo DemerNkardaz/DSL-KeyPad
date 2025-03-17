@@ -15131,6 +15131,24 @@ RegLib(this) {
 			groups: ["Alchemical"],
 			recipe: ["alc salt", "astrol arc Earth"],
 		},
+		"alchemical_potassium_nitrate", {
+			unicode: "{U+1F715}",
+			tags: ["alchemical potassium nitrate", "alchemical nitre", "алхимический нитрат калия"],
+			groups: ["Alchemical"],
+			recipe: ["alc nitre"],
+		},
+		"alchemical_vitriol_1", {
+			unicode: "{U+1F716}",
+			tags: ["alchemical metal sulfate-1", "alchemical vitriol-1", "алхимический сульфат металла-1"],
+			groups: ["Alchemical"],
+			recipe: ["alc vitriol-1"],
+		},
+		"alchemical_vitriol_2", {
+			unicode: "{U+1F717}",
+			tags: ["alchemical metal sulfate-2", "alchemical vitriol-2", "алхимический сульфат металла-2"],
+			groups: ["Alchemical"],
+			recipe: ["alc vitriol-2"],
+		},
 		;
 		;
 		; * Astrology
@@ -15140,7 +15158,7 @@ RegLib(this) {
 			unicode: "{U+1F728}",
 			tags: ["alchemical copper acetate", "alchemical aes viride", "astrological Earth", "алхимический ацетат меди", "астрологическая Земля"],
 			groups: ["Astrology"],
-			recipe: ["astrol Earth", "alc copper acetate"],
+			recipe: ["astrol Earth", "alc cop acetate"],
 		},
 		;
 		;
