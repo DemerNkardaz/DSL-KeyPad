@@ -13,27 +13,24 @@ class ChrLib {
 		for key, value in entry.OwnProps() {
 			if value is Func {
 				this.entries.%entryName%.DefineProp(key, { Get: value })
-			}
-			else if (Util.IsArray(value) || IsObject(value)) {
-				if Util.IsArray(value) {
-					this.entries.%entryName%.%key% := []
-					for subValue in value {
-						if subValue is Func {
-							intermediateObj := {}
-							intermediateObj.DefineProp("Get", { Get: subValue })
-							this.entries.%entryName%.%key%.Push(intermediateObj.Get)
-						} else {
-							this.entries.%entryName%.%key%.Push(subValue)
-						}
+			} else if Util.IsArray(value) {
+				this.entries.%entryName%.%key% := []
+				for subValue in value {
+					if subValue is Func {
+						intermediateObj := {}
+						intermediateObj.DefineProp("Get", { Get: subValue })
+						this.entries.%entryName%.%key%.Push(intermediateObj.Get)
+					} else {
+						this.entries.%entryName%.%key%.Push(subValue)
 					}
-				} else {
-					this.entries.%entryName%.%key% := {}
-					for subKey, subValue in value.OwnProps() {
-						if subValue is Func {
-							this.entries.%entryName%.%key%.DefineProp(subKey, { Get: subValue })
-						} else {
-							this.entries.%entryName%.%key%.%subKey% := subValue
-						}
+				}
+			} else if IsObject(value) {
+				this.entries.%entryName%.%key% := {}
+				for subKey, subValue in value.OwnProps() {
+					if subValue is Func {
+						this.entries.%entryName%.%key%.DefineProp(subKey, { Get: subValue })
+					} else {
+						this.entries.%entryName%.%key%.%subKey% := subValue
 					}
 				}
 			} else {
@@ -119,11 +116,8 @@ class ChrLib {
 			} else if (extraRules && getMode != "Unicode") && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(getMode) {
 				output .= Util.UnicodeToChar(entry.alterations.%getMode%)
 
-			} else if entry.HasOwnProp("sequence") {
-				output .= Util.UnicodeToChar(entry.sequence)
-
 			} else {
-				output .= Util.UnicodeToChar(entry.unicode)
+				output .= Util.UnicodeToChar(entry.HasOwnProp("sequence") ? entry.sequence : entry.unicode)
 			}
 		}
 
