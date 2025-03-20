@@ -18791,6 +18791,185 @@ RegLib(this) {
 		},
 		;
 		;
+		; * Sidetic Script
+		;
+		;
+		;
+		; * Sidetic Script
+		;
+		;
+		"sidetic_let_n01", {
+			unicode: "{U+10940}",
+			tags: ["сидетская буква а", "sidetic letter a"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[A]" },
+		},
+		"sidetic_let_n02_e", {
+			unicode: "{U+10941}",
+			tags: ["сидетская буква е", "sidetic letter e"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[E]" },
+		},
+		"sidetic_let_n03_i", {
+			unicode: "{U+10942}",
+			tags: ["сидетская буква и", "sidetic letter i"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[I]" },
+		},
+		"sidetic_let_n04_o", {
+			unicode: "{U+10943}",
+			tags: ["сидетская буква о", "sidetic letter o"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[O]" },
+		},
+		"sidetic_let_n05_u", {
+			unicode: "{U+10944}",
+			tags: ["сидетская буква у", "sidetic letter u"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[U]" },
+		},
+		"sidetic_let_n06_v", {
+			unicode: "{U+10945}",
+			tags: ["сидетская буква в", "sidetic letter v"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[V]" },
+		},
+		"sidetic_let_n07_j", {
+			unicode: "{U+10946}",
+			tags: ["сидетская буква й", "sidetic letter j"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[J]" },
+		},
+		"sidetic_let_n08_p", {
+			unicode: "{U+10947}",
+			tags: ["сидетская буква п", "sidetic letter p"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[P]" },
+		},
+		"sidetic_let_n09_ts", {
+			unicode: "{U+10948}",
+			tags: ["сидетская буква тс", "sidetic letter ts"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [T]" },
+		},
+		"sidetic_let_n10_m", {
+			unicode: "{U+10949}",
+			tags: ["сидетская буква м", "sidetic letter m"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[M]" },
+		},
+		"sidetic_let_n11_t", {
+			unicode: "{U+1094A}",
+			tags: ["сидетская буква т", "sidetic letter t"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[T]" },
+		},
+		"sidetic_let_n12_d", {
+			unicode: "{U+1094B}",
+			tags: ["сидетская буква д", "sidetic letter d"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[D]" },
+		},
+		"sidetic_let_n13_th", {
+			unicode: "{U+1094C}",
+			tags: ["сидетская буква тх", "sidetic letter th"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: ">!>+ [T]" },
+		},
+		"sidetic_let_n14_z", {
+			unicode: "{U+1094D}",
+			tags: ["сидетская буква з", "sidetic letter z"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[Z]" },
+		},
+		"sidetic_let_n15_s", {
+			unicode: "{U+1094E}",
+			tags: ["сидетская буква с", "sidetic letter s"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[S]" },
+		},
+		"sidetic_let_n16_n", {
+			unicode: "{U+1094F}",
+			tags: ["сидетская буква н", "sidetic letter n"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[N]" },
+		},
+		"sidetic_let_n17_l", {
+			unicode: "{U+10950}",
+			tags: ["сидетская буква л", "sidetic letter l"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[L]" },
+		},
+		"sidetic_let_n18_tsh", {
+			unicode: "{U+10951}",
+			tags: ["сидетская буква тш", "sidetic letter tsh"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[C]" },
+		},
+		"sidetic_let_n19_g", {
+			unicode: "{U+10952}",
+			tags: ["сидетская буква г", "sidetic letter g"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[G]" },
+		},
+		"sidetic_let_n20_khi", {
+			unicode: "{U+10953}",
+			tags: ["сидетская буква кхи", "sidetic letter khi"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [K]" },
+		},
+		"sidetic_let_n21_r", {
+			unicode: "{U+10954}",
+			tags: ["сидетская буква р", "sidetic letter r"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[R]" },
+		},
+		"sidetic_let_n22", {
+			unicode: "{U+10955}",
+			groups: ["Sidetic"],
+			options: { titlesAlt: True },
+		},
+		"sidetic_let_n22_k", {
+			unicode: "{U+10956}",
+			tags: ["сидетская буква к", "sidetic letter k"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: "[K]" },
+		},
+		"sidetic_let_n23_nj", {
+			unicode: "{U+10957}",
+			tags: ["сидетская буква нй", "sidetic letter nj"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [N]" },
+		},
+		"sidetic_let_n25_dzh", {
+			unicode: "{U+10958}",
+			tags: ["сидетская буква дж", "sidetic letter dzh"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [J]" },
+		},
+		"sidetic_let_n26_dz", {
+			unicode: "{U+10959}",
+			tags: ["сидетская буква дз", "sidetic letter dz"],
+			groups: ["Sidetic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [Z]" },
+		},
+		"sidetic_let_n27", {
+			unicode: "{U+1095A}",
+			groups: ["Sidetic"],
+			options: { titlesAlt: True },
+		},
+		"sidetic_let_n28", {
+			unicode: "{U+1095B}",
+			groups: ["Sidetic"],
+			options: { titlesAlt: True },
+		},
+		"sidetic_let_n29", {
+			unicode: "{U+1095C}",
+			groups: ["Sidetic"],
+			options: { titlesAlt: True },
+		},
+		;
+		;
 		; * Wallet Signs
 		;
 		;
