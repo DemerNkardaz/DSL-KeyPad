@@ -255,6 +255,11 @@ class ChrLib {
 		else if !refinedEntry.options.HasOwnProp("noCalc")
 			refinedEntry.options.noCalc := False
 
+		if !refinedEntry.HasOwnProp("symbol") {
+			refinedEntry.symbol := { category: "N/A" }
+			refinedEntry.symbol.set := characterSequence
+		}
+
 		if !refinedEntry.HasOwnProp("alterations")
 			refinedEntry.alterations := {}
 
@@ -283,31 +288,24 @@ class ChrLib {
 			if refinedEntry.symbol.HasOwnProp("category") {
 				category := refinedEntry.symbol.category
 
+				refinedEntry.symbol.set := (category = "Diacritic Mark" ? Chr(0x25CC) characterSequence : characterSequence)
 				if category = "Diacritic Mark" {
-					if !hasSet
-						refinedEntry.symbol.set := Chr(0x25CC) characterSequence
 					if !hasCustoms
 						refinedEntry.symbol.customs := "s72"
 					if !hasFont
 						refinedEntry.symbol.font := "Cambria"
-				} else if category = "Spaces" {
-					if !hasSet
-						refinedEntry.symbol.set := characterSequence
-					if !hasCustoms
-						refinedEntry.symbol.customs := "underline"
-				} else {
-					if !hasSet
-						refinedEntry.symbol.set := characterSequence
+				} else if category = "Spaces" && !hasCustoms {
+					refinedEntry.symbol.customs := "underline"
 				}
-
 			} else {
 				refinedEntry.symbol.category := "N/A"
 				if !hasSet
 					refinedEntry.symbol.set := characterSequence
 			}
-		} else {
-			refinedEntry.symbol := { category: "N/A" }
-			refinedEntry.symbol.set := characterSequence
+
+			if RegExMatch(entryName, "i)^(permic|hungarian)", &match) {
+				refinedEntry.symbol.font := "Noto Sans Old " match[1]
+			}
 		}
 
 		for group in refinedEntry.groups {
