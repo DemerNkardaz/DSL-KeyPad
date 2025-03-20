@@ -793,7 +793,11 @@ Class Panel {
 				"^permic", "Noto Sans Old Permic",
 				"^hungarian", "Noto Sans Old Hungarian",
 				"^south_arabian", "Noto Sans Old South Arabian",
-				"^north_arabian", "Noto Sans Old North Arabian"
+				"^north_arabian", "Noto Sans Old North Arabian",
+				"^alchemical", "Kurinto Sans",
+				"^astrological", "Kurinto Sans",
+				"^astronomical", "Kurinto Sans",
+				"^symbolistics", "Kurinto Sans"
 			)
 
 			this.PanelGUI[options.prefix "Alert"].Text := ""
