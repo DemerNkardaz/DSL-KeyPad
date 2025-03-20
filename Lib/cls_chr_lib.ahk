@@ -322,8 +322,11 @@ class ChrLib {
 					refinedEntry.symbol.set := characterSequence
 			}
 
-			if RegExMatch(entryName, "i)^(permic|hungarian|phoenician)", &match) {
-				refinedEntry.symbol.font := match[1] = "phoenician" ? "Noto Sans " match[1] : "Noto Sans Old " match[1]
+			if RegExMatch(entryName, "i)^(permic|hungarian|north_arabian|south_arabian)", &match) {
+				scriptName := StrReplace(match[1], "_", " ")
+				refinedEntry.symbol.font := "Noto Sans Old " scriptName
+			} else if InStr(entryName, "phoenician") {
+				refinedEntry.symbol.font := "Segoe UI Historic"
 			}
 		}
 

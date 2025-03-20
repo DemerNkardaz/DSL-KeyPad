@@ -789,7 +789,20 @@ Class Panel {
 			}
 
 			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read("character"))
-			this.PanelGUI[options.prefix "Alert"].Text := RegExMatch(characterEntry, "^permic") && HasPermicFont = "Noto Sans Old Permic" ? Util.StrVarsInject(Locale.Read("warning_nofont"), HasPermicFont) : RegExMatch(characterEntry, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" ? Util.StrVarsInject(Locale.Read("warning_nofont"), HasHungarianFont) : ""
+			FontMap := Map(
+				"^permic", "Noto Sans Old Permic",
+				"^hungarian", "Noto Sans Old Hungarian",
+				"^south_arabian", "Noto Sans Old South Arabian",
+				"^north_arabian", "Noto Sans Old North Arabian"
+			)
+
+			this.PanelGUI[options.prefix "Alert"].Text := ""
+			for pattern, fontName in FontMap {
+				if RegExMatch(characterEntry, pattern) {
+					this.PanelGUI[options.prefix "Alert"].Text := Util.StrVarsInject(Locale.Read("warning_nofont"), fontName)
+					break
+				}
+			}
 
 			this.PanelGUI[options.prefix "KeyPreview"].Text := characterKey
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := StrLen(characterCombinationKey) < 10 ? characterCombinationKey : ""
