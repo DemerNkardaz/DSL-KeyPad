@@ -18397,6 +18397,203 @@ RegLib(this) {
 		},
 		;
 		;
+		; * Ancient South Arabian
+		;
+		;
+		"south_arabian_let_he", {
+			unicode: "{U+10A60}",
+			tags: ["южноаравийская буква Хе", "south arabian letter He"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[H]" },
+		},
+		"south_arabian_let_lamedh", {
+			unicode: "{U+10A61}",
+			tags: ["южноаравийская буква Ламед", "south arabian letter Lamedh"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[L]" },
+		},
+		"south_arabian_let_heth", {
+			unicode: "{U+10A62}",
+			tags: ["южноаравийская буква Хет", "south arabian letter Heth"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">+ [H]" },
+		},
+		"south_arabian_let_mem", {
+			unicode: "{U+10A63}",
+			tags: ["южноаравийская буква Мем", "south arabian letter Mem"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[M]" },
+		},
+		"south_arabian_let_qoph", {
+			unicode: "{U+10A64}",
+			tags: ["южноаравийская буква Куф", "south arabian letter Qoph"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[Q]" },
+		},
+		"south_arabian_let_waw", {
+			unicode: "{U+10A65}",
+			tags: ["южноаравийская буква Уав", "south arabian letter Waw"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[W]" },
+		},
+		"south_arabian_let_shin", {
+			unicode: "{U+10A66}",
+			tags: ["южноаравийская буква Шин", "south arabian letter Shin"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">+ [S]" },
+		},
+		"south_arabian_let_resh", {
+			unicode: "{U+10A67}",
+			tags: ["южноаравийская буква Реш", "south arabian letter Resh"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[R]" },
+		},
+		"south_arabian_let_beth", {
+			unicode: "{U+10A68}",
+			tags: ["южноаравийская буква Бет", "south arabian letter Beth"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[B]" },
+		},
+		"south_arabian_let_taw", {
+			unicode: "{U+10A69}",
+			tags: ["южноаравийская буква Тау", "south arabian letter Taw"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[T]" },
+		},
+		"south_arabian_let_sat", {
+			unicode: "{U+10A6A}",
+			tags: ["южноаравийская буква Сат", "south arabian letter Sat"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[S]" },
+		},
+		"south_arabian_let_kaph", {
+			unicode: "{U+10A6B}",
+			tags: ["южноаравийская буква Каф", "south arabian letter Kaph"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[K]" },
+		},
+		"south_arabian_let_nun", {
+			unicode: "{U+10A6C}",
+			tags: ["южноаравийская буква Нун", "south arabian letter Nun"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[N]" },
+		},
+		"south_arabian_let_kheth", {
+			unicode: "{U+10A6D}",
+			tags: ["южноаравийская буква Хеф", "south arabian letter Kheth"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">! [H]" },
+		},
+		"south_arabian_let_sadhe", {
+			unicode: "{U+10A6E}",
+			tags: ["южноаравийская буква Садхе", "south arabian letter Sadhe"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">! [S]" },
+		},
+		"south_arabian_let_samekh", {
+			unicode: "{U+10A6F}",
+			tags: ["южноаравийская буква Самек", "south arabian letter Samekh"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "<+ [S]" },
+		},
+		"south_arabian_let_fe", {
+			unicode: "{U+10A70}",
+			tags: ["южноаравийская буква Фе", "south arabian letter Fe"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[F]" },
+		},
+		"south_arabian_let_alef", {
+			unicode: "{U+10A71}",
+			tags: ["южноаравийская буква Алеф", "south arabian letter Alef"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[A]" },
+		},
+		"south_arabian_let_ayn", {
+			unicode: "{U+10A72}",
+			tags: ["южноаравийская буква Аин", "south arabian letter Ayn"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">! [A]" },
+		},
+		"south_arabian_let_dhadhe", {
+			unicode: "{U+10A73}",
+			tags: ["южноаравийская буква Дадхе", "south arabian letter Dhadhe"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">! [D]" },
+		},
+		"south_arabian_let_gimel", {
+			unicode: "{U+10A74}",
+			tags: ["южноаравийская буква Гимель", "south arabian letter Gimel"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[G]" },
+		},
+		"south_arabian_let_daleth", {
+			unicode: "{U+10A75}",
+			tags: ["южноаравийская буква Далет", "south arabian letter Daleth"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[D]" },
+		},
+		"south_arabian_let_ghayn", {
+			unicode: "{U+10A76}",
+			tags: ["южноаравийская буква Гаин", "south arabian letter Ghayn"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[Y]" },
+		},
+		"south_arabian_let_teth", {
+			unicode: "{U+10A77}",
+			tags: ["южноаравийская буква Тет", "south arabian letter Teth"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">! [T]" },
+		},
+		"south_arabian_let_zayn", {
+			unicode: "{U+10A78}",
+			tags: ["южноаравийская буква Зайн", "south arabian letter Zayn"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[Z]" },
+		},
+		"south_arabian_let_dhaleth", {
+			unicode: "{U+10A79}",
+			tags: ["южноаравийская буква Дхалет", "south arabian letter Dhaleth"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">!>+ [D]" },
+		},
+		"south_arabian_let_yodh", {
+			unicode: "{U+10A7A}",
+			tags: ["южноаравийская буква Йод", "south arabian letter Yodh"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "[J]" },
+		},
+		"south_arabian_let_thaw", {
+			unicode: "{U+10A7B}",
+			tags: ["южноаравийская буква Тав", "south arabian letter Thaw"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">!>+ [T]" },
+		},
+		"south_arabian_let_theth", {
+			unicode: "{U+10A7C}",
+			tags: ["южноаравийская буква Тхет", "south arabian letter Theth"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: "<+ [T]" },
+		},
+		"south_arabian_let_numeral_one", {
+			unicode: "{U+10A7D}",
+			tags: ["южноаравийская числовая буква один", "south arabian numeral letter one"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">! [1]" },
+		},
+		"south_arabian_let_numeral_fifty", {
+			unicode: "{U+10A7E}",
+			tags: ["южноаравийская числовая буква пятьдесят", "south arabian numeral letter fifty"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">! [5]" },
+		},
+		"south_arabian_let_numeral_bracket", {
+			unicode: "{U+10A7F}",
+			tags: ["южноаравийская числовая скобка", "south arabian numeral bracket"],
+			groups: ["South Arabian"],
+			options: { titlesAlt: True, altLayoutKey: ">! [0]" },
+		},
+		;
+		;
 		; * Wallet Signs
 		;
 		;
