@@ -9,11 +9,36 @@ class ChrLib {
 	static AddEntry(entryName, entry) {
 
 		this.entries.%entryName% := {}
+
 		for key, value in entry.OwnProps() {
-			if value is Func
+			if value is Func {
 				this.entries.%entryName%.DefineProp(key, { Get: value })
-			else
+			}
+			else if (Util.IsArray(value) || IsObject(value)) {
+				if Util.IsArray(value) {
+					this.entries.%entryName%.%key% := []
+					for subValue in value {
+						if subValue is Func {
+							intermediateObj := {}
+							intermediateObj.DefineProp("Get", { Get: subValue })
+							this.entries.%entryName%.%key%.Push(intermediateObj.Get)
+						} else {
+							this.entries.%entryName%.%key%.Push(subValue)
+						}
+					}
+				} else {
+					this.entries.%entryName%.%key% := {}
+					for subKey, subValue in value.OwnProps() {
+						if subValue is Func {
+							this.entries.%entryName%.%key%.DefineProp(subKey, { Get: subValue })
+						} else {
+							this.entries.%entryName%.%key%.%subKey% := subValue
+						}
+					}
+				}
+			} else {
 				this.entries.%entryName%.%key% := value
+			}
 		}
 
 		this.entries.%entryName%.index := this.lastIndexAdded + 1

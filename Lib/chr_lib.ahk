@@ -19815,542 +19815,163 @@ RegLib(this) {
 		; * Default Cyrillic
 		;
 		;
-		"cyr_c_let_a", { ; А
-			unicode: "{U+0410}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_a", { ; а
-			unicode: "{U+0430}",
-			alterations: {
-				combining: "{U+2DF6}",
-				modifier: "{U+1E030}",
-				subscript: "{U+1E051}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_b", { ; Б
-			unicode: "{U+0411}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_b", { ; б
-			unicode: "{U+0431}",
-			alterations: {
-				combining: "{U+2DE0}",
-				modifier: "{U+1E031}",
-				subscript: "{U+1E052}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_v", { ; В
-			unicode: "{U+0412}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_v", { ; в
-			unicode: "{U+0432}",
-			alterations: {
-				combining: "{U+2DE1}",
-				modifier: "{U+1E032}",
-				subscript: "{U+1E053}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_g", { ; Г
-			unicode: "{U+0413}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_g", { ; г
-			unicode: "{U+0433}",
-			alterations: {
-				combining: "{U+2DE2}",
-				modifier: "{U+1E033}",
-				subscript: "{U+1E054}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_d", { ; Д
-			unicode: "{U+0414}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_d", { ; д
-			unicode: "{U+0434}",
-			alterations: {
-				combining: "{U+2DE3}",
-				modifier: "{U+1E034}",
-				subscript: "{U+1E055}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_ie", { ; Е
-			unicode: "{U+0415}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_ie", { ; е
-			unicode: "{U+0435}",
-			alterations: {
-				combining: "{U+2DF7}",
-				modifier: "{U+1E035}",
-				subscript: "{U+1E056}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_yo", { ; Ё
-			unicode: "{U+0401}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_yo", { ; ё
-			unicode: "{U+0451}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_zh", { ; Ж
-			unicode: "{U+0416}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_zh", { ; ж
-			unicode: "{U+0436}",
-			alterations: {
-				combining: "{U+2DE4}",
-				modifier: "{U+1E036}",
-				subscript: "{U+1E057}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_z", { ; З
-			unicode: "{U+0417}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_z", { ; з
-			unicode: "{U+0437}",
-			alterations: {
-				combining: "{U+2DE5}",
-				modifier: "{U+1E037}",
-				subscript: "{U+1E058}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_i", { ; И
-			unicode: "{U+0418}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_i", { ; и
-			unicode: "{U+0438}",
-			alterations: {
-				combining: "{U+A675}",
-				modifier: "{U+1E038}",
-				subscript: "{U+1E059}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_iy", { ; Й
-			unicode: "{U+0419}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_iy", { ; й
-			unicode: "{U+0439}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_k", { ; К
-			unicode: "{U+041A}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_k", { ; к
-			unicode: "{U+043A}",
-			alterations: {
-				combining: "{U+2DE6}",
-				modifier: "{U+1E039}",
-				subscript: "{U+1E05A}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_l", { ; Л
-			unicode: "{U+041B}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_l", { ; л
-			unicode: "{U+043B}",
-			alterations: {
-				combining: "{U+2DE7}",
-				modifier: "{U+1E03A}",
-				subscript: "{U+1E05B}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_m", { ; М
-			unicode: "{U+041C}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_m", { ; м
-			unicode: "{U+043C}",
-			alterations: {
-				combining: "{U+2DE8}",
-				modifier: "{U+1E03B}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_n", { ; Н
-			unicode: "{U+041D}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_n", { ; н
-			unicode: "{U+043D}",
-			alterations: {
-				combining: "{U+2DE9}",
-				modifier: "{U+1D78}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_o", { ; О
-			unicode: "{U+041E}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_o", { ; о
-			unicode: "{U+043E}",
-			alterations: {
-				combining: "{U+2DEA}",
-				modifier: "{U+1E03C}",
-				subscript: "{U+1E05C}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_p", { ; П
-			unicode: "{U+041F}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_p", { ; п
-			unicode: "{U+043F}",
-			alterations: {
-				combining: "{U+2DEB}",
-				modifier: "{U+1E03D}",
-				subscript: "{U+1E05D}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_r", { ; Р
-			unicode: "{U+0420}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_r", { ; р
-			unicode: "{U+0440}",
-			alterations: {
-				combining: "{U+2DEC}",
-				modifier: "{U+1E03E}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_s", { ; С
-			unicode: "{U+0421}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_s", { ; с
-			unicode: "{U+0441}",
-			alterations: {
-				combining: "{U+2DED}",
-				modifier: "{U+1E03F}",
-				subscript: "{U+1E05E}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_t", { ; Т
-			unicode: "{U+0422}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_t", { ; т
-			unicode: "{U+0442}",
-			alterations: {
-				combining: "{U+2DEE}",
-				modifier: "{U+1E040}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_u", { ; У
-			unicode: "{U+0423}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_u", { ; у
-			unicode: "{U+0443}",
-			alterations: {
-				combining: "{U+A677}",
-				modifier: "{U+1E041}",
-				subscript: "{U+1E05F}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_f", { ; Ф
-			unicode: "{U+0424}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_f", { ; ф
-			unicode: "{U+0444}",
-			alterations: {
-				combining: "{U+A69E}",
-				modifier: "{U+1E042}",
-				subscript: "{U+1E060}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_h", { ; Х
-			unicode: "{U+0425}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_h", { ; х
-			unicode: "{U+0445}",
-			alterations: {
-				combining: "{U+2DEF}",
-				modifier: "{U+1E043}",
-				subscript: "{U+1E061}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_ts", { ; Ц
-			unicode: "{U+0426}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_ts", { ; ц
-			unicode: "{U+0446}",
-			alterations: {
-				combining: "{U+2DF0}",
-				modifier: "{U+1E044}",
-				subscript: "{U+1E062}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_ch", { ; Ч
-			unicode: "{U+0427}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_ch", { ; ч
-			unicode: "{U+0447}",
-			alterations: {
-				combining: "{U+2DF1}",
-				modifier: "{U+1E045}",
-				subscript: "{U+1E063}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_sh", { ; Ш
-			unicode: "{U+0428}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_sh", { ; ш
-			unicode: "{U+0448}",
-			alterations: {
-				combining: "{U+2DF2}",
-				modifier: "{U+1E046}",
-				subscript: "{U+1E064}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_shch", { ; Щ
-			unicode: "{U+0429}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_shch", { ; щ
-			unicode: "{U+0449}",
-			alterations: {
-				combining: "{U+2DF3}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_yeru", { ; Ъ
-			unicode: "{U+042A}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_yeru", { ; ъ
-			unicode: "{U+044A}",
-			alterations: {
-				combining: "{U+A678}",
-				modifier: "{U+A69C}",
-				subscript: "{U+1E065}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_yery", { ; Ы
-			unicode: "{U+042B}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_yery", { ; ы
-			unicode: "{U+044B}",
-			alterations: {
-				combining: "{U+A679}",
-				modifier: "{U+1E047}",
-				subscript: "{U+1E066}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_yeri", { ; Ь
-			unicode: "{U+042C}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_yeri", { ; ь
-			unicode: "{U+044C}",
-			alterations: {
-				combining: "{U+A67A}",
-				modifier: "{U+A69D}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_e", { ; Э
-			unicode: "{U+042D}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_e", { ; э
-			unicode: "{U+044D}",
-			alterations: {
-				modifier: "{U+1E048}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_yu", { ; Ю
-			unicode: "{U+042E}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_yu", { ; ю
-			unicode: "{U+044E}",
-			alterations: {
-				combining: "{U+2DFB}",
-				modifier: "{U+1E049}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_c_let_ya", { ; Я
-			unicode: "{U+042F}",
-			options: {
-				noCalc: True
-			}
-		},
-		"cyr_s_let_ya", { ; я
-			unicode: "{U+044F}",
-			options: {
-				noCalc: True
-			}
-		},
+		"cyr_c_let_a", { unicode: "{U+0410}", options: { noCalc: True } }, ; А
+		"cyr_s_let_a", { unicode: "{U+0430}", alterations: { combining: "{U+2DF6}", modifier: "{U+1E030}", subscript: "{U+1E051}" }, options: { noCalc: True } }, ; а
+		"cyr_c_let_b", { unicode: "{U+0411}", options: { noCalc: True } }, ; Б
+		"cyr_s_let_b", { unicode: "{U+0431}", alterations: { combining: "{U+2DE0}", modifier: "{U+1E031}", subscript: "{U+1E052}" }, options: { noCalc: True } }, ; б
+		"cyr_c_let_v", { unicode: "{U+0412}", options: { noCalc: True } }, ; В
+		"cyr_s_let_v", { unicode: "{U+0432}", alterations: { combining: "{U+2DE1}", modifier: "{U+1E032}", subscript: "{U+1E053}" }, options: { noCalc: True } }, ; в
+		"cyr_c_let_g", { unicode: "{U+0413}", options: { noCalc: True } }, ; Г
+		"cyr_s_let_g", { unicode: "{U+0433}", alterations: { combining: "{U+2DE2}", modifier: "{U+1E033}", subscript: "{U+1E054}" }, options: { noCalc: True } }, ; г
+		"cyr_c_let_d", { unicode: "{U+0414}", options: { noCalc: True } }, ; Д
+		"cyr_s_let_d", { unicode: "{U+0434}", alterations: { combining: "{U+2DE3}", modifier: "{U+1E034}", subscript: "{U+1E055}" }, options: { noCalc: True } }, ; д
+		"cyr_c_let_ie", { unicode: "{U+0415}", options: { noCalc: True } }, ; Е
+		"cyr_s_let_ie", { unicode: "{U+0435}", alterations: { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }, options: { noCalc: True } }, ; е
+		"cyr_c_let_yo", { unicode: "{U+0401}", options: { noCalc: True } }, ; Ё
+		"cyr_s_let_yo", { unicode: "{U+0451}", options: { noCalc: True } }, ; ё
+		"cyr_c_let_zh", { unicode: "{U+0416}", options: { noCalc: True } }, ; Ж
+		"cyr_s_let_zh", { unicode: "{U+0436}", alterations: { combining: "{U+2DE4}", modifier: "{U+1E036}", subscript: "{U+1E057}" }, options: { noCalc: True } }, ; ж
+		"cyr_c_let_z", { unicode: "{U+0417}", options: { noCalc: True } }, ; З
+		"cyr_s_let_z", { unicode: "{U+0437}", alterations: { combining: "{U+2DE5}", modifier: "{U+1E037}", subscript: "{U+1E058}" }, options: { noCalc: True } }, ; з
+		"cyr_c_let_i", { unicode: "{U+0418}", options: { noCalc: True } }, ; И
+		"cyr_s_let_i", { unicode: "{U+0438}", alterations: { combining: "{U+A675}", modifier: "{U+1E038}", subscript: "{U+1E059}" }, options: { noCalc: True } }, ; и
+		"cyr_c_let_iy", { unicode: "{U+0419}", options: { noCalc: True } }, ; Й
+		"cyr_s_let_iy", { unicode: "{U+0439}", options: { noCalc: True } }, ; й
+		"cyr_c_let_k", { unicode: "{U+041A}", options: { noCalc: True } }, ; К
+		"cyr_s_let_k", { unicode: "{U+043A}", alterations: { combining: "{U+2DE6}", modifier: "{U+1E039}", subscript: "{U+1E05A}" }, options: { noCalc: True } }, ; к
+		"cyr_c_let_l", { unicode: "{U+041B}", options: { noCalc: True } }, ; Л
+		"cyr_s_let_l", { unicode: "{U+043B}", alterations: { combining: "{U+2DE7}", modifier: "{U+1E03A}", subscript: "{U+1E05B}" }, options: { noCalc: True } }, ; л
+		"cyr_c_let_m", { unicode: "{U+041C}", options: { noCalc: True } }, ; М
+		"cyr_s_let_m", { unicode: "{U+043C}", alterations: { combining: "{U+2DE8}", modifier: "{U+1E03B}" }, options: { noCalc: True } }, ; м
+		"cyr_c_let_n", { unicode: "{U+041D}", options: { noCalc: True } }, ; Н
+		"cyr_s_let_n", { unicode: "{U+043D}", alterations: { combining: "{U+2DE9}", modifier: "{U+1D78}" }, options: { noCalc: True } }, ; н
+		"cyr_c_let_o", { unicode: "{U+041E}", options: { noCalc: True } }, ; О
+		"cyr_s_let_o", { unicode: "{U+043E}", alterations: { combining: "{U+2DEA}", modifier: "{U+1E03C}", subscript: "{U+1E05C}" }, options: { noCalc: True } }, ; о
+		"cyr_c_let_p", { unicode: "{U+041F}", options: { noCalc: True } }, ; П
+		"cyr_s_let_p", { unicode: "{U+043F}", alterations: { combining: "{U+2DEB}", modifier: "{U+1E03D}", subscript: "{U+1E05D}" }, options: { noCalc: True } }, ; п
+		"cyr_c_let_r", { unicode: "{U+0420}", options: { noCalc: True } }, ; Р
+		"cyr_s_let_r", { unicode: "{U+0440}", alterations: { combining: "{U+2DEC}", modifier: "{U+1E03E}" }, options: { noCalc: True } }, ; р
+		"cyr_c_let_s", { unicode: "{U+0421}", options: { noCalc: True } }, ; С
+		"cyr_s_let_s", { unicode: "{U+0441}", alterations: { combining: "{U+2DED}", modifier: "{U+1E03F}", subscript: "{U+1E05E}" }, options: { noCalc: True } }, ; с
+		"cyr_c_let_t", { unicode: "{U+0422}", options: { noCalc: True } }, ; Т
+		"cyr_s_let_t", { unicode: "{U+0442}", alterations: { combining: "{U+2DEE}", modifier: "{U+1E040}" }, options: { noCalc: True } }, ; т
+		"cyr_c_let_u", { unicode: "{U+0423}", options: { noCalc: True } }, ; У
+		"cyr_s_let_u", { unicode: "{U+0443}", alterations: { combining: "{U+A677}", modifier: "{U+1E041}", subscript: "{U+1E05F}" }, options: { noCalc: True } }, ; у
+		"cyr_c_let_f", { unicode: "{U+0424}", options: { noCalc: True } }, ; Ф
+		"cyr_s_let_f", { unicode: "{U+0444}", alterations: { combining: "{U+A69E}", modifier: "{U+1E042}", subscript: "{U+1E060}" }, options: { noCalc: True } }, ; ф
+		"cyr_c_let_h", { unicode: "{U+0425}", options: { noCalc: True } }, ; Х
+		"cyr_s_let_h", { unicode: "{U+0445}", alterations: { combining: "{U+2DEF}", modifier: "{U+1E043}", subscript: "{U+1E061}" }, options: { noCalc: True } }, ; х
+		"cyr_c_let_ts", { unicode: "{U+0426}", options: { noCalc: True } }, ; Ц
+		"cyr_s_let_ts", { unicode: "{U+0446}", alterations: { combining: "{U+2DF0}", modifier: "{U+1E044}", subscript: "{U+1E062}" }, options: { noCalc: True } }, ; ц
+		"cyr_c_let_ch", { unicode: "{U+0427}", options: { noCalc: True } }, ; Ч
+		"cyr_s_let_ch", { unicode: "{U+0447}", alterations: { combining: "{U+2DF1}", modifier: "{U+1E045}", subscript: "{U+1E063}" }, options: { noCalc: True } }, ; ч
+		"cyr_c_let_sh", { unicode: "{U+0428}", options: { noCalc: True } }, ; Ш
+		"cyr_s_let_sh", { unicode: "{U+0448}", alterations: { combining: "{U+2DF2}", modifier: "{U+1E046}", subscript: "{U+1E064}" }, options: { noCalc: True } }, ; ш
+		"cyr_c_let_shch", { unicode: "{U+0429}", options: { noCalc: True } }, ; Щ
+		"cyr_s_let_shch", { unicode: "{U+0449}", alterations: { combining: "{U+2DF3}" }, options: { noCalc: True } }, ; щ
+		"cyr_c_let_yeru", { unicode: "{U+042A}", options: { noCalc: True } }, ; Ъ
+		"cyr_s_let_yeru", { unicode: "{U+044A}", alterations: { combining: "{U+A678}", modifier: "{U+A69C}", subscript: "{U+1E065}" }, options: { noCalc: True } }, ; ъ
+		"cyr_c_let_yery", { unicode: "{U+042B}", options: { noCalc: True } }, ; Ы
+		"cyr_s_let_yery", { unicode: "{U+044B}", alterations: { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }, options: { noCalc: True } }, ; ы
+		"cyr_c_let_yeri", { unicode: "{U+042C}", options: { noCalc: True } }, ; Ь
+		"cyr_s_let_yeri", { unicode: "{U+044C}", alterations: { combining: "{U+A67A}", modifier: "{U+A69D}" }, options: { noCalc: True } }, ; ь
+		"cyr_c_let_e", { unicode: "{U+042D}", options: { noCalc: True } }, ; Э
+		"cyr_s_let_e", { unicode: "{U+044D}", alterations: { modifier: "{U+1E048}" }, options: { noCalc: True } }, ; э
+		"cyr_c_let_yu", { unicode: "{U+042E}", options: { noCalc: True } }, ; Ю
+		"cyr_s_let_yu", { unicode: "{U+044E}", alterations: { combining: "{U+2DFB}", modifier: "{U+1E049}" }, options: { noCalc: True } }, ; ю
+		"cyr_c_let_ya", { unicode: "{U+042F}", options: { noCalc: True } }, ; Я
+		"cyr_s_let_ya", { unicode: "{U+044F}", options: { noCalc: True } }, ; я
+		;
+		;
+		; * Misc
+		;
+		;
+		"num_sup_0", { unicode: "{U+2070}" },
+		"num_sup_1", { unicode: "{U+00B9}" },
+		"num_sup_2", { unicode: "{U+00B2}" },
+		"num_sup_3", { unicode: "{U+00B3}" },
+		"num_sup_4", { unicode: "{U+2074}" },
+		"num_sup_5", { unicode: "{U+2075}" },
+		"num_sup_6", { unicode: "{U+2076}" },
+		"num_sup_7", { unicode: "{U+2077}" },
+		"num_sup_8", { unicode: "{U+2078}" },
+		"num_sup_9", { unicode: "{U+2079}" },
+		"num_sup_minus", { unicode: "{U+207B}" },
+		"num_sup_equals", { unicode: "{U+207C}" },
+		"num_sup_plus", { unicode: "{U+207A}" },
+		"num_sup_left_parenthesis", { unicode: "{U+207D}" },
+		"num_sup_right_parenthesis", { unicode: "{U+207E}" },
+		"num_sub_0", { unicode: "{U+2080}" },
+		"num_sub_1", { unicode: "{U+2081}" },
+		"num_sub_2", { unicode: "{U+2082}" },
+		"num_sub_3", { unicode: "{U+2083}" },
+		"num_sub_4", { unicode: "{U+2084}" },
+		"num_sub_5", { unicode: "{U+2085}" },
+		"num_sub_6", { unicode: "{U+2086}" },
+		"num_sub_7", { unicode: "{U+2087}" },
+		"num_sub_8", { unicode: "{U+2088}" },
+		"num_sub_9", { unicode: "{U+2089}" },
+		"num_sub_minus", { unicode: "{U+208B}" },
+		"num_sub_equals", { unicode: "{U+208C}" },
+		"num_sub_plus", { unicode: "{U+208A}" },
+		"num_sub_left_parenthesis", { unicode: "{U+208D}" },
+		"num_sub_right_parenthesis", { unicode: "{U+208E}" },
+		"kkey_0", { unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", alterations: { doubleStruck: "{U+1D7D8}", bold: "{U+1D7CE}", sansSerif: "{U+1D7E2}", sansSerifBold: "{U+1D7EC}", monospace: "{U+1D7F6}" }, options: { noCalc: True } },
+		"kkey_1", { unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", alterations: { doubleStruck: "{U+1D7D9}", bold: "{U+1D7CF}", sansSerif: "{U+1D7E3}", sansSerifBold: "{U+1D7ED}", monospace: "{U+1D7F7}" }, options: { noCalc: True } },
+		"kkey_2", { unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", alterations: { doubleStruck: "{U+1D7DA}", bold: "{U+1D7D0}", sansSerif: "{U+1D7E4}", sansSerifBold: "{U+1D7EE}", monospace: "{U+1D7F8}" }, options: { noCalc: True } },
+		"kkey_3", { unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", alterations: { doubleStruck: "{U+1D7DB}", bold: "{U+1D7D1}", sansSerif: "{U+1D7E5}", sansSerifBold: "{U+1D7EF}", monospace: "{U+1D7F9}" }, options: { noCalc: True } },
+		"kkey_4", { unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", alterations: { doubleStruck: "{U+1D7DC}", bold: "{U+1D7D2}", sansSerif: "{U+1D7E6}", sansSerifBold: "{U+1D7F0}", monospace: "{U+1D7FA}" }, options: { noCalc: True } },
+		"kkey_5", { unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", alterations: { doubleStruck: "{U+1D7DD}", bold: "{U+1D7D3}", sansSerif: "{U+1D7E7}", sansSerifBold: "{U+1D7F1}", monospace: "{U+1D7FB}" }, options: { noCalc: True } },
+		"kkey_6", { unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", alterations: { doubleStruck: "{U+1D7DE}", bold: "{U+1D7D4}", sansSerif: "{U+1D7E8}", sansSerifBold: "{U+1D7F2}", monospace: "{U+1D7FC}" }, options: { noCalc: True } },
+		"kkey_7", { unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", alterations: { doubleStruck: "{U+1D7DF}", bold: "{U+1D7D5}", sansSerif: "{U+1D7E9}", sansSerifBold: "{U+1D7F3}", monospace: "{U+1D7FD}" }, options: { noCalc: True } },
+		"kkey_8", { unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", alterations: { doubleStruck: "{U+1D7E0}", bold: "{U+1D7D6}", sansSerif: "{U+1D7EA}", sansSerifBold: "{U+1D7F4}", monospace: "{U+1D7FE}" }, options: { noCalc: True } },
+		"kkey_9", { unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", alterations: { doubleStruck: "{U+1D7E1}", bold: "{U+1D7D7}", sansSerif: "{U+1D7EB}", sansSerifBold: "{U+1D7F5}", monospace: "{U+1D7FF}" }, options: { noCalc: True } },
+		"kkey_minus", { unicode: "{U+002D}", sup: "num_sup_minus", sub: "num_sub_minus", options: { noCalc: True } },
+		"kkey_equals", { unicode: "{U+003D}", sup: "num_sup_equals", sub: "num_sub_equals", alterations: { modifier: "{U+02ED}" }, options: { noCalc: True } },
+		"kkey_asterisk", { unicode: "{U+002A}", options: { noCalc: True } },
+		"kkey_underscore", { unicode: "{U+005F}", options: { noCalc: True } },
+		"kkey_hyphen_minus", { unicode: "{U+002D}", options: { noCalc: True } },
+		"kkey_plus", { unicode: "{U+002B}", sup: "num_sup_plus", sub: "num_sub_plus", alterations: { modifier: "{U+02D6}" }, options: { noCalc: True } },
+		"kkey_left_parenthesis", { unicode: "{U+0028}", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", options: { noCalc: True } },
+		"kkey_right_parenthesis", { unicode: "{U+0029}", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", options: { noCalc: True } },
+		"kkey_comma", { unicode: "{U+002C}", options: { noCalc: True } },
+		"kkey_dot", { unicode: "{U+002E}", options: { noCalc: True } },
+		"kkey_semicolon", { unicode: "{U+003B}", options: { noCalc: True } },
+		"kkey_colon", { unicode: "{U+003A}", alterations: { modifier: "{U+02F8}" }, options: { noCalc: True } },
+		"kkey_apostrophe", { unicode: "{U+0027}", options: { noCalc: True } },
+		"kkey_quotation", { unicode: "{U+0022}", options: { noCalc: True } },
+		"kkey_l_square_bracket", { unicode: "{U+005B}", options: { noCalc: True } },
+		"kkey_r_square_bracket", { unicode: "{U+005D}", options: { noCalc: True } },
+		"kkey_l_curly_bracket", { unicode: "{U+007B}", options: { noCalc: True } },
+		"kkey_r_curly_bracket", { unicode: "{U+007D}", options: { noCalc: True } },
+		"kkey_grave_accent", { unicode: "{U+0060}", options: { noCalc: True } },
+		"kkey_tilde", { unicode: "{U+007E}", options: { noCalc: True } },
+		"kkey_slash", { unicode: "{U+002F}", options: { noCalc: True } },
+		"kkey_backslash", { unicode: "{U+005C}", options: { noCalc: True } },
+		"kkey_verticalline", { unicode: "{U+007C}", options: { noCalc: True } },
+		"kkey_lessthan", { unicode: "{U+003C}", options: { noCalc: True } },
+		"kkey_greaterthan", { unicode: "{U+003E}", options: { noCalc: True } },
+		"kkey_commercial_at", { unicode: "{U+0040}", options: { noCalc: True } },
+		"kkey_numero_sign", { unicode: "{U+2116}", options: { noCalc: True } },
+		"kkey_number_sign", { unicode: "{U+0023}", options: { noCalc: True } },
+		"kkey_percent_sign", { unicode: "{U+0025}", options: { noCalc: True } },
+		"kkey_circumflex_accent", { unicode: "{U+005E}", options: { noCalc: True } },
+		"misc_crlf_emspace", {
+			unicode: (*) => ChrLib.GetValue("carriage_return", "unicode"),
+			sequence: [(*) => ChrLib.GetValue("carriage_return", "unicode"), (*) => ChrLib.GetValue("new_line", "unicode"), (*) => ChrLib.GetValue("emsp", "unicode")],
+			groups: ["Misc"],
+			options: { noCalc: True, fastKey: "[Enter]" }
+		},
+		"misc_lf_emspace", {
+			unicode: (*) => ChrLib.GetValue("new_line", "unicode"),
+			groups: ["Misc"],
+			options: { noCalc: True, fastKey: "<+ [Enter]" }
+		},
+		"ipa_a-z", { unicode: "{U+0061}", sequence: ["{U+0061}", "{U+0062}", "{U+0063}", "{U+0064}", "{U+0065}", "{U+0066}", "{U+0067}", "{U+0068}", "{U+0069}", "{U+006A}", "{U+006B}", "{U+006C}", "{U+006D}", "{U+006E}", "{U+006F}", "{U+0070}", "{U+0071}", "{U+0072}", "{U+0073}", "{U+0074}", "{U+0075}", "{U+0076}", "{U+0077}", "{U+0078}", "{U+0079}", "{U+007A}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "<+ [a-z]" } },
+		"ipa_a-z_cap", { unicode: "{U+0041}", sequence: ["{U+0041}", "{U+0042}", "{U+0043}", "{U+0044}", "{U+0045}", "{U+0046}", "{U+0047}", "{U+0048}", "{U+0049}", "{U+004A}", "{U+004B}", "{U+004C}", "{U+004D}", "{U+004E}", "{U+004F}", "{U+0050}", "{U+0051}", "{U+0052}", "{U+0053}", "{U+0054}", "{U+0055}", "{U+0056}", "{U+0057}", "{U+0058}", "{U+0059}", "{U+005A}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "c*<+ [a-z]" } },
+		"ipa_combining_mode", { unicode: "{U+0041}", sequence: ["{U+25CC}", "{U+0363}", "{U+25CC}", "{U+1DE8}", "{U+25CC}", "{U+0369}", "{U+25CC}", "{U+1DF1}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt F2" } },
+		"ipa_modifiers_mode", { unicode: "{U+0041}", sequence: ["{U+02B0}", "{U+02B1}", "{U+02B2}", "{U+02B3}", "{U+02B7}", "{U+02B8}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt F3" } },
+		"ipa_subscript_mode", { unicode: "{U+0041}", sequence: ["{U+2090}", "{U+2091}", "{U+2095}", "{U+2C7C}", "{U+2096}", "{U+2097}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt RShift F3" } },
 	)
 
 	if this.duplicatesList.Length > 0
