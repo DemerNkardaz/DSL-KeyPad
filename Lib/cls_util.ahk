@@ -244,6 +244,30 @@ Class Util {
 		return filePath
 	}
 
+	static HasAllCharacters(str, pattern) {
+		WordBoundary := "[^a-zA-Zа-яА-ЯёЁ]"
+
+		if RegExMatch(pattern, "\s") {
+			WordSplit := StrSplit(pattern, " ")
+			for word in WordSplit {
+				if StrLen(word) < 3 {
+					pattern := "(^|" . WordBoundary . ")" . word . "($|" . WordBoundary . ")"
+					if !RegExMatch(str, pattern)
+						return False
+				} else {
+					if !InStr(str, word)
+						return False
+				}
+			}
+			return true
+		} else {
+			for char in StrSplit(pattern) {
+				if !InStr(str, char)
+					return False
+			}
+			return true
+		}
+	}
 
 	static INIToObj(filePath) {
 		obj := {}

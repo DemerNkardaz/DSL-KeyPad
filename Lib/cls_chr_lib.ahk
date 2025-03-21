@@ -3,6 +3,7 @@ class ChrLib {
 	static entries := {}
 	static entryGroups := Map()
 	static entryRecipes := Map()
+	static entryTags := Map()
 	static duplicatesList := []
 	static lastIndexAdded := -1
 
@@ -59,13 +60,20 @@ class ChrLib {
 		if this.entries.HasOwnProp(entryName) {
 			entry := this.GetEntry(entryName)
 
-			for group in entry.groups {
-				if this.entryGroups.Has(group) && this.entryGroups.Get(group).HasValue(entryName) {
-					intermediateArray := this.entryGroups.Get(group)
-					intermediateArray.RemoveValue(entryName)
+			scenarios := Map(
+				"groups", { source: entry.groups, target: this.entryGroups },
+				"tags", { source: entry.tags, target: this.entryTags }
+			)
 
-					this.entryGroups.Delete(group)
-					this.entryGroups.Set(group, intermediateArray)
+			for scenarioName, scenario in scenarios {
+				for item in scenario.source {
+					if scenario.target.Has(item) && scenario.target.Get(item).HasValue(entryName) {
+						intermediateArray := scenario.target.Get(item)
+						intermediateArray.RemoveValue(entryName)
+
+						scenario.target.Delete(item)
+						scenario.target.Set(item, intermediateArray)
+					}
 				}
 			}
 
@@ -227,6 +235,81 @@ class ChrLib {
 		return count
 	}
 
+	static SearchPrompt() {
+		searchQuery := Cfg.Get("Search", "LatestPrompts", "")
+		IB := InputBox(Locale.Read("symbol_search_prompt"), Locale.Read("symbol_search"), "w350 h110", searchQuery)
+		if IB.Result = "Cancel"
+			return
+		else
+			searchQuery := IB.Value
+
+		if searchQuery == "\" {
+			Reload
+			return
+		}
+
+		result := this.Search(searchQuery)
+		ExecSend := (*) => SendText(result)
+
+		return { result: result, prompt: searchQuery, send: ExecSend }
+	}
+
+	static Search(searchQuery) {
+		isSensitive := SubStr(searchQuery, 1, 1) = "*"
+		if isSensitive
+			searchQuery := SubStr(searchQuery, 2)
+
+		checkTagExact(tag) {
+			if isSensitive
+				return searchQuery == tag
+			return StrLower(searchQuery) = StrLower(tag)
+		}
+
+		checkTagPartial(tag) {
+			if isSensitive
+				return RegExMatch(tag, searchQuery)
+			return RegExMatch(StrLower(tag), StrLower(searchQuery))
+		}
+
+		checkTagLowAcc(tag) {
+			if isSensitive
+				return Util.HasAllCharacters(tag, searchQuery)
+			return Util.HasAllCharacters(StrLower(tag), StrLower(searchQuery))
+		}
+
+		for entryName, entry in this.entries.OwnProps() {
+			if !entry.HasOwnProp("tags")
+				continue
+
+			for _, tag in entry.tags {
+				if checkTagExact(tag)
+					return this.Get(entryName, True, Cfg.Get("Input_Mode", , "Unicode"))
+			}
+		}
+
+		for entryName, entry in this.entries.OwnProps() {
+			if !entry.HasOwnProp("tags")
+				continue
+
+			for _, tag in entry.tags {
+				if checkTagPartial(tag)
+					return this.Get(entryName, True, Cfg.Get("Input_Mode", , "Unicode"))
+			}
+		}
+
+		for entryName, entry in this.entries.OwnProps() {
+			if !entry.HasOwnProp("tags")
+				continue
+
+			for _, tag in entry.tags {
+				if checkTagLowAcc(tag)
+					return this.Get(entryName, True, Cfg.Get("Input_Mode", , "Unicode"))
+			}
+		}
+
+		return ""
+	}
+
 	static EntryPostProcessing(entryName, entry) {
 		refinedEntry := entry
 		character := Util.UnicodeToChar(refinedEntry.unicode)
@@ -341,6 +424,15 @@ class ChrLib {
 
 			if !this.entryGroups.Get(group).HasValue(entryName)
 				this.entryGroups[group].Push(entryName)
+		}
+
+		if refinedEntry.hasOwnProp("tags") && refinedEntry.tags.Length > 0 {
+			for tag in refinedEntry.tags {
+				if !this.entryTags.Has(tag)
+					this.entryTags.Set(tag, [])
+
+				this.entryTags[tag].Push(entryName)
+			}
 		}
 
 		if refinedEntry.recipe.Length > 0 {

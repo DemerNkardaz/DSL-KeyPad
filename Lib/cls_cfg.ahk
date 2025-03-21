@@ -7,7 +7,7 @@ Class Cfg {
 	static sections := [
 		"Settings", [
 			"Character_Web_Resource", "SymblCC",
-			"Input_Mode", "Default",
+			"Input_Mode", "Unicode",
 			"LaTeX_Mode", "Default",
 			"Input_Script", "Default",
 			"Layout_Latin", "QWERTY",
@@ -376,7 +376,7 @@ Class Cfg {
 	static BindedVars() {
 		return [
 			"FastKeysOn", this.Get("Mode_Fast_Keys", "Settings", False, "bool"),
-			"InputMode", this.Get("Input_Mode", "Settings", "Default"),
+			"InputMode", this.Get("Input_Mode", "Settings", "Unicode"),
 			"LaTeXMode", this.Get("LaTeX_Mode", "Settings", "Default"),
 			"SkipGroupMessage", this.Get("Skip_Group_Messages", "Settings", False, "bool"),
 		]

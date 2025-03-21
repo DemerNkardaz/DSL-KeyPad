@@ -6652,7 +6652,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Minus"], (*) => GroupActivator("Dashes", "-"),
 			"<#<!" UseKey["Apostrophe"], (*) => GroupActivator("Quotes", "'"),
 			;
-			"<#<!" UseKey["F"], (*) => SearchKey(),
+			"<#<!" UseKey["F"], (*) => ChrLib.SearchPrompt().send(), ;SearchKey(),
 			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
 			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
 			"<#<!" UseKey["L"], (*) => Ligaturiser(),
