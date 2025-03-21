@@ -18791,11 +18791,7 @@ RegLib(this) {
 		},
 		;
 		;
-		; * Sidetic Script
-		;
-		;
-		;
-		; * Sidetic Script
+		; * Sidetic Script ; Finish when Unicode 17 releases on September 9th
 		;
 		;
 		"sidetic_let_n01", {
@@ -18967,6 +18963,197 @@ RegLib(this) {
 			unicode: "{U+1095C}",
 			groups: ["Sidetic"],
 			options: { titlesAlt: True },
+		},
+		;
+		;
+		; * Ugaritic Script
+		;
+		;
+		"ugaritic_let_alpa", {
+			unicode: "{U+10380}",
+			tags: ["угаритская буква альпа", "ugaritic letter alpa"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[A]" },
+		},
+		"ugaritic_let_beta", {
+			unicode: "{U+10381}",
+			tags: ["угаритская буква бета", "ugaritic letter beta"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[B]" },
+		},
+		"ugaritic_let_gamla", {
+			unicode: "{U+10382}",
+			tags: ["угаритская буква гамла", "ugaritic letter gamla"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[G]" },
+		},
+		"ugaritic_let_kha", {
+			unicode: "{U+10383}",
+			tags: ["угаритская буква ха", "ugaritic letter kha"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [H]" },
+		},
+		"ugaritic_let_delta", {
+			unicode: "{U+10384}",
+			tags: ["угаритская буква дельта", "ugaritic letter delta"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[D]" },
+		},
+		"ugaritic_let_ho", {
+			unicode: "{U+10385}",
+			tags: ["угаритская буква хо", "ugaritic letter ho"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[H]" },
+		},
+		"ugaritic_let_wo", {
+			unicode: "{U+10386}",
+			tags: ["угаритская буква во", "ugaritic letter wo"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[W]" },
+		},
+		"ugaritic_let_zeta", {
+			unicode: "{U+10387}",
+			tags: ["угаритская буква зета", "ugaritic letter zeta"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[Z]" },
+		},
+		"ugaritic_let_hota", {
+			unicode: "{U+10388}",
+			tags: ["угаритская буква хота", "ugaritic letter hota"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">!>+ [H]" },
+		},
+		"ugaritic_let_tet", {
+			unicode: "{U+10389}",
+			tags: ["угаритская буква тет", "ugaritic letter tet"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">!>+ [T]" },
+		},
+		"ugaritic_let_yod", {
+			unicode: "{U+1038A}",
+			tags: ["угаритская буква йод", "ugaritic letter yod"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[Y]" },
+		},
+		"ugaritic_let_kaf", {
+			unicode: "{U+1038B}",
+			tags: ["угаритская буква каф", "ugaritic letter kaf"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[K]" },
+		},
+		"ugaritic_let_shin", {
+			unicode: "{U+1038C}",
+			tags: ["угаритская буква шин", "ugaritic letter shin"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[S]" },
+		},
+		"ugaritic_let_lamda", {
+			unicode: "{U+1038D}",
+			tags: ["угаритская буква ламда", "ugaritic letter lamda"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[L]" },
+		},
+		"ugaritic_let_mem", {
+			unicode: "{U+1038E}",
+			tags: ["угаритская буква мем", "ugaritic letter mem"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[M]" },
+		},
+		"ugaritic_let_dhal", {
+			unicode: "{U+1038F}",
+			tags: ["угаритская буква дхал", "ugaritic letter dhal"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [D]" },
+		},
+		"ugaritic_let_nun", {
+			unicode: "{U+10390}",
+			tags: ["угаритская буква нун", "ugaritic letter nun"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[N]" },
+		},
+		"ugaritic_let_zu", {
+			unicode: "{U+10391}",
+			tags: ["угаритская буква зу", "ugaritic letter zu"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">!>+ [Z]" },
+		},
+		"ugaritic_let_samka", {
+			unicode: "{U+10392}",
+			tags: ["угаритская буква самка", "ugaritic letter samka"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "<+ [S]" },
+		},
+		"ugaritic_let_ain", {
+			unicode: "{U+10393}",
+			tags: ["угаритская буква айн", "ugaritic letter ain"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [A]" },
+		},
+		"ugaritic_let_pu", {
+			unicode: "{U+10394}",
+			tags: ["угаритская буква пу", "ugaritic letter pu"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[P]" },
+		},
+		"ugaritic_let_sade", {
+			unicode: "{U+10395}",
+			tags: ["угаритская буква цаде", "ugaritic letter sade"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [S]" },
+		},
+		"ugaritic_let_qopa", {
+			unicode: "{U+10396}",
+			tags: ["угаритская буква копа", "ugaritic letter qopa"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[Q]" },
+		},
+		"ugaritic_let_rasha", {
+			unicode: "{U+10397}",
+			tags: ["угаритская буква раша", "ugaritic letter rasha"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[R]" },
+		},
+		"ugaritic_let_thanna", {
+			unicode: "{U+10398}",
+			tags: ["угаритская буква танна", "ugaritic letter thanna"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">!>+ [S]" },
+		},
+		"ugaritic_let_ghain", {
+			unicode: "{U+10399}",
+			tags: ["угаритская буква гайн", "ugaritic letter ghain"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: ">! [G]" },
+		},
+		"ugaritic_let_to", {
+			unicode: "{U+1039A}",
+			tags: ["угаритская буква то", "ugaritic letter to"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[T]" },
+		},
+		"ugaritic_let_i", {
+			unicode: "{U+1039B}",
+			tags: ["угаритская буква и", "ugaritic letter i"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[I]" },
+		},
+		"ugaritic_let_u", {
+			unicode: "{U+1039C}",
+			tags: ["угаритская буква у", "ugaritic letter u"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[U]" },
+		},
+		"ugaritic_let_ssu", {
+			unicode: "{U+1039D}",
+			tags: ["угаритская буква ссу", "ugaritic letter ssu"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "<+ [U]" },
+		},
+		"ugaritic_word_divider", {
+			unicode: "{U+1039F}",
+			tags: ["угаритский разделитель слов", "ugaritic word divider"],
+			groups: ["Ugaritic"],
+			options: { titlesAlt: True, altLayoutKey: "[Space]" },
 		},
 		;
 		;

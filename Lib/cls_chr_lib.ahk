@@ -325,7 +325,10 @@ class ChrLib {
 			if RegExMatch(entryName, "i)^(permic|hungarian|north_arabian|south_arabian)", &match) {
 				scriptName := StrReplace(match[1], "_", " ")
 				refinedEntry.symbol.font := "Noto Sans Old " scriptName
-			} else if RegExMatch(entryName, "i)^(alchemical|astrological|astronomical|symbolistics)") {
+			} else if RegExMatch(entryName, "i)^(ugaritic)", &match) {
+				scriptName := StrReplace(match[1], "_", " ")
+				refinedEntry.symbol.font := "Noto Sans " scriptName
+			} else if RegExMatch(entryName, "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)") {
 				refinedEntry.symbol.font := "Kurinto Sans"
 			} else if InStr(entryName, "phoenician") {
 				refinedEntry.symbol.font := "Segoe UI Historic"
