@@ -237,21 +237,27 @@ class ChrLib {
 
 	static SearchPrompt() {
 		searchQuery := Cfg.Get("Search", "LatestPrompts", "")
+		resultObj := { result: "", prompt: "", send: (*) => "" }
 		IB := InputBox(Locale.Read("symbol_search_prompt"), Locale.Read("symbol_search"), "w350 h110", searchQuery)
 		if IB.Result = "Cancel"
-			return
+			return resultObj
 		else
 			searchQuery := IB.Value
 
 		if searchQuery == "\" {
 			Reload
-			return
+			return resultObj
 		}
 
-		result := this.Search(searchQuery)
-		ExecSend := (*) => SendText(result)
+		resultObj.result := this.Search(searchQuery)
+		resultObj.prompt := searchQuery
+		resultObj.send := (*) => SendText(resultObj.result)
 
-		return { result: result, prompt: searchQuery, send: ExecSend }
+		if StrLen(resultObj.result) > 0 {
+			Cfg.Set(searchQuery, "Search", "LatestPrompts")
+		}
+
+		return resultObj
 	}
 
 	static Search(searchQuery) {

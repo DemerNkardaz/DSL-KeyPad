@@ -434,6 +434,8 @@ Class MyRecipes {
 						}
 					}
 
+					recipe := (Cfg.Get("XCompose_Add_Recipe_Prefix", , False, "bool") ? ">xc " : "") recipe
+
 					output.Push({
 						section: "xcompose_" Ord(recipe) Ord(result[1]) (StrLen(fileNameNoExt) == 0 ? "" : "__file_" fileNameNoExt),
 						name: "XCompose: [" result[1] "]",

@@ -14,6 +14,7 @@ Class Cfg {
 			"Layout_Cyrillic", "ЙЦУКЕН",
 			"Mode_Fast_Keys", "False",
 			"Skip_Group_Messages", "False",
+			"XCompose_Add_Recipe_Prefix", "False",
 			"User_Language", "",
 			"F13F24", "False",
 		],
