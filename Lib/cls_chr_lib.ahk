@@ -454,8 +454,6 @@ class ChrLib {
 		this.entries.%entryName% := refinedEntry
 	}
 }
-; TODO Выделить Tags записей знаков в отдельный ini файл
-
 
 /*
 ChrLib.AddEntry(
