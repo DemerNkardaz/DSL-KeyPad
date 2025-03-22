@@ -33,6 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (document.querySelector('.alternative-modes-header-tab-button') && !document.querySelector('.alternative-modes-header-tab-button.active')) {
 		document.querySelector('.alternative-modes-header-tab-button').click();
 	}
+
+	// Вставка <p> элемента с Unicode диапазоном
+	const descriptionElement = document.querySelector('.alternative-mode-description');
+	if (descriptionElement) {
+		const unicodeContent = getUnicodeRange("0300-034E", " ", "\u25CC");
+		const paragraph = document.createElement('p');
+		paragraph.textContent = unicodeContent;
+		descriptionElement.appendChild(paragraph);
+	}
 });
 
 function handleElementClick(element) {
