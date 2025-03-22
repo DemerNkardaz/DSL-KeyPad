@@ -82,6 +82,5 @@ function getUnicodeRange(ranges, separator = "", prefix = "") {
 
 // Пример использования:
 console.log(getUnicodeRange("1E000-1E006;1E008-1E018;1E01B-1E021;1E023-1E024;1E026-1E02A", "", "\u25CC")); 
-// Вывод: ◌𞀀◌𞀁◌𞀂...
 console.log(getUnicodeRange("2C00-2C5F"));
 console.log(getUnicodeRange("2C00-2C05", ", "));
