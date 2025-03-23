@@ -56,7 +56,8 @@ hr {
 	background-color: var(--border-color);
 	border: none;
 	margin: 7pt;
-	align-self: center;
+	align-self: stretch; /* Растягивает элемент по высоте родителя */
+	height: 100%; /* Устанавливает высоту в 100% от родителя */
 }
 
 body, html {
@@ -94,14 +95,15 @@ a {
 }
 
 
-/* Alternative mode tabs */
-.alternative-modes-container {
-	width: 800px;
+.article-container {
+	width: 900px;
+	margin: 1rem;
 	margin-inline: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 20px;
+	border-radius: 2px 2px 8px 8px;
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .alternative-modes-header {
@@ -109,7 +111,6 @@ a {
 	justify-content: center;
 	align-items: center;
 	padding: 10px 0;
-	border-bottom: 1px solid #ddd;
 	flex-wrap: wrap;
 	max-width: 100%;
 }
@@ -220,11 +221,10 @@ a {
 }
 
 .content-container {
-	width: 1500px;
+	width: 1300px;
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
-	padding: 1rem;
 }
 
 .content-list {
@@ -233,6 +233,7 @@ a {
 	flex-direction: column;
 	align-items: start;
 	padding: 1rem;
+	margin: 1rem;
 	min-height: 300px;
 	background-color: #FAFAFA;
 	border-radius: 2px 2px 8px 8px;
@@ -255,11 +256,8 @@ a {
 }
 
 .alternative-modes-body {
-	width: 800px;
-	padding: 1rem;
+	width: 100%;
 	background-color: #fff;
-	border: 1px solid var(--border-color);
-	border-top: none;
 	border-radius: 0 0 8px 8px;
 }
 
