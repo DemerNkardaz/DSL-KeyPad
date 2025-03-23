@@ -145,6 +145,9 @@ a {
 			height: calc(100% - 15px);
 			opacity: 0.8;
 			transition: all 0.15s ease;
+			-webkit-user-select: none;
+			user-select: none;
+			pointer-events: none;
 		}
 
 		&:hover, &.active {
