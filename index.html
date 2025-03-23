@@ -11,7 +11,7 @@
 		
 		<base href="./" />
 
-		<meta name="referrer" content="origin">
+		<meta name="referrer" content="same-origin">
 		<meta name="referrer" content="origin-when-cross-origin">
 		<meta name="referrer" content="no-referrer-when-downgrade">
 
@@ -51,14 +51,22 @@
 	</head>
 	<body>
 		<section class="root-container">
-			<header class="conent-header">
+			<header class="content-header">
 				<h1>DSL‐KeyPad <sup>αλφα</sup></h1>
 			</header>
 			<main class="content-container">
 				<nav class="content-list">
 					<ul>
-						<li><a href="">1</a></li>
-						<li><a href="">2</a></li>
+						<li><a href="">Освновные функции</a>
+							<ul>
+								<li><a href="">Группы активации</a></li>
+								<li><a href="">Быстрые ключи</a></li>
+								<li><a href="">Плавильня</a></li>
+								<li><a href="">Альтернативный ввод</a></li>
+								<li><a href="">Модификаторы ввода</a></li>
+							</ul>
+						</li>
+						<li><a href="">Вспомогательные функции</a></li>
 						<li><a href="">3</a></li>
 						<li><a href="">4</a></li>
 						<li><a href="">5</a></li>
@@ -160,10 +168,11 @@
 					</main>
 				</article>
 			</main>
-			<footer>
-				Footer
+			<footer class="content-footer">
 			</footer>
 		</section>
 		<script src="./WebPage/index.js"></script>
+		<script src="./WebPage/utils.js"></script>
+		<script src="./WebPage/page.js"></script>
 	</body>
 </html>
