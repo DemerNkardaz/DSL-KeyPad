@@ -202,7 +202,7 @@ A variety of other symbols are also included, such as currency signs, typographi
 
 <img src="__dev/DSLKeyPad_App_Icons/DSLKeyPad.app_greek.ico" alt="" width="62" align="right">
 
-### Греческий
+### Эллиница
 
 На данный момент отдельной поддержки для греческого языка и языков на основе греческого письма нет. Однако имеются мысли о её вводе в будущем.<br><br>
 
