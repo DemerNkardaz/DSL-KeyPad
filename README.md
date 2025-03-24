@@ -1,4 +1,4 @@
-**Note:** In the process of refactoring<br>**Примечание:** В процессе рефакторинга
+**Note:** In the process of dev & refactoring<br>**Примечание:** В процессе разработки и рефакторинга
 
 **Mini Todo:**
 
