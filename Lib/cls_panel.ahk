@@ -764,7 +764,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "LaTeX"].SetFont((StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 14) ? "s9" : "s12")
 
 			entryString := Locale.Read("entry") ": " characterEntry
-			tagsString := value.HasOwnProp("tags") ? Locale.Read("tags") ": " value.tags.ToString() : ""
+			tagsString := value.tags.Length > 0 ? Locale.Read("tags") ": " value.tags.ToString() : ""
 
 			this.PanelGUI[options.prefix "Tags"].Text := entryString ChrLib.Get("ensp") tagsString
 

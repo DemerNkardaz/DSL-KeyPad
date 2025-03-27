@@ -14,14 +14,14 @@ class ChrLib {
 
 		for key, value in entry.OwnProps() {
 			if value is Func {
-				this.entries.%entryName%.DefineProp(key, { Get: value })
+				this.entries.%entryName%.DefineProp(key, { Get: value, Set: value })
 			} else if Util.IsArray(value) {
 				this.entries.%entryName%.%key% := []
 				for subValue in value {
 					if subValue is Func {
-						intermediateObj := {}
-						intermediateObj.DefineProp("Get", { Get: subValue })
-						this.entries.%entryName%.%key%.Push(intermediateObj.Get)
+						interObj := {}
+						interObj.DefineProp("Get", { Get: subValue, Set: subValue })
+						this.entries.%entryName%.%key%.Push(interObj.Get)
 					} else {
 						this.entries.%entryName%.%key%.Push(subValue)
 					}
@@ -30,7 +30,7 @@ class ChrLib {
 				this.entries.%entryName%.%key% := {}
 				for subKey, subValue in value.OwnProps() {
 					if subValue is Func {
-						this.entries.%entryName%.%key%.DefineProp(subKey, { Get: subValue })
+						this.entries.%entryName%.%key%.DefineProp(subKey, { Get: subValue, Set: subValue })
 					} else {
 						this.entries.%entryName%.%key%.%subKey% := subValue
 					}
@@ -272,6 +272,7 @@ class ChrLib {
 			}
 		}
 
+
 		return output
 	}
 
@@ -410,6 +411,7 @@ class ChrLib {
 
 	static EntryPostProcessing(entryName, entry) {
 		refinedEntry := entry
+		refinedEntry := this.SetDecomposedData(entryName, refinedEntry)
 		character := Util.UnicodeToChar(refinedEntry.unicode)
 		characterSequence := Util.UnicodeToChar(refinedEntry.HasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode)
 
@@ -477,6 +479,9 @@ class ChrLib {
 			refinedEntry.recipe := []
 		if !refinedEntry.HasOwnProp("recipeAlt")
 			refinedEntry.recipeAlt := []
+
+		if !refinedEntry.HasOwnProp("tags")
+			refinedEntry.tags := []
 
 
 		for group in ["fastKey", "specialKey", "altLayoutKey"] {
@@ -546,6 +551,19 @@ class ChrLib {
 			}
 		}
 
+		if StrLen(refinedEntry.data.letter) > 0 {
+			if refinedEntry.recipe.Length > 0 {
+				for i, recipe in refinedEntry.recipe {
+					refinedEntry.recipe[i] := RegExReplace(recipe, "\$", refinedEntry.data.letter)
+				}
+			}
+
+			if StrLen(refinedEntry.options.fastKey) > 0 {
+				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" refinedEntry.data.letter "]")
+			}
+		}
+
+
 		if refinedEntry.recipe.Length > 0 {
 			for recipe in refinedEntry.recipe {
 				if !this.entryRecipes.Has(recipe) {
@@ -559,7 +577,6 @@ class ChrLib {
 		if refinedEntry.recipeAlt.Length = 0 && refinedEntry.recipe.Length > 0 {
 			refinedEntry.recipeAlt := refinedEntry.recipe
 
-
 			for i, altRecipe in refinedEntry.recipeAlt {
 				for diacriticName in this.entryCategories["Diacritic Mark"] {
 					diacriticChr := this.Get(diacriticName)
@@ -571,6 +588,88 @@ class ChrLib {
 		}
 
 		this.entries.%entryName% := refinedEntry
+	}
+
+	static NameDecompose(entryName) {
+		decomposedName := {
+			script: Map("lat", "latin", "cyr", "cyrillic", "hel", "hellenic"),
+			case: Map("c", "capital", "s", "small", "cs", "capitalized"),
+			type: Map("let", "letter", "lig", "ligature"),
+			letter: "",
+			postfixes: []
+		}
+
+		foundScript := False
+
+		for key, value in decomposedName.script {
+			if RegExMatch(entryName, "^" key "_") {
+				foundScript := True
+				break
+			}
+		}
+
+		if !foundScript
+			return entryName
+
+		for key, value in decomposedName.case {
+			if !RegExMatch(entryName, "i)_" key "_") {
+				foundScript := False
+			} else {
+				foundScript := True
+				break
+			}
+		}
+
+		if !foundScript
+			return entryName
+
+		for key, value in decomposedName.type {
+			if !RegExMatch(entryName, "i)_" key "_") {
+				foundScript := False
+			} else {
+				foundScript := True
+				break
+			}
+		}
+
+
+		if !foundScript {
+			return entryName
+		} else {
+			if RegExMatch(entryName, "i)^([\w]+(?:_[\w]+){3,})_?", &rawMatch) {
+				rawCharacterName := StrSplit(rawMatch[1], "_")
+
+				decomposedName.script := decomposedName.script[rawCharacterName[1]]
+				decomposedName.case := decomposedName.case[rawCharacterName[2]]
+				decomposedName.type := decomposedName.type[rawCharacterName[3]]
+				decomposedName.letter := (decomposedName.case = "capital" ? StrUpper(rawCharacterName[4]) : rawCharacterName[4])
+
+				diacriticSet := RegExReplace(entryName, "i)^.*?__")
+				decomposedName.postfixes := StrSplit(diacriticSet, "__")
+
+				return decomposedName
+			} else {
+				return entryName
+			}
+		}
+	}
+
+	static SetDecomposedData(entryName, entry) {
+		decomposedName := this.NameDecompose(entryName)
+
+		if decomposedName == entryName {
+			entry.data := {
+				script: "",
+				case: "",
+				type: "",
+				letter: "",
+				postfixes: []
+			}
+			return entry
+		} else {
+			entry.data := decomposedName
+			return entry
+		}
 	}
 }
 

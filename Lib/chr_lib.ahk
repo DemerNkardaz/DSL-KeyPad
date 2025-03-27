@@ -2449,7 +2449,7 @@ RegLib(this) {
 			tags: ["прописная лигатура AA", "capital ligature AA"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["AA"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_aa", {
@@ -2457,7 +2457,7 @@ RegLib(this) {
 			tags: ["строчная лигатура aa", "small ligature aa"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["aa"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_c_lig_ae", {
@@ -2466,7 +2466,7 @@ RegLib(this) {
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { modifier: "{U+1D2D}", smallCapital: "{U+1D01}" },
-			recipe: (*) => this.MakeRecipe("AE",
+			recipe: (*) => this.MakeRecipe("$",
 				"${lat_c_let_a::smallCapital}${lat_c_let_e::smallCapital}"),
 			symbol: { category: "Latin Ligature" },
 		},
@@ -2476,39 +2476,39 @@ RegLib(this) {
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { modifier: "{U+1DD4}", modifier: "{U+10783}" },
-			recipe: ["ae"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
-		"lat_c_lig_ae_acute", {
+		"lat_c_lig_ae__acute", {
 			unicode: "{U+01FC}",
 			tags: ["прописная лигатура AE с акутом", "capital ligature AE with acute"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("AE${acute}", "${lat_c_lig_ae}${acute}"),
+			recipe: (*) => this.MakeRecipe("$${acute}", "${lat_c_lig_ae}${acute}"),
 			symbol: { category: "Latin Ligature Accented" },
 		},
-		"lat_s_lig_ae_acute", {
+		"lat_s_lig_ae__acute", {
 			unicode: "{U+01FD}",
 			tags: ["строчная лигатура ae с акутом", "small ligature ae with acute"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("ae${acute}", "${lat_s_lig_ae}${acute}"),
+			recipe: (*) => this.MakeRecipe("$${acute}", "${lat_s_lig_ae}${acute}"),
 			symbol: { category: "Latin Ligature Accented" },
 		},
-		"lat_c_lig_ae_macron", {
+		"lat_c_lig_ae__macron", {
 			unicode: "{U+01E2}",
 			tags: ["прописная лигатура AE с макроном", "capital ligature AE with macron"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("AE${macron}", "${lat_c_lig_ae}${macron}"),
+			recipe: (*) => this.MakeRecipe("$${macron}", "${lat_c_lig_ae}${macron}"),
 			symbol: { category: "Latin Ligature Accented" },
 		},
-		"lat_s_lig_ae_macron", {
+		"lat_s_lig_ae__macron", {
 			unicode: "{U+01E3}",
 			tags: ["строчная лигатура ae с макроном", "small ligature ae with macron"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("ae${macron}", "${lat_s_lig_ae}${macron}"),
+			recipe: (*) => this.MakeRecipe("$${macron}", "${lat_s_lig_ae}${macron}"),
 			symbol: { category: "Latin Ligature Accented" },
 		},
 		"lat_c_lig_ao", {
@@ -2516,7 +2516,7 @@ RegLib(this) {
 			tags: ["прописная лигатура AO", "capital ligature AO"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["AO"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_ao", {
@@ -2525,7 +2525,7 @@ RegLib(this) {
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { combining: "{U+1DD5}" },
-			recipe: ["ao"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_c_lig_au", {
@@ -2533,7 +2533,7 @@ RegLib(this) {
 			tags: ["прописная лигатура AU", "capital ligature AU"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["AU"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_au", {
@@ -2541,7 +2541,7 @@ RegLib(this) {
 			tags: ["строчная лигатура au", "small ligature au"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["au"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_c_lig_av", {
@@ -2549,7 +2549,7 @@ RegLib(this) {
 			tags: ["прописная лигатура AV", "capital ligature AV"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["AV"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_av", {
@@ -2558,24 +2558,24 @@ RegLib(this) {
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { combining: "{U+1DD6}" },
-			recipe: ["av"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
-		"lat_c_lig_av_stroke_short", {
+		"lat_c_lig_av__stroke_short", {
 			unicode: "{U+A73A}",
 			tags: ["прописная лигатура AV", "capital ligature AV"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("AV${stroke_short}", "${lat_c_lig_av}${stroke_short}"),
+			recipe: (*) => this.MakeRecipe("$${stroke_short}", "${lat_c_lig_av}${stroke_short}"),
 			symbol: { category: "Latin Ligature" },
 		},
-		"lat_s_lig_av_stroke_short", {
+		"lat_s_lig_av__stroke_short", {
 			unicode: "{U+A73B}",
 			tags: ["строчная лигатура av", "small ligature av"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { combining: "{U+1DD6}" },
-			recipe: (*) => this.MakeRecipe("av${stroke_short}", "${lat_s_lig_av}${stroke_short}"),
+			recipe: (*) => this.MakeRecipe("$${stroke_short}", "${lat_s_lig_av}${stroke_short}"),
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_c_lig_ay", {
@@ -2583,7 +2583,7 @@ RegLib(this) {
 			tags: ["прописная лигатура AY", "capital ligature AY"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["AY"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_ay", {
@@ -2591,7 +2591,7 @@ RegLib(this) {
 			tags: ["строчная лигатура ay", "small ligature ay"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["ay"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_db", {
@@ -2599,7 +2599,7 @@ RegLib(this) {
 			tags: ["строчная лигатура db", "small ligature db"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["db"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_et", {
@@ -2607,7 +2607,7 @@ RegLib(this) {
 			tags: ["строчная лигатура et", "small ligature et", "амперсанд", "ampersand"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: ["et"],
+			recipe: ["$"],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_et_turned", {
@@ -2615,7 +2615,7 @@ RegLib(this) {
 			tags: ["лигатура перевёрнутый et", "ligature turned et", "перевёрнутый амперсанд", "turned ampersand"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("et${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"),
+			recipe: (*) => this.MakeRecipe("$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"),
 			symbol: { category: "Latin Ligature" },
 		},
 		;
@@ -2623,54 +2623,50 @@ RegLib(this) {
 		; * Accented Latin
 		;
 		;
-		"lat_c_let_a_acute", {
+		"lat_c_let_a__acute", {
 			unicode: "{U+00C1}",
 			groups: ["Latin Accented", "Latin Accented Primary"],
-			options: { titlesAlt: True, fastKey: "@" },
-			recipe: (*) => this.MakeRecipe("@'${acute}"),
+			options: { titlesAlt: True, fastKey: "$" },
+			recipe: (*) => this.MakeRecipe("$${acute}"),
 			symbol: { category: "Latin Accented" },
 		},
-		"lat_s_let_a_acute", {
+		"lat_s_let_a__acute", {
 			unicode: "{U+00E1}",
 			groups: ["Latin Accented", "Latin Accented Primary"],
-			options: { titlesAlt: True, fastKey: "@" },
+			options: { titlesAlt: True, fastKey: "$" },
 			recipe: (*) => this.MakeRecipe("@${acute}"),
 			symbol: { category: "Latin Accented" },
 		},
-		"lat_c_let_a_circumflex", {
+		"lat_c_let_a__circumflex", {
 			unicode: "{U+00C2}",
 			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { titlesAlt: True, fastKey: "<! @" },
+			options: { titlesAlt: True, fastKey: "<! $" },
 			recipe: (*) => this.MakeRecipe("@'${circumflex}"),
 			symbol: { category: "Latin Accented" },
-			ipa: {
-				romanian: "æ",
-			},
 		},
-		"lat_s_let_a_circumflex", {
+		"lat_s_let_a__circumflex", {
 			unicode: "{U+00E2}",
 			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { titlesAlt: True, fastKey: "<! @" },
+			options: { titlesAlt: True, fastKey: "<! $" },
 			recipe: (*) => this.MakeRecipe("@${circumflex}"),
 			symbol: { category: "Latin Accented" },
 		},
-		"lat_c_let_a_circumflex_acute", {
+		"lat_c_let_a__circumflex__acute", {
 			unicode: "{U+1EA4}",
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
 			recipe: (*) => this.MakeRecipe(
-				"A[SWAP:${circumflex};${acute}]", "${lat_c_let_a_(circumflex|acute)}$(*)",
-				;"${lat_c_let_a_circumflex}${acute}", "${lat_c_let_a_acute}${circumflex}",
+				"A[SWAP:${circumflex};${acute}]", "${lat_c_let_a__(circumflex|acute)}$(*)",
 			),
 			symbol: { category: "Latin Accented" },
 		},
-		"lat_s_let_a_circumflex_acute", {
+		"lat_s_let_a__circumflex__acute", {
 			unicode: "{U+1EA5}",
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
 			recipe: (*) => this.MakeRecipe(
-				"@${circumflex}${acute}", "${lat_s_let_a_circumflex}${acute}",
-				"@${acute}${circumflex}", "${lat_s_let_a_acute}${circumflex}",
+				"@${circumflex}${acute}", "${lat_s_let_a__circumflex}${acute}",
+				"@${acute}${circumflex}", "${lat_s_let_a__acute}${circumflex}",
 			),
 			symbol: { category: "Latin Accented" },
 		},

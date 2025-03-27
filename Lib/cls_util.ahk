@@ -334,4 +334,19 @@ Class Util {
 		}
 
 	}
+
+	static ObjPreview(obj, indent := 0) {
+		output := ""
+		indentStr := Util.StrRepeat("`t", indent)
+
+		for key, value in obj.OwnProps() {
+			if IsObject(value) {
+				output .= indentStr key ":`n" . this.ObjPreview(value, indent + 1)
+			} else {
+				output .= indentStr key ": " value "`n"
+			}
+		}
+
+		return output
+	}
 }

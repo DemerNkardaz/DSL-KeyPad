@@ -3,6 +3,7 @@ Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
 Array.Prototype.DefineProp("Contains", { Call: _ArrayContains })
 Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
 Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
+Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 
@@ -63,6 +64,22 @@ _ArrayRemoveValue(this, valueToRemove) {
 		}
 	}
 }
+
+_ArraySortLen(this) {
+	sorted := this.Clone()
+
+	for i, _ in sorted {
+		for j, _ in sorted {
+			if (StrLen(sorted[i]) > StrLen(sorted[j])) {
+				temp := sorted[i]
+				sorted[i] := sorted[j]
+				sorted[j] := temp
+			}
+		}
+	}
+	return sorted
+}
+
 
 ArrayMergeTo(TargetArray, Arrays*) {
 	for arrayItem in Arrays {
