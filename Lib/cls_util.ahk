@@ -8,6 +8,14 @@ Class Util {
 		}
 	}
 
+	static StrRepeat(str, count) {
+		output := ""
+		loop count {
+			output .= str
+		}
+		return output
+	}
+
 	static StrFormattedReduce(str, maxLength := 32, removeLineBreaks := False) {
 		output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ]" : str
 		if removeLineBreaks {

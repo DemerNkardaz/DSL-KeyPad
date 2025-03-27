@@ -42,7 +42,7 @@ Class Ligaturiser {
 					throw
 
 				output := RegExReplace(output, "\s+$", "")
-				this.SendOutput(RegExReplace(output, "#", ""))
+				this.SendOutput(output)
 
 				IniWrite(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), ConfigFile, "LatestPrompts", "Ligature")
 			} catch {
@@ -162,7 +162,7 @@ Class Ligaturiser {
 		} else {
 			CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " Util.StrFormattedReduce(output))
 			SetTimer(Tooltip, -500)
-			this.SendOutput(RegExReplace(output, "#", ""))
+			this.SendOutput(output)
 		}
 
 		return
@@ -223,7 +223,7 @@ Class Ligaturiser {
 						if (getSuggestions && RegExMatch(recipeEntry, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
 							charFound := True
 
-							indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, , Cfg.Get("Input_Mode")))
+							indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
 							if !getSuggestions
 								break 2
 						}
@@ -231,7 +231,7 @@ Class Ligaturiser {
 				} else if (getSuggestions && RegExMatch(recipe, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
 					charFound := True
 
-					indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, , Cfg.Get("Input_Mode")))
+					indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
 					if !getSuggestions
 						break
 				}

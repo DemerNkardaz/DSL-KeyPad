@@ -14088,6 +14088,1372 @@ RegLib(this) {
 	ChrLib.AddEntries(
 		;
 		;
+		; * Default Latin
+		;
+		;
+		"lat_c_let_a", {
+			unicode: "{U+0041}",
+			alterations: {
+				modifier: "{U+1D2C}",
+				italic: "{U+1D434}",
+				italicBold: "{U+1D468}",
+				bold: "{U+1D401}",
+				fraktur: "{U+1D504}",
+				frakturBold: "{U+1D56C}",
+				script: "{U+1D49C}",
+				scriptBold: "{U+1D4D0}",
+				doubleStruck: "{U+1D538}",
+				sansSerif: "{U+1D5A0}",
+				sansSerifItalic: "{U+1D608}",
+				sansSerifItalicBold: "{U+1D63C}",
+				sansSerifBold: "{U+1D5D4}",
+				monospace: "{U+1D670}",
+				smallCapital: "{U+1D00}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_a", {
+			unicode: "{U+0061}",
+			alterations: {
+				combining: "{U+0363}",
+				modifier: "{U+1D43}",
+				subscript: "{U+2090}",
+				italic: "{U+1D44E}",
+				italicBold: "{U+1D482}",
+				bold: "{U+1D41A}",
+				fraktur: "{U+1D51E}",
+				frakturBold: "{U+1D586}",
+				script: "{U+1D4B6}",
+				scriptBold: "{U+1D4EA}",
+				doubleStruck: "{U+1D552}",
+				sansSerif: "{U+1D5BA}",
+				sansSerifItalic: "{U+1D622}",
+				sansSerifItalicBold: "{U+1D656}",
+				sansSerifBold: "{U+1D5EE}",
+				monospace: "{U+1D68A}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_b", {
+			unicode: "{U+0042}",
+			alterations: {
+				modifier: "{U+1D2E}",
+				italic: "{U+1D435}",
+				italicBold: "{U+1D469}",
+				bold: "{U+1D401}",
+				fraktur: "{U+1D505}",
+				frakturBold: "{U+1D56D}",
+				script: "{U+212C}",
+				scriptBold: "{U+1D4D1}",
+				doubleStruck: "{U+1D539}",
+				sansSerif: "{U+1D5A1}",
+				sansSerifItalic: "{U+1D609}",
+				sansSerifItalicBold: "{U+1D63D}",
+				sansSerifBold: "{U+1D5D5}",
+				monospace: "{U+1D671}",
+				smallCapital: "{U+0299}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_b", {
+			unicode: "{U+0062}",
+			alterations: {
+				combining: "{U+1DE8}",
+				modifier: "{U+1D47}",
+				italic: "{U+1D44F}",
+				italicBold: "{U+1D483}",
+				bold: "{U+1D41B}",
+				fraktur: "{U+1D51F}",
+				frakturBold: "{U+1D587}",
+				script: "{U+1D4B7}",
+				scriptBold: "{U+1D4EB}",
+				doubleStruck: "{U+1D553}",
+				sansSerif: "{U+1D5BB}",
+				sansSerifItalic: "{U+1D623}",
+				sansSerifItalicBold: "{U+1D657}",
+				sansSerifBold: "{U+1D5EF}",
+				monospace: "{U+1D68B}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_c", {
+			unicode: "{U+0043}",
+			alterations: {
+				modifier: "{U+A7F2}",
+				italic: "{U+1D436}",
+				italicBold: "{U+1D46A}",
+				bold: "{U+1D402}",
+				fraktur: "{U+212D}",
+				frakturBold: "{U+1D56E}",
+				script: "{U+1D49E}",
+				scriptBold: "{U+1D4D2}",
+				doubleStruck: "{U+2102}",
+				sansSerif: "{U+1D5A2}",
+				sansSerifItalic: "{U+1D60A}",
+				sansSerifItalicBold: "{U+1D63E}",
+				sansSerifBold: "{U+1D5D6}",
+				monospace: "{U+1D672}",
+				smallCapital: "{U+1D04}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_c", {
+			unicode: "{U+0063}",
+			alterations: {
+				combining: "{U+0368}",
+				modifier: "{U+1D9C}",
+				italic: "{U+1D450}",
+				italicBold: "{U+1D484}",
+				bold: "{U+1D41C}",
+				fraktur: "{U+1D520}",
+				frakturBold: "{U+1D588}",
+				script: "{U+1D4B8}",
+				scriptBold: "{U+1D4EC}",
+				doubleStruck: "{U+1D554}",
+				sansSerif: "{U+1D5BC}",
+				sansSerifItalic: "{U+1D624}",
+				sansSerifItalicBold: "{U+1D658}",
+				sansSerifBold: "{U+1D5F0}",
+				monospace: "{U+1D68C}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_d", {
+			unicode: "{U+0044}",
+			alterations: {
+				modifier: "{U+1D30}",
+				italic: "{U+1D437}",
+				italicBold: "{U+1D46B}",
+				bold: "{U+1D403}",
+				fraktur: "{U+1D507}",
+				frakturBold: "{U+1D56F}",
+				script: "{U+1D49F}",
+				scriptBold: "{U+1D4D3}",
+				doubleStruck: "{U+1D53B}",
+				doubleStruckItalic: "{U+2145}",
+				sansSerif: "{U+1D5A3}",
+				sansSerifItalic: "{U+1D60B}",
+				sansSerifItalicBold: "{U+1D63F}",
+				sansSerifBold: "{U+1D5D7}",
+				monospace: "{U+1D673}",
+				smallCapital: "{U+1D05}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_d", {
+			unicode: "{U+0064}",
+			alterations: {
+				combining: "{U+0369}",
+				modifier: "{U+1D48}",
+				italic: "{U+1D451}",
+				italicBold: "{U+1D485}",
+				bold: "{U+1D41D}",
+				fraktur: "{U+1D521}",
+				frakturBold: "{U+1D589}",
+				script: "{U+1D4B9}",
+				scriptBold: "{U+1D4ED}",
+				doubleStruck: "{U+1D555}",
+				doubleStruckItalic: "{U+2146}",
+				sansSerif: "{U+1D5BD}",
+				sansSerifItalic: "{U+1D625}",
+				sansSerifItalicBold: "{U+1D659}",
+				sansSerifBold: "{U+1D5F1}",
+				monospace: "{U+1D68D}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_e", {
+			unicode: "{U+0045}",
+			alterations: {
+				modifier: "{U+1D31}",
+				italic: "{U+1D438}",
+				italicBold: "{U+1D46C}",
+				bold: "{U+1D404}",
+				fraktur: "{U+1D508}",
+				frakturBold: "{U+1D570}",
+				script: "{U+2130}",
+				scriptBold: "{U+1D4D4}",
+				doubleStruck: "{U+1D53C}",
+				sansSerif: "{U+1D5A4}",
+				sansSerifItalic: "{U+1D60C}",
+				sansSerifItalicBold: "{U+1D640}",
+				sansSerifBold: "{U+1D5D8}",
+				monospace: "{U+1D674}",
+				smallCapital: "{U+1D07}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_e", {
+			unicode: "{U+0065}",
+			alterations: {
+				combining: "{U+0364}",
+				modifier: "{U+1D49}",
+				subscript: "{U+2091}",
+				italic: "{U+1D452}",
+				italicBold: "{U+1D486}",
+				bold: "{U+1D41E}",
+				fraktur: "{U+1D522}",
+				frakturBold: "{U+1D58A}",
+				script: "{U+212F}",
+				scriptBold: "{U+1D4EE}",
+				doubleStruck: "{U+1D556}",
+				doubleStruckItalic: "{U+2147}",
+				sansSerif: "{U+1D5BE}",
+				sansSerifItalic: "{U+1D626}",
+				sansSerifItalicBold: "{U+1D65A}",
+				sansSerifBold: "{U+1D5F2}",
+				monospace: "{U+1D68E}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_f", {
+			unicode: "{U+0046}",
+			alterations: {
+				modifier: "{U+A7F3}",
+				italic: "{U+1D439}",
+				italicBold: "{U+1D46D}",
+				bold: "{U+1D405}",
+				fraktur: "{U+1D509}",
+				frakturBold: "{U+1D571}",
+				script: "{U+2131}",
+				scriptBold: "{U+1D4D5}",
+				doubleStruck: "{U+1D53D}",
+				sansSerif: "{U+1D5A5}",
+				sansSerifItalic: "{U+1D60D}",
+				sansSerifItalicBold: "{U+1D641}",
+				sansSerifBold: "{U+1D5D9}",
+				monospace: "{U+1D675}",
+				smallCapital: "{U+A730}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_f", {
+			unicode: "{U+0046}",
+			alterations: {
+				modifier: "{U+A7F3}",
+				italic: "{U+1D439}",
+				italicBold: "{U+1D46D}",
+				bold: "{U+1D405}",
+				fraktur: "{U+1D509}",
+				frakturBold: "{U+1D571}",
+				script: "{U+2131}",
+				scriptBold: "{U+1D4D5}",
+				doubleStruck: "{U+1D53D}",
+				sansSerif: "{U+1D5A5}",
+				sansSerifItalic: "{U+1D60D}",
+				sansSerifItalicBold: "{U+1D641}",
+				sansSerifBold: "{U+1D5D9}",
+				monospace: "{U+1D675}",
+				smallCapital: "{U+A730}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_g", {
+			unicode: "{U+0047}",
+			alterations: {
+				combining: "{U+1DDB}",
+				modifier: "{U+1D33}",
+				italic: "{U+1D43A}",
+				italicBold: "{U+1D46E}",
+				bold: "{U+1D406}",
+				fraktur: "{U+1D50A}",
+				frakturBold: "{U+1D572}",
+				script: "{U+1D4A2}",
+				scriptBold: "{U+1D4D6}",
+				doubleStruck: "{U+1D53E}",
+				sansSerif: "{U+1D5A6}",
+				sansSerifItalic: "{U+1D60E}",
+				sansSerifItalicBold: "{U+1D642}",
+				sansSerifBold: "{U+1D5DA}",
+				monospace: "{U+1D676}",
+				smallCapital: "{U+0262}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_g", {
+			unicode: "{U+0067}",
+			alterations: {
+				combining: "{U+1DDA}",
+				modifier: "{U+1D4D}",
+				italic: "{U+1D454}",
+				italicBold: "{U+1D488}",
+				bold: "{U+1D420}",
+				fraktur: "{U+1D524}",
+				frakturBold: "{U+1D58C}",
+				script: "{U+210A}",
+				scriptBold: "{U+1D4F0}",
+				doubleStruck: "{U+1D558}",
+				sansSerif: "{U+1D5C0}",
+				sansSerifItalic: "{U+1D628}",
+				sansSerifItalicBold: "{U+1D65C}",
+				sansSerifBold: "{U+1D5F4}",
+				monospace: "{U+1D690}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_h", {
+			unicode: "{U+0048}",
+			alterations: {
+				modifier: "{U+1D34}",
+				italic: "{U+1D43B}",
+				italicBold: "{U+1D46F}",
+				bold: "{U+1D407}",
+				fraktur: "{U+210C}",
+				frakturBold: "{U+1D573}",
+				script: "{U+210B}",
+				scriptBold: "{U+1D4D7}",
+				doubleStruck: "{U+210D}",
+				sansSerif: "{U+1D5A7}",
+				sansSerifItalic: "{U+1D60F}",
+				sansSerifItalicBold: "{U+1D643}",
+				sansSerifBold: "{U+1D5DB}",
+				monospace: "{U+1D677}",
+				smallCapital: "{U+029C}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_h", {
+			unicode: "{U+0068}",
+			alterations: {
+				combining: "{U+036A}",
+				modifier: "{U+02B0}",
+				subscript: "{U+2095}",
+				italic: "{U+210E}",
+				italicBold: "{U+1D489}",
+				bold: "{U+1D421}",
+				fraktur: "{U+1D525}",
+				frakturBold: "{U+1D58D}",
+				script: "{U+1D4BD}",
+				scriptBold: "{U+1D4F1}",
+				doubleStruck: "{U+1D559}",
+				sansSerif: "{U+1D5C1}",
+				sansSerifItalic: "{U+1D629}",
+				sansSerifItalicBold: "{U+1D65D}",
+				sansSerifBold: "{U+1D5F5}",
+				monospace: "{U+1D691}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_i", {
+			unicode: "{U+0049}",
+			alterations: {
+				modifier: "{U+1D35}",
+				italic: "{U+1D43C}",
+				italicBold: "{U+1D470}",
+				bold: "{U+1D408}",
+				fraktur: "{U+2111}",
+				frakturBold: "{U+1D574}",
+				script: "{U+2110}",
+				scriptBold: "{U+1D4D8}",
+				doubleStruck: "{U+1D540}",
+				sansSerif: "{U+1D5A8}",
+				sansSerifItalic: "{U+1D610}",
+				sansSerifItalicBold: "{U+1D644}",
+				sansSerifBold: "{U+1D5DC}",
+				monospace: "{U+1D678}",
+				smallCapital: "{U+026A}"
+			},
+			options: {
+				noCalc: True
+			},
+			recipe: [GetChar('lat_c_let_i_dot_above') "/"],
+		},
+		"lat_s_let_i", {
+			unicode: "{U+0069}",
+			alterations: {
+				combining: "{U+0365}",
+				subscript: "{U+1D62}",
+				italic: "{U+1D456}",
+				italicBold: "{U+1D48A}",
+				bold: "{U+1D422}",
+				fraktur: "{U+1D526}",
+				frakturBold: "{U+1D58E}",
+				script: "{U+1D4BE}",
+				scriptBold: "{U+1D4F2}",
+				doubleStruck: "{U+1D55A}",
+				doubleStruckItalic: "{U+2148}",
+				sansSerif: "{U+1D5C2}",
+				sansSerifItalic: "{U+1D62A}",
+				sansSerifItalicBold: "{U+1D65E}",
+				sansSerifBold: "{U+1D5F6}",
+				monospace: "{U+1D692}"
+			},
+			options: {
+				noCalc: True
+			},
+			recipe: [GetChar('lat_s_let_i_dotless', 'dot_above')],
+		},
+		"lat_c_let_j", {
+			unicode: "{U+004A}",
+			alterations: {
+				modifier: "{U+1D36}",
+				italic: "{U+1D43D}",
+				italicBold: "{U+1D471}",
+				bold: "{U+1D409}",
+				fraktur: "{U+1D50D}",
+				frakturBold: "{U+1D575}",
+				script: "{U+1D4A5}",
+				scriptBold: "{U+1D4D9}",
+				doubleStruck: "{U+1D541}",
+				sansSerif: "{U+1D5A9}",
+				sansSerifItalic: "{U+1D611}",
+				sansSerifItalicBold: "{U+1D645}",
+				sansSerifBold: "{U+1D5DD}",
+				monospace: "{U+1D679}",
+				smallCapital: "{U+1D0A}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_j", {
+			unicode: "{U+006A}",
+			alterations: {
+				modifier: "{U+02B2}",
+				subscript: "{U+2C7C}",
+				italic: "{U+1D457}",
+				italicBold: "{U+1D48B}",
+				bold: "{U+1D423}",
+				fraktur: "{U+1D527}",
+				frakturBold: "{U+1D58F}",
+				script: "{U+1D4BF}",
+				scriptBold: "{U+1D4F3}",
+				doubleStruck: "{U+1D55B}",
+				doubleStruckItalic: "{U+2149}",
+				sansSerif: "{U+1D5C3}",
+				sansSerifItalic: "{U+1D62B}",
+				sansSerifItalicBold: "{U+1D65F}",
+				sansSerifBold: "{U+1D5F7}",
+				monospace: "{U+1D693}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_k", {
+			unicode: "{U+004B}",
+			alterations: {
+				modifier: "{U+1D37}",
+				italic: "{U+1D43E}",
+				italicBold: "{U+1D472}",
+				bold: "{U+1D40A}",
+				fraktur: "{U+1D50E}",
+				frakturBold: "{U+1D576}",
+				script: "{U+1D4A6}",
+				scriptBold: "{U+1D4DA}",
+				doubleStruck: "{U+1D542}",
+				sansSerif: "{U+1D5AA}",
+				sansSerifItalic: "{U+1D612}",
+				sansSerifItalicBold: "{U+1D646}",
+				sansSerifBold: "{U+1D5DE}",
+				monospace: "{U+1D67A}",
+				smallCapital: "{U+1D0B}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_k", {
+			unicode: "{U+006B}",
+			alterations: {
+				combining: "{U+1DDC}",
+				modifier: "{U+1D4F}",
+				subscript: "{U+2096}",
+				italic: "{U+1D458}",
+				italicBold: "{U+1D48C}",
+				bold: "{U+1D424}",
+				fraktur: "{U+1D528}",
+				frakturBold: "{U+1D590}",
+				script: "{U+1D4C0}",
+				scriptBold: "{U+1D4F4}",
+				doubleStruck: "{U+1D55C}",
+				sansSerif: "{U+1D5C4}",
+				sansSerifItalic: "{U+1D62C}",
+				sansSerifItalicBold: "{U+1D660}",
+				sansSerifBold: "{U+1D5F8}",
+				monospace: "{U+1D694}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_l", {
+			unicode: "{U+004C}",
+			alterations: {
+				combining: "{U+1DDE}",
+				modifier: "{U+1D38}",
+				italic: "{U+1D43F}",
+				italicBold: "{U+1D473}",
+				bold: "{U+1D40B}",
+				fraktur: "{U+1D50F}",
+				frakturBold: "{U+1D577}",
+				script: "{U+2112}",
+				scriptBold: "{U+1D4DB}",
+				doubleStruck: "{U+1D543}",
+				sansSerif: "{U+1D5AB}",
+				sansSerifItalic: "{U+1D613}",
+				sansSerifItalicBold: "{U+1D647}",
+				sansSerifBold: "{U+1D5DF}",
+				monospace: "{U+1D67B}",
+				smallCapital: "{U+029F}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_l", {
+			unicode: "{U+006C}",
+			alterations: {
+				combining: "{U+1DDD}",
+				modifier: "{U+02E1}",
+				subscript: "{U+2097}",
+				italic: "{U+1D459}",
+				italicBold: "{U+1D48D}",
+				bold: "{U+1D425}",
+				fraktur: "{U+1D529}",
+				frakturBold: "{U+1D591}",
+				script: "{U+1D4C1}",
+				scriptBold: "{U+1D4F5}",
+				doubleStruck: "{U+1D55D}",
+				sansSerif: "{U+1D5C5}",
+				sansSerifItalic: "{U+1D62D}",
+				sansSerifItalicBold: "{U+1D661}",
+				sansSerifBold: "{U+1D5F9}",
+				monospace: "{U+1D695}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_m", {
+			unicode: "{U+004D}",
+			alterations: {
+				combining: "{U+1DDF}",
+				modifier: "{U+1D39}",
+				italic: "{U+1D440}",
+				italicBold: "{U+1D474}",
+				bold: "{U+1D40C}",
+				fraktur: "{U+1D510}",
+				frakturBold: "{U+1D578}",
+				script: "{U+2133}",
+				scriptBold: "{U+1D4DC}",
+				doubleStruck: "{U+1D544}",
+				sansSerif: "{U+1D5AC}",
+				sansSerifItalic: "{U+1D614}",
+				sansSerifItalicBold: "{U+1D648}",
+				sansSerifBold: "{U+1D5E0}",
+				monospace: "{U+1D67C}",
+				smallCapital: "{U+1D0D}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_m", {
+			unicode: "{U+006D}",
+			alterations: {
+				combining: "{U+036B}",
+				modifier: "{U+1D50}",
+				subscript: "{U+2098}",
+				italic: "{U+1D45A}",
+				italicBold: "{U+1D48E}",
+				bold: "{U+1D426}",
+				fraktur: "{U+1D52A}",
+				frakturBold: "{U+1D592}",
+				script: "{U+1D4C2}",
+				scriptBold: "{U+1D4F6}",
+				doubleStruck: "{U+1D55E}",
+				sansSerif: "{U+1D5C6}",
+				sansSerifItalic: "{U+1D62E}",
+				sansSerifItalicBold: "{U+1D662}",
+				sansSerifBold: "{U+1D5FA}",
+				monospace: "{U+1D696}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_n", {
+			unicode: "{U+004E}",
+			alterations: {
+				combining: "{U+1DE1}",
+				modifier: "{U+1D3A}",
+				italic: "{U+1D441}",
+				italicBold: "{U+1D475}",
+				bold: "{U+1D40D}",
+				fraktur: "{U+1D511}",
+				frakturBold: "{U+1D579}",
+				script: "{U+1D4A9}",
+				scriptBold: "{U+1D4DD}",
+				doubleStruck: "{U+2115}",
+				sansSerif: "{U+1D5AD}",
+				sansSerifItalic: "{U+1D615}",
+				sansSerifItalicBold: "{U+1D649}",
+				sansSerifBold: "{U+1D5E1}",
+				monospace: "{U+1D67D}",
+				smallCapital: "{U+0274}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_n", {
+			unicode: "{U+006E}",
+			alterations: {
+				combining: "{U+1DE0}",
+				subscript: "{U+2099}",
+				italic: "{U+1D45B}",
+				italicBold: "{U+1D48F}",
+				bold: "{U+1D427}",
+				fraktur: "{U+1D52B}",
+				frakturBold: "{U+1D593}",
+				script: "{U+1D4C3}",
+				scriptBold: "{U+1D4F7}",
+				doubleStruck: "{U+1D55F}",
+				sansSerif: "{U+1D5C7}",
+				sansSerifItalic: "{U+1D62F}",
+				sansSerifItalicBold: "{U+1D663}",
+				sansSerifBold: "{U+1D5FB}",
+				monospace: "{U+1D697}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_o", {
+			unicode: "{U+004F}",
+			alterations: {
+				modifier: "{U+1D3C}",
+				italic: "{U+1D442}",
+				italicBold: "{U+1D476}",
+				bold: "{U+1D40E}",
+				fraktur: "{U+1D512}",
+				frakturBold: "{U+1D57A}",
+				script: "{U+1D4AA}",
+				scriptBold: "{U+1D4DE}",
+				doubleStruck: "{U+1D546}",
+				sansSerif: "{U+1D5AE}",
+				sansSerifItalic: "{U+1D616}",
+				sansSerifItalicBold: "{U+1D64A}",
+				sansSerifBold: "{U+1D5E2}",
+				monospace: "{U+1D67E}",
+				smallCapital: "{U+1D0F}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_o", {
+			unicode: "{U+006F}",
+			alterations: {
+				combining: "{U+0366}",
+				modifier: "{U+1D52}",
+				subscript: "{U+2092}",
+				italic: "{U+1D45C}",
+				italicBold: "{U+1D490}",
+				bold: "{U+1D428}",
+				fraktur: "{U+1D52C}",
+				frakturBold: "{U+1D594}",
+				script: "{U+2134}",
+				scriptBold: "{U+1D4F8}",
+				doubleStruck: "{U+1D560}",
+				sansSerif: "{U+1D5C8}",
+				sansSerifItalic: "{U+1D630}",
+				sansSerifItalicBold: "{U+1D664}",
+				sansSerifBold: "{U+1D5FC}",
+				monospace: "{U+1D698}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_p", {
+			unicode: "{U+0050}",
+			alterations: {
+				modifier: "{U+1D3E}",
+				italic: "{U+1D443}",
+				italicBold: "{U+1D477}",
+				bold: "{U+1D40F}",
+				fraktur: "{U+1D513}",
+				frakturBold: "{U+1D57B}",
+				script: "{U+1D4AB}",
+				scriptBold: "{U+1D4DF}",
+				doubleStruck: "{U+2119}",
+				sansSerif: "{U+1D5AF}",
+				sansSerifItalic: "{U+1D617}",
+				sansSerifItalicBold: "{U+1D64B}",
+				sansSerifBold: "{U+1D5E3}",
+				monospace: "{U+1D67F}",
+				smallCapital: "{U+1D18}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_p", {
+			unicode: "{U+0070}",
+			alterations: {
+				combining: "{U+1DEE}",
+				modifier: "{U+1D56}",
+				subscript: "{U+209A}",
+				italic: "{U+1D45D}",
+				italicBold: "{U+1D491}",
+				bold: "{U+1D429}",
+				fraktur: "{U+1D52D}",
+				frakturBold: "{U+1D595}",
+				script: "{U+1D4C5}",
+				scriptBold: "{U+1D4F9}",
+				doubleStruck: "{U+1D561}",
+				sansSerif: "{U+1D5C9}",
+				sansSerifItalic: "{U+1D631}",
+				sansSerifItalicBold: "{U+1D665}",
+				sansSerifBold: "{U+1D5FD}",
+				monospace: "{U+1D699}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_q", {
+			unicode: "{U+0051}",
+			alterations: {
+				modifier: "{U+A7F4}",
+				italic: "{U+1D444}",
+				italicBold: "{U+1D478}",
+				bold: "{U+1D410}",
+				fraktur: "{U+1D514}",
+				frakturBold: "{U+1D57C}",
+				script: "{U+1D4AC}",
+				scriptBold: "{U+1D4E0}",
+				doubleStruck: "{U+211A}",
+				sansSerif: "{U+1D5B0}",
+				sansSerifItalic: "{U+1D618}",
+				sansSerifItalicBold: "{U+1D64C}",
+				sansSerifBold: "{U+1D5E4}",
+				monospace: "{U+1D680}",
+				smallCapital: "{U+A7AF}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_q", {
+			unicode: "{U+0071}",
+			alterations: {
+				italic: "{U+1D45E}",
+				italicBold: "{U+1D492}",
+				bold: "{U+1D42A}",
+				fraktur: "{U+1D52E}",
+				frakturBold: "{U+1D596}",
+				script: "{U+1D4C6}",
+				scriptBold: "{U+1D4FA}",
+				doubleStruck: "{U+1D562}",
+				sansSerif: "{U+1D5CA}",
+				sansSerifItalic: "{U+1D632}",
+				sansSerifItalicBold: "{U+1D666}",
+				sansSerifBold: "{U+1D5FE}",
+				monospace: "{U+1D69A}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_r", {
+			unicode: "{U+0052}",
+			alterations: {
+				combining: "{U+1DE2}",
+				modifier: "{U+1D3F}",
+				italic: "{U+1D445}",
+				italicBold: "{U+1D479}",
+				bold: "{U+1D411}",
+				fraktur: "{U+211C}",
+				frakturBold: "{U+1D57D}",
+				script: "{U+211B}",
+				scriptBold: "{U+1D4E1}",
+				doubleStruck: "{U+211D}",
+				sansSerif: "{U+1D5B1}",
+				sansSerifItalic: "{U+1D619}",
+				sansSerifItalicBold: "{U+1D64D}",
+				sansSerifBold: "{U+1D5E5}",
+				monospace: "{U+1D681}",
+				smallCapital: "{U+0280}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_r", {
+			unicode: "{U+0072}",
+			alterations: {
+				combining: "{U+036C}",
+				modifier: "{U+02B3}",
+				subscript: "{U+1D63}",
+				italic: "{U+1D45F}",
+				italicBold: "{U+1D493}",
+				bold: "{U+1D42B}",
+				fraktur: "{U+1D52F}",
+				frakturBold: "{U+1D597}",
+				script: "{U+1D4C7}",
+				scriptBold: "{U+1D4FB}",
+				doubleStruck: "{U+1D563}",
+				sansSerif: "{U+1D5CB}",
+				sansSerifItalic: "{U+1D633}",
+				sansSerifItalicBold: "{U+1D667}",
+				sansSerifBold: "{U+1D5FF}",
+				monospace: "{U+1D69B}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_s", {
+			unicode: "{U+0053}",
+			alterations: {
+				italic: "{U+1D446}",
+				italicBold: "{U+1D47A}",
+				bold: "{U+1D412}",
+				fraktur: "{U+1D516}",
+				frakturBold: "{U+1D57E}",
+				script: "{U+1D4AE}",
+				scriptBold: "{U+1D4E2}",
+				doubleStruck: "{U+1D54A}",
+				sansSerif: "{U+1D5B2}",
+				sansSerifItalic: "{U+1D61A}",
+				sansSerifItalicBold: "{U+1D64E}",
+				sansSerifBold: "{U+1D5E6}",
+				monospace: "{U+1D682}",
+				smallCapital: "{U+A731}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_s", {
+			unicode: "{U+0073}",
+			alterations: {
+				combining: "{U+1DE4}",
+				modifier: "{U+02E2}",
+				subscript: "{U+209B}",
+				italic: "{U+1D460}",
+				italicBold: "{U+1D494}",
+				bold: "{U+1D42C}",
+				fraktur: "{U+1D530}",
+				frakturBold: "{U+1D598}",
+				script: "{U+1D4C8}",
+				scriptBold: "{U+1D4FC}",
+				doubleStruck: "{U+1D564}",
+				sansSerif: "{U+1D5CC}",
+				sansSerifItalic: "{U+1D634}",
+				sansSerifItalicBold: "{U+1D668}",
+				sansSerifBold: "{U+1D600}",
+				monospace: "{U+1D69C}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_t", {
+			unicode: "{U+0054}",
+			alterations: {
+				modifier: "{U+1D40}",
+				italic: "{U+1D447}",
+				italicBold: "{U+1D47B}",
+				bold: "{U+1D413}",
+				fraktur: "{U+1D517}",
+				frakturBold: "{U+1D57F}",
+				script: "{U+1D4AF}",
+				scriptBold: "{U+1D4E3}",
+				doubleStruck: "{U+1D54B}",
+				sansSerif: "{U+1D5B3}",
+				sansSerifItalic: "{U+1D61B}",
+				sansSerifItalicBold: "{U+1D64F}",
+				sansSerifBold: "{U+1D5E7}",
+				monospace: "{U+1D683}",
+				smallCapital: "{U+1D1B}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_t", {
+			unicode: "{U+0074}",
+			alterations: {
+				combining: "{U+036D}",
+				modifier: "{U+1D57}",
+				subscript: "{U+209C}",
+				italic: "{U+1D461}",
+				italicBold: "{U+1D495}",
+				bold: "{U+1D42D}",
+				fraktur: "{U+1D531}",
+				frakturBold: "{U+1D599}",
+				script: "{U+1D4C9}",
+				scriptBold: "{U+1D4FD}",
+				doubleStruck: "{U+1D565}",
+				sansSerif: "{U+1D5CD}",
+				sansSerifItalic: "{U+1D635}",
+				sansSerifItalicBold: "{U+1D669}",
+				sansSerifBold: "{U+1D601}",
+				monospace: "{U+1D69D}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_u", {
+			unicode: "{U+0055}",
+			alterations: {
+				modifier: "{U+1D41}",
+				italic: "{U+1D448}",
+				italicBold: "{U+1D47C}",
+				bold: "{U+1D414}",
+				fraktur: "{U+1D518}",
+				frakturBold: "{U+1D580}",
+				script: "{U+1D4B0}",
+				scriptBold: "{U+1D4E4}",
+				doubleStruck: "{U+1D54C}",
+				sansSerif: "{U+1D5B4}",
+				sansSerifItalic: "{U+1D61C}",
+				sansSerifItalicBold: "{U+1D650}",
+				sansSerifBold: "{U+1D5E8}",
+				monospace: "{U+1D684}",
+				smallCapital: "{U+1D1C}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_u", {
+			unicode: "{U+0075}",
+			alterations: {
+				combining: "{U+0367}",
+				modifier: "{U+1D58}",
+				subscript: "{U+1D64}",
+				italic: "{U+1D462}",
+				italicBold: "{U+1D496}",
+				bold: "{U+1D42E}",
+				fraktur: "{U+1D532}",
+				frakturBold: "{U+1D59A}",
+				script: "{U+1D4CA}",
+				scriptBold: "{U+1D4FE}",
+				doubleStruck: "{U+1D566}",
+				sansSerif: "{U+1D5CE}",
+				sansSerifItalic: "{U+1D636}",
+				sansSerifItalicBold: "{U+1D66A}",
+				sansSerifBold: "{U+1D602}",
+				monospace: "{U+1D69E}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_v", {
+			unicode: "{U+0056}",
+			alterations: {
+				modifier: "{U+2C7D}",
+				italic: "{U+1D449}",
+				italicBold: "{U+1D47D}",
+				bold: "{U+1D415}",
+				fraktur: "{U+1D519}",
+				frakturBold: "{U+1D581}",
+				script: "{U+1D4B1}",
+				scriptBold: "{U+1D4E5}",
+				doubleStruck: "{U+1D54D}",
+				sansSerif: "{U+1D5B5}",
+				sansSerifItalic: "{U+1D61D}",
+				sansSerifItalicBold: "{U+1D651}",
+				sansSerifBold: "{U+1D5E9}",
+				monospace: "{U+1D685}",
+				smallCapital: "{U+1D20}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_v", {
+			unicode: "{U+0076}",
+			alterations: {
+				combining: "{U+036E}",
+				modifier: "{U+1D5B}",
+				subscript: "{U+1D65}",
+				italic: "{U+1D463}",
+				italicBold: "{U+1D497}",
+				bold: "{U+1D42F}",
+				fraktur: "{U+1D533}",
+				frakturBold: "{U+1D59B}",
+				script: "{U+1D4CB}",
+				scriptBold: "{U+1D4FF}",
+				doubleStruck: "{U+1D567}",
+				sansSerif: "{U+1D5CF}",
+				sansSerifItalic: "{U+1D637}",
+				sansSerifItalicBold: "{U+1D66B}",
+				sansSerifBold: "{U+1D603}",
+				monospace: "{U+1D69F}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_w", {
+			unicode: "{U+0057}",
+			alterations: {
+				modifier: "{U+1D42}",
+				italic: "{U+1D44A}",
+				italicBold: "{U+1D47E}",
+				bold: "{U+1D416}",
+				fraktur: "{U+1D51A}",
+				frakturBold: "{U+1D582}",
+				script: "{U+1D4B2}",
+				scriptBold: "{U+1D4E6}",
+				doubleStruck: "{U+1D54E}",
+				sansSerif: "{U+1D5B6}",
+				sansSerifItalic: "{U+1D61E}",
+				sansSerifItalicBold: "{U+1D652}",
+				sansSerifBold: "{U+1D5EA}",
+				monospace: "{U+1D686}",
+				smallCapital: "{U+1D21}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_w", {
+			unicode: "{U+0077}",
+			alterations: {
+				combining: "{U+1DF1}",
+				modifier: "{U+02B7}",
+				italic: "{U+1D464}",
+				italicBold: "{U+1D498}",
+				bold: "{U+1D430}",
+				fraktur: "{U+1D534}",
+				frakturBold: "{U+1D59C}",
+				script: "{U+1D4CC}",
+				scriptBold: "{U+1D500}",
+				doubleStruck: "{U+1D568}",
+				sansSerif: "{U+1D5D0}",
+				sansSerifItalic: "{U+1D638}",
+				sansSerifItalicBold: "{U+1D66C}",
+				sansSerifBold: "{U+1D604}",
+				monospace: "{U+1D6A0}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_x", {
+			unicode: "{U+0058}",
+			alterations: {
+				italic: "{U+1D44B}",
+				italicBold: "{U+1D47F}",
+				bold: "{U+1D417}",
+				fraktur: "{U+1D51B}",
+				frakturBold: "{U+1D583}",
+				script: "{U+1D4B3}",
+				scriptBold: "{U+1D4E7}",
+				doubleStruck: "{U+1D54F}",
+				sansSerif: "{U+1D5B7}",
+				sansSerifItalic: "{U+1D61F}",
+				sansSerifItalicBold: "{U+1D653}",
+				sansSerifBold: "{U+1D5EB}",
+				monospace: "{U+1D687}",
+				smallCapital: "{U+0078}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_x", {
+			unicode: "{U+0078}",
+			alterations: {
+				combining: "{U+036F}",
+				modifier: "{U+02E3}",
+				subscript: "{U+2093}",
+				italic: "{U+1D465}",
+				italicBold: "{U+1D499}",
+				bold: "{U+1D431}",
+				fraktur: "{U+1D535}",
+				frakturBold: "{U+1D59D}",
+				script: "{U+1D4CD}",
+				scriptBold: "{U+1D501}",
+				doubleStruck: "{U+1D569}",
+				sansSerif: "{U+1D5D1}",
+				sansSerifItalic: "{U+1D639}",
+				sansSerifItalicBold: "{U+1D66D}",
+				sansSerifBold: "{U+1D605}",
+				monospace: "{U+1D6A1}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_y", {
+			unicode: "{U+0059}",
+			alterations: {
+				italic: "{U+1D44C}",
+				italicBold: "{U+1D480}",
+				bold: "{U+1D418}",
+				fraktur: "{U+1D51C}",
+				frakturBold: "{U+1D584}",
+				script: "{U+1D4B4}",
+				scriptBold: "{U+1D4E8}",
+				doubleStruck: "{U+1D550}",
+				sansSerif: "{U+1D5B8}",
+				sansSerifItalic: "{U+1D620}",
+				sansSerifItalicBold: "{U+1D654}",
+				sansSerifBold: "{U+1D5EC}",
+				monospace: "{U+1D688}",
+				smallCapital: "{U+028F}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_y", {
+			unicode: "{U+0079}",
+			alterations: {
+				modifier: "{U+02B8}",
+				italic: "{U+1D466}",
+				italicBold: "{U+1D49A}",
+				bold: "{U+1D432}",
+				fraktur: "{U+1D536}",
+				frakturBold: "{U+1D59E}",
+				script: "{U+1D4CE}",
+				scriptBold: "{U+1D502}",
+				doubleStruck: "{U+1D56A}",
+				sansSerif: "{U+1D5D2}",
+				sansSerifItalic: "{U+1D63A}",
+				sansSerifItalicBold: "{U+1D66E}",
+				sansSerifBold: "{U+1D606}",
+				monospace: "{U+1D6A2}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_c_let_z", {
+			unicode: "{U+005A}",
+			alterations: {
+				italic: "{U+1D44D}",
+				italicBold: "{U+1D481}",
+				bold: "{U+1D419}",
+				fraktur: "{U+2128}",
+				frakturBold: "{U+1D585}",
+				script: "{U+1D4B5}",
+				scriptBold: "{U+1D4E9}",
+				doubleStruck: "{U+2124}",
+				sansSerif: "{U+1D5B9}",
+				sansSerifItalic: "{U+1D621}",
+				sansSerifItalicBold: "{U+1D655}",
+				sansSerifBold: "{U+1D5ED}",
+				monospace: "{U+1D689}",
+				smallCapital: "{U+1D22}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		"lat_s_let_z", {
+			unicode: "{U+007A}",
+			alterations: {
+				combining: "{U+1DE6}",
+				modifier: "{U+1DBB}",
+				italic: "{U+1D467}",
+				italicBold: "{U+1D49B}",
+				bold: "{U+1D433}",
+				fraktur: "{U+1D537}",
+				frakturBold: "{U+1D59F}",
+				script: "{U+1D4CF}",
+				scriptBold: "{U+1D503}",
+				doubleStruck: "{U+1D56B}",
+				sansSerif: "{U+1D5D3}",
+				sansSerifItalic: "{U+1D63B}",
+				sansSerifItalicBold: "{U+1D66F}",
+				sansSerifBold: "{U+1D607}",
+				monospace: "{U+1D6A3}"
+			},
+			options: {
+				noCalc: True
+			}
+		},
+		;
+		;
+		; * Default Cyrillic
+		;
+		;
+		"cyr_c_let_a", { unicode: "{U+0410}", options: { noCalc: True } }, ; А
+		"cyr_s_let_a", { unicode: "{U+0430}", alterations: { combining: "{U+2DF6}", modifier: "{U+1E030}", subscript: "{U+1E051}" }, options: { noCalc: True } }, ; а
+		"cyr_c_let_b", { unicode: "{U+0411}", options: { noCalc: True } }, ; Б
+		"cyr_s_let_b", { unicode: "{U+0431}", alterations: { combining: "{U+2DE0}", modifier: "{U+1E031}", subscript: "{U+1E052}" }, options: { noCalc: True } }, ; б
+		"cyr_c_let_v", { unicode: "{U+0412}", options: { noCalc: True } }, ; В
+		"cyr_s_let_v", { unicode: "{U+0432}", alterations: { combining: "{U+2DE1}", modifier: "{U+1E032}", subscript: "{U+1E053}" }, options: { noCalc: True } }, ; в
+		"cyr_c_let_g", { unicode: "{U+0413}", options: { noCalc: True } }, ; Г
+		"cyr_s_let_g", { unicode: "{U+0433}", alterations: { combining: "{U+2DE2}", modifier: "{U+1E033}", subscript: "{U+1E054}" }, options: { noCalc: True } }, ; г
+		"cyr_c_let_d", { unicode: "{U+0414}", options: { noCalc: True } }, ; Д
+		"cyr_s_let_d", { unicode: "{U+0434}", alterations: { combining: "{U+2DE3}", modifier: "{U+1E034}", subscript: "{U+1E055}" }, options: { noCalc: True } }, ; д
+		"cyr_c_let_ie", { unicode: "{U+0415}", options: { noCalc: True } }, ; Е
+		"cyr_s_let_ie", { unicode: "{U+0435}", alterations: { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }, options: { noCalc: True } }, ; е
+		"cyr_c_let_yo", { unicode: "{U+0401}", options: { noCalc: True } }, ; Ё
+		"cyr_s_let_yo", { unicode: "{U+0451}", options: { noCalc: True } }, ; ё
+		"cyr_c_let_zh", { unicode: "{U+0416}", options: { noCalc: True } }, ; Ж
+		"cyr_s_let_zh", { unicode: "{U+0436}", alterations: { combining: "{U+2DE4}", modifier: "{U+1E036}", subscript: "{U+1E057}" }, options: { noCalc: True } }, ; ж
+		"cyr_c_let_z", { unicode: "{U+0417}", options: { noCalc: True } }, ; З
+		"cyr_s_let_z", { unicode: "{U+0437}", alterations: { combining: "{U+2DE5}", modifier: "{U+1E037}", subscript: "{U+1E058}" }, options: { noCalc: True } }, ; з
+		"cyr_c_let_i", { unicode: "{U+0418}", options: { noCalc: True } }, ; И
+		"cyr_s_let_i", { unicode: "{U+0438}", alterations: { combining: "{U+A675}", modifier: "{U+1E038}", subscript: "{U+1E059}" }, options: { noCalc: True } }, ; и
+		"cyr_c_let_iy", { unicode: "{U+0419}", options: { noCalc: True } }, ; Й
+		"cyr_s_let_iy", { unicode: "{U+0439}", options: { noCalc: True } }, ; й
+		"cyr_c_let_k", { unicode: "{U+041A}", options: { noCalc: True } }, ; К
+		"cyr_s_let_k", { unicode: "{U+043A}", alterations: { combining: "{U+2DE6}", modifier: "{U+1E039}", subscript: "{U+1E05A}" }, options: { noCalc: True } }, ; к
+		"cyr_c_let_l", { unicode: "{U+041B}", options: { noCalc: True } }, ; Л
+		"cyr_s_let_l", { unicode: "{U+043B}", alterations: { combining: "{U+2DE7}", modifier: "{U+1E03A}", subscript: "{U+1E05B}" }, options: { noCalc: True } }, ; л
+		"cyr_c_let_m", { unicode: "{U+041C}", options: { noCalc: True } }, ; М
+		"cyr_s_let_m", { unicode: "{U+043C}", alterations: { combining: "{U+2DE8}", modifier: "{U+1E03B}" }, options: { noCalc: True } }, ; м
+		"cyr_c_let_n", { unicode: "{U+041D}", options: { noCalc: True } }, ; Н
+		"cyr_s_let_n", { unicode: "{U+043D}", alterations: { combining: "{U+2DE9}", modifier: "{U+1D78}" }, options: { noCalc: True } }, ; н
+		"cyr_c_let_o", { unicode: "{U+041E}", options: { noCalc: True } }, ; О
+		"cyr_s_let_o", { unicode: "{U+043E}", alterations: { combining: "{U+2DEA}", modifier: "{U+1E03C}", subscript: "{U+1E05C}" }, options: { noCalc: True } }, ; о
+		"cyr_c_let_p", { unicode: "{U+041F}", options: { noCalc: True } }, ; П
+		"cyr_s_let_p", { unicode: "{U+043F}", alterations: { combining: "{U+2DEB}", modifier: "{U+1E03D}", subscript: "{U+1E05D}" }, options: { noCalc: True } }, ; п
+		"cyr_c_let_r", { unicode: "{U+0420}", options: { noCalc: True } }, ; Р
+		"cyr_s_let_r", { unicode: "{U+0440}", alterations: { combining: "{U+2DEC}", modifier: "{U+1E03E}" }, options: { noCalc: True } }, ; р
+		"cyr_c_let_s", { unicode: "{U+0421}", options: { noCalc: True } }, ; С
+		"cyr_s_let_s", { unicode: "{U+0441}", alterations: { combining: "{U+2DED}", modifier: "{U+1E03F}", subscript: "{U+1E05E}" }, options: { noCalc: True } }, ; с
+		"cyr_c_let_t", { unicode: "{U+0422}", options: { noCalc: True } }, ; Т
+		"cyr_s_let_t", { unicode: "{U+0442}", alterations: { combining: "{U+2DEE}", modifier: "{U+1E040}" }, options: { noCalc: True } }, ; т
+		"cyr_c_let_u", { unicode: "{U+0423}", options: { noCalc: True } }, ; У
+		"cyr_s_let_u", { unicode: "{U+0443}", alterations: { combining: "{U+A677}", modifier: "{U+1E041}", subscript: "{U+1E05F}" }, options: { noCalc: True } }, ; у
+		"cyr_c_let_f", { unicode: "{U+0424}", options: { noCalc: True } }, ; Ф
+		"cyr_s_let_f", { unicode: "{U+0444}", alterations: { combining: "{U+A69E}", modifier: "{U+1E042}", subscript: "{U+1E060}" }, options: { noCalc: True } }, ; ф
+		"cyr_c_let_h", { unicode: "{U+0425}", options: { noCalc: True } }, ; Х
+		"cyr_s_let_h", { unicode: "{U+0445}", alterations: { combining: "{U+2DEF}", modifier: "{U+1E043}", subscript: "{U+1E061}" }, options: { noCalc: True } }, ; х
+		"cyr_c_let_ts", { unicode: "{U+0426}", options: { noCalc: True } }, ; Ц
+		"cyr_s_let_ts", { unicode: "{U+0446}", alterations: { combining: "{U+2DF0}", modifier: "{U+1E044}", subscript: "{U+1E062}" }, options: { noCalc: True } }, ; ц
+		"cyr_c_let_ch", { unicode: "{U+0427}", options: { noCalc: True } }, ; Ч
+		"cyr_s_let_ch", { unicode: "{U+0447}", alterations: { combining: "{U+2DF1}", modifier: "{U+1E045}", subscript: "{U+1E063}" }, options: { noCalc: True } }, ; ч
+		"cyr_c_let_sh", { unicode: "{U+0428}", options: { noCalc: True } }, ; Ш
+		"cyr_s_let_sh", { unicode: "{U+0448}", alterations: { combining: "{U+2DF2}", modifier: "{U+1E046}", subscript: "{U+1E064}" }, options: { noCalc: True } }, ; ш
+		"cyr_c_let_shch", { unicode: "{U+0429}", options: { noCalc: True } }, ; Щ
+		"cyr_s_let_shch", { unicode: "{U+0449}", alterations: { combining: "{U+2DF3}" }, options: { noCalc: True } }, ; щ
+		"cyr_c_let_yeru", { unicode: "{U+042A}", options: { noCalc: True } }, ; Ъ
+		"cyr_s_let_yeru", { unicode: "{U+044A}", alterations: { combining: "{U+A678}", modifier: "{U+A69C}", subscript: "{U+1E065}" }, options: { noCalc: True } }, ; ъ
+		"cyr_c_let_yery", { unicode: "{U+042B}", options: { noCalc: True } }, ; Ы
+		"cyr_s_let_yery", { unicode: "{U+044B}", alterations: { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }, options: { noCalc: True } }, ; ы
+		"cyr_c_let_yeri", { unicode: "{U+042C}", options: { noCalc: True } }, ; Ь
+		"cyr_s_let_yeri", { unicode: "{U+044C}", alterations: { combining: "{U+A67A}", modifier: "{U+A69D}" }, options: { noCalc: True } }, ; ь
+		"cyr_c_let_e", { unicode: "{U+042D}", options: { noCalc: True } }, ; Э
+		"cyr_s_let_e", { unicode: "{U+044D}", alterations: { modifier: "{U+1E048}" }, options: { noCalc: True } }, ; э
+		"cyr_c_let_yu", { unicode: "{U+042E}", options: { noCalc: True } }, ; Ю
+		"cyr_s_let_yu", { unicode: "{U+044E}", alterations: { combining: "{U+2DFB}", modifier: "{U+1E049}" }, options: { noCalc: True } }, ; ю
+		"cyr_c_let_ya", { unicode: "{U+042F}", options: { noCalc: True } }, ; Я
+		"cyr_s_let_ya", { unicode: "{U+044F}", options: { noCalc: True } }, ; я
+		;
+		;
+		; * Misc
+		;
+		;
+		"num_sup_0", { unicode: "{U+2070}" },
+		"num_sup_1", { unicode: "{U+00B9}" },
+		"num_sup_2", { unicode: "{U+00B2}" },
+		"num_sup_3", { unicode: "{U+00B3}" },
+		"num_sup_4", { unicode: "{U+2074}" },
+		"num_sup_5", { unicode: "{U+2075}" },
+		"num_sup_6", { unicode: "{U+2076}" },
+		"num_sup_7", { unicode: "{U+2077}" },
+		"num_sup_8", { unicode: "{U+2078}" },
+		"num_sup_9", { unicode: "{U+2079}" },
+		"num_sup_minus", { unicode: "{U+207B}" },
+		"num_sup_equals", { unicode: "{U+207C}" },
+		"num_sup_plus", { unicode: "{U+207A}" },
+		"num_sup_left_parenthesis", { unicode: "{U+207D}" },
+		"num_sup_right_parenthesis", { unicode: "{U+207E}" },
+		"num_sub_0", { unicode: "{U+2080}" },
+		"num_sub_1", { unicode: "{U+2081}" },
+		"num_sub_2", { unicode: "{U+2082}" },
+		"num_sub_3", { unicode: "{U+2083}" },
+		"num_sub_4", { unicode: "{U+2084}" },
+		"num_sub_5", { unicode: "{U+2085}" },
+		"num_sub_6", { unicode: "{U+2086}" },
+		"num_sub_7", { unicode: "{U+2087}" },
+		"num_sub_8", { unicode: "{U+2088}" },
+		"num_sub_9", { unicode: "{U+2089}" },
+		"num_sub_minus", { unicode: "{U+208B}" },
+		"num_sub_equals", { unicode: "{U+208C}" },
+		"num_sub_plus", { unicode: "{U+208A}" },
+		"num_sub_left_parenthesis", { unicode: "{U+208D}" },
+		"num_sub_right_parenthesis", { unicode: "{U+208E}" },
+		"kkey_0", { unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", alterations: { doubleStruck: "{U+1D7D8}", bold: "{U+1D7CE}", sansSerif: "{U+1D7E2}", sansSerifBold: "{U+1D7EC}", monospace: "{U+1D7F6}" }, options: { noCalc: True } },
+		"kkey_1", { unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", alterations: { doubleStruck: "{U+1D7D9}", bold: "{U+1D7CF}", sansSerif: "{U+1D7E3}", sansSerifBold: "{U+1D7ED}", monospace: "{U+1D7F7}" }, options: { noCalc: True } },
+		"kkey_2", { unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", alterations: { doubleStruck: "{U+1D7DA}", bold: "{U+1D7D0}", sansSerif: "{U+1D7E4}", sansSerifBold: "{U+1D7EE}", monospace: "{U+1D7F8}" }, options: { noCalc: True } },
+		"kkey_3", { unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", alterations: { doubleStruck: "{U+1D7DB}", bold: "{U+1D7D1}", sansSerif: "{U+1D7E5}", sansSerifBold: "{U+1D7EF}", monospace: "{U+1D7F9}" }, options: { noCalc: True } },
+		"kkey_4", { unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", alterations: { doubleStruck: "{U+1D7DC}", bold: "{U+1D7D2}", sansSerif: "{U+1D7E6}", sansSerifBold: "{U+1D7F0}", monospace: "{U+1D7FA}" }, options: { noCalc: True } },
+		"kkey_5", { unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", alterations: { doubleStruck: "{U+1D7DD}", bold: "{U+1D7D3}", sansSerif: "{U+1D7E7}", sansSerifBold: "{U+1D7F1}", monospace: "{U+1D7FB}" }, options: { noCalc: True } },
+		"kkey_6", { unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", alterations: { doubleStruck: "{U+1D7DE}", bold: "{U+1D7D4}", sansSerif: "{U+1D7E8}", sansSerifBold: "{U+1D7F2}", monospace: "{U+1D7FC}" }, options: { noCalc: True } },
+		"kkey_7", { unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", alterations: { doubleStruck: "{U+1D7DF}", bold: "{U+1D7D5}", sansSerif: "{U+1D7E9}", sansSerifBold: "{U+1D7F3}", monospace: "{U+1D7FD}" }, options: { noCalc: True } },
+		"kkey_8", { unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", alterations: { doubleStruck: "{U+1D7E0}", bold: "{U+1D7D6}", sansSerif: "{U+1D7EA}", sansSerifBold: "{U+1D7F4}", monospace: "{U+1D7FE}" }, options: { noCalc: True } },
+		"kkey_9", { unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", alterations: { doubleStruck: "{U+1D7E1}", bold: "{U+1D7D7}", sansSerif: "{U+1D7EB}", sansSerifBold: "{U+1D7F5}", monospace: "{U+1D7FF}" }, options: { noCalc: True } },
+		"kkey_minus", { unicode: "{U+002D}", sup: "num_sup_minus", sub: "num_sub_minus", options: { noCalc: True } },
+		"kkey_equals", { unicode: "{U+003D}", sup: "num_sup_equals", sub: "num_sub_equals", alterations: { modifier: "{U+02ED}" }, options: { noCalc: True } },
+		"kkey_asterisk", { unicode: "{U+002A}", options: { noCalc: True } },
+		"kkey_underscore", { unicode: "{U+005F}", options: { noCalc: True } },
+		"kkey_hyphen_minus", { unicode: "{U+002D}", options: { noCalc: True } },
+		"kkey_plus", { unicode: "{U+002B}", sup: "num_sup_plus", sub: "num_sub_plus", alterations: { modifier: "{U+02D6}" }, options: { noCalc: True } },
+		"kkey_left_parenthesis", { unicode: "{U+0028}", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", options: { noCalc: True } },
+		"kkey_right_parenthesis", { unicode: "{U+0029}", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", options: { noCalc: True } },
+		"kkey_comma", { unicode: "{U+002C}", options: { noCalc: True } },
+		"kkey_dot", { unicode: "{U+002E}", options: { noCalc: True } },
+		"kkey_semicolon", { unicode: "{U+003B}", options: { noCalc: True } },
+		"kkey_colon", { unicode: "{U+003A}", alterations: { modifier: "{U+02F8}" }, options: { noCalc: True } },
+		"kkey_apostrophe", { unicode: "{U+0027}", options: { noCalc: True } },
+		"kkey_quotation", { unicode: "{U+0022}", options: { noCalc: True } },
+		"kkey_l_square_bracket", { unicode: "{U+005B}", options: { noCalc: True } },
+		"kkey_r_square_bracket", { unicode: "{U+005D}", options: { noCalc: True } },
+		"kkey_l_curly_bracket", { unicode: "{U+007B}", options: { noCalc: True } },
+		"kkey_r_curly_bracket", { unicode: "{U+007D}", options: { noCalc: True } },
+		"kkey_grave_accent", { unicode: "{U+0060}", options: { noCalc: True } },
+		"kkey_tilde", { unicode: "{U+007E}", options: { noCalc: True } },
+		"kkey_slash", { unicode: "{U+002F}", options: { noCalc: True } },
+		"kkey_backslash", { unicode: "{U+005C}", options: { noCalc: True } },
+		"kkey_verticalline", { unicode: "{U+007C}", options: { noCalc: True } },
+		"kkey_lessthan", { unicode: "{U+003C}", options: { noCalc: True } },
+		"kkey_greaterthan", { unicode: "{U+003E}", options: { noCalc: True } },
+		"kkey_commercial_at", { unicode: "{U+0040}", options: { noCalc: True } },
+		"kkey_numero_sign", { unicode: "{U+2116}", options: { noCalc: True } },
+		"kkey_number_sign", { unicode: "{U+0023}", options: { noCalc: True } },
+		"kkey_percent_sign", { unicode: "{U+0025}", options: { noCalc: True } },
+		"kkey_circumflex_accent", { unicode: "{U+005E}", options: { noCalc: True } },
+		;
+		;
 		; * Diacritics
 		;
 		;
@@ -14965,44 +16331,47 @@ RegLib(this) {
 		"celsius", {
 			unicode: "{U+2103}",
 			tags: ["celsius", "градус Цельсия"],
-			groups: ["Special Characters", "Smelting Special"],
+			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
+			options: { fastKey: "[C]" },
 			recipe: (*) => this.MakeRecipe("${degree}C"),
 		},
 		"fahrenheit", {
 			unicode: "{U+2109}",
 			tags: ["fahrenheit", "градус по Фаренгейту"],
-			groups: ["Special Characters", "Smelting Special"],
+			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
+			options: { fastKey: "[F]" },
 			recipe: (*) => this.MakeRecipe("${degree}F"),
 		},
 		"kelvin", {
 			unicode: "{U+212A}",
 			tags: ["kelvin", "Кельвин"],
-			groups: ["Special Characters", "Smelting Special"],
+			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
+			options: { fastKey: "[K]" },
 			recipe: (*) => this.MakeRecipe("${degree}K"),
 		},
 		"rankine", {
 			unicode: "{U+0052}",
-			uniSequence: ["{U+00B0}", "{U+0052}"],
+			sequence: ["{U+00B0}", "{U+0052}"],
 			options: { noCalc: True },
 		},
 		"newton", {
 			unicode: "{U+004E}",
-			uniSequence: ["{U+00B0}", "{U+004E}"],
+			sequence: ["{U+00B0}", "{U+004E}"],
 			options: { noCalc: True },
 		},
 		"delisle", {
 			unicode: "{U+0044}",
-			uniSequence: ["{U+00B0}", "{U+0044}"],
+			sequence: ["{U+00B0}", "{U+0044}"],
 			options: { noCalc: True },
 		},
 		"dagger", {
-			unicode: "{U+2020}", LaTeX: "\dagger",
+			unicode: "{U+2020}", LaTeX: ["\dagger"],
 			tags: ["dagger", "даггер", "крест"],
 			groups: ["Special Characters", "Special Fast Secondary"],
 			options: { groupKey: ["t", "е"], fastKey: "[Num/]" },
 		},
 		"dagger_double", {
-			unicode: "{U+2021}", LaTeX: "\ddagger",
+			unicode: "{U+2021}", LaTeX: ["\ddagger"],
 			tags: ["double dagger", "двойной даггер", "двойной крест"],
 			groups: ["Special Characters", "Special Fast Secondary"],
 			options: { groupKey: ["T", "Е"], fastKey: ">+ [Num/]" },
@@ -15487,6 +16856,62 @@ RegLib(this) {
 		},
 		;
 		;
+		; * Latin Letters & Ligatures
+		;
+		;
+		"lat_c_lig_ae", {
+			unicode: "{U+00C6}",
+			tags: ["прописная лигатура AE", "capital ligature AE"],
+			groups: ["Latin Ligatures"],
+			options: { titlesAlt: True },
+			alterations: { modifier: "{U+1D2D}", smallCapital: "{U+1D01}" },
+			recipe: (*) => this.MakeRecipe("AE",
+				"${lat_c_let_a::smallCapital}${lat_c_let_e::smallCapital}"),
+			symbol: { category: "Latin Ligature" },
+		},
+		"lat_s_lig_ae", {
+			unicode: "{U+00E6}",
+			tags: ["строчная лигатура ae", "small ligature ae"],
+			groups: ["Latin Ligatures"],
+			options: { titlesAlt: True },
+			alterations: { modifier: "{U+1DD4}", modifier: "{U+10783}" },
+			recipe: ["ae"],
+			symbol: { category: "Latin Ligature" },
+		},
+		"lat_c_lig_ae_acute", {
+			unicode: "{U+01FC}",
+			tags: ["прописная лигатура AE с акутом", "capital ligature AE with acute"],
+			groups: ["Latin Ligatures"],
+			options: { titlesAlt: True },
+			recipe: (*) => this.MakeRecipe("AE${acute}", "${lat_c_lig_ae}${acute}"),
+			symbol: { category: "Latin Ligature Accented" },
+		},
+		"lat_s_lig_ae_acute", {
+			unicode: "{U+01FD}",
+			tags: ["строчная лигатура ae с акутом", "small ligature ae with acute"],
+			groups: ["Latin Ligatures"],
+			options: { titlesAlt: True },
+			recipe: (*) => this.MakeRecipe("ae${acute}", "${lat_s_lig_ae}${acute}"),
+			symbol: { category: "Latin Ligature Accented" },
+		},
+		"lat_c_lig_ae_macron", {
+			unicode: "{U+01E2}",
+			tags: ["прописная лигатура AE с макроном", "capital ligature AE with macron"],
+			groups: ["Latin Ligatures"],
+			options: { titlesAlt: True },
+			recipe: (*) => this.MakeRecipe("AE${macron}", "${lat_c_lig_ae}${macron}"),
+			symbol: { category: "Latin Ligature Accented" },
+		},
+		"lat_s_lig_ae_macron", {
+			unicode: "{U+01E3}",
+			tags: ["строчная лигатура ae с макроном", "small ligature ae with macron"],
+			groups: ["Latin Ligatures"],
+			options: { titlesAlt: True },
+			recipe: (*) => this.MakeRecipe("ae${macron}", "${lat_s_lig_ae}${macron}"),
+			symbol: { category: "Latin Ligature Accented" },
+		},
+		;
+		;
 		; * Accented Latin
 		;
 		;
@@ -15510,6 +16935,9 @@ RegLib(this) {
 			options: { titlesAlt: True, fastKey: "<! @" },
 			recipe: (*) => this.MakeRecipe("@'${circumflex}"),
 			symbol: { category: "Latin Accented" },
+			ipa: {
+				romanian: "æ",
+			},
 		},
 		"lat_s_let_a_circumflex", {
 			unicode: "{U+00E2}",
@@ -15523,8 +16951,8 @@ RegLib(this) {
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
 			recipe: (*) => this.MakeRecipe(
-				"@'${circumflex}${acute}", "${lat_c_let_a_circumflex}${acute}",
-				"@'${acute}${circumflex}", "${lat_c_let_a_acute}${circumflex}",
+				"A[SWAP:${circumflex};${acute}]", "${lat_c_let_a_(circumflex|acute)}$(*)",
+				;"${lat_c_let_a_circumflex}${acute}", "${lat_c_let_a_acute}${circumflex}",
 			),
 			symbol: { category: "Latin Accented" },
 		},
@@ -19473,1372 +20901,6 @@ RegLib(this) {
 			options: { fastKey: ">+ 2" },
 			recipe: ["Pcopy"],
 		},
-		;
-		;
-		; * Default Latin
-		;
-		;
-		"lat_c_let_a", {
-			unicode: "{U+0041}",
-			alterations: {
-				modifier: "{U+1D2C}",
-				italic: "{U+1D434}",
-				italicBold: "{U+1D468}",
-				bold: "{U+1D400}",
-				fraktur: "{U+1D504}",
-				frakturBold: "{U+1D56C}",
-				script: "{U+1D49C}",
-				scriptBold: "{U+1D4D0}",
-				doubleStruck: "{U+1D538}",
-				sansSerif: "{U+1D5A0}",
-				sansSerifItalic: "{U+1D608}",
-				sansSerifItalicBold: "{U+1D63C}",
-				sansSerifBold: "{U+1D5D4}",
-				monospace: "{U+1D670}",
-				smallCapital: "{U+1D00}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_a", {
-			unicode: "{U+0061}",
-			alterations: {
-				combining: "{U+0363}",
-				modifier: "{U+1D43}",
-				subscript: "{U+2090}",
-				italic: "{U+1D44E}",
-				italicBold: "{U+1D482}",
-				bold: "{U+1D41A}",
-				fraktur: "{U+1D51E}",
-				frakturBold: "{U+1D586}",
-				script: "{U+1D4B6}",
-				scriptBold: "{U+1D4EA}",
-				doubleStruck: "{U+1D552}",
-				sansSerif: "{U+1D5BA}",
-				sansSerifItalic: "{U+1D622}",
-				sansSerifItalicBold: "{U+1D656}",
-				sansSerifBold: "{U+1D5EE}",
-				monospace: "{U+1D68A}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_b", {
-			unicode: "{U+0042}",
-			alterations: {
-				modifier: "{U+1D2E}",
-				italic: "{U+1D435}",
-				italicBold: "{U+1D469}",
-				bold: "{U+1D401}",
-				fraktur: "{U+1D505}",
-				frakturBold: "{U+1D56D}",
-				script: "{U+212C}",
-				scriptBold: "{U+1D4D1}",
-				doubleStruck: "{U+1D539}",
-				sansSerif: "{U+1D5A1}",
-				sansSerifItalic: "{U+1D609}",
-				sansSerifItalicBold: "{U+1D63D}",
-				sansSerifBold: "{U+1D5D5}",
-				monospace: "{U+1D671}",
-				smallCapital: "{U+0299}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_b", {
-			unicode: "{U+0062}",
-			alterations: {
-				combining: "{U+1DE8}",
-				modifier: "{U+1D47}",
-				italic: "{U+1D44F}",
-				italicBold: "{U+1D483}",
-				bold: "{U+1D41B}",
-				fraktur: "{U+1D51F}",
-				frakturBold: "{U+1D587}",
-				script: "{U+1D4B7}",
-				scriptBold: "{U+1D4EB}",
-				doubleStruck: "{U+1D553}",
-				sansSerif: "{U+1D5BB}",
-				sansSerifItalic: "{U+1D623}",
-				sansSerifItalicBold: "{U+1D657}",
-				sansSerifBold: "{U+1D5EF}",
-				monospace: "{U+1D68B}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_c", {
-			unicode: "{U+0043}",
-			alterations: {
-				modifier: "{U+A7F2}",
-				italic: "{U+1D436}",
-				italicBold: "{U+1D46A}",
-				bold: "{U+1D402}",
-				fraktur: "{U+212D}",
-				frakturBold: "{U+1D56E}",
-				script: "{U+1D49E}",
-				scriptBold: "{U+1D4D2}",
-				doubleStruck: "{U+2102}",
-				sansSerif: "{U+1D5A2}",
-				sansSerifItalic: "{U+1D60A}",
-				sansSerifItalicBold: "{U+1D63E}",
-				sansSerifBold: "{U+1D5D6}",
-				monospace: "{U+1D672}",
-				smallCapital: "{U+1D04}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_c", {
-			unicode: "{U+0063}",
-			alterations: {
-				combining: "{U+0368}",
-				modifier: "{U+1D9C}",
-				italic: "{U+1D450}",
-				italicBold: "{U+1D484}",
-				bold: "{U+1D41C}",
-				fraktur: "{U+1D520}",
-				frakturBold: "{U+1D588}",
-				script: "{U+1D4B8}",
-				scriptBold: "{U+1D4EC}",
-				doubleStruck: "{U+1D554}",
-				sansSerif: "{U+1D5BC}",
-				sansSerifItalic: "{U+1D624}",
-				sansSerifItalicBold: "{U+1D658}",
-				sansSerifBold: "{U+1D5F0}",
-				monospace: "{U+1D68C}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_d", {
-			unicode: "{U+0044}",
-			alterations: {
-				modifier: "{U+1D30}",
-				italic: "{U+1D437}",
-				italicBold: "{U+1D46B}",
-				bold: "{U+1D403}",
-				fraktur: "{U+1D507}",
-				frakturBold: "{U+1D56F}",
-				script: "{U+1D49F}",
-				scriptBold: "{U+1D4D3}",
-				doubleStruck: "{U+1D53B}",
-				doubleStruckItalic: "{U+2145}",
-				sansSerif: "{U+1D5A3}",
-				sansSerifItalic: "{U+1D60B}",
-				sansSerifItalicBold: "{U+1D63F}",
-				sansSerifBold: "{U+1D5D7}",
-				monospace: "{U+1D673}",
-				smallCapital: "{U+1D05}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_d", {
-			unicode: "{U+0064}",
-			alterations: {
-				combining: "{U+0369}",
-				modifier: "{U+1D48}",
-				italic: "{U+1D451}",
-				italicBold: "{U+1D485}",
-				bold: "{U+1D41D}",
-				fraktur: "{U+1D521}",
-				frakturBold: "{U+1D589}",
-				script: "{U+1D4B9}",
-				scriptBold: "{U+1D4ED}",
-				doubleStruck: "{U+1D555}",
-				doubleStruckItalic: "{U+2146}",
-				sansSerif: "{U+1D5BD}",
-				sansSerifItalic: "{U+1D625}",
-				sansSerifItalicBold: "{U+1D659}",
-				sansSerifBold: "{U+1D5F1}",
-				monospace: "{U+1D68D}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_e", {
-			unicode: "{U+0045}",
-			alterations: {
-				modifier: "{U+1D31}",
-				italic: "{U+1D438}",
-				italicBold: "{U+1D46C}",
-				bold: "{U+1D404}",
-				fraktur: "{U+1D508}",
-				frakturBold: "{U+1D570}",
-				script: "{U+2130}",
-				scriptBold: "{U+1D4D4}",
-				doubleStruck: "{U+1D53C}",
-				sansSerif: "{U+1D5A4}",
-				sansSerifItalic: "{U+1D60C}",
-				sansSerifItalicBold: "{U+1D640}",
-				sansSerifBold: "{U+1D5D8}",
-				monospace: "{U+1D674}",
-				smallCapital: "{U+1D07}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_e", {
-			unicode: "{U+0065}",
-			alterations: {
-				combining: "{U+0364}",
-				modifier: "{U+1D49}",
-				subscript: "{U+2091}",
-				italic: "{U+1D452}",
-				italicBold: "{U+1D486}",
-				bold: "{U+1D41E}",
-				fraktur: "{U+1D522}",
-				frakturBold: "{U+1D58A}",
-				script: "{U+212F}",
-				scriptBold: "{U+1D4EE}",
-				doubleStruck: "{U+1D556}",
-				doubleStruckItalic: "{U+2147}",
-				sansSerif: "{U+1D5BE}",
-				sansSerifItalic: "{U+1D626}",
-				sansSerifItalicBold: "{U+1D65A}",
-				sansSerifBold: "{U+1D5F2}",
-				monospace: "{U+1D68E}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_f", {
-			unicode: "{U+0046}",
-			alterations: {
-				modifier: "{U+A7F3}",
-				italic: "{U+1D439}",
-				italicBold: "{U+1D46D}",
-				bold: "{U+1D405}",
-				fraktur: "{U+1D509}",
-				frakturBold: "{U+1D571}",
-				script: "{U+2131}",
-				scriptBold: "{U+1D4D5}",
-				doubleStruck: "{U+1D53D}",
-				sansSerif: "{U+1D5A5}",
-				sansSerifItalic: "{U+1D60D}",
-				sansSerifItalicBold: "{U+1D641}",
-				sansSerifBold: "{U+1D5D9}",
-				monospace: "{U+1D675}",
-				smallCapital: "{U+A730}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_f", {
-			unicode: "{U+0046}",
-			alterations: {
-				modifier: "{U+A7F3}",
-				italic: "{U+1D439}",
-				italicBold: "{U+1D46D}",
-				bold: "{U+1D405}",
-				fraktur: "{U+1D509}",
-				frakturBold: "{U+1D571}",
-				script: "{U+2131}",
-				scriptBold: "{U+1D4D5}",
-				doubleStruck: "{U+1D53D}",
-				sansSerif: "{U+1D5A5}",
-				sansSerifItalic: "{U+1D60D}",
-				sansSerifItalicBold: "{U+1D641}",
-				sansSerifBold: "{U+1D5D9}",
-				monospace: "{U+1D675}",
-				smallCapital: "{U+A730}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_g", {
-			unicode: "{U+0047}",
-			alterations: {
-				combining: "{U+1DDB}",
-				modifier: "{U+1D33}",
-				italic: "{U+1D43A}",
-				italicBold: "{U+1D46E}",
-				bold: "{U+1D406}",
-				fraktur: "{U+1D50A}",
-				frakturBold: "{U+1D572}",
-				script: "{U+1D4A2}",
-				scriptBold: "{U+1D4D6}",
-				doubleStruck: "{U+1D53E}",
-				sansSerif: "{U+1D5A6}",
-				sansSerifItalic: "{U+1D60E}",
-				sansSerifItalicBold: "{U+1D642}",
-				sansSerifBold: "{U+1D5DA}",
-				monospace: "{U+1D676}",
-				smallCapital: "{U+0262}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_g", {
-			unicode: "{U+0067}",
-			alterations: {
-				combining: "{U+1DDA}",
-				modifier: "{U+1D4D}",
-				italic: "{U+1D454}",
-				italicBold: "{U+1D488}",
-				bold: "{U+1D420}",
-				fraktur: "{U+1D524}",
-				frakturBold: "{U+1D58C}",
-				script: "{U+210A}",
-				scriptBold: "{U+1D4F0}",
-				doubleStruck: "{U+1D558}",
-				sansSerif: "{U+1D5C0}",
-				sansSerifItalic: "{U+1D628}",
-				sansSerifItalicBold: "{U+1D65C}",
-				sansSerifBold: "{U+1D5F4}",
-				monospace: "{U+1D690}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_h", {
-			unicode: "{U+0048}",
-			alterations: {
-				modifier: "{U+1D34}",
-				italic: "{U+1D43B}",
-				italicBold: "{U+1D46F}",
-				bold: "{U+1D407}",
-				fraktur: "{U+210C}",
-				frakturBold: "{U+1D573}",
-				script: "{U+210B}",
-				scriptBold: "{U+1D4D7}",
-				doubleStruck: "{U+210D}",
-				sansSerif: "{U+1D5A7}",
-				sansSerifItalic: "{U+1D60F}",
-				sansSerifItalicBold: "{U+1D643}",
-				sansSerifBold: "{U+1D5DB}",
-				monospace: "{U+1D677}",
-				smallCapital: "{U+029C}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_h", {
-			unicode: "{U+0068}",
-			alterations: {
-				combining: "{U+036A}",
-				modifier: "{U+02B0}",
-				subscript: "{U+2095}",
-				italic: "{U+210E}",
-				italicBold: "{U+1D489}",
-				bold: "{U+1D421}",
-				fraktur: "{U+1D525}",
-				frakturBold: "{U+1D58D}",
-				script: "{U+1D4BD}",
-				scriptBold: "{U+1D4F1}",
-				doubleStruck: "{U+1D559}",
-				sansSerif: "{U+1D5C1}",
-				sansSerifItalic: "{U+1D629}",
-				sansSerifItalicBold: "{U+1D65D}",
-				sansSerifBold: "{U+1D5F5}",
-				monospace: "{U+1D691}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_i", {
-			unicode: "{U+0049}",
-			alterations: {
-				modifier: "{U+1D35}",
-				italic: "{U+1D43C}",
-				italicBold: "{U+1D470}",
-				bold: "{U+1D408}",
-				fraktur: "{U+2111}",
-				frakturBold: "{U+1D574}",
-				script: "{U+2110}",
-				scriptBold: "{U+1D4D8}",
-				doubleStruck: "{U+1D540}",
-				sansSerif: "{U+1D5A8}",
-				sansSerifItalic: "{U+1D610}",
-				sansSerifItalicBold: "{U+1D644}",
-				sansSerifBold: "{U+1D5DC}",
-				monospace: "{U+1D678}",
-				smallCapital: "{U+026A}"
-			},
-			options: {
-				noCalc: True
-			},
-			recipe: [GetChar('lat_c_let_i_dot_above') "/"],
-		},
-		"lat_s_let_i", {
-			unicode: "{U+0069}",
-			alterations: {
-				combining: "{U+0365}",
-				subscript: "{U+1D62}",
-				italic: "{U+1D456}",
-				italicBold: "{U+1D48A}",
-				bold: "{U+1D422}",
-				fraktur: "{U+1D526}",
-				frakturBold: "{U+1D58E}",
-				script: "{U+1D4BE}",
-				scriptBold: "{U+1D4F2}",
-				doubleStruck: "{U+1D55A}",
-				doubleStruckItalic: "{U+2148}",
-				sansSerif: "{U+1D5C2}",
-				sansSerifItalic: "{U+1D62A}",
-				sansSerifItalicBold: "{U+1D65E}",
-				sansSerifBold: "{U+1D5F6}",
-				monospace: "{U+1D692}"
-			},
-			options: {
-				noCalc: True
-			},
-			recipe: [GetChar('lat_s_let_i_dotless', 'dot_above')],
-		},
-		"lat_c_let_j", {
-			unicode: "{U+004A}",
-			alterations: {
-				modifier: "{U+1D36}",
-				italic: "{U+1D43D}",
-				italicBold: "{U+1D471}",
-				bold: "{U+1D409}",
-				fraktur: "{U+1D50D}",
-				frakturBold: "{U+1D575}",
-				script: "{U+1D4A5}",
-				scriptBold: "{U+1D4D9}",
-				doubleStruck: "{U+1D541}",
-				sansSerif: "{U+1D5A9}",
-				sansSerifItalic: "{U+1D611}",
-				sansSerifItalicBold: "{U+1D645}",
-				sansSerifBold: "{U+1D5DD}",
-				monospace: "{U+1D679}",
-				smallCapital: "{U+1D0A}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_j", {
-			unicode: "{U+006A}",
-			alterations: {
-				modifier: "{U+02B2}",
-				subscript: "{U+2C7C}",
-				italic: "{U+1D457}",
-				italicBold: "{U+1D48B}",
-				bold: "{U+1D423}",
-				fraktur: "{U+1D527}",
-				frakturBold: "{U+1D58F}",
-				script: "{U+1D4BF}",
-				scriptBold: "{U+1D4F3}",
-				doubleStruck: "{U+1D55B}",
-				doubleStruckItalic: "{U+2149}",
-				sansSerif: "{U+1D5C3}",
-				sansSerifItalic: "{U+1D62B}",
-				sansSerifItalicBold: "{U+1D65F}",
-				sansSerifBold: "{U+1D5F7}",
-				monospace: "{U+1D693}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_k", {
-			unicode: "{U+004B}",
-			alterations: {
-				modifier: "{U+1D37}",
-				italic: "{U+1D43E}",
-				italicBold: "{U+1D472}",
-				bold: "{U+1D40A}",
-				fraktur: "{U+1D50E}",
-				frakturBold: "{U+1D576}",
-				script: "{U+1D4A6}",
-				scriptBold: "{U+1D4DA}",
-				doubleStruck: "{U+1D542}",
-				sansSerif: "{U+1D5AA}",
-				sansSerifItalic: "{U+1D612}",
-				sansSerifItalicBold: "{U+1D646}",
-				sansSerifBold: "{U+1D5DE}",
-				monospace: "{U+1D67A}",
-				smallCapital: "{U+1D0B}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_k", {
-			unicode: "{U+006B}",
-			alterations: {
-				combining: "{U+1DDC}",
-				modifier: "{U+1D4F}",
-				subscript: "{U+2096}",
-				italic: "{U+1D458}",
-				italicBold: "{U+1D48C}",
-				bold: "{U+1D424}",
-				fraktur: "{U+1D528}",
-				frakturBold: "{U+1D590}",
-				script: "{U+1D4C0}",
-				scriptBold: "{U+1D4F4}",
-				doubleStruck: "{U+1D55C}",
-				sansSerif: "{U+1D5C4}",
-				sansSerifItalic: "{U+1D62C}",
-				sansSerifItalicBold: "{U+1D660}",
-				sansSerifBold: "{U+1D5F8}",
-				monospace: "{U+1D694}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_l", {
-			unicode: "{U+004C}",
-			alterations: {
-				combining: "{U+1DDE}",
-				modifier: "{U+1D38}",
-				italic: "{U+1D43F}",
-				italicBold: "{U+1D473}",
-				bold: "{U+1D40B}",
-				fraktur: "{U+1D50F}",
-				frakturBold: "{U+1D577}",
-				script: "{U+2112}",
-				scriptBold: "{U+1D4DB}",
-				doubleStruck: "{U+1D543}",
-				sansSerif: "{U+1D5AB}",
-				sansSerifItalic: "{U+1D613}",
-				sansSerifItalicBold: "{U+1D647}",
-				sansSerifBold: "{U+1D5DF}",
-				monospace: "{U+1D67B}",
-				smallCapital: "{U+029F}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_l", {
-			unicode: "{U+006C}",
-			alterations: {
-				combining: "{U+1DDD}",
-				modifier: "{U+02E1}",
-				subscript: "{U+2097}",
-				italic: "{U+1D459}",
-				italicBold: "{U+1D48D}",
-				bold: "{U+1D425}",
-				fraktur: "{U+1D529}",
-				frakturBold: "{U+1D591}",
-				script: "{U+1D4C1}",
-				scriptBold: "{U+1D4F5}",
-				doubleStruck: "{U+1D55D}",
-				sansSerif: "{U+1D5C5}",
-				sansSerifItalic: "{U+1D62D}",
-				sansSerifItalicBold: "{U+1D661}",
-				sansSerifBold: "{U+1D5F9}",
-				monospace: "{U+1D695}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_m", {
-			unicode: "{U+004D}",
-			alterations: {
-				combining: "{U+1DDF}",
-				modifier: "{U+1D39}",
-				italic: "{U+1D440}",
-				italicBold: "{U+1D474}",
-				bold: "{U+1D40C}",
-				fraktur: "{U+1D510}",
-				frakturBold: "{U+1D578}",
-				script: "{U+2133}",
-				scriptBold: "{U+1D4DC}",
-				doubleStruck: "{U+1D544}",
-				sansSerif: "{U+1D5AC}",
-				sansSerifItalic: "{U+1D614}",
-				sansSerifItalicBold: "{U+1D648}",
-				sansSerifBold: "{U+1D5E0}",
-				monospace: "{U+1D67C}",
-				smallCapital: "{U+1D0D}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_m", {
-			unicode: "{U+006D}",
-			alterations: {
-				combining: "{U+036B}",
-				modifier: "{U+1D50}",
-				subscript: "{U+2098}",
-				italic: "{U+1D45A}",
-				italicBold: "{U+1D48E}",
-				bold: "{U+1D426}",
-				fraktur: "{U+1D52A}",
-				frakturBold: "{U+1D592}",
-				script: "{U+1D4C2}",
-				scriptBold: "{U+1D4F6}",
-				doubleStruck: "{U+1D55E}",
-				sansSerif: "{U+1D5C6}",
-				sansSerifItalic: "{U+1D62E}",
-				sansSerifItalicBold: "{U+1D662}",
-				sansSerifBold: "{U+1D5FA}",
-				monospace: "{U+1D696}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_n", {
-			unicode: "{U+004E}",
-			alterations: {
-				combining: "{U+1DE1}",
-				modifier: "{U+1D3A}",
-				italic: "{U+1D441}",
-				italicBold: "{U+1D475}",
-				bold: "{U+1D40D}",
-				fraktur: "{U+1D511}",
-				frakturBold: "{U+1D579}",
-				script: "{U+1D4A9}",
-				scriptBold: "{U+1D4DD}",
-				doubleStruck: "{U+2115}",
-				sansSerif: "{U+1D5AD}",
-				sansSerifItalic: "{U+1D615}",
-				sansSerifItalicBold: "{U+1D649}",
-				sansSerifBold: "{U+1D5E1}",
-				monospace: "{U+1D67D}",
-				smallCapital: "{U+0274}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_n", {
-			unicode: "{U+006E}",
-			alterations: {
-				combining: "{U+1DE0}",
-				subscript: "{U+2099}",
-				italic: "{U+1D45B}",
-				italicBold: "{U+1D48F}",
-				bold: "{U+1D427}",
-				fraktur: "{U+1D52B}",
-				frakturBold: "{U+1D593}",
-				script: "{U+1D4C3}",
-				scriptBold: "{U+1D4F7}",
-				doubleStruck: "{U+1D55F}",
-				sansSerif: "{U+1D5C7}",
-				sansSerifItalic: "{U+1D62F}",
-				sansSerifItalicBold: "{U+1D663}",
-				sansSerifBold: "{U+1D5FB}",
-				monospace: "{U+1D697}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_o", {
-			unicode: "{U+004F}",
-			alterations: {
-				modifier: "{U+1D3C}",
-				italic: "{U+1D442}",
-				italicBold: "{U+1D476}",
-				bold: "{U+1D40E}",
-				fraktur: "{U+1D512}",
-				frakturBold: "{U+1D57A}",
-				script: "{U+1D4AA}",
-				scriptBold: "{U+1D4DE}",
-				doubleStruck: "{U+1D546}",
-				sansSerif: "{U+1D5AE}",
-				sansSerifItalic: "{U+1D616}",
-				sansSerifItalicBold: "{U+1D64A}",
-				sansSerifBold: "{U+1D5E2}",
-				monospace: "{U+1D67E}",
-				smallCapital: "{U+1D0F}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_o", {
-			unicode: "{U+006F}",
-			alterations: {
-				combining: "{U+0366}",
-				modifier: "{U+1D52}",
-				subscript: "{U+2092}",
-				italic: "{U+1D45C}",
-				italicBold: "{U+1D490}",
-				bold: "{U+1D428}",
-				fraktur: "{U+1D52C}",
-				frakturBold: "{U+1D594}",
-				script: "{U+2134}",
-				scriptBold: "{U+1D4F8}",
-				doubleStruck: "{U+1D560}",
-				sansSerif: "{U+1D5C8}",
-				sansSerifItalic: "{U+1D630}",
-				sansSerifItalicBold: "{U+1D664}",
-				sansSerifBold: "{U+1D5FC}",
-				monospace: "{U+1D698}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_p", {
-			unicode: "{U+0050}",
-			alterations: {
-				modifier: "{U+1D3E}",
-				italic: "{U+1D443}",
-				italicBold: "{U+1D477}",
-				bold: "{U+1D40F}",
-				fraktur: "{U+1D513}",
-				frakturBold: "{U+1D57B}",
-				script: "{U+1D4AB}",
-				scriptBold: "{U+1D4DF}",
-				doubleStruck: "{U+2119}",
-				sansSerif: "{U+1D5AF}",
-				sansSerifItalic: "{U+1D617}",
-				sansSerifItalicBold: "{U+1D64B}",
-				sansSerifBold: "{U+1D5E3}",
-				monospace: "{U+1D67F}",
-				smallCapital: "{U+1D18}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_p", {
-			unicode: "{U+0070}",
-			alterations: {
-				combining: "{U+1DEE}",
-				modifier: "{U+1D56}",
-				subscript: "{U+209A}",
-				italic: "{U+1D45D}",
-				italicBold: "{U+1D491}",
-				bold: "{U+1D429}",
-				fraktur: "{U+1D52D}",
-				frakturBold: "{U+1D595}",
-				script: "{U+1D4C5}",
-				scriptBold: "{U+1D4F9}",
-				doubleStruck: "{U+1D561}",
-				sansSerif: "{U+1D5C9}",
-				sansSerifItalic: "{U+1D631}",
-				sansSerifItalicBold: "{U+1D665}",
-				sansSerifBold: "{U+1D5FD}",
-				monospace: "{U+1D699}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_q", {
-			unicode: "{U+0051}",
-			alterations: {
-				modifier: "{U+A7F4}",
-				italic: "{U+1D444}",
-				italicBold: "{U+1D478}",
-				bold: "{U+1D410}",
-				fraktur: "{U+1D514}",
-				frakturBold: "{U+1D57C}",
-				script: "{U+1D4AC}",
-				scriptBold: "{U+1D4E0}",
-				doubleStruck: "{U+211A}",
-				sansSerif: "{U+1D5B0}",
-				sansSerifItalic: "{U+1D618}",
-				sansSerifItalicBold: "{U+1D64C}",
-				sansSerifBold: "{U+1D5E4}",
-				monospace: "{U+1D680}",
-				smallCapital: "{U+A7AF}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_q", {
-			unicode: "{U+0071}",
-			alterations: {
-				italic: "{U+1D45E}",
-				italicBold: "{U+1D492}",
-				bold: "{U+1D42A}",
-				fraktur: "{U+1D52E}",
-				frakturBold: "{U+1D596}",
-				script: "{U+1D4C6}",
-				scriptBold: "{U+1D4FA}",
-				doubleStruck: "{U+1D562}",
-				sansSerif: "{U+1D5CA}",
-				sansSerifItalic: "{U+1D632}",
-				sansSerifItalicBold: "{U+1D666}",
-				sansSerifBold: "{U+1D5FE}",
-				monospace: "{U+1D69A}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_r", {
-			unicode: "{U+0052}",
-			alterations: {
-				combining: "{U+1DE2}",
-				modifier: "{U+1D3F}",
-				italic: "{U+1D445}",
-				italicBold: "{U+1D479}",
-				bold: "{U+1D411}",
-				fraktur: "{U+211C}",
-				frakturBold: "{U+1D57D}",
-				script: "{U+211B}",
-				scriptBold: "{U+1D4E1}",
-				doubleStruck: "{U+211D}",
-				sansSerif: "{U+1D5B1}",
-				sansSerifItalic: "{U+1D619}",
-				sansSerifItalicBold: "{U+1D64D}",
-				sansSerifBold: "{U+1D5E5}",
-				monospace: "{U+1D681}",
-				smallCapital: "{U+0280}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_r", {
-			unicode: "{U+0072}",
-			alterations: {
-				combining: "{U+036C}",
-				modifier: "{U+02B3}",
-				subscript: "{U+1D63}",
-				italic: "{U+1D45F}",
-				italicBold: "{U+1D493}",
-				bold: "{U+1D42B}",
-				fraktur: "{U+1D52F}",
-				frakturBold: "{U+1D597}",
-				script: "{U+1D4C7}",
-				scriptBold: "{U+1D4FB}",
-				doubleStruck: "{U+1D563}",
-				sansSerif: "{U+1D5CB}",
-				sansSerifItalic: "{U+1D633}",
-				sansSerifItalicBold: "{U+1D667}",
-				sansSerifBold: "{U+1D5FF}",
-				monospace: "{U+1D69B}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_s", {
-			unicode: "{U+0053}",
-			alterations: {
-				italic: "{U+1D446}",
-				italicBold: "{U+1D47A}",
-				bold: "{U+1D412}",
-				fraktur: "{U+1D516}",
-				frakturBold: "{U+1D57E}",
-				script: "{U+1D4AE}",
-				scriptBold: "{U+1D4E2}",
-				doubleStruck: "{U+1D54A}",
-				sansSerif: "{U+1D5B2}",
-				sansSerifItalic: "{U+1D61A}",
-				sansSerifItalicBold: "{U+1D64E}",
-				sansSerifBold: "{U+1D5E6}",
-				monospace: "{U+1D682}",
-				smallCapital: "{U+A731}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_s", {
-			unicode: "{U+0073}",
-			alterations: {
-				combining: "{U+1DE4}",
-				modifier: "{U+02E2}",
-				subscript: "{U+209B}",
-				italic: "{U+1D460}",
-				italicBold: "{U+1D494}",
-				bold: "{U+1D42C}",
-				fraktur: "{U+1D530}",
-				frakturBold: "{U+1D598}",
-				script: "{U+1D4C8}",
-				scriptBold: "{U+1D4FC}",
-				doubleStruck: "{U+1D564}",
-				sansSerif: "{U+1D5CC}",
-				sansSerifItalic: "{U+1D634}",
-				sansSerifItalicBold: "{U+1D668}",
-				sansSerifBold: "{U+1D600}",
-				monospace: "{U+1D69C}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_t", {
-			unicode: "{U+0054}",
-			alterations: {
-				modifier: "{U+1D40}",
-				italic: "{U+1D447}",
-				italicBold: "{U+1D47B}",
-				bold: "{U+1D413}",
-				fraktur: "{U+1D517}",
-				frakturBold: "{U+1D57F}",
-				script: "{U+1D4AF}",
-				scriptBold: "{U+1D4E3}",
-				doubleStruck: "{U+1D54B}",
-				sansSerif: "{U+1D5B3}",
-				sansSerifItalic: "{U+1D61B}",
-				sansSerifItalicBold: "{U+1D64F}",
-				sansSerifBold: "{U+1D5E7}",
-				monospace: "{U+1D683}",
-				smallCapital: "{U+1D1B}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_t", {
-			unicode: "{U+0074}",
-			alterations: {
-				combining: "{U+036D}",
-				modifier: "{U+1D57}",
-				subscript: "{U+209C}",
-				italic: "{U+1D461}",
-				italicBold: "{U+1D495}",
-				bold: "{U+1D42D}",
-				fraktur: "{U+1D531}",
-				frakturBold: "{U+1D599}",
-				script: "{U+1D4C9}",
-				scriptBold: "{U+1D4FD}",
-				doubleStruck: "{U+1D565}",
-				sansSerif: "{U+1D5CD}",
-				sansSerifItalic: "{U+1D635}",
-				sansSerifItalicBold: "{U+1D669}",
-				sansSerifBold: "{U+1D601}",
-				monospace: "{U+1D69D}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_u", {
-			unicode: "{U+0055}",
-			alterations: {
-				modifier: "{U+1D41}",
-				italic: "{U+1D448}",
-				italicBold: "{U+1D47C}",
-				bold: "{U+1D414}",
-				fraktur: "{U+1D518}",
-				frakturBold: "{U+1D580}",
-				script: "{U+1D4B0}",
-				scriptBold: "{U+1D4E4}",
-				doubleStruck: "{U+1D54C}",
-				sansSerif: "{U+1D5B4}",
-				sansSerifItalic: "{U+1D61C}",
-				sansSerifItalicBold: "{U+1D650}",
-				sansSerifBold: "{U+1D5E8}",
-				monospace: "{U+1D684}",
-				smallCapital: "{U+1D1C}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_u", {
-			unicode: "{U+0075}",
-			alterations: {
-				combining: "{U+0367}",
-				modifier: "{U+1D58}",
-				subscript: "{U+1D64}",
-				italic: "{U+1D462}",
-				italicBold: "{U+1D496}",
-				bold: "{U+1D42E}",
-				fraktur: "{U+1D532}",
-				frakturBold: "{U+1D59A}",
-				script: "{U+1D4CA}",
-				scriptBold: "{U+1D4FE}",
-				doubleStruck: "{U+1D566}",
-				sansSerif: "{U+1D5CE}",
-				sansSerifItalic: "{U+1D636}",
-				sansSerifItalicBold: "{U+1D66A}",
-				sansSerifBold: "{U+1D602}",
-				monospace: "{U+1D69E}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_v", {
-			unicode: "{U+0056}",
-			alterations: {
-				modifier: "{U+2C7D}",
-				italic: "{U+1D449}",
-				italicBold: "{U+1D47D}",
-				bold: "{U+1D415}",
-				fraktur: "{U+1D519}",
-				frakturBold: "{U+1D581}",
-				script: "{U+1D4B1}",
-				scriptBold: "{U+1D4E5}",
-				doubleStruck: "{U+1D54D}",
-				sansSerif: "{U+1D5B5}",
-				sansSerifItalic: "{U+1D61D}",
-				sansSerifItalicBold: "{U+1D651}",
-				sansSerifBold: "{U+1D5E9}",
-				monospace: "{U+1D685}",
-				smallCapital: "{U+1D20}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_v", {
-			unicode: "{U+0076}",
-			alterations: {
-				combining: "{U+036E}",
-				modifier: "{U+1D5B}",
-				subscript: "{U+1D65}",
-				italic: "{U+1D463}",
-				italicBold: "{U+1D497}",
-				bold: "{U+1D42F}",
-				fraktur: "{U+1D533}",
-				frakturBold: "{U+1D59B}",
-				script: "{U+1D4CB}",
-				scriptBold: "{U+1D4FF}",
-				doubleStruck: "{U+1D567}",
-				sansSerif: "{U+1D5CF}",
-				sansSerifItalic: "{U+1D637}",
-				sansSerifItalicBold: "{U+1D66B}",
-				sansSerifBold: "{U+1D603}",
-				monospace: "{U+1D69F}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_w", {
-			unicode: "{U+0057}",
-			alterations: {
-				modifier: "{U+1D42}",
-				italic: "{U+1D44A}",
-				italicBold: "{U+1D47E}",
-				bold: "{U+1D416}",
-				fraktur: "{U+1D51A}",
-				frakturBold: "{U+1D582}",
-				script: "{U+1D4B2}",
-				scriptBold: "{U+1D4E6}",
-				doubleStruck: "{U+1D54E}",
-				sansSerif: "{U+1D5B6}",
-				sansSerifItalic: "{U+1D61E}",
-				sansSerifItalicBold: "{U+1D652}",
-				sansSerifBold: "{U+1D5EA}",
-				monospace: "{U+1D686}",
-				smallCapital: "{U+1D21}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_w", {
-			unicode: "{U+0077}",
-			alterations: {
-				combining: "{U+1DF1}",
-				modifier: "{U+02B7}",
-				italic: "{U+1D464}",
-				italicBold: "{U+1D498}",
-				bold: "{U+1D430}",
-				fraktur: "{U+1D534}",
-				frakturBold: "{U+1D59C}",
-				script: "{U+1D4CC}",
-				scriptBold: "{U+1D500}",
-				doubleStruck: "{U+1D568}",
-				sansSerif: "{U+1D5D0}",
-				sansSerifItalic: "{U+1D638}",
-				sansSerifItalicBold: "{U+1D66C}",
-				sansSerifBold: "{U+1D604}",
-				monospace: "{U+1D6A0}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_x", {
-			unicode: "{U+0058}",
-			alterations: {
-				italic: "{U+1D44B}",
-				italicBold: "{U+1D47F}",
-				bold: "{U+1D417}",
-				fraktur: "{U+1D51B}",
-				frakturBold: "{U+1D583}",
-				script: "{U+1D4B3}",
-				scriptBold: "{U+1D4E7}",
-				doubleStruck: "{U+1D54F}",
-				sansSerif: "{U+1D5B7}",
-				sansSerifItalic: "{U+1D61F}",
-				sansSerifItalicBold: "{U+1D653}",
-				sansSerifBold: "{U+1D5EB}",
-				monospace: "{U+1D687}",
-				smallCapital: "{U+0078}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_x", {
-			unicode: "{U+0078}",
-			alterations: {
-				combining: "{U+036F}",
-				modifier: "{U+02E3}",
-				subscript: "{U+2093}",
-				italic: "{U+1D465}",
-				italicBold: "{U+1D499}",
-				bold: "{U+1D431}",
-				fraktur: "{U+1D535}",
-				frakturBold: "{U+1D59D}",
-				script: "{U+1D4CD}",
-				scriptBold: "{U+1D501}",
-				doubleStruck: "{U+1D569}",
-				sansSerif: "{U+1D5D1}",
-				sansSerifItalic: "{U+1D639}",
-				sansSerifItalicBold: "{U+1D66D}",
-				sansSerifBold: "{U+1D605}",
-				monospace: "{U+1D6A1}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_y", {
-			unicode: "{U+0059}",
-			alterations: {
-				italic: "{U+1D44C}",
-				italicBold: "{U+1D480}",
-				bold: "{U+1D418}",
-				fraktur: "{U+1D51C}",
-				frakturBold: "{U+1D584}",
-				script: "{U+1D4B4}",
-				scriptBold: "{U+1D4E8}",
-				doubleStruck: "{U+1D550}",
-				sansSerif: "{U+1D5B8}",
-				sansSerifItalic: "{U+1D620}",
-				sansSerifItalicBold: "{U+1D654}",
-				sansSerifBold: "{U+1D5EC}",
-				monospace: "{U+1D688}",
-				smallCapital: "{U+028F}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_y", {
-			unicode: "{U+0079}",
-			alterations: {
-				modifier: "{U+02B8}",
-				italic: "{U+1D466}",
-				italicBold: "{U+1D49A}",
-				bold: "{U+1D432}",
-				fraktur: "{U+1D536}",
-				frakturBold: "{U+1D59E}",
-				script: "{U+1D4CE}",
-				scriptBold: "{U+1D502}",
-				doubleStruck: "{U+1D56A}",
-				sansSerif: "{U+1D5D2}",
-				sansSerifItalic: "{U+1D63A}",
-				sansSerifItalicBold: "{U+1D66E}",
-				sansSerifBold: "{U+1D606}",
-				monospace: "{U+1D6A2}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_z", {
-			unicode: "{U+005A}",
-			alterations: {
-				italic: "{U+1D44D}",
-				italicBold: "{U+1D481}",
-				bold: "{U+1D419}",
-				fraktur: "{U+2128}",
-				frakturBold: "{U+1D585}",
-				script: "{U+1D4B5}",
-				scriptBold: "{U+1D4E9}",
-				doubleStruck: "{U+2124}",
-				sansSerif: "{U+1D5B9}",
-				sansSerifItalic: "{U+1D621}",
-				sansSerifItalicBold: "{U+1D655}",
-				sansSerifBold: "{U+1D5ED}",
-				monospace: "{U+1D689}",
-				smallCapital: "{U+1D22}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_z", {
-			unicode: "{U+007A}",
-			alterations: {
-				combining: "{U+1DE6}",
-				modifier: "{U+1DBB}",
-				italic: "{U+1D467}",
-				italicBold: "{U+1D49B}",
-				bold: "{U+1D433}",
-				fraktur: "{U+1D537}",
-				frakturBold: "{U+1D59F}",
-				script: "{U+1D4CF}",
-				scriptBold: "{U+1D503}",
-				doubleStruck: "{U+1D56B}",
-				sansSerif: "{U+1D5D3}",
-				sansSerifItalic: "{U+1D63B}",
-				sansSerifItalicBold: "{U+1D66F}",
-				sansSerifBold: "{U+1D607}",
-				monospace: "{U+1D6A3}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		;
-		;
-		; * Default Cyrillic
-		;
-		;
-		"cyr_c_let_a", { unicode: "{U+0410}", options: { noCalc: True } }, ; А
-		"cyr_s_let_a", { unicode: "{U+0430}", alterations: { combining: "{U+2DF6}", modifier: "{U+1E030}", subscript: "{U+1E051}" }, options: { noCalc: True } }, ; а
-		"cyr_c_let_b", { unicode: "{U+0411}", options: { noCalc: True } }, ; Б
-		"cyr_s_let_b", { unicode: "{U+0431}", alterations: { combining: "{U+2DE0}", modifier: "{U+1E031}", subscript: "{U+1E052}" }, options: { noCalc: True } }, ; б
-		"cyr_c_let_v", { unicode: "{U+0412}", options: { noCalc: True } }, ; В
-		"cyr_s_let_v", { unicode: "{U+0432}", alterations: { combining: "{U+2DE1}", modifier: "{U+1E032}", subscript: "{U+1E053}" }, options: { noCalc: True } }, ; в
-		"cyr_c_let_g", { unicode: "{U+0413}", options: { noCalc: True } }, ; Г
-		"cyr_s_let_g", { unicode: "{U+0433}", alterations: { combining: "{U+2DE2}", modifier: "{U+1E033}", subscript: "{U+1E054}" }, options: { noCalc: True } }, ; г
-		"cyr_c_let_d", { unicode: "{U+0414}", options: { noCalc: True } }, ; Д
-		"cyr_s_let_d", { unicode: "{U+0434}", alterations: { combining: "{U+2DE3}", modifier: "{U+1E034}", subscript: "{U+1E055}" }, options: { noCalc: True } }, ; д
-		"cyr_c_let_ie", { unicode: "{U+0415}", options: { noCalc: True } }, ; Е
-		"cyr_s_let_ie", { unicode: "{U+0435}", alterations: { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }, options: { noCalc: True } }, ; е
-		"cyr_c_let_yo", { unicode: "{U+0401}", options: { noCalc: True } }, ; Ё
-		"cyr_s_let_yo", { unicode: "{U+0451}", options: { noCalc: True } }, ; ё
-		"cyr_c_let_zh", { unicode: "{U+0416}", options: { noCalc: True } }, ; Ж
-		"cyr_s_let_zh", { unicode: "{U+0436}", alterations: { combining: "{U+2DE4}", modifier: "{U+1E036}", subscript: "{U+1E057}" }, options: { noCalc: True } }, ; ж
-		"cyr_c_let_z", { unicode: "{U+0417}", options: { noCalc: True } }, ; З
-		"cyr_s_let_z", { unicode: "{U+0437}", alterations: { combining: "{U+2DE5}", modifier: "{U+1E037}", subscript: "{U+1E058}" }, options: { noCalc: True } }, ; з
-		"cyr_c_let_i", { unicode: "{U+0418}", options: { noCalc: True } }, ; И
-		"cyr_s_let_i", { unicode: "{U+0438}", alterations: { combining: "{U+A675}", modifier: "{U+1E038}", subscript: "{U+1E059}" }, options: { noCalc: True } }, ; и
-		"cyr_c_let_iy", { unicode: "{U+0419}", options: { noCalc: True } }, ; Й
-		"cyr_s_let_iy", { unicode: "{U+0439}", options: { noCalc: True } }, ; й
-		"cyr_c_let_k", { unicode: "{U+041A}", options: { noCalc: True } }, ; К
-		"cyr_s_let_k", { unicode: "{U+043A}", alterations: { combining: "{U+2DE6}", modifier: "{U+1E039}", subscript: "{U+1E05A}" }, options: { noCalc: True } }, ; к
-		"cyr_c_let_l", { unicode: "{U+041B}", options: { noCalc: True } }, ; Л
-		"cyr_s_let_l", { unicode: "{U+043B}", alterations: { combining: "{U+2DE7}", modifier: "{U+1E03A}", subscript: "{U+1E05B}" }, options: { noCalc: True } }, ; л
-		"cyr_c_let_m", { unicode: "{U+041C}", options: { noCalc: True } }, ; М
-		"cyr_s_let_m", { unicode: "{U+043C}", alterations: { combining: "{U+2DE8}", modifier: "{U+1E03B}" }, options: { noCalc: True } }, ; м
-		"cyr_c_let_n", { unicode: "{U+041D}", options: { noCalc: True } }, ; Н
-		"cyr_s_let_n", { unicode: "{U+043D}", alterations: { combining: "{U+2DE9}", modifier: "{U+1D78}" }, options: { noCalc: True } }, ; н
-		"cyr_c_let_o", { unicode: "{U+041E}", options: { noCalc: True } }, ; О
-		"cyr_s_let_o", { unicode: "{U+043E}", alterations: { combining: "{U+2DEA}", modifier: "{U+1E03C}", subscript: "{U+1E05C}" }, options: { noCalc: True } }, ; о
-		"cyr_c_let_p", { unicode: "{U+041F}", options: { noCalc: True } }, ; П
-		"cyr_s_let_p", { unicode: "{U+043F}", alterations: { combining: "{U+2DEB}", modifier: "{U+1E03D}", subscript: "{U+1E05D}" }, options: { noCalc: True } }, ; п
-		"cyr_c_let_r", { unicode: "{U+0420}", options: { noCalc: True } }, ; Р
-		"cyr_s_let_r", { unicode: "{U+0440}", alterations: { combining: "{U+2DEC}", modifier: "{U+1E03E}" }, options: { noCalc: True } }, ; р
-		"cyr_c_let_s", { unicode: "{U+0421}", options: { noCalc: True } }, ; С
-		"cyr_s_let_s", { unicode: "{U+0441}", alterations: { combining: "{U+2DED}", modifier: "{U+1E03F}", subscript: "{U+1E05E}" }, options: { noCalc: True } }, ; с
-		"cyr_c_let_t", { unicode: "{U+0422}", options: { noCalc: True } }, ; Т
-		"cyr_s_let_t", { unicode: "{U+0442}", alterations: { combining: "{U+2DEE}", modifier: "{U+1E040}" }, options: { noCalc: True } }, ; т
-		"cyr_c_let_u", { unicode: "{U+0423}", options: { noCalc: True } }, ; У
-		"cyr_s_let_u", { unicode: "{U+0443}", alterations: { combining: "{U+A677}", modifier: "{U+1E041}", subscript: "{U+1E05F}" }, options: { noCalc: True } }, ; у
-		"cyr_c_let_f", { unicode: "{U+0424}", options: { noCalc: True } }, ; Ф
-		"cyr_s_let_f", { unicode: "{U+0444}", alterations: { combining: "{U+A69E}", modifier: "{U+1E042}", subscript: "{U+1E060}" }, options: { noCalc: True } }, ; ф
-		"cyr_c_let_h", { unicode: "{U+0425}", options: { noCalc: True } }, ; Х
-		"cyr_s_let_h", { unicode: "{U+0445}", alterations: { combining: "{U+2DEF}", modifier: "{U+1E043}", subscript: "{U+1E061}" }, options: { noCalc: True } }, ; х
-		"cyr_c_let_ts", { unicode: "{U+0426}", options: { noCalc: True } }, ; Ц
-		"cyr_s_let_ts", { unicode: "{U+0446}", alterations: { combining: "{U+2DF0}", modifier: "{U+1E044}", subscript: "{U+1E062}" }, options: { noCalc: True } }, ; ц
-		"cyr_c_let_ch", { unicode: "{U+0427}", options: { noCalc: True } }, ; Ч
-		"cyr_s_let_ch", { unicode: "{U+0447}", alterations: { combining: "{U+2DF1}", modifier: "{U+1E045}", subscript: "{U+1E063}" }, options: { noCalc: True } }, ; ч
-		"cyr_c_let_sh", { unicode: "{U+0428}", options: { noCalc: True } }, ; Ш
-		"cyr_s_let_sh", { unicode: "{U+0448}", alterations: { combining: "{U+2DF2}", modifier: "{U+1E046}", subscript: "{U+1E064}" }, options: { noCalc: True } }, ; ш
-		"cyr_c_let_shch", { unicode: "{U+0429}", options: { noCalc: True } }, ; Щ
-		"cyr_s_let_shch", { unicode: "{U+0449}", alterations: { combining: "{U+2DF3}" }, options: { noCalc: True } }, ; щ
-		"cyr_c_let_yeru", { unicode: "{U+042A}", options: { noCalc: True } }, ; Ъ
-		"cyr_s_let_yeru", { unicode: "{U+044A}", alterations: { combining: "{U+A678}", modifier: "{U+A69C}", subscript: "{U+1E065}" }, options: { noCalc: True } }, ; ъ
-		"cyr_c_let_yery", { unicode: "{U+042B}", options: { noCalc: True } }, ; Ы
-		"cyr_s_let_yery", { unicode: "{U+044B}", alterations: { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }, options: { noCalc: True } }, ; ы
-		"cyr_c_let_yeri", { unicode: "{U+042C}", options: { noCalc: True } }, ; Ь
-		"cyr_s_let_yeri", { unicode: "{U+044C}", alterations: { combining: "{U+A67A}", modifier: "{U+A69D}" }, options: { noCalc: True } }, ; ь
-		"cyr_c_let_e", { unicode: "{U+042D}", options: { noCalc: True } }, ; Э
-		"cyr_s_let_e", { unicode: "{U+044D}", alterations: { modifier: "{U+1E048}" }, options: { noCalc: True } }, ; э
-		"cyr_c_let_yu", { unicode: "{U+042E}", options: { noCalc: True } }, ; Ю
-		"cyr_s_let_yu", { unicode: "{U+044E}", alterations: { combining: "{U+2DFB}", modifier: "{U+1E049}" }, options: { noCalc: True } }, ; ю
-		"cyr_c_let_ya", { unicode: "{U+042F}", options: { noCalc: True } }, ; Я
-		"cyr_s_let_ya", { unicode: "{U+044F}", options: { noCalc: True } }, ; я
-		;
-		;
-		; * Misc
-		;
-		;
-		"num_sup_0", { unicode: "{U+2070}" },
-		"num_sup_1", { unicode: "{U+00B9}" },
-		"num_sup_2", { unicode: "{U+00B2}" },
-		"num_sup_3", { unicode: "{U+00B3}" },
-		"num_sup_4", { unicode: "{U+2074}" },
-		"num_sup_5", { unicode: "{U+2075}" },
-		"num_sup_6", { unicode: "{U+2076}" },
-		"num_sup_7", { unicode: "{U+2077}" },
-		"num_sup_8", { unicode: "{U+2078}" },
-		"num_sup_9", { unicode: "{U+2079}" },
-		"num_sup_minus", { unicode: "{U+207B}" },
-		"num_sup_equals", { unicode: "{U+207C}" },
-		"num_sup_plus", { unicode: "{U+207A}" },
-		"num_sup_left_parenthesis", { unicode: "{U+207D}" },
-		"num_sup_right_parenthesis", { unicode: "{U+207E}" },
-		"num_sub_0", { unicode: "{U+2080}" },
-		"num_sub_1", { unicode: "{U+2081}" },
-		"num_sub_2", { unicode: "{U+2082}" },
-		"num_sub_3", { unicode: "{U+2083}" },
-		"num_sub_4", { unicode: "{U+2084}" },
-		"num_sub_5", { unicode: "{U+2085}" },
-		"num_sub_6", { unicode: "{U+2086}" },
-		"num_sub_7", { unicode: "{U+2087}" },
-		"num_sub_8", { unicode: "{U+2088}" },
-		"num_sub_9", { unicode: "{U+2089}" },
-		"num_sub_minus", { unicode: "{U+208B}" },
-		"num_sub_equals", { unicode: "{U+208C}" },
-		"num_sub_plus", { unicode: "{U+208A}" },
-		"num_sub_left_parenthesis", { unicode: "{U+208D}" },
-		"num_sub_right_parenthesis", { unicode: "{U+208E}" },
-		"kkey_0", { unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", alterations: { doubleStruck: "{U+1D7D8}", bold: "{U+1D7CE}", sansSerif: "{U+1D7E2}", sansSerifBold: "{U+1D7EC}", monospace: "{U+1D7F6}" }, options: { noCalc: True } },
-		"kkey_1", { unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", alterations: { doubleStruck: "{U+1D7D9}", bold: "{U+1D7CF}", sansSerif: "{U+1D7E3}", sansSerifBold: "{U+1D7ED}", monospace: "{U+1D7F7}" }, options: { noCalc: True } },
-		"kkey_2", { unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", alterations: { doubleStruck: "{U+1D7DA}", bold: "{U+1D7D0}", sansSerif: "{U+1D7E4}", sansSerifBold: "{U+1D7EE}", monospace: "{U+1D7F8}" }, options: { noCalc: True } },
-		"kkey_3", { unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", alterations: { doubleStruck: "{U+1D7DB}", bold: "{U+1D7D1}", sansSerif: "{U+1D7E5}", sansSerifBold: "{U+1D7EF}", monospace: "{U+1D7F9}" }, options: { noCalc: True } },
-		"kkey_4", { unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", alterations: { doubleStruck: "{U+1D7DC}", bold: "{U+1D7D2}", sansSerif: "{U+1D7E6}", sansSerifBold: "{U+1D7F0}", monospace: "{U+1D7FA}" }, options: { noCalc: True } },
-		"kkey_5", { unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", alterations: { doubleStruck: "{U+1D7DD}", bold: "{U+1D7D3}", sansSerif: "{U+1D7E7}", sansSerifBold: "{U+1D7F1}", monospace: "{U+1D7FB}" }, options: { noCalc: True } },
-		"kkey_6", { unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", alterations: { doubleStruck: "{U+1D7DE}", bold: "{U+1D7D4}", sansSerif: "{U+1D7E8}", sansSerifBold: "{U+1D7F2}", monospace: "{U+1D7FC}" }, options: { noCalc: True } },
-		"kkey_7", { unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", alterations: { doubleStruck: "{U+1D7DF}", bold: "{U+1D7D5}", sansSerif: "{U+1D7E9}", sansSerifBold: "{U+1D7F3}", monospace: "{U+1D7FD}" }, options: { noCalc: True } },
-		"kkey_8", { unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", alterations: { doubleStruck: "{U+1D7E0}", bold: "{U+1D7D6}", sansSerif: "{U+1D7EA}", sansSerifBold: "{U+1D7F4}", monospace: "{U+1D7FE}" }, options: { noCalc: True } },
-		"kkey_9", { unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", alterations: { doubleStruck: "{U+1D7E1}", bold: "{U+1D7D7}", sansSerif: "{U+1D7EB}", sansSerifBold: "{U+1D7F5}", monospace: "{U+1D7FF}" }, options: { noCalc: True } },
-		"kkey_minus", { unicode: "{U+002D}", sup: "num_sup_minus", sub: "num_sub_minus", options: { noCalc: True } },
-		"kkey_equals", { unicode: "{U+003D}", sup: "num_sup_equals", sub: "num_sub_equals", alterations: { modifier: "{U+02ED}" }, options: { noCalc: True } },
-		"kkey_asterisk", { unicode: "{U+002A}", options: { noCalc: True } },
-		"kkey_underscore", { unicode: "{U+005F}", options: { noCalc: True } },
-		"kkey_hyphen_minus", { unicode: "{U+002D}", options: { noCalc: True } },
-		"kkey_plus", { unicode: "{U+002B}", sup: "num_sup_plus", sub: "num_sub_plus", alterations: { modifier: "{U+02D6}" }, options: { noCalc: True } },
-		"kkey_left_parenthesis", { unicode: "{U+0028}", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", options: { noCalc: True } },
-		"kkey_right_parenthesis", { unicode: "{U+0029}", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", options: { noCalc: True } },
-		"kkey_comma", { unicode: "{U+002C}", options: { noCalc: True } },
-		"kkey_dot", { unicode: "{U+002E}", options: { noCalc: True } },
-		"kkey_semicolon", { unicode: "{U+003B}", options: { noCalc: True } },
-		"kkey_colon", { unicode: "{U+003A}", alterations: { modifier: "{U+02F8}" }, options: { noCalc: True } },
-		"kkey_apostrophe", { unicode: "{U+0027}", options: { noCalc: True } },
-		"kkey_quotation", { unicode: "{U+0022}", options: { noCalc: True } },
-		"kkey_l_square_bracket", { unicode: "{U+005B}", options: { noCalc: True } },
-		"kkey_r_square_bracket", { unicode: "{U+005D}", options: { noCalc: True } },
-		"kkey_l_curly_bracket", { unicode: "{U+007B}", options: { noCalc: True } },
-		"kkey_r_curly_bracket", { unicode: "{U+007D}", options: { noCalc: True } },
-		"kkey_grave_accent", { unicode: "{U+0060}", options: { noCalc: True } },
-		"kkey_tilde", { unicode: "{U+007E}", options: { noCalc: True } },
-		"kkey_slash", { unicode: "{U+002F}", options: { noCalc: True } },
-		"kkey_backslash", { unicode: "{U+005C}", options: { noCalc: True } },
-		"kkey_verticalline", { unicode: "{U+007C}", options: { noCalc: True } },
-		"kkey_lessthan", { unicode: "{U+003C}", options: { noCalc: True } },
-		"kkey_greaterthan", { unicode: "{U+003E}", options: { noCalc: True } },
-		"kkey_commercial_at", { unicode: "{U+0040}", options: { noCalc: True } },
-		"kkey_numero_sign", { unicode: "{U+2116}", options: { noCalc: True } },
-		"kkey_number_sign", { unicode: "{U+0023}", options: { noCalc: True } },
-		"kkey_percent_sign", { unicode: "{U+0025}", options: { noCalc: True } },
-		"kkey_circumflex_accent", { unicode: "{U+005E}", options: { noCalc: True } },
 		"misc_crlf_emspace", {
 			unicode: (*) => ChrLib.GetValue("carriage_return", "unicode"),
 			sequence: [(*) => ChrLib.GetValue("carriage_return", "unicode"), (*) => ChrLib.GetValue("new_line", "unicode"), (*) => ChrLib.GetValue("emsp", "unicode")],

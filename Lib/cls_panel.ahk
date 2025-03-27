@@ -288,6 +288,8 @@ Class Panel {
 						;
 						{ type: "Fast Key", group: "Cyrillic Secondary", combinationKey: RightAlt, separator: true },
 						;
+						{ type: "Fast Key", group: "Special Right Shift", groupKey: RightShift, separator: true },
+						;
 						{ type: "Fast Key", group: "Spaces Right Shift", groupKey: RightShift, separator: true },
 						;
 						{ type: "Fast Key", group: "Latin Accented Tertiary", combinationKey: RightShift, separator: true },

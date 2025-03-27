@@ -63,6 +63,7 @@ RightAlt := Chr(0x2384)
 Window := Chr(0x229E)
 CapsLock := Chr(0x2B9D)
 
+
 #Include <External\prt_array>
 #Include <External\fnc_clip_send>
 #Include <External\fnc_caret_pos>
@@ -3303,7 +3304,7 @@ SwitchLanguage(LanguageCode) {
 	DSLPadGUI := Constructor()
 	DSLPadGUI.Show()
 
-	ManageTrayItems()
+	;ManageTrayItems()
 }
 
 ContainsEmoji(StringInput) {
@@ -3315,7 +3316,7 @@ ContainsEmoji(StringInput) {
 AlphabetCoverage := ["pl", "ro", "es"]
 Constructor() {
 	CheckUpdate()
-	ManageTrayItems()
+	;ManageTrayItems()
 
 	screenWidth := A_ScreenWidth
 	screenHeight := A_ScreenHeight
@@ -6880,8 +6881,7 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle,
 
 }
 
-A_IconTip := DSLPadTitle
-DSLTray := A_TrayMenu
+
 ReloadApplication(*) {
 	Reload
 }
@@ -6891,6 +6891,7 @@ ExitApplication(*) {
 OpenScriptFolder(*) {
 	Run A_ScriptDir
 }
+
 ManageTrayItems() {
 	LanguageCode := Language.Get()
 	Labels := Map(
@@ -6951,19 +6952,19 @@ ManageTrayItems() {
 	CurrentApp := "DSL KeyPad " . CurrentVersionString
 	UpdateEntry := Labels["install"] . " " . UpdateVersionString
 
-	DSLTray.Delete()
-	DSLTray.Add(CurrentApp, (*) => Run("https://github.com/DemerNkardaz/DSL-KeyPad/tree/main"))
+	App.tray.Delete()
+	App.tray.Add(CurrentApp, (*) => Run("https://github.com/DemerNkardaz/DSL-KeyPad/tree/main"))
 	if UpdateAvailable {
-		DSLTray.Add(UpdateEntry, (*) => GetUpdate())
-		DSLTray.SetIcon(UpdateEntry, ImageRes, 176)
+		App.tray.Add(UpdateEntry, (*) => GetUpdate())
+		App.tray.SetIcon(UpdateEntry, ImageRes, 176)
 	}
-	DSLTray.Add()
-	DSLTray.Add(Labels["panel"], OpenPanel)
-	DSLTray.Add(Labels["options"], (*) => Cfg.Editor())
-	DSLTray.Add()
+	App.tray.Add()
+	App.tray.Add(Labels["panel"], OpenPanel)
+	App.tray.Add(Labels["options"], (*) => Cfg.Editor())
+	App.tray.Add()
 
 
-	DSLTray.SetIcon(Labels["options"], ImageRes, 63)
+	App.tray.SetIcon(Labels["options"], ImageRes, 63)
 
 	ScriptsSubMenu := Menu()
 	ScriptsSubMenu.Add(Labels["telexInput"], (*) => "")
@@ -6999,7 +7000,7 @@ ManageTrayItems() {
 	ScriptsSubMenu.Disable(Labels["telexInput"])
 	ScriptsSubMenu.Disable(Labels["altInput"])
 
-	DSLTray.Add(Labels["script"], ScriptsSubMenu)
+	App.tray.Add(Labels["script"], ScriptsSubMenu)
 
 	AlterationSubMenu := Menu()
 	AlterationSubMenu.Add(Labels["combining_alteration"], (*) => SetModifiedCharsInput())
@@ -7027,7 +7028,7 @@ ManageTrayItems() {
 	AlterationSubMenu.Add(Labels["monospace_alteration"], (*) => SetModifiedCharsInput("monospace"))
 	AlterationSubMenu.Add(Labels["small_capital_alteration"], (*) => SetModifiedCharsInput("smallCapital"))
 
-	DSLTray.Add(Labels["alterations"], AlterationSubMenu)
+	App.tray.Add(Labels["alterations"], AlterationSubMenu)
 
 	LayoutsSubMenu := Menu()
 	LayoutsSubMenu.Add("QWERTY", (*) => RegisterLayout("QWERTY"))
@@ -7038,47 +7039,47 @@ ManageTrayItems() {
 	LayoutsSubMenu.Add("Диктор", (*) => RegisterLayout("Диктор"))
 	LayoutsSubMenu.Add("ЙІУКЕН (1907)", (*) => RegisterLayout("ЙІУКЕН (1907)"))
 
-	DSLTray.Add(Labels["layouts"], LayoutsSubMenu)
+	App.tray.Add(Labels["layouts"], LayoutsSubMenu)
 
-	DSLTray.Add()
-	DSLTray.Add(Labels["search"], (*) => SearchKey())
-	DSLTray.Add(Labels["unicode"], (*) => CharacterInserter("Unicode").InputDialog(False))
-	DSLTray.Add(Labels["altcode"], (*) => CharacterInserter("Altcode").InputDialog(False))
-	DSLTray.Add(Labels["smelter"], (*) => Ligaturiser())
-	DSLTray.Add(Labels["open_folder"], OpenScriptFolder)
-	DSLTray.Add()
-	DSLTray.Add(Labels["notif"], (*) => ToggleGroupMessage())
-	DSLTray.Add()
-	DSLTray.Add(Labels["reload"], ReloadApplication)
-	DSLTray.Add(Labels["config"], OpenConfigFile)
-	DSLTray.Add(Labels["locale"], OpenLocalesFile)
-	DSLTray.Add()
-	DSLTray.Add(Labels["custom_compose"], (*) => Cfg.SubGUIs("Recipes"))
-	DSLTray.Add()
+	App.tray.Add()
+	App.tray.Add(Labels["search"], (*) => SearchKey())
+	App.tray.Add(Labels["unicode"], (*) => CharacterInserter("Unicode").InputDialog(False))
+	App.tray.Add(Labels["altcode"], (*) => CharacterInserter("Altcode").InputDialog(False))
+	App.tray.Add(Labels["smelter"], (*) => Ligaturiser())
+	App.tray.Add(Labels["open_folder"], OpenScriptFolder)
+	App.tray.Add()
+	App.tray.Add(Labels["notif"], (*) => ToggleGroupMessage())
+	App.tray.Add()
+	App.tray.Add(Labels["reload"], ReloadApplication)
+	App.tray.Add(Labels["config"], OpenConfigFile)
+	App.tray.Add(Labels["locale"], OpenLocalesFile)
+	App.tray.Add()
+	App.tray.Add(Labels["custom_compose"], (*) => Cfg.SubGUIs("Recipes"))
+	App.tray.Add()
 	if Keyboard.disabledByMonitor || Keyboard.disabledByUser {
-		DSLTray.Add(Labels["enable"], (*) => Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor"))
-		DSLTray.SetIcon(Labels["enable"], InternalFiles["AppIcoDLL"].File, 9)
+		App.tray.Add(Labels["enable"], (*) => Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor"))
+		App.tray.SetIcon(Labels["enable"], InternalFiles["AppIcoDLL"].File, 9)
 	} else {
 
-		DSLTray.Add(Labels["disable"], (*) => Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor"))
-		DSLTray.SetIcon(Labels["disable"], InternalFiles["AppIcoDLL"].File, 9)
+		App.tray.Add(Labels["disable"], (*) => Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor"))
+		App.tray.SetIcon(Labels["disable"], InternalFiles["AppIcoDLL"].File, 9)
 	}
-	DSLTray.Add()
-	DSLTray.Add(Labels["exit"], ExitApplication)
-	DSLTray.Add()
+	App.tray.Add()
+	App.tray.Add(Labels["exit"], ExitApplication)
+	App.tray.Add()
 
-	DSLTray.SetIcon(CurrentApp, InternalFiles["AppIco"].File)
-	DSLTray.SetIcon(Labels["search"], ImageRes, 169)
-	DSLTray.SetIcon(Labels["unicode"], Shell32, 225)
-	DSLTray.SetIcon(Labels["altcode"], Shell32, 313)
-	DSLTray.SetIcon(Labels["smelter"], ImageRes, 151)
-	DSLTray.SetIcon(Labels["open_folder"], ImageRes, 180)
-	DSLTray.SetIcon(Labels["notif"], ImageRes, 016)
-	DSLTray.SetIcon(Labels["reload"], ImageRes, 229)
-	DSLTray.SetIcon(Labels["config"], ImageRes, 065)
-	DSLTray.SetIcon(Labels["locale"], ImageRes, 015)
-	DSLTray.SetIcon(Labels["custom_compose"], ImageRes, 188)
-	DSLTray.SetIcon(Labels["exit"], ImageRes, 085)
+	App.tray.SetIcon(CurrentApp, InternalFiles["AppIco"].File)
+	App.tray.SetIcon(Labels["search"], ImageRes, 169)
+	App.tray.SetIcon(Labels["unicode"], Shell32, 225)
+	App.tray.SetIcon(Labels["altcode"], Shell32, 313)
+	App.tray.SetIcon(Labels["smelter"], ImageRes, 151)
+	App.tray.SetIcon(Labels["open_folder"], ImageRes, 180)
+	App.tray.SetIcon(Labels["notif"], ImageRes, 016)
+	App.tray.SetIcon(Labels["reload"], ImageRes, 229)
+	App.tray.SetIcon(Labels["config"], ImageRes, 065)
+	App.tray.SetIcon(Labels["locale"], ImageRes, 015)
+	App.tray.SetIcon(Labels["custom_compose"], ImageRes, 188)
+	App.tray.SetIcon(Labels["exit"], ImageRes, 085)
 
 }
 

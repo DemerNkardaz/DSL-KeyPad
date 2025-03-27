@@ -5,6 +5,7 @@ Class App {
 	static version := [0, 1, 1, 0]
 	static versionText := this.formatVersion(this.version)
 	static winTitle := this.title " — " this.versionText
+	static tray := A_TrayMenu
 
 	static paths := {
 		dir: A_ScriptDir,
@@ -71,3 +72,5 @@ Class App {
 		return result
 	}
 }
+
+A_IconTip := App.winTitle

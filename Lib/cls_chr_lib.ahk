@@ -106,12 +106,16 @@ class ChrLib {
 		entry := this.GetEntry(entryName)
 		output := ""
 
+		if StrLen(getMode) = 0 {
+			getMode := "Unicode"
+		}
+
 		if getMode = "HTML" && entry.HasOwnProp("html") {
 			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(AlterationActiveName) {
 				output .= entry.alterations.%AlterationActiveName%HTML
 
 			} else {
-				output .= entry.html
+				output .= entry.HasOwnProp("entity") ? entry.entity : entry.html
 			}
 
 		} else if getMode = "LaTeX" && entry.HasOwnProp("LaTeX") {
@@ -126,6 +130,27 @@ class ChrLib {
 
 			} else {
 				output .= Util.UnicodeToChar(entry.HasOwnProp("sequence") ? entry.sequence : entry.unicode)
+			}
+		}
+
+		return output
+	}
+
+	static EntryPreview(entryName, indent := 0) {
+		entry := this.GetEntry(entryName)
+		output := this.FormatEntry(entry, indent)
+		MsgBox(output)
+	}
+
+	static FormatEntry(entry, indent) {
+		output := ""
+		indentStr := Util.StrRepeat("`t", indent)
+
+		for key, value in entry.OwnProps() {
+			if IsObject(value) {
+				output .= indentStr key ":`n" . this.FormatEntry(value, indent + 1)
+			} else {
+				output .= indentStr key ": " value "`n"
 			}
 		}
 
@@ -188,17 +213,83 @@ class ChrLib {
 	static MakeRecipe(recipes*) {
 		output := []
 		for recipe in recipes {
-			if InStr(recipe, "${") {
-				matches := []
-				while RegExMatch(recipe, "\${(.*?)}", &match) {
-					matches.Push(match[1])
-					recipe := RegExReplace(recipe, "\${" match[1] "}", this.Get(match[1]))
+			if InStr(recipe, "${") || InStr(recipe, "[SWAP:") {
+				if RegExMatch(recipe, "\((.*?)\|(.*?)\)", &match) {
+					recipePair := [
+						RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[1]),
+						RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[2])
+					]
+					recipePair[1] := StrReplace(recipePair[1], "$(*)", "${" match[2] "}")
+					recipePair[2] := StrReplace(recipePair[2], "$(*)", "${" match[1] "}")
+
+
+					for recipe in recipePair {
+						while RegExMatch(recipe, "\${(.*?)}", &subMatch) {
+							characterName := subMatch[1]
+							characterAlteration := ""
+							hasAlteration := False
+
+							if RegExMatch(characterName, "\:\:(.*?)$", &alterationMatch) {
+								characterAlteration := alterationMatch[1]
+								hasAlteration := True
+								characterName := RegExReplace(characterName, "\:\:.*$", "")
+							}
+
+							recipe := RegExReplace(recipe, "\${" subMatch[1] "}", this.Get(characterName, hasAlteration, characterAlteration))
+						}
+						output.Push(recipe)
+					}
+				} else {
+					while RegExMatch(recipe, "\${(.*?)}", &match) {
+
+						characterName := match[1]
+						characterAlteration := ""
+						hasAlteration := False
+
+						if RegExMatch(characterName, "\:\:(.*?)$", &alterationMatch) {
+							characterAlteration := alterationMatch[1]
+							hasAlteration := True
+							characterName := RegExReplace(characterName, "\:\:.*$", "")
+						}
+
+						recipe := RegExReplace(recipe, "\${" match[1] "}", this.Get(characterName, hasAlteration, characterAlteration))
+					}
+
+					if RegExMatch(recipe, "\[SWAP:(.*?)\]", &swapMatch) {
+						swapItems := StrSplit(swapMatch[1], ";")
+						permutations := this.GeneratePermutations(swapItems)
+						for perm in permutations {
+							swappedRecipe := RegExReplace(recipe, "\[SWAP:.*?\]", perm)
+							output.Push(swappedRecipe)
+						}
+					} else {
+						output.Push(recipe)
+					}
 				}
+			} else {
+				output.Push(recipe)
 			}
-			output.Push(recipe)
 		}
 
 		return output
+	}
+
+	static GeneratePermutations(items) {
+		if items.Length = 1 {
+			return [items[1]]
+		}
+
+		permutations := []
+		for i, item in items {
+			remaining := items.Clone()
+			remaining.RemoveAt(i)
+			subPermutations := this.GeneratePermutations(remaining)
+			for subPerm in subPermutations {
+				permutations.Push(item subPerm)
+			}
+		}
+
+		return permutations
 	}
 
 
@@ -329,6 +420,13 @@ class ChrLib {
 			}
 		} else {
 			refinedEntry.html := "&#" Util.ChrToDecimal(character) ";"
+		}
+
+		if refinedEntry.HasOwnProp("alterations") {
+			for alteration, value in refinedEntry.alterations.OwnProps() {
+				if !InStr(alteration, "HTML")
+					refinedEntry.alterations.%alteration%HTML := "&#" Util.ChrToDecimal(Util.UnicodeToChar(value)) ";"
+			}
 		}
 
 		for i, altCodeSymbol in AltCodesLibrary {
