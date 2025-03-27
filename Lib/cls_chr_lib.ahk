@@ -2,6 +2,7 @@ class ChrLib {
 
 	static entries := {}
 	static entryGroups := Map()
+	static entryCategories := Map()
 	static entryRecipes := Map()
 	static entryTags := Map()
 	static duplicatesList := []
@@ -530,6 +531,12 @@ class ChrLib {
 				this.entryGroups[group].Push(entryName)
 		}
 
+		if !this.entryCategories.Has(refinedEntry.symbol.category)
+			this.entryCategories.Set(refinedEntry.symbol.category, [])
+
+		if !this.entryCategories.Get(refinedEntry.symbol.category).HasValue(entryName)
+			this.entryCategories[refinedEntry.symbol.category].Push(entryName)
+
 		if refinedEntry.hasOwnProp("tags") && refinedEntry.tags.Length > 0 {
 			for tag in refinedEntry.tags {
 				if !this.entryTags.Has(tag)
@@ -545,6 +552,20 @@ class ChrLib {
 					this.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.hasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index })
 				} else {
 					this.duplicatesList.Push(recipe)
+				}
+			}
+		}
+
+		if refinedEntry.recipeAlt.Length = 0 && refinedEntry.recipe.Length > 0 {
+			refinedEntry.recipeAlt := refinedEntry.recipe
+
+
+			for i, altRecipe in refinedEntry.recipeAlt {
+				for diacriticName in this.entryCategories["Diacritic Mark"] {
+					diacriticChr := this.Get(diacriticName)
+					if InStr(altRecipe, diacriticChr) {
+						refinedEntry.recipeAlt[i] := StrReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
+					}
 				}
 			}
 		}

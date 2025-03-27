@@ -1450,6 +1450,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 	}
 }
 
+#Include <chr_lib_legacy>
 #Include <chr_lib>
 #Include <cls_tempature_converter>
 
