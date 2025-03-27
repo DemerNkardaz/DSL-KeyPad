@@ -2634,21 +2634,21 @@ RegLib(this) {
 			unicode: "{U+00E1}",
 			groups: ["Latin Accented", "Latin Accented Primary"],
 			options: { titlesAlt: True, fastKey: "$" },
-			recipe: (*) => this.MakeRecipe("@${acute}"),
+			recipe: (*) => this.MakeRecipe("$${acute}"),
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_c_let_a__circumflex", {
 			unicode: "{U+00C2}",
 			groups: ["Latin Accented", "Latin Accented Secondary"],
 			options: { titlesAlt: True, fastKey: "<! $" },
-			recipe: (*) => this.MakeRecipe("@'${circumflex}"),
+			recipe: (*) => this.MakeRecipe("$${circumflex}"),
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_s_let_a__circumflex", {
 			unicode: "{U+00E2}",
 			groups: ["Latin Accented", "Latin Accented Secondary"],
 			options: { titlesAlt: True, fastKey: "<! $" },
-			recipe: (*) => this.MakeRecipe("@${circumflex}"),
+			recipe: (*) => this.MakeRecipe("$${circumflex}"),
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_c_let_a__circumflex__acute", {
@@ -2656,7 +2656,7 @@ RegLib(this) {
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
 			recipe: (*) => this.MakeRecipe(
-				"A[SWAP:${circumflex};${acute}]", "${lat_c_let_a__(circumflex|acute)}$(*)",
+				"$[SWAP:${circumflex};${acute}]", "${lat_c_let_a__(circumflex|acute)}$(*)",
 			),
 			symbol: { category: "Latin Accented" },
 		},
@@ -2665,8 +2665,7 @@ RegLib(this) {
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
 			recipe: (*) => this.MakeRecipe(
-				"@${circumflex}${acute}", "${lat_s_let_a__circumflex}${acute}",
-				"@${acute}${circumflex}", "${lat_s_let_a__acute}${circumflex}",
+				"$[SWAP:${circumflex};${acute}]", "${lat_s_let_a__(circumflex|acute)}$(*)",
 			),
 			symbol: { category: "Latin Accented" },
 		},

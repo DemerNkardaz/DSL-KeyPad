@@ -475,8 +475,10 @@ class ChrLib {
 		if !refinedEntry.HasOwnProp("groups")
 			refinedEntry.groups := ["Default Group"]
 
+		if !refinedEntry.HasOwnProp("recipes")
+			refinedEntry.recipes := []
 		if !refinedEntry.HasOwnProp("recipe")
-			refinedEntry.recipe := []
+			refinedEntry.recipe := refinedEntry.recipes
 		if !refinedEntry.HasOwnProp("recipeAlt")
 			refinedEntry.recipeAlt := []
 
