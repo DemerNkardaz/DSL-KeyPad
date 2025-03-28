@@ -2618,6 +2618,67 @@ RegLib(this) {
 		},
 		;
 		;
+		; * Latin Digraphs
+		;
+		;
+		"lat_c_dig_dz", {
+			unicode: "{U+01F1}",
+			tags: ["диграф DZ", "diagraph DZ"],
+			groups: ["Latin Digraphs"],
+			options: { titlesAlt: True },
+			recipe: ["$"],
+			symbol: { category: "Latin Digraph", letter: "DZ" },
+		},
+		"lat_cs_dig_dz", {
+			unicode: "{U+01F2}",
+			tags: ["диграф Dz", "diagraph Dz"],
+			groups: ["Latin Digraphs"],
+			options: { titlesAlt: True },
+			recipe: ["$"],
+			symbol: { category: "Latin Digraph", letter: "Dz" },
+		},
+		"lat_s_dig_dz", {
+			unicode: "{U+01F3}",
+			tags: ["диграф dz", "diagraph dz"],
+			groups: ["Latin Digraphs"],
+			options: { titlesAlt: True },
+			recipe: ["$"],
+			symbol: { category: "Latin Digraph", letter: "dz" },
+		},
+		"lat_c_dig_dz__caron", {
+			unicode: "{U+01C4}",
+			tags: ["диграф DZ с гачеком", "diagraph DZ with caron"],
+			groups: ["Latin Digraphs"],
+			options: { titlesAlt: True },
+			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_c_dig_dz}${caron}")],
+			symbol: { category: "Latin Digraph", letter: "DZ" },
+		},
+		"lat_cs_dig_dz__caron", {
+			unicode: "{U+01C5}",
+			tags: ["диграф Dz с гачеком", "diagraph Dz with caron"],
+			groups: ["Latin Digraphs"],
+			options: { titlesAlt: True },
+			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_cs_dig_dz}${caron}")],
+			symbol: { category: "Latin Digraph", letter: "Dz" },
+		},
+		"lat_s_dig_dz__caron", {
+			unicode: "{U+01C6}",
+			tags: ["диграф dz с гачеком", "diagraph dz with caron"],
+			groups: ["Latin Digraphs"],
+			options: { titlesAlt: True },
+			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_s_dig_dz}${caron}")],
+			symbol: { category: "Latin Digraph", letter: "dz" },
+		},
+		"lat_s_dig_dz__curl", {
+			unicode: "{U+02A5}",
+			tags: ["диграф dz с завитком", "diagraph dz with curl"],
+			groups: ["Latin Digraphs"],
+			options: { titlesAlt: True },
+			recipe: [(*) => this.MakeRecipe("$${arrow_left_ushaped}", "${lat_s_dig_dz}${arrow_left_ushaped}")],
+			symbol: { category: "Latin Digraph", letter: "dz" },
+		},
+		;
+		;
 		; * Accented Latin
 		;
 		;

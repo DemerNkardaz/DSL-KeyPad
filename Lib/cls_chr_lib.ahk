@@ -565,15 +565,17 @@ class ChrLib {
 			}
 		}
 
+		dataLetter := (refinedEntry.symbol.HasOwnProp("letter") && StrLen(refinedEntry.symbol.letter) > 0) ? refinedEntry.symbol.letter : refinedEntry.data.letter
+
 		if StrLen(refinedEntry.data.letter) > 0 {
 			if refinedEntry.recipe.Length > 0 {
 				for i, recipe in refinedEntry.recipe {
-					refinedEntry.recipe[i] := RegExReplace(recipe, "\$", refinedEntry.data.letter)
+					refinedEntry.recipe[i] := RegExReplace(recipe, "\$", dataLetter)
 				}
 			}
 
 			if StrLen(refinedEntry.options.fastKey) > 0 {
-				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" refinedEntry.data.letter "]")
+				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" dataLetter "]")
 			}
 		}
 
@@ -608,7 +610,7 @@ class ChrLib {
 		decomposedName := {
 			script: Map("lat", "latin", "cyr", "cyrillic", "hel", "hellenic"),
 			case: Map("c", "capital", "s", "small", "cs", "capitalized"),
-			type: Map("let", "letter", "lig", "ligature"),
+			type: Map("let", "letter", "lig", "ligature", "dig", "digraph"),
 			letter: "",
 			postfixes: []
 		}
