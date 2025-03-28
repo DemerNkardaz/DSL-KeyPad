@@ -589,7 +589,7 @@ class ChrLib {
 		}
 
 		if refinedEntry.recipeAlt.Length = 0 && refinedEntry.recipe.Length > 0 {
-			refinedEntry.recipeAlt := refinedEntry.recipe
+			refinedEntry.recipeAlt := refinedEntry.recipe.Clone()
 
 			for i, altRecipe in refinedEntry.recipeAlt {
 				for diacriticName in this.entryCategories["Diacritic Mark"] {
