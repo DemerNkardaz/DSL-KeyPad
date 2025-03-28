@@ -14,14 +14,21 @@ class ChrLib {
 
 		for key, value in entry.OwnProps() {
 			if value is Func {
-				this.entries.%entryName%.DefineProp(key, { Get: value, Set: value })
+				definedValue := value
+				this.entries.%entryName%.DefineProp(key, { Get: (*) => definedValue(), Set: (this, value) => this.DefineProp(key, { Get: (*) => value }) })
 			} else if Util.IsArray(value) {
 				this.entries.%entryName%.%key% := []
 				for subValue in value {
 					if subValue is Func {
 						interObj := {}
 						interObj.DefineProp("Get", { Get: subValue, Set: subValue })
-						this.entries.%entryName%.%key%.Push(interObj.Get)
+						if Util.IsArray(interObj.Get) {
+							for interValue in interObj.Get {
+								this.entries.%entryName%.%key%.Push(interValue)
+							}
+						} else {
+							this.entries.%entryName%.%key%.Push(interObj.Get)
+						}
 					} else {
 						this.entries.%entryName%.%key%.Push(subValue)
 					}
@@ -409,6 +416,11 @@ class ChrLib {
 		return ""
 	}
 
+	static PostProcess() {
+		for entryName, entry in this.entries.OwnProps() {
+			this.EntryPostProcessing(entryName, entry)
+		}
+	}
 	static EntryPostProcessing(entryName, entry) {
 		refinedEntry := entry
 		refinedEntry := this.SetDecomposedData(entryName, refinedEntry)

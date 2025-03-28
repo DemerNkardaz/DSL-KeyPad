@@ -3,7 +3,7 @@ ChrLib.RegLib()
 RegLib(this) {
 	local D := "dotted_circle"
 
-	ChrLib.AddEntries(
+	this.AddEntries(
 		;
 		;
 		; * Diacritics
@@ -81,7 +81,6 @@ RegLib(this) {
 			groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
 			options: { groupKey: ["B", "И"], fastKey: "<+>+ [B][И]" },
 			symbol: { category: "Diacritic Mark" },
-			test: (E, B := "breve") => this.MakeRecipe("supet teeeee " this.Gets(D, "asterisk_below", D, B "_inverted", D, B)),
 		},
 		"bridge_above", {
 			unicode: "{U+0346}",
@@ -2251,21 +2250,21 @@ RegLib(this) {
 			tags: ["celsius", "градус Цельсия"],
 			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
 			options: { fastKey: "[C]" },
-			recipe: (*) => this.MakeRecipe("${degree}C"),
+			recipe: [(*) => this.MakeRecipe("${degree}C")],
 		},
 		"fahrenheit", {
 			unicode: "{U+2109}",
 			tags: ["fahrenheit", "градус по Фаренгейту"],
 			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
 			options: { fastKey: "[F]" },
-			recipe: (*) => this.MakeRecipe("${degree}F"),
+			recipe: [(*) => this.MakeRecipe("${degree}F")],
 		},
 		"kelvin", {
 			unicode: "{U+212A}",
 			tags: ["kelvin", "Кельвин"],
 			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
 			options: { fastKey: "[K]" },
-			recipe: (*) => this.MakeRecipe("${degree}K"),
+			recipe: [(*) => this.MakeRecipe("${degree}K")],
 		},
 		"rankine", {
 			unicode: "{U+0052}",
@@ -2381,21 +2380,21 @@ RegLib(this) {
 			tags: ["reversed ?", "обратный ?"],
 			groups: ["Smelting Special", "Special Fast Secondary"],
 			options: { fastKey: "<! [7]" },
-			recipe: (*) => this.MakeRecipe("${arrow_left_ushaped}?"),
+			recipe: [(*) => this.MakeRecipe("${arrow_left_ushaped}?")],
 		},
 		"inverted_exclamation", {
 			unicode: "{U+00A1}",
 			tags: ["inverted !", "перевёрнутый !"],
 			groups: ["Smelting Special", "Special Fast Secondary"],
 			options: { fastKey: "[1]" },
-			recipe: (*) => this.MakeRecipe("${arrow_down_ushaped}!"),
+			recipe: [(*) => this.MakeRecipe("${arrow_down_ushaped}!")],
 		},
 		"inverted_question", {
 			unicode: "{U+00BF}",
 			tags: ["inverted ?", "перевёрнутый ?"],
 			groups: ["Smelting Special", "Special Fast Secondary"],
 			options: { fastKey: "[7]" },
-			recipe: (*) => this.MakeRecipe("${arrow_down_ushaped}?"),
+			recipe: [(*) => this.MakeRecipe("${arrow_down_ushaped}?")],
 		},
 		"double_exclamation", {
 			unicode: "{U+203C}",
@@ -2437,7 +2436,7 @@ RegLib(this) {
 			tags: ["inverted interrobang", "перевёрнутый интерробанг", "лигатура перевёрнутый !?", "ligature inverted !?"],
 			groups: ["Smelting Special", "Special Fast RShift"],
 			options: { fastKey: "c* [1]" },
-			recipe: (*) => this.MakeRecipe("${arrow_down_ushaped}${interrobang}", "${arrow_down_ushaped}!+?"),
+			recipe: [(*) => this.MakeRecipe("${arrow_down_ushaped}${interrobang}", "${arrow_down_ushaped}!+?")],
 		},
 		;
 		;
@@ -2466,8 +2465,7 @@ RegLib(this) {
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { modifier: "{U+1D2D}", smallCapital: "{U+1D01}" },
-			recipe: (*) => this.MakeRecipe("$",
-				"${lat_c_let_a::smallCapital}${lat_c_let_e::smallCapital}"),
+			recipe: [(*) => this.MakeRecipe("$", "${lat_c_let_a::smallCapital}${lat_c_let_e::smallCapital}")],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_ae", {
@@ -2484,7 +2482,7 @@ RegLib(this) {
 			tags: ["прописная лигатура AE с акутом", "capital ligature AE with acute"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("$${acute}", "${lat_c_lig_ae}${acute}"),
+			recipe: [(*) => this.MakeRecipe("$${acute}", "${lat_c_lig_ae}${acute}")],
 			symbol: { category: "Latin Ligature Accented" },
 		},
 		"lat_s_lig_ae__acute", {
@@ -2492,7 +2490,7 @@ RegLib(this) {
 			tags: ["строчная лигатура ae с акутом", "small ligature ae with acute"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("$${acute}", "${lat_s_lig_ae}${acute}"),
+			recipe: [(*) => this.MakeRecipe("$${acute}", "${lat_s_lig_ae}${acute}")],
 			symbol: { category: "Latin Ligature Accented" },
 		},
 		"lat_c_lig_ae__macron", {
@@ -2500,7 +2498,7 @@ RegLib(this) {
 			tags: ["прописная лигатура AE с макроном", "capital ligature AE with macron"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("$${macron}", "${lat_c_lig_ae}${macron}"),
+			recipe: [(*) => this.MakeRecipe("$${macron}", "${lat_c_lig_ae}${macron}")],
 			symbol: { category: "Latin Ligature Accented" },
 		},
 		"lat_s_lig_ae__macron", {
@@ -2508,7 +2506,7 @@ RegLib(this) {
 			tags: ["строчная лигатура ae с макроном", "small ligature ae with macron"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("$${macron}", "${lat_s_lig_ae}${macron}"),
+			recipe: [(*) => this.MakeRecipe("$${macron}", "${lat_s_lig_ae}${macron}")],
 			symbol: { category: "Latin Ligature Accented" },
 		},
 		"lat_c_lig_ao", {
@@ -2566,7 +2564,7 @@ RegLib(this) {
 			tags: ["прописная лигатура AV", "capital ligature AV"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("$${stroke_short}", "${lat_c_lig_av}${stroke_short}"),
+			recipe: [(*) => this.MakeRecipe("$${stroke_short}", "${lat_c_lig_av}${stroke_short}")],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_s_lig_av__stroke_short", {
@@ -2575,7 +2573,7 @@ RegLib(this) {
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { combining: "{U+1DD6}" },
-			recipe: (*) => this.MakeRecipe("$${stroke_short}", "${lat_s_lig_av}${stroke_short}"),
+			recipe: [(*) => this.MakeRecipe("$${stroke_short}", "${lat_s_lig_av}${stroke_short}")],
 			symbol: { category: "Latin Ligature" },
 		},
 		"lat_c_lig_ay", {
@@ -2615,7 +2613,7 @@ RegLib(this) {
 			tags: ["лигатура перевёрнутый et", "ligature turned et", "перевёрнутый амперсанд", "turned ampersand"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe("$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"),
+			recipe: [(*) => this.MakeRecipe("$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}")],
 			symbol: { category: "Latin Ligature" },
 		},
 		;
@@ -2627,46 +2625,42 @@ RegLib(this) {
 			unicode: "{U+00C1}",
 			groups: ["Latin Accented", "Latin Accented Primary"],
 			options: { titlesAlt: True, fastKey: "$" },
-			recipe: (*) => this.MakeRecipe("$${acute}"),
+			recipe: [(*) => this.MakeRecipe("$${acute}")],
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_s_let_a__acute", {
 			unicode: "{U+00E1}",
 			groups: ["Latin Accented", "Latin Accented Primary"],
 			options: { titlesAlt: True, fastKey: "$" },
-			recipe: (*) => this.MakeRecipe("$${acute}"),
+			recipe: [(*) => this.MakeRecipe("$${acute}")],
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_c_let_a__circumflex", {
 			unicode: "{U+00C2}",
 			groups: ["Latin Accented", "Latin Accented Secondary"],
 			options: { titlesAlt: True, fastKey: "<! $" },
-			recipe: (*) => this.MakeRecipe("$${circumflex}"),
+			recipe: [(*) => this.MakeRecipe("$${circumflex}")],
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_s_let_a__circumflex", {
 			unicode: "{U+00E2}",
 			groups: ["Latin Accented", "Latin Accented Secondary"],
 			options: { titlesAlt: True, fastKey: "<! $" },
-			recipe: (*) => this.MakeRecipe("$${circumflex}"),
+			recipe: [(*) => this.MakeRecipe("$${circumflex}")],
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_c_let_a__circumflex__acute", {
 			unicode: "{U+1EA4}",
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe(
-				"$[SWAP:${circumflex};${acute}]", "${lat_c_let_a__(circumflex|acute)}$(*)",
-			),
+			recipe: [(*) => this.MakeRecipe("$[SWAP:${circumflex};${acute}]", "${lat_c_let_a__(circumflex|acute)}$(*)")],
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_s_let_a__circumflex__acute", {
 			unicode: "{U+1EA5}",
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
-			recipe: (*) => this.MakeRecipe(
-				"$[SWAP:${circumflex};${acute}]", "${lat_s_let_a__(circumflex|acute)}$(*)",
-			),
+			recipe: [(*) => this.MakeRecipe("$[SWAP:${circumflex};${acute}]", "${lat_s_let_a__(circumflex|acute)}$(*)")],
 			symbol: { category: "Latin Accented" },
 		},
 		;
@@ -3233,7 +3227,7 @@ RegLib(this) {
 			tags: ["прописная буква Юс малый йотированный глаголицы", "capital letter small letter Yus iotified glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: ">! [Э]" },
 			alterations: { combiningForm: "{U+1E027}" },
-			recipe: (*) => this.MakeRecipe("${glagolitic_c_let_yestu}${glagolitic_c_let_small_yus}"),
+			recipe: [(*) => this.MakeRecipe("${glagolitic_c_let_yestu}${glagolitic_c_let_small_yus}")],
 		},
 		"glagolitic_s_let_small_yus_iotified", {
 			unicode: "{U+2C57}",
@@ -3241,7 +3235,7 @@ RegLib(this) {
 			tags: ["строчная буква юс малый йотированный глаголицы", "small letter small letter yus iotified glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: ">! [э]" },
 			alterations: { combiningForm: "{U+1E027}" },
-			recipe: (*) => this.MakeRecipe("${glagolitic_s_let_yestu}${glagolitic_s_let_small_yus}"),
+			recipe: [(*) => this.MakeRecipe("${glagolitic_s_let_yestu}${glagolitic_s_let_small_yus}")],
 		},
 		"glagolitic_c_let_big_yus", {
 			unicode: "{U+2C28}",
@@ -3249,7 +3243,7 @@ RegLib(this) {
 			tags: ["прописная буква Юс большой глаголицы", "capital letter big Yus glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: "<! [О]" },
 			alterations: { combiningForm: "{U+1E028}" },
-			recipe: (*) => this.MakeRecipe("${glagolitic_c_let_onu}${glagolitic_c_let_small_yus}"),
+			recipe: [(*) => this.MakeRecipe("${glagolitic_c_let_onu}${glagolitic_c_let_small_yus}")],
 		},
 		"glagolitic_s_let_big_yus", {
 			unicode: "{U+2C58}",
@@ -3257,7 +3251,7 @@ RegLib(this) {
 			tags: ["строчная буква юс большой глаголицы", "small letter big yus glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: "<! [о]" },
 			alterations: { combiningForm: "{U+1E028}" },
-			recipe: (*) => this.MakeRecipe("${glagolitic_s_let_onu}${glagolitic_s_let_small_yus}"),
+			recipe: [(*) => this.MakeRecipe("${glagolitic_s_let_onu}${glagolitic_s_let_small_yus}")],
 		},
 		"glagolitic_c_let_big_yus_iotified", {
 			unicode: "{U+2C29}",
@@ -3265,7 +3259,7 @@ RegLib(this) {
 			tags: ["прописная буква Юс большой йотированный глаголицы", "capital letter big Yus iotified glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: "<! [Ё]" },
 			alterations: { combiningForm: "{U+1E029}" },
-			recipe: (*) => this.MakeRecipe("${glagolitic_c_let_yo}${glagolitic_c_let_small_yus}"),
+			recipe: [(*) => this.MakeRecipe("${glagolitic_c_let_yo}${glagolitic_c_let_small_yus}")],
 		},
 		"glagolitic_s_let_big_yus_iotified", {
 			unicode: "{U+2C59}",
@@ -3273,7 +3267,7 @@ RegLib(this) {
 			tags: ["строчная буква юс большой йотированный глаголицы", "small letter big yus iotified glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: "<! [ё]" },
 			alterations: { combiningForm: "{U+1E029}" },
-			recipe: (*) => this.MakeRecipe("${glagolitic_s_let_yo}${glagolitic_s_let_small_yus}"),
+			recipe: [(*) => this.MakeRecipe("${glagolitic_s_let_yo}${glagolitic_s_let_small_yus}")],
 		},
 		"glagolitic_c_let_fita", {
 			unicode: "{U+2C2A}",
@@ -3473,7 +3467,7 @@ RegLib(this) {
 			tags: ["футорк эск", "futhork aesc", "futhork æsc"],
 			groups: ["Futhork Runes"],
 			options: { titlesAlt: True, altLayoutKey: ">+ [A]" },
-			recipe: (*) => this.MakeRecipe(Chr(0x16A8) Chr(0x16D6)),
+			recipe: [(*) => this.MakeRecipe(Chr(0x16A8) Chr(0x16D6))],
 		},
 		"futhork_cen", {
 			unicode: "{U+16B3}",
@@ -6955,10 +6949,12 @@ RegLib(this) {
 		"ipa_subscript_mode", { unicode: "{U+0041}", sequence: ["{U+2090}", "{U+2091}", "{U+2095}", "{U+2C7C}", "{U+2096}", "{U+2097}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt RShift F3" } },
 	)
 
+	;this.PostProcess()
 	;MsgBox(this.GetEntry("lat_c_lig_ae_acute").recipeAlt.ToString())
 	if this.duplicatesList.Length > 0
 		TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), this.duplicatesList.ToString()), App.winTitle, "Icon! Mute")
 }
+;ChrLib.PostProcess()
 
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.Get("dotted_circle"))
 ;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.GetValue("acute", "symbol").font)

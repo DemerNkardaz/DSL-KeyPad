@@ -7,6 +7,17 @@ Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 
+class ProxyFunction {
+	__New(targetFunc) {
+		this.targetFunc := targetFunc
+	}
+
+	__Call(params*) {
+		return this.targetFunc.Call(params*)
+	}
+}
+
+
 _ObjMaxIndex(this) {
 	indexes := 0
 	for k, v in this.OwnProps() {
