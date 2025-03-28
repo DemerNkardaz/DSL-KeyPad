@@ -741,3 +741,19 @@ ChrLib.AddEntry(
 	}
 )
 */
+
+CopyDiacriticMarks() {
+
+
+	marks := ChrLib.entryCategories["Diacritic Mark"]
+
+	text := ""
+	for index, mark in marks {
+		text .= mark "`n"
+	}
+
+	A_Clipboard := text
+	MsgBox "Символы успешно скопированы в буфер обмена!"
+}
+
+SetTimer(() => CopyDiacriticMarks(), -5000)
