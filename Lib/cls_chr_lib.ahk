@@ -41,11 +41,7 @@ class ChrLib {
 						tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry.data.letter)
 					}
 
-					definedRecipe := (*) => this.MakeRecipe(tempRecipe)
-					interObj := {}
-					interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
-
-					entry.recipe := interObj.Get.Clone()
+					entry.recipe := tempRecipe
 				}
 
 				this.AddEntry(entryName, entry)
@@ -61,6 +57,14 @@ class ChrLib {
 				if value is Func {
 					definedValue := value
 					this.entries.%entryName%.DefineProp(key, { Get: (*) => definedValue(), Set: (this, value) => this.DefineProp(key, { Get: (*) => value }) })
+				} else if key = "recipe" && value.Length > 0 {
+					tempRecipe := value.Clone()
+
+					definedRecipe := (*) => this.MakeRecipe(tempRecipe)
+					interObj := {}
+					interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
+
+					this.entries.%entryName%.%key% := interObj.Get
 				} else if Util.IsArray(value) {
 					this.entries.%entryName%.%key% := []
 					for subValue in value {

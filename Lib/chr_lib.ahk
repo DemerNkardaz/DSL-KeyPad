@@ -2250,21 +2250,21 @@ RegLib(this) {
 			tags: ["celsius", "градус Цельсия"],
 			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
 			options: { fastKey: "[C]" },
-			recipe: [(*) => this.MakeRecipe("${degree}C")],
+			recipe: ["${degree}C"],
 		},
 		"fahrenheit", {
 			unicode: "{U+2109}",
 			tags: ["fahrenheit", "градус по Фаренгейту"],
 			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
 			options: { fastKey: "[F]" },
-			recipe: [(*) => this.MakeRecipe("${degree}F")],
+			recipe: ["${degree}F"],
 		},
 		"kelvin", {
 			unicode: "{U+212A}",
 			tags: ["kelvin", "Кельвин"],
 			groups: ["Special Characters", "Smelting Special", "Special Right Shift"],
 			options: { fastKey: "[K]" },
-			recipe: [(*) => this.MakeRecipe("${degree}K")],
+			recipe: ["${degree}K"],
 		},
 		"rankine", {
 			unicode: "{U+0052}",
@@ -2380,21 +2380,21 @@ RegLib(this) {
 			tags: ["reversed ?", "обратный ?"],
 			groups: ["Smelting Special", "Special Fast Secondary"],
 			options: { fastKey: "<! [7]" },
-			recipe: [(*) => this.MakeRecipe("${arrow_left_ushaped}?")],
+			recipe: ["${arrow_left_ushaped}?"],
 		},
 		"inverted_exclamation", {
 			unicode: "{U+00A1}",
 			tags: ["inverted !", "перевёрнутый !"],
 			groups: ["Smelting Special", "Special Fast Secondary"],
 			options: { fastKey: "[1]" },
-			recipe: [(*) => this.MakeRecipe("${arrow_down_ushaped}!")],
+			recipe: ["${arrow_down_ushaped}!"],
 		},
 		"inverted_question", {
 			unicode: "{U+00BF}",
 			tags: ["inverted ?", "перевёрнутый ?"],
 			groups: ["Smelting Special", "Special Fast Secondary"],
 			options: { fastKey: "[7]" },
-			recipe: [(*) => this.MakeRecipe("${arrow_down_ushaped}?")],
+			recipe: ["${arrow_down_ushaped}?"],
 		},
 		"double_exclamation", {
 			unicode: "{U+203C}",
@@ -2436,7 +2436,7 @@ RegLib(this) {
 			tags: ["inverted interrobang", "перевёрнутый интерробанг", "лигатура перевёрнутый !?", "ligature inverted !?"],
 			groups: ["Smelting Special", "Special Fast RShift"],
 			options: { fastKey: "c* [1]" },
-			recipe: [(*) => this.MakeRecipe("${arrow_down_ushaped}${interrobang}", "${arrow_down_ushaped}!+?")],
+			recipe: ["${arrow_down_ushaped}${interrobang}", "${arrow_down_ushaped}!+?"],
 		},
 		;
 		;
@@ -2529,7 +2529,7 @@ RegLib(this) {
 			tags: ["перевёрнутый амперсанд", "turned ampersand"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
-			recipe: [(*) => this.MakeRecipe("$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}")],
+			recipe: ["$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"],
 			symbol: { category: "Latin Ligature", beforeLetter: "turned" },
 		},
 		;
@@ -2555,7 +2555,7 @@ RegLib(this) {
 			unicode: "{U+02A5}",
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
-			recipe: [(*) => this.MakeRecipe("$${arrow_left_ushaped}", "${lat_s_dig_dz}${arrow_left_ushaped}")],
+			recipe: ["$${arrow_left_ushaped}", "${lat_s_dig_dz}${arrow_left_ushaped}"],
 			symbol: { category: "Latin Digraph" },
 		},
 		;
@@ -2645,7 +2645,7 @@ RegLib(this) {
 			unicode: "{U+1D8F}",
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
-			recipe: [(*) => this.MakeRecipe("$${retroflex_hook_below}")],
+			recipe: ["$${retroflex_hook_below}"],
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_[c,s]_let_a__macron", {
@@ -3324,7 +3324,7 @@ RegLib(this) {
 			tags: ["прописная буква Юс малый йотированный глаголицы", "capital letter small letter Yus iotified glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: ">! [Э]" },
 			alterations: { combiningForm: "{U+1E027}" },
-			recipe: [(*) => this.MakeRecipe("${glagolitic_c_let_yestu}${glagolitic_c_let_small_yus}")],
+			recipe: ["${glagolitic_c_let_yestu}${glagolitic_c_let_small_yus}"],
 		},
 		"glagolitic_s_let_small_yus_iotified", {
 			unicode: "{U+2C57}",
@@ -3332,7 +3332,7 @@ RegLib(this) {
 			tags: ["строчная буква юс малый йотированный глаголицы", "small letter small letter yus iotified glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: ">! [э]" },
 			alterations: { combiningForm: "{U+1E027}" },
-			recipe: [(*) => this.MakeRecipe("${glagolitic_s_let_yestu}${glagolitic_s_let_small_yus}")],
+			recipe: ["${glagolitic_s_let_yestu}${glagolitic_s_let_small_yus}"],
 		},
 		"glagolitic_c_let_big_yus", {
 			unicode: "{U+2C28}",
@@ -3340,7 +3340,7 @@ RegLib(this) {
 			tags: ["прописная буква Юс большой глаголицы", "capital letter big Yus glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: "<! [О]" },
 			alterations: { combiningForm: "{U+1E028}" },
-			recipe: [(*) => this.MakeRecipe("${glagolitic_c_let_onu}${glagolitic_c_let_small_yus}")],
+			recipe: ["${glagolitic_c_let_onu}${glagolitic_c_let_small_yus}"],
 		},
 		"glagolitic_s_let_big_yus", {
 			unicode: "{U+2C58}",
@@ -3348,7 +3348,7 @@ RegLib(this) {
 			tags: ["строчная буква юс большой глаголицы", "small letter big yus glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: "<! [о]" },
 			alterations: { combiningForm: "{U+1E028}" },
-			recipe: [(*) => this.MakeRecipe("${glagolitic_s_let_onu}${glagolitic_s_let_small_yus}")],
+			recipe: ["${glagolitic_s_let_onu}${glagolitic_s_let_small_yus}"],
 		},
 		"glagolitic_c_let_big_yus_iotified", {
 			unicode: "{U+2C29}",
@@ -3356,7 +3356,7 @@ RegLib(this) {
 			tags: ["прописная буква Юс большой йотированный глаголицы", "capital letter big Yus iotified glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: "<! [Ё]" },
 			alterations: { combiningForm: "{U+1E029}" },
-			recipe: [(*) => this.MakeRecipe("${glagolitic_c_let_yo}${glagolitic_c_let_small_yus}")],
+			recipe: ["${glagolitic_c_let_yo}${glagolitic_c_let_small_yus}"],
 		},
 		"glagolitic_s_let_big_yus_iotified", {
 			unicode: "{U+2C59}",
@@ -3364,7 +3364,7 @@ RegLib(this) {
 			tags: ["строчная буква юс большой йотированный глаголицы", "small letter big yus iotified glagolitic"],
 			options: { titlesAlt: True, altLayoutKey: "<! [ё]" },
 			alterations: { combiningForm: "{U+1E029}" },
-			recipe: [(*) => this.MakeRecipe("${glagolitic_s_let_yo}${glagolitic_s_let_small_yus}")],
+			recipe: ["${glagolitic_s_let_yo}${glagolitic_s_let_small_yus}"],
 		},
 		"glagolitic_c_let_fita", {
 			unicode: "{U+2C2A}",
@@ -3564,7 +3564,7 @@ RegLib(this) {
 			tags: ["футорк эск", "futhork aesc", "futhork æsc"],
 			groups: ["Futhork Runes"],
 			options: { titlesAlt: True, altLayoutKey: ">+ [A]" },
-			recipe: [(*) => this.MakeRecipe(Chr(0x16A8) Chr(0x16D6))],
+			recipe: ["${futhark_ansuz}${futhark_ehwaz}"],
 		},
 		"futhork_cen", {
 			unicode: "{U+16B3}",
