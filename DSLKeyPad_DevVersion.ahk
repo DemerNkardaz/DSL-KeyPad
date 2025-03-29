@@ -5387,15 +5387,15 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		])
 		SlotModdedLetters := Map(
 			"A", Map("<!", ["lat_c_let_a__acute", "lat_s_let_a__acute"],
-				"<^>!", ["lat_c_let_a_breve", "lat_s_let_a_breve"],
+				"<^>!", ["lat_c_let_a__breve", "lat_s_let_a__breve"],
 				"<^>!<!", ["lat_c_let_a__circumflex", "lat_s_let_a__circumflex"],
-				"<^>!<!<+", ["lat_c_let_a_ring_above", "lat_s_let_a_ring_above"],
-				"<^>!<!>+", ["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"],
-				"<^>!>+", ["lat_c_let_a_macron", "lat_s_let_a_macron"],
-				"<^>!<+", ["lat_c_let_a_diaeresis", "lat_s_let_a_diaeresis"],
-				"<^>!<+>+", ["lat_c_let_a_tilde", "lat_s_let_a_tilde"],
-				">+", ["lat_c_let_a_grave", "lat_s_let_a_grave"],
-				"<+>+", ["lat_c_let_a_grave_double", "lat_s_let_a_grave_double"]),
+				"<^>!<!<+", ["lat_c_let_a__ring_above", "lat_s_let_a__ring_above"],
+				"<^>!<!>+", ["lat_c_let_a__ogonek", "lat_s_let_a__ogonek"],
+				"<^>!>+", ["lat_c_let_a__macron", "lat_s_let_a__macron"],
+				"<^>!<+", ["lat_c_let_a__diaeresis", "lat_s_let_a__diaeresis"],
+				"<^>!<+>+", ["lat_c_let_a__tilde", "lat_s_let_a__tilde"],
+				">+", ["lat_c_let_a__grave", "lat_s_let_a__grave"],
+				"<+>+", ["lat_c_let_a__grave_double", "lat_s_let_a__grave_double"]),
 			"B", Map(
 				"<^>!", ["lat_c_let_b_dot_above", "lat_s_let_b_dot_above"],
 				"<^>!<!", ["lat_c_let_b_dot_below", "lat_s_let_b_dot_below"],

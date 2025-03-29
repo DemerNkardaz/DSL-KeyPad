@@ -10,48 +10,94 @@ class ChrLib {
 
 	static AddEntry(entryName, entry) {
 
-		this.entries.%entryName% := {}
+		if RegExMatch(entryName, "\[(.*?)\]", &match) {
+			splitVariants := StrSplit(match[1], ",")
+			entries := {}
 
-		for key, value in entry.OwnProps() {
-			if value is Func {
-				definedValue := value
-				this.entries.%entryName%.DefineProp(key, { Get: (*) => definedValue(), Set: (this, value) => this.DefineProp(key, { Get: (*) => value }) })
-			} else if Util.IsArray(value) {
-				this.entries.%entryName%.%key% := []
-				for subValue in value {
-					if subValue is Func {
-						interObj := {}
-						interObj.DefineProp("Get", { Get: subValue, Set: subValue })
-						if Util.IsArray(interObj.Get) {
-							for interValue in interObj.Get {
-								this.entries.%entryName%.%key%.Push(interValue)
+			for i, variant in splitVariants {
+				variantName := RegExReplace(entryName, "\[.*?\]", variant)
+				entries.%variantName% := entry.Clone()
+				entries.%variantName%.unicode := entry.unicode[i]
+				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
+				if entry.hasOwnProp("symbol") {
+					entries.%variantName%.symbol := entry.symbol.Clone()
+					if entries.%variantName%.symbol.HasOwnProp("letter") {
+						entries.%variantName%.symbol.letter := entry.symbol.letter[i]
+					}
+				}
+				if entry.hasOwnProp("alterations") {
+					entries.%variantName%.alterations := entry.alterations[i].Clone()
+				}
+				if entry.hasOwnProp("recipe") && entry.recipe.Length > 0 && IsObject(entry.recipe[entry.recipe.Length]) {
+					entries.%variantName%.recipe := entry.recipe[i].Clone()
+				}
+			}
+
+			for entryName, entry in entries.OwnProps() {
+				if entry.hasOwnProp("recipe") && entry.recipe.Length > 0 {
+					tempRecipe := entry.recipe.Clone()
+					for i, recipe in tempRecipe {
+						tempRecipe[i] := RegExReplace(tempRecipe[i], "\[.*?\]", SubStr(entry.data.case, 1, 1))
+						tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry.data.letter)
+					}
+
+					definedRecipe := (*) => this.MakeRecipe(tempRecipe)
+					interObj := {}
+					interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
+
+					entry.recipe := interObj.Get.Clone()
+				}
+
+				this.AddEntry(entryName, entry)
+			}
+
+		} else {
+			if !entry.HasOwnProp("data")
+				entry := this.SetDecomposedData(entryName, entry)
+
+			this.entries.%entryName% := {}
+
+			for key, value in entry.OwnProps() {
+				if value is Func {
+					definedValue := value
+					this.entries.%entryName%.DefineProp(key, { Get: (*) => definedValue(), Set: (this, value) => this.DefineProp(key, { Get: (*) => value }) })
+				} else if Util.IsArray(value) {
+					this.entries.%entryName%.%key% := []
+					for subValue in value {
+						if subValue is Func {
+							interObj := {}
+							interObj.DefineProp("Get", { Get: subValue, Set: subValue })
+							if Util.IsArray(interObj.Get) {
+								for interValue in interObj.Get {
+									this.entries.%entryName%.%key%.Push(interValue)
+								}
+							} else {
+								this.entries.%entryName%.%key%.Push(interObj.Get)
 							}
 						} else {
-							this.entries.%entryName%.%key%.Push(interObj.Get)
+							this.entries.%entryName%.%key%.Push(subValue)
 						}
-					} else {
-						this.entries.%entryName%.%key%.Push(subValue)
 					}
-				}
-			} else if IsObject(value) {
-				this.entries.%entryName%.%key% := {}
-				for subKey, subValue in value.OwnProps() {
-					if subValue is Func {
-						this.entries.%entryName%.%key%.DefineProp(subKey, { Get: subValue, Set: subValue })
-					} else {
-						this.entries.%entryName%.%key%.%subKey% := subValue
+				} else if IsObject(value) {
+					this.entries.%entryName%.%key% := {}
+					for subKey, subValue in value.OwnProps() {
+						if subValue is Func {
+							this.entries.%entryName%.%key%.DefineProp(subKey, { Get: subValue, Set: subValue })
+						} else {
+							this.entries.%entryName%.%key%.%subKey% := subValue
+						}
 					}
+				} else {
+					this.entries.%entryName%.%key% := value
 				}
-			} else {
-				this.entries.%entryName%.%key% := value
 			}
+
+			this.entries.%entryName%.index := this.lastIndexAdded + 1
+
+			this.lastIndexAdded := this.entries.%entryName%.index
+
+			this.EntryPostProcessing(entryName, this.entries.%entryName%)
 		}
-
-		this.entries.%entryName%.index := this.lastIndexAdded + 1
-
-		this.lastIndexAdded := this.entries.%entryName%.index
-
-		this.EntryPostProcessing(entryName, this.entries.%entryName%)
 	}
 
 	static AddEntries(arguments*) {
@@ -220,8 +266,26 @@ class ChrLib {
 
 	static MakeRecipe(recipes*) {
 		output := []
+		interArr := []
+
+
 		for recipe in recipes {
-			if InStr(recipe, "${") || InStr(recipe, "[SWAP:") {
+			if Util.IsArray(recipe) {
+				for recipeEntry in recipe {
+					interArr.Push(recipeEntry)
+				}
+			} else
+				interArr.Push(recipe)
+		}
+
+
+		for recipe in interArr {
+			test := False
+			if InStr(recipe, "breve") {
+				test := True
+				;msgbox("Breve detected in recipe: " recipe)
+			}
+			if InStr(recipe, "${") {
 				if RegExMatch(recipe, "\((.*?)\|(.*?)\)", &match) {
 					recipePair := [
 						RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[1]),
@@ -242,8 +306,11 @@ class ChrLib {
 								hasAlteration := True
 								characterName := RegExReplace(characterName, "\:\:.*$", "")
 							}
-
-							recipe := RegExReplace(recipe, "\${" subMatch[1] "}", this.Get(characterName, hasAlteration, characterAlteration))
+							try {
+								recipe := RegExReplace(recipe, "\${" subMatch[1] "}", this.Get(characterName, hasAlteration, characterAlteration))
+							} catch {
+								throw "Error in recipe: " recipe " with character: " characterName
+							}
 						}
 						output.Push(recipe)
 					}
@@ -263,20 +330,13 @@ class ChrLib {
 						recipe := RegExReplace(recipe, "\${" match[1] "}", this.Get(characterName, hasAlteration, characterAlteration))
 					}
 
-					if RegExMatch(recipe, "\[SWAP:(.*?)\]", &swapMatch) {
-						swapItems := StrSplit(swapMatch[1], ";")
-						permutations := this.GeneratePermutations(swapItems)
-						for perm in permutations {
-							swappedRecipe := RegExReplace(recipe, "\[SWAP:.*?\]", perm)
-							output.Push(swappedRecipe)
-						}
-					} else {
-						output.Push(recipe)
-					}
+					output.Push(recipe)
+
 				}
 			} else {
 				output.Push(recipe)
 			}
+
 		}
 
 
@@ -423,7 +483,6 @@ class ChrLib {
 	}
 	static EntryPostProcessing(entryName, entry) {
 		refinedEntry := entry
-		refinedEntry := this.SetDecomposedData(entryName, refinedEntry)
 		character := Util.UnicodeToChar(refinedEntry.unicode)
 		characterSequence := Util.UnicodeToChar(refinedEntry.HasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode)
 

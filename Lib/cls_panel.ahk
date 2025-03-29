@@ -816,7 +816,11 @@ Class Panel {
 
 			this.PanelGUI[options.prefix "KeyPreview"].Text := characterKey
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := StrLen(characterCombinationKey) < 10 ? characterCombinationKey : ""
-			this.PanelGUI[options.prefix "KeyPreview"].SetFont((StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 12 && StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) < 18) ? "s10" : (StrLen(this.PanelGUI[options.prefix "KeyPreview"].Text) > 19) ? "s9" : "s12")
+
+			keyPrevieLength := StrLen(StrReplace(this.PanelGUI[options.prefix "KeyPreview"].Text, Chr(0x25CC), ""))
+
+
+			this.PanelGUI[options.prefix "KeyPreview"].SetFont((keyPrevieLength > 12 && keyPrevieLength < 20) ? "s10" : (keyPrevieLength > 21) ? "s9" : "s12")
 
 			if value.options.HasOwnProp("legend") && StrLen(value.options.legend) > 1 {
 				this.PanelGUI[options.prefix "LegendButton"].Enabled := True
