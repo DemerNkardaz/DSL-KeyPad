@@ -740,8 +740,8 @@ Class Panel {
 			} else if Locale.Read(characterEntry, , True, &titleText) {
 				characterTitle := titleText
 
-			} else if value.HasOwnProp("titles") && value.titles.HasValue(languageCode) {
-				characterTitle := value.titles[languageCode]
+			} else if value.HasOwnProp("titles") && value.titles.Has(languageCode) {
+				characterTitle := value.titles[languageCode (value.titles.Has(languageCode "_alt") && value.options.titlesAlt ? "_alt" : "")]
 
 			} else {
 				characterTitle := Locale.Read(characterEntry)
@@ -939,7 +939,7 @@ Class Panel {
 						} else if Locale.Read(characterEntry, , True, &titleText) {
 							characterTitle := titleText
 
-						} else if value.HasOwnProp("titles") && value.titles.HasValue(languageCode) {
+						} else if value.HasOwnProp("titles") && value.titles.Has(languageCode) {
 							characterTitle := value.titles[languageCode]
 
 						} else {

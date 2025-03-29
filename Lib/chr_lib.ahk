@@ -2629,7 +2629,7 @@ RegLib(this) {
 			recipe: ["$"],
 			symbol: { category: "Latin Digraph", letter: "DZ" },
 		},
-		"lat_cs_dig_dz", {
+		"lat_i_dig_dz", {
 			unicode: "{U+01F2}",
 			tags: ["диграф Dz", "diagraph Dz"],
 			groups: ["Latin Digraphs"],
@@ -2653,12 +2653,12 @@ RegLib(this) {
 			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_c_dig_dz}${caron}")],
 			symbol: { category: "Latin Digraph", letter: "DZ" },
 		},
-		"lat_cs_dig_dz__caron", {
+		"lat_i_dig_dz__caron", {
 			unicode: "{U+01C5}",
 			tags: ["диграф Dz с гачеком", "diagraph Dz with caron"],
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
-			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_cs_dig_dz}${caron}")],
+			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_i_dig_dz}${caron}")],
 			symbol: { category: "Latin Digraph", letter: "Dz" },
 		},
 		"lat_s_dig_dz__caron", {

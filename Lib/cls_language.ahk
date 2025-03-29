@@ -61,8 +61,8 @@ Class Language {
 		}
 	}
 
-	static Get() {
-		userLanguage := Cfg.Get("User_Language")
+	static Get(language := "") {
+		userLanguage := StrLen(language) > 0 ? language : Cfg.Get("User_Language")
 		userLanguage := userLanguage != "" ? userLanguage : this.GetSys()
 
 		if this.Validate(userLanguage) {
@@ -186,7 +186,7 @@ Class Locale extends Language {
 
 	static Read(EntryName, Prefix := "", validate := False, &output?) {
 		Intermediate := ""
-		Section := Prefix != "" ? Prefix . "_" . this.Get() : this.Get()
+		Section := this.Validate(Prefix) ? Prefix : (Prefix != "" ? Prefix "_" this.Get() : this.Get())
 		try {
 			;Intermediate := IniRead(this.locales, Section, EntryName, "")
 			Intermediate := this.ReadStr(Section, EntryName)

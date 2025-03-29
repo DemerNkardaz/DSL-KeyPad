@@ -8,6 +8,10 @@ Class Util {
 		}
 	}
 
+	static StrUpper(Str, Length := StrLen(Str)) {
+		return StrUpper(SubStr(Str, 1, Length)) SubStr(Str, Length + 1)
+	}
+
 	static StrRepeat(str, count) {
 		output := ""
 		loop count {

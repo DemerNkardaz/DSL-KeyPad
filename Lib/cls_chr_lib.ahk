@@ -603,13 +603,17 @@ class ChrLib {
 			}
 		}
 
+		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.case) > 0 && StrLen(refinedEntry.data.letter) > 0 {
+			refinedEntry := this.LocalesGeneration(entryName, refinedEntry)
+		}
+
 		this.entries.%entryName% := refinedEntry
 	}
 
 	static NameDecompose(entryName) {
 		decomposedName := {
 			script: Map("lat", "latin", "cyr", "cyrillic", "hel", "hellenic"),
-			case: Map("c", "capital", "s", "small", "cs", "capitalized"),
+			case: Map("c", "capital", "s", "small", "sc", "small_capital", "i", "inter"),
 			type: Map("let", "letter", "lig", "ligature", "dig", "digraph"),
 			letter: "",
 			postfixes: []
@@ -660,14 +664,63 @@ class ChrLib {
 				decomposedName.type := decomposedName.type[rawCharacterName[3]]
 				decomposedName.letter := (decomposedName.case = "capital" ? StrUpper(rawCharacterName[4]) : rawCharacterName[4])
 
-				diacriticSet := RegExReplace(entryName, "i)^.*?__")
-				decomposedName.postfixes := StrSplit(diacriticSet, "__")
+				diacriticSet := InStr(entryName, "__") ? RegExReplace(entryName, "i)^.*?__(.*)", "$1") : ""
+				decomposedName.postfixes := StrLen(diacriticSet) > 0 ? StrSplit(diacriticSet, "__") : []
 
 				return decomposedName
 			} else {
 				return entryName
 			}
 		}
+	}
+
+	static LocalesGeneration(entryName, entry) {
+		pfx := "gen_"
+		letter := (entry.symbol.HasOwnProp("letter") && StrLen(entry.symbol.letter) > 0) ? entry.symbol.letter : entry.data.letter
+		lScript := entry.data.script
+		lCase := entry.data.case
+		lType := entry.data.type
+		lPostfixes := entry.data.postfixes
+		psx := lType = "digraph" ? "_second" : ""
+
+		entry.titles := Map(
+			"ru", Locale.Read(pfx "prefix_" lScript, "ru") " " Locale.Read(pfx "case_" lCase psx, "ru") " " Locale.Read(pfx "type_" lType, "ru") " " letter,
+			"en", Locale.Read(pfx "prefix_" lScript, "en") " " Locale.Read(pfx "case_" lCase psx, "en") " " Locale.Read(pfx "type_" lType, "en") " " letter,
+			"ru_alt", Util.StrUpper(Locale.Read(pfx "type_" lType, "ru"), 1) " " letter,
+			"en_alt", Util.StrUpper(Locale.Read(pfx "type_" lType, "en"), 1) " " letter,
+		)
+
+		if lPostfixes.Length > 0 {
+			output := Map("ru", " ", "en", " ", "ru_alt", " ", "en_alt", " ")
+
+			currIndex := 0
+			for i, postfix in lPostfixes {
+				currIndex++
+				if currIndex = 1 {
+					output["ru"] .= Locale.Read(pfx "postfix_with", "ru") " " Locale.Read(pfx "postfix_" postfix, "ru")
+					output["ru_alt"] .= Locale.Read(pfx "postfix_with", "ru") " " Locale.Read(pfx "postfix_" postfix, "ru")
+					output["en"] .= Locale.Read(pfx "postfix_with", "en") " " Locale.Read(pfx "postfix_" postfix, "en")
+					output["en_alt"] .= Locale.Read(pfx "postfix_with", "en") " " Locale.Read(pfx "postfix_" postfix, "en")
+				} else if currIndex > 1 && currIndex < lPostfixes.Length {
+					output["ru"] .= ", " Locale.Read(pfx "postfix_" postfix, "ru")
+					output["ru_alt"] .= ", " Locale.Read(pfx "postfix_" postfix, "ru")
+					output["en"] .= ", " Locale.Read(pfx "postfix_" postfix, "en")
+					output["en_alt"] .= ", " Locale.Read(pfx "postfix_" postfix, "en")
+				} else if currIndex = lPostfixes.Length {
+					output["ru"] .= " " Locale.Read(pfx "postfix_and", "ru") " " Locale.Read(pfx "postfix_" postfix, "ru")
+					output["ru_alt"] .= " " Locale.Read(pfx "postfix_and", "ru") " " Locale.Read(pfx "postfix_" postfix, "ru")
+					output["en"] .= " " Locale.Read(pfx "postfix_and", "en") " " Locale.Read(pfx "postfix_" postfix, "en")
+					output["en_alt"] .= " " Locale.Read(pfx "postfix_and", "en") " " Locale.Read(pfx "postfix_" postfix, "en")
+				}
+			}
+
+			entry.titles["ru"] .= output["ru"]
+			entry.titles["en"] .= output["en"]
+			entry.titles["ru_alt"] .= output["ru_alt"]
+			entry.titles["en_alt"] .= output["en_alt"]
+		}
+
+		return entry
 	}
 
 	static SetDecomposedData(entryName, entry) {
@@ -758,4 +811,4 @@ CopyDiacriticMarks() {
 	MsgBox "Символы успешно скопированы в буфер обмена!"
 }
 
-SetTimer(() => CopyDiacriticMarks(), -5000)
+;SetTimer(() => CopyDiacriticMarks(), -5000)
