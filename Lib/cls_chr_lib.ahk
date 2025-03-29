@@ -683,17 +683,23 @@ class ChrLib {
 		lPostfixes := entry.data.postfixes
 		psx := lType = "digraph" ? "_second" : ""
 
-		langCodes := ["ru", "en", "ru_alt", "en_alt"]
+		langCodes := ["en", "ru", "en_alt", "ru_alt"]
 		entry.titles := Map()
+		tags := Map()
 
 		for _, langCode in langCodes {
 			isAlt := InStr(langCode, "_alt")
 			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
 
+			lBeforeletter := entry.symbol.HasOwnProp("beforeLetter") && StrLen(entry.symbol.beforeLetter) > 0 ? Locale.Read(pfx "beforeLetter_" entry.symbol.beforeLetter, lang) " " : ""
+			lAfterletter := entry.symbol.HasOwnProp("afterLetter") && StrLen(entry.symbol.afterLetter) > 0 ? " " Locale.Read(pfx "afterLetter_" entry.symbol.afterLetter, lang) : ""
+
+
 			if isAlt {
-				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " letter
+				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter letter lAfterletter
 			} else {
-				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " letter
+				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter letter lAfterletter
+				tags[langCode] := Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter letter lAfterletter
 			}
 		}
 
@@ -711,8 +717,24 @@ class ChrLib {
 					postfixText .= " " Locale.Read(pfx "postfix_and", lang) " " Locale.Read(pfx "postfix_" lPostfixes[lPostfixes.Length], lang)
 
 				entry.titles[langCode] .= postfixText
+
+				if !InStr(langCode, "_alt") {
+					tags[langCode] .= postfixText
+				}
 			}
 		}
+
+		tags["en"] := Locale.Read(pfx "tagScript_" lScript, "en") " " tags["en"]
+		tags["ru"] := tags["ru"] " " Locale.Read(pfx "tagScript_" lScript, "ru")
+
+
+		hasTags := entry.tags.Length > 0
+		tagIndex := 0
+		for tag in tags {
+			tagIndex++
+			entry.tags.InsertAt(tagIndex, tags[tag])
+		}
+
 
 		return entry
 	}

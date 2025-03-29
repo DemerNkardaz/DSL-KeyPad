@@ -1759,72 +1759,72 @@ RegLib(this) {
 		; * Default Cyrillic
 		;
 		;
-		"cyr_c_let_a", { unicode: "{U+0410}", options: { noCalc: True } }, ; А
-		"cyr_s_let_a", { unicode: "{U+0430}", alterations: { combining: "{U+2DF6}", modifier: "{U+1E030}", subscript: "{U+1E051}" }, options: { noCalc: True } }, ; а
-		"cyr_c_let_b", { unicode: "{U+0411}", options: { noCalc: True } }, ; Б
-		"cyr_s_let_b", { unicode: "{U+0431}", alterations: { combining: "{U+2DE0}", modifier: "{U+1E031}", subscript: "{U+1E052}" }, options: { noCalc: True } }, ; б
-		"cyr_c_let_v", { unicode: "{U+0412}", options: { noCalc: True } }, ; В
-		"cyr_s_let_v", { unicode: "{U+0432}", alterations: { combining: "{U+2DE1}", modifier: "{U+1E032}", subscript: "{U+1E053}" }, options: { noCalc: True } }, ; в
-		"cyr_c_let_g", { unicode: "{U+0413}", options: { noCalc: True } }, ; Г
-		"cyr_s_let_g", { unicode: "{U+0433}", alterations: { combining: "{U+2DE2}", modifier: "{U+1E033}", subscript: "{U+1E054}" }, options: { noCalc: True } }, ; г
-		"cyr_c_let_d", { unicode: "{U+0414}", options: { noCalc: True } }, ; Д
-		"cyr_s_let_d", { unicode: "{U+0434}", alterations: { combining: "{U+2DE3}", modifier: "{U+1E034}", subscript: "{U+1E055}" }, options: { noCalc: True } }, ; д
-		"cyr_c_let_ie", { unicode: "{U+0415}", options: { noCalc: True } }, ; Е
-		"cyr_s_let_ie", { unicode: "{U+0435}", alterations: { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }, options: { noCalc: True } }, ; е
-		"cyr_c_let_yo", { unicode: "{U+0401}", options: { noCalc: True } }, ; Ё
-		"cyr_s_let_yo", { unicode: "{U+0451}", options: { noCalc: True } }, ; ё
-		"cyr_c_let_zh", { unicode: "{U+0416}", options: { noCalc: True } }, ; Ж
-		"cyr_s_let_zh", { unicode: "{U+0436}", alterations: { combining: "{U+2DE4}", modifier: "{U+1E036}", subscript: "{U+1E057}" }, options: { noCalc: True } }, ; ж
-		"cyr_c_let_z", { unicode: "{U+0417}", options: { noCalc: True } }, ; З
-		"cyr_s_let_z", { unicode: "{U+0437}", alterations: { combining: "{U+2DE5}", modifier: "{U+1E037}", subscript: "{U+1E058}" }, options: { noCalc: True } }, ; з
-		"cyr_c_let_i", { unicode: "{U+0418}", options: { noCalc: True } }, ; И
-		"cyr_s_let_i", { unicode: "{U+0438}", alterations: { combining: "{U+A675}", modifier: "{U+1E038}", subscript: "{U+1E059}" }, options: { noCalc: True } }, ; и
-		"cyr_c_let_iy", { unicode: "{U+0419}", options: { noCalc: True } }, ; Й
-		"cyr_s_let_iy", { unicode: "{U+0439}", options: { noCalc: True } }, ; й
-		"cyr_c_let_k", { unicode: "{U+041A}", options: { noCalc: True } }, ; К
-		"cyr_s_let_k", { unicode: "{U+043A}", alterations: { combining: "{U+2DE6}", modifier: "{U+1E039}", subscript: "{U+1E05A}" }, options: { noCalc: True } }, ; к
-		"cyr_c_let_l", { unicode: "{U+041B}", options: { noCalc: True } }, ; Л
-		"cyr_s_let_l", { unicode: "{U+043B}", alterations: { combining: "{U+2DE7}", modifier: "{U+1E03A}", subscript: "{U+1E05B}" }, options: { noCalc: True } }, ; л
-		"cyr_c_let_m", { unicode: "{U+041C}", options: { noCalc: True } }, ; М
-		"cyr_s_let_m", { unicode: "{U+043C}", alterations: { combining: "{U+2DE8}", modifier: "{U+1E03B}" }, options: { noCalc: True } }, ; м
-		"cyr_c_let_n", { unicode: "{U+041D}", options: { noCalc: True } }, ; Н
-		"cyr_s_let_n", { unicode: "{U+043D}", alterations: { combining: "{U+2DE9}", modifier: "{U+1D78}" }, options: { noCalc: True } }, ; н
-		"cyr_c_let_o", { unicode: "{U+041E}", options: { noCalc: True } }, ; О
-		"cyr_s_let_o", { unicode: "{U+043E}", alterations: { combining: "{U+2DEA}", modifier: "{U+1E03C}", subscript: "{U+1E05C}" }, options: { noCalc: True } }, ; о
-		"cyr_c_let_p", { unicode: "{U+041F}", options: { noCalc: True } }, ; П
-		"cyr_s_let_p", { unicode: "{U+043F}", alterations: { combining: "{U+2DEB}", modifier: "{U+1E03D}", subscript: "{U+1E05D}" }, options: { noCalc: True } }, ; п
-		"cyr_c_let_r", { unicode: "{U+0420}", options: { noCalc: True } }, ; Р
-		"cyr_s_let_r", { unicode: "{U+0440}", alterations: { combining: "{U+2DEC}", modifier: "{U+1E03E}" }, options: { noCalc: True } }, ; р
-		"cyr_c_let_s", { unicode: "{U+0421}", options: { noCalc: True } }, ; С
-		"cyr_s_let_s", { unicode: "{U+0441}", alterations: { combining: "{U+2DED}", modifier: "{U+1E03F}", subscript: "{U+1E05E}" }, options: { noCalc: True } }, ; с
-		"cyr_c_let_t", { unicode: "{U+0422}", options: { noCalc: True } }, ; Т
-		"cyr_s_let_t", { unicode: "{U+0442}", alterations: { combining: "{U+2DEE}", modifier: "{U+1E040}" }, options: { noCalc: True } }, ; т
-		"cyr_c_let_u", { unicode: "{U+0423}", options: { noCalc: True } }, ; У
-		"cyr_s_let_u", { unicode: "{U+0443}", alterations: { combining: "{U+A677}", modifier: "{U+1E041}", subscript: "{U+1E05F}" }, options: { noCalc: True } }, ; у
-		"cyr_c_let_f", { unicode: "{U+0424}", options: { noCalc: True } }, ; Ф
-		"cyr_s_let_f", { unicode: "{U+0444}", alterations: { combining: "{U+A69E}", modifier: "{U+1E042}", subscript: "{U+1E060}" }, options: { noCalc: True } }, ; ф
-		"cyr_c_let_h", { unicode: "{U+0425}", options: { noCalc: True } }, ; Х
-		"cyr_s_let_h", { unicode: "{U+0445}", alterations: { combining: "{U+2DEF}", modifier: "{U+1E043}", subscript: "{U+1E061}" }, options: { noCalc: True } }, ; х
-		"cyr_c_let_ts", { unicode: "{U+0426}", options: { noCalc: True } }, ; Ц
-		"cyr_s_let_ts", { unicode: "{U+0446}", alterations: { combining: "{U+2DF0}", modifier: "{U+1E044}", subscript: "{U+1E062}" }, options: { noCalc: True } }, ; ц
-		"cyr_c_let_ch", { unicode: "{U+0427}", options: { noCalc: True } }, ; Ч
-		"cyr_s_let_ch", { unicode: "{U+0447}", alterations: { combining: "{U+2DF1}", modifier: "{U+1E045}", subscript: "{U+1E063}" }, options: { noCalc: True } }, ; ч
-		"cyr_c_let_sh", { unicode: "{U+0428}", options: { noCalc: True } }, ; Ш
-		"cyr_s_let_sh", { unicode: "{U+0448}", alterations: { combining: "{U+2DF2}", modifier: "{U+1E046}", subscript: "{U+1E064}" }, options: { noCalc: True } }, ; ш
-		"cyr_c_let_shch", { unicode: "{U+0429}", options: { noCalc: True } }, ; Щ
-		"cyr_s_let_shch", { unicode: "{U+0449}", alterations: { combining: "{U+2DF3}" }, options: { noCalc: True } }, ; щ
-		"cyr_c_let_yeru", { unicode: "{U+042A}", options: { noCalc: True } }, ; Ъ
-		"cyr_s_let_yeru", { unicode: "{U+044A}", alterations: { combining: "{U+A678}", modifier: "{U+A69C}", subscript: "{U+1E065}" }, options: { noCalc: True } }, ; ъ
-		"cyr_c_let_yery", { unicode: "{U+042B}", options: { noCalc: True } }, ; Ы
-		"cyr_s_let_yery", { unicode: "{U+044B}", alterations: { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }, options: { noCalc: True } }, ; ы
-		"cyr_c_let_yeri", { unicode: "{U+042C}", options: { noCalc: True } }, ; Ь
-		"cyr_s_let_yeri", { unicode: "{U+044C}", alterations: { combining: "{U+A67A}", modifier: "{U+A69D}" }, options: { noCalc: True } }, ; ь
-		"cyr_c_let_e", { unicode: "{U+042D}", options: { noCalc: True } }, ; Э
-		"cyr_s_let_e", { unicode: "{U+044D}", alterations: { modifier: "{U+1E048}" }, options: { noCalc: True } }, ; э
-		"cyr_c_let_yu", { unicode: "{U+042E}", options: { noCalc: True } }, ; Ю
-		"cyr_s_let_yu", { unicode: "{U+044E}", alterations: { combining: "{U+2DFB}", modifier: "{U+1E049}" }, options: { noCalc: True } }, ; ю
-		"cyr_c_let_ya", { unicode: "{U+042F}", options: { noCalc: True } }, ; Я
-		"cyr_s_let_ya", { unicode: "{U+044F}", options: { noCalc: True } }, ; я
+		"cyr_c_let_a", { unicode: "{U+0410}", options: { noCalc: True }, symbol: { letter: "A" } },
+		"cyr_s_let_a", { unicode: "{U+0430}", alterations: { combining: "{U+2DF6}", modifier: "{U+1E030}", subscript: "{U+1E051}" }, options: { noCalc: True }, symbol: { letter: "а" } }, ; а
+		"cyr_c_let_b", { unicode: "{U+0411}", options: { noCalc: True }, symbol: { letter: "Б" } }, ; Б
+		"cyr_s_let_b", { unicode: "{U+0431}", alterations: { combining: "{U+2DE0}", modifier: "{U+1E031}", subscript: "{U+1E052}" }, options: { noCalc: True }, symbol: { letter: "б" } }, ; б
+		"cyr_c_let_v", { unicode: "{U+0412}", options: { noCalc: True }, symbol: { letter: "В" } }, ; В
+		"cyr_s_let_v", { unicode: "{U+0432}", alterations: { combining: "{U+2DE1}", modifier: "{U+1E032}", subscript: "{U+1E053}" }, options: { noCalc: True }, symbol: { letter: "в" } }, ; в
+		"cyr_c_let_g", { unicode: "{U+0413}", options: { noCalc: True }, symbol: { letter: "Г" } }, ; Г
+		"cyr_s_let_g", { unicode: "{U+0433}", alterations: { combining: "{U+2DE2}", modifier: "{U+1E033}", subscript: "{U+1E054}" }, options: { noCalc: True }, symbol: { letter: "г" } }, ; г
+		"cyr_c_let_d", { unicode: "{U+0414}", options: { noCalc: True }, symbol: { letter: "Д" } }, ; Д
+		"cyr_s_let_d", { unicode: "{U+0434}", alterations: { combining: "{U+2DE3}", modifier: "{U+1E034}", subscript: "{U+1E055}" }, options: { noCalc: True }, symbol: { letter: "д" } }, ; д
+		"cyr_c_let_ie", { unicode: "{U+0415}", options: { noCalc: True }, symbol: { letter: "Е" } }, ; Е
+		"cyr_s_let_ie", { unicode: "{U+0435}", alterations: { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }, options: { noCalc: True }, symbol: { letter: "е" } }, ; е
+		"cyr_c_let_yo", { unicode: "{U+0401}", options: { noCalc: True }, symbol: { letter: "Ё" } }, ; Ё
+		"cyr_s_let_yo", { unicode: "{U+0451}", options: { noCalc: True }, symbol: { letter: "ё" } }, ; ё
+		"cyr_c_let_zh", { unicode: "{U+0416}", options: { noCalc: True }, symbol: { letter: "Ж" } }, ; Ж
+		"cyr_s_let_zh", { unicode: "{U+0436}", alterations: { combining: "{U+2DE4}", modifier: "{U+1E036}", subscript: "{U+1E057}" }, options: { noCalc: True }, symbol: { letter: "ж" } }, ; ж
+		"cyr_c_let_z", { unicode: "{U+0417}", options: { noCalc: True }, symbol: { letter: "З" } }, ; З
+		"cyr_s_let_z", { unicode: "{U+0437}", alterations: { combining: "{U+2DE5}", modifier: "{U+1E037}", subscript: "{U+1E058}" }, options: { noCalc: True }, symbol: { letter: "з" } }, ; з
+		"cyr_c_let_i", { unicode: "{U+0418}", options: { noCalc: True }, symbol: { letter: "И" } }, ; И
+		"cyr_s_let_i", { unicode: "{U+0438}", alterations: { combining: "{U+A675}", modifier: "{U+1E038}", subscript: "{U+1E059}" }, options: { noCalc: True }, symbol: { letter: "и" } }, ; и
+		"cyr_c_let_iy", { unicode: "{U+0419}", options: { noCalc: True }, symbol: { letter: "Й" } }, ; Й
+		"cyr_s_let_iy", { unicode: "{U+0439}", options: { noCalc: True }, symbol: { letter: "й" } }, ; й
+		"cyr_c_let_k", { unicode: "{U+041A}", options: { noCalc: True }, symbol: { letter: "К" } }, ; К
+		"cyr_s_let_k", { unicode: "{U+043A}", alterations: { combining: "{U+2DE6}", modifier: "{U+1E039}", subscript: "{U+1E05A}" }, options: { noCalc: True }, symbol: { letter: "к" } }, ; к
+		"cyr_c_let_l", { unicode: "{U+041B}", options: { noCalc: True }, symbol: { letter: "Л" } }, ; Л
+		"cyr_s_let_l", { unicode: "{U+043B}", alterations: { combining: "{U+2DE7}", modifier: "{U+1E03A}", subscript: "{U+1E05B}" }, options: { noCalc: True }, symbol: { letter: "л" } }, ; л
+		"cyr_c_let_m", { unicode: "{U+041C}", options: { noCalc: True }, symbol: { letter: "М" } }, ; М
+		"cyr_s_let_m", { unicode: "{U+043C}", alterations: { combining: "{U+2DE8}", modifier: "{U+1E03B}" }, options: { noCalc: True }, symbol: { letter: "м" } }, ; м
+		"cyr_c_let_n", { unicode: "{U+041D}", options: { noCalc: True }, symbol: { letter: "Н" } }, ; Н
+		"cyr_s_let_n", { unicode: "{U+043D}", alterations: { combining: "{U+2DE9}", modifier: "{U+1D78}" }, options: { noCalc: True }, symbol: { letter: "н" } }, ; н
+		"cyr_c_let_o", { unicode: "{U+041E}", options: { noCalc: True }, symbol: { letter: "О" } }, ; О
+		"cyr_s_let_o", { unicode: "{U+043E}", alterations: { combining: "{U+2DEA}", modifier: "{U+1E03C}", subscript: "{U+1E05C}" }, options: { noCalc: True }, symbol: { letter: "о" } }, ; о
+		"cyr_c_let_p", { unicode: "{U+041F}", options: { noCalc: True }, symbol: { letter: "П" } }, ; П
+		"cyr_s_let_p", { unicode: "{U+043F}", alterations: { combining: "{U+2DEB}", modifier: "{U+1E03D}", subscript: "{U+1E05D}" }, options: { noCalc: True }, symbol: { letter: "п" } }, ; п
+		"cyr_c_let_r", { unicode: "{U+0420}", options: { noCalc: True }, symbol: { letter: "Р" } }, ; Р
+		"cyr_s_let_r", { unicode: "{U+0440}", alterations: { combining: "{U+2DEC}", modifier: "{U+1E03E}" }, options: { noCalc: True }, symbol: { letter: "р" } }, ; р
+		"cyr_c_let_s", { unicode: "{U+0421}", options: { noCalc: True }, symbol: { letter: "С" } }, ; С
+		"cyr_s_let_s", { unicode: "{U+0441}", alterations: { combining: "{U+2DED}", modifier: "{U+1E03F}", subscript: "{U+1E05E}" }, options: { noCalc: True }, symbol: { letter: "с" } }, ; с
+		"cyr_c_let_t", { unicode: "{U+0422}", options: { noCalc: True }, symbol: { letter: "Т" } }, ; Т
+		"cyr_s_let_t", { unicode: "{U+0442}", alterations: { combining: "{U+2DEE}", modifier: "{U+1E040}" }, options: { noCalc: True }, symbol: { letter: "т" } }, ; т
+		"cyr_c_let_u", { unicode: "{U+0423}", options: { noCalc: True }, symbol: { letter: "У" } }, ; У
+		"cyr_s_let_u", { unicode: "{U+0443}", alterations: { combining: "{U+A677}", modifier: "{U+1E041}", subscript: "{U+1E05F}" }, options: { noCalc: True }, symbol: { letter: "у" } }, ; у
+		"cyr_c_let_f", { unicode: "{U+0424}", options: { noCalc: True }, symbol: { letter: "Ф" } }, ; Ф
+		"cyr_s_let_f", { unicode: "{U+0444}", alterations: { combining: "{U+A69E}", modifier: "{U+1E042}", subscript: "{U+1E060}" }, options: { noCalc: True }, symbol: { letter: "ф" } }, ; ф
+		"cyr_c_let_h", { unicode: "{U+0425}", options: { noCalc: True }, symbol: { letter: "Х" } }, ; Х
+		"cyr_s_let_h", { unicode: "{U+0445}", alterations: { combining: "{U+2DEF}", modifier: "{U+1E043}", subscript: "{U+1E061}" }, options: { noCalc: True }, symbol: { letter: "х" } }, ; х
+		"cyr_c_let_ts", { unicode: "{U+0426}", options: { noCalc: True }, symbol: { letter: "Ц" } }, ; Ц
+		"cyr_s_let_ts", { unicode: "{U+0446}", alterations: { combining: "{U+2DF0}", modifier: "{U+1E044}", subscript: "{U+1E062}" }, options: { noCalc: True }, symbol: { letter: "ц" } }, ; ц
+		"cyr_c_let_ch", { unicode: "{U+0427}", options: { noCalc: True }, symbol: { letter: "Ч" } }, ; Ч
+		"cyr_s_let_ch", { unicode: "{U+0447}", alterations: { combining: "{U+2DF1}", modifier: "{U+1E045}", subscript: "{U+1E063}" }, options: { noCalc: True }, symbol: { letter: "ч" } }, ; ч
+		"cyr_c_let_sh", { unicode: "{U+0428}", options: { noCalc: True }, symbol: { letter: "Ш" } }, ; Ш
+		"cyr_s_let_sh", { unicode: "{U+0448}", alterations: { combining: "{U+2DF2}", modifier: "{U+1E046}", subscript: "{U+1E064}" }, options: { noCalc: True }, symbol: { letter: "ш" } }, ; ш
+		"cyr_c_let_shch", { unicode: "{U+0429}", options: { noCalc: True }, symbol: { letter: "Щ" } }, ; Щ
+		"cyr_s_let_shch", { unicode: "{U+0449}", alterations: { combining: "{U+2DF3}" }, options: { noCalc: True }, symbol: { letter: "щ" } }, ; щ
+		"cyr_c_let_yeru", { unicode: "{U+042A}", options: { noCalc: True }, symbol: { letter: "Ъ" } }, ; Ъ
+		"cyr_s_let_yeru", { unicode: "{U+044A}", alterations: { combining: "{U+A678}", modifier: "{U+A69C}", subscript: "{U+1E065}" }, options: { noCalc: True }, symbol: { letter: "ъ" } }, ; ъ
+		"cyr_c_let_yery", { unicode: "{U+042B}", options: { noCalc: True }, symbol: { letter: "Ы" } }, ; Ы
+		"cyr_s_let_yery", { unicode: "{U+044B}", alterations: { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }, options: { noCalc: True }, symbol: { letter: "ы" } }, ; ы
+		"cyr_c_let_yeri", { unicode: "{U+042C}", options: { noCalc: True }, symbol: { letter: "Ь" } }, ; Ь
+		"cyr_s_let_yeri", { unicode: "{U+044C}", alterations: { combining: "{U+A67A}", modifier: "{U+A69D}" }, options: { noCalc: True }, symbol: { letter: "ь" } }, ; ь
+		"cyr_c_let_e", { unicode: "{U+042D}", options: { noCalc: True }, symbol: { letter: "Э" } }, ; Э
+		"cyr_s_let_e", { unicode: "{U+044D}", alterations: { modifier: "{U+1E048}" }, options: { noCalc: True }, symbol: { letter: "э" } }, ; э
+		"cyr_c_let_yu", { unicode: "{U+042E}", options: { noCalc: True }, symbol: { letter: "Ю" } }, ; Ю
+		"cyr_s_let_yu", { unicode: "{U+044E}", alterations: { combining: "{U+2DFB}", modifier: "{U+1E049}" }, options: { noCalc: True }, symbol: { letter: "ю" } }, ; ю
+		"cyr_c_let_ya", { unicode: "{U+042F}", options: { noCalc: True }, symbol: { letter: "Я" } }, ; Я
+		"cyr_s_let_ya", { unicode: "{U+044F}", options: { noCalc: True }, symbol: { letter: "я" } }, ; я
 		;
 		;
 		; * Misc
@@ -2445,7 +2445,6 @@ RegLib(this) {
 		;
 		"lat_c_lig_aa", {
 			unicode: "{U+A732}",
-			tags: ["прописная лигатура AA", "capital ligature AA"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2453,7 +2452,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_aa", {
 			unicode: "{U+A733}",
-			tags: ["строчная лигатура aa", "small ligature aa"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2461,7 +2459,6 @@ RegLib(this) {
 		},
 		"lat_c_lig_ae", {
 			unicode: "{U+00C6}",
-			tags: ["прописная лигатура AE", "capital ligature AE"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { modifier: "{U+1D2D}", smallCapital: "{U+1D01}" },
@@ -2470,7 +2467,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_ae", {
 			unicode: "{U+00E6}",
-			tags: ["строчная лигатура ae", "small ligature ae"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { modifier: "{U+1DD4}", modifier: "{U+10783}" },
@@ -2479,7 +2475,6 @@ RegLib(this) {
 		},
 		"lat_c_lig_ae__acute", {
 			unicode: "{U+01FC}",
-			tags: ["прописная лигатура AE с акутом", "capital ligature AE with acute"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${acute}", "${lat_c_lig_ae}${acute}")],
@@ -2487,7 +2482,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_ae__acute", {
 			unicode: "{U+01FD}",
-			tags: ["строчная лигатура ae с акутом", "small ligature ae with acute"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${acute}", "${lat_s_lig_ae}${acute}")],
@@ -2495,7 +2489,6 @@ RegLib(this) {
 		},
 		"lat_c_lig_ae__macron", {
 			unicode: "{U+01E2}",
-			tags: ["прописная лигатура AE с макроном", "capital ligature AE with macron"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${macron}", "${lat_c_lig_ae}${macron}")],
@@ -2503,7 +2496,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_ae__macron", {
 			unicode: "{U+01E3}",
-			tags: ["строчная лигатура ae с макроном", "small ligature ae with macron"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${macron}", "${lat_s_lig_ae}${macron}")],
@@ -2511,7 +2503,6 @@ RegLib(this) {
 		},
 		"lat_c_lig_ao", {
 			unicode: "{U+A734}",
-			tags: ["прописная лигатура AO", "capital ligature AO"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2519,7 +2510,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_ao", {
 			unicode: "{U+A735}",
-			tags: ["строчная лигатура ao", "small ligature ao"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { combining: "{U+1DD5}" },
@@ -2528,7 +2518,6 @@ RegLib(this) {
 		},
 		"lat_c_lig_au", {
 			unicode: "{U+A736}",
-			tags: ["прописная лигатура AU", "capital ligature AU"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2536,7 +2525,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_au", {
 			unicode: "{U+A737}",
-			tags: ["строчная лигатура au", "small ligature au"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2544,7 +2532,6 @@ RegLib(this) {
 		},
 		"lat_c_lig_av", {
 			unicode: "{U+A738}",
-			tags: ["прописная лигатура AV", "capital ligature AV"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2552,7 +2539,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_av", {
 			unicode: "{U+A739}",
-			tags: ["строчная лигатура av", "small ligature av"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { combining: "{U+1DD6}" },
@@ -2561,7 +2547,6 @@ RegLib(this) {
 		},
 		"lat_c_lig_av__stroke_short", {
 			unicode: "{U+A73A}",
-			tags: ["прописная лигатура AV", "capital ligature AV"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${stroke_short}", "${lat_c_lig_av}${stroke_short}")],
@@ -2569,7 +2554,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_av__stroke_short", {
 			unicode: "{U+A73B}",
-			tags: ["строчная лигатура av", "small ligature av"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			alterations: { combining: "{U+1DD6}" },
@@ -2578,7 +2562,6 @@ RegLib(this) {
 		},
 		"lat_c_lig_ay", {
 			unicode: "{U+A73C}",
-			tags: ["прописная лигатура AY", "capital ligature AY"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2586,7 +2569,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_ay", {
 			unicode: "{U+A73D}",
-			tags: ["строчная лигатура ay", "small ligature ay"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2594,7 +2576,6 @@ RegLib(this) {
 		},
 		"lat_s_lig_db", {
 			unicode: "{U+0238}",
-			tags: ["строчная лигатура db", "small ligature db"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2602,7 +2583,7 @@ RegLib(this) {
 		},
 		"lat_s_lig_et", {
 			unicode: "{U+0026}",
-			tags: ["строчная лигатура et", "small ligature et", "амперсанд", "ampersand"],
+			tags: ["амперсанд", "ampersand"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2610,11 +2591,11 @@ RegLib(this) {
 		},
 		"lat_s_lig_et_turned", {
 			unicode: "{U+214B}",
-			tags: ["лигатура перевёрнутый et", "ligature turned et", "перевёрнутый амперсанд", "turned ampersand"],
+			tags: ["перевёрнутый амперсанд", "turned ampersand"],
 			groups: ["Latin Ligatures"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}")],
-			symbol: { category: "Latin Ligature" },
+			symbol: { category: "Latin Ligature", beforeLetter: "turned" },
 		},
 		;
 		;
@@ -2623,7 +2604,6 @@ RegLib(this) {
 		;
 		"lat_c_dig_dz", {
 			unicode: "{U+01F1}",
-			tags: ["диграф DZ", "diagraph DZ"],
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2631,7 +2611,6 @@ RegLib(this) {
 		},
 		"lat_i_dig_dz", {
 			unicode: "{U+01F2}",
-			tags: ["диграф Dz", "diagraph Dz"],
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2639,7 +2618,6 @@ RegLib(this) {
 		},
 		"lat_s_dig_dz", {
 			unicode: "{U+01F3}",
-			tags: ["диграф dz", "diagraph dz"],
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
@@ -2647,7 +2625,6 @@ RegLib(this) {
 		},
 		"lat_c_dig_dz__caron", {
 			unicode: "{U+01C4}",
-			tags: ["диграф DZ с гачеком", "diagraph DZ with caron"],
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_c_dig_dz}${caron}")],
@@ -2655,7 +2632,6 @@ RegLib(this) {
 		},
 		"lat_i_dig_dz__caron", {
 			unicode: "{U+01C5}",
-			tags: ["диграф Dz с гачеком", "diagraph Dz with caron"],
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_i_dig_dz}${caron}")],
@@ -2663,7 +2639,6 @@ RegLib(this) {
 		},
 		"lat_s_dig_dz__caron", {
 			unicode: "{U+01C6}",
-			tags: ["диграф dz с гачеком", "diagraph dz with caron"],
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_s_dig_dz}${caron}")],
@@ -2671,7 +2646,6 @@ RegLib(this) {
 		},
 		"lat_s_dig_dz__curl", {
 			unicode: "{U+02A5}",
-			tags: ["диграф dz с завитком", "diagraph dz with curl"],
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${arrow_left_ushaped}", "${lat_s_dig_dz}${arrow_left_ushaped}")],

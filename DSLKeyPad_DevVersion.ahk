@@ -5386,9 +5386,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			["cyr_c_let_u_straight_stroke_short", "cyr_s_let_u_straight_stroke_short"], MapMerge(GetModifiers("<^>!>+"), KeySeqSlot["]"]),
 		])
 		SlotModdedLetters := Map(
-			"A", Map("<!", ["lat_c_let_a_acute", "lat_s_let_a_acute"],
+			"A", Map("<!", ["lat_c_let_a__acute", "lat_s_let_a__acute"],
 				"<^>!", ["lat_c_let_a_breve", "lat_s_let_a_breve"],
-				"<^>!<!", ["lat_c_let_a_circumflex", "lat_s_let_a_circumflex"],
+				"<^>!<!", ["lat_c_let_a__circumflex", "lat_s_let_a__circumflex"],
 				"<^>!<!<+", ["lat_c_let_a_ring_above", "lat_s_let_a_ring_above"],
 				"<^>!<!>+", ["lat_c_let_a_ogonek", "lat_s_let_a_ogonek"],
 				"<^>!>+", ["lat_c_let_a_macron", "lat_s_let_a_macron"],
