@@ -593,11 +593,11 @@ class ChrLib {
 		if refinedEntry.recipeAlt.Length = 0 && refinedEntry.recipe.Length > 0 {
 			refinedEntry.recipeAlt := refinedEntry.recipe.Clone()
 
-			for i, altRecipe in refinedEntry.recipeAlt {
-				for diacriticName in this.entryCategories["Diacritic Mark"] {
-					diacriticChr := this.Get(diacriticName)
+			for diacriticName in this.entryCategories["Diacritic Mark"] {
+				diacriticChr := this.Get(diacriticName)
+				for i, altRecipe in refinedEntry.recipeAlt {
 					if InStr(altRecipe, diacriticChr) {
-						refinedEntry.recipeAlt[i] := StrReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
+						refinedEntry.recipeAlt[i] := RegExReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
 					}
 				}
 			}

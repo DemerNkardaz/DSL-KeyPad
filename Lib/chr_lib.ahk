@@ -2607,7 +2607,7 @@ RegLib(this) {
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
-			symbol: { category: "Latin Digraph", letter: "DZ" },
+			symbol: { category: "Latin Digraph" },
 		},
 		"lat_i_dig_dz", {
 			unicode: "{U+01F2}",
@@ -2621,14 +2621,14 @@ RegLib(this) {
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: ["$"],
-			symbol: { category: "Latin Digraph", letter: "dz" },
+			symbol: { category: "Latin Digraph" },
 		},
 		"lat_c_dig_dz__caron", {
 			unicode: "{U+01C4}",
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_c_dig_dz}${caron}")],
-			symbol: { category: "Latin Digraph", letter: "DZ" },
+			symbol: { category: "Latin Digraph" },
 		},
 		"lat_i_dig_dz__caron", {
 			unicode: "{U+01C5}",
@@ -2642,14 +2642,14 @@ RegLib(this) {
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${caron}", "${lat_s_dig_dz}${caron}")],
-			symbol: { category: "Latin Digraph", letter: "dz" },
+			symbol: { category: "Latin Digraph" },
 		},
 		"lat_s_dig_dz__curl", {
 			unicode: "{U+02A5}",
 			groups: ["Latin Digraphs"],
 			options: { titlesAlt: True },
 			recipe: [(*) => this.MakeRecipe("$${arrow_left_ushaped}", "${lat_s_dig_dz}${arrow_left_ushaped}")],
-			symbol: { category: "Latin Digraph", letter: "dz" },
+			symbol: { category: "Latin Digraph" },
 		},
 		;
 		;
@@ -2688,14 +2688,14 @@ RegLib(this) {
 			unicode: "{U+1EA4}",
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
-			recipe: [(*) => this.MakeRecipe("$[SWAP:${circumflex};${acute}]", "${lat_c_let_a__(circumflex|acute)}$(*)")],
+			recipe: [(*) => this.MakeRecipe("$${(circumflex|acute)}$(*)", "${lat_c_let_a__(circumflex|acute)}$(*)")],
 			symbol: { category: "Latin Accented" },
 		},
 		"lat_s_let_a__circumflex__acute", {
 			unicode: "{U+1EA5}",
 			groups: ["Latin Accented"],
 			options: { titlesAlt: True },
-			recipe: [(*) => this.MakeRecipe("$[SWAP:${circumflex};${acute}]", "${lat_s_let_a__(circumflex|acute)}$(*)")],
+			recipe: [(*) => this.MakeRecipe("$${(circumflex|acute)}$(*)", "${lat_s_let_a__(circumflex|acute)}$(*)")],
 			symbol: { category: "Latin Accented" },
 		},
 		;
