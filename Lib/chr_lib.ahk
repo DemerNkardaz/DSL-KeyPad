@@ -539,9 +539,9 @@ RegLib(this) {
 		; * Default Latin
 		;
 		;
-		"lat_c_let_a", {
-			unicode: "{U+0041}",
-			alterations: {
+		"lat_[c,s]_let_a", {
+			unicode: ["{U+0041}", "{U+0061}"],
+			alterations: [{
 				modifier: "{U+1D2C}",
 				italic: "{U+1D434}",
 				italicBold: "{U+1D468}",
@@ -557,14 +557,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5D4}",
 				monospace: "{U+1D670}",
 				smallCapital: "{U+1D00}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_a", {
-			unicode: "{U+0061}",
-			alterations: {
+			}, {
 				combining: "{U+0363}",
 				modifier: "{U+1D43}",
 				subscript: "{U+2090}",
@@ -581,14 +574,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D656}",
 				sansSerifBold: "{U+1D5EE}",
 				monospace: "{U+1D68A}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_b", {
-			unicode: "{U+0042}",
-			alterations: {
+		"lat_[c,s]_let_b", {
+			unicode: ["{U+0042}", "{U+0062}"],
+			alterations: [{
 				modifier: "{U+1D2E}",
 				italic: "{U+1D435}",
 				italicBold: "{U+1D469}",
@@ -604,14 +595,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5D5}",
 				monospace: "{U+1D671}",
 				smallCapital: "{U+0299}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_b", {
-			unicode: "{U+0062}",
-			alterations: {
+			}, {
 				combining: "{U+1DE8}",
 				modifier: "{U+1D47}",
 				italic: "{U+1D44F}",
@@ -627,14 +611,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D657}",
 				sansSerifBold: "{U+1D5EF}",
 				monospace: "{U+1D68B}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_c", {
-			unicode: "{U+0043}",
-			alterations: {
+		"lat_[c,s]_let_c", {
+			unicode: ["{U+0043}", "{U+0063}"],
+			alterations: [{
 				modifier: "{U+A7F2}",
 				italic: "{U+1D436}",
 				italicBold: "{U+1D46A}",
@@ -650,14 +632,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5D6}",
 				monospace: "{U+1D672}",
 				smallCapital: "{U+1D04}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_c", {
-			unicode: "{U+0063}",
-			alterations: {
+			}, {
 				combining: "{U+0368}",
 				modifier: "{U+1D9C}",
 				italic: "{U+1D450}",
@@ -673,14 +648,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D658}",
 				sansSerifBold: "{U+1D5F0}",
 				monospace: "{U+1D68C}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_d", {
-			unicode: "{U+0044}",
-			alterations: {
+		"lat_[c,s]_let_d", {
+			unicode: ["{U+0044}", "{U+0064}"],
+			alterations: [{
 				modifier: "{U+1D30}",
 				italic: "{U+1D437}",
 				italicBold: "{U+1D46B}",
@@ -697,14 +670,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5D7}",
 				monospace: "{U+1D673}",
 				smallCapital: "{U+1D05}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_d", {
-			unicode: "{U+0064}",
-			alterations: {
+			}, {
 				combining: "{U+0369}",
 				modifier: "{U+1D48}",
 				italic: "{U+1D451}",
@@ -721,14 +687,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D659}",
 				sansSerifBold: "{U+1D5F1}",
 				monospace: "{U+1D68D}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_e", {
-			unicode: "{U+0045}",
-			alterations: {
+		"lat_[c,s]_let_e", {
+			unicode: ["{U+0045}", "{U+0065}"],
+			alterations: [{
 				modifier: "{U+1D31}",
 				italic: "{U+1D438}",
 				italicBold: "{U+1D46C}",
@@ -744,14 +708,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5D8}",
 				monospace: "{U+1D674}",
 				smallCapital: "{U+1D07}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_e", {
-			unicode: "{U+0065}",
-			alterations: {
+			}, {
 				combining: "{U+0364}",
 				modifier: "{U+1D49}",
 				subscript: "{U+2091}",
@@ -769,14 +726,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D65A}",
 				sansSerifBold: "{U+1D5F2}",
 				monospace: "{U+1D68E}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_f", {
-			unicode: "{U+0046}",
-			alterations: {
+		"lat_[c,s]_let_f", {
+			unicode: ["{U+0046}", "{U+0066}"],
+			alterations: [{
 				modifier: "{U+A7F3}",
 				italic: "{U+1D439}",
 				italicBold: "{U+1D46D}",
@@ -792,37 +747,28 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5D9}",
 				monospace: "{U+1D675}",
 				smallCapital: "{U+A730}"
-			},
-			options: {
-				noCalc: True
-			}
+			}, {
+				combining: "{U+1DEB}",
+				modifier: "{U+1DA0}",
+				italic: "{U+1D453}",
+				italicBold: "{U+1D487}",
+				bold: "{U+1D41F}",
+				fraktur: "{U+1D523}",
+				frakturBold: "{U+1D58B}",
+				script: "{U+1D4BB}",
+				scriptBold: "{U+1D4EF}",
+				doubleStruck: "{U+1D557}",
+				sansSerif: "{U+1D5BF}",
+				sansSerifItalic: "{U+1D627}",
+				sansSerifItalicBold: "{U+1D65B}",
+				sansSerifBold: "{U+1D5F3}",
+				monospace: "{U+1D68F}"
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_f", {
-			unicode: "{U+0046}",
-			alterations: {
-				modifier: "{U+A7F3}",
-				italic: "{U+1D439}",
-				italicBold: "{U+1D46D}",
-				bold: "{U+1D405}",
-				fraktur: "{U+1D509}",
-				frakturBold: "{U+1D571}",
-				script: "{U+2131}",
-				scriptBold: "{U+1D4D5}",
-				doubleStruck: "{U+1D53D}",
-				sansSerif: "{U+1D5A5}",
-				sansSerifItalic: "{U+1D60D}",
-				sansSerifItalicBold: "{U+1D641}",
-				sansSerifBold: "{U+1D5D9}",
-				monospace: "{U+1D675}",
-				smallCapital: "{U+A730}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_c_let_g", {
-			unicode: "{U+0047}",
-			alterations: {
+		"lat_[c,s]_let_g", {
+			unicode: ["{U+0047}", "{U+0067}"],
+			alterations: [{
 				combining: "{U+1DDB}",
 				modifier: "{U+1D33}",
 				italic: "{U+1D43A}",
@@ -839,14 +785,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5DA}",
 				monospace: "{U+1D676}",
 				smallCapital: "{U+0262}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_g", {
-			unicode: "{U+0067}",
-			alterations: {
+			}, {
 				combining: "{U+1DDA}",
 				modifier: "{U+1D4D}",
 				italic: "{U+1D454}",
@@ -862,14 +801,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D65C}",
 				sansSerifBold: "{U+1D5F4}",
 				monospace: "{U+1D690}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_h", {
-			unicode: "{U+0048}",
-			alterations: {
+		"lat_[c,s]_let_h", {
+			unicode: ["{U+0048}", "{U+0068}"],
+			alterations: [{
 				modifier: "{U+1D34}",
 				italic: "{U+1D43B}",
 				italicBold: "{U+1D46F}",
@@ -885,14 +822,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5DB}",
 				monospace: "{U+1D677}",
 				smallCapital: "{U+029C}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_h", {
-			unicode: "{U+0068}",
-			alterations: {
+			}, {
 				combining: "{U+036A}",
 				modifier: "{U+02B0}",
 				subscript: "{U+2095}",
@@ -909,14 +839,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D65D}",
 				sansSerifBold: "{U+1D5F5}",
 				monospace: "{U+1D691}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_i", {
-			unicode: "{U+0049}",
-			alterations: {
+		"lat_[c,s]_let_i", {
+			unicode: ["{U+0049}", "{U+0069}"],
+			alterations: [{
 				modifier: "{U+1D35}",
 				italic: "{U+1D43C}",
 				italicBold: "{U+1D470}",
@@ -932,15 +860,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5DC}",
 				monospace: "{U+1D678}",
 				smallCapital: "{U+026A}"
-			},
-			options: {
-				noCalc: True
-			},
-			recipe: [GetChar('lat_c_let_i_dot_above') "/"],
-		},
-		"lat_s_let_i", {
-			unicode: "{U+0069}",
-			alterations: {
+			}, {
 				combining: "{U+0365}",
 				subscript: "{U+1D62}",
 				italic: "{U+1D456}",
@@ -957,15 +877,13 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D65E}",
 				sansSerifBold: "{U+1D5F6}",
 				monospace: "{U+1D692}"
-			},
-			options: {
-				noCalc: True
-			},
-			recipe: [GetChar('lat_s_let_i_dotless', 'dot_above')],
+			}],
+			options: { noCalc: True },
+			recipe: [[Chr(0x0130) "/"], [Chr(0x0131) "${dot_above}"]],
 		},
-		"lat_c_let_j", {
-			unicode: "{U+004A}",
-			alterations: {
+		"lat_[c,s]_let_j", {
+			unicode: ["{U+004A}", "{U+006A}"],
+			alterations: [{
 				modifier: "{U+1D36}",
 				italic: "{U+1D43D}",
 				italicBold: "{U+1D471}",
@@ -981,14 +899,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5DD}",
 				monospace: "{U+1D679}",
 				smallCapital: "{U+1D0A}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_j", {
-			unicode: "{U+006A}",
-			alterations: {
+			}, {
 				modifier: "{U+02B2}",
 				subscript: "{U+2C7C}",
 				italic: "{U+1D457}",
@@ -1005,14 +916,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D65F}",
 				sansSerifBold: "{U+1D5F7}",
 				monospace: "{U+1D693}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_k", {
-			unicode: "{U+004B}",
-			alterations: {
+		"lat_[c,s]_let_k", {
+			unicode: ["{U+004B}", "{U+006B}"],
+			alterations: [{
 				modifier: "{U+1D37}",
 				italic: "{U+1D43E}",
 				italicBold: "{U+1D472}",
@@ -1028,14 +937,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5DE}",
 				monospace: "{U+1D67A}",
 				smallCapital: "{U+1D0B}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_k", {
-			unicode: "{U+006B}",
-			alterations: {
+			}, {
 				combining: "{U+1DDC}",
 				modifier: "{U+1D4F}",
 				subscript: "{U+2096}",
@@ -1052,14 +954,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D660}",
 				sansSerifBold: "{U+1D5F8}",
 				monospace: "{U+1D694}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_l", {
-			unicode: "{U+004C}",
-			alterations: {
+		"lat_[c,s]_let_l", {
+			unicode: ["{U+004C}", "{U+006C}"],
+			alterations: [{
 				combining: "{U+1DDE}",
 				modifier: "{U+1D38}",
 				italic: "{U+1D43F}",
@@ -1076,14 +976,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5DF}",
 				monospace: "{U+1D67B}",
 				smallCapital: "{U+029F}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_l", {
-			unicode: "{U+006C}",
-			alterations: {
+			}, {
 				combining: "{U+1DDD}",
 				modifier: "{U+02E1}",
 				subscript: "{U+2097}",
@@ -1100,14 +993,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D661}",
 				sansSerifBold: "{U+1D5F9}",
 				monospace: "{U+1D695}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_m", {
-			unicode: "{U+004D}",
-			alterations: {
+		"lat_[c,s]_let_m", {
+			unicode: ["{U+004D}", "{U+006D}"],
+			alterations: [{
 				combining: "{U+1DDF}",
 				modifier: "{U+1D39}",
 				italic: "{U+1D440}",
@@ -1124,14 +1015,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E0}",
 				monospace: "{U+1D67C}",
 				smallCapital: "{U+1D0D}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_m", {
-			unicode: "{U+006D}",
-			alterations: {
+			}, {
 				combining: "{U+036B}",
 				modifier: "{U+1D50}",
 				subscript: "{U+2098}",
@@ -1148,14 +1032,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D662}",
 				sansSerifBold: "{U+1D5FA}",
 				monospace: "{U+1D696}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_n", {
-			unicode: "{U+004E}",
-			alterations: {
+		"lat_[c,s]_let_n", {
+			unicode: ["{U+004E}", "{U+006E}"],
+			alterations: [{
 				combining: "{U+1DE1}",
 				modifier: "{U+1D3A}",
 				italic: "{U+1D441}",
@@ -1172,14 +1054,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E1}",
 				monospace: "{U+1D67D}",
 				smallCapital: "{U+0274}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_n", {
-			unicode: "{U+006E}",
-			alterations: {
+			}, {
 				combining: "{U+1DE0}",
 				subscript: "{U+2099}",
 				italic: "{U+1D45B}",
@@ -1195,14 +1070,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D663}",
 				sansSerifBold: "{U+1D5FB}",
 				monospace: "{U+1D697}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_o", {
-			unicode: "{U+004F}",
-			alterations: {
+		"lat_[c,s]_let_o", {
+			unicode: ["{U+004F}", "{U+006F}"],
+			alterations: [{
 				modifier: "{U+1D3C}",
 				italic: "{U+1D442}",
 				italicBold: "{U+1D476}",
@@ -1218,14 +1091,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E2}",
 				monospace: "{U+1D67E}",
 				smallCapital: "{U+1D0F}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_o", {
-			unicode: "{U+006F}",
-			alterations: {
+			}, {
 				combining: "{U+0366}",
 				modifier: "{U+1D52}",
 				subscript: "{U+2092}",
@@ -1242,14 +1108,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D664}",
 				sansSerifBold: "{U+1D5FC}",
 				monospace: "{U+1D698}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_p", {
-			unicode: "{U+0050}",
-			alterations: {
+		"lat_[c,s]_let_p", {
+			unicode: ["{U+0050}", "{U+0070}"],
+			alterations: [{
 				modifier: "{U+1D3E}",
 				italic: "{U+1D443}",
 				italicBold: "{U+1D477}",
@@ -1265,14 +1129,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E3}",
 				monospace: "{U+1D67F}",
 				smallCapital: "{U+1D18}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_p", {
-			unicode: "{U+0070}",
-			alterations: {
+			}, {
 				combining: "{U+1DEE}",
 				modifier: "{U+1D56}",
 				subscript: "{U+209A}",
@@ -1289,14 +1146,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D665}",
 				sansSerifBold: "{U+1D5FD}",
 				monospace: "{U+1D699}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_q", {
-			unicode: "{U+0051}",
-			alterations: {
+		"lat_[c,s]_let_q", {
+			unicode: ["{U+0051}", "{U+0071}"],
+			alterations: [{
 				modifier: "{U+A7F4}",
 				italic: "{U+1D444}",
 				italicBold: "{U+1D478}",
@@ -1312,14 +1167,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E4}",
 				monospace: "{U+1D680}",
 				smallCapital: "{U+A7AF}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_q", {
-			unicode: "{U+0071}",
-			alterations: {
+			}, {
 				italic: "{U+1D45E}",
 				italicBold: "{U+1D492}",
 				bold: "{U+1D42A}",
@@ -1333,14 +1181,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D666}",
 				sansSerifBold: "{U+1D5FE}",
 				monospace: "{U+1D69A}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_r", {
-			unicode: "{U+0052}",
-			alterations: {
+		"lat_[c,s]_let_r", {
+			unicode: ["{U+0052}", "{U+0072}"],
+			alterations: [{
 				combining: "{U+1DE2}",
 				modifier: "{U+1D3F}",
 				italic: "{U+1D445}",
@@ -1357,14 +1203,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E5}",
 				monospace: "{U+1D681}",
 				smallCapital: "{U+0280}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_r", {
-			unicode: "{U+0072}",
-			alterations: {
+			}, {
 				combining: "{U+036C}",
 				modifier: "{U+02B3}",
 				subscript: "{U+1D63}",
@@ -1381,14 +1220,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D667}",
 				sansSerifBold: "{U+1D5FF}",
 				monospace: "{U+1D69B}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_s", {
-			unicode: "{U+0053}",
-			alterations: {
+		"lat_[c,s]_let_s", {
+			unicode: ["{U+0053}", "{U+0073}"],
+			alterations: [{
 				italic: "{U+1D446}",
 				italicBold: "{U+1D47A}",
 				bold: "{U+1D412}",
@@ -1403,14 +1240,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E6}",
 				monospace: "{U+1D682}",
 				smallCapital: "{U+A731}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_s", {
-			unicode: "{U+0073}",
-			alterations: {
+			}, {
 				combining: "{U+1DE4}",
 				modifier: "{U+02E2}",
 				subscript: "{U+209B}",
@@ -1427,14 +1257,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D668}",
 				sansSerifBold: "{U+1D600}",
 				monospace: "{U+1D69C}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_t", {
-			unicode: "{U+0054}",
-			alterations: {
+		"lat_[c,s]_let_t", {
+			unicode: ["{U+0054}", "{U+0074}"],
+			alterations: [{
 				modifier: "{U+1D40}",
 				italic: "{U+1D447}",
 				italicBold: "{U+1D47B}",
@@ -1450,14 +1278,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E7}",
 				monospace: "{U+1D683}",
 				smallCapital: "{U+1D1B}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_t", {
-			unicode: "{U+0074}",
-			alterations: {
+			}, {
 				combining: "{U+036D}",
 				modifier: "{U+1D57}",
 				subscript: "{U+209C}",
@@ -1474,14 +1295,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D669}",
 				sansSerifBold: "{U+1D601}",
 				monospace: "{U+1D69D}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_u", {
-			unicode: "{U+0055}",
-			alterations: {
+		"lat_[c,s]_let_u", {
+			unicode: ["{U+0055}", "{U+0075}"],
+			alterations: [{
 				modifier: "{U+1D41}",
 				italic: "{U+1D448}",
 				italicBold: "{U+1D47C}",
@@ -1497,14 +1316,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E8}",
 				monospace: "{U+1D684}",
 				smallCapital: "{U+1D1C}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_u", {
-			unicode: "{U+0075}",
-			alterations: {
+			}, {
 				combining: "{U+0367}",
 				modifier: "{U+1D58}",
 				subscript: "{U+1D64}",
@@ -1521,14 +1333,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D66A}",
 				sansSerifBold: "{U+1D602}",
 				monospace: "{U+1D69E}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_v", {
-			unicode: "{U+0056}",
-			alterations: {
+		"lat_[c,s]_let_v", {
+			unicode: ["{U+0056}", "{U+0076}"],
+			alterations: [{
 				modifier: "{U+2C7D}",
 				italic: "{U+1D449}",
 				italicBold: "{U+1D47D}",
@@ -1544,14 +1354,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5E9}",
 				monospace: "{U+1D685}",
 				smallCapital: "{U+1D20}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_v", {
-			unicode: "{U+0076}",
-			alterations: {
+			}, {
 				combining: "{U+036E}",
 				modifier: "{U+1D5B}",
 				subscript: "{U+1D65}",
@@ -1568,14 +1371,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D66B}",
 				sansSerifBold: "{U+1D603}",
 				monospace: "{U+1D69F}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_w", {
-			unicode: "{U+0057}",
-			alterations: {
+		"lat_[c,s]_let_w", {
+			unicode: ["{U+0057}", "{U+0077}"],
+			alterations: [{
 				modifier: "{U+1D42}",
 				italic: "{U+1D44A}",
 				italicBold: "{U+1D47E}",
@@ -1591,14 +1392,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5EA}",
 				monospace: "{U+1D686}",
 				smallCapital: "{U+1D21}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_w", {
-			unicode: "{U+0077}",
-			alterations: {
+			}, {
 				combining: "{U+1DF1}",
 				modifier: "{U+02B7}",
 				italic: "{U+1D464}",
@@ -1614,14 +1408,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D66C}",
 				sansSerifBold: "{U+1D604}",
 				monospace: "{U+1D6A0}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_x", {
-			unicode: "{U+0058}",
-			alterations: {
+		"lat_[c,s]_let_x", {
+			unicode: ["{U+0058}", "{U+0078}"],
+			alterations: [{
 				italic: "{U+1D44B}",
 				italicBold: "{U+1D47F}",
 				bold: "{U+1D417}",
@@ -1636,14 +1428,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5EB}",
 				monospace: "{U+1D687}",
 				smallCapital: "{U+0078}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_x", {
-			unicode: "{U+0078}",
-			alterations: {
+			}, {
 				combining: "{U+036F}",
 				modifier: "{U+02E3}",
 				subscript: "{U+2093}",
@@ -1660,14 +1445,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D66D}",
 				sansSerifBold: "{U+1D605}",
 				monospace: "{U+1D6A1}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_y", {
-			unicode: "{U+0059}",
-			alterations: {
+		"lat_[c,s]_let_y", {
+			unicode: ["{U+0059}", "{U+0079}"],
+			alterations: [{
 				italic: "{U+1D44C}",
 				italicBold: "{U+1D480}",
 				bold: "{U+1D418}",
@@ -1682,14 +1465,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5EC}",
 				monospace: "{U+1D688}",
 				smallCapital: "{U+028F}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_y", {
-			unicode: "{U+0079}",
-			alterations: {
+			}, {
 				modifier: "{U+02B8}",
 				italic: "{U+1D466}",
 				italicBold: "{U+1D49A}",
@@ -1704,14 +1480,12 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D66E}",
 				sansSerifBold: "{U+1D606}",
 				monospace: "{U+1D6A2}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
-		"lat_c_let_z", {
-			unicode: "{U+005A}",
-			alterations: {
+		"lat_[c,s]_let_z", {
+			unicode: ["{U+005A}", "{U+007A}"],
+			alterations: [{
 				italic: "{U+1D44D}",
 				italicBold: "{U+1D481}",
 				bold: "{U+1D419}",
@@ -1726,14 +1500,7 @@ RegLib(this) {
 				sansSerifBold: "{U+1D5ED}",
 				monospace: "{U+1D689}",
 				smallCapital: "{U+1D22}"
-			},
-			options: {
-				noCalc: True
-			}
-		},
-		"lat_s_let_z", {
-			unicode: "{U+007A}",
-			alterations: {
+			}, {
 				combining: "{U+1DE6}",
 				modifier: "{U+1DBB}",
 				italic: "{U+1D467}",
@@ -1749,82 +1516,210 @@ RegLib(this) {
 				sansSerifItalicBold: "{U+1D66F}",
 				sansSerifBold: "{U+1D607}",
 				monospace: "{U+1D6A3}"
-			},
-			options: {
-				noCalc: True
-			}
+			}],
+			options: { noCalc: True }
 		},
 		;
 		;
 		; * Default Cyrillic
 		;
 		;
-		"cyr_c_let_a", { unicode: "{U+0410}", options: { noCalc: True }, symbol: { letter: "A" } },
-		"cyr_s_let_a", { unicode: "{U+0430}", alterations: { combining: "{U+2DF6}", modifier: "{U+1E030}", subscript: "{U+1E051}" }, options: { noCalc: True }, symbol: { letter: "а" } }, ; а
-		"cyr_c_let_b", { unicode: "{U+0411}", options: { noCalc: True }, symbol: { letter: "Б" } }, ; Б
-		"cyr_s_let_b", { unicode: "{U+0431}", alterations: { combining: "{U+2DE0}", modifier: "{U+1E031}", subscript: "{U+1E052}" }, options: { noCalc: True }, symbol: { letter: "б" } }, ; б
-		"cyr_c_let_v", { unicode: "{U+0412}", options: { noCalc: True }, symbol: { letter: "В" } }, ; В
-		"cyr_s_let_v", { unicode: "{U+0432}", alterations: { combining: "{U+2DE1}", modifier: "{U+1E032}", subscript: "{U+1E053}" }, options: { noCalc: True }, symbol: { letter: "в" } }, ; в
-		"cyr_c_let_g", { unicode: "{U+0413}", options: { noCalc: True }, symbol: { letter: "Г" } }, ; Г
-		"cyr_s_let_g", { unicode: "{U+0433}", alterations: { combining: "{U+2DE2}", modifier: "{U+1E033}", subscript: "{U+1E054}" }, options: { noCalc: True }, symbol: { letter: "г" } }, ; г
-		"cyr_c_let_d", { unicode: "{U+0414}", options: { noCalc: True }, symbol: { letter: "Д" } }, ; Д
-		"cyr_s_let_d", { unicode: "{U+0434}", alterations: { combining: "{U+2DE3}", modifier: "{U+1E034}", subscript: "{U+1E055}" }, options: { noCalc: True }, symbol: { letter: "д" } }, ; д
-		"cyr_c_let_ie", { unicode: "{U+0415}", options: { noCalc: True }, symbol: { letter: "Е" } }, ; Е
-		"cyr_s_let_ie", { unicode: "{U+0435}", alterations: { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }, options: { noCalc: True }, symbol: { letter: "е" } }, ; е
-		"cyr_c_let_yo", { unicode: "{U+0401}", options: { noCalc: True }, symbol: { letter: "Ё" } }, ; Ё
-		"cyr_s_let_yo", { unicode: "{U+0451}", options: { noCalc: True }, symbol: { letter: "ё" } }, ; ё
-		"cyr_c_let_zh", { unicode: "{U+0416}", options: { noCalc: True }, symbol: { letter: "Ж" } }, ; Ж
-		"cyr_s_let_zh", { unicode: "{U+0436}", alterations: { combining: "{U+2DE4}", modifier: "{U+1E036}", subscript: "{U+1E057}" }, options: { noCalc: True }, symbol: { letter: "ж" } }, ; ж
-		"cyr_c_let_z", { unicode: "{U+0417}", options: { noCalc: True }, symbol: { letter: "З" } }, ; З
-		"cyr_s_let_z", { unicode: "{U+0437}", alterations: { combining: "{U+2DE5}", modifier: "{U+1E037}", subscript: "{U+1E058}" }, options: { noCalc: True }, symbol: { letter: "з" } }, ; з
-		"cyr_c_let_i", { unicode: "{U+0418}", options: { noCalc: True }, symbol: { letter: "И" } }, ; И
-		"cyr_s_let_i", { unicode: "{U+0438}", alterations: { combining: "{U+A675}", modifier: "{U+1E038}", subscript: "{U+1E059}" }, options: { noCalc: True }, symbol: { letter: "и" } }, ; и
-		"cyr_c_let_iy", { unicode: "{U+0419}", options: { noCalc: True }, symbol: { letter: "Й" } }, ; Й
-		"cyr_s_let_iy", { unicode: "{U+0439}", options: { noCalc: True }, symbol: { letter: "й" } }, ; й
-		"cyr_c_let_k", { unicode: "{U+041A}", options: { noCalc: True }, symbol: { letter: "К" } }, ; К
-		"cyr_s_let_k", { unicode: "{U+043A}", alterations: { combining: "{U+2DE6}", modifier: "{U+1E039}", subscript: "{U+1E05A}" }, options: { noCalc: True }, symbol: { letter: "к" } }, ; к
-		"cyr_c_let_l", { unicode: "{U+041B}", options: { noCalc: True }, symbol: { letter: "Л" } }, ; Л
-		"cyr_s_let_l", { unicode: "{U+043B}", alterations: { combining: "{U+2DE7}", modifier: "{U+1E03A}", subscript: "{U+1E05B}" }, options: { noCalc: True }, symbol: { letter: "л" } }, ; л
-		"cyr_c_let_m", { unicode: "{U+041C}", options: { noCalc: True }, symbol: { letter: "М" } }, ; М
-		"cyr_s_let_m", { unicode: "{U+043C}", alterations: { combining: "{U+2DE8}", modifier: "{U+1E03B}" }, options: { noCalc: True }, symbol: { letter: "м" } }, ; м
-		"cyr_c_let_n", { unicode: "{U+041D}", options: { noCalc: True }, symbol: { letter: "Н" } }, ; Н
-		"cyr_s_let_n", { unicode: "{U+043D}", alterations: { combining: "{U+2DE9}", modifier: "{U+1D78}" }, options: { noCalc: True }, symbol: { letter: "н" } }, ; н
-		"cyr_c_let_o", { unicode: "{U+041E}", options: { noCalc: True }, symbol: { letter: "О" } }, ; О
-		"cyr_s_let_o", { unicode: "{U+043E}", alterations: { combining: "{U+2DEA}", modifier: "{U+1E03C}", subscript: "{U+1E05C}" }, options: { noCalc: True }, symbol: { letter: "о" } }, ; о
-		"cyr_c_let_p", { unicode: "{U+041F}", options: { noCalc: True }, symbol: { letter: "П" } }, ; П
-		"cyr_s_let_p", { unicode: "{U+043F}", alterations: { combining: "{U+2DEB}", modifier: "{U+1E03D}", subscript: "{U+1E05D}" }, options: { noCalc: True }, symbol: { letter: "п" } }, ; п
-		"cyr_c_let_r", { unicode: "{U+0420}", options: { noCalc: True }, symbol: { letter: "Р" } }, ; Р
-		"cyr_s_let_r", { unicode: "{U+0440}", alterations: { combining: "{U+2DEC}", modifier: "{U+1E03E}" }, options: { noCalc: True }, symbol: { letter: "р" } }, ; р
-		"cyr_c_let_s", { unicode: "{U+0421}", options: { noCalc: True }, symbol: { letter: "С" } }, ; С
-		"cyr_s_let_s", { unicode: "{U+0441}", alterations: { combining: "{U+2DED}", modifier: "{U+1E03F}", subscript: "{U+1E05E}" }, options: { noCalc: True }, symbol: { letter: "с" } }, ; с
-		"cyr_c_let_t", { unicode: "{U+0422}", options: { noCalc: True }, symbol: { letter: "Т" } }, ; Т
-		"cyr_s_let_t", { unicode: "{U+0442}", alterations: { combining: "{U+2DEE}", modifier: "{U+1E040}" }, options: { noCalc: True }, symbol: { letter: "т" } }, ; т
-		"cyr_c_let_u", { unicode: "{U+0423}", options: { noCalc: True }, symbol: { letter: "У" } }, ; У
-		"cyr_s_let_u", { unicode: "{U+0443}", alterations: { combining: "{U+A677}", modifier: "{U+1E041}", subscript: "{U+1E05F}" }, options: { noCalc: True }, symbol: { letter: "у" } }, ; у
-		"cyr_c_let_f", { unicode: "{U+0424}", options: { noCalc: True }, symbol: { letter: "Ф" } }, ; Ф
-		"cyr_s_let_f", { unicode: "{U+0444}", alterations: { combining: "{U+A69E}", modifier: "{U+1E042}", subscript: "{U+1E060}" }, options: { noCalc: True }, symbol: { letter: "ф" } }, ; ф
-		"cyr_c_let_h", { unicode: "{U+0425}", options: { noCalc: True }, symbol: { letter: "Х" } }, ; Х
-		"cyr_s_let_h", { unicode: "{U+0445}", alterations: { combining: "{U+2DEF}", modifier: "{U+1E043}", subscript: "{U+1E061}" }, options: { noCalc: True }, symbol: { letter: "х" } }, ; х
-		"cyr_c_let_ts", { unicode: "{U+0426}", options: { noCalc: True }, symbol: { letter: "Ц" } }, ; Ц
-		"cyr_s_let_ts", { unicode: "{U+0446}", alterations: { combining: "{U+2DF0}", modifier: "{U+1E044}", subscript: "{U+1E062}" }, options: { noCalc: True }, symbol: { letter: "ц" } }, ; ц
-		"cyr_c_let_ch", { unicode: "{U+0427}", options: { noCalc: True }, symbol: { letter: "Ч" } }, ; Ч
-		"cyr_s_let_ch", { unicode: "{U+0447}", alterations: { combining: "{U+2DF1}", modifier: "{U+1E045}", subscript: "{U+1E063}" }, options: { noCalc: True }, symbol: { letter: "ч" } }, ; ч
-		"cyr_c_let_sh", { unicode: "{U+0428}", options: { noCalc: True }, symbol: { letter: "Ш" } }, ; Ш
-		"cyr_s_let_sh", { unicode: "{U+0448}", alterations: { combining: "{U+2DF2}", modifier: "{U+1E046}", subscript: "{U+1E064}" }, options: { noCalc: True }, symbol: { letter: "ш" } }, ; ш
-		"cyr_c_let_shch", { unicode: "{U+0429}", options: { noCalc: True }, symbol: { letter: "Щ" } }, ; Щ
-		"cyr_s_let_shch", { unicode: "{U+0449}", alterations: { combining: "{U+2DF3}" }, options: { noCalc: True }, symbol: { letter: "щ" } }, ; щ
-		"cyr_c_let_yeru", { unicode: "{U+042A}", options: { noCalc: True }, symbol: { letter: "Ъ" } }, ; Ъ
-		"cyr_s_let_yeru", { unicode: "{U+044A}", alterations: { combining: "{U+A678}", modifier: "{U+A69C}", subscript: "{U+1E065}" }, options: { noCalc: True }, symbol: { letter: "ъ" } }, ; ъ
-		"cyr_c_let_yery", { unicode: "{U+042B}", options: { noCalc: True }, symbol: { letter: "Ы" } }, ; Ы
-		"cyr_s_let_yery", { unicode: "{U+044B}", alterations: { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }, options: { noCalc: True }, symbol: { letter: "ы" } }, ; ы
-		"cyr_c_let_yeri", { unicode: "{U+042C}", options: { noCalc: True }, symbol: { letter: "Ь" } }, ; Ь
-		"cyr_s_let_yeri", { unicode: "{U+044C}", alterations: { combining: "{U+A67A}", modifier: "{U+A69D}" }, options: { noCalc: True }, symbol: { letter: "ь" } }, ; ь
-		"cyr_c_let_e", { unicode: "{U+042D}", options: { noCalc: True }, symbol: { letter: "Э" } }, ; Э
-		"cyr_s_let_e", { unicode: "{U+044D}", alterations: { modifier: "{U+1E048}" }, options: { noCalc: True }, symbol: { letter: "э" } }, ; э
-		"cyr_c_let_yu", { unicode: "{U+042E}", options: { noCalc: True }, symbol: { letter: "Ю" } }, ; Ю
-		"cyr_s_let_yu", { unicode: "{U+044E}", alterations: { combining: "{U+2DFB}", modifier: "{U+1E049}" }, options: { noCalc: True }, symbol: { letter: "ю" } }, ; ю
-		"cyr_c_let_ya", { unicode: "{U+042F}", options: { noCalc: True }, symbol: { letter: "Я" } }, ; Я
-		"cyr_s_let_ya", { unicode: "{U+044F}", options: { noCalc: True }, symbol: { letter: "я" } }, ; я
+		"cyr_[c,s]_let_a", {
+			unicode: ["{U+0410}", "{U+0430}"],
+			alterations: [{}, { combining: "{U+2DF6}", modifier: "{U+1E030}", subscript: "{U+1E051}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["А", "а"] }
+		},
+		"cyr_[c,s]_let_b", {
+			unicode: ["{U+0411}", "{U+0431}"],
+			alterations: [{}, { combining: "{U+2DE0}", modifier: "{U+1E031}", subscript: "{U+1E052}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Б", "б"] }
+		},
+		"cyr_[c,s]_let_v", {
+			unicode: ["{U+0412}", "{U+0432}"],
+			alterations: [{}, { combining: "{U+2DE1}", modifier: "{U+1E032}", subscript: "{U+1E053}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["В", "в"] }
+		},
+		"cyr_[c,s]_let_g", {
+			unicode: ["{U+0413}", "{U+0433}"],
+			alterations: [{}, { combining: "{U+2DE2}", modifier: "{U+1E033}", subscript: "{U+1E054}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Г", "г"] }
+		},
+		"cyr_[c,s]_let_d", {
+			unicode: ["{U+0414}", "{U+0434}"],
+			alterations: [{}, { combining: "{U+2DE3}", modifier: "{U+1E034}", subscript: "{U+1E055}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Д", "д"] }
+		},
+		"cyr_[c,s]_let_ie", {
+			unicode: ["{U+0415}", "{U+0435}"],
+			alterations: [{}, { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Е", "е"] }
+		},
+		"cyr_[c,s]_let_yo", {
+			unicode: ["{U+0401}", "{U+0451}"],
+			alterations: [{}, {}],
+			options: { noCalc: True },
+			symbol: { letter: ["Ё", "ё"] }
+		},
+		"cyr_[c,s]_let_zh", {
+			unicode: ["{U+0416}", "{U+0436}"],
+			alterations: [{}, { combining: "{U+2DE4}", modifier: "{U+1E036}", subscript: "{U+1E057}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ж", "ж"] }
+		},
+		"cyr_[c,s]_let_z", {
+			unicode: ["{U+0417}", "{U+0437}"],
+			alterations: [{}, { combining: "{U+2DE5}", modifier: "{U+1E037}", subscript: "{U+1E058}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["З", "з"] }
+		},
+		"cyr_[c,s]_let_i", {
+			unicode: ["{U+0418}", "{U+0438}"],
+			alterations: [{}, { combining: "{U+A675}", modifier: "{U+1E038}", subscript: "{U+1E059}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["И", "и"] }
+		},
+		"cyr_[c,s]_let_iy", {
+			unicode: ["{U+0419}", "{U+0439}"],
+			options: { noCalc: True },
+			symbol: { letter: ["Й", "й"] }
+		},
+		"cyr_[c,s]_let_k", {
+			unicode: ["{U+041A}", "{U+043A}"],
+			alterations: [{}, { combining: "{U+2DE6}", modifier: "{U+1E039}", subscript: "{U+1E05A}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["К", "к"] }
+		},
+		"cyr_[c,s]_let_l", {
+			unicode: ["{U+041B}", "{U+043B}"],
+			alterations: [{}, { combining: "{U+2DE7}", modifier: "{U+1E03A}", subscript: "{U+1E05B}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Л", "л"] }
+		},
+		"cyr_[c,s]_let_m", {
+			unicode: ["{U+041C}", "{U+043C}"],
+			alterations: [{}, { combining: "{U+2DE8}", modifier: "{U+1E03B}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["М", "м"] }
+		},
+		"cyr_[c,s]_let_n", {
+			unicode: ["{U+041D}", "{U+043D}"],
+			alterations: [{}, { combining: "{U+2DE9}", modifier: "{U+1D78}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Н", "н"] }
+		},
+		"cyr_[c,s]_let_o", {
+			unicode: ["{U+041E}", "{U+043E}"],
+			alterations: [{}, { combining: "{U+2DEA}", modifier: "{U+1E03C}", subscript: "{U+1E05C}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["О", "о"] }
+		},
+		"cyr_[c,s]_let_p", {
+			unicode: ["{U+041F}", "{U+043F}"],
+			alterations: [{}, { combining: "{U+2DEB}", modifier: "{U+1E03D}", subscript: "{U+1E05D}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["П", "п"] }
+		},
+		"cyr_[c,s]_let_r", {
+			unicode: ["{U+0420}", "{U+0440}"],
+			alterations: [{}, { combining: "{U+2DEC}", modifier: "{U+1E03E}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Р", "р"] }
+		},
+		"cyr_[c,s]_let_s", {
+			unicode: ["{U+0421}", "{U+0441}"],
+			alterations: [{}, { combining: "{U+2DED}", modifier: "{U+1E03F}", subscript: "{U+1E05E}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["С", "с"] }
+		},
+		"cyr_[c,s]_let_t", {
+			unicode: ["{U+0422}", "{U+0442}"],
+			alterations: [{}, { combining: "{U+2DEE}", modifier: "{U+1E040}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Т", "т"] }
+		},
+		"cyr_[c,s]_let_u", {
+			unicode: ["{U+0423}", "{U+0443}"],
+			alterations: [{}, { combining: "{U+A677}", modifier: "{U+1E041}", subscript: "{U+1E05F}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["У", "у"] }
+		},
+		"cyr_[c,s]_let_f", {
+			unicode: ["{U+0424}", "{U+0444}"],
+			alterations: [{}, { combining: "{U+A69E}", modifier: "{U+1E042}", subscript: "{U+1E060}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ф", "ф"] }
+		},
+		"cyr_[c,s]_let_h", {
+			unicode: ["{U+0425}", "{U+0445}"],
+			alterations: [{}, { combining: "{U+2DEF}", modifier: "{U+1E043}", subscript: "{U+1E061}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Х", "х"] }
+		},
+		"cyr_[c,s]_let_ts", {
+			unicode: ["{U+0426}", "{U+0446}"],
+			alterations: [{}, { combining: "{U+2DF0}", modifier: "{U+1E044}", subscript: "{U+1E062}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ц", "ц"] }
+		},
+		"cyr_[c,s]_let_ch", {
+			unicode: ["{U+0427}", "{U+0447}"],
+			alterations: [{}, { combining: "{U+2DF1}", modifier: "{U+1E045}", subscript: "{U+1E063}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ч", "ч"] }
+		},
+		"cyr_[c,s]_let_sh", {
+			unicode: ["{U+0428}", "{U+0448}"],
+			alterations: [{}, { combining: "{U+2DF2}", modifier: "{U+1E046}", subscript: "{U+1E064}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ш", "ш"] }
+		},
+		"cyr_[c,s]_let_shch", {
+			unicode: ["{U+0429}", "{U+0449}"],
+			alterations: [{}, { combining: "{U+2DF3}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Щ", "щ"] }
+		},
+		"cyr_[c,s]_let_yeru", {
+			unicode: ["{U+042A}", "{U+044A}"],
+			alterations: [{}, { combining: "{U+A678}", modifier: "{U+A69C}", subscript: "{U+1E065}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ъ", "ъ"] }
+		},
+		"cyr_[c,s]_let_yery", {
+			unicode: ["{U+042B}", "{U+044B}"],
+			alterations: [{}, { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ы", "ы"] }
+		},
+		"cyr_[c,s]_let_yeri", {
+			unicode: ["{U+042C}", "{U+044C}"],
+			alterations: [{}, { combining: "{U+A67A}", modifier: "{U+A69D}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ь", "ь"] }
+		},
+		"cyr_[c,s]_let_e", {
+			unicode: ["{U+042D}", "{U+044D}"],
+			alterations: [{}, { modifier: "{U+1E048}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Э", "э"] }
+		},
+		"cyr_[c,s]_let_yu", {
+			unicode: ["{U+042E}", "{U+044E}"],
+			alterations: [{}, { combining: "{U+2DFB}", modifier: "{U+1E049}" }],
+			options: { noCalc: True },
+			symbol: { letter: ["Ю", "ю"] }
+		},
+		"cyr_[c,s]_let_ya", {
+			unicode: ["{U+042F}", "{U+044F}"],
+			options: { noCalc: True },
+			symbol: { letter: ["Я", "я"] }
+		},
 		;
 		;
 		; * Misc

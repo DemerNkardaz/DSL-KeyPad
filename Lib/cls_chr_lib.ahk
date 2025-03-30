@@ -856,6 +856,7 @@ ChrLib.AddEntry(
 			noCalc: True,
 			noHTML: False,
 			titlesAlt: True,
+			useLetterLocale: True,
 			layoutTitles: True,
 			groupKey: "9",
 			groupModifiers: CapsLock,
@@ -865,6 +866,8 @@ ChrLib.AddEntry(
 		},
 		symbol: {
 			letter: "Ц",
+			afterLetter: "",
+			beforeLetter : "",
 			set: Chr(0x0426),
 			alt: "[" Chr(0x0426) "]",
 			category: "Entry Concept",
