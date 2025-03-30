@@ -730,18 +730,17 @@ Class Panel {
 			characterTitle := ""
 
 			if options.HasOwnProp("type") && options.type = "Alternative Layout" &&
-				(value.options.HasOwnProp("layoutTitlesAlt") && value.options.layoutTitlesAlt) &&
 				Locale.Read(characterEntry "_layout_alt", , True, &titleText) {
 				characterTitle := titleText
 
-			} else if (value.options.HasOwnProp("titlesAlt") && value.options.titlesAlt) && Locale.Read(characterEntry "_alt", , True, &titleText) {
+			} else if Locale.Read(characterEntry "_alt", , True, &titleText) {
 				characterTitle := titleText
 
 			} else if Locale.Read(characterEntry, , True, &titleText) {
 				characterTitle := titleText
 
 			} else if value.HasOwnProp("titles") && value.titles.Has(languageCode) {
-				characterTitle := value.titles[languageCode (value.titles.Has(languageCode "_alt") && value.options.titlesAlt ? "_alt" : "")]
+				characterTitle := value.titles[languageCode (value.titles.Has(languageCode "_alt") ? "_alt" : "")]
 
 			} else {
 				characterTitle := Locale.Read(characterEntry)

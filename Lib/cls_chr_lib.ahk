@@ -855,8 +855,8 @@ ChrLib.AddEntry(
 		options: {
 			noCalc: True,
 			noHTML: False,
-			titlesAlt: True,
-			useLetterLocale: True,
+			titlesAlt: True, ; Deprecated attribute
+			useLetterLocale: True, ; Deprecated attribute
 			layoutTitles: True,
 			groupKey: "9",
 			groupModifiers: CapsLock,
