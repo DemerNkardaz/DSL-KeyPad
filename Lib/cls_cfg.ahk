@@ -136,7 +136,7 @@ Class Cfg {
 
 			repairBtn := optionsPanel.AddButton(" x" (windowWidth - 32) - 24 " y" (optionsCommonH + optionsCommonY + 24) " w32 h32", Chrs(0x1F6E0, 0xFE0F))
 			repairBtn.SetFont("s16")
-			repairBtn.OnEvent("Click", (*) => GetUpdate(0, True))
+			;repairBtn.OnEvent("Click", (*) => GetUpdate(0, True))
 
 			tabLabelChars := Locale.Read("gui_options_tab_characters")
 			tabLabels := [tabLabelChars]

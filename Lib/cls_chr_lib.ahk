@@ -534,6 +534,13 @@ class ChrLib {
 			refinedEntry.groups.Push(refinedEntry.groups[1] " " addGroupMatch[1])
 		}
 
+		if !refinedEntry.HasOwnProp("recipe") && refinedEntry.data.postfixes.Length > 0 {
+			refinedEntry.recipe := ["$"]
+			for postfix in refinedEntry.data.postfixes {
+				refinedEntry.recipe[1] .= "${" postfix "}"
+			}
+		}
+
 		return refinedEntry
 	}
 

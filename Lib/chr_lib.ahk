@@ -2549,8 +2549,17 @@ RegLib(this) {
 		"lat_[c,s]_let_a__breve__acute", {
 			unicode: ["{U+1EAE}", "{U+1EAF}"]
 		},
+		"lat_[c,s]_let_a__breve__grave", {
+			unicode: ["{U+1EB0}", "{U+1EB1}"]
+		},
 		"lat_[c,s]_let_a__breve__dot_below", {
 			unicode: ["{U+1EB6}", "{U+1EB7}"]
+		},
+		"lat_[c,s]_let_a__breve__hook_above", {
+			unicode: ["{U+1EB2}", "{U+1EB3}"]
+		},
+		"lat_[c,s]_let_a__breve__tilde", {
+			unicode: ["{U+1EB4}", "{U+1EB5}"]
 		},
 		"lat_[c,s]_let_a__circumflex__acute", {
 			unicode: ["{U+1EA4}", "{U+1EA5}"]
@@ -2711,8 +2720,11 @@ RegLib(this) {
 		"lat_[c,s]_let_d__stroke_short", {
 			unicode: ["{U+0110}", "{U+0111}"],
 		},
-		"lat_[c,s]_let_d__stroke_long", {
+		"lat_[c,s]_let_d_tau_gallicum", {
 			unicode: ["{U+A7C7}", "{U+A7C8}"],
+			groups: ["Latin Accented"],
+			options: { useLetterLocale: True },
+			recipe: ["$${arrow_down}${stroke_short}"]
 		},
 		"lat_s_let_d__tilde_overlay", {
 			unicode: "{U+1D6D}",
@@ -7149,4 +7161,4 @@ showalll2() {
 ;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_a__acute"), -5500)
 ;SetTimer((*) => ChrLib.EntryPreview("lat_i_dig_dz"), -6000)
 ;SetTimer((*) => ChrLib.EntryPreview("lat_c_let_d_eth"), -5000)
-;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_d_eth"), -5500)
+;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_b__tilde_overlay"), -5500)

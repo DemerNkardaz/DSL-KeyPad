@@ -4702,7 +4702,7 @@ HandleFastKey(combo := "", characterNames*) {
 
 		for _, character in characterNames {
 			if ChrLib.entries.HasOwnProp(character) {
-				output .= ChrLib.Get(character, True)
+				output .= ChrLib.Get(character, True, Cfg.Get("Input_Mode"))
 			} else {
 				output .= GetCharacterSequence(character)
 			}
@@ -4718,7 +4718,7 @@ HandleFastKey(combo := "", characterNames*) {
 		LongPress.lastLetterInput := output
 
 
-		inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") == "LaTeX" || Cfg.Get("Input_Mode") == "HTML") ? "Text" : "Input"
+		inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") != "Unicode") ? "Text" : "Input"
 		Send%inputType%(output)
 
 	} else {
