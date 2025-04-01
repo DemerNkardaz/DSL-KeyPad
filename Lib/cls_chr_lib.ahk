@@ -34,6 +34,13 @@ class ChrLib {
 			}
 
 			for entryName, entry in entries.OwnProps() {
+				if !entry.hasOwnProp("recipe") && entry.data.postfixes.Length > 0 {
+					entry.recipe := entry.data.postfixes.Length = 1
+						? ["$${" entry.data.postfixes[1] "}"]
+						: ["$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)", "${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_let_@__(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)"]
+				}
+
+
 				if entry.hasOwnProp("recipe") && entry.recipe.Length > 0 {
 					tempRecipe := entry.recipe.Clone()
 					for i, recipe in tempRecipe {
@@ -48,10 +55,8 @@ class ChrLib {
 			}
 
 		} else {
-			if !entry.HasOwnProp("data")
-				entry := this.SetDecomposedData(entryName, entry)
-
 			this.entries.%entryName% := {}
+			entry := this.EntryPreProcessing(entryName, entry)
 
 			for key, value in entry.OwnProps() {
 				if value is Func {
@@ -205,7 +210,9 @@ class ChrLib {
 		indentStr := Util.StrRepeat("`t", indent)
 
 		for key, value in entry.OwnProps() {
-			if IsObject(value) {
+			if Util.IsArray(value) {
+				output .= indentStr key ": " value.ToString() "`n"
+			} else if IsObject(value) {
 				output .= indentStr key ":`n" . this.FormatEntry(value, indent + 1)
 			} else {
 				output .= indentStr key ": " value "`n"
@@ -480,11 +487,40 @@ class ChrLib {
 		return ""
 	}
 
+	static EntryPreProcessing(entryName, entry) {
+		refinedEntry := entry.Clone()
+		if !refinedEntry.HasOwnProp("data")
+			refinedEntry := this.SetDecomposedData(entryName, refinedEntry)
+
+		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
+			if !refinedEntry.HasOwnProp("groups") {
+				if refinedEntry.data.script = "latin" {
+					refinedEntry.groups := refinedEntry.data.type = "ligature" ? ["Latin Ligatures"] : refinedEntry.data.type = "digraph" ? ["Latin Digraphs"] : ["Latin Accented"]
+				}
+			}
+
+			if !refinedEntry.HasOwnProp("symbol") || refinedEntry.HasOwnProp("symbol") && !refinedEntry.symbol.HasOwnProp("category") {
+				if !refinedEntry.HasOwnProp("symbol")
+					refinedEntry.symbol := {}
+				if refinedEntry.data.script = "latin" {
+					refinedEntry.symbol.category := refinedEntry.data.type = "ligature" ? ["Latin Ligature"] : refinedEntry.data.type = "digraph" ? ["Latin Digraph"] : ["Latin Accented"]
+				}
+			}
+		}
+
+		if refinedEntry.HasOwnProp("options") && refinedEntry.options.HasOwnProp("fastKey") && RegExMatch(refinedEntry.options.fastKey, "\?(.*?)$", &addGroupMatch) {
+			refinedEntry.groups.Push(refinedEntry.groups[1] " " addGroupMatch[1])
+		}
+
+		return refinedEntry
+	}
+
 	static PostProcess() {
 		for entryName, entry in this.entries.OwnProps() {
 			this.EntryPostProcessing(entryName, entry)
 		}
 	}
+
 	static EntryPostProcessing(entryName, entry) {
 		refinedEntry := entry
 		character := Util.UnicodeToChar(refinedEntry.unicode)
@@ -550,10 +586,8 @@ class ChrLib {
 		if !refinedEntry.HasOwnProp("groups")
 			refinedEntry.groups := ["Default Group"]
 
-		if !refinedEntry.HasOwnProp("recipes")
-			refinedEntry.recipes := []
 		if !refinedEntry.HasOwnProp("recipe")
-			refinedEntry.recipe := refinedEntry.recipes
+			refinedEntry.recipe := []
 		if !refinedEntry.HasOwnProp("recipeAlt")
 			refinedEntry.recipeAlt := []
 
@@ -639,6 +673,7 @@ class ChrLib {
 
 			if StrLen(refinedEntry.options.fastKey) > 0 {
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" dataLetter "]")
+				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\?(.*?)$")
 			}
 		}
 

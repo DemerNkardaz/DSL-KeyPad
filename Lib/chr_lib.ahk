@@ -273,14 +273,14 @@ RegLib(this) {
 			options: { groupKey: ["H", "Р"], fastKey: "<+ [H][Р]" },
 			symbol: { category: "Diacritic Mark" },
 		},
-		"palatal_hook_below", {
+		"palatal_hook", {
 			unicode: "{U+0321}",
 			tags: ["palatal hook below", "палатальный крюк"],
 			groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
 			options: { groupKey: ["h", "р"], fastKey: ">+ [H][Р]" },
 			symbol: { category: "Diacritic Mark" },
 		},
-		"retroflex_hook_below", {
+		"retroflex_hook", {
 			unicode: "{U+0322}",
 			tags: ["retroflex hook below", "ретрофлексный крюк"],
 			groups: ["Diacritics Secondary", "Diacritics Fast Primary"],
@@ -2518,131 +2518,29 @@ RegLib(this) {
 		; * Accented Latin
 		;
 		;
-		"lat_[c,s]_let_a__acute", {
-			unicode: ["{U+00C1}", "{U+00E1}"],
-			groups: ["Latin Accented", "Latin Accented Primary"],
-			options: { fastKey: "$" },
-			recipe: ["$${acute}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__breve", {
-			unicode: ["{U+0102}", "{U+0103}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { fastKey: "$" },
-			recipe: ["$${breve}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__breve_inverted", {
-			unicode: ["{U+0202}", "{U+0203}"],
-			groups: ["Latin Accented"],
-			recipe: ["$${breve_inverted}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__circumflex", {
-			unicode: ["{U+00C2}", "{U+00E2}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { fastKey: "<! $" },
-			recipe: ["$${circumflex}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__caron", {
-			unicode: ["{U+01CD}", "{U+01CE}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			recipe: ["$${caron}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__dot_above", {
-			unicode: ["{U+0226}", "{U+0227}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			recipe: ["$${dot_above}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__dot_below", {
-			unicode: ["{U+1EA0}", "{U+1EA1}"],
-			groups: ["Latin Accented"],
-			recipe: ["$${dot_below}"],
-			symbol: { category: "Latin Accented" },
-		},
+		"lat_[c,s]_let_a__acute", { unicode: ["{U+00C1}", "{U+00E1}"], options: { fastKey: "$?Primary" } },
+		"lat_[c,s]_let_a__breve", { unicode: ["{U+0102}", "{U+0103}"], options: { fastKey: "$?Secondary" } },
+		"lat_[c,s]_let_a__breve_inverted", { unicode: ["{U+0202}", "{U+0203}"] },
+		"lat_[c,s]_let_a__circumflex", { unicode: ["{U+00C2}", "{U+00E2}"], options: { fastKey: "<! $?Secondary" } },
+		"lat_[c,s]_let_a__caron", { unicode: ["{U+01CD}", "{U+01CE}"] },
+		"lat_[c,s]_let_a__dot_above", { unicode: ["{U+0226}", "{U+0227}"] },
+		"lat_[c,s]_let_a__dot_below", { unicode: ["{U+1EA0}", "{U+1EA1}"] },
 		"lat_[c,s]_let_a__diaeresis", {
 			unicode: ["{U+00C4}", "{U+00E4}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { fastKey: "<+ $" },
+			options: { fastKey: "<+ $?Secondary" },
 			alterations: [{}, { combining: "{U+1DF2}" }],
-			recipe: ["$${diaeresis}"],
-			symbol: { category: "Latin Accented" },
 		},
-		"lat_[c,s]_let_a__grave", {
-			unicode: ["{U+00C0}", "{U+00E0}"],
-			groups: ["Latin Accented", "Latin Accented Tertiary"],
-			options: { fastKey: "$" },
-			recipe: ["$${grave}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__grave_double", {
-			unicode: ["{U+0200}", "{U+0201}"],
-			groups: ["Latin Accented", "Latin Accented Tertiary"],
-			options: { fastKey: "<+ $" },
-			recipe: ["$${grave_double}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__hook_above", {
-			unicode: ["{U+1EA2}", "{U+1EA3}"],
-			groups: ["Latin Accented"],
-			recipe: ["$${hook_above}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_s_let_a__retroflex_hook", {
-			unicode: "{U+1D8F}",
-			groups: ["Latin Accented"],
-			recipe: ["$${retroflex_hook_below}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__macron", {
-			unicode: ["{U+0100}", "{U+0101}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { fastKey: ">+ $" },
-			recipe: ["$${macron}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__ring_above", {
-			unicode: ["{U+00C5}", "{U+00E5}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { fastKey: "<!<+ $" },
-			recipe: ["$${ring_above}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__ring_below", {
-			unicode: ["{U+1E00}", "{U+1E01}"],
-			groups: ["Latin Accented"],
-			recipe: ["$${ring_below}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__solidus_long", {
-			unicode: ["{U+023A}", "{U+2C65}"],
-			groups: ["Latin Accented"],
-			recipe: ["$${solidus_long}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__ogonek", {
-			unicode: ["{U+0104}", "{U+0105}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { fastKey: "<!>+ $" },
-			recipe: ["$${ogonek}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__tilde", {
-			unicode: ["{U+00C3}", "{U+00E3}"],
-			groups: ["Latin Accented", "Latin Accented Secondary"],
-			options: { fastKey: "<+>+ $" },
-			recipe: ["$${tilde}"],
-			symbol: { category: "Latin Accented" },
-		},
-		"lat_[c,s]_let_a__breve__acute", {
-			unicode: ["{U+1EAE}", "{U+1EAF}"],
-			groups: ["Latin Accented"],
-			recipe: ["$${(breve|acute)}$(*)", "${lat_[c,s]_let_@__(breve|acute)}$(*)"],
-			symbol: { category: "Latin Accented" },
-		},
+		"lat_[c,s]_let_a__grave", { unicode: ["{U+00C0}", "{U+00E0}"], options: { fastKey: "$?Tertiary" } },
+		"lat_[c,s]_let_a__grave_double", { unicode: ["{U+0200}", "{U+0201}"], options: { fastKey: "<+ $?Tertiary" } },
+		"lat_[c,s]_let_a__hook_above", { unicode: ["{U+1EA2}", "{U+1EA3}"], },
+		"lat_s_let_a__retroflex_hook", { unicode: "{U+1D8F}" },
+		"lat_[c,s]_let_a__macron", { unicode: ["{U+0100}", "{U+0101}"], options: { fastKey: ">+ $?Secondary" } },
+		"lat_[c,s]_let_a__ring_above", { unicode: ["{U+00C5}", "{U+00E5}"], options: { fastKey: "<!<+ $?Secondary" } },
+		"lat_[c,s]_let_a__ring_below", { unicode: ["{U+1E00}", "{U+1E01}"] },
+		"lat_[c,s]_let_a__solidus_long", { unicode: ["{U+023A}", "{U+2C65}"] },
+		"lat_[c,s]_let_a__ogonek", { unicode: ["{U+0104}", "{U+0105}"], options: { fastKey: "<!>+ $?Secondary" } },
+		"lat_[c,s]_let_a__tilde", { unicode: ["{U+00C3}", "{U+00E3}"], options: { fastKey: "<+>+ $?Secondary" } },
+		"lat_[c,s]_let_a__breve__acute", { unicode: ["{U+1EAE}", "{U+1EAF}"] },
 		"lat_[c,s]_let_a__breve__dot_below", {
 			unicode: ["{U+1EB6}", "{U+1EB7}"],
 			groups: ["Latin Accented"],
@@ -2694,7 +2592,61 @@ RegLib(this) {
 		"lat_[c,s]_let_a__ring_above__acute", {
 			unicode: ["{U+01FA}", "{U+01FB}"],
 			groups: ["Latin Accented"],
-			recipe: ["$${(ring_above|acute)}$(*)", "${lat_[c,s]_let_@__(ring_above|acute)}$(*)"],
+			recipe: ["$${(diaeresis|macron)}$(*)", "${lat_[c,s]_let_@__(diaeresis|macron)}$(*)"],
+			symbol: { category: "Latin Accented" },
+		},
+		; Latin Letter “B”
+		"lat_[c,s]_let_b__dot_above", {
+			unicode: ["{U+1E02}", "{U+1E03}"],
+			groups: ["Latin Accented", "Latin Accented Secondary"],
+			options: { fastKey: "$" },
+			recipe: ["$${dot_above}"],
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_[c,s]_let_b__dot_below", {
+			unicode: ["{U+1E04}", "{U+1E05}"],
+			groups: ["Latin Accented", "Latin Accented Secondary"],
+			options: { fastKey: "<! $" },
+			recipe: ["$${dot_below}"],
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_[c,s]_let_b__common_hook", {
+			unicode: ["{U+0181}", "{U+0253}"],
+			groups: ["Latin Accented", "Latin Accented Secondary"],
+			options: { fastKey: ">+ $" },
+			recipe: ["$${arrow_left}"],
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_s_let_b__palatal_hook", {
+			unicode: "{U+1D80}",
+			groups: ["Latin Accented"],
+			recipe: ["$${palatal_hook}"],
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_[c,s]_let_b__flourish", {
+			unicode: ["{U+A796}", "{U+A797}"],
+			groups: ["Latin Accented", "Latin Accented Secondary"],
+			options: { fastKey: "<!<+ $" },
+			recipe: ["$${arrow_left_ushaped}"],
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_[c,s]_let_b__line_below", {
+			unicode: ["{U+1E06}", "{U+1E07}"],
+			groups: ["Latin Accented"],
+			recipe: ["$${macron_below}"],
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_[c,s]_let_b__stroke_short", {
+			unicode: ["{U+0243}", "{U+0180}"],
+			groups: ["Latin Accented", "Latin Accented Secondary"],
+			options: { fastKey: "<+ $" },
+			recipe: ["$${stroke_short}"],
+			symbol: { category: "Latin Accented" },
+		},
+		"lat_s_let_b__tilde_overlay", {
+			unicode: "{U+1D6C}",
+			groups: ["Latin Accented"],
+			recipe: ["$${tilde_overlay}"],
 			symbol: { category: "Latin Accented" },
 		},
 		;
@@ -7015,3 +6967,5 @@ showalll2() {
 }
 
 ;SetTimer((*) => MsgBox(ChrLib.Gets("kkey_0", "num_sup_0", "num_sup_1", "num_sup_2", "num_sup_3", "num_sup_4", "num_sup_5", "num_sup_6", "num_sup_7", "num_sup_8", "num_sup_9")), -5000)
+;SetTimer((*) => ChrLib.EntryPreview("lat_c_let_a__acute"), -5000)
+;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_a__acute"), -5500)
