@@ -2538,6 +2538,21 @@ RegLib(this) {
 			recipe: ["$${arrow_left_circle}", "${lat_s_lig_oe}${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
 		},
+		"lat_s_lig_oe_turned__stroke_short", {
+			unicode: "{U+AB42}",
+			recipe: ["$${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe}${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe_turned}${stroke_short}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_s_lig_oe_turned__solidus_long", {
+			unicode: "{U+AB41}",
+			recipe: ["$${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe}${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe_turned}${solidus_long}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_s_lig_oe_inverted", {
+			unicode: "{U+AB40}",
+			recipe: ["$${arrow_up_ushaped}", "${lat_s_lig_oe}${arrow_up_ushaped}"],
+			symbol: { beforeLetter: "inverted" },
+		},
 		"lat_[c,s]_lig_oo", {
 			unicode: ["{U+A74E}", "{U+A74F}"],
 			recipe: ["$"]

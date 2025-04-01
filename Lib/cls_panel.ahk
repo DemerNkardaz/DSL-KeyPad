@@ -711,6 +711,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
 			this.PanelGUI[options.prefix "Alert"].Text := ""
 
+			this.PanelGUI[options.prefix "Title"].SetFont("s" this.UISets.infoFonts.titleSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
 			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
 			this.PanelGUI[options.prefix "Unicode"].SetFont("s12")
 			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
@@ -756,9 +757,13 @@ Class Panel {
 			this.PanelGUI[options.prefix "LaTeX"].Text := value.HasOwnProp("LaTeX") ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"
 			this.PanelGUI[options.prefix "LaTeXPackage"].Text := value.HasOwnProp("LaTeXPackage") ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
 
+
+			this.PanelGUI[options.prefix "Title"].SetFont((StrLen(this.PanelGUI[options.prefix "Title"].Text) > 30) ? "s12" : "s" this.UISets.infoFonts.titleSize)
+
 			this.PanelGUI[options.prefix "Symbol"].SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
 			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.UISets.infoFonts.previewSize " norm cDefault")
 			this.PanelGUI[options.prefix "Symbol"].SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" this.UISets.infoFonts.previewSmaller " norm cDefault" : "s" this.UISets.infoFonts.previewSize " norm cDefault")
+
 
 			this.PanelGUI[options.prefix "Unicode"].SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) ? "s9" : "s12")
 			this.PanelGUI[options.prefix "HTML"].SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 14) ? "s9" : "s12")
