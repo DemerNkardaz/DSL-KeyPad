@@ -220,7 +220,7 @@ Class Panel {
 						;
 						{ type: "Recipe", group: "Latin Digraphs" },
 						;
-						{ type: "Recipe", group: "Latin Extended", separator: true },
+						{ type: "Recipe", group: "Latin", separator: true },
 						;
 						{ type: "Recipe", group: "Latin Accented", separator: true },
 						;
@@ -278,9 +278,9 @@ Class Panel {
 						;
 						{ type: "Fast Key", group: "Misc", combinationKey: RightAlt, separator: true },
 						;
-						{ type: "Fast Key", group: "Latin Extended", combinationKey: RightAlt, separator: true },
+						{ type: "Fast Key", group: "Latin Ligatures", combinationKey: RightAlt, separator: true },
 						;
-						{ type: "Fast Key", group: "Latin Ligatures", combinationKey: RightAlt },
+						{ type: "Fast Key", group: "Latin Secondary", combinationKey: RightAlt },
 						;
 						{ type: "Fast Key", group: "Latin Accented Secondary", combinationKey: RightAlt, separator: true },
 						;

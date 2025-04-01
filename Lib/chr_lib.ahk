@@ -2410,7 +2410,53 @@ RegLib(this) {
 		},
 		;
 		;
-		; * Latin Letters & Ligatures
+		; * Uncommon Latin Letters
+		;
+		;
+		"lat_s_let_s_long", {
+			unicode: "{U+017F}",
+			options: { useLetterLocale: True, fastKey: ">+ ~?Secondary" },
+			recipe: ["$"],
+			symbol: { letter: "fs" },
+		},
+		"lat_[c,s]_let_t_thorn", {
+			unicode: ["{U+00DE}", "{U+00FE}"],
+			options: { useLetterLocale: True, fastKey: ">+ ~?Secondary" },
+			recipe: ["$"],
+			symbol: { letter: ["TH", "th"] },
+		},
+		"lat_[c,s]_let_t_thorn__stroke_short", {
+			unicode: ["{U+A764}", "{U+A765}"],
+			groups: ["Latin"],
+			options: { useLetterLocale: "Origin" },
+			recipe: ["$${stroke_short}", "${lat_[c,s]_let_@_thorn}${stroke_short}"],
+			symbol: { letter: ["TH", "th"] },
+		},
+		"lat_[c,s]_let_t_thorn__stroke_down", {
+			unicode: ["{U+A766}", "{U+A767}"],
+			groups: ["Latin"],
+			options: { useLetterLocale: "Origin" },
+			recipe: ["$${arrow_down}${stroke_short}", "${lat_[c,s]_let_@_thorn}${arrow_down}${stroke_short}"],
+			symbol: { letter: ["TH", "th"] },
+		},
+		"lat_[c,s]_let_t_thorn_double", {
+			unicode: ["{U+A7D2}", "{U+A7D3}"],
+			options: { useLetterLocale: True },
+			recipe: ["$$", "${lat_[c,s]_let_@_thorn}${lat_[c,s]_let_@_thorn}"],
+			symbol: { letter: ["TH", "th"] },
+		},
+		"lat_[c,s]_let_z_ezh", {
+			unicode: ["{U+01B7}", "{U+0292}"],
+			tags: [[], ["voiced postalveolar fricative", "звонкий зубной щелевой согласный"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: ">+ ~?Secondary"
+			},
+			recipe: ["$3"],
+		},
+		;
+		;
+		; * Latin Ligatures
 		;
 		;
 		"lat_[c,s]_lig_aa", { unicode: ["{U+A732}", "{U+A733}"], recipe: ["$"] },
@@ -2456,6 +2502,58 @@ RegLib(this) {
 			tags: ["перевёрнутый амперсанд", "turned ampersand"],
 			recipe: ["$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
+		},
+		"lat_s_lig_ie", { unicode: "{U+AB61}", recipe: ["$"] },
+		"lat_s_lig_ff", { unicode: "{U+FB00}", recipe: ["$"] },
+		"lat_s_lig_fi", { unicode: "{U+FB01}", recipe: ["$"] },
+		"lat_s_lig_fl", { unicode: "{U+FB02}", recipe: ["$"] },
+		"lat_s_lig_ffi", {
+			unicode: "{U+FB04}",
+			recipe: ["$", "${lat_s_lig_ff}i"]
+		},
+		"lat_s_lig_ffl", {
+			unicode: "{U+FB03}",
+			recipe: ["$", "${lat_s_lig_ff}l"]
+		},
+		"lat_[c,s]_lig_ij", {
+			unicode: ["{U+0132}", "{U+0133}"],
+			recipe: ["$"]
+		},
+		"lat_s_lig_lb", { unicode: "{U+2114}", recipe: ["$"] },
+		"lat_[c,s]_lig_ll", {
+			unicode: ["{U+1EFA}", "{U+1EFB}"],
+			recipe: ["$"]
+		},
+		"lat_[c,s]_lig_oi", {
+			unicode: ["{U+01A2}", "{U+01A3}"],
+			recipe: ["$"]
+		},
+		"lat_[c,s]_lig_oe", {
+			unicode: ["{U+0152}", "{U+0153}"],
+			alterations: [{}, { modifier: "{U+A7F9}" }],
+			recipe: ["$"]
+		},
+		"lat_s_lig_oe_turned", {
+			unicode: "{U+1D14}",
+			recipe: ["$${arrow_left_circle}", "${lat_s_lig_oe}${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_lig_oo", {
+			unicode: ["{U+A74E}", "{U+A74F}"],
+			recipe: ["$"]
+		},
+		"lat_[c,s]_lig_ou", {
+			unicode: ["{U+0222}", "{U+0223}"],
+			recipe: ["$"]
+		},
+		"lat_s_lig_pl", { unicode: "{U+FB05}", recipe: ["$"] },
+		"lat_s_lig_st", { unicode: "{U+214A}", recipe: ["$", "${lat_s_let_s_long}t"] },
+		"lat_s_lig_ue", { unicode: "{U+1D6B}", recipe: ["$"] },
+		"lat_[c,s]_lig_s_eszett", {
+			unicode: ["{U+1E9E}", "{U+00DF}"],
+			options: { useLetterLocale: True, fastKey: "<+ ~?Secondary" },
+			recipe: ["$", "${lat_s_let_s_long}${lat_[c,s]_let_s}", "${lat_s_let_s_long}${lat_[c,s]_let_z_ezh}"],
+			symbol: { letter: ["SS", "ss"] },
 		},
 		;
 		;
@@ -2738,7 +2836,9 @@ RegLib(this) {
 			tags: [[], ["voiced dental fricative", "звонкий зубной щелевой согласный"]],
 			groups: [["Latin Accented"], ["Latin Accented", "IPA"]],
 			alterations: [{}, { combining: "{U+1DD9}", modifier: "{U+1D9E}" }],
-			options: { layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: "$?Secondary" },
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "$"],
+				useLetterLocale: True, fastKey: "$?Secondary" },
 			recipe: ["$${solidus_short}"],
 		},
 		; Latin Letter “E”
@@ -2836,6 +2936,17 @@ RegLib(this) {
 			unicode: ["{U+1E14}", "{U+1E15}"]
 		},
 		; Latin Letter “F”
+		"lat_[c,s]_let_f__dot_above", {
+			unicode: ["{U+1E1E}", "{U+1E1F}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_f__common_hook", {
+			unicode: ["{U+0191}", "{U+0192}"],
+			recipe: ["$${arrow_down}"]
+		},
+		"lat_s_let_f__palatal_hook", {
+			unicode: "{U+1D82}"
+		},
 		;
 		;
 		; * Glagolitic
@@ -7161,4 +7272,4 @@ showalll2() {
 ;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_a__acute"), -5500)
 ;SetTimer((*) => ChrLib.EntryPreview("lat_i_dig_dz"), -6000)
 ;SetTimer((*) => ChrLib.EntryPreview("lat_c_let_d_eth"), -5000)
-;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_b__tilde_overlay"), -5500)
+;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_thorn"), -5500)

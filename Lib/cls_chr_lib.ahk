@@ -696,16 +696,19 @@ class ChrLib {
 		if StrLen(refinedEntry.data.letter) > 0 {
 			if refinedEntry.recipe.Length > 0 {
 				for i, recipe in refinedEntry.recipe {
+					refinedEntry.recipe[i] := RegExReplace(recipe, "\~", SubStr(refinedEntry.data.letter, 1, 1))
 					refinedEntry.recipe[i] := RegExReplace(recipe, "\$", dataLetter)
 				}
 			}
 
 			if refinedEntry.options.hasOwnProp("fastKey") && StrLen(refinedEntry.options.fastKey) > 0 {
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" dataLetter "]")
+				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\~", "[" SubStr(refinedEntry.data.letter, 1, 1) "]")
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\?(.*?)$")
 			}
 			if refinedEntry.options.hasOwnProp("altLayoutKey") && StrLen(refinedEntry.options.altLayoutKey) > 0 {
 				refinedEntry.options.altLayoutKey := RegExReplace(refinedEntry.options.altLayoutKey, "\$", "[" dataLetter "]")
+				refinedEntry.options.altLayoutKey := RegExReplace(refinedEntry.options.altLayoutKey, "\~", "[" SubStr(refinedEntry.data.letter, 1, 1) "]")
 			}
 		}
 
@@ -821,7 +824,7 @@ class ChrLib {
 		for _, langCode in langCodes {
 			isAlt := InStr(langCode, "_alt")
 			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
-			postLetter := useLetterLocale ? Locale.Read(entryName "_letterTitle", lang) : letter
+			postLetter := useLetterLocale ? Locale.Read((useLetterLocale = "Origin" ? RegExReplace(entryName, "i)^(.*?)__.*", "$1") : entryName) "_letterTitle", lang) : letter
 
 			lBeforeletter := entry.symbol.HasOwnProp("beforeLetter") && StrLen(entry.symbol.beforeLetter) > 0 ? Locale.Read(pfx "beforeLetter_" entry.symbol.beforeLetter, lang) " " : ""
 			lAfterletter := entry.symbol.HasOwnProp("afterLetter") && StrLen(entry.symbol.afterLetter) > 0 ? " " Locale.Read(pfx "afterLetter_" entry.symbol.afterLetter, lang) : ""
