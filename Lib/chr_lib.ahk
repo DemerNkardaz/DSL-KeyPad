@@ -2609,6 +2609,10 @@ RegLib(this) {
 		"lat_s_let_b__tilde_overlay", {
 			unicode: "{U+1D6C}"
 		},
+		"lat_[c,s]_let_b__topbar", {
+			unicode: ["{U+0182}", "{U+0183}"],
+			recipe: ["$${arrow_up}"],
+		},
 		; Latin Letter “C”
 		"lat_[c,s]_let_c__acute", {
 			unicode: ["{U+0106}", "{U+0107}"],
@@ -2683,6 +2687,40 @@ RegLib(this) {
 		"lat_[c,s]_let_d__dot_above", {
 			unicode: ["{U+1E0A}", "{U+1E0B}"],
 		},
+		"lat_[c,s]_let_d__dot_below", {
+			unicode: ["{U+1E0C}", "{U+1E0D}"],
+		},
+		"lat_[c,s]_let_d__common_hook", {
+			unicode: ["{U+018A}", "{U+0257}"],
+			recipe: ["$${arrow_left}"],
+		},
+		"lat_s_let_d__hook__retroflex_hook", {
+			unicode: "{U+1D91}",
+			recipe: ["$${arrow_left}${retroflex_hook}"]
+		},
+		"lat_s_let_d__palatal_hook", {
+			unicode: "{U+1D81}",
+		},
+		"lat_s_let_d__retroflex_hook", {
+			unicode: "{U+0256}",
+		},
+		"lat_[c,s]_let_d__line_below", {
+			unicode: ["{U+1E0E}", "{U+1E0F}"],
+			recipe: ["$${macron_below}"]
+		},
+		"lat_[c,s]_let_d__stroke_short", {
+			unicode: ["{U+0110}", "{U+0111}"],
+		},
+		"lat_[c,s]_let_d__stroke_long", {
+			unicode: ["{U+A7C7}", "{U+A7C8}"],
+		},
+		"lat_s_let_d__tilde_overlay", {
+			unicode: "{U+1D6D}",
+		},
+		"lat_[c,s]_let_d__topbar", {
+			unicode: ["{U+018B}", "{U+018C}"],
+			recipe: ["$${arrow_up}"],
+		},
 		"lat_[c,s]_let_d_eth", {
 			unicode: ["{U+00D0}", "{U+00F0}"],
 			tags: [[], ["voiced dental fricative", "звонкий зубной щелевой согласный"]],
@@ -2691,6 +2729,101 @@ RegLib(this) {
 			options: { layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: "$?Secondary" },
 			recipe: ["$${solidus_short}"],
 		},
+		; Latin Letter “E”
+		"lat_[c,s]_let_e__acute", {
+			unicode: ["{U+00C9}", "{U+00E9}"],
+			options: { fastKey: "$?Primary" }
+		},
+		"lat_[c,s]_let_e__breve", {
+			unicode: ["{U+0114}", "{U+0115}"]
+		},
+		"lat_[c,s]_let_e__breve_inverted", {
+			unicode: ["{U+0206}", "{U+0207}"]
+		},
+		"lat_[c,s]_let_e__circumflex", {
+			unicode: ["{U+00CA}", "{U+00EA}"],
+			options: { fastKey: "<! $?Secondary" }
+		},
+		"lat_[c,s]_let_e__circumflex_below", {
+			unicode: ["{U+1E18}", "{U+1E19}"]
+		},
+		"lat_[c,s]_let_e__caron", {
+			unicode: ["{U+011A}", "{U+011B}"]
+		},
+		"lat_[c,s]_let_e__cedilla", {
+			unicode: ["{U+0228}", "{U+0229}"]
+		},
+		"lat_[c,s]_let_e__dot_above", {
+			unicode: ["{U+0116}", "{U+0117}"]
+		},
+		"lat_[c,s]_let_e__dot_below", {
+			unicode: ["{U+1EB8}", "{U+1EB9}"]
+		},
+		"lat_[c,s]_let_e__diaeresis", {
+			unicode: ["{U+00CB}", "{U+00EB}"],
+			options: { fastKey: "<+ $?Secondary" },
+		},
+		"lat_[c,s]_let_e__grave", {
+			unicode: ["{U+00C8}", "{U+00E8}"],
+			options: { fastKey: "$?Tertiary" }
+		},
+		"lat_[c,s]_let_e__grave_double", {
+			unicode: ["{U+0204}", "{U+0205}"],
+			options: { fastKey: "<+ $?Tertiary" }
+		},
+		"lat_[c,s]_let_e__hook_above", {
+			unicode: ["{U+1EBA}", "{U+1EBB}"]
+		},
+		"lat_s_let_e__retroflex_hook", {
+			unicode: "{U+1D92}"
+		},
+		"lat_s_let_e__notch", {
+			unicode: "{U+2C78}",
+			recipe: ["$${arrow_right}"]
+		},
+		"lat_[c,s]_let_e__macron", {
+			unicode: ["{U+0112}", "{U+0113}"],
+			options: { fastKey: ">+ $?Secondary" }
+		},
+		"lat_[c,s]_let_e__solidus_long", {
+			unicode: ["{U+0246}", "{U+0247}"]
+		},
+		"lat_[c,s]_let_e__ogonek", {
+			unicode: ["{U+0118}", "{U+0119}"],
+			options: { fastKey: "<!>+ $?Secondary" }
+		},
+		"lat_[c,s]_let_e__tilde", {
+			unicode: ["{U+1EBC}", "{U+1EBD}"],
+			options: { fastKey: "<+>+ $?Secondary" }
+		},
+		"lat_[c,s]_let_e__tilde_below", {
+			unicode: ["{U+1E1A}", "{U+1E1B}"]
+		},
+		"lat_[c,s]_let_e__breve__cedilla", {
+			unicode: ["{U+1E1C}", "{U+1E1D}"]
+		},
+		"lat_[c,s]_let_e__circumflex__acute", {
+			unicode: ["{U+1EBE}", "{U+1EBF}"]
+		},
+		"lat_[c,s]_let_e__circumflex__dot_below", {
+			unicode: ["{U+1EC6}", "{U+1EC7}"]
+		},
+		"lat_[c,s]_let_e__circumflex__grave", {
+			unicode: ["{U+1EC0}", "{U+1EC1}"]
+		},
+		"lat_[c,s]_let_e__circumflex__hook_above", {
+			unicode: ["{U+1EC2}", "{U+1EC3}"]
+		},
+		"lat_[c,s]_let_e__circumflex__tilde", {
+			unicode: ["{U+1EC4}", "{U+1EC5}"]
+		},
+		"lat_[c,s]_let_e__macron__acute", {
+			unicode: ["{U+1E16}", "{U+1E17}"]
+		},
+		"lat_[c,s]_let_e__macron__grave", {
+			unicode: ["{U+1E14}", "{U+1E15}"]
+		},
+		; Latin Letter “F”
 		;
 		;
 		; * Glagolitic
