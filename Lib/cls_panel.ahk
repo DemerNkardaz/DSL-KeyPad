@@ -433,6 +433,7 @@ Class Panel {
 				columns: panelColList.default,
 				columnWidths: this.UISets.column.widths,
 				source: LV_Content.scripts,
+				previewType: "Alternative Layout",
 			})
 
 			panelTabs.UseTab(panelTabList.Obj.commands)
@@ -729,10 +730,11 @@ Class Panel {
 
 			characterTitle := ""
 
-			if options.HasOwnProp("type") && options.type = "Alternative Layout" &&
-				Locale.Read(characterEntry "_layout_alt", , True, &titleText) {
+			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout" &&
+				(value.options.HasOwnProp("layoutTitles") && value.options.layoutTitles) &&
+				(Locale.Read(characterEntry "_layout_alt", , True, &titleText) ||
+					Locale.Read(characterEntry "_layout", , True, &titleText)) {
 				characterTitle := titleText
-
 			} else if Locale.Read(characterEntry "_alt", , True, &titleText) {
 				characterTitle := titleText
 

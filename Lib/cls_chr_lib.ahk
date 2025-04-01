@@ -19,29 +19,50 @@ class ChrLib {
 				entries.%variantName% := entry.Clone()
 				entries.%variantName%.unicode := entry.unicode[i]
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
-				if entry.hasOwnProp("symbol") {
+				if entry.HasOwnProp("symbol") {
 					entries.%variantName%.symbol := entry.symbol.Clone()
 					if entries.%variantName%.symbol.HasOwnProp("letter") {
 						entries.%variantName%.symbol.letter := entry.symbol.letter[i]
 					}
 				}
-				if entry.hasOwnProp("alterations") {
+				if entry.HasOwnProp("alterations") {
 					entries.%variantName%.alterations := entry.alterations[i].Clone()
 				}
-				if entry.hasOwnProp("recipe") && entry.recipe.Length > 0 && IsObject(entry.recipe[entry.recipe.Length]) {
-					entries.%variantName%.recipe := entry.recipe[i].Clone()
+
+				for reference in ["recipe", "tags", "groups"] {
+					if entry.HasOwnProp(reference) && entry.%reference%.Length > 0 && IsObject(entry.%reference%[entry.%reference%.Length]) {
+						if entry.%reference%[i].Length > 0 {
+							entries.%variantName%.%reference% := entry.%reference%[i].Clone()
+						} else {
+							entries.%variantName%.DeleteProp(reference)
+						}
+					}
+				}
+
+				if entry.HasOwnProp("options") {
+					tempOptions := entry.options.Clone()
+					for key, value in entry.options.OwnProps() {
+						if IsObject(entry.options.%key%) {
+							tempOptions.%key% := entry.options.%key%[i]
+						} else {
+							tempOptions.%key% := entry.options.%key%
+						}
+						if IsObject(entries.%variantName%.options.%key%) && entries.%variantName%.options.%key%.Length = 0
+							tempOptions.DeleteProp(key)
+					}
+					entries.%variantName%.options := tempOptions
 				}
 			}
 
 			for entryName, entry in entries.OwnProps() {
-				if !entry.hasOwnProp("recipe") && entry.data.postfixes.Length > 0 {
+				if !entry.HasOwnProp("recipe") && entry.data.postfixes.Length > 0 {
 					entry.recipe := entry.data.postfixes.Length = 1
 						? ["$${" entry.data.postfixes[1] "}"]
-						: ["$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)", "${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_let_@__(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)"]
+						: ["$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)", "${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)"]
 				}
 
 
-				if entry.hasOwnProp("recipe") && entry.recipe.Length > 0 {
+				if entry.HasOwnProp("recipe") && entry.recipe.Length > 0 {
 					tempRecipe := entry.recipe.Clone()
 					for i, recipe in tempRecipe {
 						tempRecipe[i] := RegExReplace(tempRecipe[i], "\[.*?\]", SubStr(entry.data.case, 1, 1))
@@ -494,17 +515,18 @@ class ChrLib {
 
 		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
 			if !refinedEntry.HasOwnProp("groups") {
+				hasPostfix := refinedEntry.data.postfixes.Length > 0
 				if refinedEntry.data.script = "latin" {
-					refinedEntry.groups := refinedEntry.data.type = "ligature" ? ["Latin Ligatures"] : refinedEntry.data.type = "digraph" ? ["Latin Digraphs"] : ["Latin Accented"]
+					refinedEntry.groups := refinedEntry.data.type = "ligature" ? ["Latin Ligatures"] : refinedEntry.data.type = "digraph" ? ["Latin Digraphs"] : ["Latin" (hasPostfix ? " Accented" : "")]
 				}
 			}
 
-			if !refinedEntry.HasOwnProp("symbol") || refinedEntry.HasOwnProp("symbol") && !refinedEntry.symbol.HasOwnProp("category") {
+			if (!refinedEntry.HasOwnProp("symbol") || refinedEntry.HasOwnProp("symbol") && !refinedEntry.symbol.HasOwnProp("category")) && (StrLen(refinedEntry.data.script) && StrLen(refinedEntry.data.type)) {
 				if !refinedEntry.HasOwnProp("symbol")
 					refinedEntry.symbol := {}
-				if refinedEntry.data.script = "latin" {
-					refinedEntry.symbol.category := refinedEntry.data.type = "ligature" ? ["Latin Ligature"] : refinedEntry.data.type = "digraph" ? ["Latin Digraph"] : ["Latin Accented"]
-				}
+
+				hasPostfix := refinedEntry.data.postfixes.Length > 0
+				refinedEntry.symbol.category := Util.StrUpper(refinedEntry.data.script, 1) " " Util.StrUpper(refinedEntry.data.type, 1) (hasPostfix ? " Accented" : "")
 			}
 		}
 
@@ -671,9 +693,12 @@ class ChrLib {
 				}
 			}
 
-			if StrLen(refinedEntry.options.fastKey) > 0 {
+			if refinedEntry.options.hasOwnProp("fastKey") && StrLen(refinedEntry.options.fastKey) > 0 {
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" dataLetter "]")
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\?(.*?)$")
+			}
+			if refinedEntry.options.hasOwnProp("altLayoutKey") && StrLen(refinedEntry.options.altLayoutKey) > 0 {
+				refinedEntry.options.altLayoutKey := RegExReplace(refinedEntry.options.altLayoutKey, "\$", "[" dataLetter "]")
 			}
 		}
 
@@ -774,6 +799,7 @@ class ChrLib {
 
 	static LocalesGeneration(entryName, entry) {
 		pfx := "gen_"
+		useLetterLocale := entry.options.HasOwnProp("useLetterLocale") ? entry.options.useLetterLocale : False
 		letter := (entry.symbol.HasOwnProp("letter") && StrLen(entry.symbol.letter) > 0) ? entry.symbol.letter : entry.data.letter
 		lScript := entry.data.script
 		lCase := entry.data.case
@@ -788,16 +814,17 @@ class ChrLib {
 		for _, langCode in langCodes {
 			isAlt := InStr(langCode, "_alt")
 			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
+			postLetter := useLetterLocale ? Locale.Read(entryName "_letterTitle", lang) : letter
 
 			lBeforeletter := entry.symbol.HasOwnProp("beforeLetter") && StrLen(entry.symbol.beforeLetter) > 0 ? Locale.Read(pfx "beforeLetter_" entry.symbol.beforeLetter, lang) " " : ""
 			lAfterletter := entry.symbol.HasOwnProp("afterLetter") && StrLen(entry.symbol.afterLetter) > 0 ? " " Locale.Read(pfx "afterLetter_" entry.symbol.afterLetter, lang) : ""
 
 
 			if isAlt {
-				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter letter lAfterletter
+				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter postLetter lAfterletter
 			} else {
-				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter letter lAfterletter
-				tags[langCode] := Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter letter lAfterletter
+				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
+				tags[langCode] := Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
 			}
 		}
 
@@ -891,7 +918,7 @@ ChrLib.AddEntry(
 			noCalc: True,
 			noHTML: False,
 			titlesAlt: True, ; Deprecated attribute
-			useLetterLocale: True, ; Deprecated attribute
+			useLetterLocale: True,
 			layoutTitles: True,
 			groupKey: "9",
 			groupModifiers: CapsLock,

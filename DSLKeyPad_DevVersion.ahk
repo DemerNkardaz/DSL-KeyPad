@@ -11,6 +11,7 @@ second := 1000
 minute := 60 * second
 hour := 60 * minute
 
+
 CtrlA := Chr(1)
 CtrlB := Chr(2)
 CtrlC := Chr(3)
