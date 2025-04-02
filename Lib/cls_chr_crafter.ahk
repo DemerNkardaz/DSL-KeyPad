@@ -64,6 +64,8 @@ Class ChrCrafter {
 		pauseOn := False
 		cleanPastInput := False
 
+		continueInInput := False
+
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
 
@@ -111,7 +113,11 @@ Class ChrCrafter {
 				cleanPastInput := False
 			}
 
-			tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(input, True)) : ""
+			inputWithoutBackticks := RegExReplace(input, "``", "")
+
+			hasBacktick := InStr(input, "``")
+
+			tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
 			currentInputMode := Util.StrVarsInject(Locale.Read("tooltip_input_mode"), "[" Cfg.Get("Input_Mode") "]")
 
 			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
@@ -123,8 +129,12 @@ Class ChrCrafter {
 						postInput := match[2]
 						intermediateValue := ""
 
+						; Use version without backticks for matching but track if we had any
+						postInputNoBackticks := RegExReplace(postInput, "``", "")
+						postInputHasBacktick := InStr(postInput, "``")
+
 						Loop repeatCount {
-							tempValue := this.ValidateRecipes(postInput, , RegExMatch(input, "^\(\d+~\)\s"))
+							tempValue := this.ValidateRecipes(postInputNoBackticks, , RegExMatch(input, "^\(\d+~\)\s"))
 							intermediateValue .= tempValue
 
 							len := StrLen(intermediateValue)
@@ -140,14 +150,42 @@ Class ChrCrafter {
 
 						if intermediateValue != "" {
 							output := intermediateValue
-							break
+							continueInInput := postInputHasBacktick
+							if !continueInInput
+								break
+							else {
+								input := RegExReplace(input, RegExEscape(postInput), output)
+
+								tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
+								CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+
+								continue
+							}
 						}
 					} else {
 						usePartialMode := RegExMatch(input, "^\(\~\)\s")
-						intermediateValue := this.ValidateRecipes(RegExReplace(input, "^\(\~\)\s", ""), , usePartialMode)
+						inputToCheck := RegExReplace(input, "^\(\~\)\s", "")
+
+						inputToCheckNoBackticks := RegExReplace(inputToCheck, "``", "")
+
+						intermediateValue := this.ValidateRecipes(inputToCheckNoBackticks, , usePartialMode)
 						if intermediateValue != "" {
 							output := intermediateValue
-							break
+
+							continueInInput := hasBacktick
+							if !continueInInput
+								break
+							else {
+								originalInput := input
+								input := RegExReplace(input, RegExEscape(inputToCheck), output)
+
+								if (input != originalInput) {
+									tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
+									CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+								}
+
+								continue
+							}
 						}
 					}
 				}
