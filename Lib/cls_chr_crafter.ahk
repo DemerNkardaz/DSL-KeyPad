@@ -187,6 +187,7 @@ Class ChrCrafter {
 		monoCaseRecipe := False
 
 		charFound := False
+
 		isPrefixOfLongerRecipe := False
 		for validatingValue in ChrLib.entryRecipes {
 			if (RegExMatch(validatingValue, "^" promptValidator) && validatingValue != prompt) {
@@ -194,6 +195,7 @@ Class ChrCrafter {
 				break
 			}
 		}
+
 		if !isPrefixOfLongerRecipe {
 			for validatingValue in ChrLib.entryRecipes {
 				if (RegExMatch(StrLower(validatingValue), "^" StrLower(promptValidator)) && StrLower(validatingValue) != StrLower(prompt)) {
@@ -202,6 +204,7 @@ Class ChrCrafter {
 				}
 			}
 		}
+
 		for validatingValue in ChrLib.entryRecipes {
 			if (RegExMatch(validatingValue, "^" promptValidator)) {
 				breakValidate := False
@@ -218,10 +221,34 @@ Class ChrCrafter {
 				}
 			}
 		}
+
 		if breakValidate && !breakSkip
 			return "N/A"
 
 		indexedValueResult := Map()
+
+		if getSuggestions {
+			recipeVariantsMap := Map()
+
+			for characterEntry, value in ChrLib.entries.OwnProps() {
+				if value.recipe.Length == 0 || (restrictClasses.Length > 0 && !(restrictClasses.Contains(value.symbol.category))) {
+					continue
+				}
+
+				recipe := value.recipe
+
+				if IsObject(recipe) {
+					for _, recipeEntry in recipe {
+						lowerRecipe := StrLower(recipeEntry)
+						recipeVariantsMap[lowerRecipe] := recipeVariantsMap.Has(lowerRecipe) ? recipeVariantsMap[lowerRecipe] + 1 : 1
+					}
+				} else {
+					lowerRecipe := StrLower(recipe)
+					recipeVariantsMap[lowerRecipe] := recipeVariantsMap.Has(lowerRecipe) ? recipeVariantsMap[lowerRecipe] + 1 : 1
+				}
+			}
+		}
+
 		for characterEntry, value in ChrLib.entries.OwnProps() {
 			notHasRecipe := value.recipe.Length == 0
 			notInRestrictClass := restrictClasses.Length > 0 && !(restrictClasses.Contains(value.symbol.category))
@@ -235,23 +262,54 @@ Class ChrCrafter {
 
 				if IsObject(recipe) {
 					for _, recipeEntry in recipe {
-						if (getSuggestions && RegExMatch(recipeEntry, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && prompt = recipeEntry) {
-							charFound := True
+						if getSuggestions {
+							caseSensitiveMatch := RegExMatch(recipeEntry, "^" RegExEscape(prompt))
 
-							indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
-							if !getSuggestions && !isPrefixOfLongerRecipe
+							uniqueRecipeMatch := False
+							if !caseSensitiveMatch {
+								lowerRecipe := StrLower(recipeEntry)
+								if recipeVariantsMap.Has(lowerRecipe) && recipeVariantsMap[lowerRecipe] == 1 {
+									uniqueRecipeMatch := RegExMatch(StrLower(recipeEntry), "^" StrLower(RegExEscape(prompt)))
+								}
+							}
+
+							if caseSensitiveMatch || uniqueRecipeMatch {
+								charFound := True
+								indexedValueResult.Set(value.index, this.GetRecipesString_NEW(characterEntry))
+							}
+						} else if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipeEntry)) {
+							charFound := True
+							indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
+							if !isPrefixOfLongerRecipe
 								break 2
 						}
 					}
-				} else if (getSuggestions && RegExMatch(recipe, "^" RegExEscape(prompt))) || (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && prompt = recipe) {
-					charFound := True
+				} else {
+					if getSuggestions {
+						caseSensitiveMatch := RegExMatch(recipe, "^" RegExEscape(prompt))
 
-					indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
-					if !getSuggestions && !isPrefixOfLongerRecipe
-						break
+						uniqueRecipeMatch := False
+						if !caseSensitiveMatch {
+							lowerRecipe := StrLower(recipe)
+							if recipeVariantsMap.Has(lowerRecipe) && recipeVariantsMap[lowerRecipe] == 1 {
+								uniqueRecipeMatch := RegExMatch(StrLower(recipe), "^" StrLower(RegExEscape(prompt)))
+							}
+						}
+
+						if caseSensitiveMatch || uniqueRecipeMatch {
+							charFound := True
+							indexedValueResult.Set(value.index, this.GetRecipesString_NEW(characterEntry))
+						}
+					} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipe)) {
+						charFound := True
+						indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
+						if !isPrefixOfLongerRecipe
+							break
+					}
 				}
 			}
 		}
+
 		if !charFound && !isPrefixOfLongerRecipe {
 			IntermediateValue := prompt
 			for characterEntry, value in ChrLib.entries.OwnProps() {
