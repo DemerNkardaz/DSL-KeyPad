@@ -33,13 +33,7 @@ Class ChrEntry {
 		customs: "",
 		font: "",
 	}
-	data := {
-		script: "",
-		case: "",
-		type: "",
-		letter: "",
-		postfixes: [],
-	}
+	data := { script: "", case: "", type: "", letter: "", postfixes: [], }
 
 	__New(attributes := {}) {
 		for key, value in attributes.OwnProps() {
@@ -54,7 +48,6 @@ Class ChrEntry {
 				this.%key% := value
 			}
 		}
-		;MsgBox(ChrLib.FormatEntry(this, 0))
 		return this
 	}
 }
@@ -68,6 +61,14 @@ class ChrLib {
 	static duplicatesList := []
 	static lastIndexAdded := -1
 
+	static __New() {
+		this.Registrate()
+	}
+
+	static Registrate() {
+		LibRegistrate(this)
+	}
+
 	static AddEntry(entryName, entry) {
 		if RegExMatch(entryName, "\[(.*?)\]", &match) {
 			splitVariants := StrSplit(match[1], ",")
@@ -76,6 +77,7 @@ class ChrLib {
 			for i, variant in splitVariants {
 				variantName := RegExReplace(entryName, "\[.*?\]", variant)
 				entries.%variantName% := entry.Clone()
+
 				entries.%variantName%.unicode := entry.unicode[i]
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
 
@@ -88,98 +90,22 @@ class ChrLib {
 					entries.%variantName%.alterations := entry.alterations[i].Clone()
 				}
 
-				for reference in ["recipe", "tags", "groups"] {
-					if entry.%reference%.Length > 0 && Util.IsArray(entry.%reference%[entry.%reference%.Length]) {
-						if entry.%reference%[i].Length > 0 {
-							entries.%variantName%.%reference% := entry.%reference%[i].Clone()
-						} else {
-							entries.%variantName%.DeleteProp(reference)
-						}
-					}
-				}
+				this.ProcessReferences(entries.%variantName%, entry, i)
 
-				tempOptions := entry.options.Clone()
-				for key, value in entry.options.OwnProps() {
-					if Util.IsArray(entry.options.%key%) && key != "groupKey" && entry.options.%key%.Length > 0 {
-						tempOptions.%key% := entry.options.%key%[i]
-					} else {
-						tempOptions.%key% := entry.options.%key%
-					}
-				}
-				entries.%variantName%.options := tempOptions
+				entries.%variantName%.options := this.CloneOptions(entry.options, i)
 			}
 
 			for entryName, entry in entries.OwnProps() {
-				if !entry.recipe.Length > 0 && entry.data.postfixes.Length > 0 {
-					entry.recipe := entry.data.postfixes.Length = 1
-						? ["$${" entry.data.postfixes[1] "}"]
-						: ["$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)", "${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)"]
-				}
-
-
-				if entry.recipe.Length > 0 {
-					tempRecipe := entry.recipe.Clone()
-					for i, recipe in tempRecipe {
-						tempRecipe[i] := RegExReplace(tempRecipe[i], "\[.*?\]", SubStr(entry.data.case, 1, 1))
-						tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry.data.letter)
-					}
-
-					entry.recipe := tempRecipe
-				}
-
+				this.ProcessRecipe(entry, splitVariants)
 				this.AddEntry(entryName, ChrEntry(entry))
 			}
-
 		} else {
 			this.entries.%entryName% := {}
 			entry := this.EntryPreProcessing(entryName, entry)
 
-			for key, value in entry.OwnProps() {
-				if value is Func {
-					definedValue := value
-					this.entries.%entryName%.DefineProp(key, { Get: (*) => definedValue(), Set: (this, value) => this.DefineProp(key, { Get: (*) => value }) })
-				} else if key = "recipe" && value.Length > 0 {
-					tempRecipe := value.Clone()
+			this.TransferProperties(entryName, entry)
 
-					definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe)
-					interObj := {}
-					interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
-
-					this.entries.%entryName%.%key% := interObj.Get
-				} else if Util.IsArray(value) {
-					this.entries.%entryName%.%key% := []
-					for subValue in value {
-						if subValue is Func {
-							interObj := {}
-							interObj.DefineProp("Get", { Get: subValue, Set: subValue })
-							if Util.IsArray(interObj.Get) {
-								for interValue in interObj.Get {
-									this.entries.%entryName%.%key%.Push(interValue)
-								}
-							} else {
-								this.entries.%entryName%.%key%.Push(interObj.Get)
-							}
-						} else {
-							this.entries.%entryName%.%key%.Push(subValue)
-						}
-					}
-				} else if Util.IsObject(value) {
-					this.entries.%entryName%.%key% := {}
-					for subKey, subValue in value.OwnProps() {
-						if subValue is Func {
-							this.entries.%entryName%.%key%.DefineProp(subKey, { Get: subValue, Set: subValue })
-						} else {
-							this.entries.%entryName%.%key%.%subKey% := subValue
-						}
-					}
-				} else {
-					this.entries.%entryName%.%key% := value
-				}
-			}
-
-			this.entries.%entryName%.index := this.lastIndexAdded + 1
-
-			this.lastIndexAdded := this.entries.%entryName%.index
+			this.entries.%entryName%.index := ++this.lastIndexAdded
 
 			this.EntryPostProcessing(entryName, this.entries.%entryName%)
 		}
@@ -243,36 +169,31 @@ class ChrLib {
 
 	static Get(entryName, extraRules := False, getMode := "Unicode") {
 		entry := this.GetEntry(entryName)
-		output := ""
 
-		if StrLen(getMode) = 0 {
-			getMode := "Unicode"
-		}
+		getMode := StrLen(getMode) ? getMode : "Unicode"
 
-		if getMode = "HTML" && StrLen(entry.html) > 0 {
-			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.alterations.HasOwnProp(AlterationActiveName) {
-				output .= entry.alterations.%AlterationActiveName%HTML
-
-			} else {
-				output .= StrLen(entry.entity) > 0 ? entry.entity : entry.html
+		if (getMode = "HTML" && StrLen(entry.html) > 0) {
+			if (extraRules && StrLen(AlterationActiveName) > 0 && entry.alterations.HasOwnProp(AlterationActiveName)) {
+				return entry.alterations.%AlterationActiveName%HTML
 			}
+			return StrLen(entry.entity) > 0 ? entry.entity : entry.html
 
-		} else if getMode = "LaTeX" && entry.LaTeX.Length > 0 {
-			output .= (entry.LaTeX.Length = 2 && Cfg.Get("LaTeX_Mode") = "Math") ? entry.LaTeX[2] : entry.LaTeX[1]
+		} else if (getMode = "LaTeX" && entry.LaTeX.Length > 0) {
+			return (entry.LaTeX.Length = 2 && Cfg.Get("LaTeX_Mode") = "Math")
+				? entry.LaTeX[2]
+			: entry.LaTeX[1]
 
 		} else {
-			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.alterations.HasOwnProp(AlterationActiveName) {
-				output .= Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
+			if (extraRules && StrLen(AlterationActiveName) > 0 && entry.alterations.HasOwnProp(AlterationActiveName)) {
+				return Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
 
-			} else if (extraRules && getMode != "Unicode") && entry.alterations.HasOwnProp(getMode) {
-				output .= Util.UnicodeToChar(entry.alterations.%getMode%)
+			} else if (extraRules && getMode != "Unicode" && entry.alterations.HasOwnProp(getMode)) {
+				return Util.UnicodeToChar(entry.alterations.%getMode%)
 
 			} else {
-				output .= Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+				return Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
 			}
 		}
-
-		return output
 	}
 
 	static Gets(entryNames*) {
@@ -445,6 +366,127 @@ class ChrLib {
 		}
 
 		return ""
+	}
+
+	static ProcessReferences(targetEntry, sourceEntry, index) {
+		for reference in ["recipe", "tags", "groups"] {
+			if sourceEntry.%reference%.Length > 0 && Util.IsArray(sourceEntry.%reference%[sourceEntry.%reference%.Length]) {
+				if sourceEntry.%reference%[index].Length > 0 {
+					targetEntry.%reference% := sourceEntry.%reference%[index].Clone()
+				} else {
+					targetEntry.DeleteProp(reference)
+				}
+			}
+		}
+	}
+
+	static CloneOptions(sourceOptions, index) {
+		tempOptions := sourceOptions.Clone()
+		for key, value in sourceOptions.OwnProps() {
+			if Util.IsArray(sourceOptions.%key%) && key != "groupKey" && sourceOptions.%key%.Length > 0 {
+				tempOptions.%key% := sourceOptions.%key%[index]
+			}
+		}
+		return tempOptions
+	}
+
+	static ProcessRecipe(entry, splitVariants) {
+		if !entry.recipe.Length > 0 && entry.data.postfixes.Length > 0 {
+			if entry.data.postfixes.Length = 1 {
+				entry.recipe := ["$${" entry.data.postfixes[1] "}"]
+			} else {
+				entry.recipe := [
+					"$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
+					"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_"
+					SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|"
+					entry.data.postfixes[2] ")}$(*)"
+				]
+			}
+		}
+
+		if entry.recipe.Length > 0 {
+			tempRecipe := entry.recipe.Clone()
+			for i, recipe in tempRecipe {
+				tempRecipe[i] := RegExReplace(recipe, "\[.*?\]", SubStr(entry.data.case, 1, 1))
+				tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry.data.letter)
+			}
+			entry.recipe := tempRecipe
+		}
+	}
+
+	static TransferProperties(entryName, entry) {
+		for key, value in entry.OwnProps() {
+			if !["String", "Integer", "Boolean"].HasValue(Type(value)) {
+				if key = "recipe" && value.Length > 0
+					this.TransferRecipeProperty(entryName, value)
+				else
+					this.Transfer%Type(value)%Property(entryName, key, value)
+			} else {
+				this.entries.%entryName%.%key% := value
+			}
+		}
+	}
+
+	static TransferFuncProperty(entryName, key, value) {
+		definedValue := value
+		this.entries.%entryName%.DefineProp(key, {
+			Get: (*) => definedValue(),
+			Set: (this, value) => this.DefineProp(key, { Get: (*) => value })
+		})
+	}
+
+	static TransferRecipeProperty(entryName, value) {
+		tempRecipe := value.Clone()
+		definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe)
+		interObj := {}
+		interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
+		this.entries.%entryName%.recipe := interObj.Get
+	}
+
+	static TransferArrayProperty(entryName, key, value) {
+		this.entries.%entryName%.%key% := []
+		for subValue in value {
+			if Util.IsFunc(subValue) {
+				interObj := {}
+				interObj.DefineProp("Get", { Get: subValue, Set: subValue })
+				if Util.IsArray(interObj.Get) {
+					for interValue in interObj.Get {
+						this.entries.%entryName%.%key%.Push(interValue)
+					}
+				} else {
+					this.entries.%entryName%.%key%.Push(interObj.Get)
+				}
+			} else {
+				this.entries.%entryName%.%key%.Push(subValue)
+			}
+		}
+	}
+
+	static TransferMapProperty(entryName, key, value) {
+		this.entries.%entryName%.%key% := Map()
+		for mapKey, mapValue in value {
+			if Util.IsFunc(mapValue) {
+				interObj := {}
+				interObj.DefineProp("Get", { Get: mapValue, Set: mapValue })
+				this.entries.%entryName%.%key%.Set(mapKey, interObj.Get)
+			} else {
+				this.entries.%entryName%.%key%.Set(mapKey, mapValue)
+			}
+		}
+	}
+
+	static TransferObjectProperty(entryName, key, value) {
+		this.entries.%entryName%.%key% := {}
+		for subKey, subValue in value.OwnProps() {
+			if Util.IsFunc(subValue) {
+				this.entries.%entryName%.%key%.DefineProp(subKey, {
+					Get: subValue,
+					Set: subValue
+				})
+			} else {
+				this.entries.%entryName%.%key%.%subKey% := subValue
+			}
+		}
 	}
 
 	static EntryPreProcessing(entryName, entry) {

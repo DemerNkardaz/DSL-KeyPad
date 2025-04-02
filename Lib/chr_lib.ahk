@@ -1,6 +1,4 @@
-ChrLib.base.DefineProp("RegLib", { Call: ObjBindMethod(RegLib) })
-ChrLib.RegLib()
-RegLib(this) {
+LibRegistrate(this) {
 	local D := "dotted_circle"
 
 	this.AddEntries(
@@ -2416,17 +2414,17 @@ RegLib(this) {
 		"lat_[c,s]_let_0_tone_two", {
 			unicode: ["{U+01A7}", "{U+01A8}"],
 			options: { useLetterLocale: True },
-			recipe: ["'2"],
+			recipe: [["`"2"], ["'2"]],
 		},
 		"lat_[c,s]_let_0_tone_five", {
 			unicode: ["{U+01BC}", "{U+01BD}"],
 			options: { useLetterLocale: True },
-			recipe: ["'5"],
+			recipe: [["`"5"], ["'5"]],
 		},
 		"lat_[c,s]_let_0_tone_six", {
 			unicode: ["{U+0184}", "{U+0185}"],
 			options: { useLetterLocale: True },
-			recipe: ["'6"],
+			recipe: [["`"6"], ["'6"]],
 		},
 		"lat_[c,s]_let_j_yogh", {
 			unicode: ["{U+021C}", "{U+021D}"],
@@ -7285,47 +7283,6 @@ RegLib(this) {
 		"ipa_subscript_mode", { unicode: "{U+0041}", sequence: ["{U+2090}", "{U+2091}", "{U+2095}", "{U+2C7C}", "{U+2096}", "{U+2097}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt RShift F3" } },
 	)
 
-	;this.PostProcess()
-	;MsgBox(this.GetEntry("lat_c_lig_ae_acute").recipeAlt.ToString())
 	if this.duplicatesList.Length > 0
 		TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), this.duplicatesList.ToString()), App.winTitle, "Icon! Mute")
 }
-;ChrLib.PostProcess()
-
-;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.Get("dotted_circle"))
-;MsgBox(ChrLib.GetValue("breve_inverted_below", "test")[1] "`n" ChrLib.GetValue("acute", "symbol").font)
-
-/*
-entiesarr := []
-for each in ChrLib.entryGroups.Get("Special Characters") {
-	entiesarr.Push(each)
-}
-
-MsgBox(entiesarr.ToString("`n"))
-
-*/
-
-showalll() {
-	entiesarr := []
-	for entry, value in ChrLib.entryRecipes {
-		entiesarr.Push(entry " " value.chr)
-	}
-	MsgBox(entiesarr.ToString("`n"))
-}
-showalll2() {
-	entiesarr := []
-	for entry, value in ChrLib.entries.OwnProps() {
-		entiesarr.Push(entry)
-	}
-	MsgBox(entiesarr.ToString("  "))
-}
-
-;SetTimer((*) => MsgBox(ChrLib.Gets("kkey_0", "num_sup_0", "num_sup_1", "num_sup_2", "num_sup_3", "num_sup_4", "num_sup_5", "num_sup_6", "num_sup_7", "num_sup_8", "num_sup_9")), -5000)
-;SetTimer((*) => ChrLib.EntryPreview("lat_c_let_a__acute"), -5000)
-;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_a__acute"), -5500)
-;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_a"), -500)
-;SetTimer((*) => ChrLib.EntryPreview("lat_c_lig_ae__macron"), -5000)
-;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_a__acute"), -5500)
-;SetTimer((*) => ChrLib.EntryPreview("lat_i_dig_dz"), -6000)
-;SetTimer((*) => ChrLib.EntryPreview("lat_c_let_d_eth"), -5000)
-;SetTimer((*) => ChrLib.EntryPreview("lat_s_let_thorn"), -5500)

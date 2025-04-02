@@ -16,6 +16,26 @@ Class Util {
 		return Type(value) = "String"
 	}
 
+	static IsNumber(value) {
+		return Type(value) = "Number"
+	}
+
+	static IsInt(value) {
+		return Type(value) = "Integer"
+	}
+
+	static IsBool(value) {
+		return Type(value) = "Boolean"
+	}
+
+	static IsClass(value) {
+		return Type(value) = "Class"
+	}
+
+	static IsFunc(value) {
+		return Type(value) = "Func"
+	}
+
 	static StrUpper(Str, Length := StrLen(Str)) {
 		return StrUpper(SubStr(Str, 1, Length)) SubStr(Str, Length + 1)
 	}

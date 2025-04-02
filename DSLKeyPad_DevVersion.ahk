@@ -65,6 +65,16 @@ Window := Chr(0x229E)
 CapsLock := Chr(0x2B9D)
 
 
+EscapePressed := False
+
+FastKeysIsActive := False
+ActiveScriptName := ""
+PreviousScriptName := ""
+AlterationActiveName := ""
+InputMode := "Default"
+LaTeXMode := "Default"
+
+
 #Include <External\prt_array>
 #Include <External\fnc_clip_send>
 #Include <External\fnc_caret_pos>
@@ -73,6 +83,7 @@ CapsLock := Chr(0x2B9D)
 #Include <chr_alt_codes>
 #Include <chr_entities>
 #Include <cls_util>
+#Include <chr_lib>
 #Include <cls_chr_lib>
 #Include <cls_chr_recipe_handler>
 #Include <cls_chr_legend>
@@ -232,15 +243,6 @@ OpenLocalesFile(*) {
 	Run(InternalFiles["Locales"].File)
 }
 
-
-EscapePressed := False
-
-FastKeysIsActive := False
-ActiveScriptName := ""
-PreviousScriptName := ""
-AlterationActiveName := ""
-InputMode := "Default"
-LaTeXMode := "Default"
 
 DefaultConfig := [
 	["Settings", "FastKeysIsActive", "False"],
@@ -1451,9 +1453,7 @@ InsertCharactersGroups(TargetArray := "", GroupName := "", GroupHotKey := "", Ad
 		}
 	}
 }
-
 #Include <chr_lib_legacy>
-#Include <chr_lib>
 #Include <cls_tempature_converter>
 
 GetCountDifference() {
