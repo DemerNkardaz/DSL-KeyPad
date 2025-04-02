@@ -114,7 +114,6 @@ Class ChrCrafter {
 			tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(input, True)) : ""
 			currentInputMode := Util.StrVarsInject(Locale.Read("tooltip_input_mode"), "[" Cfg.Get("Input_Mode") "]")
 
-
 			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
 			if !pauseOn || (IH.EndKey = "Enter") {
@@ -144,7 +143,8 @@ Class ChrCrafter {
 							break
 						}
 					} else {
-						intermediateValue := this.ValidateRecipes(RegExReplace(input, "^\(\~\)\s", ""), , RegExMatch(input, "^\(\~\)\s"))
+						usePartialMode := RegExMatch(input, "^\(\~\)\s")
+						intermediateValue := this.ValidateRecipes(RegExReplace(input, "^\(\~\)\s", ""), , usePartialMode)
 						if intermediateValue != "" {
 							output := intermediateValue
 							break
@@ -156,14 +156,15 @@ Class ChrCrafter {
 
 		PH.Stop()
 
-		if output = "N/A" {
+		if InStr(output, "N/A") {
 			CaretTooltip(Chr(0x26A0) " " Locale.Read("warning_recipe_absent"))
 			SetTimer(Tooltip, -1000)
 
 		} else {
 			CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " Util.StrFormattedReduce(output))
 			SetTimer(Tooltip, -500)
-			this.SendOutput(output)
+			if !InStr(output, "N/A") || output != input
+				this.SendOutput(output)
 		}
 
 		return
@@ -186,7 +187,21 @@ Class ChrCrafter {
 		monoCaseRecipe := False
 
 		charFound := False
-
+		isPrefixOfLongerRecipe := False
+		for validatingValue in ChrLib.entryRecipes {
+			if (RegExMatch(validatingValue, "^" promptValidator) && validatingValue != prompt) {
+				isPrefixOfLongerRecipe := True
+				break
+			}
+		}
+		if !isPrefixOfLongerRecipe {
+			for validatingValue in ChrLib.entryRecipes {
+				if (RegExMatch(StrLower(validatingValue), "^" StrLower(promptValidator)) && StrLower(validatingValue) != StrLower(prompt)) {
+					isPrefixOfLongerRecipe := True
+					break
+				}
+			}
+		}
 		for validatingValue in ChrLib.entryRecipes {
 			if (RegExMatch(validatingValue, "^" promptValidator)) {
 				breakValidate := False
@@ -207,9 +222,8 @@ Class ChrCrafter {
 			return "N/A"
 
 		indexedValueResult := Map()
-
 		for characterEntry, value in ChrLib.entries.OwnProps() {
-			notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
+			notHasRecipe := value.recipe.Length == 0
 			notInRestrictClass := restrictClasses.Length > 0 && !(restrictClasses.Contains(value.symbol.category))
 
 			if notInRestrictClass {
@@ -217,7 +231,6 @@ Class ChrCrafter {
 			} else if notHasRecipe {
 				continue
 			} else {
-
 				recipe := value.recipe
 
 				if IsObject(recipe) {
@@ -226,7 +239,7 @@ Class ChrCrafter {
 							charFound := True
 
 							indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
-							if !getSuggestions
+							if !getSuggestions && !isPrefixOfLongerRecipe
 								break 2
 						}
 					}
@@ -234,22 +247,15 @@ Class ChrCrafter {
 					charFound := True
 
 					indexedValueResult.Set(value.index, getSuggestions ? this.GetRecipesString_NEW(characterEntry) : ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
-					if !getSuggestions
+					if !getSuggestions && !isPrefixOfLongerRecipe
 						break
 				}
 			}
 		}
-
-		if charFound {
-			for key, value in indexedValueResult {
-				output .= value
-			}
-		}
-
-		if !charFound {
+		if !charFound && !isPrefixOfLongerRecipe {
 			IntermediateValue := prompt
 			for characterEntry, value in ChrLib.entries.OwnProps() {
-				notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
+				notHasRecipe := value.recipe.Length == 0
 				notInRestrictClass := restrictClasses.Length > 0 && !(restrictClasses.Contains(value.symbol.category))
 
 				if notInRestrictClass {
@@ -276,6 +282,12 @@ Class ChrCrafter {
 			if IntermediateValue != prompt {
 				output := IntermediateValue
 				charFound := True
+			}
+		}
+
+		if charFound {
+			for key, value in indexedValueResult {
+				output .= value
 			}
 		}
 
@@ -312,8 +324,8 @@ Class ChrCrafter {
 		if breakValidate && !breakSkip
 			return "N/A"
 		for characterEntry, value in Characters {
-			notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
-			notInRestrictClass := restrictClasses.Length > 0 && (!HasProp(value, "symbolClass") || !(restrictClasses.Contains(value.symbolClass)))
+			notHasRecipe := value.recipe.Length == 0
+			notInRestrictClass := restrictClasses.Length > 0 && (StrLen(value.symbol.category) == 0 || !restrictClasses.Contains(value.symbol.category))
 
 			if notInRestrictClass {
 				continue
@@ -354,8 +366,8 @@ Class ChrCrafter {
 		if !charFound {
 			IntermediateValue := prompt
 			for characterEntry, value in Characters {
-				notHasRecipe := (!HasProp(value, "recipe") || (HasProp(value, "recipe") && value.recipe == ""))
-				notInRestrictClass := restrictClasses.Length > 0 && (!HasProp(value, "symbolClass") || !(restrictClasses.Contains(value.symbolClass)))
+				notHasRecipe := value.recipe.Length == 0
+				notInRestrictClass := restrictClasses.Length > 0 && (StrLen(value.symbol.category) == 0 || !restrictClasses.Contains(value.symbol.category))
 
 				if notInRestrictClass {
 					continue
@@ -394,9 +406,9 @@ Class ChrCrafter {
 
 		for line in getList {
 			if StrLen(line) > 0 {
-				characterEntry := GetCharacterEntry(line)
+				characterEntry := ChrLib.GetEntry(line)
 
-				if !HasProp(characterEntry, "recipe") || (HasProp(characterEntry, "recipe") && characterEntry.recipe == "") {
+				if characterEntry.recipe.Length = 0 {
 					continue
 				} else {
 					output .= this.GetRecipesString(characterEntry)
@@ -468,7 +480,7 @@ Class ChrCrafter {
 	static GetRecipesString(value) {
 		output := ""
 
-		recipe := HasProp(value, "recipeAlt") ? value.recipeAlt : value.recipe
+		recipe := value.recipeAlt.Length > 0 ? value.recipeAlt : value.recipe
 		uniSequence := Util.StrFormattedReduce(this.GetUniChar(value, True))
 
 		if IsObject(recipe) {
@@ -488,13 +500,13 @@ Class ChrCrafter {
 
 	static GetComparedChar(value) {
 		output := ""
-		if InputMode = "HTML" && HasProp(value, "html") {
+		if InputMode = "HTML" && StrLen(value.html) > 0 {
 			output :=
 				(this.modifiedCharsType && HasProp(value, this.modifiedCharsType "HTML")) ? value.%this.modifiedCharsType%HTML :
-				(value.HasProp("entity") ? value.entity : value.html)
+				(StrLen(value.entity) > 0 ? value.entity : value.html)
 
-		} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
-			output := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
+		} else if InputMode = "LaTeX" && value.LaTeX.Length > 0 {
+			output := LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]
 
 		} else {
 			output := this.GetUniChar(value)
@@ -514,8 +526,8 @@ Class ChrCrafter {
 			} else {
 				output := PasteUnicode(value.%this.modifiedCharsType%Form)
 			}
-		} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
-			for unicode in value.uniSequence {
+		} else if value.sequence.Length > 0 {
+			for unicode in value.sequence {
 				output .= PasteUnicode(unicode)
 			}
 		} else {

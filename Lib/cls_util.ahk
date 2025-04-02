@@ -36,6 +36,10 @@ Class Util {
 		return Type(value) = "Func"
 	}
 
+	static IsClipboardTextOnly() {
+		return
+	}
+
 	static StrUpper(Str, Length := StrLen(Str)) {
 		return StrUpper(SubStr(Str, 1, Length)) SubStr(Str, Length + 1)
 	}
