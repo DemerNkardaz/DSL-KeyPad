@@ -509,7 +509,7 @@ https://www.keyboard-layout-editor.com/##@_css=* {%0A%20%20%20 font-size%2F: 11p
 
 - <kbd>&grave;</kbd>&nbsp;— оператор разделения, предотвращающий завершение работы «Compose» и отправку символа при совпадении последовательности с рецептом. Вместо этого совпадение заменит введённую последовательность в поле «Compose», позволяя использовать более сложные комбинации без активации паузы.
 
-<img src="WebPage/media/composer_grave_operator.gif" alt="" width="700">
+<img src="WebPage/media/composer_grave_operator.gif" alt="" width="600">
 
 ##### Операторы активной паузы
 
