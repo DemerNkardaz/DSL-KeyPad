@@ -5464,6 +5464,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<!", ["lat_c_let_k_dot_below", "lat_s_let_k_dot_below"],
 				"<^>!<!<+", ["lat_c_let_k_caron", "lat_s_let_k_caron"],
 				"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"],
+				"<^>!<+", ["lat_c_let_k_cuatrillo", "lat_s_let_k_cuatrillo"],
 				"Flat:>+", "kelvin"
 			),
 			"L", Map("<!", ["lat_c_let_l_acute", "lat_s_let_l_acute"],
@@ -5502,6 +5503,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<+", ["lat_c_let_p_stroke_short", "lat_s_let_p_stroke_short"],
 				"<^>!>+", ["lat_c_let_p_common_hook", "lat_s_let_p_common_hook"]),
 			"Q", Map(
+				"<^>!<+", ["lat_c_let_q_tresillo", "lat_s_let_q_tresillo"],
 				"<^>!>+", ["lat_c_let_q_common_hook", "lat_s_let_q_common_hook"]),
 			"R", Map("<!", ["lat_c_let_r_acute", "lat_s_let_r_acute"],
 				"<^>!", ["lat_c_let_r_dot_above", "lat_s_let_r_dot_above"],

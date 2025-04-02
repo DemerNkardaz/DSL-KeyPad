@@ -2413,9 +2413,34 @@ RegLib(this) {
 		; * Uncommon Latin Letters
 		;
 		;
+		"lat_[c,s]_let_0_tone_two", {
+			unicode: ["{U+01A7}", "{U+01A8}"],
+			options: { useLetterLocale: True },
+			recipe: ["'2"],
+		},
+		"lat_[c,s]_let_0_tone_five", {
+			unicode: ["{U+01BC}", "{U+01BD}"],
+			options: { useLetterLocale: True },
+			recipe: ["'5"],
+		},
+		"lat_[c,s]_let_0_tone_six", {
+			unicode: ["{U+0184}", "{U+0185}"],
+			options: { useLetterLocale: True },
+			recipe: ["'6"],
+		},
 		"lat_[c,s]_let_j_yogh", {
 			unicode: ["{U+021C}", "{U+021D}"],
 			options: { useLetterLocale: True, fastKey: ">+ $?Secondary" },
+			recipe: ["$3"],
+		},
+		"lat_[c,s]_let_k_cuatrillo", {
+			unicode: ["{U+A72C}", "{U+A72D}"],
+			options: { useLetterLocale: True, fastKey: "<+ $?Secondary" },
+			recipe: ["$4"],
+		},
+		"lat_[c,s]_let_q_tresillo", {
+			unicode: ["{U+A72A}", "{U+A72B}"],
+			options: { useLetterLocale: True, fastKey: "<+ $?Secondary" },
 			recipe: ["$3"],
 		},
 		"lat_s_let_s_long", {
