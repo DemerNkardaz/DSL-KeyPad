@@ -739,7 +739,7 @@ Class Panel {
 			characterTitle := ""
 
 			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout" &&
-				(value.options.HasOwnProp("layoutTitles") && value.options.layoutTitles) &&
+				(value.options.layoutTitles) &&
 				(Locale.Read(characterEntry "_layout_alt", , True, &titleText) ||
 					Locale.Read(characterEntry "_layout", , True, &titleText)) {
 				characterTitle := titleText
@@ -749,7 +749,7 @@ Class Panel {
 			} else if Locale.Read(characterEntry, , True, &titleText) {
 				characterTitle := titleText
 
-			} else if value.HasOwnProp("titles") && value.titles.Has(languageCode) {
+			} else if value.titles.Count > 0 && value.titles.Has(languageCode) {
 				characterTitle := value.titles[languageCode (value.titles.Has(languageCode "_alt") ? "_alt" : "")]
 
 			} else {
@@ -757,19 +757,19 @@ Class Panel {
 			}
 
 			this.PanelGUI[options.prefix "Title"].Text := characterTitle
-			this.PanelGUI[options.prefix "Symbol"].Text := value.symbol.HasOwnProp("alt") ? value.symbol.alt : value.symbol.set
-			this.PanelGUI[options.prefix "Unicode"].Text := value.HasOwnProp("sequence") ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
-			this.PanelGUI[options.prefix "HTML"].Text := value.HasOwnProp("entity") ? [value.html, value.entity].ToString(" ") : value.html
-			this.PanelGUI[options.prefix "Alt"].Text := value.HasOwnProp("altCode") ? value.altCode : "N/A"
-			this.PanelGUI[options.prefix "LaTeX"].Text := value.HasOwnProp("LaTeX") ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"
-			this.PanelGUI[options.prefix "LaTeXPackage"].Text := value.HasOwnProp("LaTeXPackage") ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
+			this.PanelGUI[options.prefix "Symbol"].Text := StrLen(value.symbol.alt) > 0 ? value.symbol.alt : value.symbol.set
+			this.PanelGUI[options.prefix "Unicode"].Text := value.sequence.Length > 0 ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
+			this.PanelGUI[options.prefix "HTML"].Text := StrLen(value.entity) > 0 ? [value.html, value.entity].ToString(" ") : value.html
+			this.PanelGUI[options.prefix "Alt"].Text := StrLen(value.altCode) > 0 ? value.altCode : "N/A"
+			this.PanelGUI[options.prefix "LaTeX"].Text := value.LaTeX.Length > 0 ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"
+			this.PanelGUI[options.prefix "LaTeXPackage"].Text := StrLen(value.LaTeXPackage) > 0 ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
 
 
 			this.PanelGUI[options.prefix "Title"].SetFont((StrLen(this.PanelGUI[options.prefix "Title"].Text) > 30) ? "s12" : "s" this.UISets.infoFonts.titleSize)
 
-			this.PanelGUI[options.prefix "Symbol"].SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
+			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(value.symbol.font) > 0 ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
 			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.UISets.infoFonts.previewSize " norm cDefault")
-			this.PanelGUI[options.prefix "Symbol"].SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" this.UISets.infoFonts.previewSmaller " norm cDefault" : "s" this.UISets.infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont(StrLen(value.symbol.customs) > 0 ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" this.UISets.infoFonts.previewSmaller " norm cDefault" : "s" this.UISets.infoFonts.previewSize " norm cDefault")
 
 
 			this.PanelGUI[options.prefix "Unicode"].SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) ? "s9" : "s12")
@@ -835,7 +835,7 @@ Class Panel {
 
 			this.PanelGUI[options.prefix "KeyPreview"].SetFont((keyPrevieLength > 12 && keyPrevieLength < 20) ? "s10" : (keyPrevieLength > 21) ? "s9" : "s12")
 
-			if value.options.HasOwnProp("legend") && StrLen(value.options.legend) > 1 {
+			if StrLen(value.options.legend) > 1 {
 				this.PanelGUI[options.prefix "LegendButton"].Enabled := True
 				this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => ChrLegend({ entry: characterEntry }))
 			} else {
@@ -935,28 +935,31 @@ Class Panel {
 
 						isFavorite := FavoriteChars.CheckVar(characterEntry)
 
-						if (options.hasOwnProp("blacklist") && options.blacklist.HasValue(characterEntry)) ||
-							(!value.groups.HasValue(options.group)) ||
-							(options.type = "Group Activator" && !value.options.HasOwnProp("groupKey")) ||
-							(options.type = "Recipe" && (value.recipe.Length = 0)) ||
-							(options.type = "Fast Key" && (!value.options.HasOwnProp("fastKey") || StrLen(value.options.fastKey) < 2)) ||
-							(options.type = "Fast Key Special" && (!value.options.HasOwnProp("specialKey") || StrLen(value.options.specialKey) < 2)) ||
-							(options.type = "Alternative Layout" && (!value.options.HasOwnProp("altLayoutKey") || StrLen(value.options.altLayoutKey) < 2))
-						{
-							continue
+						try {
+							if (options.hasOwnProp("blacklist") && options.blacklist.HasValue(characterEntry)) ||
+								(!value.groups.HasValue(options.group)) ||
+								(options.type = "Group Activator" && value.options.groupKey.Length = 0) ||
+								(options.type = "Recipe" && (value.recipe.Length = 0)) ||
+								(options.type = "Fast Key" && (StrLen(value.options.fastKey) < 2)) ||
+								(options.type = "Fast Key Special" && (StrLen(value.options.specialKey) < 2)) ||
+								(options.type = "Alternative Layout" && (StrLen(value.options.altLayoutKey) < 2))
+							{
+								continue
+							}
+						} catch {
+							throw "Trouble in paradise: " characterEntry " typeof groupKey" Type(options.groupKey) " recipe" Type(value.recipe) " fastKey" Type(value.options.fastKey) " specialKey" Type(value.options.specialKey) " altLayoutKey" Type(value.options.altLayoutKey)
 						}
 
 						characterTitle := ""
 
-						if options.type = "Alternative Layout" &&
-							(value.options.HasOwnProp("layoutTitles") && value.options.layoutTitles) &&
+						if options.type = "Alternative Layout" && value.options.layoutTitles &&
 							Locale.Read(characterEntry "_layout", , True, &titleText) {
 							characterTitle := titleText
 
 						} else if Locale.Read(characterEntry, , True, &titleText) {
 							characterTitle := titleText
 
-						} else if value.HasOwnProp("titles") && value.titles.Has(languageCode) {
+						} else if value.titles.Count > 0 && value.titles.Has(languageCode) {
 							characterTitle := value.titles[languageCode]
 
 						} else {
@@ -976,7 +979,7 @@ Class Panel {
 							"Alternative Layout", value.options.altLayoutKey,
 							"Fast Special", value.options.specialKey,
 							"Fast Key", value.options.fastKey,
-							"Group Activator", value.options.HasOwnProp("groupKey") && Util.FormatHotKey(value.options.groupKey),
+							"Group Activator", value.options.groupKey.Length > 0 && Util.FormatHotKey(value.options.groupKey),
 						)
 
 						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : "N/A"

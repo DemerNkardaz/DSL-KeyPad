@@ -538,13 +538,13 @@ Class MyRecipes {
 					ChrLib.RemoveEntry(section.section)
 
 				ChrLib.AddEntry(
-					section.section, {
+					section.section, ChrEntry({
 						unicode: resultToUnicode[1],
 						sequence: resultToUnicode,
 						titles: Map("ru", section.name, "en", section.name),
 						recipe: section.recipe,
 						groups: ["Custom Composes"],
-					},
+					}),
 				)
 			}
 		}

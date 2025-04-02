@@ -1,3 +1,64 @@
+Class ChrEntry {
+	index := 0
+	unicode := ""
+	sequence := []
+	html := ""
+	entity := ""
+	altCode := ""
+	LaTeX := []
+	LaTeXPackage := ""
+	titles := Map()
+	tags := []
+	groups := []
+	alterations := {}
+	options := {
+		noCalc: False,
+		useLetterLocale: False,
+		layoutTitles: False,
+		legend: "",
+		altLayoutKey: "",
+		fastKey: "",
+		groupKey: [],
+		specialKey: "",
+	}
+	recipe := []
+	recipeAlt := []
+	symbol := {
+		category: "",
+		letter: "",
+		afterLetter: "",
+		beforeLetter: "",
+		set: "",
+		alt: "",
+		customs: "",
+		font: "",
+	}
+	data := {
+		script: "",
+		case: "",
+		type: "",
+		letter: "",
+		postfixes: [],
+	}
+
+	__New(attributes := {}) {
+		for key, value in attributes.OwnProps() {
+			if Util.IsArray(value) {
+				this.%key% := []
+				this.%key% := value.Clone()
+			} else if Util.IsObject(value) {
+				for subKey, subValue in value.OwnProps() {
+					this.%key%.%subKey% := subValue
+				}
+			} else {
+				this.%key% := value
+			}
+		}
+		;MsgBox(ChrLib.FormatEntry(this, 0))
+		return this
+	}
+}
+
 class ChrLib {
 	static entries := {}
 	static entryGroups := Map()
@@ -8,7 +69,6 @@ class ChrLib {
 	static lastIndexAdded := -1
 
 	static AddEntry(entryName, entry) {
-
 		if RegExMatch(entryName, "\[(.*?)\]", &match) {
 			splitVariants := StrSplit(match[1], ",")
 			entries := {}
@@ -18,18 +78,18 @@ class ChrLib {
 				entries.%variantName% := entry.Clone()
 				entries.%variantName%.unicode := entry.unicode[i]
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
-				if entry.HasOwnProp("symbol") {
-					entries.%variantName%.symbol := entry.symbol.Clone()
-					if entries.%variantName%.symbol.HasOwnProp("letter") {
-						entries.%variantName%.symbol.letter := entry.symbol.letter[i]
-					}
+
+				entries.%variantName%.symbol := entry.symbol.Clone()
+				if Util.IsArray(entries.%variantName%.symbol.letter) {
+					entries.%variantName%.symbol.letter := entry.symbol.letter[i]
 				}
-				if entry.HasOwnProp("alterations") {
+
+				if Util.IsArray(entry.alterations) {
 					entries.%variantName%.alterations := entry.alterations[i].Clone()
 				}
 
 				for reference in ["recipe", "tags", "groups"] {
-					if entry.HasOwnProp(reference) && entry.%reference%.Length > 0 && IsObject(entry.%reference%[entry.%reference%.Length]) {
+					if entry.%reference%.Length > 0 && Util.IsArray(entry.%reference%[entry.%reference%.Length]) {
 						if entry.%reference%[i].Length > 0 {
 							entries.%variantName%.%reference% := entry.%reference%[i].Clone()
 						} else {
@@ -38,30 +98,26 @@ class ChrLib {
 					}
 				}
 
-				if entry.HasOwnProp("options") {
-					tempOptions := entry.options.Clone()
-					for key, value in entry.options.OwnProps() {
-						if IsObject(entry.options.%key%) {
-							tempOptions.%key% := entry.options.%key%[i]
-						} else {
-							tempOptions.%key% := entry.options.%key%
-						}
-						if IsObject(entries.%variantName%.options.%key%) && entries.%variantName%.options.%key%.Length = 0
-							tempOptions.DeleteProp(key)
+				tempOptions := entry.options.Clone()
+				for key, value in entry.options.OwnProps() {
+					if Util.IsArray(entry.options.%key%) && key != "groupKey" && entry.options.%key%.Length > 0 {
+						tempOptions.%key% := entry.options.%key%[i]
+					} else {
+						tempOptions.%key% := entry.options.%key%
 					}
-					entries.%variantName%.options := tempOptions
 				}
+				entries.%variantName%.options := tempOptions
 			}
 
 			for entryName, entry in entries.OwnProps() {
-				if !entry.HasOwnProp("recipe") && entry.data.postfixes.Length > 0 {
+				if !entry.recipe.Length > 0 && entry.data.postfixes.Length > 0 {
 					entry.recipe := entry.data.postfixes.Length = 1
 						? ["$${" entry.data.postfixes[1] "}"]
 						: ["$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)", "${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)"]
 				}
 
 
-				if entry.HasOwnProp("recipe") && entry.recipe.Length > 0 {
+				if entry.recipe.Length > 0 {
 					tempRecipe := entry.recipe.Clone()
 					for i, recipe in tempRecipe {
 						tempRecipe[i] := RegExReplace(tempRecipe[i], "\[.*?\]", SubStr(entry.data.case, 1, 1))
@@ -71,7 +127,7 @@ class ChrLib {
 					entry.recipe := tempRecipe
 				}
 
-				this.AddEntry(entryName, entry)
+				this.AddEntry(entryName, ChrEntry(entry))
 			}
 
 		} else {
@@ -107,7 +163,7 @@ class ChrLib {
 							this.entries.%entryName%.%key%.Push(subValue)
 						}
 					}
-				} else if IsObject(value) {
+				} else if Util.IsObject(value) {
 					this.entries.%entryName%.%key% := {}
 					for subKey, subValue in value.OwnProps() {
 						if subValue is Func {
@@ -134,7 +190,7 @@ class ChrLib {
 			index := A_Index * 2 - 1
 			entryName := arguments[index]
 			entryValue := arguments[index + 1]
-			this.AddEntry(entryName, entryValue)
+			this.AddEntry(entryName, ChrEntry(entryValue))
 		}
 		return
 	}
@@ -193,26 +249,26 @@ class ChrLib {
 			getMode := "Unicode"
 		}
 
-		if getMode = "HTML" && entry.HasOwnProp("html") {
-			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(AlterationActiveName) {
+		if getMode = "HTML" && StrLen(entry.html) > 0 {
+			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.alterations.HasOwnProp(AlterationActiveName) {
 				output .= entry.alterations.%AlterationActiveName%HTML
 
 			} else {
-				output .= entry.HasOwnProp("entity") ? entry.entity : entry.html
+				output .= StrLen(entry.entity) > 0 ? entry.entity : entry.html
 			}
 
-		} else if getMode = "LaTeX" && entry.HasOwnProp("LaTeX") {
+		} else if getMode = "LaTeX" && entry.LaTeX.Length > 0 {
 			output .= (entry.LaTeX.Length = 2 && Cfg.Get("LaTeX_Mode") = "Math") ? entry.LaTeX[2] : entry.LaTeX[1]
 
 		} else {
-			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(AlterationActiveName) {
+			if (extraRules && StrLen(AlterationActiveName) > 0) && entry.alterations.HasOwnProp(AlterationActiveName) {
 				output .= Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
 
-			} else if (extraRules && getMode != "Unicode") && entry.HasOwnProp("alterations") && entry.alterations.HasOwnProp(getMode) {
+			} else if (extraRules && getMode != "Unicode") && entry.alterations.HasOwnProp(getMode) {
 				output .= Util.UnicodeToChar(entry.alterations.%getMode%)
 
 			} else {
-				output .= Util.UnicodeToChar(entry.HasOwnProp("sequence") ? entry.sequence : entry.unicode)
+				output .= Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
 			}
 		}
 
@@ -298,13 +354,12 @@ class ChrLib {
 					count++
 				}
 
-				if value.HasOwnProp("alterations") {
-					for alteration, value in value.alterations.OwnProps() {
-						if !InStr(alteration, "HTML") {
-							count++
-						}
+				for alteration, value in value.alterations.OwnProps() {
+					if !InStr(alteration, "HTML") {
+						count++
 					}
 				}
+
 			}
 		}
 
@@ -360,7 +415,7 @@ class ChrLib {
 		}
 
 		for entryName, entry in this.entries.OwnProps() {
-			if !entry.HasOwnProp("tags")
+			if entry.tags.Length = 0
 				continue
 
 			for _, tag in entry.tags {
@@ -370,7 +425,7 @@ class ChrLib {
 		}
 
 		for entryName, entry in this.entries.OwnProps() {
-			if !entry.HasOwnProp("tags")
+			if entry.tags.Length = 0
 				continue
 
 			for _, tag in entry.tags {
@@ -380,7 +435,7 @@ class ChrLib {
 		}
 
 		for entryName, entry in this.entries.OwnProps() {
-			if !entry.HasOwnProp("tags")
+			if entry.tags.Length = 0
 				continue
 
 			for _, tag in entry.tags {
@@ -394,31 +449,32 @@ class ChrLib {
 
 	static EntryPreProcessing(entryName, entry) {
 		refinedEntry := entry.Clone()
-		if !refinedEntry.HasOwnProp("data")
-			refinedEntry := this.SetDecomposedData(entryName, refinedEntry)
+		refinedEntry := this.SetDecomposedData(entryName, refinedEntry)
 
 		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
-			if !refinedEntry.HasOwnProp("groups") {
+			if refinedEntry.groups.Length = 0 {
 				hasPostfix := refinedEntry.data.postfixes.Length > 0
 				if refinedEntry.data.script = "latin" {
 					refinedEntry.groups := refinedEntry.data.type = "ligature" ? ["Latin Ligatures"] : refinedEntry.data.type = "digraph" ? ["Latin Digraphs"] : ["Latin" (hasPostfix ? " Accented" : "")]
 				}
 			}
 
-			if (!refinedEntry.HasOwnProp("symbol") || refinedEntry.HasOwnProp("symbol") && !refinedEntry.symbol.HasOwnProp("category")) && (StrLen(refinedEntry.data.script) && StrLen(refinedEntry.data.type)) {
-				if !refinedEntry.HasOwnProp("symbol")
-					refinedEntry.symbol := {}
+			if StrLen(refinedEntry.symbol.category = 0) {
+				if StrLen(refinedEntry.data.script) && StrLen(refinedEntry.data.type) {
 
-				hasPostfix := refinedEntry.data.postfixes.Length > 0
-				refinedEntry.symbol.category := Util.StrUpper(refinedEntry.data.script, 1) " " Util.StrUpper(refinedEntry.data.type, 1) (hasPostfix ? " Accented" : "")
+					hasPostfix := refinedEntry.data.postfixes.Length > 0
+					refinedEntry.symbol.category := Util.StrUpper(refinedEntry.data.script, 1) " " Util.StrUpper(refinedEntry.data.type, 1) (hasPostfix ? " Accented" : "")
+				} else {
+					refinedEntry.symbol.category := "N/A"
+				}
 			}
 		}
 
-		if refinedEntry.HasOwnProp("options") && refinedEntry.options.HasOwnProp("fastKey") && RegExMatch(refinedEntry.options.fastKey, "\?(.*?)$", &addGroupMatch) {
+		if StrLen(refinedEntry.options.fastKey) && RegExMatch(refinedEntry.options.fastKey, "\?(.*?)$", &addGroupMatch) {
 			refinedEntry.groups.Push(refinedEntry.groups[1] " " addGroupMatch[1])
 		}
 
-		if !refinedEntry.HasOwnProp("recipe") && refinedEntry.data.postfixes.Length > 0 {
+		if refinedEntry.recipe.Length = 0 && refinedEntry.data.postfixes.Length > 0 {
 			refinedEntry.recipe := ["$"]
 			for postfix in refinedEntry.data.postfixes {
 				refinedEntry.recipe[1] .= "${" postfix "}"
@@ -431,11 +487,15 @@ class ChrLib {
 	static EntryPostProcessing(entryName, entry) {
 		refinedEntry := entry
 		character := Util.UnicodeToChar(refinedEntry.unicode)
-		characterSequence := Util.UnicodeToChar(refinedEntry.HasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode)
+		characterSequence := Util.UnicodeToChar(refinedEntry.sequence.Length > 0 ? refinedEntry.sequence : refinedEntry.unicode)
+		try {
+		} catch {
+			throw "Trouble in paradise: " entryName
+		}
 
-		if refinedEntry.hasOwnProp("sequence") {
+		if refinedEntry.sequence.Length > 0 {
 			for sequenceChr in refinedEntry.sequence {
-				if !refinedEntry.HasOwnProp("html")
+				if StrLen(refinedEntry.html)
 					refinedEntry.html := ""
 				refinedEntry.html .= "&#" Util.ChrToDecimal(Util.UnicodeToChar(sequenceChr)) ";"
 			}
@@ -443,11 +503,9 @@ class ChrLib {
 			refinedEntry.html := "&#" Util.ChrToDecimal(character) ";"
 		}
 
-		if refinedEntry.HasOwnProp("alterations") {
-			for alteration, value in refinedEntry.alterations.OwnProps() {
-				if !InStr(alteration, "HTML")
-					refinedEntry.alterations.%alteration%HTML := "&#" Util.ChrToDecimal(Util.UnicodeToChar(value)) ";"
-			}
+		for alteration, value in refinedEntry.alterations.OwnProps() {
+			if !InStr(alteration, "HTML")
+				refinedEntry.alterations.%alteration%HTML := "&#" Util.ChrToDecimal(Util.UnicodeToChar(value)) ";"
 		}
 
 		for i, altCodeSymbol in AltCodesLibrary {
@@ -455,7 +513,7 @@ class ChrLib {
 				AltCode := AltCodesLibrary[i + 1]
 
 				if character == altCodeSymbol {
-					if !refinedEntry.HasOwnProp("altCode") {
+					if StrLen(refinedEntry.altCode) = 0 {
 						refinedEntry.altCode := ""
 					}
 
@@ -477,29 +535,10 @@ class ChrLib {
 			}
 		}
 
-		if !refinedEntry.HasOwnProp("options")
-			refinedEntry.options := { noCalc: False }
-		else if !refinedEntry.options.HasOwnProp("noCalc")
-			refinedEntry.options.noCalc := False
+		refinedEntry.symbol.set := characterSequence
 
-		if !refinedEntry.HasOwnProp("symbol") {
-			refinedEntry.symbol := { category: "N/A" }
-			refinedEntry.symbol.set := characterSequence
-		}
-
-		if !refinedEntry.HasOwnProp("alterations")
-			refinedEntry.alterations := {}
-
-		if !refinedEntry.HasOwnProp("groups")
+		if refinedEntry.groups.Length = 0
 			refinedEntry.groups := ["Default Group"]
-
-		if !refinedEntry.HasOwnProp("recipe")
-			refinedEntry.recipe := []
-		if !refinedEntry.HasOwnProp("recipeAlt")
-			refinedEntry.recipeAlt := []
-
-		if !refinedEntry.HasOwnProp("tags")
-			refinedEntry.tags := []
 
 
 		for group in ["fastKey", "specialKey", "altLayoutKey"] {
@@ -510,40 +549,38 @@ class ChrLib {
 			}
 		}
 
-		if refinedEntry.HasOwnProp("symbol") {
-			hasSet := refinedEntry.symbol.HasOwnProp("set")
-			hasCustoms := refinedEntry.symbol.HasOwnProp("customs")
-			hasFont := refinedEntry.symbol.HasOwnProp("font")
+		hasSet := StrLen(refinedEntry.symbol.set) > 0
+		hasCustoms := StrLen(refinedEntry.symbol.customs) > 0
+		hasFont := StrLen(refinedEntry.symbol.font) > 0
 
-			if refinedEntry.symbol.HasOwnProp("category") {
-				category := refinedEntry.symbol.category
+		if StrLen(refinedEntry.symbol.category) > 0 {
+			category := refinedEntry.symbol.category
 
-				refinedEntry.symbol.set := (category = "Diacritic Mark" ? Chr(0x25CC) characterSequence : characterSequence)
-				if category = "Diacritic Mark" {
-					if !hasCustoms
-						refinedEntry.symbol.customs := "s72"
-					if !hasFont
-						refinedEntry.symbol.font := "Cambria"
-				} else if category = "Spaces" && !hasCustoms {
-					refinedEntry.symbol.customs := "underline"
-				}
-			} else {
-				refinedEntry.symbol.category := "N/A"
-				if !hasSet
-					refinedEntry.symbol.set := characterSequence
+			refinedEntry.symbol.set := (category = "Diacritic Mark" ? Chr(0x25CC) characterSequence : characterSequence)
+			if category = "Diacritic Mark" {
+				if !hasCustoms
+					refinedEntry.symbol.customs := "s72"
+				if !hasFont
+					refinedEntry.symbol.font := "Cambria"
+			} else if category = "Spaces" && !hasCustoms {
+				refinedEntry.symbol.customs := "underline"
 			}
+		} else {
+			refinedEntry.symbol.category := "N/A"
+			if !hasSet
+				refinedEntry.symbol.set := characterSequence
+		}
 
-			if RegExMatch(entryName, "i)^(permic|hungarian|north_arabian|south_arabian)", &match) {
-				scriptName := StrReplace(match[1], "_", " ")
-				refinedEntry.symbol.font := "Noto Sans Old " scriptName
-			} else if RegExMatch(entryName, "i)^(ugaritic)", &match) {
-				scriptName := StrReplace(match[1], "_", " ")
-				refinedEntry.symbol.font := "Noto Sans " scriptName
-			} else if RegExMatch(entryName, "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)") {
-				refinedEntry.symbol.font := "Kurinto Sans"
-			} else if InStr(entryName, "phoenician") {
-				refinedEntry.symbol.font := "Segoe UI Historic"
-			}
+		if RegExMatch(entryName, "i)^(permic|hungarian|north_arabian|south_arabian)", &match) {
+			scriptName := StrReplace(match[1], "_", " ")
+			refinedEntry.symbol.font := "Noto Sans Old " scriptName
+		} else if RegExMatch(entryName, "i)^(ugaritic)", &match) {
+			scriptName := StrReplace(match[1], "_", " ")
+			refinedEntry.symbol.font := "Noto Sans " scriptName
+		} else if RegExMatch(entryName, "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)") {
+			refinedEntry.symbol.font := "Kurinto Sans"
+		} else if InStr(entryName, "phoenician") {
+			refinedEntry.symbol.font := "Segoe UI Historic"
 		}
 
 		for group in refinedEntry.groups {
@@ -560,7 +597,7 @@ class ChrLib {
 		if !this.entryCategories.Get(refinedEntry.symbol.category).HasValue(entryName)
 			this.entryCategories[refinedEntry.symbol.category].Push(entryName)
 
-		if refinedEntry.hasOwnProp("tags") && refinedEntry.tags.Length > 0 {
+		if refinedEntry.tags.Length > 0 {
 			for tag in refinedEntry.tags {
 				if !this.entryTags.Has(tag)
 					this.entryTags.Set(tag, [])
@@ -569,7 +606,7 @@ class ChrLib {
 			}
 		}
 
-		dataLetter := (refinedEntry.symbol.HasOwnProp("letter") && StrLen(refinedEntry.symbol.letter) > 0) ? refinedEntry.symbol.letter : refinedEntry.data.letter
+		dataLetter := StrLen(refinedEntry.symbol.letter) > 0 ? refinedEntry.symbol.letter : refinedEntry.data.letter
 
 		if StrLen(refinedEntry.data.letter) > 0 {
 			if refinedEntry.recipe.Length > 0 {
@@ -579,12 +616,12 @@ class ChrLib {
 				}
 			}
 
-			if refinedEntry.options.hasOwnProp("fastKey") && StrLen(refinedEntry.options.fastKey) > 0 {
+			if StrLen(refinedEntry.options.fastKey) > 0 {
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" dataLetter "]")
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\~", "[" SubStr(refinedEntry.data.letter, 1, 1) "]")
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\?(.*?)$")
 			}
-			if refinedEntry.options.hasOwnProp("altLayoutKey") && StrLen(refinedEntry.options.altLayoutKey) > 0 {
+			if StrLen(refinedEntry.options.altLayoutKey) > 0 {
 				refinedEntry.options.altLayoutKey := RegExReplace(refinedEntry.options.altLayoutKey, "\$", "[" dataLetter "]")
 				refinedEntry.options.altLayoutKey := RegExReplace(refinedEntry.options.altLayoutKey, "\~", "[" SubStr(refinedEntry.data.letter, 1, 1) "]")
 			}
@@ -594,7 +631,7 @@ class ChrLib {
 		if refinedEntry.recipe.Length > 0 {
 			for recipe in refinedEntry.recipe {
 				if !this.entryRecipes.Has(recipe) {
-					this.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.hasOwnProp("sequence") ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index })
+					this.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.sequence.Length > 0 ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index })
 				} else {
 					this.duplicatesList.Push(recipe)
 				}
@@ -716,7 +753,7 @@ class ChrLib {
 		for key, value in entry.OwnProps() {
 			if Util.IsArray(value) {
 				output .= indentStr key ": " value.ToString() "`n"
-			} else if IsObject(value) {
+			} else if Util.IsObject(value) {
 				output .= indentStr key ":`n" . this.FormatEntry(value, indent + 1)
 			} else {
 				output .= indentStr key ": " value "`n"

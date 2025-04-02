@@ -100,7 +100,7 @@ RegLib(this) {
 			unicode: "{U+033A}",
 			tags: ["inverted bridge below", "перевёрнутый мостик снизу"],
 			groups: ["Diacritics Tertiary"],
-			options: { groupKey: CtrlB },
+			options: { groupKey: [CtrlB] },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"circumflex", {
@@ -373,7 +373,7 @@ RegLib(this) {
 			unicode: "{U+035A}",
 			tags: ["double ring below", "двойное кольцо снизу"],
 			groups: ["Diacritics Primary"],
-			options: { groupKey: CtrlR },
+			options: { groupKey: [CtrlR] },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"line_vertical", {
@@ -496,7 +496,7 @@ RegLib(this) {
 			unicode: "{U+A66F}",
 			tags: ["взмет кириллицы", "cyrillic vzmet"],
 			groups: ["Diacritics Primary", "Cyrillic Diacritics"],
-			options: { groupKey: CtrlD, altLayoutKey: "<^<! [В]" },
+			options: { groupKey: [CtrlD], altLayoutKey: "<^<! [В]" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"cyr_com_titlo", {
@@ -1968,7 +1968,7 @@ RegLib(this) {
 			unicode: "{U+00A0}", LaTeX: ["~"],
 			tags: ["nbsp", "no-break space", "неразрывный пробел"],
 			groups: ["Spaces"],
-			options: { groupKey: SpaceKey, fastKey: "[Space]" },
+			options: { groupKey: [SpaceKey], fastKey: "[Space]" },
 			symbol: { category: "Spaces" },
 		},
 		"medium_math_space", {
@@ -2158,14 +2158,14 @@ RegLib(this) {
 			unicode: "{U+2042}",
 			tags: ["asterism", "астеризм"],
 			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
-			options: { groupKey: CtrlA, fastKey: ">+ [Num*]" },
+			options: { groupKey: [CtrlA], fastKey: ">+ [Num*]" },
 			recipe: ["***", "3*"],
 		},
 		"bullet", {
 			unicode: "{U+2022}",
 			tags: ["bullet", "булит"],
 			groups: ["Special Characters", "Special Fast Secondary"],
-			options: { groupKey: Backquote, fastKey: "[" Backquote "]" },
+			options: { groupKey: [Backquote], fastKey: "[" Backquote "]" },
 		},
 		"bullet_hyphen", {
 			unicode: "{U+2043}",
@@ -2177,7 +2177,7 @@ RegLib(this) {
 			unicode: "{U+00B7}",
 			tags: ["middle dot", "точка по центру", "интерпункт"],
 			groups: ["Special Characters", "Special Fast Secondary"],
-			options: { groupKey: '~', fastKey: "<+ [" Backquote "]" },
+			options: { groupKey: ["~"], fastKey: "<+ [" Backquote "]" },
 		},
 		"bullet_white", {
 			unicode: "{U+25E6}",
@@ -2195,7 +2195,7 @@ RegLib(this) {
 			unicode: "{U+2027}",
 			tags: ["hyphenation point", "точка переноса"],
 			groups: ["Special Characters", "Special Fast Secondary"],
-			options: { groupKey: "-", fastKey: ">+ [-]" },
+			options: { groupKey: ["-"], fastKey: ">+ [-]" },
 		},
 		"colon_triangle", {
 			unicode: "{U+02D0}",
@@ -2267,7 +2267,7 @@ RegLib(this) {
 			unicode: "{U+2E4B}",
 			tags: ["tripple dagger", "тройной даггер", "тройной крест"],
 			groups: ["Special Characters"],
-			options: { groupKey: CtrlT },
+			options: { groupKey: [CtrlT] },
 		},
 		"fraction_slash", {
 			unicode: "{U+2044}",

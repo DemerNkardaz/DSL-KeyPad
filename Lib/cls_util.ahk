@@ -1,11 +1,19 @@
 Class Util {
 
 	static IsArray(value) {
-		try {
-			return (value.Length)
-		} catch {
-			return False
-		}
+		return Type(value) = "Array"
+	}
+
+	static IsObject(value) {
+		return Type(value) = "Object"
+	}
+
+	static IsMap(value) {
+		return Type(value) = "Map"
+	}
+
+	static IsString(value) {
+		return Type(value) = "String"
 	}
 
 	static StrUpper(Str, Length := StrLen(Str)) {
