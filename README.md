@@ -1,10 +1,5 @@
 **Note:** In the process of dev & refactoring<br>**Примечание:** В процессе разработки и рефакторинга
 
-**Mini Todo:**
-
-- Once [Unicode 17](https://www.unicode.org/versions/Unicode17.0.0/) (9 sep 2025), add mode for [Sidetic](https://en.wikipedia.org/wiki/Sidetic_language).
-- Do not forgot about “Ꝥ,” “Ꝧ,” “Ȝ.”
-
 # DSL KeyPad
 
 ![Static Badge](<https://img.shields.io/badge/%F0%9F%94%96-%CE%AC%CE%BB%CF%86%CE%B1%20(dev)-yellow>) ![Static Badge](https://img.shields.io/badge/AHK-v2-yellow) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/DemerNkardaz/DSL-KeyPad?color=yellow)

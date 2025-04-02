@@ -2413,11 +2413,15 @@ RegLib(this) {
 		; * Uncommon Latin Letters
 		;
 		;
+		"lat_[c,s]_let_j_yogh", {
+			unicode: ["{U+021C}", "{U+021D}"],
+			options: { useLetterLocale: True, fastKey: ">+ $?Secondary" },
+			recipe: ["$3"],
+		},
 		"lat_s_let_s_long", {
 			unicode: "{U+017F}",
-			options: { useLetterLocale: True, fastKey: ">+ ~?Secondary" },
-			recipe: ["$"],
-			symbol: { letter: "fs" },
+			options: { useLetterLocale: True, fastKey: ">+ $?Secondary" },
+			recipe: ["fs"]
 		},
 		"lat_[c,s]_let_t_thorn", {
 			unicode: ["{U+00DE}", "{U+00FE}"],
@@ -2561,8 +2565,8 @@ RegLib(this) {
 			unicode: ["{U+0222}", "{U+0223}"],
 			recipe: ["$"]
 		},
-		"lat_s_lig_pl", { unicode: "{U+FB05}", recipe: ["$"] },
-		"lat_s_lig_st", { unicode: "{U+214A}", recipe: ["$", "${lat_s_let_s_long}t"] },
+		"lat_s_lig_pl", { unicode: "{U+214A}", recipe: ["$"] },
+		"lat_s_lig_st", { unicode: "{U+FB05}", recipe: ["$", "${lat_s_let_s_long}t"] },
 		"lat_s_lig_ue", { unicode: "{U+1D6B}", recipe: ["$"] },
 		"lat_[c,s]_lig_s_eszett", {
 			unicode: ["{U+1E9E}", "{U+00DF}"],
