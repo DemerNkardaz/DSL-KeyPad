@@ -74,6 +74,7 @@ CapsLock := Chr(0x2B9D)
 #Include <chr_entities>
 #Include <cls_util>
 #Include <cls_chr_lib>
+#Include <cls_chr_recipe_handler>
 #Include <cls_chr_legend>
 #Include <cls_panel>
 #Include <cls_key_event>
@@ -150,7 +151,7 @@ InternalFiles := Map(
 #Include <cls_cfg>
 #Include <cls_my_recipes>
 #Include <cls_language>
-#Include <cls_ligaturiser>
+#Include <cls_chr_crafter>
 #Include <cls_chr_inserter>
 #Include <cls_favorites>
 
@@ -3749,12 +3750,12 @@ Constructor() {
 	BtnSwitchEN.OnEvent("Click", (*) => SwitchLanguage("en"))
 
 	UpdateBtn := DSLPadGUI.Add("Button", "x809 y495 w32 h32")
-	UpdateBtn.OnEvent("Click", (*) => GetUpdate())
+	UpdateBtn.OnEvent("Click", (*) => "GetUpdate()")
 	GuiButtonIcon(UpdateBtn, ImageRes, 176, "w24 h24")
 
 	RepairBtn := DSLPadGUI.Add("Button", "x777 y495 w32 h32", "🛠️")
 	RepairBtn.SetFont("s16")
-	RepairBtn.OnEvent("Click", (*) => GetUpdate(0, True))
+	RepairBtn.OnEvent("Click", (*) => "GetUpdate(0, True)")
 
 	ConfigFileBtn := DSLPadGUI.Add("Button", "x809 y527 w32 h32")
 	ConfigFileBtn.OnEvent("Click", (*) => OpenConfigFile())
@@ -5551,7 +5552,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<!", ["lat_c_let_w_circumflex", "lat_s_let_w_circumflex"],
 				"<^>!<!<+", ["lat_c_let_w_dot_below", "lat_s_let_w_dot_below"],
 				"<^>!<+", ["lat_c_let_w_diaeresis", "lat_s_let_w_diaeresis"],
-				"<^>!>+", ["lat_c_let_wynn", "lat_s_let_wynn"],
+				"<^>!>+", ["lat_c_let_w_wynn", "lat_s_let_w_wynn"],
 				"<^>!<!>+", ["lat_c_let_w_anglicana", "lat_s_let_w_anglicana"],
 				">+", ["lat_c_let_w_grave", "lat_s_let_w_grave"]),
 			"X", Map(
@@ -6661,7 +6662,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["F"], (*) => ChrLib.SearchPrompt().send(), ;SearchKey(),
 			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
 			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
-			"<#<!" UseKey["L"], (*) => Ligaturiser(),
+			"<#<!" UseKey["L"], (*) => ChrCrafter(),
 			">^" UseKey["H"], (*) => TranslateSelectionToHTML("Entities"),
 			">^" UseKey["J"], (*) => TranslateSelectionToHTML("Entities", True),
 			">^>+" UseKey["H"], (*) => TranslateSelectionToHTML(),
@@ -6816,7 +6817,7 @@ ProceedCompose() {
 
 	if RAltsCount = 1 {
 		RAltsCount := 0
-		Ligaturiser("Compose")
+		ChrCrafter("Compose")
 		return
 	} else {
 		RAltsCount++
@@ -6960,7 +6961,7 @@ ManageTrayItems() {
 	App.tray.Delete()
 	App.tray.Add(CurrentApp, (*) => Run("https://github.com/DemerNkardaz/DSL-KeyPad/tree/main"))
 	if UpdateAvailable {
-		App.tray.Add(UpdateEntry, (*) => GetUpdate())
+		App.tray.Add(UpdateEntry, (*) => "GetUpdate()")
 		App.tray.SetIcon(UpdateEntry, ImageRes, 176)
 	}
 	App.tray.Add()
@@ -7050,7 +7051,7 @@ ManageTrayItems() {
 	App.tray.Add(Labels["search"], (*) => SearchKey())
 	App.tray.Add(Labels["unicode"], (*) => CharacterInserter("Unicode").InputDialog(False))
 	App.tray.Add(Labels["altcode"], (*) => CharacterInserter("Altcode").InputDialog(False))
-	App.tray.Add(Labels["smelter"], (*) => Ligaturiser())
+	App.tray.Add(Labels["smelter"], (*) => ChrCrafter())
 	App.tray.Add(Labels["open_folder"], OpenScriptFolder)
 	App.tray.Add()
 	App.tray.Add(Labels["notif"], (*) => ToggleGroupMessage())

@@ -724,7 +724,7 @@ Class InputScriptProcessor {
 
 		InputScriptProcessor.options.interceptionInputMode := reloadHs
 			? this.mode
-				: (this.mode != InputScriptProcessor.options.interceptionInputMode ? this.mode : "")
+			: (this.mode != InputScriptProcessor.options.interceptionInputMode ? this.mode : "")
 
 		isEnabled := (InputScriptProcessor.options.interceptionInputMode != "" ? True : False)
 
@@ -779,7 +779,7 @@ Class InputScriptProcessor {
 
 				if IPS.autoDiacritics || IPS.options.interceptionInputMode = "autoDiacritics" {
 					intermediateValue := StrLen(IPS.inputLogger) > 1 ? SubStr(IPS.inputLogger, -2, 2) : IPS.inputLogger
-					setAutoDiacritic := Ligaturiser.EntriesWalk(intermediateValue, , True, ["Latin Accented", "Latin Ligature Accented", "Cyrillic Accented", "Diacritic Mark"])
+					setAutoDiacritic := ChrCrafter.EntriesWalk(intermediateValue, , True, ["Latin Accented", "Latin Ligature Accented", "Cyrillic Accented", "Diacritic Mark"])
 
 					if setAutoDiacritic != "" && setAutoDiacritic != "N/A" {
 						IPS.backspaceLock := True
@@ -803,7 +803,7 @@ Class InputScriptProcessor {
 
 			if IPS.options.interceptionInputMode != "autoDiacritics" {
 				suggestions := IPS.GetSuggestions(IPS.inputLogger)
-				CaretTooltip(IPS.inputLogger (suggestions != "" ? "`n" Ligaturiser.FormatSuggestions(suggestions) : ""))
+				CaretTooltip(IPS.inputLogger (suggestions != "" ? "`n" ChrCrafter.FormatSuggestions(suggestions) : ""))
 			}
 		} else {
 			IPS.InH.Stop()

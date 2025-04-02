@@ -1,5 +1,4 @@
 class ChrLib {
-
 	static entries := {}
 	static entryGroups := Map()
 	static entryCategories := Map()
@@ -86,7 +85,7 @@ class ChrLib {
 				} else if key = "recipe" && value.Length > 0 {
 					tempRecipe := value.Clone()
 
-					definedRecipe := (*) => this.MakeRecipe(tempRecipe)
+					definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe)
 					interObj := {}
 					interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
 
@@ -220,29 +219,6 @@ class ChrLib {
 		return output
 	}
 
-	static EntryPreview(entryName, indent := 0) {
-		entry := this.GetEntry(entryName)
-		output := this.FormatEntry(entry, indent)
-		MsgBox(output)
-	}
-
-	static FormatEntry(entry, indent) {
-		output := ""
-		indentStr := Util.StrRepeat("`t", indent)
-
-		for key, value in entry.OwnProps() {
-			if Util.IsArray(value) {
-				output .= indentStr key ": " value.ToString() "`n"
-			} else if IsObject(value) {
-				output .= indentStr key ":`n" . this.FormatEntry(value, indent + 1)
-			} else {
-				output .= indentStr key ": " value "`n"
-			}
-		}
-
-		return output
-	}
-
 	static Gets(entryNames*) {
 		output := ""
 		indexMap := Map()
@@ -296,85 +272,6 @@ class ChrLib {
 		return output
 	}
 
-	static MakeRecipe(recipes*) {
-		output := []
-		interArr := []
-
-
-		for recipe in recipes {
-			if Util.IsArray(recipe) {
-				for recipeEntry in recipe {
-					interArr.Push(recipeEntry)
-				}
-			} else
-				interArr.Push(recipe)
-		}
-
-
-		for recipe in interArr {
-			test := False
-			if InStr(recipe, "breve") {
-				test := True
-				;msgbox("Breve detected in recipe: " recipe)
-			}
-			if InStr(recipe, "${") {
-				if RegExMatch(recipe, "\((.*?)\|(.*?)\)", &match) {
-					recipePair := [
-						RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[1]),
-						RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[2])
-					]
-					recipePair[1] := StrReplace(recipePair[1], "$(*)", "${" match[2] "}")
-					recipePair[2] := StrReplace(recipePair[2], "$(*)", "${" match[1] "}")
-
-
-					for recipe in recipePair {
-						while RegExMatch(recipe, "\${(.*?)}", &subMatch) {
-							characterName := subMatch[1]
-							characterAlteration := ""
-							hasAlteration := False
-
-							if RegExMatch(characterName, "\:\:(.*?)$", &alterationMatch) {
-								characterAlteration := alterationMatch[1]
-								hasAlteration := True
-								characterName := RegExReplace(characterName, "\:\:.*$", "")
-							}
-							try {
-								recipe := RegExReplace(recipe, "\${" subMatch[1] "}", this.Get(characterName, hasAlteration, characterAlteration))
-							} catch {
-								throw "Error in recipe: " recipe " with character: " characterName
-							}
-						}
-						output.Push(recipe)
-					}
-				} else {
-					while RegExMatch(recipe, "\${(.*?)}", &match) {
-
-						characterName := match[1]
-						characterAlteration := ""
-						hasAlteration := False
-
-						if RegExMatch(characterName, "\:\:(.*?)$", &alterationMatch) {
-							characterAlteration := alterationMatch[1]
-							hasAlteration := True
-							characterName := RegExReplace(characterName, "\:\:.*$", "")
-						}
-
-						recipe := RegExReplace(recipe, "\${" match[1] "}", this.Get(characterName, hasAlteration, characterAlteration))
-					}
-
-					output.Push(recipe)
-
-				}
-			} else {
-				output.Push(recipe)
-			}
-
-		}
-
-
-		return output
-	}
-
 	static GeneratePermutations(items) {
 		if items.Length = 1 {
 			return [items[1]]
@@ -391,19 +288,6 @@ class ChrLib {
 		}
 
 		return permutations
-	}
-
-
-	static GetRecipe(entryName, formatted := False, formatChar := ", ") {
-		output := []
-		if this.entries.%entryName%.HasOwnProp("recipeAlt") && this.entries.%entryName%.recipeAlt.Length > 0 {
-			output := this.entries.%entryName%.recipeAlt
-		} else if this.entries.%entryName%.HasOwnProp("recipe") && this.entries.%entryName%.recipe.Length > 0 {
-			output := this.entries.%entryName%.recipe
-		}
-
-		output := formatted && output.length > 0 ? output.ToString(formatChar) : output
-		return output
 	}
 
 	static Count(groupRestrict?) {
@@ -542,12 +426,6 @@ class ChrLib {
 		}
 
 		return refinedEntry
-	}
-
-	static PostProcess() {
-		for entryName, entry in this.entries.OwnProps() {
-			this.EntryPostProcessing(entryName, entry)
-		}
 	}
 
 	static EntryPostProcessing(entryName, entry) {
@@ -737,7 +615,7 @@ class ChrLib {
 		}
 
 		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.case) > 0 && StrLen(refinedEntry.data.letter) > 0 {
-			refinedEntry := this.LocalesGeneration(entryName, refinedEntry)
+			refinedEntry := Locale.LocalesGeneration(entryName, refinedEntry)
 		}
 
 		this.entries.%entryName% := refinedEntry
@@ -807,73 +685,6 @@ class ChrLib {
 		}
 	}
 
-	static LocalesGeneration(entryName, entry) {
-		pfx := "gen_"
-		useLetterLocale := entry.options.HasOwnProp("useLetterLocale") ? entry.options.useLetterLocale : False
-		letter := (entry.symbol.HasOwnProp("letter") && StrLen(entry.symbol.letter) > 0) ? entry.symbol.letter : entry.data.letter
-		lScript := entry.data.script
-		lCase := entry.data.case
-		lType := entry.data.type
-		lPostfixes := entry.data.postfixes
-		psx := lType = "digraph" ? "_second" : ""
-
-		langCodes := ["en", "ru", "en_alt", "ru_alt"]
-		entry.titles := Map()
-		tags := Map()
-
-		for _, langCode in langCodes {
-			isAlt := InStr(langCode, "_alt")
-			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
-			postLetter := useLetterLocale ? Locale.Read((useLetterLocale = "Origin" ? RegExReplace(entryName, "i)^(.*?)__.*", "$1") : entryName) "_letterTitle", lang) : letter
-
-			lBeforeletter := entry.symbol.HasOwnProp("beforeLetter") && StrLen(entry.symbol.beforeLetter) > 0 ? Locale.Read(pfx "beforeLetter_" entry.symbol.beforeLetter, lang) " " : ""
-			lAfterletter := entry.symbol.HasOwnProp("afterLetter") && StrLen(entry.symbol.afterLetter) > 0 ? " " Locale.Read(pfx "afterLetter_" entry.symbol.afterLetter, lang) : ""
-
-
-			if isAlt {
-				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter postLetter lAfterletter
-			} else {
-				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
-				tags[langCode] := Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
-			}
-		}
-
-		if lPostfixes.Length > 0 {
-			for _, langCode in langCodes {
-				lang := InStr(langCode, "_alt") ? SubStr(langCode, 1, 2) : langCode
-				postfixText := ""
-
-				postfixText .= " " Locale.Read(pfx "postfix_with", lang) ChrLib.Get("no_break_space") Locale.Read(pfx "postfix_" lPostfixes[1], lang)
-
-				Loop lPostfixes.Length - 2
-					postfixText .= ", " Locale.Read(pfx "postfix_" lPostfixes[A_Index + 1], lang)
-
-				if lPostfixes.Length > 1
-					postfixText .= " " Locale.Read(pfx "postfix_and", lang) ChrLib.Get("no_break_space") Locale.Read(pfx "postfix_" lPostfixes[lPostfixes.Length], lang)
-
-				entry.titles[langCode] .= postfixText
-
-				if !InStr(langCode, "_alt") {
-					tags[langCode] .= postfixText
-				}
-			}
-		}
-
-		tags["en"] := Locale.Read(pfx "tagScript_" lScript, "en") " " tags["en"]
-		tags["ru"] := tags["ru"] " " Locale.Read(pfx "tagScript_" lScript, "ru")
-
-
-		hasTags := entry.tags.Length > 0
-		tagIndex := 0
-		for tag in tags {
-			tagIndex++
-			entry.tags.InsertAt(tagIndex, tags[tag])
-		}
-
-
-		return entry
-	}
-
 	static SetDecomposedData(entryName, entry) {
 		decomposedName := this.NameDecompose(entryName)
 
@@ -890,6 +701,29 @@ class ChrLib {
 			entry.data := decomposedName
 			return entry
 		}
+	}
+
+	static EntryPreview(entryName, indent := 0) {
+		entry := this.GetEntry(entryName)
+		output := this.FormatEntry(entry, indent)
+		MsgBox(output)
+	}
+
+	static FormatEntry(entry, indent) {
+		output := ""
+		indentStr := Util.StrRepeat("`t", indent)
+
+		for key, value in entry.OwnProps() {
+			if Util.IsArray(value) {
+				output .= indentStr key ": " value.ToString() "`n"
+			} else if IsObject(value) {
+				output .= indentStr key ":`n" . this.FormatEntry(value, indent + 1)
+			} else {
+				output .= indentStr key ": " value "`n"
+			}
+		}
+
+		return output
 	}
 }
 
@@ -951,19 +785,3 @@ ChrLib.AddEntry(
 	}
 )
 */
-
-CopyDiacriticMarks() {
-
-
-	marks := ChrLib.entryCategories["Diacritic Mark"]
-
-	text := ""
-	for index, mark in marks {
-		text .= mark "`n"
-	}
-
-	A_Clipboard := text
-	MsgBox "Символы успешно скопированы в буфер обмена!"
-}
-
-;SetTimer(() => CopyDiacriticMarks(), -5000)

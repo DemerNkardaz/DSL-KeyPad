@@ -2471,8 +2471,20 @@ RegLib(this) {
 		"lat_[c,s]_let_t_thorn_double", {
 			unicode: ["{U+A7D2}", "{U+A7D3}"],
 			options: { useLetterLocale: True },
-			recipe: ["$$", "${lat_[c,s]_let_@_thorn}${lat_[c,s]_let_@_thorn}"],
+			recipe: ["$$", "${lat_[c,s]_let_@_thorn×2}"],
 			symbol: { letter: ["TH", "th"] },
+		},
+		"lat_[c,s]_let_w_wynn", {
+			unicode: ["{U+01F7}", "{U+01BF}"],
+			options: { useLetterLocale: True, fastKey: ">+ ~?Secondary" },
+			recipe: ["$"],
+			symbol: { letter: ["WY", "wy"] },
+		},
+		"lat_[c,s]_let_w_wynn_double", {
+			unicode: ["{U+A7D4}", "{U+A7D5}"],
+			options: { useLetterLocale: True },
+			recipe: ["$$", "${lat_[c,s]_let_@_wynn×2}"],
+			symbol: { letter: ["WY", "wy"] },
 		},
 		"lat_[c,s]_let_z_ezh", {
 			unicode: ["{U+01B7}", "{U+0292}"],

@@ -487,14 +487,21 @@ Class Panel {
 			)
 			aboutAuthorLinks.SetFont("s9", "Cambria")
 
-			customCount := ChrLib.Count("Custom Composes")
-			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customCount), (customCount > 0 ? "+" customCount " " Locale.Read("with_my_recipes") : "") Chrs(0x2005, 0x2014, 0x2005) App.decodedTitle)
 
-			aboutDescBox := panelWindow.AddGroupBox("x315 y34 w530 h520", chrCount)
+			recipesCount := ChrRecipeHandler.Count()
+			customRecipesCount := ChrLib.Count("Custom Composes")
+
+
+			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customRecipesCount), recipesCount, customRecipesCount)
+
+			aboutDescBox := panelWindow.AddGroupBox("x315 y34 w530 h520", App.decodedTitle)
 			aboutDescBox.SetFont("s11", "Cambria")
 
 			aboutDescription := panelWindow.AddText("x330 y70 w505 h495 Wrap BackgroundTrans", Locale.Read("about_description"))
 			aboutDescription.SetFont("s12 c333333", "Cambria")
+
+			aboutChrCount := panelWindow.AddText("x330 y530 w505 h24 Wrap BackgroundTrans", chrCount)
+			aboutChrCount.SetFont("c333333")
 
 			panelTabs.UseTab(panelTabList.Obj.useful)
 

@@ -3,7 +3,7 @@
 \\	Founds matches of input and “recipes” in characters’ map to return the result instead of original input.
 */
 
-Class Ligaturiser {
+Class ChrCrafter {
 
 	static modifiedCharsType := ""
 	static prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
@@ -11,10 +11,10 @@ Class Ligaturiser {
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 
-		Ligaturiser.modifiedCharsType := GetModifiedCharsType()
-		Ligaturiser.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
+		ChrCrafter.modifiedCharsType := GetModifiedCharsType()
+		ChrCrafter.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
 
-		Ligaturiser.%this.compositingMode%Mode()
+		ChrCrafter.%this.compositingMode%Mode()
 		try {
 		} catch {
 			if this.compositingMode = "InputBox"
@@ -32,21 +32,19 @@ Class Ligaturiser {
 			this.prompt := IB.Value
 
 		if this.prompt != "" {
-			try {
-				output := ""
-				for prompt in StrSplit(this.prompt, " ") {
-					output .= this.ValidateRecipes(prompt, , True) " "
-				}
 
-				if output = "" || RegExMatch(output, "^\s+$")
-					throw
+			output := ""
+			for prompt in StrSplit(this.prompt, " ") {
+				output .= this.ValidateRecipes(prompt, , True) " "
+			}
 
+			if output = "" || RegExMatch(output, "^\s+$")
+				return
+			else {
 				output := RegExReplace(output, "\s+$", "")
 				this.SendOutput(output)
 
 				IniWrite(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), ConfigFile, "LatestPrompts", "Ligature")
-			} catch {
-				throw
 			}
 		}
 
@@ -110,7 +108,7 @@ Class Ligaturiser {
 				cleanPastInput := False
 			}
 
-			tooltipSuggestions := input != "" ? Ligaturiser.FormatSuggestions(this.ValidateRecipes(input, True)) : ""
+			tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(input, True)) : ""
 			currentInputMode := Util.StrVarsInject(Locale.Read("tooltip_input_mode"), "[" Cfg.Get("Input_Mode") "]")
 
 
@@ -169,6 +167,7 @@ Class Ligaturiser {
 	}
 
 	static SendOutput(output) {
+		output := RegExReplace(output, "\#", "")
 		if StrLen(output) > 20
 			ClipSend(output)
 		else
@@ -403,7 +402,7 @@ Class Ligaturiser {
 		}
 
 		if StrLen(output) > 0 {
-			output := Ligaturiser.FormatSuggestions(output)
+			output := ChrCrafter.FormatSuggestions(output)
 		}
 
 		return output
@@ -455,7 +454,7 @@ Class Ligaturiser {
 	static GetRecipesString_NEW(entryName) {
 		output := ""
 
-		recipe := ChrLib.GetRecipe(entryName, True, " | ")
+		recipe := ChrRecipeHandler.GetStr(entryName, True, " | ")
 		uniSequence := Util.StrFormattedReduce(ChrLib.Get(entryName), , True)
 
 		output .= uniSequence " (" (IsObject(recipe) ? recipe.ToString(" | ") : recipe) "), "

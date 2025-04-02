@@ -1,4 +1,5 @@
 Array.Prototype.DefineProp("ToString", { Call: _ArrayToString })
+Array.Prototype.DefineProp("ToFlat", { Call: _ArrayToFlat })
 Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
 Array.Prototype.DefineProp("Contains", { Call: _ArrayContains })
 Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
@@ -7,17 +8,6 @@ Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 
-class ProxyFunction {
-	__New(targetFunc) {
-		this.targetFunc := targetFunc
-	}
-
-	__Call(params*) {
-		return this.targetFunc.Call(params*)
-	}
-}
-
-
 _ObjMaxIndex(this) {
 	indexes := 0
 	for k, v in this.OwnProps() {
@@ -25,6 +15,20 @@ _ObjMaxIndex(this) {
 	}
 
 	return indexes
+}
+
+_ArrayToFlat(this) {
+	result := []
+	for item in this {
+		if Util.IsArray(item) {
+			for subItem in item {
+				result.Push(subItem)
+			}
+		} else {
+			result.Push(item)
+		}
+	}
+	return result
 }
 
 _ArrayToString(this, char := ", ") {

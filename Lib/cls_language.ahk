@@ -234,4 +234,72 @@ Class Locale extends Language {
 			return Intermediate
 		}
 	}
+
+	static LocalesGeneration(entryName, entry) {
+		pfx := "gen_"
+		useLetterLocale := entry.options.HasOwnProp("useLetterLocale") ? entry.options.useLetterLocale : False
+		letter := (entry.symbol.HasOwnProp("letter") && StrLen(entry.symbol.letter) > 0) ? entry.symbol.letter : entry.data.letter
+		lScript := entry.data.script
+		lCase := entry.data.case
+		lType := entry.data.type
+		lPostfixes := entry.data.postfixes
+		psx := lType = "digraph" ? "_second" : ""
+
+		langCodes := ["en", "ru", "en_alt", "ru_alt"]
+		entry.titles := Map()
+		tags := Map()
+
+		for _, langCode in langCodes {
+			isAlt := InStr(langCode, "_alt")
+			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
+			postLetter := useLetterLocale ? Locale.Read((useLetterLocale = "Origin" ? RegExReplace(entryName, "i)^(.*?)__.*", "$1") : entryName) "_letterTitle", lang) : letter
+
+			lBeforeletter := entry.symbol.HasOwnProp("beforeLetter") && StrLen(entry.symbol.beforeLetter) > 0 ? Locale.Read(pfx "beforeLetter_" entry.symbol.beforeLetter, lang) " " : ""
+			lAfterletter := entry.symbol.HasOwnProp("afterLetter") && StrLen(entry.symbol.afterLetter) > 0 ? " " Locale.Read(pfx "afterLetter_" entry.symbol.afterLetter, lang) : ""
+
+
+			if isAlt {
+				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter postLetter lAfterletter
+			} else {
+				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
+				tags[langCode] := Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
+			}
+		}
+
+		if lPostfixes.Length > 0 {
+			for _, langCode in langCodes {
+				lang := InStr(langCode, "_alt") ? SubStr(langCode, 1, 2) : langCode
+				postfixText := ""
+
+				postfixText .= " " Locale.Read(pfx "postfix_with", lang) ChrLib.Get("no_break_space") Locale.Read(pfx "postfix_" lPostfixes[1], lang)
+
+				Loop lPostfixes.Length - 2
+					postfixText .= ", " Locale.Read(pfx "postfix_" lPostfixes[A_Index + 1], lang)
+
+				if lPostfixes.Length > 1
+					postfixText .= " " Locale.Read(pfx "postfix_and", lang) ChrLib.Get("no_break_space") Locale.Read(pfx "postfix_" lPostfixes[lPostfixes.Length], lang)
+
+				entry.titles[langCode] .= postfixText
+
+				if !InStr(langCode, "_alt") {
+					tags[langCode] .= postfixText
+				}
+			}
+		}
+
+		tags["en"] := Locale.Read(pfx "tagScript_" lScript, "en") " " tags["en"]
+		tags["ru"] := tags["ru"] " " Locale.Read(pfx "tagScript_" lScript, "ru")
+
+
+		hasTags := entry.tags.Length > 0
+		tagIndex := 0
+		for tag in tags {
+			tagIndex++
+			entry.tags.InsertAt(tagIndex, tags[tag])
+		}
+
+
+		return entry
+	}
+
 }
