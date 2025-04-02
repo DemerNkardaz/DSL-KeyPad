@@ -3,7 +3,7 @@
 #MaxThreads 10
 ;#UseHook
 ;InstallKeybdHook(True, True)
-
+;KeyHistory
 A_HotkeyInterval := 1000
 A_MaxHotkeysPerInterval := 50
 

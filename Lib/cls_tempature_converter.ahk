@@ -212,7 +212,6 @@ Class TemperatureConversion {
 		CME(G) => (G + 38.83) * 100 / 395.56
 		KME(G) => (G - 234.32) * 100 / 395.56
 	}
-
 	static GetNumber(conversionLabel) {
 		static validator := "v1234567890,.-'" GetChar("minus")
 		static expression := "^[1234567890,.'\- " GetChar("minus") "]+$"
@@ -223,7 +222,7 @@ Class TemperatureConversion {
 		PH.Start()
 
 		Loop {
-			IH := InputHook("L1", "{Escape}{Backspace}")
+			IH := InputHook("L1", "{Escape}{Backspace}{Insert}")
 			IH.Start(), IH.Wait()
 
 			if (IH.EndKey = "Escape") {
@@ -232,14 +231,13 @@ Class TemperatureConversion {
 			} else if (IH.EndKey = "Backspace") {
 				if StrLen(numberValue) > 0
 					numberValue := SubStr(numberValue, 1, -1)
+			} else if (IH.EndKey = "Insert") {
+				ClipWait(0.5, 1)
+				if RegExMatch(A_Clipboard, expression) {
+					numberValue .= A_Clipboard
+				}
 			} else if InStr(validator, IH.Input) {
-				if InStr(IH.Input, "v") {
-					ClipWait(0.5, 1)
-					if RegExMatch(A_Clipboard, expression) {
-						numberValue .= A_Clipboard
-					}
-				} else
-					numberValue .= IH.Input
+				numberValue .= IH.Input
 			} else break
 
 			CaretTooltip(conversionLabel " " numberValue)

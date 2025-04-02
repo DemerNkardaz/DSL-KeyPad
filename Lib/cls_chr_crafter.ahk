@@ -71,7 +71,7 @@ Class ChrCrafter {
 
 		Loop {
 
-			IH := InputHook("L1", "{Escape}{Backspace}{Enter}{Pause}{Tab}")
+			IH := InputHook("L1", "{Escape}{Backspace}{Enter}{Pause}{Tab}{Insert}")
 			IH.Start(), IH.Wait()
 
 			if (IH.EndKey = "Escape") {
@@ -84,6 +84,9 @@ Class ChrCrafter {
 			} else if (IH.EndKey = "Backspace") {
 				if StrLen(input) > 0
 					input := SubStr(input, 1, -1)
+			} else if (IH.EndKey = "Insert") {
+				ClipWait(0.5, 1)
+				input .= A_Clipboard
 
 			} else if IH.Input != "" {
 				input .= IH.Input

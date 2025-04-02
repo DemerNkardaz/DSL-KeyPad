@@ -6948,13 +6948,13 @@ LibRegistrate(this) {
 			unicode: "{U+1F705}",
 			tags: ["alchemical nitric acid", "alchemical aqua fortis", "алхимическая азотная кислота"],
 			groups: ["Alchemical"],
-			recipe: ["alc nitric acid", "alc aqua fortis"],
+			recipe: ["${alchemical_element_water}F", "alc nitric acid", "alc aqua fortis"],
 		},
 		"alchemical_acid_nitrohydrochloric", {
 			unicode: "{U+1F706}",
 			tags: ["alchemical nitrohydrochloric acid", "alchemical aqua regia", "алхимическая царская водка"],
 			groups: ["Alchemical"],
-			recipe: ["alc aqua regia"],
+			recipe: ["${alchemical_element_water}R", "alc aqua regia"],
 		},
 		"alchemical_acid_vinegar", {
 			unicode: "{U+1F70A}",
@@ -6966,19 +6966,19 @@ LibRegistrate(this) {
 			unicode: "{U+1F70B}",
 			tags: ["alchemical distilled acetic acid-1", "alchemical distilled vinegar-1", "алхимическая дистилированная уксусная кислота-1"],
 			groups: ["Alchemical"],
-			recipe: ["alc dis vinegar-1"],
+			recipe: [":${alchemical_acid_vinegar}:", "alc dis vinegar-1"],
 		},
 		"alchemical_acid_vinegar_distilled_2", {
 			unicode: "{U+1F70C}",
 			tags: ["alchemical distilled acetic acid-2", "alchemical distilled vinegar-2", "алхимическая дистилированная уксусная кислота-2"],
 			groups: ["Alchemical"],
-			recipe: ["alc dis vinegar-2"],
+			recipe: [":I:", "alc dis vinegar-2"],
 		},
 		"alchemical_sand_bath", {
 			unicode: "{U+1F707}",
 			tags: ["alchemical sand bath", "alchemical aqua regia-2", "алхимическая песчаная баня", "алхимическая царская водка-2"],
 			groups: ["Alchemical"],
-			recipe: ["alc sand bath"],
+			recipe: ["AR", "alc sand bath"],
 		},
 		"alchemical_ethanol_1", {
 			unicode: "{U+1F708}",
@@ -6996,7 +6996,7 @@ LibRegistrate(this) {
 			unicode: "{U+1F70D}",
 			tags: ["alchemical brimstone", "alchemical sulfur", "alchemical sulphur", "алхимическая сера"],
 			groups: ["Alchemical"],
-			recipe: ["alc sulfur"],
+			recipe: ["${alchemical_element_fire}${dagger}", "alc sulfur"],
 		},
 		"alchemical_brimstone_philosophers", {
 			unicode: "{U+1F70E}",
