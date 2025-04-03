@@ -2522,6 +2522,12 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True },
 			recipe: [["`"6"], ["'6"]],
 		},
+		"lat_s_let_a_ain", {
+			unicode: "{U+1D25}",
+			alterations: { modifier: "{U+1D5C}" },
+			options: { useLetterLocale: True },
+			recipe: ["$in"],
+		},
 		"lat_[c,s]_let_j_yogh", {
 			unicode: ["{U+021C}", "{U+021D}"],
 			options: { useLetterLocale: True, fastKey: ">+ $?Secondary" },
@@ -2644,6 +2650,16 @@ LibRegistrate(this) {
 			},
 			recipe: ["$ps", "$3"],
 		},
+		"lat_s_let_f_phi", {
+			unicode: "{U+0278}",
+			tags: ["voiceless bilabial fricative", "глухой губно-губной спирант"],
+			groups: ["Latino-Hellenic", "IPA"],
+			options: {
+				layoutTitles: True, altLayoutKey: "$",
+				useLetterLocale: True
+			},
+			recipe: ["phi"],
+		},
 		"lat_[c,s]_let_g_gamma", {
 			unicode: ["{U+0194}", "{U+0263}"],
 			tags: [[], ["voiced velar fricative", "звонкий велярный спирант"]],
@@ -2652,6 +2668,30 @@ LibRegistrate(this) {
 				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: "<+>+ $?Secondary"
 			},
 			recipe: ["$am", "$y"],
+		},
+		"lat_[c,s]_let_h_chi", {
+			unicode: ["{U+A7B3}", "{U+AB53}"],
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: True },
+			recipe: ["/chi/"],
+		},
+		"lat_[c,s]_let_i_iota", {
+			unicode: ["{U+0196}", "{U+0269}"],
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: True },
+			recipe: ["$ot"],
+		},
+		"lat_[c,s]_let_l_lambda", {
+			unicode: ["{U+A7DA}", "{U+A7DB}"],
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: True },
+			recipe: ["$am"],
+		},
+		"lat_[c,s]_let_l_lambda__stroke_short", {
+			unicode: ["{U+A7DC}", "{U+019B}"],
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: "Origin" },
+			recipe: ["$am${stroke_short}", "${lat_[c,s]_let_@_lambda}${stroke_short}"],
 		},
 		"lat_[c,s]_let_o_omega", {
 			unicode: ["{U+A7B6}", "{U+A7B7}"],

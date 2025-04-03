@@ -518,6 +518,19 @@ Class ChrCrafter {
 		return output
 	}
 
+	static EffectiveLength(str) {
+		length := StrLen(str)
+
+		symbolCount := 0
+		pos := 1
+		while (pos := InStr(str, DottedCircle, false, pos)) {
+			symbolCount++
+			pos++
+		}
+
+		return length - symbolCount
+	}
+
 	static FormatSuggestions(suggestions, maxLength := 72) {
 		if suggestions = "N/A"
 			return suggestions
@@ -538,13 +551,13 @@ Class ChrCrafter {
 				}
 			}
 
-			if StrLen(part) > 2 && (isUnique) {
+			if this.EffectiveLength(part) > 2 && (isUnique) {
 				uniqueParts.Push(part)
 			}
 		}
 
 		for part in uniqueParts {
-			if (StrLen(currentLine) + StrLen(part) + 2 <= maxLength) {
+			if (this.EffectiveLength(currentLine) + this.EffectiveLength(part) + 2 <= maxLength) {
 				currentLine .= part ", "
 			} else {
 				output .= currentLine "`n"
@@ -558,6 +571,65 @@ Class ChrCrafter {
 
 		output := RegExReplace(output, ",\s$", "")
 
+		return this.SuggestionsLimiter(output)
+	}
+
+	static SuggestionsLimiter(suggestions, maxLength := 72 * 6) {
+		if this.EffectiveLength(suggestions) <= maxLength
+			return suggestions
+
+		effectivePos := 0
+		lastParenPos := 0
+
+		Loop StrLen(suggestions) {
+			char := SubStr(suggestions, A_Index, 1)
+
+			if char != DottedCircle
+				effectivePos++
+
+			if effectivePos > maxLength
+				break
+
+			if char = ")"
+				lastParenPos := A_Index
+		}
+
+		if lastParenPos = 0 {
+			effectivePos := 0
+
+			Loop StrLen(suggestions) {
+				char := SubStr(suggestions, A_Index, 1)
+
+				if char != DottedCircle
+					effectivePos++
+
+				if effectivePos > maxLength
+					break
+
+				if char = " "
+					lastParenPos := A_Index
+			}
+
+			if lastParenPos = 0 {
+				effectivePos := 0
+				realPos := 0
+
+				Loop StrLen(suggestions) {
+					char := SubStr(suggestions, A_Index, 1)
+					realPos := A_Index
+
+					if char != DottedCircle
+						effectivePos++
+
+					if effectivePos >= maxLength
+						break
+				}
+
+				lastParenPos := realPos
+			}
+		}
+
+		output := SubStr(suggestions, 1, lastParenPos) ", […]"
 		return output
 	}
 
