@@ -2629,6 +2629,12 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True },
 			recipe: ["$et"],
 		},
+		"lat_s_let_d_delta", {
+			unicode: "{U+1E9F}",
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: True },
+			recipe: ["$el"],
+		},
 		"lat_[c,s]_let_e_epsilon", {
 			unicode: ["{U+0190}", "{U+025B}"],
 			tags: [[], ["open-mid front unrounded vowel", "неогублённый гласный переднего ряда средне-нижнего подъёма"]],

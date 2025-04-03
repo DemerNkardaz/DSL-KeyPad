@@ -4,13 +4,13 @@ Class ChrRecipeHandler {
 		interArr := recipes.ToFlat()
 
 		for recipe in interArr {
-			output.Push(this.MakeStr(recipe))
+			this.MakeStr(recipe, output)
 		}
 
 		return output
 	}
 
-	static MakeStr(recipe) {
+	static MakeStr(recipe, outputArray := "") {
 		output := ""
 		if InStr(recipe, "${") {
 			if RegExMatch(recipe, "\((.*?)\|(.*?)\)", &match) {
@@ -22,16 +22,29 @@ Class ChrRecipeHandler {
 				recipePair[2] := StrReplace(recipePair[2], "$(*)", "${" match[1] "}")
 
 				for pairRecipe in recipePair {
-					output .= this.ProcessRecipeString(pairRecipe)
+					if Util.IsArray(outputArray) {
+						outputArray.Push(this.ProcessRecipeString(pairRecipe))
+					} else {
+						output .= this.ProcessRecipeString(pairRecipe)
+					}
 				}
 			} else {
-				output .= this.ProcessRecipeString(recipe)
+				if Util.IsArray(outputArray) {
+					outputArray.Push(this.ProcessRecipeString(recipe))
+				} else {
+					output .= this.ProcessRecipeString(recipe)
+				}
 			}
 		} else {
-			output .= recipe
+			if Util.IsArray(outputArray) {
+				outputArray.Push(recipe)
+			} else {
+				output .= recipe
+			}
 		}
 
-		return output
+		if Util.IsString(outputArray)
+			return output
 	}
 
 	static GetStr(entryName, formatted := False, formatChar := ", ") {
