@@ -635,6 +635,124 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Default Hellenic
+		;
+		;
+		"hel_[c,s]_let_a_alpha", {
+			unicode: ["{U+0391}", "{U+03B1}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_b_beta", {
+			unicode: ["{U+0392}", "{U+03B2}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_g_gamma", {
+			unicode: ["{U+0393}", "{U+03B3}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_d_delta", {
+			unicode: ["{U+0394}", "{U+03B4}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_e_epsilon", {
+			unicode: ["{U+0395}", "{U+03B5}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_z_zeta", {
+			unicode: ["{U+0396}", "{U+03B6}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_h_eta", {
+			unicode: ["{U+0397}", "{U+03B7}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_t_theta", {
+			unicode: ["{U+0398}", "{U+03B8}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_i_iota", {
+			unicode: ["{U+0399}", "{U+03B9}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_k_kappa", {
+			unicode: ["{U+039A}", "{U+03BA}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_l_lambda", {
+			unicode: ["{U+039B}", "{U+03BB}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_m_mu", {
+			unicode: ["{U+039C}", "{U+03BC}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_n_nu", {
+			unicode: ["{U+039D}", "{U+03BD}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_x_xi", {
+			unicode: ["{U+039E}", "{U+03BE}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_o_omicron", {
+			unicode: ["{U+039F}", "{U+03BF}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_p_pi", {
+			unicode: ["{U+03A0}", "{U+03C0}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_r_rho", {
+			unicode: ["{U+03A1}", "{U+03C1}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_s_sigma", {
+			unicode: ["{U+03A3}", "{U+03C3}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_s_let_s_sigma_final", {
+			unicode: "{U+03C2}",
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_t_tau", {
+			unicode: ["{U+03A4}", "{U+03C4}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_u_upsilon", {
+			unicode: ["{U+03A5}", "{U+03C5}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_f_phi", {
+			unicode: ["{U+03A6}", "{U+03C6}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_k_chi", {
+			unicode: ["{U+03A7}", "{U+03C7}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_p_psi", {
+			unicode: ["{U+03A8}", "{U+03C8}"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_o_omega", {
+			unicode: ["{U+03A9}", "{U+03C9}"],
+			options: { altLayoutKey: "$" },
+		},
+		;
+		;
+		; * Hellenic Ligatures
+		;
+		;
+		"hel_[c,s]_lig_st_stigma", {
+			unicode: ["{U+03DA}", "{U+03DB}"],
+			recipe: ["${hel_[c,s]_let_s_sigma}${hel_[c,s]_let_t_tau}"]
+		},
+		"hel_[c,s]_lig_k_kai", {
+			unicode: ["{U+03CF}", "{U+03D7}"],
+			recipe: ["${hel_[c,s]_let_k_kappa}${hel_[c,s]_let_a_alpha}${hel_[c,s]_let_i_iota}"]
+		},
+		;
+		;
 		; * Default Latin
 		;
 		;

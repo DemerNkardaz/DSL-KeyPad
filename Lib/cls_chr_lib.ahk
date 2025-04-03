@@ -1,5 +1,6 @@
 Class ChrEntry {
 	index := 0
+	proxy := ""
 	unicode := ""
 	sequence := []
 	result := []
@@ -37,7 +38,9 @@ Class ChrEntry {
 	}
 	data := { script: "", case: "", type: "", letter: "", postfixes: [], }
 
-	__New(attributes := {}) {
+	__New(attributes := {}, name := "") {
+		attributes := ChrEntry.Proxying(this, attributes)
+
 		for key, value in attributes.OwnProps() {
 			if Util.IsArray(value) {
 				this.%key% := []
@@ -50,7 +53,57 @@ Class ChrEntry {
 				this.%key% := value
 			}
 		}
+
+		if StrLen(this.proxy) > 0
+			this.options.noCalc := True
+
 		return this
+	}
+
+	static Proxying(root, attributes) {
+		if attributes.HasOwnProp("proxy") && StrLen(attributes.proxy) > 0 {
+			proxyName := attributes.proxy
+			proxyEntry := ChrLib.GetEntry(proxyName)
+
+			if !proxyEntry {
+				return attributes
+			}
+
+			blacklist := ["groups", "options", "recipe", "recipeAlt", "symbol", "data", "titles", "tags"]
+
+			for key, value in proxyEntry.OwnProps() {
+				if blacklist.Has(key) && attributes.HasOwnProp(key) {
+					continue
+				}
+
+				if Util.IsArray(value) {
+					root.%key% := value.Clone()
+				} else if Util.IsObject(value) {
+					root.%key% := {}
+					for subKey, subValue in value.OwnProps() {
+						root.%key%.%subKey% := subValue
+					}
+				} else {
+					root.%key% := value
+				}
+			}
+
+			for key, value in attributes.OwnProps() {
+				if Util.IsArray(value) {
+					root.%key% := value.Clone()
+				} else if Util.IsObject(value) && root.HasOwnProp(key) {
+					for subKey, subValue in value.OwnProps() {
+						root.%key%.%subKey% := subValue
+					}
+				} else {
+					root.%key% := value
+				}
+			}
+
+			return root
+		}
+
+		return attributes
 	}
 }
 
@@ -80,7 +133,10 @@ class ChrLib {
 				variantName := RegExReplace(entryName, "\[.*?\]", variant)
 				entries.%variantName% := entry.Clone()
 
-				entries.%variantName%.unicode := entry.unicode[i]
+				if Util.IsArray(entry.unicode)
+					entries.%variantName%.unicode := entry.unicode[i]
+				if Util.IsArray(entry.proxy)
+					entries.%variantName%.proxy := entry.proxy[i]
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
 
 				entries.%variantName%.symbol := entry.symbol.Clone()
@@ -95,11 +151,12 @@ class ChrLib {
 				this.ProcessReferences(entries.%variantName%, entry, i)
 
 				entries.%variantName%.options := this.CloneOptions(entry.options, i)
+
 			}
 
 			for entryName, entry in entries.OwnProps() {
 				this.ProcessRecipe(entry, splitVariants)
-				this.AddEntry(entryName, ChrEntry(entry))
+				this.AddEntry(entryName, ChrEntry(entry, entryName))
 			}
 		} else {
 
@@ -120,7 +177,7 @@ class ChrLib {
 			index := A_Index * 2 - 1
 			entryName := arguments[index]
 			entryValue := arguments[index + 1]
-			this.AddEntry(entryName, ChrEntry(entryValue))
+			this.AddEntry(entryName, ChrEntry(entryValue, entryName))
 		}
 		return
 	}
@@ -506,8 +563,12 @@ class ChrLib {
 		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
 			if refinedEntry.groups.Length = 0 {
 				hasPostfix := refinedEntry.data.postfixes.Length > 0
-				if refinedEntry.data.script = "latin" {
-					refinedEntry.groups := refinedEntry.data.type = "ligature" ? ["Latin Ligatures"] : refinedEntry.data.type = "digraph" ? ["Latin Digraphs"] : ["Latin" (hasPostfix ? " Accented" : "")]
+				if ["hellenic", "latin", "cyrillic"].HasValue(refinedEntry.data.script) {
+					refinedEntry.groups := refinedEntry.data.type = "ligature" ? [Util.StrUpper(refinedEntry.data.script, 1) " Ligatures"] : refinedEntry.data.type = "digraph" ? [Util.StrUpper(refinedEntry.data.script, 1) " Digraphs"] : [Util.StrUpper(refinedEntry.data.script, 1) (hasPostfix ? " Accented" : "")]
+				}
+
+				if refinedEntry.data.script = "hellenic" {
+					refinedEntry.options.useLetterLocale := True
 				}
 			}
 
@@ -712,9 +773,6 @@ class ChrLib {
 		}
 
 		this.entries.%entryName% := refinedEntry
-		if InStr(entryName, "digit") && InStr(entryName, "2") {
-			;MsgBox(this.entries.%entryName%.unicode)
-		}
 	}
 
 	static NameDecompose(entryName) {
@@ -828,6 +886,7 @@ class ChrLib {
 		return output
 	}
 }
+
 
 /*
 ChrLib.AddEntry(

@@ -226,6 +226,12 @@ Class Panel {
 						;
 						{ type: "Recipe", group: "Latin Accented", separator: true },
 						;
+						{ type: "Recipe", group: "Hellenic Ligatures", separator: true },
+						;
+						{ type: "Recipe", group: "Hellenic", separator: true },
+						;
+						{ type: "Recipe", group: "Hellenic Accented", separator: true },
+						;
 						{ type: "Recipe", group: "Cyrillic Ligatures & Letters", separator: true },
 						;
 						{ type: "Recipe", group: "Cyrillic Letters", separator: true },
@@ -327,6 +333,8 @@ Class Panel {
 						{ type: "Alternative Layout", group: "Fake Glagolitic", groupKey: RightControl " 1" },
 						;
 						{ type: "Alternative Layout", group: "Glagolitic Letters", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_glagolitic") },
+						;
+						{ type: "Alternative Layout", group: "Hellenic", combinationKey: RightControl " ?", groupKey: Locale.Read("symbol_hellenic"), separator: true },
 						;
 						{ type: "Alternative Layout", group: "Cyrillic Diacritics", combinationKey: RightControl " 1", groupKey: "", separator: true },
 						;
