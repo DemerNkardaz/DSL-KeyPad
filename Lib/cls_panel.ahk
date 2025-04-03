@@ -222,6 +222,8 @@ Class Panel {
 						;
 						{ type: "Recipe", group: "Latin", separator: true },
 						;
+						{ type: "Recipe", group: "Latino-Hellenic", separator: true },
+						;
 						{ type: "Recipe", group: "Latin Accented", separator: true },
 						;
 						{ type: "Recipe", group: "Cyrillic Ligatures & Letters", separator: true },
@@ -488,11 +490,12 @@ Class Panel {
 			aboutAuthorLinks.SetFont("s9", "Cambria")
 
 
-			recipesCount := ChrRecipeHandler.Count()
-			customRecipesCount := ChrLib.Count("Custom Composes")
+			recipesCount := ChrRecipeHandler.Count("No Custom")
+			customRecipesCount := ChrRecipeHandler.Count("Custom Only")
+			customEntriesCount := ChrLib.Count("Custom Composes")
 
 
-			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customRecipesCount), recipesCount, customRecipesCount)
+			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customEntriesCount), recipesCount, customRecipesCount)
 
 			aboutDescBox := panelWindow.AddGroupBox("x315 y34 w530 h520", App.decodedTitle)
 			aboutDescBox.SetFont("s11", "Cambria")

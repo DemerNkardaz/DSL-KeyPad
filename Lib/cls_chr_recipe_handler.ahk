@@ -4,24 +4,31 @@ Class ChrRecipeHandler {
 		interArr := recipes.ToFlat()
 
 		for recipe in interArr {
-			if InStr(recipe, "${") {
-				if RegExMatch(recipe, "\((.*?)\|(.*?)\)", &match) {
-					recipePair := [
-						RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[1]),
-						RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[2])
-					]
-					recipePair[1] := StrReplace(recipePair[1], "$(*)", "${" match[2] "}")
-					recipePair[2] := StrReplace(recipePair[2], "$(*)", "${" match[1] "}")
+			output.Push(this.MakeStr(recipe))
+		}
 
-					for pairRecipe in recipePair {
-						this.ProcessRecipeString(pairRecipe, output)
-					}
-				} else {
-					this.ProcessRecipeString(recipe, output)
+		return output
+	}
+
+	static MakeStr(recipe) {
+		output := ""
+		if InStr(recipe, "${") {
+			if RegExMatch(recipe, "\((.*?)\|(.*?)\)", &match) {
+				recipePair := [
+					RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[1]),
+					RegExReplace(recipe, "\((.*?)\|(.*?)\)", match[2])
+				]
+				recipePair[1] := StrReplace(recipePair[1], "$(*)", "${" match[2] "}")
+				recipePair[2] := StrReplace(recipePair[2], "$(*)", "${" match[1] "}")
+
+				for pairRecipe in recipePair {
+					output .= this.ProcessRecipeString(pairRecipe)
 				}
 			} else {
-				output.Push(recipe)
+				output .= this.ProcessRecipeString(recipe)
 			}
+		} else {
+			output .= recipe
 		}
 
 		return output
@@ -39,11 +46,25 @@ Class ChrRecipeHandler {
 		return output
 	}
 
-	static Count() {
-		return ChrLib.entryRecipes.Count
+	static Count(rule := "") {
+		output := ChrLib.entryRecipes.Count
+		substract := 0
+
+		if ChrLib.entryGroups.Has("Custom Composes") && rule = "No Custom" {
+			for entryName in ChrLib.entryGroups.Get("Custom Composes") {
+				output := output - ChrLib.entries.%entryName%.recipe.Length
+			}
+		} else if ChrLib.entryGroups.Has("Custom Composes") && rule = "Custom Only" {
+			output := 0
+			for entryName in ChrLib.entryGroups.Get("Custom Composes") {
+				output := output + ChrLib.entries.%entryName%.recipe.Length
+			}
+		}
+
+		return output
 	}
 
-	static ProcessRecipeString(recipe, output) {
+	static ProcessRecipeString(recipe) {
 		tempRecipe := recipe
 
 		while RegExMatch(tempRecipe, "\${(.*?)}", &match) {
@@ -61,7 +82,7 @@ Class ChrRecipeHandler {
 			}
 		}
 
-		output.Push(tempRecipe)
+		return tempRecipe
 	}
 
 	static ParseCharacterInfo(characterString) {

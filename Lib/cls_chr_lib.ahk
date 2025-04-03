@@ -2,6 +2,7 @@ Class ChrEntry {
 	index := 0
 	unicode := ""
 	sequence := []
+	result := []
 	html := ""
 	entity := ""
 	altCode := ""
@@ -101,6 +102,7 @@ class ChrLib {
 				this.AddEntry(entryName, ChrEntry(entry))
 			}
 		} else {
+
 			this.entries.%entryName% := {}
 			entry := this.EntryPreProcessing(entryName, entry)
 
@@ -109,6 +111,7 @@ class ChrLib {
 			this.entries.%entryName%.index := ++this.lastIndexAdded
 
 			this.EntryPostProcessing(entryName, this.entries.%entryName%)
+
 		}
 	}
 
@@ -410,6 +413,12 @@ class ChrLib {
 			for i, recipe in tempRecipe {
 				tempRecipe[i] := RegExReplace(recipe, "\[.*?\]", SubStr(entry.data.case, 1, 1))
 				tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry.data.letter)
+				if RegExMatch(tempRecipe[i], "\/(.*?)\/", &match) {
+					tempRecipe[i] := RegExReplace(tempRecipe[i], "\/(.*?)\/", entry.data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
+				}
+				if RegExMatch(tempRecipe[i], "\\(.*?)\\", &match) {
+					tempRecipe[i] := RegExReplace(tempRecipe[i], "\\(.*?)\\", entry.data.case = "capital" ? Util.StrUpper(match[1]) : Util.StrLower(match[1]))
+				}
 			}
 			entry.recipe := tempRecipe
 		}
@@ -418,8 +427,8 @@ class ChrLib {
 	static TransferProperties(entryName, entry) {
 		for key, value in entry.OwnProps() {
 			if !["String", "Integer", "Boolean"].HasValue(Type(value)) {
-				if key = "recipe" && value.Length > 0
-					this.TransferRecipeProperty(entryName, value)
+				if ["recipe", "result"].HasValue(key) && value.Length > 0
+					this.TransferRecipeProperty(entryName, key, value)
 				else
 					this.Transfer%Type(value)%Property(entryName, key, value)
 			} else {
@@ -436,12 +445,12 @@ class ChrLib {
 		})
 	}
 
-	static TransferRecipeProperty(entryName, value) {
+	static TransferRecipeProperty(entryName, key, value) {
 		tempRecipe := value.Clone()
 		definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe)
 		interObj := {}
 		interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
-		this.entries.%entryName%.recipe := interObj.Get
+		this.entries.%entryName%.%key% := interObj.Get
 	}
 
 	static TransferArrayProperty(entryName, key, value) {
@@ -528,13 +537,17 @@ class ChrLib {
 	}
 
 	static EntryPostProcessing(entryName, entry) {
-		refinedEntry := entry
+		refinedEntry := entry.Clone()
+
+		if refinedEntry.result.Length > 0 {
+			refinedEntry.sequence := MyRecipes.HandleResult(refinedEntry.result.Clone())
+			refinedEntry.unicode := refinedEntry.sequence[1]
+		}
+
+
 		character := Util.UnicodeToChar(refinedEntry.unicode)
 		characterSequence := Util.UnicodeToChar(refinedEntry.sequence.Length > 0 ? refinedEntry.sequence : refinedEntry.unicode)
-		try {
-		} catch {
-			throw "Trouble in paradise: " entryName
-		}
+
 
 		if refinedEntry.sequence.Length > 0 {
 			for sequenceChr in refinedEntry.sequence {
@@ -699,6 +712,9 @@ class ChrLib {
 		}
 
 		this.entries.%entryName% := refinedEntry
+		if InStr(entryName, "digit") && InStr(entryName, "2") {
+			;MsgBox(this.entries.%entryName%.unicode)
+		}
 	}
 
 	static NameDecompose(entryName) {
@@ -795,18 +811,23 @@ class ChrLib {
 
 		for key, value in entry.OwnProps() {
 			if Util.IsArray(value) {
-				output .= indentStr key ": " value.ToString() "`n"
+				output .= indentStr key ": [" value.ToString(, "'") "]`n"
 			} else if Util.IsObject(value) {
-				output .= indentStr key ":`n" . this.FormatEntry(value, indent + 1)
+				output .= indentStr key ": {`n" this.FormatEntry(value, indent + 1) indentStr "}`n"
+			} else if Util.IsMap(value) {
+				output .= indentStr key ": (`n"
+				for mapKey, mapValue in value {
+					output .= indentStr "`t" mapKey ": '" mapValue "'`n"
+				}
+				output .= indentStr ")`n"
 			} else {
-				output .= indentStr key ": " value "`n"
+				output .= indentStr key ": '" value "'`n"
 			}
 		}
 
 		return output
 	}
 }
-
 
 /*
 ChrLib.AddEntry(

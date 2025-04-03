@@ -31,13 +31,14 @@ _ArrayToFlat(this) {
 	return result
 }
 
-_ArrayToString(this, char := ", ") {
+_ArrayToString(this, separator := ", ", bounds := "") {
+	str := ""
 	for index, value in this {
 		if index = this.Length {
-			str .= value
+			str .= bounds value bounds
 			break
 		}
-		str .= value char
+		str .= bounds value bounds separator
 	}
 	return str
 }

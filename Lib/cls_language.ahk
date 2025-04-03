@@ -13,6 +13,17 @@ Class Language {
 		this.FillLocalizedObject()
 	}
 
+	static GetSupported(by := "locale") {
+		output := []
+
+		for key, value in this.supported {
+			if value.%by% {
+				output.Push(key)
+			}
+		}
+		return output
+	}
+
 	static Validate(input, extraRule?) {
 		if StrLen(input) > 5 {
 			for key, value in this.supported {

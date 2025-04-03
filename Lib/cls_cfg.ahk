@@ -258,7 +258,11 @@ Class Cfg {
 
 			for recipeEntry in recipesArray {
 				recipeFilePath := recipeEntry.HasOwnProp("filePath") ? recipeEntry.filePath : ""
-				recipesLV.Add(, recipeEntry.name, RegExReplace(recipeEntry.recipe, "\|", ", "), Util.StrFormattedReduce(recipeEntry.result, 24), recipeEntry.section, recipeFilePath)
+				recipesLV.Add(,
+					MyRecipes.HandleTitles(recipeEntry.name, True),
+					RegExReplace(ChrRecipeHandler.MakeStr(recipeEntry.recipe), "\|", ", "),
+					Util.StrFormattedReduce(ChrRecipeHandler.MakeStr(recipeEntry.result), 24),
+					recipeEntry.section, recipeFilePath)
 			}
 
 
@@ -310,7 +314,6 @@ Class Cfg {
 					MyRecipes.AddAttachment(trimmedFile)
 				}
 
-				MyRecipes.UpdateMap()
 				MyRecipes.UpdateChrLib()
 			}
 

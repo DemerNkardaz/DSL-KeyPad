@@ -109,7 +109,6 @@ Class MyRecipes {
 			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.user "\Autoimport.linux\demo.XCompose", "UTF-8")
 
 
-		SetTimer((*) => this.UpdateMap(), -5000)
 		SetTimer((*) => this.UpdateChrLib(), -5000)
 	}
 
@@ -234,18 +233,6 @@ Class MyRecipes {
 		}
 	}
 
-	static FormatResult(result, revert := False) {
-		if revert {
-			result := StrReplace(result, "\n", "`n")
-			result := StrReplace(result, "\t", "`t")
-		} else {
-			result := StrReplace(result, "`r`n", "\n")
-			result := StrReplace(result, "`n", "\n")
-			result := StrReplace(result, "`t", "\t")
-		}
-		return result
-	}
-
 	static AddEdit(sectionName, params, noUpdate := False) {
 		if RegExMatch(sectionName, this.sectionValidator) {
 			params.result := this.FormatResult(params.result)
@@ -255,7 +242,6 @@ Class MyRecipes {
 			IniWrite(params.result, this.file, sectionName, "result")
 
 			if !noUpdate {
-				this.UpdateMap()
 				this.UpdateChrLib()
 			}
 		} else {
@@ -282,13 +268,17 @@ Class MyRecipes {
 		return False
 	}
 
-	static Get(sectionName) {
+	static Get(sectionName, make := False) {
 		output := {}
 
 		output.name := IniRead(this.file, sectionName, "name")
 		output.recipe := IniRead(this.file, sectionName, "recipe")
 		output.result := IniRead(this.file, sectionName, "result")
 
+		if make {
+			output.recipe := ChrRecipeHandler.MakeStr(output.recipe)
+			output.result := ChrRecipeHandler.MakeStr(output.result)
+		}
 		return output
 	}
 
@@ -452,102 +442,95 @@ Class MyRecipes {
 		return output
 	}
 
-	static UpdateMap() {
-		global Characters, CharactersCount
-
-		recipeSections := this.Read()
-		try {
-			for section in recipeSections {
-				if InStr(section.recipe, "|") {
-					section.recipe := StrSplit(section.recipe, "|")
-				}
-
-				section.result := this.FormatResult(section.result, True)
-
-				resultToUnicode := []
-				i := 1
-				while (i <= StrLen(section.result)) {
-					char := SubStr(section.result, i, 1)
-					code := Ord(char)
-
-					if (code >= 0xD800 && code <= 0xDBFF) {
-						nextChar := SubStr(section.result, i + 1, 1)
-						char .= nextChar
-						i += 1
-					}
-
-					resultToUnicode.Push("{U+" GetCharacterUnicode(char) "}")
-					i += 1
-				}
-
-				characterEntry := GetCharacterEntry(section.section, True)
-
-				if characterEntry
-					Characters.Delete(characterEntry)
-
-				MapInsert(Characters,
-					section.section, {
-						unicode: resultToUnicode[1],
-						uniSequence: resultToUnicode,
-						titles: Map("ru", section.name, "en", section.name),
-						recipe: section.recipe,
-						group: ["Custom Composes"],
-					},
-				)
-			}
-		}
-
-		CharactersCount := GetCountDifference()
-		ProcessMapAfter("Custom Composes")
-		UpdateRecipeValidator()
-	}
-
 	static UpdateChrLib() {
 		recipeSections := this.Read()
 		try {
+
 			for section in recipeSections {
-				if InStr(section.recipe, "|") {
-					section.recipe := StrSplit(section.recipe, "|")
-				}
+				try {
 
-				if !IsObject(section.recipe) {
-					section.recipe := [section.recipe]
-				}
-
-				section.result := this.FormatResult(section.result, True)
-
-				resultToUnicode := []
-				i := 1
-				while (i <= StrLen(section.result)) {
-					char := SubStr(section.result, i, 1)
-					code := Ord(char)
-
-					if (code >= 0xD800 && code <= 0xDBFF) {
-						nextChar := SubStr(section.result, i + 1, 1)
-						char .= nextChar
-						i += 1
+					if InStr(section.recipe, "|") {
+						section.recipe := StrSplit(section.recipe, "|")
 					}
 
-					resultToUnicode.Push("{U+" GetCharacterUnicode(char) "}")
-					i += 1
+					if !IsObject(section.recipe) {
+						section.recipe := [section.recipe]
+					}
+
+					section.result := this.FormatResult(section.result, True)
+
+					if ChrLib.GetEntry(section.section)
+						ChrLib.RemoveEntry(section.section)
+
+					ChrLib.AddEntry(
+						section.section, ChrEntry({
+							result: [section.result],
+							titles: this.HandleTitles(section.name),
+							recipe: section.recipe,
+							groups: ["Custom Composes"],
+						}),
+					)
+				} catch {
+					MsgBox("[" section.section "]`n" Util.StrVarsInject(Locale.Read("gui_recipes_create_invalid_recipe"), Util.IsArray(section.recipe) ? section.recipe.ToString("") : section.recipe, Util.IsArray(section.result) ? section.result.ToString("") : section.result), App.winTitle)
 				}
-
-				characterEntry := GetCharacterEntry(section.section, True)
-
-				if ChrLib.GetEntry(section.section)
-					ChrLib.RemoveEntry(section.section)
-
-				ChrLib.AddEntry(
-					section.section, ChrEntry({
-						unicode: resultToUnicode[1],
-						sequence: resultToUnicode,
-						titles: Map("ru", section.name, "en", section.name),
-						recipe: section.recipe,
-						groups: ["Custom Composes"],
-					}),
-				)
 			}
 		}
+	}
+
+	static HandleResult(resultIn) {
+		if Util.IsArray(resultIn)
+			resultIn := resultIn.ToString("")
+		output := []
+		i := 1
+		while (i <= StrLen(resultIn)) {
+			char := SubStr(resultIn, i, 1)
+			code := Ord(char)
+
+			if (code >= 0xD800 && code <= 0xDBFF) {
+				nextChar := SubStr(resultIn, i + 1, 1)
+				char .= nextChar
+				i += 1
+			}
+
+			output.Push("{U+" GetCharacterUnicode(char) "}")
+			i += 1
+		}
+		return output
+	}
+
+	static FormatResult(result, revert := False) {
+		if revert {
+			result := StrReplace(result, "\n", "`n")
+			result := StrReplace(result, "\t", "`t")
+		} else {
+			result := StrReplace(result, "`r`n", "\n")
+			result := StrReplace(result, "`n", "\n")
+			result := StrReplace(result, "`t", "\t")
+		}
+		return result
+	}
+
+	static HandleTitles(sectionName, asString := False) {
+		supportedLanguages := Language.GetSupported()
+		userLanguage := Language.Get()
+
+		titles := Map()
+		for lang in supportedLanguages {
+			titles.Set(lang, sectionName)
+		}
+
+		if InStr(sectionName, "|") {
+			titleVariants := StrSplit(sectionName, "|")
+
+			for variant in titleVariants {
+				RegExMatch(variant, "^(.*?):(.*)$", &match)
+				if supportedLanguages.HasValue(match[1]) {
+					titles.Set(match[1], match[2])
+				}
+			}
+		}
+
+		return asString ? titles.Get(userLanguage) : titles
 	}
 }
 

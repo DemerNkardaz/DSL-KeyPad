@@ -538,8 +538,18 @@ LibRegistrate(this) {
 		;
 		;
 		"digit_[0,1,2,3,4,5,6,7,8,9]", {
-			unicode: ["{U+0030}", "{U+0031}", "{U+0032}", "{U+0033}", "{U+0034}",
-				"{U+0035}", "{U+0036}", "{U+0037}", "{U+0038}", "{U+0039}"],
+			unicode: [
+				"{U+0030}",
+				"{U+0031}",
+				"{U+0032}",
+				"{U+0033}",
+				"{U+0034}",
+				"{U+0035}",
+				"{U+0036}",
+				"{U+0037}",
+				"{U+0038}",
+				"{U+0039}"
+			],
 			alterations: [{
 				doubleStruck: "{U+1D7D8}",
 				bold: "{U+1D7CE}",
@@ -2515,7 +2525,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_j_yogh", {
 			unicode: ["{U+021C}", "{U+021D}"],
 			options: { useLetterLocale: True, fastKey: ">+ $?Secondary" },
-			recipe: ["$3"],
+			recipe: ["/yog/"],
 		},
 		"lat_[c,s]_let_k_cuatrillo", {
 			unicode: ["{U+A72C}", "{U+A72D}"],
@@ -2577,13 +2587,13 @@ LibRegistrate(this) {
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: ">+ ~?Secondary"
 			},
-			recipe: ["$3"],
+			recipe: ["$zh"],
 		},
 		"lat_[c,s]_let_a_alpha", {
 			unicode: ["{U+2C6D}", "{U+0251}"],
 			alterations: [{}, { combining: "{U+1DE7}", modifier: "{U+1D45}" }],
 			tags: [[], ["open back unrounded vowel", "неогублённый гласный заднего ряда нижнего подъёма"]],
-			groups: [[], ["Latin", "IPA"]],
+			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True
 			},
@@ -2591,12 +2601,13 @@ LibRegistrate(this) {
 		},
 		"lat_s_let_a_alpha__retroflex_hook", {
 			unicode: "{U+1D90}",
-			groups: ["Latin"],
+			groups: ["Latino-Hellenic"],
 			options: { useLetterLocale: "Origin" },
 			recipe: ["$lp${retroflex_hook}", "${lat_s_let_a_alpha}${retroflex_hook}"],
 		},
 		"lat_s_let_a_alpha_barred", {
 			unicode: "{U+AB30}",
+			groups: ["Latino-Hellenic"],
 			options: { useLetterLocale: True },
 			recipe: ["$lp${emdash}", "${lat_s_let_a_alpha}${emdash}"],
 			symbol: { beforeLetter: "barred" },
@@ -2605,7 +2616,7 @@ LibRegistrate(this) {
 			unicode: ["{U+2C70}", "{U+0252}"],
 			alterations: [{}, { modifier: "{U+1D9B}" }],
 			tags: [[], ["open back rounded vowel", "огублённый гласный заднего ряда нижнего подъёма"]],
-			groups: [[], ["Latin", "IPA"]],
+			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True
 			},
@@ -2614,13 +2625,14 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_b_beta", {
 			unicode: ["{U+A7B4}", "{U+A7B5}"],
+			groups: ["Latino-Hellenic"],
 			options: { useLetterLocale: True },
 			recipe: ["$et"],
 		},
 		"lat_[c,s]_let_e_epsilon", {
 			unicode: ["{U+0190}", "{U+025B}"],
 			tags: [[], ["open-mid front unrounded vowel", "неогублённый гласный переднего ряда средне-нижнего подъёма"]],
-			groups: [[], ["Latin", "IPA"]],
+			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True
 			},
@@ -2629,16 +2641,31 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_g_gamma", {
 			unicode: ["{U+0194}", "{U+0263}"],
 			tags: [[], ["voiced velar fricative", "звонкий велярный спирант"]],
-			groups: [[], ["Latin", "IPA"]],
+			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: "<+>+ $?Secondary"
 			},
 			recipe: ["$am", "$y"],
 		},
+		"lat_[c,s]_let_o_omega", {
+			unicode: ["{U+A7B6}", "{U+A7B7}"],
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: True },
+			recipe: ["$mg"],
+		},
+		"lat_[c,s]_let_s_sigma", {
+			unicode: ["{U+01A9}", "{U+0283}"],
+			tags: [[], ["voiceless postalveolar fricative", "звонкий велярный спирант"]],
+			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: "<+>+ $?Secondary"
+			},
+			recipe: ["$ig", "/esh/"],
+		},
 		"lat_[c,s]_let_u_upsilon", {
 			unicode: ["{U+01B1}", "{U+028A}"],
 			tags: [[], ["near-close near-back vowel", "ненапряжённый огублённый гласный заднего ряда верхнего подъёма"]],
-			groups: [[], ["Latin", "IPA"]],
+			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True
 			},
@@ -2677,6 +2704,11 @@ LibRegistrate(this) {
 		"lat_[c,s]_lig_ae__macron", {
 			unicode: ["{U+01E2}", "{U+01E3}"],
 			recipe: ["$${macron}", "${lat_[c,s]_lig_ae}${macron}"]
+		},
+		"lat_s_lig_ae_turned", {
+			unicode: "{U+1D02}",
+			recipe: ["$${arrow_left_circle}", "${lat_s_lig_ae}${arrow_left_circle}", "${lat_s_let_e_turned}${lat_s_let_a_turned}"],
+			symbol: { beforeLetter: "turned" },
 		},
 		"lat_[c,s]_lig_ao", {
 			unicode: ["{U+A734}", "{U+A735}"],
@@ -2740,17 +2772,17 @@ LibRegistrate(this) {
 		},
 		"lat_s_lig_oe_turned", {
 			unicode: "{U+1D14}",
-			recipe: ["$${arrow_left_circle}", "${lat_s_lig_oe}${arrow_left_circle}"],
+			recipe: ["$${arrow_left_circle}", "${lat_s_lig_oe}${arrow_left_circle}", "${lat_s_let_e_turned}o"],
 			symbol: { beforeLetter: "turned" },
 		},
 		"lat_s_lig_oe_turned__stroke_short", {
 			unicode: "{U+AB42}",
-			recipe: ["$${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe}${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe_turned}${stroke_short}"],
+			recipe: ["$${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe}${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe_turned}${stroke_short}", "${lat_s_let_e_turned}o${stroke_short}"],
 			symbol: { beforeLetter: "turned" },
 		},
 		"lat_s_lig_oe_turned__solidus_long", {
 			unicode: "{U+AB41}",
-			recipe: ["$${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe}${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe_turned}${solidus_long}"],
+			recipe: ["$${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe}${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe_turned}${solidus_long}", "${lat_s_let_e_turned}o${solidus_long}"],
 			symbol: { beforeLetter: "turned" },
 		},
 		"lat_s_lig_oe_inverted", {

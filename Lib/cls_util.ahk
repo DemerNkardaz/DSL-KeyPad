@@ -44,6 +44,10 @@ Class Util {
 		return StrUpper(SubStr(Str, 1, Length)) SubStr(Str, Length + 1)
 	}
 
+	static StrLower(Str, Length := StrLen(Str)) {
+		return StrLower(SubStr(Str, 1, Length)) SubStr(Str, Length + 1)
+	}
+
 	static StrRepeat(str, count) {
 		output := ""
 		loop count {

@@ -522,21 +522,139 @@ https://www.keyboard-layout-editor.com/##@_css=* {%0A%20%20%20 font-size%2F: 11p
 
 <img src="Images/compose_suggestions_ru.png" alt="" width="430">
 
-#### «Мои Рецепты»
+#### Пользовательские рецепты
 
-Плавильня поддерживает возможность создания собственных последовательностей через соответствующее окно интерфейса. Возможно создание рецептов с многострочным и/или объёмным результатом, но использовать через чур много текста не рекомендуется. В результатах можно использовать табуляцию. «Мои рецепты» так же будут отображаться в предложениях режима «Compose».
+Плавильня поддерживает возможность создания собственных последовательностей через соответствующее окно интерфейса и/или через редактирование `.ini`‐файлов (`\User\CustomRecipes.ini` или `\Users\Autoimport.ini\*.ini`). Структура рецепта на примере `.ini`:
 
-Для одной записи можно назначить сразу несколько последовательностей, разделяя их «|». Так, например, если установить последовательности как «змк|csl» и результат «🏯», то и «змк» и «csl» приведут к вставке эмодзи замка.
+```ini
+[alchemical_sulfuric_acid]
+name=ru:Алх. Серная кислота|en:Alc. Sulfuric Acid
+recipe=alc sulf acid
+result=🜊🜖
 
-**Дополнительно:** при запуске утилита автоматически читает любые [«\*.XCompose»](https://wiki.debian.org/XCompose) файлы в поддиректории «\User\» и создает рецепты из них. Однако это работает только в отношении простых символьных последовательностей. «Мёртвые клавиши» и подобное не поддерживается.
+[chemical_sulfuric_acid]
+name=ru:Серная кислота|en:Sulfuric Acid
+recipe=chem sulf acid|H2SO4
+result=H₂SO₄
+
+[emoji_castle]
+name=ru:Сиро|en:Shiro
+recipe=cls|змк
+result=🏯
+
+; [custom_entry_name] — Имя записи, может содержать только «a–Z» и «_» символы
+
+; name — Отображаемое имя в окне пользовательских рецептов. Может быть простой
+; строкой, так и с указанием локализации для поддерживаемых языков
+
+; recipe — Сам рецепт, может быть простой строкой или содежать несколько рецептов,
+; разделяемых «|». Можно использовать ссылки на другие записи как ${имя_записи}
+
+; result — Результат рецепта. Также может содержать ${ссылки}
+```
+
+```ini
+; То же самое с примером ссылок:
+[alchemical_sulfuric_acid]
+name=ru:Алх. Серная кислота|en:Alc. Sulfuric Acid
+recipe=alc sulf acid
+result=${alchemical_acid_vinegar}${alchemical_vitriol_1}
+
+[chemical_sulfuric_acid]
+name=ru:Серная кислота|en:Sulfuric Acid
+recipe=chem sulf acid|H2SO4
+result=H${digit_2::subscript}SO${digit_4::subscript}
+```
+
+Результат рецепта может быть многострочным и/или объёмным, что позволяет при желании использовать его и как хранилище шаблонов:
+
+```ini
+[html_template]
+name=HTML Template
+recipe=html
+result=<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<meta charset="UTF-8">\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t\t\n\t\t<meta name="date" content="">\n\t\t<meta name="subject" content="">\n\t\t<meta name="rating" content="">\n\t\t<meta name="theme-color" content="">\n\n\t\t<base href="/" />\n\n\t\t<meta name="referrer" content="origin">\n\t\t<meta name="referrer" content="origin-when-cross-origin">\n\t\t<meta name="referrer" content="no-referrer-when-downgrade">\n\n\t\t<meta property="og:type" content="website">\n\t\t<meta property="og:title" content=">\n\t\t<meta property="og:url" content="">\n\t\t<meta property="og:description" content="">\n\t\t<meta property="og:image" content="">\n\t\t<meta property="og:locale" content="">\n\n\t\t<meta name="twitter:card" content="summary_large_image">\n\t\t<meta property="twitter:domain" content="">\n\t\t<meta property="twitter:url" content="">\n\t\t<meta name="twitter:title" content="">\n\t\t<meta name="twitter:description" content="">\n\t\t<meta name="twitter:image" content="">\n\t\t<meta name="twitter:creator" content="">\n\n\t\t<meta http-equiv="Cache-Control" content="public">\n\t\t<meta http-equiv="X-UA-Compatible" content="ie=edge">\n\t\t<meta name="renderer" content="webkit|ie-comp|ie-stand">\n\t\t<meta name="author" content="">\n\t\t<meta content="" name="description">\n\t\t<link rel="manifest" href="/manifest.webmanifest">\n\n\t\t<title>Index</title>\n\t\n\t\t<link rel="icon" href="/favicon.ico" type="image/x-icon">\n\t\t<link rel="stylesheet" href="/index.css" />\n\n\t\t<meta name="robots" content="index, follow">\n\t\t<meta name="revisit-after" content="7 days">\n\n\t\t<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="use-credentials">\n\t\t<link rel="preconnect" href="https://fonts.gstatic.com">\n\t</head>\n\t<body>\n\t\t<main>\n\t\t\n\t\t</main>\n\t\t<script src="/index.js"></script>\n\t</body>\n</html>
+```
+
+<center>↓</center>
+
+<details>
+	<summary>Результат ввода «html»</summary>
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="date" content="" />
+    <meta name="subject" content="" />
+    <meta name="rating" content="" />
+    <meta name="theme-color" content="" />
+
+    <base href="/" />
+
+    <meta name="referrer" content="origin" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content=">
+    <meta property="og:url" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:locale" content="" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="" />
+    <meta property="twitter:url" content="" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:description" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:creator" content="" />
+
+    <meta http-equiv="Cache-Control" content="public" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta name="author" content="" />
+    <meta content="" name="description" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <title>Index</title>
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/index.css" />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="revisit-after" content="7 days" />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+      crossorigin="use-credentials"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  </head>
+  <body>
+    <main></main>
+    <script src="/index.js"></script>
+  </body>
+</html>
+```
+
+</details>
+
+<br>
+
+Как и обычные рецепты, пользовательские отображаются в tooltip‐подсказке режима «Compose».
+
+**Дополнительно:** при запуске утилита автоматически читает [«\*.XCompose»](https://wiki.debian.org/XCompose) файлы в поддиректории «`\User\Autoimport.linux`» и создает рецепты из них. Это работает только в отношении простых символьных последовательностей. «Мёртвые клавиши» и подобное не поддерживается.
 
 В качестве демонстрации утилита при первом запуске создаёт файл «\User\demo.XCompose» с одним рецептом:
 
 ```lua
 <Multi_key> <0> <0> : "∞"
 ```
-
-И несколько «Моих рецептов» стандартного вида: Иероглиф кандзи 義, «ёси|yoshi»; шаблон базовой HTML‐разметки, «html»; тег `<kbd></kbd>`, «kbd»; и эмодзи льда 🧊, «лёд|ice».
 
 <img src="Images/myrecipes_ru.png" alt="" width="1024">
 

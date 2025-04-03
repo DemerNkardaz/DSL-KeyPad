@@ -159,10 +159,10 @@ InternalFiles := Map(
 
 #Include <cls_app>
 #Include <cls_cfg>
-#Include <cls_my_recipes>
 #Include <cls_language>
 #Include <cls_chr_crafter>
 #Include <cls_chr_inserter>
+#Include <cls_my_recipes>
 #Include <cls_favorites>
 
 DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
@@ -5519,7 +5519,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 				"<^>!<!<+", ["lat_c_let_s_caron", "lat_s_let_s_caron"],
 				"<^>!<!>+", ["lat_c_let_s_cedilla", "lat_s_let_s_cedilla"],
 				"<^>!>+", "lat_s_let_s_long",
-				"<^>!<+>+", ["lat_c_let_s_esh", "lat_s_let_s_esh"],
+				"<^>!<+>+", ["lat_c_let_s_sigma", "lat_s_let_s_sigma"],
 				"<^>!<+", ["lat_c_lig_s_eszett", "lat_s_lig_s_eszett"]),
 			"T", Map(
 				"<^>!", ["lat_c_let_t_comma_below", "lat_s_let_t_comma_below"],
