@@ -129,7 +129,6 @@ Class ChrCrafter {
 						postInput := match[2]
 						intermediateValue := ""
 
-						; Use version without backticks for matching but track if we had any
 						postInputNoBackticks := RegExReplace(postInput, "``", "")
 						postInputHasBacktick := InStr(postInput, "``")
 

@@ -2408,6 +2408,92 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Dashes
+		;
+		;
+		"emdash", {
+			unicode: "{U+2014}", LaTeX: ["---"],
+			tags: ["em dash", "длинное тире"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["1"], fastKey: "[-]" },
+			recipe: ["---"],
+		},
+		"emdash_vertical", {
+			unicode: "{U+FE31}",
+			tags: ["vertical em dash", "вертикальное длинное тире"],
+			groups: ["Smelting Special"],
+			recipe: ["${arrow_down_ushaped}${emdash}"],
+		},
+		"endash", {
+			unicode: "{U+2013}",
+			tags: ["en dash", "короткое тире"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["2"], fastKey: "<+ [-]" },
+			recipe: ["--"],
+		},
+		"endash_vertical", {
+			unicode: "{U+FE32}",
+			tags: ["vertical en dash", "вертикальное короткое тире"],
+			groups: ["Smelting Special"],
+			recipe: ["${arrow_down_ushaped}${endash}"],
+		},
+		"three_emdash", {
+			unicode: "{U+2E3B}",
+			tags: ["three-em dash", "тройное тире"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Left"],
+			options: { groupKey: ["3"], fastKey: "[-]" },
+			recipe: ["---", "${emdash×3}"],
+		},
+		"two_emdash", {
+			unicode: "{U+2E3A}",
+			tags: ["two-em dash", "двойное тире"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Left"],
+			options: { groupKey: ["4"], fastKey: "c* [-]" },
+			recipe: ["---", "${emdash×2}"],
+		},
+		"softhyphen", {
+			unicode: "{U+00AD}",
+			tags: ["soft hyphen", "мягкий перенос"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Primary"],
+			options: { groupKey: ["5"], fastKey: "[-]" },
+			recipe: [".-"],
+		},
+		"figure_dash", {
+			unicode: "{U+2012}",
+			tags: ["figure dash", "цифровое тире"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["6"], fastKey: "<!>+ [-]" },
+			recipe: ["n-"],
+		},
+		"hyphen", {
+			unicode: "{U+2010}",
+			tags: ["hyphen", "дефис"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["7"], fastKey: "<! [-]" },
+			recipe: ["1-"],
+		},
+		"no_break_hyphen", {
+			unicode: "{U+2011}",
+			tags: ["no-break hyphen", "неразрывный дефис"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["8"], fastKey: "<!<+ [-]" },
+			recipe: ["0-"],
+		},
+		;
+		;
+		; * Mathematical Symbols
+		;
+		;
+		"minus", {
+			unicode: "{U+2212}",
+			alterations: { modifier: "{U+02D7}", subscript: "{U+208B}" },
+			tags: ["minus", "минус"],
+			groups: ["Dashes", "Smelting Special", "Special Fast Primary", "Special Fast"],
+			options: { groupKey: ["9"], altSpecialKey: "[Num-]", fastKey: "<+ [-]" },
+			recipe: ["min"],
+		},
+		;
+		;
 		; * Uncommon Latin Letters
 		;
 		;
@@ -2492,6 +2578,86 @@ LibRegistrate(this) {
 				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: ">+ ~?Secondary"
 			},
 			recipe: ["$3"],
+		},
+		"lat_[c,s]_let_a_alpha", {
+			unicode: ["{U+2C6D}", "{U+0251}"],
+			alterations: [{}, { combining: "{U+1DE7}", modifier: "{U+1D45}" }],
+			tags: [[], ["open back unrounded vowel", "неогублённый гласный заднего ряда нижнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True
+			},
+			recipe: ["$lp"],
+		},
+		"lat_s_let_a_alpha__retroflex_hook", {
+			unicode: "{U+1D90}",
+			groups: ["Latin"],
+			options: { useLetterLocale: "Origin" },
+			recipe: ["$lp${retroflex_hook}", "${lat_s_let_a_alpha}${retroflex_hook}"],
+		},
+		"lat_s_let_a_alpha_barred", {
+			unicode: "{U+AB30}",
+			options: { useLetterLocale: True },
+			recipe: ["$lp${emdash}", "${lat_s_let_a_alpha}${emdash}"],
+			symbol: { beforeLetter: "barred" },
+		},
+		"lat_[c,s]_let_a_alpha_turned", {
+			unicode: ["{U+2C70}", "{U+0252}"],
+			alterations: [{}, { modifier: "{U+1D9B}" }],
+			tags: [[], ["open back rounded vowel", "огублённый гласный заднего ряда нижнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True
+			},
+			recipe: ["$lp${arrow_left_circle}", "${lat_[c,s]_let_@_alpha}${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_let_b_beta", {
+			unicode: ["{U+A7B4}", "{U+A7B5}"],
+			options: { useLetterLocale: True },
+			recipe: ["$et"],
+		},
+		"lat_[c,s]_let_e_epsilon", {
+			unicode: ["{U+0190}", "{U+025B}"],
+			tags: [[], ["open-mid front unrounded vowel", "неогублённый гласный переднего ряда средне-нижнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True
+			},
+			recipe: ["$ps", "$3"],
+		},
+		"lat_[c,s]_let_g_gamma", {
+			unicode: ["{U+0194}", "{U+0263}"],
+			tags: [[], ["voiced velar fricative", "звонкий велярный спирант"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: "<+>+ $?Secondary"
+			},
+			recipe: ["$am", "$y"],
+		},
+		"lat_[c,s]_let_u_upsilon", {
+			unicode: ["{U+01B1}", "{U+028A}"],
+			tags: [[], ["near-close near-back vowel", "ненапряжённый огублённый гласный заднего ряда верхнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True
+			},
+			recipe: ["$ps", "-$-"],
+		},
+		;
+		;
+		; * Turned Latin Letters
+		;
+		;
+		"lat_[c,s]_let_a_turned", {
+			unicode: ["{U+2C6F}", "{U+0250}"],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_let_e_turned", {
+			unicode: ["{U+018E}", "{U+01DD}"],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
 		},
 		;
 		;

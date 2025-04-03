@@ -17,6 +17,7 @@ Class ChrEntry {
 		layoutTitles: False,
 		legend: "",
 		altLayoutKey: "",
+		altSpecialKey: "",
 		fastKey: "",
 		groupKey: [],
 		specialKey: "",
