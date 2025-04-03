@@ -2474,6 +2474,11 @@ ChangeTrayIconOnLanguage() {
 	TitleCompose := DSLPadTitle "`n" ActiveLatin " – " ActiveCyrillic
 
 	IconMap := Map(
+		"Hellenic", {
+			CodeEn: 2, CodeRu: 3, Default: 1,
+			TitleEn: Locale.Read("tray_tooltip_futhark"),
+			TitleRu: Locale.Read("tray_tooltip_glagolitic"),
+		},
 		"Glagolitic Futhark", {
 			CodeEn: 2, CodeRu: 3, Default: 1,
 			TitleEn: Locale.Read("tray_tooltip_futhark"),
@@ -2580,6 +2585,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	CurrentActive := ScriptName = ActiveScriptName
 
 	LocalesPairs := [
+		"Hellenic", "script_hellenic",
 		"Glagolitic Futhark", "script_glagolitic_futhark",
 		"Old Turkic Old Permic", "script_turkic_perimc",
 		"Old Hungarian", "script_hungarian",
@@ -2594,6 +2600,8 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 
 	if !CurrentActive {
 		if ScriptName = "Glagolitic Futhark" {
+			TraySetIcon(InternalFiles["AppIcoDLL"].File, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
+		} else if ScriptName = "Hellenic" {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
 		} else if ScriptName = "Old Turkic Old Permic" {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, CurrentLayout = CodeEn ? 4 : CurrentLayout = CodeRu ? 5 : 1)
@@ -6488,6 +6496,55 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 
 		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
+	} else if Combinations = "Hellenic" {
+		SlotMapping := Map(
+			"A", ["hel_c_let_a_alpha", "hel_s_let_a_alpha"],
+			"B", ["hel_c_let_b_beta", "hel_s_let_b_beta"],
+			"C", ["hel_c_let_g_gamma", "hel_s_let_g_gamma"],
+			"D", ["hel_c_let_d_delta", "hel_s_let_d_delta"],
+			"E", ["hel_c_let_e_epsilon", "hel_s_let_e_epsilon"],
+			"F", ["hel_c_let_f_phi", "hel_s_let_f_phi"],
+			"G", ["hel_c_let_g_gamma", "hel_s_let_g_gamma"],
+			"H", ["hel_c_let_h_eta", "hel_s_let_h_eta"],
+			"I", ["hel_c_let_i_iota", "hel_s_let_i_iota"],
+			"J", "",
+			"K", ["hel_c_let_k_kappa", "hel_s_let_k_kappa"],
+			"L", ["hel_c_let_l_lambda", "hel_s_let_l_lambda"],
+			"M", ["hel_c_let_m_mu", "hel_s_let_m_mu"],
+			"N", ["hel_c_let_n_nu", "hel_s_let_n_nu"],
+			"O", ["hel_c_let_o_omicron", "hel_s_let_o_omicron"],
+			"P", ["hel_c_let_p_pi", "hel_s_let_p_pi"],
+			"Q", ["hel_c_let_q_kappa", "hel_s_let_q_kappa"],
+			"R", ["hel_c_let_r_rho", "hel_s_let_r_rho"],
+			"S", ["hel_c_let_s_sigma", "hel_s_let_s_sigma"],
+			"T", ["hel_c_let_t_tau", "hel_s_let_t_tau"],
+			"U", ["hel_c_let_u_upsilon", "hel_s_let_u_upsilon"],
+			"V", "",
+			"W", ["", ""],
+			"X", ["hel_c_let_x_xi", "hel_s_let_x_xi"],
+			"Y", ["", ""],
+			"Z", ["hel_c_let_z_zeta", "hel_s_let_z_zeta"],
+			"~", "kkey_grave_accent",
+			",", "kkey_comma",
+			".", "kkey_dot",
+			";", "colon_triangle",
+			"'", "kkey_apostrophe",
+			"[", "kkey_l_square_bracket",
+			"]", "kkey_r_square_bracket",
+			"=", "kkey_equals",
+			"-", "kkey_hyphen_minus",
+			"/", "kkey_slash",
+		)
+
+		SlotModdedMapping := Map(
+			"Η", Map("<^>!", ["hel_c_let_h_chi", "hel_s_let_h_chi"]),
+			"O", Map("<^>!", ["hel_c_let_o_omega", "hel_s_let_o_omega"]),
+			"P", Map("<^>!", ["hel_c_let_p_psi", "hel_s_let_p_psi"]),
+			"S", Map("<^>!", "hel_s_let_s_sigma_final"),
+			"T", Map("<^>!", ["hel_c_let_t_theta", "hel_s_let_t_theta"]),
+		)
+
+		LayoutArray := GetBindingsArray(SlotMapping, SlotModdedMapping, , , "Flat")
 	} else if Combinations = "IPA" {
 		SlotMapping := Map(
 			"A", "",
@@ -6529,8 +6586,8 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 
 		SlotModdedMapping := Map(
-			"S", Map("<^>!>+", "lat_s_let_s_esh"),
-			"U", Map("<^>!<!", ["lat_c_let_upsilon", "lat_s_let_upsilon"]),
+			"S", Map("<^>!>+", "lat_s_let_s_sigma"),
+			"U", Map("<^>!<!", ["lat_c_let_U_upsilon", "lat_s_let_u_upsilon"]),
 			";", Map("<^>!", "colon_triangle_half"),
 		)
 
@@ -6714,6 +6771,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^>!" UseKey["NumpadDot"], (*) => GREPizeSelection(True),
 			"<#<!" UseKey["ArrUp"], (*) => SetNumberStyle("sup"),
 			"<#<!" UseKey["ArrDown"], (*) => SetNumberStyle("sub"),
+			">^" UseKey["Tilde"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Hellenic"), (*) => ToggleLetterScript(, "Hellenic")),
 			">^" UseKey["1"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Glagolitic Futhark"), (*) => ToggleLetterScript(, "Old Turkic Old Permic")),
 			">^" UseKey["2"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Hungarian"), (*) => ToggleLetterScript(, "Gothic")),
 			">^" UseKey["3"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Italic"), (*) => ToggleLetterScript(, "Phoenician")),

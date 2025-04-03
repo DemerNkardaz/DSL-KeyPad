@@ -712,7 +712,7 @@ LibRegistrate(this) {
 		},
 		"hel_s_let_s_sigma_final", {
 			unicode: "{U+03C2}",
-			options: { altLayoutKey: "$" },
+			options: { altLayoutKey: ">! $" },
 		},
 		"hel_[c,s]_let_t_tau", {
 			unicode: ["{U+03A4}", "{U+03C4}"],
@@ -726,17 +726,17 @@ LibRegistrate(this) {
 			unicode: ["{U+03A6}", "{U+03C6}"],
 			options: { altLayoutKey: "$" },
 		},
-		"hel_[c,s]_let_k_chi", {
+		"hel_[c,s]_let_h_chi", {
 			unicode: ["{U+03A7}", "{U+03C7}"],
-			options: { altLayoutKey: "$" },
+			options: { altLayoutKey: ">! $" },
 		},
 		"hel_[c,s]_let_p_psi", {
 			unicode: ["{U+03A8}", "{U+03C8}"],
-			options: { altLayoutKey: "$" },
+			options: { altLayoutKey: ">! $" },
 		},
 		"hel_[c,s]_let_o_omega", {
 			unicode: ["{U+03A9}", "{U+03C9}"],
-			options: { altLayoutKey: "$" },
+			options: { altLayoutKey: ">! $" },
 		},
 		;
 		;

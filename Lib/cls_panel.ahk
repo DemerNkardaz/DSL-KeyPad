@@ -334,9 +334,11 @@ Class Panel {
 						;
 						{ type: "Alternative Layout", group: "Glagolitic Letters", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_glagolitic") },
 						;
-						{ type: "Alternative Layout", group: "Hellenic", combinationKey: RightControl " ?", groupKey: Locale.Read("symbol_hellenic"), separator: true },
-						;
 						{ type: "Alternative Layout", group: "Cyrillic Diacritics", combinationKey: RightControl " 1", groupKey: "", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Fake Hellenic", groupKey: RightControl " ?", separator: true },
+						;
+						{ type: "Alternative Layout", group: "Hellenic", combinationKey: RightControl " ``", groupKey: Locale.Read("symbol_hellenic") },
 						;
 						{ type: "Alternative Layout", group: "Fake Turkic", groupKey: CapsLock RightControl " 1", separator: true },
 						;
