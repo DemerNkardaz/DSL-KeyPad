@@ -2664,6 +2664,17 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True, fastKey: "<+ $?Secondary" },
 			recipe: ["$4"],
 		},
+		"lat_[c,s]_let_o_rams_horn", {
+			unicode: ["{U+A7CB}", "{U+0264}"],
+			tags: [[], ["close-mid back unrounded vowel", "неогублённый гласный заднего ряда средне-верхнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			alterations: [{}, { modifier: "{U+10791}" }],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "$"],
+				useLetterLocale: True
+			},
+			recipe: ["/ram/"],
+		},
 		"lat_[c,s]_let_q_tresillo", {
 			unicode: ["{U+A72A}", "{U+A72B}"],
 			options: { useLetterLocale: True, fastKey: "<+ $?Secondary" },
