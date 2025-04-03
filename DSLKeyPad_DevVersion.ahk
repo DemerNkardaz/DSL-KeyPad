@@ -6514,7 +6514,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"N", ["hel_c_let_n_nu", "hel_s_let_n_nu"],
 			"O", ["hel_c_let_o_omicron", "hel_s_let_o_omicron"],
 			"P", ["hel_c_let_p_pi", "hel_s_let_p_pi"],
-			"Q", ["hel_c_let_q_kappa", "hel_s_let_q_kappa"],
+			"Q", ["hel_c_let_q_koppa_archaic", "hel_s_let_q_koppa_archaic"],
 			"R", ["hel_c_let_r_rho", "hel_s_let_r_rho"],
 			"S", ["hel_c_let_s_sigma", "hel_s_let_s_sigma"],
 			"T", ["hel_c_let_t_tau", "hel_s_let_t_tau"],
@@ -6537,9 +6537,10 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 		)
 
 		SlotModdedMapping := Map(
-			"Η", Map("<^>!", ["hel_c_let_h_chi", "hel_s_let_h_chi"]),
+			"H", Map("<^>!", ["hel_c_let_h_chi", "hel_s_let_h_chi"]),
 			"O", Map("<^>!", ["hel_c_let_o_omega", "hel_s_let_o_omega"]),
 			"P", Map("<^>!", ["hel_c_let_p_psi", "hel_s_let_p_psi"]),
+			"Q", Map("<^>!", ["hel_c_let_q_koppa", "hel_s_let_q_koppa"]),
 			"S", Map("<^>!", "hel_s_let_s_sigma_final"),
 			"T", Map("<^>!", ["hel_c_let_t_theta", "hel_s_let_t_theta"]),
 		)
