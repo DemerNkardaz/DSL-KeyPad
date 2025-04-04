@@ -1,4 +1,16 @@
-#Requires Autohotkey v2
+/* ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+ * ▓ Creator: Yalla Nkardaz (Ялла Нкардаз де Тудерий) aka Demer Nkardaz
+ * ▓ Title:   DSL KeyPad (Diacritics-Spaces-Letters KeyPad)
+ * ▓ Version: 0.1.1
+ * ▓ Description: Multilingual input tool for typing languages based on
+ *                Latin & Cyrillic scripts, special characters, and historical
+ *                scripts (Old Turkic, Permic, Hungarian, Italic, Runic,
+ *                Phoenician, Glagolitic, etc.).
+ * ▓ Repository: https://github.com/DemerNkardaz/DSL-KeyPad
+ * ▓ License:    MIT
+ * ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+*/
+
 #SingleInstance Force
 #MaxThreads 10
 ;#UseHook

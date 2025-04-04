@@ -2452,14 +2452,14 @@ LibRegistrate(this) {
 			tags: ["three-em dash", "тройное тире"],
 			groups: ["Dashes", "Smelting Special", "Special Fast Left"],
 			options: { groupKey: ["3"], fastKey: "[-]" },
-			recipe: ["---", "${emdash×3}"],
+			recipe: ["-----", "${emdash×3}"],
 		},
 		"two_emdash", {
 			unicode: "{U+2E3A}",
 			tags: ["two-em dash", "двойное тире"],
 			groups: ["Dashes", "Smelting Special", "Special Fast Left"],
 			options: { groupKey: ["4"], fastKey: "c* [-]" },
-			recipe: ["---", "${emdash×2}"],
+			recipe: ["----", "${emdash×2}"],
 		},
 		"softhyphen", {
 			unicode: "{U+00AD}",

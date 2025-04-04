@@ -246,6 +246,26 @@ Class Locale extends Language {
 		}
 	}
 
+	static LocaleRules(input, lang) {
+		lang := SubStr(lang, 1, 2)
+		nbsp := Chr(160)
+		rules := Map(
+			"ru", Map(
+				"conjunction", (str) => (InStr(str, "{conjuction}" nbsp "с") || InStr(str, "{conjuction}" nbsp "ш")) ? RegExReplace(str, "\{conjuction\}", Locale.Read("gen_postfix_with_2", lang)) : RegExReplace(str, "\{conjuction\}", Locale.Read("gen_postfix_with", lang))
+			),
+			"en", Map(
+				"conjunction", (str) => RegExReplace(str, "\{conjuction\}", Locale.Read("gen_postfix_with", lang)
+				)
+			)
+		)
+
+		for key, rule in rules[lang] {
+			input := rule(input)
+		}
+
+		return input
+	}
+
 	static LocalesGeneration(entryName, entry) {
 		pfx := "gen_"
 		useLetterLocale := entry.options.HasOwnProp("useLetterLocale") ? entry.options.useLetterLocale : False
@@ -284,7 +304,7 @@ Class Locale extends Language {
 				lang := InStr(langCode, "_alt") ? SubStr(langCode, 1, 2) : langCode
 				postfixText := ""
 
-				postfixText .= " " Locale.Read(pfx "postfix_with", lang) ChrLib.Get("no_break_space") Locale.Read(pfx "postfix_" lPostfixes[1], lang)
+				postfixText .= " {conjuction}" ChrLib.Get("no_break_space") Locale.Read(pfx "postfix_" lPostfixes[1], lang)
 
 				Loop lPostfixes.Length - 2
 					postfixText .= ", " Locale.Read(pfx "postfix_" lPostfixes[A_Index + 1], lang)
@@ -302,6 +322,13 @@ Class Locale extends Language {
 
 		tags["en"] := Locale.Read(pfx "tagScript_" lScript, "en") " " tags["en"]
 		tags["ru"] := tags["ru"] " " Locale.Read(pfx "tagScript_" lScript, "ru")
+
+		for _, langCode in langCodes {
+			entry.titles[langCode] := this.LocaleRules(entry.titles[langCode], langCode)
+			if !InStr(langCode, "_alt") {
+				tags[langCode] := this.LocaleRules(tags[langCode], langCode)
+			}
+		}
 
 
 		hasTags := entry.tags.Length > 0
