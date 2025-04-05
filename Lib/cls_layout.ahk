@@ -309,23 +309,29 @@ Class KeyboardBinder {
 		processed := Map()
 
 		for combo, value in bindings {
-			if value.Length = 1 && Util.IsString(value[1]) {
-				processed.Set(combo, (K) => BindHandler.Send(K, value[1]))
-			} else if value.Length = 2 && Util.IsString(value[1]) && Util.IsString(value[2]) {
-				processed.Set(combo, (K) => BindHandler.CapsSend(K, value))
-			} else if value.Length = 2 {
-				processed.Set(combo, (K) => BindHandler.LangSend(K, {
-					en: value[1],
-					ru: value[2],
-				}))
-			} else if Util.IsFunc(value) {
-				processed.Set(combo, value)
-			} else {
-				MsgBox("Invalid binding format for combo: " combo)
-			}
+			this.CompileBridge(combo, value, processed)
 		}
 
 		return processed
+	}
+
+	static CompileBridge(combo, bind, targetMap) {
+		if bind.Length == 1 && Util.IsString(bind[1]) {
+			targetMap.Set(combo, (K) => BindHandler.Send(K, bind[1]))
+		} else if bind.Length >= 1 && bind.Length < 3 && Util.IsArray(bind[1]) {
+			reverse := bind.Length == 2 ? bind[2] : False
+			targetMap.Set(combo, (K) => BindHandler.CapsSend(K, bind[1], reverse))
+		} else if bind.Length >= 2 {
+			reverse := bind.Length == 3 ? bind[3] : False
+			targetMap.Set(combo, (K) => BindHandler.LangSend(K, {
+				en: bind[1],
+				ru: bind[2],
+			}, reverse))
+		} else if Util.IsFunc(bind) {
+			targetMap.Set(combo, bind)
+		} else {
+			MsgBox("Invalid binding format for combo: " combo " with value: " bind.ToString())
+		}
 	}
 
 	static FormatBindings(bindingsArray := []) {
@@ -381,6 +387,12 @@ Class BindHandler {
 		if Language.Validate(lang, "bindings") {
 			output := ""
 
+			for _, character in characterNames {
+				if ChrLib.entries.HasOwnProp(character) {
+					output .= ChrLib.Get(character, True, Cfg.Get("Input_Mode"))
+				}
+			}
+
 			keysValidation := "SC(14B|148|14D|150|04A)"
 			chrValidation := "(" Chr(0x00AE) ")"
 
@@ -392,16 +404,16 @@ Class BindHandler {
 
 	static CapsSend(combo := "", charactersPair := [], reverse := False) {
 		capsOn := reverse ? !GetKeyState("CapsLock", "T") : GetKeyState("CapsLock", "T")
-		this.Send(combo, charactersPair[capsOn ? 1 : 0])
+		this.Send(combo, charactersPair[capsOn ? 2 : 1])
 	}
 
-	static LangSend(combo := "", charactersPair := {}, reverse := False) {
+	static LangSend(combo := "", charactersPair := {}, reverse := { ru: False, en: False }) {
 		Keyboard.CheckLayout(&lang)
 
 		if Language.Validate(lang, "bindings") {
 			if charactersPair.HasOwnProp(lang) {
 				if Util.IsArray(charactersPair.%lang%) {
-					this.CapsSend(combo, charactersPair.%lang%, reverse)
+					this.CapsSend(combo, charactersPair.%lang%, reverse.%lang%)
 				} else {
 					this.Send(combo, charactersPair)
 				}
@@ -422,6 +434,7 @@ defaultBinds := BindList([
 	"Ф", Map("<^>!", ["lat_c_let_a__breve_acute", "lat_c_let_a__breve_acute"]),
 ])
 
+KeyboardBinder.Registration(defaultBinds.mapping)
 
 ; MsgBox(ChrLib.FormatEntry({ binds: KeyboardBinder.FormatBindings(defaultBinds.mapping) }))
 ; MsgBox(KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E")[1].ToString() " — " KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E")[2].ToString())
