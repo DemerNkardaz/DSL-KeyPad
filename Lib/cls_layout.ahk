@@ -1,4 +1,28 @@
-Class Layout {
+Class BindList {
+	mapping := []
+
+	__New(mapping := [], modMapping := []) {
+
+		this.mapping := mapping.Clone()
+
+		if modMapping.Length > 0 {
+			Loop modMapping.Length // 2 {
+				index := A_Index * 2 - 1
+				letterKey := modMapping[index]
+				binds := modMapping[index + 1]
+
+				for modifier, value in binds {
+					this.mapping.Push(modifier "[" letterKey "]", value)
+				}
+			}
+		}
+
+		return this
+	}
+
+}
+
+Class KeyboardBinder {
 
 	static layouts := {
 		winDefault: Map(
@@ -226,18 +250,162 @@ Class Layout {
 			"Диктор", Map(),
 			"ЙІУКЕН (1907)", Map(),
 		),
-		greek: Map(),
 	}
+
+	static modifiers := [
+		"!", "<!", ">!",
+		"+", "<+", ">+",
+		"^", "<^", ">^",
+		"#", "<#", ">#",
+		"^!", "<^>!", ">^>!", "<^<!", ">^<!",
+		"^+", "<^>+", ">^>+", "<^<+", ">^<+",
+		"^#", "<^>#", ">^>#", "<^<#", ">^<#",
+		"<^>^", ">^<^", "<^<^", ">^<^",
+		"<+>+", ">+<+", "<+<+", ">+<+",
+		"^!+", "<^>!+", ">^>!+", "<^<!+", ">^<!+",
+		"<^>!<+", ">^>!<+", "<^<!<+", ">^<!<+",
+		"<^>!>+", ">^>!>+", "<^<!>+", ">^<!>+",
+		"<^>!<+>+", ">^>!<+>+", "<^<!<+>+", ">^<!<+>+",
+		"<^>!<!<+", ">^>!<!<+", "<^<!<!<+", ">^<!<!<+",
+		"<^>!<!>+", ">^>!<!>+", "<^<!<!>+", ">^<!<!>+",
+		"<^>!<!<+>+", ">^>!<!<+>+", "<^<!<!<+>+", ">^<!<!<+>+",
+	]
 
 
 	static __New() {
 
 	}
 
+	static GetCurrentLayoutMap() {
+		layout := Map()
+		latinLayout := Cfg.Get("Layout_Latin")
+		cyrillicLayout := Cfg.Get("Layout_Cyrillic")
+
+		latinLayout := KeyboardBinder.layouts.latin.Has(latinLayout) ? latinLayout : "QWERTY"
+		cyrillicLayout := KeyboardBinder.layouts.cyrillic.Has(cyrillicLayout) ? cyrillicLayout : "ЙЦУКЕН"
+
+		latinLayout := KeyboardBinder.layouts.latin[latinLayout]
+		cyrillicLayout := KeyboardBinder.layouts.cyrillic[cyrillicLayout]
+
+
+		for key, scanCode in KeyboardBinder.layouts.winDefault {
+			layout[scanCode] := [key]
+		}
+
+		for keySet in [latinLayout, cyrillicLayout] {
+			for key, scanCode in keySet {
+				if !layout.Has(scanCode) {
+					layout[scanCode] := [key]
+				} else {
+					layout[scanCode].Push(key)
+				}
+			}
+		}
+		return layout
+	}
+
+	static Registration(bindingsArray := []) {
+		layout := this.GetCurrentLayoutMap()
+
+	}
+
+	static FormatBindings(bindingsArray := []) {
+		layout := this.GetCurrentLayoutMap()
+		output := Map()
+
+		if bindingsArray.Length > 0 {
+			Loop bindingsArray.Length // 2 {
+				index := A_Index * 2 - 1
+				combo := bindingsArray[index]
+				binds := bindingsArray[index + 1]
+				;MsgBox("Combo: " combo " " (Util.IsArray(binds) ? binds.ToString() : binds))
+
+
+				for scanCode, keyNamesArray in layout {
+					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9]+)\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9]+))", &match) {
+						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
+						; if InStr(keyLetter, "Ф") {
+						; MsgBox(keyLetter)
+						; }
+						if keyNamesArray.HasValue(keyLetter) {
+							interCombo := RegExReplace(combo, keyLetter, scanCode)
+							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
+							;MsgBox(scanCode " " keyLetter "`n" interCombo)
+							if !output.Has(interCombo) {
+								output.Set(interCombo, [binds])
+							} else {
+								output[interCombo].Push(binds)
+								; MsgBox(interCombo " " (Util.IsArray(binds) ? binds.ToString() : binds))
+							}
+						}
+					}
+
+				}
+
+
+			}
+		}
+
+
+		return output
+	}
+
+
 }
 
 Class BindHandler {
+
+	static Send(combo := "", characterNames*) {
+		Keyboard.CheckLayout(&lang)
+		if Language.Validate(lang, "bindings") {
+			output := ""
+
+			keysValidation := "SC(14B|148|14D|150|04A)"
+			chrValidation := "(" Chr(0x00AE) ")"
+
+			InputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") != "Unicode") ? "Text" : "Input"
+
+			Send%inputType%(output)
+		}
+	}
+
+	static CapsSend(combo := "", charactersPair := [], reverse := False) {
+		capsOn := reverse ? !GetKeyState("CapsLock", "T") : GetKeyState("CapsLock", "T")
+		this.Send(combo, charactersPair[capsOn ? 1 : 0])
+	}
+
+	static LangSend(combo := "", charactersPair := {}, reverse := False) {
+		Keyboard.CheckLayout(&lang)
+
+		if Language.Validate(lang, "bindings") {
+			if charactersPair.HasOwnProp(lang) {
+				if Util.IsArray(charactersPair.%lang%) {
+					this.CapsSend(combo, charactersPair.%lang%, reverse)
+				} else {
+					this.Send(combo, charactersPair)
+				}
+			}
+		}
+	}
 }
+
+defaultBinds := BindList([
+	"NumpadSub", "minus",
+	;"NumpadDiv", "division",
+	;"NumpadMult", "multiplication",
+], [
+	"A", Map(
+		"<^>!", ["lat_c_let_a__acute", "lat_s_let_a__acute"],
+		"<^>!<!", ["lat_c_let_a__circumflex__acute", "lat_s_let_a__circumflex__acute"]
+	),
+	"Ф", Map("<^>!", ["lat_c_let_a__breve_acute", "lat_c_let_a__breve_acute"]),
+])
+
+; MsgBox(ChrLib.FormatEntry({ binds: KeyboardBinder.FormatBindings(defaultBinds.mapping) }))
+; MsgBox(KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E")[1].ToString() " — " KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E")[2].ToString())
+;MsgBox(KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E").ToString())
+;KeyboardBinder.Registration(defaultBinds)
+
 
 ; TODO Как-то реализовать сбор всех хоткеев, сравнивать скан-коды для биндов разных языков и собирать готовый HotKey() с валидным биндами на правильные скан-коды
 ;*	Сначала создать общую со всеми скан-кодами, затем, определяя текущий сканд-код, указанный в «key», добавлять в значения значение в созданной карте

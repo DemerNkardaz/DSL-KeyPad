@@ -863,13 +863,21 @@ class ChrLib {
 		MsgBox(output)
 	}
 
-	static FormatEntry(entry, indent) {
+	static FormatEntry(entry, indent := 0) {
 		output := ""
 		indentStr := Util.StrRepeat("`t", indent)
 
 		for key, value in entry.OwnProps() {
 			if Util.IsArray(value) {
-				output .= indentStr key ": [" value.ToString(, "'") "]`n"
+				output .= indentStr key ": [`n"
+				for subValue in value {
+					if Util.IsArray(subValue) {
+						output .= indentStr "`t[" subValue.ToString(, "'") indentStr "]`n"
+					} else {
+						output .= indentStr "`t'" subValue "'`n"
+					}
+				}
+				output .= indentStr "]`n"
 			} else if Util.IsObject(value) {
 				output .= indentStr key ": {`n" this.FormatEntry(value, indent + 1) indentStr "}`n"
 			} else if Util.IsMap(value) {

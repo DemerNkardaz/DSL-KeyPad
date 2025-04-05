@@ -267,6 +267,7 @@ Class Locale extends Language {
 	}
 
 	static LocalesGeneration(entryName, entry) {
+		nbsp := Chr(160)
 		pfx := "gen_"
 		useLetterLocale := entry.options.HasOwnProp("useLetterLocale") ? entry.options.useLetterLocale : False
 		letter := (entry.symbol.HasOwnProp("letter") && StrLen(entry.symbol.letter) > 0) ? entry.symbol.letter : entry.data.letter
@@ -304,13 +305,13 @@ Class Locale extends Language {
 				lang := InStr(langCode, "_alt") ? SubStr(langCode, 1, 2) : langCode
 				postfixText := ""
 
-				postfixText .= " {conjuction}" ChrLib.Get("no_break_space") Locale.Read(pfx "postfix_" lPostfixes[1], lang)
+				postfixText .= " {conjuction}" nbsp Locale.Read(pfx "postfix_" lPostfixes[1], lang)
 
 				Loop lPostfixes.Length - 2
 					postfixText .= ", " Locale.Read(pfx "postfix_" lPostfixes[A_Index + 1], lang)
 
 				if lPostfixes.Length > 1
-					postfixText .= " " Locale.Read(pfx "postfix_and", lang) ChrLib.Get("no_break_space") Locale.Read(pfx "postfix_" lPostfixes[lPostfixes.Length], lang)
+					postfixText .= " " Locale.Read(pfx "postfix_and", lang) nbsp Locale.Read(pfx "postfix_" lPostfixes[lPostfixes.Length], lang)
 
 				entry.titles[langCode] .= postfixText
 

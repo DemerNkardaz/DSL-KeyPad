@@ -6,6 +6,7 @@ Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
 Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
 Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
+Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 
 _ObjMaxIndex(this) {
@@ -35,10 +36,18 @@ _ArrayToString(this, separator := ", ", bounds := "") {
 	str := ""
 	for index, value in this {
 		if index = this.Length {
-			str .= bounds value bounds
+			if Util.IsArray(value) {
+				str .= bounds value.ToString(separator, bounds) bounds
+			} else {
+				str .= bounds value bounds
+			}
 			break
 		}
-		str .= bounds value bounds separator
+		if Util.IsArray(value) {
+			str .= bounds value.ToString(separator, bounds) bounds separator
+		} else {
+			str .= bounds value bounds separator
+		}
 	}
 	return str
 }
@@ -139,6 +148,14 @@ _MapKeys(this) {
 		keys.Push(k)
 	}
 	return keys
+}
+
+_MapToArray(this) {
+	arr := []
+	for k, v in this {
+		arr.Push(k, v)
+	}
+	return arr
 }
 
 MapInsert(MapObj, Pairs*) {
