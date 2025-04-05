@@ -333,6 +333,7 @@ Class KeyboardBinder {
 								rule := ruleMatch[1]
 							}
 
+
 							interCombo := RegExReplace(combo, keyLetter, scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
 							interCombo := RegExReplace(interCombo, "\:(.*?)$", "")
@@ -349,11 +350,19 @@ Class KeyboardBinder {
 			}
 		}
 
+		for key, value in output {
+			try {
+				if InStr(key, "033")
+					MsgBox(key " -> " value.ToString())
+			}
+		}
 		return output
 	}
 
 	static Registration(bindingsMap := Map(), rule := True) {
 		bindingsMap := this.CompileBinds(bindingsMap)
+		; try {
+		; }
 
 		if bindingsMap.Count > 0 {
 			for combo, action in bindingsMap {
@@ -427,10 +436,10 @@ Class BindHandler {
 
 		if Language.Validate(lang, "bindings") {
 			if charactersObj.HasOwnProp(lang) {
-				if Util.IsArray(charactersObj.%lang%) {
+				if Util.IsArray(charactersObj.%lang%) && charactersObj.%lang%.Length == 2 {
 					this.CapsSend(combo, charactersObj.%lang%, reverse.%lang%)
 				} else {
-					this.Send(combo, charactersObj)
+					this.Send(combo, Util.IsArray(charactersObj.%lang%) ? charactersObj.%lang%[1] : charactersObj.%lang%)
 				}
 			}
 		}

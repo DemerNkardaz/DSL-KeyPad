@@ -210,20 +210,20 @@ defaultBinds := Map(
 			"<!<+", "bracket_curly_left"
 		),
 		"Equals", Map(
-			"<^>!", "noequals",
-			"<^>!<!", "almostequals",
-			"<^>!<+", "plusminus"
+			"<^>!", ["noequals"],
+			"<^>!<!", ["almostequals"],
+			"<^>!<+", ["plusminus"]
 		),
 		"Hyphen-minus", Map(
-			"<^>!>+", "hyphenation_point",
-			"<^<!", "softhyphen",
-			"<^<!<+", "minus",
-			"<^>!", "emdash",
-			"<^>!<+", "endash",
+			"<^>!>+", ["hyphenation_point"],
+			"<^<!", ["softhyphen"],
+			"<^<!<+", ["minus"],
+			"<^>!", ["emdash"],
+			"<^>!<+", ["endash"],
 			"<!:Caps", ["two_emdash", "three_emdash"],
-			"<^>!<!", "hyphen",
-			"<^>!<!<+", "no_break_hyphen",
-			"<^>!<!>+", "figure_dash"
+			"<^>!<!", ["hyphen"],
+			"<^>!<!<+", ["no_break_hyphen"],
+			"<^>!<!>+", ["figure_dash"]
 		),
 		"Slash", Map(
 			"<^>!", "ellipsis",
@@ -233,19 +233,19 @@ defaultBinds := Map(
 			"<^>!>+", "fraction_slash"
 		),
 		"Comma", Map(
-			"<^>!", "quote_left_double",
-			"<^>!<+", "quote_left_single",
-			"<^>!>+", "quote_low_9_double",
-			"<^>!<+>+", "quote_low_9_single",
-			"<^>!<!", "france_left",
-			"<^>!<!<+", "france_single_left"
+			"<^>!", ["quote_left_double"],
+			"<^>!<+", ["quote_left_single"],
+			"<^>!>+", ["quote_low_9_double"],
+			"<^>!<+>+", ["quote_low_9_single"],
+			"<^>!<!", ["france_left"],
+			"<^>!<!<+", ["france_single_left"]
 		),
 		"Dot", Map(
-			"<^>!", "quote_right_double",
-			"<^>!<+", "quote_right_single",
-			"<^>!>+", "quote_low_9_double_reversed",
-			"<^>!<!", "france_right",
-			"<^>!<!<+", "france_single_right"
+			"<^>!", ["quote_right_double"],
+			"<^>!<+", ["quote_right_single"],
+			"<^>!>+", ["quote_low_9_double_reversed"],
+			"<^>!<!", ["france_right"],
+			"<^>!<!<+", ["france_single_right"]
 		),
 		"Tilde", Map(
 			"<^>!", "bullet",
@@ -278,31 +278,31 @@ defaultBinds := Map(
 			"<^>!>+", "zero_width_non_joiner",
 			"<^>!<+", "word_joiner"
 		),
-		"Дефисо-минус", Map(
-			"<^>!>+", "hyphenation_point",
-			"<^<!", "softhyphen",
-			"<^<!<+", "minus",
-			"<^>!", "emdash",
-			"<^>!<+", "endash",
-			"<!:Caps", ["two_emdash", "three_emdash"],
-			"<^>!<!", "hyphen",
-			"<^>!<!<+", "no_break_hyphen",
-			"<^>!<!>+", "figure_dash"
+		; "Дефисо-минус", Map(
+		; "<^>!>+", ["hyphenation_point"],
+		; "<^<!", ["softhyphen"],
+		; "<^<!<+", ["minus"],
+		; "<^>!", ["emdash"],
+		; "<^>!<+", ["endash"],
+		; "<!:Caps", ["two_emdash", "three_emdash"],
+		; "<^>!<!", ["hyphen"],
+		; "<^>!<!<+", ["no_break_hyphen"],
+		; "<^>!<!>+", ["figure_dash"]
+		; ),
+		"Б", Map(
+			"<^>!", ["france_left"],
+			"<^>!<+", ["quote_low_9_double"],
+			"<^>!>+", ["quote_low_9_double"],
+			"<^>!<!", ["quote_left_double"],
+			"<^>!<!<+", ["france_single_left"],
+			"<^>!<+>+", ["quote_low_9_single"]
 		),
-		"Запятая", Map(
-			"<^>!", "france_left",
-			"<^>!<+", "quote_low_9_double",
-			"<^>!>+", "quote_low_9_double",
-			"<^>!<!", "quote_left_double",
-			"<^>!<!<+", "france_single_left",
-			"<^>!<+>+", "quote_low_9_single"
-		),
-		"Точка", Map(
-			"<^>!", "france_right",
-			"<^>!<+", "quote_right_double_ghost_ru",
-			"<^>!>+", "quote_low_9_double_reversed",
-			"<^>!<!", "quote_right_double",
-			"<^>!<!<+", "france_single_right"
+		"Ю", Map(
+			"<^>!", ["france_right"],
+			"<^>!<+", ["quote_right_double_ghost_ru"],
+			"<^>!>+", ["quote_low_9_double_reversed"],
+			"<^>!<!", ["quote_right_double"],
+			"<^>!<!<+", ["france_single_right"]
 		),
 		; Latin-Modifiers Keyboard Layout
 		"A", Map(
