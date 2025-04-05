@@ -305,7 +305,26 @@ Class KeyboardBinder {
 	}
 
 	static Registration(bindingsArray := []) {
-		layout := this.GetCurrentLayoutMap()
+		bindings := this.FormatBindings(bindingsArray)
+		processed := Map()
+
+
+		for combo, value in bindings {
+			if value.Length = 1 && Util.IsString(value[1]) {
+				processed.Set(combo, (K) => BindHandler.Send(K, value[1]))
+			} else if value.Length = 1 && Util.IsArray(value[1]) {
+				processed.Set(combo, (K) => BindHandler.CapsSend(K, value[1]))
+			} else if value.Length = 2 {
+				processed.Set(combo, (K) => BindHandler.LangSend(K, {
+					en: value[1],
+					ru: value[2],
+				}))
+			} else if Util.IsFunc(value) {
+				processed.Set(combo, value)
+			} else {
+				MsgBox("Invalid binding format for combo: " combo)
+			}
+		}
 
 	}
 
@@ -318,31 +337,22 @@ Class KeyboardBinder {
 				index := A_Index * 2 - 1
 				combo := bindingsArray[index]
 				binds := bindingsArray[index + 1]
-				;MsgBox("Combo: " combo " " (Util.IsArray(binds) ? binds.ToString() : binds))
 
 
 				for scanCode, keyNamesArray in layout {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9]+)\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9]+))", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
-						; if InStr(keyLetter, "Ф") {
-						; MsgBox(keyLetter)
-						; }
 						if keyNamesArray.HasValue(keyLetter) {
 							interCombo := RegExReplace(combo, keyLetter, scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
-							;MsgBox(scanCode " " keyLetter "`n" interCombo)
 							if !output.Has(interCombo) {
 								output.Set(interCombo, [binds])
 							} else {
 								output[interCombo].Push(binds)
-								; MsgBox(interCombo " " (Util.IsArray(binds) ? binds.ToString() : binds))
 							}
 						}
 					}
-
 				}
-
-
 			}
 		}
 
