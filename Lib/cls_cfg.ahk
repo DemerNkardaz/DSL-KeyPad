@@ -388,7 +388,10 @@ Class Cfg {
 
 	static Set(value, entry, section := "Settings", options := "") {
 		if this.sections.HasValue(section) {
-			this.OptionsHandler(value, options, &value)
+			if InStr(options, "bool")
+				value := value ? "False" : "True"
+			else
+				this.OptionsHandler(value, options, &value)
 
 			IniWrite(value, this.ini, section, entry)
 

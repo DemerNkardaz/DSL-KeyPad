@@ -16,17 +16,54 @@ Class BindList {
 	}
 }
 
-importantBindsMap := Map("Flat", Map(), "Moded", Map(
+importantBindsMap := Map("Flat", Map(
+	"RAlt", (*) => ProceedCompose(),
+), "Moded", Map(
 	; Functional
 	"F1", Map(
+		"<#<!", (*) => GroupActivator("Diacritics Primary", "F1"),
 		"<^>!", (*) => KeyboardBinder.ToggleDefaultMode(),
 		"<^>!>+", (*) => ToggleInputMode(),
 	),
 	"F2", Map(
+		"<#<!", (*) => GroupActivator("Diacritics Secondary", "F2"),
 		"<^>!", (*) => InputScriptProcessor(),
 		"<^>!>+", (*) => InputScriptProcessor("pinYin"),
 		"<^>!<+", (*) => InputScriptProcessor("karaShiki"),
 		"<^>!<!", (*) => InputScriptProcessor("autoDiacritics"),
+	),
+	"F2", Map(
+		"<#<!", (*) => GroupActivator("Diacritics Tertiary", "F3"),
+	),
+	"F6", Map(
+		"<#<!", (*) => GroupActivator("Diacritics Quatemary", "F6"),
+	),
+	"F7", Map(
+		"<#<!", (*) => GroupActivator("Special Characters", "F7"),
+	),
+	"PgUp", Map("<#<!", (*) => FindCharacterPage(),),
+	"Home", Map("<#<!", (*) => Panel.Panel(), "<^>!<#<!", (*) => OpenPanel()),
+	"Space", Map("<#<!", (*) => GroupActivator("Spaces"),),
+	"Hyphen-minus", Map("<#<!", (*) => GroupActivator("Dashes", "-"),),
+	"Apostrophe", Map("<#<!", (*) => GroupActivator("Quotes", "'"),),
+	"NumpadAdd", Map("<#<!", (*) => CharacterInserter().NumHook()),
+	"NumHook", Map("<#<!", (*) => CharacterInserter("Altcode").NumHook()),
+	"A", Map("<#<!", (*) => CharacterInserter("Altcode").InputDialog(),),
+	"F", Map("<#<!", (*) => ChrLib.SearchPrompt().send(),),
+	"H", Map(
+		">^", (*) => TranslateSelectionToHTML("Entities"),
+		">^>+", (*) => TranslateSelectionToHTML(),
+	),
+	"J", Map(
+		">^", (*) => TranslateSelectionToHTML("Entities", True),
+	),
+	"L", Map("<#<!", (*) => ChrCrafter(),),
+	"M", Map("<#<!", (*) => ToggleGroupMessage()),
+	"U", Map(
+		"<#<!", (*) => CharacterInserter("Unicode").InputDialog(),
+		">^", (*) => ReplaceWithUnicode(),
+		">^", (*) => ReplaceWithUnicode("CSS"),
+		">^", (*) => ReplaceWithUnicode("Hex"),
 	),
 ))
 
@@ -39,7 +76,6 @@ defaultBinds := Map(
 	"Moded", Map(
 		; Latin-Modifiers Keyboard Layout
 		"A", Map(
-			"<#<!", (*) => CharacterInserter("Altcode").InputDialog(),
 			"<!", ["lat_c_let_a__acute", "lat_s_let_a__acute"],
 			"<^>!", ["lat_c_let_a__breve", "lat_s_let_a__breve"],
 			"<^>!<!", ["lat_c_let_a__circumflex", "lat_s_let_a__circumflex"],
@@ -61,7 +97,7 @@ defaultBinds := Map(
 			"<^>!<!", ["lat_c_let_c__circumflex", "lat_s_let_c__circumflex"],
 			"<^>!<!<+", ["lat_c_let_c__caron", "lat_s_let_c__caron"],
 			"<^>!<!>+", ["lat_c_let_c__cedilla", "lat_s_let_c__cedilla"],
-			"Flat:>+", "celsius"),
+			">+", "celsius"),
 		"D", Map(
 			"<^>!", ["lat_c_let_d_eth", "lat_s_let_d_eth"],
 			"<^>!<!", ["lat_c_let_d__stroke_short", "lat_s_let_d__stroke_short"],
@@ -79,9 +115,8 @@ defaultBinds := Map(
 			">+", ["lat_c_let_e__grave", "lat_s_let_e__grave"],
 			"<+>+", ["lat_c_let_e__grave_double", "lat_s_let_e__grave_double"]),
 		"F", Map(
-			"<#<!", (*) => ChrLib.SearchPrompt().send(),
 			"<^>!", ["lat_c_let_f__dot_above", "lat_s_let_f__dot_above"],
-			"Flat:>+", "fahrenheit"),
+			">+", "fahrenheit"),
 		"G", Map("<!", ["lat_c_let_g_acute", "lat_s_let_g_acute"],
 			"<^>!", ["lat_c_let_g_breve", "lat_s_let_g_breve"],
 			"<^>!<!", ["lat_c_let_g_circumflex", "lat_s_let_g_circumflex"],
@@ -92,8 +127,6 @@ defaultBinds := Map(
 			"<^>!<+>+", ["lat_c_let_gamma", "lat_s_let_gamma"],
 			">+", ["lat_c_let_g_dot_above", "lat_s_let_g_dot_above"]),
 		"H", Map(
-			">^", (*) => TranslateSelectionToHTML("Entities"),
-			">^>+", (*) => TranslateSelectionToHTML(),
 			"<!", ["lat_c_let_h_hwair", "lat_s_let_h_hwair"],
 			"<^>!", ["lat_c_let_h_stroke_short", "lat_s_let_h_stroke_short"],
 			"<^>!<!", ["lat_c_let_h_circumflex", "lat_s_let_h_circumflex"],
@@ -112,7 +145,6 @@ defaultBinds := Map(
 			"<+>+", ["lat_c_let_i_grave_double", "lat_s_let_i_grave_double"],
 			"<^>!<!<+>+", ["lat_c_let_i_dot_above", "lat_s_let_i_dotless"]),
 		"J", Map(
-			">^", (*) => TranslateSelectionToHTML("Entities", True),
 			"<^>!", ["lat_c_let_j_stroke_short", "lat_s_let_j_stroke_short"],
 			"<^>!>+", ["lat_c_let_j_yogh", "lat_s_let_j_yogh"],
 			"<^>!<!", ["lat_c_let_j_circumflex", "lat_s_let_j_circumflex"],
@@ -123,10 +155,9 @@ defaultBinds := Map(
 			"<^>!<!<+", ["lat_c_let_k_caron", "lat_s_let_k_caron"],
 			"<^>!<!>+", ["lat_c_let_k_cedilla", "lat_s_let_k_cedilla"],
 			"<^>!<+", ["lat_c_let_k_cuatrillo", "lat_s_let_k_cuatrillo"],
-			"Flat:>+", "kelvin"
+			">+", "kelvin"
 		),
 		"L", Map(
-			"<#<!", (*) => ChrCrafter(),
 			"<!", ["lat_c_let_l_acute", "lat_s_let_l_acute"],
 			"<^>!", ["lat_c_let_l_solidus_short", "lat_s_let_l_solidus_short"],
 			"<^>!<!<+", ["lat_c_let_l_caron", "lat_s_let_l_caron"],
@@ -190,7 +221,6 @@ defaultBinds := Map(
 			"<^>!<+", ["lat_c_let_t_dot_above", "lat_s_let_t_dot_above"],
 			"<^>!<+>+", ["lat_c_let_et_tironian", "lat_s_let_et_tironian"]),
 		"U", Map(
-			"<#<!", (*) => CharacterInserter("Unicode").InputDialog(),
 			"<!", ["lat_c_let_u_acute", "lat_s_let_u_acute"],
 			"<^>!", ["lat_c_let_u_breve", "lat_s_let_u_breve"],
 			"<^>!<!", ["lat_c_let_u_circumflex", "lat_s_let_u_circumflex"],
@@ -241,7 +271,17 @@ defaultBinds := Map(
 			"<^>!>+", ["cyr_c_let_i_macron", "cyr_s_let_i_macron"],
 			"<^>!<!<+>+", ["cyr_c_let_iota", "cyr_s_let_iota"]
 		),
-		"Б", Map(),
+		"Б", Map(
+			"<!", ["", ""],
+			"<^>!", ["", ""],
+			"<^>!<+", ["", ""],
+			"<^>!>+", ["", ""],
+			"<^>!<+>+", ["", ""],
+			"<^>!<!", ["", ""],
+			"<^>!<!<+", ["", ""],
+			"<^>!<!>+", ["", ""],
+			"<^>!<!<+>+", ["", ""],
+		),
 		"В", Map(),
 		"Г", Map(
 			"<!", ["cyr_c_let_g_acute", "cyr_s_let_g_acute"],

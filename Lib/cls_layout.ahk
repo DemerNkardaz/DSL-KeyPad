@@ -149,7 +149,7 @@ Class KeyboardBinder {
 				"LSquareBracket", "SC01A",
 				"RSquareBracket", "SC01B",
 				"Tilde", "SC029",
-				"Minus", "SC00C",
+				"Hyphen-minus", "SC00C",
 				"Equals", "SC00D",
 				"Comma", "SC033",
 				"Dot", "SC034",
@@ -321,11 +321,26 @@ Class KeyboardBinder {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9]+)\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9]+))", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
+							rules := Map(
+								"Caps", [binds],
+								"Lang", [binds, ["", ""]],
+							)
+
+							ruledBinds := rules["Lang"]
+							rule := "Lang"
+							if RegExMatch(combo, "\:(.*?)$", &ruleMatch) && rules.Has(ruleMatch[1]) {
+								ruledBinds := rules[ruleMatch[1]]
+								rule := ruleMatch[1]
+							}
+
 							interCombo := RegExReplace(combo, keyLetter, scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
+							interCombo := RegExReplace(interCombo, "\:(.*?)$", "")
 							if !output.Has(interCombo) {
-								output.Set(interCombo, [binds])
+								output.Set(interCombo, Util.IsString(binds) || Util.IsFunc(binds) ? [binds] : ruledBinds)
 							} else {
+								if rule = "Lang"
+									output[interCombo].RemoveAt(2)
 								output[interCombo].Push(binds)
 							}
 						}
@@ -367,7 +382,7 @@ Class KeyboardBinder {
 		this.UnregisterAll()
 
 		modeActive := Cfg.Get("Mode_Fast_Keys", , False, "bool")
-		Cfg.Set(modeActive ? "False" : "True", "Mode_Fast_Keys")
+		Cfg.Set(modeActive, "Mode_Fast_Keys", , "bool")
 
 		MsgBox(Locale.Read("message_fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 

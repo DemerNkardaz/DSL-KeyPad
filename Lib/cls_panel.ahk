@@ -1016,6 +1016,3 @@ Class Panel {
 		}
 	}
 }
-
-
->^F8:: Panel.Panel()
