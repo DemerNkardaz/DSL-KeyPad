@@ -304,16 +304,15 @@ Class KeyboardBinder {
 		return layout
 	}
 
-	static Registration(bindingsArray := []) {
+	static CompileBinds(bindingsArray := []) {
 		bindings := this.FormatBindings(bindingsArray)
 		processed := Map()
-
 
 		for combo, value in bindings {
 			if value.Length = 1 && Util.IsString(value[1]) {
 				processed.Set(combo, (K) => BindHandler.Send(K, value[1]))
-			} else if value.Length = 1 && Util.IsArray(value[1]) {
-				processed.Set(combo, (K) => BindHandler.CapsSend(K, value[1]))
+			} else if value.Length = 2 && Util.IsString(value[1]) && Util.IsString(value[2]) {
+				processed.Set(combo, (K) => BindHandler.CapsSend(K, value))
 			} else if value.Length = 2 {
 				processed.Set(combo, (K) => BindHandler.LangSend(K, {
 					en: value[1],
@@ -326,6 +325,7 @@ Class KeyboardBinder {
 			}
 		}
 
+		return processed
 	}
 
 	static FormatBindings(bindingsArray := []) {
@@ -356,11 +356,22 @@ Class KeyboardBinder {
 			}
 		}
 
-
 		return output
 	}
 
+	static Registration(bindingsArray := [], rule := True) {
+		bindingsMap := this.CompileBinds(bindingsArray)
 
+		if bindingsMap.Count > 0 {
+			for combo, action in bindingsMap {
+				try {
+					HotKey(combo, action, rule ? "On" : "Off")
+				} catch {
+					MsgBox("Failed to register HotKey: " combo)
+				}
+			}
+		}
+	}
 }
 
 Class BindHandler {
@@ -400,7 +411,7 @@ Class BindHandler {
 }
 
 defaultBinds := BindList([
-	"NumpadSub", "minus",
+	"NumpadSub", "lat_c_lig_ae",
 	;"NumpadDiv", "division",
 	;"NumpadMult", "multiplication",
 ], [
@@ -410,6 +421,7 @@ defaultBinds := BindList([
 	),
 	"Ф", Map("<^>!", ["lat_c_let_a__breve_acute", "lat_c_let_a__breve_acute"]),
 ])
+
 
 ; MsgBox(ChrLib.FormatEntry({ binds: KeyboardBinder.FormatBindings(defaultBinds.mapping) }))
 ; MsgBox(KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E")[1].ToString() " — " KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E")[2].ToString())
