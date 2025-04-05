@@ -318,15 +318,14 @@ Class KeyboardBinder {
 	static CompileBridge(combo, bind, targetMap) {
 		if bind.Length == 1 && Util.IsString(bind[1]) {
 			targetMap.Set(combo, (K) => BindHandler.Send(K, bind[1]))
-		} else if bind.Length >= 1 && bind.Length < 3 && Util.IsArray(bind[1]) {
+		} else if (bind.Length = 1 && Util.IsArray(bind[1])) ||
+			(bind.Length == 2 Util.IsArray(bind[1]) && Util.IsBool(bind[2])) {
 			reverse := bind.Length == 2 ? bind[2] : False
 			targetMap.Set(combo, (K) => BindHandler.CapsSend(K, bind[1], reverse))
 		} else if bind.Length >= 2 {
 			reverse := bind.Length == 3 ? bind[3] : False
-			targetMap.Set(combo, (K) => BindHandler.LangSend(K, {
-				en: bind[1],
-				ru: bind[2],
-			}, reverse))
+			targetMap.Set(combo, (K) => BindHandler.LangSend(K, { en: bind[1], ru: bind[2], }, reverse))
+			MsgBox("Bind: " bind[1].ToString() " " bind[2].ToString())
 		} else if Util.IsFunc(bind) {
 			targetMap.Set(combo, bind)
 		} else {
@@ -404,18 +403,18 @@ Class BindHandler {
 
 	static CapsSend(combo := "", charactersPair := [], reverse := False) {
 		capsOn := reverse ? !GetKeyState("CapsLock", "T") : GetKeyState("CapsLock", "T")
-		this.Send(combo, charactersPair[capsOn ? 2 : 1])
+		this.Send(combo, charactersPair[capsOn ? 1 : 2])
 	}
 
-	static LangSend(combo := "", charactersPair := {}, reverse := { ru: False, en: False }) {
+	static LangSend(combo := "", charactersObj := { en: "", ru: "" }, reverse := { ru: False, en: False }) {
 		Keyboard.CheckLayout(&lang)
 
 		if Language.Validate(lang, "bindings") {
-			if charactersPair.HasOwnProp(lang) {
-				if Util.IsArray(charactersPair.%lang%) {
-					this.CapsSend(combo, charactersPair.%lang%, reverse.%lang%)
+			if charactersObj.HasOwnProp(lang) {
+				if Util.IsArray(charactersObj.%lang%) {
+					this.CapsSend(combo, charactersObj.%lang%, reverse.%lang%)
 				} else {
-					this.Send(combo, charactersPair)
+					this.Send(combo, charactersObj)
 				}
 			}
 		}
