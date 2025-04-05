@@ -100,6 +100,7 @@ LaTeXMode := "Default"
 #Include <cls_chr_legend>
 #Include <cls_panel>
 #Include <cls_key_event>
+#Include <cls_bindlist>
 #Include <cls_layout>
 #Include <cls_long_press>
 #Include <supplement_pshell>
@@ -6745,7 +6746,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["I"], (*) => ReplaceWithUnicode("Hex"),
 			"<#<!" UseKey["Home"], (*) => OpenPanel(),
 			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
-			"<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
+			; "<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
 			"<^>!" UseKey["F2"], (*) => InputScriptProcessor(),
 			"<^>!>+" UseKey["F2"], (*) => InputScriptProcessor("pinYin"),
 			"<^>!<+" UseKey["F2"], (*) => InputScriptProcessor("karaShiki"),
@@ -6943,7 +6944,7 @@ RShiftEndingTimer() {
 }
 
 
-RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+;RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 
 ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True
@@ -7164,5 +7165,7 @@ ManageTrayItems()
 ShowInfoMessage("tray_app_started")
 
 #Include <stc_bindings>
+
+; KeyboardBinder.Registration(defaultBinds.mapping)
 
 ;ApplicationEnd

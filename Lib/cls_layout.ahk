@@ -1,27 +1,3 @@
-Class BindList {
-	mapping := []
-
-	__New(mapping := [], modMapping := []) {
-
-		this.mapping := mapping.Clone()
-
-		if modMapping.Length > 0 {
-			Loop modMapping.Length // 2 {
-				index := A_Index * 2 - 1
-				letterKey := modMapping[index]
-				binds := modMapping[index + 1]
-
-				for modifier, value in binds {
-					this.mapping.Push(modifier "[" letterKey "]", value)
-				}
-			}
-		}
-
-		return this
-	}
-
-}
-
 Class KeyboardBinder {
 
 	static layouts := {
@@ -273,6 +249,8 @@ Class KeyboardBinder {
 
 
 	static __New() {
+		this.Registration(importantBindsMap.mapping, True)
+		this.Registration(defaultBinds.mapping, Cfg.FastKeysOn)
 
 	}
 
@@ -304,8 +282,8 @@ Class KeyboardBinder {
 		return layout
 	}
 
-	static CompileBinds(bindingsArray := []) {
-		bindings := this.FormatBindings(bindingsArray)
+	static CompileBinds(bindingsMap := Map()) {
+		bindings := this.FormatBindings(bindingsMap)
 		processed := Map()
 
 		for combo, value in bindings {
@@ -323,27 +301,22 @@ Class KeyboardBinder {
 			reverse := bind.Length == 2 ? bind[2] : False
 			targetMap.Set(combo, (K) => BindHandler.CapsSend(K, bind[1], reverse))
 		} else if bind.Length >= 2 {
-			reverse := bind.Length == 3 ? bind[3] : False
+			reverse := bind.Length == 3 ? bind[3] : { en: False, ru: False }
 			targetMap.Set(combo, (K) => BindHandler.LangSend(K, { en: bind[1], ru: bind[2], }, reverse))
-			MsgBox("Bind: " bind[1].ToString() " " bind[2].ToString())
-		} else if Util.IsFunc(bind) {
-			targetMap.Set(combo, bind)
+		} else if Util.IsFunc(bind[1]) {
+			targetMap.Set(combo, bind[1])
 		} else {
-			MsgBox("Invalid binding format for combo: " combo " with value: " bind.ToString())
+			valueStr := (Util.IsArray(bind) && !Util.IsFunc(bind[1])) ? bind.ToString() : (Util.IsFunc(bind[1]) ? "<Function>" : "<Unknown>")
+			MsgBox("Invalid binding format for combo: " combo " with value: " valueStr)
 		}
 	}
 
-	static FormatBindings(bindingsArray := []) {
+	static FormatBindings(bindingsMap := Map()) {
 		layout := this.GetCurrentLayoutMap()
 		output := Map()
 
-		if bindingsArray.Length > 0 {
-			Loop bindingsArray.Length // 2 {
-				index := A_Index * 2 - 1
-				combo := bindingsArray[index]
-				binds := bindingsArray[index + 1]
-
-
+		if bindingsMap.Count > 0 {
+			for combo, binds in bindingsMap {
 				for scanCode, keyNamesArray in layout {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9]+)\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9]+))", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
@@ -364,8 +337,8 @@ Class KeyboardBinder {
 		return output
 	}
 
-	static Registration(bindingsArray := [], rule := True) {
-		bindingsMap := this.CompileBinds(bindingsArray)
+	static Registration(bindingsMap := Map(), rule := True) {
+		bindingsMap := this.CompileBinds(bindingsMap)
 
 		if bindingsMap.Count > 0 {
 			for combo, action in bindingsMap {
@@ -376,6 +349,32 @@ Class KeyboardBinder {
 				}
 			}
 		}
+	}
+
+	static UnregisterAll() {
+		layout := this.GetCurrentLayoutMap()
+
+		for scanCode, keyNamesArray in layout {
+			HotKey(scanCode, (*) => False, "Off")
+
+			for modifier in this.modifiers {
+				HotKey(modifier scanCode, (*) => False, "Off")
+			}
+		}
+	}
+
+	static ToggleDefaultMode() {
+		this.UnregisterAll()
+
+		modeActive := Cfg.Get("Mode_Fast_Keys", , False, "bool")
+		Cfg.Set(modeActive ? "False" : "True", "Mode_Fast_Keys")
+
+		MsgBox(Locale.Read("message_fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
+
+
+		this.Registration(importantBindsMap.mapping, True)
+		this.Registration(defaultBinds.mapping, Cfg.FastKeysOn)
+
 	}
 }
 
@@ -389,6 +388,8 @@ Class BindHandler {
 			for _, character in characterNames {
 				if ChrLib.entries.HasOwnProp(character) {
 					output .= ChrLib.Get(character, True, Cfg.Get("Input_Mode"))
+				} else {
+					output .= GetCharacterSequence(character)
 				}
 			}
 
@@ -421,42 +422,6 @@ Class BindHandler {
 	}
 }
 
-defaultBinds := BindList([
-	"NumpadSub", "lat_c_lig_ae",
-	;"NumpadDiv", "division",
-	;"NumpadMult", "multiplication",
-], [
-	"A", Map(
-		"<^>!", ["lat_c_let_a__acute", "lat_s_let_a__acute"],
-		"<^>!<!", ["lat_c_let_a__circumflex__acute", "lat_s_let_a__circumflex__acute"]
-	),
-	"Ф", Map("<^>!", ["lat_c_let_a__breve_acute", "lat_c_let_a__breve_acute"]),
-])
-
-KeyboardBinder.Registration(defaultBinds.mapping)
-
-; MsgBox(ChrLib.FormatEntry({ binds: KeyboardBinder.FormatBindings(defaultBinds.mapping) }))
-; MsgBox(KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E")[1].ToString() " — " KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E")[2].ToString())
-;MsgBox(KeyboardBinder.FormatBindings(defaultBinds.mapping).Get("<^>!SC01E").ToString())
-;KeyboardBinder.Registration(defaultBinds)
-
-
-; TODO Как-то реализовать сбор всех хоткеев, сравнивать скан-коды для биндов разных языков и собирать готовый HotKey() с валидным биндами на правильные скан-коды
-;*	Сначала создать общую со всеми скан-кодами, затем, определяя текущий сканд-код, указанный в «key», добавлять в значения значение в созданной карте
-;*	После сбора всех совпадения — регистрация HotKey с правильной функцией вставки символа в зависимости от языка
-;*	Сначала карта заполняется сканд-кодами, а затем вставляются подходящие бинды и в конце регистрируется HotKey
-
-;*	Совпадение в случае стандартной QWERTY/ЙЦУКЕН
-;*	Латинская «T» с запятой — на букве T, а кириллическая «Ять» — на букве Е; (с AltGr)
-
-;*	Map("SC014", Map("<^>!", {latin: ["lat_c_let_t_comma_below", "lat_s_let_t_comma_below"], cyrillic: ["cyr_c_let_yat", "cyr_s_let_yat"]}))
-;*	=> HotKey("<^>!SC014", (K) => LangSeparatedKey(K, ["lat_c_let_a_breve", "lat_s_let_a_breve"], ["cyr_c_let_fita", "cyr_s_let_fita"], True), "On")
-
-;*	Совпадение в случае Colemak/Диктор
-;*	Тот же ска-код, но другие символы: «G» с краткой и „»“ кавычка; (с AltGr)
-
-;*	Map("SC014", Map("<^>!", {latin: ["lat_c_let_g_breve", "lat_s_let_g_breve"], cyrillic: ["cyr_c_let_yat", "cyr_s_let_yat"]}))
-;*	=> HotKey("<^>!SC014", (K) => LangSeparatedKey(K, ["lat_c_let_g_breve", "lat_s_let_g_breve"], "france_right", True), "On")
 
 ;*	Реализовать возможность создавать кастомные раскладки через создание .ini файлов в «Layouts\» директории
 ;*	[Setup]
@@ -466,10 +431,3 @@ KeyboardBinder.Registration(defaultBinds.mapping)
 ;*	А=SC016
 ;*	Ф=SC02C
 ;*	...
-
-
-justBindConcept := Map(
-	;
-	Map("modifier", "<^>!", "latin", { type: "caps", characters: ["lat_c_let_a_breve", "lat_s_let_a_breve"], key: "A" }),
-	Map("modifier", "<^>!", "cyrllic", { type: "caps", characters: ["cyr_c_let_fita", "cyr_s_let_fita"], key: "Ф" }),
-)

@@ -433,7 +433,7 @@ Class Cfg {
 		if InStr(options, "fromHex")
 			value := ConvertFromHexaDecimal(value)
 		if InStr(options, "bool")
-			value := (value = "True")
+			value := (value = "True" || value = 1)
 		if InStr(options, "int")
 			value := Integer(value)
 
