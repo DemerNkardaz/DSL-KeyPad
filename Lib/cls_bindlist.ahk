@@ -7,7 +7,12 @@ Class BindList {
 		if modMapping.Count > 0 {
 			for letterKey, binds in modMapping {
 				for modifier, value in binds {
-					this.mapping.Set(modifier "[" letterKey "]", value)
+					rule := ""
+					if RegExMatch(modifier, ":(.*?)$", &ruleMatch) {
+						rule := ":" ruleMatch[1]
+						modifier := RegExReplace(modifier, ":(.*?)$", "")
+					}
+					this.mapping.Set(modifier "[" letterKey "]" rule, value)
 				}
 			}
 		}

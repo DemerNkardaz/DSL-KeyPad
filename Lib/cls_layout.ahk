@@ -313,22 +313,24 @@ Class KeyboardBinder {
 
 	static FormatBindings(bindingsMap := Map()) {
 		layout := this.GetCurrentLayoutMap()
+		matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁ\-]+"
+		matchEn := "(?!.*[а-яА-ЯёЁ])[a-zA-Z\-]+"
 		output := Map()
 
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
 				for scanCode, keyNamesArray in layout {
-					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9\-]+)\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9\-]+))", &match) {
+					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9\-]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9\-]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
 							rules := Map(
 								"Caps", [binds],
-								"Lang", RegExMatch(keyLetter, "([а-яА-ЯёЁ]+)") ? [["", ""], binds] : [binds, ["", ""]],
+								"Lang", RegExMatch(keyLetter, matchRu) ? [["", ""], binds] : [binds, ["", ""]],
 							)
 
 							ruledBinds := rules["Lang"]
 							rule := "Lang"
-							if RegExMatch(combo, "\:(.*?)$", &ruleMatch) && rules.Has(ruleMatch[1]) {
+							if RegExMatch(combo, ":(.*?)$", &ruleMatch) && rules.Has(ruleMatch[1]) {
 								ruledBinds := rules[ruleMatch[1]]
 								rule := ruleMatch[1]
 							}
@@ -336,12 +338,16 @@ Class KeyboardBinder {
 
 							interCombo := RegExReplace(combo, keyLetter, scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
-							interCombo := RegExReplace(interCombo, "\:(.*?)$", "")
+							interCombo := RegExReplace(interCombo, ":" rule "$", "")
+
 							if !output.Has(interCombo) {
 								output.Set(interCombo, Util.IsString(binds) || Util.IsFunc(binds) ? [binds] : ruledBinds)
 							} else {
-								if rule = "Lang" && output[interCombo].Length == 2
-									output[interCombo].RemoveAt(2)
+								if rule = "Lang" && output[interCombo].Length == 2 {
+									if RegExMatch(keyLetter, matchRu) {
+										output[interCombo].RemoveAt(2)
+									}
+								}
 								output[interCombo].Push(binds)
 							}
 						}
@@ -352,8 +358,8 @@ Class KeyboardBinder {
 
 		for key, value in output {
 			try {
-				if InStr(key, "033")
-					MsgBox(key " -> " value.ToString())
+				; if InStr(key, "033")
+				; MsgBox(key " -> " value.ToString())
 			}
 		}
 		return output
@@ -416,6 +422,8 @@ Class BindHandler {
 					output .= GetCharacterSequence(character)
 				}
 			}
+
+			; MsgBox(characterNames[1])
 
 			keysValidation := "SC(14B|148|14D|150|04A)"
 			chrValidation := "(" Chr(0x00AE) ")"
