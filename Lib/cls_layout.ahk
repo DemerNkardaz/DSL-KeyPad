@@ -190,7 +190,7 @@ Class KeyboardBinder {
 				"Х", "SC01A",
 				"Ъ", "SC01B",
 				"Ё", "SC029",
-				"Минус", "SC00C",
+				"Дефисо-минус", "SC00C",
 				"Равно", "SC00D",
 				"Б", "SC033",
 				"Ю", "SC034",
@@ -318,12 +318,12 @@ Class KeyboardBinder {
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
 				for scanCode, keyNamesArray in layout {
-					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9]+)\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9]+))", &match) {
+					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9\-]+)\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9\-]+))", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
 							rules := Map(
 								"Caps", [binds],
-								"Lang", [binds, ["", ""]],
+								"Lang", RegExMatch(keyLetter, "([а-яА-ЯёЁ]+)") ? [["", ""], binds] : [binds, ["", ""]],
 							)
 
 							ruledBinds := rules["Lang"]
@@ -339,7 +339,7 @@ Class KeyboardBinder {
 							if !output.Has(interCombo) {
 								output.Set(interCombo, Util.IsString(binds) || Util.IsFunc(binds) ? [binds] : ruledBinds)
 							} else {
-								if rule = "Lang"
+								if rule = "Lang" && output[interCombo].Length == 2
 									output[interCombo].RemoveAt(2)
 								output[interCombo].Push(binds)
 							}
@@ -384,7 +384,7 @@ Class KeyboardBinder {
 		modeActive := Cfg.Get("Mode_Fast_Keys", , False, "bool")
 		Cfg.Set(modeActive, "Mode_Fast_Keys", , "bool")
 
-		MsgBox(Locale.Read("message_fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
+		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 
 		this.Registration(importantBindsMap.mapping, True)

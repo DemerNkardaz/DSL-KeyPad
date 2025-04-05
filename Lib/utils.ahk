@@ -7,6 +7,7 @@ Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
 Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
+Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 
 _ObjMaxIndex(this) {
@@ -156,6 +157,19 @@ _MapToArray(this) {
 		arr.Push(k, v)
 	}
 	return arr
+}
+
+_MapMergeWith(this, maps*) {
+	for mapIdx, mapToMerge in maps {
+		for key, val in mapToMerge {
+			if this.Has(key) && Util.IsMap(this[key]) {
+				this[key].MergeWith(val)
+			} else {
+				this.Set(key, val)
+			}
+		}
+	}
+	return this
 }
 
 MapInsert(MapObj, Pairs*) {

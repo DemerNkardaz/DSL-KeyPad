@@ -67,6 +67,101 @@ importantBindsMap := Map("Flat", Map(
 	),
 ))
 
+flatBinds := Map(
+	"Flat", Map(),
+	"Moded", Map()
+)
+
+diacriticBinds := Map(
+	"Flat", Map(),
+	"Moded", Map(
+		"A", Map(
+			"<^<!", "acute",
+			"<^<!<+", "acute_double",
+			"<^<!>+", "acute_below"
+		),
+		"B", Map(
+			"<^<!", "breve",
+			"<^<!<+", "breve_inverted",
+			"<^<!>+", "breve_below",
+			"<^<!<+>+", "breve_inverted_below"
+		),
+		"C", Map(
+			"<^<!", "circumflex",
+			"<^<!<+", "caron",
+			"<^<!>+", "cedilla",
+			"<^<!<+>+", "circumflex_below"
+		),
+		"D", Map(
+			"<^<!", "dot_above",
+			"<^<!<+", "diaeresis",
+			"<^<!>+", "dot_below",
+			"<^<!<+>+", "diaeresis_below"
+		),
+		"F", Map(
+			"<^<!", "fermata"
+		),
+		"G", Map(
+			"<^<!", "grave",
+			"<^<!<+", "grave_double",
+			"<^<!>+", "cyr_com_dasia_pneumata",
+			"<^<!<+>+", "cyr_com_psili_pneumata"
+		),
+		"H", Map(
+			"<^<!", "hook_above",
+			"<^<!<+", "horn",
+			"<^<!>+", "palatal_hook_below",
+			"<^<!<+>+", "retroflex_hook_below"
+		),
+		"M", Map(
+			"<^<!", "macron",
+			"<^<!<+", "macron_below"
+		),
+		"N", Map(
+			"<^<!", "cyr_com_titlo"
+		),
+		"O", Map(
+			"<^<!", "ogonek",
+			"<^<!<+", "ogonek_above"
+		),
+		"R", Map(
+			"<^<!", "ring_above",
+			"<^<!<+", "ring_below"
+		),
+		"S", Map(
+			"<^<!", "stroke_short",
+			"<^<!<+", "stroke_long"
+		),
+		"T", Map(
+			"<^<!", "tilde",
+			"<^<!<+", "tilde_overlay"
+		),
+		"V", Map(
+			"<^<!", "line_vertical",
+			"<^<!<+", "line_vertical_double"
+		),
+		"X", Map(
+			"<^<!", "x_above",
+			"<^<!<+", "x_below"
+		),
+		"Z", Map(
+			"<^<!", "zigzag_above"
+		),
+		"Slash", Map(
+			"<^<!", "solidus_short",
+			"<^<!<+", "solidus_long"
+		),
+		"Comma", Map(
+			"<^<!", "comma_above",
+			"<^<!<+", "comma_below"
+		),
+		"Dot", Map(
+			"<^<!", "dot_above",
+			"<^<!<+", "diaeresis"
+		)
+	)
+)
+
 defaultBinds := Map(
 	"Flat", Map(
 		"NumpadSub", "minus",
@@ -74,6 +169,141 @@ defaultBinds := Map(
 		"NumpadMult", "multiplication"
 	),
 	"Moded", Map(
+		; Digit & Misc Layout
+		"0", Map(
+			"<^>!", "bracket_angle_math_right",
+			"<^>!<!", "infinity",
+			"<!", "bracket_square_right",
+			"<!<+", "bracket_curly_right"
+		),
+		"1", Map(
+			"<!", "section",
+			"<^>!", "inverted_exclamation",
+			"<^>!<+", "double_exclamation_question",
+			"<^>!>+", "double_exclamation",
+			">+:Caps", ["interrobang_inverted", "interrobang"]
+		),
+		"2", Map(
+			"<^>!:Caps", ["registered", "copyright"],
+			"<^>!<+:Caps", ["servicemark", "trademark"],
+			"<^>!>+", "sound_recording_copyright"
+		),
+		"3", Map(
+			"<^>!:Caps", ["prime_reversed_single", "prime_single"],
+			"<^>!>+:Caps", ["prime_reversed_double", "prime_double"],
+			"<^>!<+:Caps", ["prime_reversed_triple", "prime_triple"],
+			"<^>!<+>+", "prime_quadruple"
+		),
+		"4", Map("<^>!", "division"),
+		"5", Map("<^>!", "permille", "<^>!<+", "pertenthousand"),
+		"6", Map(),
+		"7", Map(
+			"<^>!", "inverted_question",
+			"<^>!>+", "double_question",
+			"<^>!<+", "double_question_exclamation",
+			"<^>!<!", "reversed_question"
+		),
+		"8", Map("<^>!", "multiplication"),
+		"9", Map(
+			"<^>!", "bracket_angle_math_left",
+			"<!", "bracket_square_left",
+			"<!<+", "bracket_curly_left"
+		),
+		"Equals", Map(
+			"<^>!", "noequals",
+			"<^>!<!", "almostequals",
+			"<^>!<+", "plusminus"
+		),
+		"Hyphen-minus", Map(
+			"<^>!>+", "hyphenation_point",
+			"<^<!", "softhyphen",
+			"<^<!<+", "minus",
+			"<^>!", "emdash",
+			"<^>!<+", "endash",
+			"<!:Caps", ["two_emdash", "three_emdash"],
+			"<^>!<!", "hyphen",
+			"<^>!<!<+", "no_break_hyphen",
+			"<^>!<!>+", "figure_dash"
+		),
+		"Slash", Map(
+			"<^>!", "ellipsis",
+			"<^>!<+", "tricolon",
+			"<^>!<+>+", "quartocolon",
+			"<!", "two_dot_punctuation",
+			"<^>!>+", "fraction_slash"
+		),
+		"Comma", Map(
+			"<^>!", "quote_left_double",
+			"<^>!<+", "quote_left_single",
+			"<^>!>+", "quote_low_9_double",
+			"<^>!<+>+", "quote_low_9_single",
+			"<^>!<!", "france_left",
+			"<^>!<!<+", "france_single_left"
+		),
+		"Dot", Map(
+			"<^>!", "quote_right_double",
+			"<^>!<+", "quote_right_single",
+			"<^>!>+", "quote_low_9_double_reversed",
+			"<^>!<!", "france_right",
+			"<^>!<!<+", "france_single_right"
+		),
+		"Tilde", Map(
+			"<^>!", "bullet",
+			"<^>!<!", "bullet_hyphen",
+			"<^>!<+", "interpunct",
+			"<^>!>+", "quote_right_single",
+			"<^>!<!<+", "bullet_triangle",
+			"<^>!<!>+", "bullet_white",
+			">+", "tilde_reversed"
+		),
+		"Apostrophe", Map(),
+		"Space", Map(
+			"<^>!", "no_break_space",
+			"<^>!>+", "emsp",
+			"<^>!<+", "ensp",
+			"<^>!<+>+", "figure_space",
+			"<^>!<!", "thinspace",
+			"<^>!<!<+", "hairspace",
+			"<^>!<!>+", "punctuation_space",
+			;"<^>!<!<+>+", "zero_width_space",
+			"<!", "emsp13",
+			"<^>!>^", "zero_width_space",
+			"<^<!", "zero_width_no_break_space",
+			;"<+", "emsp14",
+			">+", "emsp16",
+			"<+>+", "narrow_no_break_space",
+		),
+		"Tab", Map(
+			"<^>!", "zero_width_joiner",
+			"<^>!>+", "zero_width_non_joiner",
+			"<^>!<+", "word_joiner"
+		),
+		"Дефисо-минус", Map(
+			"<^>!>+", "hyphenation_point",
+			"<^<!", "softhyphen",
+			"<^<!<+", "minus",
+			"<^>!", "emdash",
+			"<^>!<+", "endash",
+			"<!:Caps", ["two_emdash", "three_emdash"],
+			"<^>!<!", "hyphen",
+			"<^>!<!<+", "no_break_hyphen",
+			"<^>!<!>+", "figure_dash"
+		),
+		"Запятая", Map(
+			"<^>!", "france_left",
+			"<^>!<+", "quote_low_9_double",
+			"<^>!>+", "quote_low_9_double",
+			"<^>!<!", "quote_left_double",
+			"<^>!<!<+", "france_single_left",
+			"<^>!<+>+", "quote_low_9_single"
+		),
+		"Точка", Map(
+			"<^>!", "france_right",
+			"<^>!<+", "quote_right_double_ghost_ru",
+			"<^>!>+", "quote_low_9_double_reversed",
+			"<^>!<!", "quote_right_double",
+			"<^>!<!<+", "france_single_right"
+		),
 		; Latin-Modifiers Keyboard Layout
 		"A", Map(
 			"<!", ["lat_c_let_a__acute", "lat_s_let_a__acute"],
@@ -99,6 +329,7 @@ defaultBinds := Map(
 			"<^>!<!>+", ["lat_c_let_c__cedilla", "lat_s_let_c__cedilla"],
 			">+", "celsius"),
 		"D", Map(
+			"<!", "degree",
 			"<^>!", ["lat_c_let_d_eth", "lat_s_let_d_eth"],
 			"<^>!<!", ["lat_c_let_d__stroke_short", "lat_s_let_d__stroke_short"],
 			"<^>!<!<+", ["lat_c_let_d__caron", "lat_s_let_d__caron"],
@@ -414,7 +645,13 @@ defaultBindsOptions() {
 	} else if letterI_Option = "Hybrid" {
 		defaultBinds["Moded"]["I"].Set("<+", ["lat_c_let_i_dot_above", "lat_s_let_i_dotless"])
 	}
-} ;defaultBindsOptions()
+} defaultBindsOptions()
 
 importantBindsMap := BindList(importantBindsMap["Flat"], importantBindsMap["Moded"])
+
+flatBinds := BindList(flatBinds["Flat"], flatBinds["Moded"])
+
 defaultBinds := BindList(defaultBinds["Flat"], defaultBinds["Moded"])
+diacriticBinds := BindList(diacriticBinds["Flat"], diacriticBinds["Moded"])
+
+defaultBinds.mapping := defaultBinds.mapping.MergeWith(diacriticBinds.mapping)
