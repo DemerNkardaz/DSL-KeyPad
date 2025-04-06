@@ -23,6 +23,7 @@ Class ChrEntry {
 		fastKey: "",
 		groupKey: [],
 		specialKey: "",
+		send: "",
 	}
 	recipe := []
 	recipeAlt := []
@@ -772,6 +773,10 @@ class ChrLib {
 						refinedEntry.recipeAlt[i] := RegExReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
 					}
 				}
+			}
+
+			for i, aR in refinedEntry.recipeAlt {
+				refinedEntry.recipeAlt[i] := RegExReplace(aR, DottedCircle DottedCircle, DottedCircle)
 			}
 		}
 

@@ -2152,26 +2152,35 @@ LibRegistrate(this) {
 			groups: ["Special Characters", "Special Fast Secondary"],
 			options: { fastKey: "<+ [" Chr(0x2192) "]" },
 		},
+		;
+		;
+		; * Various
+		;
+		;
+		"asterisk", {
+			unicode: "{U+002A}",
+			options: { noCalc: True },
+		},
 		"asterisk_low", {
 			unicode: "{U+204E}",
 			tags: ["low asterisk", "нижний астериск"],
 			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
 			options: { groupKey: ["a", "ф"], fastKey: "<+ [Num*]" },
-			recipe: ["*"],
+			recipe: ["${asterisk}${arrow_down}"],
 		},
 		"asterisk_two", {
 			unicode: "{U+2051}",
 			tags: ["two asterisks", "два астериска"],
 			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
 			options: { groupKey: ["A", "Ф"], fastKey: "[Num*]" },
-			recipe: ["**", "2*"],
+			recipe: ["${asterisk×2}", "2*"],
 		},
 		"asterism", {
 			unicode: "{U+2042}",
 			tags: ["asterism", "астеризм"],
 			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
 			options: { groupKey: [CtrlA], fastKey: ">+ [Num*]" },
-			recipe: ["***", "3*"],
+			recipe: ["${asterisk×3}", "3*"],
 		},
 		"bullet", {
 			unicode: "{U+2022}",
@@ -2351,11 +2360,32 @@ LibRegistrate(this) {
 			groups: ["Smelting Special"],
 			recipe: ["no"],
 		},
+		"number_sign", {
+			unicode: "{U+0023}",
+			options: { noCalc: True, send: "Text" },
+		},
+		"section", {
+			unicode: "{U+00A7}", LaTeX: ["\S"],
+			tags: ["section", "параграф"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Left"],
+			options: { groupKey: ["s", "с"], fastKey: "[1]" },
+			recipe: ["sec", "пар"],
+		},
+		"comma", {
+			unicode: "{U+002C}",
+			options: { noCalc: True },
+		},
+		"dot", {
+			unicode: "{U+002E}",
+			options: { noCalc: True },
+		},
 		"exclamation", {
 			unicode: "{U+0021}",
+			options: { noCalc: True, send: "Text" },
 		},
 		"question", {
 			unicode: "{U+003F}",
+			options: { noCalc: True },
 		},
 		"reversed_question", {
 			unicode: "{U+2E2E}",
@@ -2419,6 +2449,48 @@ LibRegistrate(this) {
 			groups: ["Smelting Special", "Special Fast RShift"],
 			options: { fastKey: "c* [1]" },
 			recipe: ["${arrow_down_ushaped}${interrobang}", "${arrow_down_ushaped}!+?"],
+		},
+		"grave_accent", {
+			unicode: "{U+0060}",
+			alterations: { modifier: "{U+02CB}" },
+			options: { noCalc: True },
+		},
+		"circumflex_accent", {
+			unicode: "{U+005E}",
+			alterations: { modifier: "{U+02C6}" },
+			options: { noCalc: True, send: "Text" },
+		},
+		"semicolon", {
+			unicode: "{U+003B}",
+			options: { noCalc: True },
+		},
+		"colon", {
+			unicode: "{U+003A}",
+			options: { noCalc: True },
+		},
+		"apostrophe", {
+			unicode: "{U+0027}",
+			options: { noCalc: True },
+		},
+		"quote", {
+			unicode: "{U+0022}",
+			options: { noCalc: True },
+		},
+		"solidus", {
+			unicode: "{U+002F}",
+			options: { noCalc: True, send: "Text" },
+		},
+		"reverse_solidus", {
+			unicode: "{U+005C}",
+			options: { noCalc: True, send: "Text" },
+		},
+		"vertical_line", {
+			unicode: "{U+007C}",
+			options: { noCalc: True, send: "Text" },
+		},
+		"commercial_at", {
+			unicode: "{U+0040}",
+			options: { noCalc: True },
 		},
 		;
 		;
@@ -2493,11 +2565,50 @@ LibRegistrate(this) {
 			options: { groupKey: ["8"], fastKey: "<!<+ [-]" },
 			recipe: ["0-"],
 		},
+		"hyphen_minus", {
+			unicode: "{U+002D}",
+			options: { noCalc: True },
+		},
+		"underscore", {
+			unicode: "{U+005F}",
+			options: { noCalc: True },
+		},
 		;
 		;
 		; * Mathematical Symbols
 		;
 		;
+		"percent", {
+			unicode: "{U+0025}",
+			options: { noCalc: True },
+		},
+		"permille", {
+			unicode: "{U+2030}",
+			LaTeX: ["\permil"],
+			LaTeXPackage: "wasysym",
+			tags: ["per mille", "промилле"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["5"], fastKey: "[5]" },
+			recipe: ["${percent}0"],
+		},
+		"pertenthousand", {
+			unicode: "{U+2031}",
+			LaTeX: ["\textpertenthousand"],
+			LaTeXPackage: "textcomp",
+			tags: ["per ten thousand", "промилле", "basis point", "базисный пункт"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["%"], fastKey: "<+ [5]" },
+			recipe: ["${percent}00", "${permille}0"],
+			symbol: { customs: "s40" },
+		},
+		"equals", {
+			unicode: "{U+003D}",
+			options: { noCalc: True },
+		},
+		"plus", {
+			unicode: "{U+002B}",
+			options: { noCalc: True, send: "Text" },
+		},
 		"minus", {
 			unicode: "{U+2212}",
 			alterations: { modifier: "{U+02D7}", subscript: "{U+208B}" },
@@ -2505,6 +2616,42 @@ LibRegistrate(this) {
 			groups: ["Dashes", "Smelting Special", "Special Fast Primary", "Special Fast"],
 			options: { groupKey: ["9"], altSpecialKey: "[Num-]", fastKey: "<+ [-]" },
 			recipe: ["min"],
+		},
+		"tilde", {
+			unicode: "{U+007E}",
+			options: { noCalc: True },
+		},
+		"less_than", {
+			unicode: "{U+003C}",
+			options: { noCalc: True },
+		},
+		"greater_than", {
+			unicode: "{U+003E}",
+			options: { noCalc: True },
+		},
+		"left_parenthesis", {
+			unicode: "{U+0028}",
+			options: { noCalc: True },
+		},
+		"right_parenthesis", {
+			unicode: "{U+0029}",
+			options: { noCalc: True },
+		},
+		"left_bracket", {
+			unicode: "{U+005B}",
+			options: { noCalc: True },
+		},
+		"right_bracket", {
+			unicode: "{U+005D}",
+			options: { noCalc: True },
+		},
+		"left_brace", {
+			unicode: "{U+007B}",
+			options: { noCalc: True },
+		},
+		"right_brace", {
+			unicode: "{U+007D}",
+			options: { noCalc: True },
 		},
 		;
 		;
@@ -7627,7 +7774,7 @@ LibRegistrate(this) {
 			unicode: "{U+00AE}",
 			tags: ["зарегистрированный", "registered"],
 			groups: ["Other Signs"],
-			options: { fastKey: "c* 2" },
+			options: { fastKey: "c* 2", send: "Text" },
 			recipe: ["reg"],
 		},
 		"trademark", {

@@ -65,8 +65,8 @@ Class LayoutList {
 	latin := Map(
 		"Semicolon", "SC027",
 		"Apostrophe", "SC028",
-		"LSquareBracket", "SC01A",
-		"RSquareBracket", "SC01B",
+		"Left_Bracket", "SC01A",
+		"Right_Bracket", "SC01B",
 		"Tilde", "SC029",
 		"Hyphen-minus", "SC00C",
 		"Equals", "SC00D",
@@ -112,7 +112,7 @@ Class LayoutList {
 		"Б", "SC033",
 		"Ю", "SC034",
 		"Точка", "SC035",
-		"Обратный слэш", "SC02B",
+		"Обратный_слэш", "SC02B",
 		"Ф", "SC01E",
 		"И", "SC030",
 		"С", "SC02E",
@@ -177,8 +177,8 @@ Class KeyboardBinder {
 			"Dvorak", LayoutList("latin", Map(
 				"Semicolon", "SC02C",
 				"Apostrophe", "SC010",
-				"LSquareBracket", "SC00C",
-				"RSquareBracket", "SC00D",
+				"Left_Bracket", "SC00C",
+				"Right_Bracket", "SC00D",
 				"Tilde", "SC029",
 				"Hyphen-minus", "SC028",
 				"Equals", "SC01B",
@@ -216,8 +216,8 @@ Class KeyboardBinder {
 			"Colemak", LayoutList("latin", Map(
 				"Semicolon", "SC019",
 				"Apostrophe", "SC028",
-				"LSquareBracket", "SC01A",
-				"RSquareBracket", "SC01B",
+				"Left_Bracket", "SC01A",
+				"Right_Bracket", "SC01B",
 				"Tilde", "SC029",
 				"Hyphen-minus", "SC00C",
 				"Equals", "SC00D",
@@ -266,7 +266,7 @@ Class KeyboardBinder {
 				"П", "SC033",
 				"Г", "SC034",
 				"Ж", "SC035",
-				"Обратный слэш", "SC02B",
+				"Обратный_слэш", "SC02B",
 				"У", "SC01E",
 				"Ю", "SC030",
 				"Х", "SC02E",
@@ -305,7 +305,7 @@ Class KeyboardBinder {
 				"Б", "SC034",
 				"Ю", "SC035",
 				"Точка", "",
-				"Обратный слэш", "",
+				"Обратный_слэш", "",
 				"Ф", "SC01E",
 				"И", "SC031",
 				"С", "SC02F",
@@ -505,6 +505,7 @@ Class KeyboardBinder {
 							rules := Map(
 								"Caps", [binds],
 								"Lang", isCyrillicKey ? [["", ""], binds] : [binds, ["", ""]],
+								"LangFlat", Util.IsArray(binds) && binds.Length == 2 ? [binds[1], binds[2]] : [binds],
 							)
 
 							rule := Util.IsArray(binds) ? "Lang" : ""
@@ -630,10 +631,15 @@ Class BindHandler {
 		Keyboard.CheckLayout(&lang)
 		if Language.Validate(lang, "bindings") {
 			output := ""
+			inputType := ""
 
 			for _, character in characterNames {
 				if ChrLib.entries.HasOwnProp(character) {
 					output .= ChrLib.Get(character, True, Cfg.Get("Input_Mode"))
+
+					chrSendOption := ChrLib.GetValue(character, "options").send
+					if StrLen(chrSendOption) > 0
+						inputType := chrSendOption
 				} else {
 					output .= GetCharacterSequence(character)
 				}
@@ -642,7 +648,8 @@ Class BindHandler {
 			keysValidation := "SC(14B|148|14D|150|04A)"
 			chrValidation := "(" Chr(0x00AE) ")"
 
-			InputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") != "Unicode") ? "Text" : "Input"
+			if StrLen(inputType) == 0
+				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") != "Unicode") ? "Text" : "Input"
 
 			Send%inputType%(output)
 		}

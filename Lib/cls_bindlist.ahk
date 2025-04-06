@@ -78,10 +78,14 @@ importantBindsMap := Map("Flat", Map(
 		"<!<+", (*) => LangSeparatedCall(
 			() => QuotatizeSelection("Single"),
 			() => QuotatizeSelection("Paw"))),
+	"Y", Map(
+		">^", (*) => ReplaceWithUnicode("CSS"),
+	),
 	"U", Map(
 		"<#<!", (*) => CharacterInserter("Unicode").InputDialog(),
 		">^", (*) => ReplaceWithUnicode(),
-		">^", (*) => ReplaceWithUnicode("CSS"),
+	),
+	"I", Map(
 		">^", (*) => ReplaceWithUnicode("Hex"),
 	),
 ))
@@ -101,8 +105,19 @@ flatBinds := Map(
 		"9", "digit_9",
 		"Equals", ["equals"],
 		"Hyphen-minus", ["hyphen_minus"],
+		"Dot", ["dot"],
+		"Comma", ["comma"],
+		"Slash", ["solidus"],
+		"Backslash", ["reverse_solidus"],
+		"Semicolon", ["semicolon"],
+		"Apostrophe", ["apostrophe"],
+		"Left_Bracket", ["left_bracket"],
+		"Right_Bracket", ["right_bracket"],
+		"Tilde", ["grave_accent"],
 		"Равно", ["equals"],
 		"Дефисо-минус", ["hyphen_minus"],
+		"Точка", ["dot"],
+		"Обратный_слэш", ["reverse_solidus"],
 		; Latin alphabet (A-Z)
 		"A", ["lat_c_let_a", "lat_s_let_a"],
 		"B", ["lat_c_let_b", "lat_s_let_b"],
@@ -167,7 +182,30 @@ flatBinds := Map(
 		"І", ["cyr_c_let_i_decimal", "cyr_s_let_i_decimal"],
 		"Ѣ", ["cyr_c_let_yat", "cyr_s_let_yat"]
 	),
-	"Moded", Map()
+	"Moded", Map(
+		; Digits
+		"1", Map("+", "exclamation"),
+		"2", Map("+:LangFlat", ["commercial_at", "quote"]),
+		"3", Map("+:LangFlat", ["number_sign", "numero_sign"]),
+		"4", Map("+:LangFlat", ["wallet_dollar", "semicolon"]),
+		"5", Map("+", "percent"),
+		"6", Map("+:LangFlat", ["circumflex_accent", "colon"]),
+		"7", Map("+:LangFlat", ["lat_s_lig_et", "question"]),
+		"8", Map("+", "asterisk"),
+		"9", Map("+", "left_parenthesis"),
+		"0", Map("+", "right_parenthesis"),
+		"Equals", Map("+", ["plus"]),
+		"Hyphen-minus", Map("+", ["underscore"]),
+		"Slash", Map("+", ["question"]),
+		"Backslash", Map("+", ["vertical_line"]),
+		"Semicolon", Map("+", ["colon"]),
+		"Apostrophe", Map("+", ["quote"]),
+		"Tilde", Map("+", ["tilde"]),
+		"Равно", Map("+", ["plus"]),
+		"Дефисо-минус", Map("+", ["underscore"]),
+		"Точка", Map("+", ["comma"]),
+		"Обратный_слэш", Map("+", ["solidus"]),
+	)
 )
 
 diacriticBinds := Map(
