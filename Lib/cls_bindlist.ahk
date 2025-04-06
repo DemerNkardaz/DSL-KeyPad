@@ -283,17 +283,17 @@ defaultBinds := Map(
 			"<^>!>+", "zero_width_non_joiner",
 			"<^>!<+", "word_joiner"
 		),
-		; "Дефисо-минус", Map(
-		; "<^>!>+", ["hyphenation_point"],
-		; "<^<!", ["softhyphen"],
-		; "<^<!<+", ["minus"],
-		; "<^>!", ["emdash"],
-		; "<^>!<+", ["endash"],
-		; "<!:Caps", ["two_emdash", "three_emdash"],
-		; "<^>!<!", ["hyphen"],
-		; "<^>!<!<+", ["no_break_hyphen"],
-		; "<^>!<!>+", ["figure_dash"]
-		; ),
+		"Дефисо-минус", Map(
+			"<^>!>+", ["hyphenation_point"],
+			"<^<!", ["softhyphen"],
+			"<^<!<+", ["minus"],
+			"<^>!", ["emdash"],
+			"<^>!<+", ["endash"],
+			"<!:Caps", ["two_emdash", "three_emdash"],
+			"<^>!<!", ["hyphen"],
+			"<^>!<!<+", ["no_break_hyphen"],
+			"<^>!<!>+", ["figure_dash"]
+		),
 		"Б", Map(
 			"<^>!", ["france_left"],
 			"<^>!<+", ["quote_low_9_double"],

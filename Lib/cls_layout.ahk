@@ -71,7 +71,7 @@ Class KeyboardBinder {
 				"LSquareBracket", "SC01A",
 				"RSquareBracket", "SC01B",
 				"Tilde", "SC029",
-				"Minus", "SC00C",
+				"Hyphen-minus", "SC00C",
 				"Equals", "SC00D",
 				"Comma", "SC033",
 				"Dot", "SC034",
@@ -110,7 +110,7 @@ Class KeyboardBinder {
 				"LSquareBracket", "SC00C",
 				"RSquareBracket", "SC00D",
 				"Tilde", "SC029",
-				"Minus", "SC028",
+				"Hyphen-minus", "SC028",
 				"Equals", "SC01B",
 				"Comma", "SC011",
 				"Dot", "SC012",
@@ -297,7 +297,7 @@ Class KeyboardBinder {
 		if bind.Length == 1 && Util.IsString(bind[1]) {
 			targetMap.Set(combo, (K) => BindHandler.Send(K, bind[1]))
 		} else if (bind.Length = 1 && Util.IsArray(bind[1])) ||
-			(bind.Length == 2 Util.IsArray(bind[1]) && Util.IsBool(bind[2])) {
+			(bind.Length == 2 && Util.IsArray(bind[1]) && Util.IsBool(bind[2])) {
 			reverse := bind.Length == 2 ? bind[2] : False
 			targetMap.Set(combo, (K) => BindHandler.CapsSend(K, bind[1], reverse))
 		} else if bind.Length >= 2 {
@@ -313,8 +313,8 @@ Class KeyboardBinder {
 
 	static FormatBindings(bindingsMap := Map()) {
 		layout := this.GetCurrentLayoutMap()
-		matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁ\-]+"
-		matchEn := "(?!.*[а-яА-ЯёЁ])[a-zA-Z\-]+"
+		matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁ]+"
+		matchEn := "(?!.*[а-яА-ЯёЁ])[a-zA-Z]+"
 		output := Map()
 
 		if bindingsMap.Count > 0 {
@@ -323,32 +323,43 @@ Class KeyboardBinder {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9\-]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9\-]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
+							if InStr(keyLetter, "Б") {
+								; MsgBox(combo " -> " keyLetter "`n" binds.ToString())
+							}
+							isCyrillicKey := RegExMatch(keyLetter, matchRu)
+
 							rules := Map(
 								"Caps", [binds],
-								"Lang", RegExMatch(keyLetter, matchRu) ? [["", ""], binds] : [binds, ["", ""]],
+								"Lang", isCyrillicKey ? [["", ""], binds] : [binds, ["", ""]],
 							)
 
-							ruledBinds := rules["Lang"]
-							rule := "Lang"
-							if RegExMatch(combo, ":(.*?)$", &ruleMatch) && rules.Has(ruleMatch[1]) {
-								ruledBinds := rules[ruleMatch[1]]
+							rule := Util.IsArray(binds) ? "Lang" : ""
+							if RegExMatch(combo, ":(.*?)$", &ruleMatch)
 								rule := ruleMatch[1]
-							}
 
 
 							interCombo := RegExReplace(combo, keyLetter, scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
 							interCombo := RegExReplace(interCombo, ":" rule "$", "")
 
+
 							if !output.Has(interCombo) {
-								output.Set(interCombo, Util.IsString(binds) || Util.IsFunc(binds) ? [binds] : ruledBinds)
+								output.Set(interCombo,
+									Util.IsString(binds) || Util.IsFunc(binds) ? [binds] :
+									rules[rule]
+								)
 							} else {
-								if rule = "Lang" && output[interCombo].Length == 2 {
-									if RegExMatch(keyLetter, matchRu) {
-										output[interCombo].RemoveAt(2)
-									}
+								if output.Get(interCombo).Length == 2 {
+									if InStr(interCombo, "00C")
+										MsgBox(output.Get(interCombo).ToString())
+									output[interCombo][isCyrillicKey ? 2 : 1] := binds
+									if InStr(interCombo, "00C")
+										MsgBox(output.Get(interCombo).ToString())
+
+
+								} else {
+									output[interCombo].Push(binds)
 								}
-								output[interCombo].Push(binds)
 							}
 						}
 					}
@@ -357,18 +368,16 @@ Class KeyboardBinder {
 		}
 
 		for key, value in output {
-			try {
-				; if InStr(key, "033")
+			if InStr(key, "033") {
 				; MsgBox(key " -> " value.ToString())
 			}
 		}
 		return output
 	}
 
+
 	static Registration(bindingsMap := Map(), rule := True) {
 		bindingsMap := this.CompileBinds(bindingsMap)
-		; try {
-		; }
 
 		if bindingsMap.Count > 0 {
 			for combo, action in bindingsMap {
