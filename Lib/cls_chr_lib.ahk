@@ -615,6 +615,7 @@ class ChrLib {
 				if StrLen(refinedEntry.html)
 					refinedEntry.html := ""
 				refinedEntry.html .= "&#" Util.ChrToDecimal(Util.UnicodeToChar(sequenceChr)) ";"
+
 			}
 		} else {
 			refinedEntry.html := "&#" Util.ChrToDecimal(character) ";"
@@ -641,13 +642,19 @@ class ChrLib {
 			}
 		}
 
-		for i, entitySymbol in EntitiesLibrary {
-			if Mod(i, 2) = 1 {
-				entityCode := EntitiesLibrary[i + 1]
+		if refinedEntry.sequence.Length > 1 {
+			for sequenceChr in refinedEntry.sequence {
+				refinedEntry.entity .= TranslateStringToHTML(Util.UnicodeToChar(sequenceChr), "Entities")
+			}
+		} else {
+			for i, entitySymbol in EntitiesLibrary {
+				if Mod(i, 2) = 1 {
+					entityCode := EntitiesLibrary[i + 1]
 
-				if character == entitySymbol {
-					refinedEntry.entity := entityCode
-					break
+					if character == entitySymbol {
+						refinedEntry.entity := entityCode
+						break
+					}
 				}
 			}
 		}

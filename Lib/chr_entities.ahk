@@ -836,7 +836,7 @@
 	Chr(0xFB04), "&ffllig;",
 	Chr(0x1D523), "&ffr;",
 	Chr(0xFB01), "&filig;",
-	Chr(0x66), "&fjlig;",
+	Chr(0x0066) Chr(0x006A), "&fjlig;",
 	Chr(0x266D), "&flat;",
 	Chr(0xFB02), "&fllig;",
 	Chr(0x25B1), "&fltns;",

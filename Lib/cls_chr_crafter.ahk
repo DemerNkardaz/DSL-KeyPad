@@ -208,7 +208,8 @@ Class ChrCrafter {
 	}
 
 	static SendOutput(output) {
-		output := RegExReplace(output, "\#", "")
+		mode := Cfg.Get("Input_Mode", , "Unicode")
+		output := mode = "Unicode" ? RegExReplace(output, "\#\#", "") : output
 		if StrLen(output) > 20
 			ClipSend(output)
 		else
