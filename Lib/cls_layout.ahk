@@ -546,7 +546,8 @@ Class KeyboardBinder {
 				try {
 					HotKey(combo, action, rule ? "On" : "Off")
 				} catch {
-					MsgBox("Failed to register HotKey: " combo)
+					if StrLen(combo) > 0
+						MsgBox("Failed to register HotKey: " combo)
 				}
 			}
 		}

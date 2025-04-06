@@ -40,7 +40,7 @@ importantBindsMap := Map("Flat", Map(
 		"<^>!<+", (*) => InputScriptProcessor("karaShiki"),
 		"<^>!<!", (*) => InputScriptProcessor("autoDiacritics"),
 	),
-	"F2", Map(
+	"F3", Map(
 		"<#<!", (*) => GroupActivator("Diacritics Tertiary", "F3"),
 	),
 	"F6", Map(
@@ -72,6 +72,12 @@ importantBindsMap := Map("Flat", Map(
 	"L", Map("<#<!", (*) => ChrCrafter(),),
 	"Comma", Map("<#<!", (*) => GetKeyScanCode()),
 	"M", Map("<#<!", (*) => ToggleGroupMessage()),
+	"Q", Map("<!", (*) => LangSeparatedCall(
+		() => QuotatizeSelection("Double"),
+		() => QuotatizeSelection("France")),
+		"<!<+", (*) => LangSeparatedCall(
+			() => QuotatizeSelection("Single"),
+			() => QuotatizeSelection("Paw"))),
 	"U", Map(
 		"<#<!", (*) => CharacterInserter("Unicode").InputDialog(),
 		">^", (*) => ReplaceWithUnicode(),

@@ -109,7 +109,7 @@ Class MyRecipes {
 			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.user "\Autoimport.linux\demo.XCompose", "UTF-8")
 
 
-		SetTimer((*) => this.UpdateChrLib(), -5000)
+		SetTimer((*) => this.UpdateChrLib(), -2000)
 	}
 
 	static EditorGUI := Gui()
@@ -320,6 +320,11 @@ Class MyRecipes {
 		try {
 			pushRecipes(filePath := this.file, postfix := "") {
 				content := FileRead(filePath, "UTF-16")
+				options := {
+					recipePrefix: "",
+					noWhitespace: 0,
+				}
+
 				if !content {
 					return output
 				}
@@ -332,11 +337,56 @@ Class MyRecipes {
 				}
 
 				for section in sections {
+					if section = "options" {
+						options.recipePrefix := IniRead(filePath, section, "prefix", "")
+						options.noWhitespace := Integer(IniRead(filePath, section, "no_whitespace", "0"))
+						continue
+					}
 					try {
 						name := IniRead(filePath, section, "name")
 						recipe := IniRead(filePath, section, "recipe")
 						result := IniRead(filePath, section, "result")
 
+						try {
+							if InStr(recipe, "|") && StrLen(options.recipePrefix) > 0 {
+								splittedRecipe := StrSplit(recipe, "|")
+								splittedPrefix := StrSplit(options.recipePrefix, "|")
+
+								for i, r in splittedRecipe {
+									if splittedPrefix.Length = splittedRecipe.Length {
+										splittedRecipe[i] := splittedPrefix[i] (
+											options.noWhitespace
+											|| StrLen(splittedPrefix[i]) == 0
+												? "" : " "
+										) r
+									} else {
+										splittedRecipe[i] := splittedPrefix[1] (
+											options.noWhitespace
+											|| StrLen(splittedPrefix[1]) == 0
+												? "" : " "
+										) r
+									}
+								}
+
+								recipe := splittedRecipe.ToString("|")
+							} else {
+								if InStr(options.recipePrefix, "|")
+									options.recipePrefix := StrSplit(options.recipePrefix, "|")
+
+								recipe := (
+									Util.IsArray(options.recipePrefix)
+										? options.recipePrefix[1]
+									: options.recipePrefix
+								) (
+									options.noWhitespace
+									|| Util.IsString(options.recipePrefix) && StrLen(options.recipePrefix) == 0
+									|| Util.IsArray(options.recipePrefix) && options.recipePrefix.Length == 1
+										? "" : " "
+								) recipe
+							}
+						} catch {
+							throw "Error with recipe: " recipe " of section: " section
+						}
 						output.Push({
 							section: section postfix,
 							name: name,

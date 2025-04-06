@@ -302,6 +302,10 @@ LibRegistrate(this) {
 			options: { groupKey: ["M", "Ь"], fastKey: "<+ [M][Ь]" },
 			symbol: { category: "Diacritic Mark" },
 		},
+		"line_below", { proxy: "macron_below",
+			groups: [], options: {},
+			symbol: { category: "Diacritic Mark" }
+		},
 		"ogonek", {
 			unicode: "{U+0328}", LaTeX: ["\k"],
 			alterations: {
@@ -3142,7 +3146,6 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_b__line_below", {
 			unicode: ["{U+1E06}", "{U+1E07}"],
-			recipe: ["$${macron_below}"]
 		},
 		"lat_[c,s]_let_b__stroke_short", {
 			unicode: ["{U+0243}", "{U+0180}"],
@@ -3248,7 +3251,6 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_d__line_below", {
 			unicode: ["{U+1E0E}", "{U+1E0F}"],
-			recipe: ["$${macron_below}"]
 		},
 		"lat_[c,s]_let_d__stroke_short", {
 			unicode: ["{U+0110}", "{U+0111}"],
@@ -7229,7 +7231,11 @@ LibRegistrate(this) {
 			unicode: "{U+20AB}",
 			tags: ["вьетнамский донг", "vietnamese dong"],
 			groups: ["Wallet Signs"],
-			recipe: ["VND", "DNG"],
+			recipe: [
+				"d${(stroke_short|macron_below)}$(*)",
+				"${lat_s_let_d__(stroke_short|line_below)}$(*)",
+				"VND", "DNG"
+			],
 		},
 		"wallet_mongol_tugrik", {
 			unicode: "{U+20AE}",
