@@ -114,15 +114,20 @@ Class Cfg {
 
 			optionsPanel.AddText("vLayoutLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorTextY) " w80 BackgroundTrans", Locale.Read("gui_options_layout"))
 
-			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w80 y" languageSelectorY(layouSelectorY()), GetLayoutsList)
+			layoutist := {
+				latin: KeyboardBinder.layouts.latin.Keys(),
+				cyrillic: KeyboardBinder.layouts.cyrillic.Keys()
+			}
+
+			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w80 y" languageSelectorY(layouSelectorY()), layoutist.latin)
 			PostMessage(0x0153, -1, 15, layoutLatinSelector)
 			layoutLatinSelector.Text := Cfg.Get("Layout_Latin")
-			layoutLatinSelector.OnEvent("Change", (CB, Zero) => Options.SwitchVirualLayout(CB, "Latin"))
+			layoutLatinSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
 
-			layoutCyrillicSelector := optionsPanel.AddDropDownList("vCyrillicLayout x" languageSelectorX() " w80 y" languageSelectorY(layouSelectorY(23)), CyrillicLayoutsList)
+			layoutCyrillicSelector := optionsPanel.AddDropDownList("vCyrillicLayout x" languageSelectorX() " w80 y" languageSelectorY(layouSelectorY(23)), layoutist.cyrillic)
 			PostMessage(0x0153, -1, 15, layoutCyrillicSelector)
 			layoutCyrillicSelector.Text := Cfg.Get("Layout_Cyrillic")
-			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => Options.SwitchVirualLayout(CB, "Cyrillic"))
+			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
 
 
 			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
@@ -555,8 +560,7 @@ Class Options {
 			}
 		}
 
-		UnregisterKeysLayout()
-		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
+		KeyboardBinder.RebuilBinds()
 	}
 }
 

@@ -1653,7 +1653,7 @@ LibRegistrate(this) {
 			options: { noCalc: True },
 			symbol: { letter: ["Д", "д"] }
 		},
-		"cyr_[c,s]_let_ie", {
+		"cyr_[c,s]_let_ye", {
 			unicode: ["{U+0415}", "{U+0435}"],
 			alterations: [{}, { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }],
 			options: { noCalc: True },

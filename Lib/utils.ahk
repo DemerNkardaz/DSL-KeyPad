@@ -172,6 +172,7 @@ _MapMergeWith(this, maps*) {
 	return this
 }
 
+
 MapInsert(MapObj, Pairs*) {
 	keyCount := 0
 	for index in MapObj {

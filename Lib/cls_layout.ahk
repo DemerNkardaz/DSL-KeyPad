@@ -1,5 +1,4 @@
 Class KeyboardBinder {
-
 	static layouts := {
 		winDefault: Map(
 			"Space", "SC039",
@@ -223,8 +222,84 @@ Class KeyboardBinder {
 				"Н", "SC015",
 				"Я", "SC02C",
 			),
-			"Диктор", Map(),
-			"ЙІУКЕН (1907)", Map(),
+			"Диктор", Map(
+				"Р", "SC027",
+				"Й", "SC028",
+				"Ш", "SC01A",
+				"Щ", "SC01B",
+				"Ё", "SC029",
+				"Дефисо-минус", "SC00C",
+				"Равно", "SC00D",
+				"П", "SC033",
+				"Г", "SC034",
+				"Ж", "SC035",
+				"Обратный слэш", "SC02B",
+				"У", "SC01E",
+				"Ю", "SC030",
+				"Х", "SC02E",
+				"Е", "SC020",
+				"Я", "SC012",
+				"О", "SC021",
+				"А", "SC022",
+				"Л", "SC023",
+				"К", "SC017",
+				"Н", "SC024",
+				"Т", "SC025",
+				"С", "SC026",
+				"М", "SC032",
+				"Б", "SC031",
+				"Д", "SC018",
+				"Ч", "SC019",
+				"Ц", "SC010",
+				"Запятая", "SC013",
+				"И", "SC01F",
+				"Точка", "SC014",
+				"В", "SC016",
+				"Ы", "SC02F",
+				"Ь", "SC011",
+				"Э", "SC02D",
+				"З", "SC015",
+				"Ф", "SC02C",
+			),
+			"ЙІУКЕН (1907)", Map(
+				"Д", "SC027",
+				"Ж", "SC028",
+				"Х", "SC01A",
+				"Дефисо-минус", "SC01B",
+				"Ё", "SC029",
+				"Ц", "SC00C",
+				"Э", "SC00D",
+				"Б", "SC033",
+				"Ю", "SC034",
+				"Точка", "SC035",
+				"Равно", "SC02B",
+				"Ф", "SC01E",
+				"И", "SC030",
+				"С", "SC02E",
+				"В", "SC020",
+				"У", "SC012",
+				"Ъ", "SC021",
+				"А", "SC022",
+				"П", "SC023",
+				"Ш", "SC017",
+				"Р", "SC024",
+				"О", "SC025",
+				"Л", "SC026",
+				"Ь", "SC032",
+				"Т", "SC031",
+				"Щ", "SC018",
+				"З", "SC019",
+				"Й", "SC010",
+				"К", "SC013",
+				"Ы", "SC01F",
+				"Е", "SC014",
+				"Г", "SC016",
+				"М", "SC02F",
+				"І", "SC011",
+				"Ч", "SC02D",
+				"Н", "SC015",
+				"Я", "SC02C",
+			),
 		),
 	}
 
@@ -247,17 +322,46 @@ Class KeyboardBinder {
 		"<^>!<!<+>+", ">^>!<!<+>+", "<^<!<!<+>+", ">^<!<!<+>+",
 	]
 
-
 	static __New() {
-		this.Registration(importantBindsMap.mapping, True)
-		this.Registration(defaultBinds.mapping, Cfg.FastKeysOn)
+		this.RebuilBinds()
+	}
 
+	static SetLayout(layout) {
+		layout := layout.latin.Has(layout) ? "Latin" : layout.cyrillic.Has(layout) ? "Cyrillic" : ""
+
+		if StrLen(layout) > 0 {
+			Cfg.Set("Layout_" layout)
+			this.RebuilBinds()
+		} else {
+			MsgBox("Wrong layout: " layout)
+		}
+	}
+
+	static SwitchLayout(scriptType := "Latin") {
+		keys := this.layouts.%Util.StrLower(scriptType)%.Keys()
+		current := Cfg.Get("Layout_" scriptType)
+		nextLayout := keys[1]
+
+		Loop keys.Length {
+			if A_Index + 1 > keys.Length {
+				nextLayout := keys[1]
+			} else {
+				nextLayout := keys[A_Index + 1]
+			}
+			break
+		}
+
+		this.SetLayout(nextLayout)
+	}
+
+	static CurrentLayouts(&latin?, &cyrillic?) {
+		latin := Cfg.Get("Layout_Latin")
+		cyrillic := Cfg.Get("Layout_Cyrillic")
 	}
 
 	static GetCurrentLayoutMap() {
 		layout := Map()
-		latinLayout := Cfg.Get("Layout_Latin")
-		cyrillicLayout := Cfg.Get("Layout_Cyrillic")
+		this.CurrentLayouts(&latinLayout?, &cyrillicLayout?)
 
 		latinLayout := KeyboardBinder.layouts.latin.Has(latinLayout) ? latinLayout : "QWERTY"
 		cyrillicLayout := KeyboardBinder.layouts.cyrillic.Has(cyrillicLayout) ? cyrillicLayout : "ЙЦУКЕН"
@@ -361,7 +465,6 @@ Class KeyboardBinder {
 		return output
 	}
 
-
 	static Registration(bindingsMap := Map(), rule := True) {
 		bindingsMap := this.CompileBinds(bindingsMap)
 
@@ -388,14 +491,27 @@ Class KeyboardBinder {
 		}
 	}
 
+	static RebuilBinds() {
+		this.UnregisterAll()
+		this.CurrentLayouts(&latin, &cyrillic)
+		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
+			this.Registration(flatBinds.mapping, True)
+
+		this.Registration(importantBindsMap.mapping, True)
+		this.Registration(defaultBinds.mapping, Cfg.FastKeysOn)
+	}
+
 	static ToggleDefaultMode() {
 		this.UnregisterAll()
+		this.CurrentLayouts(&latin, &cyrillic)
 
 		modeActive := Cfg.Get("Mode_Fast_Keys", , False, "bool")
 		Cfg.Set(modeActive, "Mode_Fast_Keys", , "bool")
 
 		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
+		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
+			this.Registration(flatBinds.mapping, True)
 
 		this.Registration(importantBindsMap.mapping, True)
 		this.Registration(defaultBinds.mapping, Cfg.FastKeysOn)
