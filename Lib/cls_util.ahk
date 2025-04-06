@@ -343,6 +343,37 @@ Class Util {
 		return obj
 	}
 
+	static INIToMap(filePath) {
+		if !InStr(filePath, ".ini")
+			filePath .= ".ini"
+
+		content := FileRead(filePath, "UTF-8")
+		lines := StrSplit(content, "`n", "`r`n")
+
+		iniMap := Map()
+		currentSection := ""
+
+		for line in lines {
+			line := Trim(line)
+			if (line = "" or SubStr(line, 1, 1) = ";")
+				continue
+
+			if (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]") {
+				currentSection := SubStr(line, 2, -1)
+				iniMap.Set(currentSection, Map())
+			}
+			else if (currentSection != "" && InStr(line, "=")) {
+				parts := StrSplit(line, "=", "`t ")
+				key := Trim(parts[1])
+				value := Trim(parts[2])
+				iniMap[currentSection].Set(key, value)
+			}
+		}
+
+		return iniMap
+	}
+
+
 	static MultiINIToObj(pathsArray) {
 		bufferArray := []
 		bufferObject := {}

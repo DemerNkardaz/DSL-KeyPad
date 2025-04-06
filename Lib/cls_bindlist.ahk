@@ -51,7 +51,7 @@ importantBindsMap := Map("Flat", Map(
 	),
 	"F12", Map(
 		">^", (*) => KeyboardBinder.SwitchLayout("Latin"),
-		">+", (*) => KeyboardBinder.SwitchLayout("Cyrllic")
+		">+", (*) => KeyboardBinder.SwitchLayout("Cyrillic")
 	),
 	"PgUp", Map("<#<!", (*) => FindCharacterPage(),),
 	"Home", Map("<#<!", (*) => Panel.Panel(), "<^>!<#<!", (*) => OpenPanel()),

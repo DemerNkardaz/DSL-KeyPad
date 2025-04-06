@@ -1,109 +1,178 @@
+Class LayoutList {
+	default := Map(
+		"Space", "SC039",
+		"Tab", "SC00F",
+		"Numpad0", "SC052",
+		"Numpad1", "SC04F",
+		"Numpad2", "SC050",
+		"Numpad3", "SC051",
+		"Numpad4", "SC04B",
+		"Numpad5", "SC04C",
+		"Numpad6", "SC04D",
+		"Numpad7", "SC047",
+		"Numpad8", "SC048",
+		"Numpad9", "SC049",
+		"NumpadMult", "SC037",
+		"NumpadAdd", "SC04E",
+		"NumpadSub", "SC04A",
+		"NumpadDot", "SC053",
+		"NumpadDiv", "SC135",
+		"NumpadEnter", "SC11C",
+		"PgUp", "SC149",
+		"PgDn", "SC151",
+		"End", "SC14F",
+		"Home", "SC147",
+		"Ins", "SC152",
+		"Del", "SC153",
+		"Shift", "SC02A",
+		"Ctrl", "SC01D",
+		"Alt", "SC038",
+		"LShift", "SC02A",
+		"RShift", "SC036",
+		"LCtrl", "SC01D",
+		"RCtrl", "SC11D",
+		"RAlt", "SC138",
+		"Backspace", "SC00E",
+		"Enter", "SC01C",
+		"ArrLeft", "SC14B",
+		"ArrUp", "SC148",
+		"ArrRight", "SC14D",
+		"ArrDown", "SC150",
+		"F1", "SC03B",
+		"F2", "SC03C",
+		"F3", "SC03D",
+		"F4", "SC03E",
+		"F5", "SC03F",
+		"F6", "SC040",
+		"F7", "SC041",
+		"F8", "SC042",
+		"F9", "SC043",
+		"F10", "SC044",
+		"F11", "SC057",
+		"F12", "SC058",
+		;
+		"0", "SC00B",
+		"1", "SC002",
+		"2", "SC003",
+		"3", "SC004",
+		"4", "SC005",
+		"5", "SC006",
+		"6", "SC007",
+		"7", "SC008",
+		"8", "SC009",
+		"9", "SC00A",
+	)
+	latin := Map(
+		"Semicolon", "SC027",
+		"Apostrophe", "SC028",
+		"LSquareBracket", "SC01A",
+		"RSquareBracket", "SC01B",
+		"Tilde", "SC029",
+		"Hyphen-minus", "SC00C",
+		"Equals", "SC00D",
+		"Comma", "SC033",
+		"Dot", "SC034",
+		"Slash", "SC035",
+		"Backslash", "SC02B",
+		"A", "SC01E",
+		"B", "SC030",
+		"C", "SC02E",
+		"D", "SC020",
+		"E", "SC012",
+		"F", "SC021",
+		"G", "SC022",
+		"H", "SC023",
+		"I", "SC017",
+		"J", "SC024",
+		"K", "SC025",
+		"L", "SC026",
+		"M", "SC032",
+		"N", "SC031",
+		"O", "SC018",
+		"P", "SC019",
+		"Q", "SC010",
+		"R", "SC013",
+		"S", "SC01F",
+		"T", "SC014",
+		"U", "SC016",
+		"V", "SC02F",
+		"W", "SC011",
+		"X", "SC02D",
+		"Y", "SC015",
+		"Z", "SC02C",
+	)
+	cyrillic := Map(
+		"Ж", "SC027",
+		"Э", "SC028",
+		"Х", "SC01A",
+		"Ъ", "SC01B",
+		"Ё", "SC029",
+		"Дефисо-минус", "SC00C",
+		"Равно", "SC00D",
+		"Б", "SC033",
+		"Ю", "SC034",
+		"Точка", "SC035",
+		"Обратный слэш", "SC02B",
+		"Ф", "SC01E",
+		"И", "SC030",
+		"С", "SC02E",
+		"В", "SC020",
+		"У", "SC012",
+		"А", "SC021",
+		"П", "SC022",
+		"Р", "SC023",
+		"Ш", "SC017",
+		"О", "SC024",
+		"Л", "SC025",
+		"Д", "SC026",
+		"Ь", "SC032",
+		"Т", "SC031",
+		"Щ", "SC018",
+		"З", "SC019",
+		"Й", "SC010",
+		"К", "SC013",
+		"Ы", "SC01F",
+		"Е", "SC014",
+		"Г", "SC016",
+		"М", "SC02F",
+		"Ц", "SC011",
+		"Ч", "SC02D",
+		"Н", "SC015",
+		"Я", "SC02C",
+	)
+	layout := Map()
+
+	__New(base, input := Map()) {
+		this.layout := Map()
+
+		for key, scanCode in this.default {
+			this.layout.Set(key, scanCode)
+		}
+
+		for key, scanCode in this.%base% {
+			this.layout.Set(key, scanCode)
+		}
+
+		if input.Count > 0 {
+			for key, scanCode in input {
+				for subKey, subScanCode in this.layout {
+					if subScanCode = scanCode {
+						this.layout.Delete(subKey)
+					}
+				}
+				this.layout.Set(key, scanCode)
+			}
+		}
+
+		return this
+	}
+}
+
 Class KeyboardBinder {
 	static layouts := {
-		winDefault: Map(
-			"Space", "SC039",
-			"Tab", "SC00F",
-			"Numpad0", "SC052",
-			"Numpad1", "SC04F",
-			"Numpad2", "SC050",
-			"Numpad3", "SC051",
-			"Numpad4", "SC04B",
-			"Numpad5", "SC04C",
-			"Numpad6", "SC04D",
-			"Numpad7", "SC047",
-			"Numpad8", "SC048",
-			"Numpad9", "SC049",
-			"NumpadMult", "SC037",
-			"NumpadAdd", "SC04E",
-			"NumpadSub", "SC04A",
-			"NumpadDot", "SC053",
-			"NumpadDiv", "SC135",
-			"NumpadEnter", "SC11C",
-			"PgUp", "SC149",
-			"PgDn", "SC151",
-			"End", "SC14F",
-			"Home", "SC147",
-			"Ins", "SC152",
-			"Del", "SC153",
-			"Shift", "SC02A",
-			"Ctrl", "SC01D",
-			"Alt", "SC038",
-			"LShift", "SC02A",
-			"RShift", "SC036",
-			"LCtrl", "SC01D",
-			"RCtrl", "SC11D",
-			"RAlt", "SC138",
-			"Backspace", "SC00E",
-			"Enter", "SC01C",
-			"ArrLeft", "SC14B",
-			"ArrUp", "SC148",
-			"ArrRight", "SC14D",
-			"ArrDown", "SC150",
-			"F1", "SC03B",
-			"F2", "SC03C",
-			"F3", "SC03D",
-			"F4", "SC03E",
-			"F5", "SC03F",
-			"F6", "SC040",
-			"F7", "SC041",
-			"F8", "SC042",
-			"F9", "SC043",
-			"F10", "SC044",
-			"F11", "SC057",
-			"F12", "SC058",
-			;
-			"0", "SC00B",
-			"1", "SC002",
-			"2", "SC003",
-			"3", "SC004",
-			"4", "SC005",
-			"5", "SC006",
-			"6", "SC007",
-			"7", "SC008",
-			"8", "SC009",
-			"9", "SC00A",
-		),
 		latin: Map(
-			"QWERTY", Map(
-				"Semicolon", "SC027",
-				"Apostrophe", "SC028",
-				"LSquareBracket", "SC01A",
-				"RSquareBracket", "SC01B",
-				"Tilde", "SC029",
-				"Hyphen-minus", "SC00C",
-				"Equals", "SC00D",
-				"Comma", "SC033",
-				"Dot", "SC034",
-				"Slash", "SC035",
-				"Backslash", "SC02B",
-				"A", "SC01E",
-				"B", "SC030",
-				"C", "SC02E",
-				"D", "SC020",
-				"E", "SC012",
-				"F", "SC021",
-				"G", "SC022",
-				"H", "SC023",
-				"I", "SC017",
-				"J", "SC024",
-				"K", "SC025",
-				"L", "SC026",
-				"M", "SC032",
-				"N", "SC031",
-				"O", "SC018",
-				"P", "SC019",
-				"Q", "SC010",
-				"R", "SC013",
-				"S", "SC01F",
-				"T", "SC014",
-				"U", "SC016",
-				"V", "SC02F",
-				"W", "SC011",
-				"X", "SC02D",
-				"Y", "SC015",
-				"Z", "SC02C",
-			),
-			"Dvorak", Map(
+			"QWERTY", LayoutList("latin"),
+			"Dvorak", LayoutList("latin", Map(
 				"Semicolon", "SC02C",
 				"Apostrophe", "SC010",
 				"LSquareBracket", "SC00C",
@@ -141,8 +210,8 @@ Class KeyboardBinder {
 				"X", "SC030",
 				"Y", "SC014",
 				"Z", "SC035",
-			),
-			"Colemak", Map(
+			)),
+			"Colemak", LayoutList("latin", Map(
 				"Semicolon", "SC019",
 				"Apostrophe", "SC028",
 				"LSquareBracket", "SC01A",
@@ -180,49 +249,11 @@ Class KeyboardBinder {
 				"X", "SC02D",
 				"Y", "SC018",
 				"Z", "SC02C",
-			),
+			)),
 		),
 		cyrillic: Map(
-			"ЙЦУКЕН", Map(
-				"Ж", "SC027",
-				"Э", "SC028",
-				"Х", "SC01A",
-				"Ъ", "SC01B",
-				"Ё", "SC029",
-				"Дефисо-минус", "SC00C",
-				"Равно", "SC00D",
-				"Б", "SC033",
-				"Ю", "SC034",
-				"Точка", "SC035",
-				"Обратный слэш", "SC02B",
-				"Ф", "SC01E",
-				"И", "SC030",
-				"С", "SC02E",
-				"В", "SC020",
-				"У", "SC012",
-				"А", "SC021",
-				"П", "SC022",
-				"Р", "SC023",
-				"Ш", "SC017",
-				"О", "SC024",
-				"Л", "SC025",
-				"Д", "SC026",
-				"Ь", "SC032",
-				"Т", "SC031",
-				"Щ", "SC018",
-				"З", "SC019",
-				"Й", "SC010",
-				"К", "SC013",
-				"Ы", "SC01F",
-				"Е", "SC014",
-				"Г", "SC016",
-				"М", "SC02F",
-				"Ц", "SC011",
-				"Ч", "SC02D",
-				"Н", "SC015",
-				"Я", "SC02C",
-			),
-			"Диктор", Map(
+			"ЙЦУКЕН", LayoutList("cyrillic"),
+			"Диктор", LayoutList("cyrillic", Map(
 				"Р", "SC027",
 				"Й", "SC028",
 				"Ш", "SC01A",
@@ -260,8 +291,8 @@ Class KeyboardBinder {
 				"Э", "SC02D",
 				"З", "SC015",
 				"Ф", "SC02C",
-			),
-			"ЙІУКЕН (1907)", Map(
+			)),
+			"ЙІУКЕН (1907)", LayoutList("cyrillic", Map(
 				"Д", "SC027",
 				"Ж", "SC028",
 				"Х", "SC01A",
@@ -299,7 +330,7 @@ Class KeyboardBinder {
 				"Ч", "SC02D",
 				"Н", "SC015",
 				"Я", "SC02C",
-			),
+			)),
 		),
 	}
 
@@ -322,15 +353,49 @@ Class KeyboardBinder {
 		"<^>!<!<+>+", ">^>!<!<+>+", "<^<!<!<+>+", ">^<!<!<+>+",
 	]
 
+	static autoimport := {
+		layouts: App.paths.user "\CustomLayouts",
+	}
+
 	static __New() {
+		this.UserLayouts()
 		this.RebuilBinds()
 	}
 
-	static SetLayout(layout) {
-		layout := layout.latin.Has(layout) ? "Latin" : layout.cyrillic.Has(layout) ? "Cyrillic" : ""
+	static UserLayouts() {
+		if !DirExist(this.autoimport.layouts)
+			DirCreate(this.autoimport.layouts)
 
-		if StrLen(layout) > 0 {
-			Cfg.Set("Layout_" layout)
+		Loop Files this.autoimport.layouts "\*.ini" {
+			scriptName := IniRead(A_LoopFileFullPath, "info", "name", "")
+			scriptType := IniRead(A_LoopFileFullPath, "info", "type", "")
+			layoutMap := Util.INIToMap(A_LoopFileFullPath)
+
+			if StrLen(scriptName) > 0 && StrLen(scriptType) > 0 && this.layouts.HasOwnProp(scriptType) && layoutMap.Has("keys") {
+				scriptType := Util.StrLower(scriptType)
+				layoutBase := LayoutList(scriptType)
+				outputLayout := Map()
+
+				for key, value in layoutMap["keys"] {
+					if !RegExMatch(value, "i)^SC") {
+						outputLayout[key] := layoutBase.layout[value]
+					} else {
+						outputLayout[key] := value
+					}
+				}
+
+				this.layouts.%scriptType%.Set(scriptName, LayoutList(scriptType, outputLayout))
+			} else {
+				MsgBox("Invalid layout file: " A_LoopFileFullPath)
+			}
+		}
+	}
+
+	static SetLayout(layout) {
+		layoutType := this.layouts.latin.Has(layout) ? "Latin" : this.layouts.cyrillic.Has(layout) ? "Cyrillic" : ""
+
+		if StrLen(layoutType) > 0 {
+			Cfg.Set(layout, "Layout_" layoutType)
 			this.RebuilBinds()
 		} else {
 			MsgBox("Wrong layout: " layout)
@@ -338,20 +403,24 @@ Class KeyboardBinder {
 	}
 
 	static SwitchLayout(scriptType := "Latin") {
-		keys := this.layouts.%Util.StrLower(scriptType)%.Keys()
-		current := Cfg.Get("Layout_" scriptType)
-		nextLayout := keys[1]
+		scriptType := Util.StrLower(scriptType)
+		nextLayout := False
 
-		Loop keys.Length {
-			if A_Index + 1 > keys.Length {
-				nextLayout := keys[1]
-			} else {
-				nextLayout := keys[A_Index + 1]
+		if this.layouts.HasOwnProp(scriptType) {
+			keys := this.layouts.%scriptType%.Keys()
+			current := Cfg.Get("Layout_" scriptType)
+
+			Loop keys.Length {
+				if keys[A_Index] == current {
+					nextLayout := keys[A_Index + 1 > keys.Length ? 1 : A_Index + 1]
+					break
+				}
 			}
-			break
+			if nextLayout
+				this.SetLayout(nextLayout)
+		} else {
+			MsgBox("Wrong script type: " scriptType)
 		}
-
-		this.SetLayout(nextLayout)
 	}
 
 	static CurrentLayouts(&latin?, &cyrillic?) {
@@ -369,13 +438,8 @@ Class KeyboardBinder {
 		latinLayout := KeyboardBinder.layouts.latin[latinLayout]
 		cyrillicLayout := KeyboardBinder.layouts.cyrillic[cyrillicLayout]
 
-
-		for key, scanCode in KeyboardBinder.layouts.winDefault {
-			layout[scanCode] := [key]
-		}
-
 		for keySet in [latinLayout, cyrillicLayout] {
-			for key, scanCode in keySet {
+			for key, scanCode in keySet.layout {
 				if !layout.Has(scanCode) {
 					layout[scanCode] := [key]
 				} else {
@@ -562,13 +626,3 @@ Class BindHandler {
 		}
 	}
 }
-
-
-;*	Реализовать возможность создавать кастомные раскладки через создание .ini файлов в «Layouts\» директории
-;*	[Setup]
-;*	Title=Тестовая раскладка
-;*	Type=Cyrillic
-;*	[Keys]
-;*	А=SC016
-;*	Ф=SC02C
-;*	...
