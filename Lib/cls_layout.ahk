@@ -374,9 +374,16 @@ Class KeyboardBinder {
 
 	static Monitor() {
 		isLanguageLayoutValid := Language.Validate(Keyboard.CurrentLayout(), "bindings")
+		disableTimer := Cfg.Get("Binds_Autodisable_Timer", , 1, "int")
+		disableType := Cfg.Get("Binds_Autodisable_Type", , "hour")
+		try {
+			disableType := %disableType%
+		} catch {
+			disableType := hour
+		}
 
 		if !this.disabledByUser
-			this.MonitorToggler(isLanguageLayoutValid && A_TimeIdle <= 1 * hour)
+			this.MonitorToggler(isLanguageLayoutValid && A_TimeIdle <= disableTimer * disableType)
 	}
 
 	static MonitorToggler(enable := True, rule := "Monitor", addRule := "User") {

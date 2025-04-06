@@ -13,6 +13,8 @@ Class Cfg {
 			"Layout_Latin", "QWERTY",
 			"Layout_Cyrillic", "ЙЦУКЕН",
 			"Mode_Fast_Keys", "False",
+			"Binds_Autodisable_Timer", "1",
+			"Binds_Autodisable_Type", "hour",
 			"Skip_Group_Messages", "False",
 			"XCompose_Add_Recipe_Prefix", "False",
 			"User_Language", "",
@@ -444,7 +446,8 @@ Class Cfg {
 			value := (value = "True" || value = 1)
 		if InStr(options, "int")
 			value := Integer(value)
-
+		if InStr(options, "num")
+			value := Number(value)
 		output := value
 	}
 
