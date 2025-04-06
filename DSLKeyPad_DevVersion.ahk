@@ -3045,42 +3045,7 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 	A_Clipboard := ""
 
 	if PromptValue != "" {
-		Output := ""
-
-		i := 1
-		while (i <= StrLen(PromptValue)) {
-			Symbol := SubStr(PromptValue, i, 1)
-			Code := Ord(Symbol)
-
-			if (Code >= 0xD800 && Code <= 0xDBFF) {
-				NextSymbol := SubStr(PromptValue, i + 1, 1)
-				Symbol .= NextSymbol
-				i += 1
-			}
-
-			if (IgnoreDefaultSymbols && RegExMatch(Symbol, DefaultSymbols)) {
-				Output .= Symbol
-			} else {
-				if InStr(Mode, "Entities") {
-					Found := false
-					for j, entity in EntitiesLibrary {
-						if (Mod(j, 2) = 1 && entity = Symbol) {
-							Output .= EntitiesLibrary[j + 1]
-							Found := true
-							break
-						}
-					}
-
-					if (!Found) {
-						Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimal(Symbol)) ";"
-					}
-				} else {
-					Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimal(Symbol)) ";"
-				}
-			}
-
-			i += 1
-		}
+		Output := TranslateStringToHTML(PromptValue, Mode, IgnoreDefaultSymbols)
 
 		A_Clipboard := Output
 		ClipWait(0.250, 1)
@@ -3091,6 +3056,48 @@ TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
 	A_Clipboard := BackupClipboard
 	Send("{Control Up}")
 	return
+}
+
+TranslateStringToHTML(InputString, Mode := "", IgnoreDefaultSymbols := False) {
+	DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+	Output := ""
+
+	i := 1
+	while (i <= StrLen(InputString)) {
+		Symbol := SubStr(InputString, i, 1)
+		Code := Ord(Symbol)
+
+		if (Code >= 0xD800 && Code <= 0xDBFF) {
+			NextSymbol := SubStr(InputString, i + 1, 1)
+			Symbol .= NextSymbol
+			i += 1
+		}
+
+		if (IgnoreDefaultSymbols && RegExMatch(Symbol, DefaultSymbols)) {
+			Output .= Symbol
+		} else {
+			if InStr(Mode, "Entities") {
+				Found := false
+				for j, entity in EntitiesLibrary {
+					if (Mod(j, 2) = 1 && entity = Symbol) {
+						Output .= EntitiesLibrary[j + 1]
+						Found := true
+						break
+					}
+				}
+
+				if (!Found) {
+					Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimal(Symbol)) ";"
+				}
+			} else {
+				Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimal(Symbol)) ";"
+			}
+		}
+
+		i += 1
+	}
+
+	return Output
 }
 
 #Include <cls_script_processor>
@@ -7174,3 +7181,16 @@ ShowInfoMessage("tray_app_started")
 ; KeyboardBinder.Registration(defaultBinds.mapping)
 
 ;ApplicationEnd
+
+
+ShowEntryPreview() {
+	IB := InputBox("", "", "w256 h92")
+	if IB.Result = "Cancel"
+		return
+	else {
+		ChrLib.EntryPreview(IB.Value)
+	}
+}
+
+
+<^Home:: ShowEntryPreview()
