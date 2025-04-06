@@ -1,2 +1,2 @@
->^F10:: Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor")
+>^F10:: KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor")
 <^>+Esc:: ExitApp

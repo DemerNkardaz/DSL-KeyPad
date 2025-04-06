@@ -346,6 +346,7 @@ Class KeyboardBinder {
 		"^!", "<^>!", ">^>!", "<^<!", ">^<!",
 		"^+", "<^>+", ">^>+", "<^<+", ">^<+",
 		"^#", "<^>#", ">^>#", "<^<#", ">^<#",
+		"<#<!", "<#>!",
 		"<^>^", ">^<^", "<^<^", ">^<^",
 		"<+>+", ">+<+", "<+<+", ">+<+",
 		"^!+", "<^>!+", ">^>!+", "<^<!+", ">^<!+",
@@ -361,38 +362,35 @@ Class KeyboardBinder {
 		layouts: App.paths.user "\CustomLayouts",
 	}
 
+	static disabledByMonitor := False
+	static disabledByUser := False
+
 	static __New() {
 		this.UserLayouts()
 		this.RebuilBinds()
+
+		SetTimer((*) => SetTimer((*) => this.Monitor(), 2000), -10000)
 	}
 
-	static UserLayouts() {
-		if !DirExist(this.autoimport.layouts)
-			DirCreate(this.autoimport.layouts)
+	static Monitor() {
+		isLanguageLayoutValid := Language.Validate(Keyboard.CurrentLayout(), "bindings")
 
-		Loop Files this.autoimport.layouts "\*.ini" {
-			scriptName := IniRead(A_LoopFileFullPath, "info", "name", "")
-			scriptType := IniRead(A_LoopFileFullPath, "info", "type", "")
-			layoutMap := Util.INIToMap(A_LoopFileFullPath)
+		if !this.disabledByUser
+			this.MonitorToggler(isLanguageLayoutValid && A_TimeIdle <= 1 * hour)
+	}
 
-			if StrLen(scriptName) > 0 && StrLen(scriptType) > 0 && this.layouts.HasOwnProp(scriptType) && layoutMap.Has("keys") {
-				scriptType := Util.StrLower(scriptType)
-				layoutBase := LayoutList(scriptType)
-				outputLayout := Map()
-
-				for key, value in layoutMap["keys"] {
-					if !RegExMatch(value, "i)^SC[0-9A-F]{3}$") {
-						outputLayout[key] := layoutBase.layout[value]
-					} else {
-						outputLayout[key] := value
-					}
-				}
-
-				this.layouts.%scriptType%.Set(scriptName, LayoutList(scriptType, outputLayout))
-			} else {
-				MsgBox("Invalid layout file: " A_LoopFileFullPath)
+	static MonitorToggler(enable := True, rule := "Monitor", addRule := "User") {
+		if enable && !this.disabledBy%addRule% {
+			if this.disabledBy%rule% {
+				this.disabledBy%rule% := False
+				this.RebuilBinds()
 			}
+		} else if !this.disabledBy%rule% && !this.disabledBy%addRule% {
+			this.disabledBy%rule% := True
+			this.UnregisterAll()
 		}
+
+		ManageTrayItems()
 	}
 
 	static SetLayout(layout) {
@@ -586,6 +584,35 @@ Class KeyboardBinder {
 		this.Registration(importantBindsMap.mapping, True)
 		this.Registration(defaultBinds.mapping, Cfg.FastKeysOn)
 
+	}
+
+	static UserLayouts() {
+		if !DirExist(this.autoimport.layouts)
+			DirCreate(this.autoimport.layouts)
+
+		Loop Files this.autoimport.layouts "\*.ini" {
+			scriptName := IniRead(A_LoopFileFullPath, "info", "name", "")
+			scriptType := IniRead(A_LoopFileFullPath, "info", "type", "")
+			layoutMap := Util.INIToMap(A_LoopFileFullPath)
+
+			if StrLen(scriptName) > 0 && StrLen(scriptType) > 0 && this.layouts.HasOwnProp(scriptType) && layoutMap.Has("keys") {
+				scriptType := Util.StrLower(scriptType)
+				layoutBase := LayoutList(scriptType)
+				outputLayout := Map()
+
+				for key, value in layoutMap["keys"] {
+					if !RegExMatch(value, "i)^SC[0-9A-F]{3}$") {
+						outputLayout[key] := layoutBase.layout[value]
+					} else {
+						outputLayout[key] := value
+					}
+				}
+
+				this.layouts.%scriptType%.Set(scriptName, LayoutList(scriptType, outputLayout))
+			} else {
+				MsgBox("Invalid layout file: " A_LoopFileFullPath)
+			}
+		}
 	}
 }
 

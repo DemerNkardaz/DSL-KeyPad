@@ -416,16 +416,7 @@ ChangeKeyboardLayout(LocaleID, LayoutID := 1) {
 	DllCall("PostMessage", "UInt", hwnd, "UInt", 0x50, "UInt", 0, "UInt", layout)
 }
 
-GetLayoutLocale() {
-	threadId := DllCall("GetWindowThreadProcessId", "UInt", DllCall("GetForegroundWindow", "UInt"), "UInt", 0)
-	layout := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
-	layoutHex := Format("{:08X}", layout & 0xFFFF)
-	return layoutHex
-}
 
-CurrentLayout := GetLayoutLocale()
-Sleep 25
-PreviousLayout := IniRead(ConfigFile, "ServiceFields", "PrevLayout", "")
 /*
 if (CurrentLayout != CodeEn) {
 	IniWrite(CurrentLayout, ConfigFile, "ServiceFields", "PrevLayout")
@@ -1030,7 +1021,7 @@ RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY", ForceApply := Fa
 		}
 	}
 
-	if Keyboard.disabledByMonitor || Keyboard.disabledByUser {
+	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
 		if IsLatin {
 			IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
 		} else if IsCyrillic {
@@ -2487,9 +2478,9 @@ CallBuffer(Time := -25, Callback := "") {
 
 ChangeTrayIconOnLanguage() {
 	LanguageCode := Language.Get()
-	CurrentLayout := GetLayoutLocale()
+	Keyboard.CurrentLayout(&CurrentLayout)
 
-	if Keyboard.disabledByMonitor || Keyboard.disabledByUser {
+	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
 		TraySetIcon(InternalFiles["AppIcoDLL"].File, 9)
 		A_IconTip := DSLPadTitle " (" Locale.Read("tray_tooltip_disabled") ")"
 		return
@@ -2607,7 +2598,7 @@ SetTimer(ChangeTrayIconOnLanguage, 1000)
 
 ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	LanguageCode := Language.Get()
-	CurrentLayout := GetLayoutLocale()
+	Keyboard.CurrentLayout(&CurrentLayout)
 	global ActiveScriptName, ConfigFile, PreviousScriptName
 	CurrentActive := ScriptName = ActiveScriptName
 
@@ -2651,11 +2642,11 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		} else {
 			TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 		}
-		if !Keyboard.disabledByMonitor || !Keyboard.disabledByUser {
+		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
 			UnregisterKeysLayout()
 		}
 		ActiveScriptName := ""
-		if !Keyboard.disabledByMonitor || !Keyboard.disabledByUser {
+		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
 			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], ScriptName), True)
@@ -2663,11 +2654,11 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		ActiveScriptName := ScriptName
 	} else {
 		TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
-		if !Keyboard.disabledByMonitor || !Keyboard.disabledByUser {
+		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
 			UnregisterKeysLayout()
 		}
 		ActiveScriptName := ""
-		if !Keyboard.disabledByMonitor || !Keyboard.disabledByUser {
+		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
 			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
 		}
@@ -4681,8 +4672,8 @@ ToggleInputMode() {
 }
 
 CheckLayoutValid() {
-	GetCurrentLayout := GetLayoutLocale()
-	if (GetCurrentLayout == CodeEn || GetCurrentLayout == CodeRu) {
+	Keyboard.CurrentLayout(&CurrentLayout)
+	if (CurrentLayout == CodeEn || CurrentLayout == CodeRu) {
 		return True
 	}
 	return False
@@ -7147,12 +7138,12 @@ ManageTrayItems() {
 	App.tray.Add()
 	App.tray.Add(Labels["custom_compose"], (*) => Cfg.SubGUIs("Recipes"))
 	App.tray.Add()
-	if Keyboard.disabledByMonitor || Keyboard.disabledByUser {
-		App.tray.Add(Labels["enable"], (*) => Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor"))
+	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
+		App.tray.Add(Labels["enable"], (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
 		App.tray.SetIcon(Labels["enable"], InternalFiles["AppIcoDLL"].File, 9)
 	} else {
 
-		App.tray.Add(Labels["disable"], (*) => Keyboard.BindingsToggle(Keyboard.disabledByUser = !False ? True : False, "disabledByUser", "disabledByMonitor"))
+		App.tray.Add(Labels["disable"], (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
 		App.tray.SetIcon(Labels["disable"], InternalFiles["AppIcoDLL"].File, 9)
 	}
 	App.tray.Add()

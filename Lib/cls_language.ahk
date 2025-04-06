@@ -95,33 +95,6 @@ Class Keyboard extends Language {
 
 	static __New() {
 		this.InitialValidator()
-
-		SetTimer((*) => SetTimer((*) => this.Monitor(), 2000), -10000)
-	}
-
-	static Monitor() {
-		isCurrentLanguageValid := this.Validate(this.CurrentLayout(), "bindings")
-
-		if isCurrentLanguageValid && !this.disabledByUser {
-			this.BindingsToggle(True)
-		} else if (!isCurrentLanguageValid || A_TimeIdle > 1 * hour) && !this.disabledByUser {
-			this.BindingsToggle(False)
-		}
-	}
-
-	static BindingsToggle(enable := True, rule := "disabledByMonitor", addRule?) {
-		if enable && (!IsSet(addRule) || IsSet(addRule) && !this.%addRule%) {
-			if this.%rule% {
-				this.%rule% := False
-				UnregisterKeysLayout()
-				RegisterLayout(Cfg.Get("Layout_Latin", , "QWERTY"))
-			}
-		} else if !this.%rule% && (!IsSet(addRule) || IsSet(addRule) && !this.%addRule%) {
-			this.%rule% := True
-			UnregisterKeysLayout()
-		}
-
-		ManageTrayItems()
 	}
 
 	static CurrentLayout(&layoutHex?) {
