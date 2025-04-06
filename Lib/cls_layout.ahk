@@ -139,6 +139,8 @@ Class LayoutList {
 		"Ч", "SC02D",
 		"Н", "SC015",
 		"Я", "SC02C",
+		"І", "",
+		"Ѣ", "",
 	)
 	layout := Map()
 
@@ -293,31 +295,31 @@ Class KeyboardBinder {
 				"Ф", "SC02C",
 			)),
 			"ЙІУКЕН (1907)", LayoutList("cyrillic", Map(
-				"Д", "SC027",
 				"Ж", "SC028",
-				"Х", "SC01A",
-				"Дефисо-минус", "SC01B",
-				"Ё", "SC029",
-				"Ц", "SC00C",
 				"Э", "SC00D",
-				"Б", "SC033",
-				"Ю", "SC034",
-				"Точка", "SC035",
+				"Х", "SC01A",
+				"Ъ", "SC021",
+				"Ё", "SC029",
+				"Дефисо-минус", "SC01B",
 				"Равно", "SC02B",
+				"Б", "SC034",
+				"Ю", "SC035",
+				"Точка", "",
+				"Обратный слэш", "",
 				"Ф", "SC01E",
-				"И", "SC030",
-				"С", "SC02E",
+				"И", "SC031",
+				"С", "SC02F",
 				"В", "SC020",
 				"У", "SC012",
-				"Ъ", "SC021",
 				"А", "SC022",
 				"П", "SC023",
-				"Ш", "SC017",
 				"Р", "SC024",
+				"Ш", "SC017",
 				"О", "SC025",
 				"Л", "SC026",
-				"Ь", "SC032",
-				"Т", "SC031",
+				"Д", "SC027",
+				"Ь", "SC033",
+				"Т", "SC032",
 				"Щ", "SC018",
 				"З", "SC019",
 				"Й", "SC010",
@@ -325,11 +327,13 @@ Class KeyboardBinder {
 				"Ы", "SC01F",
 				"Е", "SC014",
 				"Г", "SC016",
-				"М", "SC02F",
-				"І", "SC011",
+				"М", "SC030",
+				"Ц", "SC00C",
 				"Ч", "SC02D",
 				"Н", "SC015",
 				"Я", "SC02C",
+				"І", "SC011",
+				"Ѣ", "SC02E",
 			)),
 		),
 	}
@@ -377,7 +381,7 @@ Class KeyboardBinder {
 				outputLayout := Map()
 
 				for key, value in layoutMap["keys"] {
-					if !RegExMatch(value, "i)^SC") {
+					if !RegExMatch(value, "i)^SC[0-9A-F]{3}$") {
 						outputLayout[key] := layoutBase.layout[value]
 					} else {
 						outputLayout[key] := value
@@ -481,14 +485,14 @@ Class KeyboardBinder {
 
 	static FormatBindings(bindingsMap := Map()) {
 		layout := this.GetCurrentLayoutMap()
-		matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁ]+"
-		matchEn := "(?!.*[а-яА-ЯёЁ])[a-zA-Z]+"
+		matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁѣѢіІ]+"
+		matchEn := "(?!.*[а-яА-ЯёЁѣѢіІ])[a-zA-Z]+"
 		output := Map()
 
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
 				for scanCode, keyNamesArray in layout {
-					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9\-]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9\-]+)(?=:)?)(?=[:\]]|$)", &match) {
+					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
 							isCyrillicKey := RegExMatch(keyLetter, matchRu)
@@ -547,10 +551,12 @@ Class KeyboardBinder {
 		layout := this.GetCurrentLayoutMap()
 
 		for scanCode, keyNamesArray in layout {
-			HotKey(scanCode, (*) => False, "Off")
+			if StrLen(scanCode) > 0 RegExMatch(scanCode, "i)^SC[0-9A-F]{3}$") {
+				HotKey(scanCode, (*) => False, "Off")
 
-			for modifier in this.modifiers {
-				HotKey(modifier scanCode, (*) => False, "Off")
+				for modifier in this.modifiers {
+					HotKey(modifier scanCode, (*) => False, "Off")
+				}
 			}
 		}
 	}

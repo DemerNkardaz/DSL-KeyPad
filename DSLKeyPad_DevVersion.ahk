@@ -2395,6 +2395,20 @@ SwitchQWERTY_YITSUKEN(Script := "Latin") {
 		RegisterLayout(NextLayout)
 	}
 }
+GetKeyScanCode() {
+	IB := InputBox("Scan code get", "Scan code", "w350 h110", "")
+
+	if IB.Result = "Cancel"
+		return
+	else
+		PromptValue := IB.Value
+	scanCode := GetKeySC(PromptValue)
+	scanCode := Format("{:X}", scanCode)
+	scanCode := StrLen(scanCode) == 1 ? "00" scanCode : StrLen(scanCode) == 2 ? "0" scanCode : scanCode
+	scanCode := "SC" scanCode
+	SendText(scanCode)
+}
+
 
 SwitchToScript(scriptMode) {
 	LanguageCode := Language.Get()
@@ -7108,13 +7122,13 @@ ManageTrayItems() {
 	App.tray.Add(Labels["alterations"], AlterationSubMenu)
 
 	LayoutsSubMenu := Menu()
-	LayoutsSubMenu.Add("QWERTY", (*) => RegisterLayout("QWERTY"))
-	LayoutsSubMenu.Add("Dvorak", (*) => RegisterLayout("Dvorak"))
-	LayoutsSubMenu.Add("Colemak", (*) => RegisterLayout("Colemak"))
+	LayoutsSubMenu.Add("QWERTY", (*) => KeyboardBinder.SetLayout("QWERTY"))
+	LayoutsSubMenu.Add("Dvorak", (*) => KeyboardBinder.SetLayout("Dvorak"))
+	LayoutsSubMenu.Add("Colemak", (*) => KeyboardBinder.SetLayout("Colemak"))
 	LayoutsSubMenu.Add()
-	LayoutsSubMenu.Add("ЙЦУКЕН", (*) => RegisterLayout("ЙЦУКЕН"))
-	LayoutsSubMenu.Add("Диктор", (*) => RegisterLayout("Диктор"))
-	LayoutsSubMenu.Add("ЙІУКЕН (1907)", (*) => RegisterLayout("ЙІУКЕН (1907)"))
+	LayoutsSubMenu.Add("ЙЦУКЕН", (*) => KeyboardBinder.SetLayout("ЙЦУКЕН"))
+	LayoutsSubMenu.Add("Диктор", (*) => KeyboardBinder.SetLayout("Диктор"))
+	LayoutsSubMenu.Add("ЙІУКЕН (1907)", (*) => KeyboardBinder.SetLayout("ЙІУКЕН (1907)"))
 
 	App.tray.Add(Labels["layouts"], LayoutsSubMenu)
 

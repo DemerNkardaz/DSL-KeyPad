@@ -70,6 +70,7 @@ importantBindsMap := Map("Flat", Map(
 		">^", (*) => TranslateSelectionToHTML("Entities", True),
 	),
 	"L", Map("<#<!", (*) => ChrCrafter(),),
+	"Comma", Map("<#<!", (*) => GetKeyScanCode()),
 	"M", Map("<#<!", (*) => ToggleGroupMessage()),
 	"U", Map(
 		"<#<!", (*) => CharacterInserter("Unicode").InputDialog(),
