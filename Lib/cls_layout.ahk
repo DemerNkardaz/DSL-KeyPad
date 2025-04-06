@@ -323,9 +323,6 @@ Class KeyboardBinder {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁ0-9\-]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁ0-9\-]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
-							if InStr(keyLetter, "Б") {
-								; MsgBox(combo " -> " keyLetter "`n" binds.ToString())
-							}
 							isCyrillicKey := RegExMatch(keyLetter, matchRu)
 
 							rules := Map(
@@ -350,13 +347,7 @@ Class KeyboardBinder {
 								)
 							} else {
 								if output.Get(interCombo).Length == 2 {
-									if InStr(interCombo, "00C")
-										MsgBox(output.Get(interCombo).ToString())
 									output[interCombo][isCyrillicKey ? 2 : 1] := binds
-									if InStr(interCombo, "00C")
-										MsgBox(output.Get(interCombo).ToString())
-
-
 								} else {
 									output[interCombo].Push(binds)
 								}
@@ -367,11 +358,6 @@ Class KeyboardBinder {
 			}
 		}
 
-		for key, value in output {
-			if InStr(key, "033") {
-				; MsgBox(key " -> " value.ToString())
-			}
-		}
 		return output
 	}
 
@@ -431,8 +417,6 @@ Class BindHandler {
 					output .= GetCharacterSequence(character)
 				}
 			}
-
-			; MsgBox(characterNames[1])
 
 			keysValidation := "SC(14B|148|14D|150|04A)"
 			chrValidation := "(" Chr(0x00AE) ")"

@@ -12,14 +12,17 @@ Class BindList {
 						rule := ":" ruleMatch[1]
 						modifier := RegExReplace(modifier, ":(.*?)$", "")
 					}
-					this.mapping.Set(modifier "[" letterKey "]" rule, value)
+					entryKey := modifier "[" letterKey "]" rule
+					this.mapping.Set(entryKey, value)
 				}
 			}
 		}
 
+
 		return this
 	}
 }
+
 
 importantBindsMap := Map("Flat", Map(
 	"RAlt", (*) => ProceedCompose(),
@@ -294,21 +297,6 @@ defaultBinds := Map(
 			"<^>!<!<+", ["no_break_hyphen"],
 			"<^>!<!>+", ["figure_dash"]
 		),
-		"Б", Map(
-			"<^>!", ["france_left"],
-			"<^>!<+", ["quote_low_9_double"],
-			"<^>!>+", ["quote_low_9_double"],
-			"<^>!<!", ["quote_left_double"],
-			"<^>!<!<+", ["france_single_left"],
-			"<^>!<+>+", ["quote_low_9_single"]
-		),
-		"Ю", Map(
-			"<^>!", ["france_right"],
-			"<^>!<+", ["quote_right_double_ghost_ru"],
-			"<^>!>+", ["quote_low_9_double_reversed"],
-			"<^>!<!", ["quote_right_double"],
-			"<^>!<!<+", ["france_single_right"]
-		),
 		; Latin-Modifiers Keyboard Layout
 		"A", Map(
 			"<!", ["lat_c_let_a__acute", "lat_s_let_a__acute"],
@@ -508,15 +496,12 @@ defaultBinds := Map(
 			"<^>!<!<+>+", ["cyr_c_let_iota", "cyr_s_let_iota"]
 		),
 		"Б", Map(
-			"<!", ["", ""],
-			"<^>!", ["", ""],
-			"<^>!<+", ["", ""],
-			"<^>!>+", ["", ""],
-			"<^>!<+>+", ["", ""],
-			"<^>!<!", ["", ""],
-			"<^>!<!<+", ["", ""],
-			"<^>!<!>+", ["", ""],
-			"<^>!<!<+>+", ["", ""],
+			"<^>!", ["france_left"],
+			"<^>!<+", ["quote_low_9_double"],
+			"<^>!>+", ["quote_low_9_double"],
+			"<^>!<!", ["quote_left_double"],
+			"<^>!<!<+", ["france_single_left"],
+			"<^>!<+>+", ["quote_low_9_single"]
 		),
 		"В", Map(),
 		"Г", Map(
@@ -633,7 +618,13 @@ defaultBinds := Map(
 			"<^>!>+", ["cyr_c_let_schwa", "cyr_s_let_schwa"],
 			"<^>!<+>+", ["cyr_c_let_schwa_diaeresis", "cyr_s_let_schwa_diaeresis"],
 		),
-		"Ю", Map(),
+		"Ю", Map(
+			"<^>!", ["france_right"],
+			"<^>!<+", ["quote_right_double_ghost_ru"],
+			"<^>!>+", ["quote_low_9_double_reversed"],
+			"<^>!<!", ["quote_right_double"],
+			"<^>!<!<+", ["france_single_right"]
+		),
 		"Я", Map(
 			"<^>!", ["cyr_c_let_yus_little", "cyr_s_let_yus_little"],
 			"<^>!<+", ["cyr_c_let_a_iotified", "cyr_s_let_a_iotified"],
@@ -658,5 +649,9 @@ flatBinds := BindList(flatBinds["Flat"], flatBinds["Moded"])
 
 defaultBinds := BindList(defaultBinds["Flat"], defaultBinds["Moded"])
 diacriticBinds := BindList(diacriticBinds["Flat"], diacriticBinds["Moded"])
+
+if defaultBinds.mapping.Has("<^>![Б]") {
+	; MsgBox("<^>![Б] — " defaultBinds.mapping.Get("<^>![Б]").ToString())
+}
 
 defaultBinds.mapping := defaultBinds.mapping.MergeWith(diacriticBinds.mapping)
