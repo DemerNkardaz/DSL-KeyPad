@@ -207,72 +207,17 @@ flatBinds := Map(
 		"ДефисоМинус", Map("+", ["underscore"]),
 		"Точка", Map("+", ["comma"]),
 		"ОбратныйСлэш", Map("+", ["solidus"]),
-		; Latin alphabet (A-Z)
-		"A", Map("+", ["lat_s_let_a", "lat_c_let_a"]),
-		"B", Map("+", ["lat_s_let_b", "lat_c_let_b"]),
-		"C", Map("+", ["lat_s_let_c", "lat_c_let_c"]),
-		"D", Map("+", ["lat_s_let_d", "lat_c_let_d"]),
-		"E", Map("+", ["lat_s_let_e", "lat_c_let_e"]),
-		"F", Map("+", ["lat_s_let_f", "lat_c_let_f"]),
-		"G", Map("+", ["lat_s_let_g", "lat_c_let_g"]),
-		"H", Map("+", ["lat_s_let_h", "lat_c_let_h"]),
-		"I", Map("+", ["lat_s_let_i", "lat_c_let_i"]),
-		"J", Map("+", ["lat_s_let_j", "lat_c_let_j"]),
-		"K", Map("+", ["lat_s_let_k", "lat_c_let_k"]),
-		"L", Map("+", ["lat_s_let_l", "lat_c_let_l"]),
-		"M", Map("+", ["lat_s_let_m", "lat_c_let_m"]),
-		"N", Map("+", ["lat_s_let_n", "lat_c_let_n"]),
-		"O", Map("+", ["lat_s_let_o", "lat_c_let_o"]),
-		"P", Map("+", ["lat_s_let_p", "lat_c_let_p"]),
-		"Q", Map("+", ["lat_s_let_q", "lat_c_let_q"]),
-		"R", Map("+", ["lat_s_let_r", "lat_c_let_r"]),
-		"S", Map("+", ["lat_s_let_s", "lat_c_let_s"]),
-		"T", Map("+", ["lat_s_let_t", "lat_c_let_t"]),
-		"U", Map("+", ["lat_s_let_u", "lat_c_let_u"]),
-		"V", Map("+", ["lat_s_let_v", "lat_c_let_v"]),
-		"W", Map("+", ["lat_s_let_w", "lat_c_let_w"]),
-		"X", Map("+", ["lat_s_let_x", "lat_c_let_x"]),
-		"Y", Map("+", ["lat_s_let_y", "lat_c_let_y"]),
-		"Z", Map("+", ["lat_s_let_z", "lat_c_let_z"]),
-		; Cyrillic alphabet (А-Я)
-		"А", Map("+", ["cyr_s_let_a", "cyr_c_let_a"]),
-		"Б", Map("+", ["cyr_s_let_b", "cyr_c_let_b"]),
-		"В", Map("+", ["cyr_s_let_v", "cyr_c_let_v"]),
-		"Г", Map("+", ["cyr_s_let_g", "cyr_c_let_g"]),
-		"Д", Map("+", ["cyr_s_let_d", "cyr_c_let_d"]),
-		"Е", Map("+", ["cyr_s_let_ye", "cyr_c_let_ye"]),
-		"Ё", Map("+", ["cyr_s_let_yo", "cyr_c_let_yo"]),
-		"Ж", Map("+", ["cyr_s_let_zh", "cyr_c_let_zh"]),
-		"З", Map("+", ["cyr_s_let_z", "cyr_c_let_z"]),
-		"И", Map("+", ["cyr_s_let_i", "cyr_c_let_i"]),
-		"Й", Map("+", ["cyr_s_let_iy", "cyr_c_let_iy"]),
-		"К", Map("+", ["cyr_s_let_k", "cyr_c_let_k"]),
-		"Л", Map("+", ["cyr_s_let_l", "cyr_c_let_l"]),
-		"М", Map("+", ["cyr_s_let_m", "cyr_c_let_m"]),
-		"Н", Map("+", ["cyr_s_let_n", "cyr_c_let_n"]),
-		"О", Map("+", ["cyr_s_let_o", "cyr_c_let_o"]),
-		"П", Map("+", ["cyr_s_let_p", "cyr_c_let_p"]),
-		"Р", Map("+", ["cyr_s_let_r", "cyr_c_let_r"]),
-		"С", Map("+", ["cyr_s_let_s", "cyr_c_let_s"]),
-		"Т", Map("+", ["cyr_s_let_t", "cyr_c_let_t"]),
-		"У", Map("+", ["cyr_s_let_u", "cyr_c_let_u"]),
-		"Ф", Map("+", ["cyr_s_let_f", "cyr_c_let_f"]),
-		"Х", Map("+", ["cyr_s_let_h", "cyr_c_let_h"]),
-		"Ц", Map("+", ["cyr_s_let_ts", "cyr_c_let_ts"]),
-		"Ч", Map("+", ["cyr_s_let_ch", "cyr_c_let_ch"]),
-		"Ш", Map("+", ["cyr_s_let_sh", "cyr_c_let_sh"]),
-		"Щ", Map("+", ["cyr_s_let_shch", "cyr_c_let_shch"]),
-		"Ъ", Map("+", ["cyr_s_let_yeru", "cyr_c_let_yeru"]),
-		"Ы", Map("+", ["cyr_s_let_yery", "cyr_c_let_yery"]),
-		"Ь", Map("+", ["cyr_s_let_yeri", "cyr_c_let_yeri"]),
-		"Э", Map("+", ["cyr_s_let_e", "cyr_c_let_e"]),
-		"Ю", Map("+", ["cyr_s_let_yu", "cyr_c_let_yu"]),
-		"Я", Map("+", ["cyr_s_let_ya", "cyr_c_let_ya"]),
-		"І", Map("+", ["cyr_s_let_i_decimal", "cyr_c_let_i_decimal"]),
-		"Ѣ", Map("+", ["cyr_s_let_yat", "cyr_c_let_yat"]),
 	)
 )
 
+for key, value in flatBinds["Flat"] {
+	if Util.IsArray(value) && value.Length == 2 {
+		if !flatBinds["Moded"].Has(key)
+			flatBinds["Moded"][key] := Map()
+
+		flatBinds["Moded"][key].Set("+", [value[2], value[1]])
+	}
+}
 
 diacriticBinds := Map(
 	"Flat", Map(),
