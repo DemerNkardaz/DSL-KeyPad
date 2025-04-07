@@ -153,6 +153,12 @@ Class Keyboard extends Language {
 
 Class Locale extends Language {
 
+	static localesPath := A_ScriptDir "\Locale\"
+
+	static OpenDir(*) {
+		Run(this.localesPath)
+	}
+
 	static HandleString(str) {
 		str := StrReplace(str, "\R2", "`r`n`r`n", True)
 		str := StrReplace(str, "\R", "`r`n", True)

@@ -75,7 +75,6 @@ RightAlt := Chr(0x2384)
 Window := Chr(0x229E)
 CapsLock := Chr(0x2B9D)
 
-
 EscapePressed := False
 
 FastKeysIsActive := False
@@ -103,6 +102,7 @@ LaTeXMode := "Default"
 #Include <cls_bindlist>
 #Include <cls_layout>
 #Include <cls_long_press>
+#Include <hotstrings>
 #Include <supplement_pshell>
 #Include <supplement_python>
 
@@ -182,79 +182,7 @@ DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
 DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
 
-GetUtilityFiles(ForceUpdate := False) {
-	ErrMessages := Map(
-		"ru", "Произошла ошибка при получении файла перевода.`nСервер недоступен или ошибка соединения с интернетом.",
-		"en", "An error occured during receiving locales file.`nServer unavailable or internet connection error."
-	)
-
-	for fileEntry, value in InternalFiles {
-		if !FileExist(value.File) || ForceUpdate {
-			try {
-				Download(value.Repo, value.File)
-			} catch {
-				Error(ErrMessages[Language.Get()])
-			}
-		}
-	}
-	return
-}
-
-
 TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
-
-ReadLocale(EntryName, Prefix := "") {
-	Section := Prefix != "" ? Prefix . "_" . Language.Get() : Language.Get()
-	Intermediate := IniRead(InternalFiles["Locales"].File, Section, EntryName, "")
-
-	while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
-		LangCode := match[1]
-		SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
-		Replacement := IniRead(InternalFiles["Locales"].File, SectionOverride, EntryName, "")
-		Intermediate := StrReplace(Intermediate, match[0], Replacement)
-	}
-
-	while (RegExMatch(Intermediate, "\{(?:([^\}_]+)_)?([a-zA-Z]{2}):([^\}]+)\}", &match)) {
-		CustomPrefix := match[1] ? match[1] : ""
-		LangCode := match[2]
-		CustomEntry := match[3]
-		SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
-		Replacement := IniRead(InternalFiles["Locales"].File, SectionOverride, CustomEntry, "")
-		Intermediate := StrReplace(Intermediate, match[0], Replacement)
-	}
-
-	while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
-		Unicode := match[1]
-		Replacement := Chr("0x" . Unicode)
-		Intermediate := StrReplace(Intermediate, match[0], Replacement)
-	}
-
-	while (RegExMatch(Intermediate, "\{var:([^\}]+)\}", &match)) {
-		Varname := match[1]
-		if IsSet(%Varname%) {
-			Replacement := %Varname%
-		} else {
-			Replacement := "VAR (" . Varname . "): NOT FOUND"
-		}
-		Intermediate := StrReplace(Intermediate, match[0], Replacement)
-	}
-
-
-	Intermediate := StrReplace(Intermediate, "\n", "`n")
-	Intermediate := StrReplace(Intermediate, "\t", "`t")
-	Intermediate := Intermediate != "" ? Intermediate : "KEY (" . EntryName . "): NOT FOUND"
-	return Intermediate
-}
-
-
-OpenConfigFile(*) {
-	Run(ConfigFile)
-}
-
-OpenLocalesFile(*) {
-	Run(InternalFiles["Locales"].File)
-}
-
 
 DefaultConfig := [
 	["Settings", "FastKeysIsActive", "False"],
@@ -399,81 +327,6 @@ FontInstall(FontSource) {
 
 FontValidate()
 
-
-ChangeKeyboardLayout(LocaleID, LayoutID := 1) {
-	LanguageCode := ""
-	if LocaleID == "en" {
-		LanguageCode := CodeEn
-	} else if LocaleID == "ru" {
-		LanguageCode := CodeRu
-	} else {
-		LanguageCode := LocaleID
-	}
-
-	layout := DllCall("LoadKeyboardLayout", "Str", LanguageCode, "Int", LayoutID)
-	hwnd := DllCall("GetForegroundWindow")
-	pid := DllCall("GetWindowThreadProcessId", "UInt", hwnd, "Ptr", 0)
-	DllCall("PostMessage", "UInt", hwnd, "UInt", 0x50, "UInt", 0, "UInt", layout)
-}
-
-
-/*
-if (CurrentLayout != CodeEn) {
-	IniWrite(CurrentLayout, ConfigFile, "ServiceFields", "PrevLayout")
-	ChangeKeyboardLayout("en", 2)
-	Reload
-}
-
-SetPreviousLayout(Timing := 150) {
-	if (PreviousLayout != "") {
-		Sleep Timing
-		ChangeKeyboardLayout(PreviousLayout, 2)
-		Sleep 100
-		IniWrite("", ConfigFile, "ServiceFields", "PrevLayout")
-	}
-}
-*/
-StrRepeat(char, count) {
-	result := ""
-	Loop count
-		result .= char
-	return result
-}
-
-TrimArray(From, Count) {
-	result := []
-	for i, item in From {
-		if (i > Count)
-			break
-		result.Push(item)
-	}
-	return result
-}
-
-GetLanguageCode() {
-	ValidateLanguage(LanguageSource) {
-		for language in SupportedLanguages {
-			if (LanguageSource = language) {
-				return language
-			}
-		}
-
-		return "en"
-	}
-
-	UserLanguageKey := IniRead(ConfigFile, "Settings", "UserLanguage", "")
-
-	if (UserLanguageKey != "") {
-		return ValidateLanguage(UserLanguageKey)
-	}
-	else {
-		SysLanguageKey := RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName")
-		SysLanguageKey := SubStr(SysLanguageKey, 1, 2)
-
-		return ValidateLanguage(SysLanguageKey)
-	}
-}
-
 GetChangeLog() {
 	global ChangeLogRaw
 	ReceiveMap := Map()
@@ -520,12 +373,12 @@ GetChangeLog() {
 }
 
 InsertChangesList(TargetGUI) {
-	LanguageCode := GetLanguageCode()
+	LanguageCode := Language.Get()
 	Changes := GetChangeLog()
 	IsEmpty := True
 
 	if IsObject(Changes) {
-		for language, _ in Changes {
+		for lang, _ in Changes {
 			IsEmpty := False
 			break
 		}
@@ -544,8 +397,8 @@ InsertChangesList(TargetGUI) {
 	}
 
 
-	for language, content in Changes {
-		if language = LanguageCode {
+	for lang, content in Changes {
+		if lang = LanguageCode {
 			content := RegExReplace(content, "m)^## " . Labels.ver . " (.*) — (.*)", Labels.ver . ": $1`n" . Labels.date . ": $2")
 			content := RegExReplace(content, "m)^- (.*)", " • $1")
 			content := RegExReplace(content, "m)^\s\s- (.*)", "  ‣ $1")
@@ -557,40 +410,11 @@ InsertChangesList(TargetGUI) {
 	}
 }
 
-GetTimeString() {
-	return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
-}
-
-
-GetDate(DateStyle := "YYYYMMDDhhmmss") {
-	CurrentTime := A_Now
-	TimeFormat := Map(
-		"YYYY", SubStr(CurrentTime, 1, 4),
-		"MM", SubStr(CurrentTime, 5, 2),
-		"DD", SubStr(CurrentTime, 7, 2),
-		"hh", SubStr(CurrentTime, 9, 2),
-		"mm", SubStr(CurrentTime, 11, 2),
-		"ss", SubStr(CurrentTime, 13, 2)
-	)
-	for Key, Value in TimeFormat {
-		DateStyle := StrReplace(DateStyle, Key, Value, True)
-	}
-	CurrentTime := DateStyle
-	return CurrentTime
-}
-
-SendDate(DateStyle := "YYYYMMDDhhmmss") {
-	SendText(GetDate(DateStyle))
-}
-
-HotString(":C?0:gtsd", (D) => SendDate())
-HotString(":C?0:gtdd", (D) => SendDate("YYYY–MM–DD"))
-HotString(":C?0:gtfd", (D) => SendDate("YYYY–MM–DD hh:mm:ss"))
-HotString(":C?0:gtfh", (D) => SendDate("hh:mm:ss"))
-HotString(":C?0:gtfl", (D) => SendDate("YYYY_MM_DD-hh_mm_ss"))
 
 CheckUpdateError := ""
 GetUpdate(TimeOut := 0, RepairMode := False) {
+	if 1 = 1
+		return
 	Sleep TimeOut
 	global AppVersion, RawSource
 	ErrorOccured := False
@@ -625,11 +449,9 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 
 		Download(RawSource, UpdateFilePath)
 
-		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup-" GetTimeString())
+		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup-" Util.GetTimeStr())
 
 		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
-
-		GetUtilityFiles(True)
 
 		if RepairMode == True {
 			MsgBox(Locale.Read("update_repair_success"), DSLPadTitle)
@@ -651,6 +473,8 @@ GetUpdate(TimeOut := 0, RepairMode := False) {
 
 
 CheckUpdate() {
+	if 1 = 1
+		return
 	global AppVersion, RawSource, UpdateAvailable, UpdateVersionString, CheckUpdateError
 	http := ComObject("WinHttp.WinHttpRequest.5.1")
 	http.Open("GET", RawSource, true)
@@ -3034,71 +2858,6 @@ UpdateRecipeValidator() {
 }
 UpdateRecipeValidator()
 
-TranslateSelectionToHTML(Mode := "", IgnoreDefaultSymbols := False) {
-	DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
-	BackupClipboard := A_Clipboard
-	A_Clipboard := ""
-
-	Send("^c")
-	ClipWait(0.5, 1)
-	PromptValue := A_Clipboard
-	A_Clipboard := ""
-
-	if PromptValue != "" {
-		Output := TranslateStringToHTML(PromptValue, Mode, IgnoreDefaultSymbols)
-
-		A_Clipboard := Output
-		ClipWait(0.250, 1)
-		Send("^v")
-	}
-
-	Sleep 500
-	A_Clipboard := BackupClipboard
-	Send("{Control Up}")
-	return
-}
-
-TranslateStringToHTML(InputString, Mode := "", IgnoreDefaultSymbols := False) {
-	DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
-	Output := ""
-
-	i := 1
-	while (i <= StrLen(InputString)) {
-		Symbol := SubStr(InputString, i, 1)
-		Code := Ord(Symbol)
-
-		if (Code >= 0xD800 && Code <= 0xDBFF) {
-			NextSymbol := SubStr(InputString, i + 1, 1)
-			Symbol .= NextSymbol
-			i += 1
-		}
-
-		if (IgnoreDefaultSymbols && RegExMatch(Symbol, DefaultSymbols)) {
-			Output .= Symbol
-		} else {
-			if InStr(Mode, "Entities") {
-				Found := false
-				for j, entity in EntitiesLibrary {
-					if (Mod(j, 2) = 1 && entity = Symbol) {
-						Output .= EntitiesLibrary[j + 1]
-						Found := true
-						break
-					}
-				}
-
-				if (!Found) {
-					Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimal(Symbol)) ";"
-				}
-			} else {
-				Output .= "&#" (InStr(Mode, "Hex") ? "x" ConvertToHexaDecimal(Symbol, "") : ConvertToDecimal(Symbol)) ";"
-			}
-		}
-
-		i += 1
-	}
-
-	return Output
-}
 
 #Include <cls_script_processor>
 
@@ -3790,11 +3549,11 @@ Constructor() {
 	RepairBtn.OnEvent("Click", (*) => "GetUpdate(0, True)")
 
 	ConfigFileBtn := DSLPadGUI.Add("Button", "x809 y527 w32 h32")
-	ConfigFileBtn.OnEvent("Click", (*) => OpenConfigFile())
+	ConfigFileBtn.OnEvent("Click", (*) => Cfg.OpenFile())
 	GuiButtonIcon(ConfigFileBtn, ImageRes, 065)
 
 	LocalesFileBtn := DSLPadGUI.Add("Button", "x777 y527 w32 h32")
-	LocalesFileBtn.OnEvent("Click", (*) => OpenLocalesFile())
+	LocalesFileBtn.OnEvent("Click", (*) => Locale.OpenDir())
 	GuiButtonIcon(LocalesFileBtn, ImageRes, 015)
 
 
@@ -6745,9 +6504,9 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
 			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
 			"<#<!" UseKey["L"], (*) => ChrCrafter(),
-			">^" UseKey["H"], (*) => TranslateSelectionToHTML("Entities"),
-			">^" UseKey["J"], (*) => TranslateSelectionToHTML("Entities", True),
-			">^>+" UseKey["H"], (*) => TranslateSelectionToHTML(),
+			">^" UseKey["H"], (*) => Util.StrSelToHTML("Entities"),
+			">^" UseKey["J"], (*) => Util.StrSelToHTML("Entities", True),
+			">^>+" UseKey["H"], (*) => Util.StrSelToHTML(),
 			"<#<^>!" UseKey["1"], (*) => SwitchToScript("sup"),
 			"<#<^>!" UseKey["2"], (*) => SwitchToScript("sub"),
 			"<#<^>!" UseKey["3"], (*) => SwitchToRoman(),
@@ -7140,8 +6899,8 @@ ManageTrayItems() {
 	App.tray.Add(Labels["notif"], (*) => ToggleGroupMessage())
 	App.tray.Add()
 	App.tray.Add(Labels["reload"], ReloadApplication)
-	App.tray.Add(Labels["config"], OpenConfigFile)
-	App.tray.Add(Labels["locale"], OpenLocalesFile)
+	App.tray.Add(Labels["config"], Cfg.OpenFile)
+	App.tray.Add(Labels["locale"], Locale.OpenDir)
 	App.tray.Add()
 	App.tray.Add(Labels["custom_compose"], (*) => Cfg.SubGUIs("Recipes"))
 	App.tray.Add()

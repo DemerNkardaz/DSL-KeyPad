@@ -1,0 +1,5 @@
+HotString(":C?0:gtsd", (D) => Util.SendDate())
+HotString(":C?0:gtdd", (D) => Util.SendDate("YYYY–MM–DD"))
+HotString(":C?0:gtfd", (D) => Util.SendDate("YYYY–MM–DD hh:mm:ss"))
+HotString(":C?0:gtfh", (D) => Util.SendDate("hh:mm:ss"))
+HotString(":C?0:gtfl", (D) => Util.SendDate("YYYY_MM_DD-hh_mm_ss"))

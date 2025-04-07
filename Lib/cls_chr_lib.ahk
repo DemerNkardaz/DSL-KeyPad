@@ -645,7 +645,7 @@ class ChrLib {
 
 		if refinedEntry.sequence.Length > 1 {
 			for sequenceChr in refinedEntry.sequence {
-				refinedEntry.entity .= TranslateStringToHTML(Util.UnicodeToChar(sequenceChr), "Entities")
+				refinedEntry.entity .= Util.StrToHTML(Util.UnicodeToChar(sequenceChr), "Entities")
 			}
 		} else {
 			for i, entitySymbol in EntitiesLibrary {

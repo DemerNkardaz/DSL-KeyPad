@@ -72,6 +72,10 @@ Class Cfg {
 		recipes: Gui(),
 	}
 
+	static OpenFile(*) {
+		Run(this.ini)
+	}
+
 	static Editor() {
 		this.optionsTitle := App.winTitle " — " Locale.Read("gui_options")
 
@@ -179,11 +183,11 @@ Class Cfg {
 			GuiButtonIcon(recipesPanelBtn, ImageRes, 188)
 
 			configFileBtn := optionsPanel.AddButton("x" iniFilesX(32) " y" iniFilesY " w32 h32")
-			configFileBtn.OnEvent("Click", (*) => OpenConfigFile())
+			configFileBtn.OnEvent("Click", (*) => Cfg.OpenFile())
 			GuiButtonIcon(configFileBtn, ImageRes, 065)
 
 			localesFileBtn := optionsPanel.AddButton("x" iniFilesX(32 * 2) " y" iniFilesY " w32 h32")
-			localesFileBtn.OnEvent("Click", (*) => OpenLocalesFile())
+			localesFileBtn.OnEvent("Click", (*) => Locale.OpenDir())
 			GuiButtonIcon(localesFileBtn, ImageRes, 015)
 
 

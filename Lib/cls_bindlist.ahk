@@ -63,11 +63,11 @@ importantBindsMap := Map("Flat", Map(
 	"A", Map("<#<!", (*) => CharacterInserter("Altcode").InputDialog(),),
 	"F", Map("<#<!", (*) => ChrLib.SearchPrompt().send(),),
 	"H", Map(
-		">^", (*) => TranslateSelectionToHTML("Entities"),
-		">^>+", (*) => TranslateSelectionToHTML(),
+		">^", (*) => Util.StrSelToHTML("Entities"),
+		">^>+", (*) => Util.StrSelToHTML(),
 	),
 	"J", Map(
-		">^", (*) => TranslateSelectionToHTML("Entities", True),
+		">^", (*) => Util.StrSelToHTML("Entities", True),
 	),
 	"L", Map("<#<!", (*) => ChrCrafter(),),
 	"Comma", Map("<#<!", (*) => GetKeyScanCode()),

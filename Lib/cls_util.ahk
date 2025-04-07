@@ -40,6 +40,32 @@ Class Util {
 		return
 	}
 
+	static GetTimeStr() {
+		return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
+	}
+
+	static GetDate(DateStyle := "YYYYMMDDhhmmss") {
+		CurrentTime := A_Now
+		TimeFormat := Map(
+			"YYYY", SubStr(CurrentTime, 1, 4),
+			"MM", SubStr(CurrentTime, 5, 2),
+			"DD", SubStr(CurrentTime, 7, 2),
+			"hh", SubStr(CurrentTime, 9, 2),
+			"mm", SubStr(CurrentTime, 11, 2),
+			"ss", SubStr(CurrentTime, 13, 2)
+		)
+		for Key, Value in TimeFormat {
+			DateStyle := StrReplace(DateStyle, Key, Value, True)
+		}
+		CurrentTime := DateStyle
+		return CurrentTime
+	}
+
+	static SendDate(DateStyle := "YYYYMMDDhhmmss") {
+		SendText(this.GetDate(DateStyle))
+	}
+
+
 	static StrUpper(Str, Length := StrLen(Str)) {
 		return StrUpper(SubStr(Str, 1, Length)) SubStr(Str, Length + 1)
 	}
@@ -84,6 +110,72 @@ Class Util {
 		}
 
 		return output
+	}
+
+	static StrSelToHTML(Mode := "", IgnoreDefaultSymbols := False) {
+		DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+		BackupClipboard := A_Clipboard
+		A_Clipboard := ""
+
+		Send("^c")
+		ClipWait(0.5, 1)
+		PromptValue := A_Clipboard
+		A_Clipboard := ""
+
+		if PromptValue != "" {
+			Output := this.StrToHTML(PromptValue, Mode, IgnoreDefaultSymbols)
+
+			A_Clipboard := Output
+			ClipWait(0.250, 1)
+			Send("^v")
+		}
+
+		Sleep 500
+		A_Clipboard := BackupClipboard
+		Send("{Control Up}")
+		return
+	}
+
+	static StrToHTML(InputString, Mode := "", IgnoreDefaultSymbols := False) {
+		DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+		Output := ""
+
+		i := 1
+		while (i <= StrLen(InputString)) {
+			Symbol := SubStr(InputString, i, 1)
+			Code := Ord(Symbol)
+
+			if (Code >= 0xD800 && Code <= 0xDBFF) {
+				NextSymbol := SubStr(InputString, i + 1, 1)
+				Symbol .= NextSymbol
+				i += 1
+			}
+
+			if (IgnoreDefaultSymbols && RegExMatch(Symbol, DefaultSymbols)) {
+				Output .= Symbol
+			} else {
+				if InStr(Mode, "Entities") {
+					Found := false
+					for j, entity in EntitiesLibrary {
+						if (Mod(j, 2) = 1 && entity = Symbol) {
+							Output .= EntitiesLibrary[j + 1]
+							Found := true
+							break
+						}
+					}
+
+					if (!Found) {
+						Output .= "&#" (InStr(Mode, "Hex") ? "x" this.ChrToHexaDecimal(Symbol, "") : this.ChrToDecimal(Symbol)) ";"
+					}
+				} else {
+					Output .= "&#" (InStr(Mode, "Hex") ? "x" this.ChrToHexaDecimal(Symbol, "") : this.ChrToDecimal(Symbol)) ";"
+				}
+			}
+
+			i += 1
+		}
+
+		return Output
 	}
 
 	static UniTrim(Str) {
