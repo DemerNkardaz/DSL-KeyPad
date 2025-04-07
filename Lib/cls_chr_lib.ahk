@@ -23,6 +23,7 @@ Class ChrEntry {
 		fastKey: "",
 		groupKey: [],
 		specialKey: "",
+		numericValue: 0,
 		send: "",
 	}
 	recipe := []
@@ -568,7 +569,11 @@ class ChrLib {
 			if refinedEntry.groups.Length = 0 {
 				hasPostfix := refinedEntry.data.postfixes.Length > 0
 				if ["hellenic", "latin", "cyrillic"].HasValue(refinedEntry.data.script) {
-					refinedEntry.groups := refinedEntry.data.type = "ligature" ? [Util.StrUpper(refinedEntry.data.script, 1) " Ligatures"] : refinedEntry.data.type = "digraph" ? [Util.StrUpper(refinedEntry.data.script, 1) " Digraphs"] : [Util.StrUpper(refinedEntry.data.script, 1) (hasPostfix ? " Accented" : "")]
+					refinedEntry.groups :=
+						(StrLen(refinedEntry.data.type) > 0 && ["digraph", "ligature", "numeral"].HasValue(refinedEntry.data.type) ?
+							[Util.StrUpper(refinedEntry.data.script, 1) " " Util.StrUpper(refinedEntry.data.type, 1) "s"] :
+							[Util.StrUpper(refinedEntry.data.script, 1) (hasPostfix ? " Accented" : "")]
+						)
 				}
 
 				if refinedEntry.data.script = "hellenic" {
@@ -793,8 +798,8 @@ class ChrLib {
 	static NameDecompose(entryName) {
 		decomposedName := {
 			script: Map("lat", "latin", "cyr", "cyrillic", "hel", "hellenic"),
-			case: Map("c", "capital", "s", "small", "sc", "small_capital", "i", "inter"),
-			type: Map("let", "letter", "lig", "ligature", "dig", "digraph"),
+			case: Map("c", "capital", "s", "small", "sc", "small_capital", "i", "inter", "n", "neutral"),
+			type: Map("let", "letter", "lig", "ligature", "dig", "digraph", "num", "numeral"),
 			letter: "",
 			postfixes: []
 		}

@@ -2605,15 +2605,17 @@ LibRegistrate(this) {
 		},
 		"equals", {
 			unicode: "{U+003D}",
+			alterations: { modifier: "{U+207C}", subscript: "{U+208C}" },
 			options: { noCalc: True },
 		},
 		"plus", {
 			unicode: "{U+002B}",
+			alterations: { modifier: "{U+207A}", subscript: "{U+208A}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"minus", {
 			unicode: "{U+2212}",
-			alterations: { modifier: "{U+02D7}", subscript: "{U+208B}" },
+			alterations: { modifier: "{U+207B}", subscript: "{U+208B}" },
 			tags: ["minus", "минус"],
 			groups: ["Dashes", "Smelting Special", "Special Fast Primary", "Special Fast"],
 			options: { groupKey: ["9"], altSpecialKey: "[Num-]", fastKey: "<+ [-]" },
@@ -2633,10 +2635,12 @@ LibRegistrate(this) {
 		},
 		"left_parenthesis", {
 			unicode: "{U+0028}",
+			alterations: { modifier: "{U+207D}", subscript: "{U+208D}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"right_parenthesis", {
 			unicode: "{U+0029}",
+			alterations: { modifier: "{U+207E}", subscript: "{U+208E}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"top_parenthesis", {
@@ -3083,6 +3087,75 @@ LibRegistrate(this) {
 		"hel_[c,s]_lig_k_kai", {
 			unicode: ["{U+03CF}", "{U+03D7}"],
 			recipe: ["${hel_[c,s]_let_k_kappa}${hel_[c,s]_let_a_alpha}${hel_[c,s]_let_i_iota}"]
+		},
+		;
+		;
+		; * Latin Numberals
+		;
+		;
+		"lat_c_num_[1,2,3,4,5,6,7,8,9,10,11,12,50,100,500,1000,5000,10000,50000,100000]", {
+			unicode: [
+				"{U+2160}", "{U+2161}", "{U+2162}", "{U+2163}", "{U+2164}",
+				"{U+2165}", "{U+2166}", "{U+2167}", "{U+2168}", "{U+2169}",
+				"{U+216A}", "{U+216B}", "{U+216C}", "{U+216D}", "{U+216E}",
+				"{U+216F}", "{U+2181}", "{U+2182}", "{U+2187}", "{U+2188}"
+			],
+			options: {
+				useLetterLocale: True,
+				numericValue: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 50, 100, 500, 1000, 5000, 10000, 50000, 100000],
+			},
+			recipe: [
+				["RN 1"],
+				["RN 2"],
+				["RN 3"],
+				["RN 4"],
+				["RN 5"],
+				["RN 6"],
+				["RN 7"],
+				["RN 8"],
+				["RN 9"],
+				["RN 10"],
+				["RN 11"],
+				["RN 12"],
+				["RN 50"],
+				["RN 100"],
+				["RN 500"],
+				["RN 1K"],
+				["RN 5K"],
+				["RN 10K"],
+				["RN 50K"],
+				["RN 100K"]
+			]
+		},
+		"lat_s_num_[1,2,3,4,5,6,7,8,9,10,11,12,50,100,500,1000]", {
+			unicode: [
+				"{U+2170}", "{U+2171}", "{U+2172}", "{U+2173}", "{U+2174}",
+				"{U+2175}", "{U+2176}", "{U+2177}", "{U+2178}", "{U+2179}",
+				"{U+217A}", "{U+217B}", "{U+217C}", "{U+217D}", "{U+217E}",
+				"{U+217F}"
+			],
+			options: {
+				useLetterLocale: True,
+				numericValue: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 50, 100, 500, 1000],
+			},
+			recipe: [
+				["rn 1"],
+				["rn 2"],
+				["rn 3"],
+				["rn 4"],
+				["rn 5"],
+				["rn 6"],
+				["rn 7"],
+				["rn 8"],
+				["rn 9"],
+				["rn 10"],
+				["rn 11"],
+				["rn 12"],
+				["rn 50"],
+				["rn 100"],
+				["rn 500"],
+				["rn 1k"]
+			]
 		},
 		;
 		;

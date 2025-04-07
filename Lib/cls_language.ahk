@@ -274,8 +274,10 @@ Class Locale extends Language {
 			if isAlt {
 				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter postLetter lAfterletter proxyMark
 			} else {
-				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter proxyMark
-				tags[langCode] := Locale.Read(pfx "case_" lCase psx, lang) " " Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
+				localedCase := !lCase = "neutral" ? Locale.Read(pfx "case_" lCase psx, lang) " " : ""
+
+				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter proxyMark
+				tags[langCode] := localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
 			}
 		}
 

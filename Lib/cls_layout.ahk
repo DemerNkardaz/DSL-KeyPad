@@ -364,6 +364,7 @@ Class KeyboardBinder {
 
 	static disabledByMonitor := False
 	static disabledByUser := False
+	static numStyle := ""
 
 	static __New() {
 		this.UserLayouts()
@@ -574,10 +575,13 @@ Class KeyboardBinder {
 		this.UnregisterAll()
 		this.CurrentLayouts(&latin, &cyrillic)
 		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(binds.keyboardDefault.mapping, True)
+			this.Registration(BindList.Get().keyboardDefault.mapping, True)
 
-		this.Registration(binds.important.mapping, True)
-		this.Registration(binds.common.mapping, Cfg.FastKeysOn)
+		this.Registration(BindList.Get().important.mapping, True)
+		this.Registration(BindList.Get().common.mapping, Cfg.FastKeysOn)
+
+		if StrLen(this.numStyle) > 0
+			this.ToggleNumStyle(this.numStyle, True)
 	}
 
 	static ToggleDefaultMode() {
@@ -590,11 +594,20 @@ Class KeyboardBinder {
 		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(binds.keyboardDefault.mapping, True)
+			this.Registration(BindList.Get().keyboardDefault.mapping, True)
 
-		this.Registration(binds.important.mapping, True)
-		this.Registration(binds.common.mapping, Cfg.FastKeysOn)
+		this.Registration(BindList.Get().important.mapping, True)
+		this.Registration(BindList.Get().common.mapping, Cfg.FastKeysOn)
 
+	}
+
+	static ToggleNumStyle(style := "superscript", force := False) {
+		this.numStyle := (style = this.numStyle && !force) ? "" : style
+		this.Registration(BindList.Get().%style%Digits.mapping, force ? force : StrLen(this.numStyle) > 0)
+
+		if StrLen(this.numStyle) == 0 {
+			this.RebuilBinds()
+		}
 	}
 
 	static UserLayouts() {

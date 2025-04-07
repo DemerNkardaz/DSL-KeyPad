@@ -226,6 +226,8 @@ Class Panel {
 						;
 						{ type: "Recipe", group: "Latin Accented", separator: true },
 						;
+						{ type: "Recipe", group: "Latin Numerals", separator: true },
+						;
 						{ type: "Recipe", group: "Hellenic Ligatures", separator: true },
 						;
 						{ type: "Recipe", group: "Hellenic", separator: true },

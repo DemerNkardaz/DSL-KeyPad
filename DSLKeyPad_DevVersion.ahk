@@ -96,6 +96,7 @@ LaTeXMode := "Default"
 #Include <chr_lib>
 #Include <cls_chr_lib>
 #Include <cls_chr_recipe_handler>
+#Include <cls_auxiliary>
 #Include <cls_chr_legend>
 #Include <cls_panel>
 #Include <cls_key_event>
@@ -952,8 +953,8 @@ RoNum := Map(
 	"25-sD", Chr(0x217E),
 	"26-sC", Chr(0x217D),
 	"27-sL", Chr(0x217C),
-	;"28-sXII", Chr(0x217B),
-	;"29-sXI", Chr(0x217A),
+	"28-sXII", Chr(0x217B),
+	"29-sXI", Chr(0x217A),
 	"30-sX", Chr(0x2179),
 	"31-sIX", Chr(0x2178),
 	"32-sVIII", Chr(0x2177),
@@ -2501,28 +2502,6 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		}
 	}
 	return
-}
-
-
-NumberStyle := ""
-
-SetNumberStyle(ScriptMode) {
-	global NumberStyle
-	PreviousScriptMode := NumberStyle
-
-	IsAlterationsActive := AlterationActiveName != "" ? True : False
-
-	if (ScriptMode != "" && (ScriptMode = PreviousScriptMode)) {
-		NumberStyle := ""
-		UnregisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Cleanscript"))
-		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , IsAlterationsActive)
-	} else {
-		NumberStyle := ScriptMode
-		if IsAlterationsActive {
-			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
-		}
-		RegisterHotKeys(ScriptMode == "sup" ? GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Supercript") : GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Subscript"), True)
-	}
 }
 
 ToRomanNumeral(IntValue, CapitalLetters := True) {
@@ -6554,8 +6533,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["NumpadEnter"], (*) => ParagraphizeSelection(),
 			">^" UseKey["NumpadDot"], (*) => GREPizeSelection(),
 			"<^>!" UseKey["NumpadDot"], (*) => GREPizeSelection(True),
-			"<#<!" UseKey["ArrUp"], (*) => SetNumberStyle("sup"),
-			"<#<!" UseKey["ArrDown"], (*) => SetNumberStyle("sub"),
 			">^" UseKey["Tilde"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Hellenic"), (*) => ToggleLetterScript(, "Hellenic")),
 			">^" UseKey["1"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Glagolitic Futhark"), (*) => ToggleLetterScript(, "Old Turkic Old Permic")),
 			">^" UseKey["2"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Hungarian"), (*) => ToggleLetterScript(, "Gothic")),
@@ -6952,4 +6929,4 @@ ShowEntryPreview() {
 }
 
 
-<^Home:: ShowEntryPreview()
+<^>^Home:: ShowEntryPreview()
