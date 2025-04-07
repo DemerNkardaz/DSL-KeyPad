@@ -574,10 +574,10 @@ Class KeyboardBinder {
 		this.UnregisterAll()
 		this.CurrentLayouts(&latin, &cyrillic)
 		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(flatBinds.mapping, True)
+			this.Registration(binds.keyboardDefault.mapping, True)
 
-		this.Registration(importantBindsMap.mapping, True)
-		this.Registration(defaultBinds.mapping, Cfg.FastKeysOn)
+		this.Registration(binds.important.mapping, True)
+		this.Registration(binds.common.mapping, Cfg.FastKeysOn)
 	}
 
 	static ToggleDefaultMode() {
@@ -590,10 +590,10 @@ Class KeyboardBinder {
 		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(flatBinds.mapping, True)
+			this.Registration(binds.keyboardDefault.mapping, True)
 
-		this.Registration(importantBindsMap.mapping, True)
-		this.Registration(defaultBinds.mapping, Cfg.FastKeysOn)
+		this.Registration(binds.important.mapping, True)
+		this.Registration(binds.common.mapping, Cfg.FastKeysOn)
 
 	}
 
