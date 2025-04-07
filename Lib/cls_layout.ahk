@@ -338,6 +338,7 @@ Class KeyboardBinder {
 		),
 	}
 
+
 	static modifiers := [
 		"!", "<!", ">!",
 		"+", "<+", ">+",
@@ -360,14 +361,23 @@ Class KeyboardBinder {
 
 	static autoimport := {
 		layouts: App.paths.user "\CustomLayouts",
+		binds: App.paths.user "\CustomBindings",
 	}
 
 	static disabledByMonitor := False
 	static disabledByUser := False
 	static numStyle := ""
+	static userLayoutsNames := []
+	static userBindings := Map()
 
 	static __New() {
+		for key, path in this.autoimport.OwnProps() {
+			if !DirExist(path)
+				DirCreate(path)
+		}
+
 		this.UserLayouts()
+		this.UserBinds()
 		this.RebuilBinds()
 
 		SetTimer((*) => SetTimer((*) => this.Monitor(), 2000), -10000)
@@ -580,6 +590,12 @@ Class KeyboardBinder {
 		this.Registration(BindList.Get("important"), True)
 		this.Registration(BindList.Get("common"), Cfg.FastKeysOn)
 
+		userBindings := Cfg.Get("Active_User_Bindings", , "None")
+		if userBindings != "None" {
+			link := this.userBindings.Get(userBindings)
+			this.Registration(BindList.Get(link), True)
+		}
+
 		if StrLen(this.numStyle) > 0
 			this.ToggleNumStyle(this.numStyle, True)
 	}
@@ -599,6 +615,11 @@ Class KeyboardBinder {
 		this.Registration(BindList.Get("important"), True)
 		this.Registration(BindList.Get("common"), Cfg.FastKeysOn)
 
+		userBindings := Cfg.Get("Active_User_Bindings", , "None")
+		if userBindings != "None" {
+			link := this.userBindings.Get(userBindings)
+			this.Registration(BindList.Get(link), True)
+		}
 	}
 
 	static ToggleNumStyle(style := "superscript", force := False) {
@@ -611,9 +632,6 @@ Class KeyboardBinder {
 	}
 
 	static UserLayouts() {
-		if !DirExist(this.autoimport.layouts)
-			DirCreate(this.autoimport.layouts)
-
 		Loop Files this.autoimport.layouts "\*.ini" {
 			scriptName := IniRead(A_LoopFileFullPath, "info", "name", "")
 			scriptType := IniRead(A_LoopFileFullPath, "info", "type", "")
@@ -633,9 +651,75 @@ Class KeyboardBinder {
 				}
 
 				this.layouts.%scriptType%.Set(scriptName, LayoutList(scriptType, outputLayout))
+				this.userLayoutsNames.Push(scriptName)
 			} else {
 				MsgBox("Invalid layout file: " A_LoopFileFullPath)
 			}
+		}
+	}
+
+	static SetBinds(name := Locale.Read("gui_options_bindings_none")) {
+		if name = Locale.Read("gui_options_bindings_none") {
+			Cfg.Set("None", "Active_User_Bindings")
+			this.RebuilBinds()
+			return
+		} else {
+			Cfg.Set(name, "Active_User_Bindings")
+			this.RebuilBinds()
+		}
+	}
+
+	static UserBinds() {
+		Loop Files this.autoimport.binds "\*.ini" {
+			name := IniRead(A_LoopFileFullPath, "info", "name", "")
+			var := IniRead(A_LoopFileFullPath, "info", "var", "")
+			bindsMap := Util.INIToMap(A_LoopFileFullPath)
+
+			if StrLen(name) > 0 && StrLen(var) > 0 && bindsMap.Has("binds") {
+				this.userBindings.Set(name, "user_" var)
+				this.UserBindsHandler(bindsMap["binds"], name, var)
+			}
+		}
+
+		currentBindings := Cfg.Get("Active_User_Bindings", , "None")
+		if !this.userBindings.Has(currentBindings) && currentBindings != "None" {
+			Cfg.Set("None", "Active_User_Bindings")
+		}
+	}
+
+	static UserBindsHandler(bindsMap := Map(), name := "", var := "") {
+		if bindsMap.Count > 0 && StrLen(name) > 0 && StrLen(var) > 0 {
+			interMap := Map("Flat", Map(), "Moded", Map())
+			for combo, reference in bindsMap {
+				interRef := reference
+				keyReference := combo
+				modifiersRegEx := "[\<\>\^\!\+\#]+"
+				rule := ""
+
+				if RegExMatch(combo, ":(.*?)$", &ruleMatch)
+					rule := ruleMatch[1]
+
+				keyReference := RegExReplace(keyReference, modifiersRegEx)
+				keyReference := RegExReplace(keyReference, ":" rule "$")
+				modifierReference := RegExReplace(combo, "[^\<\>\^\!\+\#:]") rule
+
+				if RegExMatch(reference, "^\[(.*?)\]$", &arrRefMatch) {
+					interRef := StrSplit(Util.StrTrim(arrRefMatch[1]), ",")
+				}
+
+				if RegExMatch(combo, modifiersRegEx) {
+					if !interMap["Moded"].Has(keyReference) {
+						interMap["Moded"][keyReference] := Map()
+					}
+
+					interMap["Moded"][keyReference].Set(modifierReference, interRef)
+				} else {
+					interMap["Flat"].Set(keyReference rule, interRef)
+				}
+
+			}
+			bindingMaps.user_%var% := interMap
+
 		}
 	}
 }
@@ -672,12 +756,15 @@ Class BindHandler {
 			}
 
 			keysValidation := "SC(14B|148|14D|150|04A)"
-			chrValidation := "(" Chr(0x00AE) ")"
+			chrValidation := "(\" Chr(0x00AE) "|\" Chr(0x2122) "|\" Chr(0x00A9) "|\" Chr(0x2022) "|\" Chr(0x25B6) "|\" Chr(0x25C0) "|\" Chr(0x0021) "|\" Chr(0x002B) "|\" Chr(0x005E) "|\" Chr(0x0023) "|\" Chr(0x007B) "|\" Chr(0x007D) "|\" Chr(0x0060) "|\" Chr(0x007E) "|\" Chr(0x0025) "|\" Chr(0x0009) "|\" Chr(0x000A) "|\" Chr(0x000D) ")"
 
 			if StrLen(inputType) == 0
-				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") != "Unicode") ? "Text" : "Input"
+				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") != "Unicode" || StrLen(output) > 10) ? "Text" : "Input"
 
-			Send%inputType%(output)
+			if StrLen(output) > 20
+				ClipSend(output)
+			else
+				Send%inputType%(output)
 		}
 	}
 

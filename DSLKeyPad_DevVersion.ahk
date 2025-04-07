@@ -77,7 +77,6 @@ CapsLock := Chr(0x2B9D)
 
 EscapePressed := False
 
-FastKeysIsActive := False
 ActiveScriptName := ""
 PreviousScriptName := ""
 AlterationActiveName := ""
@@ -218,15 +217,7 @@ DefaultConfig := [
 	["ServiceFields", "PrevLayout", ""],
 ]
 
-if FileExist(ConfigFile) {
-	isFastKeysEnabled := IniRead(ConfigFile, "Settings", "FastKeysIsActive", "False")
-	InputMode := IniRead(ConfigFile, "Settings", "InputMode", "Default")
-	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
 
-	FastKeysIsActive := (isFastKeysEnabled = "True")
-} else {
-
-}
 /*
 FontFace := Map(
 	"sans", {
@@ -4363,24 +4354,6 @@ CheckYITSUKEN() {
 	return CyrllicLayouts.Has(IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")) ? IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН") : "ЙЦУКЕН"
 }
 
-ToggleFastKeys() {
-	LanguageCode := Language.Get()
-	global FastKeysIsActive, ActiveScriptName, ConfigFile
-	FastKeysIsActive := !FastKeysIsActive
-	IniWrite (FastKeysIsActive ? "True" : "False"), ConfigFile, "Settings", "FastKeysIsActive"
-
-	MsgBox(Locale.Read("message_fastkeys_" (!FastKeysIsActive ? "de" : "") "activated"), "FastKeys", 0x40)
-
-	Sleep 5
-	RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-	IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
-	if IsLettersModeEnabled {
-		ActiveScriptName := ""
-		ToggleLetterScript(True, IsLettersModeEnabled)
-	}
-	return
-}
-
 ToggleInputMode() {
 	LanguageCode := Language.Get()
 
@@ -4610,7 +4583,7 @@ LangSeparatedKey(combo, enChar, ruChar, useCaps := False, reverse := False) {
 	return
 }
 
-RegisterHotKeys(Bindings, CheckRule := FastKeysIsActive) {
+RegisterHotKeys(Bindings, CheckRule := True) {
 	for index, pair in Bindings {
 		if (Mod(index, 2) = 1) {
 			key := pair
@@ -4657,19 +4630,6 @@ UnregisterKeysLayout() {
 	}
 }
 
-UnregisterHotKeys(Bindings) {
-	for index, pair in Bindings {
-		if (Mod(index, 2) = 1) {
-			key := pair
-			value := Bindings[index + 1]
-			try {
-				HotKey(key, "Off", "Off")
-			} catch {
-				continue
-			}
-		}
-	}
-}
 
 KeySeq := Map(
 	"A", ["A", "A", "A"],
@@ -6492,12 +6452,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<^>!" UseKey["3"], (*) => SwitchToRoman(),
 			"<#<!" UseKey["M"], (*) => ToggleGroupMessage(),
 			"<#<!" UseKey["PgUp"], (*) => FindCharacterPage(),
-			">^" UseKey["U"], (*) => ReplaceWithUnicode(),
-			">^" UseKey["Y"], (*) => ReplaceWithUnicode("CSS"),
-			">^" UseKey["I"], (*) => ReplaceWithUnicode("Hex"),
-			"<#<!" UseKey["Home"], (*) => OpenPanel(),
-			"<^>!>+" UseKey["F1"], (*) => ToggleInputMode(),
-			; "<^>!" UseKey["F1"], (*) => ToggleFastKeys(),
 			"<^>!" UseKey["F2"], (*) => InputScriptProcessor(),
 			"<^>!>+" UseKey["F2"], (*) => InputScriptProcessor("pinYin"),
 			"<^>!<+" UseKey["F2"], (*) => InputScriptProcessor("karaShiki"),
@@ -6692,8 +6646,6 @@ RShiftEndingTimer() {
 	return SetTimer(RAltsSetStats, -300)
 }
 
-
-;RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 
 ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True

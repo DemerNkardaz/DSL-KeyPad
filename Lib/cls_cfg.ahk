@@ -12,6 +12,7 @@ Class Cfg {
 			"Input_Script", "Default",
 			"Layout_Latin", "QWERTY",
 			"Layout_Cyrillic", "ЙЦУКЕН",
+			"Active_User_Bindings", "None",
 			"Mode_Fast_Keys", "False",
 			"Binds_Autodisable_Timer", "1",
 			"Binds_Autodisable_Type", "hour",
@@ -107,9 +108,9 @@ Class Cfg {
 			languageSelectorY := (add := 0) => optionsCommonY + 35 + add
 			languageSelectorX := (add := 0) => 25 + add
 
-			optionsPanel.AddText("vLanguageLabel x" languageSelectorX() " y" languageSelectorY(-17) " w80 BackgroundTrans", Locale.Read("gui_options_language"))
+			optionsPanel.AddText("vLanguageLabel x" languageSelectorX() " y" languageSelectorY(-17) " w128 BackgroundTrans", Locale.Read("gui_options_language"))
 
-			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w80 y" languageSelectorY(), [optionsLanguages["en"], optionsLanguages["ru"]])
+			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w128 y" languageSelectorY(), [optionsLanguages["en"], optionsLanguages["ru"]])
 			PostMessage(0x0153, -1, 15, languageSelector)
 
 			languageSelector.Text := optionsLanguages[Language.Get()]
@@ -118,23 +119,34 @@ Class Cfg {
 			layouSelectorTextY := 32
 			layouSelectorY := (add := 1) => layouSelectorTextY + (16 + add)
 
-			optionsPanel.AddText("vLayoutLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorTextY) " w80 BackgroundTrans", Locale.Read("gui_options_layout"))
+			optionsPanel.AddText("vLayoutLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorTextY) " w128 BackgroundTrans", Locale.Read("gui_options_layout"))
 
 			layoutist := {
 				latin: KeyboardBinder.layouts.latin.Keys(),
 				cyrillic: KeyboardBinder.layouts.cyrillic.Keys()
 			}
 
-			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w80 y" languageSelectorY(layouSelectorY()), layoutist.latin)
+			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY()), layoutist.latin)
 			PostMessage(0x0153, -1, 15, layoutLatinSelector)
 			layoutLatinSelector.Text := Cfg.Get("Layout_Latin")
 			layoutLatinSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
 
-			layoutCyrillicSelector := optionsPanel.AddDropDownList("vCyrillicLayout x" languageSelectorX() " w80 y" languageSelectorY(layouSelectorY(23)), layoutist.cyrillic)
+			layoutCyrillicSelector := optionsPanel.AddDropDownList("vCyrillicLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(23)), layoutist.cyrillic)
 			PostMessage(0x0153, -1, 15, layoutCyrillicSelector)
 			layoutCyrillicSelector.Text := Cfg.Get("Layout_Cyrillic")
 			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
 
+			bindingsList := KeyboardBinder.userBindings.Keys()
+			bindingsList.InsertAt(1, Locale.Read("gui_options_bindings_none"))
+			currentBindings := Cfg.Get("Active_User_Bindings", , "None")
+			currentBindings := currentBindings = "None" ? Locale.Read("gui_options_bindings_none") : currentBindings
+
+			optionsPanel.AddText("vBindingsLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorY(50)) " w128 BackgroundTrans", Locale.Read("gui_options_bindings"))
+
+			bindingsSelector := optionsPanel.AddDropDownList("vBindings x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(66)), bindingsList)
+			PostMessage(0x0153, -1, 15, bindingsSelector)
+			bindingsSelector.Text := currentBindings
+			bindingsSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetBinds(CB.Text))
 
 			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
 
@@ -523,6 +535,7 @@ Class Options {
 
 			Cfg.EditorGUI["LanguageLabel"].Text := Locale.Read("gui_options_language")
 			Cfg.EditorGUI["LayoutLabel"].Text := Locale.Read("gui_options_layout")
+			Cfg.EditorGUI["BindingsLabel"].Text := Locale.Read("gui_options_bindings")
 			Cfg.EditorGUI["Autoload"].Text := Locale.Read("autoload_add")
 
 			try {

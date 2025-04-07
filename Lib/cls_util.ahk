@@ -66,6 +66,10 @@ Class Util {
 	}
 
 
+	static StrTrim(Str, chrs := "\s+") {
+		return RegExReplace(Str, chrs)
+	}
+
 	static StrUpper(Str, Length := StrLen(Str)) {
 		return StrUpper(SubStr(Str, 1, Length)) SubStr(Str, Length + 1)
 	}
@@ -439,7 +443,7 @@ Class Util {
 		if !InStr(filePath, ".ini")
 			filePath .= ".ini"
 
-		content := FileRead(filePath, "UTF-8")
+		content := FileRead(filePath, "UTF-16")
 		lines := StrSplit(content, "`n", "`r`n")
 
 		iniMap := Map()

@@ -1,76 +1,78 @@
 bindingMaps := {
-	important: Map("Flat", Map(
-		"RAlt", (*) => ProceedCompose(),
-	), "Moded", Map(
-		; Functional
-		"F1", Map(
-			"<#<!", (*) => GroupActivator("Diacritics Primary", "F1"),
-			"<^>!", (*) => KeyboardBinder.ToggleDefaultMode(),
-			"<^>!>+", (*) => ToggleInputMode(),
+	important: Map(
+		"Flat", Map(
+			"RAlt", (*) => ProceedCompose(),
 		),
-		"F2", Map(
-			"<#<!", (*) => GroupActivator("Diacritics Secondary", "F2"),
-			"<^>!", (*) => InputScriptProcessor(),
-			"<^>!>+", (*) => InputScriptProcessor("pinYin"),
-			"<^>!<+", (*) => InputScriptProcessor("karaShiki"),
-			"<^>!<!", (*) => InputScriptProcessor("autoDiacritics"),
-		),
-		"F3", Map(
-			"<#<!", (*) => GroupActivator("Diacritics Tertiary", "F3"),
-		),
-		"F6", Map(
-			"<#<!", (*) => GroupActivator("Diacritics Quatemary", "F6"),
-		),
-		"F7", Map(
-			"<#<!", (*) => GroupActivator("Special Characters", "F7"),
-		),
-		"F12", Map(
-			">^", (*) => KeyboardBinder.SwitchLayout("Latin"),
-			">+", (*) => KeyboardBinder.SwitchLayout("Cyrillic")
-		),
-		"ArrUp", Map(
-			"<#<!", (*) => KeyboardBinder.ToggleNumStyle("superscript"),
-			"<#<!>+", (*) => KeyboardBinder.ToggleNumStyle("roman"),
-		),
-		"ArrDown", Map(
-			"<#<!", (*) => KeyboardBinder.ToggleNumStyle("subscript"),
-		),
-		"PgUp", Map("<#<!", (*) => FindCharacterPage(),),
-		"Home", Map("<#<!", (*) => Panel.Panel(), "<^>!<#<!", (*) => OpenPanel()),
-		"Space", Map("<#<!", (*) => GroupActivator("Spaces"),),
-		"HyphenMinus", Map("<#<!", (*) => GroupActivator("Dashes", "-"),),
-		"Apostrophe", Map("<#<!", (*) => GroupActivator("Quotes", "'"),),
-		"NumpadAdd", Map("<#<!", (*) => CharacterInserter().NumHook()),
-		"NumpadDiv", Map("<#<!", (*) => CharacterInserter("Altcode").NumHook()),
-		"A", Map("<#<!", (*) => CharacterInserter("Altcode").InputDialog(),),
-		"F", Map("<#<!", (*) => ChrLib.SearchPrompt().send(),),
-		"H", Map(
-			">^", (*) => Util.StrSelToHTML("Entities"),
-			">^>+", (*) => Util.StrSelToHTML(),
-		),
-		"J", Map(
-			">^", (*) => Util.StrSelToHTML("Entities", True),
-		),
-		"L", Map("<#<!", (*) => ChrCrafter(),),
-		"Comma", Map("<#<!", (*) => GetKeyScanCode()),
-		"M", Map("<#<!", (*) => ToggleGroupMessage()),
-		"Q", Map("<!", (*) => LangSeparatedCall(
-			() => QuotatizeSelection("Double"),
-			() => QuotatizeSelection("France")),
-			"<!<+", (*) => LangSeparatedCall(
-				() => QuotatizeSelection("Single"),
-				() => QuotatizeSelection("Paw"))),
-		"Y", Map(
-			">^", (*) => ReplaceWithUnicode("CSS"),
-		),
-		"U", Map(
-			"<#<!", (*) => CharacterInserter("Unicode").InputDialog(),
-			">^", (*) => ReplaceWithUnicode(),
-		),
-		"I", Map(
-			">^", (*) => ReplaceWithUnicode("Hex"),
-		),
-	)),
+		"Moded", Map(
+			; Functional
+			"F1", Map(
+				"<#<!", (*) => GroupActivator("Diacritics Primary", "F1"),
+				"<^>!", (*) => KeyboardBinder.ToggleDefaultMode(),
+				"<^>!>+", (*) => ToggleInputMode(),
+			),
+			"F2", Map(
+				"<#<!", (*) => GroupActivator("Diacritics Secondary", "F2"),
+				"<^>!", (*) => InputScriptProcessor(),
+				"<^>!>+", (*) => InputScriptProcessor("pinYin"),
+				"<^>!<+", (*) => InputScriptProcessor("karaShiki"),
+				"<^>!<!", (*) => InputScriptProcessor("autoDiacritics"),
+			),
+			"F3", Map(
+				"<#<!", (*) => GroupActivator("Diacritics Tertiary", "F3"),
+			),
+			"F6", Map(
+				"<#<!", (*) => GroupActivator("Diacritics Quatemary", "F6"),
+			),
+			"F7", Map(
+				"<#<!", (*) => GroupActivator("Special Characters", "F7"),
+			),
+			"F12", Map(
+				">^", (*) => KeyboardBinder.SwitchLayout("Latin"),
+				">+", (*) => KeyboardBinder.SwitchLayout("Cyrillic")
+			),
+			"ArrUp", Map(
+				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("superscript"),
+				"<#<!>+", (*) => KeyboardBinder.ToggleNumStyle("roman"),
+			),
+			"ArrDown", Map(
+				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("subscript"),
+			),
+			"PgUp", Map("<#<!", (*) => FindCharacterPage(),),
+			"Home", Map("<#<!", (*) => Panel.Panel(), "<^>!<#<!", (*) => OpenPanel()),
+			"Space", Map("<#<!", (*) => GroupActivator("Spaces"),),
+			"HyphenMinus", Map("<#<!", (*) => GroupActivator("Dashes", "-"),),
+			"Apostrophe", Map("<#<!", (*) => GroupActivator("Quotes", "'"),),
+			"NumpadAdd", Map("<#<!", (*) => CharacterInserter().NumHook()),
+			"NumpadDiv", Map("<#<!", (*) => CharacterInserter("Altcode").NumHook()),
+			"A", Map("<#<!", (*) => CharacterInserter("Altcode").InputDialog(),),
+			"F", Map("<#<!", (*) => ChrLib.SearchPrompt().send(),),
+			"H", Map(
+				">^", (*) => Util.StrSelToHTML("Entities"),
+				">^>+", (*) => Util.StrSelToHTML(),
+			),
+			"J", Map(
+				">^", (*) => Util.StrSelToHTML("Entities", True),
+			),
+			"L", Map("<#<!", (*) => ChrCrafter(),),
+			"Comma", Map("<#<!", (*) => GetKeyScanCode()),
+			"M", Map("<#<!", (*) => ToggleGroupMessage()),
+			"Q", Map("<!", (*) => LangSeparatedCall(
+				() => QuotatizeSelection("Double"),
+				() => QuotatizeSelection("France")),
+				"<!<+", (*) => LangSeparatedCall(
+					() => QuotatizeSelection("Single"),
+					() => QuotatizeSelection("Paw"))),
+			"Y", Map(
+				">^", (*) => ReplaceWithUnicode("CSS"),
+			),
+			"U", Map(
+				"<#<!", (*) => CharacterInserter("Unicode").InputDialog(),
+				">^", (*) => ReplaceWithUnicode(),
+			),
+			"I", Map(
+				">^", (*) => ReplaceWithUnicode("Hex"),
+			),
+		)),
 	keyboardDefault: Map(
 		"Flat", Map(
 			; Digits
