@@ -229,14 +229,17 @@ class ChrLib {
 		}
 	}
 
-	static Get(entryName, extraRules := False, getMode := "Unicode") {
+	static Get(entryName, extraRules := False, getMode := "Unicode", alt := AlterationActiveName) {
+		if StrLen(alt) == 0
+			alt := AlterationActiveName
+
 		entry := this.GetEntry(entryName)
 
 		getMode := StrLen(getMode) ? getMode : "Unicode"
 
 		if (getMode = "HTML" && StrLen(entry.html) > 0) {
-			if (extraRules && StrLen(AlterationActiveName) > 0 && entry.alterations.HasOwnProp(AlterationActiveName)) {
-				return entry.alterations.%AlterationActiveName%HTML
+			if (extraRules && StrLen(alt) > 0 && entry.alterations.HasOwnProp(alt)) {
+				return entry.alterations.%alt%HTML
 			}
 			return StrLen(entry.entity) > 0 ? entry.entity : entry.html
 
@@ -246,8 +249,8 @@ class ChrLib {
 			: entry.LaTeX[1]
 
 		} else {
-			if (extraRules && StrLen(AlterationActiveName) > 0 && entry.alterations.HasOwnProp(AlterationActiveName)) {
-				return Util.UnicodeToChar(entry.alterations.%AlterationActiveName%)
+			if (extraRules && StrLen(alt) > 0 && entry.alterations.HasOwnProp(alt)) {
+				return Util.UnicodeToChar(entry.alterations.%alt%)
 
 			} else if (extraRules && getMode != "Unicode" && entry.alterations.HasOwnProp(getMode)) {
 				return Util.UnicodeToChar(entry.alterations.%getMode%)

@@ -2381,6 +2381,7 @@ LibRegistrate(this) {
 		},
 		"exclamation", {
 			unicode: "{U+0021}",
+			alterations: { modifier: "{U+A71D}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"question", {
@@ -2396,6 +2397,7 @@ LibRegistrate(this) {
 		},
 		"inverted_exclamation", {
 			unicode: "{U+00A1}",
+			alterations: { modifier: "{U+A71E}", subscript: "{U+A71F}" },
 			tags: ["inverted !", "перевёрнутый !"],
 			groups: ["Smelting Special", "Special Fast Secondary"],
 			options: { fastKey: "[1]" },

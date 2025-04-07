@@ -627,8 +627,11 @@ Class KeyboardBinder {
 	}
 }
 
-Class BindHandler {
+Class Scripter {
 
+}
+
+Class BindHandler {
 	static Send(combo := "", characterNames*) {
 		Keyboard.CheckLayout(&lang)
 		if Language.Validate(lang, "bindings") {
@@ -636,10 +639,18 @@ Class BindHandler {
 			inputType := ""
 
 			for _, character in characterNames {
+				getMode := Cfg.Get("Input_Mode")
+				alt := ""
+				if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
+					alt := alterationMatch[1]
+					character := RegExReplace(character, "\:\:.*$", "")
+				}
+
 				if ChrLib.entries.HasOwnProp(character) {
-					output .= ChrLib.Get(character, True, Cfg.Get("Input_Mode"))
+					output .= ChrLib.Get(character, True, getMode, alt)
 
 					chrSendOption := ChrLib.GetValue(character, "options").send
+
 					if StrLen(chrSendOption) > 0
 						inputType := chrSendOption
 				} else {

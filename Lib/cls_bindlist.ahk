@@ -90,6 +90,57 @@ importantBindsMap := Map("Flat", Map(
 	),
 ))
 
+
+supToSubDigits := Map(
+	"Flat", Map(
+		; Digits
+		"0:Caps", ["digit_0::modifier", "digit_0::subscript"],
+		"1:Caps", ["digit_1::modifier", "digit_1::subscript"],
+		"2:Caps", ["digit_2::modifier", "digit_2::subscript"],
+		"3:Caps", ["digit_3::modifier", "digit_3::subscript"],
+		"4:Caps", ["digit_4::modifier", "digit_4::subscript"],
+		"5:Caps", ["digit_5::modifier", "digit_5::subscript"],
+		"6:Caps", ["digit_6::modifier", "digit_6::subscript"],
+		"7:Caps", ["digit_7::modifier", "digit_7::subscript"],
+		"8:Caps", ["digit_8::modifier", "digit_8::subscript"],
+		"9:Caps", ["digit_9::modifier", "digit_9::subscript"],
+		"Equals:Caps", ["equals::modifier", "equals::subscript"],
+		"HyphenMinus:Caps", ["hyphen_minus::modifier", "hyphen_minus::subscript"],
+	),
+	"Moded", Map(
+		; Digits
+		"9", Map("+:Caps", ["left_parenthesis::modifier", "left_parenthesis::subscript"]),
+		"0", Map("+:Caps", ["right_parenthesis::modifier", "right_parenthesis::subscript"]),
+		"Equals", Map("+:Caps", ["plus::modifier", "plus::subscript"]),
+		"HyphenMinus", Map("+:Caps", ["underscore::modifier", "underscore::subscript"]),
+	)
+)
+
+subToSupDigits := Map(
+	"Flat", Map(
+		; Digits
+		"0:Caps", ["digit_0::subscript", "digit_0::modifier"],
+		"1:Caps", ["digit_1::subscript", "digit_1::modifier"],
+		"2:Caps", ["digit_2::subscript", "digit_2::modifier"],
+		"3:Caps", ["digit_3::subscript", "digit_3::modifier"],
+		"4:Caps", ["digit_4::subscript", "digit_4::modifier"],
+		"5:Caps", ["digit_5::subscript", "digit_5::modifier"],
+		"6:Caps", ["digit_6::subscript", "digit_6::modifier"],
+		"7:Caps", ["digit_7::subscript", "digit_7::modifier"],
+		"8:Caps", ["digit_8::subscript", "digit_8::modifier"],
+		"9:Caps", ["digit_9::subscript", "digit_9::modifier"],
+		"Equals:Caps", ["equals::subscript", "equals::modifier"],
+		"HyphenMinus:Caps", ["hyphen_minus::subscript", "hyphen_minus::modifier"],
+	),
+	"Moded", Map(
+		; Digits
+		"9", Map("+:Caps", ["left_parenthesis::subscript", "left_parenthesis::modifier"]),
+		"0", Map("+:Caps", ["right_parenthesis::subscript", "right_parenthesis::modifier"]),
+		"Equals", Map("+:Caps", ["plus::subscript", "plus::modifier"]),
+		"HyphenMinus", Map("+:Caps", ["underscore::subscript", "underscore::modifier"]),
+	)
+)
+
 flatBinds := Map(
 	"Flat", Map(
 		; Digits
@@ -798,7 +849,11 @@ defaultBindsOptions() {
 	}
 } defaultBindsOptions()
 
+
 importantBindsMap := BindList(importantBindsMap["Flat"], importantBindsMap["Moded"])
+
+supToSubDigits := BindList(supToSubDigits["Flat"], supToSubDigits["Moded"])
+subToSupDigits := BindList(subToSupDigits["Flat"], subToSupDigits["Moded"])
 
 flatBinds := BindList(flatBinds["Flat"], flatBinds["Moded"])
 
