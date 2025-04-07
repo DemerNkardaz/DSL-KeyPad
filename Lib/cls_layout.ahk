@@ -591,9 +591,9 @@ Class KeyboardBinder {
 		this.Registration(BindList.Get("common"), Cfg.FastKeysOn)
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
-		if userBindings != "None" {
+		if userBindings != "None" && Cfg.FastKeysOn {
 			link := this.userBindings.Get(userBindings)
-			this.Registration(BindList.Get(link), True)
+			this.Registration(BindList.Get(link), Cfg.FastKeysOn)
 		}
 
 		if StrLen(this.numStyle) > 0
@@ -616,9 +616,9 @@ Class KeyboardBinder {
 		this.Registration(BindList.Get("common"), Cfg.FastKeysOn)
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
-		if userBindings != "None" {
+		if userBindings != "None" && Cfg.FastKeysOn {
 			link := this.userBindings.Get(userBindings)
-			this.Registration(BindList.Get(link), True)
+			this.Registration(BindList.Get(link), Cfg.FastKeysOn)
 		}
 	}
 
