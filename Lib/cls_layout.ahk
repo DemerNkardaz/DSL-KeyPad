@@ -575,10 +575,10 @@ Class KeyboardBinder {
 		this.UnregisterAll()
 		this.CurrentLayouts(&latin, &cyrillic)
 		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(BindList.Get().keyboardDefault.mapping, True)
+			this.Registration(BindList.Get("keyboardDefault"), True)
 
-		this.Registration(BindList.Get().important.mapping, True)
-		this.Registration(BindList.Get().common.mapping, Cfg.FastKeysOn)
+		this.Registration(BindList.Get("important"), True)
+		this.Registration(BindList.Get("common"), Cfg.FastKeysOn)
 
 		if StrLen(this.numStyle) > 0
 			this.ToggleNumStyle(this.numStyle, True)
@@ -594,16 +594,16 @@ Class KeyboardBinder {
 		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(BindList.Get().keyboardDefault.mapping, True)
+			this.Registration(BindList.Get("keyboardDefault"), True)
 
-		this.Registration(BindList.Get().important.mapping, True)
-		this.Registration(BindList.Get().common.mapping, Cfg.FastKeysOn)
+		this.Registration(BindList.Get("important"), True)
+		this.Registration(BindList.Get("common"), Cfg.FastKeysOn)
 
 	}
 
 	static ToggleNumStyle(style := "superscript", force := False) {
 		this.numStyle := (style = this.numStyle && !force) ? "" : style
-		this.Registration(BindList.Get().%style%Digits.mapping, force ? force : StrLen(this.numStyle) > 0)
+		this.Registration(BindList.Get(style "Digits"), force ? force : StrLen(this.numStyle) > 0)
 
 		if StrLen(this.numStyle) == 0 {
 			this.RebuilBinds()

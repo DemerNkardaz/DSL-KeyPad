@@ -94,6 +94,7 @@ LaTeXMode := "Default"
 #Include <chr_entities>
 #Include <cls_util>
 #Include <chr_lib>
+#Include <chr_bindlist>
 #Include <cls_chr_lib>
 #Include <cls_chr_recipe_handler>
 #Include <cls_auxiliary>
