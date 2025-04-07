@@ -317,12 +317,6 @@ defaultBinds := Map(
 	),
 	"Moded", Map(
 		; Digit & Misc Layout
-		"0", Map(
-			"<^>!", "bracket_angle_math_right",
-			"<^>!<!", "infinity",
-			"<!", "bracket_square_right",
-			"<!<+", "bracket_curly_right"
-		),
 		"1", Map(
 			"<!", "section",
 			"<^>!", "inverted_exclamation",
@@ -350,11 +344,19 @@ defaultBinds := Map(
 			"<^>!<+", "double_question_exclamation",
 			"<^>!<!", "reversed_question"
 		),
-		"8", Map("<^>!", "multiplication"),
+		"8", Map(
+			"<^>!", "multiplication",
+			"<^>!<!", "infinity"
+		),
 		"9", Map(
-			"<^>!", "bracket_angle_math_left",
-			"<!", "bracket_square_left",
-			"<!<+", "bracket_curly_left"
+			"<^>!", "left_chevron",
+			"<!", "left_bracket",
+			"<!<+", "left_brace"
+		),
+		"0", Map(
+			"<^>!", "right_chevron",
+			"<!", "right_bracket",
+			"<!<+", "right_brace"
 		),
 		"Equals", Map(
 			"<^>!", ["noequals"],
@@ -371,6 +373,20 @@ defaultBinds := Map(
 			"<^>!<!", ["hyphen"],
 			"<^>!<!<+", ["no_break_hyphen"],
 			"<^>!<!>+", ["figure_dash"]
+		),
+		"LeftBracket", Map(
+			"<^>!<!", ["left_cjk_tortoise_shell"],
+			"<^>!<!<+", ["left_cjk_corner_bracket"],
+			"<^>!", ["left_bracket_with_quill"],
+			"<^>!>+", ["left_white_bracket"],
+			"<^>!<+", ["left_white_tortoise_shell"],
+		),
+		"RightBracket", Map(
+			"<^>!<!", ["right_cjk_tortoise_shell"],
+			"<^>!<!<+", ["right_cjk_corner_bracket"],
+			"<^>!", ["right_bracket_with_quill"],
+			"<^>!>+", ["right_white_bracket"],
+			"<^>!<+", ["right_white_tortoise_shell"],
 		),
 		"Slash", Map(
 			"<^>!", "ellipsis",
