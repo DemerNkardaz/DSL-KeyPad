@@ -2631,27 +2631,27 @@ LibRegistrate(this) {
 		},
 		"left_parenthesis", {
 			unicode: "{U+0028}",
-			options: { noCalc: True },
+			options: { noCalc: True, send: "Text" },
 		},
 		"right_parenthesis", {
 			unicode: "{U+0029}",
-			options: { noCalc: True },
+			options: { noCalc: True, send: "Text" },
 		},
 		"left_bracket", {
 			unicode: "{U+005B}",
-			options: { noCalc: True },
+			options: { noCalc: True, send: "Text" },
 		},
 		"right_bracket", {
 			unicode: "{U+005D}",
-			options: { noCalc: True },
+			options: { noCalc: True, send: "Text" },
 		},
 		"left_brace", {
 			unicode: "{U+007B}",
-			options: { noCalc: True },
+			options: { noCalc: True, send: "Text" },
 		},
 		"right_brace", {
 			unicode: "{U+007D}",
-			options: { noCalc: True },
+			options: { noCalc: True, send: "Text" },
 		},
 		;
 		;

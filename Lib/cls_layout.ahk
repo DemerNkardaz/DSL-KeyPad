@@ -65,10 +65,10 @@ Class LayoutList {
 	latin := Map(
 		"Semicolon", "SC027",
 		"Apostrophe", "SC028",
-		"Left_Bracket", "SC01A",
-		"Right_Bracket", "SC01B",
+		"LeftBracket", "SC01A",
+		"RightBracket", "SC01B",
 		"Tilde", "SC029",
-		"Hyphen-minus", "SC00C",
+		"HyphenMinus", "SC00C",
 		"Equals", "SC00D",
 		"Comma", "SC033",
 		"Dot", "SC034",
@@ -107,12 +107,12 @@ Class LayoutList {
 		"Х", "SC01A",
 		"Ъ", "SC01B",
 		"Ё", "SC029",
-		"Дефисо-минус", "SC00C",
+		"ДефисоМинус", "SC00C",
 		"Равно", "SC00D",
 		"Б", "SC033",
 		"Ю", "SC034",
 		"Точка", "SC035",
-		"Обратный_слэш", "SC02B",
+		"ОбратныйСлэш", "SC02B",
 		"Ф", "SC01E",
 		"И", "SC030",
 		"С", "SC02E",
@@ -180,7 +180,7 @@ Class KeyboardBinder {
 				"Left_Bracket", "SC00C",
 				"Right_Bracket", "SC00D",
 				"Tilde", "SC029",
-				"Hyphen-minus", "SC028",
+				"HyphenMinus", "SC028",
 				"Equals", "SC01B",
 				"Comma", "SC011",
 				"Dot", "SC012",
@@ -219,7 +219,7 @@ Class KeyboardBinder {
 				"Left_Bracket", "SC01A",
 				"Right_Bracket", "SC01B",
 				"Tilde", "SC029",
-				"Hyphen-minus", "SC00C",
+				"HyphenMinus", "SC00C",
 				"Equals", "SC00D",
 				"Comma", "SC033",
 				"Dot", "SC034",
@@ -261,12 +261,12 @@ Class KeyboardBinder {
 				"Ш", "SC01A",
 				"Щ", "SC01B",
 				"Ё", "SC029",
-				"Дефисо-минус", "SC00C",
+				"ДефисоМинус", "SC00C",
 				"Равно", "SC00D",
 				"П", "SC033",
 				"Г", "SC034",
 				"Ж", "SC035",
-				"Обратный_слэш", "SC02B",
+				"ОбратныйСлэш", "SC02B",
 				"У", "SC01E",
 				"Ю", "SC030",
 				"Х", "SC02E",
@@ -300,12 +300,12 @@ Class KeyboardBinder {
 				"Х", "SC01A",
 				"Ъ", "SC021",
 				"Ё", "SC029",
-				"Дефисо-минус", "SC01B",
+				"ДефисоМинус", "SC01B",
 				"Равно", "SC02B",
 				"Б", "SC034",
 				"Ю", "SC035",
 				"Точка", "",
-				"Обратный_слэш", "",
+				"ОбратныйСлэш", "",
 				"Ф", "SC01E",
 				"И", "SC031",
 				"С", "SC02F",
@@ -504,7 +504,9 @@ Class KeyboardBinder {
 
 							rules := Map(
 								"Caps", [binds],
+								"ReverseCase", [binds, True],
 								"Lang", isCyrillicKey ? [["", ""], binds] : [binds, ["", ""]],
+								"LangReverseCase", isCyrillicKey ? [["", ""], binds, True] : [binds, ["", ""], True],
 								"LangFlat", Util.IsArray(binds) && binds.Length == 2 ? [binds[1], binds[2]] : [binds],
 							)
 
@@ -513,9 +515,9 @@ Class KeyboardBinder {
 								rule := ruleMatch[1]
 
 
-							interCombo := RegExReplace(combo, keyLetter, scanCode)
+							interCombo := RegExReplace(combo, ":" rule "$", "")
+							interCombo := RegExReplace(interCombo, keyLetter, scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
-							interCombo := RegExReplace(interCombo, ":" rule "$", "")
 
 
 							if !output.Has(interCombo) {
