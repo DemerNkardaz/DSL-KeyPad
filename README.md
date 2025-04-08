@@ -819,8 +819,6 @@ Z=W
 ```ini
 [info]
 name=Esoteric Binds
-var=esoteric_binds
-; name и var (только «a–Z» и «_») — обязательные параметры.
 [binds]
 A=[alchemical_brimstone, alchemical_brimstone_philosophers]
 <^>!A=alchemical_brimstone_black

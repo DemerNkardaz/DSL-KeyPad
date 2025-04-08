@@ -8,6 +8,7 @@ Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
 Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
+Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 
 _ObjMaxIndex(this) {
@@ -170,6 +171,17 @@ _MapMergeWith(this, maps*) {
 		}
 	}
 	return this
+}
+
+_MapDeepClone(this) {
+	result := Map()
+	for key, value in this {
+		if IsObject(value) && value is Map
+			result[key] := value.DeepClone()
+		else
+			result[key] := value
+	}
+	return result
 }
 
 

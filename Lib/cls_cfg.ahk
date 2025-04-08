@@ -136,7 +136,7 @@ Class Cfg {
 			layoutCyrillicSelector.Text := Cfg.Get("Layout_Cyrillic")
 			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
 
-			bindingsList := KeyboardBinder.userBindings.Keys()
+			bindingsList := KeyboardBinder.userBindings.Clone()
 			bindingsList.InsertAt(1, Locale.Read("gui_options_bindings_none"))
 			currentBindings := Cfg.Get("Active_User_Bindings", , "None")
 			currentBindings := currentBindings = "None" ? Locale.Read("gui_options_bindings_none") : currentBindings

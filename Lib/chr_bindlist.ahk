@@ -1,5 +1,6 @@
-bindingMaps := {
-	important: Map(
+bindingMaps := Map(
+	"User", Map(),
+	"important", Map(
 		"Flat", Map(
 			"RAlt", (*) => ProceedCompose(),
 		),
@@ -72,8 +73,9 @@ bindingMaps := {
 			"I", Map(
 				">^", (*) => ReplaceWithUnicode("Hex"),
 			),
-		)),
-	keyboardDefault: Map(
+		)
+	),
+	"keyboardDefault", Map(
 		"Flat", Map(
 			; Digits
 			"0", "digit_0",
@@ -192,7 +194,7 @@ bindingMaps := {
 			"ОбратныйСлэш", Map("+", ["solidus"]),
 		)
 	),
-	romanDigits: Map(
+	"romanDigits", Map(
 		"Flat", Map(
 			; Digits
 			"1:Caps", ["lat_c_num_1", "lat_s_num_1"],
@@ -224,7 +226,7 @@ bindingMaps := {
 			),
 		),
 	),
-	subscriptDigits: Map(
+	"subscriptDigits", Map(
 		"Flat", Map(
 			; Digits
 			"0:Caps", ["digit_0::modifier", "digit_0::subscript"],
@@ -247,7 +249,7 @@ bindingMaps := {
 			"Equals", Map("+:Caps", ["plus::modifier", "plus::subscript"]),
 		)
 	),
-	superscriptDigits: Map(
+	"superscriptDigits", Map(
 		"Flat", Map(
 			; Digits
 			"0:Caps", ["digit_0::subscript", "digit_0::modifier"],
@@ -270,7 +272,7 @@ bindingMaps := {
 			"Equals", Map("+:Caps", ["plus::subscript", "plus::modifier"]),
 		)
 	),
-	diacritic: Map(
+	"diacritic", Map(
 		"Flat", Map(),
 		"Moded", Map(
 			"A", Map(
@@ -359,7 +361,7 @@ bindingMaps := {
 			)
 		)
 	),
-	common: Map(
+	"common", Map(
 		"Flat", Map(
 			"NumpadSub", "minus",
 			"NumpadDiv", "division",
@@ -836,4 +838,4 @@ bindingMaps := {
 			)
 		)
 	),
-}
+)

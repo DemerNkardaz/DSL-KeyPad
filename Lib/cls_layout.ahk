@@ -368,7 +368,7 @@ Class KeyboardBinder {
 	static disabledByUser := False
 	static numStyle := ""
 	static userLayoutsNames := []
-	static userBindings := Map()
+	static userBindings := []
 
 	static __New() {
 		for key, path in this.autoimport.OwnProps() {
@@ -592,8 +592,7 @@ Class KeyboardBinder {
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
 		if userBindings != "None" && Cfg.FastKeysOn {
-			link := this.userBindings.Get(userBindings)
-			this.Registration(BindList.Get(link), Cfg.FastKeysOn)
+			this.Registration(BindList.Get(userBindings, "User"), Cfg.FastKeysOn)
 		}
 
 		if StrLen(this.numStyle) > 0
@@ -617,8 +616,7 @@ Class KeyboardBinder {
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
 		if userBindings != "None" && Cfg.FastKeysOn {
-			link := this.userBindings.Get(userBindings)
-			this.Registration(BindList.Get(link), Cfg.FastKeysOn)
+			this.Registration(BindList.Get(userBindings, "User"), Cfg.FastKeysOn)
 		}
 	}
 
@@ -659,25 +657,18 @@ Class KeyboardBinder {
 	}
 
 	static SetBinds(name := Locale.Read("gui_options_bindings_none")) {
-		if name = Locale.Read("gui_options_bindings_none") {
-			Cfg.Set("None", "Active_User_Bindings")
-			this.RebuilBinds()
-			return
-		} else {
-			Cfg.Set(name, "Active_User_Bindings")
-			this.RebuilBinds()
-		}
+		Cfg.Set(name = Locale.Read("gui_options_bindings_none") ? "None" : name, "Active_User_Bindings")
+		this.RebuilBinds()
 	}
 
 	static UserBinds() {
 		Loop Files this.autoimport.binds "\*.ini" {
 			name := IniRead(A_LoopFileFullPath, "info", "name", "")
-			var := IniRead(A_LoopFileFullPath, "info", "var", "")
 			bindsMap := Util.INIToMap(A_LoopFileFullPath)
 
-			if StrLen(name) > 0 && StrLen(var) > 0 && bindsMap.Has("binds") {
-				this.userBindings.Set(name, "user_" var)
-				this.UserBindsHandler(bindsMap["binds"], name, var)
+			if StrLen(name) > 0 && bindsMap.Has("binds") {
+				this.userBindings.Push(name)
+				this.UserBindsHandler(bindsMap["binds"], name)
 			}
 		}
 
@@ -687,8 +678,8 @@ Class KeyboardBinder {
 		}
 	}
 
-	static UserBindsHandler(bindsMap := Map(), name := "", var := "") {
-		if bindsMap.Count > 0 && StrLen(name) > 0 && StrLen(var) > 0 {
+	static UserBindsHandler(bindsMap := Map(), name := "") {
+		if bindsMap.Count > 0 && StrLen(name) > 0 {
 			interMap := Map("Flat", Map(), "Moded", Map())
 			for combo, reference in bindsMap {
 				interRef := reference
@@ -718,7 +709,7 @@ Class KeyboardBinder {
 				}
 
 			}
-			bindingMaps.user_%var% := interMap
+			bindingMaps["User"].Set(name, interMap)
 
 		}
 	}
