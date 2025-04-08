@@ -2627,6 +2627,20 @@ LibRegistrate(this) {
 			options: { groupKey: ["9"], altSpecialKey: "[Num-]", fastKey: "<+ [-]" },
 			recipe: ["min"],
 		},
+		"plusminus", {
+			unicode: "{U+00B1}",
+			tags: ["plus minus", "плюс-минус"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary", "Special Fast"],
+			options: { groupKey: ["+"], altSpecialKey: "[Num- Num+]", fastKey: "<+ [=]" },
+			recipe: ["+-", "${plus}${minus}"],
+		},
+		"minusplus", {
+			unicode: "{U+2213}",
+			tags: ["minus plus", "минус-плюс"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast"],
+			options: { altSpecialKey: "[Num+ Num-]" },
+			recipe: ["-+", "${minus}${plus}"],
+		},
 		"tilde", {
 			unicode: "{U+007E}",
 			options: { noCalc: True },

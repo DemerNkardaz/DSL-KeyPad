@@ -31,11 +31,11 @@ bindingMaps := Map(
 				">^", (*) => KeyboardBinder.SwitchLayout("Latin"),
 				">+", (*) => KeyboardBinder.SwitchLayout("Cyrillic")
 			),
-			"ArrUp", Map(
+			"Up", Map(
 				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Superscript"),
 				"<#<!>+", (*) => KeyboardBinder.ToggleNumStyle("Roman"),
 			),
-			"ArrDown", Map(
+			"Down", Map(
 				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Subscript"),
 			),
 			"PgUp", Map("<#<!", (*) => FindCharacterPage(),),
@@ -365,7 +365,12 @@ bindingMaps := Map(
 	),
 	"Common", Map(
 		"Flat", Map(
-			"NumpadSub", "minus",
+			"NumpadAdd", (K) => BindHandler.TimeSend(K, Map(
+				"NumpadSub", (*) => BindHandler.Send(K, "minusplus"),
+			), (*) => BindHandler.Send(K, "plus")),
+			"NumpadSub", (K) => BindHandler.TimeSend(K, Map(
+				"NumpadAdd", (*) => BindHandler.Send(K, "plusminus"),
+			), (*) => BindHandler.Send(K, "minus")),
 			"NumpadDiv", "division",
 			"NumpadMult", "multiplication"
 		),

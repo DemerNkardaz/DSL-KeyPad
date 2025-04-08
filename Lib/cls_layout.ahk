@@ -34,10 +34,10 @@ Class LayoutList {
 		"RAlt", "SC138",
 		"Backspace", "SC00E",
 		"Enter", "SC01C",
-		"ArrLeft", "SC14B",
-		"ArrUp", "SC148",
-		"ArrRight", "SC14D",
-		"ArrDown", "SC150",
+		"Left", "SC14B",
+		"Up", "SC148",
+		"Right", "SC14D",
+		"Down", "SC150",
 		"F1", "SC03B",
 		"F2", "SC03C",
 		"F3", "SC03D",
@@ -711,7 +711,7 @@ Class Scripter {
 }
 
 Class BindHandler {
-	static isComboPressed := False
+	static waitTimeSend := False
 
 	static Send(combo := "", characterNames*) {
 		Keyboard.CheckLayout(&lang)
@@ -770,8 +770,12 @@ Class BindHandler {
 		}
 	}
 
-	static TimeSend(combo := "", secondKeysActions := Map(), DefaultAction := False, timeLimit := -25) {
-		this.isComboPressed := False
+	static TimeSend(combo := "", secondKeysActions := Map(), DefaultAction := False, timeLimit := "0.1") {
+		if this.waitTimeSend {
+			Send("{" combo "}")
+			return
+		}
+		this.waitTimeSend := True
 
 		Util.StrBind(combo, &keyRef, &modRef, &rulRef)
 		layoutMap := KeyboardBinder.GetCurrentLayoutMap()
@@ -784,16 +788,26 @@ Class BindHandler {
 			}
 		}
 
-		if secondKeysActions is Map {
-			for key, action in secondKeysActions {
+		endKeys := "{LControl}{RControl}{LAlt}{RAlt}{LShift}{RShift}{LWin}{RWin}{AppsKey}{F1}{F2}{F3}{F4}{F5}{F6}{F7}{F8}{F9}{F10}{F11}{F12}{Left}{Right}{Up}{Down}{Home}{End}{PgUp}{PgDn}{Del}{Ins}{BS}{Capslock}{Numlock}{PrintScreen}{Pause}{Numpad0}{Numpad1}{Numpad2}{Numpad3}{Numpad4}{Numpad5}{Numpad6}{Numpad7}{Numpad8}{Numpad9}{NumpadDot}{NumpadDiv}{NumpadMult}{NumpadAdd}{NumpadSub}{NumpadEnter}"
+		IH := InputHook("L1 T" timeLimit, endKeys)
+		IH.Start()
+		IH.Wait()
 
-			}
+		keyPressed := StrLen(IH.Input) > 0 ? StrUpper(IH.Input) : StrLen(IH.EndKey) > 0 ? IH.EndKey : ""
+
+		if StrLen(keyPressed) > 0 &&
+			secondKeysActions is Map &&
+			secondKeysActions.Has(keyPressed) &&
+			secondKeysActions[keyPressed] is Func {
+			secondKeysActions[keyPressed]()
+		} else {
+			Reset()
 		}
 
+		this.waitTimeSend := False
 
 		Reset() {
 			!DefaultAction ? KeyRecovery() : DefaultAction()
-			this.isComboPressed := False
 		}
 
 		KeyRecovery() {
