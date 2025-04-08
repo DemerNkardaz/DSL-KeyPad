@@ -3157,6 +3157,18 @@ LibRegistrate(this) {
 				["rn 1k"]
 			]
 		},
+		"lat_c_num_[6_late,50_early]", {
+			unicode: ["{U+2185}", "{U+2186}"],
+			options: { useLetterLocale: True, numericValue: [6, 50], },
+			recipe: [["RN L6"], ["RN E50"]],
+			symbol: { afterLetter: ["late", "early"] }
+		},
+		"lat_c_num_100_reversed", {
+			unicode: "{U+2183}",
+			options: { useLetterLocale: True, numericValue: 100, },
+			recipe: ["RN 100${arrow_left_circle}", "${lat_c_num_100}${arrow_right_circle}"],
+			symbol: { beforeLetter: "reversed" }
+		},
 		;
 		;
 		; * Uncommon Latin Letters
@@ -7786,11 +7798,23 @@ LibRegistrate(this) {
 			groups: ["Wallet Signs"],
 			recipe: ["P=", "PHP"],
 		},
-		"wallet_roman_denarius", {
-			unicode: "{U+10196}",
-			tags: ["римский денарий", "roman denarius"],
+		"wallet_roman_[denarius,quinarius,sestertius,dupondius,as]", {
+			unicode: ["{U+10196}", "{U+10197}", "{U+10198}", "{U+10199}", "{U+1019A}"],
+			tags: [
+				["римский денарий", "roman denarius"],
+				["римский квинарий", "roman quinarius"],
+				["римский сестерций", "roman sestertius"],
+				["римский дупондий", "roman dupondius"],
+				["римский асс", "roman as"],
+			],
 			groups: ["Wallet Signs"],
-			recipe: ["X-", "DIN"],
+			recipe: [
+				["X-", "DIN"],
+				["V-", "QIN"],
+				["H-S", "SES"],
+				["I-I", "DUP"],
+				["/-", "ASE"],
+			],
 		},
 		"wallet_bitcoin", {
 			unicode: "{U+20BF}",

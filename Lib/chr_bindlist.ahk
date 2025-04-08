@@ -212,12 +212,14 @@ bindingMaps := Map(
 			; Digits
 			"1", Map("<+:Caps", ["lat_c_num_11", "lat_s_num_11"]),
 			"2", Map("<+:Caps", ["lat_c_num_12", "lat_s_num_12"]),
-			"ⅴ", Map(
+			"5", Map(
 				"<+:Caps", ["lat_c_num_50", "lat_s_num_50"],
 				">+:Caps", ["lat_c_num_500", "lat_s_num_500"],
 				"<^>!", "lat_c_num_5000",
 				"<^>!>+", "lat_c_num_50000",
+				"<^>!<!", "lat_c_num_50_early",
 			),
+			"6", Map("<^>!<!", "lat_c_num_6_late"),
 			"0", Map(
 				">+:Caps", ["lat_c_num_100", "lat_s_num_100"],
 				"<^>!:Caps", ["lat_c_num_1000", "lat_s_num_1000"],

@@ -142,9 +142,10 @@ class ChrLib {
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
 
 				entries.%variantName%.symbol := entry.symbol.Clone()
-				if Util.IsArray(entries.%variantName%.symbol.letter) {
-					entries.%variantName%.symbol.letter := entry.symbol.letter[i]
-				}
+				entries.%variantName%.symbol := this.CloneOptions(entry.symbol, i)
+				; if Util.IsArray(entries.%variantName%.symbol.letter) {
+				; entries.%variantName%.symbol.letter := entry.symbol.letter[i]
+				; }
 
 				if Util.IsArray(entry.alterations) {
 					entries.%variantName%.alterations := entry.alterations[i].Clone()
