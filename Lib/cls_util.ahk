@@ -1,45 +1,7 @@
 Class Util {
-
-	static IsArray(value) {
-		return Type(value) = "Array"
-	}
-
-	static IsObject(value) {
-		return Type(value) = "Object"
-	}
-
-	static IsMap(value) {
-		return Type(value) = "Map"
-	}
-
-	static IsString(value) {
-		return Type(value) = "String"
-	}
-
-	static IsNumber(value) {
-		return Type(value) = "Number"
-	}
-
-	static IsInt(value) {
-		return Type(value) = "Integer"
-	}
-
 	static IsBool(value) {
-		return Type(value) = "Boolean"
+		return Type(value) = "Integer" && value >= 0 && value <= 1
 	}
-
-	static IsClass(value) {
-		return Type(value) = "Class"
-	}
-
-	static IsFunc(value) {
-		return Type(value) = "Func"
-	}
-
-	static IsClipboardTextOnly() {
-		return
-	}
-
 	static GetTimeStr() {
 		return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
 	}
@@ -64,7 +26,6 @@ Class Util {
 	static SendDate(DateStyle := "YYYYMMDDhhmmss") {
 		SendText(this.GetDate(DateStyle))
 	}
-
 
 	static StrTrim(Str, chrs := "\s+") {
 		return RegExReplace(Str, chrs)

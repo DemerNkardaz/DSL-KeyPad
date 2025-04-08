@@ -44,10 +44,10 @@ Class ChrEntry {
 		attributes := ChrEntry.Proxying(this, attributes)
 
 		for key, value in attributes.OwnProps() {
-			if Util.IsArray(value) {
+			if value is Array {
 				this.%key% := []
 				this.%key% := value.Clone()
-			} else if Util.IsObject(value) {
+			} else if value is Object {
 				for subKey, subValue in value.OwnProps() {
 					this.%key%.%subKey% := subValue
 				}
@@ -78,9 +78,9 @@ Class ChrEntry {
 					continue
 				}
 
-				if Util.IsArray(value) {
+				if value is Array {
 					root.%key% := value.Clone()
-				} else if Util.IsObject(value) {
+				} else if value is Object {
 					root.%key% := {}
 					for subKey, subValue in value.OwnProps() {
 						root.%key%.%subKey% := subValue
@@ -91,9 +91,9 @@ Class ChrEntry {
 			}
 
 			for key, value in attributes.OwnProps() {
-				if Util.IsArray(value) {
+				if value is Array {
 					root.%key% := value.Clone()
-				} else if Util.IsObject(value) && root.HasOwnProp(key) {
+				} else if value is Object && root.HasOwnProp(key) {
 					for subKey, subValue in value.OwnProps() {
 						root.%key%.%subKey% := subValue
 					}
@@ -135,9 +135,9 @@ class ChrLib {
 				variantName := RegExReplace(entryName, "\[.*?\]", variant)
 				entries.%variantName% := entry.Clone()
 
-				if Util.IsArray(entry.unicode)
+				if entry.unicode is Array
 					entries.%variantName%.unicode := entry.unicode[i]
-				if Util.IsArray(entry.proxy)
+				if entry.proxy is Array
 					entries.%variantName%.proxy := entry.proxy[i]
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
 
@@ -147,7 +147,7 @@ class ChrLib {
 				; entries.%variantName%.symbol.letter := entry.symbol.letter[i]
 				; }
 
-				if Util.IsArray(entry.alterations) {
+				if entry.alterations is Array {
 					entries.%variantName%.alterations := entry.alterations[i].Clone()
 				}
 
@@ -437,7 +437,7 @@ class ChrLib {
 
 	static ProcessReferences(targetEntry, sourceEntry, index) {
 		for reference in ["recipe", "tags", "groups"] {
-			if sourceEntry.%reference%.Length > 0 && Util.IsArray(sourceEntry.%reference%[sourceEntry.%reference%.Length]) {
+			if sourceEntry.%reference%.Length > 0 && sourceEntry.%reference%[sourceEntry.%reference%.Length] is Array {
 				if sourceEntry.%reference%[index].Length > 0 {
 					targetEntry.%reference% := sourceEntry.%reference%[index].Clone()
 				} else {
@@ -450,7 +450,7 @@ class ChrLib {
 	static CloneOptions(sourceOptions, index) {
 		tempOptions := sourceOptions.Clone()
 		for key, value in sourceOptions.OwnProps() {
-			if Util.IsArray(sourceOptions.%key%) && key != "groupKey" && sourceOptions.%key%.Length > 0 {
+			if sourceOptions.%key% is Array && key != "groupKey" && sourceOptions.%key%.Length > 0 {
 				tempOptions.%key% := sourceOptions.%key%[index]
 			}
 		}
@@ -480,7 +480,7 @@ class ChrLib {
 					tempRecipe[i] := RegExReplace(tempRecipe[i], "\/(.*?)\/", entry.data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
 				}
 				if RegExMatch(tempRecipe[i], "\\(.*?)\\", &match) {
-					tempRecipe[i] := RegExReplace(tempRecipe[i], "\\(.*?)\\", entry.data.case = "capital" ? Util.StrUpper(match[1]) : Util.StrLower(match[1]))
+					tempRecipe[i] := RegExReplace(tempRecipe[i], "\\(.*?)\\", entry.data.case = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
 				}
 			}
 			entry.recipe := tempRecipe
@@ -519,10 +519,10 @@ class ChrLib {
 	static TransferArrayProperty(entryName, key, value) {
 		this.entries.%entryName%.%key% := []
 		for subValue in value {
-			if Util.IsFunc(subValue) {
+			if subValue is Func {
 				interObj := {}
 				interObj.DefineProp("Get", { Get: subValue, Set: subValue })
-				if Util.IsArray(interObj.Get) {
+				if interObj.Get is Array {
 					for interValue in interObj.Get {
 						this.entries.%entryName%.%key%.Push(interValue)
 					}
@@ -538,7 +538,7 @@ class ChrLib {
 	static TransferMapProperty(entryName, key, value) {
 		this.entries.%entryName%.%key% := Map()
 		for mapKey, mapValue in value {
-			if Util.IsFunc(mapValue) {
+			if mapValue is Func {
 				interObj := {}
 				interObj.DefineProp("Get", { Get: mapValue, Set: mapValue })
 				this.entries.%entryName%.%key%.Set(mapKey, interObj.Get)
@@ -551,7 +551,7 @@ class ChrLib {
 	static TransferObjectProperty(entryName, key, value) {
 		this.entries.%entryName%.%key% := {}
 		for subKey, subValue in value.OwnProps() {
-			if Util.IsFunc(subValue) {
+			if subValue is Func {
 				this.entries.%entryName%.%key%.DefineProp(subKey, {
 					Get: subValue,
 					Set: subValue
@@ -572,8 +572,8 @@ class ChrLib {
 				if ["hellenic", "latin", "cyrillic"].HasValue(refinedEntry.data.script) {
 					refinedEntry.groups :=
 						(StrLen(refinedEntry.data.type) > 0 && ["digraph", "ligature", "numeral"].HasValue(refinedEntry.data.type) ?
-							[Util.StrUpper(refinedEntry.data.script, 1) " " Util.StrUpper(refinedEntry.data.type, 1) "s"] :
-							[Util.StrUpper(refinedEntry.data.script, 1) (hasPostfix ? " Accented" : "")]
+							[StrTitle(refinedEntry.data.script " " refinedEntry.data.type "s")] :
+							[StrTitle(refinedEntry.data.script (hasPostfix ? " Accented" : ""))]
 						)
 				}
 
@@ -586,7 +586,7 @@ class ChrLib {
 				if StrLen(refinedEntry.data.script) && StrLen(refinedEntry.data.type) {
 
 					hasPostfix := refinedEntry.data.postfixes.Length > 0
-					refinedEntry.symbol.category := Util.StrUpper(refinedEntry.data.script, 1) " " Util.StrUpper(refinedEntry.data.type, 1) (hasPostfix ? " Accented" : "")
+					refinedEntry.symbol.category := StrTitle(refinedEntry.data.script " " refinedEntry.data.type (hasPostfix ? " Accented" : ""))
 				} else {
 					refinedEntry.symbol.category := "N/A"
 				}
@@ -889,19 +889,19 @@ class ChrLib {
 		indentStr := Util.StrRepeat("`t", indent)
 
 		for key, value in entry.OwnProps() {
-			if Util.IsArray(value) {
+			if value is Array {
 				output .= indentStr key ": [`n"
 				for subValue in value {
-					if Util.IsArray(subValue) {
+					if subValue is Array {
 						output .= indentStr "`t[" subValue.ToString(, "'") indentStr "]`n"
 					} else {
 						output .= indentStr "`t'" subValue "'`n"
 					}
 				}
 				output .= indentStr "]`n"
-			} else if Util.IsObject(value) {
+			} else if value is Object {
 				output .= indentStr key ": {`n" this.FormatEntry(value, indent + 1) indentStr "}`n"
-			} else if Util.IsMap(value) {
+			} else if value is Map {
 				output .= indentStr key ": (`n"
 				for mapKey, mapValue in value {
 					output .= indentStr "`t" mapKey ": '" mapValue "'`n"

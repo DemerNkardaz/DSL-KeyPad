@@ -23,7 +23,7 @@ _ObjMaxIndex(this) {
 _ArrayToFlat(this) {
 	result := []
 	for item in this {
-		if Util.IsArray(item) {
+		if item is Array {
 			for subItem in item {
 				result.Push(subItem)
 			}
@@ -38,14 +38,14 @@ _ArrayToString(this, separator := ", ", bounds := "") {
 	str := ""
 	for index, value in this {
 		if index = this.Length {
-			if Util.IsArray(value) {
+			if value is Array {
 				str .= bounds value.ToString(separator, bounds) bounds
 			} else {
 				str .= bounds value bounds
 			}
 			break
 		}
-		if Util.IsArray(value) {
+		if value is Array {
 			str .= bounds value.ToString(separator, bounds) bounds separator
 		} else {
 			str .= bounds value bounds separator
@@ -163,7 +163,7 @@ _MapToArray(this) {
 _MapMergeWith(this, maps*) {
 	for mapIdx, mapToMerge in maps {
 		for key, val in mapToMerge {
-			if this.Has(key) && Util.IsMap(this[key]) {
+			if this.Has(key) && this[key] is Map {
 				this[key].MergeWith(val)
 			} else {
 				this.Set(key, val)

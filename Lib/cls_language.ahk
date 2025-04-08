@@ -74,7 +74,7 @@ Class Language {
 
 	static Get(language := "") {
 		userLanguage := StrLen(language) > 0 ? language : Cfg.Get("User_Language")
-		userLanguage := userLanguage != "" ? userLanguage : this.GetSys()
+		userLanguage := !IsSpace(userLanguage) ? userLanguage : this.GetSys()
 
 		if this.Validate(userLanguage) {
 			return userLanguage
@@ -176,14 +176,14 @@ Class Locale extends Language {
 
 	static Read(EntryName, Prefix := "", validate := False, &output?) {
 		Intermediate := ""
-		Section := this.Validate(Prefix) ? Prefix : (Prefix != "" ? Prefix "_" this.Get() : this.Get())
+		Section := this.Validate(Prefix) ? Prefix : (!IsSpace(Prefix) ? Prefix "_" this.Get() : this.Get())
 		try {
 			;Intermediate := IniRead(this.locales, Section, EntryName, "")
 			Intermediate := this.ReadStr(Section, EntryName)
 
 			while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
 				LangCode := match[1]
-				SectionOverride := Prefix != "" ? Prefix . "_" . LangCode : LangCode
+				SectionOverride := !IsSpace(Prefix) ? Prefix "_" LangCode : LangCode
 				Replacement := this.ReadStr(SectionOverride, EntryName)
 				Intermediate := StrReplace(Intermediate, match[0], Replacement)
 			}
@@ -192,7 +192,7 @@ Class Locale extends Language {
 				CustomPrefix := match[1] ? match[1] : ""
 				LangCode := match[2]
 				CustomEntry := match[3]
-				SectionOverride := CustomPrefix != "" ? CustomPrefix . "_" . LangCode : LangCode
+				SectionOverride := !IsSpace(CustomPrefix) ? CustomPrefix "_" LangCode : LangCode
 				Replacement := this.ReadStr(SectionOverride, CustomEntry)
 				Intermediate := StrReplace(Intermediate, match[0], Replacement)
 			}
@@ -208,7 +208,7 @@ Class Locale extends Language {
 				if IsSet(%Varname%) {
 					Replacement := %Varname%
 				} else {
-					Replacement := "VAR (" . Varname . "): NOT FOUND"
+					Replacement := "VAR (" Varname "): NOT FOUND"
 				}
 				Intermediate := StrReplace(Intermediate, match[0], Replacement)
 			}
@@ -220,7 +220,7 @@ Class Locale extends Language {
 			output := Intermediate
 			return StrLen(Intermediate) > 0
 		} else {
-			Intermediate := Intermediate != "" ? Intermediate : "KEY (" . EntryName . "): NOT FOUND"
+			Intermediate := !IsSpace(Intermediate) ? Intermediate : "KEY (" EntryName "): NOT FOUND"
 			return Intermediate
 		}
 	}
@@ -263,7 +263,7 @@ Class Locale extends Language {
 		for _, langCode in langCodes {
 			isAlt := InStr(langCode, "_alt")
 			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
-			postLetter := useLetterLocale ? Locale.Read((useLetterLocale = "Origin" ? RegExReplace(entryName, "i)^(.*?)__.*", "$1") : entryName) "_letterTitle", lang) : letter
+			postLetter := useLetterLocale ? Locale.Read((useLetterLocale = "Origin" ? RegExReplace(entryName, "i)^(.*?)__.*", "$1") : entryName) "_LTL", lang) : letter
 
 			lBeforeletter := entry.symbol.HasOwnProp("beforeLetter") && StrLen(entry.symbol.beforeLetter) > 0 ? Locale.Read(pfx "beforeLetter_" entry.symbol.beforeLetter, lang) " " : ""
 			lAfterletter := entry.symbol.HasOwnProp("afterLetter") && StrLen(entry.symbol.afterLetter) > 0 ? " " Locale.Read(pfx "afterLetter_" entry.symbol.afterLetter, lang) : ""

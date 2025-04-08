@@ -374,13 +374,13 @@ Class MyRecipes {
 									options.recipePrefix := StrSplit(options.recipePrefix, "|")
 
 								recipe := (
-									Util.IsArray(options.recipePrefix)
+									options.recipePrefix is Array
 										? options.recipePrefix[1]
 									: options.recipePrefix
 								) (
 									options.noWhitespace
-									|| Util.IsString(options.recipePrefix) && StrLen(options.recipePrefix) == 0
-									|| Util.IsArray(options.recipePrefix) && options.recipePrefix.Length == 1
+									|| options.recipePrefix is String && StrLen(options.recipePrefix) == 0
+									|| options.recipePrefix is Array && options.recipePrefix.Length == 1
 										? "" : " "
 								) recipe
 							}
@@ -521,14 +521,14 @@ Class MyRecipes {
 						}),
 					)
 				} catch {
-					MsgBox("[" section.section "]`n" Util.StrVarsInject(Locale.Read("gui_recipes_create_invalid_recipe"), Util.IsArray(section.recipe) ? section.recipe.ToString("") : section.recipe, Util.IsArray(section.result) ? section.result.ToString("") : section.result), App.winTitle)
+					MsgBox("[" section.section "]`n" Util.StrVarsInject(Locale.Read("gui_recipes_create_invalid_recipe"), section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result), App.winTitle)
 				}
 			}
 		}
 	}
 
 	static HandleResult(resultIn) {
-		if Util.IsArray(resultIn)
+		if resultIn is Array
 			resultIn := resultIn.ToString("")
 		output := []
 		i := 1

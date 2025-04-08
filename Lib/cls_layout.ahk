@@ -423,7 +423,7 @@ Class KeyboardBinder {
 	}
 
 	static SwitchLayout(scriptType := "Latin") {
-		scriptType := Util.StrLower(scriptType)
+		scriptType := StrLower(scriptType)
 		nextLayout := False
 
 		if this.layouts.HasOwnProp(scriptType) {
@@ -482,19 +482,19 @@ Class KeyboardBinder {
 	}
 
 	static CompileBridge(combo, bind, targetMap) {
-		if bind.Length == 1 && Util.IsString(bind[1]) {
+		if bind.Length == 1 && bind[1] is String {
 			targetMap.Set(combo, (K) => BindHandler.Send(K, bind[1]))
-		} else if (bind.Length = 1 && Util.IsArray(bind[1])) ||
-			(bind.Length == 2 && Util.IsArray(bind[1]) && Util.IsBool(bind[2])) {
+		} else if (bind.Length = 1 && bind[1] is Array) ||
+			(bind.Length == 2 && bind[1] is Array && Util.IsBool(bind[2])) {
 			reverse := bind.Length == 2 ? bind[2] : False
 			targetMap.Set(combo, (K) => BindHandler.CapsSend(K, bind[1], reverse))
 		} else if bind.Length >= 2 {
 			reverse := bind.Length == 3 ? bind[3] : { en: False, ru: False }
 			targetMap.Set(combo, (K) => BindHandler.LangSend(K, { en: bind[1], ru: bind[2], }, reverse))
-		} else if Util.IsFunc(bind[1]) {
+		} else if bind[1] is Func {
 			targetMap.Set(combo, bind[1])
 		} else {
-			valueStr := (Util.IsArray(bind) && !Util.IsFunc(bind[1])) ? bind.ToString() : (Util.IsFunc(bind[1]) ? "<Function>" : "<Unknown>")
+			valueStr := (bind is Array && !(bind[1] is Func)) ? bind.ToString() : (bind[1] is Func ? "<Function>" : "<Unknown>")
 			MsgBox("Invalid binding format for combo: " combo " with value: " valueStr)
 		}
 	}
@@ -518,10 +518,10 @@ Class KeyboardBinder {
 								"ReverseCase", [binds, True],
 								"Lang", isCyrillicKey ? [["", ""], binds] : [binds, ["", ""]],
 								"LangReverseCase", isCyrillicKey ? [["", ""], binds, True] : [binds, ["", ""], True],
-								"LangFlat", Util.IsArray(binds) && binds.Length == 2 ? [binds[1], binds[2]] : [binds],
+								"LangFlat", binds is Array && binds.Length == 2 ? [binds[1], binds[2]] : [binds],
 							)
 
-							rule := Util.IsArray(binds) ? "Lang" : ""
+							rule := binds is Array ? "Lang" : ""
 							if RegExMatch(combo, ":(.*?)$", &ruleMatch)
 								rule := ruleMatch[1]
 
@@ -533,7 +533,7 @@ Class KeyboardBinder {
 
 							if !output.Has(interCombo) {
 								output.Set(interCombo,
-									Util.IsString(binds) || Util.IsFunc(binds) ? [binds] :
+									binds is String || binds is Func ? [binds] :
 									rules[rule]
 								)
 							} else {
@@ -636,7 +636,7 @@ Class KeyboardBinder {
 			layoutMap := Util.INIToMap(A_LoopFileFullPath)
 
 			if StrLen(scriptName) > 0 && StrLen(scriptType) > 0 && this.layouts.HasOwnProp(scriptType) && layoutMap.Has("keys") {
-				scriptType := Util.StrLower(scriptType)
+				scriptType := StrLower(scriptType)
 				layoutBase := LayoutList(scriptType)
 				outputLayout := Map()
 
@@ -768,10 +768,10 @@ Class BindHandler {
 
 		if Language.Validate(lang, "bindings") {
 			if charactersObj.HasOwnProp(lang) {
-				if Util.IsArray(charactersObj.%lang%) && charactersObj.%lang%.Length == 2 {
+				if charactersObj.%lang% is Array && charactersObj.%lang%.Length == 2 {
 					this.CapsSend(combo, charactersObj.%lang%, reverse.%lang%)
 				} else {
-					this.Send(combo, Util.IsArray(charactersObj.%lang%) ? charactersObj.%lang%[1] : charactersObj.%lang%)
+					this.Send(combo, charactersObj.%lang% is Array ? charactersObj.%lang%[1] : charactersObj.%lang%)
 				}
 			}
 		}

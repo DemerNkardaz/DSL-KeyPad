@@ -22,28 +22,28 @@ Class ChrRecipeHandler {
 				recipePair[2] := StrReplace(recipePair[2], "$(*)", "${" match[1] "}")
 
 				for pairRecipe in recipePair {
-					if Util.IsArray(outputArray) {
+					if outputArray is Array {
 						outputArray.Push(this.ProcessRecipeString(pairRecipe))
 					} else {
 						output .= this.ProcessRecipeString(pairRecipe)
 					}
 				}
 			} else {
-				if Util.IsArray(outputArray) {
+				if outputArray is Array {
 					outputArray.Push(this.ProcessRecipeString(recipe))
 				} else {
 					output .= this.ProcessRecipeString(recipe)
 				}
 			}
 		} else {
-			if Util.IsArray(outputArray) {
+			if outputArray is Array {
 				outputArray.Push(recipe)
 			} else {
 				output .= recipe
 			}
 		}
 
-		if Util.IsString(outputArray)
+		if outputArray is String
 			return output
 	}
 

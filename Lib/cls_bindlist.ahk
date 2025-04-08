@@ -22,7 +22,7 @@ Class BindList {
 
 	static __New() {
 		for key, value in bindingMaps["Keyboard Default"]["Flat"] {
-			if Util.IsArray(value) && value.Length == 2 {
+			if value is Array && value.Length == 2 {
 				if !bindingMaps["Keyboard Default"]["Moded"].Has(key)
 					bindingMaps["Keyboard Default"]["Moded"][key] := Map()
 
