@@ -118,7 +118,7 @@ Class ChrCrafter {
 			hasBacktick := InStr(input, "``")
 
 			tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
-			currentInputMode := Util.StrVarsInject(Locale.Read("tooltip_input_mode"), "[" Cfg.Get("Input_Mode") "]")
+			currentInputMode := Util.StrVarsInject(Locale.Read("tooltip_input_mode"), "[" Auxiliary.inputMode "]")
 
 			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
@@ -208,8 +208,7 @@ Class ChrCrafter {
 	}
 
 	static SendOutput(output) {
-		mode := Cfg.Get("Input_Mode", , "Unicode")
-		output := mode = "Unicode" ? RegExReplace(output, "\#\#", "") : output
+		output := Auxiliary.inputMode = "Unicode" ? RegExReplace(output, "\#\#", "") : output
 		if StrLen(output) > 20
 			ClipSend(output)
 		else
@@ -317,7 +316,7 @@ Class ChrCrafter {
 							}
 						} else if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipeEntry)) {
 							charFound := True
-							indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
+							indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
 							if !isPrefixOfLongerRecipe
 								break 2
 						}
@@ -340,7 +339,7 @@ Class ChrCrafter {
 						}
 					} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipe)) {
 						charFound := True
-						indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Cfg.Get("Input_Mode")))
+						indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
 						if !isPrefixOfLongerRecipe
 							break
 					}
@@ -668,12 +667,12 @@ Class ChrCrafter {
 
 	static GetComparedChar(value) {
 		output := ""
-		if InputMode = "HTML" && StrLen(value.html) > 0 {
+		if Auxiliary.inputMode = "HTML" && StrLen(value.html) > 0 {
 			output :=
 				(this.modifiedCharsType && HasProp(value, this.modifiedCharsType "HTML")) ? value.%this.modifiedCharsType%HTML :
 				(StrLen(value.entity) > 0 ? value.entity : value.html)
 
-		} else if InputMode = "LaTeX" && value.LaTeX.Length > 0 {
+		} else if Auxiliary.inputMode = "LaTeX" && value.LaTeX.Length > 0 {
 			output := LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]
 
 		} else {

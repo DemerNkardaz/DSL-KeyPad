@@ -80,7 +80,6 @@ EscapePressed := False
 ActiveScriptName := ""
 PreviousScriptName := ""
 AlterationActiveName := ""
-InputMode := "Default"
 LaTeXMode := "Default"
 
 
@@ -188,7 +187,6 @@ TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
 DefaultConfig := [
 	["Settings", "FastKeysIsActive", "False"],
 	["Settings", "SkipGroupMessage", "False"],
-	["Settings", "InputMode", "Default"],
 	["Settings", "ScriptInput", "Default"],
 	["Settings", "LaTeXInput", "Default"],
 	["Settings", "UserLanguage", ""],
@@ -1868,6 +1866,7 @@ InputBridge(GroupKey) {
 	return
 }
 ProceedEntriesHandle(keyPressed, GroupKey) {
+
 	for characterEntry, value in Characters {
 		GroupValid := False
 		if (HasProp(value, "group") && value.group[1] == GroupKey) {
@@ -1891,10 +1890,10 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 			if IsObject(characterKeys) {
 				for _, key in characterKeys {
 					if (keyPressed == key) {
-						if InputMode = "HTML" && HasProp(value, "html") {
+						if Auxiliary.inputMode = "HTML" && HasProp(value, "html") {
 							(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? SendText(value.%ModifiedCharsType%HTML) :
 							SendText(characterEntity)
-						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+						} else if Auxiliary.inputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							SendText(IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX)
 						}
 						else {
@@ -1923,9 +1922,9 @@ ProceedEntriesHandle(keyPressed, GroupKey) {
 				}
 			} else {
 				if (keyPressed == characterKeys) {
-					if InputMode = "HTML" && HasProp(value, "html") {
+					if Auxiliary.inputMode = "HTML" && HasProp(value, "html") {
 						(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? SendText(value.%ModifiedCharsType%HTML) : SendText(characterEntity)
-					} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+					} else if Auxiliary.inputMode = "LaTeX" && HasProp(value, "LaTeX") {
 						if IsObject(characterLaTeX) {
 							if LaTeXMode = "common"
 								SendText(characterLaTeX[1])
@@ -2058,11 +2057,11 @@ SearchKey(CycleSend := "") {
 	SymbolSearching(SearchingPrompt) {
 		ProceedSearch(value, characterEntity, characterLaTeX) {
 			OutputValue := ""
-			if InputMode = "HTML" && HasProp(value, "html") {
+			if Auxiliary.inputMode = "HTML" && HasProp(value, "html") {
 				SendValue :=
 					(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? value.%ModifiedCharsType%HTML : characterEntity
 				OutputValue := SendValue
-			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+			} else if Auxiliary.inputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				OutputValue := IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			}
 			else {
@@ -4269,14 +4268,14 @@ LV_OpenUnicodeWebsite(LV, RowNumber) {
 		isShiftDown := GetKeyState("LShift")
 		ModifiedCharsType := GetModifiedCharsType()
 		if (isCtrlDown) {
-			if (InputMode = "HTML" || InputMode = "LaTeX") {
+			if (Auxiliary.inputMode = "HTML" || Auxiliary.inputMode = "LaTeX") {
 				for characterEntry, value in Characters {
 					if (SelectedRow = UniTrim(value.unicode)) {
 						if ModifiedCharsType && HasProp(value, ModifiedCharsType "Form") {
 							A_Clipboard := value.%ModifiedCharsType%Form
-						} else if InputMode = "HTML" && HasProp(value, "html") {
+						} else if Auxiliary.inputMode = "HTML" && HasProp(value, "html") {
 							A_Clipboard := HasProp(value, "entity") ? value.entity : value.html
-						} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+						} else if Auxiliary.inputMode = "LaTeX" && HasProp(value, "LaTeX") {
 							A_Clipboard := IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX
 						}
 					}
@@ -4354,42 +4353,6 @@ CheckYITSUKEN() {
 	return CyrllicLayouts.Has(IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")) ? IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН") : "ЙЦУКЕН"
 }
 
-ToggleInputMode() {
-	LanguageCode := Language.Get()
-
-	ActivationMessage := {}
-	ActivationMessage[] := Map()
-	ActivationMessage["ru"] := {}
-	ActivationMessage["en"] := {}
-
-	InputModeLabel := Map(
-		"Unicode", Map("ru", "символов юникода", "en", "unicode symbols"),
-		"HTML", Map("ru", "HTML-кодов", "en", "HTML codes"),
-		"LaTeX", Map("ru", "LaTeX-кодов", "en", "LaTeX codes")
-	)
-
-	global InputMode, ConfigFile
-
-	if (InputMode = "Unicode") {
-		InputMode := "HTML"
-	} else if (InputMode = "HTML") {
-		InputMode := "LaTeX"
-	} else if (InputMode = "LaTeX") {
-		InputMode := "Unicode"
-	}
-
-	IniWrite InputMode, ConfigFile, "Settings", "InputMode"
-	Cfg.Set(InputMode, "Input_Mode")
-
-
-	ActivationMessage["ru"].Active := "Ввод " . InputModeLabel[InputMode][LanguageCode] . " активирован"
-	ActivationMessage["en"].Active := "Input " . InputModeLabel[InputMode][LanguageCode] . " activated"
-
-	MsgBox(ActivationMessage[LanguageCode].Active, DSLPadTitle, 0x40)
-
-	return
-}
-
 CheckLayoutValid() {
 	Keyboard.CurrentLayout(&CurrentLayout)
 	if (CurrentLayout == CodeEn || CurrentLayout == CodeRu) {
@@ -4447,7 +4410,7 @@ HandleFastKey(combo := "", characterNames*) {
 
 		for _, character in characterNames {
 			if ChrLib.entries.HasOwnProp(character) {
-				output .= ChrLib.Get(character, True, Cfg.Get("Input_Mode"))
+				output .= ChrLib.Get(character, True, Auxiliary.inputMode)
 			} else {
 				output .= GetCharacterSequence(character)
 			}
@@ -4463,7 +4426,7 @@ HandleFastKey(combo := "", characterNames*) {
 		LongPress.lastLetterInput := output
 
 
-		inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") != "Unicode") ? "Text" : "Input"
+		inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode") ? "Text" : "Input"
 		Send%inputType%(output)
 
 	} else {
@@ -4494,6 +4457,7 @@ GetCharacterEntry(characterName, linkOnly := False) {
 
 GetCharacterSequence(CharacterName) {
 	Output := ""
+
 	ModifiedCharsType := GetModifiedCharsType()
 	for characterEntry, value in Characters {
 		entryName := RegExReplace(characterEntry, "^\S+\s+")
@@ -4502,10 +4466,10 @@ GetCharacterSequence(CharacterName) {
 			characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "html")) ? value.html : ""
 			characterLaTeX := (HasProp(value, "LaTeX")) ? value.LaTeX : ""
 
-			if InputMode = "HTML" && HasProp(value, "html") {
+			if Auxiliary.inputMode = "HTML" && HasProp(value, "html") {
 				Output .=
 					(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? value.%ModifiedCharsType%HTML : characterEntity
-			} else if InputMode = "LaTeX" && HasProp(value, "LaTeX") {
+			} else if Auxiliary.inputMode = "LaTeX" && HasProp(value, "LaTeX") {
 				Output .= IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
 			} else {
 				if ModifiedCharsType && HasProp(value, ModifiedCharsType "Form") {

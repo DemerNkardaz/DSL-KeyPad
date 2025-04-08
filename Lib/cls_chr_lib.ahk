@@ -407,7 +407,7 @@ class ChrLib {
 
 			for _, tag in entry.tags {
 				if checkTagExact(tag)
-					return this.Get(entryName, True, Cfg.Get("Input_Mode", , "Unicode"))
+					return this.Get(entryName, True, Auxiliary.inputMode)
 			}
 		}
 
@@ -417,7 +417,7 @@ class ChrLib {
 
 			for _, tag in entry.tags {
 				if checkTagPartial(tag)
-					return this.Get(entryName, True, Cfg.Get("Input_Mode", , "Unicode"))
+					return this.Get(entryName, True, Auxiliary.inputMode)
 			}
 		}
 
@@ -427,7 +427,7 @@ class ChrLib {
 
 			for _, tag in entry.tags {
 				if checkTagLowAcc(tag)
-					return this.Get(entryName, True, Cfg.Get("Input_Mode", , "Unicode"))
+					return this.Get(entryName, True, Auxiliary.inputMode)
 			}
 		}
 

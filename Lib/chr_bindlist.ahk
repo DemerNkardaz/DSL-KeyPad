@@ -1,6 +1,6 @@
 bindingMaps := Map(
 	"User", Map(),
-	"important", Map(
+	"Important", Map(
 		"Flat", Map(
 			"RAlt", (*) => ProceedCompose(),
 		),
@@ -9,7 +9,7 @@ bindingMaps := Map(
 			"F1", Map(
 				"<#<!", (*) => GroupActivator("Diacritics Primary", "F1"),
 				"<^>!", (*) => KeyboardBinder.ToggleDefaultMode(),
-				"<^>!>+", (*) => ToggleInputMode(),
+				"<^>!>+", (*) => Auxiliary.ToggleInputMode(),
 			),
 			"F2", Map(
 				"<#<!", (*) => GroupActivator("Diacritics Secondary", "F2"),
@@ -32,11 +32,11 @@ bindingMaps := Map(
 				">+", (*) => KeyboardBinder.SwitchLayout("Cyrillic")
 			),
 			"ArrUp", Map(
-				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("superscript"),
-				"<#<!>+", (*) => KeyboardBinder.ToggleNumStyle("roman"),
+				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Superscript"),
+				"<#<!>+", (*) => KeyboardBinder.ToggleNumStyle("Roman"),
 			),
 			"ArrDown", Map(
-				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("subscript"),
+				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Subscript"),
 			),
 			"PgUp", Map("<#<!", (*) => FindCharacterPage(),),
 			"Home", Map("<#<!", (*) => Panel.Panel(), "<^>!<#<!", (*) => OpenPanel()),
@@ -75,7 +75,7 @@ bindingMaps := Map(
 			),
 		)
 	),
-	"keyboardDefault", Map(
+	"Keyboard Default", Map(
 		"Flat", Map(
 			; Digits
 			"0", "digit_0",
@@ -194,7 +194,7 @@ bindingMaps := Map(
 			"ОбратныйСлэш", Map("+", ["solidus"]),
 		)
 	),
-	"romanDigits", Map(
+	"Roman Digits", Map(
 		"Flat", Map(
 			; Digits
 			"1:Caps", ["lat_c_num_1", "lat_s_num_1"],
@@ -226,7 +226,7 @@ bindingMaps := Map(
 			),
 		),
 	),
-	"subscriptDigits", Map(
+	"Subscript Digits", Map(
 		"Flat", Map(
 			; Digits
 			"0:Caps", ["digit_0::modifier", "digit_0::subscript"],
@@ -249,7 +249,7 @@ bindingMaps := Map(
 			"Equals", Map("+:Caps", ["plus::modifier", "plus::subscript"]),
 		)
 	),
-	"superscriptDigits", Map(
+	"Superscript Digits", Map(
 		"Flat", Map(
 			; Digits
 			"0:Caps", ["digit_0::subscript", "digit_0::modifier"],
@@ -272,7 +272,7 @@ bindingMaps := Map(
 			"Equals", Map("+:Caps", ["plus::subscript", "plus::modifier"]),
 		)
 	),
-	"diacritic", Map(
+	"Diacritic", Map(
 		"Flat", Map(),
 		"Moded", Map(
 			"A", Map(
@@ -361,7 +361,7 @@ bindingMaps := Map(
 			)
 		)
 	),
-	"common", Map(
+	"Common", Map(
 		"Flat", Map(
 			"NumpadSub", "minus",
 			"NumpadDiv", "division",

@@ -21,27 +21,27 @@ Class BindList {
 	}
 
 	static __New() {
-		for key, value in bindingMaps["keyboardDefault"]["Flat"] {
+		for key, value in bindingMaps["Keyboard Default"]["Flat"] {
 			if Util.IsArray(value) && value.Length == 2 {
-				if !bindingMaps["keyboardDefault"]["Moded"].Has(key)
-					bindingMaps["keyboardDefault"]["Moded"][key] := Map()
+				if !bindingMaps["Keyboard Default"]["Moded"].Has(key)
+					bindingMaps["Keyboard Default"]["Moded"][key] := Map()
 
-				bindingMaps["keyboardDefault"]["Moded"][key].Set("+", [value[2], value[1]])
+				bindingMaps["Keyboard Default"]["Moded"][key].Set("+", [value[2], value[1]])
 			}
 		}
 	}
 
-	static Get(bindingsName := "common", fromSub := "") {
+	static Get(bindingsName := "Common", fromSub := "") {
 		mapping := bindingMaps.DeepClone()
 
-		if bindingsName = "common" && mapping.Has(bindingsName) && StrLen(fromSub) == 0 {
+		if bindingsName = "Common" && mapping.Has(bindingsName) && StrLen(fromSub) == 0 {
 			letterI_Option := Cfg.Get("I_Dot_Shift_I_Dotless", "Characters", "Default")
 
 			if letterI_Option = "Separated" {
-				mapping["common"]["Moded"]["I"].Set("<+", ["lat_c_let_i", "lat_s_let_i_dotless"])
-				mapping["common"]["Flat"].Set("I", ["lat_c_let_i__dot_above", "lat_s_let_i"])
+				mapping["Common"]["Moded"]["I"].Set("<+", ["lat_c_let_i", "lat_s_let_i_dotless"])
+				mapping["Common"]["Flat"].Set("I", ["lat_c_let_i__dot_above", "lat_s_let_i"])
 			} else if letterI_Option = "Hybrid" {
-				mapping["common"]["Moded"]["I"].Set("<+", ["lat_c_let_i__dot_above", "lat_s_let_i_dotless"])
+				mapping["Common"]["Moded"]["I"].Set("<+", ["lat_c_let_i__dot_above", "lat_s_let_i_dotless"])
 			}
 		}
 
@@ -50,9 +50,9 @@ Class BindList {
 		else if mapping.Has(bindingsName)
 			mapping[bindingsName] := BindList(mapping[bindingsName]["Flat"], mapping[bindingsName]["Moded"])
 
-		if bindingsName = "common" && mapping.Has(bindingsName) && StrLen(fromSub) == 0 {
-			mapping["diacritic"] := BindList(mapping["diacritic"]["Flat"], mapping["diacritic"]["Moded"])
-			mapping["common"].mapping := mapping["common"].mapping.MergeWith(mapping["diacritic"].mapping)
+		if bindingsName = "Common" && mapping.Has(bindingsName) && StrLen(fromSub) == 0 {
+			mapping["Diacritic"] := BindList(mapping["Diacritic"]["Flat"], mapping["Diacritic"]["Moded"])
+			mapping["Common"].mapping := mapping["Common"].mapping.MergeWith(mapping["Diacritic"].mapping)
 		}
 
 		return (StrLen(fromSub) > 0 && mapping.Has(fromSub) && mapping[fromSub].Has(bindingsName)) ? mapping[fromSub][bindingsName].mapping : mapping.Has(bindingsName) ? mapping[bindingsName].mapping : Map()

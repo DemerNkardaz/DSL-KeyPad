@@ -585,10 +585,10 @@ Class KeyboardBinder {
 		this.UnregisterAll()
 		this.CurrentLayouts(&latin, &cyrillic)
 		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(BindList.Get("keyboardDefault"), True)
+			this.Registration(BindList.Get("Keyboard Default"), True)
 
-		this.Registration(BindList.Get("important"), True)
-		this.Registration(BindList.Get("common"), Cfg.FastKeysOn)
+		this.Registration(BindList.Get("Important"), True)
+		this.Registration(BindList.Get("Common"), Cfg.FastKeysOn)
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
 		if userBindings != "None" && Cfg.FastKeysOn {
@@ -609,10 +609,10 @@ Class KeyboardBinder {
 		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(BindList.Get("keyboardDefault"), True)
+			this.Registration(BindList.Get("Keyboard Default"), True)
 
-		this.Registration(BindList.Get("important"), True)
-		this.Registration(BindList.Get("common"), Cfg.FastKeysOn)
+		this.Registration(BindList.Get("Important"), True)
+		this.Registration(BindList.Get("Common"), Cfg.FastKeysOn)
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
 		if userBindings != "None" && Cfg.FastKeysOn {
@@ -620,9 +620,9 @@ Class KeyboardBinder {
 		}
 	}
 
-	static ToggleNumStyle(style := "superscript", force := False) {
+	static ToggleNumStyle(style := "Superscript", force := False) {
 		this.numStyle := (style = this.numStyle && !force) ? "" : style
-		this.Registration(BindList.Get(style "Digits"), force ? force : StrLen(this.numStyle) > 0)
+		this.Registration(BindList.Get(style " Digits"), force ? force : StrLen(this.numStyle) > 0)
 
 		if StrLen(this.numStyle) == 0 {
 			this.RebuilBinds()
@@ -727,7 +727,6 @@ Class BindHandler {
 			inputType := ""
 
 			for _, character in characterNames {
-				getMode := Cfg.Get("Input_Mode")
 				alt := ""
 				if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
 					alt := alterationMatch[1]
@@ -735,7 +734,7 @@ Class BindHandler {
 				}
 
 				if ChrLib.entries.HasOwnProp(character) {
-					output .= ChrLib.Get(character, True, getMode, alt)
+					output .= ChrLib.Get(character, True, Auxiliary.inputMode, alt)
 
 					chrSendOption := ChrLib.GetValue(character, "options").send
 
@@ -750,7 +749,7 @@ Class BindHandler {
 			chrValidation := "(\" Chr(0x00AE) "|\" Chr(0x2122) "|\" Chr(0x00A9) "|\" Chr(0x2022) "|\" Chr(0x25B6) "|\" Chr(0x25C0) "|\" Chr(0x0021) "|\" Chr(0x002B) "|\" Chr(0x005E) "|\" Chr(0x0023) "|\" Chr(0x007B) "|\" Chr(0x007D) "|\" Chr(0x0060) "|\" Chr(0x007E) "|\" Chr(0x0025) "|\" Chr(0x0009) "|\" Chr(0x000A) "|\" Chr(0x000D) ")"
 
 			if StrLen(inputType) == 0
-				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.Get("Input_Mode") != "Unicode" || StrLen(output) > 10) ? "Text" : "Input"
+				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : "Input"
 
 			if StrLen(output) > 20
 				ClipSend(output)
