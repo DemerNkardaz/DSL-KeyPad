@@ -143,6 +143,26 @@ Class Util {
 		return Output
 	}
 
+	static StrBind(str, &keyRef?, &modRef?, &rulRef?) {
+		keyRef := ""
+		modRef := ""
+		rulRef := ""
+
+		if RegExMatch(str, ":(.*?)$", &ruleMatch) {
+			rulRef := ":" ruleMatch[1]
+			str := RegExReplace(str, ":(.*?)$")
+		}
+
+		if RegExMatch(str, "([\<\>\^\!\+\#]+)", &modMatch) {
+			modRef := modMatch[1]
+			str := RegExReplace(str, "[\<\>\^\!\+\#]+")
+		}
+
+		keyRef := str
+
+		return true
+	}
+
 	static UniTrim(Str) {
 		return SubStr(Str, 4, StrLen(Str) - 4)
 	}

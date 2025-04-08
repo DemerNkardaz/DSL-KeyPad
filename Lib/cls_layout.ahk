@@ -682,30 +682,21 @@ Class KeyboardBinder {
 		if bindsMap.Count > 0 && StrLen(name) > 0 {
 			interMap := Map("Flat", Map(), "Moded", Map())
 			for combo, reference in bindsMap {
+				Util.StrBind(combo, &keyRef, &modRef, &rulRef)
 				interRef := reference
-				keyReference := combo
-				modifiersRegEx := "[\<\>\^\!\+\#]+"
-				rule := ""
-
-				if RegExMatch(combo, ":(.*?)$", &ruleMatch)
-					rule := ruleMatch[1]
-
-				keyReference := RegExReplace(keyReference, modifiersRegEx)
-				keyReference := RegExReplace(keyReference, ":" rule "$")
-				modifierReference := RegExReplace(combo, "[^\<\>\^\!\+\#:]") rule
 
 				if RegExMatch(reference, "^\[(.*?)\]$", &arrRefMatch) {
 					interRef := StrSplit(Util.StrTrim(arrRefMatch[1]), ",")
 				}
 
-				if RegExMatch(combo, modifiersRegEx) {
-					if !interMap["Moded"].Has(keyReference) {
-						interMap["Moded"][keyReference] := Map()
+				if StrLen(modRef) > 0 {
+					if !interMap["Moded"].Has(keyRef) {
+						interMap["Moded"][keyRef] := Map()
 					}
 
-					interMap["Moded"][keyReference].Set(modifierReference, interRef)
+					interMap["Moded"][keyRef].Set(modRef rulRef, interRef)
 				} else {
-					interMap["Flat"].Set(keyReference rule, interRef)
+					interMap["Flat"].Set(keyRef rulRef, interRef)
 				}
 
 			}
@@ -720,6 +711,8 @@ Class Scripter {
 }
 
 Class BindHandler {
+	static isComboPressed := False
+
 	static Send(combo := "", characterNames*) {
 		Keyboard.CheckLayout(&lang)
 		if Language.Validate(lang, "bindings") {
@@ -774,6 +767,37 @@ Class BindHandler {
 					this.Send(combo, charactersObj.%lang% is Array ? charactersObj.%lang%[1] : charactersObj.%lang%)
 				}
 			}
+		}
+	}
+
+	static TimeSend(combo := "", secondKeysActions := Map(), DefaultAction := False, timeLimit := -25) {
+		this.isComboPressed := False
+
+		Util.StrBind(combo, &keyRef, &modRef, &rulRef)
+		layoutMap := KeyboardBinder.GetCurrentLayoutMap()
+		keyRefScanCode := ""
+
+		for scanCode, keyNamesArray in layoutMap {
+			if keyNamesArray.HasValue(keyRef) {
+				keyRefScanCode := scanCode
+				break
+			}
+		}
+
+		if secondKeysActions is Map {
+			for key, action in secondKeysActions {
+
+			}
+		}
+
+
+		Reset() {
+			!DefaultAction ? KeyRecovery() : DefaultAction()
+			this.isComboPressed := False
+		}
+
+		KeyRecovery() {
+			Send("{Blind}" (InStr(modRef, "+") ? "+" : "") "{sc" keyRefScanCode "}")
 		}
 	}
 }
