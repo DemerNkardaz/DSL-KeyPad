@@ -434,7 +434,7 @@ LibRegistrate(this) {
 			options: { groupKey: ["/"], fastKey: "<+ [/][.]" },
 			symbol: { category: "Diacritic Mark" },
 		},
-		"tilde", {
+		"tilde_above", {
 			unicode: "{U+0303}", LaTeX: ["\~", "\tilde"],
 			alterations: {
 				modifier: "{U+02F7}",
@@ -3604,7 +3604,7 @@ LibRegistrate(this) {
 			unicode: ["{U+0104}", "{U+0105}"],
 			options: { fastKey: "<!>+ $?Secondary" }
 		},
-		"lat_[c,s]_let_a__tilde", {
+		"lat_[c,s]_let_a__tilde_above", {
 			unicode: ["{U+00C3}", "{U+00E3}"],
 			options: { fastKey: "<+>+ $?Secondary" }
 		},
@@ -3620,7 +3620,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_a__breve__hook_above", {
 			unicode: ["{U+1EB2}", "{U+1EB3}"]
 		},
-		"lat_[c,s]_let_a__breve__tilde", {
+		"lat_[c,s]_let_a__breve__tilde_above", {
 			unicode: ["{U+1EB4}", "{U+1EB5}"]
 		},
 		"lat_[c,s]_let_a__circumflex__acute", {
@@ -3635,7 +3635,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_a__circumflex__hook_above", {
 			unicode: ["{U+1EA8}", "{U+1EA9}"]
 		},
-		"lat_[c,s]_let_a__circumflex__tilde", {
+		"lat_[c,s]_let_a__circumflex__tilde_above", {
 			unicode: ["{U+1EAA}", "{U+1EAB}"]
 		},
 		"lat_[c,s]_let_a__dot_above__macron", {
@@ -3866,7 +3866,7 @@ LibRegistrate(this) {
 			unicode: ["{U+0118}", "{U+0119}"],
 			options: { fastKey: "<!>+ $?Secondary" }
 		},
-		"lat_[c,s]_let_e__tilde", {
+		"lat_[c,s]_let_e__tilde_above", {
 			unicode: ["{U+1EBC}", "{U+1EBD}"],
 			options: { fastKey: "<+>+ $?Secondary" }
 		},
@@ -3888,7 +3888,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_e__circumflex__hook_above", {
 			unicode: ["{U+1EC2}", "{U+1EC3}"]
 		},
-		"lat_[c,s]_let_e__circumflex__tilde", {
+		"lat_[c,s]_let_e__circumflex__tilde_above", {
 			unicode: ["{U+1EC4}", "{U+1EC5}"]
 		},
 		"lat_[c,s]_let_e__macron__acute", {

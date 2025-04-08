@@ -331,7 +331,7 @@ bindingMaps := {
 				"<^<!<+", "stroke_long"
 			),
 			"T", Map(
-				"<^<!", "tilde",
+				"<^<!", "tilde_above",
 				"<^<!<+", "tilde_overlay"
 			),
 			"V", Map(

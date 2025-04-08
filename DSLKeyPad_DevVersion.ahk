@@ -6737,7 +6737,7 @@ ManageTrayItems() {
 		App.tray.SetIcon(UpdateEntry, ImageRes, 176)
 	}
 	App.tray.Add()
-	App.tray.Add(Labels["panel"], OpenPanel)
+	App.tray.Add(Labels["panel"], (*) => Panel.Panel())
 	App.tray.Add(Labels["options"], (*) => Cfg.Editor())
 	App.tray.Add()
 
