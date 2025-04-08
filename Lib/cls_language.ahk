@@ -265,8 +265,24 @@ Class Locale extends Language {
 			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
 			postLetter := useLetterLocale ? Locale.Read((useLetterLocale = "Origin" ? RegExReplace(entryName, "i)^(.*?)__.*", "$1") : entryName) "_LTL", lang) : letter
 
-			lBeforeletter := entry.symbol.HasOwnProp("beforeLetter") && StrLen(entry.symbol.beforeLetter) > 0 ? Locale.Read(pfx "beforeLetter_" entry.symbol.beforeLetter, lang) " " : ""
-			lAfterletter := entry.symbol.HasOwnProp("afterLetter") && StrLen(entry.symbol.afterLetter) > 0 ? " " Locale.Read(pfx "afterLetter_" entry.symbol.afterLetter, lang) : ""
+			lBeforeletter := ""
+			lAfterletter := ""
+
+			for letterBound in ["beforeLetter", "afterLetter"] {
+				if entry.symbol.HasOwnProp(letterBound) && StrLen(entry.symbol.%letterBound%) > 0 {
+					boundLink := Util.StrUpper(letterBound, 1)
+					if InStr(entry.symbol.%letterBound%, ",") {
+						splitted := StrSplit(Util.StrTrim(entry.symbol.%letterBound%), ",")
+						for i, bound in splitted {
+							l%boundLink% .= Locale.Read(pfx letterBound "_" bound, lang) (i < splitted.Length ? " " : "")
+						}
+					} else
+						l%boundLink% := Locale.Read(pfx letterBound "_" entry.symbol.%boundLink%, lang)
+				}
+			}
+
+			lBeforeletter := StrLen(lBeforeletter) > 0 ? lBeforeletter " " : ""
+			lAfterletter := StrLen(lAfterletter) > 0 ? " " lAfterletter : ""
 
 			proxyMark := StrLen(entry.proxy) > 0 ? " " Locale.Read("gen_proxy", lang) : ""
 

@@ -272,6 +272,8 @@ Class Panel {
 						;
 						{ type: "Fast Key", group: "Spaces Left Alt", combinationKey: LeftAlt, separator: true },
 						;
+						{ type: "Fast Key", group: "Latin Primary", combinationKey: LeftAlt, separator: true },
+						;
 						{ type: "Fast Key", group: "Latin Accented Primary", combinationKey: LeftAlt, separator: true },
 						;
 						{ type: "Fast Key", group: "Cyrillic Primary", combinationKey: LeftAlt, separator: true },
