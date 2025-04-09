@@ -1631,197 +1631,150 @@ LibRegistrate(this) {
 			unicode: ["{U+0410}", "{U+0430}"],
 			alterations: [{}, { combining: "{U+2DF6}", modifier: "{U+1E030}", subscript: "{U+1E051}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["А", "а"] }
 		},
 		"cyr_[c,s]_let_b", {
 			unicode: ["{U+0411}", "{U+0431}"],
 			alterations: [{}, { combining: "{U+2DE0}", modifier: "{U+1E031}", subscript: "{U+1E052}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Б", "б"] }
 		},
 		"cyr_[c,s]_let_v", {
 			unicode: ["{U+0412}", "{U+0432}"],
 			alterations: [{}, { combining: "{U+2DE1}", modifier: "{U+1E032}", subscript: "{U+1E053}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["В", "в"] }
 		},
 		"cyr_[c,s]_let_g", {
 			unicode: ["{U+0413}", "{U+0433}"],
 			alterations: [{}, { combining: "{U+2DE2}", modifier: "{U+1E033}", subscript: "{U+1E054}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Г", "г"] }
 		},
 		"cyr_[c,s]_let_d", {
 			unicode: ["{U+0414}", "{U+0434}"],
 			alterations: [{}, { combining: "{U+2DE3}", modifier: "{U+1E034}", subscript: "{U+1E055}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Д", "д"] }
 		},
 		"cyr_[c,s]_let_ye", {
 			unicode: ["{U+0415}", "{U+0435}"],
 			alterations: [{}, { combining: "{U+2DF7}", modifier: "{U+1E035}", subscript: "{U+1E056}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Е", "е"] }
-		},
-		"cyr_[c,s]_let_yo", {
-			unicode: ["{U+0401}", "{U+0451}"],
-			alterations: [{}, {}],
-			options: { noCalc: True },
-			symbol: { letter: ["Ё", "ё"] }
 		},
 		"cyr_[c,s]_let_zh", {
 			unicode: ["{U+0416}", "{U+0436}"],
 			alterations: [{}, { combining: "{U+2DE4}", modifier: "{U+1E036}", subscript: "{U+1E057}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Ж", "ж"] }
 		},
 		"cyr_[c,s]_let_z", {
 			unicode: ["{U+0417}", "{U+0437}"],
 			alterations: [{}, { combining: "{U+2DE5}", modifier: "{U+1E037}", subscript: "{U+1E058}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["З", "з"] }
 		},
 		"cyr_[c,s]_let_i", {
 			unicode: ["{U+0418}", "{U+0438}"],
 			alterations: [{}, { combining: "{U+A675}", modifier: "{U+1E038}", subscript: "{U+1E059}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["И", "и"] }
-		},
-		"cyr_[c,s]_let_iy", {
-			unicode: ["{U+0419}", "{U+0439}"],
-			options: { noCalc: True },
-			symbol: { letter: ["Й", "й"] }
 		},
 		"cyr_[c,s]_let_k", {
 			unicode: ["{U+041A}", "{U+043A}"],
 			alterations: [{}, { combining: "{U+2DE6}", modifier: "{U+1E039}", subscript: "{U+1E05A}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["К", "к"] }
 		},
 		"cyr_[c,s]_let_l", {
 			unicode: ["{U+041B}", "{U+043B}"],
 			alterations: [{}, { combining: "{U+2DE7}", modifier: "{U+1E03A}", subscript: "{U+1E05B}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Л", "л"] }
 		},
 		"cyr_[c,s]_let_m", {
 			unicode: ["{U+041C}", "{U+043C}"],
 			alterations: [{}, { combining: "{U+2DE8}", modifier: "{U+1E03B}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["М", "м"] }
 		},
 		"cyr_[c,s]_let_n", {
 			unicode: ["{U+041D}", "{U+043D}"],
 			alterations: [{}, { combining: "{U+2DE9}", modifier: "{U+1D78}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Н", "н"] }
 		},
 		"cyr_[c,s]_let_o", {
 			unicode: ["{U+041E}", "{U+043E}"],
 			alterations: [{}, { combining: "{U+2DEA}", modifier: "{U+1E03C}", subscript: "{U+1E05C}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["О", "о"] }
 		},
 		"cyr_[c,s]_let_p", {
 			unicode: ["{U+041F}", "{U+043F}"],
 			alterations: [{}, { combining: "{U+2DEB}", modifier: "{U+1E03D}", subscript: "{U+1E05D}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["П", "п"] }
 		},
 		"cyr_[c,s]_let_r", {
 			unicode: ["{U+0420}", "{U+0440}"],
 			alterations: [{}, { combining: "{U+2DEC}", modifier: "{U+1E03E}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Р", "р"] }
 		},
 		"cyr_[c,s]_let_s", {
 			unicode: ["{U+0421}", "{U+0441}"],
 			alterations: [{}, { combining: "{U+2DED}", modifier: "{U+1E03F}", subscript: "{U+1E05E}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["С", "с"] }
 		},
 		"cyr_[c,s]_let_t", {
 			unicode: ["{U+0422}", "{U+0442}"],
 			alterations: [{}, { combining: "{U+2DEE}", modifier: "{U+1E040}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Т", "т"] }
 		},
 		"cyr_[c,s]_let_u", {
 			unicode: ["{U+0423}", "{U+0443}"],
 			alterations: [{}, { combining: "{U+A677}", modifier: "{U+1E041}", subscript: "{U+1E05F}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["У", "у"] }
 		},
 		"cyr_[c,s]_let_f", {
 			unicode: ["{U+0424}", "{U+0444}"],
 			alterations: [{}, { combining: "{U+A69E}", modifier: "{U+1E042}", subscript: "{U+1E060}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Ф", "ф"] }
 		},
 		"cyr_[c,s]_let_h", {
 			unicode: ["{U+0425}", "{U+0445}"],
 			alterations: [{}, { combining: "{U+2DEF}", modifier: "{U+1E043}", subscript: "{U+1E061}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Х", "х"] }
 		},
 		"cyr_[c,s]_let_ts", {
 			unicode: ["{U+0426}", "{U+0446}"],
 			alterations: [{}, { combining: "{U+2DF0}", modifier: "{U+1E044}", subscript: "{U+1E062}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Ц", "ц"] }
 		},
 		"cyr_[c,s]_let_ch", {
 			unicode: ["{U+0427}", "{U+0447}"],
 			alterations: [{}, { combining: "{U+2DF1}", modifier: "{U+1E045}", subscript: "{U+1E063}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Ч", "ч"] }
 		},
 		"cyr_[c,s]_let_sh", {
 			unicode: ["{U+0428}", "{U+0448}"],
 			alterations: [{}, { combining: "{U+2DF2}", modifier: "{U+1E046}", subscript: "{U+1E064}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Ш", "ш"] }
 		},
 		"cyr_[c,s]_let_shch", {
 			unicode: ["{U+0429}", "{U+0449}"],
 			alterations: [{}, { combining: "{U+2DF3}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Щ", "щ"] }
 		},
-		"cyr_[c,s]_let_yeru", {
+		"cyr_[c,s]_let_yer", {
 			unicode: ["{U+042A}", "{U+044A}"],
 			alterations: [{}, { combining: "{U+A678}", modifier: "{U+A69C}", subscript: "{U+1E065}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Ъ", "ъ"] }
-		},
-		"cyr_[c,s]_let_yery", {
-			unicode: ["{U+042B}", "{U+044B}"],
-			alterations: [{}, { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }],
-			options: { noCalc: True },
-			symbol: { letter: ["Ы", "ы"] }
 		},
 		"cyr_[c,s]_let_yeri", {
 			unicode: ["{U+042C}", "{U+044C}"],
 			alterations: [{}, { combining: "{U+A67A}", modifier: "{U+A69D}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Ь", "ь"] }
 		},
 		"cyr_[c,s]_let_e", {
 			unicode: ["{U+042D}", "{U+044D}"],
 			alterations: [{}, { modifier: "{U+1E048}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Э", "э"] }
 		},
 		"cyr_[c,s]_let_yu", {
 			unicode: ["{U+042E}", "{U+044E}"],
 			alterations: [{}, { combining: "{U+2DFB}", modifier: "{U+1E049}" }],
 			options: { noCalc: True },
-			symbol: { letter: ["Ю", "ю"] }
 		},
 		"cyr_[c,s]_let_ya", {
 			unicode: ["{U+042F}", "{U+044F}"],
 			options: { noCalc: True },
-			symbol: { letter: ["Я", "я"] }
 		},
 		;
 		;
@@ -4276,6 +4229,65 @@ LibRegistrate(this) {
 				"${lat_s_let_l__belt}${retroflex_hook}",
 				"${lat_s_let_l__retroflex_hook}${arrow_right_ushaped}"
 			]
+		},
+		;
+		;
+		; * Uncommon Cyrillic Letters
+		;
+		;
+		; "cyr_c_let_i_decimal", {
+		; 	unicode: "{U+0406}",
+		; 	titlesAlt: True,
+		; 	group: [["Cyrillic Letters", "Cyrillic Secondary"], "И"],
+		; 	show_on_fast_keys: True,
+		; 	tags: ["прописная буква И десятиричное кириллицы", "cyrillic capital letter I"],
+		; },
+		; 	"cyr_s_let_i_decimal", {
+		; 		unicode: "{U+0456}",
+		; 		combiningForm: "{U+1E08F}",
+		; 		modifierForm: "{U+1E04C}",
+		; 		subscriptForm: "{U+1E068}",
+		; 		titlesAlt: True,
+		; 		group: [["Cyrillic Letters", "Cyrillic Secondary"], "и"],
+		; 		show_on_fast_keys: True,
+		; 		tags: ["строчная буква и десятиричное кириллицы", "cyrillic small letter i"],
+		; 	},
+		"cyr_[c,s]_let_i_decimal", {
+			unicode: ["{U+0406}", "{U+0456}"],
+			alterations: [{}, { combining: "{U+1E08F}", modifier: "{U+1E04C}", subscript: "{U+1E068}" }],
+			options: { secondName: True, fastKey: "[И]?Secondary" },
+		},
+		;
+		;
+		; * Cyrillic Digraphs
+		;
+		;
+		"cyr_[c,s]_dig_yeru", {
+			unicode: ["{U+042B}", "{U+044B}"],
+			alterations: [{}, { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }],
+			options: { secondName: True, noCalc: True },
+			recipe: ["${cyr_[c,s]_let_yeri}${cyr_[c,s]_let_i_decimal}"],
+		},
+		"cyr_[c,s]_dig_yeru_with_back_yer", {
+			unicode: ["{U+A650}", "{U+A651}"],
+			options: { secondName: True },
+			alterations: [{}, { modifier: "{U+1E06C}" }],
+			recipe: ["${cyr_[c,s]_let_yer}${cyr_[c,s]_let_i_decimal}"],
+		},
+		;
+		;
+		; * Accented Cyrillic
+		;
+		;
+		"cyr_[c,s]_let_ye__diaeresis", {
+			unicode: ["{U+0401}", "{U+0451}"],
+			options: { noCalc: True },
+			symbol: { letter: "${cyr_[c,s]_let_ye}" }
+		},
+		"cyr_[c,s]_let_i__breve", {
+			unicode: ["{U+0419}", "{U+0439}"],
+			options: { noCalc: True },
+			symbol: { letter: "${cyr_[c,s]_let_i}" }
 		},
 		;
 		;

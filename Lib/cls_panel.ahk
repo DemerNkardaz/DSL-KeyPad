@@ -234,9 +234,13 @@ Class Panel {
 						;
 						{ type: "Recipe", group: "Hellenic Accented", separator: true },
 						;
-						{ type: "Recipe", group: "Cyrillic Ligatures & Letters", separator: true },
+						{ type: "Recipe", group: "Cyrillic Ligatures", separator: true },
 						;
-						{ type: "Recipe", group: "Cyrillic Letters", separator: true },
+						{ type: "Recipe", group: "Cyrillic Digraphs" },
+						;
+						{ type: "Recipe", group: "Cyrillic", separator: true },
+						;
+						{ type: "Recipe", group: "Cyrillic Accented", separator: true },
 						;
 						{ type: "Recipe", group: "Futhork Runes", separator: true },
 						;
@@ -296,7 +300,10 @@ Class Panel {
 						;
 						{ type: "Fast Key", group: "Latin Accented Secondary", combinationKey: RightAlt, separator: true },
 						;
-						{ type: "Fast Key", group: "Cyrillic Ligatures & Letters", combinationKey: RightAlt, separator: true },
+						{ type: "Fast Key", group: "Cyrillic Ligatures Secondary", combinationKey: RightAlt, separator: true },
+						;
+						;
+						{ type: "Fast Key", group: "Cyrillic Digraphs Secondary", combinationKey: RightAlt, },
 						;
 						{ type: "Fast Key", group: "Cyrillic Secondary", combinationKey: RightAlt, separator: true },
 						;

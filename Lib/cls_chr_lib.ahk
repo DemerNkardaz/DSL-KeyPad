@@ -15,6 +15,7 @@ Class ChrEntry {
 	alterations := {}
 	options := {
 		noCalc: False,
+		secondName: False,
 		useLetterLocale: False,
 		layoutTitles: False,
 		legend: "",
@@ -143,9 +144,18 @@ class ChrLib {
 
 				entries.%variantName%.symbol := entry.symbol.Clone()
 				entries.%variantName%.symbol := this.CloneOptions(entry.symbol, i)
-				; if Util.IsArray(entries.%variantName%.symbol.letter) {
-				; entries.%variantName%.symbol.letter := entry.symbol.letter[i]
-				; }
+
+				if entries.%variantName%.symbol.letter is String {
+					entries.%variantName%.symbol.letter := RegExReplace(entries.%variantName%.symbol.letter, "\%self\%", Util.UnicodeToChar(entries.%variantName%.unicode))
+
+					if InStr(entries.%variantName%.symbol.letter, "${") {
+						entries.%variantName%.symbol.letter := RegExReplace(entries.%variantName%.symbol.letter, "\[.*?\]", variant)
+						entries.%variantName%.symbol.letter := ChrRecipeHandler.MakeStr(entries.%variantName%.symbol.letter)
+					} else if entries.%variantName%.data.script = "cyrillic" &&
+						RegExMatch(entries.%variantName%.data.letter, "^[a-zA-Z0-9]+$") {
+						entries.%variantName%.symbol.letter := Util.UnicodeToChar(entries.%variantName%.unicode)
+					}
+				}
 
 				if entry.alterations is Array {
 					entries.%variantName%.alterations := entry.alterations[i].Clone()
@@ -258,7 +268,12 @@ class ChrLib {
 				return Util.UnicodeToChar(entry.alterations.%getMode%)
 
 			} else {
-				return Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+				try {
+					return Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+				} catch {
+					MsgBox(Locale.Read("error_critical") "`n`n" Util.StrVarsInject(Locale.Read("error_entry_not_found"), entryName), App.title, "Iconx")
+					return
+				}
 			}
 		}
 	}

@@ -225,6 +225,19 @@ Class Locale extends Language {
 		}
 	}
 
+	static VarSelect(str, varI) {
+		output := str
+		if (RegExMatch(str, "\$\((.*?)\)", &match)) {
+			split := StrSplit(match[1], "|")
+			if (varI > 0 && varI <= split.Length) {
+				beforePart := SubStr(str, 1, match.Pos(0) - 1)
+				afterPart := SubStr(str, match.Pos(0) + match.Len(0))
+				output := beforePart split[varI] afterPart
+			}
+		}
+		return output
+	}
+
 	static LocaleRules(input, lang) {
 		lang := SubStr(lang, 1, 2)
 		nbsp := Chr(160)
@@ -254,7 +267,7 @@ Class Locale extends Language {
 		lCase := entry.data.case
 		lType := entry.data.type
 		lPostfixes := entry.data.postfixes
-		psx := lType = "digraph" ? "_second" : ""
+		lVariant := lType = "digraph" ? 2 : lType = "numeral" ? 3 : 1
 
 		langCodes := ["en", "ru", "en_alt", "ru_alt"]
 		entry.titles := Map()
@@ -267,6 +280,11 @@ Class Locale extends Language {
 
 			lBeforeletter := ""
 			lAfterletter := ""
+			lSecondName := ""
+
+			if entry.options.secondName {
+				lSecondName := " " Locale.Read(entryName "_sN", lang)
+			}
 
 			for letterBound in ["beforeLetter", "afterLetter"] {
 				if entry.symbol.HasOwnProp(letterBound) && StrLen(entry.symbol.%letterBound%) > 0 {
@@ -288,12 +306,12 @@ Class Locale extends Language {
 
 
 			if isAlt {
-				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter postLetter lAfterletter proxyMark
+				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
 			} else {
-				localedCase := !lCase = "neutral" ? Locale.Read(pfx "case_" lCase psx, lang) " " : ""
+				localedCase := lCase != "neutral" ? Locale.VarSelect(Locale.Read(pfx "case_" lCase, lang), lVariant) " " : ""
 
-				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter proxyMark
-				tags[langCode] := localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter
+				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
+				tags[langCode] := localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName
 			}
 		}
 
