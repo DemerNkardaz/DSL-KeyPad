@@ -383,7 +383,15 @@ class ChrLib {
 			return resultObj
 		}
 
-		resultObj.result := this.Search(searchQuery)
+		if InStr(searchQuery, ",") {
+			tagSplit := StrSplit(searchQuery, ",")
+			for tag in tagSplit {
+				resultObj.result .= this.Search(Trim(tag))
+			}
+		} else {
+			resultObj.result := this.Search(searchQuery)
+		}
+
 		resultObj.prompt := searchQuery
 		resultObj.send := (*) => SendText(resultObj.result)
 
