@@ -9,6 +9,7 @@ bindingMaps := Map(
 			"F1", Map(
 				"<#<!", (*) => GroupActivator("Diacritics Primary", "F1"),
 				"<^>!", (*) => KeyboardBinder.ToggleDefaultMode(),
+				"<^>!<!", (*) => KeyboardBinder.ToggleLigaturedMode(),
 				"<^>!>+", (*) => Auxiliary.ToggleInputMode(),
 			),
 			"F2", Map(
@@ -372,7 +373,7 @@ bindingMaps := Map(
 				"NumpadAdd", (*) => BindHandler.Send(K, "plusminus"),
 			), (*) => BindHandler.Send(K, "minus")),
 			"NumpadDiv", "division",
-			"NumpadMult", "multiplication"
+			"NumpadMult", "multiplication",
 		),
 		"Moded", Map(
 			; Digit & Misc Layout
@@ -845,4 +846,26 @@ bindingMaps := Map(
 			)
 		)
 	),
+	"Ligatured", Map(
+		"Flat", Map(
+			"A", (K) => BindHandler.TimeSend(K, Map(
+				"A", (*) => BindHandler.CapsSend(K, ["lat_c_lig_aa", "lat_s_lig_aa"]),
+				"E", (*) => BindHandler.CapsSend(K, ["lat_c_lig_ae", "lat_s_lig_ae"]),
+				"U", (*) => BindHandler.CapsSend(K, ["lat_c_lig_au", "lat_s_lig_au"]),
+				"O", (*) => BindHandler.CapsSend(K, ["lat_c_lig_ao", "lat_s_lig_ao"]),
+				"V", (*) => BindHandler.CapsSend(K, ["lat_c_lig_av", "lat_s_lig_av"]),
+				"Y", (*) => BindHandler.CapsSend(K, ["lat_c_lig_ay", "lat_s_lig_ay"]),
+			), (*) => BindHandler.CapsSend(K, ["lat_c_let_a", "lat_s_let_a"])),
+			"O", (K) => BindHandler.TimeSend(K, Map(
+				"E", (*) => BindHandler.CapsSend(K, ["lat_c_lig_oe", "lat_s_lig_oe"]),
+				"U", (*) => BindHandler.CapsSend(K, ["lat_c_lig_ou", "lat_s_lig_ou"]),
+				"O", (*) => BindHandler.CapsSend(K, ["lat_c_lig_oo", "lat_s_lig_oo"]),
+				"I", (*) => BindHandler.CapsSend(K, ["lat_c_lig_oi", "lat_s_lig_oi"]),
+			), (*) => BindHandler.CapsSend(K, ["lat_c_let_o", "lat_s_let_o"])),
+			"S", (K) => BindHandler.TimeSend(K, Map(
+				"S", (*) => BindHandler.CapsSend(K, ["lat_c_lig_s_eszett", "lat_s_lig_s_eszett"]),
+			), (*) => BindHandler.CapsSend(K, ["lat_c_let_s", "lat_s_let_s"])),
+		),
+		"Moded", Map()
+	)
 )

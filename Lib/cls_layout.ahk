@@ -366,6 +366,7 @@ Class KeyboardBinder {
 
 	static disabledByMonitor := False
 	static disabledByUser := False
+	static ligaturedBinds := False
 	static numStyle := ""
 	static userLayoutsNames := []
 	static userBindings := []
@@ -538,6 +539,11 @@ Class KeyboardBinder {
 								)
 							} else {
 								if output.Get(interCombo).Length == 2 {
+									if output[interCombo] is Func {
+										interArr := [[], []]
+										interArr[isCyrillicKey ? 1 : 2] := output[interCombo]
+										output[interCombo] := interArr
+									}
 									output[interCombo][isCyrillicKey ? 2 : 1] := binds
 								} else {
 									output[interCombo].Push(binds)
@@ -589,6 +595,7 @@ Class KeyboardBinder {
 
 		this.Registration(BindList.Get("Important"), True)
 		this.Registration(BindList.Get("Common"), Cfg.FastKeysOn)
+		this.Registration(BindList.Get("Ligatured"), Cfg.FastKeysOn && this.ligaturedBinds)
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
 		if userBindings != "None" && Cfg.FastKeysOn {
@@ -599,25 +606,19 @@ Class KeyboardBinder {
 			this.ToggleNumStyle(this.numStyle, True)
 	}
 
-	static ToggleDefaultMode() {
-		this.UnregisterAll()
-		this.CurrentLayouts(&latin, &cyrillic)
 
+	static ToggleLigaturedMode() {
+		this.ligaturedBinds := !this.ligaturedBinds
+		this.RebuilBinds()
+	}
+
+	static ToggleDefaultMode() {
 		modeActive := Cfg.Get("Mode_Fast_Keys", , False, "bool")
 		Cfg.Set(modeActive, "Mode_Fast_Keys", , "bool")
 
 		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
-		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
-			this.Registration(BindList.Get("Keyboard Default"), True)
-
-		this.Registration(BindList.Get("Important"), True)
-		this.Registration(BindList.Get("Common"), Cfg.FastKeysOn)
-
-		userBindings := Cfg.Get("Active_User_Bindings", , "None")
-		if userBindings != "None" && Cfg.FastKeysOn {
-			this.Registration(BindList.Get(userBindings, "User"), Cfg.FastKeysOn)
-		}
+		this.RebuilBinds()
 	}
 
 	static ToggleNumStyle(style := "Superscript", force := False) {
@@ -720,21 +721,25 @@ Class BindHandler {
 			inputType := ""
 
 			for _, character in characterNames {
-				alt := ""
-				if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
-					alt := alterationMatch[1]
-					character := RegExReplace(character, "\:\:.*$", "")
-				}
-
-				if ChrLib.entries.HasOwnProp(character) {
-					output .= ChrLib.Get(character, True, Auxiliary.inputMode, alt)
-
-					chrSendOption := ChrLib.GetValue(character, "options").send
-
-					if StrLen(chrSendOption) > 0
-						inputType := chrSendOption
+				if character is Func {
+					character(combo)
 				} else {
-					output .= GetCharacterSequence(character)
+					alt := ""
+					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
+						alt := alterationMatch[1]
+						character := RegExReplace(character, "\:\:.*$", "")
+					}
+
+					if ChrLib.entries.HasOwnProp(character) {
+						output .= ChrLib.Get(character, True, Auxiliary.inputMode, alt)
+
+						chrSendOption := ChrLib.GetValue(character, "options").send
+
+						if StrLen(chrSendOption) > 0
+							inputType := chrSendOption
+					} else {
+						output .= GetCharacterSequence(character)
+					}
 				}
 			}
 
