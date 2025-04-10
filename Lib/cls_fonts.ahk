@@ -16,8 +16,10 @@ Class Fonts {
 			if this.IsInstalled(font.name)
 				found := True
 			else {
-				srcsToInstall.Push(font.src)
-				namesToInstall .= font.name "`n"
+				if font.HasOwnProp("required") && font.required {
+					srcsToInstall.Push(font.src)
+					namesToInstall .= font.name "`n"
+				}
 			}
 		}
 
@@ -31,7 +33,7 @@ Class Fonts {
 	}
 
 	static IsInstalled(fontName) {
-		for suffix in ["", " Regular", " Regular (TrueType)"] {
+		for suffix in [" Regular (TrueType)", " Regular", ""] {
 			fullName := fontName suffix
 
 			Loop Reg, "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" {

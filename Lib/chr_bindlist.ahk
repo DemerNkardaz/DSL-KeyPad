@@ -74,6 +74,9 @@ bindingMaps := Map(
 			"I", Map(
 				">^", (*) => ReplaceWithUnicode("Hex"),
 			),
+			"X", Map(
+				"<^<#", (*) => IsInputFieldActive(),
+			),
 		)
 	),
 	"Keyboard Default", Map(

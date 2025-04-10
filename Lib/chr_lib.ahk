@@ -4343,6 +4343,153 @@ LibRegistrate(this) {
 			recipe: ["$${arrow_rightdown}"]
 		},
 		; Latin Letter “O”
+		"lat_[c,s]_let_o__acute", {
+			unicode: ["{U+00D3}", "{U+00F3}"],
+			options: { fastKey: "$?Primary" }
+		},
+		"lat_[c,s]_let_o__acute_double", {
+			unicode: ["{U+0150}", "{U+0151}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_o__breve", {
+			unicode: ["{U+014E}", "{U+014F}"]
+		},
+		"lat_[c,s]_let_o__breve_inverted", {
+			unicode: ["{U+020E}", "{U+020F}"]
+		},
+		"lat_[c,s]_let_o__circumflex", {
+			unicode: ["{U+00D4}", "{U+00F4}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_o__caron", {
+			unicode: ["{U+01D1}", "{U+01D2}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_o__dot_above", {
+			unicode: ["{U+022E}", "{U+022F}"]
+		},
+		"lat_[c,s]_let_o__dot_below", {
+			unicode: ["{U+1ECC}", "{U+1ECD}"]
+		},
+		"lat_[c,s]_let_o__diaeresis", {
+			unicode: ["{U+00D6}", "{U+00F6}"],
+			alterations: [{}, { combining: "{U+1DF3}" }],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_o__grave", {
+			unicode: ["{U+00D2}", "{U+00F2}"],
+			options: { fastKey: "$?Tertiary" }
+		},
+		"lat_[c,s]_let_o__grave_double", {
+			unicode: ["{U+020C}", "{U+020D}"],
+			options: { fastKey: "$?Tertiary" }
+		},
+		"lat_[c,s]_let_o__loop", {
+			unicode: ["{U+A74C}", "{U+A74D}"],
+			recipe: ["$${arrow_up_ushaped}"]
+		},
+		"lat_[c,s]_let_o__hook_above", {
+			unicode: ["{U+1ECE}", "{U+1ECF}"]
+		},
+		"lat_s_let_o__retroflex_hook", {
+			unicode: "{U+1DF1B}"
+		},
+		"lat_s_let_o__retroflex_hook_open", {
+			unicode: "{U+1D97}",
+			recipe: ["$-${retroflex_hook}"]
+		},
+		"lat_[c,s]_let_o__horn", {
+			unicode: ["{U+01A0}", "{U+01A1}"]
+		},
+		"lat_[c,s]_let_o__macron", {
+			unicode: ["{U+014C}", "{U+014D}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_o__solidus_long", {
+			unicode: ["{U+00D8}", "{U+00F8}"],
+			alterations: [{}, { modifier: "{U+107A2}" }],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_s_let_o__solidus_long_open", {
+			unicode: "{U+AB3F}",
+			recipe: ["$-${solidus_long}"]
+		},
+		"lat_s_let_o__solidus_long_sideways", {
+			unicode: "{U+1D13}",
+			recipe: ["${arrow_right_circle}${solidus_long}"]
+		},
+		"lat_[c,s]_let_o__stroke_long", {
+			unicode: ["{U+A74A}", "{U+A74B}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_o__ogonek", {
+			unicode: ["{U+01EA}", "{U+01EB}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_o__tilde_above", {
+			unicode: ["{U+00D5}", "{U+00F5}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_o__tilde_overlay", {
+			unicode: ["{U+019F}", "{U+0275}"]
+		},
+		"lat_[c,s]_let_o__acute__horn", {
+			unicode: ["{U+1EDA}", "{U+1EDB}"]
+		},
+		"lat_[c,s]_let_o__circumflex__acute", {
+			unicode: ["{U+1ED0}", "{U+1ED1}"]
+		},
+		"lat_[c,s]_let_o__circumflex__dot_below", {
+			unicode: ["{U+1ED8}", "{U+1ED9}"]
+		},
+		"lat_[c,s]_let_o__circumflex__grave", {
+			unicode: ["{U+1ED2}", "{U+1ED3}"]
+		},
+		"lat_[c,s]_let_o__circumflex__hook_above", {
+			unicode: ["{U+1ED4}", "{U+1ED5}"]
+		},
+		"lat_[c,s]_let_o__circumflex__tilde_above", {
+			unicode: ["{U+1ED6}", "{U+1ED7}"]
+		},
+		"lat_[c,s]_let_o__dot_below__horn", {
+			unicode: ["{U+1EE2}", "{U+1EE3}"]
+		},
+		"lat_[c,s]_let_o__grave__horn", {
+			unicode: ["{U+1EDC}", "{U+1EDD}"]
+		},
+		"lat_[c,s]_let_o__hook_above__horn", {
+			unicode: ["{U+1EDE}", "{U+1EDF}"]
+		},
+		"lat_[c,s]_let_o__macron__acute", {
+			unicode: ["{U+1E52}", "{U+1E53}"]
+		},
+		"lat_[c,s]_let_o__macron__dot_above", {
+			unicode: ["{U+0230}", "{U+0231}"]
+		},
+		"lat_[c,s]_let_o__macron__diaeresis", {
+			unicode: ["{U+022A}", "{U+022B}"]
+		},
+		"lat_[c,s]_let_o__macron__grave", {
+			unicode: ["{U+1E50}", "{U+1E51}"]
+		},
+		"lat_[c,s]_let_o__macron__ogonek", {
+			unicode: ["{U+01EC}", "{U+01ED}"]
+		},
+		"lat_[c,s]_let_o__macron__tilde_above", {
+			unicode: ["{U+022C}", "{U+022D}"]
+		},
+		"lat_[c,s]_let_o__solidus_long__acute", {
+			unicode: ["{U+01FE}", "{U+01FF}"]
+		},
+		"lat_[c,s]_let_o__tilde_above__acute", {
+			unicode: ["{U+1E4C}", "{U+1E4D}"]
+		},
+		"lat_[c,s]_let_o__tilde_above__diaeresis", {
+			unicode: ["{U+1E4E}", "{U+1E4F}"]
+		},
+		"lat_[c,s]_let_o__tilde_above__horn", {
+			unicode: ["{U+1EE0}", "{U+1EE1}"]
+		},
 		;
 		;
 		; * Uncommon Cyrillic Letters
