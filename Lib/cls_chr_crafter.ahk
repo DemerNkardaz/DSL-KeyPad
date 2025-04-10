@@ -312,7 +312,7 @@ Class ChrCrafter {
 
 							if caseSensitiveMatch || uniqueRecipeMatch {
 								charFound := True
-								indexedValueResult.Set(value.index, this.GetRecipesString_NEW(characterEntry))
+								indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry))
 							}
 						} else if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipeEntry)) {
 							charFound := True
@@ -335,7 +335,7 @@ Class ChrCrafter {
 
 						if caseSensitiveMatch || uniqueRecipeMatch {
 							charFound := True
-							indexedValueResult.Set(value.index, this.GetRecipesString_NEW(characterEntry))
+							indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry))
 						}
 					} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipe)) {
 						charFound := True
@@ -396,12 +396,12 @@ Class ChrCrafter {
 
 		for line in getList {
 			if StrLen(line) > 0 {
-				characterEntry := ChrLib.GetEntry(line)
-
-				if characterEntry.recipe.Length = 0 {
-					continue
-				} else {
-					output .= this.GetRecipesString(characterEntry)
+				if ChrLib.entries.HasOwnProp(line) {
+					if ChrLib.entries.%line%.recipe.Length = 0 {
+						continue
+					} else {
+						output .= this.GetRecipesString(line)
+					}
 				}
 			}
 		}
@@ -528,37 +528,23 @@ Class ChrCrafter {
 		return output
 	}
 
-	static GetRecipesString_NEW(entryName) {
+	static GetRecipesString(entryName) {
 		output := ""
 
 		recipe := ChrRecipeHandler.GetStr(entryName, True, " | ")
-		uniSequence := Util.StrFormattedReduce(ChrLib.Get(entryName), , True)
+		entry := ChrLib.GetEntry(entryName)
+		uniSequence := ""
+		if StrLen(entry.symbol.alt) {
+			uniSequence := entry.symbol.alt
+		} else {
+			uniSequence := Util.StrFormattedReduce(ChrLib.Get(entryName), , True)
+		}
 
 		output .= uniSequence " (" (IsObject(recipe) ? recipe.ToString(" | ") : recipe) "), "
 
 		return output
 	}
 
-	static GetRecipesString(value) {
-		output := ""
-
-		recipe := value.recipeAlt.Length > 0 ? value.recipeAlt : value.recipe
-		uniSequence := Util.StrFormattedReduce(this.GetUniChar(value, True))
-
-		if IsObject(recipe) {
-			intermediateValue := ""
-
-			for _, recipeEntry in recipe {
-				intermediateValue .= " " recipeEntry " |"
-			}
-
-			output .= uniSequence " (" RegExReplace(intermediateValue, "(^\s|\s\|$)", "") "), "
-		} else {
-			output .= uniSequence " (" recipe "), "
-		}
-
-		return output
-	}
 
 	static GetComparedChar(value) {
 		output := ""

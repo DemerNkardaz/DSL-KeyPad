@@ -371,7 +371,7 @@ class ChrLib {
 
 	static SearchPrompt() {
 		searchQuery := Cfg.Get("Search", "LatestPrompts", "")
-		resultObj := { result: "", prompt: "", send: (*) => "" }
+		resultObj := { result: "", prompt: "", failed: [], send: (*) => "" }
 		IB := InputBox(Locale.Read("symbol_search_prompt"), Locale.Read("symbol_search"), "w350 h110", searchQuery)
 		if IB.Result = "Cancel"
 			return resultObj
@@ -386,10 +386,16 @@ class ChrLib {
 		if InStr(searchQuery, ",") {
 			tagSplit := StrSplit(searchQuery, ",")
 			for tag in tagSplit {
-				resultObj.result .= this.Search(Trim(tag))
+				interResult := this.Search(Trim(tag))
+				if StrLen(interResult) = 0
+					resultObj.failed.Push(tag)
+				resultObj.result .= interResult
 			}
 		} else {
-			resultObj.result := this.Search(searchQuery)
+			interResult := this.Search(searchQuery)
+			if StrLen(interResult) = 0
+				resultObj.failed.Push(searchQuery)
+			resultObj.result := interResult
 		}
 
 		resultObj.prompt := searchQuery
@@ -397,6 +403,9 @@ class ChrLib {
 
 		if StrLen(resultObj.result) > 0 {
 			Cfg.Set(searchQuery, "Search", "LatestPrompts")
+		} else {
+			if resultObj.failed.Length > 0
+				MsgBox(Util.StrVarsInject(Locale.Read("warning_tag_absent"), resultObj.failed.ToString()), App.title, "Icon!")
 		}
 
 		return resultObj

@@ -8585,7 +8585,45 @@ LibRegistrate(this) {
 		"ipa_combining_mode", { unicode: "{U+0041}", sequence: ["{U+25CC}", "{U+0363}", "{U+25CC}", "{U+1DE8}", "{U+25CC}", "{U+0369}", "{U+25CC}", "{U+1DF1}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt F2" } },
 		"ipa_modifiers_mode", { unicode: "{U+0041}", sequence: ["{U+02B0}", "{U+02B1}", "{U+02B2}", "{U+02B3}", "{U+02B7}", "{U+02B8}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt F3" } },
 		"ipa_subscript_mode", { unicode: "{U+0041}", sequence: ["{U+2090}", "{U+2091}", "{U+2095}", "{U+2C7C}", "{U+2096}", "{U+2097}"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt RShift F3" } },
+		;
+		;
+		; * Etc.
+		;
+		;
+		"replacment_character", {
+			titles: Map("ru", "Заменяющий символ", "en", "Replacement character"),
+			unicode: "{U+FFFD}",
+			options: { noCalc: True },
+			recipe: ["null"]
+		},
+		"object_replacement_character", {
+			titles: Map("ru", "Объекто-заменяющий символ", "en", "Object replacement character"),
+			unicode: "{U+FFFC}",
+			options: { noCalc: True },
+			recipe: ["obj"]
+		},
 	)
+
+	Loop 256 {
+		index := A_Index
+
+		if (index <= 16) {
+			unicodeValue := Format("FE{:02X}", index - 1)
+		} else {
+			offset := index - 17
+			unicodeValue := Format("E01{:02X}", offset)
+		}
+
+		ChrLib.AddEntries(
+			"variant_selector_" index, {
+				titles: Map("ru", "Селектор варианта " index, "en", "Variant selector " index),
+				unicode: "{U+" unicodeValue "}",
+				options: { noCalc: True },
+				recipe: ["vs" index],
+				symbol: { alt: "<VARIANT SELECTOR-" index ">" }
+			}
+		)
+	}
 
 	if this.duplicatesList.Length > 0
 		TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), this.duplicatesList.ToString()), App.winTitle, "Icon! Mute")
