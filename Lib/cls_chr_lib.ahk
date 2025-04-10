@@ -383,32 +383,58 @@ class ChrLib {
 			return resultObj
 		}
 
-		if InStr(searchQuery, ",") {
-			tagSplit := StrSplit(searchQuery, ",")
-			for tag in tagSplit {
-				interResult := this.Search(Trim(tag))
-				if StrLen(interResult) = 0
-					resultObj.failed.Push(tag)
-				resultObj.result .= interResult
+		if RegExMatch(searchQuery, "^Func\s\*\s(.*?)$", &match) {
+			funcRef := StrSplit(match[1], ".")
+			if funcRef.Length = 1 {
+				funcRef()
+			} else if funcRef.Length > 1 {
+				interRef := ""
+				objRef := ""
+
+				for i, ref in funcRef {
+					if i = 1 {
+						interRef := %ref%
+						objRef := interRef
+					} else if i < funcRef.Length {
+						interRef := interRef.%ref%
+						objRef := interRef
+					} else {
+						method := ref
+						interRef := interRef.%method%
+						interRef.Call(objRef)
+					}
+				}
 			}
+			return resultObj
 		} else {
-			interResult := this.Search(searchQuery)
-			if StrLen(interResult) = 0
-				resultObj.failed.Push(searchQuery)
-			resultObj.result := interResult
+
+			if InStr(searchQuery, ",") {
+				tagSplit := StrSplit(searchQuery, ",")
+				for tag in tagSplit {
+					interResult := this.Search(Trim(tag))
+					if StrLen(interResult) = 0
+						resultObj.failed.Push(tag)
+					resultObj.result .= interResult
+				}
+			} else {
+				interResult := this.Search(searchQuery)
+				if StrLen(interResult) = 0
+					resultObj.failed.Push(searchQuery)
+				resultObj.result := interResult
+			}
+
+			resultObj.prompt := searchQuery
+			resultObj.send := (*) => SendText(resultObj.result)
+
+			if StrLen(resultObj.result) > 0 {
+				Cfg.Set(searchQuery, "Search", "LatestPrompts")
+			} else {
+				if resultObj.failed.Length > 0
+					MsgBox(Util.StrVarsInject(Locale.Read("warning_tag_absent"), resultObj.failed.ToString()), App.title, "Icon!")
+			}
+
+			return resultObj
 		}
-
-		resultObj.prompt := searchQuery
-		resultObj.send := (*) => SendText(resultObj.result)
-
-		if StrLen(resultObj.result) > 0 {
-			Cfg.Set(searchQuery, "Search", "LatestPrompts")
-		} else {
-			if resultObj.failed.Length > 0
-				MsgBox(Util.StrVarsInject(Locale.Read("warning_tag_absent"), resultObj.failed.ToString()), App.title, "Icon!")
-		}
-
-		return resultObj
 	}
 
 	static Search(searchQuery) {
@@ -797,7 +823,7 @@ class ChrLib {
 		if refinedEntry.recipe.Length > 0 {
 			for recipe in refinedEntry.recipe {
 				if !this.entryRecipes.Has(recipe) {
-					this.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.sequence.Length > 0 ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index })
+					this.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.sequence.Length > 0 ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index, name: entryName })
 				} else {
 					this.duplicatesList.Push(recipe)
 				}
@@ -946,6 +972,23 @@ class ChrLib {
 
 		return output
 	}
+
+	static PrintRecipesToFile() {
+		filePath := A_ScriptDir "\recipes.txt"
+		indexedMap := Map()
+		output := ""
+
+		for recipe, reference in ChrLib.entryRecipes {
+			indexedMap.Set(reference.index, recipe "`t::`t" reference.name "`n")
+		}
+
+		for key, value in indexedMap {
+			output .= value
+		}
+
+		FileAppend(output, filePath, "UTF-8")
+	}
+
 }
 
 

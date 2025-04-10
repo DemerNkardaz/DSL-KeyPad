@@ -524,6 +524,8 @@ Class MyRecipes {
 					MsgBox("[" section.section "]`n" Util.StrVarsInject(Locale.Read("gui_recipes_create_invalid_recipe"), section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result), App.winTitle)
 				}
 			}
+			if ChrLib.duplicatesList.Length > 0
+				TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), ChrLib.duplicatesList.ToString()), App.winTitle, "Icon! Mute")
 		}
 	}
 
