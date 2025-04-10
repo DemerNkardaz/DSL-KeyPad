@@ -302,10 +302,6 @@ LibRegistrate(this) {
 			options: { groupKey: ["M", "Ь"], fastKey: "<+ [M][Ь]" },
 			symbol: { category: "Diacritic Mark" },
 		},
-		"line_below", { proxy: "macron_below",
-			groups: [], options: {},
-			symbol: { category: "Diacritic Mark" }
-		},
 		"ogonek", {
 			unicode: "{U+0328}", LaTeX: ["\k"],
 			alterations: {
@@ -2104,6 +2100,18 @@ LibRegistrate(this) {
 			tags: ["down u-arrow", "u-образная стрелка вниз"],
 			groups: ["Special Characters", "Special Fast Secondary"],
 			options: { fastKey: "<+ [" Chr(0x2192) "]" },
+		},
+		;
+		;
+		; * Proxies
+		;
+		;
+		"line_below", { proxy: "macron_below",
+			groups: [], options: { noCalc: True },
+			symbol: { category: "Diacritic Mark" }
+		},
+		"descender", { proxy: "arrow_down",
+			groups: [], options: { noCalc: True },
 		},
 		;
 		;
@@ -3989,7 +3997,6 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_h__descender", {
 			unicode: ["{U+2C67}", "{U+2C68}"],
-			recipe: ["$${arrow_down}"],
 		},
 		"lat_[c,s]_let_h__common_hook", {
 			unicode: ["{U+A7AA}", "{U+0266}"],
@@ -4128,7 +4135,6 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_k__descender", {
 			unicode: ["{U+2C69}", "{U+2C6A}"],
-			recipe: ["$${arrow_down}"]
 		},
 		"lat_[c,s]_let_k__stroke_short__solidus_short", {
 			unicode: ["{U+A744}", "{U+A745}"]
@@ -4230,6 +4236,113 @@ LibRegistrate(this) {
 				"${lat_s_let_l__retroflex_hook}${arrow_right_ushaped}"
 			]
 		},
+		; Latin Letter “M”
+		"lat_[c,s]_let_m__acute", {
+			unicode: ["{U+1E3E}", "{U+1E3F}"],
+			options: { fastKey: "$?Primary" }
+		},
+		"lat_[c,s]_let_m__dot_above", {
+			unicode: ["{U+1E40}", "{U+1E41}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_[c,s]_let_m__dot_below", {
+			unicode: ["{U+1E42}", "{U+1E43}"],
+			options: { fastKey: "<! $?Secondary" }
+		},
+		"lat_s_let_m__crossed_tail", {
+			unicode: "{U+AB3A}",
+			recipe: ["$${arrow_right_ushaped}"]
+		},
+		"lat_[c,s]_let_m__common_hook", {
+			unicode: ["{U+2C6E}", "{U+0271}"],
+			alterations: [{}, { modifier: "{U+1DAC}" }],
+			options: { fastKey: ">+ $?Secondary" },
+			recipe: ["$${arrow_rightdown}"]
+		},
+		"lat_s_let_m__palatal_hook", {
+			unicode: "{U+1D86}"
+		},
+		"lat_s_let_m__tilde_overlay", {
+			unicode: "{U+1D6F}"
+		},
+		"lat_s_let_m_turned__long_leg", {
+			unicode: "{U+0270}",
+			alterations: { modifier: "{U+1DAD}" },
+			recipe: ["$${arrow_left_circle}${arrow_down}"],
+			symbol: { beforeLetter: "turned" }
+		},
+		; Latin Letter “N”
+		"lat_[c,s]_let_n__acute", {
+			unicode: ["{U+0143}", "{U+0144}"],
+			options: { fastKey: "$?Primary" }
+		},
+		"lat_[c,s]_let_n__circumflex_below", {
+			unicode: ["{U+1E4A}", "{U+1E4B}"]
+		},
+		"lat_[c,s]_let_n__caron", {
+			unicode: ["{U+0147}", "{U+0148}"],
+			options: { fastKey: "<!<+ $?Secondary" }
+		},
+		"lat_[c,s]_let_n__cedilla", {
+			unicode: ["{U+0145}", "{U+0146}"],
+			options: { fastKey: "<!>+ $?Secondary" }
+		},
+		"lat_s_let_n__curl", {
+			unicode: "{U+0235}",
+			recipe: ["$${arrow_left_ushaped}"]
+		},
+		"lat_s_let_n__crossed_tail", {
+			unicode: "{U+AB3B}",
+			recipe: ["$${arrow_right_ushaped}"]
+		},
+		"lat_[c,s]_let_n__dot_above", {
+			unicode: ["{U+1E44}", "{U+1E45}"],
+			options: { fastKey: "<+>+ $?Secondary" }
+		},
+		"lat_[c,s]_let_n__dot_below", {
+			unicode: ["{U+1E46}", "{U+1E47}"],
+			options: { fastKey: "<! $?Secondary" }
+		},
+		"lat_[c,s]_let_n__descender", {
+			unicode: ["{U+A790}", "{U+A791}"],
+			options: { fastKey: "<+ $?Secondary" }
+		},
+		"lat_[c,s]_let_n__grave", {
+			unicode: ["{U+01F8}", "{U+01F9}"],
+			options: { fastKey: "$?Tertiary" }
+		},
+		"lat_[c,s]_let_n__common_hook", {
+			unicode: ["{U+019D}", "{U+0272}"],
+			alterations: [{}, { modifier: "{U+1DAE}" }],
+			options: { fastKey: ">+ $?Secondary" },
+			recipe: ["$${arrow_leftdown}"]
+		},
+		"lat_s_let_n__palatal_hook", {
+			unicode: "{U+1D87}"
+		},
+		"lat_s_let_n__retroflex_hook", {
+			unicode: "{U+0273}",
+			alterations: { modifier: "{U+1DAF}" }
+		},
+		"lat_[c,s]_let_n__line_below", {
+			unicode: ["{U+1E48}", "{U+1E49}"]
+		},
+		"lat_[c,s]_let_n__solidus_long", {
+			unicode: ["{U+A7A4}", "{U+A7A5}"],
+			recipe: ["$${solidus_long}"]
+		},
+		"lat_[c,s]_let_n__tilde_above", {
+			unicode: ["{U+00D1}", "{U+00F1}"],
+			options: { fastKey: "$?Secondary" }
+		},
+		"lat_s_let_n__tilde_overlay", {
+			unicode: "{U+1D70}"
+		},
+		"lat_[c,s]_let_n__long_leg", {
+			unicode: ["{U+0220}", "{U+019E}"],
+			recipe: ["$${arrow_rightdown}"]
+		},
+		; Latin Letter “O”
 		;
 		;
 		; * Uncommon Cyrillic Letters

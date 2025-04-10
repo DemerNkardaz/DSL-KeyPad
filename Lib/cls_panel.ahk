@@ -486,7 +486,7 @@ Class Panel {
 
 			aboutLeftBox := panelWindow.AddGroupBox("x23 y34 w280 h520",)
 			panelWindow.AddGroupBox("x75 y65 w170 h170")
-			panelWindow.AddPicture("x98 y89 w128 h128", InternalFiles["AppIco"].File)
+			panelWindow.AddPicture("x98 y89 w128 h128 Icon1", App.internal["ico_dll"].file)
 
 			aboutTitle := panelWindow.AddText("x75 y245 w170 h32 Center BackgroundTrans", App.title)
 			aboutTitle.SetFont("s20 c333333", "Cambria")

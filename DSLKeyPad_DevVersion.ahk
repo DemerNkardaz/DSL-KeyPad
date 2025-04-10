@@ -182,7 +182,7 @@ DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
 DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
 
-TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
+TraySetIcon(App.internal["ico_dll"].file, 1)
 
 DefaultConfig := [
 	["Settings", "FastKeysIsActive", "False"],
@@ -2297,7 +2297,7 @@ ChangeTrayIconOnLanguage() {
 	Keyboard.CurrentLayout(&CurrentLayout)
 
 	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
-		TraySetIcon(InternalFiles["AppIcoDLL"].File, 9)
+		TraySetIcon(App.internal["ico_dll"].file, 9)
 		A_IconTip := DSLPadTitle " (" Locale.Read("tray_tooltip_disabled") ")"
 		return
 	}
@@ -2400,7 +2400,7 @@ ChangeTrayIconOnLanguage() {
 		IconCode := 1
 	}
 
-	TraySetIcon(InternalFiles["AppIcoDLL"].File, IconCode)
+	TraySetIcon(App.internal["ico_dll"].file, IconCode)
 	A_IconTip := TrayTitle
 }
 
@@ -2434,29 +2434,29 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 
 	if !CurrentActive {
 		if ScriptName = "Glagolitic Futhark" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
 		} else if ScriptName = "Hellenic" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
 		} else if ScriptName = "Old Turkic Old Permic" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, CurrentLayout = CodeEn ? 4 : CurrentLayout = CodeRu ? 5 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, CurrentLayout = CodeEn ? 4 : CurrentLayout = CodeRu ? 5 : 1)
 		} else if ScriptName = "Old Hungarian" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 6 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 6 : 1)
 		} else if ScriptName = "Gothic" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 7 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 7 : 1)
 		} else if ScriptName = "Old Italic" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 13 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 13 : 1)
 		} else if ScriptName = "Phoenician" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 14 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 14 : 1)
 		} else if ScriptName = "Ancient South Arabian" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 15 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 15 : 1)
 		} else if ScriptName = "Ancient North Arabian" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 16 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 16 : 1)
 		} else if ScriptName = "IPA" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 8 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 8 : 1)
 		} else if ScriptName = "Maths" {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 10 : 1)
+			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 10 : 1)
 		} else {
-			TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
+			TraySetIcon(App.internal["ico_dll"].file, 1)
 		}
 		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
 			UnregisterKeysLayout()
@@ -2469,7 +2469,7 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		}
 		ActiveScriptName := ScriptName
 	} else {
-		TraySetIcon(InternalFiles["AppIcoDLL"].File, 1)
+		TraySetIcon(App.internal["ico_dll"].file, 1)
 		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
 			UnregisterKeysLayout()
 		}
@@ -4335,7 +4335,8 @@ AddScriptToAutoload(*) {
 		FileDelete(ShortcutPath)
 	}
 
-	Command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" ShortcutPath "'); $shortcut.TargetPath = '" CurrentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" InternalFiles["AppIco"].File "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()" ""
+	IconIndex := 0
+	Command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" ShortcutPath "'); $shortcut.TargetPath = '" CurrentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" App.internal["ico_dll"].file "," IconIndex "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()"
 	RunWait(Command, , "Hide")
 
 	MsgBox(Labels[LanguageCode].Success, DSLPadTitle, 0x40)
@@ -6726,18 +6727,18 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
 	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
-	ScriptsSubMenu.SetIcon(Labels["vietNam"], InternalFiles["AppIcoDLL"].File, 11)
-	ScriptsSubMenu.SetIcon(Labels["pinYin"], InternalFiles["AppIcoDLL"].File, 12)
-	ScriptsSubMenu.SetIcon(Labels["glagolitic"], InternalFiles["AppIcoDLL"].File, 2)
-	ScriptsSubMenu.SetIcon(Labels["turkic"], InternalFiles["AppIcoDLL"].File, 4)
-	ScriptsSubMenu.SetIcon(Labels["hungarian"], InternalFiles["AppIcoDLL"].File, 6)
-	ScriptsSubMenu.SetIcon(Labels["gothic"], InternalFiles["AppIcoDLL"].File, 7)
-	ScriptsSubMenu.SetIcon(Labels["italic"], InternalFiles["AppIcoDLL"].File, 13)
-	ScriptsSubMenu.SetIcon(Labels["phoenician"], InternalFiles["AppIcoDLL"].File, 14)
-	ScriptsSubMenu.SetIcon(Labels["south_arabian"], InternalFiles["AppIcoDLL"].File, 15)
-	ScriptsSubMenu.SetIcon(Labels["north_arabian"], InternalFiles["AppIcoDLL"].File, 16)
-	ScriptsSubMenu.SetIcon(Labels["maths"], InternalFiles["AppIcoDLL"].File, 10)
-	ScriptsSubMenu.SetIcon(Labels["ipa"], InternalFiles["AppIcoDLL"].File, 8)
+	ScriptsSubMenu.SetIcon(Labels["vietNam"], App.internal["ico_dll"].file, 11)
+	ScriptsSubMenu.SetIcon(Labels["pinYin"], App.internal["ico_dll"].file, 12)
+	ScriptsSubMenu.SetIcon(Labels["glagolitic"], App.internal["ico_dll"].file, 2)
+	ScriptsSubMenu.SetIcon(Labels["turkic"], App.internal["ico_dll"].file, 4)
+	ScriptsSubMenu.SetIcon(Labels["hungarian"], App.internal["ico_dll"].file, 6)
+	ScriptsSubMenu.SetIcon(Labels["gothic"], App.internal["ico_dll"].file, 7)
+	ScriptsSubMenu.SetIcon(Labels["italic"], App.internal["ico_dll"].file, 13)
+	ScriptsSubMenu.SetIcon(Labels["phoenician"], App.internal["ico_dll"].file, 14)
+	ScriptsSubMenu.SetIcon(Labels["south_arabian"], App.internal["ico_dll"].file, 15)
+	ScriptsSubMenu.SetIcon(Labels["north_arabian"], App.internal["ico_dll"].file, 16)
+	ScriptsSubMenu.SetIcon(Labels["maths"], App.internal["ico_dll"].file, 10)
+	ScriptsSubMenu.SetIcon(Labels["ipa"], App.internal["ico_dll"].file, 8)
 
 	ScriptsSubMenu.Disable(Labels["telexInput"])
 	ScriptsSubMenu.Disable(Labels["altInput"])
@@ -6800,17 +6801,17 @@ ManageTrayItems() {
 	App.tray.Add()
 	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
 		App.tray.Add(Labels["enable"], (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
-		App.tray.SetIcon(Labels["enable"], InternalFiles["AppIcoDLL"].File, 9)
+		App.tray.SetIcon(Labels["enable"], App.internal["ico_dll"].file, 9)
 	} else {
 
 		App.tray.Add(Labels["disable"], (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
-		App.tray.SetIcon(Labels["disable"], InternalFiles["AppIcoDLL"].File, 9)
+		App.tray.SetIcon(Labels["disable"], App.internal["ico_dll"].file, 9)
 	}
 	App.tray.Add()
 	App.tray.Add(Labels["exit"], ExitApplication)
 	App.tray.Add()
 
-	App.tray.SetIcon(CurrentApp, InternalFiles["AppIco"].File)
+	App.tray.SetIcon(CurrentApp, App.internal["ico_dll"].file, 1)
 	App.tray.SetIcon(Labels["search"], ImageRes, 169)
 	App.tray.SetIcon(Labels["unicode"], Shell32, 225)
 	App.tray.SetIcon(Labels["altcode"], Shell32, 313)
