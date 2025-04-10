@@ -630,8 +630,8 @@ Class Panel {
 			legendButton: panelWindow.AddButton("v" options.prefix "LegendButton " this.UISets.infoBox.legendButton, Chr(0x1F4D6)),
 		}
 
-		GroupBoxOptions.preview.SetFont("s" this.UISets.infoFonts.previewSize, this.UISets.infoFonts.fontFace["serif"].name)
-		GroupBoxOptions.title.SetFont("s" this.UISets.infoFonts.titleSize, this.UISets.infoFonts.fontFace["serif"].name)
+		GroupBoxOptions.preview.SetFont("s" this.UISets.infoFonts.previewSize, Fonts.fontFaces["Default"].name)
+		GroupBoxOptions.title.SetFont("s" this.UISets.infoFonts.titleSize, Fonts.fontFaces["Default"].name)
 		GroupBoxOptions.LaTeX.SetFont("s12")
 		GroupBoxOptions.alt.SetFont("s12")
 		GroupBoxOptions.unicode.SetFont("s12")
@@ -742,8 +742,8 @@ Class Panel {
 			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
 			this.PanelGUI[options.prefix "Alert"].Text := ""
 
-			this.PanelGUI[options.prefix "Title"].SetFont("s" this.UISets.infoFonts.titleSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
-			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.UISets.infoFonts.previewSize " norm cDefault", this.UISets.infoFonts.fontFace["serif"].name)
+			this.PanelGUI[options.prefix "Title"].SetFont("s" this.UISets.infoFonts.titleSize " norm cDefault", Fonts.fontFaces["Default"].name)
+			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.UISets.infoFonts.previewSize " norm cDefault", Fonts.fontFaces["Default"].name)
 			this.PanelGUI[options.prefix "Unicode"].SetFont("s12")
 			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont("s12")
@@ -791,7 +791,7 @@ Class Panel {
 
 			this.PanelGUI[options.prefix "Title"].SetFont((StrLen(this.PanelGUI[options.prefix "Title"].Text) > 30) ? "s12" : "s" this.UISets.infoFonts.titleSize)
 
-			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(value.symbol.font) > 0 ? value.symbol.font : this.UISets.infoFonts.fontFace["serif"].name)
+			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(value.symbol.font) > 0 ? value.symbol.font : Fonts.fontFaces["Default"].name)
 			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.UISets.infoFonts.previewSize " norm cDefault")
 			this.PanelGUI[options.prefix "Symbol"].SetFont(StrLen(value.symbol.customs) > 0 ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" this.UISets.infoFonts.previewSmaller " norm cDefault" : "s" this.UISets.infoFonts.previewSize " norm cDefault")
 

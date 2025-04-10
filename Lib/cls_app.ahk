@@ -16,10 +16,6 @@ Class App {
 		temp: A_Temp "\DSLKeyPad",
 	}
 
-	static usr := {
-		sid: PowerShell_UserSID(),
-	}
-
 	static gitBranches := Map(
 		"Stable", "main",
 		"Dev", "dev",
@@ -54,6 +50,19 @@ Class App {
 		}
 
 	}
+
+	; static UUID() {
+	; For obj in ComObjGet("winmgmts:{impersonationLevel=impersonate}!\\" A_ComputerName "\root\cimv2").ExecQuery("Select * From Win32_ComputerSystemProduct")
+	; return obj.UUID
+	; }
+
+	; static SID() {
+	; username := A_UserName
+	; query := "SELECT SID FROM Win32_UserAccount WHERE Name='" username "' AND Domain='" A_ComputerName "'"
+	; for obj in ComObjGet("winmgmts:{impersonationLevel=impersonate}!\\" A_ComputerName "\root\cimv2").ExecQuery(query)
+	; return obj.SID
+	; return ""
+	; }
 
 	static Update(timeOut := 0, forceUpdate := False) {
 

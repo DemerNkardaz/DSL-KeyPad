@@ -103,7 +103,6 @@ LaTeXMode := "Default"
 #Include <cls_layout>
 #Include <cls_long_press>
 #Include <hotstrings>
-#Include <supplement_pshell>
 #Include <supplement_python>
 
 
@@ -167,11 +166,11 @@ InternalFiles := Map(
 	"ExternalFncGuiBtnClr", { Repo: RawRepoLib "External\fnc_gui_button_icon.ahk", File: WorkingDir "\Lib\External\fnc_gui_button_icon.ahk" },
 	"LibUtils", { Repo: RawRepoLib "utils.ahk", File: WorkingDir "\Lib\utils.ahk" },
 	"pyUniName", { Repo: RawRepoLib ".py/unicodeName.py", File: WorkingDir "\Lib\.py\unicodeName.py" },
-	"psSID", { Repo: RawRepoLib ".ps/usrSID.ps1", File: WorkingDir "\Lib\.ps\usrSID.ps1" },
 )
 
 #Include <cls_app>
 #Include <cls_cfg>
+#Include <cls_fonts>
 #Include <cls_language>
 #Include <cls_chr_crafter>
 #Include <cls_chr_inserter>
@@ -215,21 +214,6 @@ DefaultConfig := [
 	["ServiceFields", "PrevLayout", ""],
 ]
 
-
-/*
-FontFace := Map(
-	"sans", {
-		name: "Noto Sans",
-		source: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSans/googlefonts/variable-ttf/NotoSans%5Bwdth%2Cwght%5D.ttf"
-	},
-		"serif", {
-			name: "Noto Serif",
-			source: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerif/googlefonts/variable-ttf/NotoSerif%5Bwdth%2Cwght%5D.ttf"
-		},
-)
-*/
-
-
 FontFace := Map(
 	"serif", {
 		name: "Noto Serif",
@@ -237,86 +221,6 @@ FontFace := Map(
 	},
 )
 
-
-IsFont(FontName) {
-	Suffixes := ["", " Regular", " Regular (TrueType)"]
-
-	for Suffix in Suffixes {
-		FullKeyName := FontName Suffix
-
-		try {
-			RegPath := "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
-			if RegRead(RegPath, FullKeyName) {
-				return True
-			}
-		}
-		catch {
-		}
-
-		try {
-			if App.usr.sid != "" {
-				RegPath := "HKEY_USERS\" App.usr.sid "\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
-				if RegRead(RegPath, FullKeyName) {
-					return True
-				}
-			}
-		}
-		catch {
-		}
-	}
-	return False
-}
-
-
-FontValidate() {
-	NamesToBeInstalled := "`n"
-	SourcesToBeInstalled := []
-	FoundNotInstalled := False
-	for _, font in FontFace {
-		if !IsFont(font.name) {
-			SourcesToBeInstalled.Push(font.source)
-			NamesToBeInstalled .= font.name "`n"
-			FoundNotInstalled := True
-		} else {
-			continue
-		}
-	}
-
-	if FoundNotInstalled {
-		MsgBox(Locale.Read("prepare_fonts") NamesToBeInstalled, DSLPadTitle)
-
-		for _, fontSource in SourcesToBeInstalled {
-			FontInstall(fontSource)
-		}
-	}
-}
-
-FontInstall(FontSource) {
-	TempFolder := A_Temp "\DSLTemp"
-	DirCreate(TempFolder)
-
-	http := ComObject("WinHttp.WinHttpRequest.5.1")
-	http.Open("GET", FontSource, true)
-	try {
-		http.Send()
-		http.WaitForResponse()
-	} catch {
-		MsgBox("Can’t download font.`n" Locale.Read("prepare_fonts"), "Font Installer")
-	}
-
-	if (http.Status != 200) {
-		MsgBox("Can’t download font.", "Font Installer")
-		return
-	}
-
-	FontTitle := RegExReplace(StrSplit(FontSource, "/").Pop(), "[^a-zA-Z]+.*$", "") ".ttf"
-	FontPath := TempFolder "\" FontTitle
-	Download(FontSource, FontPath)
-	RunWait(FontPath)
-	FileDelete(FontPath)
-}
-
-FontValidate()
 
 GetChangeLog() {
 	global ChangeLogRaw
@@ -3377,8 +3281,8 @@ Constructor() {
 		alert: DSLPadGUI.Add("Edit", "vDiacriticAlert " commonInfoBox.alert),
 	}
 
-	GroupBoxDiacritic.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GroupBoxDiacritic.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxDiacritic.preview.SetFont(CommonInfoFonts.previewSize, Fonts.fontFaces["Default"].name)
+	GroupBoxDiacritic.title.SetFont(CommonInfoFonts.titleSize, Fonts.fontFaces["Default"].name)
 	GroupBoxDiacritic.LaTeX.SetFont("s12")
 	GroupBoxDiacritic.alt.SetFont("s12")
 	GroupBoxDiacritic.unicode.SetFont("s12")
@@ -3431,8 +3335,8 @@ Constructor() {
 		alert: DSLPadGUI.Add("Edit", "vSpacesAlert " commonInfoBox.alert),
 	}
 
-	GroupBoxSpaces.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GroupBoxSpaces.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxSpaces.preview.SetFont(CommonInfoFonts.previewSize, Fonts.fontFaces["Default"].name)
+	GroupBoxSpaces.title.SetFont(CommonInfoFonts.titleSize, Fonts.fontFaces["Default"].name)
 	GroupBoxSpaces.LaTeX.SetFont("s12")
 	GroupBoxSpaces.alt.SetFont("s12")
 	GroupBoxSpaces.unicode.SetFont("s12")
@@ -3602,8 +3506,8 @@ Constructor() {
 		alert: DSLPadGUI.Add("Edit", "vLigaturesAlert " commonInfoBox.alert),
 	}
 
-	GroupBoxLigatures.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GroupBoxLigatures.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxLigatures.preview.SetFont(CommonInfoFonts.previewSize, Fonts.fontFaces["Default"].name)
+	GroupBoxLigatures.title.SetFont(CommonInfoFonts.titleSize, Fonts.fontFaces["Default"].name)
 	GroupBoxLigatures.LaTeX.SetFont("s12")
 	GroupBoxLigatures.alt.SetFont("s12")
 	GroupBoxLigatures.unicode.SetFont("s12")
@@ -3659,8 +3563,8 @@ Constructor() {
 		alert: DSLPadGUI.Add("Edit", "vFastAlert " commonInfoBox.alert),
 	}
 
-	GroupBoxFastKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GroupBoxFastKeys.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxFastKeys.preview.SetFont(CommonInfoFonts.previewSize, Fonts.fontFaces["Default"].name)
+	GroupBoxFastKeys.title.SetFont(CommonInfoFonts.titleSize, Fonts.fontFaces["Default"].name)
 	GroupBoxFastKeys.LaTeX.SetFont("s12")
 	GroupBoxFastKeys.alt.SetFont("s12")
 	GroupBoxFastKeys.unicode.SetFont("s12")
@@ -3715,8 +3619,8 @@ Constructor() {
 		alert: DSLPadGUI.Add("Edit", "vGlagoAlert " commonInfoBox.alert),
 	}
 
-	GroupBoxGlagoKeys.preview.SetFont(CommonInfoFonts.previewSize, FontFace["serif"].name)
-	GroupBoxGlagoKeys.title.SetFont(CommonInfoFonts.titleSize, FontFace["serif"].name)
+	GroupBoxGlagoKeys.preview.SetFont(CommonInfoFonts.previewSize, Fonts.fontFaces["Default"].name)
+	GroupBoxGlagoKeys.title.SetFont(CommonInfoFonts.titleSize, Fonts.fontFaces["Default"].name)
 	GroupBoxGlagoKeys.LaTeX.SetFont("s12")
 	GroupBoxGlagoKeys.alt.SetFont("s12")
 	GroupBoxGlagoKeys.unicode.SetFont("s12")
@@ -3966,8 +3870,6 @@ GetRandomByGroups(GroupNames) {
 	}
 }
 
-HasPermicFont := IsFont("Noto Sans Old Permic2") ? True : "Noto Sans Old Permic"
-HasHungarianFont := IsFont("Noto Sans Old Hungarian2") ? True : "Noto Sans Old Hungarian"
 
 SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, PreviewTitle, PreviewLaTeX, PreviewLaTeXPackage, PreviewAlt, PreviewUnicode, PreviewHTML, PreviewTags, PreviewGroupTitle, PreviewGroup, PreviewAlert := "") {
 	LanguageCode := Language.Get()
@@ -4003,7 +3905,7 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 		if (HasProp(GetEntry, "symbolFont")) {
 			PreviewGroup.preview.SetFont(, GetEntry.symbolFont)
 		} else {
-			PreviewGroup.preview.SetFont(, FontFace["serif"].name)
+			PreviewGroup.preview.SetFont(, Fonts.fontFaces["Default"].name)
 		}
 
 		if HasProp(GetEntry, "symbolCustom") {
@@ -4161,14 +4063,14 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 			PreviewGroup.latex.SetFont("s12")
 		}
 
-		if RegExMatch(EntryNameKey, "^permic") && HasPermicFont = "Noto Sans Old Permic" {
-			TargetGroup[PreviewAlert].Text := Util.StrVarsInject(Locale.Read("warning_nofont"), HasPermicFont)
-		}
-		else if RegExMatch(EntryNameKey, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" {
-			TargetGroup[PreviewAlert].Text := Util.StrVarsInject(Locale.Read("warning_nofont"), HasHungarianFont)
-		} else {
-			TargetGroup[PreviewAlert].Text := ""
-		}
+		; if RegExMatch(EntryNameKey, "^permic") && HasPermicFont = "Noto Sans Old Permic" {
+		; TargetGroup[PreviewAlert].Text := Util.StrVarsInject(Locale.Read("warning_nofont"), HasPermicFont)
+		; }
+		; else if RegExMatch(EntryNameKey, "^hungarian") && HasHungarianFont = "Noto Sans Old Hungarian" {
+		; TargetGroup[PreviewAlert].Text := Util.StrVarsInject(Locale.Read("warning_nofont"), HasHungarianFont)
+		; } else {
+		; TargetGroup[PreviewAlert].Text := ""
+		; }
 	}
 }
 
@@ -4237,7 +4139,7 @@ TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 		if (Locale.Read(label) = SelectedLabel) {
 			TargetTextBox.Text := Locale.Read(label . "_description")
 			if InStr(label, "coverage_") {
-				TargetTextBox.SetFont("s16", FontFace["serif"].name)
+				TargetTextBox.SetFont("s16", Fonts.fontFaces["Default"].name)
 			} else {
 				TargetTextBox.SetFont("s10", "Segoe UI")
 			}
