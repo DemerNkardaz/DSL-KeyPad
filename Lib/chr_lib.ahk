@@ -2120,6 +2120,7 @@ LibRegistrate(this) {
 		;
 		"asterisk", {
 			unicode: "{U+002A}",
+			alterations: { small: "{U+FE61}" },
 			options: { noCalc: True },
 		},
 		"asterisk_low", {
@@ -2323,6 +2324,7 @@ LibRegistrate(this) {
 		},
 		"number_sign", {
 			unicode: "{U+0023}",
+			alterations: { small: "{U+FE5F}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"section", {
@@ -2334,19 +2336,22 @@ LibRegistrate(this) {
 		},
 		"comma", {
 			unicode: "{U+002C}",
+			alterations: { small: "{U+FE50}" },
 			options: { noCalc: True },
 		},
 		"dot", {
 			unicode: "{U+002E}",
+			alterations: { small: "{U+FE52}" },
 			options: { noCalc: True },
 		},
 		"exclamation", {
 			unicode: "{U+0021}",
-			alterations: { modifier: "{U+A71D}" },
+			alterations: { modifier: "{U+A71D}", small: "{U+FE57}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"question", {
 			unicode: "{U+003F}",
+			alterations: { small: "{U+FE56}" },
 			options: { noCalc: True },
 		},
 		"reversed_question", {
@@ -2425,10 +2430,12 @@ LibRegistrate(this) {
 		},
 		"semicolon", {
 			unicode: "{U+003B}",
+			alterations: { small: "{U+FE54}" },
 			options: { noCalc: True },
 		},
 		"colon", {
 			unicode: "{U+003A}",
+			alterations: { small: "{U+FE55}" },
 			options: { noCalc: True },
 		},
 		"apostrophe", {
@@ -2445,6 +2452,7 @@ LibRegistrate(this) {
 		},
 		"reverse_solidus", {
 			unicode: "{U+005C}",
+			alterations: { small: "{U+FE68}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"vertical_line", {
@@ -2453,6 +2461,7 @@ LibRegistrate(this) {
 		},
 		"commercial_at", {
 			unicode: "{U+0040}",
+			alterations: { small: "{U+FE6B}" },
 			options: { noCalc: True },
 		},
 		;
@@ -2462,6 +2471,7 @@ LibRegistrate(this) {
 		;
 		"emdash", {
 			unicode: "{U+2014}", LaTeX: ["---"],
+			alterations: { small: "{U+FE58}" },
 			tags: ["em dash", "длинное тире"],
 			groups: ["Dashes", "Smelting Special", "Special Fast Secondary"],
 			options: { groupKey: ["1"], fastKey: "[-]" },
@@ -2530,6 +2540,7 @@ LibRegistrate(this) {
 		},
 		"hyphen_minus", {
 			unicode: "{U+002D}",
+			alterations: { small: "{U+FE63}" },
 			options: { noCalc: True },
 		},
 		"underscore", {
@@ -2549,6 +2560,7 @@ LibRegistrate(this) {
 		;
 		"percent", {
 			unicode: "{U+0025}",
+			alterations: { small: "{U+FE6A}" },
 			options: { noCalc: True },
 		},
 		"permille", {
@@ -2572,12 +2584,12 @@ LibRegistrate(this) {
 		},
 		"equals", {
 			unicode: "{U+003D}",
-			alterations: { modifier: "{U+207C}", subscript: "{U+208C}" },
+			alterations: { modifier: "{U+207C}", subscript: "{U+208C}", small: "{U+FE66}" },
 			options: { noCalc: True },
 		},
 		"plus", {
 			unicode: "{U+002B}",
-			alterations: { modifier: "{U+207A}", subscript: "{U+208A}" },
+			alterations: { modifier: "{U+207A}", subscript: "{U+208A}", small: "{U+FE62}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"minus", {
@@ -2608,20 +2620,22 @@ LibRegistrate(this) {
 		},
 		"less_than", {
 			unicode: "{U+003C}",
+			alterations: { small: "{U+FE64}" },
 			options: { noCalc: True },
 		},
 		"greater_than", {
 			unicode: "{U+003E}",
+			alterations: { small: "{U+FE65}" },
 			options: { noCalc: True },
 		},
 		"left_parenthesis", {
 			unicode: "{U+0028}",
-			alterations: { modifier: "{U+207D}", subscript: "{U+208D}" },
+			alterations: { modifier: "{U+207D}", subscript: "{U+208D}", small: "{U+FE59}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"right_parenthesis", {
 			unicode: "{U+0029}",
-			alterations: { modifier: "{U+207E}", subscript: "{U+208E}" },
+			alterations: { modifier: "{U+207E}", subscript: "{U+208E}", small: "{U+FE5A}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"top_parenthesis", {
@@ -2766,10 +2780,12 @@ LibRegistrate(this) {
 		},
 		"left_brace", {
 			unicode: "{U+007B}",
+			alterations: { small: "{U+FE5C}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"right_brace", {
 			unicode: "{U+007D}",
+			alterations: { small: "{U+FE5D}" },
 			options: { noCalc: True, send: "Text" },
 		},
 		"top_brace", {
@@ -3450,6 +3466,7 @@ LibRegistrate(this) {
 		"lat_s_lig_db", { unicode: "{U+0238}", recipe: ["$"] },
 		"lat_s_lig_et", {
 			unicode: "{U+0026}",
+			alterations: { small: "{U+FE60}" },
 			tags: ["амперсанд", "ampersand"],
 			groups: ["Latin Ligatures"],
 			recipe: ["$"],
@@ -8304,6 +8321,7 @@ LibRegistrate(this) {
 		},
 		"wallet_dollar", {
 			unicode: "{U+0024}",
+			alterations: { small: "{U+FE69}" },
 			tags: ["доллар", "dollar"],
 			groups: ["Wallet Signs"],
 			recipe: ["S|", "USD", "DLR"],
@@ -8875,12 +8893,12 @@ LibRegistrate(this) {
 		}
 
 		ChrLib.AddEntries(
-			"variant_selector_" index, {
-				titles: Map("ru", "Селектор варианта " index, "en", "Variant selector " index),
+			"variantion_selector_" index, {
+				titles: Map("ru", "Селектор варианта " index, "en", "Variation selector " index),
 				unicode: "{U+" unicodeValue "}",
 				options: { noCalc: True },
 				recipe: ["vs" index],
-				symbol: { alt: "<VARIANT SELECTOR-" index ">" }
+				symbol: { alt: "<VARIATION SELECTOR-" index ">" }
 			}
 		)
 	}

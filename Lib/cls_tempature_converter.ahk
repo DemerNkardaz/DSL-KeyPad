@@ -62,7 +62,7 @@ Class TemperatureConversion {
 
 		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]"
 
-		CaretTooltip(conversionLabel)
+		Util.CaretTooltip(conversionLabel)
 		numberValue := this.GetNumber(conversionLabel)
 
 		try {
@@ -240,7 +240,7 @@ Class TemperatureConversion {
 				numberValue .= IH.Input
 			} else break
 
-			CaretTooltip(conversionLabel " " numberValue)
+			Util.CaretTooltip(conversionLabel " " numberValue)
 		}
 
 		ToolTip()

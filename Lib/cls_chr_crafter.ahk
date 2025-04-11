@@ -4,6 +4,8 @@
 */
 
 Class ChrCrafter {
+	static ComposeKeyClicks := 0
+	static ComposeKeyTimer := ""
 
 	static modifiedCharsType := ""
 	static prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
@@ -52,7 +54,6 @@ Class ChrCrafter {
 	}
 
 	static ComposeMode() {
-
 		output := ""
 		input := ""
 		previousInput := ""
@@ -69,7 +70,7 @@ Class ChrCrafter {
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
 
-		CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions))
+		Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions))
 
 		Loop {
 
@@ -120,7 +121,7 @@ Class ChrCrafter {
 			tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
 			currentInputMode := Util.StrVarsInject(Locale.Read("tooltip_input_mode"), "[" Auxiliary.inputMode "]")
 
-			CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
 			if !pauseOn || (IH.EndKey = "Enter") {
 				try {
@@ -156,7 +157,7 @@ Class ChrCrafter {
 								input := RegExReplace(input, RegExEscape(postInput), output)
 
 								tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
-								CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+								Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
 								continue
 							}
@@ -180,7 +181,7 @@ Class ChrCrafter {
 
 								if (input != originalInput) {
 									tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
-									CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 								}
 
 								continue
@@ -194,17 +195,42 @@ Class ChrCrafter {
 		PH.Stop()
 
 		if InStr(output, "N/A") {
-			CaretTooltip(Chr(0x26A0) " " Locale.Read("warning_recipe_absent"))
+			Util.CaretTooltip(Chr(0x26A0) " " Locale.Read("warning_recipe_absent"))
 			SetTimer(Tooltip, -1000)
 
 		} else {
-			CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " Util.StrFormattedReduce(output))
+			Util.CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " Util.StrFormattedReduce(output))
 			SetTimer(Tooltip, -500)
 			if !InStr(output, "N/A") || output != input
 				this.SendOutput(output)
 		}
-
 		return
+	}
+
+	static ComposeActivate() {
+		if Rules.ValidateOnCaretPos() {
+			if this.ComposeKeyClicks = 1 {
+				this.ComposeKeyClicks := 0
+				ChrCrafter("Compose")
+				return
+			} else {
+				this.ComposeKeyClicks++
+				this.ComposeActivationWait()
+			}
+		}
+	}
+
+	static ComposeActivationWait() {
+		if !(this.ComposeKeyTimer is String) {
+			SetTimer(SetZero, 0)
+			this.ComposeKeyTimer := ""
+		}
+
+		return SetTimer(SetZero, -300)
+
+		SetZero(*) {
+			this.ComposeKeyClicks := 0
+		}
 	}
 
 	static SendOutput(output) {

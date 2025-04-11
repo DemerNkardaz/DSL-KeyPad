@@ -2,7 +2,7 @@ bindingMaps := Map(
 	"User", Map(),
 	"Important", Map(
 		"Flat", Map(
-			"RAlt", (*) => ProceedCompose(),
+			"RAlt", (*) => ChrCrafter.ComposeActivate(),
 		),
 		"Moded", Map(
 			; Functional
@@ -73,9 +73,6 @@ bindingMaps := Map(
 			),
 			"I", Map(
 				">^", (*) => ReplaceWithUnicode("Hex"),
-			),
-			"X", Map(
-				"<^<#", (*) => IsInputFieldActive(),
 			),
 		)
 	),
@@ -371,7 +368,7 @@ bindingMaps := Map(
 		"Flat", Map(
 			"NumpadAdd", (K) => BindHandler.TimeSend(K, Map(
 				"NumpadSub", (*) => BindHandler.Send(K, "minusplus"),
-			), (*) => BindHandler.Send(K, "plus")),
+			)),
 			"NumpadSub", (K) => BindHandler.TimeSend(K, Map(
 				"NumpadAdd", (*) => BindHandler.Send(K, "plusminus"),
 			), (*) => BindHandler.Send(K, "minus")),

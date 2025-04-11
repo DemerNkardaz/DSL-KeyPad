@@ -716,7 +716,8 @@ Class BindHandler {
 
 	static Send(combo := "", characterNames*) {
 		Keyboard.CheckLayout(&lang)
-		if Language.Validate(lang, "bindings") {
+
+		if Language.Validate(lang, "bindings") && Rules.ValidateOnCaretPos() {
 			output := ""
 			inputType := ""
 
@@ -724,7 +725,7 @@ Class BindHandler {
 				if character is Func {
 					character(combo)
 				} else {
-					alt := ""
+					alt := AlterationActiveName
 					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
 						alt := alterationMatch[1]
 						character := RegExReplace(character, "\:\:.*$", "")
@@ -747,12 +748,14 @@ Class BindHandler {
 			chrValidation := "(\" Chr(0x00AE) "|\" Chr(0x2122) "|\" Chr(0x00A9) "|\" Chr(0x2022) "|\" Chr(0x25B6) "|\" Chr(0x25C0) "|\" Chr(0x0021) "|\" Chr(0x002B) "|\" Chr(0x005E) "|\" Chr(0x0023) "|\" Chr(0x007B) "|\" Chr(0x007D) "|\" Chr(0x0060) "|\" Chr(0x007E) "|\" Chr(0x0025) "|\" Chr(0x0009) "|\" Chr(0x000A) "|\" Chr(0x000D) ")"
 
 			if StrLen(inputType) == 0
-				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : "Input"
+				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : ""
 
 			if StrLen(output) > 20
 				ClipSend(output)
 			else
 				Send%inputType%(output)
+		} else {
+			this.SendDefault(combo)
 		}
 	}
 
@@ -777,7 +780,7 @@ Class BindHandler {
 
 	static TimeSend(combo := "", secondKeysActions := Map(), DefaultAction := False, timeLimit := "0.1") {
 		if this.waitTimeSend {
-			Send("{" combo "}")
+			this.SendDefault(combo)
 			return
 		}
 		this.waitTimeSend := True
@@ -806,17 +809,14 @@ Class BindHandler {
 			secondKeysActions[keyPressed] is Func {
 			secondKeysActions[keyPressed]()
 		} else {
-			Reset()
+			!DefaultAction ? this.SendDefault(combo) : DefaultAction()
 		}
 
 		this.waitTimeSend := False
+	}
 
-		Reset() {
-			!DefaultAction ? KeyRecovery() : DefaultAction()
-		}
-
-		KeyRecovery() {
-			Send("{Blind}" (InStr(modRef, "+") ? "+" : "") "{sc" keyRefScanCode "}")
-		}
+	static SendDefault(combo) {
+		Util.StrBind(combo, &keyRef, &modRef, &rulRef)
+		Send("{Blind}" modRef (StrLen(keyRef) > 1 ? "{" keyRef "}" : keyRef))
 	}
 }

@@ -18,6 +18,7 @@ Class Cfg {
 			"Skip_Group_Messages", "False",
 			"XCompose_Add_Recipe_Prefix", "False",
 			"User_Language", "",
+			"Validate_With_CaretPos", "True",
 			"F13F24", "False",
 		],
 		"Compose", [],

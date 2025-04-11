@@ -823,11 +823,14 @@ Class Panel {
 				"IsScriptBold", [value.alterations.HasOwnProp("scriptBold"), 0x1D4F1],
 				"IsDoubleStruck", [value.alterations.HasOwnProp("doubleStruck"), 0x1D559],
 				"IsDoubleStruckItalic", [value.alterations.HasOwnProp("doubleStruckItalic"), 0x2148],
+				"IsSmallCaps", [value.alterations.HasOwnProp("smallCapital"), 0x029C],
+				; "IsSmall", [value.alterations.HasOwnProp("small"), 0xFE57],
 			)
 
 			for entry, value in AlterationsValidator {
 				if (value[1]) {
-					groupTitle .= (value[2] == "(h)" ? value[2] : ChrLib.Get("dotted_circle") Chr(value[2])) " "
+					groupTitle .= (["(h)", 0x029C].HasValue(value[2]) ? (value[2] is Number ? Chr(value[2]) : value[2])
+						: ChrLib.Get("dotted_circle") Chr(value[2])) " "
 				}
 			}
 

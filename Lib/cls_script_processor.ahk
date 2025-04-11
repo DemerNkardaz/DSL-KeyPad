@@ -793,7 +793,7 @@ Class InputScriptProcessor {
 
 			if IPS.options.interceptionInputMode != "autoDiacritics" {
 				suggestions := IPS.GetSuggestions(IPS.inputLogger)
-				CaretTooltip(IPS.inputLogger (suggestions != "" ? "`n" ChrCrafter.FormatSuggestions(suggestions) : ""))
+				Util.CaretTooltip(IPS.inputLogger (suggestions != "" ? "`n" ChrCrafter.FormatSuggestions(suggestions) : ""))
 			}
 		} else {
 			IPS.InH.Stop()
@@ -858,7 +858,7 @@ Class InputScriptProcessor {
 		if StrLen(IPS.inputLogger) > 0 && sc = backspaceCode && !InputScriptProcessor.backspaceLock {
 			IPS.inputLogger := SubStr(IPS.inputLogger, 1, -1)
 			if IPS.options.interceptionInputMode != "autoDiacritics"
-				CaretTooltip(IPS.inputLogger)
+				Util.CaretTooltip(IPS.inputLogger)
 		} else if resetKeys.HasValue(sc) {
 			IPS.inputLogger := ""
 			Tooltip()

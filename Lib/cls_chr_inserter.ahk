@@ -80,7 +80,7 @@ Class CharacterInserter {
 				preview := CharacterInserter.%this.insertType%(input, True)
 			}
 
-			CaretTooltip("[ " preview " ]" Chr(0x2002) %this.insertType%Prefix StrUpper(input))
+			Util.CaretTooltip("[ " preview " ]" Chr(0x2002) %this.insertType%Prefix StrUpper(input))
 
 			if (IH.EndKey = "Enter") {
 				if StrLen(input) > 0 {

@@ -13,13 +13,11 @@
 
 #SingleInstance Force
 #MaxThreads 10
-;#UseHook
-;InstallKeybdHook(True, True)
-<^>!>^BackSpace:: KeyHistory
+SetKeyDelay(0, 50)
 A_HotkeyInterval := 1000
 A_MaxHotkeysPerInterval := 50
 
-; #Include <External\UIA>
+; <^>!>^BackSpace:: KeyHistory
 
 controlTypes := Map(
 	50000, "Button",
@@ -64,18 +62,6 @@ controlTypes := Map(
 	50039, "SemanticZoom",
 	50040, "AppBar"
 )
-
-IsInputFieldActive(*) {
-
-	; focusedElement := UIA.GetFocusedElement()
-	; controlType := focusedElement.CurrentControlType
-
-	; if controlTypes.Has(controlType) && ["Edit", "RichEdit", "Text", "Document", "ComboBox"].HasValue(controlTypes[controlType]) {
-
-	; 	MsgBox(controlTypes[controlType])
-	; }
-
-}
 
 
 second := 1000
@@ -144,12 +130,12 @@ LaTeXMode := "Default"
 
 #Include <External\prt_array>
 #Include <External\fnc_clip_send>
-#Include <External\fnc_caret_pos>
 #Include <External\fnc_gui_button_icon>
 #Include <utils>
 #Include <chr_alt_codes>
 #Include <chr_entities>
 #Include <cls_util>
+#Include <cls_rules>
 #Include <chr_lib>
 #Include <chr_bindlist>
 #Include <cls_chr_lib>
@@ -2512,15 +2498,6 @@ SendAltNumpad(CharacterCode) {
 	Send("{Alt Up}")
 }
 
-
-CaretTooltip(tooltipText) {
-	if CaretGetPos(&x, &y)
-		ToolTip(tooltipText, x, y + 30)
-	else if CaretGetPosAlternative(&x, &y)
-		ToolTip(tooltipText, x, y + 30)
-	else
-		ToolTip(tooltipText)
-}
 
 GREPizeSelection(GetCollaborative := False) {
 	CustomAfterStartEmdash := (IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") : "ensp"
