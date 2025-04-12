@@ -4411,9 +4411,10 @@ LibRegistrate(this) {
 		"lat_s_let_o__retroflex_hook", {
 			unicode: "{U+1DF1B}"
 		},
-		"lat_s_let_o__retroflex_hook_open", {
+		"lat_s_let_o_open__retroflex_hook", {
 			unicode: "{U+1D97}",
-			recipe: ["$-${retroflex_hook}"]
+			recipe: ["$-${retroflex_hook}"],
+			symbol: { beforeLetter: "open::3" }
 		},
 		"lat_[c,s]_let_o__horn", {
 			unicode: ["{U+01A0}", "{U+01A1}"]
@@ -4427,13 +4428,15 @@ LibRegistrate(this) {
 			alterations: [{}, { modifier: "{U+107A2}" }],
 			options: { fastKey: "$?Secondary" }
 		},
-		"lat_s_let_o__solidus_long_open", {
+		"lat_s_let_o_open__solidus_long", {
 			unicode: "{U+AB3F}",
-			recipe: ["$-${solidus_long}"]
+			recipe: ["$-${solidus_long}"],
+			symbol: { beforeLetter: "open::3" }
 		},
-		"lat_s_let_o__solidus_long_sideways", {
+		"lat_s_let_o_sideways__solidus_long", {
 			unicode: "{U+1D13}",
-			recipe: ["${arrow_right_circle}${solidus_long}"]
+			recipe: ["${arrow_right_circle}${solidus_long}"],
+			symbol: { beforeLetter: "sideways::3" }
 		},
 		"lat_[c,s]_let_o__stroke_long", {
 			unicode: ["{U+A74A}", "{U+A74B}"],

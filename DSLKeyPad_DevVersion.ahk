@@ -6398,7 +6398,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["4"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Ancient South Arabian"), (*) => ToggleLetterScript(, "Ancient North Arabian")),
 			">^" UseKey["0"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "IPA"), (*) => ToggleLetterScript(, "Maths")),
 			;
-			"RAlt", (*) => ProceedCompose(),
 			;"RCtrl", (*) => ProceedCombining(),
 			;"RShift", (*) => ProceedModifiers(),
 			;
@@ -6481,45 +6480,6 @@ TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False, 
 }
 
 
-RAltsCount := 0
-RAltsTimerEnds := False
-RAltsTimer := ""
-
-ProceedCompose() {
-	global RAltsTimerEnds, RAltsCount
-
-	if (RAltsTimerEnds) {
-		return
-	}
-
-	if RAltsCount = 1 {
-		RAltsCount := 0
-		ChrCrafter("Compose")
-		return
-	} else {
-		RAltsCount++
-		RAltsEndingTimer()
-	}
-}
-RAltsEndingTimer() {
-	global RAltsTimer
-	if (RAltsTimer != "") {
-		SetTimer(RAltsSetStats, 0)
-		RAltsTimer := ""
-	}
-
-	return SetTimer(RAltsSetStats, -300)
-}
-
-RAltsSetStats() {
-	global RAltsCount, RAltsTimerEnds
-	RAltsCount := 0
-	RAltsTimerEnds := True
-	Sleep 100
-	RAltsTimerEnds := False
-}
-
-
 SetModifiedCharsInput(ModeName := "combining") {
 	global AlterationActiveName
 
@@ -6537,16 +6497,6 @@ SetModifiedCharsInput(ModeName := "combining") {
 
 GetModifiedCharsType() {
 	return AlterationActiveName != "" ? AlterationActiveName : False
-}
-
-RShiftEndingTimer() {
-	global RCtrlTimer
-	if (RCtrlTimer != "") {
-		SetTimer(RAltsSetStats, 0)
-		RCtrlTimer := ""
-	}
-
-	return SetTimer(RAltsSetStats, -300)
 }
 
 

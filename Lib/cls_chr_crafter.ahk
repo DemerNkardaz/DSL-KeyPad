@@ -208,15 +208,13 @@ Class ChrCrafter {
 	}
 
 	static ComposeActivate() {
-		if Rules.ValidateOnCaretPos() {
-			if this.ComposeKeyClicks = 1 {
-				this.ComposeKeyClicks := 0
-				ChrCrafter("Compose")
-				return
-			} else {
-				this.ComposeKeyClicks++
-				this.ComposeActivationWait()
-			}
+		if this.ComposeKeyClicks = 1 {
+			this.ComposeKeyClicks := 0
+			ChrCrafter("Compose")
+			return
+		} else {
+			this.ComposeKeyClicks++
+			this.ComposeActivationWait()
 		}
 	}
 

@@ -289,13 +289,21 @@ Class Locale extends Language {
 			for letterBound in ["beforeLetter", "afterLetter"] {
 				if entry.symbol.HasOwnProp(letterBound) && StrLen(entry.symbol.%letterBound%) > 0 {
 					boundLink := Util.StrUpper(letterBound, 1)
+					entryBoundReference := entry.symbol.%letterBound%
 					if InStr(entry.symbol.%letterBound%, ",") {
 						splitted := StrSplit(Util.StrTrim(entry.symbol.%letterBound%), ",")
 						for i, bound in splitted {
 							l%boundLink% .= Locale.Read(pfx letterBound "_" bound, lang) (i < splitted.Length ? " " : "")
 						}
-					} else
-						l%boundLink% := Locale.Read(pfx letterBound "_" entry.symbol.%boundLink%, lang)
+					} else {
+						if RegExMatch(entryBoundReference, "\:\:(.*?)$", &match) {
+							index := Integer(match[1])
+							entryBoundReference := SubStr(entryBoundReference, 1, match.Pos(0) - 1)
+							l%boundLink% := Locale.VarSelect(Locale.Read(pfx letterBound "_" entryBoundReference, lang), index)
+						} else {
+							l%boundLink% := Locale.Read(pfx letterBound "_" entryBoundReference, lang)
+						}
+					}
 				}
 			}
 

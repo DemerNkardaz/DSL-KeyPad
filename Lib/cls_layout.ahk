@@ -717,7 +717,7 @@ Class BindHandler {
 	static Send(combo := "", characterNames*) {
 		Keyboard.CheckLayout(&lang)
 
-		if Language.Validate(lang, "bindings") && Rules.ValidateOnCaretPos() {
+		if Language.Validate(lang, "bindings") {
 			output := ""
 			inputType := ""
 
