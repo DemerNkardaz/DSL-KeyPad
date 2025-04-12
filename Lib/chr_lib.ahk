@@ -3446,7 +3446,7 @@ LibRegistrate(this) {
 		; * Latin Ligatures
 		;
 		;
-		"lat_[c,s]_lig_aa", { unicode: ["{U+A732}", "{U+A733}"], recipe: ["$"] },
+		"lat_[c,s]_lig_aa", { unicode: ["{U+A732}", "{U+A733}"] },
 		"lat_[c,s]_lig_ae", {
 			unicode: ["{U+00C6}", "{U+00E6}"],
 			alterations: [{ modifier: "{U+1D2D}", smallCapital: "{U+1D01}" }, { combining: "{U+1DD4}", modifier: "{U+10783}" }],
@@ -3454,11 +3454,9 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_lig_ae__acute", {
 			unicode: ["{U+01FC}", "{U+01FD}"],
-			recipe: ["$${acute}", "${lat_[c,s]_lig_ae}${acute}"]
 		},
 		"lat_[c,s]_lig_ae__macron", {
 			unicode: ["{U+01E2}", "{U+01E3}"],
-			recipe: ["$${macron}", "${lat_[c,s]_lig_ae}${macron}"]
 		},
 		"lat_s_lig_ae_turned", {
 			unicode: "{U+1D02}",
@@ -3467,28 +3465,23 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_lig_ao", {
 			unicode: ["{U+A734}", "{U+A735}"],
-			alterations: [{}, { combining: "{U+1DD5}" }],
-			recipe: ["$"],
+			alterations: [{}, { combining: "{U+1DD5}" }]
 		},
 		"lat_[c,s]_lig_au", { unicode: ["{U+A736}", "{U+A737}"], recipe: ["$"] },
 		"lat_[c,s]_lig_av", {
 			unicode: ["{U+A738}", "{U+A739}"],
-			alterations: [{}, { combining: "{U+1DD6}" }],
-			recipe: ["$"],
+			alterations: [{}, { combining: "{U+1DD6}" }]
 		},
 		"lat_[c,s]_lig_av__stroke_short", {
-			unicode: ["{U+A73A}", "{U+A73B}"],
-			recipe: ["$${stroke_short}", "${lat_[c,s]_lig_av}${stroke_short}"],
+			unicode: ["{U+A73A}", "{U+A73B}"]
 		},
-		"lat_[c,s]_lig_ay", { unicode: ["{U+A73C}", "{U+A73D}"], recipe: ["$"],
-		},
-		"lat_s_lig_db", { unicode: "{U+0238}", recipe: ["$"] },
+		"lat_[c,s]_lig_ay", { unicode: ["{U+A73C}", "{U+A73D}"] },
+		"lat_s_lig_db", { unicode: "{U+0238}" },
 		"lat_s_lig_et", {
 			unicode: "{U+0026}",
 			alterations: { small: "{U+FE60}" },
 			tags: ["амперсанд", "ampersand"],
-			groups: ["Latin Ligatures"],
-			recipe: ["$"],
+			groups: ["Latin Ligatures"]
 		},
 		"lat_s_lig_et_turned", {
 			unicode: "{U+214B}",
@@ -3496,10 +3489,10 @@ LibRegistrate(this) {
 			recipe: ["$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
 		},
-		"lat_s_lig_ie", { unicode: "{U+AB61}", recipe: ["$"] },
-		"lat_s_lig_ff", { unicode: "{U+FB00}", recipe: ["$"] },
-		"lat_s_lig_fi", { unicode: "{U+FB01}", recipe: ["$"] },
-		"lat_s_lig_fl", { unicode: "{U+FB02}", recipe: ["$"] },
+		"lat_s_lig_ie", { unicode: "{U+AB61}" },
+		"lat_s_lig_ff", { unicode: "{U+FB00}" },
+		"lat_s_lig_fi", { unicode: "{U+FB01}" },
+		"lat_s_lig_fl", { unicode: "{U+FB02}" },
 		"lat_s_lig_ffi", {
 			unicode: "{U+FB04}",
 			recipe: ["$", "${lat_s_lig_ff}i"]
@@ -3508,23 +3501,13 @@ LibRegistrate(this) {
 			unicode: "{U+FB03}",
 			recipe: ["$", "${lat_s_lig_ff}l"]
 		},
-		"lat_[c,s]_lig_ij", {
-			unicode: ["{U+0132}", "{U+0133}"],
-			recipe: ["$"]
-		},
-		"lat_s_lig_lb", { unicode: "{U+2114}", recipe: ["$"] },
-		"lat_[c,s]_lig_ll", {
-			unicode: ["{U+1EFA}", "{U+1EFB}"],
-			recipe: ["$"]
-		},
-		"lat_[c,s]_lig_oi", {
-			unicode: ["{U+01A2}", "{U+01A3}"],
-			recipe: ["$"]
-		},
+		"lat_[c,s]_lig_ij", { unicode: ["{U+0132}", "{U+0133}"] },
+		"lat_s_lig_lb", { unicode: "{U+2114}" },
+		"lat_[c,s]_lig_ll", { unicode: ["{U+1EFA}", "{U+1EFB}"] },
+		"lat_[c,s]_lig_oi", { unicode: ["{U+01A2}", "{U+01A3}"] },
 		"lat_[c,s]_lig_oe", {
 			unicode: ["{U+0152}", "{U+0153}"],
-			alterations: [{}, { modifier: "{U+A7F9}" }],
-			recipe: ["$"]
+			alterations: [{}, { modifier: "{U+A7F9}" }]
 		},
 		"lat_s_lig_oe_turned", {
 			unicode: "{U+1D14}",
@@ -3547,16 +3530,14 @@ LibRegistrate(this) {
 			symbol: { beforeLetter: "inverted" },
 		},
 		"lat_[c,s]_lig_oo", {
-			unicode: ["{U+A74E}", "{U+A74F}"],
-			recipe: ["$"]
+			unicode: ["{U+A74E}", "{U+A74F}"]
 		},
 		"lat_[c,s]_lig_ou", {
-			unicode: ["{U+0222}", "{U+0223}"],
-			recipe: ["$"]
+			unicode: ["{U+0222}", "{U+0223}"]
 		},
-		"lat_s_lig_pl", { unicode: "{U+214A}", recipe: ["$"] },
+		"lat_s_lig_pl", { unicode: "{U+214A}" },
 		"lat_s_lig_st", { unicode: "{U+FB05}", recipe: ["$", "${lat_s_let_s_long}t"] },
-		"lat_s_lig_ue", { unicode: "{U+1D6B}", recipe: ["$"] },
+		"lat_s_lig_ue", { unicode: "{U+1D6B}" },
 		"lat_[c,s]_lig_s_eszett", {
 			unicode: ["{U+1E9E}", "{U+00DF}"],
 			options: { useLetterLocale: True, fastKey: "<+ ~?Secondary" },
@@ -3570,13 +3551,11 @@ LibRegistrate(this) {
 		;
 		"lat_[c,i,s]_dig_dz", {
 			unicode: ["{U+01F1}", "{U+01F2}", "{U+01F3}"],
-			recipe: ["$"],
-			symbol: { letter: ["DZ", "Dz", "dz"] },
+			symbol: { letter: "${lat_[c,c,s]_let_d}${lat_[c,s,s]_let_z}" }
 		},
 		"lat_[c,i,s]_dig_dz__caron", {
 			unicode: ["{U+01C4}", "{U+01C5}", "{U+01C6}"],
-			recipe: ["$${caron}", "${lat_[c,i,s]_dig_@}${caron}"],
-			symbol: { letter: ["DZ", "Dz", "dz"] },
+			symbol: { letter: "${lat_[c,c,s]_let_d}${lat_[c,s,s]_let_z}" },
 		},
 		"lat_s_dig_dz__curl", {
 			unicode: "{U+02A5}",
@@ -5052,6 +5031,19 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Cyrillic Ligatures
+		;
+		;
+		"cyr_[c,s]_lig_ae", {
+			unicode: ["{U+04D4}", "{U+04D5}"],
+			symbol: { letter: "${cyr_[c,s]_let_a}${cyr_[c,s]_let_ye}" },
+		},
+		"cyr_[c,s]_lig_yae", {
+			unicode: ["{U+0518}", "{U+0519}"],
+			symbol: { letter: "${cyr_[c,s]_let_ya}${cyr_[c,s]_let_ye}" },
+		},
+		;
+		;
 		; * Cyrillic Digraphs
 		;
 		;
@@ -5072,6 +5064,26 @@ LibRegistrate(this) {
 		; * Accented Cyrillic
 		;
 		;
+		"cyr_[c,s]_let_a__breve", {
+			unicode: ["{U+04D0}", "{U+04D1}"],
+			options: { fastKey: "$?Secondary" },
+			symbol: { letter: "${cyr_[c,s]_let_a}" }
+		},
+		"cyr_[c,s]_let_a__diaeresis", {
+			unicode: ["{U+04D2}", "{U+04D3}"],
+			options: { fastKey: "<+ $?Secondary" },
+			symbol: { letter: "${cyr_[c,s]_let_a}" }
+		},
+		"cyr_[c,s]_let_g__acute", {
+			unicode: ["{U+0403}", "{U+0453}"],
+			options: { fastKey: "$?Primary" },
+			symbol: { letter: "${cyr_[c,s]_let_g}" }
+		},
+		"cyr_[c,s]_let_g__descender", {
+			unicode: ["{U+04F6}", "{U+04F7}"],
+			options: { fastKey: "<! $?Secondary" },
+			symbol: { letter: "${cyr_[c,s]_let_g}" }
+		},
 		"cyr_[c,s]_let_ye__diaeresis", {
 			unicode: ["{U+0401}", "{U+0451}"],
 			options: { noCalc: True },

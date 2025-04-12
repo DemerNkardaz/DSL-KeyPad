@@ -39,7 +39,9 @@ Class ChrEntry {
 		customs: "",
 		font: "",
 	}
-	data := { script: "", case: "", type: "", letter: "", postfixes: [], variant: "" }
+	data := { script: "", case: "", type: "", letter: "", postfixes: [] }
+	variant := ""
+	variantPos := 1
 
 	__New(attributes := {}, name := "") {
 		attributes := ChrEntry.Proxying(this, attributes)
@@ -141,7 +143,6 @@ class ChrLib {
 				if entry.proxy is Array
 					entries.%variantName%.proxy := entry.proxy[i]
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
-				entries.%variantName%.data.variant := variant
 
 				entries.%variantName%.symbol := entry.symbol.Clone()
 				entries.%variantName%.symbol := this.CloneOptions(entry.symbol, i)
@@ -153,6 +154,8 @@ class ChrLib {
 				this.ProcessReferences(entries.%variantName%, entry, i)
 
 				entries.%variantName%.options := this.CloneOptions(entry.options, i)
+				entries.%variantName%.variant := variant
+				entries.%variantName%.variantPos := i
 
 			}
 
@@ -160,6 +163,7 @@ class ChrLib {
 				this.ProcessRecipe(entry, splitVariants)
 				this.AddEntry(entryName, ChrEntry(entry, entryName))
 			}
+
 		} else {
 
 			this.entries.%entryName% := {}
@@ -497,10 +501,10 @@ class ChrLib {
 	static ProcessSymbolLetter(targetEntry) {
 		if targetEntry.symbol.letter is String {
 			targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\%self\%", Util.UnicodeToChar(targetEntry.unicode))
-
 			if InStr(targetEntry.symbol.letter, "${") {
-				if RegExMatch(targetEntry.symbol.letter, "\[.*?\]") {
-					targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\[.*?\]", targetEntry.data.variant)
+				while RegExMatch(targetEntry.symbol.letter, "\[(.*?)\]", &varMatch) {
+					splittedVariants := StrSplit(varMatch[1], ",")
+					targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
 				}
 				targetEntry.symbol.letter := ChrRecipeHandler.MakeStr(targetEntry.symbol.letter)
 			} else if targetEntry.data.script = "cyrillic" &&
@@ -521,16 +525,24 @@ class ChrLib {
 	}
 
 	static ProcessRecipe(entry, splitVariants) {
-		if !entry.recipe.Length > 0 && entry.data.postfixes.Length > 0 {
-			if entry.data.postfixes.Length = 1 {
-				entry.recipe := ["$${" entry.data.postfixes[1] "}"]
-			} else {
-				entry.recipe := [
-					"$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
-					"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_"
-					SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|"
-					entry.data.postfixes[2] ")}$(*)"
-				]
+		if entry.recipe.Length = 0 {
+			if entry.data.postfixes.Length > 0 {
+				if entry.data.postfixes.Length = 1 {
+					if ["ligature", "digraph"].HasValue(entry.data.type) {
+						entry.recipe := ["$${" entry.data.postfixes[1] "}", "${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@}${" entry.data.postfixes[1] "}"]
+					} else {
+						entry.recipe := ["$${" entry.data.postfixes[1] "}"]
+					}
+				} else {
+					entry.recipe := [
+						"$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
+						"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_"
+						SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|"
+						entry.data.postfixes[2] ")}$(*)"
+					]
+				}
+			} else if ["ligature", "digraph"].HasValue(entry.data.type) && entry.data.postfixes.Length = 0 {
+				entry.recipe := ["$"]
 			}
 		}
 
@@ -666,6 +678,7 @@ class ChrLib {
 				refinedEntry.recipe[1] .= "${" postfix "}"
 			}
 		}
+
 
 		this.ProcessSymbolLetter(refinedEntry)
 
@@ -867,7 +880,8 @@ class ChrLib {
 			case: Map("c", "capital", "s", "small", "sc", "small_capital", "i", "inter", "n", "neutral"),
 			type: Map("let", "letter", "lig", "ligature", "dig", "digraph", "num", "numeral"),
 			letter: "",
-			postfixes: []
+			postfixes: [],
+			variantPos: 1
 		}
 
 		foundScript := False
@@ -910,7 +924,6 @@ class ChrLib {
 			if RegExMatch(entryName, "i)^([\w]+(?:_[\w]+){3,})_?", &rawMatch) {
 				rawCharacterName := StrSplit(rawMatch[1], "_")
 
-				decomposedName.variant := rawCharacterName[2]
 				decomposedName.script := decomposedName.script[rawCharacterName[1]]
 				decomposedName.case := decomposedName.case[rawCharacterName[2]]
 				decomposedName.type := decomposedName.type[rawCharacterName[3]]
