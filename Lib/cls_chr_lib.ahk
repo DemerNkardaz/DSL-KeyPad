@@ -39,7 +39,7 @@ Class ChrEntry {
 		customs: "",
 		font: "",
 	}
-	data := { script: "", case: "", type: "", letter: "", postfixes: [], }
+	data := { script: "", case: "", type: "", letter: "", postfixes: [], variant: "" }
 
 	__New(attributes := {}, name := "") {
 		attributes := ChrEntry.Proxying(this, attributes)
@@ -141,21 +141,10 @@ class ChrLib {
 				if entry.proxy is Array
 					entries.%variantName%.proxy := entry.proxy[i]
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
+				entries.%variantName%.data.variant := variant
 
 				entries.%variantName%.symbol := entry.symbol.Clone()
 				entries.%variantName%.symbol := this.CloneOptions(entry.symbol, i)
-
-				if entries.%variantName%.symbol.letter is String {
-					entries.%variantName%.symbol.letter := RegExReplace(entries.%variantName%.symbol.letter, "\%self\%", Util.UnicodeToChar(entries.%variantName%.unicode))
-
-					if InStr(entries.%variantName%.symbol.letter, "${") {
-						entries.%variantName%.symbol.letter := RegExReplace(entries.%variantName%.symbol.letter, "\[.*?\]", variant)
-						entries.%variantName%.symbol.letter := ChrRecipeHandler.MakeStr(entries.%variantName%.symbol.letter)
-					} else if entries.%variantName%.data.script = "cyrillic" &&
-						RegExMatch(entries.%variantName%.data.letter, "^[a-zA-Z0-9]+$") {
-						entries.%variantName%.symbol.letter := Util.UnicodeToChar(entries.%variantName%.unicode)
-					}
-				}
 
 				if entry.alterations is Array {
 					entries.%variantName%.alterations := entry.alterations[i].Clone()
@@ -505,6 +494,22 @@ class ChrLib {
 		}
 	}
 
+	static ProcessSymbolLetter(targetEntry) {
+		if targetEntry.symbol.letter is String {
+			targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\%self\%", Util.UnicodeToChar(targetEntry.unicode))
+
+			if InStr(targetEntry.symbol.letter, "${") {
+				if RegExMatch(targetEntry.symbol.letter, "\[.*?\]") {
+					targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\[.*?\]", targetEntry.data.variant)
+				}
+				targetEntry.symbol.letter := ChrRecipeHandler.MakeStr(targetEntry.symbol.letter)
+			} else if targetEntry.data.script = "cyrillic" &&
+				RegExMatch(targetEntry.data.letter, "^[a-zA-Z0-9]+$") {
+				targetEntry.symbol.letter := Util.UnicodeToChar(targetEntry.unicode)
+			}
+		}
+	}
+
 	static CloneOptions(sourceOptions, index) {
 		tempOptions := sourceOptions.Clone()
 		for key, value in sourceOptions.OwnProps() {
@@ -661,6 +666,8 @@ class ChrLib {
 				refinedEntry.recipe[1] .= "${" postfix "}"
 			}
 		}
+
+		this.ProcessSymbolLetter(refinedEntry)
 
 		return refinedEntry
 	}
@@ -903,6 +910,7 @@ class ChrLib {
 			if RegExMatch(entryName, "i)^([\w]+(?:_[\w]+){3,})_?", &rawMatch) {
 				rawCharacterName := StrSplit(rawMatch[1], "_")
 
+				decomposedName.variant := rawCharacterName[2]
 				decomposedName.script := decomposedName.script[rawCharacterName[1]]
 				decomposedName.case := decomposedName.case[rawCharacterName[2]]
 				decomposedName.type := decomposedName.type[rawCharacterName[3]]
@@ -927,7 +935,8 @@ class ChrLib {
 				case: "",
 				type: "",
 				letter: "",
-				postfixes: []
+				postfixes: [],
+				variant: ""
 			}
 			return entry
 		} else {
