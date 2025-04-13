@@ -1,5 +1,27 @@
 bindingMaps := Map(
 	"User", Map(),
+	"Script Specified", Map(
+		"Germanic Runes", Map(
+			"Pair", "Germanic Runes & Glagolitic",
+			"Flat", Map(),
+			"Moded", Map()
+		),
+		"Glagolitic", Map(
+			"Pair", "Germanic Runes & Glagolitic",
+			"Flat", Map(),
+			"Moded", Map()
+		),
+		"Old Turkic", Map(
+			"Pair", "Old Turkic & Old Permic",
+			"Flat", Map(),
+			"Moded", Map()
+		),
+		"Old Permic", Map(
+			"Pair", "Old Turkic & Old Permic",
+			"Flat", Map(),
+			"Moded", Map()
+		),
+	),
 	"Important", Map(
 		"Flat", Map(
 			"RAlt", (*) => ChrCrafter.ComposeActivate(),
@@ -705,10 +727,8 @@ bindingMaps := Map(
 				"<^>!<+", ["lat_c_let_z_stroke_short", "lat_s_let_z_stroke_short"]),
 			; Russian-Modifiers Keyboard Layout
 			"А", Map(
-				"<^>!", ["cyr_c_let_a_breve", "cyr_s_let_a_breve"],
-				"<^>!<+", ["cyr_c_let_a_diaeresis", "cyr_s_let_a_diaeresis"],
-				"<^>!>+", ["cyr_c_let_i_macron", "cyr_s_let_i_macron"],
-				"<^>!<!<+>+", ["cyr_c_let_iota", "cyr_s_let_iota"]
+				"<^>!", ["cyr_c_let_a__breve", "cyr_s_let_a__breve"],
+				"<^>!<+", ["cyr_c_let_a__diaeresis", "cyr_s_let_a__diaeresis"]
 			),
 			"Б", Map(
 				"<^>!", ["france_left"],
@@ -720,7 +740,7 @@ bindingMaps := Map(
 			),
 			"В", Map(),
 			"Г", Map(
-				"<!", ["cyr_c_let_g_acute", "cyr_s_let_g_acute"],
+				"<!", ["cyr_c_let_g__acute", "cyr_s_let_g__acute"],
 				"<^>!", ["cyr_c_let_g_upturn", "cyr_s_let_g_upturn"],
 				"<^>!<+", ["cyr_c_let_g_stroke_short", "cyr_s_let_g_stroke_short"],
 				"<^>!<!", ["cyr_c_let_g_descender", "cyr_s_let_g_descender"],
@@ -794,7 +814,7 @@ bindingMaps := Map(
 			),
 			"У", Map(
 				"<!", ["cyr_c_let_u_breve", "cyr_s_let_u_breve"],
-				"<^>!", ["cyr_c_let_yus_big", "cyr_s_let_yus_big"],
+				"<^>!", ["cyr_c_lig_yus_big", "cyr_s_lig_yus_big"],
 				"<^>!<+", ["cyr_c_let_u_diaeresis", "cyr_s_let_u_diaeresis"],
 				"<^>!>+", ["cyr_c_let_u_macron", "cyr_s_let_u_macron"],
 				"<^>!<!", ["cyr_c_let_uk_monograph", "cyr_s_let_uk_monograph"],
@@ -828,7 +848,7 @@ bindingMaps := Map(
 				"<^>!<!", ["cyr_c_let_semiyeri", "cyr_s_let_semiyeri"]
 			),
 			"Э", Map(
-				"<^>!", ["cyr_c_let_ukr_e", "cyr_s_let_ukr_e"],
+				"<^>!", ["cyr_c_let_ye_anchor", "cyr_s_let_ye_anchor"],
 				"<^>!<+", ["cyr_c_let_ye_diaeresis", "cyr_s_let_ye_diaeresis"],
 				"<^>!>+", ["cyr_c_let_schwa", "cyr_s_let_schwa"],
 				"<^>!<+>+", ["cyr_c_let_schwa_diaeresis", "cyr_s_let_schwa_diaeresis"],
@@ -841,8 +861,8 @@ bindingMaps := Map(
 				"<^>!<!<+", ["france_single_right"]
 			),
 			"Я", Map(
-				"<^>!", ["cyr_c_let_yus_little", "cyr_s_let_yus_little"],
-				"<^>!<+", ["cyr_c_let_a_iotified", "cyr_s_let_a_iotified"],
+				"<^>!", ["cyr_c_lig_yus_little", "cyr_s_lig_yus_little"],
+				"<^>!<+", ["cyr_c_lig_a_iotified", "cyr_s_lig_a_iotified"],
 			)
 		)
 	),

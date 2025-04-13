@@ -338,7 +338,6 @@ Class KeyboardBinder {
 		),
 	}
 
-
 	static modifiers := [
 		"!", "<!", ">!",
 		"+", "<+", ">+",
@@ -595,7 +594,6 @@ Class KeyboardBinder {
 
 		this.Registration(BindList.Get("Important"), True)
 		this.Registration(BindList.Get("Common"), Cfg.FastKeysOn)
-		this.Registration(BindList.Get("Ligatured"), Cfg.FastKeysOn && this.ligaturedBinds)
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
 		if userBindings != "None" && Cfg.FastKeysOn {

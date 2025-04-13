@@ -506,6 +506,7 @@ class ChrLib {
 					splittedVariants := StrSplit(varMatch[1], ",")
 					targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
 				}
+
 				targetEntry.symbol.letter := ChrRecipeHandler.MakeStr(targetEntry.symbol.letter)
 			} else if targetEntry.data.script = "cyrillic" &&
 				RegExMatch(targetEntry.data.letter, "^[a-zA-Z0-9]+$") {
@@ -832,6 +833,14 @@ class ChrLib {
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" dataLetter "]")
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\~", "[" SubStr(refinedEntry.data.letter, 1, 1) "]")
 				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\?(.*?)$")
+
+				if RegExMatch(refinedEntry.options.fastKey, "\/(.*?)\/", &match) {
+					refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, match[0], refinedEntry.data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
+				}
+
+				if RegExMatch(refinedEntry.options.fastKey, "\\(.*?)\\", &match) {
+					refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, match[0], refinedEntry.data.case = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
+				}
 			}
 			if StrLen(refinedEntry.options.altLayoutKey) > 0 {
 				refinedEntry.options.altLayoutKey := RegExReplace(refinedEntry.options.altLayoutKey, "\$", "[" dataLetter "]")
@@ -880,8 +889,7 @@ class ChrLib {
 			case: Map("c", "capital", "s", "small", "sc", "small_capital", "i", "inter", "n", "neutral"),
 			type: Map("let", "letter", "lig", "ligature", "dig", "digraph", "num", "numeral"),
 			letter: "",
-			postfixes: [],
-			variantPos: 1
+			postfixes: []
 		}
 
 		foundScript := False
@@ -979,14 +987,14 @@ class ChrLib {
 					}
 				}
 				output .= indentStr "]`n"
-			} else if value is Object {
-				output .= indentStr key ": {`n" this.FormatEntry(value, indent + 1) indentStr "}`n"
 			} else if value is Map {
 				output .= indentStr key ": (`n"
 				for mapKey, mapValue in value {
 					output .= indentStr "`t" mapKey ": '" mapValue "'`n"
 				}
 				output .= indentStr ")`n"
+			} else if value is Object {
+				output .= indentStr key ": {`n" this.FormatEntry(value, indent + 1) indentStr "}`n"
 			} else {
 				output .= indentStr key ": '" value "'`n"
 			}
