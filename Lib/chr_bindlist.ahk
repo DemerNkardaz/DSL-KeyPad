@@ -814,7 +814,7 @@ bindingMaps := Map(
 			),
 			"У", Map(
 				"<!", ["cyr_c_let_u_breve", "cyr_s_let_u_breve"],
-				"<^>!", ["cyr_c_lig_yus_big", "cyr_s_lig_yus_big"],
+				"<^>!", ["cyr_c_let_yus_big", "cyr_s_let_yus_big"],
 				"<^>!<+", ["cyr_c_let_u_diaeresis", "cyr_s_let_u_diaeresis"],
 				"<^>!>+", ["cyr_c_let_u_macron", "cyr_s_let_u_macron"],
 				"<^>!<!", ["cyr_c_let_uk_monograph", "cyr_s_let_uk_monograph"],
@@ -861,7 +861,7 @@ bindingMaps := Map(
 				"<^>!<!<+", ["france_single_right"]
 			),
 			"Я", Map(
-				"<^>!", ["cyr_c_lig_yus_little", "cyr_s_lig_yus_little"],
+				"<^>!", ["cyr_c_let_yus_little", "cyr_s_let_yus_little"],
 				"<^>!<+", ["cyr_c_lig_a_iotified", "cyr_s_lig_a_iotified"],
 			)
 		)
