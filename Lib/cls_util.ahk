@@ -258,36 +258,49 @@ Class Util {
 
 
 	static FormatHotKey(HKey, Modifier := "") {
-		MakeString := ""
+		output := ""
+		if HKey is Array && HKey.Length > 0 {
+			output := HKey.ToString(" ")
+		}
 
 		SpecialCommandsMap := Map(
-			CtrlA, LeftControl " [a][ф]", CtrlB, LeftControl " [b][и]", CtrlC, LeftControl " [c][с]", CtrlD, LeftControl " [d][в]", CtrlE, LeftControl " [e][у]", CtrlF, LeftControl " [f][а]", CtrlG, LeftControl " [g][п]",
-			CtrlH, LeftControl " [h][р]", CtrlI, LeftControl " [i][ш]", CtrlJ, LeftControl " [j][о]", CtrlK, LeftControl " [k][л]", CtrlL, LeftControl " [l][д]", CtrlM, LeftControl " [m][ь]", CtrlN, LeftControl " [n][т]",
-			CtrlO, LeftControl " [o][щ]", CtrlP, LeftControl " [p][з]", CtrlQ, LeftControl " [q][й]", CtrlR, LeftControl " [r][к]", CtrlS, LeftControl " [s][ы]", CtrlT, LeftControl " [t][е]", CtrlU, LeftControl " [u][г]",
-			CtrlV, LeftControl " [v][м]", CtrlW, LeftControl " [w][ц]", CtrlX, LeftControl " [x][ч]", CtrlY, LeftControl " [y][н]", CtrlZ, LeftControl " [z][я]", SpaceKey, "[Space]", ExclamationMark, "[!]", CommercialAt, "[@]", QuotationDouble, "[" QuotationDouble "]", Tabulation, "[Tab]"
+			CtrlA, LeftControl " a ф",
+			CtrlB, LeftControl " b и",
+			CtrlC, LeftControl " c с",
+			CtrlD, LeftControl " d в",
+			CtrlE, LeftControl " e у",
+			CtrlF, LeftControl " f а",
+			CtrlG, LeftControl " g п",
+			CtrlH, LeftControl " h р",
+			CtrlI, LeftControl " i ш",
+			CtrlJ, LeftControl " j о",
+			CtrlK, LeftControl " k л",
+			CtrlL, LeftControl " l д",
+			CtrlM, LeftControl " m ь",
+			CtrlN, LeftControl " n т",
+			CtrlO, LeftControl " o щ",
+			CtrlP, LeftControl " p з",
+			CtrlQ, LeftControl " q й",
+			CtrlR, LeftControl " r к",
+			CtrlS, LeftControl " s ы",
+			CtrlT, LeftControl " t е",
+			CtrlU, LeftControl " u г",
+			CtrlV, LeftControl " v м",
+			CtrlW, LeftControl " w ц",
+			CtrlX, LeftControl " x ч",
+			CtrlY, LeftControl " y н",
+			CtrlZ, LeftControl " z я",
+			ExclamationMark, "!",
+			CommercialAt, "@",
+			QuotationDouble, QuotationDouble,
+			Tabulation, "Tab"
 		)
 
 		for key, value in SpecialCommandsMap {
-			if (HKey = key)
-				return value
+			output := RegExReplace(output, key, value)
 		}
 
-		if IsObject(HKey) {
-			for keys in HKey {
-				MakeString .= this.FormatHotKey(keys)
-			}
-		} else {
-			if (RegExMatch(HKey, "^\S+\+")) {
-				StringSplitter := StrSplit(HKey, "+")
-				MakeString := StringSplitter[1] . " " . "[" . StringSplitter[2] . "]"
-			} else {
-				MakeString := "[" . HKey . "]"
-			}
-		}
-
-		MakeString := Modifier != "" ? (Modifier . " " . MakeString) : MakeString
-
-		return MakeString
+		return output
 	}
 
 	static ReplaceModifierKeys(Input) {

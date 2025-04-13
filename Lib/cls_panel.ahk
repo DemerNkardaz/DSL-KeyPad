@@ -1006,7 +1006,7 @@ Class Panel {
 							"Alternative Layout", value.options.altLayoutKey,
 							"Fast Special", value.options.specialKey,
 							"Fast Key", value.options.fastKey,
-							"Group Activator", value.options.groupKey.Length > 0 && Util.FormatHotKey(value.options.groupKey),
+							"Group Activator", StrLen(value.options.groupKeyPreview) > 0 && value.options.groupKeyPreview,
 						)
 
 						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : "N/A"

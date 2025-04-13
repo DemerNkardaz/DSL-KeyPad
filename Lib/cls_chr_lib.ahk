@@ -23,6 +23,7 @@ Class ChrEntry {
 		altSpecialKey: "",
 		fastKey: "",
 		groupKey: [],
+		groupKeyPreview: "",
 		specialKey: "",
 		numericValue: 0,
 		send: "",
@@ -820,6 +821,8 @@ class ChrLib {
 		}
 
 		dataLetter := StrLen(refinedEntry.symbol.letter) > 0 ? refinedEntry.symbol.letter : refinedEntry.data.letter
+		dataPack := entry.data
+		dataPack.dataLetter := dataLetter
 
 		if StrLen(refinedEntry.data.letter) > 0 {
 			if refinedEntry.recipe.Length > 0 {
@@ -828,25 +831,12 @@ class ChrLib {
 					refinedEntry.recipe[i] := RegExReplace(recipe, "\$", dataLetter)
 				}
 			}
-
-			if StrLen(refinedEntry.options.fastKey) > 0 {
-				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\$", "[" dataLetter "]")
-				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\~", "[" SubStr(refinedEntry.data.letter, 1, 1) "]")
-				refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, "\?(.*?)$")
-
-				if RegExMatch(refinedEntry.options.fastKey, "\/(.*?)\/", &match) {
-					refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, match[0], refinedEntry.data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
-				}
-
-				if RegExMatch(refinedEntry.options.fastKey, "\\(.*?)\\", &match) {
-					refinedEntry.options.fastKey := RegExReplace(refinedEntry.options.fastKey, match[0], refinedEntry.data.case = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
-				}
-			}
-			if StrLen(refinedEntry.options.altLayoutKey) > 0 {
-				refinedEntry.options.altLayoutKey := RegExReplace(refinedEntry.options.altLayoutKey, "\$", "[" dataLetter "]")
-				refinedEntry.options.altLayoutKey := RegExReplace(refinedEntry.options.altLayoutKey, "\~", "[" SubStr(refinedEntry.data.letter, 1, 1) "]")
-			}
 		}
+
+		if refinedEntry.options.groupKey.Length > 0
+			refinedEntry.options.groupKeyPreview := this.SetNotaion(Util.FormatHotKey(refinedEntry.options.groupKey), dataPack)
+		refinedEntry.options.fastKey := this.SetNotaion(refinedEntry.options.fastKey, dataPack)
+		refinedEntry.options.altLayoutKey := this.SetNotaion(refinedEntry.options.altLayoutKey, dataPack)
 
 
 		if refinedEntry.recipe.Length > 0 {
@@ -881,6 +871,40 @@ class ChrLib {
 		}
 
 		this.entries.%entryName% := refinedEntry
+	}
+
+	static NotationKey := (m) => Chrs(0x29FC, 0x202F) m Chrs(0x202F, 0x29FD)
+	static SetNotaion(str, data) {
+
+		output := str
+
+		if StrLen(data.letter) > 0 {
+			output := RegExReplace(output, "\$", data.dataLetter)
+			output := RegExReplace(output, "\~", SubStr(data.letter, 1, 1))
+			output := RegExReplace(output, "\?(.*?)$")
+		}
+
+		if StrLen(data.case) > 0 {
+			if RegExMatch(output, "\/(.*?)\/", &match) {
+				output := RegExReplace(output, match[0], data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
+			}
+
+			if RegExMatch(output, "\\(.*?)\\", &match) {
+				output := RegExReplace(output, match[0], data.case = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
+			}
+		}
+
+		output := RegExReplace(output, "([.])(\s|$|\?)", this.NotationKey("$1"))
+		staticReplaces := ["[", "]", "(", ")", "!", "@"]
+		for replace in staticReplaces {
+			output := StrReplace(output, replace, this.NotationKey(replace))
+		}
+		while RegExMatch(output, "([a-zA-Zа-яА-ЯёЁ0-9<>``,\'\`";\~\%\-\=\\/]+|[\x{2190}-\x{2195}]+)(\s|$|\?|,\s)", &match) {
+			output := RegExReplace(output, match[1], this.NotationKey(match[1]))
+		}
+
+
+		return output
 	}
 
 	static NameDecompose(entryName) {
