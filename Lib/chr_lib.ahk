@@ -3288,7 +3288,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_z_ezh__caron", {
 			unicode: ["{U+01EE}", "{U+01EF}"],
 			groups: ["Latin"],
-			options: { useLetterLocale: "Origin", fastKey: "<!<+ Z?Secondary" },
+			options: { useLetterLocale: "Origin" },
 			symbol: { letter: "${lat_[c,s]_let_z_ezh}" }
 		},
 		"lat_s_let_z_ezh__curl", {
@@ -4995,8 +4995,7 @@ LibRegistrate(this) {
 			unicode: ["{U+1E92}", "{U+1E93}"]
 		},
 		"lat_[c,s]_let_z__descender", {
-			unicode: ["{U+2C6B}", "{U+2C6C}"],
-			options: { fastKey: "<+$?Secondary" }
+			unicode: ["{U+2C6B}", "{U+2C6C}"]
 		},
 		"lat_[c,s]_let_z__common_hook", {
 			unicode: ["{U+0224}", "{U+0225}"],
