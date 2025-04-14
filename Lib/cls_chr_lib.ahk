@@ -873,8 +873,8 @@ class ChrLib {
 		this.entries.%entryName% := refinedEntry
 	}
 
-	static NotationKey := (m) => Chrs(0x29FC, 0x202F) m Chrs(0x202F, 0x29FD)
 	static SetNotaion(str, data) {
+		static notationKey := (m) => Chrs(0x29FC, 0x202F) m Chrs(0x202F, 0x29FD)
 
 		output := str
 
@@ -894,13 +894,13 @@ class ChrLib {
 			}
 		}
 
-		output := RegExReplace(output, "([.])(\s|$|\?)", this.NotationKey("$1"))
+		output := RegExReplace(output, "([.])(\s|$|\?)", notationKey("$1"))
 		staticReplaces := ["[", "]", "(", ")", "!", "@"]
 		for replace in staticReplaces {
-			output := StrReplace(output, replace, this.NotationKey(replace))
+			output := StrReplace(output, replace, notationKey(replace))
 		}
 		while RegExMatch(output, "([a-zA-Zа-яА-ЯёЁ0-9<>``,\'\`";\~\%\-\=\\/]+|[\x{2190}-\x{2195}]+)(\s|$|\?|,\s)", &match) {
-			output := RegExReplace(output, match[1], this.NotationKey(match[1]))
+			output := RegExReplace(output, match[1], notationKey(match[1]))
 		}
 
 

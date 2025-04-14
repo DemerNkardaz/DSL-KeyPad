@@ -750,7 +750,7 @@ bindingMaps := Map(
 				"<!", ["cyr_c_let_e_breve", "cyr_s_let_e_breve"],
 				">+", ["cyr_c_let_e_grave", "cyr_s_let_e_grave"],
 				"<^>!", ["cyr_c_let_yat", "cyr_s_let_yat"],
-				"<^>!<!", ["cyr_c_let_izhitsa", "cyr_s_let_izhitsa"]
+				"<^>!<!", ["cyr_c_let_i_izhitsa", "cyr_s_let_i_izhitsa"]
 			),
 			"Ё", Map(),
 			"Ж", Map(
@@ -817,7 +817,7 @@ bindingMaps := Map(
 				"<^>!", ["cyr_c_let_yus_big", "cyr_s_let_yus_big"],
 				"<^>!<+", ["cyr_c_let_u_diaeresis", "cyr_s_let_u_diaeresis"],
 				"<^>!>+", ["cyr_c_let_u_macron", "cyr_s_let_u_macron"],
-				"<^>!<!", ["cyr_c_let_uk_monograph", "cyr_s_let_uk_monograph"],
+				"<^>!<!", ["cyr_c_lig_uk", "cyr_s_lig_uk"],
 			),
 			"Ф", Map(
 				"<^>!", ["cyr_c_let_fita", "cyr_s_let_fita"]

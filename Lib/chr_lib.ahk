@@ -5057,6 +5057,10 @@ LibRegistrate(this) {
 			alterations: [{}, { combining: "{U+1E08F}", modifier: "{U+1E04C}", subscript: "{U+1E068}" }],
 			options: { secondName: True, fastKey: "/И/?Secondary" },
 		},
+		"cyr_[c,s]_let_i_izhitsa", {
+			unicode: ["{U+0474}", "{U+0475}"],
+			options: { secondName: True, fastKey: "<! /И/?Secondary" },
+		},
 		;
 		;
 		; * Cyrillic Ligatures
@@ -5099,11 +5103,27 @@ LibRegistrate(this) {
 			unicode: ["{U+A698}", "{U+A699}"],
 			symbol: { letter: "${cyr_[c,s]_let_o×2}" },
 		},
+		"cyr_[c,s]_lig_uk", {
+			unicode: ["{U+A64A}", "{U+A64B}"],
+			options: { useLetterLocale: True },
+			symbol: { letter: "${cyr_[c,s]_let_u}${cyr_s_let_o}" },
+		},
+		"cyr_s_lig_uk_unblended", {
+			unicode: "{U+1C88}",
+			options: { useLetterLocale: True },
+			recipe: ["${cyr_s_let_i_izhitsa}${cyr_s_let_o}"],
+			symbol: { letter: "${cyr_[c,s]_let_u}${cyr_s_let_o}", afterLetter: "unblended" },
+		},
 		;
 		;
 		; * Cyrillic Digraphs
 		;
 		;
+		"cyr_[c,s]_dig_uk", {
+			unicode: ["{U+0478}", "{U+0479}"],
+			options: { useLetterLocale: True },
+			symbol: { letter: "${cyr_[c,s]_let_o}${cyr_s_let_u}" },
+		},
 		"cyr_[c,s]_dig_yeru", {
 			unicode: ["{U+042B}", "{U+044B}"],
 			alterations: [{}, { combining: "{U+A679}", modifier: "{U+1E047}", subscript: "{U+1E066}" }],
