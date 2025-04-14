@@ -749,7 +749,7 @@ bindingMaps := Map(
 			"Е", Map(
 				"<!", ["cyr_c_let_e_breve", "cyr_s_let_e_breve"],
 				">+", ["cyr_c_let_e_grave", "cyr_s_let_e_grave"],
-				"<^>!", ["cyr_c_let_yat", "cyr_s_let_yat"],
+				"<^>!", ["cyr_c_let_ye_yat", "cyr_s_let_ye_yat"],
 				"<^>!<!", ["cyr_c_let_i_izhitsa", "cyr_s_let_i_izhitsa"]
 			),
 			"Ё", Map(),
@@ -845,7 +845,7 @@ bindingMaps := Map(
 				"<^>!<+", ["cyr_c_let_yery_diaeresis", "cyr_s_let_yery_diaeresis"]
 			),
 			"Ь", Map(
-				"<^>!<!", ["cyr_c_let_semiyeri", "cyr_s_let_semiyeri"]
+				"<^>!<!", ["cyr_c_let_semisoft_sign", "cyr_s_let_semisoft_sign"]
 			),
 			"Э", Map(
 				"<^>!", ["cyr_c_let_ye_anchor", "cyr_s_let_ye_anchor"],
