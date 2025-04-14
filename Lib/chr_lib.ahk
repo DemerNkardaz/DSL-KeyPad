@@ -8956,6 +8956,24 @@ LibRegistrate(this) {
 			groups: ["Wallet Signs"],
 			recipe: ["A=", "ARA"],
 		},
+		"wallet_cent", {
+			unicode: "{U+00A2}",
+			tags: ["цент", "cent"],
+			groups: ["Wallet Signs"],
+			recipe: ["c|", "CNT"],
+		},
+		"wallet_cedi", {
+			unicode: "{U+20B5}",
+			tags: ["седи", "cedi"],
+			groups: ["Wallet Signs"],
+			recipe: ["C|", "GHS", "CED"],
+		},
+		"wallet_colon", {
+			unicode: "{U+20A1}",
+			tags: ["колон", "colon"],
+			groups: ["Wallet Signs"],
+			recipe: ["C//", "CRC", "SVC"],
+		},
 		"wallet_dollar", {
 			unicode: "{U+0024}",
 			alterations: { small: "{U+FE69}" },
@@ -8963,17 +8981,17 @@ LibRegistrate(this) {
 			groups: ["Wallet Signs"],
 			recipe: ["S|", "USD", "DLR"],
 		},
-		"wallet_cent", {
-			unicode: "{U+00A2}",
-			tags: ["цент", "cent"],
+		"wallet_dram", {
+			unicode: "{U+058F}",
+			tags: ["драм", "dram"],
 			groups: ["Wallet Signs"],
-			recipe: ["c|", "CNT"],
+			recipe: ["AMD", "DRM"],
 		},
-		"wallet_pound", {
-			unicode: "{U+00A3}",
-			tags: ["фунт", "pound"],
+		"wallet_doromi", {
+			unicode: "{U+07FE}",
+			tags: ["дороми", "doromi"],
 			groups: ["Wallet Signs"],
-			recipe: ["f_", "GBP"],
+			recipe: ["DOR"],
 		},
 		"wallet_eur", {
 			unicode: "{U+20AC}",
@@ -8986,6 +9004,36 @@ LibRegistrate(this) {
 			tags: ["франк", "franc"],
 			groups: ["Wallet Signs"],
 			recipe: ["F=", "FRF"],
+		},
+		"wallet_guarani", {
+			unicode: "{U+20B2}",
+			tags: ["гуарани", "guarani"],
+			groups: ["Wallet Signs"],
+			recipe: ["G/", "PYG", "GNF"],
+		},
+		"wallet_kip", {
+			unicode: "{U+20AD}",
+			tags: ["кип", "kip"],
+			groups: ["Wallet Signs"],
+			recipe: ["K-", "LAK", "KIP"],
+		},
+		"wallet_lari", {
+			unicode: "{U+20BE}",
+			tags: ["лари", "lari"],
+			groups: ["Wallet Signs"],
+			recipe: ["GEL", "LAR"],
+		},
+		"wallet_naira", {
+			unicode: "{U+20A6}",
+			tags: ["наира", "naira"],
+			groups: ["Wallet Signs"],
+			recipe: ["N=", "NGN", "NAR"],
+		},
+		"wallet_pound", {
+			unicode: "{U+00A3}",
+			tags: ["фунт", "pound"],
+			groups: ["Wallet Signs"],
+			recipe: ["f_", "GBP"],
 		},
 		"wallet_tournois", {
 			unicode: "{U+20B6}",
