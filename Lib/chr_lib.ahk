@@ -5068,6 +5068,12 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True },
 			recipe: ["ь${stroke_long}${arrow_up}", "${cyr_s_let_ye_yat}${arrow_up}"],
 		},
+		"cyr_[c,s]_let_zh_dzhe", {
+			unicode: ["{U+040F}", "{U+045F}"],
+			alterations: [{}, { subscript: "{U+1E06A}" }],
+			options: { useLetterLocale: True, fastKey: "/Ж/?Secondary" },
+			recipe: ["${cyr_[c,s]_let_d}${cyr_[c,s]_let_z}${cyr_[c,s]_let_zh}"]
+		},
 		"cyr_[c,s]_let_i_decimal", {
 			unicode: ["{U+0406}", "{U+0456}"],
 			alterations: [{}, { combining: "{U+1E08F}", modifier: "{U+1E04C}", subscript: "{U+1E068}" }],
@@ -5108,10 +5114,22 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True },
 			recipe: ["${cyr_[c,s]_let_i_decimal}\а_т\", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_yus_little_closed}"]
 		},
+		"cyr_[c,s]_lig_ae", {
+			unicode: ["{U+04D4}", "{U+04D5}"],
+			symbol: { letter: "${cyr_[c,s]_let_a}${cyr_[c,s]_let_ye}" },
+		},
 		"cyr_[c,s]_lig_a_iotified", {
 			unicode: ["{U+A656}", "{U+A657}"],
 			options: { useLetterLocale: True, fastKey: "<+ /Я/?Secondary" },
 			recipe: ["${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_a}"]
+		},
+		"cyr_[c,s]_lig_dche", {
+			unicode: ["{U+052C}", "{U+052D}"],
+			symbol: { letter: "${cyr_[c,s]_let_d}${cyr_[c,s]_let_ch}" },
+		},
+		"cyr_[c,s]_lig_dzzhe", {
+			unicode: ["{U+052A}", "{U+052B}"],
+			symbol: { letter: "${cyr_[c,s]_let_d}${cyr_[c,s]_let_zh}" },
 		},
 		"cyr_[c,s]_lig_ye_iotified", {
 			unicode: ["{U+0464}", "{U+0465}"],
@@ -5123,21 +5141,47 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True },
 			recipe: ["${cyr_[c,s]_let_i_decimal}/Ь/${stroke_long}", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_ye_yat}"]
 		},
-		"cyr_[c,s]_lig_ae", {
-			unicode: ["{U+04D4}", "{U+04D5}"],
-			symbol: { letter: "${cyr_[c,s]_let_a}${cyr_[c,s]_let_ye}" },
+		"cyr_[c,s]_lig_zhwe", {
+			unicode: ["{U+A684}", "{U+A685}"],
+			symbol: { letter: "${cyr_[c,s]_let_z}${cyr_[c,s]_let_zh}" },
 		},
-		"cyr_[c,s]_lig_yae", {
-			unicode: ["{U+0518}", "{U+0519}"],
-			symbol: { letter: "${cyr_[c,s]_let_ya}${cyr_[c,s]_let_ye}" },
+		"cyr_[c,s]_lig_lha", {
+			unicode: ["{U+0514}", "{U+0515}"],
+			symbol: { letter: "${cyr_[c,s]_let_l}${cyr_[c,s]_let_h}" },
+		},
+		"cyr_[c,s]_lig_lje", {
+			unicode: ["{U+0409}", "{U+0459}"],
+			options: { fastKey: "/Л/?Secondary" },
+			symbol: { letter: "${cyr_[c,s]_let_l}${cyr_[c,s]_let_yeri}" },
+		},
+		"cyr_[c,s]_lig_nje", {
+			unicode: ["{U+040A}", "{U+045A}"],
+			options: { fastKey: "/Н/?Secondary" },
+			symbol: { letter: "${cyr_[c,s]_let_n}${cyr_[c,s]_let_yeri}" },
 		},
 		"cyr_[c,s]_lig_oo", {
 			unicode: ["{U+A698}", "{U+A699}"],
 			symbol: { letter: "${cyr_[c,s]_let_o×2}" },
 		},
+		"cyr_[c,s]_lig_rha", {
+			unicode: ["{U+0516}", "{U+0517}"],
+			symbol: { letter: "${cyr_[c,s]_let_r}${cyr_[c,s]_let_h}" },
+		},
+		"cyr_[c,s]_lig_tetse", {
+			unicode: ["{U+04B4}", "{U+04B5}"],
+			symbol: { letter: "${cyr_[c,s]_let_t}${cyr_[c,s]_let_ts}" },
+		},
+		"cyr_[c,s]_lig_tche", {
+			unicode: ["{U+A692}", "{U+A693}"],
+			symbol: { letter: "${cyr_[c,s]_let_t}${cyr_[c,s]_let_ch}" },
+		},
+		"cyr_[c,s]_lig_tje", {
+			unicode: ["{U+1C89}", "{U+1C8A}"],
+			symbol: { letter: "${cyr_[c,s]_let_t}${cyr_[c,s]_let_yeri}" },
+		},
 		"cyr_[c,s]_lig_uk", {
 			unicode: ["{U+A64A}", "{U+A64B}"],
-			options: { useLetterLocale: True },
+			options: { useLetterLocale: True, fastKey: "<! /У/?Secondary" },
 			symbol: { letter: "${cyr_[c,s]_let_u}${cyr_s_let_o}" },
 		},
 		"cyr_[s]_lig_uk_unblended", {
@@ -5145,6 +5189,14 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True },
 			recipe: ["${cyr_s_let_i_izhitsa}${cyr_s_let_o}"],
 			symbol: { letter: "${cyr_[c,s]_let_u}${cyr_s_let_o}", afterLetter: "unblended" },
+		},
+		"cyr_[c,s]_lig_cche", {
+			unicode: ["{U+A686}", "{U+A687}"],
+			symbol: { letter: "${cyr_[c,s]_let_ch}${cyr_[c,s]_let_ch}" },
+		},
+		"cyr_[c,s]_lig_yae", {
+			unicode: ["{U+0518}", "{U+0519}"],
+			symbol: { letter: "${cyr_[c,s]_let_ya}${cyr_[c,s]_let_ye}" },
 		},
 		;
 		;
