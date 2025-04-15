@@ -2580,7 +2580,6 @@ LibRegistrate(this) {
 			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
 			options: { groupKey: ["%"], fastKey: "<+ 5" },
 			recipe: ["${percent}00", "${permille}0"],
-			symbol: { customs: "s40" },
 		},
 		"equals", {
 			unicode: "{U+003D}",
