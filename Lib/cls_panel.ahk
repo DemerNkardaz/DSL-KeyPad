@@ -67,7 +67,7 @@ Class Panel {
 		},
 	}
 
-	static GetUISets() {
+	static GetUISets(set := "construction") {
 		baseX := 21
 		panelWidth := 1200
 		panelHeight := 600
@@ -100,10 +100,70 @@ Class Panel {
 		tagsY := filterY + 26
 		tagsW := panelWidth - 20
 
-		return {
+		commandsTreeW := panelWidth - (panelWidth / 1.4)
+		commandsTreeH := panelHeight - 70
+		commandsTreeX := baseX + 4
+		commandsTreeY := 43
+
+		commandsBoxW := (panelWidth - commandsTreeW) - (50 * 1.4)
+		commandsBoxH := commandsTreeH + 9
+		commandsBoxX := commandsTreeW + 50
+		commandsBoxY := 36
+
+		commandsTexW := commandsBoxW - 20
+		commandsTexH := commandsBoxH - 40
+		commandsTexX := commandsBoxX + 10
+		commandsTexY := commandsBoxY + 30
+
+		aboutLeftW := 280
+		aboutLeftH := panelHeight - 70
+		aboutLeftX := baseX + 3
+		aboutLeftY := 34
+
+		aboutPanelWindowW := 170
+		aboutPanelWindowH := 170
+		aboutPanelWindowX := aboutLeftX + (aboutLeftW - aboutPanelWindowW) / 2
+		aboutPanelWindowY := aboutLeftY + 11
+
+		aboutPanelWindowIcoW := 128
+		aboutPanelWindowIcoH := 128
+		aboutPanelWindowIcoX := aboutPanelWindowX + ((aboutPanelWindowW - aboutPanelWindowIcoW) / 2)
+		aboutPanelWindowIcoY := aboutPanelWindowY + ((aboutPanelWindowH - aboutPanelWindowIcoH) / 2)
+
+		aboutTitleW := aboutLeftW
+		aboutTitleH := 32
+		aboutTitleX := aboutLeftX
+		aboutTitleY := (aboutPanelWindowY + aboutPanelWindowH) + 14
+
+		aboutVersionW := aboutTitleW
+		aboutVersionH := aboutTitleH
+		aboutVersionX := aboutTitleX
+		aboutVersionY := (aboutTitleY + aboutTitleH) + 14
+
+		aboutRepoStrLen := StrLen(Locale.Read("about_repository"))
+		aboutRepoLinkW := aboutRepoStrLen * 10
+		aboutRepoLinkH := aboutTitleH
+		aboutRepoLinkX := aboutLeftX + ((aboutLeftW - aboutRepoLinkW) / 2) + 9
+		aboutRepoLinkY := (aboutVersionY + aboutVersionH) + 14
+
+		aboutAuthorW := aboutTitleW
+		aboutAuthorH := aboutTitleH
+		aboutAuthorX := aboutTitleX
+		aboutAuthorY := aboutLeftH - 45
+
+		aboutAuthorLinksStrLen := Util.WidthBasedStrLen(Locale.ReadNoLinks("about_author_links"))
+		aboutAuthorLinksW := aboutAuthorLinksStrLen * 8
+		aboutAuthorLinksH := 24
+		aboutAuthorLinksX := aboutLeftX + ((aboutLeftW - aboutAuthorLinksW) / 2) + 9
+		aboutAuthorLinksY := (aboutAuthorY + aboutAuthorH) + 14
+
+
+		construction := {
 			window: {
 				width: panelWidth,
-				height: panelHeight
+				height: panelHeight,
+				minWidth: 800,
+				minHeight: panelHeight
 			},
 			infoBox: {
 				body: Format("x{} y{} w{} h{} Center",
@@ -162,11 +222,34 @@ Class Panel {
 					ibPreviewButtonOffsetX, ibPreviewFrameY - 1, ibPreviewButtonW, ibPreviewButtonH),
 			},
 			commandsInfoBox: {
+				commandsTree: Format("vCommandTree x{} y{} w{} h{} -HScroll",
+					commandsTreeX, commandsTreeY, commandsTreeW, commandsTreeH),
 				body: Format("vCommandGroup x{} y{} w{} h{}",
-					300, 36, 548, 517),
+					commandsBoxX, commandsBoxY, commandsBoxW, commandsBoxH),
 				bodyText: Map("ru", "Команда", "en", "Command"),
 				text: Format("vCommandDescription x{} y{} w{} h{}",
-					310, 66, 528, 467),
+					commandsTexX, commandsTexY, commandsTexW, commandsTexH),
+			},
+			aboutInfoBox: {
+				leftBox: Format("vAboutGroupBox x{} y{} w{} h{}",
+					aboutLeftX, aboutLeftY, aboutLeftW, aboutLeftH),
+				panelWindow: Format("vAboutPanelWindow x{} y{} w{} h{}",
+					aboutPanelWindowX, aboutPanelWindowY, aboutPanelWindowW, aboutPanelWindowH),
+				panelWindowIco: Format("vAboutIco x{} y{} w{} h{}",
+					aboutPanelWindowIcoX, aboutPanelWindowIcoY, aboutPanelWindowIcoW, aboutPanelWindowIcoH),
+				aboutTitle: Format("vAboutTitle x{} y{} w{} h{} Center BackgroundTrans",
+					aboutTitleX, aboutTitleY, aboutTitleW, aboutTitleH),
+				aboutVersion: Format("vAboutVersion x{} y{} w{} h{} Center BackgroundTrans",
+					aboutVersionX, aboutVersionY, aboutVersionW, aboutVersionH),
+				aboutRepoLink: Format("vAboutRepoLink x{} y{} w{} h{}",
+					aboutRepoLinkX, aboutRepoLinkY, aboutRepoLinkW, aboutRepoLinkH),
+				aboutAuthor: Format("vAboutAuthor x{} y{} w{} h{} Center BackgroundTrans",
+					aboutAuthorX, aboutAuthorY, aboutAuthorW, aboutAuthorH),
+				aboutAuthorLinks: Format("vAboutAuthorLinks x{} y{} w{} h{}",
+					aboutAuthorLinksX, aboutAuthorLinksY, aboutAuthorLinksW, aboutAuthorLinksH),
+				aboutDescBox: "vAboutDescBox x315 y34 w530 h520",
+				aboutDescription: "vAboutDescription x330 y70 w505 h495 Wrap BackgroundTrans",
+				aboutChrCount: "vAboutChrCount x330 y530 w505 h24 Wrap BackgroundTrans",
 			},
 			filter: {
 				icon: Format("x{} y{} h{} w{}",
@@ -192,6 +275,56 @@ Class Panel {
 				),
 			},
 		}
+
+		HYWH := {
+			window: {
+				width: panelWidth,
+				height: panelHeight,
+				minWidth: 800,
+				minHeight: panelHeight
+			},
+			infoBox: {
+				body: { x: ibBodyX, y: ibBodyY, w: ibBodyW, h: ibBodyH },
+				previewFrame: { x: ibBodyX + ibPreviewFrameX, y: ibPreviewFrameY, w: ibPreviewBoxEditW, h: ibPreviewFrameH },
+				preview: { x: ibBodyX + ibPreviewFrameX, y: ibPreviewFrameY, w: ibPreviewBoxEditW, h: ibPreviewFrameH },
+				title: { x: ibBodyX + ibPreviewFrameX, y: ibPreviewTitleY, w: ibPreviewBoxEditW, h: ibPreviewTitleH },
+				LaTeXTitleA: { x: ibBodyX + ibPreviewFrameX + 4, y: 371, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				LaTeXTitleE: { x: ibBodyX + ibPreviewFrameX + 17, y: 375, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				LaTeXTitleLTX: { x: ibBodyX + ibPreviewFrameX, y: 373, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				LaTeXPackage: { x: ibBodyX + ibPreviewFrameX, y: 373, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				LaTeXPackageText: "",
+				LaTeX: { x: ibBodyX + ibPreviewFrameX, y: 390, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				alt: { x: ibBodyX + ibPreviewFrameX, y: 430, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				altTitle: { x: ibBodyX + ibPreviewFrameX, y: 415, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				unicode: { x: ibBodyX + ibPreviewFrameX, y: 470, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				unicodeTitle: { x: ibBodyX + ibPreviewFrameX, y: 455, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				html: { x: ibBodyX + ibPreviewFrameX, y: 510, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				htmlTitle: { x: ibBodyX + ibPreviewFrameX, y: 495, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				tags: { x: baseX, y: tagsY, w: tagsW, h: ibPreviewBoxEditH },
+				alert: { x: ibBodyX + ibPreviewFrameX, y: 55, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				keyPreviewTitle: { x: ibBodyX + ibPreviewFrameX, y: 305, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				keyPreview: { x: ibBodyX + ibPreviewFrameX, y: 320, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				keyPreviewSet: { x: ibBodyX + ibPreviewFrameX, y: 301, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
+				keyPreviewSetText: "",
+				legendButton: { x: ibPreviewButtonOffsetX, y: ibPreviewFrameY - 1, w: ibPreviewButtonW, h: ibPreviewButtonH },
+			},
+			commandsInfoBox: {
+				commandsTree: { x: commandsTreeX, y: commandsTreeY, w: commandsTreeW, h: commandsTreeH },
+				body: { x: commandsBoxX, y: commandsBoxY, w: commandsBoxW, h: commandsBoxH },
+				text: { x: commandsTexX, y: commandsTexY, w: commandsTexW, h: commandsTexH },
+			},
+			filter: {
+				icon: { x: baseX, y: filterY, h: ibPreviewBoxEditH, w: filterButtonW },
+				field: { x: filterOffsetX, y: filterY, h: ibPreviewBoxEditH, w: filterW },
+			},
+			column: {
+				widths: lvCols,
+				widthsSmelting: lvCols,
+				listStyle: { w: lvW, h: lvH }
+			},
+		}
+
+		return %set%
 	}
 
 
@@ -589,7 +722,7 @@ Class Panel {
 
 			panelTabs.UseTab(panelTabList.Obj.commands)
 
-			commandsTree := panelWindow.AddTreeView("x25 y43 w256 h510 -HScroll")
+			commandsTree := panelWindow.AddTreeView(this.GetUISets().commandsInfoBox.commandsTree)
 			commandsTree.OnEvent("ItemSelect", (TV, Item) => this.TV_InsertCommandsDesc(TV, Item, groupBoxCommands.text))
 
 			groupBoxCommands := {
@@ -612,30 +745,26 @@ Class Panel {
 
 			panelTabs.UseTab(panelTabList.Obj.about)
 
-			aboutLeftBox := panelWindow.AddGroupBox("x23 y34 w280 h520",)
-			panelWindow.AddGroupBox("x75 y65 w170 h170")
-			panelWindow.AddPicture("x98 y89 w128 h128 Icon1", App.internal["ico_dll"].file)
 
-			aboutTitle := panelWindow.AddText("x75 y245 w170 h32 Center BackgroundTrans", App.title)
+			aboutLeftBox := panelWindow.AddGroupBox(this.GetUISets().aboutInfoBox.leftBox)
+			panelWindow.AddGroupBox(this.GetUISets().aboutInfoBox.panelWindow)
+			panelWindow.AddPicture(this.GetUISets().aboutInfoBox.panelWindowIco, App.internal["ico_dll"].file)
+
+			aboutTitle := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutTitle, App.title)
 			aboutTitle.SetFont("s20 c333333", "Cambria")
 
-			aboutVersion := panelWindow.AddText("x75 y285 w170 h32 Center BackgroundTrans", App.versionText)
+			aboutVersion := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutVersion, App.versionText)
 			aboutVersion.SetFont("s12 c333333", "Cambria")
 
-			aboutRepoLinkX := LanguageCode == "ru" ? "x114" : "x123"
-			aboutRepoLink := panelWindow.AddLink(aboutRepoLinkX " y320 w150 h20 Center",
+			aboutRepoLink := panelWindow.AddLink(this.GetUISets().aboutInfoBox.aboutRepoLink,
 				'<a href="https://github.com/DemerNkardaz/DSL-KeyPad">' Locale.Read("about_repository") '</a>'
 			)
 			aboutRepoLink.SetFont("s12", "Cambria")
 
-			aboutAuthor := panelWindow.AddText("x75 y495 w170 h16 Center BackgroundTrans", Locale.Read("about_author"))
+			aboutAuthor := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutAuthor, Locale.Read("about_author"))
 			aboutAuthor.SetFont("s11 c333333", "Cambria")
 
-			aboutAuthorLinks := panelWindow.AddLink("x90 y525 w150 h16 Center",
-				'<a href="https://github.com/DemerNkardaz/">GitHub</a> '
-				'<a href="http://steamcommunity.com/profiles/76561198177249942">STEAM</a> '
-				'<a href="https://ficbook.net/authors/4241255">Фикбук</a>'
-			)
+			aboutAuthorLinks := panelWindow.AddLink(this.GetUISets().aboutInfoBox.aboutAuthorLinks, Locale.Read("about_author_links"))
 			aboutAuthorLinks.SetFont("s9", "Cambria")
 
 
@@ -646,13 +775,13 @@ Class Panel {
 
 			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customEntriesCount), recipesCount, customRecipesCount)
 
-			aboutDescBox := panelWindow.AddGroupBox("x315 y34 w530 h520", App.decodedTitle)
+			aboutDescBox := panelWindow.AddGroupBox(this.GetUISets().aboutInfoBox.aboutDescBox, App.decodedTitle)
 			aboutDescBox.SetFont("s11", "Cambria")
 
-			aboutDescription := panelWindow.AddText("x330 y70 w505 h495 Wrap BackgroundTrans", Locale.Read("about_description"))
+			aboutDescription := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutDescription, Locale.Read("about_description"))
 			aboutDescription.SetFont("s12 c333333", "Cambria")
 
-			aboutChrCount := panelWindow.AddText("x330 y530 w505 h24 Wrap BackgroundTrans", chrCount)
+			aboutChrCount := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutChrCount, chrCount)
 			aboutChrCount.SetFont("c333333")
 
 			panelTabs.UseTab(panelTabList.Obj.useful)

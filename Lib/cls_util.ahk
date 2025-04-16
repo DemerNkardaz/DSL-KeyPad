@@ -163,6 +163,19 @@ Class Util {
 		return true
 	}
 
+	static WidthBasedStrLen(str) {
+		len := StrLen(str)
+		lenSplit := StrSplit(str, "")
+
+		for i, char in lenSplit {
+			if (Ord(char) >= 0x2003 && Ord(char) <= 0x2002) {
+				len++
+			}
+		}
+
+		return len
+	}
+
 	static UniTrim(Str) {
 		return SubStr(Str, 4, StrLen(Str) - 4)
 	}
@@ -407,32 +420,6 @@ Class Util {
 		}
 	}
 
-	static INIToObj(filePath) {
-		obj := {}
-		content := FileRead(filePath (!InStr(filePath, ".ini") ? ".ini" : ""), "UTF-8")
-		lines := StrSplit(content, "`n", "`r`n")
-
-		currentSection := ""
-
-		for line in lines {
-			line := Trim(line)
-			if (line = "" or SubStr(line, 1, 1) = ";")
-				continue
-
-			if (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]") {
-				currentSection := SubStr(line, 2, -1)
-				obj.%currentSection% := {}
-			} else if (currentSection != "" && InStr(line, "=")) {
-				parts := StrSplit(line, "=", "`t ")
-				key := Trim(parts[1])
-				value := Trim(parts[2])
-				obj.%currentSection%.%key% := value
-			}
-		}
-
-		return obj
-	}
-
 	static INIToMap(filePath) {
 		if !InStr(filePath, ".ini")
 			filePath .= ".ini"
@@ -463,6 +450,33 @@ Class Util {
 		return iniMap
 	}
 
+
+	static INIToObj(filePath) {
+		obj := {}
+		content := FileRead(filePath (!InStr(filePath, ".ini") ? ".ini" : ""), "UTF-8")
+		lines := StrSplit(content, "`n", "`r`n")
+
+		currentSection := ""
+
+		for line in lines {
+			line := Trim(line)
+			if (line = "" or SubStr(line, 1, 1) = ";")
+				continue
+
+			if (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]") {
+				currentSection := SubStr(line, 2, -1)
+				obj.%currentSection% := {}
+			} else if (currentSection != "" && InStr(line, "=")) {
+				eqPos := InStr(line, "=")
+				key := Trim(SubStr(line, 1, eqPos - 1))
+				value := Trim(SubStr(line, eqPos + 1))
+
+				obj.%currentSection%.%key% := value
+			}
+		}
+
+		return obj
+	}
 
 	static MultiINIToObj(pathsArray) {
 		bufferArray := []

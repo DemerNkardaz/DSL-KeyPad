@@ -174,11 +174,23 @@ Class Locale extends Language {
 			? this.localeObj.%section%.%entry% : ""
 	}
 
+	static ReadNoLinks(entryName, prefix := "") {
+		baseString := this.Read(entryName, prefix)
+		result := baseString
+
+		while (RegExMatch(result, "<a [^>]*>(.*?)</a>", &match)) {
+			linkText := match[1]
+			result := StrReplace(result, match[0], linkText)
+		}
+
+		return result
+	}
+
+
 	static Read(EntryName, Prefix := "", validate := False, &output?) {
 		Intermediate := ""
 		Section := this.Validate(Prefix) ? Prefix : (!IsSpace(Prefix) ? Prefix "_" this.Get() : this.Get())
 		try {
-			;Intermediate := IniRead(this.locales, Section, EntryName, "")
 			Intermediate := this.ReadStr(Section, EntryName)
 
 			while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
