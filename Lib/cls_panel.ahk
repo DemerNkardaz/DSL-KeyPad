@@ -1,58 +1,5 @@
 Class Panel {
-
 	static UISets := {
-		infoBox: {
-			body: "x650 y35 w200 h510",
-			bodyText: Locale.Read("character"),
-			previewFrame: "x685 y80 w128 h128 Center",
-			preview: "x685 y80 w128 h128 readonly Center -VScroll -HScroll",
-			previewText: "◌͏",
-			title: "x655 y215 w190 h150 Center BackgroundTrans",
-			titleText: "N/A",
-			LaTeXTitleA: "x689 y371 w128 h24 BackgroundTrans",
-			LaTeXTitleAText: "A",
-			LaTeXTitleE: "x703 y375 w128 h24 BackgroundTrans",
-			LaTeXTitleEText: "E",
-			LaTeXTitleLTX: "x685 y373 w128 h24 BackgroundTrans",
-			LaTeXTitleLTXText: "L T  X",
-			LaTeXPackage: "x685 y373 w128 h24 BackgroundTrans Right",
-			LaTeXPackageText: "",
-			LaTeX: "x685 y390 w128 h24 readonly Center -VScroll -HScroll",
-			LaTeXText: "N/A",
-			alt: "x685 y430 w128 h24 readonly Center -VScroll -HScroll",
-			altTitle: "x685 y415 w128 h24 BackgroundTrans",
-			altText: "N/A",
-			unicode: "x685 y470 w128 h24 readonly Center -VScroll -HScroll",
-			unicodeTitle: "x685 y455 w128 h24 BackgroundTrans",
-			unicodeText: "U+0000",
-			html: "x685 y510 w128 h24 readonly Center -VScroll -HScroll",
-			htmlText: "&#x0000;",
-			htmlTitle: "x685 y495 w128 h24 BackgroundTrans",
-			tags: "x21 y546 w800 h24 readonly -VScroll -HScroll -E0x200",
-			alert: "x655 y55 w190 h24 readonly Center -VScroll -HScroll -E0x200",
-			keyPreviewTitle: "x685 y305 w128 h24 BackgroundTrans",
-			keyPreview: "x685 y320 w128 h24 readonly Center -VScroll -HScroll",
-			keyPreviewSet: "x685 y301 w128 h24 BackgroundTrans Right",
-			keyPreviewSetText: "",
-			legendButton: "x815 y79 h24 w24",
-		},
-		commandsInfoBox: {
-			body: "vCommandGroup x300 y36 w548 h517",
-			bodyText: Map("ru", "Команда", "en", "Command"),
-			text: "vCommandDescription x310 y66 w528 h467",
-		},
-		filter: {
-			icon: "x21 y520 h24 w24",
-			field: "x49 y520 w593 h24 v",
-		},
-		column: {
-			widths: [300, 150, 60, 85, 0, 0],
-			widthsSmelting: [300, 110, 100, 85, 0, 0],
-			areaWidth: "w620",
-			areaHeight: "h480",
-			areaRules: "+NoSort -Multi",
-			listStyle: "w620 h480 +NoSort -Multi",
-		},
 		infoFonts: {
 			preview: "Noto Serif",
 			previewSize: 70,
@@ -67,10 +14,13 @@ Class Panel {
 		},
 	}
 
-	static GetUISets(set := "construction") {
+	static GetUISets(set := "construction", w := 1200, h := 600) {
 		baseX := 21
-		panelWidth := 1200
-		panelHeight := 600
+		panelWidth := w
+		panelHeight := h
+
+		tabsW := panelWidth - 15
+		tabsH := panelHeight - 12
 
 		lvW := panelWidth - (panelWidth / 3)
 		lvH := panelHeight - 90
@@ -157,6 +107,20 @@ Class Panel {
 		aboutAuthorLinksX := aboutLeftX + ((aboutLeftW - aboutAuthorLinksW) / 2) + 9
 		aboutAuthorLinksY := (aboutAuthorY + aboutAuthorH) + 14
 
+		aboutDescBoxW := (panelWidth - aboutLeftW) - (50 * 1.4)
+		aboutDescBoxH := aboutLeftH + 2
+		aboutDescBoxX := (aboutLeftX + aboutLeftW) + 10
+		aboutDescBoxY := 32
+
+		aboutDescriptionW := 505
+		aboutDescriptionH := aboutDescBoxH - 40
+		aboutDescriptionX := aboutDescBoxX + 10
+		aboutDescriptionY := aboutDescBoxY + 38
+
+		aboutChrCountW := aboutDescriptionW
+		aboutChrCountH := 24
+		aboutChrCountX := aboutDescriptionX
+		aboutChrCountY := ((aboutLeftH - 45) + 32) + 14
 
 		construction := {
 			window: {
@@ -165,6 +129,7 @@ Class Panel {
 				minWidth: 800,
 				minHeight: panelHeight
 			},
+			tabs: Format("vTabs  w{} h{}", tabsW, tabsH),
 			infoBox: {
 				body: Format("x{} y{} w{} h{} Center",
 					ibBodyX, ibBodyY, ibBodyW, ibBodyH),
@@ -247,9 +212,12 @@ Class Panel {
 					aboutAuthorX, aboutAuthorY, aboutAuthorW, aboutAuthorH),
 				aboutAuthorLinks: Format("vAboutAuthorLinks x{} y{} w{} h{}",
 					aboutAuthorLinksX, aboutAuthorLinksY, aboutAuthorLinksW, aboutAuthorLinksH),
-				aboutDescBox: "vAboutDescBox x315 y34 w530 h520",
-				aboutDescription: "vAboutDescription x330 y70 w505 h495 Wrap BackgroundTrans",
-				aboutChrCount: "vAboutChrCount x330 y530 w505 h24 Wrap BackgroundTrans",
+				aboutDescBox: Format("vAboutDescBox x{} y{} w{} h{}",
+					aboutDescBoxX, aboutDescBoxY, aboutDescBoxW, aboutDescBoxH),
+				aboutDescription: Format("vAboutDescription x{} y{} w{} h{} Wrap BackgroundTrans",
+					aboutDescriptionX, aboutDescriptionY, aboutDescriptionW, aboutDescriptionH),
+				aboutChrCount: Format("vAboutChrCount x{} y{} w{} h{} Wrap BackgroundTrans",
+					aboutChrCountX, aboutChrCountY, aboutChrCountW, aboutChrCountH),
 			},
 			filter: {
 				icon: Format("x{} y{} h{} w{}",
@@ -276,13 +244,14 @@ Class Panel {
 			},
 		}
 
-		HYWH := {
+		WHXY := {
 			window: {
 				width: panelWidth,
 				height: panelHeight,
 				minWidth: 800,
 				minHeight: panelHeight
 			},
+			tabs: { w: tabsW, h: tabsH },
 			infoBox: {
 				body: { x: ibBodyX, y: ibBodyY, w: ibBodyW, h: ibBodyH },
 				previewFrame: { x: ibBodyX + ibPreviewFrameX, y: ibPreviewFrameY, w: ibPreviewBoxEditW, h: ibPreviewFrameH },
@@ -312,6 +281,19 @@ Class Panel {
 				commandsTree: { x: commandsTreeX, y: commandsTreeY, w: commandsTreeW, h: commandsTreeH },
 				body: { x: commandsBoxX, y: commandsBoxY, w: commandsBoxW, h: commandsBoxH },
 				text: { x: commandsTexX, y: commandsTexY, w: commandsTexW, h: commandsTexH },
+			},
+			aboutInfoBox: {
+				leftBox: { x: aboutLeftX, y: aboutLeftY, w: aboutLeftW, h: aboutLeftH },
+				panelWindow: { x: aboutPanelWindowX, y: aboutPanelWindowY, w: aboutPanelWindowW, h: aboutPanelWindowH },
+				panelWindowIco: { x: aboutPanelWindowIcoX, y: aboutPanelWindowIcoY, w: aboutPanelWindowIcoW, h: aboutPanelWindowIcoH },
+				aboutTitle: { x: aboutTitleX, y: aboutTitleY, w: aboutTitleW, h: aboutTitleH },
+				aboutVersion: { x: aboutVersionX, y: aboutVersionY, w: aboutVersionW, h: aboutVersionH },
+				aboutRepoLink: { x: aboutRepoLinkX, y: aboutRepoLinkY, w: aboutRepoLinkW, h: aboutRepoLinkH },
+				aboutAuthor: { x: aboutAuthorX, y: aboutAuthorY, w: aboutAuthorW, h: aboutAuthorH },
+				aboutAuthorLinks: { x: aboutAuthorLinksX, y: aboutAuthorLinksY, w: aboutAuthorLinksW, h: aboutAuthorLinksH },
+				aboutDescBox: { x: aboutDescBoxX, y: aboutDescBoxY, w: aboutDescBoxW, h: aboutDescBoxH },
+				aboutDescription: { x: aboutDescriptionX, y: aboutDescriptionY, w: aboutDescriptionW, h: aboutDescriptionH },
+				aboutChrCount: { x: aboutChrCountX, y: aboutChrCountY, w: aboutChrCountW, h: aboutChrCountH },
 			},
 			filter: {
 				icon: { x: baseX, y: filterY, h: ibPreviewBoxEditH, w: filterButtonW },
@@ -428,7 +410,10 @@ Class Panel {
 			yPos := screenHeight - windowHeight - 92
 
 			panelWindow := Gui()
+			; panelWindow.Opt("+Resize +MinSize" UISets.window.minWidth "x" UISets.window.minHeight)
 			panelWindow.title := this.panelTitle
+
+			panelWindow.OnEvent("Size", panelResize)
 
 			panelTabList := { Obj: {}, Arr: [] }
 			panelColList := { default: [], smelting: [] }
@@ -667,14 +652,14 @@ Class Panel {
 				),
 			}
 
-			panelTabs := panelWindow.AddTab3("w" windowWidth - 15 " h" windowHeight - 12, panelTabList.Arr)
+			panelTabs := panelWindow.AddTab3(UISets.tabs, panelTabList.Arr)
 			panelTabs.UseTab(panelTabList.Obj.diacritics)
 
 			this.AddCharactersTab({
 				winObj: panelWindow,
 				prefix: "Diacritic",
 				columns: panelColList.default,
-				columnWidths: this.GetUISets().column.widths,
+				columnWidths: UISets.column.widths,
 				source: LV_Content.diacritics,
 			})
 
@@ -684,7 +669,7 @@ Class Panel {
 				winObj: panelWindow,
 				prefix: "Spaces",
 				columns: panelColList.default,
-				columnWidths: this.GetUISets().column.widths,
+				columnWidths: UISets.column.widths,
 				source: LV_Content.spaces,
 			})
 
@@ -694,7 +679,7 @@ Class Panel {
 				winObj: panelWindow,
 				prefix: "Smelting",
 				columns: panelColList.smelting,
-				columnWidths: this.GetUISets().column.widthsSmelting,
+				columnWidths: UISets.column.widthsSmelting,
 				source: LV_Content.smelting,
 				previewType: "Recipe",
 			})
@@ -705,7 +690,7 @@ Class Panel {
 				winObj: panelWindow,
 				prefix: "FastKeys",
 				columns: panelColList.default,
-				columnWidths: this.GetUISets().column.widths,
+				columnWidths: UISets.column.widths,
 				source: LV_Content.fastkeys,
 			})
 
@@ -715,19 +700,19 @@ Class Panel {
 				winObj: panelWindow,
 				prefix: "Glago",
 				columns: panelColList.default,
-				columnWidths: this.GetUISets().column.widths,
+				columnWidths: UISets.column.widths,
 				source: LV_Content.scripts,
 				previewType: "Alternative Layout",
 			})
 
 			panelTabs.UseTab(panelTabList.Obj.commands)
 
-			commandsTree := panelWindow.AddTreeView(this.GetUISets().commandsInfoBox.commandsTree)
+			commandsTree := panelWindow.AddTreeView(UISets.commandsInfoBox.commandsTree)
 			commandsTree.OnEvent("ItemSelect", (TV, Item) => this.TV_InsertCommandsDesc(TV, Item, groupBoxCommands.text))
 
 			groupBoxCommands := {
-				group: panelWindow.AddGroupBox(this.GetUISets().commandsInfoBox.body, this.GetUISets().commandsInfoBox.bodyText[languageCode]),
-				text: panelWindow.AddLink(this.GetUISets().commandsInfoBox.text),
+				group: panelWindow.AddGroupBox(UISets.commandsInfoBox.body, UISets.commandsInfoBox.bodyText[languageCode]),
+				text: panelWindow.AddLink(UISets.commandsInfoBox.text),
 			}
 
 			for each in this.commandLabels.structured {
@@ -746,25 +731,25 @@ Class Panel {
 			panelTabs.UseTab(panelTabList.Obj.about)
 
 
-			aboutLeftBox := panelWindow.AddGroupBox(this.GetUISets().aboutInfoBox.leftBox)
-			panelWindow.AddGroupBox(this.GetUISets().aboutInfoBox.panelWindow)
-			panelWindow.AddPicture(this.GetUISets().aboutInfoBox.panelWindowIco, App.internal["ico_dll"].file)
+			aboutLeftBox := panelWindow.AddGroupBox(UISets.aboutInfoBox.leftBox)
+			panelWindow.AddGroupBox(UISets.aboutInfoBox.panelWindow)
+			panelWindow.AddPicture(UISets.aboutInfoBox.panelWindowIco, App.internal["ico_dll"].file)
 
-			aboutTitle := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutTitle, App.title)
+			aboutTitle := panelWindow.AddText(UISets.aboutInfoBox.aboutTitle, App.title)
 			aboutTitle.SetFont("s20 c333333", "Cambria")
 
-			aboutVersion := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutVersion, App.versionText)
+			aboutVersion := panelWindow.AddText(UISets.aboutInfoBox.aboutVersion, App.versionText)
 			aboutVersion.SetFont("s12 c333333", "Cambria")
 
-			aboutRepoLink := panelWindow.AddLink(this.GetUISets().aboutInfoBox.aboutRepoLink,
+			aboutRepoLink := panelWindow.AddLink(UISets.aboutInfoBox.aboutRepoLink,
 				'<a href="https://github.com/DemerNkardaz/DSL-KeyPad">' Locale.Read("about_repository") '</a>'
 			)
 			aboutRepoLink.SetFont("s12", "Cambria")
 
-			aboutAuthor := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutAuthor, Locale.Read("about_author"))
+			aboutAuthor := panelWindow.AddText(UISets.aboutInfoBox.aboutAuthor, Locale.Read("about_author"))
 			aboutAuthor.SetFont("s11 c333333", "Cambria")
 
-			aboutAuthorLinks := panelWindow.AddLink(this.GetUISets().aboutInfoBox.aboutAuthorLinks, Locale.Read("about_author_links"))
+			aboutAuthorLinks := panelWindow.AddLink(UISets.aboutInfoBox.aboutAuthorLinks, Locale.Read("about_author_links"))
 			aboutAuthorLinks.SetFont("s9", "Cambria")
 
 
@@ -775,13 +760,13 @@ Class Panel {
 
 			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customEntriesCount), recipesCount, customRecipesCount)
 
-			aboutDescBox := panelWindow.AddGroupBox(this.GetUISets().aboutInfoBox.aboutDescBox, App.decodedTitle)
+			aboutDescBox := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutDescBox, App.decodedTitle)
 			aboutDescBox.SetFont("s11", "Cambria")
 
-			aboutDescription := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutDescription, Locale.Read("about_description"))
+			aboutDescription := panelWindow.AddText(UISets.aboutInfoBox.aboutDescription, Locale.Read("about_description"))
 			aboutDescription.SetFont("s12 c333333", "Cambria")
 
-			aboutChrCount := panelWindow.AddText(this.GetUISets().aboutInfoBox.aboutChrCount, chrCount)
+			aboutChrCount := panelWindow.AddText(UISets.aboutInfoBox.aboutChrCount, chrCount)
 			aboutChrCount.SetFont("c333333")
 
 			panelTabs.UseTab(panelTabList.Obj.useful)
@@ -811,6 +796,35 @@ Class Panel {
 			panelWindow.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 
 
+			panelResize(guiObj, minMax, w, h) {
+				UISets := this.GetUISets("WHXY", w, h)
+
+				guiObj["Tabs"].Move(, , UISets.tabs.w, UISets.tabs.h)
+
+				for prefix in ["Diacritic", "Spaces", "Smelting", "FastKeys", "Glago"] {
+					guiObj[prefix "Group"].Move(UISets.infoBox.body.x, UISets.infoBox.body.y, UISets.infoBox.body.w, UISets.infoBox.body.h)
+					guiObj[prefix "GroupFrame"].Move(UISets.infoBox.preview.x, UISets.infoBox.preview.y, UISets.infoBox.preview.w, UISets.infoBox.preview.h)
+					guiObj[prefix "Symbol"].Move(UISets.infoBox.preview.x, UISets.infoBox.preview.y, UISets.infoBox.preview.w, UISets.infoBox.preview.h)
+					guiObj[prefix "Title"].Move(UISets.infoBox.title.x, UISets.infoBox.title.y, UISets.infoBox.title.w, UISets.infoBox.title.h)
+					guiObj[prefix "LaTeXTitleLTX"].Move(UISets.infoBox.LaTeXTitleLTX.x, UISets.infoBox.LaTeXTitleLTX.y, UISets.infoBox.LaTeXTitleLTX.w, UISets.infoBox.LaTeXTitleLTX.h)
+					guiObj[prefix "LaTeXTitleA"].Move(UISets.infoBox.LaTeXTitleA.x, UISets.infoBox.LaTeXTitleA.y, UISets.infoBox.LaTeXTitleA.w, UISets.infoBox.LaTeXTitleA.h)
+					guiObj[prefix "LaTeXTitleE"].Move(UISets.infoBox.LaTeXTitleE.x, UISets.infoBox.LaTeXTitleE.y, UISets.infoBox.LaTeXTitleE.w, UISets.infoBox.LaTeXTitleE.h)
+					guiObj[prefix "LaTeXPackage"].Move(UISets.infoBox.LaTeXPackage.x, UISets.infoBox.LaTeXPackage.y, UISets.infoBox.LaTeXPackage.w, UISets.infoBox.LaTeXPackage.h)
+					guiObj[prefix "LaTeX"].Move(UISets.infoBox.LaTeX.x, UISets.infoBox.LaTeX.y, UISets.infoBox.LaTeX.w, UISets.infoBox.LaTeX.h)
+					guiObj[prefix "AltTitle"].Move(UISets.infoBox.altTitle.x, UISets.infoBox.altTitle.y, UISets.infoBox.altTitle.w, UISets.infoBox.altTitle.h)
+					guiObj[prefix "Alt"].Move(UISets.infoBox.alt.x, UISets.infoBox.alt.y, UISets.infoBox.alt.w, UISets.infoBox.alt.h)
+					guiObj[prefix "UnicodeTitle"].Move(UISets.infoBox.unicodeTitle.x, UISets.infoBox.unicodeTitle.y, UISets.infoBox.unicodeTitle.w, UISets.infoBox.unicodeTitle.h)
+					guiObj[prefix "Unicode"].Move(UISets.infoBox.unicode.x, UISets.infoBox.unicode.y, UISets.infoBox.unicode.w, UISets.infoBox.unicode.h)
+					guiObj[prefix "HTMLTitle"].Move(UISets.infoBox.htmlTitle.x, UISets.infoBox.htmlTitle.y, UISets.infoBox.htmlTitle.w, UISets.infoBox.htmlTitle.h)
+					guiObj[prefix "HTML"].Move(UISets.infoBox.html.x, UISets.infoBox.html.y, UISets.infoBox.html.w, UISets.infoBox.html.h)
+					guiObj[prefix "Tags"].Move(UISets.infoBox.tags.x, UISets.infoBox.tags.y, UISets.infoBox.tags.w, UISets.infoBox.tags.h)
+					guiObj[prefix "Alert"].Move(UISets.infoBox.alert.x, UISets.infoBox.alert.y, UISets.infoBox.alert.w, UISets.infoBox.alert.h)
+					guiObj[prefix "KeyPreviewTitle"].Move(UISets.infoBox.keyPreviewTitle.x, UISets.infoBox.keyPreviewTitle.y, UISets.infoBox.keyPreviewTitle.w, UISets.infoBox.keyPreviewTitle.h)
+					guiObj[prefix "KeyPreviewSet"].Move(UISets.infoBox.keyPreviewSet.x, UISets.infoBox.keyPreviewSet.y, UISets.infoBox.keyPreviewSet.w, UISets.infoBox.keyPreviewSet.h)
+					guiObj[prefix "KeyPreview"].Move(UISets.infoBox.keyPreview.x, UISets.infoBox.keyPreview.y, UISets.infoBox.keyPreview.w, UISets.infoBox.keyPreview.h)
+					guiObj[prefix "LegendButton"].Move(UISets.infoBox.legendButton.x, UISets.infoBox.legendButton.y, UISets.infoBox.legendButton.w, UISets.infoBox.legendButton.h)
+				}
+			}
 			return panelWindow
 		}
 
@@ -830,6 +844,7 @@ Class Panel {
 	}
 
 	static AddCharactersTab(options) {
+		UISets := this.GetUISets()
 		languageCode := Language.Get()
 		panelWindow := options.winObj
 
@@ -837,7 +852,7 @@ Class Panel {
 			options.previewType := "Key"
 		}
 
-		items_LV := panelWindow.AddListView(this.GetUISets().column.listStyle " v" options.prefix "LV", options.columns)
+		items_LV := panelWindow.AddListView(UISets.column.listStyle " v" options.prefix "LV", options.columns)
 		items_LV.SetFont("s10")
 		items_LV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: options.prefix, previewType: options.previewType }))
 		items_LV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber))
@@ -851,44 +866,44 @@ Class Panel {
 			items_LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
 		}
 
-		items_FilterIcon := panelWindow.AddButton(this.GetUISets().filter.icon)
+		items_FilterIcon := panelWindow.AddButton(UISets.filter.icon)
 		GuiButtonIcon(items_FilterIcon, ImageRes, 169)
-		items_Filter := panelWindow.AddEdit(this.GetUISets().filter.field options.prefix "Filter", "")
+		items_Filter := panelWindow.AddEdit(UISets.filter.field options.prefix "Filter", "")
 		items_Filter.SetFont("s10")
 		items_Filter.OnEvent("Change", (*) => this.LV_Filter(panelWindow, options.prefix "Filter", items_LV, options.source))
 
 		GroupBoxOptions := {
-			group: panelWindow.Add("GroupBox", "v" options.prefix "Group " this.GetUISets().infoBox.body, this.GetUISets().infoBox.bodyText),
-			groupFrame: panelWindow.Add("GroupBox", this.GetUISets().infoBox.previewFrame),
-			preview: panelWindow.AddEdit("v" options.prefix "Symbol " this.GetUISets().infoBox.preview, this.GetUISets().infoBox.previewText),
-			title: panelWindow.AddText("v" options.prefix "Title " this.GetUISets().infoBox.title, this.GetUISets().infoBox.titleText),
+			group: panelWindow.AddGroupBox("v" options.prefix "Group " UISets.infoBox.body, UISets.infoBox.bodyText),
+			groupFrame: panelWindow.AddGroupBox("v" options.prefix "GroupFrame " UISets.infoBox.previewFrame),
+			preview: panelWindow.AddEdit("v" options.prefix "Symbol " UISets.infoBox.preview, UISets.infoBox.previewText),
+			title: panelWindow.AddText("v" options.prefix "Title " UISets.infoBox.title, UISets.infoBox.titleText),
 			;
-			LaTeXTitleLTX: panelWindow.AddText(this.GetUISets().infoBox.LaTeXTitleLTX, this.GetUISets().infoBox.LaTeXTitleLTXText).SetFont("s10", "Cambria"),
-			LaTeXTitleA: panelWindow.AddText(this.GetUISets().infoBox.LaTeXTitleA, this.GetUISets().infoBox.LaTeXTitleAText).SetFont("s9", "Cambria"),
-			LaTeXTitleE: panelWindow.AddText(this.GetUISets().infoBox.LaTeXTitleE, this.GetUISets().infoBox.LaTeXTitleEText).SetFont("s10", "Cambria"),
-			LaTeXPackage: panelWindow.AddText("v" options.prefix "LaTeXPackage " this.GetUISets().infoBox.LaTeXPackage, this.GetUISets().infoBox.LaTeXPackageText).SetFont("s9"),
-			LaTeX: panelWindow.AddEdit("v" options.prefix "LaTeX " this.GetUISets().infoBox.LaTeX, this.GetUISets().infoBox.LaTeXText),
+			LaTeXTitleLTX: panelWindow.AddText("v" options.prefix "LaTeXTitleLTX " UISets.infoBox.LaTeXTitleLTX, UISets.infoBox.LaTeXTitleLTXText).SetFont("s10", "Cambria"),
+			LaTeXTitleA: panelWindow.AddText("v" options.prefix "LaTeXTitleA " UISets.infoBox.LaTeXTitleA, UISets.infoBox.LaTeXTitleAText).SetFont("s9", "Cambria"),
+			LaTeXTitleE: panelWindow.AddText("v" options.prefix "LaTeXTitleE " UISets.infoBox.LaTeXTitleE, UISets.infoBox.LaTeXTitleEText).SetFont("s10", "Cambria"),
+			LaTeXPackage: panelWindow.AddText("v" options.prefix "LaTeXPackage " UISets.infoBox.LaTeXPackage, UISets.infoBox.LaTeXPackageText).SetFont("s9"),
+			LaTeX: panelWindow.AddEdit("v" options.prefix "LaTeX " UISets.infoBox.LaTeX, UISets.infoBox.LaTeXText),
 			;
-			altTitle: panelWindow.AddText(this.GetUISets().infoBox.altTitle, Locale.Read("symbol_altcode")).SetFont("s9"),
-			alt: panelWindow.AddEdit("v" options.prefix "Alt " this.GetUISets().infoBox.alt, this.GetUISets().infoBox.altText),
+			altTitle: panelWindow.AddText("v" options.prefix "AltTitle " UISets.infoBox.altTitle, Locale.Read("symbol_altcode")).SetFont("s9"),
+			alt: panelWindow.AddEdit("v" options.prefix "Alt " UISets.infoBox.alt, UISets.infoBox.altText),
 			;
-			unicodeTitle: panelWindow.AddText(this.GetUISets().infoBox.unicodeTitle, Locale.Read("preview_unicode")).SetFont("s9"),
-			unicode: panelWindow.AddEdit("v" options.prefix "Unicode " this.GetUISets().infoBox.unicode, this.GetUISets().infoBox.unicodeText),
+			unicodeTitle: panelWindow.AddText("v" options.prefix "UnicodeTitle " UISets.infoBox.unicodeTitle, Locale.Read("preview_unicode")).SetFont("s9"),
+			unicode: panelWindow.AddEdit("v" options.prefix "Unicode " UISets.infoBox.unicode, UISets.infoBox.unicodeText),
 			;
-			htmlTitle: panelWindow.AddText(this.GetUISets().infoBox.htmlTitle, Locale.Read("preview_html")).SetFont("s9"),
-			html: panelWindow.AddEdit("v" options.prefix "HTML " this.GetUISets().infoBox.html, this.GetUISets().infoBox.htmlText),
+			htmlTitle: panelWindow.AddText("v" options.prefix "HTMLTitle " UISets.infoBox.htmlTitle, Locale.Read("preview_html")).SetFont("s9"),
+			html: panelWindow.AddEdit("v" options.prefix "HTML " UISets.infoBox.html, UISets.infoBox.htmlText),
 			;
-			tags: panelWindow.AddEdit("v" options.prefix "Tags " this.GetUISets().infoBox.tags),
-			alert: panelWindow.AddEdit("v" options.prefix "Alert " this.GetUISets().infoBox.alert),
+			tags: panelWindow.AddEdit("v" options.prefix "Tags " UISets.infoBox.tags),
+			alert: panelWindow.AddEdit("v" options.prefix "Alert " UISets.infoBox.alert),
 			;
-			keyPreviewTitle: panelWindow.AddText(this.GetUISets().infoBox.keyPreviewTitle, options.previewType = "Recipe" ? Locale.Read("col_recipe") : Locale.Read("col_key")).SetFont("s9"),
-			keyPreviewSet: panelWindow.AddText("v" options.prefix "KeyPreviewSet " this.GetUISets().infoBox.keyPreviewSet, this.GetUISets().infoBox.keyPreviewSetText).SetFont("s12"),
-			keyPreview: panelWindow.AddEdit("v" options.prefix "KeyPreview " this.GetUISets().infoBox.keyPreview, "N/A"),
-			legendButton: panelWindow.AddButton("v" options.prefix "LegendButton " this.GetUISets().infoBox.legendButton, Chr(0x1F4D6)),
+			keyPreviewTitle: panelWindow.AddText("v" options.prefix "KeyPreviewTitle " UISets.infoBox.keyPreviewTitle, options.previewType = "Recipe" ? Locale.Read("col_recipe") : Locale.Read("col_key")).SetFont("s9"),
+			keyPreviewSet: panelWindow.AddText("v" options.prefix "KeyPreviewSet " UISets.infoBox.keyPreviewSet, UISets.infoBox.keyPreviewSetText).SetFont("s12"),
+			keyPreview: panelWindow.AddEdit("v" options.prefix "KeyPreview " UISets.infoBox.keyPreview, "N/A"),
+			legendButton: panelWindow.AddButton("v" options.prefix "LegendButton " UISets.infoBox.legendButton, Chr(0x1F4D6)),
 		}
 
-		GroupBoxOptions.preview.SetFont("s" this.GetUISets().infoFonts.previewSize, Fonts.fontFaces["Default"].name)
-		GroupBoxOptions.title.SetFont("s" this.GetUISets().infoFonts.titleSize, Fonts.fontFaces["Default"].name)
+		GroupBoxOptions.preview.SetFont("s" UISets.infoFonts.previewSize, Fonts.fontFaces["Default"].name)
+		GroupBoxOptions.title.SetFont("s" UISets.infoFonts.titleSize, Fonts.fontFaces["Default"].name)
 		GroupBoxOptions.LaTeX.SetFont("s12")
 		GroupBoxOptions.alt.SetFont("s12")
 		GroupBoxOptions.unicode.SetFont("s12")
@@ -971,6 +986,7 @@ Class Panel {
 	}
 
 	static LV_SetCharacterPreview(LV, rowValue, options) {
+		UISets := this.GetUISets()
 		characterEntry := LV.GetText(rowValue, 5)
 		characterKey := LV.GetText(rowValue, 2)
 		characterCombinationKey := LV.GetText(rowValue, 6)
@@ -999,8 +1015,8 @@ Class Panel {
 			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
 			this.PanelGUI[options.prefix "Alert"].Text := ""
 
-			this.PanelGUI[options.prefix "Title"].SetFont("s" this.GetUISets().infoFonts.titleSize " norm cDefault", Fonts.fontFaces["Default"].name)
-			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.GetUISets().infoFonts.previewSize " norm cDefault", Fonts.fontFaces["Default"].name)
+			this.PanelGUI[options.prefix "Title"].SetFont("s" UISets.infoFonts.titleSize " norm cDefault", Fonts.fontFaces["Default"].name)
+			this.PanelGUI[options.prefix "Symbol"].SetFont("s" UISets.infoFonts.previewSize " norm cDefault", Fonts.fontFaces["Default"].name)
 			this.PanelGUI[options.prefix "Unicode"].SetFont("s12")
 			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont("s12")
@@ -1046,11 +1062,11 @@ Class Panel {
 			this.PanelGUI[options.prefix "LaTeXPackage"].Text := StrLen(value.LaTeXPackage) > 0 ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
 
 
-			this.PanelGUI[options.prefix "Title"].SetFont((StrLen(this.PanelGUI[options.prefix "Title"].Text) > 30) ? "s12" : "s" this.GetUISets().infoFonts.titleSize)
+			this.PanelGUI[options.prefix "Title"].SetFont((StrLen(this.PanelGUI[options.prefix "Title"].Text) > 30) ? "s12" : "s" UISets.infoFonts.titleSize)
 
 			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(value.symbol.font) > 0 ? value.symbol.font : Fonts.fontFaces["Default"].name)
-			this.PanelGUI[options.prefix "Symbol"].SetFont("s" this.GetUISets().infoFonts.previewSize " norm cDefault")
-			this.PanelGUI[options.prefix "Symbol"].SetFont(StrLen(value.symbol.customs) > 0 ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" this.GetUISets().infoFonts.previewSmaller " norm cDefault" : "s" this.GetUISets().infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont("s" UISets.infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont(StrLen(value.symbol.customs) > 0 ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" UISets.infoFonts.previewSmaller " norm cDefault" : "s" UISets.infoFonts.previewSize " norm cDefault")
 
 
 			this.PanelGUI[options.prefix "Unicode"].SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 9 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 15) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 14) ? "s9" : "s12")
