@@ -5071,7 +5071,33 @@ LibRegistrate(this) {
 			unicode: ["{U+040F}", "{U+045F}"],
 			alterations: [{}, { subscript: "{U+1E06A}" }],
 			options: { useLetterLocale: True, fastKey: "/Ж/?Secondary" },
-			recipe: ["${cyr_[c,s]_let_d}${cyr_[c,s]_let_z}${cyr_[c,s]_let_zh}"]
+			recipe: ["\дзж\"]
+		},
+		"cyr_[c,s]_let_zh_dje", {
+			unicode: ["{U+0402}", "{U+0452}"],
+			options: { useLetterLocale: True, fastKey: ">+ /Ж/?Secondary" },
+			recipe: ["\джь\"]
+		},
+		"cyr_[c,s]_let_z_dzelo", {
+			unicode: ["{U+0405}", "{U+0455}"],
+			options: { useLetterLocale: True, fastKey: "/З/?Secondary" },
+			recipe: ["\зел\"]
+		},
+		"cyr_[c,s]_let_z_dzelo_reversed", {
+			unicode: ["{U+A644}", "{U+A645}"],
+			options: { useLetterLocale: True },
+			recipe: ["\зел\${arrow_left}", "${cyr_[c,s]_let_z_dzelo}${arrow_left}"],
+			symbol: { beforeLetter: "reversed" }
+		},
+		"cyr_[c,s]_let_z_zemlya", {
+			unicode: ["{U+A640}", "{U+A641}"],
+			options: { useLetterLocale: True, fastKey: ">+ /З/?Secondary" },
+			recipe: ["\зем\"]
+		},
+		"cyr_[c,s]_let_z_dzelo_archaic", {
+			unicode: ["{U+A642}", "{U+A643}"],
+			options: { useLetterLocale: True },
+			recipe: ["${cyr_[c,s]_let_z_zemlya}-"]
 		},
 		"cyr_[c,s]_let_i_decimal", {
 			unicode: ["{U+0406}", "{U+0456}"],
@@ -5081,6 +5107,22 @@ LibRegistrate(this) {
 		"cyr_[c,s]_let_i_izhitsa", {
 			unicode: ["{U+0474}", "{U+0475}"],
 			options: { secondName: True, fastKey: "<! /И/?Secondary" },
+		},
+		"cyr_[c,s]_let_h_shha", {
+			unicode: ["{U+04BA}", "{U+04BB}"],
+			options: { useLetterLocale: True, fastKey: "/Х/?Secondary" },
+			recipe: ["\хх\"]
+		},
+		"cyr_[c,s]_let_h_shha__descender", {
+			unicode: ["{U+0526}", "{U+0527}"],
+			groups: ["Cyrillic"],
+			options: { useLetterLocale: "Origin" },
+			recipe: ["${cyr_[c,s]_let_h_shha}${descender}"]
+		},
+		"cyr_[c,s]_let_ch_djerv", {
+			unicode: ["{U+A648}", "{U+A649}"],
+			options: { useLetterLocale: True, fastKey: "<+<! /Ч/?Secondary" },
+			recipe: ["\чжь\"]
 		},
 		"cyr_[c,s]_let_semisoft_sign", {
 			unicode: ["{U+048C}", "{U+048D}"],

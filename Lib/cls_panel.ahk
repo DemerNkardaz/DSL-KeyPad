@@ -793,6 +793,7 @@ Class Panel {
 
 			panelTabs.UseTab()
 
+			GUI_Util.RemoveMinMaxButtons(panelWindow.Hwnd)
 			panelWindow.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 
 

@@ -757,12 +757,12 @@ bindingMaps := Map(
 				"<!", ["cyr_c_let_zhe_breve", "cyr_s_let_zhe_breve"],
 				"<^>!", ["cyr_c_let_zh_dzhe", "cyr_s_let_zh_dzhe"],
 				"<^>!<+", ["cyr_c_let_zhe_diaeresis", "cyr_s_let_zhe_diaeresis"],
-				"<^>!>+", ["cyr_c_let_dje", "cyr_s_let_dje"],
+				"<^>!>+", ["cyr_c_let_zh_dje", "cyr_s_let_zh_dje"],
 				"<^>!<!", ["cyr_c_let_zhe_descender", "cyr_s_let_zhe_descender"],
 			),
 			"З", Map(
-				"<^>!", ["cyr_c_let_dze", "cyr_s_let_dze"],
-				"<^>!>+", ["cyr_c_let_zemlya", "cyr_s_let_zemlya"],
+				"<^>!", ["cyr_c_let_z_dzelo", "cyr_s_let_z_dzelo"],
+				"<^>!>+", ["cyr_c_let_z_zemlya", "cyr_s_let_z_zemlya"],
 				"<^>!<+", ["cyr_c_let_z_diaeresis", "cyr_s_let_z_diaeresis"],
 				"<^>!<!", ["cyr_c_let_z_descender", "cyr_s_let_z_descender"],
 			),
@@ -824,7 +824,7 @@ bindingMaps := Map(
 				"<^>!", ["cyr_c_let_fita", "cyr_s_let_fita"]
 			),
 			"Х", Map(
-				"<^>!", ["cyr_c_let_shha", "cyr_s_let_shha"],
+				"<^>!", ["cyr_c_let_h_shha", "cyr_s_let_h_shha"],
 				"<^>!<!", ["cyr_c_let_h_descender", "cyr_s_let_h_descender"],
 			),
 			"Ц", Map(),
@@ -832,7 +832,7 @@ bindingMaps := Map(
 				"<^>!", ["cyr_c_let_tshe", "cyr_s_let_tshe"],
 				"<^>!<+", ["cyr_c_let_ch_diaeresis", "cyr_s_let_ch_diaeresis"],
 				"<^>!<!", ["cyr_c_let_ch_descender", "cyr_s_let_ch_descender"],
-				"<^>!<!<+", ["cyr_c_let_djerv", "cyr_s_let_djerv"],
+				"<^>!<!<+", ["cyr_c_let_ch_djerv", "cyr_s_let_ch_djerv"],
 			),
 			"Ш", Map(),
 			"Щ", Map(),

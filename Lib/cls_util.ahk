@@ -596,3 +596,18 @@ Class UIA_Util {
 		return { x: NumGet(x, 'int'), y: NumGet(y, 'int'), w: NumGet(w, 'int'), h: NumGet(h, 'int') }
 	}
 }
+
+Class GUI_Util {
+	static RemoveMinMaxButtons(hwnd) {
+		style := DllCall("GetWindowLong", "Ptr", hwnd, "Int", -16, "Int")
+		newStyle := style & ~(0x00020000 | 0x00010000) ; WS_MINIMIZEBOX = 0x20000, WS_MAXIMIZEBOX = 0x10000
+		DllCall("SetWindowLong", "Ptr", hwnd, "Int", -16, "Int", newStyle)
+
+		hMenu := DllCall("GetSystemMenu", "Ptr", hwnd, "Int", 0, "Ptr")
+		DllCall("DeleteMenu", "Ptr", hMenu, "UInt", 0xF020, "UInt", 0) ; SC_MINIMIZE
+		DllCall("DeleteMenu", "Ptr", hMenu, "UInt", 0xF030, "UInt", 0) ; SC_MAXIMIZE
+		DllCall("DeleteMenu", "Ptr", hMenu, "UInt", 0xF120, "UInt", 0) ; SC_RESTORE
+
+		DllCall("DrawMenuBar", "Ptr", hwnd)
+	}
+}
