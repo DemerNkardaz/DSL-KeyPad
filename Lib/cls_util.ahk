@@ -48,10 +48,32 @@ Class Util {
 	}
 
 	static StrFormattedReduce(str, maxLength := 32, removeLineBreaks := False) {
-		output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ]" : str
+		totalLen := this.StrDigitFormat(StrLen(str))
+		output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ] ⟨ " totalLen " ⟩" : str
 		if removeLineBreaks {
 			output := StrReplace(output, "`r`n", " ")
 			output := StrReplace(output, "`n", " ")
+		}
+
+		return output
+	}
+
+	static StrDigitFormat(str) {
+		output := ""
+		len := StrLen(str)
+		if len >= 4 {
+			pos := 0
+			Loop len {
+				currentChar := SubStr(str, len - A_Index + 1, 1)
+				output := currentChar output
+				pos++
+				if (pos = 3 && A_Index < len) {
+					output := " " output
+					pos := 0
+				}
+			}
+		} else {
+			output := str
 		}
 		return output
 	}
