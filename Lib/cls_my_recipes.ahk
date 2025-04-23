@@ -8,22 +8,22 @@ Class MyRecipes {
 
 	static defaulRecipes := [
 		"kanji_yoshi", {
-			name: "Символ кандзи «Ёси»",
+			name: "ru:Кандзи «Ёси»|en:Kanji “Yoshi”",
 			recipe: "ёси|yoshi",
 			result: Chr(0x7FA9),
 		},
 		"html_template", {
-			name: "HTML Template",
+			name: "ru:Шаблон HTML|en:HTML Template",
 			recipe: "html",
 			result: '<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<meta charset="UTF-8">\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t\t\n\t\t<meta name="date" content="">\n\t\t<meta name="subject" content="">\n\t\t<meta name="rating" content="">\n\t\t<meta name="theme-color" content="">\n\n\t\t<base href="/" />\n\n\t\t<meta name="referrer" content="origin">\n\t\t<meta name="referrer" content="origin-when-cross-origin">\n\t\t<meta name="referrer" content="no-referrer-when-downgrade">\n\n\t\t<meta property="og:type" content="website">\n\t\t<meta property="og:title" content=">\n\t\t<meta property="og:url" content="">\n\t\t<meta property="og:description" content="">\n\t\t<meta property="og:image" content="">\n\t\t<meta property="og:locale" content="">\n\n\t\t<meta name="twitter:card" content="summary_large_image">\n\t\t<meta property="twitter:domain" content="">\n\t\t<meta property="twitter:url" content="">\n\t\t<meta name="twitter:title" content="">\n\t\t<meta name="twitter:description" content="">\n\t\t<meta name="twitter:image" content="">\n\t\t<meta name="twitter:creator" content="">\n\n\t\t<meta http-equiv="Cache-Control" content="public">\n\t\t<meta http-equiv="X-UA-Compatible" content="ie=edge">\n\t\t<meta name="renderer" content="webkit|ie-comp|ie-stand">\n\t\t<meta name="author" content="">\n\t\t<meta content="" name="description">\n\t\t<link rel="manifest" href="/manifest.webmanifest">\n\n\t\t<title>Index</title>\n\t\n\t\t<link rel="icon" href="/favicon.ico" type="image/x-icon">\n\t\t<link rel="stylesheet" href="/index.css" />\n\n\t\t<meta name="robots" content="index, follow">\n\t\t<meta name="revisit-after" content="7 days">\n\n\t\t<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="use-credentials">\n\t\t<link rel="preconnect" href="https://fonts.gstatic.com">\n\t</head>\n\t<body>\n\t\t<main>\n\t\t\n\t\t</main>\n\t\t<script src="/index.js"></script>\n\t</body>\n</html>',
 		},
 		"kbd", {
-			name: "Keyboard Input Tag",
+			name: "ru:Элемент ввода с клавиатуры|en:Keyboard Input element",
 			recipe: "kbd",
 			result: "<kbd></kbd>",
 		},
 		"emoji_ice", {
-			name: "Ice",
+			name: "ru:Лёд|en:Ice",
 			recipe: "лёд|ice",
 			result: Chr(0x1F9CA),
 		},
@@ -109,7 +109,8 @@ Class MyRecipes {
 			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.user "\Autoimport.linux\demo.XCompose", "UTF-8")
 
 
-		SetTimer((*) => this.UpdateChrLib(), -2000)
+		; SetTimer((*) => this.UpdateChrLib(), -2000)
+		this.UpdateChrLib()
 	}
 
 	static EditorGUI := Gui()

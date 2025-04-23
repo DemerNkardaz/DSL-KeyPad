@@ -49,7 +49,8 @@ Class Util {
 
 	static StrFormattedReduce(str, maxLength := 32, removeLineBreaks := False) {
 		totalLen := this.StrDigitFormat(StrLen(str))
-		output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ] ⟨ " totalLen " ⟩" : str
+		pages := this.StrPagesCalc(str)
+		output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ] ⟨ " this.StrVarsInject(Locale.Read("tooltip_compose_overflow_properties"), totalLen, pages) " ⟩" : str
 		if removeLineBreaks {
 			output := StrReplace(output, "`r`n", " ")
 			output := StrReplace(output, "`n", " ")
@@ -76,6 +77,17 @@ Class Util {
 			output := str
 		}
 		return output
+	}
+
+	static StrPagesCalc(str, chrPerPage := 3000) {
+		len := StrLen(str)
+		pages := len / chrPerPage
+
+		pages := Round(pages, 1)
+
+		if (pages = Floor(pages))
+			pages := Integer(pages)
+		return pages
 	}
 
 	static StrVarsInject(StringVar, SetVars*) {
