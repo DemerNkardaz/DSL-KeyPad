@@ -3287,7 +3287,7 @@ LibRegistrate(this) {
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True, fastKey: ">+ ~?Secondary"
 			},
-			recipe: ["$zh"],
+			recipe: ["/E/zh"],
 		},
 		"lat_[c,s]_let_z_ezh__caron", {
 			unicode: ["{U+01EE}", "{U+01EF}"],
@@ -5107,6 +5107,10 @@ LibRegistrate(this) {
 		"cyr_[c,s]_let_i_izhitsa", {
 			unicode: ["{U+0474}", "{U+0475}"],
 			options: { secondName: True, fastKey: "<! /И/?Secondary" },
+		},
+		"cyr_[c,s]_let_l_palochka", {
+			unicode: ["{U+04C0}", "{U+04CF}"],
+			options: { useLetterLocale: True, fastKey: "<+<! /Л/?Secondary" }
 		},
 		"cyr_[c,s]_let_h_shha", {
 			unicode: ["{U+04BA}", "{U+04BB}"],

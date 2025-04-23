@@ -787,7 +787,7 @@ bindingMaps := Map(
 				"<^>!", ["cyr_c_lig_lje", "cyr_s_lig_lje"],
 				"<^>!<!", ["cyr_c_let_l_descender", "cyr_s_let_l_descender"],
 				"<^>!<!>+", ["cyr_c_let_l_tail", "cyr_s_let_l_tail"],
-				"<^>!<!<+", ["cyr_c_let_palochka", "cyr_s_let_palochka"]
+				"<^>!<!<+", ["cyr_c_let_l_palochka", "cyr_s_let_l_palochka"]
 			),
 			"М", Map(
 				"<^>!<!<+>+", ["cyr_c_let_m_tail", "cyr_s_let_m_tail"]
