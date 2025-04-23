@@ -5085,7 +5085,7 @@ LibRegistrate(this) {
 		},
 		"cyr_[c,s]_let_z_dzelo_reversed", {
 			unicode: ["{U+A644}", "{U+A645}"],
-			options: { useLetterLocale: True },
+			options: { useLetterLocale: "dzelo$" },
 			recipe: ["\зел\${arrow_left}", "${cyr_[c,s]_let_z_dzelo}${arrow_left}"],
 			symbol: { beforeLetter: "reversed" }
 		},

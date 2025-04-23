@@ -237,14 +237,14 @@ Class Locale extends Language {
 		}
 	}
 
-	static VarSelect(str, varI) {
+	static VarSelect(str, i) {
 		output := str
 		if (RegExMatch(str, "\$\((.*?)\)", &match)) {
 			split := StrSplit(match[1], "|")
-			if (varI > 0 && varI <= split.Length) {
+			if (i > 0 && i <= split.Length) {
 				beforePart := SubStr(str, 1, match.Pos(0) - 1)
 				afterPart := SubStr(str, match.Pos(0) + match.Len(0))
-				output := beforePart split[varI] afterPart
+				output := beforePart split[i] afterPart
 			}
 		}
 		return output
@@ -288,7 +288,13 @@ Class Locale extends Language {
 		for _, langCode in langCodes {
 			isAlt := InStr(langCode, "_alt")
 			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
-			postLetter := useLetterLocale ? Locale.Read((useLetterLocale = "Origin" ? RegExReplace(entryName, "i)^(.*?)__.*", "$1") : entryName) "_LTL", lang) : letter
+			postLetter := useLetterLocale ?
+				(Locale.Read((RegExMatch(useLetterLocale, "i)^(.*?)\$", &endMatch) > 0 ?
+					RegExReplace(entryName, "i)^(.*?" RegExReplace(endMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1") :
+					useLetterLocale = "Origin" ?
+						RegExReplace(entryName, "i)^(.*?)__.*", "$1") :
+					entryName) "_LTL", lang)) :
+				letter
 
 			lBeforeletter := ""
 			lAfterletter := ""
