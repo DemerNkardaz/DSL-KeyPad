@@ -73,6 +73,8 @@ class Program
 
 			lib.LoadFile(scriptPath);
 			lib.Execute();
+
+
 		}
 		finally
 		{
