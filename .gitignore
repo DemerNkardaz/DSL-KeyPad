@@ -6,3 +6,5 @@ Testing/
 *.tmp
 DSLKeyPad_DevVersion.ahk
 __dev/DSLKeyPad.exe
+__dev/CSharp/DSLKeyPad/bin
+__dev/CSharp/DSLKeyPad/publish
