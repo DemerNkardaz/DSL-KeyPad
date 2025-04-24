@@ -45,6 +45,7 @@ Class App {
 	}
 
 	static Init() {
+		TraySetIcon(App.internal["ico_dll"].file, 1)
 		for dir in ["lib", "ufile", "user", "temp"] {
 			if !DirExist(this.paths.%dir%)
 				DirCreate(this.paths.%dir%)

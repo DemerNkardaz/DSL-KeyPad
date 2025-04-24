@@ -8,13 +8,13 @@ Class ChrCrafter {
 	static ComposeKeyTimer := ""
 
 	static modifiedCharsType := ""
-	static prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
+	static prompt := ConvertFromHexaDecimal(Cfg.Get("Ligature", "LatestPrompts"))
 
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 
 		ChrCrafter.modifiedCharsType := GetModifiedCharsType()
-		ChrCrafter.prompt := ConvertFromHexaDecimal(IniRead(ConfigFile, "LatestPrompts", "Ligature", ""))
+		ChrCrafter.prompt := ConvertFromHexaDecimal(Cfg.Get("Ligature", "LatestPrompts"))
 
 		ChrCrafter.%this.compositingMode%Mode()
 		try {
@@ -46,7 +46,7 @@ Class ChrCrafter {
 				output := RegExReplace(output, "\s+$", "")
 				this.SendOutput(output)
 
-				IniWrite(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), ConfigFile, "LatestPrompts", "Ligature")
+				Cfg.Set(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), "Ligature", "LatestPrompts")
 			}
 		}
 

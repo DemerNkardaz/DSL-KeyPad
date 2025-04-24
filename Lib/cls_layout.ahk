@@ -640,11 +640,7 @@ Class KeyboardBinder {
 				outputLayout := Map()
 
 				for key, value in layoutMap["keys"] {
-					if !RegExMatch(value, "i)^SC[0-9A-F]{3}$") {
-						outputLayout[key] := layoutBase.layout[value]
-					} else {
-						outputLayout[key] := value
-					}
+					outputLayout[key] := RegExMatch(value, "i)^SC[0-9A-F]{3}$") ? value : layoutBase.layout[value]
 				}
 
 				this.layouts.%scriptType%.Set(scriptName, LayoutList(scriptType, outputLayout))

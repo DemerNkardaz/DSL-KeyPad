@@ -123,6 +123,7 @@ class ChrLib {
 	static lastIndexAdded := -1
 
 	static __New() {
+		ShowInfoMessage("tray_app_library_oninit")
 		this.Registrate()
 	}
 
