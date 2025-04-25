@@ -6,7 +6,7 @@
 
 # DSL KeyPad
 
-![Static Badge](<https://img.shields.io/badge/%F0%9F%94%96-%CE%AC%CE%BB%CF%86%CE%B1%20(dev)-yellow>) ![Static Badge](https://img.shields.io/badge/AHK-v2-yellow) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/DemerNkardaz/DSL-KeyPad?color=yellow)
+![Static Badge](https://img.shields.io/github/v/release/DemerNkardaz/DSL-KeyPad?include_prereleases&label=%F0%9F%8F%B7%EF%B8%8F&color=yellow) ![Static Badge](https://img.shields.io/badge/AHK-v2-yellow) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/DemerNkardaz/DSL-KeyPad?color=yellow)
 
 # Table of Contents [Содержание]
 
