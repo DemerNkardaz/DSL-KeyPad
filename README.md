@@ -33,13 +33,13 @@
 
 # Overiew
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
 
 “DSL KeyPad” is a utility written on [AutoHotkey 2.0](https://www.autohotkey.com/), designed for inputting a wide range of characters using hotkeys and auxiliary functions. Its primary focus is on enhancing input capabilities for Latin and Cyrillic scripts, allowing typing in multiple languages without the need for separate keyboard layouts for each language.
 
 More than 2,900 Unicode characters are available.
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_latin.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_latin.ico" alt="" width="62" align="right">
 
 ### Latin Script
 
@@ -57,12 +57,12 @@ The utility supports input of most Latin characters, including their variations 
 - [Język polski](https://ru.wikipedia.org/wiki/Польский_язык): Wiedźmin, Żołnierz, Natknąć się.
 - [Čeština](https://ru.wikipedia.org/wiki/Чешский_язык): Zřetelně, Výpůjčka, Vyvíjí.
 - [Latviešu valoda](https://ru.wikipedia.org/wiki/Латышский_язык): Katoļu ticību, Luterāņu katķisma.
-- [<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="32" align="left"> Tiếng Việt](https://ru.wikipedia.org/wiki/Вьетнамский_язык): Thương Ưởng, Đế Chế, Rồng phương Bắc.<br>&emsp;Vietnamese TELEX/VNI‐like input mode available: <kbd>RAlt F2</kbd>
-- [<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="32" align="left"> Hànyǔ Pīnyīn「汉语拼音」](https://ru.wikipedia.org/wiki/Пиньинь): Māo「貓」, Gǔ「谷」, Gōngtíng「宮廷」.<br>&emsp;Vietnamese TELEX/VNI‐like input mode available: <kbd>RAlt RShift F2</kbd>
+- [<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="32" align="left"> Tiếng Việt](https://ru.wikipedia.org/wiki/Вьетнамский_язык): Thương Ưởng, Đế Chế, Rồng phương Bắc.<br>&emsp;Vietnamese TELEX/VNI‐like input mode available: <kbd>RAlt F2</kbd>
+- [<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="32" align="left"> Hànyǔ Pīnyīn「汉语拼音」](https://ru.wikipedia.org/wiki/Пиньинь): Māo「貓」, Gǔ「谷」, Gōngtíng「宮廷」.<br>&emsp;Vietnamese TELEX/VNI‐like input mode available: <kbd>RAlt RShift F2</kbd>
 
 [Here](https://github.com/DemerNkardaz/DSL-KeyPad/wiki/Languages-Input〈Fast-Keys-%25-Compose〉) located a list of tables of hints for multilingual input.
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_cyrillic.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_cyrillic.ico" alt="" width="62" align="right">
 
 ### Cyrillic Script
 
@@ -77,7 +77,7 @@ A wide range of Cyrillic characters is also supported, requiring a standard Russ
 - [Қазақ тілі](https://ru.wikipedia.org/wiki/Казахский_язык): Мәліметтер, Ыңғай, Көз.
 - [Забони тоҷикӣ](https://ru.wikipedia.org/wiki/Таджикский_язык): Дӯстон, Баҳри.
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_greek.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_greek.ico" alt="" width="62" align="right">
 
 ### Hellenic Script
 
@@ -85,7 +85,7 @@ Currently, there is no support for Greek and Hellenic script languages, but plan
 
 ---
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_punctuation.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_punctuation.ico" alt="" width="62" align="right">
 
 ### Punctuation
 
@@ -98,7 +98,7 @@ Utility supports the input of many punctuation marks for different languages, fo
 | ‐ ‑ — – ⸻ ⸺ ‒ ‧        | Number Range: 15–17.3 ℃ <br> — Ёримаса, стой! — воскликнул Тадахиса. <br> “Yorimasa, stop!” — Tadahisa exclaimed.                                               |
 | «» ‹› “” ‘’ „” „“ „⹂ ‚ | Организация «НВК „Рассвет“» отправила экспедицию. <br> The “SMC ‘Dawn’” organization sent an expedition. <br> Organizația „CȘM «Răsărit»” a trimis o expediție. |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_diacritics.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_diacritics.ico" alt="" width="62" align="right">
 
 ### Combining Diacritics
 
@@ -135,7 +135,7 @@ Secondary added characters category includes almost all types of spaces:
 
 _Word Joiner_ is not a space, but it was added together with spaces in a single group.
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_special.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_special.ico" alt="" width="62" align="right">
 
 ### …and other various symbols
 
@@ -151,13 +151,13 @@ A variety of other symbols are also included, such as currency signs, typographi
 
 # Обзор
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
 
 «DSL KeyPad» — утилита на языке [AutoHotkey 2.0](https://www.autohotkey.com/) для ввода широкого спектра символов посредством горячих клавиш и вспомогательных функций. Основное направление — расширение возможностей для ввода латиницы и кириллицы, что позволяет писать на множестве языков без использования отдельных раскладок для каждого из языков.
 
 Доступно более 2 900 символов юникода.
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_latin.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_latin.ico" alt="" width="62" align="right">
 
 ### Латиница
 
@@ -175,12 +175,12 @@ A variety of other symbols are also included, such as currency signs, typographi
 - [Język polski](https://ru.wikipedia.org/wiki/Польский_язык): Wiedźmin, Żołnierz, Natknąć się.
 - [Čeština](https://ru.wikipedia.org/wiki/Чешский_язык): Zřetelně, Výpůjčka, Vyvíjí.
 - [Latviešu valoda](https://ru.wikipedia.org/wiki/Латышский_язык): Katoļu ticību, Luterāņu katķisma.
-- [<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="32" align="left"> Tiếng Việt](https://ru.wikipedia.org/wiki/Вьетнамский_язык): Thương Ưởng, Đế Chế, Rồng phương Bắc.<br>&emsp;Для облегчения письма присутствует Vietnamese TELEX/VNI‐подобный режим ввода: <kbd>RAlt F2</kbd>
-- [<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="32" align="left"> Hànyǔ Pīnyīn「汉语拼音」](https://ru.wikipedia.org/wiki/Пиньинь): Māo「貓」, Gǔ「谷」, Gōngtíng「宮廷」.<br>&emsp;Аналогично присутствует Vietnamese TELEX/VNI‐подобный режим ввода: <kbd>RAlt RShift F2</kbd>
+- [<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_viet.ico" alt="" width="32" align="left"> Tiếng Việt](https://ru.wikipedia.org/wiki/Вьетнамский_язык): Thương Ưởng, Đế Chế, Rồng phương Bắc.<br>&emsp;Для облегчения письма присутствует Vietnamese TELEX/VNI‐подобный режим ввода: <kbd>RAlt F2</kbd>
+- [<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_pinyin.ico" alt="" width="32" align="left"> Hànyǔ Pīnyīn「汉语拼音」](https://ru.wikipedia.org/wiki/Пиньинь): Māo「貓」, Gǔ「谷」, Gōngtíng「宮廷」.<br>&emsp;Аналогично присутствует Vietnamese TELEX/VNI‐подобный режим ввода: <kbd>RAlt RShift F2</kbd>
 
 [Здесь](https://github.com/DemerNkardaz/DSL-KeyPad/wiki/Languages-Input〈Fast-Keys-%25-Compose〉) представлен перечень таблиц‐подсказок для многоязычного ввода.
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_cyrillic.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_cyrillic.ico" alt="" width="62" align="right">
 
 ### Кириллица
 
@@ -195,7 +195,7 @@ A variety of other symbols are also included, such as currency signs, typographi
 - [Қазақ тілі](https://ru.wikipedia.org/wiki/Казахский_язык): Мәліметтер, Ыңғай, Көз.
 - [Забони тоҷикӣ](https://ru.wikipedia.org/wiki/Таджикский_язык): Дӯстон, Баҳри.
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_greek.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_greek.ico" alt="" width="62" align="right">
 
 ### Эллиница
 
@@ -203,7 +203,7 @@ A variety of other symbols are also included, such as currency signs, typographi
 
 ---
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_punctuation.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_punctuation.ico" alt="" width="62" align="right">
 
 ### Пунктуация
 
@@ -216,7 +216,7 @@ A variety of other symbols are also included, such as currency signs, typographi
 | ‐ ‑ — – ⸻ ⸺ ‒ ‧        | Диапазон чисел: 15–17,3 ℃ <br> — Ёримаса, стой! — воскликнул Тадахиса. <br> “Yorimasa, stop!” — Tadahisa exclaimed.                                             |
 | «» ‹› “” ‘’ „” „“ „⹂ ‚ | Организация «НВК „Рассвет“» отправила экспедицию. <br> The “SMC ‘Dawn’” organization sent an expedition. <br> Organizația „CȘM «Răsărit»” a trimis o expediție. |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_diacritics.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_diacritics.ico" alt="" width="62" align="right">
 
 ### Комбинируемая диакритика
 
@@ -253,7 +253,7 @@ A variety of other symbols are also included, such as currency signs, typographi
 
 _Соединитель слов_ не является разновидностью пробела, но был добавлен вместе со шпациями в составе «одной группы».
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_special.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_special.ico" alt="" width="62" align="right">
 
 ### …и различные прочие символы
 
@@ -269,7 +269,7 @@ _Соединитель слов_ не является разновидност
 
 Режимы, которые активируются «поверх» английской и/или русской раскладок и представляют собой, в основном, различные виды письменностей. Если у режимов одинаковая комбинация активации — они «пара», т.е. активируются одновременно и их ввод осуществляется в зависимости от текущего языка раскладки.
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_norse.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_norse.ico" alt="" width="62" align="right">
 
 ### [Руническое письмо](https://ru.wikipedia.org/wiki/Руны)
 
@@ -281,7 +281,7 @@ _Соединитель слов_ не является разновидност
 | ---------------------------------------------------- | ------------------------------------- | --------------------------------------------------- | ------------- | --------------- |
 | ᚨ ᛒ ᛞ ᛖ ᚠ ᚷ ᚺ ᛁ ᛇ ᛃ ᚲ ᛚ ᛗ <br> ᚾ ᛜ ᛟ ᛈ ᚱ ᛊ ᛏ ᚦ ᚢ ᚹ ᛉ | …ᚪ ᚫ ᚳ ᛠ ᚸ ᚻ ᛄ ᛡ ᛤ ᛣ <br> ᛝ ᚩ ᛢ ᛋ ᛥ ᚣ | …ᛅ ᛆ ᛓ ᚼ ᚽ ᚴ ᛘ ᛙ ᚿ ᚬ ᚭ ᛌ <br> ᛐ ᚤ ᛦ ᛧ ᛨ ᛂ ᚧ ᛑ ᛛ ᛔ ᚡ | …ᛍ ᛀ ᚰ ᚮ ᛪ ᛎ  | …ᛮ ᛯ ᛰ          |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_glagolitic.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_glagolitic.ico" alt="" width="62" align="right">
 
 ### [Глаголица](https://ru.wikipedia.org/wiki/Глаголица)
 
@@ -296,7 +296,7 @@ _Соединитель слов_ не является разновидност
 <details>
   <summary><strong>Перечень остальных альтернативных режимов</strong></summary>
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_turkic.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_turkic.ico" alt="" width="62" align="right">
 
 ### [Древнетюркское письмо](https://ru.wikipedia.org/wiki/Древнетюркское_письмо)
 
@@ -308,7 +308,7 @@ _Орхоно‐енисейкое письмо_
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | 𐰀 𐰃 𐰆 𐰇 𐰲 𐰢 𐰭 𐰯 𐱁 𐰔 𐰡 𐰨 𐰪 𐰦 𐱈 𐰉 𐰋 𐰑 𐰓 𐰞 𐰠 𐰣 𐰤 𐰺 <br> 𐰼 𐰽 𐰾 𐱃 𐱅 𐰖 𐰘 𐰍 𐰏 𐰴 𐰚 𐰸 𐰜 𐰶 𐰱 𐰿 𐰰 𐱇 | …𐰁 𐰂 𐰅 𐰄 𐰈 𐰳 𐱂 𐰕 𐰩 𐰫 𐰧 𐰊 𐰌 𐰒 𐰟 𐰥 𐰻 𐱄 𐱆 𐰗 𐰙 𐰎 <br> 𐰐 𐰵 𐰛 𐰹 𐰝 𐰷 𐱀 |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_permic.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_permic.ico" alt="" width="62" align="right">
 
 ### [Древнепермское письмо](https://ru.wikipedia.org/wiki/Древнепермское_письмо)
 
@@ -320,7 +320,7 @@ _Орхоно‐енисейкое письмо_
 | ------------------------------------------------------------------------------- |
 | <img src="webpage/media/old_permic_full.png" alt="" width="700" align="center"> |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_hungarian.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_hungarian.ico" alt="" width="62" align="right">
 
 ### [Секейское руническое письмо](https://ru.wikipedia.org/wiki/Секельское_руническое_письмо)
 
@@ -332,7 +332,7 @@ _Орхоно‐енисейкое письмо_
 | ---------------------------------------------------------------------------------- |
 | <img src="webpage/media/old_hungarian_full.png" alt="" width="700" align="center"> |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_gothic.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_gothic.ico" alt="" width="62" align="right">
 
 ### [Готское письмо](https://ru.wikipedia.org/wiki/Готское_письмо)
 
@@ -342,7 +342,7 @@ _Орхоно‐енисейкое письмо_
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | &#66352; &#66353; &#66354; &#66355; &#66356; &#66357; &#66358; &#66359; &#66360; &#66361; &#66362; &#66363; &#66364; &#66365; &#66366; &#66367; &#66368; &#66369; &#66370; &#66371; &#66372; &#66373; &#66374; &#66375; &#66376; &#66377; &#66378; |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_italic.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_italic.ico" alt="" width="62" align="right">
 
 ### [Древнеиталийское письмо](https://ru.wikipedia.org/wiki/Этрусский_алфавит)
 
@@ -354,7 +354,7 @@ _Орхоно‐енисейкое письмо_
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | &#66304; &#66305; &#66306; &#66332; &#66307; &#66308; &#66349; &#66309; &#66330; &#66310; &#66311; &#66313; &#66333; &#66314; &#66329; &#66315; &#66316; &#66317; &#66319; &#66320; &#66328; &#66322; &#66323; &#66331; &#66324; &#66318; &#66321; &#66335; &#66325; &#66312; &#66326; &#66334; &#66327; &#66350; &#66351; &#66336; &#66337; &#66338; &#66339; |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_phoenician.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_phoenician.ico" alt="" width="62" align="right">
 
 ### [Финикийское письмо](https://ru.wikipedia.org/wiki/Финикийское_письмо)
 
@@ -364,7 +364,7 @@ _Орхоно‐енисейкое письмо_
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | &#67840; &#67855; &#67841; &#67842; &#67843; &#67844; &#67847; &#67845; &#67846; &#67849; &#67850; &#67851; &#67852; &#67853; &#67854; &#67860; &#67856; &#67857; &#67858; &#67859; &#67861; &#67848; &#67862; &#67866; &#67867; &#67863; &#67864; &#67865; &#67871; |
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_north_arabian.ico" alt="" width="62" align="right"><img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_south_arabian.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_north_arabian.ico" alt="" width="62" align="right"><img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_south_arabian.ico" alt="" width="62" align="right">
 
 ### Древнеаравийское письмо ([Южноаравийское](https://ru.wikipedia.org/wiki/Южноаравийское_письмо) и [Североаравийское](https://en.wikipedia.org/wiki/Ancient_North_Arabian))
 
@@ -376,7 +376,7 @@ _Орхоно‐енисейкое письмо_
 
 <br>
 
-<img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_math.ico" alt="" width="62" align="right"><img src="src/dev/DSLKeyPad_App_Icons/DSLKeyPad.app_ipa.ico" alt="" width="62" align="right">
+<img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_math.ico" alt="" width="62" align="right"><img src="src/bin/DSLKeyPad_App_Icons/DSLKeyPad.app_ipa.ico" alt="" width="62" align="right">
 
 ### [МФА](https://ru.wikipedia.org/wiki/Международный_фонетический_алфавит) и Математический режим
 
