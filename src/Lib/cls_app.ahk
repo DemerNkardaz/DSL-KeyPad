@@ -7,6 +7,7 @@ Class App {
 	static versionText := this.formatVersion(this.version)
 	static winTitle := this.title " " this.status " — " this.versionText
 	static tray := A_TrayMenu
+	static indexIcos := Map()
 
 	static paths := {
 		dir: A_ScriptDir,
@@ -33,15 +34,15 @@ Class App {
 			"exe", { repo: this.git.files "DSLKeyPad.exe", file: this.paths.dir "\DSLKeyPad.exe" },
 		)
 
-		this.icos := Map(
-			"app", [this.internal["ico_dll"].file, 0],
-		)
+		for i, ico in ["app", "norse", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "viet", "pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian"] {
+			this.indexIcos.Set(ico, i)
+		}
 
 		this.Init()
 	}
 
 	static Init() {
-		TraySetIcon(App.internal["ico_dll"].file, 1)
+		TraySetIcon(App.internal["ico_dll"].file, App.indexIcos["app"])
 		for dir in ["lib", "bin", "user", "temp"] {
 			if !DirExist(this.paths.%dir%)
 				DirCreate(this.paths.%dir%)

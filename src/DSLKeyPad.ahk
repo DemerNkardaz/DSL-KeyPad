@@ -88,8 +88,8 @@ RawSource := RawRepo "DSLKeyPad.ahk"
 UpdateAvailable := False
 
 ChangeLogRaw := Map(
-	"ru", RawRepoInfo "cChangelog.ru.md",
-	"en", RawRepoInfo "cChangelog.en.md"
+	"ru", RawRepoInfo "changelog.ru.md",
+	"en", RawRepoInfo "changelog.en.md"
 )
 
 WorkingDir := A_ScriptDir
@@ -1645,34 +1645,27 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		"Maths", "script_maths",
 	]
 
+	scriptModes := Map(
+		"Hellenic", [App.indexIcos["hellenic"]],
+		"Glagolitic Futhark", [App.indexIcos["norse"], App.indexIcos["glagolitic"]],
+		"Old Turkic Old Permic", [App.indexIcos["turkic"], App.indexIcos["permic"]],
+		"Old Hungarian", [App.indexIcos["hungarian"]],
+		"Gothic", [App.indexIcos["gothic"]],
+		"Old Italic", [App.indexIcos["old_italic"]],
+		"Phoenician", [App.indexIcos["phoenician"]],
+		"Ancient South Arabian", [App.indexIcos["south_arabian"]],
+		"Ancient North Arabian", [App.indexIcos["north_arabian"]],
+		"IPA", [App.indexIcos["ipa"]],
+		"Maths", [App.indexIcos["maths"]],
+	)
+
 	if !CurrentActive {
-		if ScriptName = "Glagolitic Futhark" {
-			TraySetIcon(App.internal["ico_dll"].file, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
-		} else if ScriptName = "Hellenic" {
-			TraySetIcon(App.internal["ico_dll"].file, CurrentLayout = CodeEn ? 2 : CurrentLayout = CodeRu ? 3 : 1)
-		} else if ScriptName = "Old Turkic Old Permic" {
-			TraySetIcon(App.internal["ico_dll"].file, CurrentLayout = CodeEn ? 4 : CurrentLayout = CodeRu ? 5 : 1)
-		} else if ScriptName = "Old Hungarian" {
-			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 6 : 1)
-		} else if ScriptName = "Gothic" {
-			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 7 : 1)
-		} else if ScriptName = "Old Italic" {
-			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 13 : 1)
-		} else if ScriptName = "Phoenician" {
-			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 14 : 1)
-		} else if ScriptName = "Ancient South Arabian" {
-			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 15 : 1)
-		} else if ScriptName = "Ancient North Arabian" {
-			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 16 : 1)
-		} else if ScriptName = "IPA" {
-			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 8 : 1)
-		} else if ScriptName = "Maths" {
-			TraySetIcon(App.internal["ico_dll"].file, (CurrentLayout = CodeEn || CurrentLayout = CodeRu) ? 10 : 1)
-		} else {
-			TraySetIcon(App.internal["ico_dll"].file, 1)
+		if scriptModes.Has(ScriptName) {
+			index := scriptModes[ScriptName].Length == 2 ? (CurrentLayout = Language.supported["en"].code ? 1 : 2) : 1
+			TraySetIcon(App.internal["ico_dll"].file, scriptModes[ScriptName][index])
 		}
 	} else {
-		TraySetIcon(App.internal["ico_dll"].file, 1)
+		TraySetIcon(App.internal["ico_dll"].file, App.indexIcos["app"])
 	}
 
 	if !HideMessage {
@@ -5779,18 +5772,18 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
 	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
-	ScriptsSubMenu.SetIcon(Labels["vietNam"], App.internal["ico_dll"].file, 11)
-	ScriptsSubMenu.SetIcon(Labels["pinYin"], App.internal["ico_dll"].file, 12)
-	ScriptsSubMenu.SetIcon(Labels["glagolitic"], App.internal["ico_dll"].file, 2)
-	ScriptsSubMenu.SetIcon(Labels["turkic"], App.internal["ico_dll"].file, 4)
-	ScriptsSubMenu.SetIcon(Labels["hungarian"], App.internal["ico_dll"].file, 6)
-	ScriptsSubMenu.SetIcon(Labels["gothic"], App.internal["ico_dll"].file, 7)
-	ScriptsSubMenu.SetIcon(Labels["italic"], App.internal["ico_dll"].file, 13)
-	ScriptsSubMenu.SetIcon(Labels["phoenician"], App.internal["ico_dll"].file, 14)
-	ScriptsSubMenu.SetIcon(Labels["south_arabian"], App.internal["ico_dll"].file, 15)
-	ScriptsSubMenu.SetIcon(Labels["north_arabian"], App.internal["ico_dll"].file, 16)
-	ScriptsSubMenu.SetIcon(Labels["maths"], App.internal["ico_dll"].file, 10)
-	ScriptsSubMenu.SetIcon(Labels["ipa"], App.internal["ico_dll"].file, 8)
+	ScriptsSubMenu.SetIcon(Labels["vietNam"], App.internal["ico_dll"].file, App.indexIcos["viet"])
+	ScriptsSubMenu.SetIcon(Labels["pinYin"], App.internal["ico_dll"].file, App.indexIcos["pinyin"])
+	ScriptsSubMenu.SetIcon(Labels["glagolitic"], App.internal["ico_dll"].file, App.indexIcos["glagolitic"])
+	ScriptsSubMenu.SetIcon(Labels["turkic"], App.internal["ico_dll"].file, App.indexIcos["turkic"])
+	ScriptsSubMenu.SetIcon(Labels["hungarian"], App.internal["ico_dll"].file, App.indexIcos["hungarian"])
+	ScriptsSubMenu.SetIcon(Labels["gothic"], App.internal["ico_dll"].file, App.indexIcos["gothic"])
+	ScriptsSubMenu.SetIcon(Labels["italic"], App.internal["ico_dll"].file, App.indexIcos["italic"])
+	ScriptsSubMenu.SetIcon(Labels["phoenician"], App.internal["ico_dll"].file, App.indexIcos["phoenician"])
+	ScriptsSubMenu.SetIcon(Labels["south_arabian"], App.internal["ico_dll"].file, App.indexIcos["south_arabian"])
+	ScriptsSubMenu.SetIcon(Labels["north_arabian"], App.internal["ico_dll"].file, App.indexIcos["north_arabian"])
+	ScriptsSubMenu.SetIcon(Labels["maths"], App.internal["ico_dll"].file, App.indexIcos["math"])
+	ScriptsSubMenu.SetIcon(Labels["ipa"], App.internal["ico_dll"].file, App.indexIcos["ipa"])
 
 	ScriptsSubMenu.Disable(Labels["telexInput"])
 	ScriptsSubMenu.Disable(Labels["altInput"])
@@ -5853,17 +5846,17 @@ ManageTrayItems() {
 	App.tray.Add()
 	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
 		App.tray.Add(Labels["enable"], (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
-		App.tray.SetIcon(Labels["enable"], App.internal["ico_dll"].file, 9)
+		App.tray.SetIcon(Labels["enable"], App.internal["ico_dll"].file, App.indexIcos["disabled"])
 	} else {
 
 		App.tray.Add(Labels["disable"], (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
-		App.tray.SetIcon(Labels["disable"], App.internal["ico_dll"].file, 9)
+		App.tray.SetIcon(Labels["disable"], App.internal["ico_dll"].file, App.indexIcos["disabled"])
 	}
 	App.tray.Add()
 	App.tray.Add(Labels["exit"], ExitApplication)
 	App.tray.Add()
 
-	App.tray.SetIcon(CurrentApp, App.internal["ico_dll"].file, 1)
+	App.tray.SetIcon(CurrentApp, App.internal["ico_dll"].file, App.indexIcos["app"])
 	App.tray.SetIcon(Labels["search"], ImageRes, 169)
 	App.tray.SetIcon(Labels["unicode"], Shell32, 225)
 	App.tray.SetIcon(Labels["altcode"], Shell32, 313)
