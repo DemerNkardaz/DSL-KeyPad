@@ -1,34 +1,38 @@
-param (
+﻿param (
 	[string]$ZipPath,
 	[string]$Destination
 )
 
-# Проверим существование ZIP-файла
 if (!(Test-Path $ZipPath)) {
-	Write-Error "Архив не найден: $ZipPath"
+	Write-Error "Archive not found: $ZipPath"
 	exit 1
 }
 
-# Временная директория для извлечения
 $TempExtractPath = Join-Path $env:TEMP ("DSLKeyPad_Extract_" + [System.Guid]::NewGuid().ToString())
 New-Item -ItemType Directory -Path $TempExtractPath | Out-Null
 
-# Распаковываем в неё
 Expand-Archive -LiteralPath $ZipPath -DestinationPath $TempExtractPath -Force
 
-# Ищем папку DSLKeyPad (первую попавшуюся)
-$KeypadFolder = Get-ChildItem $TempExtractPath -Directory | Where-Object { $_.Name -eq "DSLKeyPad" }
+Write-Host "Archive content:"
+Get-ChildItem $TempExtractPath -Recurse | ForEach-Object { Write-Host $_.FullName }
+
+$KeypadFolder = Get-ChildItem $TempExtractPath -Recurse -Directory | Where-Object { $_.Name -eq "DSLKeyPad" } | Select-Object -First 1
 
 if (-not $KeypadFolder) {
-	Write-Error "Папка DSLKeyPad не найдена в архиве"
+	Write-Error "Folder DSLKeyPad does not exist in the archive"
 	exit 2
 }
 
-# Копируем её содержимое в целевую папку с перезаписью
 Copy-Item -Path "$($KeypadFolder.FullName)\*" -Destination $Destination -Recurse -Force
-
-# Убираем временные файлы
 Remove-Item $TempExtractPath -Recurse -Force
 
-Write-Host "Файлы успешно распакованы в $Destination"
+try {
+	Remove-Item $ZipPath -Force
+	Write-Host "Deleted archive: $ZipPath"
+}
+catch {
+	Write-Warning "Failed to delete archive: $ZipPath"
+}
+
+Write-Host "Files successfully copied to $Destination"
 exit 0

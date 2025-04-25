@@ -7,6 +7,7 @@ Class Update {
 		this.versions := this.ChekVersions()
 		this.CompareVersions()
 
+		this.DownloadLatestZip()
 	}
 
 	static DownloadLatestZip() {
@@ -15,14 +16,11 @@ Class Update {
 
 		zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" this.availableVersion "/DSL-KeyPad-" this.availableVersion ".zip"
 		downloadPath := App.paths.temp "\DSL-KeyPad.zip"
-		destinationPath := App.paths.dir "\UnzipUpdateTesting"
-		if !DirExist(destinationPath)
-			DirCreate(destinationPath)
 
 		Download(zipSource, downloadPath)
 		powershellSupporter := A_ScriptDir "\Lib\powershell\update_supporter.ps1"
 
-		exitCode := RunWait('powershell -ExecutionPolicy Bypass -NoProfile -File "' powershellSupporter '" "' downloadPath '" "' destinationPath '"', , "Hide")
+		exitCode := RunWait('powershell -ExecutionPolicy Bypass -NoProfile -File "' powershellSupporter '" "' downloadPath '" "' App.paths.dir '"', , "Show")
 
 		if exitCode != 0 {
 			MsgBox("An error occurred during the update")
