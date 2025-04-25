@@ -6,27 +6,31 @@ Class Update {
 	static __New() {
 		this.versions := this.ChekVersions()
 		this.CompareVersions()
-
-		this.DownloadLatestZip()
 	}
 
 	static DownloadLatestZip() {
-		if !this.available
+		if !this.available {
+			MsgBox(Locale.Read("update_absent"))
 			return
-
-		zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" this.availableVersion "/DSL-KeyPad-" this.availableVersion ".zip"
-		downloadPath := App.paths.temp "\DSL-KeyPad.zip"
-
-		Download(zipSource, downloadPath)
-		powershellSupporter := A_ScriptDir "\Lib\powershell\update_supporter.ps1"
-
-		exitCode := RunWait('powershell -ExecutionPolicy Bypass -NoProfile -File "' powershellSupporter '" "' downloadPath '" "' App.paths.dir '"', , "Show")
-
-		if exitCode != 0 {
-			MsgBox("An error occurred during the update")
 		}
+		try {
+			zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" this.availableVersion "/DSL-KeyPad-" this.availableVersion ".zip"
+			downloadPath := App.paths.temp "\DSL-KeyPad.zip"
 
+			Download(zipSource, downloadPath)
+			powershellSupporter := A_ScriptDir "\Lib\powershell\update_supporter.ps1"
 
+			exitCode := RunWait('powershell -ExecutionPolicy Bypass -NoProfile -File "' powershellSupporter '" "' downloadPath '" "' App.paths.dir '"', , "Show")
+
+			if exitCode != 0 {
+				MsgBox(Util.StrVarsInject(Locale.Read("update_failed_pshell"), exitCode))
+			} else {
+				MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.versionText, this.availableVersion))
+				Reload
+			}
+		} catch {
+			MsgBox(Locale.Read("update_failed"))
+		}
 	}
 
 	static CompareVersions() {
