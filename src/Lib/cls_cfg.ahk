@@ -78,6 +78,12 @@ Class Cfg {
 	}
 
 	static Editor() {
+		Update.CheckUpdate()
+
+		if Update.available {
+			ManageTrayItems()
+		}
+
 		this.optionsTitle := App.winTitle " — " Locale.Read("gui_options")
 
 		Constructor() {
@@ -150,16 +156,17 @@ Class Cfg {
 
 			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
 
-			if UpdateAvailable {
+			if Update.available {
+				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Util.StrVarsInject(Locale.Read("update_available"), Update.availableVersion))
+				updateBtn.OnEvent("Click", (*) => Update.Get())
 
 			} else {
-
 				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", Locale.Read("update_absent"))
 			}
 
 			repairBtn := optionsPanel.AddButton(" x" (windowWidth - 32) - 24 " y" (optionsCommonH + optionsCommonY + 24) " w32 h32", Chrs(0x1F6E0, 0xFE0F))
 			repairBtn.SetFont("s16")
-			;repairBtn.OnEvent("Click", (*) => GetUpdate(0, True))
+			repairBtn.OnEvent("Click", (*) => Update.Get(True))
 
 			tabLabelChars := Locale.Read("gui_options_tab_characters")
 			tabLabels := [tabLabelChars]

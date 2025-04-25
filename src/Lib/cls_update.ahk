@@ -4,17 +4,28 @@ Class Update {
 	static availableVersion := ""
 
 	static __New() {
-		this.versions := this.ChekVersions()
-		this.CompareVersions()
+		this.CheckUpdate()
 	}
 
-	static DownloadLatestZip() {
-		if !this.available {
+	static Get(force := False) {
+		if !this.available && !force {
 			MsgBox(Locale.Read("update_absent"))
 			return
+		} else {
+			if force {
+				acceptBox := MsgBox(Locale.Read("update_repair"), App.title " — " Locale.Read("update_repair_title"), "YesNo")
+				if acceptBox = "No" || acceptBox = "Cancel" {
+					return
+				}
+				this.CompareVersions(force)
+			}
+			this.DownloadLatestZip()
 		}
+	}
+
+	static DownloadLatestZip(version := this.availableVersion) {
 		try {
-			zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" this.availableVersion "/DSL-KeyPad-" this.availableVersion ".zip"
+			zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" version "/DSL-KeyPad-" version ".zip"
 			downloadPath := App.paths.temp "\DSL-KeyPad.zip"
 
 			Download(zipSource, downloadPath)
@@ -25,7 +36,7 @@ Class Update {
 			if exitCode != 0 {
 				MsgBox(Util.StrVarsInject(Locale.Read("update_failed_pshell"), exitCode))
 			} else {
-				MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.versionText, this.availableVersion))
+				MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.versionText, version))
 				Reload
 			}
 		} catch {
@@ -33,17 +44,36 @@ Class Update {
 		}
 	}
 
-	static CompareVersions() {
+	static CheckUpdate() {
+		this.versions := this.ChekVersions()
+		this.CompareVersions()
+	}
+
+	static CompareVersions(force := False) {
 		for version in this.versions {
 			if RegExMatch(version, "(\d+)\.(\d+)\.(\d+)\.(\d+)", &digitMatches) {
 				shouldUpdate := False
-				Loop 4 {
-					v := Number(digitMatches[A_Index])
-					if v > App.version[A_Index] {
+				if !force {
+					Loop 4 {
+						v := Number(digitMatches[A_Index])
+						if v > App.version[A_Index] {
+							shouldUpdate := True
+							break
+						} else if v < App.version[A_Index] {
+							break
+						}
+					}
+				} else {
+					match := True
+					Loop 4 {
+						v := Number(digitMatches[A_Index])
+						if v != App.version[A_Index] {
+							match := False
+							break
+						}
+					}
+					if match {
 						shouldUpdate := True
-						break
-					} else if v < App.version[A_Index] {
-						break
 					}
 				}
 
@@ -56,16 +86,26 @@ Class Update {
 		}
 	}
 
-
 	static ChekVersions() {
 		whr := ComObject("WinHttp.WinHttpRequest.5.1")
 		whr.Open("GET", this.releasesJson, true)
-		whr.Send()
-		whr.WaitForResponse()
+
+		try {
+			whr.Send()
+			whr.WaitForResponse()
+		}
+		catch {
+			MsgBox Locale.Read("update_check_failed")
+			return []
+		}
+
+		if (whr.Status != 200) {
+			MsgBox Locale.Read("update_check_failed")
+			return []
+		}
+
 		responseText := whr.ResponseText
-
 		versions := this.ExtractVersionsArray(responseText)
-
 		return versions
 	}
 

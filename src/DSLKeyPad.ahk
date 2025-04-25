@@ -223,107 +223,6 @@ InsertChangesList(TargetGUI) {
 }
 
 
-CheckUpdateError := ""
-GetUpdate(TimeOut := 0, RepairMode := False) {
-	if 1 = 1
-		return
-	Sleep TimeOut
-	global AppVersion, RawSource
-	ErrorOccured := False
-	ErroMessage := ""
-
-	if RepairMode == True {
-		IB := InputBox(Locale.Read("update_repair"), Locale.Read("update_repair_title"), "w256", "")
-		if IB.Result = "Cancel" || IB.Value != "y" {
-			return
-		}
-	}
-
-	if UpdateAvailable || RepairMode == True {
-		http := ComObject("WinHttp.WinHttpRequest.5.1")
-		http.Open("GET", RawSource, true)
-		try {
-			http.Send()
-			http.WaitForResponse()
-		} catch {
-			MsgBox(Locale.Read("update_failed"), DSLPadTitle)
-			return
-		}
-
-		if http.Status != 200 {
-			MsgBox(Locale.Read("update_failed"), DSLPadTitle)
-			return
-		}
-
-		CurrentFilePath := A_ScriptFullPath
-		CurrentFileName := StrSplit(CurrentFilePath, "\").Pop()
-		UpdateFilePath := A_ScriptDir "\DSLKeyPad.ahk-GettingUpdate"
-
-		Download(RawSource, UpdateFilePath)
-
-		FileMove(CurrentFilePath, A_ScriptDir "\" CurrentFileName "-Backup-" Util.GetTimeStr())
-
-		FileMove(UpdateFilePath, A_ScriptDir "\" CurrentFileName)
-
-		if RepairMode == True {
-			MsgBox(Locale.Read("update_repair_success"), DSLPadTitle)
-		} else {
-			MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), CurrentVersionString, UpdateVersionString), DSLPadTitle)
-		}
-
-		Reload
-		return
-	} else {
-		if CheckUpdateError != "" {
-			MsgBox(CheckUpdateError, DSLPadTitle)
-		} else {
-			MsgBox(Locale.Read("update_absent"), DSLPadTitle)
-		}
-	}
-	return
-}
-
-
-CheckUpdate() {
-	if 1 = 1
-		return
-	global AppVersion, RawSource, UpdateAvailable, UpdateVersionString, CheckUpdateError
-	http := ComObject("WinHttp.WinHttpRequest.5.1")
-	http.Open("GET", RawSource, true)
-	try {
-		http.Send()
-		http.WaitForResponse()
-	} catch {
-		CheckUpdateError := Locale.Read("update_failed")
-		return
-	}
-
-	if http.Status != 200 {
-		CheckUpdateError := Locale.Read("update_failed")
-		return
-	}
-
-	FileContent := http.ResponseText
-
-	if !RegExMatch(FileContent, "AppVersion := \[(\d+),\s*(\d+),\s*(\d+),\s*(\d+)\]", &match) {
-		MsgBox "Application version not found."
-		return
-	}
-	NewVersion := [match[1], match[2], match[3], match[4]]
-	Loop 4 {
-		if NewVersion[A_Index] > AppVersion[A_Index] {
-			UpdateAvailable := True
-			UpdateVersionString := Format("{:d}.{:d}.{:d}.{:d}", NewVersion[1], NewVersion[2], NewVersion[3], NewVersion[4])
-			return
-		} else if NewVersion[A_Index] < AppVersion[A_Index] {
-			return
-		}
-	}
-	CheckUpdateError := ""
-}
-
-CheckUpdate()
-
 RoNum := Map(
 	"00-HundredM", Chr(0x2188),
 	"01-FiftyTenM", Chr(0x2187),
@@ -2246,7 +2145,6 @@ ContainsEmoji(StringInput) {
 
 AlphabetCoverage := ["pl", "ro", "es"]
 Constructor() {
-	CheckUpdate()
 	;ManageTrayItems()
 
 	screenWidth := A_ScreenWidth
@@ -2676,12 +2574,10 @@ Constructor() {
 	BtnSwitchEN := DSLPadGUI.Add("Button", "x332 y527 w32 h32", "EN")
 
 	UpdateBtn := DSLPadGUI.Add("Button", "x809 y495 w32 h32")
-	UpdateBtn.OnEvent("Click", (*) => "GetUpdate()")
 	GuiButtonIcon(UpdateBtn, ImageRes, 176, "w24 h24")
 
 	RepairBtn := DSLPadGUI.Add("Button", "x777 y495 w32 h32", "🛠️")
 	RepairBtn.SetFont("s16")
-	RepairBtn.OnEvent("Click", (*) => "GetUpdate(0, True)")
 
 	ConfigFileBtn := DSLPadGUI.Add("Button", "x809 y527 w32 h32")
 	ConfigFileBtn.OnEvent("Click", (*) => Cfg.OpenFile())
@@ -5738,13 +5634,13 @@ ManageTrayItems() {
 		"small_capital_alteration", Locale.Read("tray_func_small_capital_alteration") "`t" LeftControl LeftAlt "Num8",
 	)
 
-	CurrentApp := "DSL KeyPad " . CurrentVersionString
-	UpdateEntry := Labels["install"] . " " . UpdateVersionString
+	CurrentApp := App.title " " App.versionText
+	UpdateEntry := Labels["install"] " " Update.availableVersion
 
 	App.tray.Delete()
 	App.tray.Add(CurrentApp, (*) => Run("https://github.com/DemerNkardaz/DSL-KeyPad/tree/main"))
-	if UpdateAvailable {
-		App.tray.Add(UpdateEntry, (*) => "GetUpdate()")
+	if Update.available {
+		App.tray.Add(UpdateEntry, (*) => Update.Get())
 		App.tray.SetIcon(UpdateEntry, ImageRes, 176)
 	}
 	App.tray.Add()
