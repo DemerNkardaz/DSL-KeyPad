@@ -1,6 +1,7 @@
 Class Update {
 	static releasesJson := "https://data.jsdelivr.com/v1/package/gh/DemerNkardaz/DSL-KeyPad"
 	static available := False
+	static availableVersion := ""
 
 	static __New() {
 		this.versions := this.ChekVersions()
@@ -8,18 +9,51 @@ Class Update {
 
 	}
 
+	static DownloadLatestZip() {
+		if !this.available
+			return
+
+		zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" this.availableVersion "/DSL-KeyPad-" this.availableVersion ".zip"
+		downloadPath := App.paths.temp "\DSL-KeyPad.zip"
+		destinationPath := App.paths.dir "\UnzipUpdateTesting"
+		if !DirExist(destinationPath)
+			DirCreate(destinationPath)
+
+		Download(zipSource, downloadPath)
+		powershellSupporter := A_ScriptDir "\Lib\powershell\update_supporter.ps1"
+
+		exitCode := RunWait('powershell -ExecutionPolicy Bypass -NoProfile -File "' powershellSupporter '" "' downloadPath '" "' destinationPath '"', , "Hide")
+
+		if exitCode != 0 {
+			MsgBox("An error occurred during the update")
+		}
+
+
+	}
+
 	static CompareVersions() {
 		for version in this.versions {
-			RegExMatch(version, "(\d+)\.(\d+)\.(\d+)\.(\d+)", &digitMatches)
-			for i, digit in digitMatches {
-				if (i == 0)
-					continue
-				if (Number(digit) > App.version[i]) {
+			if RegExMatch(version, "(\d+)\.(\d+)\.(\d+)\.(\d+)", &digitMatches) {
+				shouldUpdate := False
+				Loop 4 {
+					v := Number(digitMatches[A_Index])
+					if v > App.version[A_Index] {
+						shouldUpdate := True
+						break
+					} else if v < App.version[A_Index] {
+						break
+					}
+				}
+
+				if shouldUpdate {
 					this.available := True
+					this.availableVersion := version
+					break
 				}
 			}
 		}
 	}
+
 
 	static ChekVersions() {
 		whr := ComObject("WinHttp.WinHttpRequest.5.1")
