@@ -135,10 +135,20 @@ LaTeXMode := "Default"
 #Include <chr_alt_codes>
 #Include <chr_entities>
 #Include <cls_util>
+
+#Include <cls_app>
+#Include <cls_cfg>
+#Include <cls_fonts>
+#Include <cls_language>
+#Include <cls_chr_crafter>
+#Include <cls_chr_inserter>
+#Include <cls_favorites>
+
 #Include <cls_rules>
 #Include <chr_lib>
 #Include <chr_bindlist>
 #Include <cls_chr_lib>
+#Include <cls_my_recipes>
 #Include <cls_chr_recipe_handler>
 #Include <cls_auxiliary>
 #Include <cls_chr_legend>
@@ -186,8 +196,6 @@ ChangeLogRaw := Map(
 
 WorkingDir := A_ScriptDir
 
-ConfigFile := WorkingDir "\DSLKeyPad.config.ini"
-ExecutableFile := WorkingDir "\DSLKeyPad.exe"
 
 InternalFiles := Map(
 	"Locales", { Repo: RawRepoFiles "DSLKeyPad.locales.ini", File: WorkingDir "\UtilityFiles\DSLKeyPad.locales.ini" },
@@ -213,20 +221,11 @@ InternalFiles := Map(
 	"pyUniName", { Repo: RawRepoLib ".py/unicodeName.py", File: WorkingDir "\Lib\.py\unicodeName.py" },
 )
 
-#Include <cls_app>
-#Include <cls_cfg>
-#Include <cls_fonts>
-#Include <cls_language>
-#Include <cls_chr_crafter>
-#Include <cls_chr_inserter>
-#Include <cls_my_recipes>
-#Include <cls_favorites>
 
 DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
 DSLPadTitleDefault := "DSL KeyPad"
 DSLPadTitleFull := "Diacritics-Spaces-Letters KeyPad"
 
-TraySetIcon(App.internal["ico_dll"].file, 1)
 
 DefaultConfig := [
 	["Settings", "FastKeysIsActive", "False"],
@@ -451,417 +450,6 @@ CheckUpdate() {
 }
 
 CheckUpdate()
-
-LayoutsPresets := Map(
-	"QWERTY", Map(
-		"Space", "SC039",
-		"Tab", "SC00F",
-		"Numpad0", "SC052",
-		"Numpad1", "SC04F",
-		"Numpad2", "SC050",
-		"Numpad3", "SC051",
-		"Numpad4", "SC04B",
-		"Numpad5", "SC04C",
-		"Numpad6", "SC04D",
-		"Numpad7", "SC047",
-		"Numpad8", "SC048",
-		"Numpad9", "SC049",
-		"NumpadMult", "SC037",
-		"NumpadAdd", "SC04E",
-		"NumpadSub", "SC04A",
-		"NumpadDot", "SC053",
-		"NumpadDiv", "SC135",
-		"NumpadEnter", "SC11C",
-		"PgUp", "SC149",
-		"PgDn", "SC151",
-		"End", "SC14F",
-		"Home", "SC147",
-		"Ins", "SC152",
-		"Del", "SC153",
-		"Shift", "SC02A",
-		"Ctrl", "SC01D",
-		"Alt", "SC038",
-		"LShift", "SC02A",
-		"RShift", "SC036",
-		"LCtrl", "SC01D",
-		"RCtrl", "SC11D",
-		"RAlt", "SC138",
-		"Backspace", "SC00E",
-		"Enter", "SC01C",
-		"ArrLeft", "SC14B",
-		"ArrUp", "SC148",
-		"ArrRight", "SC14D",
-		"ArrDown", "SC150",
-		"F1", "SC03B",
-		"F2", "SC03C",
-		"F3", "SC03D",
-		"F4", "SC03E",
-		"F5", "SC03F",
-		"F6", "SC040",
-		"F7", "SC041",
-		"F8", "SC042",
-		"F9", "SC043",
-		"F10", "SC044",
-		"F11", "SC057",
-		"F12", "SC058",
-		;
-		"Semicolon", "SC027",
-		"Apostrophe", "SC028",
-		"LSquareBracket", "SC01A",
-		"RSquareBracket", "SC01B",
-		"Tilde", "SC029",
-		"Minus", "SC00C",
-		"Equals", "SC00D",
-		"Comma", "SC033",
-		"Dot", "SC034",
-		"Slash", "SC035",
-		"Backslash", "SC02B",
-		"A", "SC01E",
-		"B", "SC030",
-		"C", "SC02E",
-		"D", "SC020",
-		"E", "SC012",
-		"F", "SC021",
-		"G", "SC022",
-		"H", "SC023",
-		"I", "SC017",
-		"J", "SC024",
-		"K", "SC025",
-		"L", "SC026",
-		"M", "SC032",
-		"N", "SC031",
-		"O", "SC018",
-		"P", "SC019",
-		"Q", "SC010",
-		"R", "SC013",
-		"S", "SC01F",
-		"T", "SC014",
-		"U", "SC016",
-		"V", "SC02F",
-		"W", "SC011",
-		"X", "SC02D",
-		"Y", "SC015",
-		"Z", "SC02C",
-		"0", "SC00B",
-		"1", "SC002",
-		"2", "SC003",
-		"3", "SC004",
-		"4", "SC005",
-		"7", "SC008",
-		"5", "SC006",
-		"6", "SC007",
-		"8", "SC009",
-		"9", "SC00A",
-	),
-	"Dvorak", Map(
-		"Space", "SC039",
-		"Tab", "SC00F",
-		"Numpad0", "SC052",
-		"Numpad1", "SC04F",
-		"Numpad2", "SC050",
-		"Numpad3", "SC051",
-		"Numpad4", "SC04B",
-		"Numpad5", "SC04C",
-		"Numpad6", "SC04D",
-		"Numpad7", "SC047",
-		"Numpad8", "SC048",
-		"Numpad9", "SC049",
-		"NumpadMult", "SC037",
-		"NumpadAdd", "SC04E",
-		"NumpadSub", "SC04A",
-		"NumpadDot", "SC053",
-		"NumpadDiv", "SC135",
-		"NumpadEnter", "SC11C",
-		"PgUp", "SC149",
-		"PgDn", "SC151",
-		"End", "SC14F",
-		"Home", "SC147",
-		"Ins", "SC152",
-		"Del", "SC153",
-		"Shift", "SC02A",
-		"Ctrl", "SC01D",
-		"Alt", "SC038",
-		"LShift", "SC02A",
-		"RShift", "SC036",
-		"LCtrl", "SC01D",
-		"RCtrl", "SC11D",
-		"RAlt", "SC138",
-		"Backspace", "SC00E",
-		"Enter", "SC01C",
-		"ArrLeft", "SC14B",
-		"ArrUp", "SC148",
-		"ArrRight", "SC14D",
-		"ArrDown", "SC150",
-		"F1", "SC03B",
-		"F2", "SC03C",
-		"F3", "SC03D",
-		"F4", "SC03E",
-		"F5", "SC03F",
-		"F6", "SC040",
-		"F7", "SC041",
-		"F8", "SC042",
-		"F9", "SC043",
-		"F10", "SC044",
-		"F11", "SC057",
-		"F12", "SC058",
-		;
-		"Semicolon", "SC02C",
-		"Apostrophe", "SC010",
-		"LSquareBracket", "SC00C",
-		"RSquareBracket", "SC00D",
-		"Tilde", "SC029",
-		"Minus", "SC028",
-		"Equals", "SC01B",
-		"Comma", "SC011",
-		"Dot", "SC012",
-		"Slash", "SC01A",
-		"Backslash", "SC02B",
-		"A", "SC01E",
-		"B", "SC031",
-		"C", "SC017",
-		"D", "SC023",
-		"E", "SC020",
-		"F", "SC015",
-		"G", "SC016",
-		"H", "SC024",
-		"I", "SC022",
-		"J", "SC02E",
-		"K", "SC02F",
-		"L", "SC019",
-		"M", "SC032",
-		"N", "SC026",
-		"O", "SC01F",
-		"P", "SC013",
-		"Q", "SC02D",
-		"R", "SC018",
-		"S", "SC027",
-		"T", "SC025",
-		"U", "SC021",
-		"V", "SC034",
-		"W", "SC033",
-		"X", "SC030",
-		"Y", "SC014",
-		"Z", "SC035",
-		"0", "SC00B",
-		"1", "SC002",
-		"2", "SC003",
-		"3", "SC004",
-		"4", "SC005",
-		"5", "SC006",
-		"6", "SC007",
-		"7", "SC008",
-		"8", "SC009",
-		"9", "SC00A",
-	),
-	"Colemak", Map(
-		"Space", "SC039",
-		"Tab", "SC00F",
-		"Numpad0", "SC052",
-		"Numpad1", "SC04F",
-		"Numpad2", "SC050",
-		"Numpad3", "SC051",
-		"Numpad4", "SC04B",
-		"Numpad5", "SC04C",
-		"Numpad6", "SC04D",
-		"Numpad7", "SC047",
-		"Numpad8", "SC048",
-		"Numpad9", "SC049",
-		"NumpadMult", "SC037",
-		"NumpadAdd", "SC04E",
-		"NumpadSub", "SC04A",
-		"NumpadDot", "SC053",
-		"NumpadDiv", "SC135",
-		"NumpadEnter", "SC11C",
-		"PgUp", "SC149",
-		"PgDn", "SC151",
-		"End", "SC14F",
-		"Home", "SC147",
-		"Ins", "SC152",
-		"Del", "SC153",
-		"Shift", "SC02A",
-		"Ctrl", "SC01D",
-		"Alt", "SC038",
-		"LShift", "SC02A",
-		"RShift", "SC036",
-		"LCtrl", "SC01D",
-		"RCtrl", "SC11D",
-		"RAlt", "SC138",
-		"Backspace", "SC00E",
-		"Enter", "SC01C",
-		"ArrLeft", "SC14B",
-		"ArrUp", "SC148",
-		"ArrRight", "SC14D",
-		"ArrDown", "SC150",
-		"F1", "SC03B",
-		"F2", "SC03C",
-		"F3", "SC03D",
-		"F4", "SC03E",
-		"F5", "SC03F",
-		"F6", "SC040",
-		"F7", "SC041",
-		"F8", "SC042",
-		"F9", "SC043",
-		"F10", "SC044",
-		"F11", "SC057",
-		"F12", "SC058",
-		;
-		"Semicolon", "SC019",
-		"Apostrophe", "SC028",
-		"LSquareBracket", "SC01A",
-		"RSquareBracket", "SC01B",
-		"Tilde", "SC029",
-		"Minus", "SC00C",
-		"Equals", "SC00D",
-		"Comma", "SC033",
-		"Dot", "SC034",
-		"Slash", "SC035",
-		"Backslash", "SC02B",
-		"A", "SC01E",
-		"B", "SC030",
-		"C", "SC02E",
-		"D", "SC022",
-		"E", "SC025",
-		"F", "SC012",
-		"G", "SC014",
-		"H", "SC023",
-		"I", "SC026",
-		"J", "SC015",
-		"K", "SC031",
-		"L", "SC016",
-		"M", "SC032",
-		"N", "SC024",
-		"O", "SC027",
-		"P", "SC013",
-		"Q", "SC010",
-		"R", "SC01F",
-		"S", "SC020",
-		"T", "SC021",
-		"U", "SC017",
-		"V", "SC02F",
-		"W", "SC011",
-		"X", "SC02D",
-		"Y", "SC018",
-		"Z", "SC02C",
-		"0", "SC00B",
-		"1", "SC002",
-		"2", "SC003",
-		"3", "SC004",
-		"4", "SC005",
-		"5", "SC006",
-		"6", "SC007",
-		"7", "SC008",
-		"8", "SC009",
-		"9", "SC00A",
-	),
-)
-
-CyrllicLayouts := Map(
-	"ЙЦУКЕН", Map(),
-	"Диктор", Map(),
-	"ЙІУКЕН (1907)", Map(),
-)
-
-
-RegisterLayout(LayoutName := "QWERTY", DefaultRule := "QWERTY", ForceApply := False) {
-	global ActiveScriptName
-
-	IsLatin := False
-	IsCyrillic := False
-	ActiveLatin := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
-	ActiveCyrillic := IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")
-
-	for key in GetLayoutsList {
-		if LayoutName == key {
-			IsLatin := True
-			break
-		}
-	}
-	if !IsLatin {
-		for key in CyrillicLayoutsList {
-			if LayoutName == key {
-				IsCyrillic := True
-				break
-			}
-		}
-	}
-
-	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
-		if IsLatin {
-			IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
-		} else if IsCyrillic {
-			IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
-		}
-		return
-	} else {
-		if IsLatin {
-			IniWrite LayoutName, ConfigFile, "Settings", "LatinLayout"
-		} else if IsCyrillic {
-			IniWrite LayoutName, ConfigFile, "Settings", "CyrillicLayout"
-		}
-
-		UnregisterKeysLayout()
-
-		if (IsLatin && LayoutName != "QWERTY") || (IsCyrillic && LayoutName != "ЙЦУКЕН") || (IsLatin && ActiveCyrillic != "ЙЦУКЕН") || (IsCyrillic && ActiveLatin != "QWERTY") || ForceApply {
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "NonQWERTY"), True)
-		}
-
-
-		IsLettersModeEnabled := ActiveScriptName != "" ? ActiveScriptName : False
-
-
-		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], "Utility"), True)
-		RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-
-		if IsLettersModeEnabled {
-			ActiveScriptName := ""
-			ToggleLetterScript(True, IsLettersModeEnabled)
-		}
-	}
-}
-
-GetLayoutsList := []
-for keysLayout in LayoutsPresets {
-	GetLayoutsList.Push(keysLayout)
-}
-
-CyrillicLayoutsList := []
-for keysLayout in CyrllicLayouts {
-	CyrillicLayoutsList.Push(keysLayout)
-}
-
-ChooseKeyByLayout(Script := "Latin", KeyNames*) {
-	for i, keyName in KeyNames {
-		if Script = "Latin" {
-			GetActiveLatin := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
-
-			try {
-				if GetActiveLatin = "QWERTY" {
-					return KeyNames[i]
-				} else if GetActiveLatin = "Dvorak" {
-					return KeyNames[i + 1]
-				} else if GetActiveLatin = "Colemak" {
-					return KeyNames[i + 2]
-				}
-			} catch {
-				return KeyNames[i]
-			}
-
-
-		} else if Script = "Cyrillic" {
-			GetActiveCyrillic := IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")
-
-			try {
-				if GetActiveCyrillic = "ЙЦУКЕН" {
-					return KeyNames[i]
-				} else if GetActiveCyrillic = "Диктор" {
-					return KeyNames[i + 1]
-				}
-			} catch {
-				return KeyNames[i]
-			}
-		}
-	}
-}
 
 RoNum := Map(
 	"00-HundredM", Chr(0x2188),
@@ -1946,164 +1534,6 @@ HasAllCharacters(str, pattern) {
 	}
 }
 
-
-SearchKey(CycleSend := "") {
-	CyclingSearch := False
-	LaTeXMode := IniRead(ConfigFile, "Settings", "LaTeXInput", "Default")
-	ModifiedCharsType := GetModifiedCharsType()
-
-	if StrLen(CycleSend) > 0 {
-		PromptValue := CycleSend
-		CyclingSearch := True
-	} else {
-		PromptValue := IniRead(ConfigFile, "LatestPrompts", "Search", "")
-
-
-		IB := InputBox(Locale.Read("symbol_search_prompt"), Locale.Read("symbol_search"), "w350 h110", PromptValue)
-
-		if IB.Result = "Cancel"
-			return
-		else
-			PromptValue := IB.Value
-
-		if (PromptValue = "\") {
-			Reload
-			return
-		} else if InStr(PromptValue, "=>") {
-			RegExMatch(PromptValue, "\((.+)\)", &args)
-			PromptValue := RegExReplace(PromptValue, "=>", "")
-			PromptValue := RegExReplace(PromptValue, "\((.+\))", "")
-
-			try {
-				if args[1] {
-					args := StrSplit(args[1], ",")
-
-					currIndex := 0
-					for i, arg in args {
-						currIndex++
-						try {
-							args[i] := %arg%
-						}
-					}
-
-					%PromptValue%(args*)
-				}
-				return
-			}
-			%PromptValue%()
-
-			return
-		}
-	}
-
-
-	IsSensitive := (SubStr(PromptValue, 1, 1) = "*")
-	if IsSensitive
-		PromptValue := SubStr(PromptValue, 2)
-
-	Found := False
-
-	SymbolSearching(SearchingPrompt) {
-		ProceedSearch(value, characterEntity, characterLaTeX) {
-			OutputValue := ""
-			if Auxiliary.inputMode = "HTML" && HasProp(value, "html") {
-				SendValue :=
-					(ModifiedCharsType && HasProp(value, ModifiedCharsType "HTML")) ? value.%ModifiedCharsType%HTML : characterEntity
-				OutputValue := SendValue
-			} else if Auxiliary.inputMode = "LaTeX" && HasProp(value, "LaTeX") {
-				OutputValue := IsObject(characterLaTeX) ? (LaTeXMode = "Math" ? characterLaTeX[2] : characterLaTeX[1]) : characterLaTeX
-			}
-			else {
-				if ModifiedCharsType && HasProp(value, ModifiedCharsType "Form") {
-					if IsObject(value.%ModifiedCharsType%Form) {
-						TempValue := ""
-						for modifier in value.%ModifiedCharsType%Form {
-							TempValue .= PasteUnicode(modifier)
-						}
-						OutputValue := TempValue
-					} else {
-						OutputValue := Chr("0x" UniTrim(value.%ModifiedCharsType%Form))
-					}
-				} else if HasProp(value, "uniSequence") && IsObject(value.uniSequence) {
-					TempValue := ""
-					for unicode in value.uniSequence {
-						TempValue .= PasteUnicode(unicode)
-					}
-					OutputValue := TempValue
-				} else {
-					OutputValue := Chr("0x" UniTrim(value.unicode))
-				}
-			}
-			Found := True
-			if !CyclingSearch {
-				IniWrite IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
-			}
-			return OutputValue
-		}
-
-		CheckTagExact(value, tag, SearchingPrompt, IsSensitive) {
-			IsEqualNonSensitive := !IsSensitive && (StrLower(SearchingPrompt) = StrLower(tag))
-			IsEqualSensitive := IsSensitive && (SearchingPrompt == tag)
-			return IsEqualSensitive || IsEqualNonSensitive
-		}
-
-		CheckTagPartial(value, tag, SearchingPrompt, IsSensitive) {
-			IsPartiallyEqual := !IsSensitive && RegExMatch(StrLower(tag), StrLower(SearchingPrompt))
-			IsPartiallyEqualSensitive := IsSensitive && RegExMatch(tag, SearchingPrompt)
-			return IsPartiallyEqual || IsPartiallyEqualSensitive
-		}
-
-		CheckTagLowAcc(value, tag, SearchingPrompt, IsSensitive) {
-			IsLowAcc := !IsSensitive && HasAllCharacters(StrLower(tag), StrLower(SearchingPrompt))
-			IsLowAccSensitive := IsSensitive && HasAllCharacters(tag, SearchingPrompt)
-			return IsLowAcc || IsLowAccSensitive
-		}
-
-		MapProcess(CheckingRule) {
-			for characterEntry, value in Characters {
-				if !HasProp(value, "tags") {
-					continue
-				}
-				characterEntity := (HasProp(value, "entity")) ? value.entity : (HasProp(value, "entity")) ? value.html : ""
-				characterLaTeX := (HasProp(value, "LaTeX")) ? (IsObject(value.LaTeX) ? (LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]) : value.LaTeX) : ""
-
-				for _, tag in value.tags {
-					if CheckingRule(value, tag, SearchingPrompt, IsSensitive) {
-						return ProceedSearch(value, characterEntity, characterLaTeX)
-					}
-				}
-			}
-		}
-
-		Output := MapProcess(CheckTagExact)
-		if !Found
-			Output := MapProcess(CheckTagPartial)
-		if !Found
-			Output := MapProcess(CheckTagLowAcc)
-
-		return Output
-	}
-
-	if InStr(PromptValue, ", ") && StrSplit(PromptValue, ", ")[2] != "" {
-		IniWrite IsSensitive ? "*" . PromptValue : PromptValue, ConfigFile, "LatestPrompts", "Search"
-		WordSplit := StrSplit(PromptValue, ", ")
-		Count := WordSplit.Length
-
-		loop Count {
-			Sleep 10
-			SearchKey(WordSplit[A_Index])
-		}
-	} else {
-		SendText(SymbolSearching(PromptValue))
-	}
-
-	if !Found && !InStr(PromptValue, ",") {
-		MsgBox(Locale.Read("message_character_not_found"), DSLPadTitle, "Icon!")
-	}
-
-
-}
-
 PasteUnicode(Unicode) {
 	HexStr := UniTrim(Unicode)
 	if HexStr != "" {
@@ -2113,44 +1543,6 @@ PasteUnicode(Unicode) {
 	return
 }
 
-SwitchQWERTY_YITSUKEN(Script := "Latin") {
-	if (Script == "Latin") {
-		LayoutName := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
-
-
-		LayoutItems := GetLayoutsList.Length
-		loop LayoutItems {
-			if GetLayoutsList[A_Index] == LayoutName {
-				if A_Index + 1 > LayoutItems {
-					NextLayout := GetLayoutsList[1]
-				} else {
-					NextLayout := GetLayoutsList[A_Index + 1]
-				}
-			}
-		}
-	} else if (Script == "Cyrillic") {
-		LayoutName := IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")
-
-		LayoutItems := CyrillicLayoutsList.Length
-		loop LayoutItems {
-			if CyrillicLayoutsList[A_Index] == LayoutName {
-				if A_Index + 1 > LayoutItems {
-					NextLayout := CyrillicLayoutsList[1]
-				} else {
-					NextLayout := CyrillicLayoutsList[A_Index + 1]
-				}
-				break
-			}
-		}
-
-	} else {
-		return
-	}
-
-	if NextLayout {
-		RegisterLayout(NextLayout)
-	}
-}
 GetKeyScanCode() {
 	IB := InputBox("Scan code get", "Scan code", "w350 h110", "")
 
@@ -2251,8 +1643,8 @@ ChangeTrayIconOnLanguage() {
 		return
 	}
 
-	ActiveLatin := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
-	ActiveCyrillic := IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")
+	ActiveLatin := Cfg.Get("Layout_Latin")
+	ActiveCyrillic := Cfg.Get("Layout_Cyrillic")
 
 	TitleCompose := DSLPadTitle "`n" ActiveLatin " – " ActiveCyrillic
 
@@ -2364,7 +1756,7 @@ SetTimer(ChangeTrayIconOnLanguage, 1000)
 ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	LanguageCode := Language.Get()
 	Keyboard.CurrentLayout(&CurrentLayout)
-	global ActiveScriptName, ConfigFile, PreviousScriptName
+	global ActiveScriptName, PreviousScriptName
 	CurrentActive := ScriptName = ActiveScriptName
 
 	LocalesPairs := [
@@ -2407,26 +1799,8 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 		} else {
 			TraySetIcon(App.internal["ico_dll"].file, 1)
 		}
-		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
-			UnregisterKeysLayout()
-		}
-		ActiveScriptName := ""
-		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
-			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()], ScriptName), True)
-		}
-		ActiveScriptName := ScriptName
 	} else {
 		TraySetIcon(App.internal["ico_dll"].file, 1)
-		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
-			UnregisterKeysLayout()
-		}
-		ActiveScriptName := ""
-		if !KeyboardBinder.disabledByMonitor || !KeyboardBinder.disabledByUser {
-			RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
-			RegisterHotKeys(GetKeyBindings(LayoutsPresets[CheckQWERTY()]))
-		}
 	}
 
 	if !HideMessage {
@@ -2500,10 +1874,10 @@ SendAltNumpad(CharacterCode) {
 
 
 GREPizeSelection(GetCollaborative := False) {
-	CustomAfterStartEmdash := (IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") : "ensp"
-	CustomDialogue := (IniRead(ConfigFile, "CustomRules", "GREPDialogAttribution", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPDialogAttribution", "") : "no_break_space"
-	CustomThisEmdash := (IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPThisEmdash", "") : "no_break_space"
-	CustomInitials := (IniRead(ConfigFile, "CustomRules", "GREPInitials", "") != "") ? IniRead(ConfigFile, "CustomRules", "GREPInitials", "") : "thinspace"
+	CustomAfterStartEmdash := (Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") != "") ? Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") : "ensp"
+	CustomDialogue := (Cfg.Get("GREP_Dialog_Attribution", "CustomRules", "") != "") ? Cfg.Get("GREP_Dialog_Attribution", "CustomRules", "") : "no_break_space"
+	CustomThisEmdash := (Cfg.Get("GREP_ThisEmdash", "CustomRules", "") != "") ? Cfg.Get("GREP_ThisEmdash", "CustomRules", "") : "no_break_space"
+	CustomInitials := (Cfg.Get("GREP_Initials", "CustomRules", "") != "") ? Cfg.Get("GREP_Initials", "CustomRules", "") : "thinspace"
 
 	Punctuations := "[" GetChar("reversed_question", "inverted_exclamation", "inverted_question", "double_exclamation", "double_exclamation_question", "double_question", "double_question_exclamation", "interrobang", "interrobang_inverted") ".,!?…”’»›“]"
 
@@ -2607,8 +1981,8 @@ ParagraphizeSelection(SendCollaborative := False) {
 	A_Clipboard := ""
 
 	if (PromptValue != "") {
-		CustomParagraphBeginning := (IniRead(ConfigFile, "CustomRules", "ParagraphBeginning", "") != "") ? IniRead(ConfigFile, "CustomRules", "ParagraphBeginning", "") : "emsp"
-		CustomAfterStartEmdash := (IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") != "") ? IniRead(ConfigFile, "CustomRules", "ParagraphAfterStartEmdash", "") : "ensp"
+		CustomParagraphBeginning := (Cfg.Get("Paragraph_Beginning", "CustomRules", "") != "") ? Cfg.Get("Paragraph_Beginning", "CustomRules", "") : "emsp"
+		CustomAfterStartEmdash := (Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") != "") ? Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") : "ensp"
 
 		blockRules := [CustomParagraphBeginning, CustomAfterStartEmdash]
 
@@ -2914,7 +2288,7 @@ GetUnicodeString(str) {
 }
 
 FindCharacterPage(InputCode := "", IsReturn := False) {
-	CharacterWebResource := IniRead(ConfigFile, "Settings", "CharacterWebResource", "Symblcc")
+	CharacterWebResource := Cfg.Get("Character_Web_Resource", , "SymblCC")
 	if InputCode = "" {
 		BackupClipboard := A_Clipboard
 		PromptValue := ""
@@ -2997,19 +2371,6 @@ CommonInfoFonts := {
 	titleSize: "s14",
 }
 
-SwitchLanguage(LanguageCode) {
-	IniWrite LanguageCode, ConfigFile, "Settings", "UserLanguage"
-
-	if (IsGuiOpen(DSLPadTitle))
-	{
-		WinClose(DSLPadTitle)
-	}
-
-	DSLPadGUI := Constructor()
-	DSLPadGUI.Show()
-
-	;ManageTrayItems()
-}
 
 ContainsEmoji(StringInput) {
 	EmojisPattern := "[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F900}-\x{1F9FF}\x{2700}-\x{27BF}\x{1F1E6}-\x{1F1FF}]"
@@ -3445,10 +2806,8 @@ Constructor() {
 	BtnAutoLoad.OnEvent("Click", AddScriptToAutoload)
 
 	BtnSwitchRU := DSLPadGUI.Add("Button", "x300 y527 w32 h32", "РУ")
-	BtnSwitchRU.OnEvent("Click", (*) => SwitchLanguage("ru"))
 
 	BtnSwitchEN := DSLPadGUI.Add("Button", "x332 y527 w32 h32", "EN")
-	BtnSwitchEN.OnEvent("Click", (*) => SwitchLanguage("en"))
 
 	UpdateBtn := DSLPadGUI.Add("Button", "x809 y495 w32 h32")
 	UpdateBtn.OnEvent("Click", (*) => "GetUpdate()")
@@ -3478,20 +2837,6 @@ Constructor() {
 			Util.StrVarsInject(Locale.Read("update_available"), UpdateVersionString) ' (<a href="' RepoSource '">GitHub</a>)'
 		DSLPadGUI["NewVersionIcon"].Text := InformationSymbol
 	}
-
-	LatinLayoutSelector := DSLPadGUI.AddDropDownList("vLatLayout w74 x502 y528", GetLayoutsList)
-	PostMessage(0x0153, -1, 24, LatinLayoutSelector)
-
-	LatinLayoutName := IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")
-	LatinLayoutSelector.Text := LatinLayoutName
-	LatinLayoutSelector.OnEvent("Change", (CB, Zero) => ChangeQWERTY(CB))
-
-	CyrillicLayoutSelector := DSLPadGUI.AddDropDownList("vCyrLayout w82 x418 y528", CyrillicLayoutsList)
-	PostMessage(0x0153, -1, 24, CyrillicLayoutSelector)
-
-	CyrillicLayoutName := IniRead(ConfigFile, "Settings", "CyrillicLayout", "QWERTY")
-	CyrillicLayoutSelector.Text := CyrillicLayoutName
-	CyrillicLayoutSelector.OnEvent("Change", (CB, Zero) => ChangeQWERTY(CB))
 
 	DSLPadGUI.SetFont("s11")
 
@@ -4110,10 +3455,6 @@ SetCharacterInfoPanel(EntryIDKey, EntryNameKey, TargetGroup, PreviewObject, Prev
 	}
 }
 
-ChangeQWERTY(CB) {
-	RegisterLayout(CB.Text)
-}
-
 TV_InsertCommandsDesc(TV, Item, TargetTextBox) {
 	if !Item {
 		return
@@ -4284,13 +3625,6 @@ IsGuiOpen(title) {
 	return WinExist(title) != 0
 }
 
-CheckQWERTY() {
-	return LayoutsPresets.Has(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY")) ? IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY") : "QWERTY"
-}
-
-CheckYITSUKEN() {
-	return CyrllicLayouts.Has(IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН")) ? IniRead(ConfigFile, "Settings", "CyrillicLayout", "ЙЦУКЕН") : "ЙЦУКЕН"
-}
 
 CheckLayoutValid() {
 	Keyboard.CurrentLayout(&CurrentLayout)
@@ -4505,34 +3839,6 @@ RegisterHotKeys(Bindings, CheckRule := True) {
 	}
 }
 
-UnregisterKeysLayout() {
-	Keys := LayoutsPresets[CheckQWERTY()]
-	for keyName, keySC in Keys {
-		Patterns := [
-			keySC,
-			"+" keySC, "<+" keySC, ">+" keySC, "<+>+" keySC, ,
-			"!" keySC, "<!" keySC, ">!" keySC, "<!>!" keySC,
-			"^" keySC, "<^" keySC, ">^" keySC, "<^>^" keySC,
-			"^!" keySC, "<^>!" keySC, "<^<!" keySC, ">^<!" keySC,
-			"<^>!+" keySC, "<^>!<+" keySC, "<^>!>+" keySC,
-			"<^>!<+>+" keySC, "<^>!<!+" keySC, "<^>!<!<+" keySC,
-			"<^>!<!<+>+" keySC,
-			"#" keySC, "<#" keySC, ">#" keySC,
-			"<#<!" keySC, ">#<!" keySC, "<#>!" keySC, ">#>!" keySC,
-			"<#<!+" keySC, ">#<!+" keySC, "<#>!+" keySC, ">#>!+" keySC,
-			"<#<!>+" keySC, ">#<!>+" keySC, "<#>!>+" keySC, ">#>!>+" keySC,
-		]
-
-		for pattern in Patterns {
-			try {
-				HotKey(pattern, "Off", "Off")
-			} catch {
-				continue
-			}
-		}
-	}
-}
-
 
 KeySeq := Map(
 	"A", ["A", "A", "A"],
@@ -4661,8 +3967,8 @@ GetModifiers(Modifiers*) {
 }
 
 GetKeyBindings(UseKey, Combinations := "FastKeys") {
-	LatinLayout := CheckQWERTY()
-	CyrillicLayout := CheckYITSUKEN()
+	LatinLayout := ""
+	CyrillicLayout := ""
 
 	SlotMod(SlotsKey, Slots, Mode := "+") {
 		return Slots.Has(Mode SlotsKey) ? Slots[Mode SlotsKey] : Slots.Has(SlotsKey) ? Slots[SlotsKey] : ""
@@ -6343,7 +5649,7 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Minus"], (*) => GroupActivator("Dashes", "-"),
 			"<#<!" UseKey["Apostrophe"], (*) => GroupActivator("Quotes", "'"),
 			;
-			"<#<!" UseKey["F"], (*) => ChrLib.SearchPrompt().send(), ;SearchKey(),
+			"<#<!" UseKey["F"], (*) => ChrLib.SearchPrompt().send(),
 			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
 			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
 			"<#<!" UseKey["L"], (*) => ChrCrafter(),
@@ -6380,8 +5686,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<^<!" UseKey["Numpad8"], (*) => SetModifiedCharsInput("smallCapital"),
 			"<^<!" UseKey["Numpad9"], (*) => SetModifiedCharsInput("uncombined"),
 			;
-			">^" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN(),
-			">+" UseKey["F12"], (*) => SwitchQWERTY_YITSUKEN("Cyrillic"),
 			"<!" UseKey["Q"], (*) => LangSeparatedCall(
 				() => QuotatizeSelection("Double"),
 				() => QuotatizeSelection("France")),
@@ -6414,15 +5718,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 	return LayoutArray
 }
 
-RecoveryKey(KeySC, Shift := False) {
-	KeySCCode := RegExReplace(LayoutsPresets["QWERTY"][KeySC], "SC")
-
-	if Shift {
-		Send("{Blind}+{sc" KeySCCode "}")
-	} else {
-		Send("{Blind}{sc" KeySCCode "}")
-	}
-}
 
 EmptyFunc() {
 	return
@@ -6469,7 +5764,6 @@ TimedKeyCombinations(StartKey, SecondKeys, Callbacks, DefaultCallback := False, 
 		global IsCombinationPressed
 		if !IsCombinationPressed {
 			if !DefaultCallback {
-				RecoveryKey(SCEntry, IsShiftOn)
 			} else {
 				DefaultCallback()
 			}
@@ -6486,10 +5780,8 @@ SetModifiedCharsInput(ModeName := "combining") {
 	AlterationActiveName := ModeName = AlterationActiveName ? "" : ModeName
 
 	if AlterationActiveName != "" {
-		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"), , True)
 		ShowInfoMessage("message_" ModeName, , , Cfg.SkipGroupMessage, True)
 	} else {
-		RegisterLayout(IniRead(ConfigFile, "Settings", "LatinLayout", "QWERTY"))
 		ShowInfoMessage("message_" ModeName "_disabled", , , Cfg.SkipGroupMessage, True)
 	}
 
@@ -6500,7 +5792,7 @@ GetModifiedCharsType() {
 }
 
 
-ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := DSLPadTitle, SkipMessage := False, Mute := False, NoReadLocale := False) {
+ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := App.winTitle, SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True
 		return
 	LanguageCode := Language.Get()
@@ -6673,7 +5965,7 @@ ManageTrayItems() {
 	App.tray.Add(Labels["layouts"], LayoutsSubMenu)
 
 	App.tray.Add()
-	App.tray.Add(Labels["search"], (*) => SearchKey())
+	App.tray.Add(Labels["search"], (*) => ChrLib.SearchPrompt().send())
 	App.tray.Add(Labels["unicode"], (*) => CharacterInserter("Unicode").InputDialog(False))
 	App.tray.Add(Labels["altcode"], (*) => CharacterInserter("Altcode").InputDialog(False))
 	App.tray.Add(Labels["smelter"], (*) => ChrCrafter())

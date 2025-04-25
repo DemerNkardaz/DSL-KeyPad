@@ -2,7 +2,7 @@ Class CharacterInserter {
 
 	__New(insertType := "Unicode") {
 		this.insertType := insertType
-		this.lastPrompt := IniRead(ConfigFile, "LatestPrompts", insertType, "")
+		this.lastPrompt := Cfg.Get(this.insertType, "LatestPrompts")
 	}
 
 	InputDialog(UseHWND := True) {
@@ -29,7 +29,7 @@ Class CharacterInserter {
 
 				}
 			}
-			IniWrite(this.lastPrompt, ConfigFile, "LatestPrompts", this.insertType)
+			Cfg.Set(this.lastPrompt, this.insertType, "LatestPrompts")
 		} catch {
 			MsgBox(Locale.Read("message_wrong_format") "`n`n" Locale.Read("message_wrong_format_" StrLower(this.insertType)), DSLPadTitle, "Icon!")
 			return

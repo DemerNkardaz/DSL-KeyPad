@@ -450,7 +450,7 @@ Class KeyboardBinder {
 
 	static GetCurrentLayoutMap() {
 		layout := Map()
-		this.CurrentLayouts(&latinLayout?, &cyrillicLayout?)
+		this.CurrentLayouts(&latinLayout, &cyrillicLayout)
 
 		latinLayout := KeyboardBinder.layouts.latin.Has(latinLayout) ? latinLayout : "QWERTY"
 		cyrillicLayout := KeyboardBinder.layouts.cyrillic.Has(cyrillicLayout) ? cyrillicLayout : "ЙЦУКЕН"
