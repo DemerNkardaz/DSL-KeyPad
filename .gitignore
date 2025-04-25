@@ -2,7 +2,10 @@ UtilityFiles/DSLKeyPad_App_Icons/.vs/
 UtilityFiles/DSLKeyPad_App_Icons/x64/
 __dev/DSLKeyPad_App_Icons/.vs/
 __dev/DSLKeyPad_App_Icons/x64/
-Testing/
+src/bin/DSLKeyPad_App_Icons/.vs/
+src/bin/DSLKeyPad_App_Icons/x64/
+testing/
+src/DSLKeyPad.exe
 *.tmp
 DSLKeyPad_DevVersion.ahk
 __dev/DSLKeyPad.exe
