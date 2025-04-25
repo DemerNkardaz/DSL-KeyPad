@@ -90,5 +90,20 @@
     <Image Include="DSLKeyPad.app_north_arabian.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_carian.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_lycian.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_tifinagh.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_ugaritic.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_persian.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
