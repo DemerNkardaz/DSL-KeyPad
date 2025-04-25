@@ -2,6 +2,8 @@
 
 **Strong** recommendation: use the extended character set only for text writing, no more.<br>Using these characters for passwords, file names, etc., is dangerous.
 
+**Strong 2** recommendation: turn off all AutoHotkey processes while playing games with sensitive anti-cheat systems. Games do not tolerate people who use AHK for gaining an advantage, and it is possible to be kicked or banned for having an AHK process running, even if the script does not provide an advantage.
+
 # DSL KeyPad
 
 ![Static Badge](<https://img.shields.io/badge/%F0%9F%94%96-%CE%AC%CE%BB%CF%86%CE%B1%20(dev)-yellow>) ![Static Badge](https://img.shields.io/badge/AHK-v2-yellow) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/DemerNkardaz/DSL-KeyPad?color=yellow)
