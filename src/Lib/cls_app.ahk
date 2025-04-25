@@ -4,7 +4,7 @@ Class App {
 	static status := "(αλφα)"
 	static decodedTitle := "Diacritics-Spaces-Letters KeyPad"
 	static version := [0, 1, 1, 0]
-	static versionText := this.formatVersion(this.version)
+	static versionText := this.formatVersion(this.version.Clone())
 	static winTitle := this.title " " this.status " — " this.versionText
 	static tray := A_TrayMenu
 	static indexIcos := Map()

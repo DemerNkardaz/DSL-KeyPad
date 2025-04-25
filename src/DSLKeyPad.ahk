@@ -35,6 +35,7 @@ LaTeXMode := "Default"
 #Include <cls_util>
 
 #Include <cls_app>
+#Include <cls_update>
 #Include <cls_cfg>
 #Include <cls_fonts>
 #Include <cls_language>
