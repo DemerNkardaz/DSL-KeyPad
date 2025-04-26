@@ -113,7 +113,7 @@ Class ChrEntry {
 	}
 }
 
-class ChrLib {
+Class ChrLib {
 	static entries := {}
 	static entryGroups := Map()
 	static entryCategories := Map()
@@ -236,6 +236,8 @@ class ChrLib {
 	}
 
 	static AddEntries(rawEntries, typeOfInit := "Internal") {
+		if Keyboard.blockedForReload
+			return
 		if rawEntries is Array && rawEntries.Length >= 2 {
 
 			Loop rawEntries.Length // 2 {

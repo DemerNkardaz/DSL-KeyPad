@@ -6,10 +6,7 @@ Class Language {
 		"gr", { code: "00000408", locale: False },
 	)
 
-	static localeObj := {}
-
 	static __New() {
-		this.FillLocalizedObject()
 	}
 
 	static GetSupported(by := "locale") {
@@ -43,28 +40,6 @@ Class Language {
 		return False
 	}
 
-	static FillLocalizedObject() {
-		pathsArray := []
-
-		for lang, value in this.supported {
-			if value.locale {
-				pathsArray.Push(App.paths.loc "\" lang ".ini")
-			}
-		}
-
-		Loop Files App.paths.loc "\Automated\*", "D" {
-			Loop Files A_LoopFileFullPath "\*.ini" {
-				pathsArray.Push(A_LoopFileFullPath)
-			}
-		}
-
-		Loop Files App.paths.loc "\Automated\*.ini" {
-			pathsArray.Push(A_LoopFileFullPath)
-		}
-
-		this.localeObj := Util.MultiINIToObj(pathsArray)
-	}
-
 	static Set(value) {
 		if this.Validate(value, "locale") {
 			Cfg.Set(value, "User_Language")
@@ -87,10 +62,11 @@ Class Language {
 	}
 }
 
-Class Keyboard extends Language {
+Class Keyboard {
 
 	static disabledByMonitor := False
 	static disabledByUser := False
+	static blockedForReload := False
 
 	static __New() {
 		this.InitialValidator()
@@ -117,14 +93,14 @@ Class Keyboard extends Language {
 		this.CurrentLayout(&code)
 
 		if !IsObject(abbr) {
-			for key, value in this.supported {
+			for key, value in Language.supported {
 				if abbr == key && code == value.code {
 					return True
 				}
 			}
 			return False
 		} else {
-			for key, value in this.supported {
+			for key, value in Language.supported {
 				if code == value.code {
 					%abbr% := key
 					break
@@ -139,9 +115,10 @@ Class Keyboard extends Language {
 		currentLayout := this.CurrentLayout()
 		previousLeyout := Cfg.Get("Prev_Layout", "ServiceFields")
 
-		if currentLayout != this.supported["en"].code {
+		if currentLayout != Language.supported["en"].code {
 			Cfg.Set(currentLayout, "Prev_Layout", "ServiceFields")
-			this.SwitchLayout(this.supported["en"].code, 2)
+			this.SwitchLayout(Language.supported["en"].code, 2)
+			this.blockedForReload := True
 			Reload
 		} else if StrLen(previousLeyout) > 0 {
 			this.SwitchLayout(previousLeyout, 2, 150)
@@ -150,9 +127,36 @@ Class Keyboard extends Language {
 	}
 }
 
-Class Locale extends Language {
-
+Class Locale {
+	static localeObj := {}
 	static localesPath := A_ScriptDir "\Locale\"
+
+	static __New() {
+		this.Fill()
+	}
+
+	static Fill() {
+		this.localeObj := {}
+		pathsArray := []
+
+		for lang, value in Language.supported {
+			if value.locale {
+				pathsArray.Push(App.paths.loc "\" lang ".ini")
+			}
+		}
+
+		Loop Files App.paths.loc "\Automated\*", "D" {
+			Loop Files A_LoopFileFullPath "\*.ini" {
+				pathsArray.Push(A_LoopFileFullPath)
+			}
+		}
+
+		Loop Files App.paths.loc "\Automated\*.ini" {
+			pathsArray.Push(A_LoopFileFullPath)
+		}
+
+		this.localeObj := Util.MultiINIToObj(pathsArray)
+	}
 
 	static OpenDir(*) {
 		Run(this.localesPath)
@@ -188,7 +192,7 @@ Class Locale extends Language {
 
 	static Read(EntryName, Prefix := "", validate := False, &output?) {
 		Intermediate := ""
-		Section := this.Validate(Prefix) ? Prefix : (!IsSpace(Prefix) ? Prefix "_" this.Get() : this.Get())
+		Section := Language.Validate(Prefix) ? Prefix : (!IsSpace(Prefix) ? Prefix "_" Language.Get() : Language.Get())
 		try {
 			Intermediate := this.ReadStr(Section, EntryName)
 
