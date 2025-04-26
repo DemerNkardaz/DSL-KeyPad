@@ -359,8 +359,8 @@ Class KeyboardBinder {
 	]
 
 	static autoimport := {
-		layouts: App.paths.user "\CustomLayouts",
-		binds: App.paths.user "\CustomBindings",
+		layouts: App.paths.profile "\CustomLayouts",
+		binds: App.paths.profile "\CustomBindings",
 	}
 
 	static disabledByMonitor := False

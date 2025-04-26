@@ -422,7 +422,7 @@ Class Util {
 		return str
 	}
 
-	static TrimBasePath(filePath, basePath := App.paths.user "\") {
+	static TrimBasePath(filePath, basePath := App.paths.profile "\") {
 		if (InStr(filePath, basePath) == 1) {
 			return SubStr(filePath, StrLen(basePath) + 1)
 		}

@@ -9,14 +9,18 @@ Class App {
 	static tray := A_TrayMenu
 	static indexIcos := Map()
 
+	static profileFile := A_ScriptDir "\User\Profile.ini"
+	static profileName := IniRead(this.profileFile, "data", "profile", "default")
 	static paths := {
 		dir: A_ScriptDir,
 		lib: A_ScriptDir "\Lib",
 		loc: A_ScriptDir "\Locale",
 		bin: A_ScriptDir "\Bin",
 		user: A_ScriptDir "\User",
+		profile: A_ScriptDir "\User\profile-" this.profileName,
 		temp: A_Temp "\DSLKeyPad",
 	}
+
 
 	static gitBranches := Map(
 		"Stable", "main",
@@ -43,11 +47,13 @@ Class App {
 
 	static Init() {
 		TraySetIcon(App.internal["ico_dll"].file, App.indexIcos["app"])
-		for dir in ["lib", "bin", "user", "temp"] {
+		for dir in ["lib", "bin", "user", "temp", "profile"] {
 			if !DirExist(this.paths.%dir%)
 				DirCreate(this.paths.%dir%)
 		}
 
+		if !FileExist(this.profileFile)
+			IniWrite("default", this.profileFile, "data", "profile")
 	}
 
 	; static UUID() {

@@ -1,8 +1,8 @@
 Class MyRecipes {
 
-	static file := App.paths.user "\CustomRecipes.ini"
-	static attachments := App.paths.user "\Attachments.ini"
-	static autoimport := { linux: App.paths.user "\Autoimport.linux", ini: App.paths.user "\Autoimport.ini" }
+	static file := App.paths.profile "\CustomRecipes.ini"
+	static attachments := App.paths.profile "\Attachments.ini"
+	static autoimport := { linux: App.paths.profile "\Autoimport.linux", ini: App.paths.profile "\Autoimport.ini" }
 	static editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
 	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
 
@@ -105,8 +105,8 @@ Class MyRecipes {
 				DirCreate(value)
 		}
 
-		if !FileExist(App.paths.user "\Autoimport.linux\demo.XCompose")
-			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.user "\Autoimport.linux\demo.XCompose", "UTF-8")
+		if !FileExist(App.paths.profile "\Autoimport.linux\demo.XCompose")
+			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.profile "\Autoimport.linux\demo.XCompose", "UTF-8")
 
 		ShowInfoMessage("tray_app_user_recipes_oninit")
 		this.UpdateChrLib()
@@ -203,7 +203,7 @@ Class MyRecipes {
 				if RegExMatch(data.section, this.sectionValidator) {
 					if InStr(data.section, "xcompose") {
 						RegExMatch(data.section, "\[(.*)\]", &match)
-						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\" match[1], App.winTitle)
+						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" match[1], App.winTitle)
 						return
 					} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
 						if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
@@ -404,7 +404,7 @@ Class MyRecipes {
 
 			for attachment in this.ReadAttachmentList() {
 				try {
-					pushRecipes(App.paths.user "\" attachment, "__attachment_from__" Util.EscapePathChars(attachment))
+					pushRecipes(App.paths.profile "\" attachment, "__attachment_from__" Util.EscapePathChars(attachment))
 				}
 			}
 

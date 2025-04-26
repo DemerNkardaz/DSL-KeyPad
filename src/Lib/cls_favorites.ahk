@@ -2,7 +2,7 @@ favoriteCharsList := Map()
 
 Class FavoriteChars {
 
-	static favesPath := App.paths.user "\FavoriteCharacters.txt"
+	static favesPath := App.paths.profile "\FavoriteCharacters.txt"
 
 	static __New() {
 		if !FileExist(this.favesPath) {
