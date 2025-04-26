@@ -8,7 +8,6 @@ Class App {
 	static fullVersion := this.version.Clone().ToString(".")
 	static winTitle := this.title " " this.status " — " this.versionText
 	static tray := A_TrayMenu
-	static indexIcos := Map()
 
 	static profileFile := A_ScriptDir "\User\Profile.ini"
 	static profileName := IniRead(this.profileFile, "data", "profile", "default")
@@ -22,23 +21,11 @@ Class App {
 		temp: A_Temp "\DSLKeyPad",
 	}
 
+	static icoDLL := this.paths.bin "\DSLKeyPad_App_Icons.dll"
+	static indexIcos := Map()
 
-	static gitBranches := Map(
-		"Stable", "main",
-		"Dev", "dev",
-	)
 
 	static __New() {
-		this.git := {}
-		this.git.repo := "https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad/" this.gitBranches.Get("Stable") "/"
-		this.git.src := this.git.repo "DSLKeyPad.ahk"
-		this.git.files := this.git.repo "UtilityFiles/"
-
-		this.internal := Map(
-			"ico_dll", { repo: this.git.files "DSLKeyPad_App_Icons.dll", file: this.paths.bin "\DSLKeyPad_App_Icons.dll" },
-			"exe", { repo: this.git.files "DSLKeyPad.exe", file: this.paths.dir "\DSLKeyPad.exe" },
-		)
-
 		for i, ico in ["app", "norse", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "viet", "pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian"] {
 			this.indexIcos.Set(ico, i)
 		}
@@ -47,7 +34,7 @@ Class App {
 	}
 
 	static Init() {
-		TraySetIcon(App.internal["ico_dll"].file, App.indexIcos["app"])
+		TraySetIcon(App.icoDLL, App.indexIcos["app"])
 		for dir in ["lib", "bin", "user", "temp", "profile"] {
 			if !DirExist(this.paths.%dir%)
 				DirCreate(this.paths.%dir%)

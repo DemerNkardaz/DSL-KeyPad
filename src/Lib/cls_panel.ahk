@@ -733,7 +733,7 @@ Class Panel {
 
 			aboutLeftBox := panelWindow.AddGroupBox(UISets.aboutInfoBox.leftBox)
 			panelWindow.AddGroupBox(UISets.aboutInfoBox.panelWindow)
-			panelWindow.AddPicture(UISets.aboutInfoBox.panelWindowIco, App.internal["ico_dll"].file)
+			panelWindow.AddPicture(UISets.aboutInfoBox.panelWindowIco, App.icoDLL)
 
 			aboutTitle := panelWindow.AddText(UISets.aboutInfoBox.aboutTitle, App.title)
 			aboutTitle.SetFont("s20 c333333", "Cambria")

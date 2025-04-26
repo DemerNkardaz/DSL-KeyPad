@@ -55,7 +55,6 @@ Class Cfg {
 		],
 		"ServiceFields", [
 			"Prev_Layout", "",
-			"App", "Stable",
 		],
 	]
 
