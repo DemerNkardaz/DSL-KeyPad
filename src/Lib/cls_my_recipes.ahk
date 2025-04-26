@@ -108,7 +108,6 @@ Class MyRecipes {
 		if !FileExist(App.paths.profile "\Autoimport.linux\demo.XCompose")
 			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.profile "\Autoimport.linux\demo.XCompose", "UTF-8")
 
-		ShowInfoMessage("tray_app_user_recipes_oninit")
 		this.UpdateChrLib()
 	}
 
