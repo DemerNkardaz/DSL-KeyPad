@@ -1410,7 +1410,7 @@ ChangeTrayIconOnLanguage() {
 	Keyboard.CurrentLayout(&CurrentLayout)
 
 	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
-		TraySetIcon(App.internal["ico_dll"].file, 9)
+		TraySetIcon(App.icoDLL, 9)
 		A_IconTip := DSLPadTitle " (" Locale.Read("tray_tooltip_disabled") ")"
 		return
 	}
@@ -1513,7 +1513,7 @@ ChangeTrayIconOnLanguage() {
 		IconCode := 1
 	}
 
-	TraySetIcon(App.internal["ico_dll"].file, IconCode)
+	TraySetIcon(App.icoDLL, IconCode)
 	A_IconTip := TrayTitle
 }
 
@@ -1562,10 +1562,10 @@ ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
 	if !CurrentActive {
 		if scriptModes.Has(ScriptName) {
 			index := scriptModes[ScriptName].Length == 2 ? (CurrentLayout = Language.supported["en"].code ? 1 : 2) : 1
-			TraySetIcon(App.internal["ico_dll"].file, scriptModes[ScriptName][index])
+			TraySetIcon(App.icoDLL, scriptModes[ScriptName][index])
 		}
 	} else {
-		TraySetIcon(App.internal["ico_dll"].file, App.indexIcos["app"])
+		TraySetIcon(App.icoDLL, App.indexIcos["app"])
 	}
 
 	if !HideMessage {
@@ -2776,7 +2776,7 @@ Constructor() {
 
 	AboutLeftBox := DSLPadGUI.Add("GroupBox", "x23 y34 w280 h520",)
 	DSLPadGUI.Add("GroupBox", "x75 y65 w170 h170")
-	DSLPadGUI.Add("Picture", "x98 y89 w128 h128", App.internal["ico_dll"].File, 1)
+	DSLPadGUI.Add("Picture", "x98 y89 w128 h128", App.icoDLL, 1)
 
 	AboutTitle := DSLPadGUI.Add("Text", "x75 y245 w170 h32 Center BackgroundTrans", DSLPadTitleDefault)
 	AboutTitle.SetFont("s20 c333333", "Cambria")
@@ -3377,7 +3377,7 @@ AddScriptToAutoload(*) {
 	}
 
 	IconIndex := 0
-	Command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" ShortcutPath "'); $shortcut.TargetPath = '" CurrentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" App.internal["ico_dll"].file "," IconIndex "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()"
+	Command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" ShortcutPath "'); $shortcut.TargetPath = '" CurrentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" App.icoDLL "," IconIndex "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()"
 	RunWait(Command, , "Hide")
 
 	MsgBox(Labels[LanguageCode].Success, DSLPadTitle, 0x40)
@@ -5669,18 +5669,18 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
 	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
-	ScriptsSubMenu.SetIcon(Labels["vietNam"], App.internal["ico_dll"].file, App.indexIcos["viet"])
-	ScriptsSubMenu.SetIcon(Labels["pinYin"], App.internal["ico_dll"].file, App.indexIcos["pinyin"])
-	ScriptsSubMenu.SetIcon(Labels["glagolitic"], App.internal["ico_dll"].file, App.indexIcos["glagolitic"])
-	ScriptsSubMenu.SetIcon(Labels["turkic"], App.internal["ico_dll"].file, App.indexIcos["turkic"])
-	ScriptsSubMenu.SetIcon(Labels["hungarian"], App.internal["ico_dll"].file, App.indexIcos["hungarian"])
-	ScriptsSubMenu.SetIcon(Labels["gothic"], App.internal["ico_dll"].file, App.indexIcos["gothic"])
-	ScriptsSubMenu.SetIcon(Labels["italic"], App.internal["ico_dll"].file, App.indexIcos["italic"])
-	ScriptsSubMenu.SetIcon(Labels["phoenician"], App.internal["ico_dll"].file, App.indexIcos["phoenician"])
-	ScriptsSubMenu.SetIcon(Labels["south_arabian"], App.internal["ico_dll"].file, App.indexIcos["south_arabian"])
-	ScriptsSubMenu.SetIcon(Labels["north_arabian"], App.internal["ico_dll"].file, App.indexIcos["north_arabian"])
-	ScriptsSubMenu.SetIcon(Labels["maths"], App.internal["ico_dll"].file, App.indexIcos["math"])
-	ScriptsSubMenu.SetIcon(Labels["ipa"], App.internal["ico_dll"].file, App.indexIcos["ipa"])
+	ScriptsSubMenu.SetIcon(Labels["vietNam"], App.icoDLL, App.indexIcos["viet"])
+	ScriptsSubMenu.SetIcon(Labels["pinYin"], App.icoDLL, App.indexIcos["pinyin"])
+	ScriptsSubMenu.SetIcon(Labels["glagolitic"], App.icoDLL, App.indexIcos["glagolitic"])
+	ScriptsSubMenu.SetIcon(Labels["turkic"], App.icoDLL, App.indexIcos["turkic"])
+	ScriptsSubMenu.SetIcon(Labels["hungarian"], App.icoDLL, App.indexIcos["hungarian"])
+	ScriptsSubMenu.SetIcon(Labels["gothic"], App.icoDLL, App.indexIcos["gothic"])
+	ScriptsSubMenu.SetIcon(Labels["italic"], App.icoDLL, App.indexIcos["italic"])
+	ScriptsSubMenu.SetIcon(Labels["phoenician"], App.icoDLL, App.indexIcos["phoenician"])
+	ScriptsSubMenu.SetIcon(Labels["south_arabian"], App.icoDLL, App.indexIcos["south_arabian"])
+	ScriptsSubMenu.SetIcon(Labels["north_arabian"], App.icoDLL, App.indexIcos["north_arabian"])
+	ScriptsSubMenu.SetIcon(Labels["maths"], App.icoDLL, App.indexIcos["math"])
+	ScriptsSubMenu.SetIcon(Labels["ipa"], App.icoDLL, App.indexIcos["ipa"])
 
 	ScriptsSubMenu.Disable(Labels["telexInput"])
 	ScriptsSubMenu.Disable(Labels["altInput"])
@@ -5743,17 +5743,17 @@ ManageTrayItems() {
 	App.tray.Add()
 	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
 		App.tray.Add(Labels["enable"], (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
-		App.tray.SetIcon(Labels["enable"], App.internal["ico_dll"].file, App.indexIcos["disabled"])
+		App.tray.SetIcon(Labels["enable"], App.icoDLL, App.indexIcos["disabled"])
 	} else {
 
 		App.tray.Add(Labels["disable"], (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
-		App.tray.SetIcon(Labels["disable"], App.internal["ico_dll"].file, App.indexIcos["disabled"])
+		App.tray.SetIcon(Labels["disable"], App.icoDLL, App.indexIcos["disabled"])
 	}
 	App.tray.Add()
 	App.tray.Add(Labels["exit"], ExitApplication)
 	App.tray.Add()
 
-	App.tray.SetIcon(CurrentApp, App.internal["ico_dll"].file, App.indexIcos["app"])
+	App.tray.SetIcon(CurrentApp, App.icoDLL, App.indexIcos["app"])
 	App.tray.SetIcon(Labels["search"], ImageRes, 169)
 	App.tray.SetIcon(Labels["unicode"], Shell32, 225)
 	App.tray.SetIcon(Labels["altcode"], Shell32, 313)

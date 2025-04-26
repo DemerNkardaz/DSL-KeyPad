@@ -169,7 +169,7 @@ class ChrLib {
 		}
 	}
 
-	static AddEntry(entryName, entry) {
+	static AddEntry(entryName, entry, typeOfInit := "Internal") {
 		if RegExMatch(entryName, "\[(.*?)\]", &match) {
 			splitVariants := StrSplit(match[1], ",")
 			entries := {}
@@ -215,31 +215,40 @@ class ChrLib {
 
 			this.EntryPostProcessing(entryName, this.entries.%entryName%)
 
+
 			this.progressBarCurrent++
+			this.progressBarGUI["InitPorgressCounter"].Text := Util.StrVarsInject(Locale.Read("lib_init_elems"), this.progressBarCurrent, this.maxCountOfEntries) (typeOfInit = "Custom" ? " : " Locale.Read("lib_init_custom") : " : " Locale.Read("lib_init_internal_lib"))
+			this.progressBarGUI["InitPorgressEntryName"].Text := Util.StrVarsInject(Locale.Read("lib_init_entry"), entryName)
 
-			this.progressBarGUI["InitPorgressCounter"].Text := Util.StrVarsInject(Locale.Read("lib_init_elems"), this.progressBarCurrent, this.maxCountOfEntries)
-			this.progressBarGUI["InitPorgressEntryName"].Text := entryName
-
-			this.progressBarAddition += (1 / this.maxCountOfEntries) * 100
-			if (this.progressBarAddition >= 1) {
-				progressToAdd := Floor(this.progressBarAddition)
+			if this.maxCountOfEntries > 0 {
+				this.progressBarAddition += (1 / this.maxCountOfEntries) * 100
+				if (this.progressBarAddition >= 1) {
+					progressToAdd := Floor(this.progressBarAddition)
 
 
-				this.progressBarGUI["InitPogressBar"].Value += progressToAdd
-				this.progressBarGUI.Show("NoActivate")
+					this.progressBarGUI["InitPogressBar"].Value += progressToAdd
+					this.progressBarGUI.Show("NoActivate")
 
-				this.progressBarAddition -= progressToAdd
-			}
-			if (this.progressBarGUI["InitPogressBar"].Value >= 100) {
-				this.progressBarGUI.Hide()
-				this.progressBarGUI := Gui()
+					this.progressBarAddition -= progressToAdd
+				}
 			}
 		}
 	}
 
 	static AddEntries(rawEntries, typeOfInit := "Internal") {
 		if rawEntries is Array && rawEntries.Length >= 2 {
-			this.maxCountOfEntries += rawEntries.Length
+
+			Loop rawEntries.Length // 2 {
+				index := A_Index * 2 - 1
+				entryName := rawEntries[index]
+
+				if RegExMatch(entryName, "\[(.*?)\]", &match) {
+					splitVariants := StrSplit(match[1], ",")
+					this.maxCountOfEntries += splitVariants.Length
+				} else {
+					this.maxCountOfEntries++
+				}
+			}
 
 			this.InitPorgressBar(typeOfInit)
 
@@ -247,14 +256,14 @@ class ChrLib {
 				index := A_Index * 2 - 1
 				entryName := rawEntries[index]
 				entryValue := rawEntries[index + 1]
-				this.AddEntry(entryName, ChrEntry(entryValue, entryName))
+				this.AddEntry(entryName, ChrEntry(entryValue, entryName), typeOfInit)
 			}
 
+			this.progressBarGUI.Hide()
+			this.progressBarGUI["InitPogressBar"].Value := 0
 			this.progressBarAddition := 0
 			this.maxCountOfEntries := 0
 			this.progressBarCurrent := 0
-			this.progressBarGUI.Hide()
-			this.progressBarGUI := Gui()
 		}
 		return
 	}
