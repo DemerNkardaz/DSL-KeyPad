@@ -121,6 +121,8 @@ class ChrLib {
 	static entryTags := Map()
 	static duplicatesList := []
 	static lastIndexAdded := -1
+	static maxCountOfEntries := 0
+	static progressBarAddition := 0
 
 	static __New() {
 		ShowInfoMessage("tray_app_library_oninit")
@@ -177,15 +179,84 @@ class ChrLib {
 
 			this.EntryPostProcessing(entryName, this.entries.%entryName%)
 
+
+			this.progressBarGUI["InitPorgressCounter"].Text := Util.StrVarsInject(Locale.Read("lib_init_elems"), this.lastIndexAdded, this.maxCountOfEntries)
+			this.progressBarGUI["InitPorgressEntryName"].Text := entryName
+
+			this.progressBarAddition += (1 / this.maxCountOfEntries) * 100
+			if (this.progressBarAddition >= 1) {
+				progressToAdd := Round(this.progressBarAddition)
+
+				this.progressBarGUI["InitPogressBar"].Value += progressToAdd
+				this.progressBarGUI.Show("NoActivate")
+				this.progressBarAddition := 0
+			}
+
+			if this.progressBarGUI["InitPogressBar"].Value >= 100 {
+				this.progressBarGUI.Hide()
+				this.progressBarGUI := Gui()
+			}
 		}
 	}
 
-	static AddEntries(arguments*) {
-		Loop arguments.Length // 2 {
-			index := A_Index * 2 - 1
-			entryName := arguments[index]
-			entryValue := arguments[index + 1]
-			this.AddEntry(entryName, ChrEntry(entryValue, entryName))
+	static progressBarGUI := Gui()
+	static InitPorgressBar(typeOfInit := "Internal") {
+		progressBarTitle := Locale.Read("lib_init")
+
+		Constructor() {
+			progressPanel := Gui()
+			progressPanel.title := progressBarTitle
+
+			windowWidth := 300
+			windowHeight := 80
+			xPos := (A_ScreenWidth - windowWidth) / 2
+			yPos := (A_ScreenHeight - windowHeight) / 2
+
+			prgBarW := windowWidth - 20
+			prgBarH := 24
+			prgBarY := (windowHeight - 32)
+			prgBarX := (windowWidth - prgBarW) / 2
+
+			progressPanel.AddProgress("vInitPogressBar w" prgBarW " h" prgBarH " x" prgBarX " y" prgBarY, 0)
+
+
+			progressPanel.AddText("vInitPorgressCounter w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 40), Util.StrVarsInject(Locale.Read("lib_init_elems"), 0, this.maxCountOfEntries))
+			progressPanel.AddText("vInitPorgressEntryName w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 20), "")
+
+			progressPanel.Show("w" windowWidth " h" windowHeight " x" xPos " y" yPos)
+			return progressPanel
+		}
+
+		if IsGuiOpen(progressBarTitle) {
+			WinActivate(progressBarTitle)
+		} else {
+			this.progressBarGUI := Constructor()
+			this.progressBarGUI.Show("NoActivate")
+		}
+	}
+
+
+	static AddEntries(rawEntries, typeOfInit := "Internal") {
+		if rawEntries is Array && rawEntries.Length >= 2 {
+			this.maxCountOfEntries += rawEntries.Length
+
+			Loop rawEntries.Length // 2 {
+				index := A_Index * 2 - 1
+				entryName := rawEntries[index]
+				if RegExMatch(entryName, "\[(.*?)\]", &match) {
+					splitVariants := StrSplit(match[1], ",")
+					this.maxCountOfEntries += splitVariants.Length
+				}
+			}
+
+			this.InitPorgressBar(typeOfInit)
+
+			Loop rawEntries.Length // 2 {
+				index := A_Index * 2 - 1
+				entryName := rawEntries[index]
+				entryValue := rawEntries[index + 1]
+				this.AddEntry(entryName, ChrEntry(entryValue, entryName))
+			}
 		}
 		return
 	}

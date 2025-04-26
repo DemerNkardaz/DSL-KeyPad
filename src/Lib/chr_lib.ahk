@@ -1,7 +1,7 @@
 LibRegistrate(this) {
 	local D := "dotted_circle"
 
-	this.AddEntries(
+	rawEntries := [
 		;
 		;
 		; * Diacritics
@@ -9662,7 +9662,7 @@ LibRegistrate(this) {
 			options: { noCalc: True },
 			recipe: ["obj"]
 		},
-	)
+	]
 
 	Loop 256 {
 		index := A_Index
@@ -9674,7 +9674,7 @@ LibRegistrate(this) {
 			unicodeValue := Format("E01{:02X}", offset)
 		}
 
-		ChrLib.AddEntries(
+		rawEntries.Push(
 			"variantion_selector_" index, {
 				titles: Map("ru", "Селектор варианта " index, "en", "Variation selector " index),
 				unicode: "{U+" unicodeValue "}",
@@ -9684,6 +9684,8 @@ LibRegistrate(this) {
 			}
 		)
 	}
+
+	this.AddEntries(rawEntries)
 
 	if this.duplicatesList.Length > 0
 		TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), this.duplicatesList.ToString()), App.winTitle, "Icon! Mute")

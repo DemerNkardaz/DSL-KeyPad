@@ -493,7 +493,10 @@ Class MyRecipes {
 	}
 
 	static UpdateChrLib() {
+
 		recipeSections := this.Read()
+		rawCustomEntries := []
+
 		try {
 
 			for section in recipeSections {
@@ -512,7 +515,7 @@ Class MyRecipes {
 					if ChrLib.GetEntry(section.section)
 						ChrLib.RemoveEntry(section.section)
 
-					ChrLib.AddEntry(
+					rawCustomEntries.Push(
 						section.section, ChrEntry({
 							result: [section.result],
 							titles: this.HandleTitles(section.name),
@@ -524,6 +527,7 @@ Class MyRecipes {
 					MsgBox("[" section.section "]`n" Util.StrVarsInject(Locale.Read("gui_recipes_create_invalid_recipe"), section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result), App.winTitle)
 				}
 			}
+			ChrLib.AddEntries(rawCustomEntries, "Custom")
 			if ChrLib.duplicatesList.Length > 0
 				TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), ChrLib.duplicatesList.ToString()), App.winTitle, "Icon! Mute")
 		}
