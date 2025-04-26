@@ -23,6 +23,20 @@ Class Update {
 		}
 	}
 
+	static CreateBundle() {
+		try {
+			powershellPackBundler := A_ScriptDir "\Lib\powershell\pack_bundle.ps1"
+
+			exitCode := RunWait('powershell -ExecutionPolicy Bypass -NoProfile -File "' powershellPackBundler '" "' A_ScriptDir '" "' App.fullVersion '"', , "Show")
+
+			if exitCode != 0 {
+				MsgBox(Util.StrVarsInject(Locale.Read("bundle_creation_failed_pshell"), exitCode))
+			}
+		} catch {
+			MsgBox(Locale.Read("bundle_creation_failed"))
+		}
+	}
+
 	static DownloadLatestZip(version := this.availableVersion) {
 		try {
 			zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" version "/DSL-KeyPad-" version ".zip"

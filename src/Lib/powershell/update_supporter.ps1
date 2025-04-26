@@ -1,6 +1,6 @@
 ﻿param (
-	[string]$ZipPath,
-	[string]$Destination
+	[Parameter(Mandatory = $true)][string]$ZipPath,
+	[Parameter(Mandatory = $true)][string]$Destination
 )
 
 if (!(Test-Path $ZipPath)) {
