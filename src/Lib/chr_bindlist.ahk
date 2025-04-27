@@ -394,10 +394,27 @@ bindingMaps := Map(
 			"NumpadSub", (K) => BindHandler.TimeSend(K, Map(
 				"NumpadAdd", (*) => BindHandler.Send(K, "plusminus"),
 			), (*) => BindHandler.Send(K, "minus")),
-			"NumpadDiv", "division",
-			"NumpadMult", "multiplication",
+			"NumpadDiv", (K) => BindHandler.TimeSend(K, Map(),
+				(*) => BindHandler.Send(K, "division")),
+			"NumpadMult", (K) => BindHandler.TimeSend(K, Map(
+				"NumpadDiv", (*) => BindHandler.Send(K, "division_times"),
+			), (*) => BindHandler.Send(K, "multiplication")),
 		),
 		"Moded", Map(
+			; Numpad
+			"Numpad0", Map(
+				"<^<!", "dotted_circle",
+				"<^>!", "empty_set",
+			),
+			"NumpadMult", Map(
+				"<^>!", "asterisk_two",
+				"<^>!>+", "asterism",
+				"<^>!<+", "asterisk_low",
+			),
+			"NumpadDiv", Map(
+				"<^>!", "dagger",
+				"<^>!>+", "dagger_double",
+			),
 			; Digit & Misc Layout
 			"1", Map(
 				"<!", "section",

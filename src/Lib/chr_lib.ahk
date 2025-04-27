@@ -2613,6 +2613,28 @@ LibRegistrate(this) {
 			options: { altSpecialKey: "NumAdd NumSub" },
 			recipe: ["-+", "${minus}${plus}"],
 		},
+		"multiplication", {
+			unicode: "{U+00D7}",
+			alterations: { modifier: "{U+02DF}" },
+			tags: ["multiplication", "умножение"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary", "Special Fast"],
+			options: { groupKey: ["8"], altSpecialKey: "NumMult", fastKey: "8" },
+			recipe: ["-x"],
+		},
+		"division", {
+			unicode: "{U+00F7}",
+			tags: ["деление", "обелюс", "division", "obelus"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary", "Special Fast"],
+			options: { groupKey: ["4"], altSpecialKey: "NumDiv", fastKey: "4" },
+			recipe: ["-:"],
+		},
+		"division_times", {
+			unicode: "{U+22C7}",
+			tags: ["кратность деления", "division times"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast"],
+			options: { altSpecialKey: "NumMult NumDiv" },
+			recipe: ["${multiplication}-:", "${multiplication}${multiplication}"],
+		},
 		"tilde", {
 			unicode: "{U+007E}",
 			options: { noCalc: True },
