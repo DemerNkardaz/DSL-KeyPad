@@ -151,7 +151,7 @@ Class ChrLib {
 			prgBarY := (windowHeight - 32)
 			prgBarX := (windowWidth - prgBarW) / 2
 
-			progressPanel.AddProgress("vInitPogressBar w" prgBarW " h" prgBarH " x" prgBarX " y" prgBarY, 0)
+			progressPanel.AddProgress("vInitPogressBar Range0-" this.maxCountOfEntries " w" prgBarW " h" prgBarH " x" prgBarX " y" prgBarY, 0)
 
 
 			progressPanel.AddText("vInitPorgressCounter w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 40), Util.StrVarsInject(Locale.Read("lib_init_elems"), 0, this.maxCountOfEntries))
@@ -216,21 +216,15 @@ Class ChrLib {
 			this.EntryPostProcessing(entryName, this.entries.%entryName%)
 
 
+			progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
+
 			this.progressBarCurrent++
 			this.progressBarGUI["InitPorgressCounter"].Text := Util.StrVarsInject(Locale.Read("lib_init_elems"), this.progressBarCurrent, this.maxCountOfEntries) (typeOfInit = "Custom" ? " : " Locale.Read("lib_init_custom") : " : " Locale.Read("lib_init_internal_lib"))
-			this.progressBarGUI["InitPorgressEntryName"].Text := Util.StrVarsInject(Locale.Read("lib_init_entry"), entryName)
+			this.progressBarGUI["InitPorgressEntryName"].Text := Util.StrVarsInject(Locale.Read("lib_init_entry"), progressName)
 
 			if this.maxCountOfEntries > 0 {
-				this.progressBarAddition += (1 / this.maxCountOfEntries) * 100
-				if (this.progressBarAddition >= 1) {
-					progressToAdd := Floor(this.progressBarAddition)
-
-
-					this.progressBarGUI["InitPogressBar"].Value += progressToAdd
-					this.progressBarGUI.Show("NoActivate")
-
-					this.progressBarAddition -= progressToAdd
-				}
+				this.progressBarGUI["InitPogressBar"].Value++
+				this.progressBarGUI.Show("NoActivate")
 			}
 		}
 	}
@@ -261,6 +255,7 @@ Class ChrLib {
 				this.AddEntry(entryName, ChrEntry(entryValue, entryName), typeOfInit)
 			}
 
+			Sleep 1000
 			this.progressBarGUI.Hide()
 			this.progressBarGUI["InitPogressBar"].Value := 0
 			this.progressBarAddition := 0
