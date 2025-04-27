@@ -311,6 +311,23 @@ Class ChrLib {
 		}
 	}
 
+	static Print() {
+		printPath := App.paths.user "\printed_pairs.txt"
+		output := ""
+
+		if FileExist(printPath)
+			FileDelete(printPath)
+
+		for entryName, entry in this.entries.OwnProps() {
+			output .= (entry.result.Length = 1
+				? (StrLen(entry.result[1]) > 10 ? "[ " SubStr(entry.result[1], 1, 10) " … ]" : entry.result[1])
+				: Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+			) "`t`t" entryName "`n"
+		}
+
+		FileAppend(output, printPath, "UTF-8")
+	}
+
 	static Get(entryName, extraRules := False, getMode := "Unicode", alt := AlterationActiveName) {
 		if StrLen(alt) == 0
 			alt := AlterationActiveName

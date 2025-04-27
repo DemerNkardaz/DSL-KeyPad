@@ -318,7 +318,7 @@ Class Cfg {
 
 			updateAllBtn := recipesPanel.AddButton("x" addRemX(288) " y" addRemY " w32 h32")
 			GuiButtonIcon(updateAllBtn, ImageRes, 229)
-			updateAllBtn.OnEvent("Click", (*) => MyRecipes.UpdateChrLib())
+			updateAllBtn.OnEvent("Click", (*) => MyRecipes.Update())
 
 			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return recipesPanel
@@ -349,7 +349,7 @@ Class Cfg {
 					MyRecipes.AddAttachment(trimmedFile)
 				}
 
-				MyRecipes.UpdateChrLib(strictToNames)
+				MyRecipes.Update(strictToNames)
 			}
 
 			setSelected(LV, rowNumber) {

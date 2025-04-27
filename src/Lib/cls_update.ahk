@@ -7,6 +7,9 @@ Class Update {
 		this.CheckUpdate()
 	}
 
+	static Repair() {
+		this.Get(True)
+	}
 	static Get(force := False) {
 		if !this.available && !force {
 			MsgBox(Locale.Read("update_absent"))

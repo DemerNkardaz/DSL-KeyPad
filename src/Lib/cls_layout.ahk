@@ -371,6 +371,11 @@ Class KeyboardBinder {
 	static userBindings := []
 
 	static __New() {
+		this.Init()
+		SetTimer((*) => SetTimer((*) => this.Monitor(), 2000), -10000)
+	}
+
+	static Init() {
 		for key, path in this.autoimport.OwnProps() {
 			if !DirExist(path)
 				DirCreate(path)
@@ -379,8 +384,6 @@ Class KeyboardBinder {
 		this.UserLayouts()
 		this.UserBinds()
 		this.RebuilBinds()
-
-		SetTimer((*) => SetTimer((*) => this.Monitor(), 2000), -10000)
 	}
 
 	static Monitor() {
@@ -662,7 +665,8 @@ Class KeyboardBinder {
 			bindsMap := Util.INIToMap(A_LoopFileFullPath)
 
 			if StrLen(name) > 0 && bindsMap.Has("binds") {
-				this.userBindings.Push(name)
+				if !this.userBindings.HasValue(name)
+					this.userBindings.Push(name)
 				this.UserBindsHandler(bindsMap["binds"], name)
 			}
 		}

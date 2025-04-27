@@ -57,14 +57,6 @@ Class App {
 	; return ""
 	; }
 
-	static Update(timeOut := 0, forceUpdate := False) {
-
-	}
-
-	static CheckUpdate() {
-
-	}
-
 	static formatVersion(arr, length := 3) {
 		for i, value in arr {
 			if i > length
