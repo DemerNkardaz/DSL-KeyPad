@@ -216,7 +216,7 @@ Class MyRecipes {
 							recipesLV.Add(, data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24), data.section)
 						}
 
-						this.AddEdit(data.section, data)
+						this.AddEdit(data.section, data, , True)
 					}
 				} else {
 					MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.winTitle)
@@ -232,7 +232,7 @@ Class MyRecipes {
 		}
 	}
 
-	static AddEdit(sectionName, params, noUpdate := False) {
+	static AddEdit(sectionName, params, noUpdate := False, singleSectionName := False) {
 		if RegExMatch(sectionName, this.sectionValidator) {
 			params.result := this.FormatResult(params.result)
 
@@ -241,7 +241,7 @@ Class MyRecipes {
 			IniWrite(params.result, this.file, sectionName, "result")
 
 			if !noUpdate {
-				this.UpdateChrLib()
+				this.UpdateChrLib(singleSectionName ? sectionName : "")
 			}
 		} else {
 			MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.winTitle)
@@ -491,7 +491,7 @@ Class MyRecipes {
 		return output
 	}
 
-	static UpdateChrLib() {
+	static UpdateChrLib(singleSectionName := "") {
 
 		recipeSections := this.Read()
 		rawCustomEntries := []
@@ -499,6 +499,9 @@ Class MyRecipes {
 		try {
 
 			for section in recipeSections {
+				if StrLen(singleSectionName) > 0 && section.section != singleSectionName
+					continue
+
 				try {
 
 					if InStr(section.recipe, "|") {
