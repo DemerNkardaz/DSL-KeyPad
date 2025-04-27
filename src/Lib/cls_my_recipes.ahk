@@ -535,22 +535,24 @@ Class MyRecipes {
 	static HandleResult(resultIn) {
 		if resultIn is Array
 			resultIn := resultIn.ToString("")
+		/*
 		output := []
 		i := 1
 		while (i <= StrLen(resultIn)) {
 			char := SubStr(resultIn, i, 1)
 			code := Ord(char)
-
+		
 			if (code >= 0xD800 && code <= 0xDBFF) {
 				nextChar := SubStr(resultIn, i + 1, 1)
 				char .= nextChar
 				i += 1
 			}
-
+		
 			output.Push("{U+" GetCharacterUnicode(char) "}")
 			i += 1
 		}
-		return output
+		*/
+		return ["%RAWTEXT%" resultIn]
 	}
 
 	static FormatResult(result, revert := False) {

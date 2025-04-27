@@ -339,7 +339,7 @@ Class ChrLib {
 
 			} else {
 				try {
-					return Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+					return entry.result.Length = 1 ? entry.result[1] : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
 				} catch {
 					MsgBox(Locale.Read("error_critical") "`n`n" Util.StrVarsInject(Locale.Read("error_entry_not_found"), entryName), App.title, "Iconx")
 					return
@@ -767,8 +767,8 @@ Class ChrLib {
 		refinedEntry := entry.Clone()
 
 		if refinedEntry.result.Length > 0 {
-			refinedEntry.sequence := MyRecipes.HandleResult(refinedEntry.result.Clone())
-			refinedEntry.unicode := refinedEntry.sequence[1]
+			; refinedEntry.sequence := MyRecipes.HandleResult(refinedEntry.result.Clone())
+			refinedEntry.unicode := Util.ChrToUnicode(SubStr(refinedEntry.result[1], 1, 1))
 		}
 
 
