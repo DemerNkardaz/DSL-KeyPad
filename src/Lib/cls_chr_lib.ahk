@@ -911,8 +911,9 @@ Class ChrLib {
 
 		if refinedEntry.options.groupKey.Length > 0
 			refinedEntry.options.groupKeyPreview := this.SetNotaion(Util.FormatHotKey(refinedEntry.options.groupKey), dataPack)
-		refinedEntry.options.fastKey := this.SetNotaion(refinedEntry.options.fastKey, dataPack)
-		refinedEntry.options.altLayoutKey := this.SetNotaion(refinedEntry.options.altLayoutKey, dataPack)
+		for key in ["fastKey", "altLayoutKey", "altSpecialKey"] {
+			refinedEntry.options.%key% := this.SetNotaion(refinedEntry.options.%key%, dataPack)
+		}
 
 
 		if refinedEntry.recipe.Length > 0 {

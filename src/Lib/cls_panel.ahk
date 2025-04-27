@@ -565,7 +565,7 @@ Class Panel {
 						;
 						{ type: "Fast Key", group: "Spaces Left Shift", groupKey: LeftShift, separator: true },
 						;
-						{ type: "Fast Key Special", group: "Special Fast", groupKey: Locale.Read("symbol_special_key"), separator: true },
+						{ type: "Special Combinations", group: "Special Combinations", groupKey: Locale.Read("symbol_special_key"), separator: true },
 					]),
 				),
 				scripts: ArrayMerge(
@@ -1278,7 +1278,7 @@ Class Panel {
 						bindings := Map(
 							"Recipe", value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : value.recipe.Length > 0 ? value.recipe.ToString() : "N/A",
 							"Alternative Layout", value.options.altLayoutKey,
-							"Fast Special", value.options.specialKey,
+							"Special Combinations", value.options.altSpecialKey,
 							"Fast Key", value.options.fastKey,
 							"Group Activator", StrLen(value.options.groupKeyPreview) > 0 && value.options.groupKeyPreview,
 						)

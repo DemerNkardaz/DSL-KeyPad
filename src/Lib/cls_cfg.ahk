@@ -316,8 +316,8 @@ Class Cfg {
 			attachListBtn.SetFont("s16")
 			attachListBtn.OnEvent("Click", (*) => Run(MyRecipes.attachments))
 
-			updateAllBtn := recipesPanel.AddButton("x" addRemX(288) " y" addRemY " w32 h32", Chr(0x1F504))
-			updateAllBtn.SetFont("s16")
+			updateAllBtn := recipesPanel.AddButton("x" addRemX(288) " y" addRemY " w32 h32")
+			GuiButtonIcon(updateAllBtn, ImageRes, 229)
 			updateAllBtn.OnEvent("Click", (*) => MyRecipes.UpdateChrLib())
 
 			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
