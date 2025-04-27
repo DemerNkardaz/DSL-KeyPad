@@ -1,7 +1,7 @@
 Class MyRecipes {
 
 	static file := App.paths.profile "\CustomRecipes.ini"
-	static attachments := App.paths.profile "\Attachments.ini"
+	static attachments := App.paths.profile "\Attachments.txt"
 	static autoimport := { linux: App.paths.profile "\Autoimport.linux", ini: App.paths.profile "\Autoimport.ini" }
 	static editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
 	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
@@ -97,7 +97,7 @@ Class MyRecipes {
 		}
 
 		if !FileExist(this.attachments) {
-			FileAppend("[attach]", this.attachments, "UTF-16")
+			FileAppend("", this.attachments, "UTF-8")
 		}
 
 		for key, value in this.autoimport.OwnProps() {
@@ -241,7 +241,7 @@ Class MyRecipes {
 			IniWrite(params.result, this.file, sectionName, "result")
 
 			if !noUpdate {
-				this.UpdateChrLib(singleSectionName ? sectionName : "")
+				this.UpdateChrLib(singleSectionName ? [sectionName] : [])
 			}
 		} else {
 			MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.winTitle)
@@ -426,22 +426,18 @@ Class MyRecipes {
 	}
 
 	static AddAttachment(attachment) {
-		IniWrite(attachment, this.attachments, "attach", Util.EscapePathChars(attachment))
+		FileAppend(attachment "`n", this.attachments, "UTF-8")
 	}
 
 	static ReadAttachmentList() {
 		attachments := []
 
-		content := FileRead(this.attachments, "UTF-16")
-		splitContent := StrSplit(content, "`n")
+		content := FileRead(this.attachments, "UTF-8")
 
-		for i, line in splitContent {
-			line := Trim(line)
-			if (line = "" || SubStr(line, 1, 1) = ";" || (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]"))
+		for line in StrSplit(content, "`n") {
+			if StrLen(line) == 0
 				continue
-
-			if (RegExMatch(line, "^[^=]*=(.*)$", &result))
-				attachments.Push(Trim(result[1]))
+			attachments.Push(Trim(line))
 		}
 
 		return attachments
@@ -491,7 +487,7 @@ Class MyRecipes {
 		return output
 	}
 
-	static UpdateChrLib(singleSectionName := "") {
+	static UpdateChrLib(strictToNames := []) {
 
 		recipeSections := this.Read()
 		rawCustomEntries := []
@@ -499,8 +495,9 @@ Class MyRecipes {
 		try {
 
 			for section in recipeSections {
-				if StrLen(singleSectionName) > 0 && section.section != singleSectionName
+				if (strictToNames.Length > 0 && !strictToNames.HasValue(section.section)) {
 					continue
+				}
 
 				try {
 
@@ -591,5 +588,3 @@ Class MyRecipes {
 		return asString ? titles.Get(userLanguage) : titles
 	}
 }
-
-MyRecipes.ReadAttachmentList()

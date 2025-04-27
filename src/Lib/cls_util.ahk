@@ -454,6 +454,19 @@ Class Util {
 		}
 	}
 
+	static INIGetSections(filePaths, postfix := "") {
+		output := []
+		for singleFile in filePaths {
+			content := FileRead(singleFile, "UTF-16")
+			for line in StrSplit(content, "`n") {
+				if RegExMatch(line, "^\[(.*)\]$", &match) {
+					output.Push(Trim(match[1]) postfix)
+				}
+			}
+		}
+		return output
+	}
+
 	static INIToMap(filePath) {
 		if !InStr(filePath, ".ini")
 			filePath .= ".ini"

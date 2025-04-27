@@ -5,6 +5,7 @@ Array.Prototype.DefineProp("Contains", { Call: _ArrayContains })
 Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
 Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
 Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
+Array.Prototype.DefineProp("MergeWith", { Call: _ArrayMergeWith })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
 Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
@@ -18,6 +19,14 @@ _ObjMaxIndex(this) {
 	}
 
 	return indexes
+}
+
+_ArrayMergeWith(this, arrays*) {
+	for arr in arrays {
+		for item in arr {
+			this.Push(item)
+		}
+	}
 }
 
 _ArrayToFlat(this) {

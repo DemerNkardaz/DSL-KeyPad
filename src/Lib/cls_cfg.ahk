@@ -326,12 +326,14 @@ Class Cfg {
 					return []
 
 				trimmedFiles := []
+				strictToNames := []
 				basePath := App.paths.profile "\"
 
 				for filePath in attachmentFiles {
 					trimmedPath := Util.TrimBasePath(filePath)
 					if (trimmedPath != filePath) {
 						trimmedFiles.Push(trimmedPath)
+						strictToNames.MergeWith(Util.INIGetSections([filePath], "__attachment_from__" Util.EscapePathChars(trimmedPath)))
 					}
 				}
 
@@ -343,7 +345,7 @@ Class Cfg {
 					MyRecipes.AddAttachment(trimmedFile)
 				}
 
-				MyRecipes.UpdateChrLib()
+				MyRecipes.UpdateChrLib(strictToNames)
 			}
 
 			setSelected(LV, rowNumber) {
