@@ -178,18 +178,17 @@ Class ChrLib {
 				variantName := RegExReplace(entryName, "\[.*?\]", variant)
 				entries.%variantName% := entry.Clone()
 
-				if entry.unicode is Array
-					entries.%variantName%.unicode := entry.unicode[i]
-				if entry.proxy is Array
-					entries.%variantName%.proxy := entry.proxy[i]
+				for item in ["unicode", "proxy", "alterations"] {
+					if entry.%item% is Array
+						entries.%variantName%.%item% := (
+							entry.%item%[i] is Object ? entry.%item%[i].Clone() : entry.%item%[i]
+						)
+				}
+
 				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
 
 				entries.%variantName%.symbol := entry.symbol.Clone()
 				entries.%variantName%.symbol := this.CloneOptions(entry.symbol, i)
-
-				if entry.alterations is Array {
-					entries.%variantName%.alterations := entry.alterations[i].Clone()
-				}
 
 				this.ProcessReferences(entries.%variantName%, entry, i)
 

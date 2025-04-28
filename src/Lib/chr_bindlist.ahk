@@ -415,6 +415,41 @@ bindingMaps := Map(
 				"<^>!", "dagger",
 				"<^>!>+", "dagger_double",
 			),
+			; Arrows
+			"Left", Map(
+				"<^>!", (K) => BindHandler.TimeSend(K, Map(
+					"Up", (*) => BindHandler.Send(K, "arrow_leftup"),
+					"Down", (*) => BindHandler.Send(K, "arrow_leftdown"),
+					"Right", (*) => BindHandler.Send(K, "arrow_leftright"),
+				), (*) => BindHandler.Send(K, "arrow_left")),
+				"<^>!<+", "arrow_left_ushaped",
+				"<^>!>+", "arrow_left_circle",
+			),
+			"Right", Map(
+				"<^>!", (K) => BindHandler.TimeSend(K, Map(
+					"Up", (*) => BindHandler.Send(K, "arrow_rightup"),
+					"Down", (*) => BindHandler.Send(K, "arrow_rightdown"),
+					"Left", (*) => BindHandler.Send(K, "arrow_leftright"),
+				), (*) => BindHandler.Send(K, "arrow_right")),
+				"<^>!<+", "arrow_right_ushaped",
+				"<^>!>+", "arrow_right_circle",
+			),
+			"Up", Map(
+				"<^>!", (K) => BindHandler.TimeSend(K, Map(
+					"Left", (*) => BindHandler.Send(K, "arrow_leftup"),
+					"Down", (*) => BindHandler.Send(K, "arrow_updown"),
+					"Right", (*) => BindHandler.Send(K, "arrow_rightup"),
+				), (*) => BindHandler.Send(K, "arrow_up")),
+				"<^>!<+", "arrow_up_ushaped",
+			),
+			"Down", Map(
+				"<^>!", (K) => BindHandler.TimeSend(K, Map(
+					"Left", (*) => BindHandler.Send(K, "arrow_leftdown"),
+					"Up", (*) => BindHandler.Send(K, "arrow_updown"),
+					"Right", (*) => BindHandler.Send(K, "arrow_rightdown"),
+				), (*) => BindHandler.Send(K, "arrow_down")),
+				"<^>!<+", "arrow_down_ushaped",
+			),
 			; Digit & Misc Layout
 			"1", Map(
 				"<!", "section",
