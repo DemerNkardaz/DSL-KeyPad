@@ -1,18 +1,14 @@
-UtilityFiles/DSLKeyPad_App_Icons/.vs/
-UtilityFiles/DSLKeyPad_App_Icons/x64/
-__dev/DSLKeyPad_App_Icons/.vs/
-__dev/DSLKeyPad_App_Icons/x64/
 src/bin/DSLKeyPad_App_Icons/.vs/
 src/bin/DSLKeyPad_App_Icons/x64/
 src/bin/DSLKeyPad_App_Icons/DSLKeyPad.*/x64
-testing/
 src/DSLKeyPad.exe
+drafts/DSLKeyPad.exe
+drafts/CSharp/DSLKeyPad/bin
+drafts/CSharp/DSLKeyPad/publish
+drafts/CSharp/DSLKeyPad/obj/Release
+
+testing/
 *.tmp
-DSLKeyPad_DevVersion.ahk
-__dev/DSLKeyPad.exe
-__dev/CSharp/DSLKeyPad/bin
-__dev/CSharp/DSLKeyPad/publish
-__dev/CSharp/DSLKeyPad/obj/Release
 
 */~$*.docx
 */*Draft*.pdf
