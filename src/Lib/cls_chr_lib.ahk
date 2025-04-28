@@ -319,9 +319,8 @@ Class ChrLib {
 			FileDelete(printPath)
 
 		for entryName, entry in this.entries.OwnProps() {
-			characterContent := entry.result.Length = 1 ? (
-				InStr(entry.result[1], "<") ? Util.StrToHTML(entry.result[1]) : entry.result[1]
-			) : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+			characterContent := (entry.symbol.category = "Diacritic Mark" ? DottedCircle : "") (entry.result.Length = 1 ? (
+				Util.StrToHTML(entry.result[1])) : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode))
 
 			tableRows .= (
 				'				<tr>`n'
@@ -360,7 +359,8 @@ Class ChrLib {
 			'			}`n'
 			'			table {`n'
 			'				width: 100%;`n'
-			'				border-collapse: collapse;`n'
+			'				border-collapse: separate;`n'
+			'				border-spacing: 5px;`n'
 			'			}`n'
 			'			th, td {`n'
 			'				width: 50%;`n'
@@ -370,6 +370,7 @@ Class ChrLib {
 			'				overflow-wrap: break-word;`n'
 			'				white-space: pre-wrap;`n'
 			'				hyphens: auto;`n'
+			'				border-radius: 8px;`n'
 			'			}`n'
 			'			tr > td:nth-child(1):not(.small-text) {`n'
 			'				font-size: 1.5em;`n'
