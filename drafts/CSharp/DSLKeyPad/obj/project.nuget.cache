@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8cd/s4WJBOI=",
+  "dgSpecHash": "EAEQw1zsmyQ=",
   "success": true,
-  "projectFilePath": "E:\\Work\\GitRepos\\DSL-KeyPad\\__dev\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj",
+  "projectFilePath": "E:\\Work\\GitRepos\\DSL-KeyPad\\drafts\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Demer Nkardaz\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.4\\microsoft.net.illink.tasks.9.0.4.nupkg.sha512"
   ],

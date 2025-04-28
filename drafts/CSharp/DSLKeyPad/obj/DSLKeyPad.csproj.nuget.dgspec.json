@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Work\\GitRepos\\DSL-KeyPad\\__dev\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj": {}
+    "E:\\Work\\GitRepos\\DSL-KeyPad\\drafts\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj": {}
   },
   "projects": {
-    "E:\\Work\\GitRepos\\DSL-KeyPad\\__dev\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj": {
+    "E:\\Work\\GitRepos\\DSL-KeyPad\\drafts\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Work\\GitRepos\\DSL-KeyPad\\__dev\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj",
+        "projectUniqueName": "E:\\Work\\GitRepos\\DSL-KeyPad\\drafts\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj",
         "projectName": "DSLKeyPad",
-        "projectPath": "E:\\Work\\GitRepos\\DSL-KeyPad\\__dev\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj",
+        "projectPath": "E:\\Work\\GitRepos\\DSL-KeyPad\\drafts\\CSharp\\DSLKeyPad\\DSLKeyPad.csproj",
         "packagesPath": "C:\\Users\\Demer Nkardaz\\.nuget\\packages\\",
-        "outputPath": "E:\\Work\\GitRepos\\DSL-KeyPad\\__dev\\CSharp\\DSLKeyPad\\obj\\",
+        "outputPath": "E:\\Work\\GitRepos\\DSL-KeyPad\\drafts\\CSharp\\DSLKeyPad\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

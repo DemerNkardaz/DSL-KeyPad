@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DSLKeyPad")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa82a3f60ea13c162c1a96def5a04b1a84faaecc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6510201fdfb459caa0d1d1b8b0609fb02226c14")]
 [assembly: System.Reflection.AssemblyProductAttribute("DSLKeyPad")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DSLKeyPad")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
