@@ -324,11 +324,23 @@ Class ChrLib {
 			characterContent := (entry.symbol.category = "Diacritic Mark" ? DottedCircle : "") (entry.result.Length = 1 ? (
 				Util.StrToHTML(entry.result[1])) : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode))
 
+			characterAlts := ""
+
+			maxJ := ObjOwnPropCount(entry.alterations)
+			if maxJ > 0 {
+				j := 0
+				for key, value in entry.alterations.OwnProps() {
+					j++
+					if !InStr(key, "HTML") {
+						characterAlts .= (j = 1 ? "`n" : "") '<span class="small-text">' key ':</span> ' DottedCircle Util.UnicodeToChar(value) (j < maxJ ? "`n" : "")
+					}
+				}
+			}
 
 			tableRows .= (
 				'				<tr>`n'
 				'					<td class="index">' i '</td>`n'
-				'					<td' (StrLen(characterContent) > 15 * (InStr(characterContent, "&") ? 4 : 1) ? ' class="small-text"' : entry.symbol.category = "Spaces" ? ' class="spaces"' : '') '>' characterContent '</td>`n'
+				'					<td' (StrLen(characterContent) > 15 * (InStr(characterContent, "&") ? 8 : 1) ? ' class="small-text"' : entry.symbol.category = "Spaces" ? ' class="spaces"' : '') '>' characterContent characterAlts '</td>`n'
 				'					<td>' entryName '</td>`n'
 				'				</tr>`n'
 			)
