@@ -5,7 +5,7 @@ src/DSLKeyPad.exe
 drafts/DSLKeyPad.exe
 drafts/CSharp/DSLKeyPad/bin
 drafts/CSharp/DSLKeyPad/publish
-drafts/CSharp/DSLKeyPad/obj/Release
+drafts/CSharp/DSLKeyPad/obj
 
 testing/
 *.tmp
