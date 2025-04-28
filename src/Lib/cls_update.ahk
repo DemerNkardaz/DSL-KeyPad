@@ -48,7 +48,10 @@ Class Update {
 			Download(zipSource, downloadPath)
 			powershellSupporter := A_ScriptDir "\Lib\powershell\update_supporter.ps1"
 
-			exitCode := RunWait('powershell -ExecutionPolicy Bypass -NoProfile -File "' powershellSupporter '" "' downloadPath '" "' App.paths.dir '"', , "Show")
+			exitCode := RunWait(Format(
+				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" -ZipPath "{}" -Destination "{}" -Version "{}"',
+				powershellSupporter, downloadPath, App.paths.dir, version
+			), , "Show")
 
 			if exitCode != 0 {
 				MsgBox(Util.StrVarsInject(Locale.Read("update_failed_pshell"), exitCode))
