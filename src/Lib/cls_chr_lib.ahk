@@ -318,13 +318,17 @@ Class ChrLib {
 		if FileExist(printPath)
 			FileDelete(printPath)
 
+		i := 0
 		for entryName, entry in this.entries.OwnProps() {
+			i++
 			characterContent := (entry.symbol.category = "Diacritic Mark" ? DottedCircle : "") (entry.result.Length = 1 ? (
 				Util.StrToHTML(entry.result[1])) : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode))
 
+
 			tableRows .= (
 				'				<tr>`n'
-				'					<td' (StrLen(characterContent) > 15 ? ' class="small-text"' : '') '>' characterContent '</td>`n'
+				'					<td class="index">' i '</td>`n'
+				'					<td' (StrLen(characterContent) > 15 * (InStr(characterContent, "&") ? 4 : 1) ? ' class="small-text"' : entry.symbol.category = "Spaces" ? ' class="spaces"' : '') '>' characterContent '</td>`n'
 				'					<td>' entryName '</td>`n'
 				'				</tr>`n'
 			)
@@ -363,7 +367,6 @@ Class ChrLib {
 			'				border-spacing: 5px;`n'
 			'			}`n'
 			'			th, td {`n'
-			'				width: 50%;`n'
 			'				border: 1px solid #e0e0e0;`n'
 			'				padding: 5px 20px;`n'
 			'				word-wrap: break-word;`n'
@@ -372,11 +375,26 @@ Class ChrLib {
 			'				hyphens: auto;`n'
 			'				border-radius: 8px;`n'
 			'			}`n'
-			'			tr > td:nth-child(1):not(.small-text) {`n'
+			'			td.index {`n'
+			'				text-align: center;`n'
+			'			}`n'
+			'			tr > td:nth-child(3) {`n'
+			'				width: 40%;`n'
+			'			}`n'
+			'			tr > td:nth-child(2):not(.small-text) {`n'
 			'				font-size: 1.5em;`n'
 			'			}`n'
 			'			.small-text {`n'
 			'				font-size: 0.8em;`n'
+			'			}`n'
+			'			.spaces {`n'
+			'				text-decoration: underline;`n'
+			'				&::after, &::before {`n'
+			'					content: ".";`n'
+			'					display: inline-block;`n'
+			'					text-decoration: none;`n'
+			'					margin: 0 0.2em;`n'
+			'				}`n'
 			'			}`n'
 			'		</style>`n'
 			'	</head>`n'
@@ -384,6 +402,7 @@ Class ChrLib {
 			'		<div>`n'
 			'			<table>`n'
 			'				<tr>`n'
+			'					<th>' (lang = "en" ? "#" : "№") '</th>`n'
 			'					<th>' (lang = "en" ? "Symbol" : "Символ") '</th>`n'
 			'					<th>' (lang = "en" ? "Entry" : "Запись") '</th>`n'
 			'				</tr>`n'
