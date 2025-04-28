@@ -1,4 +1,3 @@
-// !GENERATED WITH AI, just...
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -13,11 +12,21 @@ class Program
 
 		if (File.Exists(filePath))
 		{
-			Process.Start(new ProcessStartInfo(autoHotkeyPath, "/restart /script \"" + filePath + "\"") { UseShellExecute = true });
+			if (File.Exists(autoHotkeyPath))
+			{
+				Process.Start(new ProcessStartInfo(autoHotkeyPath, "/restart /script \"" + filePath + "\"") { UseShellExecute = true });
+			}
+			else
+			{
+				Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
+			}
 		}
 		else
 		{
-			Console.WriteLine("File Not Found: " + filePath);
+			Console.WriteLine("Main file “" + filePath + "” not found, check you installation");
+			Console.WriteLine("Git Repository: https://github.com/DemerNkardaz/DSL-KeyPad");
+			Console.WriteLine("\nPress any key to continue...");
+			Console.ReadLine();
 		}
 	}
 }
