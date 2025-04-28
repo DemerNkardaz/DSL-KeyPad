@@ -311,20 +311,89 @@ Class ChrLib {
 	}
 
 	static Print() {
-		printPath := App.paths.user "\printed_pairs.txt"
-		output := ""
+		lang := Language.Get()
+		printPath := App.paths.user "\printed_pairs.html"
+		tableRows := ""
 
 		if FileExist(printPath)
 			FileDelete(printPath)
 
 		for entryName, entry in this.entries.OwnProps() {
-			output .= (entry.result.Length = 1
-				? (StrLen(entry.result[1]) > 10 ? "[ " SubStr(entry.result[1], 1, 10) " … ]" : entry.result[1])
-				: Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
-			) "`t`t" entryName "`n"
+			characterContent := entry.result.Length = 1 ? (
+				InStr(entry.result[1], "<") ? Util.StrToHTML(entry.result[1]) : entry.result[1]
+			) : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+
+			tableRows .= (
+				'				<tr>`n'
+				'					<td' (StrLen(characterContent) > 15 ? ' class="small-text"' : '') '>' characterContent '</td>`n'
+				'					<td>' entryName '</td>`n'
+				'				</tr>`n'
+			)
 		}
 
-		FileAppend(output, printPath, "UTF-8")
+		html := (
+			'<!DOCTYPE html>`n'
+			'<html lang="en">`n'
+			'	<head>`n'
+			'		<meta charset="UTF-8">`n'
+			'		<title>Printed Pairs</title>`n'
+			'		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="use-credentials">`n'
+			'		<link rel="preconnect" href="https://fonts.gstatic.com">`n'
+			'		<link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Sans+Carian&family=Noto+Sans+Glagolitic&family=Noto+Sans+Lycian&family=Noto+Sans+Mandaic&family=Noto+Sans+Nabataean&family=Noto+Sans+Old+North+Arabian&family=Noto+Sans+Old+South+Arabian&family=Noto+Sans+Old+Turkic&family=Noto+Sans+Runic&family=Noto+Sans+Symbols:wght@100..900&family=Noto+Sans+Tifinagh&family=Noto+Sans+Ugaritic&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`n'
+			'		<style>`n'
+			'			body {`n'
+			'				font-family: "Noto Sans", "Noto Color Emoji", "Noto Sans Carian", "Noto Sans Glagolitic", "Noto Sans Old Turkic", "Noto Sans Lycian", "Noto Sans Mandaic", "Noto Sans Nabataean", "Noto Sans Old North Arabian", "Noto Sans Old South Arabian", "Noto Sans Runic", "Noto Sans Symbols", "Noto Sans Tifinagh", "Noto Sans Ugaritic", sans-serif;`n'
+			'				margin: 0;`n'
+			'				padding: 0;`n'
+			'				font-size: 12pt;`n'
+			'				width: 100%;`n'
+			'				display: flex;`n'
+			'				justify-content: center;`n'
+			'				align-items: center;`n'
+			'			}`n'
+			'			div {`n'
+			'				width: 1024px;`n'
+			'				display: flex;`n'
+			'				justify-content: center;`n'
+			'				align-items: center;`n'
+			'				margin: 20px auto;`n'
+			'			}`n'
+			'			table {`n'
+			'				width: 100%;`n'
+			'				border-collapse: collapse;`n'
+			'			}`n'
+			'			th, td {`n'
+			'				width: 50%;`n'
+			'				border: 1px solid #e0e0e0;`n'
+			'				padding: 5px 20px;`n'
+			'				word-wrap: break-word;`n'
+			'				overflow-wrap: break-word;`n'
+			'				white-space: pre-wrap;`n'
+			'				hyphens: auto;`n'
+			'			}`n'
+			'			tr > td:nth-child(1):not(.small-text) {`n'
+			'				font-size: 1.5em;`n'
+			'			}`n'
+			'			.small-text {`n'
+			'				font-size: 0.8em;`n'
+			'			}`n'
+			'		</style>`n'
+			'	</head>`n'
+			'	<body>`n'
+			'		<div>`n'
+			'			<table>`n'
+			'				<tr>`n'
+			'					<th>' (lang = "en" ? "Symbol" : "Символ") '</th>`n'
+			'					<th>' (lang = "en" ? "Entry" : "Запись") '</th>`n'
+			'				</tr>`n'
+			tableRows
+			'			</table>`n'
+			'		</div>`n'
+			'	</body>`n'
+			'</html>'
+		)
+		FileAppend(html, printPath, "UTF-8")
+		Run(printPath)
 	}
 
 	static Get(entryName, extraRules := False, getMode := "Unicode", alt := AlterationActiveName) {
