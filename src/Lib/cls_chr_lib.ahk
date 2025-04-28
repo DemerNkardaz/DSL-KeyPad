@@ -469,7 +469,7 @@ Class ChrLib {
 			return resultObj
 		}
 
-		if RegExMatch(searchQuery, "^Func\s\*\s(.*?)$", &match) {
+		if RegExMatch(searchQuery, "^\/(.*?)$", &match) {
 			funcRef := StrSplit(match[1], ".")
 			if funcRef.Length = 1 {
 				%funcRef[1]%()
