@@ -4,7 +4,7 @@ Class Update {
 	static availableVersion := ""
 
 	static __New() {
-		this.CheckUpdate()
+		this.Check()
 	}
 
 	static Repair() {
@@ -22,11 +22,11 @@ Class Update {
 				}
 				this.CompareVersions(force)
 			}
-			this.DownloadLatestZip()
+			this.Download()
 		}
 	}
 
-	static CreateBundle() {
+	static Bundler() {
 		try {
 			powershellPackBundler := A_ScriptDir "\Lib\powershell\pack_bundle.ps1"
 
@@ -40,7 +40,7 @@ Class Update {
 		}
 	}
 
-	static DownloadLatestZip(version := this.availableVersion) {
+	static Download(version := this.availableVersion) {
 		try {
 			zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" version "/DSL-KeyPad-" version ".zip"
 			downloadPath := App.paths.temp "\DSL-KeyPad.zip"
@@ -64,7 +64,7 @@ Class Update {
 		}
 	}
 
-	static CheckUpdate() {
+	static Check() {
 		this.versions := this.ChekVersions()
 		this.CompareVersions()
 	}

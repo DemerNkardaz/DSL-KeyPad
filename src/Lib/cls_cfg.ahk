@@ -77,7 +77,7 @@ Class Cfg {
 	}
 
 	static Editor() {
-		Update.CheckUpdate()
+		Update.Check()
 
 		if Update.available {
 			ManageTrayItems()
