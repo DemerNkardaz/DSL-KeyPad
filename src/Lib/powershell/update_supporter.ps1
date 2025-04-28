@@ -9,10 +9,9 @@ if (!(Test-Path $ZipPath)) {
 }
 
 $TempExtractPath = Join-Path $env:TEMP ("DSLKeyPad_Extract_" + [System.Guid]::NewGuid().ToString())
+
 New-Item -ItemType Directory -Path $TempExtractPath | Out-Null
-
 Expand-Archive -LiteralPath $ZipPath -DestinationPath $TempExtractPath -Force
-
 Write-Host "Archive content:"
 Get-ChildItem $TempExtractPath -Recurse | ForEach-Object { Write-Host $_.FullName }
 
@@ -23,16 +22,26 @@ if (-not $KeypadFolder) {
 	exit 2
 }
 
-Copy-Item -Path "$($KeypadFolder.FullName)\*" -Destination $Destination -Recurse -Force
+$UserDirectory = Join-Path $KeypadFolder.FullName "User"
+if (Test-Path $UserDirectory) {
+	Write-Host "Ignoring User directory: $UserDirectory"
+	Get-ChildItem -Path $KeypadFolder.FullName -Exclude "User" | Copy-Item -Destination $Destination -Recurse -Force
+}
+else {
+	Copy-Item -Path "$($KeypadFolder.FullName)\*" -Destination $Destination -Recurse -Force
+}
+
 Remove-Item $TempExtractPath -Recurse -Force
 
 try {
 	Remove-Item $ZipPath -Force
 	Write-Host "Deleted archive: $ZipPath"
 }
+
 catch {
 	Write-Warning "Failed to delete archive: $ZipPath"
 }
 
 Write-Host "Files successfully copied to $Destination"
+Start-Sleep -Seconds 2
 exit 0

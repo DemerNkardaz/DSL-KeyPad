@@ -4,7 +4,7 @@
 )
 
 if (-not (Test-Path $FolderPath -PathType Container)) {
-	Write-Error "Папка не найдена: $FolderPath"
+	Write-Error "Folder not found: $FolderPath"
 	exit 1
 }
 
@@ -52,11 +52,12 @@ try {
 	$zipArchive.Dispose()
 	$zipFileStream.Dispose()
 
-	Write-Host "Успешно создан архив без папки User: $ZipPath"
+	Write-Host "Bundle succesfully created: $ZipPath"
+	Start-Sleep -Seconds 2
 	exit 0
 }
 catch {
-	Write-Error "Ошибка при создании архива: $_"
-	Read-Host -Prompt "Нажмите Enter для выхода"
+	Write-Error "Error during bundle creation: $_"
+	Read-Host -Prompt "Press Enter to exit"
 	exit 2
 }
