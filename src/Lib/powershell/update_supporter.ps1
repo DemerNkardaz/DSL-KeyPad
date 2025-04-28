@@ -78,7 +78,7 @@ Remove-Item $TempExtractPath -Recurse -Force
 
 try {
 	Remove-Item $ZipPath -Force
-	Write-Host "Deleted archive: $ZipPath" -ForegroundColor Grey
+	Write-Host "Deleted archive: $ZipPath" -ForegroundColor Gray
 }
 catch {
 	Write-Warning "Failed to delete archive: $ZipPath"
