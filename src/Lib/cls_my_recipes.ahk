@@ -123,6 +123,7 @@ Class MyRecipes {
 				recipe: "",
 				result: "",
 				row: 0,
+				filePath: "",
 			}
 
 			screenWidth := A_ScreenWidth
@@ -168,6 +169,7 @@ Class MyRecipes {
 				data.recipe := MyRecipes.Get(sectionName[4]).recipe
 				data.result := MyRecipes.Get(sectionName[4]).result
 				data.row := sectionName[5]
+				data.filePath := sectionName[6]
 			}
 
 			saveBtn := recipeCreator.AddButton("vSaveButton x" commonX() " y" (boxCommonH) - 32 " w100 h32", Locale.Read("gui_save"))
@@ -403,13 +405,13 @@ Class MyRecipes {
 
 			for attachment in this.ReadAttachmentList() {
 				try {
-					pushRecipes(App.paths.profile "\" attachment, "__attachment_from__" Util.EscapePathChars(attachment))
+					pushRecipes(App.paths.profile "\" attachment)
 				}
 			}
 
 			Loop Files this.autoimport.ini "\*.ini" {
 				try {
-					pushRecipes(A_LoopFileDir "\" A_LoopFileName, "__attachment_from__Autoimport_ini____" A_LoopFileName)
+					pushRecipes(A_LoopFileDir "\" A_LoopFileName)
 				}
 			}
 

@@ -271,7 +271,7 @@ Class Cfg {
 			optionsCommonH := 370
 			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
 
-			listViewCols := [Locale.Read("col_name"), Locale.Read("col_recipe"), Locale.Read("col_result"), Locale.Read("col_entry_title"), ""]
+			listViewCols := [Locale.Read("col_name"), Locale.Read("col_recipe"), Locale.Read("col_result"), Locale.Read("col_entry_title"), Locale.Read("col_entry_file")]
 
 			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " -Multi"
 			recipesLV := recipesPanel.AddListView(recipesLVStyles, listViewCols)
@@ -337,7 +337,7 @@ Class Cfg {
 					trimmedPath := Util.TrimBasePath(filePath)
 					if (trimmedPath != filePath) {
 						trimmedFiles.Push(trimmedPath)
-						strictToNames.MergeWith(Util.INIGetSections([filePath], "__attachment_from__" Util.EscapePathChars(trimmedPath)))
+						strictToNames.MergeWith(Util.INIGetSections([filePath]))
 					}
 				}
 
@@ -365,7 +365,7 @@ Class Cfg {
 			}
 
 			createEditRecipe(recipeArray?) {
-				if IsSet(recipeArray) && recipeArray.Length > 0 && (InStr(recipeArray[4], "xcompose") || InStr(recipeArray[4], "__attachment_from__")) {
+				if IsSet(recipeArray) && recipeArray.Length > 0 && (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.file)) {
 					attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
 					MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.winTitle)
 					return
@@ -376,7 +376,7 @@ Class Cfg {
 
 			removeSelected(recipeArray) {
 				if recipeArray.Length > 0 {
-					if (InStr(recipeArray[4], "xcompose") || InStr(recipeArray[4], "__attachment_from__")) {
+					if (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.file)) {
 						attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
 						MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.winTitle)
 						return

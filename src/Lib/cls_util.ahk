@@ -197,6 +197,10 @@ Class Util {
 		return true
 	}
 
+	static StrTrimPath(str) {
+		return RegExReplace(str, ".*[\\/]", "")
+	}
+
 	static WidthBasedStrLen(str) {
 		len := StrLen(str)
 		lenSplit := StrSplit(str, "")
