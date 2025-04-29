@@ -20,6 +20,7 @@ Class Cfg {
 			"User_Language", "",
 			"Validate_With_CaretPos", "True",
 			"F13F24", "False",
+			"FirstMessage", "True",
 		],
 		"Compose", [],
 		"ScriptProcessor", [
@@ -409,6 +410,11 @@ Class Cfg {
 					}
 				}
 			}
+		}
+
+		if this.Get("FirstMessage", , True, "bool") {
+			MsgBox(Locale.Read("first_launch_message"), App.title)
+			this.Set("False", "FirstMessage")
 		}
 	}
 
