@@ -41,7 +41,7 @@ else {
 	Write-Host "Updating your DSL KeyPad installation..." -ForegroundColor Cyan
 	Write-Host ""
 
-	$progressWidth = 100
+	$progressWidth = 50
 
 	for ($i = 0; $i -lt $total; $i++) {
 		$file = $FilesToCopy[$i]

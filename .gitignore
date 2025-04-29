@@ -1,7 +1,11 @@
 src/bin/DSLKeyPad_App_Icons/.vs/
 src/bin/DSLKeyPad_App_Icons/x64/
 src/bin/DSLKeyPad_App_Icons/DSLKeyPad.*/x64
-src/DSLKeyPad.exe
+src/bin/*.exe
+src/bin/*.dll
+src/*.exe
+src/*.dll
+src/User/
 drafts/DSLKeyPad.exe
 drafts/CSharp/DSLKeyPad/bin
 drafts/CSharp/DSLKeyPad/publish
