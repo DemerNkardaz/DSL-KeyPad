@@ -27,8 +27,8 @@ Class Update {
 	}
 
 	static Bundler() {
+		Dev.SetSrc()
 		try {
-
 			exitCode := RunWait(Format(
 				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" "{}" "{}"',
 				App.paths.lib "\powershell\pack_bundle.ps1", A_ScriptDir, App.fullVersion
@@ -37,6 +37,7 @@ Class Update {
 			if exitCode != 0 {
 				MsgBox(Util.StrVarsInject(Locale.Read("bundle_creation_failed_pshell"), exitCode))
 			}
+
 		} catch {
 			MsgBox(Locale.Read("bundle_creation_failed"))
 		}
