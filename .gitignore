@@ -6,6 +6,7 @@ src/bin/*.dll
 src/*.exe
 src/*.dll
 src/User/
+src_backup
 drafts/DSLKeyPad.exe
 drafts/CSharp/DSLKeyPad/bin
 drafts/CSharp/DSLKeyPad/publish

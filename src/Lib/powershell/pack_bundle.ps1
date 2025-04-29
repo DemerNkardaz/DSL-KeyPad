@@ -64,7 +64,6 @@ try {
 			$entryStream.Dispose()
 		}
 		
-		# Отображаем прогресс-бар
 		$processedFiles++
 		$percent = [math]::Round(($processedFiles / $totalFiles) * 100)
 		$filledLength = [math]::Round($processedFiles / $totalFiles * $progressWidth)
@@ -78,7 +77,6 @@ try {
 	$zipArchive.Dispose()
 	$zipFileStream.Dispose()
 
-	# Выводим информацию о результатах сжатия
 	$finalSize = (Get-Item $ZipPath).Length
 	$compressionRatio = 100 - [Math]::Round(($finalSize / $originalSize) * 100, 2)
 	

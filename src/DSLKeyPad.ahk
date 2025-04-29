@@ -5773,6 +5773,7 @@ ManageTrayItems()
 ShowInfoMessage("tray_app_started")
 
 #Include <stc_bindings>
+#Include <cls_dev>
 
 ; KeyboardBinder.Registration(defaultBinds.mapping)
 

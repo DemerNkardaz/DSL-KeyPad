@@ -28,9 +28,11 @@ Class Update {
 
 	static Bundler() {
 		try {
-			powershellPackBundler := A_ScriptDir "\Lib\powershell\pack_bundle.ps1"
 
-			exitCode := RunWait('powershell -ExecutionPolicy Bypass -NoProfile -File "' powershellPackBundler '" "' A_ScriptDir '" "' App.fullVersion '"', , "Show")
+			exitCode := RunWait(Format(
+				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" "{}" "{}"',
+				App.paths.lib "\powershell\pack_bundle.ps1", A_ScriptDir, App.fullVersion
+			), , "Show")
 
 			if exitCode != 0 {
 				MsgBox(Util.StrVarsInject(Locale.Read("bundle_creation_failed_pshell"), exitCode))
@@ -46,11 +48,10 @@ Class Update {
 			downloadPath := App.paths.temp "\DSL-KeyPad.zip"
 
 			Download(zipSource, downloadPath)
-			powershellSupporter := A_ScriptDir "\Lib\powershell\update_supporter.ps1"
 
 			exitCode := RunWait(Format(
 				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" -ZipPath "{}" -Destination "{}" -Version "{}"',
-				powershellSupporter, downloadPath, App.paths.dir, version
+				App.paths.lib "\powershell\update_supporter.ps1", downloadPath, App.paths.dir, version
 			), , "Show")
 
 			if exitCode != 0 {

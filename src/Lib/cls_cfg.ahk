@@ -57,6 +57,9 @@ Class Cfg {
 		"ServiceFields", [
 			"Prev_Layout", "",
 		],
+		"Dev", [
+			"Git_Path", "",
+		],
 	]
 
 	static ini := App.paths.profile "\Config.ini"
