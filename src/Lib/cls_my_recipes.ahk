@@ -315,7 +315,7 @@ Class MyRecipes {
 		return True
 	}
 
-	static Read() {
+	static Read(updateOnCatch := False, readOnlyInitialized := False) {
 		output := []
 
 		try {
@@ -343,6 +343,10 @@ Class MyRecipes {
 						options.noWhitespace := Integer(IniRead(filePath, section, "no_whitespace", "0"))
 						continue
 					}
+
+					if (readOnlyInitialized && !ChrLib.entries.HasOwnProp(section))
+						continue
+
 					try {
 						name := IniRead(filePath, section, "name")
 						recipe := IniRead(filePath, section, "recipe")
@@ -386,7 +390,11 @@ Class MyRecipes {
 								) recipe
 							}
 						} catch {
-							throw "Error with recipe: " recipe " of section: " section
+							MsgBox(Format(Locale.Read("gui_recipes_read_error" (updateOnCatch ? "_reinit" : "")), section, recipe))
+							if updateOnCatch {
+								this.Update()
+								return this.Read()
+							}
 						}
 						output.Push({
 							section: section postfix,

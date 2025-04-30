@@ -314,7 +314,7 @@ Class Cfg {
 			recipesLV.OnEvent("ItemFocus", (LV, RowNumber) => setSelected(LV, RowNumber))
 			recipesLV.OnEvent("DoubleClick", (*) => createEditRecipe(currentRecipe))
 
-			recipesArray := MyRecipes.Read()
+			recipesArray := MyRecipes.Read(True, True)
 
 			for recipeEntry in recipesArray {
 				recipeFilePath := recipeEntry.HasOwnProp("filePath") ? recipeEntry.filePath : ""
