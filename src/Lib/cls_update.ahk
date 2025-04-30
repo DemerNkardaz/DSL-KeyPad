@@ -31,7 +31,7 @@ Class Update {
 		try {
 			exitCode := RunWait(Format(
 				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" "{}" "{}"',
-				App.paths.lib "\powershell\pack_bundle.ps1", A_ScriptDir, App.fullVersion
+				App.paths.lib "\powershell\pack_bundle.ps1", A_ScriptDir, App.fullVersion App.versionPostFix
 			), , "Show")
 
 			if exitCode != 0 {

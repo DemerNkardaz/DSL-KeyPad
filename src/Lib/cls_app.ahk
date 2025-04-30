@@ -5,6 +5,7 @@ Class App {
 	static decodedTitle := "Diacritics-Spaces-Letters KeyPad"
 	static version := [0, 1, 1, 0]
 	static versionText := this.formatVersion(this.version.Clone())
+	static versionPostFix := "-alpha-testing"
 	static fullVersion := this.version.Clone().ToString(".")
 	static winTitle := this.title " " this.status " — " this.versionText
 	static tray := A_TrayMenu
