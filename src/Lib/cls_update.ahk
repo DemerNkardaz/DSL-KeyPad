@@ -16,7 +16,7 @@ Class Update {
 			return
 		} else {
 			if force {
-				acceptBox := MsgBox(Locale.Read("update_repair"), App.title " — " Locale.Read("update_repair_title"), "YesNo")
+				acceptBox := MsgBox(Locale.Read("update_repair"), App.Title() " — " Locale.Read("update_repair_title"), "YesNo")
 				if acceptBox = "No" || acceptBox = "Cancel" {
 					return
 				}

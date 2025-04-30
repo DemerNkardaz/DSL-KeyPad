@@ -24,7 +24,7 @@ Class Fonts {
 		}
 
 		if !found {
-			MsgBox(Locale.Read("prepare_fonts") namesToInstall, App.title)
+			MsgBox(Locale.Read("prepare_fonts") namesToInstall, App.Title())
 
 			for _, fontSource in srcsToInstall {
 				this.Download(fontSource)

@@ -358,7 +358,7 @@ Class Panel {
 		]),
 	], flat: [] }
 
-	static panelTitle := App.winTitle " — " Locale.Read("gui_panel")
+	static panelTitle := App.Title("+status+version") " — " Locale.Read("gui_panel")
 
 	static PanelGUI := Gui()
 
@@ -380,7 +380,7 @@ Class Panel {
 	static Panel() {
 
 		Constructor() {
-			this.panelTitle := App.winTitle " — " Locale.Read("gui_panel")
+			this.panelTitle := App.Title("+status+version") " — " Locale.Read("gui_panel")
 			UISets := this.GetUISets()
 
 			languageCode := Language.Get()
@@ -735,7 +735,7 @@ Class Panel {
 			panelWindow.AddGroupBox(UISets.aboutInfoBox.panelWindow)
 			panelWindow.AddPicture(UISets.aboutInfoBox.panelWindowIco, App.icoDLL)
 
-			aboutTitle := panelWindow.AddText(UISets.aboutInfoBox.aboutTitle, App.title)
+			aboutTitle := panelWindow.AddText(UISets.aboutInfoBox.aboutTitle, App.Title())
 			aboutTitle.SetFont("s20 c333333", "Cambria")
 
 			aboutVersion := panelWindow.AddText(UISets.aboutInfoBox.aboutVersion, App.Ver())
@@ -760,7 +760,7 @@ Class Panel {
 
 			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customEntriesCount), recipesCount, customRecipesCount)
 
-			aboutDescBox := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutDescBox, App.decodedTitle)
+			aboutDescBox := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutDescBox, App.Title(["decoded"]))
 			aboutDescBox.SetFont("s11", "Cambria")
 
 			aboutDescription := panelWindow.AddText(UISets.aboutInfoBox.aboutDescription, Locale.Read("about_description"))

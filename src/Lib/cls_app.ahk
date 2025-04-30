@@ -1,10 +1,4 @@
 Class App {
-
-	static title := "DSL KeyPad"
-	static status := "(αλφα)"
-	static decodedTitle := "Diacritics-Spaces-Letters KeyPad"
-	static version := ["major", 0, "minor", 1, "patch", 1, "hotfix", 0, "postfix", "-alpha-testing"]
-	static winTitle := this.title " " this.status " — " this.Ver()
 	static tray := A_TrayMenu
 
 	static profileFile := A_ScriptDir "\User\Profile.ini"
@@ -42,8 +36,40 @@ Class App {
 			IniWrite("default", this.profileFile, "data", "profile")
 	}
 
+	static Title(options := ["title"]) {
+		static titleItems := [
+			"decoded", "Diacritics-Spaces-Letters KeyPad",
+			"title", "DSL KeyPad",
+			"status", "(αλφα)",
+			"version", "— " this.Ver(),
+		]
+
+		output := ""
+
+		if options is String {
+			fields := StrSplit(options, "+")
+			options := ["title"]
+
+			for each in fields {
+				options.Push(each)
+			}
+		}
+
+		for i, _ in titleItems {
+			if Mod(i, 2) = 1 {
+				len := options.Length + 1
+				if options.HasValue(titleItems[i]) {
+					output .= titleItems[i + 1] ((i <= len) ? " " : "")
+				}
+			}
+		}
+
+		return output
+	}
 
 	static Ver(includedFields := ["major", "minor", "patch"], output := "") {
+		static version := ["major", 0, "minor", 1, "patch", 1, "hotfix", 0, "postfix", "-alpha-testing"]
+
 		if includedFields is String {
 			fields := StrSplit(includedFields, "+")
 			includedFields := ["major", "minor", "patch"]
@@ -55,18 +81,18 @@ Class App {
 
 		if output is String {
 			len := includedFields.Length - (includedFields.HasValue("postfix") ? 1 : 0)
-			for i, _ in this.version {
+			for i, _ in version {
 				if Mod(i, 2) = 1 {
-					if includedFields.HasValue(this.version[i]) {
-						output .= this.version[i + 1] ((i <= len) ? "." : "")
+					if includedFields.HasValue(version[i]) {
+						output .= version[i + 1] ((i <= len) ? "." : "")
 					}
 				}
 			}
 		} else if output is Array {
-			for i, _ in this.version {
+			for i, _ in version {
 				if Mod(i, 2) = 1 {
-					if includedFields.HasValue(this.version[i]) {
-						output.Push(this.version[i + 1])
+					if includedFields.HasValue(version[i]) {
+						output.Push(version[i + 1])
 					}
 				}
 			}
@@ -90,4 +116,4 @@ Class App {
 
 }
 
-A_IconTip := App.winTitle
+A_IconTip := App.Title("+status+version")

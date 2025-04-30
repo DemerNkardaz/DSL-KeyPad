@@ -458,7 +458,7 @@ Class ChrLib {
 				try {
 					return entry.result.Length = 1 ? entry.result[1] : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
 				} catch {
-					MsgBox(Locale.Read("error_critical") "`n`n" Util.StrVarsInject(Locale.Read("error_entry_not_found"), entryName), App.title, "Iconx")
+					MsgBox(Locale.Read("error_critical") "`n`n" Util.StrVarsInject(Locale.Read("error_entry_not_found"), entryName), App.Title(), "Iconx")
 					return
 				}
 			}
@@ -617,7 +617,7 @@ Class ChrLib {
 				Cfg.Set(searchQuery, "Search", "LatestPrompts")
 			} else {
 				if resultObj.failed.Length > 0
-					MsgBox(Util.StrVarsInject(Locale.Read("warning_tag_absent"), resultObj.failed.ToString()), App.title, "Icon!")
+					MsgBox(Util.StrVarsInject(Locale.Read("warning_tag_absent"), resultObj.failed.ToString()), App.Title(), "Icon!")
 			}
 
 			return resultObj

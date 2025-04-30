@@ -68,11 +68,11 @@ Class Cfg {
 		this.Init()
 	}
 
-	static optionsTitle := App.winTitle " — " Locale.Read("gui_options")
+	static optionsTitle := App.Title("+status+version") " — " Locale.Read("gui_options")
 
 	static EditorGUI := Gui()
 	static EditorSubGUIs := {
-		recipesTitle: App.winTitle " — " Locale.Read("gui_recipes"),
+		recipesTitle: App.Title("+status+version") " — " Locale.Read("gui_recipes"),
 		recipes: Gui(),
 	}
 
@@ -87,7 +87,7 @@ Class Cfg {
 			ManageTrayItems()
 		}
 
-		this.optionsTitle := App.winTitle " — " Locale.Read("gui_options")
+		this.optionsTitle := App.Title("+status+version") " — " Locale.Read("gui_options")
 
 		Constructor() {
 			screenWidth := A_ScreenWidth
@@ -247,7 +247,7 @@ Class Cfg {
 	static SubGUIs(guiName) {
 
 		RecipesConstructor() {
-			this.EditorSubGUIs.recipesTitle := App.winTitle " — " Locale.Read("gui_recipes"),
+			this.EditorSubGUIs.recipesTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes"),
 				currentRecipe := []
 
 			screenWidth := A_ScreenWidth
@@ -371,7 +371,7 @@ Class Cfg {
 			createEditRecipe(recipeArray?) {
 				if IsSet(recipeArray) && recipeArray.Length > 0 && (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.file)) {
 					attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
-					MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.winTitle)
+					MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
 					return
 				} else {
 					MyRecipes.Editor(recipeArray?, recipesLV)
@@ -382,11 +382,11 @@ Class Cfg {
 				if recipeArray.Length > 0 {
 					if (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.file)) {
 						attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
-						MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.winTitle)
+						MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
 						return
 					} else {
 						message := Util.StrVarsInject(Locale.Read("gui_recipes_remove_confirm"), recipeArray[1])
-						confirBox := MsgBox(message, App.title, 4)
+						confirBox := MsgBox(message, App.Title(), 4)
 						if confirBox = "No" {
 							return
 						} else if confirBox = "Yes" {
@@ -416,7 +416,7 @@ Class Cfg {
 		}
 
 		if this.Get("FirstMessage", , True, "bool") {
-			MsgBox(Locale.Read("first_launch_message"), App.title)
+			MsgBox(Locale.Read("first_launch_message"), App.Title())
 			this.Set("False", "FirstMessage")
 		}
 	}
@@ -544,10 +544,10 @@ Class Options {
 		pastRecipesEditorTitle := MyRecipes.editorTitle
 
 
-		Cfg.optionsTitle := App.winTitle " — " Locale.Read("gui_options")
-		Cfg.EditorSubGUIs.recipesTitle := App.winTitle " — " Locale.Read("gui_recipes")
+		Cfg.optionsTitle := App.Title("+status+version") " — " Locale.Read("gui_options")
+		Cfg.EditorSubGUIs.recipesTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes")
 
-		MyRecipes.editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
+		MyRecipes.editorTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes_create")
 
 		if IsGuiOpen(pastOptionsTitle) {
 			Cfg.EditorGUI.Title := Cfg.optionsTitle

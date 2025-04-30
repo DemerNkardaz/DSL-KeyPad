@@ -5554,7 +5554,7 @@ GetModifiedCharsType() {
 }
 
 
-ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := App.winTitle, SkipMessage := False, Mute := False, NoReadLocale := False) {
+ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := App.Title("+status+version"), SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True
 		return
 	LanguageCode := Language.Get()
@@ -5634,7 +5634,7 @@ ManageTrayItems() {
 		"small_capital_alteration", Locale.Read("tray_func_small_capital_alteration") "`t" LeftControl LeftAlt "Num8",
 	)
 
-	CurrentApp := App.title " " App.Ver()
+	CurrentApp := App.Title("+version")
 	UpdateEntry := Labels["install"] " " Update.availableVersion
 
 	App.tray.Delete()

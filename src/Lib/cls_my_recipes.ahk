@@ -3,7 +3,7 @@ Class MyRecipes {
 	static file := App.paths.profile "\CustomRecipes.ini"
 	static attachments := App.paths.profile "\Attachments.txt"
 	static autoimport := { linux: App.paths.profile "\Autoimport.linux", ini: App.paths.profile "\Autoimport.ini" }
-	static editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
+	static editorTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes_create")
 	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
 
 	static defaulRecipes := [
@@ -116,7 +116,7 @@ Class MyRecipes {
 	static Editor(sectionName := [], recipesLV?) {
 
 		Constructor() {
-			this.editorTitle := App.winTitle " — " Locale.Read("gui_recipes_create")
+			this.editorTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes_create")
 			data := {
 				section: "",
 				name: "",
@@ -204,7 +204,7 @@ Class MyRecipes {
 				if RegExMatch(data.section, this.sectionValidator) {
 					if InStr(data.section, "xcompose") {
 						RegExMatch(data.section, "\[(.*)\]", &match)
-						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" match[1], App.winTitle)
+						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" match[1], App.Title("+status+version"))
 						return
 					} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
 						if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
@@ -212,7 +212,7 @@ Class MyRecipes {
 
 						} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
 							if this.Check(data.section) {
-								MsgBox(Locale.Read("gui_recipes_create_exists"), App.winTitle)
+								MsgBox(Locale.Read("gui_recipes_create_exists"), App.Title("+status+version"))
 								return
 							}
 							recipesLV.Add(, data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24), data.section)
@@ -221,7 +221,7 @@ Class MyRecipes {
 						this.AddEdit(data.section, data, , True)
 					}
 				} else {
-					MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.winTitle)
+					MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.Title("+status+version"))
 				}
 			}
 		}
@@ -246,7 +246,7 @@ Class MyRecipes {
 				this.Update(singleSectionName ? [sectionName] : [])
 			}
 		} else {
-			MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.winTitle)
+			MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.Title("+status+version"))
 		}
 
 		return
@@ -483,7 +483,7 @@ Class MyRecipes {
 				}
 			}
 		} else {
-			MsgBox(Locale.Read("gui_recipes_create_invalid_xcompose_name"), App.winTitle)
+			MsgBox(Locale.Read("gui_recipes_create_invalid_xcompose_name"), App.Title("+status+version"))
 		}
 
 		return output
@@ -525,12 +525,12 @@ Class MyRecipes {
 						}),
 					)
 				} catch {
-					MsgBox("[" section.section "]`n" Util.StrVarsInject(Locale.Read("gui_recipes_create_invalid_recipe"), section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result), App.winTitle)
+					MsgBox("[" section.section "]`n" Util.StrVarsInject(Locale.Read("gui_recipes_create_invalid_recipe"), section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result), App.Title("+status+version"))
 				}
 			}
 			ChrLib.AddEntries(rawCustomEntries, "Custom")
 			if ChrLib.duplicatesList.Length > 0
-				TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), ChrLib.duplicatesList.ToString()), App.winTitle, "Icon! Mute")
+				TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), ChrLib.duplicatesList.ToString()), App.Title("+status+version"), "Icon! Mute")
 		}
 	}
 
