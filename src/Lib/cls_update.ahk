@@ -135,61 +135,41 @@ Class Update {
 		}
 
 		responseText := whr.ResponseText
-		versions := useFallback ? this.ExtractGitHubTagNames(responseText) : this.ExtractVersionsArray(responseText)
+		versions := this.ExtractVersionsArray(responseText, useFallback)
 		return versions
 	}
 
-	static ExtractVersionsArray(jsonStr) {
+	static ExtractVersionsArray(jsonStr, useFallback := False) {
 		if (!jsonStr)
 			return []
 
-		startPattern := '"versions":\s*\['
-		endPattern := '\]'
-
-		startPos := RegExMatch(jsonStr, startPattern)
-		if (!startPos)
-			return []
-
-		endPos := RegExMatch(jsonStr, endPattern, , startPos + StrLen('"versions": ['))
-		if (!endPos)
-			return []
-
-		arrayContent := SubStr(jsonStr, startPos + 14, endPos - startPos - 14)
-
 		versions := []
 
-		vMatch := ""
-		versionRegex := '"([^"]*)"'
-		searchPos := 1
-
-		while (RegExMatch(arrayContent, versionRegex, &vMatch, searchPos)) {
-			if (vMatch[1] != "") {
-				versions.Push(vMatch[1])
+		if (useFallback) {
+			tagRegex := '"tag_name"\s*:\s*"([^"]+)"'
+			searchPos := 1
+			while (RegExMatch(jsonStr, tagRegex, &vMatch, searchPos)) {
+				if (vMatch[1] != "") {
+					versions.Push(vMatch[1])
+				}
+				searchPos := vMatch.Pos + vMatch.Len
 			}
-			searchPos := vMatch.Pos + vMatch.Len
+		} else {
+			versionPattern := '"versions":\s*\[([^\]]*)\]'
+			if (RegExMatch(jsonStr, versionPattern, &versionsMatch)) {
+				versionRegex := '"([^"]+)"'
+				searchPos := 1
+				while (RegExMatch(versionsMatch[1], versionRegex, &vMatch, searchPos)) {
+					versions.Push(vMatch[1])
+					searchPos := vMatch.Pos + vMatch.Len
+				}
+			}
 		}
 
 		return versions
 	}
 
-	static ExtractGitHubTagNames(jsonStr) {
-		if (!jsonStr)
-			return []
-
-		versions := []
-		vMatch := ""
-		tagRegex := '"tag_name"\s*:\s*"([^"]+)"'
-		searchPos := 1
-
-		while (RegExMatch(jsonStr, tagRegex, &vMatch, searchPos)) {
-			if (vMatch[1] != "") {
-				versions.Push(vMatch[1])
-			}
-			searchPos := vMatch.Pos + vMatch.Len
-		}
-
-		return versions
-	}
 }
 
+; MsgBox("jsDelivr: " Update.ChekVersions().ToString())
 ; MsgBox("GitHub: " Update.ChekVersions(True).ToString() "`njsDelivr: " Update.ChekVersions().ToString())
