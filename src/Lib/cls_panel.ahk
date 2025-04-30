@@ -738,7 +738,7 @@ Class Panel {
 			aboutTitle := panelWindow.AddText(UISets.aboutInfoBox.aboutTitle, App.title)
 			aboutTitle.SetFont("s20 c333333", "Cambria")
 
-			aboutVersion := panelWindow.AddText(UISets.aboutInfoBox.aboutVersion, App.versionText)
+			aboutVersion := panelWindow.AddText(UISets.aboutInfoBox.aboutVersion, App.Ver())
 			aboutVersion.SetFont("s12 c333333", "Cambria")
 
 			aboutRepoLink := panelWindow.AddLink(UISets.aboutInfoBox.aboutRepoLink,

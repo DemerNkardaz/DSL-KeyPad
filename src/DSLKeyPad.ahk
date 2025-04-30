@@ -5634,7 +5634,7 @@ ManageTrayItems() {
 		"small_capital_alteration", Locale.Read("tray_func_small_capital_alteration") "`t" LeftControl LeftAlt "Num8",
 	)
 
-	CurrentApp := App.title " " App.versionText
+	CurrentApp := App.title " " App.Ver()
 	UpdateEntry := Labels["install"] " " Update.availableVersion
 
 	App.tray.Delete()

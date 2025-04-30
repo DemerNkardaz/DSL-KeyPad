@@ -31,7 +31,7 @@ Class Update {
 		try {
 			exitCode := RunWait(Format(
 				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" "{}" "{}"',
-				App.paths.lib "\powershell\pack_bundle.ps1", A_ScriptDir, App.fullVersion App.versionPostFix
+				App.paths.lib "\powershell\pack_bundle.ps1", A_ScriptDir, App.Ver("+hotfix+postfix")
 			), , "Show")
 
 			if exitCode != 0 {
@@ -58,7 +58,7 @@ Class Update {
 			if exitCode != 0 {
 				MsgBox(Util.StrVarsInject(Locale.Read("update_failed_pshell"), exitCode))
 			} else {
-				MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.versionText, version))
+				MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.Ver("+hotfix+postfix"), version))
 				Reload
 			}
 		} catch {
@@ -72,16 +72,17 @@ Class Update {
 	}
 
 	static CompareVersions(force := False) {
+		currentVersion := App.Ver("+hotfix", [])
 		for version in this.versions {
 			if RegExMatch(version, "(\d+)\.(\d+)\.(\d+)\.(\d+)", &digitMatches) {
 				shouldUpdate := False
 				if !force {
 					Loop 4 {
 						v := Number(digitMatches[A_Index])
-						if v > App.version[A_Index] {
+						if v > currentVersion[A_Index] {
 							shouldUpdate := True
 							break
-						} else if v < App.version[A_Index] {
+						} else if v < currentVersion[A_Index] {
 							break
 						}
 					}
@@ -89,7 +90,7 @@ Class Update {
 					match := True
 					Loop 4 {
 						v := Number(digitMatches[A_Index])
-						if v != App.version[A_Index] {
+						if v != currentVersion[A_Index] {
 							match := False
 							break
 						}

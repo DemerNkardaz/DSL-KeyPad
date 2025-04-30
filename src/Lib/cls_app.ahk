@@ -3,11 +3,8 @@ Class App {
 	static title := "DSL KeyPad"
 	static status := "(αλφα)"
 	static decodedTitle := "Diacritics-Spaces-Letters KeyPad"
-	static version := [0, 1, 1, 0]
-	static versionText := this.formatVersion(this.version.Clone())
-	static versionPostFix := "-alpha-testing"
-	static fullVersion := this.version.Clone().ToString(".")
-	static winTitle := this.title " " this.status " — " this.versionText
+	static version := ["major", 0, "minor", 1, "patch", 1, "hotfix", 0, "postfix", "-alpha-testing"]
+	static winTitle := this.title " " this.status " — " this.Ver()
 	static tray := A_TrayMenu
 
 	static profileFile := A_ScriptDir "\User\Profile.ini"
@@ -45,6 +42,39 @@ Class App {
 			IniWrite("default", this.profileFile, "data", "profile")
 	}
 
+
+	static Ver(includedFields := ["major", "minor", "patch"], output := "") {
+		if includedFields is String {
+			fields := StrSplit(includedFields, "+")
+			includedFields := ["major", "minor", "patch"]
+
+			for each in fields {
+				includedFields.Push(each)
+			}
+		}
+
+		if output is String {
+			len := includedFields.Length - (includedFields.HasValue("postfix") ? 1 : 0)
+			for i, _ in this.version {
+				if Mod(i, 2) = 1 {
+					if includedFields.HasValue(this.version[i]) {
+						output .= this.version[i + 1] ((i <= len) ? "." : "")
+					}
+				}
+			}
+		} else if output is Array {
+			for i, _ in this.version {
+				if Mod(i, 2) = 1 {
+					if includedFields.HasValue(this.version[i]) {
+						output.Push(this.version[i + 1])
+					}
+				}
+			}
+		}
+
+		return output
+	}
+
 	; static UUID() {
 	; For obj in ComObjGet("winmgmts:{impersonationLevel=impersonate}!\\" A_ComputerName "\root\cimv2").ExecQuery("Select * From Win32_ComputerSystemProduct")
 	; return obj.UUID
@@ -58,14 +88,6 @@ Class App {
 	; return ""
 	; }
 
-	static formatVersion(arr, length := 3) {
-		for i, value in arr {
-			if i > length
-				break
-			result .= (i > 1 ? "." : "") value
-		}
-		return result
-	}
 }
 
 A_IconTip := App.winTitle
