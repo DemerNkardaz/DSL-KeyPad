@@ -52,22 +52,26 @@ Class Update {
 		sourceForgeRelease := "https://deac-ams.dl.sourceforge.net/project/dsl-keypad/" version "/DSL-KeyPad-" version ".zip?viasf=1"
 
 		zipSource := fallbackSourceForge ? sourceForgeRelease : gitRelease
-		try {
-			downloadPath := App.paths.temp "\DSL-KeyPad.zip"
+		downloadPath := App.paths.temp
+		downloadName := "DSL-KeyPad.zip"
 
-			Download(zipSource, downloadPath)
+		if FileExist(downloadPath "\" downloadName)
+			FileDelete(downloadPath "\" downloadName)
+
+		try {
+			exitCode := RunWait(Format(
+				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" -Url "{}" -Destination "{}" -FileName "{}"',
+				App.paths.lib "\powershell\download.ps1", zipSource, downloadPath, downloadName
+			), , "Show")
 
 			exitCode := RunWait(Format(
 				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" -ZipPath "{}" -Destination "{}" -Version "{}"',
-				App.paths.lib "\powershell\update_supporter.ps1", downloadPath, App.paths.dir, version
+				App.paths.lib "\powershell\update_supporter.ps1", downloadPath "\" downloadName, App.paths.dir, version
 			), , "Show")
 
 			if exitCode != 0 {
 				failed := True
 				failedMessage := Util.StrVarsInject(Locale.Read("update_failed_pshell"), exitCode)
-			} else {
-				MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.Ver("+hotfix+postfix"), version))
-				Reload
 			}
 		} catch
 			failed := True
@@ -78,6 +82,11 @@ Class Update {
 			} else {
 				MsgBox(failedMessage)
 			}
+		}
+
+		if !failed {
+			MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.Ver("+hotfix+postfix"), version))
+			Reload
 		}
 	}
 
