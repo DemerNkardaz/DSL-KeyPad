@@ -44,9 +44,15 @@ Class Update {
 		}
 	}
 
-	static Download(version := this.availableVersion) {
+	static Download(version := this.availableVersion, fallbackSourceForge := False) {
+		failed := False
+		failedMessage := Locale.Read("update_failed")
+
+		gitRelease := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" version "/DSL-KeyPad-" version ".zip"
+		sourceForgeRelease := "https://deac-ams.dl.sourceforge.net/project/dsl-keypad/" version "/DSL-KeyPad-" version ".zip?viasf=1"
+
+		zipSource := fallbackSourceForge ? sourceForgeRelease : gitRelease
 		try {
-			zipSource := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" version "/DSL-KeyPad-" version ".zip"
 			downloadPath := App.paths.temp "\DSL-KeyPad.zip"
 
 			Download(zipSource, downloadPath)
@@ -57,13 +63,21 @@ Class Update {
 			), , "Show")
 
 			if exitCode != 0 {
-				MsgBox(Util.StrVarsInject(Locale.Read("update_failed_pshell"), exitCode))
+				failed := True
+				failedMessage := Util.StrVarsInject(Locale.Read("update_failed_pshell"), exitCode)
 			} else {
 				MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.Ver("+hotfix+postfix"), version))
 				Reload
 			}
-		} catch {
-			MsgBox(Locale.Read("update_failed"))
+		} catch
+			failed := True
+
+		if failed {
+			if !fallbackSourceForge {
+				Update.Download(version, True)
+			} else {
+				MsgBox(failedMessage)
+			}
 		}
 	}
 
