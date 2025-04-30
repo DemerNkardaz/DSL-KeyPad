@@ -29,9 +29,10 @@ Class App {
 
 	static Init() {
 		TraySetIcon(App.icoDLL, App.indexIcos["app"])
-		for dir in ["lib", "bin", "user", "temp", "profile"] {
-			if !DirExist(this.paths.%dir%)
-				DirCreate(this.paths.%dir%)
+		for key, dir in this.paths.OwnProps() {
+			if !DirExist(dir) {
+				DirCreate(dir)
+			}
 		}
 
 		if !FileExist(this.profileFile)
@@ -50,9 +51,14 @@ Class App {
 	}
 
 	static SetProfile(profile) {
-		profile := Locale.Read("profile_default") ? "default" : profile
+		profile := profile = Locale.Read("profile_default") ? "default" : profile
 		IniWrite(profile, this.profileFile, "data", "profile")
 		Reload
+	}
+
+	static GetProfile() {
+		profile := IniRead(this.profileFile, "data", "profile", "default")
+		return profile = "default" ? Locale.Read("profile_default") : profile
 	}
 
 	static Title(options := ["title"]) {
