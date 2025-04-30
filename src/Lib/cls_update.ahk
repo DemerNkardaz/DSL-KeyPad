@@ -1,5 +1,6 @@
 Class Update {
 	static releasesJson := "https://data.jsdelivr.com/v1/package/gh/DemerNkardaz/DSL-KeyPad"
+	static fallbackReleases := "https://api.github.com/repos/DemerNkardaz/DSL-KeyPad/releases"
 	static available := False
 	static availableVersion := ""
 
@@ -109,26 +110,32 @@ Class Update {
 		}
 	}
 
-	static ChekVersions() {
+	static ChekVersions(useFallback := False) {
 		whr := ComObject("WinHttp.WinHttpRequest.5.1")
-		whr.Open("GET", this.releasesJson, true)
+		whr.Open("GET", useFallback ? this.fallbackReleases : this.releasesJson, true)
+		failed := False
 
 		try {
 			whr.Send()
 			whr.WaitForResponse()
 		}
-		catch {
-			MsgBox Locale.Read("update_check_failed")
-			return []
-		}
+		catch
+			failed := True
 
-		if (whr.Status != 200) {
-			MsgBox Locale.Read("update_check_failed")
-			return []
+		if (whr.Status != 200)
+			failed := True
+
+		if failed {
+			if !useFallback {
+				return this.ChekVersions(True)
+			} else {
+				MsgBox Locale.Read("update_check_failed")
+				return []
+			}
 		}
 
 		responseText := whr.ResponseText
-		versions := this.ExtractVersionsArray(responseText)
+		versions := useFallback ? this.ExtractGitHubTagNames(responseText) : this.ExtractVersionsArray(responseText)
 		return versions
 	}
 
@@ -164,4 +171,25 @@ Class Update {
 
 		return versions
 	}
+
+	static ExtractGitHubTagNames(jsonStr) {
+		if (!jsonStr)
+			return []
+
+		versions := []
+		vMatch := ""
+		tagRegex := '"tag_name"\s*:\s*"([^"]+)"'
+		searchPos := 1
+
+		while (RegExMatch(jsonStr, tagRegex, &vMatch, searchPos)) {
+			if (vMatch[1] != "") {
+				versions.Push(vMatch[1])
+			}
+			searchPos := vMatch.Pos + vMatch.Len
+		}
+
+		return versions
+	}
 }
+
+; MsgBox("GitHub: " Update.ChekVersions(True).ToString() "`njsDelivr: " Update.ChekVersions().ToString())
