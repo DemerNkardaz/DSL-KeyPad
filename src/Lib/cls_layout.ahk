@@ -503,9 +503,9 @@ Class KeyboardBinder {
 	}
 
 	static FormatBindings(bindingsMap := Map()) {
+		static matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁѣѢіІ]+"
+		static matchEn := "(?!.*[а-яА-ЯёЁѣѢіІ])[a-zA-Z]+"
 		layout := this.GetCurrentLayoutMap()
-		matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁѣѢіІ]+"
-		matchEn := "(?!.*[а-яА-ЯёЁѣѢіІ])[a-zA-Z]+"
 		output := Map()
 
 		if bindingsMap.Count > 0 {

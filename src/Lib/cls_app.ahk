@@ -3,6 +3,8 @@ Class App {
 
 	static profileFile := A_ScriptDir "\User\Profile.ini"
 	static profileName := IniRead(this.profileFile, "data", "profile", "default")
+	static profileList := ["default"]
+
 	static paths := {
 		dir: A_ScriptDir,
 		lib: A_ScriptDir "\Lib",
@@ -34,6 +36,23 @@ Class App {
 
 		if !FileExist(this.profileFile)
 			IniWrite("default", this.profileFile, "data", "profile")
+
+		this.ReadProfiles()
+	}
+
+	static ReadProfiles() {
+		Loop Files App.paths.user "\profile-*", "D" {
+			name := A_LoopFileName
+			if name != "profile-default" {
+				this.profileList.Push(RegExReplace(name, "profile-", ""))
+			}
+		}
+	}
+
+	static SetProfile(profile) {
+		profile := Locale.Read("profile_default") ? "default" : profile
+		IniWrite(profile, this.profileFile, "data", "profile")
+		Reload
 	}
 
 	static Title(options := ["title"]) {
