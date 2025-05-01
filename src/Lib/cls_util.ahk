@@ -47,6 +47,18 @@ Class Util {
 		return output
 	}
 
+	static InStr(str, search, start := 1, end := StrLen(str)) {
+		if search is Array {
+			for value in search {
+				if InStr(str, value, start, end) {
+					return True
+				}
+			}
+			return False
+		} else
+			return InStr(str, search, start, end)
+	}
+
 	static StrFormattedReduce(str, maxLength := 32, removeLineBreaks := False) {
 		totalLen := this.StrDigitFormat(StrLen(str))
 		pages := this.StrPagesCalc(str)

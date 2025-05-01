@@ -1064,6 +1064,38 @@ Class ChrLib {
 			refinedEntry := Locale.LocalesGeneration(entryName, refinedEntry)
 		}
 
+
+		for i, LaTeXCodeSymbol in LaTeXCodesLibrary {
+			if Mod(i, 2) = 1 {
+				LaTeXCode := LaTeXCodesLibrary[i + 1]
+
+				if character == LaTeXCodeSymbol {
+					refinedEntry.LaTeX := LaTeXCode is Array ? LaTeXCode : [LaTeXCode]
+				}
+			}
+		}
+
+		if refinedEntry.data.postfixes.Length = 1 {
+			postfixEntry := this.GetEntry(refinedEntry.data.postfixes[1])
+			originSymbolEntry := this.GetEntry(RegExReplace(entryName, "i)^(.*?)__(.*)$", "$1"))
+			if postfixEntry {
+				postfixSymbol := Util.UnicodeToChar(postfixEntry.unicode)
+
+				originLTXLen := originSymbolEntry ? originSymbolEntry.LaTeX.Length : 0
+				postfixLTXLen := postfixEntry.LaTeX.Length
+				isDigraphOrLigature := Util.InStr(refinedEntry.symbol.category, ["dig", "lig"]) && refinedEntry.recipe.Length > 1 ? refinedEntry.recipe[2] : refinedEntry.recipe[1]
+
+				symbolForLaTeX := RegExReplace(isDigraphOrLigature, postfixSymbol)
+				setLaTeX := (lpox := 1, epos := 1) => postfixEntry.LaTeX[lpox] "{" (originLTXLen > 0 ? originSymbolEntry.LaTeX[epos] : symbolForLaTeX) "}"
+
+				if postfixLTXLen > 0
+					refinedEntry.LaTeX := [setLaTeX()]
+
+				if postfixLTXLen = 2
+					refinedEntry.LaTeX.Push(setLaTeX(postfixLTXLen, originLTXLen))
+			}
+		}
+
 		this.entries.%entryName% := refinedEntry
 	}
 

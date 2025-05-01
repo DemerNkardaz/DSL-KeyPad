@@ -31,6 +31,7 @@ LaTeXMode := "Default"
 #Include <def_vars>
 #Include <utils>
 #Include <chr_alt_codes>
+#Include <chr_latex_codes>
 #Include <chr_entities>
 #Include <cls_util>
 
