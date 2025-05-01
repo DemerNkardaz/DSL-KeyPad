@@ -1,6 +1,6 @@
 Class Update {
 	static releasesJson := "https://data.jsdelivr.com/v1/package/gh/DemerNkardaz/DSL-KeyPad"
-	static fallbackReleases := "https://api.github.com/repos/DemerNkardaz/DSL-KeyPad/releases"
+	static fallbackReleases := App.API "/releases"
 	static available := False
 	static availableVersion := ""
 
@@ -48,7 +48,7 @@ Class Update {
 		failed := False
 		failedMessage := Locale.Read("update_failed")
 
-		gitRelease := "https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/" version "/DSL-KeyPad-" version ".zip"
+		gitRelease := App.URL "/releases/download/" version "/DSL-KeyPad-" version ".zip"
 		sourceForgeRelease := "https://deac-ams.dl.sourceforge.net/project/dsl-keypad/" version "/DSL-KeyPad-" version ".zip?viasf=1"
 
 		zipSource := fallbackSourceForge ? sourceForgeRelease : gitRelease
@@ -192,11 +192,11 @@ Class Update {
 		return versions
 	}
 
-	static InsertChangelog(targetGUI) {
+	static InsertChangelog(targetGUI, UISettings) {
 		if this.FormatChangelog(this.GetChangelog(), &changelog)
-			targetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", changelog)
+			targetGUI.AddEdit(UISettings, changelog)
 		else
-			targetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", Locale.Read("warning_nointernet"))
+			targetGUI.AddEdit(UISettings, Locale.Read("warning_nointernet"))
 	}
 
 	static GetChangelog(url := App.refsHeads "/CHANGELOG.md") {

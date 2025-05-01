@@ -122,12 +122,28 @@ Class Panel {
 		aboutChrCountX := aboutDescriptionX
 		aboutChrCountY := ((aboutLeftH - 45) + 32) + 14
 
+		clBodyW := panelWidth - 45
+		clBodyH := panelHeight - 55
+		clBodyX := baseX + 4
+		clBodyY := 35
+
+		clContentW := clBodyW - 20
+		clContentH := clBodyH - 40
+		clContentX := clBodyX + 10
+		clContentY := clBodyY + 30
+
 		construction := {
 			window: {
 				width: panelWidth,
 				height: panelHeight,
 				minWidth: 800,
 				minHeight: panelHeight
+			},
+			changelogInfoBox: {
+				body: Format("vChangelogInfoBox x{} y{} w{} h{}",
+					clBodyX, clBodyY, clBodyW, clBodyH),
+				content: Format("vChangelogInfoBoxContent x{} y{} w{} h{} readonly Left Wrap -HScroll -E0x200",
+					clContentX, clContentY, clContentW, clContentH)
 			},
 			tabs: Format("vTabs  w{} h{}", tabsW, tabsH),
 			infoBox: {
@@ -788,8 +804,8 @@ Class Panel {
 
 			panelTabs.UseTab(panelTabList.Obj.changelog)
 
-			panelWindow.Add("GroupBox", "w825 h520", "🌐 " . Locale.Read("tab_changelog"))
-			Update.InsertChangelog(panelWindow)
+			panelWindow.AddGroupBox(UISets.changelogInfoBox.body, "🌐 " . Locale.Read("tab_changelog"))
+			Update.InsertChangelog(panelWindow, UISets.changelogInfoBox.content)
 
 			panelTabs.UseTab()
 
