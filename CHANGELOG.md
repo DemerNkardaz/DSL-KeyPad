@@ -4,7 +4,7 @@
 <details open lang="en">
 <summary>English</summary>
 
-### Version 1.0.0 — 2025-?-?
+### [Version 1.0.0 — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/1.0.0)
 
 - Release of the first version of the “DSL KeyPad.”
 - It includes:
@@ -20,7 +20,7 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### Версия 1.0.0 — 2025-?-?
+### [Версия 1.0.0 — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/1.0.0)
 
 - Релиз первой версии «DSL KeyPad».
 - Включает:
