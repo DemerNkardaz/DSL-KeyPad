@@ -8,7 +8,7 @@ LibRegistrate(this) {
 		;
 		;
 		"acute", {
-			unicode: "{U+0301}", LaTeX: ["\'", "\acute"],
+			unicode: "{U+0301}",
 			tags: ["acute", "акут", "ударение"],
 			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
 			alterations: { uncombined: "{U+00B4}" },
@@ -16,7 +16,7 @@ LibRegistrate(this) {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"acute_double", {
-			unicode: "{U+030B}", LaTeX: ["\H"],
+			unicode: "{U+030B}",
 			tags: ["double acute", "двойной акут", "двойное ударение"],
 			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
 			alterations: { uncombined: "{U+02DD}", modifier: "{U+02F6}" },

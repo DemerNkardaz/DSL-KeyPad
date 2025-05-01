@@ -33,7 +33,6 @@ class Program
 
 		isRussian = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.Equals("ru", StringComparison.OrdinalIgnoreCase);
 
-
 		EnableVirtualTerminal();
 
 		string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
