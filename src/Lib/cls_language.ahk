@@ -69,15 +69,25 @@ Class Keyboard {
 	static blockedForReload := False
 
 	static __New() {
-		this.InitialValidator()
 	}
 
-	static CurrentLayout(&layoutHex?) {
-		threadId := DllCall("GetWindowThreadProcessId", "UInt", DllCall("GetForegroundWindow", "UInt"), "UInt", 0)
-		layout := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
-		layoutHex := Format("{:08X}", layout & 0xFFFF)
+	static CurrentLayout(&layoutHex := "") {
+		hwnd := DllCall("GetForegroundWindow", "UPtr")
+
+		hIMC := DllCall("imm32\ImmGetContext", "UPtr", hwnd, "UPtr")
+
+		layout := DllCall("imm32\ImmGetOpenStatus", "UPtr", hIMC) ?
+			DllCall("imm32\ImmGetConversionStatus", "UPtr", hIMC, "UInt*", &mode := 0, "UInt*", &sentence := 0) : 0
+
+		DllCall("imm32\ImmReleaseContext", "UPtr", hwnd, "UPtr", hIMC)
+
+		threadId := DllCall("GetWindowThreadProcessId", "UPtr", hwnd, "UInt*", 0, "UInt")
+		layoutID := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
+
+		layoutHex := Format("{:08X}", layoutID & 0xFFFF)
 		return layoutHex
 	}
+
 
 	static SwitchLayout(code, id := 1, timer := 1) {
 		SetTimer((*) => SwitchCall(), -timer)
