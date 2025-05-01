@@ -725,7 +725,7 @@ Class BindHandler {
 				} else {
 					alt := AlterationActiveName
 					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
-						alt := alterationMatch[1]
+						alt := ChrLib.ValidateAlt(alterationMatch[1])
 						character := RegExReplace(character, "\:\:.*$", "")
 					}
 

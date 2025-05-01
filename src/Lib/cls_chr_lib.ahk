@@ -624,10 +624,48 @@ Class ChrLib {
 		}
 	}
 
+	static ValidateAlt(str) {
+		static alterationNames := Map(
+			"modifier", ["superscript", "верхний индекс", "ви", "mo", "sup"],
+			"subscript", ["нижний индекс", "ни", "sub"],
+			"italic", ["курсив", "ку", "it"],
+			"italicBold", ["курсив полужирный", "куп", "itb"],
+			"bold", ["полужирный", "п", "b"],
+			"fraktur", ["фрактур", "ф", "f"],
+			"frakturBold", ["полужирный фрактур", "пф", "fb"],
+			"script", ["рукописный", "р", "s"],
+			"scriptBold", ["полужирный рукописный", "пр", "sb"],
+			"doubleStruck", ["ds"],
+			"sansSerif", ["без засечек", "бз", "ss"],
+			"sansSerifItalic", ["курсив без засечек", "кубз", "ssit"],
+			"sansSerifItalicBold", ["курсив полужирный без засечек", "купбз", "ssitb"],
+			"sansSerifBold", ["полужирный без засечек", "пбз", "ssb"],
+			"monospace", ["моноширинный", "м", "m"],
+			"smallCapital", ["капитель", "к", "sc"],
+			"small", ["маленький", "мал", "sm"],
+			"combining", ["комбинируемый", "ко", "c"],
+			"uncombined", ["некомбинируемый", "неко", "uc"],
+		)
+
+		for key, value in alterationNames {
+			for name in value {
+				if name = str || key = str {
+					return key
+				}
+			}
+		}
+
+		return str
+	}
+
 	static Search(searchQuery) {
 		isSensitive := SubStr(searchQuery, 1, 1) = "*"
 		if isSensitive
 			searchQuery := SubStr(searchQuery, 2)
+
+		alteration := RegExMatch(searchQuery, "\:\:(.*?)$", &match) ? this.ValidateAlt(match[1]) : AlterationActiveName
+
+		searchQuery := RegExReplace(searchQuery, "\:\:(.*?)$", "")
 
 		checkTagExact(tag) {
 			if isSensitive
@@ -663,7 +701,7 @@ Class ChrLib {
 
 			for _, tag in entry.tags {
 				if checkTagPartial(tag)
-					return this.Get(entryName, True, Auxiliary.inputMode)
+					return this.Get(entryName, True, Auxiliary.inputMode, alteration)
 			}
 		}
 
@@ -673,7 +711,7 @@ Class ChrLib {
 
 			for _, tag in entry.tags {
 				if checkTagLowAcc(tag)
-					return this.Get(entryName, True, Auxiliary.inputMode)
+					return this.Get(entryName, True, Auxiliary.inputMode, alteration)
 			}
 		}
 
