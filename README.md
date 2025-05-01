@@ -1,20 +1,22 @@
-[![GitHub](https://img.shields.io/badge/GitHub-grey?style=for-the-badge&logo=github)](https://github.com/DemerNkardaz/DSL-KeyPad)
-[![SourceForge](https://img.shields.io/badge/SourceForge-333333?style=for-the-badge&logo=sourceforge)](https://sourceforge.net/projects/dsl-keypad/)
+[![GitHub](https://img.shields.io/badge/GitHub-grey?style=for-the-badge&logo=github)](https://github.com/DemerNkardaz/DSL-KeyPad) [![GitLab](https://img.shields.io/badge/GitLab-grey?style=for-the-badge&logo=gitlab)](https://gitlab.com/DemerNkardaz/dsl-keypad) [![SourceForge](https://img.shields.io/badge/SourceForge-grey?style=for-the-badge&logo=sourceforge)](https://sourceforge.net/projects/dsl-keypad/)
 
-[![GitHub](https://img.shields.io/github/v/release/DemerNkardaz/DSL-KeyPad?include_prereleases&label=%F0%9F%8F%B7%EF%B8%8F&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad)
-[![GitHub](https://img.shields.io/github/release-date-pre/DemerNkardaz/DSL-KeyPad?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad)
-![Static Badge](https://img.shields.io/badge/AutoHotkey-V2-yellow)<br>
+![](https://img.shields.io/github/watchers/DemerNkardaz/DSL-KeyPad) ![](https://img.shields.io/github/stars/DemerNkardaz/DSL-KeyPad) ![](https://img.shields.io/gitlab/stars/DemerNkardaz%2Fdsl-keypad)
+
+[![GitHub](https://img.shields.io/github/v/release/DemerNkardaz/DSL-KeyPad?include_prereleases&label=%F0%9F%8F%B7%EF%B8%8F&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad) [![GitHub](https://img.shields.io/github/release-date-pre/DemerNkardaz/DSL-KeyPad?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad) ![Static Badge](https://img.shields.io/badge/AutoHotkey-V2-yellow)
+
 [![GitHub](https://img.shields.io/github/downloads-pre/DemerNkardaz/DSL-KeyPad/latest/total?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad)
 [![jsDelivr](https://img.shields.io/jsdelivr/gh/hm/DemerNkardaz/DSL-KeyPad?logo=jsdelivr&color=yellow)](https://www.jsdelivr.com/package/gh/DemerNkardaz/DSL-KeyPad)
 
-[![GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad)
-[![GitHub](https://img.shields.io/github/commit-activity/m/DemerNkardaz/DSL-KeyPad?logo=github&label=commits&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad)
-[![GitHub](https://img.shields.io/github/last-commit/DemerNkardaz/DSL-KeyPad/main?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad)<br>
-[![SourceForge](https://img.shields.io/sourceforge/dm/dsl-keypad?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/)
-[![SourceForge](https://img.shields.io/sourceforge/commit-count/dsl-keypad/code?logo=sourceforge&label=commits&color=yellow)](https://sourceforge.net/projects/dsl-keypad/)
-[![SourceForge](https://img.shields.io/sourceforge/last-commit/dsl-keypad/code?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/)
+<details>
+	<summary>Extended information</summary>
 
-_Test of push to GitHub, GitLab and SourceForge at the same time_
+| GitHub                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | GitLab                                                                                                                                                | SourceForge                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad)<br>[![GitHub](https://img.shields.io/github/commit-activity/m/DemerNkardaz/DSL-KeyPad?logo=github&label=commits&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad)<br>[![GitHub](https://img.shields.io/github/last-commit/DemerNkardaz/DSL-KeyPad/main?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad) | [![GitLab](https://img.shields.io/gitlab/last-commit/DemerNkardaz%2Fdsl-keypad?logo=gitlab&color=yellow)](https://gitlab.com/DemerNkardaz/dsl-keypad) | [![SourceForge](https://img.shields.io/sourceforge/dm/dsl-keypad?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/)<br>[![SourceForge](https://img.shields.io/sourceforge/commit-count/dsl-keypad/code?logo=sourceforge&label=commits&color=yellow)](https://sourceforge.net/projects/dsl-keypad/)<br>[![SourceForge](https://img.shields.io/sourceforge/last-commit/dsl-keypad/code?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/) |
+
+</details>
+
+<br>
 
 **Note:** In the process of dev & refactoring<br>**Примечание:** В процессе разработки и рефакторинга
 
