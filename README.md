@@ -14,7 +14,7 @@
 [![SourceForge](https://img.shields.io/sourceforge/commit-count/dsl-keypad/code?logo=sourceforge&label=commits&color=yellow)](https://sourceforge.net/projects/dsl-keypad/)
 [![SourceForge](https://img.shields.io/sourceforge/last-commit/dsl-keypad/code?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/)
 
-_Testing commit for test sourceforge push_
+_Testing commit for test sourceforge push number two_
 
 **Note:** In the process of dev & refactoring<br>**Примечание:** В процессе разработки и рефакторинга
 
