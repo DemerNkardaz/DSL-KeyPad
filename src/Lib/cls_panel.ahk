@@ -789,7 +789,7 @@ Class Panel {
 			panelTabs.UseTab(panelTabList.Obj.changelog)
 
 			panelWindow.Add("GroupBox", "w825 h520", "🌐 " . Locale.Read("tab_changelog"))
-			InsertChangesList(panelWindow)
+			Update.InsertChangelog(panelWindow)
 
 			panelTabs.UseTab()
 

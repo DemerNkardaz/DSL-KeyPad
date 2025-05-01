@@ -4,6 +4,11 @@ Class App {
 	static profileFile := A_ScriptDir "\User\Profile.ini"
 	static profileName := IniRead(this.profileFile, "data", "profile", "default")
 	static profileList := ["default"]
+	static repository := "DemerNkardaz/DSL-KeyPad"
+	static URL := "https://github.com/" this.repository
+	static gitUserContent := "https://raw.githubusercontent.com/" this.repository
+	static branch := this.URL "/tree/main"
+	static refsHeads := this.gitUserContent "/refs/heads/main"
 
 	static paths := {
 		dir: A_ScriptDir,

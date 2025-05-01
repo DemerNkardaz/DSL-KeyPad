@@ -88,11 +88,6 @@ RepoSource := "https://github.com/DemerNkardaz/DSL-KeyPad/blob/main/DSLKeyPad.ah
 RawSource := RawRepo "DSLKeyPad.ahk"
 UpdateAvailable := False
 
-ChangeLogRaw := Map(
-	"ru", RawRepoInfo "changelog.ru.md",
-	"en", RawRepoInfo "changelog.en.md"
-)
-
 WorkingDir := A_ScriptDir
 
 DSLPadTitle := "DSL KeyPad (αλφα)" " — " CurrentVersionString
@@ -137,90 +132,6 @@ FontFace := Map(
 		source: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerif/googlefonts/variable-ttf/NotoSerif%5Bwdth%2Cwght%5D.ttf"
 	},
 )
-
-
-GetChangeLog() {
-	global ChangeLogRaw
-	ReceiveMap := Map()
-
-	TimeOut := 1000
-	Cancelled := False
-
-	http := ComObject("WinHttp.WinHttpRequest.5.1")
-	CancelHttp() {
-		Cancelled := True
-	}
-
-	SetTimer(CancelHttp, TimeOut)
-	if Cancelled {
-		return Locale.Read("warning_nointernet")
-	}
-
-	for language, url in ChangeLogRaw {
-		http.Open("GET", url, true)
-		try {
-			http.Send()
-			http.WaitForResponse()
-		} catch {
-			return Locale.Read("warning_nointernet")
-		}
-
-		if http.Status != 200 || Cancelled {
-			if Cancelled {
-				http.Abort()
-				return Locale.Read("warning_nointernet")
-			}
-			continue
-		}
-
-		if Cancelled {
-			return
-		}
-
-		ReceiveMap[language] := http.ResponseText
-	}
-
-
-	return ReceiveMap
-}
-
-InsertChangesList(TargetGUI) {
-	LanguageCode := Language.Get()
-	Changes := GetChangeLog()
-	IsEmpty := True
-
-	if IsObject(Changes) {
-		for lang, _ in Changes {
-			IsEmpty := False
-			break
-		}
-	} else if Changes != "" {
-		TargetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", Changes)
-		return
-	}
-
-	if IsEmpty {
-		return
-	}
-
-	Labels := {
-		ver: Locale.Read("version"),
-		date: Locale.Read("date"),
-	}
-
-
-	for lang, content in Changes {
-		if lang = LanguageCode {
-			content := RegExReplace(content, "m)^## " Labels.ver " (.*) — (.*)", Labels.ver ": $1`n" Labels.date ": $2")
-			content := RegExReplace(content, "m)^- (.*)", " • $1")
-			content := RegExReplace(content, "m)^\s\s- (.*)", "  ‣ $1")
-			content := RegExReplace(content, "m)^\s\s\s\s- (.*)", "   ⁃ $1")
-			content := RegExReplace(content, "m)^---", " " . GetChar("emdash×84"))
-
-			TargetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", content)
-		}
-	}
-}
 
 
 RoNum := Map(
@@ -2826,7 +2737,7 @@ Constructor() {
 
 	Tab.UseTab(9)
 	DSLPadGUI.Add("GroupBox", "w825 h520", "🌐 " . Locale.Read("tab_changelog"))
-	InsertChangesList(DSLPadGUI)
+	Update.InsertChangelog(DSLPadGUI)
 
 
 	DiacriticLV.OnEvent("DoubleClick", LV_OpenUnicodeWebsite)

@@ -192,6 +192,57 @@ Class Update {
 		return versions
 	}
 
+	static InsertChangelog(targetGUI) {
+		if this.FormatChangelog(this.GetChangelog(), &changelog)
+			targetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", changelog)
+		else
+			targetGUI.Add("Edit", "x30 y58 w810 h485 readonly Left Wrap -HScroll -E0x200", Locale.Read("warning_nointernet"))
+	}
+
+	static GetChangelog(url := App.refsHeads "/CHANGELOG.md") {
+		languageCode := Language.Get()
+		http := ComObject("WinHttp.WinHttpRequest.5.1")
+		http.Open("GET", url, true)
+		try {
+			http.Send()
+			http.WaitForResponse()
+		}
+		catch
+			return False
+		if (http.Status != 200)
+			return False
+
+		content := http.ResponseText
+		pattern := '<details[^>]*lang="' LanguageCode '"[^>]*>[\s\S]*?<summary>[\s\S]*?</summary>([\s\S]*?)</details>'
+
+		if RegExMatch(content, pattern, &match) {
+			return match[1]
+		}
+		return False
+	}
+
+	static FormatChangelog(str, &output?) {
+		if !str || StrLen(str) == 0
+			return False
+
+		labels := {
+			ver: Locale.Read("version"),
+			date: Locale.Read("date"),
+			link: Locale.Read("release_link")
+		}
+
+		str := RegExReplace(str, "m)^\s*$\R", "")
+		str := RegExReplace(str, "m)^###\s+\[(.*?)\s+—\s+(.*?)\]\((.*?)\)", "`n" labels.ver ": $1`n" labels.date ": $2`n" labels.link ": $3`n")
+
+		str := RegExReplace(str, "m)^- (.*)", " • $1")
+		str := RegExReplace(str, "m)^\s\s- (.*)", "  ‣ $1")
+		str := RegExReplace(str, "m)^\s\s\s\s- (.*)", "   ⁃ $1")
+
+		str := RegExReplace(str, "m)^---", " " Util.StrRepeat(ChrLib.Get("emdash"), 84))
+		output := str
+		return str
+	}
+
 }
 
 ; MsgBox("jsDelivr: " Update.ChekVersions().ToString())
