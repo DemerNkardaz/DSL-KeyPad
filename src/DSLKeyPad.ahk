@@ -19,7 +19,6 @@ A_MaxHotkeysPerInterval := 50
 
 ; <^>!>^BackSpace:: KeyHistory
 
-
 ActiveScriptName := ""
 PreviousScriptName := ""
 AlterationActiveName := ""

@@ -93,7 +93,7 @@ Class App {
 	}
 
 	static Ver(includedFields := ["major", "minor", "patch"], output := "") {
-		static version := ["major", 0, "minor", 1, "patch", 1, "hotfix", 0, "postfix", "-alpha-testing"]
+		static version := ["major", 0, "minor", 1, "patch", 1, "hotfix", 1, "postfix", "-alpha-testing"]
 
 		if includedFields is String {
 			fields := StrSplit(includedFields, "+")

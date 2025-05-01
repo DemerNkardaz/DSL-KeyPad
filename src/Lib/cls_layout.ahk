@@ -567,6 +567,8 @@ Class KeyboardBinder {
 			for combo, action in bindingsMap {
 				try {
 					HotKey(combo, action, rule ? "On" : "Off")
+					if RegExMatch(combo, "^\<\^\>\!")
+						HotKey(SubStr(combo, 3), action, rule ? "On" : "Off")
 				} catch {
 					if StrLen(combo) > 0
 						MsgBox("Failed to register HotKey: " combo)
@@ -592,7 +594,7 @@ Class KeyboardBinder {
 	static RebuilBinds() {
 		this.UnregisterAll()
 		this.CurrentLayouts(&latin, &cyrillic)
-		if latin != "QWERTY" || cyrillic != "ЙЦУКЕН"
+		if Cfg.Get("Layout_Remapping", , False, "bool") && (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")
 			this.Registration(BindList.Get("Keyboard Default"), True)
 
 		this.Registration(BindList.Get("Important"), True)

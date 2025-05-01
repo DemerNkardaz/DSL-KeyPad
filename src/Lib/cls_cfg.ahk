@@ -11,6 +11,7 @@ Class Cfg {
 			"Input_Script", "Default",
 			"Layout_Latin", "QWERTY",
 			"Layout_Cyrillic", "ЙЦУКЕН",
+			"Layout_Remapping", "False",
 			"Active_User_Bindings", "None",
 			"Mode_Fast_Keys", "False",
 			"Binds_Autodisable_Timer", "1",
@@ -105,7 +106,7 @@ Class Cfg {
 			defaultSizes := { groupBoxW: 420, groupBoxX: (windowWidth - 420) / 2 }
 
 			optionsCommonY := 10
-			optionsCommonH := 200
+			optionsCommonH := 230
 			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
 
 			optionsPanel.AddGroupBox("vGroupCommon " optionsCommon())
@@ -130,17 +131,21 @@ Class Cfg {
 
 			optionsPanel.AddText("vLayoutLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorTextY) " w128 BackgroundTrans", Locale.Read("gui_options_layout"))
 
+			remappingCheckbox := optionsPanel.AddCheckBox("vLayoutRemapping x" languageSelectorX() " y" languageSelectorY(layouSelectorY(4)) " w128", Locale.Read("gui_options_layout_remapping"))
+			remappingCheckbox.Value := Cfg.Get("Layout_Remapping", , False, "bool")
+			remappingCheckbox.OnEvent("Click", (CB, Zero) => SetRemapping(CB.Value))
+
 			layoutist := {
 				latin: KeyboardBinder.layouts.latin.Keys(),
 				cyrillic: KeyboardBinder.layouts.cyrillic.Keys()
 			}
 
-			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY()), layoutist.latin)
+			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(23)), layoutist.latin)
 			PostMessage(0x0153, -1, 15, layoutLatinSelector)
 			layoutLatinSelector.Text := Cfg.Get("Layout_Latin")
 			layoutLatinSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
 
-			layoutCyrillicSelector := optionsPanel.AddDropDownList("vCyrillicLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(23)), layoutist.cyrillic)
+			layoutCyrillicSelector := optionsPanel.AddDropDownList("vCyrillicLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(23 * 2)), layoutist.cyrillic)
 			PostMessage(0x0153, -1, 15, layoutCyrillicSelector)
 			layoutCyrillicSelector.Text := Cfg.Get("Layout_Cyrillic")
 			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
@@ -150,9 +155,9 @@ Class Cfg {
 			currentBindings := Cfg.Get("Active_User_Bindings", , "None")
 			currentBindings := currentBindings = "None" ? Locale.Read("gui_options_bindings_none") : currentBindings
 
-			optionsPanel.AddText("vBindingsLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorY(50)) " w128 BackgroundTrans", Locale.Read("gui_options_bindings"))
+			optionsPanel.AddText("vBindingsLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorY(50 + 26)) " w128 BackgroundTrans", Locale.Read("gui_options_bindings"))
 
-			bindingsSelector := optionsPanel.AddDropDownList("vBindings x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(66)), bindingsList)
+			bindingsSelector := optionsPanel.AddDropDownList("vBindings x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(32 * 3)), bindingsList)
 			PostMessage(0x0153, -1, 15, bindingsSelector)
 			bindingsSelector.Text := currentBindings
 			bindingsSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetBinds(CB.Text))
@@ -197,9 +202,9 @@ Class Cfg {
 				Locale.Read("gui_options_hybrid") " — Ii, LShift " Chr(0x0130) Chr(0x0131),
 			]
 
-			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(290 - 17) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
+			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(300) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
 
-			letterI_selector := optionsPanel.AddDropDownList("vLetterI_selector x" languageSelectorX() " w128 y" languageSelectorY(290), letterI_labels)
+			letterI_selector := optionsPanel.AddDropDownList("vLetterI_selector x" languageSelectorX() " w128 y" languageSelectorY(300 + 17), letterI_labels)
 			PostMessage(0x0153, -1, 15, letterI_selector)
 
 			letterI_savedOption := Cfg.Get("I_Dot_Shift_I_Dotless", "Characters")
@@ -250,6 +255,18 @@ Class Cfg {
 				} else {
 					App.SetProfile(profileName)
 				}
+			}
+
+			SetRemapping(remapping) {
+				if remapping {
+					MB := MsgBox(Locale.Read("gui_options_layout_remapping_description"), App.Title(), "YesNo")
+					if MB = "No" || MB = "Cancel" {
+						this.EditorGUI["LayoutRemapping"].Value := False
+						return
+					}
+				}
+				Cfg.Set(remapping ? "True" : "False", "Layout_Remapping")
+				KeyboardBinder.RebuilBinds()
 			}
 
 			OpenRecipesPanel() {
