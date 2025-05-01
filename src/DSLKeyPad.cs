@@ -29,7 +29,11 @@ class Program
 
 	static void Main()
 	{
+		Console.OutputEncoding = Encoding.UTF8;
+
 		isRussian = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.Equals("ru", StringComparison.OrdinalIgnoreCase);
+
+
 		EnableVirtualTerminal();
 
 		string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
