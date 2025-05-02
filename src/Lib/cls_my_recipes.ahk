@@ -533,12 +533,12 @@ Class MyRecipes {
 						}),
 					)
 				} catch {
-					MsgBox("[" section.section "]`n" Util.StrVarsInject(Locale.Read("gui_recipes_create_invalid_recipe"), section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result), App.Title("+status+version"))
+					MsgBox("[" section.section "]`n" Locale.ReadInject("gui_recipes_create_invalid_recipe", [section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result]), App.Title("+status+version"))
 				}
 			}
 			ChrLib.AddEntries(rawCustomEntries, "Custom")
 			if ChrLib.duplicatesList.Length > 0
-				TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), ChrLib.duplicatesList.ToString()), App.Title("+status+version"), "Icon! Mute")
+				TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
 		}
 	}
 

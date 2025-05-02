@@ -111,9 +111,9 @@ Class TemperatureConversion {
 	)
 
 	static scales := {
-		C: [GetChar("celsius"), GetChar("degree") "C"],
-		F: [GetChar("fahrenheit"), GetChar("degree") "F"],
-		K: [GetChar("kelvin"), "K"],
+		C: [ChrLib.Get("celsius"), ChrLib.Get("degree") "C"],
+		F: [ChrLib.Get("fahrenheit"), ChrLib.Get("degree") "F"],
+		K: [ChrLib.Get("kelvin"), "K"],
 		RA: "R",
 		N: "N",
 		D: "D",
@@ -121,8 +121,8 @@ Class TemperatureConversion {
 		L: "L",
 		W: "W",
 		ME: "Me",
-		RO: "R" GetChar("lat_s_let_o_solidus_long"),
-		RE: "R" GetChar("lat_s_let_e_acute"),
+		RO: "R" ChrLib.Get("lat_s_let_o__solidus_long"),
+		RE: "R" ChrLib.Get("lat_s_let_e__acute"),
 	}
 
 	static typographyTypes := Map(

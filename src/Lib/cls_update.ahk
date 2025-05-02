@@ -36,11 +36,11 @@ Class Update {
 			), , "Show")
 
 			if exitCode != 0 {
-				MsgBox(Util.StrVarsInject(Locale.Read("bundle_creation_failed_pshell"), exitCode))
+				MsgBox(Locale.ReadInject("bundle_creation_failed_pshell", [exitCode]), App.Title())
 			}
 
 		} catch {
-			MsgBox(Locale.Read("bundle_creation_failed"))
+			MsgBox(Locale.Read("bundle_creation_failed"), App.Title())
 		}
 	}
 
@@ -71,7 +71,7 @@ Class Update {
 
 			if exitCode != 0 {
 				failed := True
-				failedMessage := Util.StrVarsInject(Locale.Read("update_failed_pshell"), exitCode)
+				failedMessage := Locale.ReadInject("update_failed_pshell", [exitCode])
 			}
 		} catch
 			failed := True
@@ -80,12 +80,12 @@ Class Update {
 			if !fallbackSourceForge {
 				Update.Download(version, True)
 			} else {
-				MsgBox(failedMessage)
+				MsgBox(failedMessage, App.Title())
 			}
 		}
 
 		if !failed {
-			MsgBox(Util.StrVarsInject(Locale.Read("update_successful"), App.Ver("+hotfix+postfix"), version))
+			MsgBox(Locale.ReadInject("update_successful", [App.Ver("+hotfix+postfix"), version]), App.Title())
 			Reload
 		}
 	}

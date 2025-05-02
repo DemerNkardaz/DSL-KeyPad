@@ -86,7 +86,7 @@ Class ChrRecipeHandler {
 			interValue := ""
 			Loop characterInfo.repeatCount {
 				if !ChrLib.entries.HasOwnProp(characterInfo.name) {
-					MsgBox(Locale.Read("error_critical") "`n`n" Util.StrVarsInject(Locale.Read("error_entry_not_found_recipe"), recipe, characterInfo.name), App.Title(), "Iconx")
+					MsgBox(Locale.Read("error_critical") "`n`n" Locale.ReadInject("error_entry_not_found_recipe", [recipe, characterInfo.name]), App.Title(), "Iconx")
 					return
 				}
 				interValue .= Chrlib.Get(characterInfo.name, characterInfo.hasAlteration, characterInfo.alteration)

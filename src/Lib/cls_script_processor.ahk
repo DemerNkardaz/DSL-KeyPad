@@ -723,7 +723,7 @@ Class InputScriptProcessor {
 		}
 
 
-		!reloadHs && ShowInfoMessage(Util.StrVarsInject((Locale.Read("script_mode_" (isEnabled ? "" : "de") "activated")), Locale.Read("script_" this.mode)), , , Cfg.SkipGroupMessage, True, True)
+		!reloadHs && ShowInfoMessage(Locale.ReadInject("script_mode_" (isEnabled ? "" : "de") "activated", [Locale.Read("script_" this.mode)]), , , Cfg.SkipGroupMessage, True, True)
 	}
 
 	static InH := InputHook("V")

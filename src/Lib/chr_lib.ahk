@@ -9710,5 +9710,5 @@ LibRegistrate(this) {
 	this.AddEntries(rawEntries)
 
 	if this.duplicatesList.Length > 0
-		TrayTip(Util.StrVarsInject(Locale.Read("warning_duplicate_recipe"), this.duplicatesList.ToString()), App.Title("+status+version"), "Icon! Mute")
+		TrayTip(Locale.ReadInject("warning_duplicate_recipe", [this.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
 }

@@ -119,7 +119,7 @@ Class ChrCrafter {
 			hasBacktick := InStr(input, "``")
 
 			tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
-			currentInputMode := Util.StrVarsInject(Locale.Read("tooltip_input_mode"), "[" Auxiliary.inputMode "]")
+			currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
 
 			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 

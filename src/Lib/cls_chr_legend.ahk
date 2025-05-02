@@ -50,7 +50,7 @@ Class ChrLegend {
 			legendData := this.ReadLegend(value.options.legend)
 			languageCode := Language.Get()
 
-			panelTitle := App.Title("+status+version") " — " Util.StrVarsInject(Locale.Read("gui_legend"), Locale.Read(data.entry))
+			panelTitle := App.Title("+status+version") " — " Locale.ReadInject("gui_legend", [Locale.Read(data.entry)])
 
 			screenWidth := A_ScreenWidth
 			screenHeight := A_ScreenHeight

@@ -178,7 +178,7 @@ Class Cfg {
 			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
 
 			if Update.available {
-				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Util.StrVarsInject(Locale.Read("update_available"), Update.availableVersion))
+				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Locale.ReadInject("update_available", [Update.availableVersion]))
 				updateBtn.OnEvent("Click", (*) => Update.Get())
 
 			} else {
@@ -429,7 +429,7 @@ Class Cfg {
 						MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
 						return
 					} else {
-						message := Util.StrVarsInject(Locale.Read("gui_recipes_remove_confirm"), recipeArray[1])
+						message := Locale.ReadInject("gui_recipes_remove_confirm", [recipeArray[1]])
 						confirBox := MsgBox(message, App.Title(), 4)
 						if confirBox = "No" {
 							return

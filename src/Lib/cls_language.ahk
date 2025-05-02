@@ -199,17 +199,19 @@ Class Locale {
 		return result
 	}
 
-
-	static Read(EntryName, Prefix := "", validate := False, &output?) {
+	static ReadInject(entryName, strInjections := []) {
+		return this.Read(entryName, , , , strInjections)
+	}
+	static Read(entryName, Prefix := "", validate := False, &output?, strInjections := []) {
 		Intermediate := ""
 		Section := Language.Validate(Prefix) ? Prefix : (!IsSpace(Prefix) ? Prefix "_" Language.Get() : Language.Get())
 		try {
-			Intermediate := this.ReadStr(Section, EntryName)
+			Intermediate := this.ReadStr(Section, entryName)
 
 			while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
 				LangCode := match[1]
 				SectionOverride := !IsSpace(Prefix) ? Prefix "_" LangCode : LangCode
-				Replacement := this.ReadStr(SectionOverride, EntryName)
+				Replacement := this.ReadStr(SectionOverride, entryName)
 				Intermediate := StrReplace(Intermediate, match[0], Replacement)
 			}
 
@@ -245,8 +247,8 @@ Class Locale {
 			output := Intermediate
 			return StrLen(Intermediate) > 0
 		} else {
-			Intermediate := !IsSpace(Intermediate) ? Intermediate : "KEY (" EntryName "): NOT FOUND"
-			return Intermediate
+			Intermediate := !IsSpace(Intermediate) ? Intermediate : "KEY (" entryName "): NOT FOUND"
+			return strInjections ? Util.StrVarsInject(Intermediate, strInjections) : Intermediate
 		}
 	}
 

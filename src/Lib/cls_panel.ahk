@@ -774,7 +774,7 @@ Class Panel {
 			customEntriesCount := ChrLib.Count("Custom Composes")
 
 
-			chrCount := Util.StrVarsInject(Locale.Read("about_lib_count"), (ChrLib.Count() - customEntriesCount), recipesCount, customRecipesCount)
+			chrCount := Locale.ReadInject("about_lib_count", [(ChrLib.Count() - customEntriesCount), recipesCount, customRecipesCount])
 
 			aboutDescBox := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutDescBox, App.Title(["decoded"]))
 			aboutDescBox.SetFont("s11", "Cambria")
@@ -1139,7 +1139,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "Alert"].Text := ""
 			for pattern, fontName in FontMap {
 				if RegExMatch(characterEntry, pattern) {
-					this.PanelGUI[options.prefix "Alert"].Text := Util.StrVarsInject(Locale.Read("warning_nofont"), fontName)
+					this.PanelGUI[options.prefix "Alert"].Text := Locale.ReadInject("warning_nofont", [fontName])
 					break
 				}
 			}

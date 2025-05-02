@@ -154,7 +154,7 @@ Class ChrLib {
 			progressPanel.AddProgress("vInitPogressBar Range0-" this.maxCountOfEntries " w" prgBarW " h" prgBarH " x" prgBarX " y" prgBarY, 0)
 
 
-			progressPanel.AddText("vInitPorgressCounter w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 40), Util.StrVarsInject(Locale.Read("lib_init_elems"), 0, this.maxCountOfEntries))
+			progressPanel.AddText("vInitPorgressCounter w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 40), Locale.ReadInject("lib_init_elems", [0, this.maxCountOfEntries]))
 			progressPanel.AddText("vInitPorgressEntryName w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 20), "")
 
 			progressPanel.Show("w" windowWidth " h" windowHeight " x" xPos " y" yPos)
@@ -218,8 +218,8 @@ Class ChrLib {
 			progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
 
 			this.progressBarCurrent++
-			this.progressBarGUI["InitPorgressCounter"].Text := Util.StrVarsInject(Locale.Read("lib_init_elems"), this.progressBarCurrent, this.maxCountOfEntries) (typeOfInit = "Custom" ? " : " Locale.Read("lib_init_custom") : " : " Locale.Read("lib_init_internal_lib"))
-			this.progressBarGUI["InitPorgressEntryName"].Text := Util.StrVarsInject(Locale.Read("lib_init_entry"), progressName)
+			this.progressBarGUI["InitPorgressCounter"].Text := Locale.ReadInject("lib_init_elems", [this.progressBarCurrent, this.maxCountOfEntries]) (typeOfInit = "Custom" ? " : " Locale.Read("lib_init_custom") : " : " Locale.Read("lib_init_internal_lib"))
+			this.progressBarGUI["InitPorgressEntryName"].Text := Locale.ReadInject("lib_init_entry", [progressName])
 
 			if this.maxCountOfEntries > 0 {
 				this.progressBarGUI["InitPogressBar"].Value++
@@ -458,7 +458,7 @@ Class ChrLib {
 				try {
 					return entry.result.Length = 1 ? entry.result[1] : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
 				} catch {
-					MsgBox(Locale.Read("error_critical") "`n`n" Util.StrVarsInject(Locale.Read("error_entry_not_found"), entryName), App.Title(), "Iconx")
+					MsgBox(Locale.Read("error_critical") "`n`n" Locale.ReadInject("error_entry_not_found", [entryName]), App.Title(), "Iconx")
 					return
 				}
 			}
@@ -617,7 +617,7 @@ Class ChrLib {
 				Cfg.Set(searchQuery, "Search", "LatestPrompts")
 			} else {
 				if resultObj.failed.Length > 0
-					MsgBox(Util.StrVarsInject(Locale.Read("warning_tag_absent"), resultObj.failed.ToString()), App.Title(), "Icon!")
+					MsgBox(Locale.ReadInject("warning_tag_absent", [resultObj.failed.ToString()]), App.Title(), "Icon!")
 			}
 
 			return resultObj

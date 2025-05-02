@@ -103,6 +103,10 @@ Class Util {
 	}
 
 	static StrVarsInject(StringVar, SetVars*) {
+		if SetVars[1] is Array {
+			SetVars := SetVars[1]
+		}
+
 		Result := StringVar
 		for index, value in SetVars {
 			Result := StrReplace(Result, "{" (index - 1) "}", value)
