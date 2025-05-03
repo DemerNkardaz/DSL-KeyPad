@@ -28,16 +28,17 @@ jobs:
         id: extract
         run: |
           $version = Get-Content -Path src\version
-          echo "::set-output name=version::$version"
+          echo "version=$version" >> $GITHUB_OUTPUT
 
-          $prerelease = Get-Content -Path src\prerelease
-          echo "::set-output name=prerelease::$prerelease"
+          $pr = Get-Content -Path src\prerelease
+          echo "prerelease=$pr" >> $GITHUB_OUTPUT
 
           $title = Get-Content -Path src\title
-          echo "::set-output name=title::$title"
+          echo "title=$title" >> $GITHUB_OUTPUT
 
-          $message = Get-Content -Path src\message
-          echo "::set-output name=body::$message"
+          $msg = Get-Content -Path src\message
+          echo "body=$msg" >> $GITHUB_OUTPUT
+        shell: pwsh
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
         with:
