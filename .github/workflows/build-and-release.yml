@@ -27,18 +27,16 @@ jobs:
       - name: Extract version, prerelease flag & message
         id: extract
         run: |
-          $version = Get-Content -Path src\version
-          echo "version=$version" >> $GITHUB_OUTPUT
+          version=$(< src/version)
+          prerelease=$(< src/prerelease)
+          title=$(< src/title)
+          body=$(< src/message)
 
-          $pr = Get-Content -Path src\prerelease
-          echo "prerelease=$pr" >> $GITHUB_OUTPUT
+          echo "version=$version"    >> $GITHUB_OUTPUT
+          echo "prerelease=$prerelease" >> $GITHUB_OUTPUT
+          echo "title=$title"        >> $GITHUB_OUTPUT
+          echo "body=$body"          >> $GITHUB_OUTPUT
 
-          $title = Get-Content -Path src\title
-          echo "title=$title" >> $GITHUB_OUTPUT
-
-          $msg = Get-Content -Path src\message
-          echo "body=$msg" >> $GITHUB_OUTPUT
-        shell: pwsh
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
         with:
