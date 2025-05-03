@@ -2,7 +2,7 @@
 set ver="0.1.1.2-alpha-testing"
 set preRelease="True"
 set makeLatest="True"
-set message="Release with tag 0.1.1.2-alpha-testing automatically created or updated via workflow :: [Stamp :: 2025-05-03 10:47:27]<br><br>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."
+set message="Release with tag 0.1.1.2-alpha-testing automatically created or updated via workflow :: [Stamp :: 2025-05-03 10:57:24]^<br^>^<br^>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."
 
 set title="DSL KeyPad — V[0.1.1.2-alpha-testing] — (αλφα)"
 echo Version: %ver%
