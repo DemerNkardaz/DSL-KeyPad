@@ -29,7 +29,7 @@ Class Dev {
 			'set ver="' ver '"`n'
 			'set preRelease="' (isPre ? "True" : "False") '"`n'
 			'set makeLatest="' (isLatest ? "True" : "False") '"`n'
-			'set message="Release with tag ' ver ' automatically created or updated via workflow :: [Stamp :: ' Util.GetDate("YYYY-MM-DD hh:mm:ss") ']"`n`n'
+			'set message="Release with tag ' ver ' automatically created or updated via workflow :: [Stamp :: ' Util.GetDate("YYYY-MM-DD hh:mm:ss") ']<br><br>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."`n`n'
 			'set title="DSL KeyPad — V[' ver ']' (status) '"`n'
 			'echo Version: %ver%`n'
 			'echo Pre-release: %preRelease%`n'
