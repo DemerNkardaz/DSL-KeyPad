@@ -8,8 +8,8 @@ Class App {
 	static URL := "https://github.com/" this.repository
 	static API := "https://api.github.com/repos/" this.repository
 	static gitUserContent := "https://raw.githubusercontent.com/" this.repository
-	static branch := this.URL "/tree/main"
-	static refsHeads := this.gitUserContent "/refs/heads/main"
+	static branch := Map("main", this.URL "/tree/main", "dev", this.URL "/tree/dev")
+	static refsHeads := Map("main", this.gitUserContent "/refs/heads/main", "dev", this.gitUserContent "/refs/heads/dev")
 
 	static paths := {
 		dir: A_ScriptDir,

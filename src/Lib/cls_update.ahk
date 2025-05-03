@@ -1,6 +1,7 @@
 Class Update {
 	static releasesJson := "https://data.jsdelivr.com/v1/package/gh/DemerNkardaz/DSL-KeyPad"
 	static fallbackReleases := App.API "/releases"
+	static filesManifest := App.paths.temp "\DSLKeyPad-FilesManifest.txt"
 	static available := False
 	static availableVersion := ""
 
@@ -68,8 +69,8 @@ Class Update {
 			), , "Show")
 
 			exitCode := RunWait(Format(
-				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" -ZipPath "{}" -Destination "{}" -Version "{}"',
-				App.paths.lib "\powershell\update_supporter.ps1", downloadPath "\" downloadName, App.paths.dir, version
+				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" -ZipPath "{}" -Destination "{}" -Version "{}" -ManifestName "{}"',
+				App.paths.lib "\powershell\update_supporter.ps1", downloadPath "\" downloadName, App.paths.dir, version, this.filesManifest
 			), , "Show")
 
 			if exitCode != 0 {
@@ -88,6 +89,15 @@ Class Update {
 		}
 
 		if !failed {
+			if FileExist(this.filesManifest) {
+				content := FileRead(this.filesManifest, "UTF-8")
+				split := StrSplit(content, "`n")
+				filesToDelete := []
+
+				Loop Files, App.paths.dir "\*" {
+
+				}
+			}
 			MsgBox(Locale.ReadInject("update_successful", [App.Ver("+hotfix+postfix"), version]), App.Title())
 			Reload
 		}
@@ -202,7 +212,7 @@ Class Update {
 			targetGUI.AddEdit(UISettings, Locale.Read("warning_nointernet"))
 	}
 
-	static GetChangelog(url := App.refsHeads "/CHANGELOG.md") {
+	static GetChangelog(url := App.refsHeads["main"] "/CHANGELOG.md") {
 		languageCode := Language.Get()
 		http := ComObject("WinHttp.WinHttpRequest.5.1")
 		http.Open("GET", url, true)

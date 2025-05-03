@@ -65,7 +65,7 @@ Class Dev {
 			'			</td>`n'
 			'		</tr>`n'
 			'</table>`n`n'
-			versionCompare '[Changelog](' App.URL '/tree/main/CHANGELOG.md)`n`n'
+			versionCompare '[Changelog](' App.branch["main"] '/CHANGELOG.md)`n`n'
 			'[Yalla Nkardaz’s custom files](' App.URL '-Custom-Files) repository for DSL KeyPad.`n'
 		)
 
