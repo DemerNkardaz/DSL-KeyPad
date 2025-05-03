@@ -35,12 +35,12 @@ Class Dev {
 			'Write-Host "Release message:`n$message"`n`n'
 			'& "./build_executable.cmd"`n'
 			'& "./Bin/build_icons_dll.cmd"`n`n'
-			'Write-Output "version=$ver" >> $env:GITHUB_OUTPUT`n'
-			'Write-Output "preRelease=$prerelease" >> $env:GITHUB_OUTPUT`n'
-			'Write-Output "makeLatest=$make_latest" >> $env:GITHUB_OUTPUT`n'
-			'Write-Output "title=$title" >> $env:GITHUB_OUTPUT`n'
-			'Write-Output "body=$message" >> $env:GITHUB_OUTPUT`n`n'
-			'& "$PSScriptRoot/Lib/powershell/pack_bundle.ps1" -FolderPath "$PSScriptRoot" -Version $ver'
+			'& "$PSScriptRoot/Lib/powershell/pack_bundle.ps1" -FolderPath "$PSScriptRoot" -Version $ver`n`n'
+			'echo "version=$ver" >> $env:GITHUB_OUTPUT`n'
+			'echo "preRelease=$prerelease" >> $env:GITHUB_OUTPUT`n'
+			'echo "makeLatest=$make_latest" >> $env:GITHUB_OUTPUT`n'
+			'echo "title=$title" >> $env:GITHUB_OUTPUT`n'
+			'echo "body=$message" >> $env:GITHUB_OUTPUT'
 		)
 
 		if FileExist(path)
