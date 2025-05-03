@@ -3,18 +3,21 @@ name: Build & Release
 on:
   push:
     branches:
-      - main # или любая нужная ветка
+      - main
 
 jobs:
   build-and-release:
     runs-on: windows-latest
 
     permissions:
-      contents: write # Нужно для создания/редактирования релизов
+      contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install Visual Studio Build Tools
+        uses: microsoft/setup-msbuild@v1
 
       - name: Run build script
         working-directory: ./src
