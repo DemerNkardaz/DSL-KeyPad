@@ -33,23 +33,25 @@ jobs:
           $prerelease = Get-Content -Path src\prerelease
           echo "::set-output name=prerelease::$prerelease"
 
+          $title = Get-Content -Path src\title
+          echo "::set-output name=title::$title"
+
           $message = Get-Content -Path src\message
           echo "::set-output name=body::$message"
-
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.extract.outputs.version }}
           assets: DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
-          fail-if-no-release: true
-          fail-if-no-assets: true
+          fail-if-no-release: false
+          fail-if-no-assets: false
 
       - name: Create or update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.extract.outputs.version }}
-          name: ${{ steps.extract.outputs.version }}
+          name: ${{ steps.extract.outputs.title }}
           body: ${{ steps.extract.outputs.body }}
           draft: false
           prerelease: ${{ steps.extract.outputs.prerelease == 'True' }}

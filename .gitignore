@@ -1,6 +1,8 @@
 build
 version
 message
+title
+latest
 prelease
 make_latest
 src/bin/DSLKeyPad_App_Icons/.vs/
