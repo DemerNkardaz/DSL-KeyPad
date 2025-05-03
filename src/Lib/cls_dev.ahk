@@ -25,6 +25,7 @@ Class Dev {
 			'@echo off`n'
 			'set ver="' ver '"`n'
 			'set preRelease="' (App.Ver(["pre-release"]) = "1" ? "True" : "False") '"`n'
+			'set makeLatest="' (App.Ver(["latest"]) = "1" ? "True" : "False") '`n'
 			'set message="Release with tag ' ver ' automatically created via workflow"`n`n'
 			'echo Version: %ver%`n'
 			'echo Pre-release: %preRelease%`n'

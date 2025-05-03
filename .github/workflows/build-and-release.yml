@@ -52,7 +52,7 @@ jobs:
           name: ${{ steps.extract.outputs.version }}
           body: ${{ steps.extract.outputs.body }}
           draft: false
-          prerelease: ${{ steps.extract.outputs.prerelease }}
+          prerelease: ${{ steps.extract.outputs.prerelease == 'True' }}
           files: |
             DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
         env:

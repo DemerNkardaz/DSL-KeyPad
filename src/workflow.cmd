@@ -1,6 +1,7 @@
 @echo off
 set ver="0.1.1.1-alpha-testing"
 set preRelease="True"
+set makeLatest="True
 set message="Release with tag 0.1.1.1-alpha-testing automatically created via workflow"
 
 echo Version: %ver%
