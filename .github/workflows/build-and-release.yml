@@ -25,7 +25,7 @@ jobs:
       - name: Run build script
         working-directory: ./src
         run: powershell -ExecutionPolicy Bypass -File workflow.ps1
-      - name: Extract version, prerelease flag & message
+      - name: Extract release information
         id: extract
         run: |
           $version = Get-Content -Path src\version

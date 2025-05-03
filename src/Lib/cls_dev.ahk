@@ -25,18 +25,23 @@ Class Dev {
 
 		downloadLink := App.URL "/releases/download/" version "/DSL-KeyPad-" version ".zip"
 		releasesArray := Update.ChekVersions()
-		previousVersion := ""
 
-		for i, release in releasesArray {
-			if releasesArray.Length > 1 && release = version {
-				previousVersion := releasesArray[i + 1]
-				break
-			} else {
-				previousVersion := version
+		previousVersion := releasesArray.Length = 1 ? version : ""
+		found := False
+
+		if releasesArray.Length > 1 {
+			for i, release in releasesArray {
+				if release = version {
+					previousVersion := releasesArray[i + 1]
+					found := True
+					break
+				}
 			}
+			if !found
+				previousVersion := releasesArray[1]
 		}
 
-		versionCompare := (previousVersion != version) ? '**Versions compare** [' previousVersion '&ensp;>>>&ensp;' version '](https://github.com/DemerNkardaz/DSL-KeyPad/compare/' previousVersion '...' version '#files_bucket) | ' : ""
+		versionCompare := (previousVersion != version) ? '**Versions compare** [' previousVersion '&ensp;>>>&ensp;' version '](' App.URL '/compare/' previousVersion '...' version '#files_bucket) | ' : ""
 
 		messageParts := (
 			'Automatically created/updated via build process in workflow.<br>`n`n'
@@ -61,8 +66,7 @@ Class Dev {
 			'		</tr>`n'
 			'</table>`n`n'
 			versionCompare '[Changelog](' App.URL '/tree/main/CHANGELOG.md)`n`n'
-			'[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad.`n`n'
-			'@DemerNkardaz '
+			'[Yalla Nkardaz’s custom files](' App.URL '-Custom-Files) repository for DSL KeyPad.`n'
 		)
 
 		body := (

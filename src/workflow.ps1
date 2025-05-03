@@ -8,7 +8,7 @@ Automatically created/updated via build process in workflow.<br>
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				2025-05-03 23:58:48
+				2025-05-04 00:44:38
 			</td>
 		</tr>
 		<tr>
@@ -29,7 +29,6 @@ Automatically created/updated via build process in workflow.<br>
 
 [Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad.
 
-@DemerNkardaz 
 "@
 
 Write-Host "Version: $ver"
