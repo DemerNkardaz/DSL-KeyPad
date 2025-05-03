@@ -19,17 +19,57 @@ Class Dev {
 
 	static CreateWorkflowScript() {
 		path := App.paths.dir "\workflow.ps1"
-		ver := App.Ver("+hotfix+postfix")
+		version := App.Ver("+hotfix+postfix")
 		isPre := App.Ver(["pre-release"]) = "1"
-		isLatest := App.Ver(["latest"]) = "1"
 		status := StrLen(App.Title(["status"])) > 0 ? " — " App.Title(["status"]) : ""
 
+		downloadLink := App.URL "/releases/download/" version "/DSL-KeyPad-" version ".zip"
+		releasesArray := Update.ChekVersions()
+		previousVersion := ""
+
+		for i, release in releasesArray {
+			if releasesArray.Length > 1 && release = version {
+				previousVersion := releasesArray[i + 1]
+				break
+			} else {
+				previousVersion := version
+			}
+		}
+
+		versionCompare := (previousVersion != version) ? '**Versions compare** [' previousVersion '&ensp;>>>&ensp;' version '](https://github.com/DemerNkardaz/DSL-KeyPad/compare/' previousVersion '...' version '#files_bucket) | ' : ""
+
+		messageParts := (
+			'Automatically created/updated via build process in workflow.<br>`n`n'
+			'<table>`n'
+			'		<tr>`n'
+			'			<td><b>Stamp</b></td>`n'
+			'			<td>`n'
+			'				' Util.GetDate("YYYY-MM-DD hh:mm:ss") '`n'
+			'			</td>`n'
+			'		</tr>`n'
+			'		<tr>`n'
+			'			<td><b>Version</b></td>`n'
+			'			<td>`n'
+			'				&#128229;&emsp14;<a href="' downloadLink '">' version '</a>`n'
+			'			</td>`n'
+			'		</tr>`n'
+			'		<tr>`n'
+			'			<td><b>Requirements</b></td>`n'
+			'			<td>`n'
+			'				<img src="https://www.autohotkey.com/favicon.ico" width="16" style="vertical-align:middle;">&emsp14;<a href="https://www.autohotkey.com/download/ahk-v2.exe">AutoHotkey v2.^</a>`n'
+			'			</td>`n'
+			'		</tr>`n'
+			'</table>`n`n'
+			versionCompare '[Changelog](' App.URL '/tree/main/CHANGELOG.md)`n`n'
+			'[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad.`n`n'
+			'@DemerNkardaz '
+		)
+
 		body := (
-			'$ver = "' ver '"`n'
+			'$ver = "' version '"`n'
 			'$preRelease = "' (isPre ? "True" : "False") '"`n'
-			'$makeLatest = "' (isLatest ? "True" : "False") '"`n'
-			'$title = "DSL KeyPad — V[' ver ']' status '"`n'
-			'$message = "Release with tag ' ver ' automatically created or updated via workflow :: [Stamp :: ' Util.GetDate("YYYY-MM-DD hh:mm:ss") ']<br><br>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."`n`n'
+			'$title = "DSL KeyPad — V[' version ']' status '"`n'
+			'$message =@"`n' messageParts '`n"@`n`n'
 			'Write-Host "Version: $ver"`n'
 			'Write-Host "Pre-release: $preRelease"`n'
 			'Write-Host "Release message:`n$message"`n`n'

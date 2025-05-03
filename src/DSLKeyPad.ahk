@@ -5549,7 +5549,7 @@ ManageTrayItems() {
 	UpdateEntry := Labels["install"] " " Update.availableVersion
 
 	App.tray.Delete()
-	App.tray.Add(CurrentApp, (*) => Run("https://github.com/DemerNkardaz/DSL-KeyPad/tree/main"))
+	App.tray.Add(CurrentApp, (*) => Run(App.URL))
 	if Update.available {
 		App.tray.Add(UpdateEntry, (*) => Update.Get())
 		App.tray.SetIcon(UpdateEntry, ImageRes, 176)

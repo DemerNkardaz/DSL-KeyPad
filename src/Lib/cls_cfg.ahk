@@ -22,6 +22,7 @@ Class Cfg {
 			"Validate_With_CaretPos", "True",
 			"F13F24", "False",
 			"FirstMessage", "True",
+			"Turn_Off_Autocheck_Update", "False",
 		],
 		"Compose", [],
 		"ScriptProcessor", [
@@ -82,7 +83,9 @@ Class Cfg {
 	}
 
 	static Editor() {
-		Update.Check()
+		if !Cfg.Get("Turn_Off_Autocheck_Updates", , False, "bool") {
+			Update.Check()
+		}
 
 		if Update.available {
 			ManageTrayItems()
