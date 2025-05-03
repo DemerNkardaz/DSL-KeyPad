@@ -24,8 +24,8 @@ jobs:
 
       - name: Run build script
         working-directory: ./src
-        run: workflow.cmd
-        shell: cmd
+        run: workflow.ps1
+        shell: pwsh
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
         with:
