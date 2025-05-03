@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
 
     permissions:
-      contents: write # Нужна для создания/редактирования релизов
+      contents: write # Нужно для создания/редактирования релизов
 
     steps:
       - name: Checkout repository
@@ -21,37 +21,36 @@ jobs:
         run: workflow.cmd
         shell: cmd
 
-      - name: Set version environment variable
+      - name: Extract version, prerelease flag & message
+        id: extract
         run: |
           $version = Get-Content -Path src\version
-          echo "version=$version" >> $GITHUB_ENV
+          echo "::set-output name=version::$version"
 
-      - name: Set prerelease environment variable
-        run: |
           $prerelease = Get-Content -Path src\prerelease
-          echo "prerelease=$prerelease" >> $GITHUB_ENV
+          echo "::set-output name=prerelease::$prerelease"
 
-      - name: Set message environment variable
-        run: |
           $message = Get-Content -Path src\message
-          echo "body=$message" >> $GITHUB_ENV
+          echo "::set-output name=body::$message"
 
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ env.version }}
-          assets: DSL-KeyPad-${{ env.version }}.zip
+          tag: ${{ steps.extract.outputs.version }}
+          assets: DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
+          fail-if-no-release: true
+          fail-if-no-assets: true
 
       - name: Create or update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ env.version }}
-          name: ${{ env.version }}
-          body: ${{ env.body }}
+          tag_name: ${{ steps.extract.outputs.version }}
+          name: ${{ steps.extract.outputs.version }}
+          body: ${{ steps.extract.outputs.body }}
           draft: false
-          prerelease: ${{ env.prerelease }}
+          prerelease: ${{ steps.extract.outputs.prerelease }}
           files: |
-            DSL-KeyPad-${{ env.version }}.zip
+            DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
