@@ -21,17 +21,20 @@ jobs:
         run: workflow.cmd
         shell: cmd
 
-      - name: Read version from file
-        id: extract-version
-        run: echo "version=$(<src/version)" >> $GITHUB_ENV
+      - name: Set version environment variable
+        run: |
+          $version = Get-Content -Path src\version
+          echo "version=$version" >> $GITHUB_ENV
 
-      - name: Read prerelease from file
-        id: extract-prerelease
-        run: echo "prerelease=$(<src/prerelease)" >> $GITHUB_ENV
+      - name: Set prerelease environment variable
+        run: |
+          $prerelease = Get-Content -Path src\prerelease
+          echo "prerelease=$prerelease" >> $GITHUB_ENV
 
-      - name: Read message from file
-        id: extract-message
-        run: echo "body=$(<src/message)" >> $GITHUB_ENV
+      - name: Set message environment variable
+        run: |
+          $message = Get-Content -Path src\message
+          echo "body=$message" >> $GITHUB_ENV
 
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
