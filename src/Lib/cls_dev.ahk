@@ -35,12 +35,12 @@ Class Dev {
 			'Write-Host "Release message:`n$message"`n`n'
 			'& "./build_executable.cmd"`n'
 			'& "./Bin/build_icons_dll.cmd"`n`n'
-			'& "$PSScriptRoot/Lib/powershell/pack_bundle.ps1" -FolderPath "$PSScriptRoot" -Version $ver`n`n'
-			'echo "version=$ver" >> $env:GITHUB_OUTPUT`n'
-			'echo "preRelease=$prerelease" >> $env:GITHUB_OUTPUT`n'
-			'echo "makeLatest=$make_latest" >> $env:GITHUB_OUTPUT`n'
-			'echo "title=$title" >> $env:GITHUB_OUTPUT`n'
-			'echo "body=$message" >> $env:GITHUB_OUTPUT'
+			'& "$PSScriptRoot/Lib/powershell/pack_bundle.ps1" -FolderPath "$PSScriptRoot" -Version $ver -SleepingDuration 0`n`n'
+			'[System.IO.File]::WriteAllText("$PSScriptRoot/version", $ver, [System.Text.Encoding]::UTF8)`n'
+			'[System.IO.File]::WriteAllText("$PSScriptRoot/prerelease", $preRelease, [System.Text.Encoding]::UTF8)`n'
+			'[System.IO.File]::WriteAllText("$PSScriptRoot/latest", $makeLatest, [System.Text.Encoding]::UTF8)`n'
+			'[System.IO.File]::WriteAllText("$PSScriptRoot/title", $title, [System.Text.Encoding]::UTF8)`n'
+			'[System.IO.File]::WriteAllText("$PSScriptRoot/message", $message, [System.Text.Encoding]::UTF8)'
 		)
 
 		if FileExist(path)

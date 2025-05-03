@@ -1,6 +1,7 @@
 ﻿param (
 	[Parameter(Mandatory = $true)][string]$FolderPath,
-	[Parameter(Mandatory = $true)][string]$Version
+	[Parameter(Mandatory = $true)][string]$Version,
+	[Int16]$SleepingDuration = 4
 )
 
 if (-not (Test-Path $FolderPath -PathType Container)) {
@@ -105,7 +106,7 @@ try {
 	Write-Host "Compression ratio: $compressionRatio%" -ForegroundColor Green
 	Write-Host ""
 	
-	Start-Sleep -Seconds 4
+	Start-Sleep -Seconds $SleepingDuration
 	exit 0
 }
 catch {

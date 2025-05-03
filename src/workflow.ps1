@@ -2,7 +2,7 @@
 $preRelease = "True"
 $makeLatest = "True"
 $title = "DSL KeyPad — V[0.1.1.2-alpha-testing] — (αλφα)"
-$message = "Release with tag 0.1.1.2-alpha-testing automatically created or updated via workflow :: [Stamp :: 2025-05-03 11:25:32]<br><br>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."
+$message = "Release with tag 0.1.1.2-alpha-testing automatically created or updated via workflow :: [Stamp :: 2025-05-03 11:32:00]<br><br>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."
 
 Write-Host "Version: $ver"
 Write-Host "Pre-release: $preRelease"
@@ -12,10 +12,10 @@ $message"
 & "./build_executable.cmd"
 & "./Bin/build_icons_dll.cmd"
 
-& "$PSScriptRoot/Lib/powershell/pack_bundle.ps1" -FolderPath "$PSScriptRoot" -Version $ver
+& "$PSScriptRoot/Lib/powershell/pack_bundle.ps1" -FolderPath "$PSScriptRoot" -Version $ver -SleepingDuration 0
 
-echo "version=$ver" >> $env:GITHUB_OUTPUT
-echo "preRelease=$prerelease" >> $env:GITHUB_OUTPUT
-echo "makeLatest=$make_latest" >> $env:GITHUB_OUTPUT
-echo "title=$title" >> $env:GITHUB_OUTPUT
-echo "body=$message" >> $env:GITHUB_OUTPUT
+[System.IO.File]::WriteAllText("$PSScriptRoot/version", $ver, [System.Text.Encoding]::UTF8)
+[System.IO.File]::WriteAllText("$PSScriptRoot/prerelease", $preRelease, [System.Text.Encoding]::UTF8)
+[System.IO.File]::WriteAllText("$PSScriptRoot/latest", $makeLatest, [System.Text.Encoding]::UTF8)
+[System.IO.File]::WriteAllText("$PSScriptRoot/title", $title, [System.Text.Encoding]::UTF8)
+[System.IO.File]::WriteAllText("$PSScriptRoot/message", $message, [System.Text.Encoding]::UTF8)

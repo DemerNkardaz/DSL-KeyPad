@@ -3,7 +3,7 @@ version
 message
 title
 latest
-prelease
+prerelease
 make_latest
 src/bin/DSLKeyPad_App_Icons/.vs/
 src/bin/DSLKeyPad_App_Icons/x64/
