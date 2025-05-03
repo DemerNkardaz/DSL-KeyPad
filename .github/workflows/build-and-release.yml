@@ -3,14 +3,14 @@ name: Build & Release
 on:
   push:
     branches:
-      - main # или любая нужная ветка
+      - main
 
 jobs:
   build-and-release:
     runs-on: windows-latest
 
     permissions:
-      contents: write # нужно для создания/редактирования релизов
+      contents: write # Нужна для создания и редактирования релизов
 
     steps:
       - name: Checkout repository
@@ -21,30 +21,43 @@ jobs:
         run: workflow.cmd
         shell: cmd
 
-      - name: Extract version, prerelease flag & message
-        id: extract
+      - name: Extract version
+        id: extract-version
         shell: cmd
         run: |
           for /f "tokens=2 delims==" %%A in ('findstr /i "^set ver=" src\workflow.cmd') do echo version=%%A>> %GITHUB_OUTPUT%
+          echo Extracted version: ${{ steps.extract-version.outputs.version }}
+
+      - name: Extract prerelease flag
+        id: extract-prerelease
+        shell: cmd
+        run: |
           for /f "tokens=2 delims==" %%A in ('findstr /i "^set preRelease=" src\workflow.cmd') do echo prerelease=%%A>> %GITHUB_OUTPUT%
+          echo Extracted prerelease: ${{ steps.extract-prerelease.outputs.prerelease }}
+
+      - name: Extract message
+        id: extract-message
+        shell: cmd
+        run: |
           for /f "tokens=2 delims==" %%A in ('findstr /i "^set message=" src\workflow.cmd') do echo body=%%A>> %GITHUB_OUTPUT%
+          echo Extracted message: ${{ steps.extract-message.outputs.body }}
 
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.extract.outputs.version }}
-          assets: DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
+          tag: ${{ steps.extract-version.outputs.version }}
+          assets: DSL-KeyPad-${{ steps.extract-version.outputs.version }}.zip
 
       - name: Create or update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.extract.outputs.version }}
-          name: ${{ steps.extract.outputs.version }}
-          body: ${{ steps.extract.outputs.body }}
+          tag_name: ${{ steps.extract-version.outputs.version }}
+          name: ${{ steps.extract-version.outputs.version }}
+          body: ${{ steps.extract-message.outputs.body }}
           draft: false
-          prerelease: ${{ steps.extract.outputs.prerelease }}
+          prerelease: ${{ steps.extract-prerelease.outputs.prerelease }}
           files: |
-            DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
+            DSL-KeyPad-${{ steps.extract-version.outputs.version }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
