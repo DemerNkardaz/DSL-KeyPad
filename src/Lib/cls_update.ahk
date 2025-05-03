@@ -27,7 +27,7 @@ Class Update {
 		}
 	}
 
-	static Bundler() {
+	static Build() {
 		Dev.SetSrc()
 		try {
 			exitCode := RunWait(Format(

@@ -23,10 +23,10 @@ try {
 	Write-Host ""
 	Write-Host "Preparing to create archive..." -ForegroundColor Cyan
 	Write-Host ""
-	
+
 	$files = Get-ChildItem -Path $FolderPath -Recurse -File | Where-Object {
 		$relativePath = $_.FullName.Substring($FolderPath.Length).TrimStart('\', '/')
-		return $relativePath -notlike 'User\*'
+		return ($relativePath -notlike 'User\*') -and ($relativePath -ne 'workflow.cmd')
 	}
 	
 	$totalFiles = $files.Count

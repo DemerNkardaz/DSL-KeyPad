@@ -6,4 +6,3 @@
   /win32icon:Bin\DSLKeyPad_App_Icons\DSLKeyPad.app.ico ^
   /reference:System.Drawing.dll ^
   DSLKeyPad.cs
-pause

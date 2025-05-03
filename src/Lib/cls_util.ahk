@@ -374,7 +374,7 @@ Class Util {
 		Output := Input
 		if IsObject(Output) {
 			for i, k in Output {
-				Output[i] = ReplaceModifierKeys(k)
+				Output[i] = this.ReplaceModifierKeys(k)
 			}
 		} else {
 			Output := RegExReplace(Output, "\<\!", LeftAlt)
