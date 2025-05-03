@@ -36,7 +36,11 @@ jobs:
           echo "version=$version" >> $env:GITHUB_OUTPUT
           echo "prerelease=$prerelease" >> $env:GITHUB_OUTPUT
           echo "title=$title" >> $env:GITHUB_OUTPUT
-          echo "body=$message" >> $env:GITHUB_OUTPUT
+          {
+            echo 'body<<EOF'
+            echo "$MESSAGE"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
 
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
