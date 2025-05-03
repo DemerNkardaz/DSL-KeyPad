@@ -26,20 +26,6 @@ jobs:
         working-directory: ./src
         run: workflow.cmd
         shell: cmd
-
-      - name: Extract version, prerelease flag & message
-        id: extract
-        run: |
-          $version = Get-Content -Path src\version
-          $prerelease = Get-Content -Path src\prerelease
-          $title = Get-Content -Path src\title
-          $message = Get-Content -Path src\message
-
-          echo "version=$version" >> $env:GITHUB_OUTPUT
-          echo "prerelease=$prerelease" >> $env:GITHUB_OUTPUT
-          echo "title=$title" >> $env:GITHUB_OUTPUT
-          echo "body=$message" >> $env:GITHUB_OUTPUT
-
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
         with:

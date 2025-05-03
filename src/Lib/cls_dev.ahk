@@ -18,35 +18,34 @@ Class Dev {
 	}
 
 	static CreateWorkflowScript() {
-		path := App.paths.dir "\workflow.cmd"
+		path := App.paths.dir "\workflow.ps1"
 		ver := App.Ver("+hotfix+postfix")
 		isPre := App.Ver(["pre-release"]) = "1"
 		isLatest := App.Ver(["latest"]) = "1"
 		status := StrLen(App.Title(["status"])) > 0 ? " — " App.Title(["status"]) : ""
 
 		body := (
-			'@echo off`n'
-			'set ver="' ver '"`n'
-			'set preRelease="' (isPre ? "True" : "False") '"`n'
-			'set makeLatest="' (isLatest ? "True" : "False") '"`n'
-			'set message="Release with tag ' ver ' automatically created or updated via workflow :: [Stamp :: ' Util.GetDate("YYYY-MM-DD hh:mm:ss") ']^<br^>^<br^>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."`n`n'
-			'set title="DSL KeyPad — V[' ver ']' (status) '"`n'
-			'echo Version: %ver%`n'
-			'echo Pre-release: %preRelease%`n'
-			'echo Release message: %message%`n`n'
-			'call build_executable.cmd`n'
-			'call Bin\\build_icons_dll.cmd`n`n'
-			'powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText(`'%~dp0\\version`', `'%ver%`', [System.Text.Encoding]::UTF8)"`n'
-			'powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText(`'%~dp0\\prerelease`', `'%preRelease%`', [System.Text.Encoding]::UTF8)"`n'
-			'powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText(`'%~dp0\\latest`', `'%makeLatest%`', [System.Text.Encoding]::UTF8)"`n'
-			'powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText(`'%~dp0\\title`', `'%title%`', [System.Text.Encoding]::UTF8)"`n'
-			'powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText(`'%~dp0\\message`', `'%message%`', [System.Text.Encoding]::UTF8)"`n`n'
-			'powershell -ExecutionPolicy Bypass -File %~dp0\\Lib\\powershell\\pack_bundle.ps1 -FolderPath %~dp0 -Version "%ver%"'
+			'$ver = "' ver '"`n'
+			'$preRelease = "' (isPre ? "True" : "False") '"`n'
+			'$makeLatest = "' (isLatest ? "True" : "False") '"`n'
+			'$title = "DSL KeyPad — V[' ver ']' status '"`n'
+			'$message = "Release with tag ' ver ' automatically created or updated via workflow :: [Stamp :: ' Util.GetDate("YYYY-MM-DD hh:mm:ss") ']<br><br>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."`n`n'
+			'Write-Host "Version: $ver"`n'
+			'Write-Host "Pre-release: $preRelease"`n'
+			'Write-Host "Release message:`n$message"`n`n'
+			'& "./build_executable.cmd"`n'
+			'& "./Bin/build_icons_dll.cmd"`n`n'
+			'Write-Output "version=$ver" >> $env:GITHUB_OUTPUT`n'
+			'Write-Output "preRelease=$prerelease" >> $env:GITHUB_OUTPUT`n'
+			'Write-Output "makeLatest=$make_latest" >> $env:GITHUB_OUTPUT`n'
+			'Write-Output "title=$title" >> $env:GITHUB_OUTPUT`n'
+			'Write-Output "body=$message" >> $env:GITHUB_OUTPUT`n`n'
+			'& "$PSScriptRoot/Lib/powershell/pack_bundle.ps1" -FolderPath "$PSScriptRoot" -Version $ver'
 		)
-
 
 		if FileExist(path)
 			FileDelete(path)
 		FileAppend(body, path, "UTF-8")
 	}
+
 }

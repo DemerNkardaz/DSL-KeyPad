@@ -31,7 +31,7 @@ try {
 		$isInUserFolder = $relativePath -like 'User\*'
 		$isInBinSubfolder = ($relativePath -like 'Bin\*\*') -and ($relativePath -notmatch '^Bin\\[^\\]+$')
 		$hasExcludedExtension = $_.Extension -in '.cmd', '.cs'
-		$isExcludedFile = $_.Name -in @('version', 'message', 'prerelease', 'make_latest', 'title', 'latest')
+		$isExcludedFile = $_.Name -in @('version', 'message', 'prerelease', 'make_latest', 'title', 'latest', 'workflow.ps1')
 
 		if ($isInUserFolder -or $isInBinSubfolder -or $hasExcludedExtension -or $isExcludedFile) {
 			$excludedFiles += $_
