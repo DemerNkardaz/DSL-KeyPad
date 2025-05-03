@@ -23,14 +23,18 @@ Class Dev {
 
 		body := (
 			'@echo off`n'
-			'set ver=' ver '`n'
-			'set preRelease=' (App.Ver(["pre-release"]) = "1" ? "True" : "False") '`n'
-			'set message=Release with tag ' ver ' automatically created via workflow`n'
-			'`n'
-			'echo %message%`n'
+			'set ver="' ver '"`n'
+			'set preRelease="' (App.Ver(["pre-release"]) = "1" ? "True" : "False") '"`n'
+			'set message="Release with tag ' ver ' automatically created via workflow"`n`n'
+			'echo Version: %ver%`n'
+			'echo Pre-release: %preRelease%`n'
+			'echo Release message: %message%`n`n'
 			'call build_executable.cmd`n'
-			'call Bin\\build_icons_dll.cmd`n'
-			'powershell -ExecutionPolicy Bypass -File %~dp0\\Lib\\powershell\\pack_bundle.ps1 -FolderPath %~dp0 -Version "%ver%"`n'
+			'call Bin\\build_icons_dll.cmd`n`n'
+			'powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText(`'%~dp0\\version`', `'%ver%`', [System.Text.Encoding]::UTF8)"`n'
+			'powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText(`'%~dp0\\prerelease`', `'%preRelease%`', [System.Text.Encoding]::UTF8)"`n'
+			'powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText(`'%~dp0\\message`', `'%message%`', [System.Text.Encoding]::UTF8)"`n`n'
+			'powershell -ExecutionPolicy Bypass -File %~dp0\\Lib\\powershell\\pack_bundle.ps1 -FolderPath %~dp0 -Version "%ver%"'
 		)
 
 

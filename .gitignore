@@ -1,4 +1,7 @@
 build
+version
+message
+prelease
 src/bin/DSLKeyPad_App_Icons/.vs/
 src/bin/DSLKeyPad_App_Icons/x64/
 src/bin/DSLKeyPad_App_Icons/DSLKeyPad.*/x64

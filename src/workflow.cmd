@@ -1,9 +1,17 @@
 @echo off
-set ver=0.1.1.1-alpha-testing
-set preRelease=True
-set message=Release with tag 0.1.1.1-alpha-testing automatically created via workflow
+set ver="0.1.1.1-alpha-testing"
+set preRelease="True"
+set message="Release with tag 0.1.1.1-alpha-testing automatically created via workflow"
 
-echo %message%
+echo Version: %ver%
+echo Pre-release: %preRelease%
+echo Release message: %message%
+
 call build_executable.cmd
 call Bin\\build_icons_dll.cmd
+
+powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText('%~dp0\\version', '%ver%', [System.Text.Encoding]::UTF8)"
+powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText('%~dp0\\prerelease', '%preRelease%', [System.Text.Encoding]::UTF8)"
+powershell -ExecutionPolicy Bypass -Command "[System.IO.File]::WriteAllText('%~dp0\\message', '%message%', [System.Text.Encoding]::UTF8)"
+
 powershell -ExecutionPolicy Bypass -File %~dp0\\Lib\\powershell\\pack_bundle.ps1 -FolderPath %~dp0 -Version "%ver%"
