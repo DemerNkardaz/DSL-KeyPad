@@ -24,8 +24,12 @@ Class Dev {
 			'@echo off`n'
 			'set ver=' App.Ver("+hotfix+postfix") '`n'
 			'set preRelease=' (App.Ver(["pre-release"]) = "1" ? "True" : "False") '`n'
+			'set message=Release with tag %ver% automatically created via workflow`n'
+			'`n'
+			'echo %message%`n'
 			'call build_executable.cmd`n'
 			'call Bin\\build_icons_dll.cmd`n'
+			'powershell -ExecutionPolicy Bypass -File %~dp0\\Lib\\powershell\\pack_bundle.ps1 -FolderPath %~dp0 -Version "%ver%"`n'
 		)
 
 

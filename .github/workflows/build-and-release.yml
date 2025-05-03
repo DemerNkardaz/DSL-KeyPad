@@ -1,0 +1,44 @@
+name: Build & Release
+
+on:
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run build workflow
+        shell: cmd
+        run: src\workflow.cmd
+
+      - name: Extract version, prerelease flag & message
+        id: extract
+        shell: cmd
+        run: |
+          for /f "tokens=2 delims==" %%A in ('findstr /i "^set ver=" src\workflow.cmd') do echo version=%%A>> %GITHUB_OUTPUT%
+          for /f "tokens=2 delims==" %%A in ('findstr /i "^set preRelease=" src\workflow.cmd') do echo prerelease=%%A>> %GITHUB_OUTPUT%
+          for /f "tokens=2 delims==" %%A in ('findstr /i "^set message=" src\workflow.cmd') do echo body=%%A>> %GITHUB_OUTPUT%
+
+      - name: Delete existing ZIP asset (if any)
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.extract.outputs.version }}
+          assets: DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
+
+      - name: Create or update GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.extract.outputs.version }}
+          name: ${{ steps.extract.outputs.version }}
+          body: ${{ steps.extract.outputs.body }}
+          draft: false
+          prerelease: ${{ steps.extract.outputs.prerelease }}
+          files: DSL-KeyPad-${{ steps.extract.outputs.version }}.zip

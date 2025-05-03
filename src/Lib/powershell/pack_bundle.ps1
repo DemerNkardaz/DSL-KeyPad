@@ -24,9 +24,26 @@ try {
 	Write-Host "Preparing to create archive..." -ForegroundColor Cyan
 	Write-Host ""
 
+	$excludedFiles = @()
 	$files = Get-ChildItem -Path $FolderPath -Recurse -File | Where-Object {
 		$relativePath = $_.FullName.Substring($FolderPath.Length).TrimStart('\', '/')
-		return ($relativePath -notlike 'User\*') -and ($relativePath -ne 'workflow.cmd')
+
+		$isInUserFolder = $relativePath -like 'User\*'
+		$isInBinSubfolder = ($relativePath -like 'Bin\*\*') -and ($relativePath -notmatch '^Bin\\[^\\]+$')
+		$hasExcludedExtension = $_.Extension -in '.cmd', '.cs'
+
+		if ($isInUserFolder -or $isInBinSubfolder -or $hasExcludedExtension) {
+			$excludedFiles += $_
+			return $false
+		}
+
+		return $true
+	}
+
+	Write-Host ""
+	Write-Host "Excluded files and paths:" -ForegroundColor Yellow
+	foreach ($excluded in $excludedFiles) {
+		Write-Host $excluded.FullName -ForegroundColor DarkGray
 	}
 	
 	$totalFiles = $files.Count
