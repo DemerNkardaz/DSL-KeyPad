@@ -13,16 +13,9 @@ set vcxproj="%ProjectDir%\DSLKeyPad_App_Icons.vcxproj"
 :: Директория вывода относительно текущей
 set OutputDir=%cd%
 
-:: Пытаемся найти правильный путь к msbuild
-set MSBUILD_PATH="C:\Program Files (x86)\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\msbuild.exe"
-if exist "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\msbuild.exe" (
-    set MSBUILD_PATH="C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\msbuild.exe"
-)
-
 echo Running msbuild...
-
 :: Строим проект с msbuild
-%MSBUILD_PATH% ^
+msbuild ^
   "%ProjectDir%\DSLKeyPad_App_Icons.vcxproj" ^
   /p:Configuration=Release ^
   /p:Platform=x64 ^
