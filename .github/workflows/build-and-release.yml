@@ -32,10 +32,10 @@ jobs:
           $title = Get-Content -Path src\title
           $message = Get-Content -Path src\message
 
-          echo "version=$version" >> $GITHUB_OUTPUT
-          echo "prerelease=$prerelease" >> $GITHUB_OUTPUT
-          echo "title=$title" >> $GITHUB_OUTPUT
-          echo "body=$message" >> $GITHUB_OUTPUT
+          echo "version=$version" >> $env:GITHUB_OUTPUT
+          echo "prerelease=$prerelease" >> $env:GITHUB_OUTPUT
+          echo "title=$title" >> $env:GITHUB_OUTPUT
+          echo "body=$message" >> $env:GITHUB_OUTPUT
 
       - name: Delete existing ZIP asset (if any)
         uses: mknejp/delete-release-assets@v1
