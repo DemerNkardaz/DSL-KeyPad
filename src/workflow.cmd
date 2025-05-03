@@ -1,7 +1,7 @@
 @echo off
 set ver=0.1.1.1-alpha-testing
 set preRelease=True
-set message=Release with tag %ver% automatically created via workflow
+set message=Release with tag 0.1.1.1-alpha-testing automatically created via workflow
 
 echo %message%
 call build_executable.cmd

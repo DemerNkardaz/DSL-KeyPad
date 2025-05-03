@@ -2,21 +2,24 @@ name: Build & Release
 
 on:
   push:
-
-permissions:
-  contents: write
+    branches:
+      - main # или любая нужная ветка
 
 jobs:
   build-and-release:
     runs-on: windows-latest
 
+    permissions:
+      contents: write # нужно для создания/редактирования релизов
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run build workflow
+      - name: Run build script
+        working-directory: ./src
+        run: workflow.cmd
         shell: cmd
-        run: src\workflow.cmd
 
       - name: Extract version, prerelease flag & message
         id: extract
@@ -41,4 +44,7 @@ jobs:
           body: ${{ steps.extract.outputs.body }}
           draft: false
           prerelease: ${{ steps.extract.outputs.prerelease }}
-          files: DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
+          files: |
+            DSL-KeyPad-${{ steps.extract.outputs.version }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

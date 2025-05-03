@@ -19,12 +19,13 @@ Class Dev {
 
 	static CreateWorkflowScript() {
 		path := App.paths.dir "\workflow.cmd"
+		ver := App.Ver("+hotfix+postfix")
 
 		body := (
 			'@echo off`n'
-			'set ver=' App.Ver("+hotfix+postfix") '`n'
+			'set ver=' ver '`n'
 			'set preRelease=' (App.Ver(["pre-release"]) = "1" ? "True" : "False") '`n'
-			'set message=Release with tag %ver% automatically created via workflow`n'
+			'set message=Release with tag ' ver ' automatically created via workflow`n'
 			'`n'
 			'echo %message%`n'
 			'call build_executable.cmd`n'
