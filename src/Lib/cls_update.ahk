@@ -28,17 +28,18 @@ Class Update {
 	}
 
 	static Build() {
-		Dev.SetSrc()
 		try {
+			Dev.SetSrc()
+			/*
 			exitCode := RunWait(Format(
 				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" "{}" "{}"',
 				App.paths.lib "\powershell\pack_bundle.ps1", A_ScriptDir, App.Ver("+hotfix+postfix")
 			), , "Show")
-
+			
 			if exitCode != 0 {
 				MsgBox(Locale.ReadInject("bundle_creation_failed_pshell", [exitCode]), App.Title())
 			}
-
+			*/
 		} catch {
 			MsgBox(Locale.Read("bundle_creation_failed"), App.Title())
 		}
