@@ -2,7 +2,7 @@
 $preRelease = "True"
 $makeLatest = "True"
 $title = "DSL KeyPad — V[0.1.1.2-alpha-testing] — (αλφα)"
-$message = "Release with tag 0.1.1.2-alpha-testing automatically created or updated via workflow :: [Stamp :: 2025-05-03 11:40:11]<br><br>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."
+$message = "Release with tag 0.1.1.2-alpha-testing automatically created or updated via workflow :: [Stamp :: 2025-05-03 12:09:46]<br><br>[Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad."
 
 Write-Host "Version: $ver"
 Write-Host "Pre-release: $preRelease"
