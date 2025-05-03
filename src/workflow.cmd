@@ -2,7 +2,7 @@
 set ver="0.1.1.1-alpha-testing"
 set preRelease="True"
 set makeLatest="True"
-set message="Release with tag 0.1.1.1-alpha-testing automatically created or updated via workflow"
+set message="Release with tag 0.1.1.1-alpha-testing automatically created or updated via workflow :: [Stamp :: 2025-05-03 10:01:34]"
 
 set title="DSL KeyPad — V[0.1.1.1-alpha-testing] — (αλφα)"
 echo Version: %ver%

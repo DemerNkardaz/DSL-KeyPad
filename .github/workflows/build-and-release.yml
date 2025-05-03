@@ -27,10 +27,10 @@ jobs:
       - name: Extract version, prerelease flag & message
         id: extract
         run: |
-          version=$(< src/version)
-          prerelease=$(< src/prerelease)
-          title=$(< src/title)
-          body=$(< src/message)
+          $version = Get-Content -Path src\version
+          $prerelease = Get-Content -Path src\prerelease
+          $title = Get-Content -Path src\title
+          $message = Get-Content -Path src\message
 
           echo "version=$version"    >> $GITHUB_OUTPUT
           echo "prerelease=$prerelease" >> $GITHUB_OUTPUT
