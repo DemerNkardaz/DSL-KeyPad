@@ -9684,6 +9684,13 @@ LibRegistrate(this) {
 			options: { noCalc: True },
 			recipe: ["obj"]
 		},
+		"amogus", {
+			titles: Map("ru", "Амогус", "en", "Amogus"),
+			tags: ["амогус", "amogus"],
+			unicode: "{U+0D9E}",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			recipe: ["sus", "сус"],
+		}
 	]
 
 	Loop 256 {
@@ -9748,6 +9755,7 @@ LibRegistrate(this) {
 			}
 		)
 	}
+
 
 	this.AddEntries(rawEntries)
 

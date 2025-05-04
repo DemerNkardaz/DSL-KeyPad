@@ -67,6 +67,9 @@ Class ChrCrafter {
 
 		continueInInput := False
 
+		isUnicodeTyping := False
+		isAltcodeTyping := False
+
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
 
@@ -91,7 +94,7 @@ Class ChrCrafter {
 				ClipWait(0.5, 1)
 				input .= A_Clipboard
 
-			} else if IH.Input != "" {
+			} else if IH.Input != "" && ((!isUnicodeTyping || isUnicodeTyping && StrLen(input) < 7) && (!isAltcodeTyping || isAltcodeTyping && StrLen(input) < 5)) {
 				input .= IH.Input
 
 				if InputScriptProcessor.options.interceptionInputMode != "" && StrLen(input) > 1 {
@@ -123,7 +126,35 @@ Class ChrCrafter {
 
 			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
-			if !pauseOn || (IH.EndKey = "Enter") {
+			if StrLen(input) > 1 && RegExMatch(input, "i)^(U|A)\+") || RegExMatch(input, "i)^(U|A)") {
+
+				insertType := RegExMatch(input, "i)^u\+") ? "Unicode" : RegExMatch(input, "i)^a\+") ? "Altcode" : ""
+				if StrLen(insertType) = 0 {
+					continue
+				}
+
+				isUnicodeTyping := insertType = "Unicode" ? True : False
+				isAltcodeTyping := insertType = "Altcode" ? True : False
+
+				code := RegExReplace(input, "i)(^u\+|^a\+)", "")
+				if code != "" && StrLen(code) < 6 && (insertType = "Unicode" ? CharacterInserter.%insertType%Validate(code) : IsInteger(code)) {
+					suggestion := ""
+
+					suggestion := CharacterInserter.%insertType%(code, True)
+
+					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) CharacterInserter.%insertType%Prefix StrUpper(code))
+
+					output := suggestion
+				}
+
+
+				if IH.EndKey = "Enter" {
+					break
+				}
+			} else if !pauseOn || (IH.EndKey = "Enter") {
+				isUnicodeTyping := False
+				isAltcodeTyping := False
+
 				try {
 					if (RegExMatch(input, "\((\d+)[\~]?\)\s+(.*)", &match)) {
 						repeatCount := (Number(match[1]) <= 100 && Number(match[1]) > 0) ? match[1] : 1

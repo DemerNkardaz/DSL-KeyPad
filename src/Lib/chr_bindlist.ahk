@@ -66,8 +66,6 @@ bindingMaps := Map(
 			"Space", Map("<#<!", (*) => GroupActivator("Spaces"),),
 			"HyphenMinus", Map("<#<!", (*) => GroupActivator("Dashes", "-"),),
 			"Apostrophe", Map("<#<!", (*) => GroupActivator("Quotes", "'"),),
-			"NumpadAdd", Map("<#<!", (*) => CharacterInserter().NumHook()),
-			"NumpadDiv", Map("<#<!", (*) => CharacterInserter("Altcode").NumHook()),
 			"A", Map("<#<!", (*) => CharacterInserter("Altcode").InputDialog(),),
 			"F", Map("<#<!", (*) => ChrLib.SearchPrompt().send(),),
 			"H", Map(

@@ -1,4 +1,6 @@
 Class CharacterInserter {
+	static AltcodePrefix := "Alt+"
+	static UnicodePrefix := "U+"
 
 	__New(insertType := "Unicode") {
 		this.insertType := insertType
@@ -44,62 +46,7 @@ Class CharacterInserter {
 			Send(output)
 		}
 		return
-
-
 	}
-
-	NumHook() {
-		output := ""
-		input := ""
-
-		AltcodePrefix := "Alt+"
-		UnicodePrefix := "U+"
-
-		PH := InputHook("L0", "{Escape}")
-		PH.Start()
-
-		Loop {
-
-			IH := InputHook("L1", "{Backspace}{Enter}{Escape}")
-			IH.Start(), IH.Wait()
-
-			if (IH.EndKey = "Escape") {
-				input := ""
-				break
-
-			} else if (IH.EndKey = "Backspace") {
-				if StrLen(input) > 0
-					input := SubStr(input, 1, -1)
-
-			} else if IH.Input != "" && StrLen(input) < 6 && (this.insertType = "Unicode" ? CharacterInserter.%this.insertType%Validate(IH.Input) : IsInteger(IH.Input)) {
-				input .= IH.Input
-			}
-
-			preview := ""
-			try {
-				preview := CharacterInserter.%this.insertType%(input, True)
-			}
-
-			Util.CaretTooltip("[ " preview " ]" Chr(0x2002) %this.insertType%Prefix StrUpper(input))
-
-			if (IH.EndKey = "Enter") {
-				if StrLen(input) > 0 {
-					output := preview
-				}
-				IH.Stop()
-				break
-			}
-		}
-
-		PH.Stop()
-		ToolTip()
-
-		if StrLen(output) > 0
-			SendText(output)
-
-		return
-	}
-
 
 	static Altcode(charCode, isReturn := False) {
 		if isReturn {

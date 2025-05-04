@@ -5323,8 +5323,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			"<#<!" UseKey["Apostrophe"], (*) => GroupActivator("Quotes", "'"),
 			;
 			"<#<!" UseKey["F"], (*) => ChrLib.SearchPrompt().send(),
-			"<#<!" UseKey["U"], (*) => CharacterInserter("Unicode").InputDialog(),
-			"<#<!" UseKey["A"], (*) => CharacterInserter("Altcode").InputDialog(),
 			"<#<!" UseKey["L"], (*) => ChrCrafter(),
 			">^" UseKey["H"], (*) => Util.StrSelToHTML("Entities"),
 			">^" UseKey["J"], (*) => Util.StrSelToHTML("Entities", True),
@@ -5378,8 +5376,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			;"RCtrl", (*) => ProceedCombining(),
 			;"RShift", (*) => ProceedModifiers(),
 			;
-			"<!" UseKey["NumpadAdd"], (*) => CharacterInserter().NumHook(),
-			"<!" UseKey["NumpadMult"], (*) => CharacterInserter("Altcode").NumHook(),
 			;
 			"<#<+" UseKey["PgUp"], (*) => SendCharToPy(),
 			"<#<^<+" UseKey["PgUp"], (*) => SendCharToPy("Copy"),
