@@ -155,14 +155,9 @@ Class Locale {
 			}
 		}
 
-		Loop Files App.paths.loc "\Automated\*", "D" {
-			Loop Files A_LoopFileFullPath "\*.ini" {
+		Loop Files App.paths.loc "\Automated\*", "FR" {
+			if A_LoopFileFullPath ~= "i)\.ini$"
 				pathsArray.Push(A_LoopFileFullPath)
-			}
-		}
-
-		Loop Files App.paths.loc "\Automated\*.ini" {
-			pathsArray.Push(A_LoopFileFullPath)
 		}
 
 		this.localeObj := Util.MultiINIToObj(pathsArray)
