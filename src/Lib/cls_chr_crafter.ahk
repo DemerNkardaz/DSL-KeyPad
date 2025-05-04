@@ -40,7 +40,7 @@ Class ChrCrafter {
 				output .= this.ValidateRecipes(prompt, , True) " "
 			}
 
-			if output = "" || RegExMatch(output, "^\s+$")
+			if output = "" || output ~= "^\s+$"
 				return
 			else {
 				output := RegExReplace(output, "\s+$", "")

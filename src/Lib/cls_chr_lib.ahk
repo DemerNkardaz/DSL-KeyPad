@@ -561,7 +561,7 @@ Class ChrLib {
 		searchQuery := Cfg.Get("Search", "LatestPrompts", "")
 		resultObj := { result: "", prompt: "", failed: [], send: (*) => "" }
 		IB := InputBox(Locale.Read("symbol_search_prompt"), Locale.Read("symbol_search"), "w350 h110", searchQuery)
-		if IB.Result = "Cancel"
+		if IB.Result = "Cancel" || IB.Value = "" || IB.Value ~= "^\s*$"
 			return resultObj
 		else
 			searchQuery := IB.Value
@@ -660,7 +660,7 @@ Class ChrLib {
 	}
 
 	static Search(searchQuery) {
-		isSensitive := SubStr(searchQuery, 1, 1) = "*"
+		isSensitive := SubStr(searchQuery, 1, 1) = "!"
 		if isSensitive
 			searchQuery := SubStr(searchQuery, 2)
 
@@ -670,6 +670,12 @@ Class ChrLib {
 
 		if this.entries.HasOwnProp(searchQuery) {
 			return this.Get(searchQuery, True, Auxiliary.inputMode, alteration)
+		}
+
+		isHasExpression := RegExMatch(searchQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
+
+		checkTagByUserRegEx(tag) {
+			return RegExMatch(tag, searchQuery)
 		}
 
 		checkTagExact(tag) {
@@ -688,6 +694,18 @@ Class ChrLib {
 			if isSensitive
 				return Util.HasAllCharacters(tag, searchQuery)
 			return Util.HasAllCharacters(StrLower(tag), StrLower(searchQuery))
+		}
+
+		if isHasExpression {
+			for entryName, entry in this.entries.OwnProps() {
+				if entry.tags.Length = 0
+					continue
+
+				for _, tag in entry.tags {
+					if checkTagByUserRegEx(tag)
+						return this.Get(entryName, True, Auxiliary.inputMode, alteration)
+				}
+			}
 		}
 
 		for entryName, entry in this.entries.OwnProps() {
