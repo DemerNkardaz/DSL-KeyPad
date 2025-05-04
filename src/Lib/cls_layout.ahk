@@ -674,7 +674,7 @@ Class KeyboardBinder {
 		}
 
 		currentBindings := Cfg.Get("Active_User_Bindings", , "None")
-		if !this.userBindings.Has(currentBindings) && currentBindings != "None" {
+		if !this.userBindings.HasValue(currentBindings) && currentBindings != "None" {
 			Cfg.Set("None", "Active_User_Bindings")
 		}
 	}
@@ -687,7 +687,28 @@ Class KeyboardBinder {
 				interRef := reference
 
 				if RegExMatch(reference, "^\[(.*?)\]$", &arrRefMatch) {
-					interRef := StrSplit(Util.StrTrim(arrRefMatch[1]), ",")
+					interRef := []
+					rawString := RegExMatch(arrRefMatch[1], "^RAW\:\:\{") ? Trim(arrRefMatch[1]) : Util.StrTrim(arrRefMatch[1])
+					openBraces := 0
+					currentSegment := ""
+
+					Loop Parse, rawString {
+						if A_LoopField = "{"
+							openBraces++
+						else if A_LoopField = "}"
+							openBraces--
+
+						if A_LoopField = "," && openBraces = 0 {
+							interRef.Push(Trim(currentSegment))
+							currentSegment := ""
+						}
+						else {
+							currentSegment .= A_LoopField
+						}
+					}
+
+					if StrLen(currentSegment) > 0
+						interRef.Push(Trim(currentSegment))
 				}
 
 				if StrLen(modRef) > 0 {
@@ -720,10 +741,16 @@ Class BindHandler {
 		if Language.Validate(lang, "bindings") {
 			output := ""
 			inputType := ""
+			lineBreaks := False
 
 			for _, character in characterNames {
 				if character is Func {
 					character(combo)
+				} else if RegExMatch(character, "^RAW\:\:\{(.*?)\}$", &rawMatch) {
+					inputType := "Text"
+					output .= MyRecipes.FormatResult(rawMatch[1], True)
+					if RegExMatch(rawMatch[1], "\\n")
+						lineBreaks := True
 				} else {
 					alt := AlterationActiveName
 					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
@@ -750,7 +777,7 @@ Class BindHandler {
 			if StrLen(inputType) == 0
 				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : ""
 
-			if StrLen(output) > 20
+			if StrLen(output) > 20 || lineBreaks
 				ClipSend(output)
 			else
 				Send%inputType%(output)
