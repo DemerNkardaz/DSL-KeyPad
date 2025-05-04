@@ -287,6 +287,7 @@ Class ChrCrafter {
 			return "N/A"
 
 		indexedValueResult := Map()
+		indexedAtEndValueResult := Map()
 
 		if getSuggestions {
 			recipeVariantsMap := Map()
@@ -336,11 +337,17 @@ Class ChrCrafter {
 
 							if caseSensitiveMatch || uniqueRecipeMatch {
 								charFound := True
-								indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry))
+								if value.options.suggestionsAtEnd
+									indexedAtEndValueResult.Set(value.index, this.GetRecipesString(characterEntry))
+								else
+									indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry))
 							}
 						} else if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipeEntry)) {
 							charFound := True
-							indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
+							if value.options.suggestionsAtEnd
+								indexedAtEndValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
+							else
+								indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
 							if !isPrefixOfLongerRecipe
 								break 2
 						}
@@ -359,11 +366,17 @@ Class ChrCrafter {
 
 						if caseSensitiveMatch || uniqueRecipeMatch {
 							charFound := True
-							indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry))
+							if value.options.suggestionsAtEnd
+								indexedAtEndValueResult.Set(value.index, this.GetRecipesString(characterEntry))
+							else
+								indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry))
 						}
 					} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipe)) {
 						charFound := True
-						indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
+						if value.options.suggestionsAtEnd
+							indexedAtEndValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
+						else
+							indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
 						if !isPrefixOfLongerRecipe
 							break
 					}
@@ -405,8 +418,10 @@ Class ChrCrafter {
 		}
 
 		if charFound {
-			for key, value in indexedValueResult {
-				output .= value
+			for indexedMap in [indexedValueResult, indexedAtEndValueResult] {
+				for key, value in indexedMap {
+					output .= value
+				}
 			}
 		}
 

@@ -44,12 +44,12 @@ Class Dev {
 		versionCompare := (previousVersion != version) ? '**Versions compare** [' previousVersion '&ensp;>>>&ensp;' version '](' App.URL '/compare/' previousVersion '...' version '#files_bucket) | ' : ""
 
 		messageParts := (
-			'Automatically created/updated via build process in workflow.<br>`n`n'
+			'&#128230;&emsp14;Automatically created/updated via build process in workflow.<br>`n`n'
 			'<table>`n'
 			'		<tr>`n'
 			'			<td><b>Stamp</b></td>`n'
 			'			<td>`n'
-			'				' Util.GetDate("YYYY-MM-DD hh:mm:ss") '`n'
+			'				&#128228;&emsp14;' Util.GetDate("YYYY-MM-DD hh:mm:ss") '`n'
 			'			</td>`n'
 			'		</tr>`n'
 			'		<tr>`n'
@@ -65,7 +65,7 @@ Class Dev {
 			'			</td>`n'
 			'		</tr>`n'
 			'</table>`n`n'
-			versionCompare '[Changelog](' App.branch["main"] '/CHANGELOG.md)`n`n'
+			versionCompare '[Changelog](' App.branch["main"] '/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2)`n`n'
 			'[Yalla Nkardaz’s custom files](' App.URL '-Custom-Files) repository for DSL KeyPad.`n'
 		)
 

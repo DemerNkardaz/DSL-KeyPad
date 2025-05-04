@@ -2,13 +2,13 @@
 $preRelease = "True"
 $title = "DSL KeyPad — V[0.1.1.2-alpha-testing] — (αλφα)"
 $message =@"
-Automatically created/updated via build process in workflow.<br>
+&#128230;&emsp14;Automatically created/updated via build process in workflow.<br>
 
 <table>
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				2025-05-04 03:30:30
+				&#128228;&emsp14;2025-05-04 04:35:56
 			</td>
 		</tr>
 		<tr>
@@ -25,7 +25,7 @@ Automatically created/updated via build process in workflow.<br>
 		</tr>
 </table>
 
-**Versions compare** [0.1.1.1-alpha-testing&ensp;>>>&ensp;0.1.1.2-alpha-testing](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.1.1-alpha-testing...0.1.1.2-alpha-testing#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md)
+**Versions compare** [0.1.1.1-alpha-testing&ensp;>>>&ensp;0.1.1.2-alpha-testing](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.1.1-alpha-testing...0.1.1.2-alpha-testing#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2)
 
 [Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad.
 

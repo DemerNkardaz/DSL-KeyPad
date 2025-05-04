@@ -15,6 +15,7 @@ Class ChrEntry {
 	alterations := {}
 	options := {
 		noCalc: False,
+		suggestionsAtEnd: False,
 		secondName: False,
 		useLetterLocale: False,
 		layoutTitles: False,

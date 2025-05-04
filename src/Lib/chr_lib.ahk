@@ -9700,9 +9700,51 @@ LibRegistrate(this) {
 			"variantion_selector_" index, {
 				titles: Map("ru", "Селектор варианта " index, "en", "Variation selector " index),
 				unicode: "{U+" unicodeValue "}",
-				options: { noCalc: True },
+				options: { noCalc: True, suggestionsAtEnd: True },
 				recipe: ["vs" index],
 				symbol: { alt: "<VARIATION SELECTOR-" index ">" }
+			}
+		)
+	}
+
+	Loop 5 {
+		index := A_Index
+		unicodeValue := Format("{:X}", 0x1F3FA + index)
+
+		if index > 1
+			index++
+
+		rawEntries.Push(
+			"emoji_modifier_fitzpatrick_" index, {
+				titles: Map("ru", "Модификатор Фицпатрика " index, "en", "Emoji Modifier Fitzpatrick " index),
+				unicode: "{U+" unicodeValue "}",
+				options: { noCalc: True, suggestionsAtEnd: True },
+				recipe: ["ftz" index],
+				symbol: { alt: "<EMOJI MODIFIER FITZPATRICK TYPE-" (index = 1 ? "1-2" : index) ">" }
+			}
+		)
+	}
+
+	emoji_hairs := Map(
+		1, ["red_hair", "rh"],
+		2, ["curly_hair", "ch"],
+		3, ["bald", "ba"],
+		4, ["white_hair", "wh"],
+	)
+
+	Loop 4 {
+		index := A_Index
+		unicodeValue := Format("{:X}", 0x1F9AF + index)
+		entryPost := emoji_hairs[index][1]
+		title := StrReplace(Util.StrUpper(entryPost, 1), "_", " ")
+
+		rawEntries.Push(
+			"emoji_component_" entryPost, {
+				titles: Map("ru", "Компонент эмодзи " title, "en", "Emoji Component " title),
+				unicode: "{U+" unicodeValue "}",
+				options: { noCalc: True, suggestionsAtEnd: True },
+				recipe: ["ecmp " emoji_hairs[index][2], "ecmp " StrReplace(entryPost, "_", " ")],
+				symbol: { alt: "<EMOJI COMPONENT " StrUpper(title) ">" }
 			}
 		)
 	}
