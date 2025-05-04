@@ -126,7 +126,7 @@ Class ChrCrafter {
 
 			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
-			if StrLen(input) > 1 && RegExMatch(input, "i)^(U|A)\+") || RegExMatch(input, "i)^(U|A)") {
+			if ((StrLen(input) > 1 && RegExMatch(input, "i)^(U|A)\+")) || (strlen(input) = 1 && RegExMatch(input, "i)^(U|A)")) && !hasBacktick) {
 
 				insertType := RegExMatch(input, "i)^u\+") ? "Unicode" : RegExMatch(input, "i)^a\+") ? "Altcode" : ""
 				if StrLen(insertType) = 0 {
