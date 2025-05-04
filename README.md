@@ -18,7 +18,14 @@
 
 <br>
 
-**Note:** In the process of dev & refactoring<br>**Примечание:** В процессе разработки и рефакторинга
+# Current development processes
+
+- Legacy character library 🔁 migrating to new, object-oriented & automated format (95%↑ completed).
+- Re-coding with object-oriented style.
+- Looking for new features.
+- [Another… → Kanban features list.](https://github.com/users/DemerNkardaz/projects/2)
+
+---
 
 **Strong** recommendation: use the extended character set only for text writing, no more.<br>Using these characters for passwords, file names, etc., is dangerous.
 
