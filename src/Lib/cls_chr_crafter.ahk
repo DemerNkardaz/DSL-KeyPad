@@ -129,9 +129,9 @@ Class ChrCrafter {
 			if ((StrLen(input) > 1 && RegExMatch(input, "i)^(U|A)\+")) || (strlen(input) = 1 && RegExMatch(input, "i)^(U|A)")) && !hasBacktick) {
 
 				insertType := RegExMatch(input, "i)^u\+") ? "Unicode" : RegExMatch(input, "i)^a\+") ? "Altcode" : ""
-				if StrLen(insertType) = 0 {
+				if StrLen(insertType) = 0
 					continue
-				}
+
 
 				isUnicodeTyping := insertType = "Unicode" ? True : False
 				isAltcodeTyping := insertType = "Altcode" ? True : False

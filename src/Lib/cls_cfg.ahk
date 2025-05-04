@@ -23,6 +23,7 @@ Class Cfg {
 			"F13F24", "False",
 			"FirstMessage", "True",
 			"Turn_Off_Autocheck_Update", "False",
+			"Bind_Register_Tooltip_Progress_Bar", "True",
 		],
 		"Compose", [],
 		"ScriptProcessor", [

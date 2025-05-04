@@ -562,19 +562,34 @@ Class KeyboardBinder {
 
 	static Registration(bindingsMap := Map(), rule := True) {
 		bindingsMap := this.CompileBinds(bindingsMap)
+		total := bindingsMap.Count
+		useTooltip := Cfg.Get("Bind_Register_Tooltip_Progress_Bar", , True, "bool")
 
-		if bindingsMap.Count > 0 {
+		if total > 0 {
+			for combo, action in bindingsMap {
+				if RegExMatch(combo, "^\<\^\>\!")
+					total++
+			}
+
+			index := 0
 			for combo, action in bindingsMap {
 				try {
 					HotKey(combo, action, rule ? "On" : "Off")
-					if RegExMatch(combo, "^\<\^\>\!")
+					index++
+					if RegExMatch(combo, "^\<\^\>\!") {
 						HotKey(SubStr(combo, 3), action, rule ? "On" : "Off")
+						index++
+					}
 				} catch {
 					if StrLen(combo) > 0
 						MsgBox("Failed to register HotKey: " combo)
 				}
+				if useTooltip
+					ToolTip(Locale.ReadInject("lib_init_elems", [index, total]) " : " Locale.Read("binds_init") "`n" Util.TextProgressBar(index, total))
 			}
 		}
+		if useTooltip
+			ToolTip()
 	}
 
 	static UnregisterAll() {
