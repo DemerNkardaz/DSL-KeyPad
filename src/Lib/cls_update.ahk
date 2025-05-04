@@ -1,7 +1,8 @@
 Class Update {
 	static releasesJson := "https://data.jsdelivr.com/v1/package/gh/DemerNkardaz/DSL-KeyPad"
 	static fallbackReleases := App.API "/releases"
-	static filesManifest := App.paths.temp "\DSLKeyPad-FilesManifest.txt"
+	static filesManifest := "DSLKeyPad-FilesManifest.txt"
+	static filesManifestPath := App.paths.temp "\" this.filesManifest
 	static available := False
 	static availableVersion := ""
 
@@ -89,17 +90,37 @@ Class Update {
 		}
 
 		if !failed {
-			if FileExist(this.filesManifest) {
-				content := FileRead(this.filesManifest, "UTF-8")
-				split := StrSplit(content, "`n")
-				filesToDelete := []
+			MsgBox(Locale.ReadInject("update_successful", [App.Ver("+hotfix+postfix"), version]), App.Title())
+			this.RemoveLegacyAssets()
+			Reload
+		}
+	}
 
-				Loop Files, App.paths.dir "\*" {
+	static RemoveLegacyAssets() {
+		if FileExist(this.filesManifestPath) {
+			content := FileRead(this.filesManifestPath, "UTF-8")
+			split := StrSplit(content, "`n", "`r")
+			filesToDelete := []
+			whitelist := ["\workflow.ps1"]
 
+			Loop Files, App.paths.dir "\*.*", "FR" {
+				currentFilePath := StrReplace(A_LoopFileFullPath, App.paths.dir)
+				if (!split.HasValue(currentFilePath) && !whitelist.HasValue(currentFilePath)) && !InStr(A_LoopFileFullPath, App.paths.dir "\User") {
+					filesToDelete.Push(currentFilePath)
 				}
 			}
-			MsgBox(Locale.ReadInject("update_successful", [App.Ver("+hotfix+postfix"), version]), App.Title())
-			Reload
+
+			if filesToDelete.Length > 0 {
+				MB := MsgBox(Locale.ReadInject("update_found_legacy_files", [filesToDelete.ToString('`n')]), App.Title(), "YesNo")
+				if MB = "Yes" {
+					for relative in filesToDelete
+						FileDelete(App.paths.dir relative)
+					MsgBox(Locale.ReadInject("update_found_legacy_files_deleted"), App.Title())
+				}
+				return
+			}
+
+			FileDelete(this.filesManifestPath)
 		}
 	}
 

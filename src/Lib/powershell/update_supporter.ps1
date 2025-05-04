@@ -32,13 +32,21 @@ else {
 }
 
 # --- BEGIN Save relative paths manifest ---
+# Determine manifest file path next to the ZIP
+$ManifestFilePath = Join-Path -Path (Split-Path -Parent $ZipPath) -ChildPath $ManifestName
+
+# Delete the manifest file if it already exists
+if (Test-Path $ManifestFilePath) {
+	Remove-Item -LiteralPath $ManifestFilePath -Force
+	Write-Host "Deleted existing manifest file: $ManifestFilePath" -ForegroundColor Gray
+}
+
 # Compute relative paths from root of DSLKeyPad folder
 $RelativePaths = $FilesToCopy | ForEach-Object {
 	$rel = $_.FullName.Substring($KeypadFolder.FullName.Length)
 	"\" + $rel.TrimStart('\')
 }
-# Determine manifest file path next to the ZIP
-$ManifestFilePath = Join-Path -Path (Split-Path -Parent $ZipPath) -ChildPath $ManifestName
+
 # Write all relative paths to manifest file
 $RelativePaths -join "`r`n" | Set-Content -LiteralPath $ManifestFilePath -Encoding UTF8
 Write-Host "Saved file manifest to $ManifestFilePath" -ForegroundColor Cyan

@@ -667,6 +667,10 @@ Class ChrLib {
 
 		searchQuery := RegExReplace(searchQuery, "\:\:(.*?)$", "")
 
+		if this.entries.HasOwnProp(searchQuery) {
+			return this.Get(searchQuery, True, Auxiliary.inputMode, alteration)
+		}
+
 		checkTagExact(tag) {
 			if isSensitive
 				return searchQuery == tag
