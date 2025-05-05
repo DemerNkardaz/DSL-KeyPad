@@ -42,4 +42,10 @@ details {
 			opacity: 1;
 		}
 	}
+
+	&.closed {
+		& > .dropdown-content {
+			opacity: 0;
+		}
+	}
 }

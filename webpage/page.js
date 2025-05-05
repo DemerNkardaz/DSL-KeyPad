@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 	document.querySelectorAll('details').forEach((el) => {
+		if (!el.open) {
+			el.classList.add('closed');
+		}
 		new Accordion(el);
 	});
 
