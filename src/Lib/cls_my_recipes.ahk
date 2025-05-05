@@ -92,7 +92,7 @@ Class MyRecipes {
 			for i, key in this.defaulRecipes {
 				if Mod(i, 2) == 1 {
 					value := this.defaulRecipes[i + 1]
-					this.AddEdit(key, { name: value.name, recipe: value.recipe, result: value.result }, True)
+					this.AddEdit(key, { name: value.name, recipe: value.recipe, result: value.result, tags: "", previousSection: key }, True)
 				}
 			}
 		}
@@ -305,9 +305,9 @@ Class MyRecipes {
 		if RegExMatch(sectionName, this.sectionValidator) {
 			params.result := this.FormatResult(params.result)
 
-			if params.section != params.previousSection {
+			if sectionName != params.previousSection {
 				FileCopy(this.filePath, this.filePath ".bak", 1)
-				Util.INIRenameSection(this.filePath, params.previousSection, params.section)
+				Util.INIRenameSection(this.filePath, params.previousSection, sectionName)
 			}
 
 			IniWrite(params.name, this.filePath, sectionName, "name")

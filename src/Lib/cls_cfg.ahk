@@ -16,7 +16,7 @@ Class Cfg {
 			"User_Language", "",
 			"Validate_With_CaretPos", "True",
 			"F13F24", "False",
-			"FirstMessage", "True",
+			"First_Message", "True",
 			"Turn_Off_Autocheck_Update", "False",
 			"Bind_Register_Tooltip_Progress_Bar", "True",
 		],
@@ -462,9 +462,9 @@ Class Cfg {
 			}
 		}
 
-		if this.Get("FirstMessage", , True, "bool") {
+		if this.Get("First_Message", , True, "bool") {
 			MsgBox(Locale.Read("first_launch_message"), App.Title())
-			this.Set("False", "FirstMessage")
+			this.Set("False", "First_Message")
 		}
 	}
 
