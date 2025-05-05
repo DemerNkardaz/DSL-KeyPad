@@ -632,6 +632,7 @@ Class KeyboardBinder {
 
 	static ToggleDefaultMode() {
 		modeActive := Cfg.Get("Mode_Fast_Keys", , False, "bool")
+		modeActive := !modeActive
 		Cfg.Set(modeActive, "Mode_Fast_Keys", , "bool")
 
 		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)

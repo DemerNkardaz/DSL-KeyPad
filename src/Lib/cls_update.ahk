@@ -7,9 +7,9 @@ Class Update {
 	static availableVersion := ""
 
 	static __New() {
-		if !Cfg.Get("Turn_Off_Autocheck_Updates", , False, "bool") {
-			this.Check()
-		}
+		autocheckOff := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
+		if !autocheckOff
+			Update.Check()
 	}
 
 	static Repair() {

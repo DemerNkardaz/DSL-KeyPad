@@ -84,9 +84,9 @@ Class Cfg {
 	}
 
 	static Editor() {
-		if !Cfg.Get("Turn_Off_Autocheck_Updates", , False, "bool") {
+		autocheckOff := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
+		if !autocheckOff
 			Update.Check()
-		}
 
 		if Update.available {
 			ManageTrayItems()
@@ -179,7 +179,11 @@ Class Cfg {
 			profileSelector.Text := App.GetProfile()
 			profileSelector.OnEvent("Change", (CB, Zero) => SetProfile(CB.Text))
 
-			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(55, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
+			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(84, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
+
+			autocheckUpdatesOff := optionsPanel.AddCheckBox("vAutocheckUpdates x" languageSelectorX() " y" languageSelectorY(layouSelectorY((optionsCommonY + optionsCommonH) - 22)) " w256", Locale.Read("gui_options_off_autocheck_updates"))
+			autocheckUpdatesOff.Value := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
+			autocheckUpdatesOff.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Turn_Off_Autocheck_Update", , "bool"))
 
 			if Update.available {
 				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Locale.ReadInject("update_available", [Update.availableVersion]))
@@ -196,7 +200,7 @@ Class Cfg {
 			tabLabelChars := Locale.Read("gui_options_tab_characters")
 			tabLabels := [tabLabelChars]
 
-			optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + 75), tabLabels)
+			optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + (84 + 25)), tabLabels)
 
 			optionsTabs.UseTab(tabLabelChars)
 
@@ -206,9 +210,9 @@ Class Cfg {
 				Locale.Read("gui_options_hybrid") " — Ii, LShift " Chr(0x0130) Chr(0x0131),
 			]
 
-			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(300) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
+			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(300 + 29) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
 
-			letterI_selector := optionsPanel.AddDropDownList("vLetterI_selector x" languageSelectorX() " w128 y" languageSelectorY(300 + 17), letterI_labels)
+			letterI_selector := optionsPanel.AddDropDownList("vLetterI_selector x" languageSelectorX() " w128 y" languageSelectorY(300 + 17 + 29), letterI_labels)
 			PostMessage(0x0153, -1, 15, letterI_selector)
 
 			letterI_savedOption := Cfg.Get("I_Dot_Shift_I_Dotless", "Characters")
@@ -269,7 +273,7 @@ Class Cfg {
 						return
 					}
 				}
-				Cfg.Set(remapping ? "True" : "False", "Layout_Remapping")
+				Cfg.Set(remapping, "Layout_Remapping", , "bool")
 				KeyboardBinder.RebuilBinds()
 			}
 
@@ -480,7 +484,7 @@ Class Cfg {
 	static Set(value, entry, section := "Settings", options := "") {
 		if this.sections.HasValue(section) {
 			if InStr(options, "bool")
-				value := value ? "False" : "True"
+				value := (value = True || value = "True" || value = 1 || value = "1") ? "True" : "False"
 			else
 				this.OptionsHandler(value, options, &value)
 
@@ -523,16 +527,15 @@ Class Cfg {
 
 	static OptionsHandler(value, options := "", &output := value) {
 		if InStr(options, "toHex")
-			value := ConvertToHexaDecimal(value)
+			output := ConvertToHexaDecimal(value)
 		if InStr(options, "fromHex")
-			value := ConvertFromHexaDecimal(value)
+			output := ConvertFromHexaDecimal(value)
 		if InStr(options, "bool")
-			value := (value = "True" || value = 1)
+			output := (value = "True" || value = 1 || value = "1")
 		if InStr(options, "int")
-			value := Integer(value)
+			output := Integer(value)
 		if InStr(options, "num")
-			value := Number(value)
-		output := value
+			output := Number(value)
 	}
 
 	static BindedVarsHandler() {
