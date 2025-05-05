@@ -38,6 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		paragraph.textContent = unicodeContent;
 		descriptionElement.appendChild(paragraph);
 	}
+
+
+	document.querySelectorAll('details').forEach((el) => {
+		new Accordion(el);
+	});
+
 });
 
 function handleElementClick(element) {
