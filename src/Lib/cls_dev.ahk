@@ -43,6 +43,36 @@ Class Dev {
 
 		versionCompare := (previousVersion != version) ? '**Versions compare** [' previousVersion '&ensp;>>>&ensp;' version '](' App.URL '/compare/' previousVersion '...' version '#files_bucket) | ' : ""
 
+		fontsArray := [
+			"Noto Color Emoji",
+			"Symbols",
+			"Runic",
+			"Glagolitic",
+			"Gothic",
+			"Lycian",
+			"Lydian",
+			"Carian",
+			"Mandaic",
+			"Nabataean",
+			"Old Hungarian",
+			"Old Italic",
+			"Old Permic",
+			"Old Persian",
+			"Old Turkic",
+			"Old North Arabian",
+			"Old South Arabian",
+			"Palmyrene",
+			"Phoenician",
+			"Tifinagh",
+			"Ugaritic"
+		]
+
+		for i, font in fontsArray {
+			if !(font ~= "i)^Noto")
+				fontsArray[i] := "Noto Sans " font
+			fontsArray[i] := '						<li><a href="https://fonts.google.com/specimen/' RegExReplace(fontsArray[i], "\s", "+") '">' fontsArray[i] '</a></li>`n'
+		}
+
 		messageParts := (
 			'&#128230;&emsp14;Automatically created/updated via build process in workflow.<br>`n`n'
 			'<table>`n'
@@ -75,33 +105,13 @@ Class Dev {
 			'					<ul>`n'
 			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans">Noto Sans</a> <i>Important</i></li>`n'
 			'						<li><a href="https://fonts.google.com/specimen/Noto+Serif">Noto Serif</a> <i>Important</i></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Color+Emoji">Noto Color Emoji</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Symbols">Noto Sans Symbols</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Runic">Noto Sans Runic</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Glagolitic">Noto Sans Glagolitic</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Gothic">Noto Sans Gothic</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Lycian">Noto Sans Lycian</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Lydian">Noto Sans Lydian</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Carian">Noto Sans Carian</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Mandaic">Noto Sans Mandaic</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Nabataean">Noto Sans Nabataean</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Hungarian">Noto Sans Old Hungarian</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Italic">Noto Sans Old Italic</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+North+Arabian">Noto Sans Old North Arabian</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Permic">Noto Sans Old Permic</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Persian">Noto Sans Old Persian</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+South+Arabian">Noto Sans Old South Arabian</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Turkic">Noto Sans Old Turkic</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Palmyrene">Noto Sans Palmyrene</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Phoenician">Noto Sans Phoenician</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Tifinagh">Noto Sans Tifinagh</a></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Ugaritic">Noto Sans Ugaritic</a></li>`n'
+			fontsArray.ToString("")
 			'					</ul>`n'
 			'				</details>`n'
 			'			</td>`n'
 			'		</tr>`n'
 			'</table>`n`n'
-			versionCompare '[Changelog](' App.branch["main"] '/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2)`n`n'
+			versionCompare '[Changelog](' App.branch["main"] '/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Docs](https://demernkardaz.github.io/DSL-KeyPad)`n`n'
 			'[Yalla Nkardaz’s custom files](' App.URL '-Custom-Files) repository for DSL KeyPad.`n<br>'
 			'[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-' version '.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/' version ') [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/' version '?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/' version '/)'
 		)

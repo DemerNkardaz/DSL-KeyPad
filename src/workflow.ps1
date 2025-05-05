@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-05-05 05:45:33
+				&#128228;&emsp14;2025-05-05 06:23:41
 			</td>
 		</tr>
 		<tr>
@@ -46,11 +46,11 @@ $message =@"
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Nabataean">Noto Sans Nabataean</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Hungarian">Noto Sans Old Hungarian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Italic">Noto Sans Old Italic</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+North+Arabian">Noto Sans Old North Arabian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Permic">Noto Sans Old Permic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Persian">Noto Sans Old Persian</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+South+Arabian">Noto Sans Old South Arabian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Turkic">Noto Sans Old Turkic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+North+Arabian">Noto Sans Old North Arabian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+South+Arabian">Noto Sans Old South Arabian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Palmyrene">Noto Sans Palmyrene</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Phoenician">Noto Sans Phoenician</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Tifinagh">Noto Sans Tifinagh</a></li>
@@ -61,7 +61,7 @@ $message =@"
 		</tr>
 </table>
 
-**Versions compare** [0.1.1.1-alpha-testing&ensp;>>>&ensp;0.1.1.2-alpha-testing](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.1.1-alpha-testing...0.1.1.2-alpha-testing#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2)
+**Versions compare** [0.1.1.1-alpha-testing&ensp;>>>&ensp;0.1.1.2-alpha-testing](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.1.1-alpha-testing...0.1.1.2-alpha-testing#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Docs](https://demernkardaz.github.io/DSL-KeyPad)
 
 [Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad.
 <br>[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-0.1.1.2-alpha-testing.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.1.2-alpha-testing) [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/0.1.1.2-alpha-testing?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/0.1.1.2-alpha-testing/)

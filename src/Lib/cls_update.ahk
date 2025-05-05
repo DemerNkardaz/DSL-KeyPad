@@ -124,9 +124,18 @@ Class Update {
 		}
 	}
 
-	static Check() {
+	static Check(withAcceptUpdate := False) {
 		this.versions := this.ChekVersions()
 		this.CompareVersions()
+
+		if withAcceptUpdate {
+			if this.available {
+				acceptBox := MsgBox(Locale.ReadInject("gui_options_get_update_acception", [this.availableVersion]), App.Title(), "YesNo")
+				if acceptBox = "Yes" || acceptBox = "OK"
+					this.Get()
+			} else
+				MsgBox(Locale.Read("gui_options_update_absent"))
+		}
 	}
 
 	static CompareVersions(force := False) {

@@ -185,12 +185,12 @@ Class Cfg {
 			autocheckUpdatesOff.Value := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
 			autocheckUpdatesOff.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Turn_Off_Autocheck_Update", , "bool"))
 
-			if Update.available {
-				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Locale.ReadInject("update_available", [Update.availableVersion]))
-				updateBtn.OnEvent("Click", (*) => Update.Get())
+			if Update.available || autocheckOff {
+				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Locale.ReadInject((autocheckOff ? "gui_options_update_check" : "gui_options_get_update"), [Update.availableVersion]))
+				updateBtn.OnEvent("Click", (*) => autocheckOff ? Update.Check(True) : Update.Get())
 
 			} else {
-				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", Locale.Read("update_absent"))
+				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", Locale.Read("gui_options_update_absent"))
 			}
 
 			repairBtn := optionsPanel.AddButton(" x" (windowWidth - 32) - 24 " y" (optionsCommonH + optionsCommonY + 24) " w32 h32", Chrs(0x1F6E0, 0xFE0F))
@@ -610,7 +610,7 @@ Class Options {
 			Cfg.EditorGUI["Autoload"].Text := Locale.Read("autoload_add")
 
 			try {
-				Cfg.EditorGUI["UpdateAbsent"].Text := Locale.Read("update_absent")
+				Cfg.EditorGUI["UpdateAbsent"].Text := Locale.Read("gui_options_update_absent")
 			}
 		}
 

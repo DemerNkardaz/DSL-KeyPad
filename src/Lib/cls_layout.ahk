@@ -635,7 +635,7 @@ Class KeyboardBinder {
 		modeActive := !modeActive
 		Cfg.Set(modeActive, "Mode_Fast_Keys", , "bool")
 
-		MsgBox(Locale.Read("message_fastkeys_" (modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
+		MsgBox(Locale.Read("message_fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 		this.RebuilBinds()
 	}
