@@ -1,9 +1,4 @@
-/*
-\\	App’s configuration class
-*/
-
 Class Cfg {
-
 	static sections := [
 		"Settings", [
 			"Character_Web_Resource", "SymblCC",
@@ -305,7 +300,7 @@ Class Cfg {
 			screenWidth := A_ScreenWidth
 			screenHeight := A_ScreenHeight
 
-			windowWidth := 450
+			windowWidth := 550
 			windowHeight := 450
 
 			xPos := (screenWidth - windowWidth) / 2
@@ -321,19 +316,19 @@ Class Cfg {
 			recipesPanel.title := this.EditorSubGUIs.recipesTitle
 
 
-			defaultSizes := { groupBoxW: 420, groupBoxX: (windowWidth - 420) / 2 }
+			defaultSizes := { groupBoxW: windowWidth - 30, groupBoxX: (windowWidth - (windowWidth - 20)) / 2 }
 
 			optionsCommonY := 10
-			optionsCommonH := 370
+			optionsCommonH := windowHeight - 80
 			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
 
 			listViewCols := [Locale.Read("col_name"), Locale.Read("col_recipe"), Locale.Read("col_result"), Locale.Read("col_entry_title"), Locale.Read("col_entry_file")]
 
 			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " -Multi"
 			recipesLV := recipesPanel.AddListView(recipesLVStyles, listViewCols)
-			recipesLV.ModifyCol(1, 158)
-			recipesLV.ModifyCol(2, 98)
-			recipesLV.ModifyCol(3, 158)
+			recipesLV.ModifyCol(1, 170)
+			recipesLV.ModifyCol(2, 110)
+			recipesLV.ModifyCol(3, 210)
 			recipesLV.ModifyCol(4, 0)
 			recipesLV.ModifyCol(5, 0)
 			recipesLV.OnEvent("ItemFocus", (LV, RowNumber) => setSelected(LV, RowNumber))
@@ -344,9 +339,9 @@ Class Cfg {
 			for recipeEntry in recipesArray {
 				recipeFilePath := recipeEntry.HasOwnProp("filePath") ? recipeEntry.filePath : ""
 				recipesLV.Add(,
-					MyRecipes.HandleTitles(recipeEntry.name, True),
+					MyRecipes.HandleTitles(recipeEntry.name, ""),
 					RegExReplace(ChrRecipeHandler.MakeStr(recipeEntry.recipe), "\|", ", "),
-					Util.StrFormattedReduce(ChrRecipeHandler.MakeStr(recipeEntry.result), 24),
+					Util.StrFormattedReduce(ChrRecipeHandler.MakeStr(recipeEntry.result), 20),
 					recipeEntry.section, recipeFilePath)
 			}
 
@@ -421,7 +416,7 @@ Class Cfg {
 			}
 
 			createEditRecipe(recipeArray?) {
-				if IsSet(recipeArray) && recipeArray.Length > 0 && (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.file)) {
+				if IsSet(recipeArray) && recipeArray.Length > 0 && (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.filePath)) {
 					attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
 					MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
 					return
@@ -432,7 +427,7 @@ Class Cfg {
 
 			removeSelected(recipeArray) {
 				if recipeArray.Length > 0 {
-					if (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.file)) {
+					if (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.filePath)) {
 						attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
 						MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
 						return

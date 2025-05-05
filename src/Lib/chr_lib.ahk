@@ -9686,7 +9686,7 @@ LibRegistrate(this) {
 		},
 		"amogus", {
 			titles: Map("ru", "Амогус", "en", "Amogus"),
-			tags: ["амогус", "amogus"],
+			tags: ["амогус", "член экипажа", "amogus", "crewmate"],
 			unicode: "{U+0D9E}",
 			options: { noCalc: True, suggestionsAtEnd: True },
 			recipe: ["sus", "сус"],

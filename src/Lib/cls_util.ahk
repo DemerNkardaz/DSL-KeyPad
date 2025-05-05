@@ -474,6 +474,26 @@ Class Util {
 		}
 	}
 
+	static INIRenameSection(filePaths, oldSection, newSection) {
+		content := FileRead(filePaths, "UTF-16")
+		split := StrSplit(content, "`n", "`r")
+
+		found := false
+		for i, line in split {
+			if (line = "[" oldSection "]") {
+				split[i] := "[" newSection "]"
+				found := true
+			}
+		}
+
+		content := split.ToString("`n")
+
+		if (found) {
+			FileDelete(filePaths)
+			FileAppend(content, filePaths, "UTF-16")
+		}
+	}
+
 	static INIGetSections(filePaths, postfix := "") {
 		output := []
 		for singleFile in filePaths {

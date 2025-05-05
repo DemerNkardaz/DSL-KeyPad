@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-05-05 08:09:28
+				&#128228;&emsp14;2025-05-05 18:36:06
 			</td>
 		</tr>
 		<tr>
@@ -20,15 +20,15 @@ $message =@"
 		<tr>
 			<td><b>Requirements</b></td>
 			<td>
-				<img src="https://www.autohotkey.com/favicon.ico" width="16" style="vertical-align:middle;">&emsp14;<a href="https://www.autohotkey.com/download/ahk-v2.exe">AutoHotkey v2.^</a><br>
+				<img src="https://www.autohotkey.com/favicon.ico" width="16">&emsp14;<a href="https://www.autohotkey.com/download/ahk-v2.exe">AutoHotkey v2.^</a><br>
 				Windows 10/11 x64
 			</td>
 		</tr>
 		<tr>
 			<td><b>Additional</b></td>
 			<td>
-				<img src="https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/favicon.svg" width="16" style="vertical-align:middle;">&emsp14;<a href="https://fonts.google.com/?query=noto">Noto fonts (search)</a><br>
-				<img src="https://www.kurinto.com/favicon.ico" width="16" style="vertical-align:middle;">&emsp14;<a href="https://www.kurinto.com/download.htm">Kurinto fonts</a>
+				<img src="https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/favicon.svg" width="16">&emsp14;<a href="https://fonts.google.com/?query=noto">Noto fonts (search)</a><br>
+				<img src="https://www.kurinto.com/favicon.ico" width="16">&emsp14;<a href="https://www.kurinto.com/download.htm">Kurinto fonts</a>
 				<details>
 					<summary>Recommended font list</summary>
 					<ul>

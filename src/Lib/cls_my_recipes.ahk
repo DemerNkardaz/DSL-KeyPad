@@ -1,6 +1,7 @@
 Class MyRecipes {
 
-	static file := App.paths.profile "\CustomRecipes.ini"
+	static file := "CustomRecipes.ini"
+	static filePath := App.paths.profile "\" this.file
 	static attachments := App.paths.profile "\Attachments.txt"
 	static autoimport := { linux: App.paths.profile "\Autoimport.linux", ini: App.paths.profile "\Autoimport.ini" }
 	static editorTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes_create")
@@ -87,7 +88,7 @@ Class MyRecipes {
 	]
 
 	static __New() {
-		if !FileExist(this.file) {
+		if !FileExist(this.filePath) {
 			for i, key in this.defaulRecipes {
 				if Mod(i, 2) == 1 {
 					value := this.defaulRecipes[i + 1]
@@ -124,13 +125,18 @@ Class MyRecipes {
 				result: "",
 				row: 0,
 				filePath: "",
+				tags: "",
+				previousSection: "",
 			}
+
+			totalLen := Util.StrDigitFormat(StrLen(data.result))
+			pages := Util.StrPagesCalc(data.result)
 
 			screenWidth := A_ScreenWidth
 			screenHeight := A_ScreenHeight
 
 			windowWidth := 300
-			windowHeight := 450
+			windowHeight := 500
 
 			xPos := (screenWidth - windowWidth) / 2
 			yPos := screenHeight - windowHeight - 92
@@ -152,7 +158,7 @@ Class MyRecipes {
 			recipeCreator.AddGroupBox("vGroupCommon " "x" defaultSizes.groupBoxX " y" boxCommonY " w" defaultSizes.groupBoxW " h" boxCommonH)
 
 			sectionLabel := recipeCreator.AddText("vSectionLabel x" commonX() " y" commonY() " w150 BackgroundTrans", Locale.Read("gui_recipes_create_section"))
-			sectionEdit := recipeCreator.AddEdit("vSectionEdit x" commonX() " y" commonY(20) " w250 Limit48 -Multi" (sectionName.Length > 0 ? " ReadOnly" : ""), sectionName.Length > 0 ? sectionName[4] : "")
+			sectionEdit := recipeCreator.AddEdit("vSectionEdit x" commonX() " y" commonY(20) " w250 Limit48 -Multi", sectionName.Length > 0 ? sectionName[4] : "")
 
 			nameLabel := recipeCreator.AddText("vNameLabel x" commonX() " y" commonY(55) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_name"))
 			nameEdit := recipeCreator.AddEdit("vNameEdit x" commonX() " y" commonY(55 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).name : "")
@@ -160,8 +166,11 @@ Class MyRecipes {
 			recipeLabel := recipeCreator.AddText("vRecipeLabel x" commonX() " y" commonY(110) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_recipe"))
 			recipeEdit := recipeCreator.AddEdit("vRecipeEdit x" commonX() " y" commonY(110 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).recipe : "")
 
-			resultLabel := recipeCreator.AddText("vResultLabel x" commonX() " y" commonY(110 + 55) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_result"))
-			resultEdit := recipeCreator.AddEdit("vResultEdit x" commonX() " y" commonY((110 + 55) + 20) " w250 h150 Multi WantTab", sectionName.Length > 0 ? this.FormatResult(MyRecipes.Get(sectionName[4]).result, True) : "")
+			tagsLabel := recipeCreator.AddText("vTagsLabel x" commonX() " y" commonY(165) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_tags"))
+			tagsEdit := recipeCreator.AddEdit("vTagsEdit x" commonX() " y" commonY(165 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).tags : "")
+
+			resultLabel := recipeCreator.AddText("vResultLabel x" commonX() " y" commonY(165 + 55) " w250 BackgroundTrans")
+			resultEdit := recipeCreator.AddEdit("vResultEdit x" commonX() " y" commonY((165 + 55) + 20) " w250 h100 Multi WantTab", sectionName.Length > 0 ? this.FormatResult(MyRecipes.Get(sectionName[4]).result, True) : "")
 
 			if sectionName.Length > 0 {
 				data.section := sectionName[4]
@@ -170,7 +179,13 @@ Class MyRecipes {
 				data.result := MyRecipes.Get(sectionName[4]).result
 				data.row := sectionName[5]
 				data.filePath := sectionName[6]
+				data.tags := MyRecipes.Get(sectionName[4]).tags
+				data.previousSection := sectionName[4]
 			}
+
+			totalLen := Util.StrDigitFormat(StrLen(data.result))
+			pages := Util.StrPagesCalc(data.result)
+			resultLabel.Text := getResultLabel()
 
 			saveBtn := recipeCreator.AddButton("vSaveButton x" commonX() " y" (boxCommonH) - 32 " w100 h32", Locale.Read("gui_save"))
 			cancelBtn := recipeCreator.AddButton("vCancelButton x" commonX(100) " y" (boxCommonH) - 32 " w100 h32", Locale.Read("gui_cancel"))
@@ -178,6 +193,7 @@ Class MyRecipes {
 			sectionEdit.OnEvent("Change", (CB, Zero) => setData(CB, "section"))
 			nameEdit.OnEvent("Change", (CB, Zero) => setData(CB, "name"))
 			recipeEdit.OnEvent("Change", (CB, Zero) => setData(CB, "recipe"))
+			tagsEdit.OnEvent("Change", (CB, Zero) => setData(CB, "tags"))
 			resultEdit.OnEvent("Change", (CB, Zero) => setData(CB, "result"))
 
 			saveBtn.OnEvent("Click", (*) => saveRecipe(data))
@@ -191,34 +207,85 @@ Class MyRecipes {
 				guiObj["SectionEdit"].Move(, , w - 50)
 				guiObj["NameEdit"].Move(, , w - 50)
 				guiObj["RecipeEdit"].Move(, , w - 50)
-				guiObj["ResultEdit"].Move(, , w - 50, h - 300)
+				guiObj["TagsEdit"].Move(, , w - 50)
+				guiObj["ResultEdit"].Move(, , w - 50, h - 350)
 				guiObj["SaveButton"].Move(, (h - 20) - 32)
 				guiObj["CancelButton"].Move(, (h - 20) - 32)
 			}
 
 			setData(CB, key) {
 				data.%key% := CB.Text
+				if key = "result" {
+					totalLen := Util.StrDigitFormat(StrLen(data.result))
+					pages := Util.StrPagesCalc(data.result)
+					resultLabel.Text := getResultLabel()
+				}
+			}
+
+			getResultLabel() {
+				return Locale.Read("gui_recipes_create_result") ": " Util.StrVarsInject(Locale.Read("tooltip_compose_overflow_properties"), totalLen, pages)
 			}
 
 			saveRecipe(data) {
+				recipesListExists := WinExist(Cfg.EditorSubGUIs.recipesTitle)
+				existingEntry := ChrLib.GetEntry(data.section)
 				if RegExMatch(data.section, this.sectionValidator) {
 					if InStr(data.section, "xcompose") {
 						RegExMatch(data.section, "\[(.*)\]", &match)
 						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" match[1], App.Title("+status+version"))
 						return
 					} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
-						if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row > 0 {
-							recipesLV.Modify(data.row, , data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24))
-
+						if recipesListExists && data.row > 0 {
+							recipesLV.Modify(data.row, "-Focus -Select",
+								this.HandleTitles(data.name),
+								RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
+								Util.StrFormattedReduce(this.FormatResult(data.result), 20),
+								data.section
+							)
 						} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
 							if this.Check(data.section) {
-								MsgBox(Locale.Read("gui_recipes_create_exists"), App.Title("+status+version"))
+								MsgBox(Locale.ReadInject("gui_recipes_create_exists", [data.section]), App.Title("+status+version"))
+								return
+							} else if existingEntry && !existingEntry.groups.HasValue("Custom Composes") {
+								MsgBox(Locale.ReadInject("gui_recipes_create_exists_internal", [data.section]), App.Title("+status+version"))
 								return
 							}
-							recipesLV.Add(, data.name, data.recipe, Util.StrFormattedReduce(this.FormatResult(data.result), 24), data.section)
+							lastMatchIndex := 0
+							targetPath := Util.StrTrimPath(this.filePath)
+
+							Loop recipesLV.GetCount()
+							{
+								rowIndex := A_Index
+								path := recipesLV.GetText(rowIndex, 5)
+								if (path = targetPath)
+									lastMatchIndex := rowIndex
+							}
+
+							if (lastMatchIndex = 0)
+								recipesLV.Add(,
+									this.HandleTitles(data.name),
+									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
+									Util.StrFormattedReduce(this.FormatResult(data.result), 20),
+									data.section,
+									targetPath
+								)
+							else
+								recipesLV.Insert(lastMatchIndex + 1, ,
+									this.HandleTitles(data.name),
+									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
+									Util.StrFormattedReduce(this.FormatResult(data.result), 20),
+									data.section,
+									targetPath
+								)
 						}
 
+						existingEntry := ChrLib.GetEntry(data.previousSection)
+
+						if (existingEntry && existingEntry.groups.HasValue("Custom Composes")) && (data.previousSection != data.section)
+							ChrLib.RemoveEntry(data.previousSection)
+
 						this.AddEdit(data.section, data, , True)
+						data.previousSection := data.section
 					}
 				} else {
 					MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.Title("+status+version"))
@@ -238,22 +305,30 @@ Class MyRecipes {
 		if RegExMatch(sectionName, this.sectionValidator) {
 			params.result := this.FormatResult(params.result)
 
-			IniWrite(params.name, this.file, sectionName, "name")
-			IniWrite(params.recipe, this.file, sectionName, "recipe")
-			IniWrite(params.result, this.file, sectionName, "result")
-
-			if !noUpdate {
-				this.Update(singleSectionName ? [sectionName] : [])
+			if params.section != params.previousSection {
+				FileCopy(this.filePath, this.filePath ".bak", 1)
+				Util.INIRenameSection(this.filePath, params.previousSection, params.section)
 			}
-		} else {
+
+			IniWrite(params.name, this.filePath, sectionName, "name")
+			IniWrite(params.recipe, this.filePath, sectionName, "recipe")
+			IniWrite(params.result, this.filePath, sectionName, "result")
+			if StrLen(params.tags) > 0
+				IniWrite(params.tags, this.filePath, sectionName, "tags")
+			else
+				try
+					IniDelete(this.filePath, sectionName, "tags")
+
+			if !noUpdate
+				this.Update(singleSectionName ? [sectionName] : [])
+		} else
 			MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.Title("+status+version"))
-		}
 
 		return
 	}
 
 	static Check(sectionName) {
-		content := FileRead(this.file, "UTF-16")
+		content := FileRead(this.filePath, "UTF-16")
 
 		sections := []
 		for line in StrSplit(content, "`n") {
@@ -272,9 +347,10 @@ Class MyRecipes {
 	static Get(sectionName, make := False) {
 		output := {}
 
-		output.name := IniRead(this.file, sectionName, "name")
-		output.recipe := IniRead(this.file, sectionName, "recipe")
-		output.result := IniRead(this.file, sectionName, "result")
+		output.name := IniRead(this.filePath, sectionName, "name")
+		output.recipe := IniRead(this.filePath, sectionName, "recipe")
+		output.result := IniRead(this.filePath, sectionName, "result")
+		output.tags := IniRead(this.filePath, sectionName, "tags", "")
 
 		if make {
 			output.recipe := ChrRecipeHandler.MakeStr(output.recipe)
@@ -284,8 +360,7 @@ Class MyRecipes {
 	}
 
 	static Remove(sectionName) {
-		global Characters
-		filePath := this.file
+		filePath := this.filePath
 		content := FileRead(filePath, "UTF-16")
 
 		if !content {
@@ -303,13 +378,8 @@ Class MyRecipes {
 		FileDelete(filePath)
 		FileAppend(newContent, filePath, "UTF-16")
 
-		characterEntry := GetCharacterEntry(sectionName, True)
-
-		if characterEntry {
-			Characters.Delete(characterEntry)
-		}
-
-		if ChrLib.GetEntry(sectionName)
+		existingEntry := ChrLib.GetEntry(sectionName)
+		if existingEntry && existingEntry.groups.HasValue("Custom Composes")
 			ChrLib.RemoveEntry(sectionName)
 
 		return True
@@ -318,99 +388,101 @@ Class MyRecipes {
 	static Read(updateOnCatch := False, readOnlyInitialized := False) {
 		output := []
 
-		try {
-			pushRecipes(filePath := this.file, postfix := "") {
-				content := FileRead(filePath, "UTF-16")
-				options := {
-					recipePrefix: "",
-					noWhitespace: 0,
-				}
+		pushRecipes(filePath := this.filePath, postfix := "") {
+			content := FileRead(filePath, "UTF-16")
+			options := {
+				recipePrefix: "",
+				noWhitespace: 0,
+			}
 
-				if !content {
-					return output
-				}
+			if !content {
+				return output
+			}
 
-				sections := []
-				for line in StrSplit(content, "`n") {
-					if RegExMatch(line, "^\[(.*)\]$", &match) {
-						sections.Push(match[1])
-					}
-				}
-
-				for section in sections {
-					if section = "options" {
-						options.recipePrefix := IniRead(filePath, section, "prefix", "")
-						options.noWhitespace := Integer(IniRead(filePath, section, "no_whitespace", "0"))
-						continue
-					}
-
-					if (readOnlyInitialized && !ChrLib.entries.HasOwnProp(section))
-						continue
-
-					try {
-						name := IniRead(filePath, section, "name")
-						recipe := IniRead(filePath, section, "recipe")
-						result := IniRead(filePath, section, "result")
-
-						try {
-							if InStr(recipe, "|") && StrLen(options.recipePrefix) > 0 {
-								splittedRecipe := StrSplit(recipe, "|")
-								splittedPrefix := StrSplit(options.recipePrefix, "|")
-
-								for i, r in splittedRecipe {
-									if splittedPrefix.Length = splittedRecipe.Length {
-										splittedRecipe[i] := splittedPrefix[i] (
-											options.noWhitespace
-											|| StrLen(splittedPrefix[i]) == 0
-												? "" : " "
-										) r
-									} else {
-										splittedRecipe[i] := splittedPrefix[1] (
-											options.noWhitespace
-											|| StrLen(splittedPrefix[1]) == 0
-												? "" : " "
-										) r
-									}
-								}
-
-								recipe := splittedRecipe.ToString("|")
-							} else {
-								if InStr(options.recipePrefix, "|")
-									options.recipePrefix := StrSplit(options.recipePrefix, "|")
-
-								recipe := (
-									options.recipePrefix is Array
-										? options.recipePrefix[1]
-									: options.recipePrefix
-								) (
-									options.noWhitespace
-									|| options.recipePrefix is String && StrLen(options.recipePrefix) == 0
-									|| options.recipePrefix is Array && options.recipePrefix.Length == 1
-										? "" : " "
-								) recipe
-							}
-						} catch {
-							MsgBox(Format(Locale.Read("gui_recipes_read_error" (updateOnCatch ? "_reinit" : "")), section, recipe))
-							if updateOnCatch {
-								this.Update()
-								return this.Read()
-							}
-						}
-						output.Push({
-							section: section postfix,
-							name: name,
-							recipe: recipe,
-							result: result,
-							filePath: Util.TrimBasePath(filePath)
-						})
-					} catch {
-						continue
-					}
+			sections := []
+			for line in StrSplit(content, "`n") {
+				if RegExMatch(line, "^\[(.*)\]$", &match) {
+					sections.Push(match[1])
 				}
 			}
 
-			pushRecipes()
+			for section in sections {
+				if section = "options" {
+					options.recipePrefix := IniRead(filePath, section, "prefix", "")
+					options.noWhitespace := Integer(IniRead(filePath, section, "no_whitespace", "0"))
+					continue
+				}
 
+				if (readOnlyInitialized && !ChrLib.entries.HasOwnProp(section))
+					continue
+
+				try {
+					name := IniRead(filePath, section, "name")
+					recipe := IniRead(filePath, section, "recipe")
+					result := IniRead(filePath, section, "result")
+
+					tags := IniRead(filePath, section, "tags", "")
+					tags := StrLen(tags) > 0 ? StrSplit(tags, "|") : []
+
+					try {
+						if InStr(recipe, "|") && StrLen(options.recipePrefix) > 0 {
+							splittedRecipe := StrSplit(recipe, "|")
+							splittedPrefix := StrSplit(options.recipePrefix, "|")
+
+							for i, r in splittedRecipe {
+								if splittedPrefix.Length = splittedRecipe.Length {
+									splittedRecipe[i] := splittedPrefix[i] (
+										options.noWhitespace
+										|| StrLen(splittedPrefix[i]) == 0
+											? "" : " "
+									) r
+								} else {
+									splittedRecipe[i] := splittedPrefix[1] (
+										options.noWhitespace
+										|| StrLen(splittedPrefix[1]) == 0
+											? "" : " "
+									) r
+								}
+							}
+
+							recipe := splittedRecipe.ToString("|")
+						} else {
+							if InStr(options.recipePrefix, "|")
+								options.recipePrefix := StrSplit(options.recipePrefix, "|")
+
+							recipe := (
+								options.recipePrefix is Array
+									? options.recipePrefix[1]
+								: options.recipePrefix
+							) (
+								options.noWhitespace
+								|| options.recipePrefix is String && StrLen(options.recipePrefix) == 0
+								|| options.recipePrefix is Array && options.recipePrefix.Length == 1
+									? "" : " "
+							) recipe
+						}
+					} catch {
+						MsgBox(Format(Locale.Read("gui_recipes_read_error" (updateOnCatch ? "_reinit" : "")), section, recipe))
+						if updateOnCatch {
+							this.Update()
+							return this.Read()
+						}
+					}
+					output.Push({
+						section: section postfix,
+						name: name,
+						tags: tags,
+						recipe: recipe,
+						result: result,
+						filePath: Util.TrimBasePath(filePath)
+					})
+				} catch
+					continue
+			}
+		}
+
+		try {
+			pushRecipes()
 			for attachment in this.ReadAttachmentList() {
 				try {
 					pushRecipes(App.paths.profile "\" attachment)
@@ -485,6 +557,7 @@ Class MyRecipes {
 						section: "xcompose_" Ord(recipe) Ord(result[1]) (StrLen(fileNameNoExt) == 0 ? "" : "__file_" fileNameNoExt),
 						name: "XCompose: [" result[1] "]",
 						recipe: recipe,
+						tags: [],
 						result: result[1],
 						filePath: Util.TrimBasePath(filePath)
 					})
@@ -519,19 +592,31 @@ Class MyRecipes {
 						section.recipe := [section.recipe]
 					}
 
+					if section.tags.Length = 0 && !(section.section ~= "i)^xcompose_") {
+						section.tags := this.HandleTitles(section.name, [])
+					}
+
 					section.result := this.FormatResult(section.result, True)
 
-					if ChrLib.GetEntry(section.section)
+					existingEntry := ChrLib.GetEntry(section.section)
+
+					if existingEntry && existingEntry.groups.HasValue("Custom Composes")
 						ChrLib.RemoveEntry(section.section)
 
-					rawCustomEntries.Push(
-						section.section, ChrEntry({
-							result: [section.result],
-							titles: this.HandleTitles(section.name),
-							recipe: section.recipe,
-							groups: ["Custom Composes"],
-						}),
-					)
+					existingEntry := ChrLib.GetEntry(section.section)
+
+					if !existingEntry {
+						rawCustomEntries.Push(
+							section.section, ChrEntry({
+								result: [section.result],
+								titles: this.HandleTitles(section.name),
+								tags: section.tags,
+								recipe: section.recipe,
+								groups: ["Custom Composes"],
+							}),
+						)
+					} else
+						MsgBox(Locale.ReadInject("gui_recipes_create_exists_internal", [section.section]), App.Title("+status+version"))
 				} catch {
 					MsgBox("[" section.section "]`n" Locale.ReadInject("gui_recipes_create_invalid_recipe", [section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result]), App.Title("+status+version"))
 				}
@@ -577,7 +662,7 @@ Class MyRecipes {
 		return result
 	}
 
-	static HandleTitles(sectionName, asString := False) {
+	static HandleTitles(sectionName, asType := "") {
 		supportedLanguages := Language.GetSupported()
 		userLanguage := Language.Get()
 
@@ -597,6 +682,7 @@ Class MyRecipes {
 			}
 		}
 
-		return asString ? titles.Get(userLanguage) : titles
+
+		return asType is String ? titles.Get(userLanguage) : asType is Array ? titles.Values() : titles
 	}
 }

@@ -7,6 +7,7 @@ Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
 Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Array.Prototype.DefineProp("MergeWith", { Call: _ArrayMergeWith })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
+Map.Prototype.DefineProp("Values", { Call: _MapValues })
 Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
 Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
 Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
@@ -153,12 +154,16 @@ RegExEscape(str) {
 	return newStr
 }
 
-_MapKeys(this) {
+_MapKeys(this, t := "k") {
 	keys := []
 	for k, v in this {
-		keys.Push(k)
+		keys.Push(%t%)
 	}
 	return keys
+}
+
+_MapValues(this) {
+	return _MapKeys(this, "v")
 }
 
 _MapToArray(this) {

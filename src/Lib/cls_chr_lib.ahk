@@ -612,7 +612,8 @@ Class ChrLib {
 			}
 
 			resultObj.prompt := searchQuery
-			resultObj.send := (*) => SendText(resultObj.result)
+			lineBreaks := resultObj.result ~= "`n" || resultObj.result ~= "`r"
+			resultObj.send := (*) => (StrLen(resultObj.result) > 20 || lineBreaks) ? ClipSend(resultObj.result) : SendText(resultObj.result)
 
 			if StrLen(resultObj.result) > 0 {
 				Cfg.Set(searchQuery, "Search", "LatestPrompts")
