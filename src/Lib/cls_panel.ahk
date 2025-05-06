@@ -177,6 +177,8 @@ Class Panel {
 					ibBodyX + ibPreviewFrameX, 430, ibPreviewBoxEditW, ibPreviewBoxEditH),
 				altTitle: Format("x{} y{} w{} h{} BackgroundTrans",
 					ibBodyX + ibPreviewFrameX, 415, ibPreviewBoxEditW, ibPreviewBoxEditH),
+				altPages: Format("x{} y{} w{} h{} BackgroundTrans Right",
+					ibBodyX + ibPreviewFrameX, 415, ibPreviewBoxEditW, ibPreviewBoxEditH),
 				altText: "N/A",
 				unicode: Format("x{} y{} w{} h{} readonly Center -VScroll -HScroll",
 					ibBodyX + ibPreviewFrameX, 470, ibPreviewBoxEditW, ibPreviewBoxEditH),
@@ -902,6 +904,7 @@ Class Panel {
 			LaTeX: panelWindow.AddEdit("v" options.prefix "LaTeX " UISets.infoBox.LaTeX, UISets.infoBox.LaTeXText),
 			;
 			altTitle: panelWindow.AddText("v" options.prefix "AltTitle " UISets.infoBox.altTitle, Locale.Read("symbol_altcode")).SetFont("s9"),
+			altPages: panelWindow.AddText("v" options.prefix "AltPages " UISets.infoBox.altPages, Locale.ReadInject("symbol_altcode_pages", [""])).SetFont("s9"),
 			alt: panelWindow.AddEdit("v" options.prefix "Alt " UISets.infoBox.alt, UISets.infoBox.altText),
 			;
 			unicodeTitle: panelWindow.AddText("v" options.prefix "UnicodeTitle " UISets.infoBox.unicodeTitle, Locale.Read("preview_unicode")).SetFont("s9"),
@@ -1026,6 +1029,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "Unicode"].Text := "U+0000"
 			this.PanelGUI[options.prefix "HTML"].Text := "&#x0000;"
 			this.PanelGUI[options.prefix "Alt"].Text := "N/A"
+			this.PanelGUI[options.prefix "AltPages"].Text := ""
 			this.PanelGUI[options.prefix "LaTeX"].Text := "N/A"
 			this.PanelGUI[options.prefix "LaTeXPackage"].Text := ""
 			this.PanelGUI[options.prefix "Tags"].Text := ""
@@ -1075,6 +1079,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "Unicode"].Text := value.sequence.Length > 0 ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
 			this.PanelGUI[options.prefix "HTML"].Text := StrLen(value.entity) > 0 ? [value.html, value.entity].ToString(" ") : value.html
 			this.PanelGUI[options.prefix "Alt"].Text := StrLen(value.altCode) > 0 ? value.altCode : "N/A"
+			this.PanelGUI[options.prefix "AltPages"].Text := value.altCodePages.Length > 0 ? Locale.ReadInject("symbol_altcode_pages", [value.altCodePages.ToString()]) : ""
 			this.PanelGUI[options.prefix "LaTeX"].Text := value.LaTeX.Length > 0 ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"
 			this.PanelGUI[options.prefix "LaTeXPackage"].Text := StrLen(value.LaTeXPackage) > 0 ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
 

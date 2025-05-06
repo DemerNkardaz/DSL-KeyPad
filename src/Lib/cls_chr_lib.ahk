@@ -7,6 +7,7 @@ Class ChrEntry {
 	html := ""
 	entity := ""
 	altCode := ""
+	altCodePages := []
 	LaTeX := []
 	LaTeXPackage := ""
 	titles := Map()
@@ -971,20 +972,23 @@ Class ChrLib {
 				refinedEntry.alterations.%alteration%HTML := "&#" Util.ChrToDecimal(Util.UnicodeToChar(value)) ";"
 		}
 
-		for i, altCode in AltCodesLibrary {
-			if Mod(i, 2) = 1 {
-				altCodeSymbol := AltCodesLibrary[i + 1]
+		if refinedEntry.altCode = "" {
+			pages := [437, 850, 866, 1251, 1252]
+			codePrefix := Map(1251, "0", 1252, "0")
+			altOutput := []
 
-				if character == altCodeSymbol {
-					if StrLen(refinedEntry.altCode) = 0 {
-						refinedEntry.altCode := ""
-					}
+			for i, page in pages {
+				code := CharacterInserter.GetAltcode(character, page)
 
-					if !InStr(refinedEntry.altCode, AltCode) {
-						refinedEntry.altCode .= AltCode " "
-					}
+				if code is Number && code <= 255 && code >= 0 && !altOutput.HasValue(code) {
+					altOutput.Push((codePrefix.Has(page) ? codePrefix[page] : "") code)
+					refinedEntry.altCodePages.Push(page)
+				} else if altOutput.HasValue(code) {
+					refinedEntry.altCodePages.Push(page)
 				}
 			}
+
+			refinedEntry.altCode := altOutput.ToString()
 		}
 
 		if refinedEntry.sequence.Length > 1 {
