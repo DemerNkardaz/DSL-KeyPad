@@ -971,9 +971,9 @@ Class ChrLib {
 				refinedEntry.alterations.%alteration%HTML := "&#" Util.ChrToDecimal(Util.UnicodeToChar(value)) ";"
 		}
 
-		for i, altCodeSymbol in AltCodesLibrary {
+		for i, altCode in AltCodesLibrary {
 			if Mod(i, 2) = 1 {
-				AltCode := AltCodesLibrary[i + 1]
+				altCodeSymbol := AltCodesLibrary[i + 1]
 
 				if character == altCodeSymbol {
 					if StrLen(refinedEntry.altCode) = 0 {
