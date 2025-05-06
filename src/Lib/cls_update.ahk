@@ -44,8 +44,8 @@ Class Update {
 				MsgBox(Locale.ReadInject("bundle_creation_failed_pshell", [exitCode]), App.Title())
 			}
 			*/
-		} catch {
-			MsgBox(Locale.Read("bundle_creation_failed"), App.Title())
+		} catch as e {
+			MsgBox(Locale.Read("bundle_creation_failed") "`n`n" e.Message, App.Title())
 		}
 	}
 

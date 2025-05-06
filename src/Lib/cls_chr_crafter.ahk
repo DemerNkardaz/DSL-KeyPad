@@ -77,6 +77,12 @@ Class ChrCrafter {
 
 		Loop {
 
+			insertType := RegExMatch(input, "i)^u\+") ? "Unicode" : RegExMatch(input, "i)^a\+") ? "Altcode" : ""
+			code := RegExReplace(input, "i)(^u\+|^a\+)", "")
+
+			isUnicodeTyping := insertType = "Unicode" ? True : False
+			isAltcodeTyping := insertType = "Altcode" ? True : False
+
 			IH := InputHook("L1", "{Escape}{Backspace}{Enter}{Pause}{Tab}{Insert}")
 			IH.Start(), IH.Wait()
 
@@ -94,8 +100,21 @@ Class ChrCrafter {
 				ClipWait(0.5, 1)
 				input .= A_Clipboard
 
-			} else if IH.Input != "" && ((!isUnicodeTyping || isUnicodeTyping && StrLen(input) < 7) && (!isAltcodeTyping || isAltcodeTyping && StrLen(input) < 5)) {
-				input .= IH.Input
+			} else if IH.Input != "" {
+				if StrLen(insertType) > 0 {
+					temp := input IH.Input
+					tempCode := RegExReplace(temp, "i)(^u\+|^a\+)", "")
+
+					if CharacterInserter.%insertType%Validate(tempCode) {
+						input .= IH.Input
+					} else
+						continue
+				} else
+					input .= IH.Input
+
+
+				; TODO: FOR UNICODE — ADD STRICTION TO 0xFFFF FORMAT
+				; TODO: FOR ALT-CODE — STRICTION TO DIGITS ONLY
 
 				if InputScriptProcessor.options.interceptionInputMode != "" && StrLen(input) > 1 {
 					charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
@@ -121,34 +140,34 @@ Class ChrCrafter {
 
 			hasBacktick := InStr(input, "``")
 
-			tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
+			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
 			currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
 
 			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 
-			if ((StrLen(input) > 1 && RegExMatch(input, "i)^(U|A)\+")) || (strlen(input) = 1 && RegExMatch(input, "i)^(U|A)")) && !hasBacktick) {
+			insertType := RegExMatch(input, "i)^u\+") ? "Unicode" : RegExMatch(input, "i)^a\+") ? "Altcode" : ""
 
-				insertType := RegExMatch(input, "i)^u\+") ? "Unicode" : RegExMatch(input, "i)^a\+") ? "Altcode" : ""
-				if StrLen(insertType) = 0
-					continue
-
+			if StrLen(insertType) > 0 {
+				code := RegExReplace(input, "i)(^u\+|^a\+)", "")
 
 				isUnicodeTyping := insertType = "Unicode" ? True : False
 				isAltcodeTyping := insertType = "Altcode" ? True : False
 
-				code := RegExReplace(input, "i)(^u\+|^a\+)", "")
-				if code != "" && StrLen(code) < 6 && (insertType = "Unicode" ? CharacterInserter.%insertType%Validate(code) : IsInteger(code)) {
+				if code != "" && StrLen(code) < 6 && (CharacterInserter.%insertType%Validate(code)) {
 					suggestion := ""
 
 					suggestion := CharacterInserter.%insertType%(code, True)
 
-					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) CharacterInserter.%insertType%Prefix StrUpper(code))
+					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) CharacterInserter.%insertType%Prefix StrUpper(code) "`n" Locale.Read("tooltip_compose_" StrLower(insertType) "_range"))
 
 					output := suggestion
 				}
 
 
-				if IH.EndKey = "Enter" {
+				if IH.EndKey = "Enter"
+					break
+				else if IH.EndKey = "Esc" {
+					input := ""
 					break
 				}
 			} else if !pauseOn || (IH.EndKey = "Enter") {

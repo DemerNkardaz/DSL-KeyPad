@@ -68,7 +68,29 @@ Class CharacterInserter {
 	}
 
 	static UnicodeValidate(charCode) {
-		return RegExMatch(charCode, "^[0-9a-fA-F]+$")
+		if !RegExMatch(charCode, "^[0-9A-Fa-f]{1,6}$")
+			return False
+
+		code := Integer("0x" charCode)
+		len := StrLen(charCode)
+
+		leadingZeros := 0
+		Loop Parse, charCode {
+			if A_LoopField == "0"
+				leadingZeros++
+			else
+				break
+		}
+
+		if (leadingZeros > 0 && len > 4)
+			return False
+
+
+		if (code >= 0x1000 && StrUpper(charCode) != Format("{:X}", code))
+			return False
+
+		return code <= 0x10FFFF
 	}
+
 
 }
