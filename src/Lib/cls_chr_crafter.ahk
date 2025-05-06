@@ -73,7 +73,7 @@ Class ChrCrafter {
 		Loop {
 
 			insertType := RegExMatch(input, "i)(^u\+|^ю\+)") ? "Unicode" : RegExMatch(input, "i)(^a\+|^а\+)") ? "Altcode" : ""
-			code := RegExReplace(input, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
+			codes := RegExReplace(input, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
 
 			isUnicodeTyping := insertType = "Unicode" ? True : False
 			isAltcodeTyping := insertType = "Altcode" ? True : False
@@ -83,6 +83,8 @@ Class ChrCrafter {
 
 			if (IH.EndKey = "Escape") {
 				input := ""
+				output := ""
+				PH.Stop()
 				break
 
 			} else if (IH.EndKey = "Pause") {
@@ -93,25 +95,9 @@ Class ChrCrafter {
 					input := SubStr(input, 1, -1)
 			} else if (IH.EndKey = "Insert") {
 				ClipWait(0.5, 1)
-				temp := input A_Clipboard
-				tempCode := RegExReplace(temp, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
-
-				if CharacterInserter.%insertType%Validate(tempCode) {
-					input .= A_Clipboard
-				} else
-					continue
-
+				input .= this.parseUniAlt(A_Clipboard, input, insertType)
 			} else if IH.Input != "" {
-				if StrLen(insertType) > 0 {
-					temp := input IH.Input
-					tempCode := RegExReplace(temp, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
-
-					if CharacterInserter.%insertType%Validate(tempCode) {
-						input .= IH.Input
-					} else
-						continue
-				} else
-					input .= IH.Input
+				input .= this.parseUniAlt(IH.Input, input, insertType)
 
 				if InputScriptProcessor.options.interceptionInputMode != "" && StrLen(input) > 1 {
 					charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
@@ -146,28 +132,31 @@ Class ChrCrafter {
 			reservedNoBreak := RegExMatch(input, "i)^(ю)") && StrLen(input) = 1
 
 			if StrLen(insertType) > 0 {
-				code := RegExReplace(input, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
+				codes := RegExReplace(input, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
+				codesArray := StrSplit(codes, " ")
+
+				for i, checkEmpty in codesArray
+					if checkEmpty = "" || checkEmpty ~= "^\s+$"
+						codesArray.RemoveAt(i)
+
+				suggestion := ""
 
 				isUnicodeTyping := insertType = "Unicode" ? True : False
 				isAltcodeTyping := insertType = "Altcode" ? True : False
 
-				if CharacterInserter.%insertType%Validate(code) {
-					suggestion := ""
-
-					suggestion := CharacterInserter.%insertType%(code)
-
-					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) CharacterInserter.%insertType%Prefix StrUpper(code) "`n" Locale.Read("tooltip_compose_" StrLower(insertType) "_range") "`n" CharacterInserter.GetBlock(code, insertType))
-
-					output := suggestion
+				if codesArray.length > 0 {
+					for code in codesArray {
+						if code != "" && CharacterInserter.%insertType%Validate(code) {
+							suggestion .= CharacterInserter.%insertType%(code)
+						}
+					}
+					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) "`n" Locale.Read("tooltip_compose_" StrLower(insertType) "_range") "`n" CharacterInserter.GetBlock(codesArray[codesArray.length], insertType))
 				}
 
+				output := suggestion
 
 				if IH.EndKey = "Enter"
 					break
-				else if IH.EndKey = "Esc" {
-					input := ""
-					break
-				}
 			} else if !pauseOn || (IH.EndKey = "Enter") {
 				if reservedNoBreak
 					continue
@@ -256,6 +245,26 @@ Class ChrCrafter {
 		}
 		return
 	}
+	static parseUniAlt(str, input, insertType) {
+		output := ""
+		if StrLen(insertType) > 0 {
+			temp := input str
+			tempCodes := RegExReplace(temp, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
+			tempCodesArray := StrSplit(tempCodes, " ")
+
+			for i, checkEmpty in tempCodesArray
+				if checkEmpty = "" || checkEmpty ~= "^\s+$"
+					tempCodesArray.RemoveAt(i)
+
+			if tempCodesArray.length > 0
+				if CharacterInserter.%insertType%Validate(tempCodesArray[tempCodesArray.length])
+					output .= str
+		} else
+			output .= str
+
+		return output
+	}
+
 
 	static ComposeActivate() {
 		if this.ComposeKeyClicks = 1 {
