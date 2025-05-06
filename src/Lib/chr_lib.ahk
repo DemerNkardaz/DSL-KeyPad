@@ -2649,6 +2649,31 @@ LibRegistrate(this) {
 			alterations: { small: "{U+FE65}" },
 			options: { noCalc: True },
 		},
+		"integral", {
+			unicode: "{U+222B}", LaTeX: ["\int"],
+			tags: ["integral", "интеграл"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "i" },
+			recipe: ["int", "инт"],
+		},
+		"integral_double", {
+			unicode: "{U+222C}", LaTeX: ["\iint"],
+			tags: ["double integral", "двойной интеграл"],
+			groups: ["Smelting Special", "Math"],
+			recipe: ["${integral×2}", "iint", "иинт"],
+		},
+		"integral_triple", {
+			unicode: "{U+222D}", LaTeX: ["\iiint"],
+			tags: ["triple integral", "тройной интеграл"],
+			groups: ["Smelting Special", "Math"],
+			recipe: ["${integral×3}", "tint", "тинт"],
+		},
+		"integral_quadruple", {
+			unicode: "{U+2A0C}",
+			tags: ["quadruple integral", "четверной интеграл"],
+			groups: ["Smelting Special", "Math"],
+			recipe: ["${integral×4}", "qint", "чинт"],
+		},
 		"left_parenthesis", {
 			unicode: "{U+0028}",
 			alterations: { modifier: "{U+207D}", subscript: "{U+208D}", small: "{U+FE59}" },
