@@ -178,31 +178,32 @@ Class ChrLib {
 
 			for i, variant in splitVariants {
 				variantName := RegExReplace(entryName, "\[.*?\]", variant)
-				entries.%variantName% := entry.Clone()
+				entries.e%i%_%variantName% := entry.Clone()
 
 				for item in ["unicode", "proxy", "alterations"] {
 					if entry.%item% is Array
-						entries.%variantName%.%item% := (
+						entries.e%i%_%variantName%.%item% := (
 							entry.%item%[i] is Object ? entry.%item%[i].Clone() : entry.%item%[i]
 						)
 				}
 
-				entries.%variantName% := this.SetDecomposedData(variantName, entries.%variantName%)
+				entries.e%i%_%variantName% := this.SetDecomposedData(variantName, entries.e%i%_%variantName%)
 
-				entries.%variantName%.symbol := entry.symbol.Clone()
-				entries.%variantName%.symbol := this.CloneOptions(entry.symbol, i)
+				entries.e%i%_%variantName%.symbol := entry.symbol.Clone()
+				entries.e%i%_%variantName%.symbol := this.CloneOptions(entry.symbol, i)
 
-				this.ProcessReferences(entries.%variantName%, entry, i)
+				this.ProcessReferences(entries.e%i%_%variantName%, entry, i)
 
-				entries.%variantName%.options := this.CloneOptions(entry.options, i)
-				entries.%variantName%.variant := variant
-				entries.%variantName%.variantPos := i
+				entries.e%i%_%variantName%.options := this.CloneOptions(entry.options, i)
+				entries.e%i%_%variantName%.variant := variant
+				entries.e%i%_%variantName%.variantPos := i
 
 			}
 
 			for entryName, entry in entries.OwnProps() {
+				noIndexName := RegExReplace(entryName, "i)^e(\d+)_(.*?)", "$2")
 				this.ProcessRecipe(entry, splitVariants)
-				this.AddEntry(entryName, ChrEntry(entry, entryName))
+				this.AddEntry(noIndexName, ChrEntry(entry, noIndexName))
 			}
 
 		} else {
@@ -748,6 +749,14 @@ Class ChrLib {
 			if sourceEntry.%reference%.Length > 0 && sourceEntry.%reference%[sourceEntry.%reference%.Length] is Array {
 				if sourceEntry.%reference%[index].Length > 0 {
 					targetEntry.%reference% := sourceEntry.%reference%[index].Clone()
+					try {
+						if sourceEntry.%reference%Prefixes.Length > 0 {
+							for i, prefix in sourceEntry.%reference%Prefixes {
+								targetEntry.%reference%[i] := prefix targetEntry.%reference%[i]
+							}
+						}
+						targetEntry.DeleteProp(reference "Prefixes")
+					}
 				} else {
 					targetEntry.DeleteProp(reference)
 				}

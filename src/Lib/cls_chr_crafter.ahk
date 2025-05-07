@@ -60,6 +60,7 @@ Class ChrCrafter {
 		currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
 
 		pauseOn := False
+		cancelledByUser := False
 		cleanPastInput := False
 
 		continueInInput := False
@@ -99,6 +100,7 @@ Class ChrCrafter {
 			if (IH.EndKey = "Escape") {
 				input := ""
 				output := ""
+				cancelledByUser := True
 				PH.Stop()
 				break
 
@@ -258,7 +260,8 @@ Class ChrCrafter {
 			SetTimer(Tooltip, -1000)
 
 		} else {
-			Util.CaretTooltip(Chr(0x2705) " " input " " Chr(0x2192) " " Util.StrFormattedReduce(output))
+			endTooltip := cancelledByUser ? Chr(0x274E) " " Chr(0x2192) " " Locale.Read("warning_compose_cancelled_by_user") : Chr(0x2705) " " input " " Chr(0x2192) " " Util.StrFormattedReduce(output)
+			Util.CaretTooltip(endTooltip)
 			SetTimer(Tooltip, -500)
 			if !InStr(output, "N/A") || output != input
 				this.SendOutput(output)

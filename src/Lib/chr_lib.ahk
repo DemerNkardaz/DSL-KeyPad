@@ -1777,60 +1777,7 @@ LibRegistrate(this) {
 		; * Misc
 		;
 		;
-		"num_sup_[0,1,2,3,4,5,6,7,8,9]", {
-			unicode: ["{U+2070}", "{U+00B9}", "{U+00B2}", "{U+00B3}", "{U+2074}",
-				"{U+2075}", "{U+2076}", "{U+2077}", "{U+2078}", "{U+2079}"]
-		},
-		"num_sup_[minus,equals,plus,left_parenthesis,right_parenthesis]", {
-			unicode: ["{U+207B}", "{U+207C}", "{U+207A}", "{U+207D}", "{U+207E}"]
-		},
-		"num_sub_[0,1,2,3,4,5,6,7,8,9]", {
-			unicode: ["{U+2080}", "{U+2081}", "{U+2082}", "{U+2083}", "{U+2084}",
-				"{U+2085}", "{U+2086}", "{U+2087}", "{U+2088}", "{U+2089}"]
-		},
-		"num_sub_[minus,equals,plus,left_parenthesis,right_parenthesis]", {
-			unicode: ["{U+208B}", "{U+208C}", "{U+208A}", "{U+208D}", "{U+208E}"]
-		},
-		"kkey_0", { unicode: "{U+0030}", sup: "num_sup_0", sub: "num_sub_0", alterations: { doubleStruck: "{U+1D7D8}", bold: "{U+1D7CE}", sansSerif: "{U+1D7E2}", sansSerifBold: "{U+1D7EC}", monospace: "{U+1D7F6}" }, options: { noCalc: True } },
-		"kkey_1", { unicode: "{U+0031}", sup: "num_sup_1", sub: "num_sub_1", alterations: { doubleStruck: "{U+1D7D9}", bold: "{U+1D7CF}", sansSerif: "{U+1D7E3}", sansSerifBold: "{U+1D7ED}", monospace: "{U+1D7F7}" }, options: { noCalc: True } },
-		"kkey_2", { unicode: "{U+0032}", sup: "num_sup_2", sub: "num_sub_2", alterations: { doubleStruck: "{U+1D7DA}", bold: "{U+1D7D0}", sansSerif: "{U+1D7E4}", sansSerifBold: "{U+1D7EE}", monospace: "{U+1D7F8}" }, options: { noCalc: True } },
-		"kkey_3", { unicode: "{U+0033}", sup: "num_sup_3", sub: "num_sub_3", alterations: { doubleStruck: "{U+1D7DB}", bold: "{U+1D7D1}", sansSerif: "{U+1D7E5}", sansSerifBold: "{U+1D7EF}", monospace: "{U+1D7F9}" }, options: { noCalc: True } },
-		"kkey_4", { unicode: "{U+0034}", sup: "num_sup_4", sub: "num_sub_4", alterations: { doubleStruck: "{U+1D7DC}", bold: "{U+1D7D2}", sansSerif: "{U+1D7E6}", sansSerifBold: "{U+1D7F0}", monospace: "{U+1D7FA}" }, options: { noCalc: True } },
-		"kkey_5", { unicode: "{U+0035}", sup: "num_sup_5", sub: "num_sub_5", alterations: { doubleStruck: "{U+1D7DD}", bold: "{U+1D7D3}", sansSerif: "{U+1D7E7}", sansSerifBold: "{U+1D7F1}", monospace: "{U+1D7FB}" }, options: { noCalc: True } },
-		"kkey_6", { unicode: "{U+0036}", sup: "num_sup_6", sub: "num_sub_6", alterations: { doubleStruck: "{U+1D7DE}", bold: "{U+1D7D4}", sansSerif: "{U+1D7E8}", sansSerifBold: "{U+1D7F2}", monospace: "{U+1D7FC}" }, options: { noCalc: True } },
-		"kkey_7", { unicode: "{U+0037}", sup: "num_sup_7", sub: "num_sub_7", alterations: { doubleStruck: "{U+1D7DF}", bold: "{U+1D7D5}", sansSerif: "{U+1D7E9}", sansSerifBold: "{U+1D7F3}", monospace: "{U+1D7FD}" }, options: { noCalc: True } },
-		"kkey_8", { unicode: "{U+0038}", sup: "num_sup_8", sub: "num_sub_8", alterations: { doubleStruck: "{U+1D7E0}", bold: "{U+1D7D6}", sansSerif: "{U+1D7EA}", sansSerifBold: "{U+1D7F4}", monospace: "{U+1D7FE}" }, options: { noCalc: True } },
-		"kkey_9", { unicode: "{U+0039}", sup: "num_sup_9", sub: "num_sub_9", alterations: { doubleStruck: "{U+1D7E1}", bold: "{U+1D7D7}", sansSerif: "{U+1D7EB}", sansSerifBold: "{U+1D7F5}", monospace: "{U+1D7FF}" }, options: { noCalc: True } },
-		"kkey_minus", { unicode: "{U+002D}", sup: "num_sup_minus", sub: "num_sub_minus", options: { noCalc: True } },
-		"kkey_equals", { unicode: "{U+003D}", sup: "num_sup_equals", sub: "num_sub_equals", alterations: { modifier: "{U+02ED}" }, options: { noCalc: True } },
-		"kkey_asterisk", { unicode: "{U+002A}", options: { noCalc: True } },
-		"kkey_underscore", { unicode: "{U+005F}", options: { noCalc: True } },
-		"kkey_hyphen_minus", { unicode: "{U+002D}", options: { noCalc: True } },
-		"kkey_plus", { unicode: "{U+002B}", sup: "num_sup_plus", sub: "num_sub_plus", alterations: { modifier: "{U+02D6}" }, options: { noCalc: True } },
-		"kkey_left_parenthesis", { unicode: "{U+0028}", sup: "num_sup_left_parenthesis", sub: "num_sub_left_parenthesis", options: { noCalc: True } },
-		"kkey_right_parenthesis", { unicode: "{U+0029}", sup: "num_sup_right_parenthesis", sub: "num_sub_right_parenthesis", options: { noCalc: True } },
-		"kkey_comma", { unicode: "{U+002C}", options: { noCalc: True } },
-		"kkey_dot", { unicode: "{U+002E}", options: { noCalc: True } },
-		"kkey_semicolon", { unicode: "{U+003B}", options: { noCalc: True } },
-		"kkey_colon", { unicode: "{U+003A}", alterations: { modifier: "{U+02F8}" }, options: { noCalc: True } },
-		"kkey_apostrophe", { unicode: "{U+0027}", options: { noCalc: True } },
-		"kkey_quotation", { unicode: "{U+0022}", options: { noCalc: True } },
-		"kkey_l_square_bracket", { unicode: "{U+005B}", options: { noCalc: True } },
-		"kkey_r_square_bracket", { unicode: "{U+005D}", options: { noCalc: True } },
-		"kkey_l_curly_bracket", { unicode: "{U+007B}", options: { noCalc: True } },
-		"kkey_r_curly_bracket", { unicode: "{U+007D}", options: { noCalc: True } },
-		"kkey_grave_accent", { unicode: "{U+0060}", options: { noCalc: True } },
-		"kkey_tilde", { unicode: "{U+007E}", options: { noCalc: True } },
-		"kkey_slash", { unicode: "{U+002F}", options: { noCalc: True } },
-		"kkey_backslash", { unicode: "{U+005C}", options: { noCalc: True } },
-		"kkey_verticalline", { unicode: "{U+007C}", options: { noCalc: True } },
-		"kkey_lessthan", { unicode: "{U+003C}", options: { noCalc: True } },
-		"kkey_greaterthan", { unicode: "{U+003E}", options: { noCalc: True } },
-		"kkey_commercial_at", { unicode: "{U+0040}", options: { noCalc: True } },
-		"kkey_numero_sign", { unicode: "{U+2116}", options: { noCalc: True } },
-		"kkey_number_sign", { unicode: "{U+0023}", options: { noCalc: True } },
-		"kkey_percent_sign", { unicode: "{U+0025}", options: { noCalc: True } },
-		"kkey_circumflex_accent", { unicode: "{U+005E}", options: { noCalc: True } },
+		; ? None
 		;
 		;
 		; * Spaces
@@ -2254,7 +2201,7 @@ LibRegistrate(this) {
 		},
 		"fraction_slash", {
 			unicode: "{U+2044}",
-			tags: ["fraction slash", "дробная черта"],
+			tags: ["fraction slash", "форматирующий символ дроби", "дробная черта"],
 			groups: ["Special Characters", "Special Fast Secondary"],
 			options: { groupKey: ["/"], fastKey: ">+ /" },
 		},
@@ -2266,7 +2213,7 @@ LibRegistrate(this) {
 		},
 		"infinity", {
 			unicode: "{U+221E}",
-			tags: ["fraction slash", "дробная черта"],
+			tags: ["infinity", "бесконечность"],
 			groups: ["Special Characters"],
 			options: { groupKey: ["9"], fastKey: "<! 8" },
 		},
@@ -2552,6 +2499,109 @@ LibRegistrate(this) {
 			tags: ["inverted lazy s", "перевёрнутая плавная s"],
 			groups: ["Special Characters", "Smelting Special"],
 			recipe: ["s${arrow_right_circle}"],
+		},
+		;
+		;
+		; * Mathematical Factions
+		;
+		;
+		"vulgar_fraction_zero_[thirds]", {
+			unicode: ["U+2189"],
+			tagsPrefixes: ["vulgar fraction zero ", "дробь нуль "],
+			tags: [
+				["thirds", "трети"]
+			],
+			groups: ["Smelting Special"],
+			recipePrefixes: ["0/"],
+			recipe: [["3"]],
+		},
+		"vulgar_fraction_one_[half,third,quarter,fifth,sixth,seventh,eighth,ninth,tenth]", {
+			unicode: [
+				"U+00BD",
+				"U+2153",
+				"U+00BC",
+				"U+2155",
+				"U+2159",
+				"U+2150",
+				"U+215B",
+				"U+2151",
+				"U+2152",
+			],
+			tagsPrefixes: ["vulgar fraction one ", "дробь одна "],
+			tags: [
+				["half", "вторая"],
+				["third", "треть"],
+				["quarter", "четверть"],
+				["fifth", "пятая"],
+				["sixth", "шестая"],
+				["seventh", "седьмая"],
+				["eighth", "восьмая"],
+				["ninth", "девятая"],
+				["tenth", "десятая"],
+			],
+			groups: ["Smelting Special"],
+			recipePrefixes: ["1/"],
+			recipe: [["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"]],
+		},
+		"vulgar_fraction_two_[thirds,fifths]", {
+			unicode: ["U+2154", "U+2156"],
+			tagsPrefixes: ["vulgar fraction two ", "дробь две "],
+			tags: [
+				["thirds", "трети"],
+				["fifths", "пятых"],
+			],
+			groups: ["Smelting Special"],
+			recipePrefixes: ["2/"],
+			recipe: [["3"], ["5"]],
+		},
+		"vulgar_fraction_three_[quarters,fifths,eighths]", {
+			unicode: ["U+00BE", "U+2157", "U+215C"],
+			tagsPrefixes: ["vulgar fraction three ", "дробь три "],
+			tags: [
+				["quarters", "четвёртых"],
+				["fifths", "пятых"],
+				["eights", "восьмых"],
+			],
+			groups: ["Smelting Special"],
+			recipePrefixes: ["3/"],
+			recipe: [["4"], ["5"], ["8"]],
+		},
+		"vulgar_fraction_four_[fifths]", {
+			unicode: ["U+2158"],
+			tagsPrefixes: ["vulgar fraction four ", "дробь четыре "],
+			tags: [
+				["fifths", "пятых"],
+			],
+			groups: ["Smelting Special"],
+			recipePrefixes: ["4/"],
+			recipe: [["5"]],
+		},
+		"vulgar_fraction_five_[sixths,eighths]", {
+			unicode: ["U+215A", "U+215D"],
+			tagsPrefixes: ["vulgar fraction five ", "дробь пять "],
+			tags: [
+				["sixths", "шестых"],
+				["eighths", "восьмых"],
+			],
+			groups: ["Smelting Special"],
+			recipePrefixes: ["5/"],
+			recipe: [["6"], ["8"]],
+		},
+		"vulgar_fraction_seven_[eighths]", {
+			unicode: ["U+215E"],
+			tagsPrefixes: ["vulgar fraction seven ", "дробь семь "],
+			tags: [
+				["eighths", "восьмых"],
+			],
+			groups: ["Smelting Special"],
+			recipePrefixes: ["7/"],
+			recipe: [["8"]],
+		},
+		"fraction_numerator_one", {
+			unicode: "U+215F",
+			tags: ["fraction numerator one", "дробный числитель один"],
+			groups: ["Smelting Special"],
+			recipe: ["1//"],
 		},
 		;
 		;
