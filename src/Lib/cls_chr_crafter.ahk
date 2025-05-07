@@ -56,6 +56,8 @@ Class ChrCrafter {
 		tooltipSuggestions := ""
 		favoriteSuggestions := this.ReadFavorites()
 		favoriteSuggestions := favoriteSuggestions != "" ? ("`n" Chrs([0x2E3B, 10]) "`n" Chr(0x2605) " " Locale.Read("func_label_favorites") "`n" RegExReplace(favoriteSuggestions, ",\s+$", "") "`n" Chrs([0x2E3B, 10])) : ""
+		insertType := ""
+		currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
 
 		pauseOn := False
 		cleanPastInput := False
@@ -68,12 +70,25 @@ Class ChrCrafter {
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
 
-		Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions))
+		ComposeSuggestedTooltip() {
+			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
+
+			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+		}
+
+		tooltips := Map(
+			"default", (*) => Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions)),
+			"unialt", (*) => Util.CaretTooltip((Chr(0x2B1C)) " " input "`n" "[ ]" Chr(0x2002) "`n" Locale.Read("tooltip_compose_" StrLower(insertType) "_range")),
+			"suggested", (*) => ComposeSuggestedTooltip()
+		)
 
 		Loop {
 
 			insertType := RegExMatch(input, "i)(^u\+|^ю\+)") ? "Unicode" : RegExMatch(input, "i)(^a\+|^а\+)") ? "Altcode" : ""
 			codes := RegExReplace(input, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
+
+			ruleTooltip := insertType != "" && StrLen(input) > 1 && StrLen(input) < 3 ? "unialt" : insertType = "" && tooltipSuggestions != "" ? "suggested" : StrLen(input) < 2 ? "default" : ""
+			useTooltip := tooltips.Has(ruleTooltip) ? tooltips.Get(ruleTooltip)() : (*) => []
 
 			isUnicodeTyping := insertType = "Unicode" ? True : False
 			isAltcodeTyping := insertType = "Altcode" ? True : False
@@ -123,15 +138,16 @@ Class ChrCrafter {
 
 			hasBacktick := InStr(input, "``")
 
-			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
-			currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
-
-			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+			if insertType = "" {
+				currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
+				ComposeSuggestedTooltip()
+			}
 
 			insertType := RegExMatch(input, "i)(^u\+|^ю\+)") ? "Unicode" : RegExMatch(input, "i)(^a\+|^а\+)") ? "Altcode" : ""
 			reservedNoBreak := RegExMatch(input, "i)^(ю)") && StrLen(input) = 1
 
-			if StrLen(insertType) > 0 {
+			if insertType != "" {
+				input := StrUpper(input)
 				codes := RegExReplace(input, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
 				codesArray := StrSplit(codes, " ")
 
@@ -150,7 +166,9 @@ Class ChrCrafter {
 							suggestion .= CharacterInserter.%insertType%(code)
 						}
 					}
-					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) "`n" Locale.Read("tooltip_compose_" StrLower(insertType) "_range") "`n" CharacterInserter.GetBlock(codesArray[codesArray.length], insertType))
+
+					blockShown := codesArray.Length > 0 ? CharacterInserter.GetBlock(codesArray[codesArray.Length], insertType) : Locale.Read("tooltip_compose_" StrLower(insertType) "_range")
+					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) "`n" blockShown)
 				}
 
 				output := suggestion
@@ -195,8 +213,10 @@ Class ChrCrafter {
 							else {
 								input := RegExReplace(input, RegExEscape(postInput), output)
 
-								tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
-								Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+								if insertType = "" {
+									tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
+									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
+								}
 
 								continue
 							}
@@ -218,7 +238,7 @@ Class ChrCrafter {
 								originalInput := input
 								input := RegExReplace(input, RegExEscape(inputToCheck), output)
 
-								if (input != originalInput) {
+								if (input != originalInput && insertType = "") {
 									tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
 									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && !RegExMatch(input, "^\(\~\)\s")) ? "`n" tooltipSuggestions : ""))
 								}
@@ -247,7 +267,7 @@ Class ChrCrafter {
 	}
 	static parseUniAlt(str, input, insertType) {
 		output := ""
-		if StrLen(insertType) > 0 {
+		if insertType != "" {
 			temp := input str
 			tempCodes := RegExReplace(temp, "i)(^u\+|^a\+|^ю\+|^а\+)", "")
 			tempCodesArray := StrSplit(tempCodes, " ")
@@ -259,6 +279,7 @@ Class ChrCrafter {
 			if tempCodesArray.length > 0
 				if CharacterInserter.%insertType%Validate(tempCodesArray[tempCodesArray.length])
 					output .= str
+
 		} else
 			output .= str
 

@@ -195,6 +195,7 @@ Class CharacterInserter {
 		"108E0...108FF", "Hatran",
 		"10900...1091F", "Phoenician",
 		"10920...1093F", "Lydian",
+		"10940...1095F", "Sidetic",
 		"10980...1099F", "Meroitic Hieroglyphs",
 		"109A0...109FF", "Meroitic Cursive",
 		"10A00...10A5F", "Kharoshthi",
@@ -246,11 +247,13 @@ Class CharacterInserter {
 		"11AB0...11ABF", "Unified Canadian Aboriginal Syllabics Extended-A",
 		"11AC0...11AFF", "Pau Cin Hau",
 		"11B00...11B5F", "Devanagari Extended-A",
+		"11B60...11B7F", "Sharada Supplement",
 		"11BC0...11BFF", "Sunuwar",
 		"11C00...11C6F", "Bhaiksuki",
 		"11C70...11CBF", "Marchen",
 		"11D00...11D5F", "Masaram Gondi",
 		"11D60...11DAF", "Gunjala Gondi",
+		"11DB0...11DEF", "Tolong Siki",
 		"11EE0...11EFF", "Makasar",
 		"11F00...11F5F", "Kawi",
 		"11FB0...11FBF", "Lisu Supplement",
@@ -270,13 +273,16 @@ Class CharacterInserter {
 		"16AD0...16AFF", "Bassa Vah",
 		"16B00...16B8F", "Pahawh Hmong",
 		"16D40...16D7F", "Kirat Rai",
+		"16D80...16DAF", "Chisoi",
 		"16E40...16E9F", "Medefaidrin",
+		"16EA0...16EDF", "Beria Erfe",
 		"16F00...16F9F", "Miao",
 		"16FE0...16FFF", "Ideographic Symbols and Punctuation",
 		"17000...187FF", "Tangut",
 		"18800...18AFF", "Tangut Components",
 		"18B00...18CFF", "Khitan Small Script",
 		"18D00...18D7F", "Tangut Supplement",
+		"18D80...18DFF", "Tangut Components Supplement",
 		"1AFF0...1AFFF", "Kana Extended-B",
 		"1B000...1B0FF", "Kana Supplement",
 		"1B100...1B12F", "Kana Extended-A",
@@ -403,10 +409,14 @@ Class CharacterInserter {
 				inputNum := Number("0x" input)
 
 				if inputNum >= startBlockNum && inputNum <= endBlockNum
-					return name
+					return "[ U+" StrReplace(block, "...", "–U+") " ] " name
 			}
 		} else if isFor = "Altcode" {
 			Keyboard.CheckLayout(&lang)
+			tooltips := Map(
+				"default", (name, pageRange) => "[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " name,
+				"localised", (name, pageRange) => "[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " (name.%lang = "ru" ? "ru" : "en"%) "`n[ " Locale.Read("script_" (lang = "ru" ? "cyrillic" : "latin")) " ]"
+			)
 			for pageRange, name in this.copePages {
 				split := StrSplit(pageRange, "...")
 				startPageNum := Number(split[1])
@@ -415,14 +425,14 @@ Class CharacterInserter {
 
 				if input ~= "^0" && pageRange ~= "^01" && inputNum >= 128 {
 					if inputNum >= startPageNum && inputNum <= endPageNum {
-						return name.%lang = "ru" ? "ru" : "en"%
+						return tooltips.Get("localised")(name, pageRange)
 					}
 				} else {
 					if inputNum >= startPageNum && inputNum <= endPageNum && !(pageRange ~= "^01") {
 						if name is Object {
-							return name.%lang = "ru" ? "ru" : "en"%
+							return tooltips.Get("localised")(name, pageRange)
 						} else
-							return name
+							return tooltips.Get("default")(name, pageRange)
 					}
 				}
 			}
