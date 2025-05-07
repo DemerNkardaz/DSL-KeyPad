@@ -746,6 +746,18 @@ Class KeyboardBinder {
 
 Class Scripter {
 
+	static selectorGUI := Gui()
+	static selectorTitle := App.Title("+status+version") " — " Locale.Read("gui_scripter")
+
+	static SelectorPanel() {
+
+
+		Constructor() {
+
+		}
+
+	}
+
 }
 
 Class BindHandler {

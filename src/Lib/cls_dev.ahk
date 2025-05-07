@@ -21,7 +21,7 @@ Class Dev {
 		path := App.paths.dir "\workflow.ps1"
 		version := App.Ver("+hotfix+postfix")
 		isPre := App.Ver(["pre-release"]) = "1"
-		status := StrLen(App.Title(["status"])) > 0 ? " — " App.Title(["status"]) : ""
+		status := StrLen(App.Title(["status"])) > 0 ? " " App.Title(["status"]) : ""
 
 		downloadLink := App.URL "/releases/download/" version "/DSL-KeyPad-" version ".zip"
 		releasesArray := Update.ChekVersions()
@@ -119,7 +119,7 @@ Class Dev {
 		body := (
 			'$ver = "' version '"`n'
 			'$preRelease = "' (isPre ? "True" : "False") '"`n'
-			'$title = "DSL KeyPad — V[' version ']' status '"`n'
+			'$title = "DSL KeyPad@' RegExReplace(version, "i)(\d+\.\d+\.\d+\.\d+).*", "$1") status '"`n'
 			'$message =@"`n' messageParts '`n"@`n`n'
 			'Write-Host "Version: $ver"`n'
 			'Write-Host "Pre-release: $preRelease"`n'

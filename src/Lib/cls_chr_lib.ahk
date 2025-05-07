@@ -749,14 +749,15 @@ Class ChrLib {
 			if sourceEntry.%reference%.Length > 0 && sourceEntry.%reference%[sourceEntry.%reference%.Length] is Array {
 				if sourceEntry.%reference%[index].Length > 0 {
 					targetEntry.%reference% := sourceEntry.%reference%[index].Clone()
-					try {
-						if sourceEntry.%reference%Prefixes.Length > 0 {
+
+					if sourceEntry.HasOwnProp(reference "Prefixes") {
+						if sourceEntry.%reference%Prefixes.Length > 0
 							for i, prefix in sourceEntry.%reference%Prefixes {
 								targetEntry.%reference%[i] := prefix targetEntry.%reference%[i]
 							}
-						}
 						targetEntry.DeleteProp(reference "Prefixes")
 					}
+
 				} else {
 					targetEntry.DeleteProp(reference)
 				}
