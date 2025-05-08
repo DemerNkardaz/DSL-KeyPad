@@ -19,8 +19,6 @@ A_MaxHotkeysPerInterval := 50
 
 ; <^>!>^BackSpace:: KeyHistory
 
-ActiveScriptName := ""
-PreviousScriptName := ""
 AlterationActiveName := ""
 LaTeXMode := "Default"
 
@@ -1238,260 +1236,6 @@ GetKeyScanCode() {
 	scanCode := StrLen(scanCode) == 1 ? "00" scanCode : StrLen(scanCode) == 2 ? "0" scanCode : scanCode
 	scanCode := "SC" scanCode
 	SendText(scanCode)
-}
-
-
-SwitchToScript(scriptMode) {
-	LanguageCode := Language.Get()
-	Labels := {}
-	Labels[] := Map()
-	Labels["ru"] := {}
-	Labels["en"] := {}
-	if (scriptMode = "sup") {
-		Labels["ru"].SearchTitle := "Верхний индекс"
-		Labels["en"].SearchTitle := "Superscript"
-	}
-	else if (scriptMode = "sub") {
-		Labels["ru"].SearchTitle := "Нижний индекс"
-		Labels["en"].SearchTitle := "Subscript"
-	}
-	Labels["ru"].WindowPrompt := "Введите знаки для конвертации"
-	Labels["en"].WindowPrompt := "Enter chars for convert"
-
-	PromptValue := ""
-
-	IB := InputBox(Labels[LanguageCode].WindowPrompt, Labels[LanguageCode].SearchTitle, "w256 h92")
-	if IB.Result = "Cancel"
-		return
-	else {
-		PromptValue := IB.Value
-		CharArray := []
-		for promptCharacters in StrSplit(PromptValue) {
-			CharArray.Push(GetCharacterUnicode(promptCharacters))
-		}
-
-		for index, char in CharArray {
-			for characterEntry, value in Characters {
-				entryID := ""
-				entryName := ""
-				if RegExMatch(characterEntry, "^\s*(\d+)\s+(.+)", &match) {
-					entryID := match[1]
-					entryName := match[2]
-				}
-
-				if (scriptMode = "sup" && !HasProp(value, "sup")) || (scriptMode = "sub" && !HasProp(value, "sub")) {
-					continue
-				}
-
-				if (!IsObject(value.unicode) && char = UniTrim(value.unicode)) {
-					ScriptObj := scriptMode = "sup" ? value.sup : value.sub
-					for scriptEntry, scriptValue in Characters {
-						scriptEntryID := ""
-						scriptEntryName := ""
-						if RegExMatch(scriptEntry, "^\s*(\d+)\s+(.+)", &match) {
-							scriptEntryID := match[1]
-							scriptEntryName := match[2]
-						}
-
-						if (scriptEntryName = ScriptObj) {
-							PromptValue := StrReplace(PromptValue, Chr("0x" char), Chr("0x" UniTrim(scriptValue.unicode)))
-							break
-						} else {
-							continue
-						}
-					}
-				}
-			}
-		}
-	}
-
-	SendText(PromptValue)
-	return
-}
-
-
-; Glagolitic, Fuþark
-CallBuffer(Time := -25, Callback := "") {
-	if Callback != ""
-		SetTimer(Callback, Time)
-}
-
-ChangeTrayIconOnLanguage() {
-	LanguageCode := Language.Get()
-	Keyboard.CurrentLayout(&CurrentLayout)
-
-	if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
-		TraySetIcon(App.icoDLL, 9)
-		A_IconTip := DSLPadTitle " (" Locale.Read("tray_tooltip_disabled") ")"
-		return
-	}
-
-	ActiveLatin := Cfg.Get("Layout_Latin")
-	ActiveCyrillic := Cfg.Get("Layout_Cyrillic")
-
-	TitleCompose := DSLPadTitle "`n" ActiveLatin " – " ActiveCyrillic
-
-	IconMap := Map(
-		"Hellenic", {
-			CodeEn: 2, CodeRu: 3, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_futhark"),
-			TitleRu: Locale.Read("tray_tooltip_glagolitic"),
-		},
-		"Glagolitic Futhark", {
-			CodeEn: 2, CodeRu: 3, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_futhark"),
-			TitleRu: Locale.Read("tray_tooltip_glagolitic"),
-		},
-		"Old Turkic Old Permic", {
-			CodeEn: 4, CodeRu: 5, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_turkic"),
-			TitleRu: Locale.Read("tray_tooltip_permic"),
-		},
-		"Old Hungarian", {
-			CodeEn: 6, CodeRu: 6, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_hungarian"),
-			TitleRu: Locale.Read("tray_tooltip_hungarian"),
-		},
-		"Gothic", {
-			CodeEn: 7, CodeRu: 7, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_gothic"),
-			TitleRu: Locale.Read("tray_tooltip_gothic"),
-		},
-		"Old Italic", {
-			CodeEn: 13, CodeRu: 13, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_old_italic"),
-			TitleRu: Locale.Read("tray_tooltip_old_italic"),
-		},
-		"Phoenician", {
-			CodeEn: 14, CodeRu: 14, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_phoenician"),
-			TitleRu: Locale.Read("tray_tooltip_phoenician"),
-		},
-		"Ancient South Arabian", {
-			CodeEn: 15, CodeRu: 15, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_ancient_south_arabian"),
-			TitleRu: Locale.Read("tray_tooltip_ancient_south_arabian"),
-		},
-		"Ancient North Arabian", {
-			CodeEn: 16, CodeRu: 16, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_ancient_north_arabian"),
-			TitleRu: Locale.Read("tray_tooltip_ancient_north_arabian"),
-		},
-		"IPA", {
-			CodeEn: 8, CodeRu: 8, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_ipa"),
-			TitleRu: Locale.Read("tray_tooltip_ipa"),
-		},
-		"Maths", {
-			CodeEn: 10, CodeRu: 10, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_maths"),
-			TitleRu: Locale.Read("tray_tooltip_maths"),
-		},
-	)
-
-	ISPEntries := Map(
-		"vietNam", {
-			CodeEn: 11, CodeRu: 11, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_vietNam"),
-			TitleRu: Locale.Read("tray_tooltip_vietNam"),
-		},
-		"pinYin", {
-			CodeEn: 12, CodeRu: 12, Default: 1,
-			TitleEn: Locale.Read("tray_tooltip_pinYin"),
-			TitleRu: Locale.Read("tray_tooltip_pinYin"),
-		},
-	)
-
-	ISPActive := ISPEntries.Has(InputScriptProcessor.options.interceptionInputMode)
-	ISPMode := InputScriptProcessor.options.interceptionInputMode
-
-	if IconMap.Has(ActiveScriptName) {
-		TrayTitle := TitleCompose (CurrentLayout = CodeEn ? "`n" IconMap[ActiveScriptName].TitleEn :
-			CurrentLayout = CodeRu ? "`n" IconMap[ActiveScriptName].TitleRu : 1) (ISPActive
-				? "`n" (CurrentLayout = CodeEn ? "`n" ISPEntries[ISPMode].TitleEn :
-					CurrentLayout = CodeRu ? "`n" ISPEntries[ISPMode].TitleRu : 1) : "")
-
-		IconCode := (CurrentLayout = CodeEn ? IconMap[ActiveScriptName].CodeEn :
-			CurrentLayout = CodeRu ? IconMap[ActiveScriptName].CodeRu : 1)
-	} else if ISPActive {
-		TrayTitle := TitleCompose (CurrentLayout = CodeEn ? "`n" ISPEntries[ISPMode].TitleEn :
-			CurrentLayout = CodeRu ? "`n" ISPEntries[ISPMode].TitleRu : 1)
-
-		IconCode := (CurrentLayout = CodeEn ? ISPEntries[ISPMode].CodeEn :
-			CurrentLayout = CodeRu ? ISPEntries[ISPMode].CodeRu : 1)
-	} else {
-		TrayTitle := TitleCompose
-		IconCode := 1
-	}
-
-	TraySetIcon(App.icoDLL, IconCode)
-	A_IconTip := TrayTitle
-}
-
-OnMessage(0x0051, On_WM_INPUTLANGCHANGE)
-
-On_WM_INPUTLANGCHANGE(wParam, lParam, msg, hwnd) {
-	ChangeTrayIconOnLanguage()
-}
-
-SetTimer(ChangeTrayIconOnLanguage, 1000)
-
-ToggleLetterScript(HideMessage := False, ScriptName := "Glagolitic Futhark") {
-	LanguageCode := Language.Get()
-	Keyboard.CurrentLayout(&CurrentLayout)
-	global ActiveScriptName, PreviousScriptName
-	CurrentActive := ScriptName = ActiveScriptName
-
-	LocalesPairs := [
-		"Hellenic", "script_hellenic",
-		"Glagolitic Futhark", "script_glagolitic_futhark",
-		"Old Turkic Old Permic", "script_turkic_perimc",
-		"Old Hungarian", "script_hungarian",
-		"Gothic", "script_gothic",
-		"Old Italic", "script_old_italic",
-		"Phoenician", "script_phoenician",
-		"Ancient South Arabian", "script_ancient_south_arabian",
-		"Ancient North Arabian", "script_ancient_north_arabian",
-		"IPA", "script_ipa",
-		"Maths", "script_maths",
-	]
-
-	scriptModes := Map(
-		"Hellenic", [App.indexIcos["hellenic"]],
-		"Glagolitic Futhark", [App.indexIcos["norse"], App.indexIcos["glagolitic"]],
-		"Old Turkic Old Permic", [App.indexIcos["turkic"], App.indexIcos["permic"]],
-		"Old Hungarian", [App.indexIcos["hungarian"]],
-		"Gothic", [App.indexIcos["gothic"]],
-		"Old Italic", [App.indexIcos["old_italic"]],
-		"Phoenician", [App.indexIcos["phoenician"]],
-		"Ancient South Arabian", [App.indexIcos["south_arabian"]],
-		"Ancient North Arabian", [App.indexIcos["north_arabian"]],
-		"IPA", [App.indexIcos["ipa"]],
-		"Maths", [App.indexIcos["maths"]],
-	)
-
-	if !CurrentActive {
-		if scriptModes.Has(ScriptName) {
-			index := scriptModes[ScriptName].Length == 2 ? (CurrentLayout = Language.supported["en"].code ? 1 : 2) : 1
-			TraySetIcon(App.icoDLL, scriptModes[ScriptName][index])
-		}
-	} else {
-		TraySetIcon(App.icoDLL, App.indexIcos["app"])
-	}
-
-	if !HideMessage {
-		for i, pair in LocalesPairs {
-			if (Mod(i, 2) == 1) {
-				key := pair
-				localePair := LocalesPairs[i + 1]
-				if ScriptName = key {
-					MsgBox(CurrentActive ? Util.StrVarsInject(Locale.Read("script_mode_deactivated"), Locale.Read(localePair)) : Util.StrVarsInject(Locale.Read("script_mode_activated"), Locale.Read(localePair)), DSLPadTitle, 0x40)
-					break
-				}
-			}
-		}
-	}
-	return
 }
 
 ToRomanNumeral(IntValue, CapitalLetters := True) {
@@ -5327,8 +5071,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["H"], (*) => Util.StrSelToHTML("Entities"),
 			">^" UseKey["J"], (*) => Util.StrSelToHTML("Entities", True),
 			">^>+" UseKey["H"], (*) => Util.StrSelToHTML(),
-			"<#<^>!" UseKey["1"], (*) => SwitchToScript("sup"),
-			"<#<^>!" UseKey["2"], (*) => SwitchToScript("sub"),
 			"<#<^>!" UseKey["3"], (*) => SwitchToRoman(),
 			"<#<!" UseKey["M"], (*) => ToggleGroupMessage(),
 			"<#<!" UseKey["PgUp"], (*) => FindCharacterPage(),
@@ -5366,12 +5108,6 @@ GetKeyBindings(UseKey, Combinations := "FastKeys") {
 			">^" UseKey["NumpadEnter"], (*) => ParagraphizeSelection(),
 			">^" UseKey["NumpadDot"], (*) => GREPizeSelection(),
 			"<^>!" UseKey["NumpadDot"], (*) => GREPizeSelection(True),
-			">^" UseKey["Tilde"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Hellenic"), (*) => ToggleLetterScript(, "Hellenic")),
-			">^" UseKey["1"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Glagolitic Futhark"), (*) => ToggleLetterScript(, "Old Turkic Old Permic")),
-			">^" UseKey["2"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Hungarian"), (*) => ToggleLetterScript(, "Gothic")),
-			">^" UseKey["3"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Old Italic"), (*) => ToggleLetterScript(, "Phoenician")),
-			">^" UseKey["4"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "Ancient South Arabian"), (*) => ToggleLetterScript(, "Ancient North Arabian")),
-			">^" UseKey["0"], (*) => CapsSeparatedCall((*) => ToggleLetterScript(, "IPA"), (*) => ToggleLetterScript(, "Maths")),
 			;
 			;"RCtrl", (*) => ProceedCombining(),
 			;"RShift", (*) => ProceedModifiers(),
@@ -5565,29 +5301,23 @@ ManageTrayItems() {
 	ScriptsSubMenu.Add(Labels["pinYin"], (*) => InputScriptProcessor("pinYin"))
 	ScriptsSubMenu.Add()
 	ScriptsSubMenu.Add(Labels["altInput"], (*) => "")
-	ScriptsSubMenu.Add(Labels["glagolitic"], (*) => ToggleLetterScript(, "Glagolitic Futhark"))
-	ScriptsSubMenu.Add(Labels["turkic"], (*) => ToggleLetterScript(, "Old Turkic Old Permic"))
-	ScriptsSubMenu.Add(Labels["hungarian"], (*) => ToggleLetterScript(, "Old Hungarian"))
-	ScriptsSubMenu.Add(Labels["gothic"], (*) => ToggleLetterScript(, "Gothic"))
-	ScriptsSubMenu.Add(Labels["italic"], (*) => ToggleLetterScript(, "Old Italic"))
-	ScriptsSubMenu.Add(Labels["phoenician"], (*) => ToggleLetterScript(, "Phoenician"))
-	ScriptsSubMenu.Add(Labels["south_arabian"], (*) => ToggleLetterScript(, "Ancient South Arabian"))
-	ScriptsSubMenu.Add(Labels["north_arabian"], (*) => ToggleLetterScript(, "Ancient North Arabian"))
-	ScriptsSubMenu.Add(Labels["ipa"], (*) => ToggleLetterScript(, "IPA"))
-	ScriptsSubMenu.Add(Labels["maths"], (*) => ToggleLetterScript(, "Maths"))
 
-	ScriptsSubMenu.SetIcon(Labels["vietNam"], App.icoDLL, App.indexIcos["viet"])
-	ScriptsSubMenu.SetIcon(Labels["pinYin"], App.icoDLL, App.indexIcos["pinyin"])
-	ScriptsSubMenu.SetIcon(Labels["glagolitic"], App.icoDLL, App.indexIcos["glagolitic"])
-	ScriptsSubMenu.SetIcon(Labels["turkic"], App.icoDLL, App.indexIcos["turkic"])
-	ScriptsSubMenu.SetIcon(Labels["hungarian"], App.icoDLL, App.indexIcos["hungarian"])
-	ScriptsSubMenu.SetIcon(Labels["gothic"], App.icoDLL, App.indexIcos["gothic"])
-	ScriptsSubMenu.SetIcon(Labels["italic"], App.icoDLL, App.indexIcos["italic"])
-	ScriptsSubMenu.SetIcon(Labels["phoenician"], App.icoDLL, App.indexIcos["phoenician"])
-	ScriptsSubMenu.SetIcon(Labels["south_arabian"], App.icoDLL, App.indexIcos["south_arabian"])
-	ScriptsSubMenu.SetIcon(Labels["north_arabian"], App.icoDLL, App.indexIcos["north_arabian"])
-	ScriptsSubMenu.SetIcon(Labels["maths"], App.icoDLL, App.indexIcos["math"])
-	ScriptsSubMenu.SetIcon(Labels["ipa"], App.icoDLL, App.indexIcos["ipa"])
+
+	ScriptsSubMenu.SetIcon(Labels["vietNam"], App.icoDLL, App.indexIcos["vietNam"])
+	ScriptsSubMenu.SetIcon(Labels["pinYin"], App.icoDLL, App.indexIcos["pinYin"])
+
+	scripterAlts := Scripter.data["Alternative Modes"].Length // 2
+	Loop scripterAlts {
+		i := A_Index * 2 - 1
+		dataName := Scripter.data["Alternative Modes"][i]
+		dataValue := Scripter.data["Alternative Modes"][i + 1]
+		AddScripts(dataName, dataValue)
+	}
+
+	AddScripts(dataName, dataValue) {
+		ScriptsSubMenu.Add(Locale.Read(dataValue.locale), (*) => Scripter.DirectSelect(dataName))
+		ScriptsSubMenu.SetIcon(Locale.Read(dataValue.locale), App.icoDLL, App.indexIcos[dataValue.icons[1]])
+	}
 
 	ScriptsSubMenu.Disable(Labels["telexInput"])
 	ScriptsSubMenu.Disable(Labels["altInput"])

@@ -398,6 +398,8 @@ Class KeyboardBinder {
 
 		if !this.disabledByUser
 			this.MonitorToggler(isLanguageLayoutValid && A_TimeIdle <= disableTimer * disableType)
+
+		this.TrayIconSwitch()
 	}
 
 	static MonitorToggler(enable := True, rule := "Monitor", addRule := "User") {
@@ -412,6 +414,34 @@ Class KeyboardBinder {
 		}
 
 		ManageTrayItems()
+	}
+
+	static TrayIconSwitch() {
+		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout)
+		Keyboard.CheckLayout(&lang)
+
+		iconCode := App.indexIcos["app"]
+		trayTitle := App.Title("+status+version") "`n" latinLayout "/" cyrillicLayout
+
+		if this.disabledByMonitor || this.disabledByUser {
+			iconCode := App.indexIcos["disabled"]
+		} else {
+			currentAlt := Scripter.selectedMode["Alternative Modes"]
+			currentISP := InputScriptProcessor.options.interceptionInputMode
+
+			if currentISP != "" && App.indexIcos.Has(currentISP) {
+				iconCode := App.indexIcos[currentISP]
+				trayTitle .= "`n" Locale.Read("script_processor_mode_" currentISP)
+			} else if currentAlt != "" {
+				data := Scripter.GetData(, currentAlt)
+				icons := data.icons
+				iconCode := App.indexIcos[icons.Length > 1 ? icons[lang = "ru" ? 2 : 1] : icons[1]]
+				trayTitle .= "`n" Locale.Read(data.locale)
+			}
+		}
+
+		TraySetIcon(App.icoDLL, iconCode)
+		A_IconTip := trayTitle
 	}
 
 	static SetLayout(layout) {
@@ -759,7 +789,6 @@ Class Scripter {
 	)
 	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "")
 
-
 	static data := Map(
 		"Alternative Modes", [
 			"Hellenic", {
@@ -772,7 +801,7 @@ Class Scripter {
 			},
 			"Germanic runes & Glagolitic", {
 				preview: [Util.UnicodeToChars("16B7", "16D6", "16B1", "16D7", "16A8", "16BE", "16C1", "16B2", "0020", "16B1", "16A2", "16BE", "16D6", "16CA"), Util.UnicodeToChars("2C03", "2C3E", "2C30", "2C33", "2C41", "2C3E", "2C3A", "2C4C", "2C30")],
-				fonts: ["Noto Sans Runic", "Noto Sans Glagolitic"],
+				fonts: ["Segoe UI Historic"],
 				locale: "alt_mode_germanic_runes__glagolitic",
 				bindings: ["Germanic Runes", "Glagolitic"],
 				uiid: "GermanicGlagolitic",
@@ -1016,8 +1045,7 @@ Class Scripter {
 				optionTitle.SetFont("s11 c333333 Bold", "Segoe UI")
 
 				scriptPreviewX := optionTitleX
-				scriptPreviewY := optionTitleY + optionTitleH + 3
-
+				scriptPreviewY := optionTitleY + optionTitleH
 
 				for i, previewText in dataValue.preview {
 					pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " +BackgroundTrans", previewText)
@@ -1038,17 +1066,24 @@ Class Scripter {
 			}
 
 			OptionSelect(name) {
+				currentISP := InputScriptProcessor.options.interceptionInputMode
+
 				if name != "" {
 					currentMode := this.selectedMode.Get(selectorType)
-					this.selectedMode.Set(selectorType, currentMode != name ? name : "")
 
 					Destroy()
 					if selectorType = "Alternative Modes" {
+						if currentISP != "" {
+							WarningISP(name, currentISP, selectorType)
+							return
+						}
+
+						this.selectedMode.Set(selectorType, currentMode != name ? name : "")
 						altMode := this.selectedMode[selectorType]
 
 						if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser) {
 							if altMode != "" {
-								bingingsNames := Scripter.GetData(selectorType, altMode).bindings
+								bingingsNames := this.GetData(selectorType, altMode).bindings
 								KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
 							} else {
 								KeyboardBinder.UnregisterAll()
@@ -1058,6 +1093,13 @@ Class Scripter {
 					}
 				} else
 					Destroy()
+				return
+			}
+
+			WarningISP(name, currentISP, selectorType) {
+				nameTitle := Locale.Read(this.GetData(selectorType, name).locale)
+				IPSTitle := Locale.Read("script_processor_mode_" currentISP)
+				MsgBox(Locale.ReadInject("alt_mode_warning_isp_active", [nameTitle, IPSTitle]), App.Title(), "Icon!")
 				return
 			}
 
@@ -1089,6 +1131,28 @@ Class Scripter {
 			this.selectorGUI[selectorType] := Constructor()
 			this.selectorGUI[selectorType].Show()
 			WinSetAlwaysOnTop(True, this.selectorTitle[selectorType])
+		}
+	}
+
+	static DirectSelect(name, selectorType := "Alternative Modes") {
+		if name != "" {
+			currentMode := this.selectedMode.Get(selectorType)
+			this.selectedMode.Set(selectorType, currentMode != name ? name : "")
+
+			if selectorType = "Alternative Modes" {
+				altMode := this.selectedMode.Get(selectorType)
+
+				if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser) {
+					if altMode != "" {
+						bingingsNames := Scripter.GetData(selectorType, altMode).bindings
+						KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
+					} else {
+						KeyboardBinder.UnregisterAll()
+						KeyboardBinder.RebuilBinds()
+					}
+				}
+			}
+			return
 		}
 	}
 

@@ -26,7 +26,7 @@ Class App {
 
 
 	static __New() {
-		for i, ico in ["app", "germanic", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "viet", "pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian", "hellenic", "latin", "cyrillic"] {
+		for i, ico in ["app", "germanic", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "vietNam", "pinYin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian", "hellenic", "latin", "cyrillic"] {
 			this.indexIcos.Set(ico, i)
 		}
 		this.Init()
@@ -67,6 +67,7 @@ Class App {
 	}
 
 	static SetTray() {
+		A_IconTip := App.Title("+status+version")
 		TraySetIcon(App.icoDLL, App.indexIcos["app"])
 		OnMessage 0x404, Received_AHK_NOTIFYICON
 		Received_AHK_NOTIFYICON(wParam, lParam, nMsg, hwnd) {
@@ -161,5 +162,3 @@ Class App {
 	; }
 
 }
-
-A_IconTip := App.Title("+status+version")

@@ -702,6 +702,14 @@ Class InputScriptProcessor {
 	}
 
 	__New(mode := "vietNam", reloadHs := False) {
+		currentAlt := Scripter.selectedMode.Get("Alternative Modes")
+
+		if currentAlt != "" {
+			nameTitle := Locale.Read(Scripter.GetData(, currentAlt).locale)
+			IPSTitle := Locale.Read("script_processor_mode_" mode)
+			MsgBox(Locale.ReadInject("script_processor_warning_alt_mode_active", [IPSTitle, nameTitle]), App.Title(), "Icon!")
+			return
+		}
 		InputScriptProcessor.autoDiacritics := Cfg.Get("Auto_Diacritics", "ScriptProcessor", True, "bool")
 
 		this.mode := mode
