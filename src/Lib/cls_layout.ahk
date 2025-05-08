@@ -595,32 +595,46 @@ Class KeyboardBinder {
 		total := bindingsMap.Count
 		useTooltip := Cfg.Get("Bind_Register_Tooltip_Progress_Bar", , True, "bool")
 
+		comboActions := []
+
+
 		if total > 0 {
+			i := 0
+
 			for combo, action in bindingsMap {
-				if RegExMatch(combo, "^\<\^\>\!")
+				comboActions.Push(combo, action)
+				if combo ~= "^\<\^\>\!" {
+					comboActions.Push(SubStr(combo, 3), action)
 					total++
+				}
 			}
 
-			index := 0
-			for combo, action in bindingsMap {
+			if useTooltip
+				SetTimer(ShowTooltip, 50)
+
+			Loop comboActions.Length // 2 {
 				try {
-					HotKey(combo, action, rule ? "On" : "Off")
-					index++
-					if RegExMatch(combo, "^\<\^\>\!") {
-						HotKey(SubStr(combo, 3), action, rule ? "On" : "Off")
-						index++
-					}
-				} catch {
-					if StrLen(combo) > 0
-						MsgBox("Failed to register HotKey: " combo)
-				}
-				if useTooltip
-					ToolTip(Locale.ReadInject("lib_init_elems", [index, total]) " : " Locale.Read("binds_init") "`n" Util.TextProgressBar(index, total))
+					i++
+					index := A_Index * 2 - 1
+					comboSeq := comboActions[index]
+					actionSeq := comboActions[index + 1]
+
+					HotKey(comboSeq, actionSeq, rule ? "On" : "Off")
+				} catch
+					StrLen(combo) > 0 && MsgBox("Failed to register HotKey: " combo)
 			}
 		}
-		if useTooltip
+
+		if useTooltip {
+			SetTimer(ShowTooltip, -0)
 			ToolTip()
+		}
+
+		ShowTooltip(*) {
+			ToolTip(Locale.ReadInject("lib_init_elems", [i, total]) " : " Locale.Read("binds_init") "`n" Util.TextProgressBar(i, total))
+		}
 	}
+
 
 	static UnregisterAll() {
 		layout := this.GetCurrentLayoutMap()
@@ -636,7 +650,7 @@ Class KeyboardBinder {
 		}
 	}
 
-	static RebuilBinds() {
+	static RebuilBinds(ignoreAltMode := False) {
 		this.UnregisterAll()
 		this.CurrentLayouts(&latin, &cyrillic)
 		if Cfg.Get("Layout_Remapping", , False, "bool") && (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")
@@ -655,7 +669,7 @@ Class KeyboardBinder {
 
 
 		altMode := Scripter.selectedMode["Alternative Modes"]
-		if altMode != "" {
+		if altMode != "" && !ignoreAltMode {
 			bingingsNames := Scripter.GetData(, altMode).bindings
 			this.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
 		}
@@ -952,7 +966,6 @@ Class Scripter {
 			"SC031",
 			"SC032"
 		]
-
 		Constructor() {
 			IH := InputHook("L1", "{Escape}")
 			hotkeys := Map()
@@ -1018,7 +1031,14 @@ Class Scripter {
 				AddOption(dataName, dataValue, j)
 			}
 
+			prevAltMode := this.selectedMode.Get(selectorType)
+			if prevAltMode != "" && selectorType = "Alternative Modes" {
+				bingingsNames := this.GetData(selectorType, prevAltMode).bindings
+				KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), False)
+			}
+
 			selectorPanel.Show("w" panelWidth " h" panelHeight " Center")
+
 			SetTimer((*) => SetIH(), -100)
 			return selectorPanel
 
@@ -1079,20 +1099,19 @@ Class Scripter {
 						}
 
 						this.selectedMode.Set(selectorType, currentMode != name ? name : "")
-						altMode := this.selectedMode[selectorType]
+						altMode := this.selectedMode.Get(selectorType)
 
 						if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser) {
 							if altMode != "" {
 								bingingsNames := this.GetData(selectorType, altMode).bindings
 								KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
-							} else {
-								KeyboardBinder.UnregisterAll()
+							} else
 								KeyboardBinder.RebuilBinds()
-							}
 						}
 					}
 				} else
 					Destroy()
+
 				return
 			}
 
@@ -1114,13 +1133,18 @@ Class Scripter {
 
 				input := StrUpper(IH.Input)
 
-				OptionSelect(hotkeys.Has(input) ? hotkeys.Get(input) : "")
+				if hotkeys.Has(input)
+					OptionSelect(hotkeys.Get(input))
+				else
+					Destroy()
 				return
 			}
 
 			Destroy() {
 				selectorPanel.Destroy()
 				IH.Stop()
+				if prevAltMode != ""
+					KeyboardBinder.RebuilBinds()
 				return
 			}
 		}
