@@ -232,6 +232,8 @@ Class ChrLib {
 	}
 
 	static AddEntries(rawEntries, typeOfInit := "Internal") {
+		Critical 1
+
 		if Keyboard.blockedForReload
 			return
 		if rawEntries is Array && rawEntries.Length >= 2 {
@@ -264,6 +266,8 @@ Class ChrLib {
 			this.maxCountOfEntries := 0
 			this.progressBarCurrent := 0
 		}
+
+		Critical 0
 		return
 	}
 

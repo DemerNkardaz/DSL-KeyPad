@@ -12,7 +12,7 @@
 */
 
 #SingleInstance Force
-#MaxThreads 10
+#MaxThreadsPerHotkey 3
 SetKeyDelay(0, 50)
 A_HotkeyInterval := 1000
 A_MaxHotkeysPerInterval := 50
@@ -5276,6 +5276,7 @@ ManageTrayItems() {
 		"monospace_alteration", Locale.Read("tray_func_monospace_alteration") "`t" LeftControl LeftAlt "Num7",
 		"small_capital_alteration", Locale.Read("tray_func_small_capital_alteration") "`t" LeftControl LeftAlt "Num8",
 	)
+
 
 	CurrentApp := App.Title("+version")
 	UpdateEntry := Labels["install"] " " Update.availableVersion

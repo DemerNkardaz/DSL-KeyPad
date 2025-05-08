@@ -926,8 +926,8 @@ Class Scripter {
 				icons: ["ipa"],
 			},
 			"Math", {
-				preview: [Util.UnicodeToChars("2211", "222D", "2206", "2207", "22D8", "22D9")],
-				fonts: ["Noto Sans"],
+				preview: [Util.UnicodeToChars("2211", "2212", "002B", "00B1", "00D7", "00F7", "0025", "2205", "2237", "2247", "22B9", "222D", "2206", "2207", "22D8", "22D9")],
+				fonts: ["Noto Serif"],
 				locale: "alt_mode_math",
 				bindings: ["Math"],
 				uiid: "Math",
@@ -937,6 +937,8 @@ Class Scripter {
 		"Glyph Variations", []
 	)
 
+
+	static sIH := InputHook("L1", "{Escape}")
 	static SelectorPanel(selectorType := "Alternative Modes") {
 		keyCodes := [
 			"SC010",
@@ -967,7 +969,6 @@ Class Scripter {
 			"SC032"
 		]
 		Constructor() {
-			IH := InputHook("L1", "{Escape}")
 			hotkeys := Map()
 			keys := keyCodes.Clone()
 			keysLen := keys.Length
@@ -981,20 +982,23 @@ Class Scripter {
 			for keyName, keyCode in KeyboardBinder.layouts.cyrillic[cyrillicLayout].layout
 				keyCodes.HasValue(keyCode, &i) && (keys[keysLen + i] := keyName)
 
+			prevAltMode := this.selectedMode.Get(selectorType)
+
 			selectorPanel := Gui()
 			selectorPanel.OnEvent("Close", (Obj) => Destroy())
 			selectorPanel.title := this.selectorTitle[selectorType]
 
+			dataCount := this.data[selectorType].Length // 2
+
 			widthDefault := 256
 			heightDefault := 256
 
-			elementsPerColumn := 4
+			elementsPerColumn := dataCount > 21 ? 4 : 3
 			rowCount := 0
 			columnCount := 0
 			totalColumns := 0
 			elementCount := 0
 
-			dataCount := this.data[selectorType].Length // 2
 
 			Loop dataCount {
 				(columnCount < elementsPerColumn) ? columnCount++ : (columnCount := 1, rowCount++)
@@ -1007,14 +1011,13 @@ Class Scripter {
 			icoW := 32
 			icoH := 32
 
-			optionW := 386
-			optionH := (icoH * 2) + 20
-			optionGap := 20
+			optionW := 386 - 24
+			optionH := (icoH * 2) + 30
+			optionGap := 10
 
-			optionTitleW := (optionW - icoW) - 21
 			optionTitleH := 24
 
-			borderPadding := 20
+			borderPadding := optionGap
 			panelWidth := optionW * totalColumns + optionGap * (totalColumns - 1) + 2 * borderPadding
 			panelHeight := optionH * rowCount + optionGap * (rowCount - 1) + 2 * borderPadding
 
@@ -1031,7 +1034,6 @@ Class Scripter {
 				AddOption(dataName, dataValue, j)
 			}
 
-			prevAltMode := this.selectedMode.Get(selectorType)
 			if prevAltMode != "" && selectorType = "Alternative Modes" {
 				bingingsNames := this.GetData(selectorType, prevAltMode).bindings
 				KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), False)
@@ -1045,27 +1047,38 @@ Class Scripter {
 			AddOption(dataName, dataValue, j) {
 				optionX := borderPadding + currentCol * (optionW + optionGap)
 				optionY := borderPadding + currentRow * (optionH + optionGap)
-				icoX := optionX + 5
-				icoY := optionY + 10
+				icoX := optionX + 10
+				icoY := optionY + 15
 				icoShift := 0
 
+				plateButtonW := optionW
+				plateButtonH := optionH - 7
+				plateButtonX := optionX
+				plateButtonY := optionY + 6
+
+				borderBackground := selectorPanel.AddText("w" plateButtonW + 4 " h" plateButtonH + 4 " x" plateButtonX - 2 " y" plateButtonY - 2 " Background" (prevAltMode = dataName ? "0xfdd500" : "Trans"))
+
+				plateButton := selectorPanel.AddText("w" plateButtonW " h" plateButtonH " x" plateButtonX " y" plateButtonY " BackgroundWhite")
+				plateButton.OnEvent("Click", (Obj, Info) => OptionSelect(dataName))
+
+
 				selectorPanel.AddGroupBox("v" dataValue.uiid " w" optionW " h" optionH " x" optionX " y" optionY)
-				invisibleButton := selectorPanel.AddPicture("v" dataValue.uiid "Invisible w" optionW " h" optionH " x" optionX " y" optionY " +BackgroundTrans")
-				invisibleButton.OnEvent("Click", (Obj, Info) => OptionSelect(dataName))
 
 				for i, ico in dataValue.icons {
-					selectorPanel.AddPicture("v" dataValue.uiid "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " Icon" App.indexIcos[ico], App.icoDLL)
+					selectorPanel.AddPicture("v" dataValue.uiid "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans Icon" App.indexIcos[ico], App.icoDLL)
 					icoShift += icoH + 5
 				}
 
-				optionTitleX := optionX + icoW + 13
-				optionTitleY := optionY + 13
+				optionTitleX := optionX + icoW + 20
+				optionTitleY := icoY
+
+				optionTitleW := optionW - (icoX - optionX) - icoW - 20
 
 				optionTitle := selectorPanel.AddText("v" dataValue.uiid "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " +BackgroundTrans", Locale.Read(dataValue.locale))
-				optionTitle.SetFont("s11 c333333 Bold", "Segoe UI")
+				optionTitle.SetFont("s10 c333333 Bold", "Segoe UI")
 
 				scriptPreviewX := optionTitleX
-				scriptPreviewY := optionTitleY + optionTitleH
+				scriptPreviewY := optionTitleY + optionTitleH - 2
 
 				for i, previewText in dataValue.preview {
 					pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " +BackgroundTrans", previewText)
@@ -1123,15 +1136,15 @@ Class Scripter {
 			}
 
 			SetIH() {
-				IH.Start()
-				IH.Wait()
+				this.sIH.Start()
+				this.sIH.Wait()
 
-				if IH.EndKey = "Escape" {
+				if this.sIH.EndKey = "Escape" {
 					Destroy()
 					return
 				}
 
-				input := StrUpper(IH.Input)
+				input := StrUpper(this.sIH.Input)
 
 				if hotkeys.Has(input)
 					OptionSelect(hotkeys.Get(input))
@@ -1142,7 +1155,7 @@ Class Scripter {
 
 			Destroy() {
 				selectorPanel.Destroy()
-				IH.Stop()
+				this.sIH.Stop()
 				if prevAltMode != ""
 					KeyboardBinder.RebuilBinds()
 				return
