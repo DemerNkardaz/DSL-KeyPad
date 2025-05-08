@@ -105,5 +105,14 @@
     <Image Include="DSLKeyPad.app_persian.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_greek.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_latin.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_cyrillic.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

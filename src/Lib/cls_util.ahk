@@ -234,6 +234,14 @@ Class Util {
 		return SubStr(Str, 4, StrLen(Str) - 4)
 	}
 
+	static HexCyrToLat(str) {
+		replacements := ["А", "A", "Б", "B", "С", "C", "Ц", "C", "Д", "D", "Е", "E", "Ф", "F"]
+		for i, replacement in replacements
+			if Mod(i, 2) = 1
+				str := RegExReplace(str, "i)" replacement, replacements[i + 1])
+		return str
+	}
+
 	static ExtractHex(Str) {
 		return RegExReplace(Str, "[^0-9A-Fa-f]", "")
 	}
@@ -261,6 +269,15 @@ Class Util {
 			}
 		}
 		return
+	}
+
+	static UnicodeToChars(unicode*) {
+		output := ""
+
+		for value in unicode
+			output .= this.UnicodeToChar(value)
+
+		return output
 	}
 
 	static ChrToUnicode(Symbol, StartFormat := "") {

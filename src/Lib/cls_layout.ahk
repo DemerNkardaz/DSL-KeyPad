@@ -1,5 +1,5 @@
 Class LayoutList {
-	default := Map(
+	static default := Map(
 		"Space", "SC039",
 		"Tab", "SC00F",
 		"Numpad0", "SC052",
@@ -62,7 +62,7 @@ Class LayoutList {
 		"8", "SC009",
 		"9", "SC00A",
 	)
-	latin := Map(
+	static latin := Map(
 		"Semicolon", "SC027",
 		"Apostrophe", "SC028",
 		"LeftBracket", "SC01A",
@@ -101,7 +101,7 @@ Class LayoutList {
 		"Y", "SC015",
 		"Z", "SC02C",
 	)
-	cyrillic := Map(
+	static cyrillic := Map(
 		"Ж", "SC027",
 		"Э", "SC028",
 		"Х", "SC01A",
@@ -147,11 +147,11 @@ Class LayoutList {
 	__New(base, input := Map()) {
 		this.layout := Map()
 
-		for key, scanCode in this.default {
+		for key, scanCode in LayoutList.default {
 			this.layout.Set(key, scanCode)
 		}
 
-		for key, scanCode in this.%base% {
+		for key, scanCode in LayoutList.%base% {
 			this.layout.Set(key, scanCode)
 		}
 
@@ -620,8 +620,15 @@ Class KeyboardBinder {
 			this.Registration(BindList.Get(userBindings, "User"), Cfg.FastKeysOn)
 		}
 
-		if StrLen(this.numStyle) > 0
+		if this.numStyle != ""
 			this.ToggleNumStyle(this.numStyle, True)
+
+
+		altMode := Scripter.selectedMode["Alternative Modes"]
+		if altMode != "" {
+			bingingsNames := Scripter.GetData(, altMode).bindings
+			this.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
+		}
 	}
 
 
@@ -745,19 +752,355 @@ Class KeyboardBinder {
 }
 
 Class Scripter {
+	static selectorGUI := Map("Alternative Modes", Gui(), "Glyph Variations", Gui())
+	static selectorTitle := Map(
+		"Alternative Modes", App.Title("+status+version") " — " Locale.Read("gui_scripter_alt_mode"),
+		"Glyph Variations", App.Title("+status+version") " — " Locale.Read("gui_scripter_glyph_variation"),
+	)
+	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "")
 
-	static selectorGUI := Gui()
-	static selectorTitle := App.Title("+status+version") " — " Locale.Read("gui_scripter")
 
-	static SelectorPanel() {
+	static data := Map(
+		"Alternative Modes", [
+			"Hellenic", {
+				preview: [Util.UnicodeToChars("1F19", "03BB", "03BB", "03AC", "03B4", "03BF", "03C2", "0020", "03C6", "1FF6", "03C2")],
+				fonts: [],
+				locale: "alt_mode_hellenic",
+				bindings: ["Hellenic"],
+				uiid: "Hellenic",
+				icons: ["hellenic"],
+			},
+			"Germanic runes & Glagolitic", {
+				preview: [Util.UnicodeToChars("16B7", "16D6", "16B1", "16D7", "16A8", "16BE", "16C1", "16B2", "0020", "16B1", "16A2", "16BE", "16D6", "16CA"), Util.UnicodeToChars("2C03", "2C3E", "2C30", "2C33", "2C41", "2C3E", "2C3A", "2C4C", "2C30")],
+				fonts: ["Noto Sans Runic", "Noto Sans Glagolitic"],
+				locale: "alt_mode_germanic_runes__glagolitic",
+				bindings: ["Germanic Runes", "Glagolitic"],
+				uiid: "GermanicGlagolitic",
+				icons: ["germanic", "glagolitic"],
+			},
+			"Old Turkic & Old Permic", {
+				preview: [Util.UnicodeToChars("10C34", "10C0D", "10C23", "2003", "10C03", "10C3E", "10C18", "10C03", "003A", "10C20", "10C03", "10C1A", "10C2D"), Util.UnicodeToChars("10363", "10371", "10355", "10350", "2003", "1035C", "10369", "10360", "10362")],
+				fonts: ["Noto Sans Old Turkic", "Noto Sans Old Permic"],
+				locale: "alt_mode_old_turkic__old_permic",
+				bindings: ["Old Turkic", "Old Permic"],
+				uiid: "TukicPermic",
+				icons: ["turkic", "permic"],
+			},
+			"Old Hungarian", {
+				preview: [Util.UnicodeToChars("10C87", "10CCF", "10C96", "10C9A", "10CDF", "10C9D", "10CAC")],
+				fonts: ["Noto Sans Old Hungarian"],
+				locale: "alt_mode_old_hungarian",
+				bindings: ["Old Hungarian"],
+				uiid: "Hungarian",
+				icons: ["hungarian"],
+			},
+			"Gothic", {
+				preview: [Util.UnicodeToChars("10330", "10339", "10342", "10338", "10330", "1033A", "1033F", "1033D", "10333", "10343")],
+				fonts: ["Noto Sans Gothic"],
+				locale: "alt_mode_gothic",
+				bindings: ["Gothic"],
+				uiid: "Gothic",
+				icons: ["gothic"],
+			},
+			"Old Italic", {
+				preview: [Util.UnicodeToChars("10300", "1030B", "10304", "10319", "10314", "10300", "1030D", "10315", "10313", "10304", "2003", "10316", "10304", "10313", "1031A", "10300", "1030B", "10304")],
+				fonts: ["Noto Sans Old Italic"],
+				locale: "alt_mode_old_italic",
+				bindings: ["Old Italic"],
+				uiid: "Italic",
+				icons: ["italic"],
+			},
+			"Phoenician", {
+				preview: [Util.UnicodeToChars("10912", "10913", "10915", "10907", "10903", "10914", "10915", "2003", "10900", "1090B", "10914", "10909")],
+				fonts: ["Segoe UI Historic"],
+				locale: "alt_mode_phoenician",
+				bindings: ["Phoenician"],
+				uiid: "Phoenician",
+				icons: ["phoenician"],
+			},
+			"Ancient South Arabian", {
+				preview: [Util.UnicodeToChars("10A6B", "10A65", "10A6B", "10A68", "2003", "10A79", "10A69", "10A62", "10A63", "10A7A", "10A63")],
+				fonts: ["Noto Sans Old South Arabian"],
+				locale: "alt_mode_ancient_south_arabian",
+				bindings: ["Ancient South Arabian"],
+				uiid: "AncientSouthArabian",
+				icons: ["south_arabian"],
+			},
+			"Ancient North Arabian", {
+				preview: [Util.UnicodeToChars("10A83", "10A9A", "10A89", "2003", "10A88", "10A93", "10A87", "2003", "10A81", "10A89")],
+				fonts: ["Noto Sans Old North Arabian"],
+				locale: "alt_mode_ancient_north_arabian",
+				bindings: ["Ancient North Arabian"],
+				uiid: "AncientNorthArabian",
+				icons: ["north_arabian"],
+			},
+			"Carian", {
+				preview: [Util.UnicodeToChars("102A8", "102A0", "102B5", "2003", "102B2", "102B0", "102AB", "102C7", "2003", "102BA", "102B5")],
+				fonts: ["Noto Sans Carian"],
+				locale: "alt_mode_carian",
+				bindings: ["Carian"],
+				uiid: "Carian",
+				icons: ["carian"],
+			},
+			"Lycian", {
+				preview: [Util.UnicodeToChars("10297", "10295", "10290", "1028E", "10286", "10296", "2003", "1029C", "10291", "10297", "10280", "10287", "10280", "10297", "10286")],
+				fonts: ["Noto Sans Lycian"],
+				locale: "alt_mode_lycian",
+				bindings: ["Lycian"],
+				uiid: "Lycian",
+				icons: ["lycian"],
+			},
+			"Tifinagh", {
+				preview: [Util.UnicodeToChars("2D30", "2D4E", "2D53", "2D4F", "2D59", "2D3D", "2D30", "2D4D", "2003", "2D49", "2D39", "2003", "2D30", "2D3C", "2D54", "2D37", "2D49", "2D59")],
+				fonts: ["Noto Sans Tifinagh"],
+				locale: "alt_mode_tifinagh",
+				bindings: ["Tifinagh"],
+				uiid: "Tifinagh",
+				icons: ["tifinagh"],
+			},
+			"Ugaritic", {
+				preview: [Util.UnicodeToChars("10383", "1038A", "10397", "2003", "10384", "1038A", "10390", "2003", "10382", "1038E", "10397")],
+				fonts: ["Noto Sans Ugaritic"],
+				locale: "alt_mode_ugaritic",
+				bindings: ["Ugaritic"],
+				uiid: "Ugaritic",
+				icons: ["ugaritic"],
+			},
+			"Old Persian", {
+				preview: [Util.UnicodeToChars("103A0", "103BC", "103AB", "103A7", "103C1", "103C2", "103A0", "2003", "")],
+				fonts: ["Noto Sans Old Persian"],
+				locale: "alt_mode_old_persian",
+				bindings: ["Old Persian"],
+				uiid: "OldPersian",
+				icons: ["persian"],
+			},
+			"IPA", {
+				preview: [Util.UnicodeToChars("002F", "02CC", "026A", "006E", "002E", "0074", "0259", "02C8", "006E", "00E6", "0283", "002E", "006E", "0259", "006C", "0020", "0066", "0259", "02C8", "006E", "025B", "002E", "0074", "026A", "006B", "0020", "02C8", "00E6", "006C", "002E", "0066", "0259", "002E", "0062", "025B", "0074", "002F")],
+				fonts: ["Noto Sans"],
+				locale: "alt_mode_ipa",
+				bindings: ["IPA"],
+				uiid: "IPA",
+				icons: ["ipa"],
+			},
+			"Math", {
+				preview: [Util.UnicodeToChars("2211", "222D", "2206", "2207", "22D8", "22D9")],
+				fonts: ["Noto Sans"],
+				locale: "alt_mode_math",
+				bindings: ["Math"],
+				uiid: "Math",
+				icons: ["math"],
+			},
+		],
+		"Glyph Variations", []
+	)
 
+	static SelectorPanel(selectorType := "Alternative Modes") {
+		keyCodes := [
+			"SC010",
+			"SC011",
+			"SC012",
+			"SC013",
+			"SC014",
+			"SC015",
+			"SC016",
+			"SC017",
+			"SC018",
+			"SC019",
+			"SC01E",
+			"SC01F",
+			"SC020",
+			"SC021",
+			"SC022",
+			"SC023",
+			"SC024",
+			"SC025",
+			"SC026",
+			"SC02C",
+			"SC02D",
+			"SC02E",
+			"SC02F",
+			"SC030",
+			"SC031",
+			"SC032"
+		]
 
 		Constructor() {
+			IH := InputHook("L1", "{Escape}")
+			hotkeys := Map()
+			keys := keyCodes.Clone()
+			keysLen := keys.Length
+			KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout)
 
+			Loop keys.Length
+				keys.Push("")
+
+			for keyName, keyCode in KeyboardBinder.layouts.latin[latinLayout].layout
+				keyCodes.HasValue(keyCode, &i) && (keys[i] := keyName)
+			for keyName, keyCode in KeyboardBinder.layouts.cyrillic[cyrillicLayout].layout
+				keyCodes.HasValue(keyCode, &i) && (keys[keysLen + i] := keyName)
+
+			selectorPanel := Gui()
+			selectorPanel.OnEvent("Close", (Obj) => Destroy())
+			selectorPanel.title := this.selectorTitle[selectorType]
+
+			widthDefault := 256
+			heightDefault := 256
+
+			elementsPerColumn := 4
+			rowCount := 0
+			columnCount := 0
+			totalColumns := 0
+			elementCount := 0
+
+			dataCount := this.data[selectorType].Length // 2
+
+			Loop dataCount {
+				(columnCount < elementsPerColumn) ? columnCount++ : (columnCount := 1, rowCount++)
+				(totalColumns < elementsPerColumn) && totalColumns++
+				elementCount++
+			}
+
+			(columnCount > 0 && columnCount < elementsPerColumn) && rowCount++
+
+			icoW := 32
+			icoH := 32
+
+			optionW := 386
+			optionH := (icoH * 2) + 20
+			optionGap := 20
+
+			optionTitleW := (optionW - icoW) - 21
+			optionTitleH := 24
+
+			borderPadding := 20
+			panelWidth := optionW * totalColumns + optionGap * (totalColumns - 1) + 2 * borderPadding
+			panelHeight := optionH * rowCount + optionGap * (rowCount - 1) + 2 * borderPadding
+
+
+			currentRow := 0
+			currentCol := 0
+
+			j := 0
+			Loop dataCount {
+				j++
+				i := A_Index * 2 - 1
+				dataName := this.data[selectorType][i]
+				dataValue := this.data[selectorType][i + 1]
+				AddOption(dataName, dataValue, j)
+			}
+
+			selectorPanel.Show("w" panelWidth " h" panelHeight " Center")
+			SetTimer((*) => SetIH(), -100)
+			return selectorPanel
+
+			AddOption(dataName, dataValue, j) {
+				optionX := borderPadding + currentCol * (optionW + optionGap)
+				optionY := borderPadding + currentRow * (optionH + optionGap)
+				icoX := optionX + 5
+				icoY := optionY + 10
+				icoShift := 0
+
+				selectorPanel.AddGroupBox("v" dataValue.uiid " w" optionW " h" optionH " x" optionX " y" optionY)
+				invisibleButton := selectorPanel.AddPicture("v" dataValue.uiid "Invisible w" optionW " h" optionH " x" optionX " y" optionY " +BackgroundTrans")
+				invisibleButton.OnEvent("Click", (Obj, Info) => OptionSelect(dataName))
+
+				for i, ico in dataValue.icons {
+					selectorPanel.AddPicture("v" dataValue.uiid "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " Icon" App.indexIcos[ico], App.icoDLL)
+					icoShift += icoH + 5
+				}
+
+				optionTitleX := optionX + icoW + 13
+				optionTitleY := optionY + 13
+
+				optionTitle := selectorPanel.AddText("v" dataValue.uiid "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " +BackgroundTrans", Locale.Read(dataValue.locale))
+				optionTitle.SetFont("s11 c333333 Bold", "Segoe UI")
+
+				scriptPreviewX := optionTitleX
+				scriptPreviewY := optionTitleY + optionTitleH + 3
+
+
+				for i, previewText in dataValue.preview {
+					pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " +BackgroundTrans", previewText)
+					pt.SetFont("s10 c333333", dataValue.fonts.length > 0 ? dataValue.fonts[dataValue.fonts.length > 1 ? i : 1] : "Segoe UI")
+
+					scriptPreviewY += optionTitleH - 5
+				}
+
+				hotkeys.Set(keys[j], dataName)
+				hotkeys.Set(keys[keyCodes.Length + j], dataName)
+				hotkeysLabel := selectorPanel.AddText("v" dataValue.uiid "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH) " Right +BackgroundTrans", Locale.ReadInject("alt_mode_gui_press", [keys[j] "/" keys[keyCodes.Length + j]]))
+
+				currentCol++
+				if (currentCol >= elementsPerColumn) {
+					currentCol := 0
+					currentRow++
+				}
+			}
+
+			OptionSelect(name) {
+				if name != "" {
+					currentMode := this.selectedMode.Get(selectorType)
+					this.selectedMode.Set(selectorType, currentMode != name ? name : "")
+
+					Destroy()
+					if selectorType = "Alternative Modes" {
+						altMode := this.selectedMode[selectorType]
+
+						if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser) {
+							if altMode != "" {
+								bingingsNames := Scripter.GetData(selectorType, altMode).bindings
+								KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
+							} else {
+								KeyboardBinder.UnregisterAll()
+								KeyboardBinder.RebuilBinds()
+							}
+						}
+					}
+				} else
+					Destroy()
+				return
+			}
+
+			SetIH() {
+				IH.Start()
+				IH.Wait()
+
+				if IH.EndKey = "Escape" {
+					Destroy()
+					return
+				}
+
+				input := StrUpper(IH.Input)
+
+				OptionSelect(hotkeys.Has(input) ? hotkeys.Get(input) : "")
+				return
+			}
+
+			Destroy() {
+				selectorPanel.Destroy()
+				IH.Stop()
+				return
+			}
 		}
 
+		if IsGuiOpen(this.selectorTitle[selectorType]) {
+			WinActivate(this.selectorTitle[selectorType])
+		} else {
+			this.selectorGUI[selectorType] := Constructor()
+			this.selectorGUI[selectorType].Show()
+			WinSetAlwaysOnTop(True, this.selectorTitle[selectorType])
+		}
 	}
 
+	static GetData(mode := "Alternative Modes", name := "Germanic runes & Glagolitic") {
+		for i, item in this.data[mode] {
+			if Mod(i, 2) = 1 {
+				if item = name {
+					return this.data[mode][i + 1]
+				}
+			}
+		}
+	}
 }
 
 Class BindHandler {

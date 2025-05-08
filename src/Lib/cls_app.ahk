@@ -26,15 +26,13 @@ Class App {
 
 
 	static __New() {
-		for i, ico in ["app", "norse", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "viet", "pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian"] {
+		for i, ico in ["app", "germanic", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "viet", "pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian", "hellenic", "latin", "cyrillic"] {
 			this.indexIcos.Set(ico, i)
 		}
-
 		this.Init()
 	}
 
 	static Init() {
-		TraySetIcon(App.icoDLL, App.indexIcos["app"])
 		for key, dir in this.paths.OwnProps() {
 			if !DirExist(dir) {
 				DirCreate(dir)
@@ -45,6 +43,7 @@ Class App {
 			IniWrite("default", this.profileFile, "data", "profile")
 
 		this.ReadProfiles()
+		this.SetTray()
 	}
 
 	static ReadProfiles() {
@@ -65,6 +64,21 @@ Class App {
 	static GetProfile() {
 		profile := IniRead(this.profileFile, "data", "profile", "default")
 		return profile = "default" ? Locale.Read("profile_default") : profile
+	}
+
+	static SetTray() {
+		TraySetIcon(App.icoDLL, App.indexIcos["app"])
+		OnMessage 0x404, Received_AHK_NOTIFYICON
+		Received_AHK_NOTIFYICON(wParam, lParam, nMsg, hwnd) {
+			if lParam = 0x202 {
+				GetKeyState("Control", "P") && GetKeyState("Shift", "P") ? Scripter.SelectorPanel("Glyph Variations")
+					: GetKeyState("Shift", "P") ? Scripter.SelectorPanel()
+					: GetKeyState("Control", "P") ? Cfg.Editor()
+					: GetKeyState("Alt", "P") ? Cfg.SubGUIs("Recipes")
+					: Panel.Panel()
+				return 1
+			}
+		}
 	}
 
 	static Title(options := ["title"]) {

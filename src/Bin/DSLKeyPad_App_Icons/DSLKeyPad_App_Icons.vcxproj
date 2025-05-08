@@ -177,6 +177,9 @@
     <Image Include="DSLKeyPad.app_tifinagh.ico" />
     <Image Include="DSLKeyPad.app_ugaritic.ico" />
     <Image Include="DSLKeyPad.app_persian.ico" />
+    <Image Include="DSLKeyPad.app_greek.ico" />
+    <Image Include="DSLKeyPad.app_latin.ico" />
+    <Image Include="DSLKeyPad.app_cyrillic.ico" />
     <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

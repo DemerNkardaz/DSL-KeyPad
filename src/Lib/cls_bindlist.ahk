@@ -31,8 +31,9 @@ Class BindList {
 		}
 	}
 
-	static Get(bindingsName := "Common", fromSub := "") {
-		mapping := bindingMaps.DeepClone()
+	static Get(bindingsName := "Common", fromSub := "", mapping := Map()) {
+		if mapping.Count == 0
+			mapping := bindingMaps.DeepClone()
 
 		if bindingsName = "Common" && mapping.Has(bindingsName) && StrLen(fromSub) == 0 {
 			letterI_Option := Cfg.Get("I_Dot_Shift_I_Dotless", "Characters", "Default")
@@ -56,5 +57,21 @@ Class BindList {
 		}
 
 		return (StrLen(fromSub) > 0 && mapping.Has(fromSub) && mapping[fromSub].Has(bindingsName)) ? mapping[fromSub][bindingsName].mapping : mapping.Has(bindingsName) ? mapping[bindingsName].mapping : Map()
+	}
+
+	static Gets(bindingsNames := [], fromSub := "", mapping := bindingMaps.DeepClone()) {
+		interArray := []
+		for bindingsName in bindingsNames
+			interArray.Push(BindList.Get(bindingsName, fromSub, mapping := Map()))
+
+		output := interArray[1]
+
+		for i, inter in interArray {
+			if i = 1
+				continue
+			output := output.DeepMergeWith(inter)
+		}
+
+		return output
 	}
 }

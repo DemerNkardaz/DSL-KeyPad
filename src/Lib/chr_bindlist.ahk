@@ -1,23 +1,238 @@
 bindingMaps := Map(
 	"User", Map(),
 	"Script Specified", Map(
-		"Germanic Runes", Map(
-			"Pair", "Germanic Runes & Glagolitic",
+		"Hellenic", Map(
 			"Flat", Map(),
 			"Moded", Map()
+		),
+		"Germanic Runes", Map(
+			"Flat", Map(
+				"A", ["futhark_ansuz"],
+				"B", ["futhark_berkanan"],
+				"C", ["futhork_cen"],
+				"D", ["futhark_dagaz"],
+				"E", ["futhark_ehwaz"],
+				"F", ["futhark_fehu"],
+				"G", ["futhark_gebo"],
+				"H", ["futhark_haglaz"],
+				"I", ["futhark_isaz"],
+				"J", ["futhark_jeran"],
+				"K", ["futhark_kauna"],
+				"L", ["futhark_laguz"],
+				"M", ["futhark_mannaz"],
+				"N", ["futhark_naudiz"],
+				"O", ["futhark_odal"],
+				"P", ["futhark_pertho"],
+				"Q", ["futhork_cweorth"],
+				"R", ["futhark_raido"],
+				"S", ["futhark_sowilo"],
+				"T", ["futhark_tiwaz"],
+				"U", ["futhark_uruz"],
+				"V", ["futhark_younger_later_v"],
+				"W", ["futhark_wunjo"],
+				"X", [""],
+				"Y", ["futhark_younger_ur"],
+				"Z", ["futhark_algiz"],
+				"Equals", ["equals"],
+				"HyphenMinus", ["hyphen_minus"],
+				"Dot", ["dot"],
+				"Comma", ["comma"],
+				"Slash", ["solidus"],
+				"Backslash", ["reverse_solidus"],
+				"Semicolon", ["semicolon"],
+				"Apostrophe", ["apostrophe"],
+				"LeftBracket", ["left_bracket"],
+				"RightBracket", ["right_bracket"],
+				"Tilde", ["grave_accent"],
+			),
+			"Moded", Map(
+				"A", Map(
+					"<+", ["futhork_as"],
+					">+", ["futhork_aesc"],
+					"<^>!", ["futhark_younger_jera"],
+					"<^>!<+", ["futhark_younger_jera_short_twig"],
+				),
+				"B", Map(
+					"<^>!<+", ["futhark_younger_bjarkan_short_twig"],
+				),
+				"C", Map(
+					"<^>!<!", ["medieval_c"],
+				),
+				"D", Map(
+					"<^>!", ["futhark_younger_later_eth"],
+					"<^>!<+", ["futhark_younger_later_d"],
+					"<^<!", ["cyr_com_vzmet"],
+				),
+				"E", Map(
+					"<+", ["futhork_ear"],
+					"<^>!", ["futhark_younger_later_e"],
+					"<^>!<!", ["medieval_en"],
+				),
+				"G", Map(
+					"<+", ["futhork_gar"],
+					"<^<!", ["cyr_com_palatalization"],
+					"<^<!<+", ["cyr_com_pokrytie"],
+					"<^<!>+", ["cyr_com_dasia_pneumata"],
+					"<^<!<+>+", ["cyr_com_psili_pneumata"],
+				),
+				"H", Map(
+					"<+", ["futhork_haegl"],
+					"<^>!", ["futhark_younger_hagall"],
+					"<^>!<+", ["futhark_younger_hagall_short_twig"],
+				),
+				"I", Map(
+					">+", ["futhark_eihwaz"],
+				),
+				"J", Map(
+					"<+", ["futhork_ger"],
+					">+", ["futhork_ior"],
+				),
+				"K", Map(
+					"<+", ["futhork_cealc"],
+					">+", ["futhork_calc"],
+					"<^>!", ["futhark_younger_kaun"],
+				),
+				"L", Map(
+					"<^>!", ["futhark_younger_later_l"],
+				),
+				"M", Map(
+					"<^>!", ["futhark_younger_madr"],
+					"<^>!<+", ["futhark_younger_madr_short_twig"],
+				),
+				"N", Map(
+					">+", ["futhark_ingwaz"],
+					"<+", ["futhork_ing"],
+					"<^>!<+", ["futhark_younger_naud_short_twig"],
+					"<^>!<!", ["medieval_en"],
+				),
+				"O", Map(
+					"<+", ["futhork_os"],
+					"<^>!", ["futhark_younger_oss"],
+					"<^>!<+", ["futhark_younger_oss_short_twig"],
+					"<^>!<!", ["medieval_on"],
+					"<^>!<!>+", ["medieval_o"],
+				),
+				"P", Map(
+					"<^>!", ["futhark_younger_later_p"],
+				),
+				"S", Map(
+					"<+", ["futhork_sigel"],
+					">+", ["futhork_stan"],
+					"<^>!<+", ["futhark_younger_sol_short_twig"],
+				),
+				"T", Map(
+					">+", ["futhark_thurisaz"],
+					"<^>!<+", ["futhark_younger_tyr_short_twig"],
+				),
+				"X", Map(
+					"<^>!<!", ["medieval_x"],
+				),
+				"Y", Map(
+					">+", ["futhark_younger_icelandic_yr"],
+					"<^>!", ["futhark_younger_yr"],
+					"<^>!<+", ["futhark_younger_yr_short_twig"],
+					"<+", ["futhork_yr"],
+				),
+				"Z", Map(
+					"<^>!<!", ["medieval_z"],
+				),
+				"Equals", Map("+", ["plus"]),
+				"HyphenMinus", Map("+", ["underscore"]),
+				"Slash", Map("+", ["question"]),
+				"Backslash", Map("+", ["vertical_line"]),
+				"Semicolon", Map("+", ["colon"]),
+				"Apostrophe", Map("+", ["quote"]),
+				"Tilde", Map("+", ["tilde"]),
+				"LeftBracket", Map("+", ["left_brace"]),
+				"RightBracket", Map("+", ["right_brace"]),
+				"Comma", Map("<^>!", ["runic_cruciform_punctuation"]),
+				"Dot", Map("<^>!", ["runic_single_punctuation"]),
+				"Space", Map("<^>!", ["runic_multiple_punctuation"]),
+				"7", Map("<^>!", ["futhark_almanac_arlaug"]),
+				"8", Map("<^>!", ["futhark_almanac_tvimadur"]),
+				"9", Map("<^>!", ["futhark_almanac_belgthor"]),
+			)
 		),
 		"Glagolitic", Map(
-			"Pair", "Germanic Runes & Glagolitic",
-			"Flat", Map(),
-			"Moded", Map()
+			"Flat", Map(
+				"А", ["glagolitic_c_let_az", "glagolitic_s_let_az"],
+				"Б", ["glagolitic_c_let_buky", "glagolitic_s_let_buky"],
+				"В", ["glagolitic_c_let_vede", "glagolitic_s_let_vede"],
+				"Г", ["glagolitic_c_let_glagoli", "glagolitic_s_let_glagoli"],
+				"Д", ["glagolitic_c_let_dobro", "glagolitic_s_let_dobro"],
+				"Е", ["glagolitic_c_let_yestu", "glagolitic_s_let_yestu"],
+				"Ё", ["glagolitic_c_let_yo", "glagolitic_s_let_yo"],
+				"Ж", ["glagolitic_c_let_zhivete", "glagolitic_s_let_zhivete"],
+				"З", ["glagolitic_c_let_zemlja", "glagolitic_s_let_zemlja"],
+				"И", ["glagolitic_c_let_i", "glagolitic_s_let_i"],
+				"Й", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"],
+				"К", ["glagolitic_c_let_kako", "glagolitic_s_let_kako"],
+				"Л", ["glagolitic_c_let_ljudije", "glagolitic_s_let_ljudije"],
+				"М", ["glagolitic_c_let_myslite", "glagolitic_s_let_myslite"],
+				"Н", ["glagolitic_c_let_nashi", "glagolitic_s_let_nashi"],
+				"О", ["glagolitic_c_let_onu", "glagolitic_s_let_onu"],
+				"П", ["glagolitic_c_let_pokoji", "glagolitic_s_let_pokoji"],
+				"Р", ["glagolitic_c_let_ritsi", "glagolitic_s_let_ritsi"],
+				"С", ["glagolitic_c_let_slovo", "glagolitic_s_let_slovo"],
+				"Т", ["glagolitic_c_let_tvrido", "glagolitic_s_let_tvrido"],
+				"У", ["glagolitic_c_let_uku", "glagolitic_s_let_uku"],
+				"Ф", ["glagolitic_c_let_fritu", "glagolitic_s_let_fritu"],
+				"Х", ["glagolitic_c_let_heru", "glagolitic_s_let_heru"],
+				"Ц", ["glagolitic_c_let_tsi", "glagolitic_s_let_tsi"],
+				"Ч", ["glagolitic_c_let_chrivi", "glagolitic_s_let_chrivi"],
+				"Ш", ["glagolitic_c_let_sha", "glagolitic_s_let_sha"],
+				"Щ", ["glagolitic_c_let_shta", "glagolitic_s_let_shta"],
+				"Ъ", ["glagolitic_c_let_yeru", "glagolitic_s_let_yeru"],
+				"Ы", ["glagolitic_c_let_yery", "glagolitic_s_let_yery"],
+				"Ь", ["glagolitic_c_let_yeri", "glagolitic_s_let_yeri"],
+				"Э", ["glagolitic_c_let_small_yus", "glagolitic_s_let_small_yus"],
+				"Ю", ["glagolitic_c_let_yu", "glagolitic_s_let_yu"],
+				"Я", ["glagolitic_c_let_yati", "glagolitic_s_let_yati"],
+			),
+			"Moded", Map(
+				"А", Map(
+					"<^>!", ["glagolitic_c_let_trokutasti_a", "glagolitic_s_let_trokutasti_a"]
+				),
+				"Ё", Map(
+					"<!", ["glagolitic_c_let_big_yus_iotified", "glagolitic_s_let_big_yus_iotified"]
+				),
+				"Ж", Map(
+					"<^>!", ["glagolitic_c_let_djervi", "glagolitic_s_let_djervi"]
+				),
+				"И", Map(
+					"<^>!", ["glagolitic_c_let_initial_izhe", "glagolitic_s_let_initial_izhe"],
+					"<+", ["glagolitic_c_let_izhe", "glagolitic_s_let_izhe"],
+					"<^>!<+", ["glagolitic_c_let_izhitsa", "glagolitic_s_let_izhitsa"],
+				),
+				"О", Map(
+					"<^>!", ["glagolitic_c_let_otu", "glagolitic_s_let_otu"],
+					"<!", ["glagolitic_c_let_big_yus", "glagolitic_s_let_big_yus"],
+				),
+				"П", Map(
+					"<^>!", ["glagolitic_c_let_pe", "glagolitic_s_let_pe"]
+				),
+				"С", Map(
+					"<^>!", ["glagolitic_c_let_dzelo", "glagolitic_s_let_dzelo"]
+				),
+				"Х", Map(
+					"<^>!", ["glagolitic_c_let_spider_ha", "glagolitic_s_let_spider_ha"]
+				),
+				"Ф", Map(
+					"<^>!", ["glagolitic_c_let_fita", "glagolitic_s_let_fita"]
+				),
+				"Ъ", Map(
+					"<^>!", ["glagolitic_c_let_shtapic", "glagolitic_s_let_shtapic"]
+				),
+				"Э", Map(
+					"<^>!", ["glagolitic_c_let_small_yus_iotified", "glagolitic_s_let_small_yus_iotified"]
+				),
+			)
 		),
 		"Old Turkic", Map(
-			"Pair", "Old Turkic & Old Permic",
 			"Flat", Map(),
 			"Moded", Map()
 		),
 		"Old Permic", Map(
-			"Pair", "Old Turkic & Old Permic",
 			"Flat", Map(),
 			"Moded", Map()
 		),
@@ -66,7 +281,8 @@ bindingMaps := Map(
 			"Space", Map("<#<!", (*) => GroupActivator("Spaces"),),
 			"HyphenMinus", Map("<#<!", (*) => GroupActivator("Dashes", "-"),),
 			"Apostrophe", Map("<#<!", (*) => GroupActivator("Quotes", "'"),),
-			"A", Map("<#<!", (*) => CharacterInserter("Altcode").InputDialog(),),
+			"A", Map("<#<!", (*) => Scripter.SelectorPanel("Glyph Variations")),
+			"S", Map("<#<!", (*) => Scripter.SelectorPanel()),
 			"F", Map("<#<!", (*) => ChrLib.SearchPrompt().send(),),
 			"H", Map(
 				">^", (*) => Util.StrSelToHTML("Entities"),

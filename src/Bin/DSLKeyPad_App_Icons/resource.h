@@ -23,6 +23,9 @@
 #define IDI_TIFINAGH 119
 #define IDI_UGARITIC 120
 #define IDI_PERSIAN 121
+#define IDI_HELLENIC 122
+#define IDI_LATIN 123
+#define IDI_CYRILLIC 124
 
 // Next default values for new objects
 //

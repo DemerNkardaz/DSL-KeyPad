@@ -10,6 +10,7 @@ Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("Values", { Call: _MapValues })
 Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
 Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
+Map.Prototype.DefineProp("DeepMergeWith", { Call: _MapDeepMergeWith })
 Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 
@@ -196,6 +197,19 @@ _MapDeepClone(this) {
 			result[key] := value
 	}
 	return result
+}
+
+_MapDeepMergeWith(this, maps*) {
+	for mapIdx, mapToMerge in maps {
+		for key, val in mapToMerge {
+			if this.Has(key) && this[key] is Map {
+				this[key].DeepMergeWith(val)
+			} else {
+				this.Set(key, val)
+			}
+		}
+	}
+	return this
 }
 
 

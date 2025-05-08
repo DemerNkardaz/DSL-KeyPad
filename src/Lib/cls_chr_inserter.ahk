@@ -349,11 +349,12 @@ Class CharacterInserter {
 	static copePages := Map(
 		"0...127", "Code Page 437",
 		"128...255", { ru: "Code Page 866", en: "Code Page 850" },
-		"0120...0255", { ru: "Windows-1251", en: "Windows-1252" },
+		"0128...0255", { ru: "Windows-1251", en: "Windows-1252" },
 	)
 
 	static AltcodePrefix := "Alt+"
 	static UnicodePrefix := "U+"
+
 	__New(insertType := "Unicode") {
 		this.insertType := insertType
 		this.lastPrompt := Cfg.Get(this.insertType, "LatestPrompts")
@@ -476,7 +477,6 @@ Class CharacterInserter {
 		return -1
 	}
 
-
 	static Unicode(charCode) {
 		charCode := Format("0x" charCode, "d")
 		return Chr(charCode)
@@ -487,7 +487,9 @@ Class CharacterInserter {
 	}
 
 	static UnicodeValidate(charCode) {
-		if !(charCode ~= "^[0-9A-Fa-f]{1,6}$")
+		if charCode ~= "i)[АБСЦДЕФ]"
+			charCode := Util.HexCyrToLat(charCode)
+		if charCode ~= "^(?![0-9A-Fa-f]{1,6}$)"
 			return False
 
 		code := Integer("0x" charCode)
