@@ -441,7 +441,7 @@ Class KeyboardBinder {
 		}
 
 		TraySetIcon(App.icoDLL, iconCode)
-		A_IconTip := trayTitle
+		A_IconTip := RegExReplace(trayTitle, "\&", "&&&")
 	}
 
 	static SetLayout(layout) {
@@ -798,8 +798,8 @@ Class KeyboardBinder {
 Class Scripter {
 	static selectorGUI := Map("Alternative Modes", Gui(), "Glyph Variations", Gui())
 	static selectorTitle := Map(
-		"Alternative Modes", App.Title("+status+version") " — " Locale.Read("gui_scripter_alt_mode"),
-		"Glyph Variations", App.Title("+status+version") " — " Locale.Read("gui_scripter_glyph_variation"),
+		"Alternative Modes", (*) => App.Title("+status+version") " — " Locale.Read("gui_scripter_alt_mode"),
+		"Glyph Variations", (*) => App.Title("+status+version") " — " Locale.Read("gui_scripter_glyph_variation"),
 	)
 	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "")
 
@@ -839,7 +839,7 @@ Class Scripter {
 			},
 			"Gothic", {
 				preview: [Util.UnicodeToChars("10330", "10339", "10342", "10338", "10330", "1033A", "1033F", "1033D", "10333", "10343")],
-				fonts: ["Noto Sans Gothic"],
+				fonts: [],
 				locale: "alt_mode_gothic",
 				bindings: ["Gothic"],
 				uiid: "Gothic",
@@ -986,7 +986,7 @@ Class Scripter {
 
 			selectorPanel := Gui()
 			selectorPanel.OnEvent("Close", (Obj) => Destroy())
-			selectorPanel.title := this.selectorTitle[selectorType]
+			selectorPanel.title := this.selectorTitle[selectorType]()
 
 			dataCount := this.data[selectorType].Length // 2
 
@@ -1074,14 +1074,14 @@ Class Scripter {
 
 				optionTitleW := optionW - (icoX - optionX) - icoW - 20
 
-				optionTitle := selectorPanel.AddText("v" dataValue.uiid "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " +BackgroundTrans", Locale.Read(dataValue.locale))
+				optionTitle := selectorPanel.AddText("v" dataValue.uiid "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " 0x80 +BackgroundTrans", Locale.Read(dataValue.locale))
 				optionTitle.SetFont("s10 c333333 Bold", "Segoe UI")
 
 				scriptPreviewX := optionTitleX
 				scriptPreviewY := optionTitleY + optionTitleH - 2
 
 				for i, previewText in dataValue.preview {
-					pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " +BackgroundTrans", previewText)
+					pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
 					pt.SetFont("s10 c333333", dataValue.fonts.length > 0 ? dataValue.fonts[dataValue.fonts.length > 1 ? i : 1] : "Segoe UI")
 
 					scriptPreviewY += optionTitleH - 5
@@ -1089,7 +1089,7 @@ Class Scripter {
 
 				hotkeys.Set(keys[j], dataName)
 				hotkeys.Set(keys[keyCodes.Length + j], dataName)
-				hotkeysLabel := selectorPanel.AddText("v" dataValue.uiid "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH) " Right +BackgroundTrans", Locale.ReadInject("alt_mode_gui_press", [keys[j] "/" keys[keyCodes.Length + j]]))
+				hotkeysLabel := selectorPanel.AddText("v" dataValue.uiid "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH) " 0x80 Right +BackgroundTrans", Locale.ReadInject("alt_mode_gui_press", [keys[j] "/" keys[keyCodes.Length + j]]))
 
 				currentCol++
 				if (currentCol >= elementsPerColumn) {
@@ -1162,12 +1162,12 @@ Class Scripter {
 			}
 		}
 
-		if IsGuiOpen(this.selectorTitle[selectorType]) {
-			WinActivate(this.selectorTitle[selectorType])
+		if IsGuiOpen(this.selectorTitle[selectorType]()) {
+			WinActivate(this.selectorTitle[selectorType]())
 		} else {
 			this.selectorGUI[selectorType] := Constructor()
 			this.selectorGUI[selectorType].Show()
-			WinSetAlwaysOnTop(True, this.selectorTitle[selectorType])
+			WinSetAlwaysOnTop(True, this.selectorTitle[selectorType]())
 		}
 	}
 
