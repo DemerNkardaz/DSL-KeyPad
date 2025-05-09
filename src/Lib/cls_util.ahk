@@ -1,4 +1,24 @@
 Class Util {
+	static ShellFunc(str, arg) {
+		funcRef := StrSplit(str[1], ".")
+		interRef := ""
+		objRef := ""
+
+		for i, ref in funcRef {
+			if i = 1 {
+				interRef := %ref%
+				objRef := interRef
+			} else if i < funcRef.Length {
+				interRef := interRef.%ref%
+				objRef := interRef
+			} else {
+				method := ref
+				interRef := interRef.%method%
+				interRef.Call(objRef, arg)
+			}
+		}
+	}
+
 	static IsBool(value) {
 		return Type(value) = "Integer" && value >= 0 && value <= 1
 	}

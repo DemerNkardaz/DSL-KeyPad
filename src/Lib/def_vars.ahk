@@ -97,3 +97,7 @@ LeftAlt := Chr(0x2387)
 RightAlt := Chr(0x2384)
 Window := Chr(0x229E)
 CapsLock := Chr(0x2B9D)
+
+ChracterMap := "C:\Windows\System32\charmap.exe"
+ImageRes := "C:\Windows\System32\imageres.dll"
+Shell32 := "C:\Windows\SysWOW64\shell32.dll"

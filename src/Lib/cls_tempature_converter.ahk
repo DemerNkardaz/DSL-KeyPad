@@ -168,7 +168,7 @@ Class TemperatureConversion {
 		labelFrom := (RegExMatch(conversionFromTo, "^(ra|ro|re|me)")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
 		labelTo := (RegExMatch(conversionFromTo, "(ra|ro|re|me)$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
 
-		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : GetChar("degree") this.scales.%labelFrom%) " " GetChar("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : GetChar("degree") this.scales.%labelTo%) "]"
+		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : ChrLib.Get("degree") this.scales.%labelFrom%) " " ChrLib.Get("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : ChrLib.Get("degree") this.scales.%labelTo%) "]"
 
 		Util.CaretTooltip(conversionLabel)
 		numberValue := this.GetNumber(conversionLabel)
@@ -202,8 +202,8 @@ Class TemperatureConversion {
 	}
 
 	static GetNumber(conversionLabel) {
-		static validator := "v1234567890,.-'" GetChar("minus")
-		static expression := "^[1234567890,.'\- " GetChar("minus") "]+$"
+		static validator := "v1234567890,.-'" ChrLib.Get("minus")
+		static expression := "^[1234567890,.'\- " ChrLib.Get("minus") "]+$"
 
 		numberValue := ""
 
@@ -267,15 +267,15 @@ Class TemperatureConversion {
 				"Deutsch", ".",
 				"Russian", chars.numberSpace,
 				"Canada", chars.numberSpace,
-				"Switzerland-Comma", GetChar("quote_right_single"),
-				"Switzerland-Dot", GetChar("quote_right_single"),
+				"Switzerland-Comma", ChrLib.Get("quote_right_single"),
+				"Switzerland-Dot", ChrLib.Get("quote_right_single"),
 			)
 
 			integerPart := RegExReplace(integerPart, "\B(?=(\d{3})+(?!\d))", decimalSeparators[regionalType])
 			temperatureValue := RegExReplace(temperatureValue, "^\d+", integerPart)
 		}
 
-		temperatureValue := (negativePoint ? GetChar("minus") : "") temperatureValue chars.degreeSpace (IsObject(this.scales.%scale%) ? (useUnicode ? this.scales.%scale%[1] : this.scales.%scale%[2]) : GetChar("degree") this.scales.%scale%)
+		temperatureValue := (negativePoint ? ChrLib.Get("minus") : "") temperatureValue chars.degreeSpace (IsObject(this.scales.%scale%) ? (useUnicode ? this.scales.%scale%[1] : this.scales.%scale%[2]) : ChrLib.Get("degree") this.scales.%scale%)
 		return temperatureValue
 	}
 }

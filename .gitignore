@@ -25,3 +25,5 @@ testing/
 */~$*.docx
 */*Draft*.pdf
 *.zip
+
+LEGACY_*.ahk

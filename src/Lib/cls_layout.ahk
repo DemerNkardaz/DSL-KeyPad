@@ -139,8 +139,8 @@ Class LayoutList {
 		"Ч", "SC02D",
 		"Н", "SC015",
 		"Я", "SC02C",
-		"І", "",
-		"Ѣ", "",
+		"І", "SC999",
+		"Ѣ", "SC999",
 	)
 	layout := Map()
 
@@ -372,7 +372,7 @@ Class KeyboardBinder {
 
 	static __New() {
 		this.Init()
-		SetTimer((*) => SetTimer((*) => this.Monitor(), 2000), -10000)
+		SetTimer((*) => this.Monitor(), 1000)
 	}
 
 	static Init() {
@@ -387,6 +387,9 @@ Class KeyboardBinder {
 	}
 
 	static Monitor() {
+		if A_IsPaused
+			return
+
 		isLanguageLayoutValid := Language.Validate(Keyboard.CurrentLayout(), "bindings")
 		disableTimer := Cfg.Get("Binds_Autodisable_Timer", , 1, "int")
 		disableType := Cfg.Get("Binds_Autodisable_Type", , "hour")
@@ -403,17 +406,20 @@ Class KeyboardBinder {
 	}
 
 	static MonitorToggler(enable := True, rule := "Monitor", addRule := "User") {
+		if A_IsPaused
+			return
+
 		if enable && !this.disabledBy%addRule% {
 			if this.disabledBy%rule% {
 				this.disabledBy%rule% := False
-				this.RebuilBinds()
+				Suspend(-1)
 			}
 		} else if !this.disabledBy%rule% && !this.disabledBy%addRule% {
 			this.disabledBy%rule% := True
-			this.UnregisterAll()
+			Suspend(1)
 		}
 
-		ManageTrayItems()
+		App.SetTray()
 	}
 
 	static TrayIconSwitch() {
@@ -440,7 +446,7 @@ Class KeyboardBinder {
 			}
 		}
 
-		TraySetIcon(App.icoDLL, iconCode)
+		TraySetIcon(App.icoDLL, iconCode, True)
 		A_IconTip := RegExReplace(trayTitle, "\&", "&&&")
 	}
 
@@ -650,29 +656,54 @@ Class KeyboardBinder {
 		}
 	}
 
-	static RebuilBinds(ignoreAltMode := False) {
-		this.UnregisterAll()
+	static RebuilBinds(ignoreAltMode := False, ignoreUnregister := False) {
 		this.CurrentLayouts(&latin, &cyrillic)
-		if (Cfg.Get("Layout_Remapping", , False, "bool") && (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")) || (Scripter.selectedMode.Get("Glyph Variations") != "")
-			this.Registration(BindList.Get("Keyboard Default"), True)
 
-		this.Registration(BindList.Get("Important"), True)
-		this.Registration(BindList.Get("Common"), Cfg.FastKeysOn)
+		useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
+		checkDefaultLayouts := (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")
+		isGlyphsVariationsOn := Scripter.selectedMode.Get("Glyph Variations") != ""
+
+		useRemap := (useRemap && checkDefaultLayouts) || isGlyphsVariationsOn
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
-		if userBindings != "None" && Cfg.FastKeysOn {
-			this.Registration(BindList.Get(userBindings, "User"), Cfg.FastKeysOn)
+		isUserBindingsOn := userBindings != "None" && Cfg.FastKeysOn
+
+		altMode := Scripter.selectedMode.Get("Alternative Modes")
+		isAltModeOn := altMode != "" && !ignoreAltMode
+
+		bingingsNames := []
+		if isAltModeOn
+			bingingsNames := Scripter.GetData(, altMode).bindings
+
+		if !ignoreUnregister
+			this.UnregisterAll()
+
+		preparedBindLists := []
+		rawBindLists := [
+			useRemap ? "Keyboard Default" : "",
+			Cfg.FastKeysOn ? "Common" : "",
+			isUserBindingsOn ? userBindings ":User" : "",
+			"Important"
+		]
+
+		if isAltModeOn {
+			for altBinding in bingingsNames {
+				len := rawBindLists.Length
+				rawBindLists.InsertAt(len - 1, altBinding ":Script Specified")
+			}
 		}
+
+		for i, bindName in rawBindLists {
+			if bindName != ""
+				preparedBindLists.Push(bindName)
+		}
+
+		bindsConstructor := BindList.Gets(preparedBindLists)
+
+		this.Registration(bindsConstructor, True)
 
 		if this.numStyle != ""
 			this.ToggleNumStyle(this.numStyle, True)
-
-
-		altMode := Scripter.selectedMode["Alternative Modes"]
-		if altMode != "" && !ignoreAltMode {
-			bingingsNames := Scripter.GetData(, altMode).bindings
-			this.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
-		}
 	}
 
 
@@ -1058,18 +1089,18 @@ Class Scripter {
 				uiid: "DoubleStruckItalic",
 				icons: ["glyph_double_struck_italic"],
 			},
-			"uncombining", {
+			"uncombined", {
 				preview: [Util.UnicodeToChars("25CC", "00B4", "25CC", "02DD", "25CC", "02D8", "25CC", "00B8", "25CC", "02D9", "25CC", "00A8", "25CC", "0060", "25CC", "00AF", "25CC", "02DB", "25CC", "02DA", "25CC", "02DC")],
 				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_uncombining",
-				uiid: "Uncombining",
-				icons: ["glyph_uncombining"],
+				locale: "glyph_mode_uncombined",
+				uiid: "Uncombined",
+				icons: ["glyph_uncombined"],
 			},
 		]
 	)
 
 	static SelectorPanel(selectorType := "Alternative Modes") {
-		static keySymbols := Map(
+		keySymbols := Map(
 			"LeftBracket", "[",
 			"RightBracket", "]",
 			"Semicolon", ";",
@@ -1117,26 +1148,30 @@ Class Scripter {
 			"SC035",
 		]
 
+		hotkeys := Map()
+		keys := keyCodes.Clone()
+		keysLen := keys.Length
+		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout)
+
+		Loop keys.Length
+			keys.Push("")
+
+		for keyName, keyCode in KeyboardBinder.layouts.latin[latinLayout].layout
+			keyCodes.HasValue(keyCode, &i) && (keys[i] := keyName)
+		for keyName, keyCode in KeyboardBinder.layouts.cyrillic[cyrillicLayout].layout
+			keyCodes.HasValue(keyCode, &i) && (keys[keysLen + i] := keyName)
+
+		for key, value in keySymbols {
+			keys.HasValue(key, &i) && (keys[i] := value)
+		}
+
+
+		prevAltMode := this.selectedMode.Get(selectorType)
+		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read("gui_scripter_" (selectorType == "Alternative Modes" ? "alt_mode" : "glyph_variation")))
+
 		Constructor() {
-			hotkeys := Map()
-			keys := keyCodes.Clone()
-			keysLen := keys.Length
-			KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout)
-
-			Loop keys.Length
-				keys.Push("")
-
-			for keyName, keyCode in KeyboardBinder.layouts.latin[latinLayout].layout
-				keyCodes.HasValue(keyCode, &i) && (keys[i] := keySymbols.Has(keySymbols) ? keySymbols.Get(keyName) : keyName)
-			for keyName, keyCode in KeyboardBinder.layouts.cyrillic[cyrillicLayout].layout
-				keyCodes.HasValue(keyCode, &i) && (keys[keysLen + i] := keySymbols.Has(keySymbols) ? keySymbols.Get(keyName) : keyName)
-
-			prevAltMode := this.selectedMode.Get(selectorType)
-
-			this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read("gui_scripter_" (selectorType == "Alternative Modes" ? "alt_mode" : "glyph_variation")))
-
 			selectorPanel := Gui()
-			selectorPanel.OnEvent("Close", (Obj) => Destroy())
+			selectorPanel.OnEvent("Close", (Obj) => this.PanelDestroy(selectorType))
 			selectorPanel.title := this.selectorTitle.Get(selectorType)
 
 			dataCount := this.data[selectorType].Length // 2
@@ -1149,7 +1184,6 @@ Class Scripter {
 			columnCount := 0
 			totalColumns := 0
 			elementCount := 0
-
 
 			Loop dataCount {
 				if (columnCount < elementsPerColumn) ? columnCount++ : (columnCount := 1, rowCount++)
@@ -1192,9 +1226,8 @@ Class Scripter {
 
 			selectorPanel.Show("w" panelWidth " h" panelHeight " Center")
 
-			sIH := InputHook("L1", "{Escape}")
-			SetTimer((*) => SetIH(), -100)
 			return selectorPanel
+
 
 			AddOption(dataName, dataValue, j) {
 				optionX := borderPadding + currentCol * (optionW + optionGap)
@@ -1211,7 +1244,10 @@ Class Scripter {
 				borderBackground := selectorPanel.AddText("w" plateButtonW + 4 " h" plateButtonH + 4 " x" plateButtonX - 2 " y" plateButtonY - 2 " Background" (prevAltMode = dataName ? "0xfdd500" : "Trans"))
 
 				plateButton := selectorPanel.AddText("w" plateButtonW " h" plateButtonH " x" plateButtonX " y" plateButtonY " BackgroundWhite")
-				plateButton.OnEvent("Click", (Obj, Info) => OptionSelect(dataName))
+				plateButton.OnEvent("Click", (Obj, Info) => (
+					this.PanelDestroy(selectorType),
+					this.OptionSelect(dataName, selectorType)
+				))
 
 
 				selectorPanel.AddGroupBox("v" dataValue.uiid " w" optionW " h" optionH " x" optionX " y" optionY)
@@ -1249,71 +1285,6 @@ Class Scripter {
 					currentRow++
 				}
 			}
-
-			OptionSelect(name) {
-
-				currentISP := InputScriptProcessor.options.interceptionInputMode
-				if name != "" {
-					currentMode := this.selectedMode.Get(selectorType)
-
-					Destroy()
-					if selectorType = "Alternative Modes" {
-						if currentISP != "" {
-							WarningISP(name, currentISP, selectorType)
-							return
-						}
-					}
-
-					this.selectedMode.Set(selectorType, currentMode != name ? name : "")
-					altMode := this.selectedMode.Get(selectorType)
-
-					if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser) {
-						if altMode != "" && selectorType = "Alternative Modes" {
-							bingingsNames := this.GetData(selectorType, altMode).bindings
-							KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
-						} else
-							KeyboardBinder.RebuilBinds()
-					}
-
-				} else
-					Destroy()
-
-				return
-			}
-
-			WarningISP(name, currentISP, selectorType) {
-				nameTitle := Locale.Read(this.GetData(selectorType, name).locale)
-				IPSTitle := Locale.Read("script_processor_mode_" currentISP)
-				MsgBox(Locale.ReadInject("alt_mode_warning_isp_active", [nameTitle, IPSTitle]), App.Title(), "Icon!")
-				return
-			}
-
-			SetIH() {
-				sIH.Start()
-				sIH.Wait()
-
-				if sIH.EndKey = "Escape" {
-					Destroy()
-					return
-				}
-
-				input := StrUpper(sIH.Input)
-
-				if hotkeys.Has(input)
-					OptionSelect(hotkeys.Get(input))
-				else
-					Destroy()
-				return
-			}
-
-			Destroy() {
-				selectorPanel.Destroy()
-				selectorPanel := Gui()
-				sIH.Stop()
-				if prevAltMode != "" && !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser)
-					KeyboardBinder.RebuilBinds()
-				return
-			}
 		}
 
 		if IsGuiOpen(this.selectorTitle.Get(selectorType)) {
@@ -1321,36 +1292,78 @@ Class Scripter {
 		} else {
 			if IsGuiOpen(this.selectorTitle.Get(selectorAntagonist)) {
 				this.selectorGUI[selectorAntagonist].Destroy()
-				this.selectorGUI[selectorAntagonist] := Gui()
 				Sleep 200
 			}
 
 			this.selectorGUI[selectorType] := Constructor()
 			this.selectorGUI[selectorType].Show()
 			WinSetAlwaysOnTop(True, this.selectorTitle.Get(selectorType))
+
+			this.WaitForKey(hotkeys, selectorType)
 		}
 	}
 
-	static DirectSelect(name, selectorType := "Alternative Modes") {
+	static OptionSelect(name, selectorType := "Alternative Modes") {
+		currentISP := InputScriptProcessor.options.interceptionInputMode
 		if name != "" {
 			currentMode := this.selectedMode.Get(selectorType)
-			this.selectedMode.Set(selectorType, currentMode != name ? name : "")
 
 			if selectorType = "Alternative Modes" {
-				altMode := this.selectedMode.Get(selectorType)
-
-				if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser) {
-					if altMode != "" {
-						bingingsNames := Scripter.GetData(selectorType, altMode).bindings
-						KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
-					} else {
-						KeyboardBinder.UnregisterAll()
-						KeyboardBinder.RebuilBinds()
-					}
+				if currentISP != "" {
+					WarningISP(name, currentISP, selectorType)
+					return
 				}
 			}
-			return
+
+			this.selectedMode.Set(selectorType, currentMode != name ? name : "")
 		}
+
+		altMode := this.selectedMode.Get(selectorType)
+		KeyboardBinder.RebuilBinds(, altMode != "")
+
+		WarningISP(name, currentISP, selectorType) {
+			nameTitle := Locale.Read(this.GetData(selectorType, name).locale)
+			IPSTitle := Locale.Read("script_processor_mode_" currentISP)
+			MsgBox(Locale.ReadInject("alt_mode_warning_isp_active", [nameTitle, IPSTitle]), App.Title(), "Icon!")
+		}
+	}
+
+	static WaitForKey(hotkeys, selectorType) {
+		local IH := InputHook("L1")
+		IH.VisibleNonText := False
+		IH.KeyOpt("{All}", "E")
+		IH.Start()
+
+		SetTimer(WaitCheckGUI, 50)
+
+		IH.Wait()
+
+		if IsGuiOpen(this.selectorTitle.Get(selectorType))
+			SetTimer((*) => this.HandleWaiting(StrUpper(IH.EndKey), hotkeys, selectorType), -1)
+
+		IH.Stop()
+
+		WaitCheckGUI() {
+			if IsGuiOpen(this.selectorTitle.Get(selectorType))
+				return
+			else {
+				IH.Stop()
+				Exit
+				MsgBox("Test2")
+			}
+		}
+	}
+
+
+	static HandleWaiting(endKey, hotkeys, selectorType) {
+		if endKey != "" && hotkeys.Has(endKey)
+			this.OptionSelect(hotkeys.Get(endKey), selectorType)
+
+		this.PanelDestroy(selectorType)
+	}
+
+	static PanelDestroy(selectorType) {
+		this.selectorGUI[selectorType].Destroy()
 	}
 
 	static GetData(mode := "Alternative Modes", name := "Germanic runes & Glagolitic") {
@@ -1397,8 +1410,6 @@ Class BindHandler {
 
 						if StrLen(chrSendOption) > 0
 							inputType := chrSendOption
-					} else {
-						output .= GetCharacterSequence(character)
 					}
 				}
 			}
@@ -1434,6 +1445,25 @@ Class BindHandler {
 					this.Send(combo, charactersObj.%lang% is Array ? charactersObj.%lang%[1] : charactersObj.%lang%)
 				}
 			}
+		}
+	}
+
+	static LangCall() {
+		Keyboard.CheckLayout(&lang)
+
+		if Language.Validate(lang, "bindings")
+			if IsSet(%lang%Callback)
+				%lang%Callback()
+
+		return
+	}
+
+	static SendPaste(SendKey, Callback := "") {
+		Send(SendKey)
+
+		if Callback != "" {
+			Sleep 50
+			Callback()
 		}
 	}
 

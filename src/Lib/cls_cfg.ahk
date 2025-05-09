@@ -84,7 +84,7 @@ Class Cfg {
 			Update.Check()
 
 		if Update.available {
-			ManageTrayItems()
+			App.SetTray()
 		}
 
 		this.optionsTitle := App.Title("+status+version") " — " Locale.Read("gui_options")
@@ -240,7 +240,7 @@ Class Cfg {
 
 
 			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", Locale.Read("autoload_add"))
-			autoloadBtn.OnEvent("Click", AddScriptToAutoload)
+			autoloadBtn.OnEvent("Click", (*) => Cfg.SetAutoload())
 
 			optionsPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return optionsPanel
@@ -522,9 +522,9 @@ Class Cfg {
 
 	static OptionsHandler(value, options := "", &output := value) {
 		if InStr(options, "toHex")
-			output := ConvertToHexaDecimal(value)
+			output := Util.ChrToHexaDecimal(value)
 		if InStr(options, "fromHex")
-			output := ConvertFromHexaDecimal(value)
+			output := Util.HexaDecimalToChr(value)
 		if InStr(options, "bool")
 			output := (value = "True" || value = 1 || value = "1")
 		if InStr(options, "int")
@@ -623,8 +623,7 @@ Class Options {
 			MyRecipes.EditorGUI["CancelButton"].Text := Locale.Read("gui_cancel")
 		}
 
-
-		ManageTrayItems()
+		App.SetTrayItems()
 	}
 
 	static SwitchVirualLayout(CB, category) {
@@ -647,6 +646,21 @@ Class Options {
 		}
 
 		KeyboardBinder.RebuilBinds()
+	}
+
+	static SetAutoload() {
+		currentScriptPath := A_ScriptDir "\DSLKeyPad.exe"
+		autoloadFolder := A_StartMenu "\Programs\Startup"
+		shortcutPath := autoloadFolder "\DSLKeyPad.lnk"
+
+		if (FileExist(shortcutPath))
+			FileDelete(shortcutPath)
+
+		iconIndex := 0
+		command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" shortcutPath "'); $shortcut.TargetPath = '" currentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" App.icoDLL "," iconIndex "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()"
+		RunWait(command, , "Hide")
+
+		MsgBox(Locale.Read("gui_options_autoload_created"), App.Title(), 0x40)
 	}
 }
 

@@ -201,6 +201,9 @@ _MapDeepClone(this) {
 
 _MapDeepMergeWith(this, maps*) {
 	for mapIdx, mapToMerge in maps {
+		if mapToMerge.Count = 0
+			continue
+
 		for key, val in mapToMerge {
 			if this.Has(key) && this[key] is Map {
 				this[key].DeepMergeWith(val)
@@ -326,5 +329,105 @@ CodesToAHK(filePath, outputFilePath := "funcOut") {
 
 	fileContent := FileRead(fullPath, "UTF-8")
 }
-;CodesToAHK(entities_list, chr_entities)
-;CodesToAHK(alt_codes_list, chr_alt_codes)
+
+Chrs(chrCodes*) {
+	Output := ""
+
+	for code in chrCodes {
+		if code is Array {
+			charCode := code[1]
+			charRepeats := code.Has(2) ? code[2] : 1
+
+			Loop charRepeats
+				Output .= Chr(charCode)
+		} else {
+			Output .= Chr(code)
+		}
+	}
+
+	return Output
+}
+
+GetKeyScanCode() {
+	IB := InputBox("Scan code get", "Scan code", "w350 h110", "")
+
+	if IB.Result = "Cancel"
+		return
+	else
+		PromptValue := IB.Value
+	scanCode := GetKeySC(PromptValue)
+	scanCode := Format("{:X}", scanCode)
+	scanCode := StrLen(scanCode) == 1 ? "00" scanCode : StrLen(scanCode) == 2 ? "0" scanCode : scanCode
+	scanCode := "SC" scanCode
+	SendText(scanCode)
+}
+
+
+ReplaceWithUnicode(Mode := "") {
+	BackupClipboard := A_Clipboard
+	PromptValue := ""
+	A_Clipboard := ""
+
+	Send("{Shift Down}{Delete}{Shift Up}")
+	ClipWait(0.5, 1)
+	PromptValue := A_Clipboard
+	A_Clipboard := ""
+
+	if PromptValue != "" {
+		Output := ""
+
+		i := 1
+		while (i <= StrLen(PromptValue)) {
+			Symbol := SubStr(PromptValue, i, 1)
+			Code := Ord(Symbol)
+			Surrogated := Code >= 0xD800 && Code <= 0xDBFF
+
+			if (Surrogated) {
+				NextSymbol := SubStr(PromptValue, i + 1, 1)
+				Symbol .= NextSymbol
+				i += 1
+			}
+
+			if Mode == "Hex" {
+				Output .= "0x" Util.ChrToUnicode(Symbol) " "
+			} else if Mode == "CSS" {
+				Output .= Surrogated ? "\u{" Util.ChrToUnicode(Symbol) "} " : "\u" Util.ChrToUnicode(Symbol) " "
+			} else {
+				Output .= Util.ChrToUnicode(Symbol) " "
+			}
+
+			i += 1
+		}
+
+		A_Clipboard := RegExReplace(Output, "\s$", "")
+		ClipWait(0.250, 1)
+		Send("{Shift Down}{Insert}{Shift Up}")
+	}
+	Sleep 500
+	A_Clipboard := BackupClipboard
+
+	Send("{Ctrl Up}")
+
+	return
+}
+
+ContainsEmoji(StringInput) {
+	EmojisPattern := "[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F900}-\x{1F9FF}\x{2700}-\x{27BF}\x{1F1E6}-\x{1F1FF}]"
+	return RegExMatch(StringInput, EmojisPattern)
+}
+
+IsGuiOpen(title) {
+	return WinExist(title) != 0
+}
+
+ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := App.Title("+status+version"), SkipMessage := False, Mute := False, NoReadLocale := False) {
+	if SkipMessage == True
+		return
+	LanguageCode := Language.Get()
+	Muting := Mute ? " Mute" : ""
+	Ico := MessageIcon == "Info" ? "Iconi" :
+		MessageIcon == "Warning" ? "Icon!" :
+		MessageIcon == "Error" ? "Iconx" : 0x0
+	TrayTip(NoReadLocale ? MessagePost : Locale.Read(MessagePost), MessageTitle, Ico . Muting)
+
+}

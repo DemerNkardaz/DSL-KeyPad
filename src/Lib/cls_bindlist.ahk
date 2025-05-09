@@ -61,8 +61,17 @@ Class BindList {
 
 	static Gets(bindingsNames := [], fromSub := "", mapping := bindingMaps.DeepClone()) {
 		interArray := []
-		for bindingsName in bindingsNames
-			interArray.Push(BindList.Get(bindingsName, fromSub, mapping := Map()))
+		for bindingsName in bindingsNames {
+			if bindingsName = ""
+				continue
+
+			if InStr(bindingsName, ":") {
+				currentName := RegExReplace(bindingsName, ":(.*?)$", "")
+				currentFromSub := RegExReplace(bindingsName, "(.*?):", "")
+				interArray.Push(BindList.Get(currentName, currentFromSub, mapping))
+			} else
+				interArray.Push(BindList.Get(bindingsName, fromSub, mapping))
+		}
 
 		output := interArray[1]
 

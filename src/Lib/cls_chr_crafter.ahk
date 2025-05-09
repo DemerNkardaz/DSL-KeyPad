@@ -3,13 +3,13 @@ Class ChrCrafter {
 	static ComposeKeyTimer := ""
 
 	static modifiedCharsType := ""
-	static prompt := ConvertFromHexaDecimal(Cfg.Get("Ligature", "LatestPrompts"))
+	static prompt := Util.HexaDecimalToChr(Cfg.Get("Ligature", "LatestPrompts"))
 
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 
 		ChrCrafter.modifiedCharsType := Scripter.selectedMode.Get("Glyph Variations")
-		ChrCrafter.prompt := ConvertFromHexaDecimal(Cfg.Get("Ligature", "LatestPrompts"))
+		ChrCrafter.prompt := Util.HexaDecimalToChr(Cfg.Get("Ligature", "LatestPrompts"))
 
 		ChrCrafter.%this.compositingMode%Mode()
 		try {
@@ -41,7 +41,7 @@ Class ChrCrafter {
 				output := RegExReplace(output, "\s+$", "")
 				this.SendOutput(output)
 
-				Cfg.Set(ConvertToHexaDecimal(SubStr(this.prompt, 1, 128)), "Ligature", "LatestPrompts")
+				Cfg.Set(Util.ChrToHexaDecimal(SubStr(this.prompt, 1, 128)), "Ligature", "LatestPrompts")
 			}
 		}
 
@@ -676,7 +676,7 @@ Class ChrCrafter {
 				(StrLen(value.entity) > 0 ? value.entity : value.html)
 
 		} else if Auxiliary.inputMode = "LaTeX" && value.LaTeX.Length > 0 {
-			output := LaTeXMode = "Math" ? value.LaTeX[2] : value.LaTeX[1]
+			output := Cfg.Get("LaTeX_Mode", , "Default") = "Math" ? value.LaTeX[2] : value.LaTeX[1]
 
 		} else {
 			output := this.GetUniChar(value)
@@ -686,22 +686,22 @@ Class ChrCrafter {
 
 	static GetUniChar(value, forceDefault := False) {
 		output := ""
-		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType "Form") && !forceDefault {
-			if IsObject(value.%this.modifiedCharsType%Form) {
+		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType) && !forceDefault {
+			if IsObject(value.%this.modifiedCharsType%) {
 				TempValue := ""
-				for modifier in value.%this.modifiedCharsType%Form {
-					TempValue .= PasteUnicode(modifier)
+				for modifier in value.%this.modifiedCharsType% {
+					TempValue .= Util.UnicodeToChar(modifier)
 				}
 				output := TempValue
 			} else {
-				output := PasteUnicode(value.%this.modifiedCharsType%Form)
+				output := Util.UnicodeToChar(value.%this.modifiedCharsType%)
 			}
 		} else if value.sequence.Length > 0 {
 			for unicode in value.sequence {
-				output .= PasteUnicode(unicode)
+				output .= Util.UnicodeToChar(unicode)
 			}
 		} else {
-			output := PasteUnicode(value.unicode)
+			output := Util.UnicodeToChar(value.unicode)
 		}
 		return output
 	}
