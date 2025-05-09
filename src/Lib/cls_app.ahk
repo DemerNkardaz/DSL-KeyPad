@@ -10,10 +10,12 @@ Class App {
 	static gitUserContent := "https://raw.githubusercontent.com/" this.repository
 	static branch := Map("main", this.URL "/tree/main", "dev", this.URL "/tree/dev")
 	static refsHeads := Map("main", this.gitUserContent "/refs/heads/main", "dev", this.gitUserContent "/refs/heads/dev")
+	static desktopINI := A_ScriptDir "\desktop.ini"
 
 	static paths := {
 		dir: A_ScriptDir,
 		lib: A_ScriptDir "\Lib",
+		pwsh: A_ScriptDir "\Lib\powershell",
 		loc: A_ScriptDir "\Locale",
 		bin: A_ScriptDir "\Bin",
 		user: A_ScriptDir "\User",
@@ -63,8 +65,18 @@ Class App {
 		if !FileExist(this.profileFile)
 			IniWrite("default", this.profileFile, "data", "profile")
 
+		Run(Format('powershell.exe -NoProfile -ExecutionPolicy Bypass -File "{}" -IniPath {}',
+			this.paths.pwsh "\set_folder_data.ps1", this.desktopINI), , "Hide")
+
 		this.ReadProfiles()
 		this.SetTray()
+	}
+
+	static DeleteDINI() {
+		if FileExist(this.desktopINI) {
+			RunWait('cmd.exe /c attrib -s -h "' this.desktopINI '"')
+			FileDelete(this.desktopINI)
+		}
 	}
 
 	static ReadProfiles() {

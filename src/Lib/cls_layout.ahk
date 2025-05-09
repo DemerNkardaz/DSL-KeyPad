@@ -1332,20 +1332,14 @@ Class Scripter {
 	}
 
 	static WaitForKey(hotkeys, selectorType) {
-		local IH := InputHook("L1")
+		local IH := InputHook("L1 M")
 		IH.VisibleNonText := False
 		IH.KeyOpt("{All}", "E")
-		IH.KeyOpt("{LShift}{RShift}{LControl}{RControl}{LAlt}{RAlt}{LWin}{RWin}", "-E")
+		IH.KeyOpt("{LShift}{RShift}{LControl}{RControl}{LAlt}{RAlt}{LWin}{RWin}{PrintScreen}", "-E")
+		IH.OnEnd := (*) => this.HandleWaiting(StrUpper(IH.EndKey), hotkeys, selectorType)
 		IH.Start()
 
 		SetTimer(WaitCheckGUI, 50)
-
-		IH.Wait()
-
-		if IsGuiOpen(this.selectorTitle.Get(selectorType))
-			SetTimer((*) => this.HandleWaiting(StrUpper(IH.EndKey), hotkeys, selectorType), -1)
-
-		IH.Stop()
 
 		WaitCheckGUI() {
 			if IsGuiOpen(this.selectorTitle.Get(selectorType))
@@ -1353,7 +1347,6 @@ Class Scripter {
 			else {
 				IH.Stop()
 				Exit
-				MsgBox("Test2")
 			}
 		}
 	}

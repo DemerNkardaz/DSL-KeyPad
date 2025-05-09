@@ -12,6 +12,7 @@ src/bin/*.exe
 src/bin/*.dll
 src/*.exe
 src/*.dll
+src/desktop.ini
 src/User/
 src_backup
 drafts/DSLKeyPad.exe
@@ -27,3 +28,4 @@ testing/
 *.zip
 
 LEGACY_*.ahk
+desktop.ini

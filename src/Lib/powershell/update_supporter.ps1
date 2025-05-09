@@ -91,5 +91,5 @@ catch {
 }
 
 Write-Host "Successfully updated to version $Version" -ForegroundColor Green
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 1
 exit 0

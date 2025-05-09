@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-05-09 10:57:12
+				&#128228;&emsp14;2025-05-09 16:52:32
 			</td>
 		</tr>
 		<tr>
@@ -73,8 +73,8 @@ Write-Host "Pre-release: $preRelease"
 Write-Host "Release message:
 $message"
 
-& "./build_executable.cmd"
-& "./Bin/build_icons_dll.cmd"
+& "$PSScriptRoot/build_executable.cmd"
+& "$PSScriptRoot/Bin/build_icons_dll.cmd"
 
 & "$PSScriptRoot/Lib/powershell/pack_bundle.ps1" -FolderPath "$PSScriptRoot" -Version $ver -SleepingDuration 0
 
