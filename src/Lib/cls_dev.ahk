@@ -45,6 +45,7 @@ Class Dev {
 
 		fontsArray := [
 			"Noto Color Emoji",
+			"Math",
 			"Symbols",
 			"Runic",
 			"Glagolitic",

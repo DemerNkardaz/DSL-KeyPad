@@ -114,5 +114,62 @@
     <Image Include="DSLKeyPad.app_cyrillic.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_glyph_combining.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_superscript.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_subscript.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_italic.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_bold.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_italic_bold.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_sans_serif.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_sans_serif_italic.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_sans_serif_bold.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_sans_serif_italic_bold.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_monospace.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_small_capital.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_fraktur.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_fraktur_bold.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_script.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_script_bold.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_double_struck.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_double_struck_italic.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DSLKeyPad.app_glyph_uncombining.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -180,6 +180,25 @@
     <Image Include="DSLKeyPad.app_greek.ico" />
     <Image Include="DSLKeyPad.app_latin.ico" />
     <Image Include="DSLKeyPad.app_cyrillic.ico" />
+    <Image Include="DSLKeyPad.app_glyph_combining.ico" />
+    <Image Include="DSLKeyPad.app_glyph_superscript.ico" />
+    <Image Include="DSLKeyPad.app_glyph_subscript.ico" />
+    <Image Include="DSLKeyPad.app_glyph_italic.ico" />
+    <Image Include="DSLKeyPad.app_glyph_bold.ico" />
+    <Image Include="DSLKeyPad.app_glyph_italic_bold.ico" />
+    <Image Include="DSLKeyPad.app_glyph_sans_serif.ico" />
+    <Image Include="DSLKeyPad.app_glyph_sans_serif_italic.ico" />
+    <Image Include="DSLKeyPad.app_glyph_sans_serif_bold.ico" />
+    <Image Include="DSLKeyPad.app_glyph_sans_serif_italic_bold.ico" />
+    <Image Include="DSLKeyPad.app_glyph_monospace.ico" />
+    <Image Include="DSLKeyPad.app_glyph_small_capital.ico" />
+    <Image Include="DSLKeyPad.app_glyph_fraktur.ico" />
+    <Image Include="DSLKeyPad.app_glyph_fraktur_bold.ico" />
+    <Image Include="DSLKeyPad.app_glyph_script.ico" />
+    <Image Include="DSLKeyPad.app_glyph_script_bold.ico" />
+    <Image Include="DSLKeyPad.app_glyph_double_struck.ico" />
+    <Image Include="DSLKeyPad.app_glyph_double_struck_italic.ico" />
+    <Image Include="DSLKeyPad.app_glyph_uncombining.ico" />
     <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

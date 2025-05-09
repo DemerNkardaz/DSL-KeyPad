@@ -232,7 +232,6 @@ Class ChrLib {
 	}
 
 	static AddEntries(rawEntries, typeOfInit := "Internal") {
-		Critical 1
 
 		if Keyboard.blockedForReload
 			return
@@ -267,7 +266,6 @@ Class ChrLib {
 			this.progressBarCurrent := 0
 		}
 
-		Critical 0
 		return
 	}
 
@@ -435,9 +433,9 @@ Class ChrLib {
 		Run(printPath)
 	}
 
-	static Get(entryName, extraRules := False, getMode := "Unicode", alt := AlterationActiveName) {
+	static Get(entryName, extraRules := False, getMode := "Unicode", alt := Scripter.selectedMode.Get("Glyph Variations")) {
 		if StrLen(alt) == 0
-			alt := AlterationActiveName
+			alt := Scripter.selectedMode.Get("Glyph Variations")
 
 		entry := this.GetEntry(entryName)
 
@@ -671,7 +669,7 @@ Class ChrLib {
 		if isSensitive
 			searchQuery := SubStr(searchQuery, 2)
 
-		alteration := RegExMatch(searchQuery, "\:\:(.*?)$", &match) ? this.ValidateAlt(match[1]) : AlterationActiveName
+		alteration := RegExMatch(searchQuery, "\:\:(.*?)$", &match) ? this.ValidateAlt(match[1]) : Scripter.selectedMode.Get("Glyph Variations")
 
 		searchQuery := RegExReplace(searchQuery, "\:\:(.*?)$", "")
 

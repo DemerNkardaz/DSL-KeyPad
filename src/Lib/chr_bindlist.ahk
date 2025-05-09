@@ -277,7 +277,7 @@ bindingMaps := Map(
 				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Subscript"),
 			),
 			"PgUp", Map("<#<!", (*) => FindCharacterPage(),),
-			"Home", Map("<#<!", (*) => Panel.Panel(), "<^>!<#<!", (*) => OpenPanel()),
+			"Home", Map("<#<!", (*) => Panel.Panel()),
 			"Space", Map("<#<!", (*) => GroupActivator("Spaces"),),
 			"HyphenMinus", Map("<#<!", (*) => GroupActivator("Dashes", "-"),),
 			"Apostrophe", Map("<#<!", (*) => GroupActivator("Quotes", "'"),),

@@ -613,15 +613,15 @@ Class KeyboardBinder {
 				SetTimer(ShowTooltip, 50)
 
 			Loop comboActions.Length // 2 {
+				i++
+				index := A_Index * 2 - 1
+				comboSeq := comboActions[index]
+				actionSeq := comboActions[index + 1]
 				try {
-					i++
-					index := A_Index * 2 - 1
-					comboSeq := comboActions[index]
-					actionSeq := comboActions[index + 1]
-
-					HotKey(comboSeq, actionSeq, rule ? "On" : "Off")
-				} catch
-					StrLen(combo) > 0 && MsgBox("Failed to register HotKey: " combo)
+					if comboSeq != ""
+						HotKey(comboSeq, actionSeq, rule ? "On" : "Off")
+				} catch as e
+					MsgBox("Error: " e.Message "`nCombo: " comboSeq)
 			}
 		}
 
@@ -653,7 +653,7 @@ Class KeyboardBinder {
 	static RebuilBinds(ignoreAltMode := False) {
 		this.UnregisterAll()
 		this.CurrentLayouts(&latin, &cyrillic)
-		if Cfg.Get("Layout_Remapping", , False, "bool") && (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")
+		if (Cfg.Get("Layout_Remapping", , False, "bool") && (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")) || (Scripter.selectedMode.Get("Glyph Variations") != "")
 			this.Registration(BindList.Get("Keyboard Default"), True)
 
 		this.Registration(BindList.Get("Important"), True)
@@ -797,10 +797,7 @@ Class KeyboardBinder {
 
 Class Scripter {
 	static selectorGUI := Map("Alternative Modes", Gui(), "Glyph Variations", Gui())
-	static selectorTitle := Map(
-		"Alternative Modes", (*) => App.Title("+status+version") " — " Locale.Read("gui_scripter_alt_mode"),
-		"Glyph Variations", (*) => App.Title("+status+version") " — " Locale.Read("gui_scripter_glyph_variation"),
-	)
+	static selectorTitle := Map("Alternative Modes", "", "Glyph Variations", "",)
 	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "")
 
 	static data := Map(
@@ -934,12 +931,156 @@ Class Scripter {
 				icons: ["math"],
 			},
 		],
-		"Glyph Variations", []
+		"Glyph Variations", [
+			"combining", {
+				preview: [Util.UnicodeToChars("25CC", "0363", "25CC", "0368", "25CC", "0369", "25CC", "0364", "25CC", "0365", "25CC", "0366", "25CC", "0367")],
+				fonts: ["Cabmria"],
+				locale: "glyph_mode_combining",
+				uiid: "Combining",
+				icons: ["glyph_combining"],
+			},
+			"modifier", {
+				preview: [Util.UnicodeToChars("25CC", "1D43", "25CC", "1D47", "25CC", "1D9C", "25CC", "1D48", "25CC", "1D49", "25CC", "1DA0")],
+				fonts: [],
+				locale: "glyph_mode_superscript",
+				uiid: "Superscript",
+				icons: ["glyph_superscript"],
+			},
+			"subscript", {
+				preview: [Util.UnicodeToChars("25CC", "2090", "25CC", "2091", "25CC", "2095", "25CC", "1D62", "25CC", "2C7C", "25CC", "2096", "25CC", "2097", "25CC", "2098", "25CC", "2099")],
+				fonts: [],
+				locale: "glyph_mode_subscript",
+				uiid: "Subscript",
+				icons: ["glyph_subscript"],
+			},
+			"italic", {
+				preview: [Util.UnicodeToChars("1D43C", "1D461", "1D44E", "1D459", "1D456", "1D450")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_italic",
+				uiid: "Italic",
+				icons: ["glyph_italic"],
+			},
+			"bold", {
+				preview: [Util.UnicodeToChars("1D401", "1D428", "1D425", "1D41D")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_bold",
+				uiid: "Bold",
+				icons: ["glyph_bold"],
+			},
+			"italicBold", {
+				preview: [Util.UnicodeToChars("1D470", "1D495", "1D482", "1D48D", "1D48A", "1D484", "0020", "1D469", "1D490", "1D48D", "1D485")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_italic_bold",
+				uiid: "ItalicBold",
+				icons: ["glyph_italic_bold"],
+			},
+			"sansSerif", {
+				preview: [Util.UnicodeToChars("1D5B2", "1D5BA", "1D5C7", "1D5CC", "002D", "1D5B2", "1D5BE", "1D5CB", "1D5C2", "1D5BF")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_sans_serif",
+				uiid: "SansSerif",
+				icons: ["glyph_sans_serif"],
+			},
+			"sansSerifItalic", {
+				preview: [Util.UnicodeToChars("1D61A", "1D622", "1D62F", "1D634", "002D", "1D61A", "1D626", "1D633", "1D62A", "1D627", "0020", "1D610", "1D635", "1D622", "1D62D", "1D62A", "1D624")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_sans_serif_italic",
+				uiid: "SansSerifItalic",
+				icons: ["glyph_sans_serif_italic"],
+			},
+			"sansSerifBold", {
+				preview: [Util.UnicodeToChars("1D5E6", "1D5EE", "1D5FB", "1D600", "002D", "1D5E6", "1D5F2", "1D5FF", "1D5F6", "1D5F3", "0020", "1D5D5", "1D5FC", "1D5F9", "1D5F1")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_sans_serif_bold",
+				uiid: "SansSerifBold",
+				icons: ["glyph_sans_serif_bold"],
+			},
+			"sansSerifItalicBold", {
+				preview: [Util.UnicodeToChars("1D64E", "1D656", "1D663", "1D668", "002D", "1D64E", "1D65A", "1D667", "1D65E", "1D65B", "0020", "1D644", "1D669", "1D656", "1D661", "1D65E", "1D658", "0020", "1D63D", "1D664", "1D661", "1D659")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_sans_serif_italic_bold",
+				uiid: "SansSerifItalicBold",
+				icons: ["glyph_sans_serif_italic_bold"],
+			},
+			"monospace", {
+				preview: [Util.UnicodeToChars("1D67C", "1D698", "1D697", "1D698", "1D69C", "1D699", "1D68A", "1D68C", "1D68E")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_monospace",
+				uiid: "Monospace",
+				icons: ["glyph_monospace"],
+			},
+			"smallCapital", {
+				preview: [Util.UnicodeToChars("A731", "1D0D", "1D00", "029F", "029F", "0020", "1D04", "1D00", "1D18", "026A", "1D1B", "1D00", "029F")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_small_capital",
+				uiid: "SmallCapital",
+				icons: ["glyph_small_capital"],
+			},
+			"fraktur", {
+				preview: [Util.UnicodeToChars("1D509", "1D52F", "1D51E", "1D528", "1D531", "1D532", "1D52F")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_fraktur",
+				uiid: "Fraktur",
+				icons: ["glyph_fraktur"],
+			},
+			"frakturBold", {
+				preview: [Util.UnicodeToChars("1D571", "1D597", "1D586", "1D590", "1D599", "1D59A", "1D597", "0020", "1D56D", "1D594", "1D591", "1D589")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_fraktur_bold",
+				uiid: "FrakturBold",
+				icons: ["glyph_fraktur_bold"],
+			},
+			"script", {
+				preview: [Util.UnicodeToChars("1D4AE", "1D4B8", "1D4C7", "1D4BE", "1D4C5", "1D4C9")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_script",
+				uiid: "Script",
+				icons: ["glyph_script"],
+			},
+			"scriptBold", {
+				preview: [Util.UnicodeToChars("1D4E2", "1D4EC", "1D4FB", "1D4F2", "1D4F9", "1D4FD", "0020", "1D4D1", "1D4F8", "1D4F5", "1D4ED")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_script_bold",
+				uiid: "ScriptBold",
+				icons: ["glyph_script_bold"],
+			},
+			"doubleStruck", {
+				preview: [Util.UnicodeToChars("1D53B", "1D560", "1D566", "1D553", "1D55D", "1D556", "002D", "1D54A", "1D565", "1D563", "1D566", "1D554", "1D55C")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_double_struck",
+				uiid: "DoubleStruck",
+				icons: ["glyph_double_struck"],
+			},
+			"doubleStruckItalic", {
+				preview: [Util.UnicodeToChars("2145", "2146", "2147", "2148", "2149")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_double_struck_italic",
+				uiid: "DoubleStruckItalic",
+				icons: ["glyph_double_struck_italic"],
+			},
+			"uncombining", {
+				preview: [Util.UnicodeToChars("25CC", "00B4", "25CC", "02DD", "25CC", "02D8", "25CC", "00B8", "25CC", "02D9", "25CC", "00A8", "25CC", "0060", "25CC", "00AF", "25CC", "02DB", "25CC", "02DA", "25CC", "02DC")],
+				fonts: ["Cabmria Math"],
+				locale: "glyph_mode_uncombining",
+				uiid: "Uncombining",
+				icons: ["glyph_uncombining"],
+			},
+		]
 	)
 
-
-	static sIH := InputHook("L1", "{Escape}")
 	static SelectorPanel(selectorType := "Alternative Modes") {
+		static keySymbols := Map(
+			"LeftBracket", "[",
+			"RightBracket", "]",
+			"Semicolon", ";",
+			"Apostrophe", "'",
+			"Comma", ",",
+			"Dot", ".",
+			"Slash", "/",
+		)
+
+		selectorAntagonist := selectorType != "Alternative Modes" ? "Alternative Modes" : "Glyph Variations"
+		isGlyphs := selectorType = "Glyph Variations"
 		keyCodes := [
 			"SC010",
 			"SC011",
@@ -951,6 +1092,8 @@ Class Scripter {
 			"SC017",
 			"SC018",
 			"SC019",
+			"SC01A",
+			"SC01B",
 			"SC01E",
 			"SC01F",
 			"SC020",
@@ -960,14 +1103,20 @@ Class Scripter {
 			"SC024",
 			"SC025",
 			"SC026",
+			"SC027",
+			"SC028",
 			"SC02C",
 			"SC02D",
 			"SC02E",
 			"SC02F",
 			"SC030",
 			"SC031",
-			"SC032"
+			"SC032",
+			"SC033",
+			"SC034",
+			"SC035",
 		]
+
 		Constructor() {
 			hotkeys := Map()
 			keys := keyCodes.Clone()
@@ -978,22 +1127,24 @@ Class Scripter {
 				keys.Push("")
 
 			for keyName, keyCode in KeyboardBinder.layouts.latin[latinLayout].layout
-				keyCodes.HasValue(keyCode, &i) && (keys[i] := keyName)
+				keyCodes.HasValue(keyCode, &i) && (keys[i] := keySymbols.Has(keySymbols) ? keySymbols.Get(keyName) : keyName)
 			for keyName, keyCode in KeyboardBinder.layouts.cyrillic[cyrillicLayout].layout
-				keyCodes.HasValue(keyCode, &i) && (keys[keysLen + i] := keyName)
+				keyCodes.HasValue(keyCode, &i) && (keys[keysLen + i] := keySymbols.Has(keySymbols) ? keySymbols.Get(keyName) : keyName)
 
 			prevAltMode := this.selectedMode.Get(selectorType)
 
+			this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read("gui_scripter_" (selectorType == "Alternative Modes" ? "alt_mode" : "glyph_variation")))
+
 			selectorPanel := Gui()
 			selectorPanel.OnEvent("Close", (Obj) => Destroy())
-			selectorPanel.title := this.selectorTitle[selectorType]()
+			selectorPanel.title := this.selectorTitle.Get(selectorType)
 
 			dataCount := this.data[selectorType].Length // 2
 
 			widthDefault := 256
 			heightDefault := 256
 
-			elementsPerColumn := dataCount > 21 ? 4 : 3
+			elementsPerColumn := dataCount > 21 && !isGlyphs ? 4 : 3
 			rowCount := 0
 			columnCount := 0
 			totalColumns := 0
@@ -1001,25 +1152,25 @@ Class Scripter {
 
 
 			Loop dataCount {
-				(columnCount < elementsPerColumn) ? columnCount++ : (columnCount := 1, rowCount++)
-				(totalColumns < elementsPerColumn) && totalColumns++
+				if (columnCount < elementsPerColumn) ? columnCount++ : (columnCount := 1, rowCount++)
+					(totalColumns < elementsPerColumn) && totalColumns++
 				elementCount++
 			}
 
-			(columnCount > 0 && columnCount < elementsPerColumn) && rowCount++
+			rowCount++
 
 			icoW := 32
 			icoH := 32
 
 			optionW := 386 - 24
-			optionH := (icoH * 2) + 30
+			optionH := ((icoH * 2) + 30) / (isGlyphs ? 1.5 : 1)
 			optionGap := 10
 
 			optionTitleH := 24
 
 			borderPadding := optionGap
 			panelWidth := optionW * totalColumns + optionGap * (totalColumns - 1) + 2 * borderPadding
-			panelHeight := optionH * rowCount + optionGap * (rowCount - 1) + 2 * borderPadding
+			panelHeight := optionH * rowCount + (optionGap // 2) * (rowCount - 1) + 2 * borderPadding
 
 
 			currentRow := 0
@@ -1041,12 +1192,13 @@ Class Scripter {
 
 			selectorPanel.Show("w" panelWidth " h" panelHeight " Center")
 
+			sIH := InputHook("L1", "{Escape}")
 			SetTimer((*) => SetIH(), -100)
 			return selectorPanel
 
 			AddOption(dataName, dataValue, j) {
 				optionX := borderPadding + currentCol * (optionW + optionGap)
-				optionY := borderPadding + currentRow * (optionH + optionGap)
+				optionY := borderPadding + currentRow * (optionH + (optionGap // 2))
 				icoX := optionX + 10
 				icoY := optionY + 15
 				icoShift := 0
@@ -1082,7 +1234,7 @@ Class Scripter {
 
 				for i, previewText in dataValue.preview {
 					pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
-					pt.SetFont("s10 c333333", dataValue.fonts.length > 0 ? dataValue.fonts[dataValue.fonts.length > 1 ? i : 1] : "Segoe UI")
+					pt.SetFont("s" (isGlyphs ? 11 : 10) " c333333", dataValue.fonts.length > 0 ? dataValue.fonts[dataValue.fonts.length > 1 ? i : 1] : "Segoe UI")
 
 					scriptPreviewY += optionTitleH - 5
 				}
@@ -1099,8 +1251,8 @@ Class Scripter {
 			}
 
 			OptionSelect(name) {
-				currentISP := InputScriptProcessor.options.interceptionInputMode
 
+				currentISP := InputScriptProcessor.options.interceptionInputMode
 				if name != "" {
 					currentMode := this.selectedMode.Get(selectorType)
 
@@ -1110,18 +1262,19 @@ Class Scripter {
 							WarningISP(name, currentISP, selectorType)
 							return
 						}
-
-						this.selectedMode.Set(selectorType, currentMode != name ? name : "")
-						altMode := this.selectedMode.Get(selectorType)
-
-						if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser) {
-							if altMode != "" {
-								bingingsNames := this.GetData(selectorType, altMode).bindings
-								KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
-							} else
-								KeyboardBinder.RebuilBinds()
-						}
 					}
+
+					this.selectedMode.Set(selectorType, currentMode != name ? name : "")
+					altMode := this.selectedMode.Get(selectorType)
+
+					if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser) {
+						if altMode != "" && selectorType = "Alternative Modes" {
+							bingingsNames := this.GetData(selectorType, altMode).bindings
+							KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), True)
+						} else
+							KeyboardBinder.RebuilBinds()
+					}
+
 				} else
 					Destroy()
 
@@ -1136,15 +1289,15 @@ Class Scripter {
 			}
 
 			SetIH() {
-				this.sIH.Start()
-				this.sIH.Wait()
+				sIH.Start()
+				sIH.Wait()
 
-				if this.sIH.EndKey = "Escape" {
+				if sIH.EndKey = "Escape" {
 					Destroy()
 					return
 				}
 
-				input := StrUpper(this.sIH.Input)
+				input := StrUpper(sIH.Input)
 
 				if hotkeys.Has(input)
 					OptionSelect(hotkeys.Get(input))
@@ -1155,19 +1308,26 @@ Class Scripter {
 
 			Destroy() {
 				selectorPanel.Destroy()
-				this.sIH.Stop()
-				if prevAltMode != ""
+				selectorPanel := Gui()
+				sIH.Stop()
+				if prevAltMode != "" && !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser)
 					KeyboardBinder.RebuilBinds()
 				return
 			}
 		}
 
-		if IsGuiOpen(this.selectorTitle[selectorType]()) {
-			WinActivate(this.selectorTitle[selectorType]())
+		if IsGuiOpen(this.selectorTitle.Get(selectorType)) {
+			WinActivate(this.selectorTitle.Get(selectorType))
 		} else {
+			if IsGuiOpen(this.selectorTitle.Get(selectorAntagonist)) {
+				this.selectorGUI[selectorAntagonist].Destroy()
+				this.selectorGUI[selectorAntagonist] := Gui()
+				Sleep 200
+			}
+
 			this.selectorGUI[selectorType] := Constructor()
 			this.selectorGUI[selectorType].Show()
-			WinSetAlwaysOnTop(True, this.selectorTitle[selectorType]())
+			WinSetAlwaysOnTop(True, this.selectorTitle.Get(selectorType))
 		}
 	}
 
@@ -1224,7 +1384,7 @@ Class BindHandler {
 					if RegExMatch(rawMatch[1], "\\n")
 						lineBreaks := True
 				} else {
-					alt := AlterationActiveName
+					alt := Scripter.selectedMode.Get("Glyph Variations")
 					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
 						alt := ChrLib.ValidateAlt(alterationMatch[1])
 						character := RegExReplace(character, "\:\:.*$", "")

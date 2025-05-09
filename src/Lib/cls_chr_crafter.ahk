@@ -8,7 +8,7 @@ Class ChrCrafter {
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 
-		ChrCrafter.modifiedCharsType := GetModifiedCharsType()
+		ChrCrafter.modifiedCharsType := Scripter.selectedMode.Get("Glyph Variations")
 		ChrCrafter.prompt := ConvertFromHexaDecimal(Cfg.Get("Ligature", "LatestPrompts"))
 
 		ChrCrafter.%this.compositingMode%Mode()
