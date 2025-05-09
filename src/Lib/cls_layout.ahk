@@ -432,14 +432,17 @@ Class KeyboardBinder {
 		if this.disabledByMonitor || this.disabledByUser {
 			iconCode := App.indexIcos["disabled"]
 		} else {
-			currentAlt := Scripter.selectedMode["Alternative Modes"]
+			currentAlt := Scripter.selectedMode.Get("Alternative Modes")
+			currentGlyph := Scripter.selectedMode.Get("Glyph Variations")
 			currentISP := InputScriptProcessor.options.interceptionInputMode
+			mode := currentAlt != "" ? "Alternative Modes" : "Glyph Variations"
+			current := currentAlt != "" ? currentAlt : currentGlyph
 
 			if currentISP != "" && App.indexIcos.Has(currentISP) {
 				iconCode := App.indexIcos[currentISP]
 				trayTitle .= "`n" Locale.Read("script_processor_mode_" currentISP)
-			} else if currentAlt != "" {
-				data := Scripter.GetData(, currentAlt)
+			} else if currentAlt != "" || currentGlyph != "" {
+				data := Scripter.GetData(mode, current)
 				icons := data.icons
 				iconCode := App.indexIcos[icons.Length > 1 ? icons[lang = "ru" ? 2 : 1] : icons[1]]
 				trayTitle .= "`n" Locale.Read(data.locale)
@@ -1332,6 +1335,7 @@ Class Scripter {
 		local IH := InputHook("L1")
 		IH.VisibleNonText := False
 		IH.KeyOpt("{All}", "E")
+		IH.KeyOpt("{LShift}{RShift}{LControl}{RControl}{LAlt}{RAlt}{LWin}{RWin}", "-E")
 		IH.Start()
 
 		SetTimer(WaitCheckGUI, 50)
