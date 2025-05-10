@@ -155,7 +155,7 @@ Class App {
 		App.tray.Add(labels.app, (*) => Run(App.URL)), App.tray.SetIcon(labels.app, App.icoDLL, App.indexIcos["app"])
 
 		if Update.available
-			App.tray.Add(labels.update, (*) => Update.Get()), App.tray.SetIcon(labels.update, ImageRes, 176)
+			App.tray.Add(labels.update, (*) => Update.Check(True)), App.tray.SetIcon(labels.update, ImageRes, 176)
 
 		App.tray.Add()
 		App.tray.Add(labels.openPanel, (*) => Panel.Panel())
@@ -254,7 +254,7 @@ Class App {
 
 	static Title(options := ["title"]) {
 		static titleItems := [
-			"decoded", "Diacritics-Spaces-Letters KeyPad",
+			"decoded", "Diacritic-Spaces-Letters KeyPad",
 			"title", "DSL KeyPad",
 			"status", "(αλφα)",
 			"version", "— " this.Ver(),

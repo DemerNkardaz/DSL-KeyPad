@@ -182,7 +182,7 @@ Class Cfg {
 
 			if Update.available || autocheckOff {
 				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Locale.ReadInject((autocheckOff ? "gui_options_update_check" : "gui_options_get_update"), [Update.availableVersion]))
-				updateBtn.OnEvent("Click", (*) => autocheckOff ? Update.Check(True) : Update.Get())
+				updateBtn.OnEvent("Click", (*) => Update.Check(True))
 
 			} else {
 				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", Locale.Read("gui_options_update_absent"))
@@ -624,6 +624,7 @@ Class Options {
 		}
 
 		App.SetTrayItems()
+		IsGuiOpen(Panel.panelTitle) && Panel.Panel(True)
 	}
 
 	static SwitchVirualLayout(CB, category) {

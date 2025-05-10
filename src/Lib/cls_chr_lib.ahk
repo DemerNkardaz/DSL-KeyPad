@@ -2,6 +2,7 @@ Class ChrEntry {
 	index := 0
 	proxy := ""
 	unicode := ""
+	unicodeBlock := ""
 	sequence := []
 	result := []
 	html := ""
@@ -20,6 +21,7 @@ Class ChrEntry {
 		secondName: False,
 		useLetterLocale: False,
 		layoutTitles: False,
+		referenceLocale: "",
 		legend: "",
 		altLayoutKey: "",
 		altSpecialKey: "",
@@ -317,7 +319,7 @@ Class ChrLib {
 
 	static Print() {
 		lang := Language.Get()
-		printPath := App.paths.user "\printed_pairs.html"
+		printPath := App.paths.temp "\printed_pairs.html"
 		tableRows := ""
 
 		if FileExist(printPath)
@@ -748,6 +750,7 @@ Class ChrLib {
 
 	static ProcessReferences(targetEntry, sourceEntry, index) {
 		for reference in ["recipe", "tags", "groups"] {
+
 			if sourceEntry.%reference%.Length > 0 && sourceEntry.%reference%[sourceEntry.%reference%.Length] is Array {
 				if sourceEntry.%reference%[index].Length > 0 {
 					targetEntry.%reference% := sourceEntry.%reference%[index].Clone()
@@ -761,7 +764,7 @@ Class ChrLib {
 					}
 
 				} else {
-					targetEntry.DeleteProp(reference)
+					targetEntry.%reference% := []
 				}
 			}
 		}
@@ -787,8 +790,11 @@ Class ChrLib {
 	static CloneOptions(sourceOptions, index) {
 		tempOptions := sourceOptions.Clone()
 		for key, value in sourceOptions.OwnProps() {
-			if sourceOptions.%key% is Array && key != "groupKey" && sourceOptions.%key%.Length > 0 {
-				tempOptions.%key% := sourceOptions.%key%[index]
+			if sourceOptions.%key% is Array && sourceOptions.%key%.Length > 0 {
+				if sourceOptions.%key%[index] is Array
+					tempOptions.%key% := sourceOptions.%key%[index].Clone()
+				else
+					tempOptions.%key% := sourceOptions.%key%[index]
 			}
 		}
 		return tempOptions
@@ -821,10 +827,10 @@ Class ChrLib {
 			for i, recipe in tempRecipe {
 				tempRecipe[i] := RegExReplace(recipe, "\[.*?\]", SubStr(entry.data.case, 1, 1))
 				tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry.data.letter)
-				if RegExMatch(tempRecipe[i], "\/(.*?)\/", &match) {
+				if RegExMatch(tempRecipe[i], "\/(.*?)\/", &match) && match[1] != "" {
 					tempRecipe[i] := RegExReplace(tempRecipe[i], "\/(.*?)\/", entry.data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
 				}
-				if RegExMatch(tempRecipe[i], "\\(.*?)\\", &match) {
+				if RegExMatch(tempRecipe[i], "\\(.*?)\\", &match) && match[1] != "" {
 					tempRecipe[i] := RegExReplace(tempRecipe[i], "\\(.*?)\\", entry.data.case = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
 				}
 			}
@@ -962,6 +968,10 @@ Class ChrLib {
 			; refinedEntry.sequence := MyRecipes.HandleResult(refinedEntry.result.Clone())
 			refinedEntry.unicode := Util.ChrToUnicode(SubStr(refinedEntry.result[1], 1, 1))
 		}
+
+		try
+			if ChrBlock.GetBlock(refinedEntry.unicode, , &block) && block.name != "Unknown"
+				refinedEntry.unicodeBlock := block.block "`n" block.name
 
 
 		character := Util.UnicodeToChar(refinedEntry.unicode)

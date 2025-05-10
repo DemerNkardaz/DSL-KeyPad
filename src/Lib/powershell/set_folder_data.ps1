@@ -84,7 +84,7 @@ try {
 [.ShellClassInfo]
 ConfirmFileOp=0
 IconResource=Bin\DSLKeyPad_App_Icons.dll,0
-InfoTip=Diacritic,${nbspChar}Spaces${nbspChar}&${nbspChar}Letters${nbspChar}KeyPad. A${nbspChar}multilingual${nbspChar}unicode${nbspChar}input${nbspChar}tool @Yalla${nbspChar}Nkardaz;${nbspChar}GitHub${enDash}SourceForge
+InfoTip=Diacritics-Spaces-Letters${nbspChar}KeyPad. A${nbspChar}multilingual${nbspChar}unicode${nbspChar}input${nbspChar}tool @Yalla${nbspChar}Nkardaz;${nbspChar}GitHub${enDash}SourceForge
 [ViewState]
 Mode=
 Vid=

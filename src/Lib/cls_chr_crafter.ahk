@@ -168,7 +168,7 @@ Class ChrCrafter {
 						}
 					}
 
-					blockShown := codesArray.Length > 0 ? CharacterInserter.GetBlock(codesArray[codesArray.Length], insertType) : Locale.Read("tooltip_compose_" StrLower(insertType) "_range")
+					blockShown := codesArray.Length > 0 ? ChrBlock.GetTooltip(codesArray[codesArray.Length], insertType) : Locale.Read("tooltip_compose_" StrLower(insertType) "_range")
 					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) "`n" blockShown)
 				}
 

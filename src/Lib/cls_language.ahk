@@ -283,12 +283,33 @@ Class Locale {
 	static LocalesGeneration(entryName, entry) {
 		nbsp := Chr(160)
 		pfx := "gen_"
+
 		useLetterLocale := entry.options.HasOwnProp("useLetterLocale") ? entry.options.useLetterLocale : False
-		letter := (entry.symbol.HasOwnProp("letter") && StrLen(entry.symbol.letter) > 0) ? entry.symbol.letter : entry.data.letter
-		lScript := entry.data.script
-		lCase := entry.data.case
-		lType := entry.data.type
-		lPostfixes := entry.data.postfixes
+
+		referenceLocale := entry.options.HasOwnProp("referenceLocale") && entry.options.referenceLocale != "" ? entry.options.referenceLocale : False
+
+		entryData := entry.data
+		entrySymbol := entry.symbol
+
+		if referenceLocale {
+			referenceName := entryName
+			if RegExMatch(referenceLocale, "i)^(.*?)\$", &refMatch) {
+				referenceName := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1")
+			} else
+				referenceName := referenceLocale
+
+			if ChrLib.entries.HasOwnProp(referenceName) {
+				entryData := ChrLib.GetValue(referenceName, "data")
+				entrySymbol := ChrLib.GetValue(referenceName, "symbol")
+			}
+			MsgBox(referenceName)
+		}
+
+		letter := (entrySymbol.HasOwnProp("letter") && StrLen(entrySymbol.letter) > 0) ? entrySymbol.letter : entryData.letter
+		lScript := entryData.script
+		lCase := entryData.case
+		lType := entryData.type
+		lPostfixes := entryData.postfixes
 		lVariant := lType = "digraph" ? 2 : lType = "numeral" ? 3 : 1
 
 		langCodes := ["en", "ru", "en_alt", "ru_alt"]

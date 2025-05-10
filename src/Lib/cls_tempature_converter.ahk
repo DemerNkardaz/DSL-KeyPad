@@ -156,14 +156,15 @@ Class TemperatureConversion {
 		callback := ObjBindMethod(this, 'Converter')
 
 		for hsKey in hsKeys {
-			HotString(":C?0:ct" hsKey, callback)
+			HotString(":*C?0:\tcalc{" hsKey "}", callback)
 		}
 	}
 
 	static Converter(conversionType) {
 		hwnd := WinActive('A')
 
-		conversionFromTo := RegExReplace(conversionType, "^.*t", "")
+		RegExMatch(conversionType, "\{(.*?)\}", &conversionFromTo)
+		conversionFromTo := conversionFromTo[1]
 
 		labelFrom := (RegExMatch(conversionFromTo, "^(ra|ro|re|me)")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
 		labelTo := (RegExMatch(conversionFromTo, "(ra|ro|re|me)$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
@@ -196,7 +197,7 @@ Class TemperatureConversion {
 
 			SendText(temperatureValue)
 		} catch {
-			SendText(RegExReplace(conversionType, "^.*?:.*?:", ""))
+			return ;SendText(RegExReplace(conversionType, "^.*?:.*?:", ""))
 		}
 		return
 	}
@@ -267,8 +268,8 @@ Class TemperatureConversion {
 				"Deutsch", ".",
 				"Russian", chars.numberSpace,
 				"Canada", chars.numberSpace,
-				"Switzerland-Comma", ChrLib.Get("quote_right_single"),
-				"Switzerland-Dot", ChrLib.Get("quote_right_single"),
+				"Switzerland-Comma", ChrLib.Get("quote_right"),
+				"Switzerland-Dot", ChrLib.Get("quote_right"),
 			)
 
 			integerPart := RegExReplace(integerPart, "\B(?=(\d{3})+(?!\d))", decimalSeparators[regionalType])

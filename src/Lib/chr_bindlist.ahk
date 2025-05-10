@@ -722,6 +722,8 @@ bindingMaps := Map(
 			"LeftBracket", Map(
 				"<^>!<!", ["left_cjk_tortoise_shell"],
 				"<^>!<!<+", ["left_cjk_corner_bracket"],
+				"<^>!<!>+", ["left_cjk_title_bracket"],
+				"<^>!<!<+>+", ["left_double_cjk_title_bracket"],
 				"<^>!", ["left_bracket_with_quill"],
 				"<^>!>+", ["left_white_bracket"],
 				"<^>!<+", ["left_white_tortoise_shell"],
@@ -729,6 +731,8 @@ bindingMaps := Map(
 			"RightBracket", Map(
 				"<^>!<!", ["right_cjk_tortoise_shell"],
 				"<^>!<!<+", ["right_cjk_corner_bracket"],
+				"<^>!<!>+", ["right_cjk_title_bracket"],
+				"<^>!<!<+>+", ["right_double_cjk_title_bracket"],
 				"<^>!", ["right_bracket_with_quill"],
 				"<^>!>+", ["right_white_bracket"],
 				"<^>!<+", ["right_white_tortoise_shell"],
@@ -742,24 +746,24 @@ bindingMaps := Map(
 			),
 			"Comma", Map(
 				"<^>!", ["quote_left_double"],
-				"<^>!<+", ["quote_left_single"],
+				"<^>!<+", ["quote_left"],
 				"<^>!>+", ["quote_low_9_double"],
-				"<^>!<+>+", ["quote_low_9_single"],
-				"<^>!<!", ["france_left"],
-				"<^>!<!<+", ["france_single_left"]
+				"<^>!<+>+", ["quote_low_9"],
+				"<^>!<!", ["quote_angle_left_double"],
+				"<^>!<!<+", ["quote_angle_left"]
 			),
 			"Dot", Map(
 				"<^>!", ["quote_right_double"],
-				"<^>!<+", ["quote_right_single"],
+				"<^>!<+", ["quote_right"],
 				"<^>!>+", ["quote_low_9_double_reversed"],
-				"<^>!<!", ["france_right"],
-				"<^>!<!<+", ["france_single_right"]
+				"<^>!<!", ["quote_angle_right_double"],
+				"<^>!<!<+", ["quote_angle_right"]
 			),
 			"Tilde", Map(
 				"<^>!", "bullet",
 				"<^>!<!", "bullet_hyphen",
 				"<^>!<+", "interpunct",
-				"<^>!>+", "quote_right_single",
+				"<^>!>+", "quote_right",
 				"<^>!<!<+", "bullet_triangle",
 				"<^>!<!>+", "bullet_white",
 				">+", "tilde_reversed"
@@ -994,12 +998,12 @@ bindingMaps := Map(
 				"<^>!<+", ["cyr_c_let_a__diaeresis", "cyr_s_let_a__diaeresis"]
 			),
 			"Б", Map(
-				"<^>!", ["france_left"],
-				"<^>!<+", ["quote_low_9_double"],
+				"<^>!", ["quote_angle_left_double"],
+				"<^>!<+", ["quote_left_double_ghost_ru"],
 				"<^>!>+", ["quote_low_9_double"],
 				"<^>!<!", ["quote_left_double"],
-				"<^>!<!<+", ["france_single_left"],
-				"<^>!<+>+", ["quote_low_9_single"]
+				"<^>!<!<+", ["quote_angle_left"],
+				"<^>!<+>+", ["quote_low_9"],
 			),
 			"В", Map(),
 			"Г", Map(
@@ -1118,11 +1122,11 @@ bindingMaps := Map(
 				"<^>!<+>+", ["cyr_c_let_schwa_diaeresis", "cyr_s_let_schwa_diaeresis"],
 			),
 			"Ю", Map(
-				"<^>!", ["france_right"],
+				"<^>!", ["quote_angle_right_double"],
 				"<^>!<+", ["quote_right_double_ghost_ru"],
 				"<^>!>+", ["quote_low_9_double_reversed"],
 				"<^>!<!", ["quote_right_double"],
-				"<^>!<!<+", ["france_single_right"]
+				"<^>!<!<+", ["quote_angle_right"]
 			),
 			"Я", Map(
 				"<^>!", ["cyr_c_let_yus_little", "cyr_s_let_yus_little"],

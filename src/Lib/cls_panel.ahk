@@ -184,7 +184,7 @@ Class Panel {
 					ibBodyX + ibPreviewFrameX, 470, ibPreviewBoxEditW, ibPreviewBoxEditH),
 				unicodeTitle: Format("x{} y{} w{} h{} 0x80 BackgroundTrans",
 					ibBodyX + ibPreviewFrameX, 455, ibPreviewBoxEditW, ibPreviewBoxEditH),
-				unicodeText: "U+0000",
+				unicodeText: "0000",
 				html: Format("x{} y{} w{} h{} readonly Center -VScroll -HScroll",
 					ibBodyX + ibPreviewFrameX, 510, ibPreviewBoxEditW, ibPreviewBoxEditH),
 				htmlText: "&#x0000;",
@@ -203,6 +203,8 @@ Class Panel {
 				keyPreviewSetText: "",
 				legendButton: Format("x{} y{} h{} w{}",
 					ibPreviewButtonOffsetX, ibPreviewFrameY - 1, ibPreviewButtonW, ibPreviewButtonH),
+				unicodeBlockLabel: Format("x{} y{} w{} h{} Center 0x80 BackgroundTrans",
+					ibBodyX + ibPreviewFrameX, (ibBodyY + ibBodyH) - 34, ibPreviewBoxEditW, ibPreviewBoxEditH + 8),
 			},
 			commandsInfoBox: {
 				commandsTree: Format("vCommandTree x{} y{} w{} h{} -HScroll",
@@ -294,6 +296,7 @@ Class Panel {
 				keyPreviewSet: { x: ibBodyX + ibPreviewFrameX, y: 301, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
 				keyPreviewSetText: "",
 				legendButton: { x: ibPreviewButtonOffsetX, y: ibPreviewFrameY - 1, w: ibPreviewButtonW, h: ibPreviewButtonH },
+				unicodeBlockLabel: { x: ibBodyX + ibPreviewFrameX, y: (ibBodyY + ibBodyH) - 30, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
 			},
 			commandsInfoBox: {
 				commandsTree: { x: commandsTreeX, y: commandsTreeY, w: commandsTreeW, h: commandsTreeH },
@@ -395,13 +398,46 @@ Class Panel {
 		}
 	}
 
-	static Panel() {
+	static Panel(redraw := False) {
+		UISets := this.GetUISets()
+		languageCode := Language.Get()
+
+		title := App.Title("+status+version") " — " Locale.Read("gui_panel")
+
+		panelTabList := { Obj: {}, Arr: [] }
+		panelColList := { default: [], smelting: [] }
+
+		for _, localeKey in ["diacritics", "spaces", "smelting", "fastkeys", "scripts", "commands", "about", "useful", "changelog"] {
+			localeText := Locale.Read("tab_" localeKey)
+			panelTabList.Obj.%localeKey% := localeText
+			panelTabList.Arr.Push(localeText)
+		}
+
+		for _, localeKey in ["name", "key", "view", "unicode", "entry_title", "entry_key"] {
+			panelColList.default.Push(Locale.Read("col_" localeKey))
+		}
+
+		for _, localeKey in ["name", "recipe", "result", "unicode", "entry_title", "entry_key"] {
+			panelColList.smelting.Push(Locale.Read("col_" localeKey))
+		}
+
+		if redraw {
+			IsGuiOpen(this.panelTitle) && ReConstructor()
+
+			ReConstructor() {
+				this.panelTitle := title
+
+				panelWindow := this.PanelGUI
+				panelTabs := panelWindow["Tabs"]
+
+				panelWindow.title := this.panelTitle
+
+			}
+			return
+		}
 
 		Constructor() {
-			this.panelTitle := App.Title("+status+version") " — " Locale.Read("gui_panel")
-			UISets := this.GetUISets()
-
-			languageCode := Language.Get()
+			this.panelTitle := title
 
 			screenWidth := A_ScreenWidth
 			screenHeight := A_ScreenHeight
@@ -432,23 +468,6 @@ Class Panel {
 			panelWindow.title := this.panelTitle
 
 			panelWindow.OnEvent("Size", panelResize)
-
-			panelTabList := { Obj: {}, Arr: [] }
-			panelColList := { default: [], smelting: [] }
-
-			for _, localeKey in ["diacritics", "spaces", "smelting", "fastkeys", "scripts", "commands", "about", "useful", "changelog"] {
-				localeText := Locale.Read("tab_" localeKey)
-				panelTabList.Obj.%localeKey% := localeText
-				panelTabList.Arr.Push(localeText)
-			}
-
-			for _, localeKey in ["name", "key", "view", "unicode", "entry_title", "entry_key"] {
-				panelColList.default.Push(Locale.Read("col_" localeKey))
-			}
-
-			for _, localeKey in ["name", "recipe", "result", "unicode", "entry_title", "entry_key"] {
-				panelColList.smelting.Push(Locale.Read("col_" localeKey))
-			}
 
 			LV_Content := {
 				diacritics: ArrayMerge(
@@ -805,9 +824,7 @@ Class Panel {
 			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_vietnamese") '<a href="https://chunom.org">Chữ Nôm</a>')
 
 			panelTabs.UseTab(panelTabList.Obj.changelog)
-
 			panelWindow.AddGroupBox(UISets.changelogInfoBox.body, "🌐 " . Locale.Read("tab_changelog"))
-			Update.InsertChangelog(panelWindow, UISets.changelogInfoBox.content)
 
 			panelTabs.UseTab()
 
@@ -847,7 +864,16 @@ Class Panel {
 			return panelWindow
 		}
 
-		if IsGuiOpen(this.panelTitle) {
+		PostConstructor() {
+			UISets := this.GetUISets()
+			panelWindow := this.PanelGUI
+			panelTabs := panelWindow["Tabs"]
+
+			panelTabs.UseTab(panelTabList.Obj.changelog)
+			Update.InsertChangelog(panelWindow, UISets.changelogInfoBox.content)
+		}
+
+		if IsGuiOpen(this.panelTitle) && !redraw {
 			WinActivate(this.panelTitle)
 		} else {
 			this.PanelGUI := Constructor()
@@ -858,8 +884,9 @@ Class Panel {
 					this.LV_SetRandomPreview(each)
 				}
 			}
-		}
 
+			IsGuiOpen(this.panelTitle) && PostConstructor()
+		}
 	}
 
 	static AddCharactersTab(options) {
@@ -920,6 +947,7 @@ Class Panel {
 			keyPreviewSet: panelWindow.AddText("v" options.prefix "KeyPreviewSet " UISets.infoBox.keyPreviewSet, UISets.infoBox.keyPreviewSetText).SetFont("s12"),
 			keyPreview: panelWindow.AddEdit("v" options.prefix "KeyPreview " UISets.infoBox.keyPreview, "N/A"),
 			legendButton: panelWindow.AddButton("v" options.prefix "LegendButton " UISets.infoBox.legendButton, Chr(0x1F4D6)),
+			unicodeBlockLabel: panelWindow.AddText("v" options.prefix "UnicodeBlockLabel " UISets.infoBox.unicodeBlockLabel, "").SetFont("s9"),
 		}
 
 		GroupBoxOptions.preview.SetFont("s" UISets.infoFonts.previewSize, Fonts.fontFaces["Default"].name)
@@ -1026,7 +1054,7 @@ Class Panel {
 		if StrLen(characterEntry) < 1 {
 			this.PanelGUI[options.prefix "Title"].Text := "N/A"
 			this.PanelGUI[options.prefix "Symbol"].Text := ChrLib.Get("dotted_circle")
-			this.PanelGUI[options.prefix "Unicode"].Text := "U+0000"
+			this.PanelGUI[options.prefix "Unicode"].Text := "0000"
 			this.PanelGUI[options.prefix "HTML"].Text := "&#x0000;"
 			this.PanelGUI[options.prefix "Alt"].Text := "N/A"
 			this.PanelGUI[options.prefix "AltPages"].Text := ""
@@ -1047,6 +1075,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := ""
 			this.PanelGUI[options.prefix "LegendButton"].Enabled := False
 			this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => "")
+			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := ""
 
 			return
 		} else {
@@ -1165,6 +1194,9 @@ Class Panel {
 				this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => "")
 			}
 		}
+
+		if value.unicodeBlock != ""
+			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := value.unicodeBlock
 
 	}
 

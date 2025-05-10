@@ -1,10 +1,12 @@
 Class Update {
+	static jsDelivr := "https://cdn.jsdelivr.net/gh/DemerNkardaz/DSL-KeyPad"
 	static releasesJson := "https://data.jsdelivr.com/v1/package/gh/DemerNkardaz/DSL-KeyPad"
 	static fallbackReleases := App.API "/releases"
 	static filesManifest := "DSLKeyPad-FilesManifest.txt"
 	static filesManifestPath := App.paths.temp "\" this.filesManifest
 	static available := False
 	static availableVersion := ""
+	static versions := []
 
 	static __New() {
 		autocheckOff := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
@@ -15,19 +17,25 @@ Class Update {
 	static Repair() {
 		this.Get(True)
 	}
+
 	static Get(force := False) {
 		if !this.available && !force {
-			MsgBox(Locale.Read("update_absent"))
+			MsgBox(Locale.Read("gui_options_update_absent"), App.Title(), "Iconi")
 			return
 		} else {
 			if force {
-				acceptBox := MsgBox(Locale.Read("update_repair"), App.Title() " — " Locale.Read("update_repair_title"), "YesNo")
+				acceptBox := MsgBox(Locale.Read("gui_options_update_repair"), App.Title() " — " Locale.Read("gui_options_update_repair_title"), "YesNo Icon!")
 				if acceptBox = "No" || acceptBox = "Cancel" {
 					return
 				}
 				this.CompareVersions(force)
 			}
-			this.Download()
+
+			if (this.versions is Integer || this.versions is Array && this.versions.Length == 0) {
+				MsgBox(Locale.Read("gui_options_update_cannot_be_executed"), App.Title() " — " Locale.Read("gui_options_update_repair_title"), "Iconx")
+				return
+			} else
+				this.Download()
 		}
 	}
 
@@ -45,13 +53,13 @@ Class Update {
 			}
 			*/
 		} catch as e {
-			MsgBox(Locale.Read("bundle_creation_failed") "`n`n" e.Message, App.Title())
+			MsgBox(Locale.Read("bundle_creation_failed") "`n`n" e.Message, App.Title(), "Iconx")
 		}
 	}
 
 	static Download(version := this.availableVersion, fallbackSourceForge := False) {
 		failed := False
-		failedMessage := Locale.Read("update_failed")
+		failedMessage := Locale.Read("gui_options_update_failed")
 
 		gitRelease := App.URL "/releases/download/" version "/DSL-KeyPad-" version ".zip"
 		sourceForgeRelease := "https://deac-ams.dl.sourceforge.net/project/dsl-keypad/" version "/DSL-KeyPad-" version ".zip?viasf=1"
@@ -76,7 +84,7 @@ Class Update {
 
 			if exitCode != 0 {
 				failed := True
-				failedMessage := Locale.ReadInject("update_failed_pshell", [exitCode])
+				failedMessage := Locale.ReadInject("gui_options_update_failed_pshell", [exitCode])
 			}
 		} catch
 			failed := True
@@ -85,12 +93,12 @@ Class Update {
 			if !fallbackSourceForge {
 				Update.Download(version, True)
 			} else {
-				MsgBox(failedMessage, App.Title())
+				MsgBox(failedMessage, App.Title(), "Iconx")
 			}
 		}
 
 		if !failed {
-			MsgBox(Locale.ReadInject("update_successful", [App.Ver("+hotfix+postfix"), version]), App.Title())
+			MsgBox(Locale.ReadInject("gui_options_update_successful", [App.Ver("+hotfix+postfix"), version]), App.Title(), "Iconi")
 			this.RemoveLegacyAssets()
 			Reload
 		}
@@ -111,11 +119,11 @@ Class Update {
 			}
 
 			if filesToDelete.Length > 0 {
-				MB := MsgBox(Locale.ReadInject("update_found_legacy_files", [filesToDelete.ToString('`n')]), App.Title(), "YesNo")
+				MB := MsgBox(Locale.ReadInject("gui_options_update_found_legacy_files", [filesToDelete.ToString('`n')]), App.Title(), "YesNo Icon!")
 				if MB = "Yes" {
 					for relative in filesToDelete
 						FileDelete(App.paths.dir relative)
-					MsgBox(Locale.ReadInject("update_found_legacy_files_deleted"), App.Title())
+					MsgBox(Locale.ReadInject("gui_options_update_found_legacy_files_deleted"), App.Title(), "Iconi")
 				}
 				return
 			}
@@ -126,20 +134,25 @@ Class Update {
 
 	static Check(withAcceptUpdate := False) {
 		this.versions := this.ChekVersions()
+		if this.versions is Integer
+			return this.versions
+
 		this.CompareVersions()
 
 		if withAcceptUpdate {
 			if this.available {
-				acceptBox := MsgBox(Locale.ReadInject("gui_options_get_update_acception", [this.availableVersion]), App.Title(), "YesNo")
+				acceptBox := MsgBox(Locale.ReadInject("gui_options_get_update_acception", [this.availableVersion]), App.Title(), "YesNo Iconi")
 				if acceptBox = "Yes" || acceptBox = "OK"
 					this.Get()
 			} else
-				MsgBox(Locale.Read("gui_options_update_absent"))
+				MsgBox(Locale.Read("gui_options_update_absent"), App.Title())
 		}
 	}
 
 	static CompareVersions(force := False) {
 		currentVersion := App.Ver("+hotfix", [])
+		if this.versions is Integer
+			return
 		for version in this.versions {
 			if RegExMatch(version, "(\d+)\.(\d+)\.(\d+)\.(\d+)", &digitMatches) {
 				shouldUpdate := False
@@ -177,30 +190,30 @@ Class Update {
 	}
 
 	static ChekVersions(useFallback := False) {
-		whr := ComObject("WinHttp.WinHttpRequest.5.1")
-		whr.Open("GET", useFallback ? this.fallbackReleases : this.releasesJson, true)
+		http := ComObject("WinHttp.WinHttpRequest.5.1")
+		http.SetTimeouts(1500, 1500, 1500, 1500)
+		http.Open("GET", useFallback ? this.fallbackReleases : this.releasesJson, true)
 		failed := False
 
 		try {
-			whr.Send()
-			whr.WaitForResponse()
+			http.Send()
+			http.WaitForResponse(1.5)
+			if (http.Status != 200)
+				failed := True
 		}
 		catch
-			failed := True
-
-		if (whr.Status != 200)
 			failed := True
 
 		if failed {
 			if !useFallback {
 				return this.ChekVersions(True)
 			} else {
-				MsgBox Locale.Read("update_check_failed")
-				return []
+				MsgBox(Locale.Read("gui_options_update_check_failed"), App.Title(), "Iconx")
+				return 1
 			}
 		}
 
-		responseText := whr.ResponseText
+		responseText := http.ResponseText
 		versions := this.ExtractVersionsArray(responseText, useFallback)
 		return versions
 	}
@@ -242,24 +255,32 @@ Class Update {
 			targetGUI.AddEdit(UISettings, Locale.Read("warning_nointernet"))
 	}
 
-	static GetChangelog(url := App.refsHeads["main"] "/CHANGELOG.md") {
+	static GetChangelog(url := this.jsDelivr "@latest/CHANGELOG.md") {
+		static fallbackURL := App.refsHeads["main"] "/CHANGELOG.md"
+		failed := False
+
 		languageCode := Language.Get()
 		http := ComObject("WinHttp.WinHttpRequest.5.1")
-		http.Open("GET", url, true)
+		http.SetTimeouts(1500, 1500, 1500, 1500)
+		http.Open("GET", url, True)
 		try {
 			http.Send()
-			http.WaitForResponse()
+			http.WaitForResponse(1.5)
+			if http.Status != 200
+				failed := True
 		}
 		catch
-			return False
-		if (http.Status != 200)
-			return False
+			failed := True
 
-		content := http.ResponseText
-		pattern := '<details[^>]*lang="' LanguageCode '"[^>]*>[\s\S]*?<summary>[\s\S]*?</summary>([\s\S]*?)</details>'
+		if failed && url != fallbackURL
+			return this.GetChangelog(fallbackURL)
+		else {
+			content := http.ResponseText
+			pattern := '<details[^>]*lang="' LanguageCode '"[^>]*>[\s\S]*?<summary>[\s\S]*?</summary>([\s\S]*?)</details>'
 
-		if RegExMatch(content, pattern, &match) {
-			return match[1]
+			if RegExMatch(content, pattern, &match) {
+				return match[1]
+			}
 		}
 		return False
 	}
@@ -285,7 +306,6 @@ Class Update {
 		output := str
 		return str
 	}
-
 }
 
 ; MsgBox("jsDelivr: " Update.ChekVersions().ToString())

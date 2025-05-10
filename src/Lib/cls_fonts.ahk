@@ -56,18 +56,19 @@ Class Fonts {
 		DirCreate(tempFolder)
 
 		http := ComObject("WinHttp.WinHttpRequest.5.1")
+		http.SetTimeouts(1500, 1500, 1500, 1500)
 		http.Open("GET", fontSource, true)
 		try {
 			http.Send()
-			http.WaitForResponse()
+			http.WaitForResponse(4)
+			if (http.Status != 200) {
+				MsgBox("Can’t download font.", "Font Installer")
+				return
+			}
 		} catch {
 			MsgBox("Can’t download font.`n" Locale.Read("prepare_fonts"), "Font Installer")
 		}
 
-		if (http.Status != 200) {
-			MsgBox("Can’t download font.", "Font Installer")
-			return
-		}
 
 		fontTitle := RegExReplace(StrSplit(fontSource, "/").Pop(), "[^a-zA-Z]+.*$", "") ".ttf"
 		fontPath := tempFolder "\" fontTitle

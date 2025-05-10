@@ -24,6 +24,7 @@ A_MaxHotkeysPerInterval := 50
 #Include <chr_alt_codes>
 #Include <chr_latex_codes>
 #Include <chr_entities>
+#Include <cls_chr_block>
 #Include <cls_util>
 #Include <chr_lib>
 
@@ -219,13 +220,13 @@ ParagraphizeSelection(SendCollaborative := False) {
 QuotatizeSelection(Mode) {
 	RegEx := "[a-zA-Zа-яА-ЯёЁ0-9.,:;!?()\`"'-+=/\\]"
 
-	france_left := ChrLib.Get("france_left")
-	france_right := ChrLib.Get("france_right")
+	quote_angle_left_double := ChrLib.Get("quote_angle_left_double")
+	quote_angle_right_double := ChrLib.Get("quote_angle_right_double")
 	quote_low_9_double := ChrLib.Get("quote_low_9_double")
 	quote_left_double := ChrLib.Get("quote_left_double")
 	quote_right_double := ChrLib.Get("quote_right_double")
-	quote_left_single := ChrLib.Get("quote_left_single")
-	quote_right_single := ChrLib.Get("quote_right_single")
+	quote_left := ChrLib.Get("quote_left")
+	quote_right := ChrLib.Get("quote_right")
 
 
 	BackupClipboard := A_Clipboard
@@ -238,13 +239,13 @@ QuotatizeSelection(Mode) {
 	if !RegExMatch(PromptValue, RegEx) {
 		A_Clipboard := BackupClipboard
 		if Mode = "France" {
-			SendText(france_left france_right)
+			SendText(quote_angle_left_double quote_angle_right_double)
 		} else if Mode = "Paw" {
 			SendText(quote_low_9_double quote_left_double)
 		} else if Mode = "Double" {
 			SendText(quote_left_double quote_right_double)
 		} else if Mode = "Single" {
-			SendText(quote_left_single quote_right_single)
+			SendText(quote_left quote_right)
 		}
 		return
 	}
@@ -279,19 +280,19 @@ QuotatizeSelection(Mode) {
 		}
 
 		if Mode = "France" {
-			PromptValue := RegExReplace(PromptValue, RegExEscape(france_left), quote_low_9_double)
-			PromptValue := RegExReplace(PromptValue, RegExEscape(france_right), quote_left_double)
+			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_angle_left_double), quote_low_9_double)
+			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_angle_right_double), quote_left_double)
 
-			PromptValue := france_left . PromptValue . france_right
+			PromptValue := quote_angle_left_double . PromptValue . quote_angle_right_double
 		} else if Mode = "Paw" {
 			PromptValue := quote_low_9_double . PromptValue . quote_left_double
 		} else if Mode = "Double" {
-			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_left_double), quote_left_single)
-			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_right_double), quote_right_single)
+			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_left_double), quote_left)
+			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_right_double), quote_right)
 
 			PromptValue := quote_left_double . PromptValue . quote_right_double
 		} else if Mode = "Single" {
-			PromptValue := quote_left_single . PromptValue . quote_right_single
+			PromptValue := quote_left . PromptValue . quote_right
 		}
 
 		A_Clipboard := PromptValue . TempSpace

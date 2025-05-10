@@ -25,6 +25,8 @@ Class Dev {
 
 		downloadLink := App.URL "/releases/download/" version "/DSL-KeyPad-" version ".zip"
 		releasesArray := Update.ChekVersions()
+		if releasesArray is Integer
+			return MsgBox("Check versions failed")
 
 		previousVersion := releasesArray.Length = 1 ? version : ""
 		found := False
