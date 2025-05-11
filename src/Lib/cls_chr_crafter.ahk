@@ -5,6 +5,8 @@ Class ChrCrafter {
 	static modifiedCharsType := ""
 	static prompt := Util.HexaDecimalToChr(Cfg.Get("Ligature", "LatestPrompts"))
 
+	static isComposeInstanceActive := False
+
 	__New(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 
@@ -49,6 +51,7 @@ Class ChrCrafter {
 	}
 
 	static ComposeMode() {
+		this.isComposeInstanceActive := True
 		output := ""
 		input := ""
 		previousInput := ""
@@ -225,7 +228,7 @@ Class ChrCrafter {
 
 						inputToCheckNoBackticks := RegExReplace(inputToCheck, "``", "")
 
-						intermediateValue := this.ValidateRecipes(inputToCheckNoBackticks, , usePartialMode)
+						intermediateValue := this.ValidateRecipes(inputToCheckNoBackticks, , usePartialMode, , hasBacktick)
 						if intermediateValue != "" {
 							output := intermediateValue
 
@@ -263,6 +266,8 @@ Class ChrCrafter {
 			if !InStr(output, "N/A") || output != input
 				this.SendOutput(output)
 		}
+
+		this.isComposeInstanceActive := False
 		return
 	}
 
@@ -323,7 +328,9 @@ Class ChrCrafter {
 			SendText(output)
 	}
 
-	static ValidateRecipes(prompt, getSuggestions := False, breakSkip := False, restrictClasses := []) {
+	static ValidateRecipes(prompt, getSuggestions := False, breakSkip := False, restrictClasses := [], hasBacktick := False) {
+		inputMode := !hasBacktick ? Auxiliary.inputMode : "Unicode"
+
 		promptBackup := prompt
 		output := ""
 
@@ -429,9 +436,9 @@ Class ChrCrafter {
 						} else if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipeEntry)) {
 							charFound := True
 							if value.options.suggestionsAtEnd
-								indexedAtEndValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
+								indexedAtEndValueResult.Set(value.index, ChrLib.Get(characterEntry, True, inputMode))
 							else
-								indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
+								indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, inputMode))
 							if !isPrefixOfLongerRecipe
 								break 2
 						}
@@ -458,9 +465,9 @@ Class ChrCrafter {
 					} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipe)) {
 						charFound := True
 						if value.options.suggestionsAtEnd
-							indexedAtEndValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
+							indexedAtEndValueResult.Set(value.index, ChrLib.Get(characterEntry, True, inputMode))
 						else
-							indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, Auxiliary.inputMode))
+							indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, inputMode))
 						if !isPrefixOfLongerRecipe
 							break
 					}

@@ -1117,6 +1117,11 @@ Class Scripter {
 
 	static SelectorPanel(selectorType := "Alternative Modes") {
 		keySymbols := Map(
+			"Tilde", "``",
+			"HyphenMinus", "-",
+			"ДефисоМинус", "-",
+			"Equals", "=",
+			"Равно", "=",
 			"LeftBracket", "[",
 			"RightBracket", "]",
 			"Semicolon", ";",
@@ -1129,6 +1134,19 @@ Class Scripter {
 		selectorAntagonist := selectorType != "Alternative Modes" ? "Alternative Modes" : "Glyph Variations"
 		isGlyphs := selectorType = "Glyph Variations"
 		keyCodes := [
+			; "SC029",
+			; "SC002",
+			; "SC003",
+			; "SC004",
+			; "SC005",
+			; "SC006",
+			; "SC007",
+			; "SC008",
+			; "SC009",
+			; "SC00A",
+			; "SC00B",
+			; "SC00C",
+			; "SC00D",
 			"SC010",
 			"SC011",
 			"SC012",
@@ -1340,10 +1358,7 @@ Class Scripter {
 
 	static WaitForKey(hotkeys, selectorType) {
 		local IH := InputHook("L1 M")
-		IH.VisibleNonText := False
-		IH.KeyOpt("{All}", "E")
-		IH.KeyOpt("{LShift}{RShift}{LControl}{RControl}{LAlt}{RAlt}{LWin}{RWin}{PrintScreen}", "-E")
-		IH.OnEnd := (*) => this.HandleWaiting(StrUpper(IH.EndKey), hotkeys, selectorType)
+		IH.OnEnd := OnEnd
 		IH.Start()
 		SetTimer(WaitCheckGUI, 50)
 
@@ -1357,6 +1372,14 @@ Class Scripter {
 				Exit
 			}
 		}
+		OnEnd(*) {
+			if GetKeyState("Shift", "P") || GetKeyState("Ctrl", "P") || GetKeyState("Alt", "P") || GetKeyState("LWin", "P") || GetKeyState("RWin", "P") {
+				this.WaitForKey(hotkeys, selectorType)
+				return
+			}
+			this.HandleWaiting(StrUpper(IH.Input), hotkeys, selectorType)
+		}
+
 	}
 
 	static HandleWaiting(endKey, hotkeys, selectorType) {
@@ -1400,14 +1423,16 @@ Class BindHandler {
 					if RegExMatch(rawMatch[1], "\\n")
 						lineBreaks := True
 				} else {
-					alt := Scripter.selectedMode.Get("Glyph Variations")
+					alt := !ChrCrafter.isComposeInstanceActive ? Scripter.selectedMode.Get("Glyph Variations") : "None"
+					inputMode := !ChrCrafter.isComposeInstanceActive ? Auxiliary.inputMode : "Unicode"
+
 					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
 						alt := ChrLib.ValidateAlt(alterationMatch[1])
 						character := RegExReplace(character, "\:\:.*$", "")
 					}
 
 					if ChrLib.entries.HasOwnProp(character) {
-						output .= ChrLib.Get(character, True, Auxiliary.inputMode, alt)
+						output .= ChrLib.Get(character, True, inputMode, alt)
 
 						chrSendOption := ChrLib.GetValue(character, "options").send
 

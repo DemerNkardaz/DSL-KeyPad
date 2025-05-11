@@ -3972,7 +3972,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_lig_ae", {
 			unicode: ["00C6", "00E6"],
 			alterations: [{ modifier: "1D2D", smallCapital: "1D01" }, { combining: "1DD4", modifier: "10783" }],
-			recipe: [["$", "${lat_[c,s]_let_a::smallCapital}${lat_[c,s]_let_e::smallCapital}"], ["$"]],
+			recipe: ["$"],
 		},
 		"lat_[c,s]_lig_ae__acute", {
 			unicode: ["01FC", "01FD"],
