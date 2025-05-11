@@ -549,6 +549,19 @@ Class KeyboardBinder {
 
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
+				if (binds is Array && binds.Length == 1
+					&& binds[1] is String && RegExMatch(binds[1], "\[(.*?)\]", &match)) {
+					splitVariants := StrSplit(match[1], ",")
+					tempBinds := []
+
+					for i, variant in splitVariants {
+						variantBind := RegExReplace(binds[1], "\[.*?\]", variant)
+						tempBinds.Push(variantBind)
+					}
+
+					binds := tempBinds
+				}
+
 				for scanCode, keyNamesArray in layout {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
