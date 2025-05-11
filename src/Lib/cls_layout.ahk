@@ -1181,7 +1181,6 @@ Class Scripter {
 			keys.HasValue(key, &i) && (keys[i] := value)
 		}
 
-
 		prevAltMode := this.selectedMode.Get(selectorType)
 		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read("gui_scripter_" (selectorType == "Alternative Modes" ? "alt_mode" : "glyph_variation")))
 
@@ -1233,11 +1232,6 @@ Class Scripter {
 				dataName := this.data[selectorType][i]
 				dataValue := this.data[selectorType][i + 1]
 				AddOption(dataName, dataValue, j)
-			}
-
-			if prevAltMode != "" && selectorType = "Alternative Modes" {
-				bingingsNames := this.GetData(selectorType, prevAltMode).bindings
-				KeyboardBinder.Registration(BindList.Gets(bingingsNames, "Script Specified"), False)
 			}
 
 			selectorPanel.Show("w" panelWidth " h" panelHeight " Center")
@@ -1351,25 +1345,24 @@ Class Scripter {
 		IH.KeyOpt("{LShift}{RShift}{LControl}{RControl}{LAlt}{RAlt}{LWin}{RWin}{PrintScreen}", "-E")
 		IH.OnEnd := (*) => this.HandleWaiting(StrUpper(IH.EndKey), hotkeys, selectorType)
 		IH.Start()
-
 		SetTimer(WaitCheckGUI, 50)
 
 		WaitCheckGUI() {
-			if IsGuiOpen(this.selectorTitle.Get(selectorType))
-				return
-			else {
+			Suspend(1)
+			if !IsGuiOpen(this.selectorTitle.Get(selectorType)) {
 				IH.Stop()
+				if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser)
+					Suspend(0)
+				SetTimer(WaitCheckGUI, -0)
 				Exit
 			}
 		}
 	}
 
-
 	static HandleWaiting(endKey, hotkeys, selectorType) {
+		this.PanelDestroy(selectorType)
 		if endKey != "" && hotkeys.Has(endKey)
 			this.OptionSelect(hotkeys.Get(endKey), selectorType)
-
-		this.PanelDestroy(selectorType)
 	}
 
 	static PanelDestroy(selectorType) {

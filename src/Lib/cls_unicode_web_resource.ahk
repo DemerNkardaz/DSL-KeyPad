@@ -90,8 +90,8 @@ Class UnicodeBlockWebResource {
 
 		resource := StrReplace(resource, "${language}", lang)
 		resource := StrReplace(resource, "${CodePrompt}", code)
-		resource := StrReplace(resource, "${Name_Prompt}", RegExReplace(name, " ", "_"))
-		resource := StrReplace(resource, "${Name-Prompt}", RegExReplace(name, " ", "-"))
+		resource := StrReplace(resource, "${Name_Prompt}", RegExReplace(name, "\s", "_"))
+		resource := StrReplace(resource, "${Name-Prompt}", RegExReplace(name, "\s", "-"))
 
 		return resource
 	}

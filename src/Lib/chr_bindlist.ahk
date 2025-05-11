@@ -236,8 +236,8 @@ bindingMaps := Map(
 				; "<#<!", (*) => GroupActivator("Special Characters", "F7"),
 			),
 			"F12", Map(
-				">^", (*) => KeyboardBinder.SwitchLayout("Latin"),
-				">+", (*) => KeyboardBinder.SwitchLayout("Cyrillic")
+				; ">^", (*) => KeyboardBinder.SwitchLayout("Latin"),
+				; ">+", (*) => KeyboardBinder.SwitchLayout("Cyrillic")
 			),
 			"Up", Map(
 				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Superscript"),
