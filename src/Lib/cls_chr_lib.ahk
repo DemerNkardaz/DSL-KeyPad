@@ -131,6 +131,14 @@ Class ChrLib {
 	static progressPercent := 0
 	static progressName := ""
 	static typeOfInit := ""
+	static countOf := {
+		entries: 0,
+		userEntries: 0,
+		recipes: 0,
+		userRecipes: 0,
+		fastKeys: 0,
+		allKeys: 0,
+	}
 
 	static __New() {
 		this.Registrate()
@@ -579,6 +587,30 @@ Class ChrLib {
 		}
 
 		return count
+	}
+
+	static HotKeysCount(key := "fastKey") {
+		count := 0
+		for entry, value in this.entries.OwnProps() {
+			if key is Array {
+				for k in key
+					if value.options.HasOwnProp(k) && value.options.%k% != ""
+						count++
+			} else
+				if value.options.HasOwnProp(key) && value.options.%key% != ""
+					count++
+
+		}
+		return count
+	}
+
+	static CountOfUpdate() {
+		this.countOf.userEntries := this.Count("Custom Composes")
+		this.countOf.entries := this.Count() - this.countOf.userEntries
+		this.countOf.userRecipes := ChrRecipeHandler.Count("Custom Only")
+		this.countOf.recipes := ChrRecipeHandler.Count("No Custom")
+		this.countOf.fastKeys := this.HotKeysCount("fastKey")
+		this.countOf.allKeys := this.countOf.fastKeys + this.HotKeysCount(["altLayoutKey", "altSpecialKey"])
 	}
 
 	static SearchPrompt() {

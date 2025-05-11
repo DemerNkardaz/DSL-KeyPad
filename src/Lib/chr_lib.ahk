@@ -16,7 +16,7 @@ LibRegistrate(this) {
 			unicode: "0301",
 			tags: ["acute", "акут", "ударение"],
 			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
-			alterations: { uncombined: "00B4" },
+			alterations: { uncombined: "00B4", modifier: "02CA" },
 			options: { groupKey: ["a", "ф"], fastKey: "A Ф" },
 			symbol: { category: "Diacritic Mark" },
 		},
@@ -294,6 +294,7 @@ LibRegistrate(this) {
 			unicode: "0304", LaTeX: ["\=", "\bar"],
 			alterations: {
 				uncombined: "00AF",
+				modifier: "02C9",
 			},
 			tags: ["macron", "макрон"],
 			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
@@ -302,6 +303,9 @@ LibRegistrate(this) {
 		},
 		"macron_below", {
 			unicode: "0331",
+			alterations: {
+				modifier: "02CD",
+			},
 			tags: ["macron below", "макрон снизу"],
 			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
 			options: { groupKey: ["M", "Ь"], fastKey: "<+ M Ь" },
@@ -2384,12 +2388,6 @@ LibRegistrate(this) {
 			groups: ["Special Characters"],
 			options: { groupKey: ["g", "п"] },
 		},
-		"infinity", {
-			unicode: "221E",
-			tags: ["infinity", "бесконечность"],
-			groups: ["Special Characters"],
-			options: { groupKey: ["9"], fastKey: "<! 8" },
-		},
 		"dotted_circle", {
 			unicode: "25CC",
 			tags: ["пунктирный круг", "dotted circle"],
@@ -2560,10 +2558,12 @@ LibRegistrate(this) {
 		},
 		"apostrophe", {
 			unicode: "0027",
+			alterations: { modifier: "02BC" },
 			options: { noCalc: True },
 		},
 		"quote", {
 			unicode: "0022",
+			alterations: { modifier: "02EE" },
 			options: { noCalc: True },
 		},
 		"solidus", {
@@ -2672,6 +2672,72 @@ LibRegistrate(this) {
 			tags: ["inverted lazy s", "перевёрнутая плавная s"],
 			groups: ["Special Characters", "Smelting Special"],
 			recipe: ["s${arrow_right_circle}"],
+		},
+		"prime_[single,double,triple,quadruple]", {
+			unicode: [
+				"2032",
+				"2033",
+				"2034",
+				"2057",
+			],
+			alterations: [{ modifier: "02B9" }, { modifier: "02BA" }, {}, {}],
+			tags: [
+				["prime", "штрих"],
+				["double prime", "двойной штрих"],
+				["triple prime", "тройной штрих"],
+				["quadruple prime", "четверной штрих"],
+			],
+			groups: ["Smelting Special", "Special Characters", "Special Fast Secondary"],
+			options: {
+				groupKey: [
+					["p", "з"],
+					["P", "З"],
+					[CtrlP],
+					[],
+				],
+				fastKey: [
+					"3",
+					">+ 3",
+					"<+ 3",
+					"<+>+ 3",
+				],
+			},
+			recipe: [
+				[],
+				["${prime_single×2}"],
+				["${prime_single×3}", "${prime_double}${prime_single}"],
+				["${prime_single×4}", "${prime_double×2}", "${prime_triple}${prime_single}"],
+			],
+		},
+		"prime_[single,double,triple]_reversed", {
+			unicode: [
+				"2035",
+				"2036",
+				"2037",
+			],
+			tags: [
+				["reversed prime", "обратный штрих"],
+				["reversed double prime", "обратный двойной штрих"],
+				["reversed triple prime", "обратный тройной штрих"],
+			],
+			groups: ["Smelting Special", "Special Characters", "Special Fast Secondary"],
+			options: {
+				groupKey: [
+					["p", "з"],
+					["P", "З"],
+					[CtrlP],
+				],
+				fastKey: [
+					"c*3",
+					"c*>+ 3",
+					"c*<+ 3",
+				],
+			},
+			recipe: [
+				[],
+				["${prime_single_reversed×2}"],
+				["${prime_single_reversed×3}", "${prime_double_reversed}${prime_single_reversed}"],
+			],
 		},
 		;
 		;
@@ -2870,6 +2936,33 @@ LibRegistrate(this) {
 		; * Mathematical Symbols
 		;
 		;
+		"asterisk_operator", {
+			unicode: "2217",
+			tags: ["оператор астериск", "asterisk operator"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Left"],
+			options: { fastKey: "NumDiv" },
+			recipe: ["^*"],
+		},
+		"bullet_operator", {
+			unicode: "2219",
+			tags: ["оператор буллит", "bullet operator"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Left"],
+			options: { fastKey: "<+ NumDiv" },
+			recipe: ["^."],
+		},
+		"infinity", {
+			unicode: "221E",
+			tags: ["infinity", "бесконечность"],
+			groups: ["Special Characters"],
+			options: { groupKey: ["9"], fastKey: "<! 8" },
+		},
+		"empty_set", {
+			unicode: "2205",
+			tags: ["пустое множество", "empty set"],
+			groups: ["Smelting Special", "Special Fast Secondary"],
+			options: { fastKey: "Num0" },
+			recipe: ["0/"],
+		},
 		"percent", {
 			unicode: "0025",
 			alterations: { small: "FE6A" },
@@ -2897,6 +2990,20 @@ LibRegistrate(this) {
 			unicode: "003D",
 			alterations: { modifier: "207C", subscript: "208C", small: "FE66" },
 			options: { noCalc: True },
+		},
+		"noequals", {
+			unicode: "2260",
+			tags: ["no equals", "не равно"],
+			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary"],
+			options: { groupKey: ["="], fastKey: "=" },
+			recipe: ["/="],
+		},
+		"almostequals", {
+			unicode: "2248",
+			tags: ["almost equals", "примерно равно"],
+			groups: ["Smelting Special", "Special Fast Secondary"],
+			options: { fastKey: "<! =" },
+			recipe: ["~="],
 		},
 		"plus", {
 			unicode: "002B",
@@ -3785,6 +3892,7 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_g_gamma", {
 			unicode: ["0194", "0263"],
+			alterations: [{}, { modifier: "02E0" }],
 			tags: [[], ["voiced velar fricative", "звонкий велярный спирант"]],
 			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {

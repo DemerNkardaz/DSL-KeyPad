@@ -65,12 +65,12 @@ Class ChrRecipeHandler {
 
 		if ChrLib.entryGroups.Has("Custom Composes") && rule = "No Custom" {
 			for entryName in ChrLib.entryGroups.Get("Custom Composes") {
-				output := output - ChrLib.entries.%entryName%.recipe.Length
+				output -= ChrLib.entries.%entryName%.recipe.Length
 			}
 		} else if ChrLib.entryGroups.Has("Custom Composes") && rule = "Custom Only" {
 			output := 0
 			for entryName in ChrLib.entryGroups.Get("Custom Composes") {
-				output := output + ChrLib.entries.%entryName%.recipe.Length
+				output += ChrLib.entries.%entryName%.recipe.Length
 			}
 		}
 

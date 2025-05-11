@@ -1,7 +1,8 @@
 Class Cfg {
 	static sections := [
 		"Settings", [
-			"Character_Web_Resource", "SymblCC",
+			"Unicode_Web_Resource", "SymblCC",
+			"Unicode_Web_Resource_Use_System_Language", "False",
 			"LaTeX_Mode", "Default",
 			"Input_Script", "Default",
 			"Layout_Latin", "QWERTY",
@@ -161,7 +162,6 @@ Class Cfg {
 			bindingsSelector.Text := currentBindings
 			bindingsSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetBinds(CB.Text))
 
-
 			optionsPanel.AddText("vProfileLabel x" languageSelectorX(256 + 16) " y" languageSelectorY(-17) " w128 BackgroundTrans", Locale.Read("profile"))
 
 			profiles := ArrayMerge(App.profileList, [Locale.Read("profile_new")])
@@ -173,6 +173,20 @@ Class Cfg {
 
 			profileSelector.Text := App.GetProfile()
 			profileSelector.OnEvent("Change", (CB, Zero) => SetProfile(CB.Text))
+
+			optionsPanel.AddText("vUnicodeResourceLabel x" languageSelectorX(256 + 16) " y" languageSelectorY(layouSelectorY((32 * 3) - 17)) " w128 BackgroundTrans", Locale.Read("gui_options_unicode_resource"))
+
+			resourcesList := UnicodeWebResource.resources.Keys()
+			currentResource := Cfg.Get("Unicode_Web_Resource", , "SymblCC")
+
+			unicodeResourceSelector := optionsPanel.AddDropDownList("vUnicodeResource x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(layouSelectorY(32 * 3)), resourcesList)
+			PostMessage(0x0153, -1, 15, unicodeResourceSelector)
+			unicodeResourceSelector.Text := currentResource
+			unicodeResourceSelector.OnEvent("Change", (CB, Zero) => Cfg.Set(CB.Text, "Unicode_Web_Resource"))
+
+			unicodeResourceLanguage := optionsPanel.AddCheckBox("vUnicodeResourceLanguage x" languageSelectorX(256 + 16) " y" languageSelectorY(layouSelectorY((32 * 3) + 28)) " w128", Locale.Read("gui_options_unicode_resource_use_system_language"))
+			unicodeResourceLanguage.Value := Cfg.Get("Unicode_Web_Resource_Use_System_Language", , False, "bool")
+			unicodeResourceLanguage.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Unicode_Web_Resource_Use_System_Language", , "bool"))
 
 			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(84, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
 
@@ -625,6 +639,7 @@ Class Options {
 
 		App.SetTrayItems()
 		IsGuiOpen(Panel.panelTitle) && Panel.Panel(True)
+		Panel.SetPanelData()
 	}
 
 	static SwitchVirualLayout(CB, category) {

@@ -246,7 +246,7 @@ bindingMaps := Map(
 			"Down", Map(
 				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Subscript"),
 			),
-			"PgUp", Map("<#<!", (*) => FindCharacterPage()),
+			"PgUp", Map("<#<!", (*) => UnicodeWebResource()),
 			"Home", Map("<#<!", (*) => Panel.Panel()),
 			; "Space", Map("<#<!", (*) => GroupActivator("Spaces")),
 			; "HyphenMinus", Map("<#<!", (*) => GroupActivator("Dashes", "-")),
@@ -575,8 +575,6 @@ bindingMaps := Map(
 			"NumpadSub", (K) => BindHandler.TimeSend(K, Map(
 				"NumpadAdd", (*) => BindHandler.Send(K, "plusminus"),
 			), (*) => BindHandler.Send(K, "minus")),
-			"NumpadDiv", (K) => BindHandler.TimeSend(K, Map(),
-				(*) => BindHandler.Send(K, "division")),
 			"NumpadMult", (K) => BindHandler.TimeSend(K, Map(
 				"NumpadDiv", (*) => BindHandler.Send(K, "division_times"),
 			), (*) => BindHandler.Send(K, "multiplication")),
@@ -595,6 +593,8 @@ bindingMaps := Map(
 			"NumpadDiv", Map(
 				"<^>!", "dagger",
 				"<^>!>+", "dagger_double",
+				"<^<!", "asterisk_operator",
+				"<^<!<+", "bullet_operator",
 			),
 			; Arrows
 			"Left", Map(
@@ -645,9 +645,9 @@ bindingMaps := Map(
 				"<^>!>+", "sound_recording_copyright"
 			),
 			"3", Map(
-				"<^>!:Caps", ["prime_reversed_single", "prime_single"],
-				"<^>!>+:Caps", ["prime_reversed_double", "prime_double"],
-				"<^>!<+:Caps", ["prime_reversed_triple", "prime_triple"],
+				"<^>!:Caps", ["prime_single[_reversed,]"],
+				"<^>!>+:Caps", ["prime_double[_reversed,]"],
+				"<^>!<+:Caps", ["prime_triple[_reversed,]"],
 				"<^>!<+>+", "prime_quadruple"
 			),
 			"4", Map("<^>!", "division"),

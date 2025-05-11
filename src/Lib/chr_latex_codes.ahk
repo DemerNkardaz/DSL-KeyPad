@@ -10,4 +10,8 @@ LaTeXCodesLibrary := [
 	Chr(0x201E), "\`"``",
 	Chr(0x00AB), "\`"<",
 	Chr(0x00BB), "\`">",
+	Chr(0x2032), "\prime",
+	Chr(0x2033), "\prime\prime",
+	Chr(0x2034), "\prime\prime\prime",
+	Chr(0x2057), "\prime\prime\prime\prime",
 ]

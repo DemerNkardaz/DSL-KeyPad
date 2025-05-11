@@ -382,6 +382,7 @@ Class MyRecipes {
 		if existingEntry && existingEntry.groups.HasValue("Custom Composes")
 			ChrLib.RemoveEntry(sectionName)
 
+		ChrLib.CountOfUpdate()
 		return True
 	}
 
@@ -625,6 +626,7 @@ Class MyRecipes {
 			if ChrLib.duplicatesList.Length > 0
 				TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
 		}
+		ChrLib.CountOfUpdate()
 	}
 
 	static HandleResult(resultIn) {

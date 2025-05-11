@@ -26,6 +26,7 @@ A_MaxHotkeysPerInterval := 50
 #Include <chr_entities>
 #Include <cls_chr_block>
 #Include <cls_util>
+#Include <cls_unicode_web_resource>
 #Include <chr_lib>
 
 #Include <cls_app>
@@ -56,6 +57,7 @@ A_MaxHotkeysPerInterval := 50
 #Include <cls_dev>
 #Include <stc_bindings>
 
+ChrLib.CountOfUpdate()
 App.SetTrayItems()
 
 GREPizeSelection(GetCollaborative := False) {
@@ -304,45 +306,6 @@ QuotatizeSelection(Mode) {
 	Sleep 500
 	A_Clipboard := BackupClipboard
 	return
-}
-
-FindCharacterPage(InputCode := "", IsReturn := False) {
-	CharacterWebResource := Cfg.Get("Character_Web_Resource", , "SymblCC")
-	if InputCode = "" {
-		BackupClipboard := A_Clipboard
-		PromptValue := ""
-		A_Clipboard := ""
-
-		Send("^c")
-		ClipWait(0.10, 1)
-		PromptValue := A_Clipboard
-		PromptValue := Util.ChrToUnicode(PromptValue)
-	} else {
-		PromptValue := StrLen(InputCode) >= 4 ? InputCode : Util.ChrToUnicode(InputCode)
-	}
-
-	resources := Map(
-		"Compart", "https://www.compart.com/en/unicode/U+" PromptValue,
-		"Codepoints", "https://codepoints.net/U+" PromptValue,
-		"UnicodePlus", "https://unicodeplus.com/U+" PromptValue,
-		"DecodeUnicode", "https://decodeunicode.org/en/u+" PromptValue,
-		"UtilUnicode", "https://util.unicode.org/UnicodeJsps/character.jsp?a=" PromptValue,
-		"Wiktionary", "https://en.wiktionary.org/wiki/" Chr("0x" PromptValue),
-		"Wikipedia", "https://en.wikipedia.org/wiki/" Chr("0x" PromptValue),
-		"SymblCC", "https://symbl.cc/" Language.Get() "/" PromptValue,
-	)
-
-	URIComponent := resources.Has(CharacterWebResource) ? resources[CharacterWebResource] : resources["SymblCC"]
-
-	if (PromptValue != "" && !IsReturn) {
-		Run(URIComponent)
-	} else if (PromptValue != "" && IsReturn) {
-		return URIComponent
-	}
-
-	if InputCode = "" {
-		A_Clipboard := BackupClipboard
-	}
 }
 
 ShowInfoMessage("tray_app_started")
