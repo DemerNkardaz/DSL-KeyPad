@@ -3769,14 +3769,20 @@ LibRegistrate(this) {
 			unicode: ["A764", "A765"],
 			groups: ["Latin"],
 			options: { useLetterLocale: "Origin" },
-			recipe: ["$${stroke_short}", "${lat_[c,s]_let_@_thorn}${stroke_short}"],
+			recipe: [
+				"$${stroke_short}", "${lat_[c,s]_let_@_thorn}${stroke_short}",
+				"${stroke_short}$", "${stroke_short}${lat_[c,s]_let_@_thorn}",
+			],
 			symbol: { letter: ["TH", "th"] },
 		},
 		"lat_[c,s]_let_t_thorn__stroke_down", {
 			unicode: ["A766", "A767"],
 			groups: ["Latin"],
 			options: { useLetterLocale: "Origin" },
-			recipe: ["$${arrow_down}${stroke_short}", "${lat_[c,s]_let_@_thorn}${arrow_down}${stroke_short}"],
+			recipe: [
+				"$${arrow_down}${stroke_short}", "${lat_[c,s]_let_@_thorn}${arrow_down}${stroke_short}",
+				"${arrow_down}${stroke_short}$", "${stroke_short}${lat_[c,s]_let_@_thorn}${arrow_down}",
+			],
 			symbol: { letter: ["TH", "th"] },
 		},
 		"lat_[c,s]_let_t_thorn_double", {
@@ -5615,7 +5621,7 @@ LibRegistrate(this) {
 		"cyr_[c,s]_let_z_dzelo_archaic", {
 			unicode: ["A642", "A643"],
 			options: { useLetterLocale: True },
-			recipe: ["${cyr_[c,s]_let_z_zemlya}-"]
+			recipe: ["${cyr_[c,s]_let_z_zemlya}-", "-${cyr_[c,s]_let_z_zemlya}"]
 		},
 		"cyr_[c,s]_let_i_decimal", {
 			unicode: ["0406", "0456"],
@@ -5639,7 +5645,7 @@ LibRegistrate(this) {
 			unicode: ["0526", "0527"],
 			groups: ["Cyrillic"],
 			options: { useLetterLocale: "Origin" },
-			recipe: ["${cyr_[c,s]_let_h_shha}${descender}"]
+			recipe: ["${cyr_[c,s]_let_h_shha}${descender}", "${descender}${cyr_[c,s]_let_h_shha}"]
 		},
 		"cyr_[c,s]_let_ch_djerv", {
 			unicode: ["A648", "A649"],

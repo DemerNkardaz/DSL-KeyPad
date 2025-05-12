@@ -429,9 +429,9 @@ Class ChrCrafter {
 							if caseSensitiveMatch || uniqueRecipeMatch {
 								charFound := True
 								if value.options.suggestionsAtEnd
-									indexedAtEndValueResult.Set(value.index, this.GetRecipesString(characterEntry))
+									indexedAtEndValueResult.Set(value.index, this.GetRecipesString(characterEntry, prompt))
 								else
-									indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry))
+									indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry, prompt))
 							}
 						} else if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipeEntry)) {
 							charFound := True
@@ -458,9 +458,9 @@ Class ChrCrafter {
 						if caseSensitiveMatch || uniqueRecipeMatch {
 							charFound := True
 							if value.options.suggestionsAtEnd
-								indexedAtEndValueResult.Set(value.index, this.GetRecipesString(characterEntry))
+								indexedAtEndValueResult.Set(value.index, this.GetRecipesString(characterEntry, prompt))
 							else
-								indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry))
+								indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry, prompt))
 						}
 					} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipe)) {
 						charFound := True
@@ -556,7 +556,7 @@ Class ChrCrafter {
 		return length - symbolCount
 	}
 
-	static FormatSuggestions(suggestions, maxLength := 72) {
+	static FormatSuggestions(suggestions, maxLength := 80) {
 		if suggestions = "N/A"
 			return suggestions
 
@@ -599,7 +599,7 @@ Class ChrCrafter {
 		return this.SuggestionsLimiter(output)
 	}
 
-	static SuggestionsLimiter(suggestions, maxLength := 72 * 6) {
+	static SuggestionsLimiter(suggestions, maxLength := 80 * 8) {
 		if this.EffectiveLength(suggestions) <= maxLength
 			return suggestions
 
@@ -658,10 +658,10 @@ Class ChrCrafter {
 		return output
 	}
 
-	static GetRecipesString(entryName) {
+	static GetRecipesString(entryName, prompt := "") {
 		output := ""
 
-		recipe := ChrRecipeHandler.GetStr(entryName, True, " | ")
+		recipe := ChrRecipeHandler.GetStr(entryName, True, " | ", prompt)
 		entry := ChrLib.GetEntry(entryName)
 		uniSequence := ""
 		if StrLen(entry.symbol.alt) {

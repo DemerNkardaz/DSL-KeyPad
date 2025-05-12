@@ -1356,22 +1356,28 @@ Class Scripter {
 		}
 	}
 
+	static isScripterWaiting := False
 	static WaitForKey(hotkeys, selectorType) {
-		local IH := InputHook("L1 M")
+		this.isScripterWaiting := True
+		useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
+		useRemap ? (KeyboardBinder.UnregisterAll(), KeyboardBinder.Registration(BindList.Get("Keyboard Default"), True)) : Suspend(1)
+
+		IH := InputHook("L1 M")
 		IH.OnEnd := OnEnd
 		IH.Start()
 		SetTimer(WaitCheckGUI, 50)
 
 		WaitCheckGUI() {
-			Suspend(1)
 			if !IsGuiOpen(this.selectorTitle.Get(selectorType)) {
 				IH.Stop()
+				this.isScripterWaiting := False
 				if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser)
 					Suspend(0)
 				SetTimer(WaitCheckGUI, -0)
 				Exit
 			}
 		}
+
 		OnEnd(*) {
 			if GetKeyState("Shift", "P") || GetKeyState("Ctrl", "P") || GetKeyState("Alt", "P") || GetKeyState("LWin", "P") || GetKeyState("RWin", "P") {
 				this.WaitForKey(hotkeys, selectorType)
@@ -1423,8 +1429,8 @@ Class BindHandler {
 					if RegExMatch(rawMatch[1], "\\n")
 						lineBreaks := True
 				} else {
-					alt := !ChrCrafter.isComposeInstanceActive ? Scripter.selectedMode.Get("Glyph Variations") : "None"
-					inputMode := !ChrCrafter.isComposeInstanceActive ? Auxiliary.inputMode : "Unicode"
+					alt := !ChrCrafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Scripter.selectedMode.Get("Glyph Variations") : "None"
+					inputMode := !ChrCrafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Auxiliary.inputMode : "Unicode"
 
 					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
 						alt := ChrLib.ValidateAlt(alterationMatch[1])

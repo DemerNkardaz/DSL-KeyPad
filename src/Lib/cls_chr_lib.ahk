@@ -136,6 +136,8 @@ Class ChrLib {
 		userEntries: 0,
 		recipes: 0,
 		userRecipes: 0,
+		uniqueRecipes: 0,
+		uniqueUserRecipes: 0,
 		fastKeys: 0,
 		allKeys: 0,
 	}
@@ -609,6 +611,8 @@ Class ChrLib {
 		this.countOf.entries := this.Count() - this.countOf.userEntries
 		this.countOf.userRecipes := ChrRecipeHandler.Count("Custom Only")
 		this.countOf.recipes := ChrRecipeHandler.Count("No Custom")
+		this.countOf.uniqueRecipes := ChrRecipeHandler.Count("No Custom", True)
+		this.countOf.uniqueUserRecipes := ChrRecipeHandler.Count("Custom Only", True)
 		this.countOf.fastKeys := this.HotKeysCount("fastKey")
 		this.countOf.allKeys := this.countOf.fastKeys + this.HotKeysCount(["altLayoutKey", "altSpecialKey"])
 	}
@@ -855,16 +859,23 @@ Class ChrLib {
 			if entry.data.postfixes.Length > 0 {
 				if entry.data.postfixes.Length = 1 {
 					if ["ligature", "digraph"].HasValue(entry.data.type) {
-						entry.recipe := ["$${" entry.data.postfixes[1] "}", "${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@}${" entry.data.postfixes[1] "}"]
+						entry.recipe := [
+							"$${" entry.data.postfixes[1] "}",
+							"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@}${" entry.data.postfixes[1] "}",
+							"${" entry.data.postfixes[1] "}$",
+							"${" entry.data.postfixes[1] "}${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@}",
+						]
 					} else {
-						entry.recipe := ["$${" entry.data.postfixes[1] "}"]
+						entry.recipe := [
+							"$${" entry.data.postfixes[1] "}",
+							"${" entry.data.postfixes[1] "}$",
+						]
 					}
 				} else {
 					entry.recipe := [
 						"$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
-						"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_"
-						SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|"
-						entry.data.postfixes[2] ")}$(*)"
+						"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
+						"${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)$",
 					]
 				}
 			} else if ["ligature", "digraph"].HasValue(entry.data.type) && entry.data.postfixes.Length = 0 {
