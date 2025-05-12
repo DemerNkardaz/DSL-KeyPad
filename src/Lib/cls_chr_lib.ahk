@@ -876,6 +876,8 @@ Class ChrLib {
 						"$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
 						"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
 						"${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)$",
+						"${" entry.data.postfixes[1] "}${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__" entry.data.postfixes[2] "}",
+						"${" entry.data.postfixes[2] "}${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__" entry.data.postfixes[1] "}",
 					]
 				}
 			} else if ["ligature", "digraph"].HasValue(entry.data.type) && entry.data.postfixes.Length = 0 {

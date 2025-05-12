@@ -947,9 +947,9 @@ bindingMaps := Map(
 			"X", Map(
 				"<^>!", ["lat_[c,s]_let_x__dot_above"],
 				"<^>!<+", ["lat_[c,s]_let_x__diaeresis"]),
-			"Y", Map("<!", ["lat_[c,s]_let_y_acute"],
-				"<^>!", ["lat_[c,s]_let_y_dot_above"],
-				"<^>!<!", ["lat_[c,s]_let_y_circumflex"],
+			"Y", Map("<!", ["lat_[c,s]_let_y__acute"],
+				"<^>!", ["lat_[c,s]_let_y__dot_above"],
+				"<^>!<!", ["lat_[c,s]_let_y__circumflex"],
 				"<^>!<!<+", ["lat_[c,s]_let_y_stroke_short"],
 				"<^>!<!>+", ["lat_[c,s]_let_y__loop"],
 				"<^>!>+", ["lat_[c,s]_let_y__macron"],

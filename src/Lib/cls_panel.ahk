@@ -107,7 +107,7 @@ Class Panel {
 		aboutAuthorLinksX := aboutLeftX + ((aboutLeftW - aboutAuthorLinksW) / 2) + 9
 		aboutAuthorLinksY := (aboutAuthorY + aboutAuthorH) + 14
 
-		aboutDescBoxW := (panelWidth - aboutLeftW) - (50 * 1.4)
+		aboutDescBoxW := 515
 		aboutDescBoxH := aboutLeftH + 2
 		aboutDescBoxX := (aboutLeftX + aboutLeftW) + 10
 		aboutDescBoxY := 32
@@ -121,6 +121,16 @@ Class Panel {
 		aboutChrCountH := 12 * 6
 		aboutChrCountX := aboutDescriptionX
 		aboutChrCountY := ((aboutLeftH + aboutLeftY) - (aboutChrCountH)) - 5
+
+		aboutSampleWordsW := panelWidth - (aboutDescBoxX + aboutDescBoxW) - 30
+		aboutSampleWordsH := aboutDescBoxH
+		aboutSampleWordsX := aboutDescBoxX + aboutDescBoxW + 10
+		aboutSampleWordsY := aboutDescBoxY
+
+		aboutSampleWordsContentX := aboutSampleWordsX + 14
+		aboutSampleWordsContentY := aboutSampleWordsY + 30
+		aboutSampleWordsContentW := (aboutSampleWordsX + aboutSampleWordsW) - aboutSampleWordsContentX - 16
+		aboutSampleWordsContentH := aboutSampleWordsH - 40
 
 		clBodyW := panelWidth - 45
 		clBodyH := panelHeight - 55
@@ -238,6 +248,10 @@ Class Panel {
 					aboutDescriptionX, aboutDescriptionY, aboutDescriptionW, aboutDescriptionH),
 				aboutChrCount: Format("vAboutChrCount x{} y{} w{} h{} 0x80 Wrap BackgroundTrans",
 					aboutChrCountX, aboutChrCountY, aboutChrCountW, aboutChrCountH),
+				aboutSampleWords: Format("vAboutSampleWords x{} y{} w{} h{}",
+					aboutSampleWordsX, aboutSampleWordsY, aboutSampleWordsW, aboutSampleWordsH),
+				aboutSampleWordsContent: Format("vAboutSampleWordsContent x{} y{} w{} h{}",
+					aboutSampleWordsContentX, aboutSampleWordsContentY, aboutSampleWordsContentW, aboutSampleWordsContentH),
 			},
 			filter: {
 				icon: Format("x{} y{} h{} w{}",
@@ -315,6 +329,8 @@ Class Panel {
 				aboutDescBox: { x: aboutDescBoxX, y: aboutDescBoxY, w: aboutDescBoxW, h: aboutDescBoxH },
 				aboutDescription: { x: aboutDescriptionX, y: aboutDescriptionY, w: aboutDescriptionW, h: aboutDescriptionH },
 				aboutChrCount: { x: aboutChrCountX, y: aboutChrCountY, w: aboutChrCountW, h: aboutChrCountH },
+				aboutSampleWords: { x: aboutSampleWordsX, y: aboutSampleWordsY, w: aboutSampleWordsW, h: aboutSampleWordsH },
+				aboutSampleWordsContent: { x: aboutSampleWordsContentX, y: aboutSampleWordsContentY, w: aboutSampleWordsContentW, h: aboutSampleWordsContentH },
 			},
 			filter: {
 				icon: { x: baseX, y: filterY, h: ibPreviewBoxEditH, w: filterButtonW },
@@ -799,6 +815,11 @@ Class Panel {
 
 			aboutChrCount := panelWindow.AddText(UISets.aboutInfoBox.aboutChrCount, chrCount)
 			aboutChrCount.SetFont("c333333")
+
+			aboutSampleWords := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutSampleWords)
+
+			aboutSampleWordsContent := panelWindow.AddText(UISets.aboutInfoBox.aboutSampleWordsContent, Locale.Read("about_sample_words"))
+			aboutSampleWordsContent.SetFont("s12 c555555", "Cambria")
 
 			panelTabs.UseTab(panelTabList.Obj.useful)
 
