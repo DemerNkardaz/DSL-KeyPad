@@ -133,6 +133,7 @@ Class ChrLib {
 	static typeOfInit := ""
 	static countOf := {
 		entries: 0,
+		glyphVariations: 0,
 		userEntries: 0,
 		recipes: 0,
 		userRecipes: 0,
@@ -571,20 +572,16 @@ Class ChrLib {
 		return permutations
 	}
 
-	static Count(groupRestrict?) {
+	static Count(groupRestrict?, onlyGlyphsVariations := False) {
 		count := 0
 		for entry, value in this.entries.OwnProps() {
 			if !IsSet(groupRestrict) || (IsSet(groupRestrict) && value.groups.HasValue(groupRestrict)) {
-				if !(value.options.noCalc) {
+				if !value.options.noCalc && !onlyGlyphsVariations
 					count++
-				}
 
-				for alteration, value in value.alterations.OwnProps() {
-					if !InStr(alteration, "HTML") {
+				for alteration, value in value.alterations.OwnProps()
+					if !InStr(alteration, "HTML")
 						count++
-					}
-				}
-
 			}
 		}
 
@@ -609,6 +606,7 @@ Class ChrLib {
 	static CountOfUpdate() {
 		this.countOf.userEntries := this.Count("Custom Composes")
 		this.countOf.entries := this.Count() - this.countOf.userEntries
+		this.countOf.glyphVariations := this.Count(, True)
 		this.countOf.userRecipes := ChrRecipeHandler.Count("Custom Only")
 		this.countOf.recipes := ChrRecipeHandler.Count("No Custom")
 		this.countOf.uniqueRecipes := ChrRecipeHandler.Count("No Custom", True)

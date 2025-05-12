@@ -805,7 +805,16 @@ Class Panel {
 			aboutAuthorLinks := panelWindow.AddLink(UISets.aboutInfoBox.aboutAuthorLinks, Locale.Read("about_author_links"))
 			aboutAuthorLinks.SetFont("s9", "Cambria")
 
-			chrCount := Locale.ReadInject("about_lib_count", [ChrLib.countOf.entries, ChrLib.countOf.allKeys, ChrLib.countOf.fastKeys, ChrLib.countOf.recipes, ChrLib.countOf.uniqueRecipes, ChrLib.countOf.userRecipes, ChrLib.countOf.uniqueUserRecipes])
+			chrCount := Format(Locale.Read("about_lib_count"),
+				ChrLib.countOf.entries,
+				ChrLib.countOf.glyphVariations,
+				ChrLib.countOf.allKeys,
+				ChrLib.countOf.fastKeys,
+				ChrLib.countOf.recipes,
+				ChrLib.countOf.uniqueRecipes,
+				ChrLib.countOf.userRecipes,
+				ChrLib.countOf.uniqueUserRecipes
+			)
 
 			aboutDescBox := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutDescBox, App.Title(["decoded"]))
 			aboutDescBox.SetFont("s11", "Cambria")
