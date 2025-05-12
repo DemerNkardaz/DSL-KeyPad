@@ -683,7 +683,7 @@ Class ChrCrafter {
 				(StrLen(value.entity) > 0 ? value.entity : value.html)
 
 		} else if Auxiliary.inputMode = "LaTeX" && value.LaTeX.Length > 0 {
-			output := Cfg.Get("LaTeX_Mode", , "Default") = "Math" ? value.LaTeX[2] : value.LaTeX[1]
+			output := Cfg.Get("LaTeX_Mode", , "Text") = "Math" ? value.LaTeX[2] : value.LaTeX[1]
 
 		} else {
 			output := this.GetUniChar(value)

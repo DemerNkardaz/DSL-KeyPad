@@ -3,7 +3,7 @@ Class Cfg {
 		"Settings", [
 			"Unicode_Web_Resource", "SymblCC",
 			"Unicode_Web_Resource_Use_System_Language", "False",
-			"LaTeX_Mode", "Default",
+			"LaTeX_Mode", "Text",
 			"Input_Script", "Default",
 			"Layout_Latin", "QWERTY",
 			"Layout_Cyrillic", "ЙЦУКЕН",
@@ -20,6 +20,10 @@ Class Cfg {
 			"First_Message", "True",
 			"Turn_Off_Autocheck_Update", "False",
 			"Bind_Register_Tooltip_Progress_Bar", "True",
+		],
+		"PanelGUI", [
+			"List_Items_Font_Size", "",
+			"Preview_Font_Family", "",
 		],
 		"Compose", [],
 		"ScriptProcessor", [
@@ -107,7 +111,7 @@ Class Cfg {
 
 			optionsCommonY := 10
 			optionsCommonH := 230
-			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
+			optionsCommon := (h := optionsCommonH, y := optionsCommonY, addW := 0) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW + addW " h" h
 
 			optionsPanel.AddGroupBox("vGroupCommon " optionsCommon())
 
@@ -209,7 +213,7 @@ Class Cfg {
 			tabLabelChars := Locale.Read("gui_options_tab_characters")
 			tabLabels := [tabLabelChars]
 
-			optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + (84 + 25)), tabLabels)
+			optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + (84 + 25), 3), tabLabels)
 
 			optionsTabs.UseTab(tabLabelChars)
 
@@ -219,14 +223,29 @@ Class Cfg {
 				Locale.Read("gui_options_hybrid") " — Ii, LShift " Chr(0x0130) Chr(0x0131),
 			]
 
-			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(300 + 29) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
+			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(300 + 30) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
 
-			letterI_selector := optionsPanel.AddDropDownList("vLetterI_selector x" languageSelectorX() " w128 y" languageSelectorY(300 + 17 + 29), letterI_labels)
+			letterI_selector := optionsPanel.AddDropDownList("vLetterI_selector x" languageSelectorX() " w128 y" languageSelectorY(300 + 30 + 18), letterI_labels)
 			PostMessage(0x0153, -1, 15, letterI_selector)
 
 			letterI_savedOption := Cfg.Get("I_Dot_Shift_I_Dotless", "Characters")
 			letterI_selector.Text := letterI_savedOption = "Separated" ? letterI_labels[2] : letterI_savedOption = "Hybrid" ? letterI_labels[3] : letterI_labels[1]
 			letterI_selector.OnEvent("Change", (CB, Zero) => Options.CharacterOption(CB, "I"))
+
+
+			optionsPanel.AddText("vLaTeXMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30) " w80 BackgroundTrans", Locale.Read("gui_options_LaTeX_Mode"))
+
+			LaTeXOptionsList := {
+				Text: Locale.Read("gui_options_LaTeX_Mode_text"),
+				Math: Locale.Read("gui_options_LaTeX_Mode_math"),
+			}
+
+			LaTeXModeSelector := optionsPanel.AddDropDownList("vLaTeXModeSelector x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(300 + 30 + 18), [LaTeXOptionsList.Text, LaTeXOptionsList.Math])
+			PostMessage(0x0153, -1, 15, LaTeXModeSelector)
+
+			LaTeXOption := Cfg.Get("LaTeX_Mode", , "Text")
+			LaTeXModeSelector.Text := LaTeXOptionsList.%LaTeXOption%
+			LaTeXModeSelector.OnEvent("Change", (CB, Zero) => Options.LaTeXOption(CB.Text, LaTeXOptionsList))
 
 			optionsTabs.UseTab()
 
@@ -485,7 +504,6 @@ Class Cfg {
 	static BindedVars() {
 		return [
 			"FastKeysOn", this.Get("Mode_Fast_Keys", "Settings", False, "bool"),
-			"LaTeXMode", this.Get("LaTeX_Mode", "Settings", "Default"),
 			"SkipGroupMessage", this.Get("Skip_Group_Messages", "Settings", False, "bool"),
 		]
 	}
@@ -508,6 +526,7 @@ Class Cfg {
 	static Get(entry, section := "Settings", default := "", options := "") {
 		if this.sections.HasValue(section) {
 			value := IniRead(this.ini, section, entry, default)
+			value := value = "" ? default : value
 
 			this.OptionsHandler(value, options, &value)
 		} else {
@@ -535,6 +554,8 @@ Class Cfg {
 	}
 
 	static OptionsHandler(value, options := "", &output := value) {
+		if value = ""
+			return
 		if InStr(options, "toHex")
 			output := Util.ChrToHexaDecimal(value)
 		if InStr(options, "fromHex")
@@ -662,6 +683,12 @@ Class Options {
 		}
 
 		KeyboardBinder.RebuilBinds()
+	}
+
+	static LaTeXOption(title, options) {
+		for key, value in options.OwnProps()
+			if value = title
+				Cfg.Set(key, "LaTeX_Mode")
 	}
 
 	static SetAutoload() {

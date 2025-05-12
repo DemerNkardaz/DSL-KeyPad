@@ -479,7 +479,7 @@ Class ChrLib {
 			return StrLen(entry.entity) > 0 ? entry.entity : entry.html
 
 		} else if (getMode = "LaTeX" && entry.LaTeX.Length > 0) {
-			return (entry.LaTeX.Length = 2 && Cfg.Get("LaTeX_Mode") = "Math")
+			return (entry.LaTeX.Length = 2 && Cfg.Get("LaTeX_Mode", , "Text") = "Math")
 				? entry.LaTeX[2]
 			: entry.LaTeX[1]
 
@@ -839,6 +839,24 @@ Class ChrLib {
 		}
 	}
 
+	static ProcessOptionStrings(targetEntry) {
+		for key, value in targetEntry.options.OwnProps() {
+			if targetEntry.options.%key% is String {
+				targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\%self\%", Util.UnicodeToChar(targetEntry.unicode))
+
+				if InStr(targetEntry.options.%key%, "${") {
+					while RegExMatch(targetEntry.options.%key%, "\[(.*?)\]", &varMatch) {
+						splittedVariants := StrSplit(varMatch[1], ",")
+						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
+						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\@", targetEntry.data.letter, , 1)
+					}
+
+					targetEntry.options.%key% := ChrRecipeHandler.MakeStr(targetEntry.options.%key%)
+				}
+			}
+		}
+	}
+
 	static CloneOptions(sourceOptions, index) {
 		tempOptions := sourceOptions.Clone()
 		for key, value in sourceOptions.OwnProps() {
@@ -1018,6 +1036,7 @@ Class ChrLib {
 
 
 		this.ProcessSymbolLetter(refinedEntry)
+		this.ProcessOptionStrings(refinedEntry)
 
 		return refinedEntry
 	}
@@ -1096,6 +1115,15 @@ Class ChrLib {
 		if refinedEntry.groups.Length = 0
 			refinedEntry.groups := ["Default Group"]
 
+		for key, value in refinedEntry.options.OwnProps() {
+			if key ~= "i)^telex__" && value != "" {
+				TELEXName := RegExReplace(key, "i)^telex__")
+				TELEXName := StrReplace(TELEXName, "_", " ")
+				TELEXName := StrTitle(TELEXName)
+
+				refinedEntry.groups.push("TELEX/VNI " TELEXName)
+			}
+		}
 
 		for group in ["fastKey", "specialKey", "altLayoutKey"] {
 			if refinedEntry.options.HasOwnProp(group) {
@@ -1177,10 +1205,11 @@ Class ChrLib {
 
 		if refinedEntry.options.groupKey.Length > 0
 			refinedEntry.options.groupKeyPreview := this.SetNotaion(Util.FormatHotKey(refinedEntry.options.groupKey), dataPack)
-		for key in ["fastKey", "altLayoutKey", "altSpecialKey"] {
-			refinedEntry.options.%key% := this.SetNotaion(refinedEntry.options.%key%, dataPack)
-		}
+		toNotate := ["fastKey", "altLayoutKey", "altSpecialKey"]
 
+		for key, value in refinedEntry.options.OwnProps()
+			if toNotate.HasValue(key) || key ~= "i)^telex__"
+				refinedEntry.options.%key% := this.SetNotaion(value, dataPack)
 
 		if refinedEntry.recipe.Length > 0 {
 			for recipe in refinedEntry.recipe {
@@ -1260,12 +1289,12 @@ Class ChrLib {
 		}
 
 		if StrLen(data.case) > 0 {
-			if RegExMatch(output, "\/(.*?)\/", &match) {
-				output := RegExReplace(output, match[0], data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
+			while RegExMatch(output, "\/(.*?)\/", &match) {
+				output := RegExReplace(output, RegExEscape(match[0]), data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
 			}
 
-			if RegExMatch(output, "\\(.*?)\\", &match) {
-				output := RegExReplace(output, match[0], data.case = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
+			while RegExMatch(output, "\\(.*?)\\", &match) {
+				output := RegExReplace(output, RegExEscape(match[0]), data.case = "capital" ? StrUpper((match[1])) : StrLower(match[1]))
 			}
 		}
 
@@ -1274,7 +1303,7 @@ Class ChrLib {
 		for replace in staticReplaces {
 			output := StrReplace(output, replace, notationKey(replace))
 		}
-		while RegExMatch(output, "([a-zA-Zа-яА-ЯёЁ0-9<>``,\'\`";\~\%\-\=\\/]+|[\x{2190}-\x{2195}]+)(\s|$|\?|,\s)", &match) {
+		while RegExMatch(output, "([a-zA-Zа-яА-ЯёЁ0-9<>``,\'\`";\~\%\-\=\\/]+|[\x{2190}-\x{2195}]+|[\x{0100}-\x{017F}]+|[\x{0080}-\x{00FF}]+|[\x{1E00}-\x{1EFF}]+)(\s|$|\?|,\s)", &match) {
 			output := RegExReplace(output, match[1], notationKey(match[1]))
 		}
 

@@ -4097,27 +4097,43 @@ LibRegistrate(this) {
 		;
 		"lat_[c,s]_let_a__acute", {
 			unicode: ["00C1", "00E1"],
-			options: { fastKey: "$?Primary" }
+			options: {
+				fastKey: "$?Primary",
+				telex__vietnamese: "$ \S\",
+				telex__chinese_romanization: "$ \S\",
+			},
 		},
 		"lat_[c,s]_let_a__breve", {
 			unicode: ["0102", "0103"],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__vietnamese: "$ \W\",
+			}
 		},
 		"lat_[c,s]_let_a__breve_inverted", {
 			unicode: ["0202", "0203"]
 		},
 		"lat_[c,s]_let_a__circumflex", {
 			unicode: ["00C2", "00E2"],
-			options: { fastKey: "<! $?Secondary" }
+			options: {
+				fastKey: "<! $?Secondary",
+				telex__vietnamese: "$ $",
+			}
 		},
 		"lat_[c,s]_let_a__caron", {
-			unicode: ["01CD", "01CE"]
+			unicode: ["01CD", "01CE"],
+			options: {
+				telex__chinese_romanization: "$ \V\",
+			}
 		},
 		"lat_[c,s]_let_a__dot_above", {
 			unicode: ["0226", "0227"]
 		},
 		"lat_[c,s]_let_a__dot_below", {
-			unicode: ["1EA0", "1EA1"]
+			unicode: ["1EA0", "1EA1"],
+			options: {
+				telex__vietnamese: "$ \S\",
+			},
 		},
 		"lat_[c,s]_let_a__diaeresis", {
 			unicode: ["00C4", "00E4"],
@@ -4126,21 +4142,31 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_a__grave", {
 			unicode: ["00C0", "00E0"],
-			options: { fastKey: "$?Tertiary" }
+			options: {
+				fastKey: "$?Tertiary",
+				telex__vietnamese: "$ \F\",
+				telex__chinese_romanization: "$ \F\",
+			}
 		},
 		"lat_[c,s]_let_a__grave_double", {
 			unicode: ["0200", "0201"],
 			options: { fastKey: "<+ $?Tertiary" }
 		},
 		"lat_[c,s]_let_a__hook_above", {
-			unicode: ["1EA2", "1EA3"]
+			unicode: ["1EA2", "1EA3"],
+			options: {
+				telex__vietnamese: "$ \R\",
+			},
 		},
 		"lat_[s]_let_a__retroflex_hook", {
 			unicode: ["1D8F"]
 		},
 		"lat_[c,s]_let_a__macron", {
 			unicode: ["0100", "0101"],
-			options: { fastKey: ">+ $?Secondary" }
+			options: {
+				fastKey: ">+ $?Secondary",
+				telex__chinese_romanization: "$ $",
+			},
 		},
 		"lat_[c,s]_let_a__ring_above", {
 			unicode: ["00C5", "00E5"],
@@ -4158,37 +4184,70 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_a__tilde_above", {
 			unicode: ["00C3", "00E3"],
-			options: { fastKey: "<+>+ $?Secondary" }
+			options: {
+				fastKey: "<+>+ $?Secondary",
+				telex__vietnamese: "$ \X\",
+			},
 		},
 		"lat_[c,s]_let_a__breve__acute", {
-			unicode: ["1EAE", "1EAF"]
-		},
-		"lat_[c,s]_let_a__breve__grave", {
-			unicode: ["1EB0", "1EB1"]
+			unicode: ["1EAE", "1EAF"],
+			options: {
+				telex__vietnamese: "$ \W S\ | \Q\ 1 | ${lat_[c,s]_let_@__breve} \S\",
+			},
 		},
 		"lat_[c,s]_let_a__breve__dot_below", {
-			unicode: ["1EB6", "1EB7"]
+			unicode: ["1EB6", "1EB7"],
+			options: {
+				telex__vietnamese: "$ \W J\ | \Q\ 4 | ${lat_[c,s]_let_@__breve} \J\",
+			},
+		},
+		"lat_[c,s]_let_a__breve__grave", {
+			unicode: ["1EB0", "1EB1"],
+			options: {
+				telex__vietnamese: "$ \W F\ | \Q\ 2 | ${lat_[c,s]_let_@__breve} \F\",
+			},
 		},
 		"lat_[c,s]_let_a__breve__hook_above", {
-			unicode: ["1EB2", "1EB3"]
+			unicode: ["1EB2", "1EB3"],
+			options: {
+				telex__vietnamese: "$ \W R\ | \Q\ 3 | ${lat_[c,s]_let_@__breve} \R\",
+			},
 		},
 		"lat_[c,s]_let_a__breve__tilde_above", {
-			unicode: ["1EB4", "1EB5"]
+			unicode: ["1EB4", "1EB5"],
+			options: {
+				telex__vietnamese: "$ \W X\ | \Q\ 5 | ${lat_[c,s]_let_@__breve} \X\",
+			},
 		},
 		"lat_[c,s]_let_a__circumflex__acute", {
-			unicode: ["1EA4", "1EA5"]
+			unicode: ["1EA4", "1EA5"],
+			options: {
+				telex__vietnamese: "$ \W S\ | $ 1 | ${lat_[c,s]_let_a__circumflex} \S\",
+			},
 		},
 		"lat_[c,s]_let_a__circumflex__dot_below", {
-			unicode: ["1EAC", "1EAD"]
+			unicode: ["1EAC", "1EAD"],
+			options: {
+				telex__vietnamese: "$ \W J\ | $ 4  | ${lat_[c,s]_let_@__circumflex} \J\",
+			},
 		},
 		"lat_[c,s]_let_a__circumflex__grave", {
-			unicode: ["1EA6", "1EA7"]
+			unicode: ["1EA6", "1EA7"],
+			options: {
+				telex__vietnamese: "$ \W F\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \F\",
+			},
 		},
 		"lat_[c,s]_let_a__circumflex__hook_above", {
-			unicode: ["1EA8", "1EA9"]
+			unicode: ["1EA8", "1EA9"],
+			options: {
+				telex__vietnamese: "$ \W R\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \R\",
+			},
 		},
 		"lat_[c,s]_let_a__circumflex__tilde_above", {
-			unicode: ["1EAA", "1EAB"]
+			unicode: ["1EAA", "1EAB"],
+			options: {
+				telex__vietnamese: "$ \W X\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \X\",
+			},
 		},
 		"lat_[c,s]_let_a__dot_above__macron", {
 			unicode: ["01E0", "01E1"]
@@ -4226,7 +4285,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_b__stroke_short", {
 			unicode: ["0243", "0180"],
-			options: { fastKey: "<+ $?Secondary" }
+			options: {
+				fastKey: "<+ $?Secondary",
+				telex__jorai: "\B B\",
+			}
 		},
 		"lat_[s]_let_b__tilde_overlay", {
 			unicode: ["1D6C"]
@@ -4246,7 +4308,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_c__caron", {
 			unicode: ["010C", "010D"],
-			options: { fastKey: "<!<+ $?Secondary" },
+			options: {
+				fastKey: "<!<+ $?Secondary",
+				telex__jorai: "$ \Z\",
+			},
 		},
 		"lat_[c,s]_let_c__cedilla", {
 			unicode: ["00C7", "00E7"],
@@ -4331,6 +4396,9 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_d__stroke_short", {
 			unicode: ["0110", "0111"],
+			options: {
+				telex__vietnamese: "$ $",
+			},
 		},
 		"lat_[c,s]_let_d_tau_gallicum", {
 			unicode: ["A7C7", "A7C8"],
@@ -4358,7 +4426,11 @@ LibRegistrate(this) {
 		; Latin Letter “E”
 		"lat_[c,s]_let_e__acute", {
 			unicode: ["00C9", "00E9"],
-			options: { fastKey: "$?Primary" }
+			options: {
+				fastKey: "$?Primary",
+				telex__vietnamese: "$ \S\",
+				telex__chinese_romanization: "$ \S\",
+			},
 		},
 		"lat_[c,s]_let_e__breve", {
 			unicode: ["0114", "0115"]
@@ -4368,13 +4440,20 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_e__circumflex", {
 			unicode: ["00CA", "00EA"],
-			options: { fastKey: "<! $?Secondary" }
+			options: {
+				fastKey: "<! $?Secondary",
+				telex__vietnamese: "$ $",
+			},
 		},
 		"lat_[c,s]_let_e__circumflex_below", {
 			unicode: ["1E18", "1E19"]
 		},
 		"lat_[c,s]_let_e__caron", {
-			unicode: ["011A", "011B"]
+			unicode: ["011A", "011B"],
+			options: {
+				telex__jorai: "$ \Z\",
+				telex__chinese_romanization: "$ \V\",
+			}
 		},
 		"lat_[c,s]_let_e__cedilla", {
 			unicode: ["0228", "0229"]
@@ -4383,7 +4462,10 @@ LibRegistrate(this) {
 			unicode: ["0116", "0117"]
 		},
 		"lat_[c,s]_let_e__dot_below", {
-			unicode: ["1EB8", "1EB9"]
+			unicode: ["1EB8", "1EB9"],
+			options: {
+				telex__vietnamese: "$ \J\",
+			},
 		},
 		"lat_[c,s]_let_e__diaeresis", {
 			unicode: ["00CB", "00EB"],
@@ -4391,14 +4473,21 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_e__grave", {
 			unicode: ["00C8", "00E8"],
-			options: { fastKey: "$?Tertiary" }
+			options: {
+				fastKey: "$?Tertiary",
+				telex__vietnamese: "$ \F\",
+				telex__chinese_romanization: "$ \F\",
+			},
 		},
 		"lat_[c,s]_let_e__grave_double", {
 			unicode: ["0204", "0205"],
 			options: { fastKey: "<+ $?Tertiary" }
 		},
 		"lat_[c,s]_let_e__hook_above", {
-			unicode: ["1EBA", "1EBB"]
+			unicode: ["1EBA", "1EBB"],
+			options: {
+				telex__vietnamese: "$ \R\",
+			},
 		},
 		"lat_[s]_let_e__retroflex_hook", {
 			unicode: ["1D92"]
@@ -4409,7 +4498,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_e__macron", {
 			unicode: ["0112", "0113"],
-			options: { fastKey: ">+ $?Secondary" }
+			options: {
+				fastKey: ">+ $?Secondary",
+				telex__chinese_romanization: "$ \E\",
+			},
 		},
 		"lat_[c,s]_let_e__solidus_long", {
 			unicode: ["0246", "0247"]
@@ -4420,7 +4512,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_e__tilde_above", {
 			unicode: ["1EBC", "1EBD"],
-			options: { fastKey: "<+>+ $?Secondary" }
+			options: {
+				fastKey: "<+>+ $?Secondary",
+				telex__vietnamese: "$ \X\",
+			}
 		},
 		"lat_[c,s]_let_e__tilde_below", {
 			unicode: ["1E1A", "1E1B"]
@@ -4429,19 +4524,34 @@ LibRegistrate(this) {
 			unicode: ["1E1C", "1E1D"]
 		},
 		"lat_[c,s]_let_e__circumflex__acute", {
-			unicode: ["1EBE", "1EBF"]
+			unicode: ["1EBE", "1EBF"],
+			options: {
+				telex__vietnamese: "$ \W S\ | $ 1 | ${lat_[c,s]_let_@__circumflex} \S\",
+			},
 		},
 		"lat_[c,s]_let_e__circumflex__dot_below", {
-			unicode: ["1EC6", "1EC7"]
+			unicode: ["1EC6", "1EC7"],
+			options: {
+				telex__vietnamese: "$ \W J\ | $ 4 | ${lat_[c,s]_let_@__circumflex} \J\",
+			},
 		},
 		"lat_[c,s]_let_e__circumflex__grave", {
-			unicode: ["1EC0", "1EC1"]
+			unicode: ["1EC0", "1EC1"],
+			options: {
+				telex__vietnamese: "$ \W F\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \F\",
+			},
 		},
 		"lat_[c,s]_let_e__circumflex__hook_above", {
-			unicode: ["1EC2", "1EC3"]
+			unicode: ["1EC2", "1EC3"],
+			options: {
+				telex__vietnamese: "$ \W R\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \R\",
+			},
 		},
 		"lat_[c,s]_let_e__circumflex__tilde_above", {
-			unicode: ["1EC4", "1EC5"]
+			unicode: ["1EC4", "1EC5"],
+			options: {
+				telex__vietnamese: "$ \W X\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \X\",
+			},
 		},
 		"lat_[c,s]_let_e__macron__acute", {
 			unicode: ["1E16", "1E17"]
@@ -4556,11 +4666,18 @@ LibRegistrate(this) {
 		; Latin Letter “I”
 		"lat_[c,s]_let_i__acute", {
 			unicode: ["00CD", "00ED"],
-			options: { fastKey: "$?Primary" }
+			options: {
+				fastKey: "$?Primary",
+				telex__vietnamese: "$ \S\",
+				telex__chinese_romanization: "$ \S\",
+			},
 		},
 		"lat_[c,s]_let_i__breve", {
 			unicode: ["012C", "012D"],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__jorai: "$ \W\",
+			}
 		},
 		"lat_[c,s]_let_i__breve_inverted", {
 			unicode: ["020A", "020B"],
@@ -4571,14 +4688,20 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_i__caron", {
 			unicode: ["01CF", "01D0"],
-			options: { fastKey: "<!<+ $?Secondary" }
+			options: {
+				fastKey: "<!<+ $?Secondary",
+				telex__chinese_romanization: "$ \V\",
+			}
 		},
 		"lat_c_let_i__dot_above", {
 			unicode: "0130",
 			options: { fastKey: "<!<+>+ $?Secondary" }
 		},
 		"lat_[c,s]_let_i__dot_below", {
-			unicode: ["1ECA", "1ECB"]
+			unicode: ["1ECA", "1ECB"],
+			options: {
+				telex__vietnamese: "$ \J\",
+			},
 		},
 		"lat_[c,s]_let_i__diaeresis", {
 			unicode: ["00CF", "00EF"],
@@ -4586,21 +4709,31 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_i__grave", {
 			unicode: ["00CC", "00EC"],
-			options: { fastKey: "$?Tertiary" }
+			options: {
+				fastKey: "$?Tertiary",
+				telex__vietnamese: "$ \F\",
+				telex__chinese_romanization: "$ \F\",
+			},
 		},
 		"lat_[c,s]_let_i__grave_double", {
 			unicode: ["0208", "0209"],
 			options: { fastKey: "<+ $?Tertiary" }
 		},
 		"lat_[c,s]_let_i__hook_above", {
-			unicode: ["1EC8", "1EC9"]
+			unicode: ["1EC8", "1EC9"],
+			options: {
+				telex__vietnamese: "$ \R\",
+			},
 		},
 		"lat_[s]_let_i__retroflex_hook", {
 			unicode: ["1D96"]
 		},
 		"lat_[c,s]_let_i__macron", {
 			unicode: ["012A", "012B"],
-			options: { fastKey: ">+ $?Secondary" }
+			options: {
+				fastKey: ">+ $?Secondary",
+				telex__chinese_romanization: "$ $",
+			},
 		},
 		"lat_[c,s]_let_i__stroke_short", {
 			unicode: ["0197", "0268"],
@@ -4612,7 +4745,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_i__tilde_above", {
 			unicode: ["0128", "0129"],
-			options: { fastKey: "<+>+ $?Secondary" }
+			options: {
+				fastKey: "<+>+ $?Secondary",
+				telex__vietnamese: "$ \X\"
+			},
 		},
 		"lat_[c,s]_let_i__tilde_below", {
 			unicode: ["1E2C", "1E2D"]
@@ -4877,7 +5013,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_n__tilde_above", {
 			unicode: ["00D1", "00F1"],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__jorai: "$ $",
+			}
 		},
 		"lat_[s]_let_n__tilde_overlay", {
 			unicode: ["1D70"]
@@ -4889,40 +5028,64 @@ LibRegistrate(this) {
 		; Latin Letter “O”
 		"lat_[c,s]_let_o__acute", {
 			unicode: ["00D3", "00F3"],
-			options: { fastKey: "$?Primary" }
+			options: {
+				fastKey: "$?Primary",
+				telex__vietnamese: "$ \S\",
+				telex__chinese_romanization: "$ \S\",
+			},
 		},
 		"lat_[c,s]_let_o__acute_double", {
 			unicode: ["0150", "0151"],
 			options: { fastKey: "$?Secondary" }
 		},
 		"lat_[c,s]_let_o__breve", {
-			unicode: ["014E", "014F"]
+			unicode: ["014E", "014F"],
+			options: {
+				telex__jorai: "$ \Q\",
+			},
 		},
 		"lat_[c,s]_let_o__breve_inverted", {
 			unicode: ["020E", "020F"]
 		},
 		"lat_[c,s]_let_o__circumflex", {
 			unicode: ["00D4", "00F4"],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__vietnamese: "$ $",
+			},
 		},
 		"lat_[c,s]_let_o__caron", {
 			unicode: ["01D1", "01D2"],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__jorai: "$ \Z\",
+				telex__chinese_romanization: "$ \V\",
+			}
 		},
 		"lat_[c,s]_let_o__dot_above", {
 			unicode: ["022E", "022F"]
 		},
 		"lat_[c,s]_let_o__dot_below", {
-			unicode: ["1ECC", "1ECD"]
+			unicode: ["1ECC", "1ECD"],
+			options: {
+				telex__vietnamese: "$ \J\",
+			},
 		},
 		"lat_[c,s]_let_o__diaeresis", {
 			unicode: ["00D6", "00F6"],
 			alterations: [{}, { combining: "1DF3" }],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__jorai: "$ 8",
+			}
 		},
 		"lat_[c,s]_let_o__grave", {
 			unicode: ["00D2", "00F2"],
-			options: { fastKey: "$?Tertiary" }
+			options: {
+				fastKey: "$?Tertiary",
+				telex__vietnamese: "$ \F\",
+				telex__chinese_romanization: "$ \F\",
+			},
 		},
 		"lat_[c,s]_let_o__grave_double", {
 			unicode: ["020C", "020D"],
@@ -4933,7 +5096,10 @@ LibRegistrate(this) {
 			recipe: ["$${arrow_up_ushaped}"]
 		},
 		"lat_[c,s]_let_o__hook_above", {
-			unicode: ["1ECE", "1ECF"]
+			unicode: ["1ECE", "1ECF"],
+			options: {
+				telex__vietnamese: "$ \R\",
+			},
 		},
 		"lat_[s]_let_o__retroflex_hook", {
 			unicode: ["1DF1B"]
@@ -4944,11 +5110,17 @@ LibRegistrate(this) {
 			symbol: { beforeLetter: "open::3" }
 		},
 		"lat_[c,s]_let_o__horn", {
-			unicode: ["01A0", "01A1"]
+			unicode: ["01A0", "01A1"],
+			options: {
+				telex__vietnamese: "$ \W\",
+			},
 		},
 		"lat_[c,s]_let_o__macron", {
 			unicode: ["014C", "014D"],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__chinese_romanization: "$ $",
+			},
 		},
 		"lat_[c,s]_let_o__solidus_long", {
 			unicode: ["00D8", "00F8"],
@@ -4975,37 +5147,73 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_o__tilde_above", {
 			unicode: ["00D5", "00F5"],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__vietnamese: "$ \X\",
+			},
 		},
 		"lat_[c,s]_let_o__tilde_overlay", {
 			unicode: ["019F", "0275"]
 		},
-		"lat_[c,s]_let_o__acute__horn", {
-			unicode: ["1EDA", "1EDB"]
-		},
 		"lat_[c,s]_let_o__circumflex__acute", {
-			unicode: ["1ED0", "1ED1"]
+			unicode: ["1ED0", "1ED1"],
+			options: {
+				telex__vietnamese: "$ \W S\ | $ 1 | ${lat_[c,s]_let_@__circumflex} \S\",
+			},
 		},
 		"lat_[c,s]_let_o__circumflex__dot_below", {
-			unicode: ["1ED8", "1ED9"]
+			unicode: ["1ED8", "1ED9"],
+			options: {
+				telex__vietnamese: "$ \W J\ | $ 4 | ${lat_[c,s]_let_@__circumflex} \J\",
+			},
 		},
 		"lat_[c,s]_let_o__circumflex__grave", {
-			unicode: ["1ED2", "1ED3"]
+			unicode: ["1ED2", "1ED3"],
+			options: {
+				telex__vietnamese: "$ \W F\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \F\",
+			},
 		},
 		"lat_[c,s]_let_o__circumflex__hook_above", {
-			unicode: ["1ED4", "1ED5"]
+			unicode: ["1ED4", "1ED5"],
+			options: {
+				telex__vietnamese: "$ \W R\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \R\",
+			},
 		},
 		"lat_[c,s]_let_o__circumflex__tilde_above", {
-			unicode: ["1ED6", "1ED7"]
+			unicode: ["1ED6", "1ED7"],
+			options: {
+				telex__vietnamese: "$ \W X\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \X\",
+			},
 		},
-		"lat_[c,s]_let_o__dot_below__horn", {
-			unicode: ["1EE2", "1EE3"]
+		"lat_[c,s]_let_o__horn__acute", {
+			unicode: ["1EDA", "1EDB"],
+			options: {
+				telex__vietnamese: "$ \W S\ | P 1 | ${lat_[c,s]_let_@__horn} \S\",
+			},
 		},
-		"lat_[c,s]_let_o__grave__horn", {
-			unicode: ["1EDC", "1EDD"]
+		"lat_[c,s]_let_o__horn__dot_below", {
+			unicode: ["1EE2", "1EE3"],
+			options: {
+				telex__vietnamese: "$ \W J\ | P 4 | ${lat_[c,s]_let_@__horn} \J\",
+			},
 		},
-		"lat_[c,s]_let_o__hook_above__horn", {
-			unicode: ["1EDE", "1EDF"]
+		"lat_[c,s]_let_o__horn__grave", {
+			unicode: ["1EDC", "1EDD"],
+			options: {
+				telex__vietnamese: "$ \W F\ | P 2 | ${lat_[c,s]_let_@__horn} \F\",
+			},
+		},
+		"lat_[c,s]_let_o__horn__hook_above", {
+			unicode: ["1EDE", "1EDF"],
+			options: {
+				telex__vietnamese: "$ \W R\ | P 3 | ${lat_[c,s]_let_@__horn} \R\",
+			},
+		},
+		"lat_[c,s]_let_o__horn__tilde_above", {
+			unicode: ["1EE0", "1EE1"],
+			options: {
+				telex__vietnamese: "$ \W X\ | P 5 | ${lat_[c,s]_let_@__horn} \X\",
+			},
 		},
 		"lat_[c,s]_let_o__macron__acute", {
 			unicode: ["1E52", "1E53"]
@@ -5013,7 +5221,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_o__macron__dot_above", {
 			unicode: ["0230", "0231"]
 		},
-		"lat_[c,s]_let_o__macron__diaeresis", {
+		"lat_[c,s]_let_o__diaeresis__macron", {
 			unicode: ["022A", "022B"]
 		},
 		"lat_[c,s]_let_o__macron__grave", {
@@ -5033,9 +5241,6 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_o__tilde_above__diaeresis", {
 			unicode: ["1E4E", "1E4F"]
-		},
-		"lat_[c,s]_let_o__tilde_above__horn", {
-			unicode: ["1EE0", "1EE1"]
 		},
 		; Latin Letter “P”
 		"lat_[c,s]_let_p__acute", {
@@ -5278,7 +5483,11 @@ LibRegistrate(this) {
 		; Latin Letter “U”
 		"lat_[c,s]_let_u__acute", {
 			unicode: ["00DA", "00FA"],
-			options: { fastKey: "$?Primary" }
+			options: {
+				fastKey: "$?Primary",
+				telex__vietnamese: "$ \S\",
+				telex__chinese_romanization: "$ \S\",
+			}
 		},
 		"lat_[c,s]_let_u__acute_double", {
 			unicode: ["0170", "0171"],
@@ -5286,7 +5495,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_u__breve", {
 			unicode: ["016C", "016D"],
-			options: { fastKey: "$?Secondary" }
+			options: {
+				fastKey: "$?Secondary",
+				telex__jorai: "$ \Q\",
+			}
 		},
 		"lat_[c,s]_let_u__breve_inverted", {
 			unicode: ["0216", "0217"]
@@ -5296,38 +5508,60 @@ LibRegistrate(this) {
 			options: { fastKey: "<! $?Secondary" }
 		},
 		"lat_[c,s]_let_u__caron", {
-			unicode: ["01D3", "01D4"]
+			unicode: ["01D3", "01D4"],
+			options: {
+				telex__chinese_romanization: "$ \V\",
+			}
 		},
 		"lat_[c,s]_let_u__dot_below", {
-			unicode: ["1EE4", "1EE5"]
+			unicode: ["1EE4", "1EE5"],
+			options: {
+				telex__vietnamese: "$ \J\",
+			},
 		},
 		"lat_[c,s]_let_u__diaeresis", {
 			unicode: ["00DC", "00FC"],
-			options: { fastKey: "<+ $?Secondary" }
+			options: {
+				fastKey: "<+ $?Secondary",
+				telex__jorai: "$ 8",
+				telex__chinese_romanization: "$ 8",
+			}
 		},
 		"lat_[c,s]_let_u__diaeresis_below", {
 			unicode: ["1E72", "1E73"]
 		},
 		"lat_[c,s]_let_u__grave", {
 			unicode: ["00D9", "00F9"],
-			options: { fastKey: "$?Tertiary" }
+			options: { fastKey: "$?Tertiary",
+				telex__vietnamese: "$ \F\",
+				telex__chinese_romanization: "$ \F\",
+			}
 		},
 		"lat_[c,s]_let_u__grave_double", {
 			unicode: ["0214", "0215"],
 			options: { fastKey: "<+ $?Tertiary" }
 		},
 		"lat_[c,s]_let_u__hook_above", {
-			unicode: ["1EE6", "1EE7"]
+			unicode: ["1EE6", "1EE7"],
+			options: {
+				telex__vietnamese: "$ \R\",
+			},
 		},
 		"lat_[s]_let_u__retroflex_hook", {
 			unicode: ["1D99"]
 		},
 		"lat_[c,s]_let_u__horn", {
-			unicode: ["01AF", "01B0"]
+			unicode: ["01AF", "01B0"],
+			options: {
+				telex__vietnamese: "$ \W\",
+			},
 		},
 		"lat_[c,s]_let_u__macron", {
 			unicode: ["016A", "016B"],
-			options: { fastKey: ">+ $?Secondary" }
+			options: {
+				fastKey: ">+ $?Secondary",
+				telex__chinese_romanization: "$ $",
+			}
 		},
 		"lat_[c,s]_let_u__ring_above", {
 			unicode: ["016E", "016F"],
@@ -5342,40 +5576,70 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_u__tilde_above", {
 			unicode: ["0168", "0169"],
-			options: { fastKey: "<+>+ $?Secondary" }
+			options: {
+				fastKey: "<+>+ $?Secondary",
+				telex__vietnamese: "$ \X\",
+			}
 		},
 		"lat_[c,s]_let_u__tilde_below", {
 			unicode: ["1E74", "1E75"]
 		},
-		"lat_[c,s]_let_u__acute__horn", {
-			unicode: ["1EE8", "1EE9"]
+		"lat_[c,s]_let_u__horn__acute", {
+			unicode: ["1EE8", "1EE9"],
+			options: {
+				telex__vietnamese: "$ \W S\ | $ 1 | ${lat_[c,s]_let_@__horn} \S\",
+			},
 		},
-		"lat_[c,s]_let_u__dot_below__horn", {
-			unicode: ["1EF0", "1EF1"]
+		"lat_[c,s]_let_u__horn__dot_below", {
+			unicode: ["1EF0", "1EF1"],
+			options: {
+				telex__vietnamese: "$ \W J\ | $ 4 | ${lat_[c,s]_let_@__horn} \J\",
+			},
+		},
+		"lat_[c,s]_let_u__horn__grave", {
+			unicode: ["1EEA", "1EEB"],
+			options: {
+				telex__vietnamese: "$ \W F\ | $ 2 | ${lat_[c,s]_let_@__horn} \F\",
+			},
+		},
+		"lat_[c,s]_let_u__horn__hook_above", {
+			unicode: ["1EEC", "1EED"],
+			options: {
+				telex__vietnamese: "$ \W R\ | $ 3 | ${lat_[c,s]_let_@__horn} \R\",
+			},
+		},
+		"lat_[c,s]_let_u__horn__tilde_above", {
+			unicode: ["1EEE", "1EEF"],
+			options: {
+				telex__vietnamese: "$ \W X\ | $ 5 | ${lat_[c,s]_let_@__horn} \X\",
+			},
 		},
 		"lat_[c,s]_let_u__diaeresis__acute", {
-			unicode: ["01D7", "01D8"]
+			unicode: ["01D7", "01D8"],
+			options: {
+				telex__chinese_romanization: "$ 1 | ${lat_[c,s]_let_@__diaeresis} \S\",
+			},
 		},
 		"lat_[c,s]_let_u__diaeresis__caron", {
-			unicode: ["01D9", "01DA"]
+			unicode: ["01D9", "01DA"],
+			options: {
+				telex__chinese_romanization: "$ 3 | ${lat_[c,s]_let_@__diaeresis} \V\",
+			},
 		},
 		"lat_[c,s]_let_u__diaeresis__grave", {
-			unicode: ["01DB", "01DC"]
+			unicode: ["01DB", "01DC"],
+			options: {
+				telex__chinese_romanization: "$ 2 | ${lat_[c,s]_let_@__diaeresis} \F\",
+			},
 		},
-		"lat_[c,s]_let_u__grave__horn", {
-			unicode: ["1EEA", "1EEB"]
-		},
-		"lat_[c,s]_let_u__hook_above__horn", {
-			unicode: ["1EEC", "1EED"]
-		},
-		"lat_[c,s]_let_u__macron__diaeresis", {
-			unicode: ["01D5", "01D6"]
+		"lat_[c,s]_let_u__diaeresis__macron", {
+			unicode: ["01D5", "01D6"],
+			options: {
+				telex__chinese_romanization: "$ 4 | ${lat_[c,s]_let_@__diaeresis} $",
+			},
 		},
 		"lat_[c,s]_let_u__tilde_above__acute", {
 			unicode: ["1E78", "1E79"]
-		},
-		"lat_[c,s]_let_u__tilde_above__horn", {
-			unicode: ["1EEE", "1EEF"]
 		},
 		; Latin Letter “V”
 		"lat_[s]_let_v__curl", {
@@ -5450,7 +5714,10 @@ LibRegistrate(this) {
 		; Latin Letter “Y”
 		"lat_[c,s]_let_y__acute", {
 			unicode: ["00DD", "00FD"],
-			options: { fastKey: "$?Primary" }
+			options: {
+				fastKey: "$?Primary",
+				telex__vietnamese: "$ \S\",
+			}
 		},
 		"lat_[c,s]_let_y__circumflex", {
 			unicode: ["0176", "0177"],
@@ -5461,7 +5728,10 @@ LibRegistrate(this) {
 			options: { fastKey: "$?Secondary" }
 		},
 		"lat_[c,s]_let_y__dot_below", {
-			unicode: ["1EF4", "1EF5"]
+			unicode: ["1EF4", "1EF5"],
+			options: {
+				telex__vietnamese: "$ \J\",
+			},
 		},
 		"lat_[c,s]_let_y__diaeresis", {
 			unicode: ["0178", "00FF"],
@@ -5469,7 +5739,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_y__grave", {
 			unicode: ["1EF2", "1EF3"],
-			options: { fastKey: "$?Tertiary" }
+			options: {
+				fastKey: "$?Tertiary",
+				telex__vietnamese: "$ \F\",
+			}
 		},
 		"lat_[c,s]_let_y__loop", {
 			unicode: ["1EFE", "1EFF"],
@@ -5477,7 +5750,10 @@ LibRegistrate(this) {
 			recipe: ["$${arrow_up_ushaped}"]
 		},
 		"lat_[c,s]_let_y__hook_above", {
-			unicode: ["1EF6", "1EF7"]
+			unicode: ["1EF6", "1EF7"],
+			options: {
+				telex__vietnamese: "$ \R\",
+			},
 		},
 		"lat_[c,s]_let_y__common_hook", {
 			unicode: ["01B3", "01B4"],
@@ -5496,7 +5772,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_y__tilde_above", {
 			unicode: ["1EF8", "1EF9"],
-			options: { fastKey: "<+>+ $?Secondary" }
+			options: {
+				fastKey: "<+>+ $?Secondary",
+				telex__vietnamese: "$ \X\",
+			}
 		},
 		; Latin Letter “Z”
 		"lat_[c,s]_let_z__acute", {

@@ -24,7 +24,7 @@ Class Panel {
 
 		lvW := panelWidth - (panelWidth / 3)
 		lvH := panelHeight - 90
-		lvCols := [lvW * 0.55, lvW * 0.2, lvW * 0.1, lvW * 0.1, 0, 0]
+		lvCols := [lvW * 0.525, lvW * 0.2, lvW * 0.125, lvW * 0.1, 0, 0]
 
 		ibBodyW := (panelWidth - lvW) / 1.25
 		ibBodyH := panelHeight - 60
@@ -554,84 +554,71 @@ Class Panel {
 			scripts: ArrayMerge(
 				this.LV_InsertGroup([
 					;
-					{ type: "Alternative Layout", group: "Fake Futhark", groupKey: RightControl " 1" },
+					{ type: "Alternative Layout", group: "Hellenic", groupKey: Locale.Read("symbol_hellenic") },
 					;
-					{ type: "Alternative Layout", group: "Futhark Runes", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_futhark") },
+					{ type: "Alternative Layout", group: "Futhark Runes", groupKey: Locale.Read("symbol_futhark"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Futhork Runes", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_futhork"), separator: true },
+					{ type: "Alternative Layout", group: "Futhork Runes", groupKey: Locale.Read("symbol_futhork"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Younger Futhark Runes", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_futhark_younger"), separator: true },
+					{ type: "Alternative Layout", group: "Younger Futhark Runes", groupKey: Locale.Read("symbol_futhark_younger"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Almanac Runes", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_futhark_almanac"), separator: true },
+					{ type: "Alternative Layout", group: "Almanac Runes", groupKey: Locale.Read("symbol_futhark_almanac"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Later Younger Futhark Runes", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_futhark_younger_later"), separator: true },
+					{ type: "Alternative Layout", group: "Later Younger Futhark Runes", groupKey: Locale.Read("symbol_futhark_younger_later"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Medieval Runes", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_medieval_runes"), separator: true },
+					{ type: "Alternative Layout", group: "Medieval Runes", groupKey: Locale.Read("symbol_medieval_runes"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Runic Punctuation", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_runic_punctuation"), separator: true },
+					{ type: "Alternative Layout", group: "Runic Punctuation", groupKey: Locale.Read("symbol_runic_punctuation"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Fake Glagolitic", groupKey: RightControl " 1" },
+					{ type: "Alternative Layout", group: "Glagolitic Letters", groupKey: Locale.Read("symbol_glagolitic"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Glagolitic Letters", combinationKey: RightControl " 1", groupKey: Locale.Read("symbol_glagolitic") },
+					{ type: "Alternative Layout", group: "Cyrillic Diacritics", groupKey: "" },
 					;
-					{ type: "Alternative Layout", group: "Cyrillic Diacritics", combinationKey: RightControl " 1", groupKey: "", separator: true },
+					{ type: "Alternative Layout", group: "Old Turkic", groupKey: Locale.Read("symbol_turkic"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Fake Hellenic", groupKey: RightControl " ?", separator: true },
+					{ type: "Alternative Layout", group: "Old Turkic Orkhon", groupKey: Locale.Read("symbol_turkic_orkhon") },
 					;
-					{ type: "Alternative Layout", group: "Hellenic", combinationKey: RightControl " ``", groupKey: Locale.Read("symbol_hellenic") },
+					{ type: "Alternative Layout", group: "Old Turkic Yenisei", groupKey: Locale.Read("symbol_turkic_yenisei"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Fake Turkic", groupKey: CapsLock RightControl " 1", separator: true },
+					{ type: "Alternative Layout", group: "Old Permic", groupKey: Locale.Read("symbol_permic"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Old Turkic", groupKey: Locale.Read("symbol_turkic") },
+					{ type: "Alternative Layout", group: "Old Hungarian", groupKey: Locale.Read("symbol_hungarian"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Old Turkic Orkhon", combinationKey: CapsLock RightControl " 1", groupKey: Locale.Read("symbol_turkic_orkhon") },
+					{ type: "Alternative Layout", group: "Gothic Alphabet", groupKey: Locale.Read("symbol_gothic"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Old Turkic Yenisei", combinationKey: CapsLock RightControl " 1", groupKey: Locale.Read("symbol_turkic_yenisei"), separator: true },
+					{ type: "Alternative Layout", group: "Old Italic", groupKey: Locale.Read("symbol_old_italic"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Fake Permic", groupKey: CapsLock RightControl " 1", separator: true },
+					{ type: "Alternative Layout", group: "Phoenician", groupKey: Locale.Read("symbol_phoenician"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Old Permic", combinationKey: CapsLock RightControl " 1", groupKey: Locale.Read("symbol_permic") },
+					{ type: "Alternative Layout", group: "South Arabian", groupKey: Locale.Read("symbol_ancient_south_arabian"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Fake Hungarian", groupKey: RightControl " 2", separator: true },
+					{ type: "Alternative Layout", group: "North Arabian", groupKey: Locale.Read("symbol_ancient_north_arabian"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Old Hungarian", combinationKey: RightControl " 2", groupKey: Locale.Read("symbol_hungarian") },
+					{ type: "Alternative Layout", group: "Ugaritic", groupKey: Locale.Read("symbol_ugaritic"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Fake Gothic", groupKey: CapsLock RightControl " 2", separator: true },
+					{ type: "Alternative Layout", group: "IPA", groupKey: Locale.Read("symbol_ipa"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Gothic Alphabet", combinationKey: CapsLock RightControl " 2", groupKey: Locale.Read("symbol_gothic") },
+					{ type: "Alternative Layout", group: "Mathematical", groupKey: Locale.Read("symbol_maths"), separator: true },
 					;
-					{ type: "Alternative Layout", group: "Fake Italic", groupKey: RightControl " 3", separator: true },
+					{ type: "Alternative Layout", group: "Math", groupKey: "", separator: true },
 					;
-					{ type: "Alternative Layout", group: "Old Italic", combinationKey: RightControl " 3", groupKey: Locale.Read("symbol_old_italic") },
-					;
-					{ type: "Alternative Layout", group: "Fake Phoenician", groupKey: CapsLock RightControl " 3", separator: true },
-					;
-					{ type: "Alternative Layout", group: "Phoenician", combinationKey: CapsLock RightControl " 3", groupKey: Locale.Read("symbol_phoenician") },
-					;
-					{ type: "Alternative Layout", group: "Fake South Arabian", groupKey: RightControl " 4", separator: true },
-					;
-					{ type: "Alternative Layout", group: "South Arabian", combinationKey: RightControl " 4", groupKey: Locale.Read("symbol_ancient_south_arabian") },
-					;
-					{ type: "Alternative Layout", group: "Fake North Arabian", groupKey: CapsLock RightControl " 4", separator: true },
-					;
-					{ type: "Alternative Layout", group: "North Arabian", combinationKey: CapsLock RightControl " 4", groupKey: Locale.Read("symbol_ancient_north_arabian") },
-					;
-					{ type: "Alternative Layout", group: "Fake Ugaritic", groupKey: RightControl " ??", separator: true },
-					;
-					{ type: "Alternative Layout", group: "Ugaritic", combinationKey: RightControl " ??", groupKey: Locale.Read("symbol_ugaritic") },
-					;
-					{ type: "Alternative Layout", group: "Fake IPA", groupKey: RightControl " 0", separator: true },
-					;
-					{ type: "Alternative Layout", group: "IPA", combinationKey: RightControl " 0", groupKey: Locale.Read("symbol_ipa") },
-					;
-					{ type: "Alternative Layout", group: "Fake Math", groupKey: RightControl RightShift " 0", separator: true },
-					;
-					{ type: "Alternative Layout", group: "Mathematical", combinationKey: RightControl RightShift " 0", groupKey: Locale.Read("symbol_maths") },
-					;
-					{ type: "Alternative Layout", group: "Math", combinationKey: RightControl RightShift " 0", groupKey: "", separator: true },
-					;
-					{ type: "Alternative Layout", group: "Math Spaces", combinationKey: RightControl RightShift " 0", groupKey: "", separator: true },
+					{ type: "Alternative Layout", group: "Math Spaces", groupKey: "", separator: true },
 				]),
+			),
+			TELEXVNI: ArrayMerge(
+				this.LV_InsertGroup([
+					;
+					{ type: "TELEX/VNI", subType: "vietnamese", group: "Fake TELEX/VNI", groupKey: RightAlt " F2" },
+					;
+					{ type: "TELEX/VNI", subType: "vietnamese", group: "TELEX/VNI Vietnamese", combinationKey: RightAlt " F2", groupKey: Locale.Read("symbol_vietnamese") },
+					;
+					{ type: "TELEX/VNI", subType: "jorai", group: "TELEX/VNI Jorai", combinationKey: RightAlt " F2", groupKey: Locale.Read("symbol_jorai"), separator: true },
+					;
+					{ type: "TELEX/VNI", subType: "vietnamese", group: "Fake TELEX/VNI", groupKey: RightAlt RightShift " F2", separator: true },
+					;
+					{ type: "TELEX/VNI", subType: "chinese_romanization", group: "TELEX/VNI Chinese Romanization", combinationKey: RightAlt RightShift " F2", groupKey: Locale.Read("symbol_chinese_romanization") },
+					;
+				])
 			),
 		}
 
@@ -646,7 +633,7 @@ Class Panel {
 		panelTabList := { Obj: {}, Arr: [] }
 		panelColList := { default: [], smelting: [] }
 
-		for _, localeKey in ["diacritics", "spaces", "smelting", "fastkeys", "scripts", "commands", "about", "useful", "changelog"] {
+		for _, localeKey in ["diacritics", "spaces", "smelting", "fastkeys", "scripts", "TELEXVNI", "commands", "about", "useful", "changelog"] {
 			localeText := Locale.Read("tab_" localeKey)
 			panelTabList.Obj.%localeKey% := localeText
 			panelTabList.Arr.Push(localeText)
@@ -742,6 +729,12 @@ Class Panel {
 				columnWidths: UISets.column.widths,
 				source: this.LV_Content.scripts,
 				previewType: "Alternative Layout",
+			}, {
+				winObj: panelWindow,
+				prefix: "TELEX/VNI",
+				columns: panelColList.default,
+				columnWidths: UISets.column.widths,
+				source: this.LV_Content.TELEXVNI,
 			}]
 
 			tabHeaders := [
@@ -749,7 +742,8 @@ Class Panel {
 				panelTabList.Obj.spaces,
 				panelTabList.Obj.smelting,
 				panelTabList.Obj.fastkeys,
-				panelTabList.Obj.scripts
+				panelTabList.Obj.scripts,
+				panelTabList.Obj.TELEXVNI,
 			]
 
 			for i, header in tabHeaders {
@@ -923,7 +917,7 @@ Class Panel {
 		}
 
 		items_LV := panelWindow.AddListView(UISets.column.listStyle " v" options.prefix "LV", options.columns)
-		items_LV.SetFont("s10")
+		items_LV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 10, "int"))
 		items_LV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: options.prefix, previewType: options.previewType }))
 		items_LV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber))
 
@@ -974,8 +968,10 @@ Class Panel {
 			unicodeBlockLabel: panelWindow.AddText("v" options.prefix "UnicodeBlockLabel " UISets.infoBox.unicodeBlockLabel, ""),
 		}
 
-		GroupBoxOptions.preview.SetFont("s" UISets.infoFonts.previewSize, Fonts.fontFaces["Default"].name)
-		GroupBoxOptions.title.SetFont("s" UISets.infoFonts.titleSize, Fonts.fontFaces["Default"].name)
+		previewFont := Cfg.Get("Preview_Font_Family", "PanelGUI", Fonts.fontFaces["Default"].name)
+
+		GroupBoxOptions.preview.SetFont("s" UISets.infoFonts.previewSize, previewFont)
+		GroupBoxOptions.title.SetFont("s" UISets.infoFonts.titleSize, previewFont)
 		GroupBoxOptions.LaTeX.SetFont("s12")
 		GroupBoxOptions.alt.SetFont("s12")
 		GroupBoxOptions.unicode.SetFont("s12")
@@ -985,7 +981,7 @@ Class Panel {
 		GroupBoxOptions.keyPreview.SetFont("s12")
 		GroupBoxOptions.legendButton.SetFont("s11")
 		GroupBoxOptions.legendButton.Enabled := False
-		GroupBoxOptions.unicodeBlockLabel.SetFont("s9 cBlue")
+		GroupBoxOptions.unicodeBlockLabel.SetFont("s9 c5088c8")
 
 		GroupBoxOptions.unicodeBlockLabel.OnEvent("Click", (*) => UnicodeBlockWebResource(GroupBoxOptions.unicodeBlockLabel.Text))
 
@@ -1077,6 +1073,8 @@ Class Panel {
 			}
 		}
 
+		previewFont := Cfg.Get("Preview_Font_Family", "PanelGUI", Fonts.fontFaces["Default"].name)
+
 		if StrLen(characterEntry) < 1 {
 			this.PanelGUI[options.prefix "Title"].Text := "N/A"
 			this.PanelGUI[options.prefix "Symbol"].Text := ChrLib.Get("dotted_circle")
@@ -1090,8 +1088,8 @@ Class Panel {
 			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
 			this.PanelGUI[options.prefix "Alert"].Text := ""
 
-			this.PanelGUI[options.prefix "Title"].SetFont("s" UISets.infoFonts.titleSize " norm cDefault", Fonts.fontFaces["Default"].name)
-			this.PanelGUI[options.prefix "Symbol"].SetFont("s" UISets.infoFonts.previewSize " norm cDefault", Fonts.fontFaces["Default"].name)
+			this.PanelGUI[options.prefix "Title"].SetFont("s" UISets.infoFonts.titleSize " norm cDefault", previewFont)
+			this.PanelGUI[options.prefix "Symbol"].SetFont("s" UISets.infoFonts.previewSize " norm cDefault", previewFont)
 			this.PanelGUI[options.prefix "Unicode"].SetFont("s12")
 			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont("s12")
@@ -1141,7 +1139,7 @@ Class Panel {
 
 			this.PanelGUI[options.prefix "Title"].SetFont((StrLen(this.PanelGUI[options.prefix "Title"].Text) > 30) ? "s12" : "s" UISets.infoFonts.titleSize)
 
-			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(value.symbol.font) > 0 ? value.symbol.font : Fonts.fontFaces["Default"].name)
+			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(value.symbol.font) > 0 ? value.symbol.font : previewFont)
 			this.PanelGUI[options.prefix "Symbol"].SetFont("s" UISets.infoFonts.previewSize " norm cDefault")
 			this.PanelGUI[options.prefix "Symbol"].SetFont(StrLen(value.symbol.customs) > 0 ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" UISets.infoFonts.previewSmaller " norm cDefault" : "s" UISets.infoFonts.previewSize " norm cDefault")
 
@@ -1322,7 +1320,10 @@ Class Panel {
 								(options.type = "Recipe" && (value.recipe.Length = 0)) ||
 								(options.type = "Fast Key" && (StrLen(value.options.fastKey) < 2)) ||
 								(options.type = "Fast Key Special" && (StrLen(value.options.specialKey) < 2)) ||
-								(options.type = "Alternative Layout" && (StrLen(value.options.altLayoutKey) < 2))
+								(options.type = "Alternative Layout" && (StrLen(value.options.altLayoutKey) < 2)) ||
+								(options.type = "TELEX/VNI" && (!value.options.HasOwnProp("telex__" options.subType) ||
+									value.options.HasOwnProp("telex__" options.subType) && value.options.telex__%options.subType% = "")
+								)
 							{
 								continue
 							}
@@ -1360,6 +1361,7 @@ Class Panel {
 							"Special Combinations", value.options.altSpecialKey,
 							"Fast Key", value.options.fastKey,
 							"Group Activator", StrLen(value.options.groupKeyPreview) > 0 && value.options.groupKeyPreview,
+							"TELEX/VNI", options.type = "TELEX/VNI" && value.options.HasOwnProp("telex__" options.subType) ? value.options.telex__%options.subType% : "",
 						)
 
 						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : "N/A"

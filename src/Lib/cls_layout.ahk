@@ -1360,7 +1360,7 @@ Class Scripter {
 	static WaitForKey(hotkeys, selectorType) {
 		this.isScripterWaiting := True
 		useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
-		useRemap ? (KeyboardBinder.UnregisterAll(), KeyboardBinder.Registration(BindList.Get("Keyboard Default"), True)) : Suspend(1)
+		useRemap ? (KeyboardBinder.Registration(BindList.Get("Keyboard Default"), True)) : Suspend(1)
 
 		IH := InputHook("L1 M")
 		IH.OnEnd := OnEnd

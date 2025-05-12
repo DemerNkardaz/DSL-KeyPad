@@ -578,6 +578,8 @@ bindingMaps := Map(
 			"NumpadMult", (K) => BindHandler.TimeSend(K, Map(
 				"NumpadDiv", (*) => BindHandler.Send(K, "division_times"),
 			), (*) => BindHandler.Send(K, "multiplication")),
+			"NumpadDiv", (K) => BindHandler.TimeSend(K, Map(),
+				(*) => BindHandler.Send(K, "division")),
 		),
 		"Moded", Map(
 			; Numpad
