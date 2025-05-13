@@ -180,5 +180,8 @@
     <Image Include="DSLKeyPad.app_sidetic.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_cypriot_syllabary.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -48,6 +48,7 @@
 #define IDI_GLYPH_FULLWIDTH 144
 #define IDI_LYDIAN 145
 #define IDI_SIDETIC 146
+#define IDI_CYPRIOT_SYLLABARY 147
 
 // Next default values for new objects
 //

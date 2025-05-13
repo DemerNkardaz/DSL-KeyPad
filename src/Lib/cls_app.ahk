@@ -52,6 +52,7 @@ Class App {
 			"glyph_fullwidth",
 			"lydian",
 			"sidetic",
+			"cypriot_syllabary",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

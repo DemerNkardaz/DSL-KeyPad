@@ -948,11 +948,19 @@ Class Scripter {
 			},
 			"Sidetic", {
 				preview: ["Wait for Unicode 17.0 2025/09/09+"],
-				fonts: ["Noto Sans sidetic"],
+				fonts: ["Noto Sans Sidetic"],
 				locale: "alt_mode_sidetic",
 				bindings: ["Sidetic"],
 				uiid: "Sidetic",
 				icons: ["sidetic"],
+			},
+			"Cypriot Syllabary", {
+				preview: [Util.UnicodeToChars("10800", "1081A", "1082E", "1080B", "2003", "10800", "10823", "1080E", "10826", "1081A", "2003", "10828", "1082D", "1082A", "1080E", "10821", "10826", "10829")],
+				fonts: ["Noto Sans Cypriot"],
+				locale: "alt_mode_cypriot_syllabary",
+				bindings: ["Cypriot Syllabary"],
+				uiid: "CypriotSyllabary",
+				icons: ["cypriot_syllabary"],
 			},
 			"Tifinagh", {
 				preview: [Util.UnicodeToChars("2D30", "2D4E", "2D53", "2D4F", "2D59", "2D3D", "2D30", "2D4D", "2003", "2D49", "2D39", "2003", "2D30", "2D3C", "2D54", "2D37", "2D49", "2D59")],
@@ -1538,6 +1546,11 @@ Class GlyphsPanel {
 
 					xBox := symbolPreviewBoxX + col * (symbolPreviewBoxW + gutterX)
 					yBox := symbolPreviewBoxY + row * (symbolPreviewBoxH + gutterY)
+
+					glyphsPanel.AddText(
+						Format("vSymbolPreviewBoxBg{} w{} h{} x{} y{} BackgroundWhite",
+							i, symbolPreviewBoxW, symbolPreviewBoxH - 10, xBox, yBox + 7)
+					)
 
 					glyphsPanel.AddGroupBox(
 						Format("vSymbolPreviewBox{} w{} h{} x{} y{}",

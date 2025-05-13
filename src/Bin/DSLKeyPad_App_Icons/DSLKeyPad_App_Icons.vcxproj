@@ -202,6 +202,7 @@
     <Image Include="DSLKeyPad.app_glyph_fullwidth.ico" />
     <Image Include="DSLKeyPad.app_lydian.ico" />
     <Image Include="DSLKeyPad.app_sidetic.ico" />
+    <Image Include="DSLKeyPad.app_cypriot_syllabary.ico" />
     <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
