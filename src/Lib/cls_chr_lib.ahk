@@ -467,7 +467,7 @@ Class ChrLib {
 	static Get(entryName, extraRules := False, getMode := "Unicode", alt := Scripter.selectedMode.Get("Glyph Variations")) {
 		if StrLen(alt) == 0
 			alt := Scripter.selectedMode.Get("Glyph Variations")
-
+		alt := this.ValidateAlt(alt)
 		entry := this.GetEntry(entryName)
 
 		getMode := StrLen(getMode) ? getMode : "Unicode"
@@ -705,6 +705,7 @@ Class ChrLib {
 			"small", ["маленький", "мал", "sm"],
 			"combining", ["комбинируемый", "ко", "c"],
 			"uncombined", ["некомбинируемый", "неко", "uc"],
+			"fullwidth", ["полноширинный", "пш", "fw"],
 		)
 
 		for key, value in alterationNames {
@@ -723,7 +724,7 @@ Class ChrLib {
 		if isSensitive
 			searchQuery := SubStr(searchQuery, 2)
 
-		alteration := RegExMatch(searchQuery, "\:\:(.*?)$", &match) ? this.ValidateAlt(match[1]) : Scripter.selectedMode.Get("Glyph Variations")
+		alteration := RegExMatch(searchQuery, "\:\:(.*?)$", &match) ? match[1] : Scripter.selectedMode.Get("Glyph Variations")
 
 		searchQuery := RegExReplace(searchQuery, "\:\:(.*?)$", "")
 

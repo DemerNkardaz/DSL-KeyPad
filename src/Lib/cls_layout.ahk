@@ -938,6 +938,22 @@ Class Scripter {
 				uiid: "Lycian",
 				icons: ["lycian"],
 			},
+			"Lydian", {
+				preview: [Util.UnicodeToChars("1092C", "1092D", "10920", "10937", "2003", "10929", "10924", "10931", "1092E", "2003", "10939", "10926", "10925", "10933")],
+				fonts: ["Noto Sans Lydian"],
+				locale: "alt_mode_lydian",
+				bindings: ["Lydian"],
+				uiid: "Lydian",
+				icons: ["lydian"],
+			},
+			"Sidetic", {
+				preview: ["Wait for Unicode 17.0 2025/09/09+"],
+				fonts: ["Noto Sans sidetic"],
+				locale: "alt_mode_sidetic",
+				bindings: ["Sidetic"],
+				uiid: "Sidetic",
+				icons: ["sidetic"],
+			},
 			"Tifinagh", {
 				preview: [Util.UnicodeToChars("2D30", "2D4E", "2D53", "2D4F", "2D59", "2D3D", "2D30", "2D4D", "2003", "2D49", "2D39", "2003", "2D30", "2D3C", "2D54", "2D37", "2D49", "2D59")],
 				fonts: ["Noto Sans Tifinagh"],
@@ -1417,6 +1433,221 @@ Class Scripter {
 	}
 }
 
+Class GlyphsPanel {
+	static panelGUI := Gui()
+	static title := ""
+	static glyphsPanelList := []
+
+	__New(preselectEntry) {
+		GlyphsPanel.Panel(preselectEntry)
+	}
+
+	static SetPanelData() {
+		entries := Map()
+		output := []
+
+		for entryName, value in ChrLib.entries.OwnProps()
+			if ObjOwnPropCount(value.alterations) > 0
+				entries.Set(value.index, entryName)
+
+		for index, entryName in entries {
+			unicode := Util.UnicodeToChar(ChrLib.entries.%entryName%.unicode)
+			alts := ""
+
+			for key, alt in ChrLib.entries.%entryName%.alterations.OwnProps()
+				if !(key ~= "i)HTML$")
+					alts .= (key = "combining" ? DottedCircle : "") Util.UnicodeToChar(alt) " "
+
+			output.Push([unicode, alts, entryName])
+		}
+
+		this.glyphsPanelList := output
+	}
+
+	static Panel(preselectEntry := "") {
+		panelW := 728
+		panelH := 800
+
+		posX := (A_ScreenWidth - panelW) / 2
+		posY := (A_ScreenHeight - panelH) / 2
+
+		listViewW := 256 + 96
+		listViewH := panelH - 20
+		listViewX := 10
+		listViewY := (panelH - listViewH) / 2
+
+		lvCols := [listViewW * 0.25, listViewW * 0.68, 0]
+
+		symbolPreviewBoxW := 96 + 16
+		symbolPreviewBoxH := 96 + 16
+		symbolPreviewBoxX := (listViewW + listViewX) + 10
+		symbolPreviewBoxY := 10
+
+		symbolPreviewW := 96 - 8
+		symbolPreviewH := 96 - 8
+		symbolPreviewX := symbolPreviewBoxX + (symbolPreviewBoxW - symbolPreviewW) / 2
+		symbolPreviewY := symbolPreviewBoxY + (symbolPreviewBoxH - symbolPreviewH) / 2
+
+		previewsCount := 21
+
+		this.title := App.Title() " — " Locale.Read("gui_scripter_glyph_variation_panel")
+
+		Constructor() {
+
+			glyphsPanel := Gui()
+			glyphsPanel.title := this.title
+			glyphsPanel.OnEvent("Close", (*) => glyphsPanel.Destroy())
+
+			glyphsColumns := ["key", "view", "entry_title"]
+			for i, each in glyphsColumns
+				glyphsColumns[i] := Locale.Read("col_" each)
+
+			glyphsLV := glyphsPanel.AddListView(Format("vGlyphsLV w{} h{} x{} y{}", listViewW, listViewH, listViewX, listViewY), glyphsColumns)
+			glyphsLV.OnEvent("ItemFocus", (LV, rowNumber) => this.GVPanelSelect(LV, rowNumber, glyphsPanel, previewsCount))
+
+			for each in this.glyphsPanelList
+				glyphsLV.Add(, each[1], each[2], each[3])
+
+			for i, each in glyphsColumns
+				glyphsLV.ModifyCol(i, lvCols[i])
+
+			Loop previewsCount
+				AddSymbolPreviewFrames(A_Index)
+
+			if preselectEntry != "" {
+				LV_Rows := glyphsLV.GetCount()
+				Loop LV_Rows {
+					if glyphsLV.GetText(A_Index, 3) = preselectEntry {
+						glyphsLV.Modify(A_Index, "+Select +Focus")
+						this.GVPanelSelect(glyphsLV, A_Index, glyphsPanel, previewsCount)
+						break
+					}
+				}
+			}
+
+			glyphsPanel.Show(Format("w{} h{} x{} y{}", panelW, panelH, posX, posY))
+			return glyphsPanel
+
+			AddSymbolPreviewFrames(i := 0) {
+				if (i > 0) {
+					col := Mod(i - 1, 3)
+					row := Floor((i - 1) / 3)
+
+					gutterX := 5
+					gutterY := -2
+
+					xBox := symbolPreviewBoxX + col * (symbolPreviewBoxW + gutterX)
+					yBox := symbolPreviewBoxY + row * (symbolPreviewBoxH + gutterY)
+
+					glyphsPanel.AddGroupBox(
+						Format("vSymbolPreviewBox{} w{} h{} x{} y{}",
+							i, symbolPreviewBoxW, symbolPreviewBoxH, xBox, yBox)
+					)
+
+					xEdit := xBox + (symbolPreviewBoxW - symbolPreviewW) / 2
+					yEdit := (yBox + (symbolPreviewBoxH - symbolPreviewH) / 2) + 2
+
+					glyphsEdit := glyphsPanel.AddEdit(
+						Format("vSymbolPreview{} w{} h{} x{} y{} readonly Center -VScroll -HScroll",
+							i, symbolPreviewW, symbolPreviewH, xEdit, yEdit)
+					)
+					glyphsEdit.SetFont("s42")
+				}
+			}
+		}
+
+		if IsGuiOpen(this.title) {
+			WinActivate(this.title)
+		} else {
+			this.panelGUI := Constructor()
+			this.panelGUI.Show()
+		}
+	}
+
+	static GVPanelSelect(LV, rowNumber, glyphsPanel, previewsCount) {
+		static order := [
+			"combining",
+			"modifier",
+			"subscript",
+			"italic",
+			"italicBold",
+			"bold",
+			"sansSerif",
+			"sansSerifItalic",
+			"sansSerifItalicBold",
+			"sansSerifBold",
+			"fraktur",
+			"frakturBold",
+			"script",
+			"scriptBold",
+			"doubleStruck",
+			"doubleStruckItalic",
+			"monospace",
+			"fullwidth",
+			"smallCapital",
+			"uncombined",
+			"small",
+		]
+
+		static fonts := Map(
+			"combining", "Noto Serif",
+			"modifier", "Noto Serif",
+			"subscript", "Noto Serif",
+			"italic", "Cabmria Math",
+			"bold", "Cabmria Math",
+			"italicBold", "Cabmria Math",
+			"sansSerif", "Cabmria Math",
+			"sansSerifItalic", "Cabmria Math",
+			"sansSerifBold", "Cabmria Math",
+			"sansSerifItalicBold", "Cabmria Math",
+			"monospace", "Cabmria Math",
+			"fullwidth", "Cabmria Math",
+			"smallCapital", "Noto Serif",
+			"fraktur", "Cabmria Math",
+			"frakturBold", "Cabmria Math",
+			"script", "Cabmria Math",
+			"scriptBold", "Cabmria Math",
+			"doubleStruck", "Cabmria Math",
+			"doubleStruckItalic", "Cabmria Math",
+			"uncombined", "Noto Serif",
+			"small", "Cabmria",
+			"glagolitic", "Noto Sans Glagolitic",
+		)
+
+		static fontSizes := Map()
+
+		Loop previewsCount
+			glyphsPanel["SymbolPreview" A_Index].Text := ""
+
+		entryName := LV.GetText(rowNumber, 3)
+		cutEntryName := RegExReplace(entryName, "_.*$")
+		entry := ChrLib.entries.%entryName%.Clone()
+		entryAlts := {}
+
+		for key, value in entry.alterations.OwnProps()
+			if !(key ~= "i)HTML$")
+				entryAlts.%key% := value
+
+		for i, each in order {
+			if entryAlts.HasOwnProp(each) {
+				unicode := Util.UnicodeToChar(entryAlts.%each%)
+				fontFamily := (fonts.Has(cutEntryName) ? fonts.Get(cutEntryName) : fonts.Get(each))
+
+				code := Number("0x" entryAlts.%each%)
+				if code >= 0x1E030 && code <= 0x1E08F {
+					fontFamily := "Catrinity"
+				}
+
+
+				glyphsPanel["SymbolPreview" i].Text := (["combining", "modifier", "subscript"].HasValue(each) && cutEntryName != "glagolitic" ? DottedCircle : "") unicode glyphsPanel["SymbolPreview" i].SetFont("s"
+					(fontSizes.Has(cutEntryName) ? fontSizes.Get(cutEntryName) : 42),
+					fontFamily
+				)
+			}
+		}
+	}
+}
+
 Class BindHandler {
 	static waitTimeSend := False
 
@@ -1441,7 +1672,7 @@ Class BindHandler {
 					inputMode := !ChrCrafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Auxiliary.inputMode : "Unicode"
 
 					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
-						alt := ChrLib.ValidateAlt(alterationMatch[1])
+						alt := alterationMatch[1]
 						character := RegExReplace(character, "\:\:.*$", "")
 					}
 

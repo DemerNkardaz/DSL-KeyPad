@@ -62,6 +62,7 @@ initialized := False
 ChrLib.CountOfUpdate()
 App.SetTrayItems()
 Panel.SetPanelData()
+GlyphsPanel.SetPanelData()
 
 initialized := True
 

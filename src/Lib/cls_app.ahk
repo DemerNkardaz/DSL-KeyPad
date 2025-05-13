@@ -50,6 +50,8 @@ Class App {
 			"glyph_double_struck_italic",
 			"glyph_uncombined",
 			"glyph_fullwidth",
+			"lydian",
+			"sidetic",
 		] {
 			this.indexIcos.Set(ico, i)
 		}
@@ -190,6 +192,9 @@ Class App {
 		App.tray.Add(labels.scriptForms, sciptsMenu)
 
 		glyphVariantsMenu := Menu()
+
+		glyphVariantsMenu.Add(Locale.Read("gui_scripter_glyph_variation_panel"), (*) => GlyphsPanel.Panel())
+		glyphVariantsMenu.Add()
 
 		glyphVariants := Scripter.data["Glyph Variations"].Length // 2
 		Loop glyphVariants {

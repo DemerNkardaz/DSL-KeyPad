@@ -55,6 +55,7 @@ Class Dev {
 			"Lycian",
 			"Lydian",
 			"Carian",
+			"Sidetic",
 			"Mandaic",
 			"Nabataean",
 			"Old Hungarian",
@@ -103,6 +104,7 @@ Class Dev {
 			'			<td>`n'
 			'				<img src="https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/favicon.svg" width="16">&emsp14;<a href="https://fonts.google.com/?query=noto">Noto fonts (search)</a><br>`n'
 			'				<img src="https://www.kurinto.com/favicon.ico" width="16">&emsp14;<a href="https://www.kurinto.com/download.htm">Kurinto fonts</a>`n'
+			'				&emsp;&emsp14;<a href="https://catrinity-font.de">Catrinity font</a>`n'
 			'				<details>`n'
 			'					<summary>Recommended font list</summary>`n'
 			'					<ul>`n'

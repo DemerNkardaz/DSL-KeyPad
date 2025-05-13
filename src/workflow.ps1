@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-05-13 06:48:26
+				&#128228;&emsp14;2025-05-13 16:12:15
 			</td>
 		</tr>
 		<tr>
@@ -29,6 +29,7 @@ $message =@"
 			<td>
 				<img src="https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/favicon.svg" width="16">&emsp14;<a href="https://fonts.google.com/?query=noto">Noto fonts (search)</a><br>
 				<img src="https://www.kurinto.com/favicon.ico" width="16">&emsp14;<a href="https://www.kurinto.com/download.htm">Kurinto fonts</a>
+				&emsp;&emsp14;<a href="https://catrinity-font.de">Catrinity font</a>
 				<details>
 					<summary>Recommended font list</summary>
 					<ul>
@@ -43,6 +44,7 @@ $message =@"
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Lycian">Noto Sans Lycian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Lydian">Noto Sans Lydian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Carian">Noto Sans Carian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Sidetic">Noto Sans Sidetic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Mandaic">Noto Sans Mandaic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Nabataean">Noto Sans Nabataean</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Hungarian">Noto Sans Old Hungarian</a></li>

@@ -213,6 +213,8 @@ Class Panel {
 				keyPreviewSetText: "",
 				legendButton: Format("x{} y{} h{} w{}",
 					ibPreviewButtonOffsetX, ibPreviewFrameY - 1, ibPreviewButtonW, ibPreviewButtonH),
+				glyphsVariantsButton: Format("x{} y{} h{} w{}",
+					ibPreviewButtonOffsetX, (ibPreviewFrameY - 1) + ibPreviewButtonH, ibPreviewButtonW, ibPreviewButtonH),
 				unicodeBlockLabel: Format("x{} y{} w{} h{} Center 0x80 BackgroundTrans",
 					ibBodyX + ibPreviewFrameX, (ibBodyY + ibBodyH) - 34, ibPreviewBoxEditW, ibPreviewBoxEditH + 8),
 			},
@@ -310,6 +312,7 @@ Class Panel {
 				keyPreviewSet: { x: ibBodyX + ibPreviewFrameX, y: 301, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
 				keyPreviewSetText: "",
 				legendButton: { x: ibPreviewButtonOffsetX, y: ibPreviewFrameY - 1, w: ibPreviewButtonW, h: ibPreviewButtonH },
+				glyphsVariantsButton: { x: ibPreviewButtonOffsetX, y: (ibPreviewFrameY - 1) + ibPreviewButtonH, w: ibPreviewButtonW, h: ibPreviewButtonH },
 				unicodeBlockLabel: { x: ibBodyX + ibPreviewFrameX, y: (ibBodyY + ibBodyH) - 30, w: ibPreviewBoxEditW, h: ibPreviewBoxEditH },
 			},
 			commandsInfoBox: {
@@ -962,6 +965,7 @@ Class Panel {
 			keyPreviewSet: panelWindow.AddText("v" options.prefix "KeyPreviewSet " UISets.infoBox.keyPreviewSet, UISets.infoBox.keyPreviewSetText).SetFont("s12"),
 			keyPreview: panelWindow.AddEdit("v" options.prefix "KeyPreview " UISets.infoBox.keyPreview, "N/A"),
 			legendButton: panelWindow.AddButton("v" options.prefix "LegendButton " UISets.infoBox.legendButton, Chr(0x1F4D6)),
+			glyphsVariantsButton: panelWindow.AddButton("v" options.prefix "GlyphsVariantsButton " UISets.infoBox.glyphsVariantsButton, Chr(0x1D57B)),
 			unicodeBlockLabel: panelWindow.AddText("v" options.prefix "UnicodeBlockLabel " UISets.infoBox.unicodeBlockLabel, ""),
 		}
 
@@ -978,10 +982,13 @@ Class Panel {
 		GroupBoxOptions.keyPreview.SetFont("s12")
 		GroupBoxOptions.legendButton.SetFont("s11")
 		GroupBoxOptions.legendButton.Enabled := False
+		GroupBoxOptions.glyphsVariantsButton.SetFont("s11")
+		GroupBoxOptions.glyphsVariantsButton.Enabled := False
 		GroupBoxOptions.unicodeBlockLabel.SetFont("s9 c5088c8")
 
 		GroupBoxOptions.unicodeBlockLabel.OnEvent("Click", (*) => UnicodeBlockWebResource(GroupBoxOptions.unicodeBlockLabel.Text))
-
+		GroupBoxOptions.legendButton.OnEvent("Click", this.ChrLegendBridge.Bind(this))
+		GroupBoxOptions.glyphsVariantsButton.OnEvent("Click", this.GlyphsPanelBridge.Bind(this))
 
 		return
 	}
@@ -1095,7 +1102,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreview"].SetFont("s12")
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := ""
 			this.PanelGUI[options.prefix "LegendButton"].Enabled := False
-			this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => "")
+			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := False
 			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := ""
 
 			return
@@ -1207,18 +1214,27 @@ Class Panel {
 
 			this.PanelGUI[options.prefix "KeyPreview"].SetFont((keyPreviewLength > 25 && keyPreviewLength < 35) ? "s10" : (keyPreviewLength > 36) ? "s9" : "s12")
 
-			if StrLen(value.options.legend) > 1 {
-				this.PanelGUI[options.prefix "LegendButton"].Enabled := True
-				this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => ChrLegend({ entry: characterEntry }))
-			} else {
-				this.PanelGUI[options.prefix "LegendButton"].Enabled := False
-				this.PanelGUI[options.prefix "LegendButton"].OnEvent("Click", (*) => "")
-			}
+
+			this.selectedCharacterEntry := characterEntry
+
+			this.PanelGUI[options.prefix "LegendButton"].Enabled := StrLen(value.options.legend) > 1 ? True : False
+			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := ObjOwnPropCount(value.alterations) > 0 ? True : False
+
 		}
 
 		if value.unicodeBlock != ""
 			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := value.unicodeBlock
 
+
+	}
+
+	static selectedCharacterEntry := ""
+	static ChrLegendBridge(*) {
+		ChrLegend({ entry: this.selectedCharacterEntry })
+	}
+
+	static GlyphsPanelBridge(*) {
+		GlyphsPanel(this.selectedCharacterEntry)
 	}
 
 	static LV_FilterPopulate(LV, DataList) {
