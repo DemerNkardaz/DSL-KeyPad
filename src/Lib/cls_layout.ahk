@@ -1056,6 +1056,13 @@ Class Scripter {
 				uiid: "Monospace",
 				icons: ["glyph_monospace"],
 			},
+			"fullwidth", {
+				preview: [Util.UnicodeToChars("FF26", "FF35", "FF2C", "FF2C", "FF37", "FF29", "FF24", "FF34", "FF28")],
+				fonts: [],
+				locale: "glyph_mode_fullwidth",
+				uiid: "Fullwidth",
+				icons: ["glyph_fullwidth"],
+			},
 			"smallCapital", {
 				preview: [Util.UnicodeToChars("A731", "1D0D", "1D00", "029F", "029F", "0020", "1D04", "1D00", "1D18", "026A", "1D1B", "1D00", "029F")],
 				fonts: ["Cabmria Math"],
@@ -1298,7 +1305,7 @@ Class Scripter {
 
 				for i, previewText in dataValue.preview {
 					pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
-					pt.SetFont("s" (isGlyphs ? 11 : 10) " c333333", dataValue.fonts.length > 0 ? dataValue.fonts[dataValue.fonts.length > 1 ? i : 1] : "Segoe UI")
+					pt.SetFont("s" (isGlyphs && dataName != "fullwidth" ? 12 : 10) " c333333", dataValue.fonts.length > 0 ? dataValue.fonts[dataValue.fonts.length > 1 ? i : 1] : "Segoe UI")
 
 					scriptPreviewY += optionTitleH - 5
 				}

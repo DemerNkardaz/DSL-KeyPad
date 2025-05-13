@@ -171,5 +171,8 @@
     <Image Include="DSLKeyPad.app_glyph_uncombining.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_glyph_fullwidth.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

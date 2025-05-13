@@ -295,6 +295,7 @@ LibRegistrate(this) {
 			alterations: {
 				uncombined: "00AF",
 				modifier: "02C9",
+				fullwidth: "FFE3"
 			},
 			tags: ["macron", "макрон"],
 			groups: ["Diacritics Primary", "Diacritics Fast Primary"],
@@ -566,7 +567,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7EC",
 				monospace: "1D7F6",
 				modifier: "2070",
-				subscript: "2080"
+				subscript: "2080",
+				fullwidth: "FF10"
 			}, {
 				doubleStruck: "1D7D9",
 				bold: "1D7CF",
@@ -574,7 +576,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7ED",
 				monospace: "1D7F7",
 				modifier: "00B9",
-				subscript: "2081"
+				subscript: "2081",
+				fullwidth: "FF11"
 			}, {
 				doubleStruck: "1D7DA",
 				bold: "1D7D0",
@@ -582,7 +585,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7EE",
 				monospace: "1D7F8",
 				modifier: "00B2",
-				subscript: "2082"
+				subscript: "2082",
+				fullwidth: "FF12"
 			}, {
 				doubleStruck: "1D7DB",
 				bold: "1D7D1",
@@ -590,7 +594,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7EF",
 				monospace: "1D7F9",
 				modifier: "00B3",
-				subscript: "2083"
+				subscript: "2083",
+				fullwidth: "FF13"
 			}, {
 				doubleStruck: "1D7DC",
 				bold: "1D7D2",
@@ -598,7 +603,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7F0",
 				monospace: "1D7FA",
 				modifier: "2074",
-				subscript: "2084"
+				subscript: "2084",
+				fullwidth: "FF14"
 			}, {
 				doubleStruck: "1D7DD",
 				bold: "1D7D3",
@@ -606,7 +612,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7F1",
 				monospace: "1D7FB",
 				modifier: "2075",
-				subscript: "2085"
+				subscript: "2085",
+				fullwidth: "FF15"
 			}, {
 				doubleStruck: "1D7DE",
 				bold: "1D7D4",
@@ -614,7 +621,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7F2",
 				monospace: "1D7FC",
 				modifier: "2076",
-				subscript: "2086"
+				subscript: "2086",
+				fullwidth: "FF176"
 			}, {
 				doubleStruck: "1D7DF",
 				bold: "1D7D5",
@@ -622,7 +630,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7F3",
 				monospace: "1D7FD",
 				modifier: "2077",
-				subscript: "2087"
+				subscript: "2087",
+				fullwidth: "FF17"
 			}, {
 				doubleStruck: "1D7E0",
 				bold: "1D7D6",
@@ -630,7 +639,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7F4",
 				monospace: "1D7FE",
 				modifier: "2078",
-				subscript: "2088"
+				subscript: "2088",
+				fullwidth: "FF18"
 			}, {
 				doubleStruck: "1D7E1",
 				bold: "1D7D7",
@@ -638,7 +648,8 @@ LibRegistrate(this) {
 				sansSerifBold: "1D7F5",
 				monospace: "1D7FF",
 				modifier: "2079",
-				subscript: "2089"
+				subscript: "2089",
+				fullwidth: "FF19"
 			}],
 			options: { noCalc: True }
 		},
@@ -664,7 +675,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D63C",
 				sansSerifBold: "1D5D4",
 				monospace: "1D670",
-				smallCapital: "1D00"
+				smallCapital: "1D00",
+				fullwidth: "FF21"
 			}, {
 				combining: "0363",
 				modifier: "1D43",
@@ -681,7 +693,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D622",
 				sansSerifItalicBold: "1D656",
 				sansSerifBold: "1D5EE",
-				monospace: "1D68A"
+				monospace: "1D68A",
+				fullwidth: "FF41"
 			}],
 			options: { noCalc: True }
 		},
@@ -702,7 +715,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D63D",
 				sansSerifBold: "1D5D5",
 				monospace: "1D671",
-				smallCapital: "0299"
+				smallCapital: "0299",
+				fullwidth: "FF22"
 			}, {
 				combining: "1DE8",
 				modifier: "1D47",
@@ -718,7 +732,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D623",
 				sansSerifItalicBold: "1D657",
 				sansSerifBold: "1D5EF",
-				monospace: "1D68B"
+				monospace: "1D68B",
+				fullwidth: "FF42"
 			}],
 			options: { noCalc: True }
 		},
@@ -739,7 +754,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D63E",
 				sansSerifBold: "1D5D6",
 				monospace: "1D672",
-				smallCapital: "1D04"
+				smallCapital: "1D04",
+				fullwidth: "FF23"
 			}, {
 				combining: "0368",
 				modifier: "1D9C",
@@ -755,7 +771,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D624",
 				sansSerifItalicBold: "1D658",
 				sansSerifBold: "1D5F0",
-				monospace: "1D68C"
+				monospace: "1D68C",
+				fullwidth: "FF43"
 			}],
 			options: { noCalc: True }
 		},
@@ -777,7 +794,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D63F",
 				sansSerifBold: "1D5D7",
 				monospace: "1D673",
-				smallCapital: "1D05"
+				smallCapital: "1D05",
+				fullwidth: "FF24"
 			}, {
 				combining: "0369",
 				modifier: "1D48",
@@ -794,7 +812,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D625",
 				sansSerifItalicBold: "1D659",
 				sansSerifBold: "1D5F1",
-				monospace: "1D68D"
+				monospace: "1D68D",
+				fullwidth: "FF44"
 			}],
 			options: { noCalc: True }
 		},
@@ -815,7 +834,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D640",
 				sansSerifBold: "1D5D8",
 				monospace: "1D674",
-				smallCapital: "1D07"
+				smallCapital: "1D07",
+				fullwidth: "FF25"
 			}, {
 				combining: "0364",
 				modifier: "1D49",
@@ -833,7 +853,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D626",
 				sansSerifItalicBold: "1D65A",
 				sansSerifBold: "1D5F2",
-				monospace: "1D68E"
+				monospace: "1D68E",
+				fullwidth: "FF45"
 			}],
 			options: { noCalc: True }
 		},
@@ -854,7 +875,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D641",
 				sansSerifBold: "1D5D9",
 				monospace: "1D675",
-				smallCapital: "A730"
+				smallCapital: "A730",
+				fullwidth: "FF26"
 			}, {
 				combining: "1DEB",
 				modifier: "1DA0",
@@ -870,7 +892,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D627",
 				sansSerifItalicBold: "1D65B",
 				sansSerifBold: "1D5F3",
-				monospace: "1D68F"
+				monospace: "1D68F",
+				fullwidth: "FF46"
 			}],
 			options: { noCalc: True }
 		},
@@ -892,7 +915,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D642",
 				sansSerifBold: "1D5DA",
 				monospace: "1D676",
-				smallCapital: "0262"
+				smallCapital: "0262",
+				fullwidth: "FF27"
 			}, {
 				combining: "1DDA",
 				modifier: "1D4D",
@@ -908,7 +932,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D628",
 				sansSerifItalicBold: "1D65C",
 				sansSerifBold: "1D5F4",
-				monospace: "1D690"
+				monospace: "1D690",
+				fullwidth: "FF47"
 			}],
 			options: { noCalc: True }
 		},
@@ -929,7 +954,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D643",
 				sansSerifBold: "1D5DB",
 				monospace: "1D677",
-				smallCapital: "029C"
+				smallCapital: "029C",
+				fullwidth: "FF28"
 			}, {
 				combining: "036A",
 				modifier: "02B0",
@@ -946,7 +972,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D629",
 				sansSerifItalicBold: "1D65D",
 				sansSerifBold: "1D5F5",
-				monospace: "1D691"
+				monospace: "1D691",
+				fullwidth: "FF48"
 			}],
 			options: { noCalc: True }
 		},
@@ -967,7 +994,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D644",
 				sansSerifBold: "1D5DC",
 				monospace: "1D678",
-				smallCapital: "026A"
+				smallCapital: "026A",
+				fullwidth: "FF29"
 			}, {
 				combining: "0365",
 				subscript: "1D62",
@@ -984,7 +1012,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D62A",
 				sansSerifItalicBold: "1D65E",
 				sansSerifBold: "1D5F6",
-				monospace: "1D692"
+				monospace: "1D692",
+				fullwidth: "FF49"
 			}],
 			options: { noCalc: True },
 			recipe: [[Chr(0x0130) "/"], [Chr(0x0131) "${dot_above}"]],
@@ -1006,7 +1035,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D645",
 				sansSerifBold: "1D5DD",
 				monospace: "1D679",
-				smallCapital: "1D0A"
+				smallCapital: "1D0A",
+				fullwidth: "FF2A"
 			}, {
 				modifier: "02B2",
 				subscript: "2C7C",
@@ -1023,7 +1053,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D62B",
 				sansSerifItalicBold: "1D65F",
 				sansSerifBold: "1D5F7",
-				monospace: "1D693"
+				monospace: "1D693",
+				fullwidth: "FF4A"
 			}],
 			options: { noCalc: True }
 		},
@@ -1044,7 +1075,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D646",
 				sansSerifBold: "1D5DE",
 				monospace: "1D67A",
-				smallCapital: "1D0B"
+				smallCapital: "1D0B",
+				fullwidth: "FF2B"
 			}, {
 				combining: "1DDC",
 				modifier: "1D4F",
@@ -1061,7 +1093,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D62C",
 				sansSerifItalicBold: "1D660",
 				sansSerifBold: "1D5F8",
-				monospace: "1D694"
+				monospace: "1D694",
+				fullwidth: "FF4B"
 			}],
 			options: { noCalc: True }
 		},
@@ -1083,7 +1116,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D647",
 				sansSerifBold: "1D5DF",
 				monospace: "1D67B",
-				smallCapital: "029F"
+				smallCapital: "029F",
+				fullwidth: "FF2C"
 			}, {
 				combining: "1DDD",
 				modifier: "02E1",
@@ -1100,7 +1134,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D62D",
 				sansSerifItalicBold: "1D661",
 				sansSerifBold: "1D5F9",
-				monospace: "1D695"
+				monospace: "1D695",
+				fullwidth: "FF4C"
 			}],
 			options: { noCalc: True }
 		},
@@ -1122,7 +1157,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D648",
 				sansSerifBold: "1D5E0",
 				monospace: "1D67C",
-				smallCapital: "1D0D"
+				smallCapital: "1D0D",
+				fullwidth: "FF2D"
 			}, {
 				combining: "036B",
 				modifier: "1D50",
@@ -1139,7 +1175,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D62E",
 				sansSerifItalicBold: "1D662",
 				sansSerifBold: "1D5FA",
-				monospace: "1D696"
+				monospace: "1D696",
+				fullwidth: "FF4D"
 			}],
 			options: { noCalc: True }
 		},
@@ -1161,7 +1198,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D649",
 				sansSerifBold: "1D5E1",
 				monospace: "1D67D",
-				smallCapital: "0274"
+				smallCapital: "0274",
+				fullwidth: "FF2E"
 			}, {
 				combining: "1DE0",
 				subscript: "2099",
@@ -1177,7 +1215,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D62F",
 				sansSerifItalicBold: "1D663",
 				sansSerifBold: "1D5FB",
-				monospace: "1D697"
+				monospace: "1D697",
+				fullwidth: "FF4E"
 			}],
 			options: { noCalc: True }
 		},
@@ -1198,7 +1237,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D64A",
 				sansSerifBold: "1D5E2",
 				monospace: "1D67E",
-				smallCapital: "1D0F"
+				smallCapital: "1D0F",
+				fullwidth: "FF2F"
 			}, {
 				combining: "0366",
 				modifier: "1D52",
@@ -1215,7 +1255,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D630",
 				sansSerifItalicBold: "1D664",
 				sansSerifBold: "1D5FC",
-				monospace: "1D698"
+				monospace: "1D698",
+				fullwidth: "FF4F"
 			}],
 			options: { noCalc: True }
 		},
@@ -1236,7 +1277,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D64B",
 				sansSerifBold: "1D5E3",
 				monospace: "1D67F",
-				smallCapital: "1D18"
+				smallCapital: "1D18",
+				fullwidth: "FF30"
 			}, {
 				combining: "1DEE",
 				modifier: "1D56",
@@ -1253,7 +1295,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D631",
 				sansSerifItalicBold: "1D665",
 				sansSerifBold: "1D5FD",
-				monospace: "1D699"
+				monospace: "1D699",
+				fullwidth: "FF50"
 			}],
 			options: { noCalc: True }
 		},
@@ -1274,7 +1317,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D64C",
 				sansSerifBold: "1D5E4",
 				monospace: "1D680",
-				smallCapital: "A7AF"
+				smallCapital: "A7AF",
+				fullwidth: "FF31"
 			}, {
 				italic: "1D45E",
 				italicBold: "1D492",
@@ -1288,7 +1332,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D632",
 				sansSerifItalicBold: "1D666",
 				sansSerifBold: "1D5FE",
-				monospace: "1D69A"
+				monospace: "1D69A",
+				fullwidth: "FF51"
 			}],
 			options: { noCalc: True }
 		},
@@ -1310,7 +1355,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D64D",
 				sansSerifBold: "1D5E5",
 				monospace: "1D681",
-				smallCapital: "0280"
+				smallCapital: "0280",
+				fullwidth: "FF32"
 			}, {
 				combining: "036C",
 				modifier: "02B3",
@@ -1327,7 +1373,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D633",
 				sansSerifItalicBold: "1D667",
 				sansSerifBold: "1D5FF",
-				monospace: "1D69B"
+				monospace: "1D69B",
+				fullwidth: "FF52"
 			}],
 			options: { noCalc: True }
 		},
@@ -1347,7 +1394,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D64E",
 				sansSerifBold: "1D5E6",
 				monospace: "1D682",
-				smallCapital: "A731"
+				smallCapital: "A731",
+				fullwidth: "FF33"
 			}, {
 				combining: "1DE4",
 				modifier: "02E2",
@@ -1364,7 +1412,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D634",
 				sansSerifItalicBold: "1D668",
 				sansSerifBold: "1D600",
-				monospace: "1D69C"
+				monospace: "1D69C",
+				fullwidth: "FF53"
 			}],
 			options: { noCalc: True }
 		},
@@ -1385,7 +1434,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D64F",
 				sansSerifBold: "1D5E7",
 				monospace: "1D683",
-				smallCapital: "1D1B"
+				smallCapital: "1D1B",
+				fullwidth: "FF34"
 			}, {
 				combining: "036D",
 				modifier: "1D57",
@@ -1402,7 +1452,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D635",
 				sansSerifItalicBold: "1D669",
 				sansSerifBold: "1D601",
-				monospace: "1D69D"
+				monospace: "1D69D",
+				fullwidth: "FF54"
 			}],
 			options: { noCalc: True }
 		},
@@ -1423,7 +1474,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D650",
 				sansSerifBold: "1D5E8",
 				monospace: "1D684",
-				smallCapital: "1D1C"
+				smallCapital: "1D1C",
+				fullwidth: "FF35"
 			}, {
 				combining: "0367",
 				modifier: "1D58",
@@ -1440,7 +1492,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D636",
 				sansSerifItalicBold: "1D66A",
 				sansSerifBold: "1D602",
-				monospace: "1D69E"
+				monospace: "1D69E",
+				fullwidth: "FF55"
 			}],
 			options: { noCalc: True }
 		},
@@ -1461,7 +1514,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D651",
 				sansSerifBold: "1D5E9",
 				monospace: "1D685",
-				smallCapital: "1D20"
+				smallCapital: "1D20",
+				fullwidth: "FF36"
 			}, {
 				combining: "036E",
 				modifier: "1D5B",
@@ -1478,7 +1532,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D637",
 				sansSerifItalicBold: "1D66B",
 				sansSerifBold: "1D603",
-				monospace: "1D69F"
+				monospace: "1D69F",
+				fullwidth: "FF56"
 			}],
 			options: { noCalc: True }
 		},
@@ -1499,7 +1554,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D652",
 				sansSerifBold: "1D5EA",
 				monospace: "1D686",
-				smallCapital: "1D21"
+				smallCapital: "1D21",
+				fullwidth: "FF37"
 			}, {
 				combining: "1DF1",
 				modifier: "02B7",
@@ -1515,7 +1571,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D638",
 				sansSerifItalicBold: "1D66C",
 				sansSerifBold: "1D604",
-				monospace: "1D6A0"
+				monospace: "1D6A0",
+				fullwidth: "FF57"
 			}],
 			options: { noCalc: True }
 		},
@@ -1535,7 +1592,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D653",
 				sansSerifBold: "1D5EB",
 				monospace: "1D687",
-				smallCapital: "0078"
+				smallCapital: "0078",
+				fullwidth: "FF38"
 			}, {
 				combining: "036F",
 				modifier: "02E3",
@@ -1552,7 +1610,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D639",
 				sansSerifItalicBold: "1D66D",
 				sansSerifBold: "1D605",
-				monospace: "1D6A1"
+				monospace: "1D6A1",
+				fullwidth: "FF58"
 			}],
 			options: { noCalc: True }
 		},
@@ -1572,7 +1631,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D654",
 				sansSerifBold: "1D5EC",
 				monospace: "1D688",
-				smallCapital: "028F"
+				smallCapital: "028F",
+				fullwidth: "FF39"
 			}, {
 				modifier: "02B8",
 				italic: "1D466",
@@ -1587,7 +1647,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D63A",
 				sansSerifItalicBold: "1D66E",
 				sansSerifBold: "1D606",
-				monospace: "1D6A2"
+				monospace: "1D6A2",
+				fullwidth: "FF59"
 			}],
 			options: { noCalc: True }
 		},
@@ -1607,7 +1668,8 @@ LibRegistrate(this) {
 				sansSerifItalicBold: "1D655",
 				sansSerifBold: "1D5ED",
 				monospace: "1D689",
-				smallCapital: "1D22"
+				smallCapital: "1D22",
+				fullwidth: "FF3A"
 			}, {
 				combining: "1DE6",
 				modifier: "1DBB",
@@ -1623,7 +1685,8 @@ LibRegistrate(this) {
 				sansSerifItalic: "1D63B",
 				sansSerifItalicBold: "1D66F",
 				sansSerifBold: "1D607",
-				monospace: "1D6A3"
+				monospace: "1D6A3",
+				fullwidth: "FF5A"
 			}],
 			options: { noCalc: True }
 		},
@@ -2244,7 +2307,10 @@ LibRegistrate(this) {
 		;
 		"asterisk", {
 			unicode: "002A",
-			alterations: { small: "FE61" },
+			alterations: {
+				small: "FE61",
+				fullwidth: "FF0A"
+			},
 			options: { noCalc: True },
 		},
 		"asterisk_low", {
@@ -2442,7 +2508,10 @@ LibRegistrate(this) {
 		},
 		"number_sign", {
 			unicode: "0023",
-			alterations: { small: "FE5F" },
+			alterations: {
+				small: "FE5F",
+				fullwidth: "FF03"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"section", {
@@ -2454,22 +2523,35 @@ LibRegistrate(this) {
 		},
 		"comma", {
 			unicode: "002C",
-			alterations: { small: "FE50" },
+			alterations: {
+				small: "FE50",
+				fullwidth: "FF0C"
+			},
 			options: { noCalc: True },
 		},
 		"dot", {
 			unicode: "002E",
-			alterations: { small: "FE52" },
+			alterations: {
+				small: "FE52",
+				fullwidth: "FF0E"
+			},
 			options: { noCalc: True },
 		},
 		"exclamation", {
 			unicode: "0021",
-			alterations: { modifier: "A71D", small: "FE57" },
+			alterations: {
+				modifier: "A71D",
+				small: "FE57",
+				fullwidth: "FF01"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"question", {
 			unicode: "003F",
-			alterations: { small: "FE56" },
+			alterations: {
+				small: "FE56",
+				fullwidth: "FF1F"
+			},
 			options: { noCalc: True },
 		},
 		"reversed_question", {
@@ -2538,50 +2620,80 @@ LibRegistrate(this) {
 		},
 		"grave_accent", {
 			unicode: "0060",
-			alterations: { modifier: "02CB" },
+			alterations: {
+				modifier: "02CB",
+				fullwidth: "FF40"
+			},
 			options: { noCalc: True },
 		},
 		"circumflex_accent", {
 			unicode: "005E",
-			alterations: { modifier: "02C6" },
+			alterations: {
+				modifier: "02C6",
+				fullwidth: "FF3E"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"semicolon", {
 			unicode: "003B",
-			alterations: { small: "FE54" },
+			alterations: {
+				small: "FE54",
+				fullwidth: "FF1B"
+			},
 			options: { noCalc: True },
 		},
 		"colon", {
 			unicode: "003A",
-			alterations: { small: "FE55" },
+			alterations: {
+				small: "FE55",
+				fullwidth: "FF1A"
+			},
 			options: { noCalc: True },
 		},
 		"apostrophe", {
 			unicode: "0027",
-			alterations: { modifier: "02BC" },
+			alterations: {
+				modifier: "02BC",
+				fullwidth: "FF07"
+			},
 			options: { noCalc: True },
 		},
 		"quote", {
 			unicode: "0022",
-			alterations: { modifier: "02EE" },
+			alterations: {
+				modifier: "02EE",
+				fullwidth: "FF02"
+			},
 			options: { noCalc: True },
 		},
 		"solidus", {
 			unicode: "002F",
+			alterations: {
+				fullwidth: "FF0F"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"reverse_solidus", {
 			unicode: "005C",
-			alterations: { small: "FE68" },
+			alterations: {
+				small: "FE68",
+				fullwidth: "FF3C"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"vertical_line", {
 			unicode: "007C",
+			alterations: {
+				fullwidth: "FF5C"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"commercial_at", {
 			unicode: "0040",
-			alterations: { small: "FE6B" },
+			alterations: {
+				small: "FE6B",
+				fullwidth: "FF20"
+			},
 			options: { noCalc: True },
 		},
 		;
@@ -2660,11 +2772,17 @@ LibRegistrate(this) {
 		},
 		"hyphen_minus", {
 			unicode: "002D",
-			alterations: { small: "FE63" },
+			alterations: {
+				small: "FE63",
+				fullwidth: "FF0D"
+			},
 			options: { noCalc: True },
 		},
 		"underscore", {
 			unicode: "005F",
+			alterations: {
+				fullwidth: "FF3F"
+			},
 			options: { noCalc: True },
 		},
 		"inverted_lazy_s", {
@@ -2965,7 +3083,10 @@ LibRegistrate(this) {
 		},
 		"percent", {
 			unicode: "0025",
-			alterations: { small: "FE6A" },
+			alterations: {
+				small: "FE6A",
+				fullwidth: "FF05"
+			},
 			options: { noCalc: True },
 		},
 		"permille", {
@@ -2988,7 +3109,12 @@ LibRegistrate(this) {
 		},
 		"equals", {
 			unicode: "003D",
-			alterations: { modifier: "207C", subscript: "208C", small: "FE66" },
+			alterations: {
+				modifier: "207C",
+				subscript: "208C",
+				small: "FE66",
+				fullwidth: "FF1D"
+			},
 			options: { noCalc: True },
 		},
 		"noequals", {
@@ -3007,7 +3133,12 @@ LibRegistrate(this) {
 		},
 		"plus", {
 			unicode: "002B",
-			alterations: { modifier: "207A", subscript: "208A", small: "FE62" },
+			alterations: {
+				modifier: "207A",
+				subscript: "208A",
+				small: "FE62",
+				fullwidth: "FF0B"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"minus", {
@@ -3056,16 +3187,25 @@ LibRegistrate(this) {
 		},
 		"tilde", {
 			unicode: "007E",
+			alterations: {
+				fullwidth: "FF5E"
+			},
 			options: { noCalc: True },
 		},
 		"less_than", {
 			unicode: "003C",
-			alterations: { small: "FE64" },
+			alterations: {
+				small: "FE64",
+				fullwidth: "FF1C"
+			},
 			options: { noCalc: True },
 		},
 		"greater_than", {
 			unicode: "003E",
-			alterations: { small: "FE65" },
+			alterations: {
+				small: "FE65",
+				fullwidth: "FF1E"
+			},
 			options: { noCalc: True },
 		},
 		"integral", {
@@ -3095,12 +3235,22 @@ LibRegistrate(this) {
 		},
 		"left_parenthesis", {
 			unicode: "0028",
-			alterations: { modifier: "207D", subscript: "208D", small: "FE59" },
+			alterations: {
+				modifier: "207D",
+				subscript: "208D",
+				small: "FE59",
+				fullwidth: "FF08"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"right_parenthesis", {
 			unicode: "0029",
-			alterations: { modifier: "207E", subscript: "208E", small: "FE5A" },
+			alterations: {
+				modifier: "207E",
+				subscript: "208E",
+				small: "FE5A",
+				fullwidth: "FF09"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"top_parenthesis", {
@@ -3153,10 +3303,16 @@ LibRegistrate(this) {
 		},
 		"left_bracket", {
 			unicode: "005B",
+			alterations: {
+				fullwidth: "FF3B"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"right_bracket", {
 			unicode: "005D",
+			alterations: {
+				fullwidth: "FF3D"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"top_bracket", {
@@ -3245,12 +3401,18 @@ LibRegistrate(this) {
 		},
 		"left_brace", {
 			unicode: "007B",
-			alterations: { small: "FE5C" },
+			alterations: {
+				small: "FE5C",
+				fullwidth: "FF5B"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"right_brace", {
 			unicode: "007D",
-			alterations: { small: "FE5D" },
+			alterations: {
+				small: "FE5D",
+				fullwidth: "FF5D"
+			},
 			options: { noCalc: True, send: "Text" },
 		},
 		"top_brace", {
@@ -4007,7 +4169,10 @@ LibRegistrate(this) {
 		"lat_[s]_lig_db", { unicode: ["0238"] },
 		"lat_[s]_lig_et", {
 			unicode: ["0026"],
-			alterations: { small: "FE60" },
+			alterations: {
+				small: "FE60",
+				fullwidth: "FF06"
+			},
 			tags: ["амперсанд", "ampersand"],
 			groups: ["Latin Ligatures"]
 		},
@@ -9858,6 +10023,9 @@ LibRegistrate(this) {
 		},
 		"wallet_cent", {
 			unicode: "00A2",
+			alterations: {
+				fullwidth: "FFE0"
+			},
 			tags: ["цент", "cent"],
 			groups: ["Wallet Signs"],
 			recipe: ["c|", "CNT"],
@@ -9876,7 +10044,10 @@ LibRegistrate(this) {
 		},
 		"wallet_dollar", {
 			unicode: "0024",
-			alterations: { small: "FE69" },
+			alterations: {
+				small: "FE69",
+				fullwidth: "FF04"
+			},
 			tags: ["доллар", "dollar"],
 			groups: ["Wallet Signs"],
 			recipe: ["S|", "USD", "DLR"],
@@ -9931,6 +10102,9 @@ LibRegistrate(this) {
 		},
 		"wallet_pound", {
 			unicode: "00A3",
+			alterations: {
+				fullwidth: "FFE1"
+			},
 			tags: ["фунт", "pound"],
 			groups: ["Wallet Signs"],
 			recipe: ["f_", "GBP"],
@@ -9973,12 +10147,18 @@ LibRegistrate(this) {
 		},
 		"wallet_won", {
 			unicode: "20A9",
+			alterations: {
+				fullwidth: "FFE6"
+			},
 			tags: ["вон", "won"],
 			groups: ["Wallet Signs"],
 			recipe: ["W=", "WON", "KRW"],
 		},
 		"wallet_yen", {
 			unicode: "00A5",
+			alterations: {
+				fullwidth: "FFE5"
+			},
 			tags: ["знак йены", "yen sign"],
 			groups: ["Wallet Signs"],
 			recipe: ["Y=", "YEN"],

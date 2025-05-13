@@ -49,6 +49,7 @@ Class App {
 			"glyph_double_struck",
 			"glyph_double_struck_italic",
 			"glyph_uncombined",
+			"glyph_fullwidth",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

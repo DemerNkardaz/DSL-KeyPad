@@ -199,6 +199,7 @@
     <Image Include="DSLKeyPad.app_glyph_double_struck.ico" />
     <Image Include="DSLKeyPad.app_glyph_double_struck_italic.ico" />
     <Image Include="DSLKeyPad.app_glyph_uncombining.ico" />
+    <Image Include="DSLKeyPad.app_glyph_fullwidth.ico" />
     <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
