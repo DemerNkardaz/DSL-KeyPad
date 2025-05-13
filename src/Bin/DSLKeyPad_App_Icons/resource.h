@@ -46,6 +46,8 @@
 #define IDI_GLYPH_DOUBLE_STRUCK_ITALIC 142
 #define IDI_GLYPH_UNCOMBINING 143
 #define IDI_GLYPH_FULLWIDTH 144
+#define IDI_LYDIAN 145
+#define IDI_SIDETIC 146
 
 // Next default values for new objects
 //
