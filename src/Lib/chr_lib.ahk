@@ -3337,7 +3337,7 @@ LibRegistrate(this) {
 			unicode: "2046",
 			tags: ["right bracket with quill", "правая квадратная скобка с чертой"],
 			groups: ["Brackets", "Special Fast Secondary"],
-			options: { fastKey: "" },
+			options: { fastKey: "]" },
 		},
 		"left_white_bracket", {
 			unicode: "27E6",
@@ -3612,8 +3612,8 @@ LibRegistrate(this) {
 				fastKey: [
 					"<!>+ [",
 					"<!>+ ]",
-					"<!<+> [",
-					"<!<+> ]",
+					"<!<+>+ [",
+					"<!<+>+ ]",
 					"",
 					"",
 					"",

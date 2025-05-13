@@ -16,6 +16,8 @@ SetKeyDelay(0, 50)
 A_HotkeyInterval := 1000
 A_MaxHotkeysPerInterval := 50
 
+initialized := False
+
 #Include <External\prt_array>
 #Include <External\fnc_clip_send>
 #Include <External\fnc_gui_button_icon>
@@ -59,6 +61,9 @@ A_MaxHotkeysPerInterval := 50
 
 ChrLib.CountOfUpdate()
 App.SetTrayItems()
+Panel.SetPanelData()
+
+initialized := True
 
 GREPizeSelection(GetCollaborative := False) {
 	CustomAfterStartEmdash := (Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") != "") ? Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") : "ensp"

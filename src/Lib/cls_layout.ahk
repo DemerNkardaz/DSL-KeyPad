@@ -647,13 +647,14 @@ Class KeyboardBinder {
 			}
 		}
 
-		if useTooltip {
-			SetTimer(ShowTooltip, -0)
-			ToolTip()
+		if useTooltip && i >= total {
+			SetTimer(ShowTooltip, -50)
+			SetTimer((*) => ToolTip(), -700)
 		}
 
 		ShowTooltip(*) {
 			ToolTip(Locale.ReadInject("lib_init_elems", [i, total]) " : " Locale.Read("binds_init") "`n" Util.TextProgressBar(i, total))
+			Sleep 50
 		}
 	}
 

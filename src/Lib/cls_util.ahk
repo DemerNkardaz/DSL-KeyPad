@@ -659,7 +659,7 @@ Class Util {
 	}
 
 	static TextProgressBar(current, total, width := 20) {
-		percent := Round(current / total * 100, 2)
+		percent := Floor((current / total) * 100)
 		filledWidth := Round(width * percent / 100)
 		unfilledWidth := width - filledWidth
 		bar := "▏ " Util.StrRepeat("█" Chr(0x2006), filledWidth) Util.StrRepeat(Chrs(0x2002, 0x2005, 0x2006) (current != total ? Chr(0x2006) : ""), unfilledWidth) " ▕  " percent "%"

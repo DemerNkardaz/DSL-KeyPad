@@ -411,7 +411,6 @@ Class Panel {
 				}
 			}
 		}
-		this.SetPanelData()
 	}
 
 	static SetPanelData() {
@@ -897,11 +896,9 @@ Class Panel {
 			this.PanelGUI := Constructor()
 			this.PanelGUI.Show()
 
-			for each in ["Diacritic", "Spaces", "Smelting", "FastKeys", "Glago"] {
-				try {
+			for each in ["Diacritic", "Spaces", "Smelting", "FastKeys", "Glago", "TELEX/VNI"]
+				try
 					this.LV_SetRandomPreview(each)
-				}
-			}
 
 			IsGuiOpen(this.panelTitle) && PostConstructor()
 		}

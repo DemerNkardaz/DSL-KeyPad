@@ -490,7 +490,10 @@ bindingMaps := Map(
 				"<^<!", "breve",
 				"<^<!<+", "breve_inverted",
 				"<^<!>+", "breve_below",
-				"<^<!<+>+", "breve_inverted_below"
+				"<^<!<+>+", "breve_inverted_below",
+				">^<!", "bridge_above",
+				">^<!>+", "bridge_below",
+				">^<!<+>+", "bridge_inverted_below",
 			),
 			"C", Map(
 				"<^<!", "circumflex",
@@ -772,6 +775,11 @@ bindingMaps := Map(
 				"<^>!<!", ["hyphen"],
 				"<^>!<!<+", ["no_break_hyphen"],
 				"<^>!<!>+", ["figure_dash"]
+			),
+			"Равно", Map(
+				"<^>!", ["noequals"],
+				"<^>!<!", ["almostequals"],
+				"<^>!<+", ["plusminus"]
 			),
 			; Latin-Modifiers Keyboard Layout
 			"A", Map(
