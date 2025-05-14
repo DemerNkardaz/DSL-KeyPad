@@ -263,7 +263,7 @@ Class App {
 		static titleItems := [
 			"decoded", "Diacritic-Spaces-Letters KeyPad",
 			"title", "DSL KeyPad",
-			"status", "(αλφα)",
+			"status", "α",
 			"version", "— " this.Ver(),
 		]
 

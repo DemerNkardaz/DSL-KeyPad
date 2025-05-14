@@ -26,8 +26,6 @@ Class ChrEntry {
 		altLayoutKey: "",
 		altSpecialKey: "",
 		fastKey: "",
-		groupKey: [],
-		groupKeyPreview: "",
 		specialKey: "",
 		numericValue: 0,
 		send: "",
@@ -1204,8 +1202,6 @@ Class ChrLib {
 			}
 		}
 
-		if refinedEntry.options.groupKey.Length > 0
-			refinedEntry.options.groupKeyPreview := this.SetNotaion(Util.FormatHotKey(refinedEntry.options.groupKey), dataPack)
 		toNotate := ["fastKey", "altLayoutKey", "altSpecialKey"]
 
 		for key, value in refinedEntry.options.OwnProps()
@@ -1305,7 +1301,7 @@ Class ChrLib {
 			output := StrReplace(output, replace, notationKey(replace))
 		}
 		while RegExMatch(output, "([a-zA-Zа-яА-ЯёЁ0-9<>``,\'\`";\~\%\-\=\\/]+|[\x{2190}-\x{2195}]+|[\x{0100}-\x{017F}]+|[\x{0080}-\x{00FF}]+|[\x{1E00}-\x{1EFF}]+)(\s|$|\?|,\s)", &match) {
-			output := RegExReplace(output, match[1], notationKey(match[1]))
+			output := RegExReplace(output, RegExEscape(match[1]), notationKey(match[1]))
 		}
 
 

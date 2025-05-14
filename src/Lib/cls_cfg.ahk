@@ -9,7 +9,8 @@ Class Cfg {
 			"Layout_Cyrillic", "ЙЦУКЕН",
 			"Layout_Remapping", "False",
 			"Active_User_Bindings", "None",
-			"Mode_Fast_Keys", "False",
+			"Mode_Fast_Keys", "True",
+			"Mode_Fast_Keys_Over", "",
 			"Binds_Autodisable_Timer", "1",
 			"Binds_Autodisable_Type", "hour",
 			"Skip_Group_Messages", "False",
@@ -504,6 +505,7 @@ Class Cfg {
 	static BindedVars() {
 		return [
 			"FastKeysOn", this.Get("Mode_Fast_Keys", "Settings", False, "bool"),
+			"FastKeysOver", this.Get("Mode_Fast_Keys_Over", "Settings", ""),
 			"SkipGroupMessage", this.Get("Skip_Group_Messages", "Settings", False, "bool"),
 		]
 	}
@@ -516,6 +518,9 @@ Class Cfg {
 				this.OptionsHandler(value, options, &value)
 
 			IniWrite(value, this.ini, section, entry)
+			if InStr(value, "_Over") {
+				MsgBox(value)
+			}
 
 			this.BindedVarsHandler()
 		} else {

@@ -1,6 +1,7 @@
 Array.Prototype.DefineProp("ToString", { Call: _ArrayToString })
 Array.Prototype.DefineProp("ToFlat", { Call: _ArrayToFlat })
 Array.Prototype.DefineProp("HasValue", { Call: _ArrayHasValue })
+Array.Prototype.DefineProp("HasRegEx", { Call: _ArrayHasRegEx })
 Array.Prototype.DefineProp("Contains", { Call: _ArrayContains })
 Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
 Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
@@ -75,6 +76,20 @@ _ArrayHasValue(this, valueToFind, &indexID?) {
 	return false
 }
 
+_ArrayHasRegEx(this, valueToFind, &indexID?) {
+	for index, value in this {
+		if value is String && (value = valueToFind ||
+			(valueToFind ~= "[" RegExEscape(regExChars) "]" && value ~= valueToFind) ||
+			(value ~= "[" RegExEscape(regExChars) "]" && valueToFind ~= value)
+		) {
+			indexID := index
+			return true
+		}
+	}
+	return false
+}
+
+
 _ArrayContains(this, valueToFind, &indexID?) {
 	for index, value in this {
 		if value == valueToFind {
@@ -142,11 +157,9 @@ ArrayMerge(Arrays*) {
 }
 
 RegExEscape(str) {
-	static specialChars := "\.-*+?^${}()[]|/"
-
 	newStr := ""
 	for k, char in StrSplit(str) {
-		if InStr(specialChars, char) {
+		if InStr(regExChars, char) {
 			newStr .= "\" char
 		} else {
 			newStr .= char

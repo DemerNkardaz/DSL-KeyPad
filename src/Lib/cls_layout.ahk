@@ -699,6 +699,7 @@ Class KeyboardBinder {
 		rawBindLists := [
 			useRemap ? "Keyboard Default" : "",
 			Cfg.FastKeysOn ? "Common" : "",
+			Cfg.FastKeysOver != "" && Cfg.FastKeysOn ? Cfg.FastKeysOver : "",
 			isUserBindingsOn ? userBindings ":User" : "",
 			"Important"
 		]
@@ -729,12 +730,18 @@ Class KeyboardBinder {
 		this.RebuilBinds()
 	}
 
-	static ToggleDefaultMode() {
-		modeActive := Cfg.Get("Mode_Fast_Keys", , False, "bool")
-		modeActive := !modeActive
-		Cfg.Set(modeActive, "Mode_Fast_Keys", , "bool")
+	static ToggleDefaultMode(typeofActivation := "") {
+		isTOA := StrLen(typeofActivation) > 0
+		modeActive := Cfg.Get("Mode_Fast_Keys" (isTOA ? "_Over" : ""), , isTOA ? "" : False, isTOA ? "" : "bool")
 
-		MsgBox(Locale.Read("message_fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
+		modeActive := isTOA
+			? (modeActive != typeofActivation ? typeofActivation : "")
+			: !modeActive
+
+		Cfg.Set(modeActive, "Mode_Fast_Keys" (isTOA ? "_Over" : ""), , isTOA ? "" : "bool")
+
+		if typeofActivation = ""
+			MsgBox(Locale.Read("message_fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 		this.RebuilBinds()
 	}
@@ -1510,7 +1517,7 @@ Class GlyphsPanel {
 			for i, each in glyphsColumns
 				glyphsColumns[i] := Locale.Read("col_" each)
 
-			glyphsLV := glyphsPanel.AddListView(Format("vGlyphsLV w{} h{} x{} y{}", listViewW, listViewH, listViewX, listViewY), glyphsColumns)
+			glyphsLV := glyphsPanel.AddListView(Format("vGlyphsLV w{} h{} x{} y{} +NoSort -Multi", listViewW, listViewH, listViewX, listViewY), glyphsColumns)
 			glyphsLV.OnEvent("ItemFocus", (LV, rowNumber) => this.GVPanelSelect(LV, rowNumber, glyphsPanel, previewsCount))
 
 			for each in this.glyphsPanelList
@@ -1571,6 +1578,20 @@ Class GlyphsPanel {
 
 		if IsGuiOpen(this.title) {
 			WinActivate(this.title)
+
+			if preselectEntry != "" {
+				glyphsPanel := this.panelGUI
+				glyphsLV := glyphsPanel["GlyphsLV"]
+
+				LV_Rows := glyphsLV.GetCount()
+				Loop LV_Rows {
+					if glyphsLV.GetText(A_Index, 3) = preselectEntry {
+						glyphsLV.Modify(A_Index, "+Select +Focus")
+						this.GVPanelSelect(glyphsLV, A_Index, glyphsPanel, previewsCount)
+						break
+					}
+				}
+			}
 		} else {
 			this.panelGUI := Constructor()
 			this.panelGUI.Show()

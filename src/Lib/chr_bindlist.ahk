@@ -214,31 +214,20 @@ bindingMaps := Map(
 		"Moded", Map(
 			; Functional
 			"F1", Map(
-				; "<#<!", (*) => GroupActivator("Diacritics Primary", "F1"),
 				"<^>!", (*) => KeyboardBinder.ToggleDefaultMode(),
-				"<^>!<!", (*) => KeyboardBinder.ToggleLigaturedMode(),
 				"<^>!>+", (*) => Auxiliary.ToggleInputMode(),
+				"<^>!<!", (*) => KeyboardBinder.ToggleDefaultMode("Second Keys"),
 			),
 			"F2", Map(
-				; "<#<!", (*) => GroupActivator("Diacritics Secondary", "F2"),
+				"<^>!<!", (*) => KeyboardBinder.ToggleDefaultMode("Tertiary Keys"),
 				"<^>!", (*) => InputScriptProcessor(),
 				"<^>!>+", (*) => InputScriptProcessor("pinYin"),
 				"<^>!<+", (*) => InputScriptProcessor("karaShiki"),
-				"<^>!<!", (*) => InputScriptProcessor("autoDiacritics"),
 			),
-			"F3", Map(
-				; "<#<!", (*) => GroupActivator("Diacritics Tertiary", "F3"),
-			),
-			"F6", Map(
-				; "<#<!", (*) => GroupActivator("Diacritics Quatemary", "F6"),
-			),
-			"F7", Map(
-				; "<#<!", (*) => GroupActivator("Special Characters", "F7"),
-			),
-			"F12", Map(
-				; ">^", (*) => KeyboardBinder.SwitchLayout("Latin"),
-				; ">+", (*) => KeyboardBinder.SwitchLayout("Cyrillic")
-			),
+			"F3", Map(),
+			"F6", Map(),
+			"F7", Map(),
+			"F12", Map(),
 			"Up", Map(
 				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Superscript"),
 				"<#<!>+", (*) => KeyboardBinder.ToggleNumStyle("Roman"),
@@ -491,9 +480,6 @@ bindingMaps := Map(
 				"<^<!<+", "breve_inverted",
 				"<^<!>+", "breve_below",
 				"<^<!<+>+", "breve_inverted_below",
-				">^<!", "bridge_above",
-				">^<!>+", "bridge_below",
-				">^<!<+>+", "bridge_inverted_below",
 			),
 			"C", Map(
 				"<^<!", "circumflex",
@@ -543,7 +529,8 @@ bindingMaps := Map(
 			),
 			"T", Map(
 				"<^<!", "tilde_above",
-				"<^<!<+", "tilde_overlay"
+				"<^<!<+", "tilde_overlay",
+				"<^<!<+>+", "tilde_below"
 			),
 			"V", Map(
 				"<^<!", "line_vertical",
@@ -598,6 +585,7 @@ bindingMaps := Map(
 			"NumpadDiv", Map(
 				"<^>!", "dagger",
 				"<^>!>+", "dagger_double",
+				"<^>!<!", "dagger_tripple",
 				"<^<!", "asterisk_operator",
 				"<^<!<+", "bullet_operator",
 			),
@@ -718,6 +706,9 @@ bindingMaps := Map(
 				"<^>!<+>+", "quartocolon",
 				"<!", "two_dot_punctuation",
 				"<^>!>+", "fraction_slash"
+			),
+			"Backslash", Map(
+				"<^>!", "grapheme_joiner",
 			),
 			"Comma", Map(
 				"<^>!", ["quote_left_double"],
@@ -1113,26 +1104,59 @@ bindingMaps := Map(
 			)
 		)
 	),
-	"Ligatured", Map(
-		"Flat", Map(
-			"A", (K) => BindHandler.TimeSend(K, Map(
-				"A", (*) => BindHandler.CapsSend(K, ["lat_c_lig_aa", "lat_s_lig_aa"]),
-				"E", (*) => BindHandler.CapsSend(K, ["lat_c_lig_ae", "lat_s_lig_ae"]),
-				"U", (*) => BindHandler.CapsSend(K, ["lat_c_lig_au", "lat_s_lig_au"]),
-				"O", (*) => BindHandler.CapsSend(K, ["lat_c_lig_ao", "lat_s_lig_ao"]),
-				"V", (*) => BindHandler.CapsSend(K, ["lat_c_lig_av", "lat_s_lig_av"]),
-				"Y", (*) => BindHandler.CapsSend(K, ["lat_c_lig_ay", "lat_s_lig_ay"]),
-			), (*) => BindHandler.CapsSend(K, ["lat_c_let_a", "lat_s_let_a"])),
-			"O", (K) => BindHandler.TimeSend(K, Map(
-				"E", (*) => BindHandler.CapsSend(K, ["lat_c_lig_oe", "lat_s_lig_oe"]),
-				"U", (*) => BindHandler.CapsSend(K, ["lat_c_lig_ou", "lat_s_lig_ou"]),
-				"O", (*) => BindHandler.CapsSend(K, ["lat_c_lig_oo", "lat_s_lig_oo"]),
-				"I", (*) => BindHandler.CapsSend(K, ["lat_c_lig_oi", "lat_s_lig_oi"]),
-			), (*) => BindHandler.CapsSend(K, ["lat_c_let_o", "lat_s_let_o"])),
-			"S", (K) => BindHandler.TimeSend(K, Map(
-				"S", (*) => BindHandler.CapsSend(K, ["lat_c_lig_s_eszett", "lat_s_lig_s_eszett"]),
-			), (*) => BindHandler.CapsSend(K, ["lat_c_let_s", "lat_s_let_s"])),
+	"Second Keys", Map(
+		"Flat", Map(),
+		"Moded", Map(
+			"Comma", Map(
+				"<^<!", "comma_above_turned",
+				"<^<!<+", "comma_above_reversed",
+				"<^<!>+", "comma_above_right",
+			),
+			"Space", Map(
+				"<^>!>+", "emquad",
+				"<^>!<+", "enquad",
+				"<!", "emsp14",
+			),
+			"A", Map(
+				"<^<!", "asterisk_above",
+				"<^<!<+", "asterisk_below",
+			),
+			"B", Map(
+				"<^<!", "bridge_above",
+				"<^<!<+", "bridge_below",
+				"<^<!<+>+", "bridge_inverted_below",
+			),
+			"C", Map(
+				"<^<!<+>+", "caron_below",
+			),
+			"G", Map(
+				"<^<!", "grave_below",
+			),
+			"O", Map(
+				"<^<!", "overline",
+				"<^<!<+", "overline_double",
+				"<^<!>+", "low_line",
+				"<^<!<+>+", "low_line_double",
+			),
+			"R", Map(
+				"<^<!", "ring_below_double",
+			),
+			"T", Map(
+				"<^<!", "tilde_not",
+				"<^<!<+", "tilde_vertical",
+			),
+			"V", Map(
+				"<^<!", "line_vertical_below",
+				"<^<!<+", "line_vertical_double_below",
+			),
 		),
-		"Moded", Map()
-	)
+	),
+	"Tertiary Keys", Map(
+		"Flat", Map(),
+		"Moded", Map(
+			"C", Map(
+				"<^<!", "candrabindu",
+			),
+		),
+	),
 )

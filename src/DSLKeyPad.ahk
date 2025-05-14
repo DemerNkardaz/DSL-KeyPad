@@ -64,6 +64,7 @@ App.SetTrayItems()
 Panel.SetPanelData()
 GlyphsPanel.SetPanelData()
 
+
 initialized := True
 
 GREPizeSelection(GetCollaborative := False) {
