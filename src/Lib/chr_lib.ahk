@@ -10227,6 +10227,12 @@ LibRegistrate(this) {
 		; * Extra Symbolistics
 		;
 		;
+		"symbolistics_chi_rho", {
+			unicode: "2627",
+			tags: ["Chi Rho", "Chrismon", "Хризма", "Хримсон", "Хи-Ро"],
+			groups: ["Extra Symbolistics"],
+			recipe: ["${hel_c_let_h_chi}${hel_c_let_r_rho}"]
+		},
 		"symbolistics_rod_of_asclepius", {
 			unicode: "2695",
 			tags: ["rod of Asclepius", "посох Асклепия"],
@@ -10673,7 +10679,10 @@ LibRegistrate(this) {
 
 		rawEntries.Push(
 			"emoji_modifier_fitzpatrick_" index, {
-				titles: Map("ru", "Модификатор Фицпатрика " index, "en", "Emoji Modifier Fitzpatrick " index),
+				titles: Map(
+					"en", "Emoji Modifier Fitzpatrick " index,
+					"ru", "Модификатор Фицпатрика " index
+				),
 				unicode: "" unicodeValue "",
 				options: { noCalc: True, suggestionsAtEnd: True },
 				recipe: ["ftz" index],
@@ -10697,7 +10706,10 @@ LibRegistrate(this) {
 
 		rawEntries.Push(
 			"emoji_component_" entryPost, {
-				titles: Map("ru", "Компонент эмодзи " title, "en", "Emoji Component " title),
+				titles: Map(
+					"en", "Emoji Component " title,
+					"ru", "Компонент эмодзи " title
+				),
 				unicode: "" unicodeValue "",
 				options: { noCalc: True, suggestionsAtEnd: True },
 				recipe: ["ecmp " emoji_hairs[index][2], "ecmp " StrReplace(entryPost, "_", " ")],

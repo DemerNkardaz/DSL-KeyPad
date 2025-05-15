@@ -25,6 +25,7 @@ Class Panel {
 		lvW := panelWidth - (panelWidth / 3)
 		lvH := panelHeight - 90
 		lvCols := [lvW * 0.525, lvW * 0.2, lvW * 0.125, lvW * 0.1, 0, 0]
+		lvColsAll := [lvW * 0.625, 0, lvW * 0.175, lvW * 0.15, 0, 0]
 
 		ibBodyW := (panelWidth - lvW) / 1.25
 		ibBodyH := panelHeight - 60
@@ -258,6 +259,7 @@ Class Panel {
 			column: {
 				widths: lvCols,
 				widthsSmelting: lvCols,
+				widthsAll: lvColsAll,
 				listStyle: Format("w{} h{} +NoSort -Multi", lvW, lvH)
 			},
 			infoFonts: {
@@ -336,6 +338,7 @@ Class Panel {
 			column: {
 				widths: lvCols,
 				widthsSmelting: lvCols,
+				widthsAll: lvColsAll,
 				listStyle: { w: lvW, h: lvH }
 			},
 		}
@@ -607,6 +610,12 @@ Class Panel {
 					)
 				})
 			),
+			all: ArrayMerge(
+				this.LV_InsertGroup({
+					type: "",
+					group: ["i)^(?!Custom)"],
+				}),
+			),
 		}
 
 	}
@@ -629,7 +638,7 @@ Class Panel {
 			"TELEXVNI",
 			"help",
 			"about",
-			"useful"
+			"all"
 		] {
 			localeText := Locale.Read("tab_" localeKey)
 			panelTabList.Obj.%localeKey% := localeText
@@ -732,6 +741,13 @@ Class Panel {
 				columns: panelColList.default,
 				columnWidths: UISets.column.widths,
 				source: this.LV_Content.TELEXVNI,
+			}, {
+				winObj: panelWindow,
+				prefix: "AllSymbols",
+				columns: panelColList.default,
+				columnWidths: UISets.column.widthsAll,
+				source: this.LV_Content.all,
+				previewType: "Recipe",
 			}]
 
 			tabHeaders := [
@@ -741,6 +757,7 @@ Class Panel {
 				panelTabList.Obj.tertiarykeys,
 				panelTabList.Obj.scripts,
 				panelTabList.Obj.TELEXVNI,
+				panelTabList.Obj.all,
 			]
 
 			for i, header in tabHeaders {
@@ -821,23 +838,24 @@ Class Panel {
 			aboutSampleWordsContent := panelWindow.AddText(UISets.aboutInfoBox.aboutSampleWordsContent, Locale.Read("about_sample_words"))
 			aboutSampleWordsContent.SetFont("s12 c555555", "Cambria")
 
-			panelTabs.UseTab(panelTabList.Obj.useful)
-
-			panelWindow.SetFont("s13")
-			panelWindow.Add("Text", , Locale.Read("typography"))
-			panelWindow.SetFont("s11")
-			panelWindow.Add("Link", "w600", Locale.Read("typography_layout"))
-			panelWindow.SetFont("s13")
-			panelWindow.Add("Text", , Locale.Read("unicode_resources"))
-			panelWindow.SetFont("s11")
-			panelWindow.Add("Link", "w600", '<a href="https://symbl.cc/">Symbl.cc</a> <a href="https://www.compart.com/en/unicode/">Compart</a>')
-			panelWindow.SetFont("s13")
-			panelWindow.Add("Text", , Locale.Read("dictionaries"))
-			panelWindow.SetFont("s11")
-			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_japanese") '<a href="https://yarxi.ru">ЯРКСИ</a> <a href="https://www.warodai.ruu">Warodai</a>')
-			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_chinese") '<a href="https://bkrs.info">БКРС</a>')
-			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_vietnamese") '<a href="https://chunom.org">Chữ Nôm</a>')
-
+			/*
+						panelTabs.UseTab(panelTabList.Obj.useful)
+			
+						panelWindow.SetFont("s13")
+						panelWindow.Add("Text", , Locale.Read("typography"))
+						panelWindow.SetFont("s11")
+						panelWindow.Add("Link", "w600", Locale.Read("typography_layout"))
+						panelWindow.SetFont("s13")
+						panelWindow.Add("Text", , Locale.Read("unicode_resources"))
+						panelWindow.SetFont("s11")
+						panelWindow.Add("Link", "w600", '<a href="https://symbl.cc/">Symbl.cc</a> <a href="https://www.compart.com/en/unicode/">Compart</a>')
+						panelWindow.SetFont("s13")
+						panelWindow.Add("Text", , Locale.Read("dictionaries"))
+						panelWindow.SetFont("s11")
+						panelWindow.Add("Link", "w600", Locale.Read("dictionaries_japanese") '<a href="https://yarxi.ru">ЯРКСИ</a> <a href="https://www.warodai.ruu">Warodai</a>')
+						panelWindow.Add("Link", "w600", Locale.Read("dictionaries_chinese") '<a href="https://bkrs.info">БКРС</a>')
+						panelWindow.Add("Link", "w600", Locale.Read("dictionaries_vietnamese") '<a href="https://chunom.org">Chữ Nôm</a>')
+			*/
 			panelTabs.UseTab()
 
 			GUI_Util.RemoveMinMaxButtons(panelWindow.Hwnd)
@@ -887,7 +905,7 @@ Class Panel {
 			this.PanelGUI := Constructor()
 			this.PanelGUI.Show()
 
-			for each in ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI"]
+			for each in ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI", "AllSymbols"]
 				try
 					this.LV_SetRandomPreview(each)
 
@@ -1348,7 +1366,8 @@ Class Panel {
 						isFavorite := FavoriteChars.CheckVar(characterEntry)
 
 						try {
-							if (options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(characterEntry)) ||
+							if (value.proxy != "") ||
+								(options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(characterEntry)) ||
 								(!value.groups.HasRegEx(options.group)) ||
 								(options.type = "Recipe" && (value.recipe.Length = 0)) ||
 								(options.type = "Fast Key" && (StrLen(value.options.fastKey) < 2)) ||
@@ -1374,7 +1393,7 @@ Class Panel {
 							characterTitle := titleText
 
 						} else if value.titles.Count > 0 && value.titles.Has(languageCode) {
-							characterTitle := value.titles[languageCode]
+							characterTitle := value.titles.Get(languageCode)
 
 						} else {
 							characterTitle := Locale.Read(characterEntry)
@@ -1396,7 +1415,7 @@ Class Panel {
 							"TELEX/VNI", options.type = "TELEX/VNI" && value.options.HasOwnProp("telex__" options.subType) ? value.options.telex__%options.subType% : "",
 						)
 
-						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : "N/A"
+						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : options.type = "" && value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : "N/A"
 
 						intermediateMap.Set(value.index, [characterTitle, characterBinding, characterSymbol, Util.ExtractHex(value.unicode), characterEntry, options.hasOwnProp("combinationKey") ? options.combinationKey : options.hasOwnProp("groupKey") ? options.groupKey : ""])
 					}

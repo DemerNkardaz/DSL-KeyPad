@@ -53,6 +53,8 @@ Class ChrEntry {
 			if value is Array {
 				this.%key% := []
 				this.%key% := value.Clone()
+			} else if value is Map {
+				this.%key% := value.Clone()
 			} else if value is Object {
 				for subKey, subValue in value.OwnProps() {
 					this.%key%.%subKey% := subValue
@@ -210,6 +212,7 @@ Class ChrLib {
 		if RegExMatch(entryName, "\[(.*?)\]", &match) {
 			splitVariants := StrSplit(match[1], ",")
 			entries := {}
+
 
 			for i, variant in splitVariants {
 				variantName := RegExReplace(entryName, "\[.*?\]", variant)
