@@ -247,6 +247,57 @@ Class Update {
 
 		return versions
 	}
+}
+
+Class Changelog {
+
+	static PanelGUI := Gui()
+	static panelTitle := ""
+
+	static Panel() {
+		this.panelTitle := App.Title() " — " Locale.Read("gui_changelog")
+
+		panelW := 600
+		panelH := 800
+
+		posX := (A_ScreenWidth - panelW) / 2
+		posY := (A_ScreenHeight - panelH) / 2
+
+		clBoxW := panelW - 20
+		clBoxH := panelH - 20
+		clBoxX := (panelW - clBoxW) / 2
+		clBoxY := (panelH - clBoxH) / 2
+
+		clContentW := clBoxW - 20
+		clContentH := clBoxH - 20 - 5
+		clContentX := clBoxX + (clBoxW - clContentW) / 2
+		clContentY := (clBoxY + (clBoxH - clContentH) / 2) + 5
+
+		Constructor() {
+			changelogPanel := Gui()
+			changelogPanel.title := this.panelTitle
+
+			changelogPanel.AddGroupBox(Format("vChangelogBox w{} h{} x{} y{}", clBoxW, clBoxH, clBoxX, clBoxY), Chr(0x1F310) " " Locale.Read("gui_changelog"))
+
+			changelogPanel.Show(Format("w{} h{} x{} y{}", panelW, panelH, posX, posY))
+			return changelogPanel
+		}
+
+		if IsGuiOpen(this.panelTitle) {
+			WinActivate(this.panelTitle)
+		} else {
+			this.PanelGUI := Constructor()
+			this.PanelGUI.Show()
+
+			IsGuiOpen(this.panelTitle) && PostConstructor()
+		}
+
+		PostConstructor() {
+			changelogPanel := this.PanelGUI
+
+			this.InsertChangelog(changelogPanel, Format("vChangelogInfoBoxContent w{} h{} x{} y{} readonly Left Wrap -HScroll -E0x200", clContentW, clContentH, clContentX, clContentY))
+		}
+	}
 
 	static InsertChangelog(targetGUI, UISettings) {
 		if this.FormatChangelog(this.GetChangelog(), &changelog)
@@ -255,7 +306,7 @@ Class Update {
 			targetGUI.AddEdit(UISettings, Locale.Read("warning_nointernet"))
 	}
 
-	static GetChangelog(url := this.jsDelivr "@latest/CHANGELOG.md") {
+	static GetChangelog(url := Update.jsDelivr "@latest/CHANGELOG.md") {
 		static fallbackURL := App.refsHeads["main"] "/CHANGELOG.md"
 		failed := False
 
@@ -306,7 +357,9 @@ Class Update {
 		output := str
 		return str
 	}
+
 }
+
 
 ; MsgBox("jsDelivr: " Update.ChekVersions().ToString())
 ; MsgBox("GitHub: " Update.ChekVersions(True).ToString() "`njsDelivr: " Update.ChekVersions().ToString())

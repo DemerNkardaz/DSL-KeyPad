@@ -125,6 +125,7 @@ Class App {
 			update: Locale.ReadInject("update_available", [Update.availableVersion]),
 			openPanel: Locale.Read("open_panel"),
 			options: Locale.Read("gui_options"),
+			changelogPanel: Locale.Read("gui_changelog"),
 			scriptForms: Locale.Read("tray_menu_item_scripts"),
 			glyphForms: Locale.Read("tray_menu_item_glyphs"),
 			layouts: Locale.Read("tray_menu_item_layouts"),
@@ -164,6 +165,8 @@ Class App {
 		App.tray.Add()
 		App.tray.Add(labels.openPanel, (*) => Panel.Panel())
 		App.tray.Add(labels.options, (*) => Cfg.Editor()), App.tray.SetIcon(labels.options, ImageRes, 63)
+		App.tray.Add()
+		App.tray.Add(labels.changelogPanel, (*) => Changelog.Panel())
 		App.tray.Add()
 
 		sciptsMenu := Menu()

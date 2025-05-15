@@ -6218,7 +6218,7 @@ LibRegistrate(this) {
 		},
 		"cyr_[c,s]_dig_yeru_with_back_yer", {
 			unicode: ["A650", "A651"],
-			options: { secondName: True },
+			options: { secondName: True, fastKey: "/Ы/?Secondary" },
 			alterations: [{}, { modifier: "1E06C" }],
 			recipe: ["${cyr_[c,s]_let_yer}${cyr_[c,s]_let_i_decimal}"],
 		},

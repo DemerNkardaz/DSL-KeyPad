@@ -149,12 +149,6 @@ Class Panel {
 				minWidth: 800,
 				minHeight: panelHeight
 			},
-			changelogInfoBox: {
-				body: Format("vChangelogInfoBox x{} y{} w{} h{}",
-					clBodyX, clBodyY, clBodyW, clBodyH),
-				content: Format("vChangelogInfoBoxContent x{} y{} w{} h{} readonly Left Wrap -HScroll -E0x200",
-					clContentX, clContentY, clContentW, clContentH)
-			},
 			tabs: Format("vTabs  w{} h{}", tabsW, tabsH),
 			infoBox: {
 				body: Format("x{} y{} w{} h{} Center",
@@ -627,7 +621,6 @@ Class Panel {
 		panelColList := { default: [], smelting: [] }
 
 		for _, localeKey in [
-			; "diacritics", "spaces",
 			"smelting",
 			"fastkeys",
 			"secondkeys",
@@ -636,8 +629,7 @@ Class Panel {
 			"TELEXVNI",
 			"help",
 			"about",
-			"useful",
-			"changelog"
+			"useful"
 		] {
 			localeText := Locale.Read("tab_" localeKey)
 			panelTabList.Obj.%localeKey% := localeText
@@ -702,63 +694,47 @@ Class Panel {
 
 			panelTabs := panelWindow.AddTab3(UISets.tabs, panelTabList.Arr)
 
-			tabContents := [
-				/*{
+			tabContents := [{
 				winObj: panelWindow,
-				prefix: "Diacritic",
+				prefix: "Smelting",
+				columns: panelColList.smelting,
+				columnWidths: UISets.column.widthsSmelting,
+				source: this.LV_Content.smelting,
+				previewType: "Recipe",
+			}, {
+				winObj: panelWindow,
+				prefix: "FastKeys",
 				columns: panelColList.default,
 				columnWidths: UISets.column.widths,
-				source: this.LV_Content.diacritics,
-							}, {
+				source: this.LV_Content.fastkeys,
+			}, {
 				winObj: panelWindow,
-				prefix: "Spaces",
+				prefix: "SecondKeys",
 				columns: panelColList.default,
 				columnWidths: UISets.column.widths,
-				source: this.LV_Content.spaces,
-				},*/
-				{
-					winObj: panelWindow,
-					prefix: "Smelting",
-					columns: panelColList.smelting,
-					columnWidths: UISets.column.widthsSmelting,
-					source: this.LV_Content.smelting,
-					previewType: "Recipe",
-				}, {
-					winObj: panelWindow,
-					prefix: "FastKeys",
-					columns: panelColList.default,
-					columnWidths: UISets.column.widths,
-					source: this.LV_Content.fastkeys,
-				}, {
-					winObj: panelWindow,
-					prefix: "SecondKeys",
-					columns: panelColList.default,
-					columnWidths: UISets.column.widths,
-					source: this.LV_Content.secondkeys,
-				}, {
-					winObj: panelWindow,
-					prefix: "TertiaryKeys",
-					columns: panelColList.default,
-					columnWidths: UISets.column.widths,
-					source: this.LV_Content.tertiarykeys,
-				}, {
-					winObj: panelWindow,
-					prefix: "Glago",
-					columns: panelColList.default,
-					columnWidths: UISets.column.widths,
-					source: this.LV_Content.scripts,
-					previewType: "Alternative Layout",
-				}, {
-					winObj: panelWindow,
-					prefix: "TELEX/VNI",
-					columns: panelColList.default,
-					columnWidths: UISets.column.widths,
-					source: this.LV_Content.TELEXVNI,
-				}]
+				source: this.LV_Content.secondkeys,
+			}, {
+				winObj: panelWindow,
+				prefix: "TertiaryKeys",
+				columns: panelColList.default,
+				columnWidths: UISets.column.widths,
+				source: this.LV_Content.tertiarykeys,
+			}, {
+				winObj: panelWindow,
+				prefix: "Glago",
+				columns: panelColList.default,
+				columnWidths: UISets.column.widths,
+				source: this.LV_Content.scripts,
+				previewType: "Alternative Layout",
+			}, {
+				winObj: panelWindow,
+				prefix: "TELEX/VNI",
+				columns: panelColList.default,
+				columnWidths: UISets.column.widths,
+				source: this.LV_Content.TELEXVNI,
+			}]
 
 			tabHeaders := [
-				; panelTabList.Obj.diacritics,
-				; panelTabList.Obj.spaces,
 				panelTabList.Obj.smelting,
 				panelTabList.Obj.fastkeys,
 				panelTabList.Obj.secondkeys,
@@ -862,9 +838,6 @@ Class Panel {
 			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_chinese") '<a href="https://bkrs.info">БКРС</a>')
 			panelWindow.Add("Link", "w600", Locale.Read("dictionaries_vietnamese") '<a href="https://chunom.org">Chữ Nôm</a>')
 
-			panelTabs.UseTab(panelTabList.Obj.changelog)
-			panelWindow.AddGroupBox(UISets.changelogInfoBox.body, "🌐 " . Locale.Read("tab_changelog"))
-
 			panelTabs.UseTab()
 
 			GUI_Util.RemoveMinMaxButtons(panelWindow.Hwnd)
@@ -877,8 +850,6 @@ Class Panel {
 				guiObj["Tabs"].Move(, , UISets.tabs.w, UISets.tabs.h)
 
 				for prefix in [
-					; "Diacritic",
-					; "Spaces",
 					"Smelting",
 					"FastKeys",
 					"Glago"
@@ -909,14 +880,6 @@ Class Panel {
 			return panelWindow
 		}
 
-		PostConstructor() {
-			UISets := this.GetUISets()
-			panelWindow := this.PanelGUI
-			panelTabs := panelWindow["Tabs"]
-
-			panelTabs.UseTab(panelTabList.Obj.changelog)
-			Update.InsertChangelog(panelWindow, UISets.changelogInfoBox.content)
-		}
 
 		if IsGuiOpen(this.panelTitle) && !redraw {
 			WinActivate(this.panelTitle)
@@ -924,11 +887,10 @@ Class Panel {
 			this.PanelGUI := Constructor()
 			this.PanelGUI.Show()
 
-			for each in ["Diacritic", "Spaces", "Smelting", "FastKeys", "Glago", "TELEX/VNI"]
+			for each in ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI"]
 				try
 					this.LV_SetRandomPreview(each)
 
-			IsGuiOpen(this.panelTitle) && PostConstructor()
 		}
 	}
 
