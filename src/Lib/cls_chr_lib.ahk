@@ -846,15 +846,18 @@ Class ChrLib {
 			if targetEntry.options.%key% is String {
 				targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\%self\%", Util.UnicodeToChar(targetEntry.unicode))
 
-				if InStr(targetEntry.options.%key%, "${") {
+				if InStr(targetEntry.options.%key%, "${") || InStr(targetEntry.options.%key%, "*?") {
 					while RegExMatch(targetEntry.options.%key%, "\[(.*?)\]", &varMatch) {
 						splittedVariants := StrSplit(varMatch[1], ",")
 						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
 						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\@", targetEntry.data.letter, , 1)
+						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\*\?")
 					}
 
-					targetEntry.options.%key% := ChrRecipeHandler.MakeStr(targetEntry.options.%key%)
+					if InStr(targetEntry.options.%key%, "${")
+						targetEntry.options.%key% := ChrRecipeHandler.MakeStr(targetEntry.options.%key%)
 				}
+
 			}
 		}
 	}
@@ -1315,7 +1318,7 @@ Class ChrLib {
 		decomposedName := {
 			script: Map("lat", "latin", "cyr", "cyrillic", "hel", "hellenic"),
 			case: Map("c", "capital", "s", "small", "sc", "small_capital", "i", "inter", "n", "neutral"),
-			type: Map("let", "letter", "lig", "ligature", "dig", "digraph", "num", "numeral"),
+			type: Map("let", "letter", "lig", "ligature", "dig", "digraph", "num", "numeral", "sym", "symbol"),
 			letter: "",
 			postfixes: []
 		}

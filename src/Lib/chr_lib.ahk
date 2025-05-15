@@ -3667,6 +3667,7 @@ LibRegistrate(this) {
 				italicBold: "1D71E",
 				sansSerifBold: "1D758",
 				sansSerifItalicBold: "1D792",
+				smallCapital: "1D26",
 			}, {
 				bold: "1D6C4",
 				italic: "1D6FE",
@@ -3759,7 +3760,7 @@ LibRegistrate(this) {
 				sansSerifBold: "1D777",
 				sansSerifItalicBold: "1D7B1",
 			}],
-			options: { altLayoutKey: "$" },
+			options: { altLayoutKey: "\U\ | >! $" },
 		},
 		"hel_[c,s]_let_i_iota", {
 			unicode: ["0399", "03B9"],
@@ -3803,6 +3804,7 @@ LibRegistrate(this) {
 				italicBold: "1D726",
 				sansSerifBold: "1D760",
 				sansSerifItalicBold: "1D79A",
+				smallCapital: "1D27",
 			}, {
 				bold: "1D6CC",
 				italic: "1D706",
@@ -3861,7 +3863,7 @@ LibRegistrate(this) {
 				sansSerifBold: "1D77D",
 				sansSerifItalicBold: "1D7B7",
 			}],
-			options: { altLayoutKey: "$" },
+			options: { altLayoutKey: "\J\" },
 		},
 		"hel_[c,s]_let_o_omicron", {
 			unicode: ["039F", "03BF"],
@@ -3888,6 +3890,7 @@ LibRegistrate(this) {
 				italicBold: "1D72B",
 				sansSerifBold: "1D765",
 				sansSerifItalicBold: "1D79F",
+				smallCapital: "1D28",
 			}, {
 				bold: "1D6D1",
 				italic: "1D70B",
@@ -3905,6 +3908,7 @@ LibRegistrate(this) {
 				italicBold: "1D72C",
 				sansSerifBold: "1D766",
 				sansSerifItalicBold: "1D7A0",
+				smallCapital: "1D29",
 			}, {
 				bold: "1D6D2",
 				italic: "1D70C",
@@ -3952,7 +3956,7 @@ LibRegistrate(this) {
 			}],
 			options: { altLayoutKey: "$" },
 		},
-		"hel_[c,s]_let_u_upsilon", {
+		"hel_[c,s]_let_y_upsilon", {
 			unicode: ["03A5", "03C5"],
 			alterations: [{
 				bold: "1D6BC",
@@ -4001,7 +4005,7 @@ LibRegistrate(this) {
 				sansSerifBold: "1D786",
 				sansSerifItalicBold: "1D7C0",
 			}],
-			options: { altLayoutKey: ">! $" },
+			options: { altLayoutKey: "\X\" },
 		},
 		"hel_[c,s]_let_p_psi", {
 			unicode: ["03A8", "03C8"],
@@ -4011,6 +4015,7 @@ LibRegistrate(this) {
 				italicBold: "1D733",
 				sansSerifBold: "1D76D",
 				sansSerifItalicBold: "1D7A7",
+				smallCapital: "1D2A",
 			}, {
 				bold: "1D6D9",
 				italic: "1D713",
@@ -4018,15 +4023,7 @@ LibRegistrate(this) {
 				sansSerifBold: "1D787",
 				sansSerifItalicBold: "1D7C1",
 			}],
-			options: { altLayoutKey: ">! $" },
-		},
-		"hel_[c,s]_let_q_koppa_archaic", {
-			unicode: ["03D8", "03D9"],
-			options: { altLayoutKey: "$" },
-		},
-		"hel_[c,s]_let_q_koppa", {
-			unicode: ["03DE", "03DF"],
-			options: { altLayoutKey: ">! $" },
+			options: { altLayoutKey: "\C\" },
 		},
 		"hel_[c,s]_let_o_omega", {
 			unicode: ["03A9", "03C9"],
@@ -4036,6 +4033,7 @@ LibRegistrate(this) {
 				italicBold: "1D734",
 				sansSerifBold: "1D76E",
 				sansSerifItalicBold: "1D7A8",
+				smallCapital: "AB65",
 			}, {
 				bold: "1D6DA",
 				italic: "1D714",
@@ -4043,7 +4041,134 @@ LibRegistrate(this) {
 				sansSerifBold: "1D788",
 				sansSerifItalicBold: "1D7C2",
 			}],
+			options: { altLayoutKey: "\V\" },
+		},
+		"hel_[c,s]_let_i_jot", {
+			unicode: ["037F", "03F3"],
 			options: { altLayoutKey: ">! $" },
+		},
+		"hel_[c,s]_let_h_heta", {
+			unicode: ["0370", "0371"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"hel_[c,s]_let_q_koppa", {
+			unicode: ["03DE", "03DF"],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_q_koppa_archaic", {
+			unicode: ["03D8", "03D9"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"hel_[c,s]_let_s_san", {
+			unicode: ["03FA", "03FB"],
+			options: { altLayoutKey: "<! $" },
+		},
+		"hel_[c,s]_let_s_sampi", {
+			unicode: ["03E1", "03E0"],
+			options: { altLayoutKey: ">!<! $" },
+		},
+		"hel_[c,s]_let_s_sampi_archaic", {
+			unicode: ["0372", "0373"],
+			options: { altLayoutKey: ">!<!<+ $" },
+		},
+		"hel_[c,s]_let_s_sho", {
+			unicode: ["03F7", "03F8"],
+			options: { altLayoutKey: ">!>+ $" },
+		},
+		"hel_[c,s]_let_w_digamma", {
+			unicode: ["03DC", "03DD"],
+			alterations: [{
+				bold: "1D7CA",
+			}, {
+				bold: "1D7CB",
+			}],
+			options: { altLayoutKey: "$" },
+		},
+		"hel_[c,s]_let_w_digamma_pamphylian", {
+			unicode: ["0376", "0377"],
+			options: { altLayoutKey: "<+ $" },
+		},
+		"hel_[s]_sym_b_beta", {
+			unicode: ["03D0"],
+			options: { referenceLocale: ":hel_s_let_b_beta", altLayoutKey: ">+ $" },
+		},
+		"hel_[c,s]_sym_t_theta", {
+			unicode: ["03F4", "03D1"],
+			alterations: [{
+				bold: "1D6B9",
+				italic: "1D6F3",
+				italicBold: "1D72D",
+				sansSerifBold: "1D767",
+				sansSerifItalicBold: "1D7A1",
+			}, {
+				bold: "1D6DD",
+				italic: "1D717",
+				italicBold: "1D751",
+				sansSerifBold: "1D78B",
+				sansSerifItalicBold: "1D7C2",
+			}],
+			options: { referenceLocale: ":hel_[c,s]_let_t_theta*?", altLayoutKey: ">+ \U\" },
+		},
+		"hel_[s]_sym_f_phi", {
+			unicode: ["03D5"],
+			alterations: {
+				bold: "1D6DF",
+				italic: "1D719",
+				italicBold: "1D753",
+				sansSerifBold: "1D78D",
+				sansSerifItalicBold: "1D7C7",
+			},
+			options: { referenceLocale: ":hel_s_let_f_phi", altLayoutKey: ">+ $" },
+		},
+		"hel_[s]_sym_r_rho", {
+			unicode: ["03F1"],
+			alterations: {
+				bold: "1D6E0",
+				italic: "1D71A",
+				italicBold: "1D754",
+				sansSerifBold: "1D78E",
+				sansSerifItalicBold: "1D7C8",
+			},
+			options: { referenceLocale: ":hel_s_let_r_rho", altLayoutKey: ">+ $" },
+		},
+		"hel_[s]_sym_p_pi", {
+			unicode: ["03D6"],
+			alterations: {
+				bold: "1D6E1",
+				italic: "1D71B",
+				italicBold: "1D755",
+				sansSerifBold: "1D78F",
+				sansSerifItalicBold: "1D7C9",
+			},
+			options: { referenceLocale: ":hel_s_let_p_pi", altLayoutKey: ">+ $" },
+		},
+		"hel_[s]_sym_k_kappa", {
+			unicode: ["03F0"],
+			alterations: {
+				bold: "1D6DE",
+				italic: "1D718",
+				italicBold: "1D752",
+				sansSerifBold: "1D78C",
+				sansSerifItalicBold: "1D7C6",
+			},
+			options: { referenceLocale: ":hel_s_let_k_kappa", altLayoutKey: ">+ $" },
+		},
+		"hel_[c,s]_sym_s_sigma_lunate", {
+			unicode: ["03F9", "03F2"],
+			options: { referenceLocale: ":hel_[c,s]_let_s_sigma*?", altLayoutKey: ">+ $" },
+			symbol: { beforeLetter: "lunate" },
+		},
+		"hel_[s]_sym_e_epsilon_lunate", {
+			unicode: ["03F5"],
+			alterations: {
+				bold: "1D6DC",
+				italic: "1D716",
+				italicBold: "1D750",
+				sansSerifBold: "1D78A",
+				sansSerifItalicBold: "1D7C4",
+			},
+			options: { referenceLocale: ":hel_s_let_e_epsilon", altLayoutKey: ">+ $" },
+			symbol: { beforeLetter: "lunate::2" },
 		},
 		;
 		;

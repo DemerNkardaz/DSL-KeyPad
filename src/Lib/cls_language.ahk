@@ -288,21 +288,28 @@ Class Locale {
 
 		referenceLocale := entry.options.HasOwnProp("referenceLocale") && entry.options.referenceLocale != "" ? entry.options.referenceLocale : False
 
+		LTLReference := False
+
 		entryData := entry.data
 		entrySymbol := entry.symbol
 
 		if referenceLocale {
-			referenceName := entryName
-			if RegExMatch(referenceLocale, "i)^(.*?)\$", &refMatch) {
-				referenceName := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1")
-			} else
-				referenceName := referenceLocale
+			if !(referenceLocale ~= "i)^:") {
+				referenceName := entryName
+				if RegExMatch(referenceLocale, "i)^(.*?)\$", &refMatch) {
+					referenceName := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1")
+				} else
+					referenceName := referenceLocale
 
-			if ChrLib.entries.HasOwnProp(referenceName) {
-				entryData := ChrLib.GetValue(referenceName, "data")
-				entrySymbol := ChrLib.GetValue(referenceName, "symbol")
+				if ChrLib.entries.HasOwnProp(referenceName) {
+					entryData := ChrLib.GetValue(referenceName, "data")
+					entrySymbol := ChrLib.GetValue(referenceName, "symbol")
+				}
+
+				entryName := referenceName
+			} else {
+				LTLReference := StrReplace(referenceLocale, ":", "")
 			}
-			MsgBox(referenceName)
 		}
 
 		letter := (entrySymbol.HasOwnProp("letter") && StrLen(entrySymbol.letter) > 0) ? entrySymbol.letter : entryData.letter
@@ -310,21 +317,23 @@ Class Locale {
 		lCase := entryData.case
 		lType := entryData.type
 		lPostfixes := entryData.postfixes
-		lVariant := lType = "digraph" ? 2 : lType = "numeral" ? 3 : 1
+		lVariant := ["digraph", "symbol"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
 		langCodes := ["en", "ru", "en_alt", "ru_alt"]
 		entry.titles := Map()
 		tags := Map()
+
+		ref := LTLReference ? LTLReference : entryName
 
 		for _, langCode in langCodes {
 			isAlt := InStr(langCode, "_alt")
 			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
 			postLetter := useLetterLocale ?
 				(Locale.Read((RegExMatch(useLetterLocale, "i)^(.*?)\$", &endMatch) > 0 ?
-					RegExReplace(entryName, "i)^(.*?" RegExReplace(endMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1") :
+					RegExReplace(ref, "i)^(.*?" RegExReplace(endMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1") :
 					useLetterLocale = "Origin" ?
-						RegExReplace(entryName, "i)^(.*?)__.*", "$1") :
-					entryName) "_LTL", lang)) :
+						RegExReplace(ref, "i)^(.*?)__.*", "$1") :
+					ref) "_LTL", lang)) :
 				letter
 
 			lBeforeletter := ""
@@ -332,7 +341,7 @@ Class Locale {
 			lSecondName := ""
 
 			if entry.options.secondName {
-				lSecondName := " " Locale.Read(entryName "_sN", lang)
+				lSecondName := " " Locale.Read(ref "_sN", lang)
 			}
 
 			for letterBound in ["beforeLetter", "afterLetter"] {
@@ -350,7 +359,7 @@ Class Locale {
 							entryBoundReference := SubStr(entryBoundReference, 1, match.Pos(0) - 1)
 							l%boundLink% := Locale.VarSelect(Locale.Read(pfx letterBound "_" entryBoundReference, lang), index)
 						} else {
-							l%boundLink% := Locale.Read(pfx letterBound "_" entryBoundReference, lang)
+							l%boundLink% := Locale.VarSelect(Locale.Read(pfx letterBound "_" entryBoundReference, lang), 1)
 						}
 					}
 				}
