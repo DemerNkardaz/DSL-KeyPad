@@ -587,10 +587,14 @@ Class KeyboardBinder {
 
 
 							if !output.Has(interCombo) {
-								output.Set(interCombo,
-									binds is String || binds is Func ? [binds] :
-									rules[rule]
-								)
+								try {
+									output.Set(interCombo,
+										binds is String || binds is Func ? [binds] :
+										rules[rule]
+									)
+								} catch as e {
+									MsgBox "Error in Origin Combo: " combo "`n Combo: " interCombo "`n Rule: " rule "`n Error: " e.Message
+								}
 							} else {
 								if output.Get(interCombo).Length == 2 {
 									if output[interCombo] is Func {
@@ -1738,7 +1742,7 @@ Class BindHandler {
 
 	static CapsSend(combo := "", charactersPair := [], reverse := False) {
 		capsOn := reverse ? !GetKeyState("CapsLock", "T") : GetKeyState("CapsLock", "T")
-		this.Send(combo, charactersPair[capsOn ? 1 : 2])
+		this.Send(combo, charactersPair.Length > 1 ? charactersPair[capsOn ? 1 : 2] : charactersPair[1])
 	}
 
 	static LangSend(combo := "", charactersObj := { en: "", ru: "" }, reverse := { ru: False, en: False }) {
