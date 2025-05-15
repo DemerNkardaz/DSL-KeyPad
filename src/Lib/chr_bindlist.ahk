@@ -706,8 +706,70 @@ bindingMaps := Map(
 			"Moded", Map()
 		),
 		"Ugaritic", Map(
-			"Flat", Map(),
-			"Moded", Map()
+			"Flat", Map(
+				"A", "ugaritic_let_alpa",
+				"B", "ugaritic_let_beta",
+				"C", "",
+				"D", "ugaritic_let_delta",
+				"E", "",
+				"F", "",
+				"G", "ugaritic_let_gamla",
+				"H", "ugaritic_let_ho",
+				"I", "ugaritic_let_i",
+				"J", "",
+				"K", "ugaritic_let_kaf",
+				"L", "ugaritic_let_lamda",
+				"M", "ugaritic_let_mem",
+				"N", "ugaritic_let_nun",
+				"O", "",
+				"P", "ugaritic_let_pu",
+				"Q", "ugaritic_let_qopa",
+				"R", "ugaritic_let_rasha",
+				"S", "ugaritic_let_shin",
+				"T", "ugaritic_let_to",
+				"U", "ugaritic_let_u",
+				"V", "",
+				"W", "ugaritic_let_wo",
+				"X", "",
+				"Y", "ugaritic_let_yod",
+				"Z", "ugaritic_let_zeta",
+				"Space", "ugaritic_word_divider",
+			),
+			"Moded", Map(
+				"A", Map("<^>!", "ugaritic_let_ain"),
+				"B", Map(),
+				"C", Map(),
+				"D", Map("<^>!", "ugaritic_let_dhal"),
+				"E", Map(),
+				"F", Map(),
+				"G", Map("<^>!", "ugaritic_let_ghain"),
+				"H", Map(
+					"<^>!", "ugaritic_let_kha",
+					"<^>!>+", "ugaritic_let_hota",
+				),
+				"I", Map(),
+				"J", Map(),
+				"K", Map(),
+				"L", Map(),
+				"M", Map(),
+				"N", Map(),
+				"O", Map(),
+				"P", Map(),
+				"Q", Map(),
+				"R", Map(),
+				"S", Map(
+					"<^>!", "ugaritic_let_sade",
+					"<^>!>+", "ugaritic_let_thanna",
+					"<+", "ugaritic_let_samka"
+				),
+				"T", Map("<^>!>+", "ugaritic_let_tet"),
+				"U", Map("<+", "ugaritic_let_ssu"),
+				"V", Map(),
+				"W", Map(),
+				"X", Map(),
+				"Y", Map(),
+				"Z", Map("<^>!>+", "ugaritic_let_zu"),
+			)
 		),
 		"Old Persian", Map(
 			"Flat", Map(),
@@ -715,13 +777,13 @@ bindingMaps := Map(
 		),
 		"IPA", Map(
 			"Flat", Map(
-				"A", "",
+				"A", "lat_s_let_a_alpha",
 				"B", "",
 				"C", "lat_s_let_c__curl",
 				"D", "lat_s_let_d_eth",
-				"E", "",
-				"F", "",
-				"G", "",
+				"E", "lat_s_let_e_epsilon",
+				"F", "lat_s_let_f_phi",
+				"G", "lat_s_let_g_gamma",
 				"H", "",
 				"I", "lat_c_let_i::smallCapital",
 				"J", "",
@@ -729,23 +791,104 @@ bindingMaps := Map(
 				"L", "",
 				"M", "",
 				"N", "",
-				"O", "",
+				"O", "lat_s_let_o_rams_horn",
 				"P", "",
 				"Q", "",
 				"R", "",
-				"S", "",
+				"S", "lat_s_let_s_sigma",
 				"T", "",
-				"U", "",
+				"U", "lat_s_let_u_upsilon",
 				"V", "",
 				"W", "",
 				"X", "",
 				"Y", "",
 				"Z", "lat_s_let_z_ezh",
+				"Semicolon", "colon_triangle",
 			),
 			"Moded", Map(
-				"S", Map("<^>!>+", "lat_s_let_s_sigma"),
-				"U", Map("<^>!<!", ["lat_[c,s]_let_u_upsilon"]),
-				"Semicolon", Map("<^>!", "colon_triangle_half"),
+				"A", Map(
+					"<+:Caps", ["lat_[c,s]_let_a"],
+					"<^>!", "lat_s_let_a_alpha_turned",
+				),
+				"B", Map(
+					"<+:Caps", ["lat_[c,s]_let_b"],
+				),
+				"C", Map(
+					"<+:Caps", ["lat_[c,s]_let_c"],
+				),
+				"D", Map(
+					"<+:Caps", ["lat_[c,s]_let_d"],
+				),
+				"E", Map(
+					"<+:Caps", ["lat_[c,s]_let_e"],
+				),
+				"F", Map(
+					"<+:Caps", ["lat_[c,s]_let_f"],
+				),
+				"G", Map(
+					"<+:Caps", ["lat_[c,s]_let_g"],
+				),
+				"H", Map(
+					"<+:Caps", ["lat_[c,s]_let_h"],
+				),
+				"I", Map(
+					"<+:Caps", ["lat_[c,s]_let_i"],
+				),
+				"J", Map(
+					"<+:Caps", ["lat_[c,s]_let_j"],
+				),
+				"K", Map(
+					"<+:Caps", ["lat_[c,s]_let_k"],
+				),
+				"L", Map(
+					"<+:Caps", ["lat_[c,s]_let_l"],
+				),
+				"M", Map(
+					"<+:Caps", ["lat_[c,s]_let_m"],
+				),
+				"N", Map(
+					"<+:Caps", ["lat_[c,s]_let_n"],
+				),
+				"O", Map(
+					"<+:Caps", ["lat_[c,s]_let_o"],
+				),
+				"P", Map(
+					"<+:Caps", ["lat_[c,s]_let_p"],
+				),
+				"Q", Map(
+					"<+:Caps", ["lat_[c,s]_let_q"],
+				),
+				"R", Map(
+					"<+:Caps", ["lat_[c,s]_let_r"],
+				),
+				"S", Map(
+					"<+:Caps", ["lat_[c,s]_let_s"],
+					"<^>!>+", "lat_s_let_s_sigma",
+				),
+				"T", Map(
+					"<+:Caps", ["lat_[c,s]_let_t"],
+				),
+				"U", Map(
+					"<+:Caps", ["lat_[c,s]_let_u"],
+				),
+				"V", Map(
+					"<+:Caps", ["lat_[c,s]_let_v"],
+				),
+				"W", Map(
+					"<+:Caps", ["lat_[c,s]_let_w"],
+				),
+				"X", Map(
+					"<+:Caps", ["lat_[c,s]_let_x"],
+				),
+				"Y", Map(
+					"<+:Caps", ["lat_[c,s]_let_y"],
+				),
+				"Z", Map(
+					"<+:Caps", ["lat_[c,s]_let_z"],
+				),
+				"Semicolon", Map(
+					"<^>!", "colon_triangle_half"
+				),
 			)
 		),
 		"Math", Map(

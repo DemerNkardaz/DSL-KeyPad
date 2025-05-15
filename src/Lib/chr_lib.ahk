@@ -10618,11 +10618,12 @@ LibRegistrate(this) {
 			groups: ["Misc"],
 			options: { noCalc: True, fastKey: "<+ Enter" }
 		},
-		"ipa_a-z", { unicode: "0061", sequence: ["0061", "0062", "0063", "0064", "0065", "0066", "0067", "0068", "0069", "006A", "006B", "006C", "006D", "006E", "006F", "0070", "0071", "0072", "0073", "0074", "0075", "0076", "0077", "0078", "0079", "007A"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "<+ a-z" } },
-		"ipa_a-z_cap", { unicode: "0041", sequence: ["0041", "0042", "0043", "0044", "0045", "0046", "0047", "0048", "0049", "004A", "004B", "004C", "004D", "004E", "004F", "0050", "0051", "0052", "0053", "0054", "0055", "0056", "0057", "0058", "0059", "005A"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "c*<+ a-z" } },
-		"ipa_combining_mode", { unicode: "0041", sequence: ["25CC", "0363", "25CC", "1DE8", "25CC", "0369", "25CC", "1DF1"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt F2" } },
-		"ipa_modifiers_mode", { unicode: "0041", sequence: ["02B0", "02B1", "02B2", "02B3", "02B7", "02B8"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt F3" } },
-		"ipa_subscript_mode", { unicode: "0041", sequence: ["2090", "2091", "2095", "2C7C", "2096", "2097"], groups: ["IPA"], options: { noCalc: True, altLayoutKey: "RAlt RShift F3" } },
+		"ipa_[c,s]_a-z", {
+			unicode: ["0041", "0061"],
+			groups: ["IPA"],
+			options: { noCalc: True, altLayoutKey: ["c*<+ a-z", "<+ a-z"] },
+			symbol: { alt: ["ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"] },
+		},
 		;
 		;
 		; * Etc.
