@@ -34,6 +34,10 @@ Class UnicodeWebResource {
 		}
 	}
 
+	static GetCurrentResource() {
+		return Cfg.Get("Unicode_Web_Resource", , "SymblCC")
+	}
+
 	static CodeHandler(code) {
 		resource := Cfg.Get("Unicode_Web_Resource", , "SymblCC")
 		useSystemLanguage := Cfg.Get("Unicode_Web_Resource_Use_System_Language", , False, "bool")
@@ -68,6 +72,16 @@ Class UnicodeBlockWebResource {
 			codeURL := UnicodeBlockWebResource.CodeHandler(m[1], m[3])
 			Run(codeURL)
 		}
+	}
+
+
+	static GetCurrentResource() {
+		resourceName := Cfg.Get("Unicode_Web_Resource", , "SymblCC")
+
+		if !UnicodeBlockWebResource.resources.Has(resourceName)
+			resourceName := RegExMatch(resourceName, "i)^Wik") ? "Wiktionary (En)" : "SymblCC"
+
+		return resourceName
 	}
 
 	static CodeHandler(code, name) {

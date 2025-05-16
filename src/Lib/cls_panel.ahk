@@ -927,6 +927,7 @@ Class Panel {
 		items_LV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 10, "int"))
 		items_LV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: options.prefix, previewType: options.previewType }))
 		items_LV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber, options.prefix = "Favorites"))
+		items_LV.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.LV_ContextMenu(panelWindow, LV, rowNumber, options.prefix = "Favorites", isRMB, X, Y))
 
 		Loop options.columns.Length {
 			index := A_Index
@@ -1011,6 +1012,52 @@ Class Panel {
 			if (Locale.Read(label) = selectedLabel) {
 				TargetTextBox.Text := Locale.Read(label "_description")
 				TargetTextBox.SetFont("s10", "Segoe UI")
+			}
+		}
+	}
+
+	static LV_ContextMenu(panelWindow, LV, rowNumber, isFavorite := False, isRMB := False, X := 0, Y := 0) {
+		if !isRMB
+			return
+		try {
+			if StrLen(LV.GetText(rowNumber, 1)) < 1 {
+				return
+			} else {
+				titleCol := LV.GetText(rowNumber, 1)
+				entryCol := LV.GetText(rowNumber, 5)
+				unicode := ChrLib.entries.%entryCol%.unicode
+				unicodeBlock := ChrLib.entries.%entryCol%.unicodeBlock
+				sequence := ChrLib.entries.%entryCol%.sequence
+				value := ChrLib.GetEntry(entryCol)
+
+				if StrLen(unicode) > 0 {
+					star := " " Chr(0x2605)
+					isCharFavorite := FavoriteChars.CheckVar(entryCol)
+					contextMenu := Menu()
+
+					contextMenu.Add(Locale.Read("gui_panel_context_" (isCharFavorite ? "remove" : "add") "_favorites"), doFav)
+					contextMenu.Add()
+					contextMenu.Add(Locale.ReadInject("gui_panel_context_show_symbol_page", [UnicodeWebResource.GetCurrentResource()]),
+						(*) => UnicodeWebResource("Copy", unicode))
+					contextMenu.Add(Locale.ReadInject("gui_panel_context_show_block_page", [UnicodeBlockWebResource.GetCurrentResource()]),
+						(*) => UnicodeBlockWebResource(unicodeBlock))
+
+
+					contextMenu.Show(X, Y)
+					return
+
+					doFav(*) {
+						SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
+						if !isCharFavorite && !InStr(titleCol, star) {
+							FavoriteChars.Add(entryCol)
+							LV.Modify(rowNumber, , titleCol star)
+						} else if isCharFavorite {
+							FavoriteChars.Remove(entryCol, isFavorite)
+							LV.Modify(rowNumber, , StrReplace(titleCol, star))
+						}
+
+					}
+				}
 			}
 		}
 	}
