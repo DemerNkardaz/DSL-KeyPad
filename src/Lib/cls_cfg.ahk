@@ -4,6 +4,7 @@ Class Cfg {
 			"Unicode_Web_Resource", "SymblCC",
 			"Unicode_Web_Resource_Use_System_Language", "False",
 			"LaTeX_Mode", "Text",
+			"HTML_Mode", "Decimal",
 			"Input_Script", "Default",
 			"Layout_Latin", "QWERTY",
 			"Layout_Cyrillic", "ЙЦУКЕН",
@@ -234,19 +235,33 @@ Class Cfg {
 			letterI_selector.OnEvent("Change", (CB, Zero) => Options.CharacterOption(CB, "I"))
 
 
-			optionsPanel.AddText("vLaTeXMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30) " w80 BackgroundTrans", Locale.Read("gui_options_LaTeX_Mode"))
-
 			LaTeXOptionsList := {
 				Text: Locale.Read("gui_options_LaTeX_Mode_text"),
 				Math: Locale.Read("gui_options_LaTeX_Mode_math"),
 			}
 
+			optionsPanel.AddText("vLaTeXMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30) " w80 BackgroundTrans", Locale.Read("gui_options_LaTeX_Mode"))
+
 			LaTeXModeSelector := optionsPanel.AddDropDownList("vLaTeXModeSelector x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(300 + 30 + 18), [LaTeXOptionsList.Text, LaTeXOptionsList.Math])
 			PostMessage(0x0153, -1, 15, LaTeXModeSelector)
 
 			LaTeXOption := Cfg.Get("LaTeX_Mode", , "Text")
-			LaTeXModeSelector.Text := LaTeXOptionsList.%LaTeXOption%
-			LaTeXModeSelector.OnEvent("Change", (CB, Zero) => Options.LaTeXOption(CB.Text, LaTeXOptionsList))
+			LaTeXModeSelector.Text := LaTeXOptionsList.HasOwnProp(LaTeXOption) ? LaTeXOptionsList.%LaTeXOption% : LaTeXOptionsList.Text
+			LaTeXModeSelector.OnEvent("Change", (CB, Zero) => Options.SetLocalisedOption(CB.Text, LaTeXOptionsList, "LaTeX_Mode"))
+
+			HTMLOptionsList := {
+				Decimal: Locale.Read("gui_options_HTML_Mode_decimal"),
+				Hexadecimal: Locale.Read("gui_options_HTML_Mode_hexadecimal"),
+			}
+
+			optionsPanel.AddText("vHTMLMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30 + 50) " w80 BackgroundTrans", Locale.Read("gui_options_HTML_Mode"))
+
+			HTMLModeSelector := optionsPanel.AddDropDownList("vHTMLModeSelector x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(300 + 30 + 18 + 50), [HTMLOptionsList.Decimal, HTMLOptionsList.Hexadecimal])
+			PostMessage(0x0153, -1, 15, HTMLModeSelector)
+
+			HTMLOption := Cfg.Get("HTML_Mode", , "Decimal")
+			HTMLModeSelector.Text := HTMLOptionsList.HasOwnProp(HTMLOption) ? HTMLOptionsList.%HTMLOption% : HTMLOptionsList.Decimal
+			HTMLModeSelector.OnEvent("Change", (CB, Zero) => Options.SetLocalisedOption(CB.Text, HTMLOptionsList, "HTML_Mode"))
 
 			optionsTabs.UseTab()
 
@@ -506,6 +521,8 @@ Class Cfg {
 		return [
 			"FastKeysOn", this.Get("Mode_Fast_Keys", "Settings", False, "bool"),
 			"FastKeysOver", this.Get("Mode_Fast_Keys_Over", "Settings", ""),
+			"HTMLMode", this.Get("HTML_Mode", "Settings", "Decimal"),
+			"LaTeXMode", this.Get("LaTeX_Mode", "Settings", "Text"),
 			"SkipGroupMessage", this.Get("Skip_Group_Messages", "Settings", False, "bool"),
 		]
 	}
@@ -690,10 +707,10 @@ Class Options {
 		KeyboardBinder.RebuilBinds()
 	}
 
-	static LaTeXOption(title, options) {
+	static SetLocalisedOption(title, options, entry) {
 		for key, value in options.OwnProps()
 			if value = title
-				Cfg.Set(key, "LaTeX_Mode")
+				Cfg.Set(key, entry)
 	}
 
 	static SetAutoload() {

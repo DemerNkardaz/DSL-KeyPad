@@ -2,7 +2,6 @@ Class ChrCrafter {
 	static ComposeKeyClicks := 0
 	static ComposeKeyTimer := ""
 
-	static modifiedCharsType := ""
 	static prompt := Util.HexaDecimalToChr(Cfg.Get("Ligature", "LatestPrompts"))
 
 	static isComposeInstanceActive := False
@@ -485,20 +484,6 @@ Class ChrCrafter {
 					continue
 				} else if notHasRecipe {
 					continue
-				} else {
-					recipe := value.recipe
-
-					if IsObject(recipe) {
-						for _, recipeEntry in recipe {
-							if InStr(IntermediateValue, recipeEntry, true) {
-								IntermediateValue := StrReplace(IntermediateValue, recipeEntry, this.GetComparedChar(value))
-							}
-						}
-					} else {
-						if InStr(IntermediateValue, recipe, true) {
-							IntermediateValue := StrReplace(IntermediateValue, recipe, this.GetComparedChar(value))
-						}
-					}
 				}
 			}
 
@@ -672,44 +657,6 @@ Class ChrCrafter {
 
 		output .= uniSequence " (" (IsObject(recipe) ? recipe.ToString(" | ") : recipe) "), "
 
-		return output
-	}
-
-	static GetComparedChar(value) {
-		output := ""
-		if Auxiliary.inputMode = "HTML" && StrLen(value.html) > 0 {
-			output :=
-				(this.modifiedCharsType && HasProp(value, this.modifiedCharsType "HTML")) ? value.%this.modifiedCharsType%HTML :
-				(StrLen(value.entity) > 0 ? value.entity : value.html)
-
-		} else if Auxiliary.inputMode = "LaTeX" && value.LaTeX.Length > 0 {
-			output := Cfg.Get("LaTeX_Mode", , "Text") = "Math" ? value.LaTeX[2] : value.LaTeX[1]
-
-		} else {
-			output := this.GetUniChar(value)
-		}
-		return output
-	}
-
-	static GetUniChar(value, forceDefault := False) {
-		output := ""
-		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType) && !forceDefault {
-			if IsObject(value.%this.modifiedCharsType%) {
-				TempValue := ""
-				for modifier in value.%this.modifiedCharsType% {
-					TempValue .= Util.UnicodeToChar(modifier)
-				}
-				output := TempValue
-			} else {
-				output := Util.UnicodeToChar(value.%this.modifiedCharsType%)
-			}
-		} else if value.sequence.Length > 0 {
-			for unicode in value.sequence {
-				output .= Util.UnicodeToChar(unicode)
-			}
-		} else {
-			output := Util.UnicodeToChar(value.unicode)
-		}
 		return output
 	}
 }

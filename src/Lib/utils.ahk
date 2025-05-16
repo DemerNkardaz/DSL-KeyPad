@@ -14,6 +14,7 @@ Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
 Map.Prototype.DefineProp("DeepMergeWith", { Call: _MapDeepMergeWith })
 Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
+Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
 
 _ObjMaxIndex(this) {
 	indexes := 0
@@ -22,6 +23,14 @@ _ObjMaxIndex(this) {
 	}
 
 	return indexes
+}
+
+_ObjKeys(this) {
+	keys := []
+	for k, v in this.OwnProps() {
+		keys.Push(k)
+	}
+	return keys
 }
 
 _ArrayMergeWith(this, arrays*) {

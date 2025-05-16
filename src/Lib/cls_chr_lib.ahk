@@ -5,7 +5,6 @@ Class ChrEntry {
 	unicodeBlock := ""
 	sequence := []
 	result := []
-	html := ""
 	entity := ""
 	altCode := ""
 	altCodePages := []
@@ -468,21 +467,29 @@ Class ChrLib {
 	static Get(entryName, extraRules := False, getMode := "Unicode", alt := Scripter.selectedMode.Get("Glyph Variations")) {
 		if StrLen(alt) == 0
 			alt := Scripter.selectedMode.Get("Glyph Variations")
+
 		alt := this.ValidateAlt(alt)
 		entry := this.GetEntry(entryName)
 
 		getMode := StrLen(getMode) ? getMode : "Unicode"
 
-		if (getMode = "HTML" && StrLen(entry.html) > 0) {
+		getChar := entry.result.Length = 1 ? entry.result[1] : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+
+		if (getMode = "HTML") {
+			output := getChar
+			entity := entry.entity
+
 			if (extraRules && StrLen(alt) > 0 && entry.alterations.HasOwnProp(alt)) {
-				return entry.alterations.%alt%HTML
+				output := Util.UnicodeToChar(entry.alterations.%alt%)
+
+				if entry.alterations.HasOwnProp(alt "Entity") && entry.alterations.%alt%Entity != ""
+					entity := entry.alterations.%alt%Entity
 			}
-			return StrLen(entry.entity) > 0 ? entry.entity : entry.html
+
+			return StrLen(entity) > 0 ? entity : Util.StrToHTML(output, Cfg.HTMLMode)
 
 		} else if (getMode = "LaTeX" && entry.LaTeX.Length > 0) {
-			return (entry.LaTeX.Length = 2 && Cfg.Get("LaTeX_Mode", , "Text") = "Math")
-				? entry.LaTeX[2]
-			: entry.LaTeX[1]
+			return (entry.LaTeX.Length = 2 && Cfg.LaTeXMode = "Math") ? entry.LaTeX[2] : entry.LaTeX[1]
 
 		} else {
 			if (extraRules && StrLen(alt) > 0 && entry.alterations.HasOwnProp(alt)) {
@@ -490,10 +497,9 @@ Class ChrLib {
 
 			} else if (extraRules && getMode != "Unicode" && entry.alterations.HasOwnProp(getMode)) {
 				return Util.UnicodeToChar(entry.alterations.%getMode%)
-
 			} else {
 				try {
-					return entry.result.Length = 1 ? entry.result[1] : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+					return getChar
 				} catch {
 					MsgBox(Locale.Read("error_critical") "`n`n" Locale.ReadInject("error_entry_not_found", [entryName]), App.Title(), "Iconx")
 					return
@@ -1049,34 +1055,23 @@ Class ChrLib {
 	static EntryPostProcessing(entryName, entry) {
 		refinedEntry := entry.Clone()
 
-		if refinedEntry.result.Length > 0 {
-			; refinedEntry.sequence := MyRecipes.HandleResult(refinedEntry.result.Clone())
+		if refinedEntry.result.Length > 0
 			refinedEntry.unicode := Util.ChrToUnicode(SubStr(refinedEntry.result[1], 1, 1))
-		}
+
 
 		try
 			if ChrBlock.GetBlock(refinedEntry.unicode, , &block) && block.name != "Unknown"
 				refinedEntry.unicodeBlock := block.block "`n" block.name
 
-
 		character := Util.UnicodeToChar(refinedEntry.unicode)
 		characterSequence := Util.UnicodeToChar(refinedEntry.sequence.Length > 0 ? refinedEntry.sequence : refinedEntry.unicode)
 
-
-		if refinedEntry.sequence.Length > 0 {
-			for sequenceChr in refinedEntry.sequence {
-				if StrLen(refinedEntry.html)
-					refinedEntry.html := ""
-				refinedEntry.html .= "&#" Util.ChrToDecimal(Util.UnicodeToChar(sequenceChr)) ";"
-
-			}
-		} else {
-			refinedEntry.html := "&#" Util.ChrToDecimal(character) ";"
-		}
-
 		for alteration, value in refinedEntry.alterations.OwnProps() {
-			if !InStr(alteration, "HTML")
-				refinedEntry.alterations.%alteration%HTML := "&#" Util.ChrToDecimal(Util.UnicodeToChar(value)) ";"
+			if !InStr(alteration, "Entity") {
+				entity := Util.CheckEntity(Util.UnicodeToChar(value))
+				if entity
+					refinedEntry.alterations.%alteration%Entity := entity
+			}
 		}
 
 		if refinedEntry.altCode = "" {
@@ -1228,7 +1223,7 @@ Class ChrLib {
 			refinedEntry.recipeAlt := refinedEntry.recipe.Clone()
 
 			for diacriticName in this.entryCategories["Diacritic Mark"] {
-				diacriticChr := this.Get(diacriticName)
+				diacriticChr := Util.ChrToUnicode(this.entries.%diacriticName%.unicode)
 				for i, altRecipe in refinedEntry.recipeAlt {
 					if InStr(altRecipe, diacriticChr) {
 						refinedEntry.recipeAlt[i] := RegExReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)

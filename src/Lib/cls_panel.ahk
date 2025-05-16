@@ -1132,10 +1132,13 @@ Class Panel {
 				characterTitle := Locale.Read(characterEntry)
 			}
 
+			getChar := Util.UnicodeToChar(value.sequence.Length > 0 ? value.sequence : value.unicode)
+			htmlCode := Util.StrToHTML(getChar)
+
 			this.PanelGUI[options.prefix "Title"].Text := characterTitle
 			this.PanelGUI[options.prefix "Symbol"].Text := StrLen(value.symbol.alt) > 0 ? value.symbol.alt : value.symbol.set
 			this.PanelGUI[options.prefix "Unicode"].Text := value.sequence.Length > 0 ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
-			this.PanelGUI[options.prefix "HTML"].Text := StrLen(value.entity) > 0 ? [value.html, value.entity].ToString(" ") : value.html
+			this.PanelGUI[options.prefix "HTML"].Text := StrLen(value.entity) > 0 ? [htmlCode, value.entity].ToString(" ") : htmlCode
 			this.PanelGUI[options.prefix "Alt"].Text := StrLen(value.altCode) > 0 ? value.altCode : "N/A"
 			this.PanelGUI[options.prefix "AltPages"].Text := value.altCodePages.Length > 0 ? Locale.ReadInject("symbol_altcode_pages", [value.altCodePages.ToString()]) : ""
 			this.PanelGUI[options.prefix "LaTeX"].Text := value.LaTeX.Length > 0 ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"

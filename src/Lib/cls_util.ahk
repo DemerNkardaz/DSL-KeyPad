@@ -171,46 +171,56 @@ Class Util {
 		return
 	}
 
-	static StrToHTML(InputString, Mode := "", IgnoreDefaultSymbols := False) {
-		DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
-		Output := ""
+	static CheckEntity(input, &entity := "") {
+		for j, entity in EntitiesLibrary {
+			if (Mod(j, 2) = 1 && entity = input) {
+				entity := EntitiesLibrary[j + 1]
+				return entity
+			}
+		}
+		return False
+	}
+
+	static StrToHTML(inputString, mode := "", ignoreDefaultSymbols := False) {
+		defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+		output := ""
 
 		i := 1
-		while (i <= StrLen(InputString)) {
-			Symbol := SubStr(InputString, i, 1)
-			Code := Ord(Symbol)
+		while (i <= StrLen(inputString)) {
+			symbol := SubStr(inputString, i, 1)
+			Code := Ord(symbol)
 
 			if (Code >= 0xD800 && Code <= 0xDBFF) {
-				NextSymbol := SubStr(InputString, i + 1, 1)
-				Symbol .= NextSymbol
+				NextSymbol := SubStr(inputString, i + 1, 1)
+				symbol .= NextSymbol
 				i += 1
 			}
 
-			if (IgnoreDefaultSymbols && RegExMatch(Symbol, DefaultSymbols)) {
-				Output .= Symbol
+			if (ignoreDefaultSymbols && RegExMatch(symbol, defaultSymbols)) {
+				output .= symbol
 			} else {
-				if InStr(Mode, "Entities") {
-					Found := false
+				if InStr(mode, "Entities") {
+					found := false
 					for j, entity in EntitiesLibrary {
-						if (Mod(j, 2) = 1 && entity = Symbol) {
-							Output .= EntitiesLibrary[j + 1]
-							Found := true
+						if (Mod(j, 2) = 1 && entity = symbol) {
+							output .= EntitiesLibrary[j + 1]
+							entity .= EntitiesLibrary[j + 1]
+							found := true
 							break
 						}
 					}
 
-					if (!Found) {
-						Output .= "&#" (InStr(Mode, "Hex") ? "x" this.ChrToHexaDecimal(Symbol, "") : this.ChrToDecimal(Symbol)) ";"
+					if (!found) {
+						output .= "&#" (InStr(mode, "Hex") ? "x" this.ChrToHexaDecimal(symbol, "") : this.ChrToDecimal(symbol)) ";"
 					}
 				} else {
-					Output .= "&#" (InStr(Mode, "Hex") ? "x" this.ChrToHexaDecimal(Symbol, "") : this.ChrToDecimal(Symbol)) ";"
+					output .= "&#" (InStr(mode, "Hex") ? "x" this.ChrToHexaDecimal(symbol, "") : this.ChrToDecimal(symbol)) ";"
 				}
 			}
 
 			i += 1
 		}
-
-		return Output
+		return output
 	}
 
 	static StrBind(str, &keyRef?, &modRef?, &rulRef?) {
