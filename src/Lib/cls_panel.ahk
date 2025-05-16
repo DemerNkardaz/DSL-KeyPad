@@ -26,6 +26,7 @@ Class Panel {
 		lvH := panelHeight - 90
 		lvCols := [lvW * 0.525, lvW * 0.2, lvW * 0.125, lvW * 0.1, 0, 0]
 		lvColsAll := [lvW * 0.625, 0, lvW * 0.175, lvW * 0.15, 0, 0]
+		lvColsFavorites := [lvW * 0.5, lvW * 0.205, lvW * 0.175, lvW * 0.055, 0, 0]
 
 		ibBodyW := (panelWidth - lvW) / 1.25
 		ibBodyH := panelHeight - 60
@@ -260,6 +261,7 @@ Class Panel {
 				widths: lvCols,
 				widthsSmelting: lvCols,
 				widthsAll: lvColsAll,
+				widthsFavorites: lvColsFavorites,
 				listStyle: Format("w{} h{} +NoSort -Multi", lvW, lvH)
 			},
 			infoFonts: {
@@ -415,207 +417,190 @@ Class Panel {
 
 	static SetPanelData() {
 		this.LV_Content := {
-			smelting: ArrayMerge(
-				this.LV_InsertGroup({
-					type: "Recipe",
-					group: [
-						"Latin Ligatures", "",
-						"Latin Digraphs", "",
-						"Latin", "",
-						"Latino-Hellenic", "",
-						"Latin Accented", "",
-						"Latin Numerals", "",
-						"Hellenic Ligatures", "",
-						"Hellenic", "",
-						"Hellenic Accented", "",
-						"Cyrillic Ligatures", "",
-						"Cyrillic Digraphs", "",
-						"Cyrillic", "",
-						"Cyrillic Accented", "",
-						"Futhork Runes", "",
-						"Glagolitic Letters", "",
-						"Smelting Special", "",
-						"Extra Symbolistics", "",
-						"Alchemical", "",
-						"Astrology", "",
-						"Astronomy", "",
-						"Wallet Signs", "",
-						"Other Signs", "",
-						"Miscellaneous Technical",
-					]
-				}),
-			),
-			fastkeys: ArrayMerge(
-				this.LV_InsertGroup({
-					type: "Fast Key",
-					group: [
-						"FK Diacritics Primary", "",
-						"Special Fast Primary", "",
-						"Spaces Primary", "",
-						"Special Fast Left", "",
-						"Spaces Left Alt", "",
-						"Latin Primary", "",
-						"Latin Accented Primary", "",
-						"Cyrillic Primary", "",
-						"Special Fast Secondary", "",
-						"Asian Quotes", "",
-						"Other Signs", "",
-						"Spaces", "",
-						"Format Characters", "",
-						"Misc", "",
-						"Latin Ligatures", "",
-						"Latin Secondary", "",
-						"Latin Accented Secondary", "",
-						"Cyrillic Ligatures Secondary", "",
-						"Cyrillic Digraphs Secondary", "",
-						"Cyrillic Secondary", "",
-						"Special Right Shift", "",
-						"Spaces Right Shift", "",
-						"Latin Accented Tertiary", "",
-						"Cyrillic Tertiary", "",
-						"Special Fast RShift", "",
-						"Spaces Left Shift", "",
-						"Special Combinations"
-					],
-					groupKey: Map(
-						"FK Diacritics Primary", LeftControl LeftAlt,
-						"Special Fast Left", LeftAlt,
-						"Special Fast Secondary", RightAlt,
-						"Special Right Shift", RightShift,
-						"Spaces Left Shift", LeftShift,
-						"Special Combinations", Locale.Read("symbol_special_key"),
-					),
-				}),
-			),
-			secondkeys: ArrayMerge(
-				this.LV_InsertGroup({
-					type: "Fast Key",
-					group: [
-						"SK Diacritics Primary", "",
-						"SK Spaces Primary", "",
-						"SK Special Secondary", "",
-						"SK Spaces Secondary", "",
-						"SK Special Left Alt", "",
-						"SK Spaces Left Alt", "",
-					],
-					groupKey: Map(
-						"SK Diacritics Primary", LeftControl LeftAlt,
-						"SK Special Secondary", RightAlt,
-						"SK Special Left Alt", LeftAlt,
-					),
-				}),
-			),
-			tertiarykeys: ArrayMerge(
-				this.LV_InsertGroup({
-					type: "Fast Key",
-					group: [
-						"TK Diacritics Primary", "",
-					],
-					groupKey: Map(
-						"TK Diacritics Primary", LeftControl LeftAlt,
-					),
-				}),
-			),
-			scripts: ArrayMerge(
-				this.LV_InsertGroup({
-					type: "Alternative Layout",
-					group: [
-						"Hellenic", "",
-						"Futhark Runes", "",
-						"Futhork Runes", "",
-						"Younger Futhark Runes", "",
-						"Almanac Runes", "",
-						"Later Younger Futhark Runes", "",
-						"Medieval Runes", "",
-						"Runic Punctuation", "",
-						"Glagolitic Letters",
-						"Cyrillic Diacritics", "",
-						"Old Turkic",
-						"Old Turkic Orkhon", "",
-						"Old Turkic Yenisei", "",
-						"Old Permic", "",
-						"Old Hungarian", "",
-						"Gothic Alphabet", "",
-						"Old Italic", "",
-						"Phoenician", "",
-						"South Arabian", "",
-						"North Arabian", "",
-						"Carian", "",
-						"Lycian", "",
-						"Lydian", "",
-						"Sidetic", "",
-						"Cypriot Syllabary", "",
-						"Tifinagh", "",
-						"Ugaritic", "",
-						"Old Persian", "",
-						"IPA", "",
-						"Mathematical", "",
-						"Math", "",
-						"Math Spaces"
-					],
-					groupKey: Map(
-						"Hellenic", Locale.Read("symbol_hellenic"),
-						"Futhark Runes", Locale.Read("symbol_futhark"),
-						"Futhork Runes", Locale.Read("symbol_futhork"),
-						"Younger Futhark Runes", Locale.Read("symbol_futhark_younger"),
-						"Almanac Runes", Locale.Read("symbol_futhark_almanac"),
-						"Later Younger Futhark Runes", Locale.Read("symbol_futhark_younger_later"),
-						"Medieval Runes", Locale.Read("symbol_medieval_runes"),
-						"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
-						"Glagolitic Letters", Locale.Read("symbol_glagolitic"),
-						"Old Turkic", Locale.Read("symbol_turkic"),
-						"Old Turkic Orkhon", Locale.Read("symbol_turkic_orkhon"),
-						"Old Turkic Yenisei", Locale.Read("symbol_turkic_yenisei"),
-						"Old Permic", Locale.Read("symbol_permic"),
-						"Old Hungarian", Locale.Read("symbol_hungarian"),
-						"Gothic Alphabet", Locale.Read("symbol_gothic"),
-						"Old Italic", Locale.Read("symbol_old_italic"),
-						"Phoenician", Locale.Read("symbol_phoenician"),
-						"South Arabian", Locale.Read("symbol_ancient_south_arabian"),
-						"North Arabian", Locale.Read("symbol_ancient_north_arabian"),
-						"Carian", Locale.Read("symbol_carian"),
-						"Lycian", Locale.Read("symbol_lycian"),
-						"Lydian", Locale.Read("symbol_lydian"),
-						"Sidetic", Locale.Read("symbol_sidetic"),
-						"Cypriot Syllabary", Locale.Read("symbol_cypriot_syllabary"),
-						"Ugaritic", Locale.Read("symbol_ugaritic"),
-						"Old Persian", Locale.Read("symbol_old_persian"),
-						"IPA", Locale.Read("symbol_ipa"),
-						"Mathematical", Locale.Read("symbol_maths")
-					),
-				}),
-			),
-			TELEXVNI: ArrayMerge(
-				this.LV_InsertGroup({
-					type: "TELEX/VNI",
-					group: [
-						"TELEX/VNI Vietnamese", "",
-						"TELEX/VNI Jorai", "",
-						"TELEX/VNI Chinese Romanization", "",
-					],
-					groupKey: Map(
-						"TELEX/VNI Vietnamese", Locale.Read("symbol_vietnamese"),
-						"TELEX/VNI Jorai", Locale.Read("symbol_jorai"),
-						"TELEX/VNI Chinese Romanization", Locale.Read("symbol_chinese_romanization"),
-					),
-					subType: Map(
-						"TELEX/VNI Vietnamese", "vietnamese",
-						"TELEX/VNI Jorai", "jorai",
-						"TELEX/VNI Chinese Romanization", "chinese_romanization",
-					),
-					combinationKey: Map(
-						"TELEX/VNI Vietnamese", RightAlt " F2",
-						"TELEX/VNI Jorai", RightAlt " F2",
-						"TELEX/VNI Chinese Romanization", RightAlt RightShift " F2",
-					)
-				})
-			),
-			all: ArrayMerge(
-				this.LV_InsertGroup({
-					type: "",
-					group: ["i)^(?!Custom)"],
-				}),
-			),
+			smelting: this.LV_InsertGroup({
+				type: "Recipe",
+				group: [
+					"Latin Ligatures", "",
+					"Latin Digraphs", "",
+					"Latin", "",
+					"Latino-Hellenic", "",
+					"Latin Accented", "",
+					"Latin Numerals", "",
+					"Hellenic Ligatures", "",
+					"Hellenic", "",
+					"Hellenic Accented", "",
+					"Cyrillic Ligatures", "",
+					"Cyrillic Digraphs", "",
+					"Cyrillic", "",
+					"Cyrillic Accented", "",
+					"Futhork Runes", "",
+					"Glagolitic Letters", "",
+					"Smelting Special", "",
+					"Extra Symbolistics", "",
+					"Alchemical", "",
+					"Astrology", "",
+					"Astronomy", "",
+					"Wallet Signs", "",
+					"Other Signs", "",
+					"Miscellaneous Technical",
+				]
+			}),
+			fastkeys: this.LV_InsertGroup({
+				type: "Fast Key",
+				group: [
+					"FK Diacritics Primary", "",
+					"Special Fast Primary", "",
+					"Spaces Primary", "",
+					"Special Fast Left", "",
+					"Spaces Left Alt", "",
+					"Latin Primary", "",
+					"Latin Accented Primary", "",
+					"Cyrillic Primary", "",
+					"Special Fast Secondary", "",
+					"Asian Quotes", "",
+					"Other Signs", "",
+					"Spaces", "",
+					"Format Characters", "",
+					"Misc", "",
+					"Latin Ligatures", "",
+					"Latin Secondary", "",
+					"Latin Accented Secondary", "",
+					"Cyrillic Ligatures Secondary", "",
+					"Cyrillic Digraphs Secondary", "",
+					"Cyrillic Secondary", "",
+					"Special Right Shift", "",
+					"Spaces Right Shift", "",
+					"Latin Accented Tertiary", "",
+					"Cyrillic Tertiary", "",
+					"Special Fast RShift", "",
+					"Spaces Left Shift", "",
+					"Special Combinations"
+				],
+				groupKey: Map(
+					"FK Diacritics Primary", LeftControl LeftAlt,
+					"Special Fast Left", LeftAlt,
+					"Special Fast Secondary", RightAlt,
+					"Special Right Shift", RightShift,
+					"Spaces Left Shift", LeftShift,
+					"Special Combinations", Locale.Read("symbol_special_key"),
+				),
+			}),
+			secondkeys: this.LV_InsertGroup({
+				type: "Fast Key",
+				group: [
+					"SK Diacritics Primary", "",
+					"SK Spaces Primary", "",
+					"SK Special Secondary", "",
+					"SK Spaces Secondary", "",
+					"SK Special Left Alt", "",
+					"SK Spaces Left Alt", "",
+				],
+				groupKey: Map(
+					"SK Diacritics Primary", LeftControl LeftAlt,
+					"SK Special Secondary", RightAlt,
+					"SK Special Left Alt", LeftAlt,
+				),
+			}),
+			tertiarykeys: this.LV_InsertGroup({
+				type: "Fast Key",
+				group: [
+					"TK Diacritics Primary", "",
+				],
+				groupKey: Map(
+					"TK Diacritics Primary", LeftControl LeftAlt,
+				),
+			}),
+			scripts: this.LV_InsertGroup({
+				type: "Alternative Layout",
+				group: [
+					"Hellenic", "",
+					"Futhark Runes", "",
+					"Futhork Runes", "",
+					"Younger Futhark Runes", "",
+					"Almanac Runes", "",
+					"Later Younger Futhark Runes", "",
+					"Medieval Runes", "",
+					"Runic Punctuation", "",
+					"Glagolitic Letters",
+					"Cyrillic Diacritics", "",
+					"Old Turkic",
+					"Old Turkic Orkhon", "",
+					"Old Turkic Yenisei", "",
+					"Old Permic", "",
+					"Old Hungarian", "",
+					"Gothic Alphabet", "",
+					"Old Italic", "",
+					"Phoenician", "",
+					"South Arabian", "",
+					"North Arabian", "",
+					"Carian", "",
+					"Lycian", "",
+					"Lydian", "",
+					"Sidetic", "",
+					"Cypriot Syllabary", "",
+					"Tifinagh", "",
+					"Ugaritic", "",
+					"Old Persian", "",
+					"IPA", "",
+					"Mathematical", "",
+					"Math", "",
+					"Math Spaces"
+				],
+				groupKey: Map(
+					"Hellenic", Locale.Read("symbol_hellenic"),
+					"Futhark Runes", Locale.Read("symbol_futhark"),
+					"Futhork Runes", Locale.Read("symbol_futhork"),
+					"Younger Futhark Runes", Locale.Read("symbol_futhark_younger"),
+					"Almanac Runes", Locale.Read("symbol_futhark_almanac"),
+					"Later Younger Futhark Runes", Locale.Read("symbol_futhark_younger_later"),
+					"Medieval Runes", Locale.Read("symbol_medieval_runes"),
+					"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
+					"Glagolitic Letters", Locale.Read("symbol_glagolitic"),
+					"Old Turkic", Locale.Read("symbol_turkic"),
+					"Old Turkic Orkhon", Locale.Read("symbol_turkic_orkhon"),
+					"Old Turkic Yenisei", Locale.Read("symbol_turkic_yenisei"),
+					"Old Permic", Locale.Read("symbol_permic"),
+					"Old Hungarian", Locale.Read("symbol_hungarian"),
+					"Gothic Alphabet", Locale.Read("symbol_gothic"),
+					"Old Italic", Locale.Read("symbol_old_italic"),
+					"Phoenician", Locale.Read("symbol_phoenician"),
+					"South Arabian", Locale.Read("symbol_ancient_south_arabian"),
+					"North Arabian", Locale.Read("symbol_ancient_north_arabian"),
+					"Carian", Locale.Read("symbol_carian"),
+					"Lycian", Locale.Read("symbol_lycian"),
+					"Lydian", Locale.Read("symbol_lydian"),
+					"Sidetic", Locale.Read("symbol_sidetic"),
+					"Cypriot Syllabary", Locale.Read("symbol_cypriot_syllabary"),
+					"Ugaritic", Locale.Read("symbol_ugaritic"),
+					"Old Persian", Locale.Read("symbol_old_persian"),
+					"IPA", Locale.Read("symbol_ipa"),
+					"Mathematical", Locale.Read("symbol_maths")
+				),
+			}),
+			TELEXVNI: this.LV_InsertGroup({
+				type: "TELEX/VNI",
+				group: [
+					"TELEX/VNI Vietnamese", "",
+					"TELEX/VNI Jorai", "",
+					"TELEX/VNI Chinese Romanization", "",
+				],
+				groupKey: Map(
+					"TELEX/VNI Vietnamese", Locale.Read("symbol_vietnamese"),
+					"TELEX/VNI Jorai", Locale.Read("symbol_jorai"),
+					"TELEX/VNI Chinese Romanization", Locale.Read("symbol_chinese_romanization"),
+				),
+				subType: Map(
+					"TELEX/VNI Vietnamese", "vietnamese",
+					"TELEX/VNI Jorai", "jorai",
+					"TELEX/VNI Chinese Romanization", "chinese_romanization",
+				),
+				combinationKey: Map(
+					"TELEX/VNI Vietnamese", RightAlt " F2",
+					"TELEX/VNI Jorai", RightAlt " F2",
+					"TELEX/VNI Chinese Romanization", RightAlt RightShift " F2",
+				)
+			}),
+			all: this.LV_InsertGroup({ type: "", group: ["i)^(?!Custom)"], }),
 		}
 
 	}
@@ -627,7 +612,7 @@ Class Panel {
 		title := App.Title("+status+version") " — " Locale.Read("gui_panel")
 
 		panelTabList := { Obj: {}, Arr: [] }
-		panelColList := { default: [], smelting: [] }
+		panelColList := { default: [], smelting: [], favorites: [] }
 
 		for _, localeKey in [
 			"smelting",
@@ -638,7 +623,8 @@ Class Panel {
 			"TELEXVNI",
 			"help",
 			"about",
-			"all"
+			"all",
+			"favorites",
 		] {
 			localeText := Locale.Read("tab_" localeKey)
 			panelTabList.Obj.%localeKey% := localeText
@@ -651,6 +637,10 @@ Class Panel {
 
 		for _, localeKey in ["name", "recipe", "result", "unicode", "entry_title", "entry_key"] {
 			panelColList.smelting.Push(Locale.Read("col_" localeKey))
+		}
+
+		for _, localeKey in ["name", "recipe", "key", "view", "entry_title", "entry_key"] {
+			panelColList.favorites.Push(Locale.Read("col_" localeKey))
 		}
 
 		if redraw {
@@ -703,6 +693,10 @@ Class Panel {
 
 			panelTabs := panelWindow.AddTab3(UISets.tabs, panelTabList.Arr)
 
+			this.LV_Content.favorites := ArrayMerge(
+				this.LV_InsertGroup({ type: "", group: ["Favorites"] })
+			)
+
 			tabContents := [{
 				winObj: panelWindow,
 				prefix: "Smelting",
@@ -744,9 +738,16 @@ Class Panel {
 			}, {
 				winObj: panelWindow,
 				prefix: "AllSymbols",
-				columns: panelColList.default,
+				columns: panelColList.smelting,
 				columnWidths: UISets.column.widthsAll,
 				source: this.LV_Content.all,
+				previewType: "Recipe",
+			}, {
+				winObj: panelWindow,
+				prefix: "Favorites",
+				columns: panelColList.favorites,
+				columnWidths: UISets.column.widthsFavorites,
+				source: this.LV_Content.favorites,
 				previewType: "Recipe",
 			}]
 
@@ -758,6 +759,7 @@ Class Panel {
 				panelTabList.Obj.scripts,
 				panelTabList.Obj.TELEXVNI,
 				panelTabList.Obj.all,
+				panelTabList.Obj.favorites,
 			]
 
 			for i, header in tabHeaders {
@@ -905,7 +907,7 @@ Class Panel {
 			this.PanelGUI := Constructor()
 			this.PanelGUI.Show()
 
-			for each in ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI", "AllSymbols"]
+			for each in ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI", "AllSymbols", "Favorites"]
 				try
 					this.LV_SetRandomPreview(each)
 
@@ -1013,38 +1015,39 @@ Class Panel {
 		}
 	}
 
-	static LV_DoubleClickHandler(LV, rowNumber) {
+	static LV_DoubleClickHandler(LV, rowNumber, isFavorite := False) {
+		star := " " Chr(0x2605)
 		if StrLen(LV.GetText(rowNumber, 4)) < 1 {
 			return
 		} else {
-			entryTitle := LV.GetText(rowNumber, 1)
-			unicodeKey := LV.GetText(rowNumber, 4)
-			characterEntry := LV.GetText(rowNumber, 5)
-			value := ChrLib.GetEntry(characterEntry)
+			titleCol := LV.GetText(rowNumber, 1)
+			entryCol := LV.GetText(rowNumber, 5)
+			unicode := ChrLib.entries.%entryCol%.unicode
+			value := ChrLib.GetEntry(entryCol)
 
-			if StrLen(unicodeKey) > 0 {
+			if StrLen(unicode) > 0 {
 				isCtrlDown := GetKeyState("LControl")
 				isShiftDown := GetKeyState("LShift")
 
 				if (isCtrlDown) {
-					unicodeCodePoint := "0x" unicodeKey
+					unicodeCodePoint := "0x" unicode
 					A_Clipboard := Chr(unicodeCodePoint)
 
 					SoundPlay("C:\Windows\Media\Speech On.wav")
 				} else if isShiftDown {
-					if (unicodeKey = Util.ExtractHex(value.unicode)) {
-						if !FavoriteChars.CheckVar(characterEntry) {
-							FavoriteChars.Add(characterEntry)
-							LV.Modify(rowNumber, , entryTitle " " Chr(0x2605))
+					if (unicode = Util.ExtractHex(value.unicode)) {
+						SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
+						if !FavoriteChars.CheckVar(entryCol) && !InStr(titleCol, star) {
+							FavoriteChars.Add(entryCol)
+							LV.Modify(rowNumber, , titleCol star)
 						} else {
-							FavoriteChars.Remove(characterEntry)
-							LV.Modify(rowNumber, , StrReplace(entryTitle, " " Chr(0x2605)))
+							FavoriteChars.Remove(entryCol)
+							LV.Modify(rowNumber, , StrReplace(titleCol, star))
 						}
 					}
 
-					SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
 				} else {
-					UnicodeWebResource("Copy", unicodeKey)
+					UnicodeWebResource("Copy", unicode)
 				}
 			}
 		}
@@ -1294,6 +1297,8 @@ Class Panel {
 		}
 	}
 
+	static combinationKeyToGroupPairs := Map()
+
 	static LV_InsertGroup(options) {
 		if Type(options) = "Array" {
 			outputArrays := []
@@ -1332,6 +1337,8 @@ Class Panel {
 					else
 						eachOptions.combinationKey := lastGroupKey
 
+				if options.type = "Fast Key"
+					this.combinationKeyToGroupPairs.Set(eachOptions.group, options.HasOwnProp("combinationKey") ? options.combinationKey.Get(each) : lastGroupKey)
 
 				ArrayMergeTo(outputArrays, this.LV_InsertGroup(eachOptions))
 			}
@@ -1362,14 +1369,14 @@ Class Panel {
 				if !([groupKey].HasRegEx(options.group)) || entryNamesArray.Length = 0 {
 					continue
 				} else {
-					for characterEntry in entryNamesArray {
-						value := ChrLib.GetEntry(characterEntry)
+					for entryName in entryNamesArray {
+						value := ChrLib.GetEntry(entryName)
 
-						isFavorite := FavoriteChars.CheckVar(characterEntry)
+						isFavorite := FavoriteChars.CheckVar(entryName)
 
 						try {
 							if (value.proxy != "") ||
-								(options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(characterEntry)) ||
+								(options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(entryName)) ||
 								(!value.groups.HasRegEx(options.group)) ||
 								(options.type = "Recipe" && (value.recipe.Length = 0)) ||
 								(options.type = "Fast Key" && (StrLen(value.options.fastKey) < 2)) ||
@@ -1382,23 +1389,23 @@ Class Panel {
 								continue
 							}
 						} catch {
-							throw "Trouble in paradise: " characterEntry " typeof groupKey" Type(options.groupKey) " recipe" Type(value.recipe) " fastKey" Type(value.options.fastKey) " specialKey" Type(value.options.specialKey) " altLayoutKey" Type(value.options.altLayoutKey)
+							throw "Trouble in paradise: " entryName " typeof groupKey" Type(options.groupKey) " recipe" Type(value.recipe) " fastKey" Type(value.options.fastKey) " specialKey" Type(value.options.specialKey) " altLayoutKey" Type(value.options.altLayoutKey)
 						}
 
 						characterTitle := ""
 
 						if options.type = "Alternative Layout" && value.options.layoutTitles &&
-							Locale.Read(characterEntry "_layout", , True, &titleText) {
+							Locale.Read(entryName "_layout", , True, &titleText) {
 							characterTitle := titleText
 
-						} else if Locale.Read(characterEntry, , True, &titleText) {
+						} else if Locale.Read(entryName, , True, &titleText) {
 							characterTitle := titleText
 
 						} else if value.titles.Count > 0 && value.titles.Has(languageCode) {
 							characterTitle := value.titles.Get(languageCode)
 
 						} else {
-							characterTitle := Locale.Read(characterEntry)
+							characterTitle := Locale.Read(entryName)
 						}
 
 						if isFavorite {
@@ -1410,21 +1417,47 @@ Class Panel {
 						characterBinding := ""
 
 						bindings := Map(
-							"Recipe", value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : value.recipe.Length > 0 ? value.recipe.ToString() : "N/A",
+							"Recipe", value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : value.recipe.Length > 0 ? value.recipe.ToString() : "",
 							"Alternative Layout", value.options.altLayoutKey,
 							"Special Combinations", value.options.altSpecialKey,
 							"Fast Key", value.options.fastKey,
 							"TELEX/VNI", options.type = "TELEX/VNI" && value.options.HasOwnProp("telex__" options.subType) ? value.options.telex__%options.subType% : "",
 						)
 
-						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : options.type = "" && value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : "N/A"
+						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : options.type = "" && value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : ""
 
-						intermediateMap.Set(value.index, [characterTitle, characterBinding, characterSymbol, Util.ExtractHex(value.unicode), characterEntry, options.hasOwnProp("combinationKey") ? options.combinationKey : options.hasOwnProp("groupKey") ? options.groupKey : ""])
+						reserveCombinationKey := ""
+
+						for cgroup, ckey in this.combinationKeyToGroupPairs {
+							reserveCombinationKey := value.groups.HasValue(cgroup) ? ckey : reserveCombinationKey
+						}
+						reserveCombinationKey := (reserveCombinationKey != "" ? reserveCombinationKey " + " : "")
+
+						intermediateMap.Set(value.index,
+							options.group = "Favorites"
+								? [
+									characterTitle,
+									bindings["Recipe"],
+									bindings["Fast Key"] != "" ? reserveCombinationKey bindings["Fast Key"]
+									: bindings["Alternative Layout"] != "" ? reserveCombinationKey bindings["Alternative Layout"]
+									: "",
+									characterSymbol,
+									entryName,
+									""
+								]
+							: [
+								characterTitle,
+								characterBinding,
+								characterSymbol,
+								Util.ExtractHex(value.unicode),
+								entryName,
+								options.hasOwnProp("combinationKey") ? options.combinationKey : options.hasOwnProp("groupKey") ? options.groupKey : ""
+							])
 					}
 				}
 			}
 
-			for key, value in intermediateMap {
+			for cgroup, value in intermediateMap {
 				outputArray.Push(value)
 			}
 

@@ -118,7 +118,7 @@ Class ChrEntry {
 
 Class ChrLib {
 	static entries := {}
-	static entryGroups := Map()
+	static entryGroups := Map("Favorites", [])
 	static entryCategories := Map()
 	static entryRecipes := Map()
 	static entryTags := Map()

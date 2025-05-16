@@ -6621,13 +6621,13 @@ LibRegistrate(this) {
 		"cyr_[c,s]_lig_uk", {
 			unicode: ["A64A", "A64B"],
 			options: { useLetterLocale: True, fastKey: "<! /У/?Secondary" },
-			symbol: { letter: "${cyr_[c,s]_let_u}${cyr_s_let_o}" },
+			symbol: { letter: "${cyr_[c,s]_let_o}${cyr_s_let_u}" },
 		},
 		"cyr_[s]_lig_uk_unblended", {
 			unicode: ["1C88"],
 			options: { useLetterLocale: True },
 			recipe: ["${cyr_s_let_i_izhitsa}${cyr_s_let_o}"],
-			symbol: { letter: "${cyr_[c,s]_let_u}${cyr_s_let_o}", afterLetter: "unblended" },
+			symbol: { letter: "${cyr_[c,s]_let_o}${cyr_s_let_u}", afterLetter: "unblended" },
 		},
 		"cyr_[c,s]_lig_cche", {
 			unicode: ["A686", "A687"],
