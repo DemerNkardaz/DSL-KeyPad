@@ -1223,7 +1223,7 @@ Class ChrLib {
 			refinedEntry.recipeAlt := refinedEntry.recipe.Clone()
 
 			for diacriticName in this.entryCategories["Diacritic Mark"] {
-				diacriticChr := Util.ChrToUnicode(this.entries.%diacriticName%.unicode)
+				diacriticChr := Util.UnicodeToChar(this.entries.%diacriticName%.unicode)
 				for i, altRecipe in refinedEntry.recipeAlt {
 					if InStr(altRecipe, diacriticChr) {
 						refinedEntry.recipeAlt[i] := RegExReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
