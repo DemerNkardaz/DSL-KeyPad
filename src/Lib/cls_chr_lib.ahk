@@ -587,7 +587,7 @@ Class ChrLib {
 					count++
 
 				for alteration, value in value.alterations.OwnProps()
-					if !InStr(alteration, "HTML")
+					if !InStr(alteration, "HTML") && !InStr(alteration, "Entity")
 						count++
 			}
 		}

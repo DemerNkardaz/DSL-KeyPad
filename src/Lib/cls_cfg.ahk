@@ -240,7 +240,7 @@ Class Cfg {
 				Math: Locale.Read("gui_options_LaTeX_Mode_math"),
 			}
 
-			optionsPanel.AddText("vLaTeXMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30) " w80 BackgroundTrans", Locale.Read("gui_options_LaTeX_Mode"))
+			optionsPanel.AddText("vLaTeXMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30) " w128 BackgroundTrans", Locale.Read("gui_options_LaTeX_Mode"))
 
 			LaTeXModeSelector := optionsPanel.AddDropDownList("vLaTeXModeSelector x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(300 + 30 + 18), [LaTeXOptionsList.Text, LaTeXOptionsList.Math])
 			PostMessage(0x0153, -1, 15, LaTeXModeSelector)
@@ -254,7 +254,7 @@ Class Cfg {
 				Hexadecimal: Locale.Read("gui_options_HTML_Mode_hexadecimal"),
 			}
 
-			optionsPanel.AddText("vHTMLMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30 + 50) " w80 BackgroundTrans", Locale.Read("gui_options_HTML_Mode"))
+			optionsPanel.AddText("vHTMLMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30 + 50) " w128 BackgroundTrans", Locale.Read("gui_options_HTML_Mode"))
 
 			HTMLModeSelector := optionsPanel.AddDropDownList("vHTMLModeSelector x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(300 + 30 + 18 + 50), [HTMLOptionsList.Decimal, HTMLOptionsList.Hexadecimal])
 			PostMessage(0x0153, -1, 15, HTMLModeSelector)

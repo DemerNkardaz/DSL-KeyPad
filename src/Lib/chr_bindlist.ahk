@@ -2,6 +2,7 @@ bindingMaps := Map(
 	"User", Map(),
 	"Script Specified", Map(
 		"Hellenic", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A:Caps", ["hel_[c,s]_let_a_alpha"],
 				"B:Caps", ["hel_[c,s]_let_b_beta"],
@@ -387,6 +388,7 @@ bindingMaps := Map(
 			)
 		),
 		"Old Hungarian", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A:Caps", ["hungarian_[c,s]_let_a"],
 				"B:Caps", ["hungarian_[c,s]_let_eb"],
@@ -463,6 +465,7 @@ bindingMaps := Map(
 			),
 		),
 		"Old Italic", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A", "italic_let_a",
 				"B", "italic_let_be",
@@ -513,6 +516,7 @@ bindingMaps := Map(
 			)
 		),
 		"Gothic", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A", "gothic_ahza",
 				"B", "gothic_bairkan",
@@ -552,6 +556,7 @@ bindingMaps := Map(
 			),
 		),
 		"Phoenician", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A", "phoenician_let_alef",
 				"B", "phoenician_let_bet",
@@ -595,6 +600,7 @@ bindingMaps := Map(
 			)
 		),
 		"Ancient South Arabian", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A", "south_arabian_let_alef",
 				"B", "south_arabian_let_beth",
@@ -647,6 +653,7 @@ bindingMaps := Map(
 			)
 		),
 		"Ancient North Arabian", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A", "north_arabian_let_alef",
 				"B", "north_arabian_let_beh",
@@ -700,30 +707,37 @@ bindingMaps := Map(
 			)
 		),
 		"Carian", Map(
+			"ForceSingle", True,
 			"Flat", Map(),
 			"Moded", Map()
 		),
 		"Lycian", Map(
+			"ForceSingle", True,
 			"Flat", Map(),
 			"Moded", Map()
 		),
 		"Lydian", Map(
+			"ForceSingle", True,
 			"Flat", Map(),
 			"Moded", Map()
 		),
 		"Sidetic", Map(
+			"ForceSingle", True,
 			"Flat", Map(),
 			"Moded", Map()
 		),
 		"Cypriot Syllabary", Map(
+			"ForceSingle", True,
 			"Flat", Map(),
 			"Moded", Map()
 		),
 		"Tifinagh", Map(
+			"ForceSingle", True,
 			"Flat", Map(),
 			"Moded", Map()
 		),
 		"Ugaritic", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A", "ugaritic_let_alpa",
 				"B", "ugaritic_let_beta",
@@ -790,10 +804,12 @@ bindingMaps := Map(
 			)
 		),
 		"Old Persian", Map(
+			"ForceSingle", True,
 			"Flat", Map(),
 			"Moded", Map()
 		),
 		"IPA", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"A", "lat_s_let_a_alpha",
 				"B", "",
@@ -910,6 +926,7 @@ bindingMaps := Map(
 			)
 		),
 		"Math", Map(
+			"ForceSingle", True,
 			"Flat", Map(
 				"D", "delta",
 				"I", ["contour_integral", "integral"],
@@ -927,10 +944,10 @@ bindingMaps := Map(
 				"Space", Map(
 					"Flat:<!", "medium_math_space",
 				),
-				",", Map(
+				"Comma", Map(
 					"Flat:>+", "less_or_equals",
 				),
-				".", Map(
+				"Dot", Map(
 					"Flat:>+", "greater_or_equals",
 				),
 			)

@@ -1082,7 +1082,7 @@ Class Panel {
 
 		if StrLen(characterEntry) < 1 {
 			this.PanelGUI[options.prefix "Title"].Text := "N/A"
-			this.PanelGUI[options.prefix "Symbol"].Text := ChrLib.Get("dotted_circle")
+			this.PanelGUI[options.prefix "Symbol"].Text := DottedCircle
 			this.PanelGUI[options.prefix "Unicode"].Text := "0000"
 			this.PanelGUI[options.prefix "HTML"].Text := "&#x0000;"
 			this.PanelGUI[options.prefix "Alt"].Text := "N/A"
@@ -1134,7 +1134,6 @@ Class Panel {
 
 			getChar := Util.UnicodeToChar(value.sequence.Length > 0 ? value.sequence : value.unicode)
 			htmlCode := Util.StrToHTML(getChar)
-
 			this.PanelGUI[options.prefix "Title"].Text := characterTitle
 			this.PanelGUI[options.prefix "Symbol"].Text := StrLen(value.symbol.alt) > 0 ? value.symbol.alt : value.symbol.set
 			this.PanelGUI[options.prefix "Unicode"].Text := value.sequence.Length > 0 ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
@@ -1159,11 +1158,11 @@ Class Panel {
 			entryString := Locale.Read("entry") ": " characterEntry
 			tagsString := value.tags.Length > 0 ? Locale.Read("tags") ": " value.tags.ToString() : ""
 
-			this.PanelGUI[options.prefix "Tags"].Text := entryString ChrLib.Get("ensp") tagsString
+			this.PanelGUI[options.prefix "Tags"].Text := entryString Chr(0x2002) tagsString
 
 
 			groupTitle := ""
-			isDiacritic := RegExMatch(value.symbol.set, "^" ChrLib.Get("dotted_circle") "\S")
+			isDiacritic := RegExMatch(value.symbol.set, "^" DottedCircle "\S")
 
 			AlterationsValidator := Map(
 				"IsModifier", [value.alterations.HasOwnProp("modifier"), 0x02B0],
@@ -1186,7 +1185,7 @@ Class Panel {
 			for entry, value in AlterationsValidator {
 				if (value[1]) {
 					groupTitle .= (["(h)", 0x029C].HasValue(value[2]) ? (value[2] is Number ? Chr(value[2]) : value[2])
-						: ChrLib.Get("dotted_circle") Chr(value[2])) " "
+						: DottedCircle Chr(value[2])) " "
 				}
 			}
 

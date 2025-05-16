@@ -43,6 +43,14 @@ You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-K
 
 <br>
 
+**Install AutoHotkey via Powershell** or [download from its site](https://www.autohotkey.com/).
+
+```powershell
+winget install AutoHotkey.AutoHotkey
+```
+
+<br>
+
 **Strong** recommendation: use the extended character set only for text writing, no more.<br>Using these characters for passwords, file names, etc., is dangerous.
 
 **Strong 2** recommendation: turn off all AutoHotkey processes while playing games with sensitive anti-cheat systems. Games do not tolerate people who use AHK for gaining an advantage, and it is possible to be kicked or banned for having an AHK process running, even if the script does not provide an advantage.
@@ -77,6 +85,14 @@ You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-K
 
 - **Латиница**: <span title="Древнеанглийский">Ænglisċ</span>, <span title="Французский">Français</span>, <span title="Румынский">Română</span>, <span title="Вьетнамский">Tiếng Việt</span>, <span title="Мандаринский (романизация)">Hànyǔ Pīnyīn</span>, <span title="Польский">Język polski</span>, <span title="Чешский">Čeština</span>, <span title="Норвежский Букмол">Bokmål</span>, <span title="Турецкий">Türkçe</span>, <span title="Древнескандинавский">Norrœnt Mál</span>.
 - **Кириллица**: <span title="Старославянский">Словѣньскъ ѩꙁꙑкъ</span>, <span title="Румынский (Валахо-молдавская кириллица)">Лимба Рѹмѫнѣскъ</span>, <span title="Казахский">Қазақ тілі</span>, <span title="Украинский">Українська мова</span>, <span title="Абхазский">Аԥсуа Бызшәа</span>, <span title="Таджикский">Забони тоҷикӣ</span>.
+
+<br>
+
+**Установите AutoHotkey через Powershell** или [скачайте с сайта](https://www.autohotkey.com/).
+
+```powershell
+winget install AutoHotkey.AutoHotkey
+```
 
 <br>
 

@@ -4086,7 +4086,7 @@ LibRegistrate(this) {
 		},
 		"hel_[c,s]_let_w_digamma_pamphylian", {
 			unicode: ["0376", "0377"],
-			options: { altLayoutKey: "<+ $" },
+			options: { altLayoutKey: ">! $" },
 		},
 		"hel_[s]_sym_b_beta", {
 			unicode: ["03D0"],

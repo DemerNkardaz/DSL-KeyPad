@@ -46,6 +46,35 @@ Class BindList {
 			}
 		}
 
+		if (fromSub = "Script Specified"
+			&& mapping.Has(fromSub)
+			&& mapping[fromSub].Has(bindingsName)
+			&& mapping[fromSub][bindingsName].Has("ForceSingle")
+			&& mapping[fromSub][bindingsName].Get("ForceSingle")) {
+			layout := KeyboardBinder.GetCurrentLayoutMap()
+
+			for scanCode, keyNamesArray in layout {
+				if keyNamesArray.Length = 2 {
+					for i, keyName in keyNamesArray {
+						if mapping[fromSub][bindingsName]["Flat"].Has(keyName) {
+							otherI := (i = 1) ? 2 : 1
+							otherKeyName := keyNamesArray[otherI]
+
+							mapping[fromSub][bindingsName]["Flat"].Set(otherKeyName, mapping[fromSub][bindingsName]["Flat"].Get(keyName))
+
+						} else if mapping[fromSub][bindingsName]["Moded"].Has(keyName) {
+							otherI := (i = 1) ? 2 : 1
+							otherKeyName := keyNamesArray[otherI]
+
+							mapping[fromSub][bindingsName]["Moded"].Set(otherKeyName, mapping[fromSub][bindingsName]["Moded"].Get(keyName))
+						}
+					}
+				}
+			}
+
+			mapping[fromSub][bindingsName].Delete("ForceSingle")
+		}
+
 		if StrLen(fromSub) > 0 && mapping.Has(fromSub) && mapping[fromSub].Has(bindingsName)
 			mapping[fromSub][bindingsName] := BindList(mapping[fromSub][bindingsName]["Flat"], mapping[fromSub][bindingsName]["Moded"])
 		else if mapping.Has(bindingsName)
