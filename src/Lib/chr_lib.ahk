@@ -9500,177 +9500,149 @@ LibRegistrate(this) {
 		; * Phoenician
 		;
 		;
-		"phoenician_let_alef", {
+		"phoenician_n_let_a_alef", {
 			unicode: "10900",
-			tags: ["финикийская буква Алеф", "phoenician letter Alef"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "A" },
 		},
-		"phoenician_let_ain", {
+		"phoenician_n_let_a_ain", {
 			unicode: "1090F",
-			tags: ["финикийская буква Аин", "phoenician letter Ain"],
 			groups: ["Phoenician"],
-			options: { altLayoutKey: "<+ A], [O" },
+			options: { altLayoutKey: "<+ A, O" },
 		},
-		"phoenician_let_bet", {
+		"phoenician_n_let_b_bet", {
 			unicode: "10901",
-			tags: ["финикийская буква Бет", "phoenician letter Bet"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "B" },
 		},
-		"phoenician_let_gaml", {
+		"phoenician_n_let_g_gaml", {
 			unicode: "10902",
-			tags: ["финикийская буква Гамл", "phoenician letter Gaml"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "G" },
 		},
-		"phoenician_let_delt", {
+		"phoenician_n_let_d_delt", {
 			unicode: "10903",
-			tags: ["финикийская буква Делт", "phoenician letter Delt"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "D" },
 		},
-		"phoenician_let_he", {
+		"phoenician_n_let_h_he", {
 			unicode: "10904",
-			tags: ["финикийская буква Хе", "phoenician letter He"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "H" },
 		},
-		"phoenician_let_het", {
+		"phoenician_n_let_h_het", {
 			unicode: "10907",
-			tags: ["финикийская буква Хет", "phoenician letter Het"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">+ H" },
 		},
-		"phoenician_let_wau", {
+		"phoenician_n_let_w_wau", {
 			unicode: "10905",
-			tags: ["финикийская буква Вав", "phoenician letter Wau"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "W" },
 		},
-		"phoenician_let_zai", {
+		"phoenician_n_let_z_zai", {
 			unicode: "10906",
-			tags: ["финикийская буква Зен", "phoenician letter Zai"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "Z" },
 		},
-		"phoenician_let_yod", {
+		"phoenician_n_let_y_yod", {
 			unicode: "10909",
-			tags: ["финикийская буква Йуд", "phoenician letter Yod"],
 			groups: ["Phoenician"],
-			options: { altLayoutKey: "J], [Y" },
+			options: { altLayoutKey: "J, Y" },
 		},
-		"phoenician_let_kaf", {
+		"phoenician_n_let_k_kaf", {
 			unicode: "1090A",
-			tags: ["финикийская буква Каф", "phoenician letter Kaf"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "K" },
 		},
-		"phoenician_let_lamd", {
+		"phoenician_n_let_l_lamd", {
 			unicode: "1090B",
-			tags: ["финикийская буква Ламд", "phoenician letter Lamd"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "L" },
 		},
-		"phoenician_let_mem", {
+		"phoenician_n_let_m_mem", {
 			unicode: "1090C",
-			tags: ["финикийская буква Мем", "phoenician letter Mem"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "M" },
 		},
-		"phoenician_let_nun", {
+		"phoenician_n_let_n_nun", {
 			unicode: "1090D",
-			tags: ["финикийская буква Нун", "phoenician letter Nun"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "N" },
 		},
-		"phoenician_let_semk", {
+		"phoenician_n_let_s_semk", {
 			unicode: "1090E",
-			tags: ["финикийская буква Семк", "phoenician letter Semk"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "S" },
 		},
-		"phoenician_let_shin", {
+		"phoenician_n_let_s_shin", {
 			unicode: "10914",
-			tags: ["финикийская буква Шин", "phoenician letter Shin"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">+ S" },
 		},
-		"phoenician_let_pe", {
+		"phoenician_n_let_p_pe", {
 			unicode: "10910",
-			tags: ["финикийская буква Пе", "phoenician letter Pe"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "P" },
 		},
-		"phoenician_let_sade", {
+		"phoenician_n_let_c_sade", {
 			unicode: "10911",
-			tags: ["финикийская буква Цади", "phoenician letter Sade"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "C" },
 		},
-		"phoenician_let_qof", {
+		"phoenician_n_let_q_qof", {
 			unicode: "10912",
-			tags: ["финикийская буква Куф", "phoenician letter Qof"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "Q" },
 		},
-		"phoenician_let_rosh", {
+		"phoenician_n_let_r_rosh", {
 			unicode: "10913",
-			tags: ["финикийская буква Рош", "phoenician letter Rosh"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "R" },
 		},
-		"phoenician_let_tau", {
+		"phoenician_n_let_t_tau", {
 			unicode: "10915",
-			tags: ["финикийская буква Тав", "phoenician letter Tau"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: "T" },
 		},
-		"phoenician_let_tet", {
+		"phoenician_n_let_t_tet", {
 			unicode: "10908",
-			tags: ["финикийская буква Тет", "phoenician letter Tet"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">+ T" },
 		},
-		"phoenician_let_numeral_one", {
+		"phoenician_n_num_one", {
 			unicode: "10916",
-			tags: ["финикийская числовая буква один", "phoenician numeral letter one"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">! 1" },
 		},
-		"phoenician_let_numeral_two", {
+		"phoenician_n_num_two", {
 			unicode: "1091A",
-			tags: ["финикийская числовая буква два", "phoenician numeral letter two"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">! 2" },
 		},
-		"phoenician_let_numeral_three", {
+		"phoenician_n_num_three", {
 			unicode: "1091B",
-			tags: ["финикийская числовая буква три", "phoenician numeral letter three"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">! 3" },
 		},
-		"phoenician_let_numeral_ten", {
+		"phoenician_n_num_ten", {
 			unicode: "10917",
-			tags: ["финикийская числовая буква десять", "phoenician numeral letter ten"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">! 4" },
 		},
-		"phoenician_let_numeral_twenty", {
+		"phoenician_n_num_twenty", {
 			unicode: "10918",
-			tags: ["финикийская числовая буква двадцать", "phoenician numeral letter twenty"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">! 5" },
 		},
-		"phoenician_let_numeral_hundred", {
+		"phoenician_n_num_hundred", {
 			unicode: "10919",
-			tags: ["финикийская числовая буква сто", "phoenician numeral letter one hundred"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">! 6" },
 		},
 		"phoenician_word_separator", {
 			unicode: "1091F",
-			tags: ["финикийская разделитель слов", "phoenician word separator"],
+			tags: ["финикийский разделитель слов", "phoenician word separator"],
 			groups: ["Phoenician"],
 			options: { altLayoutKey: ">! Space" },
 		},

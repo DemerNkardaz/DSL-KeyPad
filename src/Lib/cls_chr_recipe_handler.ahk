@@ -137,7 +137,7 @@ Class ChrRecipeHandler {
 		}
 
 		if RegExMatch(info.name, "\:\:(.*?)$", &alterationMatch) {
-			info.alteration := alterationMatch[1]
+			info.alteration := ChrLib.ValidateAlt(alterationMatch[1])
 			info.hasAlteration := true
 			info.name := RegExReplace(info.name, "\:\:.*$", "")
 		}

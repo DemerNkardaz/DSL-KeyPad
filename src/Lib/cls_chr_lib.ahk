@@ -1309,23 +1309,51 @@ Class ChrLib {
 		return output
 	}
 
+	static scriptsValidator := [
+		"phoenician",
+	]
+
 	static NameDecompose(entryName) {
 		decomposedName := {
-			script: Map("lat", "latin", "cyr", "cyrillic", "hel", "hellenic"),
-			case: Map("c", "capital", "s", "small", "sc", "small_capital", "i", "inter", "n", "neutral"),
-			type: Map("let", "letter", "lig", "ligature", "dig", "digraph", "num", "numeral", "sym", "symbol"),
+			script: Map(
+				"lat", "latin",
+				"cyr", "cyrillic",
+				"hel", "hellenic",
+			),
+			case: Map(
+				"c", "capital",
+				"s", "small",
+				"sc", "small_capital",
+				"i", "inter",
+				"n", "neutral"
+			),
+			type: Map(
+				"let", "letter",
+				"lig", "ligature",
+				"dig", "digraph",
+				"num", "numeral",
+				"sym", "symbol"
+			),
 			letter: "",
 			postfixes: []
 		}
 
+		altInputScript := ""
+
 		foundScript := False
 
 		for key, value in decomposedName.script {
-			if RegExMatch(entryName, "^" key "_") {
+			if entryName ~= "^" key "_" {
 				foundScript := True
 				break
 			}
 		}
+
+		if !foundScript && this.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"]) {
+			foundScript := True
+			altInputScript := this.scriptsValidator[i]
+		}
+
 
 		if !foundScript
 			return entryName
@@ -1358,7 +1386,7 @@ Class ChrLib {
 			if RegExMatch(entryName, "i)^([\w]+(?:_[\w]+){3,})_?", &rawMatch) {
 				rawCharacterName := StrSplit(rawMatch[1], "_")
 
-				decomposedName.script := decomposedName.script[rawCharacterName[1]]
+				decomposedName.script := altInputScript != "" ? altInputScript : decomposedName.script[rawCharacterName[1]]
 				decomposedName.case := decomposedName.case[rawCharacterName[2]]
 				decomposedName.type := decomposedName.type[rawCharacterName[3]]
 				decomposedName.letter := (decomposedName.case = "capital" ? StrUpper(rawCharacterName[4]) : rawCharacterName[4])

@@ -286,6 +286,13 @@ Class Locale {
 
 		useLetterLocale := entry.options.HasOwnProp("useLetterLocale") ? entry.options.useLetterLocale : False
 
+		cyrillicTasgScriptAtStart := False
+
+		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"]) {
+			useLetterLocale := True
+			cyrillicTasgScriptAtStart := True
+		}
+
 		referenceLocale := entry.options.HasOwnProp("referenceLocale") && entry.options.referenceLocale != "" ? entry.options.referenceLocale : False
 
 		LTLReference := False
@@ -376,7 +383,7 @@ Class Locale {
 			} else {
 				localedCase := lCase != "neutral" ? Locale.VarSelect(Locale.Read(pfx "case_" lCase, lang), lVariant) " " : ""
 
-				entry.titles[langCode] := Locale.Read(pfx "prefix_" lScript, lang) " " localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
+				entry.titles[langCode] := Locale.VarSelect(Locale.Read(pfx "prefix_" lScript, lang), lVariant) " " localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
 				tags[langCode] := localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName
 			}
 		}
@@ -402,8 +409,10 @@ Class Locale {
 			}
 		}
 
-		tags["en"] := Locale.Read(pfx "tagScript_" lScript, "en") " " tags["en"]
-		tags["ru"] := tags["ru"] " " Locale.Read(pfx "tagScript_" lScript, "ru")
+		tags["en"] := Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "en"), lVariant) " " tags["en"]
+		tags["ru"] := cyrillicTasgScriptAtStart ?
+			Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru"), lVariant) " " tags["ru"]
+			: tags["ru"] " " Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru"), lVariant)
 
 		for _, langCode in langCodes {
 			entry.titles[langCode] := this.LocaleRules(entry.titles[langCode], langCode)

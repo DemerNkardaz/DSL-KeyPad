@@ -85,11 +85,12 @@ _ArrayHasValue(this, valueToFind, &indexID?) {
 	return false
 }
 
-_ArrayHasRegEx(this, valueToFind, &indexID?) {
+_ArrayHasRegEx(this, valueToFind, &indexID?, boundRegEx := []) {
 	for index, value in this {
 		if value is String && (value = valueToFind ||
 			(valueToFind ~= "[" RegExEscape(regExChars) "]" && value ~= valueToFind) ||
-			(value ~= "[" RegExEscape(regExChars) "]" && valueToFind ~= value)
+			(value ~= "[" RegExEscape(regExChars) "]" && valueToFind ~= value) ||
+			boundRegEx.Length = 2 && valueToFind ~= boundRegEx[1] value boundRegEx[2]
 		) {
 			indexID := index
 			return true
@@ -213,7 +214,7 @@ _MapMergeWith(this, maps*) {
 _MapDeepClone(this) {
 	result := Map()
 	for key, value in this {
-		if IsObject(value) && value is Map
+		if value is Map
 			result[key] := value.DeepClone()
 		else
 			result[key] := value
