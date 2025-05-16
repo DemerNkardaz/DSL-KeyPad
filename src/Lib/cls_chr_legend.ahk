@@ -105,17 +105,20 @@ Class ChrLegend {
 				author: panelWindow.AddLink("vLegendAuthor " this.UISets.infoBox.author),
 			}
 
-			GroupBoxOptions.preview.Text := value.symbol.HasOwnProp("alt") ? value.symbol.alt : value.symbol.set
-			GroupBoxOptions.preview.SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : Panel.UISets.infoFonts.fontFace["serif"].name)
+			GroupBoxOptions.preview.Text := value.symbol.alt != "" ? value.symbol.alt : value.symbol.set
+			GroupBoxOptions.preview.SetFont(, value.symbol.font != "" ? value.symbol.font : Panel.UISets.infoFonts.fontFace["serif"].name)
 			GroupBoxOptions.preview.SetFont("s" (Panel.UISets.infoFonts.previewSize * 1.5) " norm cDefault")
-			GroupBoxOptions.preview.SetFont(, value.symbol.HasOwnProp("font") ? value.symbol.font : Panel.UISets.infoFonts.fontFace["serif"].name)
-			GroupBoxOptions.preview.SetFont(value.symbol.HasOwnProp("customs") ? value.symbol.customs : StrLen(GroupBoxOptions.preview.Text) > 2 ? "s" (Panel.UISets.infoFonts.previewSmaller * 1.5) " norm cDefault" : "s" (Panel.UISets.infoFonts.previewSize * 1.5) " norm cDefault")
+			GroupBoxOptions.preview.SetFont(, value.symbol.font != "" ? value.symbol.font : Panel.UISets.infoFonts.fontFace["serif"].name)
+			GroupBoxOptions.preview.SetFont(value.symbol.customs != "" ? value.symbol.customs : StrLen(GroupBoxOptions.preview.Text) > 2 ? "s" (Panel.UISets.infoFonts.previewSmaller * 1.5) " norm cDefault" : "s" (Panel.UISets.infoFonts.previewSize * 1.5) " norm cDefault")
 
 
 			GroupBoxOptions.topbarID.Text := value.index
 			GroupBoxOptions.topbarEntry.Text := data.entry
-			GroupBoxOptions.topbarUnicode.Text := value.HasOwnProp("sequence") ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
-			GroupBoxOptions.topbarHTML.Text := value.HasOwnProp("entity") ? [value.html, value.entity].ToString(" ") : value.html
+			GroupBoxOptions.topbarUnicode.Text := value.sequence.Length > 0 ? value.sequence.ToString(" ") : value.unicode
+
+			unicodeSymbol := Util.UnicodeToChar(GroupBoxOptions.topbarUnicode.Text)
+
+			GroupBoxOptions.topbarHTML.Text := value.HasOwnProp("entity") ? [Util.StrToHTML(unicodeSymbol), value.entity].ToString(" ") : Util.StrToHTML(unicodeSymbol)
 			GroupBoxOptions.topbarID.SetFont("s12")
 			GroupBoxOptions.topbarEntry.SetFont("s12")
 			GroupBoxOptions.topbarUnicode.SetFont(StrLen(GroupBoxOptions.topbarUnicode.Text) > 6 ? "s9" : "s12")

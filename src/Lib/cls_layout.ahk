@@ -1671,9 +1671,18 @@ Class GlyphsPanel {
 				unicode := Util.UnicodeToChar(entryAlts.%each%)
 				fontFamily := (fonts.Has(cutEntryName) ? fonts.Get(cutEntryName) : fonts.Get(each))
 
-				code := Number("0x" entryAlts.%each%)
-				if code >= 0x1E030 && code <= 0x1E08F {
-					fontFamily := "Catrinity"
+				if entryAlts.%each% is Array {
+					for j, each in entryAlts.%each% {
+						code := Number("0x" each)
+						if code >= 0x1E030 && code <= 0x1E08F {
+							fontFamily := "Catrinity"
+						}
+					} else {
+						code := Number("0x" entryAlts.%each%)
+						if code >= 0x1E030 && code <= 0x1E08F {
+							fontFamily := "Catrinity"
+						}
+					}
 				}
 
 

@@ -47,7 +47,7 @@ Class FavoriteChars {
 
 	}
 
-	static Remove(fave) {
+	static Remove(fave, preventFavoriteTabRemove := False) {
 		fave := RegExReplace(fave, "^.*\s", "")
 
 		newContent := ""
@@ -72,10 +72,10 @@ Class FavoriteChars {
 		if ChrLib.entries.%fave%.groups.HasValue("Favorites", &i)
 			ChrLib.entries.%fave%.groups.RemoveAt(i)
 
-		this.UpdatePanelLVItem(fave, "Remove")
+		this.UpdatePanelLVItem(fave, "Remove", preventFavoriteTabRemove)
 	}
 
-	static UpdatePanelLVItem(entryName, action := "Add") {
+	static UpdatePanelLVItem(entryName, action := "Add", preventFavoriteTabRemove := False) {
 		LVContent := Panel.LV_Content
 		star := " " Chr(0x2605)
 		prefixes := ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI", "AllSymbols", "Favorites"]
@@ -107,6 +107,7 @@ Class FavoriteChars {
 
 			for i, prefix in prefixes {
 				items_LV := panelGUI[prefix "LV"]
+				favorites_LV := panelGUI["FavoritesLV"]
 				rowCount := items_LV.GetCount()
 				found := False
 
@@ -155,7 +156,7 @@ Class FavoriteChars {
 					bindings := bindings != "" ? (reserveCombinationKey != "" ? reserveCombinationKey " + " : "") bindings : ""
 
 
-					items_LV.Add(,
+					favorites_LV.Add(,
 						characterTitle,
 						recipe,
 						bindings,
@@ -163,6 +164,14 @@ Class FavoriteChars {
 						entryName,
 						""
 					)
+				} else if action = "Remove" && !preventFavoriteTabRemove && found {
+					farotitesRowCount := favorites_LV.GetCount()
+					Loop farotitesRowCount {
+						if favorites_LV.GetText(A_Index, 5) = entryName {
+							favorites_LV.Delete(A_Index)
+							break
+						}
+					}
 				}
 			}
 		}

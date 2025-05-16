@@ -926,7 +926,7 @@ Class Panel {
 		items_LV := panelWindow.AddListView(UISets.column.listStyle " v" options.prefix "LV", options.columns)
 		items_LV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 10, "int"))
 		items_LV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: options.prefix, previewType: options.previewType }))
-		items_LV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber))
+		items_LV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber, options.prefix = "Favorites"))
 
 		Loop options.columns.Length {
 			index := A_Index
@@ -994,8 +994,8 @@ Class Panel {
 		GroupBoxOptions.unicodeBlockLabel.SetFont("s9 c5088c8")
 
 		GroupBoxOptions.unicodeBlockLabel.OnEvent("Click", (*) => UnicodeBlockWebResource(GroupBoxOptions.unicodeBlockLabel.Text))
-		GroupBoxOptions.legendButton.OnEvent("Click", this.ChrLegendBridge.Bind(this))
-		GroupBoxOptions.glyphsVariantsButton.OnEvent("Click", this.GlyphsPanelBridge.Bind(this))
+		GroupBoxOptions.legendButton.OnEvent("Click", (B, I) => this.PreviewButtonsBridge(panelWindow, options.prefix, "ChrLegend"))
+		GroupBoxOptions.glyphsVariantsButton.OnEvent("Click", (B, I) => this.PreviewButtonsBridge(panelWindow, options.prefix, "GlyphsPanel"))
 
 		return
 	}
@@ -1023,6 +1023,7 @@ Class Panel {
 			titleCol := LV.GetText(rowNumber, 1)
 			entryCol := LV.GetText(rowNumber, 5)
 			unicode := ChrLib.entries.%entryCol%.unicode
+			sequence := ChrLib.entries.%entryCol%.sequence
 			value := ChrLib.GetEntry(entryCol)
 
 			if StrLen(unicode) > 0 {
@@ -1030,8 +1031,8 @@ Class Panel {
 				isShiftDown := GetKeyState("LShift")
 
 				if (isCtrlDown) {
-					unicodeCodePoint := "0x" unicode
-					A_Clipboard := Chr(unicodeCodePoint)
+					unicodeCodePoint := Util.UnicodeToChar(sequence.length > 1 ? sequence : unicode)
+					A_Clipboard := unicodeCodePoint
 
 					SoundPlay("C:\Windows\Media\Speech On.wav")
 				} else if isShiftDown {
@@ -1041,7 +1042,7 @@ Class Panel {
 							FavoriteChars.Add(entryCol)
 							LV.Modify(rowNumber, , titleCol star)
 						} else {
-							FavoriteChars.Remove(entryCol)
+							FavoriteChars.Remove(entryCol, isFavorite)
 							LV.Modify(rowNumber, , StrReplace(titleCol, star))
 						}
 					}
@@ -1054,17 +1055,27 @@ Class Panel {
 	}
 
 	static LV_SetRandomPreview(prefix) {
-		LV_Rows := this.PanelGUI[prefix "LV"].GetCount()
-		allowedRows := []
+		panelGUI := this.PanelGUI
+		LV := panelGUI[prefix "LV"]
+		total := LV.GetCount()
+		if total = 0
+			return
 
-		Loop LV_Rows {
-			if StrLen(this.PanelGUI[prefix "LV"].GetText(A_Index, 5)) > 0 {
-				allowedRows.Push(A_Index)
-			}
+		loopCount := 0
+		maxTries := 100
+		while True {
+			rand := Random(1, total)
+			col1 := LV.GetText(rand, 1)
+			col4 := LV.GetText(rand, 4)
+			if (col1 != "" && col4 != "")
+				break
+			loopCount++
+			if loopCount > maxTries
+				return
 		}
 
-		rand := Random(1, allowedRows.Length)
-		this.LV_SetCharacterPreview(this.PanelGUI[prefix "LV"], allowedRows[rand], { prefix: prefix })
+		LV.Modify(rand, "+Select +Focus")
+		this.LV_SetCharacterPreview(LV, rand, { prefix: prefix })
 	}
 
 	static LV_SetCharacterPreview(LV, rowValue, options) {
@@ -1158,7 +1169,7 @@ Class Panel {
 			this.PanelGUI[options.prefix "HTML"].SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 20) ? "s9" : "s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont((StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 20) ? "s9" : "s12")
 
-			entryString := Locale.Read("entry") ": " characterEntry
+			entryString := Locale.Read("entry") ": [" characterEntry "]"
 			tagsString := value.tags.Length > 0 ? Locale.Read("tags") ": " value.tags.ToString() : ""
 
 			this.PanelGUI[options.prefix "Tags"].Text := entryString Chr(0x2002) tagsString
@@ -1224,8 +1235,6 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreviewSet"].SetFont((KeyPreviewSetLength > 5) ? "s10" : "s12")
 
 
-			this.selectedCharacterEntry := characterEntry
-
 			this.PanelGUI[options.prefix "LegendButton"].Enabled := StrLen(value.options.legend) > 1 ? True : False
 			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := ObjOwnPropCount(value.alterations) > 0 ? True : False
 
@@ -1233,17 +1242,18 @@ Class Panel {
 
 		if value.unicodeBlock != ""
 			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := value.unicodeBlock
-
-
 	}
 
-	static selectedCharacterEntry := ""
-	static ChrLegendBridge(*) {
-		ChrLegend({ entry: this.selectedCharacterEntry })
-	}
+	static PreviewButtonsBridge(guiObj, prefix, callType := "GlyphsPanel") {
+		tagsElement := guiObj[prefix "Tags"]
+		RegExMatch(tagsElement.Text, "\[([^\]]+)\]", &entryName)
 
-	static GlyphsPanelBridge(*) {
-		GlyphsPanel(this.selectedCharacterEntry)
+		callMethods := Map(
+			"GlyphsPanel", (*) => GlyphsPanel(entryName[1]),
+			"ChrLegend", (*) => ChrLegend({ entry: entryName[1] })
+		)
+
+		callMethods[callType]()
 	}
 
 	static LV_FilterPopulate(LV, DataList) {

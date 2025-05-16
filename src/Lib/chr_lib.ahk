@@ -7160,7 +7160,7 @@ LibRegistrate(this) {
 			tags: ["прописная буква Еры глаголицы", "capital letter Yery glagolitic"],
 			options: { altLayoutKey: "Ы" },
 			alterations: { combining: ["1E01F", "1E00A"], },
-			symbol: { custom: "s36" },
+			symbol: { customs: "s60" },
 		},
 		"glagolitic_s_let_yery", {
 			unicode: "2C4F",
@@ -7169,7 +7169,7 @@ LibRegistrate(this) {
 			tags: ["строчная буква еры глаголицы", "small letter yery glagolitic"],
 			options: { altLayoutKey: "ы" },
 			alterations: { combining: ["1E01F", "1E00A"], },
-			symbol: { custom: "s36" },
+			symbol: { customs: "s60" },
 		},
 		"glagolitic_c_let_yeri", {
 			unicode: "2C20",
