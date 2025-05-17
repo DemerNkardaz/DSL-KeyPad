@@ -1,6 +1,11 @@
 Class Fonts {
 	static fontFaces := Map(
 		"Default", { name: "Noto Serif", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerif/googlefonts/variable-ttf/NotoSerif%5Bwdth%2Cwght%5D.ttf", required: True },
+		"Sans-Serif", { name: "Noto Sans", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSans/googlefonts/variable-ttf/NotoSans%5Bwdth%2Cwght%5D.ttf" },
+		"Noto Sans Old Permic", { name: "Noto Sans Old Permic", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansOldPermic/full/ttf/NotoSansOldPermic-Regular.ttf" },
+		"Noto Sans Old North Arabian", { name: "Noto Sans Old North Arabian", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansOldNorthArabian/full/ttf/NotoSansOldNorthArabian-Regular.ttf" },
+		"Noto Sans Old South Arabian", { name: "Noto Sans Old South Arabian", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansOldSouthArabian/full/ttf/NotoSansOldSouthArabian-Regular.ttf" },
+		"Noto Sans Chorasmian", { name: "Noto Sans Chorasmian", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansChorasmian/full/ttf/NotoSansChorasmian-Regular.ttf" },
 	)
 
 	static __New() {
@@ -30,6 +35,47 @@ Class Fonts {
 				this.Download(fontSource)
 			}
 		}
+	}
+
+	static InstallRecommended() {
+		sources := []
+
+		for _, font in this.fontFaces {
+			if !font.HasOwnProp("required") {
+				src := font.src
+				dest := App.paths.temp "\" StrSplit(src, "/").Pop()
+				Download(src, dest)
+
+			}
+		}
+
+		Sleep 1000
+
+		if FileExist(App.paths.temp "\font-install.log")
+			FileDelete(App.paths.temp "\font-install.log")
+
+
+		/*
+		
+				shell := ComObject("Shell.Application")
+				folder := shell.Namespace(App.paths.temp)
+		
+				Loop Files App.paths.temp "\*.ttf" {
+		
+					name := A_LoopFileName
+					item := folder.ParseName(name)
+		
+					if item {
+						item.InvokeVerb("Install")
+						FileAppend "Installed: " name "`n", App.paths.temp "\font-install.log"
+					} else {
+						FileAppend "Failed to parse: " name "`n", App.paths.temp "\font-install.log"
+					}
+		
+					Sleep 100
+					FileDelete(App.paths.temp "\" name)
+				}
+		*/
 	}
 
 	static IsInstalled(fontName) {

@@ -742,22 +742,26 @@ Class ChrLib {
 		isHasExpression := RegExMatch(searchQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
 
 		checkTagByUserRegEx(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
 			return RegExMatch(tag, searchQuery)
 		}
 
 		checkTagExact(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
 			if isSensitive
 				return searchQuery == tag
 			return StrLower(searchQuery) = StrLower(tag)
 		}
 
 		checkTagPartial(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
 			if isSensitive
 				return RegExMatch(tag, searchQuery)
 			return RegExMatch(StrLower(tag), StrLower(searchQuery))
 		}
 
 		checkTagLowAcc(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
 			if isSensitive
 				return Util.HasAllCharacters(tag, searchQuery)
 			return Util.HasAllCharacters(StrLower(tag), StrLower(searchQuery))
@@ -1091,6 +1095,20 @@ Class ChrLib {
 			}
 
 			refinedEntry.altCode := altOutput.ToString()
+
+			if refinedEntry.altCode = "" {
+				Loop AltCodesLibrary.Length // 2 {
+					i := A_Index * 2 - 1
+					num := AltCodesLibrary[i]
+					sym := AltCodesLibrary[i + 1]
+
+					if sym = character {
+						refinedEntry.altCode := num
+						refinedEntry.altCodePages := [437]
+						break
+					}
+				}
+			}
 		}
 
 		if refinedEntry.sequence.Length > 1 {
@@ -1155,12 +1173,12 @@ Class ChrLib {
 				refinedEntry.symbol.set := characterSequence
 		}
 
-		if RegExMatch(entryName, "i)^(permic|hungarian|north_arabian|south_arabian)", &match) {
+		if RegExMatch(entryName, "i)^(permic|hungarian|north_arabian|south_arabian|persian)", &match) {
 			scriptName := StrReplace(match[1], "_", " ")
-			refinedEntry.symbol.font := "Noto Sans Old " scriptName
-		} else if RegExMatch(entryName, "i)^(ugaritic)", &match) {
+			refinedEntry.symbol.font := "Noto Sans Old " StrTitle(scriptName)
+		} else if RegExMatch(entryName, "i)^(ugaritic|sidetic)", &match) {
 			scriptName := StrReplace(match[1], "_", " ")
-			refinedEntry.symbol.font := "Noto Sans " scriptName
+			refinedEntry.symbol.font := "Noto Sans " StrTitle(scriptName)
 		} else if RegExMatch(entryName, "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)") {
 			refinedEntry.symbol.font := "Kurinto Sans"
 		} else if InStr(entryName, "phoenician") {
@@ -1420,38 +1438,72 @@ Class ChrLib {
 		}
 	}
 
-	static EntryPreview(entryName, indent := 0) {
+	static EntryPreview(entryName, indent := 1) {
 		entry := this.GetEntry(entryName)
-		output := this.FormatEntry(entry, indent)
-		MsgBox(output)
+		output := "'" entryName "', {`n"
+		output .= this.FormatEntry(entry, indent)
+		output .= "}"
+
+
+		Constructor() {
+			pGui := Gui()
+			pGui.title := App.Title() " — [ " entryName " ]"
+
+			w := 600
+			h := 800
+
+			xPos := (A_ScreenWidth - w) / 2
+			yPos := (A_ScreenHeight - h) / 2
+
+			contentW := w - 20
+			contentH := h - 20
+			contentX := (w - contentW) / 2
+			contentY := (h - contentH) / 2
+
+			content := pGui.AddEdit(Format("vEntryPreviewContent w{} h{} x{} y{} ReadOnly +Wrap -HScroll", contentW, contentH, contentX, contentY), output)
+			content.SetFont("s10", "Courier New")
+
+
+			pGui.Show(Format("w{} h{} x{} y{}", w, h, xPos, yPos))
+			return pGui
+		}
+
+		pGui := Constructor()
 	}
 
-	static FormatEntry(entry, indent := 0) {
+	static FormatEntry(entry, indent := 1) {
 		output := ""
-		indentStr := Util.StrRepeat("`t", indent)
+		indentStr := Util.StrRepeat(" ", indent * 8)
 
 		for key, value in entry.OwnProps() {
 			if value is Array {
-				output .= indentStr key ": [`n"
+				output .= indentStr key ": ["
+				subOutput := ""
+
 				for subValue in value {
-					if subValue is Array {
-						output .= indentStr "`t[" subValue.ToString(, "'") indentStr "]`n"
-					} else {
-						output .= indentStr "`t'" subValue "'`n"
-					}
+					if subValue is Array
+						subOutput .= indentStr indentStr "[" subValue.ToString(, "'") indentStr "]`n"
+					else
+						subOutput .= indentStr indentStr "'" subValue "'`n"
 				}
-				output .= indentStr "]`n"
+
+				if subOutput != ""
+					output .= "`n" subOutput indentStr
+
+				output .= "]`n"
 			} else if value is Map {
 				output .= indentStr key ": (`n"
-				for mapKey, mapValue in value {
-					output .= indentStr "`t" mapKey ": '" mapValue "'`n"
-				}
+
+				for mapKey, mapValue in value
+					output .= indentStr indentStr mapKey ": '" mapValue "'`n"
+
 				output .= indentStr ")`n"
 			} else if value is Object {
-				output .= indentStr key ": {`n" this.FormatEntry(value, indent + 1) indentStr "}`n"
-			} else {
-				output .= indentStr key ": '" value "'`n"
-			}
+				subOutput := this.FormatEntry(value, indent + 1)
+				subOutput := subOutput != "" ? "`n" subOutput indentStr : ""
+				output .= indentStr key ": {" subOutput "}`n"
+			} else
+				output .= value is Number ? indentStr key ": " value "`n" : indentStr key ": '" StrReplace(value, "`n", " ") "'`n"
 		}
 
 		return output

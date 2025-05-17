@@ -10624,6 +10624,7 @@ LibRegistrate(this) {
 				["I-I", "DUP"],
 				["/-", "ASE"],
 			],
+			symbol: { font: "Catrinity" },
 		},
 		"wallet_bitcoin", {
 			unicode: "20BF",
@@ -10986,6 +10987,7 @@ LibRegistrate(this) {
 			tags: ["копилефт", "copyleft"],
 			groups: ["Other Signs"],
 			recipe: ["cft"],
+			symbol: { font: "Kurinto Sans" },
 		},
 		"registered", {
 			unicode: "00AE",

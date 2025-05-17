@@ -942,7 +942,7 @@ Class Panel {
 		GuiButtonIcon(items_FilterIcon, ImageRes, 169)
 		items_Filter := panelWindow.AddEdit(UISets.filter.field options.prefix "Filter", "")
 		items_Filter.SetFont("s10")
-		items_Filter.OnEvent("Change", (*) => this.LV_Filter(panelWindow, options.prefix "Filter", items_LV, options.source))
+		items_Filter.OnEvent("Change", (E, I) => this.LV_FilterBridge(panelWindow, options.prefix "Filter", items_LV, options.source, E.Text))
 
 		GroupBoxOptions := {
 			group: panelWindow.AddGroupBox("v" options.prefix "Group " UISets.infoBox.body, UISets.infoBox.bodyText),
@@ -986,7 +986,7 @@ Class Panel {
 		GroupBoxOptions.unicode.SetFont("s12")
 		GroupBoxOptions.html.SetFont("s12")
 		GroupBoxOptions.tags.SetFont("s9")
-		GroupBoxOptions.alert.SetFont("s9")
+		GroupBoxOptions.alert.SetFont("s10", Fonts.fontFaces["Default"].name)
 		GroupBoxOptions.keyPreview.SetFont("s12")
 		GroupBoxOptions.legendButton.SetFont("s11")
 		GroupBoxOptions.legendButton.Enabled := False
@@ -1041,7 +1041,9 @@ Class Panel {
 						(*) => UnicodeWebResource("Copy", unicode))
 					contextMenu.Add(Locale.ReadInject("gui_panel_context_show_block_page", [UnicodeBlockWebResource.GetCurrentResource()]),
 						(*) => UnicodeBlockWebResource(unicodeBlock))
-
+					contextMenu.Add()
+					contextMenu.Add(Locale.ReadInject("gui_panel_context_show_entry", [entryCol]),
+						(*) => ChrLib.EntryPreview(entryCol))
 
 					contextMenu.Show(X, Y)
 					return
@@ -1251,24 +1253,7 @@ Class Panel {
 			}
 
 			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read("character"))
-			FontMap := Map(
-				"^permic", "Noto Sans Old Permic",
-				"^hungarian", "Noto Sans Old Hungarian",
-				"^south_arabian", "Noto Sans Old South Arabian",
-				"^north_arabian", "Noto Sans Old North Arabian",
-				"^alchemical", "Kurinto Sans",
-				"^astrological", "Kurinto Sans",
-				"^astronomical", "Kurinto Sans",
-				"^symbolistics", "Kurinto Sans"
-			)
-
-			this.PanelGUI[options.prefix "Alert"].Text := ""
-			for pattern, fontName in FontMap {
-				if RegExMatch(characterEntry, pattern) {
-					this.PanelGUI[options.prefix "Alert"].Text := Locale.ReadInject("warning_nofont", [fontName])
-					break
-				}
-			}
+			this.PanelGUI[options.prefix "Alert"].Text := value.symbol.font != "" ? Chr(0x1D4D5) " " value.symbol.font : ""
 
 			this.PanelGUI[options.prefix "KeyPreview"].Text := characterKey
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := characterCombinationKey != "" ? characterCombinationKey : ""
@@ -1310,46 +1295,66 @@ Class Panel {
 		}
 	}
 
-	static LV_Filter(guiFrame, filterField, LV, dataList) {
-		filterText := StrLower(guiFrame[filterField].Text)
+	static LV_FilterBridge(guiFrame, filterField, LV, dataList, filterText) {
+		static lastFilterText := ""
+		currentFilterText := guiFrame[filterField].Text
+
+		SetTimer(() => this.LV_FilterCheck(guiFrame, filterField, LV, dataList, currentFilterText, &lastFilterText), -500)
+	}
+
+	static LV_FilterCheck(guiFrame, filterField, LV, dataList, originalFilterText, &lastFilterText) {
+		currentFilterText := guiFrame[filterField].Text
+
+		if (currentFilterText == originalFilterText) {
+			this.LV_Filter(guiFrame, filterField, LV, dataList, currentFilterText)
+			lastFilterText := currentFilterText
+		}
+	}
+
+	static LV_Filter(guiFrame, filterField, LV, dataList, filterText) {
+		filterText := filterText
 		LV.Delete()
 
-		if filterText = ""
+		if filterText = "" {
 			this.LV_FilterPopulate(LV, dataList)
-		else {
+		} else {
 			GroupStarted := False
 			PreviousGroupName := ""
-			for item in dataList {
-				ItemText := StrLower(item[1])
 
-				;IsFavorite := (ItemText ~= "\Q" Chr(0x2605))
-				IsFavorite := InStr(ItemText, Chr(0x2605))
-				IsMatch := InStr(ItemText, filterText)
-					|| (IsFavorite && RegExMatch(filterText, "^(изб|fav|\*)"))
-
-				if ItemText = "" {
-					LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
-					GroupStarted := true
-				} else if IsMatch {
-					if !GroupStarted {
-						GroupStarted := true
+			try {
+				for item in dataList {
+					if item[1] = "" {
+						continue
 					}
-					LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
-				} else if GroupStarted {
-					GroupStarted := False
+
+					ItemText := StrReplace(item[1], Chr(0x00A0), " ")
+					ReserveArray := [StrReplace(item[1], Chr(0x00A0), " "), item[5]]
+					IsFavorite := InStr(ItemText, Chr(0x2605))
+					IsMatch := ItemText ~= filterText || ReserveArray.HasRegEx(filterText) || (IsFavorite && filterText ~= "^(изб|fav|\*)")
+
+					if IsMatch {
+						if !GroupStarted {
+							GroupStarted := true
+						}
+						LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
+					} else if GroupStarted {
+						GroupStarted := False
+					}
+
+					if ItemText != "" and ItemText != PreviousGroupName {
+						PreviousGroupName := ItemText
+					}
 				}
 
-				if ItemText != "" and ItemText != PreviousGroupName {
-					PreviousGroupName := ItemText
+				if GroupStarted {
+					LV.Add(, "", "", "", "")
 				}
-			}
 
-			if GroupStarted {
-				LV.Add(, "", "", "", "")
-			}
-
-			if PreviousGroupName != "" {
-				LV.Add(, "", "", "", "")
+				if PreviousGroupName != "" {
+					LV.Add(, "", "", "", "")
+				}
+			} catch {
+				this.LV_FilterPopulate(LV, dataList)
 			}
 		}
 	}
@@ -1368,36 +1373,53 @@ Class Panel {
 			outputArrays := []
 			lastGroupKey := ""
 			for i, each in options.group {
-				eachOptions := options.Clone()
-				eachOptions.group := each
+				outputArrays := []
+				lastGroupKey := ""
 
-				if options.HasOwnProp("groupKey") {
-					if options.groupKey is Map
-						&& options.groupKey.Has(each) {
-						eachOptions.groupKey := options.groupKey.Get(each)
-						lastGroupKey := eachOptions.groupKey
-					} else
-						eachOptions.DeleteProp("groupKey")
-				}
+				for i, each in options.group {
+					eachOptions := options.Clone()
+					eachOptions.group := each
 
-				if options.hasOwnProp("subType")
-					if options.subType is Map
-						&& options.subType.Has(each)
-						eachOptions.subType := options.subType.Get(each)
-					else
-						eachOptions.DeleteProp("subType")
+					if options.HasOwnProp("groupKey") {
+						if options.groupKey is Map && options.groupKey.Has(each) {
+							eachOptions.groupKey := options.groupKey.Get(each)
+							lastGroupKey := eachOptions.groupKey
+						} else
+							eachOptions.DeleteProp("groupKey")
+					}
 
-				if options.HasOwnProp("combinationKey")
-					if options.combinationKey is Map
-						&& options.combinationKey.Has(each)
-						eachOptions.combinationKey := options.combinationKey.Get(each)
-					else
+					if options.hasOwnProp("subType") {
+						if options.subType is Map && options.subType.Has(each) {
+							eachOptions.subType := options.subType.Get(each)
+						} else {
+							eachOptions.DeleteProp("subType")
+						}
+					}
+
+					if options.HasOwnProp("combinationKey") {
+						if options.combinationKey is Map && options.combinationKey.Has(each) {
+							eachOptions.combinationKey := options.combinationKey.Get(each)
+						} else {
+							if lastGroupKey != ""
+								eachOptions.combinationKey := lastGroupKey
+							else
+								eachOptions.DeleteProp("combinationKey")
+						}
+					} else if lastGroupKey != ""
 						eachOptions.combinationKey := lastGroupKey
 
-				if options.type = "Fast Key"
-					this.combinationKeyToGroupPairs.Set(eachOptions.group, options.HasOwnProp("combinationKey") ? options.combinationKey.Get(each) : lastGroupKey)
 
-				ArrayMergeTo(outputArrays, this.LV_InsertGroup(eachOptions))
+					if options.type = "Fast Key" {
+						this.combinationKeyToGroupPairs.Set(
+							eachOptions.group,
+							eachOptions.HasOwnProp("combinationKey") ? eachOptions.combinationKey : lastGroupKey
+						)
+					}
+
+					ArrayMergeTo(outputArrays, this.LV_InsertGroup(eachOptions))
+				}
+
+				return outputArrays
 			}
 
 			return outputArrays
