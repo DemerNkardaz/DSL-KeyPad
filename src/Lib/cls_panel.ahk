@@ -219,7 +219,6 @@ Class Panel {
 					commandsTreeX, commandsTreeY, commandsTreeW, commandsTreeH),
 				body: Format("vCommandGroup x{} y{} w{} h{}",
 					commandsBoxX, commandsBoxY, commandsBoxW, commandsBoxH),
-				bodyText: Map("ru", "Команда", "en", "Command"),
 				text: Format("vCommandDescription x{} y{} w{} h{} 0x80",
 					commandsTexX, commandsTexY, commandsTexW, commandsTexH),
 			},
@@ -774,7 +773,7 @@ Class Panel {
 			commandsTree.OnEvent("ItemSelect", (TV, Item) => this.TV_InsertCommandsDesc(TV, Item, groupBoxCommands.text))
 
 			groupBoxCommands := {
-				group: panelWindow.AddGroupBox(UISets.commandsInfoBox.body, UISets.commandsInfoBox.bodyText[languageCode]),
+				group: panelWindow.AddGroupBox(UISets.commandsInfoBox.body, Locale.Read("tab_help")),
 				text: panelWindow.AddLink(UISets.commandsInfoBox.text),
 			}
 

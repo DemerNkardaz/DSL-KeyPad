@@ -1,31 +1,47 @@
 Class Language {
-
-	static supported := Map(
-		"en", { code: "00000409", locale: True, bindings: True },
-		"ru", { code: "00000419", locale: True, bindings: True },
-		"gr", { code: "00000408", locale: False },
-	)
+	static optionsFile := App.paths.loc "\locale.options.ini"
+	static supported := Map()
 
 	static __New() {
+		this.Init()
 	}
 
-	static GetSupported(by := "locale") {
+	static Init() {
+		languages := Util.INIGetSections([this.optionsFile])
+
+		for iso in languages {
+			data := {
+				parent: IniRead(this.optionsFile, iso, "parent", ""),
+				title: IniRead(this.optionsFile, iso, "title", ""),
+				code: IniRead(this.optionsFile, iso, "code", ""),
+				locale: IniRead(this.optionsFile, iso, "is_locale", False),
+				bindings: IniRead(this.optionsFile, iso, "is_bindings", False),
+			}
+
+			data.code := data.code != "" ? Number(data.code) : ""
+			data.locale := data.locale = "True" ? True : False
+			data.bindings := data.bindings = "True" ? True : False
+
+			this.supported.Set(iso, data)
+		}
+	}
+
+	static GetSupported(by := "locale", get := "key") {
 		output := []
 
-		for key, value in this.supported {
-			if value.%by% {
-				output.Push(key)
-			}
-		}
+		for key, value in this.supported
+			if value.%by% && !(value.code is String)
+				output.Push(get = "key" ? key : value.title)
+
 		return output
 	}
 
 	static Validate(input, extraRule?) {
-		if StrLen(input) > 5 {
+		if input is Number {
 			for key, value in this.supported {
 				extraRuleValidate := (!IsSet(extraRule) || IsSet(extraRule) && (HasProp(value, extraRule) ? value.%extraRule% : False))
 
-				if input == value.code && extraRuleValidate {
+				if !(value.code is String) && input = value.code && extraRuleValidate {
 					return True
 				}
 			}
@@ -46,14 +62,14 @@ Class Language {
 		}
 	}
 
-	static Get(language := "") {
+	static Get(language := "", getTitle := False) {
 		userLanguage := StrLen(language) > 0 ? language : Cfg.Get("User_Language")
 		userLanguage := !IsSpace(userLanguage) ? userLanguage : this.GetSys()
 
 		if this.Validate(userLanguage) {
-			return userLanguage
+			return getTitle ? this.supported.Get(userLanguage).title : userLanguage
 		} else {
-			return "en"
+			return getTitle ? this.supported.Get("en-US").title : "en-US"
 		}
 	}
 
@@ -71,7 +87,7 @@ Class Keyboard {
 	static __New() {
 	}
 
-	static CurrentLayout(&layoutHex := "") {
+	static CurrentLayout(&layoutHex := "", toStr := False) {
 		hwnd := DllCall("GetForegroundWindow", "UPtr")
 
 		hIMC := DllCall("imm32\ImmGetContext", "UPtr", hwnd, "UPtr")
@@ -84,10 +100,9 @@ Class Keyboard {
 		threadId := DllCall("GetWindowThreadProcessId", "UPtr", hwnd, "UInt*", 0, "UInt")
 		layoutID := DllCall("GetKeyboardLayout", "UInt", threadId, "UPtr")
 
-		layoutHex := Format("{:08X}", layoutID & 0xFFFF)
+		layoutHex := toStr ? Format("{:08X}", layoutID & 0xFFFF) : Number("0x" Format("{:X}", layoutID & 0xFFFF))
 		return layoutHex
 	}
-
 
 	static SwitchLayout(code, id := 1, timer := 1) {
 		SetTimer((*) => SwitchCall(), -timer)
@@ -102,21 +117,12 @@ Class Keyboard {
 	static CheckLayout(abbr) {
 		this.CurrentLayout(&code)
 
-		if !IsObject(abbr) {
-			for key, value in Language.supported {
-				if abbr == key && code == value.code {
-					return True
-				}
-			}
-			return False
-		} else {
-			for key, value in Language.supported {
-				if code == value.code {
-					%abbr% := key
-					break
-				} else {
-					%abbr% := ""
-				}
+		for key, value in Language.supported {
+			if code = value.code {
+				%abbr% := key
+				break
+			} else {
+				%abbr% := ""
 			}
 		}
 	}
@@ -125,9 +131,9 @@ Class Keyboard {
 		currentLayout := this.CurrentLayout()
 		previousLeyout := Cfg.Get("Prev_Layout", "ServiceFields")
 
-		if currentLayout != Language.supported["en"].code {
+		if currentLayout != Language.supported["en-US"].code {
 			Cfg.Set(currentLayout, "Prev_Layout", "ServiceFields")
-			this.SwitchLayout(Language.supported["en"].code, 2)
+			this.SwitchLayout(Language.supported["en-US"].code, 2)
 			this.blockedForReload := True
 			Reload
 		} else if StrLen(previousLeyout) > 0 {
@@ -151,7 +157,7 @@ Class Locale {
 
 		for lang, value in Language.supported {
 			if value.locale {
-				pathsArray.Push(App.paths.loc "\" lang ".ini")
+				pathsArray.Push(App.paths.loc "\locale_" lang ".ini")
 			}
 		}
 
@@ -194,23 +200,25 @@ Class Locale {
 		return result
 	}
 
-	static ReadInject(entryName, strInjections := []) {
-		return this.Read(entryName, , , , strInjections)
+	static ReadInject(entryName, strInjections := [], prefix := "", validate := False) {
+		return this.Read(entryName, prefix, validate, , strInjections)
 	}
-	static Read(entryName, Prefix := "", validate := False, &output?, strInjections := []) {
+
+	static Read(entryName, prefix := "", validate := False, &output?, strInjections := []) {
 		Intermediate := ""
-		Section := Language.Validate(Prefix) ? Prefix : (!IsSpace(Prefix) ? Prefix "_" Language.Get() : Language.Get())
+		Section := Language.Validate(prefix) ? prefix : (!IsSpace(prefix) ? prefix "_" Language.Get() : Language.Get())
+
 		try {
 			Intermediate := this.ReadStr(Section, entryName)
 
-			while (RegExMatch(Intermediate, "\{([a-zA-Z]{2})\}", &match)) {
+			while (RegExMatch(Intermediate, "\{@([a-zA-Z-]+)\}", &match)) {
 				LangCode := match[1]
-				SectionOverride := !IsSpace(Prefix) ? Prefix "_" LangCode : LangCode
+				SectionOverride := !IsSpace(prefix) ? prefix "_" LangCode : LangCode
 				Replacement := this.ReadStr(SectionOverride, entryName)
 				Intermediate := StrReplace(Intermediate, match[0], Replacement)
 			}
 
-			while (RegExMatch(Intermediate, "\{(?:([^\}_]+)_)?([a-zA-Z]{2}):([^\}]+)\}", &match)) {
+			while (RegExMatch(Intermediate, "\{@(?:([^\}_]+)_)?([a-zA-Z-]+):([^\}]+)\}", &match)) {
 				CustomPrefix := match[1] ? match[1] : ""
 				LangCode := match[2]
 				CustomEntry := match[3]
@@ -261,13 +269,13 @@ Class Locale {
 	}
 
 	static LocaleRules(input, lang) {
-		lang := SubStr(lang, 1, 2)
+		lang := RegExReplace(lang, "_alt")
 		nbsp := Chr(160)
 		rules := Map(
-			"ru", Map(
+			"ru-RU", Map(
 				"conjunction", (str) => (InStr(str, "{conjuction}" nbsp "с") || InStr(str, "{conjuction}" nbsp "ш")) ? RegExReplace(str, "\{conjuction\}", Locale.Read("gen_postfix_with_2", lang)) : RegExReplace(str, "\{conjuction\}", Locale.Read("gen_postfix_with", lang))
 			),
-			"en", Map(
+			"en-US", Map(
 				"conjunction", (str) => RegExReplace(str, "\{conjuction\}", Locale.Read("gen_postfix_with", lang)
 				)
 			)
@@ -326,7 +334,7 @@ Class Locale {
 		lPostfixes := entryData.postfixes
 		lVariant := ["digraph", "symbol"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
-		langCodes := ["en", "ru", "en_alt", "ru_alt"]
+		langCodes := ["en-US", "ru-RU", "en-US_alt", "ru-RU_alt"]
 		entry.titles := Map()
 		tags := Map()
 
@@ -334,7 +342,7 @@ Class Locale {
 
 		for _, langCode in langCodes {
 			isAlt := InStr(langCode, "_alt")
-			lang := isAlt ? SubStr(langCode, 1, 2) : langCode
+			lang := isAlt ? RegExReplace(langCode, "_alt") : langCode
 			postLetter := useLetterLocale ?
 				(Locale.Read((RegExMatch(useLetterLocale, "i)^(.*?)\$", &endMatch) > 0 ?
 					RegExReplace(ref, "i)^(.*?" RegExReplace(endMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1") :
@@ -390,7 +398,7 @@ Class Locale {
 
 		if lPostfixes.Length > 0 {
 			for _, langCode in langCodes {
-				lang := InStr(langCode, "_alt") ? SubStr(langCode, 1, 2) : langCode
+				lang := InStr(langCode, "_alt") ? RegExReplace(langCode, "_alt") : langCode
 				postfixText := ""
 
 				postfixText .= " {conjuction}" nbsp Locale.Read(pfx "postfix_" lPostfixes[1], lang)
@@ -409,10 +417,10 @@ Class Locale {
 			}
 		}
 
-		tags["en"] := Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "en"), lVariant) " " tags["en"]
-		tags["ru"] := cyrillicTasgScriptAtStart ?
-			Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru"), lVariant) " " tags["ru"]
-			: tags["ru"] " " Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru"), lVariant)
+		tags["en-US"] := Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "en-US"), lVariant) " " tags["en-US"]
+		tags["ru-RU"] := cyrillicTasgScriptAtStart ?
+			Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant) " " tags["ru-RU"]
+			: tags["ru-RU"] " " Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant)
 
 		for _, langCode in langCodes {
 			entry.titles[langCode] := this.LocaleRules(entry.titles[langCode], langCode)

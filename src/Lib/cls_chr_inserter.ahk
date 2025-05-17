@@ -53,7 +53,7 @@ Class CharacterInserter {
 
 		Keyboard.CheckLayout(&lang)
 
-		codePage := StrLen(charCode) > 1 && charCode ~= "^0" ? ((lang = "ru") ? 1251 : 1252) : Number(charCode) >= 128 ? ((lang = "ru") ? 866 : 850) : 437
+		codePage := StrLen(charCode) > 1 && charCode ~= "^0" ? ((lang = "ru-RU") ? 1251 : 1252) : Number(charCode) >= 128 ? ((lang = "ru-RU") ? 866 : 850) : 437
 
 		bytes := Buffer(1)
 		NumPut("UChar", charCode, bytes)

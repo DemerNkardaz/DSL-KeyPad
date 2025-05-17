@@ -117,19 +117,16 @@ Class Cfg {
 
 			optionsPanel.AddGroupBox("vGroupCommon " optionsCommon())
 
-			optionsLanguages := Map(
-				"en", "English",
-				"ru", "Русский",
-			)
+			optionsLanguages := Language.GetSupported(, "title")
 			languageSelectorY := (add := 0) => optionsCommonY + 35 + add
 			languageSelectorX := (add := 0) => 25 + add
 
 			optionsPanel.AddText("vLanguageLabel x" languageSelectorX() " y" languageSelectorY(-17) " w128 BackgroundTrans", Locale.Read("gui_options_language"))
 
-			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w128 y" languageSelectorY(), [optionsLanguages["en"], optionsLanguages["ru"]])
+			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w128 y" languageSelectorY(), optionsLanguages)
 			PostMessage(0x0153, -1, 15, languageSelector)
 
-			languageSelector.Text := optionsLanguages[Language.Get()]
+			languageSelector.Text := Language.Get(, True)
 			languageSelector.OnEvent("Change", (CB, Zero) => Options.SwitchLanguage(CB))
 
 			layouSelectorTextY := 32
@@ -630,18 +627,23 @@ Class Cfg {
 
 Class Options {
 	static SwitchLanguage(CB) {
-		locales := Map(
-			"en", ["English", "Английский"],
-			"ru", ["Russian", "Русский"],
-		)
+		isLanguageWasChanged := False
 
-		for key, value in locales {
-			if value.HasValue(CB.Text) || key = CB.Text {
+		for key, value in Language.supported {
+			if value.title = CB.Text {
 				Cfg.Set(key, "User_Language")
+				isLanguageWasChanged := True
 				break
 			}
 		}
 
+		if !isLanguageWasChanged
+			return
+
+		SetTimer(this.PostSwitchLanguage.Bind(this), -50)
+	}
+
+	static PostSwitchLanguage() {
 		pastOptionsTitle := Cfg.optionsTitle
 		pastRecipesTitle := Cfg.EditorSubGUIs.recipesTitle
 		pastRecipesEditorTitle := MyRecipes.editorTitle

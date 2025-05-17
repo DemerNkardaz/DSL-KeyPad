@@ -173,7 +173,7 @@ Class ChrLib {
 			progressPanel.AddProgress("vInitProgressBar w" prgBarW " h" prgBarH " x" prgBarX " y" prgBarY, 0)
 
 
-			progressPanel.AddText("vInitPorgressCounter w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 40), Locale.ReadInject("lib_init_elems", [0, this.maxCountOfEntries]))
+			progressPanel.AddText("vInitPorgressCounter w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 40), Locale.ReadInject("lib_init_elems", [0, this.maxCountOfEntries], "default"))
 			progressPanel.AddText("vInitPorgressEntryName w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 20), "")
 
 			progressPanel.Show("w" windowWidth " h" windowHeight " x" xPos " y" yPos)
@@ -190,7 +190,7 @@ Class ChrLib {
 
 	static SetProgressBarValue(*) {
 		if IsGuiOpen(this.progressBarTitle) {
-			this.progressBarGUI["InitPorgressCounter"].Text := Locale.ReadInject("lib_init_elems", [this.progressBarCurrent, this.maxCountOfEntries]) (this.typeOfInit = "Custom" ? " : " Locale.Read("lib_init_custom") : " : " Locale.Read("lib_init_internal_lib"))
+			this.progressBarGUI["InitPorgressCounter"].Text := Locale.ReadInject("lib_init_elems", [this.progressBarCurrent, this.maxCountOfEntries], "default") (this.typeOfInit = "Custom" ? " : " Locale.Read("lib_init_custom") : " : " Locale.Read("lib_init_internal_lib"))
 			this.progressBarGUI["InitPorgressEntryName"].Text := Locale.ReadInject("lib_init_entry", [this.progressName])
 
 			this.progressBarGUI["InitProgressBar"].Value := this.progressPercent

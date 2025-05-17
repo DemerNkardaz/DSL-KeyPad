@@ -398,7 +398,7 @@ Class ChrBlock {
 
 			tooltips := Map(
 				"default", (name, pageRange) => "[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " name,
-				"localised", (name, pageRange) => "[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " (name.%lang = "ru" ? "ru" : "en"%) "`n[ " Locale.Read("script_" (lang = "ru" ? "cyrillic" : "latin")) " ]"
+				"localised", (name, pageRange) => "[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " (name.%lang = "ru-RU" ? "ru-RU" : "en-US"%) "`n[ " Locale.Read("script_" (lang = "ru-RU" ? "cyrillic" : "latin")) " ]"
 			)
 
 			if blockData.pageRange != "Unknown" {

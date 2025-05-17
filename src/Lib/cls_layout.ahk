@@ -390,6 +390,7 @@ Class KeyboardBinder {
 		if A_IsPaused
 			return
 
+		; ToolTip(Keyboard.CurrentLayout(, True))
 		isLanguageLayoutValid := Language.Validate(Keyboard.CurrentLayout(), "bindings")
 		disableTimer := Cfg.Get("Binds_Autodisable_Timer", , 1, "int")
 		disableType := Cfg.Get("Binds_Autodisable_Type", , "hour")
@@ -426,6 +427,9 @@ Class KeyboardBinder {
 		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout)
 		Keyboard.CheckLayout(&lang)
 
+		if lang != "" && Language.supported[lang].parent != ""
+			lang := Language.supported[lang].parent
+
 		iconCode := App.indexIcos["app"]
 		trayTitle := App.Title("+status+version") "`n" latinLayout "/" cyrillicLayout
 
@@ -444,7 +448,7 @@ Class KeyboardBinder {
 			} else if currentAlt != "" || currentGlyph != "" {
 				data := Scripter.GetData(mode, current)
 				icons := data.icons
-				iconCode := App.indexIcos[icons.Length > 1 ? icons[lang = "ru" ? 2 : 1] : icons[1]]
+				iconCode := App.indexIcos[icons.Length > 1 ? icons[lang = "ru-RU" ? 2 : 1] : icons[1]]
 				trayTitle .= "`n" Locale.Read(data.locale)
 			}
 		}
@@ -531,8 +535,8 @@ Class KeyboardBinder {
 			reverse := bind.Length == 2 ? bind[2] : False
 			targetMap.Set(combo, (K) => BindHandler.CapsSend(K, bind[1], reverse))
 		} else if bind.Length >= 2 {
-			reverse := bind.Length == 3 ? bind[3] : { en: False, ru: False }
-			targetMap.Set(combo, (K) => BindHandler.LangSend(K, { en: bind[1], ru: bind[2], }, reverse))
+			reverse := bind.Length == 3 ? bind[3] : Map("en-US", False, "ru-RU", False)
+			targetMap.Set(combo, (K) => BindHandler.LangSend(K, Map("en-US", bind[1], "ru-RU", bind[2]), reverse))
 		} else if bind[1] is Func {
 			targetMap.Set(combo, bind[1])
 		} else {
@@ -657,7 +661,7 @@ Class KeyboardBinder {
 		}
 
 		ShowTooltip(*) {
-			ToolTip(Locale.ReadInject("lib_init_elems", [i, total]) " : " Locale.Read("binds_init") "`n" Util.TextProgressBar(i, total))
+			ToolTip(Locale.ReadInject("lib_init_elems", [i, total], "default") " : " Locale.Read("binds_init") "`n" Util.TextProgressBar(i, total))
 			Sleep 50
 		}
 	}
@@ -1754,15 +1758,21 @@ Class BindHandler {
 		this.Send(combo, charactersPair.Length > 1 ? charactersPair[capsOn ? 1 : 2] : charactersPair[1])
 	}
 
-	static LangSend(combo := "", charactersObj := { en: "", ru: "" }, reverse := { ru: False, en: False }) {
+	static LangSend(combo := "", charactersMap := Map("en-US", "", "ru-RU", ""), reverse := Map("en-US", False "ru-RU", False)) {
 		Keyboard.CheckLayout(&lang)
 
+		if lang != "" && Language.supported[lang].parent != ""
+			lang := Language.supported[lang].parent
+
+		if !charactersMap.Has(lang)
+			lang := "en-US"
+
 		if Language.Validate(lang, "bindings") {
-			if charactersObj.HasOwnProp(lang) {
-				if charactersObj.%lang% is Array && charactersObj.%lang%.Length == 2 {
-					this.CapsSend(combo, charactersObj.%lang%, reverse.%lang%)
+			if charactersMap.Has(lang) {
+				if charactersMap[lang] is Array && charactersMap[lang].Length == 2 {
+					this.CapsSend(combo, charactersMap[lang], reverse[lang])
 				} else {
-					this.Send(combo, charactersObj.%lang% is Array ? charactersObj.%lang%[1] : charactersObj.%lang%)
+					this.Send(combo, charactersMap[lang] is Array ? charactersMap[lang][1] : charactersMap[lang])
 				}
 			}
 		}
@@ -1770,6 +1780,9 @@ Class BindHandler {
 
 	static LangCall() {
 		Keyboard.CheckLayout(&lang)
+
+		if lang != "" && Language.supported[lang].parent != ""
+			lang := Language.supported[lang].parent
 
 		if Language.Validate(lang, "bindings")
 			if IsSet(%lang%Callback)

@@ -102,6 +102,10 @@ Class UnicodeBlockWebResource {
 				name := name
 		}
 
+		if resourceName = "SymblCC" && name ~= "greek.*coptic"
+			name := "greek-coptic"
+
+
 		resource := StrReplace(resource, "${language}", lang)
 		resource := StrReplace(resource, "${CodePrompt}", code)
 		resource := StrReplace(resource, "${Name_Prompt}", RegExReplace(name, "\s", "_"))

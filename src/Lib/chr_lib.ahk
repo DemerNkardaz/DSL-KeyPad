@@ -11041,19 +11041,19 @@ LibRegistrate(this) {
 		;
 		;
 		"replacment_character", {
-			titles: Map("ru", "Заменяющий символ", "en", "Replacement character"),
+			titles: Map("ru-RU", "Заменяющий символ", "en-US", "Replacement character"),
 			unicode: "FFFD",
 			options: { noCalc: True },
 			recipe: ["null"]
 		},
 		"object_replacement_character", {
-			titles: Map("ru", "Объекто-заменяющий символ", "en", "Object replacement character"),
+			titles: Map("ru-RU", "Объекто-заменяющий символ", "en-US", "Object replacement character"),
 			unicode: "FFFC",
 			options: { noCalc: True },
 			recipe: ["obj"]
 		},
 		"amogus", {
-			titles: Map("ru", "Амогус", "en", "Amogus"),
+			titles: Map("ru-RU", "Амогус", "en-US", "Amogus"),
 			tags: ["амогус", "член экипажа", "amogus", "crewmate"],
 			unicode: "0D9E",
 			options: { noCalc: True, suggestionsAtEnd: True },
@@ -11073,7 +11073,7 @@ LibRegistrate(this) {
 
 		rawEntries.Push(
 			"variantion_selector_" index, {
-				titles: Map("ru", "Селектор варианта " index, "en", "Variation selector " index),
+				titles: Map("ru-RU", "Селектор варианта " index, "en-US", "Variation selector " index),
 				unicode: "" unicodeValue "",
 				options: { noCalc: True, suggestionsAtEnd: True },
 				recipe: ["vs" index],
@@ -11092,8 +11092,8 @@ LibRegistrate(this) {
 		rawEntries.Push(
 			"emoji_modifier_fitzpatrick_" index, {
 				titles: Map(
-					"en", "Emoji Modifier Fitzpatrick " index,
-					"ru", "Модификатор Фицпатрика " index
+					"en-US", "Emoji Modifier Fitzpatrick " index,
+					"ru-RU", "Модификатор Фицпатрика " index
 				),
 				unicode: "" unicodeValue "",
 				options: { noCalc: True, suggestionsAtEnd: True },
@@ -11119,8 +11119,8 @@ LibRegistrate(this) {
 		rawEntries.Push(
 			"emoji_component_" entryPost, {
 				titles: Map(
-					"en", "Emoji Component " title,
-					"ru", "Компонент эмодзи " title
+					"en-US", "Emoji Component " title,
+					"ru-RU", "Компонент эмодзи " title
 				),
 				unicode: "" unicodeValue "",
 				options: { noCalc: True, suggestionsAtEnd: True },

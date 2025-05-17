@@ -157,7 +157,7 @@ Class ChrLegend {
 			GroupBoxOptions.description.SetFont("s11")
 
 
-			defaultAuthor := Map("ru", "<a href=`"https://nkardaz.carrd.co`">Ялла Нкардаз</a>", "en", "<a href=`"https://nkardaz.carrd.co`">Yalla Nkardaz</a>")
+			defaultAuthor := Map("ru-RU", "<a href=`"https://nkardaz.carrd.co`">Ялла Нкардаз</a>", "en-US", "<a href=`"https://nkardaz.carrd.co`">Yalla Nkardaz</a>")
 
 			GroupBoxOptions.authorLabel.Text := Locale.Read("gui_legend_author") ChrLib.Get("emsp")
 			GroupBoxOptions.authorLabel.SetFont("bold")

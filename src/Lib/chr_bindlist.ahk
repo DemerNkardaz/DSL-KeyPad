@@ -1251,8 +1251,8 @@ bindingMaps := Map(
 			"H", Map(
 				"<^<!", "hook_above",
 				"<^<!<+", "horn",
-				"<^<!>+", "palatal_hook_below",
-				"<^<!<+>+", "retroflex_hook_below"
+				"<^<!>+", "palatal_hook",
+				"<^<!<+>+", "retroflex_hook"
 			),
 			"M", Map(
 				"<^<!", "macron",

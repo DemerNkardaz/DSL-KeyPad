@@ -587,7 +587,12 @@ Class Util {
 
 	static INIToObj(filePath) {
 		obj := {}
-		content := FileRead(filePath (!InStr(filePath, ".ini") ? ".ini" : ""), "UTF-8")
+		filePath := filePath (!InStr(filePath, ".ini") ? ".ini" : "")
+
+		if !FileExist(filePath)
+			return obj
+
+		content := FileRead(filePath, "UTF-8")
 		lines := StrSplit(content, "`n", "`r`n")
 
 		currentSection := ""
