@@ -122,16 +122,17 @@ Class Util {
 		return pages
 	}
 
-	static StrVarsInject(StringVar, SetVars*) {
-		if SetVars[1] is Array {
-			SetVars := SetVars[1]
+	static StrVarsInject(stringVar, setVars*) {
+		if setVars[1] is Array {
+			setVars := setVars[1]
 		}
 
-		Result := StringVar
-		for index, value in SetVars {
-			Result := StrReplace(Result, "{" (index - 1) "}", value)
+		result := stringVar
+		for index, value in setVars {
+			; result := StrReplace(result, "{" (index - 1) "}", value)
+			result := RegExReplace(result, "\{\}", value, , 1)
 		}
-		return Result
+		return result
 	}
 
 	static StrCutBrackets(Str) {

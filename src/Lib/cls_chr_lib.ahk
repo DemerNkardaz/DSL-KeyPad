@@ -23,6 +23,7 @@ Class ChrEntry {
 		referenceLocale: "",
 		legend: "",
 		altLayoutKey: "",
+		showOnAlt: "",
 		altSpecialKey: "",
 		fastKey: "",
 		specialKey: "",
@@ -471,6 +472,9 @@ Class ChrLib {
 		alt := this.ValidateAlt(alt)
 		entry := this.GetEntry(entryName)
 
+		if alt = "superscript" && !entry.alterations.HasOwnProp("superscript")
+			alt := "modifier"
+
 		getMode := StrLen(getMode) ? getMode : "Unicode"
 
 		getChar := entry.result.Length = 1 ? entry.result[1] : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
@@ -693,7 +697,8 @@ Class ChrLib {
 
 	static ValidateAlt(str) {
 		static alterationNames := Map(
-			"modifier", ["superscript", "верхний индекс", "ви", "mo", "sup"],
+			"modifier", ["модификатор", "ви", "mo"],
+			"superscript", ["superscript", "верхний индекс", "ви", "sup"],
 			"subscript", ["нижний индекс", "ни", "sub"],
 			"italic", ["курсив", "ку", "it"],
 			"italicBold", ["курсив полужирный", "куп", "itb"],

@@ -236,8 +236,11 @@ Class MyRecipes {
 						return
 					} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
 						if recipesListExists && data.row > 0 {
+							title := this.HandleTitles(data.name)
+							title := title ? title : data.name
+
 							recipesLV.Modify(data.row, "-Focus -Select",
-								this.HandleTitles(data.name),
+								title,
 								RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
 								Util.StrFormattedReduce(this.FormatResult(data.result), 20),
 								data.section
@@ -261,9 +264,12 @@ Class MyRecipes {
 									lastMatchIndex := rowIndex
 							}
 
+							title := this.HandleTitles(data.name)
+							title := title ? title : data.name
+
 							if (lastMatchIndex = 0)
 								recipesLV.Add(,
-									this.HandleTitles(data.name),
+									title,
 									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
 									Util.StrFormattedReduce(this.FormatResult(data.result), 20),
 									data.section,
@@ -271,7 +277,7 @@ Class MyRecipes {
 								)
 							else
 								recipesLV.Insert(lastMatchIndex + 1, ,
-									this.HandleTitles(data.name),
+									title
 									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
 									Util.StrFormattedReduce(this.FormatResult(data.result), 20),
 									data.section,
@@ -605,13 +611,14 @@ Class MyRecipes {
 						ChrLib.RemoveEntry(section.section)
 
 					existingEntry := ChrLib.GetEntry(section.section)
+					title := this.HandleTitles(section.name)
 
 					if !existingEntry {
 						rawCustomEntries.Push(
 							section.section, ChrEntry({
 								result: [section.result],
-								titles: this.HandleTitles(section.name),
-								tags: section.tags,
+								titles: title ? title : section.name,
+								tags: section.tags ? section.tags : [],
 								recipe: section.recipe,
 								groups: ["Custom Composes"],
 							}),
@@ -668,23 +675,32 @@ Class MyRecipes {
 		supportedLanguages := Language.GetSupported()
 		userLanguage := Language.Get()
 
-		titles := Map()
-		for lang in supportedLanguages {
-			titles.Set(lang, sectionName)
-		}
+		try {
 
-		if InStr(sectionName, "|") {
-			titleVariants := StrSplit(sectionName, "|")
+			titles := Map()
+			for lang in supportedLanguages {
+				titles.Set(lang, sectionName)
+			}
 
-			for variant in titleVariants {
-				RegExMatch(variant, "^(.*?):(.*)$", &match)
-				if supportedLanguages.HasValue(match[1]) {
-					titles.Set(match[1], match[2])
+			if InStr(sectionName, "|") {
+				titleVariants := StrSplit(sectionName, "|")
+
+				for variant in titleVariants {
+					RegExMatch(variant, "^(.*?):(.*)$", &match)
+					inSupportedENRU := supportedLanguages.HasRegEx("i)^" match[1] "\-(US|RU)", &i)
+					inSupportedNoENRU := supportedLanguages.HasRegEx("i)^" match[1] "\-(?!US|RU)", &j)
+					if inSupportedENRU {
+						titles.Set(supportedLanguages[i], match[2])
+					} else if inSupportedNoENRU {
+						titles.Set(supportedLanguages[j], match[2])
+					}
 				}
 			}
+
+			return asType is String ? titles.Get(userLanguage) : asType is Array ? titles.Values() : titles
+		} catch {
+			MsgBox(Locale.ReadInject("gui_recipes_error_titles", [sectionName]), App.Title("+status+version"))
+			return False
 		}
-
-
-		return asType is String ? titles.Get(userLanguage) : asType is Array ? titles.Values() : titles
 	}
 }

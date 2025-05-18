@@ -384,8 +384,9 @@ Class Cfg {
 
 			for recipeEntry in recipesArray {
 				recipeFilePath := recipeEntry.HasOwnProp("filePath") ? recipeEntry.filePath : ""
+				title := MyRecipes.HandleTitles(recipeEntry.name, "")
 				recipesLV.Add(,
-					MyRecipes.HandleTitles(recipeEntry.name, ""),
+					title ? title : recipeEntry.name,
 					RegExReplace(ChrRecipeHandler.MakeStr(recipeEntry.recipe), "\|", ", "),
 					Util.StrFormattedReduce(ChrRecipeHandler.MakeStr(recipeEntry.result), 20),
 					recipeEntry.section, recipeFilePath)

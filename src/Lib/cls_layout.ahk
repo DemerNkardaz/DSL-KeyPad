@@ -1026,7 +1026,7 @@ Class Scripter {
 				uiid: "Combining",
 				icons: ["glyph_combining"],
 			},
-			"modifier", {
+			"superscript", {
 				preview: [Util.UnicodeToChars("25CC", "1D43", "25CC", "1D47", "25CC", "1D9C", "25CC", "1D48", "25CC", "1D49", "25CC", "1DA0")],
 				fonts: [],
 				locale: "glyph_mode_superscript",
@@ -1610,6 +1610,7 @@ Class GlyphsPanel {
 		static order := [
 			"combining",
 			"modifier",
+			"superscript",
 			"subscript",
 			"italic",
 			"italicBold",
@@ -1628,12 +1629,12 @@ Class GlyphsPanel {
 			"fullwidth",
 			"smallCapital",
 			"uncombined",
-			"small",
 		]
 
 		static fonts := Map(
 			"combining", "Noto Serif",
 			"modifier", "Noto Serif",
+			"superscript", "Noto Serif",
 			"subscript", "Noto Serif",
 			"italic", "Cabmria Math",
 			"bold", "Cabmria Math",
@@ -1690,7 +1691,7 @@ Class GlyphsPanel {
 				}
 
 
-				glyphsPanel["SymbolPreview" i].Text := (["combining", "modifier", "subscript"].HasValue(each) && cutEntryName != "glagolitic" ? DottedCircle : "") unicode glyphsPanel["SymbolPreview" i].SetFont("s"
+				glyphsPanel["SymbolPreview" i].Text := (["combining", "modifier", "superscript", "subscript"].HasValue(each) && cutEntryName != "glagolitic" ? DottedCircle : "") unicode glyphsPanel["SymbolPreview" i].SetFont("s"
 					(fontSizes.Has(cutEntryName) ? fontSizes.Get(cutEntryName) : 42),
 					fontFamily
 				)

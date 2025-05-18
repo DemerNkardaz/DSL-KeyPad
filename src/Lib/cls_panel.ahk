@@ -104,7 +104,7 @@ Class Panel {
 		aboutAuthorY := aboutLeftH - 45
 
 		aboutAuthorLinksStrLen := Util.WidthBasedStrLen(Locale.ReadNoLinks("about_author_links"))
-		aboutAuthorLinksW := aboutAuthorLinksStrLen * 8
+		aboutAuthorLinksW := aboutAuthorLinksStrLen * 6
 		aboutAuthorLinksH := 24
 		aboutAuthorLinksX := aboutLeftX + ((aboutLeftW - aboutAuthorLinksW) / 2) + 9
 		aboutAuthorLinksY := (aboutAuthorY + aboutAuthorH) + 14
@@ -114,15 +114,15 @@ Class Panel {
 		aboutDescBoxX := (aboutLeftX + aboutLeftW) + 10
 		aboutDescBoxY := 32
 
-		aboutDescriptionW := 505
+		aboutDescriptionW := aboutDescBoxW - 25
 		aboutDescriptionH := aboutDescBoxH - 40
-		aboutDescriptionX := aboutDescBoxX + 10
+		aboutDescriptionX := aboutDescBoxX + 15
 		aboutDescriptionY := aboutDescBoxY + 38
 
 		aboutChrCountW := aboutDescriptionW
-		aboutChrCountH := 12 * 6
+		aboutChrCountH := (18 * 5) + 5
 		aboutChrCountX := aboutDescriptionX
-		aboutChrCountY := ((aboutLeftH + aboutLeftY) - (aboutChrCountH)) - 5
+		aboutChrCountY := ((aboutLeftH + aboutLeftY) - (aboutChrCountH)) - 18 + 5
 
 		aboutSampleWordsW := panelWidth - (aboutDescBoxX + aboutDescBoxW) - 30
 		aboutSampleWordsH := aboutDescBoxH
@@ -809,10 +809,10 @@ Class Panel {
 			aboutRepoLink.SetFont("s12", "Cambria")
 
 			aboutAuthor := panelWindow.AddText(UISets.aboutInfoBox.aboutAuthor, Locale.Read("about_author"))
-			aboutAuthor.SetFont("s11 c333333", "Cambria")
+			aboutAuthor.SetFont("s11 c333333", Fonts.fontFaces["Default"].name)
 
 			aboutAuthorLinks := panelWindow.AddLink(UISets.aboutInfoBox.aboutAuthorLinks, Locale.Read("about_author_links"))
-			aboutAuthorLinks.SetFont("s9", "Cambria")
+			aboutAuthorLinks.SetFont("s9", Fonts.fontFaces["Default"].name)
 
 			chrCount := Format(Locale.Read("about_lib_count"),
 				ChrLib.countOf.entries,
@@ -826,18 +826,18 @@ Class Panel {
 			)
 
 			aboutDescBox := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutDescBox, App.Title(["decoded"]))
-			aboutDescBox.SetFont("s11", "Cambria")
+			aboutDescBox.SetFont("s11 c333333", Fonts.fontFaces["Default"].name)
 
-			aboutDescription := panelWindow.AddText(UISets.aboutInfoBox.aboutDescription, Locale.Read("about_description"))
-			aboutDescription.SetFont("s12 c333333", "Cambria")
+			aboutDescription := panelWindow.AddText(UISets.aboutInfoBox.aboutDescription, Locale.ReadInject("about_description", [App.Ver("+hotfix+postfix") " " App.Title(["status"])]))
+			aboutDescription.SetFont("s11 c333333", Fonts.fontFaces["Default"].name)
 
 			aboutChrCount := panelWindow.AddText(UISets.aboutInfoBox.aboutChrCount, chrCount)
-			aboutChrCount.SetFont("c333333")
+			aboutChrCount.SetFont("s10 c333333", Fonts.fontFaces["Default"].name)
 
 			aboutSampleWords := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutSampleWords)
 
-			aboutSampleWordsContent := panelWindow.AddText(UISets.aboutInfoBox.aboutSampleWordsContent, Locale.Read("about_sample_words"))
-			aboutSampleWordsContent.SetFont("s12 c555555", "Cambria")
+			aboutSampleWordsContent := panelWindow.AddText(UISets.aboutInfoBox.aboutSampleWordsContent, Locale.Read("about_sample_words", "default"))
+			aboutSampleWordsContent.SetFont("s11 c555555", Fonts.fontFaces["Default"].name)
 
 			/*
 						panelTabs.UseTab(panelTabList.Obj.useful)
@@ -1027,6 +1027,8 @@ Class Panel {
 				unicode := ChrLib.entries.%entryCol%.unicode
 				unicodeBlock := ChrLib.entries.%entryCol%.unicodeBlock
 				sequence := ChrLib.entries.%entryCol%.sequence
+				altsCount := ObjOwnPropCount(ChrLib.entries.%entryCol%.alterations)
+				hasLegend := ChrLib.entries.%entryCol%.options.legend != ""
 				value := ChrLib.GetEntry(entryCol)
 
 				if StrLen(unicode) > 0 {
@@ -1034,15 +1036,30 @@ Class Panel {
 					isCharFavorite := FavoriteChars.CheckVar(entryCol)
 					contextMenu := Menu()
 
-					contextMenu.Add(Locale.Read("gui_panel_context_" (isCharFavorite ? "remove" : "add") "_favorites"), doFav)
+					labels := {
+						fav: Locale.Read("gui_panel_context_" (isCharFavorite ? "remove" : "add") "_favorites"),
+						showSymbolPage: Locale.ReadInject("gui_panel_context_show_symbol_page", [UnicodeWebResource.GetCurrentResource()]),
+						showBlockPage: Locale.ReadInject("gui_panel_context_show_block_page", [UnicodeBlockWebResource.GetCurrentResource()]),
+						glyphVariations: Locale.Read("gui_panel_context_glyph_variations"),
+						legend: Locale.Read("gui_panel_context_legend"),
+						showEntry: Locale.ReadInject("gui_panel_context_show_entry", [entryCol])
+					}
+
+					contextMenu.Add(labels.fav, doFav)
 					contextMenu.Add()
-					contextMenu.Add(Locale.ReadInject("gui_panel_context_show_symbol_page", [UnicodeWebResource.GetCurrentResource()]),
-						(*) => UnicodeWebResource("Copy", unicode))
-					contextMenu.Add(Locale.ReadInject("gui_panel_context_show_block_page", [UnicodeBlockWebResource.GetCurrentResource()]),
-						(*) => UnicodeBlockWebResource(unicodeBlock))
+					contextMenu.Add(labels.showSymbolPage, (*) => UnicodeWebResource("Copy", unicode))
+					contextMenu.Add(labels.showBlockPage, (*) => UnicodeBlockWebResource(unicodeBlock))
 					contextMenu.Add()
-					contextMenu.Add(Locale.ReadInject("gui_panel_context_show_entry", [entryCol]),
-						(*) => ChrLib.EntryPreview(entryCol))
+					contextMenu.Add(labels.glyphVariations, (*) => GlyphsPanel(entryCol))
+					contextMenu.Add(labels.legend, (*) => ChrLegend({ entry: entryCol }))
+					contextMenu.Add()
+					contextMenu.Add(labels.showEntry, (*) => ChrLib.EntryPreview(entryCol))
+
+					if altsCount = 0
+						contextMenu.Disable(labels.glyphVariations)
+
+					if !hasLegend
+						contextMenu.Disable(labels.legend)
 
 					contextMenu.Show(X, Y)
 					return
@@ -1173,8 +1190,12 @@ Class Panel {
 			languageCode := Language.Get()
 			value := ChrLib.GetEntry(characterEntry)
 
-
+			getChar := Util.UnicodeToChar(value.sequence.Length > 0 ? value.sequence : value.unicode)
+			htmlCode := Util.StrToHTML(getChar)
+			previewSymbol := StrLen(value.symbol.alt) > 0 ? value.symbol.alt : value.symbol.set
+			entryString := Locale.Read("entry") ": [" characterEntry "]"
 			characterTitle := ""
+
 
 			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout" &&
 				(value.options.layoutTitles) &&
@@ -1194,10 +1215,15 @@ Class Panel {
 				characterTitle := Locale.Read(characterEntry)
 			}
 
-			getChar := Util.UnicodeToChar(value.sequence.Length > 0 ? value.sequence : value.unicode)
-			htmlCode := Util.StrToHTML(getChar)
+			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout"
+				&& value.options.showOnAlt != "" && value.alterations.HasOwnProp(value.options.showOnAlt) {
+				previewSymbol := Util.UnicodeToChar(value.alterations.%value.options.showOnAlt%)
+				entryString .= " :: " value.options.showOnAlt
+			}
+
+
 			this.PanelGUI[options.prefix "Title"].Text := characterTitle
-			this.PanelGUI[options.prefix "Symbol"].Text := StrLen(value.symbol.alt) > 0 ? value.symbol.alt : value.symbol.set
+			this.PanelGUI[options.prefix "Symbol"].Text := previewSymbol
 			this.PanelGUI[options.prefix "Unicode"].Text := value.sequence.Length > 0 ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
 			this.PanelGUI[options.prefix "HTML"].Text := StrLen(value.entity) > 0 ? [htmlCode, value.entity].ToString(" ") : htmlCode
 			this.PanelGUI[options.prefix "Alt"].Text := StrLen(value.altCode) > 0 ? value.altCode : "N/A"
@@ -1217,7 +1243,6 @@ Class Panel {
 			this.PanelGUI[options.prefix "HTML"].SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 20) ? "s9" : "s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont((StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 20) ? "s9" : "s12")
 
-			entryString := Locale.Read("entry") ": [" characterEntry "]"
 			tagsString := value.tags.Length > 0 ? Locale.Read("tags") ": " value.tags.ToString() : ""
 
 			this.PanelGUI[options.prefix "Tags"].Text := entryString Chr(0x2002) tagsString

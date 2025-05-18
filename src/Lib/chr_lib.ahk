@@ -160,9 +160,10 @@ LibRegistrate(this) {
 		},
 		"comma_above_turned", {
 			unicode: "0312",
+			alterations: { modifier: "02BB" },
 			tags: ["turned comma above", "перевёрнутая запятая сверху"],
-			groups: ["SK Diacritics Primary"],
-			options: { fastKey: ", Б" },
+			groups: ["SK Diacritics Primary", "IPA"],
+			options: { fastKey: ", Б", altLayoutKey: ">+ <", showOnAlt: "modifier", layoutTitles: True },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"comma_above_reversed", {
@@ -386,9 +387,10 @@ LibRegistrate(this) {
 		},
 		"line_vertical", {
 			unicode: "030D",
+			alterations: { modifier: "02C8" },
 			tags: ["vertical line", "вертикальная черта"],
-			groups: ["Diacritics Primary", "FK Diacritics Primary"],
-			options: { fastKey: "V М" },
+			groups: ["Diacritics Primary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: "V М", altLayoutKey: "'", showOnAlt: "modifier", layoutTitles: True },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"line_vertical_double", {
@@ -400,9 +402,10 @@ LibRegistrate(this) {
 		},
 		"line_vertical_below", {
 			unicode: "0329",
+			alterations: { modifier: "02CC" },
 			tags: ["vertical line below", "вертикальная черта снизу"],
-			groups: ["SK Diacritics Primary"],
-			options: { fastKey: "V М" },
+			groups: ["SK Diacritics Primary", "IPA"],
+			options: { fastKey: "V М", altLayoutKey: ">! '", showOnAlt: "modifier", layoutTitles: True },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"line_vertical_double_below", {
@@ -566,7 +569,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7E2",
 				sansSerifBold: "1D7EC",
 				monospace: "1D7F6",
-				modifier: "2070",
+				superscript: "2070",
 				subscript: "2080",
 				fullwidth: "FF10"
 			}, {
@@ -575,7 +578,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7E3",
 				sansSerifBold: "1D7ED",
 				monospace: "1D7F7",
-				modifier: "00B9",
+				superscript: "00B9",
 				subscript: "2081",
 				fullwidth: "FF11"
 			}, {
@@ -584,7 +587,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7E4",
 				sansSerifBold: "1D7EE",
 				monospace: "1D7F8",
-				modifier: "00B2",
+				superscript: "00B2",
 				subscript: "2082",
 				fullwidth: "FF12"
 			}, {
@@ -593,7 +596,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7E5",
 				sansSerifBold: "1D7EF",
 				monospace: "1D7F9",
-				modifier: "00B3",
+				superscript: "00B3",
 				subscript: "2083",
 				fullwidth: "FF13"
 			}, {
@@ -602,7 +605,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7E6",
 				sansSerifBold: "1D7F0",
 				monospace: "1D7FA",
-				modifier: "2074",
+				superscript: "2074",
 				subscript: "2084",
 				fullwidth: "FF14"
 			}, {
@@ -611,7 +614,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7E7",
 				sansSerifBold: "1D7F1",
 				monospace: "1D7FB",
-				modifier: "2075",
+				superscript: "2075",
 				subscript: "2085",
 				fullwidth: "FF15"
 			}, {
@@ -620,7 +623,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7E8",
 				sansSerifBold: "1D7F2",
 				monospace: "1D7FC",
-				modifier: "2076",
+				superscript: "2076",
 				subscript: "2086",
 				fullwidth: "FF176"
 			}, {
@@ -629,7 +632,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7E9",
 				sansSerifBold: "1D7F3",
 				monospace: "1D7FD",
-				modifier: "2077",
+				superscript: "2077",
 				subscript: "2087",
 				fullwidth: "FF17"
 			}, {
@@ -638,7 +641,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7EA",
 				sansSerifBold: "1D7F4",
 				monospace: "1D7FE",
-				modifier: "2078",
+				superscript: "2078",
 				subscript: "2088",
 				fullwidth: "FF18"
 			}, {
@@ -647,7 +650,7 @@ LibRegistrate(this) {
 				sansSerif: "1D7EB",
 				sansSerifBold: "1D7F5",
 				monospace: "1D7FF",
-				modifier: "2079",
+				superscript: "2079",
 				subscript: "2089",
 				fullwidth: "FF19"
 			}],
@@ -2658,7 +2661,8 @@ LibRegistrate(this) {
 				modifier: "02BC",
 				fullwidth: "FF07"
 			},
-			options: { noCalc: True },
+			groups: ["IPA"],
+			options: { noCalc: True, altLayoutKey: ">+ '", showOnAlt: "modifier", layoutTitles: True },
 		},
 		"quote", {
 			unicode: "0022",
@@ -3123,7 +3127,8 @@ LibRegistrate(this) {
 		"plus", {
 			unicode: "002B",
 			alterations: {
-				modifier: "207A",
+				modifier: "02D6",
+				superscript: "207A",
 				subscript: "208A",
 				small: "FE62",
 				fullwidth: "FF0B"
@@ -3132,7 +3137,11 @@ LibRegistrate(this) {
 		},
 		"minus", {
 			unicode: "2212",
-			alterations: { modifier: "207B", subscript: "208B" },
+			alterations: {
+				modifier: "02D7",
+				superscript: "207B",
+				subscript: "208B"
+			},
 			tags: ["minus", "минус"],
 			groups: ["Dashes", "Smelting Special", "Special Fast Primary", "Special Combinations"],
 			options: { altSpecialKey: "NumSub", fastKey: "<+ -" },
