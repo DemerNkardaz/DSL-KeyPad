@@ -1779,15 +1779,18 @@ Class BindHandler {
 		}
 	}
 
-	static LangCall() {
+	static LangCall(commandsMap := Map("en-US", "", "ru-RU", "")) {
 		Keyboard.CheckLayout(&lang)
 
 		if lang != "" && Language.supported[lang].parent != ""
 			lang := Language.supported[lang].parent
 
+		if !commandsMap.Has(lang)
+			lang := "en-US"
+
 		if Language.Validate(lang, "bindings")
-			if IsSet(%lang%Callback)
-				%lang%Callback()
+			if commandsMap.Has(lang)
+				commandsMap[lang]()
 
 		return
 	}

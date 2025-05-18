@@ -104,9 +104,9 @@ Class Panel {
 		aboutAuthorY := aboutLeftH - 45
 
 		aboutAuthorLinksStrLen := Util.WidthBasedStrLen(Locale.ReadNoLinks("about_author_links"))
-		aboutAuthorLinksW := aboutAuthorLinksStrLen * 6
+		aboutAuthorLinksW := aboutAuthorLinksStrLen * 8
 		aboutAuthorLinksH := 24
-		aboutAuthorLinksX := aboutLeftX + ((aboutLeftW - aboutAuthorLinksW) / 2) + 9
+		aboutAuthorLinksX := aboutLeftX + ((aboutLeftW - aboutAuthorLinksW) / 2)
 		aboutAuthorLinksY := (aboutAuthorY + aboutAuthorH) + 14
 
 		aboutDescBoxW := 515

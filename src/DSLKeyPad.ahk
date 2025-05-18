@@ -52,6 +52,7 @@ initialized := False
 #Include <cls_key_event>
 #Include <cls_bindlist>
 #Include <cls_layout>
+#Include <cls_text_handlers>
 #Include <cls_long_press>
 #Include <hotstrings>
 #Include <cls_tempature_converter>
@@ -226,94 +227,6 @@ ParagraphizeSelection(SendCollaborative := False) {
 	A_Clipboard := BackupClipboard
 }
 
-QuotatizeSelection(Mode) {
-	RegEx := "[a-zA-Zа-яА-ЯёЁ0-9.,:;!?()\`"'-+=/\\]"
-
-	quote_angle_left_double := ChrLib.Get("quote_angle_left_double")
-	quote_angle_right_double := ChrLib.Get("quote_angle_right_double")
-	quote_low_9_double := ChrLib.Get("quote_low_9_double")
-	quote_left_double := ChrLib.Get("quote_left_double")
-	quote_right_double := ChrLib.Get("quote_right_double")
-	quote_left := ChrLib.Get("quote_left")
-	quote_right := ChrLib.Get("quote_right")
-
-
-	BackupClipboard := A_Clipboard
-	PromptValue := ""
-	A_Clipboard := ""
-
-	Send("^c")
-	ClipWait(0.5, 0)
-	PromptValue := A_Clipboard
-	if !RegExMatch(PromptValue, RegEx) {
-		A_Clipboard := BackupClipboard
-		if Mode = "France" {
-			SendText(quote_angle_left_double quote_angle_right_double)
-		} else if Mode = "Paw" {
-			SendText(quote_low_9_double quote_left_double)
-		} else if Mode = "Double" {
-			SendText(quote_left_double quote_right_double)
-		} else if Mode = "Single" {
-			SendText(quote_left quote_right)
-		}
-		return
-	}
-	A_Clipboard := ""
-
-	if RegExMatch(PromptValue, RegEx) {
-
-
-		TempSpace := ""
-		CheckFor := [
-			SpaceKey,
-			ChrLib.Get("emsp"),
-			ChrLib.Get("ensp"),
-			ChrLib.Get("emsp13"),
-			ChrLib.Get("emsp14"),
-			ChrLib.Get("thinspace"),
-			ChrLib.Get("emsp16"),
-			ChrLib.Get("narrow_no_break_space"),
-			ChrLib.Get("hairspace"),
-			ChrLib.Get("punctuation_space"),
-			ChrLib.Get("figure_space"),
-			ChrLib.Get("tabulation"),
-			ChrLib.Get("no_break_space"),
-		]
-
-		for space in CheckFor {
-			if (PromptValue ~= space . "$") {
-				TempSpace := space
-				PromptValue := RegExReplace(PromptValue, space . "$", "")
-				break
-			}
-		}
-
-		if Mode = "France" {
-			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_angle_left_double), quote_low_9_double)
-			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_angle_right_double), quote_left_double)
-
-			PromptValue := quote_angle_left_double . PromptValue . quote_angle_right_double
-		} else if Mode = "Paw" {
-			PromptValue := quote_low_9_double . PromptValue . quote_left_double
-		} else if Mode = "Double" {
-			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_left_double), quote_left)
-			PromptValue := RegExReplace(PromptValue, RegExEscape(quote_right_double), quote_right)
-
-			PromptValue := quote_left_double . PromptValue . quote_right_double
-		} else if Mode = "Single" {
-			PromptValue := quote_left . PromptValue . quote_right
-		}
-
-		A_Clipboard := PromptValue . TempSpace
-		ClipWait(0.250, 0)
-		Sleep 250
-		Send("^v")
-	}
-
-	Sleep 500
-	A_Clipboard := BackupClipboard
-	return
-}
 
 ShowInfoMessage("tray_app_started")
 

@@ -991,9 +991,6 @@ bindingMaps := Map(
 			),
 			"PgUp", Map("<#<!", (*) => UnicodeWebResource()),
 			"Home", Map("<#<!", (*) => Panel.Panel()),
-			; "Space", Map("<#<!", (*) => GroupActivator("Spaces")),
-			; "HyphenMinus", Map("<#<!", (*) => GroupActivator("Dashes", "-")),
-			; "Apostrophe", Map("<#<!", (*) => GroupActivator("Quotes", "'")),
 			"A", Map("<#<!", (*) => Scripter.SelectorPanel("Glyph Variations")),
 			"S", Map("<#<!", (*) => Scripter.SelectorPanel()),
 			"F", Map("<#<!", (*) => ChrLib.SearchPrompt().send()),
@@ -1005,12 +1002,18 @@ bindingMaps := Map(
 				">^", (*) => Util.StrSelToHTML("Entities", True),
 			),
 			"Comma", Map("<#<!", (*) => GetKeyScanCode()),
-			"Q", Map("<!", (*) => BindHandler.LangCall(
-				() => QuotatizeSelection("Double"),
-				() => QuotatizeSelection("France")),
-				"<!<+", (*) => BindHandler.LangCall(
-					() => QuotatizeSelection("Single"),
-					() => QuotatizeSelection("Paw"))),
+			"Q", Map(
+				"<!", (*) => BindHandler.LangCall(Map(
+					"en-US", TextHandlers.ToQuote.Bind(TextHandlers,
+						[ChrLib.Get("quote_left_double"), ChrLib.Get("quote_right_double")],
+						[ChrLib.Get("quote_left"), ChrLib.Get("quote_right")]
+					),
+					"ru-RU", TextHandlers.ToQuote.Bind(TextHandlers,
+						[ChrLib.Get("quote_angle_left_double"), ChrLib.Get("quote_angle_right_double")],
+						[ChrLib.Get("quote_left_double_ghost_ru"), ChrLib.Get("quote_right_double_ghost_ru")]
+					)
+				)),
+			),
 			"Y", Map(
 				">^", (*) => ReplaceWithUnicode("CSS"),
 			),
