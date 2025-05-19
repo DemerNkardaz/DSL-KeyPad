@@ -553,13 +553,13 @@ Class KeyboardBinder {
 
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
-				if (binds is Array && binds.Length == 1
-					&& binds[1] is String && RegExMatch(binds[1], "\[(.*?)\]", &match)) {
+				if (binds is Array && binds.Length == 1 && binds[1] is String && RegExMatch(binds[1], "\[(.*?)\]", &match)) ||
+					(binds is String && RegExMatch(binds, "\[(.*?)\]", &match)) {
 					splitVariants := StrSplit(match[1], ",")
 					tempBinds := []
 
 					for i, variant in splitVariants {
-						variantBind := RegExReplace(binds[1], "\[.*?\]", variant)
+						variantBind := RegExReplace(binds is String ? binds : binds[1], "\[.*?\]", variant)
 						tempBinds.Push(variantBind)
 					}
 
@@ -573,7 +573,7 @@ Class KeyboardBinder {
 							isCyrillicKey := RegExMatch(keyLetter, matchRu)
 
 							rules := Map(
-								"Caps", [binds],
+								"Caps", binds is Array ? [binds] : [[binds]],
 								"ReverseCase", [binds, True],
 								"Lang", isCyrillicKey ? [["", ""], binds] : [binds, ["", ""]],
 								"LangReverseCase", isCyrillicKey ? [["", ""], binds, True] : [binds, ["", ""], True],
