@@ -926,6 +926,10 @@ bindingMaps := Map(
 					">+:Caps", "lat_s_let_m::modifier",
 				),
 				"N", Map(
+					"<^>!:Caps", "lat_s_let_n_eng",
+					"<^>!>+:Caps", "lat_s_let_n_eng::modifier",
+					"<^>!<!:Caps", "lat_s_dig_feng",
+					"<^>!<!>+:Caps", "lat_s_dig_feng::modifier",
 					">+:Caps", "lat_s_let_n::modifier",
 				),
 				"O", Map(
@@ -990,24 +994,22 @@ bindingMaps := Map(
 				"D", "delta",
 				"I", ["contour_integral", "integral"],
 				"N", "nabla",
-				"L", "gre_s_let_lambda",
-				"P", "gre_s_let_pi",
+				"L", "",
+				"P", "n_ary_product",
 				"R", "square_root",
 				"S", "n_ary_summation",
 				"U", "n_ary_union",
 			),
 			"Moded", Map(
-				"P", Map(
-					"Flat:>+", "n_ary_product",
-				),
+				"P", Map(),
 				"Space", Map(
-					"Flat:<!", "medium_math_space",
+					"<!", "medium_math_space",
 				),
 				"Comma", Map(
-					"Flat:>+", "less_or_equals",
+					">+", "less_or_equals",
 				),
 				"Dot", Map(
-					"Flat:>+", "greater_or_equals",
+					">+", "greater_or_equals",
 				),
 			)
 		),
@@ -1726,7 +1728,7 @@ bindingMaps := Map(
 				"<^>!<!>+", ["lat_[c,s]_let_t__cedilla"],
 				"<^>!>+", ["lat_[c,s]_let_t_thorn"],
 				"<^>!<+", ["lat_[c,s]_let_t__dot_above"],
-				"<^>!<+>+", ["lat_[c,s]_let_et_tironian"]),
+				"<^>!<+>+", ["lat_[c,s]_sign_et_tironian"]),
 			"U", Map(
 				"<!", ["lat_[c,s]_let_u__acute"],
 				"<^>!", ["lat_[c,s]_let_u__breve"],
@@ -1743,7 +1745,7 @@ bindingMaps := Map(
 				"<^>!", ["lat_[c,s]_let_v__solidus_long"],
 				"<^>!<!", ["lat_[c,s]_let_v__dot_below"],
 				"<^>!<+", ["lat_[c,s]_let_v_middle_welsh"],
-				"<^>!>+", ["lat_[c,s]_let_vend"],
+				"<^>!>+", ["lat_[c,s]_let_v_vend"],
 				"<^>!<+>+", ["lat_[c,s]_let_v__tilde_above"]),
 			"W", Map("<!", ["lat_[c,s]_let_w__acute"],
 				"<^>!", ["lat_[c,s]_let_w__dot_above"],

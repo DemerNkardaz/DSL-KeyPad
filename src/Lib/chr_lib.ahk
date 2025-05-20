@@ -2310,6 +2310,9 @@ LibRegistrate(this) {
 		"descender", { proxy: "arrow_down",
 			groups: [], options: { noCalc: True },
 		},
+		"trill", { proxy: "arrow_up",
+			groups: [], options: { noCalc: True },
+		},
 		;
 		;
 		; * Various
@@ -4573,6 +4576,35 @@ LibRegistrate(this) {
 			},
 			recipe: ["/ram/"],
 		},
+		"lat_[c,s]_let_n_eng", {
+			unicode: ["014A", "014B"],
+			tags: [[], ["voiced velar nasal", "велярный носовой согласный"]],
+			groups: [[], ["Latin", "IPA"]],
+			alterations: [{}, { modifier: "1D51" }],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", ">! $"],
+				useLetterLocale: True
+			},
+			recipe: ["/Ng/"],
+		},
+		"lat_[c,s]_let_o_open", {
+			unicode: ["0186", "0254"],
+			options: { referenceLocale: "o$" },
+			recipe: ["$-"],
+			symbol: { beforeLetter: "open" },
+		},
+		"lat_[s]_let_o_sideways", {
+			unicode: ["1D11"],
+			options: { referenceLocale: "o$" },
+			recipe: ["$${arrow_right_circle}"],
+			symbol: { beforeLetter: "sideways" },
+		},
+		"lat_[s]_let_o_open_sideways", {
+			unicode: ["1D12"],
+			options: { referenceLocale: "o$" },
+			recipe: ["$-${arrow_right_circle}", "${lat_[s]_let_o_sideways}${arrow_left_circle}"],
+			symbol: { beforeLetter: "sideways,open" },
+		},
 		"lat_[c,s]_let_q_tresillo", {
 			unicode: ["A72A", "A72B"],
 			options: { useLetterLocale: True, fastKey: "<+ $?Secondary" },
@@ -4615,6 +4647,12 @@ LibRegistrate(this) {
 			recipe: ["$$", "${lat_[c,s]_let_@_thorn×2}"],
 			symbol: { letter: ["TH", "th"] },
 		},
+		"lat_[c,s]_let_v_vend", {
+			unicode: ["A768", "A769"],
+			options: { useLetterLocale: True, fastKey: ">+ ~?Secondary" },
+			recipe: ["$"],
+			symbol: { letter: ["VE", "ve"] },
+		},
 		"lat_[c,s]_let_w_wynn", {
 			unicode: ["01F7", "01BF"],
 			options: { useLetterLocale: True, fastKey: ">+ ~?Secondary" },
@@ -4655,6 +4693,107 @@ LibRegistrate(this) {
 			options: { useLetterLocale: "Origin" },
 			symbol: { letter: "${lat_s_let_z_ezh}" }
 		},
+		;
+		;
+		; * Insular Latin
+		;
+		;
+		"lat_[c,s]_let_d_insular", {
+			unicode: ["A779", "A77A"],
+			alterations: [{}, { combining: "1DD8" }],
+			options: { useLetterLocale: True },
+			recipe: ["$ ins"],
+		},
+		"lat_[c,s]_let_f_insular", {
+			unicode: ["A77B", "A77C"],
+			options: { useLetterLocale: True },
+			recipe: ["$ ins"],
+		},
+		"lat_[c,s]_let_g_insular", {
+			unicode: ["A77D", "1D79"],
+			alterations: [{}, { combining: "1ACC" }],
+			options: { useLetterLocale: True, fastKey: "<+ $?Secondary" },
+			recipe: ["$ ins"],
+		},
+		"lat_[c,s]_let_g_insular_closed", {
+			unicode: ["A7D0", "A7D1"],
+			options: { useLetterLocale: True, referenceLocale: "insular$" },
+			recipe: ["$- ins", "${lat_[c,s]_let_@_insular}-"],
+			symbol: { beforeLetter: "closed" },
+		},
+		"lat_[c,s]_let_g_insular_turned", {
+			unicode: ["A77E", "A77F"],
+			options: { useLetterLocale: True, referenceLocale: "insular$" },
+			recipe: ["$${arrow_left_circle} ins", "${lat_[c,s]_let_@_insular}${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_let_s_insular", {
+			unicode: ["A784", "A785"],
+			options: { useLetterLocale: True },
+			recipe: ["$ ins"],
+		},
+		"lat_[c,s]_let_r_insular", {
+			unicode: ["A782", "A783"],
+			alterations: [{}, { combining: "1ACD" }],
+			options: { useLetterLocale: True },
+			recipe: ["$ ins"],
+		},
+		"lat_[c,s]_let_t_insular", {
+			unicode: ["A786", "A787"],
+			alterations: [{}, { combining: "1ACE" }],
+			options: { useLetterLocale: True },
+			recipe: ["$ ins"],
+		},
+		"lat_[c,s]_sign_et_tironian", {
+			unicode: ["2E52", "204A"],
+			options: { useLetterLocale: True, fastKey: "<+>+ /T/?Secondary" },
+			recipe: ["$ ins", "& /ins/"],
+		},
+		"lat_[c,s]_let_r_rotunda", {
+			unicode: ["A75A", "A75B"],
+			alterations: [{}, { combining: "1DE3" }],
+			options: { useLetterLocale: True },
+			recipe: ["$ rot"],
+		},
+		"lat_[c,s]_let_rum_rotunda", {
+			unicode: ["A75C", "A75D"],
+			options: { useLetterLocale: True },
+			recipe: ["/Rum/ rot"],
+		},
+		;
+		;
+		; * Middle-Welsh
+		;
+		;
+		"lat_[c,s]_lig_ll_middle_welsh", {
+			unicode: ["1EFA", "1EFB"],
+			options: { referenceLocale: "_l$" },
+			groups: ["Latin"],
+			recipe: ["$ mw"],
+			symbol: { beforeLetter: "middle_welsh" },
+		},
+		"lat_[c,s]_let_v_middle_welsh", {
+			unicode: ["1EFC", "1EFD"],
+			options: { referenceLocale: "v$", fastKey: "<+ $?Secondary" },
+			recipe: ["$ mw"],
+			symbol: { beforeLetter: "middle_welsh" },
+		},
+		;
+		;
+		; * Anglicana
+		;
+		;
+		"lat_[c,s]_let_w_anglicana", {
+			unicode: ["A7C2", "A7C3"],
+			options: { referenceLocale: "w$", fastKey: "<!>+ $?Secondary" },
+			recipe: ["$ ang"],
+			symbol: { afterLetter: "anglicana" },
+		},
+		;
+		;
+		; * Latinized Hellenic
+		;
+		;
 		"lat_[c,s]_let_a_alpha", {
 			unicode: ["2C6D", "0251"],
 			alterations: [{}, { combining: "1DE7", modifier: "1D45" }],
@@ -4792,130 +4931,6 @@ LibRegistrate(this) {
 			unicode: ["018E", "01DD"],
 			recipe: ["$${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
-		},
-		;
-		;
-		; * Latin Ligatures
-		;
-		;
-		"lat_[c,s]_lig_aa", { unicode: ["A732", "A733"] },
-		"lat_[c,s]_lig_ae", {
-			unicode: ["00C6", "00E6"],
-			alterations: [{ modifier: "1D2D", smallCapital: "1D01" }, { combining: "1DD4", modifier: "10783" }],
-			recipe: ["$"],
-		},
-		"lat_[c,s]_lig_ae__acute", {
-			unicode: ["01FC", "01FD"],
-		},
-		"lat_[c,s]_lig_ae__macron", {
-			unicode: ["01E2", "01E3"],
-		},
-		"lat_[s]_lig_ae_turned", {
-			unicode: ["1D02"],
-			recipe: ["$${arrow_left_circle}", "${lat_s_lig_ae}${arrow_left_circle}", "${lat_s_let_e_turned}${lat_s_let_a_turned}"],
-			symbol: { beforeLetter: "turned" },
-		},
-		"lat_[c,s]_lig_ao", {
-			unicode: ["A734", "A735"],
-			alterations: [{}, { combining: "1DD5" }]
-		},
-		"lat_[c,s]_lig_au", { unicode: ["A736", "A737"], recipe: ["$"] },
-		"lat_[c,s]_lig_av", {
-			unicode: ["A738", "A739"],
-			alterations: [{}, { combining: "1DD6" }]
-		},
-		"lat_[c,s]_lig_av__stroke_short", {
-			unicode: ["A73A", "A73B"]
-		},
-		"lat_[c,s]_lig_ay", { unicode: ["A73C", "A73D"] },
-		"lat_[s]_lig_db", { unicode: ["0238"] },
-		"lat_[s]_lig_et", {
-			unicode: ["0026"],
-			alterations: {
-				small: "FE60",
-				fullwidth: "FF06"
-			},
-			tags: ["амперсанд", "ampersand"],
-			groups: ["Latin Ligatures"]
-		},
-		"lat_[s]_lig_et_turned", {
-			unicode: ["214B"],
-			tags: ["перевёрнутый амперсанд", "turned ampersand"],
-			recipe: ["$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"],
-			symbol: { beforeLetter: "turned" },
-		},
-		"lat_[s]_lig_ie", { unicode: ["AB61"] },
-		"lat_[s]_lig_ff", { unicode: ["FB00"] },
-		"lat_[s]_lig_fi", { unicode: ["FB01"] },
-		"lat_[s]_lig_fl", { unicode: ["FB02"] },
-		"lat_[s]_lig_ffi", {
-			unicode: ["FB04"],
-			recipe: ["$", "${lat_s_lig_ff}i"]
-		},
-		"lat_[s]_lig_ffl", {
-			unicode: ["FB03"],
-			recipe: ["$", "${lat_s_lig_ff}l"]
-		},
-		"lat_[c,s]_lig_ij", { unicode: ["0132", "0133"] },
-		"lat_[s]_lig_lb", { unicode: ["2114"] },
-		"lat_[c,s]_lig_ll", { unicode: ["1EFA", "1EFB"] },
-		"lat_[c,s]_lig_oi", { unicode: ["01A2", "01A3"] },
-		"lat_[c,s]_lig_oe", {
-			unicode: ["0152", "0153"],
-			alterations: [{}, { modifier: "A7F9" }]
-		},
-		"lat_[s]_lig_oe_turned", {
-			unicode: ["1D14"],
-			recipe: ["$${arrow_left_circle}", "${lat_s_lig_oe}${arrow_left_circle}", "${lat_s_let_e_turned}o"],
-			symbol: { beforeLetter: "turned" },
-		},
-		"lat_[s]_lig_oe_turned__stroke_short", {
-			unicode: ["AB42"],
-			recipe: ["$${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe}${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe_turned}${stroke_short}", "${lat_s_let_e_turned}o${stroke_short}"],
-			symbol: { beforeLetter: "turned" },
-		},
-		"lat_[s]_lig_oe_turned__solidus_long", {
-			unicode: ["AB41"],
-			recipe: ["$${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe}${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe_turned}${solidus_long}", "${lat_s_let_e_turned}o${solidus_long}"],
-			symbol: { beforeLetter: "turned" },
-		},
-		"lat_[s]_lig_oe_inverted", {
-			unicode: ["AB40"],
-			recipe: ["$${arrow_up_ushaped}", "${lat_s_lig_oe}${arrow_up_ushaped}"],
-			symbol: { beforeLetter: "inverted" },
-		},
-		"lat_[c,s]_lig_oo", {
-			unicode: ["A74E", "A74F"]
-		},
-		"lat_[c,s]_lig_ou", {
-			unicode: ["0222", "0223"]
-		},
-		"lat_[s]_lig_pl", { unicode: ["214A"] },
-		"lat_[s]_lig_st", { unicode: ["FB05"], recipe: ["$", "${lat_s_let_s_long}t"] },
-		"lat_[s]_lig_ue", { unicode: ["1D6B"] },
-		"lat_[s]_lig_uo", { unicode: ["AB63"] },
-		"lat_[c,s]_lig_s_eszett", {
-			unicode: ["1E9E", "00DF"],
-			options: { useLetterLocale: True, fastKey: "<+ ~?Secondary" },
-			recipe: ["$", "${lat_s_let_s_long}${lat_[c,s]_let_s}", "${lat_s_let_s_long}${lat_[c,s]_let_z_ezh}"],
-			symbol: { letter: ["SS", "ss"] },
-		},
-		;
-		;
-		; * Latin Digraphs
-		;
-		;
-		"lat_[c,i,s]_dig_dz", {
-			unicode: ["01F1", "01F2", "01F3"],
-			symbol: { letter: "${lat_[c,c,s]_let_d}${lat_[c,s,s]_let_z}" }
-		},
-		"lat_[c,i,s]_dig_dz__caron", {
-			unicode: ["01C4", "01C5", "01C6"],
-			symbol: { letter: "${lat_[c,c,s]_let_d}${lat_[c,s,s]_let_z}" },
-		},
-		"lat_[s]_dig_dz__curl", {
-			unicode: ["02A5"],
-			recipe: ["$${arrow_left_ushaped}", "${lat_s_dig_dz}${arrow_left_ushaped}"],
 		},
 		;
 		;
@@ -5244,7 +5259,7 @@ LibRegistrate(this) {
 			unicode: ["00D0", "00F0"],
 			tags: [[], ["voiced dental fricative", "звонкий зубной щелевой согласный"]],
 			groups: [["Latin Accented"], ["Latin Accented", "IPA"]],
-			alterations: [{}, { combining: "1DD9", modifier: "1D9E" }],
+			alterations: [{ smallCapital: "1D06" }, { combining: "1DD9", modifier: "1D9E" }],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", ">! $"],
 				useLetterLocale: True, fastKey: "$?Secondary" },
@@ -6663,6 +6678,183 @@ LibRegistrate(this) {
 		},
 		"lat_[s]_let_z__tilde_overlay", {
 			unicode: ["1D76"]
+		},
+		;
+		;
+		; * Latin Ligatures
+		;
+		;
+		"lat_[c,s]_lig_aa", { unicode: ["A732", "A733"] },
+		"lat_[c,s]_lig_ae", {
+			unicode: ["00C6", "00E6"],
+			alterations: [{ modifier: "1D2D", smallCapital: "1D01" }, { combining: "1DD4", modifier: "10783" }],
+			recipe: ["$"],
+		},
+		"lat_[c,s]_lig_ae__acute", {
+			unicode: ["01FC", "01FD"],
+		},
+		"lat_[c,s]_lig_ae__macron", {
+			unicode: ["01E2", "01E3"],
+		},
+		"lat_[s]_lig_ae_turned", {
+			unicode: ["1D02"],
+			recipe: ["$${arrow_left_circle}", "${lat_s_lig_ae}${arrow_left_circle}", "${lat_s_let_e_turned}${lat_s_let_a_turned}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_lig_ao", {
+			unicode: ["A734", "A735"],
+			alterations: [{}, { combining: "1DD5" }]
+		},
+		"lat_[c,s]_lig_au", { unicode: ["A736", "A737"], recipe: ["$"] },
+		"lat_[c,s]_lig_av", {
+			unicode: ["A738", "A739"],
+			alterations: [{}, { combining: "1DD6" }]
+		},
+		"lat_[c,s]_lig_av__stroke_short", {
+			unicode: ["A73A", "A73B"]
+		},
+		"lat_[c,s]_lig_ay", { unicode: ["A73C", "A73D"] },
+		"lat_[s]_lig_db", { unicode: ["0238"] },
+		"lat_[s]_lig_et", {
+			unicode: ["0026"],
+			alterations: {
+				small: "FE60",
+				fullwidth: "FF06"
+			},
+			tags: ["амперсанд", "ampersand"],
+			groups: ["Latin Ligatures"]
+		},
+		"lat_[s]_lig_et_turned", {
+			unicode: ["214B"],
+			tags: ["перевёрнутый амперсанд", "turned ampersand"],
+			recipe: ["$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[s]_lig_ie", { unicode: ["AB61"] },
+		"lat_[s]_lig_ff", { unicode: ["FB00"] },
+		"lat_[s]_lig_fi", { unicode: ["FB01"] },
+		"lat_[s]_lig_fl", { unicode: ["FB02"] },
+		"lat_[s]_lig_ffi", {
+			unicode: ["FB04"],
+			recipe: ["$", "${lat_s_lig_ff}i"]
+		},
+		"lat_[s]_lig_ffl", {
+			unicode: ["FB03"],
+			recipe: ["$", "${lat_s_lig_ff}l"]
+		},
+		"lat_[c,s]_lig_ij", { unicode: ["0132", "0133"] },
+		"lat_[s]_lig_lb", { unicode: ["2114"] },
+		"lat_[c,s]_lig_oi", { unicode: ["01A2", "01A3"] },
+		"lat_[c,s]_lig_oe", {
+			unicode: ["0152", "0153"],
+			alterations: [{}, { modifier: "A7F9" }]
+		},
+		"lat_[s]_lig_oe_turned", {
+			unicode: ["1D14"],
+			recipe: ["$${arrow_left_circle}", "${lat_s_lig_oe}${arrow_left_circle}", "${lat_s_let_e_turned}o"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[s]_lig_oe_turned__stroke_short", {
+			unicode: ["AB42"],
+			recipe: ["$${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe}${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe_turned}${stroke_short}", "${lat_s_let_e_turned}o${stroke_short}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[s]_lig_oe_turned__solidus_long", {
+			unicode: ["AB41"],
+			recipe: ["$${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe}${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe_turned}${solidus_long}", "${lat_s_let_e_turned}o${solidus_long}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[s]_lig_oe_inverted", {
+			unicode: ["AB40"],
+			recipe: ["$${arrow_up_ushaped}", "${lat_s_lig_oe}${arrow_up_ushaped}"],
+			symbol: { beforeLetter: "inverted" },
+		},
+		"lat_[c,s]_lig_oo", {
+			unicode: ["A74E", "A74F"]
+		},
+		"lat_[c,s]_lig_ou", {
+			unicode: ["0222", "0223"]
+		},
+		"lat_[s]_lig_pl", { unicode: ["214A"] },
+		"lat_[s]_lig_st_long", {
+			unicode: ["FB05"],
+			recipe: ["$"],
+			symbol: { letter: "${lat_s_let_s_long}t" }
+		},
+		"lat_[s]_lig_st", { unicode: ["FB06"], recipe: ["$"] },
+		"lat_[s]_lig_ue", { unicode: ["1D6B"] },
+		"lat_[s]_lig_uo", { unicode: ["AB63"] },
+		"lat_[c,s]_lig_s_eszett", {
+			unicode: ["1E9E", "00DF"],
+			options: { useLetterLocale: True, fastKey: "<+ ~?Secondary" },
+			recipe: ["$", "${lat_s_let_s_long}${lat_[c,s]_let_s}", "${lat_s_let_s_long}${lat_[c,s]_let_z_ezh}"],
+			symbol: { letter: ["SS", "ss"] },
+		},
+		"lat_[c,s]_lig_vy", {
+			unicode: ["A760", "A761"]
+		},
+		;
+		;
+		; * Latin Digraphs
+		;
+		;
+		"lat_[c,i,s]_dig_dz", {
+			unicode: ["01F1", "01F2", "01F3"],
+			symbol: { letter: "${lat_[c,c,s]_let_d}${lat_[c,s,s]_let_z}" }
+		},
+		"lat_[c,i,s]_dig_dz__caron", {
+			unicode: ["01C4", "01C5", "01C6"],
+			symbol: { letter: "${lat_[c,c,s]_let_d}${lat_[c,s,s]_let_z}" },
+		},
+		"lat_[s]_dig_dz__curl", {
+			unicode: ["02A5"],
+			recipe: ["$${arrow_left_ushaped}", "${lat_s_dig_dz}${arrow_left_ushaped}"],
+		},
+		"lat_[c,i,s]_dig_lj", {
+			unicode: ["01C7", "01C8", "01C9"],
+			symbol: { letter: "${lat_[c,c,s]_let_l}${lat_[c,s,s]_let_j}" }
+		},
+		"lat_[s]_dig_feng", {
+			unicode: ["02A9"],
+			tags: ["voiceless velopharyngeal fricative", "велофарингальный фрикативный согласный"],
+			groups: [["Latin Digraphs", "IPA"]],
+			alterations: { modifier: "10790" },
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "<!>! $"],
+				useLetterLocale: True
+			},
+			recipe: ["fng", "f${lat_s_let_n_eng}"],
+		},
+		"lat_[s]_dig_feng__trill", {
+			unicode: ["1DF00"],
+			tags: ["voiceless velopharyngeal trill", "велофарингальный трелевой согласный"],
+			options: { useLetterLocale: "Origin" },
+			recipe: ["fng${arrow_up}", "f${lat_s_let_n_eng}${arrow_up}", "${lat_s_dig_feng}${arrow_up}"],
+		},
+		"lat_[s]_dig_ls", {
+			unicode: ["02AA"],
+		},
+		"lat_[s]_dig_lz", {
+			unicode: ["02AB"],
+		},
+		"lat_[c,i,s]_dig_nj", {
+			unicode: ["01CA", "01CB", "01CC"],
+			symbol: { letter: "${lat_[c,c,s]_let_n}${lat_[c,s,s]_let_j}" }
+		},
+		"lat_[s]_dig_tc__curl", {
+			unicode: ["02A8"],
+			recipe: ["$${arrow_left_ushaped}", "t${lat_s_let_c__curl}"],
+		},
+		"lat_[s]_dig_tch", {
+			unicode: ["02A7"],
+			recipe: ["$", "t${lat_s_let_s_sigma}"],
+		},
+		"lat_[s]_dig_th__solidus_long", {
+			unicode: ["1D7A"],
+			recipe: ["$${solidus_long}"],
+		},
+		"lat_[s]_dig_ts", {
+			unicode: ["02A6"],
 		},
 		;
 		;

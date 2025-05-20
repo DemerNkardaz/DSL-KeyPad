@@ -333,7 +333,7 @@ Class Locale {
 		lCase := entryData.case
 		lType := entryData.type
 		lPostfixes := entryData.postfixes
-		lVariant := ["digraph", "symbol"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
+		lVariant := ["digraph", "symbol", "sign"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
 		langCodes := ["en-US", "ru-RU", "en-US_alt", "ru-RU_alt"]
 		entry.titles := Map()
@@ -364,22 +364,19 @@ Class Locale {
 				if entry.symbol.HasOwnProp(letterBound) && StrLen(entry.symbol.%letterBound%) > 0 {
 					boundLink := Util.StrUpper(letterBound, 1)
 					entryBoundReference := entry.symbol.%letterBound%
-					if InStr(entry.symbol.%letterBound%, ",") {
-						splitted := StrSplit(Util.StrTrim(entry.symbol.%letterBound%), ",")
-						for i, bound in splitted {
-							l%boundLink% .= Locale.Read(pfx letterBound "_" bound, lang) (i < splitted.Length ? " " : "")
-						}
-					} else {
-						if RegExMatch(entryBoundReference, "\:\:(.*?)$", &match) {
+					splitted := StrSplit(Util.StrTrim(entry.symbol.%letterBound%), ",")
+
+					for i, bound in splitted {
+						if RegExMatch(bound, "\:\:(.*?)$", &match) {
 							index := Integer(match[1])
-							entryBoundReference := SubStr(entryBoundReference, 1, match.Pos(0) - 1)
-							l%boundLink% := Locale.VarSelect(Locale.Read(pfx letterBound "_" entryBoundReference, lang), index)
-						} else {
-							l%boundLink% := Locale.VarSelect(Locale.Read(pfx letterBound "_" entryBoundReference, lang), 1)
-						}
+							bound := SubStr(bound, 1, match.Pos(0) - 1)
+							l%boundLink% .= Locale.VarSelect(Locale.Read(pfx letterBound "_" bound, lang), index) (i < splitted.Length ? " " : "")
+						} else
+							l%boundLink% .= Locale.VarSelect(Locale.Read(pfx letterBound "_" bound, lang), 1) (i < splitted.Length ? " " : "")
 					}
 				}
 			}
+
 
 			lBeforeletter := StrLen(lBeforeletter) > 0 ? lBeforeletter " " : ""
 			lAfterletter := StrLen(lAfterletter) > 0 ? " " lAfterletter : ""

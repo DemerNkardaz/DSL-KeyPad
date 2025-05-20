@@ -1355,7 +1355,8 @@ Class ChrLib {
 				"lig", "ligature",
 				"dig", "digraph",
 				"num", "numeral",
-				"sym", "symbol"
+				"sym", "symbol",
+				"sign", "sign",
 			),
 			letter: "",
 			postfixes: []
