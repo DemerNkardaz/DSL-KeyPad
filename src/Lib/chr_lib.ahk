@@ -938,7 +938,9 @@ LibRegistrate(this) {
 				monospace: "1D690",
 				fullwidth: "FF47"
 			}],
-			options: { noCalc: True }
+			groups: [["Latin", "IPA"], ["Latin"]],
+			tags: [["voiced uvular plosive", "звонкий увулярный взрывной согласный"], []],
+			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
 		},
 		"lat_[c,s]_let_h", {
 			unicode: ["0048", "0068"],
@@ -978,7 +980,9 @@ LibRegistrate(this) {
 				monospace: "1D691",
 				fullwidth: "FF48"
 			}],
-			options: { noCalc: True }
+			groups: [["Latin", "IPA"], ["Latin"]],
+			tags: [["voiceless epiglottal fricative", "глухой эпиглоттальный спирант"], []],
+			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
 		},
 		"lat_[c,s]_let_i", {
 			unicode: ["0049", "0069"],
@@ -1025,7 +1029,8 @@ LibRegistrate(this) {
 			; }
 			; }, {}],
 			groups: [["Latin", "IPA"], ["Latin"]],
-			options: { noCalc: True, altLayoutKey: [">! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			tags: [["near-close near-front unrounded vowel", "ненапряжённый неогублённый гласный переднего ряда верхнего подъёма"], []],
+			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
 			recipe: [[Chr(0x0130) "/"], [Chr(0x0131) "${dot_above}"]],
 		},
 		"lat_[c,s]_let_j", {
@@ -1147,7 +1152,9 @@ LibRegistrate(this) {
 				monospace: "1D695",
 				fullwidth: "FF4C"
 			}],
-			options: { noCalc: True }
+			groups: [["Latin", "IPA"], ["Latin"]],
+			tags: [["voiced velar lateral approximant", "звонкий велярный латеральный аппроксимант"], []],
+			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
 		},
 		"lat_[c,s]_let_m", {
 			unicode: ["004D", "006D"],
@@ -1228,7 +1235,9 @@ LibRegistrate(this) {
 				monospace: "1D697",
 				fullwidth: "FF4E"
 			}],
-			options: { noCalc: True }
+			groups: [["Latin", "IPA"], ["Latin"]],
+			tags: [["voiced uvular nasal", "увулярный носовой согласный"], []],
+			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
 		},
 		"lat_[c,s]_let_o", {
 			unicode: ["004F", "006F"],
@@ -1386,7 +1395,9 @@ LibRegistrate(this) {
 				monospace: "1D69B",
 				fullwidth: "FF52"
 			}],
-			options: { noCalc: True }
+			groups: [["Latin", "IPA"], ["Latin"]],
+			tags: [["voiced uvular trill", "увулярный дрожащий согласный"], []],
+			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
 		},
 		"lat_[c,s]_let_s", {
 			unicode: ["0053", "0073"],
@@ -1660,7 +1671,9 @@ LibRegistrate(this) {
 				monospace: "1D6A2",
 				fullwidth: "FF59"
 			}],
-			options: { noCalc: True }
+			groups: [["Latin", "IPA"], ["Latin"]],
+			tags: [["near-close near-front rounded vowel", "ненапряжённый огублённый гласный переднего ряда верхнего подъёма"], []],
+			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
 		},
 		"lat_[c,s]_let_z", {
 			unicode: ["005A", "007A"],
@@ -4529,6 +4542,16 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True },
 			recipe: ["$in"],
 		},
+		"lat_[c,s]_let_a_schwa", {
+			unicode: ["018F", "0259"],
+			alterations: [{}, { modifier: "1D4A" }],
+			tags: [[], ["mid central vowel", "неогублённый гласный среднего ряда среднего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", ">!<! /E/"], useLetterLocale: True, fastKey: "/E/?Secondary"
+			},
+			recipe: ["/Sch/"],
+		},
 		"lat_[c,s]_let_h_hwair", {
 			unicode: ["01F6", "0195"],
 			options: { useLetterLocale: True, fastKey: "$?Primary" },
@@ -4589,7 +4612,10 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_o_open", {
 			unicode: ["0186", "0254"],
-			options: { referenceLocale: "o$" },
+			tags: [[], ["open-mid back rounded vowel", "огублённый гласный заднего ряда средне-нижнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			alterations: [{}, { modifier: "1D53" }],
+			options: { referenceLocale: "o$", layoutTitles: ["", True], altLayoutKey: ["", ">!<+ $"] },
 			recipe: ["$-"],
 			symbol: { beforeLetter: "open" },
 		},
@@ -4800,7 +4826,7 @@ LibRegistrate(this) {
 			tags: [[], ["open back unrounded vowel", "неогублённый гласный заднего ряда нижнего подъёма"]],
 			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {
-				layoutTitles: ["", True], altLayoutKey: ["", "$"], useLetterLocale: True
+				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True
 			},
 			recipe: ["$lp"],
 		},
@@ -4813,7 +4839,7 @@ LibRegistrate(this) {
 		"lat_s_let_a_alpha_barred", {
 			unicode: "AB30",
 			groups: ["Latino-Hellenic"],
-			options: { useLetterLocale: True },
+			options: { useLetterLocale: True, referenceLocale: "alpha$" },
 			recipe: ["$lp${emdash}", "${lat_s_let_a_alpha}${emdash}"],
 			symbol: { beforeLetter: "barred" },
 		},
@@ -4823,7 +4849,7 @@ LibRegistrate(this) {
 			tags: [[], ["open back rounded vowel", "огублённый гласный заднего ряда нижнего подъёма"]],
 			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {
-				layoutTitles: ["", True], altLayoutKey: ["", ">!<! $"], useLetterLocale: True
+				layoutTitles: ["", True], altLayoutKey: ["", "c*>! $"], useLetterLocale: True, referenceLocale: "alpha$"
 			},
 			recipe: ["$lp${arrow_left_circle}", "${lat_[c,s]_let_@_alpha}${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
@@ -4844,10 +4870,40 @@ LibRegistrate(this) {
 			unicode: ["0190", "025B"],
 			tags: [[], ["open-mid front unrounded vowel", "неогублённый гласный переднего ряда средне-нижнего подъёма"]],
 			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
+			alterations: [{}, { modifier: "1D4B" }],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True
 			},
 			recipe: ["$ps", "$3"],
+		},
+		"lat_[c,s]_let_e_epsilon_reversed", {
+			unicode: ["A7AB", "025C"],
+			tags: [[], ["open-mid central unrounded vowel", "неогублённый гласный среднего ряда средне-нижнего подъёма"]],
+			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
+			alterations: [{}, { modifier: "1D9F" }],
+			options: {
+				layoutTitles: ["", True], altLayoutKey: ["", "c*>! $"], useLetterLocale: True, referenceLocale: "epsilon$"
+			},
+			recipe: ["$ps${arrow_right_circle}", "${lat_[c,s]_let_@_epsilon}${arrow_right_circle}"],
+			symbol: { beforeLetter: "reversed" },
+		},
+		"lat_[s]_let_e_epsilon_closed", {
+			unicode: ["029A"],
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: True, referenceLocale: "epsilon$" },
+			recipe: ["$ps-", "${lat_[c,s]_let_@_epsilon}-"],
+			symbol: { beforeLetter: "closed" },
+		},
+		"lat_[s]_let_e_epsilon_closed_reversed", {
+			unicode: ["025E"],
+			tags: ["open-mid central rounded vowel", "огублённый гласный среднего ряда средне-нижнего подъёма"],
+			groups: ["Latino-Hellenic", "IPA"],
+			alterations: { modifier: "1078F" },
+			options: {
+				layoutTitles: True, altLayoutKey: ">!<+ $", useLetterLocale: True, referenceLocale: "epsilon$"
+			},
+			recipe: ["$ps-${arrow_right_circle}", "${lat_[c,s]_let_@_epsilon_closed}${arrow_right_circle}"],
+			symbol: { beforeLetter: "closed,reversed" },
 		},
 		"lat_s_let_f_phi", {
 			unicode: "0278",
@@ -4910,8 +4966,9 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_u_upsilon", {
 			unicode: ["01B1", "028A"],
-			tags: [[], ["near-close near-back vowel", "ненапряжённый огублённый гласный заднего ряда верхнего подъёма"]],
+			tags: [[], ["near-close near-back rounded vowel", "ненапряжённый огублённый гласный заднего ряда верхнего подъёма"]],
 			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
+			alterations: [{}, { modifier: "1DB7" }],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True
 			},
@@ -4924,11 +4981,42 @@ LibRegistrate(this) {
 		;
 		"lat_[c,s]_let_a_turned", {
 			unicode: ["2C6F", "0250"],
+			tags: [[], ["near-open central vowel", "ненапряжённый неогублённый гласный среднего ряда нижнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: { layoutTitles: ["", True], altLayoutKey: ["", ">!<! $"] },
+			alterations: [{}, { modifier: "1D44" }],
 			recipe: ["$${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
 		},
 		"lat_[c,s]_let_e_turned", {
 			unicode: ["018E", "01DD"],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[s]_let_e_reversed", {
+			unicode: ["0258"],
+			tags: ["close-mid central unrounded vowel", "неогублённый гласный среднего ряда средне-верхнего подъёма"],
+			groups: ["Latin", "IPA"],
+			options: { layoutTitles: True, altLayoutKey: "c*>!<! $" },
+			alterations: { modifier: "1078E" },
+			recipe: ["$${arrow_right_circle}"],
+			symbol: { beforeLetter: "reversed" },
+		},
+		"lat_[c,s]_let_m_turned", {
+			unicode: ["019C", "026F"],
+			tags: [[], ["close back unrounded vowel", "неогублённый гласный заднего ряда верхнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: { layoutTitles: ["", True], altLayoutKey: ["", ">!<! /U/"] },
+			alterations: [{}, { modifier: "1D5A" }],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_let_v_turned", {
+			unicode: ["0245", "028C"],
+			tags: [[], ["open-mid back unrounded vowel", "неогублённый гласный заднего ряда средне-нижнего подъёма"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: { layoutTitles: ["", True], altLayoutKey: ["", ">! $"] },
+			alterations: [{}, { modifier: "1DBA" }],
 			recipe: ["$${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
 		},
@@ -4979,7 +5067,9 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_a__diaeresis", {
 			unicode: ["00C4", "00E4"],
-			options: { fastKey: "<+ $?Secondary" },
+			tags: [[], ["open central unrounded vowel", "открытый средний неокруглённый гласный"]],
+			groups: [[], ["Latin Accented", "IPA"]],
+			options: { fastKey: "<+ $?Secondary", layoutTitles: ["", True], altLayoutKey: ["", ">!<+ $"] },
 			alterations: [{}, { combining: "1DF2" }]
 		},
 		"lat_[c,s]_let_a__grave", {
@@ -5174,7 +5264,7 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_c_reversed__dot_middle", {
 			unicode: ["A73E", "A73F"],
-			recipe: ["$${arrow_left_circle}${interpunct}"],
+			recipe: ["$${arrow_right_circle}${interpunct}"],
 			symbol: { beforeLetter: "reversed" }
 		},
 		"lat_[c,s]_let_c__common_hook", {
@@ -5582,7 +5672,7 @@ LibRegistrate(this) {
 			tags: [[], ["close central unrounded vowel", "неогублённый гласный среднего ряда верхнего подъёма"]],
 			groups: [["Latin Accented"], ["Latin Accented", "IPA"]],
 			alterations: [{ smallCapital: "1D7B" }, {}],
-			options: { altLayoutKey: ["", ">!<! $"], layoutTitles: ["", True] },
+			options: { altLayoutKey: ["", ">! $"], layoutTitles: ["", True] },
 		},
 		"lat_[c,s]_let_i__ogonek", {
 			unicode: ["012E", "012F"],
@@ -6000,7 +6090,11 @@ LibRegistrate(this) {
 			},
 		},
 		"lat_[c,s]_let_o__tilde_overlay", {
-			unicode: ["019F", "0275"]
+			unicode: ["019F", "0275"],
+			tags: [[], ["close-mid central rounded vowel", "огублённый гласный среднего ряда средне-верхнего подъёма"]],
+			alterations: [{}, { modifier: "1DB1" }],
+			groups: [["Latin Accented"], ["Latin Accented", "IPA"]],
+			options: { altLayoutKey: ["", "c*>!<! $"], layoutTitles: ["", True] }
 		},
 		"lat_[c,s]_let_o__circumflex__acute", {
 			unicode: ["1ED0", "1ED1"],
@@ -6417,8 +6511,9 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_u__stroke_long", {
 			unicode: ["0244", "0289"],
 			tags: [[], ["close central rounded vowel", "огублённый гласный среднего ряда верхнего подъёма"]],
+			alterations: [{}, { modifier: "1DB6" }],
 			groups: [["Latin Accented"], ["Latin Accented", "IPA"]],
-			options: { altLayoutKey: ["", ">!<! $"], layoutTitles: ["", True] }
+			options: { altLayoutKey: ["", ">!<!<+ $"], layoutTitles: ["", True] }
 		},
 		"lat_[c,s]_let_u__solidus_long", {
 			unicode: ["A7B8", "A7B9"]
@@ -6688,6 +6783,9 @@ LibRegistrate(this) {
 		"lat_[c,s]_lig_ae", {
 			unicode: ["00C6", "00E6"],
 			alterations: [{ modifier: "1D2D", smallCapital: "1D01" }, { combining: "1DD4", modifier: "10783" }],
+			groups: [[], ["Latin Ligatures", "IPA"]],
+			tags: [[], ["near-open front unrounded vowel", "ненапряжённый неогублённый гласный переднего ряда нижнего подъёма"]],
+			options: { altLayoutKey: ["", ">!<!<+ /A/"], layoutTitles: [False, True] },
 			recipe: ["$"],
 		},
 		"lat_[c,s]_lig_ae__acute", {
@@ -6699,6 +6797,7 @@ LibRegistrate(this) {
 		"lat_[s]_lig_ae_turned", {
 			unicode: ["1D02"],
 			recipe: ["$${arrow_left_circle}", "${lat_s_lig_ae}${arrow_left_circle}", "${lat_s_let_e_turned}${lat_s_let_a_turned}"],
+			alterations: [{}, { modifier: "1D46" }],
 			symbol: { beforeLetter: "turned" },
 		},
 		"lat_[c,s]_lig_ao", {
@@ -6747,7 +6846,10 @@ LibRegistrate(this) {
 		"lat_[c,s]_lig_oi", { unicode: ["01A2", "01A3"] },
 		"lat_[c,s]_lig_oe", {
 			unicode: ["0152", "0153"],
-			alterations: [{}, { modifier: "A7F9" }]
+			groups: [["Latin Ligatures", "IPA"], ["Latin Ligatures", "IPA"]],
+			tags: [["open front rounded vowel", "огублённый гласный переднего ряда нижнего подъёма"], ["open-mid front rounded vowel", "огублённый гласный переднего ряда средне-нижнего подъёма"]],
+			options: { altLayoutKey: ["c*>!<!<+ /O/", ">!<!<+ /O/"], showOnAlt: ["smallCapital", ""], layoutTitles: [True, True] },
+			alterations: [{ smallCapital: "0276" }, { modifier: "A7F9" }]
 		},
 		"lat_[s]_lig_oe_turned", {
 			unicode: ["1D14"],
