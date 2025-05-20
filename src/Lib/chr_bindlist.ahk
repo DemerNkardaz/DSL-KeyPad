@@ -874,8 +874,8 @@ bindingMaps := Map(
 				"LeftBracket", Map("+:Caps", "left_brace"),
 				"RightBracket", Map("+:Caps", "right_brace"),
 				"A", Map(
-					"<^>!:Caps", "lat_s_let_a_alpha[,_turned]",
-					"<^>!>+:Caps", "lat_s_let_a_alpha[,_turned]::modifier",
+					"<^>!:Caps", "lat_s_let_a_alpha[_turned,]",
+					"<^>!>+:Caps", "lat_s_let_a_alpha[_turned,]::modifier",
 					"<^>!<+:Caps", "lat_s_let_a__diaeresis",
 					"<^>!<!:Caps", "lat_s_let_a_turned",
 					"<^>!<!>+:Caps", "lat_s_let_a_turned::modifier",
@@ -897,8 +897,8 @@ bindingMaps := Map(
 					">+:Caps", "lat_s_let_d::modifier",
 				),
 				"E", Map(
-					"<^>!:Caps", "lat_s_let_e_epsilon[,_reversed]",
-					"<^>!>+:Caps", "lat_s_let_e_epsilon[,_reversed]::modifier",
+					"<^>!:Caps", "lat_s_let_e_epsilon[_reversed,]",
+					"<^>!>+:Caps", "lat_s_let_e_epsilon[_reversed,]::modifier",
 					"<^>!<+:Caps", "lat_s_let_e_epsilon_closed_reversed",
 					"<^>!<+>+:Caps", "lat_s_let_e_epsilon_closed_reversed::modifier",
 					"<^>!<!:Caps", "lat_s_let_[e_reversed,a_schwa]",
