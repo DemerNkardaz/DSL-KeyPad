@@ -1,27 +1,25 @@
 Class Cfg {
 	static sections := [
 		"Settings", [
-			"Unicode_Web_Resource", "SymblCC",
-			"Unicode_Web_Resource_Use_System_Language", "False",
+			"User_Language", "",
+			"Validate_With_CaretPos", "True",
+			"Turn_Off_Autocheck_Update", "False",
+			"Mode_Fast_Keys", "True",
+			"Mode_Fast_Keys_Over", "",
 			"LaTeX_Mode", "Text",
 			"HTML_Mode", "Decimal",
-			"Input_Script", "Default",
 			"Layout_Latin", "QWERTY",
 			"Layout_Cyrillic", "ЙЦУКЕН",
 			"Layout_Remapping", "False",
 			"Active_User_Bindings", "None",
-			"Mode_Fast_Keys", "True",
-			"Mode_Fast_Keys_Over", "",
 			"Binds_Autodisable_Timer", "1",
 			"Binds_Autodisable_Type", "hour",
-			"Skip_Group_Messages", "False",
 			"XCompose_Add_Recipe_Prefix", "False",
-			"User_Language", "",
-			"Validate_With_CaretPos", "True",
 			"F13F24", "False",
-			"First_Message", "True",
-			"Turn_Off_Autocheck_Update", "False",
 			"Bind_Register_Tooltip_Progress_Bar", "True",
+			"Unicode_Web_Resource", "SymblCC",
+			"Unicode_Web_Resource_Use_System_Language", "False",
+			"First_Message", "True",
 		],
 		"PanelGUI", [
 			"List_Items_Font_Size", "",
@@ -521,7 +519,6 @@ Class Cfg {
 			"FastKeysOver", this.Get("Mode_Fast_Keys_Over", "Settings", ""),
 			"HTMLMode", this.Get("HTML_Mode", "Settings", "Decimal"),
 			"LaTeXMode", this.Get("LaTeX_Mode", "Settings", "Text"),
-			"SkipGroupMessage", this.Get("Skip_Group_Messages", "Settings", False, "bool"),
 		]
 	}
 

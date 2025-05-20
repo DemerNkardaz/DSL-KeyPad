@@ -310,7 +310,7 @@ Class Changelog {
 		static fallbackURL := App.refsHeads["main"] "/CHANGELOG.md"
 		failed := False
 
-		languageCode := Language.Get()
+		languageCode := Language.Get(, , 2)
 		http := ComObject("WinHttp.WinHttpRequest.5.1")
 		http.SetTimeouts(1500, 1500, 1500, 1500)
 		http.Open("GET", url, True)

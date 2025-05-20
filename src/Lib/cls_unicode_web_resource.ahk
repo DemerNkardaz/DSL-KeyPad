@@ -44,7 +44,7 @@ Class UnicodeWebResource {
 		resource := UnicodeWebResource.resources.Has(resource)
 			? UnicodeWebResource.resources.Get(resource)
 			: UnicodeWebResource.resources.Get("SymblCC")
-		lang := useSystemLanguage ? Language.GetSys() : Language.Get()
+		lang := useSystemLanguage ? Language.GetSys(2) : Language.Get(, , 2)
 
 		resource := StrReplace(resource, "${language}", lang)
 		resource := StrReplace(resource, "${Prompt}", code)
@@ -93,7 +93,7 @@ Class UnicodeBlockWebResource {
 			resourceName := RegExMatch(resourceName, "i)^Wik") ? "Wiktionary (En)" : "SymblCC"
 
 		resource := UnicodeBlockWebResource.resources.Get(resourceName)
-		lang := useSystemLanguage ? Language.GetSys() : Language.Get()
+		lang := useSystemLanguage ? Language.GetSys(2) : Language.Get(, , 2)
 
 		switch resourceName {
 			case "SymblCC", "Codepoints":

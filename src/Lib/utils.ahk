@@ -446,7 +446,6 @@ IsGuiOpen(title) {
 ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := App.Title("+status+version"), SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True
 		return
-	LanguageCode := Language.Get()
 	Muting := Mute ? " Mute" : ""
 	Ico := MessageIcon == "Info" ? "Iconi" :
 		MessageIcon == "Warning" ? "Icon!" :

@@ -606,7 +606,6 @@ Class Panel {
 
 	static Panel(redraw := False) {
 		UISets := this.GetUISets()
-		languageCode := Language.Get()
 
 		title := App.Title("+status+version") " — " Locale.Read("gui_panel")
 
@@ -915,7 +914,6 @@ Class Panel {
 
 	static AddCharactersTab(options) {
 		UISets := this.GetUISets()
-		languageCode := Language.Get()
 		panelWindow := options.winObj
 
 		if !options.hasOwnProp("previewType") {

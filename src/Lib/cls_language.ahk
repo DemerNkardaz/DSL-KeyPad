@@ -62,19 +62,20 @@ Class Language {
 		}
 	}
 
-	static Get(language := "", getTitle := False) {
+	static Get(language := "", getTitle := False, endLen := 0) {
 		userLanguage := StrLen(language) > 0 ? language : Cfg.Get("User_Language")
 		userLanguage := !IsSpace(userLanguage) ? userLanguage : this.GetSys()
 
 		if this.Validate(userLanguage) {
-			return getTitle ? this.supported.Get(userLanguage).title : userLanguage
+			return getTitle ? this.supported.Get(userLanguage).title : endLen > 0 ? SubStr(userLanguage, 1, endLen) : userLanguage
 		} else {
-			return getTitle ? this.supported.Get("en-US").title : "en-US"
+			return getTitle ? this.supported.Get("en-US").title : endLen > 0 ? SubStr("en-US", 1, endLen) : "en-US"
 		}
 	}
 
-	static GetSys() {
-		return SubStr(RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName"), 1, 2)
+	static GetSys(endLen := 0) {
+		regVal := RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName")
+		return endLen > 0 ? SubStr(RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName"), 1, endLen) : regVal
 	}
 }
 

@@ -2783,6 +2783,12 @@ LibRegistrate(this) {
 			options: { fastKey: "<!<+ -" },
 			recipe: ["0-"],
 		},
+		"horbar", {
+			unicode: "2015",
+			tags: ["horbar", "горизонтальная черта"],
+			groups: ["Smelting Special"],
+			recipe: ["h-"],
+		},
 		"hyphen_minus", {
 			unicode: "002D",
 			alterations: {
@@ -2858,6 +2864,17 @@ LibRegistrate(this) {
 				["${prime_single_reversed×2}"],
 				["${prime_single_reversed×3}", "${prime_double_reversed}${prime_single_reversed}"],
 			],
+		},
+		;
+		;
+		; * Miscellaneous Technical
+		;
+		;
+		"benzene", {
+			unicode: "232C",
+			tags: ["benzene", "бензол"],
+			groups: ["Miscellaneous Technical"],
+			recipe: ["C${digit_6::subscript}H${digit_6::subscript}", "C6H6"],
 		},
 		;
 		;
@@ -3154,6 +3171,12 @@ LibRegistrate(this) {
 			options: { altSpecialKey: "NumSub", fastKey: "<+ -" },
 			recipe: ["min"],
 		},
+		"minusdot", {
+			unicode: "2213",
+			tags: ["dot minus", "минус с точкой"],
+			groups: ["Smelting Special"],
+			recipe: ["-."],
+		},
 		"plusminus", {
 			unicode: "00B1",
 			tags: ["plus minus", "плюс-минус"],
@@ -3167,6 +3190,24 @@ LibRegistrate(this) {
 			groups: ["Special Characters", "Smelting Special", "Special Combinations"],
 			options: { altSpecialKey: "NumAdd NumSub" },
 			recipe: ["-+", "${minus}${plus}"],
+		},
+		"plusdot", {
+			unicode: "2214",
+			tags: ["dot plus", "плюс с точкой"],
+			groups: ["Smelting Special"],
+			recipe: ["+."],
+		},
+		"plusequals_above", {
+			unicode: "2A71",
+			tags: ["plus with equals above", "плюс с равно сверху"],
+			groups: ["Smelting Special"],
+			recipe: ["+="],
+		},
+		"plusequals_below", {
+			unicode: "2A72",
+			tags: ["plus with equals below", "плюс с равно снизу"],
+			groups: ["Smelting Special"],
+			recipe: ["=+"],
 		},
 		"multiplication", {
 			unicode: "00D7",
@@ -3197,6 +3238,55 @@ LibRegistrate(this) {
 			},
 			options: { noCalc: True },
 		},
+		"nottilde", {
+			unicode: "2241",
+			tags: ["не эквивалентно", "not tilde"],
+			groups: ["Smelting Special"],
+			recipe: ["/~"],
+		},
+		"tilderising_dots", {
+			unicode: "2A6B",
+			tags: ["tilde operator with rising dots", "тильда точками"],
+			groups: ["Smelting Special"],
+			recipe: [".~."],
+		},
+		"homothetic", {
+			unicode: "223B",
+			tags: ["гомотетия", "homothetic"],
+			groups: ["Smelting Special"],
+			recipe: ["~:"],
+		},
+		"asymptotically_equal", {
+			unicode: "2243",
+			tags: ["асимптотически равно", "asymptotically equal"],
+			groups: ["Smelting Special"],
+			recipe: ["-~", "${minus}~"],
+		},
+		"tilde_tripple", {
+			unicode: "224B",
+			tags: ["тройная тильда", "triple tilde"],
+			groups: ["Smelting Special"],
+			recipe: ["~~~", "3~"],
+		},
+		"minustilde", {
+			unicode: "2242",
+			tags: ["minus tilde", "тильда с минусом"],
+			groups: ["Smelting Special"],
+			recipe: ["~-", "~${minus}"],
+		},
+		"tilde_reversed", {
+			unicode: "223D",
+			tags: ["обратная  тильда", "reversed tilde"],
+			groups: ["Smelting Special", "Special Fast RShift"],
+			options: { fastKey: "~" },
+			recipe: ["${arrow_left_circle}~"],
+		},
+		"tilde_reversed_equals", {
+			unicode: "22CD",
+			tags: ["обратная тильда равно", "reversed tilde equal"],
+			groups: ["Smelting Special"],
+			recipe: ["=${arrow_left_circle}~", "=${tilde_reversed}"],
+		},
 		"less_than", {
 			unicode: "003C",
 			alterations: {
@@ -3205,6 +3295,25 @@ LibRegistrate(this) {
 			},
 			options: { noCalc: True },
 		},
+		"less_or_equals", {
+			unicode: "2264",
+			tags: ["less than or equals", "меньше или равно"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: ">+ [<]" },
+			recipe: ["<="],
+		},
+		"neither_less_nor_equals", {
+			unicode: "2270",
+			tags: ["neither less than nor equals", "ни меньше ни равно"],
+			groups: ["Smelting Special"],
+			recipe: ["/<="],
+		},
+		"less_over_equals", {
+			unicode: "2266",
+			tags: ["less than over equals", "меньше над равно"],
+			groups: ["Smelting Special"],
+			recipe: ["<==", "${less_or_equals}="],
+		},
 		"greater_than", {
 			unicode: "003E",
 			alterations: {
@@ -3212,6 +3321,73 @@ LibRegistrate(this) {
 				fullwidth: "FF1E"
 			},
 			options: { noCalc: True },
+		},
+		"greater_or_equals", {
+			unicode: "2265",
+			tags: ["greater than or equals", "больше или равно"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: ">+ [>]" },
+			recipe: [">="],
+		},
+		"neither_greater_nor_equals", {
+			unicode: "2271",
+			tags: ["neither greater than nor equals", "ни больше ни равно"],
+			groups: ["Smelting Special"],
+			recipe: ["/>="],
+		},
+		"greater_over_equals", {
+			unicode: "2267",
+			tags: ["greater than over equals", "больше над равно"],
+			groups: ["Smelting Special"],
+			recipe: [">==", "${greater_or_equals}="],
+		},
+		"inverted_lazy_s", {
+			unicode: "223E",
+			tags: ["inverted lazy s", "перевёрнутая плавная s"],
+			groups: ["Smelting Special"],
+			recipe: ["s${arrow_right_circle}"],
+		},
+		"n_ary_summation", {
+			unicode: "2211",
+			tags: ["n-ary summation", "summation", "знак суммирования"],
+			groups: ["Smelting Special", "Math"],
+			alterations: { doubleStruck: "2140" },
+			options: { altLayoutKey: "S" },
+			recipe: ["sum", "сум"],
+		},
+		"modulo_two_sum", {
+			unicode: "2A0A",
+			tags: ["modulo two sum"],
+			groups: ["Smelting Special"],
+			recipe: ["msum", "мсум"],
+		},
+		"n_ary_product", {
+			unicode: "220F",
+			tags: ["n-ary product", "product", "знак произведения"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: ">+ P" },
+			recipe: ["prod", "прод"],
+		},
+		"n_ary_union", {
+			unicode: "222A",
+			tags: ["n-ary union", "union", "знак объединения"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "U" },
+			recipe: ["uni", "обд"],
+		},
+		"delta", {
+			unicode: "2206",
+			tags: ["increment", "delta", "дельта"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "D" },
+			recipe: ["del", "дел"],
+		},
+		"nabla", {
+			unicode: "2207",
+			tags: ["nabla", "набла"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "N" },
+			recipe: ["nab", "наб"],
 		},
 		"integral", {
 			unicode: "222B", LaTeX: ["\int"],
@@ -3237,6 +3413,50 @@ LibRegistrate(this) {
 			tags: ["quadruple integral", "четверной интеграл"],
 			groups: ["Smelting Special", "Math"],
 			recipe: ["${integral×4}", "qint", "чинт"],
+		},
+		"contour_integral", {
+			unicode: "222E", LaTeX: ["\oint"],
+			tags: ["contour integral", "интеграл по контуру"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "I" },
+			recipe: ["oint", "кинт"],
+		},
+		"surface_integral", {
+			unicode: "222F", LaTeX: ["\oiint"], LaTeXPackage: "esint",
+			tags: ["surface integral", "интеграл по поверхности"],
+			groups: ["Smelting Special"],
+			recipe: ["oiint", "киинт", "${contour_integral×2}"],
+		},
+		"volume_integral", {
+			unicode: "2230", LaTeX: ["\oiiint"], LaTeXPackage: "esint",
+			tags: ["volume integral", "тройной по объёму"],
+			groups: ["Smelting Special"],
+			recipe: ["otint", "ктинт", "${contour_integral×3}"],
+		},
+		"summation_integral", {
+			unicode: "2A0B",
+			tags: ["summation with integral", "суммирования с интегралом"],
+			groups: ["Smelting Special"],
+			recipe: ["sumint", "суминт", "${n_ary_summation}${integral}"],
+		},
+		"square_root", {
+			unicode: "221A", LaTeX: ["\sqrt"],
+			tags: ["square root", "квадратный корень"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "r" },
+			recipe: ["sqrt", "квкр"],
+		},
+		"cube_root", {
+			unicode: "221B", LaTeX: ["\sqrt[3]"],
+			tags: ["cube root", "кубический корень"],
+			groups: ["Smelting Special"],
+			recipe: ["cbrt", "кубкр"],
+		},
+		"fourth_root", {
+			unicode: "221C", LaTeX: ["\sqrt[4]"],
+			tags: ["fourth root", "корень четвёртой степени"],
+			groups: ["Smelting Special"],
+			recipe: ["qurt", "чткр"],
 		},
 		"left_parenthesis", {
 			unicode: "0028",

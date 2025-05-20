@@ -348,7 +348,7 @@ Class ChrLib {
 	}
 
 	static Print() {
-		lang := Language.Get()
+		lang := Language.Get(, , 2)
 		printPath := App.paths.temp "\printed_pairs.html"
 		tableRows := ""
 
