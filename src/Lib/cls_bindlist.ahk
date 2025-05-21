@@ -55,18 +55,36 @@ Class BindList {
 
 			for scanCode, keyNamesArray in layout {
 				if keyNamesArray.Length = 2 {
+					for key, value in mapping[fromSub][bindingsName]["Flat"] {
+						if !InStr(key, ":") {
+							valB := value
+							mapping[fromSub][bindingsName]["Flat"].Delete(key)
+							mapping[fromSub][bindingsName]["Flat"].Set(key ":Caps", valB)
+						}
+					}
+
+					for parent, bindKey in mapping[fromSub][bindingsName]["Moded"] {
+						for key, value in bindKey {
+							if !InStr(key, ":") {
+								valB := value
+								mapping[fromSub][bindingsName]["Moded"][parent].Delete(key)
+								mapping[fromSub][bindingsName]["Moded"][parent].Set(key ":Caps", valB)
+							}
+						}
+					}
+
 					for i, keyName in keyNamesArray {
 						if mapping[fromSub][bindingsName]["Flat"].Has(keyName) {
 							otherI := (i = 1) ? 2 : 1
 							otherKeyName := keyNamesArray[otherI]
 
-							mapping[fromSub][bindingsName]["Flat"].Set(otherKeyName, mapping[fromSub][bindingsName]["Flat"].Get(keyName))
+							; mapping[fromSub][bindingsName]["Flat"].Set(otherKeyName, mapping[fromSub][bindingsName]["Flat"].Get(keyName))
 
 						} else if mapping[fromSub][bindingsName]["Moded"].Has(keyName) {
 							otherI := (i = 1) ? 2 : 1
 							otherKeyName := keyNamesArray[otherI]
 
-							mapping[fromSub][bindingsName]["Moded"].Set(otherKeyName, mapping[fromSub][bindingsName]["Moded"].Get(keyName))
+							; mapping[fromSub][bindingsName]["Moded"].Set(otherKeyName, mapping[fromSub][bindingsName]["Moded"].Get(keyName))
 						}
 					}
 				}
@@ -107,7 +125,7 @@ Class BindList {
 		for i, inter in interArray {
 			if i = 1
 				continue
-			output := output.DeepMergeWith(inter)
+			output := output.DeepMergeBinds(inter)
 		}
 
 		return output

@@ -434,6 +434,7 @@ Class Panel {
 					"Cyrillic Accented", "",
 					"Futhork Runes", "",
 					"Glagolitic Letters", "",
+					"Shavian Ligatures", "",
 					"Smelting Special", "",
 					"Extra Symbolistics", "",
 					"Alchemical", "",
@@ -541,6 +542,8 @@ Class Panel {
 					"Ugaritic", "",
 					"Old Persian", "",
 					"IPA", "",
+					"Deseret", "",
+					"Shavian", "Shavian Ligatures", "",
 					"Mathematical", "",
 					"Math", "",
 					"Math Spaces"
@@ -573,6 +576,8 @@ Class Panel {
 					"Ugaritic", Locale.Read("symbol_ugaritic"),
 					"Old Persian", Locale.Read("symbol_old_persian"),
 					"IPA", Locale.Read("symbol_ipa"),
+					"Deseret", Locale.Read("symbol_deseret"),
+					"Shavian", Locale.Read("symbol_shavian"),
 					"Mathematical", Locale.Read("symbol_maths")
 				),
 			}),

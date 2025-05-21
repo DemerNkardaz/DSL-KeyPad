@@ -297,7 +297,7 @@ Class Locale {
 
 		cyrillicTasgScriptAtStart := False
 
-		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"]) {
+		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["deseret"]) {
 			useLetterLocale := True
 			cyrillicTasgScriptAtStart := True
 		}
@@ -344,13 +344,12 @@ Class Locale {
 		for _, langCode in langCodes {
 			isAlt := InStr(langCode, "_alt")
 			lang := isAlt ? RegExReplace(langCode, "_alt") : langCode
-			postLetter := useLetterLocale ?
-				(Locale.Read((RegExMatch(useLetterLocale, "i)^(.*?)\$", &endMatch) > 0 ?
-					RegExReplace(ref, "i)^(.*?" RegExReplace(endMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1") :
-					useLetterLocale = "Origin" ?
-						RegExReplace(ref, "i)^(.*?)__.*", "$1") :
-					ref) "_LTL", lang)) :
-				letter
+
+			interLetter := useLetterLocale ? (
+				useLetterLocale = "Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref
+			) "_LTL" : ""
+
+			postLetter := useLetterLocale ? Locale.Read(interLetter) : letter
 
 			lBeforeletter := ""
 			lAfterletter := ""

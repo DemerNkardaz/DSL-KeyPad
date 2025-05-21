@@ -12,6 +12,7 @@ Map.Prototype.DefineProp("Values", { Call: _MapValues })
 Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
 Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
 Map.Prototype.DefineProp("DeepMergeWith", { Call: _MapDeepMergeWith })
+Map.Prototype.DefineProp("DeepMergeBinds", { Call: _MapDeepMergeBinds })
 Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
@@ -85,9 +86,11 @@ _ArrayHasValue(this, valueToFind, &indexID?) {
 	return false
 }
 
-_ArrayHasRegEx(this, valueToFind, &indexID?, boundRegEx := []) {
+_ArrayHasRegEx(this, valueToFind, &indexID?, boundRegEx := [], skipValues := []) {
 	for index, value in this {
-		if value is String && (value = valueToFind ||
+		if skipValues.Length > 0 && skipValues.HasValue(value) {
+			continue
+		} else if value is String && (value = valueToFind ||
 			(valueToFind ~= "[" RegExEscape(regExChars) "]" && value ~= valueToFind) ||
 			(value ~= "[" RegExEscape(regExChars) "]" && valueToFind ~= value) ||
 			boundRegEx.Length = 2 && valueToFind ~= boundRegEx[1] value boundRegEx[2]
@@ -238,6 +241,38 @@ _MapDeepMergeWith(this, maps*) {
 	return this
 }
 
+_MapDeepMergeBinds(this, maps*) {
+	for mapIdx, mapToMerge in maps {
+		if mapToMerge.Count = 0
+			continue
+		for newKey, newVal in mapToMerge {
+			newKeyBase := RegExMatch(newKey, "^([^:]+)", &baseMatch) ? baseMatch[1] : newKey
+
+			keyToRemove := ""
+			for existingKey in this {
+				existingKeyBase := RegExMatch(existingKey, "^([^:]+)", &existingBaseMatch) ? existingBaseMatch[1] : existingKey
+
+				if (existingKeyBase = newKeyBase) {
+					if (InStr(newKey, ":") > 0) {
+						keyToRemove := existingKey
+						break
+					}
+				}
+			}
+
+			if (keyToRemove != "") {
+				this.Delete(keyToRemove)
+			}
+
+			if this.Has(newKey) && this[newKey] is Map && newVal is Map {
+				this[newKey].DeepMergeBinds(newVal)
+			} else {
+				this.Set(newKey, newVal)
+			}
+		}
+	}
+	return this
+}
 
 MapInsert(MapObj, Pairs*) {
 	keyCount := 0

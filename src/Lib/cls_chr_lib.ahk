@@ -1019,7 +1019,7 @@ Class ChrLib {
 		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
 			if refinedEntry.groups.Length = 0 {
 				hasPostfix := refinedEntry.data.postfixes.Length > 0
-				if ["hellenic", "latin", "cyrillic"].HasValue(refinedEntry.data.script) {
+				if ArrayMerge(this.scriptsValidator, ["hellenic", "latin", "cyrillic"]).HasValue(refinedEntry.data.script) {
 					refinedEntry.groups :=
 						(StrLen(refinedEntry.data.type) > 0 && ["digraph", "ligature", "numeral"].HasValue(refinedEntry.data.type) ?
 							[StrTitle(refinedEntry.data.script " " refinedEntry.data.type "s")] :
@@ -1184,10 +1184,12 @@ Class ChrLib {
 		} else if RegExMatch(entryName, "i)^(ugaritic|sidetic)", &match) {
 			scriptName := StrReplace(match[1], "_", " ")
 			refinedEntry.symbol.font := "Noto Sans " StrTitle(scriptName)
-		} else if RegExMatch(entryName, "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)") {
+		} else if entryName ~= "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)" {
 			refinedEntry.symbol.font := "Kurinto Sans"
-		} else if InStr(entryName, "phoenician") {
+		} else if entryName ~= "i)^(phoenician|shavian)" {
 			refinedEntry.symbol.font := "Segoe UI Historic"
+		} else if entryName ~= "i)^(deseret)" {
+			refinedEntry.symbol.font := "Segoe UI Symbol"
 		}
 
 		for group in refinedEntry.groups {
@@ -1334,6 +1336,8 @@ Class ChrLib {
 
 	static scriptsValidator := [
 		"phoenician",
+		"deseret",
+		"shavian",
 	]
 
 	static NameDecompose(entryName) {

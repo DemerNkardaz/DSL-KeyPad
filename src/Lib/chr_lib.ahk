@@ -4544,7 +4544,7 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_a_schwa", {
 			unicode: ["018F", "0259"],
-			alterations: [{}, { modifier: "1D4A" }],
+			alterations: [{}, { modifier: "1D4A", subscript: "2094" }],
 			tags: [[], ["mid central vowel", "неогублённый гласный среднего ряда среднего подъёма"]],
 			groups: [[], ["Latin", "IPA"]],
 			options: {
@@ -7020,7 +7020,7 @@ LibRegistrate(this) {
 		},
 		"cyr_[c,s]_let_z_dzelo_reversed", {
 			unicode: ["A644", "A645"],
-			options: { useLetterLocale: "dzelo$" },
+			options: { useLetterLocale: True, referenceLocale: "dzelo$" },
 			recipe: ["\зел\${arrow_left}", "${cyr_[c,s]_let_z_dzelo}${arrow_left}"],
 			symbol: { beforeLetter: "reversed" }
 		},
@@ -10942,6 +10942,383 @@ LibRegistrate(this) {
 			tags: ["угаритский разделитель слов", "ugaritic word divider"],
 			groups: ["Ugaritic"],
 			options: { altLayoutKey: "Space" },
+		},
+		;
+		;
+		; * Deseret ABC
+		;
+		;
+		"deseret_[c,s]_let_a_short", {
+			unicode: ["10408", "10430"],
+			options: { altLayoutKey: "$" },
+			symbol: { beforeLetter: "short" },
+		},
+		"deseret_[c,s]_let_a_long", {
+			unicode: ["10402", "1042A"],
+			options: { altLayoutKey: "<+ $" },
+			symbol: { beforeLetter: "long" },
+		},
+		"deseret_[c,s]_let_a_ah_short", {
+			unicode: ["10409", "10431"],
+			options: { altLayoutKey: ">! /A/" },
+			symbol: { beforeLetter: "short", letter: ["Ah", "ah"] },
+		},
+		"deseret_[c,s]_let_a_ah_long", {
+			unicode: ["10403", "1042B"],
+			options: { altLayoutKey: ">!>+ /A/" },
+			symbol: { beforeLetter: "long", letter: ["Ah", "ah"] },
+		},
+		"deseret_[c,s]_let_a_ow", {
+			unicode: ["1040D", "10435"],
+			options: { altLayoutKey: "<! /A/", letter: ["Ow", "ow"] },
+		},
+		"deseret_[c,s]_let_b_bee", {
+			unicode: ["10412", "1043A"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_c_chee", {
+			unicode: ["10415", "1043D"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_d_dee", {
+			unicode: ["10414", "1043C"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_d_thee", {
+			unicode: ["1041C", "10444"],
+			options: { altLayoutKey: "<! $", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_e_short", {
+			unicode: ["10407", "1042F"],
+			options: { altLayoutKey: "$" },
+			symbol: { beforeLetter: "short" },
+		},
+		"deseret_[c,s]_let_e_long", {
+			unicode: ["10401", "10429"],
+			options: { altLayoutKey: "<+ $" },
+			symbol: { beforeLetter: "long" },
+		},
+		"deseret_[c,s]_let_e_ew", {
+			unicode: ["10427", "1044F"],
+			options: { altLayoutKey: "<! /E/" },
+			symbol: { beforeLetter: "short", letter: ["Ew", "ew"] },
+		},
+		"deseret_[c,s]_let_f_ef", {
+			unicode: ["10419", "10441"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_g_gay", {
+			unicode: ["10418", "10440"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_h", {
+			unicode: ["10410", "10438"],
+			options: { altLayoutKey: "$" },
+		},
+		"deseret_[c,s]_let_i_short", {
+			unicode: ["10406", "1042E"],
+			options: { altLayoutKey: "$" },
+			symbol: { beforeLetter: "short" },
+		},
+		"deseret_[c,s]_let_i_long", {
+			unicode: ["10400", "10428"],
+			options: { altLayoutKey: ">+ $" },
+			symbol: { beforeLetter: "long" },
+		},
+		"deseret_[c,s]_let_i_ay", {
+			unicode: ["1040C", "10434"],
+			options: { altLayoutKey: ">! /I/" },
+			symbol: { beforeLetter: "long", letter: ["Ay", "ay"] },
+		},
+		"deseret_[c,s]_let_j_jee", {
+			unicode: ["10416", "1043E"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_k_kay", {
+			unicode: ["10417", "1043F"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_l_el", {
+			unicode: ["10422", "1044A"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_m_em", {
+			unicode: ["10423", "1044B"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_n_en", {
+			unicode: ["10424", "1044C"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_n_eng", {
+			unicode: ["10425", "1044D"],
+			options: { altLayoutKey: ">! $", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_o_short", {
+			unicode: ["1040A", "10432"],
+			options: { altLayoutKey: "$" },
+			symbol: { beforeLetter: "short" },
+		},
+		"deseret_[c,s]_let_o_long", {
+			unicode: ["10404", "1042C"],
+			options: { altLayoutKey: ">+ $" },
+			symbol: { beforeLetter: "long" },
+		},
+		"deseret_[c,s]_let_o_oi", {
+			unicode: ["10426", "1044E"],
+			options: { altLayoutKey: ">! /O/" },
+			symbol: { beforeLetter: "short", letter: ["Oi", "oi"] },
+		},
+		"deseret_[c,s]_let_u_oo_short", {
+			unicode: ["1040B", "10433"],
+			options: { altLayoutKey: "/U/" },
+			symbol: { beforeLetter: "short", letter: ["Oo", "oo"] },
+		},
+		"deseret_[c,s]_let_u_oo_long", {
+			unicode: ["10405", "1042D"],
+			options: { altLayoutKey: ">! /U/" },
+			symbol: { beforeLetter: "long", letter: ["Oo", "oo"] },
+		},
+		"deseret_[c,s]_let_p_pee", {
+			unicode: ["10411", "10439"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_r_er", {
+			unicode: ["10421", "10449"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_s_es", {
+			unicode: ["1041D", "10445"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_s_esh", {
+			unicode: ["1041F", "10447"],
+			options: { altLayoutKey: "<! $", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_t_tee", {
+			unicode: ["10413", "1043B"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_t_eth", {
+			unicode: ["1041B", "10443"],
+			options: { altLayoutKey: ">! $", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_v_vee", {
+			unicode: ["1041A", "10442"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_w_wu", {
+			unicode: ["1040E", "10436"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_y_yee", {
+			unicode: ["1040F", "10437"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_z_zee", {
+			unicode: ["1041E", "10446"],
+			options: { altLayoutKey: "$", useLetterLocale: True },
+		},
+		"deseret_[c,s]_let_z_zhee", {
+			unicode: ["10420", "10448"],
+			options: { altLayoutKey: "<! $", useLetterLocale: True },
+		},
+		;
+		;
+		; * Shavian ABC
+		;
+		;
+		"shavian_[n]_let_a_ash", {
+			unicode: ["10468"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_a_ice", {
+			unicode: ["10472"],
+			options: { altLayoutKey: "<! $" },
+		},
+		"shavian_[n]_let_a_ado", {
+			unicode: ["10469"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"shavian_[n]_let_a_up", {
+			unicode: ["10473"],
+			options: { altLayoutKey: "<+ $" },
+		},
+		"shavian_[n]_let_a_ah", {
+			unicode: ["1046D"],
+			options: { altLayoutKey: ">!>+ $" },
+		},
+		"shavian_[n]_let_b_bib", {
+			unicode: ["1045A"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_c_church", {
+			unicode: ["10457"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_d_dead", {
+			unicode: ["1045B"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_d_they", {
+			unicode: ["1045E"],
+			options: { altLayoutKey: "<! $" },
+		},
+		"shavian_[n]_let_e_egg", {
+			unicode: ["10467"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_e_age", {
+			unicode: ["10471"],
+			options: { altLayoutKey: "<! $" },
+		},
+		"shavian_[n]_let_f_fee", {
+			unicode: ["10453"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_g_gag", {
+			unicode: ["1045C"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_h_ha_ha", {
+			unicode: ["10463"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_i_if", {
+			unicode: ["10466"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_i_eat", {
+			unicode: ["10470"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"shavian_[n]_let_j_judge", {
+			unicode: ["10461"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_k_kick", {
+			unicode: ["10452"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_l_loll", {
+			unicode: ["10464"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_m_mime", {
+			unicode: ["10465"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_n_nun", {
+			unicode: ["1046F"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_n_hung", {
+			unicode: ["10459"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"shavian_[n]_let_o_on", {
+			unicode: ["1046A"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_o_oak", {
+			unicode: ["10474"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"shavian_[n]_let_o_awe", {
+			unicode: ["10477"],
+			options: { altLayoutKey: ">!>+ $" },
+		},
+		"shavian_[n]_let_p_peep", {
+			unicode: ["10450"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_r_roar", {
+			unicode: ["1046E"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_s_so", {
+			unicode: ["10455"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_s_sure", {
+			unicode: ["10456"],
+			options: { altLayoutKey: "<! $" },
+		},
+		"shavian_[n]_let_t_tot", {
+			unicode: ["10451"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_t_thigh", {
+			unicode: ["10454"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"shavian_[n]_let_u_wool", {
+			unicode: ["1046B"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_u_ooze", {
+			unicode: ["10475"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"shavian_[n]_let_v_vow", {
+			unicode: ["1045D"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_y_yea", {
+			unicode: ["10458"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_w_woe", {
+			unicode: ["10462"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_z_zoo", {
+			unicode: ["1045F"],
+			options: { altLayoutKey: "$" },
+		},
+		"shavian_[n]_let_z_measure", {
+			unicode: ["10460"],
+			options: { altLayoutKey: "<! $" },
+		},
+		"shavian_[n]_lig_are", {
+			unicode: ["10478"],
+			options: { altLayoutKey: ">!<! /A/" },
+			recipe: ["${shavian_[n]_let_a_ah}${shavian_[n]_let_r_roar}"],
+		},
+		"shavian_[n]_lig_or", {
+			unicode: ["10479"],
+			options: { altLayoutKey: ">!<! /O/" },
+			recipe: ["${shavian_[n]_let_o_awe}${shavian_[n]_let_r_roar}"],
+		},
+		"shavian_[n]_lig_air", {
+			unicode: ["1047A"],
+			options: { altLayoutKey: ">!<! /E/" },
+			recipe: ["${shavian_[n]_let_e_egg×2}${shavian_[n]_let_r_roar}"],
+		},
+		"shavian_[n]_lig_err", {
+			unicode: ["1047B"],
+			options: { altLayoutKey: ">!<!<+ /E/" },
+			recipe: ["${shavian_[n]_let_e_egg}${shavian_[n]_let_a_ado}${shavian_[n]_let_r_roar}"],
+		},
+		"shavian_[n]_lig_array", {
+			unicode: ["1047C"],
+			options: { altLayoutKey: ">!<! /R/" },
+			recipe: ["${shavian_[n]_let_a_ado}${shavian_[n]_let_r_roar}"],
+		},
+		"shavian_[n]_lig_ear", {
+			unicode: ["1047D"],
+			options: { altLayoutKey: ">!<!<+ /R/" },
+			recipe: ["${shavian_[n]_let_i_if}${shavian_[n]_let_a_ado}${shavian_[n]_let_r_roar}"],
+		},
+		"shavian_[n]_lig_ian", {
+			unicode: ["1047E"],
+			options: { altLayoutKey: ">!<! /I/" },
+			recipe: ["${shavian_[n]_let_i_if}${shavian_[n]_let_a_ado}"],
+		},
+		"shavian_[n]_lig_yew", {
+			unicode: ["1047F"],
+			options: { altLayoutKey: ">!<! /J/" },
+			recipe: ["${shavian_[n]_let_y_yea}${shavian_[n]_let_u_ooze}"],
 		},
 		;
 		;

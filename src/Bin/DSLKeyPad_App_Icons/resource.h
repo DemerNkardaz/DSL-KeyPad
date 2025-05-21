@@ -49,6 +49,8 @@
 #define IDI_LYDIAN 145
 #define IDI_SIDETIC 146
 #define IDI_CYPRIOT_SYLLABARY 147
+#define IDI_DESERET 148
+#define IDI_SHAVIAN 149
 
 // Next default values for new objects
 //

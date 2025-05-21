@@ -53,6 +53,8 @@ Class App {
 			"lydian",
 			"sidetic",
 			"cypriot_syllabary",
+			"deseret",
+			"shavian",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

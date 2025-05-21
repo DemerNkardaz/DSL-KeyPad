@@ -550,9 +550,11 @@ Class KeyboardBinder {
 		static matchEn := "(?!.*[а-яА-ЯёЁѣѢіІ])[a-zA-Z]+"
 		layout := this.GetCurrentLayoutMap()
 		output := Map()
+		capsOnlyKeys := []
 
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
+
 				if (binds is Array && binds.Length == 1 && binds[1] is String && RegExMatch(binds[1], "\[(.*?)\]", &match)) ||
 					(binds is String && RegExMatch(binds, "\[(.*?)\]", &match)) {
 					splitVariants := StrSplit(match[1], ",")
@@ -589,6 +591,8 @@ Class KeyboardBinder {
 							interCombo := RegExReplace(interCombo, keyLetter, scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
 
+							if rule = "Caps"
+								capsOnlyKeys.Push(interCombo)
 
 							if !output.Has(interCombo) {
 								try {
@@ -599,7 +603,7 @@ Class KeyboardBinder {
 								} catch as e {
 									MsgBox "Error in Origin Combo: " combo "`n Combo: " interCombo "`n Rule: " rule "`n Error: " e.Message
 								}
-							} else {
+							} else if !capsOnlyKeys.HasValue(interCombo) {
 								if output.Get(interCombo).Length == 2 {
 									if output[interCombo] is Func {
 										interArr := [[], []]
@@ -1008,6 +1012,22 @@ Class Scripter {
 				bindings: ["IPA"],
 				uiid: "IPA",
 				icons: ["ipa"],
+			},
+			"Deseret", {
+				preview: [Util.UnicodeToChars("10414", "1042F", "10445", "10428", "10449", "1042F", "1043B", "0020", "10408", "1044A", "10441", "10430", "1043A", "1042F", "1043B")],
+				fonts: ["Segoe UI Symbol"],
+				locale: "alt_mode_deseret",
+				bindings: ["Deseret"],
+				uiid: "Deseret",
+				icons: ["deseret"],
+			},
+			"Shavian", {
+				preview: [Util.UnicodeToChars("10456", "10471", "1045D", "1047E", "1046F", "0020", "10468", "10464", "10453", "10469", "1045A", "10467", "10451")],
+				fonts: ["Segoe UI Historic"],
+				locale: "alt_mode_shavian",
+				bindings: ["Shavian"],
+				uiid: "Shavian",
+				icons: ["shavian"],
 			},
 			"Math", {
 				preview: [Util.UnicodeToChars("2211", "2212", "002B", "00B1", "00D7", "00F7", "0025", "2205", "2237", "2247", "22B9", "222D", "2206", "2207", "22D8", "22D9")],
