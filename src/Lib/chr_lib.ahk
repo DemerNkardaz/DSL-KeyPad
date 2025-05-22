@@ -10164,196 +10164,134 @@ LibRegistrate(this) {
 		; * Ancient South Arabian
 		;
 		;
-		"south_arabian_let_he", {
-			unicode: "10A60",
-			tags: ["южноаравийская буква Хе", "south arabian letter He"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "H" },
-		},
-		"south_arabian_let_lamedh", {
-			unicode: "10A61",
-			tags: ["южноаравийская буква Ламед", "south arabian letter Lamedh"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "L" },
-		},
-		"south_arabian_let_heth", {
-			unicode: "10A62",
-			tags: ["южноаравийская буква Хет", "south arabian letter Heth"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">+ H" },
-		},
-		"south_arabian_let_mem", {
-			unicode: "10A63",
-			tags: ["южноаравийская буква Мем", "south arabian letter Mem"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "M" },
-		},
-		"south_arabian_let_qoph", {
-			unicode: "10A64",
-			tags: ["южноаравийская буква Куф", "south arabian letter Qoph"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "Q" },
-		},
-		"south_arabian_let_waw", {
-			unicode: "10A65",
-			tags: ["южноаравийская буква Уав", "south arabian letter Waw"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "W" },
-		},
-		"south_arabian_let_shin", {
-			unicode: "10A66",
-			tags: ["южноаравийская буква Шин", "south arabian letter Shin"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">+ S" },
-		},
-		"south_arabian_let_resh", {
-			unicode: "10A67",
-			tags: ["южноаравийская буква Реш", "south arabian letter Resh"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "R" },
-		},
-		"south_arabian_let_beth", {
-			unicode: "10A68",
-			tags: ["южноаравийская буква Бет", "south arabian letter Beth"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "B" },
-		},
-		"south_arabian_let_taw", {
-			unicode: "10A69",
-			tags: ["южноаравийская буква Тау", "south arabian letter Taw"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "T" },
-		},
-		"south_arabian_let_sat", {
-			unicode: "10A6A",
-			tags: ["южноаравийская буква Сат", "south arabian letter Sat"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "S" },
-		},
-		"south_arabian_let_kaph", {
-			unicode: "10A6B",
-			tags: ["южноаравийская буква Каф", "south arabian letter Kaph"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "K" },
-		},
-		"south_arabian_let_nun", {
-			unicode: "10A6C",
-			tags: ["южноаравийская буква Нун", "south arabian letter Nun"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "N" },
-		},
-		"south_arabian_let_kheth", {
-			unicode: "10A6D",
-			tags: ["южноаравийская буква Хеф", "south arabian letter Kheth"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">! H], [X" },
-		},
-		"south_arabian_let_sadhe", {
-			unicode: "10A6E",
-			tags: ["южноаравийская буква Садхе", "south arabian letter Sadhe"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">! S" },
-		},
-		"south_arabian_let_samekh", {
-			unicode: "10A6F",
-			tags: ["южноаравийская буква Самек", "south arabian letter Samekh"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "<+ S" },
-		},
-		"south_arabian_let_fe", {
-			unicode: "10A70",
-			tags: ["южноаравийская буква Фе", "south arabian letter Fe"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "F" },
-		},
-		"south_arabian_let_alef", {
+		"south_arabian_n_let_a_alef", {
 			unicode: "10A71",
-			tags: ["южноаравийская буква Алеф", "south arabian letter Alef"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "A" },
+			options: { altLayoutKey: "$" },
 		},
-		"south_arabian_let_ayn", {
+		"south_arabian_n_let_a_ayn", {
 			unicode: "10A72",
-			tags: ["южноаравийская буква Аин", "south arabian letter Ayn"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">! A" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"south_arabian_let_dhadhe", {
-			unicode: "10A73",
-			tags: ["южноаравийская буква Дадхе", "south arabian letter Dhadhe"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">! D" },
+		"south_arabian_n_let_b_beth", {
+			unicode: "10A68",
+			options: { altLayoutKey: "$" },
 		},
-		"south_arabian_let_gimel", {
-			unicode: "10A74",
-			tags: ["южноаравийская буква Гимель", "south arabian letter Gimel"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "G" },
-		},
-		"south_arabian_let_daleth", {
+		"south_arabian_n_let_d_daleth", {
 			unicode: "10A75",
-			tags: ["южноаравийская буква Далет", "south arabian letter Daleth"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "D" },
+			options: { altLayoutKey: "$" },
 		},
-		"south_arabian_let_ghayn", {
-			unicode: "10A76",
-			tags: ["южноаравийская буква Гаин", "south arabian letter Ghayn"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "Y" },
+		"south_arabian_n_let_d_dhadhe", {
+			unicode: "10A73",
+			options: { altLayoutKey: ">! $" },
 		},
-		"south_arabian_let_teth", {
-			unicode: "10A77",
-			tags: ["южноаравийская буква Тет", "south arabian letter Teth"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">! T" },
-		},
-		"south_arabian_let_zayn", {
-			unicode: "10A78",
-			tags: ["южноаравийская буква Зайн", "south arabian letter Zayn"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "Z" },
-		},
-		"south_arabian_let_dhaleth", {
+		"south_arabian_n_let_d_dhaleth", {
 			unicode: "10A79",
-			tags: ["южноаравийская буква Дхалет", "south arabian letter Dhaleth"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">!>+ D" },
+			options: { altLayoutKey: ">!>+ $" },
 		},
-		"south_arabian_let_yodh", {
-			unicode: "10A7A",
-			tags: ["южноаравийская буква Йод", "south arabian letter Yodh"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "J" },
+		"south_arabian_n_let_f_fe", {
+			unicode: "10A70",
+			options: { altLayoutKey: "$" },
 		},
-		"south_arabian_let_thaw", {
-			unicode: "10A7B",
-			tags: ["южноаравийская буква Тав", "south arabian letter Thaw"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: ">!>+ T" },
+		"south_arabian_n_let_g_gimel", {
+			unicode: "10A74",
+			options: { altLayoutKey: "$" },
 		},
-		"south_arabian_let_theth", {
+		"south_arabian_n_let_g_ghayn", {
+			unicode: "10A76",
+			options: { altLayoutKey: ">! $" },
+		},
+		"south_arabian_n_let_h_he", {
+			unicode: "10A60",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_h_heth", {
+			unicode: "10A62",
+			options: { altLayoutKey: ">+ $" },
+		},
+		"south_arabian_n_let_h_kheth", {
+			unicode: "10A6D",
+			options: { altLayoutKey: ">! $ | X" },
+		},
+		"south_arabian_n_let_k_kaph", {
+			unicode: "10A6B",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_l_lamedh", {
+			unicode: "10A61",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_m_mem", {
+			unicode: "10A63",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_n_nun", {
+			unicode: "10A6C",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_q_qoph", {
+			unicode: "10A64",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_r_resh", {
+			unicode: "10A67",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_s_sat", {
+			unicode: "10A6A",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_s_samekh", {
+			unicode: "10A6F",
+			options: { altLayoutKey: "<+ $" },
+		},
+		"south_arabian_n_let_s_shin", {
+			unicode: "10A66",
+			options: { altLayoutKey: "<! $" },
+		},
+		"south_arabian_n_let_s_sadhe", {
+			unicode: "10A6E",
+			options: { altLayoutKey: ">! $" },
+		},
+		"south_arabian_n_let_t_taw", {
+			unicode: "10A69",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_t_theth", {
 			unicode: "10A7C",
-			tags: ["южноаравийская буква Тхет", "south arabian letter Theth"],
-			groups: ["South Arabian"],
-			options: { altLayoutKey: "<+ T" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"south_arabian_let_numeral_one", {
+		"south_arabian_n_let_t_teth", {
+			unicode: "10A77",
+			options: { altLayoutKey: ">! $" },
+		},
+		"south_arabian_n_let_t_thaw", {
+			unicode: "10A7B",
+			options: { altLayoutKey: ">!>+ $" },
+		},
+		"south_arabian_n_let_w_waw", {
+			unicode: "10A65",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_y_yodh", {
+			unicode: "10A7A",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_let_z_zayn", {
+			unicode: "10A78",
+			options: { altLayoutKey: "$" },
+		},
+		"south_arabian_n_num_one", {
 			unicode: "10A7D",
-			tags: ["южноаравийская числовая буква один", "south arabian numeral letter one"],
 			groups: ["South Arabian"],
 			options: { altLayoutKey: ">! 1" },
 		},
-		"south_arabian_let_numeral_fifty", {
+		"south_arabian_n_num_fifty", {
 			unicode: "10A7E",
-			tags: ["южноаравийская числовая буква пятьдесят", "south arabian numeral letter fifty"],
 			groups: ["South Arabian"],
 			options: { altLayoutKey: ">! 5" },
 		},
-		"south_arabian_let_numeral_bracket", {
+		"south_arabian_n_sym_numeral_bracket", {
 			unicode: "10A7F",
-			tags: ["южноаравийская числовая скобка", "south arabian numeral bracket"],
-			groups: ["South Arabian"],
 			options: { altLayoutKey: ">! 0" },
 		},
 		;
@@ -10361,195 +10299,134 @@ LibRegistrate(this) {
 		; * Ancient North Arabian
 		;
 		;
-		"north_arabian_let_heh", {
+		"north_arabian_n_let_a_alef", {
+			unicode: "10A91",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_a_ain", {
+			unicode: "10A92",
+			options: { altLayoutKey: ">! $" },
+		},
+		"north_arabian_n_let_b_beh", {
+			unicode: "10A88",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_d_dal", {
+			unicode: "10A95",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_d_thal", {
+			unicode: "10A99",
+			options: { altLayoutKey: ">! $" },
+		},
+		"north_arabian_n_let_d_dad", {
+			unicode: "10A93",
+			options: { altLayoutKey: ">!>+ $" },
+		},
+		"north_arabian_n_let_f_feh", {
+			unicode: "10A90",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_g_geem", {
+			unicode: "10A94",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_g_ghain", {
+			unicode: "10A96",
+			options: { altLayoutKey: ">! $" },
+		},
+		"north_arabian_n_let_h_heh", {
 			unicode: "10A80",
-			tags: ["североаравийская буква Хе", "old north arabian letter Heh"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "H" },
+			options: { altLayoutKey: "$" },
 		},
-		"north_arabian_let_lam", {
-			unicode: "10A81",
-			tags: ["североаравийская буква Лам", "old north arabian letter Lam"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "L" },
-		},
-		"north_arabian_let_hah", {
+		"north_arabian_n_let_h_hah", {
 			unicode: "10A82",
-			tags: ["североаравийская буква Хах", "old north arabian letter Hah"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">! H" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"north_arabian_let_meem", {
+		"north_arabian_n_let_h_khah", {
+			unicode: "10A8D",
+			options: { altLayoutKey: ">+ $" },
+		},
+		"north_arabian_n_let_k_kaf", {
+			unicode: "10A8B",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_l_lam", {
+			unicode: "10A81",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_m_meem", {
 			unicode: "10A83",
-			tags: ["североаравийская буква Мим", "old north arabian letter Meem"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "M" },
+			options: { altLayoutKey: "$" },
 		},
-		"north_arabian_let_qaf", {
+		"north_arabian_n_let_n_noon", {
+			unicode: "10A8C",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_q_qaf", {
 			unicode: "10A84",
-			tags: ["североаравийская буква Каф", "old north arabian letter Qaf"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "Q" },
+			options: { altLayoutKey: "$" },
 		},
-		"north_arabian_let_waw", {
-			unicode: "10A85",
-			tags: ["североаравийская буква Вав", "old north arabian letter Waw"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "W" },
-		},
-		"north_arabian_let_es_2", {
-			unicode: "10A86",
-			tags: ["североаравийская буква Эс-2", "old north arabian letter Es-2"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">+ S" },
-		},
-		"north_arabian_let_reh", {
+		"north_arabian_n_let_r_reh", {
 			unicode: "10A87",
-			tags: ["североаравийская буква Рех", "old north arabian letter Reh"],
-			groups: ["North Arabian"],
 			options: { altLayoutKey: "R" },
 		},
-		"north_arabian_let_beh", {
-			unicode: "10A88",
-			tags: ["североаравийская буква Бех", "old north arabian letter Beh"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "B" },
-		},
-		"north_arabian_let_teh", {
-			unicode: "10A89",
-			tags: ["североаравийская буква Тех", "old north arabian letter Teh"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "T" },
-		},
-		"north_arabian_let_es_1", {
-			unicode: "10A8A",
-			tags: ["североаравийская буква Эс-1", "old north arabian letter Es-1"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "S" },
-		},
-		"north_arabian_let_kaf", {
-			unicode: "10A8B",
-			tags: ["североаравийская буква Каф", "old north arabian letter Kaf"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "K" },
-		},
-		"north_arabian_let_noon", {
-			unicode: "10A8C",
-			tags: ["североаравийская буква Нун", "old north arabian letter Noon"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "N" },
-		},
-		"north_arabian_let_khah", {
-			unicode: "10A8D",
-			tags: ["североаравийская буква Хах", "old north arabian letter Khah"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">+ H" },
-		},
-		"north_arabian_let_sad", {
-			unicode: "10A8E",
-			tags: ["североаравийская буква Сад", "old north arabian letter Sad"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">! S" },
-		},
-		"north_arabian_let_es_3", {
+		"north_arabian_n_let_s_es", {
 			unicode: "10A8F",
-			tags: ["североаравийская буква Эс-3", "old north arabian letter Es-3"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "<+ S" },
+			options: { altLayoutKey: "$" },
 		},
-		"north_arabian_let_feh", {
-			unicode: "10A90",
-			tags: ["североаравийская буква Фех", "old north arabian letter Feh"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "F" },
+		"north_arabian_n_let_s_esh", {
+			unicode: "10A8A",
+			options: { altLayoutKey: "<! $" },
 		},
-		"north_arabian_let_alef", {
-			unicode: "10A91",
-			tags: ["североаравийская буква Алеф", "old north arabian letter Alef"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "A" },
+		"north_arabian_n_let_s_sh", {
+			unicode: "10A86",
+			options: { altLayoutKey: "<+ $" },
 		},
-		"north_arabian_let_ain", {
-			unicode: "10A92",
-			tags: ["североаравийская буква Айн", "old north arabian letter Ain"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">! A" },
+		"north_arabian_n_let_s_sad", {
+			unicode: "10A8E",
+			options: { altLayoutKey: ">! $" },
 		},
-		"north_arabian_let_dad", {
-			unicode: "10A93",
-			tags: ["североаравийская буква Дад", "old north arabian letter Dad"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">! D" },
+		"north_arabian_n_let_t_teh", {
+			unicode: "10A89",
+			options: { altLayoutKey: "$" },
 		},
-		"north_arabian_let_geem", {
-			unicode: "10A94",
-			tags: ["североаравийская буква Джим", "old north arabian letter Geem"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "G" },
-		},
-		"north_arabian_let_dal", {
-			unicode: "10A95",
-			tags: ["североаравийская буква Даль", "old north arabian letter Dal"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "D" },
-		},
-		"north_arabian_let_ghain", {
-			unicode: "10A96",
-			tags: ["североаравийская буква Гайн", "old north arabian letter Ghain"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "Y" },
-		},
-		"north_arabian_let_tah", {
+		"north_arabian_n_let_t_tah", {
 			unicode: "10A97",
-			tags: ["североаравийская буква Тах", "old north arabian letter Tah"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">! T" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"north_arabian_let_zain", {
-			unicode: "10A98",
-			tags: ["североаравийская буква Зайн", "old north arabian letter Zain"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "Z" },
-		},
-		"north_arabian_let_thal", {
-			unicode: "10A99",
-			tags: ["североаравийская буква Заль", "old north arabian letter Thal"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">!>+ D" },
-		},
-		"north_arabian_let_yeh", {
-			unicode: "10A9A",
-			tags: ["североаравийская буква Йех", "old north arabian letter Yeh"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "J" },
-		},
-		"north_arabian_let_theh", {
-			unicode: "10A9B",
-			tags: ["североаравийская буква Тех", "old north arabian letter Theh"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: ">!>+ T" },
-		},
-		"north_arabian_let_zah", {
+		"north_arabian_n_let_t_zah", {
 			unicode: "10A9C",
-			tags: ["североаравийская буква Зах", "old north arabian letter Zah"],
-			groups: ["North Arabian"],
-			options: { altLayoutKey: "<+ Z" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"north_arabian_num_one", {
+		"north_arabian_n_let_t_theh", {
+			unicode: "10A9B",
+			options: { altLayoutKey: ">!>+ $" },
+		},
+		"north_arabian_n_let_w_waw", {
+			unicode: "10A85",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_y_yeh", {
+			unicode: "10A9A",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_let_z_zain", {
+			unicode: "10A98",
+			options: { altLayoutKey: "$" },
+		},
+		"north_arabian_n_num_one", {
 			unicode: "10A9D",
-			tags: ["североаравийская числовая буква один", "old north arabian number one"],
 			groups: ["North Arabian"],
 			options: { altLayoutKey: ">! 1" },
 		},
-		"north_arabian_num_ten", {
+		"north_arabian_n_num_ten", {
 			unicode: "10A9E",
-			tags: ["североаравийская числовая буква десять", "old north arabian number ten"],
 			groups: ["North Arabian"],
 			options: { altLayoutKey: ">! 2" },
 		},
-		"north_arabian_num_twenty", {
+		"north_arabian_n_num_twenty", {
 			unicode: "10A9F",
-			tags: ["североаравийская числовая буква двадцать", "old north arabian number twenty"],
 			groups: ["North Arabian"],
 			options: { altLayoutKey: ">! 3" },
 		},

@@ -1020,10 +1020,11 @@ Class ChrLib {
 			if refinedEntry.groups.Length = 0 {
 				hasPostfix := refinedEntry.data.postfixes.Length > 0
 				if ArrayMerge(this.scriptsValidator, ["hellenic", "latin", "cyrillic"]).HasValue(refinedEntry.data.script) {
+					script := StrReplace(refinedEntry.data.script, "_", " ")
 					refinedEntry.groups :=
 						(StrLen(refinedEntry.data.type) > 0 && ["digraph", "ligature", "numeral"].HasValue(refinedEntry.data.type) ?
-							[StrTitle(refinedEntry.data.script " " refinedEntry.data.type "s")] :
-							[StrTitle(refinedEntry.data.script (hasPostfix ? " Accented" : ""))]
+							[StrTitle(script " " refinedEntry.data.type "s")] :
+							[StrTitle(script (hasPostfix ? " Accented" : ""))]
 						)
 				}
 
@@ -1336,6 +1337,8 @@ Class ChrLib {
 
 	static scriptsValidator := [
 		"phoenician",
+		"south_arabian",
+		"north_arabian",
 		"sidetic",
 		"ugaritic",
 		"deseret",
@@ -1413,13 +1416,18 @@ Class ChrLib {
 		if !foundScript {
 			return entryName
 		} else {
-			if RegExMatch(entryName, "i)^([\w]+(?:_[\w]+){3,})_?", &rawMatch) {
-				rawCharacterName := StrSplit(rawMatch[1], "_")
+			regEx := InStr(altInputScript, "_")
+				? "i)^(" altInputScript ")_([\w]+(?:_[\w]+){2,})_?"
+				: "i)^([\w]+(?:_[\w]+){3,})_?"
+
+			if RegExMatch(entryName, regEx, &rawMatch) {
+				rawCharacterName := StrSplit(rawMatch[InStr(altInputScript, "_") ? 2 : 1], "_")
+				shift := InStr(altInputScript, "_") ? 1 : 0
 
 				decomposedName.script := altInputScript != "" ? altInputScript : decomposedName.script[rawCharacterName[1]]
-				decomposedName.case := decomposedName.case[rawCharacterName[2]]
-				decomposedName.type := decomposedName.type[rawCharacterName[3]]
-				decomposedName.letter := (["capital", "neutral"].HasValue(decomposedName.case) ? StrUpper(rawCharacterName[4]) : rawCharacterName[4])
+				decomposedName.case := decomposedName.case[rawCharacterName[2 - shift]]
+				decomposedName.type := decomposedName.type[rawCharacterName[3 - shift]]
+				decomposedName.letter := (["capital", "neutral"].HasValue(decomposedName.case) ? StrUpper(rawCharacterName[4 - shift]) : rawCharacterName[4 - shift])
 
 				diacriticSet := InStr(entryName, "__") ? RegExReplace(entryName, "i)^.*?__(.*)", "$1") : ""
 				decomposedName.postfixes := StrLen(diacriticSet) > 0 ? StrSplit(diacriticSet, "__") : []

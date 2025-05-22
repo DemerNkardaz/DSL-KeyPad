@@ -192,7 +192,15 @@ Class FavoriteChars {
 
 	static ReadList() {
 		fileContent := FileRead(this.favesPath, "UTF-8")
-		return StrSplit(fileContent, "`n", "`r")
+		split := StrSplit(fileContent, "`n", "`r")
+		output := []
+		toClean := False
+
+		for line in split
+			if ChrLib.entries.HasOwnProp(line)
+				output.Push(line)
+
+		return output
 	}
 
 	static CheckVar(fave) {
