@@ -4,6 +4,7 @@ Class Language {
 
 	static __New() {
 		this.Init()
+
 	}
 
 	static Init() {
@@ -189,8 +190,8 @@ Class Locale {
 			? this.localeObj.%section%.%entry% : ""
 	}
 
-	static ReadNoLinks(entryName, prefix := "") {
-		baseString := this.Read(entryName, prefix)
+	static ReadNoLinks(entryName, inSection := "") {
+		baseString := this.Read(entryName, inSection)
 		result := baseString
 
 		while (RegExMatch(result, "<a [^>]*>(.*?)</a>", &match)) {
@@ -201,58 +202,37 @@ Class Locale {
 		return result
 	}
 
-	static ReadInject(entryName, strInjections := [], prefix := "", validate := False) {
-		return this.Read(entryName, prefix, validate, , strInjections)
+	static ReadInject(entryName, strInjections := [], inSection := "", validate := False) {
+		return this.Read(entryName, inSection, validate, , strInjections)
 	}
 
-	static Read(entryName, prefix := "", validate := False, &output?, strInjections := []) {
-		Intermediate := ""
-		Section := Language.Validate(prefix) ? prefix : (!IsSpace(prefix) ? prefix "_" Language.Get() : Language.Get())
+	static Read(entryName, inSection := "", validate := False, &output?, strInjections := []) {
+		intermediate := ""
+		section := Language.Validate(inSection) ? inSection : Language.Get()
 
-		try {
-			Intermediate := this.ReadStr(Section, entryName)
+		intermediate := this.ReadStr(section, entryName)
 
-			while (RegExMatch(Intermediate, "\{@([a-zA-Z-]+)\}", &match)) {
-				LangCode := match[1]
-				SectionOverride := !IsSpace(prefix) ? prefix "_" LangCode : LangCode
-				Replacement := this.ReadStr(SectionOverride, entryName)
-				Intermediate := StrReplace(Intermediate, match[0], Replacement)
-			}
-
-			while (RegExMatch(Intermediate, "\{@(?:([^\}_]+)_)?([a-zA-Z-]+):([^\}]+)\}", &match)) {
-				CustomPrefix := match[1] ? match[1] : ""
-				LangCode := match[2]
-				CustomEntry := match[3]
-				SectionOverride := !IsSpace(CustomPrefix) ? CustomPrefix "_" LangCode : LangCode
-				Replacement := this.ReadStr(SectionOverride, CustomEntry)
-				Intermediate := StrReplace(Intermediate, match[0], Replacement)
-			}
-
-			while (RegExMatch(Intermediate, "\{U\+(\w+)\}", &match)) {
-				Unicode := match[1]
-				Replacement := Chr("0x" . Unicode)
-				Intermediate := StrReplace(Intermediate, match[0], Replacement)
-			}
-
-			while (RegExMatch(Intermediate, "\{var:([^\}]+)\}", &match)) {
-				Varname := match[1]
-				if IsSet(%Varname%) {
-					Replacement := %Varname%
-				} else {
-					Replacement := "VAR (" Varname "): NOT FOUND"
-				}
-				Intermediate := StrReplace(Intermediate, match[0], Replacement)
-			}
-			Intermediate := this.HandleString(Intermediate)
+		while (RegExMatch(intermediate, "\{@([a-zA-Z-]+)(?::([^\}]+))?\}", &match)) {
+			langCode := match[1]
+			customEntry := match[2] != "" ? match[2] : entryName
+			replacement := this.ReadStr(langCode, customEntry)
+			intermediate := StrReplace(intermediate, match[0], replacement)
 		}
 
+		while (RegExMatch(intermediate, "\{U\+(.*?)\}", &match)) {
+			Unicode := StrSplit(match[1], ",")
+			replacement := Util.UnicodeToChars(Unicode)
+			intermediate := StrReplace(intermediate, match[0], replacement)
+		}
+
+		intermediate := this.HandleString(intermediate)
 
 		if validate {
-			output := Intermediate
-			return StrLen(Intermediate) > 0
+			output := intermediate
+			return StrLen(intermediate) > 0
 		} else {
-			Intermediate := !IsSpace(Intermediate) ? Intermediate : "KEY (" entryName "): NOT FOUND"
-			return strInjections ? Util.StrVarsInject(Intermediate, strInjections) : Intermediate
+			intermediate := !IsSpace(intermediate) ? intermediate : "KEY (" entryName "): NOT FOUND in " section
+			return strInjections ? Util.StrVarsInject(intermediate, strInjections) : intermediate
 		}
 	}
 
@@ -297,7 +277,7 @@ Class Locale {
 
 		cyrillicTasgScriptAtStart := False
 
-		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["deseret"]) {
+		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic"]) {
 			useLetterLocale := True
 			cyrillicTasgScriptAtStart := True
 		}
@@ -349,7 +329,7 @@ Class Locale {
 				useLetterLocale = "Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref
 			) "_LTL" : ""
 
-			postLetter := useLetterLocale ? Locale.Read(interLetter) : letter
+			postLetter := useLetterLocale ? Locale.Read(interLetter, lang) : letter
 
 			lBeforeletter := ""
 			lAfterletter := ""

@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-05-21 10:42:40
+				&#128228;&emsp14;2025-05-22 11:43:53
 			</td>
 		</tr>
 		<tr>
@@ -59,6 +59,8 @@ $message =@"
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Phoenician">Noto Sans Phoenician</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Tifinagh">Noto Sans Tifinagh</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Ugaritic">Noto Sans Ugaritic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Deseret">Noto Sans Deseret</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Shavian">Noto Sans Shavian</a></li>
 					</ul>
 				</details>
 			</td>

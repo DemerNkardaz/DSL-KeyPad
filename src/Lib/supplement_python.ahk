@@ -12,6 +12,8 @@ GetUnicodeName(char) {
 	return result
 }
 
+
+
 SendCharToPy(Mode := "") {
 	ClipSendProcessed(GetUnicodeName, Mode == "Copy")
 }

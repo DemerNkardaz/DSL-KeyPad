@@ -147,31 +147,6 @@ Class Util {
 
 		return output
 	}
-
-	static StrSelToHTML(Mode := "", IgnoreDefaultSymbols := False) {
-		DefaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
-		BackupClipboard := A_Clipboard
-		A_Clipboard := ""
-
-		Send("^c")
-		ClipWait(0.5, 1)
-		PromptValue := A_Clipboard
-		A_Clipboard := ""
-
-		if PromptValue != "" {
-			Output := this.StrToHTML(PromptValue, Mode, IgnoreDefaultSymbols)
-
-			A_Clipboard := Output
-			ClipWait(0.250, 1)
-			Send("^v")
-		}
-
-		Sleep 500
-		A_Clipboard := BackupClipboard
-		Send("{Control Up}")
-		return
-	}
-
 	static CheckEntity(input, &entity := "") {
 		for j, entity in EntitiesLibrary {
 			if (Mod(j, 2) = 1 && entity = input) {
@@ -182,6 +157,62 @@ Class Util {
 		return False
 	}
 
+	static StrToUnicode(inputString, mode := "") {
+		output := ""
+		len := StrLen(inputString)
+
+		i := 1
+		while (i <= len) {
+			symbol := SubStr(inputString, i, 1)
+			code := Ord(symbol)
+			surrogated := False
+			if (code >= 0xD800 && code <= 0xDBFF) {
+				nextSymbol := SubStr(inputString, i + 1, 1)
+				symbol .= nextSymbol
+				surrogated := True
+				i += 1
+			}
+
+			if mode = "Hex" {
+				output .= "0x" this.ChrToUnicode(symbol)
+			} else if mode == "CSS" {
+				output .= Surrogated ? "\u{" this.ChrToUnicode(symbol) "}" : "\u" this.ChrToUnicode(symbol)
+			} else {
+				output .= this.ChrToUnicode(symbol)
+			}
+
+			output .= (i < len ? " " : "")
+
+			i += 1
+		}
+		return output
+	}
+
+	static StrSelToUnicode(mode := "") {
+		backupClipboard := ClipboardAll()
+		A_Clipboard := ""
+
+		Send("{Shift Down}{Delete}{Shift Up}")
+		ClipWait(0.5, 1)
+		promptValue := A_Clipboard
+		A_Clipboard := ""
+
+		if promptValue != "" {
+			output := this.StrToUnicode(promptValue, mode)
+
+
+			A_Clipboard := output
+			ClipWait(0.250, 1)
+			Send("{Shift Down}{Insert}{Shift Up}")
+		}
+
+		Sleep 500
+		A_Clipboard := backupClipboard
+		Send("{Control Up}")
+		return
+	}
+
+
 	static StrToHTML(inputString, mode := "", ignoreDefaultSymbols := False) {
 		defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
 		output := ""
@@ -189,11 +220,11 @@ Class Util {
 		i := 1
 		while (i <= StrLen(inputString)) {
 			symbol := SubStr(inputString, i, 1)
-			Code := Ord(symbol)
+			code := Ord(symbol)
 
-			if (Code >= 0xD800 && Code <= 0xDBFF) {
-				NextSymbol := SubStr(inputString, i + 1, 1)
-				symbol .= NextSymbol
+			if (code >= 0xD800 && code <= 0xDBFF) {
+				nextSymbol := SubStr(inputString, i + 1, 1)
+				symbol .= nextSymbol
 				i += 1
 			}
 
@@ -222,6 +253,30 @@ Class Util {
 			i += 1
 		}
 		return output
+	}
+
+	static StrSelToHTML(mode := "", ignoreDefaultSymbols := False) {
+		defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+		backupClipboard := ClipboardAll()
+		A_Clipboard := ""
+
+		Send("{Shift Down}{Delete}{Shift Up}")
+		ClipWait(0.5, 1)
+		promptValue := A_Clipboard
+		A_Clipboard := ""
+
+		if promptValue != "" {
+			output := this.StrToHTML(promptValue, mode, ignoreDefaultSymbols)
+
+			A_Clipboard := output
+			ClipWait(0.250, 1)
+			Send("{Shift Down}{Insert}{Shift Up}")
+		}
+
+		Sleep 500
+		A_Clipboard := backupClipboard
+		Send("{Control Up}")
+		return
 	}
 
 	static StrBind(str, &keyRef?, &modRef?, &rulRef?) {
@@ -305,28 +360,20 @@ Class Util {
 	static UnicodeToChars(unicode*) {
 		output := ""
 
+		if unicode[1] is Array
+			unicode := unicode[1]
+
 		for value in unicode
 			output .= this.UnicodeToChar(value)
 
 		return output
 	}
 
-	static ChrToUnicode(Symbol, StartFormat := "") {
-		Code := Ord(Symbol)
+	static ChrToUnicode(symbol, startFormat := "") {
+		symOrd := Ord(symbol)
+		code := startFormat Format("{:04X}", symOrd)
 
-		if (Code >= 0xD800 && Code <= 0xDBFF) {
-			nextSymbol := SubStr(Symbol, 2, 1)
-			NextCode := Ord(nextSymbol)
-
-			if (NextCode >= 0xDC00 && NextCode <= 0xDFFF) {
-				HighSurrogate := Code - 0xD800
-				LowSurrogate := NextCode - 0xDC00
-				FullCodePoint := (HighSurrogate << 10) + LowSurrogate + 0x10000
-				return StartFormat Format("{:06X}", FullCodePoint)
-			}
-		}
-
-		return StartFormat Format("{:04X}", Code)
+		return code
 	}
 
 	static ChrToDecimal(Symbol) {
@@ -334,28 +381,28 @@ Class Util {
 		return Format("{:d}", "0x" HexCode)
 	}
 
-	static ChrToHexaDecimal(StringInput, StartFromat := "0x") {
-		if StringInput != "" {
-			Output := ""
+	static ChrToHexaDecimal(stringInput, startFromat := "0x") {
+		if stringInput != "" {
+			output := ""
 			i := 1
 
-			while (i <= StrLen(StringInput)) {
-				Symbol := SubStr(StringInput, i, 1)
-				Code := Ord(Symbol)
+			while (i <= StrLen(stringInput)) {
+				symbol := SubStr(stringInput, i, 1)
+				code := Ord(symbol)
 
-				if (Code >= 0xD800 && Code <= 0xDBFF) {
-					NextSymbol := SubStr(StringInput, i + 1, 1)
-					Symbol .= NextSymbol
+				if (code >= 0xD800 && code <= 0xDBFF) {
+					NextSymbol := SubStr(stringInput, i + 1, 1)
+					symbol .= NextSymbol
 					i += 1
 				}
 
-				Output .= this.ChrToUnicode(Symbol, StartFromat) "-"
+				output .= this.ChrToUnicode(symbol, startFromat) "-"
 				i += 1
 			}
 
-			return RegExReplace(Output, "-$", "")
+			return RegExReplace(output, "-$", "")
 		} else {
-			return StringInput
+			return stringInput
 		}
 	}
 

@@ -414,7 +414,16 @@ Class Panel {
 		}
 	}
 
+	static pdToolTipIncrement := 0
+	static PanelDataToolTip() {
+		this.pdToolTipIncrement := this.pdToolTipIncrement > 4 ? 0 : this.pdToolTipIncrement + 1
+		ToolTip(Chr(0x2B1C) " " Util.StrRepeat(".", this.pdToolTipIncrement))
+	}
+
 	static SetPanelData() {
+		tt := this.PanelDataToolTip.Bind(this)
+		SetTimer(tt, 100, 0)
+
 		this.LV_Content := {
 			smelting: this.LV_InsertGroup({
 				type: "Recipe",
@@ -607,9 +616,19 @@ Class Panel {
 			all: this.LV_InsertGroup({ type: "", group: ["i)^(?!Custom)"], }),
 		}
 
+		SetTimer(tt, 0)
+		ToolTip(Chr(0x2705))
+		this.pdToolTipIncrement := 0
+		SetTimer(ToolTip.Bind(""), -500)
 	}
 
 	static Panel(redraw := False) {
+		if !initialized
+			return
+
+		tt := this.PanelDataToolTip.Bind(this)
+		SetTimer(tt, 100, 0)
+
 		UISets := this.GetUISets()
 
 		title := App.Title("+status+version") " — " Locale.Read("gui_panel")
@@ -910,11 +929,14 @@ Class Panel {
 			this.PanelGUI := Constructor()
 			this.PanelGUI.Show()
 
-			for each in ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI", "AllSymbols", "Favorites"]
-				try
-					this.LV_SetRandomPreview(each)
 
+			SetTimer(this.LV_SetRandomPreviews.Bind(this), -100)
 		}
+
+		SetTimer(tt, 0)
+		ToolTip(Chr(0x2705))
+		this.pdToolTipIncrement := 0
+		SetTimer(ToolTip.Bind(""), -500)
 	}
 
 	static AddCharactersTab(options) {
@@ -1120,6 +1142,12 @@ Class Panel {
 				}
 			}
 		}
+	}
+
+	static LV_SetRandomPreviews() {
+		for each in ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI", "AllSymbols", "Favorites"]
+			try
+				this.LV_SetRandomPreview(each)
 	}
 
 	static LV_SetRandomPreview(prefix) {

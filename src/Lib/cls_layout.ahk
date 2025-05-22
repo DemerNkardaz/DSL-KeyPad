@@ -966,7 +966,7 @@ Class Scripter {
 				icons: ["lydian"],
 			},
 			"Sidetic", {
-				preview: ["Wait for Unicode 17.0 2025/09/09+"],
+				preview: ["(2025/09/09+)" Util.UnicodeToChars("1094D", "10946", "10942", "10947", "1094F", "10940", "1094C", "0020", "1094F", "10943", "10949", "1094A", "10954", "10940", "0020", "10943", "1094F", "10943", "1094C", "10940", "10941", "1094B", "1094D", "10940", "1094B", "10940", "10946", "10950", "10940", "10949")],
 				fonts: ["Noto Sans Sidetic"],
 				locale: "alt_mode_sidetic",
 				bindings: ["Sidetic"],
@@ -1724,6 +1724,7 @@ Class BindHandler {
 	static waitTimeSend := False
 
 	static Send(combo := "", characterNames*) {
+		Thread("Priority", 100)
 		Keyboard.CheckLayout(&lang)
 
 		if Language.Validate(lang, "bindings") {
@@ -1772,6 +1773,7 @@ Class BindHandler {
 		} else {
 			this.SendDefault(combo)
 		}
+		Thread("Priority", 1)
 	}
 
 	static CapsSend(combo := "", charactersPair := [], reverse := False) {

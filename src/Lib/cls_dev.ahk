@@ -71,7 +71,9 @@ Class Dev {
 			"Palmyrene",
 			"Phoenician",
 			"Tifinagh",
-			"Ugaritic"
+			"Ugaritic",
+			"Deseret",
+			"Shavian",
 		]
 
 		for i, font in fontsArray {

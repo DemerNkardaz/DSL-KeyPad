@@ -15,7 +15,7 @@ Class UnicodeWebResource {
 
 	__New(useType := "Clipboard", prompt := "") {
 		if useType = "Clipboard" {
-			Clipboard := A_Clipboard
+			clipboardBk := ClipboardAll()
 			A_Clipboard := ""
 
 			Send("{Control Down}{Insert}{Control Up}")
@@ -25,7 +25,7 @@ Class UnicodeWebResource {
 			prompt := Util.ChrToUnicode(clipContent)
 
 			Sleep 100
-			A_Clipboard := Clipboard
+			A_Clipboard := clipboardBk
 		}
 
 		if prompt != "" {

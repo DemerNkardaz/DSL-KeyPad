@@ -283,7 +283,7 @@ Class ChrLib {
 				}
 			}
 
-			SetTimer(setProgress, 250)
+			SetTimer(setProgress, 250, 0)
 
 			Loop rawEntries.Length // 2 {
 				index := A_Index * 2 - 1
@@ -1313,11 +1313,11 @@ Class ChrLib {
 
 		if StrLen(data.case) > 0 {
 			while RegExMatch(output, "\/(.*?)\/", &match) {
-				output := RegExReplace(output, RegExEscape(match[0]), data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
+				output := RegExReplace(output, RegExEscape(match[0]), ["capital", "neutral"].HasValue(data.case) ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
 			}
 
 			while RegExMatch(output, "\\(.*?)\\", &match) {
-				output := RegExReplace(output, RegExEscape(match[0]), data.case = "capital" ? StrUpper((match[1])) : StrLower(match[1]))
+				output := RegExReplace(output, RegExEscape(match[0]), ["capital", "neutral"].HasValue(data.case) ? StrUpper((match[1])) : StrLower(match[1]))
 			}
 		}
 
@@ -1336,6 +1336,8 @@ Class ChrLib {
 
 	static scriptsValidator := [
 		"phoenician",
+		"sidetic",
+		"ugaritic",
 		"deseret",
 		"shavian",
 	]
@@ -1417,7 +1419,7 @@ Class ChrLib {
 				decomposedName.script := altInputScript != "" ? altInputScript : decomposedName.script[rawCharacterName[1]]
 				decomposedName.case := decomposedName.case[rawCharacterName[2]]
 				decomposedName.type := decomposedName.type[rawCharacterName[3]]
-				decomposedName.letter := (decomposedName.case = "capital" ? StrUpper(rawCharacterName[4]) : rawCharacterName[4])
+				decomposedName.letter := (["capital", "neutral"].HasValue(decomposedName.case) ? StrUpper(rawCharacterName[4]) : rawCharacterName[4])
 
 				diacriticSet := InStr(entryName, "__") ? RegExReplace(entryName, "i)^.*?__(.*)", "$1") : ""
 				decomposedName.postfixes := StrLen(diacriticSet) > 0 ? StrSplit(diacriticSet, "__") : []

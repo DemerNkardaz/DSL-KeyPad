@@ -12,6 +12,7 @@
 */
 
 #SingleInstance Force
+Thread("Interrupt", 0)
 SetKeyDelay(0, 50)
 A_HotkeyInterval := 1000
 A_MaxHotkeysPerInterval := 50
@@ -32,11 +33,11 @@ initialized := False
 #Include <chr_lib>
 
 #Include <cls_app>
-#Include <cls_chr_lib>
+#Include <cls_language>
 #Include <cls_update>
 #Include <cls_cfg>
 #Include <cls_fonts>
-#Include <cls_language>
+#Include <cls_chr_lib>
 #Include <cls_chr_crafter>
 #Include <cls_chr_inserter>
 #Include <cls_script_processor>
@@ -119,12 +120,12 @@ GREPizeSelection(GetCollaborative := False) {
 		},
 	)
 
-	BackupClipboard := A_Clipboard
+	BackupClipboard := ClipboardAll()
 	if !GetCollaborative {
 		PromptValue := ""
 		A_Clipboard := ""
 
-		Send("^c")
+		Send("{Shift Down}{Delete}{Shift Up}")
 		ClipWait(0.50, 1)
 		PromptValue := A_Clipboard
 		A_Clipboard := ""
@@ -156,12 +157,11 @@ GREPizeSelection(GetCollaborative := False) {
 		}
 
 		A_Clipboard := ModifiedValue
-		ClipWait(0.250, 1)
-		Sleep 1000
-		Send("^v")
+		ClipWait(0.5, 1)
+		Send("{Shift Down}{Insert}{Shift Up}")
 	}
 
-	Sleep 1000
+	Sleep 500
 	A_Clipboard := BackupClipboard
 }
 

@@ -420,55 +420,6 @@ GetKeyScanCode() {
 	SendText(scanCode)
 }
 
-
-ReplaceWithUnicode(Mode := "") {
-	BackupClipboard := A_Clipboard
-	PromptValue := ""
-	A_Clipboard := ""
-
-	Send("{Shift Down}{Delete}{Shift Up}")
-	ClipWait(0.5, 1)
-	PromptValue := A_Clipboard
-	A_Clipboard := ""
-
-	if PromptValue != "" {
-		Output := ""
-
-		i := 1
-		while (i <= StrLen(PromptValue)) {
-			Symbol := SubStr(PromptValue, i, 1)
-			Code := Ord(Symbol)
-			Surrogated := Code >= 0xD800 && Code <= 0xDBFF
-
-			if (Surrogated) {
-				NextSymbol := SubStr(PromptValue, i + 1, 1)
-				Symbol .= NextSymbol
-				i += 1
-			}
-
-			if Mode == "Hex" {
-				Output .= "0x" Util.ChrToUnicode(Symbol) " "
-			} else if Mode == "CSS" {
-				Output .= Surrogated ? "\u{" Util.ChrToUnicode(Symbol) "} " : "\u" Util.ChrToUnicode(Symbol) " "
-			} else {
-				Output .= Util.ChrToUnicode(Symbol) " "
-			}
-
-			i += 1
-		}
-
-		A_Clipboard := RegExReplace(Output, "\s$", "")
-		ClipWait(0.250, 1)
-		Send("{Shift Down}{Insert}{Shift Up}")
-	}
-	Sleep 500
-	A_Clipboard := BackupClipboard
-
-	Send("{Ctrl Up}")
-
-	return
-}
-
 ContainsEmoji(StringInput) {
 	EmojisPattern := "[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F900}-\x{1F9FF}\x{2700}-\x{27BF}\x{1F1E6}-\x{1F1FF}]"
 	return RegExMatch(StringInput, EmojisPattern)

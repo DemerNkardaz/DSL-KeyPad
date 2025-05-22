@@ -3,7 +3,7 @@ Class TextHandlers {
 	static ToQuote(outerQuotes, innerQuotes) {
 		static regEx := "[a-zA-Zа-яА-ЯёЁ0-9.,:;!?()\`"'-+=/\\]"
 
-		backupClipboard := A_Clipboard
+		backupClipboard := ClipboardAll()
 		promptValue := ""
 		A_Clipboard := ""
 
