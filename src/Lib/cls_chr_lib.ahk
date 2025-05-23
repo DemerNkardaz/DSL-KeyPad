@@ -697,8 +697,8 @@ Class ChrLib {
 
 	static ValidateAlt(str) {
 		static alterationNames := Map(
-			"modifier", ["модификатор", "ви", "mo"],
-			"superscript", ["superscript", "верхний индекс", "ви", "sup"],
+			"modifier", ["модификатор", "мо", "mo"],
+			"superscript", ["верхний индекс", "ви", "sup"],
 			"subscript", ["нижний индекс", "ни", "sub"],
 			"italic", ["курсив", "ку", "it"],
 			"italicBold", ["курсив полужирный", "куп", "itb"],
@@ -732,9 +732,12 @@ Class ChrLib {
 	}
 
 	static Search(searchQuery) {
+		nonSensitiveMark := "i)"
 		isSensitive := SubStr(searchQuery, 1, 1) = "!"
-		if isSensitive
+		if isSensitive {
 			searchQuery := SubStr(searchQuery, 2)
+			nonSensitiveMark := ""
+		}
 
 		alteration := RegExMatch(searchQuery, "\:\:(.*?)$", &match) ? match[1] : Scripter.selectedMode.Get("Glyph Variations")
 
@@ -748,28 +751,40 @@ Class ChrLib {
 
 		checkTagByUserRegEx(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
-			return RegExMatch(tag, searchQuery)
+			return tag ~= searchQuery
 		}
 
 		checkTagExact(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
 			if isSensitive
 				return searchQuery == tag
-			return StrLower(searchQuery) = StrLower(tag)
+			return searchQuery ~= nonSensitiveMark tag "$"
 		}
 
 		checkTagPartial(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
-			if isSensitive
-				return RegExMatch(tag, searchQuery)
-			return RegExMatch(StrLower(tag), StrLower(searchQuery))
+			return tag ~= nonSensitiveMark searchQuery
+		}
+
+		checkTagSplittedPartial(tag, strict3 := True) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
+			splitSearchQuery := StrSplit(searchQuery, " ")
+			for _, part in splitSearchQuery {
+				if StrLen(part) < 3 && strict3 {
+					if !(tag ~= nonSensitiveMark "(\A|\s)" part "(\s|\z)")
+						return False
+				} else {
+					if !(tag ~= nonSensitiveMark part)
+						return False
+				}
+			}
+			return splitSearchQuery.Length > 0
 		}
 
 		checkTagLowAcc(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
 			if isSensitive
-				return Util.HasAllCharacters(tag, searchQuery)
-			return Util.HasAllCharacters(StrLower(tag), StrLower(searchQuery))
+				return Util.HasAllCharacters(tag, nonSensitiveMark searchQuery)
 		}
 
 		if isHasExpression {
@@ -799,7 +814,17 @@ Class ChrLib {
 				continue
 
 			for _, tag in entry.tags {
-				if checkTagPartial(tag)
+				if checkTagPartial(tag) || checkTagSplittedPartial(tag)
+					return this.Get(entryName, True, Auxiliary.inputMode, alteration)
+			}
+		}
+
+		for entryName, entry in this.entries.OwnProps() {
+			if entry.tags.Length = 0
+				continue
+
+			for _, tag in entry.tags {
+				if checkTagSplittedPartial(tag, False)
 					return this.Get(entryName, True, Auxiliary.inputMode, alteration)
 			}
 		}

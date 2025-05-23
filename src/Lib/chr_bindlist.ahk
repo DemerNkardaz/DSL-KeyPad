@@ -601,7 +601,7 @@ bindingMaps := Map(
 				"4", Map("<^>!", "phoenician_n_num_ten"),
 				"5", Map("<^>!", "phoenician_n_num_twenty"),
 				"6", Map("<^>!", "phoenician_n_num_hundred"),
-				"Space", Map("<^>!", "phoenician_word_separator"),
+				"Space", Map("<^>!", "phoenician_n_sym_word_separator"),
 			)
 		),
 		"Ancient South Arabian", Map(
@@ -1858,7 +1858,7 @@ bindingMaps := Map(
 				"<^>!<!>+", ["lat_[c,s]_let_g__cedilla"],
 				"<^>!<+", ["lat_[c,s]_let_g_insular"],
 				"<^>!>+", ["lat_[c,s]_let_g__macron"],
-				"<^>!<+>+", ["lat_[c,s]_let_gamma"],
+				"<^>!<+>+", ["lat_[c,s]_let_g_gamma"],
 				">+", ["lat_[c,s]_let_g__dot_above"]),
 			"H", Map(
 				"<!", ["lat_[c,s]_let_h_hwair"],

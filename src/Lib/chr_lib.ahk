@@ -10153,10 +10153,8 @@ LibRegistrate(this) {
 			unicode: "10919",
 			options: { altLayoutKey: ">! 6" },
 		},
-		"phoenician_word_separator", {
+		"phoenician_n_sym_word_separator", {
 			unicode: "1091F",
-			tags: ["финикийский разделитель слов", "phoenician word separator"],
-			groups: ["Phoenician"],
 			options: { altLayoutKey: ">! Space" },
 		},
 		;
@@ -10180,13 +10178,13 @@ LibRegistrate(this) {
 			unicode: "10A75",
 			options: { altLayoutKey: "$" },
 		},
-		"south_arabian_n_let_d_dhadhe", {
-			unicode: "10A73",
-			options: { altLayoutKey: ">! $" },
-		},
 		"south_arabian_n_let_d_dhaleth", {
 			unicode: "10A79",
 			options: { altLayoutKey: ">!>+ $" },
+		},
+		"south_arabian_n_let_d_dhadhe", {
+			unicode: "10A73",
+			options: { altLayoutKey: ">! $" },
 		},
 		"south_arabian_n_let_f_fe", {
 			unicode: "10A70",

@@ -83,7 +83,7 @@ Class ChrCrafter {
 		ComposeSuggestedTooltip() {
 			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
 
-			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && input ~= "^(?!\(\~\)\s)") ? "`n" tooltipSuggestions : ""))
+			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : ""))
 		}
 
 		tooltips := Map(
@@ -138,6 +138,10 @@ Class ChrCrafter {
 				pastInput := ""
 				previousInput := ""
 				cleanPastInput := False
+			}
+
+			if input ~= "^\([~0-9]" {
+				pauseOn := True
 			}
 
 			inputWithoutBackticks := RegExReplace(input, "``", "")
@@ -215,7 +219,7 @@ Class ChrCrafter {
 
 								if insertType = "" {
 									tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
-									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && input ~= "^(?!\(\~\)\s)") ? "`n" tooltipSuggestions : ""))
+									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : ""))
 								}
 
 								continue
@@ -228,6 +232,9 @@ Class ChrCrafter {
 						inputToCheckNoBackticks := RegExReplace(inputToCheck, "``", "")
 
 						intermediateValue := this.ValidateRecipes(inputToCheckNoBackticks, , usePartialMode, , hasBacktick)
+						if usePartialMode {
+							; MsgBox(input "`nOut: " intermediateValue)
+						}
 						if intermediateValue != "" {
 							output := intermediateValue
 
@@ -241,7 +248,7 @@ Class ChrCrafter {
 								if (input != originalInput && insertType = "") {
 									tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
 
-									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0 && input ~= "^(?!\(\~\)\s)") ? "`n" tooltipSuggestions : ""))
+									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : ""))
 								}
 
 								continue
@@ -339,6 +346,7 @@ Class ChrCrafter {
 
 		charFound := False
 
+
 		isPrefixOfLongerRecipe := False
 		for validatingValue in ChrLib.entryRecipes {
 			if validatingValue ~= "^" promptValidator && validatingValue != prompt {
@@ -376,6 +384,7 @@ Class ChrCrafter {
 		if breakValidate && !breakSkip
 			return "N/A"
 
+
 		indexedValueResult := Map()
 		indexedAtEndValueResult := Map()
 
@@ -389,14 +398,11 @@ Class ChrCrafter {
 
 				recipe := value.recipe
 
-				if IsObject(recipe) {
+				if recipe is Array {
 					for _, recipeEntry in recipe {
 						lowerRecipe := StrLower(recipeEntry)
 						recipeVariantsMap[lowerRecipe] := recipeVariantsMap.Has(lowerRecipe) ? recipeVariantsMap[lowerRecipe] + 1 : 1
 					}
-				} else {
-					lowerRecipe := StrLower(recipe)
-					recipeVariantsMap[lowerRecipe] := recipeVariantsMap.Has(lowerRecipe) ? recipeVariantsMap[lowerRecipe] + 1 : 1
 				}
 			}
 		}
@@ -412,7 +418,7 @@ Class ChrCrafter {
 			} else {
 				recipe := value.recipe
 
-				if IsObject(recipe) {
+				if recipe is Array {
 					for _, recipeEntry in recipe {
 						if getSuggestions {
 							caseSensitiveMatch := recipeEntry ~= "^" RegExEscape(prompt)
@@ -442,34 +448,6 @@ Class ChrCrafter {
 								break 2
 						}
 					}
-				} else {
-					if getSuggestions {
-						caseSensitiveMatch := recipe ~= "^" RegExEscape(prompt)
-
-						uniqueRecipeMatch := False
-						if !caseSensitiveMatch {
-							lowerRecipe := StrLower(recipe)
-							if recipeVariantsMap.Has(lowerRecipe) && recipeVariantsMap[lowerRecipe] == 1 {
-								uniqueRecipeMatch := recipe ~= "i)^" RegExEscape(prompt)
-							}
-						}
-
-						if caseSensitiveMatch || uniqueRecipeMatch {
-							charFound := True
-							if value.options.suggestionsAtEnd
-								indexedAtEndValueResult.Set(value.index, this.GetRecipesString(characterEntry, prompt))
-							else
-								indexedValueResult.Set(value.index, this.GetRecipesString(characterEntry, prompt))
-						}
-					} else if (!monoCaseRecipe && prompt == recipe) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipe)) {
-						charFound := True
-						if value.options.suggestionsAtEnd
-							indexedAtEndValueResult.Set(value.index, ChrLib.Get(characterEntry, True, inputMode))
-						else
-							indexedValueResult.Set(value.index, ChrLib.Get(characterEntry, True, inputMode))
-						if !isPrefixOfLongerRecipe
-							break
-					}
 				}
 			}
 		}
@@ -484,6 +462,20 @@ Class ChrCrafter {
 					continue
 				} else if notHasRecipe {
 					continue
+				} else {
+					recipe := value.recipe
+
+					if IsObject(recipe) {
+						for _, recipeEntry in recipe {
+							if InStr(IntermediateValue, recipeEntry, true) {
+								IntermediateValue := StrReplace(IntermediateValue, recipeEntry, this.GetComparedChar(value))
+							}
+						}
+					} else {
+						if InStr(IntermediateValue, recipe, true) {
+							IntermediateValue := StrReplace(IntermediateValue, recipe, this.GetComparedChar(value))
+						}
+					}
 				}
 			}
 
@@ -657,6 +649,44 @@ Class ChrCrafter {
 
 		output .= uniSequence " (" (IsObject(recipe) ? recipe.ToString(" | ") : recipe) "), "
 
+		return output
+	}
+
+	static GetComparedChar(value) {
+		output := ""
+		if Auxiliary.inputMode = "HTML" && StrLen(value.html) > 0 {
+			output :=
+				(this.modifiedCharsType && HasProp(value, this.modifiedCharsType "HTML")) ? value.%this.modifiedCharsType%HTML :
+				(StrLen(value.entity) > 0 ? value.entity : value.html)
+
+		} else if Auxiliary.inputMode = "LaTeX" && value.LaTeX.Length > 0 {
+			output := Cfg.Get("LaTeX_Mode", , "Text") = "Math" ? value.LaTeX[2] : value.LaTeX[1]
+
+		} else {
+			output := this.GetUniChar(value)
+		}
+		return output
+	}
+
+	static GetUniChar(value, forceDefault := False) {
+		output := ""
+		if this.modifiedCharsType && HasProp(value, this.modifiedCharsType) && !forceDefault {
+			if IsObject(value.%this.modifiedCharsType%) {
+				TempValue := ""
+				for modifier in value.%this.modifiedCharsType% {
+					TempValue .= Util.UnicodeToChar(modifier)
+				}
+				output := TempValue
+			} else {
+				output := Util.UnicodeToChar(value.%this.modifiedCharsType%)
+			}
+		} else if value.sequence.Length > 0 {
+			for unicode in value.sequence {
+				output .= Util.UnicodeToChar(unicode)
+			}
+		} else {
+			output := Util.UnicodeToChar(value.unicode)
+		}
 		return output
 	}
 }

@@ -57,14 +57,14 @@ Class Panel {
 		commandsTreeX := baseX + 4
 		commandsTreeY := 43
 
-		commandsBoxW := (panelWidth - commandsTreeW) - (50 * 1.4)
+		commandsBoxW := (panelWidth - commandsTreeW) - (40 * 1.4)
 		commandsBoxH := commandsTreeH + 9
-		commandsBoxX := commandsTreeW + 50
+		commandsBoxX := commandsTreeW + 40
 		commandsBoxY := 36
 
-		commandsTexW := commandsBoxW - 20
+		commandsTexW := commandsBoxW - 25
 		commandsTexH := commandsBoxH - 40
-		commandsTexX := commandsBoxX + 10
+		commandsTexX := commandsBoxX + 15
 		commandsTexY := commandsBoxY + 30
 
 		aboutLeftW := 280
@@ -348,50 +348,22 @@ Class Panel {
 	}
 
 	static commandLabels := { structured: [
-		"func_label_controls",
-		"func_label_disable",
-		"func_label_gotopage",
-		"func_label_selgoto",
-		"func_label_favorites",
-		"func_label_copylist",
-		"func_label_tagsearch",
-		"func_label_uninsert",
-		"func_label_altcode",
-		Map("func_label_smelter", [
-			"func_label_compose",
+		"help_modifier_keys",
+		"help_common_binds",
+		"help_panel_commands",
+		"help_tray_commands",
+		"help_uncommon_titles",
+		Map("help_search", [
+			"help_search__glyph_variations",
+			"help_search__funcs",
 		]),
-		"func_label_num_superscript",
-		"func_label_num_roman",
-		"func_label_fastkeys",
-		Map("func_label_alterations", [
-			"func_label_alterations_combining",
-			"func_label_alterations_modifier",
-			"func_label_alterations_italic_to_bold",
-			"func_label_alterations_fraktur_script_struck",
-			"func_label_alterations_sans_serif",
-			"func_label_alterations_monospace",
-			"func_label_alterations_small_capital",
-		],
-			"func_label_scripts", [
-				"func_label_glagolitic_futhark",
-				"func_label_old_permic_old_turkic",
-				"func_label_old_hungarian",
-				"func_label_gothic",
-				"func_label_old_italic",
-				"func_label_phoenician",
-				"func_label_ancient_south_arabian",
-				"func_label_ipa",
-				"func_label_maths",
-			]),
-		"func_label_input_toggle",
-		"func_label_layout_toggle",
-		"func_label_notifications",
-		Map("func_label_text_processing", [
-			"func_label_tp_quotes",
-			"func_label_tp_paragraph",
-			"func_label_tp_grep",
-			"func_label_tp_html",
-			"func_label_tp_unicode",
+		"help_forge",
+		"help_alternative_input",
+		"help_glyph_variations",
+		"help_TELEX",
+		"help_digit_cases",
+		Map("help_text_processing", [
+			"help_text_processing__quotes",
 		]),
 	], flat: [] }
 
@@ -473,6 +445,7 @@ Class Panel {
 					"Misc", "",
 					"Latin Ligatures", "",
 					"Latin Secondary", "",
+					"Latino-Hellenic Secondary", "",
 					"Latin Accented Secondary", "",
 					"Cyrillic Ligatures Secondary", "",
 					"Cyrillic Digraphs Secondary", "",
@@ -794,11 +767,14 @@ Class Panel {
 
 			commandsTree := panelWindow.AddTreeView(UISets.commandsInfoBox.commandsTree)
 			commandsTree.OnEvent("ItemSelect", (TV, Item) => this.TV_InsertCommandsDesc(TV, Item, groupBoxCommands.text))
+			commandsTree.SetFont("s10")
 
 			groupBoxCommands := {
 				group: panelWindow.AddGroupBox(UISets.commandsInfoBox.body, Locale.Read("tab_help")),
 				text: panelWindow.AddLink(UISets.commandsInfoBox.text),
 			}
+
+			groupBoxCommands.group.SetFont("s11")
 
 			for each in this.commandLabels.structured {
 				if Type(each) = "String" {
@@ -1035,7 +1011,7 @@ Class Panel {
 		for label in this.commandLabels.flat {
 			if (Locale.Read(label) = selectedLabel) {
 				TargetTextBox.Text := Locale.Read(label "_description")
-				TargetTextBox.SetFont("s10", "Segoe UI")
+				TargetTextBox.SetFont("s11", "Segoe UI")
 			}
 		}
 	}

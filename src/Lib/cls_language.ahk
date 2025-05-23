@@ -212,9 +212,9 @@ Class Locale {
 
 		intermediate := this.ReadStr(section, entryName)
 
-		while (RegExMatch(intermediate, "\{@([a-zA-Z-]+)(?::([^\}]+))?\}", &match)) {
-			langCode := match[1]
-			customEntry := match[2] != "" ? match[2] : entryName
+		while (RegExMatch(intermediate, "\{@([a-zA-Z-]*)(?::([^\}]+))?\}", &match)) {
+			langCode := (match[1] != "" ? match[1] : section)
+			customEntry := (match[2] != "" ? match[2] : entryName)
 			replacement := this.ReadStr(langCode, customEntry)
 			intermediate := StrReplace(intermediate, match[0], replacement)
 		}
@@ -222,6 +222,19 @@ Class Locale {
 		while (RegExMatch(intermediate, "\{U\+(.*?)\}", &match)) {
 			Unicode := StrSplit(match[1], ",")
 			replacement := Util.UnicodeToChars(Unicode)
+			intermediate := StrReplace(intermediate, match[0], replacement)
+		}
+
+		while (RegExMatch(intermediate, "\{var:([^\}]+)\}", &match)) {
+			variableName := match[1]
+			parts := StrSplit(variableName, ".")
+			ref := %parts[1]%
+			if (parts.Length > 1) {
+				Loop parts.Length - 1 {
+					ref := ref.%parts[A_Index + 1]%
+				}
+			}
+			replacement := ref
 			intermediate := StrReplace(intermediate, match[0], replacement)
 		}
 
