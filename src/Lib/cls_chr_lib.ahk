@@ -1204,10 +1204,10 @@ Class ChrLib {
 				refinedEntry.symbol.set := characterSequence
 		}
 
-		if RegExMatch(entryName, "i)^(permic|hungarian|north_arabian|south_arabian|persian)", &match) {
+		if RegExMatch(entryName, "i)^(north_arabian|south_arabian)", &match) {
 			scriptName := StrReplace(match[1], "_", " ")
 			refinedEntry.symbol.font := "Noto Sans Old " StrTitle(scriptName)
-		} else if RegExMatch(entryName, "i)^(ugaritic|sidetic)", &match) {
+		} else if RegExMatch(entryName, "i)^(old_permic|old_hungarian|old_persian|ugaritic|sidetic)", &match) {
 			scriptName := StrReplace(match[1], "_", " ")
 			refinedEntry.symbol.font := "Noto Sans " StrTitle(scriptName)
 		} else if entryName ~= "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)" {
@@ -1362,8 +1362,14 @@ Class ChrLib {
 
 	static scriptsValidator := [
 		"phoenician",
+		"gothic",
 		"south_arabian",
 		"north_arabian",
+		"old_turkic",
+		"old_permic",
+		"old_hungarian",
+		"old_italic",
+		"old_persian",
 		"sidetic",
 		"ugaritic",
 		"deseret",

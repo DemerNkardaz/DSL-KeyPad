@@ -9635,166 +9635,114 @@ LibRegistrate(this) {
 		; * Gothic
 		;
 		;
-		"gothic_ahza", {
+		"gothic_n_let_a_ahza", {
 			unicode: "10330",
-			tags: ["готская буква аза", "gothic letter ahsa"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "A" },
+			options: { altLayoutKey: "$" },
 		},
-		"gothic_bairkan", {
+		"gothic_n_let_b_bairkan", {
 			unicode: "10331",
-			tags: ["готская буква беркна", "gothic letter bairkan", "gothic letter baírkan"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "B" },
+			options: { altLayoutKey: "$" },
 		},
-		"gothic_giba", {
-			unicode: "10332",
-			tags: ["готская буква гиба", "gothic letter giba"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "G" },
-		},
-		"gothic_dags", {
+		"gothic_n_let_d_dagz", {
 			unicode: "10333",
-			tags: ["готская буква дааз", "gothic letter dags"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "D" },
+			options: { altLayoutKey: "$" },
 		},
-		"gothic_aihvus", {
+		"gothic_n_let_e_aihvus", {
 			unicode: "10334",
-			tags: ["готская буква эзй", "gothic letter aihvus", "gothic letter eíƕs"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "E" },
+			options: { altLayoutKey: "$" },
 		},
-		"gothic_qairthra", {
-			unicode: "10335",
-			tags: ["готская буква квертра", "gothic letter qairthra", "gothic letter qaírþra"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "Q" },
-		},
-		"gothic_ezek", {
-			unicode: "10336",
-			tags: ["готская буква эзек", "gothic letter ezek"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "Z" },
-		},
-		"gothic_hagl", {
-			unicode: "10337",
-			tags: ["готская буква хаал", "gothic letter hagl"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "H" },
-		},
-		"gothic_thiuth", {
-			unicode: "10338",
-			tags: ["готская буква сюс", "gothic letter thiuth", "gothic letter þiuþ"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: ">! T], [C" },
-		},
-		"gothic_eis", {
-			unicode: "10339",
-			tags: ["готская буква ииз", "gothic letter eis"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "I" },
-		},
-		"gothic_kusma", {
-			unicode: "1033A",
-			tags: ["готская буква козма", "gothic letter kusma"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "K" },
-		},
-		"gothic_lagus", {
-			unicode: "1033B",
-			tags: ["готская буква лааз", "gothic letter lagus"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "L" },
-		},
-		"gothic_manna", {
-			unicode: "1033C",
-			tags: ["готская буква манна", "gothic letter manna"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "M" },
-		},
-		"gothic_nauths", {
-			unicode: "1033D",
-			tags: ["готская буква нойкз", "gothic letter nauths", "gothic letter nauþs"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "N" },
-		},
-		"gothic_jer", {
-			unicode: "1033E",
-			tags: ["готская буква гаар", "gothic letter jer", "gothic letter jēr"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "J" },
-		},
-		"gothic_urus", {
-			unicode: "1033F",
-			tags: ["готская буква ураз", "gothic letter urus", "gothic letter ūrus"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "U" },
-		},
-		"gothic_pairthra", {
-			unicode: "10340",
-			tags: ["готская буква пертра", "gothic letter pairthra", "gothic letter ūrus"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "P" },
-		},
-		"gothic_ninety", {
-			unicode: "10341",
-			tags: ["готская буква-число 90", "gothic letter ninety"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: ">! P" },
-		},
-		"gothic_raida", {
-			unicode: "10342",
-			tags: ["готская буква райда", "gothic letter raida"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "R" },
-		},
-		"gothic_sugil", {
-			unicode: "10343",
-			tags: ["готская буква сугил", "gothic letter sugil"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "S" },
-		},
-		"gothic_teiws", {
-			unicode: "10344",
-			tags: ["готская буква тюз", "gothic letter teiws"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "T" },
-		},
-		"gothic_winja", {
-			unicode: "10345",
-			tags: ["готская буква винья", "gothic letter winja"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "W], [Y" },
-		},
-		"gothic_faihu", {
+		"gothic_n_let_f_faihu", {
 			unicode: "10346",
-			tags: ["готская буква файху", "gothic letter faihu"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "F" },
+			options: { altLayoutKey: "$" },
 		},
-		"gothic_iggws", {
+		"gothic_n_let_g_giba", {
+			unicode: "10332",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_h_hagl", {
+			unicode: "10337",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_h_hwair", {
+			unicode: "10348",
+			options: { altLayoutKey: ">! $ | V" },
+		},
+		"gothic_n_let_i_eis", {
+			unicode: "10339",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_k_kusma", {
+			unicode: "1033A",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_l_lagus", {
+			unicode: "1033B",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_m_manna", {
+			unicode: "1033C",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_n_nauths", {
+			unicode: "1033D",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_o_othal", {
+			unicode: "10349",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_p_pairthra", {
+			unicode: "10340",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_q_qairthra", {
+			unicode: "10335",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_r_raida", {
+			unicode: "10342",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_s_sugil", {
+			unicode: "10343",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_t_teiws", {
+			unicode: "10344",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_t_thiuth", {
+			unicode: "10338",
+			options: { altLayoutKey: ">! $ | C" },
+		},
+		"gothic_n_let_u_urus", {
+			unicode: "1033F",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_w_winja", {
+			unicode: "10345",
+			options: { altLayoutKey: "$" },
+		},
+		"gothic_n_let_k_iggws", {
 			unicode: "10347",
-			tags: ["готская буква энкуз", "gothic letter iggws"],
-			groups: ["Gothic Alphabet"],
 			options: { altLayoutKey: "X" },
 		},
-		"gothic_hwair", {
-			unicode: "10348",
-			tags: ["готская буква хвайр", "gothic letter hwair", "gothic letter ƕaír"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: ">! H], [V" },
+		"gothic_n_let_y_jer", {
+			unicode: "1033E",
+			options: { altLayoutKey: "$" },
 		},
-		"gothic_othal", {
-			unicode: "10349",
-			tags: ["готская буква отал", "gothic letter othal", "gothic letter ōþal"],
-			groups: ["Gothic Alphabet"],
-			options: { altLayoutKey: "O" },
+		"gothic_n_let_z_ezek", {
+			unicode: "10336",
+			options: { altLayoutKey: "$" },
 		},
-		"gothic_nine_hundred", {
+		"gothic_n_num_ninety", {
+			unicode: "10341",
+			groups: ["Gothic"],
+			options: { altLayoutKey: ">! P" },
+		},
+		"gothic_n_num_nine_hundred", {
 			unicode: "1034A",
-			tags: ["готская буква-число 900", "gothic letter nine hundred"],
-			groups: ["Gothic Alphabet"],
+			groups: ["Gothic"],
 			options: { altLayoutKey: ">! S" },
 		},
 		;
