@@ -9006,627 +9006,230 @@ LibRegistrate(this) {
 		; * Old Hungarian
 		;
 		;
-		"hungarian_c_let_a", {
-			unicode: "10C80",
-			tags: ["прописная руна А секельская", "capital rune A old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "A" },
+		"old_hungarian_[c,s]_rune_a", {
+			unicode: ["10C80", "10CC0"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_s_let_a", {
-			unicode: "10CC0",
-			tags: ["строчная руна а секельская", "small rune a old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "a" },
+		"old_hungarian_[c,s]_rune_a_aa", {
+			unicode: ["10C81", "10CC1"],
+			options: { altLayoutKey: ">! $" },
 		},
-		"hungarian_c_let_aa", {
-			unicode: "10C81",
-			tags: ["прописная руна Аа секельская", "capital rune Aa old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! A" },
+		"old_hungarian_[c,s]_rune_b_eb", {
+			unicode: ["10C82", "10CC2"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_s_let_aa", {
-			unicode: "10CC1",
-			tags: ["строчная руна аа секельская", "small rune aa old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! a" },
+		"old_hungarian_[c,s]_rune_b_amb", {
+			unicode: ["10C83", "10CC3"],
+			options: { altLayoutKey: "<+ $" },
 		},
-		"hungarian_c_let_eb", {
-			unicode: "10C82",
-			tags: ["прописная руна Эб секельская", "capital rune Eb old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "B" },
+		"old_hungarian_[c,s]_rune_c_ec", {
+			unicode: ["10C84", "10CC4"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_s_let_eb", {
-			unicode: "10CC2",
-			tags: ["строчная руна эб секельская", "small rune eb old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "b" },
+		"old_hungarian_[c,s]_rune_c_ech", {
+			unicode: ["10CA9", "10CE9"],
+			options: { altLayoutKey: "<+ $" },
 		},
-		"hungarian_c_let_ec", {
-			unicode: "10C84",
-			tags: ["прописная руна Эц секельская", "capital rune Ec old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "C" },
+		"old_hungarian_[c,s]_rune_c_ecs", {
+			unicode: ["10C86", "10CC6"],
+			options: { altLayoutKey: ">! $" },
 		},
-		"hungarian_s_let_ec", {
-			unicode: "10CC4",
-			tags: ["строчная руна эц секельская", "small rune ec old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "c" },
+		"old_hungarian_[c,s]_rune_d_ed", {
+			unicode: ["10C87", "10CC7"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_c_let_ecs", {
-			unicode: "10C86",
-			tags: ["прописная руна Эч секельская", "capital rune Ecs old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! C" },
+		"old_hungarian_[c,s]_rune_e", {
+			unicode: ["10C89", "10CC9"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_s_let_ecs", {
-			unicode: "10CC6",
-			tags: ["строчная руна эч секельская", "small rune ecs old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! c" },
+		"old_hungarian_[c,s]_rune_e_ee", {
+			unicode: ["10C8B", "10CCB"],
+			options: { altLayoutKey: ">! $" },
 		},
-		"hungarian_c_let_ed", {
-			unicode: "10C87",
-			tags: ["прописная руна Эд секельская", "capital rune Ed old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "D" },
+		"old_hungarian_[c,s]_rune_e_enk", {
+			unicode: ["10C85", "10CC5"],
+			options: { altLayoutKey: "<+ $" },
 		},
-		"hungarian_s_let_ed", {
-			unicode: "10CC7",
-			tags: ["строчная руна эд секельская", "small rune ed old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "d" },
+		"old_hungarian_[c,s]_rune_f_ef", {
+			unicode: ["10C8C", "10CCC"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_c_let_e", {
-			unicode: "10C89",
-			tags: ["прописная руна Е секельская", "capital rune E old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "E" },
+		"old_hungarian_[c,s]_rune_g_eg", {
+			unicode: ["10C8D", "10CCD"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_s_let_e", {
-			unicode: "10CC9",
-			tags: ["строчная руна е секельская", "small rune e old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "e" },
+		"old_hungarian_[c,s]_rune_g_egy", {
+			unicode: ["10C8E", "10CCE"],
+			options: { altLayoutKey: ">! $" },
 		},
-		"hungarian_c_let_ee", {
-			unicode: "10C8B",
-			tags: ["прописная руна Ее секельская", "capital rune Ee old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! E" },
+		"old_hungarian_[c,s]_rune_h_eh", {
+			unicode: ["10C8F", "10CCF"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_s_let_ee", {
-			unicode: "10CCB",
-			tags: ["строчная руна ее секельская", "small rune ee old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! e" },
+		"old_hungarian_[c,s]_rune_i", {
+			unicode: ["10C90", "10CD0"],
+			options: { altLayoutKey: "$" },
 		},
-		"hungarian_c_let_ef", {
-			unicode: "10C8C",
-			tags: ["прописная руна Эф секельская", "capital rune Ef old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "F" },
+		"old_hungarian_[c,s]_rune_i_ii", {
+			unicode: ["10C91", "10CD1"],
+			options: { altLayoutKey: ">! $" },
 		},
-		"hungarian_s_let_ef", {
-			unicode: "10CCC",
-			tags: ["строчная руна эф секельская", "small rune ef old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "f" },
-		},
-		"hungarian_c_let_eg", {
-			unicode: "10C8D",
-			tags: ["прописная руна Эг секельская", "capital rune Eg old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "G" },
-		},
-		"hungarian_s_let_eg", {
-			unicode: "10CCD",
-			tags: ["строчная руна эг секельская", "small rune eg old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "g" },
-		},
-		"hungarian_c_let_egy", {
-			unicode: "10C8E",
-			tags: ["прописная руна Эгй секельская", "capital rune Egy old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! G" },
-		},
-		"hungarian_s_let_egy", {
-			unicode: "10CCE",
-			tags: ["строчная руна эгй секельская", "small rune egy old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! g" },
-		},
-		"hungarian_c_let_eh", {
-			unicode: "10C8F",
-			tags: ["прописная руна Эх секельская", "capital rune Eh old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "H" },
-		},
-		"hungarian_s_let_eh", {
-			unicode: "10CCF",
-			tags: ["строчная руна эх секельская", "small rune eh old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "h" },
-		},
-		"hungarian_c_let_i", {
-			unicode: "10C90",
-			tags: ["прописная руна и секельская", "capital rune I old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "I" },
-		},
-		"hungarian_s_let_i", {
-			unicode: "10CD0",
-			tags: ["строчная руна и секельская", "small rune i old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "i" },
-		},
-		"hungarian_c_let_ii", {
-			unicode: "10C91",
-			tags: ["прописная руна Ии секельская", "capital rune Ii old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! I" },
-		},
-		"hungarian_s_let_ii", {
-			unicode: "10CD1",
-			tags: ["строчная руна ии секельская", "small rune ii old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! i" },
-		},
-		"hungarian_c_let_ej", {
-			unicode: "10C92",
-			tags: ["прописная руна Эј секельская", "capital rune Ej old hungarian"],
-			groups: ["Old Hungarian"],
+		"old_hungarian_[c,s]_rune_y_ej", {
+			unicode: ["10C92", "10CD2"],
 			options: { altLayoutKey: "J" },
 		},
-		"hungarian_s_let_ej", {
-			unicode: "10CD2",
-			tags: ["строчная руна эј секельская", "small rune ej old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "j" },
-		},
-		"hungarian_c_let_ek", {
-			unicode: "10C93",
-			tags: ["прописная руна Эк секельская", "capital rune Ek old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "K" },
-		},
-		"hungarian_s_let_ek", {
-			unicode: "10CD3",
-			tags: ["строчная руна эк секельская", "small rune ek old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "k" },
-		},
-		"hungarian_c_let_ak", {
-			unicode: "10C94",
-			tags: ["прописная руна Ак секельская", "capital rune Ak old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! K" },
-		},
-		"hungarian_s_let_ak", {
-			unicode: "10CD4",
-			tags: ["строчная руна ак секельская", "small rune ak old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! k" },
-		},
-		"hungarian_c_let_el", {
-			unicode: "10C96",
-			tags: ["прописная руна Эл секельская", "capital rune El old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "L" },
-		},
-		"hungarian_s_let_el", {
-			unicode: "10CD6",
-			tags: ["строчная руна эл секельская", "small rune el old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "l" },
-		},
-		"hungarian_c_let_ely", {
-			unicode: "10C97",
-			tags: ["прописная руна Элй секельская", "capital rune Ely old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! L" },
-		},
-		"hungarian_s_let_ely", {
-			unicode: "10CD7",
-			tags: ["строчная руна элй секельская", "small rune ely old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! l" },
-		},
-		"hungarian_c_let_em", {
-			unicode: "10C98",
-			tags: ["прописная руна Эм секельская", "capital rune Em old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "M" },
-		},
-		"hungarian_s_let_em", {
-			unicode: "10CD8",
-			tags: ["строчная руна эм секельская", "small rune em old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "m" },
-		},
-		"hungarian_c_let_en", {
-			unicode: "10C99",
-			tags: ["прописная руна Эн секельская", "capital rune En old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "N" },
-		},
-		"hungarian_s_let_en", {
-			unicode: "10CD9",
-			tags: ["строчная руна эн секельская", "small rune en old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "n" },
-		},
-		"hungarian_c_let_eny", {
-			unicode: "10C9A",
-			tags: ["прописная руна Энй секельская", "capital rune Eny old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! N" },
-		},
-		"hungarian_s_let_eny", {
-			unicode: "10CDA",
-			tags: ["строчная руна энй секельская", "small rune eny old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! n" },
-		},
-		"hungarian_c_let_o", {
-			unicode: "10C9B",
-			tags: ["прописная руна О секельская", "capital rune O old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "O" },
-		},
-		"hungarian_s_let_o", {
-			unicode: "10CD9",
-			tags: ["строчная руна о секельская", "small rune o old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "o" },
-		},
-		"hungarian_c_let_oo", {
-			unicode: "10C9C",
-			tags: ["прописная руна Оо секельская", "capital rune Oo old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! O" },
-		},
-		"hungarian_s_let_oo", {
-			unicode: "10CDC",
-			tags: ["строчная руна оо секельская", "small rune oo old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! o" },
-		},
-		"hungarian_c_let_oe", {
-			unicode: "10C9E",
-			tags: ["прописная руна рудиментарная Ое секельская", "capital rune rudimentar Oe old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ O" },
-		},
-		"hungarian_s_let_oe", {
-			unicode: "10CDE",
-			tags: ["строчная руна рудиментарная ое секельская", "small rune rudimentar oe old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ o" },
-		},
-		"hungarian_c_let_oe_nik", {
-			unicode: "10C9D",
-			tags: ["прописная руна никольсбургская Ое секельская", "capital rune nikolsburg Oe old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">!<+ O" },
-		},
-		"hungarian_s_let_oe_nik", {
-			unicode: "10CDD",
-			tags: ["строчная руна никольсбургская ое секельская", "small rune nikolsburg oe old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">!<+ o" },
-		},
-		"hungarian_c_let_oee", {
-			unicode: "10C9F",
-			tags: ["прописная руна Оее секельская", "capital rune Oee old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">+ O" },
-		},
-		"hungarian_s_let_oee", {
-			unicode: "10CDF",
-			tags: ["строчная руна оее секельская", "small rune oee old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">+ o" },
-		},
-		"hungarian_c_let_ep", {
-			unicode: "10CA0",
-			tags: ["прописная руна Эп секельская", "capital rune Ep old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "P" },
-		},
-		"hungarian_s_let_ep", {
-			unicode: "10CE0",
-			tags: ["строчная руна эп секельская", "small rune ep old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "p" },
-		},
-		"hungarian_c_let_er", {
-			unicode: "10CA2",
-			tags: ["прописная руна Эр секельская", "capital rune Er old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "R" },
-		},
-		"hungarian_s_let_er", {
-			unicode: "10CE2",
-			tags: ["строчная руна эр секельская", "small rune er old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "r" },
-		},
-		"hungarian_c_let_short_er", {
-			unicode: "10CA3",
-			tags: ["прописная руна короткая Эр секельская", "capital rune short Er old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ R" },
-		},
-		"hungarian_s_let_short_er", {
-			unicode: "10CE3",
-			tags: ["строчная руна короткая эр секельская", "small rune short er old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ r" },
-		},
-		"hungarian_c_let_es", {
-			unicode: "10CA4",
-			tags: ["прописная руна Эщ секельская", "capital rune Es old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "S" },
-		},
-		"hungarian_s_let_es", {
-			unicode: "10CE4",
-			tags: ["строчная руна эщ секельская", "small rune es old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "s" },
-		},
-		"hungarian_c_let_esz", {
-			unicode: "10CA5",
-			tags: ["прописная руна Эс секельская", "capital rune Esz old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! S" },
-		},
-		"hungarian_s_let_esz", {
-			unicode: "10CE5",
-			tags: ["строчная руна эс секельская", "small rune esz old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! s" },
-		},
-		"hungarian_c_let_et", {
-			unicode: "10CA6",
-			tags: ["прописная руна Эт секельская", "capital rune Et old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "T" },
-		},
-		"hungarian_s_let_et", {
-			unicode: "10CE6",
-			tags: ["строчная руна эт секельская", "small rune et old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "t" },
-		},
-		"hungarian_c_let_ety", {
-			unicode: "10CA8",
-			tags: ["прописная руна Этй секельская", "capital rune Ety old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! T" },
-		},
-		"hungarian_s_let_ety", {
-			unicode: "10CE8",
-			tags: ["строчная руна этй секельская", "small rune ety old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! t" },
-		},
-		"hungarian_c_let_u", {
-			unicode: "10CAA",
-			tags: ["прописная руна У секельская", "capital rune U old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "U" },
-		},
-		"hungarian_s_let_u", {
-			unicode: "10CEA",
-			tags: ["строчная руна у секельская", "small rune u old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "u" },
-		},
-		"hungarian_c_let_uu", {
-			unicode: "10CAB",
-			tags: ["прописная руна Уу секельская", "capital rune Uu old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! U" },
-		},
-		"hungarian_s_let_uu", {
-			unicode: "10CEB",
-			tags: ["строчная руна уу секельская", "small rune uu old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! u" },
-		},
-		"hungarian_c_let_ue", {
-			unicode: "10CAD",
-			tags: ["прописная руна рудиментарная Уе секельская", "capital rune rudimentar Ue old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "Y" },
-		},
-		"hungarian_s_let_ue", {
-			unicode: "10CED",
-			tags: ["строчная руна рудиментарная Уе секельская", "small rune rudimentar ue old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "y" },
-		},
-		"hungarian_c_let_ue_nik", {
-			unicode: "10CAC",
-			tags: ["прописная руна никольсбургская Уе секельская", "capital rune nikolsburg Ue old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! Y" },
-		},
-		"hungarian_s_let_ue_nik", {
-			unicode: "10CEC",
-			tags: ["строчная руна никольсбургская Уе секельская", "small rune nikolsburg ue old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! y" },
-		},
-		"hungarian_c_let_ev", {
-			unicode: "10CAE",
-			tags: ["прописная руна Эв секельская", "capital rune Ev old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "V" },
-		},
-		"hungarian_s_let_ev", {
-			unicode: "10CEE",
-			tags: ["строчная руна эв секельская", "small rune ev old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "v" },
-		},
-		"hungarian_c_let_ez", {
-			unicode: "10CAF",
-			tags: ["прописная руна Эз секельская", "capital rune Ez old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "Z" },
-		},
-		"hungarian_s_let_ez", {
-			unicode: "10CEF",
-			tags: ["строчная руна эз секельская", "small rune ez old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "z" },
-		},
-		"hungarian_c_let_ezs", {
-			unicode: "10CB0",
-			tags: ["прописная руна Эж секельская", "capital rune Ezs old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! Z" },
-		},
-		"hungarian_s_let_ezs", {
-			unicode: "10CF0",
-			tags: ["строчная руна эж секельская", "small rune ezs old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">! z" },
-		},
-		"hungarian_c_let_ent", {
-			unicode: "10CA7",
-			tags: ["прописная руна Энт секельская", "capital rune Ent old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ T" },
-		},
-		"hungarian_s_let_ent", {
-			unicode: "10CE7",
-			tags: ["строчная руна энт секельская", "small rune ent old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ t" },
-		},
-		"hungarian_c_let_ent_shaped", {
-			unicode: "10CB1",
-			tags: ["прописная руна Энт-подобный знак секельский", "capital rune Ent-shaped sign old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">+ T" },
-		},
-		"hungarian_s_let_ent_shaped", {
-			unicode: "10CF1",
-			tags: ["строчная руна энт-подобный знак секельский", "small rune ent-shaped sign old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: ">+ t" },
-		},
-		"hungarian_c_let_emp", {
-			unicode: "10CA1",
-			tags: ["прописная руна Эмп секельская", "capital rune Emp old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ P" },
-		},
-		"hungarian_s_let_emp", {
-			unicode: "10CE1",
-			tags: ["строчная руна эмп секельская", "small rune emp old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ p" },
-		},
-		"hungarian_c_let_unk", {
-			unicode: "10C95",
-			tags: ["прописная руна Унк секельская", "capital rune Unk old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ K" },
-		},
-		"hungarian_s_let_unk", {
-			unicode: "10CD5",
-			tags: ["строчная руна унк секельская", "small rune unk old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ k" },
-		},
-		"hungarian_c_let_us", {
-			unicode: "10CB2",
-			tags: ["прописная руна Ус секельская", "capital rune Us old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ S" },
-		},
-		"hungarian_s_let_us", {
-			unicode: "10CF2",
-			tags: ["строчная руна ус секельская", "small rune us old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ s" },
-		},
-		"hungarian_c_let_amb", {
-			unicode: "10C83",
-			tags: ["прописная руна Амб секельская", "capital rune Amb old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ B" },
-		},
-		"hungarian_s_let_amb", {
-			unicode: "10CC3",
-			tags: ["строчная руна амб секельская", "small rune amb old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ b" },
-		},
-		"hungarian_c_let_enk", {
-			unicode: "10C85",
-			tags: ["прописная руна Энк секельская", "capital rune Enk old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ E" },
-		},
-		"hungarian_s_let_enk", {
-			unicode: "10CC5",
-			tags: ["строчная руна энк секельская", "small rune enk old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ e" },
-		},
-		"hungarian_c_let_ech", {
-			unicode: "10CA9",
-			tags: ["прописная руна Эч секельская", "capital rune Ech old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ C" },
-		},
-		"hungarian_s_let_ech", {
-			unicode: "10CE9",
-			tags: ["строчная руна эч секельская", "small rune ech old hungarian"],
-			groups: ["Old Hungarian"],
-			options: { altLayoutKey: "<+ c" },
-		},
-		"hungarian_num_one", {
+		"old_hungarian_[c,s]_rune_k_ek", {
+			unicode: ["10C93", "10CD3"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_k_ak", {
+			unicode: ["10C94", "10CD4"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_[c,s]_rune_k_unk", {
+			unicode: ["10C95", "10CD5"],
+			options: { altLayoutKey: "<+ $" },
+		},
+		"old_hungarian_[c,s]_rune_l_el", {
+			unicode: ["10C96", "10CD6"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_l_ely", {
+			unicode: ["10C97", "10CD7"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_[c,s]_rune_m_em", {
+			unicode: ["10C98", "10CD8"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_n_en", {
+			unicode: ["10C99", "10CD9"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_n_eny", {
+			unicode: ["10C9A", "10CDA"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_[c,s]_rune_o", {
+			unicode: ["10C9B", "10CDB"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_o_oo", {
+			unicode: ["10C9C", "10CDC"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_[c,s]_rune_o_oe", {
+			unicode: ["10C9E", "10CDE"],
+			options: { altLayoutKey: "<+ $" },
+		},
+		"old_hungarian_[c,s]_rune_o_oe_nik", {
+			unicode: ["10C9D", "10CDD"],
+			options: { altLayoutKey: ">!<+ $" },
+		},
+		"old_hungarian_[c,s]_rune_o_oee", {
+			unicode: ["10C9F", "10CDF"],
+			options: { altLayoutKey: ">+ $" },
+		},
+		"old_hungarian_[c,s]_rune_p_ep", {
+			unicode: ["10CA0", "10CE0"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_p_emp", {
+			unicode: ["10CA1", "10CE1"],
+			options: { altLayoutKey: "<+ $" },
+		},
+		"old_hungarian_[c,s]_rune_r_er", {
+			unicode: ["10CA2", "10CE2"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_r_er_short", {
+			unicode: ["10CA3", "10CE3"],
+			options: { altLayoutKey: "<+ $", referenceLocale: "er$" },
+			symbol: { beforeLetter: "short" }
+		},
+		"old_hungarian_[c,s]_rune_s_es", {
+			unicode: ["10CA4", "10CE4"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_s_esz", {
+			unicode: ["10CA5", "10CE5"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_[c,s]_rune_s_us", {
+			unicode: ["10CB2", "10CF2"],
+			options: { altLayoutKey: "<+ $" },
+		},
+		"old_hungarian_[c,s]_rune_t_et", {
+			unicode: ["10CA6", "10CE6"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_t_ety", {
+			unicode: ["10CA8", "10CE8"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_[c,s]_rune_t_ent", {
+			unicode: ["10CA7", "10CE7"],
+			options: { altLayoutKey: "<+ $" },
+		},
+		"old_hungarian_[c,s]_rune_t_ent_shaped", {
+			unicode: ["10CB1", "10CF1"],
+			options: { altLayoutKey: ">+ $" },
+		},
+		"old_hungarian_[c,s]_rune_u", {
+			unicode: ["10CAA", "10CEA"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_u_uu", {
+			unicode: ["10CAB", "10CEB"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_[c,s]_rune_v_ev", {
+			unicode: ["10CAE", "10CEE"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_y_ue", {
+			unicode: ["10CAD", "10CED"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_y_ue_nik", {
+			unicode: ["10CAC", "10CEC"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_[c,s]_rune_z_ez", {
+			unicode: ["10CAF", "10CEF"],
+			options: { altLayoutKey: "$" },
+		},
+		"old_hungarian_[c,s]_rune_z_ezs", {
+			unicode: ["10CB0", "10CF0"],
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_hungarian_n_num_one", {
 			unicode: "10CFA",
-			tags: ["цифра 1 секельская", "number 1 hungarian"],
 			groups: ["Old Hungarian"],
 			options: { altLayoutKey: "1" },
 		},
-		"hungarian_num_five", {
+		"old_hungarian_n_num_five", {
 			unicode: "10CFB",
-			tags: ["цифра 5 секельская", "number 5 hungarian"],
 			groups: ["Old Hungarian"],
 			options: { altLayoutKey: "2" },
 		},
-		"hungarian_num_ten", {
+		"old_hungarian_n_num_ten", {
 			unicode: "10CFC",
-			tags: ["цифра 10 секельская", "number 10 hungarian"],
 			groups: ["Old Hungarian"],
 			options: { altLayoutKey: "3" },
 		},
-		"hungarian_num_fifty", {
+		"old_hungarian_n_num_fifty", {
 			unicode: "10CFD",
-			tags: ["цифра 50 секельская", "number 50 hungarian"],
 			groups: ["Old Hungarian"],
 			options: { altLayoutKey: "4" },
 		},
-		"hungarian_num_one_hundred", {
+		"old_hungarian_n_num_one_hundred", {
 			unicode: "10CFE",
-			tags: ["цифра 100 секельская", "number 100 hungarian"],
 			groups: ["Old Hungarian"],
 			options: { altLayoutKey: "5" },
 		},
-		"hungarian_num_one_thousand", {
+		"old_hungarian_n_num_one_thousand", {
 			unicode: "10CFF",
-			tags: ["цифра 1000 секельская", "number 1000 hungarian"],
 			groups: ["Old Hungarian"],
 			options: { altLayoutKey: "6" },
 		},
