@@ -1674,18 +1674,29 @@ Class GlyphsPanel {
 			"doubleStruckItalic", "Cabmria Math",
 			"uncombined", "Noto Serif",
 			"small", "Cabmria",
-			"glagolitic", "Noto Sans Glagolitic",
 		)
-
-		static fontSizes := Map()
+		static scriptFonts := Map(
+			"glagolitic", "Noto Sans Glagolitic",
+			"old_permic", "Noto Sans Old Permic",
+		)
 
 		Loop previewsCount
 			glyphsPanel["SymbolPreview" A_Index].Text := ""
 
 		entryName := LV.GetText(rowNumber, 3)
-		cutEntryName := RegExReplace(entryName, "_.*$")
 		entry := ChrLib.entries.%entryName%.Clone()
 		entryAlts := {}
+
+		scriptFontFamily := ""
+		scriptFontFamilyKey := ""
+
+		for key, value in scriptFonts {
+			if entryName ~= "i)^" key {
+				scriptFontFamilyKey := key
+				scriptFontFamily := value
+				break
+			}
+		}
 
 		for key, value in entry.alterations.OwnProps()
 			if !(key ~= "i)HTML$")
@@ -1694,26 +1705,22 @@ Class GlyphsPanel {
 		for i, each in order {
 			if entryAlts.HasOwnProp(each) {
 				unicode := Util.UnicodeToChar(entryAlts.%each%)
-				fontFamily := (fonts.Has(cutEntryName) ? fonts.Get(cutEntryName) : fonts.Get(each))
+				fontFamily := (scriptFontFamily != "" ? scriptFontFamily : fonts.Get(each))
 
 				if entryAlts.%each% is Array {
 					for j, each in entryAlts.%each% {
 						code := Number("0x" each)
-						if code >= 0x1E030 && code <= 0x1E08F {
+						if code >= 0x1E030 && code <= 0x1E08F
 							fontFamily := "Catrinity"
-						}
+
 					} else {
 						code := Number("0x" entryAlts.%each%)
-						if code >= 0x1E030 && code <= 0x1E08F {
+						if code >= 0x1E030 && code <= 0x1E08F
 							fontFamily := "Catrinity"
-						}
 					}
 				}
 
-
-				glyphsPanel["SymbolPreview" i].Text := (["combining", "modifier", "superscript", "subscript"].HasValue(each) && cutEntryName != "glagolitic" ? DottedCircle : "") unicode glyphsPanel["SymbolPreview" i].SetFont("s"
-					(fontSizes.Has(cutEntryName) ? fontSizes.Get(cutEntryName) : 42),
-					fontFamily
+				glyphsPanel["SymbolPreview" i].Text := (["combining", "modifier", "superscript", "subscript"].HasValue(each) && scriptFontFamilyKey != "glagolitic" ? DottedCircle : "") unicode glyphsPanel["SymbolPreview" i].SetFont("s" (42), (fontFamily)
 				)
 			}
 		}

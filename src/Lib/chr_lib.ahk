@@ -8771,234 +8771,161 @@ LibRegistrate(this) {
 		; * Old Permic
 		;
 		;
-		"permic_an", {
+		"old_permic_n_let_an", {
 			unicode: "10350",
-			tags: ["древнепермская буква ан", "old permic letter an"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: "A" },
+			options: { altLayoutKey: "А" },
+			alterations: { combining: "10376" },
 		},
-		"permic_bur", {
+		"old_permic_n_let_bur", {
 			unicode: "10351",
-			tags: ["древнепермская буква бур", "old permic letter bur"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Б" },
 		},
-		"permic_gai", {
+		"old_permic_n_let_ver", {
+			unicode: "1036E",
+			options: { altLayoutKey: "В" },
+		},
+		"old_permic_n_let_gai", {
 			unicode: "10352",
-			tags: ["древнепермская буква гай", "old permic letter gai"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Г" },
 		},
-		"permic_doi", {
+		"old_permic_n_let_doi", {
 			unicode: "10353",
-			tags: ["древнепермская буква дой", "old permic letter doi"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Д" },
+			alterations: { combining: "10377" },
 		},
-		"permic_e", {
+		"old_permic_n_let_e", {
 			unicode: "10354",
-			tags: ["древнепермская буква э", "old permic letter e"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Е" },
 		},
-		"permic_zhoi", {
+		"old_permic_n_let_oo", {
+			unicode: "1036A",
+			options: { altLayoutKey: "Ё" },
+		},
+		"old_permic_n_let_zhoi", {
 			unicode: "10355",
-			tags: ["древнепермская буква жой", "old permic letter zhoi"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Ж" },
 		},
-		"permic_dzhoi", {
+		"old_permic_n_let_dzhoi", {
 			unicode: "10356",
-			tags: ["древнепермская буква джой", "old permic letter dzhoi"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: ">! Ж" },
 		},
-		"permic_zata", {
+		"old_permic_n_let_zata", {
 			unicode: "10357",
-			tags: ["древнепермская буква зата", "old permic letter zata"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "З" },
+			alterations: { combining: "10378" },
 		},
-		"permic_dzita", {
+		"old_permic_n_let_dzita", {
 			unicode: "10358",
-			tags: ["древнепермская буква дзита", "old permic letter dzita"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: ">! З" },
 		},
-		"permic_i", {
+		"old_permic_n_let_i", {
 			unicode: "10359",
-			tags: ["древнепермская буква и", "old permic letter i"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "И" },
 		},
-		"permic_koke", {
+		"old_permic_n_let_ie", {
+			unicode: "10372",
+			options: { altLayoutKey: "Й" },
+		},
+		"old_permic_n_let_koke", {
 			unicode: "1035A",
-			tags: ["древнепермская буква кокэ", "old permic letter koke"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "К" },
 		},
-		"permic_lei", {
+		"old_permic_n_let_lei", {
 			unicode: "1035B",
-			tags: ["древнепермская буква лэй", "old permic letter lei"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Л" },
 		},
-		"permic_menoe", {
+		"old_permic_n_let_menoe", {
 			unicode: "1035C",
-			tags: ["древнепермская буква мэно", "древнепермская буква мэнӧ", "old permic letter menoe"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "М" },
 		},
-		"permic_nenoe", {
+		"old_permic_n_let_nenoe", {
 			unicode: "1035D",
-			tags: ["древнепермская буква нэно", "древнепермская буква нэнӧ", "old permic letter nenoe"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Н" },
 			alterations: { combining: "10379" },
 		},
-		"permic_vooi", {
+		"old_permic_n_let_vooi", {
 			unicode: "1035E",
-			tags: ["древнепермская буква вой", "древнепермская буква во̂й", "old permic letter vooi"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "О" },
 		},
-		"permic_peei", {
+		"old_permic_n_let_o", {
+			unicode: "10369",
+			options: { altLayoutKey: ">! О" },
+		},
+		"old_permic_n_let_peei", {
 			unicode: "1035F",
-			tags: ["древнепермская буква пэй", "древнепермская буква пэ̂й", "old permic letter peei"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "П" },
 		},
-		"permic_rei", {
+		"old_permic_n_let_rei", {
 			unicode: "10360",
-			tags: ["древнепермская буква пэй", "old permic letter rei"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Р" },
 		},
-		"permic_sii", {
+		"old_permic_n_let_sii", {
 			unicode: "10361",
-			tags: ["древнепермская буква сий", "old permic letter sii"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "С" },
 			alterations: { combining: "1037A" },
 		},
-		"permic_tai", {
+		"old_permic_n_let_tai", {
 			unicode: "10362",
-			tags: ["древнепермская буква тай", "old permic letter tai"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Т" },
 		},
-		"permic_u", {
+		"old_permic_n_let_u", {
 			unicode: "10363",
-			tags: ["древнепермская буква у", "old permic letter u"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "У" },
 		},
-		"permic_chery", {
-			unicode: "10364",
-			tags: ["древнепермская буква чэры", "old permic letter chery"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: "Ч" },
-		},
-		"permic_shooi", {
-			unicode: "10365",
-			tags: ["древнепермская буква шой", "древнепермская буква шо̂й", "old permic letter shooi"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: "Ш" },
-		},
-		"permic_shchooi", {
-			unicode: "10366",
-			tags: ["древнепермская буква тшой", "древнепермская буква тшо̂й", "old permic letter shchooi"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: "Щ" },
-		},
-		"permic_yery", {
-			unicode: "10368",
-			tags: ["древнепермская буква еры", "old permic letter yery"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: "Ы" },
-		},
-		"permic_yry", {
-			unicode: "10367",
-			tags: ["древнепермская буква ыры", "old permic letter yry"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: ">! Ы" },
-		},
-		"permic_o", {
-			unicode: "10369",
-			tags: ["древнепермская буква о", "old permic letter o"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: ">! О" },
-		},
-		"permic_oo", {
-			unicode: "1036A",
-			tags: ["древнепермская буква оо", "old permic letter oo"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: "Ё" },
-		},
-		"permic_ef", {
+		"old_permic_n_let_ef", {
 			unicode: "1036B",
-			tags: ["древнепермская буква эф", "old permic letter ef"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Ф" },
 		},
-		"permic_ha", {
+		"old_permic_n_let_ha", {
 			unicode: "1036C",
-			tags: ["древнепермская буква ха", "old permic letter ha"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Х" },
 		},
-		"permic_tsiu", {
+		"old_permic_n_let_tsiu", {
 			unicode: "1036D",
-			tags: ["древнепермская буква цю", "old permic letter tsiu"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Ц" },
 		},
-		"permic_ver", {
-			unicode: "1036E",
-			tags: ["древнепермская буква вэр", "old permic letter ver"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: "В" },
+		"old_permic_n_let_chery", {
+			unicode: "10364",
+			options: { altLayoutKey: "Ч" },
 		},
-		"permic_yeru", {
+		"old_permic_n_let_shooi", {
+			unicode: "10365",
+			options: { altLayoutKey: "Ш" },
+		},
+		"old_permic_n_let_shchooi", {
+			unicode: "10366",
+			options: { altLayoutKey: "Щ" },
+		},
+		"old_permic_n_let_yeru", {
 			unicode: "1036F",
-			tags: ["древнепермская буква ер", "old permic letter yeru"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Ъ" },
 		},
-		"permic_yeri", {
+		"old_permic_n_let_yery", {
+			unicode: "10368",
+			options: { altLayoutKey: "Ы" },
+		},
+		"old_permic_n_let_yry", {
+			unicode: "10367",
+			options: { altLayoutKey: ">! Ы" },
+		},
+		"old_permic_n_let_yeri", {
 			unicode: "10370",
-			tags: ["древнепермская буква ери", "old permic letter yeri"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Ь" },
 		},
-		"permic_yat", {
+		"old_permic_n_let_yat", {
 			unicode: "10371",
-			tags: ["древнепермская буква ять", "old permic letter yat"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Э" },
 		},
-		"permic_ie", {
-			unicode: "10372",
-			tags: ["древнепермская буква йэ", "old permic letter ie"],
-			groups: ["Old Permic"],
-			options: { altLayoutKey: "Й" },
-		},
-		"permic_yu", {
+		"old_permic_n_let_yu", {
 			unicode: "10373",
-			tags: ["древнепермская буква ю", "old permic letter yu"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Ю" },
 		},
-		"permic_ia", {
+		"old_permic_n_let_ia", {
 			unicode: "10375",
-			tags: ["древнепермская буква йа", "old permic letter ia"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: "Я" },
 		},
-		"permic_ya", {
+		"old_permic_n_let_ya", {
 			unicode: "10374",
-			tags: ["древнепермская буква я", "old permic letter ya"],
-			groups: ["Old Permic"],
 			options: { altLayoutKey: ">! Я" },
 		},
 		;
