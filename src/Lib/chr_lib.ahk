@@ -8340,431 +8340,181 @@ LibRegistrate(this) {
 		; * Old Turkic
 		;
 		;
-		"turkic_orkhon_a", {
-			unicode: "10C00",
-			tags: ["древнетюркская орхонская буква а", "old turkic orkhon letter a"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "A" },
+		"old_turkic_n_rune_a_[orkhon,yenisei]_a", {
+			unicode: ["10C00", "10C01"],
+			options: { altLayoutKey: ["A", "c*>! A"] },
 		},
-		"turkic_yenisei_a", {
-			unicode: "10C01",
-			tags: ["древнетюркская енисейская буква а", "old turkic yenisei letter a"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* A" },
-		},
-		"turkic_yenisei_ae", {
+		"old_turkic_n_rune_a_yenisei_ae", {
 			unicode: "10C02",
-			tags: ["древнетюркская енисейская буква я", "old turkic yenisei letter ae"],
-			groups: ["Old Turkic Yenisei"],
 			options: { altLayoutKey: ">! A" },
 		},
-		"turkic_yenisei_e", {
+		"old_turkic_n_rune_e_yenisei", {
 			unicode: "10C05",
-			tags: ["древнетюркская енисейская буква е", "old turkic yenisei letter e"],
-			groups: ["Old Turkic Yenisei"],
 			options: { altLayoutKey: "E" },
 		},
-		"turkic_orkhon_i", {
-			unicode: "10C03",
-			tags: ["древнетюркская орхонская буква и", "old turkic orkhon letter i"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "I" },
+		"old_turkic_n_rune_i_[orkhon,yenisei]", {
+			unicode: ["10C03", "10C04"],
+			options: { altLayoutKey: ["I", "c*>! I"] },
 		},
-		"turkic_yenisei_i", {
-			unicode: "10C04",
-			tags: ["древнетюркская енисейская буква и", "old turkic yenisei letter i"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* I" },
-		},
-		"turkic_orkhon_o", {
+		"old_turkic_n_rune_o_orkhon", {
 			unicode: "10C06",
-			tags: ["древнетюркская орхонская буква о", "old turkic orkhon letter o"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: "O" },
 		},
-		"turkic_orkhon_oe", {
-			unicode: "10C07",
-			tags: ["древнетюркская орхонская буква ё", "old turkic orkhon letter oe"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">! O" },
+		"old_turkic_n_rune_o_[orkhon,yenisei]_oe", {
+			unicode: ["10C07", "10C08"],
+			options: { altLayoutKey: [">! O", "c*>! O"] },
 		},
-		"turkic_yenisei_oe", {
-			unicode: "10C08",
-			tags: ["древнетюркская енисейская буква ё", "old turkic yenisei letter oe"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>! O" },
+		"old_turkic_n_rune_c_[orkhon,yenisei]_ec", {
+			unicode: ["10C32", "10C33"],
+			options: { altLayoutKey: ["C", "c* C"] },
 		},
-		"turkic_orkhon_ec", {
-			unicode: "10C32",
-			tags: ["древнетюркская орхонская буква эч", "old turkic orkhon letter ec"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "C" },
-		},
-		"turkic_yenisei_ec", {
-			unicode: "10C33",
-			tags: ["древнетюркская енисейская буква эч", "old turkic yenisei letter ec"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* C" },
-		},
-		"turkic_orkhon_em", {
+		"old_turkic_n_rune_m_orkhon_em", {
 			unicode: "10C22",
-			tags: ["древнетюркская орхонская буква эм", "old turkic orkhon letter em"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: "M" },
 		},
-		"turkic_orkhon_eng", {
+		"old_turkic_n_rune_n_orkhon_eng", {
 			unicode: "10C2D",
-			tags: ["древнетюркская орхонская буква энг", "old turkic orkhon letter eng"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: "<! N" },
 		},
-		"turkic_orkhon_ep", {
+		"old_turkic_n_rune_p_orkhon_ep", {
 			unicode: "10C2F",
-			tags: ["древнетюркская орхонская буква эп", "old turkic orkhon letter ep"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: "P" },
 		},
-		"turkic_orkhon_esh", {
-			unicode: "10C41",
-			tags: ["древнетюркская орхонская буква эш", "old turkic orkhon letter esh"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "<! S" },
+		"old_turkic_n_rune_s_[orkhon,yenisei]_esh", {
+			unicode: ["10C41", "10C42"],
+			options: { altLayoutKey: ["<! S", "c*<! S"] },
 		},
-		"turkic_yenisei_esh", {
-			unicode: "10C42",
-			tags: ["древнетюркская енисейская буква эш", "old turkic yenisei letter esh"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*<! S" },
+		"old_turkic_n_rune_z_[orkhon,yenisei]_ez", {
+			unicode: ["10C14", "10C15"],
+			options: { altLayoutKey: ["Z", "c* Z"] },
 		},
-		"turkic_orkhon_ez", {
-			unicode: "10C14",
-			tags: ["древнетюркская орхонская буква эз", "old turkic orkhon letter ez"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "Z" },
-		},
-		"turkic_yenisei_ez", {
-			unicode: "10C15",
-			tags: ["древнетюркская енисейская буква эз", "old turkic yenisei letter ez"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* Z" },
-		},
-		"turkic_orkhon_elt", {
+		"old_turkic_n_rune_t_orkhon_elt", {
 			unicode: "10C21",
-			tags: ["древнетюркская орхонская буква элт", "old turkic orkhon letter elt"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: ">!>+ T" },
 		},
-		"turkic_orkhon_enc", {
-			unicode: "10C28",
-			tags: ["древнетюркская орхонская буква энч", "old turkic orkhon letter enc"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">+ N" },
+		"old_turkic_n_rune_n_[orkhon,yenisei]_enc", {
+			unicode: ["10C28", "10C29"],
+			options: { altLayoutKey: [">+ N", "c*>+ N"] },
 		},
-		"turkic_yenisei_enc", {
-			unicode: "10C29",
-			tags: ["древнетюркская енисейская буква энч", "old turkic yenisei letter enc"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>+ N" },
+		"old_turkic_n_rune_n_[orkhon,yenisei]_eny", {
+			unicode: ["10C2A", "10C2B"],
+			options: { altLayoutKey: ["<+ N", "c*<+ N"] },
 		},
-		"turkic_orkhon_eny", {
-			unicode: "10C2A",
-			tags: ["древнетюркская орхонская буква энь", "old turkic orkhon letter eny"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "<+ N" },
+		"old_turkic_n_rune_n_[orkhon,yenisei]_ent", {
+			unicode: ["10C26", "10C27"],
+			options: { altLayoutKey: [">!>+ N", "c*>!>+ N"] },
 		},
-		"turkic_yenisei_eny", {
-			unicode: "10C2B",
-			tags: ["древнетюркская енисейская буква энь", "old turkic yenisei letter eny"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*<+ N" },
-		},
-		"turkic_orkhon_ent", {
-			unicode: "10C26",
-			tags: ["древнетюркская орхонская буква энт", "old turkic orkhon letter ent"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">!>+ N" },
-		},
-		"turkic_yenisei_ent", {
-			unicode: "10C27",
-			tags: ["древнетюркская енисейская буква энт", "old turkic yenisei letter ent"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>!>+ N" },
-		},
-		"turkic_orkhon_bash", {
+		"old_turkic_n_rune_r_orkhon_bash", {
 			unicode: "10C48",
-			tags: ["древнетюркская орхонская буква баш", "old turkic orkhon letter bash"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: "<! R" },
 		},
-		"turkic_orkhon_ab", {
-			unicode: "10C09",
-			tags: ["древнетюркская орхонская буква аб", "old turkic orkhon letter ab"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "B" },
+		"old_turkic_n_rune_b_[orkhon,yenisei]_ab", {
+			unicode: ["10C09", "10C0A"],
+			options: { altLayoutKey: ["B", "c* B"] },
 		},
-		"turkic_yenisei_ab", {
-			unicode: "10C0A",
-			tags: ["древнетюркская енисейская буква аб", "old turkic yenisei letter ab"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* B" },
+		"old_turkic_n_rune_b_[orkhon,yenisei]_aeb", {
+			unicode: ["10C0B", "10C0C"],
+			options: { altLayoutKey: [">! B", "c*>! B"] },
 		},
-		"turkic_orkhon_aeb", {
-			unicode: "10C0B",
-			tags: ["древнетюркская орхонская буква ябь", "old turkic orkhon letter aeb"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">! B" },
+		"old_turkic_n_rune_d_[orkhon,yenisei]_ad", {
+			unicode: ["10C11", "10C12"],
+			options: { altLayoutKey: ["D", "c* D"] },
 		},
-		"turkic_yenisei_aeb", {
-			unicode: "10C0C",
-			tags: ["древнетюркская енисейская буква ябь", "old turkic yenisei letter aeb"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>! B" },
-		},
-		"turkic_orkhon_ad", {
-			unicode: "10C11",
-			tags: ["древнетюркская орхонская буква ад", "old turkic orkhon letter ad"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "D" },
-		},
-		"turkic_yenisei_ad", {
-			unicode: "10C12",
-			tags: ["древнетюркская енисейская буква ад", "old turkic yenisei letter ad"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* D" },
-		},
-		"turkic_orkhon_aed", {
+		"old_turkic_n_rune_d_orkhon_aed", {
 			unicode: "10C13",
-			tags: ["древнетюркская орхонская буква ядь", "old turkic orkhon letter aed"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: ">! D" },
 		},
-		"turkic_orkhon_al", {
-			unicode: "10C1E",
-			tags: ["древнетюркская орхонская буква ал", "old turkic orkhon letter al"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "L" },
+		"old_turkic_n_rune_l_[orkhon,yenisei]_al", {
+			unicode: ["10C1E", "10C1F"],
+			options: { altLayoutKey: ["L", "c* L"] },
 		},
-		"turkic_yenisei_al", {
-			unicode: "10C1F",
-			tags: ["древнетюркская енисейская буква ал", "old turkic yenisei letter al"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* L" },
-		},
-		"turkic_orkhon_ael", {
+		"old_turkic_n_rune_l_orkhon_ael", {
 			unicode: "10C20",
-			tags: ["древнетюркская орхонская буква яль", "old turkic orkhon letter ael"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: ">! L" },
 		},
-		"turkic_orkhon_an", {
+		"old_turkic_n_rune_n_orkhon_an", {
 			unicode: "10C23",
-			tags: ["древнетюркская орхонская буква ан", "old turkic orkhon letter an"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: "N" },
 		},
-		"turkic_orkhon_aen", {
-			unicode: "10C24",
-			tags: ["древнетюркская орхонская буква янь", "old turkic orkhon letter aen"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">! N" },
+		"old_turkic_n_rune_n_[orkhon,yenisei]_aen", {
+			unicode: ["10C24", "10C25"],
+			options: { altLayoutKey: [">! N", "c*>! N"] },
 		},
-		"turkic_yenisei_aen", {
-			unicode: "10C25",
-			tags: ["древнетюркская енисейская буква янь", "old turkic yenisei letter aen"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>! N" },
+		"old_turkic_n_rune_r_[orkhon,yenisei]_ar", {
+			unicode: ["10C3A", "10C3B"],
+			options: { altLayoutKey: ["R", "c* R"] },
 		},
-		"turkic_orkhon_ar", {
-			unicode: "10C3A",
-			tags: ["древнетюркская орхонская буква ар", "old turkic orkhon letter ar"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "R" },
-		},
-		"turkic_yenisei_ar", {
-			unicode: "10C3B",
-			tags: ["древнетюркская енисейская буква ар", "old turkic yenisei letter ar"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* R" },
-		},
-		"turkic_orkhon_aer", {
+		"old_turkic_n_rune_r_orkhon_aer", {
 			unicode: "10C3C",
-			tags: ["древнетюркская орхонская буква ярь", "old turkic orkhon letter aer"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: ">! R" },
 		},
-		"turkic_orkhon_as", {
+		"old_turkic_n_rune_s_orkhon_as", {
 			unicode: "10C3D",
-			tags: ["древнетюркская орхонская буква ар", "old turkic orkhon letter as"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: "S" },
 		},
-		"turkic_orkhon_aes", {
+		"old_turkic_n_rune_s_orkhon_aes", {
 			unicode: "10C3E",
-			tags: ["древнетюркская орхонская буква ярь", "old turkic orkhon letter aes"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: ">! S" },
 		},
-		"turkic_orkhon_at", {
-			unicode: "10C43",
-			tags: ["древнетюркская орхонская буква ат", "old turkic orkhon letter at"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "T" },
+		"old_turkic_n_rune_t_[orkhon,yenisei]_at", {
+			unicode: ["10C43", "10C44"],
+			options: { altLayoutKey: ["T", "c* T"] },
 		},
-		"turkic_yenisei_at", {
-			unicode: "10C44",
-			tags: ["древнетюркская енисейская буква ат", "old turkic yenisei letter at"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* T" },
+		"old_turkic_n_rune_t_[orkhon,yenisei]_aet", {
+			unicode: ["10C45", "10C46"],
+			options: { altLayoutKey: [">! T", "c*>! T"] },
 		},
-		"turkic_orkhon_aet", {
-			unicode: "10C45",
-			tags: ["древнетюркская орхонская буква ять", "old turkic orkhon letter aet"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">! T" },
+		"old_turkic_n_rune_y_[orkhon,yenisei]_ay", {
+			unicode: ["10C16", "10C17"],
+			options: { altLayoutKey: ["Y", "c* Y"] },
 		},
-		"turkic_yenisei_aet", {
-			unicode: "10C46",
-			tags: ["древнетюркская енисейская буква ять", "old turkic yenisei letter aet"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>! T" },
+		"old_turkic_n_rune_y_[orkhon,yenisei]_aey", {
+			unicode: ["10C18", "10C19"],
+			options: { altLayoutKey: [">! Y, J", "c*>! Y, J"] },
 		},
-		"turkic_orkhon_ay", {
-			unicode: "10C16",
-			tags: ["древнетюркская орхонская буква ай", "old turkic orkhon letter ay"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "Y" },
+		"old_turkic_n_rune_g_[orkhon,yenisei]_ag", {
+			unicode: ["10C0D", "10C0E"],
+			options: { altLayoutKey: ["G", "c* G"] },
 		},
-		"turkic_yenisei_ay", {
-			unicode: "10C17",
-			tags: ["древнетюркская енисейская буква ай", "old turkic yenisei letter ay"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* Y" },
+		"old_turkic_n_rune_g_[orkhon,yenisei]_aeg", {
+			unicode: ["10C0F", "10C10"],
+			options: { altLayoutKey: [">! G", "c*>! G"] },
 		},
-		"turkic_orkhon_aey", {
-			unicode: "10C18",
-			tags: ["древнетюркская орхонская буква яй", "old turkic orkhon letter aey"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">! Y], [J" },
+		"old_turkic_n_rune_k_[orkhon,yenisei]_aq", {
+			unicode: ["10C34", "10C35"],
+			options: { altLayoutKey: ["K", "c* K"] },
 		},
-		"turkic_yenisei_aey", {
-			unicode: "10C19",
-			tags: ["древнетюркская енисейская буква яй", "old turkic yenisei letter aey"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>! Y], [J" },
+		"old_turkic_n_rune_k_[orkhon,yenisei]_aek", {
+			unicode: ["10C1A", "10C1B"],
+			options: { altLayoutKey: [">! K", "c*>! K"] },
 		},
-		"turkic_orkhon_ag", {
-			unicode: "10C0D",
-			tags: ["древнетюркская орхонская буква агх", "old turkic orkhon letter ag"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "G" },
+		"old_turkic_n_rune_q_[orkhon,yenisei]_oq", {
+			unicode: ["10C38", "10C39"],
+			options: { altLayoutKey: ["Q", "c* Q"] },
 		},
-		"turkic_yenisei_ag", {
-			unicode: "10C0E",
-			tags: ["древнетюркская енисейская буква агх", "old turkic yenisei letter ag"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* G" },
+		"old_turkic_n_rune_q_[orkhon,yenisei]_oek", {
+			unicode: ["10C1C", "10C1D"],
+			options: { altLayoutKey: [">! Q", "c*>! Q"] },
 		},
-		"turkic_orkhon_aeg", {
-			unicode: "10C0F",
-			tags: ["древнетюркская орхонская буква ягь", "old turkic orkhon letter aeg"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">! G" },
+		"old_turkic_n_rune_q_[orkhon,yenisei]_iq", {
+			unicode: ["10C36", "10C37"],
+			options: { altLayoutKey: ["<! Q", "c*<! Q"] },
 		},
-		"turkic_yenisei_aeg", {
-			unicode: "10C10",
-			tags: ["древнетюркская енисейская буква ягь", "old turkic yenisei letter aeg"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>! G" },
-		},
-		"turkic_orkhon_aq", {
-			unicode: "10C34",
-			tags: ["древнетюркская орхонская буква акх", "old turkic orkhon letter aq"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "K" },
-		},
-		"turkic_yenisei_aq", {
-			unicode: "10C35",
-			tags: ["древнетюркская енисейская буква акх", "old turkic yenisei letter aq"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* K" },
-		},
-		"turkic_orkhon_aek", {
-			unicode: "10C1A",
-			tags: ["древнетюркская орхонская буква якь", "old turkic orkhon letter aek"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">! K" },
-		},
-		"turkic_yenisei_aek", {
-			unicode: "10C1B",
-			tags: ["древнетюркская енисейская буква якь", "old turkic yenisei letter aek"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>! K" },
-		},
-		"turkic_orkhon_oq", {
-			unicode: "10C38",
-			tags: ["древнетюркская орхонская буква окх", "old turkic orkhon letter oq"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "Q" },
-		},
-		"turkic_yenisei_oq", {
-			unicode: "10C39",
-			tags: ["древнетюркская енисейская буква окх", "old turkic yenisei letter oq"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c* Q" },
-		},
-		"turkic_orkhon_oek", {
-			unicode: "10C1C",
-			tags: ["древнетюркская орхонская буква ёкь", "old turkic orkhon letter oek"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: ">! Q" },
-		},
-		"turkic_yenisei_oek", {
-			unicode: "10C1D",
-			tags: ["древнетюркская енисейская буква ёкь", "old turkic yenisei letter oek"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*>! Q" },
-		},
-		"turkic_orkhon_iq", {
-			unicode: "10C36",
-			tags: ["древнетюркская орхонская буква ыкх", "old turkic orkhon letter iq"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "<! Q" },
-		},
-		"turkic_yenisei_iq", {
-			unicode: "10C37",
-			tags: ["древнетюркская енисейская буква ыкх", "old turkic yenisei letter iq"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*<!  Q" },
-		},
-		"turkic_orkhon_ic", {
+		"old_turkic_n_rune_c_orkhon_ic", {
 			unicode: "10C31",
-			tags: ["древнетюркская орхонская буква ичь", "old turkic orkhon letter ic"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: ">! C" },
 		},
-		"turkic_orkhon_ash", {
-			unicode: "10C3F",
-			tags: ["древнетюркская орхонская буква аш", "old turkic orkhon letter ash"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "<! A" },
+		"old_turkic_n_rune_a_[orkhon,yenisei]_ash", {
+			unicode: ["10C3F", "10C40"],
+			options: { altLayoutKey: ["<! A", "c*<! A"] },
 		},
-		"turkic_yenisei_ash", {
-			unicode: "10C40",
-			tags: ["древнетюркская енисейская буква аш", "old turkic yenisei letter ash"],
-			groups: ["Old Turkic Yenisei"],
-			options: { altLayoutKey: "c*<! A" },
-		},
-		"turkic_orkhon_op", {
+		"old_turkic_n_rune_p_orkhon_op", {
 			unicode: "10C30",
-			tags: ["древнетюркская орхонская буква оп", "old turkic orkhon letter op"],
-			groups: ["Old Turkic Orkhon"],
 			options: { altLayoutKey: "<! P" },
 		},
-		"turkic_orkhon_ot", {
+		"old_turkic_n_rune_t_orkhon_ot", {
 			unicode: "10C47",
-			tags: ["древнетюркская орхонская буква от", "old turkic orkhon letter ot"],
-			groups: ["Old Turkic Orkhon"],
-			options: { altLayoutKey: "<! T" },
+			options: { altLayoutKey: "<! $" },
 		},
 		;
 		;

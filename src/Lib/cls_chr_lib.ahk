@@ -1042,6 +1042,10 @@ Class ChrLib {
 		refinedEntry := entry.Clone()
 		refinedEntry := this.SetDecomposedData(entryName, refinedEntry)
 
+		selectivePart := ""
+		if RegExMatch(entryName, "i)(orkhon|yenisei)", &selectiveMatch)
+			selectivePart := " " selectiveMatch[1]
+
 		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
 			if refinedEntry.groups.Length = 0 {
 				hasPostfix := refinedEntry.data.postfixes.Length > 0
@@ -1049,8 +1053,8 @@ Class ChrLib {
 					script := StrReplace(refinedEntry.data.script, "_", " ")
 					refinedEntry.groups :=
 						(StrLen(refinedEntry.data.type) > 0 && ["digraph", "ligature", "numeral"].HasValue(refinedEntry.data.type) ?
-							[StrTitle(script " " refinedEntry.data.type "s")] :
-							[StrTitle(script (hasPostfix ? " Accented" : ""))]
+							[StrTitle(script selectivePart " " refinedEntry.data.type "s")] :
+							[StrTitle(script selectivePart (hasPostfix ? " Accented" : ""))]
 						)
 				}
 
@@ -1069,8 +1073,11 @@ Class ChrLib {
 				}
 			}
 
-			if refinedEntry.data.script = "old_italic" && refinedEntry.symbol.scriptAdditive = ""
-				refinedEntry.symbol.scriptAdditive := "etruscan"
+			if refinedEntry.symbol.scriptAdditive = ""
+				if refinedEntry.data.script = "old_italic"
+					refinedEntry.symbol.scriptAdditive := "etruscan"
+				else if selectivePart != ""
+					refinedEntry.symbol.scriptAdditive := selectiveMatch[1]
 		}
 
 		if StrLen(refinedEntry.options.fastKey) && RegExMatch(refinedEntry.options.fastKey, "\?(.*?)$", &addGroupMatch) {
