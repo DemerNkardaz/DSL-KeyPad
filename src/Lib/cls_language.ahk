@@ -286,7 +286,8 @@ Class Locale {
 		nbsp := Chr(160)
 		pfx := "gen_"
 
-		useLetterLocale := entry.options.HasOwnProp("useLetterLocale") ? entry.options.useLetterLocale : False
+		useLetterLocale := entry.options.useLetterLocale
+		scriptAdditive := entry.symbol.scriptAdditive != "" ? "_" entry.symbol.scriptAdditive : ""
 
 		cyrillicTasgScriptAtStart := False
 
@@ -381,7 +382,7 @@ Class Locale {
 			} else {
 				localedCase := lCase != "neutral" ? Locale.VarSelect(Locale.Read(pfx "case_" lCase, lang), lVariant) " " : ""
 
-				entry.titles[langCode] := Locale.VarSelect(Locale.Read(pfx "prefix_" lScript, lang), lVariant) " " localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
+				entry.titles[langCode] := Locale.VarSelect(Locale.Read(pfx "prefix_" lScript (scriptAdditive), lang), lVariant) " " localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
 				tags[langCode] := localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName
 			}
 		}
@@ -407,10 +408,27 @@ Class Locale {
 			}
 		}
 
-		tags["en-US"] := Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "en-US"), lVariant) " " tags["en-US"]
-		tags["ru-RU"] := cyrillicTasgScriptAtStart ?
-			Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant) " " tags["ru-RU"]
-			: tags["ru-RU"] " " Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant)
+		tagScriptAdditive := Map(
+			"en-US", scriptAdditive ? " " Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript (scriptAdditive), "en-US"), lVariant) : "",
+			"ru-RU", scriptAdditive ? " " Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript (scriptAdditive), "ru-RU"), lVariant) : "",
+		)
+
+		tags["en-US"] := (
+			Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "en-US"), lVariant)
+			tagScriptAdditive["en-US"] " "
+			tags["en-US"]
+		)
+		tags["ru-RU"] := (
+			cyrillicTasgScriptAtStart ?
+				(
+					Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant)
+					tagScriptAdditive["ru-RU"] " "
+					tags["ru-RU"]
+				)
+			: (
+				tags["ru-RU"] " " Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant)
+			)
+		)
 
 		for _, langCode in langCodes {
 			entry.titles[langCode] := this.LocaleRules(entry.titles[langCode], langCode)

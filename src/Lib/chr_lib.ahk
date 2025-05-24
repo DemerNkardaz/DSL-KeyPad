@@ -9750,237 +9750,171 @@ LibRegistrate(this) {
 		; * Old Italic
 		;
 		;
-		"italic_let_a", {
+		"old_italic_n_let_a", {
 			unicode: "10300",
-			tags: ["древнеиталийская буква А", "old italic letter A"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "A" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_be", {
+		"old_italic_n_let_b_be", {
 			unicode: "10301",
-			tags: ["древнеиталийская буква Бе", "old italic letter Be"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "B" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_ke", {
+		"old_italic_n_let_c_ke", {
 			unicode: "10302",
-			tags: ["древнеиталийская буква Ке", "old italic letter Ke"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "C" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_che", {
+		"old_italic_n_let_c_che", {
 			unicode: "1031C",
-			tags: ["древнеиталийская буква Че", "old italic letter Che"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ C" },
+			options: { altLayoutKey: "<! $" },
+			symbol: { scriptAdditive: "umbrian" },
 		},
-		"italic_let_de", {
+		"old_italic_n_let_d_de", {
 			unicode: "10303",
-			tags: ["древнеиталийская буква Де", "old italic letter De"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "D" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_e", {
+		"old_italic_n_let_e", {
 			unicode: "10304",
-			tags: ["древнеиталийская буква Е", "old italic letter E"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "E" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_ye", {
-			unicode: "1032D",
-			tags: ["древнеиталийская буква Йе", "old italic letter Ye"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "Y" },
-		},
-		"italic_let_ve", {
-			unicode: "10305",
-			tags: ["древнеиталийская буква Ве", "old italic letter Ve"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "F" },
-		},
-		"italic_let_ef", {
+		"old_italic_n_let_f_ef", {
 			unicode: "1031A",
-			tags: ["древнеиталийская буква Эф", "old italic letter Ef"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ F" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_ze", {
-			unicode: "10306",
-			tags: ["древнеиталийская буква Зе", "old italic letter Ze"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "Z" },
+		"old_italic_n_let_f_ve", {
+			unicode: "10305",
+			options: { altLayoutKey: "V" },
 		},
-		"italic_let_he", {
+		"old_italic_n_let_h_he", {
 			unicode: "10307",
-			tags: ["древнеиталийская буква Хе", "old italic letter He"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "H" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_i", {
+		"old_italic_n_let_i", {
 			unicode: "10309",
-			tags: ["древнеиталийская буква И", "old italic letter I"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "I" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_ii", {
+		"old_italic_n_let_i_ii", {
 			unicode: "1031D",
-			tags: ["древнеиталийская буква Ии", "old italic letter Ii"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ I" },
+			options: { altLayoutKey: ">+ $" },
+			symbol: { scriptAdditive: "oscan" },
 		},
-		"italic_let_ka", {
+		"old_italic_n_let_k_ka", {
 			unicode: "1030A",
-			tags: ["древнеиталийская буква Ка", "old italic letter Ka"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "K" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_khe", {
+		"old_italic_n_let_k_khe", {
 			unicode: "10319",
-			tags: ["древнеиталийская буква Кхе", "old italic letter Khe"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ K" },
+			options: { altLayoutKey: ">+ $" },
 		},
-		"italic_let_el", {
+		"old_italic_n_let_l_el", {
 			unicode: "1030B",
-			tags: ["древнеиталийская буква Эль", "old italic letter El"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "L" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_em", {
+		"old_italic_n_let_m_em", {
 			unicode: "1030C",
-			tags: ["древнеиталийская буква Эм", "old italic letter Em"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "M" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_en", {
+		"old_italic_n_let_n_en", {
 			unicode: "1030D",
-			tags: ["древнеиталийская буква Эн", "old italic letter En"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "N" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_o", {
+		"old_italic_n_let_o", {
 			unicode: "1030F",
-			tags: ["древнеиталийская буква О", "old italic letter O"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "O" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_pe", {
+		"old_italic_n_let_p_pe", {
 			unicode: "10310",
-			tags: ["древнеиталийская буква Пе", "old italic letter Pe"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "P" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_phe", {
+		"old_italic_n_let_p_phe", {
 			unicode: "10318",
-			tags: ["древнеиталийская буква Пхе", "old italic letter Phe"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ P" },
+			options: { altLayoutKey: ">+ $" },
 		},
-		"italic_let_ku", {
+		"old_italic_n_let_q_ku", {
 			unicode: "10312",
-			tags: ["древнеиталийская буква Ку", "old italic letter Ku"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "Q" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_er", {
+		"old_italic_n_let_r_er", {
 			unicode: "10313",
-			tags: ["древнеиталийская буква Эр", "old italic letter Er"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "R" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_ers", {
+		"old_italic_n_let_r_ers", {
 			unicode: "1031B",
-			tags: ["древнеиталийская буква Эрс", "old italic letter Ers"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ R" },
+			options: { altLayoutKey: ">+ $" },
+			symbol: { scriptAdditive: "umbrian" },
 		},
-		"italic_let_es", {
+		"old_italic_n_let_s_es", {
 			unicode: "10314",
-			tags: ["древнеиталийская буква Эс", "old italic letter Es"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "S" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_esh", {
+		"old_italic_n_let_s_esh", {
 			unicode: "1030E",
-			tags: ["древнеиталийская буква Эш", "old italic letter Esh"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ S" },
+			options: { altLayoutKey: ">+ $" },
 		},
-		"italic_let_she", {
+		"old_italic_n_let_s_she", {
 			unicode: "10311",
-			tags: ["древнеиталийская буква Ше", "old italic letter She"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "<+ S" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"italic_let_ess", {
+		"old_italic_n_let_s_ess", {
 			unicode: "1031F",
-			tags: ["древнеиталийская буква Эсс", "old italic letter Ess"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "<! S" },
+			options: { altLayoutKey: "<! $" },
+			symbol: { scriptAdditive: "sabine" },
 		},
-		"italic_let_te", {
+		"old_italic_n_let_t_te", {
 			unicode: "10315",
-			tags: ["древнеиталийская буква Те", "old italic letter Te"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "T" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_the", {
+		"old_italic_n_let_t_the", {
 			unicode: "10308",
-			tags: ["древнеиталийская буква Зэ", "old italic letter The"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ T" },
+			options: { altLayoutKey: ">+ $" },
 		},
-		"italic_let_u", {
+		"old_italic_n_let_u", {
 			unicode: "10316",
-			tags: ["древнеиталийская буква У", "old italic letter U"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "U" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_uu", {
+		"old_italic_n_let_u_uu", {
 			unicode: "1031E",
-			tags: ["древнеиталийская буква Уу", "old italic letter Uu"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: ">+ U" },
+			options: { altLayoutKey: ">+ $" },
+			symbol: { scriptAdditive: "oscan" },
 		},
-		"italic_let_eks", {
+		"old_italic_n_let_x_eks", {
 			unicode: "10317",
-			tags: ["древнеиталийская буква Экс", "old italic letter Eks"],
-			groups: ["Old Italic"],
-			options: { altLayoutKey: "X" },
+			options: { altLayoutKey: "$" },
 		},
-		"italic_let_northern_tse", {
+		"old_italic_n_let_y_ye", {
+			unicode: "1032D",
+			options: { altLayoutKey: "$" },
+			symbol: { scriptAdditive: "north" },
+		},
+		"old_italic_n_let_z_ze", {
+			unicode: "10306",
+			options: { altLayoutKey: "$" },
+		},
+		"old_italic_n_let_c_northern_tse", {
 			unicode: "1032E",
-			tags: ["древнеиталийская буква Северная Це", "old italic letter Northern Tse"],
-			groups: ["Old Italic"],
 			options: { altLayoutKey: "W" },
+			symbol: { scriptAdditive: "north" },
 		},
-		"italic_let_southern_tse", {
+		"old_italic_n_let_c_southern_tse", {
 			unicode: "1032F",
-			tags: ["древнеиталийская буква Южная Це", "old italic letter Southern Tse"],
-			groups: ["Old Italic"],
 			options: { altLayoutKey: "<+ W" },
+			symbol: { scriptAdditive: "north" },
 		},
-		"italic_let_numeral_one", {
+		"old_italic_n_num_one", {
 			unicode: "10320",
-			tags: ["древнеиталийская числовая буква один", "old italic numeral letter one"],
 			groups: ["Old Italic"],
 			options: { altLayoutKey: ">! 1" },
 		},
-		"italic_let_numeral_five", {
+		"old_italic_n_num_five", {
 			unicode: "10321",
-			tags: ["древнеиталийская числовая буква пять", "old italic numeral letter five"],
 			groups: ["Old Italic"],
 			options: { altLayoutKey: ">! 2" },
 		},
-		"italic_let_numeral_ten", {
+		"old_italic_n_num_ten", {
 			unicode: "10322",
-			tags: ["древнеиталийская числовая буква десять", "old italic numeral letter ten"],
 			groups: ["Old Italic"],
 			options: { altLayoutKey: ">! 3" },
 		},
-		"italic_let_numeral_fifty", {
+		"old_italic_n_num_fifty", {
 			unicode: "10323",
-			tags: ["древнеиталийская числовая буква пятьдесят", "old italic numeral letter fifty"],
 			groups: ["Old Italic"],
 			options: { altLayoutKey: ">! 4" },
 		},

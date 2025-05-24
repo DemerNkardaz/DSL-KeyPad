@@ -37,6 +37,7 @@ Class ChrEntry {
 		letter: "",
 		afterLetter: "",
 		beforeLetter: "",
+		scriptAdditive: "",
 		set: "",
 		alt: "",
 		customs: "",
@@ -1067,6 +1068,9 @@ Class ChrLib {
 					refinedEntry.symbol.category := "N/A"
 				}
 			}
+
+			if refinedEntry.data.script = "old_italic" && refinedEntry.symbol.scriptAdditive = ""
+				refinedEntry.symbol.scriptAdditive := "etruscan"
 		}
 
 		if StrLen(refinedEntry.options.fastKey) && RegExMatch(refinedEntry.options.fastKey, "\?(.*?)$", &addGroupMatch) {
@@ -1207,7 +1211,7 @@ Class ChrLib {
 		if RegExMatch(entryName, "i)^(north_arabian|south_arabian)", &match) {
 			scriptName := StrReplace(match[1], "_", " ")
 			refinedEntry.symbol.font := "Noto Sans Old " StrTitle(scriptName)
-		} else if RegExMatch(entryName, "i)^(old_permic|old_hungarian|old_persian|ugaritic|sidetic)", &match) {
+		} else if RegExMatch(entryName, "i)^(old_permic|old_hungarian|old_italic|old_persian|ugaritic|sidetic)", &match) {
 			scriptName := StrReplace(match[1], "_", " ")
 			refinedEntry.symbol.font := "Noto Sans " StrTitle(scriptName)
 		} else if entryName ~= "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)" {
