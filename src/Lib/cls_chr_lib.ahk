@@ -214,7 +214,6 @@ Class ChrLib {
 			splitVariants := StrSplit(match[1], ",")
 			entries := {}
 
-
 			for i, variant in splitVariants {
 				variantName := RegExReplace(entryName, "\[.*?\]", variant)
 				entries.e%i%_%variantName% := entry.Clone()
@@ -225,6 +224,9 @@ Class ChrLib {
 							entry.%item%[i] is Object ? entry.%item%[i].Clone() : entry.%item%[i]
 						)
 				}
+
+				if entry.sequence.Length > 0 && entry.sequence[i] is Array
+					entries.e%i%_%variantName%.sequence := entry.sequence[i].Clone()
 
 				entries.e%i%_%variantName% := this.SetDecomposedData(variantName, entries.e%i%_%variantName%)
 
@@ -1058,7 +1060,7 @@ Class ChrLib {
 						)
 				}
 
-				if refinedEntry.data.script = "hellenic" {
+				if ["hellenic", "glagolitic"].HasValue(refinedEntry.data.script) {
 					refinedEntry.options.useLetterLocale := True
 				}
 			}
@@ -1372,19 +1374,22 @@ Class ChrLib {
 	}
 
 	static scriptsValidator := [
-		"phoenician",
+		"deseret",
+		"glagolitic",
 		"gothic",
-		"south_arabian",
-		"north_arabian",
-		"old_turkic",
-		"old_permic",
 		"old_hungarian",
 		"old_italic",
+		"old_permic",
 		"old_persian",
-		"sidetic",
-		"ugaritic",
-		"deseret",
+		"old_turkic",
+		"phoenician",
 		"shavian",
+		"sidetic",
+		;
+		"north_arabian",
+		"south_arabian",
+		;
+		"ugaritic",
 	]
 
 	static NameDecompose(entryName) {
