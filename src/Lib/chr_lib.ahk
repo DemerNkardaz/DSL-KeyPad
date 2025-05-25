@@ -7441,19 +7441,19 @@ LibRegistrate(this) {
 			unicode: ["2C27", "2C57"],
 			options: { altLayoutKey: ">! /Э/" },
 			alterations: { combining: "1E027" },
-			recipe: [["${glagolitic_c_let_yestu}${glagolitic_c_let_small_yus}"], ["${glagolitic_s_let_yestu}${glagolitic_s_let_small_yus}"]],
+			recipe: ["${glagolitic_[c,s]_let_yestu}${glagolitic_[c,s]_let_small_yus}"],
 		},
 		"glagolitic_[c,s]_let_big_yus", {
 			unicode: ["2C28", "2C58"],
 			options: { altLayoutKey: "<! /О/" },
 			alterations: { combining: "1E028" },
-			recipe: [["${glagolitic_c_let_onu}${glagolitic_c_let_small_yus}"], ["${glagolitic_s_let_onu}${glagolitic_s_let_small_yus}"]],
+			recipe: ["${glagolitic_[c,s]_let_onu}${glagolitic_[c,s]_let_small_yus}"],
 		},
 		"glagolitic_[c,s]_let_big_yus_iotified", {
 			unicode: ["2C29", "2C59"],
 			options: { altLayoutKey: "<! /Ё/" },
 			alterations: { combining: "1E029" },
-			recipe: [["${glagolitic_c_let_yo}${glagolitic_c_let_small_yus}"], ["${glagolitic_s_let_yo}${glagolitic_s_let_small_yus}"]],
+			recipe: ["${glagolitic_[c,s]_let_yo}${glagolitic_[c,s]_let_small_yus}"],
 		},
 		"glagolitic_[c,s]_let_fita", {
 			unicode: ["2C2A", "2C5A"],
@@ -7473,438 +7473,437 @@ LibRegistrate(this) {
 		; * Germanic Runes
 		;
 		;
-		"futhark_ansuz", {
+		"germanic_runic_n_rune_a_elder_futhark_ansuz", {
 			unicode: "16A8",
-			tags: ["старший футарк ансуз", "elder futhark ansuz"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "A" },
+			options: { altLayoutKey: "$" },
 		},
-		"futhark_berkanan", {
+		"germanic_runic_n_rune_b_elder_futhark_berkanan", {
 			unicode: "16D2",
-			tags: ["старший футарк беркана", "elder futhark berkanan", "futhork beorc", "younger futhark bjarkan"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "B" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "bjarkan",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "beorc",
+			}] },
 		},
-		"futhark_dagaz", {
+		"germanic_runic_n_rune_d_elder_futhark_dagaz", {
 			unicode: "16DE",
-			tags: ["старший футарк дагаз", "elder futhark dagaz", "futhork daeg", "futhork dæg"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "D" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "daeg",
+			}] },
 		},
-		"futhark_ehwaz", {
+		"germanic_runic_n_rune_e_elder_futhark_ehwaz", {
 			unicode: "16D6",
-			tags: ["старший футарк эваз", "elder futhark ehwaz", "futhork eh"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "E" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "eh",
+			}] },
 		},
-		"futhark_fehu", {
+		"germanic_runic_n_rune_f_elder_futhark_fehu", {
 			unicode: "16A0",
-			tags: ["старший футарк феху", "elder futhark fehu", "futhork feoh", "younger futhark fe", "younger futhark fé"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "F" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "fe",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "feoh",
+			}] },
 		},
-		"futhark_gebo", {
+		"germanic_runic_n_rune_g_elder_futhark_gebo", {
 			unicode: "16B7",
-			tags: ["старший футарк гебо", "elder futhark gebo", "futhork gyfu", "elder futhark gebō"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "G" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "gyfu",
+			}] },
 		},
-		"futhark_haglaz", {
+		"germanic_runic_n_rune_h_elder_futhark_hagalaz", {
 			unicode: "16BA",
-			tags: ["старший футарк хагалаз", "elder futhark hagalaz"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "H" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "haegl",
+			}] },
 		},
-		"futhark_isaz", {
+		"germanic_runic_n_rune_i_elder_futhark_isaz", {
 			unicode: "16C1",
-			tags: ["старший футарк исаз", "elder futhark isaz", "futhork is", "younger futhark iss", "futhork īs", "younger futhark íss"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "I" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "isa",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "is",
+			}] },
 		},
-		"futhark_eihwaz", {
+		"germanic_runic_n_rune_i_elder_futhark_eihwaz", {
 			unicode: "16C7",
-			tags: ["старший футарк эваз", "elder futhark eihwaz", "elder futhark iwaz", "elder futhark ēihwaz", "futhork eoh", "futhork ēoh"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: ">+ I" },
+			options: { altLayoutKey: ">+ $" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "eoh",
+			}] },
 		},
-		"futhark_jeran", {
+		"germanic_runic_n_rune_y_elder_futhark_jeran", {
 			unicode: "16C3",
-			tags: ["старший футарк йера", "elder futhark jeran", "elder futhark jēra"],
-			groups: ["Futhark Runes"],
 			options: { altLayoutKey: "J" },
 		},
-		"futhark_kauna", {
+		"germanic_runic_n_rune_k_elder_futhark_kenaz", {
 			unicode: "16B2",
-			tags: ["старший футарк кеназ", "elder futhark kauna", "elder futhark kenaz", "elder futhark kauną"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "K" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "elder_futhark",
+				letter: "kauna",
+			}] },
 		},
-		"futhark_laguz", {
+		"germanic_runic_n_rune_l_elder_futhark_laguz", {
 			unicode: "16DA",
-			tags: ["старший футарк лагуз", "elder futhark laukaz", "elder futhark laguz", "futhork lagu", "futhork logr", "futhork lögr"],
 			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "L" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "elder_futhark",
+				letter: "laukaz",
+			}, {
+				scriptAdditive: "younger_futhark",
+				letter: "logr",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "lagu",
+			}] },
 		},
-		"futhark_mannaz", {
+		"germanic_runic_n_rune_m_elder_futhark_mannaz", {
 			unicode: "16D7",
-			tags: ["старший футарк манназ", "elder futhark mannaz", "futhork mann"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "M" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "mann",
+			}] },
 		},
-		"futhark_naudiz", {
+		"germanic_runic_n_rune_n_elder_futhark_naudiz", {
 			unicode: "16BE",
-			tags: ["старший футарк наудиз", "elder futhark naudiz", "futhork nyd", "younger futhark naudr", "younger futhark nauðr"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "N" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "naudr",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "nyd",
+			}] },
 		},
-		"futhark_ingwaz", {
+		"germanic_runic_n_rune_n_elder_futhark_ingwaz", {
 			unicode: "16DC",
-			tags: ["старший футарк ингваз", "elder futhark ingwaz"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: ">+ N" },
+			options: { altLayoutKey: ">+ $" },
 		},
-		"futhark_odal", {
+		"germanic_runic_n_rune_o_elder_futhark_othala", {
 			unicode: "16DF",
-			tags: ["старший футарк одал", "elder futhark othala", "futhork edel", "elder futhark ōþala", "futhork ēðel"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "O", legend: "NorseRunes\othala" },
+			options: { altLayoutKey: "$", legend: "NorseRunes\othala" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "edel",
+			}] },
 		},
-		"futhark_pertho", {
+		"germanic_runic_n_rune_p_elder_futhark_pertho", {
 			unicode: "16C8",
-			tags: ["старший футарк перто", "elder futhark pertho", "futhork peord", "elder futhark perþō", "futhork peorð"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "P" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "peord",
+			}] },
 		},
-		"futhark_raido", {
+		"germanic_runic_n_rune_r_elder_futhark_raido", {
 			unicode: "16B1",
-			tags: ["старший футарк райдо", "elder futhark raido", "futhork rad", "younger futhark reid", "elder futhark raidō", "futhork rād", "younger futhark reið"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "R" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "reid",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "rad",
+			}] },
 		},
-		"futhark_sowilo", {
+		"germanic_runic_n_rune_s_elder_futhark_sowilo", {
 			unicode: "16CA",
-			tags: ["старший футарк совило", "elder futhark sowilo", "elder futhark sōwilō"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "S" },
+			options: { altLayoutKey: "$" },
 		},
-		"futhark_tiwaz", {
+		"germanic_runic_n_rune_t_elder_futhark_tiwaz", {
 			unicode: "16CF",
-			tags: ["старший футарк тейваз", "elder futhark tiwaz", "futhork ti", "futhork tir", "younger futhark tyr", "elder futhark tēwaz", "futhork tī", "futhork tīr", "younger futhark týr"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "T" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "tyr",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "tir",
+			}] },
 		},
-		"futhark_thurisaz", {
+		"germanic_runic_n_rune_t_elder_futhark_thurisaz", {
 			unicode: "16A6",
-			tags: ["старший футарк турисаз", "elder futhark thurisaz", "futhork thorn", "younger futhark thurs", "elder futhark þurisaz", "futhork þorn", "younger futhark þurs"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: ">+T" },
+			options: { altLayoutKey: ">+ $" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "thurs",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "thorn",
+			}] },
 		},
-		"futhark_uruz", {
+		"germanic_runic_n_rune_u_elder_futhark_uruz", {
 			unicode: "16A2",
-			tags: ["старший футарк уруз", "elder futhark uruz", "elder futhark ura", "futhork ur", "younger futhark ur", "elder futhark ūrą", "elder futhark ūruz", "futhork ūr", "younger futhark úr"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "U" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "elder_futhark",
+				letter: "ura",
+			}, {
+				scriptAdditive: "younger_futhark",
+				letter: "ur",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "ur",
+			}] },
 		},
-		"futhark_wunjo", {
+		"germanic_runic_n_rune_w_elder_futhark_wunjo", {
 			unicode: "16B9",
-			tags: ["старший футарк вуньо", "elder futhark wunjo", "futhork wynn", "elder futhark wunjō", "elder futhark ƿunjō", "futhork ƿynn"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "W" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "wynn",
+			}] },
 		},
-		"futhark_algiz", {
+		"germanic_runic_n_rune_z_elder_futhark_algiz", {
 			unicode: "16C9",
-			tags: ["старший футарк альгиз", "elder futhark algiz", "futhork eolhx"],
-			groups: ["Futhark Runes"],
-			options: { altLayoutKey: "Z" },
+			options: { altLayoutKey: "$" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "futhork",
+				letter: "eolhx",
+			}] },
 		},
-		"futhork_as", {
+		"germanic_runic_n_rune_a_futhork_ac", {
 			unicode: "16AA",
-			tags: ["футорк ас", "futhork as", "futhork ās"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "<+ A" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"futhork_aesc", {
+		"germanic_runic_n_rune_a_futhork_aesc", {
 			unicode: "16AB",
-			tags: ["футорк эск", "futhork aesc", "futhork æsc"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: ">+ A" },
-			recipe: ["${futhark_ansuz}${futhark_ehwaz}"],
+			options: { altLayoutKey: ">+ $" },
+			recipe: ["${germanic_runic_n_rune_a_elder_futhark_ansuz}${germanic_runic_n_rune_e_elder_futhark_ehwaz}"],
 		},
-		"futhork_cen", {
+		"germanic_runic_n_rune_c_futhork_cen", {
 			unicode: "16B3",
-			tags: ["футорк кен", "futhork cen", "futhork cēn"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "C" },
+			options: { altLayoutKey: "$" },
 		},
-		"futhork_ear", {
+		"germanic_runic_n_rune_e_futhork_ear", {
 			unicode: "16E0",
-			tags: ["футорк эар", "ear"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "<+ E" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"futhork_gar", {
+		"germanic_runic_n_rune_g_futhork_gar", {
 			unicode: "16B8",
-			tags: ["футорк гар", "futhork gar", "futhork gār"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "<+ G" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"futhork_haegl", {
+		"germanic_runic_n_rune_h_futhork_haegl", {
 			unicode: "16BB",
-			tags: ["футорк хегль", "futhork haegl", "futhork hægl"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "<+ H" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"futhork_ger", {
+		"germanic_runic_n_rune_y_futhork_ger", {
 			unicode: "16C4",
-			tags: ["футорк гер", "futhork ger", "futhork gēr"],
-			groups: ["Futhork Runes"],
 			options: { altLayoutKey: "<+ J" },
 		},
-		"futhork_ior", {
+		"germanic_runic_n_rune_y_futhork_ior", {
 			unicode: "16E1",
-			tags: ["футорк йор", "futhork gerx", "futhork ior", "younger futhark arx", "futhork gērx", "futhork īor", "youner futhark árx"],
-			groups: ["Futhork Runes"],
 			options: { altLayoutKey: ">+ J" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "ar",
+			}, {
+				scriptAdditive: "futhork",
+				letter: "gerx",
+			}] },
 		},
-		"futhork_cealc", {
+		"germanic_runic_n_rune_k_futhork_cealc", {
 			unicode: "16E4",
-			tags: ["футорк келк", "futhork cealc"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "<+ K" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"futhork_calc", {
+		"germanic_runic_n_rune_k_futhork_calc", {
 			unicode: "16E3",
-			tags: ["футорк калк", "futhork calc"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: ">+ K" },
+			options: { altLayoutKey: ">+ $" },
 		},
-		"futhork_ing", {
+		"germanic_runic_n_rune_n_futhork_ing", {
 			unicode: "16DD",
 			tags: ["футорк инг", "futhork ing"],
 			groups: ["Futhork Runes"],
 			options: { altLayoutKey: "<+ N" },
 		},
-		"futhork_os", {
+		"germanic_runic_n_rune_o_futhork_os", {
 			unicode: "16A9",
-			tags: ["футорк ос", "futhork os", "futhork ōs"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "<+ O" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"futhork_cweorth", {
+		"germanic_runic_n_rune_k_futhork_cweorth", {
 			unicode: "16E2",
-			tags: ["футорк квирд", "futhark cweorth", "futhork cƿeorð"],
-			groups: ["Futhork Runes"],
 			options: { altLayoutKey: "Q" },
 		},
-		"futhork_sigel", {
+		"germanic_runic_n_rune_s_futhork_sigel", {
 			unicode: "16CB",
-			tags: ["футорк сигель", "futhork sigel", "younger futhark sól"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "<+ S" },
+			options: { altLayoutKey: "<+ $" },
+			symbol: { tagAdditive: [{
+				scriptAdditive: "younger_futhark",
+				letter: "sol",
+			}] },
 		},
-		"futhork_stan", {
+		"germanic_runic_n_rune_s_futhork_stan", {
 			unicode: "16E5",
-			tags: ["футорк стан", "futhork stan"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: ">+ S" },
+			options: { altLayoutKey: ">+ $" },
 		},
-		"futhork_yr", {
+		"germanic_runic_n_rune_y_futhork_yr", {
 			unicode: "16A3",
-			tags: ["футорк ир", "futhork yr", "futhork ȳr"],
-			groups: ["Futhork Runes"],
-			options: { altLayoutKey: "<+ Y" },
+			options: { altLayoutKey: "<+ $" },
 		},
-		"futhark_younger_jera", {
+		"germanic_runic_n_rune_a_younger_futhark_ar", {
 			unicode: "16C5",
 			tags: ["младший футарк йера", "younger futhark jera", "younger futhark ar", "younger futhark ár"],
 			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">! A" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_jera_short_twig", {
+		"germanic_runic_n_rune_a_younger_futhark_ar_short_twig", {
 			unicode: "16C6",
-			tags: ["младший футарк короткая йера", "younger futhark short twig jera"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ A" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "_ar$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_bjarkan_short_twig", {
+		"germanic_runic_n_rune_b_younger_futhark_bjarkan_short_twig", {
 			unicode: "16D3",
-			tags: ["младший футарк короткая беркана", "younger futhark short twig bjarkan"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ B" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "bjarkan$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_hagall", {
+		"germanic_runic_n_rune_h_younger_futhark_hagall", {
 			unicode: "16BC",
-			tags: ["младший футарк хагал", "younger futhark hagall"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">! H" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_hagall_short_twig", {
+		"germanic_runic_n_rune_h_younger_futhark_hagall_short_twig", {
 			unicode: "16BD",
-			tags: ["младший футарк короткий хагал", "younger futhark short twig hagall"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ H" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "hagall$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_kaun", {
+		"germanic_runic_n_rune_k_younger_futhark_kaun", {
 			unicode: "16B4",
-			tags: ["младший футарк каун", "younger futhark kaun"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">! K" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_madr", {
+		"germanic_runic_n_rune_m_younger_futhark_madr", {
 			unicode: "16D8",
-			tags: ["младший футарк мадр", "younger futhark madr", "younger futhark maðr"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">! M" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_madr_short_twig", {
+		"germanic_runic_n_rune_m_younger_futhark_madr_short_twig", {
 			unicode: "16D9",
-			tags: ["младший футарк короткий мадр", "younger futhark short twig madr", "younger futhark short twig maðr"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ M" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "madr$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_naud_short_twig", {
+		"germanic_runic_n_rune_n_younger_futhark_naudr_short_twig", {
 			unicode: "16BF",
-			tags: ["младший футарк короткий науд", "younger futhark short twig naud", "younger futhark short twig nauðr"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ N" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "naudr$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_oss", {
+		"germanic_runic_n_rune_o_younger_futhark_oss", {
 			unicode: "16AC",
-			tags: ["младший футарк осс", "younger futhark oss", "younger futhark óss"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">! O" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_oss_short_twig", {
+		"germanic_runic_n_rune_o_younger_futhark_oss_short_twig", {
 			unicode: "16AD",
-			tags: ["младший футарк короткий осс", "younger futhark short twig oss", "younger futhark short twig óss"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ O" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "oss$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_sol_short_twig", {
+		"germanic_runic_n_rune_s_younger_futhark_sol_short_twig", {
 			unicode: "16CC",
-			tags: ["младший футарк короткий сол", "younger futhark short twig sol", "younger futhark short twig sól"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ S" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "sol$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_tyr_short_twig", {
+		"germanic_runic_n_rune_t_younger_futhark_tyr_short_twig", {
 			unicode: "16D0",
-			tags: ["младший футарк короткий тир", "younger futhark short twig tyr", "younger futhark short twig týr"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ T" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "tyr$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_ur", {
+		"germanic_runic_n_rune_y_younger_futhark_ur", {
 			unicode: "16A4",
-			tags: ["младший футарк ур", "younger futhark ur"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: "Y" },
+			options: { altLayoutKey: "$" },
 		},
-		"futhark_younger_yr", {
+		"germanic_runic_n_rune_y_younger_futhark_yr", {
 			unicode: "16E6",
-			tags: ["младший футарк короткий тис", "younger futhark yr"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!Y" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_yr_short_twig", {
+		"germanic_runic_n_rune_y_younger_futhark_yr_short_twig", {
 			unicode: "16E7",
-			tags: ["младший футарк короткий тис", "younger futhark short twig yr"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ Y" },
+			options: { altLayoutKey: ">!<+ $", referenceLocale: "yr$" },
+			symbol: { beforeLetter: "short_twig" },
 		},
-		"futhark_younger_icelandic_yr", {
+		"germanic_runic_n_rune_y_younger_futhark_icelandic_yr", {
 			unicode: "16E8",
-			tags: ["младший футарк исладнский тис", "younger futhark icelandic yr"],
-			groups: ["Younger Futhark Runes"],
-			options: { altLayoutKey: ">+ Y" },
+			options: { altLayoutKey: ">+ $" },
 		},
-		"futhark_almanac_arlaug", {
+		"germanic_runic_n_rune_almanac_arlaug", {
 			unicode: "16EE",
-			tags: ["золотой номер 17 арлауг", "golden number 17 arlaug"],
-			groups: ["Almanac Runes"],
 			options: { altLayoutKey: ">! 7" },
 		},
-		"futhark_almanac_tvimadur", {
+		"germanic_runic_n_rune_almanac_tvimadur", {
 			unicode: "16EF",
-			tags: ["золотой номер 18 твимадур", "golden number 18 tvimadur", "golden number 18 tvímaður"],
-			groups: ["Almanac Runes"],
 			options: { altLayoutKey: ">! 8" },
 		},
-		"futhark_almanac_belgthor", {
+		"germanic_runic_n_rune_almanac_belgthor", {
 			unicode: "16F0",
-			tags: ["золотой номер 19 белгтор", "golden number 19 belgthor"],
-			groups: ["Almanac Runes"],
 			options: { altLayoutKey: ">! 9" },
 		},
-		"futhark_younger_later_e", {
+		"germanic_runic_n_rune_e_later_younger_futhark", {
 			unicode: "16C2",
-			tags: ["младшяя поздняя е", "later younger futhark e"],
-			groups: ["Later Younger Futhark Runes"],
-			options: { altLayoutKey: ">! E" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_later_eth", {
+		"germanic_runic_n_rune_d_later_younger_futhark_eth", {
 			unicode: "16A7",
-			tags: ["поздний младший футарк эт", "later younger futhark eth"],
-			groups: ["Later Younger Futhark Runes"],
-			options: { altLayoutKey: ">! D" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_later_d", {
+		"germanic_runic_n_rune_d_later_younger_futhark", {
 			unicode: "16D1",
-			tags: ["поздний младший футарк д", "later younger futhark d"],
-			groups: ["Later Younger Futhark Runes"],
-			options: { altLayoutKey: ">!<+ D" },
+			options: { altLayoutKey: ">!<+ $" },
 		},
-		"futhark_younger_later_l", {
+		"germanic_runic_n_rune_l_later_younger_futhark", {
 			unicode: "16DB",
-			tags: ["поздний младший футарк л", "later younger futhark l"],
-			groups: ["Later Younger Futhark Runes"],
-			options: { altLayoutKey: ">! L" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_later_p", {
+		"germanic_runic_n_rune_p_later_younger_futhark", {
 			unicode: "16D4",
-			tags: ["младшяя поздняя п", "later younger futhark p"],
-			groups: ["Later Younger Futhark Runes"],
-			options: { altLayoutKey: ">! P" },
+			options: { altLayoutKey: ">! $" },
 		},
-		"futhark_younger_later_v", {
+		"germanic_runic_n_rune_v_later_younger_futhark", {
 			unicode: "16A1",
-			tags: ["поздний младший футарк в", "later younger futhark v"],
-			groups: ["Later Younger Futhark Runes"],
-			options: { altLayoutKey: "V" },
+			options: { altLayoutKey: "$" },
 		},
-		"medieval_c", {
+		"germanic_runic_n_rune_c_medieval", {
 			unicode: "16CD",
 			tags: ["средневековый си", "medieval с"],
 			groups: ["Medieval Runes"],
-			options: { altLayoutKey: ">!<! C" },
+			options: { altLayoutKey: ">!<! $" },
 		},
-		"medieval_en", {
+		"germanic_runic_n_rune_n_medieval_en", {
 			unicode: "16C0",
 			tags: ["средневековый эн", "medieval en"],
 			groups: ["Medieval Runes"],
-			options: { altLayoutKey: ">!<! N" },
+			options: { altLayoutKey: ">!<! $" },
 		},
-		"medieval_on", {
+		"germanic_runic_n_rune_o_medieval_on", {
 			unicode: "16B0",
-			tags: ["средневековый он", "medieval on"],
-			groups: ["Medieval Runes"],
-			options: { altLayoutKey: ">!<! O" },
+			options: { altLayoutKey: ">!<! $" },
 		},
-		"medieval_o", {
+		"germanic_runic_n_rune_o_medieval", {
 			unicode: "16AE",
-			tags: ["средневековый о", "medieval o"],
-			groups: ["Medieval Runes"],
-			options: { altLayoutKey: ">!<!>+ O" },
+			options: { altLayoutKey: ">!<!>+ $" },
 		},
-		"medieval_x", {
+		"germanic_runic_n_rune_x_medieval", {
 			unicode: "16EA",
 			tags: ["средневековый экс", "medieval ex"],
 			groups: ["Medieval Runes"],
-			options: { altLayoutKey: ">!<! X" },
+			options: { altLayoutKey: ">!<! $" },
 		},
-		"medieval_z", {
+		"germanic_runic_n_rune_z_medieval", {
 			unicode: "16CE",
-			tags: ["средневековый зе", "medieval ze"],
-			groups: ["Medieval Runes"],
-			options: { altLayoutKey: ">!<! Z" },
+			options: { altLayoutKey: ">!<! $" },
 		},
 		"runic_single_punctuation", {
 			unicode: "16EB",

@@ -329,6 +329,8 @@ Class Locale {
 		lPostfixes := entryData.postfixes
 		lVariant := ["digraph", "symbol", "sign"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
+		isGermanic := lScript = "germanic_runic"
+
 		langCodes := ["en-US", "ru-RU", "en-US_alt", "ru-RU_alt"]
 		entry.titles := Map()
 		tags := Map()
@@ -382,8 +384,25 @@ Class Locale {
 			} else {
 				localedCase := lCase != "neutral" ? Locale.VarSelect(Locale.Read(pfx "case_" lCase, lang), lVariant) " " : ""
 
-				entry.titles[langCode] := Locale.VarSelect(Locale.Read(pfx "prefix_" lScript (scriptAdditive), lang), lVariant) " " localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
-				tags[langCode] := localedCase Locale.Read(pfx "type_" lType, lang) " " lBeforeletter postLetter lAfterletter lSecondName
+				entry.titles[langCode] := (
+					Locale.VarSelect(Locale.Read(pfx "prefix_" lScript (!isGermanic ? scriptAdditive : ""), lang), lVariant)
+					" "
+					localedCase Locale.Read(pfx "type_" lType, lang)
+					(isGermanic ? " " Locale.VarSelect(Locale.Read(pfx "prefix_" lScript scriptAdditive, lang), lVariant) : "")
+					" "
+					lBeforeletter
+					postLetter
+					lAfterletter
+					lSecondName
+					proxyMark
+				)
+				tags[langCode] := (
+					(!isGermanic ? localedCase Locale.Read(pfx "type_" lType, lang) " " : "")
+					lBeforeletter
+					postLetter
+					lAfterletter
+					lSecondName
+				)
 			}
 		}
 
@@ -415,6 +434,7 @@ Class Locale {
 
 		tags["en-US"] := (
 			Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "en-US"), lVariant)
+			(isGermanic ? " " Locale.Read(pfx "type_" lType, "en-US") : "")
 			tagScriptAdditive["en-US"] " "
 			tags["en-US"]
 		)
@@ -422,11 +442,14 @@ Class Locale {
 			cyrillicTasgScriptAtStart ?
 				(
 					Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant)
+					(isGermanic ? " " Locale.Read(pfx "type_" lType, "ru-RU") : "")
 					tagScriptAdditive["ru-RU"] " "
 					tags["ru-RU"]
 				)
 			: (
-				tags["ru-RU"] " " Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant)
+				tags["ru-RU"]
+				" "
+				Locale.VarSelect(Locale.Read(pfx "tagScript_" lScript, "ru-RU"), lVariant)
 			)
 		)
 
@@ -445,6 +468,41 @@ Class Locale {
 			entry.tags.InsertAt(tagIndex, tags[tag])
 		}
 
+		additionalTags := []
+		if entry.symbol.tagAdditive.Length > 0 && isGermanic {
+			for tagAdd in entry.symbol.tagAdditive {
+				for lang in ["en-US", "ru-RU"] {
+					local curScript := (tagAdd.HasOwnProp("script") ? tagAdd.script : lScript)
+					local curType := (tagAdd.HasOwnProp("type") ? tagAdd.type : lType)
+					local aLScript := Locale.VarSelect(Locale.Read(pfx "tagScript_" curScript, lang), lVariant)
+					local aScriptAdditive := Locale.VarSelect(Locale.Read(pfx "tagScript_" curScript "_" tagAdd.scriptAdditive, lang), lVariant)
+					local aLType := Locale.VarSelect(Locale.Read(pfx "type_" curType, lang), lVariant)
+					local lBuildedName := StrLower(curScript "_n_" curType "_" letter "_" tagAdd.scriptAdditive "_" tagAdd.letter) "_LTL"
+
+					additionalTags.Push(
+						aLScript
+						" " aLType " "
+						aScriptAdditive " "
+						Locale.Read(lBuildedName, lang)
+					)
+				}
+			}
+		}
+
+
+		if additionalTags.Length > 0 {
+			for tag in additionalTags {
+				entry.tags.Push(tag)
+			}
+		}
+
+		if entry.tags.Length > 0 {
+			sorting := Map()
+			for i, tag in entry.tags
+				sorting.Set(tag, i)
+
+			entry.tags := sorting.Keys()
+		}
 
 		return entry
 	}

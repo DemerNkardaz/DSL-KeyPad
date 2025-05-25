@@ -38,6 +38,7 @@ Class ChrEntry {
 		afterLetter: "",
 		beforeLetter: "",
 		scriptAdditive: "",
+		tagAdditive: [],
 		set: "",
 		alt: "",
 		customs: "",
@@ -1045,7 +1046,7 @@ Class ChrLib {
 		refinedEntry := this.SetDecomposedData(entryName, refinedEntry)
 
 		selectivePart := ""
-		if RegExMatch(entryName, "i)(orkhon|yenisei)", &selectiveMatch)
+		if RegExMatch(entryName, "i)(orkhon|yenisei|later_younger_futhark|younger_futhark|elder_futhark|futhork|almanac|medieval)", &selectiveMatch)
 			selectivePart := " " selectiveMatch[1]
 
 		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
@@ -1055,8 +1056,8 @@ Class ChrLib {
 					script := StrReplace(refinedEntry.data.script, "_", " ")
 					refinedEntry.groups :=
 						(StrLen(refinedEntry.data.type) > 0 && ["digraph", "ligature", "numeral"].HasValue(refinedEntry.data.type) ?
-							[StrTitle(script selectivePart " " refinedEntry.data.type "s")] :
-							[StrTitle(script selectivePart (hasPostfix ? " Accented" : ""))]
+							[StrTitle(script RegExReplace(selectivePart, "_", " ") " " refinedEntry.data.type "s")] :
+							[StrTitle(script RegExReplace(selectivePart, "_", " ") (hasPostfix ? " Accented" : ""))]
 						)
 				}
 
@@ -1376,6 +1377,7 @@ Class ChrLib {
 	static scriptsValidator := [
 		"deseret",
 		"glagolitic",
+		"germanic_runic",
 		"gothic",
 		"old_hungarian",
 		"old_italic",
@@ -1551,6 +1553,8 @@ Class ChrLib {
 				for subValue in value {
 					if subValue is Array
 						subOutput .= indentStr indentStr "[" subValue.ToString(, "'") indentStr "]`n"
+					else if subValue is Object
+						subOutput .= this.FormatEntry(subValue, indent + 1)
 					else
 						subOutput .= indentStr indentStr "'" subValue "'`n"
 				}
