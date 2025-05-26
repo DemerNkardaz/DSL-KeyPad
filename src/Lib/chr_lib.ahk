@@ -9180,6 +9180,103 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Carian Ssript
+		;
+		;
+		"carian_n_let_a[,_a2]", {
+			unicode: ["102A0", "102A7"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"carian_n_let_b[,_p2]", {
+			unicode: ["102A9", "102A1"],
+			options: { altLayoutKey: ["$", ">!<! $"] },
+		},
+		"carian_n_let_b_mb[,2,3,4]", {
+			unicode: ["102CA", "102CB", "102CC", "102CD"],
+			options: { altLayoutKey: ["<! $", "<+ $", ">! $", ">+ $"] },
+		},
+		"carian_n_let_s_ss", {
+			unicode: "102B8",
+			options: { altLayoutKey: "C" },
+		},
+		"carian_n_let_d[,_d2,_nd]", {
+			unicode: ["102A2", "102AC", "102BE"],
+			options: { altLayoutKey: ["$", "<! $", ">! $"] },
+		},
+		"carian_n_let_e[,_e2]", {
+			unicode: ["102BA", "102CF"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"carian_n_let_g[,_g2]", {
+			unicode: ["102C0", "102C1"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"carian_n_let_i", {
+			unicode: "102B9",
+			options: { altLayoutKey: "$" },
+		},
+		"carian_n_let_k[,_k2,_ng]", {
+			unicode: ["102BC", "102BD", "102C4"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		},
+		"carian_n_let_l[,_ld,_ld2]", {
+			unicode: ["102A3", "102A6", "102CE"],
+			options: { altLayoutKey: ["$", ">! $", ">!<! $"] },
+		},
+		"carian_n_let_m", {
+			unicode: "102AA",
+			options: { altLayoutKey: "$" },
+		},
+		"carian_n_let_n[,_x,_nn]", {
+			unicode: ["102B5", "1029C", "102B3"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		},
+		"carian_n_let_o", {
+			unicode: "102AB",
+			options: { altLayoutKey: "$" },
+		},
+		"carian_n_let_p", {
+			unicode: "102B7",
+			options: { altLayoutKey: "$" },
+		},
+		"carian_n_let_q", {
+			unicode: "102A8",
+			options: { altLayoutKey: "$" },
+		},
+		"carian_n_let_r[,_rr]", {
+			unicode: ["102A5", "102C9"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"carian_n_let_s[,_sh,_sh2,_st,_st2]", {
+			unicode: ["102B0", "102AE", "102AF", "102C2", "102C3"],
+			options: { altLayoutKey: ["$", "<! $", "<+ $", ">! $", ">!>+ $"] },
+		},
+		"carian_n_let_t[,_tt,_tt2]", {
+			unicode: ["102AD", "102C7", "102B6"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		},
+		"carian_n_let_u", {
+			unicode: "102B2",
+			options: { altLayoutKey: "$" },
+		},
+		"carian_n_let_w_uu", {
+			unicode: "102BF",
+			options: { altLayoutKey: "$" },
+		},
+		"carian_n_let_y_ii", {
+			unicode: "102C5",
+			options: { altLayoutKey: "$" },
+		},
+		"carian_n_let_y_uuu[,2,3,u]", {
+			unicode: ["102A4", "102C8", "102D0", "102BB"],
+			options: { altLayoutKey: [">! $", ">!<+ $", ">!<! $", ">!>+ $"] },
+		},
+		"carian_n_let_c[18,39]", {
+			unicode: ["102B1", "102C6"],
+			options: { altLayoutKey: [">+ T", "<+ T"] },
+		},
+		;
+		;
 		; * Sidetic Script
 		;
 		;
