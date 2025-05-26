@@ -9227,9 +9227,9 @@ LibRegistrate(this) {
 			unicode: "102AA",
 			options: { altLayoutKey: "$" },
 		},
-		"carian_n_let_n[,_x,_nn]", {
-			unicode: ["102B5", "1029C", "102B3"],
-			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		"carian_n_let_n[,_nn]", {
+			unicode: ["102B5", "102B3"],
+			options: { altLayoutKey: ["$", ">! $"] },
 		},
 		"carian_n_let_o", {
 			unicode: "102AB",
@@ -9274,6 +9274,160 @@ LibRegistrate(this) {
 		"carian_n_let_c[18,39]", {
 			unicode: ["102B1", "102C6"],
 			options: { altLayoutKey: [">+ T", "<+ T"] },
+		},
+		;
+		;
+		; * Lycian Script
+		;
+		;
+		"lycian_n_let_a[,_an]", {
+			unicode: ["10280", "10299"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"lycian_n_let_b", {
+			unicode: "10282",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_d", {
+			unicode: "10285",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_e[,_en]", {
+			unicode: ["10281", "1029A"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"lycian_n_let_h", {
+			unicode: "1029B",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_k[,_bh,_kk]", {
+			unicode: ["1028B", "10283", "10294"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		},
+		"lycian_n_let_l", {
+			unicode: "1028D",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_m[,_mm]", {
+			unicode: ["1028E", "10290"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"lycian_n_let_n[,_nn]", {
+			unicode: ["1028F", "10291"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"lycian_n_let_p", {
+			unicode: "10293",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_q", {
+			unicode: "1028C",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_r", {
+			unicode: "10295",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_s", {
+			unicode: "10296",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_t[,_tt]", {
+			unicode: ["10297", "10298"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"lycian_n_let_u", {
+			unicode: "10292",
+			options: { altLayoutKey: "$" },
+		},
+		"lycian_n_let_x", {
+			unicode: "1029C",
+			options: { altLayoutKey: "$" },
+		},
+		;
+		;
+		; * Lydian Script
+		;
+		;
+		"lydian_n_let_a[,_an]", {
+			unicode: ["10920", "10935"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"lydian_n_let_b", {
+			unicode: "10921",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_c", {
+			unicode: "10939",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_d", {
+			unicode: "10923",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_e[,_en]", {
+			unicode: ["10924", "10936"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"lydian_n_let_f", {
+			unicode: "10931",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_g", {
+			unicode: "10922",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_i", {
+			unicode: "10926",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_k", {
+			unicode: "10928",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_l[,_ly]", {
+			unicode: ["10929", "10937"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"lydian_n_let_m", {
+			unicode: "1092A",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_n[,_nn]", {
+			unicode: ["1092B", "10938"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"lydian_n_let_o", {
+			unicode: "1092C",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_q", {
+			unicode: "10932",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_r", {
+			unicode: "1092D",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_s[,_ss]", {
+			unicode: ["10933", "1092E"],
+			options: { altLayoutKey: ["<! $", "$"] },
+		},
+		"lydian_n_let_t[,_tt]", {
+			unicode: ["1092F", "10934"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"lydian_n_let_v", {
+			unicode: "10925",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_let_y", {
+			unicode: "10927",
+			options: { altLayoutKey: "$" },
+		},
+		"lydian_n_sign_triangular_mark", {
+			unicode: "1093F",
+			options: { altLayoutKey: "Z" },
 		},
 		;
 		;

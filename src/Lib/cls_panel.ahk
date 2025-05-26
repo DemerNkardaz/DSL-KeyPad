@@ -555,6 +555,7 @@ Class Panel {
 					"Lydian", Locale.Read("symbol_lydian"),
 					"Sidetic", Locale.Read("symbol_sidetic"),
 					"Cypriot Syllabary", Locale.Read("symbol_cypriot_syllabary"),
+					"Tifinagh", Locale.Read("symbol_tifinagh"),
 					"Ugaritic", Locale.Read("symbol_ugaritic"),
 					"Old Persian", Locale.Read("symbol_old_persian"),
 					"IPA", Locale.Read("symbol_ipa"),
