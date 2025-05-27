@@ -76,6 +76,11 @@ Class ChrCrafter {
 		cleanPastInput := False
 
 		continueInInput := False
+		surrogatePair := ""
+		surrogatInput := ""
+
+		forceSurrogates := ["Old Persian", "Shavian"].HasValue(Scripter.selectedMode.Get("Alternative Modes"))
+		symCount := forceSurrogates ? 2 : 1
 
 		PH := InputHook("L0", "{Escape}")
 		PH.Start()
@@ -83,12 +88,31 @@ Class ChrCrafter {
 		ComposeSuggestedTooltip() {
 			tooltipSuggestions := input != "" ? this.FormatSuggestions(this.ValidateRecipes(inputWithoutBackticks, True)) : ""
 
-			Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : ""))
+			Util.CaretTooltip(
+				(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+				" " input "`n"
+				Util.ChrToUnicode(input) "`n"
+				currentInputMode
+				(favoriteSuggestions)
+				((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : "")
+			)
 		}
 
 		tooltips := Map(
-			"default", (*) => Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input (favoriteSuggestions)),
-			"unialt", (*) => Util.CaretTooltip((Chr(0x2B1C)) " " input "`n" "[ ]" Chr(0x2002) "`n" Locale.Read("tooltip_compose_" StrLower(insertType) "_range")),
+			"default", (*) => Util.CaretTooltip(
+				(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+				" "
+				input
+				(favoriteSuggestions)
+			),
+			"unialt", (*) => Util.CaretTooltip(
+				(Chr(0x2B1C))
+				" "
+				input "`n"
+				"[ ]"
+				Chr(0x2002) "`n"
+				Locale.Read("tooltip_compose_" StrLower(insertType) "_range")
+			),
 			"suggested", (*) => ComposeSuggestedTooltip()
 		)
 
@@ -104,10 +128,10 @@ Class ChrCrafter {
 
 			useTooltip := tooltips.Has(ruleTooltip) ? tooltips.Get(ruleTooltip)() : (*) => []
 
-			IH := InputHook("L1", "{Escape}{Backspace}{Enter}{Pause}{Tab}{Insert}")
+			IH := InputHook("L" symCount, "{Escape}{Backspace}{Enter}{Pause}{Tab}{Insert}")
 			IH.Start(), IH.Wait()
 
-			(IH.EndKey = "Backspace") && StrLen(input) > 0 && input := SubStr(input, 1, -1)
+			(IH.EndKey = "Backspace") && StrLen(input) > 0 && input := SubStr(input, 1, -symCount)
 			(IH.EndKey = "Insert") && ClipWait(0.5, 1) && input .= this.parseUniAlt(A_Clipboard, input, insertType)
 			(IH.EndKey = "Pause") && pauseOn := !pauseOn
 
@@ -175,7 +199,14 @@ Class ChrCrafter {
 					}
 
 					blockShown := codesArray.Length > 0 ? ChrBlock.GetTooltip(codesArray[codesArray.Length], insertType) : Locale.Read("tooltip_compose_" StrLower(insertType) "_range")
-					Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" "[ " suggestion " ]" Chr(0x2002) "`n" blockShown)
+					Util.CaretTooltip(
+						(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+						" "
+						input "`n"
+						"[ " suggestion " ]"
+						Chr(0x2002) "`n"
+						blockShown
+					)
 				}
 
 				output := suggestion
@@ -219,7 +250,14 @@ Class ChrCrafter {
 
 								if insertType = "" {
 									tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
-									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : ""))
+									Util.CaretTooltip(
+										(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+										" "
+										input "`n"
+										currentInputMode
+										(favoriteSuggestions)
+										((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : "")
+									)
 								}
 
 								continue
@@ -248,7 +286,14 @@ Class ChrCrafter {
 								if (input != originalInput && insertType = "") {
 									tooltipSuggestions := input != "" ? ChrCrafter.FormatSuggestions(this.ValidateRecipes(RegExReplace(input, "``", ""), True)) : ""
 
-									Util.CaretTooltip((pauseOn ? Chr(0x23F8) : Chr(0x2B1C)) " " input "`n" currentInputMode (favoriteSuggestions) ((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : ""))
+									Util.CaretTooltip(
+										(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+										" "
+										input "`n"
+										currentInputMode
+										(favoriteSuggestions)
+										((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : "")
+									)
 								}
 
 								continue

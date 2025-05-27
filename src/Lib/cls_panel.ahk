@@ -415,6 +415,7 @@ Class Panel {
 					"Cyrillic Accented", "",
 					"Futhork Runes", "",
 					"Glagolitic", "",
+					"Old Persian", "",
 					"Shavian Ligatures", "",
 					"Smelting Special", "",
 					"Extra Symbolistics", "",

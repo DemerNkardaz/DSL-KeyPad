@@ -9814,6 +9814,216 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Old Persian Script
+		;
+		;
+		"old_persian_n_sign_a", {
+			unicode: "103A0",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_i", {
+			unicode: "103A1",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_u", {
+			unicode: "103A2",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_d_d[a,i,u]", {
+			unicode: ["103AD", "103AE", "103AF"],
+			options: { altLayoutKey: ["$ A", "$ I", "$ U"] },
+		},
+		"old_persian_n_sign_g_g[a,u]", {
+			unicode: ["103A5", "103A6"],
+			options: { altLayoutKey: ["$ A", "$ U"] },
+		},
+		"old_persian_n_sign_j_j[a,i]", {
+			unicode: ["103A9", "103AA"],
+			options: { altLayoutKey: ["$ A", "$ I"] },
+		},
+		"old_persian_n_sign_k_k[a,u]", {
+			unicode: ["103A3", "103A4"],
+			options: { altLayoutKey: ["$ A | $ I", "$ U"] },
+		},
+		"old_persian_n_sign_m_m[a,i,u]", {
+			unicode: ["103B6", "103B7", "103B8"],
+			options: { altLayoutKey: ["$ A", "$ I", "$ U"] },
+		},
+		"old_persian_n_sign_n_n[a,u]", {
+			unicode: ["103B4", "103B5"],
+			options: { altLayoutKey: ["$ A", "$ U"] },
+		},
+		"old_persian_n_sign_r_r[a,u]", {
+			unicode: ["103BC", "103BD"],
+			options: { altLayoutKey: ["$ A | $ I", "$ U"] },
+		},
+		"old_persian_n_sign_t_t[a,u]", {
+			unicode: ["103AB", "103AC"],
+			options: { altLayoutKey: ["$ A | $ I", "$ U"] },
+		},
+		"old_persian_n_sign_v_v[a,i]", {
+			unicode: ["103BA", "103BB"],
+			options: { altLayoutKey: ["$ A", "$ I"] },
+		},
+		"old_persian_n_sign_c_[ca,ssa]", {
+			unicode: ["103A8", "103C2"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"old_persian_n_sign_b_ba", {
+			unicode: "103B2",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_f_fa", {
+			unicode: "103B3",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_h_ha", {
+			unicode: "103C3",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_l_la", {
+			unicode: "103BE",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_p_pa", {
+			unicode: "103B1",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_s_s[a,ha]", {
+			unicode: ["103BF", "103C1"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"old_persian_n_sign_t_tha", {
+			unicode: "103B0",
+			options: { altLayoutKey: ">! $" },
+		},
+		"old_persian_n_sign_x_xa", {
+			unicode: "103A7",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_y_ya", {
+			unicode: "103B9",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sign_z_za", {
+			unicode: "103C0",
+			options: { altLayoutKey: "$" },
+		},
+		"old_persian_n_sym_word_divider", {
+			unicode: "103D0",
+			options: { altLayoutKey: "Space" },
+		},
+		"old_persian_n_num_[one,two,ten,twenty,hundred]", {
+			unicode: ["103D1", "103D2", "103D3", "103D4", "103D5"],
+			groups: ["Old Persian"],
+			options: { altLayoutKey: ["1", "2", "3", "4", "5"] },
+		},
+		"old_persian_n_log_xshaayathiya", {
+			unicode: "103CB",
+			options: { altLayoutKey: "<! X" },
+			recipe: [
+				(
+					"${old_persian_n_sign_x_xa}"
+					"${old_persian_n_sign_s_sha}"
+					"${old_persian_n_sign_a}"
+					"${old_persian_n_sign_y_ya}"
+					"${old_persian_n_sign_t_tha}"
+					"${old_persian_n_sign_i}"
+					"${old_persian_n_sign_y_ya}"
+				)
+			],
+		},
+		"old_persian_n_log_auramazdaa[,_2,ha]", {
+			unicode: ["103C8", "103C9", "103CA"],
+			options: { altLayoutKey: ["<! A", "<+ A", ">! A"] },
+			recipe: [[
+				(
+					"${old_persian_n_sign_a}"
+					"${old_persian_n_sign_u}"
+					"${old_persian_n_sign_r_ra}"
+					"${old_persian_n_sign_m_ma}"
+					"${old_persian_n_sign_z_za}"
+					"${old_persian_n_sign_d_da}"
+					"${old_persian_n_sign_a}"
+				)
+			], [
+				(
+					"${old_persian_n_sign_a}"
+					"${old_persian_n_sign_u}"
+					"${old_persian_n_sign_r_ra}"
+					"${old_persian_n_sign_m_ma}"
+					"${old_persian_n_sign_z_za}"
+					"${old_persian_n_sign_d_da}"
+					"${old_persian_n_sign_a}"
+					"${old_persian_n_sym_word_divider}"
+				), (
+					"${old_persian_n_log_auramazdaa}"
+					"${old_persian_n_sym_word_divider}"
+				)
+			], [
+				(
+					"${old_persian_n_sign_a}"
+					"${old_persian_n_sign_u}"
+					"${old_persian_n_sign_r_ra}"
+					"${old_persian_n_sign_m_ma}"
+					"${old_persian_n_sign_z_za}"
+					"${old_persian_n_sign_d_da}"
+					"${old_persian_n_sign_h_ha}"
+				), (
+					"${old_persian_n_log_auramazdaa_2}"
+					"${old_persian_n_sym_word_divider}"
+				)
+			]],
+		},
+		"old_persian_n_log_dahyaaush[,_2]", {
+			unicode: ["103CC", "103CD"],
+			options: { altLayoutKey: ["<! D", "<+ D"] },
+			recipe: [[
+				(
+					"${old_persian_n_sign_d_da}"
+					"${old_persian_n_sign_h_ha}"
+					"${old_persian_n_sign_y_ya}"
+					"${old_persian_n_sign_u}"
+					"${old_persian_n_sign_s_sha}"
+				)
+			], [
+				(
+					"${old_persian_n_sign_d_da}"
+					"${old_persian_n_sign_h_ha}"
+					"${old_persian_n_sign_y_ya}"
+					"${old_persian_n_sign_u}"
+					"${old_persian_n_sign_s_sha}"
+					"${old_persian_n_sym_word_divider}"
+				), (
+					"${old_persian_n_log_dahyaaush}"
+					"${old_persian_n_sym_word_divider}"
+				)
+			]],
+		},
+		"old_persian_n_log_baga", {
+			unicode: "103CE",
+			options: { altLayoutKey: "<! B" },
+			recipe: [
+				(
+					"${old_persian_n_sign_b_ba}"
+					"${old_persian_n_sign_g_ga}"
+				)
+			],
+		},
+		"old_persian_n_log_buumish", {
+			unicode: "103CF",
+			options: { altLayoutKey: "<+ B" },
+			recipe: [
+				(
+					"${old_persian_n_sign_b_ba}"
+					"${old_persian_n_sign_u}"
+					"${old_persian_n_sign_m_mi}"
+					"${old_persian_n_sign_s_sha}"
+				)
+			],
+		},
+		;
+		;
 		; * Deseret ABC
 		;
 		;

@@ -1833,7 +1833,7 @@ Class BindHandler {
 		}
 	}
 
-	static TimeSend(combo := "", secondKeysActions := Map(), DefaultAction := False, timeLimit := "0.1") {
+	static TimeSend(combo := "", secondKeysActions := Map(), DefaultAction := False, timeLimit := "0.1", alwaysUpper := False) {
 		if this.waitTimeSend {
 			this.SendDefault(combo)
 			return
@@ -1859,6 +1859,9 @@ Class BindHandler {
 		IH.Wait()
 
 		keyPressed := StrLen(IH.Input) > 0 ? StrUpper(IH.Input) : StrLen(IH.EndKey) > 0 ? IH.EndKey : ""
+
+		if StrLen(keyPressed) = 1 && (alwaysUpper || GetKeyState("CapsLock", "T"))
+			keyPressed := StrUpper(keyPressed)
 
 		report .= "`n" keyPressed
 
