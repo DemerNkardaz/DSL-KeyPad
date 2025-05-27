@@ -9425,7 +9425,7 @@ LibRegistrate(this) {
 			unicode: "10927",
 			options: { altLayoutKey: "$" },
 		},
-		"lydian_n_sign_triangular_mark", {
+		"lydian_n_sym_triangular_mark", {
 			unicode: "1093F",
 			options: { altLayoutKey: "Z" },
 		},
@@ -9549,6 +9549,139 @@ LibRegistrate(this) {
 		"sidetic_n_let_unknown_N29", {
 			unicode: "1095C",
 			options: { altLayoutKey: "$" },
+		},
+		;
+		;
+		; * Tifinagh Script
+		;
+		;
+		"tifinagh_n_let_a_ya", {
+			unicode: "2D30",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_b_yah[,_berber_academy]", {
+			unicode: ["2D40", "2D41"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"tifinagh_n_let_b_yab[,h]", {
+			unicode: ["2D31", "2D32"],
+			options: { altLayoutKey: ["<! $", "<+ $"] },
+		},
+		"tifinagh_n_let_s_ya[sh,ch]", {
+			unicode: ["2D5B", "2D5E"],
+			options: { altLayoutKey: ["C", "<! C"] },
+		},
+		"tifinagh_n_let_d_yad[,h,d,dh]", {
+			unicode: ["2D37", "2D38", "2D39", "2D3A"],
+			options: { altLayoutKey: ["$", "<! $", ">! $", ">!>+ $"] },
+		},
+		"tifinagh_n_let_e_ye[y,]", {
+			unicode: ["2D3B", "2D66"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"tifinagh_n_let_f_yaf", {
+			unicode: "2D3C",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_g_yag[,h,hh]", {
+			unicode: ["2D33", "2D56", "2D34"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		},
+		"tifinagh_n_let_g_yaj", {
+			unicode: "2D36",
+			options: { altLayoutKey: "<! $" },
+		},
+		"tifinagh_n_let_h_tuareg", {
+			unicode: "2D42",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_i_yi", {
+			unicode: "2D49",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_j_yazh[,_tuareg,_ahaggar]", {
+			unicode: ["2D4A", "2D4B", "2D4C"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		},
+		"tifinagh_n_let_k_yak[,hh,_tuareg,h,h_tuareg]", {
+			unicode: ["2D3D", "2D3F", "2D3E", "2D45", "2D46"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $", "<! $", ">!<! $"] },
+		},
+		"tifinagh_n_let_l_yal", {
+			unicode: "2D4D",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_m_yam", {
+			unicode: "2D4E",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_n_ya[n,ng,gn]", {
+			unicode: ["2D4F", "2D51", "2D50"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		},
+		"tifinagh_n_let_o_y[aa,o]", {
+			unicode: ["2D44", "2D67"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"tifinagh_n_let_p_yap", {
+			unicode: "2D52",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_q_yaq[,_tuareg]", {
+			unicode: ["2D47", "2D48"],
+			options: { altLayoutKey: ["$", "<+ $"] },
+		},
+		"tifinagh_n_let_r_yar[,r]", {
+			unicode: ["2D54", "2D55"],
+			options: { altLayoutKey: ["$", ">! $"] },
+		},
+		"tifinagh_n_let_s_yas[,s]", {
+			unicode: ["2D59", "2D5A"],
+			options: { altLayoutKey: ["$", "<! $"] },
+		},
+		"tifinagh_n_let_t_yat[,t,h]", {
+			unicode: ["2D5C", "2D5F", "2D5D"],
+			options: { altLayoutKey: ["$", ">! $", ">!>+ $"] },
+		},
+		"tifinagh_n_let_w_yu", {
+			unicode: "2D53",
+			options: { altLayoutKey: "U" },
+		},
+		"tifinagh_n_let_v_yav", {
+			unicode: "2D60",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_w_yaw", {
+			unicode: "2D61",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_g_yagh_[tuareg,ayer]", {
+			unicode: ["2D57", "2D58"],
+			options: { altLayoutKey: ["X", "<! X"] },
+		},
+		"tifinagh_n_let_y_yay", {
+			unicode: "2D62",
+			options: { altLayoutKey: "$" },
+		},
+		"tifinagh_n_let_z_yaz[,z,_tawellement]", {
+			unicode: ["2D63", "2D65", "2D64"],
+			options: { altLayoutKey: ["$", "<! $", "<+ $"] },
+		},
+		"tifinagh_n_let_z_yaj_berber_academy", {
+			unicode: "2D35",
+			options: { altLayoutKey: ">! $" },
+		},
+		"tifinagh_n_let_w_modifier_labialization_mark", {
+			unicode: "2D6F",
+			options: { altLayoutKey: ">! $" },
+		},
+		"tifinagh_n_sym_seprator_mark", {
+			unicode: "2D70",
+			options: { altLayoutKey: "<! <" },
+		},
+		"tifinagh_n_sym_consonant_joiner", {
+			unicode: "2D7F",
+			options: { altLayoutKey: "<! \" },
 		},
 		;
 		;

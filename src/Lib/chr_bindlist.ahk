@@ -884,7 +884,7 @@ bindingMaps := Map(
 				"W", "",
 				"X", "",
 				"Y", "lydian_n_let_y",
-				"Z", "lydian_n_sign_triangular_mark",
+				"Z", "lydian_n_sym_triangular_mark",
 			),
 			"Moded", Map(
 				"A", Map(
@@ -982,34 +982,103 @@ bindingMaps := Map(
 		"Tifinagh", Map(
 			"ForceSingle", True,
 			"Flat", Map(
-				"A", "",
-				"B", "",
-				"C", "",
-				"D", "",
-				"E", "",
-				"F", "",
-				"G", "",
-				"H", "",
-				"I", "",
-				"J", "",
-				"K", "",
-				"L", "",
-				"M", "",
-				"N", "",
-				"O", "",
-				"P", "",
-				"Q", "",
-				"R", "",
-				"S", "",
-				"T", "",
-				"U", "",
-				"V", "",
-				"W", "",
-				"X", "",
-				"Y", "",
-				"Z", "",
+				"A", "tifinagh_n_let_a_ya",
+				"B", "tifinagh_n_let_b_yah",
+				"C", "tifinagh_n_let_s_yash",
+				"D", "tifinagh_n_let_d_yad",
+				"E", "tifinagh_n_let_e_yey",
+				"F", "tifinagh_n_let_f_yaf",
+				"G", "tifinagh_n_let_g_yag",
+				"H", "tifinagh_n_let_h_tuareg",
+				"I", "tifinagh_n_let_i_yi",
+				"J", "tifinagh_n_let_j_yazh",
+				"K", "tifinagh_n_let_k_yak",
+				"L", "tifinagh_n_let_l_yal",
+				"M", "tifinagh_n_let_m_yam",
+				"N", "tifinagh_n_let_n_yan",
+				"O", "tifinagh_n_let_o_yaa",
+				"P", "tifinagh_n_let_p_yap",
+				"Q", "tifinagh_n_let_q_yaq",
+				"R", "tifinagh_n_let_r_yar",
+				"S", "tifinagh_n_let_s_yas",
+				"T", "tifinagh_n_let_t_yat",
+				"U", "tifinagh_n_let_w_yu",
+				"V", "tifinagh_n_let_v_yav",
+				"W", "tifinagh_n_let_w_yaw",
+				"X", "tifinagh_n_let_g_yagh_tuareg",
+				"Y", "tifinagh_n_let_y_yay",
+				"Z", "tifinagh_n_let_z_yaz",
 			),
-			"Moded", Map()
+			"Moded", Map(
+				"B", Map(
+					"<!", "tifinagh_n_let_b_yab",
+					"<+", "tifinagh_n_let_b_yabh",
+					"<^>!", "tifinagh_n_let_b_yah_berber_academy",
+				),
+				"C", Map(
+					"<!", "tifinagh_n_let_s_yach",
+				),
+				"D", Map(
+					"<!", "tifinagh_n_let_d_yadh",
+					"<^>!", "tifinagh_n_let_d_yadd",
+					"<^>!>+", "tifinagh_n_let_d_yaddh",
+				),
+				"E", Map(
+					"<!", "tifinagh_n_let_e_ye",
+				),
+				"G", Map(
+					"<^>!", "tifinagh_n_let_g_yagh",
+					"<^>!>+", "tifinagh_n_let_g_yaghh",
+					"<!", "tifinagh_n_let_g_yaj",
+				),
+				"J", Map(
+					"<^>!", "tifinagh_n_let_j_yazh_tuareg",
+					"<^>!>+", "tifinagh_n_let_j_yazh_ahaggar",
+				),
+				"K", Map(
+					"<!", "tifinagh_n_let_k_yakh",
+					"<^>!<!", "tifinagh_n_let_k_yakh_tuareg",
+					"<^>!", "tifinagh_n_let_k_yakhh",
+					"<^>!>+", "tifinagh_n_let_k_yak_tuareg",
+				),
+				"N", Map(
+					"<^>!", "tifinagh_n_let_n_yang",
+					"<^>!>+", "tifinagh_n_let_n_yagn",
+				),
+				"O", Map(
+					"<^>!", "tifinagh_n_let_o_yo",
+				),
+				"Q", Map(
+					"<+", "tifinagh_n_let_q_yaq_tuareg",
+				),
+				"R", Map(
+					"<^>!", "tifinagh_n_let_r_yarr",
+				),
+				"S", Map(
+					"<!", "tifinagh_n_let_s_yass",
+				),
+				"T", Map(
+					"<^>!", "tifinagh_n_let_t_yatt",
+					"<^>!>+", "tifinagh_n_let_t_yath",
+				),
+				"W", Map(
+					"<!", "tifinagh_n_let_w_modifier_labialization_mark",
+				),
+				"X", Map(
+					"<!", "tifinagh_n_let_g_yagh_ayer",
+				),
+				"Z", Map(
+					"<!", "tifinagh_n_let_z_yazz",
+					"<+", "tifinagh_n_let_z_yaz_tawellement",
+					"<^>!", "tifinagh_n_let_z_yaj_berber_academy",
+				),
+				"Comma", Map(
+					"<^>!", "tifinagh_n_sym_seprator_mark",
+				),
+				"Backslash", Map(
+					"<^>!", "tifinagh_n_sym_consonant_joiner",
+				),
+			)
 		),
 		"Ugaritic", Map(
 			"ForceSingle", True,
