@@ -107,7 +107,10 @@ Class Keyboard {
 	}
 
 	static SwitchLayout(code, id := 1, timer := 1) {
-		SetTimer((*) => SwitchCall(), -timer)
+		if timer is Array
+			SwitchCall()
+		else
+			SetTimer((*) => SwitchCall(), -timer)
 		SwitchCall() {
 			layout := DllCall("LoadKeyboardLayout", "Str", code, "Int", id)
 			hwnd := DllCall("GetForegroundWindow")
@@ -327,7 +330,7 @@ Class Locale {
 		lCase := entryData.case
 		lType := entryData.type
 		lPostfixes := entryData.postfixes
-		lVariant := ["digraph", "symbol", "sign"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
+		lVariant := ["digraph", "symbol", "sign", "syllable"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
 		isGermanic := lScript = "germanic_runic"
 

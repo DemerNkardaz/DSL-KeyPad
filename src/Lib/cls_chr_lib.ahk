@@ -1422,6 +1422,7 @@ Class ChrLib {
 				"sign", "sign",
 				"rune", "rune",
 				"log", "logogram",
+				"syl", "syllable",
 			),
 			letter: "",
 			postfixes: []

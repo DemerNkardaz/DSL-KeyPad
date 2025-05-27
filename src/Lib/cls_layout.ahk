@@ -670,7 +670,6 @@ Class KeyboardBinder {
 		}
 	}
 
-
 	static UnregisterAll() {
 		layout := this.GetCurrentLayoutMap()
 
@@ -696,13 +695,13 @@ Class KeyboardBinder {
 
 		userBindings := Cfg.Get("Active_User_Bindings", , "None")
 		isUserBindingsOn := userBindings != "None" && Cfg.FastKeysOn
-
 		altMode := Scripter.selectedMode.Get("Alternative Modes")
 		isAltModeOn := altMode != "" && !ignoreAltMode
 
 		bingingsNames := []
 		if isAltModeOn
 			bingingsNames := Scripter.GetData(, altMode).bindings
+
 
 		if !ignoreUnregister
 			this.UnregisterAll()
@@ -1414,6 +1413,7 @@ Class Scripter {
 		}
 
 		altMode := this.selectedMode.Get(selectorType)
+
 		KeyboardBinder.RebuilBinds(, altMode != "")
 
 		WarningISP(name, currentISP, selectorType) {
@@ -1833,7 +1833,16 @@ Class BindHandler {
 		}
 	}
 
-	static TimeSend(combo := "", secondKeysActions := Map(), DefaultAction := False, timeLimit := "0.1", alwaysUpper := False) {
+	static TimeShell(defaultAction := "", timeLimit := "0.005") {
+		return (combo) => BindHandler.TimeSend(
+			combo,
+			Map(),
+			defaultAction is Func ? defaultAction : (*) => BindHandler.Send(combo, defaultAction),
+			timeLimit
+		)
+	}
+
+	static TimeSend(combo := "", secondKeysActions := Map(), defaultAction := False, timeLimit := "0.1", alwaysUpper := False) {
 		if this.waitTimeSend {
 			this.SendDefault(combo)
 			return
@@ -1871,7 +1880,7 @@ Class BindHandler {
 			secondKeysActions[keyPressed] is Func {
 			secondKeysActions[keyPressed]()
 		} else {
-			!DefaultAction ? this.SendDefault(combo) : DefaultAction()
+			!defaultAction ? this.SendDefault(combo) : defaultAction()
 		}
 
 		this.waitTimeSend := False
