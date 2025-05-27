@@ -1862,17 +1862,24 @@ Class BindHandler {
 
 		IH := InputHook("L1 M T" timeLimit)
 		IH.VisibleNonText := False
+
 		IH.KeyOpt("{All}", "E")
 		IH.KeyOpt("{LShift}{RShift}{LControl}{RControl}{LAlt}{RAlt}", "-E")
+		IH.KeyOpt("{A}{B}{C}{D}{E}{F}{G}{H}{I}{J}{K}{L}{M}{N}{O}{P}{Q}{R}{S}{T}{U}{V}{W}{X}{Y}{Z}", "-E")
 		IH.Start()
 		IH.Wait()
 
-		keyPressed := StrLen(IH.Input) > 0 ? StrUpper(IH.Input) : StrLen(IH.EndKey) > 0 ? IH.EndKey : ""
+		input := IH.Input
+		endKey := IH.EndKey
+
+		keyPressed := StrLen(input) > 0 ? input : StrLen(endKey) > 0 ? endKey : ""
 
 		if StrLen(keyPressed) = 1 && (alwaysUpper || GetKeyState("CapsLock", "T"))
 			keyPressed := StrUpper(keyPressed)
 
 		report .= "`n" keyPressed
+
+		; ToolTip(combo report '`n' input '`n' endKey)
 
 		if StrLen(keyPressed) > 0 &&
 			secondKeysActions is Map &&
