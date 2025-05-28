@@ -1842,12 +1842,39 @@ Class BindHandler {
 		)
 	}
 
+	static TimeSend__HandleSecondKeys(secondKeysActions, combo := "") {
+		output := Map()
+		keys := []
+		actions := []
+
+		if RegExMatch(secondKeysActions[1], "\[(.*?)\]", &keysMatch)
+			keys := StrSplit(keysMatch[1], ",")
+
+		if RegExMatch(secondKeysActions[2], "\[(.*?)\]", &actionsMatch) {
+			interActions := StrSplit(actionsMatch[1], ",")
+
+			for each in interActions
+				actions.Push(RegExReplace(secondKeysActions[2], "\[(.*?)\]", each))
+		}
+
+
+		for i, each in keys
+			output.Set(each, BindHandler.Send.Bind(BindHandler, combo, actions[i]))
+
+
+		return (output)
+	}
+
 	static TimeSend(combo := "", secondKeysActions := Map(), defaultAction := False, timeLimit := "0.1", alwaysUpper := False) {
 		if this.waitTimeSend {
 			this.SendDefault(combo)
 			return
 		}
 		this.waitTimeSend := True
+
+		if secondKeysActions is Array
+			secondKeysActions := this.TimeSend__HandleSecondKeys(secondKeysActions, combo)
+
 
 		Util.StrBind(combo, &keyRef, &modRef, &rulRef)
 		layoutMap := KeyboardBinder.GetCurrentLayoutMap()
