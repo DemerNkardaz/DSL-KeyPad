@@ -91,7 +91,6 @@ Class ChrCrafter {
 			Util.CaretTooltip(
 				(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 				" " input "`n"
-				Util.ChrToUnicode(input) "`n"
 				currentInputMode
 				(favoriteSuggestions)
 				((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : "")

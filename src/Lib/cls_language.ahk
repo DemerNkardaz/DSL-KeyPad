@@ -355,7 +355,7 @@ Class Locale {
 			lSecondName := ""
 
 			if entry.options.secondName {
-				lSecondName := " " Locale.Read(ref "_sN", lang)
+				lSecondName := " " Locale.Read(("Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref) "_sN", lang)
 			}
 
 			for letterBound in ["beforeLetter", "afterLetter"] {

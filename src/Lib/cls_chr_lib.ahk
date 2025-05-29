@@ -478,6 +478,8 @@ Class ChrLib {
 
 		if alt = "superscript" && !entry.alterations.HasOwnProp("superscript")
 			alt := "modifier"
+		else if alt = "fraktur" && !entry.alterations.HasOwnProp("fraktur")
+			alt := "blackletter"
 
 		getMode := StrLen(getMode) ? getMode : "Unicode"
 
@@ -722,6 +724,7 @@ Class ChrLib {
 			"combining", ["комбинируемый", "ко", "c"],
 			"uncombined", ["некомбинируемый", "неко", "uc"],
 			"fullwidth", ["полноширинный", "пш", "fw"],
+			"blackletter", ["bl"],
 		)
 
 		for key, value in alterationNames {
