@@ -1412,7 +1412,7 @@ Class ChrLib {
 			case: Map(
 				"c", "capital",
 				"s", "small",
-				"sc", "small_capital",
+				"k", "small_capital",
 				"i", "inter",
 				"n", "neutral"
 			),
@@ -1487,7 +1487,7 @@ Class ChrLib {
 				decomposedName.script := altInputScript != "" ? altInputScript : decomposedName.script[rawCharacterName[1]]
 				decomposedName.case := decomposedName.case[rawCharacterName[2 - shift]]
 				decomposedName.type := decomposedName.type[rawCharacterName[3 - shift]]
-				decomposedName.letter := (["capital", "neutral"].HasValue(decomposedName.case) ? StrUpper(rawCharacterName[4 - shift]) : rawCharacterName[4 - shift])
+				decomposedName.letter := (["capital", "small_capital", "neutral"].HasValue(decomposedName.case) ? StrUpper(rawCharacterName[4 - shift]) : rawCharacterName[4 - shift])
 
 				diacriticSet := InStr(entryName, "__") ? RegExReplace(entryName, "i)^.*?__(.*)", "$1") : ""
 				decomposedName.postfixes := StrLen(diacriticSet) > 0 ? StrSplit(diacriticSet, "__") : []

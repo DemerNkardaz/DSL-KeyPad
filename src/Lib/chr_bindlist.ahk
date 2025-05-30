@@ -1370,6 +1370,9 @@ bindingMaps := Map(
 				),
 				"G", Map(
 					"<^>!", "lat_[c_let_g::smallCapital,s_let_g_gamma]",
+					"<^>!>+", "lat_s_let_g_gamma::modifier",
+					"<^>!<!", "lat_s_let_m_turned__long_leg",
+					"<^>!<!>+", "lat_s_let_m_turned__long_leg::modifier",
 					">+", "lat_s_let_g::modifier",
 				),
 				"H", Map(
@@ -1388,6 +1391,8 @@ bindingMaps := Map(
 				),
 				"L", Map(
 					"<^>!", "lat_c_let_l::smallCapital",
+					"<^>!<!", "lat_s_let_y_turned",
+					"<^>!<!>+", "lat_s_let_y_turned::modifier",
 					">+", "lat_s_let_l::modifier",
 				),
 				"M", Map(
@@ -1424,6 +1429,8 @@ bindingMaps := Map(
 				),
 				"R", Map(
 					"<^>!", "lat_c_let_r::smallCapital",
+					"<^>!<!", "lat_s_let_r_turned",
+					"<^>!<!>+", "lat_s_let_r_turned::modifier",
 					">+", "lat_s_let_r::modifier",
 				),
 				"S", Map(
@@ -1448,6 +1455,8 @@ bindingMaps := Map(
 					">+", "lat_s_let_v::modifier",
 				),
 				"W", Map(
+					"<^>!", "lat_s_let_w_turned",
+					"<^>!>+", "lat_s_let_w_turned::modifier",
 					">+", "lat_s_let_w::modifier",
 				),
 				"X", Map(
@@ -1455,6 +1464,8 @@ bindingMaps := Map(
 				),
 				"Y", Map(
 					"<^>!", "lat_c_let_y::smallCapital",
+					"<^>!<!", "lat_s_let_h_turned",
+					"<^>!<!>+", "lat_s_let_h_turned::modifier",
 					">+", "lat_s_let_y::modifier",
 				),
 				"Z", Map(

@@ -2328,6 +2328,9 @@ LibRegistrate(this) {
 		"descender", { proxy: "arrow_down",
 			groups: [], options: { noCalc: True },
 		},
+		"long_leg", { proxy: "arrow_down",
+			groups: [], options: { noCalc: True },
+		},
 		"upturn", { proxy: "arrow_up",
 			groups: [], options: { noCalc: True },
 		},
@@ -4625,6 +4628,12 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True, fastKey: "<+ $?Secondary" },
 			recipe: ["$4"],
 		},
+		"lat_[c,s]_let_k_kra", {
+			unicode: ["004B", "0138"],
+			sequence: [["004B", "02BC"], []],
+			options: { noCalc: [True, False], useLetterLocale: True },
+			recipe: ["$ra"],
+		},
 		"lat_[c,s]_let_o_rams_horn", {
 			unicode: ["A7CB", "0264"],
 			tags: [[], ["close-mid back unrounded vowel", "неогублённый гласный заднего ряда средне-верхнего подъёма"]],
@@ -5135,6 +5144,26 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Glottal Latin Letters
+		;
+		;
+		"lat_[c,s]_let_a__comma_above", {
+			unicode: ["A7BA", "A7BB"],
+			options: { referenceLocale: "_a$" },
+			symbol: { beforeLetter: "glottal" },
+		},
+		"lat_[c,s]_let_i__comma_above", {
+			unicode: ["A7BC", "A7BD"],
+			options: { referenceLocale: "_i$" },
+			symbol: { beforeLetter: "glottal" },
+		},
+		"lat_[c,s]_let_u__comma_above", {
+			unicode: ["A7BE", "A7BF"],
+			options: { referenceLocale: "_u$" },
+			symbol: { beforeLetter: "glottal" },
+		},
+		;
+		;
 		; * Turned Latin Letters
 		;
 		;
@@ -5149,6 +5178,7 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_e_turned", {
 			unicode: ["018E", "01DD"],
+			alterations: [{ modifier: "1D32", smallCapital: "2C7B" }, {}],
 			recipe: ["$${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
 		},
@@ -5161,6 +5191,27 @@ LibRegistrate(this) {
 			recipe: ["$${arrow_right_circle}"],
 			symbol: { beforeLetter: "reversed" },
 		},
+		"lat_[c,s]_let_h_turned", {
+			unicode: ["A78D", "0265"],
+			tags: [[], ["voiced labial–palatal approximant", "лабиопалатальный аппроксимант"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: { layoutTitles: ["", True], altLayoutKey: ["", ">!<! /Y/"] },
+			alterations: [{}, { modifier: "1DA3" }],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_let_k_turned", {
+			unicode: ["A7B0", "029E"],
+			alterations: [{ smallCapital: "1DF10" }, {}],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_let_l_turned", {
+			unicode: ["A780", "A781"],
+			alterations: [{ sansSerif: "2142" }, {}],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
 		"lat_[c,s]_let_m_turned", {
 			unicode: ["019C", "026F"],
 			tags: [[], ["close back unrounded vowel", "неогублённый гласный заднего ряда верхнего подъёма"]],
@@ -5170,12 +5221,57 @@ LibRegistrate(this) {
 			recipe: ["$${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
 		},
+		"lat_[s]_let_m_turned__long_leg", {
+			unicode: ["0270"],
+			tags: ["voiced velar approximant", "велярный аппроксимант"],
+			groups: ["Latin", "IPA"],
+			options: { layoutTitles: True, altLayoutKey: ">!<! /G/" },
+			alterations: { modifier: "1DAD" },
+			recipe: [
+				"$${arrow_left_circle}${long_leg}",
+				"${lat_[s]_let_m_turned}${long_leg}",
+				"${long_leg}${lat_[s]_let_m_turned}",
+			],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[k,s]_let_r_turned", {
+			unicode: ["1D1A", "0279"],
+			tags: [[], ["voiced alveolar approximant", "альвеолярный аппроксимант"]],
+			groups: [[], ["Latin", "IPA"]],
+			options: { layoutTitles: ["", True], altLayoutKey: ["", ">! $"] },
+			alterations: [{}, { modifier: "02B4" }],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[c,s]_let_t_turned", {
+			unicode: ["A7B1", "0287"],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
 		"lat_[c,s]_let_v_turned", {
 			unicode: ["0245", "028C"],
 			tags: [[], ["open-mid back unrounded vowel", "неогублённый гласный заднего ряда средне-нижнего подъёма"]],
 			groups: [[], ["Latin", "IPA"]],
 			options: { layoutTitles: ["", True], altLayoutKey: ["", ">! $"] },
 			alterations: [{}, { modifier: "1DBA" }],
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[s]_let_w_turned", {
+			unicode: ["028D"],
+			tags: ["voiceless labial–velar fricative", "глухой лабиовелярный аппроксимант"],
+			groups: ["Latin", "IPA"],
+			options: { layoutTitles: True, altLayoutKey: ">! $" },
+			alterations: { modifier: "AB69" },
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[s]_let_y_turned", {
+			unicode: ["028E"],
+			tags: ["voiced palatal lateral approximant", "боковой палатальный сонант"],
+			groups: ["Latin", "IPA"],
+			options: { layoutTitles: True, altLayoutKey: ">!<! /L/" },
+			alterations: { modifier: "107A0" },
 			recipe: ["$${arrow_left_circle}"],
 			symbol: { beforeLetter: "turned" },
 		},
@@ -6038,12 +6134,6 @@ LibRegistrate(this) {
 		},
 		"lat_[s]_let_m__tilde_overlay", {
 			unicode: ["1D6F"]
-		},
-		"lat_[s]_let_m_turned__long_leg", {
-			unicode: ["0270"],
-			alterations: { modifier: "1DAD" },
-			recipe: ["$${arrow_left_circle}${arrow_down}"],
-			symbol: { beforeLetter: "turned" }
 		},
 		; Latin Letter “N”
 		"lat_[c,s]_let_n__acute", {
