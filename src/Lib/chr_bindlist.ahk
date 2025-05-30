@@ -1288,19 +1288,47 @@ bindingMaps := Map(
 				"Tilde", "grave_accent",
 			),
 			"Moded", Map(
-				"1", Map("+", "exclamation"),
-				"2", Map("+", "commercial_at"),
-				"3", Map("+", "number_sign"),
-				"4", Map("+", "wallet_dollar"),
-				"5", Map("+", "percent"),
-				"6", Map("+", "circumflex_accent"),
+				"1", Map(
+					"+", "exclamation",
+					"<^>!", "lat_n_let_alveolar_click",
+					"<^>!<!", "lat_n_let_retroflex_click",
+					"<^>!<!>+", "lat_n_let_retroflex_click::modifier",
+				),
+				"2", Map(
+					"+", "commercial_at",
+					"<^>!", "lat_n_let_dental_click",
+					"<^>!>+", "lat_n_let_dental_click::modifier",
+				),
+				"3", Map(
+					"+", "number_sign",
+					"<^>!", "lat_n_let_lateral_click",
+					"<^>!>+", "lat_n_let_lateral_click::modifier",
+				),
+				"4", Map(
+					"+", "wallet_dollar",
+					"<^>!", "lat_n_let_palatal_click",
+					"<^>!>+", "lat_n_let_palatal_click::modifier",
+				),
+				"5", Map(
+					"+", "percent",
+					"<^>!", "lat_n_let_bilabial_click",
+					"<^>!>+", "lat_n_let_bilabial_click::modifier",
+				),
+				"6", Map(
+					"+", "circumflex_accent",
+					"<^>!", "lat_n_let_[bidental,bilabial]_percussive",
+				),
 				"7", Map("+", "lat_s_lig_et"),
 				"8", Map("+", "asterisk"),
 				"9", Map("+", "left_parenthesis"),
-				"0", Map("+", "right_parenthesis"),
+				"0", Map(
+					"+", "right_parenthesis"
+				),
 				"Equals", Map("+", "plus"),
 				"Slash", Map("+", "question"),
-				"Backslash", Map("+", "vertical_line"),
+				"Backslash", Map(
+					"+", "vertical_line",
+				),
 				"Tilde", Map("+", "tilde"),
 				"LeftBracket", Map("+", "left_brace"),
 				"RightBracket", Map("+", "right_brace"),
@@ -1387,6 +1415,11 @@ bindingMaps := Map(
 					">+", "lat_s_let_p::modifier",
 				),
 				"Q", Map(
+					"<^>!", "lat_n_let_a_glottal_stop[_reversed,]",
+					"<^>!>+", "lat_n_let_a_glottal_stop[_reversed,]::modifier",
+					"<^>!<+", "lat_n_let_a_glottal_stop[_reversed,]__stroke_short",
+					"<^>!<+>+", "lat_n_let_a_glottal_stop[_reversed,]__stroke_short::modifier",
+					"<^>!<!", "lat_n_let_a_glottal_stop_inverted[__stroke_short,]",
 					">+", "lat_s_let_q::modifier",
 				),
 				"R", Map(
@@ -2292,8 +2325,10 @@ bindingMaps := Map(
 				"<^>!<+", ["lat_[c,s]_let_p__stroke_short"],
 				"<^>!>+", ["lat_[c,s]_let_p__common_hook"]),
 			"Q", Map(
+				"<^>!", ["lat_[c,s]_let_a_glottal_stop"],
 				"<^>!<+", ["lat_[c,s]_let_q_tresillo"],
-				"<^>!>+", ["lat_[c,s]_let_q__common_hook"]),
+				"<^>!>+", ["lat_[c,s]_let_q__common_hook"],
+			),
 			"R", Map("<!", ["lat_[c,s]_let_r__acute"],
 				"<^>!", ["lat_[c,s]_let_r__dot_above"],
 				"<^>!<!", ["lat_[c,s]_let_r_dot_below"],

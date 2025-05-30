@@ -344,9 +344,14 @@ Class Locale {
 			isAlt := InStr(langCode, "_alt")
 			lang := isAlt ? RegExReplace(langCode, "_alt") : langCode
 
-			interLetter := useLetterLocale ? (
-				useLetterLocale = "Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref
-			) "_LTL" : ""
+			interLetter := ref "_LTL"
+
+			if useLetterLocale {
+				if RegExMatch(useLetterLocale, "i)^(.*?)\$", &refMatch)
+					interLetter := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1") "_LTL"
+				else if useLetterLocale = "Origin"
+					interLetter := RegExReplace(ref, "i)^(.*?)__.*", "$1") "_LTL"
+			}
 
 			postLetter := useLetterLocale ? Locale.Read(interLetter, lang) : letter
 

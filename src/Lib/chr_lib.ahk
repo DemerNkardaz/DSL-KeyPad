@@ -2992,6 +2992,14 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Proxies
+		;
+		;
+		"back_apostrophe", { proxy: "quote_right",
+			groups: [], options: { noCalc: True },
+		},
+		;
+		;
 		; * Mathematical Factions
 		;
 		;
@@ -4576,6 +4584,11 @@ LibRegistrate(this) {
 			symbol: { letter: "${lat_s_let_a_schwa}" },
 			recipe: ["$${arrow_right}"],
 		},
+		"lat_[c,s]_let_h_heng", {
+			unicode: ["A726", "A727"],
+			options: { useLetterLocale: True },
+			recipe: ["/Hng/"],
+		},
 		"lat_[c,s]_let_h_hwair", {
 			unicode: ["01F6", "0195"],
 			options: { useLetterLocale: True, fastKey: "$?Primary" },
@@ -4753,6 +4766,117 @@ LibRegistrate(this) {
 			groups: ["Latin"],
 			options: { useLetterLocale: "Origin" },
 			symbol: { letter: "${lat_s_let_z_ezh}" }
+		},
+		"lat_[c,s]_let_a_glottal_stop", {
+			unicode: ["0241", "0242"],
+			options: { useLetterLocale: True, fastKey: ">+ /Q/?Secondary" },
+			recipe: ["/GS/?"],
+		},
+		"lat_[c,s]_let_a_glottal_stop_reversed", {
+			unicode: ["A7CE", "A7CF"],
+			options: { useLetterLocale: True },
+			recipe: ["/GS/?${arrow_left}", "${lat_[c,s]_let_a_glottal_stop}${arrow_left}"],
+		},
+		"lat_n_let_a_glottal_stop", {
+			unicode: "0294",
+			groups: ["Latin", "IPA"],
+			alterations: { modifier: "02C0" },
+			options: { useLetterLocale: True, altLayoutKey: ">! Q" },
+		},
+		"lat_n_let_a_glottal_stop__stroke_short", {
+			unicode: "02A1",
+			groups: ["Latin", "IPA"],
+			tags: ["epiglottal plosive", "эпиглоттальный взрывной согласный"],
+			alterations: { modifier: "107B3" },
+			options: {
+				useLetterLocale: "Origin",
+				layoutTitles: True,
+				altLayoutKey: ">!<+ Q"
+			},
+		},
+		"lat_n_let_a_glottal_stop_reversed", {
+			unicode: "0295",
+			groups: ["Latin", "IPA"],
+			alterations: { modifier: "02C1" },
+			options: {
+				useLetterLocale: True,
+				altLayoutKey: "c*>! Q"
+			},
+			recipe: ["${lat_n_let_a_glottal_stop}${arrow_left}"],
+			symbol: { beforeLetter: "reversed" },
+		},
+		"lat_n_let_a_glottal_stop_reversed__stroke_short", {
+			unicode: "02A2",
+			groups: ["Latin", "IPA"],
+			tags: ["voiced epiglottal fricative", "звонкий эпиглоттальный фрикатив"],
+			alterations: { modifier: "107B4" },
+			options: { useLetterLocale: "Origin", layoutTitles: True, altLayoutKey: "c*>!<+ Q" },
+			symbol: { letter: "${lat_n_let_a_glottal_stop}" },
+		},
+		"lat_n_let_a_glottal_stop_inverted", {
+			unicode: "0296",
+			groups: ["Latin", "IPA"],
+			options: {
+				useLetterLocale: True,
+				referenceLocale: "stop$",
+				altLayoutKey: ">!<! Q"
+			},
+			recipe: ["${lat_n_let_a_glottal_stop}${arrow_right_circle}"],
+			symbol: { beforeLetter: "inverted" },
+		},
+		"lat_n_let_a_glottal_stop_inverted__stroke_short", {
+			unicode: "01BE",
+			groups: ["Latin", "IPA"],
+			options: {
+				useLetterLocale: "stop$",
+				altLayoutKey: "c*>!<! Q"
+			},
+			symbol: { beforeLetter: "inverted", letter: "${lat_n_let_a_glottal_stop_inverted}" },
+		},
+		"lat_n_let_alveolar_click", {
+			unicode: "01C3",
+			groups: ["Latin", "IPA"],
+			options: { useLetterLocale: True, altLayoutKey: ">! 1" },
+		},
+		"lat_n_let_retroflex_click", {
+			unicode: "1DF0A",
+			groups: ["Latin", "IPA"],
+			alterations: { modifier: "107B9" },
+			options: { useLetterLocale: True, altLayoutKey: ">!<! 1" },
+		},
+		"lat_n_let_dental_click", {
+			unicode: "01C0",
+			groups: ["Latin", "IPA"],
+			alterations: { modifier: "107B6" },
+			options: { useLetterLocale: True, altLayoutKey: ">! 2" },
+		},
+		"lat_n_let_lateral_click", {
+			unicode: "01C1",
+			groups: ["Latin", "IPA"],
+			alterations: { modifier: "107B7" },
+			options: { useLetterLocale: True, altLayoutKey: ">! 3" },
+		},
+		"lat_n_let_palatal_click", {
+			unicode: "01C2",
+			groups: ["Latin", "IPA"],
+			alterations: { modifier: "107B8" },
+			options: { useLetterLocale: True, altLayoutKey: ">! 4" },
+		},
+		"lat_n_let_bilabial_click", {
+			unicode: "0298",
+			groups: ["Latin", "IPA"],
+			alterations: { modifier: "107B5" },
+			options: { useLetterLocale: True, altLayoutKey: ">! 5" },
+		},
+		"lat_n_let_bilabial_percussive", {
+			unicode: "02AC",
+			groups: ["Latin", "IPA"],
+			options: { useLetterLocale: True, altLayoutKey: ">! 6" },
+		},
+		"lat_n_let_bidental_percussive", {
+			unicode: "02AD",
+			groups: ["Latin", "IPA"],
+			options: { useLetterLocale: True, altLayoutKey: "c*>!  6" },
 		},
 		;
 		;
@@ -5995,6 +6119,9 @@ LibRegistrate(this) {
 			unicode: ["0220", "019E"],
 			recipe: ["$${arrow_rightdown}"]
 		},
+		"lat_[s]_let_n__back_apostrophe", {
+			unicode: ["0149"]
+		},
 		; Latin Letter “O”
 		"lat_[c,s]_let_o__acute", {
 			unicode: ["00D3", "00F3"],
@@ -6917,6 +7044,7 @@ LibRegistrate(this) {
 			unicode: ["0222", "0223"]
 		},
 		"lat_[s]_lig_pl", { unicode: ["214A"] },
+		"lat_[s]_lig_qp", { unicode: ["0239"] },
 		"lat_[s]_lig_st_long", {
 			unicode: ["FB05"],
 			recipe: ["$"],
