@@ -4,13 +4,23 @@
 
 # <span title="Diacritics-Spaces-Letters KeyPad">${\color{#e2b041}\mathbf{DSL \ KeyPad}}$</span>
 
-![unicode](https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4200+-yellow?logo=unicode&labelColor=ffffff) ![forge](https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-3300+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff) ![binds](https://custom-icon-badges.herokuapp.com/badge/binds-1800+/600+-yellow?logo=keybind&labelColor=ffffff) <br> ![wakatime](https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social) ![](https://img.shields.io/github/watchers/DemerNkardaz/DSL-KeyPad) ![](https://img.shields.io/github/stars/DemerNkardaz/DSL-KeyPad) ![](https://img.shields.io/gitlab/stars/DemerNkardaz%2Fdsl-keypad) ![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FDemerNkardaz%2FDSL-KeyPad&label=visits&color=yellow)
+![unicode](https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4200+-yellow?logo=unicode&labelColor=ffffff) ![forge](https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-3400+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff) ![binds](https://custom-icon-badges.herokuapp.com/badge/binds-1800+/600+-yellow?logo=keybind&labelColor=ffffff) <br> ![wakatime](https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social) ![](https://img.shields.io/github/watchers/DemerNkardaz/DSL-KeyPad) ![](https://img.shields.io/github/stars/DemerNkardaz/DSL-KeyPad) ![](https://img.shields.io/gitlab/stars/DemerNkardaz%2Fdsl-keypad) ![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FDemerNkardaz%2FDSL-KeyPad&label=visits&color=yellow)
 
 <img src="src/Bin/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
 
-“DSL KeyPad” is a tool written on [AutoHotkey 2.0](https://www.autohotkey.com/), designed for inputting a wide range of characters using hotkeys and auxiliary functions. Its primary focus is on enhancing input capabilities for Latin and Cyrillic scripts, allowing typing in multiple languages without the need for separate keyboard layouts for each language.
+“DSL KeyPad” is a tool written on [AutoHotkey 2.0](https://www.autohotkey.com/), designed for inputting a wide range of characters using hotkeys, [Compose](https://en.wikipedia.org/wiki/Compose_key)-like mode and auxiliary functions. Its primary focus is on enhancing input capabilities for Latin and Cyrillic scripts, allowing typing in multiple languages without the need for separate keyboard layouts for each language.
 
 You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-KeyPad/). Downloading available on [Releases](https://github.com/DemerNkardaz/DSL-KeyPad/releases) & [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
+
+<br>
+
+![Sequences Tab](webpage/media/panel_forge_tab.png)
+
+<p align="center">
+	<i>Forge’s Sequences Tab</i>
+</p>
+
+<br>
 
 ### Shortlist of Features
 
@@ -43,11 +53,50 @@ You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-K
 
 <br>
 
-**Install AutoHotkey via Powershell** or [download from its site](https://www.autohotkey.com/).
+**⚠️ AutoHotkey is required to use this tool.** Install it via Powershell or [download from its site](https://www.autohotkey.com/).
 
 ```powershell
 winget install AutoHotkey.AutoHotkey
 ```
+
+<br>
+
+<p align="center">
+	<table>
+		<tr>
+			<td><img src="webpage/media/panel_fastkeys_tab.png" alt="FastKeys Tab" width="460"></td>
+			<td><img src="webpage/media/panel_scripts_tab.png" alt="Scripts Tab" width="460"></td>
+		</tr>
+		<tr>
+			<th><i>FastKeys Tab</i></th>
+			<th><i>Scripts Tab</i></th>
+		</tr>
+		<tr>
+			<td><img src="webpage/media/panel_commands_tab.png" alt="Commands Tab" width="460"></td>
+			<td><img src="webpage/media/panel_about_tab.png" alt="About Tab" width="460"></td>
+		</tr>
+		<tr>
+			<th><i>Commands Tab</i></th>
+			<th><i>About Tab</i></th>
+		</tr>
+		<tr>
+			<td><img src="webpage/media/scripter_alternative_input.png" alt="Alternative Input Selector" width="460"></td>
+			<td><img src="webpage/media/scripter_glyph_variatioins.png" alt="Glyph Variations Selector" width="460"></td>
+		</tr>
+		<tr>
+			<th><i>Alternative Input Selector</i></th>
+			<th><i>Glyph Variations Selector</i></th>
+		</tr>
+		<tr>
+			<td><img src="webpage/media/user_recipes_panel.png" alt="User Recipes Panel" width="460"></td>
+			<td><img src="webpage/media/user_recipes_editor.png" alt="User Recipes Editor" width="460"></td>
+		</tr>
+		<tr>
+			<th><i>User-Defined Recipes Panel</i></th>
+			<th><i>User-Defined Recipes Editor</i></th>
+		</tr>
+	</table>
+<p>
 
 <br>
 
@@ -59,7 +108,7 @@ winget install AutoHotkey.AutoHotkey
 
 ### \[ На Русском \]
 
-«DSL KeyPad» — утилита на языке [AutoHotkey 2.0](https://www.autohotkey.com/) для ввода широкого спектра символов посредством горячих клавиш и вспомогательных функций. Основное направление — расширение возможностей для ввода латиницы и кириллицы, что позволяет писать на множестве языков без использования отдельных раскладок для каждого из языков.
+«DSL KeyPad» — утилита на языке [AutoHotkey 2.0](https://www.autohotkey.com/) для ввода широкого спектра символов посредством горячих клавиш, [Compose](https://en.wikipedia.org/wiki/Compose_key)-подобного режима и вспомогательных функций. Основное направление — расширение возможностей для ввода латиницы и кириллицы, что позволяет писать на множестве языков без использования отдельных раскладок для каждого из языков.
 
 Вы можете ознакомиться с документацией утилиты [здесь](https://demernkardaz.github.io/DSL-KeyPad/). Скачивание доступно в [Релизах](https://github.com/DemerNkardaz/DSL-KeyPad/releases) и на [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
 
@@ -88,7 +137,7 @@ winget install AutoHotkey.AutoHotkey
 
 <br>
 
-**Установите AutoHotkey через Powershell** или [скачайте с сайта](https://www.autohotkey.com/).
+**⚠️ Для работы требуется AutoHotkey.** Установите его через Powershell или [скачайте с официального сайта](https://www.autohotkey.com/).
 
 ```powershell
 winget install AutoHotkey.AutoHotkey
