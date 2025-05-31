@@ -1,10 +1,45 @@
-[![GitHub](https://custom-icon-badges.herokuapp.com/badge/GitHub-[Main]-eeeeee?logoColor=eeeeee&style=for-the-badge&logo=github&labelColor=363B40)](https://github.com/DemerNkardaz/DSL-KeyPad) [![GitLab](https://custom-icon-badges.herokuapp.com/badge/Git-Lab-db4128?logoColor=db4128&style=for-the-badge&logo=gitlab&labelColor=363B40)](https://gitlab.com/DemerNkardaz/dsl-keypad) [![SourceForge](https://custom-icon-badges.herokuapp.com/badge/Source-Forge-f76300?logoColor=f76300&style=for-the-badge&logo=sourceforge&labelColor=363B40)](https://sourceforge.net/projects/dsl-keypad/) [![Bitbucket](https://custom-icon-badges.herokuapp.com/badge/Bit-Bucket-eee?logoColor=eee&style=for-the-badge&logo=bitbucket&labelColor=2d79ce)](https://bitbucket.org/nkardaz/public/src/)
+<p align="center">
+	<a href="https://github.com/DemerNkardaz/DSL-KeyPad">
+		<img src="https://custom-icon-badges.herokuapp.com/badge/GitHub-[Main]-eeeeee?logoColor=eeeeee&style=for-the-badge&logo=github&labelColor=363B40" alt="GitHub"/>
+	</a>
+	<a href="https://gitlab.com/DemerNkardaz/dsl-keypad">
+		<img src="https://custom-icon-badges.herokuapp.com/badge/Git-Lab-db4128?logoColor=db4128&style=for-the-badge&logo=gitlab&labelColor=363B40" alt="GitLab"/>
+	</a>
+	<a href="https://sourceforge.net/projects/dsl-keypad/">
+		<img src="https://custom-icon-badges.herokuapp.com/badge/Source-Forge-f76300?logoColor=f76300&style=for-the-badge&logo=sourceforge&labelColor=363B40" alt="SourceForge"/>
+	</a>
+	<a href="https://bitbucket.org/nkardaz/public/src/">
+		<img src="https://custom-icon-badges.herokuapp.com/badge/Bit-Bucket-eee?logoColor=eee&style=for-the-badge&logo=bitbucket&labelColor=2d79ce" alt="Bitbucket"/>
+	</a>
+</p>
 
 <br>
 
-# <span title="Diacritics-Spaces-Letters KeyPad">${\color{#e2b041}\mathbf{DSL \ KeyPad}}$</span>
+$$
+\begin{array}{c}
+\Large \mathbf{DSL \ KeyPad} \\
+\text{ } \\
+\normalsize \mathbf{Type \ multiple \ languages \ with \ two \ layouts} \\
+\small \text{Ænglisċ sprǣċ | Français | Română | Tiếng Việt … } \\
+\small \text{Словѣньскъ ѩꙁыкъ | Қазақ тілі | Рѹмѫнѣскъ | Аԥсуа бызшәа … }
+\end{array}
+$$
 
-![unicode](https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4200+-yellow?logo=unicode&labelColor=ffffff) ![forge](https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-3400+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff) ![binds](https://custom-icon-badges.herokuapp.com/badge/binds-1800+/600+-yellow?logo=keybind&labelColor=ffffff) <br> ![wakatime](https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social) ![](https://img.shields.io/github/watchers/DemerNkardaz/DSL-KeyPad) ![](https://img.shields.io/github/stars/DemerNkardaz/DSL-KeyPad) ![](https://img.shields.io/gitlab/stars/DemerNkardaz%2Fdsl-keypad) ![Badge](https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FDemerNkardaz%2FDSL-KeyPad&label=visits&color=yellow)
+---
+
+<p align="center">
+<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4200+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-3400+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/binds-1800+/600+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
+<br>
+<img src="https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social" alt="wakatime"/>
+<img src="https://img.shields.io/github/watchers/DemerNkardaz/DSL-KeyPad" alt="GitHub watchers"/>
+<img src="https://img.shields.io/github/stars/DemerNkardaz/DSL-KeyPad" alt="GitHub stars"/>
+<img src="https://img.shields.io/gitlab/stars/DemerNkardaz%2Fdsl-keypad" alt="GitLab stars"/>
+<img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FDemerNkardaz%2FDSL-KeyPad&label=visits&color=yellow" alt="visits"/>
+</p>
+
+<br>
 
 <img src="src/Bin/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
 
