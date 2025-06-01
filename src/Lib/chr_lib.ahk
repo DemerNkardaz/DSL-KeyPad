@@ -4671,6 +4671,17 @@ LibRegistrate(this) {
 			recipe: ["$${arrow_right_circle}"],
 			symbol: { beforeLetter: "sideways" },
 		},
+		"lat_[s]_let_o_sideways__solidus_long", {
+			unicode: ["1D13"],
+			options: { referenceLocale: "o$" },
+			groups: ["Latin"],
+			recipe: [
+				"${lat_[s]_let_o_sideways}${stroke_short}",
+				"${stroke_short}${lat_[s]_let_o_sideways}",
+				"${lat_[s]_let_o__solidus_long}${arrow_right_circle}",
+			],
+			symbol: { beforeLetter: "sideways", letter: "${lat_[s]_let_o_sideways}" },
+		},
 		"lat_[s]_let_o_open_sideways", {
 			unicode: ["1D12"],
 			options: { referenceLocale: "o$" },
@@ -4723,6 +4734,24 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True },
 			recipe: ["$$", "${lat_[c,s]_let_@_thorn×2}"],
 			symbol: { letter: ["TH", "th"] },
+		},
+		"lat_[s]_let_u_sideways", {
+			unicode: ["1D1D"],
+			options: { referenceLocale: "u$" },
+			alterations: { modifier: "1D59" },
+			recipe: ["$${arrow_right_circle}"],
+			symbol: { beforeLetter: "sideways" },
+		},
+		"lat_[s]_let_u_sideways__diaeresis", {
+			unicode: ["1D1E"],
+			options: { referenceLocale: "u$" },
+			groups: ["Latin"],
+			recipe: [
+				"${lat_[s]_let_u_sideways}${diaeresis}",
+				"${diaeresis}${lat_[s]_let_u_sideways}",
+				"${lat_[s]_let_u__diaeresis}${arrow_right_circle}",
+			],
+			symbol: { beforeLetter: "sideways", letter: "${lat_[s]_let_u_sideways}" },
 		},
 		"lat_[c,s]_let_v_vend", {
 			unicode: ["A768", "A769"],
@@ -6321,11 +6350,6 @@ LibRegistrate(this) {
 			recipe: ["$-${solidus_long}"],
 			symbol: { beforeLetter: "open::3" }
 		},
-		"lat_[s]_let_o_sideways__solidus_long", {
-			unicode: ["1D13"],
-			recipe: ["${arrow_right_circle}${solidus_long}"],
-			symbol: { beforeLetter: "sideways::3" }
-		},
 		"lat_[c,s]_let_o__stroke_long", {
 			unicode: ["A74A", "A74B"],
 			options: { fastKey: "$?Secondary" }
@@ -7245,12 +7269,12 @@ LibRegistrate(this) {
 		"cyr_[c,s]_let_a_schwa", {
 			unicode: ["04D8", "04D9"],
 			alterations: [{}, { combining: "1E04B" }],
-			options: { useLetterLocale: True, fastKey: ">+ /Э/?Secondary" }
+			options: { useLetterLocale: True, fastKey: ">+ /А/?Secondary" }
 		},
 		"cyr_[c,s]_let_a_schwa__diaeresis", {
 			unicode: ["04DA", "04DB"],
 			groups: ["Cyrillic"],
-			options: { useLetterLocale: "Origin", fastKey: "<+>+ /Э/?Secondary" }
+			options: { useLetterLocale: "Origin", fastKey: ">+ /А/?Secondary" }
 		},
 		"cyr_[c,s]_let_ye_anchor", {
 			unicode: ["0404", "0454"],
@@ -7571,7 +7595,7 @@ LibRegistrate(this) {
 		;
 		"cyr_[c,s]_let_a__breve", {
 			unicode: ["04D0", "04D1"],
-			options: { fastKey: "$?Secondary" },
+			options: { fastKey: "$?Primary" },
 			symbol: { letter: "${cyr_[c,s]_let_a}" }
 		},
 		"cyr_[c,s]_let_a__diaeresis", {

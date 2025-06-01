@@ -1,16 +1,8 @@
 <p align="center">
-	<a href="https://github.com/DemerNkardaz/DSL-KeyPad">
-		<img src="https://custom-icon-badges.herokuapp.com/badge/GitHub-[Main]-eeeeee?logoColor=eeeeee&style=for-the-badge&logo=github&labelColor=363B40" alt="GitHub"/>
-	</a>
-	<a href="https://gitlab.com/DemerNkardaz/dsl-keypad">
-		<img src="https://custom-icon-badges.herokuapp.com/badge/Git-Lab-db4128?logoColor=db4128&style=for-the-badge&logo=gitlab&labelColor=363B40" alt="GitLab"/>
-	</a>
-	<a href="https://sourceforge.net/projects/dsl-keypad/">
-		<img src="https://custom-icon-badges.herokuapp.com/badge/Source-Forge-f76300?logoColor=f76300&style=for-the-badge&logo=sourceforge&labelColor=363B40" alt="SourceForge"/>
-	</a>
-	<a href="https://bitbucket.org/nkardaz/public/src/">
-		<img src="https://custom-icon-badges.herokuapp.com/badge/Bit-Bucket-eee?logoColor=eee&style=for-the-badge&logo=bitbucket&labelColor=2d79ce" alt="Bitbucket"/>
-	</a>
+	<a href="https://github.com/DemerNkardaz/DSL-KeyPad"><img src="https://custom-icon-badges.herokuapp.com/badge/GitHub-[Main]-eeeeee?logoColor=eeeeee&style=for-the-badge&logo=github&labelColor=363B40" alt="GitHub"/></a>
+	<a href="https://gitlab.com/DemerNkardaz/dsl-keypad"><img src="https://custom-icon-badges.herokuapp.com/badge/Git-Lab-db4128?logoColor=db4128&style=for-the-badge&logo=gitlab&labelColor=363B40" alt="GitLab"/></a>
+	<a href="https://sourceforge.net/projects/dsl-keypad/"><img src="https://custom-icon-badges.herokuapp.com/badge/Source-Forge-f76300?logoColor=f76300&style=for-the-badge&logo=sourceforge&labelColor=363B40" alt="SourceForge"/></a>
+	<a href="https://bitbucket.org/nkardaz/public/src/"><img src="https://custom-icon-badges.herokuapp.com/badge/Bit-Bucket-eee?logoColor=eee&style=for-the-badge&logo=bitbucket&labelColor=2d79ce" alt="Bitbucket"/></a>
 </p>
 
 <br>
@@ -107,11 +99,11 @@ winget install AutoHotkey.AutoHotkey
 			<th><i>Scripts Tab</i></th>
 		</tr>
 		<tr>
-			<td><img src="webpage/media/panel_commands_tab.png" alt="Commands Tab" width="460"></td>
+			<td><img src="webpage/media/panel_help_tab.png" alt="Help Tab" width="460"></td>
 			<td><img src="webpage/media/panel_about_tab.png" alt="About Tab" width="460"></td>
 		</tr>
 		<tr>
-			<th><i>Commands Tab</i></th>
+			<th><i>Help Tab</i></th>
 			<th><i>About Tab</i></th>
 		</tr>
 		<tr>

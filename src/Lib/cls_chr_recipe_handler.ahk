@@ -1,16 +1,16 @@
 Class ChrRecipeHandler {
-	static Make(recipes*) {
+	static Make(recipes, entryName := "", skipStatus := "") {
 		output := []
 		interArr := recipes.ToFlat()
 
 		for recipe in interArr {
-			this.MakeStr(recipe, output)
+			this.MakeStr(recipe, output, entryName, skipStatus)
 		}
 
 		return output
 	}
 
-	static MakeStr(recipe, outputArray := "") {
+	static MakeStr(recipe, outputArray := "", entryName := "", skipStatus := "") {
 		output := ""
 		if InStr(recipe, "${") {
 			if RegExMatch(recipe, "\((.*?)\|(.*?)\)", &match) {
@@ -23,16 +23,16 @@ Class ChrRecipeHandler {
 
 				for pairRecipe in recipePair {
 					if outputArray is Array {
-						outputArray.Push(this.ProcessRecipeString(pairRecipe))
+						outputArray.Push(this.ProcessRecipeString(pairRecipe, entryName, skipStatus))
 					} else {
-						output .= this.ProcessRecipeString(pairRecipe)
+						output .= this.ProcessRecipeString(pairRecipe, entryName, skipStatus)
 					}
 				}
 			} else {
 				if outputArray is Array {
-					outputArray.Push(this.ProcessRecipeString(recipe))
+					outputArray.Push(this.ProcessRecipeString(recipe, entryName, skipStatus))
 				} else {
-					output .= this.ProcessRecipeString(recipe)
+					output .= this.ProcessRecipeString(recipe, entryName, skipStatus)
 				}
 			}
 		} else {
@@ -102,27 +102,24 @@ Class ChrRecipeHandler {
 		return output
 	}
 
-	static ProcessRecipeString(recipe) {
+	static ProcessRecipeString(recipe, entryName := "", skipStatus := "") {
 		tempRecipe := recipe
 
 		while RegExMatch(tempRecipe, "\${(.*?)}", &match) {
 			characterInfo := this.ParseCharacterInfo(match[1])
 
-			interValue := ""
-			Loop characterInfo.repeatCount {
-				if !ChrLib.entries.HasOwnProp(characterInfo.name) {
-					MsgBox(Locale.Read("error_critical") "`n`n" Locale.ReadInject("error_entry_not_found_recipe", [recipe, characterInfo.name]), App.Title(), "Iconx")
-					return
+			if !ChrLib.entries.HasOwnProp(characterInfo.name) {
+				if skipStatus = "Missing" {
+					MsgBox(Locale.Read("error_critical") "`n`n" Locale.ReadInject("error_entry_not_found_recipe", [entryName, RegExReplace(recipe, "\$"), characterInfo.name]), App.Title(), "Iconx")
+					return tempRecipe
 				}
+			}
+
+			interValue := ""
+			Loop characterInfo.repeatCount
 				interValue .= Chrlib.Get(characterInfo.name, characterInfo.hasAlteration, characterInfo.alteration)
 
-			}
-
-			try {
-				tempRecipe := RegExReplace(tempRecipe, "\${" match[1] "}", interValue)
-			} catch {
-				throw "Error in recipe: " tempRecipe " with character: " characterInfo.name
-			}
+			tempRecipe := RegExReplace(tempRecipe, "\${" match[1] "}", interValue)
 		}
 
 		return tempRecipe

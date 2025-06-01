@@ -286,6 +286,7 @@ Class Locale {
 	}
 
 	static LocalesGeneration(entryName, entry) {
+		originalName := entryName
 		nbsp := Chr(160)
 		pfx := "gen_"
 
@@ -301,10 +302,12 @@ Class Locale {
 
 		referenceLocale := entry.options.HasOwnProp("referenceLocale") && entry.options.referenceLocale != "" ? entry.options.referenceLocale : False
 
+		useSelfPrefixesOnReferenceLocale := entry.options.useSelfPrefixesOnReferenceLocale
+
 		LTLReference := False
 
-		entryData := entry.data
-		entrySymbol := entry.symbol
+		entryData := entry.data.Clone()
+		entrySymbol := entry.symbol.Clone()
 
 		if referenceLocale {
 			if !(referenceLocale ~= "i)^:") {
@@ -315,14 +318,18 @@ Class Locale {
 					referenceName := referenceLocale
 
 				if ChrLib.entries.HasOwnProp(referenceName) {
-					entryData := ChrLib.GetValue(referenceName, "data")
-					entrySymbol := ChrLib.GetValue(referenceName, "symbol")
+					entryData := ChrLib.GetValue(referenceName, "data").Clone()
+					entrySymbol := ChrLib.GetValue(referenceName, "symbol").Clone()
+
 				}
 
 				entryName := referenceName
 			} else {
 				LTLReference := StrReplace(referenceLocale, ":", "")
 			}
+
+			if useSelfPrefixesOnReferenceLocale
+				entryData.postfixes := entry.data.postfixes.Clone()
 		}
 
 		letter := (entrySymbol.HasOwnProp("letter") && StrLen(entrySymbol.letter) > 0) ? entrySymbol.letter : entryData.letter

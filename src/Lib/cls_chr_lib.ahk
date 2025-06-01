@@ -21,6 +21,7 @@ Class ChrEntry {
 		useLetterLocale: False,
 		layoutTitles: False,
 		referenceLocale: "",
+		useSelfPrefixesOnReferenceLocale: True,
 		legend: "",
 		altLayoutKey: "",
 		showOnAlt: "",
@@ -121,6 +122,7 @@ Class ChrEntry {
 
 Class ChrLib {
 	static entries := {}
+	static entriesSource := {}
 	static entryGroups := Map("Favorites", [])
 	static entryCategories := Map()
 	static entryRecipes := Map()
@@ -249,8 +251,8 @@ Class ChrLib {
 			}
 
 		} else {
-
 			this.entries.%entryName% := {}
+			this.entriesSource.%entryName% := entry
 			entry := this.EntryPreProcessing(entryName, entry)
 
 			this.TransferProperties(entryName, entry)
@@ -295,6 +297,8 @@ Class ChrLib {
 				entryValue := rawEntries[index + 1]
 				this.AddEntry(entryName, ChrEntry(entryValue, entryName))
 			}
+
+			this.Aftermath()
 
 			Sleep 500
 			this.progressBarGUI.Destroy()
@@ -969,11 +973,11 @@ Class ChrLib {
 		}
 	}
 
-	static TransferProperties(entryName, entry) {
+	static TransferProperties(entryName, entry, skipStatus := "") {
 		for key, value in entry.OwnProps() {
 			if !["String", "Integer", "Boolean"].HasValue(Type(value)) {
 				if ["recipe", "result"].HasValue(key) && value.Length > 0
-					this.TransferRecipeProperty(entryName, key, value)
+					this.TransferRecipeProperty(entryName, key, value, skipStatus)
 				else
 					this.Transfer%Type(value)%Property(entryName, key, value)
 			} else {
@@ -990,12 +994,37 @@ Class ChrLib {
 		})
 	}
 
-	static TransferRecipeProperty(entryName, key, value) {
-		tempRecipe := value.Clone()
-		definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe)
-		interObj := {}
-		interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
-		this.entries.%entryName%.%key% := interObj.Get
+	static TransferRecipeProperty(entryName, key, value, skipStatus := "") {
+		try {
+			tempRecipe := value.Clone()
+			definedRecipe := (*) => ChrRecipeHandler.Make([tempRecipe], entryName, skipStatus)
+			interObj := {}
+			interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
+			this.entries.%entryName%.%key% := interObj.Get
+		} catch {
+			this.entries.%entryName%.%key% := value.Clone()
+			if skipStatus = ""
+				this.attemptQueue.Push(entryName)
+		}
+	}
+
+	static attemptQueue := []
+	static Aftermath() {
+		if this.attemptQueue.Length > 0 {
+			for entryName in this.attemptQueue {
+				presavedIndex := this.entries.%entryName%.index
+				this.entries.%entryName% := {}
+
+				entry := this.EntryPreProcessing(entryName, this.entriesSource.%entryName%)
+
+				this.TransferProperties(entryName, entry, skipStatus := "Missing")
+
+				this.entries.%entryName%.index := presavedIndex
+
+				this.EntryPostProcessing(entryName, this.entries.%entryName%)
+			}
+			this.attemptQueue := []
+		}
 	}
 
 	static TransferArrayProperty(entryName, key, value) {

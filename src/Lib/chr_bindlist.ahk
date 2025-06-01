@@ -2410,8 +2410,10 @@ bindingMaps := Map(
 				"<^>!<+", ["lat_[c,s]_let_z__stroke_short"]),
 			; Russian-Modifiers Keyboard Layout
 			"А", Map(
-				"<^>!", ["cyr_[c,s]_let_a__breve"],
+				"<^>!", ["cyr_[c,s]_let_a_schwa"],
+				"<^>!>+", ["cyr_[c,s]_let_a_schwa__diaeresis"],
 				"<^>!<+", ["cyr_[c,s]_let_a__diaeresis"],
+				"<!", ["cyr_[c,s]_let_a__breve"],
 			),
 			"Б", Map(
 				"<^>!", ["quote_angle_left_double"],
@@ -2534,8 +2536,6 @@ bindingMaps := Map(
 			"Э", Map(
 				"<^>!", ["cyr_[c,s]_let_ye_anchor"],
 				"<^>!<+", ["cyr_[c,s]_let_e__diaeresis"],
-				"<^>!>+", ["cyr_[c,s]_let_a_schwa"],
-				"<^>!<+>+", ["cyr_[c,s]_let_a_schwa__diaeresis"],
 			),
 			"Ю", Map(
 				"<^>!", ["quote_angle_right_double"],
