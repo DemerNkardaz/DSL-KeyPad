@@ -337,7 +337,7 @@ Class Locale {
 		lCase := entryData.case
 		lType := entryData.type
 		lPostfixes := entryData.postfixes
-		lVariant := ["digraph", "symbol", "sign", "syllable"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
+		lVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
 		isGermanic := lScript = "germanic_runic"
 

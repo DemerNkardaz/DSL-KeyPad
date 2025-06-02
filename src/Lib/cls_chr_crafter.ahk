@@ -379,6 +379,9 @@ Class ChrCrafter {
 	}
 
 	static ValidateRecipes(prompt, getSuggestions := False, breakSkip := False, restrictClasses := [], hasBacktick := False) {
+		if prompt = ""
+			return
+
 		inputMode := !hasBacktick ? Auxiliary.inputMode : "Unicode"
 
 		promptBackup := prompt

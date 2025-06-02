@@ -2177,7 +2177,9 @@ bindingMaps := Map(
 				"<^>!<!>+", "bullet_white",
 				">+", "tilde_reversed"
 			),
-			"Apostrophe", Map(),
+			"Apostrophe", Map(
+				"<^>!", ["lat_[c,s]_let_a_saltillo"],
+			),
 			"Space", Map(
 				"<^>!", "no_break_space",
 				"<^>!>+", "emsp",
@@ -2423,7 +2425,9 @@ bindingMaps := Map(
 				"<^>!<!<+", ["quote_angle_left"],
 				"<^>!<+>+", ["quote_low_9"],
 			),
-			"В", Map(),
+			"В", Map(
+				"<^>!", ["cyr_[c,s]_let_w"],
+			),
 			"Г", Map(
 				"<!", ["cyr_[c,s]_let_g__acute"],
 				"<^>!", ["cyr_[c,s]_let_g__upturn"],
@@ -2449,6 +2453,7 @@ bindingMaps := Map(
 				"<^>!>+", ["cyr_[c,s]_let_z_zemlya"],
 				"<^>!<+", ["cyr_[c,s]_let_z__diaeresis"],
 				"<^>!<!", ["cyr_[c,s]_let_z__descender"],
+				"<^>!<!<+", ["cyr_[c,s]_let_z_dze"],
 			),
 			"И", Map(
 				"<^>!", ["cyr_[c,s]_let_i_decimal"],
@@ -2466,6 +2471,7 @@ bindingMaps := Map(
 				"<!", ["cyr_[c,s]_let_k__acute"],
 				"<^>!", ["cyr_[c,s]_let_k_ksi"],
 				"<^>!<+", ["cyr_[c,s]_let_q_koppa"],
+				"<^>!>+", ["cyr_[c,s]_let_q"],
 				"<^>!<!", ["cyr_[c,s]_let_k__descender"],
 			),
 			"Л", Map(
@@ -2484,7 +2490,8 @@ bindingMaps := Map(
 			),
 			"О", Map(
 				"<^>!", ["cyr_[c,s]_let_o_omega"],
-				"<^>!<+", ["cyr_[c,s]_let_o__diaeresis"]
+				"<^>!<+", ["cyr_[c,s]_let_o__diaeresis"],
+				"<^>!<!<+>+", ["cyr_n_gly_o_multiocular"],
 			),
 			"П", Map(
 				"<^>!", ["cyr_[c,s]_let_p_psi"],
@@ -2512,14 +2519,18 @@ bindingMaps := Map(
 				"<^>!", ["cyr_[c,s]_let_h_shha"],
 				"<^>!<!", ["cyr_[c,s]_let_h__descender"],
 			),
-			"Ц", Map(),
+			"Ц", Map(
+				"<^>!", ["cyr_[c,s]_let_ts_tswe"],
+			),
 			"Ч", Map(
 				"<^>!", ["cyr_[c,s]_let_ch_tshe"],
 				"<^>!<+", ["cyr_[c,s]_let_ch__diaeresis"],
 				"<^>!<!", ["cyr_[c,s]_let_ch__descender"],
 				"<^>!<!<+", ["cyr_[c,s]_let_ch_djerv"],
 			),
-			"Ш", Map(),
+			"Ш", Map(
+				"<^>!", ["cyr_[c,s]_let_sh_shwe"],
+			),
 			"Щ", Map(),
 			"Ъ", Map(
 				"<^>!", ["cyr_[c,s]_let_u_straight"],
@@ -2531,7 +2542,8 @@ bindingMaps := Map(
 				"<^>!<+", ["cyr_[c,s]_dig_yeru__diaeresis"]
 			),
 			"Ь", Map(
-				"<^>!<!", ["cyr_[c,s]_let_semisoft_sign"]
+				"<^>!", ["cyr_[c,s]_let_neutral_yer"],
+				"<^>!<!", ["cyr_[c,s]_let_semisoft_sign"],
 			),
 			"Э", Map(
 				"<^>!", ["cyr_[c,s]_let_ye_anchor"],

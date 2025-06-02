@@ -4805,6 +4805,10 @@ LibRegistrate(this) {
 			options: { useLetterLocale: "Origin" },
 			symbol: { letter: "${lat_s_let_z_ezh}" }
 		},
+		"lat_[c,s]_let_a_saltillo", {
+			unicode: ["A78B", "A78C"],
+			options: { useLetterLocale: True, fastKey: "'?Secondary" },
+		},
 		"lat_[c,s]_let_a_glottal_stop", {
 			unicode: ["0241", "0242"],
 			options: { useLetterLocale: True, fastKey: ">+ /Q/?Secondary" },
@@ -5262,6 +5266,12 @@ LibRegistrate(this) {
 				"${long_leg}${lat_[s]_let_m_turned}",
 			],
 			symbol: { beforeLetter: "turned" },
+		},
+		"lat_[s]_let_m_turned_sideways", {
+			unicode: ["1D1F"],
+			options: { referenceLocale: "turned$" },
+			recipe: ["$${arrow_left_circle}"],
+			symbol: { beforeLetter: "sideways,turned", letter: "${lat_[s]_let_m_turned}" },
 		},
 		"lat_[k,s]_let_r_turned", {
 			unicode: ["1D1A", "0279"],
@@ -6252,7 +6262,7 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_o__acute_double", {
 			unicode: ["0150", "0151"],
-			options: { fastKey: "$?Secondary" }
+			options: { fastKey: "<!<+>+ $?Secondary" }
 		},
 		"lat_[c,s]_let_o__breve", {
 			unicode: ["014E", "014F"],
@@ -6266,14 +6276,14 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_o__circumflex", {
 			unicode: ["00D4", "00F4"],
 			options: {
-				fastKey: "$?Secondary",
+				fastKey: "<! $?Secondary",
 				telex__vietnamese: "$ $",
 			},
 		},
 		"lat_[c,s]_let_o__caron", {
 			unicode: ["01D1", "01D2"],
 			options: {
-				fastKey: "$?Secondary",
+				fastKey: "<!<+ $?Secondary",
 				telex__jorai: "$ \Z\",
 				telex__chinese_romanization: "$ \V\",
 			}
@@ -6291,7 +6301,7 @@ LibRegistrate(this) {
 			unicode: ["00D6", "00F6"],
 			alterations: [{}, { combining: "1DF3" }],
 			options: {
-				fastKey: "$?Secondary",
+				fastKey: "<+ $?Secondary",
 				telex__jorai: "$ 8",
 			}
 		},
@@ -6305,7 +6315,7 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_o__grave_double", {
 			unicode: ["020C", "020D"],
-			options: { fastKey: "$?Tertiary" }
+			options: { fastKey: "<+ $?Tertiary" }
 		},
 		"lat_[c,s]_let_o__loop", {
 			unicode: ["A74C", "A74D"],
@@ -6334,7 +6344,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_o__macron", {
 			unicode: ["014C", "014D"],
 			options: {
-				fastKey: "$?Secondary",
+				fastKey: ">+ $?Secondary",
 				telex__chinese_romanization: "$ $",
 			},
 		},
@@ -6356,12 +6366,12 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_o__ogonek", {
 			unicode: ["01EA", "01EB"],
-			options: { fastKey: "$?Secondary" }
+			options: { fastKey: "<!>+ $?Secondary" }
 		},
 		"lat_[c,s]_let_o__tilde_above", {
 			unicode: ["00D5", "00F5"],
 			options: {
-				fastKey: "$?Secondary",
+				fastKey: "<+>+ $?Secondary",
 				telex__vietnamese: "$ \X\",
 			},
 		},
@@ -6872,7 +6882,7 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_v__dot_below", {
 			unicode: ["1E7E", "1E7F"],
-			options: { fastKey: "$?Secondary" }
+			options: { fastKey: "<! $?Secondary" }
 		},
 		"lat_[c,s]_let_v__common_hook", {
 			unicode: ["01B2", "028B"],
@@ -6893,7 +6903,7 @@ LibRegistrate(this) {
 		},
 		"lat_[c,s]_let_v__tilde_above", {
 			unicode: ["1E7C", "1E7D"],
-			options: { fastKey: "$?Secondary" }
+			options: { fastKey: "<+>+ $?Secondary" }
 		},
 		; Latin Letter “W”
 		"lat_[c,s]_let_w__acute", {
@@ -7354,6 +7364,11 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True, fastKey: "/К/?Secondary" },
 			recipe: ["\КС\"]
 		},
+		"cyr_[c,s]_let_q", {
+			unicode: ["051A", "051B"],
+			options: { secondName: True, fastKey: ">+ /К/?Secondary" },
+			recipe: ["\КА\"]
+		},
 		"cyr_[c,s]_let_q_koppa", {
 			unicode: ["0480", "0481"],
 			options: { useLetterLocale: True, fastKey: "<+ /К/?Secondary" },
@@ -7384,6 +7399,36 @@ LibRegistrate(this) {
 			recipe: ["\О\:", ".\О\."],
 			symbol: { beforeLetter: "round" },
 		},
+		"cyr_[c,s]_let_o_crossed", {
+			unicode: ["A69A", "A69B"],
+			options: { referenceLocale: "o$" },
+			recipe: ["\ОХ\"],
+			symbol: { beforeLetter: "crossed" }
+		},
+		"cyr_[c,s]_let_o_monocular", {
+			unicode: ["A668", "A669"],
+			options: { referenceLocale: "o$" },
+			recipe: ["\О\."],
+			symbol: { beforeLetter: "monocular" }
+		},
+		"cyr_[c,s]_let_o_monocular_double", {
+			unicode: ["A66C", "A66D"],
+			options: { referenceLocale: "o$" },
+			recipe: ["\О\.\О\.", "${cyr_[c,s]_let_o_monocular×2}"],
+			symbol: { beforeLetter: "double,monocular" }
+		},
+		"cyr_[c,s]_let_o_binocular", {
+			unicode: ["A66A", "A66B"],
+			options: { referenceLocale: "o$" },
+			recipe: [":\О\", "\О\.."],
+			symbol: { beforeLetter: "binocular" }
+		},
+		"cyr_n_gly_o_multiocular", {
+			unicode: "A66E",
+			options: { referenceLocale: ":cyr_n_gly_o", fastKey: "<!<+>+ /О/?Secondary" },
+			recipe: ["О7", "${cyr_c_let_o_monocular×7}"],
+			symbol: { beforeLetter: "multiocular", letter: "${cyr_c_let_o}" }
+		},
 		"cyr_[c,s]_let_p_psi", {
 			unicode: ["0470", "0471"],
 			options: { useLetterLocale: True, fastKey: "/П/?Secondary" },
@@ -7404,6 +7449,11 @@ LibRegistrate(this) {
 			alterations: [{}, { modifier: "2DF4" }],
 			options: { useLetterLocale: True, fastKey: "/Ф/?Secondary" },
 			recipe: ["\ФИ\"]
+		},
+		"cyr_[c,s]_let_w", {
+			unicode: ["051C", "051D"],
+			options: { secondName: True, fastKey: "/В/?Secondary" },
+			recipe: ["\ВЭ\"]
 		},
 		"cyr_[c,s]_let_h_shha", {
 			unicode: ["04BA", "04BB"],
@@ -7432,10 +7482,51 @@ LibRegistrate(this) {
 			options: { useLetterLocale: True, fastKey: "<! /Ь/?Secondary" },
 			recipe: ["/Ь/${stroke_short}"]
 		},
+		"cyr_[c,s]_let_neutral_yer", {
+			unicode: ["A64E", "A64F"],
+			options: { useLetterLocale: True, fastKey: "/Ь/?Secondary" },
+		},
 		"cyr_[c,s]_let_y_yn", {
 			unicode: ["A65E", "A65F"],
 			options: { useLetterLocale: True, fastKey: "<! /Ы/?Secondary" },
 			recipe: ["${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_i_izhitsa}"]
+		},
+		"cyr_[c,s]_let_z_dze", {
+			unicode: ["04E0", "04E1"],
+			options: { useLetterLocale: True, fastKey: "<!<+ /З/?Secondary" },
+			recipe: ["\ДЗЭ\"]
+		},
+		"cyr_[c,s]_let_z_dzwe", {
+			unicode: ["A682", "A683"],
+			options: { useLetterLocale: True },
+			recipe: ["${cyr_[c,s]_let_z_dze}${cyr_[c,s]_let_a_schwa}"]
+		},
+		"cyr_[c,s]_let_ts_tswe", {
+			unicode: ["A68E", "A68F"],
+			options: { useLetterLocale: True, fastKey: "/Ц/?Secondary" },
+			recipe: ["\Ц\${cyr_[c,s]_let_a_schwa}"]
+		},
+		"cyr_[c,s]_let_sh_shwe", {
+			unicode: ["A696", "A697"],
+			options: { useLetterLocale: True, fastKey: "/Ш/?Secondary" },
+			recipe: ["\Ш\${cyr_[c,s]_let_a_schwa}"]
+		},
+		;
+		;
+		; * Cyrillic Reversed
+		;
+		;
+		"cyr_[c,s]_let_z_reversed", {
+			unicode: ["0510", "0511"],
+			options: { referenceLocale: "z$" },
+			recipe: ["\З\${arrow_left}"],
+			symbol: { beforeLetter: "reversed" }
+		},
+		"cyr_[c,s]_let_ts_reversed", {
+			unicode: ["A660", "A661"],
+			options: { referenceLocale: "ts$" },
+			recipe: ["\Ц\${arrow_left}"],
+			symbol: { beforeLetter: "reversed" }
 		},
 		;
 		;
@@ -7635,6 +7726,7 @@ LibRegistrate(this) {
 		},
 		"cyr_[c,s]_let_d_dwe", {
 			unicode: ["A680", "A681"],
+			groups: ["Cyrillic Accented"],
 			options: { useLetterLocale: True },
 			recipe: ["$${arrow_up}"],
 			symbol: { letter: "${cyr_[c,s]_let_d}" }

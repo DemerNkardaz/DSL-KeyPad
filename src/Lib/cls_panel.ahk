@@ -427,7 +427,7 @@ Class Panel {
 					"Miscellaneous Technical",
 				]
 			}),
-			fastkeys: this.LV_InsertGroup({
+			fastkeys: ArrayMerge(this.LV_InsertGroup({
 				type: "Fast Key",
 				group: [
 					"FK Diacritics Primary", "",
@@ -458,18 +458,21 @@ Class Panel {
 					"Latin Accented Tertiary", "",
 					"Cyrillic Tertiary", "",
 					"Special Fast RShift", "",
-					"Spaces Left Shift", "",
-					"Special Combinations"
+					"Spaces Left Shift", ""
 				],
 				groupKey: Map(
 					"FK Diacritics Primary", LeftControl LeftAlt,
 					"Special Fast Left", LeftAlt,
 					"Special Fast Secondary", RightAlt,
 					"Special Right Shift", RightShift,
-					"Spaces Left Shift", LeftShift,
-					"Special Combinations", Locale.Read("symbol_special_key"),
+					"Spaces Left Shift", LeftShift
 				),
-			}),
+			}), this.LV_InsertGroup({
+				type: "Special Combinations",
+				group: ["Special Combinations"],
+				groupKey: Map("Special Combinations", Locale.Read("symbol_special_key")),
+			})
+			),
 			secondkeys: this.LV_InsertGroup({
 				type: "Fast Key",
 				group: [
