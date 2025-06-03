@@ -6,7 +6,26 @@ Class BindList {
 
 		if modMapping.Count > 0 {
 			for letterKey, binds in modMapping {
+				if binds is Object && !(binds is Map || binds is Array || binds is Func)
+					&& binds.HasOwnProp("Get") {
+					blacklist := binds.HasOwnProp("blacklist") ? binds.blacklist : []
+					binds := binds.Get()
+
+					if blacklist.Length > 0 {
+						for modifier in blacklist {
+							if binds.Has(modifier) {
+								binds.Delete(modifier)
+							}
+						}
+					}
+				}
+
 				for modifier, value in binds {
+					if value is Object && !(value is Map || value is Array || value is Func)
+						&& value.HasOwnProp("Get") {
+						value := value.Get()
+					}
+
 					rule := ""
 					if RegExMatch(modifier, ":(.*?)$", &ruleMatch) {
 						rule := ":" ruleMatch[1]

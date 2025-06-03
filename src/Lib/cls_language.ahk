@@ -17,6 +17,7 @@ Class Language {
 				code: IniRead(this.optionsFile, iso, "code", ""),
 				locale: IniRead(this.optionsFile, iso, "is_locale", False),
 				bindings: IniRead(this.optionsFile, iso, "is_bindings", False),
+				altInput: IniRead(this.optionsFile, iso, "alt_input", ""),
 			}
 
 			data.code := data.code != "" ? Number(data.code) : ""
@@ -72,6 +73,18 @@ Class Language {
 		} else {
 			return getTitle ? this.supported.Get("en-US").title : endLen > 0 ? SubStr("en-US", 1, endLen) : "en-US"
 		}
+	}
+
+	static GetLanguageBlock(input, &output?) {
+		output := False
+		if input is Number {
+			for key, value in this.supported
+				if !(value.code is String) && input = value.code
+					output := [key, value]
+		} else if StrLen(input) > 0
+			if this.supported.Has(input)
+				output := [input, this.supported.Get(input)]
+		return output
 	}
 
 	static GetSys(endLen := 0) {

@@ -142,6 +142,45 @@ Class LayoutList {
 		"І", "SC999",
 		"Ѣ", "SC999",
 	)
+	static hellenic := Map(
+		"ΑνωΤελεια", "SC027",
+		"Αποστροφη", "SC028",
+		"ΑριστερηΑγκυλη", "SC01A",
+		"ΔεξιαΑγκυλη", "SC01B",
+		"Περισπωμενη", "SC029",
+		"HyphenMinus", "SC00C",
+		"Ισον", "SC00D",
+		"Κομμα", "SC033",
+		"Τελεια", "SC034",
+		"Σολιδος", "SC035",
+		"ΠισωΣολιδος", "SC02B",
+		"Α", "SC01E",
+		"Β", "SC030",
+		"Ψ", "SC02E",
+		"Δ", "SC020",
+		"Ε", "SC012",
+		"Φ", "SC021",
+		"Γ", "SC022",
+		"Η", "SC023",
+		"Ι", "SC017",
+		"Ξ", "SC024",
+		"Κ", "SC025",
+		"Λ", "SC026",
+		"Μ", "SC032",
+		"Ν", "SC031",
+		"Ο", "SC018",
+		"Π", "SC019",
+		"Ϟ", "SC010",
+		"Ρ", "SC013",
+		"Σ", "SC01F",
+		"Τ", "SC014",
+		"Θ", "SC016",
+		"Ω", "SC02F",
+		"Ϝ", "SC011",
+		"Χ", "SC02D",
+		"Υ", "SC015",
+		"Ζ", "SC02C",
+	)
 	layout := Map()
 
 	__New(base, input := Map()) {
@@ -336,6 +375,9 @@ Class KeyboardBinder {
 				"Ѣ", "SC02E",
 			)),
 		),
+		hellenic: Map(
+			"ϞϜΕΡΤΥ", LayoutList("hellenic"),
+		)
 	}
 
 	static modifiers := [
@@ -391,7 +433,9 @@ Class KeyboardBinder {
 			return
 
 		; ToolTip(Keyboard.CurrentLayout(, True))
-		isLanguageLayoutValid := Language.Validate(Keyboard.CurrentLayout(), "bindings")
+		layoutHex := Keyboard.CurrentLayout()
+		langBlock := Language.GetLanguageBlock(layoutHex)
+		isLanguageLayoutValid := Language.Validate(layoutHex, "bindings")
 		disableTimer := Cfg.Get("Binds_Autodisable_Timer", , 1, "int")
 		disableType := Cfg.Get("Binds_Autodisable_Type", , "hour")
 		try {
@@ -402,6 +446,24 @@ Class KeyboardBinder {
 
 		if !this.disabledByUser
 			this.MonitorToggler(isLanguageLayoutValid && A_TimeIdle <= disableTimer * disableType)
+
+		if (!this.disabledByUser && !this.disabledByMonitor) && isLanguageLayoutValid
+			&& Cfg.Get("Alt_Input_Autoactivation", , False, "bool")
+			&& langBlock {
+
+			if !["^en", "^ru", "^vi"].HasRegEx(langBlock[1])
+				&& Scripter.selectedMode.Get("Alternative Modes") = ""
+				&& InputScriptProcessor.options.interceptionInputMode = ""
+				&& langBlock[2].altInput != ""
+				&& Scripter.Has(langBlock[2].altInput) {
+				Scripter.activatedViaMonitor := True
+				Scripter.OptionSelect(langBlock[2].altInput)
+			} else if Scripter.activatedViaMonitor
+				&& langBlock[2].altInput = "" {
+				Scripter.activatedViaMonitor := False
+				Scripter.OptionSelect(Scripter.selectedMode.Get("Alternative Modes"))
+			}
+		}
 
 		this.TrayIconSwitch()
 	}
@@ -424,14 +486,14 @@ Class KeyboardBinder {
 	}
 
 	static TrayIconSwitch() {
-		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout)
+		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 		Keyboard.CheckLayout(&lang)
 
 		if lang != "" && Language.supported[lang].parent != ""
 			lang := Language.supported[lang].parent
 
 		iconCode := App.indexIcos["app"]
-		trayTitle := App.Title("+status+version") "`n" latinLayout "/" cyrillicLayout
+		trayTitle := App.Title("+status+version") "`n" latinLayout "/" cyrillicLayout "/" hellenicLayout
 
 		if this.disabledByMonitor || this.disabledByUser {
 			iconCode := App.indexIcos["disabled"]
@@ -489,22 +551,25 @@ Class KeyboardBinder {
 		}
 	}
 
-	static CurrentLayouts(&latin?, &cyrillic?) {
+	static CurrentLayouts(&latin?, &cyrillic?, &hellenic?) {
 		latin := Cfg.Get("Layout_Latin")
 		cyrillic := Cfg.Get("Layout_Cyrillic")
+		hellenic := Cfg.Get("Layout_Hellenic")
 	}
 
 	static GetCurrentLayoutMap() {
 		layout := Map()
-		this.CurrentLayouts(&latinLayout, &cyrillicLayout)
+		this.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 
 		latinLayout := KeyboardBinder.layouts.latin.Has(latinLayout) ? latinLayout : "QWERTY"
 		cyrillicLayout := KeyboardBinder.layouts.cyrillic.Has(cyrillicLayout) ? cyrillicLayout : "ЙЦУКЕН"
+		hellenicLayout := KeyboardBinder.layouts.hellenic.Has(hellenicLayout) ? hellenicLayout : "ϞϜΕΡΤΥ"
 
 		latinLayout := KeyboardBinder.layouts.latin[latinLayout]
 		cyrillicLayout := KeyboardBinder.layouts.cyrillic[cyrillicLayout]
+		hellenicLayout := KeyboardBinder.layouts.hellenic[hellenicLayout]
 
-		for keySet in [latinLayout, cyrillicLayout] {
+		for keySet in [latinLayout, cyrillicLayout, hellenicLayout] {
 			for key, scanCode in keySet.layout {
 				if !layout.Has(scanCode) {
 					layout[scanCode] := [key]
@@ -548,6 +613,7 @@ Class KeyboardBinder {
 	static FormatBindings(bindingsMap := Map()) {
 		static matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁѣѢіІ]+"
 		static matchEn := "(?!.*[а-яА-ЯёЁѣѢіІ])[a-zA-Z]+"
+		static metchEl := "[\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+"
 		layout := this.GetCurrentLayoutMap()
 		output := Map()
 		capsOnlyKeys := []
@@ -569,10 +635,11 @@ Class KeyboardBinder {
 				}
 
 				for scanCode, keyNamesArray in layout {
-					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-]+)(?=:)?)(?=[:\]]|$)", &match) {
+					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
 							isCyrillicKey := RegExMatch(keyLetter, matchRu)
+							isHellenicKey := RegExMatch(keyLetter, metchEl)
 
 							rules := Map(
 								"Caps", binds is Array ? [binds] : [[binds]],
@@ -594,7 +661,7 @@ Class KeyboardBinder {
 							if rule = "Caps"
 								capsOnlyKeys.Push(interCombo)
 
-							if !output.Has(interCombo) {
+							if !output.Has(interCombo) || isHellenicKey {
 								try {
 									output.Set(interCombo,
 										binds is String || binds is Func ? [binds] :
@@ -611,6 +678,7 @@ Class KeyboardBinder {
 										output[interCombo] := interArr
 									}
 									output[interCombo][isCyrillicKey ? 2 : 1] := binds
+
 								} else {
 									output[interCombo].Push(binds)
 								}
@@ -630,7 +698,6 @@ Class KeyboardBinder {
 		useTooltip := Cfg.Get("Bind_Register_Tooltip_Progress_Bar", , True, "bool")
 
 		comboActions := []
-
 
 		if total > 0 {
 			i := 0
@@ -685,10 +752,10 @@ Class KeyboardBinder {
 	}
 
 	static RebuilBinds(ignoreAltMode := False, ignoreUnregister := False) {
-		this.CurrentLayouts(&latin, &cyrillic)
+		this.CurrentLayouts(&latin, &cyrillic, &hellenic)
 
 		useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
-		checkDefaultLayouts := (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")
+		checkDefaultLayouts := (latin != "QWERTY" || cyrillic != "ЙЦУКЕН" || hellenic != "ϞϜΕΡΤΥ")
 		isGlyphsVariationsOn := Scripter.selectedMode.Get("Glyph Variations") != ""
 
 		useRemap := (useRemap && checkDefaultLayouts) || isGlyphsVariationsOn
@@ -703,12 +770,12 @@ Class KeyboardBinder {
 			bingingsNames := Scripter.GetData(, altMode).bindings
 
 
-		if !ignoreUnregister
+		if !ignoreUnregister || useRemap && altMode = "Hellenic"
 			this.UnregisterAll()
 
 		preparedBindLists := []
 		rawBindLists := [
-			useRemap ? "Keyboard Default" : "",
+			useRemap && altMode != "Hellenic" ? "Keyboard Default" : "",
 			Cfg.FastKeysOn ? "Common" : "",
 			Cfg.FastKeysOver != "" && Cfg.FastKeysOn ? Cfg.FastKeysOver : "",
 			isUserBindingsOn ? userBindings ":User" : "",
@@ -865,6 +932,7 @@ Class Scripter {
 	static selectorGUI := Map("Alternative Modes", Gui(), "Glyph Variations", Gui())
 	static selectorTitle := Map("Alternative Modes", "", "Glyph Variations", "",)
 	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "")
+	static activatedViaMonitor := False
 
 	static data := Map(
 		"Alternative Modes", [
@@ -1195,6 +1263,17 @@ Class Scripter {
 			"Comma", ",",
 			"Dot", ".",
 			"Slash", "/",
+			"ΑνωΤελεια", ";",
+			"Αποστροφη", "'",
+			"ΑριστερηΑγκυλη", "[",
+			"ΔεξιαΑγκυλη", "]",
+			"Περισπωμενη", "``",
+			"Παυλα", "-",
+			"Ισον", "=",
+			"Κομμα", ",",
+			"Τελεια", ".",
+			"Σολιδος", "/",
+			"ΠισωΣολιδος", "\",
 		)
 
 		selectorAntagonist := selectorType != "Alternative Modes" ? "Alternative Modes" : "Glyph Variations"
@@ -1251,15 +1330,17 @@ Class Scripter {
 		hotkeys := Map()
 		keys := keyCodes.Clone()
 		keysLen := keys.Length
-		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout)
+		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 
-		Loop keys.Length
-			keys.Push("")
+		Loop keysLen
+			keys.Push("", "")
 
 		for keyName, keyCode in KeyboardBinder.layouts.latin[latinLayout].layout
 			keyCodes.HasValue(keyCode, &i) && (keys[i] := keyName)
 		for keyName, keyCode in KeyboardBinder.layouts.cyrillic[cyrillicLayout].layout
 			keyCodes.HasValue(keyCode, &i) && (keys[keysLen + i] := keyName)
+		for keyName, keyCode in KeyboardBinder.layouts.hellenic[hellenicLayout].layout
+			keyCodes.HasValue(keyCode, &i) && (keys[keysLen * 2 + i] := keyName)
 
 		for key, value in keySymbols {
 			keys.HasValue(key, &i) && (keys[i] := value)
@@ -1371,7 +1452,11 @@ Class Scripter {
 
 				hotkeys.Set(keys[j], dataName)
 				hotkeys.Set(keys[keyCodes.Length + j], dataName)
-				hotkeysLabel := selectorPanel.AddText("v" dataValue.uiid "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH) " 0x80 Right +BackgroundTrans", Locale.ReadInject("alt_mode_gui_press", [keys[j] "/" keys[keyCodes.Length + j]]))
+				hotkeysLabel := selectorPanel.AddText(
+					"v" dataValue.uiid "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH)
+					" 0x80 Right +BackgroundTrans",
+					Locale.ReadInject("alt_mode_gui_press", [keys[j] " / " keys[keyCodes.Length + j] " / " keys[keyCodes.Length * 2 + j]])
+				)
 
 				currentCol++
 				if (currentCol >= elementsPerColumn) {
@@ -1457,12 +1542,25 @@ Class Scripter {
 
 	static HandleWaiting(endKey, hotkeys, selectorType) {
 		this.PanelDestroy(selectorType)
-		if endKey != "" && hotkeys.Has(endKey)
+		if endKey != "" && hotkeys.Has(endKey) {
+			this.activatedViaMonitor := False
 			this.OptionSelect(hotkeys.Get(endKey), selectorType)
+		}
 	}
 
 	static PanelDestroy(selectorType) {
 		this.selectorGUI[selectorType].Destroy()
+	}
+
+	static Has(name := "", selectorType := "Alternative Modes") {
+		for i, item in this.data[selectorType] {
+			if Mod(i, 2) = 1 {
+				if item = name {
+					return True
+				}
+			}
+		}
+		return False
 	}
 
 	static GetData(mode := "Alternative Modes", name := "Germanic runes & Glagolitic") {

@@ -4,35 +4,46 @@ bindingMaps := Map(
 		"Hellenic", Map(
 			"ForceSingle", True,
 			"Flat", Map(
-				"A", "hel_[c,s]_let_a_alpha",
-				"B", "hel_[c,s]_let_b_beta",
-				"C", "hel_[c,s]_let_p_psi",
-				"D", "hel_[c,s]_let_d_delta",
-				"E", "hel_[c,s]_let_e_epsilon",
-				"F", "hel_[c,s]_let_f_phi",
-				"G", "hel_[c,s]_let_g_gamma",
-				"H", "hel_[c,s]_let_h_eta",
-				"I", "hel_[c,s]_let_i_iota",
-				"J", "hel_[c,s]_let_x_xi",
-				"K", "hel_[c,s]_let_k_kappa",
-				"L", "hel_[c,s]_let_l_lambda",
-				"M", "hel_[c,s]_let_m_mu",
-				"N", "hel_[c,s]_let_n_nu",
-				"O", "hel_[c,s]_let_o_omicron",
-				"P", "hel_[c,s]_let_p_pi",
-				"Q", "hel_[c,s]_let_q_koppa",
-				"R", "hel_[c,s]_let_r_rho",
-				"S", "hel_[c,s]_let_s_sigma",
-				"T", "hel_[c,s]_let_t_tau",
-				"U", "hel_[c,s]_let_t_theta",
-				"V", "hel_[c,s]_let_o_omega",
-				"W", "hel_[c,s]_let_w_digamma",
-				"X", "hel_[c,s]_let_h_chi",
-				"Y", "hel_[c,s]_let_y_upsilon",
-				"Z", "hel_[c,s]_let_z_zeta",
+				"Α", "hel_[c,s]_let_a_alpha",
+				"Β", "hel_[c,s]_let_b_beta",
+				"Ψ", "hel_[c,s]_let_p_psi",
+				"Δ", "hel_[c,s]_let_d_delta",
+				"Ε", "hel_[c,s]_let_e_epsilon",
+				"Φ", "hel_[c,s]_let_f_phi",
+				"Γ", "hel_[c,s]_let_g_gamma",
+				"Η", "hel_[c,s]_let_h_eta",
+				"Ι", "hel_[c,s]_let_i_iota",
+				"Ξ", "hel_[c,s]_let_x_xi",
+				"Κ", "hel_[c,s]_let_k_kappa",
+				"Λ", "hel_[c,s]_let_l_lambda",
+				"Μ", "hel_[c,s]_let_m_mu",
+				"Ν", "hel_[c,s]_let_n_nu",
+				"Ο", "hel_[c,s]_let_o_omicron",
+				"Π", "hel_[c,s]_let_p_pi",
+				"Ϟ", "hel_[c,s]_let_q_koppa",
+				"Ρ", "hel_[c,s]_let_r_rho",
+				"Σ", "hel_[c,s]_let_s_sigma",
+				"Τ", "hel_[c,s]_let_t_tau",
+				"Θ", "hel_[c,s]_let_t_theta",
+				"Ω", "hel_[c,s]_let_o_omega",
+				"Ϝ", "hel_[c,s]_let_w_digamma",
+				"Χ", "hel_[c,s]_let_h_chi",
+				"Υ", "hel_[c,s]_let_y_upsilon",
+				"Ζ", "hel_[c,s]_let_z_zeta",
+				"Ισον", "equals",
+				"Παυλα", "hyphen_minus",
+				"Τελεια", "dot",
+				"Κομμα", "comma",
+				"Σολιδος", "solidus",
+				"ΠισωΣολιδος", "reverse_solidus",
+				"ΑνωΤελεια", "semicolon",
+				"Αποστροφη", "apostrophe",
+				"ΑριστερηΑγκυλη", "left_bracket",
+				"ΔεξιαΑγκυλη", "right_bracket",
+				"Περισπωμενη", "grave_accent",
 			),
 			"Moded", Map(
-				"A", Map(
+				"Α", Map(
 					"<!", "hel_[c,s]_let_a_alpha__tonos",
 					"<^>!", "hel_[c,s]_let_a_alpha__dasia",
 					"<^>!<+", "hel_[c,s]_let_a_alpha__psili",
@@ -43,26 +54,26 @@ bindingMaps := Map(
 					"<^>!<!<+>+", "hel_[c,s]_let_a_alpha__oxia",
 					"<^<!", "tonos",
 				),
-				"B", Map(
+				"Β", Map(
 					">+", "hel_s_sym_b_beta",
 					"<^<!", "vrachy",
 				),
-				"E", Map(">+", "hel_s_sym_e_epsilon_lunate"),
-				"F", Map(">+", "hel_s_sym_f_phi"),
-				"H", Map("<^>!", "hel_[c,s]_let_h_heta"),
-				"I", Map("<^>!", "hel_[c,s]_let_i_jot"),
-				"K", Map(">+", "hel_s_sym_k_kappa"),
-				"O", Map(
+				"Ε", Map(">+", "hel_s_sym_e_epsilon_lunate"),
+				"Φ", Map(">+", "hel_s_sym_f_phi"),
+				"Η", Map("<^>!", "hel_[c,s]_let_h_heta"),
+				"Ι", Map("<^>!", "hel_[c,s]_let_i_jot"),
+				"Κ", Map(">+", "hel_s_sym_k_kappa"),
+				"Ο", Map(
 					"<^<!", "oxia",
 				),
-				"P", Map(
+				"Π", Map(
 					">+", "hel_s_sym_p_pi",
 					"<^<!", "perispomeni",
 					"<^<!<+", "prosgegrammeni",
 				),
-				"Q", Map("<^>!", "hel_[c,s]_let_q_koppa_archaic"),
-				"R", Map(">+", "hel_s_sym_r_rho"),
-				"S", Map(
+				"Ϟ", Map("<^>!", "hel_[c,s]_let_q_koppa_archaic"),
+				"Ρ", Map(">+", "hel_s_sym_r_rho"),
+				"Σ", Map(
 					">+", "hel_[c,s]_sym_s_sigma_lunate",
 					"<!", "hel_[c,s]_let_s_san",
 					"<^>!", "hel_s_let_s_sigma_final",
@@ -70,21 +81,30 @@ bindingMaps := Map(
 					"<^>!<!", "hel_[c,s]_let_s_sampi",
 					"<^>!<!<+", "hel_[c,s]_let_s_sampi_archaic",
 				),
-				"T", Map("<^>!", "hel_[c,s]_let_t_theta"),
-				"U", Map(">+", "hel_[c,s]_sym_t_theta"),
-				"V", Map(
+				"Τ", Map("<^>!", "hel_[c,s]_let_t_theta"),
+				"Θ", Map(">+", "hel_[c,s]_sym_t_theta"),
+				"Ω", Map(
 					"<^<!", "varia",
 				),
-				"W", Map("<^>!", "hel_[c,s]_let_w_digamma_pamphylian"),
-				"Comma", Map(
+				"Ϝ", Map("<^>!", "hel_[c,s]_let_w_digamma_pamphylian"),
+				"Κομμα", Map(
 					"<^<!", "dasia",
 				),
-				"Y", Map(
+				"Υ", Map(
 					"<^<!", "ypogegrammeni",
 				),
-				"Dot", Map(
+				"Τελεια", Map(
 					"<^<!", "psili",
 				),
+				"Ισον", Map("+", ["plus"]),
+				"Παυλα", Map("+", ["underscore"]),
+				"Σολιδος", Map("+", ["question"]),
+				"ΠισωΣολιδος", Map("+", ["vertical_line"]),
+				"ΑνωΤελεια", Map("+", ["colon"]),
+				"Αποστροφη", Map("+", ["quote"]),
+				"Περισπωμενη", Map("+", ["tilde"]),
+				"ΑριστερηΑγκυλη", Map("+", ["left_brace"]),
+				"ΔεξιαΑγκυλη", Map("+", ["right_brace"]),
 			)
 		),
 		"Germanic Runes", Map(
@@ -2591,7 +2611,7 @@ bindingMaps := Map(
 			"Я", Map(
 				"<^>!", ["cyr_[c,s]_let_yus_little"],
 				"<^>!<+", ["cyr_[c,s]_lig_a_iotified"],
-			)
+			),
 		)
 	),
 	"Second Keys", Map(
