@@ -32,14 +32,34 @@ bindingMaps := Map(
 				"Z", "hel_[c,s]_let_z_zeta",
 			),
 			"Moded", Map(
-				"B", Map(">+", "hel_s_sym_b_beta"),
+				"A", Map(
+					"<!", "hel_[c,s]_let_a_alpha__tonos",
+					"<^>!", "hel_[c,s]_let_a_alpha__dasia",
+					"<^>!<+", "hel_[c,s]_let_a_alpha__psili",
+					"<^>!>+", "hel_[c,s]_let_a_alpha__macron",
+					"<^>!<+>+", "hel_[c,s]_let_a_alpha__vrachy",
+					"<^>!<!", "hel_[c,s]_let_a_alpha__varia",
+					"<^>!<!<+", "hel_[c,s]_let_a_alpha__prosgegrammeni",
+					"<^>!<!<+>+", "hel_[c,s]_let_a_alpha__oxia",
+					"<^<!", "tonos",
+				),
+				"B", Map(
+					">+", "hel_s_sym_b_beta",
+					"<^<!", "vrachy",
+				),
 				"E", Map(">+", "hel_s_sym_e_epsilon_lunate"),
 				"F", Map(">+", "hel_s_sym_f_phi"),
 				"H", Map("<^>!", "hel_[c,s]_let_h_heta"),
 				"I", Map("<^>!", "hel_[c,s]_let_i_jot"),
 				"K", Map(">+", "hel_s_sym_k_kappa"),
-				"O", Map(),
-				"P", Map(">+", "hel_s_sym_p_pi"),
+				"O", Map(
+					"<^<!", "oxia",
+				),
+				"P", Map(
+					">+", "hel_s_sym_p_pi",
+					"<^<!", "perispomeni",
+					"<^<!<+", "prosgegrammeni",
+				),
 				"Q", Map("<^>!", "hel_[c,s]_let_q_koppa_archaic"),
 				"R", Map(">+", "hel_s_sym_r_rho"),
 				"S", Map(
@@ -52,7 +72,19 @@ bindingMaps := Map(
 				),
 				"T", Map("<^>!", "hel_[c,s]_let_t_theta"),
 				"U", Map(">+", "hel_[c,s]_sym_t_theta"),
+				"V", Map(
+					"<^<!", "varia",
+				),
 				"W", Map("<^>!", "hel_[c,s]_let_w_digamma_pamphylian"),
+				"Comma", Map(
+					"<^<!", "dasia",
+				),
+				"Y", Map(
+					"<^<!", "ypogegrammeni",
+				),
+				"Dot", Map(
+					"<^<!", "psili",
+				),
 			)
 		),
 		"Germanic Runes", Map(

@@ -91,6 +91,8 @@ Class ChrEntry {
 
 				if value is Array {
 					root.%key% := value.Clone()
+				} else if value is Map {
+					root.%key% := value.Clone()
 				} else if value is Object {
 					root.%key% := {}
 					for subKey, subValue in value.OwnProps() {
@@ -104,6 +106,9 @@ Class ChrEntry {
 			for key, value in attributes.OwnProps() {
 				if value is Array {
 					root.%key% := value.Clone()
+				} else if value is Map && root.Has(key) {
+					for subKey, subValue in value
+						root.%key%.Set(subKey, subValue)
 				} else if value is Object && root.HasOwnProp(key) {
 					for subKey, subValue in value.OwnProps() {
 						root.%key%.%subKey% := subValue
@@ -1093,9 +1098,10 @@ Class ChrLib {
 						)
 				}
 
-				if ["hellenic", "glagolitic"].HasValue(refinedEntry.data.script) {
+				if ["hellenic", "glagolitic"].HasValue(refinedEntry.data.script)
+					&& !refinedEntry.options.useLetterLocale
 					refinedEntry.options.useLetterLocale := True
-				}
+
 			}
 
 			if StrLen(refinedEntry.symbol.category = 0) {

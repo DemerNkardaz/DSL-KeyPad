@@ -3896,6 +3896,80 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Greek Diacritics
+		;
+		;
+		"tonos", {
+			unicode: "0384",
+			tags: ["tonos", "тонос", "τονος"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! A" },
+		},
+		"oxia", {
+			unicode: "1FFD",
+			tags: ["oxia", "оксия", "οξεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! O" },
+		},
+		"varia", {
+			unicode: "1FEF",
+			tags: ["varia", "вария", "βαρεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! V" },
+		},
+		"dasia", {
+			unicode: "1FFE",
+			tags: ["dasia", "дасия", "δασεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! <" },
+		},
+		"psili", {
+			unicode: "1FBF",
+			tags: ["psili", "псили", "ψιλη"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! >" },
+		},
+		"perispomeni", {
+			unicode: "1FC0",
+			tags: ["perispomeni", "периспомени", "περισπωμενη"],
+			groups: ["Hellenic Diacritics"],
+			alterations: { combining: "0342" },
+			options: { altLayoutKey: "<^<! P" },
+		},
+		"prosgegrammeni", {
+			unicode: "1FBE",
+			tags: ["prosgegrammeni", "просгеграммени", "προσγεγραμμενη"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<!<+ P" },
+		},
+		"ypogegrammeni", {
+			unicode: "037A",
+			tags: ["ypogegrammeni", "ипогеграммени", "υπογεγραμμενη"],
+			groups: ["Hellenic Diacritics"],
+			alterations: { combining: "0345" },
+			options: { altLayoutKey: "<^<! Y" },
+		},
+		"dialytika_tonos", {
+			unicode: "0385",
+			tags: ["dialytika tonos", "диалитика тонос", "διαλυτικα τονος"],
+			groups: ["Hellenic Diacritics"],
+			alterations: { combining: "0344" },
+			options: {},
+		},
+		"dialytika_oxia", {
+			unicode: "1FEE",
+			tags: ["dialytika oxia", "диалитика оксия", "διαλυτικα οξεια"],
+			groups: ["Hellenic Diacritics"],
+			options: {},
+		},
+		"vrachy", {
+			proxy: "breve",
+			tags: ["vrachy", "врачи", "βραχυ"],
+			groups: ["Hellenic Diacritics"],
+			options: { noCalc: True, altLayoutKey: "<^<! B" },
+		},
+		;
+		;
 		; * Default Hellenic
 		;
 		;
@@ -4456,6 +4530,56 @@ LibRegistrate(this) {
 		"hel_[c,s]_lig_k_kai", {
 			unicode: ["03CF", "03D7"],
 			recipe: ["${hel_[c,s]_let_k_kappa}${hel_[c,s]_let_a_alpha}${hel_[c,s]_let_i_iota}"]
+		},
+		;
+		;
+		; * Hellenic Accented
+		;
+		;
+		"hel_[c,s]_let_a_alpha__tonos", {
+			unicode: ["0386", "03AC"],
+			options: { useLetterLocale: "alpha$", altLayoutKey: "<! $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__oxia", {
+			unicode: ["1FBB", "1F71"],
+			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<!<+>+ $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__varia", {
+			unicode: ["1FBA", "1F70"],
+			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<! $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__dasia", {
+			unicode: ["1F09", "1F01"],
+			options: { useLetterLocale: "alpha$", altLayoutKey: ">! $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__psili", {
+			unicode: ["1F08", "1F00"],
+			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<+ $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[s]_let_a_alpha__perispomeni", {
+			unicode: ["1FB6"],
+			options: { useLetterLocale: "alpha$" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__macron", {
+			unicode: ["1FB9", "1FB1"],
+			options: { useLetterLocale: "alpha$", altLayoutKey: ">!>+ $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__vrachy", {
+			unicode: ["1FB8", "1FB0"],
+			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<+>+ $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__prosgegrammeni", {
+			unicode: ["1FBC", "1FB3"],
+			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<!<+ $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
 		;
 		;

@@ -502,6 +502,8 @@ Class Panel {
 				type: "Alternative Layout",
 				group: [
 					"Hellenic", "",
+					"Hellenic Accented", "",
+					"Hellenic Diacritics", "",
 					"Germanic Runic Elder Futhark", "",
 					"Germanic Runic Futhork", "",
 					"Germanic Runic Younger Futhark", "",
@@ -1492,8 +1494,7 @@ Class Panel {
 						isFavorite := FavoriteChars.CheckVar(entryName)
 
 						try {
-							if (value.proxy != "") ||
-								(options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(entryName)) ||
+							if (options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(entryName)) ||
 								(!value.groups.HasRegEx(options.group)) ||
 								(options.type = "Recipe" && (value.recipe.Length = 0)) ||
 								(options.type = "Fast Key" && (StrLen(value.options.fastKey) < 2)) ||
