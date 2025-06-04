@@ -552,10 +552,15 @@ Class MyRecipes {
 							if this.XComposePairs.HasValue(cutMatch, &index) {
 								recipe .= this.XComposePairs[index + 1]
 							} else {
-								recipe .= cutMatch
+								inter := cutMatch
+								if RegExMatch(inter, "U([0-9A-Fa-f]{1,6})", &uniMatch)
+									inter := StrReplace(inter, uniMatch[0], Chr(Number("0x" uniMatch[1])))
+
+								recipe .= inter
 							}
 						}
 					}
+
 
 					recipe := (Cfg.Get("XCompose_Add_Recipe_Prefix", , False, "bool") ? ">xc " : "") recipe
 
@@ -565,7 +570,7 @@ Class MyRecipes {
 						recipe: recipe,
 						tags: [],
 						result: result[1],
-						filePath: Util.TrimBasePath(filePath)
+						filePath: Util.TrimBasePath(filePath),
 					})
 				}
 			}
@@ -610,7 +615,7 @@ Class MyRecipes {
 						ChrLib.RemoveEntry(section.section)
 
 					existingEntry := ChrLib.GetEntry(section.section)
-					title := this.HandleTitles(section.name)
+					title := !(section.section ~= "i)^xcompose") ? this.HandleTitles(section.name) : section.name
 
 					if !existingEntry {
 						rawCustomEntries.Push(
@@ -620,6 +625,7 @@ Class MyRecipes {
 								tags: section.tags ? section.tags : [],
 								recipe: section.recipe,
 								groups: ["Custom Composes"],
+								isXCompose: section.section ~= "i)^xcompose" ? True : False,
 							}),
 						)
 					} else

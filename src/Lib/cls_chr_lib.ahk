@@ -48,6 +48,7 @@ Class ChrEntry {
 	data := { script: "", case: "", type: "", letter: "", postfixes: [] }
 	variant := ""
 	variantPos := 1
+	isXCompose := False
 
 	__New(attributes := {}, name := "") {
 		attributes := ChrEntry.Proxying(this, attributes)
