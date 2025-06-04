@@ -3259,7 +3259,7 @@ LibRegistrate(this) {
 			unicode: "00F7",
 			tags: ["деление", "обелюс", "division", "obelus"],
 			groups: ["Special Characters", "Smelting Special", "Special Fast Secondary", "Special Combinations"],
-			options: { altSpecialKey: "NumDiv", fastKey: "4" },
+			options: { altSpecialKey: "NumDiv", fastKey: "6" },
 			recipe: ["-:"],
 		},
 		"division_times", {
@@ -11240,13 +11240,15 @@ LibRegistrate(this) {
 		"wallet_sign", {
 			unicode: "00A4",
 			tags: ["знак валюты", "currency sign"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Right Shift"],
+			options: { fastKey: "4" },
 			recipe: ["XO"],
 		},
 		"wallet_austral", {
 			unicode: "20B3",
 			tags: ["аустраль", "austral"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "c*>+ 4" },
 			recipe: ["A=", "ARA"],
 		},
 		"wallet_cent", {
@@ -11255,7 +11257,8 @@ LibRegistrate(this) {
 				fullwidth: "FFE0"
 			},
 			tags: ["цент", "cent"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Left Shift"],
+			options: { fastKey: "c* 4" },
 			recipe: ["c|", "CNT"],
 		},
 		"wallet_cedi", {
@@ -11277,8 +11280,16 @@ LibRegistrate(this) {
 				fullwidth: "FF04"
 			},
 			tags: ["доллар", "dollar"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Left Shift"],
+			options: { fastKey: "4" },
 			recipe: ["S|", "USD", "DLR"],
+		},
+		"wallet_drachma", {
+			unicode: "20AF",
+			tags: ["драхма", "drachma", "δραχμη"],
+			groups: ["Wallet Signs", "Hellenic Specials"],
+			options: { altLayoutKey: ">! Δ" },
+			recipe: ["Δρχ", "DR", "GRD"],
 		},
 		"wallet_dram", {
 			unicode: "058F",
@@ -11295,13 +11306,15 @@ LibRegistrate(this) {
 		"wallet_eur", {
 			unicode: "20AC",
 			tags: ["евро", "euro"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "4" },
 			recipe: ["C=", "EUR"],
 		},
 		"wallet_franc", {
 			unicode: "20A3",
 			tags: ["франк", "franc"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "c* 4" },
 			recipe: ["F=", "FRF"],
 		},
 		"wallet_guarani", {
@@ -11334,7 +11347,8 @@ LibRegistrate(this) {
 				fullwidth: "FFE1"
 			},
 			tags: ["фунт", "pound"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Primary"],
+			options: { fastKey: "4" },
 			recipe: ["f_", "GBP"],
 		},
 		"wallet_tournois", {
@@ -11343,34 +11357,45 @@ LibRegistrate(this) {
 			groups: ["Wallet Signs"],
 			recipe: ["lt", "LTF"],
 		},
+		"wallet_spesmilo", {
+			unicode: "20B7",
+			tags: ["спесмило", "spesmilo"],
+			groups: ["Wallet Signs"],
+			recipe: ["Sm"],
+		},
 		"wallet_rub", {
 			unicode: "20BD",
 			tags: ["рубль", "ruble"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "Р" },
 			recipe: ["Р=", "RUB", "РУБ"],
 		},
 		"wallet_hryvnia", {
 			unicode: "20B4",
 			tags: ["гривна", "hryvnia"],
-			groups: ["Wallet Signs"],
-			recipe: ["S=", "UAH", "ГРН"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: ">+ 4" },
+			recipe: ["Г=", "UAH", "ГРН"],
 		},
 		"wallet_lira", {
 			unicode: "20A4",
 			tags: ["лира", "lira"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "c*<!<+ 4" },
 			recipe: ["f=", "LIR"],
 		},
 		"wallet_turkish_lira", {
 			unicode: "20BA",
 			tags: ["лира", "lira"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "<!<+ 4" },
 			recipe: ["L=", "TRY"],
 		},
 		"wallet_rupee", {
 			unicode: "20B9",
 			tags: ["рупия", "rupee"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "<!>+ 4" },
 			recipe: ["R=", "INR", "RUP"],
 		},
 		"wallet_won", {
@@ -11379,7 +11404,8 @@ LibRegistrate(this) {
 				fullwidth: "FFE6"
 			},
 			tags: ["вон", "won"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "c*<+ 4" },
 			recipe: ["W=", "WON", "KRW"],
 		},
 		"wallet_yen", {
@@ -11388,7 +11414,8 @@ LibRegistrate(this) {
 				fullwidth: "FFE5"
 			},
 			tags: ["знак йены", "yen sign"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "<+ 4" },
 			recipe: ["Y=", "YEN"],
 		},
 		"wallet_jpy_yen", {
@@ -11406,7 +11433,8 @@ LibRegistrate(this) {
 		"wallet_viet_dong", {
 			unicode: "20AB",
 			tags: ["вьетнамский донг", "vietnamese dong"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "c*<!>+ 4" },
 			recipe: [
 				"d${(stroke_short|macron_below)}$(*)",
 				"${lat_s_let_d__(stroke_short|line_below)}$(*)",
@@ -11416,25 +11444,29 @@ LibRegistrate(this) {
 		"wallet_mongol_tugrik", {
 			unicode: "20AE",
 			tags: ["монгольский тугрик", "mongolian tugrik"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "c*<! 4" },
 			recipe: ["T//", "MNT", "TGK"],
 		},
 		"wallet_qazaq_tenge", {
 			unicode: "20B8",
 			tags: ["казахский тенге", "kazakh tenge"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "<! 4" },
 			recipe: ["T=", "KZT", "TNG"],
 		},
 		"wallet_new_sheqel", {
 			unicode: "20AA",
 			tags: ["новый шекель", "new sheqel"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "<+>+ 4" },
 			recipe: ["NZD", "SHQ"],
 		},
 		"wallet_philippine_peso", {
 			unicode: "20B1",
 			tags: ["филиппинский песо", "philippine peso"],
-			groups: ["Wallet Signs"],
+			groups: ["Wallet Signs", "Wallet Signs Secondary"],
+			options: { fastKey: "c*<+>+ 4" },
 			recipe: ["P=", "PHP"],
 		},
 		"wallet_roman_[denarius,quinarius,sestertius,dupondius,as]", {
@@ -11831,14 +11863,14 @@ LibRegistrate(this) {
 			tags: ["торговый знак", "trademark"],
 			groups: ["Other Signs"],
 			options: { fastKey: "<+ 2" },
-			recipe: ["TM", "tm"],
+			recipe: ["TM"],
 		},
 		"servicemark", {
 			unicode: "2120",
 			tags: ["знак обслуживания", "servicemark"],
 			groups: ["Other Signs"],
 			options: { fastKey: "c*<+ 2" },
-			recipe: ["SM", "sm"],
+			recipe: ["SM"],
 		},
 		"sound_recording_copyright", {
 			unicode: "2117",

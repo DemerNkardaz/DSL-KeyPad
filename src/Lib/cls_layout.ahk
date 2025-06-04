@@ -100,6 +100,13 @@ Class LayoutList {
 		"X", "SC02D",
 		"Y", "SC015",
 		"Z", "SC02C",
+		Chr(0x00DE), "SC99F", ; Thorn
+		Chr(0x01F7), "SC99E", ; Wynn
+		Chr(0xA768), "SC99D", ; Vend
+		Chr(0x01B7), "SC99C", ; Ezh
+		Chr(0x021C), "SC99B", ; Yogh
+		Chr(0x1E9E), "SC99A", ; Eszett
+		Chr(0x0194), "SC999", ; Gamma
 	)
 	static cyrillic := Map(
 		"Ж", "SC027",
@@ -139,8 +146,17 @@ Class LayoutList {
 		"Ч", "SC02D",
 		"Н", "SC015",
 		"Я", "SC02C",
-		"І", "SC999",
-		"Ѣ", "SC999",
+		Chr(0x0406), "SC99F", ; Decimal I
+		Chr(0x0462), "SC99E", ; Yat
+		Chr(0x046A), "SC99D", ; Big Yus
+		Chr(0x0466), "SC99C", ; Small Yus
+		Chr(0x0470), "SC99B", ; Psi
+		Chr(0x046E), "SC99A", ; Ksi
+		Chr(0x0460), "SC999", ; Omega
+		Chr(0x0472), "SC998", ; Fita
+		Chr(0x051C), "SC997", ; We
+		Chr(0x051A), "SC998", ; Qa
+		Chr(0xA65E), "SC997", ; Yn
 	)
 	static hellenic := Map(
 		"ΑνωΤελεια", "SC027",
@@ -432,9 +448,11 @@ Class KeyboardBinder {
 		if A_IsPaused
 			return
 
-		; ToolTip(Keyboard.CurrentLayout(, True))
 		layoutHex := Keyboard.CurrentLayout()
 		langBlock := Language.GetLanguageBlock(layoutHex)
+
+		Keyboard.activeLanguage := langBlock ? langBlock[1] : "0x" Format("{:X}", layoutHex)
+
 		isLanguageLayoutValid := Language.Validate(layoutHex, "bindings")
 		disableTimer := Cfg.Get("Binds_Autodisable_Timer", , 1, "int")
 		disableType := Cfg.Get("Binds_Autodisable_Type", , "hour")
@@ -611,9 +629,9 @@ Class KeyboardBinder {
 	}
 
 	static FormatBindings(bindingsMap := Map()) {
-		static matchRu := "(?!.*[a-zA-Z])[а-яА-ЯёЁѣѢіІ]+"
-		static matchEn := "(?!.*[а-яА-ЯёЁѣѢіІ])[a-zA-Z]+"
-		static metchEl := "[\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+"
+		static matchRu := "(?!.*[a-zA-Z" enExt "])[а-яА-ЯёЁ" ruExt "]+"
+		static matchEn := "(?!.*[а-яА-ЯёЁ" ruExt "])[a-zA-Z" enExt "]+"
+		static metchEl := "[" hellenicRange "]+"
 		layout := this.GetCurrentLayoutMap()
 		output := Map()
 		capsOnlyKeys := []
@@ -692,7 +710,7 @@ Class KeyboardBinder {
 		return output
 	}
 
-	static Registration(bindingsMap := Map(), rule := True) {
+	static Registration(bindingsMap := Map(), rule := True, silent := False) {
 		bindingsMap := this.CompileBinds(bindingsMap)
 		total := bindingsMap.Count
 		useTooltip := Cfg.Get("Bind_Register_Tooltip_Progress_Bar", , True, "bool")
@@ -710,7 +728,7 @@ Class KeyboardBinder {
 				}
 			}
 
-			if useTooltip
+			if useTooltip && !silent
 				SetTimer(ShowTooltip, 50)
 
 			Loop comboActions.Length // 2 {
@@ -726,7 +744,7 @@ Class KeyboardBinder {
 			}
 		}
 
-		if useTooltip && i >= total {
+		if useTooltip && !silent && i >= total {
 			SetTimer(ShowTooltip, -50)
 			SetTimer((*) => ToolTip(), -700)
 		}
@@ -755,7 +773,7 @@ Class KeyboardBinder {
 		this.CurrentLayouts(&latin, &cyrillic, &hellenic)
 
 		useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
-		checkDefaultLayouts := (latin != "QWERTY" || cyrillic != "ЙЦУКЕН" || hellenic != "ϞϜΕΡΤΥ")
+		checkDefaultLayouts := (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")
 		isGlyphsVariationsOn := Scripter.selectedMode.Get("Glyph Variations") != ""
 
 		useRemap := (useRemap && checkDefaultLayouts) || isGlyphsVariationsOn
@@ -1452,6 +1470,7 @@ Class Scripter {
 
 				hotkeys.Set(keys[j], dataName)
 				hotkeys.Set(keys[keyCodes.Length + j], dataName)
+				hotkeys.Set(keys[keyCodes.Length * 2 + j], dataName)
 				hotkeysLabel := selectorPanel.AddText(
 					"v" dataValue.uiid "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH)
 					" 0x80 Right +BackgroundTrans",
@@ -1511,8 +1530,16 @@ Class Scripter {
 	static isScripterWaiting := False
 	static WaitForKey(hotkeys, selectorType) {
 		this.isScripterWaiting := True
+		currentMode := this.selectedMode.Get(selectorType)
 		useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
-		useRemap ? (KeyboardBinder.Registration(BindList.Get("Keyboard Default"), True)) : Suspend(1)
+
+		if !useRemap && currentMode != "Hellenic" && Keyboard.activeLanguage != "el-GR"
+			Suspend(1)
+		else if Keyboard.activeLanguage = "el-GR" && currentMode != "Hellenic"
+			KeyboardBinder.Registration(BindList.Get("Hellenic", "Script Specified"), True, True)
+		else if useRemap && currentMode != "Hellenic"
+			KeyboardBinder.Registration(BindList.Get("Keyboard Default"), True, True)
+
 
 		IH := InputHook("L1 M")
 		IH.OnEnd := OnEnd
@@ -1537,7 +1564,6 @@ Class Scripter {
 			}
 			this.HandleWaiting(StrUpper(IH.Input), hotkeys, selectorType)
 		}
-
 	}
 
 	static HandleWaiting(endKey, hotkeys, selectorType) {
@@ -1843,11 +1869,17 @@ Class BindHandler {
 				} else if RegExMatch(character, "^RAW\:\:\{(.*?)\}$", &rawMatch) {
 					inputType := "Text"
 					output .= MyRecipes.FormatResult(rawMatch[1], True)
-					if RegExMatch(rawMatch[1], "\\n")
+					if rawMatch[1] ~= "\\n" || output ~= "[`n`r]"
 						lineBreaks := True
 				} else {
 					alt := !ChrCrafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Scripter.selectedMode.Get("Glyph Variations") : "None"
 					inputMode := !ChrCrafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Auxiliary.inputMode : "Unicode"
+					repeatCount := 1
+
+					if RegExMatch(character, "×(\d+)$", &repeatMatch) {
+						repeatCount := repeatMatch[1]
+						character := RegExReplace(character, "×\d+$", "")
+					}
 
 					if RegExMatch(character, "\:\:(.*?)$", &alterationMatch) {
 						alt := alterationMatch[1]
@@ -1855,7 +1887,7 @@ Class BindHandler {
 					}
 
 					if ChrLib.entries.HasOwnProp(character) {
-						output .= ChrLib.Get(character, True, inputMode, alt)
+						output .= Util.StrRepeat(ChrLib.Get(character, True, inputMode, alt), repeatCount)
 
 						chrSendOption := ChrLib.GetValue(character, "options").send
 
@@ -1871,7 +1903,7 @@ Class BindHandler {
 			if StrLen(inputType) == 0
 				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : ""
 
-			if StrLen(output) > 20 || lineBreaks
+			if StrLen(output) > 4 || lineBreaks
 				ClipSend(output)
 			else
 				Send%inputType%(output)

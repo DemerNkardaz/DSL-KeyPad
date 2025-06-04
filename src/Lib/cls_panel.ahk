@@ -433,13 +433,15 @@ Class Panel {
 					"FK Diacritics Primary", "",
 					"Special Fast Primary", "",
 					"Spaces Primary", "",
-					"Special Fast Left", "",
+					"Special Fast Left",
+					"Wallet Signs Primary", "",
 					"Spaces Left Alt", "",
 					"Latin Primary", "",
 					"Latin Accented Primary", "",
 					"Cyrillic Primary", "",
 					"Cyrillic Accented Primary", "",
-					"Special Fast Secondary", "",
+					"Special Fast Secondary",
+					"Wallet Signs Secondary", "",
 					"Asian Quotes", "",
 					"Other Signs", "",
 					"Spaces", "",
@@ -453,11 +455,13 @@ Class Panel {
 					"Cyrillic Digraphs Secondary", "",
 					"Cyrillic Secondary", "",
 					"Cyrillic Accented Secondary", "",
-					"Special Right Shift", "",
+					"Special Right Shift",
+					"Wallet Signs Right Shift", "",
 					"Spaces Right Shift", "",
 					"Latin Accented Tertiary", "",
 					"Cyrillic Tertiary", "",
 					"Special Fast RShift", "",
+					"Wallet Signs Left Shift", ""
 					"Spaces Left Shift", ""
 				],
 				groupKey: Map(
@@ -465,7 +469,7 @@ Class Panel {
 					"Special Fast Left", LeftAlt,
 					"Special Fast Secondary", RightAlt,
 					"Special Right Shift", RightShift,
-					"Spaces Left Shift", LeftShift
+					"Wallet Signs Left Shift", LeftShift
 				),
 			}), this.LV_InsertGroup({
 				type: "Special Combinations",
@@ -504,6 +508,7 @@ Class Panel {
 					"Hellenic", "",
 					"Hellenic Accented", "",
 					"Hellenic Diacritics", "",
+					"Hellenic Specials", "",
 					"Germanic Runic Elder Futhark", "",
 					"Germanic Runic Futhork", "",
 					"Germanic Runic Younger Futhark", "",

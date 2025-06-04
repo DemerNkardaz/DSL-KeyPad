@@ -286,7 +286,7 @@ Class Cfg {
 
 
 			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", Locale.Read("autoload_add"))
-			autoloadBtn.OnEvent("Click", (*) => Cfg.SetAutoload())
+			autoloadBtn.OnEvent("Click", (*) => Options.SetAutoload())
 
 			optionsPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return optionsPanel

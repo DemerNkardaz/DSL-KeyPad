@@ -130,18 +130,18 @@ Class ChrRecipeHandler {
 			name: characterString,
 			repeatCount: 1,
 			alteration: "",
-			hasAlteration: false
-		}
-
-		if RegExMatch(info.name, "\:\:(.*?)$", &alterationMatch) {
-			info.alteration := ChrLib.ValidateAlt(alterationMatch[1])
-			info.hasAlteration := true
-			info.name := RegExReplace(info.name, "\:\:.*$", "")
+			hasAlteration: False
 		}
 
 		if RegExMatch(info.name, "×(\d+)$", &repeatMatch) {
 			info.repeatCount := repeatMatch[1]
 			info.name := RegExReplace(info.name, "×\d+$", "")
+		}
+
+		if RegExMatch(info.name, "\:\:(.*?)$", &alterationMatch) {
+			info.alteration := ChrLib.ValidateAlt(alterationMatch[1])
+			info.hasAlteration := True
+			info.name := RegExReplace(info.name, "\:\:.*$", "")
 		}
 
 		return info

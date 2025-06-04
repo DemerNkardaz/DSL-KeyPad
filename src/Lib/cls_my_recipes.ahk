@@ -454,21 +454,20 @@ Class MyRecipes {
 
 							recipe := splittedRecipe.ToString("|")
 						} else {
-							if InStr(options.recipePrefix, "|")
-								options.recipePrefix := StrSplit(options.recipePrefix, "|")
+							if InStr(options.recipePrefix, "|") {
+								splittedPrefix := StrSplit(options.recipePrefix, "|")
 
-							recipe := (
-								options.recipePrefix is Array
-									? options.recipePrefix[1]
-								: options.recipePrefix
-							) (
-								options.noWhitespace
-								|| options.recipePrefix is String && StrLen(options.recipePrefix) == 0
-								|| options.recipePrefix is Array && options.recipePrefix.Length == 1
-									? "" : " "
-							) recipe
+								recipe := splittedPrefix[1] (
+									options.noWhitespace
+									|| StrLen(splittedPrefix[1]) == 0
+										? "" : " "
+								) recipe
+							}
 						}
-					} catch {
+					} catch as e {
+						if True {
+							throw e.Message
+						}
 						MsgBox(Format(Locale.Read("gui_recipes_read_error" (updateOnCatch ? "_reinit" : "")), section, recipe))
 						if updateOnCatch {
 							this.Update()

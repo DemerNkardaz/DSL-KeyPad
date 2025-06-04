@@ -1,10 +1,10 @@
 Class Language {
 	static optionsFile := App.paths.loc "\locale.options.ini"
 	static supported := Map()
+	static links := Map()
 
 	static __New() {
 		this.Init()
-
 	}
 
 	static Init() {
@@ -25,6 +25,8 @@ Class Language {
 			data.bindings := data.bindings = "True" ? True : False
 
 			this.supported.Set(iso, data)
+			if data.code != ""
+				this.links.Set(data.code, iso)
 		}
 	}
 
@@ -39,20 +41,14 @@ Class Language {
 	}
 
 	static Validate(input, extraRule?) {
-		if input is Number {
-			for key, value in this.supported {
-				extraRuleValidate := (!IsSet(extraRule) || IsSet(extraRule) && (HasProp(value, extraRule) ? value.%extraRule% : False))
+		if input is Number && this.links.Has(input)
+			input := this.links.Get(input)
 
-				if !(value.code is String) && input = value.code && extraRuleValidate {
-					return True
-				}
-			}
-		} else if StrLen(input) > 0 {
+		if input is String && input != "" {
 			extraRuleValidate := (!IsSet(extraRule) || IsSet(extraRule) && (HasProp(this.supported[input], extraRule) ? this.supported[input].%extraRule% : False))
 
-			if this.supported.Has(input) && extraRuleValidate {
+			if this.supported.Has(input) && extraRuleValidate
 				return True
-			}
 		}
 
 		return False
@@ -65,7 +61,7 @@ Class Language {
 	}
 
 	static Get(language := "", getTitle := False, endLen := 0) {
-		userLanguage := StrLen(language) > 0 ? language : Cfg.Get("User_Language")
+		userLanguage := language != "" ? language : Cfg.Get("User_Language")
 		userLanguage := !IsSpace(userLanguage) ? userLanguage : this.GetSys()
 
 		if this.Validate(userLanguage) {
@@ -77,13 +73,13 @@ Class Language {
 
 	static GetLanguageBlock(input, &output?) {
 		output := False
-		if input is Number {
-			for key, value in this.supported
-				if !(value.code is String) && input = value.code
-					output := [key, value]
-		} else if StrLen(input) > 0
+		if input is Number && this.links.Has(input)
+			input := this.links.Get(input)
+
+		if input is String && input != ""
 			if this.supported.Has(input)
 				output := [input, this.supported.Get(input)]
+
 		return output
 	}
 
@@ -98,6 +94,7 @@ Class Keyboard {
 	static disabledByMonitor := False
 	static disabledByUser := False
 	static blockedForReload := False
+	static activeLanguage := ""
 
 	static __New() {
 	}
@@ -133,16 +130,8 @@ Class Keyboard {
 	}
 
 	static CheckLayout(abbr) {
-		this.CurrentLayout(&code)
-
-		for key, value in Language.supported {
-			if code = value.code {
-				%abbr% := key
-				break
-			} else {
-				%abbr% := ""
-			}
-		}
+		this.CurrentLayout(&layoutHex)
+		%abbr% := Language.links.Has(layoutHex) ? Language.links.Get(layoutHex) : ""
 	}
 
 	static InitialValidator() {

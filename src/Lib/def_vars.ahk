@@ -103,3 +103,10 @@ ImageRes := "C:\Windows\System32\imageres.dll"
 Shell32 := "C:\Windows\SysWOW64\shell32.dll"
 
 regExChars := "\.-*+?^${}()[]|/"
+
+latinRange := "\x{0041}-\x{005A}\x{0061}-\x{007A}\x{0080}-\x{00FF}\x{0100}-\x{017F}\x{0180}-\x{024F}\x{A720}-\x{A7FF}\x{AB30}-\x{AB6F}"
+cyrillicRange := "\x{0400}-\x{04FF}\x{0500}-\x{052F}\x{A640}-\x{A69F}\x{1C80}-\x{1C8F}"
+hellenicRange := "\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}"
+
+enExt := "\x{00DE}\x{00FE}\x{01F7}\x{01BF}\x{A768}\x{A769}\x{01B7}\x{0292}\x{021C}\x{021D}\x{1E9E}\x{00DF}\x{0194}\x{0263}"
+ruExt := "\x{0406}\x{0456}\x{0462}\x{0463}\x{046A}\x{046B}\x{0466}\x{0467}\x{0470}\x{0471}\x{046E}\x{046F}\x{0460}\x{0461}\x{0472}\x{0473}\x{051C}\x{051D}\x{051A}\x{051B}\x{A65E}\x{A65F}"

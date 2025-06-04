@@ -13,6 +13,7 @@ $$
 \text{ } \\
 \normalsize \mathbf{Type \ multiple \ languages \ with \ two \ layouts} \\
 \small \text{Ænglisċ sprǣċ | Français | Română | Tiếng Việt … } \\
+\small \text{Ελληνική γλώσσα | 𐐔𐐯𐑅𐐨𐑉𐐯𐐻 𐐈𐑊𐑁𐐰𐐺𐐯𐐻 | ᚹᛟᛞᛁᚾᛊ᛫ᚱᚢᚾᛟ … } \\
 \small \text{Словѣньскъ ѩꙁыкъ | Қазақ тілі | Рѹмѫнѣскъ | Аԥсуа бызшәа … }
 \end{array}
 $$
@@ -20,9 +21,9 @@ $$
 ---
 
 <p align="center">
-<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4200+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4300+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
 <img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-3400+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
-<img src="https://custom-icon-badges.herokuapp.com/badge/binds-1800+/600+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/binds-1800+/700+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
 <br>
 <img src="https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social" alt="wakatime"/>
 <img src="https://img.shields.io/github/watchers/DemerNkardaz/DSL-KeyPad" alt="GitHub watchers"/>

@@ -6,30 +6,30 @@ bindingMaps := Map(
 			"Flat", Map(
 				"Α", "hel_[c,s]_let_a_alpha",
 				"Β", "hel_[c,s]_let_b_beta",
-				"Ψ", "hel_[c,s]_let_p_psi",
+				"Γ", "hel_[c,s]_let_g_gamma",
 				"Δ", "hel_[c,s]_let_d_delta",
 				"Ε", "hel_[c,s]_let_e_epsilon",
-				"Φ", "hel_[c,s]_let_f_phi",
-				"Γ", "hel_[c,s]_let_g_gamma",
+				"Ζ", "hel_[c,s]_let_z_zeta",
 				"Η", "hel_[c,s]_let_h_eta",
+				"Θ", "hel_[c,s]_let_t_theta",
 				"Ι", "hel_[c,s]_let_i_iota",
-				"Ξ", "hel_[c,s]_let_x_xi",
 				"Κ", "hel_[c,s]_let_k_kappa",
 				"Λ", "hel_[c,s]_let_l_lambda",
 				"Μ", "hel_[c,s]_let_m_mu",
 				"Ν", "hel_[c,s]_let_n_nu",
+				"Ξ", "hel_[c,s]_let_x_xi",
 				"Ο", "hel_[c,s]_let_o_omicron",
 				"Π", "hel_[c,s]_let_p_pi",
-				"Ϟ", "hel_[c,s]_let_q_koppa",
 				"Ρ", "hel_[c,s]_let_r_rho",
 				"Σ", "hel_[c,s]_let_s_sigma",
 				"Τ", "hel_[c,s]_let_t_tau",
-				"Θ", "hel_[c,s]_let_t_theta",
-				"Ω", "hel_[c,s]_let_o_omega",
-				"Ϝ", "hel_[c,s]_let_w_digamma",
-				"Χ", "hel_[c,s]_let_h_chi",
 				"Υ", "hel_[c,s]_let_y_upsilon",
-				"Ζ", "hel_[c,s]_let_z_zeta",
+				"Φ", "hel_[c,s]_let_f_phi",
+				"Χ", "hel_[c,s]_let_h_chi",
+				"Ψ", "hel_[c,s]_let_p_psi",
+				"Ω", "hel_[c,s]_let_o_omega",
+				"Ϟ", "hel_[c,s]_let_q_koppa",
+				"Ϝ", "hel_[c,s]_let_w_digamma",
 				"Ισον", "equals",
 				"Παυλα", "hyphen_minus",
 				"Τελεια", "dot",
@@ -58,11 +58,21 @@ bindingMaps := Map(
 					">+", "hel_s_sym_b_beta",
 					"<^<!", "vrachy",
 				),
+				"Γ", Map(),
+				"Δ", Map("<^>!", "wallet_drachma"),
 				"Ε", Map(">+", "hel_s_sym_e_epsilon_lunate"),
-				"Φ", Map(">+", "hel_s_sym_f_phi"),
+				"Ζ", Map(),
 				"Η", Map("<^>!", "hel_[c,s]_let_h_heta"),
+				"Θ", Map(">+", "hel_[c,s]_sym_t_theta"),
 				"Ι", Map("<^>!", "hel_[c,s]_let_i_jot"),
 				"Κ", Map(">+", "hel_s_sym_k_kappa"),
+				"Κομμα", Map(
+					"<^<!", "dasia",
+				),
+				"Λ", Map(),
+				"Μ", Map(),
+				"Ν", Map(),
+				"Ξ", Map(),
 				"Ο", Map(
 					"<^<!", "oxia",
 				),
@@ -71,7 +81,6 @@ bindingMaps := Map(
 					"<^<!", "perispomeni",
 					"<^<!<+", "prosgegrammeni",
 				),
-				"Ϟ", Map("<^>!", "hel_[c,s]_let_q_koppa_archaic"),
 				"Ρ", Map(">+", "hel_s_sym_r_rho"),
 				"Σ", Map(
 					">+", "hel_[c,s]_sym_s_sigma_lunate",
@@ -82,17 +91,17 @@ bindingMaps := Map(
 					"<^>!<!<+", "hel_[c,s]_let_s_sampi_archaic",
 				),
 				"Τ", Map("<^>!", "hel_[c,s]_let_t_theta"),
-				"Θ", Map(">+", "hel_[c,s]_sym_t_theta"),
+				"Υ", Map(
+					"<^<!", "ypogegrammeni",
+				),
+				"Φ", Map(">+", "hel_s_sym_f_phi"),
+				"Χ", Map(),
+				"Ψ", Map(),
 				"Ω", Map(
 					"<^<!", "varia",
 				),
 				"Ϝ", Map("<^>!", "hel_[c,s]_let_w_digamma_pamphylian"),
-				"Κομμα", Map(
-					"<^<!", "dasia",
-				),
-				"Υ", Map(
-					"<^<!", "ypogegrammeni",
-				),
+				"Ϟ", Map("<^>!", "hel_[c,s]_let_q_koppa_archaic"),
 				"Τελεια", Map(
 					"<^<!", "psili",
 				),
@@ -1829,6 +1838,13 @@ bindingMaps := Map(
 			"X", ["lat_[c,s]_let_x"],
 			"Y", ["lat_[c,s]_let_y"],
 			"Z", ["lat_[c,s]_let_z"],
+			Chr(0x00DE), ["lat_[c,s]_let_t_thorn"], ; Thorn
+			Chr(0x01F7), ["lat_[c,s]_let_w_wynn"], ; Wynn
+			Chr(0xA768), ["lat_[c,s]_let_v_vend"], ; Vend
+			Chr(0x01B7), ["lat_[c,s]_let_z_ezh"], ; Ezh
+			Chr(0x021C), ["lat_[c,s]_let_j_yogh"], ; Yogh
+			Chr(0x1E9E), ["lat_[c,s]_lig_s_eszett"], ; Eszett
+			Chr(0x0194), ["lat_[c,s]_let_g_gamma"], ; Gamma
 			; Cyrillic alphabet (А-Я)
 			"А", ["cyr_[c,s]_let_a"],
 			"Б", ["cyr_[c,s]_let_b"],
@@ -1858,13 +1874,22 @@ bindingMaps := Map(
 			"Ш", ["cyr_[c,s]_let_sh"],
 			"Щ", ["cyr_[c,s]_let_shch"],
 			"Ъ", ["cyr_[c,s]_let_yer"],
-			"Ы", ["cyr_[c,s]_let_yery"],
+			"Ы", ["cyr_[c,s]_dig_yeru_with_back_yer"],
 			"Ь", ["cyr_[c,s]_let_yeri"],
 			"Э", ["cyr_[c,s]_let_e"],
 			"Ю", ["cyr_[c,s]_let_yu"],
 			"Я", ["cyr_[c,s]_let_ya"],
-			"І", ["cyr_[c,s]_let_i_decimal"],
-			"Ѣ", ["cyr_[c,s]_let_yat"]
+			Chr(0x0406), ["cyr_[c,s]_let_i_decimal"], ; Decimal I
+			Chr(0x0462), ["cyr_[c,s]_let_ye_yat"], ; Yat
+			Chr(0x046A), ["cyr_[c,s]_let_yus_big"], ; Big Yus
+			Chr(0x0466), ["cyr_[c,s]_let_yus_little"], ; Small Yus
+			Chr(0x0470), ["cyr_[c,s]_let_p_psi"], ; Psi
+			Chr(0x046E), ["cyr_[c,s]_let_k_ksi"], ; Ksi
+			Chr(0x0460), ["cyr_[c,s]_let_o_omega"], ; Omega
+			Chr(0x0472), ["cyr_[c,s]_let_f_fita"], ; Fita
+			Chr(0x051C), ["cyr_[c,s]_let_w"], ; We
+			Chr(0x051A), ["cyr_[c,s]_let_q"], ; Qa
+			Chr(0xA65E), ["cyr_[c,s]_let_y_yn"], ; Yn
 		),
 		"Moded", Map(
 			; Digits
@@ -2138,9 +2163,22 @@ bindingMaps := Map(
 				"<^>!<+:Caps", ["prime_triple[_reversed,]"],
 				"<^>!<+>+", "prime_quadruple"
 			),
-			"4", Map("<^>!", "division"),
+			"4", Map(
+				"<^>!:Caps", "wallet_[franc,eur]",
+				"<^>!<+:Caps", "wallet_[won,yen]",
+				"<^>!>+:Caps", "wallet_[austral,hryvnia]",
+				"<^>!<+>+:Caps", "wallet_[philippine_peso,new_sheqel]",
+				"<^>!<!:Caps", "wallet_[mongol_tugrik,qazaq_tenge]",
+				"<^>!<!<+:Caps", "wallet_[,turkish_]lira",
+				"<^>!<!>+:Caps", "wallet_[viet_dong,rupee]",
+				"<!", "wallet_pound",
+				"<+:LangFlat", [["wallet_cent", "wallet_dollar"], ["semicolon"]],
+				">+", "wallet_sign",
+			),
 			"5", Map("<^>!", "permille", "<^>!<+", "pertenthousand"),
-			"6", Map(),
+			"6", Map(
+				"<^>!", "division",
+			),
 			"7", Map(
 				"<^>!", "inverted_question",
 				"<^>!>+", "double_question",
@@ -2549,7 +2587,9 @@ bindingMaps := Map(
 				"<^>!", ["cyr_[c,s]_let_p_psi"],
 				"<^>!<!", ["cyr_[c,s]_let_p__descender"]
 			),
-			"Р", Map(),
+			"Р", Map(
+				"<^>!", ["wallet_rub"],
+			),
 			"С", Map(
 				"<^>!<!", ["cyr_[c,s]_let_s__descender"]
 			),
