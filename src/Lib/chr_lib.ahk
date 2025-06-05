@@ -3970,6 +3970,28 @@ LibRegistrate(this) {
 		},
 		;
 		;
+		; * Hellenic Punctuation & Specials
+		;
+		;
+		"hel_n_sym_ano_teleia", {
+			unicode: "0387",
+			tags: ["ελληνικη ανω τελεια"],
+			groups: ["Hellenic Punctuation"],
+			options: { altLayoutKey: ">! `;" },
+		},
+		"hel_n_sym_erotimatiko", {
+			unicode: "037E",
+			tags: ["ελληνικη ερωτηματικο"],
+			groups: ["Hellenic Punctuation"],
+			options: { altLayoutKey: "<! `;" },
+		},
+		"hel_n_sym_numeral_sign[,_lower]", {
+			unicode: ["0374", "0375"],
+			groups: ["Hellenic Specials"],
+			options: { altLayoutKey: ["c*>! '", ">! '"] },
+		},
+		;
+		;
 		; * Default Hellenic
 		;
 		;
@@ -8378,7 +8400,7 @@ LibRegistrate(this) {
 		},
 		"germanic_runic_n_rune_o_elder_futhark_othala", {
 			unicode: "16DF",
-			options: { altLayoutKey: "$", legend: "NorseRunes\othala" },
+			options: { altLayoutKey: "$" },
 			symbol: { tagAdditive: [{
 				scriptAdditive: "futhork",
 				letter: "edel",
@@ -11920,7 +11942,87 @@ LibRegistrate(this) {
 			unicode: "0D9E",
 			options: { noCalc: True, suggestionsAtEnd: True },
 			recipe: ["sus", "сус"],
-		}
+		},
+		"left_to_right_mark", {
+			titles: Map("ru-RU", "Маркер направления слева направо", "en-US", "Left to Right Mark"),
+			tags: ["left to right mark", "ltr mark", "маркер направления слева направо"],
+			unicode: "200E",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<LTR MARK>" },
+			recipe: ["LRM"],
+		},
+		"right_to_left_mark", {
+			titles: Map("ru-RU", "Маркер направления справа налево", "en-US", "Right to Left Mark"),
+			tags: ["right to left mark", "rtl mark", "маркер направления справа налево"],
+			unicode: "200F",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<RTL MARK>" },
+			recipe: ["RLM"],
+		},
+		"left_to_right_embedding", {
+			titles: Map("ru-RU", "Вложенное направление слева направо", "en-US", "Left to Right Embedding"),
+			tags: ["left to right embedding", "ltr embedding", "вложенное направление слева направо"],
+			unicode: "202A",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<LTR EMBEDDING>" },
+			recipe: ["LRE"],
+		},
+		"right_to_left_embedding", {
+			titles: Map("ru-RU", "Вложенное направление справа налево", "en-US", "Right to Left Embedding"),
+			tags: ["right to left embedding", "rtl embedding", "вложенное направление справа налево"],
+			unicode: "202B",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<RTL EMBEDDING>" },
+			recipe: ["RLE"],
+		},
+		"left_to_right_override", {
+			titles: Map("ru-RU", "Переопределение направление слева направо", "en-US", "Left to Right Override"),
+			tags: ["left to right override", "ltr override", "переопределение направление слева направо"],
+			unicode: "202D",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<LTR OVERRIDE>" },
+			recipe: ["LRO"],
+		},
+		"right_to_left_override", {
+			titles: Map("ru-RU", "Переопределение направление справа налево", "en-US", "Right to Left Override"),
+			tags: ["right to left override", "rtl override", "переопределение направление справа налево"],
+			unicode: "202E",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<RTL OVERRIDE>" },
+			recipe: ["RLO"],
+		},
+		"left_to_right_isolate", {
+			titles: Map("ru-RU", "Изолированное направление слева направо", "en-US", "Left to Right Isolate"),
+			tags: ["left to right isolate", "ltr isolate", "изолированное направление слева направо"],
+			unicode: "2066",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<LTR ISOLATE>" },
+			recipe: ["LRI"],
+		},
+		"right_to_left_isolate", {
+			titles: Map("ru-RU", "Изолированное направление справа налево", "en-US", "Right to Left Isolate"),
+			tags: ["right to left isolate", "rtl isolate", "изолированное направление справа налево"],
+			unicode: "2067",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<RTL ISOLATE>" },
+			recipe: ["RLI"],
+		},
+		"pop_directional_formatting", {
+			titles: Map("ru-RU", "Выход из встраивания направления", "en-US", "Pop Directional Formatting"),
+			tags: ["pop directional formatting", "выход из встраивания направления"],
+			unicode: "202C",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<POP DIR. FORMATTING>" },
+			recipe: ["PPDF"],
+		},
+		"pop_directional_isolate", {
+			titles: Map("ru-RU", "Выход из изоляции направления", "en-US", "Pop Directional Isolate"),
+			tags: ["pop directional isolate", "выход из изоляции направления"],
+			unicode: "2069",
+			options: { noCalc: True, suggestionsAtEnd: True },
+			symbol: { alt: "<POP DIR. ISOLATE>" },
+			recipe: ["PPDI"],
+		},
 	]
 
 	Loop 256 {

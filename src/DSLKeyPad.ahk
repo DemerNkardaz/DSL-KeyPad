@@ -12,7 +12,7 @@
 */
 
 #SingleInstance Force
-Thread("Interrupt", 0)
+; Thread("Interrupt", 0)
 SetKeyDelay(0, 50)
 A_HotkeyInterval := 1000
 A_MaxHotkeysPerInterval := 50

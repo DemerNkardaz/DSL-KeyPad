@@ -1,175 +1,515 @@
 Class ChrLegend {
+	static legendsPath := App.paths.loc "\CharacterLegend\"
+	static legends := Map()
+	static panelGUI := Gui()
+	static title := ""
 
-	static UISets := {
-		infoBox: {
-			body: "x20 y35 w830 h510",
-			previewFrame: "x621 y80 w192 h192 Center",
-			preview: "x621 y80 w192 h192 readonly Center -VScroll -HScroll",
-			topbarID: "x20 y10 w75 h24 readonly -VScroll -HScroll",
-			topbarEntry: "x100 y10 w320 h24 readonly -VScroll -HScroll",
-			topbarUnicode: "x425 y10 w75 h24 readonly Center -VScroll -HScroll",
-			topbarHTML: "x505 y10 w75 h24 readonly Center -VScroll -HScroll",
-			mainTitle: "x35 y75 w450 h42 readonly -VScroll -HScroll -E0x200",
-			unicodeLabel: "x45 y135 w75 h20 BackgroundTrans",
-			unicode: "x120 y135 w450 h20 readonly -VScroll -HScroll -E0x200",
-			subTitlesLabel: "x45 y155 w75 h20 BackgroundTrans",
-			subTitles: "x120 y155 w450 h20 readonly -VScroll -HScroll -E0x200",
-			IPALabel: "x45 y175 w75 h20 BackgroundTrans",
-			IPA: "x120 y175 w450 h20 readonly -VScroll -HScroll -E0x200",
-			transcriptionLabel: "x45 y195 w75 h20 BackgroundTrans",
-			transcription: "x120 y195 w450 h20 readonly -VScroll -HScroll -E0x200",
-			languagesLabel: "x45 y215 w75 h20 BackgroundTrans",
-			languages: "x120 y215 w450 h20 readonly -VScroll -HScroll -E0x200",
-			description: "x45 y255 w550 h320 R20 readonly +Multi +Wrap -HScroll -E0x200",
-			authorLabel: "x45 y550 w75 h20 BackgroundTrans",
-			author: "x120 y550 w600 h20 readonly -VScroll -HScroll -E0x200",
-		},
+	static __New() {
+		this.Init()
 	}
 
-	static RelativeUISet() {
-		sizes := {}
-		sizes.body := { x: 20, y: 35, w: 830, h: 510 }
-		sizes.previewFrame := { x: 621, y: 80, w: 192, h: 192, options: "Center" }
-		sizes.preview := { x: sizes.previewFrame.x, y: sizes.previewFrame.y, w: sizes.previewFrame.w, h: sizes.previewFrame.h, options: "readonly Center -VScroll -HScroll" }
+	static Init() {
+		Loop Files this.legendsPath "*", "FR" {
+			if A_LoopFileFullPath ~= "i)\.ini$" {
+				name := RegExReplace(A_LoopFileName, "\.ini$")
+				filePath := RegExReplace(RegExReplace(A_LoopFileFullPath, RegExEscape(this.legendsPath)), "\.ini$")
+				this.legends.Set(name, filePath)
+			}
+		}
 
+		for name, path in this.legends
+			if ChrLib.entries.HasOwnProp(name)
+				ChrLib.entries.%name%.options.legend := path
 	}
 
-	__New(data) {
-		ChrLegend.Panel(data)
+	__New(preselectEntry := "") {
+		ChrLegend.Panel(preselectEntry)
 	}
 
-	static ReadLegend(path) {
-		legend := Util.INIToObj(A_ScriptDir "\Locale\ChrLegend\" path)
+	static Panel(preselectEntry := "") {
+		legendsList := this.CollectList()
+		nameToEntry := Map()
 
-		return legend
-	}
+		languageCode := Language.Get()
 
-	static Panel(data) {
+		for each in legendsList {
+			if each is String {
+				title := IniRead(this.legendsPath this.legends.Get(each) ".ini", languageCode, "title", each)
+				nameToEntry.Set(title, each)
+			} else if each is Map {
+				for k, v in each {
+					parentTitle := Locale.Read("symbol_" k)
+					nameToEntry.Set(parentTitle, "")
+					for child in v {
+						title := IniRead(this.legendsPath this.legends.Get(child) ".ini", languageCode, "title", child)
+						nameToEntry.Set(title, child)
+					}
+				}
+			}
+		}
+
+		labels := {
+			unknown: Locale.Read("gui_legend_unknown"),
+			uniTitle: Locale.Read("gui_legend_unicode"),
+			altTitles: Locale.Read("gui_legend_alts"),
+			languages: Locale.Read("gui_legend_languages"),
+			description: Locale.Read("gui_legend_description_unavailable"),
+			author: Locale.Read("gui_legend_author"),
+			authorLink: Locale.Read("gui_legend_author_default"),
+			entry: Locale.Read("gui_legend_entry"),
+			unicode: Locale.Read("preview_unicode"),
+			html: Locale.Read("preview_html"),
+		}
+
+		panelW := 1280
+		panelH := 700
+
+		posX := (A_ScreenWidth - panelW) / 2
+		posY := (A_ScreenHeight - panelH) / 2
+
+		treeW := 300
+		treeH := panelH - 20
+		treeX := 10
+		treeY := 10
+
+		groupBoxW := panelW - treeW - 40
+		groupBoxH := panelH - 15
+		groupBoxX := treeW + 25
+		groupBoxY := 5
+
+		previewW := 192
+		previewH := 192
+		previewX := groupBoxX + 25
+		previewY := groupBoxY + 25 + 5
+
+		chrTitleX := previewX + previewW + 25
+		chrTitleY := groupBoxY + 25
+		chrTitleW := groupBoxW - chrTitleX - 10
+		chrTitleH := 48
+
+		defShiftY := 5
+
+		uniTitleX := previewX + previewW + 25
+		uniTitleY := chrTitleY + chrTitleH + defShiftY
+		uniTitleW := chrTitleW
+		uniTitleH := 24
+
+		uniTitleContentX := previewX + previewW + 25
+		uniTitleContentY := uniTitleY + uniTitleH - defShiftY
+		uniTitleContentW := chrTitleW
+		uniTitleContentH := 24
+
+		altTitlesX := uniTitleX
+		altTitlesY := uniTitleContentY + uniTitleContentH + defShiftY
+		altTitlesW := chrTitleW
+		altTitlesH := 24
+
+		altTitlesContentX := uniTitleContentX
+		altTitlesContentY := altTitlesY + altTitlesH - defShiftY
+		altTitlesContentW := chrTitleW
+		altTitlesContentH := 24
+
+		languagesX := uniTitleX
+		languagesY := altTitlesContentY + altTitlesContentH + defShiftY
+		languagesW := chrTitleW
+		languagesH := 24
+
+		languagesContentX := uniTitleContentX
+		languagesContentY := languagesY + languagesH - defShiftY
+		languagesContentW := chrTitleW
+		languagesContentH := 24
+
+		descriptionX := groupBoxX + 25
+		descriptionY := previewY + previewH + 25
+		descriptionW := 192 * 2.5
+		descriptionH := groupBoxH - descriptionY - 25
+
+		tabList := [
+			Locale.Read("gui_legend_ipa"),
+			Locale.Read("gui_legend_transcription"),
+			Locale.Read("gui_legend_data"),
+		]
+
+		tabsX := descriptionX + descriptionW + 10
+		tabsY := descriptionY
+		tabsW := panelW - tabsX - 25
+		tabsH := descriptionH
+
+		authorLabelLen := StrLen(labels.author)
+		authorW := (authorLabelLen * (Language.Get() ~= "^en" ? 7 : 9))
+		authorH := 24
+		authorX := groupBoxX + 25
+		authorY := groupBoxH - authorH
+
+		authorLinkX := authorX + authorW + 10
+		authorLinkY := authorY
+		authorLinkW := groupBoxW - authorLinkX - 15
+		authorLinkH := authorH
+
+		opts := {
+			TV: Format("vTV w{} h{} x{} y{}", treeW, treeH, treeX, treeY),
+			GB: Format("vGB w{} h{} x{} y{}", groupBoxW, groupBoxH, groupBoxX, groupBoxY),
+			PV: Format("vPV w{} h{} x{} y{} ReadOnly Center -VScroll -HScroll", previewW, previewH, previewX, previewY),
+			chrTitle: Format("vTitle w{} h{} x{} y{}", chrTitleW, chrTitleH, chrTitleX, chrTitleY),
+			uniTitle: Format("vUnicodeTitle w{} h{} x{} y{}", uniTitleW, uniTitleH, uniTitleX, uniTitleY),
+			uniTitleContent: Format("vUnicodeTitleContent w{} h{} x{} y{} ReadOnly -VScroll -HScroll -E0x200", uniTitleContentW, uniTitleContentH, uniTitleContentX, uniTitleContentY),
+			altTitles: Format("vAltTitles w{} h{} x{} y{}", altTitlesW, altTitlesH, altTitlesX, altTitlesY),
+			altTitlesContent: Format("vAltTitlesContent w{} h{} x{} y{} ReadOnly -VScroll -HScroll -E0x200", altTitlesContentW, altTitlesContentH, altTitlesContentX, altTitlesContentY),
+			languages: Format("vLanguages w{} h{} x{} y{}", languagesW, languagesH, languagesX, languagesY),
+			languagesContent: Format("vLanguagesContent w{} h{} x{} y{} ReadOnly -VScroll -HScroll -E0x200", languagesContentW, languagesContentH, languagesContentX, languagesContentY),
+			description: Format("vDescription w{} h{} x{} y{} ReadOnly +Multi +Wrap -HScroll -E0x200", descriptionW, descriptionH, descriptionX, descriptionY),
+			tabs: Format("vTabs w{} h{} x{} y{}", tabsW, tabsH, tabsX, tabsY),
+			author: Format("vAuthor w{} h{} x{} y{}", authorW, authorH, authorX, authorY),
+			authorLink: Format("vAuthorLink w{} h{} x{} y{}", authorLinkW, authorLinkH, authorLinkX, authorLinkY),
+		}
+
+		lvHeaders := [
+			Locale.Read("gui_options_language"),
+			Locale.Read("gui_legend_value"),
+		]
+
+		ipaLVW := tabsW - 25
+		ipaLVH := tabsH - 45
+		ipaLVX := tabsX + Floor((tabsW - ipaLVW) / 2)
+		ipaLVY := tabsY + 35
+		colW := [Floor(ipaLVW * 0.6) - 3, ipaLVW - (Floor(ipaLVW * 0.6) - 3) - 6]
+
+		defDataH := 28
+
+		entryW := tabsW - 25
+		entryH := 18
+		entryX := tabsX + Floor((tabsW - entryW) / 2)
+		entryY := tabsY + 35
+		entryContentW := entryW
+		entryContentH := defDataH
+		entryContentX := tabsX + Floor((tabsW - entryContentW) / 2)
+		entryContentY := entryY + entryH
+
+		unicodeW := entryW
+		unicodeH := entryH
+		unicodeX := tabsX + Floor((tabsW - unicodeW) / 2)
+		unicodeY := entryContentY + entryContentH + defShiftY
+		unicodeContentW := unicodeW
+		unicodeContentH := defDataH
+		unicodeContentX := tabsX + Floor((tabsW - unicodeContentW) / 2)
+		unicodeContentY := unicodeY + unicodeH
+
+		htmlW := entryW
+		htmlH := entryH
+		htmlX := tabsX + Floor((tabsW - htmlW) / 2)
+		htmlY := unicodeContentY + unicodeContentH + defShiftY
+
+		gap := 2
+		totalGap := 2 * gap
+		htmlContentDecW := Floor((htmlW - totalGap) / 3)
+		htmlContentHexW := Floor((htmlW - totalGap) / 3)
+		htmlContentEntW := htmlW - htmlContentDecW - htmlContentHexW - totalGap
+
+		htmlContentDecH := defDataH
+		htmlContentHexH := defDataH
+		htmlContentEntH := defDataH
+
+		totalHtmlContentW := htmlContentDecW + htmlContentHexW + htmlContentEntW + totalGap
+		startX := tabsX + Floor((tabsW - totalHtmlContentW) / 2)
+
+		htmlContentDecX := startX
+		htmlContentHexX := htmlContentDecX + htmlContentDecW + gap
+		htmlContentEntX := htmlContentHexX + htmlContentHexW + gap
+
+		htmlContentDecY := htmlY + htmlH
+		htmlContentHexY := htmlContentDecY
+		htmlContentEntY := htmlContentDecY
+
+		tabOpts := {
+			ipa: {
+				lv: Format("vIPA_LV w{} h{} x{} y{} +NoSort -Multi", ipaLVW, ipaLVH, ipaLVX, ipaLVY),
+			},
+			trans: {
+				lv: Format("vTrans_LV w{} h{} x{} y{} +NoSort -Multi", ipaLVW, ipaLVH, ipaLVX, ipaLVY),
+			},
+			data: {
+				entry: Format("vEntry w{} h{} x{} y{}", entryW, entryH, entryX, entryY),
+				entryContent: Format("vEntryContent w{} h{} x{} y{} Center ReadOnly -VScroll -HScroll", entryContentW, entryContentH, entryContentX, entryContentY),
+				unicode: Format("vUnicode w{} h{} x{} y{}", unicodeW, unicodeH, unicodeX, unicodeY),
+				unicodeContent: Format("vUnicodeContent w{} h{} x{} y{} Center ReadOnly -VScroll -HScroll", unicodeContentW, unicodeContentH, unicodeContentX, unicodeContentY),
+				html: Format("vHTML w{} h{} x{} y{}", htmlW, htmlH, htmlX, htmlY),
+				htmlContentDec: Format("vHTMLContentDec w{} h{} x{} y{} Center ReadOnly -VScroll -HScroll", htmlContentDecW, htmlContentDecH, htmlContentDecX, htmlContentDecY),
+				htmlContentHex: Format("vHTMLContentHex w{} h{} x{} y{} Center ReadOnly -VScroll -HScroll", htmlContentHexW, htmlContentHexH, htmlContentHexX, htmlContentHexY),
+				htmlContentEnt: Format("vHTMLContentEnt w{} h{} x{} y{} Center ReadOnly -VScroll -HScroll", htmlContentEntW, htmlContentEntH, htmlContentEntX, htmlContentEntY),
+			},
+		}
+
+		this.title := App.Title("+status+version") " — " Locale.Read("gui_legend")
 		Constructor() {
-			value := ChrLib.GetEntry(data.entry)
-			legendData := this.ReadLegend(value.options.legend)
-			languageCode := Language.Get()
+			legendPanel := Gui()
+			legendPanel.title := this.title
 
-			panelTitle := App.Title("+status+version") " — " Locale.ReadInject("gui_legend", [Locale.Read(data.entry)])
+			tabs := legendPanel.AddTab3(opts.tabs, tabList)
+			tabs.UseTab(1)
 
-			screenWidth := A_ScreenWidth
-			screenHeight := A_ScreenHeight
+			ipaLV := legendPanel.AddListView(tabOpts.ipa.lv, lvHeaders)
 
-			windowWidth := 870
-			windowHeight := 570
+			tabs.UseTab(2)
 
-			resolutions := [
-				[1080, 1920],
-				[1440, 2560],
-				[1800, 3200],
-				[2160, 3840],
-				[2880, 5120],
-				[4320, 7680]
-			]
+			transLV := legendPanel.AddListView(tabOpts.trans.lv, lvHeaders)
 
-			for res in resolutions {
-				if screenHeight = res[1] && screenWidth > res[2] {
-					screenWidth := res[2]
+			tabs.UseTab(3)
+
+			entry := legendPanel.AddText(tabOpts.data.entry, labels.entry)
+			entry.SetFont("s" (11) " c333333 bold")
+			entryContent := legendPanel.AddEdit(tabOpts.data.entryContent, labels.unknown)
+			entryContent.SetFont("s" (11) " c333333")
+
+			unicode := legendPanel.AddText(tabOpts.data.unicode, labels.unicode)
+			unicode.SetFont("s" (11) " c333333 bold")
+			unicodeContent := legendPanel.AddEdit(tabOpts.data.unicodeContent, "0000")
+			unicodeContent.SetFont("s" (11) " c333333")
+
+			html := legendPanel.AddText(tabOpts.data.html, labels.html)
+			html.SetFont("s" (11) " c333333 bold")
+			htmlContentDec := legendPanel.AddEdit(tabOpts.data.htmlContentDec, "&#0;")
+			htmlContentDec.SetFont("s" (11) " c333333")
+			htmlContentHex := legendPanel.AddEdit(tabOpts.data.htmlContentHex, "&#x0000;")
+			htmlContentHex.SetFont("s" (11) " c333333")
+			htmlContentEnt := legendPanel.AddEdit(tabOpts.data.htmlContentEnt, labels.unknown)
+			htmlContentEnt.SetFont("s" (11) " c333333")
+
+			tabs.UseTab()
+
+			TV := legendPanel.AddTreeView(opts.TV)
+
+			for each in legendsList {
+				if each is String {
+					title := IniRead(this.legendsPath this.legends.Get(each) ".ini", languageCode, "title", each)
+
+					TV.Add(title)
+				} else if each is Map {
+					for k, v in each {
+						parentTitle := Locale.Read("symbol_" k)
+						parent := TV.Add(parentTitle)
+
+						for child in v {
+							title := IniRead(this.legendsPath this.legends.Get(child) ".ini", languageCode, "title", child)
+
+							TV.Add(title, parent)
+						}
+					}
+				}
+			}
+
+			TV.OnEvent("ItemSelect", (TV, Item) => this.PanelSelect(TV, item, nameToEntry))
+
+			for each in [ipaLV, transLV] {
+				each.SetFont("s" (11) " c333333")
+				Loop lvHeaders.Length {
+					index := A_Index
+					each.ModifyCol(index, colW[index])
+				}
+			}
+
+			GB := legendPanel.AddGroupBox(opts.GB)
+
+			PV := legendPanel.AddEdit(opts.PV, Chr(0x25CC))
+			PV.SetFont("s" (70 * 1.5) " c333333", Fonts.fontFaces["Default"].name)
+
+			chrTitle := legendPanel.AddText(opts.chrTitle, labels.unknown)
+			chrTitle.SetFont("s" (24) " c333333", Fonts.fontFaces["Default"].name)
+
+			uniTitle := legendPanel.AddText(opts.uniTitle, labels.uniTitle)
+			uniTitle.SetFont("s" (11) " c333333 bold")
+
+			uniTitleContent := legendPanel.AddEdit(opts.uniTitleContent, labels.unknown)
+			uniTitleContent.SetFont("s" (11) " c333333")
+
+			altTitles := legendPanel.AddText(opts.altTitles, labels.altTitles)
+			altTitles.SetFont("s" (11) " c333333 bold")
+
+			altTitlesContent := legendPanel.AddEdit(opts.altTitlesContent, labels.unknown)
+			altTitlesContent.SetFont("s" (11) " c333333")
+
+			languages := legendPanel.AddText(opts.languages, labels.languages)
+			languages.SetFont("s" (11) " c333333 bold")
+
+			languagesContent := legendPanel.AddEdit(opts.languagesContent, labels.unknown)
+			languagesContent.SetFont("s" (11) " c333333")
+
+			description := legendPanel.AddEdit(opts.description, labels.description)
+			description.SetFont("s" (10) " c333333")
+
+			author := legendPanel.AddText(opts.author, labels.author)
+			author.SetFont("s" (11) " c333333 bold")
+			authorLink := legendPanel.AddLink(opts.authorLink, labels.authorLink)
+			authorLink.SetFont("s" (11) " c333333")
+
+
+			legendPanel.Show(Format("w{} h{} x{} y{}", panelW, panelH, posX, posY))
+			return legendPanel
+		}
+
+
+		if IsGuiOpen(this.title) {
+			WinActivate(this.title)
+		} else {
+			this.panelGUI := Constructor()
+			this.panelGUI.Show()
+		}
+
+		this.PanelAftermath(preselectEntry, nameToEntry)
+	}
+
+	static PanelAftermath(preselectEntry, nameToEntry) {
+		TV := this.panelGUI["TV"]
+		if preselectEntry = ""
+			TV.Focus()
+
+		if IsGuiOpen(this.title) && preselectEntry != "" {
+		}
+
+
+		if preselectEntry != "" {
+			label := ""
+			for k, v in nameToEntry {
+				if preselectEntry = v {
+					label := k
 					break
 				}
 			}
 
-			xPos := screenWidth - windowWidth - 50
-			yPos := screenHeight - windowHeight - 92
 
+			itemID := 0
+			Loop {
+				itemID := TV.GetNext(itemID, "Full")
+				if !itemID
+					break
 
-			panelWindow := Gui()
-			panelWindow.title := panelTitle
-
-			GroupBoxOptions := {
-				topbarID: panelWindow.AddEdit("vLegendID " this.UISets.infoBox.topbarID),
-				topbarEntry: panelWindow.AddEdit("vLegendEntry " this.UISets.infoBox.topbarEntry),
-				topbarUnicode: panelWindow.AddEdit("vLegendUnicode " this.UISets.infoBox.topbarUnicode),
-				topbarHTML: panelWindow.AddEdit("vLegendHTML " this.UISets.infoBox.topbarHTML),
-				group: panelWindow.Add("GroupBox", "vLegendGroup " this.UISets.infoBox.body),
-				groupFrame: panelWindow.Add("GroupBox", this.UISets.infoBox.previewFrame),
-				preview: panelWindow.AddEdit("vLegendSymbol " this.UISets.infoBox.preview),
-				mainTitle: panelWindow.AddEdit("vLegendTitle " this.UISets.infoBox.mainTitle),
-				unicodeLabel: panelWindow.AddText("vLegendUnicodeLabel " this.UISets.infoBox.unicodeLabel),
-				unicode: panelWindow.AddEdit("vLegendUnicodeName " this.UISets.infoBox.unicode),
-				subTitlesLabel: panelWindow.AddText("vLegendSubTitlesLabel " this.UISets.infoBox.subTitlesLabel),
-				subTitles: panelWindow.AddEdit("vLegendSubTitles " this.UISets.infoBox.subTitles),
-				IPALabel: panelWindow.AddText("vLegendIPALabel " this.UISets.infoBox.IPALabel),
-				IPA: panelWindow.AddEdit("vLegendIPA " this.UISets.infoBox.IPA),
-				transcriptionLabel: panelWindow.AddText("vLegendTranscriptionLabel " this.UISets.infoBox.transcriptionLabel),
-				transcription: panelWindow.AddEdit("vLegendTranscription " this.UISets.infoBox.transcription),
-				languagesLabel: panelWindow.AddText("vLegendlanguagesLabel " this.UISets.infoBox.languagesLabel),
-				languages: panelWindow.AddEdit("vLegendlanguages " this.UISets.infoBox.languages),
-				description: panelWindow.AddEdit("vLegenddescription " this.UISets.infoBox.description),
-				authorLabel: panelWindow.AddText("vLegendAuthorLabel " this.UISets.infoBox.authorLabel),
-				author: panelWindow.AddLink("vLegendAuthor " this.UISets.infoBox.author),
+				itemText := TV.GetText(itemID)
+				if itemText = label {
+					TV.Modify(itemID)
+					this.PanelSelect(TV, itemID, nameToEntry)
+					break
+				}
 			}
+		}
+	}
 
-			GroupBoxOptions.preview.Text := value.symbol.alt != "" ? value.symbol.alt : value.symbol.set
-			GroupBoxOptions.preview.SetFont(, value.symbol.font != "" ? value.symbol.font : Panel.UISets.infoFonts.fontFace["serif"].name)
-			GroupBoxOptions.preview.SetFont("s" (Panel.UISets.infoFonts.previewSize * 1.5) " norm cDefault")
-			GroupBoxOptions.preview.SetFont(, value.symbol.font != "" ? value.symbol.font : Panel.UISets.infoFonts.fontFace["serif"].name)
-			GroupBoxOptions.preview.SetFont(value.symbol.customs != "" ? value.symbol.customs : StrLen(GroupBoxOptions.preview.Text) > 2 ? "s" (Panel.UISets.infoFonts.previewSmaller * 1.5) " norm cDefault" : "s" (Panel.UISets.infoFonts.previewSize * 1.5) " norm cDefault")
+	static PanelSelect(TV, item, nameToEntry) {
+		if !item
+			return
 
+		if IsGuiOpen(this.title) {
+			selectedLabel := TV.GetText(item)
 
-			GroupBoxOptions.topbarID.Text := value.index
-			GroupBoxOptions.topbarEntry.Text := data.entry
-			GroupBoxOptions.topbarUnicode.Text := value.sequence.Length > 0 ? value.sequence.ToString(" ") : value.unicode
+			if nameToEntry.Has(selectedLabel) && nameToEntry.GetRef(selectedLabel, &entryName) != "" {
+				labels := {
+					unknown: Locale.Read("gui_legend_unknown"),
+					description: Locale.Read("gui_legend_description_unavailable"),
+				}
 
-			unicodeSymbol := Util.UnicodeToChar(GroupBoxOptions.topbarUnicode.Text)
+				languageCode := Language.Get()
+				legendEntry := this.ReadLegend(this.legends.Get(entryName) ".ini")
+				legendEntryL := legendEntry.%languageCode%
 
-			GroupBoxOptions.topbarHTML.Text := value.HasOwnProp("entity") ? [Util.StrToHTML(unicodeSymbol), value.entity].ToString(" ") : Util.StrToHTML(unicodeSymbol)
-			GroupBoxOptions.topbarID.SetFont("s12")
-			GroupBoxOptions.topbarEntry.SetFont("s12")
-			GroupBoxOptions.topbarUnicode.SetFont(StrLen(GroupBoxOptions.topbarUnicode.Text) > 6 ? "s9" : "s12")
-			GroupBoxOptions.topbarHTML.SetFont(StrLen(GroupBoxOptions.topbarHTML.Text) > 7 ? "s9" : "s12")
+				entry := ChrLib.GetEntry(entryName)
+				previewSymbol := StrLen(entry.symbol.alt) > 0 ? entry.symbol.alt : entry.symbol.set
+				getChar := Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
 
+				legendPanel := this.panelGUI
+				PV := legendPanel["PV"]
+				PV.Text := previewSymbol != "" ? previewSymbol : Chr(0x25CC)
 
-			GroupBoxOptions.mainTitle.Text := legendData.%languageCode%.title
-			GroupBoxOptions.mainTitle.SetFont("s24 bold", Panel.UISets.infoFonts.fontFace["serif"].name)
+				chrTitle := legendPanel["Title"]
+				chrTitle.Text := legendEntryL.HasOwnProp("title") && legendEntryL.title != "" ? legendEntryL.title : selectedLabel
 
-			GroupBoxOptions.unicodeLabel.Text := Locale.Read("gui_legend_unicode") ChrLib.Get("emsp")
-			GroupBoxOptions.unicodeLabel.SetFont("s11 bold")
-			GroupBoxOptions.unicode.Text := legendData.legend.unicode_name
-			GroupBoxOptions.unicode.SetFont("s11")
+				uniTitleContent := legendPanel["UnicodeTitleContent"]
+				uniTitleContent.Text := legendEntry.legend.HasOwnProp("unicode_name") && legendEntry.legend.unicode_name != "" ? legendEntry.legend.unicode_name : labels.unknown
 
-			GroupBoxOptions.subTitlesLabel.Text := Locale.Read("gui_legend_alts") ChrLib.Get("emsp")
-			GroupBoxOptions.subTitlesLabel.SetFont("s11 bold")
-			GroupBoxOptions.subTitles.Text := legendData.%languageCode%.alts
-			GroupBoxOptions.subTitles.SetFont("s11")
+				altTitlesContent := legendPanel["AltTitlesContent"]
+				altTitlesContent.Text := legendEntryL.HasOwnProp("alts") && legendEntryL.alts != "" ? legendEntryL.alts : labels.unknown
 
-			GroupBoxOptions.IPALabel.Text := Locale.Read("gui_legend_ipa") ChrLib.Get("emsp")
-			GroupBoxOptions.IPALabel.SetFont("s11 bold")
-			GroupBoxOptions.IPA.Text := legendData.%languageCode%.ipa
-			GroupBoxOptions.IPA.SetFont("s11")
+				languagesContent := legendPanel["LanguagesContent"]
+				languagesContent.Text := legendEntryL.HasOwnProp("languages") && legendEntryL.languages != "" ? legendEntryL.languages : labels.unknown
 
-			GroupBoxOptions.transcriptionLabel.Text := Locale.Read("gui_legend_transcription") ChrLib.Get("emsp")
-			GroupBoxOptions.transcriptionLabel.SetFont("s11 bold")
-			GroupBoxOptions.transcription.Text := legendData.%languageCode%.transcription
-			GroupBoxOptions.transcription.SetFont("s11")
+				description := legendPanel["Description"]
+				description.Text := legendEntryL.HasOwnProp("description") && legendEntryL.description != "" ? Locale.HandleString(legendEntryL.description) : labels.description
 
-			GroupBoxOptions.languagesLabel.Text := Locale.Read("gui_legend_langs") ChrLib.Get("emsp")
-			GroupBoxOptions.languagesLabel.SetFont("s11 bold")
-			GroupBoxOptions.languages.Text := legendData.%languageCode%.langs
-			GroupBoxOptions.languages.SetFont("s11")
+				entryContent := legendPanel["EntryContent"]
+				entryContent.Text := entryName
 
-			GroupBoxOptions.description.Text := Locale.HandleString(legendData.%languageCode%.description)
-			GroupBoxOptions.description.SetFont("s11")
+				unicodeContent := legendPanel["UnicodeContent"]
+				unicodeContent.Text := entry.sequence.Length > 0 ? entry.sequence.ToString(" ") : entry.unicode
 
+				htmlContentDec := legendPanel["HTMLContentDec"]
+				htmlContentDec.Text := Util.StrToHTML(getChar)
 
-			defaultAuthor := Map("ru-RU", "<a href=`"https://nkardaz.carrd.co`">Ялла Нкардаз</a>", "en-US", "<a href=`"https://nkardaz.carrd.co`">Yalla Nkardaz</a>")
+				htmlContentHex := legendPanel["HTMLContentHex"]
+				htmlContentHex.Text := Util.StrToHTML(getChar, "Hex")
 
-			GroupBoxOptions.authorLabel.Text := Locale.Read("gui_legend_author") ChrLib.Get("emsp")
-			GroupBoxOptions.authorLabel.SetFont("bold")
-			GroupBoxOptions.author.Text := legendData.%languageCode%.hasOwnProp("author") ? legendData.%languageCode%.author : defaultAuthor[LanguageCode]
+				htmlContentEnt := legendPanel["HTMLContentEnt"]
+				htmlContentEnt.Text := entry.entity != "" ? entry.entity : labels.unknown
 
+				ipaLV := legendPanel["IPA_LV"]
+				transLV := legendPanel["Trans_LV"]
 
-			panelWindow.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
+				ipaLV.Delete()
+				transLV.Delete()
 
-			return panelWindow
+				ipaArray := this.ParseIPA(legendEntryL.HasOwnProp("ipa") && legendEntryL.ipa != "" ? legendEntryL.ipa : "")
+				transArray := this.ParseIPA(legendEntryL.HasOwnProp("transcription") && legendEntryL.transcription != "" ? legendEntryL.transcription : "")
+
+				for each in ["ipa", "trans"] {
+					if %each%Array.Length > 0 {
+						for i, _ in %each%Array {
+							if Mod(i, 2) = 1 {
+								%each%LV.Add(, %each%Array[i], %each%Array[i + 1])
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	static ReadLegend(path) {
+		legend := Util.INIToObj(this.legendsPath path)
+		return legend
+	}
+
+	static ParseIPA(str) {
+		output := []
+		while pos := RegExMatch(str, "\[(.*?)\:\:(.*?)\]", &match) {
+			output.Push(match[1], match[2])
+			str := SubStr(str, 1, pos - 1) SubStr(str, pos + match.Len)
+		}
+		return output
+	}
+
+	static CollectList() {
+		indexed := Map()
+		output := []
+		toRemove := []
+
+		for name, path in this.legends
+			if ChrLib.entries.HasOwnProp(name)
+				indexed.Set(ChrLib.entries.%name%.index, name)
+
+		for i, name in indexed {
+			group := IniRead(this.legendsPath this.legends.Get(name) ".ini", "legend", "group", "")
+			if group != "" {
+				if !toRemove.HasValue(group)
+					toRemove.Push(group)
+
+				if !output.HasValue(group)
+					output.Push(group, Map(group, [name]))
+				else if output.HasValue(group, &j)
+					output[j + 1][group].Push(name)
+			} else
+				output.Push(name)
 		}
 
-		PanelGUI := Constructor()
-		PanelGUI.Show()
+		for i, each in output
+			if toRemove.HasValue(each)
+				output.RemoveAt(i)
+
+		return output
 	}
 }

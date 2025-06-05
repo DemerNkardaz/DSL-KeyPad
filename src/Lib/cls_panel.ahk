@@ -508,6 +508,7 @@ Class Panel {
 					"Hellenic", "",
 					"Hellenic Accented", "",
 					"Hellenic Diacritics", "",
+					"Hellenic Punctuation",
 					"Hellenic Specials", "",
 					"Germanic Runic Elder Futhark", "",
 					"Germanic Runic Futhork", "",
@@ -1066,7 +1067,7 @@ Class Panel {
 					contextMenu.Add(labels.showBlockPage, (*) => UnicodeBlockWebResource(unicodeBlock))
 					contextMenu.Add()
 					contextMenu.Add(labels.glyphVariations, (*) => GlyphsPanel(entryCol))
-					contextMenu.Add(labels.legend, (*) => ChrLegend({ entry: entryCol }))
+					contextMenu.Add(labels.legend, (*) => ChrLegend(entryCol))
 					contextMenu.Add()
 					contextMenu.Add(labels.showEntry, (*) => ChrLib.EntryPreview(entryCol))
 
@@ -1327,7 +1328,7 @@ Class Panel {
 
 		callMethods := Map(
 			"GlyphsPanel", (*) => GlyphsPanel(entryName[1]),
-			"ChrLegend", (*) => ChrLegend({ entry: entryName[1] })
+			"ChrLegend", (*) => ChrLegend(entryName[1])
 		)
 
 		callMethods[callType]()

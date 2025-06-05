@@ -601,7 +601,7 @@ Class Util {
 		if !FileExist(filePath)
 			return obj
 
-		content := FileRead(filePath, "UTF-8")
+		content := FileRead(filePath, "UTF-16")
 		lines := StrSplit(content, "`n", "`r`n")
 
 		currentSection := ""

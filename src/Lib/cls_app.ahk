@@ -126,6 +126,7 @@ Class App {
 			app: App.Title("+version"),
 			update: Locale.ReadInject("update_available", [Update.availableVersion]),
 			openPanel: Locale.Read("open_panel"),
+			legend: Locale.Read("gui_panel_context_legend"),
 			options: Locale.Read("gui_options"),
 			changelogPanel: Locale.Read("gui_changelog"),
 			scriptForms: Locale.Read("tray_menu_item_scripts"),
@@ -166,6 +167,7 @@ Class App {
 
 		App.tray.Add()
 		App.tray.Add(labels.openPanel, (*) => Panel.Panel())
+		App.tray.Add(labels.legend, (*) => ChrLegend.Panel())
 		App.tray.Add(labels.options, (*) => Cfg.Editor()), App.tray.SetIcon(labels.options, ImageRes, 63)
 		App.tray.Add()
 		App.tray.Add(labels.changelogPanel, (*) => Changelog.Panel())

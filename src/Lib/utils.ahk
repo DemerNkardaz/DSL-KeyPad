@@ -14,6 +14,7 @@ Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
 Map.Prototype.DefineProp("DeepMergeWith", { Call: _MapDeepMergeWith })
 Map.Prototype.DefineProp("DeepMergeBinds", { Call: _MapDeepMergeBinds })
 Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
+Map.Prototype.DefineProp("GetRef", { Call: _MapGetRef })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
 
@@ -274,6 +275,12 @@ _MapDeepMergeBinds(this, maps*) {
 	return this
 }
 
+_MapGetRef(this, key, &output := "") {
+	if this.Has(key)
+		output := this.Get(key)
+	return output
+}
+
 MapInsert(MapObj, Pairs*) {
 	keyCount := 0
 	for index in MapObj {
@@ -330,14 +337,6 @@ MapMerge(MapObjects*) {
 		}
 	}
 	return TempMap
-}
-
-
-RegExRemove(str, toRemove*) {
-	for i, v in toRemove {
-		str := RegExReplace(str, v, "")
-	}
-	return str
 }
 
 ClipSendProcessed(callback, noSendRestore := False, isClipReverted := True, untilRevert := 300) {

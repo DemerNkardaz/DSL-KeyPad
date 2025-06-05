@@ -105,15 +105,22 @@ bindingMaps := Map(
 				"Τελεια", Map(
 					"<^<!", "psili",
 				),
-				"Ισον", Map("+", ["plus"]),
-				"Παυλα", Map("+", ["underscore"]),
-				"Σολιδος", Map("+", ["question"]),
-				"ΠισωΣολιδος", Map("+", ["vertical_line"]),
-				"ΑνωΤελεια", Map("+", ["colon"]),
-				"Αποστροφη", Map("+", ["quote"]),
-				"Περισπωμενη", Map("+", ["tilde"]),
-				"ΑριστερηΑγκυλη", Map("+", ["left_brace"]),
-				"ΔεξιαΑγκυλη", Map("+", ["right_brace"]),
+				"Ισον", Map("+", "plus"),
+				"Παυλα", Map("+", "underscore"),
+				"Σολιδος", Map("+", "question"),
+				"ΠισωΣολιδος", Map("+", "vertical_line"),
+				"ΑνωΤελεια", Map(
+					"+", "colon",
+					"<!", "hel_n_sym_erotimatiko",
+					"<^>!", "hel_n_sym_ano_teleia",
+				),
+				"Αποστροφη", Map(
+					"+", "quote",
+					"<^>!", "hel_n_sym_numeral_sign[,_lower]",
+				),
+				"Περισπωμενη", Map("+", "tilde"),
+				"ΑριστερηΑγκυλη", Map("+", "left_brace"),
+				"ΔεξιαΑγκυλη", Map("+", "right_brace"),
 			)
 		),
 		"Germanic Runes", Map(

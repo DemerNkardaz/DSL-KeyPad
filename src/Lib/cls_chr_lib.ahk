@@ -1088,6 +1088,12 @@ Class ChrLib {
 			selectivePart := " " selectiveMatch[1]
 
 		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
+
+			if ["hellenic", "glagolitic"].HasValue(refinedEntry.data.script)
+				&& !refinedEntry.options.useLetterLocale
+				refinedEntry.options.useLetterLocale := True
+
+
 			if refinedEntry.groups.Length = 0 {
 				hasPostfix := refinedEntry.data.postfixes.Length > 0
 				if ArrayMerge(this.scriptsValidator, ["hellenic", "latin", "cyrillic"]).HasValue(refinedEntry.data.script) {
@@ -1098,11 +1104,6 @@ Class ChrLib {
 							[StrTitle(script RegExReplace(selectivePart, "_", " ") (hasPostfix ? " Accented" : ""))]
 						)
 				}
-
-				if ["hellenic", "glagolitic"].HasValue(refinedEntry.data.script)
-					&& !refinedEntry.options.useLetterLocale
-					refinedEntry.options.useLetterLocale := True
-
 			}
 
 			if StrLen(refinedEntry.symbol.category = 0) {
