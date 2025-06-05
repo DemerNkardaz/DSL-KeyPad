@@ -84,7 +84,7 @@ Class ChrLegend {
 
 		chrTitleX := previewX + previewW + 25
 		chrTitleY := groupBoxY + 25
-		chrTitleW := groupBoxW - chrTitleX - 10
+		chrTitleW := panelW - chrTitleX - 35
 		chrTitleH := 48
 
 		defShiftY := 5
@@ -277,6 +277,7 @@ Class ChrLegend {
 			tabs.UseTab()
 
 			TV := legendPanel.AddTreeView(opts.TV)
+			TV.SetFont("s" (11) " c333333")
 
 			for each in legendsList {
 				if each is String {
@@ -403,6 +404,7 @@ Class ChrLegend {
 				labels := {
 					unknown: Locale.Read("gui_legend_unknown"),
 					description: Locale.Read("gui_legend_description_unavailable"),
+					authorLink: Locale.Read("gui_legend_author_default"),
 				}
 
 				languageCode := Language.Get()
@@ -431,6 +433,9 @@ Class ChrLegend {
 
 				description := legendPanel["Description"]
 				description.Text := legendEntryL.HasOwnProp("description") && legendEntryL.description != "" ? Locale.HandleString(legendEntryL.description) : labels.description
+
+				authorLink := legendPanel["AuthorLink"]
+				authorLink.Text := legendEntryL.HasOwnProp("author") && legendEntryL.author != "" ? legendEntryL.author : labels.authorLink
 
 				entryContent := legendPanel["EntryContent"]
 				entryContent.Text := entryName
@@ -476,7 +481,7 @@ Class ChrLegend {
 
 	static ParseIPA(str) {
 		output := []
-		while pos := RegExMatch(str, "\[(.*?)\:\:(.*?)\]", &match) {
+		while pos := RegExMatch(str, "\[([^\[\]:]*)::((?:[^\[\]]|\[[^\]]*\])*)\]", &match) {
 			output.Push(match[1], match[2])
 			str := SubStr(str, 1, pos - 1) SubStr(str, pos + match.Len)
 		}
