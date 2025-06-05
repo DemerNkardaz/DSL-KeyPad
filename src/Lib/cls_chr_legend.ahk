@@ -4,6 +4,10 @@ Class ChrLegend {
 	static panelGUI := Gui()
 	static title := ""
 
+	static bracketPresets := Map(
+		"Ornate", [Chr(0xFD3E), Chr(0xFD3F)],
+	)
+
 	static __New() {
 		this.Init()
 	}
@@ -35,6 +39,15 @@ Class ChrLegend {
 		for each in legendsList {
 			if each is String {
 				title := IniRead(this.legendsPath this.legends.Get(each) ".ini", languageCode, "title", each)
+
+				postfix := IniRead(this.legendsPath this.legends.Get(each) ".ini", "legend", "postfix", "")
+				postfix := postfix != "" ? " " this.SetBracketStyle(postfix) : ""
+
+				prefix := IniRead(this.legendsPath this.legends.Get(each) ".ini", "legend", "prefix", "")
+				prefix := prefix != "" ? this.SetBracketStyle(prefix) " " : ""
+
+				title := prefix title postfix
+
 				nameToEntry.Set(title, each)
 			} else if each is Map {
 				for k, v in each {
@@ -42,6 +55,14 @@ Class ChrLegend {
 					nameToEntry.Set(parentTitle, "")
 					for child in v {
 						title := IniRead(this.legendsPath this.legends.Get(child) ".ini", languageCode, "title", child)
+						postfix := IniRead(this.legendsPath this.legends.Get(child) ".ini", "legend", "postfix", "")
+						postfix := postfix != "" ? " " this.SetBracketStyle(postfix) : ""
+
+						prefix := IniRead(this.legendsPath this.legends.Get(child) ".ini", "legend", "prefix", "")
+						prefix := prefix != "" ? this.SetBracketStyle(prefix) " " : ""
+
+						title := prefix title postfix
+
 						nameToEntry.Set(title, child)
 					}
 				}
@@ -284,11 +305,19 @@ Class ChrLegend {
 			tabs.UseTab()
 
 			TV := legendPanel.AddTreeView(opts.TV)
-			TV.SetFont("s" (11) " c333333")
+			TV.SetFont("s" (11) " c333333", Fonts.fontFaces["Default"].name)
 
 			for each in legendsList {
 				if each is String {
 					title := IniRead(this.legendsPath this.legends.Get(each) ".ini", languageCode, "title", each)
+
+					postfix := IniRead(this.legendsPath this.legends.Get(each) ".ini", "legend", "postfix", "")
+					postfix := postfix != "" ? " " this.SetBracketStyle(postfix) : ""
+
+					prefix := IniRead(this.legendsPath this.legends.Get(each) ".ini", "legend", "prefix", "")
+					prefix := prefix != "" ? this.SetBracketStyle(prefix) " " : ""
+
+					title := prefix title postfix
 
 					TV.Add(title)
 				} else if each is Map {
@@ -298,6 +327,14 @@ Class ChrLegend {
 
 						for child in v {
 							title := IniRead(this.legendsPath this.legends.Get(child) ".ini", languageCode, "title", child)
+
+							postfix := IniRead(this.legendsPath this.legends.Get(child) ".ini", "legend", "postfix", "")
+							postfix := postfix != "" ? " " this.SetBracketStyle(postfix) : ""
+
+							prefix := IniRead(this.legendsPath this.legends.Get(child) ".ini", "legend", "prefix", "")
+							prefix := prefix != "" ? this.SetBracketStyle(prefix) " " : ""
+
+							title := prefix title postfix
 
 							TV.Add(title, parent)
 						}
@@ -501,6 +538,31 @@ Class ChrLegend {
 			str := SubStr(str, 1, pos - 1) SubStr(str, pos + match.Len)
 		}
 		return output
+	}
+
+	static SetBracketStyle(str) {
+		if str = ""
+			return str
+
+		if RegExMatch(str, "\:\:(.*?)$", &bracketStyleMatch) {
+			str := regexReplace(str, "\:\:(.*?)$")
+			space := Chr(0x20)
+			bracketStyle := bracketStyleMatch[1]
+
+			if RegExMatch(bracketStyle, "\[(.*?)\]", &spaceMatch) {
+				bracketStyle := RegExReplace(bracketStyle, "\[(.*?)\]", "")
+				space := spaceMatch[1]
+			}
+
+			if space ~= "i)^U\+[a-fA-F0-9]+$"
+				space := Chr("0x" SubStr(space, 3))
+
+			if this.bracketPresets.Has(bracketStyle) {
+				brackets := this.bracketPresets.Get(bracketStyle)
+				str := Util.StrWrap(str, brackets, space)
+			}
+		}
+		return str
 	}
 
 	static CollectList() {

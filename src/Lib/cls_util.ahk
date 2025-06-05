@@ -316,6 +316,10 @@ Class Util {
 		return len
 	}
 
+	static StrWrap(str, pair, space := " ") {
+		return pair[1] space str space pair[2]
+	}
+
 	static UniTrim(Str) {
 		return SubStr(Str, 4, StrLen(Str) - 4)
 	}
