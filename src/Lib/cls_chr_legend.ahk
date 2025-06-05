@@ -127,6 +127,7 @@ Class ChrLegend {
 		tabList := [
 			Locale.Read("gui_legend_ipa"),
 			Locale.Read("gui_legend_transcription"),
+			Locale.Read("gui_legend_names"),
 			Locale.Read("gui_legend_data"),
 		]
 
@@ -162,9 +163,8 @@ Class ChrLegend {
 			author: Format("vAuthor w{} h{} x{} y{}", authorW, authorH, authorX, authorY),
 			authorLink: Format("vAuthorLink w{} h{} x{} y{}", authorLinkW, authorLinkH, authorLinkX, authorLinkY),
 		}
-
 		lvHeaders := [
-			Locale.Read("gui_options_language"),
+			Locale.Read("gui_legend_language"),
 			Locale.Read("gui_legend_value"),
 		]
 
@@ -227,6 +227,9 @@ Class ChrLegend {
 			trans: {
 				lv: Format("vTrans_LV w{} h{} x{} y{} +NoSort -Multi", ipaLVW, ipaLVH, ipaLVX, ipaLVY),
 			},
+			names: {
+				lv: Format("vNames_LV w{} h{} x{} y{} +NoSort -Multi", ipaLVW, ipaLVH, ipaLVX, ipaLVY),
+			},
 			data: {
 				entry: Format("vEntry w{} h{} x{} y{}", entryW, entryH, entryX, entryY),
 				entryContent: Format("vEntryContent w{} h{} x{} y{} Center ReadOnly -VScroll -HScroll", entryContentW, entryContentH, entryContentX, entryContentY),
@@ -254,6 +257,10 @@ Class ChrLegend {
 			transLV := legendPanel.AddListView(tabOpts.trans.lv, lvHeaders)
 
 			tabs.UseTab(3)
+
+			namesLV := legendPanel.AddListView(tabOpts.names.lv, lvHeaders)
+
+			tabs.UseTab(4)
 
 			entry := legendPanel.AddText(tabOpts.data.entry, labels.entry)
 			entry.SetFont("s" (11) " c333333 bold")
@@ -300,7 +307,7 @@ Class ChrLegend {
 
 			TV.OnEvent("ItemSelect", (TV, Item) => this.PanelSelect(TV, item, nameToEntry))
 
-			for each in [ipaLV, transLV] {
+			for each in [ipaLV, transLV, namesLV] {
 				each.SetFont("s" (11) " c333333")
 				Loop lvHeaders.Length {
 					index := A_Index
@@ -422,6 +429,11 @@ Class ChrLegend {
 				chrTitle := legendPanel["Title"]
 				chrTitle.Text := legendEntryL.HasOwnProp("title") && legendEntryL.title != "" ? legendEntryL.title : selectedLabel
 
+				chrTitle.SetFont(
+					StrLen(entry.symbol.customs) > 0 ? entry.symbol.customs : ("s" (24) " norm c333333"),
+					StrLen(entry.symbol.font) > 0 ? entry.symbol.font : Fonts.fontFaces["Default"].name
+				)
+
 				uniTitleContent := legendPanel["UnicodeTitleContent"]
 				uniTitleContent.Text := legendEntry.legend.HasOwnProp("unicode_name") && legendEntry.legend.unicode_name != "" ? legendEntry.legend.unicode_name : labels.unknown
 
@@ -454,14 +466,17 @@ Class ChrLegend {
 
 				ipaLV := legendPanel["IPA_LV"]
 				transLV := legendPanel["Trans_LV"]
+				namesLV := legendPanel["Names_LV"]
 
 				ipaLV.Delete()
 				transLV.Delete()
+				namesLV.Delete()
 
 				ipaArray := this.ParseIPA(legendEntryL.HasOwnProp("ipa") && legendEntryL.ipa != "" ? legendEntryL.ipa : "")
 				transArray := this.ParseIPA(legendEntryL.HasOwnProp("transcription") && legendEntryL.transcription != "" ? legendEntryL.transcription : "")
+				namesArray := this.ParseIPA(legendEntryL.HasOwnProp("names") && legendEntryL.names != "" ? legendEntryL.names : "")
 
-				for each in ["ipa", "trans"] {
+				for each in ["ipa", "trans", "names"] {
 					if %each%Array.Length > 0 {
 						for i, _ in %each%Array {
 							if Mod(i, 2) = 1 {
