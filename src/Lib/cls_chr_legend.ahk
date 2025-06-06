@@ -38,33 +38,13 @@ Class ChrLegend {
 
 		for each in legendsList {
 			if each is String {
-				title := IniRead(this.legendsPath this.legends.Get(each) ".ini", languageCode, "title", each)
-
-				postfix := IniRead(this.legendsPath this.legends.Get(each) ".ini", "legend", "postfix", "")
-				postfix := postfix != "" ? " " this.SetBracketStyle(postfix) : ""
-
-				prefix := IniRead(this.legendsPath this.legends.Get(each) ".ini", "legend", "prefix", "")
-				prefix := prefix != "" ? this.SetBracketStyle(prefix) " " : ""
-
-				title := prefix title postfix
-
-				nameToEntry.Set(title, each)
+				nameToEntry.Set(this.SetTreeTitle(each, languageCode), each)
 			} else if each is Map {
 				for k, v in each {
-					parentTitle := Locale.Read("symbol_" k)
-					nameToEntry.Set(parentTitle, "")
-					for child in v {
-						title := IniRead(this.legendsPath this.legends.Get(child) ".ini", languageCode, "title", child)
-						postfix := IniRead(this.legendsPath this.legends.Get(child) ".ini", "legend", "postfix", "")
-						postfix := postfix != "" ? " " this.SetBracketStyle(postfix) : ""
+					nameToEntry.Set(Chr(0x269C) " " Locale.Read("symbol_" k), "")
 
-						prefix := IniRead(this.legendsPath this.legends.Get(child) ".ini", "legend", "prefix", "")
-						prefix := prefix != "" ? this.SetBracketStyle(prefix) " " : ""
-
-						title := prefix title postfix
-
-						nameToEntry.Set(title, child)
-					}
+					for child in v
+						nameToEntry.Set(this.SetTreeTitle(child, languageCode), child)
 				}
 			}
 		}
@@ -82,7 +62,7 @@ Class ChrLegend {
 			html: Locale.Read("preview_html"),
 		}
 
-		panelW := 1280
+		panelW := 1300
 		panelH := 700
 
 		posX := (A_ScreenWidth - panelW) / 2
@@ -309,35 +289,13 @@ Class ChrLegend {
 
 			for each in legendsList {
 				if each is String {
-					title := IniRead(this.legendsPath this.legends.Get(each) ".ini", languageCode, "title", each)
-
-					postfix := IniRead(this.legendsPath this.legends.Get(each) ".ini", "legend", "postfix", "")
-					postfix := postfix != "" ? " " this.SetBracketStyle(postfix) : ""
-
-					prefix := IniRead(this.legendsPath this.legends.Get(each) ".ini", "legend", "prefix", "")
-					prefix := prefix != "" ? this.SetBracketStyle(prefix) " " : ""
-
-					title := prefix title postfix
-
-					TV.Add(title)
+					TV.Add(this.SetTreeTitle(each, languageCode))
 				} else if each is Map {
 					for k, v in each {
-						parentTitle := Locale.Read("symbol_" k)
-						parent := TV.Add(parentTitle)
+						parent := TV.Add(Chr(0x269C) " " Locale.Read("symbol_" k))
 
-						for child in v {
-							title := IniRead(this.legendsPath this.legends.Get(child) ".ini", languageCode, "title", child)
-
-							postfix := IniRead(this.legendsPath this.legends.Get(child) ".ini", "legend", "postfix", "")
-							postfix := postfix != "" ? " " this.SetBracketStyle(postfix) : ""
-
-							prefix := IniRead(this.legendsPath this.legends.Get(child) ".ini", "legend", "prefix", "")
-							prefix := prefix != "" ? this.SetBracketStyle(prefix) " " : ""
-
-							title := prefix title postfix
-
-							TV.Add(title, parent)
-						}
+						for child in v
+							TV.Add(this.SetTreeTitle(child, languageCode), parent)
 					}
 				}
 			}
@@ -540,6 +498,20 @@ Class ChrLegend {
 		return output
 	}
 
+	static SetTreeTitle(item, languageCode) {
+		title := IniRead(this.legendsPath this.legends.Get(item) ".ini", languageCode, "title", item)
+
+		postfix := IniRead(this.legendsPath this.legends.Get(item) ".ini", "legend", "postfix", "")
+		postfix := postfix != "" ? Chr(0x2002) this.SetBracketStyle(postfix) : ""
+
+		prefix := IniRead(this.legendsPath this.legends.Get(item) ".ini", "legend", "prefix", "")
+		prefix := prefix != "" ? this.SetBracketStyle(prefix) Chr(0x2002) : ""
+
+		title := prefix title postfix
+
+		return title
+	}
+
 	static SetBracketStyle(str) {
 		if str = ""
 			return str
@@ -559,7 +531,7 @@ Class ChrLegend {
 
 			if this.bracketPresets.Has(bracketStyle) {
 				brackets := this.bracketPresets.Get(bracketStyle)
-				str := Util.StrWrap(str, brackets, space)
+				str := Util.StrWrap(str Chr(0x200B), brackets, space)
 			}
 		}
 		return str

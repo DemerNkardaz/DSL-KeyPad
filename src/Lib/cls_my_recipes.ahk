@@ -242,7 +242,7 @@ Class MyRecipes {
 							recipesLV.Modify(data.row, "-Focus -Select",
 								title,
 								RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
-								Util.StrFormattedReduce(this.FormatResult(data.result), 20),
+								Util.StrFormattedReduce(this.FormatResult(data.result, , True), 20),
 								data.section
 							)
 						} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
@@ -256,8 +256,7 @@ Class MyRecipes {
 							lastMatchIndex := 0
 							targetPath := Util.StrTrimPath(this.filePath)
 
-							Loop recipesLV.GetCount()
-							{
+							Loop recipesLV.GetCount() {
 								rowIndex := A_Index
 								path := recipesLV.GetText(rowIndex, 5)
 								if (path = targetPath)
@@ -271,7 +270,7 @@ Class MyRecipes {
 								recipesLV.Add(,
 									title,
 									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
-									Util.StrFormattedReduce(this.FormatResult(data.result), 20),
+									Util.StrFormattedReduce(this.FormatResult(data.result, , True), 20),
 									data.section,
 									targetPath
 								)
@@ -279,7 +278,7 @@ Class MyRecipes {
 								recipesLV.Insert(lastMatchIndex + 1, ,
 									title
 									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
-									Util.StrFormattedReduce(this.FormatResult(data.result), 20),
+									Util.StrFormattedReduce(this.FormatResult(data.result, , True), 20),
 									data.section,
 									targetPath
 								)
@@ -664,7 +663,9 @@ Class MyRecipes {
 		return ["%RAWTEXT%" resultIn]
 	}
 
-	static FormatResult(result, revert := False) {
+	static FormatResult(result, revert := False, formatRecipe := False) {
+		if formatRecipe
+			result := ChrRecipeHandler.MakeStr(result)
 		if revert {
 			result := StrReplace(result, "\n", "`n")
 			result := StrReplace(result, "\t", "`t")
