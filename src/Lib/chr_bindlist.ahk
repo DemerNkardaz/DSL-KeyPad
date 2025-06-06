@@ -1817,7 +1817,13 @@ bindingMaps := Map(
 			"Равно", ["equals"],
 			"ДефисоМинус", ["hyphen_minus"],
 			"Точка", ["dot"],
+			"Запятая", ["comma"],
+			"Слэш", ["solidus"],
 			"ОбратныйСлэш", ["reverse_solidus"],
+			"Апостроф", ["apostrophe"],
+			"Тильда", ["grave_accent"],
+			"ЛеваяКВСкобка", ["left_bracket"],
+			"ПраваяКВСкобка", ["right_bracket"],
 			; Latin alphabet (A-Z)
 			"A", ["lat_[c,s]_let_a"],
 			"B", ["lat_[c,s]_let_b"],
@@ -1881,7 +1887,7 @@ bindingMaps := Map(
 			"Ш", ["cyr_[c,s]_let_sh"],
 			"Щ", ["cyr_[c,s]_let_shch"],
 			"Ъ", ["cyr_[c,s]_let_yer"],
-			"Ы", ["cyr_[c,s]_dig_yeru_with_back_yer"],
+			"Ы", ["cyr_[c,s]_dig_yeru"],
 			"Ь", ["cyr_[c,s]_let_yeri"],
 			"Э", ["cyr_[c,s]_let_e"],
 			"Ю", ["cyr_[c,s]_let_yu"],
@@ -1921,7 +1927,23 @@ bindingMaps := Map(
 			"RightBracket", Map("+", ["right_brace"]),
 			"Равно", Map("+", ["plus"]),
 			"ДефисоМинус", Map("+", ["underscore"]),
-			"Точка", Map("+", ["comma"]),
+			"Точка", Map(
+				"SwitchLayout", True,
+				"Default", Map(
+					"+", ["comma"]
+				),
+				"Диктор", Map(
+					"+", ["exclamation"]
+				),
+			),
+			"Ь", Map(
+				"SwitchLayout", True,
+				"Default", Map(),
+				"Диктор", Map(
+					"<!", ["cyr_[c,s]_let_yer"],
+				),
+			),
+			"Запятая", Map("+", ["question"]),
 			"ОбратныйСлэш", Map("+", ["solidus"]),
 		)
 	),
@@ -2641,8 +2663,17 @@ bindingMaps := Map(
 				"<^>!<+", ["cyr_[c,s]_dig_yeru__diaeresis"]
 			),
 			"Ь", Map(
-				"<^>!", ["cyr_[c,s]_let_neutral_yer"],
-				"<^>!<!", ["cyr_[c,s]_let_semisoft_sign"],
+				"SwitchLayout", True,
+				"Default", Map(
+					"<^>!", ["cyr_[c,s]_let_neutral_yer"],
+					"<^>!<!", ["cyr_[c,s]_let_semisoft_sign"],
+				),
+				"Диктор", Map(
+					"<^>!", ["cyr_[c,s]_let_neutral_yer"],
+					"<^>!<!", ["cyr_[c,s]_let_semisoft_sign"],
+					"<^>!<!", ["cyr_[c,s]_let_u_straight"],
+					"<^>!<!<+", ["cyr_[c,s]_let_u_straight__stroke_short"],
+				),
 			),
 			"Э", Map(
 				"<^>!", ["cyr_[c,s]_let_ye_anchor"],

@@ -146,6 +146,13 @@ Class LayoutList {
 		"Ч", "SC02D",
 		"Н", "SC015",
 		"Я", "SC02C",
+		"Запятая", "SC90F",
+		"Слэш", "SC90E",
+		"Тильда", "SC90D",
+		"Апостроф", "SC90C",
+		"ТочкаСЗапятой", "SC90B",
+		"ЛеваяКВСкобка", "SC90A",
+		"ПраваяКВСкобка", "SC909",
 		Chr(0x0406), "SC99F", ; Decimal I
 		Chr(0x0462), "SC99E", ; Yat
 		Chr(0x046A), "SC99D", ; Big Yus
@@ -632,6 +639,7 @@ Class KeyboardBinder {
 		static matchRu := "(?!.*[a-zA-Z" enExt "])[а-яА-ЯёЁ" ruExt "]+"
 		static matchEn := "(?!.*[а-яА-ЯёЁ" ruExt "])[a-zA-Z" enExt "]+"
 		static metchEl := "[" hellenicRange "]+"
+		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 		layout := this.GetCurrentLayoutMap()
 		output := Map()
 		capsOnlyKeys := []

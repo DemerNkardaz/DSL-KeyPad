@@ -2,10 +2,24 @@ Class BindList {
 	mapping := []
 
 	__New(mapping := Map(), modMapping := Map()) {
+		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
+
 		this.mapping := mapping.Clone()
 
 		if modMapping.Count > 0 {
 			for letterKey, binds in modMapping {
+				if binds.Has("SwitchLayout") && binds.Get("SwitchLayout") {
+					set := binds.Get("Default")
+					for each in [latinLayout, cyrillicLayout, hellenicLayout] {
+						if binds.Has(each) {
+							set := binds.Get(each)
+							break
+						}
+					}
+					binds := set
+					modMapping.Set(letterKey, set)
+				}
+
 				if binds is Object && !(binds is Map || binds is Array || binds is Func)
 					&& binds.HasOwnProp("Get") {
 					blacklist := binds.HasOwnProp("blacklist") ? binds.blacklist : []
