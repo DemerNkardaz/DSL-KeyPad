@@ -1270,6 +1270,8 @@ Class ChrLib {
 			refinedEntry.symbol.font := "Segoe UI Historic"
 		} else if entryName ~= "i)^(deseret)" {
 			refinedEntry.symbol.font := "Segoe UI Symbol"
+		} else if entryName ~= "i)^(cirth_runic)" || entryName ~= "(franks_casket)" {
+			refinedEntry.symbol.font := "Catrinity"
 		}
 
 		for group in refinedEntry.groups {
@@ -1418,6 +1420,7 @@ Class ChrLib {
 		"deseret",
 		"glagolitic",
 		"germanic_runic",
+		"cirth_runic",
 		"gothic",
 		"old_hungarian",
 		"old_italic",

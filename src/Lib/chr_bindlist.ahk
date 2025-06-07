@@ -169,6 +169,8 @@ bindingMaps := Map(
 					">+", ["germanic_runic_n_rune_a_futhork_aesc"],
 					"<^>!", ["germanic_runic_n_rune_a_younger_futhark_ar"],
 					"<^>!<+", ["germanic_runic_n_rune_a_younger_futhark_ar_short_twig"],
+					"<^>!<!<+", ["germanic_runic_n_rune_a_franks_casket_ac"],
+					"<^>!<!<+>+", ["germanic_runic_n_rune_a_franks_casket_aesc"],
 				),
 				"B", Map(
 					"<^>!<+", ["germanic_runic_n_rune_b_younger_futhark_bjarkan_short_twig"],
@@ -182,10 +184,11 @@ bindingMaps := Map(
 				"E", Map(
 					"<+", ["germanic_runic_n_rune_e_futhork_ear"],
 					"<^>!", ["germanic_runic_n_rune_e_later_younger_futhark"],
-					"<^>!<!", ["germanic_runic_n_rune_n_medieval_en"],
+					"<^>!<!<+", ["germanic_runic_n_rune_e_franks_casket_eh"],
 				),
 				"G", Map(
 					"<+", ["germanic_runic_n_rune_g_futhork_gar"],
+					"<^>!<!", ["germanic_runic_n_rune_g_medieval"],
 					"<^<!", ["cyr_com_palatalization"],
 					"<^<!<+", ["cyr_com_pokrytie"],
 					"<^<!>+", ["cyr_com_dasia_pneumata"],
@@ -196,7 +199,10 @@ bindingMaps := Map(
 					"<^>!", ["germanic_runic_n_rune_h_younger_futhark_hagall"],
 					"<^>!<+", ["germanic_runic_n_rune_h_younger_futhark_hagall_short_twig"],
 				),
-				"I", Map(">+", ["germanic_runic_n_rune_i_elder_futhark_eihwaz"]),
+				"I", Map(
+					">+", ["germanic_runic_n_rune_i_elder_futhark_eihwaz"],
+					"<^>!<!<+", ["germanic_runic_n_rune_i_franks_casket_is"],
+				),
 				"J", Map(
 					"<+", ["germanic_runic_n_rune_y_futhork_ger"],
 					">+", ["germanic_runic_n_rune_y_futhork_ior"],
@@ -205,6 +211,8 @@ bindingMaps := Map(
 					"<+", ["germanic_runic_n_rune_k_futhork_cealc"],
 					">+", ["germanic_runic_n_rune_k_futhork_calc"],
 					"<^>!", ["germanic_runic_n_rune_k_younger_futhark_kaun"],
+					"<^>!<!", ["germanic_runic_n_rune_k_medieval_open"],
+					"<^>!>+", ["cirth_runic_n_rune_k"],
 				),
 				"L", Map("<^>!", ["germanic_runic_n_rune_l_later_younger_futhark"]),
 				"M", Map(
@@ -216,24 +224,29 @@ bindingMaps := Map(
 					"<+", ["germanic_runic_n_rune_n_futhork_ing"],
 					"<^>!<+", ["germanic_runic_n_rune_n_younger_futhark_naudr_short_twig"],
 					"<^>!<!", ["germanic_runic_n_rune_n_medieval_en"],
+					"<^>!<!+", ["germanic_runic_n_rune_n_medieval_eng"],
 				),
 				"O", Map(
 					"<+", ["germanic_runic_n_rune_o_futhork_os"],
 					"<^>!", ["germanic_runic_n_rune_o_younger_futhark_oss"],
 					"<^>!<+", ["germanic_runic_n_rune_o_younger_futhark_oss_short_twig"],
+					"<^>!>+", ["cirth_runic_n_rune_o_oo"],
 					"<^>!<!", ["germanic_runic_n_rune_o_medieval_on"],
 					"<^>!<!>+", ["germanic_runic_n_rune_o_medieval"],
+					"<^>!<!<+", ["germanic_runic_n_rune_o_franks_casket_os"],
 				),
 				"P", Map("<^>!", ["germanic_runic_n_rune_p_later_younger_futhark"]),
 				"S", Map(
 					"<+", ["germanic_runic_n_rune_s_futhork_sigel"],
 					">+", ["germanic_runic_n_rune_s_futhork_stan"],
 					"<^>!<+", ["germanic_runic_n_rune_s_younger_futhark_sol_short_twig"],
+					"<^>!>+", ["cirth_runic_n_rune_s_sh"],
 				),
 				"T", Map(
 					">+", ["germanic_runic_n_rune_t_elder_futhark_thurisaz"],
 					"<^>!<+", ["germanic_runic_n_rune_t_younger_futhark_tyr_short_twig"],
 				),
+				"W", Map("<^>!<!", ["germanic_runic_n_rune_w_medieval"]),
 				"X", Map("<^>!<!", ["germanic_runic_n_rune_x_medieval"]),
 				"Y", Map(
 					">+", ["germanic_runic_n_rune_y_younger_futhark_icelandic_yr"],

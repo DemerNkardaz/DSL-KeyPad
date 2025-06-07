@@ -341,7 +341,7 @@ Class Locale {
 		lPostfixes := entryData.postfixes
 		lVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
-		isGermanic := lScript = "germanic_runic"
+		isGermanic := ["germanic_runic", "cirth_runic"].HasValue(lScript)
 
 		langCodes := ["en-US", "ru-RU", "en-US_alt", "ru-RU_alt"]
 		entry.titles := Map()
@@ -405,7 +405,7 @@ Class Locale {
 					Locale.VarSelect(Locale.Read(pfx "prefix_" lScript (!isGermanic ? scriptAdditive : ""), lang), lVariant)
 					" "
 					localedCase Locale.Read(pfx "type_" lType, lang)
-					(isGermanic ? " " Locale.VarSelect(Locale.Read(pfx "prefix_" lScript scriptAdditive, lang), lVariant) : "")
+					(isGermanic && scriptAdditive != "" ? " " Locale.VarSelect(Locale.Read(pfx "prefix_" lScript scriptAdditive, lang), lVariant) : "")
 					" "
 					lBeforeletter
 					postLetter

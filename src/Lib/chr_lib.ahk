@@ -8623,6 +8623,7 @@ LibRegistrate(this) {
 		"germanic_runic_n_rune_y_younger_futhark_ur", {
 			unicode: "16A4",
 			options: { altLayoutKey: "$" },
+			recipe: ["${germanic_runic_n_rune_u_elder_futhark_uruz}."],
 		},
 		"germanic_runic_n_rune_y_younger_futhark_yr", {
 			unicode: "16E6",
@@ -8656,6 +8657,7 @@ LibRegistrate(this) {
 		"germanic_runic_n_rune_d_later_younger_futhark_eth", {
 			unicode: "16A7",
 			options: { altLayoutKey: ">! $" },
+			recipe: ["${germanic_runic_n_rune_t_elder_futhark_thurisaz}."],
 		},
 		"germanic_runic_n_rune_d_later_younger_futhark", {
 			unicode: "16D1",
@@ -8668,22 +8670,35 @@ LibRegistrate(this) {
 		"germanic_runic_n_rune_p_later_younger_futhark", {
 			unicode: "16D4",
 			options: { altLayoutKey: ">! $" },
+			recipe: ["${germanic_runic_n_rune_b_elder_futhark_berkanan}:"],
 		},
 		"germanic_runic_n_rune_v_later_younger_futhark", {
 			unicode: "16A1",
 			options: { altLayoutKey: "$" },
+			recipe: ["${germanic_runic_n_rune_f_elder_futhark_fehu}${arrow_up}."],
 		},
 		"germanic_runic_n_rune_c_medieval", {
 			unicode: "16CD",
-			tags: ["средневековый си", "medieval с"],
-			groups: ["Medieval Runes"],
 			options: { altLayoutKey: ">!<! $" },
+		},
+		"germanic_runic_n_rune_g_medieval", {
+			unicode: "16B5",
+			options: { altLayoutKey: ">!<! $" },
+			recipe: ["${germanic_runic_n_rune_k_younger_futhark_kaun}${arrow_up}."],
+		},
+		"germanic_runic_n_rune_k_medieval_open", {
+			unicode: "16D5",
+			options: { altLayoutKey: ">!<! $" },
+			symbol: { beforeLetter: "open" },
 		},
 		"germanic_runic_n_rune_n_medieval_en", {
 			unicode: "16C0",
-			tags: ["средневековый эн", "medieval en"],
-			groups: ["Medieval Runes"],
 			options: { altLayoutKey: ">!<! $" },
+		},
+		"germanic_runic_n_rune_n_medieval_eng", {
+			unicode: "16B6",
+			options: { altLayoutKey: ">!<! $" },
+			recipe: ["${germanic_runic_n_rune_k_younger_futhark_kaun}${arrow_left}."],
 		},
 		"germanic_runic_n_rune_o_medieval_on", {
 			unicode: "16B0",
@@ -8693,15 +8708,49 @@ LibRegistrate(this) {
 			unicode: "16AE",
 			options: { altLayoutKey: ">!<!>+ $" },
 		},
+		"germanic_runic_n_rune_w_medieval", {
+			unicode: "16A5",
+			options: { altLayoutKey: ">!<! $" },
+		},
 		"germanic_runic_n_rune_x_medieval", {
 			unicode: "16EA",
-			tags: ["средневековый экс", "medieval ex"],
-			groups: ["Medieval Runes"],
 			options: { altLayoutKey: ">!<! $" },
 		},
 		"germanic_runic_n_rune_z_medieval", {
 			unicode: "16CE",
 			options: { altLayoutKey: ">!<! $" },
+		},
+		"germanic_runic_n_rune_o_franks_casket_os", {
+			unicode: "16F4",
+			options: { altLayoutKey: ">!<!<+ $" },
+		},
+		"germanic_runic_n_rune_i_franks_casket_is", {
+			unicode: "16F5",
+			options: { altLayoutKey: ">!<!<+ $" },
+		},
+		"germanic_runic_n_rune_e_franks_casket_eh", {
+			unicode: "16F6",
+			options: { altLayoutKey: ">!<!<+ $" },
+		},
+		"germanic_runic_n_rune_a_franks_casket_ac", {
+			unicode: "16F7",
+			options: { altLayoutKey: ">!<!<+ $" },
+		},
+		"germanic_runic_n_rune_a_franks_casket_aesc", {
+			unicode: "16F8",
+			options: { altLayoutKey: ">!<!<+>+ $" },
+		},
+		"cirth_runic_n_rune_k", {
+			unicode: "16F1",
+			options: { altLayoutKey: ">!>+ $" },
+		},
+		"cirth_runic_n_rune_s_sh", {
+			unicode: "16F2",
+			options: { altLayoutKey: ">!>+ $" },
+		},
+		"cirth_runic_n_rune_o_oo", {
+			unicode: "16F3",
+			options: { altLayoutKey: ">!>+ $" },
 		},
 		"runic_single_punctuation", {
 			unicode: "16EB",
