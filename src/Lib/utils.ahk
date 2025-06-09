@@ -18,13 +18,18 @@ Map.Prototype.DefineProp("GetRef", { Call: _MapGetRef })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
 
-_ObjMaxIndex(this) {
-	indexes := 0
+ObjGet(this, j) {
+	i := 0
 	for k, v in this.OwnProps() {
-		indexes++
+		if i = j {
+			return v
+		}
+		i++
 	}
+}
 
-	return indexes
+_ObjMaxIndex(this) {
+	return ObjOwnPropCount(this)
 }
 
 _ObjKeys(this) {

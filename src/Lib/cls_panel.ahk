@@ -202,7 +202,7 @@ Class Panel {
 					ibBodyX + ibPreviewFrameX, 55, ibPreviewBoxEditW, ibPreviewBoxEditH),
 				keyPreviewTitle: Format("x{} y{} w{} h{} 0x80 BackgroundTrans",
 					ibBodyX + ibPreviewFrameX, 305, ibPreviewBoxEditW, ibPreviewBoxEditH),
-				keyPreview: Format("x{} y{} w{} h{} readonly Center -VScroll -HScroll",
+				keyPreview: Format("x{} y{} w{} h{} readonly Center +Multi +Wrap -VScroll -HScroll",
 					ibBodyX + ibPreviewFrameX, 320, ibPreviewBoxEditW, ibPreviewBoxEditH),
 				keyPreviewSet: Format("x{} y{} w{} h{} 0x80 BackgroundTrans Right",
 					ibBodyX + ibPreviewFrameX, 301, ibPreviewBoxEditW, ibPreviewBoxEditH),
@@ -409,6 +409,7 @@ Class Panel {
 					"Hellenic Ligatures", "",
 					"Hellenic", "",
 					"Hellenic Accented", "",
+					"Hellenic Diacritics", "",
 					"Cyrillic Ligatures", "",
 					"Cyrillic Digraphs", "",
 					"Cyrillic", "",
@@ -1226,12 +1227,29 @@ Class Panel {
 			entryString := Locale.Read("entry") ": [" characterEntry "]"
 			characterTitle := ""
 
+			skipCombine := True
+			combinedTitle := ""
+
+			if value.options.localeCombineAnd {
+				split := StrSplit(characterEntry, "_and_")
+				if split.Length > 1 {
+					for i, each in split {
+						if Locale.Read(each "_alt", , True, &titleText) || Locale.Read(each, , True, &titleText) {
+							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and") " " : "")
+							skipCombine := False
+						}
+					}
+				}
+			}
 
 			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout" &&
 				(value.options.layoutTitles) &&
 				(Locale.Read(characterEntry "_layout_alt", , True, &titleText) ||
 					Locale.Read(characterEntry "_layout", , True, &titleText)) {
 				characterTitle := titleText
+			} else if !skipCombine {
+				characterTitle := combinedTitle
+
 			} else if Locale.Read(characterEntry "_alt", , True, &titleText) {
 				characterTitle := titleText
 
@@ -1312,11 +1330,17 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreview"].Text := characterKey
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := characterCombinationKey != "" ? characterCombinationKey : ""
 
+
 			keyPreviewLength := StrLen(StrReplace(this.PanelGUI[options.prefix "KeyPreview"].Text, Chr(0x25CC), ""))
 			KeyPreviewSetLength := StrLen(this.PanelGUI[options.prefix "KeyPreviewSet"].Text)
 
 
-			this.PanelGUI[options.prefix "KeyPreview"].SetFont((keyPreviewLength > 25 && keyPreviewLength < 36) ? "s10" : (keyPreviewLength > 36) ? "s9" : "s12")
+			hMult := keyPreviewLength > 25 ? 2 : 1
+			this.PanelGUI[options.prefix "KeyPreview"].Move(, , , 24 * hMult)
+
+
+			; this.PanelGUI[options.prefix "KeyPreview"].SetFont((keyPreviewLength > 25 && keyPreviewLength < 36) ? "s10" : (keyPreviewLength > 36) ? "s9" : "s12")
+			this.PanelGUI[options.prefix "KeyPreview"].SetFont("s12")
 
 			this.PanelGUI[options.prefix "KeyPreviewSet"].SetFont((KeyPreviewSetLength > 5) ? "s10" : "s12")
 
@@ -1526,9 +1550,27 @@ Class Panel {
 
 						characterTitle := ""
 
+						skipCombine := True
+						combinedTitle := ""
+
+						if value.options.localeCombineAnd {
+							split := StrSplit(entryName, "_and_")
+							if split.Length > 1 {
+								for i, each in split {
+									if Locale.Read(each "_alt", , True, &titleText) || Locale.Read(each, , True, &titleText) {
+										combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and") " " : "")
+										skipCombine := False
+									}
+								}
+							}
+						}
+
 						if options.type = "Alternative Layout" && value.options.layoutTitles &&
 							Locale.Read(entryName "_layout", , True, &titleText) {
 							characterTitle := titleText
+
+						} else if !skipCombine {
+							characterTitle := combinedTitle
 
 						} else if Locale.Read(entryName, , True, &titleText) {
 							characterTitle := titleText

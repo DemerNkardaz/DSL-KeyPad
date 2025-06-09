@@ -211,6 +211,16 @@ Class Locale {
 		return this.Read(entryName, inSection, validate, , strInjections)
 	}
 
+	static ReadMulti(entryNames*) {
+		output := ""
+
+		for entryName in entryNames {
+			output .= " " this.Read(entryName)
+		}
+
+		return output
+	}
+
 	static Read(entryName, inSection := "", validate := False, &output?, strInjections := []) {
 		intermediate := ""
 		section := Language.Validate(inSection) ? inSection : Language.Get()

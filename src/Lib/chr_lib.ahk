@@ -2522,6 +2522,48 @@ LibRegistrate(this) {
 			options: { fastKey: "/ ." },
 			recipe: [".."],
 		},
+		"three_dot_punctuation", {
+			unicode: "2056",
+			tags: ["three dot punctuation", "трёхточечная пунктуация"],
+			groups: ["Smelting Special"],
+			recipe: [".:"],
+		},
+		"four_dot_punctuation", {
+			unicode: "2058",
+			tags: ["four dot punctuation", "четырёхточечная пунктуация"],
+			groups: ["Smelting Special"],
+			recipe: [".:.", "${two_dot_punctuation×2}", "${three_dot_punctuation}."],
+		},
+		"five_dot_punctuation", {
+			unicode: "2059",
+			tags: ["five dot punctuation", "пятиточечная пунктуация"],
+			groups: ["Smelting Special"],
+			recipe: [":.:"],
+		},
+		"squared_four_dot_punctuation", {
+			unicode: "2E2C",
+			tags: ["squared four dot punctuation", "квадратная четырёхточечная пунктуация"],
+			groups: ["Smelting Special"],
+			recipe: ["::"],
+		},
+		"two_dots_over_one_punctuation", {
+			unicode: "2E2A",
+			tags: ["two dots over one punctuation", "пунктуация с двумя точками над одной"],
+			groups: ["Smelting Special"],
+			recipe: [":\."],
+		},
+		"two_dots_under_one_punctuation", {
+			unicode: "2E2B",
+			tags: ["two dots over one punctuation", "пунктуация с двумя точками под одной"],
+			groups: ["Smelting Special"],
+			recipe: [".\:"],
+		},
+		"four_dot_mark", {
+			unicode: "205B",
+			tags: ["four dot mark", "четырехточечный знак"],
+			groups: ["Smelting Special"],
+			recipe: ["\.:."],
+		},
 		"tricolon", {
 			unicode: "205D",
 			tags: ["tricolon", "троеточие"],
@@ -2541,6 +2583,12 @@ LibRegistrate(this) {
 			tags: ["reference mark", "знак сноски", "komejirushi", "комэдзируси"],
 			groups: ["Special Characters", "Smelting Special"],
 			recipe: ["..×..", ":×:"],
+		},
+		"dotted_cross", {
+			unicode: "205C",
+			tags: ["dotted cross", "крест с точками"],
+			groups: ["Smelting Special"],
+			recipe: [":+:"],
 		},
 		"numero_sign", {
 			unicode: "2116",
@@ -3903,19 +3951,19 @@ LibRegistrate(this) {
 			unicode: "0384",
 			tags: ["tonos", "тонос", "τονος"],
 			groups: ["Hellenic Diacritics"],
-			options: { altLayoutKey: "<^<! A" },
+			options: { altLayoutKey: "<^<! Α" },
 		},
 		"oxia", {
 			unicode: "1FFD",
 			tags: ["oxia", "оксия", "οξεια"],
 			groups: ["Hellenic Diacritics"],
-			options: { altLayoutKey: "<^<! O" },
+			options: { altLayoutKey: "<^<! Ο" },
 		},
 		"varia", {
 			unicode: "1FEF",
 			tags: ["varia", "вария", "βαρεια"],
 			groups: ["Hellenic Diacritics"],
-			options: { altLayoutKey: "<^<! V" },
+			options: { altLayoutKey: "<^<! Ω" },
 		},
 		"dasia", {
 			unicode: "1FFE",
@@ -3934,39 +3982,110 @@ LibRegistrate(this) {
 			tags: ["perispomeni", "периспомени", "περισπωμενη"],
 			groups: ["Hellenic Diacritics"],
 			alterations: { combining: "0342" },
-			options: { altLayoutKey: "<^<! P" },
+			options: { altLayoutKey: "<^<! Π" },
 		},
 		"prosgegrammeni", {
 			unicode: "1FBE",
 			tags: ["prosgegrammeni", "просгеграммени", "προσγεγραμμενη"],
 			groups: ["Hellenic Diacritics"],
-			options: { altLayoutKey: "<^<!<+ P" },
+			options: { altLayoutKey: "c*<^<! Y" },
 		},
 		"ypogegrammeni", {
 			unicode: "037A",
 			tags: ["ypogegrammeni", "ипогеграммени", "υπογεγραμμενη"],
 			groups: ["Hellenic Diacritics"],
 			alterations: { combining: "0345" },
-			options: { altLayoutKey: "<^<! Y" },
+			options: { altLayoutKey: "<^<! Υ" },
 		},
-		"dialytika_tonos", {
-			unicode: "0385",
-			tags: ["dialytika tonos", "диалитика тонос", "διαλυτικα τονος"],
+		"dialytika", {
+			unicode: "00A8",
+			tags: ["dialytika", "диалитика", "διαλυτικα"],
 			groups: ["Hellenic Diacritics"],
-			alterations: { combining: "0344" },
-			options: {},
-		},
-		"dialytika_oxia", {
-			unicode: "1FEE",
-			tags: ["dialytika oxia", "диалитика оксия", "διαλυτικα οξεια"],
-			groups: ["Hellenic Diacritics"],
-			options: {},
+			options: { noCalc: True, altLayoutKey: "<^<! Δ" },
 		},
 		"vrachy", {
-			proxy: "breve",
+			unicode: "02D8",
 			tags: ["vrachy", "врачи", "βραχυ"],
 			groups: ["Hellenic Diacritics"],
-			options: { noCalc: True, altLayoutKey: "<^<! B" },
+			options: { noCalc: True, altLayoutKey: "<^<! Β" },
+		},
+		"koronis", {
+			unicode: "1FBD",
+			tags: ["koronis", "коронис", "κορωνις"],
+			groups: ["Hellenic Diacritics"],
+			alterations: { combining: "0343" },
+			options: { noCalc: True, altLayoutKey: "<^<! Κ" },
+		},
+		"dasia_and_varia", {
+			unicode: "1FDD",
+			tags: ["dasia and varia", "дасия и вария", "δασεια βαρεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! Ϟ", localeCombineAnd: True },
+			recipe: ["${dasia}${varia}", "${varia}${dasia}"],
+		},
+		"psili_and_varia", {
+			unicode: "1FCD",
+			tags: ["psili and varia", "псили и вария", "ψιλη βαρεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<!<+ Ϟ", localeCombineAnd: True },
+			recipe: ["${psili}${varia}", "${varia}${psili}"],
+		},
+		"dasia_and_oxia", {
+			unicode: "1FDE",
+			tags: ["dasia and oxia", "дасия и оксия", "δασεια οξεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! Ϝ", localeCombineAnd: True },
+			recipe: ["${dasia}${oxia}", "${oxia}${dasia}"],
+		},
+		"psili_and_oxia", {
+			unicode: "1FCE",
+			tags: ["psili and oxia", "псили и оксия", "ψιλη οξεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<!<+ Ϝ", localeCombineAnd: True },
+			recipe: ["${psili}${oxia}", "${oxia}${psili}"],
+		},
+		"dasia_and_perispomeni", {
+			unicode: "1FDF",
+			tags: ["dasia and perispomeni", "дасия и периспомени", "δασεια περισπωμενη"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! Ε", localeCombineAnd: True },
+			recipe: ["${dasia}${perispomeni}", "${perispomeni}${dasia}"],
+		},
+		"psili_and_perispomeni", {
+			unicode: "1FCF",
+			tags: ["psili and perispomeni", "псили и периспомени", "ψιλη περισπωμενη"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<!<+ Ε", localeCombineAnd: True },
+			recipe: ["${psili}${perispomeni}", "${perispomeni}${psili}"],
+		},
+		"dialytika_and_tonos", {
+			unicode: "0385",
+			tags: ["dialytika and tonos", "диалитика и тонос", "διαλυτικα τονος"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! Ζ", localeCombineAnd: True },
+			alterations: { combining: "0344" },
+			recipe: ["${dialytika}${tonos}", "${tonos}${dialytika}"],
+		},
+		"dialytika_and_oxia", {
+			unicode: "1FEE",
+			tags: ["dialytika and oxia", "диалитика и оксия", "διαλυτικα οξεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<!<+ Ζ", localeCombineAnd: True },
+			recipe: ["${dialytika}${oxia}", "${oxia}${dialytika}"],
+		},
+		"dialytika_and_varia", {
+			unicode: "1FED",
+			tags: ["dialytika and varia", "диалитика и вария", "διαλυτικα βαρεια"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<! Χ", localeCombineAnd: True },
+			recipe: ["${dialytika}${varia}", "${varia}${dialytika}"],
+		},
+		"dialytika_and_perispomeni", {
+			unicode: "1FC1",
+			tags: ["dialytika and perispomeni", "диалитика и периспомени", "διαλυτικα περισπωμενη"],
+			groups: ["Hellenic Diacritics"],
+			options: { altLayoutKey: "<^<!<+ Χ", localeCombineAnd: True },
+			recipe: ["${dialytika}${perispomeni}", "${perispomeni}${dialytika}"],
 		},
 		;
 		;
@@ -3984,6 +4103,68 @@ LibRegistrate(this) {
 			tags: ["ελληνικη ερωτηματικο"],
 			groups: ["Hellenic Punctuation"],
 			options: { altLayoutKey: "<! `;" },
+		},
+		"hel_n_sym_hypodiastole", {
+			unicode: "2E12",
+			tags: ["ελληνικη υποδιαστολη"],
+			groups: ["Hellenic Punctuation"],
+			options: { altLayoutKey: ">!<! ``" },
+		},
+		"hel_n_sym_paragraphos[,_forked,_forked_reversed]", {
+			unicode: ["2E0F", "2E10", "2E11"],
+			tags: [
+				["ελληνικη παραγραφος"],
+				["ελληνικη παραγραφος διακλαδωμενη"],
+				["ελληνικη παραγραφος διακλαδωμενη αντεστραμμενη"],
+			],
+			groups: ["Hellenic Punctuation"],
+			options: {
+				altLayoutKey: [">! \", ">!>+ \", ">!<+ \"],
+				useLetterLocale: "paragraphos$"
+			},
+			symbol: {
+				beforeLetter: [
+					"",
+					"forked::2",
+					"reversed::2,forked::2"
+				]
+			}
+		},
+		"hel_n_sym_editorial_koronis", {
+			unicode: "2E0E",
+			tags: ["ελληνικη κρασις κορωνις"],
+			groups: ["Hellenic Punctuation"],
+			options: { altLayoutKey: "<! 2" },
+		},
+		"hel_n_sym_ancora_[downwards,upwards]", {
+			unicode: ["2E15", "2E14"],
+			tags: [
+				["ελληνικη προς τα κατω αγκυρα"],
+				["ελληνικη προς τα πανω αγκυρα"],
+			],
+			groups: ["Hellenic Punctuation"],
+			options: {
+				altLayoutKey: [">!<! 2", "c*>!<! 2"],
+				useLetterLocale: "ancora$"
+			},
+			symbol: {
+				beforeLetter: [
+					"downwards::1",
+					"upwards::1"
+				]
+			}
+		},
+		"hel_n_sym_dotted_obelos", {
+			unicode: "2E13",
+			tags: ["ελληνικη οβελος"],
+			groups: ["Hellenic Punctuation"],
+			options: { altLayoutKey: "<! 5" },
+		},
+		"hel_n_sym_diple", {
+			unicode: "2E16",
+			tags: ["ελληνικη διπλη"],
+			groups: ["Hellenic Punctuation"],
+			options: { altLayoutKey: ">+ >" },
 		},
 		"hel_n_sym_numeral_sign[,_lower]", {
 			unicode: ["0374", "0375"],
@@ -4598,9 +4779,203 @@ LibRegistrate(this) {
 			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<+>+ $" },
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c,s]_let_a_alpha__prosgegrammeni", {
+		"hel_[c_let_a_alpha__prosgegrammeni,s_let_a_alpha__ypogegrammeni]", {
 			unicode: ["1FBC", "1FB3"],
 			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<!<+ $" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__psili__varia", {
+			unicode: ["1F0A", "1F02"],
+			options: { useLetterLocale: "alpha$" },
+			recipePush: {
+				1: ["${psili_and_varia}$", "$${psili_and_varia}"],
+			},
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__dasia__varia", {
+			unicode: ["1F0B", "1F03"],
+			options: { useLetterLocale: "alpha$" },
+			recipePush: {
+				1: ["${dasia_and_varia}$", "$${dasia_and_varia}"],
+			},
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__psili__perispomeni", {
+			unicode: ["1F0E", "1F06"],
+			options: { useLetterLocale: "alpha$" },
+			recipe: [[
+				"$${psili}${perispomeni}",
+				"$${perispomeni}${psili}",
+				"${hel_c_let_a_alpha__psili}${perispomeni}",
+				"${psili}${perispomeni}$",
+				"${perispomeni}${psili}$",
+				"${perispomeni}${hel_c_let_a_alpha__psili}",
+			], []],
+			recipePush: {
+				1: ["${psili_and_perispomeni}$", "$${psili_and_perispomeni}"],
+			},
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c,s]_let_a_alpha__dasia__perispomeni", {
+			unicode: ["1F0F", "1F07"],
+			options: { useLetterLocale: "alpha$" },
+			recipe: [[
+				"$${dasia}${perispomeni}",
+				"$${perispomeni}${dasia}",
+				"${hel_c_let_a_alpha__dasia}${perispomeni}",
+				"${dasia}${perispomeni}$",
+				"${perispomeni}${dasia}$",
+				"${perispomeni}${hel_c_let_a_alpha__dasia}",
+			], []],
+			recipePush: {
+				1: ["${dasia_and_perispomeni}$", "$${dasia_and_perispomeni}"],
+			},
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c_let_a_alpha__psili__prosgegrammeni,s_let_a_alpha__psili__ypogegrammeni]", {
+			unicode: ["1F88", "1F80"],
+			options: { useLetterLocale: "alpha$" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c_let_a_alpha__dasia__prosgegrammeni,s_let_a_alpha__dasia__ypogegrammeni]", {
+			unicode: ["1F89", "1F81"],
+			options: { useLetterLocale: "alpha$" },
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c_let_a_alpha__psili__varia__prosgegrammeni,s_let_a_alpha__psili__varia__ypogegrammeni]", {
+			unicode: ["1F8A", "1F82"],
+			options: { useLetterLocale: "alpha$" },
+			recipePush: [{
+				1: "$${psili_and_varia}${prosgegrammeni}",
+				2: "$${prosgegrammeni}${psili_and_varia}",
+				3: "${hel_c_let_a_alpha__prosgegrammeni}${psili_and_varia}",
+				4: "${psili_and_varia}${prosgegrammeni}$",
+				5: "${prosgegrammeni}${psili_and_varia}$",
+				6: "${psili_and_varia}${hel_c_let_a_alpha__prosgegrammeni}",
+			}, {
+				1: "$${psili_and_varia}${ypogegrammeni}",
+				2: "$${ypogegrammeni}${psili_and_varia}",
+				3: "${hel_s_let_a_alpha__ypogegrammeni}${psili_and_varia}",
+				4: "${psili_and_varia}${ypogegrammeni}$",
+				5: "${ypogegrammeni}${psili_and_varia}$",
+				6: "${psili_and_varia}${hel_s_let_a_alpha__ypogegrammeni}",
+			}],
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c_let_a_alpha__dasia__varia__prosgegrammeni,s_let_a_alpha__psili__varia__ypogegrammeni]", {
+			unicode: ["1F8B", "1F83"],
+			options: { useLetterLocale: "alpha$" },
+			recipePush: [{
+				1: "$${dasia_and_varia}${prosgegrammeni}",
+				2: "$${prosgegrammeni}${dasia_and_varia}",
+				3: "${hel_c_let_a_alpha__prosgegrammeni}${dasia_and_varia}",
+				4: "${dasia_and_varia}${prosgegrammeni}$",
+				5: "${prosgegrammeni}${dasia_and_varia}$",
+				6: "${dasia_and_varia}${hel_c_let_a_alpha__prosgegrammeni}",
+			}, {
+				1: "$${dasia_and_varia}${ypogegrammeni}",
+				2: "$${ypogegrammeni}${dasia_and_varia}",
+				3: "${hel_s_let_a_alpha__ypogegrammeni}${dasia_and_varia}",
+				4: "${dasia_and_varia}${ypogegrammeni}$",
+				5: "${ypogegrammeni}${dasia_and_varia}$",
+				6: "${dasia_and_varia}${hel_s_let_a_alpha__ypogegrammeni}",
+			}],
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c_let_a_alpha__psili__oxia__prosgegrammeni,s_let_a_alpha__psili__oxia__ypogegrammeni]", {
+			unicode: ["1F8C", "1F84"],
+			options: { useLetterLocale: "alpha$" },
+			recipePush: [{
+				1: "$${psili_and_oxia}${prosgegrammeni}",
+				2: "$${prosgegrammeni}${psili_and_oxia}",
+				3: "${hel_c_let_a_alpha__prosgegrammeni}${psili_and_oxia}",
+				4: "${psili_and_oxia}${prosgegrammeni}$",
+				5: "${prosgegrammeni}${psili_and_oxia}$",
+				6: "${psili_and_oxia}${hel_c_let_a_alpha__prosgegrammeni}",
+			}, {
+				1: "$${psili_and_oxia}${ypogegrammeni}",
+				2: "$${ypogegrammeni}${psili_and_oxia}",
+				3: "${hel_s_let_a_alpha__ypogegrammeni}${psili_and_oxia}",
+				4: "${psili_and_oxia}${ypogegrammeni}$",
+				5: "${ypogegrammeni}${psili_and_oxia}$",
+				6: "${psili_and_oxia}${hel_s_let_a_alpha__ypogegrammeni}",
+			}],
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c_let_a_alpha__dasia__oxia__prosgegrammeni,s_let_a_alpha__dasia__oxia__ypogegrammeni]", {
+			unicode: ["1F8D", "1F85"],
+			options: { useLetterLocale: "alpha$" },
+			recipePush: [{
+				1: "$${dasia_and_oxia}${prosgegrammeni}",
+				2: "$${prosgegrammeni}${dasia_and_oxia}",
+				3: "${hel_c_let_a_alpha__prosgegrammeni}${dasia_and_oxia}",
+				4: "${dasia_and_oxia}${prosgegrammeni}$",
+				5: "${prosgegrammeni}${dasia_and_oxia}$",
+				6: "${dasia_and_oxia}${hel_c_let_a_alpha__prosgegrammeni}",
+			}, {
+				1: "$${dasia_and_oxia}${ypogegrammeni}",
+				2: "$${ypogegrammeni}${dasia_and_oxia}",
+				3: "${hel_s_let_a_alpha__ypogegrammeni}${dasia_and_oxia}",
+				4: "${dasia_and_oxia}${ypogegrammeni}$",
+				5: "${ypogegrammeni}${dasia_and_oxia}$",
+				6: "${dasia_and_oxia}${hel_s_let_a_alpha__ypogegrammeni}",
+			}],
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c_let_a_alpha__psili__perispomeni__prosgegrammeni,s_let_a_alpha__psili__perispomeni__ypogegrammeni]", {
+			unicode: ["1F8E", "1F86"],
+			options: { useLetterLocale: "alpha$" },
+			recipe: [[
+				"$${psili}${perispomeni}${prosgegrammeni}",
+				"$${perispomeni}${psili}",
+				"${hel_c_let_a_alpha__psili}${perispomeni}${prosgegrammeni}",
+				"${psili}${perispomeni}${prosgegrammeni}$",
+				"${perispomeni}${psili}${prosgegrammeni}$",
+				"${perispomeni}${prosgegrammeni}${hel_c_let_a_alpha__psili}",
+			], []],
+			recipePush: [{
+				1: "$${psili_and_perispomeni}${prosgegrammeni}",
+				2: "$${prosgegrammeni}${psili_and_perispomeni}",
+				3: "${hel_c_let_a_alpha__prosgegrammeni}${psili_and_perispomeni}",
+				4: "${psili_and_perispomeni}${prosgegrammeni}$",
+				5: "${prosgegrammeni}${psili_and_perispomeni}$",
+				6: "${psili_and_perispomeni}${hel_c_let_a_alpha__prosgegrammeni}",
+			}, {
+				1: "$${psili_and_perispomeni}${ypogegrammeni}",
+				2: "$${ypogegrammeni}${psili_and_perispomeni}",
+				3: "${hel_s_let_a_alpha__ypogegrammeni}${psili_and_perispomeni}",
+				4: "${psili_and_perispomeni}${ypogegrammeni}$",
+				5: "${ypogegrammeni}${psili_and_perispomeni}$",
+				6: "${psili_and_perispomeni}${hel_s_let_a_alpha__ypogegrammeni}",
+			}],
+			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+		},
+		"hel_[c_let_a_alpha__dasia__perispomeni__prosgegrammeni,s_let_a_alpha__dasia__perispomeni__ypogegrammeni]", {
+			unicode: ["1F8F", "1F87"],
+			options: { useLetterLocale: "alpha$" },
+			recipe: [[
+				"$${dasia}${perispomeni}${prosgegrammeni}",
+				"$${perispomeni}${dasia}${prosgegrammeni}",
+				"${hel_c_let_a_alpha__dasia}${perispomeni}${prosgegrammeni}",
+				"${dasia}${perispomeni}${prosgegrammeni}$",
+				"${perispomeni}${dasia}${prosgegrammeni}$",
+				"${perispomeni}${prosgegrammeni}${hel_c_let_a_alpha__dasia}",
+			], []],
+			recipePush: [{
+				1: "$${dasia_and_perispomeni}${prosgegrammeni}",
+				2: "$${prosgegrammeni}${dasia_and_perispomeni}",
+				3: "${hel_c_let_a_alpha__prosgegrammeni}${dasia_and_perispomeni}",
+				4: "${dasia_and_perispomeni}${prosgegrammeni}$",
+				5: "${prosgegrammeni}${dasia_and_perispomeni}$",
+				6: "${dasia_and_perispomeni}${hel_c_let_a_alpha__prosgegrammeni}",
+			}, {
+				1: "$${dasia_and_perispomeni}${ypogegrammeni}",
+				2: "$${ypogegrammeni}${dasia_and_perispomeni}",
+				3: "${hel_s_let_a_alpha__ypogegrammeni}${dasia_and_perispomeni}",
+				4: "${dasia_and_perispomeni}${ypogegrammeni}$",
+				5: "${ypogegrammeni}${dasia_and_perispomeni}$",
+				6: "${dasia_and_perispomeni}${hel_s_let_a_alpha__ypogegrammeni}",
+			}],
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
 		;
@@ -5257,7 +5632,7 @@ LibRegistrate(this) {
 			tags: ["voiceless bilabial fricative", "глухой губно-губной спирант"],
 			groups: ["Latino-Hellenic", "IPA"],
 			options: {
-				layoutTitles: True, altLayoutKey: ">! $",
+				layoutTitles: True, altLayoutKey: ">! $", fastKey: "<! $?Secondary",
 				useLetterLocale: True
 			},
 			recipe: ["phi"],
@@ -5275,7 +5650,7 @@ LibRegistrate(this) {
 		"lat_[c,s]_let_h_chi", {
 			unicode: ["A7B3", "AB53"],
 			groups: ["Latino-Hellenic"],
-			options: { useLetterLocale: True },
+			options: { useLetterLocale: True, fastKey: "<! $?Secondary" },
 			recipe: ["/chi/"],
 		},
 		"lat_[c,s]_let_i_iota", {
@@ -11576,6 +11951,12 @@ LibRegistrate(this) {
 			groups: ["Extra Symbolistics"],
 			recipe: ["${hel_c_let_h_chi}${hel_c_let_r_rho}"]
 		},
+		"symbolistics_palmula", {
+			unicode: "2E19",
+			tags: ["Palmula", "Ramulus", "Palm Branch", "Пальмула", "Пальмовая Ветвь", "Хи-Ро"],
+			groups: ["Extra Symbolistics"],
+			recipe: ["palm", "пальм"]
+		},
 		"symbolistics_rod_of_asclepius", {
 			unicode: "2695",
 			tags: ["rod of Asclepius", "посох Асклепия"],
@@ -11699,7 +12080,7 @@ LibRegistrate(this) {
 			unicode: "1F714",
 			tags: ["alchemical salt", "archaic astrological Earth", "алхимическая соль", "архаичное астрологическая Земля"],
 			groups: ["Alchemical"],
-			recipe: ["alc salt", "astrol arc Earth"],
+			recipe: ["alc salt", "ast arc Earth"],
 		},
 		"alchemical_potassium_nitrate", {
 			unicode: "1F715",
@@ -11788,97 +12169,97 @@ LibRegistrate(this) {
 			unicode: "1F728",
 			tags: ["alchemical copper acetate", "alchemical aes viride", "astrological Earth", "алхимический ацетат меди", "астрологическая Земля"],
 			groups: ["Astrology"],
-			recipe: ["astrol Earth", "alc cop acetate"],
+			recipe: ["ast Earth", "alc cop acetate"],
 		},
 		"astrological_neptune", {
 			unicode: "2646",
 			tags: ["astrological Neptune", "астрологический Нептун"],
 			groups: ["Astrology"],
-			recipe: ["astrol Neptune"],
+			recipe: ["ast Neptune"],
 		},
 		"astrological_uranus", {
 			unicode: "2645",
 			tags: ["astrological Uranus", "астрологический Уран"],
 			groups: ["Astrology"],
-			recipe: ["astrol Uranus"],
+			recipe: ["ast Uranus"],
 		},
 		"astrological_pluto_1", {
 			unicode: "2647",
 			tags: ["astrological Pluto-1", "астрологическая Плутон-1"],
 			groups: ["Astrology"],
-			recipe: ["astrol Pluto-1"],
+			recipe: ["ast Pluto-1"],
 		},
 		"astrological_pluto_2", {
 			unicode: "2BD3",
 			tags: ["astrological Pluto-2", "астрологическая Плутон-2"],
 			groups: ["Astrology"],
-			recipe: ["astrol Pluto-2"],
+			recipe: ["ast Pluto-2"],
 		},
 		"astrological_pluto_3", {
 			unicode: "2BD4",
 			tags: ["astrological Pluto-3", "астрологическая Плутон-3"],
 			groups: ["Astrology"],
-			recipe: ["astrol Pluto-3"],
+			recipe: ["ast Pluto-3"],
 		},
 		"astrological_pluto_4", {
 			unicode: "2BD5",
 			tags: ["astrological Pluto-4", "астрологическая Плутон-4"],
 			groups: ["Astrology"],
-			recipe: ["astrol Pluto-4"],
+			recipe: ["ast Pluto-4"],
 		},
 		"astrological_pluto_5", {
 			unicode: "2BD6",
 			tags: ["astrological Pluto-5", "астрологическая Плутон-5"],
 			groups: ["Astrology"],
-			recipe: ["astrol Pluto-5"],
+			recipe: ["ast Pluto-5"],
 		},
 		"astrological_transpluto", {
 			unicode: "2BD7",
 			tags: ["astrological Transpluto", "астрологическая Трансплутон"],
 			groups: ["Astrology"],
-			recipe: ["astrol Transpluto"],
+			recipe: ["ast Transpluto"],
 		},
 		"astrological_vesta", {
 			unicode: "26B6",
 			tags: ["astrological Vesta", "астрологическая Веста"],
 			groups: ["Astrology"],
-			recipe: ["astrol Vesta"],
+			recipe: ["ast Vesta"],
 		},
 		"astrological_chiron", {
 			unicode: "26B7",
 			tags: ["astrological Chiron", "астрологическая Хирон"],
 			groups: ["Astrology"],
-			recipe: ["astrol Chiron"],
+			recipe: ["ast Chiron"],
 		},
 		"astrological_proserpina", {
 			unicode: "2BD8",
 			tags: ["astrological Proserpina", "астрологическая Прозерпина"],
 			groups: ["Astrology"],
-			recipe: ["astrol Proserpina"],
+			recipe: ["ast Proserpina"],
 		},
 		"astrological_astraea", {
 			unicode: "2BD9",
 			tags: ["astrological Astraea", "астрологическая Астрея"],
 			groups: ["Astrology"],
-			recipe: ["astrol Astraea"],
+			recipe: ["ast Astraea"],
 		},
 		"astrological_hygiea", {
 			unicode: "2BDA",
 			tags: ["astrological Hygiea", "астрологическая Гигея"],
 			groups: ["Astrology"],
-			recipe: ["astrol Hygiea"],
+			recipe: ["ast Hygiea"],
 		},
 		"astrological_pholus", {
 			unicode: "2BDB",
 			tags: ["astrological Pholus", "астрологическая Фол"],
 			groups: ["Astrology"],
-			recipe: ["astrol Pholus"],
+			recipe: ["ast Pholus"],
 		},
 		"astrological_nessus", {
 			unicode: "2BDC",
 			tags: ["astrological Nessus", "астрологическая Несс"],
 			groups: ["Astrology"],
-			recipe: ["astrol Nessus"],
+			recipe: ["ast Nessus"],
 		},
 		;
 		;
@@ -11889,19 +12270,19 @@ LibRegistrate(this) {
 			unicode: "2641",
 			tags: ["alchemical antimony trisulfide", "alchemical stibnite", "astronomical Earth", "алхимический стибнит", "алхимический сульфид сурьмы", "астрономическая Земля"],
 			groups: ["Astronomy"],
-			recipe: ["astron Earth", "alc stibnite"],
+			recipe: ["asn Earth", "alc stibnite"],
 		},
 		"astronomical_neptune", {
 			unicode: "2BC9",
 			tags: ["astronomical Neptune", "астрономический Нептун"],
 			groups: ["Astrology"],
-			recipe: ["astron Neptune"],
+			recipe: ["asn Neptune"],
 		},
 		"astronomical_uranus", {
 			unicode: "26E2",
 			tags: ["astronomical Uranus", "астрономический Уран"],
 			groups: ["Astronomy"],
-			recipe: ["astron Uranus"],
+			recipe: ["asn Uranus"],
 		},
 		;
 		;

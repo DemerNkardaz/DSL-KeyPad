@@ -22,6 +22,7 @@ Class ChrEntry {
 		layoutTitles: False,
 		referenceLocale: "",
 		useSelfPrefixesOnReferenceLocale: True,
+		localeCombineAnd: False,
 		legend: "",
 		altLayoutKey: "",
 		showOnAlt: "",
@@ -45,7 +46,7 @@ Class ChrEntry {
 		customs: "",
 		font: "",
 	}
-	data := { script: "", case: "", type: "", letter: "", postfixes: [] }
+	data := { script: "", case: "", type: "", letter: "", endPart: "", postfixes: [] }
 	variant := ""
 	variantPos := 1
 	isXCompose := False
@@ -60,6 +61,8 @@ Class ChrEntry {
 			} else if value is Map {
 				this.%key% := value.Clone()
 			} else if value is Object {
+				if !this.HasOwnProp(key)
+					this.%key% := {}
 				for subKey, subValue in value.OwnProps() {
 					this.%key%.%subKey% := subValue
 				}
@@ -234,6 +237,12 @@ Class ChrLib {
 						)
 				}
 
+				if entry.HasOwnProp("recipePush")
+					&& entry.recipePush is Array
+					&& entry.recipePush[i] is Object {
+					entries.e%i%_%variantName%.recipePush := entry.recipePush[i].Clone()
+				}
+
 				if entry.sequence.Length > 0 && entry.sequence[i] is Array
 					entries.e%i%_%variantName%.sequence := entry.sequence[i].Clone()
 
@@ -252,6 +261,7 @@ Class ChrLib {
 
 			for entryName, entry in entries.OwnProps() {
 				noIndexName := RegExReplace(entryName, "i)^e(\d+)_(.*?)", "$2")
+
 				this.ProcessRecipe(entry, splitVariants)
 				this.AddEntry(noIndexName, ChrEntry(entry, noIndexName))
 			}
@@ -775,7 +785,7 @@ Class ChrLib {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
 			if isSensitive
 				return searchQuery == tag
-			return searchQuery ~= nonSensitiveMark tag "$"
+			return searchQuery = tag
 		}
 
 		checkTagPartial(tag) {
@@ -861,7 +871,6 @@ Class ChrLib {
 
 	static ProcessReferences(targetEntry, sourceEntry, index) {
 		for reference in ["recipe", "tags", "groups"] {
-
 			if sourceEntry.%reference%.Length > 0 && sourceEntry.%reference%[sourceEntry.%reference%.Length] is Array {
 				if sourceEntry.%reference%[index].Length > 0 {
 					targetEntry.%reference% := sourceEntry.%reference%[index].Clone()
@@ -904,10 +913,12 @@ Class ChrLib {
 				targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\%self\%", Util.UnicodeToChar(targetEntry.unicode))
 
 				if InStr(targetEntry.options.%key%, "${") || InStr(targetEntry.options.%key%, "*?") {
+					endPart := targetEntry.data.endPart != "" ? "_" targetEntry.data.endPart : ""
 					while RegExMatch(targetEntry.options.%key%, "\[(.*?)\]", &varMatch) {
 						splittedVariants := StrSplit(varMatch[1], ",")
 						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
 						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\@", targetEntry.data.letter, , 1)
+						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\?\?", endPart, , 1)
 						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\*\?")
 					}
 
@@ -939,9 +950,19 @@ Class ChrLib {
 					if ["ligature", "digraph"].HasValue(entry.data.type) {
 						entry.recipe := [
 							"$${" entry.data.postfixes[1] "}",
-							"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@}${" entry.data.postfixes[1] "}",
+							(
+								"${" SubStr(entry.data.script, 1, 3)
+								"_[" splitVariants.ToString(",") "]_"
+								SubStr(entry.data.type, 1, 3)
+								"_@??}${" entry.data.postfixes[1] "}"
+							),
 							"${" entry.data.postfixes[1] "}$",
-							"${" entry.data.postfixes[1] "}${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@}",
+							(
+								"${" entry.data.postfixes[1] "}"
+								"${" SubStr(entry.data.script, 1, 3)
+								"_[" splitVariants.ToString(",") "]_"
+								SubStr(entry.data.type, 1, 3) "_@??}"
+							),
 						]
 					} else {
 						entry.recipe := [
@@ -949,13 +970,48 @@ Class ChrLib {
 							"${" entry.data.postfixes[1] "}$",
 						]
 					}
-				} else {
+				} else if entry.data.postfixes.Length = 2 {
 					entry.recipe := [
-						"$${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
-						"${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)",
-						"${(" entry.data.postfixes[1] "|" entry.data.postfixes[2] ")}$(*)$",
-						"${" entry.data.postfixes[1] "}${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__" entry.data.postfixes[2] "}",
-						"${" entry.data.postfixes[2] "}${" SubStr(entry.data.script, 1, 3) "_[" splitVariants.ToString(",") "]_" SubStr(entry.data.type, 1, 3) "_@__" entry.data.postfixes[1] "}",
+						(
+							"$${(" entry.data.postfixes[1]
+							"|" entry.data.postfixes[2] ")}$(*)"
+						),
+						(
+							"${" SubStr(entry.data.script, 1, 3)
+							"_[" splitVariants.ToString(",") "]_"
+							SubStr(entry.data.type, 1, 3) "_@??__("
+							entry.data.postfixes[1] "|"
+							entry.data.postfixes[2] ")}$(*)"
+						),
+						(
+							"${(" entry.data.postfixes[1] "|"
+							entry.data.postfixes[2] ")}$(*)$"
+						),
+						(
+							"${" entry.data.postfixes[1] "}"
+							"${" SubStr(entry.data.script, 1, 3)
+							"_[" splitVariants.ToString(",") "]_"
+							SubStr(entry.data.type, 1, 3) "_@??__"
+							entry.data.postfixes[2] "}"
+						),
+						(
+							"${" entry.data.postfixes[2] "}"
+							"${" SubStr(entry.data.script, 1, 3)
+							"_[" splitVariants.ToString(",") "]_"
+							SubStr(entry.data.type, 1, 3) "_@??__"
+							entry.data.postfixes[1] "}"
+						),
+					]
+				} else if entry.data.postfixes.Length = 3 {
+					entry.recipe := [
+						(
+							"$${" entry.data.postfixes[1] "}"
+							"${" entry.data.postfixes[2] "}${" entry.data.postfixes[3] "}"
+						),
+						(
+							"${" entry.data.postfixes[1] "}"
+							"${" entry.data.postfixes[2] "}${" entry.data.postfixes[3] "}$"
+						),
 					]
 				}
 			} else if ["ligature", "digraph"].HasValue(entry.data.type) && entry.data.postfixes.Length = 0 {
@@ -963,11 +1019,31 @@ Class ChrLib {
 			}
 		}
 
+		if entry.HasOwnProp("recipePush") && entry.data.script = "hellenic" && entry.data.postfixes.Length > 1 {
+			if entry.recipePush is Array {
+				if entry.recipePush.Length > 0
+					for recipe in entry.recipePush
+						entry.recipe.Push(recipe)
+
+			} else if entry.recipePush is Object {
+				for i, r in entry.recipePush.OwnProps() {
+					if r is Array {
+						for recipe in r
+							entry.recipe.InsertAt(i, recipe)
+					} else
+						entry.recipe.InsertAt(i, r)
+				}
+			}
+		}
+
 		if entry.recipe.Length > 0 {
 			tempRecipe := entry.recipe.Clone()
 			for i, recipe in tempRecipe {
+				endPart := entry.data.endPart != "" ? "_" entry.data.endPart : ""
+
 				tempRecipe[i] := RegExReplace(recipe, "\[.*?\]", SubStr(entry.data.case, 1, 1))
 				tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry.data.letter)
+				tempRecipe[i] := RegExReplace(tempRecipe[i], "\?\?", endPart)
 				if RegExMatch(tempRecipe[i], "\/(.*?)\/", &match) && match[1] != "" {
 					tempRecipe[i] := RegExReplace(tempRecipe[i], "\/(.*?)\/", entry.data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
 				}
@@ -1408,7 +1484,7 @@ Class ChrLib {
 		for replace in staticReplaces {
 			output := StrReplace(output, replace, notationKey(replace))
 		}
-		while RegExMatch(output, "([a-zA-Zа-яА-ЯёЁ0-9<>``,\'\`";\~\%\-\=\\/]+|[\x{2190}-\x{2195}]+|[\x{0100}-\x{017F}]+|[\x{0080}-\x{00FF}]+|[\x{1E00}-\x{1EFF}]+)(\s|$|\?|,\s)", &match) {
+		while RegExMatch(output, "([a-zA-Zа-яА-ЯёЁ0-9<>``,\'\`";\~\%\-\=\\/]+|[\x{2190}-\x{2195}]+|[\x{0100}-\x{017F}]+|[\x{0080}-\x{00FF}]+|[\x{1E00}-\x{1EFF}]+|[\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(\s|$|\?|,\s)", &match) {
 			output := RegExReplace(output, RegExEscape(match[1]), notationKey(match[1]))
 		}
 
@@ -1469,6 +1545,7 @@ Class ChrLib {
 				"gly", "glyph"
 			),
 			letter: "",
+			endPart: "",
 			postfixes: []
 		}
 
@@ -1530,6 +1607,11 @@ Class ChrLib {
 				decomposedName.type := decomposedName.type[rawCharacterName[3 - shift]]
 				decomposedName.letter := (["capital", "small_capital", "neutral"].HasValue(decomposedName.case) ? StrUpper(rawCharacterName[4 - shift]) : rawCharacterName[4 - shift])
 
+				letterIndex := 4 - shift
+				pattern := "i)^(?:[^_]+_){" (letterIndex - 1) "}[^_]+_([^_]+(?:_[^_]+)*)(?:__|$)"
+				endPartSet := RegExMatch(entryName, pattern, &m) ? m[1] : ""
+				decomposedName.endPart := endPartSet
+
 				diacriticSet := InStr(entryName, "__") ? RegExReplace(entryName, "i)^.*?__(.*)", "$1") : ""
 				decomposedName.postfixes := StrLen(diacriticSet) > 0 ? StrSplit(diacriticSet, "__") : []
 
@@ -1549,6 +1631,7 @@ Class ChrLib {
 				case: "",
 				type: "",
 				letter: "",
+				endPart: "",
 				postfixes: [],
 				variant: ""
 			}

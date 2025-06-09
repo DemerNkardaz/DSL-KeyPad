@@ -126,8 +126,7 @@ Class ChrLegend {
 		descriptionH := groupBoxH - descriptionY - 25
 
 		tabList := [
-			Locale.Read("gui_legend_ipa"),
-			Locale.Read("gui_legend_transcription"),
+			Locale.ReadMulti("gui_legend_ipa", "and", "gui_legend_transcription"),
 			Locale.Read("gui_legend_names"),
 			Locale.Read("gui_legend_data"),
 		]
@@ -223,10 +222,20 @@ Class ChrLegend {
 
 		tabOpts := {
 			ipa: {
-				lv: Format("vIPA_LV w{} h{} x{} y{} +NoSort -Multi", ipaLVW, ipaLVH, ipaLVX, ipaLVY),
+				lv: Format("vIPA_LV w{} h{} x{} y{} +NoSort -Multi -Hdr",
+					ipaLVW,
+					(ipaLVH // 2) - gap,
+					ipaLVX,
+					ipaLVY
+				),
 			},
 			trans: {
-				lv: Format("vTrans_LV w{} h{} x{} y{} +NoSort -Multi", ipaLVW, ipaLVH, ipaLVX, ipaLVY),
+				lv: Format("vTrans_LV w{} h{} x{} y{} +NoSort -Multi -Hdr",
+					ipaLVW,
+					ipaLVH // 2,
+					ipaLVX,
+					ipaLVY + (ipaLVH // 2) + gap
+				),
 			},
 			names: {
 				lv: Format("vNames_LV w{} h{} x{} y{} +NoSort -Multi", ipaLVW, ipaLVH, ipaLVX, ipaLVY),
@@ -253,15 +262,13 @@ Class ChrLegend {
 
 			ipaLV := legendPanel.AddListView(tabOpts.ipa.lv, lvHeaders)
 
-			tabs.UseTab(2)
-
 			transLV := legendPanel.AddListView(tabOpts.trans.lv, lvHeaders)
 
-			tabs.UseTab(3)
+			tabs.UseTab(2)
 
 			namesLV := legendPanel.AddListView(tabOpts.names.lv, lvHeaders)
 
-			tabs.UseTab(4)
+			tabs.UseTab(3)
 
 			entry := legendPanel.AddText(tabOpts.data.entry, labels.entry)
 			entry.SetFont("s" (11) " c333333 bold")
