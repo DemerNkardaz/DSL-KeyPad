@@ -50,7 +50,7 @@ bindingMaps := Map(
 					"<^>!>+", "hel_[c,s]_let_a_alpha__macron",
 					"<^>!<+>+", "hel_[c,s]_let_a_alpha__vrachy",
 					"<^>!<!", "hel_[c,s]_let_a_alpha__varia",
-					"<^>!<!<+", "hel_[c,s]_let_a_alpha__prosgegrammeni",
+					"<^>!<!<+", "hel_[c_let_a_alpha__prosgegrammeni,s_let_a_alpha__ypogegrammeni]",
 					"<^>!<!<+>+", "hel_[c,s]_let_a_alpha__oxia",
 					"<^<!", "tonos",
 				),
@@ -65,6 +65,11 @@ bindingMaps := Map(
 				),
 				"Ε", Map(
 					">+", "hel_s_sym_e_epsilon_lunate",
+					"<!", "hel_[c,s]_let_e_epsilon__tonos",
+					"<^>!", "hel_[c,s]_let_e_epsilon__dasia",
+					"<^>!<+", "hel_[c,s]_let_e_epsilon__psili",
+					"<^>!<!", "hel_[c,s]_let_e_epsilon__varia",
+					"<^>!<!<+>+", "hel_[c,s]_let_e_epsilon__oxia",
 					"<^<!", "dasia_and_perispomeni",
 					"<^<!<+", "psili_and_perispomeni",
 				),
@@ -72,9 +77,27 @@ bindingMaps := Map(
 					"<^<!", "dialytika_and_tonos",
 					"<^<!<+", "dialytika_and_oxia",
 				),
-				"Η", Map("<^>!", "hel_[c,s]_let_h_heta"),
+				"Η", Map(
+					"<!", "hel_[c,s]_let_h_eta__tonos",
+					"<^>!", "hel_[c,s]_let_h_eta__dasia",
+					"<^>!<+", "hel_[c,s]_let_h_eta__psili",
+					"<^>!>+", "hel_[c,s]_let_h_eta__macron",
+					"<^>!<!", "hel_[c,s]_let_h_eta__varia",
+					"<^>!<!<+", "hel_[c_let_h_eta__prosgegrammeni,s_let_h_eta__ypogegrammeni]",
+					"<^>!<!<+>+", "hel_[c,s]_let_h_eta__oxia",
+				),
 				"Θ", Map(">+", "hel_[c,s]_sym_t_theta"),
-				"Ι", Map("<^>!", "hel_[c,s]_let_i_jot"),
+				"Ι", Map(
+					"<+", "hel_[c,s]_let_i_jot",
+					">+", "hel_[c,s]_let_i_iota__dasia",
+					"<!", "hel_[c,s]_let_i_iota__tonos",
+					"<^>!", "hel_[c,s]_let_i_iota__dialytika",
+					"<^>!<+", "hel_[c,s]_let_i_iota__psili",
+					"<^>!>+", "hel_[c,s]_let_i_iota__macron",
+					"<^>!<+>+", "hel_[c,s]_let_i_iota__vrachy",
+					"<^>!<!", "hel_[c,s]_let_i_iota__varia",
+					"<^>!<!<+>+", "hel_[c,s]_let_i_iota__oxia",
+				),
 				"Κ", Map(
 					">+", "hel_s_sym_k_kappa",
 					"<^<!", "koronis",
@@ -88,12 +111,21 @@ bindingMaps := Map(
 				"Ξ", Map(),
 				"Ο", Map(
 					"<^<!", "oxia",
+					"<!", "hel_[c,s]_let_o_omicron__tonos",
+					"<^>!", "hel_[c,s]_let_o_omicron__dasia",
+					"<^>!<+", "hel_[c,s]_let_o_omicron__psili",
+					"<^>!<!", "hel_[c,s]_let_o_omicron__varia",
+					"<^>!<!<+>+", "hel_[c,s]_let_o_omicron__oxia",
 				),
 				"Π", Map(
 					">+", "hel_s_sym_p_pi",
 					"<^<!", "perispomeni",
 				),
-				"Ρ", Map(">+", "hel_s_sym_r_rho"),
+				"Ρ", Map(
+					">+", "hel_s_sym_r_rho",
+					"<^>!", "hel_[c,s]_let_r_rho__dasia",
+					"<^>!<+", "hel_[s]_let_r_rho__psili",
+				),
 				"Σ", Map(
 					">+", "hel_[c,s]_sym_s_sigma_lunate",
 					"<!", "hel_[c,s]_let_s_san",
@@ -105,15 +137,32 @@ bindingMaps := Map(
 				"Τ", Map("<^>!", "hel_[c,s]_let_t_theta"),
 				"Υ", Map(
 					"<^<!", "[pros,ypo]gegrammeni",
+					">+", "hel_[c,s]_let_y_upsilon__dasia",
+					"<!", "hel_[c,s]_let_y_upsilon__tonos",
+					"<^>!", "hel_[c,s]_let_y_upsilon__dialytika",
+					"<^>!<+", "hel_[s]_let_y_upsilon__psili",
+					"<^>!>+", "hel_[c,s]_let_y_upsilon__macron",
+					"<^>!<+>+", "hel_[c,s]_let_y_upsilon__vrachy",
+					"<^>!<!", "hel_[c,s]_let_y_upsilon__varia",
+					"<^>!<!<+>+", "hel_[c,s]_let_y_upsilon__oxia",
 				),
 				"Φ", Map(">+", "hel_s_sym_f_phi"),
 				"Χ", Map(
+					"<!", "hel_[c,s]_let_h_heta",
 					"<^<!", "dialytika_and_varia",
 					"<^<!<+", "dialytika_and_perispomeni",
 				),
 				"Ψ", Map(),
 				"Ω", Map(
 					"<^<!", "varia",
+					"<!", "hel_[c,s]_let_o_omega__tonos",
+					"<^>!", "hel_[c,s]_let_o_omega__dasia",
+					"<^>!<+", "hel_[c,s]_let_o_omega__psili",
+					"<^>!>+", "hel_[c,s]_let_o_omega__macron",
+					"<^>!<+>+", "hel_[c,s]_let_o_omega__vrachy",
+					"<^>!<!", "hel_[c,s]_let_o_omega__varia",
+					"<^>!<!<+", "hel_[c_let_o_omega__prosgegrammeni,s_let_o_omega__ypogegrammeni]",
+					"<^>!<!<+>+", "hel_[c,s]_let_o_omega__oxia",
 				),
 				"Ϝ", Map(
 					"<^>!", "hel_[c,s]_let_w_digamma_pamphylian",
@@ -263,7 +312,7 @@ bindingMaps := Map(
 					"<+", ["germanic_runic_n_rune_n_futhork_ing"],
 					"<^>!<+", ["germanic_runic_n_rune_n_younger_futhark_naudr_short_twig"],
 					"<^>!<!", ["germanic_runic_n_rune_n_medieval_en"],
-					"<^>!<!+", ["germanic_runic_n_rune_n_medieval_eng"],
+					"<^>!<!<++", ["germanic_runic_n_rune_n_medieval_eng"],
 				),
 				"O", Map(
 					"<+", ["germanic_runic_n_rune_o_futhork_os"],
@@ -2231,6 +2280,7 @@ bindingMaps := Map(
 				"<^>!", "inverted_exclamation",
 				"<^>!<+", "double_exclamation_question",
 				"<^>!>+", "double_exclamation",
+				">+", "medieval_exclamation",
 				">+:Caps", "interrobang[_inverted,]",
 			),
 			"2", Map(
@@ -2264,11 +2314,12 @@ bindingMaps := Map(
 				"<^>!", "inverted_question",
 				"<^>!>+", "double_question",
 				"<^>!<+", "double_question_exclamation",
-				"<^>!<!", "reversed_question"
+				"<^>!<!", "reversed_question",
+				">+", "medieval_question",
 			),
 			"8", Map(
 				"<^>!", "multiplication",
-				"<^>!<!", "infinity"
+				"<^>!<!", "infinity",
 			),
 			"9", Map(
 				"<^>!", "left_chevron",
@@ -2324,13 +2375,17 @@ bindingMaps := Map(
 			"Backslash", Map(
 				"<^>!", "grapheme_joiner",
 			),
+			"Semicolon", Map(
+				"<^>!", ["semicolon_[turned,reversed]"],
+			),
 			"Comma", Map(
 				"<^>!", ["quote_left_double"],
 				"<^>!<+", ["quote_left"],
 				"<^>!>+", ["quote_low_9_double"],
 				"<^>!<+>+", ["quote_low_9"],
 				"<^>!<!", ["quote_angle_left_double"],
-				"<^>!<!<+", ["quote_angle_left"]
+				"<^>!<!<+", ["quote_angle_left"],
+				">+", "medieval_comma",
 			),
 			"Dot", Map(
 				"<^>!", ["quote_right_double"],
