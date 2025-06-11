@@ -591,6 +591,15 @@ Class ChrLib {
 		return output
 	}
 
+	static GetIndexedMap() {
+		output := Map()
+
+		for k, v in this.entries.OwnProps()
+			output.Set(v.index, k)
+
+		return output
+	}
+
 	static GeneratePermutations(items) {
 		if items.Length = 1 {
 			return [items[1]]
@@ -759,6 +768,8 @@ Class ChrLib {
 	}
 
 	static Search(searchQuery) {
+		indexedEntries := this.GetIndexedMap()
+
 		nonSensitiveMark := "i)"
 		isSensitive := SubStr(searchQuery, 1, 1) = "!"
 		if isSensitive {
@@ -770,9 +781,8 @@ Class ChrLib {
 
 		searchQuery := RegExReplace(searchQuery, "\:\:(.*?)$", "")
 
-		if this.entries.HasOwnProp(searchQuery) {
+		if this.entries.HasOwnProp(searchQuery)
 			return this.Get(searchQuery, True, Auxiliary.inputMode, alteration)
-		}
 
 		isHasExpression := RegExMatch(searchQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
 
@@ -808,61 +818,35 @@ Class ChrLib {
 			return splitSearchQuery.Length > 0
 		}
 
-		checkTagLowAcc(tag) {
+		checkTagLowAccSequental(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
-			if isSensitive
-				return Util.HasAllCharacters(tag, nonSensitiveMark searchQuery)
+			return Util.HasSequentialCharacters(tag, searchQuery, nonSensitiveMark = "")
 		}
 
-		if isHasExpression {
-			for entryName, entry in this.entries.OwnProps() {
+		checkTagLowAcc(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
+			return Util.HasAllCharacters(tag, nonSensitiveMark searchQuery)
+		}
+
+		conditions := [
+			(tag) => (isHasExpression ? checkTagByUserRegEx(tag) : False),
+			(tag) => (checkTagExact(tag)),
+			(tag) => (checkTagPartial(tag) || checkTagSplittedPartial(tag)),
+			(tag) => (checkTagSplittedPartial(tag, False)),
+			(tag) => (checkTagLowAccSequental(tag)),
+			(tag) => (checkTagLowAcc(tag)),
+		]
+
+		for i, condition in conditions {
+			for j, entryName in indexedEntries {
+				entry := this.entries.%entryName%
+
 				if entry.tags.Length = 0
 					continue
 
-				for _, tag in entry.tags {
-					if checkTagByUserRegEx(tag)
+				for tag in entry.tags
+					if conditions[i](tag)
 						return this.Get(entryName, True, Auxiliary.inputMode, alteration)
-				}
-			}
-		}
-
-		for entryName, entry in this.entries.OwnProps() {
-			if entry.tags.Length = 0
-				continue
-
-			for _, tag in entry.tags {
-				if checkTagExact(tag)
-					return this.Get(entryName, True, Auxiliary.inputMode)
-			}
-		}
-
-		for entryName, entry in this.entries.OwnProps() {
-			if entry.tags.Length = 0
-				continue
-
-			for _, tag in entry.tags {
-				if checkTagPartial(tag) || checkTagSplittedPartial(tag)
-					return this.Get(entryName, True, Auxiliary.inputMode, alteration)
-			}
-		}
-
-		for entryName, entry in this.entries.OwnProps() {
-			if entry.tags.Length = 0
-				continue
-
-			for _, tag in entry.tags {
-				if checkTagSplittedPartial(tag, False)
-					return this.Get(entryName, True, Auxiliary.inputMode, alteration)
-			}
-		}
-
-		for entryName, entry in this.entries.OwnProps() {
-			if entry.tags.Length = 0
-				continue
-
-			for _, tag in entry.tags {
-				if checkTagLowAcc(tag)
-					return this.Get(entryName, True, Auxiliary.inputMode, alteration)
 			}
 		}
 
@@ -1346,7 +1330,7 @@ Class ChrLib {
 			refinedEntry.symbol.font := "Segoe UI Historic"
 		} else if entryName ~= "i)^(deseret)" {
 			refinedEntry.symbol.font := "Segoe UI Symbol"
-		} else if entryName ~= "i)^(cirth_runic)" || entryName ~= "(franks_casket)" {
+		} else if entryName ~= "i)^(cirth_runic|tolkien_runic)" || entryName ~= "(franks_casket)" {
 			refinedEntry.symbol.font := "Catrinity"
 		}
 
@@ -1497,6 +1481,7 @@ Class ChrLib {
 		"glagolitic",
 		"germanic_runic",
 		"cirth_runic",
+		"tolkien_runic",
 		"gothic",
 		"old_hungarian",
 		"old_italic",

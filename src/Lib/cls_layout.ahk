@@ -432,7 +432,8 @@ Class KeyboardBinder {
 	static disabledByUser := False
 	static ligaturedBinds := False
 	static numStyle := ""
-	static userLayoutsNames := []
+	static userLayoutNames := Map("latin", [], "cyrillic", [], "hellenic", [])
+	static layoutNames := Map("latin", [], "cyrillic", [], "hellenic", [])
 	static userBindings := []
 
 	static __New() {
@@ -445,6 +446,11 @@ Class KeyboardBinder {
 			if !DirExist(path)
 				DirCreate(path)
 		}
+
+		for script in this.layoutNames.Keys()
+			for k, v in this.layouts.%script%
+				if !this.layoutNames[script].HasValue(k)
+					this.layoutNames[script].Push(k)
 
 		this.UserLayouts()
 		this.UserBinds()
@@ -642,7 +648,7 @@ Class KeyboardBinder {
 		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 		layout := this.GetCurrentLayoutMap()
 		output := Map()
-		capsOnlyKeys := []
+		restrictKeys := []
 
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
@@ -673,6 +679,7 @@ Class KeyboardBinder {
 								"Lang", isCyrillicKey ? [["", ""], binds] : [binds, ["", ""]],
 								"LangReverseCase", isCyrillicKey ? [["", ""], binds, True] : [binds, ["", ""], True],
 								"LangFlat", binds is Array && binds.Length == 2 ? [binds[1], binds[2]] : [binds],
+								"Flat", binds
 							)
 
 							rule := binds is Array ? "Lang" : ""
@@ -684,8 +691,8 @@ Class KeyboardBinder {
 							interCombo := RegExReplace(interCombo, keyLetter, scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
 
-							if rule = "Caps"
-								capsOnlyKeys.Push(interCombo)
+							if rule = "Caps" || rule = "Flat"
+								restrictKeys.Push(interCombo)
 
 							if !output.Has(interCombo) || isHellenicKey {
 								try {
@@ -696,7 +703,7 @@ Class KeyboardBinder {
 								} catch as e {
 									MsgBox "Error in Origin Combo: " combo "`n Combo: " interCombo "`n Rule: " rule "`n Error: " e.Message
 								}
-							} else if !capsOnlyKeys.HasValue(interCombo) {
+							} else if !restrictKeys.HasValue(interCombo) {
 								if output.Get(interCombo).Length == 2 {
 									if output[interCombo] is Func {
 										interArr := [[], []]
@@ -860,6 +867,7 @@ Class KeyboardBinder {
 	}
 
 	static UserLayouts() {
+		handled := Map("latin", [], "cyrillic", [], "hellenic", [])
 		Loop Files this.autoimport.layouts "\*.ini" {
 			scriptName := IniRead(A_LoopFileFullPath, "info", "name", "")
 			scriptType := IniRead(A_LoopFileFullPath, "info", "type", "")
@@ -875,9 +883,20 @@ Class KeyboardBinder {
 				}
 
 				this.layouts.%scriptType%.Set(scriptName, LayoutList(scriptType, outputLayout))
-				this.userLayoutsNames.Push(scriptName)
+				handled[scriptType].Push(scriptName)
 			} else {
 				MsgBox("Invalid layout file: " A_LoopFileFullPath)
+			}
+		}
+
+		this.userLayoutNames := handled
+
+		for script in handled.Keys() {
+			for k, v in this.layouts.%script% {
+				if this.layoutNames[script].HasValue(k)
+					continue
+				if !this.userLayoutNames[script].HasValue(k)
+					this.layouts.%script%.Delete(k)
 			}
 		}
 	}
@@ -888,16 +907,19 @@ Class KeyboardBinder {
 	}
 
 	static UserBinds() {
+		handled := []
 		Loop Files this.autoimport.binds "\*.ini" {
 			name := IniRead(A_LoopFileFullPath, "info", "name", "")
 			bindsMap := Util.INIToMap(A_LoopFileFullPath)
 
 			if StrLen(name) > 0 && bindsMap.Has("binds") {
-				if !this.userBindings.HasValue(name)
-					this.userBindings.Push(name)
+				if !handled.HasValue(name)
+					handled.Push(name)
 				this.UserBindsHandler(bindsMap["binds"], name)
 			}
 		}
+
+		this.userBindings := handled
 
 		currentBindings := Cfg.Get("Active_User_Bindings", , "None")
 		if !this.userBindings.HasValue(currentBindings) && currentBindings != "None" {
@@ -935,6 +957,9 @@ Class KeyboardBinder {
 
 					if StrLen(currentSegment) > 0
 						interRef.Push(Trim(currentSegment))
+				} else {
+					if rulRef = ""
+						rulRef := ":Flat"
 				}
 
 				if StrLen(modRef) > 0 {

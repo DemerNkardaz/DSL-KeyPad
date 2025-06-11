@@ -100,6 +100,7 @@ bindingMaps := Map(
 				),
 				"Κ", Map(
 					">+", "hel_s_sym_k_kappa",
+					"<^>!", "hel_[c,s]_lig_k_kai",
 					"<^<!", "koronis",
 				),
 				"Κομμα", Map(
@@ -128,8 +129,9 @@ bindingMaps := Map(
 				),
 				"Σ", Map(
 					">+", "hel_[c,s]_sym_s_sigma_lunate",
-					"<!", "hel_[c,s]_let_s_san",
-					"<^>!", "hel_s_let_s_sigma_final",
+					"<+", "hel_[c,s]_lig_st_stigma",
+					"<!", "hel_s_let_s_sigma_final",
+					"<^>!", "hel_[c,s]_let_s_san",
 					"<^>!>+", "hel_[c,s]_let_s_sho",
 					"<^>!<!", "hel_[c,s]_let_s_sampi",
 					"<^>!<!<+", "hel_[c,s]_let_s_sampi_archaic",
@@ -300,7 +302,7 @@ bindingMaps := Map(
 					">+", ["germanic_runic_n_rune_k_futhork_calc"],
 					"<^>!", ["germanic_runic_n_rune_k_younger_futhark_kaun"],
 					"<^>!<!", ["germanic_runic_n_rune_k_medieval_open"],
-					"<^>!>+", ["cirth_runic_n_rune_k"],
+					"<^>!>+", ["tolkien_runic_n_rune_k"],
 				),
 				"L", Map("<^>!", ["germanic_runic_n_rune_l_later_younger_futhark"]),
 				"M", Map(
@@ -318,7 +320,7 @@ bindingMaps := Map(
 					"<+", ["germanic_runic_n_rune_o_futhork_os"],
 					"<^>!", ["germanic_runic_n_rune_o_younger_futhark_oss"],
 					"<^>!<+", ["germanic_runic_n_rune_o_younger_futhark_oss_short_twig"],
-					"<^>!>+", ["cirth_runic_n_rune_o_oo"],
+					"<^>!>+", ["tolkien_runic_n_rune_o_oo"],
 					"<^>!<!", ["germanic_runic_n_rune_o_medieval_on"],
 					"<^>!<!>+", ["germanic_runic_n_rune_o_medieval"],
 					"<^>!<!<+", ["germanic_runic_n_rune_o_franks_casket_os"],
@@ -328,7 +330,7 @@ bindingMaps := Map(
 					"<+", ["germanic_runic_n_rune_s_futhork_sigel"],
 					">+", ["germanic_runic_n_rune_s_futhork_stan"],
 					"<^>!<+", ["germanic_runic_n_rune_s_younger_futhark_sol_short_twig"],
-					"<^>!>+", ["cirth_runic_n_rune_s_sh"],
+					"<^>!>+", ["tolkien_runic_n_rune_s_sh"],
 				),
 				"T", Map(
 					">+", ["germanic_runic_n_rune_t_elder_futhark_thurisaz"],

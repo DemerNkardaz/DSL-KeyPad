@@ -516,7 +516,7 @@ Class Util {
 			WordSplit := StrSplit(pattern, " ")
 			for word in WordSplit {
 				if StrLen(word) < 3 {
-					pattern := "(^|" . WordBoundary . ")" . word . "($|" . WordBoundary . ")"
+					pattern := "(^|" WordBoundary ")" word "($|" WordBoundary ")"
 					if !RegExMatch(str, pattern)
 						return False
 				} else {
@@ -524,14 +524,25 @@ Class Util {
 						return False
 				}
 			}
-			return true
+			return True
 		} else {
 			for char in StrSplit(pattern) {
 				if !InStr(str, char)
 					return False
 			}
-			return true
+			return True
 		}
+	}
+
+	static HasSequentialCharacters(str, pattern, caseSense := False) {
+		pos := 1
+		for char in StrSplit(pattern) {
+			found := InStr(str, char, caseSense, pos)
+			if !found
+				return False
+			pos := found + 1
+		}
+		return True
 	}
 
 	static INIRenameSection(filePaths, oldSection, newSection) {

@@ -4519,7 +4519,15 @@ LibRegistrate(this) {
 		},
 		"hel_s_let_s_sigma_final", {
 			unicode: "03C2",
-			options: { altLayoutKey: ">! $" },
+			alterations: {
+				bold: "1D6D3",
+				italic: "1D70D",
+				italicBold: "1D747",
+				sansSerifBold: "1D781",
+				sansSerifItalicBold: "1D7BB",
+			},
+			options: { altLayoutKey: "<! $", useLetterLocale: "sigma$" },
+			symbol: { beforeLetter: "final" },
 		},
 		"hel_[c,s]_let_t_tau", {
 			unicode: ["03A4", "03C4"],
@@ -4643,7 +4651,7 @@ LibRegistrate(this) {
 		},
 		"hel_[c,s]_let_s_san", {
 			unicode: ["03FA", "03FB"],
-			options: { altLayoutKey: "<! $" },
+			options: { altLayoutKey: ">! $" },
 		},
 		"hel_[c,s]_let_s_sampi", {
 			unicode: ["03E1", "03E0"],
@@ -4759,10 +4767,12 @@ LibRegistrate(this) {
 		;
 		"hel_[c,s]_lig_st_stigma", {
 			unicode: ["03DA", "03DB"],
+			options: { altLayoutKey: "<+ Σ" },
 			recipe: ["${hel_[c,s]_let_s_sigma}${hel_[c,s]_let_t_tau}"]
 		},
 		"hel_[c,s]_lig_k_kai", {
 			unicode: ["03CF", "03D7"],
+			options: { altLayoutKey: ">! Κ" },
 			recipe: ["${hel_[c,s]_let_k_kappa}${hel_[c,s]_let_a_alpha}${hel_[c,s]_let_i_iota}"]
 		},
 		;
@@ -10082,17 +10092,17 @@ LibRegistrate(this) {
 			unicode: "16F8",
 			options: { altLayoutKey: ">!<!<+>+ $" },
 		},
-		"cirth_runic_n_rune_k", {
+		"tolkien_runic_n_rune_k", {
 			unicode: "16F1",
-			options: { altLayoutKey: ">!>+ $" },
+			options: { altLayoutKey: ">!>+ $", useLetterLocale: True },
 		},
-		"cirth_runic_n_rune_s_sh", {
+		"tolkien_runic_n_rune_s_sh", {
 			unicode: "16F2",
-			options: { altLayoutKey: ">!>+ $" },
+			options: { altLayoutKey: ">!>+ $", useLetterLocale: True },
 		},
-		"cirth_runic_n_rune_o_oo", {
+		"tolkien_runic_n_rune_o_oo", {
 			unicode: "16F3",
-			options: { altLayoutKey: ">!>+ $" },
+			options: { altLayoutKey: ">!>+ $", useLetterLocale: True },
 		},
 		"runic_single_punctuation", {
 			unicode: "16EB",

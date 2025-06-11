@@ -85,7 +85,7 @@ Class Cfg {
 		Run(this.ini)
 	}
 
-	static Editor() {
+	static Editor(xPos := 0, yPos := 0) {
 		autocheckOff := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
 		if !autocheckOff
 			Update.Check()
@@ -103,8 +103,8 @@ Class Cfg {
 			windowWidth := 450
 			windowHeight := 720
 
-			xPos := (screenWidth - windowWidth) / 2
-			yPos := screenHeight - windowHeight - 92
+			xPos := xPos = 0 ? (screenWidth - windowWidth) / 2 : xPos
+			yPos := yPos = 0 ? screenHeight - windowHeight - 92 : yPos
 
 			optionsPanel := Gui()
 			optionsPanel.title := this.optionsTitle
@@ -127,7 +127,12 @@ Class Cfg {
 			PostMessage(0x0153, -1, 15, languageSelector)
 
 			languageSelector.Text := Language.Get(, True)
-			languageSelector.OnEvent("Change", (CB, Zero) => Options.SwitchLanguage(CB))
+			languageSelector.OnEvent("Change", (CB, Zero) => (
+				Options.SwitchLanguage(CB),
+				this.EditorGUI.GetPos(&X, &Y, &W, &H),
+				this.EditorGUI.Destroy(),
+				this.Editor(X, Y)
+			))
 
 			layouSelectorTextY := 32
 			layouSelectorY := (add := 1) => layouSelectorTextY + (16 + add)
@@ -153,6 +158,15 @@ Class Cfg {
 			layoutCyrillicSelector.Text := Cfg.Get("Layout_Cyrillic")
 			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
 
+			layoutUpdate := optionsPanel.AddButton("vLayoutUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(23) - 1))
+			GuiButtonIcon(layoutUpdate, ImageRes, 229)
+			layoutUpdate.OnEvent("Click", (*) => (
+				KeyboardBinder.UserLayouts(),
+				this.EditorGUI.GetPos(&X, &Y, &W, &H),
+				this.EditorGUI.Destroy(),
+				this.Editor(X, Y)
+			))
+
 			bindingsList := KeyboardBinder.userBindings.Clone()
 			bindingsList.InsertAt(1, Locale.Read("gui_options_bindings_none"))
 			currentBindings := Cfg.Get("Active_User_Bindings", , "None")
@@ -164,6 +178,15 @@ Class Cfg {
 			PostMessage(0x0153, -1, 15, bindingsSelector)
 			bindingsSelector.Text := currentBindings
 			bindingsSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetBinds(CB.Text))
+
+			bindingsUpdate := optionsPanel.AddButton("vBindingsUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(32 * 3) - 1))
+			GuiButtonIcon(bindingsUpdate, ImageRes, 229)
+			bindingsUpdate.OnEvent("Click", (*) => (
+				KeyboardBinder.UserBinds(),
+				this.EditorGUI.GetPos(&X, &Y, &W, &H),
+				this.EditorGUI.Destroy(),
+				this.Editor(X, Y)
+			))
 
 			optionsPanel.AddText("vProfileLabel x" languageSelectorX(256 + 16) " y" languageSelectorY(-17) " w128 BackgroundTrans", Locale.Read("profile"))
 
@@ -337,7 +360,7 @@ Class Cfg {
 		}
 	}
 
-	static SubGUIs(guiName) {
+	static SubGUIs(guiName, xPos := 0, yPos := 0) {
 
 		RecipesConstructor() {
 			this.EditorSubGUIs.recipesTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes"),
@@ -349,8 +372,8 @@ Class Cfg {
 			windowWidth := 550
 			windowHeight := 450
 
-			xPos := (screenWidth - windowWidth) / 2
-			yPos := screenHeight - windowHeight - 92
+			xPos := xPos = 0 ? (screenWidth - windowWidth) / 2 : xPos
+			yPos := yPos = 0 ? screenHeight - windowHeight - 92 : yPos
 
 			if IsGuiOpen(this.optionsTitle) && WinActive(this.optionsTitle) {
 				WinGetPos(&optx, &opty, &optw, &opth)
@@ -416,7 +439,12 @@ Class Cfg {
 
 			updateAllBtn := recipesPanel.AddButton("x" addRemX(288) " y" addRemY " w32 h32")
 			GuiButtonIcon(updateAllBtn, ImageRes, 229)
-			updateAllBtn.OnEvent("Click", (*) => MyRecipes.Update())
+			updateAllBtn.OnEvent("Click", (*) => (
+				MyRecipes.Update(),
+				recipesPanel.GetPos(&X, &Y, &W, &H),
+				recipesPanel.Destroy(),
+				this.SubGUIs("Recipes", X, Y)
+			))
 
 			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return recipesPanel

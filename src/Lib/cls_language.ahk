@@ -307,7 +307,7 @@ Class Locale {
 
 		cyrillicTasgScriptAtStart := False
 
-		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic"]) {
+		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic"]) {
 			useLetterLocale := True
 			cyrillicTasgScriptAtStart := True
 		}
