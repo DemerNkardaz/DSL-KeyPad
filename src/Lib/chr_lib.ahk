@@ -7157,7 +7157,10 @@ LibRegistrate(this) {
 			},
 		},
 		"lat_[c,s]_let_e__breve", {
-			unicode: ["0114", "0115"]
+			unicode: ["0114", "0115"],
+			options: {
+				telex__jorai: "$ \W\",
+			}
 		},
 		"lat_[c,s]_let_e__breve_inverted", {
 			unicode: ["0206", "0207"]

@@ -135,7 +135,6 @@ Class App {
 			IPS_TELEX: Locale.Read("tray_menu_item_script_processor"),
 			IPS_TiengViet: Locale.Read("tray_menu_item_script_processor_vietnamese") "`t" RightAlt "F2",
 			IPS_HanYuPinYin: Locale.Read("tray_menu_item_script_processor_chinese_romanization") "`t" RightAlt RightShift "F2",
-			IPS_AdvancedMode: Locale.Read("tray_menu_item_script_processor_advanced_mode"),
 			Scripter_AlternativeInput: Locale.Read("tray_menu_item_scripter_alternative_input"),
 			;
 			userRecipes: Locale.Read("tray_menu_item_user_recipes"),
@@ -176,7 +175,6 @@ Class App {
 		sciptsMenu := Menu()
 
 		sciptsMenu.Add(labels.IPS_TELEX, (*) => []), sciptsMenu.Disable(labels.IPS_TELEX)
-		sciptsMenu.Add(labels.IPS_AdvancedMode, (*) => Cfg.SwitchSet(["True", "False"], "Advanced_Mode", "ScriptProcessor", "bind"))
 		sciptsMenu.Add(labels.IPS_TiengViet, (*) => InputScriptProcessor()),
 			sciptsMenu.SetIcon(labels.IPS_TiengViet, App.icoDLL, App.indexIcos["vietNam"])
 		sciptsMenu.Add(labels.IPS_HanYuPinYin, (*) => InputScriptProcessor("pinYin")),

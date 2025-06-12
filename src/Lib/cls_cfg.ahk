@@ -28,10 +28,6 @@ Class Cfg {
 			"Preview_Font_Family", "",
 		],
 		"Compose", [],
-		"ScriptProcessor", [
-			"Advanced_Mode", "False",
-			"Auto_Diacritics", "True",
-		],
 		"Characters", [
 			"I_Dot_Shift_I_Dotless", "Default",
 		],
