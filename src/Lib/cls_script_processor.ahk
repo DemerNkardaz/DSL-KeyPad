@@ -207,7 +207,11 @@ Class InputScriptProcessor {
 			}
 
 		} else {
-			RegExMatch(libLink, "^(.*?):(.*?)(?:\[(.*?)\])?$", &match)
+			RegExMatch(libLink, "^(.*?):(.*?)(?:\[(.*?)\])?(?:::escape)?$", &match)
+
+			escape := ""
+			if RegExMatch(libLink, "::escape$")
+				escape := "[escape]"
 
 			category := match[1]
 			libChar := match[2]
@@ -256,19 +260,28 @@ Class InputScriptProcessor {
 						sequenceOut := replaceWith
 					}
 
-					SetSequences(sequenceIn, ending, sequenceOut)
+					SetSequences(sequenceIn, ending, sequenceOut, escape)
 				}
 			}
 
 		}
 
-		SetSequences(seqIn, seqEnd, seqOut) {
+		SetSequences(seqIn, seqEnd, seqOut, escape) {
 			output.Set(
-				seqIn[1] seqEnd[1], seqOut[1],
-				seqIn[2] seqEnd[2], seqOut[2],
+				seqIn[1] seqEnd[1], seqOut[1] escape,
+				seqIn[2] seqEnd[2], seqOut[2] escape,
 				seqIn[1] "\" seqEnd[1], seqIn[1] seqEnd[1],
 				seqIn[2] "\" seqEnd[2], seqIn[2] seqEnd[2],
+				seqOut[1] "z", seqIn[1],
+				seqOut[2] "Z", seqIn[2],
 			)
+
+			if !(seqEnd[1] ~= "i)z$") {
+				output.Set(
+					seqOut[1] seqEnd[1], seqIn[1] seqEnd[1] "[escape]",
+					seqOut[2] seqEnd[2], seqIn[2] seqEnd[2] "[escape]",
+				)
+			}
 		}
 
 		return output
@@ -303,72 +316,54 @@ Class InputScriptProcessor {
 				"Advanced", MapMerge(
 					this.GenerateSequences([
 						"lat:a[bre, cir]", [["w", "W"], ["a", "A"]], "a[*]",
-						"lat:a[cir, bre, acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], ["a", "A"],
 						"lat:a[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "a[*]",
 						;
-						"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_bre",
 						"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", ["a", "A"], "a_cir[*]",
 						"lat:a_bre[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "a_bre[*]",
 						;
-						"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "a_cir",
 						"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "a_bre[*]",
 						"lat:a_cir[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "a_cir[*]",
 						;
 						"lat:e[bre, cir, car]", [["w", "W"], ["e", "E"], ["``", "``"]], "e[*]",
-						"lat:e[cir, bre, acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], ["e", "E"],
 						"lat:e[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "e[*]",
 						;
-						"lat:e_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "e_cir",
 						"lat:e_cir[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "e_cir[*]",
 						;
-						"lat:i[bre, acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], ["i", "I"],
 						"lat:i[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "i[*]",
 						;
 						"lat:o[hor, cir, bre, car]", [["w", "W"], ["o", "O"], ["q", "Q"], ["``", "``"]], "o[*]",
-						"lat:o[cir, hor, acu, gra, til, hoo_abo, dot_bel, bre]", ["z", "Z"], ["o", "O"],
 						"lat:o[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "o[*]",
 						;
-						"lat:o_hor[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "o_hor",
 						"lat:o_hor[acu, gra, til, dot_bel, hoo_abo]", ["o", "O"], "o_cir[*]",
 						"lat:o_hor[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "o_hor[*]",
 						;
-						"lat:o_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "o_cir",
 						"lat:o_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "o_hor[*]",
 						"lat:o_cir[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "o_cir[*]",
 						;
 						"lat:u[hor, bre]", [["w", "W"], ["q", "Q"]], "u[*]",
-						"lat:u[hor, acu, gra, til, hoo_abo, dot_bel, bre]", ["z", "Z"], ["u", "U"],
 						"lat:u[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "u[*]",
 						;
-						"lat:u_hor[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "u_hor",
 						"lat:u_hor[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "u_hor[*]",
 						;
-						"lat:y[acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], ["y", "Y"],
 						"lat:y[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "y[*]",
 						;
 						;
 						"lat:uong[hor_hor, hor_cir]", [["w", "W"], ["o", "O"]], "uong[*]",
-						"lat:uong[hor_cir, hor_hor, acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], "uong",
 						"lat:uong[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "uong[*]",
 						;
-						"lat:uong_hor_hor[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "uong_hor_hor",
 						"lat:uong_hor_hor[acu, gra, til, dot_bel, hoo_abo]", ["o", "O"], "uong_hor_cir[*]",
 						"lat:uong_hor_hor[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "uong_hor_hor[*]",
 						;
-						"lat:uong_hor_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "uong_hor_cir",
 						"lat:uong_hor_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "uong_hor_hor[*]",
 						"lat:uong_hor_cir[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "uong_hor_cir[*]",
 						;
 						;
 						"lat:uoc[hor_hor, hor_cir]", [["w", "W"], ["o", "O"]], "uoc[*]",
-						"lat:uoc[hor_cir, hor_hor, acu, gra, til, hoo_abo, dot_bel]", ["z", "Z"], "uoc",
 						"lat:uoc[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "uoc[*]",
 						;
-						"lat:uoc_hor_hor[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "uoc_hor_hor",
 						"lat:uoc_hor_hor[acu, gra, til, dot_bel, hoo_abo]", ["o", "O"], "uoc_hor_cir[*]",
 						"lat:uoc_hor_hor[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "uoc_hor_hor[*]",
 						;
-						"lat:uoc_hor_cir[acu, gra, til, dot_bel, hoo_abo]", ["z", "Z"], "uoc_hor_cir",
 						"lat:uoc_hor_cir[acu, gra, til, dot_bel, hoo_abo]", ["w", "W"], "uoc_hor_hor[*]",
 						"lat:uoc_hor_cir[acu, gra, til, dot_bel, hoo_abo]", [["s", "S"], ["f", "F"], ["x", "X"], ["j", "J"], ["r", "R"]], "uoc_hor_cir[*]",
 					]),
@@ -543,17 +538,11 @@ Class InputScriptProcessor {
 			),
 			pinYin: Map(
 				"Advanced", this.GenerateSequences([
-					"lat:a[mac, gra, acu, car]", ["z", "Z"], ["a", "A"],
 					"lat:a[mac, gra, acu, car]", [["a", "A"], ["f", "F"], ["s", "S"], ["v", "V"]], "a[*]",
-					"lat:e[mac, gra, acu, car]", ["z", "Z"], ["e", "E"],
 					"lat:e[mac, gra, acu, car]", [["e", "E"], ["f", "F"], ["s", "S"], ["v", "V"]], "e[*]",
-					"lat:i[mac, gra, acu, car]", ["z", "Z"], ["i", "I"],
 					"lat:i[mac, gra, acu, car]", [["i", "I"], ["f", "F"], ["s", "S"], ["v", "V"]], "i[*]",
-					"lat:o[mac, gra, acu, car]", ["z", "Z"], ["o", "O"],
 					"lat:o[mac, gra, acu, car]", [["o", "O"], ["f", "F"], ["s", "S"], ["v", "V"]], "o[*]",
-					"lat:u[mac, gra, acu, car, dia]", ["z", "Z"], ["u", "U"],
 					"lat:u[mac, gra, acu, car]", [["u", "U"], ["f", "F"], ["s", "S"], ["v", "V"]], "u[*]",
-					"lat:u_dia[mac, gra, acu, car]", ["z", "Z"], "u_dia",
 					"lat:u_dia[mac, gra, acu, car]", [["u", "U"], ["f", "F"], ["s", "S"], ["v", "V"]], "u_dia[*]",
 				]),
 				"Default", this.GenerateSequences([
@@ -688,6 +677,9 @@ Class InputScriptProcessor {
 
 		Send(Util.StrRepeat("{Backspace}", StrLen(k)))
 
+		if InStr(v, "[escape]")
+			v := StrReplace(v, "[escape]")
+
 		SendText(v)
 		IPS.InH.Stop()
 		IPS.inputLogger := v
@@ -713,7 +705,7 @@ Class InputScriptProcessor {
 					for group in ["Escaped", "Default"] {
 						for k, v in IPS.scriptSequences.%IPS.options.interceptionInputMode%.Get(group) {
 							if IPS.inputLogger ~= RegExEscape(k) "$" {
-								IPS.SequenceBridge(IPS, group, k, v)
+								IPS.SequenceBridge(IPS, InStr(v, "[escape]") ? "Escaped" : group, k, v)
 								break 2
 							}
 						}
@@ -742,9 +734,9 @@ Class InputScriptProcessor {
 			for subMap, entries in IPS.scriptSequences.%IPS.options.interceptionInputMode% {
 				for key, value in entries {
 					if (RegExMatch(key, "^" RegExEscape(input))) {
-						output .= RegExReplace(key, "^" RegExEscape(input), "-") "(" value "), "
+						output .= RegExReplace(key, "^" RegExEscape(input), "-") "(" StrReplace(value, "[escape]") "), "
 					} else if IPS.EntriesComparator(input, key, &a, &b, True) {
-						output .= RegExReplace(b, "^" RegExEscape(a), "-") "(" value "), "
+						output .= RegExReplace(b, "^" RegExEscape(a), "-") "(" StrReplace(value, "[escape]") "), "
 					}
 				}
 			}
