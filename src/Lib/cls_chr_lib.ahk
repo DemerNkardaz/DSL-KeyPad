@@ -490,6 +490,18 @@ Class ChrLib {
 	}
 
 	static Get(entryName, extraRules := False, getMode := "Unicode", alt := Scripter.selectedMode.Get("Glyph Variations")) {
+		if RegExMatch(entryName, "\\(.*?)\/", &multiMatch) {
+			output := ""
+			split := StrSplit(multiMatch[1], ",")
+
+			for each in split {
+				name := RegExReplace(entryName, "\\(.*?)\/", each)
+				output .= this.Get(name, extraRules, getMode, alt)
+			}
+
+			return output
+		}
+
 		if StrLen(alt) == 0
 			alt := Scripter.selectedMode.Get("Glyph Variations")
 
