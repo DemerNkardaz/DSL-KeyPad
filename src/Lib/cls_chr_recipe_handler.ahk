@@ -119,7 +119,7 @@ Class ChrRecipeHandler {
 			Loop characterInfo.repeatCount
 				interValue .= Chrlib.Get(characterInfo.name, characterInfo.hasAlteration, characterInfo.alteration)
 
-			tempRecipe := RegExReplace(tempRecipe, "\${" match[1] "}", interValue)
+			tempRecipe := RegExReplace(tempRecipe, "\${" RegExEscape(match[1]) "}", interValue)
 		}
 
 		return tempRecipe

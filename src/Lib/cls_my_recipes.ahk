@@ -276,7 +276,7 @@ Class MyRecipes {
 								)
 							else
 								recipesLV.Insert(lastMatchIndex + 1, ,
-									title
+									title,
 									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
 									Util.StrFormattedReduce(this.FormatResult(data.result, , True), 20),
 									data.section,
@@ -667,8 +667,8 @@ Class MyRecipes {
 		if formatRecipe
 			result := ChrRecipeHandler.MakeStr(result)
 		if revert {
-			result := StrReplace(result, "\n", "`n")
-			result := StrReplace(result, "\t", "`t")
+			result := RegExReplace(result, "\\n(?![^$]*\})", "`n")
+			result := RegExReplace(result, "\\t(?![^$]*\})", "`t")
 		} else {
 			result := StrReplace(result, "`r`n", "\n")
 			result := StrReplace(result, "`n", "\n")
