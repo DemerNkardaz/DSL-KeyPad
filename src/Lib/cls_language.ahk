@@ -236,7 +236,7 @@ Class Locale {
 
 		while (RegExMatch(intermediate, "\{U\+(.*?)\}", &match)) {
 			Unicode := StrSplit(match[1], ",")
-			replacement := Util.UnicodeToChars(Unicode)
+			replacement := Util.UnicodeToChars(Unicode*)
 			intermediate := StrReplace(intermediate, match[0], replacement)
 		}
 
@@ -260,7 +260,7 @@ Class Locale {
 			return StrLen(intermediate) > 0
 		} else {
 			intermediate := !IsSpace(intermediate) ? intermediate : "KEY (" entryName "): NOT FOUND in " section
-			return strInjections ? Util.StrVarsInject(intermediate, strInjections) : intermediate
+			return strInjections ? Util.StrVarsInject(intermediate, strInjections*) : intermediate
 		}
 	}
 

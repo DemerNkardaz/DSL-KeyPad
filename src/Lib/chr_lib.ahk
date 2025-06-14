@@ -8129,8 +8129,10 @@ LibRegistrate(this) {
 			unicode: ["1D8A"],
 		},
 		"lat_[c,s]_let_s__solidus_long", {
+			unicode: ["A7CC", "A7CD"],
+		},
+		"lat_[c,s]_let_s__solidus_short", {
 			unicode: ["A7A8", "A7A9"],
-			recipe: ["$${solidus_long}"],
 		},
 		"lat_[c,s]_let_s__stroke_short", {
 			unicode: ["A7C9", "A7CA"],

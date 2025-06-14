@@ -32,6 +32,7 @@ IPS_LocalLibrary := {
 		;
 		d: "lat_[c,s]_let_d",
 		d_sto: "lat_[c,s]_let_d__stroke_short",
+		d_dong: "wallet_viet_dong",
 		;
 		n: "lat_[c,s]_let_n",
 		n_til: "lat_[c,s]_let_n__tilde_above",
@@ -495,11 +496,13 @@ Class InputScriptProcessor {
 
 				for variation in inputVariations {
 					var := variation != "" ? "_" variation : ""
-					sequenceIn := [IPS_LocalLibrary.%category%.%libChar%%var%[2], IPS_LocalLibrary.%category%.%libChar%%var%[1]]
+					ref := IPS_LocalLibrary.%category%.%libChar%%var%
+					sequenceIn := ref is Array ? [ref[2], ref[1]] : [ref, ref]
 
 					if !IsObject(replaceWith) {
 						variationsReplace := (InStr(replaceWith, "[*]") ? StrReplace(replaceWith, "[*]", "_" variation) : replaceWith)
-						sequenceOut := [IPS_LocalLibrary.%category%.%variationsReplace%[2], IPS_LocalLibrary.%category%.%variationsReplace%[1]]
+						local ref := IPS_LocalLibrary.%category%.%variationsReplace%
+						sequenceOut := ref is Array ? [ref[2], ref[1]] : [ref, ref]
 					} else {
 						sequenceOut := replaceWith
 					}
@@ -544,14 +547,19 @@ Class InputScriptProcessor {
 	static Init() {
 		for scriptType, entries in IPS_LocalLibrary.OwnProps() {
 			for k, v in entries.OwnProps() {
-				if v is String && RegExMatch(v, "\[(.*?)\]", &match) {
-					split := StrSplit(match[1], ",")
-					inter := []
+				if v is String {
+					if RegExMatch(v, "\[(.*?)\]", &match) {
+						split := StrSplit(match[1], ",")
+						inter := []
 
-					for each in split
-						inter.Push(ChrLib.Get(RegExReplace(v, "\[(.*?)\]", each)))
+						for each in split
+							inter.Push(ChrLib.Get(RegExReplace(v, "\[(.*?)\]", each)))
 
-					IPS_LocalLibrary.%scriptType%.%k% := inter
+						IPS_LocalLibrary.%scriptType%.%k% := inter
+					} else {
+						inter := ChrLib.Get(v)
+						IPS_LocalLibrary.%scriptType%.%k% := inter
+					}
 				}
 			}
 		}
@@ -635,6 +643,7 @@ Class InputScriptProcessor {
 					"lat:q", "5", "a_bre_til",
 					;
 					"lat:d", "D", "d_sto",
+					"lat:d_sto", "_", "d_dong",
 					;
 					"lat:e", "E", "e_cir",
 					"lat:e", "F", "e_gra",
@@ -792,6 +801,13 @@ Class InputScriptProcessor {
 					"lat:u[mac, gra, acu, car]", [["u", "U"], ["f", "F"], ["s", "S"], ["v", "V"]], "u[*]",
 					"lat:u_dia[mac, gra, acu, car]", [["u", "U"], ["f", "F"], ["s", "S"], ["v", "V"]], "u_dia[*]",
 					;
+					"lat:a[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "a[*]",
+					"lat:e[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "e[*]",
+					"lat:i[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "i[*]",
+					"lat:o[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "o[*]",
+					"lat:u[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "u[*]",
+					"lat:u_dia[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "u_dia[*]",
+					;
 					"lat:an[mac, gra, acu, car]", [["a", "A"], ["f", "F"], ["s", "S"], ["v", "V"]], "an[*]",
 					"lat:ang[mac, gra, acu, car]", [["a", "A"], ["f", "F"], ["s", "S"], ["v", "V"]], "ang[*]",
 					"lat:en[mac, gra, acu, car]", [["e", "E"], ["f", "F"], ["s", "S"], ["v", "V"]], "en[*]",
@@ -806,6 +822,20 @@ Class InputScriptProcessor {
 					"lat:ung_dia[mac, gra, acu, car]", [["u", "U"], ["f", "F"], ["s", "S"], ["v", "V"]], "ung_dia[*]",
 					"lat:er[mac, gra, acu, car]", [["e", "E"], ["f", "F"], ["s", "S"], ["v", "V"]], "er[*]",
 					;
+					"lat:an[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "an[*]",
+					"lat:ang[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ang[*]",
+					"lat:en[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "en[*]",
+					"lat:eng[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "eng[*]",
+					"lat:in[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "in[*]",
+					"lat:ing[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ing[*]",
+					"lat:on[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "on[*]",
+					"lat:ong[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ong[*]",
+					"lat:un[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "un[*]",
+					"lat:ung[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ung[*]",
+					"lat:un_dia[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "un_dia[*]",
+					"lat:ung_dia[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ung_dia[*]",
+					"lat:er[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "er[*]",
+					;
 					"lat:ai[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ai[*]",
 					"lat:ei[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ei[*]",
 					"lat:ao[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ao[*]",
@@ -819,6 +849,13 @@ Class InputScriptProcessor {
 					"lat:ui[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ui[*]",
 					"lat:ue[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ue[*]",
 					"lat:ue_dia[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "ue_dia[*]",
+					;
+					"lat:un[mac, gra, acu, car]", ["8"], "un_dia[*]",
+					"lat:ung[mac, gra, acu, car]", ["8"], "ung_dia[*]",
+					"lat:ua[mac, gra, acu, car]", ["8"], "ua_dia[*]",
+					"lat:uo[mac, gra, acu, car]", ["8"], "uo_dia[*]",
+					"lat:ui[mac, gra, acu, car]", ["8"], "ui_dia[*]",
+					"lat:ue[mac, gra, acu, car]", ["8"], "ue_dia[*]",
 				]),
 				"Default", this.GenerateSequences([
 					"lat:a", "A", "a_mac",
@@ -912,6 +949,59 @@ Class InputScriptProcessor {
 					"lat:er", "S", "er_acu",
 					"lat:er", "V", "er_car",
 					;
+					"lat:an", "1", "an_mac",
+					"lat:an", "4", "an_gra",
+					"lat:an", "2", "an_acu",
+					"lat:an", "3", "an_car",
+					"lat:ang", "1", "ang_mac",
+					"lat:ang", "4", "ang_gra",
+					"lat:ang", "2", "ang_acu",
+					"lat:ang", "3", "ang_car",
+					"lat:en", "1", "en_mac",
+					"lat:en", "4", "en_gra",
+					"lat:en", "2", "en_acu",
+					"lat:en", "3", "en_car",
+					"lat:eng", "1", "eng_mac",
+					"lat:eng", "4", "eng_gra",
+					"lat:eng", "2", "eng_acu",
+					"lat:eng", "3", "eng_car",
+					"lat:in", "1", "in_mac",
+					"lat:in", "4", "in_gra",
+					"lat:in", "2", "in_acu",
+					"lat:in", "3", "in_car",
+					"lat:ing", "1", "ing_mac",
+					"lat:ing", "4", "ing_gra",
+					"lat:ing", "2", "ing_acu",
+					"lat:ing", "3", "ing_car",
+					"lat:on", "1", "on_mac",
+					"lat:on", "4", "on_gra",
+					"lat:on", "2", "on_acu",
+					"lat:on", "3", "on_car",
+					"lat:ong", "1", "ong_mac",
+					"lat:ong", "4", "ong_gra",
+					"lat:ong", "2", "ong_acu",
+					"lat:ong", "3", "ong_car",
+					"lat:un", "1", "un_mac",
+					"lat:un", "4", "un_gra",
+					"lat:un", "2", "un_acu",
+					"lat:un", "3", "un_car",
+					"lat:ung", "1", "ung_mac",
+					"lat:ung", "4", "ung_gra",
+					"lat:ung", "2", "ung_acu",
+					"lat:ung", "3", "ung_car",
+					"lat:un_dia", "1", "un_dia_mac",
+					"lat:un_dia", "4", "un_dia_gra",
+					"lat:un_dia", "2", "un_dia_acu",
+					"lat:un_dia", "3", "un_dia_car",
+					"lat:ung_dia", "1", "ung_dia_mac",
+					"lat:ung_dia", "4", "ung_dia_gra",
+					"lat:ung_dia", "2", "ung_dia_acu",
+					"lat:ung_dia", "3", "ung_dia_car",
+					"lat:er", "1", "er_mac",
+					"lat:er", "4", "er_gra",
+					"lat:er", "2", "er_acu",
+					"lat:er", "3", "er_car",
+					;
 					"lat:ai", "1", "ai_mac",
 					"lat:ai", "4", "ai_gra",
 					"lat:ai", "2", "ai_acu",
@@ -960,10 +1050,18 @@ Class InputScriptProcessor {
 					"lat:ue", "4", "ue_gra",
 					"lat:ue", "2", "ue_acu",
 					"lat:ue", "3", "ue_car",
+					;
 					"lat:ue_dia", "1", "ue_dia_mac",
 					"lat:ue_dia", "4", "ue_dia_gra",
 					"lat:ue_dia", "2", "ue_dia_acu",
 					"lat:ue_dia", "3", "ue_dia_car",
+					;
+					"lat:un", "8", "un_dia",
+					"lat:ung", "8", "ung_dia",
+					"lat:ua", "8", "ua_dia",
+					"lat:uo", "8", "uo_dia",
+					"lat:ui", "8", "ui_dia",
+					"lat:ue", "8", "ue_dia",
 				]),
 			),
 			karaShiki: Map(
@@ -1137,20 +1235,85 @@ Class InputScriptProcessor {
 
 	static GetSuggestions(input) {
 		IPS := InputScriptProcessor
+		suggestions := []
 		output := ""
+
 		if input != "" {
 			for group in ["Default", "Escaped"] {
 				for key, value in IPS.scriptSequences.%IPS.options.interceptionInputMode%.Get(group) {
-					if (RegExMatch(key, "^" RegExEscape(input))) {
-						output .= RegExReplace(key, "^" RegExEscape(input), "-") "(" StrReplace(value, "[escape]") "), "
-					} else if IPS.EntriesComparator(input, key, &a, &b, True) {
-						output .= RegExReplace(b, "^" RegExEscape(a), "-") "(" StrReplace(value, "[escape]") "), "
+					if key ~= "\\"
+						continue
+
+					suggestion := ""
+					priority := 0
+
+					if IPS.EntriesComparator(input, key, &a, &b, True) {
+						suggestion := RegExReplace(b, "^" RegExEscape(a), "-") "(" StrReplace(value, "[escape]") ")"
+						if (a == input)
+							priority := 1000
+						else
+							priority := 500 + StrLen(a)
+					} else if (RegExMatch(key, "^" RegExEscape(input))) {
+						suggestion := RegExReplace(key, "^" RegExEscape(input), "-") "(" StrReplace(value, "[escape]") ")"
+						priority := 100 + (1000 - StrLen(key))
+					}
+
+					if (suggestion != "") {
+						suggestions.Push({
+							text: suggestion,
+							priority: priority,
+							keyLength: StrLen(key),
+							inputMatch: StrLen(a ?? input)
+						})
 					}
 				}
+			}
+
+			suggestions := this.SortSuggestions(suggestions)
+
+			for suggestion in suggestions {
+				output .= suggestion.text ", "
 			}
 		}
 
 		return output
+	}
+
+	static SortSuggestions(suggestions) {
+		if (suggestions.Length <= 1)
+			return suggestions
+
+		for i in this.SuggestionRange(2, suggestions.Length) {
+			current := suggestions[i]
+			j := i - 1
+
+			while (j >= 1 && this.SuggestionShouldSwap(suggestions[j], current)) {
+				suggestions[j + 1] := suggestions[j]
+				j--
+			}
+
+			suggestions[j + 1] := current
+		}
+
+		return suggestions
+	}
+
+	static SuggestionShouldSwap(a, b) {
+		if (a.priority != b.priority)
+			return a.priority < b.priority
+
+		if (a.inputMatch != b.inputMatch)
+			return a.inputMatch < b.inputMatch
+
+		return a.keyLength > b.keyLength
+	}
+
+	static SuggestionRange(start, end) {
+		result := []
+		Loop end - start + 1 {
+			result.Push(start + A_Index - 1)
+		}
+		return result
 	}
 
 	static EntriesComparator(a, entries, &foundKey := "", &foundValue := "", partial := False) {

@@ -123,7 +123,7 @@ Class Util {
 	}
 
 	static StrVarsInject(stringVar, setVars*) {
-		if setVars[1] is Array {
+		if setVars.Length = 1 && setVars[1] is Array {
 			setVars := setVars[1]
 		}
 
@@ -364,7 +364,7 @@ Class Util {
 	static UnicodeToChars(unicode*) {
 		output := ""
 
-		if unicode[1] is Array
+		if unicode.Length = 1 && unicode[1] is Array
 			unicode := unicode[1]
 
 		for value in unicode

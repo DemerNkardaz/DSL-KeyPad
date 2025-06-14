@@ -266,22 +266,18 @@ Class MyRecipes {
 							title := this.HandleTitles(data.name)
 							title := title ? title : data.name
 
+							params := [
+								title,
+								RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
+								Util.StrFormattedReduce(this.FormatResult(data.result, , True), 20),
+								data.section,
+								targetPath
+							]
+
 							if (lastMatchIndex = 0)
-								recipesLV.Add(,
-									title,
-									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
-									Util.StrFormattedReduce(this.FormatResult(data.result, , True), 20),
-									data.section,
-									targetPath
-								)
+								recipesLV.Add(, params*)
 							else
-								recipesLV.Insert(lastMatchIndex + 1, ,
-									title,
-									RegExReplace(ChrRecipeHandler.MakeStr(data.recipe), "\|", ", "),
-									Util.StrFormattedReduce(this.FormatResult(data.result, , True), 20),
-									data.section,
-									targetPath
-								)
+								recipesLV.Insert(lastMatchIndex + 1, , params*)
 						}
 
 						existingEntry := ChrLib.GetEntry(data.previousSection)
