@@ -524,6 +524,8 @@ Class InputScriptProcessor {
 				seqIn[2] "\" seqEnd[2], seqIn[2] seqEnd[2],
 				seqOut[1] "z", seqIn[1],
 				seqOut[2] "Z", seqIn[2],
+				seqOut[1] "\z", seqOut[1] "z",
+				seqOut[2] "\Z", seqOut[2] "Z",
 			)
 
 			if !(seqEnd[1] ~= "i)z$") {
