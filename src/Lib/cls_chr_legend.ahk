@@ -27,14 +27,14 @@ Class ChrLegend {
 	}
 
 	__New(preselectEntry := "") {
-		ChrLegend.Panel(preselectEntry)
+		ChrLegend.Panel(&preselectEntry)
 	}
 
-	static Panel(preselectEntry := "") {
-		legendsList := this.CollectList()
-		nameToEntry := Map()
+	static Panel(&preselectEntry := "") {
+		local legendsList := this.CollectList()
+		local nameToEntry := Map()
 
-		languageCode := Language.Get()
+		local languageCode := Language.Get()
 
 		for each in legendsList {
 			if each is String {
@@ -307,7 +307,7 @@ Class ChrLegend {
 				}
 			}
 
-			TV.OnEvent("ItemSelect", (TV, Item) => this.PanelSelect(TV, item, nameToEntry))
+			TV.OnEvent("ItemSelect", (TV, Item) => this.PanelSelect(&TV, &item, &nameToEntry))
 
 			for each in [ipaLV, transLV, namesLV] {
 				each.SetFont("s" (11) " c333333")
@@ -364,10 +364,10 @@ Class ChrLegend {
 			this.panelGUI.Show()
 		}
 
-		this.PanelAftermath(preselectEntry, nameToEntry)
+		this.PanelAftermath(&preselectEntry, &nameToEntry)
 	}
 
-	static PanelAftermath(preselectEntry, nameToEntry) {
+	static PanelAftermath(&preselectEntry, &nameToEntry) {
 		TV := this.panelGUI["TV"]
 		if preselectEntry = ""
 			TV.Focus()
@@ -395,21 +395,21 @@ Class ChrLegend {
 				itemText := TV.GetText(itemID)
 				if itemText = label {
 					TV.Modify(itemID)
-					this.PanelSelect(TV, itemID, nameToEntry)
+					this.PanelSelect(&TV, &itemID, &nameToEntry)
 					break
 				}
 			}
 		}
 	}
 
-	static PanelSelect(TV, item, nameToEntry) {
+	static PanelSelect(&TV, &item, &nameToEntry) {
 		if !item
 			return
 
 		if IsGuiOpen(this.title) {
 			selectedLabel := TV.GetText(item)
 
-			if nameToEntry.Has(selectedLabel) && nameToEntry.GetRef(selectedLabel, &entryName) != "" {
+			if nameToEntry.Has(selectedLabel) && nameToEntry.GetRef(&selectedLabel, &entryName) != "" {
 				labels := {
 					unknown: Locale.Read("gui_legend_unknown"),
 					description: Locale.Read("gui_legend_description_unavailable"),

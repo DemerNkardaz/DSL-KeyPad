@@ -166,7 +166,7 @@ Class App {
 
 		App.tray.Add()
 		App.tray.Add(labels.openPanel, (*) => Panel.Panel())
-		App.tray.Add(labels.legend, (*) => ChrLegend.Panel())
+		App.tray.Add(labels.legend, (*) => ChrLegend())
 		App.tray.Add(labels.options, (*) => Cfg.Editor()), App.tray.SetIcon(labels.options, ImageRes, 63)
 		App.tray.Add()
 		App.tray.Add(labels.changelogPanel, (*) => Changelog.Panel())

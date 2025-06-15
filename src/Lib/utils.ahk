@@ -298,10 +298,10 @@ _MapDeepMergeBinds(this, maps*) {
 	return this
 }
 
-_MapGetRef(this, key, &output := "") {
+_MapGetRef(this, &key, &output := "") {
 	if this.Has(key)
-		return this.Get(key)
-	return
+		output := this.Get(key)
+	return this.Get(key)
 }
 
 MapMergeTo(TargetMap, MapObjects*) {
