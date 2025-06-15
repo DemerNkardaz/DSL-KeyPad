@@ -427,6 +427,17 @@ IPS_LocalLibrary := {
 		er_gra: "lat_[c,s]_let_\e__grave,r/",
 		er_car: "lat_[c,s]_let_\e__caron,r/",
 		er_mac: "lat_[c,s]_let_\e__macron,r/",
+		;
+		n_acu: "lat_[c,s]_let_\n__acute/",
+		n_gra: "lat_[c,s]_let_\n__grave/",
+		n_car: "lat_[c,s]_let_\n__caron/",
+		ng: "lat_[c,s]_let_\n,g/",
+		ng_acu: "lat_[c,s]_let_\n__acute,g/",
+		ng_gra: "lat_[c,s]_let_\n__grave,g/",
+		ng_car: "lat_[c,s]_let_\n__caron,g/",
+		;
+		m: "lat_[c,s]_let_m",
+		m_acu: "lat_[c,s]_let_\m__acute/",
 	},
 	cyr: {}
 }
@@ -810,6 +821,11 @@ Class InputScriptProcessor {
 					"lat:u[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "u[*]",
 					"lat:u_dia[mac, gra, acu, car]", [["1"], ["4"], ["2"], ["3"]], "u_dia[*]",
 					;
+					"lat:n[gra, acu, car]", [["f", "F"], ["s", "S"], ["v", "V"]], "n[*]",
+					"lat:ng[gra, acu, car]", [["f", "F"], ["s", "S"], ["v", "V"]], "ng[*]",
+					"lat:n[gra, acu, car]", [["4"], ["2"], ["3"]], "n[*]",
+					"lat:ng[gra, acu, car]", [["4"], ["2"], ["3"]], "ng[*]",
+					;
 					"lat:an[mac, gra, acu, car]", [["a", "A"], ["f", "F"], ["s", "S"], ["v", "V"]], "an[*]",
 					"lat:ang[mac, gra, acu, car]", [["a", "A"], ["f", "F"], ["s", "S"], ["v", "V"]], "ang[*]",
 					"lat:en[mac, gra, acu, car]", [["e", "E"], ["f", "F"], ["s", "S"], ["v", "V"]], "en[*]",
@@ -893,7 +909,6 @@ Class InputScriptProcessor {
 					"lat:u_dia", "F", "u_dia_gra",
 					"lat:u_dia", "S", "u_dia_acu",
 					"lat:u_dia", "V", "u_dia_car",
-					;
 				]),
 				"Extended", this.GenerateSequences([
 					"lat:an", "A", "an_mac",
@@ -1203,7 +1218,34 @@ Class InputScriptProcessor {
 			return
 		} else {
 			inputCut := (str, len := 7) => StrLen(str) > len ? SubStr(str, StrLen(str) - (len - 1)) : str
-			forbiddenChars := "[`n|`r|\x{0000}-\x{0020}|,|.]"
+			forbiddenChars := "[`n`r`t\x{0000}-\x{0020},." (
+				ChrLib.Get(
+					(
+						"\"
+						"space,"
+						"emsp,"
+						"ensp,"
+						"emsp13,"
+						"emsp14,"
+						"thinspace,"
+						"emsp16,"
+						"narrow_no_break_space,"
+						"hairspace,"
+						"punctuation_space,"
+						"zero_width_space,"
+						"zero_width_no_break_space,"
+						"figure_space,"
+						"no_break_space,"
+						"medium_math_space,"
+						"emquad,"
+						"enquad,"
+						"word_joiner,"
+						"zero_width_joiner,"
+						"zero_width_non_joiner"
+						"/"
+					)
+				)
+			) "]"
 
 			if StrLen(input) > 0 && IPS.options.interceptionInputMode != "" {
 				if !RegExMatch(input, forbiddenChars) {
@@ -1346,11 +1388,12 @@ Class InputScriptProcessor {
 	static backspaceLock := False
 	static Backspacer(ih, vk, sc) {
 		IPS := InputScriptProcessor
-		backspaceCode := "14"
-		resetKeys := [
-			"331", "336", "328", "333", ; Arrows
-			"327", "335", "329", "337", ; Home End PgUp PgDn
-		]
+		sc := Number(sc)
+		backspaceCode := LayoutList.GetKeyCodes("int", "Backspace")
+		resetKeys := LayoutList.GetKeyCodes("int",
+			"Left", "Right", "Up", "Down", "Home", "End", "PgUp", "PgDn",
+			"RCtrl", "Space"
+		)
 
 		if StrLen(IPS.inputLogger) > 0 && sc = backspaceCode && !InputScriptProcessor.backspaceLock {
 			IPS.inputLogger := SubStr(IPS.inputLogger, 1, -1)

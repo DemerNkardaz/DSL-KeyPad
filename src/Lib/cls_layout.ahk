@@ -1,4 +1,21 @@
 Class LayoutList {
+	static GetKeyCodes(keyNames*) {
+		list := MapMerge(this.default, this.latin, this.cyrillic, this.hellenic)
+		output := []
+
+		isInt := keyNames[1] = "int"
+
+		if isInt
+			keyNames.RemoveAt(1)
+
+		for k, v in list {
+			if keyNames.HasValue(k)
+				output.Push(isInt ? Number("0x" SubStr(v, 3)) : v)
+		}
+
+		return output
+	}
+
 	static default := Map(
 		"Space", "SC039",
 		"Tab", "SC00F",

@@ -495,7 +495,7 @@ Class ChrLib {
 			split := StrSplit(multiMatch[1], ",")
 
 			for each in split {
-				name := RegExReplace(entryName, "\\(.*?)\/", each)
+				name := each ~= "^\+" ? SubStr(each, 2) : RegExReplace(entryName, "\\(.*?)\/", each)
 				output .= this.Get(name, extraRules, getMode, alt)
 			}
 
