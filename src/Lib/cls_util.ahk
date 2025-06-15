@@ -1,8 +1,8 @@
 Class Util {
 	static ShellFunc(str, arg) {
-		funcRef := StrSplit(str[1], ".")
-		interRef := ""
-		objRef := ""
+		local funcRef := StrSplit(str[1], ".")
+		local interRef := ""
+		local objRef := ""
 
 		for i, ref in funcRef {
 			if i = 1 {
@@ -12,11 +12,13 @@ Class Util {
 				interRef := interRef.%ref%
 				objRef := interRef
 			} else {
-				method := ref
+				local method := ref
 				interRef := interRef.%method%
 				interRef.Call(objRef, arg)
 			}
 		}
+
+		return
 	}
 
 	static IsBool(value) {
@@ -26,25 +28,26 @@ Class Util {
 		return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
 	}
 
-	static GetDate(DateStyle := "YYYYMMDDhhmmss") {
-		CurrentTime := A_Now
-		TimeFormat := Map(
-			"YYYY", SubStr(CurrentTime, 1, 4),
-			"MM", SubStr(CurrentTime, 5, 2),
-			"DD", SubStr(CurrentTime, 7, 2),
-			"hh", SubStr(CurrentTime, 9, 2),
-			"mm", SubStr(CurrentTime, 11, 2),
-			"ss", SubStr(CurrentTime, 13, 2)
+	static GetDate(dateStyle := "YYYYMMDDhhmmss") {
+		local currentTime := A_Now
+		static timeFormat := Map(
+			"YYYY", SubStr(currentTime, 1, 4),
+			"MM", SubStr(currentTime, 5, 2),
+			"DD", SubStr(currentTime, 7, 2),
+			"hh", SubStr(currentTime, 9, 2),
+			"mm", SubStr(currentTime, 11, 2),
+			"ss", SubStr(currentTime, 13, 2)
 		)
-		for Key, Value in TimeFormat {
-			DateStyle := StrReplace(DateStyle, Key, Value, True)
+		for Key, Value in timeFormat {
+			dateStyle := StrReplace(dateStyle, Key, Value, True)
 		}
-		CurrentTime := DateStyle
-		return CurrentTime
+		currentTime := dateStyle
+		return currentTime
 	}
 
-	static SendDate(DateStyle := "YYYYMMDDhhmmss") {
-		SendText(this.GetDate(DateStyle))
+	static SendDate(dateStyle := "YYYYMMDDhhmmss") {
+		SendText(this.GetDate(dateStyle))
+		return
 	}
 
 	static StrTrim(Str, chrs := "\s+") {
@@ -60,7 +63,7 @@ Class Util {
 	}
 
 	static StrRepeat(str, count) {
-		output := ""
+		local output := ""
 		loop count {
 			output .= str
 		}
@@ -77,12 +80,13 @@ Class Util {
 			return False
 		} else
 			return InStr(str, search, start, end)
+		return
 	}
 
 	static StrFormattedReduce(str, maxLength := 32, removeLineBreaks := False) {
-		totalLen := this.StrDigitFormat(StrLen(str))
-		pages := this.StrPagesCalc(str)
-		output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ] ⟨ " this.StrVarsInject(Locale.Read("tooltip_compose_overflow_properties"), totalLen, pages) " ⟩" : str
+		local totalLen := this.StrDigitFormat(StrLen(str))
+		local pages := this.StrPagesCalc(str)
+		local output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ] ⟨ " this.StrVarsInject(Locale.Read("tooltip_compose_overflow_properties"), totalLen, pages) " ⟩" : str
 		if removeLineBreaks {
 			output := StrReplace(output, "`r`n", " ")
 			output := StrReplace(output, "`n", " ")
@@ -92,12 +96,12 @@ Class Util {
 	}
 
 	static StrDigitFormat(str) {
-		output := ""
-		len := StrLen(str)
+		local output := ""
+		local len := StrLen(str)
 		if len >= 4 {
-			pos := 0
+			local pos := 0
 			Loop len {
-				currentChar := SubStr(str, len - A_Index + 1, 1)
+				local currentChar := SubStr(str, len - A_Index + 1, 1)
 				output := currentChar output
 				pos++
 				if (pos = 3 && A_Index < len) {
@@ -112,8 +116,8 @@ Class Util {
 	}
 
 	static StrPagesCalc(str, chrPerPage := 3000) {
-		len := StrLen(str)
-		pages := len / chrPerPage
+		local len := StrLen(str)
+		local pages := len / chrPerPage
 
 		pages := Round(pages, 1)
 
@@ -127,7 +131,7 @@ Class Util {
 			setVars := setVars[1]
 		}
 
-		result := stringVar
+		local result := stringVar
 		for index, value in setVars {
 			; result := StrReplace(result, "{" (index - 1) "}", value)
 			result := RegExReplace(result, "\{\}", value, , 1)
@@ -136,8 +140,8 @@ Class Util {
 	}
 
 	static StrCutBrackets(Str) {
-		output := ""
-		blacklist := ["{", "}"]
+		local output := ""
+		static blacklist := ["{", "}"]
 
 		for symbol in StrSplit(Str, "") {
 			if !blacklist.Contains(symbol) {
@@ -158,16 +162,16 @@ Class Util {
 	}
 
 	static StrToUnicode(inputString, mode := "") {
-		output := ""
-		len := StrLen(inputString)
+		local output := ""
+		local len := StrLen(inputString)
 
-		i := 1
+		local i := 1
 		while (i <= len) {
-			symbol := SubStr(inputString, i, 1)
-			code := Ord(symbol)
-			surrogated := False
+			local symbol := SubStr(inputString, i, 1)
+			local code := Ord(symbol)
+			local surrogated := False
 			if (code >= 0xD800 && code <= 0xDBFF) {
-				nextSymbol := SubStr(inputString, i + 1, 1)
+				local nextSymbol := SubStr(inputString, i + 1, 1)
 				symbol .= nextSymbol
 				surrogated := True
 				i += 1
@@ -189,16 +193,16 @@ Class Util {
 	}
 
 	static StrSelToUnicode(mode := "") {
-		backupClipboard := ClipboardAll()
+		local backupClipboard := ClipboardAll()
 		A_Clipboard := ""
 
 		Send("{Shift Down}{Delete}{Shift Up}")
 		ClipWait(0.5, 1)
-		promptValue := A_Clipboard
+		local promptValue := A_Clipboard
 		A_Clipboard := ""
 
 		if promptValue != "" {
-			output := this.StrToUnicode(promptValue, mode)
+			local output := this.StrToUnicode(promptValue, mode)
 
 
 			A_Clipboard := output
@@ -214,16 +218,16 @@ Class Util {
 
 
 	static StrToHTML(inputString, mode := "", ignoreDefaultSymbols := False) {
-		defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
-		output := ""
+		static defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+		local output := ""
 
-		i := 1
+		local i := 1
 		while (i <= StrLen(inputString)) {
-			symbol := SubStr(inputString, i, 1)
-			code := Ord(symbol)
+			local symbol := SubStr(inputString, i, 1)
+			local code := Ord(symbol)
 
 			if (code >= 0xD800 && code <= 0xDBFF) {
-				nextSymbol := SubStr(inputString, i + 1, 1)
+				local nextSymbol := SubStr(inputString, i + 1, 1)
 				symbol .= nextSymbol
 				i += 1
 			}
@@ -232,7 +236,7 @@ Class Util {
 				output .= symbol
 			} else {
 				if InStr(mode, "Entities") {
-					found := false
+					local found := false
 					for j, entity in EntitiesLibrary {
 						if (Mod(j, 2) = 1 && entity = symbol) {
 							output .= EntitiesLibrary[j + 1]
@@ -256,17 +260,17 @@ Class Util {
 	}
 
 	static StrSelToHTML(mode := "", ignoreDefaultSymbols := False) {
-		defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
-		backupClipboard := ClipboardAll()
+		static defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+		local backupClipboard := ClipboardAll()
 		A_Clipboard := ""
 
 		Send("{Shift Down}{Delete}{Shift Up}")
 		ClipWait(0.5, 1)
-		promptValue := A_Clipboard
+		local promptValue := A_Clipboard
 		A_Clipboard := ""
 
 		if promptValue != "" {
-			output := this.StrToHTML(promptValue, mode, ignoreDefaultSymbols)
+			local output := this.StrToHTML(promptValue, mode, ignoreDefaultSymbols)
 
 			A_Clipboard := output
 			ClipWait(0.250, 1)
@@ -296,7 +300,7 @@ Class Util {
 
 		keyRef := str
 
-		return true
+		return True
 	}
 
 	static StrTrimPath(str) {
@@ -304,8 +308,8 @@ Class Util {
 	}
 
 	static WidthBasedStrLen(str) {
-		len := StrLen(str)
-		lenSplit := StrSplit(str, "")
+		local len := StrLen(str)
+		local lenSplit := StrSplit(str, "")
 
 		for i, char in lenSplit {
 			if (Ord(char) >= 0x2003 && Ord(char) <= 0x2002) {
@@ -325,7 +329,7 @@ Class Util {
 	}
 
 	static HexCyrToLat(str) {
-		replacements := ["А", "A", "Б", "B", "С", "C", "Ц", "C", "Д", "D", "Е", "E", "Ф", "F"]
+		static replacements := ["А", "A", "Б", "B", "С", "C", "Ц", "C", "Д", "D", "Е", "E", "Ф", "F"]
 		for i, replacement in replacements
 			if Mod(i, 2) = 1
 				str := RegExReplace(str, "i)" replacement, replacements[i + 1])
@@ -338,12 +342,12 @@ Class Util {
 
 	static UnicodeToChar(unicode) {
 		if IsObject(unicode) {
-			hexStr := ""
+			local hexStr := ""
 
 			for value in unicode {
-				intermediate := this.ExtractHex(value)
+				local intermediate := this.ExtractHex(value)
 				if StrLen(intermediate) > 0 {
-					num := Format("0x{1}", intermediate)
+					local num := Format("0x{1}", intermediate)
 					hexStr .= Chr(num)
 				}
 			}
@@ -352,9 +356,9 @@ Class Util {
 				return hexStr
 			}
 		} else {
-			hexStr := this.ExtractHex(unicode)
+			local hexStr := this.ExtractHex(unicode)
 			if StrLen(hexStr) > 0 {
-				num := Format("0x{1}", hexStr)
+				local num := Format("0x{1}", hexStr)
 				return Chr(num)
 			}
 		}
@@ -362,7 +366,7 @@ Class Util {
 	}
 
 	static UnicodeToChars(unicode*) {
-		output := ""
+		local output := ""
 
 		if unicode.Length = 1 && unicode[1] is Array
 			unicode := unicode[1]
@@ -374,29 +378,29 @@ Class Util {
 	}
 
 	static ChrToUnicode(symbol, startFormat := "") {
-		symOrd := Ord(symbol)
-		code := startFormat Format("{:04X}", symOrd)
+		local symOrd := Ord(symbol)
+		local code := startFormat Format("{:04X}", symOrd)
 
 		return code
 	}
 
 	static ChrToDecimal(Symbol) {
-		HexCode := this.ChrToUnicode(Symbol)
-		return Format("{:d}", "0x" HexCode)
+		local hexCode := this.ChrToUnicode(Symbol)
+		return Format("{:d}", "0x" hexCode)
 	}
 
 	static ChrToHexaDecimal(stringInput, startFromat := "0x") {
 		if stringInput != "" {
-			output := ""
-			i := 1
+			local output := ""
+			local i := 1
 
 			while (i <= StrLen(stringInput)) {
-				symbol := SubStr(stringInput, i, 1)
-				code := Ord(symbol)
+				local symbol := SubStr(stringInput, i, 1)
+				local code := Ord(symbol)
 
 				if (code >= 0xD800 && code <= 0xDBFF) {
-					NextSymbol := SubStr(stringInput, i + 1, 1)
-					symbol .= NextSymbol
+					local nextSymbol := SubStr(stringInput, i + 1, 1)
+					symbol .= nextSymbol
 					i += 1
 				}
 
@@ -408,28 +412,30 @@ Class Util {
 		} else {
 			return stringInput
 		}
+		return
 	}
 
-	static HexaDecimalToChr(StringInput) {
-		if StringInput != "" {
-			Output := ""
-			for symbol in StrSplit(StringInput, "-") {
-				Output .= Chr(symbol)
+	static HexaDecimalToChr(stringInput) {
+		if stringInput != "" {
+			local output := ""
+			for symbol in StrSplit(stringInput, "-") {
+				output .= Chr(symbol)
 			}
-			return Output
+			return output
 		} else {
-			return StringInput
+			return stringInput
 		}
+		return
 	}
 
 
-	static FormatHotKey(HKey, Modifier := "") {
-		output := ""
-		if HKey is Array && HKey.Length > 0 {
-			output := HKey.ToString(" ")
+	static FormatHotKey(hKey, modifier := "") {
+		local output := ""
+		if hKey is Array && hKey.Length > 0 {
+			output := hKey.ToString(" ")
 		}
 
-		SpecialCommandsMap := Map(
+		static specialCommandsMap := Map(
 			CtrlA, LeftControl " a ф",
 			CtrlB, LeftControl " b и",
 			CtrlC, LeftControl " c с",
@@ -462,38 +468,38 @@ Class Util {
 			Tabulation, "Tab"
 		)
 
-		for key, value in SpecialCommandsMap {
+		for key, value in specialCommandsMap {
 			output := RegExReplace(output, key, value)
 		}
 
 		return output
 	}
 
-	static ReplaceModifierKeys(Input) {
-		Output := Input
-		if IsObject(Output) {
-			for i, k in Output {
-				Output[i] = this.ReplaceModifierKeys(k)
+	static ReplaceModifierKeys(input) {
+		local output := input
+		if IsObject(output) {
+			for i, k in output {
+				output[i] = this.ReplaceModifierKeys(k)
 			}
 		} else {
-			Output := RegExReplace(Output, "\<\!", LeftAlt)
-			Output := RegExReplace(Output, "\>\!", RightAlt)
-			Output := RegExReplace(Output, "\<\+", LeftShift)
-			Output := RegExReplace(Output, "\>\+", RightShift)
-			Output := RegExReplace(Output, "\<\^", LeftControl)
-			Output := RegExReplace(Output, "\>\^", RightControl)
-			Output := RegExReplace(Output, "c\*", CapsLock)
+			output := RegExReplace(output, "\<\!", LeftAlt)
+			output := RegExReplace(output, "\>\!", RightAlt)
+			output := RegExReplace(output, "\<\+", LeftShift)
+			output := RegExReplace(output, "\>\+", RightShift)
+			output := RegExReplace(output, "\<\^", LeftControl)
+			output := RegExReplace(output, "\>\^", RightControl)
+			output := RegExReplace(output, "c\*", CapsLock)
 		}
-		return Output
+		return output
 	}
 
 	static EscapePathChars(str) {
 		str := StrReplace(str, " ", "_")
 		str := StrReplace(str, "\", "____")
 		str := StrReplace(str, "/", "____")
-		dotPos := InStr(str, ".", , -1)
+		local dotPos := InStr(str, ".", , -1)
 		if (dotPos) {
-			ext := SubStr(str, dotPos)
+			local ext := SubStr(str, dotPos)
 			str := SubStr(str, 1, dotPos - 1)
 		}
 
@@ -510,13 +516,13 @@ Class Util {
 	}
 
 	static HasAllCharacters(str, pattern) {
-		WordBoundary := "[^a-zA-Zа-яА-ЯёЁ]"
+		static wordBoundary := "[^a-zA-Zа-яА-ЯёЁ]"
 
 		if RegExMatch(pattern, "\s") {
-			WordSplit := StrSplit(pattern, " ")
-			for word in WordSplit {
+			local wordSplit := StrSplit(pattern, " ")
+			for word in wordSplit {
 				if StrLen(word) < 3 {
-					pattern := "(^|" WordBoundary ")" word "($|" WordBoundary ")"
+					pattern := "(^|" wordBoundary ")" word "($|" wordBoundary ")"
 					if !RegExMatch(str, pattern)
 						return False
 				} else {
@@ -535,9 +541,9 @@ Class Util {
 	}
 
 	static HasSequentialCharacters(str, pattern, caseSense := False) {
-		pos := 1
+		local pos := 1
 		for char in StrSplit(pattern) {
-			found := InStr(str, char, caseSense, pos)
+			local found := InStr(str, char, caseSense, pos)
 			if !found
 				return False
 			pos := found + 1
@@ -546,14 +552,14 @@ Class Util {
 	}
 
 	static INIRenameSection(filePaths, oldSection, newSection) {
-		content := FileRead(filePaths, "UTF-16")
-		split := StrSplit(content, "`n", "`r")
+		local content := FileRead(filePaths, "UTF-16")
+		local split := StrSplit(content, "`n", "`r")
 
-		found := false
+		local found := False
 		for i, line in split {
 			if (line = "[" oldSection "]") {
 				split[i] := "[" newSection "]"
-				found := true
+				found := True
 			}
 		}
 
@@ -566,9 +572,9 @@ Class Util {
 	}
 
 	static INIGetSections(filePaths, postfix := "") {
-		output := []
+		local output := []
 		for singleFile in filePaths {
-			content := FileRead(singleFile, "UTF-16")
+			local content := FileRead(singleFile, "UTF-16")
 			for line in StrSplit(content, "`n") {
 				if RegExMatch(line, "^\[(.*)\]$", &match) {
 					output.Push(Trim(match[1]) postfix)
@@ -582,11 +588,11 @@ Class Util {
 		if !InStr(filePath, ".ini")
 			filePath .= ".ini"
 
-		content := FileRead(filePath, "UTF-16")
-		lines := StrSplit(content, "`n", "`r`n")
+		local content := FileRead(filePath, "UTF-16")
+		local lines := StrSplit(content, "`n", "`r`n")
 
-		iniMap := Map()
-		currentSection := ""
+		local iniMap := Map()
+		local currentSection := ""
 
 		for line in lines {
 			line := Trim(line)
@@ -598,9 +604,9 @@ Class Util {
 				iniMap.Set(currentSection, Map())
 			}
 			else if (currentSection != "" && InStr(line, "=")) {
-				parts := StrSplit(line, "=", "`t ")
-				key := Trim(parts[1])
-				value := Trim(parts[2])
+				local parts := StrSplit(line, "=", "`t ")
+				local key := Trim(parts[1])
+				local value := Trim(parts[2])
 				iniMap[currentSection].Set(key, value)
 			}
 		}
@@ -610,16 +616,16 @@ Class Util {
 
 
 	static INIToObj(filePath) {
-		obj := {}
+		local obj := {}
 		filePath := filePath (!InStr(filePath, ".ini") ? ".ini" : "")
 
 		if !FileExist(filePath)
 			return obj
 
-		content := FileRead(filePath, "UTF-16")
-		lines := StrSplit(content, "`n", "`r`n")
+		local content := FileRead(filePath, "UTF-16")
+		local lines := StrSplit(content, "`n", "`r`n")
 
-		currentSection := ""
+		local currentSection := ""
 
 		for line in lines {
 			line := Trim(line)
@@ -630,9 +636,9 @@ Class Util {
 				currentSection := SubStr(line, 2, -1)
 				obj.%currentSection% := {}
 			} else if (currentSection != "" && InStr(line, "=")) {
-				eqPos := InStr(line, "=")
-				key := Trim(SubStr(line, 1, eqPos - 1))
-				value := Trim(SubStr(line, eqPos + 1))
+				local eqPos := InStr(line, "=")
+				local key := Trim(SubStr(line, 1, eqPos - 1))
+				local value := Trim(SubStr(line, eqPos + 1))
 
 				obj.%currentSection%.%key% := value
 			}
@@ -642,8 +648,8 @@ Class Util {
 	}
 
 	static MultiINIToObj(pathsArray) {
-		bufferArray := []
-		bufferObject := {}
+		local bufferArray := []
+		local bufferObject := {}
 
 		for path in pathsArray {
 			bufferArray.Push(this.INIToObj(path))
@@ -664,7 +670,6 @@ Class Util {
 	}
 
 	static ObjToINI(obj, filePath) {
-
 		for localeKey, dict in obj.OwnProps() {
 			for key, value in obj.%localeKey%.OwnProps() {
 				IniWrite(value, filePath, localeKey, key)
@@ -674,8 +679,8 @@ Class Util {
 	}
 
 	static ObjPreview(obj, indent := 0) {
-		output := ""
-		indentStr := Util.StrRepeat("`t", indent)
+		local output := ""
+		local indentStr := Util.StrRepeat("`t", indent)
 
 		for key, value in obj.OwnProps() {
 			if IsObject(value) {
@@ -698,10 +703,10 @@ Class Util {
 	}
 
 	static TextProgressBar(current, total, width := 20) {
-		percent := Floor((current / total) * 100)
-		filledWidth := Round(width * percent / 100)
-		unfilledWidth := width - filledWidth
-		bar := "▏ " Util.StrRepeat("█" Chr(0x2006), filledWidth) Util.StrRepeat(Chrs(0x2002, 0x2005, 0x2006) (current != total ? Chr(0x2006) : ""), unfilledWidth) " ▕  " percent "%"
+		local percent := Floor((current / total) * 100)
+		local filledWidth := Round(width * percent / 100)
+		local unfilledWidth := width - filledWidth
+		local bar := "▏ " Util.StrRepeat("█" Chr(0x2006), filledWidth) Util.StrRepeat(Chrs(0x2002, 0x2005, 0x2006) (current != total ? Chr(0x2006) : ""), unfilledWidth) " ▕  " percent "%"
 
 		return bar
 	}

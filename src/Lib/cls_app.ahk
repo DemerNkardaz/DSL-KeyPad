@@ -234,7 +234,7 @@ Class App {
 		App.tray.Add()
 		App.tray.Add(labels.userRecipes, (*) => Cfg.SubGUIs("Recipes")), App.tray.SetIcon(labels.userRecipes, ImageRes, 188)
 		App.tray.Add()
-		App.tray.Add(labels.search, (*) => ChrLib.SearchPrompt().send()), App.tray.SetIcon(labels.search, ImageRes, 169)
+		App.tray.Add(labels.search, (*) => Search()), App.tray.SetIcon(labels.search, ImageRes, 169)
 		App.tray.Add(labels.unicode, (*) => CharacterInserter("Unicode").InputDialog(False)),
 			App.tray.SetIcon(labels.unicode, Shell32, 225)
 		App.tray.Add(labels.altcode, (*) => CharacterInserter("Altcode").InputDialog(False)),

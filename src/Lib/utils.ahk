@@ -7,6 +7,7 @@ Array.Prototype.DefineProp("MaxIndex", { Call: _ArrayMaxIndex })
 Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
 Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Array.Prototype.DefineProp("MergeWith", { Call: _ArrayMergeWith })
+Array.Prototype.DefineProp("Clear", { Call: _ArrayClear })
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("Values", { Call: _MapValues })
 Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
@@ -18,14 +19,23 @@ Map.Prototype.DefineProp("GetRef", { Call: _MapGetRef })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
 
+
+ClassClear(this) {
+	for k, v in this.OwnProps() {
+		this.%k% := unset
+	}
+	return
+}
+
 ObjGet(this, j) {
-	i := 0
+	local i := 0
 	for k, v in this.OwnProps() {
 		if i = j {
 			return v
 		}
 		i++
 	}
+	return
 }
 
 _ObjMaxIndex(this) {
@@ -33,11 +43,16 @@ _ObjMaxIndex(this) {
 }
 
 _ObjKeys(this) {
-	keys := []
+	local keys := []
 	for k, v in this.OwnProps() {
 		keys.Push(k)
 	}
 	return keys
+}
+
+_ArrayClear(this) {
+	this.Length := 0
+	return this
 }
 
 _ArrayMergeWith(this, arrays*) {
@@ -46,10 +61,11 @@ _ArrayMergeWith(this, arrays*) {
 			this.Push(item)
 		}
 	}
+	return
 }
 
 _ArrayToFlat(this) {
-	result := []
+	local result := []
 	for item in this {
 		if item is Array {
 			for subItem in item {
@@ -63,7 +79,7 @@ _ArrayToFlat(this) {
 }
 
 _ArrayToString(this, separator := ", ", bounds := "") {
-	str := ""
+	local str := ""
 	for index, value in this {
 		if index = this.Length {
 			if value is Array {
@@ -120,7 +136,7 @@ _ArrayContains(this, valueToFind, &indexID?) {
 }
 
 _ArrayMaxIndex(this) {
-	indexes := 0
+	local indexes := 0
 	for i, v in this {
 		indexes++
 	}
@@ -135,15 +151,16 @@ _ArrayRemoveValue(this, valueToRemove) {
 			break
 		}
 	}
+	return
 }
 
 _ArraySortLen(this) {
-	sorted := this.Clone()
+	local sorted := this.Clone()
 
 	for i, _ in sorted {
 		for j, _ in sorted {
 			if (StrLen(sorted[i]) > StrLen(sorted[j])) {
-				temp := sorted[i]
+				local temp := sorted[i]
 				sorted[i] := sorted[j]
 				sorted[j] := temp
 			}
@@ -161,22 +178,23 @@ ArrayMergeTo(TargetArray, Arrays*) {
 			TargetArray.Push(element)
 		}
 	}
+	return
 }
 
 ArrayMerge(Arrays*) {
-	TempArray := []
+	local tempArray := []
 	for arrayItem in Arrays {
 		if !IsObject(arrayItem)
 			continue
 		for element in arrayItem {
-			TempArray.Push(element)
+			tempArray.Push(element)
 		}
 	}
-	return TempArray
+	return tempArray
 }
 
 RegExEscape(str) {
-	newStr := ""
+	local newStr := ""
 	for k, char in StrSplit(str) {
 		if InStr(regExChars, char) {
 			newStr .= "\" char
@@ -188,7 +206,7 @@ RegExEscape(str) {
 }
 
 _MapKeys(this, t := "k") {
-	keys := []
+	local keys := []
 	for k, v in this {
 		keys.Push(%t%)
 	}
@@ -200,7 +218,7 @@ _MapValues(this) {
 }
 
 _MapToArray(this) {
-	arr := []
+	local arr := []
 	for k, v in this {
 		arr.Push(k, v)
 	}
@@ -221,7 +239,7 @@ _MapMergeWith(this, maps*) {
 }
 
 _MapDeepClone(this) {
-	result := Map()
+	local result := Map()
 	for key, value in this {
 		if value is Map
 			result[key] := value.DeepClone()
@@ -252,11 +270,11 @@ _MapDeepMergeBinds(this, maps*) {
 		if mapToMerge.Count = 0
 			continue
 		for newKey, newVal in mapToMerge {
-			newKeyBase := RegExMatch(newKey, "^([^:]+)", &baseMatch) ? baseMatch[1] : newKey
+			local newKeyBase := RegExMatch(newKey, "^([^:]+)", &baseMatch) ? baseMatch[1] : newKey
 
-			keyToRemove := ""
+			local keyToRemove := ""
 			for existingKey in this {
-				existingKeyBase := RegExMatch(existingKey, "^([^:]+)", &existingBaseMatch) ? existingBaseMatch[1] : existingKey
+				local existingKeyBase := RegExMatch(existingKey, "^([^:]+)", &existingBaseMatch) ? existingBaseMatch[1] : existingKey
 
 				if (existingKeyBase = newKeyBase) {
 					if (InStr(newKey, ":") > 0) {
@@ -282,46 +300,8 @@ _MapDeepMergeBinds(this, maps*) {
 
 _MapGetRef(this, key, &output := "") {
 	if this.Has(key)
-		output := this.Get(key)
-	return output
-}
-
-MapInsert(MapObj, Pairs*) {
-	keyCount := 0
-	for index in MapObj {
-		keyCount++
-	}
-
-	startNumber := keyCount + 1
-	numberLength := 10
-
-	for i, pair in Pairs {
-		if (Mod(i, 2) == 1) {
-			try {
-				key := pair
-				numberStr := "0" . startNumber
-				while (StrLen(numberStr) < numberLength) {
-					numberStr := "0" . numberStr
-				}
-				formattedKey := numberStr . " " . key
-				startNumber++
-			} catch {
-				throw Error("Failed to format key: " i " ")
-			}
-		} else {
-			MapObj[formattedKey] := pair
-		}
-	}
-}
-
-MapPush(MapObj, Pairs*) {
-	for i, pair in Pairs {
-		if (Mod(i, 2) == 1) {
-			key := pair
-		} else {
-			MapObj[key] := pair
-		}
-	}
+		return this.Get(key)
+	return
 }
 
 MapMergeTo(TargetMap, MapObjects*) {
@@ -332,16 +312,17 @@ MapMergeTo(TargetMap, MapObjects*) {
 			TargetMap[entry] := value
 		}
 	}
+	return
 }
 
 MapMerge(MapObjects*) {
-	TempMap := Map()
+	local tempMap := Map()
 	for mapObj in MapObjects {
 		for entry, value in mapObj {
-			TempMap[entry] := value
+			tempMap[entry] := value
 		}
 	}
-	return TempMap
+	return tempMap
 }
 
 ClipSendProcessed(callback, noSendRestore := False, isClipReverted := True, untilRevert := 300) {
@@ -367,6 +348,7 @@ ClipSendProcessed(callback, noSendRestore := False, isClipReverted := True, unti
 	} else {
 		SendText(copyBackup)
 	}
+	return
 }
 
 CodesToAHK(filePath, outputFilePath := "funcOut") {
@@ -374,59 +356,62 @@ CodesToAHK(filePath, outputFilePath := "funcOut") {
 	outputFilePath := A_ScriptDir "\UtilityFiles\" outputFilePath ".ahk"
 
 
-	fileContent := FileRead(fullPath, "UTF-8")
+	local fileContent := FileRead(fullPath, "UTF-8")
 
 	FileAppend("funcOut := [`n", outputFilePath, "UTF-8")
 
 	for line in StrSplit(fileContent, "`n") {
 		RegExMatch(line, '^(.+)\t(.+)', &match)
-		entityCode := Format("0x{1}", match[1])
-		entityName := InStr(filePath, "alt") ? match[2] : "&" match[2] ";"
+		local entityCode := Format("0x{1}", match[1])
+		local entityName := InStr(filePath, "alt") ? match[2] : "&" match[2] ";"
 
-		outString := "`tChr(" entityCode "), `"" entityName "`",`n"
+		local outString := "`tChr(" entityCode "), `"" entityName "`",`n"
 		FileAppend(outString, outputFilePath, "UTF-8")
 	}
 
 	FileAppend("]", outputFilePath, "UTF-8")
 
 	fileContent := FileRead(fullPath, "UTF-8")
+	return
 }
 
 Chrs(chrCodes*) {
-	Output := ""
+	local output := ""
 
 	for code in chrCodes {
 		if code is Array {
-			charCode := code[1]
-			charRepeats := code.Has(2) ? code[2] : 1
+			local charCode := code[1]
+			local charRepeats := code.Has(2) ? code[2] : 1
 
 			Loop charRepeats
-				Output .= Chr(charCode)
+				output .= Chr(charCode)
 		} else {
-			Output .= Chr(code)
+			output .= Chr(code)
 		}
 	}
 
-	return Output
+	return output
 }
 
 GetKeyScanCode() {
-	IB := InputBox("Scan code get", "Scan code", "w350 h110", "")
+	local IB := InputBox("Scan code get", "Scan code", "w350 h110", "")
 
 	if IB.Result = "Cancel"
 		return
-	else
-		PromptValue := IB.Value
-	scanCode := GetKeySC(PromptValue)
-	scanCode := Format("{:X}", scanCode)
-	scanCode := StrLen(scanCode) == 1 ? "00" scanCode : StrLen(scanCode) == 2 ? "0" scanCode : scanCode
-	scanCode := "SC" scanCode
-	SendText(scanCode)
+	else {
+		local promptValue := IB.Value
+		local scanCode := GetKeySC(promptValue)
+		scanCode := Format("{:X}", scanCode)
+		scanCode := StrLen(scanCode) == 1 ? "00" scanCode : StrLen(scanCode) == 2 ? "0" scanCode : scanCode
+		scanCode := "SC" scanCode
+		SendText(scanCode)
+	}
+	return
 }
 
 ContainsEmoji(StringInput) {
-	EmojisPattern := "[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F900}-\x{1F9FF}\x{2700}-\x{27BF}\x{1F1E6}-\x{1F1FF}]"
-	return RegExMatch(StringInput, EmojisPattern)
+	static emojisPattern := "[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F900}-\x{1F9FF}\x{2700}-\x{27BF}\x{1F1E6}-\x{1F1FF}]"
+	return RegExMatch(StringInput, emojisPattern)
 }
 
 IsGuiOpen(title) {
@@ -436,10 +421,10 @@ IsGuiOpen(title) {
 ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := App.Title("+status+version"), SkipMessage := False, Mute := False, NoReadLocale := False) {
 	if SkipMessage == True
 		return
-	Muting := Mute ? " Mute" : ""
-	Ico := MessageIcon == "Info" ? "Iconi" :
+	local muting := Mute ? " Mute" : ""
+	local ico := MessageIcon == "Info" ? "Iconi" :
 		MessageIcon == "Warning" ? "Icon!" :
 		MessageIcon == "Error" ? "Iconx" : 0x0
-	TrayTip(NoReadLocale ? MessagePost : Locale.Read(MessagePost), MessageTitle, Ico . Muting)
+	TrayTip(NoReadLocale ? MessagePost : Locale.Read(MessagePost), MessageTitle, ico . muting)
 
 }

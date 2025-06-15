@@ -1,0 +1,164 @@
+Class Search {
+	__New(action := "send") {
+		this.SearchPrompt(action)
+	}
+
+	__Delete() {
+		ClassClear(this)
+	}
+
+	SearchPrompt(action) {
+		local searchQuery := Cfg.Get("Search", "LatestPrompts", "")
+		local resultObj := { result: "", prompt: "", failed: [], send: (*) => "" }
+		local IB := InputBox(Locale.Read("symbol_search_prompt"), Locale.Read("symbol_search"), "w350 h110", searchQuery)
+		if IB.Result = "Cancel" || IB.Value = "" || IB.Value ~= "^\s*$"
+			return resultObj
+		else
+			searchQuery := IB.Value
+
+		if searchQuery == "\" {
+			Reload
+			return resultObj
+		}
+
+		if RegExMatch(searchQuery, "^\/(.*?)$", &match) {
+			local funcRef := StrSplit(match[1], ".")
+			if funcRef.Length = 1 {
+				%funcRef[1]%()
+			} else if funcRef.Length > 1 {
+				local interRef := ""
+				local objRef := ""
+
+				for i, ref in funcRef {
+					if i = 1 {
+						interRef := %ref%
+						objRef := interRef
+					} else if i < funcRef.Length {
+						interRef := interRef.%ref%
+						objRef := interRef
+					} else {
+						local method := ref
+						interRef := interRef.%method%
+						interRef.Call(objRef)
+					}
+				}
+			}
+			return resultObj
+		} else {
+
+			if InStr(searchQuery, ",") {
+				local tagSplit := StrSplit(searchQuery, ",")
+				for tag in tagSplit {
+					local interResult := this.Search(Trim(tag))
+					if StrLen(interResult) = 0
+						resultObj.failed.Push(tag)
+					resultObj.result .= interResult
+				}
+			} else {
+				local interResult := this.Search(searchQuery)
+				if StrLen(interResult) = 0
+					resultObj.failed.Push(searchQuery)
+				resultObj.result := interResult
+			}
+
+			resultObj.prompt := searchQuery
+			local lineBreaks := resultObj.result ~= "`n" || resultObj.result ~= "`r"
+			resultObj.send := (*) => (StrLen(resultObj.result) > 20 || lineBreaks) ? ClipSend(resultObj.result) : SendText(resultObj.result)
+
+			if StrLen(resultObj.result) > 0 {
+				Cfg.Set(searchQuery, "Search", "LatestPrompts")
+			} else {
+				if resultObj.failed.Length > 0
+					MsgBox(Locale.ReadInject("warning_tag_absent", [resultObj.failed.ToString()]), App.Title(), "Icon!")
+			}
+
+			return resultObj.%action%()
+		}
+		return
+	}
+
+	Search(searchQuery) {
+		local indexedEntries := ChrLib.GetIndexedMap()
+
+		local nonSensitiveMark := "i)"
+		local isSensitive := SubStr(searchQuery, 1, 1) = "!"
+		if isSensitive {
+			searchQuery := SubStr(searchQuery, 2)
+			nonSensitiveMark := ""
+		}
+
+		local alteration := RegExMatch(searchQuery, "\:\:(.*?)$", &match) ? match[1] : Scripter.selectedMode.Get("Glyph Variations")
+
+		searchQuery := RegExReplace(searchQuery, "\:\:(.*?)$", "")
+
+		if ChrLib.entries.HasOwnProp(searchQuery)
+			return ChrLib.Get(searchQuery, True, Auxiliary.inputMode, alteration)
+
+		local isHasExpression := RegExMatch(searchQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
+
+		checkTagByUserRegEx(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
+			return tag ~= searchQuery
+		}
+
+		checkTagExact(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
+			if isSensitive
+				return searchQuery == tag
+			return searchQuery = tag
+		}
+
+		checkTagPartial(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
+			return tag ~= nonSensitiveMark searchQuery
+		}
+
+		checkTagSplittedPartial(tag, strict3 := True) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
+			local splitSearchQuery := StrSplit(searchQuery, " ")
+			for _, part in splitSearchQuery {
+				if StrLen(part) < 3 && strict3 {
+					if !(tag ~= nonSensitiveMark "(\A|\s)" part "(\s|\z)")
+						return False
+				} else {
+					if !(tag ~= nonSensitiveMark part)
+						return False
+				}
+			}
+			return splitSearchQuery.Length > 0
+		}
+
+		checkTagLowAccSequental(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
+			return Util.HasSequentialCharacters(tag, searchQuery, nonSensitiveMark = "")
+		}
+
+		checkTagLowAcc(tag) {
+			tag := StrReplace(tag, Chr(0x00A0), " ")
+			return Util.HasAllCharacters(tag, nonSensitiveMark searchQuery)
+		}
+
+		local conditions := [
+			(tag) => (isHasExpression ? checkTagByUserRegEx(tag) : False),
+			(tag) => (checkTagExact(tag)),
+			(tag) => (checkTagPartial(tag) || checkTagSplittedPartial(tag)),
+			(tag) => (checkTagSplittedPartial(tag, False)),
+			(tag) => (checkTagLowAccSequental(tag)),
+			(tag) => (checkTagLowAcc(tag)),
+		]
+
+		for i, condition in conditions {
+			for j, entryName in indexedEntries {
+				local entry := ChrLib.entries.%entryName%
+
+				if entry.tags.Length = 0
+					continue
+
+				for tag in entry.tags
+					if conditions[i](tag)
+						return ChrLib.Get(entryName, True, Auxiliary.inputMode, alteration)
+			}
+		}
+		return
+	}
+}

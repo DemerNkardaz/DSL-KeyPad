@@ -1211,14 +1211,14 @@ Class InputScriptProcessor {
 	}
 
 	static SequenceHandler(input := "", backspaceOn := False) {
-		IPS := InputScriptProcessor
+		static IPS := InputScriptProcessor
 
 		if IPS.blockHandler >= 2 {
 			IPS.blockHandler--
 			return
 		} else {
-			inputCut := (str, len := 7) => StrLen(str) > len ? SubStr(str, StrLen(str) - (len - 1)) : str
-			forbiddenChars := "[`n`r`t\x{0000}-\x{0020},." (
+			static inputCut := (str, len := 7) => StrLen(str) > len ? SubStr(str, StrLen(str) - (len - 1)) : str
+			static forbiddenChars := "[`n`r`t\x{0000}-\x{0020},." (
 				ChrLib.Get(
 					(
 						"\"
@@ -1387,16 +1387,19 @@ Class InputScriptProcessor {
 
 	static backspaceLock := False
 	static Backspacer(ih, vk, sc) {
-		IPS := InputScriptProcessor
-		sc := Number(sc)
-		backspaceCode := LayoutList.GetKeyCodes("int", "Backspace")
-		resetKeys := LayoutList.GetKeyCodes("int",
+		static IPS := InputScriptProcessor
+		static backspaceCode := LayoutList.GetKeyCodes("int", "Backspace")[1]
+		static resetKeys := LayoutList.GetKeyCodes("int",
 			"Left", "Right", "Up", "Down", "Home", "End", "PgUp", "PgDn",
 			"RCtrl", "Space"
 		)
 
+		sc := Number(sc)
+
+		isCtrlPressed := GetKeyState("LControl", "P") || GetKeyState("RControl", "P")
+
 		if StrLen(IPS.inputLogger) > 0 && sc = backspaceCode && !InputScriptProcessor.backspaceLock {
-			IPS.inputLogger := SubStr(IPS.inputLogger, 1, -1)
+			IPS.inputLogger := isCtrlPressed ? "" : SubStr(IPS.inputLogger, 1, -1)
 
 			Util.CaretTooltip(IPS.inputLogger)
 		} else if resetKeys.HasValue(sc) {

@@ -29,6 +29,8 @@ initialized := False
 #Include <chr_entities>
 #Include <cls_chr_block>
 #Include <cls_util>
+#Include <cls_progress_bar>
+#Include <cls_search>
 #Include <cls_unicode_web_resource>
 #Include <chr_lib>
 
@@ -37,6 +39,8 @@ initialized := False
 #Include <cls_update>
 #Include <cls_cfg>
 #Include <cls_fonts>
+#Include <cls_chr_ent>
+#Include <cls_chr_reg>
 #Include <cls_chr_lib>
 #Include <cls_chr_crafter>
 #Include <cls_chr_inserter>

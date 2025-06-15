@@ -614,7 +614,7 @@ Class MyRecipes {
 
 					if !existingEntry {
 						rawCustomEntries.Push(
-							section.section, ChrEntry({
+							section.section, ChrEntry().Get({
 								result: [section.result],
 								titles: title ? title : section.name,
 								tags: section.tags ? section.tags : [],
@@ -629,7 +629,7 @@ Class MyRecipes {
 					MsgBox("[" section.section "]`n" Locale.ReadInject("gui_recipes_create_invalid_recipe", [section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result]), App.Title("+status+version"))
 				}
 			}
-			ChrLib.AddEntries(rawCustomEntries, "Custom")
+			ChrReg(rawCustomEntries, "Custom")
 			if ChrLib.duplicatesList.Length > 0
 				TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
 		}

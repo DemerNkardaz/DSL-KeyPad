@@ -1861,7 +1861,7 @@ bindingMaps := Map(
 			"Home", Map("<#<!", (*) => Panel.Panel()),
 			"A", Map("<#<!", (*) => Scripter.SelectorPanel("Glyph Variations")),
 			"S", Map("<#<!", (*) => Scripter.SelectorPanel()),
-			"F", Map("<#<!", (*) => ChrLib.SearchPrompt().send()),
+			"F", Map("<#<!", (*) => Search()),
 			"H", Map(
 				">^", (*) => Util.StrSelToHTML("Entities"),
 				">^>+", (*) => Util.StrSelToHTML("Hex"),

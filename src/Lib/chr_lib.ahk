@@ -4,9 +4,9 @@
 	* Single Entry: "name",							{ ... }
 	* Bulk Entry:		"[name,name,name]", { [..., ..., ...] }
 */
-LibRegistrate(this) {
-	local D := "dotted_circle"
-	rawEntries := [
+LibRegistrate() {
+	static D := Chr(0x25CC)
+	local rawEntries := [
 		;
 		;
 		; * Diacritics
@@ -13438,12 +13438,13 @@ LibRegistrate(this) {
 	]
 
 	Loop 256 {
-		index := A_Index
+		local index := A_Index
+		local unicodeValue := ""
 
 		if (index <= 16) {
 			unicodeValue := Format("FE{:02X}", index - 1)
 		} else {
-			offset := index - 17
+			local offset := index - 17
 			unicodeValue := Format("E01{:02X}", offset)
 		}
 
@@ -13456,11 +13457,14 @@ LibRegistrate(this) {
 				symbol: { alt: "<VARIATION SELECTOR-" index ">" }
 			}
 		)
+
+		index := unset
+		unicodeValue := unset
 	}
 
 	Loop 5 {
-		index := A_Index
-		unicodeValue := Format("{:X}", 0x1F3FA + index)
+		local index := A_Index
+		local unicodeValue := Format("{:X}", 0x1F3FA + index)
 
 		if index > 1
 			index++
@@ -13477,9 +13481,12 @@ LibRegistrate(this) {
 				symbol: { alt: "<EMOJI MODIFIER FITZPATRICK TYPE-" (index = 1 ? "1-2" : index) ">" }
 			}
 		)
+
+		index := unset
+		unicodeValue := unset
 	}
 
-	emoji_hairs := Map(
+	local emoji_hairs := Map(
 		1, ["red_hair", "rh"],
 		2, ["curly_hair", "ch"],
 		3, ["bald", "ba"],
@@ -13487,10 +13494,10 @@ LibRegistrate(this) {
 	)
 
 	Loop 4 {
-		index := A_Index
-		unicodeValue := Format("{:X}", 0x1F9AF + index)
-		entryPost := emoji_hairs[index][1]
-		title := StrReplace(Util.StrUpper(entryPost, 1), "_", " ")
+		local index := A_Index
+		local unicodeValue := Format("{:X}", 0x1F9AF + index)
+		local entryPost := emoji_hairs[index][1]
+		local title := StrReplace(Util.StrUpper(entryPost, 1), "_", " ")
 
 		rawEntries.Push(
 			"emoji_component_" entryPost, {
@@ -13504,11 +13511,19 @@ LibRegistrate(this) {
 				symbol: { alt: "<EMOJI COMPONENT " StrUpper(title) ">" }
 			}
 		)
+
+		index := unset
+		unicodeValue := unset
+		entryPost := unset
+		title := unset
 	}
 
+	ChrReg(rawEntries)
 
-	this.AddEntries(rawEntries)
+	if ChrLib.duplicatesList.Length > 0
+		TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
 
-	if this.duplicatesList.Length > 0
-		TrayTip(Locale.ReadInject("warning_duplicate_recipe", [this.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
+	rawEntries := unset
+	emoji_hairs := unset
+	return
 }
