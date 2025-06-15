@@ -348,8 +348,8 @@ Class ChrReg {
 
 	TransferRecipeProperty(&entryName, &key, &value, &skipStatus := "") {
 		try {
-			local tempRecipe := value.Clone()
-			local definedRecipe := (*) => ChrRecipeHandler.Make([tempRecipe], entryName, skipStatus)
+			local tempRecipe := [value.Clone()]
+			local definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe, entryName, skipStatus)
 			local interObj := {}
 			interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
 			ChrLib.entries.%entryName%.%key% := interObj.Get
@@ -366,17 +366,17 @@ Class ChrReg {
 		if this.attemptQueue.Length > 0 {
 			for entryName in this.attemptQueue {
 				local presavedIndex := ChrLib.entries.%entryName%.index
-				ChrLib.entries.%entryName% := {}
+				ChrLib.entries.%entryName% := ChrLib.entriesSource.%entryName%.Clone()
+				local libEntry := ChrLib.entries.%entryName%
+				libEntry.index := presavedIndex
 
-				local entrySrc := ChrLib.entriesSource.%entryName%.Clone()
-				this.EntryPreProcessing(&entryName, &entrySrc)
-				this.TransferProperties(&entryName, &entrySrc, &skipStatus := "Missing")
-				local entry := ChrLib.entries.%entryName%
-				entry := entrySrc
+				this.EntryPreProcessing(&entryName, &libEntry)
+				this.TransferProperties(&entryName, &libEntry, &skipStatus := "Missing")
 
-				ChrLib.entries.%entryName%.index := presavedIndex
+				libEntry.recipe := ChrRecipeHandler.Make(libEntry.recipe, entryName, skipStatus)
+				libEntry.result := ChrRecipeHandler.Make(libEntry.result, entryName, skipStatus)
 
-				this.EntryPostProcessing(&entryName, &entry)
+				this.EntryPostProcessing(&entryName, &libEntry)
 			}
 			this.attemptQueue := []
 		}
@@ -689,7 +689,7 @@ Class ChrReg {
 			if refinedEntry.recipe.Length > 0 {
 				for i, recipe in refinedEntry.recipe {
 					refinedEntry.recipe[i] := RegExReplace(recipe, "\~", SubStr(refinedEntry.data.letter, 1, 1))
-					refinedEntry.recipe[i] := RegExReplace(recipe, "\$", dataLetter)
+					refinedEntry.recipe[i] := RegExReplace(recipe, "\$(?![{(])", dataLetter)
 				}
 			}
 		}
@@ -794,7 +794,7 @@ Class ChrReg {
 		local output := str
 
 		if StrLen(data.letter) > 0 {
-			output := RegExReplace(output, "\$", data.dataLetter)
+			output := RegExReplace(output, "\$(?![{(])", data.dataLetter)
 			output := RegExReplace(output, "\~", SubStr(data.letter, 1, 1))
 			output := RegExReplace(output, "\?(.*?)$")
 		}
