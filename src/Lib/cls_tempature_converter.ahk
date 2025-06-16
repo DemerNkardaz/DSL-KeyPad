@@ -108,6 +108,30 @@ Class TemperatureConversion {
 		"MEK", (G) => (G / 100) * 395.56 + 234.32,
 		"CME", (G) => (G + 38.83) * 100 / 395.56,
 		"KME", (G) => (G - 234.32) * 100 / 395.56,
+		; Dalton (Da)
+		"DAC", (G) => 273.15 * (((373.15 / 273.15) ** (G / 100)) - 1),
+		"DAF", (G) => (273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) * 9 / 5 + 32,
+		"DAK", (G) => 273.15 * ((373.15 / 273.15) ** (G / 100)),
+		"DARA", (G) => 273.15 * ((373.15 / 273.15) ** (G / 100)) * 1.8,
+		"DAN", (G) => (273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) * 33 / 100,
+		"DAD", (G) => (100 - (273.15 * (((373.15 / 273.15) ** (G / 100)) - 1))) * 3 / 2,
+		"DAH", (G) => (273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) * 5 / 12,
+		"DAL", (G) => (273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) + 253,
+		"DAW", (G) => ((273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) / 24.857191) - 10.821818,
+		"DARO", (G) => ((273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) / 1.904762) + 7.5,
+		"DARE", (G) => (273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) / 1.25,
+		; Обратные конверсии в Dalton
+		"CDA", (G) => 100 * (Log(G + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"FDA", (G) => 100 * (Log((G - 32) * 5 / 9 + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"KDA", (G) => 100 * (Log(G) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"RADA", (G) => 100 * (Log(G / 1.8) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"NDA", (G) => 100 * (Log(G * 100 / 33 + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"DDA", (G) => 100 * (Log(100 - G * 2 / 3 + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"HDA", (G) => 100 * (Log(G * 12 / 5 + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"LDA", (G) => 100 * (Log(G - 253 + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"WDA", (G) => 100 * (Log(24.857191 * G + 269 + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"RODA", (G) => 100 * (Log(1.904762 * G - 14.285714 + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
+		"REDA", (G) => 100 * (Log(1.25 * G + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
 	)
 
 	static scales := {
@@ -123,6 +147,7 @@ Class TemperatureConversion {
 		ME: "Me",
 		RO: "R" ChrLib.Get("lat_s_let_o__solidus_long"),
 		RE: "R" ChrLib.Get("lat_s_let_e__acute"),
+		DA: "Da"
 	}
 
 	static typographyTypes := Map(
@@ -139,17 +164,18 @@ Class TemperatureConversion {
 
 	static RegistryHotstrings() {
 		hsKeys := [
-			'cd', 'cf', 'ck', 'cn', 'cra', "cl", "cw", "cro", "cre", 'ch', ; Celsius
-			'fc', 'fd', 'fk', 'fn', 'fra', 'fl', 'fw', 'fro', 'fre', ; Fahrenheit
-			'kc', 'kd', 'kf', 'kn', 'kra', 'kl', 'kw', 'kro', 'kre', ; Kelvin
-			'nc', 'nd', 'nf', 'nk', 'nra', 'nl', 'nw', 'nro', 'nre', ; Newton
-			'rac', 'rad', 'raf', 'rak', 'ran', 'ral', 'raw', 'raro', 'rare', ; Rankine
-			'dc', 'df', 'dk', 'dn', 'dra', 'dl', 'dw', 'dro', 'dre', ; Delisle
-			'lc', 'lf', 'lk', 'ln', 'lra', 'ld', 'lw', 'lro', 'lre', ; Leiden
-			'wc', 'wf', 'wk', 'wn', 'wra', 'wd', 'wl', 'wro', 'wre', ; Wedgwood
-			'roc', 'rof', 'rok', 'ron', 'rora', 'rod', 'rol', 'row', 'rore', ; Romer
-			'rec', 'ref', 'rek', 'ren', 'rera', 'red', 'rel', 'rew', 'rero', ; Reaumur
-			'hc', ; Hooke
+			'cd', 'cf', 'ck', 'cn', 'cra', "cl", "cw", "cro", "cre", 'ch', 'cda', ; Celsius
+			'fc', 'fd', 'fk', 'fn', 'fra', 'fl', 'fw', 'fro', 'fre', 'fda', ; Fahrenheit
+			'kc', 'kd', 'kf', 'kn', 'kra', 'kl', 'kw', 'kro', 'kre', 'kda', ; Kelvin
+			'nc', 'nd', 'nf', 'nk', 'nra', 'nl', 'nw', 'nro', 'nre', 'nda', ; Newton
+			'rac', 'rad', 'raf', 'rak', 'ran', 'ral', 'raw', 'raro', 'rare', 'rada', ; Rankine
+			'dc', 'df', 'dk', 'dn', 'dra', 'dl', 'dw', 'dro', 'dre', 'dda', ; Delisle
+			'lc', 'lf', 'lk', 'ln', 'lra', 'ld', 'lw', 'lro', 'lre', 'lda', ; Leiden
+			'wc', 'wf', 'wk', 'wn', 'wra', 'wd', 'wl', 'wro', 'wre', 'wda', ; Wedgwood
+			'roc', 'rof', 'rok', 'ron', 'rora', 'rod', 'rol', 'row', 'rore', 'roda', ; Romer
+			'rec', 'ref', 'rek', 'ren', 'rera', 'red', 'rel', 'rew', 'rero', 'reda', ; Reaumur
+			'dac', 'daf', 'dak', 'dan', 'dara', 'dad', 'dah', 'dal', 'daw', 'daro', 'dare',  ; Dalton
+			'hc', 'hda', ; Hooke
 			'mec', 'cme', 'mek', 'kme', ; Special Custom, Mercuric
 		]
 
@@ -166,8 +192,8 @@ Class TemperatureConversion {
 		RegExMatch(conversionType, "\{(.*?)\}", &conversionFromTo)
 		conversionFromTo := conversionFromTo[1]
 
-		labelFrom := (RegExMatch(conversionFromTo, "^(ra|ro|re|me)")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
-		labelTo := (RegExMatch(conversionFromTo, "(ra|ro|re|me)$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
+		labelFrom := (RegExMatch(conversionFromTo, "^(ra|ro|re|me|da)")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
+		labelTo := (RegExMatch(conversionFromTo, "(ra|ro|re|me|da)$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
 
 		local conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : ChrLib.Get("degree") this.scales.%labelFrom%) " " ChrLib.Get("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : ChrLib.Get("degree") this.scales.%labelTo%) "]"
 
@@ -175,7 +201,8 @@ Class TemperatureConversion {
 		local numberValue := this.GetNumber(conversionLabel)
 
 		try {
-			regionalType := "English"
+			local temperatureValue := ""
+			local regionalType := "English"
 			for region, value in this.typographyTypes {
 				if InStr(numberValue, value[1]) {
 					numberValue := value[2](numberValue)
@@ -188,14 +215,20 @@ Class TemperatureConversion {
 
 			(SubStr(numberValue, 1, 1) = "-") ? (numberValue := SubStr(numberValue, 2), negativePoint := True) : (negativePoint := False)
 
-			temperatureValue := this.PostFormatting(numberValue, labelTo, negativePoint, regionalType)
+			try
+				temperatureValue := this.PostFormatting(numberValue, labelTo, negativePoint, regionalType)
+
 
 			if !WinActive('ahk_id ' hwnd) {
 				WinActivate('ahk_id ' hwnd)
 				WinWaitActive(hwnd)
 			}
 
-			SendText(temperatureValue)
+			if labelTo = "da" && temperatureValue = ""
+				temperatureValue := Chrs(0x2212, 0x221E)
+
+			if temperatureValue != ""
+				SendText(temperatureValue)
 		} catch {
 			return ;SendText(RegExReplace(conversionType, "^.*?:.*?:", ""))
 		}
