@@ -12685,7 +12685,7 @@ LibRegistrate() {
 				fullwidth: "FFE0"
 			},
 			tags: ["цент", "cent"],
-			groups: ["Wallet Signs", "Wallet Signs Left Shift"],
+			groups: ["Wallet Signs", "Wallet Signs Primary"],
 			options: { fastKey: "c* 4" },
 			recipe: ["c|", "CNT"],
 		},

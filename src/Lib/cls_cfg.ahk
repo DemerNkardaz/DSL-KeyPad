@@ -7,6 +7,7 @@ Class Cfg {
 			"Mode_Fast_Keys", "True",
 			"Mode_Fast_Keys_Over", "",
 			"LaTeX_Mode", "Text",
+			"LaTeX_Hotstrings", "True",
 			"HTML_Mode", "Decimal",
 			"Layout_Latin", "QWERTY",
 			"Layout_Cyrillic", "ЙЦУКЕН",
@@ -228,7 +229,7 @@ Class Cfg {
 			repairBtn.SetFont("s16")
 			repairBtn.OnEvent("Click", (*) => Update.Get(True))
 
-			tabLabelChars := Locale.Read("gui_options_tab_characters")
+			tabLabelChars := Locale.Read("gui_options_tab_base")
 			tabLabels := [tabLabelChars]
 
 			optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + (84 + 25), 3), tabLabels)
@@ -278,6 +279,11 @@ Class Cfg {
 			HTMLOption := Cfg.Get("HTML_Mode", , "Decimal")
 			HTMLModeSelector.Text := HTMLOptionsList.HasOwnProp(HTMLOption) ? HTMLOptionsList.%HTMLOption% : HTMLOptionsList.Decimal
 			HTMLModeSelector.OnEvent("Change", (CB, Zero) => Options.SetLocalisedOption(CB.Text, HTMLOptionsList, "HTML_Mode"))
+
+
+			LaTeXHotStringsCheckbox := optionsPanel.AddCheckBox("vLaTeXHotstrings x" languageSelectorX() " y" languageSelectorY(300 + 225) " w320", Locale.Read("gui_options_LaTeX_Hotstrings"))
+			LaTeXHotStringsCheckbox.Value := Cfg.Get("LaTeX_Hotstrings", , False, "bool")
+			LaTeXHotStringsCheckbox.OnEvent("Click", (CB, Zero) => LaTeXHotstrings(CB.Value))
 
 			optionsTabs.UseTab()
 
