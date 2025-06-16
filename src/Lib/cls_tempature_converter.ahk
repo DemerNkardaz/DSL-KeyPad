@@ -156,12 +156,12 @@ Class TemperatureConversion {
 		callback := ObjBindMethod(this, 'Converter')
 
 		for hsKey in hsKeys {
-			HotString(":*C?0:\tcalc{" hsKey "}", callback)
+			HotString(":*C1?:\tcalc{" hsKey "}", callback)
 		}
 	}
 
 	static Converter(conversionType) {
-		hwnd := WinActive('A')
+		local hwnd := WinActive('A')
 
 		RegExMatch(conversionType, "\{(.*?)\}", &conversionFromTo)
 		conversionFromTo := conversionFromTo[1]
@@ -169,10 +169,10 @@ Class TemperatureConversion {
 		labelFrom := (RegExMatch(conversionFromTo, "^(ra|ro|re|me)")) ? SubStr(conversionFromTo, 1, 2) : SubStr(conversionFromTo, 1, 1)
 		labelTo := (RegExMatch(conversionFromTo, "(ra|ro|re|me)$")) ? SubStr(conversionFromTo, -2) : SubStr(conversionFromTo, -1, 1)
 
-		conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : ChrLib.Get("degree") this.scales.%labelFrom%) " " ChrLib.Get("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : ChrLib.Get("degree") this.scales.%labelTo%) "]"
+		local conversionLabel := "[" (IsObject(this.scales.%labelFrom%) ? this.scales.%labelFrom%[2] : ChrLib.Get("degree") this.scales.%labelFrom%) " " ChrLib.Get("arrow_right") " " (IsObject(this.scales.%labelTo%) ? this.scales.%labelTo%[2] : ChrLib.Get("degree") this.scales.%labelTo%) "]"
 
 		Util.CaretTooltip(conversionLabel)
-		numberValue := this.GetNumber(conversionLabel)
+		local numberValue := this.GetNumber(conversionLabel)
 
 		try {
 			regionalType := "English"
@@ -184,7 +184,7 @@ Class TemperatureConversion {
 				}
 			}
 
-			numberValue := this.Conversion.Get(StrUpper(conversionFromTo))(StrReplace(numberValue, Chr(0x002D), "-"))
+			numberValue := this.Conversion.Get(StrUpper(conversionFromTo))(StrReplace(numberValue, Chr(0x2212), "-"))
 
 			(SubStr(numberValue, 1, 1) = "-") ? (numberValue := SubStr(numberValue, 2), negativePoint := True) : (negativePoint := False)
 
@@ -206,13 +206,13 @@ Class TemperatureConversion {
 		static validator := "v1234567890,.-'" ChrLib.Get("minus")
 		static expression := "^[1234567890,.'\- " ChrLib.Get("minus") "]+$"
 
-		numberValue := ""
+		local numberValue := ""
 
-		PH := InputHook("L0", "{Escape}")
+		local PH := InputHook("L0", "{Escape}")
 		PH.Start()
 
 		Loop {
-			IH := InputHook("L1", "{Escape}{Backspace}{Insert}")
+			local IH := InputHook("L1", "{Escape}{Backspace}{Insert}")
 			IH.Start(), IH.Wait()
 
 			if (IH.EndKey = "Escape") {
@@ -237,19 +237,20 @@ Class TemperatureConversion {
 
 		PH.Stop()
 
+		; numberValue := StrReplace(numberValue, Chr(0x2212), "-")
 		return numberValue
 	}
 
 	static PostFormatting(temperatureValue, scale, negativePoint := False, regionalType := "English") {
-		chars := {
+		local chars := {
 			numberSpace: ChrLib.Get(Cfg.Get("Num_Space_Type", "TemperatureCalc", "thinspace")),
 			degreeSpace: ChrLib.Get(Cfg.Get("Deg_Space_Type", "TemperatureCalc", "narrow_no_break_space")),
 		}
 
-		useUnicode := Cfg.Get("Dedicated_Unicode_Chars", "TemperatureCalc", True)
-		extendedFormatOn := Cfg.Get("Format_Extended", "TemperatureCalc", True)
-		formatMinAt := Integer(Cfg.Get("Format_Min_At", "TemperatureCalc", 5))
-		roundValueTo := Integer(Cfg.Get("Round_Value_To", "TemperatureCalc", 2))
+		local useUnicode := Cfg.Get("Dedicated_Unicode_Chars", "TemperatureCalc", True)
+		local extendedFormatOn := Cfg.Get("Format_Extended", "TemperatureCalc", True)
+		local formatMinAt := Integer(Cfg.Get("Format_Min_At", "TemperatureCalc", 5))
+		local roundValueTo := Integer(Cfg.Get("Round_Value_To", "TemperatureCalc", 2))
 
 		if !(GetKeyState("CapsLock", "T"))
 			temperatureValue := Round(temperatureValue, Integer(roundValueTo))
@@ -263,7 +264,7 @@ Class TemperatureConversion {
 		integerPart := RegExReplace(temperatureValue, "(\..*)|([,].*)", "")
 
 		if (extendedFormatOn && StrLen(integerPart) >= formatMinAt) {
-			decimalSeparators := Map(
+			local decimalSeparators := Map(
 				"English", ",",
 				"Deutsch", ".",
 				"Russian", chars.numberSpace,

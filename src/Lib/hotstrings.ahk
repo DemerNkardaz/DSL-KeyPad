@@ -7,7 +7,7 @@ HotString(":C?0:gtfl", (D) => Util.SendDate("YYYY_MM_DD-hh_mm_ss"))
 
 Class LaTeXHotstrings {
 	static __New() {
-		stance := Cfg.Get("LaTeX_Hotstrings", , True, "bool")
+		local stance := Cfg.Get("LaTeX_Hotstrings", , True, "bool")
 		return LaTeXHotstrings(stance)
 	}
 
@@ -17,7 +17,7 @@ Class LaTeXHotstrings {
 				continue
 
 			for each in value.LaTeX {
-				if StrLen(each) > 0 && StrLen(each) < 10 {
+				if StrLen(each) > 0 && StrLen(each) <= 38 {
 					local char := ChrLib.Get(entryName)
 					local callback := ObjBindMethod(LaTeXHotstrings, "Send", char)
 					HotString(":*C?:$" each "$", callback, stance)

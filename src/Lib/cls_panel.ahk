@@ -362,7 +362,9 @@ Class Panel {
 		"help_glyph_variations",
 		"help_TELEX",
 		"help_digit_cases",
-		"help_hotstrings",
+		Map("help_hotstrings", [
+			"help_hotstrings__temperature_conversion",
+		]),
 		Map("help_text_processing", [
 			"help_text_processing__quotes",
 		]),
