@@ -1807,16 +1807,23 @@ bindingMaps := Map(
 			"ForceSingle", True,
 			"Flat", Map(
 				"D", "delta",
-				"I", ["contour_integral", "integral"],
+				"E", "[not_an_,]element_of",
+				"I", "[contour_,]integral",
 				"N", "nabla",
 				"L", "",
-				"P", "n_ary_product",
+				"P", "n_ary_[co,]product",
 				"R", "square_root",
 				"S", "n_ary_summation",
-				"U", "n_ary_union",
+				"U", "[intersection,union]",
 			),
 			"Moded", Map(
+				"E", Map(
+					"<^>!", "[does_not_,]contains_as_member",
+				),
 				"P", Map(),
+				"U", Map(
+					"<^>!", "n_ary_[intersection,union]",
+				),
 				"Space", Map(
 					"<!", "medium_math_space",
 				),
@@ -2330,6 +2337,7 @@ bindingMaps := Map(
 			),
 			"0", Map(
 				"<^>!", "right_chevron",
+				"<^>!<!", "large_circle",
 				"<!", "right_bracket",
 				"<!<+", "right_brace"
 			),

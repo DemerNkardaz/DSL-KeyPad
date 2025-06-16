@@ -57,7 +57,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"breve", {
-			unicode: "0306", LaTeX: ["\u", "\breve"],
+			unicode: "0306",
 			tags: ["breve", "бреве", "кратка"],
 			groups: ["Diacritics Primary", "FK Diacritics Primary"],
 			alterations: { uncombined: "02D8" },
@@ -107,14 +107,14 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"circumflex", {
-			unicode: "0302", LaTeX: ["\^", "\hat"],
+			unicode: "0302",
 			tags: ["circumflex", "циркумфлекс"],
 			groups: ["Diacritics Primary", "FK Diacritics Primary"],
 			options: { fastKey: "C С" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"caron", {
-			unicode: "030C", LaTeX: ["\v", "\check"],
+			unicode: "030C",
 			tags: ["caron", "hachek", "карон", "гачек"],
 			groups: ["Diacritics Primary", "FK Diacritics Primary"],
 			options: { fastKey: "<+ C С" },
@@ -135,7 +135,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"cedilla", {
-			unicode: "0327", LaTeX: ["\c"],
+			unicode: "0327",
 			alterations: {
 				uncombined: "00B8",
 			},
@@ -188,7 +188,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"dot_above", {
-			unicode: "0307", LaTeX: ["\.", "\dot"],
+			unicode: "0307",
 			alterations: {
 				uncombined: "02D9",
 			},
@@ -198,7 +198,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"diaeresis", {
-			unicode: "0308", LaTeX: ["\`"", "\ddot"],
+			unicode: "0308",
 			alterations: {
 				uncombined: "00A8",
 			},
@@ -208,7 +208,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"dot_below", {
-			unicode: "0323", LaTeX: ["\d"],
+			unicode: "0323",
 			tags: ["dot below", "точка снизу"],
 			groups: ["Diacritics Secondary", "FK Diacritics Primary"],
 			options: { fastKey: ">+ D В" },
@@ -229,7 +229,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"grave", {
-			unicode: "0300", LaTeX: ["\``", "\grave"],
+			unicode: "0300",
 			alterations: {
 				modifier: "02F4",
 				uncombined: "0060",
@@ -292,7 +292,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"macron", {
-			unicode: "0304", LaTeX: ["\=", "\bar"],
+			unicode: "0304",
 			alterations: {
 				uncombined: "00AF",
 				modifier: "02C9",
@@ -314,7 +314,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"ogonek", {
-			unicode: "0328", LaTeX: ["\k"],
+			unicode: "0328",
 			alterations: {
 				uncombined: "02DB",
 			},
@@ -444,7 +444,7 @@ LibRegistrate() {
 			symbol: { category: "Diacritic Mark" },
 		},
 		"tilde_above", {
-			unicode: "0303", LaTeX: ["\~", "\tilde"],
+			unicode: "0303",
 			alterations: {
 				modifier: "02F7",
 				uncombined: "02DC",
@@ -1928,7 +1928,7 @@ LibRegistrate() {
 			symbol: { category: "Spaces" },
 		},
 		"narrow_no_break_space", {
-			unicode: "202F", LaTeX: ["\,"],
+			unicode: "202F",
 			tags: ["nnbsp", "narrow no-break space", "узкий неразрывный пробел", "тонкий неразрывный пробел"],
 			groups: ["Spaces", "Spaces Right Shift"],
 			options: { fastKey: "<+ Space" },
@@ -1970,7 +1970,7 @@ LibRegistrate() {
 			symbol: { category: "Spaces" },
 		},
 		"no_break_space", {
-			unicode: "00A0", LaTeX: ["~"],
+			unicode: "00A0",
 			tags: ["nbsp", "no-break space", "неразрывный пробел"],
 			groups: ["Spaces"],
 			options: { fastKey: "Space" },
@@ -1991,14 +1991,14 @@ LibRegistrate() {
 			symbol: { category: "Spaces" },
 		},
 		"emquad", {
-			unicode: "2001", LaTeX: ["\qquad"],
+			unicode: "2001",
 			tags: ["em quad", "emquad", "emqd", "em-квадрат"],
 			groups: ["Spaces", "SK Spaces Secondary"],
 			options: { fastKey: ">+ Space" },
 			symbol: { category: "Spaces" },
 		},
 		"enquad", {
-			unicode: "2000", LaTeX: ["\quad"],
+			unicode: "2000",
 			tags: ["en quad", "enquad", "enqd", "en-квадрат"],
 			groups: ["Spaces", "SK Spaces Secondary"],
 			options: { fastKey: "<+ Space" },
@@ -2465,13 +2465,13 @@ LibRegistrate() {
 			options: { noCalc: True },
 		},
 		"dagger", {
-			unicode: "2020", LaTeX: ["\dagger"],
+			unicode: "2020",
 			tags: ["dagger", "даггер", "крест"],
 			groups: ["Special Characters", "Special Fast Secondary"],
 			options: { fastKey: "NumDiv" },
 		},
 		"dagger_double", {
-			unicode: "2021", LaTeX: ["\ddagger"],
+			unicode: "2021",
 			tags: ["double dagger", "двойной даггер", "двойной крест"],
 			groups: ["Special Characters", "Special Fast Secondary"],
 			options: { fastKey: ">+ NumDiv" },
@@ -2604,8 +2604,14 @@ LibRegistrate() {
 			},
 			options: { noCalc: True, send: "Text" },
 		},
+		"not_sign", {
+			unicode: "00AC",
+			tags: ["not sign", "отрицание"],
+			groups: ["Smelting Special"],
+			recipe: ["-|"],
+		},
 		"section", {
-			unicode: "00A7", LaTeX: ["\S"],
+			unicode: "00A7",
 			tags: ["section", "параграф"],
 			groups: ["Special Characters", "Smelting Special", "Special Fast Left"],
 			options: { fastKey: "1" },
@@ -2824,7 +2830,7 @@ LibRegistrate() {
 		;
 		;
 		"emdash", {
-			unicode: "2014", LaTeX: ["---"],
+			unicode: "2014",
 			alterations: { small: "FE58" },
 			tags: ["em dash", "длинное тире"],
 			groups: ["Dashes", "Smelting Special", "Special Fast Secondary"],
@@ -3464,6 +3470,20 @@ LibRegistrate() {
 			groups: ["Smelting Special"],
 			recipe: ["s${arrow_right_circle}"],
 		},
+		"union", {
+			unicode: "222A",
+			tags: ["union", "знак объединения"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "U" },
+			recipe: ["uni", "обд"],
+		},
+		"intersection", {
+			unicode: "2229",
+			tags: ["intersection", "знак  пересечения"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "c* U" },
+			recipe: ["ins", "прс"],
+		},
 		"n_ary_summation", {
 			unicode: "2211",
 			tags: ["n-ary summation", "summation", "знак суммирования"],
@@ -3482,15 +3502,69 @@ LibRegistrate() {
 			unicode: "220F",
 			tags: ["n-ary product", "product", "знак произведения"],
 			groups: ["Smelting Special", "Math"],
-			options: { altLayoutKey: ">+ P" },
+			options: { altLayoutKey: "P" },
 			recipe: ["prod", "прод"],
 		},
-		"n_ary_union", {
-			unicode: "222A",
-			tags: ["n-ary union", "union", "знак объединения"],
+		"n_ary_coproduct", {
+			unicode: "2210",
+			tags: ["n-ary coproduct", "coproduct", "знак копроизведения"],
 			groups: ["Smelting Special", "Math"],
-			options: { altLayoutKey: "U" },
-			recipe: ["uni", "обд"],
+			options: { altLayoutKey: "c* P" },
+			recipe: ["coprod", "копрод"],
+		},
+		"n_ary_union", {
+			unicode: "22C3",
+			tags: ["n-ary union", "знак н-арного объединения"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: ">! U" },
+			recipe: ["nuni", "нобд"],
+		},
+		"n_ary_intersection", {
+			unicode: "22C2",
+			tags: ["n-ary intersection", "знак н-арного пересечения"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "c*>! U" },
+			recipe: ["nuni", "нпрс"],
+		},
+		"element_of", {
+			unicode: "2208",
+			tags: ["element of", "принадлежность"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "E" },
+			recipe: ["elf", "прин"],
+		},
+		"small_element_of", {
+			unicode: "2208",
+			tags: ["small element of", "малая принадлежность"],
+			groups: ["Smelting Special", "Math"],
+			recipe: ["smelf", "малприн"],
+		},
+		"not_an_element_of", {
+			unicode: "2209",
+			tags: ["not an element of", "непринадлежность"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "c* E" },
+			recipe: ["nelf", "неприн"],
+		},
+		"contains_as_member", {
+			unicode: "220B",
+			tags: ["contains as member", "содержит как член множества"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: ">! E" },
+			recipe: ["cnm", "содчл"],
+		},
+		"small_contains_as_member", {
+			unicode: "220D",
+			tags: ["small contains as member", "малая содержит как член множества"],
+			groups: ["Smelting Special", "Math"],
+			recipe: ["smcnm", "малсодчл"],
+		},
+		"does_not_contains_as_member", {
+			unicode: "220C",
+			tags: ["does not contains as member", "не содержит как член множества"],
+			groups: ["Smelting Special", "Math"],
+			options: { altLayoutKey: "c*>! E" },
+			recipe: ["dcnm", "несодчл"],
 		},
 		"delta", {
 			unicode: "2206",
@@ -3507,20 +3581,20 @@ LibRegistrate() {
 			recipe: ["nab", "наб"],
 		},
 		"integral", {
-			unicode: "222B", LaTeX: ["\int"],
+			unicode: "222B",
 			tags: ["integral", "интеграл"],
 			groups: ["Smelting Special", "Math"],
 			options: { altLayoutKey: "i" },
 			recipe: ["int", "инт"],
 		},
 		"integral_double", {
-			unicode: "222C", LaTeX: ["\iint"],
+			unicode: "222C",
 			tags: ["double integral", "двойной интеграл"],
 			groups: ["Smelting Special", "Math"],
 			recipe: ["${integral×2}", "iint", "иинт"],
 		},
 		"integral_triple", {
-			unicode: "222D", LaTeX: ["\iiint"],
+			unicode: "222D",
 			tags: ["triple integral", "тройной интеграл"],
 			groups: ["Smelting Special", "Math"],
 			recipe: ["${integral×3}", "tint", "тинт"],
@@ -3532,7 +3606,7 @@ LibRegistrate() {
 			recipe: ["${integral×4}", "qint", "чинт"],
 		},
 		"contour_integral", {
-			unicode: "222E", LaTeX: ["\oint"],
+			unicode: "222E",
 			tags: ["contour integral", "интеграл по контуру"],
 			groups: ["Smelting Special", "Math"],
 			options: { altLayoutKey: "I" },
@@ -3557,23 +3631,77 @@ LibRegistrate() {
 			recipe: ["sumint", "суминт", "${n_ary_summation}${integral}"],
 		},
 		"square_root", {
-			unicode: "221A", LaTeX: ["\sqrt"],
+			unicode: "221A",
 			tags: ["square root", "квадратный корень"],
 			groups: ["Smelting Special", "Math"],
 			options: { altLayoutKey: "r" },
 			recipe: ["sqrt", "квкр"],
 		},
 		"cube_root", {
-			unicode: "221B", LaTeX: ["\sqrt[3]"],
+			unicode: "221B",
 			tags: ["cube root", "кубический корень"],
 			groups: ["Smelting Special"],
 			recipe: ["cbrt", "кубкр"],
 		},
 		"fourth_root", {
-			unicode: "221C", LaTeX: ["\sqrt[4]"],
+			unicode: "221C",
 			tags: ["fourth root", "корень четвёртой степени"],
 			groups: ["Smelting Special"],
 			recipe: ["qurt", "чткр"],
+		},
+		"large_circle", {
+			unicode: "25EF",
+			tags: ["large circle", "большой круг"],
+			groups: ["Special Fast Secondary"],
+			options: { fastKey: "<! 0" },
+		},
+		"circled_minus", {
+			unicode: "2296",
+			tags: ["circled minus", "минус в круге"],
+			groups: ["Smelting Special"],
+			recipe: ["${large_circle}${minus}", "${large_circle}-"],
+		},
+		"circled_plus", {
+			unicode: "2295",
+			tags: ["circled plus", "плюс в круге"],
+			groups: ["Smelting Special"],
+			recipe: ["${large_circle}+"],
+		},
+		"circled_times", {
+			unicode: "2297",
+			tags: ["circled times", "умножение в круге"],
+			groups: ["Smelting Special"],
+			recipe: ["${large_circle}${multiplication}"],
+		},
+		"circled_division_slash", {
+			unicode: "2298",
+			tags: ["circled division slash", "косая черта в круге"],
+			groups: ["Smelting Special"],
+			recipe: ["${large_circle}/"],
+		},
+		"circled_reverse_solidus", {
+			unicode: "29B8",
+			tags: ["circled reverse solidus", "обратная косая черта в круге"],
+			groups: ["Smelting Special"],
+			recipe: ["${large_circle}\"],
+		},
+		"circled_vertical_bar", {
+			unicode: "29B6",
+			tags: ["circled vertical bar", "вертикальная черта в круге"],
+			groups: ["Smelting Special"],
+			recipe: ["${large_circle}|"],
+		},
+		"bowtie", {
+			unicode: "22C8",
+			tags: ["bowtie", "natural join"],
+			groups: ["Smelting Special"],
+			recipe: ["bwt"],
+		},
+		"join", {
+			unicode: "2A1D",
+			tags: ["join", "соединение"],
+			groups: ["Smelting Special"],
+			recipe: ["jin"],
 		},
 		"left_parenthesis", {
 			unicode: "0028",
@@ -3813,14 +3941,12 @@ LibRegistrate() {
 		},
 		"left_chevron", {
 			unicode: "27E8",
-			LaTeX: ["\langle"],
 			tags: ["mathematical left angle bracket", "математическая левая угловая скобка"],
 			groups: ["Brackets", "Special Fast Secondary"],
 			options: { fastKey: "9" },
 		},
 		"right_chevron", {
 			unicode: "27E9",
-			LaTeX: ["\rangle"],
 			tags: ["mathematical right angle bracket", "математическая правая угловая скобка"],
 			groups: ["Brackets", "Special Fast Secondary"],
 			options: { fastKey: "0" },
@@ -3848,13 +3974,6 @@ LibRegistrate() {
 			tags: ["mathematical double right angle bracket", "математическая двойная правая угловая скобка"],
 			groups: ["Brackets", "Smelting Special"],
 			recipe: ["${right_chevron×2}"],
-		},
-		"left_chevron", {
-			unicode: "27E8",
-			LaTeX: ["\langle"],
-			tags: ["mathematical left angle bracket", "математическая левая угловая скобка"],
-			groups: ["Brackets", "Special Fast Secondary"],
-			options: { fastKey: "9" },
 		},
 		"left_cjk_tortoise_shell", {
 			unicode: "3014",

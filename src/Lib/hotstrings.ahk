@@ -13,7 +13,7 @@ Class LaTeXHotstrings {
 
 	__New(stance := True) {
 		for entryName, value in ChrLib.entries.OwnProps() {
-			if value.LaTeX.Length = 0
+			if value.LaTeX.Length = 0 || value.symbol.category ~= "Diacritic"
 				continue
 
 			for each in value.LaTeX {
