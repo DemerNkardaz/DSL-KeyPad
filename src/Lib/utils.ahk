@@ -8,6 +8,9 @@ Array.Prototype.DefineProp("RemoveValue", { Call: _ArrayRemoveValue })
 Array.Prototype.DefineProp("SortLen", { Call: _ArraySortLen })
 Array.Prototype.DefineProp("MergeWith", { Call: _ArrayMergeWith })
 Array.Prototype.DefineProp("Clear", { Call: _ArrayClear })
+Array.Prototype.DefineProp("ToLower", { Call: _ArrayToLower })
+Array.Prototype.DefineProp("ToUpper", { Call: _ArrayToUpper })
+
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("Values", { Call: _MapValues })
 Map.Prototype.DefineProp("ToArray", { Call: _MapToArray })
@@ -18,7 +21,6 @@ Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
 Map.Prototype.DefineProp("GetRef", { Call: _MapGetRef })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
-
 
 ClassClear(this) {
 	for k, v in this.OwnProps() {
@@ -75,6 +77,24 @@ _ArrayToFlat(this) {
 			result.Push(item)
 		}
 	}
+	return result
+}
+
+_ArrayToLower(this) {
+	local result := []
+	for item in this
+		if item is String
+			result.Push(StrLower(item))
+
+	return result
+}
+
+_ArrayToUpper(this) {
+	local result := []
+	for item in this
+		if item is String
+			result.Push(StrUpper(item))
+
 	return result
 }
 

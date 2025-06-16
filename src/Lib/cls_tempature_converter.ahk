@@ -108,7 +108,7 @@ Class TemperatureConversion {
 		"MEK", (G) => (G / 100) * 395.56 + 234.32,
 		"CME", (G) => (G + 38.83) * 100 / 395.56,
 		"KME", (G) => (G - 234.32) * 100 / 395.56,
-		; Dalton (Da)
+		; Dalton
 		"DAC", (G) => 273.15 * (((373.15 / 273.15) ** (G / 100)) - 1),
 		"DAF", (G) => (273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) * 9 / 5 + 32,
 		"DAK", (G) => 273.15 * ((373.15 / 273.15) ** (G / 100)),
@@ -120,7 +120,7 @@ Class TemperatureConversion {
 		"DAW", (G) => ((273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) / 24.857191) - 10.821818,
 		"DARO", (G) => ((273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) / 1.904762) + 7.5,
 		"DARE", (G) => (273.15 * (((373.15 / 273.15) ** (G / 100)) - 1)) / 1.25,
-		; Обратные конверсии в Dalton
+		; To Dalton
 		"CDA", (G) => 100 * (Log(G + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
 		"FDA", (G) => 100 * (Log((G - 32) * 5 / 9 + 273.15) - Log(273.15)) / (Log(373.15) - Log(273.15)),
 		"KDA", (G) => 100 * (Log(G) - Log(273.15)) / (Log(373.15) - Log(273.15)),
@@ -163,23 +163,8 @@ Class TemperatureConversion {
 	}
 
 	static RegistryHotstrings() {
-		hsKeys := [
-			'cd', 'cf', 'ck', 'cn', 'cra', "cl", "cw", "cro", "cre", 'ch', 'cda', ; Celsius
-			'fc', 'fd', 'fk', 'fn', 'fra', 'fl', 'fw', 'fro', 'fre', 'fda', ; Fahrenheit
-			'kc', 'kd', 'kf', 'kn', 'kra', 'kl', 'kw', 'kro', 'kre', 'kda', ; Kelvin
-			'nc', 'nd', 'nf', 'nk', 'nra', 'nl', 'nw', 'nro', 'nre', 'nda', ; Newton
-			'rac', 'rad', 'raf', 'rak', 'ran', 'ral', 'raw', 'raro', 'rare', 'rada', ; Rankine
-			'dc', 'df', 'dk', 'dn', 'dra', 'dl', 'dw', 'dro', 'dre', 'dda', ; Delisle
-			'lc', 'lf', 'lk', 'ln', 'lra', 'ld', 'lw', 'lro', 'lre', 'lda', ; Leiden
-			'wc', 'wf', 'wk', 'wn', 'wra', 'wd', 'wl', 'wro', 'wre', 'wda', ; Wedgwood
-			'roc', 'rof', 'rok', 'ron', 'rora', 'rod', 'rol', 'row', 'rore', 'roda', ; Romer
-			'rec', 'ref', 'rek', 'ren', 'rera', 'red', 'rel', 'rew', 'rero', 'reda', ; Reaumur
-			'dac', 'daf', 'dak', 'dan', 'dara', 'dad', 'dah', 'dal', 'daw', 'daro', 'dare',  ; Dalton
-			'hc', 'hda', ; Hooke
-			'mec', 'cme', 'mek', 'kme', ; Special Custom, Mercuric
-		]
-
-		callback := ObjBindMethod(this, 'Converter')
+		local hsKeys := this.Conversion.Keys().ToLower()
+		local callback := ObjBindMethod(this, 'Converter')
 
 		for hsKey in hsKeys {
 			HotString(":*C1?:\tcalc{" hsKey "}", callback)
