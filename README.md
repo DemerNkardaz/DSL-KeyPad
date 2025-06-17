@@ -64,7 +64,7 @@ You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-K
 - **Glyph Variations**: Allows entering alternative variants of symbols, if available.  
   E.g., `A` → `ᴬ` `𝐴` `𝐀` `𝑨` `𝙰` `Ａ` `ᴀ` `𝔄` `𝕬` `𝒜` `𝓐` `𝔸`.
 
-- **Switch Between Entering Unicode Symbols/HTML Code/ $\LaTeX$ Codes**, if available.  
+- **Switch Between Entering Unicode Symbols/HTML Code/ $\LaTeX$ Commands**, if available.  
   E.g., `Ă` `Ǣ` → `&Abreve;` `&#482;` ${\color{darkorange}\texttt{and}}$ `\u{A}` `\={\AE}` ${\color{darkorange}\texttt{or}}$ `\breve{A}` `\bar{\AE}` $\breve{A}$ $\text{Ǣ}$.
 
 - **Search Symbols in Local Library by Tags**: Allows searching for symbols in the local library by tags for easy input.  
@@ -150,7 +150,7 @@ winget install AutoHotkey.AutoHotkey
 
 - **Вариации глифов**: Позволяет вводить альтернативные варианты символов, если они доступны.<br>Например, `A` → `ᴬ` `𝐴` `𝐀` `𝑨` `𝙰` `Ａ` `ᴀ` `𝔄` `𝕬` `𝒜` `𝓐` `𝔸`.
 
-- **Переключение между вводом Unicode-символов/HTML-кодов/ $\LaTeX$-кодов**, если доступно.<br>Например, `Ă` `Ǣ` → `&Abreve;` `&#482;` ${\color{darkorange}\texttt{и}}$ `\u{A}` `\={\AE}` ${\color{darkorange}\texttt{или}}$ `\breve{A}` `\bar{\AE}` $\breve{A}$ $\text{Ǣ}$.
+- **Переключение между вводом Unicode-символов/HTML-кодов/ $\LaTeX$-команд**, если доступно.<br>Например, `Ă` `Ǣ` → `&Abreve;` `&#482;` ${\color{darkorange}\texttt{и}}$ `\u{A}` `\={\AE}` ${\color{darkorange}\texttt{или}}$ `\breve{A}` `\bar{\AE}` $\breve{A}$ $\text{Ǣ}$.
 
 - **Поиск символов в локальной библиотеке по тегам**: позволяет искать символы в локальной библиотеке по тегам для ввода.<br>Например, `latin small ligature turned oe with short stroke` или сокращённо `oe tur str` → `ꭂ`.
 

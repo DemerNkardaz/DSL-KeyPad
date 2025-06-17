@@ -35,8 +35,10 @@ Class LaTeXHotstrings {
 
 	__New(stance := True) {
 		for code, char in LaTeXHotstrings.collection {
-			local callback := ObjBindMethod(LaTeXHotstrings, "Send", char)
-			HotString(":*C?:$" code "$", callback, stance)
+			if StrLen(code) > 0 && StrLen(char) < 38 {
+				local callback := ObjBindMethod(LaTeXHotstrings, "Send", char)
+				HotString(":*C?:$>" code "$", callback, stance)
+			}
 		}
 
 		return

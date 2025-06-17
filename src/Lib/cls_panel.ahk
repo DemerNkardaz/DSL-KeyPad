@@ -1536,7 +1536,8 @@ Class Panel {
 						isFavorite := FavoriteChars.CheckVar(entryName)
 
 						try {
-							if (options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(entryName)) ||
+							if (value.options.hidden) ||
+								(options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(entryName)) ||
 								(!value.groups.HasRegEx(options.group)) ||
 								(options.type = "Recipe" && (value.recipe.Length = 0)) ||
 								(options.type = "Fast Key" && (StrLen(value.options.fastKey) < 2)) ||

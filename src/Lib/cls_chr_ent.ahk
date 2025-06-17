@@ -19,6 +19,7 @@ Class ChrEntry {
 				alterations: {},
 				options: {
 					noCalc: False,
+					hidden: False,
 					suggestionsAtEnd: False,
 					secondName: False,
 					useLetterLocale: False,

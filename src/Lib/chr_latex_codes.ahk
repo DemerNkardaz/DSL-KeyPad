@@ -54,6 +54,7 @@ LaTeXCodesLibrary := [
 	Chr(0x005D), "\rbrack",
 	Chr(0x007B), "\lbrace",
 	Chr(0x007C), "\vert",
+	Chr(0x2016), "\Vert",
 	Chr(0x007D), "\rbrace",
 	Chr(0x00A1), "!``",
 	Chr(0x00BF), "?``",

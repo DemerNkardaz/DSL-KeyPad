@@ -2319,26 +2319,26 @@ LibRegistrate() {
 		;
 		;
 		"line_below", { proxy: "macron_below",
-			groups: [], options: { noCalc: True },
+			groups: [], options: { noCalc: True, hidden: True },
 			symbol: { category: "Diacritic Mark" }
 		},
 		"kendema", { proxy: "grave_double",
-			groups: [], options: { noCalc: True },
+			groups: [], options: { noCalc: True, hidden: True },
 		},
 		"descender", { proxy: "arrow_down",
-			groups: [], options: { noCalc: True },
+			groups: [], options: { noCalc: True, hidden: True },
 		},
 		"long_leg", { proxy: "arrow_down",
-			groups: [], options: { noCalc: True },
+			groups: [], options: { noCalc: True, hidden: True },
 		},
 		"upturn", { proxy: "arrow_up",
-			groups: [], options: { noCalc: True },
+			groups: [], options: { noCalc: True, hidden: True },
 		},
 		"rtl_tail", { proxy: "arrow_leftdown",
-			groups: [], options: { noCalc: True },
+			groups: [], options: { noCalc: True, hidden: True },
 		},
 		"trill", { proxy: "arrow_up",
-			groups: [], options: { noCalc: True },
+			groups: [], options: { noCalc: True, hidden: True },
 		},
 		;
 		;
@@ -2816,6 +2816,11 @@ LibRegistrate() {
 			},
 			options: { noCalc: True, send: "Text" },
 		},
+		"vertical_line_double", {
+			unicode: "2016",
+			groups: ["Smelting Special"],
+			recipe: ["${vertical_line×2}"],
+		},
 		"commercial_at", {
 			unicode: "0040",
 			alterations: {
@@ -3084,7 +3089,7 @@ LibRegistrate() {
 		;
 		;
 		"back_apostrophe", { proxy: "quote_right",
-			groups: [], options: { noCalc: True },
+			groups: [], options: { noCalc: True, hidden: True },
 		},
 		;
 		;
