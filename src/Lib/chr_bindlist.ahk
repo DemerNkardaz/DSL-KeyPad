@@ -2295,7 +2295,8 @@ bindingMaps := Map(
 			"2", Map(
 				"<^>!:Caps", ["registered", "copyright"],
 				"<^>!<+:Caps", ["servicemark", "trademark"],
-				"<^>!>+", "sound_recording_copyright"
+				"<^>!>+", "sound_recording_copyright",
+				"<^>!<!:Caps", "[facsimile,telephone]_sign",
 			),
 			"3", Map(
 				"<^>!:Caps", ["prime_single[_reversed,]"],

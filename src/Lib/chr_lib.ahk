@@ -13420,7 +13420,7 @@ LibRegistrate() {
 		},
 		"servicemark", {
 			unicode: "2120",
-			tags: ["знак обслуживания", "servicemark"],
+			tags: ["знак обслуживания", "service mark"],
 			groups: ["Other Signs"],
 			options: { fastKey: "c*<+ 2" },
 			recipe: ["SM"],
@@ -13431,6 +13431,20 @@ LibRegistrate() {
 			groups: ["Other Signs"],
 			options: { fastKey: ">+ 2" },
 			recipe: ["Pcopy"],
+		},
+		"telephone_sign", {
+			unicode: "2121",
+			tags: ["телефонный знак", "telephone mark"],
+			groups: ["Other Signs"],
+			options: { fastKey: "<! 2" },
+			recipe: ["TEL"],
+		},
+		"facsimile_sign", {
+			unicode: "213B",
+			tags: ["знак факса", "facsimile mark"],
+			groups: ["Other Signs"],
+			options: { fastKey: "c*<! 2" },
+			recipe: ["FAX"],
 		},
 		"misc_crlf_emspace", {
 			unicode: (*) => ChrLib.GetValue("carriage_return", "unicode"),

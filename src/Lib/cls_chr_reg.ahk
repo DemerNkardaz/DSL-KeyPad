@@ -783,13 +783,15 @@ Class ChrReg {
 
 		for i, LaTeXCodeSymbol in LaTeXCodesLibrary {
 			if Mod(i, 2) = 1 {
-				local LaTeXCode := LaTeXCodesLibrary[i + 1]
+				if refinedEntry.LaTeX.Length = 0 {
+					local LaTeXCode := LaTeXCodesLibrary[i + 1]
 
-				if character == LaTeXCodeSymbol {
-					refinedEntry.LaTeX := LaTeXCode is Array ? LaTeXCode : [LaTeXCode]
+					if character == LaTeXCodeSymbol {
+						refinedEntry.LaTeX := LaTeXCode is Array ? LaTeXCode : [LaTeXCode]
+					}
+
+					LaTeXCode := unset
 				}
-
-				LaTeXCode := unset
 			}
 		}
 
