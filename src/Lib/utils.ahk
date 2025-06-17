@@ -448,3 +448,17 @@ ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := App.Title("+
 	TrayTip(NoReadLocale ? MessagePost : Locale.Read(MessagePost), MessageTitle, ico . muting)
 
 }
+
+Range(start, end, step := 1) {
+	local result := []
+	if step > 0 {
+		loop (end - start + 1) // step {
+			result.Push(start + (A_Index - 1) * step)
+		}
+	} else {
+		loop (start - end + 1) // Abs(step) {
+			result.Push(start + (A_Index - 1) * step)
+		}
+	}
+	return result
+}

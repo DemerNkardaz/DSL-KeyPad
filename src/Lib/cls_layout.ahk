@@ -669,6 +669,69 @@ Class KeyboardBinder {
 
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
+				local bindString := binds is String ? binds : (binds is Array && binds.Length == 1 && binds[1] is String ? binds[1] : "")
+
+				if bindString != "" {
+					local brackets := []
+					local pos := 1
+					while (pos := RegExMatch(bindString, "\[(.*?)\]", &match, pos)) {
+						brackets.Push({
+							fullMatch: match[0],
+							content: match[1],
+							startPos: pos,
+							endPos: pos + StrLen(match[0]) - 1
+						})
+						pos += StrLen(match[0])
+					}
+
+					if brackets.Length > 0 {
+						local allVariants := []
+						local maxVariants := 0
+
+						for bracket in brackets {
+							local variants := StrSplit(bracket.content, ",")
+							for i, variant in variants {
+								variants[i] := Trim(variant)
+							}
+							allVariants.Push(variants)
+							if variants.Length > maxVariants
+								maxVariants := variants.Length
+						}
+
+						for variants in allVariants {
+							if variants.Length != maxVariants {
+								MsgBox((
+									Locale.Read("error_at_binds_registration") "`n"
+									Locale.ReadInject("error_invalid_variants_at_name", [variants.Length, maxVariants, bindString])
+								), App.Title(), "Iconx")
+								continue 2
+							}
+						}
+
+						local tempBinds := []
+
+						for i in Range(1, maxVariants) {
+							local variantBind := bindString
+
+							for j in Range(brackets.Length, 1, -1) {
+								local bracket := brackets[j]
+								local variant := allVariants[j][i]
+
+								variantBind := (
+									SubStr(variantBind, 1, bracket.startPos - 1)
+									variant
+									SubStr(variantBind, bracket.endPos + 1)
+								)
+							}
+
+							tempBinds.Push(variantBind)
+						}
+
+						binds := tempBinds
+						allVariants := unset
+						brackets := unset
+					}
+				}
 
 				if (binds is Array && binds.Length == 1 && binds[1] is String && RegExMatch(binds[1], "\[(.*?)\]", &match)) ||
 					(binds is String && RegExMatch(binds, "\[(.*?)\]", &match)) {

@@ -50,7 +50,7 @@ bindingMaps := Map(
 					"<^>!>+", "hel_[c,s]_let_a_alpha__macron",
 					"<^>!<+>+", "hel_[c,s]_let_a_alpha__vrachy",
 					"<^>!<!", "hel_[c,s]_let_a_alpha__varia",
-					"<^>!<!<+", "hel_[c_let_a_alpha__prosgegrammeni,s_let_a_alpha__ypogegrammeni]",
+					"<^>!<!<+", "hel_[c,s]_let_a_alpha__[prosgegrammeni,ypogegrammeni]",
 					"<^>!<!<+>+", "hel_[c,s]_let_a_alpha__oxia",
 					"<^<!", "tonos",
 				),
@@ -83,7 +83,7 @@ bindingMaps := Map(
 					"<^>!<+", "hel_[c,s]_let_h_eta__psili",
 					"<^>!>+", "hel_[c,s]_let_h_eta__macron",
 					"<^>!<!", "hel_[c,s]_let_h_eta__varia",
-					"<^>!<!<+", "hel_[c_let_h_eta__prosgegrammeni,s_let_h_eta__ypogegrammeni]",
+					"<^>!<!<+", "hel_[c,s]_let_h_eta__[prosgegrammeni,ypogegrammeni]",
 					"<^>!<!<+>+", "hel_[c,s]_let_h_eta__oxia",
 				),
 				"Θ", Map(">+", "hel_[c,s]_sym_t_theta"),
@@ -163,7 +163,7 @@ bindingMaps := Map(
 					"<^>!>+", "hel_[c,s]_let_o_omega__macron",
 					"<^>!<+>+", "hel_[c,s]_let_o_omega__vrachy",
 					"<^>!<!", "hel_[c,s]_let_o_omega__varia",
-					"<^>!<!<+", "hel_[c_let_o_omega__prosgegrammeni,s_let_o_omega__ypogegrammeni]",
+					"<^>!<!<+", "hel_[c,s]_let_o_omega__[prosgegrammeni,ypogegrammeni]",
 					"<^>!<!<+>+", "hel_[c,s]_let_o_omega__oxia",
 				),
 				"Ϝ", Map(
@@ -1540,7 +1540,7 @@ bindingMaps := Map(
 					">+", "lat_s_let_f::modifier",
 				),
 				"G", Map(
-					"<^>!", "lat_[c_let_g::smallCapital,s_let_g_gamma]",
+					"<^>!", "lat_[c,s]_let_g[::smallCapital,_gamma]",
 					"<^>!>+", "lat_s_let_g_gamma::modifier",
 					"<^>!<!", "lat_s_let_m_turned__long_leg",
 					"<^>!<!>+", "lat_s_let_m_turned__long_leg::modifier",
@@ -1551,7 +1551,7 @@ bindingMaps := Map(
 					">+", "lat_s_let_h::modifier",
 				),
 				"I", Map(
-					"<^>!", "lat_[c_let_i::smallCapital,s_let_i__stroke_short]",
+					"<^>!", "lat_[c,s]_let_i[::smallCapital,__stroke_short]",
 					">+", "lat_s_let_i::modifier",
 				),
 				"J", Map(
@@ -1570,7 +1570,7 @@ bindingMaps := Map(
 					">+", "lat_s_let_m::modifier",
 				),
 				"N", Map(
-					"<^>!", "lat_[c_let_n::smallCapital,s_let_n_eng]",
+					"<^>!", "lat_[c,s]_let_n[::smallCapital,_eng]",
 					"<^>!>+", "lat_s_let_n_eng::modifier",
 					"<^>!<!", "lat_s_dig_feng",
 					"<^>!<!>+", "lat_s_dig_feng::modifier",
@@ -1583,7 +1583,7 @@ bindingMaps := Map(
 					"<^>!<+>+", "lat_s_let_o_open::modifier",
 					"<^>!<!", "lat_s_let_o__[tilde_overlay,solidus_long]",
 					"<^>!<!>+", "lat_s_let_o__[tilde_overlay,solidus_long]::modifier",
-					"<^>!<!<+", "lat_[c_lig_oe::smallCapital,s_lig_oe]",
+					"<^>!<!<+", "lat_[c,s]_lig_oe[::smallCapital,]",
 					"<^>!<!<+>+", "lat_s_lig_oe::modifier",
 					">+", "lat_s_let_o::modifier",
 				),

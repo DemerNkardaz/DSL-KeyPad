@@ -10,12 +10,59 @@ Class ChrReg {
 	AddEntry(&entryName, &entry, &progress) {
 		if !IsSet(entry)
 			return
-		if RegExMatch(entryName, "\[(.*?)\]", &match) {
-			local splitVariants := StrSplit(match[1], ",")
+
+		local brackets := []
+		local pos := 1
+		while (pos := RegExMatch(entryName, "\[(.*?)\]", &match, pos)) {
+			brackets.Push({
+				fullMatch: match[0],
+				content: match[1],
+				startPos: pos,
+				endPos: pos + StrLen(match[0]) - 1
+			})
+			pos += StrLen(match[0])
+		}
+
+		if brackets.Length > 0 {
+			local allVariants := []
+			local maxVariants := 0
+
+			for bracket in brackets {
+				local variants := StrSplit(bracket.content, ",")
+				for i, variant in variants {
+					variants[i] := Trim(variant)
+				}
+				allVariants.Push(variants)
+				if variants.Length > maxVariants
+					maxVariants := variants.Length
+			}
+
+			for variants in allVariants {
+				if variants.Length != maxVariants {
+					MsgBox((
+						Locale.Read("error_at_library_registration") "`n"
+						Locale.ReadInject("error_invalid_variants_at_name", [variants.Length, maxVariants, entryName])
+					), App.Title(), "Iconx")
+					return
+				}
+			}
+
 			local entries := {}
 
-			for i, variant in splitVariants {
-				local variantName := RegExReplace(entryName, "\[.*?\]", variant)
+			for i in Range(1, maxVariants) {
+				local variantName := entryName
+
+				for j in Range(brackets.Length, 1, -1) {
+					local bracket := brackets[j]
+					local variant := allVariants[j][i]
+
+					variantName := (
+						SubStr(variantName, 1, bracket.startPos - 1)
+						variant
+						SubStr(variantName, bracket.endPos + 1)
+					)
+				}
+
 				local variantEntry := entry.Clone()
 
 				for item in ["unicode", "proxy", "alterations"] {
@@ -43,7 +90,7 @@ Class ChrReg {
 
 				local optionsRef := entry.options
 				variantEntry.options := this.CloneOptions(&optionsRef, &i)
-				variantEntry.variant := variant
+				variantEntry.variant := allVariants[1][i]
 				variantEntry.variantPos := i
 
 				entries.e%i%_%variantName% := variantEntry
@@ -53,8 +100,8 @@ Class ChrReg {
 
 			for entryName, entry in entries.OwnProps() {
 				local noIndexName := RegExReplace(entryName, "i)^e(\d+)_(.*?)", "$2")
-
-				this.ProcessRecipe(&entry, &splitVariants)
+				local variant := allVariants[1]
+				this.ProcessRecipe(&entry, &variant)
 				local value := ChrEntry().Get(entry)
 				this.AddEntry(&noIndexName, &value, &progress)
 
@@ -62,7 +109,8 @@ Class ChrReg {
 			}
 
 			entries := unset
-			splitVariants.Clear()
+			allVariants := unset
+			brackets := unset
 
 		} else {
 			ChrLib.entries.%entryName% := {}

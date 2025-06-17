@@ -4939,7 +4939,7 @@ LibRegistrate() {
 			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<+>+ $" },
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__prosgegrammeni,s_let_a_alpha__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FBC", "1FB3"],
 			options: { useLetterLocale: "alpha$", altLayoutKey: ">!<!<+ $" },
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
@@ -5008,17 +5008,17 @@ LibRegistrate() {
 			},
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__dasia__prosgegrammeni,s_let_a_alpha__dasia__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__dasia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F89", "1F81"],
 			options: { useLetterLocale: "alpha$" },
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__psili__prosgegrammeni,s_let_a_alpha__psili__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__psili__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F88", "1F80"],
 			options: { useLetterLocale: "alpha$" },
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__dasia__varia__prosgegrammeni,s_let_a_alpha__dasia__varia__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__dasia__varia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F8B", "1F83"],
 			options: { useLetterLocale: "alpha$" },
 			recipePush: [{
@@ -5038,7 +5038,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__psili__varia__prosgegrammeni,s_let_a_alpha__psili__varia__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__psili__varia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F8A", "1F82"],
 			options: { useLetterLocale: "alpha$" },
 			recipePush: [{
@@ -5058,7 +5058,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__dasia__oxia__prosgegrammeni,s_let_a_alpha__dasia__oxia__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__dasia__oxia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F8D", "1F85"],
 			options: { useLetterLocale: "alpha$" },
 			recipePush: [{
@@ -5078,7 +5078,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__psili__oxia__prosgegrammeni,s_let_a_alpha__psili__oxia__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__psili__oxia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F8C", "1F84"],
 			options: { useLetterLocale: "alpha$" },
 			recipePush: [{
@@ -5098,7 +5098,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__dasia__perispomeni__prosgegrammeni,s_let_a_alpha__dasia__perispomeni__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__dasia__perispomeni__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F8F", "1F87"],
 			options: { useLetterLocale: "alpha$" },
 			recipe: [[
@@ -5126,7 +5126,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
 		},
-		"hel_[c_let_a_alpha__psili__perispomeni__prosgegrammeni,s_let_a_alpha__psili__perispomeni__ypogegrammeni]", {
+		"hel_[c,s]_let_a_alpha__psili__perispomeni__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F8E", "1F86"],
 			options: { useLetterLocale: "alpha$" },
 			recipe: [[
@@ -5240,7 +5240,7 @@ LibRegistrate() {
 			options: { useLetterLocale: "eta$" },
 			symbol: { letter: "${hel_[s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__prosgegrammeni,s_let_h_eta__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FCC", "1FC3"],
 			options: { useLetterLocale: "eta$", altLayoutKey: ">!<!<+ $" },
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
@@ -5309,12 +5309,12 @@ LibRegistrate() {
 			},
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__dasia__prosgegrammeni,s_let_h_eta__dasia__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__dasia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F99", "1F91"],
 			options: { useLetterLocale: "eta$" },
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__psili__prosgegrammeni,s_let_h_eta__psili__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__psili__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F98", "1F90"],
 			options: { useLetterLocale: "eta$" },
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
@@ -5334,7 +5334,7 @@ LibRegistrate() {
 			options: { useLetterLocale: "eta$" },
 			symbol: { letter: "${hel_[s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__dasia__varia__prosgegrammeni,s_let_h_eta__dasia__varia__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__dasia__varia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F9B", "1F93"],
 			options: { useLetterLocale: "eta$" },
 			recipePush: [{
@@ -5354,7 +5354,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__psili__varia__prosgegrammeni,s_let_h_eta__psili__varia__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__psili__varia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F9A", "1F92"],
 			options: { useLetterLocale: "eta$" },
 			recipePush: [{
@@ -5374,7 +5374,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__dasia__oxia__prosgegrammeni,s_let_h_eta__dasia__oxia__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__dasia__oxia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F9D", "1F95"],
 			options: { useLetterLocale: "eta$" },
 			recipePush: [{
@@ -5394,7 +5394,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__psili__oxia__prosgegrammeni,s_let_h_eta__psili__oxia__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__psili__oxia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F9C", "1F94"],
 			options: { useLetterLocale: "eta$" },
 			recipePush: [{
@@ -5414,7 +5414,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__dasia__perispomeni__prosgegrammeni,s_let_h_eta__dasia__perispomeni__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__dasia__perispomeni__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F9F", "1F97"],
 			options: { useLetterLocale: "eta$" },
 			recipe: [[
@@ -5442,7 +5442,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_h_eta}" },
 		},
-		"hel_[c_let_h_eta__psili__perispomeni__prosgegrammeni,s_let_h_eta__psili__perispomeni__ypogegrammeni]", {
+		"hel_[c,s]_let_h_eta__psili__perispomeni__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1F9E", "1F96"],
 			options: { useLetterLocale: "eta$" },
 			recipe: [[
@@ -5844,7 +5844,7 @@ LibRegistrate() {
 			options: { useLetterLocale: "omega$" },
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__prosgegrammeni,s_let_o_omega__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FFC", "1FF3"],
 			options: { useLetterLocale: "omega$", altLayoutKey: ">!<!<+ $" },
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
@@ -5913,32 +5913,32 @@ LibRegistrate() {
 			},
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__dasia__prosgegrammeni,s_let_o_omega__dasia__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__dasia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FA9", "1FA1"],
 			options: { useLetterLocale: "omega$" },
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__psili__prosgegrammeni,s_let_o_omega__psili__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__psili__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FA8", "1FA0"],
 			options: { useLetterLocale: "omega$" },
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[s_let_o_omega__varia__ypogegrammeni]", {
+		"hel_[s]_let_o_omega__varia__ypogegrammeni", {
 			unicode: ["1FF2"],
 			options: { useLetterLocale: "omega$" },
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[s_let_o_omega__oxia__ypogegrammeni]", {
+		"hel_[s]_let_o_omega__oxia__ypogegrammeni", {
 			unicode: ["1FF4"],
 			options: { useLetterLocale: "omega$" },
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[s_let_o_omega__perispomeni__ypogegrammeni]", {
+		"hel_[s]_let_o_omega__perispomeni__ypogegrammeni", {
 			unicode: ["1FF7"],
 			options: { useLetterLocale: "omega$" },
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__dasia__varia__prosgegrammeni,s_let_o_omega__dasia__varia__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__dasia__varia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FAB", "1FA3"],
 			options: { useLetterLocale: "omega$" },
 			recipePush: [{
@@ -5958,7 +5958,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__psili__varia__prosgegrammeni,s_let_o_omega__psili__varia__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__psili__varia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FAA", "1FA2"],
 			options: { useLetterLocale: "omega$" },
 			recipePush: [{
@@ -5978,7 +5978,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__dasia__oxia__prosgegrammeni,s_let_o_omega__dasia__oxia__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__dasia__oxia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FAD", "1FA5"],
 			options: { useLetterLocale: "omega$" },
 			recipePush: [{
@@ -5998,7 +5998,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__psili__oxia__prosgegrammeni,s_let_o_omega__psili__oxia__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__psili__oxia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FAC", "1FA4"],
 			options: { useLetterLocale: "omega$" },
 			recipePush: [{
@@ -6018,7 +6018,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__dasia__perispomeni__prosgegrammeni,s_let_o_omega__dasia__perispomeni__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__dasia__perispomeni__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FAF", "1FA7"],
 			options: { useLetterLocale: "omega$" },
 			recipe: [[
@@ -6046,7 +6046,7 @@ LibRegistrate() {
 			}],
 			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
 		},
-		"hel_[c_let_o_omega__psili__perispomeni__prosgegrammeni,s_let_o_omega__psili__perispomeni__ypogegrammeni]", {
+		"hel_[c,s]_let_o_omega__psili__perispomeni__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FAE", "1FA6"],
 			options: { useLetterLocale: "omega$" },
 			recipe: [[
