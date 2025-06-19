@@ -1870,11 +1870,15 @@ bindingMaps := Map(
 			"S", Map("<#<!", (*) => Scripter.SelectorPanel()),
 			"F", Map("<#<!", (*) => Search()),
 			"H", Map(
-				">^", (*) => Util.StrSelToHTML("Entities"),
-				">^>+", (*) => Util.StrSelToHTML("Hex"),
+				">^", (*) => Util.StrSelToConvert("Entities"),
+				"<^>^", (*) => Util.StrSelToConvert("Hex"),
 			),
 			"J", Map(
-				">^", (*) => Util.StrSelToHTML("Entities", True),
+				">^", (*) => Util.StrSelToConvert("Entities", True),
+			),
+			"Backslash", Map(
+				">^", (*) => Util.URLEncoder(),
+				"<^>^", (*) => Util.URLEncoder("decode"),
 			),
 			"Comma", Map("<#<!", (*) => GetKeyScanCode()),
 			"Q", Map(

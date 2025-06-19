@@ -217,7 +217,7 @@ Class Util {
 	}
 
 
-	static StrToHTML(inputString, mode := "", ignoreDefaultSymbols := False) {
+	static StrToHTML(inputString, ignoreDefaultSymbols := False, mode := "", reverse := False) {
 		static defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
 		local output := ""
 
@@ -259,8 +259,7 @@ Class Util {
 		return output
 	}
 
-	static StrSelToHTML(mode := "", ignoreDefaultSymbols := False) {
-		static defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+	static StrSelToConvert(mode := "", ignoreDefaultSymbols := False, reverse := False) {
 		local backupClipboard := ClipboardAll()
 		A_Clipboard := ""
 
@@ -270,7 +269,7 @@ Class Util {
 		A_Clipboard := ""
 
 		if promptValue != "" {
-			local output := this.StrToHTML(promptValue, mode, ignoreDefaultSymbols)
+			local output := this.StrToHTML(promptValue, ignoreDefaultSymbols, mode, reverse)
 
 			A_Clipboard := output
 			ClipWait(0.250, 1)
@@ -282,6 +281,45 @@ Class Util {
 		Send("{Control Up}")
 		return
 	}
+
+	static URLEncoder(action := "encode") {
+		local backupClipboard := ClipboardAll()
+		A_Clipboard := ""
+
+		Send("{Shift Down}{Delete}{Shift Up}")
+		ClipWait(0.5, 1)
+		local promptValue := A_Clipboard
+		A_Clipboard := ""
+
+		if promptValue != "" {
+			local output := action = "encode" ? this.UrlEscape(promptValue) : this.UrlUnescape(promptValue)
+
+			A_Clipboard := output
+			ClipWait(0.250, 1)
+			Send("{Shift Down}{Insert}{Shift Up}")
+		}
+
+		Sleep 500
+		A_Clipboard := backupClipboard
+		Send("{Control Up}")
+		return
+	}
+
+	static UrlEscape(Url, Flags := 0x000C3000) {
+		; * Code of Escape/Unescape taken from https://www.autohotkey.com/boards/viewtopic.php?p=554647&sid=83cf90bcab788e19e2aacfaa0e9e57e3#p554647
+		Local CC := 4096, Esc := "", Result := ""
+		Loop {
+			VarSetStrCapacity(&Esc, CC)
+			Result := DllCall("Shlwapi.dll\UrlEscapeW", "Str", Url, "Str", &Esc, "UIntP", &CC, "UInt", Flags, "UInt")
+		} Until Result != 0x80004003
+
+		Return Esc
+	}
+
+	static UrlUnescape(Url, Flags := 0x00140000) {
+		Return !DllCall("Shlwapi.dll\UrlUnescape", "Ptr", StrPtr(Url), "Ptr", 0, "UInt", 0, "UInt", Flags, "UInt") ? Url : ""
+	}
+
 
 	static StrBind(str, &keyRef?, &modRef?, &rulRef?) {
 		keyRef := ""
