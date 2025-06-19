@@ -370,7 +370,7 @@ Class ChrBlock {
 				split := StrSplit(pageRange, "...")
 				startPageNum := Number(split[1])
 				endPageNum := Number(split[2])
-				inputNum := Number(input)
+				inputNum := CharacterInserter.HexToDec(input)
 
 				if input ~= "^0" && pageRange ~= "^01" && inputNum >= 128 {
 					if inputNum >= startPageNum && inputNum <= endPageNum {

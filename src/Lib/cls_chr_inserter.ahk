@@ -47,16 +47,27 @@ Class CharacterInserter {
 		}
 		return
 	}
+
+	static HexToDec(int) {
+		if int ~= "i)[АБСЦДЕФ]"
+			int := Util.HexCyrToLat(int)
+		if int ~= "[A-Fa-f]"
+			int := Number("0x" int)
+		return int
+	}
+
 	static Altcode(charCode) {
-		if !(StrLen(charCode) > 1 && charCode ~= "^0") && Number(charCode) < 32 && AltCodesLibrary.HasValue(charCode, &i)
+		local hasZero := SubStr(charCode, 1, 1) ~= "^0"
+
+		if !(StrLen(charCode) > 1 && hasZero) && this.HexToDec(charCode) < 32 && AltCodesLibrary.HasValue(charCode, &i)
 			return AltCodesLibrary[i + 1]
 
 		Keyboard.CheckLayout(&lang)
 
-		codePage := StrLen(charCode) > 1 && charCode ~= "^0" ? ((lang = "ru-RU") ? 1251 : 1252) : Number(charCode) >= 128 ? ((lang = "ru-RU") ? 866 : 850) : 437
+		codePage := StrLen(charCode) > 1 && hasZero ? ((lang = "ru-RU") ? 1251 : 1252) : this.HexToDec(charCode) >= 128 ? ((lang = "ru-RU") ? 866 : 850) : 437
 
 		bytes := Buffer(1)
-		NumPut("UChar", charCode, bytes)
+		NumPut("UChar", this.HexToDec(charCode), bytes)
 
 		chars := StrGet(bytes, 1, "CP" codePage)
 
@@ -89,7 +100,8 @@ Class CharacterInserter {
 	}
 
 	static AltcodeValidate(charCode) {
-		return StrLen(charCode) > 0 && (charCode ~= "^[0-9]{1,4}$") && (Number(charCode) >= 0) && Number(charCode) <= 255
+
+		return StrLen(charCode) > 0 && (this.HexToDec(charCode) ~= "^[0-9]{1,4}$") && (this.HexToDec(charCode) >= 0) && this.HexToDec(charCode) <= 255
 	}
 
 	static UnicodeValidate(charCode) {

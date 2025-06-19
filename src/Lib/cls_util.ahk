@@ -212,7 +212,7 @@ Class Util {
 
 		Sleep 500
 		A_Clipboard := backupClipboard
-		Send("{Control Up}")
+		Send("{Blind}{Ctrl Up}")
 		return
 	}
 
@@ -278,7 +278,7 @@ Class Util {
 
 		Sleep 500
 		A_Clipboard := backupClipboard
-		Send("{Control Up}")
+		Send("{Blind}{Ctrl Up}")
 		return
 	}
 
@@ -301,12 +301,13 @@ Class Util {
 
 		Sleep 500
 		A_Clipboard := backupClipboard
-		Send("{Control Up}")
+		Send("{Blind}{Ctrl Up}")
 		return
 	}
 
 	static UrlEscape(Url, Flags := 0x000C3000) {
 		; * Code of Escape/Unescape taken from https://www.autohotkey.com/boards/viewtopic.php?p=554647&sid=83cf90bcab788e19e2aacfaa0e9e57e3#p554647
+		; * by william_ahk
 		Local CC := 4096, Esc := "", Result := ""
 		Loop {
 			VarSetStrCapacity(&Esc, CC)
