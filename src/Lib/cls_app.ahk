@@ -78,7 +78,7 @@ Class App {
 		this.SetTray()
 	}
 
-	static DeleteDINI() {
+	static DeleteINI() {
 		if FileExist(this.desktopINI) {
 			RunWait('cmd.exe /c attrib -s -h "' this.desktopINI '"')
 			FileDelete(this.desktopINI)

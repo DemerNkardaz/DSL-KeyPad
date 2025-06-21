@@ -49,14 +49,30 @@ Class CharacterInserter {
 	}
 
 	static HexToDec(int) {
-		if int ~= "i)[АБСЦДЕФ]"
-			int := Util.HexCyrToLat(int)
+		if int ~= "i)[АБСЦДЕФΑΒΨΣΔΕΦ]"
+			int := Util.HexNonLatinToLatin(int)
 		if int ~= "[A-Fa-f]"
 			int := Number("0x" int)
 		return int
 	}
 
+	static regionalPages := {
+		generic: Map(
+			"en-US", 850,
+			"ru-RU", 866,
+			"el-GR", 737,
+			"vi-VN", 1258,
+		),
+		atZero: Map(
+			"en-US", 1252,
+			"ru-RU", 1251,
+			"el-GR", 1253,
+			"vi-VN", 1258,
+		),
+	}
+
 	static Altcode(charCode) {
+
 		local hasZero := SubStr(charCode, 1, 1) ~= "^0"
 
 		if !(StrLen(charCode) > 1 && hasZero) && this.HexToDec(charCode) < 32 && AltCodesLibrary.HasValue(charCode, &i)
@@ -64,7 +80,17 @@ Class CharacterInserter {
 
 		Keyboard.CheckLayout(&lang)
 
-		codePage := StrLen(charCode) > 1 && hasZero ? ((lang = "ru-RU") ? 1251 : 1252) : this.HexToDec(charCode) >= 128 ? ((lang = "ru-RU") ? 866 : 850) : 437
+		codePage := (
+			StrLen(charCode) > 1 && hasZero
+				? (this.regionalPages.atZero.Has(lang)
+					? this.regionalPages.atZero.Get(lang)
+					: 1252)
+			: this.HexToDec(charCode) >= 128
+				? (this.regionalPages.generic.Has(lang)
+					? this.regionalPages.generic.Get(lang)
+					: 850)
+			: 437
+		)
 
 		bytes := Buffer(1)
 		NumPut("UChar", this.HexToDec(charCode), bytes)
@@ -100,13 +126,15 @@ Class CharacterInserter {
 	}
 
 	static AltcodeValidate(charCode) {
+		if !(charCode ~= "i)^[АБСЦДЕФΑΒΨΣΔΕΦA-Fa-f0-9]+$")
+			return False
 
 		return StrLen(charCode) > 0 && (this.HexToDec(charCode) ~= "^[0-9]{1,4}$") && (this.HexToDec(charCode) >= 0) && this.HexToDec(charCode) <= 255
 	}
 
 	static UnicodeValidate(charCode) {
-		if charCode ~= "i)[АБСЦДЕФ]"
-			charCode := Util.HexCyrToLat(charCode)
+		if charCode ~= "i)[АБСЦДЕФΑΒΨΣΔΕΦ]"
+			charCode := Util.HexNonLatinToLatin(charCode)
 		if charCode ~= "^(?![0-9A-Fa-f]{1,6}$)"
 			return False
 

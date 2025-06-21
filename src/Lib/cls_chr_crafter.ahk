@@ -116,8 +116,8 @@ Class ChrCrafter {
 		)
 
 		Loop {
-			insertType := RegExMatch(input, "i)^([uюaа])\+", &m) ? (m[1] ~= "i)[uю]" ? "Unicode" : "Altcode") : ""
-			codes := RegExReplace(input, "i)^([uюaа])\+", "")
+			insertType := RegExMatch(input, "i)^([uюυaаα])\+", &m) ? (m[1] ~= "i)[uюυ]" ? "Unicode" : "Altcode") : ""
+			codes := RegExReplace(input, "i)^([uюυaаα])\+", "")
 
 			ruleTooltip := (
 				insertType != "" && StrLen(input) > 1 && StrLen(input) < 3 ? "unialt"
@@ -176,12 +176,12 @@ Class ChrCrafter {
 				ComposeSuggestedTooltip()
 			}
 
-			insertType := RegExMatch(input, "i)^([uюaа])\+", &m) ? (m[1] ~= "i)[uю]" ? "Unicode" : "Altcode") : ""
+			insertType := RegExMatch(input, "i)^([uюυaаα])\+", &m) ? (m[1] ~= "i)[uюυ]" ? "Unicode" : "Altcode") : ""
 			reservedNoBreak := RegExMatch(input, "i)^(ю)") && StrLen(input) = 1
 
 			if insertType != "" {
 				input := StrUpper(input)
-				codes := RegExReplace(input, "i)^([uюaа])\+", "")
+				codes := RegExReplace(input, "i)^([uюυaаα])\+", "")
 				codesArray := StrSplit(codes, " ")
 
 				for i, checkEmpty in codesArray
@@ -325,7 +325,7 @@ Class ChrCrafter {
 		output := ""
 		if insertType != "" {
 			temp := input str
-			tempCodes := RegExReplace(temp, "i)^([uюaа])\+", "")
+			tempCodes := RegExReplace(temp, "i)^([uюυaаα])\+", "")
 
 			tempCodesArray := StrSplit(tempCodes, " ")
 
@@ -334,8 +334,8 @@ Class ChrCrafter {
 					tempCodesArray.RemoveAt(i)
 
 			if tempCodesArray.length > 0 {
-				if str ~= "i)[АБСЦДЕФ]"
-					str := Util.HexCyrToLat(str)
+				if str ~= "i)[АБСЦДЕФΑΒΨΣΔΕΦ]"
+					str := Util.HexNonLatinToLatin(str)
 				if CharacterInserter.%insertType%Validate(tempCodesArray[tempCodesArray.length])
 					output .= str
 			}

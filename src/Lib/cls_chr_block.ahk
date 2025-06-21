@@ -348,9 +348,26 @@ Class ChrBlock {
 
 	static codePages := Map(
 		"0...127", "Code Page 437",
-		"128...255", { ru: "Code Page 866", en: "Code Page 850" },
-		"0128...0255", { ru: "Windows-1251", en: "Windows-1252" },
+		"128...255", [
+			"en", "Code Page 850",
+			"ru", "Code Page 866",
+			"el", "Code Page 737",
+			"vi", "Windows-1258",
+		],
+		"0128...0255", [
+			"en", "Windows-1252",
+			"ru", "Windows-1251",
+			"el", "Windows-1253",
+			"vi", "Windows-1258",
+		],
 	)
+
+	static langToLocale := [
+		"en", "latin",
+		"ru", "cyrillic",
+		"el", "greek",
+		"vi", "vietnamese",
+	]
 
 	static GetBlock(input := "0000", isFor := "Unicode", &outputVar := { block: "Unknown", name: "Unknown" }) {
 		if isFor = "Unicode" {
@@ -398,7 +415,19 @@ Class ChrBlock {
 
 			tooltips := Map(
 				"default", (name, pageRange) => "[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " name,
-				"localised", (name, pageRange) => "[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " (name.%lang ~= "^ru" ? "ru" : "en"%) "`n[ " Locale.Read("script_" (lang ~= "^ru" ? "cyrillic" : "latin")) " ]"
+				"localised", (name, pageRange) => (
+					"[ ALT+"
+					StrReplace(pageRange, "...", "–ALT+")
+					" ] "
+					(name.HasRegEx("^" SubStr(lang, 1, 2), &i) ? name[i + 1] : name[1])
+					"`n[ "
+					Locale.Read("symbol_" (
+						this.langToLocale.HasRegEx("^" SubStr(lang, 1, 2), &i)
+							? this.langToLocale[i + 1]
+						: this.langToLocale[1]
+					))
+					" ]"
+				)
 			)
 
 			if blockData.pageRange != "Unknown" {

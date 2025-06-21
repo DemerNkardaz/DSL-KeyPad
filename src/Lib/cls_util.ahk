@@ -367,8 +367,11 @@ Class Util {
 		return SubStr(Str, 4, StrLen(Str) - 4)
 	}
 
-	static HexCyrToLat(str) {
-		static replacements := ["А", "A", "Б", "B", "С", "C", "Ц", "C", "Д", "D", "Е", "E", "Ф", "F"]
+	static HexNonLatinToLatin(str) {
+		static replacements := [
+			"А", "A", "Б", "B", "С", "C", "Ц", "C", "Д", "D", "Е", "E", "Ф", "F",
+			"Α", "A", "Β", "B", "Σ", "C", "Ψ", "C", "Δ", "D", "Ε", "E", "Φ", "F",
+		]
 		for i, replacement in replacements
 			if Mod(i, 2) = 1
 				str := RegExReplace(str, "i)" replacement, replacements[i + 1])

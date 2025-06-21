@@ -577,15 +577,17 @@ Class ChrReg {
 		}
 
 		if refinedEntry.altCode = "" {
-			local pages := [437, 850, 866, 1251, 1252]
-			local codePrefix := Map(1251, "0", 1252, "0")
+			; local pages := [437, 850, 866, 1251, 1252]
+			local generic := CharacterInserter.regionalPages.generic.Values()
+			local atZero := CharacterInserter.regionalPages.atZero.Values()
+			local pages := ArrayMerge(437, generic, atZero)
 			local altOutput := []
 
 			for i, page in pages {
 				local code := CharacterInserter.GetAltcode(character, page)
 
 				if code is Number && code <= 255 && code >= 0 && !altOutput.HasValue(code) {
-					altOutput.Push((codePrefix.Has(page) ? codePrefix[page] : "") code)
+					altOutput.Push((page >= 1251 ? "0" : "") code)
 					refinedEntry.altCodePages.Push(page)
 				} else if altOutput.HasValue(code) {
 					refinedEntry.altCodePages.Push(page)
@@ -614,7 +616,8 @@ Class ChrReg {
 			}
 
 			pages := unset
-			codePrefix := unset
+			generic := unset
+			atZero := unset
 			altOutput := unset
 		}
 
