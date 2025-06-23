@@ -79,7 +79,22 @@ Class ChrLib {
 
 	static GetEntry(entryName) {
 		if this.entries.HasOwnProp(entryName) {
-			return this.entries.%entryName%.Clone()
+			local entry := this.entries.%entryName%.Clone()
+			local referencingTo := entry.reference is Object
+				? entry.reference.Clone() : entry.reference
+
+			if referencingTo is Object {
+				local call := referencingTo.HasOwnProp("call") ? referencingTo.call : Cfg.Get.Bind(Cfg, referencingTo.params*)
+				local result := call()
+				referencingTo := result = referencingTo.if
+					? referencingTo.then
+					: referencingTo.else
+			}
+
+			if referencingTo != ""
+				entry := this.ReplaceEntryKeys(entry, this.GetEntry(referencingTo), entry.modifiedKeys)
+
+			return entry
 		} else {
 			return False
 		}
@@ -217,6 +232,23 @@ Class ChrLib {
 		FileAppend(html, printPath, "UTF-8")
 		Run(printPath)
 		return
+	}
+
+	static ReplaceEntryKeys(entryToModify, entrySource, keyNames := []) {
+		if !entrySource || !entryToModify
+			return False
+
+		local output := entrySource.Clone()
+
+		for each in ArrayMerge(keyNames, ["index"]) {
+			if entryToModify.HasOwnProp(each) {
+				output.%each% := entryToModify.%each% is Object
+					? entryToModify.%each%.Clone()
+					: entryToModify.%each%
+			}
+		}
+
+		return output
 	}
 
 	static Get(entryName, extraRules := False, getMode := "Unicode", alt := Scripter.selectedMode.Get("Glyph Variations")) {

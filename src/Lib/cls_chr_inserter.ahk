@@ -48,12 +48,12 @@ Class CharacterInserter {
 		return
 	}
 
-	static HexToDec(int) {
-		if int ~= "i)[АБСЦДЕФΑΒΨΣΔΕΦ]"
-			int := Util.HexNonLatinToLatin(int)
-		if int ~= "[A-Fa-f]"
-			int := Number("0x" int)
-		return int
+	static HexToDec(str) {
+		if str ~= "i)[АБСЦДЕФΑΒΨΣΔΕΦ]"
+			str := Util.HexNonLatinToLatin(str)
+		if str ~= "[A-Fa-f]"
+			str := Number("0x" str)
+		return str
 	}
 
 	static regionalPages := {
@@ -72,8 +72,7 @@ Class CharacterInserter {
 	}
 
 	static Altcode(charCode) {
-
-		local hasZero := SubStr(charCode, 1, 1) ~= "^0"
+		local hasZero := charCode ~= "^0"
 
 		if !(StrLen(charCode) > 1 && hasZero) && this.HexToDec(charCode) < 32 && AltCodesLibrary.HasValue(charCode, &i)
 			return AltCodesLibrary[i + 1]

@@ -4,6 +4,7 @@ Class ChrEntry {
 			return {
 				index: 0,
 				proxy: "",
+				modifiedKeys: [],
 				unicode: "",
 				unicodeBlock: "",
 				sequence: [],
@@ -64,7 +65,15 @@ Class ChrEntry {
 
 	Get(attributes := {}) {
 		local root := this.data
+
+		if !attributes.HasOwnProp("modifiedKeys") || attributes.modifiedKeys.Length = 0
+			attributes.modifiedKeys := attributes.ObjKeys()
+
+		if !attributes.HasOwnProp("reference")
+			attributes.reference := ""
+
 		attributes := this.Proxying(&root, &attributes)
+
 
 		for key, value in attributes.OwnProps() {
 			if value is Array {

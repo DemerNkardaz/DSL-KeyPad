@@ -1632,6 +1632,8 @@ bindingMaps := Map(
 				),
 				"X", Map(
 					">+", "lat_s_let_x::modifier",
+					"<^>!", "&ipa_s_let_h_chi",
+					"<^>!>+", "hel_s_let_h_chi::modifier",
 				),
 				"Y", Map(
 					"<^>!", "lat_c_let_y::smallCapital",
@@ -2486,7 +2488,7 @@ bindingMaps := Map(
 				">+", "celsius",
 			),
 			"D", Map(
-				"<!", "degree",
+				"<!", "[angle,degree]",
 				"<^>!", ["lat_[c,s]_let_d_eth"],
 				"<^>!<!", ["lat_[c,s]_let_d__stroke_short"],
 				"<^>!<!<+", ["lat_[c,s]_let_d__caron"],

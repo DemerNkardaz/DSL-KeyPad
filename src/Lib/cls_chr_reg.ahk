@@ -577,10 +577,9 @@ Class ChrReg {
 		}
 
 		if refinedEntry.altCode = "" {
-			; local pages := [437, 850, 866, 1251, 1252]
 			local generic := CharacterInserter.regionalPages.generic.Values()
 			local atZero := CharacterInserter.regionalPages.atZero.Values()
-			local pages := ArrayMerge(437, generic, atZero)
+			local pages := ArrayMerge([437], generic, atZero)
 			local altOutput := []
 
 			for i, page in pages {

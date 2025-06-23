@@ -24,6 +24,9 @@ Class Cfg {
 			"Unicode_Web_Resource_Use_System_Language", "False",
 			"First_Message", "True",
 		],
+		"IPA", [
+			"Referencing_Rule_Latin", "False",
+		],
 		"PanelGUI", [
 			"List_Items_Font_Size", "",
 			"Preview_Font_Family", "",
@@ -230,7 +233,8 @@ Class Cfg {
 			repairBtn.OnEvent("Click", (*) => Update.Get(True))
 
 			tabLabelChars := Locale.Read("gui_options_tab_base")
-			tabLabels := [tabLabelChars]
+			tabIPA := Locale.Read("gui_options_tab_ipa")
+			tabLabels := [tabLabelChars, tabIPA]
 
 			optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + (84 + 25), 3), tabLabels)
 
@@ -280,10 +284,15 @@ Class Cfg {
 			HTMLModeSelector.Text := HTMLOptionsList.HasOwnProp(HTMLOption) ? HTMLOptionsList.%HTMLOption% : HTMLOptionsList.Decimal
 			HTMLModeSelector.OnEvent("Change", (CB, Zero) => Options.SetLocalisedOption(CB.Text, HTMLOptionsList, "HTML_Mode"))
 
-
 			LaTeXHotStringsCheckbox := optionsPanel.AddCheckBox("vLaTeXHotstrings x" languageSelectorX() " y" languageSelectorY(300 + 225) " w320", Locale.Read("gui_options_LaTeX_Hotstrings"))
 			LaTeXHotStringsCheckbox.Value := Cfg.Get("LaTeX_Hotstrings", , False, "bool")
 			LaTeXHotStringsCheckbox.OnEvent("Click", (CB, Zero) => LaTeXHotstrings(CB.Value))
+
+			optionsTabs.UseTab(tabIPA)
+
+			referencingMode := optionsPanel.AddCheckbox("vReferencingMode x" languageSelectorX() " w320 y" languageSelectorY(300 + 30 + 5), Locale.Read("gui_options_ipa_use_latin_instead_greek"))
+			referencingMode.Value := Cfg.Get("Referencing_Rule_Latin", "IPA", False, "bool")
+			referencingMode.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Referencing_Rule_Latin", "IPA", "bool"))
 
 			optionsTabs.UseTab()
 

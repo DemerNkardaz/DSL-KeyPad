@@ -1053,12 +1053,12 @@ Class Panel {
 			} else {
 				titleCol := LV.GetText(rowNumber, 1)
 				entryCol := LV.GetText(rowNumber, 5)
-				unicode := ChrLib.entries.%entryCol%.unicode
-				unicodeBlock := ChrLib.entries.%entryCol%.unicodeBlock
-				sequence := ChrLib.entries.%entryCol%.sequence
-				altsCount := ObjOwnPropCount(ChrLib.entries.%entryCol%.alterations)
-				hasLegend := ChrLib.entries.%entryCol%.options.legend != ""
 				value := ChrLib.GetEntry(entryCol)
+				unicode := value.unicode
+				unicodeBlock := value.unicodeBlock
+				sequence := value.sequence
+				altsCount := ObjOwnPropCount(value.alterations)
+				hasLegend := value.options.legend != ""
 
 				if StrLen(unicode) > 0 {
 					star := " " Chr(0x2605)
@@ -1116,9 +1116,9 @@ Class Panel {
 		} else {
 			titleCol := LV.GetText(rowNumber, 1)
 			entryCol := LV.GetText(rowNumber, 5)
-			unicode := ChrLib.entries.%entryCol%.unicode
-			sequence := ChrLib.entries.%entryCol%.sequence
 			value := ChrLib.GetEntry(entryCol)
+			unicode := value.unicode
+			sequence := value.sequence
 
 			if StrLen(unicode) > 0 {
 				isCtrlDown := GetKeyState("LControl")
@@ -1224,6 +1224,7 @@ Class Panel {
 		} else {
 			languageCode := Language.Get()
 			value := ChrLib.GetEntry(characterEntry)
+			referenced := value.reference is Object || value.reference != ""
 
 			getChar := Util.UnicodeToChar(value.sequence.Length > 0 ? value.sequence : value.unicode)
 			htmlCode := Util.StrToHTML(getChar)
@@ -1274,12 +1275,14 @@ Class Panel {
 			}
 
 
+			local altCodePages := value.altCodePages.Length > 0 ? value.altCodePages.ToString() : ""
+
 			this.PanelGUI[options.prefix "Title"].Text := characterTitle
 			this.PanelGUI[options.prefix "Symbol"].Text := previewSymbol
-			this.PanelGUI[options.prefix "Unicode"].Text := value.sequence.Length > 0 ? Util.StrCutBrackets(value.sequence.ToString(" ")) : Util.StrCutBrackets(value.unicode)
+			this.PanelGUI[options.prefix "Unicode"].Text := value.sequence.Length > 0 ? value.sequence.ToString(" ") : value.unicode
 			this.PanelGUI[options.prefix "HTML"].Text := StrLen(value.entity) > 0 ? [htmlCode, value.entity].ToString(" ") : htmlCode
 			this.PanelGUI[options.prefix "Alt"].Text := StrLen(value.altCode) > 0 ? value.altCode : "N/A"
-			this.PanelGUI[options.prefix "AltPages"].Text := value.altCodePages.Length > 0 ? Locale.ReadInject("symbol_altcode_pages", [value.altCodePages.ToString()]) : ""
+			this.PanelGUI[options.prefix "AltPages"].Text := value.altCodePages.Length > 0 ? Locale.ReadInject("symbol_altcode_pages", [Util.StrCutToComma(altCodePages, 24)]) : ""
 			this.PanelGUI[options.prefix "LaTeX"].Text := value.LaTeX.Length > 0 ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"
 			this.PanelGUI[options.prefix "LaTeXPackage"].Text := StrLen(value.LaTeXPackage) > 0 ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
 
@@ -1328,7 +1331,7 @@ Class Panel {
 				}
 			}
 
-			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read("character"))
+			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read(referenced ? "entry_reference" : "character"))
 			this.PanelGUI[options.prefix "Alert"].Text := value.symbol.font != "" ? Chr(0x1D4D5) " " value.symbol.font : ""
 
 			this.PanelGUI[options.prefix "KeyPreview"].Text := characterKey

@@ -2428,6 +2428,12 @@ LibRegistrate() {
 			groups: ["Special Characters", "Special Fast Left"],
 			options: { fastKey: "D" },
 		},
+		"angle", {
+			unicode: "2220",
+			tags: ["angle", "угол"],
+			groups: ["Special Characters", "Special Fast Left"],
+			options: { fastKey: "c* D" },
+		},
 		"celsius", {
 			unicode: "2103",
 			tags: ["celsius", "градус Цельсия"],
@@ -4357,6 +4363,8 @@ LibRegistrate() {
 				sansSerifBold: "1D757",
 				sansSerifItalicBold: "1D791",
 			}, {
+				modifier: "1D5D",
+				subscript: "1D66",
 				bold: "1D6C3",
 				italic: "1D6FD",
 				italicBold: "1D737",
@@ -4375,6 +4383,8 @@ LibRegistrate() {
 				sansSerifItalicBold: "1D792",
 				smallCapital: "1D26",
 			}, {
+				modifier: "1D5E",
+				subscript: "1D67",
 				bold: "1D6C4",
 				italic: "1D6FE",
 				italicBold: "1D738",
@@ -4392,6 +4402,7 @@ LibRegistrate() {
 				sansSerifBold: "1D759",
 				sansSerifItalicBold: "1D793",
 			}, {
+				modifier: "1D5F",
 				bold: "1D6C5",
 				italic: "1D6FF",
 				italicBold: "1D739",
@@ -4616,6 +4627,7 @@ LibRegistrate() {
 				sansSerifItalicBold: "1D7A0",
 				smallCapital: "1D29",
 			}, {
+				subscript: "1D68",
 				bold: "1D6D2",
 				italic: "1D70C",
 				italicBold: "1D746",
@@ -4696,6 +4708,8 @@ LibRegistrate() {
 				sansSerifBold: "1D76B",
 				sansSerifItalicBold: "1D7A5",
 			}, {
+				modifier: "1D60",
+				subscript: "1D69",
 				bold: "1D6D7",
 				italic: "1D711",
 				italicBold: "1D74B",
@@ -4713,6 +4727,8 @@ LibRegistrate() {
 				sansSerifBold: "1D76C",
 				sansSerifItalicBold: "1D7A6",
 			}, {
+				modifier: "1D61",
+				subscript: "1D6A",
 				bold: "1D6D8",
 				italic: "1D712",
 				italicBold: "1D74C",
@@ -6209,6 +6225,11 @@ LibRegistrate() {
 			symbol: { letter: "${lat_s_let_a_schwa}" },
 			recipe: ["$${arrow_right}"],
 		},
+		"lat_[c,s]_let_g_gha", {
+			unicode: ["01A2", "01A3"],
+			options: { useLetterLocale: True },
+			recipe: ["/Gha/"],
+		},
 		"lat_[c,s]_let_h_heng", {
 			unicode: ["A726", "A727"],
 			options: { useLetterLocale: True },
@@ -6780,7 +6801,7 @@ LibRegistrate() {
 		},
 		"lat_[c,s]_let_s_sigma", {
 			unicode: ["01A9", "0283"],
-			tags: [[], ["voiceless postalveolar fricative", "звонкий велярный спирант"]],
+			tags: [[], ["voiceless postalveolar fricative", "глухой постальвеолярный сибилянт"]],
 			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True, fastKey: "<+>+ $?Secondary"
@@ -8760,7 +8781,6 @@ LibRegistrate() {
 		},
 		"lat_[c,s]_lig_ij", { unicode: ["0132", "0133"] },
 		"lat_[s]_lig_lb", { unicode: ["2114"] },
-		"lat_[c,s]_lig_oi", { unicode: ["01A2", "01A3"] },
 		"lat_[c,s]_lig_oe", {
 			unicode: ["0152", "0153"],
 			groups: [["Latin Ligatures", "IPA"], ["Latin Ligatures", "IPA"]],
@@ -8875,6 +8895,23 @@ LibRegistrate() {
 		},
 		"lat_[s]_dig_ts", {
 			unicode: ["02A6"],
+		},
+		;
+		;
+		; * IPA References
+		;
+		;
+		"&ipa_s_let_h_chi", {
+			reference: {
+				params: ["Referencing_Rule_Latin", "IPA", True, "bool"],
+				if: True,
+				then: "lat_s_let_h_chi",
+				else: "hel_s_let_h_chi",
+			},
+			titles: Map(),
+			tags: ["voiceless uvular fricative", "глухой увулярный фрикатив"],
+			groups: ["IPA"],
+			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! X" },
 		},
 		;
 		;

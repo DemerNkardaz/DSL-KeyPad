@@ -95,6 +95,49 @@ Class Util {
 		return output
 	}
 
+	static StrCutToComma(str, maxLength := 32, end := " [ " Chr(0x2026) " ] ") {
+		local len := StrLen(str)
+
+		if (len <= maxLength)
+			return str
+
+		local cutPos := maxLength
+		local leftComma := 0
+		local rightComma := 0
+
+		Loop Parse, str {
+			if (A_LoopField = ",") {
+				if (A_Index <= cutPos) {
+					leftComma := A_Index
+				} else if (rightComma = 0) {
+					rightComma := A_Index
+					break
+				}
+			}
+		}
+
+		local finalCutPos := cutPos
+
+		if (leftComma > 0 && rightComma > 0) {
+			local leftDistance := cutPos - leftComma
+			local rightDistance := rightComma - cutPos
+
+			if (leftDistance <= rightDistance) {
+				finalCutPos := leftComma
+			} else {
+				finalCutPos := rightComma
+			}
+		} else if (leftComma > 0) {
+			finalCutPos := leftComma
+		} else if (rightComma > 0) {
+			finalCutPos := rightComma
+		}
+
+		local output := SubStr(str, 1, finalCutPos)
+		local outputLen := StrLen(output)
+		return output (outputLen < len ? end : "")
+	}
+
 	static StrDigitFormat(str) {
 		local output := ""
 		local len := StrLen(str)
