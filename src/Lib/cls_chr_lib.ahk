@@ -77,19 +77,27 @@ Class ChrLib {
 		return
 	}
 
+	static GetReferenceName(&entryName, &entry?) {
+		if !IsSet(entry)
+			entry := this.entries.%entryName%
+
+		local referencingTo := entry.reference is Object ? entry.reference.Clone() : entry.reference
+
+		if referencingTo is Object {
+			local call := referencingTo.HasOwnProp("call") ? referencingTo.call : Cfg.Get.Bind(Cfg, referencingTo.params*)
+			local result := call()
+			referencingTo := result = referencingTo.if
+				? referencingTo.then
+				: referencingTo.else
+		}
+
+		return referencingTo
+	}
+
 	static GetEntry(entryName) {
 		if this.entries.HasOwnProp(entryName) {
 			local entry := this.entries.%entryName%.Clone()
-			local referencingTo := entry.reference is Object
-				? entry.reference.Clone() : entry.reference
-
-			if referencingTo is Object {
-				local call := referencingTo.HasOwnProp("call") ? referencingTo.call : Cfg.Get.Bind(Cfg, referencingTo.params*)
-				local result := call()
-				referencingTo := result = referencingTo.if
-					? referencingTo.then
-					: referencingTo.else
-			}
+			local referencingTo := this.GetReferenceName(&entryName, &entry)
 
 			if referencingTo != ""
 				entry := this.ReplaceEntryKeys(entry, this.GetEntry(referencingTo), entry.modifiedKeys)

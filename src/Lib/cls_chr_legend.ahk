@@ -27,6 +27,9 @@ Class ChrLegend {
 	}
 
 	__New(preselectEntry := "") {
+		if preselectEntry ~= "^&"
+			preselectEntry := ChrLib.GetReferenceName(&preselectEntry)
+
 		ChrLegend.Panel(&preselectEntry)
 	}
 

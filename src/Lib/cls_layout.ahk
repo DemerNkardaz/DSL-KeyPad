@@ -1745,6 +1745,9 @@ Class GlyphsPanel {
 	}
 
 	static Panel(preselectEntry := "") {
+		if preselectEntry ~= "^&"
+			preselectEntry := ChrLib.GetReferenceName(&preselectEntry)
+
 		panelW := 728
 		panelH := 800
 
