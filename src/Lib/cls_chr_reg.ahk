@@ -78,6 +78,11 @@ Class ChrReg {
 					variantEntry.recipePush := entry.recipePush[i].Clone()
 				}
 
+				if entry.HasOwnProp("reference") {
+					if entry.reference is Array
+						variantEntry.reference := entry.reference[i].Clone()
+				}
+
 				if entry.sequence.Length > 0 && entry.sequence[i] is Array
 					variantEntry.sequence := entry.sequence[i].Clone()
 
@@ -86,7 +91,7 @@ Class ChrReg {
 				local symbolRef := entry.symbol
 				variantEntry.symbol := this.CloneOptions(&symbolRef, &i)
 
-				this.ProcessReferences(&variantEntry, &entry, &i)
+				this.ProcessProperties(&variantEntry, &entry, &i)
 
 				local optionsRef := entry.options
 				variantEntry.options := this.CloneOptions(&optionsRef, &i)
@@ -99,7 +104,8 @@ Class ChrReg {
 			}
 
 			for entryName, entry in entries.OwnProps() {
-				local noIndexName := RegExReplace(entryName, "i)^e(\d+)_(.*?)", "$2")
+				RegExMatch(entryName, "i)^e(\d+)_(.*)", &nameMatch)
+				local noIndexName := nameMatch[2]
 				local variant := allVariants[1]
 				this.ProcessRecipe(&entry, &variant)
 				local value := ChrEntry().Get(entry)
@@ -181,7 +187,7 @@ Class ChrReg {
 		return
 	}
 
-	ProcessReferences(&targetEntry, &sourceEntry, &index) {
+	ProcessProperties(&targetEntry, &sourceEntry, &index) {
 		for reference in ["recipe", "tags", "groups"] {
 			if sourceEntry.%reference%.Length > 0 && sourceEntry.%reference%[sourceEntry.%reference%.Length] is Array {
 				if sourceEntry.%reference%[index].Length > 0 {
@@ -203,12 +209,25 @@ Class ChrReg {
 		return
 	}
 
+	ProcessReference(&targetEntry) {
+		if targetEntry.HasOwnProp("reference") && targetEntry.reference is Object {
+			for each in ["name", "then", "else", "as"] {
+				if targetEntry.reference.HasOwnProp(each)
+					&& RegExMatch(targetEntry.reference.%each%, "\[(.*?)\]", &match) {
+					local splittedVariants := StrSplit(match[1], ",")
+					local copy := targetEntry.reference.%each%
+					targetEntry.reference.%each% := RegExReplace(targetEntry.reference.%each%, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
+				}
+			}
+		}
+	}
+
 	ProcessSymbolLetter(&targetEntry) {
 		if targetEntry.symbol.letter is String {
 			targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\%self\%", Util.UnicodeToChar(targetEntry.unicode))
 			if InStr(targetEntry.symbol.letter, "${") {
 				while RegExMatch(targetEntry.symbol.letter, "\[(.*?)\]", &varMatch) {
-					splittedVariants := StrSplit(varMatch[1], ",")
+					local splittedVariants := StrSplit(varMatch[1], ",")
 					targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
 				}
 
@@ -541,6 +560,7 @@ Class ChrReg {
 			}
 		}
 
+		this.ProcessReference(&refinedEntry)
 		this.ProcessSymbolLetter(&refinedEntry)
 		this.ProcessOptionStrings(&refinedEntry)
 
@@ -748,7 +768,7 @@ Class ChrReg {
 
 		for key, value in refinedEntry.options.OwnProps()
 			if toNotate.HasValue(key) || key ~= "i)^telex__"
-				refinedEntry.options.%key% := this.SetNotaion(&value, &dataPack)
+				refinedEntry.options.%key% := ChrReg.SetNotaion(&value, &dataPack)
 
 		if refinedEntry.recipe.Length > 0 {
 			for recipe in refinedEntry.recipe {
@@ -840,7 +860,7 @@ Class ChrReg {
 		return
 	}
 
-	SetNotaion(&str, &data) {
+	static SetNotaion(&str, &data) {
 		static notationKey := (m) => Chrs(0x29FC, 0x202F) m Chrs(0x202F, 0x29FD)
 
 		local output := str

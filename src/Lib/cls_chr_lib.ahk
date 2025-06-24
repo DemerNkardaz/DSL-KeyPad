@@ -83,13 +83,15 @@ Class ChrLib {
 
 		local referencingTo := entry.reference is Object ? entry.reference.Clone() : entry.reference
 
-		if referencingTo is Object {
+		if referencingTo is Object && referencingTo.HasOwnProp("params") {
 			local call := referencingTo.HasOwnProp("call") ? referencingTo.call : Cfg.Get.Bind(Cfg, referencingTo.params*)
 			local result := call()
 			referencingTo := result = referencingTo.if
 				? referencingTo.then
 				: referencingTo.else
-		}
+		} else if referencingTo is Object && referencingTo.HasOwnProp("name")
+			referencingTo := referencingTo.name
+
 
 		return referencingTo
 	}
@@ -255,6 +257,30 @@ Class ChrLib {
 					: entryToModify.%each%
 			}
 		}
+
+		if entryToModify.reference is Object
+			&& entryToModify.reference.HasOwnProp("as")
+			&& ObjOwnPropCount(entrySource.alterations) > 0
+			&& entrySource.alterations.HasOwnProp(entryToModify.reference.as) {
+			output.unicode := entrySource.alterations.%entryToModify.reference.as%
+			output.symbol.set := Util.UnicodeToChar(entrySource.alterations.%entryToModify.reference.as%)
+			output.sequence := []
+			output.alterations := {}
+			output.altCode := ""
+			output.altCodePages := []
+			output.LaTeX := []
+			output.LaTeXPackage := ""
+
+			if entryToModify.reference.HasOwnProp("include")
+				for k, v in entryToModify.reference.include
+					output.alterations.%k% := entrySource.alterations.%v%
+		}
+
+		local dataPack := output.data
+
+		for key, value in output.options.OwnProps()
+			if ["fastKey", "altLayoutKey", "altSpecialKey"].HasValue(key)
+				output.options.%key% := ChrReg.SetNotaion(&value, &dataPack)
 
 		return output
 	}

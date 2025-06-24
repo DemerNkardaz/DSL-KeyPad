@@ -1481,6 +1481,7 @@ bindingMaps := Map(
 					"<^>!>+", "lat_n_let_palatal_click::modifier",
 				),
 				"5", Map(
+					"<^<!", "breve_[below,inverted]_double",
 					"+", "percent",
 					"<^>!", "lat_n_let_bilabial_click",
 					"<^>!>+", "lat_n_let_bilabial_click::modifier",
@@ -1501,7 +1502,11 @@ bindingMaps := Map(
 					"+", "vertical_line",
 				),
 				"Tilde", Map("+", "tilde"),
-				"LeftBracket", Map("+", "left_brace"),
+				"LeftBracket", Map(
+					"+", "left_brace",
+					"<^<!", "bridge_[below,above]",
+					"<^<!<+", "bridge_inverted_below",
+				),
 				"RightBracket", Map("+", "right_brace"),
 				"A", Map(
 					"<^>!", "lat_s_let_a_alpha[_turned,]",
@@ -1514,9 +1519,11 @@ bindingMaps := Map(
 					">+", "lat_s_let_a::modifier",
 				),
 				"B", Map(
+					"<^<!", "breve[_below,]",
+					"<^<!<+", "breve_inverted[_below,]",
 					">+", "lat_s_let_b::modifier",
-					"<^>!", "[lat_c_let_b::smallCapital,&ipa_s_let_b_beta]",
-					"<^>!>+", "[lat_c_let_b::smallCapitalModifier,hel_s_let_b_beta::modifier]",
+					"<^>!", "&ipa_[k,s]_let_b[,_beta]",
+					"<^>!>+", "[&ipa,hel]_[k,s]_let_b[,_beta]::modifier",
 				),
 				"C", Map(
 					"<^>!", "lat_s_let_c__curl",
@@ -1524,6 +1531,7 @@ bindingMaps := Map(
 					">+", "lat_s_let_c::modifier",
 				),
 				"D", Map(
+					"<^<!", "diaeresis[_below,]",
 					"<^>!", "lat_s_let_d_eth",
 					"<^>!>+", "lat_s_let_d_eth::modifier",
 					">+", "lat_s_let_d::modifier",
@@ -1542,20 +1550,20 @@ bindingMaps := Map(
 					">+", "lat_s_let_f::modifier",
 				),
 				"G", Map(
-					"<^>!", "lat_[c,s]_let_g[::smallCapital,_gamma]",
-					"<^>!>+", "lat_[c,s]_let_g[::smallCapitalModifier,_gamma::modifier]",
+					"<^>!", "[&ipa,lat]_[k,s]_let_g[,_gamma]",
+					"<^>!>+", "[&ipa,lat]_[k,s]_let_g[,_gamma]::modifier",
 					"<^>!<!", "lat_s_let_m_turned__long_leg",
 					"<^>!<!>+", "lat_s_let_m_turned__long_leg::modifier",
 					">+", "lat_s_let_g::modifier",
 				),
 				"H", Map(
-					"<^>!", "lat_c_let_h::smallCapital",
-					"<^>!>+", "lat_c_let_h::smallCapitalModifier",
+					"<^>!", "&ipa_k_let_h",
+					"<^>!>+", "&ipa_k_let_h::modifier",
 					">+", "lat_s_let_h::modifier",
 				),
 				"I", Map(
-					"<^>!", "lat_[c,s]_let_i[::smallCapital,__stroke_short]",
-					"<^>!>+", "lat_[c,s]_let_i[::smallCapitalModifier,__stroke_short::modifier]",
+					"<^>!", "[&ipa,lat]_[k,s]_let_i[,__stroke_short]",
+					"<^>!>+", "[&ipa,lat]_[k,s]_let_i[,__stroke_short]::modifier",
 					">+", "lat_s_let_i::modifier",
 				),
 				"J", Map(
@@ -1565,8 +1573,8 @@ bindingMaps := Map(
 					">+", "lat_s_let_k::modifier",
 				),
 				"L", Map(
-					"<^>!", "lat_c_let_l::smallCapital",
-					"<^>!>+", "lat_c_let_l::smallCapitalModifier",
+					"<^>!", "&ipa_k_let_l",
+					"<^>!>+", "&ipa_k_let_l::modifier",
 					"<^>!<!", "lat_s_let_y_turned",
 					"<^>!<!>+", "lat_s_let_y_turned::modifier",
 					">+", "lat_s_let_l::modifier",
@@ -1575,8 +1583,8 @@ bindingMaps := Map(
 					">+", "lat_s_let_m::modifier",
 				),
 				"N", Map(
-					"<^>!", "lat_[c,s]_let_n[::smallCapital,_eng]",
-					"<^>!>+", "lat_[c,s]_let_n[::smallCapitalModifier,_eng::modifier]",
+					"<^>!", "[&ipa,lat]_[k,s]_let_n[,_eng]",
+					"<^>!>+", "[&ipa,lat]_[k,s]_let_n[,_eng]::modifier",
 					"<^>!<!", "lat_s_dig_feng",
 					"<^>!<!>+", "lat_s_dig_feng::modifier",
 					">+", "lat_s_let_n::modifier",
@@ -1604,8 +1612,9 @@ bindingMaps := Map(
 					">+", "lat_s_let_q::modifier",
 				),
 				"R", Map(
-					"<^>!", "lat_c_let_r::smallCapital",
-					"<^>!>+", "lat_c_let_r::smallCapitalModifier",
+					"<^<!", "ring_[below,above]",
+					"<^>!", "&ipa_k_let_r",
+					"<^>!>+", "&ipa_k_let_r::modifier",
 					"<^>!<!", "lat_s_let_r_turned",
 					"<^>!<!>+", "lat_s_let_r_turned::modifier",
 					">+", "lat_s_let_r::modifier",
@@ -1644,8 +1653,8 @@ bindingMaps := Map(
 					"<^>!>+", "hel_s_let_h_chi::modifier",
 				),
 				"Y", Map(
-					"<^>!", "lat_c_let_y::smallCapital",
-					"<^>!>+", "lat_c_let_y::smallCapitalModifier",
+					"<^>!", "&ipa_k_let_y",
+					"<^>!>+", "&ipa_k_let_y::modifier",
 					"<^>!<!", "lat_s_let_h_turned",
 					"<^>!<!>+", "lat_s_let_h_turned::modifier",
 					">+", "lat_s_let_y::modifier",
@@ -2157,6 +2166,9 @@ bindingMaps := Map(
 	"Diacritic", Map(
 		"Flat", Map(),
 		"Moded", Map(
+			"6", Map(
+				"<^<!:Caps", ["breve_[below,inverted]_double"],
+			),
 			"A", Map(
 				"<^<!", "acute",
 				"<^<!<+", "acute_double",

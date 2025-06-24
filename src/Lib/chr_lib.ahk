@@ -59,51 +59,67 @@ LibRegistrate() {
 		"breve", {
 			unicode: "0306",
 			tags: ["breve", "бреве", "кратка"],
-			groups: ["Diacritics Primary", "FK Diacritics Primary"],
+			groups: ["Diacritics Primary", "FK Diacritics Primary", "IPA"],
 			alterations: { uncombined: "02D8" },
-			options: { fastKey: "B И" },
+			options: { fastKey: "B И", altLayoutKey: "<^<! B" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"breve_inverted", {
 			unicode: "0311",
 			tags: ["inverted breve", "перевёрнутое бреве", "перевёрнутая кратка"],
-			groups: ["Diacritics Primary", "FK Diacritics Primary"],
-			options: { fastKey: "<+ B И" },
+			groups: ["Diacritics Primary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: "<+ B И", altLayoutKey: "<^<!<+ B" },
 			symbol: { category: "Diacritic Mark" },
+		},
+		"breve_inverted_double", {
+			unicode: "0361",
+			tags: ["double inverted breve", "двойное перевёрнутое бреве", "двойная перевёрнутая кратка"],
+			groups: ["Diacritics Primary", "FK Diacritics Primary"],
+			options: { fastKey: "6" },
+			symbol: { category: "Diacritic Mark" },
+			recipe: ["${breve_inverted×2}"],
 		},
 		"breve_below", {
 			unicode: "032E",
 			tags: ["breve below", "бреве снизу", "кратка снизу"],
-			groups: ["Diacritics Secondary", "FK Diacritics Primary"],
-			options: { fastKey: ">+ B И" },
+			groups: ["Diacritics Secondary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: ">+ B И", altLayoutKey: "c*<^<! B" },
 			symbol: { category: "Diacritic Mark" },
+		},
+		"breve_below_double", {
+			unicode: "035C",
+			tags: ["double breve below", "двойное бреве снизу", "двойная кратка снизу"],
+			groups: ["Diacritics Primary", "FK Diacritics Primary"],
+			options: { fastKey: "c* 6" },
+			symbol: { category: "Diacritic Mark" },
+			recipe: ["${breve_below×2}"],
 		},
 		"breve_inverted_below", {
 			unicode: "032F",
 			tags: ["inverted breve below", "перевёрнутое бреве снизу", "перевёрнутая кратка снизу"],
-			groups: ["Diacritics Secondary", "FK Diacritics Primary"],
-			options: { fastKey: "<+>+ B И" },
+			groups: ["Diacritics Secondary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: "<+>+ B И", altLayoutKey: "c*<^<!<+ B" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"bridge_above", {
 			unicode: "0346",
 			tags: ["bridge above", "мостик сверху"],
-			groups: ["SK Diacritics Primary"],
-			options: { fastKey: "B И" },
+			groups: ["SK Diacritics Primary", "IPA"],
+			options: { fastKey: "B И", altLayoutKey: "<^<! [" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"bridge_below", {
 			unicode: "032A",
 			tags: ["bridge below", "мостик снизу"],
-			groups: ["SK Diacritics Primary"],
-			options: { fastKey: "<+ B И" },
+			groups: ["SK Diacritics Primary", "IPA"],
+			options: { fastKey: "<+ B И", altLayoutKey: "c*<^<! [" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"bridge_inverted_below", {
 			unicode: "033A",
 			tags: ["inverted bridge below", "перевёрнутый мостик снизу"],
-			groups: ["SK Diacritics Primary"],
-			options: { fastKey: ">+ B И" },
+			groups: ["SK Diacritics Primary", "IPA"],
+			options: { fastKey: ">+ B И", altLayoutKey: "<^<!<+ [" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"circumflex", {
@@ -203,8 +219,8 @@ LibRegistrate() {
 				uncombined: "00A8",
 			},
 			tags: ["diaeresis", "диерезис"],
-			groups: ["Diacritics Primary", "FK Diacritics Primary"],
-			options: { fastKey: "<+ D В" },
+			groups: ["Diacritics Primary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: "<+ D В", altLayoutKey: "<^<! D" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"dot_below", {
@@ -217,8 +233,8 @@ LibRegistrate() {
 		"diaeresis_below", {
 			unicode: "0324",
 			tags: ["diaeresis below", "диерезис снизу"],
-			groups: ["Diacritics Secondary", "FK Diacritics Primary"],
-			options: { fastKey: "<+>+ D В" },
+			groups: ["Diacritics Secondary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: "<+>+ D В", altLayoutKey: "c*<^<! D" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"fermata", {
@@ -364,8 +380,8 @@ LibRegistrate() {
 				uncombined: "02DA",
 			},
 			tags: ["ring above", "кольцо сверху"],
-			groups: ["Diacritics Primary", "FK Diacritics Primary"],
-			options: { fastKey: "R К" },
+			groups: ["Diacritics Primary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: "R К", altLayoutKey: "<^<! R" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"ring_below", {
@@ -374,8 +390,8 @@ LibRegistrate() {
 				modifier: "02F3",
 			},
 			tags: ["ring above", "кольцо сверху"],
-			groups: ["Diacritics Primary", "FK Diacritics Primary"],
-			options: { fastKey: "<+ R К" },
+			groups: ["Diacritics Primary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: "<+ R К", altLayoutKey: "c*<^<! R" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"ring_below_double", {
@@ -739,9 +755,7 @@ LibRegistrate() {
 				monospace: "1D68B",
 				fullwidth: "FF42"
 			}],
-			groups: [["Latin", "IPA"], ["Latin"]],
-			tags: [["voiced bilabial trill", "губно-губной дрожащий согласный"], []],
-			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			options: { noCalc: True }
 		},
 		"lat_[c,s]_let_c", {
 			unicode: ["0043", "0063"],
@@ -943,9 +957,7 @@ LibRegistrate() {
 				monospace: "1D690",
 				fullwidth: "FF47"
 			}],
-			groups: [["Latin", "IPA"], ["Latin"]],
-			tags: [["voiced uvular plosive", "звонкий увулярный взрывной согласный"], []],
-			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			options: { noCalc: True }
 		},
 		"lat_[c,s]_let_h", {
 			unicode: ["0048", "0068"],
@@ -986,9 +998,7 @@ LibRegistrate() {
 				monospace: "1D691",
 				fullwidth: "FF48"
 			}],
-			groups: [["Latin", "IPA"], ["Latin"]],
-			tags: [["voiceless epiglottal fricative", "глухой эпиглоттальный спирант"], []],
-			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			options: { noCalc: True }
 		},
 		"lat_[c,s]_let_i", {
 			unicode: ["0049", "0069"],
@@ -1029,15 +1039,7 @@ LibRegistrate() {
 				monospace: "1D692",
 				fullwidth: "FF49"
 			}],
-			; alterationsEntries: [{ ; ? It is just a draft idea for separated info for symbols variations
-			; smallCapital: {
-			; groups: ["IPA"],
-			; options: { altLayoutKey: ">! $", layoutTitles: True },
-			; }
-			; }, {}],
-			groups: [["Latin", "IPA"], ["Latin"]],
-			tags: [["near-close near-front unrounded vowel", "ненапряжённый неогублённый гласный переднего ряда верхнего подъёма"], []],
-			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			options: { noCalc: True },
 			recipe: [[Chr(0x0130) "/"], [Chr(0x0131) "${dot_above}"]],
 		},
 		"lat_[c,s]_let_j", {
@@ -1160,9 +1162,7 @@ LibRegistrate() {
 				monospace: "1D695",
 				fullwidth: "FF4C"
 			}],
-			groups: [["Latin", "IPA"], ["Latin"]],
-			tags: [["voiced velar lateral approximant", "звонкий велярный латеральный аппроксимант"], []],
-			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			options: { noCalc: True }
 		},
 		"lat_[c,s]_let_m", {
 			unicode: ["004D", "006D"],
@@ -1244,9 +1244,7 @@ LibRegistrate() {
 				monospace: "1D697",
 				fullwidth: "FF4E"
 			}],
-			groups: [["Latin", "IPA"], ["Latin"]],
-			tags: [["voiced uvular nasal", "увулярный носовой согласный"], []],
-			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			options: { noCalc: True }
 		},
 		"lat_[c,s]_let_o", {
 			unicode: ["004F", "006F"],
@@ -1406,9 +1404,7 @@ LibRegistrate() {
 				monospace: "1D69B",
 				fullwidth: "FF52"
 			}],
-			groups: [["Latin", "IPA"], ["Latin"]],
-			tags: [["voiced uvular trill", "увулярный дрожащий согласный"], []],
-			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			options: { noCalc: True }
 		},
 		"lat_[c,s]_let_s", {
 			unicode: ["0053", "0073"],
@@ -1683,9 +1679,7 @@ LibRegistrate() {
 				monospace: "1D6A2",
 				fullwidth: "FF59"
 			}],
-			groups: [["Latin", "IPA"], ["Latin"]],
-			tags: [["near-close near-front rounded vowel", "ненапряжённый огублённый гласный переднего ряда верхнего подъёма"], []],
-			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
+			options: { noCalc: True }
 		},
 		"lat_[c,s]_let_z", {
 			unicode: ["005A", "007A"],
@@ -8912,36 +8906,48 @@ LibRegistrate() {
 		; * IPA References
 		;
 		;
-		"&ipa_s_let_b_beta", {
+		"&ipa_k_let_[b,g,h,i,l,n,r,y]", {
 			reference: {
-				params: ["Referencing_Rule_Latin", "IPA", True, "bool"],
-				if: True,
-				then: "lat_s_let_b_beta",
-				else: "hel_s_let_b_beta",
+				name: "lat_c_let_[b,g,h,i,l,n,r,y]",
+				as: "smallCapital",
+				include: Map("modifier", "smallCapitalModifier"),
 			},
-			titles: Map(),
-			tags: ["voiced bilabial fricative", "звонкий губно-губной спирант"],
 			groups: ["IPA"],
-			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! B" },
+			tags: [
+				["voiced bilabial trill", "губно-губной дрожащий согласный"],
+				["voiced uvular plosive", "звонкий увулярный взрывной согласный"],
+				["voiceless epiglottal fricative", "ненапряжённый неогублённый гласный переднего ряда верхнего подъёма"],
+				["near-close near-front unrounded vowel", "ненапряжённый неогублённый гласный переднего ряда верхнего подъёма"],
+				["voiced velar lateral approximant", "звонкий велярный латеральный аппроксимант"],
+				["voiced uvular nasal", "увулярный носовой согласный"],
+				["voiced uvular trill", "увулярный дрожащий согласный"],
+				["near-close near-front rounded vowel", "ненапряжённый огублённый гласный переднего ряда верхнего подъёма"],
+			],
+			options: { noCalc: True, altLayoutKey: "c*>! $", layoutTitles: True },
 		},
-		"&ipa_s_let_h_chi", {
+		"&ipa_s_let_[b_beta,h_chi]", {
 			reference: {
 				params: ["Referencing_Rule_Latin", "IPA", True, "bool"],
 				if: True,
-				then: "lat_s_let_h_chi",
-				else: "hel_s_let_h_chi",
+				then: "lat_s_let_[b_beta,h_chi]",
+				else: "hel_s_let_[b_beta,h_chi]",
 			},
 			titles: Map(),
-			tags: ["voiceless uvular fricative", "глухой увулярный фрикатив"],
+			tags: [
+				["voiced bilabial fricative", "звонкий губно-губной спирант"],
+				["voiceless uvular fricative", "глухой увулярный фрикатив"],
+			],
 			groups: ["IPA"],
-			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! X" },
+			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! ~" },
+			recipe: [],
 		},
 		"&ipa_s_let_t_theta", {
 			reference: "hel_s_let_t_theta",
 			titles: Map(),
 			tags: ["voiceless dental fricative", "глухой зубной щелевой согласный"],
 			groups: ["IPA"],
-			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! T" },
+			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! ~" },
+			recipe: [],
 		},
 		;
 		;
@@ -8954,6 +8960,7 @@ LibRegistrate() {
 			tags: ["number pi", "число пи"],
 			groups: ["Math"],
 			options: { noCalc: True, altLayoutKey: ">! P" },
+			recipe: ["mth pi"],
 		},
 		;
 		;
