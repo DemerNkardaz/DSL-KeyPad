@@ -30,11 +30,12 @@ try {
 		$relativePath = $_.FullName.Substring($FolderPath.Length).TrimStart('\', '/')
 
 		$isInUserFolder = $relativePath -like 'User\*'
+		$isInModsFolder = $relativePath -like 'Mods\*'
 		$isInBinSubfolder = ($relativePath -like 'Bin\*\*') -and ($relativePath -notmatch '^Bin\\[^\\]+$')
 		$hasExcludedExtension = $_.Extension -in '.cmd', '.cs'
 		$isExcludedFile = $_.Name -in @('version', 'message', 'prerelease', 'make_latest', 'title', 'latest', 'workflow.ps1', 'desktop.ini')
 
-		if ($isInUserFolder -or $isInBinSubfolder -or $hasExcludedExtension -or $isExcludedFile) {
+		if ($isInUserFolder -or $isInModsFolder -or $isInBinSubfolder -or $hasExcludedExtension -or $isExcludedFile) {
 			$excludedFiles += $_
 			return $false
 		}

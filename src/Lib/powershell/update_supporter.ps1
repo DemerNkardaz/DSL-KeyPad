@@ -22,10 +22,21 @@ if (-not $KeypadFolder) {
 	exit 2
 }
 
-# Gather all files (excluding User folder if present)
-if (Test-Path (Join-Path $KeypadFolder.FullName "User")) {
-	Write-Host "Ignoring User directory: $(Join-Path $KeypadFolder.FullName 'User')"
-	$FilesToCopy = Get-ChildItem -Path $KeypadFolder.FullName -Recurse | Where-Object { $_.FullName -notlike "*\User\*" }
+# Gather all files (excluding User and Mods folder if present)
+if ((Test-Path (Join-Path $KeypadFolder.FullName "User")) -or (Test-Path (Join-Path $KeypadFolder.FullName "Mods"))) {
+	$IgnoredDirs = @()
+	if (Test-Path (Join-Path $KeypadFolder.FullName "User")) {
+		Write-Host "Ignoring User directory: $(Join-Path $KeypadFolder.FullName 'User')"
+		$IgnoredDirs += "*\User\*"
+	}
+	if (Test-Path (Join-Path $KeypadFolder.FullName "Mods")) {
+		Write-Host "Ignoring Mods directory: $(Join-Path $KeypadFolder.FullName 'Mods')"
+		$IgnoredDirs += "*\Mods\*"
+	}
+	$FilesToCopy = Get-ChildItem -Path $KeypadFolder.FullName -Recurse | Where-Object { 
+		$file = $_.FullName
+		-not ($IgnoredDirs | Where-Object { $file -like $_ })
+	}
 }
 else {
 	$FilesToCopy = Get-ChildItem -Path $KeypadFolder.FullName -Recurse

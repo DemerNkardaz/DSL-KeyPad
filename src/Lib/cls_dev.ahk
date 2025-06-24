@@ -15,19 +15,8 @@ Class Dev {
 				}
 			}
 
-			if !DirExist(srcPath "\Mods")
-				DirCreate(srcPath "\Mods")
-
-			Loop Files, srcPath "\Mods\*.*"
-				FileDelete(A_LoopFileFullPath)
-
-			for name, path in ModsInjector.injectors.OwnProps() {
-				SplitPath(path, &fileName)
-				local filePath := srcPath "\Mods\" fileName
-				if FileExist(filePath)
-					FileDelete(filePath)
-				FileAppend("", filePath, "UTF-8")
-			}
+			if DirExist(srcPath "\Mods")
+				DirDelete(srcPath "\Mods", True)
 		}
 	}
 

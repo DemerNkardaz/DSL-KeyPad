@@ -78,7 +78,7 @@ Class ModsInjector {
 		for section, content in scriptContents {
 			if list.Has(section) {
 				for fileName, value in list[section].OwnProps() {
-					local hasInclude := InStr(content, "#Include " fileName)
+					local hasInclude := InStr(content, "#Include *i " fileName)
 					if (value = 0 && hasInclude) {
 						hasDifference := True
 						break
@@ -148,7 +148,7 @@ Class ModsInjector {
 				if newList.Has(name) {
 					for key, value in newList[name].OwnProps() {
 						if value > 0
-							content .= "#Include " key "`n"
+							content .= "#Include *i " key "`n"
 					}
 				}
 

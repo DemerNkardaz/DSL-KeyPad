@@ -25,7 +25,7 @@ initialized := False
 
 #Include <utils>
 #Include <cls_mods_injector>
-#Include Mods\_pre_init__mods_injector.ahk
+#Include *i Mods\_pre_init__mods_injector.ahk
 
 #Include <def_vars>
 #Include <chr_alt_codes>
@@ -76,7 +76,7 @@ GlyphsPanel.SetPanelData()
 
 initialized := True
 
-#Include Mods\_post_init__mods_injector.ahk
+#Include *i Mods\_post_init__mods_injector.ahk
 
 GREPizeSelection(GetCollaborative := False) {
 	CustomAfterStartEmdash := (Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") != "") ? Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") : "ensp"
