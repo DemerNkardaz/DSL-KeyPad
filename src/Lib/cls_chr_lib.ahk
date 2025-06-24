@@ -456,6 +456,7 @@ Class ChrLib {
 			"sansSerifBold", ["полужирный без засечек", "пбз", "ssb"],
 			"monospace", ["моноширинный", "м", "m"],
 			"smallCapital", ["капитель", "к", "sc"],
+			"smallCapitalModifier", ["капитель-модификатор", "км", "scm"],
 			"small", ["маленький", "мал", "sm"],
 			"combining", ["комбинируемый", "ко", "c"],
 			"uncombined", ["некомбинируемый", "неко", "uc"],

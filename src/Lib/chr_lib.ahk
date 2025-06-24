@@ -719,6 +719,7 @@ LibRegistrate() {
 				sansSerifBold: "1D5D5",
 				monospace: "1D671",
 				smallCapital: "0299",
+				smallCapitalModifier: "10784",
 				fullwidth: "FF22"
 			}, {
 				combining: "1DE8",
@@ -738,7 +739,9 @@ LibRegistrate() {
 				monospace: "1D68B",
 				fullwidth: "FF42"
 			}],
-			options: { noCalc: True }
+			groups: [["Latin", "IPA"], ["Latin"]],
+			tags: [["voiced bilabial trill", "губно-губной дрожащий согласный"], []],
+			options: { noCalc: True, altLayoutKey: ["c*>! $", ""], showOnAlt: ["smallCapital", ""], layoutTitles: [True, False] },
 		},
 		"lat_[c,s]_let_c", {
 			unicode: ["0043", "0063"],
@@ -920,6 +923,7 @@ LibRegistrate() {
 				sansSerifBold: "1D5DA",
 				monospace: "1D676",
 				smallCapital: "0262",
+				smallCapitalModifier: "10792",
 				fullwidth: "FF27"
 			}, {
 				combining: "1DDA",
@@ -961,6 +965,7 @@ LibRegistrate() {
 				sansSerifBold: "1D5DB",
 				monospace: "1D677",
 				smallCapital: "029C",
+				smallCapitalModifier: "10796",
 				fullwidth: "FF28"
 			}, {
 				combining: "036A",
@@ -1003,6 +1008,7 @@ LibRegistrate() {
 				sansSerifBold: "1D5DC",
 				monospace: "1D678",
 				smallCapital: "026A",
+				smallCapitalModifier: "1DA6",
 				fullwidth: "FF29"
 			}, {
 				combining: "0365",
@@ -1133,6 +1139,7 @@ LibRegistrate() {
 				sansSerifBold: "1D5DF",
 				monospace: "1D67B",
 				smallCapital: "029F",
+				smallCapitalModifier: "1DAB",
 				fullwidth: "FF2C"
 			}, {
 				combining: "1DDD",
@@ -1217,6 +1224,7 @@ LibRegistrate() {
 				sansSerifBold: "1D5E1",
 				monospace: "1D67D",
 				smallCapital: "0274",
+				smallCapitalModifier: "1DB0",
 				fullwidth: "FF2E"
 			}, {
 				combining: "1DE0",
@@ -1377,6 +1385,7 @@ LibRegistrate() {
 				sansSerifBold: "1D5E5",
 				monospace: "1D681",
 				smallCapital: "0280",
+				smallCapitalModifier: "107AA",
 				fullwidth: "FF32"
 			}, {
 				combining: "036C",
@@ -1655,6 +1664,7 @@ LibRegistrate() {
 				sansSerifBold: "1D5EC",
 				monospace: "1D688",
 				smallCapital: "028F",
+				smallCapitalModifier: "107B2",
 				fullwidth: "FF39"
 			}, {
 				modifier: "02B8",
@@ -4471,6 +4481,7 @@ LibRegistrate() {
 				sansSerifBold: "1D75D",
 				sansSerifItalicBold: "1D797",
 			}, {
+				modifier: "1DBF",
 				bold: "1D6C9",
 				italic: "1D703",
 				italicBold: "1D73D",
@@ -7611,7 +7622,7 @@ LibRegistrate() {
 			unicode: ["0197", "0268"],
 			tags: [[], ["close central unrounded vowel", "неогублённый гласный среднего ряда верхнего подъёма"]],
 			groups: [["Latin Accented"], ["Latin Accented", "IPA"]],
-			alterations: [{ smallCapital: "1D7B" }, {}],
+			alterations: [{ smallCapital: "1D7B" }, { modifier: "1DA4" }],
 			options: { altLayoutKey: ["", ">! $"], layoutTitles: ["", True] },
 		},
 		"lat_[c,s]_let_i__ogonek", {
@@ -8901,6 +8912,18 @@ LibRegistrate() {
 		; * IPA References
 		;
 		;
+		"&ipa_s_let_b_beta", {
+			reference: {
+				params: ["Referencing_Rule_Latin", "IPA", True, "bool"],
+				if: True,
+				then: "lat_s_let_b_beta",
+				else: "hel_s_let_b_beta",
+			},
+			titles: Map(),
+			tags: ["voiced bilabial fricative", "звонкий губно-губной спирант"],
+			groups: ["IPA"],
+			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! B" },
+		},
 		"&ipa_s_let_h_chi", {
 			reference: {
 				params: ["Referencing_Rule_Latin", "IPA", True, "bool"],
@@ -8912,6 +8935,25 @@ LibRegistrate() {
 			tags: ["voiceless uvular fricative", "глухой увулярный фрикатив"],
 			groups: ["IPA"],
 			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! X" },
+		},
+		"&ipa_s_let_t_theta", {
+			reference: "hel_s_let_t_theta",
+			titles: Map(),
+			tags: ["voiceless dental fricative", "глухой зубной щелевой согласный"],
+			groups: ["IPA"],
+			options: { noCalc: True, layoutTitles: True, altLayoutKey: ">! T" },
+		},
+		;
+		;
+		; * Math References
+		;
+		;
+		"&math_pi_sign", {
+			reference: "hel_s_let_p_pi",
+			titles: Map(),
+			tags: ["number pi", "число пи"],
+			groups: ["Math"],
+			options: { noCalc: True, altLayoutKey: ">! P" },
 		},
 		;
 		;
