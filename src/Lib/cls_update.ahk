@@ -113,7 +113,10 @@ Class Update {
 
 			Loop Files, App.paths.dir "\*.*", "FR" {
 				currentFilePath := StrReplace(A_LoopFileFullPath, App.paths.dir)
-				if (!split.HasValue(currentFilePath) && !whitelist.HasValue(currentFilePath)) && !InStr(A_LoopFileFullPath, App.paths.dir "\User") {
+				if (!split.HasValue(currentFilePath)
+					&& !whitelist.HasValue(currentFilePath))
+					&& !InStr(A_LoopFileFullPath, App.paths.dir "\User")
+					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Mods") {
 					filesToDelete.Push(currentFilePath)
 				}
 			}

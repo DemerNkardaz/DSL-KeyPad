@@ -22,8 +22,12 @@ initialized := False
 #Include <External\prt_array>
 #Include <External\fnc_clip_send>
 #Include <External\fnc_gui_button_icon>
-#Include <def_vars>
+
 #Include <utils>
+#Include <cls_mods_injector>
+#Include Mods\_pre_init__mods_injector.ahk
+
+#Include <def_vars>
 #Include <chr_alt_codes>
 #Include <chr_latex_codes>
 #Include <chr_entities>
@@ -71,6 +75,8 @@ Panel.SetPanelData()
 GlyphsPanel.SetPanelData()
 
 initialized := True
+
+#Include Mods\_post_init__mods_injector.ahk
 
 GREPizeSelection(GetCollaborative := False) {
 	CustomAfterStartEmdash := (Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") != "") ? Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") : "ensp"

@@ -250,7 +250,7 @@ Class ChrLib {
 
 		local output := entrySource.Clone()
 
-		for each in ArrayMerge(keyNames, ["index"]) {
+		for each in ArrayMerge(keyNames, ["index", "variant", "variantPos"]) {
 			if entryToModify.HasOwnProp(each) {
 				output.%each% := entryToModify.%each% is Object
 					? entryToModify.%each%.Clone()

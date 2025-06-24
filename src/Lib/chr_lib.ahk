@@ -8925,6 +8925,7 @@ LibRegistrate() {
 				include: Map("modifier", "smallCapitalModifier"),
 			},
 			groups: ["IPA"],
+			titles: Map(),
 			tags: [
 				["voiced bilabial trill", "губно-губной дрожащий согласный"],
 				["voiced uvular plosive", "звонкий увулярный взрывной согласный"],

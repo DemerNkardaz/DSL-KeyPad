@@ -14,6 +14,9 @@ src/*.exe
 src/*.dll
 src/desktop.ini
 src/User/
+src/Mods/*
+!src/Mods/_post_init__mods_injector.ahk
+!src/Mods/_pre_init__mods_injector.ahk
 src_backup
 drafts/DSLKeyPad.exe
 drafts/CSharp/DSLKeyPad/bin
