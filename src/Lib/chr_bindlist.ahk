@@ -1453,7 +1453,7 @@ bindingMaps := Map(
 				"Slash", "solidus",
 				"Backslash", "reverse_solidus",
 				"Semicolon", "colon_triangle",
-				"Apostrophe", "line_vertical::modifier",
+				"Apostrophe", "&ipa_n_sym_stress_primary",
 				"LeftBracket", "left_bracket",
 				"RightBracket", "right_bracket",
 				"Tilde", "grave_accent",
@@ -1638,6 +1638,8 @@ bindingMaps := Map(
 					">+", "lat_s_let_u::modifier",
 				),
 				"V", Map(
+					"<^<!", "line_vertical[_below,]",
+					"<^<!<+", "line_vertical_double[_below,]",
 					"<^>!", "lat_s_let_v_turned",
 					"<^>!>+", "lat_s_let_v_turned::modifier",
 					">+", "lat_s_let_v::modifier",
@@ -1667,7 +1669,7 @@ bindingMaps := Map(
 					"<^>!", "colon_triangle_half",
 				),
 				"Apostrophe", Map(
-					"<^>!", "line_vertical_below::modifier",
+					"<^>!", "&ipa_n_sym_stress_secondary",
 					">+", "apostrophe::modifier",
 				),
 				"Comma", Map(

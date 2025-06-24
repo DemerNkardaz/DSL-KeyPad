@@ -406,14 +406,14 @@ LibRegistrate() {
 			alterations: { modifier: "02C8" },
 			tags: ["vertical line", "вертикальная черта"],
 			groups: ["Diacritics Primary", "FK Diacritics Primary", "IPA"],
-			options: { fastKey: "V М", altLayoutKey: "'", showOnAlt: "modifier", layoutTitles: True },
+			options: { fastKey: "V М", altLayoutKey: "<^<! V" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"line_vertical_double", {
 			unicode: "030E",
 			tags: ["double vertical line", "двойная вертикальная черта"],
-			groups: ["Diacritics Primary", "FK Diacritics Primary"],
-			options: { fastKey: "<+ V М" },
+			groups: ["Diacritics Primary", "FK Diacritics Primary", "IPA"],
+			options: { fastKey: "<+ V М", altLayoutKey: "<^<!<+ V" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"line_vertical_below", {
@@ -421,14 +421,14 @@ LibRegistrate() {
 			alterations: { modifier: "02CC" },
 			tags: ["vertical line below", "вертикальная черта снизу"],
 			groups: ["SK Diacritics Primary", "IPA"],
-			options: { fastKey: "V М", altLayoutKey: ">! '", showOnAlt: "modifier", layoutTitles: True },
+			options: { fastKey: "V М", altLayoutKey: "c*<^<! V" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"line_vertical_double_below", {
 			unicode: "0348",
 			tags: ["dobule vertical line below", "двойная вертикальная черта снизу"],
-			groups: ["SK Diacritics Primary"],
-			options: { fastKey: "<+ V М" },
+			groups: ["SK Diacritics Primary", "IPA"],
+			options: { fastKey: "<+ V М", altLayoutKey: "c*<^<!<+ V" },
 			symbol: { category: "Diacritic Mark" },
 		},
 		"stroke_short", {
@@ -8906,6 +8906,18 @@ LibRegistrate() {
 		; * IPA References
 		;
 		;
+		"&ipa_n_sym_stress_[primary,secondary]", {
+			reference: {
+				name: "line_vertical[,_below]",
+				as: "modifier",
+			},
+			groups: ["IPA"],
+			tags: [
+				["primary stress", "знак ударения"],
+				["secondary stress", "знак дополнительного ударения"],
+			],
+			options: { noCalc: True, altLayoutKey: ["'", ">! '"], layoutTitles: True },
+		},
 		"&ipa_k_let_[b,g,h,i,l,n,r,y]", {
 			reference: {
 				name: "lat_c_let_[b,g,h,i,l,n,r,y]",
@@ -8916,7 +8928,7 @@ LibRegistrate() {
 			tags: [
 				["voiced bilabial trill", "губно-губной дрожащий согласный"],
 				["voiced uvular plosive", "звонкий увулярный взрывной согласный"],
-				["voiceless epiglottal fricative", "ненапряжённый неогублённый гласный переднего ряда верхнего подъёма"],
+				["voiceless epiglottal fricative", "глухой эпиглоттальный спирант"],
 				["near-close near-front unrounded vowel", "ненапряжённый неогублённый гласный переднего ряда верхнего подъёма"],
 				["voiced velar lateral approximant", "звонкий велярный латеральный аппроксимант"],
 				["voiced uvular nasal", "увулярный носовой согласный"],

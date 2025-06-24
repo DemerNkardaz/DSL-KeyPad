@@ -215,7 +215,6 @@ Class ChrReg {
 				if targetEntry.reference.HasOwnProp(each)
 					&& RegExMatch(targetEntry.reference.%each%, "\[(.*?)\]", &match) {
 					local splittedVariants := StrSplit(match[1], ",")
-					local copy := targetEntry.reference.%each%
 					targetEntry.reference.%each% := RegExReplace(targetEntry.reference.%each%, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
 				}
 			}
