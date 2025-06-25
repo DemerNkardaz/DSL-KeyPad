@@ -4956,7 +4956,7 @@ LibRegistrate() {
 		"hel_[s]_let_a_alpha__perispomeni", {
 			unicode: ["1FB6"],
 			options: { useLetterLocale: "alpha$" },
-			symbol: { letter: "${hel_[c,s]_let_a_alpha}" },
+			symbol: { letter: "${hel_[s]_let_a_alpha}" },
 		},
 		"hel_[c,s]_let_a_alpha__macron", {
 			unicode: ["1FB9", "1FB1"],
@@ -5871,7 +5871,7 @@ LibRegistrate() {
 		"hel_[s]_let_o_omega__perispomeni", {
 			unicode: ["1FF6"],
 			options: { useLetterLocale: "omega$" },
-			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
+			symbol: { letter: "${hel_[s]_let_o_omega}" },
 		},
 		"hel_[c,s]_let_o_omega__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FFC", "1FF3"],
@@ -5955,17 +5955,17 @@ LibRegistrate() {
 		"hel_[s]_let_o_omega__varia__ypogegrammeni", {
 			unicode: ["1FF2"],
 			options: { useLetterLocale: "omega$" },
-			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
+			symbol: { letter: "${hel_[s]_let_o_omega}" },
 		},
 		"hel_[s]_let_o_omega__oxia__ypogegrammeni", {
 			unicode: ["1FF4"],
 			options: { useLetterLocale: "omega$" },
-			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
+			symbol: { letter: "${hel_[s]_let_o_omega}" },
 		},
 		"hel_[s]_let_o_omega__perispomeni__ypogegrammeni", {
 			unicode: ["1FF7"],
 			options: { useLetterLocale: "omega$" },
-			symbol: { letter: "${hel_[c,s]_let_o_omega}" },
+			symbol: { letter: "${hel_[s]_let_o_omega}" },
 		},
 		"hel_[c,s]_let_o_omega__dasia__varia__[prosgegrammeni,ypogegrammeni]", {
 			unicode: ["1FAB", "1FA3"],
