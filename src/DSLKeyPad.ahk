@@ -42,6 +42,7 @@ initialized := False
 #Include <cls_language>
 #Include <cls_update>
 #Include <cls_cfg>
+#Include <cls_mods_gui>
 #Include <cls_fonts>
 #Include <cls_chr_ent>
 #Include <cls_chr_reg>

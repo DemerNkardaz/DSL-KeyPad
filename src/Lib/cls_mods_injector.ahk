@@ -59,6 +59,22 @@ Class ModsInjector {
 		return iniMap
 	}
 
+	static ReadModData(modFolder) {
+		local filePath := this.modsPath "\" modFolder "\options.ini"
+		local output := {
+			title: IniRead(filePath, "options", "title", modFolder),
+			version: IniRead(filePath, "options", "version", ""),
+			author: IniRead(filePath, "options", "author", ""),
+			description: IniRead(filePath, "options", "description", ""),
+			type: IniRead(filePath, "options", "type", "pre_init"),
+			folder: modFolder,
+		}
+
+		output.status := IniRead(this.registryINI, output.type, modFolder, 1)
+
+		return output
+	}
+
 	static Watcher() {
 		return this.Build(False)
 	}
