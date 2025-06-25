@@ -9070,6 +9070,12 @@ LibRegistrate() {
 			alterations: [{}, { combining: "1E08F", modifier: "1E04C", subscript: "1E068" }],
 			options: { secondName: True, fastKey: "/И/?Secondary" },
 		},
+		"cyr_[c,s]_let_i_decimal__diaeresis", {
+			unicode: ["0407", "0457"],
+			groups: ["Cyrillic"],
+			options: { secondName: True, fastKey: ">+ /Й/?Secondary" },
+			symbol: { letter: "${cyr_[c,s]_let_i_decimal}" }
+		},
 		"cyr_[c,s]_let_i_iota", {
 			unicode: ["A646", "A647"],
 			options: { useLetterLocale: True, fastKey: "/И/?Primary" },
@@ -9317,14 +9323,14 @@ LibRegistrate() {
 		"cyr_[c,s]_let_z_reversed", {
 			unicode: ["0510", "0511"],
 			options: { referenceLocale: "z$" },
-			recipe: ["\З\${arrow_left}"],
-			symbol: { beforeLetter: "reversed" }
+			recipe: ["$${arrow_left}"],
+			symbol: { letter: "${cyr_[c,s]_let_z}", beforeLetter: "reversed" }
 		},
 		"cyr_[c,s]_let_ts_reversed", {
 			unicode: ["A660", "A661"],
-			options: { referenceLocale: "ts$" },
-			recipe: ["\Ц\${arrow_left}"],
-			symbol: { beforeLetter: "reversed" }
+			options: { referenceLocale: "ts$", fastKey: "<! $?Secondary" },
+			recipe: ["$${arrow_left}"],
+			symbol: { letter: "${cyr_[c,s]_let_ts}", beforeLetter: "reversed" }
 		},
 		;
 		;

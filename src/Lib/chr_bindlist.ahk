@@ -2773,6 +2773,7 @@ bindingMaps := Map(
 			),
 			"Й", Map(
 				"<^>!", ["cyr_[c,s]_let_i__breve"],
+				"<^>!>+", ["cyr_[c,s]_let_i_decimal__diaeresis"],
 				"<^>!<!", ["cyr_[c,s]_let_y_jota"],
 				"<^>!<+>+", ["cyr_[c,s]_let_i__breve__rtl_tail"],
 			),
@@ -2851,6 +2852,7 @@ bindingMaps := Map(
 			),
 			"Ц", Map(
 				"<^>!", ["cyr_[c,s]_let_ts_tswe"],
+				"<^>!<!", ["cyr_[c,s]_let_ts_reversed"],
 			),
 			"Ч", Map(
 				"<^>!", ["cyr_[c,s]_let_ch_tshe"],
