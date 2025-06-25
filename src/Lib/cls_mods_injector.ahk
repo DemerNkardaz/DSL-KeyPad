@@ -1,9 +1,9 @@
 Class ModsInjector {
 	static modsPath := A_ScriptDir "\Mods"
-	static registryINI := this.modsPath "\_modlist.ini"
+	static registryINI := this.modsPath "\mods.ini"
 	static injectors := {
-		pre_init: this.modsPath "\_pre_init__mods_injector.ahk",
-		post_init: this.modsPath "\_post_init__mods_injector.ahk"
+		pre_init: this.modsPath "\injector_pre_init.ahk",
+		post_init: this.modsPath "\injector_post_init.ahk"
 	}
 
 	static __New() {
@@ -78,7 +78,7 @@ Class ModsInjector {
 		for section, content in scriptContents {
 			if list.Has(section) {
 				for fileName, value in list[section].OwnProps() {
-					local hasInclude := InStr(content, "#Include *i " fileName)
+					local hasInclude := InStr(content, "#Include *i " fileName "\index.ahk")
 					if (value = 0 && hasInclude) {
 						hasDifference := True
 						break
@@ -93,11 +93,21 @@ Class ModsInjector {
 				break
 		}
 
-		Loop Files this.modsPath "\*.ahk" {
-			if A_LoopFileName ~= "i)^pre_init__"
-				handling["pre_init"].Push(A_LoopFileName)
-			else if A_LoopFileName ~= "i)^post_init__"
-				handling["post_init"].Push(A_LoopFileName)
+		Loop Files this.modsPath "\*", "FR" {
+			if RegExMatch(A_LoopFileFullPath, "\\Mods\\(.*)\\(index.ahk)", &match) {
+				local typeInit := IniRead(this.modsPath "\" match[1] "\options.ini", "options", "type", "pre_init")
+				local title := IniRead(this.modsPath "\" match[1] "\options.ini", "options", "title", "") " " IniRead(this.modsPath "\" match[1] "\options.ini", "options", "version", "")
+
+				if (title = " ")
+					title := match[1]
+
+				if !(typeInit ~= "^(pre_init|post_init)$") {
+					MsgBox("The value “" typeInit "” of “type” in modification “" title "” is not allowed.`n`nAllowed values: pre_init, post_init", , "Iconx")
+					continue
+				}
+
+				handling[typeInit].Push(match[1])
+			}
 		}
 
 		for section in ["pre_init", "post_init"] {
@@ -148,7 +158,7 @@ Class ModsInjector {
 				if newList.Has(name) {
 					for key, value in newList[name].OwnProps() {
 						if value > 0
-							content .= "#Include *i " key "`n"
+							content .= "#Include *i " key "\index.ahk" "`n"
 					}
 				}
 

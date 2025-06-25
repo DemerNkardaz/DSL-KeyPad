@@ -1547,6 +1547,7 @@ bindingMaps := Map(
 				),
 				"F", Map(
 					"<^>!", "lat_s_let_f_phi",
+					"<^>!>+", "lat_s_let_f_phi::modifier",
 					">+", "lat_s_let_f::modifier",
 				),
 				"G", Map(

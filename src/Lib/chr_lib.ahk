@@ -6758,6 +6758,7 @@ LibRegistrate() {
 			unicode: "0278",
 			tags: ["voiceless bilabial fricative", "глухой губно-губной спирант"],
 			groups: ["Latino-Hellenic", "IPA"],
+			alterations: { modifier: "1DB2" },
 			options: {
 				layoutTitles: True, altLayoutKey: ">! $", fastKey: "<! $?Secondary",
 				useLetterLocale: True
