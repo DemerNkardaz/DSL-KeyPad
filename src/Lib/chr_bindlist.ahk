@@ -2736,8 +2736,13 @@ bindingMaps := Map(
 				"<^>!", ["cyr_[c,s]_let_g__upturn"],
 				"<^>!<+", ["cyr_[c,s]_let_g__stroke_short"],
 				"<^>!<!", ["cyr_[c,s]_let_g__descender"],
+				"<^>!<!>+", ["cyr_[c,s]_let_g__middle_hook"],
 			),
-			"Д", Map(),
+			"Д", Map(
+				"<^>!", ["cyr_[c,s]_let_de_komi"],
+				"<^>!>+", ["cyr_[c,s]_let_dje_komi"],
+				"<^>!<+", ["cyr_[c,s]_let_dzje_komi"],
+			),
 			"Е", Map(
 				"<!", ["cyr_[c,s]_let_ye__breve"],
 				">+", ["cyr_[c,s]_let_ye__grave"],
@@ -2756,6 +2761,7 @@ bindingMaps := Map(
 				"<^>!>+", ["cyr_[c,s]_let_z_zemlya"],
 				"<^>!<+", ["cyr_[c,s]_let_z__diaeresis"],
 				"<^>!<!", ["cyr_[c,s]_let_z__descender"],
+				"<^>!<!>+", ["cyr_[c,s]_let_zje_komi"],
 				"<^>!<!<+", ["cyr_[c,s]_let_z_dze"],
 			),
 			"И", Map(
@@ -2768,28 +2774,38 @@ bindingMaps := Map(
 			"Й", Map(
 				"<^>!", ["cyr_[c,s]_let_i__breve"],
 				"<^>!<!", ["cyr_[c,s]_let_y_jota"],
-				"<^>!<!>+", ["cyr_[c,s]_let_i__breve__rtl_tail"],
+				"<^>!<+>+", ["cyr_[c,s]_let_i__breve__rtl_tail"],
 			),
 			"К", Map(
 				"<!", ["cyr_[c,s]_let_k__acute"],
 				"<^>!", ["cyr_[c,s]_let_k_ksi"],
 				"<^>!<+", ["cyr_[c,s]_let_q_koppa"],
 				"<^>!>+", ["cyr_[c,s]_let_q"],
+				"<^>!<+>+", ["cyr_[c,s]_let_k__horizontal_element_left"],
+				"<^>!<!>+", ["cyr_[c,s]_let_k__common_hook"],
 				"<^>!<!", ["cyr_[c,s]_let_k__descender"],
+				"<^>!<!<+", ["cyr_[c,s]_let_k__stroke_short"],
 			),
 			"Л", Map(
 				"<^>!", ["cyr_[c,s]_lig_lje"],
 				"<^>!<!", ["cyr_[c,s]_let_l__descender"],
-				"<^>!<!>+", ["cyr_[c,s]_let_l__rtl_tail"],
+				"<^>!<+", ["cyr_[c,s]_let_l__common_hook"],
+				"<^>!>+", ["cyr_[c,s]_let_lje_komi"],
+				"<^>!<!>+", ["cyr_[c,s]_let_l__middle_hook"],
+				"<^>!<+>+", ["cyr_[c,s]_let_l__rtl_tail"],
 				"<^>!<!<+", ["cyr_[c,s]_let_l_palochka"]
 			),
 			"М", Map(
-				"<^>!<!<+>+", ["cyr_[c,s]_let_m__rtl_tail"]
+				"<^>!<+>+", ["cyr_[c,s]_let_m__rtl_tail"]
 			),
 			"Н", Map(
 				"<^>!", ["cyr_[c,s]_lig_nje"],
 				"<^>!<!", ["cyr_[c,s]_let_n__descender"],
-				"<^>!<!>+", ["cyr_[c,s]_let_n__rtl_tail"],
+				"<^>!<+", ["cyr_[c,s]_let_n__common_hook"],
+				"<^>!>+", ["cyr_[c,s]_let_n__left_hook"],
+				"<^>!<!<+", ["cyr_[c,s]_let_nje_komi"],
+				"<^>!<!>+", ["cyr_[c,s]_let_n__middle_hook"],
+				"<^>!<+>+", ["cyr_[c,s]_let_n__rtl_tail"],
 			),
 			"О", Map(
 				"<^>!", ["cyr_[c,s]_let_o_omega"],
@@ -2798,17 +2814,23 @@ bindingMaps := Map(
 			),
 			"П", Map(
 				"<^>!", ["cyr_[c,s]_let_p_psi"],
-				"<^>!<!", ["cyr_[c,s]_let_p__descender"]
+				"<^>!<!", ["cyr_[c,s]_let_p__descender"],
+				"<^>!<!>+", ["cyr_[c,s]_let_p__middle_hook"],
 			),
 			"Р", Map(
 				"<^>!", ["wallet_rub"],
+				"<^>!>+", ["cyr_[c,s]_let_r__tick"],
 			),
 			"С", Map(
-				"<^>!<!", ["cyr_[c,s]_let_s__descender"]
+				"<^>!", ["cyr_[c,s]_let_sje_komi"],
+				"<^>!<!", ["cyr_[c,s]_let_s__descender"],
 			),
 			"Т", Map(
 				"<^>!", ["cyr_[c,s]_lig_tje"],
-				"<^>!<!", ["cyr_[c,s]_let_t__descender"]
+				"<^>!<+", ["cyr_[c,s]_let_tje_komi"],
+				"<^>!<!", ["cyr_[c,s]_let_t__descender"],
+				"<^>!<!>+", ["cyr_[c,s]_let_t__middle_hook"],
+				"<^>!>+", ["cyr_[c,s]_let_t_twe"],
 			),
 			"У", Map(
 				"<!", ["cyr_[c,s]_let_u__breve"],
@@ -2823,6 +2845,9 @@ bindingMaps := Map(
 			"Х", Map(
 				"<^>!", ["cyr_[c,s]_let_h_shha"],
 				"<^>!<!", ["cyr_[c,s]_let_h__descender"],
+				"<^>!<+", ["cyr_[c,s]_let_h__common_hook"],
+				"<^>!<+>+", ["cyr_[c,s]_let_h_abkhasian"],
+				"<^>!>+", ["cyr_[c,s]_let_h_hwe"],
 			),
 			"Ц", Map(
 				"<^>!", ["cyr_[c,s]_let_ts_tswe"],
@@ -2830,6 +2855,8 @@ bindingMaps := Map(
 			"Ч", Map(
 				"<^>!", ["cyr_[c,s]_let_ch_tshe"],
 				"<^>!<+", ["cyr_[c,s]_let_ch__diaeresis"],
+				"<^>!>+", ["cyr_[c,s]_let_ch_abkhasian"],
+				"<^>!<+>+", ["cyr_[c,s]_let_ch_abkhasian__descender"],
 				"<^>!<!", ["cyr_[c,s]_let_ch__descender"],
 				"<^>!<!<+", ["cyr_[c,s]_let_ch_djerv"],
 			),
