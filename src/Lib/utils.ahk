@@ -462,3 +462,7 @@ Range(start, end, step := 1) {
 	}
 	return result
 }
+
+ModPath(modName) {
+	return A_ScriptDir "\Mods\" modName
+}

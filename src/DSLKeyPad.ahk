@@ -24,10 +24,10 @@ initialized := False
 #Include <External\fnc_gui_button_icon>
 
 #Include <utils>
+#Include <def_vars>
 #Include <cls_mods_injector>
 #Include *i Mods\injector_pre_init.ahk
 
-#Include <def_vars>
 #Include <chr_alt_codes>
 #Include <chr_latex_codes>
 #Include <chr_entities>
