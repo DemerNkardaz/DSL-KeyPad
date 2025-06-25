@@ -2329,12 +2329,14 @@ bindingMaps := Map(
 				"<^>!<+:Caps", ["servicemark", "trademark"],
 				"<^>!>+", "sound_recording_copyright",
 				"<^>!<!:Caps", "[facsimile,telephone]_sign",
+				">+:LangFlat", "[quote,commercial_at]",
 			),
 			"3", Map(
 				"<^>!:Caps", ["prime_single[_reversed,]"],
 				"<^>!>+:Caps", ["prime_double[_reversed,]"],
 				"<^>!<+:Caps", ["prime_triple[_reversed,]"],
-				"<^>!<+>+", "prime_quadruple"
+				"<^>!<+>+", "prime_quadruple",
+				">+:LangFlat", "[numero_sign,number_sign]",
 			),
 			"4", Map(
 				"<^>!:Caps", "wallet_[franc,eur]",
@@ -2345,19 +2347,21 @@ bindingMaps := Map(
 				"<^>!<!<+:Caps", "wallet_[,turkish_]lira",
 				"<^>!<!>+:Caps", "wallet_[viet_dong,rupee]",
 				"<!:Caps", "wallet_[cent,pound]",
-				; "<+:LangFlat", [["wallet_cent", "wallet_dollar"], ["semicolon"]],
-				">+", "wallet_sign",
+				"<+>+", "wallet_sign",
+				">+:LangFlat", "[semicolon,wallter_dollar]",
 			),
 			"5", Map("<^>!", "permille", "<^>!<+", "pertenthousand"),
 			"6", Map(
 				"<^>!", "division",
+				">+:LangFlat", "[colon,circumflex_accent]",
 			),
 			"7", Map(
 				"<^>!", "inverted_question",
 				"<^>!>+", "double_question",
 				"<^>!<+", "double_question_exclamation",
 				"<^>!<!", "reversed_question",
-				">+", "medieval_question",
+				"<+>+", "medieval_question",
+				">+:LangFlat", "[question,lat_s_lig_et]",
 			),
 			"8", Map(
 				"<^>!", "multiplication",
@@ -2417,6 +2421,7 @@ bindingMaps := Map(
 			),
 			"Backslash", Map(
 				"<^>!", "grapheme_joiner",
+				">+", "vertical_line",
 			),
 			"Semicolon", Map(
 				"<^>!", ["semicolon_[turned,reversed]"],
@@ -2849,6 +2854,8 @@ bindingMaps := Map(
 				"<^>!<+", ["cyr_[c,s]_let_h__common_hook"],
 				"<^>!<+>+", ["cyr_[c,s]_let_h_abkhasian"],
 				"<^>!>+", ["cyr_[c,s]_let_h_hwe"],
+				">+", ["left_bracket"],
+				"<+>+", ["left_brace"],
 			),
 			"Ц", Map(
 				"<^>!", ["cyr_[c,s]_let_ts_tswe"],
@@ -2869,6 +2876,8 @@ bindingMaps := Map(
 			"Ъ", Map(
 				"<^>!", ["cyr_[c,s]_let_u_straight"],
 				"<^>!<+", ["cyr_[c,s]_let_u_straight__stroke_short"],
+				">+", ["right_bracket"],
+				"<+>+", ["right_brace"],
 			),
 			"Ы", Map(
 				"<^>!", ["cyr_[c,s]_dig_yeru_with_back_yer"],

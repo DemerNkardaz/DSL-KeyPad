@@ -2724,7 +2724,7 @@ LibRegistrate() {
 			unicode: "2E54",
 			tags: ["medieval ?", "средневековый ?"],
 			groups: ["Smelting Special", "Special Fast RShift"],
-			options: { fastKey: ">+ 7" },
+			options: { fastKey: "<+>+ 7" },
 			recipe: [".?"],
 		},
 		"medieval_comma", {
@@ -2827,7 +2827,8 @@ LibRegistrate() {
 			alterations: {
 				fullwidth: "FF5C"
 			},
-			options: { noCalc: True, send: "Text" },
+			groups: ["Special Fast RShif"],
+			options: { noCalc: True, fastKey: ">+ \", send: "Text" },
 		},
 		"vertical_line_double", {
 			unicode: "2016",
@@ -13077,7 +13078,7 @@ LibRegistrate() {
 			unicode: "00A4",
 			tags: ["знак валюты", "currency sign"],
 			groups: ["Wallet Signs", "Wallet Signs Right Shift"],
-			options: { fastKey: "4" },
+			options: { fastKey: "<+ 4" },
 			recipe: ["XO"],
 		},
 		"wallet_austral", {
