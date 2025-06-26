@@ -2720,10 +2720,10 @@ bindingMaps := Map(
 			),
 			; Russian-Modifiers Keyboard Layout
 			"А", Map(
-				"<^>!", ["cyr_[c,s]_let_a_schwa"],
-				"<^>!>+", ["cyr_[c,s]_let_a_schwa__diaeresis"],
+				"<^>!", ["cyr_[c,s]_let_a__breve"],
+				"<^>!<!", ["cyr_[c,s]_let_a_schwa"],
+				"<^>!<!<+", ["cyr_[c,s]_let_a_schwa__diaeresis"],
 				"<^>!<+", ["cyr_[c,s]_let_a__diaeresis"],
-				"<!", ["cyr_[c,s]_let_a__breve"],
 			),
 			"Б", Map(
 				"<^>!", ["quote_angle_left_double"],
@@ -2749,9 +2749,9 @@ bindingMaps := Map(
 				"<^>!<+", ["cyr_[c,s]_let_dzje_komi"],
 			),
 			"Е", Map(
-				"<!", ["cyr_[c,s]_let_ye__breve"],
+				"<^>!", ["cyr_[c,s]_let_ye__breve"],
+				"<^>!<!", ["cyr_[c,s]_let_ye_yat"],
 				">+", ["cyr_[c,s]_let_ye__grave"],
-				"<^>!", ["cyr_[c,s]_let_ye_yat"],
 			),
 			"Ё", Map(),
 			"Ж", Map(
@@ -2777,8 +2777,7 @@ bindingMaps := Map(
 				"<!", ["cyr_[c,s]_let_i_iota"]
 			),
 			"Й", Map(
-				"<^>!", ["cyr_[c,s]_let_i__breve"],
-				"<^>!>+", ["cyr_[c,s]_let_i_decimal__diaeresis"],
+				"<^>!", ["cyr_[c,s]_let_i_decimal__diaeresis"],
 				"<^>!<!", ["cyr_[c,s]_let_y_jota"],
 				"<^>!<+>+", ["cyr_[c,s]_let_i__breve__rtl_tail"],
 			),
@@ -2791,6 +2790,7 @@ bindingMaps := Map(
 				"<^>!<+>+", ["cyr_[c,s]_let_k__horizontal_element_left"],
 				"<^>!<!>+", ["cyr_[c,s]_let_k__common_hook"],
 				"<^>!<!<+", ["cyr_[c,s]_let_k__stroke_short"],
+				"<^>!<!<+>+", ["cyr_[c,s]_let_k__stroke_vertical"],
 			),
 			"Л", Map(
 				"<^>!", ["cyr_[c,s]_lig_lje"],
@@ -2814,7 +2814,8 @@ bindingMaps := Map(
 				"<^>!<+>+", ["cyr_[c,s]_let_n__rtl_tail"],
 			),
 			"О", Map(
-				"<^>!", ["cyr_[c,s]_let_o_omega"],
+				"<^>!", ["cyr_[c,s]_let_o_barred"],
+				"<^>!<!", ["cyr_[c,s]_let_o_omega"],
 				"<^>!<+", ["cyr_[c,s]_let_o__diaeresis"],
 				"<^>!<!<+>+", ["cyr_n_gly_o_multiocular"],
 			),
@@ -2869,6 +2870,7 @@ bindingMaps := Map(
 				"<^>!<+>+", ["cyr_[c,s]_let_ch_abkhasian__descender"],
 				"<^>!<!", ["cyr_[c,s]_let_ch__descender"],
 				"<^>!<!<+", ["cyr_[c,s]_let_ch_djerv"],
+				"<^>!<!>+", ["cyr_[c,s]_let_ch__stroke_vertical"],
 			),
 			"Ш", Map(
 				"<^>!", ["cyr_[c,s]_let_sh_shwe"],
