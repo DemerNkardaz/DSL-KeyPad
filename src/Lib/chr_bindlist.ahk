@@ -1534,6 +1534,10 @@ bindingMaps := Map(
 					"<^<!", "diaeresis[_below,]",
 					"<^>!", "lat_s_let_d_eth",
 					"<^>!>+", "lat_s_let_d_eth::modifier",
+					"<^>!<!", "lat_s_dig_dz[__retroflex_hook,]",
+					"<^>!<!>+", "lat_s_dig_dz[__retroflex_hook,]::modifier",
+					"<^>!<!<+", "lat_s_dig_d[_ezh,z__curl]",
+					"<^>!<!<+>+", "lat_s_dig_d[_ezh,z__curl]::modifier",
 					">+", "lat_s_let_d::modifier",
 				),
 				"E", Map(
@@ -1568,6 +1572,8 @@ bindingMaps := Map(
 					">+", "lat_s_let_i::modifier",
 				),
 				"J", Map(
+					"<^>!", "lat_s_let_j__crossed_tail",
+					"<^>!>+", "lat_s_let_j__crossed_tail::modifier",
 					">+", "lat_s_let_j::modifier",
 				),
 				"K", Map(
@@ -1578,6 +1584,8 @@ bindingMaps := Map(
 					"<^>!>+", "&ipa_k_let_l::modifier",
 					"<^>!<!", "lat_s_let_y_turned",
 					"<^>!<!>+", "lat_s_let_y_turned::modifier",
+					"<^>!<!<+", "lat_s_dig_l[z,s]",
+					"<^>!<!<+>+", "lat_s_dig_l[z,s]::modifier",
 					">+", "lat_s_let_l::modifier",
 				),
 				"M", Map(
@@ -1597,8 +1605,8 @@ bindingMaps := Map(
 					"<^>!<+>+", "lat_s_let_o_open::modifier",
 					"<^>!<!", "lat_s_let_o__[tilde_overlay,solidus_long]",
 					"<^>!<!>+", "lat_s_let_o__[tilde_overlay,solidus_long]::modifier",
-					"<^>!<!<+", "lat_[c,s]_lig_oe[::smallCapital,]",
-					"<^>!<!<+>+", "lat_s_lig_oe::modifier",
+					"<^>!<!<+", "[&ipa,lat]_[k,s]_lig_oe",
+					"<^>!<!<+>+", "[&ipa,lat]_[k,s]_lig_oe::modifier",
 					">+", "lat_s_let_o::modifier",
 				),
 				"P", Map(
@@ -1625,9 +1633,13 @@ bindingMaps := Map(
 					">+", "lat_s_let_s::modifier",
 				),
 				"T", Map(
-					">+", "lat_s_let_t::modifier",
 					"<^>!", "&ipa_s_let_t_theta",
 					"<^>!>+", "hel_s_let_t_theta::modifier",
+					"<^>!<!", "lat_s_dig_t[s,c__curl]",
+					"<^>!<!>+", "lat_s_dig_t[s,c__curl]::modifier",
+					"<^>!<!<+", "lat_s_dig_t[s__retroflex_hook,_sigma]",
+					"<^>!<!<+>+", "lat_s_dig_t[s__retroflex_hook,_sigma]::modifier",
+					">+", "lat_s_let_t::modifier",
 				),
 				"U", Map(
 					"<^>!", "lat_s_let_u_upsilon",
@@ -1664,6 +1676,7 @@ bindingMaps := Map(
 				),
 				"Z", Map(
 					"<^>!", "lat_s_let_z_ezh",
+					"<^>!>+", "lat_s_let_z_ezh::modifier",
 					">+", "lat_s_let_z::modifier",
 				),
 				"Semicolon", Map(
@@ -1906,7 +1919,7 @@ bindingMaps := Map(
 				"<^>^", (*) => Util.URLEncoder("decode"),
 			),
 			"Comma", Map("<#<!", (*) => GetKeyScanCode()),
-			"Q", Map(
+			"2", Map(
 				"<!", (*) => BindHandler.LangCall(Map(
 					"en-US", TextHandlers.ToQuote.Bind(TextHandlers,
 						[ChrLib.Get("quote_left_double"), ChrLib.Get("quote_right_double")],
@@ -2510,6 +2523,7 @@ bindingMaps := Map(
 				"<^>!<!<+", ["lat_[c,s]_let_b__flourish"],
 				"<^>!<+", ["lat_[c,s]_let_b__stroke_short"],
 				"<^>!>+", ["lat_[c,s]_let_b__common_hook"],
+				"<^>!<+>+", ["lat_[c,s]_let_b__topbar"],
 			),
 			"C", Map("<!", ["lat_[c,s]_let_c__acute"],
 				"<^>!", ["lat_[c,s]_let_c__dot_above"],
@@ -2522,6 +2536,7 @@ bindingMaps := Map(
 				"<!", "[angle,degree]",
 				"<^>!", ["lat_[c,s]_let_d_eth"],
 				"<^>!<!", ["lat_[c,s]_let_d__stroke_short"],
+				"<^>!>+", ["lat_[c,s]_let_d_afrikan"],
 				"<^>!<!<+", ["lat_[c,s]_let_d__caron"],
 				"<^>!<!>+", ["lat_[c,s]_let_d__cedilla"],
 				"<^>!<+>+", ["lat_[c,s]_let_d__circumflex_below"]),
@@ -2531,6 +2546,7 @@ bindingMaps := Map(
 				"<^>!<!", ["lat_[c,s]_let_e__circumflex"],
 				"<^>!<!<+", ["lat_[c,s]_let_e__caron"],
 				"<^>!<!>+", ["lat_[c,s]_let_e__ogonek"],
+				"<^>!<!<+>+", ["lat_[c,s]_let_e_epsilon"],
 				"<^>!>+", ["lat_[c,s]_let_e__macron"],
 				"<^>!<+", ["lat_[c,s]_let_e__diaeresis"],
 				"<^>!<+>+", ["lat_[c,s]_let_e__tilde_above"],
@@ -2540,6 +2556,8 @@ bindingMaps := Map(
 			"F", Map(
 				"<^>!", ["lat_[c,s]_let_f__dot_above"],
 				"<^>!<!", ["lat_s_let_f_phi"],
+				"<^>!>+", ["lat_[c,s]_let_f__common_hook"],
+				"<^>!<+", ["lat_[c,s]_let_f__stroke_short"],
 				">+", "fahrenheit"),
 			"G", Map(
 				"<!", ["lat_[c,s]_let_g__acute"],
@@ -2571,7 +2589,7 @@ bindingMaps := Map(
 				"<^>!<+>+", ["lat_[c,s]_let_i__tilde_above"],
 				">+", ["lat_[c,s]_let_i__grave"],
 				"<+>+", ["lat_[c,s]_let_i__grave_double"],
-				"<^>!<!<+>+", ["lat_[c,s]_let_i__dot_above"],
+				"<^>!<!<+>+", ["lat_[c,s]_let_i_[_dot_above,dotless]"],
 			),
 			"J", Map(
 				"<^>!", ["lat_[c,s]_let_j__stroke_short"],
@@ -2599,6 +2617,7 @@ bindingMaps := Map(
 				"<^>!", ["lat_[c,s]_let_m__dot_above"],
 				"<^>!<!", ["lat_[c,s]_let_m__dot_below"],
 				"<^>!>+", ["lat_[c,s]_let_m__common_hook"],
+				"<^>!<+", ["lat_c_let_m_epigraphic_archaic"],
 			),
 			"N", Map(
 				"<!", ["lat_[c,s]_let_n__acute"],
@@ -2679,6 +2698,7 @@ bindingMaps := Map(
 				"<^>!<!<+>+", ["lat_[c,s]_let_u__acute_double"],
 			),
 			"V", Map(
+				"<!", ["lat_[c,s]_let_v__common_hook"],
 				"<^>!", ["lat_[c,s]_let_v__solidus_long"],
 				"<^>!<!", ["lat_[c,s]_let_v__dot_below"],
 				"<^>!<+", ["lat_[c,s]_let_v_middle_welsh"],
@@ -2715,6 +2735,7 @@ bindingMaps := Map(
 				"<^>!", ["lat_[c,s]_let_z__dot_above"],
 				"<^>!<!", ["lat_[c,s]_let_z__circumflex"],
 				"<^>!<!<+", ["lat_[c,s]_let_z__caron"],
+				"<^>!<!>+", ["lat_[c,s]_let_z_visigothic"],
 				"<^>!>+", ["lat_[c,s]_let_z_ezh"],
 				"<^>!<+", ["lat_[c,s]_let_z__stroke_short"],
 			),
@@ -2755,8 +2776,8 @@ bindingMaps := Map(
 			),
 			"Ё", Map(),
 			"Ж", Map(
-				"<!", ["cyr_[c,s]_let_zh__breve"],
-				"<^>!", ["cyr_[c,s]_let_zh_dzhe"],
+				"<^>!", ["cyr_[c,s]_let_zh__breve"],
+				; "<^>!", ["cyr_[c,s]_let_zh_dzhe"],
 				"<^>!<+", ["cyr_[c,s]_let_zh__diaeresis"],
 				"<^>!>+", ["cyr_[c,s]_let_zh_dje"],
 				"<^>!<!", ["cyr_[c,s]_let_zh__descender"],
@@ -2777,8 +2798,8 @@ bindingMaps := Map(
 				"<!", ["cyr_[c,s]_let_i_iota"]
 			),
 			"Й", Map(
+				"<!", ["cyr_[c,s]_let_y_jota"],
 				"<^>!", ["cyr_[c,s]_let_i_decimal__diaeresis"],
-				"<^>!<!", ["cyr_[c,s]_let_y_jota"],
 				"<^>!<+>+", ["cyr_[c,s]_let_i__breve__rtl_tail"],
 			),
 			"К", Map(
@@ -2860,6 +2881,7 @@ bindingMaps := Map(
 				"<+>+", ["left_brace"],
 			),
 			"Ц", Map(
+				"<!", ["cyr_[c,s]_let_zh_dzhe"],
 				"<^>!", ["cyr_[c,s]_let_ts_tswe"],
 				"<^>!<!", ["cyr_[c,s]_let_ts_reversed"],
 			),

@@ -6207,6 +6207,7 @@ LibRegistrate() {
 		},
 		"lat_s_let_a_ain", {
 			unicode: "1D25",
+			groups: ["Latin", "UPA"],
 			alterations: { modifier: "1D5C" },
 			options: { useLetterLocale: True },
 			recipe: ["$in"],
@@ -6233,6 +6234,11 @@ LibRegistrate() {
 			options: { useLetterLocale: "Origin" },
 			symbol: { letter: "${lat_s_let_a_schwa}" },
 			recipe: ["$${arrow_right}"],
+		},
+		"lat_[c,s]_let_d_afrikan", {
+			unicode: ["0189", "0256"],
+			options: { noCalc: [False, True], useLetterLocale: True, fastKey: ">+ $?Secondary" },
+			recipe: ["$-"],
 		},
 		"lat_[c,s]_let_g_gha", {
 			unicode: ["01A2", "01A3"],
@@ -6427,6 +6433,7 @@ LibRegistrate() {
 			unicode: ["01B7", "0292"],
 			tags: [[], ["voiced postalveolar fricative", "звонкий зубной щелевой согласный"]],
 			groups: [[], ["Latin", "IPA"]],
+			alterations: [{}, { modifier: "1DBE" }],
 			options: {
 				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True, fastKey: ">+ ~?Secondary"
 			},
@@ -6444,18 +6451,25 @@ LibRegistrate() {
 			options: { useLetterLocale: "Origin" },
 			symbol: { letter: "${lat_[c,s]_let_z_ezh}" }
 		},
-		"lat_s_let_z_ezh__curl", {
-			unicode: "0293",
+		"lat_[s]_let_z_ezh__curl", {
+			unicode: ["0293"],
 			recipe: ["$${arrow_right_ushaped}"],
 			groups: ["Latin"],
 			options: { useLetterLocale: "Origin" },
 			symbol: { letter: "${lat_s_let_z_ezh}" }
 		},
-		"lat_s_let_z_ezh__retroflex_hook", {
-			unicode: "1D9A",
+		"lat_[s]_let_z_ezh__retroflex_hook", {
+			unicode: ["1D9A"],
 			groups: ["Latin"],
 			options: { useLetterLocale: "Origin" },
 			symbol: { letter: "${lat_s_let_z_ezh}" }
+		},
+		"lat_[s]_let_z_ezh__tail", {
+			unicode: ["01BA"],
+			groups: ["Latin"],
+			options: { useLetterLocale: "Origin" },
+			symbol: { letter: "${lat_[c,s]_let_z_ezh}" },
+			recipe: ["$${arrow_down}"]
 		},
 		"lat_[c,s]_let_a_saltillo", {
 			unicode: ["A78B", "A78C"],
@@ -6670,6 +6684,67 @@ LibRegistrate() {
 		},
 		;
 		;
+		; * Visigothic
+		;
+		;
+		"lat_[c,s]_let_z_visigothic", {
+			unicode: ["A762", "A763"],
+			options: { referenceLocale: "z$", fastKey: "<!>+ $?Secondary" },
+			recipe: ["\c\$"],
+			symbol: { beforeLetter: "visigothic", letter: "${lat_[c,s]_let_z_ezh}" },
+		},
+		;
+		;
+		; * Old Polish
+		;
+		;
+		"lat_[c,s]_let_o_old_polish", {
+			unicode: ["A7C0", "A7C1"],
+			options: { referenceLocale: "o$" },
+			recipe: ["'$'"],
+			symbol: { beforeLetter: "old_polish" },
+		},
+		;
+		;
+		; * Epigraphic
+		;
+		;
+		"lat_c_let_[f,p]_epigraphic_reversed", {
+			unicode: ["A7FB", "A7FC"],
+			options: { referenceLocale: ["f$", "p$"] },
+			recipe: ["epi ${arrow_left}$"],
+			symbol: { beforeLetter: "epigraphic,reversed" },
+		},
+		"lat_c_let_i_epigraphic_[sideways,longa]", {
+			unicode: ["A7F7", "A7FE"],
+			options: { referenceLocale: "i$" },
+			recipe: [["epi ${arrow_right_circle}$"], ["epi $"]],
+			symbol: {
+				beforeLetter: ["epigraphic,sideways", "epigraphic"],
+				afterLetter: ["", "longa"]
+			},
+		},
+		"lat_c_let_m_epigraphic_[inverted,archaic]", {
+			unicode: ["A7FD", "A7FF"],
+			options: { referenceLocale: "m$", fastKey: ["", "<+ $?Secondary"] },
+			recipe: [["epi ${arrow_down}$"], ["epi $"]],
+			symbol: { beforeLetter: ["epigraphic,inverted", "epigraphic,archaic"] },
+		},
+		;
+		;
+		; * UPA
+		;
+		;
+		"lat_s_let_s_voiced_laryngeal_spirant", {
+			unicode: "1D24",
+			groups: ["Latin", "UPA"],
+			tags: ["voiced laryngeal spirant", "звонкий ларингальный спирант"],
+			options: { secondName: True },
+			recipe: ["_s"],
+			symbol: { letter: "%self%" },
+		},
+		;
+		;
 		; * Latinized Hellenic
 		;
 		;
@@ -6725,7 +6800,7 @@ LibRegistrate() {
 			groups: [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 			alterations: [{}, { modifier: "1D4B" }],
 			options: {
-				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True
+				layoutTitles: ["", True], fastKey: "<!<+>+ $?Secondary", altLayoutKey: ["", ">! $"], useLetterLocale: True
 			},
 			recipe: ["$ps", "$3"],
 		},
@@ -6809,6 +6884,14 @@ LibRegistrate() {
 			options: { useLetterLocale: True },
 			recipe: ["$mg"],
 		},
+		"lat_[s]_let_o_omega_closed", {
+			unicode: ["0277"],
+			groups: ["Latino-Hellenic"],
+			alterations: { modifier: "107A4" },
+			options: { useLetterLocale: "omega$" },
+			recipe: ["$mg-", "${lat_s_let_o_omega}-"],
+			symbol: { beforeLetter: "closed" },
+		},
 		"lat_[c,s]_let_s_sigma", {
 			unicode: ["01A9", "0283"],
 			tags: [[], ["voiceless postalveolar fricative", "глухой постальвеолярный сибилянт"]],
@@ -6817,6 +6900,20 @@ LibRegistrate() {
 				layoutTitles: ["", True], altLayoutKey: ["", ">! $"], useLetterLocale: True, fastKey: "<+>+ $?Secondary"
 			},
 			recipe: ["$ig", "/esh/"],
+		},
+		"lat_[s]_let_s_sigma_reversed__loop", {
+			unicode: ["01AA"],
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: "sigma$" },
+			symbol: { beforeLetter: "reversed", letter: "${lat_[s]_let_s_sigma}" },
+			recipe: ["$${arrow_right_circle}${arrow_up_ushaped}"]
+		},
+		"lat_[s]_let_s_sigma__curl", {
+			unicode: ["0286"],
+			groups: ["Latino-Hellenic"],
+			options: { useLetterLocale: "sigma$" },
+			symbol: { letter: "${lat_[s]_let_s_sigma}" },
+			recipe: ["$${arrow_right_ushaped}"]
 		},
 		"lat_[c,s]_let_u_upsilon", {
 			unicode: ["01B1", "028A"],
@@ -6925,6 +7022,17 @@ LibRegistrate() {
 			options: { referenceLocale: "turned$" },
 			recipe: ["$${arrow_left_circle}"],
 			symbol: { beforeLetter: "sideways,turned", letter: "${lat_[s]_let_m_turned}" },
+		},
+		"lat_s_let_r_reversed__fishhook[,__retroflex_hook]", {
+			unicode: ["027F", "0285"],
+			recipe: [
+				["$${arrow_right_circle}${arrow_right}"],
+				[
+					"${lat_s_let_r_reversed__fishhook}${retroflex_hook}",
+					"${retroflex_hook}${lat_s_let_r_reversed__fishhook}",
+				]
+			],
+			symbol: { beforeLetter: "reversed" },
 		},
 		"lat_[k,s]_let_r_turned", {
 			unicode: ["1D1A", "0279"],
@@ -7174,6 +7282,7 @@ LibRegistrate() {
 		},
 		"lat_[c,s]_let_b__topbar", {
 			unicode: ["0182", "0183"],
+			options: { fastKey: "<+>+ $?Secondary" },
 			recipe: ["$${arrow_up}"],
 		},
 		; Latin Letter “C”
@@ -7448,6 +7557,7 @@ LibRegistrate() {
 		},
 		"lat_[c,s]_let_f__common_hook", {
 			unicode: ["0191", "0192"],
+			options: { fastKey: ">+ $?Secondary" },
 			recipe: ["$${arrow_down}"]
 		},
 		"lat_[s]_let_f__palatal_hook", {
@@ -7455,6 +7565,7 @@ LibRegistrate() {
 		},
 		"lat_[c,s]_let_f__stroke_short", {
 			unicode: ["A798", "A799"],
+			options: { fastKey: "<+ $?Secondary" },
 		},
 		"lat_[s]_let_f__tilde_overlay", {
 			unicode: ["1D6E"],
@@ -7654,8 +7765,12 @@ LibRegistrate() {
 			groups: [["Latin Reserved"], []],
 			options: { fastKey: "$?Secondary" }
 		},
-		"lat_[s]_let_j__crossed_tail", {
-			unicode: ["A7B2"],
+		"lat_[c,s]_let_j__crossed_tail", {
+			unicode: ["A7B2", "029D"],
+			tags: [[], ["voiced palatal fricative", "звонкий палатальный спирант"]],
+			groups: [["Latin Accented"], ["Latin Accented", "IPA"]],
+			alterations: [{}, { modifier: "1DA8" }],
+			options: { altLayoutKey: ["", ">! $"], layoutTitles: ["", True] },
 			recipe: ["$${arrow_right_ushaped}"],
 		},
 		"lat_[c,s]_let_j__stroke_short", {
@@ -8544,6 +8659,7 @@ LibRegistrate() {
 		},
 		"lat_[c,s]_let_v__common_hook", {
 			unicode: ["01B2", "028B"],
+			options: { fastKey: "$?Primary" },
 			recipe: ["$${arrow_up}"],
 		},
 		"lat_[s]_let_v__right_hook", {
@@ -8793,10 +8909,10 @@ LibRegistrate() {
 		"lat_[s]_lig_lb", { unicode: ["2114"] },
 		"lat_[c,s]_lig_oe", {
 			unicode: ["0152", "0153"],
-			groups: [["Latin Ligatures", "IPA"], ["Latin Ligatures", "IPA"]],
-			tags: [["open front rounded vowel", "огублённый гласный переднего ряда нижнего подъёма"], ["open-mid front rounded vowel", "огублённый гласный переднего ряда средне-нижнего подъёма"]],
-			options: { altLayoutKey: ["c*>!<!<+ /O/", ">!<!<+ /O/"], showOnAlt: ["smallCapital", ""], layoutTitles: [True, True] },
-			alterations: [{ smallCapital: "0276" }, { modifier: "A7F9" }]
+			groups: [[], ["Latin Ligatures", "IPA"]],
+			tags: [[], ["open-mid front rounded vowel", "огублённый гласный переднего ряда средне-нижнего подъёма"]],
+			options: { altLayoutKey: ["", ">!<!<+ /O/"], layoutTitles: [False, True] },
+			alterations: [{ smallCapital: "0276", smallCapitalModifier: "107A3" }, { modifier: "A7F9" }]
 		},
 		"lat_[s]_lig_oe_turned", {
 			unicode: ["1D14"],
@@ -8850,6 +8966,9 @@ LibRegistrate() {
 		;
 		"lat_[c,i,s]_dig_dz", {
 			unicode: ["01F1", "01F2", "01F3"],
+			groups: [[], [], ["Latin Digraphs", "IPA"]],
+			alterations: [{}, {}, { modifier: "10787" }],
+			options: { altLayoutKey: "<! \D\" },
 			symbol: { letter: "${lat_[c,c,s]_let_d}${lat_[c,s,s]_let_z}" }
 		},
 		"lat_[c,i,s]_dig_dz__caron", {
@@ -8858,7 +8977,23 @@ LibRegistrate() {
 		},
 		"lat_[s]_dig_dz__curl", {
 			unicode: ["02A5"],
+			groups: ["Latin Digraphs", "IPA"],
+			alterations: { modifier: "10789" },
+			options: { altLayoutKey: "<!<+ \D\" },
 			recipe: ["$${arrow_left_ushaped}", "${lat_s_dig_dz}${arrow_left_ushaped}"],
+		},
+		"lat_[s]_dig_dz__retroflex_hook", {
+			unicode: ["AB66"],
+			groups: ["Latin Digraphs", "IPA"],
+			options: { altLayoutKey: "c*<! \D\" },
+			alterations: { modifier: "10788" },
+		},
+		"lat_[s]_dig_d_ezh", {
+			unicode: ["02A4"],
+			groups: ["Latin Digraphs", "IPA"],
+			alterations: { modifier: "1078A" },
+			options: { altLayoutKey: "c*<!<+ \D\" },
+			symbol: { letter: "${lat_[s]_let_d}${lat_[s]_let_z_ezh}" },
 		},
 		"lat_[c,i,s]_dig_lj", {
 			unicode: ["01C7", "01C8", "01C9"],
@@ -8883,9 +9018,19 @@ LibRegistrate() {
 		},
 		"lat_[s]_dig_ls", {
 			unicode: ["02AA"],
+			alterations: { modifier: "10799" },
+			options: { altLayoutKey: "<!<+ \L\" }
 		},
 		"lat_[s]_dig_lz", {
 			unicode: ["02AB"],
+			alterations: { modifier: "1079A" },
+			options: { altLayoutKey: "c*<!<+ \L\" }
+		},
+		"lat_[s]_dig_l_ezh", {
+			unicode: ["026E"],
+			groups: ["Latin Digraphs", "IPA"],
+			alterations: { modifier: "1079E" },
+			symbol: { letter: "${lat_[s]_let_l}${lat_[s]_let_z_ezh}" },
 		},
 		"lat_[c,i,s]_dig_nj", {
 			unicode: ["01CA", "01CB", "01CC"],
@@ -8893,11 +9038,9 @@ LibRegistrate() {
 		},
 		"lat_[s]_dig_tc__curl", {
 			unicode: ["02A8"],
+			alterations: { modifier: "107AB" },
+			options: { altLayoutKey: "<! \T\" },
 			recipe: ["$${arrow_left_ushaped}", "t${lat_s_let_c__curl}"],
-		},
-		"lat_[s]_dig_tch", {
-			unicode: ["02A7"],
-			recipe: ["$", "t${lat_s_let_s_sigma}"],
 		},
 		"lat_[s]_dig_th__solidus_long", {
 			unicode: ["1D7A"],
@@ -8905,6 +9048,20 @@ LibRegistrate() {
 		},
 		"lat_[s]_dig_ts", {
 			unicode: ["02A6"],
+			alterations: { modifier: "107AC" },
+			options: { altLayoutKey: "c*<! \T\" }
+		},
+		"lat_[s]_dig_ts__retroflex_hook", {
+			unicode: ["AB67"],
+			alterations: { modifier: "107AD" },
+			options: { altLayoutKey: "<!<+ \T\" }
+		},
+		"lat_[s]_dig_t_sigma", {
+			unicode: ["02A7"],
+			groups: ["Latin Digraphs", "IPA"],
+			alterations: { modifier: "107AE" },
+			options: { altLayoutKey: "c*<!<+ \T\" },
+			symbol: { letter: "${lat_[s]_let_l}${lat_[s]_let_s_sigma}" },
 		},
 		;
 		;
@@ -8922,6 +9079,17 @@ LibRegistrate() {
 				["secondary stress", "знак дополнительного ударения"],
 			],
 			options: { noCalc: True, altLayoutKey: ["'", ">! '"], layoutTitles: True },
+		},
+		"&ipa_k_lig_oe", {
+			reference: {
+				name: "lat_c_lig_oe",
+				as: "smallCapital",
+				include: Map("modifier", "smallCapitalModifier"),
+			},
+			groups: ["IPA"],
+			titles: Map(),
+			tags: ["open front rounded vowel", "огублённый гласный переднего ряда нижнего подъёма"],
+			options: { altLayoutKey: "c*>!<!<+ /O/", layoutTitles: True },
 		},
 		"&ipa_k_let_[b,g,h,i,l,n,r,y]", {
 			reference: {
@@ -9037,7 +9205,7 @@ LibRegistrate() {
 		"cyr_[c,s]_let_zh_dzhe", {
 			unicode: ["040F", "045F"],
 			alterations: [{}, { subscript: "1E06A" }],
-			options: { useLetterLocale: True, fastKey: "/Ж/?Secondary" },
+			options: { useLetterLocale: True, fastKey: "/Ц/?Primary" },
 			recipe: ["\дзж\"]
 		},
 		"cyr_[c,s]_let_zh_dje", {
@@ -9084,7 +9252,7 @@ LibRegistrate() {
 		"cyr_[c,s]_let_y_jota", {
 			unicode: ["0408", "0458"],
 			alterations: [{}, { modifier: "1E04D" }],
-			options: { useLetterLocale: True, fastKey: "<! /Й/?Secondary" },
+			options: { useLetterLocale: True, fastKey: "/Й/?Primary" },
 		},
 		"cyr_[c,s]_let_i_izhitsa", {
 			unicode: ["0474", "0475"],
