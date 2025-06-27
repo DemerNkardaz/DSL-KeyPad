@@ -1580,8 +1580,8 @@ bindingMaps := Map(
 					">+", "lat_s_let_k::modifier",
 				),
 				"L", Map(
-					"<^>!", "&ipa_k_let_l",
-					"<^>!>+", "&ipa_k_let_l::modifier",
+					"<^>!", "[&ipa,lat]_[k,s]_let_l[,__belt]",
+					"<^>!>+", "[&ipa,lat]_[k,s]_let_l[,__belt]::modifier",
 					"<^>!<!", "lat_s_let_y_turned",
 					"<^>!<!>+", "lat_s_let_y_turned::modifier",
 					"<^>!<!<+", "lat_s_dig_l[z,s]",

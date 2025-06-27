@@ -51,6 +51,7 @@
 #define IDI_CYPRIOT_SYLLABARY 147
 #define IDI_DESERET 148
 #define IDI_SHAVIAN 149
+#define IDI_BLANK 150
 
 // Next default values for new objects
 //

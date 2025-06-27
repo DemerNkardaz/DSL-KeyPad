@@ -55,6 +55,7 @@ Class App {
 			"cypriot_syllabary",
 			"deseret",
 			"shavian",
+			"blank",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

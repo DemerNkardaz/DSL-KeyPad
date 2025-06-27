@@ -157,39 +157,41 @@ Class ModsInjector {
 		}
 
 		if hasDifference {
-			local output := ""
+			try {
+				local output := ""
 
-			for section, files in handling {
-				output .= "[" section "]`n"
+				for section, files in handling {
+					output .= "[" section "]`n"
 
-				for fileName in files {
-					local value := (list.Has(section) && list[section].HasOwnProp(fileName)) ? list[section].%fileName% : 1
-					output .= fileName "=" value "`n"
-				}
-				output .= "`n"
-			}
-
-			FileDelete(this.registryINI)
-			FileAppend(output, this.registryINI, "UTF-16")
-
-			local newList := this.Read()
-
-			for name, path in this.injectors.OwnProps() {
-				local content := ""
-
-				if newList.Has(name) {
-					for key, value in newList[name].OwnProps() {
-						if value > 0
-							content .= "#Include *i " key "\index.ahk" "`n"
+					for fileName in files {
+						local value := (list.Has(section) && list[section].HasOwnProp(fileName)) ? list[section].%fileName% : 1
+						output .= fileName "=" value "`n"
 					}
+					output .= "`n"
 				}
 
-				FileDelete(path)
-				FileAppend(content, path, "UTF-8")
-			}
+				FileDelete(this.registryINI)
+				FileAppend(output, this.registryINI, "UTF-16")
 
-			if toReload
-				Reload
+				local newList := this.Read()
+
+				for name, path in this.injectors.OwnProps() {
+					local content := ""
+
+					if newList.Has(name) {
+						for key, value in newList[name].OwnProps() {
+							if value > 0
+								content .= "#Include *i " key "\index.ahk" "`n"
+						}
+					}
+
+					FileDelete(path)
+					FileAppend(content, path, "UTF-8")
+				}
+
+				if toReload
+					Reload
+			}
 		}
 	}
 }

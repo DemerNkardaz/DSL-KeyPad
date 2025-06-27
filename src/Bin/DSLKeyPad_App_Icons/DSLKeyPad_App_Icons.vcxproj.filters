@@ -189,5 +189,8 @@
     <Image Include="DSLKeyPad.app_shavian.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_blank.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

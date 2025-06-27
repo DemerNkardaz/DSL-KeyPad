@@ -76,7 +76,6 @@ Panel.SetPanelData()
 GlyphsPanel.SetPanelData()
 
 initialized := True
-
 #Include *i Mods\injector_post_init.ahk
 
 GREPizeSelection(GetCollaborative := False) {

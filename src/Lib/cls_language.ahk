@@ -117,14 +117,15 @@ Class Keyboard {
 	}
 
 	static SwitchLayout(code, id := 1, timer := 1) {
+		code := "00000" SubStr(Format("0x{:X}", code), 3)
 		if timer is Array
 			SwitchCall()
 		else
 			SetTimer((*) => SwitchCall(), -timer)
 		SwitchCall() {
-			layout := DllCall("LoadKeyboardLayout", "Str", code, "Int", id)
-			hwnd := DllCall("GetForegroundWindow")
-			pid := DllCall("GetWindowThreadProcessId", "UInt", hwnd, "Ptr", 0)
+			local layout := DllCall("LoadKeyboardLayout", "Str", code, "Int", id)
+			local hwnd := DllCall("GetForegroundWindow")
+			local pid := DllCall("GetWindowThreadProcessId", "UInt", hwnd, "Ptr", 0)
 			DllCall("PostMessage", "UInt", hwnd, "UInt", 0x50, "UInt", 0, "UInt", layout)
 		}
 	}

@@ -7842,7 +7842,10 @@ LibRegistrate() {
 		},
 		"lat_[c,s]_let_l__belt", {
 			unicode: ["A7AD", "026C"],
+			tags: [[], ["voiceless alveolar lateral fricative", "глухой альвеолярный латеральный спирант"]],
+			groups: [["Latin Accented"], ["Latin Accented", "IPA"]],
 			alterations: [{}, { modifier: "1079B" }],
+			options: { altLayoutKey: ["", ">! $"], layoutTitles: ["", True] },
 			recipe: ["$${arrow_right_ushaped}"]
 		},
 		"lat_[s]_let_l__fishhook", {
@@ -9285,7 +9288,7 @@ LibRegistrate() {
 		},
 		"cyr_[c,s]_let_o_omega", {
 			unicode: ["0460", "0461"],
-			alterations: [{}, { modifier: "A67B" }],
+			alterations: [{}, { combining: "A67B" }],
 			options: { useLetterLocale: True, fastKey: "<! /О/?Secondary" }
 		},
 		"cyr_[c,s]_let_o_omega__cyr_com_titlo", {
@@ -9351,7 +9354,7 @@ LibRegistrate() {
 		},
 		"cyr_[c,s]_let_f_fita", {
 			unicode: ["0472", "0473"],
-			alterations: [{}, { modifier: "2DF4" }],
+			alterations: [{}, { combining: "2DF4" }],
 			options: { useLetterLocale: True, fastKey: "/Ф/?Secondary" },
 			recipe: ["\ФИ\"]
 		},
