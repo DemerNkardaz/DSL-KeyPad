@@ -2285,10 +2285,6 @@ bindingMaps := Map(
 		),
 		"Moded", Map(
 			; Numpad
-			"Numpad0", Map(
-				"<^<!", "dotted_circle",
-				"<^>!", "empty_set",
-			),
 			"NumpadMult", Map(
 				"<^>!", "asterisk_two",
 				"<^>!>+", "asterism",
@@ -2434,6 +2430,8 @@ bindingMaps := Map(
 			),
 			"Backslash", Map(
 				"<^>!", "grapheme_joiner",
+				"<^<!", "dotted_circle",
+				"<^>!<+", "empty_set",
 				">+", "vertical_line",
 			),
 			"Semicolon", Map(

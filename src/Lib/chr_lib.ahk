@@ -2513,7 +2513,7 @@ LibRegistrate() {
 			unicode: "25CC",
 			tags: ["пунктирный круг", "dotted circle"],
 			groups: ["Special Fast Primary"],
-			options: { fastKey: "Num0" },
+			options: { fastKey: "\" },
 		},
 		"ellipsis", {
 			unicode: "2026",
@@ -3237,7 +3237,7 @@ LibRegistrate() {
 			unicode: "2205",
 			tags: ["пустое множество", "empty set"],
 			groups: ["Smelting Special", "Special Fast Secondary"],
-			options: { fastKey: "Num0" },
+			options: { fastKey: "<+ \" },
 			recipe: ["0/"],
 		},
 		"percent", {

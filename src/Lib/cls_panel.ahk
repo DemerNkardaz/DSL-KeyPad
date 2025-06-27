@@ -395,6 +395,24 @@ Class Panel {
 		ToolTip(Chr(0x2B1C) " " Util.StrRepeat(".", this.pdToolTipIncrement))
 	}
 
+	static externalGroups := {
+		smelting: [],
+		fastKeys: [],
+		secondkeys: [],
+		tertiarykeys: [],
+		scripts: [],
+		TELEXVNI: [],
+	}
+
+	static externalGroupKeys := {
+		smelting: Map(),
+		fastKeys: Map(),
+		secondkeys: Map(),
+		tertiarykeys: Map(),
+		scripts: Map(),
+		TELEXVNI: Map(),
+	}
+
 	static SetPanelData() {
 		tt := this.PanelDataToolTip.Bind(this)
 		SetTimer(tt, 100, 0)
@@ -402,7 +420,7 @@ Class Panel {
 		this.LV_Content := {
 			smelting: this.LV_InsertGroup({
 				type: "Recipe",
-				group: [
+				group: ArrayMerge([
 					"Latin Ligatures", "",
 					"Latin Digraphs", "",
 					"Latin", "",
@@ -435,11 +453,12 @@ Class Panel {
 					"Wallet Signs", "",
 					"Other Signs", "",
 					"Miscellaneous Technical",
-				]
+				], this.externalGroups.smelting),
+				groupKey: MapMerge(Map(), this.externalGroupKeys.smelting),
 			}),
 			fastkeys: ArrayMerge(this.LV_InsertGroup({
 				type: "Fast Key",
-				group: [
+				group: ArrayMerge([
 					"FK Diacritics Primary", "",
 					"Special Fast Primary", "",
 					"Spaces Primary", "",
@@ -473,14 +492,14 @@ Class Panel {
 					"Special Fast RShift", "",
 					"Wallet Signs Left Shift", ""
 					"Spaces Left Shift", ""
-				],
-				groupKey: Map(
+				], this.externalGroups.fastKeys),
+				groupKey: MapMerge(Map(
 					"FK Diacritics Primary", LeftControl LeftAlt,
 					"Special Fast Left", LeftAlt,
 					"Special Fast Secondary", RightAlt,
 					"Special Right Shift", RightShift,
 					"Wallet Signs Left Shift", LeftShift
-				),
+				), this.externalGroupKeys.fastKeys),
 			}), this.LV_InsertGroup({
 				type: "Special Combinations",
 				group: ["Special Combinations"],
@@ -489,32 +508,32 @@ Class Panel {
 			),
 			secondkeys: this.LV_InsertGroup({
 				type: "Fast Key",
-				group: [
+				group: ArrayMerge([
 					"SK Diacritics Primary", "",
 					"SK Spaces Primary", "",
 					"SK Special Secondary", "",
 					"SK Spaces Secondary", "",
 					"SK Special Left Alt", "",
 					"SK Spaces Left Alt", "",
-				],
-				groupKey: Map(
+				], this.externalGroups.secondkeys),
+				groupKey: MapMerge(Map(
 					"SK Diacritics Primary", LeftControl LeftAlt,
 					"SK Special Secondary", RightAlt,
 					"SK Special Left Alt", LeftAlt,
-				),
+				), this.externalGroupKeys.fastKeys),
 			}),
 			tertiarykeys: this.LV_InsertGroup({
 				type: "Fast Key",
-				group: [
+				group: ArrayMerge([
 					"TK Diacritics Primary", "",
-				],
-				groupKey: Map(
+				], this.externalGroups.tertiarykeys),
+				groupKey: MapMerge(Map(
 					"TK Diacritics Primary", LeftControl LeftAlt,
-				),
+				), this.externalGroupKeys.fastKeys),
 			}),
 			scripts: this.LV_InsertGroup({
 				type: "Alternative Layout",
-				group: [
+				group: ArrayMerge([
 					"Hellenic", "",
 					"Hellenic Accented", "",
 					"Hellenic Diacritics", "",
@@ -556,8 +575,8 @@ Class Panel {
 					"Mathematical", "",
 					"Math", "",
 					"Math Spaces"
-				],
-				groupKey: Map(
+				], this.externalGroups.scripts),
+				groupKey: MapMerge(Map(
 					"Hellenic", Locale.Read("symbol_hellenic"),
 					"Germanic Runic Elder Futhark", Locale.Read("symbol_futhark"),
 					"Germanic Runic Futhork", Locale.Read("symbol_futhork"),
@@ -589,20 +608,20 @@ Class Panel {
 					"Deseret", Locale.Read("symbol_deseret"),
 					"Shavian", Locale.Read("symbol_shavian"),
 					"Mathematical", Locale.Read("symbol_maths")
-				),
+				), this.externalGroupKeys.scripts),
 			}),
 			TELEXVNI: this.LV_InsertGroup({
 				type: "TELEX/VNI",
-				group: [
+				group: ArrayMerge([
 					"TELEX/VNI Vietnamese", "",
 					"TELEX/VNI Jorai", "",
 					"TELEX/VNI Chinese Romanization", "",
-				],
-				groupKey: Map(
+				], this.externalGroups.TELEXVNI),
+				groupKey: MapMerge(Map(
 					"TELEX/VNI Vietnamese", Locale.Read("symbol_vietnamese"),
 					"TELEX/VNI Jorai", Locale.Read("symbol_jorai"),
 					"TELEX/VNI Chinese Romanization", Locale.Read("symbol_chinese_romanization"),
-				),
+				), this.externalGroupKeys.fastKeys),
 				subType: Map(
 					"TELEX/VNI Vietnamese", "vietnamese",
 					"TELEX/VNI Jorai", "jorai",
@@ -1500,6 +1519,9 @@ Class Panel {
 							eachOptions.HasOwnProp("combinationKey") ? eachOptions.combinationKey : lastGroupKey
 						)
 					}
+
+					if eachOptions.hasOwnProp("groupKey") && eachOptions.groupKey is Func
+						eachOptions.groupKey := eachOptions.groupKey()
 
 					ArrayMergeTo(outputArrays, this.LV_InsertGroup(eachOptions))
 				}

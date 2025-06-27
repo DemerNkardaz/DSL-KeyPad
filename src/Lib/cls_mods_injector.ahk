@@ -30,6 +30,21 @@ Class ModsInjector {
 				FileAppend("", v, "UTF-8")
 	}
 
+	static GetActiveList() {
+		local activeList := []
+		local modKeys := this.Read()
+
+		for sectionName, sectionData in modKeys {
+			for key, value in sectionData.OwnProps() {
+				if (value = 1) {
+					activeList.Push(key)
+				}
+			}
+		}
+
+		return activeList
+	}
+
 	static Read() {
 		if !FileExist(this.registryINI)
 			FileAppend("[pre_init]`n`n[post_init]`n", this.registryINI, "UTF-16")

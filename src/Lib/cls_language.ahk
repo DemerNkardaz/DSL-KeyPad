@@ -161,7 +161,7 @@ Class Locale {
 
 	static Fill() {
 		this.localeObj := {}
-		pathsArray := []
+		local pathsArray := []
 
 		for lang, value in Language.supported {
 			if value.locale {
@@ -169,10 +169,18 @@ Class Locale {
 			}
 		}
 
-		Loop Files App.paths.loc "\Automated\*", "FR" {
+		Loop Files App.paths.loc "\Automated\*", "FR"
 			if A_LoopFileFullPath ~= "i)\.ini$"
 				pathsArray.Push(A_LoopFileFullPath)
-		}
+
+		local activeMods := ModsInjector.GetActiveList()
+
+		if activeMods.Length > 0
+			for folderName in activeMods
+				if DirExist(ModsInjector.modsPath "\" folderName "\Locale")
+					Loop Files ModsInjector.modsPath "\" folderName "\Locale\*", "FR"
+						if A_LoopFileFullPath ~= "i)\.ini$"
+							pathsArray.Push(A_LoopFileFullPath)
 
 		this.localeObj := Util.MultiINIToObj(pathsArray)
 	}

@@ -540,8 +540,9 @@ Class KeyboardBinder {
 		if lang != "" && Language.supported[lang].parent != ""
 			lang := Language.supported[lang].parent
 
-		iconCode := App.indexIcos["app"]
-		trayTitle := App.Title("+status+version") "`n" latinLayout "/" cyrillicLayout "/" hellenicLayout
+		local iconCode := App.indexIcos["app"]
+		local trayTitle := App.Title("+status+version") "`n" latinLayout "/" cyrillicLayout "/" hellenicLayout
+		local iconFile := App.icoDLL
 
 		if this.disabledByMonitor || this.disabledByUser {
 			iconCode := App.indexIcos["disabled"]
@@ -556,14 +557,19 @@ Class KeyboardBinder {
 				iconCode := App.indexIcos[currentISP]
 				trayTitle .= "`n" Locale.Read("script_processor_mode_" currentISP)
 			} else if currentAlt != "" || currentGlyph != "" {
-				data := Scripter.GetData(mode, current)
-				icons := data.icons
-				iconCode := App.indexIcos[icons.Length > 1 ? icons[lang = "ru-RU" ? 2 : 1] : icons[1]]
+				local data := Scripter.GetData(mode, current)
+				local icons := data.icons
+				local icon := icons.Length > 1 ? icons[lang = "ru-RU" ? 2 : 1] : icons[1]
+				if icon ~= "file::" {
+					iconFile := StrReplace(icon, "file::")
+					iconCode := 1
+				} else
+					iconCode := App.indexIcos[icon]
 				trayTitle .= "`n" Locale.Read(data.locale)
 			}
 		}
 
-		TraySetIcon(App.icoDLL, iconCode, True)
+		TraySetIcon(iconFile, iconCode, True)
 		A_IconTip := RegExReplace(trayTitle, "\&", "&&&")
 	}
 
@@ -1490,7 +1496,7 @@ Class Scripter {
 			widthDefault := 256
 			heightDefault := 256
 
-			elementsPerColumn := dataCount > 21 && !isGlyphs ? 4 : 3
+			elementsPerColumn := dataCount > 24 && !isGlyphs ? 4 : 3
 			rowCount := 0
 			columnCount := 0
 			totalColumns := 0
@@ -1559,7 +1565,10 @@ Class Scripter {
 				selectorPanel.AddGroupBox("v" dataValue.uiid " w" optionW " h" optionH " x" optionX " y" optionY)
 
 				for i, ico in dataValue.icons {
-					selectorPanel.AddPicture("v" dataValue.uiid "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans Icon" App.indexIcos[ico], App.icoDLL)
+					if ico ~= "file::" {
+						selectorPanel.AddPicture("v" dataValue.uiid "Ico" i " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans", StrReplace(ico, "file::"))
+					} else
+						selectorPanel.AddPicture("v" dataValue.uiid "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans Icon" App.indexIcos[ico], App.icoDLL)
 					icoShift += icoH + 5
 				}
 

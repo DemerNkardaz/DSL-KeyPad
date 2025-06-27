@@ -195,7 +195,10 @@ Class App {
 
 		AddScripts(dataName, dataValue) {
 			sciptsMenu.Add(Locale.Read(dataValue.locale), (*) => Scripter.OptionSelect(dataName))
-			sciptsMenu.SetIcon(Locale.Read(dataValue.locale), App.icoDLL, App.indexIcos[dataValue.icons[1]])
+			if dataValue.icons[1] ~= "file::" {
+				sciptsMenu.SetIcon(Locale.Read(dataValue.locale), StrReplace(dataValue.icons[1], "file::"))
+			} else
+				sciptsMenu.SetIcon(Locale.Read(dataValue.locale), App.icoDLL, App.indexIcos[dataValue.icons[1]])
 		}
 
 		App.tray.Add(labels.scriptForms, sciptsMenu)
