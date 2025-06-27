@@ -1,6 +1,6 @@
 Class ChrReg {
-	__New(rawEntries, typeOfInit := "Internal") {
-		this.AddEntries(&rawEntries, &typeOfInit)
+	__New(rawEntries, typeOfInit := "Internal", preventProgressGUI := False) {
+		this.AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI)
 	}
 
 	__Delete() {
@@ -130,37 +130,39 @@ Class ChrReg {
 			local libEntry := ChrLib.entries.%entryName%
 			this.EntryPostProcessing(&entryName, &libEntry)
 
-			progress.data.progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
-			progress.data.progressBarCurrent++
-			progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
-
+			if progress {
+				progress.data.progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
+				progress.data.progressBarCurrent++
+				progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
+			}
 			entry := unset
 		}
 		return
 	}
 
-	AddEntries(&rawEntries, &typeOfInit) {
-		local progress := PorgressBar({ typeOfInit: typeOfInit })
-		local setProgress := progress.SetProgressBarValue.Bind(progress)
+	AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI) {
+		local progress := !preventProgressGUI ? PorgressBar({ typeOfInit: typeOfInit }) : False
+		local setProgress := !preventProgressGUI ? progress.SetProgressBarValue.Bind(progress) : False
 
 		if Keyboard.blockedForReload
 			return
 
 		if rawEntries is Array && rawEntries.Length >= 2 {
+			if progress {
+				Loop rawEntries.Length // 2 {
+					local index := A_Index * 2 - 1
+					local entryName := rawEntries[index]
 
-			Loop rawEntries.Length // 2 {
-				local index := A_Index * 2 - 1
-				local entryName := rawEntries[index]
-
-				if RegExMatch(entryName, "\[(.*?)\]", &match) {
-					local splitVariants := StrSplit(match[1], ",")
-					progress.data.maxCountOfEntries += splitVariants.Length
-				} else {
-					progress.data.maxCountOfEntries++
+					if RegExMatch(entryName, "\[(.*?)\]", &match) {
+						local splitVariants := StrSplit(match[1], ",")
+						progress.data.maxCountOfEntries += splitVariants.Length
+					} else {
+						progress.data.maxCountOfEntries++
+					}
 				}
-			}
 
-			SetTimer(setProgress, 250, 0)
+				SetTimer(setProgress, 250, 0)
+			}
 
 			Loop rawEntries.Length // 2 {
 				local index := A_Index * 2 - 1
@@ -176,12 +178,15 @@ Class ChrReg {
 			rawEntries := unset
 			typeOfInit := unset
 
-			Sleep 500
-			progress.GUI.Destroy()
-			progress.SetProgressBarZero()
+			if progress {
+				Sleep 500
+				progress.GUI.Destroy()
+				progress.SetProgressBarZero()
+			}
 		}
 
-		SetTimer(setProgress, -0)
+		if progress
+			SetTimer(setProgress, -0)
 		progress := unset
 		setProgress := unset
 		return

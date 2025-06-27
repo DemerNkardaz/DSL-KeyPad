@@ -1386,8 +1386,8 @@ Class Scripter {
 		]
 	)
 
-	static SelectorPanel(selectorType := "Alternative Modes") {
-		keySymbols := Map(
+	static SelectorPanel(selectorType := "Alternative Modes", currentPage := 1) {
+		local keySymbols := Map(
 			"Tilde", "``",
 			"HyphenMinus", "-",
 			"ДефисоМинус", "-",
@@ -1413,9 +1413,9 @@ Class Scripter {
 			"ΠισωΣολιδος", "\",
 		)
 
-		selectorAntagonist := selectorType != "Alternative Modes" ? "Alternative Modes" : "Glyph Variations"
-		isGlyphs := selectorType = "Glyph Variations"
-		keyCodes := [
+		local selectorAntagonist := selectorType != "Alternative Modes" ? "Alternative Modes" : "Glyph Variations"
+		local isGlyphs := selectorType = "Glyph Variations"
+		local keyCodes := [
 			; "SC029",
 			; "SC002",
 			; "SC003",
@@ -1464,9 +1464,9 @@ Class Scripter {
 			"SC035",
 		]
 
-		hotkeys := Map()
-		keys := keyCodes.Clone()
-		keysLen := keys.Length
+		local hotkeys := Map()
+		local keys := keyCodes.Clone()
+		local keysLen := keys.Length
 		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 
 		Loop keysLen
@@ -1479,61 +1479,66 @@ Class Scripter {
 		for keyName, keyCode in KeyboardBinder.layouts.hellenic[hellenicLayout].layout
 			keyCodes.HasValue(keyCode, &i) && (keys[keysLen * 2 + i] := keyName)
 
-		for key, value in keySymbols {
+		for key, value in keySymbols
 			keys.HasValue(key, &i) && (keys[i] := value)
-		}
 
-		prevAltMode := this.selectedMode.Get(selectorType)
+
+		local prevAltMode := this.selectedMode.Get(selectorType)
 		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read("gui_scripter_" (selectorType == "Alternative Modes" ? "alt_mode" : "glyph_variation")))
 
 		Constructor() {
-			selectorPanel := Gui()
+			local maxItems := Cfg.Get("Scripter_Selector_Max_Items", "UI", 24, "int")
+
+			if maxItems > keysLen
+				maxItems := keysLen
+
+			local selectorPanel := Gui()
 			selectorPanel.OnEvent("Close", (Obj) => this.PanelDestroy(selectorType))
 			selectorPanel.title := this.selectorTitle.Get(selectorType)
 
-			dataCount := this.data[selectorType].Length // 2
+			local totalItems := this.data[selectorType].Length // 2
+			local totalPages := Ceil(totalItems / maxItems)
 
-			widthDefault := 256
-			heightDefault := 256
+			if currentPage > totalPages
+				currentPage := totalPages
 
-			elementsPerColumn := dataCount > 24 && !isGlyphs ? 4 : 3
-			rowCount := 0
-			columnCount := 0
-			totalColumns := 0
-			elementCount := 0
+			selectorPanel.title .= Chr(0x2003) "::" Chr(0x2003) Locale.ReadInject("gui_scripter_pages", [currentPage, totalPages]) " " Locale.Read("gui_scripter_pages_help")
 
-			Loop dataCount {
-				if (columnCount < elementsPerColumn) ? columnCount++ : (columnCount := 1, rowCount++)
-					(totalColumns < elementsPerColumn) && totalColumns++
-				elementCount++
-			}
+			local startIndex := (currentPage - 1) * maxItems + 1
+			local pageItems := Min(maxItems, totalItems - startIndex + 1)
 
-			rowCount++
+			local widthDefault := 256
+			local heightDefault := 256
 
-			icoW := 32
-			icoH := 32
+			local itemsPerRow := totalItems > 24 && !isGlyphs ? 4 : 3
+			local rowCount := Ceil(pageItems / itemsPerRow)
+			local columnCount := Min(pageItems, itemsPerRow)
 
-			optionW := 386 - 24
-			optionH := ((icoH * 2) + 30) / (isGlyphs ? 1.5 : 1)
-			optionGap := 10
+			local icoW := 32
+			local icoH := 32
 
-			optionTitleH := 24
+			local optionW := 386 - 24
+			local optionH := ((icoH * 2) + 30) / (isGlyphs ? 1.5 : 1)
+			local optionGap := 10
 
-			borderPadding := optionGap
-			panelWidth := optionW * totalColumns + optionGap * (totalColumns - 1) + 2 * borderPadding
-			panelHeight := optionH * rowCount + (optionGap // 2) * (rowCount - 1) + 2 * borderPadding
+			local optionTitleH := 24
+
+			local borderPadding := optionGap
+			local panelWidth := optionW * columnCount + optionGap * (columnCount - 1) + 2 * borderPadding
+			local panelHeight := optionH * rowCount + (optionGap // 2) * (rowCount - 1) + 2 * borderPadding
 
 
-			currentRow := 0
-			currentCol := 0
+			local currentRow := 0
+			local currentCol := 0
 
 			j := 0
-			Loop dataCount {
+			Loop pageItems {
 				j++
-				i := A_Index * 2 - 1
-				dataName := this.data[selectorType][i]
-				dataValue := this.data[selectorType][i + 1]
-				AddOption(dataName, dataValue, j)
+				local dataIndex := startIndex + A_Index - 1
+				local i := dataIndex * 2 - 1
+				local dataName := this.data[selectorType][i]
+				local dataValue := this.data[selectorType][i + 1]
+				AddOption(&dataName, &dataValue, &j)
 			}
 
 			selectorPanel.Show("w" panelWidth " h" panelHeight " Center")
@@ -1541,21 +1546,21 @@ Class Scripter {
 			return selectorPanel
 
 
-			AddOption(dataName, dataValue, j) {
-				optionX := borderPadding + currentCol * (optionW + optionGap)
-				optionY := borderPadding + currentRow * (optionH + (optionGap // 2))
-				icoX := optionX + 10
-				icoY := optionY + 15
-				icoShift := 0
+			AddOption(&dataName, &dataValue, &j) {
+				local optionX := borderPadding + currentCol * (optionW + optionGap)
+				local optionY := borderPadding + currentRow * (optionH + (optionGap // 2))
+				local icoX := optionX + 10
+				local icoY := optionY + 15
+				local icoShift := 0
 
-				plateButtonW := optionW
-				plateButtonH := optionH - 7
-				plateButtonX := optionX
-				plateButtonY := optionY + 6
+				local plateButtonW := optionW
+				local plateButtonH := optionH - 7
+				local plateButtonX := optionX
+				local plateButtonY := optionY + 6
 
-				borderBackground := selectorPanel.AddText("w" plateButtonW + 4 " h" plateButtonH + 4 " x" plateButtonX - 2 " y" plateButtonY - 2 " Background" (prevAltMode = dataName ? "0xfdd500" : "Trans"))
+				local borderBackground := selectorPanel.AddText("w" plateButtonW + 4 " h" plateButtonH + 4 " x" plateButtonX - 2 " y" plateButtonY - 2 " Background" (prevAltMode = dataName ? "0xfdd500" : "Trans"))
 
-				plateButton := selectorPanel.AddText("w" plateButtonW " h" plateButtonH " x" plateButtonX " y" plateButtonY " BackgroundWhite")
+				local plateButton := selectorPanel.AddText("w" plateButtonW " h" plateButtonH " x" plateButtonX " y" plateButtonY " BackgroundWhite")
 				plateButton.OnEvent("Click", (Obj, Info) => (
 					this.PanelDestroy(selectorType),
 					this.OptionSelect(dataName, selectorType)
@@ -1572,19 +1577,19 @@ Class Scripter {
 					icoShift += icoH + 5
 				}
 
-				optionTitleX := optionX + icoW + 20
-				optionTitleY := icoY
+				local optionTitleX := optionX + icoW + 20
+				local optionTitleY := icoY
 
-				optionTitleW := optionW - (icoX - optionX) - icoW - 20
+				local optionTitleW := optionW - (icoX - optionX) - icoW - 20
 
-				optionTitle := selectorPanel.AddText("v" dataValue.uiid "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " 0x80 +BackgroundTrans", Locale.Read(dataValue.locale))
+				local optionTitle := selectorPanel.AddText("v" dataValue.uiid "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " 0x80 +BackgroundTrans", Locale.Read(dataValue.locale))
 				optionTitle.SetFont("s10 c333333 Bold", "Segoe UI")
 
-				scriptPreviewX := optionTitleX
-				scriptPreviewY := optionTitleY + optionTitleH - 2
+				local scriptPreviewX := optionTitleX
+				local scriptPreviewY := optionTitleY + optionTitleH - 2
 
 				for i, previewText in dataValue.preview {
-					pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
+					local pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
 					pt.SetFont("s" (isGlyphs && dataName != "fullwidth" ? 12 : 10) " c333333", dataValue.fonts.length > 0 ? dataValue.fonts[dataValue.fonts.length > 1 ? i : 1] : "Segoe UI")
 
 					scriptPreviewY += optionTitleH - 5
@@ -1600,17 +1605,17 @@ Class Scripter {
 				)
 
 				currentCol++
-				if (currentCol >= elementsPerColumn) {
+				if (currentCol >= itemsPerRow) {
 					currentCol := 0
 					currentRow++
 				}
 			}
 		}
 
-		if IsGuiOpen(this.selectorTitle.Get(selectorType)) {
+		if WinExist(this.selectorTitle.Get(selectorType)) {
 			WinActivate(this.selectorTitle.Get(selectorType))
 		} else {
-			if IsGuiOpen(this.selectorTitle.Get(selectorAntagonist)) {
+			if WinExist(this.selectorTitle.Get(selectorAntagonist)) {
 				this.selectorGUI[selectorAntagonist].Destroy()
 				Sleep 200
 			}
@@ -1624,9 +1629,9 @@ Class Scripter {
 	}
 
 	static OptionSelect(name, selectorType := "Alternative Modes") {
-		currentISP := InputScriptProcessor.options.interceptionInputMode
+		local currentISP := InputScriptProcessor.options.interceptionInputMode
 		if name != "" {
-			currentMode := this.selectedMode.Get(selectorType)
+			local currentMode := this.selectedMode.Get(selectorType)
 
 			if selectorType = "Alternative Modes" {
 				if currentISP != "" {
@@ -1638,13 +1643,13 @@ Class Scripter {
 			this.selectedMode.Set(selectorType, currentMode != name ? name : "")
 		}
 
-		altMode := this.selectedMode.Get(selectorType)
+		local altMode := this.selectedMode.Get(selectorType)
 
 		KeyboardBinder.RebuilBinds(, altMode != "")
 
 		WarningISP(name, currentISP, selectorType) {
-			nameTitle := Locale.Read(this.GetData(selectorType, name).locale)
-			IPSTitle := Locale.Read("script_processor_mode_" currentISP)
+			local nameTitle := Locale.Read(this.GetData(selectorType, name).locale)
+			local IPSTitle := Locale.Read("script_processor_mode_" currentISP)
 			MsgBox(Locale.ReadInject("alt_mode_warning_isp_active", [nameTitle, IPSTitle]), App.Title(), "Icon!")
 		}
 	}
@@ -1652,8 +1657,8 @@ Class Scripter {
 	static isScripterWaiting := False
 	static WaitForKey(hotkeys, selectorType) {
 		this.isScripterWaiting := True
-		currentMode := this.selectedMode.Get(selectorType)
-		useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
+		local currentMode := this.selectedMode.Get(selectorType)
+		local useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
 
 		if !useRemap && currentMode != "Hellenic" && Keyboard.activeLanguage != "el-GR"
 			Suspend(1)
@@ -1662,14 +1667,17 @@ Class Scripter {
 		else if useRemap && currentMode != "Hellenic"
 			KeyboardBinder.Registration(BindList.Get("Keyboard Default"), True, True)
 
+		local fKeys := ""
+		Loop 12
+			fKeys .= "{F" A_Index "}"
 
-		IH := InputHook("L1 M")
+		local IH := InputHook("L1 M", fKeys)
 		IH.OnEnd := OnEnd
 		IH.Start()
 		SetTimer(WaitCheckGUI, 50)
 
 		WaitCheckGUI() {
-			if !IsGuiOpen(this.selectorTitle.Get(selectorType)) {
+			if !WinExist(this.selectorTitle.Get(selectorType)) {
 				IH.Stop()
 				this.isScripterWaiting := False
 				if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser)
@@ -1682,6 +1690,11 @@ Class Scripter {
 		OnEnd(*) {
 			if GetKeyState("Shift", "P") || GetKeyState("Ctrl", "P") || GetKeyState("Alt", "P") || GetKeyState("LWin", "P") || GetKeyState("RWin", "P") {
 				this.WaitForKey(hotkeys, selectorType)
+				return
+			} else if RegExMatch(IH.EndKey, "^F(\d*)", &page) {
+				if WinExist(this.selectorTitle.Get(selectorType))
+					this.PanelDestroy(selectorType)
+				this.SelectorPanel(selectorType, page[1])
 				return
 			}
 			this.HandleWaiting(StrUpper(IH.Input), hotkeys, selectorType)

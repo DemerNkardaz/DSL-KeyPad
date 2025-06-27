@@ -31,6 +31,9 @@ Class Cfg {
 			"List_Items_Font_Size", "",
 			"Preview_Font_Family", "",
 		],
+		"UI", [
+			"Scripter_Selector_Max_Items", 24,
+		],
 		"Compose", [],
 		"Characters", [
 			"I_Dot_Shift_I_Dotless", "Default",
