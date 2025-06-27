@@ -1488,9 +1488,7 @@ Class Scripter {
 
 		Constructor() {
 			local maxItems := Cfg.Get("Scripter_Selector_Max_Items", "UI", 24, "int")
-
-			if maxItems > keysLen
-				maxItems := keysLen
+			maxItems := Min(Max(1, maxItems), keysLen)
 
 			local selectorPanel := Gui()
 			selectorPanel.OnEvent("Close", (Obj) => this.PanelDestroy(selectorType))
