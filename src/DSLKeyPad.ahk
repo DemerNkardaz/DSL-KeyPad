@@ -36,6 +36,7 @@ initialized := False
 
 #Include <Classes\class_util>
 #Include <Classes\class_progress_bar>
+#Include <Classes\class_progress_tooltip>
 #Include <Classes\class_character_block>
 #Include <Classes\class_unicode_web_resource>
 #Include <Classes\class_search>

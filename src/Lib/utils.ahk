@@ -183,12 +183,12 @@ _ArraySortLen(this) {
 }
 
 
-ArrayMergeTo(TargetArray, Arrays*) {
+ArrayMergeTo(&targetArray, Arrays*) {
 	for arrayItem in Arrays {
 		if !IsObject(arrayItem)
 			continue
 		for element in arrayItem {
-			TargetArray.Push(element)
+			targetArray.Push(element)
 		}
 	}
 	return
@@ -218,16 +218,20 @@ RegExEscape(str) {
 	return newStr
 }
 
-_MapKeys(this, t := "k") {
+_MapKeys(this, t := "k", names?) {
 	local keys := []
 	for k, v in this {
-		keys.Push(%t%)
+		if IsSet(names) {
+			if names.HasValue(k)
+				keys.Push(%t%)
+		} else
+			keys.Push(%t%)
 	}
 	return keys
 }
 
-_MapValues(this) {
-	return _MapKeys(this, "v")
+_MapValues(this, names?) {
+	return _MapKeys(this, "v", names?)
 }
 
 _MapToArray(this) {

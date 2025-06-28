@@ -1,3 +1,452 @@
+Class Panel2 {
+	title := ""
+	w := 1200
+	h := 600
+	xPos := 0
+	yPos := 0
+	resolutions := [
+		[1080, 1920],
+		[1440, 2560],
+		[1800, 3200],
+		[2160, 3840],
+		[2880, 5120],
+		[4320, 7680]
+	]
+
+	tabsX := 10
+	tabsY := 10
+	tabsW := this.w - this.tabsX * 2
+	tabsH := this.h - this.tabsY * 2
+
+	lvW := this.w - (this.w / 3)
+	lvH := this.h - 90
+	lvX := this.tabsX + 10
+	lvY := this.tabsY + 35
+
+	listViewColumnWidths := {
+		default: [this.lvW * 0.525, this.lvW * 0.2, this.lvW * 0.125, this.lvW * 0.1, 0, 0],
+		all: [this.lvW * 0.625, 0, this.lvW * 0.175, this.lvW * 0.15, 0, 0],
+		favorites: [this.lvW * 0.5, this.lvW * 0.205, this.lvW * 0.175, this.lvW * 0.055, 0, 0]
+	}
+
+	tabs := [
+		"smelting",
+		"fastkeys",
+		"secondkeys",
+		"tertiarykeys",
+		"scripts",
+		"TELEXVNI",
+		"help",
+		"about",
+		"all",
+		"favorites",
+	]
+
+	listViewTabs := [
+		"smelting",
+		"fastkeys",
+		"secondkeys",
+		"tertiarykeys",
+		"scripts",
+		"TELEXVNI",
+		"all",
+		"favorites",
+	]
+
+	listViewData := Map()
+	combinationKeyToGroupPairs := Map()
+
+	listViewColumnHeaders := {
+		default: ["name", "key", "view", "unicode", "entry_title", "entry_key"],
+		smelting: ["name", "recipe", "result", "unicode", "entry_title", "entry_key"],
+		favorites: ["name", "recipe", "key", "view", "entry_title", "entry_key"]
+	}
+
+	tabContents := [{
+		prefix: "Smelting",
+		columns: this.listViewColumnHeaders.smelting,
+		columnWidths: this.listViewColumnWidths.default,
+		source: "smelting",
+		previewType: "Recipe",
+	}, {
+		prefix: "FastKeys",
+		columns: this.listViewColumnHeaders.default,
+		columnWidths: this.listViewColumnWidths.default,
+		source: "fastkeys",
+	}, {
+		prefix: "SecondKeys",
+		columns: this.listViewColumnHeaders.default,
+		columnWidths: this.listViewColumnWidths.default,
+		source: "secondkeys",
+	}, {
+		prefix: "TertiaryKeys",
+		columns: this.listViewColumnHeaders.default,
+		columnWidths: this.listViewColumnWidths.default,
+		source: "tertiarykeys",
+	}, {
+		prefix: "Glago",
+		columns: this.listViewColumnHeaders.default,
+		columnWidths: this.listViewColumnWidths.default,
+		source: "scripts",
+		previewType: "Alternative Layout",
+	}, {
+		prefix: "TELEX/VNI",
+		columns: this.listViewColumnHeaders.default,
+		columnWidths: this.listViewColumnWidths.default,
+		source: "TELEXVNI",
+	}, {
+		prefix: "AllSymbols",
+		columns: this.listViewColumnHeaders.smelting,
+		columnWidths: this.listViewColumnWidths.all,
+		source: "all",
+		previewType: "Recipe",
+	}, {
+		prefix: "Favorites",
+		columns: this.listViewColumnHeaders.favorites,
+		columnWidths: this.listViewColumnWidths.favorites,
+		source: "favorites",
+		previewType: "Recipe",
+	}]
+
+	__New() {
+		local progress := DottedProgressTooltip(, &triggerEnds := False)
+		local JSONLists := JSON.LoadFile(App.paths.data "\ui_main_panel_lists.json", "UTF-8")
+
+		this.FillListViewData(&JSONLists)
+
+		triggerEnds := True
+		progress := unset
+		JSONLists := unset
+		return
+	}
+
+	Show() {
+		if this.title != "" && WinExist(this.title) {
+			WinActivate(this.title)
+		} else {
+			local progress := DottedProgressTooltip(, &triggerEnds := False)
+
+			this.GUI := this.Constructor()
+			this.GUI.Show(Format("w{} h{} x{} y{}", this.w, this.h, this.xPos, this.yPos))
+
+			triggerEnds := True
+			progress := unset
+		}
+		return
+	}
+
+	Destroy() {
+		this.GUI.Destroy()
+		return
+	}
+
+	Constructor() {
+		local screenWidth := A_ScreenWidth
+		local screenHeight := A_ScreenHeight
+
+		for res in this.resolutions {
+			if screenHeight = res[1] && screenWidth > res[2] {
+				screenWidth := res[2]
+				break
+			}
+		}
+
+		this.xPos := screenWidth - this.w - 50
+		this.yPos := screenHeight - this.h - 92
+
+		; *
+		; *
+		; *
+
+		this.title := App.Title("+status+version") " — " Locale.Read("gui_panel")
+
+		local panelWindow := Gui()
+		panelWindow.Title := this.title
+
+
+		local localizedTabs := []
+
+		for tab in this.tabs
+			localizedTabs.Push(Locale.Read("tab_" tab))
+
+		local panelTabs := panelWindow.AddTab3(Format("vTabs x{} y{} w{} h{}", this.tabsX, this.tabsY, this.tabsW, this.tabsH), localizedTabs)
+
+		local tabHeaders := []
+
+		for tab in this.listViewTabs
+			tabHeaders.Push(Locale.Read("tab_" tab))
+
+		for i, header in tabHeaders {
+			panelTabs.UseTab(header)
+
+			local attributes := this.tabContents[i]
+			this.CreateTabConcent(&panelWindow, &attributes)
+		}
+
+		return panelWindow
+	}
+
+	CreateTabConcent(&panelWindow, &attributes := {}) {
+		if !attributes.HasOwnProp("previewType")
+			attributes.previewType := "Key"
+
+		local localizedColumns := []
+
+		for tab in attributes.columns
+			localizedColumns.Push(Locale.Read("col_" tab))
+
+		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
+		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 10, "int"))
+		; charactersLV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.previewType }))
+		; charactersLV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber, attributes.prefix = "Favorites"))
+		; charactersLV.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.LV_ContextMenu(panelWindow, LV, rowNumber, attributes.prefix = "Favorites", isRMB, X, Y))
+
+		Loop attributes.columns.Length {
+			index := A_Index
+			charactersLV.ModifyCol(index, attributes.columnWidths[index])
+		}
+
+		for item in this.listViewData[attributes.source] {
+			local itemClone := item.Clone()
+			itemClone[1] := item[1] != "" ? this.HandleTitle(item[1]) : item[1] ; Title
+			itemClone[2] := item[2] != "" ? this.HandleKey(item[2]) : item[2]  ; Key
+			charactersLV.Add(, itemClone*)
+		}
+
+
+	}
+
+	FillListViewData(&source) {
+		for category, attributes in source
+			this.listViewData.Set(category, this.GetEntries(&attributes))
+		return
+	}
+
+	GetEntries(&attributes) {
+		if attributes is Array {
+			local outputArrays := []
+
+			for each in attributes
+				ArrayMergeTo(&outputArrays, this.GetEntries(&each))
+
+			return outputArrays
+		} else if attributes["group"] is Array {
+			local outputArrays := []
+			local lastGroupKey := ""
+
+			for i, each in attributes["group"] {
+				local eachAttributes := attributes.Clone()
+				eachAttributes["group"] := each
+
+				if attributes.Has("groupKey") {
+					if attributes["groupKey"] is Map && attributes["groupKey"].Has(each) {
+						eachAttributes["groupKey"] := attributes["groupKey"].Get(each)
+						lastGroupKey := eachAttributes["groupKey"]
+					} else
+						eachAttributes.Delete("groupKey")
+				}
+
+				if attributes.Has("subType") {
+					if attributes["subType"] is Map && attributes["subType"].Has(each) {
+						eachAttributes["subType"] := attributes["subType"].Get(each)
+					} else {
+						eachAttributes.Delete("subType")
+					}
+				}
+
+				if attributes.Has("combinationKey") {
+					if attributes["combinationKey"] is Map && attributes["combinationKey"].Has(each) {
+						eachAttributes["combinationKey"] := attributes["combinationKey"].Get(each)
+					} else {
+						if lastGroupKey != ""
+							eachAttributes["combinationKey"] := lastGroupKey
+						else
+							eachAttributes.Delete("combinationKey")
+					}
+				} else if lastGroupKey != ""
+					eachAttributes["combinationKey"] := lastGroupKey
+
+
+				if attributes["type"] = "Fast Key" {
+					this.combinationKeyToGroupPairs.Set(
+						eachAttributes["group"],
+						eachAttributes.Has("combinationKey") ? eachAttributes["combinationKey"] : lastGroupKey
+					)
+				}
+
+				ArrayMergeTo(&outputArrays, this.GetEntries(&eachAttributes))
+			}
+
+			return outputArrays
+		} else {
+			if attributes["group"] == ""
+				return [["", "", "", "", "", "", ""]]
+
+			if !attributes.Has("type")
+				throw "Type is required for MainGUI GetEntries"
+
+			local languageCode := Language.Get()
+			local outputArray := []
+			local intermediateMap := Map()
+
+			if attributes.Has("separator") && attributes["separator"]
+				outputArray.Push(["", "", "", "", "", "", ""])
+
+			if attributes.Has("groupKey")
+				if (attributes["groupKey"] is String && StrLen(attributes["groupKey"]) > 0
+					|| attributes["groupKey"] is Func)
+					outputArray.Push(["", attributes["groupKey"], "", "", "", "", ""])
+
+			for groupKey, entryNamesArray in ChrLib.entryGroups {
+				if !([groupKey].HasRegEx(attributes["group"])) || entryNamesArray.Length = 0 {
+					continue
+				} else {
+					for entryName in entryNamesArray {
+						local entry := ChrLib.GetEntry(entryName)
+						local isFavorite := FavoriteChars.CheckVar(entryName)
+
+						try {
+							if (entry["options"]["hidden"]) ||
+								(attributes.Has("blacklist") && attributes["blacklist"].HasRegEx(entryName)) ||
+								(!entry["groups"].HasRegEx(attributes["group"])) ||
+								(attributes["type"] = "Recipe" && (entry["recipe"].Length = 0)) ||
+								(attributes["type"] = "Fast Key" && (StrLen(entry["options"]["fastKey"]) < 2)) ||
+								(attributes["type"] = "Fast Key Special" && (StrLen(entry["options"]["specialKey"]) < 2)) ||
+								(attributes["type"] = "Alternative Layout" && (StrLen(entry["options"]["altLayoutKey"]) < 2)) ||
+								(attributes["type"] = "TELEX/VNI" && (!entry["options"].Has("telex__" attributes["subType"]) ||
+									entry["options"].Has("telex__" attributes["subType"]) && entry["options"]["telex__" attributes["subType"]] = "")
+								)
+							{
+								continue
+							}
+						} catch {
+							throw "Trouble in paradise: " entryName " typeof groupKey" (attributes.Has("groupKey") ? Type(attributes["groupKey"]) : "null") " recipe" Type(entry["recipe"]) " fastKey" Type(entry["options"]["fastKey"]) " specialKey" Type(entry["options"]["specialKey"]) " altLayoutKey" Type(entry["options"]["altLayoutKey"])
+						}
+
+						local characterRawTitle := Format("{}[type::{}]", entryName, attributes["type"])
+
+						local bindings := Map(
+							"Recipe", entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : entry["recipe"].Length > 0 ? entry["recipe"].ToString() : "",
+							"Alternative Layout", entry["options"]["altLayoutKey"],
+							"Special Combinations", entry["options"]["altSpecialKey"],
+							"Fast Key", entry["options"]["fastKey"],
+							"TELEX/VNI", attributes["type"] = "TELEX/VNI" && entry["options"].Has("telex__" attributes["subType"]) ? entry["options"]["telex__" attributes["subType"]] : "",
+						)
+
+						local characterSymbol := entry["symbol"]["set"]
+						local characterBinding := bindings.Has(attributes["type"]) ? bindings.Get(attributes["type"]) : attributes["type"] = "" && entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : ""
+
+						local reserveCombinationKey := ""
+
+						for cgroup, ckey in this.combinationKeyToGroupPairs
+							reserveCombinationKey := entry["groups"].HasValue(cgroup) ? ckey : reserveCombinationKey
+
+						reserveCombinationKey := (reserveCombinationKey != "" ? reserveCombinationKey " + " : "")
+
+						intermediateMap.Set(entry["index"],
+							attributes["group"] = "Favorites"
+								? [
+									characterRawTitle,
+									bindings["Recipe"],
+									bindings["Fast Key"] != "" ? reserveCombinationKey bindings["Fast Key"]
+									: bindings["Alternative Layout"] != "" ? reserveCombinationKey bindings["Alternative Layout"]
+									: "",
+									characterSymbol,
+									entryName,
+									""
+								]
+							: [
+								characterRawTitle,
+								characterBinding,
+								characterSymbol,
+								Util.ExtractHex(entry["unicode"]),
+								entryName,
+								attributes.Has("combinationKey") ? attributes["combinationKey"] : attributes.Has("groupKey") ? attributes["groupKey"] : ""
+							])
+					}
+				}
+			}
+
+			for cgroup, entry in intermediateMap
+				outputArray.Push(entry)
+
+			if attributes.Has("target") {
+				for each in outputArray
+					%attributes["target"]%.Push(each)
+			} else
+				return outputArray
+		}
+		return
+	}
+
+	HandleTitle(str) {
+		if RegExMatch(str, "^(.*)\[type::(.*)\]$", &partsMatch) {
+			local languageCode := Language.Get()
+			local entryName := partsMatch[1]
+			local entry := ChrLib.entries.%entryName%
+			local optionsType := partsMatch[2]
+			local characterTitle := ""
+			local isFavorite := FavoriteChars.CheckVar(entryName)
+
+			local skipCombine := True
+			local combinedTitle := ""
+
+			if entry["options"]["localeCombineAnd"] {
+				split := StrSplit(entryName, "_and_")
+				if split.Length > 1 {
+					for i, each in split {
+						if Locale.Read(each "_alt", , True, &titleText) || Locale.Read(each, , True, &titleText) {
+							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and") " " : "")
+							skipCombine := False
+						}
+					}
+				}
+			}
+
+			if optionsType = "Alternative Layout" && entry["options"]["layoutTitles"] &&
+				Locale.Read(entryName "_layout", , True, &titleText) {
+				characterTitle := titleText
+
+			} else if !skipCombine {
+				characterTitle := combinedTitle
+
+			} else if Locale.Read(entryName, , True, &titleText) {
+				characterTitle := titleText
+
+			} else if entry["titles"].Count > 0 && entry["titles"].Has(languageCode) {
+				characterTitle := entry["titles"].Get(languageCode)
+
+			} else {
+				characterTitle := Locale.Read(entryName)
+			}
+
+			if isFavorite {
+				characterTitle .= " " Chr(0x2605)
+			}
+
+			return characterTitle
+		}
+		return str
+	}
+
+	HandleKey(str) {
+		local rules := Map(
+			"^@(\S+)$", (str, match, callBack := Locale.Read.Bind(Locale, match[1])) => RegExReplace(str, match[0], callBack()),
+			"%(.*?)%", (str, match) => RegExReplace(str, match[0], %match[1]%),
+		)
+
+		for pattern, call in rules
+			while RegExMatch(str, pattern, &match)
+				str := call(str, match)
+
+		return str
+	}
+}
+
+globalInstances.MainGUI := Panel2()
+
+F11:: globalInstances.MainGUI.Show()
+
 Class Panel {
 	static UISets := {
 		infoFonts: {
@@ -414,8 +863,8 @@ Class Panel {
 	}
 
 	static SetPanelData() {
-		tt := this.PanelDataToolTip.Bind(this)
-		SetTimer(tt, 100, 0)
+		; tt := this.PanelDataToolTip.Bind(this)
+		; SetTimer(tt, 100, 0)
 
 		this.LV_Content := {
 			smelting: this.LV_InsertGroup({
@@ -636,10 +1085,10 @@ Class Panel {
 			all: this.LV_InsertGroup({ type: "", group: ["i)^(?!Custom)"], }),
 		}
 
-		SetTimer(tt, 0)
-		ToolTip(Chr(0x2705))
-		this.pdToolTipIncrement := 0
-		SetTimer(ToolTip.Bind(""), -500)
+		; SetTimer(tt, 0)
+		; ToolTip(Chr(0x2705))
+		; this.pdToolTipIncrement := 0
+		; SetTimer(ToolTip.Bind(""), -500)
 	}
 
 	static Panel(redraw := False) {
@@ -1646,7 +2095,7 @@ Class Panel {
 		if Type(options) = "Array" {
 			outputArrays := []
 			for each in options {
-				ArrayMergeTo(outputArrays, this.LV_InsertGroup(each))
+				ArrayMergeTo(&outputArrays, this.LV_InsertGroup(each))
 			}
 
 			return outputArrays
@@ -1700,7 +2149,7 @@ Class Panel {
 					; if eachOptions.hasOwnProp("groupKey") && eachOptions.groupKey is Func
 					; 	eachOptions.groupKey := eachOptions.groupKey()
 
-					ArrayMergeTo(outputArrays, this.LV_InsertGroup(eachOptions))
+					ArrayMergeTo(&outputArrays, this.LV_InsertGroup(eachOptions))
 				}
 
 				return outputArrays

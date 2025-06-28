@@ -1,0 +1,224 @@
+{
+	"smelting": {
+		"type": "Recipe",
+		"group": [
+			"Latin Ligatures", "",
+			"Latin Digraphs", "",
+			"Latin", "",
+			"Latino-Hellenic", "",
+			"Latin Accented", "",
+			"Latin Numerals", "",
+			"Hellenic Ligatures", "",
+			"Hellenic", "",
+			"Hellenic Accented", "",
+			"Hellenic Diacritics", "",
+			"Cyrillic Ligatures", "",
+			"Cyrillic Digraphs", "",
+			"Cyrillic", "",
+			"Cyrillic Accented", "",
+			"Germanic Runic Elder Futhark",
+			"Germanic Runic Futhork",
+			"Germanic Runic Younger Futhark",
+			"Germanic Runic Almanac",
+			"Germanic Runic Later Younger Futhark",
+			"Germanic Runic Medieval",
+			"Cirth Runic", "",
+			"Glagolitic", "",
+			"Old Persian", "",
+			"Shavian Ligatures", "",
+			"Smelting Special", "",
+			"Extra Symbolistics", "",
+			"Alchemical", "",
+			"Astrology", "",
+			"Astronomy", "",
+			"Wallet Signs", "",
+			"Other Signs", "",
+			"Miscellaneous Technical"
+		],
+		"groupKey": {}
+	},
+	"fastkeys": [{
+		"type": "Fast Key",
+		"group": [
+			"FK Diacritics Primary", "",
+			"Special Fast Primary", "",
+			"Spaces Primary", "",
+			"Special Fast Left",
+			"Wallet Signs Primary", "",
+			"Spaces Left Alt", "",
+			"Latin Primary", "",
+			"Latin Accented Primary", "",
+			"Cyrillic Primary", "",
+			"Cyrillic Accented Primary", "",
+			"Special Fast Secondary",
+			"Wallet Signs Secondary", "",
+			"Asian Quotes", "",
+			"Other Signs", "",
+			"Spaces", "",
+			"Format Characters", "",
+			"Misc", "",
+			"Latin Ligatures", "",
+			"Latin Secondary", "",
+			"Latino-Hellenic Secondary", "",
+			"Latin Accented Secondary", "",
+			"Cyrillic Ligatures Secondary", "",
+			"Cyrillic Digraphs Secondary", "",
+			"Cyrillic Secondary", "",
+			"Cyrillic Accented Secondary", "",
+			"Special Right Shift",
+			"Wallet Signs Right Shift", "",
+			"Spaces Right Shift", "",
+			"Latin Accented Tertiary", "",
+			"Cyrillic Tertiary", "",
+			"Special Fast RShift", "",
+			"Wallet Signs Left Shift", "",
+			"Spaces Left Shift", ""
+		],
+		"groupKey": {
+			"FK Diacritics Primary": "%LeftControl% %LeftAlt%",
+			"Special Fast Left": "%LeftAlt%",
+			"Special Fast Secondary": "%RightAlt%",
+			"Special Right Shift": "%RightShift%",
+			"Wallet Signs Left Shift": "%LeftShift"
+		}
+	}, {
+		"type": "Special Combinations",
+		"group": ["Special Combinations"],
+		"groupKey": {"Special Combinations": "@symbol_special_key"}
+	}],
+	"secondkeys": {
+		"type": "Fast Key",
+		"group": [
+			"SK Diacritics Primary", "",
+			"SK Spaces Primary", "",
+			"SK Special Secondary", "",
+			"SK Spaces Secondary", "",
+			"SK Special Left Alt", "",
+			"SK Spaces Left Alt", ""
+		],
+		"groupKey": {
+			"SK Diacritics Primary": "%LeftControl% %LeftAlt%",
+			"SK Special Secondary": "%RightAlt%",
+			"SK Special Left Alt": "%LeftAlt%"
+		}
+	},
+	"tertiarykeys": {
+		"type": "Fast Key",
+		"group": [
+			"TK Diacritics Primary", ""
+		],
+		"groupKey": {
+			"TK Diacritics Primary": "%LeftControl% %LeftAlt%"
+		}
+	},
+	"scripts": {
+		"type": "Alternative Layout",
+		"group": [
+			"Hellenic", "",
+			"Hellenic Accented", "",
+			"Hellenic Diacritics", "",
+			"Hellenic Punctuation",
+			"Hellenic Specials", "",
+			"Germanic Runic Elder Futhark", "",
+			"Germanic Runic Futhork", "",
+			"Germanic Runic Younger Futhark", "",
+			"Germanic Runic Almanac", "",
+			"Germanic Runic Later Younger Futhark", "",
+			"Germanic Runic Medieval", "",
+			"Germanic Runic", "",
+			"Cirth Runic",
+			"Tolkien Runic", "",
+			"Runic Punctuation", "",
+			"Glagolitic",
+			"Cyrillic Diacritics", "",
+			"Old Turkic",
+			"Old Turkic Orkhon", "",
+			"Old Turkic Yenisei", "",
+			"Old Permic", "",
+			"Old Hungarian", "",
+			"Gothic", "",
+			"Old Italic", "",
+			"Phoenician", "",
+			"South Arabian", "",
+			"North Arabian", "",
+			"Carian", "",
+			"Lycian", "",
+			"Lydian", "",
+			"Sidetic", "",
+			"Cypriot Syllabary", "",
+			"Tifinagh", "",
+			"Ugaritic", "",
+			"Old Persian", "",
+			"IPA", "",
+			"Deseret", "",
+			"Shavian", "Shavian Ligatures", "",
+			"Mathematical", "",
+			"Math", "",
+			"Math Spaces"
+		],
+		"groupKey": {
+			"Hellenic": "@symbol_hellenic",
+			"Germanic Runic Elder Futhark": "@symbol_futhark",
+			"Germanic Runic Futhork": "@symbol_futhork",
+			"Germanic Runic Younger Futhark": "@symbol_futhark_younger",
+			"Germanic Runic Almanac": "@symbol_futhark_almanac",
+			"Germanic Runic Later Younger Futhark": "@symbol_futhark_younger_later",
+			"Germanic Runic Medieval": "@symbol_medieval_runes",
+			"Runic Punctuation": "@symbol_runic_punctuation",
+			"Glagolitic": "@symbol_glagolitic",
+			"Old Turkic": "@symbol_turkic",
+			"Old Turkic Orkhon": "@symbol_turkic_orkhon",
+			"Old Turkic Yenisei": "@symbol_turkic_yenisei",
+			"Old Permic": "@symbol_permic",
+			"Old Hungarian": "@symbol_hungarian",
+			"Gothic": "@symbol_gothic",
+			"Old Italic": "@symbol_old_italic",
+			"Phoenician": "@symbol_phoenician",
+			"South Arabian": "@symbol_ancient_south_arabian",
+			"North Arabian": "@symbol_ancient_north_arabian",
+			"Carian": "@symbol_carian",
+			"Lycian": "@symbol_lycian",
+			"Lydian": "@symbol_lydian",
+			"Sidetic": "@symbol_sidetic",
+			"Cypriot Syllabary": "@symbol_cypriot_syllabary",
+			"Tifinagh": "@symbol_tifinagh",
+			"Ugaritic": "@symbol_ugaritic",
+			"Old Persian": "@symbol_old_persian",
+			"IPA": "@symbol_ipa",
+			"Deseret": "@symbol_deseret",
+			"Shavian": "@symbol_shavian",
+			"Mathematical": "@symbol_maths"
+		}
+	},
+	"TELEXVNI": {
+		"type": "TELEX/VNI",
+		"group": [
+			"TELEX/VNI Vietnamese", "",
+			"TELEX/VNI Jorai", "",
+			"TELEX/VNI Chinese Romanization", ""
+		],
+		"groupKey": {
+			"TELEX/VNI Vietnamese": "@symbol_vietnamese",
+			"TELEX/VNI Jorai": "@symbol_jorai",
+			"TELEX/VNI Chinese Romanization": "@symbol_chinese_romanization"
+		},
+		"subType": {
+			"TELEX/VNI Vietnamese": "vietnamese",
+			"TELEX/VNI Jorai": "jorai",
+			"TELEX/VNI Chinese Romanization": "chinese_romanization"
+		},
+		"combinationKey": {
+			"TELEX/VNI Vietnamese": "%RightAlt% F2",
+			"TELEX/VNI Jorai": "%RightAlt% F2",
+			"TELEX/VNI Chinese Romanization": "%RightAlt% %RightShift% F2"
+		}
+	},
+	"all": {
+		"type": "",
+		"group": ["i)^(?!Custom)"]
+	},
+	"favorites": {
+		"type": "",
+		"group": ["Favorites"]
+	}
+}

@@ -17,10 +17,9 @@ Class InputScriptProcessor {
 		return output
 	}
 
-	library := JSON.LoadFile(App.paths.data "\script_processor_library.json", "UTF-8")
-	sequences := Map("Escaped", Map(), "Default", Map())
-
-	__New(mode := "Tieng Viet") {
+	__New(mode := "Tieng Viet", customData?) {
+		this.library := IsSet(customData) ? customData : JSON.LoadFile(App.paths.data "\script_processor_library.json", "UTF-8")
+		this.sequences := Map("Escaped", Map(), "Default", Map())
 		this.tag := StrLower(StrReplace(mode, " ", "_"))
 		this.mode := mode
 
@@ -56,7 +55,6 @@ Class InputScriptProcessor {
 		this.inputLogger := ""
 		Tooltip()
 	}
-
 
 	GenerateSequences(libLink, ending?, replaceWith?) {
 		local output := Map()
