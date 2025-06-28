@@ -796,6 +796,64 @@ Class Util {
 
 		return bar
 	}
+
+	static ProcessConcatenation(arr) {
+		local result := []
+		local concatStartI := 0
+		local i := 1
+
+		while i <= arr.Length {
+			local item := arr[i]
+
+			if item is Array {
+				if concatStartI > 0 {
+					i++
+					continue
+				} else {
+					result.Push(this.ProcessConcatenation(item))
+					i++
+					continue
+				}
+			}
+
+			if RegExMatch(item, "@concat\{") {
+				concatStartI := i
+				i++
+				continue
+			}
+
+			if RegExMatch(item, "\}endConcat@") && concatStartI > 0 {
+				local concatStr := ""
+
+				Loop i - concatStartI - 1 {
+					local idx := concatStartI + A_Index
+					local concatItem := arr[idx]
+
+					if concatItem is Array {
+						local processedSubArray := this.ProcessConcatenation(concatItem)
+						concatStr .= processedSubArray.ToString("")
+					} else {
+						concatStr .= concatItem
+					}
+				}
+
+				result.Push(concatStr)
+				concatStartI := 0
+				i++
+				continue
+			}
+
+			if concatStartI > 0 {
+				i++
+				continue
+			}
+
+			result.Push(item)
+			i++
+		}
+
+		return result
+	}
 }
 
 Class UIA_Util {

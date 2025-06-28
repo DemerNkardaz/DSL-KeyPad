@@ -94,6 +94,11 @@ Class ChrReg {
 				variantEntry["variant"] := allVariants[1][i]
 				variantEntry["variantPos"] := i
 
+				if variantEntry["recipe"].Length > 0 {
+					variantEntry["recipe"] := Util.ProcessConcatenation(variantEntry["recipe"])
+					variantEntry["concatenated"] := True
+				}
+
 				entries.e%i%_%variantName% := variantEntry
 				variantName := unset
 				variantEntry := unset
@@ -564,6 +569,12 @@ Class ChrReg {
 			}
 		}
 
+		if entry["recipe"].Length > 0 && !entry.Has("concatenated")
+			entry["recipe"] := Util.ProcessConcatenation(entry["recipe"])
+
+		if entry.Has("concatenated")
+			entry.Delete("concatenated")
+
 		this.ProcessReference(&entry)
 		this.ProcessSymbolLetter(&entry)
 		this.ProcessOptionStrings(&entry)
@@ -716,7 +727,7 @@ Class ChrReg {
 			entry["symbol"]["font"] := "Noto Sans " StrTitle(scriptName)
 
 			scriptName := unset
-		} else if entryName ~= "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)" {
+		} else if entryName ~= "i)^(alchemical|astrological|astronomical|symbolistics)" {
 			entry["symbol"]["font"] := "Kurinto Sans"
 		} else if entryName ~= "i)^(phoenician|shavian)" {
 			entry["symbol"]["font"] := "Segoe UI Historic"
@@ -769,31 +780,6 @@ Class ChrReg {
 				entry["options"][key] := ChrReg.SetNotaion(&value, &dataPack)
 
 		if entry["recipe"].Length > 0 {
-			local concatStartI := 0
-			local concatedRecipes := []
-			for i, recipe in entry["recipe"] {
-				if RegExMatch(recipe, "(@concat\{)", &concatMatch) {
-					concatStartI := i
-					continue
-				} else if RegExMatch(recipe, "(\}endConcat@)", &concatMatch) && concatStartI > 0 {
-					local concatStr := ""
-					Loop i - concatStartI + 1 {
-						local idx := concatStartI + A_Index - 1
-						concatStr .= entry["recipe"][idx]
-					}
-					concatedRecipes.Push(concatStr)
-					concatStartI := 0
-					continue
-				} else if concatStartI > 0 {
-					continue
-				} else {
-					concatedRecipes.Push(recipe)
-				}
-			}
-
-			if concatedRecipes.Length > 0
-				entry["recipe"] := concatedRecipes
-
 			for recipe in entry["recipe"] {
 				if !ChrLib.entryRecipes.Has(recipe) {
 					ChrLib.entryRecipes.Set(
