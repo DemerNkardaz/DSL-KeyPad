@@ -982,7 +982,7 @@ Class Panel {
 		}
 
 		for item in options.source {
-			items_LV.Add(, item[1], item[2], item[3], item[4], item[5], item[6])
+			items_LV.Add(, item[1] is Func ? item[1]() : item[1], item[2], item[3], item[4], item[5], item[6])
 		}
 
 		items_FilterIcon := panelWindow.AddButton(UISets.filter.icon)
@@ -1697,8 +1697,8 @@ Class Panel {
 						)
 					}
 
-					if eachOptions.hasOwnProp("groupKey") && eachOptions.groupKey is Func
-						eachOptions.groupKey := eachOptions.groupKey()
+					; if eachOptions.hasOwnProp("groupKey") && eachOptions.groupKey is Func
+					; 	eachOptions.groupKey := eachOptions.groupKey()
 
 					ArrayMergeTo(outputArrays, this.LV_InsertGroup(eachOptions))
 				}
@@ -1724,8 +1724,12 @@ Class Panel {
 
 			if options.hasOwnProp("separator") && options.separator
 				outputArray.Push(["", "", "", "", "", "", ""])
-			if options.HasOwnProp("groupKey") && StrLen(options.groupKey) > 0
-				outputArray.Push(["", options.groupKey, "", "", "", "", ""])
+			if options.HasOwnProp("groupKey") {
+				if options.groupKey is Func
+					options.groupKey := options.groupKey()
+				if StrLen(options.groupKey) > 0
+					outputArray.Push(["", options.groupKey, "", "", "", "", ""])
+			}
 
 
 			for groupKey, entryNamesArray in ChrLib.entryGroups {

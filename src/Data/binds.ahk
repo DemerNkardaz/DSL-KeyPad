@@ -85,7 +85,6 @@ bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMerg
 			"RAlt", (*) => globalInstances.crafter.ComposeActivate(),
 		),
 		"Moded", Map(
-			; Functional
 			"F1", Map(
 				"<^>!", (*) => KeyboardBinder.ToggleDefaultMode(),
 				"<^>!>+", (*) => Auxiliary.ToggleInputMode(),
@@ -93,9 +92,8 @@ bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMerg
 			),
 			"F2", Map(
 				"<^>!<!", (*) => KeyboardBinder.ToggleDefaultMode("Tertiary Keys"),
-				"<^>!", (*) => InputScriptProcessor(),
-				"<^>!>+", (*) => InputScriptProcessor("pinYin"),
-				"<^>!<+", (*) => InputScriptProcessor("karaShiki"),
+				"<^>!", (*) => globalInstances.scriptProcessors["Tieng Viet"].Start(),
+				"<^>!>+", (*) => globalInstances.scriptProcessors["HanYu PinYin"].Start(),
 			),
 			"Up", Map(
 				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Superscript"),

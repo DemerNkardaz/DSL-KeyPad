@@ -547,15 +547,16 @@ Class KeyboardBinder {
 		if this.disabledByMonitor || this.disabledByUser {
 			iconCode := App.indexIcos["disabled"]
 		} else {
-			currentAlt := Scripter.selectedMode.Get("Alternative Modes")
-			currentGlyph := Scripter.selectedMode.Get("Glyph Variations")
-			currentISP := InputScriptProcessor.options.interceptionInputMode
-			mode := currentAlt != "" ? "Alternative Modes" : "Glyph Variations"
-			current := currentAlt != "" ? currentAlt : currentGlyph
+			local currentAlt := Scripter.selectedMode.Get("Alternative Modes")
+			local currentGlyph := Scripter.selectedMode.Get("Glyph Variations")
+			local currentISP := InputScriptProcessor.options.interceptionInputMode
+			local mode := currentAlt != "" ? "Alternative Modes" : "Glyph Variations"
+			local current := currentAlt != "" ? currentAlt : currentGlyph
+			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
 
-			if currentISP != "" && App.indexIcos.Has(currentISP) {
-				iconCode := App.indexIcos[currentISP]
-				trayTitle .= "`n" Locale.Read("script_processor_mode_" currentISP)
+			if currentISP != "" && App.indexIcos.Has(instanceRef.tag) {
+				iconCode := App.indexIcos[instanceRef.tag]
+				trayTitle .= "`n" Locale.Read("script_processor_mode_" instanceRef.tag)
 			} else if currentAlt != "" || currentGlyph != "" {
 				local data := Scripter.GetData(mode, current)
 				local icons := data.icons
@@ -1646,8 +1647,9 @@ Class Scripter {
 		KeyboardBinder.RebuilBinds(, altMode != "")
 
 		WarningISP(name, currentISP, selectorType) {
+			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
 			local nameTitle := Locale.Read(this.GetData(selectorType, name).locale)
-			local IPSTitle := Locale.Read("script_processor_mode_" currentISP)
+			local IPSTitle := Locale.Read("script_processor_mode_" instanceRef.tag)
 			MsgBox(Locale.ReadInject("alt_mode_warning_isp_active", [nameTitle, IPSTitle]), App.Title(), "Icon!")
 		}
 	}

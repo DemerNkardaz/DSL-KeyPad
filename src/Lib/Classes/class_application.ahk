@@ -30,7 +30,7 @@ Class App {
 
 	static __New() {
 		for i, ico in [
-			"app", "germanic", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "vietNam", "pinYin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian", "hellenic", "latin", "cyrillic",
+			"app", "germanic", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "tieng_viet", "hanyu_pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian", "hellenic", "latin", "cyrillic",
 			"glyph_combining",
 			"glyph_superscript",
 			"glyph_subscript",
@@ -179,10 +179,10 @@ Class App {
 		sciptsMenu := Menu()
 
 		sciptsMenu.Add(labels.IPS_TELEX, (*) => []), sciptsMenu.Disable(labels.IPS_TELEX)
-		sciptsMenu.Add(labels.IPS_TiengViet, (*) => InputScriptProcessor()),
-			sciptsMenu.SetIcon(labels.IPS_TiengViet, App.icoDLL, App.indexIcos["vietNam"])
-		sciptsMenu.Add(labels.IPS_HanYuPinYin, (*) => InputScriptProcessor("pinYin")),
-			sciptsMenu.SetIcon(labels.IPS_HanYuPinYin, App.icoDLL, App.indexIcos["pinYin"])
+		sciptsMenu.Add(labels.IPS_TiengViet, (*) => globalInstances.scriptProcessors["Tieng Viet"].Start()),
+			sciptsMenu.SetIcon(labels.IPS_TiengViet, App.icoDLL, App.indexIcos["tieng_viet"])
+		sciptsMenu.Add(labels.IPS_HanYuPinYin, (*) => globalInstances.scriptProcessors["HanYu PinYin"].Start()),
+			sciptsMenu.SetIcon(labels.IPS_HanYuPinYin, App.icoDLL, App.indexIcos["hanyu_pinyin"])
 		sciptsMenu.Add()
 		sciptsMenu.Add(labels.Scripter_AlternativeInput, (*) => []), sciptsMenu.Disable(labels.Scripter_AlternativeInput)
 

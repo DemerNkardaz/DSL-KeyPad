@@ -141,7 +141,7 @@ Class ChrCrafter {
 
 				if InputScriptProcessor.options.interceptionInputMode != "" && StrLen(input) > 1 {
 					local charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
-					local telexChar := InputScriptProcessor.TelexReturn(charPair)
+					local telexChar := InputScriptProcessor.TelexReturn(&charPair)
 
 					if telexChar != charPair {
 						input := SubStr(input, 1, previousInput = "\" ? -3 : -2) telexChar
