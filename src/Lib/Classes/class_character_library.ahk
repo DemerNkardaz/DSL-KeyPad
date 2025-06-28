@@ -99,7 +99,7 @@ Class ChrLib {
 	}
 
 	static GetEntry(entryName) {
-		if this.entries.HasOwnProp(entryName) {
+		if this.entries.HasOwnProp(entryName) && this.entries.%entryName% is Map {
 			local entry := this.entries.%entryName%.Clone()
 			local referencingTo := this.GetReferenceName(&entryName, &entry)
 
@@ -545,6 +545,9 @@ Class ChrLib {
 	}
 
 	static FormatEntry(entry, indent := 1) {
+		; if !(entry is Map)
+		; 	return ""
+
 		local output := ""
 		local indentStr := Util.StrRepeat(" ", indent * 8)
 
@@ -556,8 +559,14 @@ Class ChrLib {
 				for subValue in value {
 					if subValue is Array
 						subOutput .= indentStr indentStr "[" subValue.ToString(, "'") indentStr "]`n"
-					else if subValue is Object
-						subOutput .= this.FormatEntry(subValue, indent + 1)
+					else if subValue is Map
+						subOutput .= this.FormatEntry(subValue, indent + 2)
+					else if subValue is Object {
+						local tempMap := Map()
+						for prop in subValue.OwnProps()
+							tempMap[prop] := subValue.%prop%
+						subOutput .= this.FormatEntry(tempMap, indent + 2)
+					}
 					else
 						subOutput .= indentStr indentStr "'" subValue "'`n"
 				}
@@ -569,12 +578,52 @@ Class ChrLib {
 			} else if value is Map {
 				output .= indentStr key ": (`n"
 
-				for mapKey, mapValue in value
-					output .= indentStr indentStr mapKey ": '" mapValue "'`n"
+				for mapKey, mapValue in value {
+					if mapValue is Map {
+						output .= Util.StrRepeat(" ", (indent + 1) * 8) mapKey ": (`n"
+						output .= this.FormatEntry(mapValue, indent + 2)
+						output .= Util.StrRepeat(" ", (indent + 1) * 8) ")`n"
+					} else if mapValue is Array {
+						output .= Util.StrRepeat(" ", (indent + 1) * 8) mapKey ": ["
+						local arrayOutput := ""
+
+						for arrayValue in mapValue {
+							if arrayValue is Array
+								arrayOutput .= Util.StrRepeat(" ", (indent + 2) * 8) "[" arrayValue.ToString(, "'") "]`n"
+							else if arrayValue is Map
+								arrayOutput .= this.FormatEntry(arrayValue, indent + 2)
+							else if arrayValue is Object {
+								local tempMap := Map()
+								for prop in arrayValue.OwnProps()
+									tempMap[prop] := arrayValue.%prop%
+								arrayOutput .= this.FormatEntry(tempMap, indent + 2)
+							}
+							else
+								arrayOutput .= Util.StrRepeat(" ", (indent + 2) * 8) "'" arrayValue "'`n"
+						}
+
+						if arrayOutput != ""
+							output .= "`n" arrayOutput Util.StrRepeat(" ", (indent + 1) * 8)
+
+						output .= "]`n"
+					} else if mapValue is Object {
+						local tempMap := Map()
+						for prop in mapValue.OwnProps()
+							tempMap[prop] := mapValue.%prop%
+						subOutput := this.FormatEntry(tempMap, indent + 2)
+						subOutput := subOutput != "" ? "`n" subOutput Util.StrRepeat(" ", (indent + 1) * 8) : ""
+						output .= Util.StrRepeat(" ", (indent + 1) * 8) mapKey ": {" subOutput "}`n"
+					} else {
+						output .= mapValue is Number ? Util.StrRepeat(" ", (indent + 1) * 8) mapKey ": " mapValue "`n" : Util.StrRepeat(" ", (indent + 1) * 8) mapKey ": '" StrReplace(mapValue, "`n", " ") "'`n"
+					}
+				}
 
 				output .= indentStr ")`n"
 			} else if value is Object {
-				subOutput := this.FormatEntry(value, indent + 1)
+				local tempMap := Map()
+				for prop in value.OwnProps()
+					tempMap[prop] := value.%prop%
+				subOutput := this.FormatEntry(tempMap, indent + 1)
 				subOutput := subOutput != "" ? "`n" subOutput indentStr : ""
 				output .= indentStr key ": {" subOutput "}`n"
 			} else

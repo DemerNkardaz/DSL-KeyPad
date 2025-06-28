@@ -1173,6 +1173,30 @@ Class Panel {
 				this.LV_SetRandomPreview(each)
 	}
 
+	static LV_SetRandomPreview(prefix) {
+		panelGUI := this.PanelGUI
+		LV := panelGUI[prefix "LV"]
+		total := LV.GetCount()
+		if total = 0
+			return
+
+		loopCount := 0
+		maxTries := 100
+		while True {
+			rand := Random(1, total)
+			col1 := LV.GetText(rand, 1)
+			col4 := LV.GetText(rand, 4)
+			if (col1 != "" && col4 != "")
+				break
+			loopCount++
+			if loopCount > maxTries
+				return
+		}
+
+		LV.Modify(rand, "+Select +Focus")
+		this.LV_SetCharacterPreview(LV, rand, { prefix: prefix })
+	}
+
 	static LV_SetCharacterPreview(LV, rowValue, options) {
 		UISets := this.GetUISets()
 		characterEntry := LV.GetText(rowValue, 5)
