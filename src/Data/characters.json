@@ -7031,31 +7031,31 @@
 			"lat_[c,s]_let_a__circumflex__acute", {
 				"unicode": ["1EA4", "1EA5"],
 				"options": {
-					"telex__vietnamese": "$ \\W S\\ | $ 1 | ${lat_[c,s]_let_a__circumflex} \\S\\"
+					"telex__vietnamese": "$ $ \\S\\ | $ 1 | ${lat_[c,s]_let_a__circumflex} \\S\\"
 				}
 			},
 			"lat_[c,s]_let_a__circumflex__dot_below", {
 				"unicode": ["1EAC", "1EAD"],
 				"options": {
-					"telex__vietnamese": "$ \\W J\\ | $ 4  | ${lat_[c,s]_let_@__circumflex} \\J\\"
+					"telex__vietnamese": "$ $ \\J\\ | $ 4  | ${lat_[c,s]_let_@__circumflex} \\J\\"
 				}
 			},
 			"lat_[c,s]_let_a__circumflex__grave", {
 				"unicode": ["1EA6", "1EA7"],
 				"options": {
-					"telex__vietnamese": "$ \\W F\\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \\F\\"
+					"telex__vietnamese": "$ $ \\F\\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \\F\\"
 				}
 			},
 			"lat_[c,s]_let_a__circumflex__hook_above", {
 				"unicode": ["1EA8", "1EA9"],
 				"options": {
-					"telex__vietnamese": "$ \\W R\\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \\R\\"
+					"telex__vietnamese": "$ $ \\R\\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \\R\\"
 				}
 			},
 			"lat_[c,s]_let_a__circumflex__tilde_above", {
 				"unicode": ["1EAA", "1EAB"],
 				"options": {
-					"telex__vietnamese": "$ \\W X\\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \\X\\"
+					"telex__vietnamese": "$ $ \\X\\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \\X\\"
 				}
 			},
 			"lat_[c,s]_let_a__dot_above__macron", {
@@ -7335,31 +7335,31 @@
 			"lat_[c,s]_let_e__circumflex__acute", {
 				"unicode": ["1EBE", "1EBF"],
 				"options": {
-					"telex__vietnamese": "$$ \\S\\ | $ 1 | ${lat_[c,s]_let_@__circumflex} \\S\\"
+					"telex__vietnamese": "$ $ \\S\\ | $ 1 | ${lat_[c,s]_let_@__circumflex} \\S\\"
 				}
 			},
 			"lat_[c,s]_let_e__circumflex__dot_below", {
 				"unicode": ["1EC6", "1EC7"],
 				"options": {
-					"telex__vietnamese": "$$ \\J\\ | $ 4 | ${lat_[c,s]_let_@__circumflex} \\J\\"
+					"telex__vietnamese": "$ $ \\J\\ | $ 4 | ${lat_[c,s]_let_@__circumflex} \\J\\"
 				}
 			},
 			"lat_[c,s]_let_e__circumflex__grave", {
 				"unicode": ["1EC0", "1EC1"],
 				"options": {
-					"telex__vietnamese": "$$ \\F\\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \\F\\"
+					"telex__vietnamese": "$ $ \\F\\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \\F\\"
 				}
 			},
 			"lat_[c,s]_let_e__circumflex__hook_above", {
 				"unicode": ["1EC2", "1EC3"],
 				"options": {
-					"telex__vietnamese": "$$ \\R\\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \\R\\"
+					"telex__vietnamese": "$ $ \\R\\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \\R\\"
 				}
 			},
 			"lat_[c,s]_let_e__circumflex__tilde_above", {
 				"unicode": ["1EC4", "1EC5"],
 				"options": {
-					"telex__vietnamese": "$$ \\X\\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \\X\\"
+					"telex__vietnamese": "$ $ \\X\\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \\X\\"
 				}
 			},
 			"lat_[c,s]_let_e__macron__acute", {
@@ -7967,31 +7967,31 @@
 			"lat_[c,s]_let_o__circumflex__acute", {
 				"unicode": ["1ED0", "1ED1"],
 				"options": {
-					"telex__vietnamese": "$$ \\S\\ | $ 1 | ${lat_[c,s]_let_@__circumflex} \\S\\"
+					"telex__vietnamese": "$ $ \\S\\ | $ 1 | ${lat_[c,s]_let_@__circumflex} \\S\\"
 				}
 			},
 			"lat_[c,s]_let_o__circumflex__dot_below", {
 				"unicode": ["1ED8", "1ED9"],
 				"options": {
-					"telex__vietnamese": "$$ \\J\\ | $ 4 | ${lat_[c,s]_let_@__circumflex} \\J\\"
+					"telex__vietnamese": "$ $ \\J\\ | $ 4 | ${lat_[c,s]_let_@__circumflex} \\J\\"
 				}
 			},
 			"lat_[c,s]_let_o__circumflex__grave", {
 				"unicode": ["1ED2", "1ED3"],
 				"options": {
-					"telex__vietnamese": "$$ \\F\\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \\F\\"
+					"telex__vietnamese": "$ $ \\F\\ | $ 2 | ${lat_[c,s]_let_@__circumflex} \\F\\"
 				}
 			},
 			"lat_[c,s]_let_o__circumflex__hook_above", {
 				"unicode": ["1ED4", "1ED5"],
 				"options": {
-					"telex__vietnamese": "$$ \\R\\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \\R\\"
+					"telex__vietnamese": "$ $ \\R\\ | $ 3 | ${lat_[c,s]_let_@__circumflex} \\R\\"
 				}
 			},
 			"lat_[c,s]_let_o__circumflex__tilde_above", {
 				"unicode": ["1ED6", "1ED7"],
 				"options": {
-					"telex__vietnamese": "$$ \\X\\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \\X\\"
+					"telex__vietnamese": "$ $ \\X\\ | $ 5 | ${lat_[c,s]_let_@__circumflex} \\X\\"
 				}
 			},
 			"lat_[c,s]_let_o__horn__acute", {

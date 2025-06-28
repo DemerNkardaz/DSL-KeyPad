@@ -59,7 +59,8 @@ initialized := False
 #Include <Classes\class_character_recipe_handler>
 #Include <Classes\class_auxiliary>
 #Include <Classes\class_character_legend>
-#Include <Classes\class_panel>
+#Include <Classes\class_ui_panel>
+#Include <Classes\class_ui_panel_filter>
 #Include <Classes\class_key_event>
 #Include <Classes\class_bind_list>
 #Include <Classes\class_layout>

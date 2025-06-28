@@ -1,9 +1,18 @@
 Class Panel2 {
 	title := ""
+
+	fontSizes := {
+		preview: 70,
+		smallerPreview: 40,
+		title: 14
+	}
+
 	w := 1200
-	h := 600
+	h := 650
+
 	xPos := 0
 	yPos := 0
+
 	resolutions := [
 		[1080, 1920],
 		[1440, 2560],
@@ -12,6 +21,8 @@ Class Panel2 {
 		[2880, 5120],
 		[4320, 7680]
 	]
+
+	baseX := 21
 
 	tabsX := 10
 	tabsY := 10
@@ -28,6 +39,34 @@ Class Panel2 {
 		all: [this.lvW * 0.625, 0, this.lvW * 0.175, this.lvW * 0.15, 0, 0],
 		favorites: [this.lvW * 0.5, this.lvW * 0.205, this.lvW * 0.175, this.lvW * 0.055, 0, 0]
 	}
+
+	filterIconX := this.baseX
+	filterIconY := (this.lvY + this.lvH) + 5
+	filterIconW := 24
+	filterIconH := 24
+
+	filterX := this.filterIconX + 28
+	filterY := this.filterIconY
+	filterW := (this.lvW - this.filterIconW) - 4
+	filterH := this.filterIconH
+
+	previewGrpBoxX := this.lvX + this.lvW + 10
+	previewGrpBoxY := this.lvY
+	previewGrpBoxW := (this.w - this.previewGrpBoxX) - 20
+	previewGrpBoxH := (this.lvH + this.filterH) + 5
+
+	previewFrameW := (this.previewGrpBoxW / 1.75) * 1.25
+	previewFrameH := 128
+	previewFrameX := this.previewGrpBoxX + (this.previewGrpBoxW - this.previewFrameW) / 2
+	previewFrameY := this.previewGrpBoxY + 50
+
+	previewTitleW := this.previewGrpBoxW - 10
+	previewTitleH := 150
+	previewTitleX := this.previewGrpBoxX + 5
+	previewTitleY := (this.previewFrameY + this.previewFrameH) + 15
+
+
+	previewTabs := ["data", "tags"]
 
 	tabs := [
 		"smelting",
@@ -206,13 +245,41 @@ Class Panel2 {
 			charactersLV.ModifyCol(index, attributes.columnWidths[index])
 		}
 
+		local localizesRowsList := []
 		for item in this.listViewData[attributes.source] {
 			local itemClone := item.Clone()
 			itemClone[1] := item[1] != "" ? this.HandleTitle(item[1]) : item[1] ; Title
-			itemClone[2] := item[2] != "" ? this.HandleKey(item[2]) : item[2]  ; Key
+			itemClone[2] := item[2] ~= "(^@|%.*%)" ? this.HandleKey(item[2]) : item[2]  ; Key
+			itemClone[3] := item[3] ~= "(^@|%.*%)" ? this.HandleKey(item[3]) : item[3]  ; Key
 			charactersLV.Add(, itemClone*)
+			localizesRowsList.Push(itemClone)
+			itemClone := unset
 		}
 
+		local characterFilterIcon := panelWindow.AddButton(Format("x{} y{} h{} w{}", this.filterIconX, this.filterIconY, this.filterIconW, this.filterIconH))
+
+		GuiButtonIcon(characterFilterIcon, ImageRes, 169)
+		characterFilter := panelWindow.AddEdit(Format("x{} y{} w{} h{} v{}Filter",
+			this.filterX, this.filterY, this.filterW, this.filterH, attributes.prefix), "")
+		characterFilter.SetFont("s10")
+
+		local filterInstance := UIPanelFilter(&panelWindow, &characterFilter, &charactersLV, &localizesRowsList)
+		characterFilter.OnEvent("Change", (Ctrl, Info) => (
+			filterText := Ctrl.Text,
+			filterInstance.FilterBridge(&filterText)
+		))
+
+
+		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("character"))
+
+		local previewGroupFrame := panelWindow.AddGroupBox(Format("v{}Frame x{} y{} w{} h{}", attributes.prefix, this.previewFrameX, this.previewFrameY, this.previewFrameW, this.previewFrameH))
+
+		local previewSymbol := panelWindow.AddEdit(Format("v{}Symbol x{} y{} w{} h{} Readonly Center -VScroll -HScroll", attributes.prefix, this.previewFrameX, this.previewFrameY, this.previewFrameW, this.previewFrameH), DottedCircle)
+
+		local title := panelWindow.AddText(Format("v{}Title x{} y{} w{} h{} Center", attributes.prefix, this.previewTitleX, this.previewTitleY, this.previewTitleW, this.previewTitleH), "N/A")
+
+		previewSymbol.SetFont("s" this.fontSizes.preview, Fonts.fontFaces["Default"].name)
+		title.SetFont("s" this.fontSizes.title, Fonts.fontFaces["Default"].name)
 
 	}
 
