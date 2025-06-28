@@ -307,32 +307,32 @@ Class Locale {
 	}
 
 	static LocalesGeneration(entryName, entry) {
-		originalName := entryName
-		nbsp := Chr(160)
-		pfx := "gen_"
+		local originalName := entryName
+		local nbsp := Chr(160)
+		local pfx := "gen_"
 
-		useLetterLocale := entry.options.useLetterLocale
-		scriptAdditive := entry.symbol.scriptAdditive != "" ? "_" entry.symbol.scriptAdditive : ""
+		local useLetterLocale := entry["options"]["useLetterLocale"]
+		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "_" entry["symbol"]["scriptAdditive"] : ""
 
-		cyrillicTasgScriptAtStart := False
+		local cyrillicTasgScriptAtStart := False
 
 		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic"]) {
 			useLetterLocale := True
 			cyrillicTasgScriptAtStart := True
 		}
 
-		referenceLocale := entry.options.HasOwnProp("referenceLocale") && entry.options.referenceLocale != "" ? entry.options.referenceLocale : False
+		local referenceLocale := entry["options"].Has("referenceLocale") && entry["options"]["referenceLocale"] != "" ? entry["options"]["referenceLocale"] : False
 
-		useSelfPrefixesOnReferenceLocale := entry.options.useSelfPrefixesOnReferenceLocale
+		local useSelfPrefixesOnReferenceLocale := entry["options"]["useSelfPrefixesOnReferenceLocale"]
 
-		LTLReference := False
+		local LTLReference := False
 
-		entryData := entry.data.Clone()
-		entrySymbol := entry.symbol.Clone()
+		local entryData := entry["data"].Clone()
+		local entrySymbol := entry["symbol"].Clone()
 
 		if referenceLocale {
 			if !(referenceLocale ~= "i)^:") {
-				referenceName := entryName
+				local referenceName := entryName
 				if RegExMatch(referenceLocale, "i)^(.*?)\$", &refMatch) {
 					referenceName := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1")
 				} else
@@ -350,29 +350,29 @@ Class Locale {
 			}
 
 			if useSelfPrefixesOnReferenceLocale
-				entryData.postfixes := entry.data.postfixes.Clone()
+				entryData.postfixes := entry["data"]["postfixes"].Clone()
 		}
 
-		letter := (entrySymbol.HasOwnProp("letter") && StrLen(entrySymbol.letter) > 0) ? entrySymbol.letter : entryData.letter
-		lScript := entryData.script
-		lCase := entryData.case
-		lType := entryData.type
-		lPostfixes := entryData.postfixes
-		lVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
+		local letter := (entrySymbol.Has("letter") && StrLen(entrySymbol["letter"]) > 0) ? entrySymbol["letter"] : entryData["letter"]
+		local lScript := entryData["script"]
+		local lCase := entryData["case"]
+		local lType := entryData["type"]
+		local lPostfixes := entryData["postfixes"]
+		local lVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
-		isGermanic := ["germanic_runic", "cirth_runic"].HasValue(lScript)
+		local isGermanic := ["germanic_runic", "cirth_runic"].HasValue(lScript)
 
-		langCodes := ["en-US", "ru-RU", "en-US_alt", "ru-RU_alt"]
-		entry.titles := Map()
-		tags := Map()
+		local langCodes := ["en-US", "ru-RU", "en-US_alt", "ru-RU_alt"]
+		local tags := Map()
+		entry["titles"] := Map()
 
-		ref := LTLReference ? LTLReference : entryName
+		local ref := LTLReference ? LTLReference : entryName
 
 		for _, langCode in langCodes {
-			isAlt := InStr(langCode, "_alt")
-			lang := isAlt ? RegExReplace(langCode, "_alt") : langCode
+			local isAlt := InStr(langCode, "_alt")
+			local lang := isAlt ? RegExReplace(langCode, "_alt") : langCode
 
-			interLetter := ref "_LTL"
+			local interLetter := ref "_LTL"
 
 			if useLetterLocale {
 				if RegExMatch(useLetterLocale, "i)^(.*?)\$", &refMatch)
@@ -381,26 +381,26 @@ Class Locale {
 					interLetter := RegExReplace(ref, "i)^(.*?)__.*", "$1") "_LTL"
 			}
 
-			postLetter := useLetterLocale ? Locale.Read(interLetter, lang) : letter
+			local postLetter := useLetterLocale ? Locale.Read(interLetter, lang) : letter
 
-			lBeforeletter := ""
-			lAfterletter := ""
-			lSecondName := ""
+			local lBeforeletter := ""
+			local lAfterletter := ""
+			local lSecondName := ""
 
-			if entry.options.secondName {
+			if entry["options"]["secondName"] {
 				lSecondName := " " Locale.Read(("Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref) "_sN", lang)
 			}
 
 			for letterBound in ["beforeLetter", "afterLetter"] {
-				if entry.symbol.HasOwnProp(letterBound) && StrLen(entry.symbol.%letterBound%) > 0 {
-					boundLink := Util.StrUpper(letterBound, 1)
-					entryBoundReference := entry.symbol.%letterBound%
-					splitted := StrSplit(Util.StrTrim(entry.symbol.%letterBound%), ",")
+				if entry["symbol"].Has(letterBound) && StrLen(entry["symbol"][letterBound]) > 0 {
+					local boundLink := Util.StrUpper(letterBound, 1)
+					local entryBoundReference := entry["symbol"][letterBound]
+					local splitted := StrSplit(Util.StrTrim(entry["symbol"][letterBound]), ",")
 
 					for i, bound in splitted {
 						if RegExMatch(bound, "\:\:(.*?)$", &match) {
-							index := Integer(match[1])
-							bound := SubStr(bound, 1, match.Pos(0) - 1)
+							local index := Integer(match[1])
+							local bound := SubStr(bound, 1, match.Pos(0) - 1)
 							l%boundLink% .= Locale.VarSelect(Locale.Read(pfx letterBound "_" bound, lang), index) (i < splitted.Length ? " " : "")
 						} else
 							l%boundLink% .= Locale.VarSelect(Locale.Read(pfx letterBound "_" bound, lang), 1) (i < splitted.Length ? " " : "")
@@ -408,19 +408,17 @@ Class Locale {
 				}
 			}
 
-
 			lBeforeletter := StrLen(lBeforeletter) > 0 ? lBeforeletter " " : ""
 			lAfterletter := StrLen(lAfterletter) > 0 ? " " lAfterletter : ""
 
-			proxyMark := StrLen(entry.proxy) > 0 ? " " Locale.Read("gen_proxy", lang) : ""
-
+			local proxyMark := StrLen(entry["proxy"]) > 0 ? " " Locale.Read("gen_proxy", lang) : ""
 
 			if isAlt {
-				entry.titles[langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
+				entry["titles"][langCode] := Util.StrUpper(Locale.Read(pfx "type_" lType, lang), 1) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
 			} else {
 				localedCase := lCase != "neutral" ? Locale.VarSelect(Locale.Read(pfx "case_" lCase, lang), lVariant) " " : ""
 
-				entry.titles[langCode] := (
+				entry["titles"][langCode] := (
 					Locale.VarSelect(Locale.Read(pfx "prefix_" lScript (!isGermanic ? scriptAdditive : ""), lang), lVariant)
 					" "
 					localedCase Locale.Read(pfx "type_" lType, lang)
@@ -444,8 +442,8 @@ Class Locale {
 
 		if lPostfixes.Length > 0 {
 			for _, langCode in langCodes {
-				lang := InStr(langCode, "_alt") ? RegExReplace(langCode, "_alt") : langCode
-				postfixText := ""
+				local lang := InStr(langCode, "_alt") ? RegExReplace(langCode, "_alt") : langCode
+				local postfixText := ""
 
 				postfixText .= " {conjuction}" nbsp Locale.Read(pfx "postfix_" lPostfixes[1], lang)
 
@@ -455,7 +453,7 @@ Class Locale {
 				if lPostfixes.Length > 1
 					postfixText .= " " Locale.Read(pfx "postfix_and", lang) nbsp Locale.Read(pfx "postfix_" lPostfixes[lPostfixes.Length], lang)
 
-				entry.titles[langCode] .= postfixText
+				entry["titles"][langCode] .= postfixText
 
 				if !InStr(langCode, "_alt") {
 					tags[langCode] .= postfixText
@@ -490,30 +488,29 @@ Class Locale {
 		)
 
 		for _, langCode in langCodes {
-			entry.titles[langCode] := this.LocaleRules(entry.titles[langCode], langCode)
+			entry["titles"][langCode] := this.LocaleRules(entry["titles"][langCode], langCode)
 			if !InStr(langCode, "_alt") {
 				tags[langCode] := this.LocaleRules(tags[langCode], langCode)
 			}
 		}
 
-
-		hasTags := entry.tags.Length > 0
-		tagIndex := 0
+		local hasTags := entry["tags"].Length > 0
+		local tagIndex := 0
 		for tag in tags {
 			tagIndex++
-			entry.tags.InsertAt(tagIndex, tags[tag])
+			entry["tags"].InsertAt(tagIndex, tags[tag])
 		}
 
-		additionalTags := []
-		if entry.symbol.tagAdditive.Length > 0 && isGermanic {
-			for tagAdd in entry.symbol.tagAdditive {
+		local additionalTags := []
+		if entry["symbol"]["tagAdditive"].Length > 0 && isGermanic {
+			for tagAdd in entry["symbol"]["tagAdditive"] {
 				for lang in ["en-US", "ru-RU"] {
-					local curScript := (tagAdd.HasOwnProp("script") ? tagAdd.script : lScript)
-					local curType := (tagAdd.HasOwnProp("type") ? tagAdd.type : lType)
+					local curScript := (tagAdd.Has("script") ? tagAdd.script : lScript)
+					local curType := (tagAdd.Has("type") ? tagAdd.type : lType)
 					local aLScript := Locale.VarSelect(Locale.Read(pfx "tagScript_" curScript, lang), lVariant)
-					local aScriptAdditive := Locale.VarSelect(Locale.Read(pfx "tagScript_" curScript "_" tagAdd.scriptAdditive, lang), lVariant)
+					local aScriptAdditive := Locale.VarSelect(Locale.Read(pfx "tagScript_" curScript "_" tagAdd["scriptAdditive"], lang), lVariant)
 					local aLType := Locale.VarSelect(Locale.Read(pfx "type_" curType, lang), lVariant)
-					local lBuildedName := StrLower(curScript "_n_" curType "_" letter "_" tagAdd.scriptAdditive "_" tagAdd.letter) "_LTL"
+					local lBuildedName := StrLower(curScript "_n_" curType "_" letter "_" tagAdd["scriptAdditive"] "_" tagAdd["letter"]) "_LTL"
 
 					additionalTags.Push(
 						aLScript
@@ -528,16 +525,16 @@ Class Locale {
 
 		if additionalTags.Length > 0 {
 			for tag in additionalTags {
-				entry.tags.Push(tag)
+				entry["tags"].Push(tag)
 			}
 		}
 
-		if entry.tags.Length > 0 {
+		if entry["tags"].Length > 0 {
 			sorting := Map()
-			for i, tag in entry.tags
+			for i, tag in entry["tags"]
 				sorting.Set(tag, i)
 
-			entry.tags := sorting.Keys()
+			entry["tags"] := sorting.Keys()
 		}
 
 		return entry

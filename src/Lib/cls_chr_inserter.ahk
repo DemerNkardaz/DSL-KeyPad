@@ -74,8 +74,8 @@ Class CharacterInserter {
 	static Altcode(charCode) {
 		local hasZero := charCode ~= "^0"
 
-		if !(StrLen(charCode) > 1 && hasZero) && this.HexToDec(charCode) < 32 && AltCodesLibrary.HasValue(charCode, &i)
-			return AltCodesLibrary[i + 1]
+		if !(StrLen(charCode) > 1 && hasZero) && this.HexToDec(charCode) < 32 && characters.supplementaryData["Alt Codes"].HasValue(charCode, &i)
+			return characters.supplementaryData["Alt Codes"][i + 1]
 
 		Keyboard.CheckLayout(&lang)
 

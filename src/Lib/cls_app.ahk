@@ -14,6 +14,7 @@ Class App {
 
 	static paths := {
 		dir: A_ScriptDir,
+		data: A_ScriptDir "\Data",
 		lib: A_ScriptDir "\Lib",
 		pwsh: A_ScriptDir "\Lib\powershell",
 		loc: A_ScriptDir "\Locale",
@@ -245,7 +246,7 @@ Class App {
 			App.tray.SetIcon(labels.unicode, Shell32, 225)
 		App.tray.Add(labels.altcode, (*) => CharacterInserter("Altcode").InputDialog(False)),
 			App.tray.SetIcon(labels.altcode, Shell32, 313)
-		App.tray.Add(labels.forge, (*) => ChrCrafter()), App.tray.SetIcon(labels.forge, ImageRes, 151)
+		App.tray.Add(labels.forge, (*) => globalInstances.crafter.Start("InputBox")), App.tray.SetIcon(labels.forge, ImageRes, 151)
 		App.tray.Add(labels.folder, (*) => Run(A_ScriptDir)), App.tray.SetIcon(labels.folder, ImageRes, 180)
 		App.tray.Add()
 		App.tray.Add(labels.reload, (*) => Reload()), App.tray.SetIcon(labels.reload, ImageRes, 229)

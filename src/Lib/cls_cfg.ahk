@@ -686,47 +686,7 @@ Class Options {
 	}
 
 	static PostSwitchLanguage() {
-		pastOptionsTitle := Cfg.optionsTitle
-		pastRecipesTitle := Cfg.EditorSubGUIs.recipesTitle
-		pastRecipesEditorTitle := MyRecipes.editorTitle
-
-
-		Cfg.optionsTitle := App.Title("+status+version") " — " Locale.Read("gui_options")
-		Cfg.EditorSubGUIs.recipesTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes")
-
-		MyRecipes.editorTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes_create")
-
-		if IsGuiOpen(pastOptionsTitle) {
-			Cfg.EditorGUI.Title := Cfg.optionsTitle
-			Cfg.EditorGUI["GroupUpdates"].Text := Locale.Read("gui_options_updates")
-
-			Cfg.EditorGUI["LanguageLabel"].Text := Locale.Read("gui_options_language")
-			Cfg.EditorGUI["LayoutLabel"].Text := Locale.Read("gui_options_layout")
-			Cfg.EditorGUI["BindingsLabel"].Text := Locale.Read("gui_options_bindings")
-			Cfg.EditorGUI["Autoload"].Text := Locale.Read("autoload_add")
-
-			try {
-				Cfg.EditorGUI["UpdateAbsent"].Text := Locale.Read("gui_options_update_absent")
-			}
-		}
-
-		if IsGuiOpen(pastRecipesTitle) {
-			Cfg.EditorSubGUIs.recipes.Title := Cfg.EditorSubGUIs.recipesTitle
-		}
-
-		if IsGuiOpen(pastRecipesEditorTitle) {
-			MyRecipes.EditorGUI.Title := MyRecipes.editorTitle
-			MyRecipes.EditorGUI["SectionLabel"].Text := Locale.Read("gui_recipes_create_section")
-			MyRecipes.EditorGUI["NameLabel"].Text := Locale.Read("gui_recipes_create_name")
-			MyRecipes.EditorGUI["RecipeLabel"].Text := Locale.Read("gui_recipes_create_recipe")
-			MyRecipes.EditorGUI["ResultLabel"].Text := Locale.Read("gui_recipes_create_result")
-			MyRecipes.EditorGUI["SaveButton"].Text := Locale.Read("gui_save")
-			MyRecipes.EditorGUI["CancelButton"].Text := Locale.Read("gui_cancel")
-		}
-
 		App.SetTrayItems()
-		IsGuiOpen(Panel.panelTitle) && Panel.Panel(True)
-		Panel.SetPanelData()
 	}
 
 	static SwitchVirualLayout(CB, category) {

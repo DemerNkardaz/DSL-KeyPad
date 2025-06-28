@@ -22,13 +22,6 @@ Map.Prototype.DefineProp("GetRef", { Call: _MapGetRef })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
 
-ClassClear(this) {
-	for k, v in this.OwnProps() {
-		this.%k% := unset
-	}
-	return
-}
-
 ObjGet(this, j) {
 	local i := 0
 	for k, v in this.OwnProps() {

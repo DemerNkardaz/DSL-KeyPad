@@ -1746,15 +1746,15 @@ Class GlyphsPanel {
 		entries := Map()
 		output := []
 
-		for entryName, value in ChrLib.entries.OwnProps()
-			if ObjOwnPropCount(value.alterations) > 0
-				entries.Set(value.index, entryName)
+		for entryName, entry in ChrLib.entries.OwnProps()
+			if ObjOwnPropCount(entry["alterations"]) > 0
+				entries.Set(entry["index"], entryName)
 
 		for index, entryName in entries {
-			unicode := Util.UnicodeToChar(ChrLib.entries.%entryName%.unicode)
+			unicode := Util.UnicodeToChar(ChrLib.entries.%entryName%["unicode"])
 			alts := ""
 
-			for key, alt in ChrLib.entries.%entryName%.alterations.OwnProps()
+			for key, alt in ChrLib.entries.%entryName%["alterations"]
 				if !(key ~= "i)HTML$")
 					alts .= (key = "combining" ? DottedCircle : "") Util.UnicodeToChar(alt) " "
 
@@ -1958,7 +1958,7 @@ Class GlyphsPanel {
 			}
 		}
 
-		for key, value in entry.alterations.OwnProps()
+		for key, value in entry["alterations"]
 			if !(key ~= "i)HTML$")
 				entryAlts.%key% := value
 
@@ -2008,8 +2008,8 @@ Class BindHandler {
 					if rawMatch[1] ~= "\\n" || output ~= "[`n`r]"
 						lineBreaks := True
 				} else {
-					alt := !ChrCrafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Scripter.selectedMode.Get("Glyph Variations") : "None"
-					inputMode := !ChrCrafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Auxiliary.inputMode : "Unicode"
+					alt := !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Scripter.selectedMode.Get("Glyph Variations") : "None"
+					inputMode := !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Auxiliary.inputMode : "Unicode"
 					repeatCount := 1
 
 					if RegExMatch(character, "×(\d+)$", &repeatMatch) {
@@ -2025,7 +2025,7 @@ Class BindHandler {
 					if ChrLib.entries.HasOwnProp(character) {
 						output .= Util.StrRepeat(ChrLib.Get(character, True, inputMode, alt), repeatCount)
 
-						chrSendOption := ChrLib.GetValue(character, "options").send
+						chrSendOption := ChrLib.GetValue(character, "options")["send"]
 
 						if StrLen(chrSendOption) > 0
 							inputType := chrSendOption

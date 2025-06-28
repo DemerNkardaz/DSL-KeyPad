@@ -577,37 +577,37 @@ Class Panel {
 					"Math Spaces"
 				], this.externalGroups.scripts),
 				groupKey: MapMerge(Map(
-					"Hellenic", Locale.Read("symbol_hellenic"),
-					"Germanic Runic Elder Futhark", Locale.Read("symbol_futhark"),
-					"Germanic Runic Futhork", Locale.Read("symbol_futhork"),
-					"Germanic Runic Younger Futhark", Locale.Read("symbol_futhark_younger"),
-					"Germanic Runic Almanac", Locale.Read("symbol_futhark_almanac"),
-					"Germanic Runic Later Younger Futhark", Locale.Read("symbol_futhark_younger_later"),
-					"Germanic Runic Medieval", Locale.Read("symbol_medieval_runes"),
-					"Runic Punctuation", Locale.Read("symbol_runic_punctuation"),
-					"Glagolitic", Locale.Read("symbol_glagolitic"),
-					"Old Turkic", Locale.Read("symbol_turkic"),
-					"Old Turkic Orkhon", Locale.Read("symbol_turkic_orkhon"),
-					"Old Turkic Yenisei", Locale.Read("symbol_turkic_yenisei"),
-					"Old Permic", Locale.Read("symbol_permic"),
-					"Old Hungarian", Locale.Read("symbol_hungarian"),
-					"Gothic", Locale.Read("symbol_gothic"),
-					"Old Italic", Locale.Read("symbol_old_italic"),
-					"Phoenician", Locale.Read("symbol_phoenician"),
-					"South Arabian", Locale.Read("symbol_ancient_south_arabian"),
-					"North Arabian", Locale.Read("symbol_ancient_north_arabian"),
-					"Carian", Locale.Read("symbol_carian"),
-					"Lycian", Locale.Read("symbol_lycian"),
-					"Lydian", Locale.Read("symbol_lydian"),
-					"Sidetic", Locale.Read("symbol_sidetic"),
-					"Cypriot Syllabary", Locale.Read("symbol_cypriot_syllabary"),
-					"Tifinagh", Locale.Read("symbol_tifinagh"),
-					"Ugaritic", Locale.Read("symbol_ugaritic"),
-					"Old Persian", Locale.Read("symbol_old_persian"),
-					"IPA", Locale.Read("symbol_ipa"),
-					"Deseret", Locale.Read("symbol_deseret"),
-					"Shavian", Locale.Read("symbol_shavian"),
-					"Mathematical", Locale.Read("symbol_maths")
+					"Hellenic", Locale.Read.Bind(Locale, "symbol_hellenic"),
+					"Germanic Runic Elder Futhark", Locale.Read.Bind(Locale, "symbol_futhark"),
+					"Germanic Runic Futhork", Locale.Read.Bind(Locale, "symbol_futhork"),
+					"Germanic Runic Younger Futhark", Locale.Read.Bind(Locale, "symbol_futhark_younger"),
+					"Germanic Runic Almanac", Locale.Read.Bind(Locale, "symbol_futhark_almanac"),
+					"Germanic Runic Later Younger Futhark", Locale.Read.Bind(Locale, "symbol_futhark_younger_later"),
+					"Germanic Runic Medieval", Locale.Read.Bind(Locale, "symbol_medieval_runes"),
+					"Runic Punctuation", Locale.Read.Bind(Locale, "symbol_runic_punctuation"),
+					"Glagolitic", Locale.Read.Bind(Locale, "symbol_glagolitic"),
+					"Old Turkic", Locale.Read.Bind(Locale, "symbol_turkic"),
+					"Old Turkic Orkhon", Locale.Read.Bind(Locale, "symbol_turkic_orkhon"),
+					"Old Turkic Yenisei", Locale.Read.Bind(Locale, "symbol_turkic_yenisei"),
+					"Old Permic", Locale.Read.Bind(Locale, "symbol_permic"),
+					"Old Hungarian", Locale.Read.Bind(Locale, "symbol_hungarian"),
+					"Gothic", Locale.Read.Bind(Locale, "symbol_gothic"),
+					"Old Italic", Locale.Read.Bind(Locale, "symbol_old_italic"),
+					"Phoenician", Locale.Read.Bind(Locale, "symbol_phoenician"),
+					"South Arabian", Locale.Read.Bind(Locale, "symbol_ancient_south_arabian"),
+					"North Arabian", Locale.Read.Bind(Locale, "symbol_ancient_north_arabian"),
+					"Carian", Locale.Read.Bind(Locale, "symbol_carian"),
+					"Lycian", Locale.Read.Bind(Locale, "symbol_lycian"),
+					"Lydian", Locale.Read.Bind(Locale, "symbol_lydian"),
+					"Sidetic", Locale.Read.Bind(Locale, "symbol_sidetic"),
+					"Cypriot Syllabary", Locale.Read.Bind(Locale, "symbol_cypriot_syllabary"),
+					"Tifinagh", Locale.Read.Bind(Locale, "symbol_tifinagh"),
+					"Ugaritic", Locale.Read.Bind(Locale, "symbol_ugaritic"),
+					"Old Persian", Locale.Read.Bind(Locale, "symbol_old_persian"),
+					"IPA", Locale.Read.Bind(Locale, "symbol_ipa"),
+					"Deseret", Locale.Read.Bind(Locale, "symbol_deseret"),
+					"Shavian", Locale.Read.Bind(Locale, "symbol_shavian"),
+					"Mathematical", Locale.Read.Bind(Locale, "symbol_maths")
 				), this.externalGroupKeys.scripts),
 			}),
 			TELEXVNI: this.LV_InsertGroup({
@@ -618,9 +618,9 @@ Class Panel {
 					"TELEX/VNI Chinese Romanization", "",
 				], this.externalGroups.TELEXVNI),
 				groupKey: MapMerge(Map(
-					"TELEX/VNI Vietnamese", Locale.Read("symbol_vietnamese"),
-					"TELEX/VNI Jorai", Locale.Read("symbol_jorai"),
-					"TELEX/VNI Chinese Romanization", Locale.Read("symbol_chinese_romanization"),
+					"TELEX/VNI Vietnamese", Locale.Read.Bind(Locale, "symbol_vietnamese"),
+					"TELEX/VNI Jorai", Locale.Read.Bind(Locale, "symbol_jorai"),
+					"TELEX/VNI Chinese Romanization", Locale.Read.Bind(Locale, "symbol_chinese_romanization"),
 				), this.externalGroupKeys.fastKeys),
 				subType: Map(
 					"TELEX/VNI Vietnamese", "vietnamese",
@@ -1070,14 +1070,14 @@ Class Panel {
 			if StrLen(LV.GetText(rowNumber, 1)) < 1 {
 				return
 			} else {
-				titleCol := LV.GetText(rowNumber, 1)
-				entryCol := LV.GetText(rowNumber, 5)
-				value := ChrLib.GetEntry(entryCol)
-				unicode := value.unicode
-				unicodeBlock := value.unicodeBlock
-				sequence := value.sequence
-				altsCount := ObjOwnPropCount(value.alterations)
-				hasLegend := value.options.legend != ""
+				local titleCol := LV.GetText(rowNumber, 1)
+				local entryCol := LV.GetText(rowNumber, 5)
+				local entry := ChrLib.GetEntry(entryCol)
+				local unicode := entry["unicode"]
+				local unicodeBlock := entry["unicodeBlock"]
+				local sequence := entry["sequence"]
+				local altsCount := ObjOwnPropCount(entry["alterations"])
+				local hasLegend := entry["options"]["legend"] != ""
 
 				if StrLen(unicode) > 0 {
 					star := " " Chr(0x2605)
@@ -1133,11 +1133,11 @@ Class Panel {
 		if StrLen(LV.GetText(rowNumber, 4)) < 1 {
 			return
 		} else {
-			titleCol := LV.GetText(rowNumber, 1)
-			entryCol := LV.GetText(rowNumber, 5)
-			value := ChrLib.GetEntry(entryCol)
-			unicode := value.unicode
-			sequence := value.sequence
+			local titleCol := LV.GetText(rowNumber, 1)
+			local entryCol := LV.GetText(rowNumber, 5)
+			local entry := ChrLib.GetEntry(entryCol)
+			local unicode := entry["unicode"]
+			local sequence := entry["sequence"]
 
 			if StrLen(unicode) > 0 {
 				isCtrlDown := GetKeyState("LControl")
@@ -1149,7 +1149,7 @@ Class Panel {
 
 					SoundPlay("C:\Windows\Media\Speech On.wav")
 				} else if isShiftDown {
-					if (unicode = Util.ExtractHex(value.unicode)) {
+					if (unicode = Util.ExtractHex(entry["unicode"])) {
 						SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
 						if !FavoriteChars.CheckVar(entryCol) && !InStr(titleCol, star) {
 							FavoriteChars.Add(entryCol)
@@ -1171,30 +1171,6 @@ Class Panel {
 		for each in ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI", "AllSymbols", "Favorites"]
 			try
 				this.LV_SetRandomPreview(each)
-	}
-
-	static LV_SetRandomPreview(prefix) {
-		panelGUI := this.PanelGUI
-		LV := panelGUI[prefix "LV"]
-		total := LV.GetCount()
-		if total = 0
-			return
-
-		loopCount := 0
-		maxTries := 100
-		while True {
-			rand := Random(1, total)
-			col1 := LV.GetText(rand, 1)
-			col4 := LV.GetText(rand, 4)
-			if (col1 != "" && col4 != "")
-				break
-			loopCount++
-			if loopCount > maxTries
-				return
-		}
-
-		LV.Modify(rand, "+Select +Focus")
-		this.LV_SetCharacterPreview(LV, rand, { prefix: prefix })
 	}
 
 	static LV_SetCharacterPreview(LV, rowValue, options) {
@@ -1243,18 +1219,18 @@ Class Panel {
 		} else {
 			languageCode := Language.Get()
 			value := ChrLib.GetEntry(characterEntry)
-			referenced := value.reference is Object || value.reference != ""
+			referenced := value["reference"] is Object || value["reference"] != ""
 
-			getChar := Util.UnicodeToChar(value.sequence.Length > 0 ? value.sequence : value.unicode)
+			getChar := Util.UnicodeToChar(value["sequence"].Length > 0 ? value["sequence"] : value["unicode"])
 			htmlCode := Util.StrToHTML(getChar)
-			previewSymbol := StrLen(value.symbol.alt) > 0 ? value.symbol.alt : value.symbol.set
+			previewSymbol := StrLen(value["symbol"]["alt"]) > 0 ? value["symbol"]["alt"] : value["symbol"]["set"]
 			entryString := Locale.Read("entry") ": [" characterEntry "]"
 			characterTitle := ""
 
 			skipCombine := True
 			combinedTitle := ""
 
-			if value.options.localeCombineAnd {
+			if value["options"]["localeCombineAnd"] {
 				split := StrSplit(characterEntry, "_and_")
 				if split.Length > 1 {
 					for i, each in split {
@@ -1267,7 +1243,7 @@ Class Panel {
 			}
 
 			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout" &&
-				(value.options.layoutTitles) &&
+				(value["options"]["layoutTitles"]) &&
 				(Locale.Read(characterEntry "_layout_alt", , True, &titleText) ||
 					Locale.Read(characterEntry "_layout", , True, &titleText)) {
 				characterTitle := titleText
@@ -1280,67 +1256,66 @@ Class Panel {
 			} else if Locale.Read(characterEntry, , True, &titleText) {
 				characterTitle := titleText
 
-			} else if value.titles.Count > 0 && value.titles.Has(languageCode) {
-				characterTitle := value.titles[languageCode (value.titles.Has(languageCode "_alt") ? "_alt" : "")]
+			} else if value["titles"].Count > 0 && value["titles"].Has(languageCode) {
+				characterTitle := value["titles"][languageCode (value["titles"].Has(languageCode "_alt") ? "_alt" : "")]
 
 			} else {
 				characterTitle := Locale.Read(characterEntry)
 			}
 
 			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout"
-				&& value.options.showOnAlt != "" && value.alterations.HasOwnProp(value.options.showOnAlt) {
-				previewSymbol := Util.UnicodeToChar(value.alterations.%value.options.showOnAlt%)
-				entryString .= " :: " value.options.showOnAlt
+				&& value["options"]["showOnAlt"] != "" && value["alterations"].Has(value["options"]["showOnAlt"]) {
+				previewSymbol := Util.UnicodeToChar(value["alterations"][value["options"]["showOnAlt"]])
+				entryString .= " :: " value["options"]["showOnAlt"]
 			}
 
 
-			local altCodePages := value.altCodePages.Length > 0 ? value.altCodePages.ToString() : ""
+			local altCodePages := value["altCodePages"].Length > 0 ? value["altCodePages"].ToString() : ""
 
 			this.PanelGUI[options.prefix "Title"].Text := characterTitle
 			this.PanelGUI[options.prefix "Symbol"].Text := previewSymbol
-			this.PanelGUI[options.prefix "Unicode"].Text := value.sequence.Length > 0 ? value.sequence.ToString(" ") : value.unicode
-			this.PanelGUI[options.prefix "HTML"].Text := StrLen(value.entity) > 0 ? [htmlCode, value.entity].ToString(" ") : htmlCode
-			this.PanelGUI[options.prefix "Alt"].Text := StrLen(value.altCode) > 0 ? value.altCode : "N/A"
-			this.PanelGUI[options.prefix "AltPages"].Text := value.altCodePages.Length > 0 ? Locale.ReadInject("symbol_altcode_pages", [Util.StrCutToComma(altCodePages, 24)]) : ""
-			this.PanelGUI[options.prefix "LaTeX"].Text := value.LaTeX.Length > 0 ? value.LaTeX.ToString(Chr(0x2002)) : "N/A"
-			this.PanelGUI[options.prefix "LaTeXPackage"].Text := StrLen(value.LaTeXPackage) > 0 ? Chrs(0x1F4E6, 0x2005) value.LaTeXPackage : ""
+			this.PanelGUI[options.prefix "Unicode"].Text := value["sequence"].Length > 0 ? value["sequence"].ToString(" ") : value["unicode"]
+			this.PanelGUI[options.prefix "HTML"].Text := StrLen(value["entity"]) > 0 ? [htmlCode, value["entity"]].ToString(" ") : htmlCode
+			this.PanelGUI[options.prefix "Alt"].Text := StrLen(value["altCode"]) > 0 ? value["altCode"] : "N/A"
+			this.PanelGUI[options.prefix "AltPages"].Text := value["altCodePages"].Length > 0 ? Locale.ReadInject("symbol_altcode_pages", [Util.StrCutToComma(altCodePages, 24)]) : ""
+			this.PanelGUI[options.prefix "LaTeX"].Text := value["LaTeX"].Length > 0 ? value["LaTeX"].ToString(Chr(0x2002)) : "N/A"
+			this.PanelGUI[options.prefix "LaTeXPackage"].Text := StrLen(value["LaTeXPackage"]) > 0 ? Chrs(0x1F4E6, 0x2005) value["LaTeXPackage"] : ""
 
 
 			this.PanelGUI[options.prefix "Title"].SetFont((StrLen(this.PanelGUI[options.prefix "Title"].Text) > 30) ? "s12" : "s" UISets.infoFonts.titleSize)
 
-			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(value.symbol.font) > 0 ? value.symbol.font : previewFont)
+			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(value["symbol"]["font"]) > 0 ? value["symbol"]["font"] : previewFont)
 			this.PanelGUI[options.prefix "Symbol"].SetFont("s" UISets.infoFonts.previewSize " norm cDefault")
-			this.PanelGUI[options.prefix "Symbol"].SetFont(StrLen(value.symbol.customs) > 0 ? value.symbol.customs : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" UISets.infoFonts.previewSmaller " norm cDefault" : "s" UISets.infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont(StrLen(value["symbol"]["customs"]) > 0 ? value["symbol"]["customs"] : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" UISets.infoFonts.previewSmaller " norm cDefault" : "s" UISets.infoFonts.previewSize " norm cDefault")
 
 
 			this.PanelGUI[options.prefix "Unicode"].SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 20) ? "s9" : "s12")
 			this.PanelGUI[options.prefix "HTML"].SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 20) ? "s9" : "s12")
 			this.PanelGUI[options.prefix "LaTeX"].SetFont((StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 20) ? "s9" : "s12")
 
-			tagsString := value.tags.Length > 0 ? Locale.Read("tags") ": " value.tags.ToString() : ""
+			tagsString := value["tags"].Length > 0 ? Locale.Read("tags") ": " value["tags"].ToString() : ""
 
 			this.PanelGUI[options.prefix "Tags"].Text := entryString Chr(0x2002) tagsString
 
 
 			groupTitle := ""
-			isDiacritic := RegExMatch(value.symbol.set, "^" DottedCircle "\S")
+			isDiacritic := RegExMatch(value["symbol"]["set"], "^" DottedCircle "\S")
 
 			AlterationsValidator := Map(
-				"IsModifier", [value.alterations.HasOwnProp("modifier"), 0x02B0],
-				"IsUncombined", [value.alterations.HasOwnProp("uncombined"), "(h)"],
-				"IsSubscript", [value.alterations.HasOwnProp("subscript"), 0x2095],
-				"IsCombining", [isDiacritic || value.alterations.HasOwnProp("combining"), 0x036A],
-				"IsItalic", [value.alterations.HasOwnProp("italic"), 0x210E],
-				"IsItalicBold", [value.alterations.HasOwnProp("italicBold"), 0x1D489],
-				"IsBold", [value.alterations.HasOwnProp("bold"), 0x1D421],
-				"IsFraktur", [value.alterations.HasOwnProp("fraktur"), 0x1D525],
-				"IsFrakturBold", [value.alterations.HasOwnProp("frakturBold"), 0x1D58D],
-				"IsScript", [value.alterations.HasOwnProp("script"), 0x1D4BD],
-				"IsScriptBold", [value.alterations.HasOwnProp("scriptBold"), 0x1D4F1],
-				"IsDoubleStruck", [value.alterations.HasOwnProp("doubleStruck"), 0x1D559],
-				"IsDoubleStruckItalic", [value.alterations.HasOwnProp("doubleStruckItalic"), 0x2148],
-				"IsSmallCaps", [value.alterations.HasOwnProp("smallCapital"), 0x029C],
-				; "IsSmall", [value.alterations.HasOwnProp("small"), 0xFE57],
+				"IsModifier", [value["alterations"].Has("modifier"), 0x02B0],
+				"IsUncombined", [value["alterations"].Has("uncombined"), "(h)"],
+				"IsSubscript", [value["alterations"].Has("subscript"), 0x2095],
+				"IsCombining", [isDiacritic || value["alterations"].Has("combining"), 0x036A],
+				"IsItalic", [value["alterations"].Has("italic"), 0x210E],
+				"IsItalicBold", [value["alterations"].Has("italicBold"), 0x1D489],
+				"IsBold", [value["alterations"].Has("bold"), 0x1D421],
+				"IsFraktur", [value["alterations"].Has("fraktur"), 0x1D525],
+				"IsFrakturBold", [value["alterations"].Has("frakturBold"), 0x1D58D],
+				"IsScript", [value["alterations"].Has("script"), 0x1D4BD],
+				"IsScriptBold", [value["alterations"].Has("scriptBold"), 0x1D4F1],
+				"IsDoubleStruck", [value["alterations"].Has("doubleStruck"), 0x1D559],
+				"IsDoubleStruckItalic", [value["alterations"].Has("doubleStruckItalic"), 0x2148],
+				"IsSmallCaps", [value["alterations"].Has("smallCapital"), 0x029C],
 			)
 
 			for entry, value in AlterationsValidator {
@@ -1351,7 +1326,185 @@ Class Panel {
 			}
 
 			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read(referenced ? "entry_reference" : "character"))
-			this.PanelGUI[options.prefix "Alert"].Text := value.symbol.font != "" ? Chr(0x1D4D5) " " value.symbol.font : ""
+			this.PanelGUI[options.prefix "Alert"].Text := value["symbol"]["font"] != "" ? Chr(0x1D4D5) " " value["symbol"]["font"] : ""
+
+			this.PanelGUI[options.prefix "KeyPreview"].Text := characterKey
+			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := characterCombinationKey != "" ? characterCombinationKey : ""
+
+
+			keyPreviewLength := StrLen(StrReplace(this.PanelGUI[options.prefix "KeyPreview"].Text, Chr(0x25CC), ""))
+			KeyPreviewSetLength := StrLen(this.PanelGUI[options.prefix "KeyPreviewSet"].Text)
+
+
+			hMult := keyPreviewLength > 25 ? 2 : 1
+			this.PanelGUI[options.prefix "KeyPreview"].Move(, , , 24 * hMult)
+
+
+			this.PanelGUI[options.prefix "KeyPreview"].SetFont("s12")
+
+			this.PanelGUI[options.prefix "KeyPreviewSet"].SetFont((KeyPreviewSetLength > 5) ? "s10" : "s12")
+
+
+			this.PanelGUI[options.prefix "LegendButton"].Enabled := StrLen(value["options"]["legend"]) > 1 ? True : False
+			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := ObjOwnPropCount(value["alterations"]) > 0 ? True : False
+
+		}
+
+		if value["unicodeBlock"] != ""
+			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := value["unicodeBlock"]
+	}
+
+	static LV_SetCharacterPreview2(LV, rowValue, options) {
+		UISets := this.GetUISets()
+		entryName := LV.GetText(rowValue, 5)
+		characterKey := LV.GetText(rowValue, 2)
+		characterCombinationKey := LV.GetText(rowValue, 6)
+
+		try {
+			if options.prefix ~= "i)Keys"
+				characterKey := Util.ReplaceModifierKeys(ChrLib.GetValue(rowValue, "options")["fastKey"])
+			else if options.prefix = "Glago"
+				characterKey := Util.ReplaceModifierKeys(ChrLib.GetValue(rowValue, "options")["altLayoutKey"])
+		}
+
+		previewFont := Cfg.Get("Preview_Font_Family", "PanelGUI", Fonts.fontFaces["Default"].name)
+
+		if StrLen(entryName) < 1 {
+			this.PanelGUI[options.prefix "Title"].Text := "N/A"
+			this.PanelGUI[options.prefix "Symbol"].Text := DottedCircle
+			this.PanelGUI[options.prefix "Unicode"].Text := "0000"
+			this.PanelGUI[options.prefix "HTML"].Text := "&#x0000;"
+			this.PanelGUI[options.prefix "Alt"].Text := "N/A"
+			this.PanelGUI[options.prefix "AltPages"].Text := ""
+			this.PanelGUI[options.prefix "LaTeX"].Text := "N/A"
+			this.PanelGUI[options.prefix "LaTeXPackage"].Text := ""
+			this.PanelGUI[options.prefix "Tags"].Text := ""
+			this.PanelGUI[options.prefix "Group"].Text := Locale.Read("character")
+			this.PanelGUI[options.prefix "Alert"].Text := ""
+
+			this.PanelGUI[options.prefix "Title"].SetFont("s" UISets.infoFonts.titleSize " norm cDefault", previewFont)
+			this.PanelGUI[options.prefix "Symbol"].SetFont("s" UISets.infoFonts.previewSize " norm cDefault", previewFont)
+			this.PanelGUI[options.prefix "Unicode"].SetFont("s12")
+			this.PanelGUI[options.prefix "HTML"].SetFont("s12")
+			this.PanelGUI[options.prefix "LaTeX"].SetFont("s12")
+
+			this.PanelGUI[options.prefix "KeyPreview"].Text := "N/A"
+			this.PanelGUI[options.prefix "KeyPreview"].SetFont("s12")
+			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := ""
+			this.PanelGUI[options.prefix "LegendButton"].Enabled := False
+			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := False
+			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := ""
+
+			return
+		} else {
+			languageCode := Language.Get()
+			entry := ChrLib.GetEntry(entryName)
+			referenced := entry["reference"] is Object || entry["reference"] != ""
+
+			getChar := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
+			htmlCode := Util.StrToHTML(getChar)
+			previewSymbol := StrLen(entry["symbol"]["alt"]) > 0 ? entry["symbol"]["alt"] : entry["symbol"]["set"]
+			entryString := Locale.Read("entry") ": [" entryName "]"
+			characterTitle := ""
+
+			skipCombine := True
+			combinedTitle := ""
+
+			if entry["options"]["localeCombineAnd"] {
+				split := StrSplit(entryName, "_and_")
+				if split.Length > 1 {
+					for i, each in split {
+						if Locale.Read(each "_alt", , True, &titleText) || Locale.Read(each, , True, &titleText) {
+							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and") " " : "")
+							skipCombine := False
+						}
+					}
+				}
+			}
+
+			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout" &&
+				(entry["options"]["layoutTitles"]) &&
+				(Locale.Read(entryName "_layout_alt", , True, &titleText) ||
+					Locale.Read(entryName "_layout", , True, &titleText)) {
+				characterTitle := titleText
+			} else if !skipCombine {
+				characterTitle := combinedTitle
+
+			} else if Locale.Read(entryName "_alt", , True, &titleText) {
+				characterTitle := titleText
+
+			} else if Locale.Read(entryName, , True, &titleText) {
+				characterTitle := titleText
+
+			} else if entry["titles"].Count > 0 && entry["titles"].Has(languageCode) {
+				characterTitle := entry["titles"][languageCode (entry["titles"].Has(languageCode "_alt") ? "_alt" : "")]
+
+			} else {
+				characterTitle := Locale.Read(entryName)
+			}
+
+			if options.HasOwnProp("previewType") && options.previewType = "Alternative Layout"
+				&& entry["options"]["showOnAlt"] != "" && entry["alterations"].Has(entry["options"]["showOnAlt"]) {
+				previewSymbol := Util.UnicodeToChar(entry["alterations"][entry["options"]["showOnAlt"]])
+				entryString .= " :: " entry["options"]["showOnAlt"]
+			}
+
+			local altCodePages := entry["altCodePages"].Length > 0 ? entry["altCodePages"].ToString() : ""
+
+			this.PanelGUI[options.prefix "Title"].Text := characterTitle
+			this.PanelGUI[options.prefix "Symbol"].Text := previewSymbol
+			this.PanelGUI[options.prefix "Unicode"].Text := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
+			this.PanelGUI[options.prefix "HTML"].Text := StrLen(entry["entity"]) > 0 ? [htmlCode, entry.entity].ToString(" ") : htmlCode
+			this.PanelGUI[options.prefix "Alt"].Text := StrLen(entry["altCode"]) > 0 ? entry["altCode"] : "N/A"
+			this.PanelGUI[options.prefix "AltPages"].Text := entry["altCodePages"].Length > 0 ? Locale.ReadInject("symbol_altcode_pages", [Util.StrCutToComma(altCodePages, 24)]) : ""
+			this.PanelGUI[options.prefix "LaTeX"].Text := entry["LaTeX"].Length > 0 ? entry["LaTeX"].ToString(Chr(0x2002)) : "N/A"
+			this.PanelGUI[options.prefix "LaTeXPackage"].Text := StrLen(entry["LaTeXPackage"]) > 0 ? Chrs(0x1F4E6, 0x2005) entry["LaTeXPackage"] : ""
+
+
+			this.PanelGUI[options.prefix "Title"].SetFont((StrLen(this.PanelGUI[options.prefix "Title"].Text) > 30) ? "s12" : "s" UISets.infoFonts.titleSize)
+
+			this.PanelGUI[options.prefix "Symbol"].SetFont(, StrLen(entry["symbol"]["font"]) > 0 ? entry["symbol"]["font"] : previewFont)
+			this.PanelGUI[options.prefix "Symbol"].SetFont("s" UISets.infoFonts.previewSize " norm cDefault")
+			this.PanelGUI[options.prefix "Symbol"].SetFont(StrLen(entry["symbol"]["customs"]) > 0 ? entry["symbol"]["customs"] : StrLen(this.PanelGUI[options.prefix "Symbol"].Text) > 2 ? "s" UISets.infoFonts.previewSmaller " norm cDefault" : "s" UISets.infoFonts.previewSize " norm cDefault")
+
+
+			this.PanelGUI[options.prefix "Unicode"].SetFont((StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "Unicode"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "Unicode"].Text) > 20) ? "s9" : "s12")
+			this.PanelGUI[options.prefix "HTML"].SetFont((StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "HTML"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "HTML"].Text) > 20) ? "s9" : "s12")
+			this.PanelGUI[options.prefix "LaTeX"].SetFont((StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 15 && StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) < 21) ? "s10" : (StrLen(this.PanelGUI[options.prefix "LaTeX"].Text) > 20) ? "s9" : "s12")
+
+			tagsString := entry["tags"].Length > 0 ? Locale.Read("tags") ": " entry["tags"].ToString() : ""
+
+			this.PanelGUI[options.prefix "Tags"].Text := entryString Chr(0x2002) tagsString
+
+			groupTitle := ""
+			isDiacritic := RegExMatch(entry["symbol"]["set"], "^" DottedCircle "\S")
+
+			AlterationsValidator := Map(
+				"IsModifier", [entry["alterations"].Has("modifier"), 0x02B0],
+				"IsUncombined", [entry["alterations"].Has("uncombined"), "(h)"],
+				"IsSubscript", [entry["alterations"].Has("subscript"), 0x2095],
+				"IsCombining", [isDiacritic || entry["alterations"].Has("combining"), 0x036A],
+				"IsItalic", [entry["alterations"].Has("italic"), 0x210E],
+				"IsItalicBold", [entry["alterations"].Has("italicBold"), 0x1D489],
+				"IsBold", [entry["alterations"].Has("bold"), 0x1D421],
+				"IsFraktur", [entry["alterations"].Has("fraktur"), 0x1D525],
+				"IsFrakturBold", [entry["alterations"].Has("frakturBold"), 0x1D58D],
+				"IsScript", [entry["alterations"].Has("script"), 0x1D4BD],
+				"IsScriptBold", [entry["alterations"].Has("scriptBold"), 0x1D4F1],
+				"IsDoubleStruck", [entry["alterations"].Has("doubleStruck"), 0x1D559],
+				"IsDoubleStruckItalic", [entry["alterations"].Has("doubleStruckItalic"), 0x2148],
+				"IsSmallCaps", [entry["alterations"].Has("smallCapital"), 0x029C],
+			)
+
+			for entry, entry in AlterationsValidator {
+				if (entry[1]) {
+					groupTitle .= (["(h)", 0x029C].HasValue(entry[2]) ? (entry[2] is Number ? Chr(entry[2]) : entry[2])
+						: DottedCircle Chr(entry[2])) " "
+				}
+			}
+
+			this.PanelGUI[options.prefix "Group"].Text := groupTitle (isDiacritic ? Locale.Read("character_combining") : Locale.Read(referenced ? "entry_reference" : "character"))
+			this.PanelGUI[options.prefix "Alert"].Text := entry["symbol"]["font"] != "" ? Chr(0x1D4D5) " " entry["symbol"]["font"] : ""
 
 			this.PanelGUI[options.prefix "KeyPreview"].Text := characterKey
 			this.PanelGUI[options.prefix "KeyPreviewSet"].Text := characterCombinationKey != "" ? characterCombinationKey : ""
@@ -1371,13 +1524,13 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreviewSet"].SetFont((KeyPreviewSetLength > 5) ? "s10" : "s12")
 
 
-			this.PanelGUI[options.prefix "LegendButton"].Enabled := StrLen(value.options.legend) > 1 ? True : False
-			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := ObjOwnPropCount(value.alterations) > 0 ? True : False
+			this.PanelGUI[options.prefix "LegendButton"].Enabled := StrLen(entry["options"]["legend"]) > 1 ? True : False
+			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := ObjOwnPropCount(entry["alterations"]) > 0 ? True : False
 
 		}
 
-		if value.unicodeBlock != ""
-			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := value.unicodeBlock
+		if entry["unicodeBlock"] != ""
+			this.PanelGUI[options.prefix "UnicodeBlockLabel"].Text := entry["unicodeBlock"]
 	}
 
 	static PreviewButtonsBridge(guiObj, prefix, callType := "GlyphsPanel") {
@@ -1556,26 +1709,26 @@ Class Panel {
 					continue
 				} else {
 					for entryName in entryNamesArray {
-						value := ChrLib.GetEntry(entryName)
+						local entry := ChrLib.GetEntry(entryName)
 
 						isFavorite := FavoriteChars.CheckVar(entryName)
 
 						try {
-							if (value.options.hidden) ||
+							if (entry["options"]["hidden"]) ||
 								(options.hasOwnProp("blacklist") && options.blacklist.HasRegEx(entryName)) ||
-								(!value.groups.HasRegEx(options.group)) ||
-								(options.type = "Recipe" && (value.recipe.Length = 0)) ||
-								(options.type = "Fast Key" && (StrLen(value.options.fastKey) < 2)) ||
-								(options.type = "Fast Key Special" && (StrLen(value.options.specialKey) < 2)) ||
-								(options.type = "Alternative Layout" && (StrLen(value.options.altLayoutKey) < 2)) ||
-								(options.type = "TELEX/VNI" && (!value.options.HasOwnProp("telex__" options.subType) ||
-									value.options.HasOwnProp("telex__" options.subType) && value.options.telex__%options.subType% = "")
+								(!entry["groups"].HasRegEx(options.group)) ||
+								(options.type = "Recipe" && (entry["recipe"].Length = 0)) ||
+								(options.type = "Fast Key" && (StrLen(entry["options"]["fastKey"]) < 2)) ||
+								(options.type = "Fast Key Special" && (StrLen(entry["options"]["specialKey"]) < 2)) ||
+								(options.type = "Alternative Layout" && (StrLen(entry["options"]["altLayoutKey"]) < 2)) ||
+								(options.type = "TELEX/VNI" && (!entry["options"].Has("telex__" options.subType) ||
+									entry["options"].Has("telex__" options.subType) && entry["options"]["telex__" options.subType] = "")
 								)
 							{
 								continue
 							}
 						} catch {
-							throw "Trouble in paradise: " entryName " typeof groupKey" Type(options.groupKey) " recipe" Type(value.recipe) " fastKey" Type(value.options.fastKey) " specialKey" Type(value.options.specialKey) " altLayoutKey" Type(value.options.altLayoutKey)
+							throw "Trouble in paradise: " entryName " typeof groupKey" (options.hasOwnProp("groupKey") ? Type(options.groupKey) : "null") " recipe" Type(entry["recipe"]) " fastKey" Type(entry["options"]["fastKey"]) " specialKey" Type(entry["options"]["specialKey"]) " altLayoutKey" Type(entry["options"]["altLayoutKey"])
 						}
 
 						characterTitle := ""
@@ -1583,7 +1736,7 @@ Class Panel {
 						skipCombine := True
 						combinedTitle := ""
 
-						if value.options.localeCombineAnd {
+						if entry["options"]["localeCombineAnd"] {
 							split := StrSplit(entryName, "_and_")
 							if split.Length > 1 {
 								for i, each in split {
@@ -1595,7 +1748,7 @@ Class Panel {
 							}
 						}
 
-						if options.type = "Alternative Layout" && value.options.layoutTitles &&
+						if options.type = "Alternative Layout" && entry["options"]["layoutTitles"] &&
 							Locale.Read(entryName "_layout", , True, &titleText) {
 							characterTitle := titleText
 
@@ -1605,8 +1758,8 @@ Class Panel {
 						} else if Locale.Read(entryName, , True, &titleText) {
 							characterTitle := titleText
 
-						} else if value.titles.Count > 0 && value.titles.Has(languageCode) {
-							characterTitle := value.titles.Get(languageCode)
+						} else if entry["titles"].Count > 0 && entry["titles"].Has(languageCode) {
+							characterTitle := entry["titles"].Get(languageCode)
 
 						} else {
 							characterTitle := Locale.Read(entryName)
@@ -1616,28 +1769,28 @@ Class Panel {
 							characterTitle .= " " Chr(0x2605)
 						}
 
-						characterSymbol := value.symbol.set
+						characterSymbol := entry["symbol"]["set"]
 
 						characterBinding := ""
 
 						bindings := Map(
-							"Recipe", value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : value.recipe.Length > 0 ? value.recipe.ToString() : "",
-							"Alternative Layout", value.options.altLayoutKey,
-							"Special Combinations", value.options.altSpecialKey,
-							"Fast Key", value.options.fastKey,
-							"TELEX/VNI", options.type = "TELEX/VNI" && value.options.HasOwnProp("telex__" options.subType) ? value.options.telex__%options.subType% : "",
+							"Recipe", entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : entry["recipe"].Length > 0 ? entry["recipe"].ToString() : "",
+							"Alternative Layout", entry["options"]["altLayoutKey"],
+							"Special Combinations", entry["options"]["altSpecialKey"],
+							"Fast Key", entry["options"]["fastKey"],
+							"TELEX/VNI", options.type = "TELEX/VNI" && entry["options"].Has("telex__" options.subType) ? entry["options"]["telex__" options.subType] : "",
 						)
 
-						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : options.type = "" && value.recipeAlt.Length > 0 ? value.recipeAlt.ToString() : ""
+						characterBinding := bindings.Has(options.type) ? bindings.Get(options.type) : options.type = "" && entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : ""
 
 						reserveCombinationKey := ""
 
 						for cgroup, ckey in this.combinationKeyToGroupPairs {
-							reserveCombinationKey := value.groups.HasValue(cgroup) ? ckey : reserveCombinationKey
+							reserveCombinationKey := entry["groups"].HasValue(cgroup) ? ckey : reserveCombinationKey
 						}
 						reserveCombinationKey := (reserveCombinationKey != "" ? reserveCombinationKey " + " : "")
 
-						intermediateMap.Set(value.index,
+						intermediateMap.Set(entry["index"],
 							options.group = "Favorites"
 								? [
 									characterTitle,
@@ -1653,7 +1806,7 @@ Class Panel {
 								characterTitle,
 								characterBinding,
 								characterSymbol,
-								Util.ExtractHex(value.unicode),
+								Util.ExtractHex(entry["unicode"]),
 								entryName,
 								options.hasOwnProp("combinationKey") ? options.combinationKey : options.hasOwnProp("groupKey") ? options.groupKey : ""
 							])
@@ -1661,8 +1814,8 @@ Class Panel {
 				}
 			}
 
-			for cgroup, value in intermediateMap {
-				outputArray.Push(value)
+			for cgroup, entry in intermediateMap {
+				outputArray.Push(entry)
 			}
 
 			if options.HasOwnProp("target") {

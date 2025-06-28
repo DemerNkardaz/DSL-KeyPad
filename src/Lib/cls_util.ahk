@@ -194,10 +194,11 @@ Class Util {
 
 		return output
 	}
+
 	static CheckEntity(input, &entity := "") {
-		for j, entity in EntitiesLibrary {
+		for j, entity in characters.supplementaryData["HTML Named Entities"] {
 			if (Mod(j, 2) = 1 && entity = input) {
-				entity := EntitiesLibrary[j + 1]
+				entity := characters.supplementaryData["HTML Named Entities"][j + 1]
 				return entity
 			}
 		}
@@ -280,10 +281,10 @@ Class Util {
 			} else {
 				if InStr(mode, "Entities") {
 					local found := false
-					for j, entity in EntitiesLibrary {
+					for j, entity in characters.supplementaryData["HTML Named Entities"] {
 						if (Mod(j, 2) = 1 && entity = symbol) {
-							output .= EntitiesLibrary[j + 1]
-							entity .= EntitiesLibrary[j + 1]
+							output .= characters.supplementaryData["HTML Named Entities"][j + 1]
+							entity .= characters.supplementaryData["HTML Named Entities"][j + 1]
 							found := true
 							break
 						}

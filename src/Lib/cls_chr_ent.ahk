@@ -1,61 +1,61 @@
 Class ChrEntry {
 	data {
 		get {
-			return {
-				index: 0,
-				proxy: "",
-				modifiedKeys: [],
-				unicode: "",
-				unicodeBlock: "",
-				sequence: [],
-				result: [],
-				entity: "",
-				altCode: "",
-				altCodePages: [],
-				LaTeX: [],
-				LaTeXPackage: "",
-				titles: Map(),
-				tags: [],
-				groups: [],
-				alterations: {},
-				options: {
-					noCalc: False,
-					hidden: False,
-					suggestionsAtEnd: False,
-					secondName: False,
-					useLetterLocale: False,
-					layoutTitles: False,
-					referenceLocale: "",
-					useSelfPrefixesOnReferenceLocale: True,
-					localeCombineAnd: False,
-					legend: "",
-					altLayoutKey: "",
-					showOnAlt: "",
-					altSpecialKey: "",
-					fastKey: "",
-					specialKey: "",
-					numericValue: 0,
-					send: "",
-				},
-				recipe: [],
-				recipeAlt: [],
-				symbol: {
-					category: "",
-					letter: "",
-					afterLetter: "",
-					beforeLetter: "",
-					scriptAdditive: "",
-					tagAdditive: [],
-					set: "",
-					alt: "",
-					customs: "",
-					font: "",
-				},
-				data: { script: "", case: "", type: "", letter: "", endPart: "", postfixes: [] },
-				variant: "",
-				variantPos: 1,
-				isXCompose: False,
-			}
+			return Map(
+				"index", 0,
+				"proxy", "",
+				"modifiedKeys", [],
+				"unicode", "",
+				"unicodeBlock", "",
+				"sequence", [],
+				"result", [],
+				"entity", "",
+				"altCode", "",
+				"altCodePages", [],
+				"LaTeX", [],
+				"LaTeXPackage", "",
+				"titles", Map(),
+				"tags", [],
+				"groups", [],
+				"alterations", Map(),
+				"options", Map(
+					"noCalc", False,
+					"hidden", False,
+					"suggestionsAtEnd", False,
+					"secondName", False,
+					"useLetterLocale", False,
+					"layoutTitles", False,
+					"referenceLocale", "",
+					"useSelfPrefixesOnReferenceLocale", True,
+					"localeCombineAnd", False,
+					"legend", "",
+					"altLayoutKey", "",
+					"showOnAlt", "",
+					"altSpecialKey", "",
+					"fastKey", "",
+					"specialKey", "",
+					"numericValue", 0,
+					"send", "",
+				),
+				"recipe", [],
+				"recipeAlt", [],
+				"symbol", Map(
+					"category", "",
+					"letter", "",
+					"afterLetter", "",
+					"beforeLetter", "",
+					"scriptAdditive", "",
+					"tagAdditive", [],
+					"set", "",
+					"alt", "",
+					"customs", "",
+					"font", "",
+				),
+				"data", Map("script", "", "case", "", "type", "", "letter", "", "endPart", "", "postfixes", []),
+				"variant", "",
+				"variantPos", 1,
+				"isXCompose", False,
+			)
 		}
 	}
 
@@ -63,44 +63,46 @@ Class ChrEntry {
 
 	}
 
-	Get(attributes := {}) {
+	Get(attributes := Map()) {
 		local root := this.data
 
-		if !attributes.HasOwnProp("modifiedKeys") || attributes.modifiedKeys.Length = 0
-			attributes.modifiedKeys := attributes.ObjKeys()
+		if !attributes.Has("modifiedKeys") || attributes["modifiedKeys"].Length = 0
+			attributes["modifiedKeys"] := attributes.Keys()
 
-		if !attributes.HasOwnProp("reference")
-			attributes.reference := ""
+		if !attributes.Has("reference")
+			attributes["reference"] := ""
 
 		attributes := this.Proxying(&root, &attributes)
 
-
-		for key, value in attributes.OwnProps() {
-			if value is Array {
-				root.%key% := []
-				root.%key% := value.Clone()
-			} else if value is Map {
-				root.%key% := value.Clone()
-			} else if value is Object {
-				if !root.HasOwnProp(key)
-					root.%key% := {}
-				for subKey, subValue in value.OwnProps() {
-					root.%key%.%subKey% := subValue
+		for attribKey, attribValue in attributes {
+			if attribValue is Array {
+				root[attribKey] := []
+				root[attribKey] := attribValue.Clone()
+			} else if attribValue is Map {
+				if !root.Has(attribKey)
+					root[attribKey] := Map()
+				for childKey, childValue in attribValue
+					root[attribKey].Set(childKey, childValue)
+			} else if attribValue is Object {
+				if !root.Has(attribKey)
+					root[attribKey] := {}
+				for childKey, childValue in attribValue.OwnProps() {
+					root[attribKey].%childKey% := childValue
 				}
 			} else {
-				root.%key% := value
+				root[attribKey] := attribValue
 			}
 		}
 
-		if StrLen(root.proxy) > 0
-			root.options.noCalc := True
+		if StrLen(root["proxy"]) > 0
+			root["options"]["noCalc"] := True
 
 		return root
 	}
 
 	Proxying(&root, &attributes) {
-		if attributes.HasOwnProp("proxy") && StrLen(attributes.proxy) > 0 {
-			local proxyName := attributes.proxy
+		if attributes.Has("proxy") && StrLen(attributes["proxy"]) > 0 {
+			local proxyName := attributes["proxy"]
 			local proxyEntry := ChrLib.GetEntry(proxyName)
 
 			if !proxyEntry
@@ -109,36 +111,38 @@ Class ChrEntry {
 
 			local blacklist := ["groups", "options", "recipe", "recipeAlt", "symbol", "data", "titles", "tags"]
 
-			for key, value in proxyEntry.OwnProps() {
-				if blacklist.Has(key) && attributes.HasOwnProp(key)
+			for proxyAttribKey, proxyAttribValue in proxyEntry {
+				if blacklist.Has(proxyAttribKey) && attributes.Has(proxyAttribKey)
 					continue
 
-				if value is Array {
-					root.%key% := value.Clone()
-				} else if value is Map {
-					root.%key% := value.Clone()
-				} else if value is Object {
-					root.%key% := {}
-					for subKey, subValue in value.OwnProps() {
-						root.%key%.%subKey% := subValue
+				if proxyAttribValue is Array {
+					root[proxyAttribKey] := proxyAttribValue.Clone()
+				} else if proxyAttribValue is Map {
+					root[proxyAttribKey] := Map()
+					for childKey, childValue in proxyAttribValue
+						root[proxyAttribKey].Set(childKey, childValue)
+				} else if proxyAttribValue is Object {
+					root[proxyAttribKey] := {}
+					for childKey, ChildValue in proxyAttribValue.OwnProps() {
+						root[proxyAttribKey].%childKey% := ChildValue
 					}
 				} else {
-					root.%key% := value
+					root[proxyAttribKey] := proxyAttribValue
 				}
 			}
 
-			for key, value in attributes.OwnProps() {
-				if value is Array {
-					root.%key% := value.Clone()
-				} else if value is Map && root.Has(key) {
-					for subKey, subValue in value
-						root.%key%.Set(subKey, subValue)
-				} else if value is Object && root.HasOwnProp(key) {
-					for subKey, subValue in value.OwnProps() {
-						root.%key%.%subKey% := subValue
+			for proxyAttribKey, proxyAttribValue in attributes {
+				if proxyAttribValue is Array {
+					root[proxyAttribKey] := proxyAttribValue.Clone()
+				} else if proxyAttribValue is Map && root.Has(proxyAttribKey) {
+					for childKey, ChildValue in proxyAttribValue
+						root[proxyAttribKey].Set(childKey, ChildValue)
+				} else if proxyAttribValue is Object && root.Has(proxyAttribKey) {
+					for childKey, ChildValue in proxyAttribValue.OwnProps() {
+						root[proxyAttribKey].%childKey% := ChildValue
 					}
 				} else {
-					root.%key% := value
+					root[proxyAttribKey] := proxyAttribValue
 				}
 			}
 
@@ -146,10 +150,5 @@ Class ChrEntry {
 		}
 
 		return attributes
-	}
-
-	__Delete() {
-		; DllCall("GlobalFree", "Ptr", this.memAdress)
-		ClassClear(this)
 	}
 }

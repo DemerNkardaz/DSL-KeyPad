@@ -23,7 +23,7 @@ Class ChrLegend {
 
 		for name, path in this.legends
 			if ChrLib.entries.HasOwnProp(name)
-				ChrLib.entries.%name%.options.legend := path
+				ChrLib.entries.%name%["options"]["legend"] := path
 	}
 
 	__New(preselectEntry := "") {
@@ -424,8 +424,8 @@ Class ChrLegend {
 				legendEntryL := legendEntry.%languageCode%
 
 				entry := ChrLib.GetEntry(entryName)
-				previewSymbol := StrLen(entry.symbol.alt) > 0 ? entry.symbol.alt : entry.symbol.set
-				getChar := Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+				previewSymbol := StrLen(entry["symbol"]["alt"]) > 0 ? entry["symbol"]["alt"] : entry["symbol"]["set"]
+				getChar := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
 
 				legendPanel := this.panelGUI
 				PV := legendPanel["PV"]
@@ -435,8 +435,8 @@ Class ChrLegend {
 				chrTitle.Text := legendEntryL.HasOwnProp("title") && legendEntryL.title != "" ? legendEntryL.title : selectedLabel
 
 				chrTitle.SetFont(
-					StrLen(entry.symbol.customs) > 0 ? entry.symbol.customs : ("s" (24) " norm c333333"),
-					StrLen(entry.symbol.font) > 0 ? entry.symbol.font : Fonts.fontFaces["Default"].name
+					StrLen(entry["symbol"]["customs"]) > 0 ? entry["symbol"]["customs"] : ("s" (24) " norm c333333"),
+					StrLen(entry["symbol"]["font"]) > 0 ? entry["symbol"]["font"] : Fonts.fontFaces["Default"].name
 				)
 
 				uniTitleContent := legendPanel["UnicodeTitleContent"]
@@ -458,7 +458,7 @@ Class ChrLegend {
 				entryContent.Text := entryName
 
 				unicodeContent := legendPanel["UnicodeContent"]
-				unicodeContent.Text := entry.sequence.Length > 0 ? entry.sequence.ToString(" ") : entry.unicode
+				unicodeContent.Text := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
 
 				htmlContentDec := legendPanel["HTMLContentDec"]
 				htmlContentDec.Text := Util.StrToHTML(getChar)
@@ -467,7 +467,7 @@ Class ChrLegend {
 				htmlContentHex.Text := Util.StrToHTML(getChar, "Hex")
 
 				htmlContentEnt := legendPanel["HTMLContentEnt"]
-				htmlContentEnt.Text := entry.entity != "" ? entry.entity : labels.unknown
+				htmlContentEnt.Text := entry["entity"] != "" ? entry["entity"] : labels.unknown
 
 				ipaLV := legendPanel["IPA_LV"]
 				transLV := legendPanel["Trans_LV"]
@@ -554,7 +554,7 @@ Class ChrLegend {
 
 		for name, path in this.legends
 			if ChrLib.entries.HasOwnProp(name)
-				indexed.Set(ChrLib.entries.%name%.index, name)
+				indexed.Set(ChrLib.entries.%name%["index"], name)
 
 		for i, name in indexed {
 			group := IniRead(this.legendsPath this.legends.Get(name) ".ini", "legend", "group", "")

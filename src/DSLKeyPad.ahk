@@ -22,21 +22,20 @@ initialized := False
 #Include <External\prt_array>
 #Include <External\fnc_clip_send>
 #Include <External\fnc_gui_button_icon>
+#Include <External\JSON>
 
 #Include <utils>
 #Include <def_vars>
+#Include Data\binds.ahk
+#Include Data\characters.ahk
 #Include <cls_mods_injector>
 #Include *i Mods\injector_pre_init.ahk
 
-#Include <chr_alt_codes>
-#Include <chr_latex_codes>
-#Include <chr_entities>
 #Include <cls_chr_block>
 #Include <cls_util>
 #Include <cls_progress_bar>
 #Include <cls_search>
 #Include <cls_unicode_web_resource>
-#Include <chr_lib>
 
 #Include <cls_app>
 #Include <cls_language>
@@ -53,7 +52,6 @@ initialized := False
 #Include <cls_favorites>
 
 #Include <cls_rules>
-#Include <chr_bindlist>
 #Include <cls_my_recipes>
 #Include <cls_chr_recipe_handler>
 #Include <cls_auxiliary>
@@ -66,7 +64,6 @@ initialized := False
 #Include <cls_long_press>
 #Include <hotstrings>
 #Include <cls_tempature_converter>
-#Include <supplement_python>
 #Include <cls_dev>
 #Include <stc_bindings>
 
@@ -78,6 +75,7 @@ GlyphsPanel.SetPanelData()
 initialized := True
 #Include *i Mods\injector_post_init.ahk
 
+; Legacy code, saved for future rework
 GREPizeSelection(GetCollaborative := False) {
 	CustomAfterStartEmdash := (Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") != "") ? Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") : "ensp"
 	CustomDialogue := (Cfg.Get("GREP_Dialog_Attribution", "CustomRules", "") != "") ? Cfg.Get("GREP_Dialog_Attribution", "CustomRules", "") : "no_break_space"

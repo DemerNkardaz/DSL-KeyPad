@@ -40,8 +40,8 @@ Class FavoriteChars {
 		if !ChrLib.entryGroups["Favorites"].HasValue(fave)
 			ChrLib.entryGroups["Favorites"].Push(fave)
 
-		if !ChrLib.entries.%fave%.groups.HasValue("Favorites")
-			ChrLib.entries.%fave%.groups.Push("Favorites")
+		if !ChrLib.entries.%fave%["groups"].HasValue("Favorites")
+			ChrLib.entries.%fave%["groups"].Push("Favorites")
 
 		this.UpdatePanelLVItem(fave, "Add")
 
@@ -69,8 +69,8 @@ Class FavoriteChars {
 		if ChrLib.entryGroups["Favorites"].HasValue(fave, &i)
 			ChrLib.entryGroups["Favorites"].RemoveAt(i)
 
-		if ChrLib.entries.%fave%.groups.HasValue("Favorites", &i)
-			ChrLib.entries.%fave%.groups.RemoveAt(i)
+		if ChrLib.entries.%fave%["groups"].HasValue("Favorites", &i)
+			ChrLib.entries.%fave%["groups"].RemoveAt(i)
 
 		this.UpdatePanelLVItem(fave, "Remove", preventFavoriteTabRemove)
 	}
@@ -136,8 +136,8 @@ Class FavoriteChars {
 
 					if Locale.Read(entryName, , True, &titleText) {
 						characterTitle := titleText
-					} else if entry.titles.Count > 0 && entry.titles.Has(languageCode) {
-						characterTitle := entry.titles.Get(languageCode)
+					} else if entry["titles"].Count > 0 && entry["titles"].Has(languageCode) {
+						characterTitle := entry["titles"].Get(languageCode)
 					} else {
 						characterTitle := Locale.Read(entryName)
 					}
@@ -145,14 +145,14 @@ Class FavoriteChars {
 					reserveCombinationKey := ""
 
 					for cgroup, ckey in Panel.combinationKeyToGroupPairs {
-						reserveCombinationKey := entry.groups.HasValue(cgroup) ? ckey : reserveCombinationKey
+						reserveCombinationKey := entry["groups"].HasValue(cgroup) ? ckey : reserveCombinationKey
 					}
 
 					characterTitle .= star
-					characterSymbol := entry.symbol.set
-					recipe := entry.recipeAlt.Length > 0 ? entry.recipeAlt.ToString() : entry.recipe.Length > 0 ? entry.recipe.ToString() : ""
+					characterSymbol := entry["symbol"]["set"]
+					recipe := entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : entry["recipe"].Length > 0 ? entry["recipe"].ToString() : ""
 
-					bindings := entry.options.fastKey != "" ? entry.options.fastKey : entry.options.altLayoutKey != "" ? entry.options.altLayoutKey : entry.options.altSpecialKey != "" ? entry.options.altSpecialKey : ""
+					bindings := entry["options"]["fastKey"] != "" ? entry["options"]["fastKey"] : entry["options"]["altLayoutKey"] != "" ? entry["options"]["altLayoutKey"] : entry["options"]["altSpecialKey"] != "" ? entry["options"]["altSpecialKey"] : ""
 					bindings := bindings != "" ? (reserveCombinationKey != "" ? reserveCombinationKey " + " : "") bindings : ""
 
 
@@ -217,8 +217,8 @@ Class FavoriteChars {
 			if !ChrLib.entryGroups["Favorites"].HasValue(fave)
 				ChrLib.entryGroups["Favorites"].Push(fave)
 
-			if !ChrLib.entries.%fave%.groups.HasValue("Favorites")
-				ChrLib.entries.%fave%.groups.Push("Favorites")
+			if !ChrLib.entries.%fave%["groups"].HasValue("Favorites")
+				ChrLib.entries.%fave%["groups"].Push("Favorites")
 		}
 	}
 }

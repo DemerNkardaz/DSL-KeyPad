@@ -17,10 +17,6 @@ Class PorgressBar {
 		return
 	}
 
-	__Delete() {
-		ClassClear(this)
-	}
-
 	Constructor() {
 		this.GUI := Gui()
 		this.GUI.title := this.data.progressBarTitle

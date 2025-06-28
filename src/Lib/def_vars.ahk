@@ -112,3 +112,13 @@ enExt := "\x{00DE}\x{00FE}\x{01F7}\x{01BF}\x{A768}\x{A769}\x{01B7}\x{0292}\x{021
 ruExt := "\x{0406}\x{0456}\x{0462}\x{0463}\x{046A}\x{046B}\x{0466}\x{0467}\x{0470}\x{0471}\x{046E}\x{046F}\x{0460}\x{0461}\x{0472}\x{0473}\x{051C}\x{051D}\x{051A}\x{051B}\x{A65E}\x{A65F}"
 
 mods := Map()
+
+globalInstances := {}
+
+dataDir := A_ScriptDir "\Data"
+
+characters := {
+	data: ArrayMerge(JSON.LoadFile(dataDir "\characters.json", "UTF-8")["entries"], GeneratedEntries()),
+	supplementaryData: JSON.LoadFile(dataDir "\supplementary.json", "UTF-8"),
+	blocksData: JSON.LoadFile(App.paths.data "\character_blocks.json", "UTF-8")
+}

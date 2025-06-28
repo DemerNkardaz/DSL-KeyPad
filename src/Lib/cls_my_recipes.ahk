@@ -249,7 +249,7 @@ Class MyRecipes {
 							if this.Check(data.section) {
 								MsgBox(Locale.ReadInject("gui_recipes_create_exists", [data.section]), App.Title("+status+version"))
 								return
-							} else if existingEntry && !existingEntry.groups.HasValue("Custom Composes") {
+							} else if existingEntry && !existingEntry["groups"].HasValue("Custom Composes") {
 								MsgBox(Locale.ReadInject("gui_recipes_create_exists_internal", [data.section]), App.Title("+status+version"))
 								return
 							}
@@ -282,7 +282,7 @@ Class MyRecipes {
 
 						existingEntry := ChrLib.GetEntry(data.previousSection)
 
-						if (existingEntry && existingEntry.groups.HasValue("Custom Composes")) && (data.previousSection != data.section)
+						if (existingEntry && existingEntry["groups"].HasValue("Custom Composes")) && (data.previousSection != data.section)
 							ChrLib.RemoveEntry(data.previousSection)
 
 						this.AddEdit(data.section, data, , True)
@@ -380,7 +380,7 @@ Class MyRecipes {
 		FileAppend(newContent, filePath, "UTF-16")
 
 		existingEntry := ChrLib.GetEntry(sectionName)
-		if existingEntry && existingEntry.groups.HasValue("Custom Composes")
+		if existingEntry && existingEntry["groups"].HasValue("Custom Composes")
 			ChrLib.RemoveEntry(sectionName)
 
 		ChrLib.CountOfUpdate()
@@ -606,7 +606,7 @@ Class MyRecipes {
 
 					existingEntry := ChrLib.GetEntry(section.section)
 
-					if existingEntry && existingEntry.groups.HasValue("Custom Composes")
+					if existingEntry && existingEntry["groups"].HasValue("Custom Composes")
 						ChrLib.RemoveEntry(section.section)
 
 					existingEntry := ChrLib.GetEntry(section.section)
@@ -614,14 +614,14 @@ Class MyRecipes {
 
 					if !existingEntry {
 						rawCustomEntries.Push(
-							section.section, ChrEntry().Get({
-								result: [section.result],
-								titles: title ? title : section.name,
-								tags: section.tags ? section.tags : [],
-								recipe: section.recipe,
-								groups: ["Custom Composes"],
-								isXCompose: section.section ~= "i)^xcompose" ? True : False,
-							}),
+							section.section, ChrEntry().Get(Map(
+								"result", [section.result],
+								"titles", title ? title : section.name,
+								"tags", section.tags ? section.tags : [],
+								"recipe", section.recipe,
+								"groups", ["Custom Composes"],
+								"isXCompose", section.section ~= "i)^xcompose" ? True : False,
+							)),
 						)
 					} else
 						MsgBox(Locale.ReadInject("gui_recipes_create_exists_internal", [section.section]), App.Title("+status+version"))
@@ -639,23 +639,6 @@ Class MyRecipes {
 	static HandleResult(resultIn) {
 		if resultIn is Array
 			resultIn := resultIn.ToString("")
-		/*
-		output := []
-		i := 1
-		while (i <= StrLen(resultIn)) {
-			char := SubStr(resultIn, i, 1)
-			code := Ord(char)
-		
-			if (code >= 0xD800 && code <= 0xDBFF) {
-				nextChar := SubStr(resultIn, i + 1, 1)
-				char .= nextChar
-				i += 1
-			}
-		
-			output.Push("{U+" GetCharacterUnicode(char) "}")
-			i += 1
-		}
-		*/
 		return ["%RAWTEXT%" resultIn]
 	}
 

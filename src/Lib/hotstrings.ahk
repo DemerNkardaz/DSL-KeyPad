@@ -10,9 +10,9 @@ Class LaTeXHotstrings {
 	static __New() {
 		local stance := Cfg.Get("LaTeX_Hotstrings", , True, "bool")
 
-		for i, char in LaTeXCodesLibrary {
+		for i, char in characters.supplementaryData["LaTeX Commands"] {
 			if Mod(i, 2) = 1 {
-				local code := LaTeXCodesLibrary[i + 1]
+				local code := characters.supplementaryData["LaTeX Commands"][i + 1]
 				if code is Array {
 					for each in code
 						this.collection.Set(each, char)
@@ -22,10 +22,10 @@ Class LaTeXHotstrings {
 			}
 		}
 
-		for entryName, value in ChrLib.entries.OwnProps() {
-			if value.LaTeX.Length = 0 || value.symbol.category ~= "Diacritic"
+		for entryName, entry in ChrLib.entries.OwnProps() {
+			if entry["LaTeX"].Length = 0 || entry["symbol"]["category"] ~= "Diacritic"
 				continue
-			for each in value.LaTeX
+			for each in entry["LaTeX"]
 				if !this.collection.Has(each)
 					this.collection.Set(each, ChrLib.Get(entryName))
 		}

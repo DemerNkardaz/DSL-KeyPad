@@ -443,7 +443,6 @@ IPS_LocalLibrary := {
 }
 
 Class InputScriptProcessor {
-
 	static options := {
 		interceptionInputMode: "",
 	}
@@ -1266,7 +1265,7 @@ Class InputScriptProcessor {
 				}
 
 				suggestions := IPS.GetSuggestions(IPS.LoggerDuplicates(IPS.inputLogger))
-				Util.CaretTooltip(IPS.LoggerDuplicates(IPS.inputLogger) (suggestions != "" ? "`n" ChrCrafter.FormatSuggestions(suggestions) : ""))
+				Util.CaretTooltip(IPS.LoggerDuplicates(IPS.inputLogger) (suggestions != "" ? "`n" globalInstances.crafter.FormatSuggestions(suggestions) : ""))
 
 			} else {
 				IPS.InH.Stop()
@@ -1434,3 +1433,5 @@ Class InputScriptProcessor {
 		return output
 	}
 }
+
+; globalInstances.inputScriptProcessor := InputScriptProcessor()

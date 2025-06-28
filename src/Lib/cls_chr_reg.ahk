@@ -3,11 +3,7 @@ Class ChrReg {
 		this.AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI)
 	}
 
-	__Delete() {
-		ClassClear(this)
-	}
-
-	AddEntry(&entryName, &entry, &progress) {
+	AddEntry(&entryName, &entry, &progress, &instances) {
 		if !IsSet(entry)
 			return
 
@@ -66,37 +62,37 @@ Class ChrReg {
 				local variantEntry := entry.Clone()
 
 				for item in ["unicode", "proxy", "alterations"] {
-					if entry.%item% is Array
-						variantEntry.%item% := (
-							entry.%item%[i] is Object ? entry.%item%[i].Clone() : entry.%item%[i]
+					if entry[item] is Array
+						variantEntry[item] := (
+							entry[item][i] is Object ? entry[item][i].Clone() : entry[item][i]
 						)
 				}
 
-				if entry.HasOwnProp("recipePush")
-					&& entry.recipePush is Array
-					&& entry.recipePush[i] is Object {
-					variantEntry.recipePush := entry.recipePush[i].Clone()
+				if entry.Has("recipePush")
+					&& entry["recipePush"] is Array
+					&& entry["recipePush"][i] is Object {
+					variantEntry["recipePush"] := entry["recipePush"][i].Clone()
 				}
 
-				if entry.HasOwnProp("reference") {
-					if entry.reference is Array
-						variantEntry.reference := entry.reference[i].Clone()
+				if entry.Has("reference") {
+					if entry["reference"] is Array
+						variantEntry["reference"] := entry["reference"][i].Clone()
 				}
 
-				if entry.sequence.Length > 0 && entry.sequence[i] is Array
-					variantEntry.sequence := entry.sequence[i].Clone()
+				if entry["sequence"].Length > 0 && entry["sequence"][i] is Array
+					variantEntry["sequence"] := entry["sequence"][i].Clone()
 
 				variantEntry := this.SetDecomposedData(&variantName, &variantEntry)
 
-				local symbolRef := entry.symbol
-				variantEntry.symbol := this.CloneOptions(&symbolRef, &i)
+				local symbolRef := entry["symbol"]
+				variantEntry["symbol"] := this.CloneOptions(&symbolRef, &i)
 
 				this.ProcessProperties(&variantEntry, &entry, &i)
 
-				local optionsRef := entry.options
-				variantEntry.options := this.CloneOptions(&optionsRef, &i)
-				variantEntry.variant := allVariants[1][i]
-				variantEntry.variantPos := i
+				local optionsRef := entry["options"]
+				variantEntry["options"] := this.CloneOptions(&optionsRef, &i)
+				variantEntry["variant"] := allVariants[1][i]
+				variantEntry["variantPos"] := i
 
 				entries.e%i%_%variantName% := variantEntry
 				variantName := unset
@@ -109,7 +105,7 @@ Class ChrReg {
 				local variant := allVariants[1]
 				this.ProcessRecipe(&entry, &variant)
 				local value := ChrEntry().Get(entry)
-				this.AddEntry(&noIndexName, &value, &progress)
+				this.AddEntry(&noIndexName, &value, &progress, &instances)
 
 				value := unset
 			}
@@ -119,16 +115,16 @@ Class ChrReg {
 			brackets := unset
 
 		} else {
-			ChrLib.entries.%entryName% := {}
+			ChrLib.entries.%entryName% := Map()
 			ChrLib.entriesSource.%entryName% := entry
-			this.EntryPreProcessing(&entryName, &entry)
+			this.EntryPreProcessing(&entryName, &entry, &instances)
 
 			this.TransferProperties(&entryName, &entry)
 
-			ChrLib.entries.%entryName%.index := ++ChrLib.lastIndexAdded
+			ChrLib.entries.%entryName%["index"] := ++ChrLib.lastIndexAdded
 
 			local libEntry := ChrLib.entries.%entryName%
-			this.EntryPostProcessing(&entryName, &libEntry)
+			this.EntryPostProcessing(&entryName, &libEntry, &instances)
 
 			if progress {
 				progress.data.progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
@@ -143,6 +139,9 @@ Class ChrReg {
 	AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI) {
 		local progress := !preventProgressGUI ? PorgressBar({ typeOfInit: typeOfInit }) : False
 		local setProgress := !preventProgressGUI ? progress.SetProgressBarValue.Bind(progress) : False
+		local instances := {
+			ChrBlock: ChrBlock(),
+		}
 
 		if Keyboard.blockedForReload
 			return
@@ -169,14 +168,15 @@ Class ChrReg {
 				local entryName := rawEntries[index]
 				local entryValue := rawEntries[index + 1]
 				local entry := ChrEntry().Get(entryValue)
-				this.AddEntry(&entryName, &entry, &progress)
+				this.AddEntry(&entryName, &entry, &progress, &instances)
 
 				entry := unset
 			}
 
-			this.Aftermath()
+			this.Aftermath(&instances)
 			rawEntries := unset
 			typeOfInit := unset
+			instances := unset
 
 			if progress {
 				Sleep 500
@@ -194,20 +194,20 @@ Class ChrReg {
 
 	ProcessProperties(&targetEntry, &sourceEntry, &index) {
 		for reference in ["recipe", "tags", "groups"] {
-			if sourceEntry.%reference%.Length > 0 && sourceEntry.%reference%[sourceEntry.%reference%.Length] is Array {
-				if sourceEntry.%reference%[index].Length > 0 {
-					targetEntry.%reference% := sourceEntry.%reference%[index].Clone()
+			if sourceEntry[reference].Length > 0 && sourceEntry[reference][sourceEntry[reference].Length] is Array {
+				if sourceEntry[reference][index].Length > 0 {
+					targetEntry[reference] := sourceEntry[reference][index].Clone()
 
-					if sourceEntry.HasOwnProp(reference "Prefixes") {
-						if sourceEntry.%reference%Prefixes.Length > 0
-							for i, prefix in sourceEntry.%reference%Prefixes {
-								targetEntry.%reference%[i] := prefix targetEntry.%reference%[i]
+					if sourceEntry.Has(reference "Prefixes") {
+						if sourceEntry[reference "Prefixes"].Length > 0
+							for i, prefix in sourceEntry[reference "Prefixes"] {
+								targetEntry[reference][i] := prefix targetEntry[reference][i]
 							}
-						targetEntry.DeleteProp(reference "Prefixes")
+						targetEntry.Delete(reference "Prefixes")
 					}
 
 				} else {
-					targetEntry.%reference% := []
+					targetEntry[reference] := []
 				}
 			}
 		}
@@ -215,52 +215,52 @@ Class ChrReg {
 	}
 
 	ProcessReference(&targetEntry) {
-		if targetEntry.HasOwnProp("reference") && targetEntry.reference is Object {
+		if targetEntry.Has("reference") && targetEntry["reference"] is Object {
 			for each in ["name", "then", "else", "as"] {
-				if targetEntry.reference.HasOwnProp(each)
-					&& RegExMatch(targetEntry.reference.%each%, "\[(.*?)\]", &match) {
+				if targetEntry["reference"].Has(each)
+					&& RegExMatch(targetEntry["reference"][each], "\[(.*?)\]", &match) {
 					local splittedVariants := StrSplit(match[1], ",")
-					targetEntry.reference.%each% := RegExReplace(targetEntry.reference.%each%, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
+					targetEntry["reference"][each] := RegExReplace(targetEntry["reference"][each], "\[.*?\]", splittedVariants[targetEntry["variantPos"]], , 1)
 				}
 			}
 		}
 	}
 
 	ProcessSymbolLetter(&targetEntry) {
-		if targetEntry.symbol.letter is String {
-			targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\%self\%", Util.UnicodeToChar(targetEntry.unicode))
-			if InStr(targetEntry.symbol.letter, "${") {
-				while RegExMatch(targetEntry.symbol.letter, "\[(.*?)\]", &varMatch) {
+		if targetEntry["symbol"]["letter"] is String {
+			targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], "\%self\%", Util.UnicodeToChar(targetEntry["unicode"]))
+			if InStr(targetEntry["symbol"]["letter"], "${") {
+				while RegExMatch(targetEntry["symbol"]["letter"], "\[(.*?)\]", &varMatch) {
 					local splittedVariants := StrSplit(varMatch[1], ",")
-					targetEntry.symbol.letter := RegExReplace(targetEntry.symbol.letter, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
+					targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], "\[.*?\]", splittedVariants[targetEntry["variantPos"]], , 1)
 				}
 
-				targetEntry.symbol.letter := ChrRecipeHandler.MakeStr(targetEntry.symbol.letter)
-			} else if targetEntry.data.script = "cyrillic" &&
-				RegExMatch(targetEntry.data.letter, "^[a-zA-Z0-9]+$") {
-				targetEntry.symbol.letter := Util.UnicodeToChar(targetEntry.unicode)
+				targetEntry["symbol"]["letter"] := ChrRecipeHandler.MakeStr(targetEntry["symbol"]["letter"])
+			} else if targetEntry["data"]["script"] = "cyrillic" &&
+				RegExMatch(targetEntry["data"]["letter"], "^[a-zA-Z0-9]+$") {
+				targetEntry["symbol"]["letter"] := Util.UnicodeToChar(targetEntry["unicode"])
 			}
 		}
 		return
 	}
 
 	ProcessOptionStrings(&targetEntry) {
-		for key, value in targetEntry.options.OwnProps() {
-			if targetEntry.options.%key% is String {
-				targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\%self\%", Util.UnicodeToChar(targetEntry.unicode))
+		for key, value in targetEntry["options"] {
+			if targetEntry["options"][key] is String {
+				targetEntry["options"][key] := RegExReplace(targetEntry["options"][key], "\%self\%", Util.UnicodeToChar(targetEntry["unicode"]))
 
-				if InStr(targetEntry.options.%key%, "${") || InStr(targetEntry.options.%key%, "*?") {
-					endPart := targetEntry.data.endPart != "" ? "_" targetEntry.data.endPart : ""
-					while RegExMatch(targetEntry.options.%key%, "\[(.*?)\]", &varMatch) {
+				if InStr(targetEntry["options"][key], "${") || InStr(targetEntry["options"][key], "*?") {
+					endPart := targetEntry["data"]["endPart"] != "" ? "_" targetEntry["data"]["endPart"] : ""
+					while RegExMatch(targetEntry["options"][key], "\[(.*?)\]", &varMatch) {
 						local splittedVariants := StrSplit(varMatch[1], ",")
-						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\[.*?\]", splittedVariants[targetEntry.variantPos], , 1)
-						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\@", targetEntry.data.letter, , 1)
-						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\?\?", endPart, , 1)
-						targetEntry.options.%key% := RegExReplace(targetEntry.options.%key%, "\*\?")
+						targetEntry["options"][key] := RegExReplace(targetEntry["options"][key], "\[.*?\]", splittedVariants[targetEntry["variantPos"]], , 1)
+						targetEntry["options"][key] := RegExReplace(targetEntry["options"][key], "\@", targetEntry["data"]["letter"], , 1)
+						targetEntry["options"][key] := RegExReplace(targetEntry["options"][key], "\?\?", endPart, , 1)
+						targetEntry["options"][key] := RegExReplace(targetEntry["options"][key], "\*\?")
 					}
 
-					if InStr(targetEntry.options.%key%, "${")
-						targetEntry.options.%key% := ChrRecipeHandler.MakeStr(targetEntry.options.%key%)
+					if InStr(targetEntry["options"][key], "${")
+						targetEntry["options"][key] := ChrRecipeHandler.MakeStr(targetEntry["options"][key])
 				}
 
 			}
@@ -270,139 +270,139 @@ Class ChrReg {
 
 	CloneOptions(&sourceOptions, &index) {
 		local tempOptions := sourceOptions.Clone()
-		for key, value in sourceOptions.OwnProps() {
-			if sourceOptions.%key% is Array && sourceOptions.%key%.Length > 0 {
-				if sourceOptions.%key%[index] is Array
-					tempOptions.%key% := sourceOptions.%key%[index].Clone()
+		for key, value in sourceOptions {
+			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 {
+				if sourceOptions[key][index] is Array
+					tempOptions[key] := sourceOptions[key][index].Clone()
 				else
-					tempOptions.%key% := sourceOptions.%key%[index]
+					tempOptions[key] := sourceOptions[key][index]
 			}
 		}
 		return tempOptions
 	}
 
 	ProcessRecipe(&entry, &splitVariants) {
-		if entry.recipe.Length = 0 {
-			if entry.data.postfixes.Length > 0 {
-				if entry.data.postfixes.Length = 1 {
-					if ["ligature", "digraph"].HasValue(entry.data.type) {
-						entry.recipe := [
-							"$${" entry.data.postfixes[1] "}",
+		if entry["recipe"].Length = 0 {
+			if entry["data"]["postfixes"].Length > 0 {
+				if entry["data"]["postfixes"].Length = 1 {
+					if ["ligature", "digraph"].HasValue(entry["data"]["type"]) {
+						entry["recipe"] := [
+							"$${" entry["data"]["postfixes"][1] "}",
 							(
-								"${" SubStr(entry.data.script, 1, 3)
+								"${" SubStr(entry["data"]["script"], 1, 3)
 								"_[" splitVariants.ToString(",") "]_"
-								SubStr(entry.data.type, 1, 3)
-								"_@??}${" entry.data.postfixes[1] "}"
+								SubStr(entry["data"]["type"], 1, 3)
+								"_@??}${" entry["data"]["postfixes"][1] "}"
 							),
-							"${" entry.data.postfixes[1] "}$",
+							"${" entry["data"]["postfixes"][1] "}$",
 							(
-								"${" entry.data.postfixes[1] "}"
-								"${" SubStr(entry.data.script, 1, 3)
+								"${" entry["data"]["postfixes"][1] "}"
+								"${" SubStr(entry["data"]["script"], 1, 3)
 								"_[" splitVariants.ToString(",") "]_"
-								SubStr(entry.data.type, 1, 3) "_@??}"
+								SubStr(entry["data"]["type"], 1, 3) "_@??}"
 							),
 						]
 					} else {
-						entry.recipe := [
-							"$${" entry.data.postfixes[1] "}",
-							"${" entry.data.postfixes[1] "}$",
+						entry["recipe"] := [
+							"$${" entry["data"]["postfixes"][1] "}",
+							"${" entry["data"]["postfixes"][1] "}$",
 						]
 					}
-				} else if entry.data.postfixes.Length = 2 {
-					entry.recipe := [
+				} else if entry["data"]["postfixes"].Length = 2 {
+					entry["recipe"] := [
 						(
-							"$${(" entry.data.postfixes[1]
-							"|" entry.data.postfixes[2] ")}$(*)"
+							"$${(" entry["data"]["postfixes"][1]
+							"|" entry["data"]["postfixes"][2] ")}$(*)"
 						),
 						(
-							"${" SubStr(entry.data.script, 1, 3)
+							"${" SubStr(entry["data"]["script"], 1, 3)
 							"_[" splitVariants.ToString(",") "]_"
-							SubStr(entry.data.type, 1, 3) "_@??__("
-							entry.data.postfixes[1] "|"
-							entry.data.postfixes[2] ")}$(*)"
+							SubStr(entry["data"]["type"], 1, 3) "_@??__("
+							entry["data"]["postfixes"][1] "|"
+							entry["data"]["postfixes"][2] ")}$(*)"
 						),
 						(
-							"${(" entry.data.postfixes[1] "|"
-							entry.data.postfixes[2] ")}$(*)$"
+							"${(" entry["data"]["postfixes"][1] "|"
+							entry["data"]["postfixes"][2] ")}$(*)$"
 						),
 						(
-							"${" entry.data.postfixes[1] "}"
-							"${" SubStr(entry.data.script, 1, 3)
+							"${" entry["data"]["postfixes"][1] "}"
+							"${" SubStr(entry["data"]["script"], 1, 3)
 							"_[" splitVariants.ToString(",") "]_"
-							SubStr(entry.data.type, 1, 3) "_@??__"
-							entry.data.postfixes[2] "}"
+							SubStr(entry["data"]["type"], 1, 3) "_@??__"
+							entry["data"]["postfixes"][2] "}"
 						),
 						(
-							"${" entry.data.postfixes[2] "}"
-							"${" SubStr(entry.data.script, 1, 3)
+							"${" entry["data"]["postfixes"][2] "}"
+							"${" SubStr(entry["data"]["script"], 1, 3)
 							"_[" splitVariants.ToString(",") "]_"
-							SubStr(entry.data.type, 1, 3) "_@??__"
-							entry.data.postfixes[1] "}"
+							SubStr(entry["data"]["type"], 1, 3) "_@??__"
+							entry["data"]["postfixes"][1] "}"
 						),
 					]
-				} else if entry.data.postfixes.Length = 3 {
-					entry.recipe := [
+				} else if entry["data"]["postfixes"].Length = 3 {
+					entry["recipe"] := [
 						(
-							"$${" entry.data.postfixes[1] "}"
-							"${" entry.data.postfixes[2] "}${" entry.data.postfixes[3] "}"
+							"$${" entry["data"]["postfixes"][1] "}"
+							"${" entry["data"]["postfixes"][2] "}${" entry["data"]["postfixes"][3] "}"
 						),
 						(
-							"${" entry.data.postfixes[1] "}"
-							"${" entry.data.postfixes[2] "}${" entry.data.postfixes[3] "}$"
+							"${" entry["data"]["postfixes"][1] "}"
+							"${" entry["data"]["postfixes"][2] "}${" entry["data"]["postfixes"][3] "}$"
 						),
 					]
 				}
-			} else if ["ligature", "digraph"].HasValue(entry.data.type) && entry.data.postfixes.Length = 0 {
-				entry.recipe := ["$"]
+			} else if ["ligature", "digraph"].HasValue(entry["data"]["type"]) && entry["data"]["postfixes"].Length = 0 {
+				entry["recipe"] := ["$"]
 			}
 		}
 
-		if entry.HasOwnProp("recipePush") && entry.data.script = "hellenic" && entry.data.postfixes.Length > 1 {
-			if entry.recipePush is Array {
-				if entry.recipePush.Length > 0
-					for recipe in entry.recipePush
-						entry.recipe.Push(recipe)
+		if entry.Has("recipePush") && entry["data"]["script"] = "hellenic" && entry["data"]["postfixes"].Length > 1 {
+			if entry["recipePush"] is Array {
+				if entry["recipePush"].Length > 0
+					for recipe in entry["recipePush"]
+						entry["recipe"].Push(recipe)
 
-			} else if entry.recipePush is Object {
-				for i, r in entry.recipePush.OwnProps() {
+			} else if entry["recipePush"] is Object {
+				for i, r in entry["recipePush"] {
 					if r is Array {
 						for recipe in r
-							entry.recipe.InsertAt(i, recipe)
+							entry["recipe"].InsertAt(Integer(i), recipe)
 					} else
-						entry.recipe.InsertAt(i, r)
+						entry["recipe"].InsertAt(Integer(i), r)
 				}
 			}
 		}
 
-		if entry.recipe.Length > 0 {
-			local tempRecipe := entry.recipe.Clone()
+		if entry["recipe"].Length > 0 {
+			local tempRecipe := entry["recipe"].Clone()
 			for i, recipe in tempRecipe {
-				endPart := entry.data.endPart != "" ? "_" entry.data.endPart : ""
+				endPart := entry["data"]["endPart"] != "" ? "_" entry["data"]["endPart"] : ""
 
-				tempRecipe[i] := RegExReplace(recipe, "\[.*?\]", SubStr(entry.data.case, 1, 1))
-				tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry.data.letter)
+				tempRecipe[i] := RegExReplace(recipe, "\[.*?\]", SubStr(entry["data"]["case"], 1, 1))
+				tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry["data"]["letter"])
 				tempRecipe[i] := RegExReplace(tempRecipe[i], "\?\?", endPart)
 				if RegExMatch(tempRecipe[i], "\/(.*?)\/", &match) && match[1] != "" {
-					tempRecipe[i] := RegExReplace(tempRecipe[i], "\/(.*?)\/", entry.data.case = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
+					tempRecipe[i] := RegExReplace(tempRecipe[i], "\/(.*?)\/", entry["data"]["case"] = "capital" ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
 				}
 				if RegExMatch(tempRecipe[i], "\\(.*?)\\", &match) && match[1] != "" {
-					tempRecipe[i] := RegExReplace(tempRecipe[i], "\\(.*?)\\", entry.data.case = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
+					tempRecipe[i] := RegExReplace(tempRecipe[i], "\\(.*?)\\", entry["data"]["case"] = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
 				}
 			}
-			entry.recipe := tempRecipe
+			entry["recipe"] := tempRecipe
 		}
 		return
 	}
 
 	TransferProperties(&entryName, &entry, &skipStatus := "") {
-		for key, value in entry.OwnProps() {
+		for key, value in entry {
 			if !["String", "Integer", "Boolean"].HasValue(Type(value)) {
 				if ["recipe", "result"].HasValue(key) && value.Length > 0
 					this.TransferRecipeProperty(&entryName, &key, &value, &skipStatus)
 				else
 					this.Transfer%Type(value)%Property(&entryName, &key, &value)
 			} else {
-				ChrLib.entries.%entryName%.%key% := value
+				ChrLib.entries.%entryName%[key] := value
 			}
 		}
 		return
@@ -410,10 +410,12 @@ Class ChrReg {
 
 	TransferFuncProperty(&entryName, &key, &value) {
 		local definedValue := value
-		ChrLib.entries.%entryName%.DefineProp(key, {
+		local interObj := {}
+		interObj.DefineProp(key, {
 			Get: (*) => definedValue(),
 			Set: (ChrLib, value) => this.DefineProp(key, { Get: (*) => value })
 		})
+		ChrLib.entries.%entryName%[key] := interObj
 		return
 	}
 
@@ -423,9 +425,9 @@ Class ChrReg {
 			local definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe, entryName, skipStatus)
 			local interObj := {}
 			interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
-			ChrLib.entries.%entryName%.%key% := interObj.Get
+			ChrLib.entries.%entryName%[key] := interObj.Get
 		} catch {
-			ChrLib.entries.%entryName%.%key% := value.Clone()
+			ChrLib.entries.%entryName%[key] := value.Clone()
 			if skipStatus = ""
 				this.attemptQueue.Push(entryName)
 		}
@@ -433,174 +435,166 @@ Class ChrReg {
 	}
 
 	attemptQueue := []
-	Aftermath() {
+	Aftermath(&instances) {
 		if this.attemptQueue.Length > 0 {
 			for entryName in this.attemptQueue {
-				local presavedIndex := ChrLib.entries.%entryName%.index
+				local presavedIndex := ChrLib.entries.%entryName%["index"]
 				ChrLib.entries.%entryName% := ChrLib.entriesSource.%entryName%.Clone()
 				local libEntry := ChrLib.entries.%entryName%
-				libEntry.index := presavedIndex
+				libEntry["index"] := presavedIndex
 
-				this.EntryPreProcessing(&entryName, &libEntry)
+				this.EntryPreProcessing(&entryName, &libEntry, &instances)
 				this.TransferProperties(&entryName, &libEntry, &skipStatus := "Missing")
 
-				libEntry.recipe := ChrRecipeHandler.Make(libEntry.recipe, entryName, skipStatus)
-				libEntry.result := ChrRecipeHandler.Make(libEntry.result, entryName, skipStatus)
+				libEntry["recipe"] := ChrRecipeHandler.Make(libEntry["recipe"], entryName, skipStatus)
+				libEntry["result"] := ChrRecipeHandler.Make(libEntry["result"], entryName, skipStatus)
 
-				this.EntryPostProcessing(&entryName, &libEntry)
+				this.EntryPostProcessing(&entryName, &libEntry, &instances)
 			}
 			this.attemptQueue := []
+			instances := unset
 		}
 		return
 	}
 
 	TransferArrayProperty(&entryName, &key, &value) {
-		ChrLib.entries.%entryName%.%key% := []
+		ChrLib.entries.%entryName%[key] := []
 		for subValue in value {
 			if subValue is Func {
 				local interObj := {}
 				interObj.DefineProp("Get", { Get: subValue, Set: subValue })
 				if interObj.Get is Array {
-					for interValue in interObj.Get {
-						ChrLib.entries.%entryName%.%key%.Push(interValue)
-					}
+					for interValue in interObj.Get
+						ChrLib.entries.%entryName%[key].Push(interValue)
 				} else {
-					ChrLib.entries.%entryName%.%key%.Push(interObj.Get)
+					ChrLib.entries.%entryName%[key].Push(interObj.Get)
 				}
 			} else {
-				ChrLib.entries.%entryName%.%key%.Push(subValue)
+				ChrLib.entries.%entryName%[key].Push(subValue)
 			}
 		}
 		return
 	}
 
 	TransferMapProperty(&entryName, &key, &value) {
-		ChrLib.entries.%entryName%.%key% := Map()
+		ChrLib.entries.%entryName%[key] := Map()
 		for mapKey, mapValue in value {
 			if mapValue is Func {
 				local interObj := {}
 				interObj.DefineProp("Get", { Get: mapValue, Set: mapValue })
-				ChrLib.entries.%entryName%.%key%.Set(mapKey, interObj.Get)
+				ChrLib.entries.%entryName%[key].Set(mapKey, interObj.Get)
 			} else {
-				ChrLib.entries.%entryName%.%key%.Set(mapKey, mapValue)
+				ChrLib.entries.%entryName%[key].Set(mapKey, mapValue)
 			}
 		}
 		return
 	}
 
 	TransferObjectProperty(&entryName, &key, &value) {
-		ChrLib.entries.%entryName%.%key% := {}
+		ChrLib.entries.%entryName%[key] := {}
 		for subKey, subValue in value.OwnProps() {
 			if subValue is Func {
-				ChrLib.entries.%entryName%.%key%.DefineProp(subKey, {
+				ChrLib.entries.%entryName%[key].DefineProp(subKey, {
 					Get: subValue,
 					Set: subValue
 				})
 			} else {
-				ChrLib.entries.%entryName%.%key%.%subKey% := subValue
+				ChrLib.entries.%entryName%[key].%subKey% := subValue
 			}
 		}
 		return
 	}
 
-	EntryPreProcessing(&entryName, &entry) {
+	EntryPreProcessing(&entryName, &entry, &instances) {
 		if !IsSet(entry)
 			return
 
-		local refinedEntry := entry.Clone()
-		refinedEntry := this.SetDecomposedData(&entryName, &refinedEntry)
+		entry := this.SetDecomposedData(&entryName, &entry)
 
 		local selectivePart := ""
 		if RegExMatch(entryName, "i)(orkhon|yenisei|later_younger_futhark|younger_futhark|elder_futhark|futhork|almanac|medieval)", &selectiveMatch)
 			selectivePart := " " selectiveMatch[1]
 
-		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.type) > 0 {
+		if StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["type"]) > 0 {
 
-			if ["hellenic", "glagolitic"].HasValue(refinedEntry.data.script)
-				&& !refinedEntry.options.useLetterLocale
-				refinedEntry.options.useLetterLocale := True
+			if ["hellenic", "glagolitic"].HasValue(entry["data"]["script"])
+				&& !entry["options"]["useLetterLocale"]
+				entry["options"]["useLetterLocale"] := True
 
 
-			if refinedEntry.groups.Length = 0 {
-				local hasPostfix := refinedEntry.data.postfixes.Length > 0
-				if ArrayMerge(ChrLib.scriptsValidator, ["hellenic", "latin", "cyrillic"]).HasValue(refinedEntry.data.script) {
-					script := StrReplace(refinedEntry.data.script, "_", " ")
-					refinedEntry.groups :=
-						(StrLen(refinedEntry.data.type) > 0 && ["digraph", "ligature", "numeral"].HasValue(refinedEntry.data.type) ?
-							[StrTitle(script RegExReplace(selectivePart, "_", " ") " " refinedEntry.data.type "s")] :
-							[StrTitle(script RegExReplace(selectivePart, "_", " ") (hasPostfix ? " Accented" : ""))]
-						)
+			if entry["groups"].Length = 0 {
+				local hasPostfix := entry["data"]["postfixes"].Length > 0
+				if ArrayMerge(ChrLib.scriptsValidator, ["hellenic", "latin", "cyrillic"]).HasValue(entry["data"]["script"]) {
+					script := StrReplace(entry["data"]["script"], "_", " ")
+					entry["groups"] := (StrLen(entry["data"]["type"]) > 0 && ["digraph", "ligature", "numeral"].HasValue(entry["data"]["type"]) ?
+						[StrTitle(script RegExReplace(selectivePart, "_", " ") " " entry["data"]["type"] "s")] :
+						[StrTitle(script RegExReplace(selectivePart, "_", " ") (hasPostfix ? " Accented" : ""))]
+					)
 				}
 				hasPostfix := unset
 			}
 
-			if StrLen(refinedEntry.symbol.category = 0) {
-				if StrLen(refinedEntry.data.script) && StrLen(refinedEntry.data.type) {
+			if StrLen(entry["symbol"]["category"] = 0) {
+				if StrLen(entry["data"]["script"]) && StrLen(entry["data"]["type"]) {
 
-					local hasPostfix := refinedEntry.data.postfixes.Length > 0
-					refinedEntry.symbol.category := StrTitle(refinedEntry.data.script " " refinedEntry.data.type (hasPostfix ? " Accented" : ""))
+					local hasPostfix := entry["data"]["postfixes"].Length > 0
+					entry["symbol"]["category"] := StrTitle(entry["data"]["script"] " " entry["data"]["type"] (hasPostfix ? " Accented" : ""))
 
 					hasPostfix := unset
 				} else {
-					refinedEntry.symbol.category := "N/A"
+					entry["symbol"]["category"] := "N/A"
 				}
 			}
 
-			if refinedEntry.symbol.scriptAdditive = ""
-				if refinedEntry.data.script = "old_italic"
-					refinedEntry.symbol.scriptAdditive := "etruscan"
+			if entry["symbol"]["scriptAdditive"] = ""
+				if entry["data"]["script"] = "old_italic"
+					entry["symbol"]["scriptAdditive"] := "etruscan"
 				else if selectivePart != ""
-					refinedEntry.symbol.scriptAdditive := selectiveMatch[1]
+					entry["symbol"]["scriptAdditive"] := selectiveMatch[1]
 		}
 
-		if StrLen(refinedEntry.options.fastKey) && RegExMatch(refinedEntry.options.fastKey, "\?(.*?)$", &addGroupMatch) {
-			refinedEntry.groups.Push(refinedEntry.groups[1] " " addGroupMatch[1])
+		if StrLen(entry["options"]["fastKey"]) && RegExMatch(entry["options"]["fastKey"], "\?(.*?)$", &addGroupMatch) {
+			entry["groups"].Push(entry["groups"][1] " " addGroupMatch[1])
 		}
 
-		if refinedEntry.recipe.Length = 0 && refinedEntry.data.postfixes.Length > 0 {
-			refinedEntry.recipe := ["$"]
-			for postfix in refinedEntry.data.postfixes {
-				refinedEntry.recipe[1] .= "${" postfix "}"
+		if entry["recipe"].Length = 0 && entry["data"]["postfixes"].Length > 0 {
+			entry["recipe"] := ["$"]
+			for postfix in entry["data"]["postfixes"] {
+				entry["recipe"][1] .= "${" postfix "}"
 			}
 		}
 
-		this.ProcessReference(&refinedEntry)
-		this.ProcessSymbolLetter(&refinedEntry)
-		this.ProcessOptionStrings(&refinedEntry)
+		this.ProcessReference(&entry)
+		this.ProcessSymbolLetter(&entry)
+		this.ProcessOptionStrings(&entry)
 
-		entry := refinedEntry
-		refinedEntry := unset
-		selectivePart := unset
 		return
 	}
 
-	EntryPostProcessing(&entryName, &entry) {
+	EntryPostProcessing(&entryName, &entry, &instances) {
 		if !IsSet(entry)
 			return
 
-		local refinedEntry := entry.Clone()
-
-		if refinedEntry.result.Length > 0
-			refinedEntry.unicode := Util.ChrToUnicode(SubStr(refinedEntry.result[1], 1, 1))
+		if entry["result"].Length > 0
+			entry["unicode"] := Util.ChrToUnicode(SubStr(entry["result"][1], 1, 1))
 
 
-		try
-			if ChrBlock.GetBlock(refinedEntry.unicode, , &block) && block.name != "Unknown"
-				refinedEntry.unicodeBlock := block.block "`n" block.name
+		if instances.ChrBlock.GetBlock(entry["unicode"], , &block) && block.name != "Unknown"
+			entry["unicodeBlock"] := block.block "`n" block.name
 
-		local character := Util.UnicodeToChar(refinedEntry.unicode)
-		local characterSequence := Util.UnicodeToChar(refinedEntry.sequence.Length > 0 ? refinedEntry.sequence : refinedEntry.unicode)
+		local character := Util.UnicodeToChar(entry["unicode"])
+		local characterSequence := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
 
-		for alteration, value in refinedEntry.alterations.OwnProps() {
+		for alteration, value in entry["alterations"] {
 			if !InStr(alteration, "Entity") {
 				local entity := Util.CheckEntity(Util.UnicodeToChar(value))
 				if entity
-					refinedEntry.alterations.%alteration%Entity := entity
+					entry["alterations"][alteration "Entity"] := entity
 				entity := unset
 			}
 		}
 
-		if refinedEntry.altCode = "" {
+		if entry["altCode"] = "" {
 			local generic := CharacterInserter.regionalPages.generic.Values()
 			local atZero := CharacterInserter.regionalPages.atZero.Values()
 			local pages := ArrayMerge([437], generic, atZero)
@@ -611,25 +605,25 @@ Class ChrReg {
 
 				if code is Number && code <= 255 && code >= 0 && !altOutput.HasValue(code) {
 					altOutput.Push((page >= 1251 ? "0" : "") code)
-					refinedEntry.altCodePages.Push(page)
+					entry["altCodePages"].Push(page)
 				} else if altOutput.HasValue(code) {
-					refinedEntry.altCodePages.Push(page)
+					entry["altCodePages"].Push(page)
 				}
 
 				code := unset
 			}
 
-			refinedEntry.altCode := altOutput.ToString()
+			entry["altCode"] := altOutput.ToString()
 
-			if refinedEntry.altCode = "" {
-				Loop AltCodesLibrary.Length // 2 {
+			if entry["altCode"] = "" {
+				Loop characters.supplementaryData["Alt Codes"].Length // 2 {
 					local i := A_Index * 2 - 1
-					local num := AltCodesLibrary[i]
-					local sym := AltCodesLibrary[i + 1]
+					local num := characters.supplementaryData["Alt Codes"][i + 1]
+					local sym := characters.supplementaryData["Alt Codes"][i]
 
 					if sym = character {
-						refinedEntry.altCode := num
-						refinedEntry.altCodePages := [437]
+						entry["altCode"] := num
+						entry["altCodePages"] := [437]
 						break
 					}
 					i := unset
@@ -644,17 +638,17 @@ Class ChrReg {
 			altOutput := unset
 		}
 
-		if refinedEntry.sequence.Length > 1 {
-			for sequenceChr in refinedEntry.sequence {
-				refinedEntry.entity .= Util.StrToHTML(Util.UnicodeToChar(sequenceChr), "Entities")
+		if entry["sequence"].Length > 1 {
+			for sequenceChr in entry["sequence"] {
+				entry["entity"] .= Util.StrToHTML(Util.UnicodeToChar(sequenceChr), "Entities")
 			}
 		} else {
-			for i, entitySymbol in EntitiesLibrary {
+			for i, entitySymbol in characters.supplementaryData["HTML Named Entities"] {
 				if Mod(i, 2) = 1 {
-					local entityCode := EntitiesLibrary[i + 1]
+					local entityCode := characters.supplementaryData["HTML Named Entities"][i + 1]
 
 					if character == entitySymbol {
-						refinedEntry.entity := entityCode
+						entry["entity"] := entityCode
 						break
 					}
 
@@ -663,91 +657,91 @@ Class ChrReg {
 			}
 		}
 
-		refinedEntry.symbol.set := characterSequence
+		entry["symbol"]["set"] := characterSequence
 
-		if refinedEntry.groups.Length = 0
-			refinedEntry.groups := ["Default Group"]
+		if entry["groups"].Length = 0
+			entry["groups"] := ["Default Group"]
 
-		for key, value in refinedEntry.options.OwnProps() {
+		for key, value in entry["options"] {
 			if key ~= "i)^telex__" && value != "" {
 				local TELEXName := RegExReplace(key, "i)^telex__")
 				TELEXName := StrReplace(TELEXName, "_", " ")
 				TELEXName := StrTitle(TELEXName)
 
-				refinedEntry.groups.push("TELEX/VNI " TELEXName)
+				entry["groups"].push("TELEX/VNI " TELEXName)
 
 				TELEXName := unset
 			}
 		}
 
-		for group in ["fastKey", "specialKey", "altLayoutKey"] {
-			if refinedEntry.options.HasOwnProp(group) {
-				refinedEntry.options.%group% := Util.ReplaceModifierKeys(refinedEntry.options.%group%)
+		for each in ["fastKey", "specialKey", "altLayoutKey"] {
+			if entry["options"].Has(each) {
+				entry["options"][each] := Util.ReplaceModifierKeys(entry["options"][each])
 			} else {
-				refinedEntry.options.%group% := ""
+				entry["options"][each] := ""
 			}
 		}
 
-		local hasSet := StrLen(refinedEntry.symbol.set) > 0
-		local hasCustoms := StrLen(refinedEntry.symbol.customs) > 0
-		local hasFont := StrLen(refinedEntry.symbol.font) > 0
+		local hasSet := StrLen(entry["symbol"]["set"]) > 0
+		local hasCustoms := StrLen(entry["symbol"]["customs"]) > 0
+		local hasFont := StrLen(entry["symbol"]["font"]) > 0
 
-		if StrLen(refinedEntry.symbol.category) > 0 {
-			local category := refinedEntry.symbol.category
+		if StrLen(entry["symbol"]["category"]) > 0 {
+			local category := entry["symbol"]["category"]
 
-			refinedEntry.symbol.set := (category = "Diacritic Mark" ? Chr(0x25CC) characterSequence : characterSequence)
+			entry["symbol"]["set"] := (category = "Diacritic Mark" ? Chr(0x25CC) characterSequence : characterSequence)
 			if category = "Diacritic Mark" {
 				if !hasCustoms
-					refinedEntry.symbol.customs := "s72"
+					entry["symbol"]["customs"] := "s72"
 				if !hasFont
-					refinedEntry.symbol.font := "Cambria"
+					entry["symbol"]["font"] := "Cambria"
 			} else if category = "Spaces" && !hasCustoms {
-				refinedEntry.symbol.customs := "underline"
+				entry["symbol"]["customs"] := "underline"
 			}
 
 			category := unset
 		} else {
-			refinedEntry.symbol.category := "N/A"
+			entry["symbol"]["category"] := "N/A"
 			if !hasSet
-				refinedEntry.symbol.set := characterSequence
+				entry["symbol"]["set"] := characterSequence
 		}
 
 		if RegExMatch(entryName, "i)^(north_arabian|south_arabian)", &match) {
 			local scriptName := StrReplace(match[1], "_", " ")
-			refinedEntry.symbol.font := "Noto Sans Old " StrTitle(scriptName)
+			entry["symbol"]["font"] := "Noto Sans Old " StrTitle(scriptName)
 
 			scriptName := unset
 		} else if RegExMatch(entryName, "i)^(old_permic|old_hungarian|old_italic|old_persian|ugaritic|carian|sidetic|lycian|lydian|cypriot|tifinagh)", &match) {
 			local scriptName := StrReplace(match[1], "_", " ")
-			refinedEntry.symbol.font := "Noto Sans " StrTitle(scriptName)
+			entry["symbol"]["font"] := "Noto Sans " StrTitle(scriptName)
 
 			scriptName := unset
 		} else if entryName ~= "i)^(alchemical|astrological|astronomical|symbolistics|ugaritic)" {
-			refinedEntry.symbol.font := "Kurinto Sans"
+			entry["symbol"]["font"] := "Kurinto Sans"
 		} else if entryName ~= "i)^(phoenician|shavian)" {
-			refinedEntry.symbol.font := "Segoe UI Historic"
+			entry["symbol"]["font"] := "Segoe UI Historic"
 		} else if entryName ~= "i)^(deseret)" {
-			refinedEntry.symbol.font := "Segoe UI Symbol"
+			entry["symbol"]["font"] := "Segoe UI Symbol"
 		} else if entryName ~= "i)^(cirth_runic|tolkien_runic)" || entryName ~= "(franks_casket)" {
-			refinedEntry.symbol.font := "Catrinity"
+			entry["symbol"]["font"] := "Catrinity"
 		}
 
-		for group in refinedEntry.groups {
-			if !ChrLib.entryGroups.Has(group)
-				ChrLib.entryGroups.Set(group, [])
+		for each in entry["groups"] {
+			if !ChrLib.entryGroups.Has(each)
+				ChrLib.entryGroups.Set(each, [])
 
-			if !ChrLib.entryGroups.Get(group).HasValue(entryName)
-				ChrLib.entryGroups[group].Push(entryName)
+			if !ChrLib.entryGroups.Get(each).HasValue(entryName)
+				ChrLib.entryGroups[each].Push(entryName)
 		}
 
-		if !ChrLib.entryCategories.Has(refinedEntry.symbol.category)
-			ChrLib.entryCategories.Set(refinedEntry.symbol.category, [])
+		if !ChrLib.entryCategories.Has(entry["symbol"]["category"])
+			ChrLib.entryCategories.Set(entry["symbol"]["category"], [])
 
-		if !ChrLib.entryCategories.Get(refinedEntry.symbol.category).HasValue(entryName)
-			ChrLib.entryCategories[refinedEntry.symbol.category].Push(entryName)
+		if !ChrLib.entryCategories.Get(entry["symbol"]["category"]).HasValue(entryName)
+			ChrLib.entryCategories[entry["symbol"]["category"]].Push(entryName)
 
-		if refinedEntry.tags.Length > 0 {
-			for tag in refinedEntry.tags {
+		if entry["tags"].Length > 0 {
+			for tag in entry["tags"] {
 				if !ChrLib.entryTags.Has(tag)
 					ChrLib.entryTags.Set(tag, [])
 
@@ -755,65 +749,95 @@ Class ChrReg {
 			}
 		}
 
-		local dataLetter := StrLen(refinedEntry.symbol.letter) > 0 ? refinedEntry.symbol.letter : refinedEntry.data.letter
-		local dataPack := entry.data
-		dataPack.dataLetter := dataLetter
+		local dataLetter := StrLen(entry["symbol"]["letter"]) > 0 ? entry["symbol"]["letter"] : entry["data"]["letter"]
+		local dataPack := entry["data"]
+		dataPack["dataLetter"] := dataLetter
 
-		if StrLen(refinedEntry.data.letter) > 0 {
-			if refinedEntry.recipe.Length > 0 {
-				for i, recipe in refinedEntry.recipe {
-					refinedEntry.recipe[i] := RegExReplace(recipe, "\~", SubStr(refinedEntry.data.letter, 1, 1))
-					refinedEntry.recipe[i] := RegExReplace(recipe, "\$(?![{(])", dataLetter)
+		if StrLen(entry["data"]["letter"]) > 0 {
+			if entry["recipe"].Length > 0 {
+				for i, recipe in entry["recipe"] {
+					entry["recipe"][i] := RegExReplace(recipe, "\~", SubStr(entry["data"]["letter"], 1, 1))
+					entry["recipe"][i] := RegExReplace(recipe, "\$(?![{(])", dataLetter)
 				}
 			}
 		}
 
 		local toNotate := ["fastKey", "altLayoutKey", "altSpecialKey"]
 
-		for key, value in refinedEntry.options.OwnProps()
+		for key, value in entry["options"]
 			if toNotate.HasValue(key) || key ~= "i)^telex__"
-				refinedEntry.options.%key% := ChrReg.SetNotaion(&value, &dataPack)
+				entry["options"][key] := ChrReg.SetNotaion(&value, &dataPack)
 
-		if refinedEntry.recipe.Length > 0 {
-			for recipe in refinedEntry.recipe {
+		if entry["recipe"].Length > 0 {
+			local concatStartI := 0
+			local concatedRecipes := []
+			for i, recipe in entry["recipe"] {
+				if RegExMatch(recipe, "(@concat\{)", &concatMatch) {
+					concatStartI := i
+					continue
+				} else if RegExMatch(recipe, "(\}endConcat@)", &concatMatch) && concatStartI > 0 {
+					local concatStr := ""
+					Loop i - concatStartI + 1 {
+						local idx := concatStartI + A_Index - 1
+						concatStr .= entry["recipe"][idx]
+					}
+					concatedRecipes.Push(concatStr)
+					concatStartI := 0
+					continue
+				} else if concatStartI > 0 {
+					continue
+				} else {
+					concatedRecipes.Push(recipe)
+				}
+			}
+
+			if concatedRecipes.Length > 0
+				entry["recipe"] := concatedRecipes
+
+			for recipe in entry["recipe"] {
 				if !ChrLib.entryRecipes.Has(recipe) {
-					ChrLib.entryRecipes.Set(recipe, { chr: Util.UnicodeToChar(refinedEntry.sequence.Length > 0 ? refinedEntry.sequence : refinedEntry.unicode), index: refinedEntry.index, name: entryName })
+					ChrLib.entryRecipes.Set(
+						recipe, {
+							chr: Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"]),
+							index: entry["index"],
+							name: entryName
+						})
 				} else {
 					ChrLib.duplicatesList.Push(recipe)
 				}
 			}
 		}
 
-		if refinedEntry.recipeAlt.Length = 0 && refinedEntry.recipe.Length > 0 {
-			refinedEntry.recipeAlt := refinedEntry.recipe.Clone()
+		if entry["recipeAlt"].Length = 0 && entry["recipe"].Length > 0 {
+			entry["recipeAlt"] := entry["recipe"].Clone()
 
 			for diacriticName in ChrLib.entryCategories["Diacritic Mark"] {
-				local diacriticChr := Util.UnicodeToChar(ChrLib.entries.%diacriticName%.unicode)
-				for i, altRecipe in refinedEntry.recipeAlt {
+				local diacriticChr := Util.UnicodeToChar(ChrLib.entries.%diacriticName%["unicode"])
+				for i, altRecipe in entry["recipeAlt"] {
 					if InStr(altRecipe, diacriticChr) {
-						refinedEntry.recipeAlt[i] := RegExReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
+						entry["recipeAlt"][i] := RegExReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
 					}
 				}
 
 				diacriticChr := unset
 			}
 
-			for i, aR in refinedEntry.recipeAlt {
-				refinedEntry.recipeAlt[i] := RegExReplace(aR, DottedCircle DottedCircle, DottedCircle)
+			for i, aR in entry["recipeAlt"] {
+				entry["recipeAlt"][i] := RegExReplace(aR, DottedCircle DottedCircle, DottedCircle)
 			}
 		}
 
-		if StrLen(refinedEntry.data.script) > 0 && StrLen(refinedEntry.data.case) > 0 && StrLen(refinedEntry.data.letter) > 0 {
-			refinedEntry := Locale.LocalesGeneration(entryName, refinedEntry)
+		if StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["case"]) > 0 && StrLen(entry["data"]["letter"]) > 0 {
+			entry := Locale.LocalesGeneration(entryName, entry)
 		}
 
-		for i, LaTeXCodeSymbol in LaTeXCodesLibrary {
+		for i, LaTeXCodeSymbol in characters.supplementaryData["LaTeX Commands"] {
 			if Mod(i, 2) = 1 {
-				if refinedEntry.LaTeX.Length = 0 {
-					local LaTeXCode := LaTeXCodesLibrary[i + 1]
+				if entry["LaTeX"].Length = 0 {
+					local LaTeXCode := characters.supplementaryData["LaTeX Commands"][i + 1]
 
 					if character == LaTeXCodeSymbol {
-						refinedEntry.LaTeX := LaTeXCode is Array ? LaTeXCode : [LaTeXCode]
+						entry["LaTeX"] := LaTeXCode is Array ? LaTeXCode : [LaTeXCode]
 					}
 
 					LaTeXCode := unset
@@ -821,24 +845,24 @@ Class ChrReg {
 			}
 		}
 
-		if refinedEntry.data.postfixes.Length = 1 {
-			local postfixEntry := ChrLib.GetEntry(refinedEntry.data.postfixes[1])
+		if entry["data"]["postfixes"].Length = 1 {
+			local postfixEntry := ChrLib.GetEntry(entry["data"]["postfixes"][1])
 			local originSymbolEntry := ChrLib.GetEntry(RegExReplace(entryName, "i)^(.*?)__(.*)$", "$1"))
 			if postfixEntry {
-				postfixSymbol := Util.UnicodeToChar(postfixEntry.unicode)
+				postfixSymbol := Util.UnicodeToChar(postfixEntry["unicode"])
 
-				local originLTXLen := originSymbolEntry ? originSymbolEntry.LaTeX.Length : 0
-				local postfixLTXLen := postfixEntry.LaTeX.Length
-				local isDigraphOrLigature := Util.InStr(refinedEntry.symbol.category, ["dig", "lig"]) && refinedEntry.recipe.Length > 1 ? refinedEntry.recipe[2] : refinedEntry.recipe[1]
+				local originLTXLen := originSymbolEntry ? originSymbolEntry["LaTeX"].Length : 0
+				local postfixLTXLen := postfixEntry["LaTeX"].Length
+				local isDigraphOrLigature := Util.InStr(entry["symbol"]["category"], ["dig", "lig"]) && entry["recipe"].Length > 1 ? entry["recipe"][2] : entry["recipe"][1]
 
 				local symbolForLaTeX := RegExReplace(isDigraphOrLigature, postfixSymbol)
-				local setLaTeX := (lpox := 1, epos := 1) => postfixEntry.LaTeX[lpox] "{" (originLTXLen > 0 ? originSymbolEntry.LaTeX[epos] : symbolForLaTeX) "}"
+				local setLaTeX := (lpox := 1, epos := 1) => postfixEntry["LaTeX"][lpox] "{" (originLTXLen > 0 ? originSymbolEntry["LaTeX"][epos] : symbolForLaTeX) "}"
 
 				if postfixLTXLen > 0
-					refinedEntry.LaTeX := [setLaTeX()]
+					entry["LaTeX"] := [setLaTeX()]
 
 				if postfixLTXLen = 2
-					refinedEntry.LaTeX.Push(setLaTeX(postfixLTXLen, originLTXLen))
+					entry["LaTeX"].Push(setLaTeX(postfixLTXLen, originLTXLen))
 
 				originLTXLen := unset
 				postfixLTXLen := unset
@@ -851,8 +875,7 @@ Class ChrReg {
 			originSymbolEntry := unset
 		}
 
-		ChrLib.entries.%entryName% := refinedEntry
-		refinedEntry := unset
+		ChrLib.entries.%entryName% := entry
 		character := unset
 		characterSequence := unset
 		hasSet := unset
@@ -869,19 +892,19 @@ Class ChrReg {
 
 		local output := str
 
-		if StrLen(data.letter) > 0 {
-			output := RegExReplace(output, "\$(?![{(])", data.dataLetter)
-			output := RegExReplace(output, "\~", SubStr(data.letter, 1, 1))
+		if StrLen(data["letter"]) > 0 {
+			output := RegExReplace(output, "\$(?![{(])", data["dataLetter"])
+			output := RegExReplace(output, "\~", SubStr(data["letter"], 1, 1))
 			output := RegExReplace(output, "\?(.*?)$")
 		}
 
-		if StrLen(data.case) > 0 {
+		if StrLen(data["case"]) > 0 {
 			while RegExMatch(output, "\/(.*?)\/", &match) {
-				output := RegExReplace(output, RegExEscape(match[0]), ["capital", "neutral"].HasValue(data.case) ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
+				output := RegExReplace(output, RegExEscape(match[0]), ["capital", "neutral"].HasValue(data["case"]) ? Util.StrUpper(match[1], 1) : Util.StrLower(match[1], 1))
 			}
 
 			while RegExMatch(output, "\\(.*?)\\", &match) {
-				output := RegExReplace(output, RegExEscape(match[0]), ["capital", "neutral"].HasValue(data.case) ? StrUpper((match[1])) : StrLower(match[1]))
+				output := RegExReplace(output, RegExEscape(match[0]), ["capital", "neutral"].HasValue(data["case"]) ? StrUpper((match[1])) : StrLower(match[1]))
 			}
 		}
 
@@ -898,20 +921,20 @@ Class ChrReg {
 	}
 
 	NameDecompose(&entryName) {
-		local decomposedName := {
-			script: Map(
+		local decomposedName := Map(
+			"script", Map(
 				"lat", "latin",
 				"cyr", "cyrillic",
 				"hel", "hellenic",
 			),
-			case: Map(
+			"case", Map(
 				"c", "capital",
 				"s", "small",
 				"k", "small_capital",
 				"i", "inter",
 				"n", "neutral"
 			),
-			type: Map(
+			"type", Map(
 				"let", "letter",
 				"lig", "ligature",
 				"dig", "digraph",
@@ -923,15 +946,15 @@ Class ChrReg {
 				"syl", "syllable",
 				"gly", "glyph"
 			),
-			letter: "",
-			endPart: "",
-			postfixes: []
-		}
+			"letter", "",
+			"endPart", "",
+			"postfixes", []
+		)
 
 		local altInputScript := ""
 		local foundScript := False
 
-		for key, value in decomposedName.script {
+		for key, value in decomposedName["script"] {
 			if entryName ~= "^" key "_" {
 				foundScript := True
 				break
@@ -946,7 +969,7 @@ Class ChrReg {
 		if !foundScript
 			return entryName
 
-		for key, value in decomposedName.case {
+		for key, value in decomposedName["case"] {
 			if !RegExMatch(entryName, "i)_" key "_") {
 				foundScript := False
 			} else {
@@ -958,7 +981,7 @@ Class ChrReg {
 		if !foundScript
 			return entryName
 
-		for key, value in decomposedName.type {
+		for key, value in decomposedName["type"] {
 			if !RegExMatch(entryName, "i)_" key "_") {
 				foundScript := False
 			} else {
@@ -968,7 +991,7 @@ Class ChrReg {
 		}
 
 		if !foundScript {
-			decomposedName := {}
+			decomposedName := Map()
 			return entryName
 		} else {
 			local regEx := InStr(altInputScript, "_")
@@ -979,18 +1002,18 @@ Class ChrReg {
 				local rawCharacterName := StrSplit(rawMatch[InStr(altInputScript, "_") ? 2 : 1], "_")
 				local shift := InStr(altInputScript, "_") ? 1 : 0
 
-				decomposedName.script := altInputScript != "" ? altInputScript : decomposedName.script[rawCharacterName[1]]
-				decomposedName.case := decomposedName.case[rawCharacterName[2 - shift]]
-				decomposedName.type := decomposedName.type[rawCharacterName[3 - shift]]
-				decomposedName.letter := (["capital", "small_capital", "neutral"].HasValue(decomposedName.case) ? StrUpper(rawCharacterName[4 - shift]) : rawCharacterName[4 - shift])
+				decomposedName["script"] := altInputScript != "" ? altInputScript : decomposedName["script"][rawCharacterName[1]]
+				decomposedName["case"] := decomposedName["case"][rawCharacterName[2 - shift]]
+				decomposedName["type"] := decomposedName["type"][rawCharacterName[3 - shift]]
+				decomposedName["letter"] := (["capital", "small_capital", "neutral"].HasValue(decomposedName["case"]) ? StrUpper(rawCharacterName[4 - shift]) : rawCharacterName[4 - shift])
 
 				local letterIndex := 4 - shift
 				local pattern := "i)^(?:[^_]+_){" (letterIndex - 1) "}[^_]+_([^_]+(?:_[^_]+)*)(?:__|$)"
 				local endPartSet := RegExMatch(entryName, pattern, &m) ? m[1] : ""
-				decomposedName.endPart := endPartSet
+				decomposedName["endPart"] := endPartSet
 
 				local diacriticSet := InStr(entryName, "__") ? RegExReplace(entryName, "i)^.*?__(.*)", "$1") : ""
-				decomposedName.postfixes := StrLen(diacriticSet) > 0 ? StrSplit(diacriticSet, "__") : []
+				decomposedName["postfixes"] := StrLen(diacriticSet) > 0 ? StrSplit(diacriticSet, "__") : []
 
 				return decomposedName
 			} else {
@@ -1005,20 +1028,20 @@ Class ChrReg {
 		local decomposedName := this.NameDecompose(&entryName)
 
 		if decomposedName == entryName {
-			entry.data := {
-				script: "",
-				case: "",
-				type: "",
-				letter: "",
-				endPart: "",
-				postfixes: [],
-				variant: ""
-			}
-			decomposedName := {}
+			entry["data"] := Map(
+				"script", "",
+				"case", "",
+				"type", "",
+				"letter", "",
+				"endPart", "",
+				"postfixes", [],
+				"variant", ""
+			)
+			decomposedName := Map()
 			return entry
 		} else {
-			entry.data := decomposedName
-			decomposedName := {}
+			entry["data"] := decomposedName
+			decomposedName := Map()
 			return entry
 		}
 		return

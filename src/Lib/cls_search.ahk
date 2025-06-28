@@ -3,10 +3,6 @@ Class Search {
 		this.SearchPrompt(action)
 	}
 
-	__Delete() {
-		ClassClear(this)
-	}
-
 	SearchPrompt(action) {
 		local searchQuery := Cfg.Get("Search", "LatestPrompts", "")
 		local resultObj := { result: "", prompt: "", failed: [], send: (*) => "" }
@@ -151,10 +147,10 @@ Class Search {
 			for j, entryName in indexedEntries {
 				local entry := ChrLib.entries.%entryName%
 
-				if entry.tags.Length = 0
+				if entry["tags"].Length = 0
 					continue
 
-				for tag in entry.tags
+				for tag in entry["tags"]
 					if conditions[i](tag)
 						return ChrLib.Get(entryName, True, Auxiliary.inputMode, alteration)
 			}

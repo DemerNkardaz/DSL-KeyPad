@@ -50,10 +50,10 @@ Class ChrRecipeHandler {
 	static GetStr(entryName, formatted := False, formatChar := ", ", prompt := "") {
 		output := []
 		intermediate := []
-		if ChrLib.entries.%entryName%.HasOwnProp("recipeAlt") && ChrLib.entries.%entryName%.recipeAlt.Length > 0 {
-			intermediate := ChrLib.entries.%entryName%.recipeAlt
-		} else if ChrLib.entries.%entryName%.HasOwnProp("recipe") && ChrLib.entries.%entryName%.recipe.Length > 0 {
-			intermediate := ChrLib.entries.%entryName%.recipe
+		if ChrLib.entries.%entryName%.Has("recipeAlt") && ChrLib.entries.%entryName%["recipeAlt"].Length > 0 {
+			intermediate := ChrLib.entries.%entryName%["recipeAlt"]
+		} else if ChrLib.entries.%entryName%.Has("recipe") && ChrLib.entries.%entryName%["recipe"].Length > 0 {
+			intermediate := ChrLib.entries.%entryName%["recipe"]
 		}
 
 		if prompt != "" && (intermediate.Length > 2 || (intermediate.Length = 2 && RegExMatch(intermediate[2], "^" Chr(0x25CC)))) {
@@ -87,15 +87,15 @@ Class ChrRecipeHandler {
 
 		if ChrLib.entryGroups.Has("Custom Composes") && rule = "No Custom" {
 			for entryName in ChrLib.entryGroups.Get("Custom Composes") {
-				output -= ChrLib.entries.%entryName%.recipe.Length
+				output -= ChrLib.entries.%entryName%["recipe"].Length
 			}
 		} else if ChrLib.entryGroups.Has("Custom Composes") && rule = "Custom Only" {
 			output := 0
 			for entryName in ChrLib.entryGroups.Get("Custom Composes") {
-				if onlyUnique && ChrLib.entries.%entryName%.recipe.Length > 0
+				if onlyUnique && ChrLib.entries.%entryName%["recipe"].Length > 0
 					output++
 				else
-					output += ChrLib.entries.%entryName%.recipe.Length
+					output += ChrLib.entries.%entryName%["recipe"].Length
 			}
 		}
 

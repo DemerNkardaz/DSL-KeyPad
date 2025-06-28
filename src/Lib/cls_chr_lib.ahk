@@ -46,7 +46,10 @@ Class ChrLib {
 	]
 
 	static __New() {
-		LibRegistrate()
+		ChrReg(characters.data)
+
+		if ChrLib.duplicatesList.Length > 0
+			TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
 		return
 	}
 
@@ -55,8 +58,8 @@ Class ChrLib {
 			local entry := this.GetEntry(entryName)
 
 			local scenarios := Map(
-				"groups", { source: entry.groups, target: this.entryGroups },
-				"tags", { source: entry.tags, target: this.entryTags }
+				"groups", { source: entry["groups"], target: this.entryGroups },
+				"tags", { source: entry["tags"], target: this.entryTags }
 			)
 
 			for scenarioName, scenario in scenarios {
@@ -81,17 +84,16 @@ Class ChrLib {
 		if !IsSet(entry)
 			entry := this.entries.%entryName%
 
-		local referencingTo := entry.reference is Object ? entry.reference.Clone() : entry.reference
+		local referencingTo := entry["reference"] is Object ? entry["reference"].Clone() : entry["reference"]
 
-		if referencingTo is Object && referencingTo.HasOwnProp("params") {
-			local call := referencingTo.HasOwnProp("call") ? referencingTo.call : Cfg.Get.Bind(Cfg, referencingTo.params*)
+		if referencingTo is Object && referencingTo.Has("params") {
+			local call := referencingTo.Has("call") ? referencingTo["call"] : Cfg.Get.Bind(Cfg, referencingTo["params"]*)
 			local result := call()
-			referencingTo := result = referencingTo.if
-				? referencingTo.then
-				: referencingTo.else
-		} else if referencingTo is Object && referencingTo.HasOwnProp("name")
-			referencingTo := referencingTo.name
-
+			referencingTo := result = referencingTo["if"]
+				? referencingTo["then"]
+				: referencingTo["else"]
+		} else if referencingTo is Object && referencingTo.Has("name")
+			referencingTo := referencingTo["name"]
 
 		return referencingTo
 	}
@@ -102,7 +104,7 @@ Class ChrLib {
 			local referencingTo := this.GetReferenceName(&entryName, &entry)
 
 			if referencingTo != ""
-				entry := this.ReplaceEntryKeys(entry, this.GetEntry(referencingTo), entry.modifiedKeys)
+				entry := this.ReplaceEntryKeys(entry, this.GetEntry(referencingTo), entry["modifiedKeys"])
 
 			return entry
 		} else {
@@ -113,14 +115,14 @@ Class ChrLib {
 
 	static GetValue(entryName, value, useRef := False, &output?) {
 		if useRef {
-			if this.entries.%entryName%.HasOwnProp(value) {
-				output := this.entries.%entryName%.%value%
+			if this.entries.%entryName%.Has(value) {
+				output := this.entries.%entryName%[value]
 				return True
 			} else {
 				return False
 			}
 		} else {
-			return this.entries.%entryName%.%value%
+			return this.entries.%entryName%[value]
 		}
 		return
 	}
@@ -136,15 +138,15 @@ Class ChrLib {
 		local i := 0
 		for entryName, entry in this.entries.OwnProps() {
 			i++
-			local characterContent := (entry.symbol.category = "Diacritic Mark" ? DottedCircle : "") (entry.result.Length = 1 ? (
-				Util.StrToHTML(entry.result[1])) : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode))
+			local characterContent := (entry["symbol"]["category"] = "Diacritic Mark" ? DottedCircle : "") (entry["result"].Length = 1 ? (
+				Util.StrToHTML(entry["result"][1])) : Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"]))
 
 			local characterAlts := ""
 
-			local maxJ := ObjOwnPropCount(entry.alterations)
+			local maxJ := ObjOwnPropCount(entry["alterations"])
 			if maxJ > 0 {
 				local j := 0
-				for key, value in entry.alterations.OwnProps() {
+				for key, value in entry["alterations"] {
 					j++
 					if !InStr(key, "HTML") {
 						characterAlts .= (j = 1 ? "`n" : "") '<span class="small-text">' key ':</span> ' DottedCircle Util.UnicodeToChar(value) (j < maxJ ? "`n" : "")
@@ -155,7 +157,7 @@ Class ChrLib {
 			local tableRows .= (
 				'				<tr>`n'
 				'					<td class="index">' i '</td>`n'
-				'					<td' (StrLen(characterContent) > 15 * (InStr(characterContent, "&") ? 8 : 1) ? ' class="small-text"' : entry.symbol.category = "Spaces" ? ' class="spaces"' : '') '>' characterContent characterAlts '</td>`n'
+				'					<td' (StrLen(characterContent) > 15 * (InStr(characterContent, "&") ? 8 : 1) ? ' class="small-text"' : entry["symbol"]["category"] = "Spaces" ? ' class="spaces"' : '') '>' characterContent characterAlts '</td>`n'
 				'					<td>' entryName '</td>`n'
 				'				</tr>`n'
 			)
@@ -251,36 +253,36 @@ Class ChrLib {
 		local output := entrySource.Clone()
 
 		for each in ArrayMerge(keyNames, ["index", "variant", "variantPos"]) {
-			if entryToModify.HasOwnProp(each) {
-				output.%each% := entryToModify.%each% is Object
-					? entryToModify.%each%.Clone()
-					: entryToModify.%each%
+			if entryToModify.Has(each) {
+				output[each] := entryToModify[each] is Object
+					? entryToModify[each].Clone()
+					: entryToModify[each]
 			}
 		}
 
-		if entryToModify.reference is Object
-			&& entryToModify.reference.HasOwnProp("as")
-			&& ObjOwnPropCount(entrySource.alterations) > 0
-			&& entrySource.alterations.HasOwnProp(entryToModify.reference.as) {
-			output.unicode := entrySource.alterations.%entryToModify.reference.as%
-			output.symbol.set := Util.UnicodeToChar(entrySource.alterations.%entryToModify.reference.as%)
-			output.sequence := []
-			output.alterations := {}
-			output.altCode := ""
-			output.altCodePages := []
-			output.LaTeX := []
-			output.LaTeXPackage := ""
+		if entryToModify["reference"] is Object
+			&& entryToModify["reference"].Has("as")
+			&& entrySource["alterations"].Count > 0
+			&& entrySource["alterations"].Has(entryToModify["reference"]["as"]) {
+			output["unicode"] := entrySource["alterations"][entryToModify["reference"]["as"]]
+			output["symbol"]["set"] := Util.UnicodeToChar(entrySource["alterations"][entryToModify["reference"]["as"]])
+			output["sequence"] := []
+			output["alterations"] := Map()
+			output["altCode"] := ""
+			output["altCodePages"] := []
+			output["LaTeX"] := []
+			output["LaTeXPackage"] := ""
 
-			if entryToModify.reference.HasOwnProp("include")
-				for k, v in entryToModify.reference.include
-					output.alterations.%k% := entrySource.alterations.%v%
+			if entryToModify["reference"].Has("include")
+				for k, v in entryToModify["reference"]["include"]
+					output["alterations"][k] := entrySource["alterations"][v]
 		}
 
-		local dataPack := output.data
+		local dataPack := output["data"]
 
-		for key, value in output.options.OwnProps()
+		for key, value in output["options"]
 			if ["fastKey", "altLayoutKey", "altSpecialKey"].HasValue(key)
-				output.options.%key% := ChrReg.SetNotaion(&value, &dataPack)
+				output["options"][key] := ChrReg.SetNotaion(&value, &dataPack)
 
 		return output
 	}
@@ -304,37 +306,37 @@ Class ChrLib {
 		alt := this.ValidateAlt(alt)
 		local entry := this.GetEntry(entryName)
 
-		if alt = "superscript" && !entry.alterations.HasOwnProp("superscript")
+		if alt = "superscript" && !entry["alterations"].Has("superscript")
 			alt := "modifier"
-		else if alt = "fraktur" && !entry.alterations.HasOwnProp("fraktur")
+		else if alt = "fraktur" && !entry["alterations"].Has("fraktur")
 			alt := "blackletter"
 
 		getMode := StrLen(getMode) ? getMode : "Unicode"
 
-		local getChar := entry.result.Length = 1 ? entry.result[1] : Util.UnicodeToChar(entry.sequence.Length > 0 ? entry.sequence : entry.unicode)
+		local getChar := entry["result"].Length = 1 ? entry["result"][1] : Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
 
 		if (getMode = "HTML") {
 			local output := getChar
-			local entity := entry.entity
+			local entity := entry["entity"]
 
-			if (extraRules && StrLen(alt) > 0 && entry.alterations.HasOwnProp(alt)) {
-				output := Util.UnicodeToChar(entry.alterations.%alt%)
+			if (extraRules && StrLen(alt) > 0 && entry["alterations"].Has(alt)) {
+				output := Util.UnicodeToChar(entry["alterations"][alt])
 
-				if entry.alterations.HasOwnProp(alt "Entity") && entry.alterations.%alt%Entity != ""
-					entity := entry.alterations.%alt%Entity
+				if entry["alterations"].Has(alt "Entity") && entry["alterations"][alt "Entity"] != ""
+					entity := entry["alterations"][alt "Entity"]
 			}
 
 			return StrLen(entity) > 0 ? entity : Util.StrToHTML(output, Cfg.HTMLMode)
 
-		} else if (getMode = "LaTeX" && entry.LaTeX.Length > 0) {
-			return (entry.LaTeX.Length = 2 && Cfg.LaTeXMode = "Math") ? entry.LaTeX[2] : entry.LaTeX[1]
+		} else if (getMode = "LaTeX" && entry["LaTeX"].Length > 0) {
+			return (entry["LaTeX"].Length = 2 && Cfg.LaTeXMode = "Math") ? entry["LaTeX"][2] : entry["LaTeX"][1]
 
 		} else {
-			if (extraRules && StrLen(alt) > 0 && entry.alterations.HasOwnProp(alt)) {
-				return Util.UnicodeToChar(entry.alterations.%alt%)
+			if (extraRules && StrLen(alt) > 0 && entry["alterations"].Has(alt)) {
+				return Util.UnicodeToChar(entry["alterations"][alt])
 
-			} else if (extraRules && getMode != "Unicode" && entry.alterations.HasOwnProp(getMode)) {
-				return Util.UnicodeToChar(entry.alterations.%getMode%)
+			} else if (extraRules && getMode != "Unicode" && entry["alterations"].Has(getMode)) {
+				return Util.UnicodeToChar(entry["alterations"][getMode])
 			} else {
 				try {
 					return getChar
@@ -404,7 +406,7 @@ Class ChrLib {
 		local output := Map()
 
 		for k, v in this.entries.OwnProps()
-			output.Set(v.index, k)
+			output.Set(v["index"], k)
 
 		return output
 	}
@@ -430,11 +432,11 @@ Class ChrLib {
 	static Count(groupRestrict?, onlyGlyphsVariations := False) {
 		local count := 0
 		for entry, value in this.entries.OwnProps() {
-			if !IsSet(groupRestrict) || (IsSet(groupRestrict) && value.groups.HasValue(groupRestrict)) {
-				if !value.options.noCalc && !onlyGlyphsVariations
+			if !IsSet(groupRestrict) || (IsSet(groupRestrict) && value["groups"].HasValue(groupRestrict)) {
+				if !value["options"]["noCalc"] && !onlyGlyphsVariations
 					count++
 
-				for alteration, value in value.alterations.OwnProps()
+				for alteration, value in value["alterations"]
 					if !InStr(alteration, "HTML") && !InStr(alteration, "Entity")
 						count++
 			}
@@ -448,10 +450,10 @@ Class ChrLib {
 		for entry, value in this.entries.OwnProps() {
 			if key is Array {
 				for k in key
-					if value.options.HasOwnProp(k) && value.options.%k% != ""
+					if value["options"].Has(k) && value["options"][k] != ""
 						count++
 			} else
-				if value.options.HasOwnProp(key) && value.options.%key% != ""
+				if value["options"].Has(key) && value["options"][key] != ""
 					count++
 		}
 
@@ -546,7 +548,7 @@ Class ChrLib {
 		local output := ""
 		local indentStr := Util.StrRepeat(" ", indent * 8)
 
-		for key, value in entry.OwnProps() {
+		for key, value in entry {
 			if value is Array {
 				output .= indentStr key ": ["
 				local subOutput := ""
