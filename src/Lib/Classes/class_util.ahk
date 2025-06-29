@@ -70,6 +70,13 @@ Class Util {
 		return output
 	}
 
+	static ArrRepeatEmpty(count) {
+		local output := []
+		loop count
+			output.Push("")
+		return output
+	}
+
 	static InStr(str, search, start := 1, end := StrLen(str)) {
 		if search is Array {
 			for value in search {

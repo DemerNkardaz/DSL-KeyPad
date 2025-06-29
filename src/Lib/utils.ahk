@@ -206,6 +206,17 @@ ArrayMerge(Arrays*) {
 	return tempArray
 }
 
+ArraySlice(this, start, end := this.Length) {
+	local result := []
+	for index, value in this {
+		if index >= start && index <= end {
+			result.Push(value)
+		}
+	}
+	return result
+
+}
+
 RegExEscape(str) {
 	local newStr := ""
 	for k, char in StrSplit(str) {

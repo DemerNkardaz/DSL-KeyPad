@@ -1,15 +1,16 @@
 Class UIPanelFilter {
-	__New(&panelWindow, &filterField, &LV, &dataList) {
+	__New(&panelWindow, &filterField, &LV, &dataList, &localeData) {
 		this.panelWindow := panelWindow
 		this.filterField := filterField
 		this.LV := LV
 		this.dataList := dataList
+		this.localeData := localeData
 	}
 
 	Populate() {
 		this.LV.Delete()
 		for item in this.dataList
-			this.LV.Add(, item*)
+			this.LV.Add(, item[this.localeData.localeIndex], ArraySlice(item, 2, this.localeData.columnsCount)*)
 		return
 	}
 
@@ -29,6 +30,16 @@ Class UIPanelFilter {
 		}
 	}
 
+	MatchInArray(&textsArray, &filterText) {
+		for each in textsArray {
+			if each = filterText
+				|| each ~= filterText
+				|| filterText ~= each
+				return True
+		}
+		return False
+	}
+
 	Filter(&filterText) {
 		filterText := filterText
 		this.LV.Delete()
@@ -38,36 +49,40 @@ Class UIPanelFilter {
 		} else {
 			local groupStarted := False
 			local greviousGroupName := ""
+			local caseSensitiveMark := ""
 
 			try {
 				for item in this.dataList {
-					if item[1] = ""
+					if item[this.localeData.localeIndex] = ""
 						continue
 
-					local itemText := StrReplace(item[1], Chr(0x00A0), " ")
-					local reserveArray := [StrReplace(item[1], Chr(0x00A0), " "), item[5]]
+					local itemText := StrReplace(item[this.localeData.localeIndex], Chr(0x00A0), " ")
+
+					local reserveTexts := [item[5]]
+					for key, index in this.localeData.localeIndexMap
+						if index != this.localeData.localeIndex
+							reserveTexts.Push(StrReplace(item[index], Chr(0x00A0), " "))
+
 					local isFavorite := InStr(itemText, Chr(0x2605))
-					local isMatch := itemText ~= filterText || reserveArray.HasRegEx(filterText) || (isFavorite && filterText ~= "^(изб|fav|\*)")
+					local isMatch := itemText ~= filterText || this.MatchInArray(&reserveTexts, &filterText) || (isFavorite && filterText ~= "^(изб|fav|\*)")
 
 					if isMatch {
 						if !groupStarted
-							groupStarted := true
-
-						this.LV.Add(, item*)
+							groupStarted := True
+						this.LV.Add(, item[this.localeData.localeIndex], ArraySlice(item, 2, this.localeData.columnsCount)*)
 					} else if groupStarted
 						groupStarted := False
 
-
-					if itemText != "" and itemText != greviousGroupName
+					if itemText != "" && itemText != greviousGroupName
 						greviousGroupName := itemText
 				}
 
 				if groupStarted
-					this.LV.Add(, "", "", "", "")
+					this.LV.Add()
 
 
 				if greviousGroupName != ""
-					this.LV.Add(, "", "", "", "")
+					this.LV.Add()
 
 			} catch
 				this.Populate()

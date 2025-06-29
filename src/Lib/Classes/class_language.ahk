@@ -10,7 +10,7 @@ Class Language {
 	static Init() {
 		languages := Util.INIGetSections([this.optionsFile])
 
-		for iso in languages {
+		for i, iso in languages {
 			data := {
 				parent: IniRead(this.optionsFile, iso, "parent", ""),
 				title: IniRead(this.optionsFile, iso, "title", ""),
@@ -18,6 +18,7 @@ Class Language {
 				locale: IniRead(this.optionsFile, iso, "is_locale", False),
 				bindings: IniRead(this.optionsFile, iso, "is_bindings", False),
 				altInput: IniRead(this.optionsFile, iso, "alt_input", ""),
+				index: i,
 			}
 
 			data.code := data.code != "" ? Number(data.code) : ""
@@ -30,14 +31,17 @@ Class Language {
 		}
 	}
 
-	static GetSupported(by := "locale", get := "key") {
-		output := []
+	static GetSupported(by := "locale", get := "key", useIndex := False) {
+		output := useIndex ? Map() : []
 
 		for key, value in this.supported
 			if value.%by% && !(value.code is String)
-				output.Push(get = "key" ? key : value.title)
+				if useIndex
+					output.Set(value.index, get = "key" ? key : value.title)
+				else
+					output.Push(get = "key" ? key : value.title)
 
-		return output
+		return useIndex ? output.Values() : output
 	}
 
 	static Validate(input, extraRule?) {

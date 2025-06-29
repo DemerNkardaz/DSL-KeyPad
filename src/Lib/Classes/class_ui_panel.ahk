@@ -66,8 +66,6 @@ Class Panel2 {
 	previewTitleY := (this.previewFrameY + this.previewFrameH) + 15
 
 
-	previewTabs := ["data", "tags"]
-
 	tabs := [
 		"smelting",
 		"fastkeys",
@@ -91,6 +89,8 @@ Class Panel2 {
 		"all",
 		"favorites",
 	]
+
+	listViewLocaleColumnsIndexes := Map()
 
 	listViewData := Map()
 	combinationKeyToGroupPairs := Map()
@@ -151,7 +151,15 @@ Class Panel2 {
 		local progress := DottedProgressTooltip(, &triggerEnds := False)
 		local JSONLists := JSON.LoadFile(App.paths.data "\ui_main_panel_lists.json", "UTF-8")
 
-		this.FillListViewData(&JSONLists)
+		local columnsData := {}
+		columnsData.tabColumns := this.listViewColumnHeaders.default.Clone()
+		columnsData.supportedLanguages := Language.GetSupported(, , useIndex := True)
+		columnsData.languageColumnsStartIndex := columnsData.tabColumns.Length
+		columnsData.tabColumns.MergeWith(columnsData.supportedLanguages)
+
+		for i, each in columnsData.supportedLanguages
+			this.listViewLocaleColumnsIndexes.Set(each, i + columnsData.languageColumnsStartIndex)
+		this.FillListViewData(&JSONLists, &columnsData)
 
 		triggerEnds := True
 		progress := unset
@@ -230,9 +238,17 @@ Class Panel2 {
 			attributes.previewType := "Key"
 
 		local localizedColumns := []
+		local languageCode := Language.Get()
+		local localeData := {
+			supportedLanguages: Language.GetSupported(, , useIndex := True),
+			localeIndex: this.listViewLocaleColumnsIndexes.Get(languageCode),
+			localeIndexMap: this.listViewLocaleColumnsIndexes,
+		}
 
 		for tab in attributes.columns
 			localizedColumns.Push(Locale.Read("col_" tab))
+
+		localeData.columnsCount := localizedColumns.Length
 
 		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
 		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 10, "int"))
@@ -246,14 +262,9 @@ Class Panel2 {
 		}
 
 		local localizesRowsList := []
+		local src := this.listViewData[attributes.source]
 		for item in this.listViewData[attributes.source] {
-			local itemClone := item.Clone()
-			itemClone[1] := item[1] != "" ? this.HandleTitle(item[1]) : item[1] ; Title
-			itemClone[2] := item[2] ~= "(^@|%.*%)" ? this.HandleKey(item[2]) : item[2]  ; Key
-			itemClone[3] := item[3] ~= "(^@|%.*%)" ? this.HandleKey(item[3]) : item[3]  ; Key
-			charactersLV.Add(, itemClone*)
-			localizesRowsList.Push(itemClone)
-			itemClone := unset
+			charactersLV.Add(, item[localeData.localeIndex], ArraySlice(item, 2, attributes.columns.Length)*)
 		}
 
 		local characterFilterIcon := panelWindow.AddButton(Format("x{} y{} h{} w{}", this.filterIconX, this.filterIconY, this.filterIconW, this.filterIconH))
@@ -263,7 +274,7 @@ Class Panel2 {
 			this.filterX, this.filterY, this.filterW, this.filterH, attributes.prefix), "")
 		characterFilter.SetFont("s10")
 
-		local filterInstance := UIPanelFilter(&panelWindow, &characterFilter, &charactersLV, &localizesRowsList)
+		local filterInstance := UIPanelFilter(&panelWindow, &characterFilter, &charactersLV, &src, &localeData)
 		characterFilter.OnEvent("Change", (Ctrl, Info) => (
 			filterText := Ctrl.Text,
 			filterInstance.FilterBridge(&filterText)
@@ -283,18 +294,18 @@ Class Panel2 {
 
 	}
 
-	FillListViewData(&source) {
+	FillListViewData(&source, &columnsData) {
 		for category, attributes in source
-			this.listViewData.Set(category, this.GetEntries(&attributes))
+			this.listViewData.Set(category, this.GetEntries(&attributes, &columnsData))
 		return
 	}
 
-	GetEntries(&attributes) {
+	GetEntries(&attributes, &columnsData) {
 		if attributes is Array {
 			local outputArrays := []
 
 			for each in attributes
-				ArrayMergeTo(&outputArrays, this.GetEntries(&each))
+				ArrayMergeTo(&outputArrays, this.GetEntries(&each, &columnsData))
 
 			return outputArrays
 		} else if attributes["group"] is Array {
@@ -341,28 +352,29 @@ Class Panel2 {
 					)
 				}
 
-				ArrayMergeTo(&outputArrays, this.GetEntries(&eachAttributes))
+				ArrayMergeTo(&outputArrays, this.GetEntries(&eachAttributes, &columnsData))
 			}
 
 			return outputArrays
 		} else {
-			if attributes["group"] == ""
-				return [["", "", "", "", "", "", ""]]
-
 			if !attributes.Has("type")
 				throw "Type is required for MainGUI GetEntries"
 
-			local languageCode := Language.Get()
+			local defaultRow := Util.ArrRepeatEmpty(columnsData.tabColumns.Length + 1)
+
+			if attributes["group"] == ""
+				return [defaultRow]
+
 			local outputArray := []
 			local intermediateMap := Map()
 
-			if attributes.Has("separator") && attributes["separator"]
-				outputArray.Push(["", "", "", "", "", "", ""])
-
 			if attributes.Has("groupKey")
 				if (attributes["groupKey"] is String && StrLen(attributes["groupKey"]) > 0
-					|| attributes["groupKey"] is Func)
-					outputArray.Push(["", attributes["groupKey"], "", "", "", "", ""])
+					|| attributes["groupKey"] is Func) {
+					local groupRow := defaultRow.Clone()
+					groupRow[2] := this.HandleKey(attributes["groupKey"])
+					outputArray.Push(groupRow)
+				}
 
 			for groupKey, entryNamesArray in ChrLib.entryGroups {
 				if !([groupKey].HasRegEx(attributes["group"])) || entryNamesArray.Length = 0 {
@@ -400,6 +412,9 @@ Class Panel2 {
 							"TELEX/VNI", attributes["type"] = "TELEX/VNI" && entry["options"].Has("telex__" attributes["subType"]) ? entry["options"]["telex__" attributes["subType"]] : "",
 						)
 
+						for key, value in bindings
+							bindings.Set(key, this.HandleKey(value))
+
 						local characterSymbol := entry["symbol"]["set"]
 						local characterBinding := bindings.Has(attributes["type"]) ? bindings.Get(attributes["type"]) : attributes["type"] = "" && entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : ""
 
@@ -410,26 +425,33 @@ Class Panel2 {
 
 						reserveCombinationKey := (reserveCombinationKey != "" ? reserveCombinationKey " + " : "")
 
-						intermediateMap.Set(entry["index"],
-							attributes["group"] = "Favorites"
-								? [
-									characterRawTitle,
-									bindings["Recipe"],
-									bindings["Fast Key"] != "" ? reserveCombinationKey bindings["Fast Key"]
-									: bindings["Alternative Layout"] != "" ? reserveCombinationKey bindings["Alternative Layout"]
-									: "",
-									characterSymbol,
-									entryName,
-									""
-								]
-							: [
-								characterRawTitle,
-								characterBinding,
-								characterSymbol,
-								Util.ExtractHex(entry["unicode"]),
-								entryName,
-								attributes.Has("combinationKey") ? attributes["combinationKey"] : attributes.Has("groupKey") ? attributes["groupKey"] : ""
-							])
+						local entryRow := defaultRow.Clone()
+
+						entryRow[2] := attributes["group"] = "Favorites"
+							? bindings["Recipe"]
+						: (attributes["label"] != "All" ? characterBinding : "")
+
+						entryRow[3] := attributes["group"] = "Favorites"
+							? (bindings["Fast Key"] != "" ? reserveCombinationKey bindings["Fast Key"]
+								: bindings["Alternative Layout"] != "" ? reserveCombinationKey bindings["Alternative Layout"]
+								: "")
+						: characterSymbol
+
+						entryRow[4] := attributes["group"] = "Favorites"
+							? characterSymbol
+						: Util.ExtractHex(entry["unicode"])
+
+						entryRow[5] := entryName
+						entryRow[6] := attributes["group"] = "Favorites"
+							? ""
+						: (attributes.Has("combinationKey") ? attributes["combinationKey"] : attributes.Has("groupKey") ? attributes["groupKey"] : "")
+
+						for each in columnsData.supportedLanguages {
+							local index := this.listViewLocaleColumnsIndexes.Get(each)
+							entryRow[index] := this.HandleTitle(characterRawTitle, &each)
+						}
+
+						intermediateMap.Set(entry["index"], entryRow)
 					}
 				}
 			}
@@ -446,9 +468,9 @@ Class Panel2 {
 		return
 	}
 
-	HandleTitle(str) {
+	HandleTitle(str, &specificLanguage := "") {
 		if RegExMatch(str, "^(.*)\[type::(.*)\]$", &partsMatch) {
-			local languageCode := Language.Get()
+			local languageCode := specificLanguage != "" ? specificLanguage : Language.Get()
 			local entryName := partsMatch[1]
 			local entry := ChrLib.entries.%entryName%
 			local optionsType := partsMatch[2]
@@ -462,8 +484,8 @@ Class Panel2 {
 				split := StrSplit(entryName, "_and_")
 				if split.Length > 1 {
 					for i, each in split {
-						if Locale.Read(each "_alt", , True, &titleText) || Locale.Read(each, , True, &titleText) {
-							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and") " " : "")
+						if Locale.Read(each "_alt", specificLanguage, True, &titleText) || Locale.Read(each, specificLanguage, True, &titleText) {
+							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and", specificLanguage) " " : "")
 							skipCombine := False
 						}
 					}
@@ -471,20 +493,20 @@ Class Panel2 {
 			}
 
 			if optionsType = "Alternative Layout" && entry["options"]["layoutTitles"] &&
-				Locale.Read(entryName "_layout", , True, &titleText) {
+				Locale.Read(entryName "_layout", specificLanguage, True, &titleText) {
 				characterTitle := titleText
 
 			} else if !skipCombine {
 				characterTitle := combinedTitle
 
-			} else if Locale.Read(entryName, , True, &titleText) {
+			} else if Locale.Read(entryName, specificLanguage, True, &titleText) {
 				characterTitle := titleText
 
 			} else if entry["titles"].Count > 0 && entry["titles"].Has(languageCode) {
 				characterTitle := entry["titles"].Get(languageCode)
 
 			} else {
-				characterTitle := Locale.Read(entryName)
+				characterTitle := Locale.Read(entryName, specificLanguage)
 			}
 
 			if isFavorite {

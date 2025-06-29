@@ -1,5 +1,6 @@
 {
 	"smelting": {
+		"label": "Smelting",
 		"type": "Recipe",
 		"group": [
 			"Latin Ligatures", "",
@@ -38,6 +39,7 @@
 		"groupKey": {}
 	},
 	"fastkeys": [{
+		"label": "Fast Keys",
 		"type": "Fast Key",
 		"group": [
 			"FK Diacritics Primary", "",
@@ -82,11 +84,13 @@
 			"Wallet Signs Left Shift": "%LeftShift"
 		}
 	}, {
+		"label": "Fast Keys",
 		"type": "Special Combinations",
 		"group": ["Special Combinations"],
 		"groupKey": {"Special Combinations": "@symbol_special_key"}
 	}],
 	"secondkeys": {
+		"label": "Second Keys",
 		"type": "Fast Key",
 		"group": [
 			"SK Diacritics Primary", "",
@@ -103,6 +107,7 @@
 		}
 	},
 	"tertiarykeys": {
+		"label": "Tertiary Keys",
 		"type": "Fast Key",
 		"group": [
 			"TK Diacritics Primary", ""
@@ -112,6 +117,7 @@
 		}
 	},
 	"scripts": {
+		"label": "Scripts",
 		"type": "Alternative Layout",
 		"group": [
 			"Hellenic", "",
@@ -191,6 +197,7 @@
 		}
 	},
 	"TELEXVNI": {
+		"label": "TELEX/VNI",
 		"type": "TELEX/VNI",
 		"group": [
 			"TELEX/VNI Vietnamese", "",
@@ -214,10 +221,12 @@
 		}
 	},
 	"all": {
+		"label": "All",
 		"type": "",
 		"group": ["i)^(?!Custom)"]
 	},
 	"favorites": {
+		"label": "Favorites",
 		"type": "",
 		"group": ["Favorites"]
 	}
