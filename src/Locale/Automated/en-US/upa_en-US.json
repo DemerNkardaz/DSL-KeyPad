@@ -1,0 +1,12 @@
+{
+	"en-US": {
+		"scripts": {
+			"latin": {
+				"s_let_s_voiced_laryngeal_spirant": {
+					"layout_locale": "Voiced Laryngeal Spirant",
+					"second_name": "(UPA)"
+				}
+			}
+		}
+	}
+}

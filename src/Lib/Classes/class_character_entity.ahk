@@ -51,7 +51,7 @@ Class ChrEntry {
 					"customs", "",
 					"font", "",
 				),
-				"data", Map("script", "", "case", "", "type", "", "letter", "", "endPart", "", "postfixes", []),
+				"data", Map("script", "", "originScript", "", "case", "", "type", "", "letter", "", "endPart", "", "postfixes", []),
 				"variant", "",
 				"variantPos", 1,
 				"isXCompose", False,

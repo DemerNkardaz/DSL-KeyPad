@@ -1,0 +1,13 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "sidetic": "Сидетск$(ая|ий|ое)" },
+			"tag": { "sidetic": "сидетск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"sidetic": {
+
+			}
+		}
+	}
+}

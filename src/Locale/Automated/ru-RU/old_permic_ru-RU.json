@@ -1,0 +1,50 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "old_permic": "Древнепермск$(ая|ий|ое)" },
+			"tag": { "old_permic": "древнепермск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"old_permic": {
+				"n_let_an": { "letter_locale": "Ан" },
+				"n_let_bur": { "letter_locale": "Бур" },
+				"n_let_gai": { "letter_locale": "Гай" },
+				"n_let_doi": { "letter_locale": "Дой" },
+				"n_let_e": { "letter_locale": "Э" },
+				"n_let_zhoi": { "letter_locale": "Жой" },
+				"n_let_dzhoi": { "letter_locale": "Джой" },
+				"n_let_zata": { "letter_locale": "Зата" },
+				"n_let_dzita": { "letter_locale": "Дзита" },
+				"n_let_i": { "letter_locale": "И" },
+				"n_let_koke": { "letter_locale": "Кокэ" },
+				"n_let_lei": { "letter_locale": "Лэй" },
+				"n_let_menoe": { "letter_locale": "Мэно" },
+				"n_let_nenoe": { "letter_locale": "Нэно" },
+				"n_let_vooi": { "letter_locale": "Вой" },
+				"n_let_peei": { "letter_locale": "Пэй" },
+				"n_let_rei": { "letter_locale": "Рэй" },
+				"n_let_sii": { "letter_locale": "Сий" },
+				"n_let_tai": { "letter_locale": "Тай" },
+				"n_let_u": { "letter_locale": "У" },
+				"n_let_chery": { "letter_locale": "Чэры" },
+				"n_let_shooi": { "letter_locale": "Шой" },
+				"n_let_shchooi": { "letter_locale": "Тшой" },
+				"n_let_yery": { "letter_locale": "Еры" },
+				"n_let_yry": { "letter_locale": "Ыры" },
+				"n_let_o": { "letter_locale": "О" },
+				"n_let_oo": { "letter_locale": "Оо" },
+				"n_let_ef": { "letter_locale": "Эф" },
+				"n_let_ha": { "letter_locale": "Ха" },
+				"n_let_tsiu": { "letter_locale": "Цю" },
+				"n_let_ver": { "letter_locale": "Вэр" },
+				"n_let_yeru": { "letter_locale": "Ер" },
+				"n_let_yeri": { "letter_locale": "Ери" },
+				"n_let_yat": { "letter_locale": "Ять" },
+				"n_let_ie": { "letter_locale": "Йэ" },
+				"n_let_yu": { "letter_locale": "Ю" },
+				"n_let_ia": { "letter_locale": "Йа" },
+				"n_let_ya": { "letter_locale": "Я" }
+			}
+		}
+	}
+}

@@ -1,0 +1,61 @@
+{
+	"en-US": {
+		"generated": {
+			"prefix": { "carian": "Carian" },
+			"tag": { "carian": "carian" }
+		},
+		"scripts": {
+			"carian": {
+				"n_let_a": { "letter_locale": "A" },
+				"n_let_a_a2": { "letter_locale": "A2" },
+				"n_let_b": { "letter_locale": "B" },
+				"n_let_b_p2": { "letter_locale": "P2" },
+				"n_let_b_mb": { "letter_locale": "Mb" },
+				"n_let_b_mb2": { "letter_locale": "Mb2" },
+				"n_let_b_mb3": { "letter_locale": "Mb3" },
+				"n_let_b_mb4": { "letter_locale": "Mb4" },
+				"n_let_d": { "letter_locale": "D" },
+				"n_let_d_d2": { "letter_locale": "D2" },
+				"n_let_d_nd": { "letter_locale": "Nd" },
+				"n_let_e": { "letter_locale": "E" },
+				"n_let_e_e2": { "letter_locale": "E2" },
+				"n_let_g": { "letter_locale": "G" },
+				"n_let_g_g2": { "letter_locale": "G2" },
+				"n_let_i": { "letter_locale": "I" },
+				"n_let_k": { "letter_locale": "K" },
+				"n_let_k_k2": { "letter_locale": "K2" },
+				"n_let_k_ng": { "letter_locale": "Ng" },
+				"n_let_l": { "letter_locale": "L" },
+				"n_let_l_ld": { "letter_locale": "Ld" },
+				"n_let_l_ld2": { "letter_locale": "Ld2" },
+				"n_let_m": { "letter_locale": "M" },
+				"n_let_n": { "letter_locale": "N" },
+				"n_let_n_x": { "letter_locale": "X" },
+				"n_let_n_nn": { "letter_locale": "Nn" },
+				"n_let_o": { "letter_locale": "O" },
+				"n_let_p": { "letter_locale": "P" },
+				"n_let_q": { "letter_locale": "Q" },
+				"n_let_r": { "letter_locale": "R" },
+				"n_let_r_rr": { "letter_locale": "Rr" },
+				"n_let_s": { "letter_locale": "S" },
+				"n_let_s_sh": { "letter_locale": "Sh" },
+				"n_let_s_sh2": { "letter_locale": "Sh2" },
+				"n_let_s_ss": { "letter_locale": "Ss" },
+				"n_let_s_st": { "letter_locale": "St" },
+				"n_let_s_st2": { "letter_locale": "St2" },
+				"n_let_t": { "letter_locale": "T" },
+				"n_let_t_tt": { "letter_locale": "Tt" },
+				"n_let_t_tt2": { "letter_locale": "Tt2" },
+				"n_let_u": { "letter_locale": "U" },
+				"n_let_w_uu": { "letter_locale": "Uu" },
+				"n_let_y_ii": { "letter_locale": "Ii" },
+				"n_let_y_uuu": { "letter_locale": "Uuu" },
+				"n_let_y_uuu2": { "letter_locale": "Uuu2" },
+				"n_let_y_uuu3": { "letter_locale": "Uuu3" },
+				"n_let_y_uuuu": { "letter_locale": "Uuuu" },
+				"n_let_c18": { "letter_locale": "C-18" },
+				"n_let_c39": { "letter_locale": "C-39" }
+			}
+		}
+	}
+}

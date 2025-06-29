@@ -1,0 +1,44 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "north_arabian": "Североаравийск$(ая|ий|ое)" },
+			"tag": { "north_arabian": "североаравийск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"north_arabian": {
+				"n_let_a_alef": { "letter_locale": "Алеф" },
+				"n_let_a_ain": { "letter_locale": "Аин" },
+				"n_let_b_beh": { "letter_locale": "Бех" },
+				"n_let_d_dal": { "letter_locale": "Даль" },
+				"n_let_d_thal": { "letter_locale": "Ҫаль" },
+				"n_let_d_dad": { "letter_locale": "Дад" },
+				"n_let_f_feh": { "letter_locale": "Фех" },
+				"n_let_g_geem": { "letter_locale": "Геем" },
+				"n_let_g_ghain": { "letter_locale": "Ғаин" },
+				"n_let_h_heh": { "letter_locale": "Хех" },
+				"n_let_h_hah": { "letter_locale": "Хах" },
+				"n_let_h_khah": { "letter_locale": "Ҳах" },
+				"n_let_k_kaf": { "letter_locale": "Каф" },
+				"n_let_l_lam": { "letter_locale": "Лам" },
+				"n_let_m_meem": { "letter_locale": "Мим" },
+				"n_let_n_noon": { "letter_locale": "Нун" },
+				"n_let_q_qaf": { "letter_locale": "Қаф" },
+				"n_let_r_reh": { "letter_locale": "Реф" },
+				"n_let_s_es": { "letter_locale": "Эс" },
+				"n_let_s_esh": { "letter_locale": "Ша" },
+				"n_let_s_sh": { "letter_locale": "Ԯа" },
+				"n_let_s_sad": { "letter_locale": "Сад" },
+				"n_let_t_teh": { "letter_locale": "Тех" },
+				"n_let_t_tah": { "letter_locale": "Тах" },
+				"n_let_t_theh": { "letter_locale": "Ҫех" },
+				"n_let_w_waw": { "letter_locale": "Ўаў" },
+				"n_let_y_yeh": { "letter_locale": "Йех" },
+				"n_let_z_zain": { "letter_locale": "Заин" },
+				"n_let_t_zah": { "letter_locale": "Зах" },
+				"n_num_one": { "letter_locale": "Один" },
+				"n_num_ten": { "letter_locale": "Десять" },
+				"n_num_twenty": { "letter_locale": "Двадцать" }
+			}
+		}
+	}
+}

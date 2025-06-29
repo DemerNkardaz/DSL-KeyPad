@@ -1,0 +1,39 @@
+{
+	"en-US": {
+		"generated": {
+			"prefix": { "gothic": "Gothic" },
+			"tag": { "gothic": "gothic" }
+		},
+		"scripts": {
+			"gothic": {
+				"n_let_a_ahza": { "letter_locale": "Ahza" },
+				"n_let_b_bairkan": { "letter_locale": "Bairkan" },
+				"n_let_d_dagz": { "letter_locale": "Dagz" },
+				"n_let_e_aihvus": { "letter_locale": "Aihvus" },
+				"n_let_f_faihu": { "letter_locale": "Faihu" },
+				"n_let_g_giba": { "letter_locale": "Giba" },
+				"n_let_h_hagl": { "letter_locale": "Hagl" },
+				"n_let_h_hwair": { "letter_locale": "Hwair" },
+				"n_let_i_eis": { "letter_locale": "Eis" },
+				"n_let_k_iggws": { "letter_locale": "Iggws" },
+				"n_let_k_kusma": { "letter_locale": "Kusma" },
+				"n_let_l_lagus": { "letter_locale": "Lagus" },
+				"n_let_m_manna": { "letter_locale": "Manna" },
+				"n_let_n_nauths": { "letter_locale": "Nauths" },
+				"n_let_o_othal": { "letter_locale": "Othal" },
+				"n_let_p_pairthra": { "letter_locale": "Pairthra" },
+				"n_let_q_qairthra": { "letter_locale": "Qairthra" },
+				"n_let_r_raida": { "letter_locale": "Raida" },
+				"n_let_s_sugil": { "letter_locale": "Sugil" },
+				"n_let_t_teiws": { "letter_locale": "Teiws" },
+				"n_let_t_thiuth": { "letter_locale": "Thiuth" },
+				"n_let_u_urus": { "letter_locale": "Urus" },
+				"n_let_w_winja": { "letter_locale": "Winjia" },
+				"n_let_y_jer": { "letter_locale": "Jer" },
+				"n_let_z_ezek": { "letter_locale": "Ezek" },
+				"n_num_ninety": { "letter_locale": "90" },
+				"n_num_nine_hundred": { "letter_locale": "900" }
+			}
+		}
+	}
+}

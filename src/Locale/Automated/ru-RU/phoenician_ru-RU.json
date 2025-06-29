@@ -1,0 +1,41 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "phoenician": "Финикийск$(ая|ий|ое)" },
+			"tag": { "phoenician": "финикийск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"phoenician": {
+				"n_let_a_alef": { "letter_locale": "Алеф" },
+				"n_let_a_ain": { "letter_locale": "Аин" },
+				"n_let_b_bet": { "letter_locale": "Бет" },
+				"n_let_g_gaml": { "letter_locale": "Гамл" },
+				"n_let_d_delt": { "letter_locale": "Делт" },
+				"n_let_h_he": { "letter_locale": "Хе" },
+				"n_let_h_het": { "letter_locale": "Хет" },
+				"n_let_w_wau": { "letter_locale": "Вав" },
+				"n_let_z_zai": { "letter_locale": "Зен" },
+				"n_let_y_yod": { "letter_locale": "Йуд" },
+				"n_let_k_kaf": { "letter_locale": "Каф" },
+				"n_let_l_lamd": { "letter_locale": "Ламд" },
+				"n_let_m_mem": { "letter_locale": "Мем" },
+				"n_let_n_nun": { "letter_locale": "Нун" },
+				"n_let_s_semk": { "letter_locale": "Семк" },
+				"n_let_s_shin": { "letter_locale": "Шин" },
+				"n_let_p_pe": { "letter_locale": "Пе" },
+				"n_let_c_sade": { "letter_locale": "Цади" },
+				"n_let_q_qof": { "letter_locale": "Коф" },
+				"n_let_r_rosh": { "letter_locale": "Рош" },
+				"n_let_t_tau": { "letter_locale": "Тав" },
+				"n_let_t_tet": { "letter_locale": "Тет" },
+				"n_num_one": { "letter_locale": "Один" },
+				"n_num_two": { "letter_locale": "Два" },
+				"n_num_three": { "letter_locale": "Три" },
+				"n_num_ten": { "letter_locale": "Десять" },
+				"n_num_twenty": { "letter_locale": "Двадцать" },
+				"n_num_hundred": { "letter_locale": "Сто" },
+				"n_sym_word_separator": { "letter_locale": "Разделитель слов" }
+			}
+		}
+	}
+}

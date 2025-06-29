@@ -1,0 +1,44 @@
+{
+	"en-US": {
+		"generated": {
+			"prefix": { "north_arabian": "Ancient North Arabian" },
+			"tag": { "north_arabian": "ancient north arabian" }
+		},
+		"scripts": {
+			"north_arabian": {
+				"n_let_a_alef": { "letter_locale": "Alef" },
+				"n_let_a_ain": { "letter_locale": "Ain" },
+				"n_let_b_beh": { "letter_locale": "Beh" },
+				"n_let_d_dal": { "letter_locale": "Dal" },
+				"n_let_d_thal": { "letter_locale": "Thal" },
+				"n_let_d_dad": { "letter_locale": "Dad" },
+				"n_let_f_feh": { "letter_locale": "Feh" },
+				"n_let_g_geem": { "letter_locale": "Geem" },
+				"n_let_g_ghain": { "letter_locale": "Ghain" },
+				"n_let_h_heh": { "letter_locale": "Heh" },
+				"n_let_h_hah": { "letter_locale": "Hah" },
+				"n_let_h_khah": { "letter_locale": "Khah" },
+				"n_let_k_kaf": { "letter_locale": "Kaf" },
+				"n_let_l_lam": { "letter_locale": "Lam" },
+				"n_let_m_meem": { "letter_locale": "Meem" },
+				"n_let_n_noon": { "letter_locale": "Noon" },
+				"n_let_q_qaf": { "letter_locale": "Qaf" },
+				"n_let_r_reh": { "letter_locale": "Reh" },
+				"n_let_s_es": { "letter_locale": "Es" },
+				"n_let_s_esh": { "letter_locale": "Esh" },
+				"n_let_s_sh": { "letter_locale": "Sh" },
+				"n_let_s_sad": { "letter_locale": "Sad" },
+				"n_let_t_teh": { "letter_locale": "Teh" },
+				"n_let_t_tah": { "letter_locale": "Tah" },
+				"n_let_t_theh": { "letter_locale": "Theh" },
+				"n_let_w_waw": { "letter_locale": "Waw" },
+				"n_let_y_yeh": { "letter_locale": "Yeh" },
+				"n_let_z_zain": { "letter_locale": "Zain" },
+				"n_let_t_zah": { "letter_locale": "Zah" },
+				"n_num_one": { "letter_locale": "One" },
+				"n_num_ten": { "letter_locale": "Ten" },
+				"n_num_twenty": { "letter_locale": "Twenty" }
+			}
+		}
+	}
+}

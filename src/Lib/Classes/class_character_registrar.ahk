@@ -813,7 +813,7 @@ Class ChrReg {
 			}
 		}
 
-		if StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["case"]) > 0 && StrLen(entry["data"]["letter"]) > 0 {
+		if StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["case"]) > 0 && StrLen(entry["data"]["letter"]) > 0 && entry["data"]["originScript"] != "&ipa" {
 			entry := Locale.LocalesGeneration(entryName, entry)
 		}
 
@@ -989,6 +989,7 @@ Class ChrReg {
 				local shift := InStr(altInputScript, "_") ? 1 : 0
 
 				decomposedName["script"] := altInputScript != "" ? altInputScript : decomposedName["script"][rawCharacterName[1]]
+				decomposedName["originScript"] := altInputScript != "" ? altInputScript : rawCharacterName[1]
 				decomposedName["case"] := decomposedName["case"][rawCharacterName[2 - shift]]
 				decomposedName["type"] := decomposedName["type"][rawCharacterName[3 - shift]]
 				decomposedName["letter"] := (["capital", "small_capital", "neutral"].HasValue(decomposedName["case"]) ? StrUpper(rawCharacterName[4 - shift]) : rawCharacterName[4 - shift])
@@ -1016,6 +1017,7 @@ Class ChrReg {
 		if decomposedName == entryName {
 			entry["data"] := Map(
 				"script", "",
+				"originScript", "",
 				"case", "",
 				"type", "",
 				"letter", "",

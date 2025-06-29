@@ -1,0 +1,65 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": {
+				"old_italic": "Древнеиталийск$(ая|ий|ое)",
+				"old_italic_etruscan": "Этрусск$(ая|ий|ое)",
+				"old_italic_umbrian": "Умбрск$(ая|ий|ое)",
+				"old_italic_oscan": "Оскск$(ая|ий|ое)",
+				"old_italic_sabine": "Южнопиценск$(ая|ий|ое)",
+				"old_italic_north": "Североиталийск$(ая|ий|ое)"
+			},
+			"tag": {
+				"old_italic": "древнеиталийск$(ая|ий|ое)",
+				"old_italic_etruscan": "этрусск$(ая|ий|ое)",
+				"old_italic_umbrian": "умбрск$(ая|ий|ое)",
+				"old_italic_oscan": "оскск$(ая|ий|ое)",
+				"old_italic_sabine": "южнопиценск$(ая|ий|ое)",
+				"old_italic_north": "североиталийск$(ая|ий|ое)"
+			}
+		},
+		"scripts": {
+			"old_italic": {
+				"n_let_a": { "letter_locale": "А" },
+				"n_let_b_be": { "letter_locale": "Бе" },
+				"n_let_c_che": { "letter_locale": "Че" },
+				"n_let_c_ke": { "letter_locale": "Ке" },
+				"n_let_c_northern_tse": { "letter_locale": "Северная Це" },
+				"n_let_c_southern_tse": { "letter_locale": "Южная Це" },
+				"n_let_d_de": { "letter_locale": "Де" },
+				"n_let_e": { "letter_locale": "Е" },
+				"n_let_f_ef": { "letter_locale": "Эф" },
+				"n_let_f_ve": { "letter_locale": "Ве" },
+				"n_let_h_he": { "letter_locale": "Хе" },
+				"n_let_i": { "letter_locale": "И" },
+				"n_let_i_ii": { "letter_locale": "Ии" },
+				"n_let_k_ka": { "letter_locale": "Ка" },
+				"n_let_k_khe": { "letter_locale": "Кхе" },
+				"n_let_l_el": { "letter_locale": "Эль" },
+				"n_let_m_em": { "letter_locale": "Эм" },
+				"n_let_n_en": { "letter_locale": "Эн" },
+				"n_let_o": { "letter_locale": "О" },
+				"n_let_p_pe": { "letter_locale": "Пе" },
+				"n_let_p_phe": { "letter_locale": "Пхе" },
+				"n_let_q_ku": { "letter_locale": "Ку" },
+				"n_let_r_er": { "letter_locale": "Эр" },
+				"n_let_r_ers": { "letter_locale": "Эрс" },
+				"n_let_s_es": { "letter_locale": "Эс" },
+				"n_let_s_esh": { "letter_locale": "Эш" },
+				"n_let_s_ess": { "letter_locale": "Эсс" },
+				"n_let_s_she": { "letter_locale": "Ше" },
+				"n_let_t_te": { "letter_locale": "Те" },
+				"n_let_t_the": { "letter_locale": "Зэ" },
+				"n_let_u": { "letter_locale": "У" },
+				"n_let_u_uu": { "letter_locale": "Уу" },
+				"n_let_x_eks": { "letter_locale": "Экс" },
+				"n_let_y_ye": { "letter_locale": "Северная Йе" },
+				"n_let_z_ze": { "letter_locale": "Зе" },
+				"n_num_one": { "letter_locale": "Один" },
+				"n_num_five": { "letter_locale": "Пять" },
+				"n_num_ten": { "letter_locale": "Десять" },
+				"n_num_fifty": { "letter_locale": "Пятьдесят" }
+			}
+		}
+	}
+}

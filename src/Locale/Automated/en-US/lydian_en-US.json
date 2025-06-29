@@ -1,0 +1,39 @@
+{
+	"en-US": {
+		"generated": {
+			"prefix": { "lydian": "Lydian" },
+			"tag": { "lydian": "lydian" }
+		},
+		"scripts": {
+			"lydian": {
+				"n_let_a": { "letter_locale": "A" },
+				"n_let_a_an": { "letter_locale": "An" },
+				"n_let_b": { "letter_locale": "B" },
+				"n_let_c": { "letter_locale": "C" },
+				"n_let_d": { "letter_locale": "D" },
+				"n_let_e": { "letter_locale": "E" },
+				"n_let_e_en": { "letter_locale": "En" },
+				"n_let_f": { "letter_locale": "F" },
+				"n_let_g": { "letter_locale": "G" },
+				"n_let_i": { "letter_locale": "I" },
+				"n_let_k": { "letter_locale": "K" },
+				"n_let_l": { "letter_locale": "L" },
+				"n_let_l_ly": { "letter_locale": "Ly" },
+				"n_let_m": { "letter_locale": "M" },
+				"n_let_n": { "letter_locale": "N" },
+				"n_let_n_nn": { "letter_locale": "Nn" },
+				"n_let_o": { "letter_locale": "O" },
+				"n_let_q": { "letter_locale": "Q" },
+				"n_let_r": { "letter_locale": "R" },
+				"n_let_s": { "letter_locale": "S" },
+				"n_let_s_ss": { "letter_locale": "Ss" },
+				"n_let_t": { "letter_locale": "T" },
+				"n_let_t_tt": { "letter_locale": "Tt" },
+				"n_let_u": { "letter_locale": "U" },
+				"n_let_v": { "letter_locale": "V" },
+				"n_let_y": { "letter_locale": "Y" },
+				"n_sym_triangular_mark": { "letter_locale": "Triangular Mark" }
+			}
+		}
+	}
+}

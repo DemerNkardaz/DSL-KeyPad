@@ -1,0 +1,35 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "lycian": "Ликийск$(ая|ий|ое)" },
+			"tag": { "lycian": "ликийск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"lycian": {
+				"n_let_a": { "letter_locale": "А" },
+				"n_let_a_an": { "letter_locale": "Ан" },
+				"n_let_b": { "letter_locale": "Б" },
+				"n_let_d": { "letter_locale": "Д" },
+				"n_let_e": { "letter_locale": "Е" },
+				"n_let_e_en": { "letter_locale": "Ен" },
+				"n_let_h": { "letter_locale": "Х" },
+				"n_let_k": { "letter_locale": "К" },
+				"n_let_k_bh": { "letter_locale": "Бх" },
+				"n_let_k_kk": { "letter_locale": "Кк" },
+				"n_let_l": { "letter_locale": "Л" },
+				"n_let_m": { "letter_locale": "М" },
+				"n_let_m_mm": { "letter_locale": "Мм" },
+				"n_let_n": { "letter_locale": "Н" },
+				"n_let_n_nn": { "letter_locale": "Нн" },
+				"n_let_p": { "letter_locale": "П" },
+				"n_let_q": { "letter_locale": "Қ" },
+				"n_let_r": { "letter_locale": "Р" },
+				"n_let_s": { "letter_locale": "С" },
+				"n_let_t": { "letter_locale": "Т" },
+				"n_let_t_tt": { "letter_locale": "Тт" },
+				"n_let_u": { "letter_locale": "У" },
+				"n_let_x": { "letter_locale": "Х" }
+			}
+		}
+	}
+}

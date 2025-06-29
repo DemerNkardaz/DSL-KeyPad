@@ -1,0 +1,65 @@
+{
+	"en-US": {
+		"generated": {
+			"prefix": {
+				"old_italic": "Old italic",
+				"old_italic_etruscan": "Etruscan",
+				"old_italic_umbrian": "Umbrian",
+				"old_italic_oscan": "Oscan",
+				"old_italic_sabine": "South Picene",
+				"old_italic_north": "North Italic"
+			},
+			"tag": {
+				"old_italic": "old italic",
+				"old_italic_etruscan": "etruscan",
+				"old_italic_umbrian": "umbrian",
+				"old_italic_oscan": "oscan",
+				"old_italic_sabine": "south picene",
+				"old_italic_north": "north italic"
+			}
+		},
+		"scripts": {
+			"old_italic": {
+				"n_let_a": { "letter_locale": "A" },
+				"n_let_b_be": { "letter_locale": "Be" },
+				"n_let_c_che": { "letter_locale": "Che" },
+				"n_let_c_ke": { "letter_locale": "Ke" },
+				"n_let_c_northern_tse": { "letter_locale": "Northern Tse" },
+				"n_let_c_southern_tse": { "letter_locale": "Southern Tse" },
+				"n_let_d_de": { "letter_locale": "De" },
+				"n_let_e": { "letter_locale": "E" },
+				"n_let_f_ef": { "letter_locale": "Ef" },
+				"n_let_f_ve": { "letter_locale": "Ve" },
+				"n_let_h_he": { "letter_locale": "He" },
+				"n_let_i": { "letter_locale": "I" },
+				"n_let_i_ii": { "letter_locale": "Ii" },
+				"n_let_k_ka": { "letter_locale": "Ka" },
+				"n_let_k_khe": { "letter_locale": "Khe" },
+				"n_let_l_el": { "letter_locale": "El" },
+				"n_let_m_em": { "letter_locale": "Em" },
+				"n_let_n_en": { "letter_locale": "En" },
+				"n_let_o": { "letter_locale": "O" },
+				"n_let_p_pe": { "letter_locale": "Pe" },
+				"n_let_p_phe": { "letter_locale": "Phe" },
+				"n_let_q_ku": { "letter_locale": "Ku" },
+				"n_let_r_er": { "letter_locale": "Er" },
+				"n_let_r_ers": { "letter_locale": "Ers" },
+				"n_let_s_es": { "letter_locale": "Es" },
+				"n_let_s_esh": { "letter_locale": "Esh" },
+				"n_let_s_ess": { "letter_locale": "Ess" },
+				"n_let_s_she": { "letter_locale": "She" },
+				"n_let_t_te": { "letter_locale": "Te" },
+				"n_let_t_the": { "letter_locale": "The" },
+				"n_let_u": { "letter_locale": "U" },
+				"n_let_u_uu": { "letter_locale": "Uu" },
+				"n_let_x_eks": { "letter_locale": "Eks" },
+				"n_let_y_ye": { "letter_locale": "Ye" },
+				"n_let_z_ze": { "letter_locale": "Ze" },
+				"n_num_one": { "letter_locale": "One" },
+				"n_num_five": { "letter_locale": "Five" },
+				"n_num_ten": { "letter_locale": "Ten" },
+				"n_num_fifty": { "letter_locale": "Fifty" }
+			}
+		}
+	}
+}

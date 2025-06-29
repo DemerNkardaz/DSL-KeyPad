@@ -1,0 +1,43 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "ugaritic": "Угаритск$(ая|ий|ое)" },
+			"tag": { "ugaritic": "угаритск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"ugaritic": {
+				"n_let_a_alpa": { "letter_locale": "Альпа"},
+				"n_let_a_ain": { "letter_locale": "Айн"},
+				"n_let_b_beta": { "letter_locale": "Бета"},
+				"n_let_d_delta": { "letter_locale": "Дельта"},
+				"n_let_d_dhal": { "letter_locale": "Дхаль"},
+				"n_let_g_gamla": { "letter_locale": "Гамла"},
+				"n_let_g_ghain": { "letter_locale": "Гайн"},
+				"n_let_h_kha": { "letter_locale": "Ха"},
+				"n_let_h_ho": { "letter_locale": "Хо"},
+				"n_let_h_hota": { "letter_locale": "Хота"},
+				"n_let_i": { "letter_locale": "И"},
+				"n_let_k_kaf": { "letter_locale": "Каф"},
+				"n_let_l_lamda": { "letter_locale": "Ламда"},
+				"n_let_m_mem": { "letter_locale": "Мем"},
+				"n_let_n_nun": { "letter_locale": "Нун"},
+				"n_let_p_pu": { "letter_locale": "Пу"},
+				"n_let_q_qopa": { "letter_locale": "Копа"},
+				"n_let_r_rasha": { "letter_locale": "Раша"},
+				"n_let_s_shin": { "letter_locale": "Шин"},
+				"n_let_s_samka": { "letter_locale": "Самка"},
+				"n_let_s_sade": { "letter_locale": "Саде"},
+				"n_let_t_thanna": { "letter_locale": "Тханна"},
+				"n_let_t_tet": { "letter_locale": "Тет"},
+				"n_let_t_to": { "letter_locale": "То"},
+				"n_let_u": { "letter_locale": "У"},
+				"n_let_s_ssu": { "letter_locale": "Ссу"},
+				"n_let_w_wo": { "letter_locale": "Уо"},
+				"n_let_y_yod": { "letter_locale": "Йод"},
+				"n_let_z_zeta": { "letter_locale": "Зета"},
+				"n_let_z_zu": { "letter_locale": "Зу"},
+				"n_sym_word_divider": { "letter_locale": "Разделитель слов"}
+			}
+		}
+	}
+}

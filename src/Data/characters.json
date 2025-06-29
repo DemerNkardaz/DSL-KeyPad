@@ -8854,6 +8854,7 @@
 				"symbol": { "letter": "${lat_[s]_let_l}${lat_[s]_let_s_sigma}" }
 			},
 			"&ipa_n_sym_stress_[primary,secondary]", {
+				"&data": { "originScript": "&ipa", "script": "&ipa" },
 				"reference": {
 					"name": "line_vertical[,_below]",
 					"as": "modifier"
@@ -8866,24 +8867,24 @@
 				"options": { "noCalc": true, "altLayoutKey": ["'", ">! '"], "layoutTitles": true }
 			},
 			"&ipa_k_lig_oe", {
+				"&data": { "originScript": "&ipa", "script": "&ipa" },
 				"reference": {
 					"name": "lat_c_lig_oe",
 					"as": "smallCapital",
 					"include": { "modifier": "smallCapitalModifier"}
 				},
 				"groups": ["IPA"],
-				"titles": {},
 				"tags": ["open front rounded vowel", "огублённый гласный переднего ряда нижнего подъёма"],
 				"options": { "altLayoutKey": "c*>!<!<+ /O/", "layoutTitles": true }
 			},
 			"&ipa_k_let_[b,g,h,i,l,n,r,y]", {
+				"&data": { "originScript": "&ipa", "script": "&ipa" },
 				"reference": {
 					"name": "lat_c_let_[b,g,h,i,l,n,r,y]",
 					"as": "smallCapital",
 					"include": {"modifier": "smallCapitalModifier"}
 				},
 				"groups": ["IPA"],
-				"titles": {},
 				"tags": [
 					["voiced bilabial trill", "губно-губной дрожащий согласный"],
 					["voiced uvular plosive", "звонкий увулярный взрывной согласный"],
@@ -8897,13 +8898,13 @@
 				"options": { "noCalc": true, "altLayoutKey": "c*>! $", "layoutTitles": true }
 			},
 			"&ipa_s_let_[b_beta,h_chi]", {
+				"&data": { "originScript": "&ipa", "script": "&ipa" },
 				"reference": {
 					"params": ["Referencing_Rule_Latin", "IPA", true, "bool"],
 					"if": true,
 					"then": "lat_s_let_[b_beta,h_chi]",
 					"else": "hel_s_let_[b_beta,h_chi]"
 				},
-				"titles": {},
 				"tags": [
 					["voiced bilabial fricative", "звонкий губно-губной спирант"],
 					["voiceless uvular fricative", "глухой увулярный фрикатив"]
@@ -8913,8 +8914,8 @@
 				"recipe": []
 			},
 			"&ipa_s_let_t_theta", {
+				"&data": { "originScript": "&ipa", "script": "&ipa" },
 				"reference": "hel_s_let_t_theta",
-				"titles": {},
 				"tags": ["voiceless dental fricative", "глухой зубной щелевой согласный"],
 				"groups": ["IPA"],
 				"options": { "noCalc": true, "layoutTitles": true, "altLayoutKey": ">! ~" },
@@ -8922,7 +8923,6 @@
 			},
 			"&math_pi_sign", {
 				"reference": "hel_s_let_p_pi",
-				"titles": {},
 				"tags": ["number pi", "число пи"],
 				"groups": ["Math"],
 				"options": { "noCalc": true, "altLayoutKey": ">! P" },

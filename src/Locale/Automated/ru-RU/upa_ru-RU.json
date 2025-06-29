@@ -1,0 +1,12 @@
+{
+	"ru-RU": {
+		"scripts": {
+			"latin": {
+				"s_let_s_voiced_laryngeal_spirant": {
+					"layout_locale": "Звонкий ларингальный спирант",
+					"second_name": "(УФА)"
+				}
+			}
+		}
+	}
+}

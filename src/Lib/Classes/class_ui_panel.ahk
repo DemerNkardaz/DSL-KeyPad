@@ -468,7 +468,7 @@ Class Panel2 {
 		return
 	}
 
-	HandleTitle(str, &specificLanguage := "") {
+	HandleTitle(str, &specificLanguage := "", useAlt?) {
 		if RegExMatch(str, "^(.*)\[type::(.*)\]$", &partsMatch) {
 			local languageCode := specificLanguage != "" ? specificLanguage : Language.Get()
 			local entryName := partsMatch[1]
@@ -480,11 +480,19 @@ Class Panel2 {
 			local skipCombine := True
 			local combinedTitle := ""
 
+			local entryData := entry.Has("&data") ? entry["&data"] : entry["data"]
+			local lScript := entryData["script"]
+			local lOriginScript := entryData["originScript"]
+			local hasScript := lScript != ""
+			local useLetterLocale := entry["options"]["useLetterLocale"]
+
+			local interLabel := entryName
+
 			if entry["options"]["localeCombineAnd"] {
 				split := StrSplit(entryName, "_and_")
 				if split.Length > 1 {
 					for i, each in split {
-						if Locale.Read(each "_alt", specificLanguage, True, &titleText) || Locale.Read(each, specificLanguage, True, &titleText) {
+						if Locale.Read(each ".alt", specificLanguage, True, &titleText) || Locale.Read(each, specificLanguage, True, &titleText) {
 							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and", specificLanguage) " " : "")
 							skipCombine := False
 						}
@@ -492,26 +500,33 @@ Class Panel2 {
 				}
 			}
 
-			if optionsType = "Alternative Layout" && entry["options"]["layoutTitles"] &&
-				Locale.Read(entryName "_layout", specificLanguage, True, &titleText) {
+			if hasScript
+				interLabel := RegExReplace(interLabel, "^" lOriginScript "_", "scripts." lScript ".")
+
+			if optionsType = "Alternative Layout" && entry["options"]["layoutTitles"]
+				&& ((IsSet(useAlt) && useAlt && Locale.Read(interLabel ".layout_locale_alt", specificLanguage, True, &titleText)) || (!IsSet(useAlt) && Locale.Read(interLabel ".layout_locale", specificLanguage, True, &titleText))) {
 				characterTitle := titleText
 
 			} else if !skipCombine {
 				characterTitle := combinedTitle
 
-			} else if Locale.Read(entryName, specificLanguage, True, &titleText) {
+			} else if (
+				(IsSet(useAlt) && useAlt && Locale.Read(interLabel ".alt", specificLanguage, True, &titleText)) || (!IsSet(useAlt) && Locale.Read(interLabel, specificLanguage, True, &titleText))
+			) {
 				characterTitle := titleText
 
 			} else if entry["titles"].Count > 0 && entry["titles"].Has(languageCode) {
-				characterTitle := entry["titles"].Get(languageCode)
+				characterTitle := IsSet(useAlt) && entry["titles"].Has(languageCode "_alt") ? entry["titles"].Get(languageCode "_alt") : entry["titles"].Get(languageCode)
 
-			} else {
+			} else if Locale.Read(interLabel, specificLanguage, True, &titleText) {
+				characterTitle := titleText
+
+			} else
 				characterTitle := Locale.Read(entryName, specificLanguage)
-			}
 
-			if isFavorite {
+
+			if isFavorite
 				characterTitle .= " " Chr(0x2605)
-			}
 
 			return characterTitle
 		}

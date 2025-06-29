@@ -1,0 +1,62 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "old_persian": "Древнеперсидск$(ая|ий|ое)" },
+			"tag": { "old_persian": "древнеперсидск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"old_persian": {
+				"n_sign_a": { "letter_locale": "А" },
+				"n_sign_b_ba": { "letter_locale": "Ба" },
+				"n_sign_c_ca": { "letter_locale": "Цa" },
+				"n_sign_c_ssa": { "letter_locale": "Ща" },
+				"n_sign_d_da": { "letter_locale": "Да" },
+				"n_sign_d_di": { "letter_locale": "Ди" },
+				"n_sign_d_du": { "letter_locale": "Ду" },
+				"n_sign_f_fa": { "letter_locale": "Фа" },
+				"n_sign_g_ga": { "letter_locale": "Га" },
+				"n_sign_g_gu": { "letter_locale": "Гу" },
+				"n_sign_h_ha": { "letter_locale": "Ха" },
+				"n_sign_i": { "letter_locale": "И" },
+				"n_sign_j_ja": { "letter_locale": "Джа" },
+				"n_sign_j_ji": { "letter_locale": "Джи" },
+				"n_sign_k_ka": { "letter_locale": "Ка" },
+				"n_sign_k_ku": { "letter_locale": "Ку" },
+				"n_sign_l_la": { "letter_locale": "Ла" },
+				"n_sign_m_ma": { "letter_locale": "Ма" },
+				"n_sign_m_mi": { "letter_locale": "Ми" },
+				"n_sign_m_mu": { "letter_locale": "Му" },
+				"n_sign_n_na": { "letter_locale": "На" },
+				"n_sign_n_nu": { "letter_locale": "Ну" },
+				"n_sign_p_pa": { "letter_locale": "Па" },
+				"n_sign_r_ra": { "letter_locale": "Ра" },
+				"n_sign_r_ru": { "letter_locale": "Ру" },
+				"n_sign_s_sa": { "letter_locale": "Са" },
+				"n_sign_s_sha": { "letter_locale": "Ша" },
+				"n_sign_t_ta": { "letter_locale": "Та" },
+				"n_sign_t_tu": { "letter_locale": "Ту" },
+				"n_sign_t_tha": { "letter_locale": "Ҫа" },
+				"n_sign_u": { "letter_locale": "У" },
+				"n_sign_v_va": { "letter_locale": "Ва" },
+				"n_sign_v_vi": { "letter_locale": "Ви" },
+				"n_sign_x_xa": { "letter_locale": "Кса" },
+				"n_sign_y_ya": { "letter_locale": "Йа" },
+				"n_sign_z_za": { "letter_locale": "За" },
+				"n_log_auramazdaa": { "letter_locale": "Аурамаздаа" },
+				"n_log_auramazdaa_2": { "letter_locale": "Аурамаздаа-2" },
+				"n_log_auramazdaaha": { "letter_locale": "Аурамаздааха" },
+				"n_log_baga": { "letter_locale": "Бага" },
+				"n_log_buumish": { "letter_locale": "Буумиш" },
+				"n_log_dahyaaush": { "letter_locale": "Дахйаауш" },
+				"n_log_dahyaaush_2": { "letter_locale": "Дахйаауш-2" },
+				"n_log_xshaayathiya": { "letter_locale": "Ксшаайатия" },
+				"n_sym_word_divider": { "letter_locale": "Разделитель слов" },
+				"n_num_one": { "letter_locale": "Один" },
+				"n_num_two": { "letter_locale": "Два" },
+				"n_num_ten": { "letter_locale": "Десять" },
+				"n_num_twenty": { "letter_locale": "Двадцать" },
+				"n_num_hundred": { "letter_locale": "Сто" }
+			}
+		}
+	}
+}

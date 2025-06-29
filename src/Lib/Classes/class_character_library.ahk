@@ -43,6 +43,9 @@ Class ChrLib {
 		"south_arabian",
 		;
 		"ugaritic",
+		;
+		"ipa",
+		"&ipa",
 	]
 
 	static __New() {

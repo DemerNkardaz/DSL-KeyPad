@@ -1,0 +1,39 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "gothic": "Готск$(ая|ий|ое)" },
+			"tag": { "gothic": "готск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"gothic": {
+				"n_let_a_ahza": { "letter_locale": "Аза" },
+				"n_let_b_bairkan": { "letter_locale": "Баиркан" },
+				"n_let_d_dagz": { "letter_locale": "Дагз" },
+				"n_let_e_aihvus": { "letter_locale": "Эйз" },
+				"n_let_f_faihu": { "letter_locale": "Файху" },
+				"n_let_g_giba": { "letter_locale": "Гиба" },
+				"n_let_h_hagl": { "letter_locale": "Хагл" },
+				"n_let_h_hwair": { "letter_locale": "Хвайр" },
+				"n_let_i_eis": { "letter_locale": "Ииз" },
+				"n_let_k_kusma": { "letter_locale": "Кусма" },
+				"n_let_k_iggws": { "letter_locale": "Энгуз" },
+				"n_let_l_lagus": { "letter_locale": "Лагус" },
+				"n_let_m_manna": { "letter_locale": "Манна" },
+				"n_let_n_nauths": { "letter_locale": "Наутс" },
+				"n_let_o_othal": { "letter_locale": "Отал" },
+				"n_let_p_pairthra": { "letter_locale": "Пертра" },
+				"n_let_q_qairthra": { "letter_locale": "Квертра" },
+				"n_let_r_raida": { "letter_locale": "Райда" },
+				"n_let_s_sugil": { "letter_locale": "Сугил" },
+				"n_let_t_thiuth": { "letter_locale": "Тют" },
+				"n_let_t_teiws": { "letter_locale": "Тюз" },
+				"n_let_u_urus": { "letter_locale": "Урус" },
+				"n_let_w_winja": { "letter_locale": "Винья" },
+				"n_let_y_jer": { "letter_locale": "Гаар" },
+				"n_let_z_ezek": { "letter_locale": "Эзек" },
+				"n_num_ninety": { "letter_locale": "90" },
+				"n_num_nine_hundred": { "letter_locale": "900" }
+			}
+		}
+	}
+}

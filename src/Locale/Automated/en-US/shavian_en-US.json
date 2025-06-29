@@ -1,0 +1,58 @@
+{
+	"en-US": {
+		"generated": {
+			"prefix": { "shavian": "Shavian" },
+			"tag": { "shavian": "shavian" }
+		},
+		"scripts": {
+			"shavian": {
+				"n_let_a_ash": { "letter_locale": "Ash" },
+				"n_let_a_ice": { "letter_locale": "Ice" },
+				"n_let_a_ado": { "letter_locale": "Ado" },
+				"n_let_a_up": { "letter_locale": "Up" },
+				"n_let_a_ah": { "letter_locale": "Ah" },
+				"n_let_b_bib": { "letter_locale": "Bib" },
+				"n_let_c_church": { "letter_locale": "Church" },
+				"n_let_d_dead": { "letter_locale": "Dead" },
+				"n_let_d_they": { "letter_locale": "They" },
+				"n_let_e_egg": { "letter_locale": "Egg" },
+				"n_let_e_age": { "letter_locale": "Age" },
+				"n_let_f_fee": { "letter_locale": "Fee" },
+				"n_let_g_gag": { "letter_locale": "Gag" },
+				"n_let_h_ha_ha": { "letter_locale": "Ha ha" },
+				"n_let_i_if": { "letter_locale": "If" },
+				"n_let_i_eat": { "letter_locale": "Eat" },
+				"n_let_j_judge": { "letter_locale": "Judge" },
+				"n_let_k_kick": { "letter_locale": "Kick" },
+				"n_let_l_loll": { "letter_locale": "Loll" },
+				"n_let_m_mime": { "letter_locale": "Mime" },
+				"n_let_n_nun": { "letter_locale": "Nun" },
+				"n_let_n_hung": { "letter_locale": "Hung" },
+				"n_let_o_on": { "letter_locale": "On" },
+				"n_let_o_oak": { "letter_locale": "Oak" },
+				"n_let_o_awe": { "letter_locale": "Awe" },
+				"n_let_p_peep": { "letter_locale": "Peep" },
+				"n_let_r_roar": { "letter_locale": "Roar" },
+				"n_let_s_so": { "letter_locale": "So" },
+				"n_let_s_sure": { "letter_locale": "Sure" },
+				"n_let_t_tot": { "letter_locale": "Tot" },
+				"n_let_t_thigh": { "letter_locale": "Thigh" },
+				"n_let_u_wool": { "letter_locale": "Wool" },
+				"n_let_u_ooze": { "letter_locale": "Ooze" },
+				"n_let_v_vow": { "letter_locale": "Vow" },
+				"n_let_y_yea": { "letter_locale": "Yea" },
+				"n_let_w_woe": { "letter_locale": "Woe" },
+				"n_let_z_zoo": { "letter_locale": "Zoo" },
+				"n_let_z_measure": { "letter_locale": "Measure" },
+				"n_lig_are": { "letter_locale": "Are" },
+				"n_lig_or": { "letter_locale": "Or" },
+				"n_lig_air": { "letter_locale": "Air" },
+				"n_lig_err": { "letter_locale": "Err" },
+				"n_lig_array": { "letter_locale": "Array" },
+				"n_lig_ear": { "letter_locale": "Ear" },
+				"n_lig_ian": { "letter_locale": "Ian" },
+				"n_lig_yew": { "letter_locale": "Yew" }
+			}
+		}
+	}
+}

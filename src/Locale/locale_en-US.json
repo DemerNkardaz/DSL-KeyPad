@@ -3,8 +3,8 @@
 		"init": {
 			"__self": "Initialization",
 			"entry": "Entry: “\u2008{}\u2008”",
-			"internal_lib": "Internal Library",
-			"custom": "User Recipes",
+			"internal_library": "Internal Library",
+			"custom_recipes": "User Recipes",
 			"binds": "Bindings Initialization"
 		},
 		"GUI": {

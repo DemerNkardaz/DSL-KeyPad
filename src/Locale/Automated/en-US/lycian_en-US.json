@@ -1,0 +1,35 @@
+{
+	"en-US": {
+		"generated": {
+			"prefix": { "lycian": "Lycian" },
+			"tag": { "lycian": "lycian" }
+		},
+		"scripts": {
+			"lycian": {
+				"n_let_a": { "letter_locale": "A" },
+				"n_let_a_an": { "letter_locale": "An" },
+				"n_let_b": { "letter_locale": "B" },
+				"n_let_d": { "letter_locale": "D" },
+				"n_let_e": { "letter_locale": "E" },
+				"n_let_e_en": { "letter_locale": "En" },
+				"n_let_h": { "letter_locale": "H" },
+				"n_let_k": { "letter_locale": "K" },
+				"n_let_k_bh": { "letter_locale": "Bh" },
+				"n_let_k_kk": { "letter_locale": "Kk" },
+				"n_let_l": { "letter_locale": "L" },
+				"n_let_m": { "letter_locale": "M" },
+				"n_let_m_mm": { "letter_locale": "Mm" },
+				"n_let_n": { "letter_locale": "N" },
+				"n_let_n_nn": { "letter_locale": "Nn" },
+				"n_let_p": { "letter_locale": "P" },
+				"n_let_q": { "letter_locale": "Q" },
+				"n_let_r": { "letter_locale": "R" },
+				"n_let_s": { "letter_locale": "S" },
+				"n_let_t": { "letter_locale": "T" },
+				"n_let_t_tt": { "letter_locale": "Tt" },
+				"n_let_u": { "letter_locale": "U" },
+				"n_let_x": { "letter_locale": "X" }
+			}
+		}
+	}
+}

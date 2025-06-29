@@ -1,0 +1,58 @@
+{
+	"ru-RU": {
+		"generated": {
+			"prefix": { "shavian": "Шовианск$(ая|ий|ое)" },
+			"tag": { "shavian": "шовианск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"shavian": {
+				"n_let_a_ash": { "letter_locale": "{@en-US}"},
+				"n_let_a_ice": { "letter_locale": "{@en-US}"},
+				"n_let_a_ado": { "letter_locale": "{@en-US}"},
+				"n_let_a_up": { "letter_locale": "{@en-US}"},
+				"n_let_a_ah": { "letter_locale": "{@en-US}"},
+				"n_let_b_bib": { "letter_locale": "{@en-US}"},
+				"n_let_c_church": { "letter_locale": "{@en-US}"},
+				"n_let_d_dead": { "letter_locale": "{@en-US}"},
+				"n_let_d_they": { "letter_locale": "{@en-US}"},
+				"n_let_e_egg": { "letter_locale": "{@en-US}"},
+				"n_let_e_age": { "letter_locale": "{@en-US}"},
+				"n_let_f_fee": { "letter_locale": "{@en-US}"},
+				"n_let_g_gag": { "letter_locale": "{@en-US}"},
+				"n_let_h_ha_ha": { "letter_locale": "{@en-US}"},
+				"n_let_i_if": { "letter_locale": "{@en-US}"},
+				"n_let_i_eat": { "letter_locale": "{@en-US}"},
+				"n_let_j_judge": { "letter_locale": "{@en-US}"},
+				"n_let_k_kick": { "letter_locale": "{@en-US}"},
+				"n_let_l_loll": { "letter_locale": "{@en-US}"},
+				"n_let_m_mime": { "letter_locale": "{@en-US}"},
+				"n_let_n_nun": { "letter_locale": "{@en-US}"},
+				"n_let_n_hung": { "letter_locale": "{@en-US}"},
+				"n_let_o_on": { "letter_locale": "{@en-US}"},
+				"n_let_o_oak": { "letter_locale": "{@en-US}"},
+				"n_let_o_awe": { "letter_locale": "{@en-US}"},
+				"n_let_p_peep": { "letter_locale": "{@en-US}"},
+				"n_let_r_roar": { "letter_locale": "{@en-US}"},
+				"n_let_s_so": { "letter_locale": "{@en-US}"},
+				"n_let_s_sure": { "letter_locale": "{@en-US}"},
+				"n_let_t_tot": { "letter_locale": "{@en-US}"},
+				"n_let_t_thigh": { "letter_locale": "{@en-US}"},
+				"n_let_u_wool": { "letter_locale": "{@en-US}"},
+				"n_let_u_ooze": { "letter_locale": "{@en-US}"},
+				"n_let_v_vow": { "letter_locale": "{@en-US}"},
+				"n_let_y_yea": { "letter_locale": "{@en-US}"},
+				"n_let_w_woe": { "letter_locale": "{@en-US}"},
+				"n_let_z_zoo": { "letter_locale": "{@en-US}"},
+				"n_let_z_measure": { "letter_locale": "{@en-US}"},
+				"n_lig_are": { "letter_locale": "{@en-US}"},
+				"n_lig_or": { "letter_locale": "{@en-US}"},
+				"n_lig_air": { "letter_locale": "{@en-US}"},
+				"n_lig_err": { "letter_locale": "{@en-US}"},
+				"n_lig_array": { "letter_locale": "{@en-US}"},
+				"n_lig_ear": { "letter_locale": "{@en-US}"},
+				"n_lig_ian": { "letter_locale": "{@en-US}"},
+				"n_lig_yew": { "letter_locale": "{@en-US}"}
+			}
+		}
+	}
+}
