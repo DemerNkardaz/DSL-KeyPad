@@ -186,20 +186,20 @@ Class App {
 		sciptsMenu.Add()
 		sciptsMenu.Add(labels.Scripter_AlternativeInput, (*) => []), sciptsMenu.Disable(labels.Scripter_AlternativeInput)
 
-		scripterAlts := Scripter.data["Alternative Modes"].Length // 2
+		scripterAlts := ScripterStore.storedData["Alternative Modes"].Length // 2
 		Loop scripterAlts {
 			i := A_Index * 2 - 1
-			dataName := Scripter.data["Alternative Modes"][i]
-			dataValue := Scripter.data["Alternative Modes"][i + 1]
+			dataName := ScripterStore.storedData["Alternative Modes"][i]
+			dataValue := ScripterStore.storedData["Alternative Modes"][i + 1]
 			AddScripts(dataName, dataValue)
 		}
 
 		AddScripts(dataName, dataValue) {
-			sciptsMenu.Add(Locale.Read(dataValue.locale), (*) => Scripter.OptionSelect(dataName))
-			if dataValue.icons[1] ~= "file::" {
-				sciptsMenu.SetIcon(Locale.Read(dataValue.locale), StrReplace(dataValue.icons[1], "file::"))
+			sciptsMenu.Add(Locale.Read(dataValue["locale"]), (*) => Scripter.OptionSelect(dataName))
+			if dataValue["icons"][1] ~= "file::" {
+				sciptsMenu.SetIcon(Locale.Read(dataValue["locale"]), StrReplace(dataValue["icons"][1], "file::"))
 			} else
-				sciptsMenu.SetIcon(Locale.Read(dataValue.locale), App.icoDLL, App.indexIcos[dataValue.icons[1]])
+				sciptsMenu.SetIcon(Locale.Read(dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
 		}
 
 		App.tray.Add(labels.scriptForms, sciptsMenu)
@@ -209,17 +209,17 @@ Class App {
 		glyphVariantsMenu.Add(Locale.Read("gui_scripter_glyph_variation_panel"), (*) => GlyphsPanel.Panel())
 		glyphVariantsMenu.Add()
 
-		glyphVariants := Scripter.data["Glyph Variations"].Length // 2
+		glyphVariants := ScripterStore.storedData["Glyph Variations"].Length // 2
 		Loop glyphVariants {
 			i := A_Index * 2 - 1
-			dataName := Scripter.data["Glyph Variations"][i]
-			dataValue := Scripter.data["Glyph Variations"][i + 1]
+			dataName := ScripterStore.storedData["Glyph Variations"][i]
+			dataValue := ScripterStore.storedData["Glyph Variations"][i + 1]
 			AddGlyphVariatns(dataName, dataValue)
 		}
 
 		AddGlyphVariatns(dataName, dataValue) {
-			glyphVariantsMenu.Add(Locale.Read(dataValue.locale), (*) => Scripter.OptionSelect(dataName, "Glyph Variations"))
-			glyphVariantsMenu.SetIcon(Locale.Read(dataValue.locale), App.icoDLL, App.indexIcos[dataValue.icons[1]])
+			glyphVariantsMenu.Add(Locale.Read(dataValue["locale"]), (*) => Scripter.OptionSelect(dataName, "Glyph Variations"))
+			glyphVariantsMenu.SetIcon(Locale.Read(dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
 		}
 
 		App.tray.Add(labels.glyphForms, glyphVariantsMenu)

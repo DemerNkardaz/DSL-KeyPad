@@ -151,11 +151,7 @@ Class Panel2 {
 		local progress := DottedProgressTooltip(, &triggerEnds := False)
 		local JSONLists := JSON.LoadFile(App.paths.data "\ui_main_panel_lists.json", "UTF-8")
 
-		local columnsData := {}
-		columnsData.tabColumns := this.listViewColumnHeaders.default.Clone()
-		columnsData.supportedLanguages := Language.GetSupported(, , useIndex := True)
-		columnsData.languageColumnsStartIndex := columnsData.tabColumns.Length
-		columnsData.tabColumns.MergeWith(columnsData.supportedLanguages)
+		this.GetColumnsData(&columnsData)
 
 		for i, each in columnsData.supportedLanguages
 			this.listViewLocaleColumnsIndexes.Set(each, i + columnsData.languageColumnsStartIndex)
@@ -165,6 +161,15 @@ Class Panel2 {
 		progress := unset
 		JSONLists := unset
 		return
+	}
+
+	GetColumnsData(&columnsData) {
+		columnsData := {}
+		columnsData.tabColumns := this.listViewColumnHeaders.default.Clone()
+		columnsData.supportedLanguages := Language.GetSupported(, , useIndex := True)
+		columnsData.languageColumnsStartIndex := columnsData.tabColumns.Length
+		columnsData.tabColumns.MergeWith(columnsData.supportedLanguages)
+		return columnsData
 	}
 
 	Show() {
@@ -297,6 +302,14 @@ Class Panel2 {
 	FillListViewData(&source, &columnsData) {
 		for category, attributes in source
 			this.listViewData.Set(category, this.GetEntries(&attributes, &columnsData))
+		return
+	}
+
+	MergeListViewData(&source, &columnsData) {
+		for category, attributes in source {
+			local ref := this.listViewData[category]
+			ArrayMergeTo(&ref, this.GetEntries(&attributes, &columnsData))
+		}
 		return
 	}
 
@@ -445,6 +458,7 @@ Class Panel2 {
 						entryRow[6] := attributes["group"] = "Favorites"
 							? ""
 						: (attributes.Has("combinationKey") ? attributes["combinationKey"] : attributes.Has("groupKey") ? attributes["groupKey"] : "")
+						entryRow[6] := this.HandleKey(entryRow[6])
 
 						for each in columnsData.supportedLanguages {
 							local index := this.listViewLocaleColumnsIndexes.Get(each)

@@ -1,0 +1,162 @@
+[
+	"combining", {
+		"preview": ["%Util.UnicodeToChars('25CC', '0363', '25CC', '0368', '25CC', '0369', '25CC', '0364', '25CC', '0365', '25CC', '0366', '25CC', '0367')%"],
+		"fonts": ["Cabmria"],
+		"locale": "glyph_mode_combining",
+		"bindings": [],
+		"uiid": "Combining",
+		"icons": ["glyph_combining"]
+	},
+	"superscript", {
+		"preview": ["%Util.UnicodeToChars('25CC', '1D43', '25CC', '1D47', '25CC', '1D9C', '25CC', '1D48', '25CC', '1D49', '25CC', '1DA0')%"],
+		"fonts": [],
+		"locale": "glyph_mode_superscript",
+		"bindings": [],
+		"uiid": "Superscript",
+		"icons": ["glyph_superscript"]
+	},
+	"subscript", {
+		"preview": ["%Util.UnicodeToChars('25CC', '2090', '25CC', '2091', '25CC', '2095', '25CC', '1D62', '25CC', '2C7C', '25CC', '2096', '25CC', '2097', '25CC', '2098', '25CC', '2099')%"],
+		"fonts": [],
+		"locale": "glyph_mode_subscript",
+		"bindings": [],
+		"uiid": "Subscript",
+		"icons": ["glyph_subscript"]
+	},
+	"italic", {
+		"preview": ["%Util.UnicodeToChars('1D43C', '1D461', '1D44E', '1D459', '1D456', '1D450')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_italic",
+		"bindings": [],
+		"uiid": "Italic",
+		"icons": ["glyph_italic"]
+	},
+	"bold", {
+		"preview": ["%Util.UnicodeToChars('1D401', '1D428', '1D425', '1D41D')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_bold",
+		"bindings": [],
+		"uiid": "Bold",
+		"icons": ["glyph_bold"]
+	},
+	"italicBold", {
+		"preview": ["%Util.UnicodeToChars('1D470', '1D495', '1D482', '1D48D', '1D48A', '1D484', '0020', '1D469', '1D490', '1D48D', '1D485')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_italic_bold",
+		"bindings": [],
+		"uiid": "ItalicBold",
+		"icons": ["glyph_italic_bold"]
+	},
+	"sansSerif", {
+		"preview": ["%Util.UnicodeToChars('1D5B2', '1D5BA', '1D5C7', '1D5CC', '002D', '1D5B2', '1D5BE', '1D5CB', '1D5C2', '1D5BF')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_sans_serif",
+		"bindings": [],
+		"uiid": "SansSerif",
+		"icons": ["glyph_sans_serif"]
+	},
+	"sansSerifItalic", {
+		"preview": ["%Util.UnicodeToChars('1D61A', '1D622', '1D62F', '1D634', '002D', '1D61A', '1D626', '1D633', '1D62A', '1D627', '0020', '1D610', '1D635', '1D622', '1D62D', '1D62A', '1D624')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_sans_serif_italic",
+		"bindings": [],
+		"uiid": "SansSerifItalic",
+		"icons": ["glyph_sans_serif_italic"]
+	},
+	"sansSerifBold", {
+		"preview": ["%Util.UnicodeToChars('1D5E6', '1D5EE', '1D5FB', '1D600', '002D', '1D5E6', '1D5F2', '1D5FF', '1D5F6', '1D5F3', '0020', '1D5D5', '1D5FC', '1D5F9', '1D5F1')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_sans_serif_bold",
+		"bindings": [],
+		"uiid": "SansSerifBold",
+		"icons": ["glyph_sans_serif_bold"]
+	},
+	"sansSerifItalicBold", {
+		"preview": ["%Util.UnicodeToChars('1D64E', '1D656', '1D663', '1D668', '002D', '1D64E', '1D65A', '1D667', '1D65E', '1D65B', '0020', '1D644', '1D669', '1D656', '1D661', '1D65E', '1D658', '0020', '1D63D', '1D664', '1D661', '1D659')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_sans_serif_italic_bold",
+		"bindings": [],
+		"uiid": "SansSerifItalicBold",
+		"icons": ["glyph_sans_serif_italic_bold"]
+	},
+	"monospace", {
+		"preview": ["%Util.UnicodeToChars('1D67C', '1D698', '1D697', '1D698', '1D69C', '1D699', '1D68A', '1D68C', '1D68E')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_monospace",
+		"bindings": [],
+		"uiid": "Monospace",
+		"icons": ["glyph_monospace"]
+	},
+	"fullwidth", {
+		"preview": ["%Util.UnicodeToChars('FF26', 'FF35', 'FF2C', 'FF2C', 'FF37', 'FF29', 'FF24', 'FF34', 'FF28')%"],
+		"fonts": [],
+		"locale": "glyph_mode_fullwidth",
+		"bindings": [],
+		"uiid": "Fullwidth",
+		"icons": ["glyph_fullwidth"]
+	},
+	"smallCapital", {
+		"preview": ["%Util.UnicodeToChars('A731', '1D0D', '1D00', '029F', '029F', '0020', '1D04', '1D00', '1D18', '026A', '1D1B', '1D00', '029F')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_small_capital",
+		"bindings": [],
+		"uiid": "SmallCapital",
+		"icons": ["glyph_small_capital"]
+	},
+	"fraktur", {
+		"preview": ["%Util.UnicodeToChars('1D509', '1D52F', '1D51E', '1D528', '1D531', '1D532', '1D52F')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_fraktur",
+		"bindings": [],
+		"uiid": "Fraktur",
+		"icons": ["glyph_fraktur"]
+	},
+	"frakturBold", {
+		"preview": ["%Util.UnicodeToChars('1D571', '1D597', '1D586', '1D590', '1D599', '1D59A', '1D597', '0020', '1D56D', '1D594', '1D591', '1D589')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_fraktur_bold",
+		"bindings": [],
+		"uiid": "FrakturBold",
+		"icons": ["glyph_fraktur_bold"]
+	},
+	"script", {
+		"preview": ["%Util.UnicodeToChars('1D4AE', '1D4B8', '1D4C7', '1D4BE', '1D4C5', '1D4C9')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_script",
+		"bindings": [],
+		"uiid": "Script",
+		"icons": ["glyph_script"]
+	},
+	"scriptBold", {
+		"preview": ["%Util.UnicodeToChars('1D4E2', '1D4EC', '1D4FB', '1D4F2', '1D4F9', '1D4FD', '0020', '1D4D1', '1D4F8', '1D4F5', '1D4ED')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_script_bold",
+		"bindings": [],
+		"uiid": "ScriptBold",
+		"icons": ["glyph_script_bold"]
+	},
+	"doubleStruck", {
+		"preview": ["%Util.UnicodeToChars('1D53B', '1D560', '1D566', '1D553', '1D55D', '1D556', '002D', '1D54A', '1D565', '1D563', '1D566', '1D554', '1D55C')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_double_struck",
+		"bindings": [],
+		"uiid": "DoubleStruck",
+		"icons": ["glyph_double_struck"]
+	},
+	"doubleStruckItalic", {
+		"preview": ["%Util.UnicodeToChars('2145', '2146', '2147', '2148', '2149')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_double_struck_italic",
+		"bindings": [],
+		"uiid": "DoubleStruckItalic",
+		"icons": ["glyph_double_struck_italic"]
+	},
+	"uncombined", {
+		"preview": ["%Util.UnicodeToChars('25CC', '00B4', '25CC', '02DD', '25CC', '02D8', '25CC', '00B8', '25CC', '02D9', '25CC', '00A8', '25CC', '0060', '25CC', '00AF', '25CC', '02DB', '25CC', '02DA', '25CC', '02DC')%"],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_mode_uncombined",
+		"bindings": [],
+		"uiid": "Uncombined",
+		"icons": ["glyph_uncombined"]
+	}
+]

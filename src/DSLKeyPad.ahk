@@ -48,6 +48,8 @@ initialized := False
 #Include <Classes\class_config>
 #Include <Classes\class_mods_gui>
 #Include <Classes\class_fonts>
+#Include <Classes\class_binding_registrar>
+#Include <Classes\class_scripter_store>
 #Include <Classes\class_character_entity>
 #Include <Classes\class_character_registrar>
 #Include <Classes\class_character_library>

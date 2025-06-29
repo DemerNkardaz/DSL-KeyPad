@@ -559,14 +559,14 @@ Class KeyboardBinder {
 				trayTitle .= "`n" Locale.Read("script_processor_mode_" instanceRef.tag)
 			} else if currentAlt != "" || currentGlyph != "" {
 				local data := Scripter.GetData(mode, current)
-				local icons := data.icons
+				local icons := data["icons"]
 				local icon := icons.Length > 1 ? icons[lang = "ru-RU" ? 2 : 1] : icons[1]
 				if icon ~= "file::" {
 					iconFile := StrReplace(icon, "file::")
 					iconCode := 1
 				} else
 					iconCode := App.indexIcos[icon]
-				trayTitle .= "`n" Locale.Read(data.locale)
+				trayTitle .= "`n" Locale.Read(data["locale"])
 			}
 		}
 
@@ -911,7 +911,7 @@ Class KeyboardBinder {
 
 		bingingsNames := []
 		if isAltModeOn
-			bingingsNames := Scripter.GetData(, altMode).bindings
+			bingingsNames := Scripter.GetData(, altMode)["bindings"]
 
 
 		if !ignoreUnregister || useRemap && altMode = "Hellenic"
@@ -1084,7 +1084,7 @@ Class KeyboardBinder {
 				}
 
 			}
-			bindingMaps["User"].Set(name, interMap)
+			BindReg.storedData["User"].Set(name, interMap)
 
 		}
 	}
@@ -1095,321 +1095,6 @@ Class Scripter {
 	static selectorTitle := Map("Alternative Modes", "", "Glyph Variations", "",)
 	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "")
 	static activatedViaMonitor := False
-
-	static data := Map(
-		"Alternative Modes", [
-			"Hellenic", {
-				preview: [Util.UnicodeToChars("1F19", "03BB", "03BB", "03AC", "03B4", "03BF", "03C2", "0020", "03C6", "1FF6", "03C2")],
-				fonts: [],
-				locale: "alt_mode_hellenic",
-				bindings: ["Hellenic"],
-				uiid: "Hellenic",
-				icons: ["hellenic"],
-			},
-			"Germanic runes & Glagolitic", {
-				preview: [Util.UnicodeToChars("16B7", "16D6", "16B1", "16D7", "16A8", "16BE", "16C1", "16B2", "0020", "16B1", "16A2", "16BE", "16D6", "16CA"), Util.UnicodeToChars("2C03", "2C3E", "2C30", "2C33", "2C41", "2C3E", "2C3A", "2C4C", "2C30")],
-				fonts: ["Segoe UI Historic"],
-				locale: "alt_mode_germanic_runes__glagolitic",
-				bindings: ["Germanic Runes", "Glagolitic"],
-				uiid: "GermanicGlagolitic",
-				icons: ["germanic", "glagolitic"],
-			},
-			"Old Turkic & Old Permic", {
-				preview: [Util.UnicodeToChars("10C34", "10C0D", "10C23", "2003", "10C03", "10C3E", "10C18", "10C03", "003A", "10C20", "10C03", "10C1A", "10C2D"), Util.UnicodeToChars("10363", "10371", "10355", "10350", "2003", "1035C", "10369", "10360", "10362")],
-				fonts: ["Noto Sans Old Turkic", "Noto Sans Old Permic"],
-				locale: "alt_mode_old_turkic__old_permic",
-				bindings: ["Old Turkic", "Old Permic"],
-				uiid: "TukicPermic",
-				icons: ["turkic", "permic"],
-			},
-			"Old Hungarian", {
-				preview: [Util.UnicodeToChars("10C87", "10CCF", "10C96", "10C9A", "10CDF", "10C9D", "10CAC")],
-				fonts: ["Noto Sans Old Hungarian"],
-				locale: "alt_mode_old_hungarian",
-				bindings: ["Old Hungarian"],
-				uiid: "Hungarian",
-				icons: ["hungarian"],
-			},
-			"Gothic", {
-				preview: [Util.UnicodeToChars("10330", "10339", "10342", "10338", "10330", "1033A", "1033F", "1033D", "10333", "10343")],
-				fonts: [],
-				locale: "alt_mode_gothic",
-				bindings: ["Gothic"],
-				uiid: "Gothic",
-				icons: ["gothic"],
-			},
-			"Old Italic", {
-				preview: [Util.UnicodeToChars("10300", "1030B", "10304", "10319", "10314", "10300", "1030D", "10315", "10313", "10304", "2003", "10316", "10304", "10313", "1031A", "10300", "1030B", "10304")],
-				fonts: ["Noto Sans Old Italic"],
-				locale: "alt_mode_old_italic",
-				bindings: ["Old Italic"],
-				uiid: "Italic",
-				icons: ["italic"],
-			},
-			"Phoenician", {
-				preview: [Util.UnicodeToChars("10912", "10913", "10915", "10907", "10903", "10914", "10915", "2003", "10900", "1090B", "10914", "10909")],
-				fonts: ["Segoe UI Historic"],
-				locale: "alt_mode_phoenician",
-				bindings: ["Phoenician"],
-				uiid: "Phoenician",
-				icons: ["phoenician"],
-			},
-			"Ancient South Arabian", {
-				preview: [Util.UnicodeToChars("10A6B", "10A65", "10A6B", "10A68", "2003", "10A79", "10A69", "10A62", "10A63", "10A7A", "10A63")],
-				fonts: ["Noto Sans Old South Arabian"],
-				locale: "alt_mode_ancient_south_arabian",
-				bindings: ["Ancient South Arabian"],
-				uiid: "AncientSouthArabian",
-				icons: ["south_arabian"],
-			},
-			"Ancient North Arabian", {
-				preview: [Util.UnicodeToChars("10A83", "10A9A", "10A89", "2003", "10A88", "10A93", "10A87", "2003", "10A81", "10A89")],
-				fonts: ["Noto Sans Old North Arabian"],
-				locale: "alt_mode_ancient_north_arabian",
-				bindings: ["Ancient North Arabian"],
-				uiid: "AncientNorthArabian",
-				icons: ["north_arabian"],
-			},
-			"Carian", {
-				preview: [Util.UnicodeToChars("102A8", "102A0", "102B5", "2003", "102B2", "102B0", "102AB", "102C7", "2003", "102BA", "102B5")],
-				fonts: ["Noto Sans Carian"],
-				locale: "alt_mode_carian",
-				bindings: ["Carian"],
-				uiid: "Carian",
-				icons: ["carian"],
-			},
-			"Lycian", {
-				preview: [Util.UnicodeToChars("10297", "10295", "10290", "1028E", "10286", "10296", "2003", "1029C", "10291", "10297", "10280", "10287", "10280", "10297", "10286")],
-				fonts: ["Noto Sans Lycian"],
-				locale: "alt_mode_lycian",
-				bindings: ["Lycian"],
-				uiid: "Lycian",
-				icons: ["lycian"],
-			},
-			"Lydian", {
-				preview: [Util.UnicodeToChars("1092C", "1092D", "10920", "10937", "2003", "10929", "10924", "10931", "1092E", "2003", "10939", "10926", "10925", "10933")],
-				fonts: ["Noto Sans Lydian"],
-				locale: "alt_mode_lydian",
-				bindings: ["Lydian"],
-				uiid: "Lydian",
-				icons: ["lydian"],
-			},
-			"Sidetic", {
-				preview: ["(2025/09/09+)" Util.UnicodeToChars("1094D", "10946", "10942", "10947", "1094F", "10940", "1094C", "0020", "1094F", "10943", "10949", "1094A", "10954", "10940", "0020", "10943", "1094F", "10943", "1094C", "10940", "10941", "1094B", "1094D", "10940", "1094B", "10940", "10946", "10950", "10940", "10949")],
-				fonts: ["Noto Sans Sidetic"],
-				locale: "alt_mode_sidetic",
-				bindings: ["Sidetic"],
-				uiid: "Sidetic",
-				icons: ["sidetic"],
-			},
-			"Cypriot Syllabary", {
-				preview: [Util.UnicodeToChars("10800", "1081A", "1082E", "1080B", "2003", "10800", "10823", "1080E", "10826", "1081A", "2003", "10828", "1082D", "1082A", "1080E", "10821", "10826", "10829")],
-				fonts: ["Noto Sans Cypriot"],
-				locale: "alt_mode_cypriot_syllabary",
-				bindings: ["Cypriot Syllabary"],
-				uiid: "CypriotSyllabary",
-				icons: ["cypriot_syllabary"],
-			},
-			"Tifinagh", {
-				preview: [Util.UnicodeToChars("2D30", "2D4E", "2D53", "2D4F", "2D59", "2D3D", "2D30", "2D4D", "2003", "2D49", "2D39", "2003", "2D30", "2D3C", "2D54", "2D37", "2D49", "2D59")],
-				fonts: ["Noto Sans Tifinagh"],
-				locale: "alt_mode_tifinagh",
-				bindings: ["Tifinagh"],
-				uiid: "Tifinagh",
-				icons: ["tifinagh"],
-			},
-			"Ugaritic", {
-				preview: [Util.UnicodeToChars("10383", "1038A", "10397", "2003", "10384", "1038A", "10390", "2003", "10382", "1038E", "10397")],
-				fonts: ["Noto Sans Ugaritic"],
-				locale: "alt_mode_ugaritic",
-				bindings: ["Ugaritic"],
-				uiid: "Ugaritic",
-				icons: ["ugaritic"],
-			},
-			"Old Persian", {
-				preview: [Util.UnicodeToChars("103A0", "103BC", "103AB", "103A7", "103C1", "103C2", "103A0", "2003", "")],
-				fonts: ["Noto Sans Old Persian"],
-				locale: "alt_mode_old_persian",
-				bindings: ["Old Persian"],
-				uiid: "OldPersian",
-				icons: ["persian"],
-			},
-			"IPA", {
-				preview: [Util.UnicodeToChars("002F", "02CC", "026A", "006E", "0074", "0259", "02C8", "006E", "00E6", "0283", "0028", "0259", "0029", "006E", "0259", "006C", "0020", "0066", "0259", "02C8", "006E", "025B", "0074", "026A", "006B", "0020", "02C8", "00E6", "006C", "0066", "0259", "02CC", "0062", "025B", "0074", "002F")],
-				fonts: ["Noto Sans"],
-				locale: "alt_mode_ipa",
-				bindings: ["IPA"],
-				uiid: "IPA",
-				icons: ["ipa"],
-			},
-			"Deseret", {
-				preview: [Util.UnicodeToChars("10414", "1042F", "10445", "10428", "10449", "1042F", "1043B", "0020", "10408", "1044A", "10441", "10430", "1043A", "1042F", "1043B")],
-				fonts: ["Segoe UI Symbol"],
-				locale: "alt_mode_deseret",
-				bindings: ["Deseret"],
-				uiid: "Deseret",
-				icons: ["deseret"],
-			},
-			"Shavian", {
-				preview: [Util.UnicodeToChars("10456", "10471", "1045D", "1047E", "1046F", "0020", "10468", "10464", "10453", "10469", "1045A", "10467", "10451")],
-				fonts: ["Segoe UI Historic"],
-				locale: "alt_mode_shavian",
-				bindings: ["Shavian"],
-				uiid: "Shavian",
-				icons: ["shavian"],
-			},
-			"Math", {
-				preview: [Util.UnicodeToChars("2211", "2212", "002B", "00B1", "00D7", "00F7", "0025", "2205", "2237", "2247", "22B9", "222D", "2206", "2207", "22D8", "22D9")],
-				fonts: ["Noto Serif"],
-				locale: "alt_mode_math",
-				bindings: ["Math"],
-				uiid: "Math",
-				icons: ["math"],
-			},
-		],
-		"Glyph Variations", [
-			"combining", {
-				preview: [Util.UnicodeToChars("25CC", "0363", "25CC", "0368", "25CC", "0369", "25CC", "0364", "25CC", "0365", "25CC", "0366", "25CC", "0367")],
-				fonts: ["Cabmria"],
-				locale: "glyph_mode_combining",
-				uiid: "Combining",
-				icons: ["glyph_combining"],
-			},
-			"superscript", {
-				preview: [Util.UnicodeToChars("25CC", "1D43", "25CC", "1D47", "25CC", "1D9C", "25CC", "1D48", "25CC", "1D49", "25CC", "1DA0")],
-				fonts: [],
-				locale: "glyph_mode_superscript",
-				uiid: "Superscript",
-				icons: ["glyph_superscript"],
-			},
-			"subscript", {
-				preview: [Util.UnicodeToChars("25CC", "2090", "25CC", "2091", "25CC", "2095", "25CC", "1D62", "25CC", "2C7C", "25CC", "2096", "25CC", "2097", "25CC", "2098", "25CC", "2099")],
-				fonts: [],
-				locale: "glyph_mode_subscript",
-				uiid: "Subscript",
-				icons: ["glyph_subscript"],
-			},
-			"italic", {
-				preview: [Util.UnicodeToChars("1D43C", "1D461", "1D44E", "1D459", "1D456", "1D450")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_italic",
-				uiid: "Italic",
-				icons: ["glyph_italic"],
-			},
-			"bold", {
-				preview: [Util.UnicodeToChars("1D401", "1D428", "1D425", "1D41D")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_bold",
-				uiid: "Bold",
-				icons: ["glyph_bold"],
-			},
-			"italicBold", {
-				preview: [Util.UnicodeToChars("1D470", "1D495", "1D482", "1D48D", "1D48A", "1D484", "0020", "1D469", "1D490", "1D48D", "1D485")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_italic_bold",
-				uiid: "ItalicBold",
-				icons: ["glyph_italic_bold"],
-			},
-			"sansSerif", {
-				preview: [Util.UnicodeToChars("1D5B2", "1D5BA", "1D5C7", "1D5CC", "002D", "1D5B2", "1D5BE", "1D5CB", "1D5C2", "1D5BF")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_sans_serif",
-				uiid: "SansSerif",
-				icons: ["glyph_sans_serif"],
-			},
-			"sansSerifItalic", {
-				preview: [Util.UnicodeToChars("1D61A", "1D622", "1D62F", "1D634", "002D", "1D61A", "1D626", "1D633", "1D62A", "1D627", "0020", "1D610", "1D635", "1D622", "1D62D", "1D62A", "1D624")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_sans_serif_italic",
-				uiid: "SansSerifItalic",
-				icons: ["glyph_sans_serif_italic"],
-			},
-			"sansSerifBold", {
-				preview: [Util.UnicodeToChars("1D5E6", "1D5EE", "1D5FB", "1D600", "002D", "1D5E6", "1D5F2", "1D5FF", "1D5F6", "1D5F3", "0020", "1D5D5", "1D5FC", "1D5F9", "1D5F1")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_sans_serif_bold",
-				uiid: "SansSerifBold",
-				icons: ["glyph_sans_serif_bold"],
-			},
-			"sansSerifItalicBold", {
-				preview: [Util.UnicodeToChars("1D64E", "1D656", "1D663", "1D668", "002D", "1D64E", "1D65A", "1D667", "1D65E", "1D65B", "0020", "1D644", "1D669", "1D656", "1D661", "1D65E", "1D658", "0020", "1D63D", "1D664", "1D661", "1D659")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_sans_serif_italic_bold",
-				uiid: "SansSerifItalicBold",
-				icons: ["glyph_sans_serif_italic_bold"],
-			},
-			"monospace", {
-				preview: [Util.UnicodeToChars("1D67C", "1D698", "1D697", "1D698", "1D69C", "1D699", "1D68A", "1D68C", "1D68E")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_monospace",
-				uiid: "Monospace",
-				icons: ["glyph_monospace"],
-			},
-			"fullwidth", {
-				preview: [Util.UnicodeToChars("FF26", "FF35", "FF2C", "FF2C", "FF37", "FF29", "FF24", "FF34", "FF28")],
-				fonts: [],
-				locale: "glyph_mode_fullwidth",
-				uiid: "Fullwidth",
-				icons: ["glyph_fullwidth"],
-			},
-			"smallCapital", {
-				preview: [Util.UnicodeToChars("A731", "1D0D", "1D00", "029F", "029F", "0020", "1D04", "1D00", "1D18", "026A", "1D1B", "1D00", "029F")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_small_capital",
-				uiid: "SmallCapital",
-				icons: ["glyph_small_capital"],
-			},
-			"fraktur", {
-				preview: [Util.UnicodeToChars("1D509", "1D52F", "1D51E", "1D528", "1D531", "1D532", "1D52F")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_fraktur",
-				uiid: "Fraktur",
-				icons: ["glyph_fraktur"],
-			},
-			"frakturBold", {
-				preview: [Util.UnicodeToChars("1D571", "1D597", "1D586", "1D590", "1D599", "1D59A", "1D597", "0020", "1D56D", "1D594", "1D591", "1D589")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_fraktur_bold",
-				uiid: "FrakturBold",
-				icons: ["glyph_fraktur_bold"],
-			},
-			"script", {
-				preview: [Util.UnicodeToChars("1D4AE", "1D4B8", "1D4C7", "1D4BE", "1D4C5", "1D4C9")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_script",
-				uiid: "Script",
-				icons: ["glyph_script"],
-			},
-			"scriptBold", {
-				preview: [Util.UnicodeToChars("1D4E2", "1D4EC", "1D4FB", "1D4F2", "1D4F9", "1D4FD", "0020", "1D4D1", "1D4F8", "1D4F5", "1D4ED")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_script_bold",
-				uiid: "ScriptBold",
-				icons: ["glyph_script_bold"],
-			},
-			"doubleStruck", {
-				preview: [Util.UnicodeToChars("1D53B", "1D560", "1D566", "1D553", "1D55D", "1D556", "002D", "1D54A", "1D565", "1D563", "1D566", "1D554", "1D55C")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_double_struck",
-				uiid: "DoubleStruck",
-				icons: ["glyph_double_struck"],
-			},
-			"doubleStruckItalic", {
-				preview: [Util.UnicodeToChars("2145", "2146", "2147", "2148", "2149")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_double_struck_italic",
-				uiid: "DoubleStruckItalic",
-				icons: ["glyph_double_struck_italic"],
-			},
-			"uncombined", {
-				preview: [Util.UnicodeToChars("25CC", "00B4", "25CC", "02DD", "25CC", "02D8", "25CC", "00B8", "25CC", "02D9", "25CC", "00A8", "25CC", "0060", "25CC", "00AF", "25CC", "02DB", "25CC", "02DA", "25CC", "02DC")],
-				fonts: ["Cabmria Math"],
-				locale: "glyph_mode_uncombined",
-				uiid: "Uncombined",
-				icons: ["glyph_uncombined"],
-			},
-		]
-	)
 
 	static SelectorPanel(selectorType := "Alternative Modes", currentPage := 1) {
 		local keySymbols := Map(
@@ -1519,7 +1204,7 @@ Class Scripter {
 			selectorPanel.OnEvent("Close", (Obj) => this.PanelDestroy(selectorType))
 			selectorPanel.title := this.selectorTitle.Get(selectorType)
 
-			local totalItems := this.data[selectorType].Length // 2
+			local totalItems := ScripterStore.storedData[selectorType].Length // 2
 			local totalPages := Ceil(totalItems / maxItems)
 
 			if currentPage > totalPages
@@ -1559,8 +1244,8 @@ Class Scripter {
 				j++
 				local dataIndex := startIndex + A_Index - 1
 				local i := dataIndex * 2 - 1
-				local dataName := this.data[selectorType][i]
-				local dataValue := this.data[selectorType][i + 1]
+				local dataName := ScripterStore.storedData[selectorType][i]
+				local dataValue := ScripterStore.storedData[selectorType][i + 1]
 				AddOption(dataName, dataValue, j)
 			}
 
@@ -1590,13 +1275,13 @@ Class Scripter {
 				))
 
 
-				selectorPanel.AddGroupBox("v" dataValue.uiid " w" optionW " h" optionH " x" optionX " y" optionY)
+				selectorPanel.AddGroupBox("v" dataValue["uiid"] " w" optionW " h" optionH " x" optionX " y" optionY)
 
-				for i, ico in dataValue.icons {
+				for i, ico in dataValue["icons"] {
 					if ico ~= "file::" {
-						selectorPanel.AddPicture("v" dataValue.uiid "Ico" i " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans", StrReplace(ico, "file::"))
+						selectorPanel.AddPicture("v" dataValue["uiid"] "Ico" i " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans", StrReplace(ico, "file::"))
 					} else
-						selectorPanel.AddPicture("v" dataValue.uiid "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans Icon" App.indexIcos[ico], App.icoDLL)
+						selectorPanel.AddPicture("v" dataValue["uiid"] "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans Icon" App.indexIcos[ico], App.icoDLL)
 					icoShift += icoH + 5
 				}
 
@@ -1605,15 +1290,15 @@ Class Scripter {
 
 				local optionTitleW := optionW - (icoX - optionX) - icoW - 20
 
-				local optionTitle := selectorPanel.AddText("v" dataValue.uiid "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " 0x80 +BackgroundTrans", Locale.Read(dataValue.locale))
+				local optionTitle := selectorPanel.AddText("v" dataValue["uiid"] "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " 0x80 +BackgroundTrans", Locale.Read(dataValue["locale"]))
 				optionTitle.SetFont("s10 c333333 Bold", "Segoe UI")
 
 				local scriptPreviewX := optionTitleX
 				local scriptPreviewY := optionTitleY + optionTitleH - 2
 
-				for i, previewText in dataValue.preview {
-					local pt := selectorPanel.AddText("v" dataValue.uiid "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
-					pt.SetFont("s" (isGlyphs && dataName != "fullwidth" ? 12 : 10) " c333333", dataValue.fonts.length > 0 ? dataValue.fonts[dataValue.fonts.length > 1 ? i : 1] : "Segoe UI")
+				for i, previewText in dataValue["preview"] {
+					local pt := selectorPanel.AddText("v" dataValue["uiid"] "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
+					pt.SetFont("s" (isGlyphs && dataName != "fullwidth" ? 12 : 10) " c333333", dataValue["fonts"].length > 0 ? dataValue["fonts"][dataValue["fonts"].length > 1 ? i : 1] : "Segoe UI")
 
 					scriptPreviewY += optionTitleH - 5
 				}
@@ -1622,7 +1307,7 @@ Class Scripter {
 				hotkeys.Set(keys[keyCodes.Length + j], dataName)
 				hotkeys.Set(keys[keyCodes.Length * 2 + j], dataName)
 				hotkeysLabel := selectorPanel.AddText(
-					"v" dataValue.uiid "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH)
+					"v" dataValue["uiid"] "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH)
 					" 0x80 Right +BackgroundTrans",
 					Locale.ReadInject("alt_mode_gui_press", [keys[j] " / " keys[keyCodes.Length + j] " / " keys[keyCodes.Length * 2 + j]])
 				)
@@ -1738,7 +1423,7 @@ Class Scripter {
 	}
 
 	static Has(name := "", selectorType := "Alternative Modes") {
-		for i, item in this.data[selectorType] {
+		for i, item in ScripterStore.storedData[selectorType] {
 			if Mod(i, 2) = 1 {
 				if item = name {
 					return True
@@ -1749,10 +1434,10 @@ Class Scripter {
 	}
 
 	static GetData(mode := "Alternative Modes", name := "Germanic runes & Glagolitic") {
-		for i, item in this.data[mode] {
+		for i, item in ScripterStore.storedData[mode] {
 			if Mod(i, 2) = 1 {
 				if item = name {
-					return this.data[mode][i + 1]
+					return ScripterStore.storedData[mode][i + 1]
 				}
 			}
 		}

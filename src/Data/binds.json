@@ -1134,6 +1134,7 @@
 					"J": "",
 					"O": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_o')%",
 					"Q": "",
+					"U": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_u')%",
 					"V": ""
 				},
 				"Moded": {

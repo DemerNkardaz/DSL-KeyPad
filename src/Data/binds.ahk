@@ -1,4 +1,4 @@
-bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMergeBinds(Map(
+BindReg(Map(
 	"Script Specified", Map(
 		"Cypriot Syllabary", Map(
 			"Flat", Map(

@@ -54,19 +54,19 @@ Class BindList {
 	}
 
 	static __New() {
-		for key, value in bindingMaps["Keyboard Default"]["Flat"] {
+		for key, value in BindReg.storedData["Keyboard Default"]["Flat"] {
 			if value is Array && value.Length == 2 {
-				if !bindingMaps["Keyboard Default"]["Moded"].Has(key)
-					bindingMaps["Keyboard Default"]["Moded"][key] := Map()
+				if !BindReg.storedData["Keyboard Default"]["Moded"].Has(key)
+					BindReg.storedData["Keyboard Default"]["Moded"][key] := Map()
 
-				bindingMaps["Keyboard Default"]["Moded"][key].Set("+", [value[2], value[1]])
+				BindReg.storedData["Keyboard Default"]["Moded"][key].Set("+", [value[2], value[1]])
 			}
 		}
 	}
 
 	static Get(bindingsName := "Common", fromSub := "", mapping := Map()) {
 		if mapping.Count == 0
-			mapping := bindingMaps.DeepClone()
+			mapping := BindReg.storedData.DeepClone()
 
 		if bindingsName = "Common" && mapping.Has(bindingsName) && StrLen(fromSub) == 0 {
 			letterI_Option := Cfg.Get("I_Dot_Shift_I_Dotless", "Characters", "Default")
@@ -139,7 +139,7 @@ Class BindList {
 		return (StrLen(fromSub) > 0 && mapping.Has(fromSub) && mapping[fromSub].Has(bindingsName)) ? mapping[fromSub][bindingsName].mapping : mapping.Has(bindingsName) ? mapping[bindingsName].mapping : Map()
 	}
 
-	static Gets(bindingsNames := [], fromSub := "", mapping := bindingMaps.DeepClone()) {
+	static Gets(bindingsNames := [], fromSub := "", mapping := BindReg.storedData.DeepClone()) {
 		interArray := []
 		for bindingsName in bindingsNames {
 			if bindingsName = ""
