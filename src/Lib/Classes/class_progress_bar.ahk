@@ -6,7 +6,7 @@ Class PorgressBar {
 		progressPercent: 0,
 		progressName: "",
 		typeOfInit: "",
-		progressBarTitle: Locale.Read("lib_init")
+		progressBarTitle: Locale.Read("init")
 	}
 
 	__New(data := {}) {
@@ -33,7 +33,7 @@ Class PorgressBar {
 
 		this.GUI.AddProgress("vInitProgressBar w" prgBarW " h" prgBarH " x" prgBarX " y" prgBarY, 0)
 
-		this.GUI.AddText("vInitPorgressCounter w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 40), Locale.ReadInject("lib_init_elems", [0, this.data.maxCountOfEntries], "default"))
+		this.GUI.AddText("vInitPorgressCounter w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 40), Locale.ReadInject("init.elements", [0, this.data.maxCountOfEntries], "default"))
 		this.GUI.AddText("vInitPorgressEntryName w" prgBarW " h" 16 " x" prgBarX " y" (prgBarY - 20), "")
 
 		this.GUI.Show("w" windowWidth " h" windowHeight " x" xPos " y" yPos)
@@ -42,8 +42,8 @@ Class PorgressBar {
 
 	SetProgressBarValue() {
 		if WinExist(this.data.progressBarTitle) {
-			this.GUI["InitPorgressCounter"].Text := Locale.ReadInject("lib_init_elems", [this.data.progressBarCurrent, this.data.maxCountOfEntries], "default") (this.data.typeOfInit = "Custom" ? " : " Locale.Read("lib_init_custom") : " : " Locale.Read("lib_init_internal_lib"))
-			this.GUI["InitPorgressEntryName"].Text := Locale.ReadInject("lib_init_entry", [this.data.progressName])
+			this.GUI["InitPorgressCounter"].Text := Locale.ReadInject("init.elements", [this.data.progressBarCurrent, this.data.maxCountOfEntries], "default") (this.data.typeOfInit = "Custom" ? " : " Locale.Read("init.custom_recipes") : " : " Locale.Read("init.internal_library"))
+			this.GUI["InitPorgressEntryName"].Text := Locale.ReadInject("init.entry", [this.data.progressName])
 
 			this.GUI["InitProgressBar"].Value := this.data.progressPercent
 			this.GUI.Show("NoActivate")

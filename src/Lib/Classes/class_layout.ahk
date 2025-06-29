@@ -852,7 +852,7 @@ Class KeyboardBinder {
 		}
 
 		ShowTooltip(*) {
-			ToolTip(Locale.ReadInject("lib_init_elems", [i, total], "default") " : " Locale.Read("binds_init") "`n" Util.TextProgressBar(i, total))
+			ToolTip(Locale.ReadInject("init.elements", [i, total], "default") " : " Locale.Read("init.binds") "`n" Util.TextProgressBar(i, total))
 			Sleep 50
 		}
 	}

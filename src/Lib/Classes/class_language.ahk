@@ -156,7 +156,7 @@ Class Keyboard {
 }
 
 Class Locale {
-	static localeObj := {}
+	static localeObj := Map()
 	static localesPath := A_ScriptDir "\Locale\"
 
 	static __New() {
@@ -164,17 +164,24 @@ Class Locale {
 	}
 
 	static Fill() {
-		this.localeObj := {}
+		this.localeObj := Map()
 		local pathsArray := []
 
 		for lang, value in Language.supported {
 			if value.locale {
-				pathsArray.Push(App.paths.loc "\locale_" lang ".ini")
+				local iniPath := App.paths.loc "\locale_" lang ".ini"
+				local jsonPath := App.paths.loc "\locale_" lang ".json"
+
+				if FileExist(iniPath)
+					pathsArray.Push(App.paths.loc "\locale_" lang ".ini")
+
+				if FileExist(jsonPath)
+					pathsArray.Push(App.paths.loc "\locale_" lang ".json")
 			}
 		}
 
 		Loop Files App.paths.loc "\Automated\*", "FR"
-			if A_LoopFileFullPath ~= "i)\.ini$"
+			if A_LoopFileFullPath ~= "i)\.(ini|json)$"
 				pathsArray.Push(A_LoopFileFullPath)
 
 		local activeMods := ModsInjector.GetActiveList()
@@ -183,10 +190,25 @@ Class Locale {
 			for folderName in activeMods
 				if DirExist(ModsInjector.modsPath "\" folderName "\Locale")
 					Loop Files ModsInjector.modsPath "\" folderName "\Locale\*", "FR"
-						if A_LoopFileFullPath ~= "i)\.ini$"
+						if A_LoopFileFullPath ~= "i)\.(ini|json)$"
 							pathsArray.Push(A_LoopFileFullPath)
 
-		this.localeObj := Util.MultiINIToObj(pathsArray)
+		this.localeObj := this.ParseSourceFiles(pathsArray)
+	}
+
+	static ParseSourceFiles(pathsArray) {
+		local bufferArray := []
+		local output := Map()
+
+		for path in pathsArray {
+			if path ~= "i)\.(ini)$"
+				bufferArray.Push(Util.INIToMap(path))
+			else if path ~= "i)\.(json)$"
+				bufferArray.Push(JSON.LoadFile(path, "UTF-8"))
+		}
+
+		output.DeepMergeWith(bufferArray*)
+		return output
 	}
 
 	static OpenDir(*) {
@@ -204,8 +226,46 @@ Class Locale {
 	}
 
 	static ReadStr(section, entry) {
-		return (this.localeObj.HasOwnProp(section) && this.localeObj.%section%.HasOwnProp(entry))
-			? this.localeObj.%section%.%entry% : ""
+		local str := this.GetEntry(&section, &entry)
+		local output := ""
+
+		if str is String
+			return str
+
+		if str is Map && str.Has("__self")
+			output := str.Get("__self")
+
+		if str is Array
+			output := str.Clone().ToString("")
+
+		return output
+	}
+
+	static GetEntry(&section, &entry) {
+		if InStr(entry, ".") {
+			local split := StrSplit(entry, ".")
+
+			if !this.localeObj.Has(section)
+				return ""
+
+			local current := this.localeObj[section]
+
+			for index, key in split {
+				if current.HasProp("Has") && current.Has(key) {
+					current := current[key]
+				} else {
+					if this.localeObj.Has(section) && this.localeObj[section].Has(entry)
+						return this.localeObj[section][entry]
+					return ""
+				}
+			}
+
+			return current
+
+		} else if this.localeObj.Has(section) && this.localeObj[section].Has(entry) {
+			return this.localeObj[section][entry]
+		}
+		return ""
 	}
 
 	static ReadNoLinks(entryName, inSection := "") {
@@ -543,5 +603,4 @@ Class Locale {
 
 		return entry
 	}
-
 }

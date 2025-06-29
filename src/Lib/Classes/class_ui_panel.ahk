@@ -1420,7 +1420,7 @@ Class Panel {
 
 			aboutSampleWords := panelWindow.AddGroupBox(UISets.aboutInfoBox.aboutSampleWords)
 
-			aboutSampleWordsContent := panelWindow.AddText(UISets.aboutInfoBox.aboutSampleWordsContent, Locale.Read("about_sample_words", "default"))
+			aboutSampleWordsContent := panelWindow.AddText(UISets.aboutInfoBox.aboutSampleWordsContent, Locale.Read("about.scripts_words", "default"))
 			aboutSampleWordsContent.SetFont("s11 c555555", Fonts.fontFaces["Default"].name)
 
 			/*

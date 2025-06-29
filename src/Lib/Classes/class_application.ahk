@@ -97,14 +97,14 @@ Class App {
 	}
 
 	static SetProfile(profile) {
-		profile := profile = Locale.Read("profile_default") ? "default" : profile
+		profile := profile = Locale.Read("profile.default") ? "default" : profile
 		IniWrite(profile, this.profileFile, "data", "profile")
 		Reload
 	}
 
 	static GetProfile() {
 		profile := IniRead(this.profileFile, "data", "profile", "default")
-		return profile = "default" ? Locale.Read("profile_default") : profile
+		return profile = "default" ? Locale.Read("profile.default") : profile
 	}
 
 	static SetTray() {

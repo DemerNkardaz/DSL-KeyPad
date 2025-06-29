@@ -49,7 +49,7 @@ Class UIPanelFilter {
 			this.Populate()
 		} else {
 			local groupStarted := False
-			local greviousGroupName := ""
+			local previousGroupName := ""
 			local keyOrRecipeMark := False
 
 			if filterText ~= "i)^(R::|Р::)" {
@@ -81,15 +81,15 @@ Class UIPanelFilter {
 					} else if groupStarted
 						groupStarted := False
 
-					if itemText != "" && itemText != greviousGroupName
-						greviousGroupName := itemText
+					if itemText != "" && itemText != previousGroupName
+						previousGroupName := itemText
 				}
 
 				if groupStarted
 					this.LV.Add()
 
 
-				if greviousGroupName != ""
+				if previousGroupName != ""
 					this.LV.Add()
 
 			} catch

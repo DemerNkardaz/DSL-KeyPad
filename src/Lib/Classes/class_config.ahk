@@ -193,9 +193,9 @@ Class Cfg {
 
 			optionsPanel.AddText("vProfileLabel x" languageSelectorX(256 + 16) " y" languageSelectorY(-17) " w128 BackgroundTrans", Locale.Read("profile"))
 
-			profiles := ArrayMerge(App.profileList, [Locale.Read("profile_new")])
+			profiles := ArrayMerge(App.profileList, [Locale.Read("profile.new")])
 			profiles.RemoveAt(1)
-			profiles.InsertAt(1, Locale.Read("profile_default"))
+			profiles.InsertAt(1, Locale.Read("profile.default"))
 
 			profileSelector := optionsPanel.AddDropDownList("vProfile x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(), profiles)
 			PostMessage(0x0153, -1, 15, profileSelector)
@@ -329,8 +329,8 @@ Class Cfg {
 			return optionsPanel
 
 			SetProfile(profileName) {
-				if profileName = Locale.Read("profile_new") {
-					IB := InputBox(Locale.Read("profile_new_name"), Locale.Read("profile_creation"), "w256 h92")
+				if profileName = Locale.Read("profile.new") {
+					IB := InputBox(Locale.Read("profile.new_name"), Locale.Read("profile.creation"), "w256 h92")
 					if IB.Result = "Cancel" || IB.Value = "" {
 						this.EditorGUI["Profile"].Text := App.GetProfile()
 						return
