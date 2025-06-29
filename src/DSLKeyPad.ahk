@@ -35,6 +35,7 @@ initialized := False
 #Include *i Mods\injector_pre_init.ahk
 
 #Include <Classes\class_util>
+#Include <Classes\class_variable_parser>
 #Include <Classes\class_progress_bar>
 #Include <Classes\class_progress_tooltip>
 #Include <Classes\class_character_block>

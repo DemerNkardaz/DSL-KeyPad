@@ -1,18 +1,7 @@
 bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMergeBinds(Map(
 	"Script Specified", Map(
 		"Cypriot Syllabary", Map(
-			"ForceSingle", True,
 			"Flat", Map(
-				"A", BindHandler.TimeShell("cypriot_syllabary_n_syl_a"),
-				"B", "",
-				"C", "",
-				"D", "",
-				"E", BindHandler.TimeShell("cypriot_syllabary_n_syl_e"),
-				"F", "",
-				"G", "",
-				"H", "",
-				"I", BindHandler.TimeShell("cypriot_syllabary_n_syl_i"),
-				"J", "",
 				"K", (K) => BindHandler.TimeSend(K,
 					["[A,E,I,O,U]", "cypriot_syllabary_n_syl_k_k[a,e,i,o,u]"], (*) => [], "1", True),
 				"L", (K) => BindHandler.TimeSend(K,
@@ -21,18 +10,14 @@ bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMerg
 					["[A,E,I,O,U]", "cypriot_syllabary_n_syl_m_m[a,e,i,o,u]"], (*) => [], "1", True),
 				"N", (K) => BindHandler.TimeSend(K,
 					["[A,E,I,O,U]", "cypriot_syllabary_n_syl_n_n[a,e,i,o,u]"], (*) => [], "1", True),
-				"O", BindHandler.TimeShell("cypriot_syllabary_n_syl_o"),
 				"P", (K) => BindHandler.TimeSend(K,
 					["[A,E,I,O,U]", "cypriot_syllabary_n_syl_p_p[a,e,i,o,u]"], (*) => [], "1", True),
-				"Q", "",
 				"R", (K) => BindHandler.TimeSend(K,
 					["[A,E,I,O,U]", "cypriot_syllabary_n_syl_r_r[a,e,i,o,u]"], (*) => [], "1", True),
 				"S", (K) => BindHandler.TimeSend(K,
 					["[A,E,I,O,U]", "cypriot_syllabary_n_syl_s_s[a,e,i,o,u]"], (*) => [], "1", True),
 				"T", (K) => BindHandler.TimeSend(K,
 					["[A,E,I,O,U]", "cypriot_syllabary_n_syl_t_t[a,e,i,o,u]"], (*) => [], "1", True),
-				"U", BindHandler.TimeShell("cypriot_syllabary_n_syl_u"),
-				"V", "",
 				"W", (K) => BindHandler.TimeSend(K,
 					["[A,E,I,O]", "cypriot_syllabary_n_syl_w_w[a,e,i,o]"], (*) => [], "1", True),
 				"X", (K) => BindHandler.TimeSend(K,
@@ -45,16 +30,13 @@ bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMerg
 			"Moded", Map()
 		),
 		"Old Persian", Map(
-			"ForceSingle", True,
 			"Flat", Map(
-				"A", BindHandler.TimeShell("old_persian_n_sign_a"),
 				"D", (K) => BindHandler.TimeSend(K,
 					["[A,I,U]", "old_persian_n_sign_d_d[a,i,u]"],
 					(*) => [], "1", True),
 				"G", (K) => BindHandler.TimeSend(K,
 					["[A,U]", "old_persian_n_sign_g_g[a,u]"],
 					(*) => [], "1", True),
-				"I", BindHandler.TimeShell("old_persian_n_sign_i"),
 				"J", (K) => BindHandler.TimeSend(K,
 					["[A,I]", "old_persian_n_sign_j_j[a,i]"],
 					(*) => [], "1", True),
@@ -73,7 +55,6 @@ bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMerg
 				"T", (K) => BindHandler.TimeSend(K,
 					["[A,I,U]", "old_persian_n_sign_t_t[a,i,u]"],
 					(*) => [], "1", True),
-				"U", BindHandler.TimeShell("old_persian_n_sign_u"),
 				"V", (K) => BindHandler.TimeSend(K,
 					["[A,I]", "old_persian_n_sign_v_v[a,i]"],
 					(*) => [], "1", True),
@@ -81,44 +62,7 @@ bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMerg
 		),
 	),
 	"Important", Map(
-		"Flat", Map(
-			"RAlt", (*) => globalInstances.crafter.ComposeActivate(),
-		),
 		"Moded", Map(
-			"F1", Map(
-				"<^>!", (*) => KeyboardBinder.ToggleDefaultMode(),
-				"<^>!>+", (*) => Auxiliary.ToggleInputMode(),
-				"<^>!<!", (*) => KeyboardBinder.ToggleDefaultMode("Second Keys"),
-			),
-			"F2", Map(
-				"<^>!<!", (*) => KeyboardBinder.ToggleDefaultMode("Tertiary Keys"),
-				"<^>!", (*) => globalInstances.scriptProcessors["Tieng Viet"].Start(),
-				"<^>!>+", (*) => globalInstances.scriptProcessors["HanYu PinYin"].Start(),
-			),
-			"Up", Map(
-				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Superscript"),
-				"<#<!>+", (*) => KeyboardBinder.ToggleNumStyle("Roman"),
-			),
-			"Down", Map(
-				"<#<!", (*) => KeyboardBinder.ToggleNumStyle("Subscript"),
-			),
-			"PgUp", Map("<#<!", (*) => UnicodeWebResource()),
-			"Home", Map("<#<!", (*) => Panel.Panel()),
-			"A", Map("<#<!", (*) => Scripter.SelectorPanel("Glyph Variations")),
-			"S", Map("<#<!", (*) => Scripter.SelectorPanel()),
-			"F", Map("<#<!", (*) => Search()),
-			"H", Map(
-				">^", (*) => Util.StrSelToConvert("Entities"),
-				"<^>^", (*) => Util.StrSelToConvert("Hex"),
-			),
-			"J", Map(
-				">^", (*) => Util.StrSelToConvert("Entities", True),
-			),
-			"Backslash", Map(
-				">^", (*) => Util.URLEncoder(),
-				"<^>^", (*) => Util.URLEncoder("decode"),
-			),
-			"Comma", Map("<#<!", (*) => GetKeyScanCode()),
 			"2", Map(
 				"<!", (*) => BindHandler.LangCall(Map(
 					"en-US", TextHandlers.ToQuote.Bind(TextHandlers,
@@ -130,16 +74,7 @@ bindingMaps := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"].DeepMerg
 						[ChrLib.Get("quote_left_double_ghost_ru"), ChrLib.Get("quote_right_double_ghost_ru")]
 					)
 				)),
-			),
-			"Y", Map(
-				">^", (*) => Util.StrSelToUnicode("CSS"),
-			),
-			"U", Map(
-				">^", (*) => Util.StrSelToUnicode(),
-			),
-			"I", Map(
-				">^", (*) => Util.StrSelToUnicode("Hex"),
-			),
+			)
 		)
 	),
 	"Common", Map(

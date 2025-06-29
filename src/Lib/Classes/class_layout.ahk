@@ -676,6 +676,31 @@ Class KeyboardBinder {
 
 		if bindingsMap.Count > 0 {
 			for combo, binds in bindingsMap {
+				if binds is String {
+					local originalBinds := binds
+					local processedBinds := binds
+					local lastProcessed := ""
+
+					while (RegExMatch(processedBinds, "(?<!\\)%([^%]+)%", &varExprMatch) && processedBinds != lastProcessed) {
+						lastProcessed := processedBinds
+
+						try {
+							local funcObject := VariableParser.Parse(varExprMatch[0])
+
+							if (funcObject is Func) {
+								processedBinds := funcObject
+								break
+							} else {
+								processedBinds := StrReplace(processedBinds, varExprMatch[0], funcObject, , , 1)
+							}
+						} catch as e {
+							processedBinds := StrReplace(processedBinds, varExprMatch[0], "[Parse Error: " . e.Message . "]", , , 1)
+						}
+					}
+
+					binds := processedBinds
+				}
+
 				local bindString := binds is String ? binds : (binds is Array && binds.Length == 1 && binds[1] is String ? binds[1] : "")
 
 				if bindString != "" {
@@ -772,7 +797,6 @@ Class KeyboardBinder {
 							rule := binds is Array ? "Lang" : ""
 							if RegExMatch(combo, ":(.*?)$", &ruleMatch)
 								rule := ruleMatch[1]
-
 
 							interCombo := RegExReplace(combo, ":" rule "$", "")
 							interCombo := RegExReplace(interCombo, keyLetter, scanCode)
@@ -1537,7 +1561,7 @@ Class Scripter {
 				local i := dataIndex * 2 - 1
 				local dataName := this.data[selectorType][i]
 				local dataValue := this.data[selectorType][i + 1]
-				AddOption(&dataName, &dataValue, &j)
+				AddOption(dataName, dataValue, j)
 			}
 
 			selectorPanel.Show("w" panelWidth " h" panelHeight " Center")
@@ -1545,7 +1569,7 @@ Class Scripter {
 			return selectorPanel
 
 
-			AddOption(&dataName, &dataValue, &j) {
+			AddOption(dataName, dataValue, j) {
 				local optionX := borderPadding + currentCol * (optionW + optionGap)
 				local optionY := borderPadding + currentRow * (optionH + (optionGap // 2))
 				local icoX := optionX + 10
