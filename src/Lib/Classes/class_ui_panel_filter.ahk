@@ -32,9 +32,10 @@ Class UIPanelFilter {
 
 	MatchInArray(&textsArray, &filterText) {
 		for each in textsArray {
-			if each = filterText
-				|| each ~= filterText
-				|| filterText ~= each
+			local escaped := RegExEscape(each)
+			if escaped = filterText
+				|| escaped ~= filterText
+				|| filterText ~= escaped
 				return True
 		}
 		return False
@@ -49,22 +50,29 @@ Class UIPanelFilter {
 		} else {
 			local groupStarted := False
 			local greviousGroupName := ""
-			local caseSensitiveMark := ""
+			local keyOrRecipeMark := False
+
+			if filterText ~= "i)^(R::|Р::)" {
+				keyOrRecipeMark := True
+				filterText := RegExReplace(filterText, "i)^(R::|Р::)")
+			}
 
 			try {
 				for item in this.dataList {
 					if item[this.localeData.localeIndex] = ""
 						continue
-
 					local itemText := StrReplace(item[this.localeData.localeIndex], Chr(0x00A0), " ")
 
-					local reserveTexts := [item[5]]
+					local reserveTexts := []
 					for key, index in this.localeData.localeIndexMap
 						if index != this.localeData.localeIndex
 							reserveTexts.Push(StrReplace(item[index], Chr(0x00A0), " "))
 
+					if item[5] != ""
+						reserveTexts.MergeWith([item[5]], ChrLib.GetValue(item[5], "tags"))
+
 					local isFavorite := InStr(itemText, Chr(0x2605))
-					local isMatch := itemText ~= filterText || this.MatchInArray(&reserveTexts, &filterText) || (isFavorite && filterText ~= "^(изб|fav|\*)")
+					local isMatch := keyOrRecipeMark ? (item[2] ~= filterText) : (itemText ~= filterText || this.MatchInArray(&reserveTexts, &filterText) || (isFavorite && filterText ~= "^(изб|fav|\*)"))
 
 					if isMatch {
 						if !groupStarted

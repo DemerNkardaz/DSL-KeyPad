@@ -2659,7 +2659,7 @@
 				"unicode": "2E53",
 				"tags": ["medieval !", "средневековый !"],
 				"groups": ["Smelting Special", "Special Fast RShift"],
-				"options": { "fastKey": ">+ 1" },
+				"options": { "fastKey": "<+>+ 1" },
 				"recipe": [".!"]
 			},
 			"medieval_question", {

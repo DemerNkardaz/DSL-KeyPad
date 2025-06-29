@@ -2152,7 +2152,7 @@
 					"<^>!": "inverted_exclamation",
 					"<^>!<+": "double_exclamation_question",
 					"<^>!>+": "double_exclamation",
-					">+": "medieval_exclamation",
+					"<+>+": "medieval_exclamation",
 					">+:Caps": "interrobang[_inverted,]"
 				},
 				"2": {
