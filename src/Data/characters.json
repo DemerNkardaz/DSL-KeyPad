@@ -483,7 +483,7 @@
 				"unicode": "0334",
 				"tags": ["tilde overlay", "тильда посередине"],
 				"groups": ["FK Diacritics Primary"],
-				"options": { "fastKey": "<+ T Е" },
+				"options": { "fastKey": ">+ T Е" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
 			"x_above", {
@@ -2659,21 +2659,21 @@
 				"unicode": "2E53",
 				"tags": ["medieval !", "средневековый !"],
 				"groups": ["Smelting Special", "Special Fast RShift"],
-				"options": { "fastKey": "<+>+ 1" },
+				"options": { "fastKey": "<+ 1" },
 				"recipe": [".!"]
 			},
 			"medieval_question", {
 				"unicode": "2E54",
 				"tags": ["medieval ?", "средневековый ?"],
 				"groups": ["Smelting Special", "Special Fast RShift"],
-				"options": { "fastKey": "<+>+ 7" },
+				"options": { "fastKey": "<+ 7" },
 				"recipe": [".?"]
 			},
 			"medieval_comma", {
 				"unicode": "2E4C",
 				"tags": ["medieval comma", "средневековый запятая"],
 				"groups": ["Smelting Special", "Special Fast RShift"],
-				"options": { "fastKey": ">+ <" },
+				"options": { "fastKey": "<" },
 				"recipe": [".,"]
 			},
 			"interrobang", {
@@ -3221,8 +3221,8 @@
 					"subscript": "208B"
 				},
 				"tags": ["minus", "минус"],
-				"groups": ["Dashes", "Smelting Special", "Special Fast Primary", "Special Combinations"],
-				"options": { "altSpecialKey": "NumSub", "fastKey": "<+ -" },
+				"groups": ["Dashes", "Smelting Special", "Special Fast RShif", "Special Combinations"],
+				"options": { "altSpecialKey": "NumSub", "fastKey": "-" },
 				"recipe": ["min"]
 			},
 			"minusdot", {
@@ -6694,7 +6694,7 @@
 			"lat_[c,s]_let_h_chi", {
 				"unicode": ["A7B3", "AB53"],
 				"groups": ["Latino-Hellenic"],
-				"options": { "useLetterLocale": true, "fastKey": "<! $?Secondary" },
+				"options": { "useLetterLocale": true, "fastKey": "<! \\X\\?Secondary" },
 				"recipe": ["/chi/"]
 			},
 			"lat_[c,s]_let_i_iota", {
@@ -9203,7 +9203,7 @@
 			},
 			"cyr_[c,s]_let_h_abkhasian", {
 				"unicode": ["04A8", "04A9"],
-				"options": { "useLetterLocale": true, "fastKey": "<+>+ $?Secondary" },
+				"options": { "useLetterLocale": true, "fastKey": "/Щ/?Secondary" },
 				"symbol": { "letter": "${cyr_[c,s]_let_h}" }
 			},
 			"cyr_[c,s]_let_ch_abkhasian", {
@@ -9297,15 +9297,17 @@
 			},
 			"cyr_[c,s]_lig_dche", {
 				"unicode": ["052C", "052D"],
+				"options": {  "fastKey": "<!<+ /Д/?Secondary" },
 				"symbol": { "letter": "${cyr_[c,s]_let_d}${cyr_[c,s]_let_ch}" }
 			},
 			"cyr_[c,s]_lig_dzzhe", {
 				"unicode": ["052A", "052B"],
+				"options": {  "fastKey": "<! /Д/?Secondary" },
 				"symbol": { "letter": "${cyr_[c,s]_let_d}${cyr_[c,s]_let_zh}" }
 			},
 			"cyr_[c,s]_lig_ye_iotified", {
 				"unicode": ["0464", "0465"],
-				"options": { "useLetterLocale": true },
+				"options": { "useLetterLocale": true, "fastKey": "<! /Э/?Secondary" },
 				"recipe": ["${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_e}", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_ye_anchor}"]
 			},
 			"cyr_[c,s]_lig_ye_yat_iotified", {
@@ -9720,7 +9722,7 @@
 			},
 			"cyr_[c,s]_let_ch_abkhasian__descender", {
 				"unicode": ["04BE", "04BF"],
-				"options": { "useLetterLocale": "Origin", "fastKey": "<+>+ \\Ч\\?Secondary" },
+				"options": { "useLetterLocale": "Origin", "fastKey": "<+>+ /Ч/?Secondary" },
 				"symbol": { "letter": "${cyr_[c,s]_let_ch_abkhasian}" }
 			},
 			"cyr_[c,s]_let_e__diaeresis", {

@@ -2117,7 +2117,8 @@
 				"T": {
 					"<^<!": "tilde_above",
 					"<^<!<+": "tilde_overlay",
-					"<^<!<+>+": "tilde_below"
+					"<^<!<+>+": "tilde_below",
+					"<^<!>+": "tilde_overlay"
 				},
 				"V": {
 					"<^<!": "line_vertical",
@@ -2396,7 +2397,7 @@
 				"ДефисоМинус": {
 					"<^>!>+": ["hyphenation_point"],
 					"<^<!": ["softhyphen"],
-					"<^<!<+": ["minus"],
+					">+": ["minus"],
 					"<^>!": ["emdash"],
 					"<^>!<+": ["endash"],
 					"<!:Caps": ["two_emdash", "three_emdash"],
@@ -2437,7 +2438,7 @@
 					">+": "celsius"
 				},
 				"D": {
-					"<!": "[angle,degree]",
+					"<!:Caps": "[angle,degree]",
 					"<^>!": ["lat_[c,s]_let_d_eth"],
 					"<^>!<!": ["lat_[c,s]_let_d__stroke_short"],
 					"<^>!>+": ["lat_[c,s]_let_d_afrikan"],
@@ -2670,7 +2671,9 @@
 				"Д": {
 					"<^>!": ["cyr_[c,s]_let_de_komi"],
 					"<^>!>+": ["cyr_[c,s]_let_dje_komi"],
-					"<^>!<+": ["cyr_[c,s]_let_dzje_komi"]
+					"<^>!<+": ["cyr_[c,s]_let_dzje_komi"],
+					"<^>!<!": ["cyr_[c,s]_lig_dzzhe"],
+					"<^>!<!<+": ["cyr_[c,s]_lig_dche"]
 				},
 				"Е": {
 					"<^>!": ["cyr_[c,s]_let_ye__breve"],
@@ -2777,7 +2780,6 @@
 					"<^>!": ["cyr_[c,s]_let_h_shha"],
 					"<^>!<!": ["cyr_[c,s]_let_h__descender"],
 					"<^>!<+": ["cyr_[c,s]_let_h__common_hook"],
-					"<^>!<+>+": ["cyr_[c,s]_let_h_abkhasian"],
 					"<^>!>+": ["cyr_[c,s]_let_h_hwe"],
 					">+": ["left_bracket"],
 					"<+>+": ["left_brace"]
@@ -2799,7 +2801,9 @@
 				"Ш": {
 					"<^>!": ["cyr_[c,s]_let_sh_shwe"]
 				},
-				"Щ": {},
+				"Щ": {
+					"<^>!": ["cyr_[c,s]_let_h_abkhasian"]
+				},
 				"Ъ": {
 					"<^>!": ["cyr_[c,s]_let_u_straight"],
 					"<^>!<+": ["cyr_[c,s]_let_u_straight__stroke_short"],
@@ -2828,7 +2832,8 @@
 				},
 				"Э": {
 					"<^>!": ["cyr_[c,s]_let_ye_anchor"],
-					"<^>!<+": ["cyr_[c,s]_let_e__diaeresis"]
+					"<^>!<+": ["cyr_[c,s]_let_e__diaeresis"],
+					"<^>!<!": ["cyr_[c,s]_lig_ye_iotified"]
 				},
 				"Ю": {
 					"<^>!": ["quote_angle_right_double"],

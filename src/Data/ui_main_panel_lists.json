@@ -81,7 +81,7 @@
 			"Special Fast Left": "%LeftAlt%",
 			"Special Fast Secondary": "%RightAlt%",
 			"Special Right Shift": "%RightShift%",
-			"Wallet Signs Left Shift": "%LeftShift"
+			"Wallet Signs Left Shift": "%LeftShift%"
 		}
 	}, {
 		"label": "Fast Keys",
