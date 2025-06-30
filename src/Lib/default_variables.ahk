@@ -113,7 +113,7 @@ ruExt := "\x{0406}\x{0456}\x{0462}\x{0463}\x{046A}\x{046B}\x{0466}\x{0467}\x{047
 
 mods := Map()
 
-globalInstances := {}
+globalInstances := { MainGUI: {}, crafter: {} }
 
 dataDir := A_ScriptDir "\Data"
 

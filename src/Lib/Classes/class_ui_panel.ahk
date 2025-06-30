@@ -96,9 +96,30 @@ Class Panel2 {
 	combinationKeyToGroupPairs := Map()
 
 	listViewColumnHeaders := {
-		default: ["name", "key", "view", "unicode", "entry_title", "entry_key"],
-		smelting: ["name", "recipe", "result", "unicode", "entry_title", "entry_key"],
-		favorites: ["name", "recipe", "key", "view", "entry_title", "entry_key"]
+		default: [
+			"dictionary.name",
+			"dictionary.key",
+			"dictionary.view",
+			"[default]unicode",
+			"dictionary.entry",
+			"dictionary.combination_key"
+		],
+		smelting: [
+			"dictionary.name",
+			"dictionary.recipe",
+			"dictionary.result",
+			"[default]unicode",
+			"dictionary.entry",
+			"dictionary.combination_key"
+		],
+		favorites: [
+			"dictionary.name",
+			"dictionary.recipe",
+			"dictionary.key",
+			"dictionary.view",
+			"dictionary.entry",
+			"dictionary.combination_key"
+		]
 	}
 
 	tabContents := [{
@@ -148,7 +169,6 @@ Class Panel2 {
 	}]
 
 	__New() {
-		local progress := DottedProgressTooltip(, &triggerEnds := False)
 		local JSONLists := JSON.LoadFile(App.paths.data "\ui_main_panel_lists.json", "UTF-8")
 
 		this.GetColumnsData(&columnsData)
@@ -157,8 +177,6 @@ Class Panel2 {
 			this.listViewLocaleColumnsIndexes.Set(each, i + columnsData.languageColumnsStartIndex)
 		this.FillListViewData(&JSONLists, &columnsData)
 
-		triggerEnds := True
-		progress := unset
 		JSONLists := unset
 		return
 	}
@@ -210,7 +228,7 @@ Class Panel2 {
 		; *
 		; *
 
-		this.title := App.Title("+status+version") " — " Locale.Read("gui_panel")
+		this.title := App.Title("+status+version") " — " Locale.Read("gui.panel")
 
 		local panelWindow := Gui()
 		panelWindow.Title := this.title
@@ -219,14 +237,14 @@ Class Panel2 {
 		local localizedTabs := []
 
 		for tab in this.tabs
-			localizedTabs.Push(Locale.Read("tab_" tab))
+			localizedTabs.Push(Locale.Read("gui.tabs." tab))
 
 		local panelTabs := panelWindow.AddTab3(Format("vTabs x{} y{} w{} h{}", this.tabsX, this.tabsY, this.tabsW, this.tabsH), localizedTabs)
 
 		local tabHeaders := []
 
 		for tab in this.listViewTabs
-			tabHeaders.Push(Locale.Read("tab_" tab))
+			tabHeaders.Push(Locale.Read("gui.tabs." tab))
 
 		for i, header in tabHeaders {
 			panelTabs.UseTab(header)
@@ -250,8 +268,10 @@ Class Panel2 {
 			localeIndexMap: this.listViewLocaleColumnsIndexes,
 		}
 
-		for tab in attributes.columns
-			localizedColumns.Push(Locale.Read("col_" tab))
+		for column in attributes.columns {
+			RegExMatch(column, "^(?:\[(.*?)\])?(.*)$", &match)
+			localizedColumns.Push(Locale.Read(match[2], match[1]))
+		}
 
 		localeData.columnsCount := localizedColumns.Length
 
@@ -286,7 +306,7 @@ Class Panel2 {
 		))
 
 
-		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("character"))
+		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
 
 		local previewGroupFrame := panelWindow.AddGroupBox(Format("v{}Frame x{} y{} w{} h{}", attributes.prefix, this.previewFrameX, this.previewFrameY, this.previewFrameW, this.previewFrameH))
 
@@ -449,6 +469,7 @@ Class Panel2 {
 								: bindings["Alternative Layout"] != "" ? reserveCombinationKey bindings["Alternative Layout"]
 								: "")
 						: characterSymbol
+						entryRow[3] := this.HandleKey(entryRow[3])
 
 						entryRow[4] := attributes["group"] = "Favorites"
 							? characterSymbol
@@ -507,7 +528,7 @@ Class Panel2 {
 				if split.Length > 1 {
 					for i, each in split {
 						if Locale.Read(each ".alt", specificLanguage, True, &titleText) || Locale.Read(each, specificLanguage, True, &titleText) {
-							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and", specificLanguage) " " : "")
+							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("dictionary.and", specificLanguage) " " : "")
 							skipCombine := False
 						}
 					}
@@ -920,9 +941,9 @@ Class Panel {
 		"help_panel_commands",
 		"help_tray_commands",
 		"help_uncommon_titles",
-		Map("help_search", [
-			"help_search__glyph_variations",
-			"help_search__funcs",
+		Map("help.search_at_library", [
+			"help.search_at_library.glyph_variations",
+			"help.search_at_library.funcs",
 		]),
 		"help_forge",
 		"help_alternative_input",
@@ -937,7 +958,7 @@ Class Panel {
 		]),
 	], flat: [] }
 
-	static panelTitle := App.Title("+status+version") " — " Locale.Read("gui_panel")
+	static panelTitle := App.Title("+status+version") " — " Locale.Read("gui.panel")
 
 	static PanelGUI := Gui()
 
@@ -1218,7 +1239,7 @@ Class Panel {
 
 		UISets := this.GetUISets()
 
-		title := App.Title("+status+version") " — " Locale.Read("gui_panel")
+		title := App.Title("+status+version") " — " Locale.Read("gui.panel")
 
 		panelTabList := { Obj: {}, Arr: [] }
 		panelColList := { default: [], smelting: [], favorites: [] }
@@ -1624,7 +1645,7 @@ Class Panel {
 
 		for label in this.commandLabels.flat {
 			if (Locale.Read(label) = selectedLabel) {
-				TargetTextBox.Text := Locale.Read(label "_description")
+				TargetTextBox.Text := Locale.Read(label ".description")
 				TargetTextBox.SetFont("s11", "Segoe UI")
 			}
 		}
@@ -1652,12 +1673,12 @@ Class Panel {
 					contextMenu := Menu()
 
 					labels := {
-						fav: Locale.Read("gui_panel_context_" (isCharFavorite ? "remove" : "add") "_favorites"),
-						showSymbolPage: Locale.ReadInject("gui_panel_context_show_symbol_page", [UnicodeWebResource.GetCurrentResource()]),
-						showBlockPage: Locale.ReadInject("gui_panel_context_show_block_page", [UnicodeBlockWebResource.GetCurrentResource()]),
-						glyphVariations: Locale.Read("gui_panel_context_glyph_variations"),
-						legend: Locale.Read("gui_panel_context_legend"),
-						showEntry: Locale.ReadInject("gui_panel_context_show_entry", [entryCol])
+						fav: Locale.Read("gui.panel.context_menu." (isCharFavorite ? "remove" : "add") "_favorites"),
+						showSymbolPage: Locale.ReadInject("gui.panel.context_menu.show_symbol_page", [UnicodeWebResource.GetCurrentResource()]),
+						showBlockPage: Locale.ReadInject("gui.panel.context_menu.show_block_page", [UnicodeBlockWebResource.GetCurrentResource()]),
+						glyphVariations: Locale.Read("gui.panel.context_menu.glyph_variations"),
+						legend: Locale.Read("gui.panel.context_menu.legend"),
+						showEntry: Locale.ReadInject("gui.panel.context_menu.show_entry", [entryCol])
 					}
 
 					contextMenu.Add(labels.fav, doFav)

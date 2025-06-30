@@ -29,7 +29,7 @@ Class Fonts {
 		}
 
 		if !found {
-			MsgBox(Locale.Read("prepare_fonts") namesToInstall, App.Title())
+			MsgBox(Locale.Read("prepare.fonts_not_found") namesToInstall, App.Title())
 
 			for _, fontSource in srcsToInstall {
 				this.Download(fontSource)
@@ -112,7 +112,7 @@ Class Fonts {
 				return
 			}
 		} catch {
-			MsgBox("Can’t download font.`n" Locale.Read("prepare_fonts"), "Font Installer")
+			MsgBox("Can’t download font.`n" Locale.Read("prepare.fonts_not_found"), "Font Installer")
 		}
 
 

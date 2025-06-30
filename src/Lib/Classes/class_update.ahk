@@ -258,7 +258,7 @@ Class Changelog {
 	static panelTitle := ""
 
 	static Panel() {
-		this.panelTitle := App.Title() " — " Locale.Read("gui_changelog")
+		this.panelTitle := App.Title() " — " Locale.Read("gui.changelog")
 
 		panelW := 600
 		panelH := 800
@@ -280,7 +280,7 @@ Class Changelog {
 			changelogPanel := Gui()
 			changelogPanel.title := this.panelTitle
 
-			changelogPanel.AddGroupBox(Format("vChangelogBox w{} h{} x{} y{}", clBoxW, clBoxH, clBoxX, clBoxY), Chr(0x1F310) " " Locale.Read("gui_changelog"))
+			changelogPanel.AddGroupBox(Format("vChangelogBox w{} h{} x{} y{}", clBoxW, clBoxH, clBoxX, clBoxY), Chr(0x1F310) " " Locale.Read("gui.changelog"))
 
 			changelogPanel.Show(Format("w{} h{} x{} y{}", panelW, panelH, posX, posY))
 			return changelogPanel

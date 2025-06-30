@@ -146,6 +146,7 @@ Class ChrReg {
 		local setProgress := !preventProgressGUI ? progress.SetProgressBarValue.Bind(progress) : False
 		local instances := {
 			ChrBlock: ChrBlock(),
+			LocaleGenerator: LocaleGenerator(),
 		}
 
 		if Keyboard.blockedForReload
@@ -813,9 +814,8 @@ Class ChrReg {
 			}
 		}
 
-		if StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["case"]) > 0 && StrLen(entry["data"]["letter"]) > 0 && entry["data"]["originScript"] != "&ipa" {
-			entry := Locale.LocalesGeneration(entryName, entry)
-		}
+		if StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["case"]) > 0 && StrLen(entry["data"]["letter"]) > 0 && entry["data"]["originScript"] != "&ipa"
+			entry := instances.LocaleGenerator.Generate(entryName, entry)
 
 		for i, LaTeXCodeSymbol in characters.supplementaryData["LaTeX Commands"] {
 			if Mod(i, 2) = 1 {

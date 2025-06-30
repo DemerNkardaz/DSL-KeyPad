@@ -11,7 +11,7 @@ Class ModsGUI {
 	Constructor() {
 		local languageCode := Language.Get()
 
-		local title := App.Title() " — " Locale.Read("gui_mods")
+		local title := App.Title() " — " Locale.Read("dictionary.mods")
 		ModsGUI.title := title
 
 		local w := 900
@@ -65,7 +65,7 @@ Class ModsGUI {
 		panel.title := ModsGUI.title
 
 		local listTitles := []
-		for each in ["gui_mod_name", "gui_mod_version", "gui_mod_init", "gui_mod_folder"]
+		for each in ["dictionary.name", "dictionary.version", "init", "dictionary.folder"]
 			listTitles.Push(Locale.Read(each))
 		listTitles.Push("")
 
@@ -73,7 +73,7 @@ Class ModsGUI {
 		modListLV.OnEvent("ItemCheck", (LV, Item, Checked) => this.ToggleMod(&LV, &Item, &Checked))
 		modListLV.OnEvent("ItemFocus", (LV, Item) => this.SetInfo(&LV, &Item, &panel))
 
-		local reloadBtn := panel.AddButton(Format("vReloadBtn w{} h{} x{} y{}", reloadBtnW, reloadBtnH, reloadBtnX, reloadBtnY), Locale.Read("gui_mod_reload_button"))
+		local reloadBtn := panel.AddButton(Format("vReloadBtn w{} h{} x{} y{}", reloadBtnW, reloadBtnH, reloadBtnX, reloadBtnY), Locale.Read("dictionary.reload"))
 		reloadBtn.OnEvent("Click", (*) => Reload())
 
 		for i, each in lvCols
@@ -104,7 +104,7 @@ Class ModsGUI {
 					),
 					modData[modData.Has(languageCode) ? languageCode : "options"]["title"],
 					modData["options"]["version"],
-					modData["options"]["type"] = "pre_init" ? Locale.Read("gui_mod_init_on_start") : Locale.Read("gui_mod_init_at_end"),
+					modData["options"]["type"] = "pre_init" ? Locale.Read("init.before_start") : Locale.Read("init.after_start"),
 					modData["options"]["folder"],
 					modData["options"]["type"],
 				])
@@ -211,9 +211,9 @@ Class ModsGUI {
 		panel["PreviewImage"].Value := this.GetPreview(&modPath)
 		panel["InfoGroup"].Text := title
 
-		panel["VersionLabel"].Text := Locale.Read("gui_mod_info_version") " " optionsMap["options"]["version"]
-		panel["AuthorLabel"].Text := Locale.Read("gui_mod_info_author") " " author
-		panel["ModPage"].Text := Locale.Read("gui_mod_info_mod_page") "`n" url
+		panel["VersionLabel"].Text := Locale.Read("dictionary.version") " " optionsMap["options"]["version"]
+		panel["AuthorLabel"].Text := Locale.Read("dictionary.author") " " author
+		panel["ModPage"].Text := Locale.Read("dictionary.homepage") "`n" url
 		panel["Description"].Text := Locale.HandleString(description)
 	}
 

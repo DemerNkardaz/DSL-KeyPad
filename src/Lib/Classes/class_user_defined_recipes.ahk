@@ -4,7 +4,7 @@ Class MyRecipes {
 	static filePath := App.paths.profile "\" this.file
 	static attachments := App.paths.profile "\Attachments.txt"
 	static autoimport := { linux: App.paths.profile "\Autoimport.linux", ini: App.paths.profile "\Autoimport.ini" }
-	static editorTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes_create")
+	static editorTitle := App.Title("+status+version") " — " Locale.Read("dictionary.create")
 	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
 
 	static defaulRecipes := [
@@ -117,7 +117,7 @@ Class MyRecipes {
 	static Editor(sectionName := [], recipesLV?) {
 
 		Constructor() {
-			this.editorTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes_create")
+			this.editorTitle := App.Title("+status+version") " — " Locale.Read("gui.recipes.create/edit")
 			data := {
 				section: "",
 				name: "",
@@ -157,16 +157,16 @@ Class MyRecipes {
 
 			recipeCreator.AddGroupBox("vGroupCommon " "x" defaultSizes.groupBoxX " y" boxCommonY " w" defaultSizes.groupBoxW " h" boxCommonH)
 
-			sectionLabel := recipeCreator.AddText("vSectionLabel x" commonX() " y" commonY() " w150 BackgroundTrans", Locale.Read("gui_recipes_create_section"))
+			sectionLabel := recipeCreator.AddText("vSectionLabel x" commonX() " y" commonY() " w150 BackgroundTrans", Locale.Read("gui.recipes.create/edit.section"))
 			sectionEdit := recipeCreator.AddEdit("vSectionEdit x" commonX() " y" commonY(20) " w250 Limit48 -Multi", sectionName.Length > 0 ? sectionName[4] : "")
 
-			nameLabel := recipeCreator.AddText("vNameLabel x" commonX() " y" commonY(55) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_name"))
+			nameLabel := recipeCreator.AddText("vNameLabel x" commonX() " y" commonY(55) " w150 BackgroundTrans", Locale.Read("gui.recipes.create/edit.name"))
 			nameEdit := recipeCreator.AddEdit("vNameEdit x" commonX() " y" commonY(55 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).name : "")
 
-			recipeLabel := recipeCreator.AddText("vRecipeLabel x" commonX() " y" commonY(110) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_recipe"))
+			recipeLabel := recipeCreator.AddText("vRecipeLabel x" commonX() " y" commonY(110) " w150 BackgroundTrans", Locale.Read("dictionary.recipe"))
 			recipeEdit := recipeCreator.AddEdit("vRecipeEdit x" commonX() " y" commonY(110 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).recipe : "")
 
-			tagsLabel := recipeCreator.AddText("vTagsLabel x" commonX() " y" commonY(165) " w150 BackgroundTrans", Locale.Read("gui_recipes_create_tags"))
+			tagsLabel := recipeCreator.AddText("vTagsLabel x" commonX() " y" commonY(165) " w150 BackgroundTrans", Locale.Read("dictionary.tags"))
 			tagsEdit := recipeCreator.AddEdit("vTagsEdit x" commonX() " y" commonY(165 + 20) " w250 -Multi", sectionName.Length > 0 ? MyRecipes.Get(sectionName[4]).tags : "")
 
 			resultLabel := recipeCreator.AddText("vResultLabel x" commonX() " y" commonY(165 + 55) " w250 BackgroundTrans")
@@ -187,8 +187,8 @@ Class MyRecipes {
 			pages := Util.StrPagesCalc(data.result)
 			resultLabel.Text := getResultLabel()
 
-			saveBtn := recipeCreator.AddButton("vSaveButton x" commonX() " y" (boxCommonH) - 32 " w100 h32", Locale.Read("gui_save"))
-			cancelBtn := recipeCreator.AddButton("vCancelButton x" commonX(100) " y" (boxCommonH) - 32 " w100 h32", Locale.Read("gui_cancel"))
+			saveBtn := recipeCreator.AddButton("vSaveButton x" commonX() " y" (boxCommonH) - 32 " w100 h32", Locale.Read("dictionary.save"))
+			cancelBtn := recipeCreator.AddButton("vCancelButton x" commonX(100) " y" (boxCommonH) - 32 " w100 h32", Locale.Read("dictionary.cancel"))
 
 			sectionEdit.OnEvent("Change", (CB, Zero) => setData(CB, "section"))
 			nameEdit.OnEvent("Change", (CB, Zero) => setData(CB, "name"))
@@ -223,7 +223,7 @@ Class MyRecipes {
 			}
 
 			getResultLabel() {
-				return Locale.Read("gui_recipes_create_result") ": " Util.StrVarsInject(Locale.Read("tooltip_compose_overflow_properties"), totalLen, pages)
+				return Locale.Read("dictionary.result") ": " Util.StrVarsInject(Locale.Read("tooltip_compose_overflow_properties"), totalLen, pages)
 			}
 
 			saveRecipe(data) {
@@ -232,7 +232,7 @@ Class MyRecipes {
 				if RegExMatch(data.section, this.sectionValidator) {
 					if InStr(data.section, "xcompose") {
 						RegExMatch(data.section, "\[(.*)\]", &match)
-						MsgBox(Locale.Read("gui_recipes_xcompose_break") "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" match[1], App.Title("+status+version"))
+						MsgBox(Locale.Read("gui.recipes.warnings.xcompose_cannot_be_edited") "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" match[1], App.Title("+status+version"))
 						return
 					} else if StrLen(data.section) > 0 && StrLen(data.name) > 0 && StrLen(data.recipe) > 0 && StrLen(data.result) > 0 {
 						if recipesListExists && data.row > 0 {
@@ -247,10 +247,10 @@ Class MyRecipes {
 							)
 						} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
 							if this.Check(data.section) {
-								MsgBox(Locale.ReadInject("gui_recipes_create_exists", [data.section]), App.Title("+status+version"))
+								MsgBox(Locale.ReadInject("gui.recipes.warnings.exists", [data.section]), App.Title("+status+version"))
 								return
 							} else if existingEntry && !existingEntry["groups"].HasValue("Custom Composes") {
-								MsgBox(Locale.ReadInject("gui_recipes_create_exists_internal", [data.section]), App.Title("+status+version"))
+								MsgBox(Locale.ReadInject("gui.recipes.warnings.exists_internal", [data.section]), App.Title("+status+version"))
 								return
 							}
 							lastMatchIndex := 0
@@ -289,7 +289,7 @@ Class MyRecipes {
 						data.previousSection := data.section
 					}
 				} else {
-					MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.Title("+status+version"))
+					MsgBox(Locale.Read("gui.recipes.warnings.invalid_section_name"), App.Title("+status+version"))
 				}
 			}
 		}
@@ -323,7 +323,7 @@ Class MyRecipes {
 			if !noUpdate
 				this.Update(singleSectionName ? [sectionName] : [])
 		} else
-			MsgBox(Locale.Read("gui_recipes_create_invalid_section_name"), App.Title("+status+version"))
+			MsgBox(Locale.Read("gui.recipes.warnings.invalid_section_name"), App.Title("+status+version"))
 
 		return
 	}
@@ -463,7 +463,7 @@ Class MyRecipes {
 						if True {
 							throw e.Message
 						}
-						MsgBox(Format(Locale.Read("gui_recipes_read_error" (updateOnCatch ? "_reinit" : "")), section, recipe))
+						MsgBox(Format(Locale.Read("gui.recipes.errors.read_error"), section, recipe))
 						if updateOnCatch {
 							this.Update()
 							return this.Read()
@@ -570,7 +570,7 @@ Class MyRecipes {
 				}
 			}
 		} else {
-			MsgBox(Locale.Read("gui_recipes_create_invalid_xcompose_name"), App.Title("+status+version"))
+			MsgBox(Locale.Read("gui.recipes.warnings.invalid_xcompose_name"), App.Title("+status+version"))
 		}
 
 		return output
@@ -624,14 +624,14 @@ Class MyRecipes {
 							)),
 						)
 					} else
-						MsgBox(Locale.ReadInject("gui_recipes_create_exists_internal", [section.section]), App.Title("+status+version"))
+						MsgBox(Locale.ReadInject("gui.recipes.warnings.exists_internal", [section.section]), App.Title("+status+version"))
 				} catch {
-					MsgBox("[" section.section "]`n" Locale.ReadInject("gui_recipes_create_invalid_recipe", [section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result]), App.Title("+status+version"))
+					MsgBox("[" section.section "]`n" Locale.ReadInject("gui.recipes.warnings.invalid_recipe", [section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result]), App.Title("+status+version"))
 				}
 			}
 			ChrReg(rawCustomEntries, "Custom")
 			if ChrLib.duplicatesList.Length > 0
-				TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
+				TrayTip(Locale.ReadInject("gui.recipes.warnings.duplicates_found", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
 		}
 		ChrLib.CountOfUpdate()
 	}
@@ -684,7 +684,7 @@ Class MyRecipes {
 
 			return asType is String ? titles.Get(userLanguage) : asType is Array ? titles.Values() : titles
 		} catch {
-			MsgBox(Locale.ReadInject("gui_recipes_error_titles", [sectionName]), App.Title("+status+version"))
+			MsgBox(Locale.ReadInject("gui.recipes.errors.titles", [sectionName]), App.Title("+status+version"))
 			return False
 		}
 	}

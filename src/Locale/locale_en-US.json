@@ -1,5 +1,23 @@
 {
 	"en-US": {
+		"dictionary": {
+			"__self": "Dictionary",
+			"and": "and",
+			"favorites": "Favorites",
+			"search": "Search"
+		},
+		"first_launch": {
+			"message": [
+				"ATTENTION!\n\n",
+				"If you play video games, please note that this tool operates on AutoHotkey, which may be prohibited in games, even in the background, due to players using .ahk scripts to gain an unfair advantage over others.\n\n",
+				"To avoid issues with game anti-cheats, it is recommended to disable all AutoHotkey processes before playing.\n\n",
+				"The highest risk is in the following games: Marvel Rivals, Apex Legends, games with BattlEye anti-cheat."
+			]
+		},
+		"prepare": {
+			"__self": "Prepare",
+			"fonts_not_found": "We have no found required fonts in the system.\nClose this windows for start its donwloading and installation.\n\nFonts to be installed:"
+		},
 		"init": {
 			"__self": "Initialization",
 			"entry": "Entry: “\u2008{}\u2008”",

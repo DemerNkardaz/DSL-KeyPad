@@ -322,7 +322,7 @@ Class Cfg {
 			GuiButtonIcon(openFolderBtn, ImageRes, 180)
 
 
-			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", Locale.Read("autoload_add"))
+			autoloadBtn := optionsPanel.AddButton("vAutoload x" (windowWidth - 150) / 2 " y" iniFilesY " w150 h32", Locale.Read("gui.options.system_startup.add"))
 			autoloadBtn.OnEvent("Click", (*) => Options.SetAutoload())
 
 			optionsPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
@@ -405,7 +405,7 @@ Class Cfg {
 			optionsCommonH := windowHeight - 80
 			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
 
-			listViewCols := [Locale.Read("col_name"), Locale.Read("col_recipe"), Locale.Read("col_result"), Locale.Read("col_entry_title"), Locale.Read("col_entry_file")]
+			listViewCols := [Locale.Read("dictionary.name"), Locale.Read("dictionary.recipe"), Locale.Read("dictionary.result"), Locale.Read("dictionary.entry"), Locale.Read("dictionary.file")]
 
 			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " -Multi"
 			recipesLV := recipesPanel.AddListView(recipesLVStyles, listViewCols)
@@ -443,7 +443,7 @@ Class Cfg {
 			removeRecipeBtn.SetFont("s16")
 			removeRecipeBtn.OnEvent("Click", (*) => removeSelected(currentRecipe))
 
-			attachRecipesListBtn := recipesPanel.AddButton("x" addRemX(128) " y" addRemY " w128 h32", Locale.Read("gui_recipes_attach_list"))
+			attachRecipesListBtn := recipesPanel.AddButton("x" addRemX(128) " y" addRemY " w128 h32", Locale.Read("gui.recipes.attach_list"))
 			attachRecipesListBtn.SetFont("s9")
 			attachRecipesListBtn.OnEvent("Click", (*) => attachList())
 
@@ -521,7 +521,7 @@ Class Cfg {
 						MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
 						return
 					} else {
-						message := Locale.ReadInject("gui_recipes_remove_confirm", [recipeArray[1]])
+						message := Locale.ReadInject("gui.recipes.warnings.remove_confirm", [recipeArray[1]])
 						confirBox := MsgBox(message, App.Title(), 4)
 						if confirBox = "No" {
 							return
@@ -552,7 +552,7 @@ Class Cfg {
 		}
 
 		if this.Get("First_Message", , True, "bool") {
-			MsgBox(Locale.Read("first_launch_message"), App.Title())
+			MsgBox(Locale.Read("first_launch.message"), App.Title())
 			this.Set("False", "First_Message")
 		}
 	}
@@ -729,7 +729,7 @@ Class Options {
 		command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" shortcutPath "'); $shortcut.TargetPath = '" currentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" App.icoDLL "," iconIndex "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()"
 		RunWait(command, , "Hide")
 
-		MsgBox(Locale.Read("gui_options_autoload_created"), App.Title(), 0x40)
+		MsgBox(Locale.Read("gui.options.system_startup.shortcut_created/updated"), App.Title(), 0x40)
 	}
 }
 
