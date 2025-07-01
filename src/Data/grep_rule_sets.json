@@ -2,10 +2,17 @@
 	"ru-RU": {
 		"0::Разное": [
 			"\\-\\-", "%ChrLib.Get('emdash')%",
+			"(\\d+)\\-(\\d+)", "$1%ChrLib.Get('endash')%$2",
+			"(?<!\\d)\\-(\\d+)", "%ChrLib.Get('minus')%$1",
+			"([-%ChrLib.Get('minus')%])(\\d+)[%ChrLib.Get('endash')%|\\-](\\d+)", "$1$2%ChrLib.Get('ellipsis')%$3",
 			"\\.\\.\\.", "%ChrLib.Get('ellipsis')%",
 			"\"\"(.*)\"\"", "«„$1“»",
 			"\"(.*)\"", "«$1»",
-			"(?<!\\s)\\s(?=%GREP.punctuation%)", ""
+			"\\.»", "».",
+			"((\\!|\\?)((\\.\\.\\.)|%ChrLib.Get('ellipsis')%)|((\\.\\.\\.)|%ChrLib.Get('ellipsis')%)(\\!|\\?))", "$2$7..",
+			"(?<!\\s)\\s(?=%GREPTypography.punctuation%|[\\)\\]])", "",
+			"(?<=[«„\\(\\[])[ \\t]+", "",
+			"\\s\\s", " "
 		],
 		"1::Одиночные буквы": [
 			"(?<![а-яА-ЯёЁa-zA-Z])([а-яА-ЯёЁa-zA-Z])\\s", "$1%ChrLib.Get('no_break_space')%"
@@ -15,6 +22,7 @@
 			"([A-ZА-ЯЁ][a-zа-яё]+)\\s([A-ZА-Яё]\\.)\\s([A-ZА-ЯЁ]\\.)", "$1%ChrLib.Get('thinspace')%$2%ChrLib.Get('thinspace')%$3"
 		],
 		"3::Цифры": [
+			"(?<=\\d)(?=(\\d{3})+(?!\\d))", "%ChrLib.Get('no_break_space')%",
 			"(?<=\\d)\\s(?=\\d{3})", "%ChrLib.Get('no_break_space')%"
 		],
 		"4::Тире": [
@@ -22,8 +30,8 @@
 			"(?<!%GREP.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'space')%"
 		],
 		"5::Союзы": [
-			"i)\\s(бы|ли|то|же)(?![а-яА-Я])", "%ChrLib.Get('no_break_space')%$1",
-			"i)\\s(за|из|до|для|на|но|не|ни|то|по|со)\\s", "%ChrLib.Get('space')%$1%ChrLib.Get('no_break_space')%"
+			"i)\\s(б|бы|ж|же|ли|ль)(?![а-яА-Я])", "%ChrLib.Get('no_break_space')%$1",
+			"i)\\s(за|из|до|об|на|но|не|ни|то|от|по|со|или|для|над|под|при|что|если|через|после|перед)\\s", "%ChrLib.Get('space')%$1%ChrLib.Get('no_break_space')%"
 		],
 		"6::Конец абзаца": [
 			"(?<=[а-яА-ЯёЁa-zA-Z])\\s(?=[а-яА-ЯёЁa-zA-Z]{1,12}%GREP.punctuation%*$)", "%ChrLib.Get('no_break_space')%"
@@ -33,6 +41,11 @@
 		"начало абзаца": [
 			"^%ChrLib.Get('emdash')%\\s+", "%ChrLib.Gets('emdash', 'ensp')%",
 			"^(?=.)(?!%ChrLib.Get('emsp')%)", "%ChrLib.Get('emsp')%"
+		]
+	},
+	"en-US": {
+		"0::Miscellaneous": [
+
 		]
 	}
 }
