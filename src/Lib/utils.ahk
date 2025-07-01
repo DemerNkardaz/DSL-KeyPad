@@ -446,17 +446,6 @@ IsGuiOpen(title) {
 	return WinExist(title) != 0
 }
 
-ShowInfoMessage(MessagePost, MessageIcon := "Info", MessageTitle := App.Title("+status+version"), SkipMessage := False, Mute := False, NoReadLocale := False) {
-	if SkipMessage == True
-		return
-	local muting := Mute ? " Mute" : ""
-	local ico := MessageIcon == "Info" ? "Iconi" :
-		MessageIcon == "Warning" ? "Icon!" :
-		MessageIcon == "Error" ? "Iconx" : 0x0
-	TrayTip(NoReadLocale ? MessagePost : Locale.Read(MessagePost), MessageTitle, ico . muting)
-
-}
-
 Range(start, end, step := 1) {
 	local result := []
 	if step > 0 {

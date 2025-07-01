@@ -2141,6 +2141,10 @@
 				"RAlt": "%(*) => globalInstances.crafter.ComposeActivate()%"
 			},
 			"Moded": {
+				"NumpadEnter": {
+					"<^": "%(*) => GREPTypography.SetStyles()%",
+					"<!": "%(*) => GREPTypography.SetStyles('Paragraphs')%"
+				},
 				"F1": {
 					"<^>!": "%(*) => KeyboardBinder.ToggleDefaultMode()%",
 					"<^>!>+": "%(*) => Auxiliary.ToggleInputMode()%",

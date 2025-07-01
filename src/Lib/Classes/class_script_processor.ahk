@@ -210,8 +210,6 @@ Class InputScriptProcessor {
 		if this.mode != "" {
 			this.InitHook()
 		}
-
-		!reloadHs && ShowInfoMessage(Locale.ReadInject("script_mode_" (isEnabled ? "" : "de") "activated", [Locale.Read("script_" this.tag)]), , , , True, True)
 	}
 
 	InH := InputHook("V")

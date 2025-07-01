@@ -13,8 +13,6 @@ Class ChrCrafter {
 		} catch {
 			if this.compositingMode = "InputBox"
 				MsgBox(Locale.Read("warning_recipe_absent"), Locale.Read("symbol_smelting"), 0x30)
-			else
-				ShowInfoMessage("warning_recipe_absent", , , Cfg.SkipGroupMessage, True)
 		}
 	}
 

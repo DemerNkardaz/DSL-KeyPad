@@ -80,184 +80,22 @@ triggerEnds := True
 #Include <Classes\class_ui_glyph_variations_panel>
 #Include <Classes\class_key_event>
 #Include <Classes\class_text_handlers>
+#Include <Classes\class_grep_typography>
+#Include <Classes\class_grep_typography_registrar>
 #Include <Classes\class_long_press>
 #Include <Classes\class_hotstrings_latex>
 #Include <Classes\class_tempature_converter>
 #Include <Classes\class_dev>
-; MsgBox(BindReg.storedData["User"]["Esoteric Binds"]["Moded"]["Y"]["<^>!"][2])
-
 initialized := True
 
 ChrLib.CountOfUpdate()
 App.SetTrayItems()
-; Panel.SetPanelData()
-; GlyphsPanel.SetPanelData()
+Panel.SetPanelData()
+GlyphsPanel.SetPanelData()
 
 ; Automatically created/updated by mods injector class
 ; Dynamically loads mods pasted into \Mods\ directory
 #Include *i Mods\injector_post_init.ahk
-
-; Legacy code, saved for future rework
-GREPizeSelection(GetCollaborative := False) {
-	CustomAfterStartEmdash := (Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") != "") ? Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") : "ensp"
-	CustomDialogue := (Cfg.Get("GREP_Dialog_Attribution", "CustomRules", "") != "") ? Cfg.Get("GREP_Dialog_Attribution", "CustomRules", "") : "no_break_space"
-	CustomThisEmdash := (Cfg.Get("GREP_ThisEmdash", "CustomRules", "") != "") ? Cfg.Get("GREP_ThisEmdash", "CustomRules", "") : "no_break_space"
-	CustomInitials := (Cfg.Get("GREP_Initials", "CustomRules", "") != "") ? Cfg.Get("GREP_Initials", "CustomRules", "") : "thinspace"
-
-	Punctuations := "[" ChrLib.Get("reversed_question", "inverted_exclamation", "inverted_question", "double_exclamation", "double_exclamation_question", "double_question", "double_question_exclamation", "interrobang", "interrobang_inverted") ".,!?…”’»›“]"
-
-	GREPRules := Map(
-		"start_emdash", {
-			grep: "^" ChrLib.Get("emdash") "\s",
-			replace: ChrLib.Get("emdash", CustomAfterStartEmdash)
-		},
-		"dialogue_emdash", {
-			grep: "(?<=" Punctuations ")\s" ChrLib.Get("emdash") "\s",
-			replace: ChrLib.Get(CustomDialogue "[1,3]", "emdash")
-		},
-		"this_emdash", {
-			grep: "(?<!" Punctuations ")\s" ChrLib.Get("emdash") "\s",
-			replace: ChrLib.Get(CustomThisEmdash, "emdash", "space")
-		},
-		"nums", {
-			grep: "(?<=\d)\s(?=\d{3})",
-			replace: ChrLib.Get("no_break_space")
-		},
-		"paragraph_end", {
-			grep: "(?<=[а-яА-ЯёЁa-zA-Z])\s(?=[а-яА-ЯёЁa-zA-Z]{1,12}[" Punctuations "]*$)",
-			replace: ChrLib.Get("no_break_space")
-		},
-		"initials", {
-			grep: "([A-ZА-ЯЁ]\.)\s([A-ZА-ЯЁ]\.)\s([A-ZА-ЯЁ][a-zа-яё]+)",
-			replace: "$1" . ChrLib.Get(CustomInitials) . "$2" . ChrLib.Get(CustomInitials) . "$3"
-		},
-		"initials_reversed", {
-			grep: "([A-ZА-ЯЁ][a-zа-яё]+)\s([A-ZА-Яё]\.)\s([A-ZА-ЯЁ]\.)",
-			replace: "$1" . ChrLib.Get(CustomInitials) . "$2" . ChrLib.Get(CustomInitials) . "$3"
-		},
-		"single_letter", {
-			grep: "(?<![а-яА-ЯёЁa-zA-Z])([а-яА-ЯёЁa-zA-Z])\s",
-			replace: "$1" ChrLib.Get("no_break_space")
-		},
-		"russian_conjunctions", {
-			grep: "\s(бы|ли|то|же)(?![а-яА-Я])",
-			replace: ChrLib.Get("no_break_space") "$1"
-		},
-		"russian_conjunctions_2", {
-			grep: "\s(из|до|для|на|но|не|ни|то|по|со|Из|До|Для|На|Но|Не|Ни|То|По|Со)\s",
-			replace: ChrLib.Get("space") "$1" ChrLib.Get("no_break_space")
-		},
-	)
-
-	BackupClipboard := ClipboardAll()
-	if !GetCollaborative {
-		PromptValue := ""
-		A_Clipboard := ""
-
-		Send("{Shift Down}{Delete}{Shift Up}")
-		ClipWait(0.50, 1)
-		PromptValue := A_Clipboard
-		A_Clipboard := ""
-	} else {
-		PromptValue := ParagraphizeSelection(True)
-		Sleep 100
-	}
-
-	if (PromptValue != "") {
-		TotalLines := 0
-		SplittedLines := StrSplit(PromptValue, "`r`n")
-		ModifiedValue := ""
-
-		for index in SplittedLines {
-			TotalLines++
-		}
-
-		CurrentLine := 0
-		for _, rule in GREPRules {
-			for i, line in SplittedLines {
-				SplittedLines[i] := RegExReplace(line, rule.grep, rule.replace)
-			}
-		}
-
-		for line in SplittedLines {
-			CurrentLine++
-			EndLine := CurrentLine < TotalLines ? "`r`n" : ""
-			ModifiedValue .= line . EndLine
-		}
-
-		A_Clipboard := ModifiedValue
-		ClipWait(0.5, 1)
-		Send("{Shift Down}{Insert}{Shift Up}")
-	}
-
-	Sleep 500
-	A_Clipboard := BackupClipboard
-}
-
-ParagraphizeSelection(SendCollaborative := False) {
-	BackupClipboard := A_Clipboard
-	PromptValue := ""
-	A_Clipboard := ""
-
-	Send("^c")
-	ClipWait(0.50, 1)
-	PromptValue := A_Clipboard
-	A_Clipboard := ""
-
-	if (PromptValue != "") {
-		CustomParagraphBeginning := (Cfg.Get("Paragraph_Beginning", "CustomRules", "") != "") ? Cfg.Get("Paragraph_Beginning", "CustomRules", "") : "emsp"
-		CustomAfterStartEmdash := (Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") != "") ? Cfg.Get("Paragraph_After_Start_Emdash", "CustomRules", "") : "ensp"
-
-		blockRules := [CustomParagraphBeginning, CustomAfterStartEmdash]
-
-		for i, blockRule in blockRules {
-			if blockRule = "noad" {
-				blockRules[i] := ""
-			}
-		}
-
-		CustomParagraphBeginning := blockRules[1]
-		CustomAfterStartEmdash := blockRules[2]
-
-		TotalLines := 0
-		ModifiedValue := ""
-		SplittedLines := StrSplit(PromptValue, "`r`n")
-
-		for index in SplittedLines {
-			TotalLines++
-		}
-
-		CurrentLine := 0
-		for line in SplittedLines {
-			CurrentLine++
-			EndLine := CurrentLine < TotalLines ? "`r`n" : ""
-			LocalModify := RegExReplace(
-				line, "^" . ChrLib.Get("emdash") . "\s+",
-				ChrLib.Get("emdash") . ChrLib.Get(CustomAfterStartEmdash)
-			)
-			ModifiedValue .= ChrLib.Get(CustomParagraphBeginning) . LocalModify . EndLine
-
-		}
-
-		if !SendCollaborative {
-			A_Clipboard := ModifiedValue
-			ClipWait(0.250, 1)
-			Sleep 1000
-			Send("^v")
-		} else {
-			A_Clipboard := BackupClipboard
-			return ModifiedValue
-		}
-
-		;SendText(ModifiedValue)
-	}
-
-	Sleep 1000
-	A_Clipboard := BackupClipboard
-}
-
-
-ShowInfoMessage("tray_app_started")
 
 ShowEntryPreview() {
 	IB := InputBox("", "", "w256 h92")

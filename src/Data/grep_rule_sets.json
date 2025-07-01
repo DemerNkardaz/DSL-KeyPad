@@ -1,0 +1,38 @@
+{
+	"ru-RU": {
+		"0::Разное": [
+			"\\-\\-", "%ChrLib.Get('emdash')%",
+			"\\.\\.\\.", "%ChrLib.Get('ellipsis')%",
+			"\"\"(.*)\"\"", "«„$1“»",
+			"\"(.*)\"", "«$1»",
+			"(?<!\\s)\\s(?=%GREP.punctuation%)", ""
+		],
+		"1::Одиночные буквы": [
+			"(?<![а-яА-ЯёЁa-zA-Z])([а-яА-ЯёЁa-zA-Z])\\s", "$1%ChrLib.Get('no_break_space')%"
+		],
+		"2::Инициалы": [
+			"([A-ZА-ЯЁ]\\.)\\s([A-ZА-ЯЁ]\\.)\\s([A-ZА-ЯЁ][a-zа-яё]+)", "$1%ChrLib.Get('thinspace')%$2%ChrLib.Get('thinspace')%$3",
+			"([A-ZА-ЯЁ][a-zа-яё]+)\\s([A-ZА-Яё]\\.)\\s([A-ZА-ЯЁ]\\.)", "$1%ChrLib.Get('thinspace')%$2%ChrLib.Get('thinspace')%$3"
+		],
+		"3::Цифры": [
+			"(?<=\\d)\\s(?=\\d{3})", "%ChrLib.Get('no_break_space')%"
+		],
+		"4::Тире": [
+			"(?<=%GREP.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'no_break_space')%",
+			"(?<!%GREP.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'space')%"
+		],
+		"5::Союзы": [
+			"i)\\s(бы|ли|то|же)(?![а-яА-Я])", "%ChrLib.Get('no_break_space')%$1",
+			"i)\\s(за|из|до|для|на|но|не|ни|то|по|со)\\s", "%ChrLib.Get('space')%$1%ChrLib.Get('no_break_space')%"
+		],
+		"6::Конец абзаца": [
+			"(?<=[а-яА-ЯёЁa-zA-Z])\\s(?=[а-яА-ЯёЁa-zA-Z]{1,12}%GREP.punctuation%*$)", "%ChrLib.Get('no_break_space')%"
+		]
+	},
+	"ru-RU::Paragraphs": {
+		"начало абзаца": [
+			"^%ChrLib.Get('emdash')%\\s+", "%ChrLib.Gets('emdash', 'ensp')%",
+			"^(?=.)(?!%ChrLib.Get('emsp')%)", "%ChrLib.Get('emsp')%"
+		]
+	}
+}
