@@ -1234,9 +1234,6 @@ Class Panel {
 		if !initialized
 			return
 
-		tt := this.PanelDataToolTip.Bind(this)
-		SetTimer(tt, 100, 0)
-
 		UISets := this.GetUISets()
 
 		title := App.Title("+status+version") " — " Locale.Read("gui.panel")
@@ -1544,10 +1541,6 @@ Class Panel {
 			SetTimer(this.LV_SetRandomPreviews.Bind(this), -100)
 		}
 
-		SetTimer(tt, 0)
-		ToolTip(Chr(0x2705))
-		this.pdToolTipIncrement := 0
-		SetTimer(ToolTip.Bind(""), -500)
 	}
 
 	static AddCharactersTab(options) {

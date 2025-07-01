@@ -96,16 +96,16 @@ _ArrayToString(this, separator := ", ", bounds := "") {
 	for index, value in this {
 		if index = this.Length {
 			if value is Array {
-				str .= bounds value.ToString(separator, bounds) bounds
+				str .= (bounds is Array ? bounds[1] : bounds) value.ToString(separator, bounds) (bounds is Array ? bounds[2] : bounds)
 			} else {
-				str .= bounds value bounds
+				str .= (bounds is Array ? bounds[2] : bounds) value (bounds is Array ? bounds[2] : bounds)
 			}
 			break
 		}
 		if value is Array {
-			str .= bounds value.ToString(separator, bounds) bounds separator
+			str .= (bounds is Array ? bounds[1] : bounds) value.ToString(separator, bounds) (bounds is Array ? bounds[2] : bounds) separator
 		} else {
-			str .= bounds value bounds separator
+			str .= (bounds is Array ? bounds[1] : bounds) value (bounds is Array ? bounds[2] : bounds) separator
 		}
 	}
 	return str

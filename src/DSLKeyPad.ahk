@@ -61,6 +61,7 @@ triggerEnds := True
 #Include <Classes\class_character_crafter>
 #Include <Classes\class_character_inserter>
 #Include <Classes\class_script_processor>
+#Include <Classes\class_functional_bindings_storage>
 #Include <Classes\class_binding_registrar>
 #Include <Classes\class_binding_handler>
 #Include <Classes\class_binding_list>

@@ -2173,6 +2173,9 @@
 				"Home": {
 					"<#<!": "%(*) => Panel.Panel()%"
 				},
+				"2": {
+					"<!": "%FuncBindStore.Get('ToQuote')%"
+				},
 				"A": {
 					"<#<!": "%(*) => Scripter.SelectorPanel('Glyph Variations')%"
 				},
@@ -2208,6 +2211,8 @@
 			}
 		},
 		"Common": {
+			"Flat": {
+			},
 			"Moded": {
 				"NumpadMult": {
 					"<^>!": "asterisk_two",
@@ -2678,6 +2683,7 @@
 				"Е": {
 					"<^>!": ["cyr_[c,s]_let_ye__breve"],
 					"<^>!<!": ["cyr_[c,s]_let_ye_yat"],
+					"<^>!<+": ["cyr_[c,s]_let_ye__diaeresis"],
 					">+": ["cyr_[c,s]_let_ye__grave"]
 				},
 				"Ё": {},

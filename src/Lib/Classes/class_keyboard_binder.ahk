@@ -398,14 +398,14 @@ Class KeyboardBinder {
 
 	static CompileBridge(combo, bind, targetMap) {
 		if bind.Length == 1 && bind[1] is String {
-			targetMap.Set(combo, (K) => BindHandler.Send(K, bind[1]))
+			targetMap.Set(combo, BindHandler.Send.Bind(BindHandler, , bind[1]))
 		} else if (bind.Length = 1 && bind[1] is Array) ||
 			(bind.Length == 2 && bind[1] is Array && Util.IsBool(bind[2])) {
 			reverse := bind.Length == 2 ? bind[2] : False
-			targetMap.Set(combo, (K) => BindHandler.CapsSend(K, bind[1], reverse))
+			targetMap.Set(combo, BindHandler.CapsSend.Bind(BindHandler, , bind[1], reverse))
 		} else if bind.Length >= 2 {
 			reverse := bind.Length == 3 ? bind[3] : Map("en-US", False, "ru-RU", False)
-			targetMap.Set(combo, (K) => BindHandler.LangSend(K, Map("en-US", bind[1], "ru-RU", bind[2]), reverse))
+			targetMap.Set(combo, BindHandler.LangSend.Bind(BindHandler, , Map("en-US", bind[1], "ru-RU", bind[2]), reverse))
 		} else if bind[1] is Func {
 			targetMap.Set(combo, bind[1])
 		} else {

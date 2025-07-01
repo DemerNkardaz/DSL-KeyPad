@@ -3222,7 +3222,7 @@
 				},
 				"tags": ["minus", "минус"],
 				"groups": ["Dashes", "Smelting Special", "Special Fast RShif", "Special Combinations"],
-				"options": { "altSpecialKey": "NumSub", "fastKey": "-" },
+				"options": { "altSpecialKey": "NumSub", "fastKey": "-", "send": "Text" },
 				"recipe": ["min"]
 			},
 			"minusdot", {
@@ -9396,6 +9396,11 @@
 				"recipe": ["$${cyr_[c,s]_let_g}"],
 				"symbol": { "letter": "${cyr_[c,s]_let_m}", "beforeLetter": "soft" }
 			},
+			"cyr_[c,s]_lig_soft_n", {
+				"unicode": ["04A4", "04A5"],
+				"recipe": ["$${cyr_[c,s]_let_g}"],
+				"symbol": { "letter": "${cyr_[c,s]_let_n}", "beforeLetter": "soft" }
+			},
 			"cyr_[c,s]_dig_uk", {
 				"unicode": ["0478", "0479"],
 				"options": { "useLetterLocale": true },
@@ -9482,7 +9487,7 @@
 			},
 			"cyr_[c,s]_let_ye__diaeresis", {
 				"unicode": ["0401", "0451"],
-				"options": { "noCalc": true },
+				"options": { "noCalc": true, "fastKey": "<+ $?Secondary" },
 				"symbol": { "letter": "${cyr_[c,s]_let_ye}" }
 			},
 			"cyr_[c,s]_let_ye__grave", {
