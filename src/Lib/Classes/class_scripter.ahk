@@ -90,11 +90,11 @@ Class Scripter {
 		Loop keysLen
 			keys.Push("", "")
 
-		for keyName, keyCode in KeyboardBinder.layouts.latin[latinLayout].layout
+		for keyName, keyCode in KbdLayoutReg.storedData["latin"][latinLayout]
 			keyCodes.HasValue(keyCode, &i) && (keys[i] := keyName)
-		for keyName, keyCode in KeyboardBinder.layouts.cyrillic[cyrillicLayout].layout
+		for keyName, keyCode in KbdLayoutReg.storedData["cyrillic"][cyrillicLayout]
 			keyCodes.HasValue(keyCode, &i) && (keys[keysLen + i] := keyName)
-		for keyName, keyCode in KeyboardBinder.layouts.hellenic[hellenicLayout].layout
+		for keyName, keyCode in KbdLayoutReg.storedData["hellenic"][hellenicLayout]
 			keyCodes.HasValue(keyCode, &i) && (keys[keysLen * 2 + i] := keyName)
 
 		for key, value in keySymbols

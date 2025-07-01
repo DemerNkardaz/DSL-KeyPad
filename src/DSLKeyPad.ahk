@@ -42,7 +42,9 @@ DottedProgressTooltip(4, &triggerEnds := False)
 #Include <Classes\class_variable_parser>
 #Include <Classes\class_scripter_store>
 #Include <Classes\class_scripter>
-#Include <Classes\class_layout_list>
+#Include <Classes\class_keyboard_layout>
+#Include <Classes\class_keyboard_layout_registrar>
+#Include <Classes\class_keyboard_layout_user_defined>
 #Include <Classes\class_character_block>
 #Include <Classes\class_unicode_web_resource>
 #Include <Classes\class_search>

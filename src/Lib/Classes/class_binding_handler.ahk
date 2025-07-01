@@ -47,7 +47,7 @@ Class BindHandler {
 			}
 
 			keysValidation := "SC(14B|148|14D|150|04A)"
-			chrValidation := "(\" Chr(0x00AE) "|\" Chr(0x2122) "|\" Chr(0x00A9) "|\" Chr(0x2022) "|\" Chr(0x25B6) "|\" Chr(0x25C0) "|\" Chr(0x0021) "|\" Chr(0x002B) "|\" Chr(0x005E) "|\" Chr(0x0023) "|\" Chr(0x007B) "|\" Chr(0x007D) "|\" Chr(0x0060) "|\" Chr(0x007E) "|\" Chr(0x0025) "|\" Chr(0x0009) "|\" Chr(0x000A) "|\" Chr(0x000D) ")"
+			chrValidation := "[\x{00AE}\x{2122}\x{00A9}\x{2022}\x{25B6}\x{25C0}\x{0021}\x{002B}\x{005E}\x{0023}\x{007B}\x{007D}\x{0060}\x{007E}\x{0025}\x{0009}\x{000A}\x{000D}]"
 
 			if StrLen(inputType) == 0
 				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : ""

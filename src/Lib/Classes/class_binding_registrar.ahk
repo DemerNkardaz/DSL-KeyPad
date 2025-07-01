@@ -5,6 +5,28 @@ Class BindReg {
 		this.storedData := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"]
 	}
 
+	static Get(name, inRoot := "", &varReference := Map()) {
+		if (inRoot != "")
+			varReference := this.storedData[inRoot][name]
+		else
+			varReference := this.storedData[name]
+		return varReference
+	}
+
+	static Set(name, inRoot := "", value := Map()) {
+		if (inRoot != "")
+			this.storedData[inRoot].Set(name, value)
+		else
+			this.storedData.Set(name, value)
+	}
+
+	static Has(name, inRoot := "") {
+		if (inRoot != "")
+			return this.storedData[inRoot].Has(name)
+		else
+			return this.storedData.Has(name)
+	}
+
 	__New(source*) {
 		this.Merge(source*)
 	}

@@ -1,6 +1,7 @@
 {
 	"entries": {
 		"User": {},
+		"Layout Specified": {},
 		"Script Specified": {
 			"Hellenic": {
 				"ForceSingle": true,
@@ -1960,20 +1961,10 @@
 				"Равно": {"+": ["plus"]},
 				"ДефисоМинус": {"+": ["underscore"]},
 				"Точка": {
-					"SwitchLayout": true,
-					"Default": {
-						"+": ["comma"]
-					},
-					"Диктор": {
-						"+": ["exclamation"]
-					}
+					"+": ["comma"]
 				},
 				"Ь": {
-					"SwitchLayout": true,
-					"Default": {},
-					"Диктор": {
-						"<!": ["cyr_[c,s]_let_yer"]
-					}
+					"<!": ["cyr_[c,s]_let_yer"]
 				},
 				"Запятая": {"+": ["question"]},
 				"ОбратныйСлэш": {"+": ["solidus"]}
@@ -2822,19 +2813,9 @@
 					"<^>!<+": ["cyr_[c,s]_dig_yeru__diaeresis"]
 				},
 				"Ь": {
-					"SwitchLayout": true,
-					"Default": {
-						"<!": ["cyr_[c,s]_let_yus_blended"],
-						"<^>!": ["cyr_[c,s]_let_neutral_yer"],
-						"<^>!<!": ["cyr_[c,s]_let_semisoft_sign"]
-					},
-					"Диктор": {
-						"<!": ["cyr_[c,s]_let_yus_blended"],
-						"<^>!": ["cyr_[c,s]_let_neutral_yer"],
-						"<^>!<+": ["cyr_[c,s]_let_semisoft_sign"],
-						"<^>!<!": ["cyr_[c,s]_let_u_straight"],
-						"<^>!<!<+": ["cyr_[c,s]_let_u_straight__stroke_short"]
-					}
+					"<!": ["cyr_[c,s]_let_yus_blended"],
+					"<^>!": ["cyr_[c,s]_let_neutral_yer"],
+					"<^>!<!": ["cyr_[c,s]_let_semisoft_sign"]
 				},
 				"Э": {
 					"<^>!": ["cyr_[c,s]_let_ye_anchor"],

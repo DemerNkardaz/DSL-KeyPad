@@ -433,11 +433,9 @@ Class InputScriptProcessor {
 
 	backspaceLock := False
 	Backspacer(ih, vk, sc) {
-		local backspaceCode := LayoutList.GetKeyCodes("int", "Backspace")[1]
-		local resetKeys := LayoutList.GetKeyCodes("int",
-			"Left", "Right", "Up", "Down", "Home", "End", "PgUp", "PgDn",
-			"RCtrl", "Space"
-		)
+		local backspaceCode := 0x00E
+		local resetKeys := [0x14B, 0x148, 0x14D, 0x150, 0x11D, 0x149, 0x151, 0x14F, 0x147, 0x039]
+		; Left, Up, Right, Down, RCtrl, PgUp, PgDn, End, Home, Space,
 
 		sc := Number(sc)
 

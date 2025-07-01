@@ -1,174 +1,4 @@
 Class KeyboardBinder {
-	static layouts := {
-		latin: Map(
-			"QWERTY", LayoutList("latin"),
-			"Dvorak", LayoutList("latin", Map(
-				"Semicolon", "SC02C",
-				"Apostrophe", "SC010",
-				"Left_Bracket", "SC00C",
-				"Right_Bracket", "SC00D",
-				"Tilde", "SC029",
-				"HyphenMinus", "SC028",
-				"Equals", "SC01B",
-				"Comma", "SC011",
-				"Dot", "SC012",
-				"Slash", "SC01A",
-				"Backslash", "SC02B",
-				"A", "SC01E",
-				"B", "SC031",
-				"C", "SC017",
-				"D", "SC023",
-				"E", "SC020",
-				"F", "SC015",
-				"G", "SC016",
-				"H", "SC024",
-				"I", "SC022",
-				"J", "SC02E",
-				"K", "SC02F",
-				"L", "SC019",
-				"M", "SC032",
-				"N", "SC026",
-				"O", "SC01F",
-				"P", "SC013",
-				"Q", "SC02D",
-				"R", "SC018",
-				"S", "SC027",
-				"T", "SC025",
-				"U", "SC021",
-				"V", "SC034",
-				"W", "SC033",
-				"X", "SC030",
-				"Y", "SC014",
-				"Z", "SC035",
-			)),
-			"Colemak", LayoutList("latin", Map(
-				"Semicolon", "SC019",
-				"Apostrophe", "SC028",
-				"Left_Bracket", "SC01A",
-				"Right_Bracket", "SC01B",
-				"Tilde", "SC029",
-				"HyphenMinus", "SC00C",
-				"Equals", "SC00D",
-				"Comma", "SC033",
-				"Dot", "SC034",
-				"Slash", "SC035",
-				"Backslash", "SC02B",
-				"A", "SC01E",
-				"B", "SC030",
-				"C", "SC02E",
-				"D", "SC022",
-				"E", "SC025",
-				"F", "SC012",
-				"G", "SC014",
-				"H", "SC023",
-				"I", "SC026",
-				"J", "SC015",
-				"K", "SC031",
-				"L", "SC016",
-				"M", "SC032",
-				"N", "SC024",
-				"O", "SC027",
-				"P", "SC013",
-				"Q", "SC010",
-				"R", "SC01F",
-				"S", "SC020",
-				"T", "SC021",
-				"U", "SC017",
-				"V", "SC02F",
-				"W", "SC011",
-				"X", "SC02D",
-				"Y", "SC018",
-				"Z", "SC02C",
-			)),
-		),
-		cyrillic: Map(
-			"ЙЦУКЕН", LayoutList("cyrillic"),
-			"Диктор", LayoutList("cyrillic", Map(
-				"Р", "SC027",
-				"Й", "SC028",
-				"Ш", "SC01A",
-				"Щ", "SC01B",
-				"Ё", "SC029",
-				"ДефисоМинус", "SC00C",
-				"Равно", "SC00D",
-				"П", "SC033",
-				"Г", "SC034",
-				"Ж", "SC035",
-				"ОбратныйСлэш", "SC02B",
-				"У", "SC01E",
-				"Ю", "SC030",
-				"Х", "SC02E",
-				"Е", "SC020",
-				"Я", "SC012",
-				"О", "SC021",
-				"А", "SC022",
-				"Л", "SC023",
-				"К", "SC017",
-				"Н", "SC024",
-				"Т", "SC025",
-				"С", "SC026",
-				"М", "SC032",
-				"Б", "SC031",
-				"Д", "SC018",
-				"Ч", "SC019",
-				"Ц", "SC010",
-				"Запятая", "SC013",
-				"И", "SC01F",
-				"Точка", "SC014",
-				"В", "SC016",
-				"Ы", "SC02F",
-				"Ь", "SC011",
-				"Э", "SC02D",
-				"З", "SC015",
-				"Ф", "SC02C",
-			)),
-			"ЙІУКЕН (1907)", LayoutList("cyrillic", Map(
-				"Ж", "SC028",
-				"Э", "SC00D",
-				"Х", "SC01A",
-				"Ъ", "SC021",
-				"Ё", "SC029",
-				"ДефисоМинус", "SC01B",
-				"Равно", "SC02B",
-				"Б", "SC034",
-				"Ю", "SC035",
-				"Точка", "",
-				"ОбратныйСлэш", "",
-				"Ф", "SC01E",
-				"И", "SC031",
-				"С", "SC02F",
-				"В", "SC020",
-				"У", "SC012",
-				"А", "SC022",
-				"П", "SC023",
-				"Р", "SC024",
-				"Ш", "SC017",
-				"О", "SC025",
-				"Л", "SC026",
-				"Д", "SC027",
-				"Ь", "SC033",
-				"Т", "SC032",
-				"Щ", "SC018",
-				"З", "SC019",
-				"Й", "SC010",
-				"К", "SC013",
-				"Ы", "SC01F",
-				"Е", "SC014",
-				"Г", "SC016",
-				"М", "SC030",
-				"Ц", "SC00C",
-				"Ч", "SC02D",
-				"Н", "SC015",
-				"Я", "SC02C",
-				"І", "SC011",
-				"Ѣ", "SC02E",
-			)),
-		),
-		hellenic: Map(
-			"ϞϜΕΡΤΥ", LayoutList("hellenic"),
-		)
-	}
-
 	static modifiers := [
 		"!", "<!", ">!",
 		"+", "<+", ">+",
@@ -214,11 +44,10 @@ Class KeyboardBinder {
 		}
 
 		for script in this.layoutNames.Keys()
-			for k, v in this.layouts.%script%
+			for k, v in KbdLayoutReg.storedData[script]
 				if !this.layoutNames[script].HasValue(k)
 					this.layoutNames[script].Push(k)
 
-		this.UserLayouts()
 		this.UserBinds()
 		this.RebuilBinds()
 	}
@@ -324,7 +153,7 @@ Class KeyboardBinder {
 	}
 
 	static SetLayout(layout) {
-		layoutType := this.layouts.latin.Has(layout) ? "Latin" : this.layouts.cyrillic.Has(layout) ? "Cyrillic" : ""
+		layoutType := KbdLayoutReg.storedData["latin"].Has(layout) ? "Latin" : KbdLayoutReg.storedData["cyrillic"].Has(layout) ? "Cyrillic" : ""
 
 		if StrLen(layoutType) > 0 {
 			Cfg.Set(layout, "Layout_" layoutType)
@@ -338,8 +167,8 @@ Class KeyboardBinder {
 		scriptType := StrLower(scriptType)
 		nextLayout := False
 
-		if this.layouts.HasOwnProp(scriptType) {
-			keys := this.layouts.%scriptType%.Keys()
+		if KbdLayoutReg.storedData.Has(scriptType) {
+			keys := KbdLayoutReg.storedData[scriptType].Keys()
 			current := Cfg.Get("Layout_" scriptType)
 
 			Loop keys.Length {
@@ -365,16 +194,16 @@ Class KeyboardBinder {
 		layout := Map()
 		this.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 
-		latinLayout := KeyboardBinder.layouts.latin.Has(latinLayout) ? latinLayout : "QWERTY"
-		cyrillicLayout := KeyboardBinder.layouts.cyrillic.Has(cyrillicLayout) ? cyrillicLayout : "ЙЦУКЕН"
-		hellenicLayout := KeyboardBinder.layouts.hellenic.Has(hellenicLayout) ? hellenicLayout : "ϞϜΕΡΤΥ"
+		latinLayout := KbdLayoutReg.Check("latin", latinLayout) ? latinLayout : "QWERTY"
+		cyrillicLayout := KbdLayoutReg.Check("cyrillic", cyrillicLayout) ? cyrillicLayout : "ЙЦУКЕН"
+		hellenicLayout := KbdLayoutReg.Check("hellenic", hellenicLayout) ? hellenicLayout : "ϞϜΕΡΤΥ"
 
-		latinLayout := KeyboardBinder.layouts.latin[latinLayout]
-		cyrillicLayout := KeyboardBinder.layouts.cyrillic[cyrillicLayout]
-		hellenicLayout := KeyboardBinder.layouts.hellenic[hellenicLayout]
+		latinLayout := KbdLayoutReg.Get("latin", latinLayout)
+		cyrillicLayout := KbdLayoutReg.Get("cyrillic", cyrillicLayout)
+		hellenicLayout := KbdLayoutReg.Get("hellenic", hellenicLayout)
 
 		for keySet in [latinLayout, cyrillicLayout, hellenicLayout] {
-			for key, scanCode in keySet.layout {
+			for key, scanCode in keySet {
 				if !layout.Has(scanCode) {
 					layout[scanCode] := [key]
 				} else {
@@ -529,6 +358,7 @@ Class KeyboardBinder {
 
 				for scanCode, keyNamesArray in layout {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(?=:)?)(?=[:\]]|$)", &match) {
+						; if RegExMatch(combo, "(?:\[(?<modKey>[^\]]+)(?=:)?\]|(?<key>[^:\]]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
 							isCyrillicKey := RegExMatch(keyLetter, matchRu)
@@ -548,7 +378,7 @@ Class KeyboardBinder {
 								rule := ruleMatch[1]
 
 							interCombo := RegExReplace(combo, ":" rule "$", "")
-							interCombo := RegExReplace(interCombo, keyLetter, scanCode)
+							interCombo := RegExReplace(interCombo, RegExEscape(keyLetter), scanCode)
 							interCombo := RegExReplace(interCombo, "\[(.*?)\]", "$1")
 
 							if rule = "Caps" || rule = "Flat"
@@ -647,18 +477,19 @@ Class KeyboardBinder {
 	static RebuilBinds(ignoreAltMode := False, ignoreUnregister := False) {
 		this.CurrentLayouts(&latin, &cyrillic, &hellenic)
 
-		useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
-		checkDefaultLayouts := (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")
-		isGlyphsVariationsOn := Scripter.selectedMode.Get("Glyph Variations") != ""
+		local useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
+		local checkDefaultLayouts := (latin != "QWERTY" || cyrillic != "ЙЦУКЕН")
+		local isGlyphsVariationsOn := Scripter.selectedMode.Get("Glyph Variations") != ""
+		local useRemap := (useRemap && checkDefaultLayouts) || isGlyphsVariationsOn
+		local latinLayoutHasBinds := BindReg.Has(latin, "Layout Specified")
+		local cyrillicLayoutHasBinds := BindReg.Has(cyrillic, "Layout Specified")
 
-		useRemap := (useRemap && checkDefaultLayouts) || isGlyphsVariationsOn
+		local userBindings := Cfg.Get("Active_User_Bindings", , "None")
+		local isUserBindingsOn := userBindings != "None" && Cfg.FastKeysOn
+		local altMode := Scripter.selectedMode.Get("Alternative Modes")
+		local isAltModeOn := altMode != "" && !ignoreAltMode
 
-		userBindings := Cfg.Get("Active_User_Bindings", , "None")
-		isUserBindingsOn := userBindings != "None" && Cfg.FastKeysOn
-		altMode := Scripter.selectedMode.Get("Alternative Modes")
-		isAltModeOn := altMode != "" && !ignoreAltMode
-
-		bingingsNames := []
+		local bingingsNames := []
 		if isAltModeOn
 			bingingsNames := Scripter.GetData(, altMode)["bindings"]
 
@@ -666,11 +497,13 @@ Class KeyboardBinder {
 		if !ignoreUnregister || useRemap && altMode = "Hellenic"
 			this.UnregisterAll()
 
-		preparedBindLists := []
-		rawBindLists := [
+		local preparedBindLists := []
+		local rawBindLists := [
 			useRemap && altMode != "Hellenic" ? "Keyboard Default" : "",
 			Cfg.FastKeysOn ? "Common" : "",
 			Cfg.FastKeysOver != "" && Cfg.FastKeysOn ? Cfg.FastKeysOver : "",
+			latinLayoutHasBinds ? latin ":Layout Specified" : "",
+			cyrillicLayoutHasBinds ? cyrillic ":Layout Specified" : "",
 			isUserBindingsOn ? userBindings ":User" : "",
 			"Important"
 		]
@@ -723,41 +556,6 @@ Class KeyboardBinder {
 
 		if StrLen(this.numStyle) == 0 {
 			this.RebuilBinds()
-		}
-	}
-
-	static UserLayouts() {
-		handled := Map("latin", [], "cyrillic", [], "hellenic", [])
-		Loop Files this.autoimport.layouts "\*.ini" {
-			scriptName := IniRead(A_LoopFileFullPath, "info", "name", "")
-			scriptType := IniRead(A_LoopFileFullPath, "info", "type", "")
-			layoutMap := Util.INIToMap(A_LoopFileFullPath)
-
-			if StrLen(scriptName) > 0 && StrLen(scriptType) > 0 && this.layouts.HasOwnProp(scriptType) && layoutMap.Has("keys") {
-				scriptType := StrLower(scriptType)
-				layoutBase := LayoutList(scriptType)
-				outputLayout := Map()
-
-				for key, value in layoutMap["keys"] {
-					outputLayout[key] := RegExMatch(value, "i)^SC[0-9A-F]{3}$") ? value : layoutBase.layout[value]
-				}
-
-				this.layouts.%scriptType%.Set(scriptName, LayoutList(scriptType, outputLayout))
-				handled[scriptType].Push(scriptName)
-			} else {
-				MsgBox("Invalid layout file: " A_LoopFileFullPath)
-			}
-		}
-
-		this.userLayoutNames := handled
-
-		for script in handled.Keys() {
-			for k, v in this.layouts.%script% {
-				if this.layoutNames[script].HasValue(k)
-					continue
-				if !this.userLayoutNames[script].HasValue(k)
-					this.layouts.%script%.Delete(k)
-			}
 		}
 	}
 
@@ -833,8 +631,7 @@ Class KeyboardBinder {
 				}
 
 			}
-			BindReg.storedData["User"].Set(name, interMap)
-
+			BindReg.Set(name, "User", interMap)
 		}
 	}
 }

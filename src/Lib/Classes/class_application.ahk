@@ -21,6 +21,8 @@ Class App {
 		bin: A_ScriptDir "\Bin",
 		user: A_ScriptDir "\User",
 		profile: A_ScriptDir "\User\profile-" this.profileName,
+		layouts: A_ScriptDir "\User\profile-" this.profileName "\CustomLayouts",
+		binds: A_ScriptDir "\User\profile-" this.profileName "\CustomBindings",
 		temp: A_Temp "\DSLKeyPad",
 	}
 
@@ -225,7 +227,7 @@ Class App {
 		App.tray.Add(labels.glyphForms, glyphVariantsMenu)
 
 		layoutsMenu := Menu()
-		layoutist := [KeyboardBinder.layouts.latin.Keys(), KeyboardBinder.layouts.cyrillic.Keys()]
+		layoutist := [KbdLayoutReg.storedData["latin"].Keys(), KbdLayoutReg.storedData["cyrillic"].Keys()]
 
 		for i, layout in layoutist {
 			if i > 1

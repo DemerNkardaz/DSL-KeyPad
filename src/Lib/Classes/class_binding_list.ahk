@@ -1,8 +1,9 @@
 Class BindList {
-	mapping := []
+	mapping := Map()
 
 	__New(mapping := Map(), modMapping := Map()) {
 		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
+		local useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
 
 		this.mapping := mapping.Clone()
 
@@ -35,6 +36,15 @@ Class BindList {
 				}
 
 				for modifier, value in binds {
+					if RegExMatch(modifier, "^\[lazy\](.+)$", &lazyMatch) {
+						binds.Delete(modifier)
+						if !useRemap
+							continue
+						if binds.Has(lazyMatch[1])
+							binds.Delete(lazyMatch[1])
+						modifier := lazyMatch[1]
+					}
+
 					if value is Object && !(value is Map || value is Array || value is Func)
 						&& value.HasOwnProp("Get") {
 						value := value.Get()
@@ -50,16 +60,30 @@ Class BindList {
 				}
 			}
 		}
+
+		if this.mapping.Count > 0 {
+			for letterKey, bind in this.mapping {
+				if RegExMatch(letterKey, "^\[lazy\](.+)$", &lazyMatch) {
+					if this.mapping.Has(lazyMatch[1])
+						this.mapping.Delete(lazyMatch[1])
+					this.mapping.Delete(letterKey)
+					letterKey := lazyMatch[1]
+					if useRemap
+						this.mapping.Set(letterKey, bind)
+				}
+			}
+		}
+
+
 		return this
 	}
 
 	static __New() {
-		for key, value in BindReg.storedData["Keyboard Default"]["Flat"] {
+		for key, value in BindReg.Get("Keyboard Default", , &bindings)["Flat"] {
 			if value is Array && value.Length == 2 {
-				if !BindReg.storedData["Keyboard Default"]["Moded"].Has(key)
-					BindReg.storedData["Keyboard Default"]["Moded"][key] := Map()
-
-				BindReg.storedData["Keyboard Default"]["Moded"][key].Set("+", [value[2], value[1]])
+				if !bindings["Moded"].Has(key)
+					bindings["Moded"][key] := Map()
+				bindings["Moded"][key].Set("+", [value[2], value[1]])
 			}
 		}
 	}
@@ -111,7 +135,6 @@ Class BindList {
 							otherI := (i = 1) ? 2 : 1
 							otherKeyName := keyNamesArray[otherI]
 
-							; mapping[fromSub][bindingsName]["Flat"].Set(otherKeyName, mapping[fromSub][bindingsName]["Flat"].Get(keyName))
 
 						} else if mapping[fromSub][bindingsName]["Moded"].Has(keyName) {
 							otherI := (i = 1) ? 2 : 1
@@ -140,7 +163,8 @@ Class BindList {
 	}
 
 	static Gets(bindingsNames := [], fromSub := "", mapping := BindReg.storedData.DeepClone()) {
-		interArray := []
+		local interArray := []
+
 		for bindingsName in bindingsNames {
 			if bindingsName = ""
 				continue

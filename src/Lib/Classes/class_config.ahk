@@ -147,8 +147,8 @@ Class Cfg {
 			remappingCheckbox.OnEvent("Click", (CB, Zero) => SetRemapping(CB.Value))
 
 			layoutist := {
-				latin: KeyboardBinder.layouts.latin.Keys(),
-				cyrillic: KeyboardBinder.layouts.cyrillic.Keys()
+				latin: KbdLayoutReg.storedData["latin"].Keys(),
+				cyrillic: KbdLayoutReg.storedData["cyrillic"].Keys()
 			}
 
 			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(23)), layoutist.latin)
@@ -164,7 +164,7 @@ Class Cfg {
 			layoutUpdate := optionsPanel.AddButton("vLayoutUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(23) - 1))
 			GuiButtonIcon(layoutUpdate, ImageRes, 229)
 			layoutUpdate.OnEvent("Click", (*) => (
-				KeyboardBinder.UserLayouts(),
+				KbdLayoutUserDefined.Update(),
 				this.EditorGUI.GetPos(&X, &Y, &W, &H),
 				this.EditorGUI.Destroy(),
 				this.Editor(X, Y)
