@@ -642,7 +642,8 @@ Class MyRecipes {
 		return ["%RAWTEXT%" resultIn]
 	}
 
-	static FormatResult(result, revert := False, formatRecipe := False) {
+	static FormatResult(input, revert := False, formatRecipe := False) {
+		local result := input
 		if formatRecipe
 			result := ChrRecipeHandler.MakeStr(result)
 		if revert {

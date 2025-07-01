@@ -53,10 +53,9 @@ DottedProgressTooltip(4, &triggerEnds := False)
 #Include <Classes\class_keyboard>
 #Include <Classes\class_locale>
 #Include <Classes\class_locale_generator>
+triggerEnds := True
 #Include <Classes\class_update>
 #Include <Classes\class_fonts>
-triggerEnds := True
-#Include <Classes\class_keyboard_binder>
 #Include <Classes\class_character_entity>
 #Include <Classes\class_character_registrar>
 #Include <Classes\class_character_library>
@@ -65,6 +64,7 @@ triggerEnds := True
 #Include <Classes\class_script_processor>
 #Include <Classes\class_functional_bindings_storage>
 #Include <Classes\class_binding_registrar>
+#Include <Classes\class_binding_user_defined>
 #Include <Classes\class_binding_handler>
 #Include <Classes\class_binding_list>
 #Include <Classes\class_favorites>
@@ -72,6 +72,7 @@ triggerEnds := True
 #Include <Classes\class_user_defined_recipes>
 #Include <Classes\class_character_recipe_handler>
 #Include <Classes\class_auxiliary>
+#Include <Classes\class_keyboard_binder>
 #Include <Classes\class_ui_character_legend>
 #Include <Classes\class_ui_panel>
 #Include <Classes\class_ui_panel_filter>
@@ -83,6 +84,7 @@ triggerEnds := True
 #Include <Classes\class_hotstrings_latex>
 #Include <Classes\class_tempature_converter>
 #Include <Classes\class_dev>
+; MsgBox(BindReg.storedData["User"]["Esoteric Binds"]["Moded"]["Y"]["<^>!"][2])
 
 initialized := True
 

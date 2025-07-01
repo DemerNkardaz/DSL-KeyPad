@@ -30,7 +30,6 @@ Class KeyboardBinder {
 	static numStyle := ""
 	static userLayoutNames := Map("latin", [], "cyrillic", [], "hellenic", [])
 	static layoutNames := Map("latin", [], "cyrillic", [], "hellenic", [])
-	static userBindings := []
 
 	static __New() {
 		this.Init()
@@ -48,7 +47,6 @@ Class KeyboardBinder {
 				if !this.layoutNames[script].HasValue(k)
 					this.layoutNames[script].Push(k)
 
-		this.UserBinds()
 		this.RebuilBinds()
 	}
 
@@ -215,11 +213,24 @@ Class KeyboardBinder {
 	}
 
 	static CompileBinds(bindingsMap := Map()) {
-		bindings := this.FormatBindings(bindingsMap)
-		processed := Map()
+		local bindings := this.FormatBindings(bindingsMap)
+		local processed := Map()
 
 		for combo, value in bindings {
-			this.CompileBridge(combo, value, processed)
+			local bind := value
+
+			if bind is String && bind ~= "[`r`n`t]"
+				bind := MyRecipes.FormatResult(bind)
+			else if bind is Array && bind.Length > 0
+				for i, item in bind
+					if item is String && item ~= "[`r`n`t]"
+						bind[i] := MyRecipes.FormatResult(item)
+					else if bind[i] is Array && bind[i].Length > 0
+						for j, childItem in bind[i]
+							if childItem is String && childItem ~= "[`r`n`t]"
+								bind[i][j] := MyRecipes.FormatResult(childItem)
+
+			this.CompileBridge(combo, bind, processed)
 		}
 
 		return processed
@@ -259,7 +270,7 @@ Class KeyboardBinder {
 					local processedBinds := binds
 					local lastProcessed := ""
 
-					while (RegExMatch(processedBinds, "(?<!\\)%([^%]+)%", &varExprMatch) && processedBinds != lastProcessed) {
+					while (RegExMatch(processedBinds, "(?s)(?<!\\)%([^%]+)%", &varExprMatch) && processedBinds != lastProcessed) {
 						lastProcessed := processedBinds
 
 						try {
@@ -272,7 +283,7 @@ Class KeyboardBinder {
 								processedBinds := StrReplace(processedBinds, varExprMatch[0], funcObject, , , 1)
 							}
 						} catch as e {
-							processedBinds := StrReplace(processedBinds, varExprMatch[0], "[Parse Error: " . e.Message . "]", , , 1)
+							processedBinds := StrReplace(processedBinds, varExprMatch[0], "[Parse Error: " e.Message "]", , , 1)
 						}
 					}
 
@@ -281,7 +292,7 @@ Class KeyboardBinder {
 
 				local bindString := binds is String ? binds : (binds is Array && binds.Length == 1 && binds[1] is String ? binds[1] : "")
 
-				if bindString != "" {
+				if bindString != "" && !(bindString ~= "^@") {
 					local brackets := []
 					local pos := 1
 					while (pos := RegExMatch(bindString, "\[(.*?)\]", &match, pos)) {
@@ -344,7 +355,7 @@ Class KeyboardBinder {
 				}
 
 				if (binds is Array && binds.Length == 1 && binds[1] is String && RegExMatch(binds[1], "\[(.*?)\]", &match)) ||
-					(binds is String && RegExMatch(binds, "\[(.*?)\]", &match)) {
+					(binds is String && RegExMatch(binds, "\[(.*?)\]", &match)) && !(match[1] ~= "^@") {
 					splitVariants := StrSplit(match[1], ",")
 					tempBinds := []
 
@@ -358,12 +369,10 @@ Class KeyboardBinder {
 
 				for scanCode, keyNamesArray in layout {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(?=:)?)(?=[:\]]|$)", &match) {
-						; if RegExMatch(combo, "(?:\[(?<modKey>[^\]]+)(?=:)?\]|(?<key>[^:\]]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
 						if keyNamesArray.HasValue(keyLetter) {
 							isCyrillicKey := RegExMatch(keyLetter, matchRu)
 							isHellenicKey := RegExMatch(keyLetter, metchEl)
-
 							rules := Map(
 								"Caps", binds is Array ? [binds] : [[binds]],
 								"ReverseCase", [binds, True],
@@ -411,7 +420,6 @@ Class KeyboardBinder {
 				}
 			}
 		}
-
 		return output
 	}
 
@@ -562,76 +570,5 @@ Class KeyboardBinder {
 	static SetBinds(name := Locale.Read("gui_options_bindings_none")) {
 		Cfg.Set(name = Locale.Read("gui_options_bindings_none") ? "None" : name, "Active_User_Bindings")
 		this.RebuilBinds()
-	}
-
-	static UserBinds() {
-		handled := []
-		Loop Files this.autoimport.binds "\*.ini" {
-			name := IniRead(A_LoopFileFullPath, "info", "name", "")
-			bindsMap := Util.INIToMap(A_LoopFileFullPath)
-
-			if StrLen(name) > 0 && bindsMap.Has("binds") {
-				if !handled.HasValue(name)
-					handled.Push(name)
-				this.UserBindsHandler(bindsMap["binds"], name)
-			}
-		}
-
-		this.userBindings := handled
-
-		currentBindings := Cfg.Get("Active_User_Bindings", , "None")
-		if !this.userBindings.HasValue(currentBindings) && currentBindings != "None" {
-			Cfg.Set("None", "Active_User_Bindings")
-		}
-	}
-
-	static UserBindsHandler(bindsMap := Map(), name := "") {
-		if bindsMap.Count > 0 && StrLen(name) > 0 {
-			interMap := Map("Flat", Map(), "Moded", Map())
-			for combo, reference in bindsMap {
-				Util.StrBind(combo, &keyRef, &modRef, &rulRef)
-				interRef := reference
-
-				if RegExMatch(reference, "^\[(.*?)\]$", &arrRefMatch) {
-					interRef := []
-					rawString := RegExMatch(arrRefMatch[1], "^RAW\:\:\{") ? Trim(arrRefMatch[1]) : Util.StrTrim(arrRefMatch[1])
-					openBraces := 0
-					currentSegment := ""
-
-					Loop Parse, rawString {
-						if A_LoopField = "{"
-							openBraces++
-						else if A_LoopField = "}"
-							openBraces--
-
-						if A_LoopField = "," && openBraces = 0 {
-							interRef.Push(Trim(currentSegment))
-							currentSegment := ""
-						}
-						else {
-							currentSegment .= A_LoopField
-						}
-					}
-
-					if StrLen(currentSegment) > 0
-						interRef.Push(Trim(currentSegment))
-				} else {
-					if rulRef = ""
-						rulRef := ":Flat"
-				}
-
-				if StrLen(modRef) > 0 {
-					if !interMap["Moded"].Has(keyRef) {
-						interMap["Moded"][keyRef] := Map()
-					}
-
-					interMap["Moded"][keyRef].Set(modRef rulRef, interRef)
-				} else {
-					interMap["Flat"].Set(keyRef rulRef, interRef)
-				}
-
-			}
-			BindReg.Set(name, "User", interMap)
-		}
 	}
 }

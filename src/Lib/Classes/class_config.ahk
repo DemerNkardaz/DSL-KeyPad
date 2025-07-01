@@ -170,7 +170,7 @@ Class Cfg {
 				this.Editor(X, Y)
 			))
 
-			bindingsList := KeyboardBinder.userBindings.Clone()
+			bindingsList := BindReg.userBindings.Clone()
 			bindingsList.InsertAt(1, Locale.Read("gui_options_bindings_none"))
 			currentBindings := Cfg.Get("Active_User_Bindings", , "None")
 			currentBindings := currentBindings = "None" ? Locale.Read("gui_options_bindings_none") : currentBindings
@@ -185,7 +185,7 @@ Class Cfg {
 			bindingsUpdate := optionsPanel.AddButton("vBindingsUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(32 * 3) - 1))
 			GuiButtonIcon(bindingsUpdate, ImageRes, 229)
 			bindingsUpdate.OnEvent("Click", (*) => (
-				KeyboardBinder.UserBinds(),
+				BindingUserDefined.Update(),
 				this.EditorGUI.GetPos(&X, &Y, &W, &H),
 				this.EditorGUI.Destroy(),
 				this.Editor(X, Y)

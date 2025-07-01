@@ -1,5 +1,6 @@
 Class BindReg {
 	static storedData := Map()
+	static userBindings := []
 
 	static __New() {
 		this.storedData := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"]
@@ -39,6 +40,9 @@ Class BindReg {
 		for i, mapToMerge in maps {
 			if mapToMerge.Count = 0
 				continue
+
+			; local prehandlerMap := this.RecursiveBreaksHandler(mapToMerge)
+
 			for newKey, newVal in mapToMerge {
 				local newKeyBase := RegExMatch(newKey, "^([^:]+)", &baseMatch) ? baseMatch[1] : newKey
 
@@ -64,4 +68,30 @@ Class BindReg {
 			}
 		}
 	}
+
+	; RecursiveBreaksHandler(targetMap) {
+	; 	local result := Map()
+	; 	for key, value in targetMap {
+	; 		if value is String && value ~= "[`r`n`t]"
+	; 			result[key] := MyRecipes.FormatResult(value)
+	; 		else if value is Array {
+	; 			local arr := []
+	; 			for _, item in value {
+	; 				if item is String && item ~= "[`r`n`t]"
+	; 					arr.Push(MyRecipes.FormatResult(item))
+	; 				else if item is Map || item is Array
+	; 					arr.Push(this.RecursiveBreaksHandler(item))
+	; 				else
+	; 					arr.Push(item)
+	; 			}
+	; 			result[key] := arr
+	; 		}
+	; 		else if value is Map
+	; 			result[key] := this.RecursiveBreaksHandler(value)
+	; 		else
+	; 			result[key] := value
+	; 	}
+	; 	return result
+	; }
+
 }

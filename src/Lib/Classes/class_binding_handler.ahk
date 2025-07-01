@@ -15,7 +15,7 @@ Class BindHandler {
 			for _, character in characterNames {
 				if character is Func {
 					character(combo)
-				} else if RegExMatch(character, "^RAW\:\:\{(.*?)\}$", &rawMatch) {
+				} else if RegExMatch(character, "^@(.*)$", &rawMatch) {
 					inputType := "Text"
 					output .= MyRecipes.FormatResult(rawMatch[1], True)
 					if rawMatch[1] ~= "\\n" || output ~= "[`n`r]"
