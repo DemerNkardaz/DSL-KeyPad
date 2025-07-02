@@ -77,7 +77,7 @@ Class KbdBinder {
 
 			if !["^en", "^ru", "^vi"].HasRegEx(langBlock[1])
 				&& Scripter.selectedMode.Get("Alternative Modes") = ""
-				&& InputScriptProcessor.options.interceptionInputMode = ""
+				&& TelexScriptProcessor.options.interceptionInputMode = ""
 				&& langBlock[2].altInput != ""
 				&& Scripter.Has(langBlock[2].altInput) {
 				Scripter.activatedViaMonitor := True
@@ -125,14 +125,14 @@ Class KbdBinder {
 		} else {
 			local currentAlt := Scripter.selectedMode.Get("Alternative Modes")
 			local currentGlyph := Scripter.selectedMode.Get("Glyph Variations")
-			local currentISP := InputScriptProcessor.options.interceptionInputMode
+			local currentISP := TelexScriptProcessor.options.interceptionInputMode
 			local mode := currentAlt != "" ? "Alternative Modes" : "Glyph Variations"
 			local current := currentAlt != "" ? currentAlt : currentGlyph
 			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
 
 			if currentISP != "" && App.indexIcos.Has(instanceRef.tag) {
 				iconCode := App.indexIcos[instanceRef.tag]
-				trayTitle .= "`n" Locale.Read("script_processor_mode_" instanceRef.tag)
+				trayTitle .= "`n" Locale.Read("telex_script_processor.labels." instanceRef.tag)
 			} else if currentAlt != "" || currentGlyph != "" {
 				local data := Scripter.GetData(mode, current)
 				local icons := data["icons"]
@@ -142,7 +142,7 @@ Class KbdBinder {
 					iconCode := 1
 				} else
 					iconCode := App.indexIcos[icon]
-				trayTitle .= "`n" Locale.Read(data["locale"])
+				trayTitle .= "`n" Locale.Read("script_labels." data["locale"])
 			}
 		}
 

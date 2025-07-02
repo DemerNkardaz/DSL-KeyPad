@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"gothic": "Gothic"
+		},
 		"generated": {
 			"prefix": { "gothic": "Gothic" },
 			"tag": { "gothic": "gothic" }

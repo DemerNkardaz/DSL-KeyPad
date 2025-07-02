@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"ancient_north_arabian": "Североаравийское письмо"
+		},
 		"generated": {
 			"prefix": { "north_arabian": "Североаравийск$(ая|ий|ое)" },
 			"tag": { "north_arabian": "североаравийск$(ая|ий|ое)" }

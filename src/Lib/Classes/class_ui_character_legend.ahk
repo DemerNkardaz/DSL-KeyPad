@@ -8,24 +8,6 @@ Class ChrLegend {
 		"Ornate", [Chr(0xFD3E), Chr(0xFD3F)],
 	)
 
-	static __New() {
-		this.Init()
-	}
-
-	static Init() {
-		Loop Files this.legendsPath "*", "FR" {
-			if A_LoopFileFullPath ~= "i)\.ini$" {
-				name := RegExReplace(A_LoopFileName, "\.ini$")
-				filePath := RegExReplace(RegExReplace(A_LoopFileFullPath, RegExEscape(this.legendsPath)), "\.ini$")
-				this.legends.Set(name, filePath)
-			}
-		}
-
-		for name, path in this.legends
-			if ChrLib.entries.HasOwnProp(name)
-				ChrLib.entries.%name%["options"]["legend"] := path
-	}
-
 	__New(preselectEntry := "") {
 		if preselectEntry ~= "^&"
 			preselectEntry := ChrLib.GetReferenceName(&preselectEntry)
@@ -34,35 +16,46 @@ Class ChrLegend {
 	}
 
 	static Panel(&preselectEntry := "") {
-		local legendsList := this.CollectList()
+		local legendsList := ChrLegendStore.Keys()
+		local legendGroups := ChrLegendStore.storedGroups
 		local nameToEntry := Map()
+		local entriesInGroups := []
 
 		local languageCode := Language.Get()
 
-		for each in legendsList {
-			if each is String {
-				nameToEntry.Set(this.SetTreeTitle(each, languageCode), each)
-			} else if each is Map {
-				for k, v in each {
-					nameToEntry.Set(Chr(0x269C) " " Locale.Read("symbol_" k), "")
-
-					for child in v
-						nameToEntry.Set(this.SetTreeTitle(child, languageCode), child)
+		for key, value in legendGroups {
+			nameToEntry.Set(Chr(0x269C) " " Locale.Read("legend.groups." key), "")
+			for child in value {
+				if legendsList.HasValue(child) {
+					nameToEntry.Set(this.SetTreeTitle(child, languageCode), child)
+					entriesInGroups.Push(child)
 				}
 			}
 		}
 
+		for each in legendsList {
+			inGroup := false
+			for key, value in legendGroups {
+				if value.HasValue(each) {
+					inGroup := true
+					break
+				}
+			}
+			if !entriesInGroups.HasValue(each)
+				nameToEntry.Set(this.SetTreeTitle(each, languageCode), each)
+		}
+
 		labels := {
-			unknown: Locale.Read("gui_legend_unknown"),
-			uniTitle: Locale.Read("gui_legend_unicode"),
-			altTitles: Locale.Read("gui_legend_alts"),
-			languages: Locale.Read("gui_legend_languages"),
-			description: Locale.Read("gui_legend_description_unavailable"),
-			author: Locale.Read("gui_legend_author"),
-			authorLink: Locale.Read("gui_legend_author_default"),
-			entry: Locale.Read("gui_legend_entry"),
-			unicode: Locale.Read("preview_unicode"),
-			html: Locale.Read("preview_html"),
+			unknown: Locale.Read("dictionary.unknown"),
+			uniTitle: Locale.Read("unicode", "default"),
+			altTitles: Locale.Read("gui.legend.name_variations"),
+			languages: Locale.Read("dictionary.languages"),
+			description: Locale.Read("gui.legend.description_unavailable"),
+			author: Locale.Read("gui.legend.authors"),
+			authorLink: Locale.Read("gui.legend.authors.default"),
+			entry: Locale.Read("dictionary.entry"),
+			unicode: Locale.Read("unicode", "default"),
+			html: Locale.Read("html"),
 		}
 
 		panelW := 1300
@@ -129,9 +122,9 @@ Class ChrLegend {
 		descriptionH := groupBoxH - descriptionY - 25
 
 		tabList := [
-			Locale.ReadMulti("gui_legend_ipa", "and", "gui_legend_transcription"),
-			Locale.Read("gui_legend_names"),
-			Locale.Read("gui_legend_data"),
+			Locale.Read("script_labels.ipa.short+dictionary.and+dictionary.transcription"),
+			Locale.Read("dictionary.titles"),
+			Locale.Read("dictionary.data"),
 		]
 
 		tabsX := descriptionX + descriptionW + 10
@@ -167,8 +160,8 @@ Class ChrLegend {
 			authorLink: Format("vAuthorLink w{} h{} x{} y{}", authorLinkW, authorLinkH, authorLinkX, authorLinkY),
 		}
 		lvHeaders := [
-			Locale.Read("gui_legend_language"),
-			Locale.Read("gui_legend_value"),
+			Locale.Read("dictionary.language"),
+			Locale.Read("dictionary.value"),
 		]
 
 		ipaLVW := tabsW - 25
@@ -255,7 +248,7 @@ Class ChrLegend {
 			},
 		}
 
-		this.title := App.Title("+status+version") " — " Locale.Read("gui_legend")
+		this.title := App.Title("+status+version") " — " Locale.Read("gui.legend")
 		Constructor() {
 			legendPanel := Gui()
 			legendPanel.title := this.title
@@ -297,17 +290,27 @@ Class ChrLegend {
 			TV := legendPanel.AddTreeView(opts.TV)
 			TV.SetFont("s" (11) " c333333", Fonts.fontFaces["Default"].name)
 
-			for each in legendsList {
-				if each is String {
-					TV.Add(this.SetTreeTitle(each, languageCode))
-				} else if each is Map {
-					for k, v in each {
-						parent := TV.Add(Chr(0x269C) " " Locale.Read("symbol_" k))
-
-						for child in v
-							TV.Add(this.SetTreeTitle(child, languageCode), parent)
+			for key, value in legendGroups {
+				local parent := ""
+				for child in value {
+					if legendsList.HasValue(child) {
+						if !parent
+							parent := TV.Add(Chr(0x269C) " " Locale.Read("legend.groups." key))
+						TV.Add(this.SetTreeTitle(child, languageCode), parent)
 					}
 				}
+			}
+
+			for each in legendsList {
+				local inGroup := false
+				for key, value in legendGroups {
+					if value.HasValue(each) {
+						inGroup := true
+						break
+					}
+				}
+				if !entriesInGroups.HasValue(each)
+					TV.Add(this.SetTreeTitle(each, languageCode))
 			}
 
 			TV.OnEvent("ItemSelect", (TV, Item) => this.PanelSelect(&TV, &item, &nameToEntry))
@@ -378,7 +381,6 @@ Class ChrLegend {
 		if WinExist(this.title) && preselectEntry != "" {
 		}
 
-
 		if preselectEntry != "" {
 			label := ""
 			for k, v in nameToEntry {
@@ -389,6 +391,21 @@ Class ChrLegend {
 			}
 
 
+			local itemID := 0
+			Loop {
+				itemID := TV.GetNext(itemID, "Full")
+				itemID := TV.GetChild(itemID)
+				if !itemID
+					break
+
+				local itemText := TV.GetText(itemID)
+				if itemText = label {
+					TV.Modify(itemID)
+					this.PanelSelect(&TV, &itemID, &nameToEntry)
+					break
+				}
+			}
+		} else {
 			itemID := 0
 			Loop {
 				itemID := TV.GetNext(itemID, "Full")
@@ -396,11 +413,16 @@ Class ChrLegend {
 					break
 
 				itemText := TV.GetText(itemID)
-				if itemText = label {
+				firstChild := TV.GetChild(itemID)
+
+				if firstChild {
+					TV.Modify(firstChild)
+					this.PanelSelect(&TV, &firstChild, &nameToEntry)
+				} else {
 					TV.Modify(itemID)
 					this.PanelSelect(&TV, &itemID, &nameToEntry)
-					break
 				}
+				break
 			}
 		}
 	}
@@ -414,14 +436,13 @@ Class ChrLegend {
 
 			if nameToEntry.Has(selectedLabel) && nameToEntry.GetRef(&selectedLabel, &entryName) != "" {
 				labels := {
-					unknown: Locale.Read("gui_legend_unknown"),
-					description: Locale.Read("gui_legend_description_unavailable"),
-					authorLink: Locale.Read("gui_legend_author_default"),
+					unknown: Locale.Read("dictionary.unknown"),
+					description: Locale.Read("gui.legend.description_unavailable"),
+					authorLink: Locale.Read("gui.legend.authors.default"),
 				}
 
 				languageCode := Language.Get()
-				legendEntry := this.ReadLegend(this.legends.Get(entryName) ".ini")
-				legendEntryL := legendEntry.%languageCode%
+				legendEntry := this.Read(entryName)
 
 				entry := ChrLib.GetEntry(entryName)
 				previewSymbol := StrLen(entry["symbol"]["alt"]) > 0 ? entry["symbol"]["alt"] : entry["symbol"]["set"]
@@ -432,7 +453,7 @@ Class ChrLegend {
 				PV.Text := previewSymbol != "" ? previewSymbol : Chr(0x25CC)
 
 				chrTitle := legendPanel["Title"]
-				chrTitle.Text := legendEntryL.HasOwnProp("title") && legendEntryL.title != "" ? legendEntryL.title : selectedLabel
+				chrTitle.Text := legendEntry.Has("title") && legendEntry["title"] != "" ? legendEntry["title"] : selectedLabel
 
 				chrTitle.SetFont(
 					StrLen(entry["symbol"]["customs"]) > 0 ? entry["symbol"]["customs"] : ("s" (24) " norm c333333"),
@@ -440,19 +461,19 @@ Class ChrLegend {
 				)
 
 				uniTitleContent := legendPanel["UnicodeTitleContent"]
-				uniTitleContent.Text := legendEntry.legend.HasOwnProp("unicode_name") && legendEntry.legend.unicode_name != "" ? legendEntry.legend.unicode_name : labels.unknown
+				uniTitleContent.Text := legendEntry.Has("unicode_name") && legendEntry["unicode_name"] != "" ? legendEntry["unicode_name"] : labels.unknown
 
 				altTitlesContent := legendPanel["AltTitlesContent"]
-				altTitlesContent.Text := legendEntryL.HasOwnProp("alts") && legendEntryL.alts != "" ? legendEntryL.alts : labels.unknown
+				altTitlesContent.Text := legendEntry.Has("alts") && legendEntry["alts"] != "" ? legendEntry["alts"] : labels.unknown
 
 				languagesContent := legendPanel["LanguagesContent"]
-				languagesContent.Text := legendEntryL.HasOwnProp("languages") && legendEntryL.languages != "" ? legendEntryL.languages : labels.unknown
+				languagesContent.Text := legendEntry.Has("languages") && legendEntry["languages"] != "" ? legendEntry["languages"] : labels.unknown
 
 				description := legendPanel["Description"]
-				description.Text := legendEntryL.HasOwnProp("description") && legendEntryL.description != "" ? Locale.HandleString(legendEntryL.description) : labels.description
+				description.Text := legendEntry.Has("description") && legendEntry["description"] != "" ? Locale.HandleString(legendEntry["description"]) : labels.description
 
 				authorLink := legendPanel["AuthorLink"]
-				authorLink.Text := legendEntryL.HasOwnProp("author") && legendEntryL.author != "" ? legendEntryL.author : labels.authorLink
+				authorLink.Text := legendEntry.Has("author") && legendEntry["author"] != "" ? legendEntry["author"] : labels.authorLink
 
 				entryContent := legendPanel["EntryContent"]
 				entryContent.Text := entryName
@@ -477,9 +498,9 @@ Class ChrLegend {
 				transLV.Delete()
 				namesLV.Delete()
 
-				ipaArray := this.ParseIPA(legendEntryL.HasOwnProp("ipa") && legendEntryL.ipa != "" ? legendEntryL.ipa : "")
-				transArray := this.ParseIPA(legendEntryL.HasOwnProp("transcription") && legendEntryL.transcription != "" ? legendEntryL.transcription : "")
-				namesArray := this.ParseIPA(legendEntryL.HasOwnProp("names") && legendEntryL.names != "" ? legendEntryL.names : "")
+				ipaArray := this.ParseIPA(legendEntry.Has("ipa") && legendEntry["ipa"] != "" ? legendEntry["ipa"] : "")
+				transArray := this.ParseIPA(legendEntry.Has("transcription") && legendEntry["transcription"] != "" ? legendEntry["transcription"] : "")
+				namesArray := this.ParseIPA(legendEntry.Has("names") && legendEntry["names"] != "" ? legendEntry["names"] : "")
 
 				for each in ["ipa", "trans", "names"] {
 					if %each%Array.Length > 0 {
@@ -494,9 +515,17 @@ Class ChrLegend {
 		}
 	}
 
-	static ReadLegend(path) {
-		legend := Util.INIToObj(this.legendsPath path)
-		return legend
+	static Read(entryName, languageSection := "") {
+		local output := Map()
+		languageSection := Language.Validate(languageSection) ? languageSection : Language.Get()
+
+		if ChrLegendStore.storedData.Has(entryName) && ChrLegendStore.storedData[entryName].Has("legend") {
+			output := ChrLegendStore.storedData[entryName]["legend"]
+			if ChrLegendStore.storedData[entryName].Has(languageSection)
+				for key, value in ChrLegendStore.storedData[entryName][languageSection]
+					output.Set(key, value)
+		}
+		return output
 	}
 
 	static ParseIPA(str) {
@@ -509,12 +538,15 @@ Class ChrLegend {
 	}
 
 	static SetTreeTitle(item, languageCode) {
-		title := IniRead(this.legendsPath this.legends.Get(item) ".ini", languageCode, "title", item)
+		local ref := ChrLegendStore.storedData[item]
+		local hasLang := ref.Has(languageCode)
 
-		postfix := IniRead(this.legendsPath this.legends.Get(item) ".ini", "legend", "postfix", "")
+		local title := hasLang && ref[languageCode].Has("title") ? ref[languageCode]["title"] : item
+
+		local postfix := ref["legend"].Has("postfix") ? ref["legend"]["postfix"] : ""
 		postfix := postfix != "" ? Chr(0x2002) this.SetBracketStyle(postfix) : ""
 
-		prefix := IniRead(this.legendsPath this.legends.Get(item) ".ini", "legend", "prefix", "")
+		local prefix := ref["legend"].Has("prefix") ? ref["legend"]["prefix"] : ""
 		prefix := prefix != "" ? this.SetBracketStyle(prefix) Chr(0x2002) : ""
 
 		title := prefix title postfix
@@ -547,33 +579,4 @@ Class ChrLegend {
 		return str
 	}
 
-	static CollectList() {
-		indexed := Map()
-		output := []
-		toRemove := []
-
-		for name, path in this.legends
-			if ChrLib.entries.HasOwnProp(name)
-				indexed.Set(ChrLib.entries.%name%["index"], name)
-
-		for i, name in indexed {
-			group := IniRead(this.legendsPath this.legends.Get(name) ".ini", "legend", "group", "")
-			if group != "" {
-				if !toRemove.HasValue(group)
-					toRemove.Push(group)
-
-				if !output.HasValue(group)
-					output.Push(group, Map(group, [name]))
-				else if output.HasValue(group, &j)
-					output[j + 1][group].Push(name)
-			} else
-				output.Push(name)
-		}
-
-		for i, each in output
-			if toRemove.HasValue(each)
-				output.RemoveAt(i)
-
-		return output
-	}
 }

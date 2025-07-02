@@ -1,15 +1,27 @@
 {
 	"en-US": {
+		"script_labels": {
+			"old_turkic": {
+				"__self": "Old Turkic",
+				"short": "Old Turkic",
+				"orkhon": "Orkhon",
+				"yenisei": "Yenisei"
+			}
+		},
 		"generated": {
 			"prefix": {
-				"old_turkic": "Old Turkic",
-				"old_turkic_yenisei": "Yenisei",
-				"old_turkic_orkhon": "Orkhon"
+				"old_turkic": {
+					"__self": "Old Turkic",
+					"yenisei": "Yenisei",
+					"orkhon": "Orkhon"
+				}
 			},
 			"tag": {
-				"old_turkic": "old turkic",
-				"old_turkic_yenisei": "yenisei",
-				"old_turkic_orkhon": "orkhon"
+				"old_turkic": {
+					"__self": "old turkic",
+					"yenisei": "yenisei",
+					"orkhon": "orkhon"
+				}
 			}
 		},
 		"scripts": {

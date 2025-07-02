@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"phoenician": "Phoenician"
+		},
 		"generated": {
 			"prefix": { "phoenician": "Phoenician" },
 			"tag": { "phoenician": "phoenician" }

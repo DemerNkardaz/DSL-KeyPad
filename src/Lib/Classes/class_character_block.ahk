@@ -60,7 +60,7 @@ Class ChrBlock {
 					" ] "
 					(name.HasRegEx("^" SubStr(lang, 1, 2), &i) ? name[i + 1] : name[1])
 					"`n[ "
-					Locale.Read("symbol_" (
+					Locale.Read("script_labels." (
 						this.langToLocale.HasRegEx("^" SubStr(lang, 1, 2), &i)
 							? this.langToLocale[i + 1]
 						: this.langToLocale[1]

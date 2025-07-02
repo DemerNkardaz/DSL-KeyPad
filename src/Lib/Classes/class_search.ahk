@@ -17,7 +17,15 @@ Class Search {
 			return resultObj
 		}
 
-		if RegExMatch(searchQuery, "^\/(.*?)$", &match) {
+		if searchQuery == "/ubuild" {
+			Update.Build()
+			return resultObj
+		}
+
+		if RegExMatch(searchQuery, "^\%(.*?)\%$", &match) {
+			local result := VariableParser.Parse("%" match[1] "%")
+			return result is String && result != "" ? MsgBox(result, App.Title(), "Iconi") : []
+		} else if RegExMatch(searchQuery, "^\/(.*?)$", &match) {
 			local funcRef := StrSplit(match[1], ".")
 			if funcRef.Length = 1 {
 				%funcRef[1]%()

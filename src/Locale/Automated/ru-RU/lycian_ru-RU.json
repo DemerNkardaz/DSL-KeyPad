@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"lycian": "Ликийское письмо"
+		},
 		"generated": {
 			"prefix": { "lycian": "Ликийск$(ая|ий|ое)" },
 			"tag": { "lycian": "ликийск$(ая|ий|ое)" }

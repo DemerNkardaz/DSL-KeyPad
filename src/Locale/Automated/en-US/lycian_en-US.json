@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"lycian": "Lycian"
+		},
 		"generated": {
 			"prefix": { "lycian": "Lycian" },
 			"tag": { "lycian": "lycian" }

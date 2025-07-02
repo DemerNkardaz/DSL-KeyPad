@@ -1,0 +1,23 @@
+{
+	"legend": {
+		"unicode_name": "Runic Letter Ansuz A",
+		"group": "germanic_runes",
+		"prefix": "ᚨ::Ornate"
+	},
+	"ru-RU": {
+		"title": "Ансуз",
+		"alts": "Эш",
+		"languages": "Прагерманский, Др.‐английский",
+		"names": "[Старший Футарк::Ansuz][Футорк::Æsċ]",
+		"ipa": "[Прагерманский::[a(ː)], /ɑ/, /ɑː/][Др.‐английский::/æ/]",
+		"transcription": "[Прагерманский::a][Др.‐английский::æ]"
+	},
+	"en-US": {
+		"title": "Ansuz",
+		"languages": "Proto Germanic, Old English",
+		"alts": "Ash",
+		"names": "[Elder Futhark::Ansuz][Futhork::Æsċ]",
+		"ipa": "[Proto Germanic::[a(ː)], /ɑ/, /ɑː/][Old English::/æ/]",
+		"transcription": "[Proto Germanic::a][Old English::æ]"
+	}
+}

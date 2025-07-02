@@ -229,6 +229,26 @@ RegExEscape(str) {
 	return newStr
 }
 
+RegExSplit(str, pattern, omitEmpty := false) {
+	splits := []
+	pos := 1
+	while RegExMatch(str, pattern, &match, pos) {
+		part := SubStr(str, pos, match.Pos(0) - pos)
+		if (!omitEmpty || part != "")
+			splits.Push(part)
+		pos := match.Pos(0) + match.Len(0)
+	}
+	if (pos <= StrLen(str)) {
+		part := SubStr(str, pos)
+		if (!omitEmpty || part != "")
+			splits.Push(part)
+	} else if (!omitEmpty && RegExMatch(str, pattern "$")) {
+		splits.Push("")
+	}
+	return splits
+}
+
+
 _MapKeys(this, t := "k", names?) {
 	local keys := []
 	for k, v in this {

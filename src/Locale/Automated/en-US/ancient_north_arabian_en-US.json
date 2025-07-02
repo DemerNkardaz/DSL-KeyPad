@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"ancient_north_arabian": "Ancient North Arabian"
+		},
 		"generated": {
 			"prefix": { "north_arabian": "Ancient North Arabian" },
 			"tag": { "north_arabian": "ancient north arabian" }

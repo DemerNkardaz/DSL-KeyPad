@@ -137,9 +137,9 @@ Class App {
 			scriptForms: Locale.Read("tray_menu_item_scripts"),
 			glyphForms: Locale.Read("tray_menu_item_glyphs"),
 			layouts: Locale.Read("tray_menu_item_layouts"),
-			IPS_TELEX: Locale.Read("tray_menu_item_script_processor"),
-			IPS_TiengViet: Locale.Read("tray_menu_item_script_processor_vietnamese") "`t" RightAlt "F2",
-			IPS_HanYuPinYin: Locale.Read("tray_menu_item_script_processor_chinese_romanization") "`t" RightAlt RightShift "F2",
+			TSP_TELEX: Locale.Read("tray_menu_item_script_processor"),
+			TSP_TiengViet: Locale.Read("telex_script_processor.labels.tieng_viet") "`t" RightAlt "F2",
+			TSP_HanYuPinYin: Locale.Read("telex_script_processor.labels.hanyu_pinyin") "`t" RightAlt RightShift "F2",
 			Scripter_AlternativeInput: Locale.Read("tray_menu_item_scripter_alternative_input"),
 			;
 			userRecipes: Locale.Read("tray_menu_item_user_recipes"),
@@ -180,11 +180,11 @@ Class App {
 
 		sciptsMenu := Menu()
 
-		sciptsMenu.Add(labels.IPS_TELEX, (*) => []), sciptsMenu.Disable(labels.IPS_TELEX)
-		sciptsMenu.Add(labels.IPS_TiengViet, (*) => globalInstances.scriptProcessors["Tieng Viet"].Start()),
-			sciptsMenu.SetIcon(labels.IPS_TiengViet, App.icoDLL, App.indexIcos["tieng_viet"])
-		sciptsMenu.Add(labels.IPS_HanYuPinYin, (*) => globalInstances.scriptProcessors["HanYu PinYin"].Start()),
-			sciptsMenu.SetIcon(labels.IPS_HanYuPinYin, App.icoDLL, App.indexIcos["hanyu_pinyin"])
+		sciptsMenu.Add(labels.TSP_TELEX, (*) => []), sciptsMenu.Disable(labels.TSP_TELEX)
+		sciptsMenu.Add(labels.TSP_TiengViet, (*) => globalInstances.scriptProcessors["Tieng Viet"].Start()),
+			sciptsMenu.SetIcon(labels.TSP_TiengViet, App.icoDLL, App.indexIcos["tieng_viet"])
+		sciptsMenu.Add(labels.TSP_HanYuPinYin, (*) => globalInstances.scriptProcessors["HanYu PinYin"].Start()),
+			sciptsMenu.SetIcon(labels.TSP_HanYuPinYin, App.icoDLL, App.indexIcos["hanyu_pinyin"])
 		sciptsMenu.Add()
 		sciptsMenu.Add(labels.Scripter_AlternativeInput, (*) => []), sciptsMenu.Disable(labels.Scripter_AlternativeInput)
 
@@ -197,18 +197,18 @@ Class App {
 		}
 
 		AddScripts(dataName, dataValue) {
-			sciptsMenu.Add(Locale.Read(dataValue["locale"]), (*) => Scripter.OptionSelect(dataName))
+			sciptsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.OptionSelect(dataName))
 			if dataValue["icons"][1] ~= "file::" {
-				sciptsMenu.SetIcon(Locale.Read(dataValue["locale"]), StrReplace(dataValue["icons"][1], "file::"))
+				sciptsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), StrReplace(dataValue["icons"][1], "file::"))
 			} else
-				sciptsMenu.SetIcon(Locale.Read(dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
+				sciptsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
 		}
 
 		App.tray.Add(labels.scriptForms, sciptsMenu)
 
 		glyphVariantsMenu := Menu()
 
-		glyphVariantsMenu.Add(Locale.Read("gui_scripter_glyph_variation_panel"), (*) => GlyphsPanel.Panel())
+		glyphVariantsMenu.Add(Locale.Read("gui.scripter.glyph_variations.gui_title"), (*) => GlyphsPanel.Panel())
 		glyphVariantsMenu.Add()
 
 		glyphVariants := ScripterStore.storedData["Glyph Variations"].Length // 2
@@ -220,8 +220,8 @@ Class App {
 		}
 
 		AddGlyphVariatns(dataName, dataValue) {
-			glyphVariantsMenu.Add(Locale.Read(dataValue["locale"]), (*) => Scripter.OptionSelect(dataName, "Glyph Variations"))
-			glyphVariantsMenu.SetIcon(Locale.Read(dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
+			glyphVariantsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.OptionSelect(dataName, "Glyph Variations"))
+			glyphVariantsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
 		}
 
 		App.tray.Add(labels.glyphForms, glyphVariantsMenu)

@@ -1,5 +1,11 @@
 {
 	"en-US": {
+		"script_labels": {
+			"ipa": {
+				"__self": "International Phonetic Alphabet",
+				"short": "IPA"
+			}
+		},
 		"generated": {
 			"prefix": { "&ipa": "(IPA)", "ipa": "(IPA)" },
 			"tag": { "&ipa": "(ipa)", "ipa": "(ipa)" }

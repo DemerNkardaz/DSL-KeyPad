@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"glagolitic": "Glagolitic"
+		},
 		"generated": {
 			"prefix": { "glagolitic": "Glagolitic" },
 			"tag": { "glagolitic": "glagolitic" }

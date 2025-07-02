@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"latin": "Latin"
+		},
 		"scripts": {
 			"latin": {
 				"c_num_100000": { "letter_locale": "One hundred thousand" },

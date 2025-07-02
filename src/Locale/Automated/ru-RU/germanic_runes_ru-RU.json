@@ -1,25 +1,44 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"germanic_runes": "Германские руны",
+			"futhark": "Старший Футарк",
+			"futhork": "Футорк",
+			"futhark_younger": "Младший Футарк",
+			"futhark_almanac": "Рунический Альманах",
+			"futhark_younger_later": "Поздний М. Футарк",
+			"medieval_runes": "Средневековые Руны",
+			"runic_punctuation": "Руническая пунктуация"
+		},
+		"legend": {
+			"groups": {
+				"germanic_runes": "{@:script_labels.germanic_runes}"
+			}
+		},
 		"generated": {
 			"prefix": {
-				"germanic_runic": "Германск$(ая|ий|ое)",
-				"germanic_runic_elder_futhark": "Старшего Футарка",
-				"germanic_runic_almanac": "Альманаха",
-				"germanic_runic_younger_futhark": "Младшего Футарка",
-				"germanic_runic_later_younger_futhark": "позднего Младшего Футарка",
-				"germanic_runic_futhork": "Футорка",
-				"germanic_runic_medieval": "Средневеков$(ая|ий|ое)",
+				"germanic_runic": {
+					"__self":"Германск$(ая|ий|ое)",
+					"elder_futhark": "Старшего Футарка",
+					"almanac": "Альманаха",
+					"younger_futhark": "Младшего Футарка",
+					"later_younger_futhark": "позднего Младшего Футарка",
+					"futhork": "Футорка",
+					"medieval": "Средневеков$(ая|ий|ое)"
+				},
 				"cirth_runic": "Киртск$(ая|ий|ое) (Толкин)",
 				"tolkien_runic": "Толкин,"
 			},
 			"tag": {
-				"germanic_runic": "германск$(ая|ий|ое)",
-				"germanic_runic_elder_futhark": "старшего футарка",
-				"germanic_runic_almanac": "альманаха",
-				"germanic_runic_younger_futhark": "младшего футарка",
-				"germanic_runic_later_younger_futhark": "позднего младшего футарка",
-				"germanic_runic_futhork": "футорка",
-				"germanic_runic_medieval": "средневеков$(ая|ий|ое)",
+				"germanic_runic": {
+					"__self": "германск$(ая|ий|ое)",
+					"elder_futhark": "старшего футарка",
+					"almanac": "альманаха",
+					"younger_futhark": "младшего футарка",
+					"later_younger_futhark": "позднего младшего футарка",
+					"futhork": "футорка",
+					"medieval": "средневеков$(ая|ий|ое)"
+				},
 				"cirth_runic": "киртск$(ая|ий|ое) (Толкин)",
 				"tolkien_runic": "Толкина"
 			}

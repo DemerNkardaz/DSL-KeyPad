@@ -1,0 +1,23 @@
+{
+	"legend": {
+		"unicode_name": "Runic Letter Tiwaz Tir Tyr T",
+		"group": "germanic_runes",
+		"prefix": "ᛏ::Ornate"
+	},
+	"ru-RU": {
+		"title": "Тейваз",
+		"alts": "Тиваз, Тир, Тюр",
+		"languages": "Прагерманский, Др.‐английский, Др.‐скандинавский",
+		"names": "[Старший Футарк::Tīwaz][Футорк::Tīr][::Tī][Младший Футарк::Týr]",
+		"ipa": "[Прагерманский::[t]][Др.‐английский::[t]][Др.‐скандинавский::[t], [d]]",
+		"transcription": "[Прагерманский::t][Др.‐английский::t][Др.‐скандинавский::t]"
+	},
+	"en-US": {
+		"title": "Tiwaz",
+		"languages": "Proto Germanic, Old English, Old Norse",
+		"alts": "Tir, Tyr",
+		"names": "[Elder Futhark::Tīwaz][Futhork::Tīr][::Tī][Younger Futhark::Týr]",
+		"ipa": "[Proto Germanic::[t]][Old English::[t]][Old Norse::[t], [d]]",
+		"transcription": "[Proto Germanic::t][Old English::t][Old Norse::t]"
+	}
+}

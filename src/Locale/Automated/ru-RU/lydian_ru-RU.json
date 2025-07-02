@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"lydian": "Лидийское письмо"
+		},
 		"generated": {
 			"prefix": { "lydian": "Лидийск$(ая|ий|ое)" },
 			"tag": { "lydian": "лидийск$(ая|ий|ое)" }

@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"cypriot_syllabary": "Кипрское слоговое письмо"
+		},
 		"generated": {
 			"prefix": { "cypriot_syllabary": "Кипрск$(ая|ий|ое)" },
 			"tag": { "cypriot_syllabary": "кипрск$(ая|ий|ое)" }

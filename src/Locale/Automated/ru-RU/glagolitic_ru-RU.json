@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"glagolitic": "Глаголица"
+		},
 		"generated": {
 			"prefix": { "glagolitic": "Глаголица," },
 			"tag": { "glagolitic": "глаголицы" }

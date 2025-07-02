@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"gothic": "Готское письмо"
+		},
 		"generated": {
 			"prefix": { "gothic": "Готск$(ая|ий|ое)" },
 			"tag": { "gothic": "готск$(ая|ий|ое)" }

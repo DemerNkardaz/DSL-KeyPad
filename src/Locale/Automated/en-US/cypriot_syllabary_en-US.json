@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"cypriot_syllabary": "Cypriot Syllabary"
+		},
 		"generated": {
 			"prefix": { "cypriot_syllabary": "Cypriot" },
 			"tag": { "cypriot_syllabary": "cypriot" }

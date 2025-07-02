@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"phoenician": "Финикийское письмо"
+		},
 		"generated": {
 			"prefix": { "phoenician": "Финикийск$(ая|ий|ое)" },
 			"tag": { "phoenician": "финикийск$(ая|ий|ое)" }

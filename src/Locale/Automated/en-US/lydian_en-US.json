@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"lydian": "Lydian"
+		},
 		"generated": {
 			"prefix": { "lydian": "Lydian" },
 			"tag": { "lydian": "lydian" }

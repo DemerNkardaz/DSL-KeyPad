@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"old_permic": "Древнепермское письмо"
+		},
 		"generated": {
 			"prefix": { "old_permic": "Древнепермск$(ая|ий|ое)" },
 			"tag": { "old_permic": "древнепермск$(ая|ий|ое)" }

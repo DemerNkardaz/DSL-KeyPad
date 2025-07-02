@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"old_hungarian": "Секейское письмо"
+		},
 		"generated": {
 			"prefix": { "old_hungarian": "Секейск$(ая|ий|ое)" },
 			"tag": { "old_hungarian": "секейск$(ая|ий|ое)" }

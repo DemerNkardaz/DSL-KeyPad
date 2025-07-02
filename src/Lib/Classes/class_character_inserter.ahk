@@ -10,7 +10,7 @@ Class CharacterInserter {
 	InputDialog(UseHWND := True) {
 		hwnd := WinActive('A')
 
-		IB := InputBox(Locale.Read("symbol_code_prompt"), Locale.Read("symbol_" StrLower(this.insertType)), "w256 h92", this.lastPrompt)
+		IB := InputBox(Locale.Read("symbol_code_prompt"), Locale.Read("script_labels." StrLower(this.insertType)), "w256 h92", this.lastPrompt)
 		this.lastPrompt := IB.Value
 
 		if IB.Result = "Cancel"

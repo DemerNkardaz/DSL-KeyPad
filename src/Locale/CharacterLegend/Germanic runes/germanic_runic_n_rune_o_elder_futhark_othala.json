@@ -1,0 +1,27 @@
+{
+	"legend": {
+		"unicode_name": "Runic Letter Othalan Ethel O",
+		"group": "germanic_runes",
+		"prefix": "ᛟ::Ornate"
+	},
+	"ru-RU": {
+		"title": "Одал",
+		"alts": "Отал, Эдель",
+		"languages": "Прагерманский, Др.‐английский",
+		"names": "[Старший Футарк::Ōþalan][::Ōþalą][Футорк::Ēðel][::Ēþel][::Ǣþel][::Œ̄þel][::Œðel][::ᛟᚦᛖᛚ]",
+		"ipa": "[Прагерманский::/ɔː/, [o(ː)]][Др.‐английский::[eː], [ø(ː)]]",
+		"transcription": "[Прагерманский::o, ō][Др.‐английский::œ, oe, ōe]",
+		"author": "<a href=\"https://ru.wikipedia.org/wiki/Один\">Один</a>, сын <a href=\"https://ru.wikipedia.org/wiki/Бор_(бог)\">Бора</a>",
+		"description": "Одал (ᛟ) — 24-я руна старшего, 23-я руна англосаксонского и младшего рунического алфавитов."
+	},
+	"en-US": {
+		"title": "Othala",
+		"alts": "Odal, Ethel",
+		"languages": "Proto-Germanic, Old English",
+		"names": "[Elder Futhark::Ōþalan][::Ōþalą][Futhork::Ēðel][::Ēþel][::Ǣþel][::Œ̄þel][::Œðel][::ᛟᚦᛖᛚ]",
+		"ipa": "[Proto-Germanic::/ɔː/, [o(ː)]][Old English::[eː], [ø(ː)]]",
+		"transcription": "[Proto-Germanic::o, ō][Old English::œ, oe, ōe]",
+		"description": "Othala (ᛟ) is the 24th rune of the Elder Futhark, the 23rd rune of the Anglo-Saxon Futhorc, and the 23rd rune of the Younger Futhark.",
+		"author": "<a href=\"https://en.wikipedia.org/wiki/Odin\">Óðinn</a>, son of <a href=\"https://en.wikipedia.org/wiki/Borr_(god)\">Borr</a>"
+	}
+}

@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"carian": "Карийское письмо"
+		},
 		"generated": {
 			"prefix": { "carian": "Карийск$(ая|ий|ое)" },
 			"tag": { "carian": "карийск$(ая|ий|ое)" }

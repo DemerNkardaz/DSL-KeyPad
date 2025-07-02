@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"ancient_south_arabian": "Южноаравийское письмо"
+		},
 		"generated": {
 			"prefix": { "south_arabian": "Южноаравийск$(ая|ий|ое)" },
 			"tag": { "south_arabian": "южноаравийск$(ая|ий|ое)" }

@@ -1,5 +1,11 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"upa": {
+				"__self": "Уральский фонетический алфавит",
+				"short": "УФА"
+			}
+		},
 		"scripts": {
 			"latin": {
 				"s_let_s_voiced_laryngeal_spirant": {

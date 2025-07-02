@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"sidetic": "Сидетское письмо"
+		},
 		"generated": {
 			"prefix": { "sidetic": "Сидетск$(ая|ий|ое)" },
 			"tag": { "sidetic": "сидетск$(ая|ий|ое)" }

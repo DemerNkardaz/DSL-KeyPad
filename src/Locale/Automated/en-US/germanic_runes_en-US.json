@@ -1,25 +1,44 @@
 {
 	"en-US": {
+		"script_labels": {
+			"germanic_runes": "Germanic Runes",
+			"futhark": "Elder Futhark",
+			"futhork": "Futhork",
+			"futhark_younger": "Younger Futhark",
+			"futhark_almanac": "Runic Almanac",
+			"futhark_younger_later": "Later Younger Futhark",
+			"medieval_runes": "Medieval Runes",
+			"runic_punctuation": "Runic Punctuation"
+		},
+		"legend": {
+			"groups": {
+				"germanic_runes": "{@:script_labels.germanic_runes}"
+			}
+		},
 		"generated": {
 			"prefix": {
-				"germanic_runic": "Germanic",
-				"germanic_runic_elder_futhark": "Elder Futhark",
-				"germanic_runic_almanac": "Almanac",
-				"germanic_runic_younger_futhark": "Younger Futhark",
-				"germanic_runic_later_younger_futhark": "Later Younger Futhark",
-				"germanic_runic_futhork": "Futhork",
-				"germanic_runic_medieval": "Medieval",
+				"germanic_runic": {
+					"__self": "Germanic",
+					"elder_futhark": "Elder Futhark",
+					"almanac": "Almanac",
+					"younger_futhark": "Younger Futhark",
+					"later_younger_futhark": "Later Younger Futhark",
+					"futhork": "Futhork",
+					"medieval": "Medieval"
+				},
 				"cirth_runic": "Cirth (Tolkien)",
 				"tolkien_runic": "Tolkien"
 			},
 			"tag": {
-				"germanic_runic": "germanic",
-				"germanic_runic_elder_futhark": "elder futhark",
-				"germanic_runic_almanac": "almanac",
-				"germanic_runic_younger_futhark": "younger futhark",
-				"germanic_runic_later_younger_futhark": "later younger futhark",
-				"germanic_runic_futhork": "futhork",
-				"germanic_runic_medieval": "medieval",
+				"germanic_runic": {
+					"__self": "germanic",
+					"elder_futhark": "elder futhark",
+					"almanac": "almanac",
+					"younger_futhark": "younger futhark",
+					"later_younger_futhark": "later younger futhark",
+					"futhork": "futhork",
+					"medieval": "medieval"
+				},
 				"cirth_runic": "cirth (Tolkien)",
 				"tolkien_runic": "Tolkien"
 			}

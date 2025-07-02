@@ -1658,7 +1658,7 @@ Class Panel {
 				local unicodeBlock := entry["unicodeBlock"]
 				local sequence := entry["sequence"]
 				local altsCount := ObjOwnPropCount(entry["alterations"])
-				local hasLegend := entry["options"]["legend"] != ""
+				local hasLegend := entry["options"]["legend"]
 
 				if StrLen(unicode) > 0 {
 					star := " " Chr(0x2605)
@@ -1840,7 +1840,7 @@ Class Panel {
 				if split.Length > 1 {
 					for i, each in split {
 						if Locale.Read(each "_alt", , True, &titleText) || Locale.Read(each, , True, &titleText) {
-							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and") " " : "")
+							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("dictionary.and") " " : "")
 							skipCombine := False
 						}
 					}
@@ -1950,8 +1950,8 @@ Class Panel {
 			this.PanelGUI[options.prefix "KeyPreviewSet"].SetFont((KeyPreviewSetLength > 5) ? "s10" : "s12")
 
 
-			this.PanelGUI[options.prefix "LegendButton"].Enabled := StrLen(value["options"]["legend"]) > 1 ? True : False
-			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := ObjOwnPropCount(value["alterations"]) > 0 ? True : False
+			this.PanelGUI[options.prefix "LegendButton"].Enabled := value["options"]["legend"]
+			this.PanelGUI[options.prefix "GlyphsVariantsButton"].Enabled := value["alterations"].Count > 0
 
 		}
 
@@ -2020,7 +2020,7 @@ Class Panel {
 				if split.Length > 1 {
 					for i, each in split {
 						if Locale.Read(each "_alt", , True, &titleText) || Locale.Read(each, , True, &titleText) {
-							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and") " " : "")
+							combinedTitle .= titleText " " (i < split.Length ? Locale.Read("dictionary.and") " " : "")
 							skipCombine := False
 						}
 					}
@@ -2350,7 +2350,7 @@ Class Panel {
 							if split.Length > 1 {
 								for i, each in split {
 									if Locale.Read(each "_alt", , True, &titleText) || Locale.Read(each, , True, &titleText) {
-										combinedTitle .= titleText " " (i < split.Length ? Locale.Read("and") " " : "")
+										combinedTitle .= titleText " " (i < split.Length ? Locale.Read("dictionary.and") " " : "")
 										skipCombine := False
 									}
 								}

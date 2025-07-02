@@ -1,5 +1,9 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"hellenic": "Эллиница",
+			"greek": "Греческий"
+		},
 		"tonos": "Тонос",
 		"oxia": "Оксия",
 		"varia": "Вария",

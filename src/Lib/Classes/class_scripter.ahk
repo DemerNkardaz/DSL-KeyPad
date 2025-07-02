@@ -102,7 +102,7 @@ Class Scripter {
 
 
 		local prevAltMode := this.selectedMode.Get(selectorType)
-		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read("gui_scripter_" (selectorType == "Alternative Modes" ? "alt_mode" : "glyph_variation")))
+		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read("gui.scripter." (selectorType == "Alternative Modes" ? "alternative_mode" : "glyph_variations")))
 
 		Constructor() {
 			local maxItems := Cfg.Get("Scripter_Selector_Max_Items", "UI", 24, "int")
@@ -118,7 +118,7 @@ Class Scripter {
 			if currentPage > totalPages
 				currentPage := totalPages
 
-			selectorPanel.title .= Chr(0x2003) "::" Chr(0x2003) Locale.ReadInject("gui_scripter_pages", [currentPage, totalPages]) " " Locale.Read("gui_scripter_pages_help")
+			selectorPanel.title .= Chr(0x2003) "::" Chr(0x2003) Locale.ReadInject("dynamic_dictionary.page_of", [currentPage, totalPages]) " " Locale.Read("gui.scripter.pages_help")
 
 			local startIndex := (currentPage - 1) * maxItems + 1
 			local pageItems := Min(maxItems, totalItems - startIndex + 1)
@@ -198,7 +198,7 @@ Class Scripter {
 
 				local optionTitleW := optionW - (icoX - optionX) - icoW - 20
 
-				local optionTitle := selectorPanel.AddText("v" dataValue["uiid"] "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " 0x80 +BackgroundTrans", Locale.Read(dataValue["locale"]))
+				local optionTitle := selectorPanel.AddText("v" dataValue["uiid"] "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " 0x80 +BackgroundTrans", Locale.Read("script_labels." dataValue["locale"]))
 				optionTitle.SetFont("s10 c333333 Bold", "Segoe UI")
 
 				local scriptPreviewX := optionTitleX
@@ -217,7 +217,7 @@ Class Scripter {
 				hotkeysLabel := selectorPanel.AddText(
 					"v" dataValue["uiid"] "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH)
 					" 0x80 Right +BackgroundTrans",
-					Locale.ReadInject("alt_mode_gui_press", [keys[j] " / " keys[keyCodes.Length + j] " / " keys[keyCodes.Length * 2 + j]])
+					Locale.ReadInject("dynamic_dictionary.press", [keys[j] " / " keys[keyCodes.Length + j] " / " keys[keyCodes.Length * 2 + j]])
 				)
 
 				currentCol++
@@ -245,7 +245,7 @@ Class Scripter {
 	}
 
 	static OptionSelect(name, selectorType := "Alternative Modes") {
-		local currentISP := InputScriptProcessor.options.interceptionInputMode
+		local currentISP := TelexScriptProcessor.options.interceptionInputMode
 		if name != "" {
 			local currentMode := this.selectedMode.Get(selectorType)
 
@@ -265,9 +265,9 @@ Class Scripter {
 
 		WarningISP(name, currentISP, selectorType) {
 			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
-			local nameTitle := Locale.Read(this.GetData(selectorType, name).locale)
-			local IPSTitle := Locale.Read("script_processor_mode_" instanceRef.tag)
-			MsgBox(Locale.ReadInject("alt_mode_warning_isp_active", [nameTitle, IPSTitle]), App.Title(), "Icon!")
+			local nameTitle := Locale.Read("script_labels." this.GetData(selectorType, name)["locale"])
+			local TSPTitle := Locale.Read("telex_script_processor.labels." instanceRef.tag)
+			MsgBox(Locale.ReadInject("telex_script_processor.warnings.incompatible_with_alternative_modes", [nameTitle, TSPTitle]), App.Title(), "Icon!")
 		}
 	}
 

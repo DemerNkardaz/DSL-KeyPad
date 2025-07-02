@@ -1,0 +1,16 @@
+{
+	"legend": {
+		"unicode_name": "Latin Capital Letter A With Circumflex",
+		"prefix": "Â::Ornate"
+	},
+	"ru-RU": {
+		"title": "A с циркумфлексом",
+		"languages": "Французский, Португальский, Румынский, Вьетнамский, Турецкий",
+		"ipa": "[Французский::/ɑ/][Португальский::/ɐ/, [ɐ], [ɜ], [ə]][Румынский::/ɨ/][Вьетнамский::[ʔəː˧˦], [ʔəː˨˩˦], [ʔəː˦˥]][Турецкий::/ʲa/, /ʲaː/, /aː/]"
+	},
+	"en-US": {
+		"title": "A with circumflex",
+		"languages": "French, Portuguese, Romanian, Vietnamese, Turkish",
+		"ipa": "[French::/ɑ/][Portuguese::/ɐ/, [ɐ], [ɜ], [ə]][Romanian::/ɨ/][Vietnamese::[ʔəː˧˦], [ʔəː˨˩˦], [ʔəː˦˥]][Turkish::/ʲa/, /ʲaː/, /aː/]"
+	}
+}

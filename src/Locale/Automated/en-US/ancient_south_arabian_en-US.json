@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"ancient_south_arabian": "Ancient South Arabian"
+		},
 		"generated": {
 			"prefix": { "south_arabian": "Ancient South Arabian" },
 			"tag": { "south_arabian": "ancient south arabian" }

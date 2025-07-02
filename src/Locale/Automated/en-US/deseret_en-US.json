@@ -1,5 +1,11 @@
 {
 	"en-US": {
+		"script_labels": {
+			"deseret": {
+				"__self": "Deseret Phonetic Alphabet",
+				"short": "Deseret"
+			}
+		},
 		"generated": {
 			"prefix": { "deseret": "Deseret" },
 			"tag": { "deseret": "deseret" }

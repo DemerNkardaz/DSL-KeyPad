@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"old_permic": "Old Permic"
+		},
 		"generated": {
 			"prefix": { "old_permic": "Old Permic" },
 			"tag": { "old_permic": "old permic" }

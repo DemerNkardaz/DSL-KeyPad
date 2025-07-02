@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"tifinagh": "Tifinagh"
+		},
 		"generated": {
 			"prefix": { "tifinagh": "Tifinagh" },
 			"tag": { "tifinagh": "tifinagh" }

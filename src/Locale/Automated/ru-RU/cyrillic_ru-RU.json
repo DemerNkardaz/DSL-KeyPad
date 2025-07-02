@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"cyrillic": "Кириллица"
+		},
 		"scripts": {
 			"cyrillic": {
 				"c_let_yus_little": { "letter_locale": "Юс малый" },

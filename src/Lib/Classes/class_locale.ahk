@@ -33,10 +33,11 @@ Class Locale {
 			for folderName in activeMods
 				if DirExist(ModsInjector.modsPath "\" folderName "\Locale")
 					Loop Files ModsInjector.modsPath "\" folderName "\Locale\*", "FR"
-						if A_LoopFileFullPath ~= "i)\.(ini|json)$"
+						if A_LoopFileFullPath ~= "i)\.(ini|json)$" && !(A_LoopFileFullPath ~= "CharacterLegend")
 							pathsArray.Push(A_LoopFileFullPath)
 
 		this.localeObj := this.ParseSourceFiles(pathsArray)
+		return
 	}
 
 	static ParseSourceFiles(pathsArray) {
@@ -92,74 +93,6 @@ Class Locale {
 		return str
 	}
 
-	static ReadStr(section, entry) {
-		local str := this.GetEntry(&section, &entry)
-		local output := ""
-
-		if str is String
-			return str
-
-		if str is Map && str.Has("__self")
-			output := str.Get("__self")
-
-		if str is Array
-			output := str.ToString("")
-
-		return output
-	}
-
-	static GetEntry(&section, &entry) {
-		if InStr(entry, ".") {
-			local split := StrSplit(entry, ".")
-
-			if !this.localeObj.Has(section)
-				return ""
-
-			local current := this.localeObj[section]
-
-			for index, key in split {
-				if current.HasProp("Has") && current.Has(key) {
-					current := current[key]
-				} else {
-					if this.localeObj.Has(section) && this.localeObj[section].Has(entry)
-						return this.localeObj[section][entry]
-					return ""
-				}
-			}
-
-			return current
-
-		} else if this.localeObj.Has(section) && this.localeObj[section].Has(entry) {
-			return this.localeObj[section][entry]
-		}
-		return ""
-	}
-
-	static ReadNoLinks(entryName, inSection := "") {
-		baseString := this.Read(entryName, inSection)
-		result := baseString
-
-		while (RegExMatch(result, "<a [^>]*>(.*?)</a>", &match)) {
-			linkText := match[1]
-			result := StrReplace(result, match[0], linkText)
-		}
-
-		return result
-	}
-
-	static ReadInject(entryName, strInjections := [], inSection := "", validate := False) {
-		return this.Read(entryName, inSection, validate, , strInjections)
-	}
-
-	static ReadMulti(entryNames*) {
-		output := ""
-
-		for entryName in entryNames {
-			output .= " " this.Read(entryName)
-		}
-
-		return output
-	}
 
 	static Read(entryName, inSection := "", validate := False, &output?, strInjections := []) {
 		intermediate := ""
@@ -206,6 +139,103 @@ Class Locale {
 		}
 	}
 
+
+	static ReadStr(section, entry) {
+		if RegExMatch(entry, "^(.*?\.)?([^.<]*)<([^>]*)>(.*)$", &multiMatch) {
+			local i := 0
+			local starter := multiMatch[1]
+			local firstKey := starter multiMatch[2]
+			local secondKey := starter multiMatch[4]
+			local interKey := multiMatch[3]
+			local outputString := ""
+
+			for each in [firstKey, interKey, secondKey]
+				if each != "" {
+					outputString .= (i > 0 ? " " : "") this.ReadStr(section, each)
+					i++
+				}
+
+			return outputString
+		} else if RegExMatch(entry, "\+", &multiMatch) {
+			local i := 0
+			local split := StrSplit(entry, "+")
+			local outputString := ""
+
+			for each in split
+				if each != "" {
+					outputString .= (i > 0 ? " " : "") this.ReadStr(section, each)
+					i++
+				}
+			return outputString
+		}
+
+		local str := this.GetEntry(&section, &entry)
+		local output := ""
+
+		if str is String
+			return str
+
+		if str is Map && str.Has("__self")
+			output := str.Get("__self")
+
+		if str is Array
+			output := str.ToString("")
+
+		return output
+	}
+
+	static GetEntry(&section, &entry) {
+		if RegExMatch(entry, "[.:]") {
+			local split := RegExSplit(entry, "[.:]")
+
+			if !this.localeObj.Has(section)
+				return ""
+
+			local current := this.localeObj[section]
+
+			for index, key in split {
+				if current.HasProp("Has") && current.Has(key) {
+					current := current[key]
+				} else {
+					if this.localeObj.Has(section) && this.localeObj[section].Has(entry)
+						return this.localeObj[section][entry]
+					return ""
+				}
+			}
+			return current
+
+		} else if this.localeObj.Has(section) && this.localeObj[section].Has(entry) {
+			return this.localeObj[section][entry]
+		}
+		return ""
+	}
+
+
+	static ReadNoLinks(entryName, inSection := "") {
+		baseString := this.Read(entryName, inSection)
+		result := baseString
+
+		while (RegExMatch(result, "<a [^>]*>(.*?)</a>", &match)) {
+			linkText := match[1]
+			result := StrReplace(result, match[0], linkText)
+		}
+
+		return result
+	}
+
+	static ReadInject(entryName, strInjections := [], inSection := "", validate := False) {
+		return this.Read(entryName, inSection, validate, , strInjections)
+	}
+
+	static ReadMulti(entryNames*) {
+		output := ""
+
+		for entryName in entryNames {
+			output .= " " this.Read(entryName)
+		}
+
+		return output
+	}
 	static VariantSelect(str, i) {
 		output := str
 		if (RegExMatch(str, "\$\((.*?)\)", &match)) {

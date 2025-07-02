@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"carian": "Carian"
+		},
 		"generated": {
 			"prefix": { "carian": "Carian" },
 			"tag": { "carian": "carian" }

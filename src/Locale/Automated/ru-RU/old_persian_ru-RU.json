@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"old_persian": "Древнеперсидское письмо"
+		},
 		"generated": {
 			"prefix": { "old_persian": "Древнеперсидск$(ая|ий|ое)" },
 			"tag": { "old_persian": "древнеперсидск$(ая|ий|ое)" }

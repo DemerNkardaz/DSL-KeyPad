@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"math": "Математический ввод"
+		},
 		"digit_0": "{@en-US}",
 		"digit_1": "{@en-US}",
 		"digit_2": "{@en-US}",

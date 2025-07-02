@@ -12,7 +12,7 @@ Class GlyphsPanel {
 		output := []
 
 		for entryName, entry in ChrLib.entries.OwnProps()
-			if ObjOwnPropCount(entry["alterations"]) > 0
+			if entry["alterations"].Count > 0
 				entries.Set(entry["index"], entryName)
 
 		for index, entryName in entries {
@@ -68,7 +68,7 @@ Class GlyphsPanel {
 
 			glyphsColumns := ["key", "view", "entry_title"]
 			for i, each in glyphsColumns
-				glyphsColumns[i] := Locale.Read("col_" each)
+				glyphsColumns[i] := Locale.Read("dictionary." each)
 
 			glyphsLV := glyphsPanel.AddListView(Format("vGlyphsLV w{} h{} x{} y{} +NoSort -Multi", listViewW, listViewH, listViewX, listViewY), glyphsColumns)
 			glyphsLV.OnEvent("ItemFocus", (LV, rowNumber) => this.GVPanelSelect(LV, rowNumber, glyphsPanel, previewsCount))

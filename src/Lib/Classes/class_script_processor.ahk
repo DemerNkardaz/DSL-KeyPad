@@ -1,9 +1,9 @@
-Class InputScriptProcessor {
+Class TelexScriptProcessor {
 	static options := { interceptionInputMode: "" }
 
 	static TelexReturn(&input) {
 		local output := input
-		local sequences := JSON.LoadFile(App.paths.data "\script_processor_sequences.json", "UTF-8")
+		local sequences := JSON.LoadFile(App.paths.data "\telex_script_processor_sequences.json", "UTF-8")
 
 		for key, value in sequences[this.options.interceptionInputMode] {
 			isValid := input == key || InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3)))
@@ -18,7 +18,7 @@ Class InputScriptProcessor {
 	}
 
 	__New(mode := "Tieng Viet", customData?) {
-		this.library := IsSet(customData) ? customData : JSON.LoadFile(App.paths.data "\script_processor_library.json", "UTF-8")
+		this.library := IsSet(customData) ? customData : JSON.LoadFile(App.paths.data "\telex_script_processor_library.json", "UTF-8")
 		this.sequences := Map("Escaped", Map(), "Default", Map())
 		this.tag := StrLower(StrReplace(mode, " ", "_"))
 		this.mode := mode
@@ -30,7 +30,7 @@ Class InputScriptProcessor {
 	}
 
 	Start(reloadHs := False) {
-		local previousMode := InputScriptProcessor.options.interceptionInputMode
+		local previousMode := TelexScriptProcessor.options.interceptionInputMode
 		if previousMode != "" {
 			globalInstances.scriptProcessors[previousMode].Stop()
 			if previousMode = this.mode
@@ -40,9 +40,9 @@ Class InputScriptProcessor {
 		local currentAlt := Scripter.selectedMode.Get("Alternative Modes")
 
 		if currentAlt != "" {
-			local nameTitle := Locale.Read(Scripter.GetData(, currentAlt).locale)
-			local IPSTitle := Locale.Read("script_processor_mode_" this.tag)
-			MsgBox(Locale.ReadInject("script_processor_warning_alt_mode_active", [IPSTitle, nameTitle]), App.Title(), "Icon!")
+			local nameTitle := Locale.Read("script_labels." Scripter.GetData(, currentAlt)["locale"])
+			local TSPTitle := Locale.Read("telex_script_processor.labels." this.tag)
+			MsgBox(Locale.ReadInject("gui.scripter.alternative_mode.warnings.incompatible_with_telex", [TSPTitle, nameTitle]), App.Title(), "Icon!")
 			return
 		}
 
@@ -50,7 +50,7 @@ Class InputScriptProcessor {
 	}
 
 	Stop() {
-		InputScriptProcessor.options.interceptionInputMode := ""
+		TelexScriptProcessor.options.interceptionInputMode := ""
 		this.InH.Stop()
 		this.inputLogger := ""
 		Tooltip()
@@ -180,7 +180,7 @@ Class InputScriptProcessor {
 	}
 
 	SetSequences() {
-		local sequences := JSON.LoadFile(App.paths.data "\script_processor_sequences.json", "UTF-8")
+		local sequences := JSON.LoadFile(App.paths.data "\telex_script_processor_sequences.json", "UTF-8")
 
 		for script, groups in sequences {
 			if script != this.mode
@@ -201,11 +201,11 @@ Class InputScriptProcessor {
 	RegistryHotstrings(reloadHs) {
 		Tooltip()
 
-		InputScriptProcessor.options.interceptionInputMode := reloadHs
+		TelexScriptProcessor.options.interceptionInputMode := reloadHs
 			? this.mode
-			: (this.mode != InputScriptProcessor.options.interceptionInputMode ? this.mode : "")
+			: (this.mode != TelexScriptProcessor.options.interceptionInputMode ? this.mode : "")
 
-		isEnabled := (InputScriptProcessor.options.interceptionInputMode != "" ? True : False)
+		isEnabled := (TelexScriptProcessor.options.interceptionInputMode != "" ? True : False)
 
 		if this.mode != "" {
 			this.InitHook()
@@ -217,7 +217,7 @@ Class InputScriptProcessor {
 
 	blockHandler := 1
 
-	SequenceBridge(IPS, g, k, v) {
+	SequenceBridge(TSP, g, k, v) {
 		this.backspaceLock := True
 		this.blockHandler := g = "Escaped" ? 3 : 1
 
@@ -292,7 +292,7 @@ Class InputScriptProcessor {
 				)
 			) "]"
 
-			if StrLen(input) > 0 && InputScriptProcessor.options.interceptionInputMode != "" {
+			if StrLen(input) > 0 && TelexScriptProcessor.options.interceptionInputMode != "" {
 				if !RegExMatch(input, forbiddenChars) {
 					this.inputLogger .= input
 					this.inputLogger := inputCut(this.inputLogger)
@@ -462,4 +462,4 @@ Class InputScriptProcessor {
 	}
 }
 
-globalInstances.scriptProcessors := Map("Tieng Viet", InputScriptProcessor("Tieng Viet"), "HanYu PinYin", InputScriptProcessor("HanYu PinYin"))
+globalInstances.scriptProcessors := Map("Tieng Viet", TelexScriptProcessor("Tieng Viet"), "HanYu PinYin", TelexScriptProcessor("HanYu PinYin"))

@@ -82,6 +82,7 @@ initialized := False
 #Include <Classes\class_tempature_converter>
 #Include <Classes\class_dev>
 DottedProgressTooltip(4, &triggerEnds := False, 500)
+#Include <Classes\class_ui_character_legend_storage>
 #Include <Classes\class_ui_character_legend>
 #Include <Classes\class_ui_panel>
 #Include <Classes\class_ui_panel_filter>

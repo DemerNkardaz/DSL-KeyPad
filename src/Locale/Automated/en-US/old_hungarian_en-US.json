@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"old_hungarian": "Old Hungarian"
+		},
 		"generated": {
 			"prefix": { "old_hungarian": "Old Hungarian" },
 			"tag": { "old_hungarian": "old hungarian" }

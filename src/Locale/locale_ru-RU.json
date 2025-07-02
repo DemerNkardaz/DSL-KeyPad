@@ -21,21 +21,31 @@
 			"default": "По умолчанию",
 			"delete": "Удалить",
 			"entry": "Запись",
+			"entries": "Записи",
+			"et": "и",
 			"exit": "Выход",
 			"favorites": "Избранное",
 			"file": "Файл",
+			"files": "Файлы",
 			"folder": "Папка",
+			"folders": "Папки",
 			"font": "Шрифт",
+			"fonts": "Шрифты",
 			"help": "Помощь",
 			"hexadecimal": "Шестнадцатеричный",
 			"homepage": "Домашняя страница",
 			"key": "Ключ",
+			"keys": "Ключи",
 			"language": "Язык",
 			"languages": "Языки",
 			"letters": "Буквы",
+			"mod": "Модификация",
 			"mods": "Модификации",
 			"name": "Имя",
 			"names": "Имена",
+			"page": "Страница",
+			"pages": "Страницы",
+			"press": "Нажмите",
 			"recipe": "Рецепт",
 			"recipes": "Рецепты",
 			"reload": "Перезапустить",
@@ -55,8 +65,14 @@
 			"titles": "Названия",
 			"transcription": "Транскрипция",
 			"unknown": "Неизвестно",
+			"value": "Значение",
+			"values": "Значения",
 			"version": "Версия",
 			"view": "Вид"
+		},
+		"dynamic_dictionary": {
+			"page_of": "Страница {}/{}",
+			"press": "Нажмите {}"
 		},
 		"first_launch": {
 			"message": [
@@ -138,8 +154,27 @@
 				"all": "{@default:misc.white_chess_king} Все символы",
 				"favorites": "{@default:misc.circled_white_start} {@:dictionary.favorites}"
 			},
+			"scripter": {
+				"pages_help": "(F1–F12 — выбрать страницу)",
+				"alternative_mode": {
+					"__self": "Альтернативный режим",
+					"warnings": {
+						"incompatible_with_telex": "Невозможно активировать альтернативный режим «{}», пока ативен {@default:TELEX}-подобный режим «{}»."
+					}
+				},
+				"glyph_variations": {
+					"__self": "Вариации глифа",
+					"gui_title": "Панель вариаций глифов"
+				}
+			},
 			"legend": {
-				"__self": "Легенда"
+				"__self": "Легенда",
+				"description_unavailable": "Описание недоступно",
+				"name_variations": "Варианты названий",
+				"authors": {
+					"__self":"{@:dictionary.authors}:",
+					"default": "Низвестно"
+				}
 			},
 			"mods": {
 				"__self": "Модификации"
@@ -215,6 +250,44 @@
 					]
 				}
 			}
-		}
+		},
+		"telex_script_processor": {
+			"__self": "{@default:TELEX}-подобный процессор ввода",
+			"labels": {
+				"tieng_viet": "{@:telex_script_processor.labels.vietnamese<dictionary.et>jorai}",
+				"hanyu_pinyin": "{@:telex_script_processor.labels.chinese_romanization}",
+				"vietnamese": "Вьетнамский",
+				"jorai": "Джарайский",
+				"chinese_romanization": "Ханьюй Пиньинь"
+			},
+			"warnings": {
+				"incompatible_with_alternative_modes": "Невозможно активировать {@default:TELEX}-подобный режим «{}», пока активен альтернативный режим «{}»."
+			}
+		},
+		"script_labels": {
+			"glyph_variations": {
+				"combining": "Комбинируемые знаки",
+				"superscript": "Надстрочные знаки и модификаторы",
+				"subscript": "Подстрочные знаки",
+				"italic": "Курсивные знаки",
+				"bold": "Полужирные знаки",
+				"italic_bold": "Полужирные курсивные знаки",
+				"sans_serif": "Знаки без засечек",
+				"sans_serif_italic": "Курсивные знаки без засечек",
+				"sans_serif_bold": "Полужирные знаки без засечек",
+				"sans_serif_italic_bold": "Полужирные курсивные знаки без засечек",
+				"monospace": "Моноширинные знаки",
+				"fullwidth": "Полноширинные знаки",
+				"small_capital": "Капители",
+				"fraktur": "«Fraktur» знаки",
+				"fraktur_bold": "«Fraktur» полужирные знаки",
+				"script": "Рукописные знаки",
+				"script_bold": "Рукописные полужирные знаки",
+				"double_struck": "«Double-Struck» знаки",
+				"double_struck_italic": "«Double-Struck» курсивные знаки",
+				"uncombined": "Некомбинируемые знаки"
+			}
+		},
+		"html": "HTML-Код/Мнемоника"
 	}
 }

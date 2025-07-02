@@ -1,5 +1,11 @@
 {
 	"en-US": {
+		"script_labels": {
+			"shavian": {
+				"__self": "Shavian Phomenatic Alphabet",
+				"short": "Shavian"
+			}
+		},
 		"generated": {
 			"prefix": { "shavian": "Shavian" },
 			"tag": { "shavian": "shavian" }

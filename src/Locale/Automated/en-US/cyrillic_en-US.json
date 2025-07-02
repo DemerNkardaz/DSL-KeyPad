@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"cyrillic": "Cyrillic"
+		},
 		"scripts": {
 			"cyrillic": {
 				"c_let_yus_little": { "letter_locale": "little Yus" },

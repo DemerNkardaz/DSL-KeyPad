@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"ugaritic": "Угаритское письмо"
+		},
 		"generated": {
 			"prefix": { "ugaritic": "Угаритск$(ая|ий|ое)" },
 			"tag": { "ugaritic": "угаритск$(ая|ий|ое)" }

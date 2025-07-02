@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"math": "Math"
+		},
 		"digit_0": "0",
 		"digit_1": "1",
 		"digit_2": "2",

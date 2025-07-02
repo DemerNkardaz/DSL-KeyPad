@@ -5,7 +5,7 @@ Class LocaleGenerator {
 		local pfx := "generated."
 
 		local useLetterLocale := entry["options"]["useLetterLocale"]
-		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "_" entry["symbol"]["scriptAdditive"] : ""
+		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "." entry["symbol"]["scriptAdditive"] : ""
 
 		local cyrillicTasgScriptAtStart := False
 
@@ -213,7 +213,7 @@ Class LocaleGenerator {
 					local aLScript := Locale.VariantSelect(Locale.Read(pfx "tag." curScript, lang), lVariant)
 					local aScriptAdditive := Locale.VariantSelect(Locale.Read(pfx "tag." curScript "." tagAdd["scriptAdditive"], lang), lVariant)
 					local aLType := Locale.VariantSelect(Locale.Read(pfx "type." curType, lang), lVariant)
-					local lBuildedName := StrLower(curScript "_n_" curType "_" letter "_" tagAdd["scriptAdditive"] "_" tagAdd["letter"]) ".letter_locale"
+					local lBuildedName := StrLower("scripts." curScript ".n_" curType "_" letter "_" tagAdd["scriptAdditive"] "_" tagAdd["letter"]) ".letter_locale"
 
 					additionalTags.Push(
 						aLScript

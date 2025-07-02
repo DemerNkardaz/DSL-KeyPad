@@ -1,5 +1,8 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"tifinagh": "Тифинаг"
+		},
 		"generated": {
 			"prefix": { "tifinagh": "Тифинагск$(ая|ий|ое)" },
 			"tag": { "tifinagh": "тифинагск$(ая|ий|ое)" }

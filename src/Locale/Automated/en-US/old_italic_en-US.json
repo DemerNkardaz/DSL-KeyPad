@@ -1,21 +1,28 @@
 {
 	"en-US": {
+		"script_labels": {
+			"old_italic": "Old Italic"
+		},
 		"generated": {
 			"prefix": {
-				"old_italic": "Old italic",
-				"old_italic_etruscan": "Etruscan",
-				"old_italic_umbrian": "Umbrian",
-				"old_italic_oscan": "Oscan",
-				"old_italic_sabine": "South Picene",
-				"old_italic_north": "North Italic"
+				"old_italic": {
+					"__self": "Old italic",
+					"etruscan": "Etruscan",
+					"umbrian": "Umbrian",
+					"oscan": "Oscan",
+					"sabine": "South Picene",
+					"north": "North Italic"
+				}
 			},
 			"tag": {
-				"old_italic": "old italic",
-				"old_italic_etruscan": "etruscan",
-				"old_italic_umbrian": "umbrian",
-				"old_italic_oscan": "oscan",
-				"old_italic_sabine": "south picene",
-				"old_italic_north": "north italic"
+				"old_italic": {
+					"__self": "old italic",
+					"etruscan": "etruscan",
+					"umbrian": "umbrian",
+					"oscan": "oscan",
+					"sabine": "south picene",
+					"north": "north italic"
+				}
 			}
 		},
 		"scripts": {

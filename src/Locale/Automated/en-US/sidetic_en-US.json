@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"sidetic": "Sidetic"
+		},
 		"generated": {
 			"prefix": { "sidetic": "Sidetic" },
 			"tag": { "sidetic": "sidetic" }

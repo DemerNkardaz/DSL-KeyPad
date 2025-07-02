@@ -1,5 +1,8 @@
 {
 	"en-US": {
+		"script_labels": {
+			"old_persian": "Old Persian"
+		},
 		"generated": {
 			"prefix": { "old_persian": "Old Persian" },
 			"tag": { "old_persian": "old persian" }

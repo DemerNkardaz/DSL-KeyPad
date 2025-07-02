@@ -1,5 +1,11 @@
 {
 	"en-US": {
+		"script_labels": {
+			"upa": {
+				"__self": "Uralic Phonetic Alphabet",
+				"short": "UPA"
+			}
+		},
 		"scripts": {
 			"latin": {
 				"s_let_s_voiced_laryngeal_spirant": {

@@ -28,7 +28,7 @@ Class ChrEntry {
 					"referenceLocale", "",
 					"useSelfPrefixesOnReferenceLocale", True,
 					"localeCombineAnd", False,
-					"legend", "",
+					"legend", False,
 					"altLayoutKey", "",
 					"showOnAlt", "",
 					"altSpecialKey", "",
