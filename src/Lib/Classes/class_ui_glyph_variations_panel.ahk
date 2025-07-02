@@ -129,7 +129,7 @@ Class GlyphsPanel {
 			}
 		}
 
-		if IsGuiOpen(this.title) {
+		if WinExist(this.title) {
 			WinActivate(this.title)
 
 			if preselectEntry != "" {

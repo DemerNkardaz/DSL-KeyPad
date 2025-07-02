@@ -1271,7 +1271,7 @@ Class Panel {
 		}
 
 		if redraw {
-			IsGuiOpen(this.panelTitle) && ReConstructor()
+			WinExist(this.panelTitle) && ReConstructor()
 
 			ReConstructor() {
 				this.panelTitle := title
@@ -1531,7 +1531,7 @@ Class Panel {
 		}
 
 
-		if IsGuiOpen(this.panelTitle) && !redraw {
+		if WinExist(this.panelTitle) && !redraw {
 			WinActivate(this.panelTitle)
 		} else {
 			this.PanelGUI := Constructor()

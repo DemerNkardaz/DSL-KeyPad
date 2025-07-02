@@ -146,12 +146,12 @@ Class Cfg {
 			layoutLatinSelector := optionsPanel.AddDropDownList("vLatinLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(23)), layoutist.latin)
 			PostMessage(0x0153, -1, 15, layoutLatinSelector)
 			layoutLatinSelector.Text := Cfg.Get("Layout_Latin")
-			layoutLatinSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
+			layoutLatinSelector.OnEvent("Change", (CB, Zero) => KbdBinder.SetLayout(CB.Text))
 
 			layoutCyrillicSelector := optionsPanel.AddDropDownList("vCyrillicLayout x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(23 * 2)), layoutist.cyrillic)
 			PostMessage(0x0153, -1, 15, layoutCyrillicSelector)
 			layoutCyrillicSelector.Text := Cfg.Get("Layout_Cyrillic")
-			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetLayout(CB.Text))
+			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KbdBinder.SetLayout(CB.Text))
 
 			layoutUpdate := optionsPanel.AddButton("vLayoutUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(23) - 1))
 			GuiButtonIcon(layoutUpdate, ImageRes, 229)
@@ -172,7 +172,7 @@ Class Cfg {
 			bindingsSelector := optionsPanel.AddDropDownList("vBindings x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(32 * 3)), bindingsList)
 			PostMessage(0x0153, -1, 15, bindingsSelector)
 			bindingsSelector.Text := currentBindings
-			bindingsSelector.OnEvent("Change", (CB, Zero) => KeyboardBinder.SetBinds(CB.Text))
+			bindingsSelector.OnEvent("Change", (CB, Zero) => KbdBinder.SetBinds(CB.Text))
 
 			bindingsUpdate := optionsPanel.AddButton("vBindingsUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(32 * 3) - 1))
 			GuiButtonIcon(bindingsUpdate, ImageRes, 229)
@@ -344,11 +344,11 @@ Class Cfg {
 					}
 				}
 				Cfg.Set(remapping, "Layout_Remapping", , "bool")
-				KeyboardBinder.RebuilBinds()
+				KbdBinder.RebuilBinds()
 			}
 
 			OpenRecipesPanel() {
-				if IsGuiOpen(this.EditorSubGUIs.recipesTitle) {
+				if WinExist(this.EditorSubGUIs.recipesTitle) {
 					WinActivate(this.EditorSubGUIs.recipesTitle)
 				} else {
 					this.EditorSubGUIs.recipes := this.SubGUIs("Recipes")
@@ -358,7 +358,7 @@ Class Cfg {
 		}
 
 
-		if IsGuiOpen(this.optionsTitle) {
+		if WinExist(this.optionsTitle) {
 			WinActivate(this.optionsTitle)
 		} else {
 			this.EditorGUI := Constructor()
@@ -381,7 +381,7 @@ Class Cfg {
 			xPos := xPos = 0 ? (screenWidth - windowWidth) / 2 : xPos
 			yPos := yPos = 0 ? screenHeight - windowHeight - 92 : yPos
 
-			if IsGuiOpen(this.optionsTitle) && WinActive(this.optionsTitle) {
+			if WinExist(this.optionsTitle) && WinActive(this.optionsTitle) {
 				WinGetPos(&optx, &opty, &optw, &opth)
 
 				xPos := xPos - optw
@@ -700,7 +700,7 @@ Class Options {
 			}
 		}
 
-		KeyboardBinder.RebuilBinds()
+		KbdBinder.RebuilBinds()
 	}
 
 	static SetLocalisedOption(title, options, entry) {

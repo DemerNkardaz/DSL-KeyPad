@@ -360,7 +360,7 @@ Class ChrLegend {
 		}
 
 
-		if IsGuiOpen(this.title) {
+		if WinExist(this.title) {
 			WinActivate(this.title)
 		} else {
 			this.panelGUI := Constructor()
@@ -375,7 +375,7 @@ Class ChrLegend {
 		if preselectEntry = ""
 			TV.Focus()
 
-		if IsGuiOpen(this.title) && preselectEntry != "" {
+		if WinExist(this.title) && preselectEntry != "" {
 		}
 
 
@@ -409,7 +409,7 @@ Class ChrLegend {
 		if !item
 			return
 
-		if IsGuiOpen(this.title) {
+		if WinExist(this.title) {
 			selectedLabel := TV.GetText(item)
 
 			if nameToEntry.Has(selectedLabel) && nameToEntry.GetRef(&selectedLabel, &entryName) != "" {

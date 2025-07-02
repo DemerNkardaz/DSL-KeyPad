@@ -79,7 +79,7 @@ Class FavoriteChars {
 		LVContent := Panel.LV_Content
 		star := " " Chr(0x2605)
 		prefixes := ["Smelting", "FastKeys", "SecondKeys", "TertiaryKeys", "Glago", "TELEX/VNI", "AllSymbols", "Favorites"]
-		isPanelOpened := IsGuiOpen(Panel.panelTitle)
+		isPanelOpened := WinExist(Panel.panelTitle)
 
 		isUpdated := False
 

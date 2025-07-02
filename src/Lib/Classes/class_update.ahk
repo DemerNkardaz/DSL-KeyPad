@@ -286,13 +286,13 @@ Class Changelog {
 			return changelogPanel
 		}
 
-		if IsGuiOpen(this.panelTitle) {
+		if WinExist(this.panelTitle) {
 			WinActivate(this.panelTitle)
 		} else {
 			this.PanelGUI := Constructor()
 			this.PanelGUI.Show()
 
-			IsGuiOpen(this.panelTitle) && PostConstructor()
+			WinExist(this.panelTitle) && PostConstructor()
 		}
 
 		PostConstructor() {

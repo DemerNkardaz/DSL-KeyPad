@@ -85,7 +85,7 @@ Class Scripter {
 		local hotkeys := Map()
 		local keys := keyCodes.Clone()
 		local keysLen := keys.Length
-		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
+		KbdBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 
 		Loop keysLen
 			keys.Push("", "")
@@ -261,7 +261,7 @@ Class Scripter {
 
 		local altMode := this.selectedMode.Get(selectorType)
 
-		KeyboardBinder.RebuilBinds(, altMode != "")
+		KbdBinder.RebuilBinds(, altMode != "")
 
 		WarningISP(name, currentISP, selectorType) {
 			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
@@ -280,9 +280,9 @@ Class Scripter {
 		if !useRemap && currentMode != "Hellenic" && Keyboard.activeLanguage != "el-GR"
 			Suspend(1)
 		else if Keyboard.activeLanguage = "el-GR" && currentMode != "Hellenic"
-			KeyboardBinder.Registration(BindList.Get("Hellenic", "Script Specified"), True, True)
+			KbdBinder.Registration(BindList.Get("Hellenic", "Script Specified"), True, True)
 		else if useRemap && currentMode != "Hellenic"
-			KeyboardBinder.Registration(BindList.Get("Keyboard Default"), True, True)
+			KbdBinder.Registration(BindList.Get("Keyboard Default"), True, True)
 
 		local fKeys := ""
 		Loop 12
@@ -297,7 +297,7 @@ Class Scripter {
 			if !WinExist(this.selectorTitle.Get(selectorType)) {
 				IH.Stop()
 				this.isScripterWaiting := False
-				if !(KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser)
+				if !(KbdBinder.disabledByMonitor || KbdBinder.disabledByUser)
 					Suspend(0)
 				SetTimer(WaitCheckGUI, -0)
 				Exit

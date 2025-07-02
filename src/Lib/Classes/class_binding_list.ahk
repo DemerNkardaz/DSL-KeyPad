@@ -2,7 +2,7 @@ Class BindList {
 	mapping := Map()
 
 	__New(mapping := Map(), modMapping := Map()) {
-		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
+		KbdBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 		local useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
 
 		this.mapping := mapping.Clone()
@@ -108,7 +108,7 @@ Class BindList {
 			&& mapping[fromSub].Has(bindingsName)
 			&& mapping[fromSub][bindingsName].Has("ForceSingle")
 			&& mapping[fromSub][bindingsName].Get("ForceSingle")) {
-			layout := KeyboardBinder.GetCurrentLayoutMap()
+			layout := KbdBinder.GetCurrentLayoutMap()
 
 			for scanCode, keyNamesArray in layout {
 				if keyNamesArray.Length = 2 {

@@ -244,26 +244,16 @@ Class Util {
 	}
 
 	static StrSelToUnicode(mode := "") {
-		local backupClipboard := ClipboardAll()
-		A_Clipboard := ""
+		Clip.CopySelected(&text, , "Backup")
 
-		Send("{Shift Down}{Delete}{Shift Up}")
-		ClipWait(0.5, 1)
-		local promptValue := A_Clipboard
-		A_Clipboard := ""
-
-		if promptValue != "" {
-			local output := this.StrToUnicode(promptValue, mode)
-
-
-			A_Clipboard := output
-			ClipWait(0.250, 1)
-			Send("{Shift Down}{Insert}{Shift Up}")
+		if text = "" {
+			Clip.Release(1)
+			return
 		}
 
-		Sleep 500
-		A_Clipboard := backupClipboard
-		Send("{Blind}{Ctrl Up}")
+		text := this.StrToUnicode(text, mode)
+
+		Clip.Send(&text, , , "Release")
 		return
 	}
 
@@ -311,52 +301,34 @@ Class Util {
 	}
 
 	static StrSelToConvert(mode := "", ignoreDefaultSymbols := False, reverse := False) {
-		local backupClipboard := ClipboardAll()
-		A_Clipboard := ""
+		Clip.CopySelected(&text, , "Backup")
 
-		Send("{Shift Down}{Delete}{Shift Up}")
-		ClipWait(0.5, 1)
-		local promptValue := A_Clipboard
-		A_Clipboard := ""
-
-		if promptValue != "" {
-			local output := this.StrToHTML(promptValue, ignoreDefaultSymbols, mode, reverse)
-
-			A_Clipboard := output
-			ClipWait(0.250, 1)
-			Send("{Shift Down}{Insert}{Shift Up}")
+		if text = "" {
+			Clip.Release(1)
+			return
 		}
 
-		Sleep 500
-		A_Clipboard := backupClipboard
-		Send("{Blind}{Ctrl Up}")
+		text := this.StrToHTML(text, ignoreDefaultSymbols, mode, reverse)
+
+		Clip.Send(&text, , , "Release")
 		return
 	}
 
 	static URLEncoder(action := "encode") {
-		local backupClipboard := ClipboardAll()
-		A_Clipboard := ""
+		Clip.CopySelected(&text, , "Backup")
 
-		Send("{Shift Down}{Delete}{Shift Up}")
-		ClipWait(0.5, 1)
-		local promptValue := A_Clipboard
-		A_Clipboard := ""
-
-		if promptValue != "" {
-			local output := action = "encode" ? this.UrlEscape(promptValue) : this.UrlUnescape(promptValue)
-
-			A_Clipboard := output
-			ClipWait(0.250, 1)
-			Send("{Shift Down}{Insert}{Shift Up}")
+		if text = "" {
+			Clip.Release(1)
+			return
 		}
 
-		Sleep 500
-		A_Clipboard := backupClipboard
-		Send("{Blind}{Ctrl Up}")
+		text := action = "encode" ? this.UrlEscape(&text) : this.UrlUnescape(&text)
+
+		Clip.Send(&text, , , "Release")
 		return
 	}
 
-	static UrlEscape(Url, Flags := 0x000C3000) {
+	static UrlEscape(&Url, Flags := 0x000C3000) {
 		; * Code of Escape/Unescape taken from https://www.autohotkey.com/boards/viewtopic.php?p=554647&sid=83cf90bcab788e19e2aacfaa0e9e57e3#p554647
 		; * by william_ahk
 		Local CC := 4096, Esc := "", Result := ""
@@ -368,7 +340,7 @@ Class Util {
 		Return Esc
 	}
 
-	static UrlUnescape(Url, Flags := 0x00140000) {
+	static UrlUnescape(&Url, Flags := 0x00140000) {
 		Return !DllCall("Shlwapi.dll\UrlUnescape", "Ptr", StrPtr(Url), "Ptr", 0, "UInt", 0, "UInt", Flags, "UInt") ? Url : ""
 	}
 

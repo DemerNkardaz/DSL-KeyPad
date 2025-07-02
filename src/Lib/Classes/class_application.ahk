@@ -255,12 +255,12 @@ Class App {
 		; App.tray.Add(labels.pause, (*) => Suspend(-1))
 		App.tray.Add()
 
-		if KeyboardBinder.disabledByMonitor || KeyboardBinder.disabledByUser {
-			App.tray.Add(labels.enableBinds (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
+		if KbdBinder.disabledByMonitor || KbdBinder.disabledByUser {
+			App.tray.Add(labels.enableBinds (*) => KbdBinder.MonitorToggler(KbdBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
 			App.tray.SetIcon(labels.enableBinds, App.icoDLL, App.indexIcos["disabled"])
 		} else {
 
-			App.tray.Add(labels.disableBinds, (*) => KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
+			App.tray.Add(labels.disableBinds, (*) => KbdBinder.MonitorToggler(KbdBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
 			App.tray.SetIcon(labels.disableBinds, App.icoDLL, App.indexIcos["disabled"])
 		}
 

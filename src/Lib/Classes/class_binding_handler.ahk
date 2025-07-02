@@ -165,7 +165,7 @@ Class BindHandler {
 
 
 		Util.StrBind(combo, &keyRef, &modRef, &rulRef)
-		layoutMap := KeyboardBinder.GetCurrentLayoutMap()
+		layoutMap := KbdBinder.GetCurrentLayoutMap()
 		keyRefScanCode := ""
 
 		for scanCode, keyNamesArray in layoutMap {

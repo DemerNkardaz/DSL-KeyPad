@@ -27,7 +27,7 @@ Class Clip {
 		return
 	}
 
-	static CopySelected(&text := "", wait := 0.5, actions := "") {
+	static CopySelected(&text := "", wait := 0.5, actions := "", keys := ["Shift", "Delete"]) {
 		if GetKeyState("Alt", "P")
 			Send("{Alt Up}")
 
@@ -35,15 +35,18 @@ Class Clip {
 			this.Backup()
 		A_Clipboard := ""
 
-		Send("{Shift Down}{Delete}{Shift Up}")
+		Send("{" keys[1] " Down}{" keys[2] "}{" keys[1] " Up}")
 		ClipWait(wait, 1)
 
 		text := A_Clipboard
 		A_Clipboard := ""
+
+		if InStr(actions, "Release")
+			this.Release()
 		return
 	}
 
-	static Send(&text := "", endText := "", wait := 0.5, actions := "") {
+	static Send(&text := "", endText := "", wait := 0.5, actions := "", keys := ["Shift", "Insert"]) {
 		if GetKeyState("Alt", "P")
 			Send("{Alt Up}")
 
@@ -53,7 +56,7 @@ Class Clip {
 		if text != "" {
 			A_Clipboard := text endText
 			ClipWait(wait, 1)
-			Send("{Shift Down}{Insert}{Shift Up}")
+			Send("{" keys[1] " Down}{" keys[2] "}{" keys[1] " Up}")
 		}
 
 		if InStr(actions, "Release")

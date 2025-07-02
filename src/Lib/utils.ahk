@@ -353,55 +353,6 @@ MapMerge(MapObjects*) {
 	return tempMap
 }
 
-ClipSendProcessed(callback, noSendRestore := False, isClipReverted := True, untilRevert := 300) {
-	if isClipReverted
-		prevClip := ClipboardAll()
-
-	A_Clipboard := ""
-	ClipWait(1)
-	Send("{Shift Down}{Delete}{Shift Up}")
-	ClipWait(1)
-
-	copyBackup := A_Clipboard
-
-	if A_Clipboard != "" {
-		A_Clipboard := callback(A_Clipboard)
-	}
-
-	if !noSendRestore {
-		Send("{Shift Down}{Insert}{Shift Up}")
-
-		if isClipReverted
-			SetTimer(() => A_Clipboard := prevClip, -untilRevert)
-	} else {
-		SendText(copyBackup)
-	}
-	return
-}
-
-CodesToAHK(filePath, outputFilePath := "funcOut") {
-	fullPath := A_ScriptDir "\UtilityFiles\" filePath ".txt"
-	outputFilePath := A_ScriptDir "\UtilityFiles\" outputFilePath ".ahk"
-
-
-	local fileContent := FileRead(fullPath, "UTF-8")
-
-	FileAppend("funcOut := [`n", outputFilePath, "UTF-8")
-
-	for line in StrSplit(fileContent, "`n") {
-		RegExMatch(line, '^(.+)\t(.+)', &match)
-		local entityCode := Format("0x{1}", match[1])
-		local entityName := InStr(filePath, "alt") ? match[2] : "&" match[2] ";"
-
-		local outString := "`tChr(" entityCode "), `"" entityName "`",`n"
-		FileAppend(outString, outputFilePath, "UTF-8")
-	}
-
-	FileAppend("]", outputFilePath, "UTF-8")
-
-	fileContent := FileRead(fullPath, "UTF-8")
-	return
-}
 
 Chrs(chrCodes*) {
 	local output := ""
@@ -440,10 +391,6 @@ GetKeyScanCode() {
 ContainsEmoji(StringInput) {
 	static emojisPattern := "[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F900}-\x{1F9FF}\x{2700}-\x{27BF}\x{1F1E6}-\x{1F1FF}]"
 	return RegExMatch(StringInput, emojisPattern)
-}
-
-IsGuiOpen(title) {
-	return WinExist(title) != 0
 }
 
 Range(start, end, step := 1) {

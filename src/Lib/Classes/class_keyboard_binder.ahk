@@ -1,4 +1,4 @@
-Class KeyboardBinder {
+Class KbdBinder {
 	static modifiers := [
 		"!", "<!", ">!",
 		"+", "<+", ">+",
@@ -110,7 +110,7 @@ Class KeyboardBinder {
 	}
 
 	static TrayIconSwitch() {
-		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
+		KbdBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 		Keyboard.CheckLayout(&lang)
 
 		if lang != "" && Language.supported[lang].parent != ""
@@ -258,7 +258,7 @@ Class KeyboardBinder {
 		static matchRu := "(?!.*[a-zA-Z" enExt "])[а-яА-ЯёЁ" ruExt "]+"
 		static matchEn := "(?!.*[а-яА-ЯёЁ" ruExt "])[a-zA-Z" enExt "]+"
 		static metchEl := "[" hellenicRange "]+"
-		KeyboardBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
+		KbdBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 		layout := this.GetCurrentLayoutMap()
 		output := Map()
 		restrictKeys := []

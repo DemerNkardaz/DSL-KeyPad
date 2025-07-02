@@ -245,7 +245,7 @@ Class MyRecipes {
 								Util.StrFormattedReduce(this.FormatResult(data.result, , True), 20),
 								data.section
 							)
-						} else if IsGuiOpen(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
+						} else if WinExist(Cfg.EditorSubGUIs.recipesTitle) && data.row = 0 {
 							if this.Check(data.section) {
 								MsgBox(Locale.ReadInject("gui.recipes.warnings.exists", [data.section]), App.Title("+status+version"))
 								return
@@ -294,7 +294,7 @@ Class MyRecipes {
 			}
 		}
 
-		if IsGuiOpen(this.editorTitle) {
+		if WinExist(this.editorTitle) {
 			WinActivate(this.editorTitle)
 		} else {
 			this.EditorGUI := Constructor()

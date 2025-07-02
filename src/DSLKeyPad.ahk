@@ -110,7 +110,7 @@ ShowEntryPreview() {
 <^>^Home:: ShowEntryPreview()
 
 #SuspendExempt
->^F10:: KeyboardBinder.MonitorToggler(KeyboardBinder.disabledByUser = !False ? True : False, "User", "Monitor")
+>^F10:: KbdBinder.MonitorToggler(KbdBinder.disabledByUser = !False ? True : False, "User", "Monitor")
 #SuspendExempt False
 
 <^>+Esc:: ExitApp

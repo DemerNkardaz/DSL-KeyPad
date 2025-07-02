@@ -13,23 +13,14 @@ Class UnicodeWebResource {
 		"SymblCC", "https://symbl.cc/${language}/${Prompt}",
 	)
 
-	__New(useType := "Clipboard", prompt := "") {
+	__New(useType := "Clipboard", text := "") {
 		if useType = "Clipboard" {
-			clipboardBk := ClipboardAll()
-			A_Clipboard := ""
-
-			Send("{Control Down}{Insert}{Control Up}")
-			ClipWait(0.25, 1)
-
-			clipContent := A_Clipboard
-			prompt := Util.ChrToUnicode(clipContent)
-
-			Sleep 100
-			A_Clipboard := clipboardBk
+			Clip.CopySelected(&text, 0.25, "Backup & Release", ["Control", "Insert"])
+			text := Util.ChrToUnicode(text)
 		}
 
-		if prompt != "" {
-			codeURL := UnicodeWebResource.CodeHandler(prompt)
+		if text != "" {
+			local codeURL := UnicodeWebResource.CodeHandler(text)
 			Run(codeURL)
 		}
 	}
