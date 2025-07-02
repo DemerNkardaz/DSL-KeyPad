@@ -363,7 +363,7 @@ Class ChrCrafter {
 	SendOutput(&output) {
 		output := Auxiliary.inputMode = "Unicode" ? RegExReplace(output, "\#\#", "") : output
 		if StrLen(output) > 20
-			ClipSend(output)
+			Clip.Send(&output, , , "Backup & Release")
 		else
 			SendText(output)
 	}

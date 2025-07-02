@@ -58,8 +58,9 @@ Class Search {
 			}
 
 			resultObj.prompt := searchQuery
-			local lineBreaks := resultObj.result ~= "`n" || resultObj.result ~= "`r"
-			resultObj.send := (*) => (StrLen(resultObj.result) > 20 || lineBreaks) ? ClipSend(resultObj.result) : SendText(resultObj.result)
+			local result := resultObj.result
+			local lineBreaks := result ~= "`n" || result ~= "`r"
+			resultObj.send := (*) => (StrLen(result) > 20 || lineBreaks) ? Clip.Send(&result, , , "Backup & Release") : SendText(result)
 
 			if StrLen(resultObj.result) > 0 {
 				Cfg.Set(searchQuery, "Search", "LatestPrompts")

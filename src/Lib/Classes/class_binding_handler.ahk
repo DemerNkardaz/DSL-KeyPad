@@ -53,7 +53,7 @@ Class BindHandler {
 				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : ""
 
 			if StrLen(output) > 4 || lineBreaks
-				ClipSend(output)
+				Clip.Send(&output, , , "Backup & Release")
 			else
 				Send%inputType%(output)
 		} else {

@@ -8,8 +8,20 @@
 			GREPTypographyReg(this.dictionariesPaths)
 			return
 		}
-
 		static SetStyles(extraRules*) {
+			Keyboard.CheckLayout(&lang)
+			if !GREPTypography.dictionaries.Has(lang)
+				return
+			else {
+				local text := ""
+				Clip.CopySelected(&text, , "Backup")
+				if text != ""
+					GREPTypography(&text, &extraRules, &lang)
+				Clip.Send(&text, , , "Release")
+			}
+			return
+		}
+		static SetStyles2(extraRules*) {
 			Keyboard.CheckLayout(&lang)
 			if !GREPTypography.dictionaries.Has(lang)
 				return

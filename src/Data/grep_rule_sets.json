@@ -26,15 +26,15 @@
 			"(?<=\\d)\\s(?=\\d{3})", "%ChrLib.Get('no_break_space')%"
 		],
 		"4::Тире": [
-			"(?<=%GREP.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'no_break_space')%",
-			"(?<!%GREP.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'space')%"
+			"(?<=%GREPTypography.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'no_break_space')%",
+			"(?<!%GREPTypography.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'space')%"
 		],
 		"5::Союзы": [
 			"i)\\s(б|бы|ж|же|ли|ль)(?![а-яА-Я])", "%ChrLib.Get('no_break_space')%$1",
 			"i)\\s(за|из|до|об|на|но|не|ни|то|от|по|со|или|для|над|под|при|что|если|через|после|перед)\\s", "%ChrLib.Get('space')%$1%ChrLib.Get('no_break_space')%"
 		],
 		"6::Конец абзаца": [
-			"(?<=[а-яА-ЯёЁa-zA-Z])\\s(?=[а-яА-ЯёЁa-zA-Z]{1,12}%GREP.punctuation%*$)", "%ChrLib.Get('no_break_space')%"
+			"(?<=[а-яА-ЯёЁa-zA-Z])\\s(?=[а-яА-ЯёЁa-zA-Z]{1,12}%GREPTypography.punctuation%*$)", "%ChrLib.Get('no_break_space')%"
 		]
 	},
 	"ru-RU::Paragraphs": {

@@ -34,11 +34,12 @@ initialized := False
 ; Dynamically loads mods pasted into \Mods\ directory
 #Include *i Mods\injector_pre_init.ahk
 
-DottedProgressTooltip(4, &triggerEnds := False)
-#Include <Classes\class_util>
-#Include <Classes\class_config>
 #Include <Classes\class_progress_bar>
 #Include <Classes\class_progress_tooltip>
+
+#Include <Classes\class_clip>
+#Include <Classes\class_util>
+#Include <Classes\class_config>
 #Include <Classes\class_variable_parser>
 #Include <Classes\class_scripter_store>
 #Include <Classes\class_scripter>
@@ -53,7 +54,6 @@ DottedProgressTooltip(4, &triggerEnds := False)
 #Include <Classes\class_keyboard>
 #Include <Classes\class_locale>
 #Include <Classes\class_locale_generator>
-triggerEnds := True
 #Include <Classes\class_update>
 #Include <Classes\class_fonts>
 #Include <Classes\class_character_entity>
@@ -71,12 +71,8 @@ triggerEnds := True
 
 #Include <Classes\class_user_defined_recipes>
 #Include <Classes\class_character_recipe_handler>
-#Include <Classes\class_auxiliary>
 #Include <Classes\class_keyboard_binder>
-#Include <Classes\class_ui_character_legend>
-#Include <Classes\class_ui_panel>
-#Include <Classes\class_ui_panel_filter>
-#Include <Classes\class_ui_mods>
+#Include <Classes\class_auxiliary>
 #Include <Classes\class_ui_glyph_variations_panel>
 #Include <Classes\class_key_event>
 #Include <Classes\class_text_handlers>
@@ -86,6 +82,12 @@ triggerEnds := True
 #Include <Classes\class_hotstrings_latex>
 #Include <Classes\class_tempature_converter>
 #Include <Classes\class_dev>
+DottedProgressTooltip(4, &triggerEnds := False, 500)
+#Include <Classes\class_ui_character_legend>
+#Include <Classes\class_ui_panel>
+#Include <Classes\class_ui_panel_filter>
+#Include <Classes\class_ui_mods>
+triggerEnds := True
 initialized := True
 
 ChrLib.CountOfUpdate()
