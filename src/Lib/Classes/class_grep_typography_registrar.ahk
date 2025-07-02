@@ -1,5 +1,5 @@
 Class GREPTypographyReg {
-	__New(paths := GREPTypography.dictionariesPaths) {
+	__New(paths*) {
 		local data := Map()
 		local dataToMerge := Map()
 

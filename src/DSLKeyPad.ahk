@@ -19,7 +19,6 @@ A_MaxHotkeysPerInterval := 50
 initialized := False
 
 #Include <External\JSON>
-#Include <External\function_clip_send>
 #Include <External\function_gui_button_icon>
 
 #Include <utils>

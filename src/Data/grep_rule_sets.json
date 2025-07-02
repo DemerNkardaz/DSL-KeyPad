@@ -1,45 +1,49 @@
 {
 	"ru-RU": {
 		"0::Разное": [
+			"\\s\\s", " ",
+			"^\\s|\\s$", "",
 			"\\-\\-", "%ChrLib.Get('emdash')%",
-			"(\\d+)\\-(\\d+)", "$1%ChrLib.Get('endash')%$2",
+			"(\\d+|[XIVCMLDZ]+)\\-(\\d+|[XIVCMLDZ]+)", "$1%ChrLib.Get('endash')%$2",
 			"(?<!\\d)\\-(\\d+)", "%ChrLib.Get('minus')%$1",
+			"(\\d+)\\s\\%", "$1%",
 			"([-%ChrLib.Get('minus')%])(\\d+)[%ChrLib.Get('endash')%|\\-](\\d+)", "$1$2%ChrLib.Get('ellipsis')%$3",
 			"\\.\\.\\.", "%ChrLib.Get('ellipsis')%",
-			"\"\"(.*)\"\"", "«„$1“»",
+			"\"\"(.*)\"\"", "„«$1“»",
 			"\"(.*)\"", "«$1»",
-			"\\.»", "».",
 			"((\\!|\\?)((\\.\\.\\.)|%ChrLib.Get('ellipsis')%)|((\\.\\.\\.)|%ChrLib.Get('ellipsis')%)(\\!|\\?))", "$2$7..",
-			"(?<!\\s)\\s(?=%GREPTypography.punctuation%|[\\)\\]])", "",
-			"(?<=[«„\\(\\[])[ \\t]+", "",
-			"\\s\\s", " "
+			"(?<=[%GREPTypography.punctuation.leftSided%«„\\(\\[])\\s+|(?<!\\s)\\s(?=[%GREPTypography.punctuation.rightSided%»“’\\)\\]])", "",
+			"\\.»", "».",
+			"(?<!\\d\\s)([%ChrLib.GetByPrefix('wallet')%])\\s(\\d{1,3}(?:\\d{3})*(?:,\\d+)?|\\d+(?:,\\d+)?)", "$2%ChrLib.Get('no_break_space')%$1",
+			"(\\d+)\\s([%ChrLib.GetByPrefix('wallet')%])", "$1%ChrLib.Get('no_break_space')%$2"
 		],
-		"1::Одиночные буквы": [
+		"1::Тире": [
+			"^(%ChrLib.Get('emdash')%)\\s", "$1%ChrLib.Get('no_break_space')%",
+			"(?<=[%GREPTypography.punctuation.rightSided%])\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'no_break_space')%",
+			"(?<![%GREPTypography.punctuation.rightSided%])\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'space')%"
+		],
+		"2::Одиночные буквы": [
 			"(?<![а-яА-ЯёЁa-zA-Z])([а-яА-ЯёЁa-zA-Z])\\s", "$1%ChrLib.Get('no_break_space')%"
 		],
-		"2::Инициалы": [
+		"3::Инициалы": [
 			"([A-ZА-ЯЁ]\\.)\\s([A-ZА-ЯЁ]\\.)\\s([A-ZА-ЯЁ][a-zа-яё]+)", "$1%ChrLib.Get('thinspace')%$2%ChrLib.Get('thinspace')%$3",
 			"([A-ZА-ЯЁ][a-zа-яё]+)\\s([A-ZА-Яё]\\.)\\s([A-ZА-ЯЁ]\\.)", "$1%ChrLib.Get('thinspace')%$2%ChrLib.Get('thinspace')%$3"
 		],
-		"3::Цифры": [
-			"(?<=\\d)(?=(\\d{3})+(?!\\d))", "%ChrLib.Get('no_break_space')%",
+		"4::Цифры": [
+			"(?<=\\d)(?=(\\d{3})+(?=[.,]))", "%ChrLib.Get('no_break_space')%",
 			"(?<=\\d)\\s(?=\\d{3})", "%ChrLib.Get('no_break_space')%"
 		],
-		"4::Тире": [
-			"(?<=%GREPTypography.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'no_break_space')%",
-			"(?<!%GREPTypography.punctuation%)\\s%ChrLib.Get('emdash')%\\s", "%ChrLib.Gets('no_break_space', 'emdash', 'space')%"
-		],
-		"5::Союзы": [
+		"5::Союзы и прочее": [
 			"i)\\s(б|бы|ж|же|ли|ль)(?![а-яА-Я])", "%ChrLib.Get('no_break_space')%$1",
-			"i)\\s(за|из|до|об|на|но|не|ни|то|от|по|со|или|для|над|под|при|что|если|через|после|перед)\\s", "%ChrLib.Get('space')%$1%ChrLib.Get('no_break_space')%"
+			"i)\\s(за|из|до|об|на|но|не|ни|то|от|по|со|или|для|над|под|при|что|если|через|после|перед|г.|обл.|кр.|ст.|пос.|с.|д.|ул.|пер.|пр.|пр-т.|просп.|пл.|бул.|б-р.|наб.|ш.|туп.|оф.|кв.|комн.|под.|мкр.|уч.|вл.|влад.|стр.|корп.|литер|эт.|пгт.|стр.|гл.|рис.|илл.|ст.|п.|c.|№|§|АО|ОАО|ЗАО|ООО|ПАО)\\s", "%ChrLib.Get('space')%$1%ChrLib.Get('no_break_space')%"
 		],
 		"6::Конец абзаца": [
-			"(?<=[а-яА-ЯёЁa-zA-Z])\\s(?=[а-яА-ЯёЁa-zA-Z]{1,12}%GREPTypography.punctuation%*$)", "%ChrLib.Get('no_break_space')%"
+			"(?<=[а-яА-ЯёЁa-zA-Z])\\s(?=[а-яА-ЯёЁa-zA-Z]{1,12}[%GREPTypography.punctuation.rightSided%]*$)", "%ChrLib.Get('no_break_space')%"
 		]
 	},
 	"ru-RU::Paragraphs": {
 		"начало абзаца": [
-			"^%ChrLib.Get('emdash')%\\s+", "%ChrLib.Gets('emdash', 'ensp')%",
+			"^(%ChrLib.Get('emdash')%)[\\s%ChrLib.Get('no_break_space')%]+", "$1%ChrLib.Get('ensp')%",
 			"^(?=.)(?!%ChrLib.Get('emsp')%)", "%ChrLib.Get('emsp')%"
 		]
 	},

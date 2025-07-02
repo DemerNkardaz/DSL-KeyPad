@@ -46,14 +46,6 @@ Class Cfg {
 			"Num_Space_Type", "narrow_no_break_space",
 			"Deg_Space_Type", "thinspace",
 		],
-		"CustomRules", [
-			"Paragraph_Beginning", "",
-			"Paragraph_After_Start_Emdash", "",
-			"GREP_Dialog_Attribution", "",
-			"GREP_ThisEmdash", "",
-			"GREP_Initials", "",
-			"GREP_Initials", "",
-		],
 		"LatestPrompts", [
 			"LaTeX", "",
 			"Unicode", "",

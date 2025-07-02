@@ -352,6 +352,16 @@ Class ChrLib {
 		return
 	}
 
+	static GetByPrefix(prefix, extraRules := False, getMode := "Unicode", alt := Scripter.selectedMode.Get("Glyph Variations")) {
+		local output := ""
+
+		for entryName, entyr in this.entries.OwnProps()
+			if entryName ~= "^(" prefix ")"
+				output .= this.Get(entryName, extraRules, getMode, alt)
+
+		return output
+	}
+
 	static Gets(entryNames*) {
 		local output := ""
 		local indexMap := Map()
