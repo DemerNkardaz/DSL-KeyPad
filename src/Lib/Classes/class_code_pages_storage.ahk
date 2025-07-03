@@ -27,12 +27,21 @@ Class CodePagesStore {
 				this.pages.Push(page)
 		}
 
-		if fileExist(this.dumpPath)
+		if FileExist(this.dumpPath)
 			this.storedData := JSON.LoadFile(this.dumpPath, "UTF-8")
 		else
-			this.FillDictionary(),
-				JSON.DumpFile(this.storedData, this.dumpPath, , "UTF-8")
+			this.FillAndDump()
 
+		local keys := this.storedData.Keys()
+		if keys.Length != this.pages.Length
+			this.FillAndDump()
+
+		return
+	}
+
+	static FillAndDump() {
+		this.FillDictionary()
+		JSON.DumpFile(this.storedData, this.dumpPath, , "UTF-8")
 		return
 	}
 

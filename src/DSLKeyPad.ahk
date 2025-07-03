@@ -1,15 +1,15 @@
-/* ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
- * ▓ Creator: Yalla Nkardaz (Ялла Нкардаз де Тудерий) aka Demer Nkardaz
- * ▓ Title:   DSL KeyPad (Diacritics-Spaces-Letters KeyPad)
- * ▓ Version: 0.1.2
- * ▓ Description: Multilingual input tool for typing languages based on
- *                Latin & Cyrillic scripts, special characters, and historical
- *                scripts (Old Turkic, Permic, Hungarian, Italic, Runic,
- *                Phoenician, Glagolitic, etc.).
- * ▓ Repository: https://github.com/DemerNkardaz/DSL-KeyPad
- * ▓ License:    MIT
- * ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-*/
+/** ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+ *  ▓ @author Yalla Nkardaz (Ялла Нкардаз де Тудерий) aka Demer Nkardaz @DemerNkardaz
+ *  ▓ Title:   DSL KeyPad (Diacritics-Spaces-Letters KeyPad)
+ *  ▓ Version: 0.1.2
+ *  ▓ Description: Multilingual input tool for typing languages based on
+ *                 Latin & Cyrillic scripts, special characters, and historical
+ *                 scripts (Old Turkic, Permic, Hungarian, Italic, Runic,
+ *                 Phoenician, Glagolitic, etc.).
+ *  ▓ Repository: {@link https://github.com/DemerNkardaz/DSL-KeyPad}
+ *  ▓ License:    {@license MIT}
+ *  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+ **/
 
 #SingleInstance Force
 SetKeyDelay(0, 50)

@@ -15,6 +15,7 @@ Class App {
 	static paths := {
 		dir: A_ScriptDir,
 		data: A_ScriptDir "\Data",
+		dumps: A_ScriptDir "\Data\Dumps",
 		lib: A_ScriptDir "\Lib",
 		sidProc: A_ScriptDir "\Lib\SideProcesses",
 		pwsh: A_ScriptDir "\Lib\powershell",

@@ -1,23 +1,8 @@
 Class Util {
-	static ShellFunc(str, arg) {
-		local funcRef := StrSplit(str[1], ".")
-		local interRef := ""
-		local objRef := ""
-
-		for i, ref in funcRef {
-			if i = 1 {
-				interRef := %ref%
-				objRef := interRef
-			} else if i < funcRef.Length {
-				interRef := interRef.%ref%
-				objRef := interRef
-			} else {
-				local method := ref
-				interRef := interRef.%method%
-				interRef.Call(objRef, arg)
-			}
-		}
-
+	static ClearDumps() {
+		Loop Files, App.paths.dumps "\*.*", "FR"
+			if (A_LoopFileName ~= "i)dump_.*\.json$")
+				FileDelete(A_LoopFileFullPath)
 		return
 	}
 

@@ -55,7 +55,7 @@ Class ChrCrafter {
 		favoriteSuggestions := (
 			favoriteSuggestions != "" ? (
 				"`n" Chrs([0x2E3B, 10]) "`n"
-				Chr(0x272A) " " Locale.Read("feature_favorites") "`n"
+				Chr(0x272A) " " Locale.Read("dictionary.favorites") "`n"
 				RegExReplace(favoriteSuggestions, ",\s+$", "") "`n"
 				Chrs([0x2E3B, 10])
 			) : ""

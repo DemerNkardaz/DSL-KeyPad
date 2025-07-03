@@ -52,7 +52,7 @@ Class BindHandler {
 			if StrLen(inputType) == 0
 				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : ""
 
-			Event.Trigger("on_chr", "send", combo, &output, &inputType)
+			Event.Trigger("on_chr", "send", &output, &combo, &inputType)
 
 			if StrLen(output) > 4 || lineBreaks
 				Clip.Send(&output, , , "Backup & Release")
@@ -68,7 +68,7 @@ Class BindHandler {
 	static CapsSend(combo := "", charactersPair := [], reverse := False) {
 		capsOn := reverse ? !GetKeyState("CapsLock", "T") : GetKeyState("CapsLock", "T")
 		this.Send(combo, charactersPair.Length > 1 ? charactersPair[capsOn ? 1 : 2] : charactersPair[1])
-		Event.Trigger("on_chr", "caps_send", combo, &charactersPair, &capsOn)
+		Event.Trigger("on_chr", "caps_send", &charactersPair, &capsOn, &combo)
 		return
 	}
 
@@ -83,6 +83,7 @@ Class BindHandler {
 
 		if Language.Validate(lang, "bindings") {
 			if charactersMap.Has(lang) {
+				Event.Trigger("on_chr", "lang_send", &charactersMap, &lang, &combo)
 				if charactersMap[lang] is Array && charactersMap[lang].Length == 2 {
 					this.CapsSend(combo, charactersMap[lang], reverse[lang])
 				} else {
@@ -90,7 +91,6 @@ Class BindHandler {
 				}
 			}
 		}
-		Event.Trigger("on_chr", "lang_send", combo, &charactersMap, &lang)
 		return
 	}
 
@@ -113,10 +113,10 @@ Class BindHandler {
 		}
 
 		if Language.Validate(lang, "bindings")
-			if commandsMap.Has(lang)
+			if commandsMap.Has(lang) {
+				Event.Trigger("on_chr", "lang_call", &commandsMap, &lang)
 				commandsMap[lang]()
-
-		Event.Trigger("on_chr", "lang_call", &commandsMap, &lang)
+			}
 		return
 	}
 
@@ -214,7 +214,7 @@ Class BindHandler {
 		}
 
 		this.waitTimeSend := False
-		Event.Trigger("on_chr", "time_send", combo, &keyRef, &modRef, &rulRef)
+		Event.Trigger("on_chr", "time_send", &combo, &keyRef, &modRef, &rulRef)
 		return
 	}
 
@@ -226,7 +226,7 @@ Class BindHandler {
 			arrowKeys ? "{" keyRef "}" :
 			("{Blind}" modRef (StrLen(keyRef) > 1 ? "{" keyRef "}" : keyRef))
 		)
-		Event.Trigger("on_chr", "default_send", combo, &keyRef, &modRef, &rulRef)
+		Event.Trigger("on_chr", "default_send", &combo, &keyRef, &modRef, &rulRef)
 		return
 	}
 }
