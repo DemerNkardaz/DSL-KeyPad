@@ -44,12 +44,6 @@ initialized := False
 #Include <Classes\class_side_process>
 #Include <Classes\class_config>
 #Include <Classes\class_variable_parser>
-#Include <Classes\class_scripter_store>
-#Include <Classes\class_scripter>
-#Include <Classes\class_keyboard_layout>
-#Include <Classes\class_keyboard_layout_registrar>
-#Include <Classes\class_keyboard_layout_user_defined>
-#Include <Classes\class_keyboard_monitor>
 #Include <Classes\class_character_block>
 #Include <Classes\class_unicode_web_resource>
 #Include <Classes\class_search>
@@ -57,30 +51,40 @@ initialized := False
 #Include <Classes\class_tray_menu>
 ; Currently has no logic to run
 ; SideProcess.StartDynamic("support", , App.Title("+status+version") "``n" Locale.Read("side_process.support"), App.icoDLL, App.indexIcos["support"], App.PID)
-#Include <Classes\class_keyboard_binder>
 TrayMenu.SetTrayItems()
 #Include <Classes\class_language>
 #Include <Classes\class_keyboard>
 #Include <Classes\class_locale>
 #Include <Classes\class_locale_generator>
-#Include <Classes\class_update>
-#Include <Classes\class_fonts>
+#Include <Classes\class_character_recipe_handler>
 #Include <Classes\class_character_entity>
 #Include <Classes\class_character_inserter>
 #Include <Classes\class_character_registrar>
 #Include <Classes\class_character_library>
 #Include <Classes\class_character_crafter>
+#Include <Classes\class_update>
+#Include <Classes\class_fonts>
 #Include <Classes\class_script_processor>
 #Include <Classes\class_functional_bindings_storage>
+#Include <Classes\class_favorites>
+#Include <Classes\class_user_defined_recipes>
+#Include <Classes\class_auxiliary>
+#Include <Classes\class_text_handlers>
+#Include <Classes\class_grep_typography>
+#Include <Classes\class_grep_typography_registrar>
+
+#Include <Classes\class_keyboard_binder>
 #Include <Classes\class_binding_registrar>
 #Include <Classes\class_binding_user_defined>
 #Include <Classes\class_binding_handler>
 #Include <Classes\class_binding_list>
-#Include <Classes\class_favorites>
+#Include <Classes\class_scripter_store>
+#Include <Classes\class_scripter>
+#Include <Classes\class_keyboard_layout>
+#Include <Classes\class_keyboard_layout_registrar>
+#Include <Classes\class_keyboard_layout_user_defined>
+#Include <Classes\class_keyboard_monitor>
 
-#Include <Classes\class_user_defined_recipes>
-#Include <Classes\class_character_recipe_handler>
-#Include <Classes\class_auxiliary>
 #Include <Classes\class_ui_glyph_variations_panel>
 #Include <Classes\class_ui_character_legend_storage>
 #Include <Classes\class_ui_character_legend>
@@ -88,9 +92,6 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_ui_panel_filter>
 #Include <Classes\class_ui_mods>
 #Include <Classes\class_key_event>
-#Include <Classes\class_text_handlers>
-#Include <Classes\class_grep_typography>
-#Include <Classes\class_grep_typography_registrar>
 #Include <Classes\class_long_press>
 #Include <Classes\class_hotstrings_latex>
 #Include <Classes\class_tempature_converter>

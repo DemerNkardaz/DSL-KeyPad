@@ -176,7 +176,7 @@ Class ChrReg {
 					}
 				}
 
-				SetTimer(setProgress, 250, 0)
+				SetTimer(setProgress, 25, 0)
 			}
 
 			Loop rawEntries.Length // 2 {
