@@ -203,9 +203,9 @@ Class Util {
 	}
 
 	static CheckEntity(input, &entity := "") {
-		for j, entity in characters.supplementaryData["HTML Named Entities"] {
-			if (Mod(j, 2) = 1 && entity = input) {
-				entity := characters.supplementaryData["HTML Named Entities"][j + 1]
+		for char, htmlCode in characters.supplementaryData["HTML Named Entities"] {
+			if (char == input) {
+				entity := htmlCode
 				return entity
 			}
 		}
@@ -278,10 +278,9 @@ Class Util {
 			} else {
 				if InStr(mode, "Entities") {
 					local found := false
-					for j, entity in characters.supplementaryData["HTML Named Entities"] {
-						if (Mod(j, 2) = 1 && entity = symbol) {
-							output .= characters.supplementaryData["HTML Named Entities"][j + 1]
-							entity .= characters.supplementaryData["HTML Named Entities"][j + 1]
+					for char, htmlCode in characters.supplementaryData["HTML Named Entities"] {
+						if (char == symbol) {
+							output .= htmlCode
 							found := true
 							break
 						}

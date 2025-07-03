@@ -3,16 +3,16 @@ Class LaTeXHotstrings {
 	static __New() {
 		local stance := Cfg.Get("LaTeX_Hotstrings", , True, "bool")
 
-		for i, char in characters.supplementaryData["LaTeX Commands"] {
-			if Mod(i, 2) = 1 {
-				local code := characters.supplementaryData["LaTeX Commands"][i + 1]
-				if code is Array {
-					for each in code
+		for char, code in characters.supplementaryData["LaTeX Commands"] {
+			if code is Array {
+				for each in code
+					if each is Array {
+						for sub in each
+							this.collection.Set(sub, char)
+					} else
 						this.collection.Set(each, char)
-				} else
-					this.collection.Set(code, char)
-				code := unset
-			}
+			} else
+				this.collection.Set(code, char)
 		}
 
 		for entryName, entry in ChrLib.entries.OwnProps() {

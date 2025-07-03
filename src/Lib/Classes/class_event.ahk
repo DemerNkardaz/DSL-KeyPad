@@ -30,7 +30,6 @@ Class Event {
 		return
 	}
 
-
 	static OnEvent(eventName, label, action) {
 		if !this.eventListeners.Has(eventName)
 			throw "Event '" eventName "' does not exist."
@@ -39,7 +38,7 @@ Class Event {
 		return
 	}
 
-	static Trigger(eventName, label, args*) {
+	static Trigger2(eventName, label, args*) {
 		if this.eventListeners[eventName][label].Length > 0
 			for action in this.eventListeners[eventName][label] {
 				try {
@@ -50,17 +49,47 @@ Class Event {
 			}
 		return
 	}
+
+	static Trigger(eventName, label, args*) {
+		if this.eventListeners[eventName][label].Length > 0
+			for action in this.eventListeners[eventName][label] {
+				try {
+					local maxParams := this.GetFunctionMaxParams(action)
+
+					local trimmedArgs := []
+					local argCount := Min(args.Length, maxParams)
+
+					Loop argCount {
+						trimmedArgs.Push(args[A_Index])
+					}
+
+					action.Call(trimmedArgs*)
+				} catch as e {
+					MsgBox("Error in event handler for " eventName " - " label ": " e.Message)
+				}
+			}
+		return
+	}
+
+	static GetFunctionMaxParams(function) {
+		if function.HasProp("MaxParams")
+			return function.MaxParams
+
+		if function.HasProp("MinParams")
+			return function.MinParams + 5
+
+		return 10
+	}
 }
 
 ; Event.OnEvent("on_chr", "send", (combo, &output, &inputType) => (
-; 	; Example handler for character sending
 ; 	Tooltip("Character sent: " combo "`nOutput: " output "`nInput Type: " inputType),
 ; 	output = "Ă" && output := "Ắ"
 ; ))
 
-; Event.OnEvent("chr_reg", "starts", (rawEntries, typeOfInit, *) => (
+; Event.OnEvent("chr_lib", "starts_reg", (rawEntries, typeOfInit) => (
 ; 	MsgBox("Character registration starts!`n" typeOfInit "`n`n" rawEntries[1]),
 ; 	rawEntries[1] = "acute" && rawEntries.InsertAt(1, "acute_modified", rawEntries[2])
 ; ))
-; Event.OnEvent("chr_reg", "ends", (*) => (MsgBox("Character registration ends!`n")))
+; Event.OnEvent("chr_lib", "ends_reg", (*) => (MsgBox("Character registration ends!`n")))
 ; Event.OnEvent("app_class", "initialized", (*) => (MsgBox("Application initialized!")))

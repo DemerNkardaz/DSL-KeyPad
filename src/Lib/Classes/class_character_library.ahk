@@ -5,6 +5,7 @@ Class ChrLib {
 	static entryCategories := Map()
 	static entryRecipes := Map()
 	static entryTags := Map()
+	static dumpPath := App.paths.temp "\characters_dump.json"
 	static duplicatesList := []
 	static lastIndexAdded := -1
 	static countOf := {
@@ -50,6 +51,9 @@ Class ChrLib {
 
 	static __New() {
 		ChrReg(characters.data)
+
+		; if !characters.data.Has("isDump")
+		; 	JSON.DumpFile(this.dumpPath, "UTF-8")
 
 		if ChrLib.duplicatesList.Length > 0
 			TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")

@@ -116,9 +116,18 @@ mods := Map()
 globalInstances := { MainGUI: {}, crafter: {} }
 
 dataDir := A_ScriptDir "\Data"
+dataDumps := A_ScriptDir "\Data\Dumps"
+if !DirExist(dataDumps)
+	DirCreate(dataDumps)
+dataTemp := A_Temp "\DSLKeyPad"
 
 characters := {
-	data: ArrayMerge(JSON.LoadFile(dataDir "\characters.json", "UTF-8")["entries"], GeneratedEntries()),
-	supplementaryData: JSON.LoadFile(dataDir "\supplementary.json", "UTF-8"),
-	blocksData: JSON.LoadFile(App.paths.data "\character_blocks.json", "UTF-8")
+	data: ArrayMerge(JSON.LoadFile(App.paths.data "\characters.json", "UTF-8")["entries"], GeneratedEntries()),
+	; dataDump: FileExist(dataTemp "\characters_dump.json") ? JSON.LoadFile(dataTemp "\characters_dump.json", "UTF-8") : Map(),
+	supplementaryData: JSON.LoadFile(App.paths.data "\supplementary.json", "UTF-8"),
+	blocksData: JSON.LoadFile(App.paths.data "\character_blocks.json", "UTF-8"),
+	fontAssignation: JSON.LoadFile(App.paths.data "\font_assignation.json", "UTF-8"),
 }
+
+; if characters.dataDump.Count > 0 && characters.data.Length // 2 != characters.dataDump.Count
+; 	characters.data := characters.dataDump.MergeWith(Map("isDump", True))

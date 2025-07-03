@@ -60,4 +60,12 @@ Class PorgressBar {
 		this.data.typeOfInit := ""
 		return
 	}
+
+	Destroy() {
+		if WinExist(this.data.progressBarTitle) {
+			this.GUI.Destroy()
+			this.SetProgressBarZero()
+		}
+		return
+	}
 }

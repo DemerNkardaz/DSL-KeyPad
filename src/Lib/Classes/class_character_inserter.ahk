@@ -56,37 +56,23 @@ Class CharacterInserter {
 		return str
 	}
 
-	static regionalPages := {
-		generic: Map(
-			"en-US", 850,
-			"ru-RU", 866,
-			"el-GR", 737,
-			"vi-VN", 1258,
-		),
-		atZero: Map(
-			"en-US", 1252,
-			"ru-RU", 1251,
-			"el-GR", 1253,
-			"vi-VN", 1258,
-		),
-	}
-
 	static Altcode(charCode) {
 		local hasZero := charCode ~= "^0"
 
-		if !(StrLen(charCode) > 1 && hasZero) && this.HexToDec(charCode) < 32 && characters.supplementaryData["Alt Codes"].HasValue(charCode, &i)
-			return characters.supplementaryData["Alt Codes"][i + 1]
+		if !(StrLen(charCode) > 1 && hasZero) && this.HexToDec(charCode) < 32 && characters.supplementaryData["Alt Codes Reversed"].Has("" charCode)
+			return characters.supplementaryData["Alt Codes Reversed"]["" charCode]
 
+		local chars := ""
 		Keyboard.CheckLayout(&lang)
 
 		codePage := (
 			StrLen(charCode) > 1 && hasZero
-				? (this.regionalPages.atZero.Has(lang)
-					? this.regionalPages.atZero.Get(lang)
+				? (CodePagesStore.regionalPages.atZero.Has(lang)
+					? CodePagesStore.regionalPages.atZero.Get(lang)
 					: 1252)
 			: this.HexToDec(charCode) >= 128
-				? (this.regionalPages.generic.Has(lang)
-					? this.regionalPages.generic.Get(lang)
+				? (CodePagesStore.regionalPages.generic.Has(lang)
+					? CodePagesStore.regionalPages.generic.Get(lang)
 					: 850)
 			: 437
 		)
@@ -97,26 +83,6 @@ Class CharacterInserter {
 		chars := StrGet(bytes, 1, "CP" codePage)
 
 		return chars
-	}
-
-	static GetAltcode(char, page := 437) {
-		if StrLen(char) = 0
-			return -1
-
-		try {
-			Loop 256 {
-				b := A_Index - 1
-				buf := Buffer(1)
-				NumPut("UChar", b, buf)
-				result := StrGet(buf, 1, "CP" page)
-				if result = char
-					return b
-			}
-		} catch {
-			return -1
-		}
-
-		return -1
 	}
 
 	static Unicode(charCode) {

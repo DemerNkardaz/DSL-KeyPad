@@ -1,5 +1,5 @@
 Class ChrReg {
-	__New(rawEntries, typeOfInit := "Internal", preventProgressGUI := False) {
+	__New(rawEntries, typeOfInit := "Internal", preventProgressGUI := False, defaultLib := False) {
 		Event.Trigger("chr_lib", "starts_reg", rawEntries, typeOfInit, preventProgressGUI)
 
 		this.AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI)
@@ -7,7 +7,7 @@ Class ChrReg {
 		return Event.Trigger("chr_lib", "ends_reg")
 	}
 
-	AddEntry(&entryName, &entry, &progress, &instances) {
+	AddEntry(&entryName, &entry, &progress, &instances, &isDump?) {
 		if !IsSet(entry)
 			return
 
@@ -126,19 +126,24 @@ Class ChrReg {
 		} else {
 			ChrLib.entries.%entryName% := Map()
 			ChrLib.entriesSource.%entryName% := entry
-			this.EntryPreProcessing(&entryName, &entry, &instances)
+			if IsSet(isDump) && isDump {
+				this.ProcessDump(&entryName, &entry)
 
-			this.TransferProperties(&entryName, &entry)
+				this.TransferProperties(&entryName, &entry)
+			} else {
+				this.EntryPreProcessing(&entryName, &entry, &instances)
 
-			ChrLib.entries.%entryName%["index"] := ++ChrLib.lastIndexAdded
+				this.TransferProperties(&entryName, &entry)
 
-			local libEntry := ChrLib.entries.%entryName%
-			this.EntryPostProcessing(&entryName, &libEntry, &instances)
+				ChrLib.entries.%entryName%["index"] := ++ChrLib.lastIndexAdded
 
-			if progress {
-				progress.data.progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
-				progress.data.progressBarCurrent++
-				progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
+				local libEntry := ChrLib.entries.%entryName%
+				this.EntryPostProcessing(&entryName, &libEntry, &instances)
+				if progress {
+					progress.data.progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
+					progress.data.progressBarCurrent++
+					progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
+				}
 			}
 			entry := unset
 		}
@@ -155,6 +160,7 @@ Class ChrReg {
 
 		if Keyboard.blockedForReload
 			return
+
 
 		if rawEntries is Array && rawEntries.Length >= 2 {
 			if progress {
@@ -184,16 +190,33 @@ Class ChrReg {
 			}
 
 			this.Aftermath(&instances)
-			rawEntries := unset
-			typeOfInit := unset
-			instances := unset
 
 			if progress {
 				Sleep 500
 				progress.GUI.Destroy()
 				progress.SetProgressBarZero()
 			}
+		} else if rawEntries is Map && rawEntries.Has("isDump") {
+			rawEntries.Delete("isDump")
+			if progress {
+				progress.data.maxCountOfEntries := rawEntries.Count
+				ChrLib.lastIndexAdded := rawEntries.Count - 1
+				SetTimer(setProgress, 250, 0)
+			}
+
+			for entryName, entryValue in rawEntries {
+				this.AddEntry(&entryName, &entryValue, &progress, &instances, &isDump := True)
+				if progress {
+					progress.data.progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
+					progress.data.progressBarCurrent++
+					progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
+				}
+			}
+			progress.Destroy()
 		}
+		rawEntries := unset
+		typeOfInit := unset
+		instances := unset
 
 		if progress
 			SetTimer(setProgress, -0)
@@ -201,6 +224,49 @@ Class ChrReg {
 		setProgress := unset
 		return
 	}
+
+	ProcessDump(&entryName, &entry) {
+		for each in entry["groups"] {
+			if !ChrLib.entryGroups.Has(each)
+				ChrLib.entryGroups.Set(each, [])
+
+			if !ChrLib.entryGroups.Get(each).HasValue(entryName)
+				ChrLib.entryGroups[each].Push(entryName)
+		}
+
+		if !ChrLib.entryCategories.Has(entry["symbol"]["category"])
+			ChrLib.entryCategories.Set(entry["symbol"]["category"], [])
+
+		if !ChrLib.entryCategories.Get(entry["symbol"]["category"]).HasValue(entryName)
+			ChrLib.entryCategories[entry["symbol"]["category"]].Push(entryName)
+
+		if entry["tags"].Length > 0 {
+			for tag in entry["tags"] {
+				if !ChrLib.entryTags.Has(tag)
+					ChrLib.entryTags.Set(tag, [])
+
+				ChrLib.entryTags[tag].Push(entryName)
+			}
+		}
+
+		if entry["recipe"].Length > 0 {
+			for recipe in entry["recipe"] {
+				if !ChrLib.entryRecipes.Has(recipe) {
+					ChrLib.entryRecipes.Set(
+						recipe, {
+							chr: Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"]),
+							index: entry["index"],
+							name: entryName
+						})
+				} else {
+					ChrLib.duplicatesList.Push(recipe)
+				}
+			}
+		}
+
+		return
+	}
+
 
 	ProcessProperties(&targetEntry, &sourceEntry, &index) {
 		for reference in ["recipe", "tags", "groups"] {
@@ -601,82 +667,11 @@ Class ChrReg {
 		local character := Util.UnicodeToChar(entry["unicode"])
 		local characterSequence := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
 
-		for alteration, value in entry["alterations"] {
-			if !InStr(alteration, "Entity") {
-				local entity := Util.CheckEntity(Util.UnicodeToChar(value))
-				if entity
-					entry["alterations"][alteration "Entity"] := entity
-				entity := unset
-			}
-		}
 
-		if entry["altCode"] = "" {
-			local generic := CharacterInserter.regionalPages.generic.Values()
-			local atZero := CharacterInserter.regionalPages.atZero.Values()
-			local pages := ArrayMerge([437], generic, atZero)
-			local altOutput := []
+		this.EntryPostProcessing__Alterations(&entryName, &entry)
+		this.EntryPostProcessing__AltCodes(&entryName, &entry, &character)
+		this.EntryPostProcessing__Sequence(&entryName, &entry, &character)
 
-			for i, page in pages {
-				local code := CharacterInserter.GetAltcode(character, page)
-
-				if code is Number && code <= 255 && code >= 0 && !altOutput.HasValue(code) {
-					altOutput.Push((page >= 1251 ? "0" : "") code)
-					entry["altCodePages"].Push(page)
-				} else if altOutput.HasValue(code) {
-					entry["altCodePages"].Push(page)
-				}
-
-				code := unset
-			}
-
-			entry["altCode"] := altOutput.ToString()
-
-			if entry["altCode"] = "" {
-				Loop characters.supplementaryData["Alt Codes"].Length // 2 {
-					local i := A_Index * 2 - 1
-					local num := characters.supplementaryData["Alt Codes"][i + 1]
-					local sym := characters.supplementaryData["Alt Codes"][i]
-
-					if sym = character {
-						entry["altCode"] := num
-						entry["altCodePages"] := [437]
-						break
-					}
-					i := unset
-					num := unset
-					sym := unset
-				}
-			}
-
-			pages := unset
-			generic := unset
-			atZero := unset
-			altOutput := unset
-		}
-
-		if entry["sequence"].Length > 1 {
-			for sequenceChr in entry["sequence"] {
-				entry["entity"] .= Util.StrToHTML(Util.UnicodeToChar(sequenceChr), "Entities")
-			}
-		} else {
-			for i, entitySymbol in characters.supplementaryData["HTML Named Entities"] {
-				if Mod(i, 2) = 1 {
-					local entityCode := characters.supplementaryData["HTML Named Entities"][i + 1]
-
-					if character == entitySymbol {
-						entry["entity"] := entityCode
-						break
-					}
-
-					entityCode := unset
-				}
-			}
-		}
-
-		entry["symbol"]["set"] := characterSequence
-
-		if entry["groups"].Length = 0
-			entry["groups"] := ["Default Group"]
 
 		for key, value in entry["options"] {
 			if key ~= "i)^telex__" && value != "" {
@@ -698,6 +693,80 @@ Class ChrReg {
 			}
 		}
 
+		this.EntryPostProcessing__Customs(&entryName, &entry, &characterSequence)
+		this.EntryPostProcessing__Fonts(&entryName, &entry)
+		this.EntryPostProcessing__Categories(&entryName, &entry)
+		this.EntryPostProcessing__Notation(&entryName, &entry)
+		this.EntryPostProcessing__Recipes(&entryName, &entry)
+		this.EntryPostProcessing__LaTeX(&entryName, &entry, &instances, &character)
+
+
+		ChrLib.entries.%entryName% := entry
+		return
+	}
+
+	EntryPostProcessing__Alterations(&entryName, &entry) {
+		for alteration, value in entry["alterations"] {
+			if !InStr(alteration, "Entity") {
+				local entity := Util.CheckEntity(Util.UnicodeToChar(value))
+				if entity
+					entry["alterations"][alteration "Entity"] := entity
+			}
+		}
+		return
+	}
+
+	EntryPostProcessing__AltCodes(&entryName, &entry, &character) {
+		if entry["altCode"] = "" {
+			local altOutput := []
+
+			for i, page in CodePagesStore.pages {
+				local code := Number(CodePagesStore.GetAltCode(character, page))
+
+
+				if code is Number && code <= 255 && code >= 0 && !altOutput.HasValue(code) {
+					altOutput.Push((page >= 1251 ? "0" : "") code)
+					entry["altCodePages"].Push(page)
+				} else if altOutput.HasValue(code) {
+					entry["altCodePages"].Push(page)
+				}
+			}
+
+			entry["altCode"] := altOutput.ToString()
+
+			if entry["altCode"] = "" {
+				for char, code in characters.supplementaryData["Alt Codes"] {
+					if char = character {
+						entry["altCode"] := code
+						entry["altCodePages"] := [437]
+						break
+					}
+				}
+			}
+		}
+		return
+	}
+
+	EntryPostProcessing__Sequence(&entryName, &entry, &character) {
+		if entry["sequence"].Length > 1 {
+			for sequenceChr in entry["sequence"]
+				entry["entity"] .= Util.StrToHTML(Util.UnicodeToChar(sequenceChr), "Entities")
+		} else {
+
+			for char, htmlCode in characters.supplementaryData["HTML Named Entities"] {
+				if char == character {
+					entry["entity"] := htmlCode
+					break
+				}
+			}
+		}
+
+		return
+	}
+
+	EntryPostProcessing__Customs(&entryName, &entry, &characterSequence) {
+		entry["symbol"]["set"] := characterSequence
+
 		local hasSet := StrLen(entry["symbol"]["set"]) > 0
 		local hasCustoms := StrLen(entry["symbol"]["customs"]) > 0
 		local hasFont := StrLen(entry["symbol"]["font"]) > 0
@@ -714,33 +783,27 @@ Class ChrReg {
 			} else if category = "Spaces" && !hasCustoms {
 				entry["symbol"]["customs"] := "underline"
 			}
-
-			category := unset
 		} else {
 			entry["symbol"]["category"] := "N/A"
 			if !hasSet
 				entry["symbol"]["set"] := characterSequence
 		}
+		return
+	}
 
-		if RegExMatch(entryName, "i)^(north_arabian|south_arabian)", &match) {
-			local scriptName := StrReplace(match[1], "_", " ")
-			entry["symbol"]["font"] := "Noto Sans Old " StrTitle(scriptName)
-
-			scriptName := unset
-		} else if RegExMatch(entryName, "i)^(old_permic|old_hungarian|old_italic|old_persian|ugaritic|carian|sidetic|lycian|lydian|cypriot|tifinagh)", &match) {
-			local scriptName := StrReplace(match[1], "_", " ")
-			entry["symbol"]["font"] := "Noto Sans " StrTitle(scriptName)
-
-			scriptName := unset
-		} else if entryName ~= "i)^(alchemical|astrological|astronomical|symbolistics)" {
-			entry["symbol"]["font"] := "Kurinto Sans"
-		} else if entryName ~= "i)^(phoenician|shavian)" {
-			entry["symbol"]["font"] := "Segoe UI Historic"
-		} else if entryName ~= "i)^(deseret)" {
-			entry["symbol"]["font"] := "Segoe UI Symbol"
-		} else if entryName ~= "i)^(cirth_runic|tolkien_runic)" || entryName ~= "(franks_casket)" {
-			entry["symbol"]["font"] := "Catrinity"
+	EntryPostProcessing__Fonts(&entryName, &entry) {
+		for fontName, scriptArrays in characters.fontAssignation {
+			if scriptArrays.HasRegEx(entry["data"]["script"] != "" ? entry["data"]["script"] : entryName) {
+				entry["symbol"]["font"] := fontName
+				break
+			}
 		}
+		return
+	}
+
+	EntryPostProcessing__Categories(&entryName, &entry) {
+		if entry["groups"].Length = 0
+			entry["groups"] := ["Default Group"]
 
 		for each in entry["groups"] {
 			if !ChrLib.entryGroups.Has(each)
@@ -764,7 +827,10 @@ Class ChrReg {
 				ChrLib.entryTags[tag].Push(entryName)
 			}
 		}
+		return
+	}
 
+	EntryPostProcessing__Notation(&entryName, &entry) {
 		local dataLetter := StrLen(entry["symbol"]["letter"]) > 0 ? entry["symbol"]["letter"] : entry["data"]["letter"]
 		local dataPack := entry["data"]
 		dataPack["dataLetter"] := dataLetter
@@ -783,7 +849,10 @@ Class ChrReg {
 		for key, value in entry["options"]
 			if toNotate.HasValue(key) || key ~= "i)^telex__"
 				entry["options"][key] := ChrReg.SetNotaion(&value, &dataPack)
+		return
+	}
 
+	EntryPostProcessing__Recipes(&entryName, &entry) {
 		if entry["recipe"].Length > 0 {
 			for recipe in entry["recipe"] {
 				if !ChrLib.entryRecipes.Has(recipe) {
@@ -818,21 +887,22 @@ Class ChrReg {
 			}
 		}
 
+		return
+	}
+
+	EntryPostProcessing__LaTeX(&entryName, &entry, &instances, &character) {
 		if StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["case"]) > 0 && StrLen(entry["data"]["letter"]) > 0 && entry["data"]["originScript"] != "&ipa"
 			entry := instances.LocaleGenerator.Generate(entryName, entry)
 
-		for i, LaTeXCodeSymbol in characters.supplementaryData["LaTeX Commands"] {
-			if Mod(i, 2) = 1 {
-				if entry["LaTeX"].Length = 0 {
-					local LaTeXCode := characters.supplementaryData["LaTeX Commands"][i + 1]
+		if characters.supplementaryData["LaTeX Commands"].Has(character) && entry["LaTeX"].Length = 0 {
+			local code := characters.supplementaryData["LaTeX Commands"][character]
 
-					if character == LaTeXCodeSymbol {
-						entry["LaTeX"] := LaTeXCode is Array ? LaTeXCode : [LaTeXCode]
-					}
-
-					LaTeXCode := unset
-				}
-			}
+			if code is String
+				entry["LaTeX"] := [code]
+			else if code is Array && code.Length = 1 && code[1] is Array
+				entry["LaTeX"] := [code[1][1]]
+			else if code is Array && code.Length > 1
+				entry["LaTeX"] := code.Clone()
 		}
 
 		if entry["data"]["postfixes"].Length = 1 {
@@ -853,28 +923,9 @@ Class ChrReg {
 
 				if postfixLTXLen = 2
 					entry["LaTeX"].Push(setLaTeX(postfixLTXLen, originLTXLen))
-
-				originLTXLen := unset
-				postfixLTXLen := unset
-				isDigraphOrLigature := unset
-				symbolForLaTeX := unset
-				setLaTeX := unset
 			}
 
-			postfixEntry := unset
-			originSymbolEntry := unset
 		}
-
-		ChrLib.entries.%entryName% := entry
-		character := unset
-		characterSequence := unset
-		hasSet := unset
-		hasCustoms := unset
-		hasFont := unset
-		dataLetter := unset
-		dataPack := unset
-		toNotate := unset
-		return
 	}
 
 	static SetNotaion(&str, &data) {

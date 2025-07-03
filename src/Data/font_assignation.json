@@ -1,0 +1,19 @@
+{
+	"Noto Sans Old North Arabian": ["north_arabian"],
+	"Noto Sans Old South Arabian": ["south_arabian"],
+	"Noto Sans Old Permic": ["old_permic"],
+	"Noto Sans Old Hungarian": ["old_hungarian"],
+	"Noto Sans Old Italic": ["old_italic"],
+	"Noto Sans Old Persian": ["old_persian"],
+	"Noto Sans Ugaritic": ["ugaritic"],
+	"Noto Sans Carian": ["carian"],
+	"Noto Sans Sidetic": ["sidetic"],
+	"Noto Sans Lycian": ["lycian"],
+	"Noto Sans Lydian": ["lydian"],
+	"Noto Sans Cypriot": ["cypriot_syllabary"],
+	"Noto Sans Tifinagh": ["tifinagh"],
+	"Segoe UI Historic": ["phoenician", "shavian"],
+	"Segoe UI Symbol": ["deseret"],
+	"Kurinto Sans": ["^alchemical", "^astrological", "^astronomical", "^symbolistics"],
+	"Catrinity": ["cirth_runic", "tolkien_runic"]
+}

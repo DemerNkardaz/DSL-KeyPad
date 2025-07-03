@@ -37,6 +37,8 @@ initialized := False
 #Include <Classes\class_progress_bar>
 #Include <Classes\class_progress_tooltip>
 
+#Include <Classes\class_code_pages_storage>
+
 #Include <Classes\class_clip>
 #Include <Classes\class_util>
 #Include <Classes\class_side_process>
@@ -64,10 +66,10 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_update>
 #Include <Classes\class_fonts>
 #Include <Classes\class_character_entity>
+#Include <Classes\class_character_inserter>
 #Include <Classes\class_character_registrar>
 #Include <Classes\class_character_library>
 #Include <Classes\class_character_crafter>
-#Include <Classes\class_character_inserter>
 #Include <Classes\class_script_processor>
 #Include <Classes\class_functional_bindings_storage>
 #Include <Classes\class_binding_registrar>

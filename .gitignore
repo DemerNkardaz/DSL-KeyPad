@@ -15,6 +15,7 @@ src/*.dll
 src/desktop.ini
 src/User/
 src/Mods/
+src/Data/Dumps/
 src_backup
 drafts/DSLKeyPad.exe
 drafts/CSharp/DSLKeyPad/bin

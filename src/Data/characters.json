@@ -10414,23 +10414,28 @@
 			},
 			"germanic_runic_n_rune_o_franks_casket_os", {
 				"unicode": "16F4",
-				"options": { "altLayoutKey": ">!<!<+ $" }
+				"options": { "altLayoutKey": ">!<!<+ $" },
+				"symbol": { "font": "Catrinity"}
 			},
 			"germanic_runic_n_rune_i_franks_casket_is", {
 				"unicode": "16F5",
-				"options": { "altLayoutKey": ">!<!<+ $" }
+				"options": { "altLayoutKey": ">!<!<+ $" },
+				"symbol": { "font": "Catrinity"}
 			},
 			"germanic_runic_n_rune_e_franks_casket_eh", {
 				"unicode": "16F6",
-				"options": { "altLayoutKey": ">!<!<+ $" }
+				"options": { "altLayoutKey": ">!<!<+ $" },
+				"symbol": { "font": "Catrinity"}
 			},
 			"germanic_runic_n_rune_a_franks_casket_ac", {
 				"unicode": "16F7",
-				"options": { "altLayoutKey": ">!<!<+ $" }
+				"options": { "altLayoutKey": ">!<!<+ $" },
+				"symbol": { "font": "Catrinity"}
 			},
 			"germanic_runic_n_rune_a_franks_casket_aesc", {
 				"unicode": "16F8",
-				"options": { "altLayoutKey": ">!<!<+>+ $" }
+				"options": { "altLayoutKey": ">!<!<+>+ $" },
+				"symbol": { "font": "Catrinity"}
 			},
 			"tolkien_runic_n_rune_k", {
 				"unicode": "16F1",
