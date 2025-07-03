@@ -52,6 +52,8 @@ Class BindHandler {
 			if StrLen(inputType) == 0
 				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : ""
 
+			Event.Trigger("on_chr", "send", combo, &output, &inputType)
+
 			if StrLen(output) > 4 || lineBreaks
 				Clip.Send(&output, , , "Backup & Release")
 			else
@@ -60,11 +62,14 @@ Class BindHandler {
 			this.SendDefault(combo)
 		}
 		Thread("Priority", 1)
+		return
 	}
 
 	static CapsSend(combo := "", charactersPair := [], reverse := False) {
 		capsOn := reverse ? !GetKeyState("CapsLock", "T") : GetKeyState("CapsLock", "T")
 		this.Send(combo, charactersPair.Length > 1 ? charactersPair[capsOn ? 1 : 2] : charactersPair[1])
+		Event.Trigger("on_chr", "caps_send", combo, &charactersPair, &capsOn)
+		return
 	}
 
 	static LangSend(combo := "", charactersMap := Map("en-US", "", "ru-RU", ""), reverse := Map("en-US", False "ru-RU", False)) {
@@ -85,6 +90,8 @@ Class BindHandler {
 				}
 			}
 		}
+		Event.Trigger("on_chr", "lang_send", combo, &charactersMap, &lang)
+		return
 	}
 
 	static LangCall(commandsMap := Map("en-US", "", "ru-RU", ""), additionalRules := []) {
@@ -109,6 +116,7 @@ Class BindHandler {
 			if commandsMap.Has(lang)
 				commandsMap[lang]()
 
+		Event.Trigger("on_chr", "lang_call", &commandsMap, &lang)
 		return
 	}
 
@@ -206,6 +214,8 @@ Class BindHandler {
 		}
 
 		this.waitTimeSend := False
+		Event.Trigger("on_chr", "time_send", combo, &keyRef, &modRef, &rulRef)
+		return
 	}
 
 	static SendDefault(combo) {
@@ -216,5 +226,7 @@ Class BindHandler {
 			arrowKeys ? "{" keyRef "}" :
 			("{Blind}" modRef (StrLen(keyRef) > 1 ? "{" keyRef "}" : keyRef))
 		)
+		Event.Trigger("on_chr", "default_send", combo, &keyRef, &modRef, &rulRef)
+		return
 	}
 }

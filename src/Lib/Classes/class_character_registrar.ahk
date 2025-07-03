@@ -1,6 +1,10 @@
 Class ChrReg {
 	__New(rawEntries, typeOfInit := "Internal", preventProgressGUI := False) {
+		Event.Trigger("chr_lib", "starts_reg", rawEntries, typeOfInit, preventProgressGUI)
+
 		this.AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI)
+
+		return Event.Trigger("chr_lib", "ends_reg")
 	}
 
 	AddEntry(&entryName, &entry, &progress, &instances) {

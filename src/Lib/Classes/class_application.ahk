@@ -32,6 +32,7 @@ Class App {
 
 
 	static __New() {
+
 		for i, ico in [
 			"app", "germanic", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "tieng_viet", "hanyu_pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian", "hellenic", "latin", "cyrillic",
 			"glyph_combining",
@@ -65,6 +66,7 @@ Class App {
 			this.indexIcos.Set(ico, i)
 		}
 		this.Init()
+		return
 	}
 
 	static Init() {
@@ -81,6 +83,7 @@ Class App {
 			this.paths.pwsh "\set_folder_data.ps1", this.desktopINI), , "Hide")
 
 		this.ReadProfiles()
+		return
 	}
 
 	static DeleteINI() {
@@ -88,6 +91,7 @@ Class App {
 			RunWait('cmd.exe /c attrib -s -h "' this.desktopINI '"')
 			FileDelete(this.desktopINI)
 		}
+		return
 	}
 
 	static ReadProfiles() {
@@ -97,6 +101,7 @@ Class App {
 				this.profileList.Push(RegExReplace(name, "profile-", ""))
 			}
 		}
+		return
 	}
 
 	static SetProfile(profile) {
@@ -190,3 +195,4 @@ Class App {
 	; }
 
 }
+Event.Trigger("app_class", "initialized")

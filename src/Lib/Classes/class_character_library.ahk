@@ -53,6 +53,8 @@ Class ChrLib {
 
 		if ChrLib.duplicatesList.Length > 0
 			TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
+
+		Event.Trigger("chr_lib", "common_library_ends_reg")
 		return
 	}
 

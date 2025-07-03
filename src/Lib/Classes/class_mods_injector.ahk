@@ -1,6 +1,7 @@
 Class ModsInjector {
 	static modsPath := A_ScriptDir "\Mods"
 	static registryINI := this.modsPath "\mods.ini"
+	static eventListeners := Map()
 	static injectors := {
 		pre_init: this.modsPath "\injector_pre_init.ahk",
 		post_init: this.modsPath "\injector_post_init.ahk"
@@ -209,4 +210,19 @@ Class ModsInjector {
 			}
 		}
 	}
+}
+
+OnModSettingsChange(modPath, callback) {
+
+	if !ModsInjector.eventListeners.Has(modPath)
+		ModsInjector.eventListeners[modPath] := callback
+	else
+		throw Error("Handler already registered for this mod: " modPath)
+}
+
+TriggerModSettingsEvent(modPath) {
+	if handler := ModsInjector.eventListeners.Get(modPath, (*) => [])
+		handler.Call(modPath)
+	else
+		throw Error("No handler registered for mod: " modPath)
 }
