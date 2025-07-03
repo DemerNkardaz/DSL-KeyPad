@@ -462,7 +462,7 @@ Class Panel2 {
 
 						entryRow[2] := attributes["group"] = "Favorites"
 							? bindings["Recipe"]
-						: (attributes["label"] != "All" ? characterBinding : "")
+						: ((attributes.Has("label") && attributes["label"] != "All" || !attributes.Has("label")) ? characterBinding : "")
 
 						entryRow[3] := attributes["group"] = "Favorites"
 							? (bindings["Fast Key"] != "" ? reserveCombinationKey bindings["Fast Key"]

@@ -6,6 +6,7 @@ Class BindList {
 		local useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
 
 		this.mapping := mapping.Clone()
+		this.persistent := []
 
 		if modMapping.Count > 0 {
 			for letterKey, binds in modMapping {
@@ -43,6 +44,14 @@ Class BindList {
 						if binds.Has(lazyMatch[1])
 							binds.Delete(lazyMatch[1])
 						modifier := lazyMatch[1]
+						this.mapping.Set(modifier, value)
+					} else if RegExMatch(modifier, "i)^\[Persistent\](.+)$", &persistentMatch) {
+						binds.Delete(modifier)
+						if binds.Has(persistentMatch[1])
+							binds.Delete(persistentMatch[1])
+						modifier := persistentMatch[1]
+						this.mapping.Set(modifier, value)
+						this.persistent.Push(modifier)
 					}
 
 					if value is Object && !(value is Map || value is Array || value is Func)
@@ -70,6 +79,13 @@ Class BindList {
 					letterKey := lazyMatch[1]
 					if useRemap
 						this.mapping.Set(letterKey, bind)
+				} else if RegExMatch(letterKey, "i)^\[Persistent\](.+)$", &persistentMatch) {
+					if this.mapping.Has(persistentMatch[1])
+						this.mapping.Delete(persistentMatch[1])
+					this.mapping.Delete(letterKey)
+					letterKey := persistentMatch[1]
+					this.mapping.Set(letterKey, bind)
+					this.persistent.Push(letterKey)
 				}
 			}
 		}
@@ -159,7 +175,10 @@ Class BindList {
 			mapping["Common"].mapping := mapping["Common"].mapping.MergeWith(mapping["Diacritic"].mapping)
 		}
 
-		return (StrLen(fromSub) > 0 && mapping.Has(fromSub) && mapping[fromSub].Has(bindingsName)) ? mapping[fromSub][bindingsName].mapping : mapping.Has(bindingsName) ? mapping[bindingsName].mapping : Map()
+		return Map(
+			"mapping", (StrLen(fromSub) > 0 && mapping.Has(fromSub) && mapping[fromSub].Has(bindingsName)) ? mapping[fromSub][bindingsName].mapping : mapping.Has(bindingsName) ? mapping[bindingsName].mapping : Map(),
+			"persistent", (StrLen(fromSub) > 0 && mapping.Has(fromSub) && mapping[fromSub].Has(bindingsName)) ? mapping[fromSub][bindingsName].persistent : mapping.Has(bindingsName) ? mapping[bindingsName].persistent : []
+		)
 	}
 
 	static Gets(bindingsNames := [], fromSub := "", mapping := BindReg.storedData.DeepClone()) {

@@ -86,7 +86,7 @@ Class Cfg {
 			Update.Check()
 
 		if Update.available {
-			App.SetTray()
+			TrayMenu.SetTray()
 		}
 
 		this.optionsTitle := App.Title("+status+version") " — " Locale.Read("gui_options")
@@ -678,7 +678,7 @@ Class Options {
 	}
 
 	static PostSwitchLanguage() {
-		App.SetTrayItems()
+		TrayMenu.SetTrayItems()
 	}
 
 	static SwitchVirualLayout(CB, category) {

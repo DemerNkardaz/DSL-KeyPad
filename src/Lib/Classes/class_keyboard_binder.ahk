@@ -24,16 +24,13 @@ Class KbdBinder {
 		binds: App.paths.profile "\CustomBindings",
 	}
 
-	static disabledByMonitor := False
-	static disabledByUser := False
-	static ligaturedBinds := False
 	static numStyle := ""
 	static userLayoutNames := Map("latin", [], "cyrillic", [], "hellenic", [])
 	static layoutNames := Map("latin", [], "cyrillic", [], "hellenic", [])
 
 	static __New() {
 		this.Init()
-		SetTimer((*) => this.Monitor(), 1000)
+		return
 	}
 
 	static Init() {
@@ -50,105 +47,6 @@ Class KbdBinder {
 		this.RebuilBinds()
 	}
 
-	static Monitor() {
-		if A_IsPaused
-			return
-
-		layoutHex := Keyboard.CurrentLayout()
-		langBlock := Language.GetLanguageBlock(layoutHex)
-
-		Keyboard.activeLanguage := langBlock ? langBlock[1] : "0x" Format("{:X}", layoutHex)
-
-		isLanguageLayoutValid := Language.Validate(layoutHex, "bindings")
-		disableTimer := Cfg.Get("Binds_Autodisable_Timer", , 1, "int")
-		disableType := Cfg.Get("Binds_Autodisable_Type", , "hour")
-		try {
-			disableType := %disableType%
-		} catch {
-			disableType := hour
-		}
-
-		if !this.disabledByUser
-			this.MonitorToggler(isLanguageLayoutValid && A_TimeIdle <= disableTimer * disableType)
-
-		if (!this.disabledByUser && !this.disabledByMonitor) && isLanguageLayoutValid
-			&& Cfg.Get("Alt_Input_Autoactivation", , False, "bool")
-			&& langBlock {
-
-			if !["^en", "^ru", "^vi"].HasRegEx(langBlock[1])
-				&& Scripter.selectedMode.Get("Alternative Modes") = ""
-				&& TelexScriptProcessor.options.interceptionInputMode = ""
-				&& langBlock[2].altInput != ""
-				&& Scripter.Has(langBlock[2].altInput) {
-				Scripter.activatedViaMonitor := True
-				Scripter.OptionSelect(langBlock[2].altInput)
-			} else if Scripter.activatedViaMonitor
-				&& langBlock[2].altInput = "" {
-				Scripter.activatedViaMonitor := False
-				Scripter.OptionSelect(Scripter.selectedMode.Get("Alternative Modes"))
-			}
-		}
-
-		this.TrayIconSwitch()
-	}
-
-	static MonitorToggler(enable := True, rule := "Monitor", addRule := "User") {
-		if A_IsPaused
-			return
-
-		if enable && !this.disabledBy%addRule% {
-			if this.disabledBy%rule% {
-				this.disabledBy%rule% := False
-				Suspend(-1)
-			}
-		} else if !this.disabledBy%rule% && !this.disabledBy%addRule% {
-			this.disabledBy%rule% := True
-			Suspend(1)
-		}
-
-		App.SetTray()
-	}
-
-	static TrayIconSwitch() {
-		KbdBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
-		Keyboard.CheckLayout(&lang)
-
-		if lang != "" && Language.supported[lang].parent != ""
-			lang := Language.supported[lang].parent
-
-		local iconCode := App.indexIcos["app"]
-		local trayTitle := App.Title("+status+version") "`n" latinLayout "/" cyrillicLayout "/" hellenicLayout
-		local iconFile := App.icoDLL
-
-		if this.disabledByMonitor || this.disabledByUser {
-			iconCode := App.indexIcos["disabled"]
-		} else {
-			local currentAlt := Scripter.selectedMode.Get("Alternative Modes")
-			local currentGlyph := Scripter.selectedMode.Get("Glyph Variations")
-			local currentISP := TelexScriptProcessor.options.interceptionInputMode
-			local mode := currentAlt != "" ? "Alternative Modes" : "Glyph Variations"
-			local current := currentAlt != "" ? currentAlt : currentGlyph
-			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
-
-			if currentISP != "" && App.indexIcos.Has(instanceRef.tag) {
-				iconCode := App.indexIcos[instanceRef.tag]
-				trayTitle .= "`n" Locale.Read("telex_script_processor.labels." instanceRef.tag)
-			} else if currentAlt != "" || currentGlyph != "" {
-				local data := Scripter.GetData(mode, current)
-				local icons := data["icons"]
-				local icon := icons.Length > 1 ? icons[lang = "ru-RU" ? 2 : 1] : icons[1]
-				if icon ~= "file::" {
-					iconFile := StrReplace(icon, "file::")
-					iconCode := 1
-				} else
-					iconCode := App.indexIcos[icon]
-				trayTitle .= "`n" Locale.Read("script_labels." data["locale"])
-			}
-		}
-
-		TraySetIcon(iconFile, iconCode, True)
-		A_IconTip := RegExReplace(trayTitle, "\&", "&&&")
-	}
 
 	static SetLayout(layout) {
 		layoutType := KbdLayoutReg.storedData["latin"].Has(layout) ? "Latin" : KbdLayoutReg.storedData["cyrillic"].Has(layout) ? "Cyrillic" : ""
@@ -214,9 +112,9 @@ Class KbdBinder {
 
 	static CompileBinds(bindingsMap := Map()) {
 		local bindings := this.FormatBindings(bindingsMap)
-		local processed := Map()
+		local processed := Map("mapping", Map(), "persistent", bindings["persistent"])
 
-		for combo, value in bindings {
+		for combo, value in bindings["mapping"] {
 			local bind := value
 
 			if bind is String && bind ~= "[`r`n`t]"
@@ -230,7 +128,7 @@ Class KbdBinder {
 							if childItem is String && childItem ~= "[`r`n`t]"
 								bind[i][j] := MyRecipes.FormatResult(childItem)
 
-			this.CompileBridge(combo, bind, processed)
+			this.CompileBridge(combo, bind, processed["mapping"])
 		}
 
 		return processed
@@ -259,12 +157,12 @@ Class KbdBinder {
 		static matchEn := "(?!.*[а-яА-ЯёЁ" ruExt "])[a-zA-Z" enExt "]+"
 		static metchEl := "[" hellenicRange "]+"
 		KbdBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
-		layout := this.GetCurrentLayoutMap()
-		output := Map()
-		restrictKeys := []
+		local layout := this.GetCurrentLayoutMap()
+		local output := Map("mapping", Map(), "persistent", bindingsMap["persistent"].Clone())
+		local restrictKeys := []
 
-		if bindingsMap.Count > 0 {
-			for combo, binds in bindingsMap {
+		if bindingsMap["mapping"].Count > 0 {
+			for combo, binds in bindingsMap["mapping"] {
 				if binds is String {
 					local originalBinds := binds
 					local processedBinds := binds
@@ -393,9 +291,9 @@ Class KbdBinder {
 							if rule = "Caps" || rule = "Flat"
 								restrictKeys.Push(interCombo)
 
-							if !output.Has(interCombo) || isHellenicKey {
+							if !output["mapping"].Has(interCombo) || isHellenicKey {
 								try {
-									output.Set(interCombo,
+									output["mapping"].Set(interCombo,
 										binds is String || binds is Func ? [binds] :
 										rules[rule]
 									)
@@ -403,18 +301,21 @@ Class KbdBinder {
 									MsgBox "Error in Origin Combo: " combo "`n Combo: " interCombo "`n Rule: " rule "`n Error: " e.Message
 								}
 							} else if !restrictKeys.HasValue(interCombo) {
-								if output.Get(interCombo).Length == 2 {
-									if output[interCombo] is Func {
+								if output["mapping"].Get(interCombo).Length == 2 {
+									if output["mapping"][interCombo] is Func {
 										interArr := [[], []]
-										interArr[isCyrillicKey ? 1 : 2] := output[interCombo]
-										output[interCombo] := interArr
+										interArr[isCyrillicKey ? 1 : 2] := output["mapping"][interCombo]
+										output["mapping"][interCombo] := interArr
 									}
-									output[interCombo][isCyrillicKey ? 2 : 1] := binds
+									output["mapping"][interCombo][isCyrillicKey ? 2 : 1] := binds
 
 								} else {
-									output[interCombo].Push(binds)
+									output["mapping"][interCombo].Push(binds)
 								}
 							}
+
+							if output["persistent"].HasValue(combo, &persIndex)
+								output["persistent"][persIndex] := interCombo
 						}
 					}
 				}
@@ -425,15 +326,14 @@ Class KbdBinder {
 
 	static Registration(bindingsMap := Map(), rule := True, silent := False) {
 		bindingsMap := this.CompileBinds(bindingsMap)
-		total := bindingsMap.Count
+		total := bindingsMap["mapping"].Count
 		useTooltip := Cfg.Get("Bind_Register_Tooltip_Progress_Bar", , True, "bool")
-
 		comboActions := []
 
 		if total > 0 {
 			i := 0
 
-			for combo, action in bindingsMap {
+			for combo, action in bindingsMap["mapping"] {
 				comboActions.Push(combo, action)
 				if combo ~= "^\<\^\>\!" {
 					comboActions.Push(SubStr(combo, 3), action)
@@ -446,12 +346,15 @@ Class KbdBinder {
 
 			Loop comboActions.Length // 2 {
 				i++
-				index := A_Index * 2 - 1
-				comboSeq := comboActions[index]
-				actionSeq := comboActions[index + 1]
+				local index := A_Index * 2 - 1
+				local comboSeq := comboActions[index]
+				local actionSeq := comboActions[index + 1]
+				local isPersistent := bindingsMap["persistent"].HasValue(comboSeq)
+				local options := [rule ? "On" : "Off", isPersistent ? "S" : ""]
+
 				try {
 					if comboSeq != ""
-						HotKey(comboSeq, actionSeq, rule ? "On" : "Off")
+						HotKey(comboSeq, actionSeq, options.ToString(""))
 				} catch as e
 					MsgBox("Error: " e.Message "`nCombo: " comboSeq)
 			}
@@ -536,11 +439,6 @@ Class KbdBinder {
 			this.ToggleNumStyle(this.numStyle, True)
 	}
 
-
-	static ToggleLigaturedMode() {
-		this.ligaturedBinds := !this.ligaturedBinds
-		this.RebuilBinds()
-	}
 
 	static ToggleDefaultMode(typeofActivation := "") {
 		isTOA := StrLen(typeofActivation) > 0

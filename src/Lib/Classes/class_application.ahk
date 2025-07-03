@@ -1,5 +1,5 @@
 Class App {
-	static tray := A_TrayMenu
+	static PID := WinGetPID(A_ScriptHwnd)
 
 	static profileFile := A_ScriptDir "\User\Profile.ini"
 	static profileName := IniRead(this.profileFile, "data", "profile", "default")
@@ -16,6 +16,7 @@ Class App {
 		dir: A_ScriptDir,
 		data: A_ScriptDir "\Data",
 		lib: A_ScriptDir "\Lib",
+		sidProc: A_ScriptDir "\Lib\SideProcesses",
 		pwsh: A_ScriptDir "\Lib\powershell",
 		loc: A_ScriptDir "\Locale",
 		bin: A_ScriptDir "\Bin",
@@ -59,6 +60,7 @@ Class App {
 			"deseret",
 			"shavian",
 			"blank",
+			"support",
 		] {
 			this.indexIcos.Set(ico, i)
 		}
@@ -79,7 +81,6 @@ Class App {
 			this.paths.pwsh "\set_folder_data.ps1", this.desktopINI), , "Hide")
 
 		this.ReadProfiles()
-		this.SetTray()
 	}
 
 	static DeleteINI() {
@@ -107,170 +108,6 @@ Class App {
 	static GetProfile() {
 		profile := IniRead(this.profileFile, "data", "profile", "default")
 		return profile = "default" ? Locale.Read("profile.default") : profile
-	}
-
-	static SetTray() {
-		A_IconTip := App.Title("+status+version")
-		TraySetIcon(App.icoDLL, App.indexIcos["app"], True)
-		OnMessage 0x404, Received_AHK_NOTIFYICON
-		Received_AHK_NOTIFYICON(wParam, lParam, nMsg, hwnd) {
-			if lParam = 0x202 {
-				GetKeyState("Control", "P") && GetKeyState("Shift", "P") ? Scripter.SelectorPanel("Glyph Variations")
-					: GetKeyState("Shift", "P") ? Scripter.SelectorPanel()
-					: GetKeyState("Control", "P") ? Cfg.Editor()
-					: GetKeyState("Alt", "P") ? Cfg.SubGUIs("Recipes")
-					: Panel.Panel()
-				return 1
-			}
-		}
-	}
-
-	static TrayLabels() {
-		labels := {
-			app: App.Title("+version"),
-			update: Locale.ReadInject("update_available", [Update.availableVersion]),
-			openPanel: Locale.Read("open_panel"),
-			legend: Locale.Read("gui.panel.context_menu.legend"),
-			mods: Locale.Read("gui.mods"),
-			options: Locale.Read("gui.options"),
-			changelogPanel: Locale.Read("gui.changelog"),
-			scriptForms: Locale.Read("tray_menu_item_scripts"),
-			glyphForms: Locale.Read("tray_menu_item_glyphs"),
-			layouts: Locale.Read("tray_menu_item_layouts"),
-			TSP_TELEX: Locale.Read("tray_menu_item_script_processor"),
-			TSP_TiengViet: Locale.Read("telex_script_processor.labels.tieng_viet") "`t" RightAlt "F2",
-			TSP_HanYuPinYin: Locale.Read("telex_script_processor.labels.hanyu_pinyin") "`t" RightAlt RightShift "F2",
-			Scripter_AlternativeInput: Locale.Read("tray_menu_item_scripter_alternative_input"),
-			;
-			userRecipes: Locale.Read("tray_menu_item_user_recipes"),
-			;
-			search: Locale.Read("tray_menu_item_search") "`t" Window LeftAlt "F",
-			unicode: Locale.Read("tray_menu_item_unicode"),
-			altcode: Locale.Read("tray_menu_item_altcode"),
-			forge: Locale.Read("tray_menu_item_forge"),
-			folder: Locale.Read("tray_menu_item_folder"),
-			notificationToggle: Locale.Read("tray_menu_item_notification_toggle"),
-			reload: Locale.Read("tray_menu_item_reload"),
-			pause: Locale.Read("tray_menu_item_pause"),
-			enableBinds: Locale.Read("tray_menu_item_enable_binds") "`t" RightControl "F10",
-			disableBinds: Locale.Read("tray_menu_item_disable_binds") "`t" RightControl "F10",
-			exit: Locale.Read("tray_menu_item_exit"),
-		}
-
-		return labels
-	}
-
-	static SetTrayItems() {
-		labels := this.TrayLabels()
-
-		App.tray.Delete()
-		App.tray.Add(labels.app, (*) => Run(App.URL)), App.tray.SetIcon(labels.app, App.icoDLL, App.indexIcos["app"])
-
-		if Update.available
-			App.tray.Add(labels.update, (*) => Update.Check(True)), App.tray.SetIcon(labels.update, ImageRes, 176)
-
-		App.tray.Add()
-		App.tray.Add(labels.openPanel, (*) => Panel.Panel())
-		App.tray.Add(labels.legend, (*) => ChrLegend())
-		App.tray.Add(labels.mods, (*) => ModsGUI())
-		App.tray.Add(labels.options, (*) => Cfg.Editor()), App.tray.SetIcon(labels.options, ImageRes, 63)
-		App.tray.Add()
-		App.tray.Add(labels.changelogPanel, (*) => Changelog.Panel())
-		App.tray.Add()
-
-		sciptsMenu := Menu()
-
-		sciptsMenu.Add(labels.TSP_TELEX, (*) => []), sciptsMenu.Disable(labels.TSP_TELEX)
-		sciptsMenu.Add(labels.TSP_TiengViet, (*) => globalInstances.scriptProcessors["Tieng Viet"].Start()),
-			sciptsMenu.SetIcon(labels.TSP_TiengViet, App.icoDLL, App.indexIcos["tieng_viet"])
-		sciptsMenu.Add(labels.TSP_HanYuPinYin, (*) => globalInstances.scriptProcessors["HanYu PinYin"].Start()),
-			sciptsMenu.SetIcon(labels.TSP_HanYuPinYin, App.icoDLL, App.indexIcos["hanyu_pinyin"])
-		sciptsMenu.Add()
-		sciptsMenu.Add(labels.Scripter_AlternativeInput, (*) => []), sciptsMenu.Disable(labels.Scripter_AlternativeInput)
-
-		scripterAlts := ScripterStore.storedData["Alternative Modes"].Length // 2
-		Loop scripterAlts {
-			i := A_Index * 2 - 1
-			dataName := ScripterStore.storedData["Alternative Modes"][i]
-			dataValue := ScripterStore.storedData["Alternative Modes"][i + 1]
-			AddScripts(dataName, dataValue)
-		}
-
-		AddScripts(dataName, dataValue) {
-			sciptsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.OptionSelect(dataName))
-			if dataValue["icons"][1] ~= "file::" {
-				sciptsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), StrReplace(dataValue["icons"][1], "file::"))
-			} else
-				sciptsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
-		}
-
-		App.tray.Add(labels.scriptForms, sciptsMenu)
-
-		glyphVariantsMenu := Menu()
-
-		glyphVariantsMenu.Add(Locale.Read("gui.scripter.glyph_variations.gui_title"), (*) => GlyphsPanel.Panel())
-		glyphVariantsMenu.Add()
-
-		glyphVariants := ScripterStore.storedData["Glyph Variations"].Length // 2
-		Loop glyphVariants {
-			i := A_Index * 2 - 1
-			dataName := ScripterStore.storedData["Glyph Variations"][i]
-			dataValue := ScripterStore.storedData["Glyph Variations"][i + 1]
-			AddGlyphVariatns(dataName, dataValue)
-		}
-
-		AddGlyphVariatns(dataName, dataValue) {
-			glyphVariantsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.OptionSelect(dataName, "Glyph Variations"))
-			glyphVariantsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
-		}
-
-		App.tray.Add(labels.glyphForms, glyphVariantsMenu)
-
-		layoutsMenu := Menu()
-		layoutist := [KbdLayoutReg.storedData["latin"].Keys(), KbdLayoutReg.storedData["cyrillic"].Keys()]
-
-		for i, layout in layoutist {
-			if i > 1
-				layoutsMenu.Add()
-			for each in layout {
-				layoutsMenu.Add(each, (*) => this.KeyboardBinder.SetLayout(each))
-				layoutsMenu.SetIcon(each, App.icoDLL, App.indexIcos[i > 1 ? "cyrillic" : "latin"])
-			}
-		}
-
-		App.tray.Add(labels.layouts, layoutsMenu)
-
-		App.tray.Add()
-		App.tray.Add(labels.userRecipes, (*) => Cfg.SubGUIs("Recipes")), App.tray.SetIcon(labels.userRecipes, ImageRes, 188)
-		App.tray.Add()
-		App.tray.Add(labels.search, (*) => Search()), App.tray.SetIcon(labels.search, ImageRes, 169)
-		App.tray.Add(labels.unicode, (*) => CharacterInserter("Unicode").InputDialog(False)),
-			App.tray.SetIcon(labels.unicode, Shell32, 225)
-		App.tray.Add(labels.altcode, (*) => CharacterInserter("Altcode").InputDialog(False)),
-			App.tray.SetIcon(labels.altcode, Shell32, 313)
-		App.tray.Add(labels.forge, (*) => globalInstances.crafter.Start("InputBox")), App.tray.SetIcon(labels.forge, ImageRes, 151)
-		App.tray.Add(labels.folder, (*) => Run(A_ScriptDir)), App.tray.SetIcon(labels.folder, ImageRes, 180)
-		App.tray.Add()
-		App.tray.Add(labels.reload, (*) => Reload()), App.tray.SetIcon(labels.reload, ImageRes, 229)
-		; App.tray.Add(labels.pause, (*) => Suspend(-1))
-		App.tray.Add()
-
-		if KbdBinder.disabledByMonitor || KbdBinder.disabledByUser {
-			App.tray.Add(labels.enableBinds (*) => KbdBinder.MonitorToggler(KbdBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
-			App.tray.SetIcon(labels.enableBinds, App.icoDLL, App.indexIcos["disabled"])
-		} else {
-
-			App.tray.Add(labels.disableBinds, (*) => KbdBinder.MonitorToggler(KbdBinder.disabledByUser = !False ? True : False, "User", "Monitor"))
-			App.tray.SetIcon(labels.disableBinds, App.icoDLL, App.indexIcos["disabled"])
-		}
-
-		App.tray.Add()
-		App.tray.Add(labels.exit, (*) => ExitApp()), App.tray.SetIcon(labels.exit, ImageRes, 085)
-
-
-	}
-
-	static EditTrayItem(label, iconSource := this.icoDLL, iconIndex := -1) {
 	}
 
 	static Title(options := ["title"]) {

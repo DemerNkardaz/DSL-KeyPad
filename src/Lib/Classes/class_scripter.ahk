@@ -297,7 +297,7 @@ Class Scripter {
 			if !WinExist(this.selectorTitle.Get(selectorType)) {
 				IH.Stop()
 				this.isScripterWaiting := False
-				if !(KbdBinder.disabledByMonitor || KbdBinder.disabledByUser)
+				if !(KbdMonitor.Disabled())
 					Suspend(0)
 				SetTimer(WaitCheckGUI, -0)
 				Exit

@@ -38,6 +38,7 @@ initialized := False
 
 #Include <Classes\class_clip>
 #Include <Classes\class_util>
+#Include <Classes\class_side_process>
 #Include <Classes\class_config>
 #Include <Classes\class_variable_parser>
 #Include <Classes\class_scripter_store>
@@ -45,10 +46,15 @@ initialized := False
 #Include <Classes\class_keyboard_layout>
 #Include <Classes\class_keyboard_layout_registrar>
 #Include <Classes\class_keyboard_layout_user_defined>
+#Include <Classes\class_keyboard_monitor>
 #Include <Classes\class_character_block>
 #Include <Classes\class_unicode_web_resource>
 #Include <Classes\class_search>
 #Include <Classes\class_application>
+#Include <Classes\class_tray_menu>
+; SideProcess.StartDynamic("support", , App.Title("+status+version") "``n" Locale.Read("side_process.support"), App.icoDLL, App.indexIcos["support"], App.PID)
+#Include <Classes\class_keyboard_binder>
+TrayMenu.SetTrayItems()
 #Include <Classes\class_language>
 #Include <Classes\class_keyboard>
 #Include <Classes\class_locale>
@@ -70,9 +76,13 @@ initialized := False
 
 #Include <Classes\class_user_defined_recipes>
 #Include <Classes\class_character_recipe_handler>
-#Include <Classes\class_keyboard_binder>
 #Include <Classes\class_auxiliary>
 #Include <Classes\class_ui_glyph_variations_panel>
+#Include <Classes\class_ui_character_legend_storage>
+#Include <Classes\class_ui_character_legend>
+#Include <Classes\class_ui_panel>
+#Include <Classes\class_ui_panel_filter>
+#Include <Classes\class_ui_mods>
 #Include <Classes\class_key_event>
 #Include <Classes\class_text_handlers>
 #Include <Classes\class_grep_typography>
@@ -82,16 +92,10 @@ initialized := False
 #Include <Classes\class_tempature_converter>
 #Include <Classes\class_dev>
 DottedProgressTooltip(4, &triggerEnds := False, 500)
-#Include <Classes\class_ui_character_legend_storage>
-#Include <Classes\class_ui_character_legend>
-#Include <Classes\class_ui_panel>
-#Include <Classes\class_ui_panel_filter>
-#Include <Classes\class_ui_mods>
 triggerEnds := True
 initialized := True
 
 ChrLib.CountOfUpdate()
-App.SetTrayItems()
 Panel.SetPanelData()
 GlyphsPanel.SetPanelData()
 
@@ -109,9 +113,4 @@ ShowEntryPreview() {
 }
 
 <^>^Home:: ShowEntryPreview()
-
-#SuspendExempt
->^F10:: KbdBinder.MonitorToggler(KbdBinder.disabledByUser = !False ? True : False, "User", "Monitor")
-#SuspendExempt False
-
 <^>+Esc:: ExitApp

@@ -2138,16 +2138,16 @@
 		},
 		"Important": {
 			"Flat": {
-				"RAlt": "%(*) => globalInstances.crafter.ComposeActivate()%"
+				"[Persistent]RAlt": "%(*) => globalInstances.crafter.ComposeActivate()%"
 			},
 			"Moded": {
 				"F1": {
-					"<^>!": "%(*) => KeyboardBinder.ToggleDefaultMode()%",
+					"<^>!": "%(*) => KbdBinder.ToggleDefaultMode()%",
 					"<^>!>+": "%(*) => Auxiliary.ToggleInputMode()%",
-					"<^>!<!": "%(*) => KeyboardBinder.ToggleDefaultMode('Second Keys')%"
+					"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Second Keys')%"
 				},
 				"F2": {
-					"<^>!<!": "%(*) => KeyboardBinder.ToggleDefaultMode('Tertiary Keys')%",
+					"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Tertiary Keys')%",
 					"<^>!": "%(*) => globalInstances.scriptProcessors['Tieng Viet'].Start()%",
 					"<^>!>+": "%(*) => globalInstances.scriptProcessors['HanYu PinYin'].Start()%"
 				},
@@ -2159,11 +2159,11 @@
 					"<^>!": "%(*) => GREPTypography.SetStyles('Paragraphs')%"
 				},
 				"Up": {
-					"<#<!": "%(*) => KeyboardBinder.ToggleNumStyle('Superscript')%",
-					"<#<!>+": "%(*) => KeyboardBinder.ToggleNumStyle('Roman')%"
+					"<#<!": "%(*) => KbdBinder.ToggleNumStyle('Superscript')%",
+					"<#<!>+": "%(*) => KbdBinder.ToggleNumStyle('Roman')%"
 				},
 				"Down": {
-					"<#<!": "%(*) => KeyboardBinder.ToggleNumStyle('Subscript')%"
+					"<#<!": "%(*) => KbdBinder.ToggleNumStyle('Subscript')%"
 				},
 				"PgUp": {
 					"<#<!": "%(*) => UnicodeWebResource()%"
