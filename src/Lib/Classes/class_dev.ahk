@@ -19,6 +19,8 @@ Class Dev {
 				DirDelete(srcPath "\Mods", True)
 			if DirExist(srcPath "\Data\Dumps")
 				DirDelete(srcPath "\Data\Dumps", True)
+			if DirExist(srcPath "\Logs")
+				DirDelete(srcPath "\Logs", True)
 		}
 	}
 

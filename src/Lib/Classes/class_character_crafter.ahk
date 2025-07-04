@@ -77,7 +77,7 @@ Class ChrCrafter {
 
 		composeObject.ParentHook := InputHook("L0", "{Escape}")
 
-		Event.Trigger("on_compose_mode", "starts", &this, &composeObject)
+		Event.Trigger("Compose Mode", "Started", &this, &composeObject)
 		composeObject.ParentHook.Start()
 
 		ComposeSuggestedTooltip() {
@@ -127,7 +127,7 @@ Class ChrCrafter {
 			iterationObject.IterationHook := InputHook("L" composeObject.symCount, "{Escape}{Backspace}{Enter}{Pause}{Tab}{Insert}")
 			iterationObject.IterationHook.Start(), iterationObject.IterationHook.Wait()
 
-			Event.Trigger("on_compose_mode", "iteration_starts", &iterationObject, &composeObject)
+			Event.Trigger("Compose Mode", "Iteration Started", &iterationObject, &composeObject)
 
 			(iterationObject.IterationHook.EndKey = "Backspace") && StrLen(composeObject.input) > 0 && composeObject.input := SubStr(composeObject.input, 1, -composeObject.symCount)
 			(iterationObject.IterationHook.EndKey = "Insert") && ClipWait(0.5, 1) && composeObject.input .= this.parseUniAlt(A_Clipboard, composeObject.input, composeObject.insertType)
@@ -309,7 +309,7 @@ Class ChrCrafter {
 			Util.CaretTooltip(endTooltip)
 			SetTimer(Tooltip, -500)
 			if !InStr(composeObject.output, "N/A") || composeObject.output != composeObject.input {
-				Event.Trigger("on_compose_mode", "ends", &this, &composeObject)
+				Event.Trigger("Compose Mode", "Ended", &this, &composeObject)
 				local output := composeObject.output
 				this.SendOutput(&output)
 			}

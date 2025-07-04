@@ -72,7 +72,7 @@ Class UIPanelFilter {
 						reserveTexts.MergeWith([item[5]], ChrLib.GetValue(item[5], "tags"))
 
 					local isFavorite := InStr(itemText, Chr(0x2605))
-					local isMatch := keyOrRecipeMark ? (item[2] ~= filterText) : (itemText ~= filterText || this.MatchInArray(&reserveTexts, &filterText) || (isFavorite && filterText ~= "^(изб|fav|\*)"))
+					local isMatch := keyOrRecipeMark ? (item[2] ~= filterText) : (isFavorite && filterText ~= "^(изб|fav|\*)") || filterText != "*" && (itemText ~= filterText || this.MatchInArray(&reserveTexts, &filterText))
 
 					if isMatch {
 						if !groupStarted

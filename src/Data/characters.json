@@ -2369,7 +2369,7 @@
 				"unicode": "02D1",
 				"tags": ["half triangle colon", "знак полудолготы"],
 				"groups": ["Special Characters", "IPA"],
-				"options": { "altLayoutKey": ">! `;" }
+				"options": { "altLayoutKey": ">! ;" }
 			},
 			"degree", {
 				"unicode": "00B0",
@@ -2721,7 +2721,7 @@
 					["turned semicolon", "перевёрнутая точка с запятой"]
 				],
 				"groups": ["Smelting Special", "Special Fast Secondary"],
-				"options": { "fastKey": [";", "c* `;"] },
+				"options": { "fastKey": [";", "c* ;"] },
 				"recipe": [["${semicolon}${arrow_left}"], ["${semicolon}${arrow_up}"]]
 			},
 			"colon", {
@@ -2965,10 +2965,10 @@
 					]
 				},
 				"recipe": [
-					["`\"<"],
-					["`\">"],
-					["`\"<<", "${quote_angle_left×2}"],
-					["`\">>", "${quote_angle_right×2}"]
+					["\"<"],
+					["\">"],
+					["\"<<", "${quote_angle_left×2}"],
+					["\">>", "${quote_angle_right×2}"]
 				]
 			},
 			"quote_[left,right,left_double,right_double,low_9,low_9_double,low_9_double_reversed]", {
@@ -2994,7 +2994,7 @@
 				"options": {
 					"fastKey": [
 						"<+ <",
-						"<+ > | >+ `` Ё",
+						"<+ > | >+ ` Ё",
 						"< | <! Б | <+ Ю",
 						"> | <! Ю",
 						"<+>+ < Б",
@@ -3003,29 +3003,32 @@
 					]
 				},
 				"recipe": [
-					["`\"'${arrow_left}"],
-					["`\"'${arrow_right}"],
-					["`\"`\"${arrow_left}", "${quote_left×2}"],
-					["`\"`\"${arrow_right}", "${quote_right×2}"],
-					["`\"'${arrow_down}", "${quote_right}${arrow_down}"],
-					["`\"`\"${arrow_down}", "${quote_right×2}${arrow_down}", "${quote_right_double}${arrow_down}"],
-					["`\"`\"${arrow_down}${arrow_left_ushaped}", "${quote_right×2}${arrow_down}${arrow_left_ushaped}", "${quote_low_9_double}${arrow_left_ushaped}"]
+					["\"'${arrow_left}"],
+					["\"'${arrow_right}"],
+					["\"\"${arrow_left}", "${quote_left×2}"],
+					["\"\"${arrow_right}", "${quote_right×2}"],
+					["\"'${arrow_down}", "${quote_right}${arrow_down}"],
+					["\"\"${arrow_down}", "${quote_right×2}${arrow_down}", "${quote_right_double}${arrow_down}"],
+					["\"\"${arrow_down}${arrow_left_ushaped}", "${quote_right×2}${arrow_down}${arrow_left_ushaped}", "${quote_low_9_double}${arrow_left_ushaped}"]
 				]
 			},
 			"quote_left_double_ghost_ru", {
 				"proxy": "quote_low_9_double",
 				"tags": ["left paw quotes", "левая кавычка-лапка"],
 				"groups": ["Quotes", "Smelting Special", "Special Fast Secondary"],
-				"options": { "noCalc": true, "fastKey": "<+ Б" }
+				"options": { "noCalc": true, "fastKey": "<+ Б" },
+				"recipe": []
 			},
 			"quote_right_double_ghost_ru", {
 				"proxy": "quote_left_double",
 				"tags": ["right paw quotes", "правая кавычка-лапка"],
 				"groups": ["Quotes", "Smelting Special", "Special Fast Secondary"],
-				"options": { "noCalc": true, "fastKey": "<+ Ю" }
+				"options": { "noCalc": true, "fastKey": "<+ Ю" },
+				"recipe": []
 			},
 			"back_apostrophe", { "proxy": "quote_right",
-				"groups": [], "options": { "noCalc": true, "hidden": true }
+				"groups": [], "options": { "noCalc": true, "hidden": true },
+				"recipe": []
 			},
 			"vulgar_fraction_zero_[thirds]", {
 				"unicode": ["2189"],
@@ -3455,7 +3458,7 @@
 				"tags": ["n-ary intersection", "знак н-арного пересечения"],
 				"groups": ["Smelting Special", "Math"],
 				"options": { "altLayoutKey": "c*>! U" },
-				"recipe": ["nuni", "нпрс"]
+				"recipe": ["nini", "нпрс"]
 			},
 			"element_of", {
 				"unicode": "2208",
@@ -4167,19 +4170,19 @@
 				"unicode": "0387",
 				"tags": ["ελληνικη ανω τελεια"],
 				"groups": ["Hellenic Punctuation"],
-				"options": { "altLayoutKey": ">! `;" }
+				"options": { "altLayoutKey": ">! ;" }
 			},
 			"hel_n_sym_erotimatiko", {
 				"unicode": "037E",
 				"tags": ["ελληνικη ερωτηματικο"],
 				"groups": ["Hellenic Punctuation"],
-				"options": { "altLayoutKey": "<! `;" }
+				"options": { "altLayoutKey": "<! ;" }
 			},
 			"hel_n_sym_hypodiastole", {
 				"unicode": "2E12",
 				"tags": ["ελληνικη υποδιαστολη"],
 				"groups": ["Hellenic Punctuation"],
-				"options": { "altLayoutKey": ">!<! ``" }
+				"options": { "altLayoutKey": ">!<! `" }
 			},
 			"hel_n_sym_paragraphos[,_forked,_forked_reversed]", {
 				"unicode": ["2E0F", "2E10", "2E11"],
@@ -5048,7 +5051,7 @@
 				"options": { "useLetterLocale": "alpha$" },
 				"recipe": [[
 					"$${psili}${perispomeni}${prosgegrammeni}",
-					"$${perispomeni}${psili}",
+					"$${perispomeni}${psili}${prosgegrammeni}",
 					"${hel_c_let_a_alpha__psili}${perispomeni}${prosgegrammeni}",
 					"${psili}${perispomeni}${prosgegrammeni}$",
 					"${perispomeni}${psili}${prosgegrammeni}$",
@@ -5364,7 +5367,7 @@
 				"options": { "useLetterLocale": "eta$" },
 				"recipe": [[
 					"$${psili}${perispomeni}${prosgegrammeni}",
-					"$${perispomeni}${psili}",
+					"$${perispomeni}${psili}${prosgegrammeni}",
 					"${hel_c_let_h_eta__psili}${perispomeni}${prosgegrammeni}",
 					"${psili}${perispomeni}${prosgegrammeni}$",
 					"${perispomeni}${psili}${prosgegrammeni}$",
@@ -5968,7 +5971,7 @@
 				"options": { "useLetterLocale": "omega$" },
 				"recipe": [[
 					"$${psili}${perispomeni}${prosgegrammeni}",
-					"$${perispomeni}${psili}",
+					"$${perispomeni}${psili}${prosgegrammeni}",
 					"${hel_c_let_o_omega__psili}${perispomeni}${prosgegrammeni}",
 					"${psili}${perispomeni}${prosgegrammeni}$",
 					"${perispomeni}${psili}${prosgegrammeni}$",
@@ -6070,17 +6073,17 @@
 			"lat_[c,s]_let_0_tone_two", {
 				"unicode": ["01A7", "01A8"],
 				"options": { "useLetterLocale": true },
-				"recipe": [["`\"2"], ["'2"]]
+				"recipe": [["\"2"], ["'2"]]
 			},
 			"lat_[c,s]_let_0_tone_five", {
 				"unicode": ["01BC", "01BD"],
 				"options": { "useLetterLocale": true },
-				"recipe": [["`\"5"], ["'5"]]
+				"recipe": [["\"5"], ["'5"]]
 			},
 			"lat_[c,s]_let_0_tone_six", {
 				"unicode": ["0184", "0185"],
 				"options": { "useLetterLocale": true },
-				"recipe": [["`\"6"], ["'6"]]
+				"recipe": [["\"6"], ["'6"]]
 			},
 			"lat_s_let_a_ain", {
 				"unicode": "1D25",
@@ -6629,7 +6632,7 @@
 				"unicode": "1E9F",
 				"groups": ["Latino-Hellenic"],
 				"options": { "useLetterLocale": true },
-				"recipe": ["$el"]
+				"recipe": ["$elt"]
 			},
 			"lat_[c,s]_let_e_epsilon", {
 				"unicode": ["0190", "025B"],
@@ -9365,7 +9368,7 @@
 			"cyr_[c,s]_lig_uk", {
 				"unicode": ["A64A", "A64B"],
 				"options": { "useLetterLocale": true, "fastKey": "/У/?Primary" },
-				"symbol": { "letter": "${cyr_[c,s]_let_o}${cyr_s_let_u}" }
+				"symbol": { "letter": "${cyr_[c,s]_let_o}${arrow_up}${cyr_[c,s]_let_u}" }
 			},
 			"cyr_[s]_lig_uk_unblended", {
 				"unicode": ["1C88"],
@@ -9404,7 +9407,7 @@
 			"cyr_[c,s]_dig_uk", {
 				"unicode": ["0478", "0479"],
 				"options": { "useLetterLocale": true },
-				"symbol": { "letter": "${cyr_[c,s]_let_o}${cyr_s_let_u}" }
+				"symbol": { "letter": "${cyr_[c,s]_let_o}${cyr_[c,s]_let_u}" }
 			},
 			"cyr_[c,s]_dig_yeru", {
 				"unicode": ["042B", "044B"],

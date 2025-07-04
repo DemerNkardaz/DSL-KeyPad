@@ -1,34 +1,48 @@
 Class Event {
 	/**
-	 * @method {@link Event.Trigger()} =>
 	 * 
-	 * @event \<on_compose_mode\> \<starts\> => @references @instance of {@link ChrCrafter} & @type {Object} 
-	 * @property {String} Object.input
-	 * @property {Boolean} Object.pauseOn
-	 * 
-	 * @event \<on_compose_mode\> \<ends\> => @references @instance of {@link ChrCrafter} & @param {Object}
 	 **/
 	static eventListeners := Map(
-		"app_class", Map(
-			"initialized", [],
+		"Application Class", Map(
+			"Initialized", [],
 		),
-		"chr_lib", Map(
-			"starts_reg", [],
-			"ends_reg", [],
-			"common_library_ends_reg", [],
+		"Character Library", Map(
+			"Registration Starts", [],
+			"Registration Ends", [],
+			"Default Ready", [],
 		),
-		"on_chr", Map(
-			"send", [],
-			"caps_send", [],
-			"lang_send", [],
-			"lang_call", [],
-			"time_send", [],
-			"default_send", [],
+		"Chracter", Map(
+			"Send", [],
+			"CpasLock Send", [],
+			"Language Send", [],
+			"Language Call", [],
+			"Time Send", [],
+			"Default Send", [],
 		),
-		"on_compose_mode", Map(
-			"starts", [],
-			"ends", [],
-			"iteration_starts", [],
+		"Compose Mode", Map(
+			"Started", [],
+			"Ended", [],
+			"Iteration Started", [],
+		),
+		"UI Instance [Panel]", Map(
+			"Created", [],
+			"Destroyed", [],
+			"Shown", [],
+		),
+		"UI Data", Map(
+			"Changed", [],
+		),
+		"UI Language", Map(
+			"Switched", [],
+		),
+		"Binding Storage", Map(
+			"Item Registered", [],
+		),
+		"Scripter Storage", Map(
+			"Item Registered", [],
+		),
+		"Favorites", Map(
+			"Changed", [],
 		),
 	)
 
@@ -68,7 +82,7 @@ Class Event {
 	 * @returns {Timer} which will clear static variable after 5 seconds
 	 * 
 	 * @example
-	 * Event.OnEvent("on_chr", "send", MyEvent)
+	 * Event.OnEvent("Chracter", "Send", MyEvent)
 	 * MyEvent(&output) {
 	 * 	static storage := ""
 	 * 	static clear := _Clear.Bind()
@@ -112,6 +126,11 @@ Class Event {
 		return
 	}
 
+	static TriggerMulti(arrays*) {
+		for each in arrays
+			this.Trigger(each*)
+	}
+
 	static GetFunctionMaxParams(function) {
 		if function.HasProp("MaxParams")
 			return function.MaxParams
@@ -122,35 +141,3 @@ Class Event {
 		return 10
 	}
 }
-
-
-; Event.OnEvent("on_chr", "send", MyEvent)
-; MyEvent(&output) {
-; 	static storage := ""
-; 	static clear := _Clear.Bind()
-
-; 	SetTimer(clear, 0)
-
-; 	if globalInstances.crafter.isComposeInstanceActive
-; 		return
-
-; 	if storage == Chr(0x0102) && output == Chr(0x0301)
-; 		SendEvent("{BackSpace}"), output := Chr(0x1EAE)
-
-; 	storage := output
-; 	return SetTimer(clear, -5000)
-
-; 	static _Clear() => storage := ""
-; }
-
-; Event.OnEvent("on_chr", "send", (&combo, &output, &inputType) => (
-; 	Tooltip("Character sent: " combo "`nOutput: " output "`nInput Type: " inputType)
-; 	; output = "Ă" && output := "Ắ"
-; ))
-
-; Event.OnEvent("chr_lib", "starts_reg", (rawEntries, typeOfInit) => (
-; 	MsgBox("Character registration starts!`n" typeOfInit "`n`n" rawEntries[1]),
-; 	rawEntries[1] = "acute" && rawEntries.InsertAt(1, "acute_modified", rawEntries[2])
-; ))
-; Event.OnEvent("chr_lib", "ends_reg", (*) => (MsgBox("Character registration ends!`n")))
-; Event.OnEvent("app_class", "initialized", (*) => (MsgBox("Application initialized!")))

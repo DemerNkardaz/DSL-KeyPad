@@ -674,7 +674,7 @@ Class Options {
 		if !isLanguageWasChanged
 			return
 
-		SetTimer(this.PostSwitchLanguage.Bind(this), -50)
+		return Event.Trigger("UI Language", "Switched")
 	}
 
 	static PostSwitchLanguage() {

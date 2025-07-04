@@ -1,10 +1,10 @@
 Class ChrReg {
 	__New(rawEntries, typeOfInit := "Internal", preventProgressGUI := False, defaultLib := False) {
-		Event.Trigger("chr_lib", "starts_reg", rawEntries, typeOfInit, preventProgressGUI)
+		Event.Trigger("Character Library", "Registration Starts", rawEntries, typeOfInit, preventProgressGUI)
 
 		this.AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI)
 
-		return Event.Trigger("chr_lib", "ends_reg")
+		return Event.TriggerMulti(["Character Library", "Registration Ends"], ["UI Data", "Changed"])
 	}
 
 	AddEntry(&entryName, &entry, &progress, &instances, &isDump?) {
@@ -862,8 +862,10 @@ Class ChrReg {
 							index: entry["index"],
 							name: entryName
 						})
-				} else {
-					ChrLib.duplicatesList.Push(recipe)
+				} else if ChrLib.entryRecipes.Has(recipe) && entryName != ChrLib.entryRecipes[recipe].name {
+					if !ChrLib.duplicatesList.Has(recipe)
+						ChrLib.duplicatesList.Set(recipe, [ChrLib.entryRecipes[recipe].name " -> "])
+					ChrLib.duplicatesList[recipe].Push(entryName)
 				}
 			}
 		}

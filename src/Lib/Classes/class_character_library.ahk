@@ -6,7 +6,7 @@ Class ChrLib {
 	static entryRecipes := Map()
 	static entryTags := Map()
 	static dumpPath := App.paths.temp "\characters_dump.json"
-	static duplicatesList := []
+	static duplicatesList := Map()
 	static lastIndexAdded := -1
 	static countOf := {
 		entries: 0,
@@ -55,11 +55,16 @@ Class ChrLib {
 		; if !characters.data.Has("isDump")
 		; 	JSON.DumpFile(this.dumpPath, "UTF-8")
 
-		if ChrLib.duplicatesList.Length > 0
-			TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
+		if ChrLib.duplicatesList.Count > 0 {
+			TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.Keys().ToString()]), App.Title("+status+version"), "Icon! Mute")
+			output := ""
+			for recipe, names in ChrLib.duplicatesList
+				output .= recipe "`t" names.ToString() "`n"
 
-		Event.Trigger("chr_lib", "common_library_ends_reg")
-		return
+			Journal("duplicates", output)
+		}
+
+		return Event.Trigger("Character Library", "Default Ready")
 	}
 
 	static RemoveEntry(entryName) {

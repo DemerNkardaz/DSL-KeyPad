@@ -196,4 +196,4 @@ Class App {
 	; }
 
 }
-Event.Trigger("app_class", "initialized")
+Event.Trigger("Application Class", "Initialized")

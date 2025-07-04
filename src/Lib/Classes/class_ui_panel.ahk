@@ -1,4 +1,5 @@
 Class Panel2 {
+	setCached := False
 	title := ""
 
 	fontSizes := {
@@ -123,45 +124,45 @@ Class Panel2 {
 	}
 
 	tabContents := [{
-		prefix: "Smelting",
+		prefix: "smelting",
 		columns: this.listViewColumnHeaders.smelting,
 		columnWidths: this.listViewColumnWidths.default,
 		source: "smelting",
 		previewType: "Recipe",
 	}, {
-		prefix: "FastKeys",
+		prefix: "fastkeys",
 		columns: this.listViewColumnHeaders.default,
 		columnWidths: this.listViewColumnWidths.default,
 		source: "fastkeys",
 	}, {
-		prefix: "SecondKeys",
+		prefix: "secondkeys",
 		columns: this.listViewColumnHeaders.default,
 		columnWidths: this.listViewColumnWidths.default,
 		source: "secondkeys",
 	}, {
-		prefix: "TertiaryKeys",
+		prefix: "tertiarykeys",
 		columns: this.listViewColumnHeaders.default,
 		columnWidths: this.listViewColumnWidths.default,
 		source: "tertiarykeys",
 	}, {
-		prefix: "Glago",
+		prefix: "scripts",
 		columns: this.listViewColumnHeaders.default,
 		columnWidths: this.listViewColumnWidths.default,
 		source: "scripts",
 		previewType: "Alternative Layout",
 	}, {
-		prefix: "TELEX/VNI",
+		prefix: "TELEXVNI",
 		columns: this.listViewColumnHeaders.default,
 		columnWidths: this.listViewColumnWidths.default,
 		source: "TELEXVNI",
 	}, {
-		prefix: "AllSymbols",
+		prefix: "all",
 		columns: this.listViewColumnHeaders.smelting,
 		columnWidths: this.listViewColumnWidths.all,
 		source: "all",
 		previewType: "Recipe",
 	}, {
-		prefix: "Favorites",
+		prefix: "favorites",
 		columns: this.listViewColumnHeaders.favorites,
 		columnWidths: this.listViewColumnWidths.favorites,
 		source: "favorites",
@@ -178,7 +179,14 @@ Class Panel2 {
 		this.FillListViewData(&JSONLists, &columnsData)
 
 		JSONLists := unset
-		return
+
+		Event.OnEvent("UI Data", "Changed", () => this.setCached := False)
+		Event.OnEvent("UI Language", "Switched", () => this.setCached := False)
+		Event.OnEvent("Favorites", "Changed", (faveName, condition, preventFromTabChange) =>
+			WinExist(this.title)
+			&& this.ListViewFavoritesEvent(&faveName, &condition, &preventFromTabChange, this.GUI)
+		)
+		return Event.Trigger("UI Instance [Panel]", "Created", this)
 	}
 
 	GetColumnsData(&columnsData) {
@@ -196,18 +204,21 @@ Class Panel2 {
 		} else {
 			local progress := DottedProgressTooltip(, &triggerEnds := False)
 
-			this.GUI := this.Constructor()
+			if !this.setCached
+				this.GUI := this.Constructor()
 			this.GUI.Show(Format("w{} h{} x{} y{}", this.w, this.h, this.xPos, this.yPos))
 
 			triggerEnds := True
 			progress := unset
+			this.setCached := True
 		}
-		return
+
+		return Event.Trigger("UI Instance [Panel]", "Shown", this)
 	}
 
 	Destroy() {
 		this.GUI.Destroy()
-		return
+		return Event.Trigger("UI Instance [Panel]", "Destroyed", this)
 	}
 
 	Constructor() {
@@ -250,13 +261,13 @@ Class Panel2 {
 			panelTabs.UseTab(header)
 
 			local attributes := this.tabContents[i]
-			this.CreateTabConcent(&panelWindow, &attributes)
+			this.CreateTabConcent(panelWindow, attributes)
 		}
 
 		return panelWindow
 	}
 
-	CreateTabConcent(&panelWindow, &attributes := {}) {
+	CreateTabConcent(panelWindow, attributes := {}) {
 		if !attributes.HasOwnProp("previewType")
 			attributes.previewType := "Key"
 
@@ -278,8 +289,8 @@ Class Panel2 {
 		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
 		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 10, "int"))
 		; charactersLV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.previewType }))
-		; charactersLV.OnEvent("DoubleClick", (LV, rowNumber) => this.LV_DoubleClickHandler(LV, rowNumber, attributes.prefix = "Favorites"))
-		; charactersLV.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.LV_ContextMenu(panelWindow, LV, rowNumber, attributes.prefix = "Favorites", isRMB, X, Y))
+		charactersLV.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemDoubleClick(LV, rowNumber, attributes.prefix))
+		charactersLV.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.ItemContextMenu(panelWindow, LV, rowNumber, isRMB, X, Y, attributes.prefix))
 
 		Loop attributes.columns.Length {
 			index := A_Index
@@ -317,6 +328,114 @@ Class Panel2 {
 		previewSymbol.SetFont("s" this.fontSizes.preview, Fonts.fontFaces["Default"].name)
 		title.SetFont("s" this.fontSizes.title, Fonts.fontFaces["Default"].name)
 
+		return
+	}
+
+	ListViewFavoritesEvent(&faveName, &condition, &preventFromTabChange, panelWindow) {
+		local star := Chr(0x2002) Chr(0x2605)
+		local allPrefixes := []
+		for tab in this.listViewTabs {
+			allPrefixes.Push(tab)
+		}
+
+		for tabPrefix in allPrefixes {
+			local listView := panelWindow[tabPrefix "LV"]
+			local itemsCount := listView.GetCount()
+
+			Loop itemsCount {
+				local index := A_Index
+				local entryName := listView.GetText(index, 5)
+
+				if entryName == faveName {
+					local entryTitle := listView.GetText(index, 1)
+
+					if condition = "Added" {
+						if !InStr(entryTitle, star) {
+							listView.Modify(index, , entryTitle star)
+						}
+					} else if condition = "Removed" {
+						if InStr(entryTitle, star) {
+							listView.Modify(index, , StrReplace(entryTitle, star, ""))
+						}
+					}
+					break
+				}
+			}
+		}
+
+		if !preventFromTabChange {
+			local addingRow := []
+
+			if condition = "Added" {
+				local entry := ChrLib.GetEntry(faveName)
+				local reserveCombinationKey := ""
+
+				for cgroup, ckey in globalInstances.MainGUI.combinationKeyToGroupPairs
+					reserveCombinationKey := entry["groups"].HasValue(cgroup) ? ckey : reserveCombinationKey
+
+				local recipe := entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : entry["recipe"].Length > 0 ? entry["recipe"].ToString() : ""
+				local bindings := entry["options"]["fastKey"] != "" ? entry["options"]["fastKey"] : entry["options"]["altLayoutKey"] != "" ? entry["options"]["altLayoutKey"] : entry["options"]["altSpecialKey"] != "" ? entry["options"]["altSpecialKey"] : ""
+				bindings := bindings != "" ? (reserveCombinationKey != "" ? reserveCombinationKey " + " : "") bindings : ""
+
+				while (RegExMatch(bindings, "\%(.*)\%", &match))
+					bindings := RegExReplace(bindings, match[0], VariableParser.Parse(match[0]), , 1)
+
+				local entryView := ""
+				local actualTitle := ""
+
+				for tabPrefix in allPrefixes {
+					local lv := panelWindow[tabPrefix "LV"]
+					local count := lv.GetCount()
+
+					Loop count {
+						local idx := A_Index
+						local name := lv.GetText(idx, 5)
+
+						if name == faveName {
+							entryView := lv.GetText(idx, 3)
+							actualTitle := lv.GetText(idx, 1)
+							actualTitle := StrReplace(actualTitle, star, "")
+							actualTitle := actualTitle star
+							break
+						}
+					}
+					if entryView != ""
+						break
+				}
+
+				addingRow := [,
+					actualTitle,
+					recipe,
+					bindings,
+					entryView,
+					faveName,
+					""
+				]
+			}
+
+			this.ListViewAffectFavoritesTab(&faveName, &condition, panelWindow, addingRow)
+		}
+		return
+	}
+
+	ListViewAffectFavoritesTab(&faveName, &condition, panelWindow, addingRow := []) {
+		local favoritesListView := panelWindow["favoritesLV"]
+		local itemsCount := favoritesListView.GetCount()
+
+		if condition = "Removed" {
+			Loop itemsCount {
+				local index := A_Index
+				local entryName := favoritesListView.GetText(index, 5)
+
+				if entryName == faveName {
+					favoritesListView.Delete(index)
+					break
+				}
+			}
+		} else if condition = "Added"
+			favoritesListView.Add(addingRow*)
+
+		return
 	}
 
 	FillListViewData(&source, &columnsData) {
@@ -330,7 +449,7 @@ Class Panel2 {
 			local ref := this.listViewData[category]
 			ArrayMergeTo(&ref, this.GetEntries(&attributes, &columnsData))
 		}
-		return
+		return Event.Trigger("UI Data", "Changed")
 	}
 
 	GetEntries(&attributes, &columnsData) {
@@ -564,7 +683,7 @@ Class Panel2 {
 
 
 			if isFavorite
-				characterTitle .= " " Chr(0x2605)
+				characterTitle .= Chr(0x2002) Chr(0x2605)
 
 			return characterTitle
 		}
@@ -576,12 +695,112 @@ Class Panel2 {
 			"^@(\S+)$", (str, match, callBack := Locale.Read.Bind(Locale, match[1])) => RegExReplace(str, match[0], callBack()),
 			"%(.*?)%", (str, match) => RegExReplace(str, match[0], %match[1]%),
 		)
-
-		for pattern, call in rules
-			while RegExMatch(str, pattern, &match)
-				str := call(str, match)
+		try
+			for pattern, call in rules
+				while RegExMatch(str, pattern, &match)
+					str := call(str, match)
 
 		return str
+	}
+
+	ItemContextMenu(panelWindow, LV, rowNumber, prefix := " False", isRMB := False, X := 0, Y := 0) {
+		local isFavoriteTab := prefix = "favorites"
+		if !isRMB
+			return
+		try {
+			if StrLen(LV.GetText(rowNumber, 1)) < 1 {
+				return
+			} else {
+				local titleCol := LV.GetText(rowNumber, 1)
+				local entryCol := LV.GetText(rowNumber, 5)
+				local entry := ChrLib.GetEntry(entryCol)
+				local unicode := entry["unicode"]
+				local unicodeBlock := entry["unicodeBlock"]
+				local sequence := entry["sequence"]
+				local altsCount := ObjOwnPropCount(entry["alterations"])
+				local hasLegend := entry["options"]["legend"]
+
+				if StrLen(unicode) > 0 {
+					isCharFavorite := FavoriteChars.CheckVar(entryCol)
+					contextMenu := Menu()
+
+					labels := {
+						fav: Locale.Read("gui.panel.context_menu." (isCharFavorite ? "remove" : "add") "_favorites"),
+						showSymbolPage: Locale.ReadInject("gui.panel.context_menu.show_symbol_page", [UnicodeWebResource.GetCurrentResource()]),
+						showBlockPage: Locale.ReadInject("gui.panel.context_menu.show_block_page", [UnicodeBlockWebResource.GetCurrentResource()]),
+						glyphVariations: Locale.Read("gui.panel.context_menu.glyph_variations"),
+						legend: Locale.Read("gui.panel.context_menu.legend"),
+						showEntry: Locale.ReadInject("gui.panel.context_menu.show_entry", [entryCol])
+					}
+
+					contextMenu.Add(labels.fav, doFav)
+					contextMenu.Add()
+					contextMenu.Add(labels.showSymbolPage, (*) => UnicodeWebResource("Copy", unicode))
+					contextMenu.Add(labels.showBlockPage, (*) => UnicodeBlockWebResource(unicodeBlock))
+					contextMenu.Add()
+					contextMenu.Add(labels.glyphVariations, (*) => GlyphsPanel(entryCol))
+					contextMenu.Add(labels.legend, (*) => ChrLegend(entryCol))
+					contextMenu.Add()
+					contextMenu.Add(labels.showEntry, (*) => ChrLib.EntryPreview(entryCol))
+
+					if altsCount = 0
+						contextMenu.Disable(labels.glyphVariations)
+
+					if !hasLegend
+						contextMenu.Disable(labels.legend)
+
+					contextMenu.Show(X, Y)
+					return
+
+					doFav(*) {
+						SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
+						if !isCharFavorite {
+							FavoriteChars.Add(entryCol, isFavoriteTab)
+						} else if isCharFavorite {
+							FavoriteChars.Remove(entryCol, isFavoriteTab)
+						}
+
+					}
+				}
+			}
+		}
+	}
+
+	ItemDoubleClick(LV, rowNumber, prefix := "False") {
+		local isFavoriteTab := prefix = "favorites"
+		if StrLen(LV.GetText(rowNumber, 4)) < 1 {
+			return
+		} else {
+			local titleCol := LV.GetText(rowNumber, 1)
+			local entryCol := LV.GetText(rowNumber, 5)
+			local entry := ChrLib.GetEntry(entryCol)
+			local unicode := entry["unicode"]
+			local sequence := entry["sequence"]
+
+			if StrLen(unicode) > 0 {
+				isCtrlDown := GetKeyState("LControl")
+				isShiftDown := GetKeyState("LShift")
+
+				if (isCtrlDown) {
+					unicodeCodePoint := Util.UnicodeToChar(sequence.length > 1 ? sequence : unicode)
+					A_Clipboard := unicodeCodePoint
+
+					SoundPlay("C:\Windows\Media\Speech On.wav")
+				} else if isShiftDown {
+					if (unicode = Util.ExtractHex(entry["unicode"])) {
+						SoundPlay("C:\Windows\Media\Speech Misrecognition.wav")
+						if !FavoriteChars.CheckVar(entryCol) {
+							FavoriteChars.Add(entryCol, isFavoriteTab)
+						} else {
+							FavoriteChars.Remove(entryCol, isFavoriteTab)
+						}
+					}
+
+				} else {
+					UnicodeWebResource("Copy", unicode)
+				}
+			}
+		}
 	}
 }
 

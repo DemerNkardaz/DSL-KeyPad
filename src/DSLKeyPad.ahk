@@ -45,6 +45,7 @@ initialized := False
 #Include <Classes\class_user_defined_recipes_storage>
 #Include <Classes\class_user_defined_recipes_registrar>
 #Include <Classes\class_config>
+#Include <Classes\class_journal>
 #Include <Classes\class_variable_parser>
 #Include <Classes\class_character_block>
 #Include <Classes\class_unicode_web_resource>
@@ -102,6 +103,9 @@ TrayMenu.SetTrayItems()
 DottedProgressTooltip(4, &triggerEnds := False, 500)
 triggerEnds := True
 initialized := True
+
+Event.OnEvent("UI Language", "Switched", () => TrayMenu.SetTrayItems())
+Event.OnEvent("Scripter Storage", "Item Registered", () => TrayMenu.SetTrayItems())
 
 ChrLib.CountOfUpdate()
 Panel.SetPanelData()

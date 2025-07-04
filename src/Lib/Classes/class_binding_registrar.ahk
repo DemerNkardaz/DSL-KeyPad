@@ -30,10 +30,12 @@ Class BindReg {
 
 	__New(source*) {
 		this.Merge(source*)
+		return Event.Trigger("Binding Storage", "Item Registered")
 	}
 
 	Merge(source*) {
 		this.MergeInto(BindReg.storedData, source*)
+		return
 	}
 
 	MergeInto(targetMap, maps*) {

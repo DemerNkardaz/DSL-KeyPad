@@ -11,6 +11,7 @@ Class ScripterStore {
 	__New(target := "Alternative Modes", source*) {
 		this.target := target
 		this.Merge(source*)
+		return Event.Trigger("Scripter Storage", "Item Registered")
 	}
 
 	Merge(source*) {
