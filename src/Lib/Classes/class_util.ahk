@@ -663,6 +663,45 @@ Class Util {
 		return iniMap
 	}
 
+	static INIToArray(filePath) {
+		if !InStr(filePath, ".ini")
+			filePath .= ".ini"
+
+		local content := FileRead(filePath, "UTF-16")
+		local lines := StrSplit(content, "`n", "`r`n")
+
+		local iniArray := []
+		local currentSection := ""
+		local currentMap := Map()
+
+		for line in lines {
+			line := Trim(line)
+			if (line = "" or SubStr(line, 1, 1) = ";")
+				continue
+
+			if (SubStr(line, 1, 1) = "[" && SubStr(line, -1) = "]") {
+				if (currentSection != "") {
+					iniArray.Push(currentSection, currentMap)
+				}
+
+				currentSection := SubStr(line, 2, -1)
+				currentMap := Map()
+			}
+			else if (currentSection != "" && InStr(line, "=")) {
+				local parts := StrSplit(line, "=", "`t ")
+				local key := Trim(parts[1])
+				local value := Trim(parts[2])
+				currentMap.Set(key, value)
+			}
+		}
+
+		if (currentSection != "") {
+			iniArray.Push(currentSection, currentMap)
+		}
+
+		return iniArray
+	}
+
 
 	static INIToObj(filePath) {
 		local obj := {}

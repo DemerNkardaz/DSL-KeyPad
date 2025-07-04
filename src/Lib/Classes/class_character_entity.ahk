@@ -15,6 +15,8 @@ Class ChrEntry {
 				"LaTeX", [],
 				"LaTeXPackage", "",
 				"titles", Map(),
+				"name", "",
+				"filePath", "",
 				"tags", [],
 				"groups", [],
 				"alterations", Map(),

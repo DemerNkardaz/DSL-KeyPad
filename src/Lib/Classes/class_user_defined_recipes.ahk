@@ -1,34 +1,11 @@
 Class MyRecipes {
-
-	static file := "CustomRecipes.ini"
+	static file := "CustomRecipes.json"
 	static filePath := App.paths.profile "\" this.file
+	static sampleFile := App.paths.data "\user_defined_recipes_sample.json"
 	static attachments := App.paths.profile "\Attachments.txt"
-	static autoimport := { linux: App.paths.profile "\Autoimport.linux", ini: App.paths.profile "\Autoimport.ini" }
+	static autoimport := { xcompose: App.paths.profile "\XCompose", CustomRecipes: App.paths.profile "\CustomRecipes" }
 	static editorTitle := App.Title("+status+version") " — " Locale.Read("dictionary.create")
 	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
-
-	static defaulRecipes := [
-		"kanji_yoshi", {
-			name: "ru:Кандзи «Ёси»|en:Kanji “Yoshi”",
-			recipe: "ёси|yoshi",
-			result: Chr(0x7FA9),
-		},
-		"html_template", {
-			name: "ru:Шаблон HTML|en:HTML Template",
-			recipe: "html",
-			result: '<!DOCTYPE html>\n<html lang="en">\n\t<head>\n\t\t<meta charset="UTF-8">\n\t\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t\t\n\t\t<meta name="date" content="">\n\t\t<meta name="subject" content="">\n\t\t<meta name="rating" content="">\n\t\t<meta name="theme-color" content="">\n\n\t\t<base href="/" />\n\n\t\t<meta name="referrer" content="origin">\n\t\t<meta name="referrer" content="origin-when-cross-origin">\n\t\t<meta name="referrer" content="no-referrer-when-downgrade">\n\n\t\t<meta property="og:type" content="website">\n\t\t<meta property="og:title" content=">\n\t\t<meta property="og:url" content="">\n\t\t<meta property="og:description" content="">\n\t\t<meta property="og:image" content="">\n\t\t<meta property="og:locale" content="">\n\n\t\t<meta name="twitter:card" content="summary_large_image">\n\t\t<meta property="twitter:domain" content="">\n\t\t<meta property="twitter:url" content="">\n\t\t<meta name="twitter:title" content="">\n\t\t<meta name="twitter:description" content="">\n\t\t<meta name="twitter:image" content="">\n\t\t<meta name="twitter:creator" content="">\n\n\t\t<meta http-equiv="Cache-Control" content="public">\n\t\t<meta http-equiv="X-UA-Compatible" content="ie=edge">\n\t\t<meta name="renderer" content="webkit|ie-comp|ie-stand">\n\t\t<meta name="author" content="">\n\t\t<meta content="" name="description">\n\t\t<link rel="manifest" href="/manifest.webmanifest">\n\n\t\t<title>Index</title>\n\t\n\t\t<link rel="icon" href="/favicon.ico" type="image/x-icon">\n\t\t<link rel="stylesheet" href="/index.css" />\n\n\t\t<meta name="robots" content="index, follow">\n\t\t<meta name="revisit-after" content="7 days">\n\n\t\t<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="use-credentials">\n\t\t<link rel="preconnect" href="https://fonts.gstatic.com">\n\t</head>\n\t<body>\n\t\t<main>\n\t\t\n\t\t</main>\n\t\t<script src="/index.js"></script>\n\t</body>\n</html>',
-		},
-		"kbd", {
-			name: "ru:Элемент ввода с клавиатуры|en:Keyboard Input element",
-			recipe: "kbd",
-			result: "<kbd></kbd>",
-		},
-		"emoji_ice", {
-			name: "ru:Лёд|en:Ice",
-			recipe: "лёд|ice",
-			result: Chr(0x1F9CA),
-		},
-	]
 
 	static XComposePairs := [
 		"at", Chr(0x0040),
@@ -88,28 +65,34 @@ Class MyRecipes {
 	]
 
 	static __New() {
-		if !FileExist(this.filePath) {
-			for i, key in this.defaulRecipes {
-				if Mod(i, 2) == 1 {
-					value := this.defaulRecipes[i + 1]
-					this.AddEdit(key, { name: value.name, recipe: value.recipe, result: value.result, tags: "", previousSection: key }, True)
-				}
-			}
-		}
+		this.Init()
+		return
+	}
 
-		if !FileExist(this.attachments) {
-			FileAppend("", this.attachments, "UTF-8")
-		}
-
-		for key, value in this.autoimport.OwnProps() {
+	static Init() {
+		for key, value in this.autoimport.OwnProps()
 			if !DirExist(value)
 				DirCreate(value)
-		}
+
+		if !FileExist(this.filePath)
+			FileCopy(this.sampleFile, this.filePath)
 
 		if !FileExist(App.paths.profile "\Autoimport.linux\demo.XCompose")
-			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', App.paths.profile "\Autoimport.linux\demo.XCompose", "UTF-8")
+			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', this.autoimport.xcompose "\demo.XCompose", "UTF-8")
 
-		this.Update()
+		MyRecipesReg(this.filePath)
+
+		Loop Files this.autoimport.CustomRecipes "\*", "FR"
+			if A_LoopFileFullPath ~= "i)\.(ini|json)$"
+				MyRecipesReg(A_LoopFileFullPath)
+
+		Loop Files this.autoimport.xcompose "\*", "FR"
+			if A_LoopFileFullPath ~= "i)(XCompose)$"
+				MyRecipesReg(A_LoopFileFullPath)
+
+		local registeredRecipesData := MyRecipesStore.GetAll("IndexList AsArray")
+		ChrReg(registeredRecipesData, "Custom")
+		return
 	}
 
 	static EditorGUI := Gui()
@@ -387,6 +370,7 @@ Class MyRecipes {
 		return True
 	}
 
+
 	static Read(updateOnCatch := False, readOnlyInitialized := False) {
 		output := []
 
@@ -490,13 +474,13 @@ Class MyRecipes {
 				}
 			}
 
-			Loop Files this.autoimport.ini "\*.ini" {
+			Loop Files this.autoimport.CustomRecipes "\*.ini" {
 				try {
 					pushRecipes(A_LoopFileDir "\" A_LoopFileName)
 				}
 			}
 
-			Loop Files this.autoimport.linux "\*.XCompose" {
+			Loop Files this.autoimport.xcompose "\*.XCompose" {
 				try {
 					output := ArrayMerge(output, this.XComposeRead(A_LoopFilePath, A_LoopFileName))
 				}
@@ -576,64 +560,31 @@ Class MyRecipes {
 		return output
 	}
 
-	static Update(strictToNames := []) {
+	static Update() {
+		for key, value in this.autoimport.OwnProps()
+			if !DirExist(value)
+				DirCreate(value)
 
-		recipeSections := this.Read()
-		rawCustomEntries := []
+		if !FileExist(this.filePath)
+			FileCopy(this.sampleFile, this.filePath)
 
-		try {
+		MyRecipesStore.Clear()
 
-			for section in recipeSections {
-				if (strictToNames.Length > 0 && !strictToNames.HasValue(section.section)) {
-					continue
-				}
+		MyRecipesReg(this.filePath)
 
-				try {
+		Loop Files this.autoimport.CustomRecipes "\*", "FR"
+			if A_LoopFileFullPath ~= "i)\.(ini|json)$"
+				MyRecipesReg(A_LoopFileFullPath)
 
-					if InStr(section.recipe, "|") {
-						section.recipe := StrSplit(section.recipe, "|")
-					}
+		Loop Files this.autoimport.xcompose "\*", "FR"
+			if A_LoopFileFullPath ~= "i)(XCompose)$"
+				MyRecipesReg(A_LoopFileFullPath)
 
-					if !IsObject(section.recipe) {
-						section.recipe := [section.recipe]
-					}
+		local registeredRecipesData := MyRecipesStore.GetAll("IndexList AsArray")
+		ChrReg(registeredRecipesData, "Custom")
 
-					if section.tags.Length = 0 && !(section.section ~= "i)^xcompose_") {
-						section.tags := this.HandleTitles(section.name, [])
-					}
-
-					section.result := this.FormatResult(section.result, True)
-
-					existingEntry := ChrLib.GetEntry(section.section)
-
-					if existingEntry && existingEntry["groups"].HasValue("Custom Composes")
-						ChrLib.RemoveEntry(section.section)
-
-					existingEntry := ChrLib.GetEntry(section.section)
-					title := !(section.section ~= "i)^xcompose") ? this.HandleTitles(section.name) : section.name
-
-					if !existingEntry {
-						rawCustomEntries.Push(
-							section.section, ChrEntry().Get(Map(
-								"result", [section.result],
-								"titles", title ? title : section.name,
-								"tags", section.tags ? section.tags : [],
-								"recipe", section.recipe,
-								"groups", ["Custom Composes"],
-								"isXCompose", section.section ~= "i)^xcompose" ? True : False,
-							)),
-						)
-					} else
-						MsgBox(Locale.ReadInject("gui.recipes.warnings.exists_internal", [section.section]), App.Title("+status+version"))
-				} catch {
-					MsgBox("[" section.section "]`n" Locale.ReadInject("gui.recipes.warnings.invalid_recipe", [section.recipe is Array ? section.recipe.ToString("") : section.recipe, section.result is Array ? section.result.ToString("") : section.result]), App.Title("+status+version"))
-				}
-			}
-			ChrReg(rawCustomEntries, "Custom")
-			if ChrLib.duplicatesList.Length > 0
-				TrayTip(Locale.ReadInject("gui.recipes.warnings.duplicates_found", [ChrLib.duplicatesList.ToString()]), App.Title("+status+version"), "Icon! Mute")
-		}
 		ChrLib.CountOfUpdate()
+		return
 	}
 
 	static HandleResult(resultIn) {

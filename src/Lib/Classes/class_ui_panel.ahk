@@ -553,6 +553,9 @@ Class Panel2 {
 			} else if entry["titles"].Count > 0 && entry["titles"].Has(languageCode) {
 				characterTitle := IsSet(useAlt) && entry["titles"].Has(languageCode "_alt") ? entry["titles"].Get(languageCode "_alt") : entry["titles"].Get(languageCode)
 
+			} else if entry["name"] != "" {
+				characterTitle := entry["name"]
+
 			} else if Locale.Read(interLabel, specificLanguage, True, &titleText) {
 				characterTitle := titleText
 
@@ -2369,6 +2372,9 @@ Class Panel {
 
 						} else if entry["titles"].Count > 0 && entry["titles"].Has(languageCode) {
 							characterTitle := entry["titles"].Get(languageCode)
+
+						} else if entry["name"] != "" {
+							characterTitle := entry["name"]
 
 						} else {
 							characterTitle := Locale.Read(entryName)

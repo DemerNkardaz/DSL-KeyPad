@@ -1,4 +1,6 @@
 Class Search {
+	static cache := Map()
+
 	__New(action := "send") {
 		this.SearchPrompt(action)
 	}
@@ -83,47 +85,52 @@ Class Search {
 	}
 
 	Search(searchQuery) {
+		if Search.cache.Has(searchQuery)
+			return Search.cache.Get(searchQuery)
+
 		local indexedEntries := ChrLib.GetIndexedMap()
+		local handledQuery := searchQuery
 
 		local nonSensitiveMark := "i)"
-		local isSensitive := SubStr(searchQuery, 1, 1) = "!"
+		local isSensitive := SubStr(handledQuery, 1, 1) = "!"
 		if isSensitive {
-			searchQuery := SubStr(searchQuery, 2)
+			handledQuery := SubStr(handledQuery, 2)
 			nonSensitiveMark := ""
 		}
 
-		local alteration := RegExMatch(searchQuery, "\:\:(.*?)$", &match) ? match[1] : Scripter.selectedMode.Get("Glyph Variations")
+		local alteration := RegExMatch(handledQuery, "\:\:(.*?)$", &match) ? match[1] : Scripter.selectedMode.Get("Glyph Variations")
 
-		searchQuery := RegExReplace(searchQuery, "\:\:(.*?)$", "")
+		handledQuery := RegExReplace(handledQuery, "\:\:(.*?)$", "")
 
-		if ChrLib.entries.HasOwnProp(searchQuery)
-			return ChrLib.Get(searchQuery, True, Auxiliary.inputMode, alteration)
+		if ChrLib.entries.HasOwnProp(handledQuery)
+			return ChrLib.Get(handledQuery, True, Auxiliary.inputMode, alteration)
 
-		local isHasExpression := RegExMatch(searchQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
+		local isHasExpression := RegExMatch(handledQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
+		local output := ""
 
 		checkTagByUserRegEx(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
-			return tag ~= searchQuery
+			return tag ~= handledQuery
 		}
 
 		checkTagExact(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
 			if isSensitive
-				return searchQuery == tag
-			return searchQuery = tag
+				return handledQuery == tag
+			return handledQuery = tag
 		}
 
 		checkTagPartial(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
-			return tag ~= nonSensitiveMark searchQuery
+			return tag ~= nonSensitiveMark handledQuery
 		}
 
 		checkTagSplittedPartial(tag, strict3 := True) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
-			local splitSearchQuery := StrSplit(searchQuery, " ")
+			local splitSearchQuery := StrSplit(handledQuery, " ")
 			for _, part in splitSearchQuery {
 				if StrLen(part) < 3 && strict3 {
-					if !(tag ~= nonSensitiveMark "(\A|\s)" part "(\s|\z)")
+					if !(tag ~= nonSensitiveMark "(\A" part "(\s|\z))|(\A|\s)" part "\z|(\A|\s)" part "(\s|\z)")
 						return False
 				} else {
 					if !(tag ~= nonSensitiveMark part)
@@ -135,12 +142,12 @@ Class Search {
 
 		checkTagLowAccSequental(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
-			return Util.HasSequentialCharacters(tag, searchQuery, nonSensitiveMark = "")
+			return Util.HasSequentialCharacters(tag, handledQuery, nonSensitiveMark = "")
 		}
 
 		checkTagLowAcc(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
-			return Util.HasAllCharacters(tag, nonSensitiveMark searchQuery)
+			return Util.HasAllCharacters(tag, nonSensitiveMark handledQuery)
 		}
 
 		local conditions := [
@@ -160,10 +167,15 @@ Class Search {
 					continue
 
 				for tag in entry["tags"]
-					if conditions[i](tag)
-						return ChrLib.Get(entryName, True, Auxiliary.inputMode, alteration)
+					if conditions[i](tag) {
+						output := ChrLib.Get(entryName, True, Auxiliary.inputMode, alteration)
+						break 3
+					}
 			}
 		}
-		return
+
+		if output != ""
+			Search.cache.Set(searchQuery, output)
+		return output
 	}
 }

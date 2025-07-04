@@ -10,7 +10,6 @@
  *  ▓ License:    {@license MIT}
  *  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
  **/
-
 #SingleInstance Force
 SetKeyDelay(0, 50)
 A_HotkeyInterval := 1000
@@ -42,6 +41,9 @@ initialized := False
 #Include <Classes\class_clip>
 #Include <Classes\class_util>
 #Include <Classes\class_side_process>
+#Include <Classes\class_xcompose_parser>
+#Include <Classes\class_user_defined_recipes_storage>
+#Include <Classes\class_user_defined_recipes_registrar>
 #Include <Classes\class_config>
 #Include <Classes\class_variable_parser>
 #Include <Classes\class_character_block>
@@ -67,6 +69,7 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_script_processor>
 #Include <Classes\class_functional_bindings_storage>
 #Include <Classes\class_favorites>
+; #Include <Classes\class_xcompose_parser>
 #Include <Classes\class_user_defined_recipes>
 #Include <Classes\class_auxiliary>
 #Include <Classes\class_text_handlers>

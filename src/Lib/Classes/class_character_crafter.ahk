@@ -43,139 +43,144 @@ Class ChrCrafter {
 
 	ComposeMode() {
 		this.isComposeInstanceActive := True
-		local ChrBlockInstance := ChrBlock()
-		local output := ""
-		local input := ""
-		local previousInput := ""
-		local pastInput := ""
+		local composeObject := {}
+		composeObject.ChrBlockInstance := ChrBlock()
 
-		local tooltipSuggestions := ""
-		local favoriteSuggestions := this.ReadFavorites()
+		composeObject.output := ""
+		composeObject.input := ""
+		composeObject.previousInput := ""
+		composeObject.pastInput := ""
 
-		favoriteSuggestions := (
-			favoriteSuggestions != "" ? (
+		composeObject.tooltipSuggestions := ""
+		composeObject.favoriteSuggestions := this.ReadFavorites()
+
+		composeObject.favoriteSuggestions := (
+			composeObject.favoriteSuggestions != "" ? (
 				"`n" Chrs([0x2E3B, 10]) "`n"
 				Chr(0x272A) " " Locale.Read("dictionary.favorites") "`n"
-				RegExReplace(favoriteSuggestions, ",\s+$", "") "`n"
+				RegExReplace(composeObject.favoriteSuggestions, ",\s+$", "") "`n"
 				Chrs([0x2E3B, 10])
 			) : ""
 		)
 
-		local insertType := ""
-		local currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
+		composeObject.insertType := ""
+		composeObject.currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
 
-		local pauseOn := False
-		local cancelledByUser := False
-		local cleanPastInput := False
+		composeObject.pauseOn := False
+		composeObject.cancelledByUser := False
+		composeObject.cleanPastInput := False
 
-		local continueInInput := False
-		local surrogatePair := ""
-		local surrogatInput := ""
+		composeObject.continueInInput := False
 
-		local forceSurrogates := ["Old Persian", "Shavian"].HasValue(Scripter.selectedMode.Get("Alternative Modes"))
-		local symCount := forceSurrogates ? 2 : 1
+		composeObject.forceSurrogates := ["Old Persian", "Shavian"].HasValue(Scripter.selectedMode.Get("Alternative Modes"))
+		composeObject.symCount := composeObject.forceSurrogates ? 2 : 1
 
-		local PH := InputHook("L0", "{Escape}")
-		PH.Start()
+		composeObject.ParentHook := InputHook("L0", "{Escape}")
+
+		Event.Trigger("on_compose_mode", "starts", &this, &composeObject)
+		composeObject.ParentHook.Start()
 
 		ComposeSuggestedTooltip() {
 			local recipesToBeSuggested := this.ValidateRecipes(inputWithoutBackticks, True)
-			tooltipSuggestions := input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
+			composeObject.tooltipSuggestions := composeObject.input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 			Util.CaretTooltip(
-				(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
-				" " input "`n"
-				currentInputMode
-				(favoriteSuggestions)
-				((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : "")
+				(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+				" " composeObject.input "`n"
+				composeObject.currentInputMode
+				(composeObject.favoriteSuggestions)
+				((StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
 			)
 		}
 
-		local tooltips := Map(
+		composeObject.tooltips := Map(
 			"default", (*) => Util.CaretTooltip(
-				(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+				(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 				" "
-				input
-				(favoriteSuggestions)
+				composeObject.input
+				(composeObject.favoriteSuggestions)
 			),
 			"unialt", (*) => Util.CaretTooltip(
 				(Chr(0x2B1C))
 				" "
-				input "`n"
+				composeObject.input "`n"
 				"[ ]"
 				Chr(0x2002) "`n"
-				Locale.Read("tooltip_compose_" StrLower(insertType) "_range")
+				Locale.Read("tooltip_compose_" StrLower(composeObject.insertType) "_range")
 			),
 			"suggested", (*) => ComposeSuggestedTooltip()
 		)
 
 		Loop {
-			insertType := RegExMatch(input, "i)^([uюυaаα])\+", &m) ? (m[1] ~= "i)[uюυ]" ? "Unicode" : "Altcode") : ""
-			local codes := RegExReplace(input, "i)^([uюυaаα])\+", "")
+			iterationObject := {}
+			composeObject.insertType := RegExMatch(composeObject.input, "i)^([uюυaаα])\+", &m) ? (m[1] ~= "i)[uюυ]" ? "Unicode" : "Altcode") : ""
+			iterationObject.codes := RegExReplace(composeObject.input, "i)^([uюυaаα])\+", "")
 
-			local ruleTooltip := (
-				insertType != "" && StrLen(input) > 1 && StrLen(input) < 3 ? "unialt"
-				: insertType = "" && tooltipSuggestions != "" ? "suggested"
-				: StrLen(input) < 2 ? "default" : ""
+			iterationObject.ruleTooltip := (
+				composeObject.insertType != "" && StrLen(composeObject.input) > 1 && StrLen(composeObject.input) < 3 ? "unialt"
+				: composeObject.insertType = "" && composeObject.tooltipSuggestions != "" ? "suggested"
+				: StrLen(composeObject.input) < 2 ? "default" : ""
 			)
 
-			local useTooltip := tooltips.Has(ruleTooltip) ? tooltips.Get(ruleTooltip)() : (*) => []
+			local useTooltip := composeObject.tooltips.Has(iterationObject.ruleTooltip) ? composeObject.tooltips.Get(iterationObject.ruleTooltip)() : (*) => []
 
-			local IH := InputHook("L" symCount, "{Escape}{Backspace}{Enter}{Pause}{Tab}{Insert}")
-			IH.Start(), IH.Wait()
+			iterationObject.IterationHook := InputHook("L" composeObject.symCount, "{Escape}{Backspace}{Enter}{Pause}{Tab}{Insert}")
+			iterationObject.IterationHook.Start(), iterationObject.IterationHook.Wait()
 
-			(IH.EndKey = "Backspace") && StrLen(input) > 0 && input := SubStr(input, 1, -symCount)
-			(IH.EndKey = "Insert") && ClipWait(0.5, 1) && input .= this.parseUniAlt(A_Clipboard, input, insertType)
-			(IH.EndKey = "Pause") && pauseOn := !pauseOn
+			Event.Trigger("on_compose_mode", "iteration_starts", &iterationObject, &composeObject)
 
-			if (IH.EndKey = "Escape") {
-				input := ""
-				output := ""
-				cancelledByUser := True
-				PH.Stop()
+			(iterationObject.IterationHook.EndKey = "Backspace") && StrLen(composeObject.input) > 0 && composeObject.input := SubStr(composeObject.input, 1, -composeObject.symCount)
+			(iterationObject.IterationHook.EndKey = "Insert") && ClipWait(0.5, 1) && composeObject.input .= this.parseUniAlt(A_Clipboard, composeObject.input, composeObject.insertType)
+			(iterationObject.IterationHook.EndKey = "Pause") && composeObject.pauseOn := !composeObject.pauseOn
+
+			if (iterationObject.IterationHook.EndKey = "Escape") {
+				composeObject.input := ""
+				composeObject.output := ""
+				composeObject.cancelledByUser := True
+				composeObject.ParentHook.Stop()
 				break
-			} else if IH.Input != "" {
-				input .= this.parseUniAlt(IH.Input, input, insertType)
+			} else if iterationObject.IterationHook.Input != "" {
+				composeObject.input .= this.parseUniAlt(iterationObject.IterationHook.Input, composeObject.input, composeObject.insertType)
 
-				if TelexScriptProcessor.options.interceptionInputMode != "" && StrLen(input) > 1 {
-					local charPair := StrLen(input) > 2 && previousInput = "\" ? pastInput previousInput IH.Input : previousInput IH.Input
+				if TelexScriptProcessor.options.interceptionInputMode != "" && StrLen(composeObject.input) > 1 {
+					local charPair := StrLen(composeObject.input) > 2 && composeObject.previousInput = "\" ? composeObject.pastInput composeObject.previousInput iterationObject.IterationHook.Input : composeObject.previousInput iterationObject.IterationHook.Input
 					local telexChar := TelexScriptProcessor.TelexReturn(&charPair)
 
 					if telexChar != charPair {
-						input := SubStr(input, 1, previousInput = "\" ? -3 : -2) telexChar
-						cleanPastInput := True
+						composeObject.input := SubStr(composeObject.input, 1, composeObject.previousInput = "\" ? -3 : -2) telexChar
+						composeObject.cleanPastInput := True
 					}
 				}
 
-				pastInput := previousInput
-				previousInput := IH.Input
+				composeObject.pastInput := composeObject.previousInput
+				composeObject.previousInput := iterationObject.IterationHook.Input
 			}
 
-			if cleanPastInput {
-				pastInput := ""
-				previousInput := ""
-				cleanPastInput := False
+			if composeObject.cleanPastInput {
+				composeObject.pastInput := ""
+				composeObject.previousInput := ""
+				composeObject.cleanPastInput := False
 			}
 
-			if input ~= "^\([~0-9]"
-				pauseOn := True
+			if composeObject.input ~= "^\([~0-9]"
+				composeObject.pauseOn := True
 
-			inputWithoutBackticks := RegExReplace(input, "``", "")
+			inputWithoutBackticks := RegExReplace(composeObject.input, "``", "")
 
-			hasBacktick := InStr(input, "``")
+			hasBacktick := InStr(composeObject.input, "``")
 
-			if insertType = "" {
-				currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
+			if composeObject.insertType = "" {
+				composeObject.currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
 				ComposeSuggestedTooltip()
 			}
 
-			insertType := RegExMatch(input, "i)^([uюυaаα])\+", &m) ? (m[1] ~= "i)[uюυ]" ? "Unicode" : "Altcode") : ""
-			local reservedNoBreak := RegExMatch(input, "i)^(ю)") && StrLen(input) = 1
+			composeObject.insertType := RegExMatch(composeObject.input, "i)^([uюυaаα])\+", &m) ? (m[1] ~= "i)[uюυ]" ? "Unicode" : "Altcode") : ""
+			local reservedNoBreak := RegExMatch(composeObject.input, "i)^(ю)") && StrLen(composeObject.input) = 1
 
-			if insertType != "" {
-				input := StrUpper(input)
-				codes := RegExReplace(input, "i)^([uюυaаα])\+", "")
-				local codesArray := StrSplit(codes, " ")
+			if composeObject.insertType != "" {
+				composeObject.input := StrUpper(composeObject.input)
+				iterationObject.codes := RegExReplace(composeObject.input, "i)^([uюυaаα])\+", "")
+				local codesArray := StrSplit(iterationObject.codes, " ")
 
 				for i, checkEmpty in codesArray
 					if checkEmpty = "" || checkEmpty ~= "^\s+$"
@@ -185,29 +190,29 @@ Class ChrCrafter {
 
 				if codesArray.length > 0 {
 					for code in codesArray
-						if code != "" && CharacterInserter.%insertType%Validate(code)
-							suggestion .= CharacterInserter.%insertType%(code)
+						if code != "" && CharacterInserter.%composeObject.insertType%Validate(code)
+							suggestion .= CharacterInserter.%composeObject.insertType%(code)
 
-					local blockShown := codesArray.Length > 0 ? ChrBlockInstance.GetTooltip(codesArray[codesArray.Length], insertType) : Locale.Read("tooltip_compose_" StrLower(insertType) "_range")
+					local blockShown := codesArray.Length > 0 ? composeObject.ChrBlockInstance.GetTooltip(codesArray[codesArray.Length], composeObject.insertType) : Locale.Read("tooltip_compose_" StrLower(composeObject.insertType) "_range")
 					Util.CaretTooltip(
-						(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+						(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 						" "
-						input "`n"
+						composeObject.input "`n"
 						"[ " suggestion " ]"
 						Chr(0x2002) "`n"
 						blockShown
 					)
 				}
 
-				output := suggestion
+				composeObject.output := suggestion
 
-				if IH.EndKey = "Enter"
+				if iterationObject.IterationHook.EndKey = "Enter"
 					break
-			} else if !pauseOn || (IH.EndKey = "Enter") {
+			} else if !composeObject.pauseOn || (iterationObject.IterationHook.EndKey = "Enter") {
 				if reservedNoBreak
 					continue
 				try {
-					if (RegExMatch(input, "\((\d+)[\~]?\)\s+(.*)", &match)) {
+					if (RegExMatch(composeObject.input, "\((\d+)[\~]?\)\s+(.*)", &match)) {
 						local repeatCount := (Number(match[1]) <= 100 && Number(match[1]) > 0) ? match[1] : 1
 						local postInput := match[2]
 						local intermediateValue := ""
@@ -216,7 +221,7 @@ Class ChrCrafter {
 						local postInputHasBacktick := InStr(postInput, "``")
 
 						Loop repeatCount {
-							intermediateValue .= this.ValidateRecipes(postInputNoBackticks, , input ~= "^\(\d+~\)\s")
+							intermediateValue .= this.ValidateRecipes(postInputNoBackticks, , composeObject.input ~= "^\(\d+~\)\s")
 
 							local len := StrLen(intermediateValue)
 							if (len >= 2) {
@@ -230,24 +235,24 @@ Class ChrCrafter {
 						}
 
 						if intermediateValue != "" {
-							output := intermediateValue
-							continueInInput := postInputHasBacktick
-							if !continueInInput
+							composeObject.output := intermediateValue
+							composeObject.continueInInput := postInputHasBacktick
+							if !composeObject.continueInInput
 								break
 							else {
-								input := RegExReplace(input, RegExEscape(postInput), output)
+								composeObject.input := RegExReplace(composeObject.input, RegExEscape(postInput), composeObject.output)
 
-								if insertType = "" {
-									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(input, "``", ""), True)
-									tooltipSuggestions := input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
+								if composeObject.insertType = "" {
+									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), True)
+									composeObject.tooltipSuggestions := composeObject.input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 									Util.CaretTooltip(
-										(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+										(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 										" "
-										input "`n"
-										currentInputMode
-										(favoriteSuggestions)
-										((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : "")
+										composeObject.input "`n"
+										composeObject.currentInputMode
+										(composeObject.favoriteSuggestions)
+										((StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
 									)
 								}
 
@@ -255,33 +260,33 @@ Class ChrCrafter {
 							}
 						}
 					} else {
-						local usePartialMode := input ~= "^\(\~\)\s"
-						local inputToCheck := RegExReplace(input, "^\(\~\)\s", "")
+						local usePartialMode := composeObject.input ~= "^\(\~\)\s"
+						local inputToCheck := RegExReplace(composeObject.input, "^\(\~\)\s", "")
 
 						local inputToCheckNoBackticks := RegExReplace(inputToCheck, "``", "")
 
 						local intermediateValue := this.ValidateRecipes(inputToCheckNoBackticks, , usePartialMode, , hasBacktick)
 						if intermediateValue != "" {
-							output := intermediateValue
+							composeObject.output := intermediateValue
 
-							continueInInput := hasBacktick
-							if !continueInInput
+							composeObject.continueInInput := hasBacktick
+							if !composeObject.continueInInput
 								break
 							else {
-								local originalInput := input
-								input := RegExReplace(input, RegExEscape(inputToCheck), output)
+								local originalInput := composeObject.input
+								composeObject.input := RegExReplace(composeObject.input, RegExEscape(inputToCheck), composeObject.output)
 
-								if (input != originalInput && insertType = "") {
-									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(input, "``", ""), True)
-									tooltipSuggestions := input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
+								if (composeObject.input != originalInput && composeObject.insertType = "") {
+									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), True)
+									composeObject.tooltipSuggestions := composeObject.input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 									Util.CaretTooltip(
-										(pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
+										(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 										" "
-										input "`n"
-										currentInputMode
-										(favoriteSuggestions)
-										((StrLen(tooltipSuggestions) > 0) ? "`n" tooltipSuggestions : "")
+										composeObject.input "`n"
+										composeObject.currentInputMode
+										(composeObject.favoriteSuggestions)
+										((StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
 									)
 								}
 
@@ -293,18 +298,21 @@ Class ChrCrafter {
 			}
 		}
 
-		PH.Stop()
+		composeObject.ParentHook.Stop()
 
-		if InStr(output, "N/A") {
+		if InStr(composeObject.output, "N/A") {
 			Util.CaretTooltip(Chr(0x26A0) " " Locale.Read("warning_recipe_absent"))
 			SetTimer(Tooltip, -1000)
 
 		} else {
-			endTooltip := cancelledByUser ? Chr(0x274E) " " Chr(0x2192) " " Locale.Read("warning_compose_cancelled_by_user") : Chr(0x2705) " " input " " Chr(0x2192) " " Util.StrFormattedReduce(output)
+			endTooltip := composeObject.cancelledByUser ? Chr(0x274E) " " Chr(0x2192) " " Locale.Read("warning_compose_cancelled_by_user") : Chr(0x2705) " " composeObject.input " " Chr(0x2192) " " Util.StrFormattedReduce(composeObject.output)
 			Util.CaretTooltip(endTooltip)
 			SetTimer(Tooltip, -500)
-			if !InStr(output, "N/A") || output != input
+			if !InStr(composeObject.output, "N/A") || composeObject.output != composeObject.input {
+				Event.Trigger("on_compose_mode", "ends", &this, &composeObject)
+				local output := composeObject.output
 				this.SendOutput(&output)
+			}
 		}
 
 		this.isComposeInstanceActive := False

@@ -1,4 +1,13 @@
 Class Event {
+	/**
+	 * @method {@link Event.Trigger()} =>
+	 * 
+	 * @event \<on_compose_mode\> \<starts\> => @references @instance of {@link ChrCrafter} & @type {Object} 
+	 * @property {String} Object.input
+	 * @property {Boolean} Object.pauseOn
+	 * 
+	 * @event \<on_compose_mode\> \<ends\> => @references @instance of {@link ChrCrafter} & @param {Object}
+	 **/
 	static eventListeners := Map(
 		"app_class", Map(
 			"initialized", [],
@@ -15,6 +24,11 @@ Class Event {
 			"lang_call", [],
 			"time_send", [],
 			"default_send", [],
+		),
+		"on_compose_mode", Map(
+			"starts", [],
+			"ends", [],
+			"iteration_starts", [],
 		),
 	)
 
@@ -108,6 +122,7 @@ Class Event {
 		return 10
 	}
 }
+
 
 ; Event.OnEvent("on_chr", "send", MyEvent)
 ; MyEvent(&output) {

@@ -21,7 +21,7 @@ Class PorgressBar {
 		this.GUI := Gui()
 		this.GUI.title := this.data.progressBarTitle
 
-		local windowWidth := 300
+		local windowWidth := 400
 		local windowHeight := 80
 		local xPos := (A_ScreenWidth - windowWidth) / 2
 		local yPos := (A_ScreenHeight - windowHeight) / 2

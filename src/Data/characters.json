@@ -6130,7 +6130,7 @@
 			"lat_[c,s]_let_h_hwair", {
 				"unicode": ["01F6", "0195"],
 				"options": { "useLetterLocale": true, "fastKey": "$?Primary" },
-				"recipe": ["$${arrow_right}"]
+				"recipe": ["$${arrow_right}", "\\hw\\"]
 			},
 			"lat_[c,s]_let_h_half", {
 				"unicode": ["2C75", "2C76"],

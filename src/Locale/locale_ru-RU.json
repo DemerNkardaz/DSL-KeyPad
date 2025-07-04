@@ -302,6 +302,12 @@
 		"side_process": {
 			"support": "Вспомогательный процесс"
 		},
+		"warnings": {
+			"user_defined_recipes": {
+				"recipe_or_result_has_empty_value": "Рецепт или результат для записи «{}» в файле «{}» имеет пустое значение и будет пропущен.",
+				"recipe_format_is_invalid": "Неверный формат записи рецепта «{}» в файле «{}»."
+			}
+		},
 		"html": "HTML-Код/Мнемоника"
 	}
 }

@@ -140,7 +140,7 @@ Class ChrReg {
 				local libEntry := ChrLib.entries.%entryName%
 				this.EntryPostProcessing(&entryName, &libEntry, &instances)
 				if progress {
-					progress.data.progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
+					progress.data.progressName := StrLen(entryName) > 50 ? SubStr(entryName, 1, 50) "…" : entryName
 					progress.data.progressBarCurrent++
 					progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
 				}
