@@ -35,6 +35,18 @@ Class Util {
 		return
 	}
 
+	static StrCountOfChr(str, char) {
+		local count := 0
+
+		Loop Parse, str {
+			if (A_LoopField = char) {
+				count++
+			}
+		}
+
+		return count
+	}
+
 	static StrTrim(Str, chrs := "\s+") {
 		return RegExReplace(Str, chrs)
 	}

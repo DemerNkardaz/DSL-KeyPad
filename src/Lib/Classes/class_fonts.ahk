@@ -9,24 +9,27 @@ Class Fonts {
 	)
 
 	static URLData := JSON.LoadFile(App.paths.data "\fonts_url_data.json", "UTF-8")
+	static fontByCodePoint := JSON.LoadFile(App.paths.data "\font_by_code_points.json", "UTF-8")
 
-	static OpenURL(fontName) {
-		if fontName ~= "^" Chr(0x1D4D5)
-			fontName := SubStr(fontName, 4)
-
-		if this.URLData["Google Fonts"].HasRegEx(fontName) {
-			fontName := StrReplace(fontName, " ", "+")
-			Run("https://fonts.google.com/specimen/" fontName)
-		} else if this.URLData.Has(fontName) && this.URLData[fontName] is String
-			Run(this.URLData.Get(fontName))
-		else
-			Run("https://google.com/search?q=" fontName)
-
-		return
-	}
 
 	static __New() {
 		this.Validate()
+		for fontName, pairs in this.fontByCodePoint
+			for i, each in pairs
+				this.fontByCodePoint[fontName][i] := Number("0x" each)
+		return
+	}
+
+
+	static CompareByPair(codePoint) {
+		local num := Number("0x" codePoint)
+
+		for fontName, pairs in this.fontByCodePoint
+			for i, pair in pairs
+				if Mod(i, 2) = 1 && num >= pairs[i] && num <= pairs[i + 1]
+					return fontName
+
+		return "Segoe UI"
 	}
 
 	static Validate() {
@@ -138,5 +141,20 @@ Class Fonts {
 		Download(fontSource, fontPath)
 		RunWait(fontPath)
 		FileDelete(fontPath)
+	}
+
+	static OpenURL(fontName) {
+		if fontName ~= "^" Chr(0x1D4D5)
+			fontName := SubStr(fontName, 4)
+
+		if this.URLData["Google Fonts"].HasRegEx(fontName) {
+			fontName := StrReplace(fontName, " ", "+")
+			Run("https://fonts.google.com/specimen/" fontName)
+		} else if this.URLData.Has(fontName) && this.URLData[fontName] is String
+			Run(this.URLData.Get(fontName))
+		else
+			Run("https://google.com/search?q=" fontName)
+
+		return
 	}
 }

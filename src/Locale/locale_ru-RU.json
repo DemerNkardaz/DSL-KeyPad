@@ -12,7 +12,9 @@
 			"character": "Знак",
 			"characters": "Знаки",
 			"clear": "Очистить",
+			"code_page": "Кодовая страница",
 			"column": "Колонка",
+			"combining_character": "Комбинируемый знак",
 			"combination": "Комбинация",
 			"combination_key": "Ключ комбинации",
 			"create": "Создать",
@@ -75,6 +77,7 @@
 			"view": "Вид"
 		},
 		"dynamic_dictionary": {
+			"code_page": "Код. стр. {}",
 			"page_of": "Страница {}/{}",
 			"press": "Нажмите {}"
 		},

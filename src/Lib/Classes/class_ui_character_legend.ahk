@@ -379,9 +379,6 @@ Class ChrLegend {
 			TV.Focus()
 
 		if WinExist(this.title) && preselectEntry != "" {
-		}
-
-		if preselectEntry != "" {
 			label := ""
 			for k, v in nameToEntry {
 				if preselectEntry = v {
@@ -390,20 +387,29 @@ Class ChrLegend {
 				}
 			}
 
+			if label != "" {
+				FindAndSelectItem(itemID := 0) {
+					Loop {
+						itemID := TV.GetNext(itemID, "Full")
+						if !itemID
+							break
 
-			local itemID := 0
-			Loop {
-				itemID := TV.GetNext(itemID, "Full")
-				itemID := TV.GetChild(itemID)
-				if !itemID
-					break
+						itemText := TV.GetText(itemID)
+						if itemText = label {
+							TV.Modify(itemID, "Select")
+							this.PanelSelect(&TV, &itemID, &nameToEntry)
+							return True
+						}
 
-				local itemText := TV.GetText(itemID)
-				if itemText = label {
-					TV.Modify(itemID)
-					this.PanelSelect(&TV, &itemID, &nameToEntry)
-					break
+						childID := TV.GetChild(itemID)
+						if childID && FindAndSelectItem(childID - 1) {
+							return True
+						}
+					}
+					return False
 				}
+
+				FindAndSelectItem()
 			}
 		} else {
 			itemID := 0
@@ -416,17 +422,16 @@ Class ChrLegend {
 				firstChild := TV.GetChild(itemID)
 
 				if firstChild {
-					TV.Modify(firstChild)
+					TV.Modify(firstChild, "Select")
 					this.PanelSelect(&TV, &firstChild, &nameToEntry)
 				} else {
-					TV.Modify(itemID)
+					TV.Modify(itemID, "Select")
 					this.PanelSelect(&TV, &itemID, &nameToEntry)
 				}
 				break
 			}
 		}
 	}
-
 	static PanelSelect(&TV, &item, &nameToEntry) {
 		if !item
 			return
