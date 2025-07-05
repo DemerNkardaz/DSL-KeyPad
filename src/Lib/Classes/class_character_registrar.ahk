@@ -126,8 +126,10 @@ Class ChrReg {
 		} else {
 			ChrLib.entries.%entryName% := Map()
 			ChrLib.entriesSource.%entryName% := entry
+			local libEntry := Map()
 			if IsSet(isDump) && isDump {
 				this.ProcessDump(&entryName, &entry)
+				libEntry := ChrLib.entries.%entryName%
 
 				this.TransferProperties(&entryName, &entry)
 			} else {
@@ -137,13 +139,22 @@ Class ChrReg {
 
 				ChrLib.entries.%entryName%["index"] := ++ChrLib.lastIndexAdded
 
-				local libEntry := ChrLib.entries.%entryName%
+				libEntry := ChrLib.entries.%entryName%
 				this.EntryPostProcessing(&entryName, &libEntry, &instances)
-				if progress {
-					progress.data.progressName := StrLen(entryName) > 50 ? SubStr(entryName, 1, 50) "…" : entryName
-					progress.data.progressBarCurrent++
-					progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
-				}
+			}
+			if progress {
+				progress.data.progressName := StrLen(entryName) > 50 ? SubStr(entryName, 1, 50) "…" : entryName
+				progress.data.progressBarCurrent++
+
+				if libEntry["alterations"].Count > 0
+					for alt, _ in libEntry["alterations"] {
+						if InStr(alt, "Entity")
+							progress.data.progressBarCurrent--
+						if !InStr(alt, "Entity")
+							progress.data.progressBarCurrent++
+					}
+
+				progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
 			}
 			entry := unset
 		}
@@ -167,10 +178,19 @@ Class ChrReg {
 				Loop rawEntries.Length // 2 {
 					local index := A_Index * 2 - 1
 					local entryName := rawEntries[index]
+					local entry := rawEntries[index + 1]
 
 					if RegExMatch(entryName, "\[(.*?)\]", &match) {
 						local splitVariants := StrSplit(match[1], ",")
 						progress.data.maxCountOfEntries += splitVariants.Length
+						if entry.Has("alterations") {
+							if entry["alterations"] is Array {
+								for i, _ in entry["alterations"]
+									progress.data.maxCountOfEntries += entry["alterations"][i].Count
+							} else
+								progress.data.maxCountOfEntries += entry["alterations"].Count
+
+						}
 					} else {
 						progress.data.maxCountOfEntries++
 					}
@@ -200,17 +220,21 @@ Class ChrReg {
 			rawEntries.Delete("isDump")
 			if progress {
 				progress.data.maxCountOfEntries := rawEntries.Count
+				for entryName, entry in rawEntries {
+					if entry.Has("alterations") {
+						if entry["alterations"] is Array {
+							for i, _ in entry["alterations"]
+								progress.data.maxCountOfEntries += entry["alterations"][i].Count
+						} else
+							progress.data.maxCountOfEntries += entry["alterations"].Count
+					}
+				}
 				ChrLib.lastIndexAdded := rawEntries.Count - 1
 				SetTimer(setProgress, 250, 0)
 			}
 
 			for entryName, entryValue in rawEntries {
 				this.AddEntry(&entryName, &entryValue, &progress, &instances, &isDump := True)
-				if progress {
-					progress.data.progressName := StrLen(entryName) > 40 ? SubStr(entryName, 1, 40) "…" : entryName
-					progress.data.progressBarCurrent++
-					progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
-				}
 			}
 			progress.Destroy()
 		}
@@ -226,44 +250,8 @@ Class ChrReg {
 	}
 
 	ProcessDump(&entryName, &entry) {
-		for each in entry["groups"] {
-			if !ChrLib.entryGroups.Has(each)
-				ChrLib.entryGroups.Set(each, [])
-
-			if !ChrLib.entryGroups.Get(each).HasValue(entryName)
-				ChrLib.entryGroups[each].Push(entryName)
-		}
-
-		if !ChrLib.entryCategories.Has(entry["symbol"]["category"])
-			ChrLib.entryCategories.Set(entry["symbol"]["category"], [])
-
-		if !ChrLib.entryCategories.Get(entry["symbol"]["category"]).HasValue(entryName)
-			ChrLib.entryCategories[entry["symbol"]["category"]].Push(entryName)
-
-		if entry["tags"].Length > 0 {
-			for tag in entry["tags"] {
-				if !ChrLib.entryTags.Has(tag)
-					ChrLib.entryTags.Set(tag, [])
-
-				ChrLib.entryTags[tag].Push(entryName)
-			}
-		}
-
-		if entry["recipe"].Length > 0 {
-			for recipe in entry["recipe"] {
-				if !ChrLib.entryRecipes.Has(recipe) {
-					ChrLib.entryRecipes.Set(
-						recipe, {
-							chr: Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"]),
-							index: entry["index"],
-							name: entryName
-						})
-				} else {
-					ChrLib.duplicatesList.Push(recipe)
-				}
-			}
-		}
-
+		this.EntryPostProcessing__Categories(&entryName, &entry)
+		this.EntryPostProcessing__Recipes(&entryName, &entry)
 		return
 	}
 

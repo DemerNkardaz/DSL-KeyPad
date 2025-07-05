@@ -4,6 +4,7 @@
 			"__self": "Словарь",
 			"about": "О программе",
 			"all_characters": "Все символы",
+			"alt_code": "Альт-код",
 			"and": "и",
 			"author": "Автор",
 			"authors": "Авторы",
@@ -34,6 +35,8 @@
 			"help": "Помощь",
 			"hexadecimal": "Шестнадцатеричный",
 			"homepage": "Домашняя страница",
+			"html": "HTM",
+			"html_entity": "HTML-Код/Мнемоника",
 			"key": "Ключ",
 			"keys": "Ключи",
 			"language": "Язык",
@@ -64,6 +67,7 @@
 			"title": "Название",
 			"titles": "Названия",
 			"transcription": "Транскрипция",
+			"unicode_point": "Кодовая точка",
 			"unknown": "Неизвестно",
 			"value": "Значение",
 			"values": "Значения",
@@ -113,7 +117,7 @@
 					"show_block_page": "Посмотреть блок Юникода на {}",
 					"glyph_variations": "Вариации глифа",
 					"legend": "{@:gui.legend}",
-					"show_entry": "Show entry {}"
+					"show_entry": "Открыть запись {}"
 				}
 			},
 			"recipes": {
@@ -307,7 +311,6 @@
 				"recipe_or_result_has_empty_value": "Рецепт или результат для записи «{}» в файле «{}» имеет пустое значение и будет пропущен.",
 				"recipe_format_is_invalid": "Неверный формат записи рецепта «{}» в файле «{}»."
 			}
-		},
-		"html": "HTML-Код/Мнемоника"
+		}
 	}
 }

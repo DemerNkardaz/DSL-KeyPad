@@ -49,6 +49,7 @@ Class ChrEntry {
 					"scriptAdditive", "",
 					"tagAdditive", [],
 					"set", "",
+					"view", "",
 					"alt", "",
 					"customs", "",
 					"font", "",

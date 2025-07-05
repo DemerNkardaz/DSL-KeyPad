@@ -7472,7 +7472,13 @@
 			},
 			"lat_[c,s]_let_h__stroke_short", {
 				"unicode": ["0126", "0127"],
-				"options": { "fastKey": "$?Secondary" }
+				"tags": [[], ["voiceless pharyngeal fricative", "uлухой фарингальный фрикатив"]],
+				"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
+				"alterations": [{  }, {  "modifier": "10795" }],
+				"options": {
+					"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"],
+					"fastKey": "$?Secondary" },
+				"recipe": ["$${solidus_short}"]
 			},
 			"lat_[c,s]_let_i__acute", {
 				"unicode": ["00CD", "00ED"],
@@ -13554,7 +13560,9 @@
 				"unicode": "02B2",
 				"groups": ["IPA"],
 				"options": { "noCalc": true, "altLayoutKey": "+>+ a-z" },
-				"symbol": { "alt": "◌ᵃ◌ᵇ◌ᶜ◌ᵈ◌ᵉ◌ᶠ◌ᵍ◌ʰ◌ʲ◌ᵏ◌ˡ" }
+				"symbol": {
+					"alt": "◌\u1D43◌\u1D47◌\u1D9C◌\u1D48◌\u1D49◌\u1DA0◌\u1D4D◌\u02B0◌\u02B2◌\u1D4F◌\u02E1"
+				}
 			},
 			"replacment_character", {
 				"titles": {"ru-RU": "Заменяющий символ", "en-US": "Replacement character"},

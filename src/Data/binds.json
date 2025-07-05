@@ -1515,8 +1515,8 @@
 						">+": "lat_s_let_g::modifier"
 					},
 					"H": {
-						"<^>!": "&ipa_k_let_h",
-						"<^>!>+": "&ipa_k_let_h::modifier",
+						"<^>!": "[&ipa,lat]_[k,s]_let_h[,__stroke_short]",
+						"<^>!>+": "[&ipa,lat]_[k,s]_let_h[,__stroke_short]::modifier",
 						">+": "lat_s_let_h::modifier"
 					},
 					"I": {

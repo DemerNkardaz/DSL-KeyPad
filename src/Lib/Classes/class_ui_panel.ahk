@@ -1,4 +1,10 @@
 Class Panel2 {
+	static __New() {
+		globalInstances.MainGUI := this()
+		return
+	}
+
+
 	setCached := False
 	title := ""
 
@@ -8,8 +14,8 @@ Class Panel2 {
 		title: 14
 	}
 
-	w := 1200
-	h := 650
+	w := 1250
+	h := 850
 
 	xPos := 0
 	yPos := 0
@@ -56,16 +62,107 @@ Class Panel2 {
 	previewGrpBoxW := (this.w - this.previewGrpBoxX) - 20
 	previewGrpBoxH := (this.lvH + this.filterH) + 5
 
-	previewFrameW := (this.previewGrpBoxW / 1.75) * 1.25
+	defaultFrameW := (this.previewGrpBoxW / 1.75) * 1.25
+	defaultFrameX := this.previewGrpBoxX + (this.previewGrpBoxW - this.defaultFrameW) / 2
+
+	previewFrameW := this.defaultFrameW
 	previewFrameH := 128
-	previewFrameX := this.previewGrpBoxX + (this.previewGrpBoxW - this.previewFrameW) / 2
-	previewFrameY := this.previewGrpBoxY + 50
+	previewFrameX := this.defaultFrameX
+	previewFrameY := this.previewGrpBoxY + 60
 
-	previewTitleW := this.previewGrpBoxW - 10
-	previewTitleH := 150
-	previewTitleX := this.previewGrpBoxX + 5
-	previewTitleY := (this.previewFrameY + this.previewFrameH) + 15
+	previewFontW := this.defaultFrameW
+	previewFontH := 20
+	previewFontY := this.previewGrpBoxY + ((this.previewFrameY - this.previewGrpBoxY - this.previewFontH) / 2) + 8
+	previewFontX := this.defaultFrameX
 
+	defaultButtonW := 24
+	defaultButtonH := 24
+	defaultButtonX_RightSide := this.previewFrameX + this.previewFrameW + 0.25
+	defaultButtonX_LeftSide := this.previewFrameX - this.defaultButtonW - 0.75
+
+	legendButtonW := this.defaultButtonW
+	legendButtonH := this.defaultButtonH
+	legendButtonX := this.defaultButtonX_RightSide
+	legendButtonY := this.previewFrameY - 1
+
+	glyphsVariantsButtonW := this.defaultButtonW
+	glyphsVariantsButtonH := this.defaultButtonH
+	glyphsVariantsButtonX := this.defaultButtonX_RightSide
+	glyphsVariantsButtonY := (this.legendButtonY + this.legendButtonH) - 0.15
+
+	previewAlterationsGroupW := this.defaultFrameW
+	previewAlterationsWStep := 5
+	previewAlterationsCount := 8
+
+	previewAlterationH := 32
+	previewAlterationW(itemNumber := 1) => (this.previewAlterationsGroupW - ((this.previewAlterationsCount - 1) * this.previewAlterationsWStep)) / this.previewAlterationsCount
+	previewAlterationY := (this.previewFrameY + this.previewFrameH) + 5
+	previewAlterationX(itemNumber := 1) => this.previewGrpBoxX + (this.previewGrpBoxW - this.previewAlterationsGroupW) / 2 + (itemNumber - 1) * (this.previewAlterationW(itemNumber) + this.previewAlterationsWStep)
+
+	previewTitleW := this.previewGrpBoxW - 60
+	previewTitleH := 60
+	previewTitleX := this.previewGrpBoxX + (this.previewGrpBoxW - this.previewTitleW) / 2
+	previewTitleY := (this.previewAlterationY + this.previewAlterationH) + 20
+
+	fieldW := this.defaultFrameW
+	fieldH := 24
+	fieldX := this.defaultFrameX
+
+	fieldTitleW := this.fieldW
+	fieldTitleH := 14
+	fieldTitleX := this.fieldX
+
+	fieldTitleY := (this.previewTitleY + this.previewTitleH) + 15
+	fieldY := (this.fieldTitleY + this.fieldTitleH) + 2
+
+	fieldStep := 25
+	reservedRecipeSteps := 1.5
+
+	tagsLVW := this.defaultFrameW
+	tagsLVH := 120
+	tagsLVX := this.defaultFrameX
+	tagsLVY := this.incrementFieldY(this.reservedRecipeSteps + 5)[1]
+
+	unicodeBlockW := this.defaultFrameW
+	unicodeBlockH := 120
+	unicodeBlockX := this.defaultFrameX
+	unicodeBlockY := (this.tagsLVY + this.tagsLVH) + 15
+
+	incrementField(stepsCount := 1) {
+		local x := this.fieldX
+		local y := this.fieldY + (stepsCount - 1) * (this.fieldH + this.fieldStep)
+		local w := this.fieldW
+		local h := this.fieldH
+		local field := [x, y, w, h]
+
+		local x := this.fieldTitleX
+		local y := this.fieldTitleY + (stepsCount - 1) * (this.fieldH + this.fieldStep)
+		local w := this.fieldTitleW
+		local h := this.fieldTitleH
+		local fieldTitle := [x, y, w, h]
+		return [field, fieldTitle]
+	}
+
+	incrementFieldY(stepsCount := 1) {
+		local y := this.fieldY + (stepsCount - 1) * (this.fieldH + this.fieldStep)
+		local y2 := this.fieldTitleY + (stepsCount - 1) * (this.fieldH + this.fieldStep)
+		return [y, y2]
+	}
+
+	defaultFieldFSize := 12
+	defaultUnicode := "0000"
+	defaultUnicodeBlock := "0000...10FFFF`n<UNKNOWN>"
+	defaultHTML := "&#0;"
+	defaultAlteration := Chr(0x1D504)
+	notAvailable := "N/A"
+
+	defaultTextOpts := "0x80 BackgroundTrans"
+	defaultEditOpts := "Readonly Center -VScroll -HScroll"
+
+	fontMarker := Chr(0x1D4D5) Chr(0x2004)
+
+	fontColorNoData := "cc3c3c3"
+	fontColorDefault := "c333333"
 
 	tabs := [
 		"smelting",
@@ -288,9 +385,6 @@ Class Panel2 {
 
 		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
 		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 10, "int"))
-		; charactersLV.OnEvent("ItemFocus", (LV, rowNumber) => this.LV_SetCharacterPreview(LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.previewType }))
-		charactersLV.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemDoubleClick(LV, rowNumber, attributes.prefix))
-		charactersLV.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.ItemContextMenu(panelWindow, LV, rowNumber, isRMB, X, Y, attributes.prefix))
 
 		Loop attributes.columns.Length {
 			index := A_Index
@@ -311,23 +405,95 @@ Class Panel2 {
 		characterFilter.SetFont("s10")
 
 		local filterInstance := UIPanelFilter(&panelWindow, &characterFilter, &charactersLV, &src, &localeData)
+
+		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
+
+		local fontMarker := panelWindow.AddText(Format("v{}Font {} x{} y{} w{} h{} c5088c8 Center", attributes.prefix, this.defaultTextOpts, this.previewFontX, this.previewFontY, this.previewFontW, this.previewFontH), this.fontMarker "Noto Sans Old North Arabian")
+
+		local previewGroupFrame := panelWindow.AddGroupBox(Format("v{}Frame x{} y{} w{} h{}", attributes.prefix, this.previewFrameX, this.previewFrameY, this.previewFrameW, this.previewFrameH))
+
+		local previewSymbol := panelWindow.AddEdit(Format("v{}Symbol {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.previewFrameX, this.previewFrameY, this.previewFrameW, this.previewFrameH), DottedCircle)
+
+
+		local legendButton := panelWindow.AddButton(Format("v{}LegendButton x{} y{} w{} h{}", attributes.prefix, this.legendButtonX, this.legendButtonY, this.legendButtonW, this.legendButtonH), Chr(0x1F4D6))
+		local glyphsVariantsButton := panelWindow.AddButton(Format("v{}GlyphsVariantsButton x{} y{} w{} h{}", attributes.prefix, this.glyphsVariantsButtonX, this.glyphsVariantsButtonY, this.glyphsVariantsButtonW, this.glyphsVariantsButtonH), Chr(0x1D57B))
+
+		Loop this.previewAlterationsCount {
+			local index := A_Index
+			local alterationPreview := panelWindow.AddEdit(Format("v{}AlterationPreview{} {} x{} y{} w{} h{}", attributes.prefix, index, this.defaultEditOpts " " this.fontColorNoData, this.previewAlterationX(index), this.previewAlterationY, this.previewAlterationW(index), this.previewAlterationH), this.defaultAlteration)
+			alterationPreview.SetFont("s14")
+		}
+
+		local title := panelWindow.AddText(Format("v{}Title {} x{} y{} w{} h{} {} Center", attributes.prefix, this.defaultTextOpts, this.previewTitleX, this.previewTitleY, this.previewTitleW, this.previewTitleH, this.fontColorNoData), this.notAvailable)
+
+		local keyRecipeTitle := panelWindow.AddText(Format("v{}RecipeTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.fieldTitleX, this.fieldTitleY, this.fieldTitleW, this.fieldTitleH), Locale.Read(attributes.previewType = "Recipe" ? "dictionary.recipe" : "dictionary.key"))
+
+		local keyRecipeTitleSecondary := panelWindow.AddText(Format("v{}RecipeTitleSecondary {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.fieldTitleX, this.fieldTitleY, this.fieldTitleW, this.fieldTitleH))
+
+		local keyRecipeField := panelWindow.AddEdit(Format("v{}RecipeField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts, this.fieldX, this.fieldY, this.fieldW, this.fieldH, this.defaultEditOpts), "")
+
+		local unicodeTitle := panelWindow.AddText(Format("v{}UnicodeTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 1)[2]*), Locale.Read("dictionary.unicode_point"))
+
+		local unicodeField := panelWindow.AddEdit(Format("v{}UnicodeField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementField(this.reservedRecipeSteps + 1)[1]*), this.defaultUnicode)
+
+		local htmlTitle := panelWindow.AddText(Format("v{}HtmlTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 2)[2]*), Locale.Read("dictionary.html_entity"))
+
+		local htmlField := panelWindow.AddEdit(Format("v{}HtmlField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementField(this.reservedRecipeSteps + 2)[1]*), this.defaultHTML)
+
+		local altCodeTitle := panelWindow.AddText(Format("v{}AltCodeTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 3)[2]*), Locale.Read("dictionary.alt_code"))
+
+		local altCodeField := panelWindow.AddEdit(Format("v{}AltCodeField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementField(this.reservedRecipeSteps + 3)[1]*), this.notAvailable)
+
+		local LaTeX_LTX_Title := panelWindow.AddText(Format("v{}LaTeX_LTX {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 4 - 0.04)[2]*), "L T  X")
+
+		local LaTeX_A_Title := panelWindow.AddText(Format("v{}LaTeX_A {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 4 - 0.04 - 0.035)[2]*), Chr(0x2004) "A")
+
+		local LaTeX_E_Title := panelWindow.AddText(Format("v{}LaTeX_E {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 4 - 0.04 + 0.07)[2]*), Chr(0x2003) Chr(0x2004) "E")
+
+		local LaTeXPackageTitle := panelWindow.AddText(Format("v{}LaTeXPackage {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 4)[2]*))
+
+		local LaTeXField := panelWindow.AddEdit(Format("v{}LaTeXField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementField(this.reservedRecipeSteps + 4)[1]*), this.notAvailable)
+
+		local tagsTitle := panelWindow.AddText(Format("v{}TagsTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 5)[2]*), Locale.Read("dictionary.tags"))
+
+		local tagsListView := panelWindow.AddListView(Format("v{}TagsLV x{} y{} w{} h{} +NoSort -Multi -Hdr", attributes.prefix, this.tagsLVX, this.tagsLVY, this.tagsLVW, this.tagsLVH), [""])
+
+		local unicodeBlock := panelWindow.AddText(Format("v{}UnicodeBlock {} x{} y{} w{} h{} c5088c8 Center", attributes.prefix, this.defaultTextOpts, this.unicodeBlockX, this.unicodeBlockY, this.unicodeBlockW, this.unicodeBlockH), this.defaultUnicodeBlock)
+
+		charactersLV.OnEvent("ItemFocus", (LV, rowNumber) => this.ItemSetPreview(LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.previewType }))
+
+		charactersLV.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemDoubleClick(LV, rowNumber, attributes.prefix))
+
+		charactersLV.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.ItemContextMenu(panelWindow, LV, rowNumber, isRMB, X, Y, attributes.prefix))
+
 		characterFilter.OnEvent("Change", (Ctrl, Info) => (
 			filterText := Ctrl.Text,
 			filterInstance.FilterBridge(&filterText)
 		))
 
+		fontMarker.OnEvent("Click", (TextCtrl, *) => Fonts.OpenURL(TextCtrl.Text))
+		tagsListView.OnEvent("DoubleClick", (LV, rowNumber) => this.TagItemDoubleClick(LV, rowNumber))
+		unicodeBlock.OnEvent("Click", (TextCtrl, *) => UnicodeBlockWebResource(TextCtrl.Text))
 
-		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
+		fontMarker.SetFont("s11", Fonts.fontFaces["Default"].name)
 
-		local previewGroupFrame := panelWindow.AddGroupBox(Format("v{}Frame x{} y{} w{} h{}", attributes.prefix, this.previewFrameX, this.previewFrameY, this.previewFrameW, this.previewFrameH))
-
-		local previewSymbol := panelWindow.AddEdit(Format("v{}Symbol x{} y{} w{} h{} Readonly Center -VScroll -HScroll", attributes.prefix, this.previewFrameX, this.previewFrameY, this.previewFrameW, this.previewFrameH), DottedCircle)
-
-		local title := panelWindow.AddText(Format("v{}Title x{} y{} w{} h{} Center", attributes.prefix, this.previewTitleX, this.previewTitleY, this.previewTitleW, this.previewTitleH), "N/A")
+		legendButton.SetFont("s11")
+		legendButton.Enabled := False
+		glyphsVariantsButton.SetFont("s11")
+		glyphsVariantsButton.Enabled := False
 
 		previewSymbol.SetFont("s" this.fontSizes.preview, Fonts.fontFaces["Default"].name)
 		title.SetFont("s" this.fontSizes.title, Fonts.fontFaces["Default"].name)
 
+		keyRecipeField.SetFont("s" this.defaultFieldFSize)
+		unicodeField.SetFont("s" this.defaultFieldFSize)
+		htmlField.SetFont("s" this.defaultFieldFSize)
+		altCodeField.SetFont("s" this.defaultFieldFSize)
+		LaTeXField.SetFont("s" this.defaultFieldFSize)
+
+		LaTeX_LTX_Title.SetFont("s10", "Cambria")
+		LaTeX_A_Title.SetFont("s9", "Cambria")
+		LaTeX_E_Title.SetFont("s10", "Cambria")
 		return
 	}
 
@@ -587,7 +753,7 @@ Class Panel2 {
 							? (bindings["Fast Key"] != "" ? reserveCombinationKey bindings["Fast Key"]
 								: bindings["Alternative Layout"] != "" ? reserveCombinationKey bindings["Alternative Layout"]
 								: "")
-						: characterSymbol
+						: entry["symbol"]["alt"] != "" ? entry["symbol"]["alt"] : characterSymbol
 						entryRow[3] := this.HandleKey(entryRow[3])
 
 						entryRow[4] := attributes["group"] = "Favorites"
@@ -703,7 +869,7 @@ Class Panel2 {
 		return str
 	}
 
-	ItemContextMenu(panelWindow, LV, rowNumber, prefix := " False", isRMB := False, X := 0, Y := 0) {
+	ItemContextMenu(panelWindow, LV, rowNumber, isRMB := False, X := 0, Y := 0, prefix := "") {
 		local isFavoriteTab := prefix = "favorites"
 		if !isRMB
 			return
@@ -764,6 +930,7 @@ Class Panel2 {
 				}
 			}
 		}
+		return
 	}
 
 	ItemDoubleClick(LV, rowNumber, prefix := "False") {
@@ -801,10 +968,30 @@ Class Panel2 {
 				}
 			}
 		}
+		return
+	}
+
+	ItemSetPreview(LV, rowValue, options) {
+
+		return
+	}
+
+	TagItemDoubleClick(LV, rowNumber) {
+		local tag := LV.GetText(rowNumber, 1)
+
+		if tag != "" {
+			isCtrlDown := GetKeyState("LControl")
+
+			if isCtrlDown {
+				A_Clipboard := tag
+				SoundPlay("C:\Windows\Media\Speech On.wav")
+			} else {
+				Run("https://www.google.com/search?q=" tag)
+			}
+		}
+		return
 	}
 }
-
-globalInstances.MainGUI := Panel2()
 
 F11:: globalInstances.MainGUI.Show()
 

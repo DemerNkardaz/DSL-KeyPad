@@ -13,7 +13,7 @@ Class Event {
 		),
 		"Chracter", Map(
 			"Send", [],
-			"CpasLock Send", [],
+			"CapsLock Send", [],
 			"Language Send", [],
 			"Language Call", [],
 			"Time Send", [],

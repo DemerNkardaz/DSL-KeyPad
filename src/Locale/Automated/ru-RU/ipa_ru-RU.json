@@ -51,6 +51,7 @@
 				"s_let_d_eth": { "layout_locale": "Звонкий зубной щелевой согласный" },
 				"s_let_e_reversed": { "layout_locale": "Неогублённый гласный среднего ряда средне-верхнего подъёма" },
 				"s_let_h_turned": { "layout_locale": "Лабиопалатальный аппроксимант" },
+				"s_let_h__stroke_short": { "layout_locale": "Глухой фарингальный фрикатив" },
 				"s_let_i__stroke_short": { "layout_locale": "Неогублённый гласный среднего ряда верхнего подъёма" },
 				"s_let_j__crossed_tail": { "layout_locale": "Звонкий палатальный спирант" },
 				"s_let_l__belt": { "layout_locale": "Глухой альвеолярный латеральный спирант" },

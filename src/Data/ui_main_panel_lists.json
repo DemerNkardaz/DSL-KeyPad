@@ -205,9 +205,9 @@
 			"TELEX/VNI Chinese Romanization", ""
 		],
 		"groupKey": {
-			"TELEX/VNI Vietnamese": "@telex_script_processor.vietnamese",
-			"TELEX/VNI Jorai": "@telex_script_processor.jorai",
-			"TELEX/VNI Chinese Romanization": "@telex_script_processor.chinese_romanization"
+			"TELEX/VNI Vietnamese": "@telex_script_processor.labels.vietnamese",
+			"TELEX/VNI Jorai": "@telex_script_processor.labels.jorai",
+			"TELEX/VNI Chinese Romanization": "@telex_script_processor.labels.chinese_romanization"
 		},
 		"subType": {
 			"TELEX/VNI Vietnamese": "vietnamese",

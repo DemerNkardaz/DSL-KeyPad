@@ -8,6 +8,23 @@ Class Fonts {
 		"Noto Sans Chorasmian", { name: "Noto Sans Chorasmian", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansChorasmian/full/ttf/NotoSansChorasmian-Regular.ttf" },
 	)
 
+	static URLData := JSON.LoadFile(App.paths.data "\fonts_url_data.json", "UTF-8")
+
+	static OpenURL(fontName) {
+		if fontName ~= "^" Chr(0x1D4D5)
+			fontName := SubStr(fontName, 4)
+
+		if this.URLData["Google Fonts"].HasRegEx(fontName) {
+			fontName := StrReplace(fontName, " ", "+")
+			Run("https://fonts.google.com/specimen/" fontName)
+		} else if this.URLData.Has(fontName) && this.URLData[fontName] is String
+			Run(this.URLData.Get(fontName))
+		else
+			Run("https://google.com/search?q=" fontName)
+
+		return
+	}
+
 	static __New() {
 		this.Validate()
 	}
