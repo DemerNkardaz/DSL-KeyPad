@@ -28,6 +28,7 @@ Class Event {
 			"Created", [],
 			"Destroyed", [],
 			"Shown", [],
+			"Cache Loaded", [],
 		),
 		"UI Data", Map(
 			"Changed", [],

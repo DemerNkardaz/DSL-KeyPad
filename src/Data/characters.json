@@ -624,7 +624,7 @@
 					"monospace": "1D7FC",
 					"superscript": "2076",
 					"subscript": "2086",
-					"fullwidth": "FF176"
+					"fullwidth": "FF16"
 				}, {
 					"doubleStruck": "1D7DF",
 					"bold": "1D7D5",
@@ -7121,7 +7121,7 @@
 				"unicode": ["010C", "010D"],
 				"options": {
 					"fastKey": "<!<+ $?Secondary",
-					"telex__jorai": "$ \\Z\\"
+					"telex__jorai": "$ `"
 				}
 			},
 			"lat_[c,s]_let_c__cedilla", {
@@ -7263,7 +7263,7 @@
 			"lat_[c,s]_let_e__caron", {
 				"unicode": ["011A", "011B"],
 				"options": {
-					"telex__jorai": "$ \\Z\\",
+					"telex__jorai": "$ `",
 					"telex__chinese_romanization": "$ \\V\\"
 				}
 			},
@@ -7875,7 +7875,7 @@
 				"unicode": ["01D1", "01D2"],
 				"options": {
 					"fastKey": "<!<+ $?Secondary",
-					"telex__jorai": "$ \\Z\\",
+					"telex__jorai": "$ `",
 					"telex__chinese_romanization": "$ \\V\\"
 				}
 			},

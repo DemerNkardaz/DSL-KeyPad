@@ -21,7 +21,7 @@ Class Fonts {
 	}
 
 
-	static CompareByPair(codePoint) {
+	static CompareByPair(codePoint, defaultFont := "Segoe UI") {
 		local num := Number("0x" codePoint)
 
 		for fontName, pairs in this.fontByCodePoint
@@ -29,7 +29,7 @@ Class Fonts {
 				if Mod(i, 2) = 1 && num >= pairs[i] && num <= pairs[i + 1]
 					return fontName
 
-		return "Segoe UI"
+		return defaultFont
 	}
 
 	static Validate() {

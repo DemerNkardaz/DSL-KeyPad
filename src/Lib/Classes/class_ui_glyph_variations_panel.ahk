@@ -176,35 +176,6 @@ Class GlyphsPanel {
 			"uncombined",
 		]
 
-		static fonts := Map(
-			"combining", "Noto Serif",
-			"modifier", "Noto Serif",
-			"superscript", "Noto Serif",
-			"subscript", "Noto Serif",
-			"italic", "Cabmria Math",
-			"bold", "Cabmria Math",
-			"italicBold", "Cabmria Math",
-			"sansSerif", "Cabmria Math",
-			"sansSerifItalic", "Cabmria Math",
-			"sansSerifBold", "Cabmria Math",
-			"sansSerifItalicBold", "Cabmria Math",
-			"monospace", "Cabmria Math",
-			"fullwidth", "Cabmria Math",
-			"smallCapital", "Noto Serif",
-			"fraktur", "Cabmria Math",
-			"frakturBold", "Cabmria Math",
-			"script", "Cabmria Math",
-			"scriptBold", "Cabmria Math",
-			"doubleStruck", "Cabmria Math",
-			"doubleStruckItalic", "Cabmria Math",
-			"uncombined", "Noto Serif",
-			"small", "Cabmria",
-		)
-		static scriptFonts := Map(
-			"glagolitic", "Noto Sans Glagolitic",
-			"old_permic", "Noto Sans Old Permic",
-		)
-
 		Loop previewsCount
 			glyphsPanel["SymbolPreview" A_Index].Text := ""
 
@@ -212,41 +183,20 @@ Class GlyphsPanel {
 		entry := ChrLib.entries.%entryName%.Clone()
 		entryAlts := {}
 
-		scriptFontFamily := ""
-		scriptFontFamilyKey := ""
-
-		for key, value in scriptFonts {
-			if entryName ~= "i)^" key {
-				scriptFontFamilyKey := key
-				scriptFontFamily := value
-				break
-			}
-		}
-
 		for key, value in entry["alterations"]
 			if !(key ~= "i)HTML$")
 				entryAlts.%key% := value
 
 		for i, each in order {
 			if entryAlts.HasOwnProp(each) {
-				unicode := Util.UnicodeToChar(entryAlts.%each%)
-				fontFamily := (scriptFontFamily != "" ? scriptFontFamily : fonts.Get(each))
+				local unicode := Util.UnicodeToChar(entryAlts.%each%)
+				local code := entryAlts.%each%
+				local fontFamily := Fonts.CompareByPair(code, "")
+				code := Number("0x" code)
+				local addition := ["combining", "modifier", "superscript", "subscript"].HasValue(each) && !(code >= 0x1E000 && code <= 0x1E02F) ? DottedCircle : ""
 
-				if entryAlts.%each% is Array {
-					for j, each in entryAlts.%each% {
-						code := Number("0x" each)
-						if code >= 0x1E030 && code <= 0x1E08F
-							fontFamily := "Catrinity"
-
-					} else {
-						code := Number("0x" entryAlts.%each%)
-						if code >= 0x1E030 && code <= 0x1E08F
-							fontFamily := "Catrinity"
-					}
-				}
-
-				glyphsPanel["SymbolPreview" i].Text := (["combining", "modifier", "superscript", "subscript"].HasValue(each) && scriptFontFamilyKey != "glagolitic" ? DottedCircle : "") unicode glyphsPanel["SymbolPreview" i].SetFont("s" (42), (fontFamily)
-				)
+				glyphsPanel["SymbolPreview" i].Text := (addition) unicode
+				glyphsPanel["SymbolPreview" i].SetFont("s" (42), (fontFamily))
 			}
 		}
 	}
