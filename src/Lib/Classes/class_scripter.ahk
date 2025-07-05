@@ -4,6 +4,21 @@ Class Scripter {
 	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "")
 	static activatedViaMonitor := False
 
+	Class Events {
+		static __New() {
+			Event.OnEvent("Scripter", "On Option Selected", (name, selectorType, terminated) => this.DisableModifiers(name, selectorType, terminated))
+			return
+		}
+
+		static DisableModifiers(name, selectorType, terminated) {
+			if terminated
+				&& selectorType = "Alternative Modes"
+				&& Scripter.selectedMode.Get("Glyph Variations") = "modifier"
+				Scripter.OptionSelect("modifier", "Glyph Variations", True)
+			return
+		}
+	}
+
 	static SelectorPanel(selectorType := "Alternative Modes", currentPage := 1) {
 		local keySymbols := Map(
 			"Tilde", "``",
@@ -112,7 +127,15 @@ Class Scripter {
 			selectorPanel.OnEvent("Close", (Obj) => this.PanelDestroy(selectorType))
 			selectorPanel.title := this.selectorTitle.Get(selectorType)
 
-			local totalItems := ScripterStore.storedData[selectorType].Length // 2
+			; local totalItems := ScripterStore.storedData[selectorType].Length // 2
+			local totalItems := 0
+
+			for i, pairs in ScripterStore.storedData[selectorType] {
+				if Mod(i, 2) = 1 && !ScripterStore.storedData[selectorType][i + 1].Has("hidden") {
+					totalItems++
+				}
+			}
+
 			local totalPages := Ceil(totalItems / maxItems)
 
 			if currentPage > totalPages
@@ -149,11 +172,14 @@ Class Scripter {
 
 			j := 0
 			Loop pageItems {
-				j++
 				local dataIndex := startIndex + A_Index - 1
 				local i := dataIndex * 2 - 1
 				local dataName := ScripterStore.storedData[selectorType][i]
 				local dataValue := ScripterStore.storedData[selectorType][i + 1]
+				if dataValue.Has("hidden") && dataValue["hidden"]
+					continue
+
+				j++
 				AddOption(dataName, dataValue, j)
 			}
 
@@ -244,14 +270,14 @@ Class Scripter {
 		}
 	}
 
-	static OptionSelect(name, selectorType := "Alternative Modes") {
-		local currentISP := TelexScriptProcessor.options.interceptionInputMode
+	static OptionSelect(name, selectorType := "Alternative Modes", ignoreRebuild := False) {
+		local currentTSP := TelexScriptProcessor.options.interceptionInputMode
 		if name != "" {
 			local currentMode := this.selectedMode.Get(selectorType)
 
 			if selectorType = "Alternative Modes" {
-				if currentISP != "" {
-					WarningISP(name, currentISP, selectorType)
+				if currentTSP != "" {
+					WarningISP(name, currentTSP, selectorType)
 					return
 				}
 			}
@@ -260,8 +286,11 @@ Class Scripter {
 		}
 
 		local altMode := this.selectedMode.Get(selectorType)
+		local terminated := altMode = ""
 
-		KbdBinder.RebuilBinds(, altMode != "")
+		Event.Trigger("Scripter", "On Option Selected", name, selectorType, terminated)
+		if !ignoreRebuild
+			KbdBinder.RebuilBinds(, altMode != "")
 
 		WarningISP(name, currentISP, selectorType) {
 			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
@@ -269,6 +298,8 @@ Class Scripter {
 			local TSPTitle := Locale.Read("telex_script_processor.labels." instanceRef.tag)
 			MsgBox(Locale.ReadInject("telex_script_processor.warnings.incompatible_with_alternative_modes", [nameTitle, TSPTitle]), App.Title(), "Icon!")
 		}
+
+		return
 	}
 
 	static isScripterWaiting := False

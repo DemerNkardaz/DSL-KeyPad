@@ -273,6 +273,7 @@
 		},
 		"script_labels": {
 			"glyph_variations": {
+				"modifier": "Модификаторы",
 				"combining": "Комбинируемые знаки",
 				"superscript": "Надстрочные знаки и модификаторы",
 				"subscript": "Подстрочные знаки",

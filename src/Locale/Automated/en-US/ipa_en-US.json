@@ -47,6 +47,7 @@
 				"s_let_c__curl": { "layout_locale": "Voiceless alveolo-palatal fricative" },
 				"s_let_d_eth": { "layout_locale": "Voiced dental fricative" },
 				"s_let_e_reversed": { "layout_locale": "Close-mid central unrounded vowel" },
+				"s_let_g_script": { "layout_locale": "Voiced velar plosive" },
 				"s_let_h_turned": { "layout_locale": "Voiceless pharyngeal fricative" },
 				"s_let_h__stroke_short": { "layout_locale": "Глухой фарингальный фрикатив" },
 				"s_let_i__stroke_short": { "layout_locale": "Close central unrounded vowel" },

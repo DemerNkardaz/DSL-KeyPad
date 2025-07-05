@@ -1,4 +1,7 @@
 [
+	"modifier", {
+		"hidden": true
+	},
 	"combining", {
 		"preview": ["%Util.UnicodeToChars('25CC', '0363', '25CC', '0368', '25CC', '0369', '25CC', '0364', '25CC', '0365', '25CC', '0366', '25CC', '0367')%"],
 		"fonts": ["Cabmria"],

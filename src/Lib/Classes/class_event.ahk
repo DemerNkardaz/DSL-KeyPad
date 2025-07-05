@@ -42,6 +42,9 @@ Class Event {
 		"Scripter Storage", Map(
 			"Item Registered", [],
 		),
+		"Scripter", Map(
+			"On Option Selected", [],
+		),
 		"Favorites", Map(
 			"Changed", [],
 		),

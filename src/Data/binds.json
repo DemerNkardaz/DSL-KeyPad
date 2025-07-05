@@ -1409,35 +1409,31 @@
 					"Apostrophe": "&ipa_n_sym_stress_primary",
 					"LeftBracket": "left_bracket",
 					"RightBracket": "right_bracket",
-					"Tilde": "grave_accent"
+					"Tilde": "grave_accent",
+					"F1": "%(*) => Scripter.OptionSelect(\"modifier\", \"Glyph Variations\", True)%"
 				},
 				"Moded": {
 					"1": {
 						"+": "exclamation",
 						"<^>!": "lat_n_let_alveolar_click",
-						"<^>!<!": "lat_n_let_retroflex_click",
-						"<^>!<!>+": "lat_n_let_retroflex_click::modifier"
+						"<^>!<!": "lat_n_let_retroflex_click"
 					},
 					"2": {
 						"+": "commercial_at",
-						"<^>!": "lat_n_let_dental_click",
-						"<^>!>+": "lat_n_let_dental_click::modifier"
+						"<^>!": "lat_n_let_dental_click"
 					},
 					"3": {
 						"+": "number_sign",
-						"<^>!": "lat_n_let_lateral_click",
-						"<^>!>+": "lat_n_let_lateral_click::modifier"
+						"<^>!": "lat_n_let_lateral_click"
 					},
 					"4": {
 						"+": "wallet_dollar",
-						"<^>!": "lat_n_let_palatal_click",
-						"<^>!>+": "lat_n_let_palatal_click::modifier"
+						"<^>!": "lat_n_let_palatal_click"
 					},
 					"5": {
 						"<^<!": "breve_[below,inverted]_double",
 						"+": "percent",
-						"<^>!": "lat_n_let_bilabial_click",
-						"<^>!>+": "lat_n_let_bilabial_click::modifier"
+						"<^>!": "lat_n_let_bilabial_click"
 					},
 					"6": {
 						"+": "circumflex_accent",
@@ -1463,184 +1459,115 @@
 					"RightBracket": {"+": "right_brace"},
 					"A": {
 						"<^>!": "lat_s_let_a_alpha[_turned,]",
-						"<^>!>+": "lat_s_let_a_alpha[_turned,]::modifier",
 						"<^>!<+": "lat_s_let_a__diaeresis",
 						"<^>!<!": "lat_s_let_a_turned",
-						"<^>!<!>+": "lat_s_let_a_turned::modifier",
-						"<^>!<!<+": "lat_s_lig_ae",
-						"<^>!<!<+>+": "lat_s_lig_ae::modifier",
-						">+": "lat_s_let_a::modifier"
+						"<^>!<!<+": "lat_s_lig_ae"
 					},
 					"B": {
 						"<^<!": "breve[_below,]",
 						"<^<!<+": "breve_inverted[_below,]",
-						">+": "lat_s_let_b::modifier",
-						"<^>!": "&ipa_[k,s]_let_b[,_beta]",
-						"<^>!>+": "[&ipa,hel]_[k,s]_let_b[,_beta]::modifier"
+						"<^>!": "&ipa_[k,s]_let_b[,_beta]"
 					},
 					"C": {
-						"<^>!": "lat_s_let_c__curl",
-						"<^>!>+": "lat_s_let_c__curl::modifier",
-						">+": "lat_s_let_c::modifier"
+						"<^>!": "lat_s_let_c__curl"
 					},
 					"D": {
 						"<^<!": "diaeresis[_below,]",
 						"<^>!": "lat_s_let_d_eth",
-						"<^>!>+": "lat_s_let_d_eth::modifier",
 						"<^>!<!": "lat_s_dig_dz[__retroflex_hook,]",
-						"<^>!<!>+": "lat_s_dig_dz[__retroflex_hook,]::modifier",
-						"<^>!<!<+": "lat_s_dig_d[_ezh,z__curl]",
-						"<^>!<!<+>+": "lat_s_dig_d[_ezh,z__curl]::modifier",
-						">+": "lat_s_let_d::modifier"
+						"<^>!<!<+": "lat_s_dig_d[_ezh,z__curl]"
 					},
 					"E": {
 						"<^>!": "lat_s_let_e_epsilon[_reversed,]",
-						"<^>!>+": "lat_s_let_e_epsilon[_reversed,]::modifier",
 						"<^>!<+": "lat_s_let_e_epsilon_closed_reversed",
-						"<^>!<+>+": "lat_s_let_e_epsilon_closed_reversed::modifier",
-						"<^>!<!": "lat_s_let_[e_reversed,a_schwa]",
-						"<^>!<!>+": "lat_s_let_[e_reversed,a_schwa]::modifier",
-						">+": "lat_s_let_e::modifier"
+						"<^>!<!": "lat_s_let_[e_reversed,a_schwa]"
 					},
 					"F": {
-						"<^>!": "lat_s_let_f_phi",
-						"<^>!>+": "lat_s_let_f_phi::modifier",
-						">+": "lat_s_let_f::modifier"
+						"<^>!": "lat_s_let_f_phi"
 					},
 					"G": {
 						"<^>!": "[&ipa,lat]_[k,s]_let_g[,_gamma]",
-						"<^>!>+": "[&ipa,lat]_[k,s]_let_g[,_gamma]::modifier",
-						"<^>!<!": "lat_s_let_m_turned__long_leg",
-						"<^>!<!>+": "lat_s_let_m_turned__long_leg::modifier",
-						">+": "lat_s_let_g::modifier"
+						"<^>!<!": "lat_s_let_g_script"
 					},
 					"H": {
 						"<^>!": "[&ipa,lat]_[k,s]_let_h[,__stroke_short]",
-						"<^>!>+": "[&ipa,lat]_[k,s]_let_h[,__stroke_short]::modifier",
-						">+": "lat_s_let_h::modifier"
+						"<^>!<!": "lat_s_let_m_turned__long_leg"
 					},
 					"I": {
-						"<^>!": "[&ipa,lat]_[k,s]_let_i[,__stroke_short]",
-						"<^>!>+": "[&ipa,lat]_[k,s]_let_i[,__stroke_short]::modifier",
-						">+": "lat_s_let_i::modifier"
+						"<^>!": "[&ipa,lat]_[k,s]_let_i[,__stroke_short]"
 					},
 					"J": {
-						"<^>!": "lat_s_let_j__crossed_tail",
-						"<^>!>+": "lat_s_let_j__crossed_tail::modifier",
-						">+": "lat_s_let_j::modifier"
+						"<^>!": "lat_s_let_j__crossed_tail"
 					},
 					"K": {
-						">+": "lat_s_let_k::modifier"
 					},
 					"L": {
 						"<^>!": "[&ipa,lat]_[k,s]_let_l[,__belt]",
-						"<^>!>+": "[&ipa,lat]_[k,s]_let_l[,__belt]::modifier",
 						"<^>!<!": "lat_s_let_y_turned",
-						"<^>!<!>+": "lat_s_let_y_turned::modifier",
-						"<^>!<!<+": "lat_s_dig_l[z,s]",
-						"<^>!<!<+>+": "lat_s_dig_l[z,s]::modifier",
-						">+": "lat_s_let_l::modifier"
+						"<^>!<!<+": "lat_s_dig_l[z,s]"
 					},
 					"M": {
-						">+": "lat_s_let_m::modifier"
 					},
 					"N": {
 						"<^>!": "[&ipa,lat]_[k,s]_let_n[,_eng]",
-						"<^>!>+": "[&ipa,lat]_[k,s]_let_n[,_eng]::modifier",
-						"<^>!<!": "lat_s_dig_feng",
-						"<^>!<!>+": "lat_s_dig_feng::modifier",
-						">+": "lat_s_let_n::modifier"
+						"<^>!<!": "lat_s_dig_feng"
 					},
 					"O": {
 						"<^>!": "lat_s_let_o_rams_horn",
-						"<^>!>+": "lat_s_let_o_rams_horn::modifier",
 						"<^>!<+": "lat_s_let_o_open",
-						"<^>!<+>+": "lat_s_let_o_open::modifier",
 						"<^>!<!": "lat_s_let_o__[tilde_overlay,solidus_long]",
-						"<^>!<!>+": "lat_s_let_o__[tilde_overlay,solidus_long]::modifier",
-						"<^>!<!<+": "[&ipa,lat]_[k,s]_lig_oe",
-						"<^>!<!<+>+": "[&ipa,lat]_[k,s]_lig_oe::modifier",
-						">+": "lat_s_let_o::modifier"
+						"<^>!<!<+": "[&ipa,lat]_[k,s]_lig_oe"
 					},
 					"P": {
-						">+": "lat_s_let_p::modifier"
 					},
 					"Q": {
 						"<^>!": "lat_n_let_a_glottal_stop[_reversed,]",
-						"<^>!>+": "lat_n_let_a_glottal_stop[_reversed,]::modifier",
 						"<^>!<+": "lat_n_let_a_glottal_stop[_reversed,]__stroke_short",
-						"<^>!<+>+": "lat_n_let_a_glottal_stop[_reversed,]__stroke_short::modifier",
-						"<^>!<!": "lat_n_let_a_glottal_stop_inverted[__stroke_short,]",
-						">+": "lat_s_let_q::modifier"
+						"<^>!<!": "lat_n_let_a_glottal_stop_inverted[__stroke_short,]"
 					},
 					"R": {
 						"<^<!": "ring_[below,above]",
 						"<^>!": "&ipa_k_let_r",
-						"<^>!>+": "&ipa_k_let_r::modifier",
-						"<^>!<!": "lat_s_let_r_turned",
-						"<^>!<!>+": "lat_s_let_r_turned::modifier",
-						">+": "lat_s_let_r::modifier"
+						"<^>!<!": "lat_s_let_r_turned"
 					},
 					"S": {
-						"<^>!": "lat_s_let_s_sigma",
-						">+": "lat_s_let_s::modifier"
+						"<^>!": "lat_s_let_s_sigma"
 					},
 					"T": {
 						"<^>!": "&ipa_s_let_t_theta",
-						"<^>!>+": "hel_s_let_t_theta::modifier",
 						"<^>!<!": "lat_s_dig_t[s,c__curl]",
-						"<^>!<!>+": "lat_s_dig_t[s,c__curl]::modifier",
-						"<^>!<!<+": "lat_s_dig_t[s__retroflex_hook,_sigma]",
-						"<^>!<!<+>+": "lat_s_dig_t[s__retroflex_hook,_sigma]::modifier",
-						">+": "lat_s_let_t::modifier"
+						"<^>!<!<+": "lat_s_dig_t[s__retroflex_hook,_sigma]"
 					},
 					"U": {
 						"<^>!": "lat_s_let_u_upsilon",
-						"<^>!>+": "lat_s_let_u_upsilon::modifier",
 						"<^>!<!": "lat_s_let_m_turned",
-						"<^>!<!>+": "lat_s_let_m_turned::modifier",
-						"<^>!<!<+": "lat_s_let_u__stroke_long",
-						"<^>!<!<+>+": "lat_s_let_u__stroke_long::modifier",
-						">+": "lat_s_let_u::modifier"
+						"<^>!<!<+": "lat_s_let_u__stroke_long"
 					},
 					"V": {
 						"<^<!": "line_vertical[_below,]",
 						"<^<!<+": "line_vertical_double[_below,]",
-						"<^>!": "lat_s_let_v_turned",
-						"<^>!>+": "lat_s_let_v_turned::modifier",
-						">+": "lat_s_let_v::modifier"
+						"<^>!": "lat_s_let_v_turned"
 					},
 					"W": {
-						"<^>!": "lat_s_let_w_turned",
-						"<^>!>+": "lat_s_let_w_turned::modifier",
-						">+": "lat_s_let_w::modifier"
+						"<^>!": "lat_s_let_w_turned"
 					},
 					"X": {
-						">+": "lat_s_let_x::modifier",
-						"<^>!": "&ipa_s_let_h_chi",
-						"<^>!>+": "hel_s_let_h_chi::modifier"
+						"<^>!": "&ipa_s_let_h_chi"
 					},
 					"Y": {
 						"<^>!": "&ipa_k_let_y",
-						"<^>!>+": "&ipa_k_let_y::modifier",
-						"<^>!<!": "lat_s_let_h_turned",
-						"<^>!<!>+": "lat_s_let_h_turned::modifier",
-						">+": "lat_s_let_y::modifier"
+						"<^>!<!": "lat_s_let_h_turned"
 					},
 					"Z": {
-						"<^>!": "lat_s_let_z_ezh",
-						"<^>!>+": "lat_s_let_z_ezh::modifier",
-						">+": "lat_s_let_z::modifier"
+						"<^>!": "lat_s_let_z_ezh"
 					},
 					"Semicolon": {
 						"<^>!": "colon_triangle_half"
 					},
 					"Apostrophe": {
-						"<^>!": "&ipa_n_sym_stress_secondary",
-						">+": "apostrophe::modifier"
+						"<^>!": "&ipa_n_sym_stress_secondary"
 					},
 					"Comma": {
-						">+": "comma_above_turned::modifier"
 					}
 				}
 			},
@@ -2138,7 +2065,7 @@
 		},
 		"Important": {
 			"Flat": {
-				"[Persistent]RAlt": "%(*) => globalInstances.crafter.ComposeActivate()%"
+				"RAlt": "%(*) => globalInstances.crafter.ComposeActivate()%"
 			},
 			"Moded": {
 				"F1": {

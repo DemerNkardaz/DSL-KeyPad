@@ -90,6 +90,8 @@ Class TrayMenu {
 			i := A_Index * 2 - 1
 			dataName := ScripterStore.storedData["Alternative Modes"][i]
 			dataValue := ScripterStore.storedData["Alternative Modes"][i + 1]
+			if dataValue.Has("hidden") && dataValue["hidden"]
+				continue
 			AddScripts(dataName, dataValue)
 		}
 
@@ -113,6 +115,8 @@ Class TrayMenu {
 			i := A_Index * 2 - 1
 			dataName := ScripterStore.storedData["Glyph Variations"][i]
 			dataValue := ScripterStore.storedData["Glyph Variations"][i + 1]
+			if dataValue.Has("hidden") && dataValue["hidden"]
+				continue
 			AddGlyphVariatns(dataName, dataValue)
 		}
 
@@ -206,14 +210,17 @@ Class TrayMenu {
 				trayTitle .= "`n" Locale.Read("telex_script_processor.labels." instanceRef.tag)
 			} else if currentAlt != "" || currentGlyph != "" {
 				local data := Scripter.GetData(mode, current)
-				local icons := data["icons"]
-				local icon := icons.Length > 1 ? icons[lang = "ru-RU" ? 2 : 1] : icons[1]
-				if icon ~= "file::" {
-					iconFile := StrReplace(icon, "file::")
-					iconCode := 1
-				} else
-					iconCode := App.indexIcos[icon]
-				trayTitle .= "`n" Locale.Read("script_labels." data["locale"])
+
+				if !data.Has("hidden") || data.Has("hidden") && !data["hidden"] {
+					local icons := data["icons"]
+					local icon := icons.Length > 1 ? icons[lang = "ru-RU" ? 2 : 1] : icons[1]
+					if icon ~= "file::" {
+						iconFile := StrReplace(icon, "file::")
+						iconCode := 1
+					} else
+						iconCode := App.indexIcos[icon]
+					trayTitle .= "`n" Locale.Read("script_labels." data["locale"])
+				}
 			}
 		}
 

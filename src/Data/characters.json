@@ -6559,6 +6559,18 @@
 				"recipe": ["'$'"],
 				"symbol": { "beforeLetter": "old_polish" }
 			},
+			"lat_[c,s]_let_g_script", {
+				"unicode": ["A7AC", "0261"],
+				"tags": [[], ["voiced velar plosive", "звонкий велярный взрывной согласный"]],
+				"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
+				"alterations": [{ }, {  "modifier": "1DA2" }],
+				"options": {
+					"layoutTitles": ["", true], "altLayoutKey": ["", ">!<! $"],
+					"referenceLocale": "g$" },
+				"recipe": ["$'/S/"],
+				"symbol": { "beforeLetter": "script" }
+				
+			},
 			"lat_c_let_[f,p]_epigraphic_reversed", {
 				"unicode": ["A7FB", "A7FC"],
 				"options": { "referenceLocale": ["f$", "p$"] },
@@ -6838,7 +6850,7 @@
 				"unicode": ["0270"],
 				"tags": ["voiced velar approximant", "велярный аппроксимант"],
 				"groups": ["Latin", "IPA"],
-				"options": { "layoutTitles": true, "altLayoutKey": ">!<! /G/" },
+				"options": { "layoutTitles": true, "altLayoutKey": ">!<! /H/" },
 				"alterations": { "modifier": "1DAD" },
 				"recipe": [
 					"$${arrow_left_circle}${long_leg}",
@@ -8932,7 +8944,7 @@
 			},
 			"&math_pi_sign", {
 				"reference": "hel_s_let_p_pi",
-				"tags": ["number pi", "число пи"],
+				"tags": ["math number pi", "математическое число пи"],
 				"groups": ["Math"],
 				"options": { "noCalc": true, "altLayoutKey": ">! P" },
 				"recipe": ["mth pi"]
@@ -13559,7 +13571,7 @@
 			"ipa_s_modifiers", {
 				"unicode": "02B2",
 				"groups": ["IPA"],
-				"options": { "noCalc": true, "altLayoutKey": "+>+ a-z" },
+				"options": { "noCalc": true, "altLayoutKey": "F1 On/Off + a-z" },
 				"symbol": {
 					"alt": "◌\u1D43◌\u1D47◌\u1D9C◌\u1D48◌\u1D49◌\u1DA0◌\u1D4D◌\u02B0◌\u02B2◌\u1D4F◌\u02E1"
 				}
