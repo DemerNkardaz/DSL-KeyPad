@@ -142,7 +142,7 @@ Class ChrCrafter {
 			} else if iterationObject.IterationHook.Input != "" {
 				composeObject.input .= this.parseUniAlt(iterationObject.IterationHook.Input, composeObject.input, composeObject.insertType)
 
-				if TelexScriptProcessor.options.interceptionInputMode != "" && StrLen(composeObject.input) > 1 {
+				if TelexScriptProcessor.GetActiveMode() && StrLen(composeObject.input) > 1 {
 					local charPair := StrLen(composeObject.input) > 2 && composeObject.previousInput = "\" ? composeObject.pastInput composeObject.previousInput iterationObject.IterationHook.Input : composeObject.previousInput iterationObject.IterationHook.Input
 					local telexChar := TelexScriptProcessor.TelexReturn(&charPair)
 

@@ -36,15 +36,15 @@ Class KbdMonitor {
 
 			if !["^en", "^ru", "^vi"].HasRegEx(langBlock[1])
 				&& Scripter.selectedMode.Get("Alternative Modes") = ""
-				&& TelexScriptProcessor.options.interceptionInputMode = ""
+				&& !TelexScriptProcessor.GetActiveMode()
 				&& langBlock[2].altInput != ""
 				&& Scripter.Has(langBlock[2].altInput) {
 				Scripter.activatedViaMonitor := True
-				Scripter.OptionSelect(langBlock[2].altInput)
+				Scripter.ToggleSelectedOption(langBlock[2].altInput)
 			} else if Scripter.activatedViaMonitor
 				&& langBlock[2].altInput = "" {
 				Scripter.activatedViaMonitor := False
-				Scripter.OptionSelect(Scripter.selectedMode.Get("Alternative Modes"))
+				Scripter.ToggleSelectedOption(Scripter.selectedMode.Get("Alternative Modes"))
 			}
 		}
 

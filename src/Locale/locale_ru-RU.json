@@ -272,6 +272,10 @@
 			}
 		},
 		"script_labels": {
+			"telex_script_processor": {
+				"tieng_viet": "{@:telex_script_processor.labels.vietnamese<dictionary.et>jorai}",
+				"hanyu_pinyin": "{@:telex_script_processor.labels.chinese_romanization}"
+			},
 			"glyph_variations": {
 				"modifier": "Модификаторы",
 				"combining": "Комбинируемые знаки",

@@ -1,0 +1,18 @@
+[
+	"Tieng Viet", {
+		"preview": ["Tiếng Việt × Jơrai"],
+		"fonts": [],
+		"font_size": 12,
+		"locale": "telex_script_processor.tieng_viet",
+		"uiid": "TiengViet",
+		"icons": ["tieng_viet"]
+	},
+	"HanYu PinYin", {
+		"preview": ["HànYǔ Pīnyīn"],
+		"fonts": [],
+		"font_size": 12,
+		"locale": "telex_script_processor.hanyu_pinyin",
+		"uiid": "HanYuPinYin",
+		"icons": ["hanyu_pinyin"]
+	}
+]

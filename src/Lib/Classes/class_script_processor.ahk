@@ -1,11 +1,14 @@
 Class TelexScriptProcessor {
-	static options := { interceptionInputMode: "" }
+
+	static GetActiveMode() {
+		return Scripter.GetCurrentMode("TELEX")
+	}
 
 	static TelexReturn(&input) {
 		local output := input
 		local sequences := JSON.LoadFile(App.paths.data "\telex_script_processor_sequences.json", "UTF-8")
 
-		for key, value in sequences[this.options.interceptionInputMode] {
+		for key, value in sequences[Scripter.GetCurrentMode("TELEX")] {
 			isValid := input == key || InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3)))
 			if isValid {
 				getValue := input == key ? value : key
@@ -30,19 +33,19 @@ Class TelexScriptProcessor {
 	}
 
 	Start(reloadHs := False) {
-		local previousMode := TelexScriptProcessor.options.interceptionInputMode
-		if previousMode != "" {
+		local previousMode := TelexScriptProcessor.GetActiveMode()
+		if previousMode {
 			globalInstances.scriptProcessors[previousMode].Stop()
 			if previousMode = this.mode
 				return
 		}
 
-		local currentAlt := Scripter.selectedMode.Get("Alternative Modes")
+		local currentAlternativeMode := Scripter.GetCurrentModeData("Alternative Modes", &alternativeModeName)
 
-		if currentAlt != "" {
-			local nameTitle := Locale.Read("script_labels." Scripter.GetData(, currentAlt)["locale"])
+		if currentAlternativeMode {
+			local nameTitle := Locale.Read("script_labels." currentAlternativeMode["locale"])
 			local TSPTitle := Locale.Read("telex_script_processor.labels." this.tag)
-			MsgBox(Locale.ReadInject("gui.scripter.alternative_mode.warnings.incompatible_with_telex", [TSPTitle, nameTitle]), App.Title(), "Icon!")
+			MsgBox(Locale.ReadInject("telex_script_processor.warnings.incompatible_with_alternative_modes", [TSPTitle, nameTitle]), App.Title(), "Icon!")
 			return
 		}
 
@@ -50,7 +53,6 @@ Class TelexScriptProcessor {
 	}
 
 	Stop() {
-		TelexScriptProcessor.options.interceptionInputMode := ""
 		this.InH.Stop()
 		this.inputLogger := ""
 		Tooltip()
@@ -200,16 +202,7 @@ Class TelexScriptProcessor {
 
 	RegistryHotstrings(reloadHs) {
 		Tooltip()
-
-		TelexScriptProcessor.options.interceptionInputMode := reloadHs
-			? this.mode
-			: (this.mode != TelexScriptProcessor.options.interceptionInputMode ? this.mode : "")
-
-		isEnabled := (TelexScriptProcessor.options.interceptionInputMode != "" ? True : False)
-
-		if this.mode != "" {
-			this.InitHook()
-		}
+		this.InitHook()
 	}
 
 	InH := InputHook("V")
@@ -292,7 +285,7 @@ Class TelexScriptProcessor {
 				)
 			) "]"
 
-			if StrLen(input) > 0 && TelexScriptProcessor.options.interceptionInputMode != "" {
+			if StrLen(input) > 0 && Scripter.selectedMode.Get("TELEX") != "" {
 				if !RegExMatch(input, forbiddenChars) {
 					this.inputLogger .= input
 					this.inputLogger := inputCut(this.inputLogger)

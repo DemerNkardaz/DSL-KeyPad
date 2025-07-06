@@ -1410,7 +1410,7 @@
 					"LeftBracket": "left_bracket",
 					"RightBracket": "right_bracket",
 					"Tilde": "grave_accent",
-					"F1": "%(*) => Scripter.OptionSelect(\"modifier\", \"Glyph Variations\", True)%"
+					"F1": "%(*) => Scripter.ToggleSelectedOption(\"__modifier\", \"Glyph Variations\", True)%"
 				},
 				"Moded": {
 					"1": {
@@ -2075,8 +2075,8 @@
 				},
 				"F2": {
 					"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Tertiary Keys')%",
-					"<^>!": "%(*) => globalInstances.scriptProcessors['Tieng Viet'].Start()%",
-					"<^>!>+": "%(*) => globalInstances.scriptProcessors['HanYu PinYin'].Start()%"
+					"<^>!": "%(*) => Scripter.ToggleSelectedOption(\"Tieng Viet\", \"TELEX\")%",
+					"<^>!>+": "%(*) => Scripter.ToggleSelectedOption(\"HanYu PinYin\", \"TELEX\")%"
 				},
 				"F8": {
 					"<^>!": "%(*) => GREPTypography.SetStyles()%"
@@ -2103,6 +2103,9 @@
 				},
 				"A": {
 					"<#<!": "%(*) => Scripter.SelectorPanel('Glyph Variations')%"
+				},
+				"D": {
+					"<#<!": "%(*) => Scripter.SelectorPanel('TELEX')%"
 				},
 				"S": {
 					"<#<!": "%(*) => Scripter.SelectorPanel()%"

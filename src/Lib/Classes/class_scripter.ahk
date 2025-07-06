@@ -1,20 +1,22 @@
 Class Scripter {
-	static selectorGUI := Map("Alternative Modes", Gui(), "Glyph Variations", Gui())
-	static selectorTitle := Map("Alternative Modes", "", "Glyph Variations", "",)
-	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "")
+	static selectorGUI := Map("Alternative Modes", Gui(), "Glyph Variations", Gui(), "TELEX", Gui())
+	static selectorTitle := Map("Alternative Modes", "", "Glyph Variations", "", "TELEX", "")
+	static selectedMode := Map("Alternative Modes", "", "Glyph Variations", "", "TELEX", "")
 	static activatedViaMonitor := False
 
 	Class Events {
 		static __New() {
-			Event.OnEvent("Scripter", "On Option Selected", (name, selectorType, terminated) => this.DisableModifiers(name, selectorType, terminated))
+			Event.OnEvent("Scripter", "On Option Selected", (name, selectorType, terminated) => this.DisableAttachedGlyphsMode(name, selectorType, terminated))
 			return
 		}
 
-		static DisableModifiers(name, selectorType, terminated) {
-			if terminated
-				&& selectorType = "Alternative Modes"
-				&& Scripter.selectedMode.Get("Glyph Variations") = "modifier"
-				Scripter.OptionSelect("modifier", "Glyph Variations", True)
+		static DisableAttachedGlyphsMode(name, selectorType, terminated) {
+			if (terminated && selectorType = "Alternative Modes")
+				&& Scripter.GetCurrentModeData("Glyph Variations", &name, &data)
+				&& data.Has("attached_to_alternative_mode")
+				&& data["attached_to_alternative_mode"] {
+				Scripter.ToggleSelectedOption(name, "Glyph Variations", True)
+			}
 			return
 		}
 	}
@@ -117,7 +119,12 @@ Class Scripter {
 
 
 		local prevAltMode := this.selectedMode.Get(selectorType)
-		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read("gui.scripter." (selectorType == "Alternative Modes" ? "alternative_mode" : "glyph_variations")))
+		local titles := Map(
+			"Alternative Modes", "gui.scripter.alternative_mode",
+			"Glyph Variations", "gui.scripter.glyph_variations)",
+			"TELEX", "telex_script_processor",
+		)
+		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read(titles.Get(selectorType)))
 
 		Constructor() {
 			local maxItems := Cfg.Get("Scripter_Selector_Max_Items", "UI", 24, "int")
@@ -205,7 +212,7 @@ Class Scripter {
 				local plateButton := selectorPanel.AddText("w" plateButtonW " h" plateButtonH " x" plateButtonX " y" plateButtonY " BackgroundWhite")
 				plateButton.OnEvent("Click", (Obj, Info) => (
 					this.PanelDestroy(selectorType),
-					this.OptionSelect(dataName, selectorType)
+					this.ToggleSelectedOption(dataName, selectorType)
 				))
 
 
@@ -232,7 +239,7 @@ Class Scripter {
 
 				for i, previewText in dataValue["preview"] {
 					local pt := selectorPanel.AddText("v" dataValue["uiid"] "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
-					pt.SetFont("s" (isGlyphs && dataName != "fullwidth" ? 12 : 10) " c333333", dataValue["fonts"].length > 0 ? dataValue["fonts"][dataValue["fonts"].length > 1 ? i : 1] : "Segoe UI")
+					pt.SetFont("s" (dataValue.Has("font_size") ? dataValue["font_size"] : (isGlyphs && dataName != "fullwidth" ? 12 : 10)) " c333333", dataValue["fonts"].length > 0 ? dataValue["fonts"][dataValue["fonts"].length > 1 ? i : 1] : "Segoe UI")
 
 					scriptPreviewY += optionTitleH - 5
 				}
@@ -270,17 +277,23 @@ Class Scripter {
 		}
 	}
 
-	static OptionSelect(name, selectorType := "Alternative Modes", ignoreRebuild := False) {
-		local currentTSP := TelexScriptProcessor.options.interceptionInputMode
+	static ToggleSelectedOption(name, selectorType := "Alternative Modes", ignoreRebuild := False) {
+		local currentTSP := TelexScriptProcessor.GetActiveMode()
+		local curreltAlternative := this.GetCurrentMode("Alternative Modes")
+
 		if name != "" {
 			local currentMode := this.selectedMode.Get(selectorType)
 
-			if selectorType = "Alternative Modes" {
-				if currentTSP != "" {
-					WarningISP(name, currentTSP, selectorType)
-					return
-				}
+			if selectorType = "Alternative Modes" && currentTSP {
+				WarningISP(name, currentTSP, selectorType)
+				return
 			}
+
+			if selectorType = "TELEX"
+				globalInstances.scriptProcessors[name].Start()
+
+			if curreltAlternative && selectorType = "TELEX"
+				return
 
 			this.selectedMode.Set(selectorType, currentMode != name ? name : "")
 		}
@@ -289,14 +302,15 @@ Class Scripter {
 		local terminated := altMode = ""
 
 		Event.Trigger("Scripter", "On Option Selected", name, selectorType, terminated)
-		if !ignoreRebuild
+		if !ignoreRebuild && selectorType != "TELEX"
 			KbdBinder.RebuilBinds(, altMode != "")
 
 		WarningISP(name, currentISP, selectorType) {
 			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
-			local nameTitle := Locale.Read("script_labels." this.GetData(selectorType, name)["locale"])
+			local nameTitle := Locale.Read("script_labels." this.GetModeData(selectorType, name)["locale"])
 			local TSPTitle := Locale.Read("telex_script_processor.labels." instanceRef.tag)
-			MsgBox(Locale.ReadInject("telex_script_processor.warnings.incompatible_with_alternative_modes", [nameTitle, TSPTitle]), App.Title(), "Icon!")
+			MsgBox(Locale.ReadInject("gui.scripter.alternative_mode.warnings.incompatible_with_telex", [nameTitle, TSPTitle]), App.Title(), "Icon!")
+			return
 		}
 
 		return
@@ -353,7 +367,7 @@ Class Scripter {
 		this.PanelDestroy(selectorType)
 		if endKey != "" && hotkeys.Has(endKey) {
 			this.activatedViaMonitor := False
-			this.OptionSelect(hotkeys.Get(endKey), selectorType)
+			this.ToggleSelectedOption(hotkeys.Get(endKey), selectorType)
 		}
 	}
 
@@ -372,13 +386,25 @@ Class Scripter {
 		return False
 	}
 
-	static GetData(mode := "Alternative Modes", name := "Germanic runes & Glagolitic") {
-		for i, item in ScripterStore.storedData[mode] {
-			if Mod(i, 2) = 1 {
-				if item = name {
-					return ScripterStore.storedData[mode][i + 1]
-				}
-			}
-		}
+	static GetModeData(modeType := "Alternative Modes", name := "Germanic runes & Glagolitic") {
+		if ScripterStore.Has(modeType, name)
+			return ScripterStore.Get(modeType, name)
+		return False
 	}
+
+	static GetCurrentMode(modeType := "Alternative Modes") {
+		local name := this.selectedMode.Get(modeType)
+		if name = ""
+			return False
+		return name
+	}
+
+	static GetCurrentModeData(modeType := "Alternative Modes", &name := "", &data := Map()) {
+		name := this.GetCurrentMode(modeType)
+		if !name
+			return False
+		data := ScripterStore.Get(modeType, name)
+		return data
+	}
+
 }

@@ -21,9 +21,14 @@ Class BindHandler {
 					if rawMatch[1] ~= "\\n" || output ~= "[`n`r]"
 						lineBreaks := True
 				} else {
-					alt := !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Scripter.selectedMode.Get("Glyph Variations") : "None"
-					inputMode := !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Auxiliary.inputMode : "Unicode"
+					local alt := "None"
+					local inputMode := !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Auxiliary.inputMode : "Unicode"
 					repeatCount := 1
+
+					if !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting {
+						local glyphsMode := Scripter.GetCurrentModeData("Glyph Variations", &modeName)
+						alt := glyphsMode is Map && glyphsMode.Has("reference") ? glyphsMode["reference"] : modeName
+					}
 
 					if RegExMatch(character, "×(\d+)$", &repeatMatch) {
 						repeatCount := repeatMatch[1]

@@ -78,9 +78,9 @@ Class TrayMenu {
 		sciptsMenu := Menu()
 
 		sciptsMenu.Add(labels.TSP_TELEX, (*) => []), sciptsMenu.Disable(labels.TSP_TELEX)
-		sciptsMenu.Add(labels.TSP_TiengViet, (*) => globalInstances.scriptProcessors["Tieng Viet"].Start()),
+		sciptsMenu.Add(labels.TSP_TiengViet, (*) => Scripter.ToggleSelectedOption("Tieng Viet", "TELEX")),
 			sciptsMenu.SetIcon(labels.TSP_TiengViet, App.icoDLL, App.indexIcos["tieng_viet"])
-		sciptsMenu.Add(labels.TSP_HanYuPinYin, (*) => globalInstances.scriptProcessors["HanYu PinYin"].Start()),
+		sciptsMenu.Add(labels.TSP_HanYuPinYin, (*) => Scripter.ToggleSelectedOption("HanYu PinYin", "TELEX")),
 			sciptsMenu.SetIcon(labels.TSP_HanYuPinYin, App.icoDLL, App.indexIcos["hanyu_pinyin"])
 		sciptsMenu.Add()
 		sciptsMenu.Add(labels.Scripter_AlternativeInput, (*) => []), sciptsMenu.Disable(labels.Scripter_AlternativeInput)
@@ -96,7 +96,7 @@ Class TrayMenu {
 		}
 
 		AddScripts(dataName, dataValue) {
-			sciptsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.OptionSelect(dataName))
+			sciptsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.ToggleSelectedOption(dataName))
 			if dataValue["icons"][1] ~= "file::" {
 				sciptsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), StrReplace(dataValue["icons"][1], "file::"))
 			} else
@@ -121,7 +121,7 @@ Class TrayMenu {
 		}
 
 		AddGlyphVariatns(dataName, dataValue) {
-			glyphVariantsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.OptionSelect(dataName, "Glyph Variations"))
+			glyphVariantsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.ToggleSelectedOption(dataName, "Glyph Variations"))
 			glyphVariantsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
 		}
 
@@ -198,28 +198,32 @@ Class TrayMenu {
 			iconCode := App.indexIcos["disabled"]
 			trayTitle .= "`n" Locale.ReadInject("monitor.binds.disabled", [Locale.Read("monitor.binds.disabled.by_" keyboardStatus)])
 		} else {
-			local currentAlt := Scripter.selectedMode.Get("Alternative Modes")
-			local currentGlyph := Scripter.selectedMode.Get("Glyph Variations")
-			local currentTSP := TelexScriptProcessor.options.interceptionInputMode
-			local mode := currentAlt != "" ? "Alternative Modes" : "Glyph Variations"
-			local current := currentAlt != "" ? currentAlt : currentGlyph
-			local instanceRef := currentTSP != "" ? globalInstances.scriptProcessors[currentTSP] : False
+			local modeType := "Alternative Modes"
+			local currentMode := Scripter.GetCurrentMode(modeType)
+			local modeData := False
 
-			if currentTSP != "" && App.indexIcos.Has(instanceRef.tag) {
-				iconCode := App.indexIcos[instanceRef.tag]
-				trayTitle .= "`n" Locale.Read("telex_script_processor.labels." instanceRef.tag)
-			} else if currentAlt != "" || currentGlyph != "" {
-				local data := Scripter.GetData(mode, current)
+			if !currentMode {
+				modeType := "TELEX"
+				currentMode := Scripter.GetCurrentMode(modeType)
+			}
+			if !currentMode {
+				modeType := "Glyph Variations"
+				currentMode := Scripter.GetCurrentMode(modeType)
+			}
 
-				if !data.Has("hidden") || data.Has("hidden") && !data["hidden"] {
-					local icons := data["icons"]
+			if currentMode
+				modeData := Scripter.GetModeData(modeType, currentMode)
+
+			if modeData {
+				if !modeData.Has("hidden") || modeData.Has("hidden") && !modeData["hidden"] {
+					local icons := modeData["icons"]
 					local icon := icons.Length > 1 ? icons[lang = "ru-RU" ? 2 : 1] : icons[1]
 					if icon ~= "file::" {
 						iconFile := StrReplace(icon, "file::")
 						iconCode := 1
 					} else
 						iconCode := App.indexIcos[icon]
-					trayTitle .= "`n" Locale.Read("script_labels." data["locale"])
+					trayTitle .= "`n" Locale.Read("script_labels." modeData["locale"])
 				}
 			}
 		}

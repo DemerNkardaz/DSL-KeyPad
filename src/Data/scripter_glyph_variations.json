@@ -1,5 +1,7 @@
 [
-	"modifier", {
+	"__modifier", {
+		"reference": "modifier",
+		"attached_to_alternative_mode": true,
 		"hidden": true
 	},
 	"combining", {

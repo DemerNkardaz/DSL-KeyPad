@@ -397,20 +397,19 @@ Class KbdBinder {
 
 		local userBindings := Cfg.Get("Active_User_Bindings", , "None")
 		local isUserBindingsOn := userBindings != "None" && Cfg.FastKeysOn
-		local altMode := Scripter.selectedMode.Get("Alternative Modes")
-		local isAltModeOn := altMode != "" && !ignoreAltMode
+		local alternativeModeData := Scripter.GetCurrentModeData("Alternative Modes", &alternativeModeName)
 
-		local bingingsNames := []
-		if isAltModeOn
-			bingingsNames := Scripter.GetData(, altMode)["bindings"]
+		local alternativeModeBindings := []
+		if alternativeModeData
+			alternativeModeBindings := alternativeModeData["bindings"]
 
 
-		if !ignoreUnregister || useRemap && altMode = "Hellenic"
+		if !ignoreUnregister || useRemap && alternativeModeData = "Hellenic"
 			this.UnregisterAll()
 
 		local preparedBindLists := []
 		local rawBindLists := [
-			useRemap && altMode != "Hellenic" ? "Keyboard Default" : "",
+			useRemap && alternativeModeData != "Hellenic" ? "Keyboard Default" : "",
 			Cfg.FastKeysOn ? "Common" : "",
 			Cfg.FastKeysOver != "" && Cfg.FastKeysOn ? Cfg.FastKeysOver : "",
 			latinLayoutHasBinds ? latin ":Layout Specified" : "",
@@ -419,8 +418,8 @@ Class KbdBinder {
 			"Important"
 		]
 
-		if isAltModeOn {
-			for altBinding in bingingsNames {
+		if alternativeModeData {
+			for altBinding in alternativeModeBindings {
 				len := rawBindLists.Length
 				rawBindLists.InsertAt(len - 1, altBinding ":Script Specified")
 			}
