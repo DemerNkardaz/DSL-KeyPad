@@ -108,6 +108,14 @@ Class Search {
 		local isHasExpression := RegExMatch(handledQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
 		local output := ""
 
+		checkBy32ID(&entryName) {
+			if RegExMatch(handledQuery, "^#(.*)$", &IDMatch) && ChrLib.entryIdentifiers.Has(Number(IDMatch[1])) {
+				entryName := ChrLib.entryIdentifiers.Get(Number(IDMatch[1]))
+				return True
+			}
+			return False
+		}
+
 		checkTagByUserRegEx(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
 			return tag ~= handledQuery
@@ -162,6 +170,11 @@ Class Search {
 		for i, condition in conditions {
 			for j, entryName in indexedEntries {
 				local entry := ChrLib.entries.%entryName%
+
+				if checkBy32ID(&indexedEntryName) {
+					output := ChrLib.Get(indexedEntryName, True, Auxiliary.inputMode, alteration)
+					break 2
+				}
 
 				if entry["tags"].Length = 0
 					continue

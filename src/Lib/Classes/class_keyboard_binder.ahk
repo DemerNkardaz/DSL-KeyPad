@@ -462,10 +462,12 @@ Class KbdBinder {
 		if StrLen(this.numStyle) == 0 {
 			this.RebuilBinds()
 		}
+		return
 	}
 
 	static SetBinds(name := Locale.Read("gui_options_bindings_none")) {
 		Cfg.Set(name = Locale.Read("gui_options_bindings_none") ? "None" : name, "Active_User_Bindings")
 		this.RebuilBinds()
+		return
 	}
 }

@@ -17,6 +17,7 @@ Class Panel2 {
 		title: 14,
 		titleSmall: 13,
 		field: 12,
+		fieldSmall: 11,
 		small: 10,
 		extraSmall: 9
 	}
@@ -126,7 +127,17 @@ Class Panel2 {
 	fieldWStep := 5
 	reservedRecipeSteps := 1.45
 
-	incrementMultiPerRow(stepsCount := 1, currentColumn := 1, maxColumns := 2) {
+	incrementMultiPerRowTitle(stepsCount := 1, currentColumn := 1, maxColumns := 2) {
+		local totalW := this.fieldTitleW
+		local wStep := this.fieldWStep
+		local w := (totalW - ((maxColumns - 1) * wStep)) / maxColumns
+		local x := this.fieldTitleX + (currentColumn - 1) * (w + wStep)
+		local y := this.fieldTitleY + (stepsCount - 1) * (this.fieldH + this.fieldStep)
+		local h := this.fieldTitleH
+
+		return [x, y, w, h]
+	}
+	incrementMultiPerRowField(stepsCount := 1, currentColumn := 1, maxColumns := 2) {
 		local totalW := this.fieldW
 		local wStep := this.fieldWStep
 		local w := (totalW - ((maxColumns - 1) * wStep)) / maxColumns
@@ -480,18 +491,25 @@ Class Panel2 {
 			keyRecipeTitleSecondary.Visible := False
 		}
 
-		local unicodeTitle := panelWindow.AddText(Format("v{}UnicodeTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 1)[2]*), Locale.Read("dictionary.unicode_point"))
+		local unicodeTitle := panelWindow.AddText(Format("v{}UnicodeTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementMultiPerRowTitle(this.reservedRecipeSteps + 1, 1, 2)*), Locale.Read("dictionary.unicode_point"))
 
-		local unicodeField := panelWindow.AddEdit(Format("v{}UnicodeField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementField(this.reservedRecipeSteps + 1)[1]*), this.defaultUnicode)
+		local internalIDTitle := panelWindow.AddText(Format("v{}InternalIDTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementMultiPerRowTitle(this.reservedRecipeSteps + 1, 2, 2)*), Locale.Read("dictionary.internal_id"))
 
-		local htmlTitle := panelWindow.AddText(Format("v{}HTMLTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 2)[2]*), Locale.Read("dictionary.html_entity"))
+		local unicodeField := panelWindow.AddEdit(Format("v{}UnicodeField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementMultiPerRowField(this.reservedRecipeSteps + 1, 1, 2)*), this.defaultUnicode)
+
+		local internalIDField := panelWindow.AddEdit(Format("v{}InternalIDField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementMultiPerRowField(this.reservedRecipeSteps + 1, 2, 2)*), this.defaultUnicode)
+
+		local htmlTitle := panelWindow.AddText(Format("v{}HTMLTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementMultiPerRowTitle(this.reservedRecipeSteps + 2, 1, 2)*), Locale.Read("dictionary.html_entity"))
+
+		local htmlNamedTitle := panelWindow.AddText(Format("v{}HTMLNamedTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementMultiPerRowTitle(this.reservedRecipeSteps + 2, 2, 2)*), Locale.Read("dictionary.html_entity_named"))
+		htmlNamedTitle.Visible := False
 
 		local htmlField := panelWindow.AddEdit(Format("v{}HTMLField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementField(this.reservedRecipeSteps + 2)[1]*), this.defaultHTML)
 
-		local htmlFieldDecimal := panelWindow.AddEdit(Format("v{}HTMLFieldDecimal {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementMultiPerRow(this.reservedRecipeSteps + 2, 1, 2)*), this.defaultHTML)
+		local htmlFieldDecimal := panelWindow.AddEdit(Format("v{}HTMLFieldDecimal {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementMultiPerRowField(this.reservedRecipeSteps + 2, 1, 2)*), this.defaultHTML)
 		htmlFieldDecimal.Visible := False
 
-		local htmlFieldNamed := panelWindow.AddEdit(Format("v{}HTMLFieldNamed {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementMultiPerRow(this.reservedRecipeSteps + 2, 2, 2)*), this.defaultHTML)
+		local htmlFieldNamed := panelWindow.AddEdit(Format("v{}HTMLFieldNamed {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementMultiPerRowField(this.reservedRecipeSteps + 2, 2, 2)*), this.defaultHTML)
 		htmlFieldNamed.Visible := False
 
 		local altCodeTitle := panelWindow.AddText(Format("v{}AltCodeTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 3)[2]*), Locale.Read("dictionary.alt_code"))
@@ -499,6 +517,28 @@ Class Panel2 {
 		local altCodePages := panelWindow.AddText(Format("v{}AltCodePages {} x{} y{} w{} h{} Right", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 3)[2]*), Locale.Read("dictionary.alt_code"))
 
 		local altCodeField := panelWindow.AddEdit(Format("v{}AltCodeField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementField(this.reservedRecipeSteps + 3)[1]*), this.notAvailable)
+
+		local groupConfig := [2, 3, 4]
+		local altCodeFields := Map()
+
+		for groupIndex, groupSize in groupConfig {
+			for fieldIndex in Range(1, groupSize) {
+				local fieldName := Format("AltCodeField_G{}_{}", groupIndex + 1, fieldIndex)
+				local fieldVar := Format("v{}{}", attributes.prefix, fieldName)
+
+				local field := panelWindow.AddEdit(
+					Format("{} {} x{} y{} w{} h{}",
+						fieldVar,
+						this.defaultEditOpts " " this.fontColorDefault,
+						this.incrementMultiPerRowField(this.reservedRecipeSteps + 3, fieldIndex, groupIndex + 1)*
+					),
+					this.defaultHTML
+				)
+
+				field.Visible := False
+				altCodeFields[fieldName] := field
+			}
+		}
 
 		local LaTeX_LTX_Title := panelWindow.AddText(Format("v{}LaTeX_LTX {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 4 - 0.04)[2]*), "L T  X")
 
@@ -509,6 +549,12 @@ Class Panel2 {
 		local LaTeXPackageTitle := panelWindow.AddText(Format("v{}LaTeXPackage {} x{} y{} w{} h{} Right", attributes.prefix, this.defaultTextOpts, this.incrementField(this.reservedRecipeSteps + 4)[2]*))
 
 		local LaTeXField := panelWindow.AddEdit(Format("v{}LaTeXField {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementField(this.reservedRecipeSteps + 4)[1]*), this.notAvailable)
+
+		local LaTeXFieldText := panelWindow.AddEdit(Format("v{}LaTeXFieldText {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementMultiPerRowField(this.reservedRecipeSteps + 4, 1, 2)*), this.defaultHTML)
+		LaTeXFieldText.Visible := False
+
+		local LaTeXFieldMath := panelWindow.AddEdit(Format("v{}LaTeXFieldMath {} x{} y{} w{} h{}", attributes.prefix, this.defaultEditOpts " " this.fontColorNoData, this.incrementMultiPerRowField(this.reservedRecipeSteps + 4, 2, 2)*), this.defaultHTML)
+		LaTeXFieldMath.Visible := False
 
 		local tagsTitle := panelWindow.AddText(Format("v{}TagsTitle {} x{} y{} w{} h{}", attributes.prefix, this.defaultTextOpts " c5088c8", this.incrementField(this.reservedRecipeSteps + 5)[2]*), Locale.Read("dictionary.tags"))
 
@@ -556,11 +602,16 @@ Class Panel2 {
 
 		keyRecipeField.SetFont("s" this.fontSizes.field)
 		unicodeField.SetFont("s" this.fontSizes.field)
+		internalIDField.SetFont("s" this.fontSizes.field)
 		htmlField.SetFont("s" this.fontSizes.field)
 		htmlFieldDecimal.SetFont("s" this.fontSizes.field)
 		htmlFieldNamed.SetFont("s" this.fontSizes.field)
 		altCodeField.SetFont("s" this.fontSizes.field)
+		for key, value in altCodeFields
+			value.SetFont("s" this.fontSizes.field)
 		LaTeXField.SetFont("s" this.fontSizes.field)
+		LaTeXFieldText.SetFont("s" this.fontSizes.field)
+		LaTeXFieldMath.SetFont("s" this.fontSizes.field)
 
 		altCodePages.SetFont("s9")
 
@@ -1062,6 +1113,7 @@ Class Panel2 {
 			panelWindow[prefix "Title"].Text := this.notAvailable
 			panelWindow[prefix "Symbol"].Text := DottedCircle
 			panelWindow[prefix "UnicodeField"].Text := this.defaultUnicode
+			panelWindow[prefix "InternalIDField"].Text := 0
 			panelWindow[prefix "UnicodeBlock"].Text := this.defaultUnicodeBlock
 			panelWindow[prefix "HTMLField"].Text := this.defaultHTML
 			panelWindow[prefix "HTMLFieldDecimal"].Text := this.defaultHTML
@@ -1069,6 +1121,8 @@ Class Panel2 {
 			panelWindow[prefix "AltCodeField"].Text := this.notAvailable
 			panelWindow[prefix "AltCodePages"].Text := ""
 			panelWindow[prefix "LaTeXField"].Text := this.notAvailable
+			panelWindow[prefix "LaTeXFieldText"].Text := this.notAvailable
+			panelWindow[prefix "LaTeXFieldMath"].Text := this.notAvailable
 			panelWindow[prefix "LaTeXPackage"].Text := ""
 			panelWindow[prefix "Group"].Text := Locale.Read("character")
 			panelWindow[prefix "Font"].Text := ""
@@ -1077,10 +1131,13 @@ Class Panel2 {
 			panelWindow[prefix "Title"].SetFont("s" this.fontSizes.title " norm " this.fontColorNoData, Fonts.fontFaces["Default"].name)
 			panelWindow[prefix "Symbol"].SetFont("s" this.fontSizes.preview " norm " this.fontColorNoData, Fonts.fontFaces["Default"].name)
 			panelWindow[prefix "UnicodeField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
+			panelWindow[prefix "InternalIDField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "HTMLField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "HTMLFieldDecimal"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "HTMLFieldNamed"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "LaTeXField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
+			panelWindow[prefix "LaTeXFieldText"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
+			panelWindow[prefix "LaTeXFieldMath"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "AltCodeField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "EntryName"].SetFont(this.fontColorNoData)
 
@@ -1119,15 +1176,41 @@ Class Panel2 {
 		panelWindow[prefix "Title"].Text := characterTitle
 		panelWindow[prefix "Symbol"].Text := previewSymbol
 		panelWindow[prefix "UnicodeField"].Text := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
+		panelWindow[prefix "InternalIDField"].Text := entry["index"]
 		panelWindow[prefix "UnicodeBlock"].Text := unicodeBlock
-		panelWindow[prefix "AltCodeField"].Text := StrLen(entry["altCode"]) > 0 ? entry["altCode"] : this.notAvailable
 		panelWindow[prefix "AltCodePages"].Text := entry["altCodePages"].Length > 0 ? Locale.ReadInject("dynamic_dictionary.code_page", [Util.StrCutToComma(altCodePages, 24)]) : ""
-		panelWindow[prefix "LaTeXField"].Text := entry["LaTeX"].Length > 0 ? entry["LaTeX"].ToString(Chr(0x2002)) : this.notAvailable
 		panelWindow[prefix "LaTeXPackage"].Text := StrLen(entry["LaTeXPackage"]) > 0 ? Chrs(0x1F4E6, 0x2005) entry["LaTeXPackage"] : ""
 		panelWindow[prefix "Font"].Text := entryFont != "" ? this.fontMarker entryFont : ""
 		panelWindow[prefix "EntryName"].Text := "[" Chr(0x2003) entryName Chr(0x2003) "]"
 		panelWindow[prefix "RecipeField"].Text := key != "" ? key : view
 		panelWindow[prefix "RecipeTitleSecondary"].Text := combinationKey
+
+		panelWindow[prefix "AltCodeField"].Text := entry["altCode"].Length > 0 ? entry["altCode"][1] : this.notAvailable
+		panelWindow[prefix "AltCodeField"].Visible := entry["altCode"].Length < 2
+
+		local groupSizes := [2, 3, 4]
+		local altCodeLength := entry["altCode"].Length
+
+		for groupIndex, groupSize in groupSizes {
+			local groupNum := groupIndex + 1
+			local isCurrentGroup := (altCodeLength = groupSize)
+
+			for fieldIndex in Range(1, groupSize) {
+				local fieldName := prefix "AltCodeField_G" groupNum "_" fieldIndex
+				local field := panelWindow[fieldName]
+
+				field.Text := isCurrentGroup ? entry["altCode"][fieldIndex] : this.notAvailable
+				field.Visible := isCurrentGroup
+			}
+		}
+
+		panelWindow[prefix "LaTeXField"].Text := entry["LaTeX"].Length > 0 ? entry["LaTeX"][1] : this.notAvailable
+		panelWindow[prefix "LaTeXFieldText"].Text := entry["LaTeX"].Length = 2 ? entry["LaTeX"][1] : this.notAvailable
+		panelWindow[prefix "LaTeXFieldMath"].Text := entry["LaTeX"].Length = 2 ? entry["LaTeX"][2] : this.notAvailable
+
+		panelWindow[prefix "LaTeXField"].Visible := entry["LaTeX"].Length < 2
+		panelWindow[prefix "LaTeXFieldText"].Visible := entry["LaTeX"].Length = 2
+		panelWindow[prefix "LaTeXFieldMath"].Visible := entry["LaTeX"].Length = 2
 
 		panelWindow[prefix "HTMLField"].Text := htmlCode
 		panelWindow[prefix "HTMLFieldDecimal"].Text := htmlCode
@@ -1136,6 +1219,8 @@ Class Panel2 {
 		panelWindow[prefix "HTMLField"].Visible := entry["entity"] = ""
 		panelWindow[prefix "HTMLFieldDecimal"].Visible := entry["entity"] != ""
 		panelWindow[prefix "HTMLFieldNamed"].Visible := entry["entity"] != ""
+
+		panelWindow[prefix "HTMLNamedTitle"].Visible := entry["entity"] != ""
 
 		panelWindow[prefix "TagsLV"].Delete()
 
@@ -1164,6 +1249,7 @@ Class Panel2 {
 		local keyLen := StrLen(key) - Util.StrCountOfChr(key, DottedCircle)
 		local combinationLen := StrLen(combinationKey)
 		local titleLen := StrLen(characterTitle)
+		local entityLen := StrLen(entry["entity"])
 
 		panelWindow[prefix "Symbol"].SetFont(this.fontColorDefault,
 			entryFont != "" ? entryFont : Fonts.fontFaces["Default"].name)
@@ -1171,12 +1257,17 @@ Class Panel2 {
 		panelWindow[prefix "Symbol"].SetFont(entry["symbol"]["customs"] != "" ? entry["symbol"]["customs"] : "norm")
 
 		panelWindow[prefix "Title"].SetFont("s" (titleLen > 32 ? this.fontSizes.titleSmall : this.fontSizes.title) " " (panelWindow[prefix "Title"].Text = this.notAvailable ? this.field : this.fontColorDefault))
+		panelWindow[prefix "HTMLFieldNamed"].SetFont("s" (entityLen > 14 ? this.fontSizes.fieldSmall : this.fontSizes.field))
+
 		panelWindow[prefix "UnicodeField"].SetFont(panelWindow[prefix "UnicodeField"].Text = this.defaultUnicode ? this.fontColorNoData : this.fontColorDefault)
+		panelWindow[prefix "InternalIDField"].SetFont(panelWindow[prefix "UnicodeField"].Text = 0 ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "HTMLField"].SetFont(panelWindow[prefix "HTMLField"].Text = this.defaultHTML ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "HTMLFieldDecimal"].SetFont(panelWindow[prefix "HTMLFieldDecimal"].Text = this.defaultHTML ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "HTMLFieldNamed"].SetFont(panelWindow[prefix "HTMLFieldNamed"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "AltCodeField"].SetFont(panelWindow[prefix "AltCodeField"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "LaTeXField"].SetFont(panelWindow[prefix "LaTeXField"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
+		panelWindow[prefix "LaTeXFieldText"].SetFont(panelWindow[prefix "LaTeXField"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
+		panelWindow[prefix "LaTeXFieldMath"].SetFont(panelWindow[prefix "LaTeXField"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "EntryName"].SetFont(panelWindow[prefix "EntryName"].Text ~= this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "RecipeField"].SetFont(, entryFont != "" ? entryFont : "Segoe UI")
 		panelWindow[prefix "RecipeField"].Move(, , , keyLen > 32 ? this.fieldH * (this.reservedRecipeSteps * 1.25) : this.fieldH)

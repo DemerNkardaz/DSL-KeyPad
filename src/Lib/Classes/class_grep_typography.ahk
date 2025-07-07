@@ -48,8 +48,9 @@
 					Loop rules.Length // 2 {
 						local pattern := rules[A_Index * 2 - 1]
 						local replace := rules[A_Index * 2]
-						for i, line in lines
+						for i, line in lines {
 							lines[i] := RegExReplace(line, pattern, replace)
+						}
 					}
 
 			return lines.ToString("`n")

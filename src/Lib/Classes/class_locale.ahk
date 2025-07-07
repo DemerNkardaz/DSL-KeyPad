@@ -95,36 +95,42 @@ Class Locale {
 
 
 	static Read(entryName, inSection := "", validate := False, &output?, strInjections := []) {
-		intermediate := ""
-		section := Language.Validate(inSection) ? inSection : Language.Get()
+		local intermediate := ""
+		local section := Language.Validate(inSection) ? inSection : Language.Get()
 
-		intermediate := this.ReadStr(section, entryName)
+		local intermediate := this.ReadStr(section, entryName)
 
 		while (RegExMatch(intermediate, "\{@([a-zA-Z-]*)(?::([^\}]+))?\}", &match)) {
-			langCode := (match[1] != "" ? match[1] : section)
-			customEntry := (match[2] != "" ? match[2] : entryName)
-			replacement := this.ReadStr(langCode, customEntry)
-			intermediate := StrReplace(intermediate, match[0], replacement)
+			local langCode := (match[1] != "" ? match[1] : section)
+			local customEntry := (match[2] != "" ? match[2] : entryName)
+
+			if customEntry = entryName && langCode = section {
+				intermediate := StrReplace(intermediate, match[0], "DUPLICATED KEY REFERENCE (" entryName ") IN " section)
+			} else {
+				local replacement := this.ReadStr(langCode, customEntry)
+				intermediate := StrReplace(intermediate, match[0], replacement)
+			}
 		}
 
 		while (RegExMatch(intermediate, "\{U\+(.*?)\}", &match)) {
-			Unicode := StrSplit(match[1], ",")
-			replacement := Util.UnicodeToChars(Unicode*)
+			local unicode := StrSplit(match[1], ",")
+			local replacement := Util.UnicodeToChars(unicode*)
 			intermediate := StrReplace(intermediate, match[0], replacement)
 		}
+
 		while (RegExMatch(intermediate, "(?<!\\)%(.*)%", &match))
 			intermediate := StrReplace(intermediate, match[0], VariableParser.Parse(match[0]))
 
 		while (RegExMatch(intermediate, "\{var:([^\}]+)\}", &match)) {
-			variableName := match[1]
-			parts := StrSplit(variableName, ".")
-			ref := %parts[1]%
+			local variableName := match[1]
+			local parts := StrSplit(variableName, ".")
+			local ref := %parts[1]%
 			if (parts.Length > 1) {
 				Loop parts.Length - 1 {
 					ref := ref.%parts[A_Index + 1]%
 				}
 			}
-			replacement := ref
+			local replacement := ref
 			intermediate := StrReplace(intermediate, match[0], replacement)
 		}
 

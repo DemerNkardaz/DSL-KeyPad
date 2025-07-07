@@ -10,7 +10,7 @@ Class ChrEntry {
 				"sequence", [],
 				"result", [],
 				"entity", "",
-				"altCode", "",
+				"altCode", [],
 				"altCodePages", [],
 				"LaTeX", [],
 				"LaTeXPackage", "",

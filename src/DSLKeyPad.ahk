@@ -77,11 +77,11 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_grep_typography>
 #Include <Classes\class_grep_typography_registrar>
 
-#Include <Classes\class_keyboard_binder>
 #Include <Classes\class_binding_registrar>
 #Include <Classes\class_binding_user_defined>
 #Include <Classes\class_binding_handler>
 #Include <Classes\class_binding_list>
+#Include <Classes\class_keyboard_binder>
 #Include <Classes\class_scripter_store>
 #Include <Classes\class_scripter>
 #Include <Classes\class_keyboard_layout>

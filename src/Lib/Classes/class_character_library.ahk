@@ -5,6 +5,7 @@ Class ChrLib {
 	static entryCategories := Map()
 	static entryRecipes := Map()
 	static entryTags := Map()
+	static entryIdentifiers := Map()
 	static dumpPath := App.paths.temp "\characters_dump.json"
 	static duplicatesList := Map()
 	static lastIndexAdded := -1
@@ -282,7 +283,7 @@ Class ChrLib {
 			output["symbol"]["set"] := Util.UnicodeToChar(entrySource["alterations"][entryToModify["reference"]["as"]])
 			output["sequence"] := []
 			output["alterations"] := Map()
-			output["altCode"] := ""
+			output["altCode"] := []
 			output["altCodePages"] := []
 			output["LaTeX"] := []
 			output["LaTeXPackage"] := ""

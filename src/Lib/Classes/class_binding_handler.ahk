@@ -40,6 +40,10 @@ Class BindHandler {
 						character := RegExReplace(character, "\:\:.*$", "")
 					}
 
+					if RegExMatch(character, "^#(.*)$", &IDMatch) && ChrLib.entryIdentifiers.Has(Number(IDMatch[1])) {
+						character := ChrLib.entryIdentifiers.Get(Number(IDMatch[1]))
+					}
+
 					if ChrLib.entries.HasOwnProp(character) {
 						output .= Util.StrRepeat(ChrLib.Get(character, True, inputMode, alt), repeatCount)
 

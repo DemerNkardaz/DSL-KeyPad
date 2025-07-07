@@ -868,8 +868,57 @@ Class Util {
 
 		return result
 	}
-}
 
+	static DecimalToBase32(decimal) {
+		if (decimal == 0)
+			return "0"
+
+		base32Chars := "0123456789ABCDEFGHIJKLMNOPQRSTUV"
+		result := ""
+		isNegative := false
+
+		if (decimal < 0) {
+			isNegative := true
+			decimal := -decimal
+		}
+
+		while (decimal > 0) {
+			remainder := decimal - (decimal // 32) * 32
+			result := SubStr(base32Chars, remainder + 1, 1) result
+			decimal := decimal // 32
+		}
+
+		return isNegative ? "-" . result : result
+	}
+
+	static Base32ToDecimal(base32) {
+		if (base32 == "0")
+			return 0
+
+		base32Chars := "0123456789ABCDEFGHIJKLMNOPQRSTUV"
+		result := 0
+		isNegative := false
+
+		if (SubStr(base32, 1, 1) == "-") {
+			isNegative := true
+			base32 := SubStr(base32, 2)
+		}
+
+		base32 := StrUpper(base32)
+
+		Loop Parse, base32 {
+			if (InStr(base32Chars, A_LoopField) == 0)
+				throw Error("Некорректный символ: " A_LoopField)
+		}
+
+		Loop Parse, base32 {
+			digitValue := InStr(base32Chars, A_LoopField) - 1
+			result := result * 32 + digitValue
+		}
+
+		return isNegative ? -result : result
+	}
+}
 Class UIA_Util {
 	; Caret get from https://www.autohotkey.com/boards/viewtopic.php?t=114802
 

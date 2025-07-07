@@ -4,6 +4,7 @@
 			"__self": "Dictionary",
 			"about": "About",
 			"all_characters": "All characters",
+			"alt_code": "Alt code",
 			"and": "and",
 			"author": "Author",
 			"authors": "Authors",
@@ -11,7 +12,9 @@
 			"character": "Character",
 			"characters": "Characters",
 			"clear": "Clear",
+			"code_page": "Code page",
 			"column": "Column",
+			"combining_character": "Combining character",
 			"combination": "Combination",
 			"combination_key": "Combination key",
 			"create": "Create",
@@ -22,7 +25,7 @@
 			"delete": "Delete",
 			"entry": "Entry",
 			"entries": "Entries",
-			"et": "&",
+			"et": "and",
 			"exit": "Exit",
 			"favorites": "Favorites",
 			"file": "File",
@@ -34,6 +37,10 @@
 			"help": "Help",
 			"hexadecimal": "Hexadecimal",
 			"homepage": "Homepage",
+			"html": "HTML",
+			"html_entity": "HTML Entity Code",
+			"html_entity_named": "HTML Entity Name",
+			"internal_id": "Internal ID",
 			"key": "Key",
 			"keys": "Keys",
 			"language": "Language",
@@ -64,6 +71,7 @@
 			"title": "Title",
 			"titles": "Titles",
 			"transcription": "Transcription",
+			"unicode_point": "Unicode point",
 			"unknown": "Unknown",
 			"value": "Value",
 			"values": "Values",
@@ -71,54 +79,247 @@
 			"view": "View"
 		},
 		"dynamic_dictionary": {
+			"code_page": "Code page {}",
 			"page_of": "Page {}/{}",
 			"press": "Press {}"
 		},
 		"first_launch": {
 			"message": [
-				"ATTENTION!\n\n",
-				"If you play video games, please note that this tool operates on AutoHotkey, which may be prohibited in games, even in the background, due to players using .ahk scripts to gain an unfair advantage over others.\n\n",
-				"To avoid issues with game anti-cheats, it is recommended to disable all AutoHotkey processes before playing.\n\n",
-				"The highest risk is in the following games: Marvel Rivals, Apex Legends, games with BattlEye anti-cheat."
+				"WARNING!\n\n",
+				"If you play video games — please note that this tool runs on AutoHotkey, which may be prohibited in games, including running in the background, due to players using .ahk scripts to gain unfair advantages over other players.\n\n",
+				"To avoid issues with game anti-cheat systems, it is recommended to disable all AutoHotkey processes before playing.\n\n",
+				"The risk is highest in the following games: Marvel Rivals, Apex Legends, games with BattlEye anti-cheat."
 			]
 		},
 		"prepare": {
-			"__self": "Prepare",
-			"fonts_not_found": "We have no found required fonts in the system.\nClose this windows for start its donwloading and installation.\n\nFonts to be installed:"
+			"__self": "Preparation",
+			"fonts_not_found": "Fonts used by the utility are missing from the system.\nClose this window to obtain them.\n\nFonts to install:"
 		},
 		"init": {
 			"__self": "Initialization",
 			"entry": "Entry: “\u2008{}\u2008”",
-			"internal_library": "Internal Library",
-			"custom_recipes": "User Recipes",
-			"binds": "Bindings Initialization"
+			"internal_library": "Internal library",
+			"custom_recipes": "Custom recipes",
+			"binds": "Initializing bindings",
+			"before_start": "Before start",
+			"after_start": "After start"
 		},
-		"GUI": {
+		"gui": {
+			"options": {
+				"__self": "Options",
+				"system_startup": {
+					"add": "Add to startup",
+					"shortcut_created/updated": "Startup shortcut created or updated"
+				}
+			},
+			"panel": {
+				"__self": "Panel",
+				"context_menu": {
+					"add_favorites": "Add to favorites",
+					"remove_favorites": "Remove from favorites",
+					"show_symbol_page": "View symbol on {}",
+					"show_block_page": "View Unicode block on {}",
+					"glyph_variations": "Glyph variations",
+					"legend": "{@:gui.legend}",
+					"show_entry": "Open entry {}"
+				}
+			},
+			"recipes": {
+				"__self": "My Recipes",
+				"attach_list": "Attach list",
+				"create/edit": {
+					"__self": "Create/Edit recipe",
+					"section": "Section (“a–Z” and “_”)",
+					"name": "Recipe name"
+				},
+				"warnings": {
+					"remove_confirm": "Do you really want to delete the recipe “{}”?",
+					"exists": "A custom recipe with section name “{}” already exists.",
+					"exists_internal": "A recipe with section name “{}” already exists in the internal library.\n\nRename the custom recipe section.",
+					"xcompose_cannot_be_edited": "Recipes extracted from “.XCompose” files cannot be deleted or edited.",
+					"invalid_name": "Name must contain only English letters “a–Z”, digits (not at the beginning), and underscore “_”.",
+					"invalid_section_name": "Invalid section name.\n{@:gui.recipes.warnings.invalid_name}",
+					"invalid_xcompose_name": "Invalid .XCompose file name.\n{@:gui.recipes.warnings.invalid_name}",
+					"invalid_recipe": "Invalid recipe or result.\nRecipe: {}\nResult: {}",
+					"duplicates_found": "Recipe duplication detected: {}"
+				},
+				"errors": {
+					"read_error": "Error reading recipe list: section {}, recipe {}.",
+					"read_error_reinit": "Error reading recipe list: section {}, recipe {}.",
+					"titles": "Localized recipe name “{}” contains an error (empty language code or other error)."
+				}
+			},
 			"tabs": {
-
+				"__self": "Tabs",
+				"smelting": "{@default:misc.fire} Smelting recipes",
+				"fastkeys": "{@default:misc.insert_key} Fast keys",
+				"secondkeys": "{@default:misc.die_face_2} Secondary keys",
+				"tertiarykeys": "{@default:misc.die_face_3} Tertiary keys",
+				"scripts": "{@default:misc.amphora} {@:dictionary.scripts}",
+				"TELEXVNI": "{@default:misc.mahjong_tile_bamboo} {@default:TELEX}",
+				"help": "{@default:misc.bulb} {@:dictionary.help}",
+				"about": "{@default:misc.info} About",
+				"all": "{@default:misc.white_chess_king} All symbols",
+				"favorites": "{@default:misc.circled_white_start} {@:dictionary.favorites}"
+			},
+			"scripter": {
+				"pages_help": "(F1–F12 — select page)",
+				"alternative_mode": {
+					"__self": "Alternative mode",
+					"warnings": {
+						"incompatible_with_telex": "Cannot activate alternative mode “{}” while {@default:TELEX}-like mode “{}” is active."
+					}
+				},
+				"glyph_variations": {
+					"__self": "Glyph variations",
+					"gui_title": "Glyph variations panel"
+				}
+			},
+			"legend": {
+				"__self": "Legend",
+				"description_unavailable": "Description unavailable",
+				"name_variations": "Name variations",
+				"authors": {
+					"__self": "{@:dictionary.authors}:",
+					"default": "Unknown"
+				}
+			},
+			"mods": {
+				"__self": "Modifications"
+			},
+			"changelog": {
+				"__self": "Changelog"
 			}
 		},
 		"profile": {
 			"__self": "Profile",
 			"default": "Default",
 			"new": "< CREATE >",
-			"new_name": "Profile Name",
-			"creation": "Profile Creation"
+			"new_name": "Profile name",
+			"creation": "Profile creation"
 		},
-		"help_search_description": [
-			"Комбинация: {var:Window}{var:LeftAlt} F\n",
-			"У большинства символов библиотеки есть собственные теги, представляющие собой варианты названий символа, которые можно использовать для вставки через поиск.\n",
-			"Введите тег полностью или частично (или имя записи), чтобы вставить соответствующий символ. Можно ввести сразу несколько запросов, разделяя их запятой. Примеры:\n",
-			"\u2003•\u2002«hellenic capital letter lambda», «hel lam», «hel_c_let_l_lambda» → «Λ»\n",
-			"\u2003•\u2002«дез ди, !дез ди», «lam, !lam» → «𐐔𐐼», «Λλ».\n",
-			"\u2003•\u2002«reference_mark» → «※».\n\n",
-			"Примечания:\n",
-			"\u2003•\u2002Чем короче запрос — тем менее он точен.\n",
-			"\u2003•\u2002Знак «!» в начале запроса указывает поиску использовать чувствительность к регистру.\n",
-			"\u2003•\u2002Поддерживаются простые регулярные выражения, например:\n",
-			"\u2003\u2004\u2002\u2003‣\u2002«fut.*?\\s+\\S+al» → «ᚺ» (руна Хагалаз)\n",
-			"\u2003\u2004\u2002\u2003‣\u2002«az$» → «ᛞ» (руна Манназ)\n",
-			"\u2003\u2004\u2002\u2003‣\u2002«^фра» → «₣» (Франк)."
-		]
+		"help": {
+			"__self": "{@:dictionary.help}",
+			"search_at_library": {
+				"__self": "Library search",
+				"description": [
+					"Combination: {var:Window}{var:LeftAlt} F\n",
+					"Most library symbols have their own tags, which are variants of the symbol name that can be used for insertion through search.\n",
+					"Enter a tag completely or partially (or entry name) to insert the corresponding symbol. You can enter multiple queries at once, separating them with commas. Examples:\n",
+					"\u2003•\u2002“hellenic capital letter lambda”, “hel lam”, “hel_c_let_l_lambda” → “Λ”\n",
+					"\u2003•\u2002“дез ди, !дез ди”, “lam, !lam” → “𐐔𐐼”, “Λλ”.\n",
+					"\u2003•\u2002“reference_mark” → “※”.\n\n",
+					"Notes:\n",
+					"\u2003•\u2002The shorter the query — the less precise it is.\n",
+					"\u2003•\u2002The “!” sign at the beginning of a query tells the search to use case sensitivity.\n",
+					"\u2003•\u2002Simple regular expressions are supported, for example:\n",
+					"\u2003\u2004\u2002\u2003‣\u2002“fut.*?\\s+\\S+al” → “ᚺ” (Hagalaz rune)\n",
+					"\u2003\u2004\u2002\u2003‣\u2002“az$” → “ᛞ” (Mannaz rune)\n",
+					"\u2003\u2004\u2002\u2003‣\u2002“^фр” → “₣” (Franc)."
+				],
+				"glyph_variations": {
+					"__self": "Glyph variations",
+					"description": [
+						"When searching, you can specify the desired glyph variation by adding “::<VARIATION>” to the end of the query, for example: “lat m::fraktur” → “𝔐”.\n",
+						"\u2003\u2004\u2002\u2003‣\u2002“^фра” → “₣” (Franc).",
+						" • modifier — модификатор, мо, mo.\n",
+						" • superscript — верхний индекс, ви, sup.\n",
+						" • subscript — нижний индекс, ни, sub.\n",
+						" • italic — курсив, ку, it.\n",
+						" • italicBold — курсив полужирный, куп, itb.\n",
+						" • bold — полужирный, п, b.\n",
+						" • fraktur — фрактур, ф, f.\n",
+						" • frakturBold — полужирный фрактур, пф, fb.\n",
+						" • script — рукописный, р, s.\n",
+						" • scriptBold — полужирный рукописный, пр, sb.\n",
+						" • doubleStruck — ds.\n",
+						" • sansSerif — без засечек, бз, ss.\n",
+						" • sansSerifItalic — курсив без засечек, кубз, ssit.\n",
+						" • sansSerifItalicBold — курсив полужирный без засечек, купбз, ssitb.\n",
+						" • sansSerifBold — полужирный без засечек, пбз, ssb.\n",
+						" • monospace — моноширинный, м, m.\n",
+						" • smallCapital — капитель, к, sc.\n",
+						" • small — маленький, мал, sm.\n",
+						" • combining — комбинируемый, ко, c.\n",
+						" • uncombined — некомбинируемый, неко, uc.\n",
+						" • fullwidth — полноширинный, пш, fw.\n"
+					]
+				},
+				"funcs": {
+					"__self": "Function and method calls",
+					"description": [
+						"The search field supports the ability to call some functions and methods, including:\n",
+						" • “\\” or “/Reload” — restart the program.\n",
+						" • “/Exit” — close the program.\n",
+						" • “/ChrLib.Print” — generate and open an .HTML file with a list of library symbols.\n",
+						" • “/MyRecipes.Update” — re-initialize custom recipes.\n",
+						" • “/Update.Get” or “/Update.Repair” — get update or repair current version.\n",
+						" • “/KbdBinder.Init” — re-initialize layouts and bindings."
+					]
+				}
+			}
+		},
+		"telex_script_processor": {
+			"__self": "{@default:TELEX}-like input processor",
+			"labels": {
+				"tieng_viet": "{@:telex_script_processor.labels.vietnamese<dictionary.et>jorai}",
+				"hanyu_pinyin": "{@:telex_script_processor.labels.chinese_romanization}",
+				"vietnamese": "Vietnamese",
+				"jorai": "Jarai",
+				"chinese_romanization": "Hanyu Pinyin"
+			},
+			"warnings": {
+				"incompatible_with_alternative_modes": "Cannot activate {@default:TELEX}-like mode “{}” while alternative mode “{}” is active."
+			}
+		},
+		"script_labels": {
+			"telex_script_processor": {
+				"tieng_viet": "{@:telex_script_processor.labels.vietnamese<dictionary.et>jorai}",
+				"hanyu_pinyin": "{@:telex_script_processor.labels.chinese_romanization}"
+			},
+			"glyph_variations": {
+				"modifier": "Modifiers",
+				"combining": "Combining characters",
+				"superscript": "Superscript characters and modifiers",
+				"subscript": "Subscript characters",
+				"italic": "Italic characters",
+				"bold": "Bold characters",
+				"italic_bold": "Bold italic characters",
+				"sans_serif": "Sans serif characters",
+				"sans_serif_italic": "Sans serif italic characters",
+				"sans_serif_bold": "Sans serif bold characters",
+				"sans_serif_italic_bold": "Sans serif bold italic characters",
+				"monospace": "Monospace characters",
+				"fullwidth": "Fullwidth characters",
+				"small_capital": "Small capitals",
+				"fraktur": "Fraktur characters",
+				"fraktur_bold": "Bold fraktur characters",
+				"script": "Script characters",
+				"script_bold": "Bold script characters",
+				"double_struck": "Double-struck characters",
+				"double_struck_italic": "Double-struck italic characters",
+				"uncombined": "Uncombined characters"
+			}
+		},
+		"monitor": {
+			"binds": {
+				"disable": "Disable bindings",
+				"disabled": {
+					"__self": "(Disabled {})",
+					"by_user": "by user",
+					"by_monitor": "by monitor"
+				},
+				"enable": "Enable bindings"
+			}
+		},
+		"side_process": {
+			"support": "Support process"
+		},
+		"warnings": {
+			"user_defined_recipes": {
+				"recipe_or_result_has_empty_value": "Recipe or result for entry “{}” in file “{}” has an empty value and will be skipped.",
+				"recipe_format_is_invalid": "Invalid recipe entry format “{}” in file “{}”."
+			}
+		}
 	}
 }

@@ -137,7 +137,9 @@ Class ChrReg {
 
 				this.TransferProperties(&entryName, &entry)
 
-				ChrLib.entries.%entryName%["index"] := ++ChrLib.lastIndexAdded
+				local idx := ++ChrLib.lastIndexAdded
+				ChrLib.entries.%entryName%["index"] := idx
+				ChrLib.entryIdentifiers.Set(idx, entryName)
 
 				libEntry := ChrLib.entries.%entryName%
 				this.EntryPostProcessing(&entryName, &libEntry, &instances)
@@ -705,7 +707,7 @@ Class ChrReg {
 	}
 
 	EntryPostProcessing__AltCodes(&entryName, &entry, &character) {
-		if entry["altCode"] = "" {
+		if entry["altCode"].Length = 0 {
 			local altOutput := []
 
 			for i, page in CodePagesStore.pages {
@@ -720,12 +722,12 @@ Class ChrReg {
 				}
 			}
 
-			entry["altCode"] := altOutput.ToString()
+			entry["altCode"] := altOutput
 
-			if entry["altCode"] = "" {
+			if entry["altCode"].Length = 0 {
 				for char, code in characters.supplementaryData["Alt Codes"] {
 					if char = character {
-						entry["altCode"] := code
+						entry["altCode"] := [code]
 						entry["altCodePages"] := [437]
 						break
 					}

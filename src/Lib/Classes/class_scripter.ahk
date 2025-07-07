@@ -121,7 +121,7 @@ Class Scripter {
 		local prevAltMode := this.selectedMode.Get(selectorType)
 		local titles := Map(
 			"Alternative Modes", "gui.scripter.alternative_mode",
-			"Glyph Variations", "gui.scripter.glyph_variations)",
+			"Glyph Variations", "gui.scripter.glyph_variations",
 			"TELEX", "telex_script_processor",
 		)
 		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read(titles.Get(selectorType)))

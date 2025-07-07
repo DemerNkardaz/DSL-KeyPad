@@ -78,10 +78,17 @@ Class TrayMenu {
 		sciptsMenu := Menu()
 
 		sciptsMenu.Add(labels.TSP_TELEX, (*) => []), sciptsMenu.Disable(labels.TSP_TELEX)
-		sciptsMenu.Add(labels.TSP_TiengViet, (*) => Scripter.ToggleSelectedOption("Tieng Viet", "TELEX")),
-			sciptsMenu.SetIcon(labels.TSP_TiengViet, App.icoDLL, App.indexIcos["tieng_viet"])
-		sciptsMenu.Add(labels.TSP_HanYuPinYin, (*) => Scripter.ToggleSelectedOption("HanYu PinYin", "TELEX")),
-			sciptsMenu.SetIcon(labels.TSP_HanYuPinYin, App.icoDLL, App.indexIcos["hanyu_pinyin"])
+
+		TELEXModes := ScripterStore.storedData["TELEX"].Length // 2
+		Loop TELEXModes {
+			i := A_Index * 2 - 1
+			dataName := ScripterStore.storedData["TELEX"][i]
+			dataValue := ScripterStore.storedData["TELEX"][i + 1]
+			if dataValue.Has("hidden") && dataValue["hidden"]
+				continue
+			this.AddScripterItems(sciptsMenu, dataName, dataValue, "TELEX")
+		}
+
 		sciptsMenu.Add()
 		sciptsMenu.Add(labels.Scripter_AlternativeInput, (*) => []), sciptsMenu.Disable(labels.Scripter_AlternativeInput)
 
@@ -92,15 +99,7 @@ Class TrayMenu {
 			dataValue := ScripterStore.storedData["Alternative Modes"][i + 1]
 			if dataValue.Has("hidden") && dataValue["hidden"]
 				continue
-			AddScripts(dataName, dataValue)
-		}
-
-		AddScripts(dataName, dataValue) {
-			sciptsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.ToggleSelectedOption(dataName))
-			if dataValue["icons"][1] ~= "file::" {
-				sciptsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), StrReplace(dataValue["icons"][1], "file::"))
-			} else
-				sciptsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
+			this.AddScripterItems(sciptsMenu, dataName, dataValue)
 		}
 
 		this.tray.Add(labels.scriptForms, sciptsMenu)
@@ -117,12 +116,7 @@ Class TrayMenu {
 			dataValue := ScripterStore.storedData["Glyph Variations"][i + 1]
 			if dataValue.Has("hidden") && dataValue["hidden"]
 				continue
-			AddGlyphVariatns(dataName, dataValue)
-		}
-
-		AddGlyphVariatns(dataName, dataValue) {
-			glyphVariantsMenu.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.ToggleSelectedOption(dataName, "Glyph Variations"))
-			glyphVariantsMenu.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
+			this.AddScripterItems(glyphVariantsMenu, dataName, dataValue, "Glyph Variations")
 		}
 
 		this.tray.Add(labels.glyphForms, glyphVariantsMenu)
@@ -230,6 +224,14 @@ Class TrayMenu {
 
 		TraySetIcon(iconFile, iconCode, True)
 		A_IconTip := RegExReplace(trayTitle, "\&", "&&&")
+	}
+
+	static AddScripterItems(menuElement, dataName, dataValue, mode := "Alternative Modes") {
+		menuElement.Add(Locale.Read("script_labels." dataValue["locale"]), (*) => Scripter.ToggleSelectedOption(dataName, mode))
+		if dataValue["icons"][1] ~= "file::" {
+			menuElement.SetIcon(Locale.Read("script_labels." dataValue["locale"]), StrReplace(dataValue["icons"][1], "file::"))
+		} else
+			menuElement.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
 	}
 
 }
