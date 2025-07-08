@@ -15,7 +15,12 @@ Class MyRecipesStore {
 			if InStr(rule, "AsArray") {
 				local interOutput := []
 				for index, recipeName in output {
-					interOutput.Push(recipeName, this.Get(recipeName))
+					local recipeEntry := this.Get(recipeName)
+					if RegExMatch(rule, "File:(.*)$", &fileMatch) {
+						if recipeEntry["filePath"] = fileMatch[1]
+							interOutput.Push(recipeName, recipeEntry)
+					} else
+						interOutput.Push(recipeName, recipeEntry)
 				}
 
 				return interOutput
@@ -35,6 +40,10 @@ Class MyRecipesStore {
 			this.lastIndexAdded++
 		this.storedData.Set(name, value)
 		return
+	}
+
+	static ProcessData(data) {
+
 	}
 
 	static Delete(name) {

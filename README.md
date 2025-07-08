@@ -9,7 +9,7 @@
 
 $$
 \begin{array}{c}
-\Large \mathbf{DSL \ KeyPad} \\
+\Large \color{#e2b041}\mathbf{DSL \ KeyPad} \\
 \text{ } \\
 \normalsize \mathbf{Type \ multiple \ languages \ with \ two \ layouts} \\
 \small \text{Ænglisċ sprǣċ | Français | Română | Tiếng Việt … } \\
@@ -21,15 +21,22 @@ $$
 ---
 
 <p align="center">
-<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4600+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
-<img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-4900+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
-<img src="https://custom-icon-badges.herokuapp.com/badge/binds-2000+/700+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4700+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-5000+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/binds-2100+/800+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
 <br>
 <img src="https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social" alt="wakatime"/>
 <img src="https://img.shields.io/github/watchers/DemerNkardaz/DSL-KeyPad" alt="GitHub watchers"/>
 <img src="https://img.shields.io/github/stars/DemerNkardaz/DSL-KeyPad" alt="GitHub stars"/>
 <img src="https://img.shields.io/gitlab/stars/DemerNkardaz%2Fdsl-keypad" alt="GitLab stars"/>
 <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FDemerNkardaz%2FDSL-KeyPad&label=visits&color=yellow" alt="visits"/>
+<br>
+<a href="https://github.com/DemerNkardaz/DSL-KeyPad">
+	<img src="https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&color=yellow" alt="GitHub Downloads"/>
+</a>
+<a href="https://sourceforge.net/projects/dsl-keypad/">
+	<img src="https://img.shields.io/sourceforge/dm/dsl-keypad?logo=sourceforge&color=yellow" alt="SourceForge Downloads"/>
+</a>
 </p>
 
 <br>
@@ -42,7 +49,7 @@ You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-K
 
 <br>
 
-![Sequences Tab](webpage/media/panel_forge_tab.png)
+![Sequences Tab](webpage/media/panel_forge_tab_en.png)
 
 <p align="center">
 	<i>Forge’s Sequences Tab</i>
@@ -92,20 +99,20 @@ winget install AutoHotkey.AutoHotkey
 <p align="center">
 	<table>
 		<tr>
-			<td><img src="webpage/media/panel_fastkeys_tab.png" alt="FastKeys Tab" width="460"></td>
-			<td><img src="webpage/media/panel_scripts_tab.png" alt="Scripts Tab" width="460"></td>
+			<td><img src="webpage/media/panel_fastkeys_tab_en.png" alt="FastKeys Tab" width="460"></td>
+			<td><img src="webpage/media/panel_scripts_tab_en.png" alt="Scripts Tab" width="460"></td>
 		</tr>
 		<tr>
 			<th><i>FastKeys Tab</i></th>
 			<th><i>Scripts Tab</i></th>
 		</tr>
 		<tr>
-			<td><img src="webpage/media/panel_help_tab.png" alt="Help Tab" width="460"></td>
-			<td><img src="webpage/media/panel_about_tab.png" alt="About Tab" width="460"></td>
+			<td><img src="webpage/media/panel_help_tab_en.png" alt="Help Tab" width="460"></td>
+			<td><img src="webpage/media/panel_about_en.png" alt="About" width="460"></td>
 		</tr>
 		<tr>
 			<th><i>Help Tab</i></th>
-			<th><i>About Tab</i></th>
+			<th><i>About</i></th>
 		</tr>
 		<tr>
 			<td><img src="webpage/media/scripter_alternative_input.png" alt="Alternative Input Selector" width="460"></td>
@@ -116,8 +123,8 @@ winget install AutoHotkey.AutoHotkey
 			<th><i>Glyph Variations Selector</i></th>
 		</tr>
 		<tr>
-			<td><img src="webpage/media/user_recipes_panel.png" alt="User Recipes Panel" width="460"></td>
-			<td><img src="webpage/media/user_recipes_editor.png" alt="User Recipes Editor" width="460"></td>
+			<td><img src="webpage/media/user_recipes_panel_en.png" alt="User Recipes Panel" width="460"></td>
+			<td><img src="webpage/media/user_recipes_editor_en.png" alt="User Recipes Editor" width="460"></td>
 		</tr>
 		<tr>
 			<th><i>User-Defined Recipes Panel</i></th>

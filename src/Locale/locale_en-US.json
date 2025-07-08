@@ -29,6 +29,7 @@
 			"description": "Description",
 			"entry": "Entry",
 			"entries": "Entries",
+			"entry_name": "Entry name",
 			"et": "and",
 			"exit": "Exit",
 			"favorites": "Favorites",
@@ -192,9 +193,10 @@
 				"__self": "My Recipes",
 				"attach_list": "Attach list",
 				"create_or_edit": {
-					"__self": "create_or_edit recipe",
-					"section": "Section (“a–Z” and “_”)",
+					"__self": "Create/Edit recipe",
+					"name_restrictions": "(“a–Z” and “_”)",
 					"name": "Recipe name",
+					"result": "{@:dictionary.result}:",
 					"overflow_properties": "Chr. {}, Pg. {}"
 				},
 				"warnings": {

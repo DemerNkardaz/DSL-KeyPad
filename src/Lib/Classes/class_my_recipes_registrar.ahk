@@ -73,6 +73,9 @@ Class MyRecipesReg {
 						recipeData["titles"].Set(this.supportedLanguages[i], match["title"])
 		}
 
+		recipeData["recipe_prefix"] := optionsData["prefix"]
+		recipeData["no_whitespace"] := optionsData["no_whitespace"]
+
 		if !recipeData.Has("tags")
 			recipeData["tags"] := []
 		if !recipeData.Has("filePath") {
@@ -80,6 +83,7 @@ Class MyRecipesReg {
 			recipeData["filePath"] := cutPath
 		}
 
+		recipeData["recipeRaw"] := recipeData["recipe"] is Array ? recipeData["recipe"].ToString("|") : recipeData["recipe"]
 		if recipeData["recipe"] is String
 			recipeData["recipe"] := StrSplit(recipeData["recipe"], "|")
 
@@ -89,16 +93,24 @@ Class MyRecipesReg {
 		if recipeData["result"] is String
 			recipeData["result"] := StrSplit(recipeData["result"], "|")
 
+		recipeData["tagsRaw"] := recipeData["tags"] is Array ? recipeData["tags"].ToString("|") : recipeData["tags"]
 		if recipeData["tags"] is String
 			recipeData["tags"] := StrSplit(recipeData["tags"], "|")
+
+		if recipeData["tags"].Length = 0 {
+			if recipeData["titles"].Count > 0 {
+				for language, title in recipeData["titles"]
+					recipeData["tags"].push(title)
+			} else
+				recipeData["tags"].push(recipeData["name"])
+		}
 
 		if !recipeData.Has("groups")
 			recipeData["groups"] := ["Custom Composes", "User Composes"]
 
-		if optionsData["prefix"].Length > 0
+		if recipeData["recipe_prefix"].Length > 0
 			for i, recipe in recipeData["recipe"]
-				recipeData["recipe"][i] := optionsData["prefix"][i < optionsData["prefix"].Length ? i : 1] (optionsData["no_whitespace"] ? "" : " ") recipe
-
+				recipeData["recipe"][i] := recipeData["recipe_prefix"][i <= recipeData["recipe_prefix"].Length ? i : recipeData["recipe_prefix"].Length] (recipeData["no_whitespace"] ? "" : " ") recipe
 
 		MyRecipesStore.lastIndexAdded++
 		recipeData["index"] := MyRecipesStore.lastIndexAdded

@@ -21,6 +21,12 @@ Class Dev {
 				DirDelete(srcPath "\Data\Dumps", True)
 			if DirExist(srcPath "\Logs")
 				DirDelete(srcPath "\Logs", True)
+			if DirExist(srcPath "\User")
+				DirDelete(srcPath "\User", True)
+			if FileExist(srcPath "\Bin\DSLKeyPad_App_Icons.dll")
+				FileDelete(srcPath "\Bin\DSLKeyPad_App_Icons.dll")
+			if FileExist(srcPath "\DSLKeyPad.exe")
+				FileDelete(srcPath "\DSLKeyPad.exe")
 		}
 	}
 

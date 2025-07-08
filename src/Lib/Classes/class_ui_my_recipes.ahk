@@ -41,41 +41,41 @@ class UIMyRecipes {
 	Constructor() {
 		this.title := App.Title("+status+version") " — " Locale.Read("gui.recipes")
 
-		local recipesWindows := Gui()
-		recipesWindows.Title := this.title
+		local recipesWindow := Gui()
+		recipesWindow.Title := this.title
 
 		local localizedCols := []
 		for column in this.columns
 			localizedCols.Push(Locale.Read(column))
 
-		local recipesLV := recipesWindows.AddListView(Format("vRecipesLV w{} h{} x{} y{} +NoSort -Multi", this.lvW, this.lvH, this.lvX, this.lvY), localizedCols)
+		local recipesLV := recipesWindow.AddListView(Format("vRecipesLV w{} h{} x{} y{} +NoSort -Multi", this.lvW, this.lvH, this.lvX, this.lvY), localizedCols)
 
 		for i, _ in this.columnWidths
 			recipesLV.ModifyCol(i, this.columnWidths[i])
 
 		this.Fill(recipesLV)
 
-		local grpBox := recipesWindows.AddGroupbox(Format("vGrpBox w{} h{} x{} y{}", this.grpBoxW, this.grpBoxH, this.grpBoxX, this.grpBoxY))
+		local grpBox := recipesWindow.AddGroupbox(Format("vGrpBox w{} h{} x{} y{}", this.grpBoxW, this.grpBoxH, this.grpBoxX, this.grpBoxY))
 
-		local createButton := recipesWindows.AddButton(Format("vCreateBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(), this.btnY), "+")
-		local deleteButton := recipesWindows.AddButton(Format("vDeleteBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(2), this.btnY), Chr(0x2212))
-		local updateButton := recipesWindows.AddButton(Format("vUpdateBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(3), this.btnY))
+		local createButton := recipesWindow.AddButton(Format("vCreateBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(), this.btnY), "+")
+		local deleteButton := recipesWindow.AddButton(Format("vDeleteBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(2), this.btnY), Chr(0x2212))
+		local updateButton := recipesWindow.AddButton(Format("vUpdateBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(3), this.btnY))
 		GuiButtonIcon(updateButton, ImageRes, 229)
 
 		createButton.SetFont("s16")
 		deleteButton.SetFont("s16")
 
-		recipesLV.OnEvent("DoubleClick", (LV, rowNumber, parentTitle := recipesWindows.title) => this.ItemDoubleClick(parentTitle, LV, rowNumber))
-		createButton.OnEvent("Click", (parentTitle := recipesWindows.title, *) => this.ItemDoubleClick(parentTitle, recipesLV))
+		recipesLV.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemEdit(recipesWindow, LV, rowNumber))
+		createButton.OnEvent("Click", (btn, inf) => this.ItemEdit(recipesWindow, recipesLV))
 
 		updateButton.OnEvent("Click", (*) => (
 			MyRecipes.Update(),
-			recipesWindows.GetPos(&X, &Y),
-			recipesWindows.Destroy(),
+			recipesWindow.GetPos(&X, &Y),
+			recipesWindow.Destroy(),
 			this.Show(X, Y)
 		))
 
-		return recipesWindows
+		return recipesWindow
 	}
 
 	Fill(LV) {
@@ -125,9 +125,9 @@ class UIMyRecipes {
 		return
 	}
 
-	ItemDoubleClick(parentTitle, LV, rowNumber?) {
+	ItemEdit(parentGUI, LV, rowNumber?) {
 		if !IsSet(rowNumber)
-			return UIMyRecipes.Editor(parentTitle, LV)
+			return UIMyRecipes.Editor(parentGUI, LV)
 
 		local recipeName := LV.GetText(rowNumber, 4)
 		local filePath := LV.GetText(rowNumber, 5)
@@ -137,7 +137,7 @@ class UIMyRecipes {
 			return
 		}
 
-		return UIMyRecipes.Editor(parentTitle, LV, rowNumber, recipeName, filePath)
+		return UIMyRecipes.Editor(parentGUI, LV, rowNumber, recipeName, filePath)
 	}
 
 	Class Editor {
@@ -213,7 +213,7 @@ class UIMyRecipes {
 			return
 		}
 
-		__New(parentTitle, LV, rowNumber?, recipeName?, filePath?) {
+		__New(parentGUI, LV, rowNumber?, recipeName?, filePath?) {
 			this.CalcSizes()
 
 			if IsSet(rowNumber)
@@ -222,7 +222,7 @@ class UIMyRecipes {
 			this.recipeName := IsSet(recipeName) ? recipeName : ""
 			this.filePath := IsSet(filePath) ? App.paths.profile "\" filePath : MyRecipes.filePath
 
-			WinGetPos(&parentX, &parentY, &parentW, &parentH, parentTitle)
+			parentGUI.GetPos(&parentX, &parentY, &parentW, &parentH)
 
 			this.xPos := parentX + ((parentW - this.w) / 2)
 			this.yPos := parentY + ((parentH - this.h) / 2)
@@ -241,7 +241,7 @@ class UIMyRecipes {
 
 			local grpBox := editorWindow.AddGroupBox(Format("vEditorGrpBox x{} y{} w{} h{}", this.grpBoxX, this.grpBoxY, this.grpBoxW, this.grpBoxH))
 
-			local sectionTitle := editorWindow.AddText(Format("vSectionTitle x{} y{} w{} h{}", this.incrementField(1)[2]*), Locale.Read("gui.recipes.create_or_edit.section"))
+			local sectionTitle := editorWindow.AddText(Format("vSectionTitle x{} y{} w{} h{}", this.incrementField(1)[2]*), Locale.Read("dictionary.entry_name+gui.recipes.create_or_edit.name_restrictions"))
 			local sectionField := editorWindow.AddEdit(Format("vSectionField x{} y{} w{} h{} Limit48 -Multi", this.incrementField(1)[1]*), this.recipeName)
 
 			local nameTitle := editorWindow.AddText(Format("vNameTitle x{} y{} w{} h{}", this.incrementField(2)[2]*), Locale.Read("gui.recipes.create_or_edit.name"))
@@ -253,19 +253,21 @@ class UIMyRecipes {
 			local tagsTitle := editorWindow.AddText(Format("vTagsTitle x{} y{} w{} h{}", this.incrementField(4)[2]*), Locale.Read("dictionary.tags"))
 			local tagsField := editorWindow.AddEdit(Format("vTagsField x{} y{} w{} h{} -Multi", this.incrementField(4)[1]*))
 
-			local resultTitle := editorWindow.AddText(Format("vResultTitle x{} y{} w{} h{}", this.incrementField(5)[2]*), (
-				Locale.Read("dictionary.result") ": "
-				Locale.ReadInject("gui.recipes.create_or_edit.overflow_properties", 0, 0)
-			))
+			local resultTitle := editorWindow.AddText(Format("vResultTitle x{} y{} w{} h{}", this.incrementField(5)[2]*), (Locale.Read("gui.recipes.create_or_edit.result")))
 			local resultField := editorWindow.AddEdit(Format("vResultField x{} y{} w{} h{} Multi WantTab", this.incrementField(5, 6)[1]*))
 
 			if this.recipeName != "" {
 				local recipeEntry := MyRecipesStore.Get(this.recipeName)
 				nameField.Value := recipeEntry["name"]
-				recipeField.Value := recipeEntry["recipe"].ToString("|")
-				tagsField.Value := recipeEntry["tags"].ToString("|")
+				recipeField.Value := recipeEntry["recipeRaw"]
+				tagsField.Value := recipeEntry["tagsRaw"]
 				resultField.Value := recipeEntry["result"][1]
+
+				local chrsCount := Util.StrDigitFormat(StrLen(resultField.Value))
+				local pagesCount := Util.StrPagesCalc(resultField.Value)
+				resultTitle.Text := Locale.ReadInject("gui.recipes.create_or_edit.result<>overflow_properties", [chrsCount, pagesCount])
 			}
+
 
 			local saveButton := editorWindow.AddButton(Format("vSaveBtn x{} y{} w{} h{}", this.btnX(1), this.btnY, this.btnW, this.btnH), Locale.Read("dictionary.save"))
 			local cancelButton := editorWindow.AddButton(Format("vCancelBtn x{} y{} w{} h{}", this.btnX(2), this.btnY, this.btnW, this.btnH), Locale.Read("dictionary.cancel"))
@@ -288,3 +290,7 @@ class UIMyRecipes {
 }
 
 F11:: globalInstances.MyRecipesGUI.Show()
+
+
+; ? For save handling
+; @MyRecipesStore.GetAll(Format("IndexList AsArray File:{}", MyRecipes.file))

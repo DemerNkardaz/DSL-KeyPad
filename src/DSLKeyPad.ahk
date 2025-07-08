@@ -106,6 +106,7 @@ DottedProgressTooltip(4, &triggerEnds := False, 500)
 triggerEnds := True
 initialized := True
 
+
 Event.OnEvent("UI Language", "Switched", () => TrayMenu.SetTrayItems())
 Event.OnEvent("Scripter Storage", "Item Registered", () => TrayMenu.SetTrayItems())
 

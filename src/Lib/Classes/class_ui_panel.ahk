@@ -1180,18 +1180,18 @@ Class UIMainPanel {
 
 		if entryName = "" {
 			panelWindow[prefix "Title"].Text := this.notAvailable
-			panelWindow[prefix "Symbol"].Text := DottedCircle
-			panelWindow[prefix "UnicodeField"].Text := this.defaultUnicode
-			panelWindow[prefix "InternalIDField"].Text := 0
-			panelWindow[prefix "UnicodeBlock"].Text := this.defaultUnicodeBlock
-			panelWindow[prefix "HTMLField"].Text := this.defaultHTML
-			panelWindow[prefix "HTMLFieldDecimal"].Text := this.defaultHTML
-			panelWindow[prefix "HTMLFieldNamed"].Text := this.notAvailable
-			panelWindow[prefix "AltCodeField"].Text := this.notAvailable
+			panelWindow[prefix "Symbol"].Value := DottedCircle
+			panelWindow[prefix "UnicodeField"].Value := this.defaultUnicode
+			panelWindow[prefix "InternalIDField"].Value := 0
+			panelWindow[prefix "UnicodeBlock"].Value := this.defaultUnicodeBlock
+			panelWindow[prefix "HTMLField"].Value := this.defaultHTML
+			panelWindow[prefix "HTMLFieldDecimal"].Value := this.defaultHTML
+			panelWindow[prefix "HTMLFieldNamed"].Value := this.notAvailable
+			panelWindow[prefix "AltCodeField"].Value := this.notAvailable
 			panelWindow[prefix "AltCodePages"].Text := ""
-			panelWindow[prefix "LaTeXField"].Text := this.notAvailable
-			panelWindow[prefix "LaTeXFieldText"].Text := this.notAvailable
-			panelWindow[prefix "LaTeXFieldMath"].Text := this.notAvailable
+			panelWindow[prefix "LaTeXField"].Value := this.notAvailable
+			panelWindow[prefix "LaTeXFieldText"].Value := this.notAvailable
+			panelWindow[prefix "LaTeXFieldMath"].Value := this.notAvailable
 			panelWindow[prefix "LaTeXPackage"].Text := ""
 			panelWindow[prefix "Group"].Text := Locale.Read("character")
 			panelWindow[prefix "Font"].Text := ""
@@ -1210,14 +1210,14 @@ Class UIMainPanel {
 			panelWindow[prefix "AltCodeField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "EntryName"].SetFont(this.fontColorNoData)
 
-			panelWindow[prefix "RecipeField"].Text := ""
+			panelWindow[prefix "RecipeField"].Value := ""
 			panelWindow[prefix "LegendButton"].Enabled := False
 			panelWindow[prefix "GlyphsVariantsButton"].Enabled := False
 			panelWindow[prefix "OpenTagsButton"].Enabled := False
 
 			Loop this.previewAlterationsCount {
 				local index := A_Index
-				panelWindow[prefix "AlterationPreview" index].Text := this.defaultAlteration
+				panelWindow[prefix "AlterationPreview" index].Value := this.defaultAlteration
 				panelWindow[prefix "AlterationPreview" index].SetFont(this.fontColorNoData)
 			}
 
@@ -1242,19 +1242,19 @@ Class UIMainPanel {
 		local entryFont := entry["symbol"]["font"]
 
 		panelWindow[prefix "Group"].Text := groupTitle
-		panelWindow[prefix "Title"].Text := characterTitle
+		panelWindow[prefix "Title"].Value := characterTitle
 		panelWindow[prefix "Symbol"].Text := previewSymbol
-		panelWindow[prefix "UnicodeField"].Text := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
-		panelWindow[prefix "InternalIDField"].Text := entry["index"]
+		panelWindow[prefix "UnicodeField"].Value := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
+		panelWindow[prefix "InternalIDField"].Value := entry["index"]
 		panelWindow[prefix "UnicodeBlock"].Text := unicodeBlock
 		panelWindow[prefix "AltCodePages"].Text := entry["altCodePages"].Length > 0 ? Locale.ReadInject("dynamic_dictionary.code_page", [Util.StrCutToComma(altCodePages, 24)]) : ""
 		panelWindow[prefix "LaTeXPackage"].Text := StrLen(entry["LaTeXPackage"]) > 0 ? Chrs(0x1F4E6, 0x2005) entry["LaTeXPackage"] : ""
 		panelWindow[prefix "Font"].Text := entryFont != "" ? this.fontMarker entryFont : ""
 		panelWindow[prefix "EntryName"].Text := "[" Chr(0x2003) entryName Chr(0x2003) "]"
-		panelWindow[prefix "RecipeField"].Text := key != "" ? key : view
+		panelWindow[prefix "RecipeField"].Value := key != "" ? key : view
 		panelWindow[prefix "RecipeTitleSecondary"].Text := combinationKey
 
-		panelWindow[prefix "AltCodeField"].Text := entry["altCode"].Length > 0 ? entry["altCode"][1] : this.notAvailable
+		panelWindow[prefix "AltCodeField"].Value := entry["altCode"].Length > 0 ? entry["altCode"][1] : this.notAvailable
 		panelWindow[prefix "AltCodeField"].Visible := entry["altCode"].Length < 2
 
 		local groupSizes := [2, 3, 4]
@@ -1268,22 +1268,22 @@ Class UIMainPanel {
 				local fieldName := prefix "AltCodeField_G" groupNum "_" fieldIndex
 				local field := panelWindow[fieldName]
 
-				field.Text := isCurrentGroup ? entry["altCode"][fieldIndex] : this.notAvailable
+				field.Value := isCurrentGroup ? entry["altCode"][fieldIndex] : this.notAvailable
 				field.Visible := isCurrentGroup
 			}
 		}
 
-		panelWindow[prefix "LaTeXField"].Text := entry["LaTeX"].Length > 0 ? entry["LaTeX"][1] : this.notAvailable
-		panelWindow[prefix "LaTeXFieldText"].Text := entry["LaTeX"].Length = 2 ? entry["LaTeX"][1] : this.notAvailable
-		panelWindow[prefix "LaTeXFieldMath"].Text := entry["LaTeX"].Length = 2 ? entry["LaTeX"][2] : this.notAvailable
+		panelWindow[prefix "LaTeXField"].Value := entry["LaTeX"].Length > 0 ? entry["LaTeX"][1] : this.notAvailable
+		panelWindow[prefix "LaTeXFieldText"].Value := entry["LaTeX"].Length = 2 ? entry["LaTeX"][1] : this.notAvailable
+		panelWindow[prefix "LaTeXFieldMath"].Value := entry["LaTeX"].Length = 2 ? entry["LaTeX"][2] : this.notAvailable
 
 		panelWindow[prefix "LaTeXField"].Visible := entry["LaTeX"].Length < 2
 		panelWindow[prefix "LaTeXFieldText"].Visible := entry["LaTeX"].Length = 2
 		panelWindow[prefix "LaTeXFieldMath"].Visible := entry["LaTeX"].Length = 2
 
-		panelWindow[prefix "HTMLField"].Text := htmlCode
-		panelWindow[prefix "HTMLFieldDecimal"].Text := htmlCode
-		panelWindow[prefix "HTMLFieldNamed"].Text := entry["entity"]
+		panelWindow[prefix "HTMLField"].Value := htmlCode
+		panelWindow[prefix "HTMLFieldDecimal"].Value := htmlCode
+		panelWindow[prefix "HTMLFieldNamed"].Value := entry["entity"]
 
 		panelWindow[prefix "HTMLField"].Visible := entry["entity"] = ""
 		panelWindow[prefix "HTMLFieldDecimal"].Visible := entry["entity"] != ""
@@ -1349,13 +1349,14 @@ Class UIMainPanel {
 		local rand := 0
 		local maxTries := 20
 
-		Loop maxTries {
-			rand := Random(1, count)
-			col1 := LV.GetText(rand, 1)
-			col4 := LV.GetText(rand, 4)
-			if (col1 != "" && col4 != "")
-				break
-		}
+		if count > 0
+			Loop maxTries {
+				rand := Random(1, count)
+				col1 := LV.GetText(rand, 1)
+				col4 := LV.GetText(rand, 4)
+				if (col1 != "" && col4 != "")
+					break
+			}
 
 		if rand != 0 {
 			LV.Modify(rand, "+Select +Focus")
