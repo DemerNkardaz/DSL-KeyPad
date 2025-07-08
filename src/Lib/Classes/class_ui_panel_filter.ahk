@@ -1,4 +1,4 @@
-Class UIPanelFilter {
+Class UIMainPanelFilter {
 	__New(&panelWindow, &filterField, &LV, &dataList, &localeData) {
 		this.panelWindow := panelWindow
 		this.filterField := filterField

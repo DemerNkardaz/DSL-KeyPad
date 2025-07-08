@@ -191,8 +191,8 @@
 			"recipes": {
 				"__self": "My Recipes",
 				"attach_list": "Attach list",
-				"create/edit": {
-					"__self": "Create/Edit recipe",
+				"create_or_edit": {
+					"__self": "create_or_edit recipe",
 					"section": "Section (“a–Z” and “_”)",
 					"name": "Recipe name",
 					"overflow_properties": "Chr. {}, Pg. {}"

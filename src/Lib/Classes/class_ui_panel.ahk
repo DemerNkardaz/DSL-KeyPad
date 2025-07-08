@@ -1,4 +1,4 @@
-Class Panel {
+Class UIMainPanel {
 	static __New() {
 		globalInstances.MainGUI := this()
 		return
@@ -526,7 +526,7 @@ Class Panel {
 			this.filterX, this.filterY, this.filterW, this.filterH, attributes.prefix), "")
 		characterFilter.SetFont("s10")
 
-		local filterInstance := UIPanelFilter(&panelWindow, &characterFilter, &charactersLV, &src, &localeData)
+		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &src, &localeData)
 
 		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
 
@@ -652,7 +652,7 @@ Class Panel {
 		entryNameLabel.OnEvent("Click", (TextCtrl, *) => this.PreviewPanelEntryNameClick(TextCtrl.Text))
 
 		tagsTitle.OnEvent("Click", (*) => this.ToggleExpandTagsList(panelWindow))
-		openTagsButton.OnEvent("Click", (*) => Panel.TagsPanel(panelWindow, tagsListView, attributes.prefix, instance))
+		openTagsButton.OnEvent("Click", (*) => UIMainPanel.TagsPanel(panelWindow, tagsListView, attributes.prefix, instance))
 
 		legendButton.OnEvent("Click", (B, I) => this.PreviewButtonsBridge(panelWindow, attributes.prefix, "ChrLegend"))
 		glyphsVariantsButton.OnEvent("Click", (B, I) => this.PreviewButtonsBridge(panelWindow, attributes.prefix, "GlyphsPanel"))

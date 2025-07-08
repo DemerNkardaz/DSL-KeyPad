@@ -42,8 +42,8 @@ initialized := False
 #Include <Classes\class_util>
 #Include <Classes\class_side_process>
 #Include <Classes\class_xcompose_parser>
-#Include <Classes\class_user_defined_recipes_storage>
-#Include <Classes\class_user_defined_recipes_registrar>
+#Include <Classes\class_my_recipes_storage>
+#Include <Classes\class_my_recipes_registrar>
 #Include <Classes\class_config>
 #Include <Classes\class_journal>
 #Include <Classes\class_variable_parser>
@@ -71,7 +71,7 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_functional_bindings_storage>
 #Include <Classes\class_favorites>
 ; #Include <Classes\class_xcompose_parser>
-#Include <Classes\class_user_defined_recipes>
+#Include <Classes\class_my_recipes>
 #Include <Classes\class_auxiliary>
 #Include <Classes\class_text_handlers>
 #Include <Classes\class_grep_typography>
@@ -89,9 +89,10 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_keyboard_layout_user_defined>
 #Include <Classes\class_keyboard_monitor>
 
+#Include <Classes\class_character_legend_storage>
 #Include <Classes\class_ui_glyph_variations_panel>
-#Include <Classes\class_ui_character_legend_storage>
 #Include <Classes\class_ui_character_legend>
+#Include <Classes\class_ui_my_recipes>
 #Include <Classes\class_ui_about>
 #Include <Classes\class_ui_panel>
 #Include <Classes\class_ui_panel_filter>

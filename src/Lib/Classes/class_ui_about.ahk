@@ -1,4 +1,9 @@
 Class AboutPanel {
+	static __New() {
+		globalInstances.AboutGUI := this()
+		return
+	}
+
 	setCached := False
 	title := ""
 
@@ -181,5 +186,3 @@ Class AboutPanel {
 		return
 	}
 }
-
-globalInstances.AboutGUI := AboutPanel()
