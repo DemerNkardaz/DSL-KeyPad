@@ -11364,7 +11364,7 @@
 			},
 			"phoenician_n_let_y_yod", {
 				"unicode": "10909",
-				"options": { "altLayoutKey": "J, Y" }
+				"options": { "altLayoutKey": "J Y" }
 			},
 			"phoenician_n_let_k_kaf", {
 				"unicode": "1090A",

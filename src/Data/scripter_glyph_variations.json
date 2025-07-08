@@ -5,7 +5,9 @@
 		"hidden": true
 	},
 	"combining", {
-		"preview": ["%Util.UnicodeToChars('25CC', '0363', '25CC', '0368', '25CC', '0369', '25CC', '0364', '25CC', '0365', '25CC', '0366', '25CC', '0367')%"],
+		"preview": [
+			"\u25CC\u0363\u25CC\u0368\u25CC\u0369\u25CC\u0364\u25CC\u0365\u25CC\u0366\u25CC\u0367"
+		],
 		"fonts": ["Cabmria"],
 		"locale": "glyph_variations.combining",
 		"bindings": [],
@@ -13,7 +15,9 @@
 		"icons": ["glyph_combining"]
 	},
 	"superscript", {
-		"preview": ["%Util.UnicodeToChars('25CC', '1D43', '25CC', '1D47', '25CC', '1D9C', '25CC', '1D48', '25CC', '1D49', '25CC', '1DA0')%"],
+		"preview": [
+			"\u25CC\u1D43\u25CC\u1D47\u25CC\u1D9C\u25CC\u1D48\u25CC\u1D49\u25CC\u1DA0"
+		],
 		"fonts": [],
 		"locale": "glyph_variations.superscript",
 		"bindings": [],
@@ -21,7 +25,9 @@
 		"icons": ["glyph_superscript"]
 	},
 	"subscript", {
-		"preview": ["%Util.UnicodeToChars('25CC', '2090', '25CC', '2091', '25CC', '2095', '25CC', '1D62', '25CC', '2C7C', '25CC', '2096', '25CC', '2097', '25CC', '2098', '25CC', '2099')%"],
+		"preview": [
+			"\u25CC\u2090\u25CC\u2091\u25CC\u2095\u25CC\u1D62\u25CC\u2C7C\u25CC\u2096\u25CC\u2097\u25CC\u2098\u25CC\u2099"
+		],
 		"fonts": [],
 		"locale": "glyph_variations.subscript",
 		"bindings": [],
@@ -29,7 +35,9 @@
 		"icons": ["glyph_subscript"]
 	},
 	"italic", {
-		"preview": ["%Util.UnicodeToChars('1D43C', '1D461', '1D44E', '1D459', '1D456', '1D450')%"],
+		"preview": [
+			"\uD835\uDC3C\uD835\uDC61\uD835\uDC4E\uD835\uDC59\uD835\uDC56\uD835\uDC50"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.italic",
 		"bindings": [],
@@ -37,7 +45,9 @@
 		"icons": ["glyph_italic"]
 	},
 	"bold", {
-		"preview": ["%Util.UnicodeToChars('1D401', '1D428', '1D425', '1D41D')%"],
+		"preview": [
+			"\uD835\uDC01\uD835\uDC28\uD835\uDC25\uD835\uDC1D"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.bold",
 		"bindings": [],
@@ -45,7 +55,9 @@
 		"icons": ["glyph_bold"]
 	},
 	"italicBold", {
-		"preview": ["%Util.UnicodeToChars('1D470', '1D495', '1D482', '1D48D', '1D48A', '1D484', '0020', '1D469', '1D490', '1D48D', '1D485')%"],
+		"preview": [
+			"\uD835\uDC70\uD835\uDC95\uD835\uDC82\uD835\uDC8D\uD835\uDC8A\uD835\uDC84 \uD835\uDC69\uD835\uDC90\uD835\uDC8D\uD835\uDC85"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.italic_bold",
 		"bindings": [],
@@ -53,7 +65,9 @@
 		"icons": ["glyph_italic_bold"]
 	},
 	"sansSerif", {
-		"preview": ["%Util.UnicodeToChars('1D5B2', '1D5BA', '1D5C7', '1D5CC', '002D', '1D5B2', '1D5BE', '1D5CB', '1D5C2', '1D5BF')%"],
+		"preview": [
+			"\uD835\uDDB2\uD835\uDDBA\uD835\uDDC7\uD835\uDDCC-\uD835\uDDB2\uD835\uDDBE\uD835\uDDCB\uD835\uDDC2\uD835\uDDBF"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.sans_serif",
 		"bindings": [],
@@ -61,7 +75,9 @@
 		"icons": ["glyph_sans_serif"]
 	},
 	"sansSerifItalic", {
-		"preview": ["%Util.UnicodeToChars('1D61A', '1D622', '1D62F', '1D634', '002D', '1D61A', '1D626', '1D633', '1D62A', '1D627', '0020', '1D610', '1D635', '1D622', '1D62D', '1D62A', '1D624')%"],
+		"preview": [
+			"\uD835\uDE1A\uD835\uDE22\uD835\uDE2F\uD835\uDE34-\uD835\uDE1A\uD835\uDE26\uD835\uDE33\uD835\uDE2A\uD835\uDE27 \uD835\uDE10\uD835\uDE35\uD835\uDE22\uD835\uDE2D\uD835\uDE2A\uD835\uDE24"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.sans_serif_italic",
 		"bindings": [],
@@ -69,7 +85,9 @@
 		"icons": ["glyph_sans_serif_italic"]
 	},
 	"sansSerifBold", {
-		"preview": ["%Util.UnicodeToChars('1D5E6', '1D5EE', '1D5FB', '1D600', '002D', '1D5E6', '1D5F2', '1D5FF', '1D5F6', '1D5F3', '0020', '1D5D5', '1D5FC', '1D5F9', '1D5F1')%"],
+		"preview": [
+			"\uD835\uDDE6\uD835\uDDEE\uD835\uDDFB\uD835\uDE00-\uD835\uDDE6\uD835\uDDF2\uD835\uDDFF\uD835\uDDF6\uD835\uDDF3 \uD835\uDDD5\uD835\uDDFC\uD835\uDDF9\uD835\uDDF1"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.sans_serif_bold",
 		"bindings": [],
@@ -77,7 +95,9 @@
 		"icons": ["glyph_sans_serif_bold"]
 	},
 	"sansSerifItalicBold", {
-		"preview": ["%Util.UnicodeToChars('1D64E', '1D656', '1D663', '1D668', '002D', '1D64E', '1D65A', '1D667', '1D65E', '1D65B', '0020', '1D644', '1D669', '1D656', '1D661', '1D65E', '1D658', '0020', '1D63D', '1D664', '1D661', '1D659')%"],
+		"preview": [
+			"\uD835\uDE4E\uD835\uDE56\uD835\uDE63\uD835\uDE68-\uD835\uDE4E\uD835\uDE5A\uD835\uDE67\uD835\uDE5E\uD835\uDE5B \uD835\uDE44\uD835\uDE69\uD835\uDE56\uD835\uDE61\uD835\uDE5E\uD835\uDE58 \uD835\uDE3D\uD835\uDE64\uD835\uDE61\uD835\uDE59"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.sans_serif_italic_bold",
 		"bindings": [],
@@ -85,7 +105,9 @@
 		"icons": ["glyph_sans_serif_italic_bold"]
 	},
 	"monospace", {
-		"preview": ["%Util.UnicodeToChars('1D67C', '1D698', '1D697', '1D698', '1D69C', '1D699', '1D68A', '1D68C', '1D68E')%"],
+		"preview": [
+			"\uD835\uDE7C\uD835\uDE98\uD835\uDE97\uD835\uDE98\uD835\uDE9C\uD835\uDE99\uD835\uDE8A\uD835\uDE8C\uD835\uDE8E"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.monospace",
 		"bindings": [],
@@ -93,7 +115,9 @@
 		"icons": ["glyph_monospace"]
 	},
 	"fullwidth", {
-		"preview": ["%Util.UnicodeToChars('FF26', 'FF35', 'FF2C', 'FF2C', 'FF37', 'FF29', 'FF24', 'FF34', 'FF28')%"],
+		"preview": [
+			"\uFF26\uFF35\uFF2C\uFF2C\uFF37\uFF29\uFF24\uFF34\uFF28"
+		],
 		"fonts": [],
 		"locale": "glyph_variations.fullwidth",
 		"bindings": [],
@@ -101,7 +125,9 @@
 		"icons": ["glyph_fullwidth"]
 	},
 	"smallCapital", {
-		"preview": ["%Util.UnicodeToChars('A731', '1D0D', '1D00', '029F', '029F', '0020', '1D04', '1D00', '1D18', '026A', '1D1B', '1D00', '029F')%"],
+		"preview": [
+			"\uA731\u1D0D\u1D00\u029F\u029F \u1D04\u1D00\u1D18\u026A\u1D1B\u1D00\u029F"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.small_capital",
 		"bindings": [],
@@ -109,7 +135,9 @@
 		"icons": ["glyph_small_capital"]
 	},
 	"fraktur", {
-		"preview": ["%Util.UnicodeToChars('1D509', '1D52F', '1D51E', '1D528', '1D531', '1D532', '1D52F')%"],
+		"preview": [
+			"\uD835\uDD09\uD835\uDD2F\uD835\uDD1E\uD835\uDD28\uD835\uDD31\uD835\uDD32\uD835\uDD2F"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.fraktur",
 		"bindings": [],
@@ -117,7 +145,9 @@
 		"icons": ["glyph_fraktur"]
 	},
 	"frakturBold", {
-		"preview": ["%Util.UnicodeToChars('1D571', '1D597', '1D586', '1D590', '1D599', '1D59A', '1D597', '0020', '1D56D', '1D594', '1D591', '1D589')%"],
+		"preview": [
+			"\uD835\uDD71\uD835\uDD97\uD835\uDD86\uD835\uDD90\uD835\uDD99\uD835\uDD9A\uD835\uDD97 \uD835\uDD6D\uD835\uDD94\uD835\uDD91\uD835\uDD89"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.fraktur_bold",
 		"bindings": [],
@@ -125,7 +155,9 @@
 		"icons": ["glyph_fraktur_bold"]
 	},
 	"script", {
-		"preview": ["%Util.UnicodeToChars('1D4AE', '1D4B8', '1D4C7', '1D4BE', '1D4C5', '1D4C9')%"],
+		"preview": [
+			"\uD835\uDCAE\uD835\uDCB8\uD835\uDCC7\uD835\uDCBE\uD835\uDCC5\uD835\uDCC9"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.script",
 		"bindings": [],
@@ -133,7 +165,9 @@
 		"icons": ["glyph_script"]
 	},
 	"scriptBold", {
-		"preview": ["%Util.UnicodeToChars('1D4E2', '1D4EC', '1D4FB', '1D4F2', '1D4F9', '1D4FD', '0020', '1D4D1', '1D4F8', '1D4F5', '1D4ED')%"],
+		"preview": [
+			"\uD835\uDCE2\uD835\uDCEC\uD835\uDCFB\uD835\uDCF2\uD835\uDCF9\uD835\uDCFD \uD835\uDCD1\uD835\uDCF8\uD835\uDCF5\uD835\uDCED"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.script_bold",
 		"bindings": [],
@@ -141,7 +175,9 @@
 		"icons": ["glyph_script_bold"]
 	},
 	"doubleStruck", {
-		"preview": ["%Util.UnicodeToChars('1D53B', '1D560', '1D566', '1D553', '1D55D', '1D556', '002D', '1D54A', '1D565', '1D563', '1D566', '1D554', '1D55C')%"],
+		"preview": [
+			"\uD835\uDD3B\uD835\uDD60\uD835\uDD66\uD835\uDD53\uD835\uDD5D\uD835\uDD56-\uD835\uDD4A\uD835\uDD65\uD835\uDD63\uD835\uDD66\uD835\uDD54\uD835\uDD5C"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.double_struck",
 		"bindings": [],
@@ -149,7 +185,9 @@
 		"icons": ["glyph_double_struck"]
 	},
 	"doubleStruckItalic", {
-		"preview": ["%Util.UnicodeToChars('2145', '2146', '2147', '2148', '2149')%"],
+		"preview": [
+			"\u2145\u2146\u2147\u2148\u2149"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.double_struck_italic",
 		"bindings": [],
@@ -157,7 +195,9 @@
 		"icons": ["glyph_double_struck_italic"]
 	},
 	"uncombined", {
-		"preview": ["%Util.UnicodeToChars('25CC', '00B4', '25CC', '02DD', '25CC', '02D8', '25CC', '00B8', '25CC', '02D9', '25CC', '00A8', '25CC', '0060', '25CC', '00AF', '25CC', '02DB', '25CC', '02DA', '25CC', '02DC')%"],
+		"preview": [
+			"\u25CC\u00B4\u25CC\u02DD\u25CC\u02D8\u25CC\u00B8\u25CC\u02D9\u25CC\u00A8\u25CC`\u25CC\u00AF\u25CC\u02DB\u25CC\u02DA\u25CC\u02DC"
+		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.uncombined",
 		"bindings": [],

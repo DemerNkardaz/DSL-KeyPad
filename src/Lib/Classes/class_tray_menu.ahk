@@ -16,7 +16,7 @@ Class TrayMenu {
 					: GetKeyState("Shift", "P") ? Scripter.SelectorPanel()
 					: GetKeyState("Control", "P") ? Cfg.Editor()
 					: GetKeyState("Alt", "P") ? Cfg.SubGUIs("Recipes")
-					: Panel.Panel()
+					: globalInstances.MainGUI.Show()
 				return 1
 			}
 		}
@@ -25,33 +25,30 @@ Class TrayMenu {
 	static TrayLabels() {
 		labels := {
 			app: App.Title("+version"),
-			update: Locale.ReadInject("update_available", [Update.availableVersion]),
-			openPanel: Locale.Read("open_panel"),
+			update: Locale.ReadInject("gui.options.update_available", [Update.availableVersion]),
+			openPanel: Locale.Read("gui.panel.open"),
+			about: Locale.Read("dictionary.about"),
 			legend: Locale.Read("gui.panel.context_menu.legend"),
 			mods: Locale.Read("gui.mods"),
 			options: Locale.Read("gui.options"),
 			changelogPanel: Locale.Read("gui.changelog"),
-			scriptForms: Locale.Read("tray_menu_item_scripts"),
-			glyphForms: Locale.Read("tray_menu_item_glyphs"),
-			layouts: Locale.Read("tray_menu_item_layouts"),
-			TSP_TELEX: Locale.Read("tray_menu_item_script_processor"),
+			scriptForms: Locale.Read("dictionary.scripts"),
+			glyphForms: Locale.Read("dictionary.glyph_variations"),
+			layouts: Locale.Read("dictionary.layouts"),
+			TSP_TELEX: Locale.Read("telex_script_processor"),
 			TSP_TiengViet: Locale.Read("telex_script_processor.labels.tieng_viet") "`t" RightAlt "F2",
 			TSP_HanYuPinYin: Locale.Read("telex_script_processor.labels.hanyu_pinyin") "`t" RightAlt RightShift "F2",
-			Scripter_AlternativeInput: Locale.Read("tray_menu_item_scripter_alternative_input"),
+			Scripter_AlternativeInput: Locale.Read("dictionary.alternative_input"),
 			;
-			userRecipes: Locale.Read("tray_menu_item_user_recipes"),
+			userRecipes: Locale.Read("gui.recipes"),
 			;
-			search: Locale.Read("tray_menu_item_search") "`t" Window LeftAlt "F",
-			unicode: Locale.Read("tray_menu_item_unicode"),
-			altcode: Locale.Read("tray_menu_item_altcode"),
-			forge: Locale.Read("tray_menu_item_forge"),
-			folder: Locale.Read("tray_menu_item_folder"),
-			notificationToggle: Locale.Read("tray_menu_item_notification_toggle"),
-			reload: Locale.Read("tray_menu_item_reload"),
-			pause: Locale.Read("tray_menu_item_pause"),
+			search: Locale.Read("dictionary.search_by_tag") "`t" Window LeftAlt "F",
+			forge: Locale.Read("dictionary.forge"),
+			folder: Locale.Read("dictionary.folder"),
+			reload: Locale.Read("dictionary.reload"),
 			enableBinds: Locale.Read("monitor.binds.enable") "`t" RightControl "F10",
 			disableBinds: Locale.Read("monitor.binds.disable") "`t" RightControl "F10",
-			exit: Locale.Read("tray_menu_item_exit"),
+			exit: Locale.Read("dictionary.exit"),
 		}
 
 		return labels
@@ -67,10 +64,11 @@ Class TrayMenu {
 			this.tray.Add(labels.update, (*) => Update.Check(True)), this.tray.SetIcon(labels.update, ImageRes, 176)
 
 		this.tray.Add()
-		this.tray.Add(labels.openPanel, (*) => Panel.Panel())
+		this.tray.Add(labels.openPanel, (*) => globalInstances.MainGUI.Show())
 		this.tray.Add(labels.legend, (*) => ChrLegend())
 		this.tray.Add(labels.mods, (*) => ModsGUI())
 		this.tray.Add(labels.options, (*) => Cfg.Editor()), this.tray.SetIcon(labels.options, ImageRes, 63)
+		this.tray.Add(labels.about, (*) => globalInstances.AboutGUI.Show())
 		this.tray.Add()
 		this.tray.Add(labels.changelogPanel, (*) => Changelog.Panel())
 		this.tray.Add()
@@ -139,15 +137,10 @@ Class TrayMenu {
 		this.tray.Add(labels.userRecipes, (*) => Cfg.SubGUIs("Recipes")), this.tray.SetIcon(labels.userRecipes, ImageRes, 188)
 		this.tray.Add()
 		this.tray.Add(labels.search, (*) => Search()), this.tray.SetIcon(labels.search, ImageRes, 169)
-		this.tray.Add(labels.unicode, (*) => CharacterInserter("Unicode").InputDialog(False)),
-			this.tray.SetIcon(labels.unicode, Shell32, 225)
-		this.tray.Add(labels.altcode, (*) => CharacterInserter("Altcode").InputDialog(False)),
-			this.tray.SetIcon(labels.altcode, Shell32, 313)
 		this.tray.Add(labels.forge, (*) => globalInstances.crafter.Start("InputBox")), this.tray.SetIcon(labels.forge, ImageRes, 151)
 		this.tray.Add(labels.folder, (*) => Run(A_ScriptDir)), this.tray.SetIcon(labels.folder, ImageRes, 180)
 		this.tray.Add()
 		this.tray.Add(labels.reload, (*) => Reload()), this.tray.SetIcon(labels.reload, ImageRes, 229)
-		; this.tray.Add(labels.pause, (*) => Suspend(-1))
 		this.tray.Add()
 
 		this.tray.Add(labels.disableBinds, toggleMonitor.Bind())

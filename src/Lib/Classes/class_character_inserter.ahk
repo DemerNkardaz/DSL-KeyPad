@@ -33,7 +33,7 @@ Class CharacterInserter {
 			}
 			Cfg.Set(this.lastPrompt, this.insertType, "LatestPrompts")
 		} catch {
-			MsgBox(Locale.Read("message_wrong_format") "`n`n" Locale.Read("message_wrong_format_" StrLower(this.insertType)), App.Title(), "Icon!")
+			MsgBox(Locale.Read("warnings.wrong_format") "`n`n" Locale.Read("warnings.wrong_format_" StrLower(this.insertType)), App.Title(), "Icon!")
 			return
 		}
 

@@ -92,6 +92,7 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_ui_glyph_variations_panel>
 #Include <Classes\class_ui_character_legend_storage>
 #Include <Classes\class_ui_character_legend>
+#Include <Classes\class_ui_about>
 #Include <Classes\class_ui_panel>
 #Include <Classes\class_ui_panel_filter>
 #Include <Classes\class_ui_mods>
@@ -108,7 +109,6 @@ Event.OnEvent("UI Language", "Switched", () => TrayMenu.SetTrayItems())
 Event.OnEvent("Scripter Storage", "Item Registered", () => TrayMenu.SetTrayItems())
 
 ChrLib.CountOfUpdate()
-Panel.SetPanelData()
 GlyphsPanel.SetPanelData()
 
 ; Automatically created/updated by mods injector class

@@ -1,6 +1,8 @@
 [
 	"Hellenic", {
-		"preview": ["%Util.UnicodeToChars('1F19', '03BB', '03BB', '03AC', '03B4', '03BF', '03C2', '0020', '03C6', '1FF6', '03C2')%"],
+		"preview": [
+			"\u1F19\u03BB\u03BB\u03AC\u03B4\u03BF\u03C2 \u03C6\u1FF6\u03C2"
+		],
 		"fonts": [],
 		"locale": "hellenic",
 		"bindings": ["Hellenic"],
@@ -8,7 +10,10 @@
 		"icons": ["hellenic"]
 	},
 	"Germanic runes & Glagolitic", {
-		"preview": ["%Util.UnicodeToChars('16B7', '16D6', '16B1', '16D7', '16A8', '16BE', '16C1', '16B2', '0020', '16B1', '16A2', '16BE', '16D6', '16CA')%", "%Util.UnicodeToChars('2C03', '2C3E', '2C30', '2C33', '2C41', '2C3E', '2C3A', '2C4C', '2C30')%"],
+		"preview":  [
+			"\u16B7\u16D6\u16B1\u16D7\u16A8\u16BE\u16C1\u16B2 \u16B1\u16A2\u16BE\u16D6\u16CA",
+			"\u2C03\u2C3E\u2C30\u2C33\u2C41\u2C3E\u2C3A\u2C4C\u2C30"
+		],
 		"fonts": ["Segoe UI Historic"],
 		"locale": "germanic_runes<dictionary.et>glagolitic",
 		"bindings": ["Germanic Runes", "Glagolitic"],
@@ -16,7 +21,10 @@
 		"icons": ["germanic", "glagolitic"]
 	},
 	"Old Turkic & Old Permic", {
-		"preview": ["%Util.UnicodeToChars('10C34', '10C0D', '10C23', '2003', '10C03', '10C3E', '10C18', '10C03', '003A', '10C20', '10C03', '10C1A', '10C2D')%", "%Util.UnicodeToChars('10363', '10371', '10355', '10350', '2003', '1035C', '10369', '10360', '10362')%"],
+		"preview": [
+			"\uD803\uDC34\uD803\uDC0D\uD803\uDC23\u2003\uD803\uDC03\uD803\uDC3E\uD803\uDC18\uD803\uDC03:\uD803\uDC20\uD803\uDC03\uD803\uDC1A\uD803\uDC2D",
+			"\uD800\uDF63\uD800\uDF71\uD800\uDF55\uD800\uDF50\u2003\uD800\uDF5C\uD800\uDF69\uD800\uDF60\uD800\uDF62"
+		],
 		"fonts": ["Noto Sans Old Turkic", "Noto Sans Old Permic"],
 		"locale": "old_turkic:short<dictionary.et>old_permic",
 		"bindings": ["Old Turkic", "Old Permic"],
@@ -24,7 +32,9 @@
 		"icons": ["turkic", "permic"]
 	},
 	"Old Hungarian", {
-		"preview": ["%Util.UnicodeToChars('10C87', '10CCF', '10C96', '10C9A', '10CDF', '10C9D', '10CAC')%"],
+		"preview": [
+			"\uD803\uDC87\uD803\uDCCF\uD803\uDC96\uD803\uDC9A\uD803\uDCDF\uD803\uDC9D\uD803\uDCAC"
+		],
 		"fonts": ["Noto Sans Old Hungarian"],
 		"locale": "old_hungarian",
 		"bindings": ["Old Hungarian"],
@@ -32,7 +42,9 @@
 		"icons": ["hungarian"]
 	},
 	"Gothic", {
-		"preview": ["%Util.UnicodeToChars('10330', '10339', '10342', '10338', '10330', '1033A', '1033F', '1033D', '10333', '10343')%"],
+		"preview": [
+			"\uD800\uDF30\uD800\uDF39\uD800\uDF42\uD800\uDF38\uD800\uDF30\uD800\uDF3A\uD800\uDF3F\uD800\uDF3D\uD800\uDF33\uD800\uDF43"
+		],
 		"fonts": [],
 		"locale": "gothic",
 		"bindings": ["Gothic"],
@@ -40,7 +52,9 @@
 		"icons": ["gothic"]
 	},
 	"Old Italic", {
-		"preview": ["%Util.UnicodeToChars('10300', '1030B', '10304', '10319', '10314', '10300', '1030D', '10315', '10313', '10304', '2003', '10316', '10304', '10313', '1031A', '10300', '1030B', '10304')%"],
+		"preview": [
+			"\uD800\uDF00\uD800\uDF0B\uD800\uDF04\uD800\uDF19\uD800\uDF14\uD800\uDF00\uD800\uDF0D\uD800\uDF15\uD800\uDF13\uD800\uDF04\u2003\uD800\uDF16\uD800\uDF04\uD800\uDF13\uD800\uDF1A\uD800\uDF00\uD800\uDF0B\uD800\uDF04"
+		],
 		"fonts": ["Noto Sans Old Italic"],
 		"locale": "old_italic",
 		"bindings": ["Old Italic"],
@@ -48,7 +62,9 @@
 		"icons": ["italic"]
 	},
 	"Phoenician", {
-		"preview": ["%Util.UnicodeToChars('10912', '10913', '10915', '10907', '10903', '10914', '10915', '2003', '10900', '1090B', '10914', '10909')%"],
+		"preview": [
+			"\uD802\uDD12\uD802\uDD13\uD802\uDD15\uD802\uDD07\uD802\uDD03\uD802\uDD14\uD802\uDD15\u2003\uD802\uDD00\uD802\uDD0B\uD802\uDD14\uD802\uDD09"
+		],
 		"fonts": ["Segoe UI Historic"],
 		"locale": "phoenician",
 		"bindings": ["Phoenician"],
@@ -56,7 +72,9 @@
 		"icons": ["phoenician"]
 	},
 	"Ancient South Arabian", {
-		"preview": ["%Util.UnicodeToChars('10A6B', '10A65', '10A6B', '10A68', '2003', '10A79', '10A69', '10A62', '10A63', '10A7A', '10A63')%"],
+		"preview": [
+			"\uD802\uDE6B\uD802\uDE65\uD802\uDE6B\uD802\uDE68\u2003\uD802\uDE79\uD802\uDE69\uD802\uDE62\uD802\uDE63\uD802\uDE7A\uD802\uDE63"
+		],
 		"fonts": ["Noto Sans Old South Arabian"],
 		"locale": "ancient_south_arabian",
 		"bindings": ["Ancient South Arabian"],
@@ -64,7 +82,9 @@
 		"icons": ["south_arabian"]
 	},
 	"Ancient North Arabian", {
-		"preview": ["%Util.UnicodeToChars('10A83', '10A9A', '10A89', '2003', '10A88', '10A93', '10A87', '2003', '10A81', '10A89')%"],
+		"preview": [
+			"\uD802\uDE83\uD802\uDE9A\uD802\uDE89\u2003\uD802\uDE88\uD802\uDE93\uD802\uDE87\u2003\uD802\uDE81\uD802\uDE89"
+		],
 		"fonts": ["Noto Sans Old North Arabian"],
 		"locale": "ancient_north_arabian",
 		"bindings": ["Ancient North Arabian"],
@@ -72,7 +92,9 @@
 		"icons": ["north_arabian"]
 	},
 	"Carian", {
-		"preview": ["%Util.UnicodeToChars('102A8', '102A0', '102B5', '2003', '102B2', '102B0', '102AB', '102C7', '2003', '102BA', '102B5')%"],
+		"preview": [
+			"\uD800\uDEA8\uD800\uDEA0\uD800\uDEB5\u2003\uD800\uDEB2\uD800\uDEB0\uD800\uDEAB\uD800\uDEC7\u2003\uD800\uDEBA\uD800\uDEB5"
+		],
 		"fonts": ["Noto Sans Carian"],
 		"locale": "carian",
 		"bindings": ["Carian"],
@@ -80,7 +102,9 @@
 		"icons": ["carian"]
 	},
 	"Lycian", {
-		"preview": ["%Util.UnicodeToChars('10297', '10295', '10290', '1028E', '10286', '10296', '2003', '1029C', '10291', '10297', '10280', '10287', '10280', '10297', '10286')%"],
+		"preview": [
+			"\uD800\uDE97\uD800\uDE95\uD800\uDE90\uD800\uDE8E\uD800\uDE86\uD800\uDE96\u2003\uD800\uDE9C\uD800\uDE91\uD800\uDE97\uD800\uDE80\uD800\uDE87\uD800\uDE80\uD800\uDE97\uD800\uDE86"
+		],
 		"fonts": ["Noto Sans Lycian"],
 		"locale": "lycian",
 		"bindings": ["Lycian"],
@@ -88,7 +112,9 @@
 		"icons": ["lycian"]
 	},
 	"Lydian", {
-		"preview": ["%Util.UnicodeToChars('1092C', '1092D', '10920', '10937', '2003', '10929', '10924', '10931', '1092E', '2003', '10939', '10926', '10925', '10933')%"],
+		"preview": [
+			"\uD802\uDD2C\uD802\uDD2D\uD802\uDD20\uD802\uDD37\u2003\uD802\uDD29\uD802\uDD24\uD802\uDD31\uD802\uDD2E\u2003\uD802\uDD39\uD802\uDD26\uD802\uDD25\uD802\uDD33"
+		],
 		"fonts": ["Noto Sans Lydian"],
 		"locale": "lydian",
 		"bindings": ["Lydian"],
@@ -96,7 +122,9 @@
 		"icons": ["lydian"]
 	},
 	"Sidetic", {
-		"preview": ["(2025/09/09+) %Util.UnicodeToChars('1094D', '10946', '10942', '10947', '1094F', '10940', '1094C', '0020', '1094F', '10943', '10949', '1094A', '10954', '10940', '0020', '10943', '1094F', '10943', '1094C', '10940', '10941', '1094B', '1094D', '10940', '1094B', '10940', '10946', '10950', '10940', '10949')%"],
+		"preview": [
+			"(2025/09/09+) \uD802\uDD4D\uD802\uDD46\uD802\uDD42\uD802\uDD47\uD802\uDD4F\uD802\uDD40\uD802\uDD4C \uD802\uDD4F\uD802\uDD43\uD802\uDD49\uD802\uDD4A\uD802\uDD54\uD802\uDD40 \uD802\uDD43\uD802\uDD4F\uD802\uDD43\uD802\uDD4C\uD802\uDD40\uD802\uDD41\uD802\uDD4B\uD802\uDD4D\uD802\uDD40\uD802\uDD4B\uD802\uDD40\uD802\uDD46\uD802\uDD50\uD802\uDD40\uD802\uDD49"
+		],
 		"fonts": ["Noto Sans Sidetic"],
 		"locale": "sidetic",
 		"bindings": ["Sidetic"],
@@ -104,7 +132,9 @@
 		"icons": ["sidetic"]
 	},
 	"Cypriot Syllabary", {
-		"preview": ["%Util.UnicodeToChars('10800', '1081A', '1082E', '1080B', '2003', '10800', '10823', '1080E', '10826', '1081A', '2003', '10828', '1082D', '1082A', '1080E', '10821', '10826', '10829')%"],
+		"preview": [
+			"\uD802\uDC00\uD802\uDC1A\uD802\uDC2E\uD802\uDC0B\u2003\uD802\uDC00\uD802\uDC23\uD802\uDC0E\uD802\uDC26\uD802\uDC1A\u2003\uD802\uDC28\uD802\uDC2D\uD802\uDC2A\uD802\uDC0E\uD802\uDC21\uD802\uDC26\uD802\uDC29"
+		],
 		"fonts": ["Noto Sans Cypriot"],
 		"locale": "cypriot_syllabary",
 		"bindings": ["Cypriot Syllabary"],
@@ -112,7 +142,9 @@
 		"icons": ["cypriot_syllabary"]
 	},
 	"Tifinagh", {
-		"preview": ["%Util.UnicodeToChars('2D30', '2D4E', '2D53', '2D4F', '2D59', '2D3D', '2D30', '2D4D', '2003', '2D49', '2D39', '2003', '2D30', '2D3C', '2D54', '2D37', '2D49', '2D59')%"],
+		"preview": [
+			"\u2D30\u2D4E\u2D53\u2D4F\u2D59\u2D3D\u2D30\u2D4D\u2003\u2D49\u2D39\u2003\u2D30\u2D3C\u2D54\u2D37\u2D49\u2D59"
+		],
 		"fonts": ["Noto Sans Tifinagh"],
 		"locale": "tifinagh",
 		"bindings": ["Tifinagh"],
@@ -120,7 +152,9 @@
 		"icons": ["tifinagh"]
 	},
 	"Ugaritic", {
-		"preview": ["%Util.UnicodeToChars('10383', '1038A', '10397', '2003', '10384', '1038A', '10390', '2003', '10382', '1038E', '10397')%"],
+		"preview": [
+			"\uD800\uDF83\uD800\uDF8A\uD800\uDF97\u2003\uD800\uDF84\uD800\uDF8A\uD800\uDF90\u2003\uD800\uDF82\uD800\uDF8E\uD800\uDF97"
+		],
 		"fonts": ["Noto Sans Ugaritic"],
 		"locale": "ugaritic",
 		"bindings": ["Ugaritic"],
@@ -128,7 +162,9 @@
 		"icons": ["ugaritic"]
 	},
 	"Old Persian", {
-		"preview": ["%Util.UnicodeToChars('103A0', '103BC', '103AB', '103A7', '103C1', '103C2', '103A0', '2003', '')%"],
+		"preview": [
+			"\uD800\uDFA0\uD800\uDFBC\uD800\uDFAB\uD800\uDFA7\uD800\uDFC1\uD800\uDFC2\uD800\uDFA0\u2003"
+		],
 		"fonts": ["Noto Sans Old Persian"],
 		"locale": "old_persian",
 		"bindings": ["Old Persian"],
@@ -136,7 +172,9 @@
 		"icons": ["persian"]
 	},
 	"IPA", {
-		"preview": ["%Util.UnicodeToChars('002F', '02CC', '026A', '006E', '0074', '0259', '02C8', '006E', '00E6', '0283', '0028', '0259', '0029', '006E', '0259', '006C', '0020', '0066', '0259', '02C8', '006E', '025B', '0074', '026A', '006B', '0020', '02C8', '00E6', '006C', '0066', '0259', '02CC', '0062', '025B', '0074', '002F')%"],
+		"preview": [
+			"/\u02CC\u026Ant\u0259\u02C8n\u00E6\u0283(\u0259)n\u0259l f\u0259\u02C8n\u025Bt\u026Ak \u02C8\u00E6lf\u0259\u02CCb\u025Bt/"
+		],
 		"fonts": ["Noto Sans"],
 		"locale": "ipa",
 		"bindings": ["IPA"],
@@ -144,7 +182,9 @@
 		"icons": ["ipa"]
 	},
 	"Deseret", {
-		"preview": ["%Util.UnicodeToChars('10414', '1042F', '10445', '10428', '10449', '1042F', '1043B', '0020', '10408', '1044A', '10441', '10430', '1043A', '1042F', '1043B')%"],
+		"preview": [
+			"\uD801\uDC14\uD801\uDC2F\uD801\uDC45\uD801\uDC28\uD801\uDC49\uD801\uDC2F\uD801\uDC3B \uD801\uDC08\uD801\uDC4A\uD801\uDC41\uD801\uDC30\uD801\uDC3A\uD801\uDC2F\uD801\uDC3B"
+		],
 		"fonts": ["Segoe UI Symbol"],
 		"locale": "deseret",
 		"bindings": ["Deseret"],
@@ -152,7 +192,9 @@
 		"icons": ["deseret"]
 	},
 	"Shavian", {
-		"preview": ["%Util.UnicodeToChars('10456', '10471', '1045D', '1047E', '1046F', '0020', '10468', '10464', '10453', '10469', '1045A', '10467', '10451')%"],
+		"preview": [
+			"\uD801\uDC56\uD801\uDC71\uD801\uDC5D\uD801\uDC7E\uD801\uDC6F \uD801\uDC68\uD801\uDC64\uD801\uDC53\uD801\uDC69\uD801\uDC5A\uD801\uDC67\uD801\uDC51"
+		],
 		"fonts": ["Segoe UI Historic"],
 		"locale": "shavian",
 		"bindings": ["Shavian"],
@@ -160,7 +202,9 @@
 		"icons": ["shavian"]
 	},
 	"Math", {
-		"preview": ["%Util.UnicodeToChars('2211', '2212', '002B', '00B1', '00D7', '00F7', '0025', '2205', '2237', '2247', '22B9', '222D', '2206', '2207', '22D8', '22D9')%"],
+		"preview": [
+			"\u2211\u2212+\u00B1\u00D7\u00F7%\u2205\u2237\u2247\u22B9\u222D\u2206\u2207\u22D8\u22D9"
+		],
 		"fonts": ["Noto Serif"],
 		"locale": "math",
 		"bindings": ["Math"],

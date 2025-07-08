@@ -8,7 +8,7 @@ Class Search {
 	SearchPrompt(action) {
 		local searchQuery := Cfg.Get("Search", "LatestPrompts", "")
 		local resultObj := { result: "", prompt: "", failed: [], send: (*) => "" }
-		local IB := InputBox(Locale.Read("symbol_search_prompt"), Locale.Read("symbol_search"), "w350 h110", searchQuery)
+		local IB := InputBox(Locale.Read("symbol_search.prompt"), Locale.Read("symbol_search"), "w350 h110", searchQuery)
 		if IB.Result = "Cancel" || IB.Value = "" || IB.Value ~= "^\s*$"
 			return resultObj
 		else
@@ -76,7 +76,7 @@ Class Search {
 				Cfg.Set(searchQuery, "Search", "LatestPrompts")
 			} else {
 				if resultObj.failed.Length > 0
-					MsgBox(Locale.ReadInject("warning_tag_absent", [resultObj.failed.ToString()]), App.Title(), "Icon!")
+					MsgBox(Locale.ReadInject("warnings.tag_absent", [resultObj.failed.ToString()]), App.Title(), "Icon!")
 			}
 
 			return resultObj.%action%()

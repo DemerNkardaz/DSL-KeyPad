@@ -40,8 +40,8 @@ Class ChrReg {
 			for variants in allVariants {
 				if variants.Length != maxVariants {
 					MsgBox((
-						Locale.Read("error_at_library_registration") "`n"
-						Locale.ReadInject("error_invalid_variants_at_name", [variants.Length, maxVariants, entryName])
+						Locale.Read("error.at_library_registration") "`n"
+						Locale.ReadInject("error.invalid_variants_at_name", [variants.Length, maxVariants, entryName])
 					), App.Title(), "Iconx")
 					return
 				}
@@ -147,15 +147,6 @@ Class ChrReg {
 			if progress {
 				progress.data.progressName := StrLen(entryName) > 50 ? SubStr(entryName, 1, 50) "…" : entryName
 				progress.data.progressBarCurrent++
-
-				if libEntry["alterations"].Count > 0
-					for alt, _ in libEntry["alterations"] {
-						if InStr(alt, "Entity")
-							progress.data.progressBarCurrent--
-						if !InStr(alt, "Entity")
-							progress.data.progressBarCurrent++
-					}
-
 				progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
 			}
 			entry := unset
@@ -185,14 +176,6 @@ Class ChrReg {
 					if RegExMatch(entryName, "\[(.*?)\]", &match) {
 						local splitVariants := StrSplit(match[1], ",")
 						progress.data.maxCountOfEntries += splitVariants.Length
-						if entry.Has("alterations") {
-							if entry["alterations"] is Array {
-								for i, _ in entry["alterations"]
-									progress.data.maxCountOfEntries += entry["alterations"][i].Count
-							} else
-								progress.data.maxCountOfEntries += entry["alterations"].Count
-
-						}
 					} else {
 						progress.data.maxCountOfEntries++
 					}
@@ -222,15 +205,6 @@ Class ChrReg {
 			rawEntries.Delete("isDump")
 			if progress {
 				progress.data.maxCountOfEntries := rawEntries.Count
-				for entryName, entry in rawEntries {
-					if entry.Has("alterations") {
-						if entry["alterations"] is Array {
-							for i, _ in entry["alterations"]
-								progress.data.maxCountOfEntries += entry["alterations"][i].Count
-						} else
-							progress.data.maxCountOfEntries += entry["alterations"].Count
-					}
-				}
 				ChrLib.lastIndexAdded := rawEntries.Count - 1
 				SetTimer(setProgress, 250, 0)
 			}

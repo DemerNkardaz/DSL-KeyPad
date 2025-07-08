@@ -17,7 +17,7 @@ Class Auxiliary {
 				this.inputMode := "Unicode"
 		}
 
-		MsgBox(Locale.ReadInject("message_input_mode_changed", [Locale.Read("message_input_mode_changed_" StrLower(this.inputMode))]), App.Title(), 0x40)
+		MsgBox(Locale.ReadInject("messages.input_mode_changed", [Locale.Read("messages.input_mode_changed_" StrLower(this.inputMode))]), App.Title(), 0x40)
 
 		return
 	}

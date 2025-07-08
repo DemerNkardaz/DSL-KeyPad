@@ -90,7 +90,7 @@ Class Util {
 	static StrFormattedReduce(str, maxLength := 32, removeLineBreaks := False) {
 		local totalLen := this.StrDigitFormat(StrLen(str))
 		local pages := this.StrPagesCalc(str)
-		local output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ] ⟨ " this.StrVarsInject(Locale.Read("tooltip_compose_overflow_properties"), totalLen, pages) " ⟩" : str
+		local output := StrLen(str) > maxLength ? "[ " SubStr(str, 1, maxLength) " " Chr(0x2026) " ] ⟨ " this.StrVarsInject(Locale.Read("gui.recipes.create/edit.overflow_properties"), totalLen, pages) " ⟩" : str
 		if removeLineBreaks {
 			output := StrReplace(output, "`r`n", " ")
 			output := StrReplace(output, "`n", " ")

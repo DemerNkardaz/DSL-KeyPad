@@ -20,11 +20,11 @@ Class Update {
 
 	static Get(force := False) {
 		if !this.available && !force {
-			MsgBox(Locale.Read("gui_options_update_absent"), App.Title(), "Iconi")
+			MsgBox(Locale.Read("gui.options.update_absent"), App.Title(), "Iconi")
 			return
 		} else {
 			if force {
-				acceptBox := MsgBox(Locale.Read("gui_options_update_repair"), App.Title() " — " Locale.Read("gui_options_update_repair_title"), "YesNo Icon!")
+				acceptBox := MsgBox(Locale.Read("gui.options.update_repair.description"), App.Title() " — " Locale.Read("gui.options.update_repair"), "YesNo Icon!")
 				if acceptBox = "No" || acceptBox = "Cancel" {
 					return
 				}
@@ -32,7 +32,7 @@ Class Update {
 			}
 
 			if (this.versions is Integer || this.versions is Array && this.versions.Length == 0) {
-				MsgBox(Locale.Read("gui_options_update_cannot_be_executed"), App.Title() " — " Locale.Read("gui_options_update_repair_title"), "Iconx")
+				MsgBox(Locale.Read("warnings.cannot_be_executed"), App.Title() " — " Locale.Read("gui.options.update_repair"), "Iconx")
 				return
 			} else
 				this.Download()
@@ -59,7 +59,7 @@ Class Update {
 
 	static Download(version := this.availableVersion, fallbackSourceForge := False) {
 		failed := False
-		failedMessage := Locale.Read("gui_options_update_failed")
+		failedMessage := Locale.Read("gui.options.update_failed")
 
 		gitRelease := App.URL "/releases/download/" version "/DSL-KeyPad-" version ".zip"
 		sourceForgeRelease := "https://deac-ams.dl.sourceforge.net/project/dsl-keypad/" version "/DSL-KeyPad-" version ".zip?viasf=1"
@@ -84,7 +84,7 @@ Class Update {
 
 			if exitCode != 0 {
 				failed := True
-				failedMessage := Locale.ReadInject("gui_options_update_failed_pshell", [exitCode])
+				failedMessage := Locale.ReadInject("gui.options.update_failed_pshell", [exitCode])
 			}
 		} catch
 			failed := True
@@ -98,7 +98,7 @@ Class Update {
 		}
 
 		if !failed {
-			MsgBox(Locale.ReadInject("gui_options_update_successful", [App.Ver("+hotfix+postfix"), version]), App.Title(), "Iconi")
+			MsgBox(Locale.ReadInject("gui.options.update_successful", [App.Ver("+hotfix+postfix"), version]), App.Title(), "Iconi")
 			this.RemoveLegacyAssets()
 			Reload
 		}
@@ -122,11 +122,11 @@ Class Update {
 			}
 
 			if filesToDelete.Length > 0 {
-				MB := MsgBox(Locale.ReadInject("gui_options_update_found_legacy_files", [filesToDelete.ToString('`n')]), App.Title(), "YesNo Icon!")
+				MB := MsgBox(Locale.ReadInject("gui.options.update_found_legacy_files", [filesToDelete.ToString('`n')]), App.Title(), "YesNo Icon!")
 				if MB = "Yes" {
 					for relative in filesToDelete
 						FileDelete(App.paths.dir relative)
-					MsgBox(Locale.ReadInject("gui_options_update_found_legacy_files_deleted"), App.Title(), "Iconi")
+					MsgBox(Locale.ReadInject("gui.options.update_found_legacy_files_deleted"), App.Title(), "Iconi")
 				}
 				return
 			}
@@ -144,11 +144,11 @@ Class Update {
 
 		if withAcceptUpdate {
 			if this.available {
-				acceptBox := MsgBox(Locale.ReadInject("gui_options_get_update_acception", [this.availableVersion]), App.Title(), "YesNo Iconi")
+				acceptBox := MsgBox(Locale.ReadInject("gui.options.update_get_acception", [this.availableVersion]), App.Title(), "YesNo Iconi")
 				if acceptBox = "Yes" || acceptBox = "OK"
 					this.Get()
 			} else
-				MsgBox(Locale.Read("gui_options_update_absent"), App.Title())
+				MsgBox(Locale.Read("gui.options.update_absent"), App.Title())
 		}
 	}
 
@@ -211,7 +211,7 @@ Class Update {
 			if !useFallback {
 				return this.ChekVersions(True)
 			} else {
-				MsgBox(Locale.Read("gui_options_update_check_failed"), App.Title(), "Iconx")
+				MsgBox(Locale.Read("gui.options.update_check_failed"), App.Title(), "Iconx")
 				return 1
 			}
 		}
@@ -306,7 +306,7 @@ Class Changelog {
 		if this.FormatChangelog(this.GetChangelog(), &changelog)
 			targetGUI.AddEdit(UISettings, changelog)
 		else
-			targetGUI.AddEdit(UISettings, Locale.Read("warning_nointernet"))
+			targetGUI.AddEdit(UISettings, Locale.Read("warnings.nointernet"))
 	}
 
 	static GetChangelog(url := Update.jsDelivr "@latest/CHANGELOG.md") {
@@ -344,9 +344,9 @@ Class Changelog {
 			return False
 
 		labels := {
-			ver: Locale.Read("version"),
-			date: Locale.Read("date"),
-			link: Locale.Read("release_link")
+			ver: Locale.Read("dictionary.version"),
+			date: Locale.Read("dictionary.date"),
+			link: Locale.Read("dictionary.release_link")
 		}
 
 		str := RegExReplace(str, "m)^\s*$\R", "")

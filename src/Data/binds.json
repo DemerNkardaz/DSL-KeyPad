@@ -2096,7 +2096,7 @@
 					"<#<!": "%(*) => UnicodeWebResource()%"
 				},
 				"Home": {
-					"<#<!": "%(*) => Panel.Panel()%"
+					"<#<!": "%(*) => globalInstances.MainGUI.Show()%"
 				},
 				"2": {
 					"<!": "%FuncBindStore.Get('ToQuote')%"

@@ -68,11 +68,11 @@ Class Cfg {
 		this.Init()
 	}
 
-	static optionsTitle := App.Title("+status+version") " — " Locale.Read("gui_options")
+	static optionsTitle := App.Title("+status+version") " — " Locale.Read("gui.options")
 
 	static EditorGUI := Gui()
 	static EditorSubGUIs := {
-		recipesTitle: App.Title("+status+version") " — " Locale.Read("gui_recipes"),
+		recipesTitle: App.Title("+status+version") " — " Locale.Read("gui.recipes"),
 		recipes: Gui(),
 	}
 
@@ -89,7 +89,7 @@ Class Cfg {
 			TrayMenu.SetTray()
 		}
 
-		this.optionsTitle := App.Title("+status+version") " — " Locale.Read("gui_options")
+		this.optionsTitle := App.Title("+status+version") " — " Locale.Read("gui.options")
 
 		Constructor() {
 			screenWidth := A_ScreenWidth
@@ -116,7 +116,7 @@ Class Cfg {
 			languageSelectorY := (add := 0) => optionsCommonY + 35 + add
 			languageSelectorX := (add := 0) => 25 + add
 
-			optionsPanel.AddText("vLanguageLabel x" languageSelectorX() " y" languageSelectorY(-17) " w128 BackgroundTrans", Locale.Read("gui_options_language"))
+			optionsPanel.AddText("vLanguageLabel x" languageSelectorX() " y" languageSelectorY(-17) " w128 BackgroundTrans", Locale.Read("dictionary.language"))
 
 			languageSelector := optionsPanel.AddDropDownList("vLanguage x" languageSelectorX() " w128 y" languageSelectorY(), optionsLanguages)
 			PostMessage(0x0153, -1, 15, languageSelector)
@@ -132,9 +132,9 @@ Class Cfg {
 			layouSelectorTextY := 32
 			layouSelectorY := (add := 1) => layouSelectorTextY + (16 + add)
 
-			optionsPanel.AddText("vLayoutLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorTextY) " w128 BackgroundTrans", Locale.Read("gui_options_layout"))
+			optionsPanel.AddText("vLayoutLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorTextY) " w128 BackgroundTrans", Locale.Read("dictionary.layout"))
 
-			remappingCheckbox := optionsPanel.AddCheckBox("vLayoutRemapping x" languageSelectorX() " y" languageSelectorY(layouSelectorY(4)) " w128", Locale.Read("gui_options_layout_remapping"))
+			remappingCheckbox := optionsPanel.AddCheckBox("vLayoutRemapping x" languageSelectorX() " y" languageSelectorY(layouSelectorY(4)) " w128", Locale.Read("gui.options.remapping"))
 			remappingCheckbox.Value := Cfg.Get("Layout_Remapping", , False, "bool")
 			remappingCheckbox.OnEvent("Click", (CB, Zero) => SetRemapping(CB.Value))
 
@@ -163,11 +163,11 @@ Class Cfg {
 			))
 
 			bindingsList := BindReg.userBindings.Clone()
-			bindingsList.InsertAt(1, Locale.Read("gui_options_bindings_none"))
+			bindingsList.InsertAt(1, Locale.Read("dictionary.bindings_none"))
 			currentBindings := Cfg.Get("Active_User_Bindings", , "None")
-			currentBindings := currentBindings = "None" ? Locale.Read("gui_options_bindings_none") : currentBindings
+			currentBindings := currentBindings = "None" ? Locale.Read("dictionary.bindings_none") : currentBindings
 
-			optionsPanel.AddText("vBindingsLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorY(50 + 26)) " w128 BackgroundTrans", Locale.Read("gui_options_bindings"))
+			optionsPanel.AddText("vBindingsLabel x" languageSelectorX() " y" languageSelectorY(layouSelectorY(50 + 26)) " w128 BackgroundTrans", Locale.Read("dictionary.bindings"))
 
 			bindingsSelector := optionsPanel.AddDropDownList("vBindings x" languageSelectorX() " w128 y" languageSelectorY(layouSelectorY(32 * 3)), bindingsList)
 			PostMessage(0x0153, -1, 15, bindingsSelector)
@@ -195,7 +195,7 @@ Class Cfg {
 			profileSelector.Text := App.GetProfile()
 			profileSelector.OnEvent("Change", (CB, Zero) => SetProfile(CB.Text))
 
-			optionsPanel.AddText("vUnicodeResourceLabel x" languageSelectorX(256 + 16) " y" languageSelectorY(layouSelectorY((32 * 3) - 17)) " w128 BackgroundTrans", Locale.Read("gui_options_unicode_resource"))
+			optionsPanel.AddText("vUnicodeResourceLabel x" languageSelectorX(256 + 16) " y" languageSelectorY(layouSelectorY((32 * 3) - 17)) " w128 BackgroundTrans", Locale.Read("dictionary.unicode_resource"))
 
 			resourcesList := UnicodeWebResource.resources.Keys()
 			currentResource := Cfg.Get("Unicode_Web_Resource", , "SymblCC")
@@ -205,30 +205,30 @@ Class Cfg {
 			unicodeResourceSelector.Text := currentResource
 			unicodeResourceSelector.OnEvent("Change", (CB, Zero) => Cfg.Set(CB.Text, "Unicode_Web_Resource"))
 
-			unicodeResourceLanguage := optionsPanel.AddCheckBox("vUnicodeResourceLanguage x" languageSelectorX(256 + 16) " y" languageSelectorY(layouSelectorY((32 * 3) + 28)) " w128", Locale.Read("gui_options_unicode_resource_use_system_language"))
+			unicodeResourceLanguage := optionsPanel.AddCheckBox("vUnicodeResourceLanguage x" languageSelectorX(256 + 16) " y" languageSelectorY(layouSelectorY((32 * 3) + 28)) " w128", Locale.Read("dictionary.system_language"))
 			unicodeResourceLanguage.Value := Cfg.Get("Unicode_Web_Resource_Use_System_Language", , False, "bool")
 			unicodeResourceLanguage.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Unicode_Web_Resource_Use_System_Language", , "bool"))
 
-			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(84, (optionsCommonY + optionsCommonH) + 10), Locale.Read("gui_options_updates"))
+			optionsPanel.AddGroupBox("vGroupUpdates " optionsCommon(84, (optionsCommonY + optionsCommonH) + 10), Locale.Read("dictionary.updates"))
 
-			autocheckUpdatesOff := optionsPanel.AddCheckBox("vAutocheckUpdates x" languageSelectorX() " y" languageSelectorY(layouSelectorY((optionsCommonY + optionsCommonH) - 22)) " w256", Locale.Read("gui_options_off_autocheck_updates"))
+			autocheckUpdatesOff := optionsPanel.AddCheckBox("vAutocheckUpdates x" languageSelectorX() " y" languageSelectorY(layouSelectorY((optionsCommonY + optionsCommonH) - 22)) " w384", Locale.Read("gui.options.turn_off_autocheck_updates"))
 			autocheckUpdatesOff.Value := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
 			autocheckUpdatesOff.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Turn_Off_Autocheck_Update", , "bool"))
 
 			if Update.available || autocheckOff {
-				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Locale.ReadInject((autocheckOff ? "gui_options_update_check" : "gui_options_get_update"), [Update.availableVersion]))
+				updateBtn := optionsPanel.AddButton("vUpdateButton x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 24) " w256 h32", Locale.ReadInject((autocheckOff ? "gui.options.update_check" : "gui.options.update_get"), [Update.availableVersion]))
 				updateBtn.OnEvent("Click", (*) => Update.Check(True))
 
 			} else {
-				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", Locale.Read("gui_options_update_absent"))
+				optionsPanel.AddText("vUpdateAbsent x" (windowWidth - 256) / 2 " y" (optionsCommonH + optionsCommonY + 35) " w256 Center BackgroundTrans", Locale.Read("gui.options.update_absent"))
 			}
 
 			repairBtn := optionsPanel.AddButton(" x" (windowWidth - 32) - 24 " y" (optionsCommonH + optionsCommonY + 24) " w32 h32", Chrs(0x1F6E0, 0xFE0F))
 			repairBtn.SetFont("s16")
 			repairBtn.OnEvent("Click", (*) => Update.Get(True))
 
-			tabLabelChars := Locale.Read("gui_options_tab_base")
-			tabIPA := Locale.Read("gui_options_tab_ipa")
+			tabLabelChars := Locale.Read("gui.options.base")
+			tabIPA := Locale.Read("script_labels.ipa.short")
 			tabLabels := [tabLabelChars, tabIPA]
 
 			optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + (84 + 25), 3), tabLabels)
@@ -236,12 +236,12 @@ Class Cfg {
 			optionsTabs.UseTab(tabLabelChars)
 
 			letterI_labels := [
-				Locale.Read("gui_options_default") " — Ii",
-				Locale.Read("gui_options_separated") " — " Chr(0x0130) "i, LShift I" Chr(0x0131),
-				Locale.Read("gui_options_hybrid") " — Ii, LShift " Chr(0x0130) Chr(0x0131),
+				Locale.Read("dictionary.default") " — Ii",
+				Locale.Read("dictionary.separated") " — " Chr(0x0130) "i, LShift I" Chr(0x0131),
+				Locale.Read("dictionary.hybrid") " — Ii, LShift " Chr(0x0130) Chr(0x0131),
 			]
 
-			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(300 + 30) " w80 BackgroundTrans", Locale.Read("gui_options_letterI"))
+			optionsPanel.AddText("vLetterI_Option x" languageSelectorX() " y" languageSelectorY(300 + 30) " w80 BackgroundTrans", Locale.Read("gui.options.letterI"))
 
 			letterI_selector := optionsPanel.AddDropDownList("vLetterI_selector x" languageSelectorX() " w128 y" languageSelectorY(300 + 30 + 18), letterI_labels)
 			PostMessage(0x0153, -1, 15, letterI_selector)
@@ -252,11 +252,11 @@ Class Cfg {
 
 
 			LaTeXOptionsList := {
-				Text: Locale.Read("gui_options_LaTeX_Mode_text"),
-				Math: Locale.Read("gui_options_LaTeX_Mode_math"),
+				Text: Locale.Read("gui.options.LaTeX.modes.text"),
+				Math: Locale.Read("gui.options.LaTeX.modes.math"),
 			}
 
-			optionsPanel.AddText("vLaTeXMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30) " w128 BackgroundTrans", Locale.Read("gui_options_LaTeX_Mode"))
+			optionsPanel.AddText("vLaTeXMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30) " w128 BackgroundTrans", Locale.Read("gui.options.LaTeX.modes"))
 
 			LaTeXModeSelector := optionsPanel.AddDropDownList("vLaTeXModeSelector x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(300 + 30 + 18), [LaTeXOptionsList.Text, LaTeXOptionsList.Math])
 			PostMessage(0x0153, -1, 15, LaTeXModeSelector)
@@ -266,11 +266,11 @@ Class Cfg {
 			LaTeXModeSelector.OnEvent("Change", (CB, Zero) => Options.SetLocalisedOption(CB.Text, LaTeXOptionsList, "LaTeX_Mode"))
 
 			HTMLOptionsList := {
-				Decimal: Locale.Read("gui_options_HTML_Mode_decimal"),
-				Hexadecimal: Locale.Read("gui_options_HTML_Mode_hexadecimal"),
+				Decimal: Locale.Read("gui.options.HTML.modes.decimal"),
+				Hexadecimal: Locale.Read("gui.options.HTML.modes.hexadecimal"),
 			}
 
-			optionsPanel.AddText("vHTMLMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30 + 50) " w128 BackgroundTrans", Locale.Read("gui_options_HTML_Mode"))
+			optionsPanel.AddText("vHTMLMode x" languageSelectorX(256 + 16) " y" languageSelectorY(300 + 30 + 50) " w128 BackgroundTrans", Locale.Read("gui.options.HTML.modes"))
 
 			HTMLModeSelector := optionsPanel.AddDropDownList("vHTMLModeSelector x" languageSelectorX(256 + 16) " w128 y" languageSelectorY(300 + 30 + 18 + 50), [HTMLOptionsList.Decimal, HTMLOptionsList.Hexadecimal])
 			PostMessage(0x0153, -1, 15, HTMLModeSelector)
@@ -279,13 +279,13 @@ Class Cfg {
 			HTMLModeSelector.Text := HTMLOptionsList.HasOwnProp(HTMLOption) ? HTMLOptionsList.%HTMLOption% : HTMLOptionsList.Decimal
 			HTMLModeSelector.OnEvent("Change", (CB, Zero) => Options.SetLocalisedOption(CB.Text, HTMLOptionsList, "HTML_Mode"))
 
-			LaTeXHotStringsCheckbox := optionsPanel.AddCheckBox("vLaTeXHotstrings x" languageSelectorX() " y" languageSelectorY(300 + 225) " w320", Locale.Read("gui_options_LaTeX_Hotstrings"))
+			LaTeXHotStringsCheckbox := optionsPanel.AddCheckBox("vLaTeXHotstrings x" languageSelectorX() " y" languageSelectorY(300 + 225) " w320", Locale.Read("gui.options.LaTeX.hotstrings"))
 			LaTeXHotStringsCheckbox.Value := Cfg.Get("LaTeX_Hotstrings", , False, "bool")
 			LaTeXHotStringsCheckbox.OnEvent("Click", (CB, Zero) => LaTeXHotstrings(CB.Value))
 
 			optionsTabs.UseTab(tabIPA)
 
-			referencingMode := optionsPanel.AddCheckbox("vReferencingMode x" languageSelectorX() " w320 y" languageSelectorY(300 + 30 + 5), Locale.Read("gui_options_ipa_use_latin_instead_greek"))
+			referencingMode := optionsPanel.AddCheckbox("vReferencingMode x" languageSelectorX() " w320 y" languageSelectorY(300 + 30 + 5), Locale.Read("gui.options.IPA.use_latin_instead_greek"))
 			referencingMode.Value := Cfg.Get("Referencing_Rule_Latin", "IPA", False, "bool")
 			referencingMode.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Referencing_Rule_Latin", "IPA", "bool"))
 
@@ -337,7 +337,7 @@ Class Cfg {
 
 			SetRemapping(remapping) {
 				if remapping {
-					MB := MsgBox(Locale.Read("gui_options_layout_remapping_description"), App.Title(), "YesNo")
+					MB := MsgBox(Locale.Read("gui.options.remapping.description"), App.Title(), "YesNo")
 					if MB = "No" || MB = "Cancel" {
 						this.EditorGUI["LayoutRemapping"].Value := False
 						return
@@ -369,7 +369,7 @@ Class Cfg {
 	static SubGUIs(guiName, xPos := 0, yPos := 0) {
 
 		RecipesConstructor() {
-			this.EditorSubGUIs.recipesTitle := App.Title("+status+version") " — " Locale.Read("gui_recipes"),
+			this.EditorSubGUIs.recipesTitle := App.Title("+status+version") " — " Locale.Read("gui.recipes"),
 				currentRecipe := []
 
 			screenWidth := A_ScreenWidth
@@ -435,15 +435,7 @@ Class Cfg {
 			removeRecipeBtn.SetFont("s16")
 			removeRecipeBtn.OnEvent("Click", (*) => removeSelected(currentRecipe))
 
-			attachRecipesListBtn := recipesPanel.AddButton("x" addRemX(128) " y" addRemY " w128 h32", Locale.Read("gui.recipes.attach_list"))
-			attachRecipesListBtn.SetFont("s9")
-			attachRecipesListBtn.OnEvent("Click", (*) => attachList())
-
-			attachListBtn := recipesPanel.AddButton("x" addRemX(256) " y" addRemY " w32 h32", Chr(0x1F5D2))
-			attachListBtn.SetFont("s16")
-			attachListBtn.OnEvent("Click", (*) => Run(MyRecipes.attachments))
-
-			updateAllBtn := recipesPanel.AddButton("x" addRemX(288) " y" addRemY " w32 h32")
+			updateAllBtn := recipesPanel.AddButton("x" addRemX(128) " y" addRemY " w64 h32")
 			GuiButtonIcon(updateAllBtn, ImageRes, 229)
 			updateAllBtn.OnEvent("Click", (*) => (
 				MyRecipes.Update(),
@@ -454,35 +446,6 @@ Class Cfg {
 
 			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
 			return recipesPanel
-
-			attachList() {
-				attachmentFiles := FileSelect("M", App.paths.profile, Locale.Read("gui_recipes_attach_list"), "*.ini")
-
-				if (!attachmentFiles)
-					return []
-
-				trimmedFiles := []
-				strictToNames := []
-				basePath := App.paths.profile "\"
-
-				for filePath in attachmentFiles {
-					trimmedPath := Util.TrimBasePath(filePath)
-					if (trimmedPath != filePath) {
-						trimmedFiles.Push(trimmedPath)
-						strictToNames.MergeWith(Util.INIGetSections([filePath]))
-					}
-				}
-
-				if trimmedFiles.Length == 0 {
-					return
-				}
-
-				for trimmedFile in trimmedFiles {
-					MyRecipes.AddAttachment(trimmedFile)
-				}
-
-				MyRecipes.Update(strictToNames)
-			}
 
 			setSelected(LV, rowNumber) {
 				currentRecipe := [
@@ -499,7 +462,7 @@ Class Cfg {
 			createEditRecipe(recipeArray?) {
 				if IsSet(recipeArray) && recipeArray.Length > 0 && (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.filePath)) {
 					attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
-					MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
+					MsgBox(Locale.Read("gui.recipes.warnings." (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "autoimported_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
 					return
 				} else {
 					MyRecipes.Editor(recipeArray?, recipesLV)
@@ -510,7 +473,7 @@ Class Cfg {
 				if recipeArray.Length > 0 {
 					if (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.filePath)) {
 						attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
-						MsgBox(Locale.Read("gui_recipes_" (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "attach_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
+						MsgBox(Locale.Read("gui.recipes.warnings." (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "autoimported_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
 						return
 					} else {
 						message := Locale.ReadInject("gui.recipes.warnings.remove_confirm", [recipeArray[1]])
@@ -721,7 +684,7 @@ Class Options {
 		command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" shortcutPath "'); $shortcut.TargetPath = '" currentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" App.icoDLL "," iconIndex "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()"
 		RunWait(command, , "Hide")
 
-		MsgBox(Locale.Read("gui.options.system_startup.shortcut_created/updated"), App.Title(), 0x40)
+		MsgBox(Locale.Read("gui.options.system_startup.shortcut_created_or_updated"), App.Title(), 0x40)
 	}
 }
 

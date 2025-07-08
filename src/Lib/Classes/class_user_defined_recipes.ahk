@@ -206,7 +206,7 @@ Class MyRecipes {
 			}
 
 			getResultLabel() {
-				return Locale.Read("dictionary.result") ": " Util.StrVarsInject(Locale.Read("tooltip_compose_overflow_properties"), totalLen, pages)
+				return Locale.Read("dictionary.result") ": " Util.StrVarsInject(Locale.Read("gui.recipes.create/edit.overflow_properties"), totalLen, pages)
 			}
 
 			saveRecipe(data) {

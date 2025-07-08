@@ -110,7 +110,7 @@ Class ChrRecipeHandler {
 
 			if !ChrLib.entries.HasOwnProp(characterInfo.name) {
 				if skipStatus = "Missing" {
-					MsgBox(Locale.Read("error_critical") "`n`n" Locale.ReadInject("error_entry_not_found_recipe", [entryName, RegExReplace(recipe, "\$(?![{(])"), characterInfo.name]), App.Title(), "Iconx")
+					MsgBox(Locale.Read("error.critical") "`n`n" Locale.ReadInject("error.entry_not_found_recipe", [entryName, RegExReplace(recipe, "\$(?![{(])"), characterInfo.name]), App.Title(), "Iconx")
 					return tempRecipe
 				}
 			}

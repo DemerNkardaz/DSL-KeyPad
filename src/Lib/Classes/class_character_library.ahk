@@ -57,7 +57,7 @@ Class ChrLib {
 		; 	JSON.DumpFile(ChrLib.entries, this.dumpPath, , "UTF-8")
 
 		if ChrLib.duplicatesList.Count > 0 {
-			TrayTip(Locale.ReadInject("warning_duplicate_recipe", [ChrLib.duplicatesList.Keys().ToString()]), App.Title("+status+version"), "Icon! Mute")
+			TrayTip(Locale.ReadInject("warnings.duplicate_recipe", [ChrLib.duplicatesList.Keys().ToString()]), App.Title("+status+version"), "Icon! Mute")
 			output := ""
 			for recipe, names in ChrLib.duplicatesList
 				output .= recipe "`t" names.ToString() "`n"
@@ -356,7 +356,7 @@ Class ChrLib {
 				try {
 					return getChar
 				} catch {
-					MsgBox(Locale.Read("error_critical") "`n`n" Locale.ReadInject("error_entry_not_found", [entryName]), App.Title(), "Iconx")
+					MsgBox(Locale.Read("error.critical") "`n`n" Locale.ReadInject("error.entry_not_found", [entryName]), App.Title(), "Iconx")
 					return
 				}
 			}

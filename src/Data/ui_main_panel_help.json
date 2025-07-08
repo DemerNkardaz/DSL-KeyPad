@@ -1,22 +1,22 @@
 [
-	"help_modifier_keys",
-	"help_common_binds",
-	"help_panel_commands",
-	"help_tray_commands",
-	"help_uncommon_titles",
+	"help.modifier_keys",
+	"help.common_binds",
+	"help.panel_commands",
+	"help.tray_commands",
+	"help.uncommon_titles",
 	{"help.search_at_library": [
 		"help.search_at_library.glyph_variations",
 		"help.search_at_library.funcs"
 	]},
-	"help_forge",
-	"help_alternative_input",
-	"help_glyph_variations",
-	"help_TELEX",
-	"help_digit_cases",
-	{"help_hotstrings": [
-		"help_hotstrings__temperature_conversion"
+	"help.forge",
+	"help.alternative_input",
+	"help.glyph_variations",
+	"help.TELEX",
+	"help.digit_cases",
+	{"help.hotstrings": [
+		"help.hotstrings.temperature_conversion"
 	]},
-	{"help_text_processing": [
-		"help_text_processing__quotes"
+	{"help.text_processing": [
+		"help.text_processing.quotes"
 	]}
 ]

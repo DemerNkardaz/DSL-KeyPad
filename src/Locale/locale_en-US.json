@@ -5,9 +5,12 @@
 			"about": "About",
 			"all_characters": "All characters",
 			"alt_code": "Alt code",
+			"alternative_input": "Alternative input",
 			"and": "and",
 			"author": "Author",
 			"authors": "Authors",
+			"bindings": "Bindings",
+			"bindings_none": "No bindings",
 			"cancel": "Cancel",
 			"character": "Character",
 			"characters": "Characters",
@@ -23,6 +26,7 @@
 			"decimal": "Decimal",
 			"default": "Default",
 			"delete": "Delete",
+			"description": "Description",
 			"entry": "Entry",
 			"entries": "Entries",
 			"et": "and",
@@ -34,17 +38,22 @@
 			"folders": "Folders",
 			"font": "Font",
 			"fonts": "Fonts",
+			"forge": "Forge",
+			"glyph_variations": "Glyph variations",
 			"help": "Help",
 			"hexadecimal": "Hexadecimal",
 			"homepage": "Homepage",
 			"html": "HTML",
-			"html_entity": "HTML Entity Code",
-			"html_entity_named": "HTML Entity Name",
+			"html_entity": "HTML entity",
+			"html_entity_named": "Named entity",
+			"hybrid": "Hybrid",
 			"internal_id": "Internal ID",
 			"key": "Key",
 			"keys": "Keys",
 			"language": "Language",
 			"languages": "Languages",
+			"layout": "Layout",
+			"layouts": "Layouts",
 			"letters": "Letters",
 			"mod": "Modification",
 			"mods": "Modifications",
@@ -55,39 +64,47 @@
 			"press": "Press",
 			"recipe": "Recipe",
 			"recipes": "Recipes",
+			"release_link": "Release link",
 			"reload": "Reload",
 			"rename": "Rename",
+			"repository": "Repository",
 			"result": "Result",
 			"row": "Row",
 			"save": "Save",
 			"script": "Script",
 			"scripts": "Scripts",
 			"search": "Search",
+			"search_by_tag": "Search by tag",
+			"separated": "Separated",
 			"status": "Status",
 			"symbol": "Symbol",
 			"symbols": "Symbols",
+			"system_language": "System language",
 			"tag": "Tag",
 			"tags": "Tags",
 			"title": "Title",
 			"titles": "Titles",
 			"transcription": "Transcription",
 			"unicode_point": "Unicode point",
+			"unicode_resource": "Unicode resource",
 			"unknown": "Unknown",
+			"update": "Update",
+			"updates": "Updates",
 			"value": "Value",
 			"values": "Values",
 			"version": "Version",
 			"view": "View"
 		},
 		"dynamic_dictionary": {
-			"code_page": "Code page {}",
-			"page_of": "Page {}/{}",
+			"code_page": "Code Pages {}",
+			"page_of": "Pages {}/{}",
 			"press": "Press {}"
 		},
 		"first_launch": {
 			"message": [
-				"WARNING!\n\n",
-				"If you play video games — please note that this tool runs on AutoHotkey, which may be prohibited in games, including running in the background, due to players using .ahk scripts to gain unfair advantages over other players.\n\n",
-				"To avoid issues with game anti-cheat systems, it is recommended to disable all AutoHotkey processes before playing.\n\n",
+				"ATTENTION!\n\n",
+				"If you play video games — please note that this tool works on AutoHotkey, which may be prohibited in games, including in background mode, due to players using .ahk scripts to gain unfair advantage over other players.\n\n",
+				"To avoid problems with game anti-cheats, it is recommended to disable all AutoHotkey processes before playing.\n\n",
 				"The risk is highest in the following games: Marvel Rivals, Apex Legends, games with BattlEye anti-cheat."
 			]
 		},
@@ -105,21 +122,68 @@
 			"after_start": "After start"
 		},
 		"gui": {
+			"about": {
+				"author_name": "Yalla Nkardaz",
+				"repository_url": "https://github.com/DemerNkardaz/DSL-KeyPad",
+				"description": "Version: {}\n\nA tool for simplified access to a wide range of Unicode symbols. Allows you to input them directly from the keyboard using various methods, including keyboard bindings and “compose mode.”\n\nExpands multilingual writing capabilities, requiring only English and Russian keyboard layouts to be present in the system.",
+				"library_count": "Characters: {} / {} Glyph variations\nTotal combinations: {}\nHotkeys: {}\nRecipes: {} / {} unique\nCustom recipes: {} / {} unique"
+			},
 			"options": {
-				"__self": "Options",
+				"__self": "Settings",
+				"base": "Base settings",
+				"turn_off_autocheck_updates": "Disable automatic update checking",
+				"update_check": "Check for updates",
+				"update_check_failed": "Update check failed. You may not be connected to the internet.",
+				"update_get": "Update to version: {}",
+				"update_get_acception": "Version {} is available.\n\nWould you like to install?",
+				"update_absent": "You already have the latest version installed.",
+				"update_failed": "Update failed to complete.",
+				"update_failed_pshell": "Update failed to complete. PowerShell script exited with code {}.",
+				"update_available": "Update available",
+				"update_repair": {
+					"__self": "Repair",
+					"description": "Repair installation.\n\nAre you sure you want to force overwrite the installed version of DSL KeyPad?\n\nAll custom files will not be affected.",
+					"success": "Repair completed successfully."
+				},
+				"update_found_legacy_files": "The installation contains library and/or localization files not used in the new version.\n\nWould you like to delete them?\n\nFile list:\n{}",
+				"update_found_legacy_files_deleted": "Deletion completed successfully.",
+				"letterI": "“I” input type",
+				"LaTeX": {
+					"hotstrings": "LaTeX hotstrings",
+					"modes": {
+						"__self": "LaTeX commands mode",
+						"text": "Text",
+						"math": "Mathematical"
+					}
+				},
+				"HTML": {
+					"modes": {
+						"__self": "HTML entities mode",
+						"decimal": "Decimal",
+						"hexadecimal": "Hexadecimal"
+					}
+				},
+				"IPA": {
+					"use_latin_instead_greek": "Latin symbols instead of Greek"
+				},
+				"remapping": {
+					"__self": "Remapping",
+					"description": "When remapping is enabled, all standard keyboard keys will be reassigned according to the selected layout except QWERTY/QWERTY. This setting may interfere with application bindings, such as games.\n\nRemapping will be relevant for custom layouts.\n\nWhen possible, it is recommended to use a similar system layout instead of remapping."
+				},
 				"system_startup": {
 					"add": "Add to startup",
-					"shortcut_created/updated": "Startup shortcut created or updated"
+					"shortcut_created_or_updated": "Startup shortcut created or updated"
 				}
 			},
 			"panel": {
 				"__self": "Panel",
+				"open": "Open panel",
 				"context_menu": {
 					"add_favorites": "Add to favorites",
 					"remove_favorites": "Remove from favorites",
 					"show_symbol_page": "View symbol on {}",
 					"show_block_page": "View Unicode block on {}",
-					"glyph_variations": "Glyph variations",
+					"glyph_variations": "{@:dictionary.glyph_variations}",
 					"legend": "{@:gui.legend}",
 					"show_entry": "Open entry {}"
 				}
@@ -130,31 +194,34 @@
 				"create/edit": {
 					"__self": "Create/Edit recipe",
 					"section": "Section (“a–Z” and “_”)",
-					"name": "Recipe name"
+					"name": "Recipe name",
+					"overflow_properties": "Chr. {}, Pg. {}"
 				},
 				"warnings": {
-					"remove_confirm": "Do you really want to delete the recipe “{}”?",
+					"remove_confirm": "Do you really want to delete recipe “{}”?",
 					"exists": "A custom recipe with section name “{}” already exists.",
-					"exists_internal": "A recipe with section name “{}” already exists in the internal library.\n\nRename the custom recipe section.",
+					"exists_internal": "A recipe with section name “{}” already exists in the standard library.\n\nRename the custom recipe section.",
 					"xcompose_cannot_be_edited": "Recipes extracted from “.XCompose” files cannot be deleted or edited.",
-					"invalid_name": "Name must contain only English letters “a–Z”, digits (not at the beginning), and underscore “_”.",
+					"invalid_name": "Name must contain only English letters “a–Z”, numbers (not at the beginning) and underscore “_”.",
 					"invalid_section_name": "Invalid section name.\n{@:gui.recipes.warnings.invalid_name}",
 					"invalid_xcompose_name": "Invalid .XCompose file name.\n{@:gui.recipes.warnings.invalid_name}",
 					"invalid_recipe": "Invalid recipe or result.\nRecipe: {}\nResult: {}",
-					"duplicates_found": "Recipe duplication detected: {}"
+					"duplicates_found": "Recipe duplication detected: {}",
+					"xcompose_break": "Recipes extracted from “.XCompose” files cannot be deleted or edited.",
+					"autoimported_edit_unable": "Imported recipes cannot be edited or deleted from this window."
 				},
 				"errors": {
-					"read_error": "Error reading recipe list: section {}, recipe {}.",
-					"read_error_reinit": "Error reading recipe list: section {}, recipe {}.",
-					"titles": "Localized recipe name “{}” contains an error (empty language code or other error)."
+					"read_error": "Recipe list read error: section {}, recipe {}.",
+					"read_error_reinit": "Recipe list read error: section {}, recipe {}.",
+					"titles": "Localized recipe name “{}” contains an error (language code is empty or other error)."
 				}
 			},
 			"tabs": {
 				"__self": "Tabs",
-				"smelting": "{@default:misc.fire} Smelting recipes",
-				"fastkeys": "{@default:misc.insert_key} Fast keys",
-				"secondkeys": "{@default:misc.die_face_2} Secondary keys",
-				"tertiarykeys": "{@default:misc.die_face_3} Tertiary keys",
+				"smelting": "{@default:misc.fire} Smelting Recipes",
+				"fastkeys": "{@default:misc.insert_key} Fast Keys",
+				"secondkeys": "{@default:misc.die_face_2} Secondary Keys",
+				"tertiarykeys": "{@default:misc.die_face_3} Tertiary Keys",
 				"scripts": "{@default:misc.amphora} {@:dictionary.scripts}",
 				"TELEXVNI": "{@default:misc.mahjong_tile_bamboo} {@default:TELEX}",
 				"help": "{@default:misc.bulb} {@:dictionary.help}",
@@ -171,7 +238,7 @@
 					}
 				},
 				"glyph_variations": {
-					"__self": "Glyph variations",
+					"__self": "{@:dictionary.glyph_variations}",
 					"gui_title": "Glyph variations panel"
 				}
 			},
@@ -200,61 +267,204 @@
 		},
 		"help": {
 			"__self": "{@:dictionary.help}",
+			"modifier_keys": {
+				"__self": "Modifier keys",
+				"description": [
+					"Modifier keys such as Shift, Alt, Win, etc. have been abbreviated for compactness in the interface:\n\n",
+					"{var:LeftAlt}, {var:RightAlt} — left and right Alt.\n",
+					"{var:LeftShift}, {var:RightShift} — left and right Shift.\n",
+					"{var:LeftControl}, {var:RightControl} — left and right Ctrl.\n",
+					"{var:Window} — Win key.\n",
+					"{var:CapsLock} — CapsLock in active state."
+				]
+			},
+			"common_binds": {
+				"__self": "Common bindings",
+				"description": [
+					"Interface:\n",
+					"{var:RightControl} F9 — open settings window\n",
+					"{var:Window}{var:LeftAlt} Home — main panel.\n\n",
+					"Bindings and input:\n",
+					"{var:RightControl} F10 — toggle all bindings state (on/off).\n",
+					"{var:RightAlt} F1 — toggle “Fast Keys” state (on/off, saved to settings file).\n",
+					"{var:RightAlt}{var:RightShift} F1 — toggle input mode between {@default:unicode}/HTML codes/LaTeX commands.\n",
+					"{var:RightAlt} F2 — toggle {@default:TELEX} mode for Vietnamese.\n",
+					"{var:RightAlt}{var:RightShift} F2 — toggle {@default:TELEX} mode for Pinyin.\n\n",
+					"Other:\n",
+					"{var:Window}{var:LeftAlt} PgUp — open {@default:unicode} web resource for selected symbol."
+				]
+			},
+			"panel_commands": {
+				"__self": "Panel commands",
+				"description": [
+					"Right-click on list item — context menu.\n",
+					"Double left-click on list item — open {@default:unicode} web resource for symbol.\n\n",
+					"Left-click on {@default:unicode} block at bottom of symbol preview — open corresponding web page.\n",
+					"Double left-click with {var:LeftShift} held on list item — add or remove symbol from favorites list.\n",
+					"Double left-click with {var:LeftControl} held on list item — copy symbol."
+				]
+			},
+			"tray_commands": {
+				"__self": "Tray commands",
+				"description": [
+					"Right-click — context menu.\n",
+					"Left-click — open main panel.\n",
+					"Left-click with {var:LeftControl} held — open settings window.\n",
+					"Left-click with {var:LeftAlt} held — open custom recipes window.\n",
+					"Left-click with {var:LeftShift} held — open Alternative Input selector.\n",
+					"Left-click with {var:LeftControl}{var:LeftShift} held — open Glyph Variations selector."
+				]
+			},
+			"uncommon_titles": {
+				"__self": "Uncommon titles",
+				"description": [
+					"For Russian language, the names of various symbols of one or another alphabet sometimes turn out to be the same, which is why extended Cyrillic letters had to be introduced to prevent duplication of symbol names and tags within the same alphabet:\n",
+					"\u2003•\u2002“\u04AA” — equivalent of Latin digraph “th” or sound [\u03B8].\n",
+					"\u2003•\u2002“\u0498” — equivalent of Latin digraph “dh” or sound [\u00F0].\n",
+					"\u2003•\u2002“\u04B2” — equivalent of Latin digraph “kh” or sound [\u0127].\n",
+					"\u2003•\u2002“\u0492” — equivalent of Latin digraph “gh” or sound [\u0263].\n",
+					"\u2003•\u2002“\u040E” — equivalent of sound [w].\n",
+					"\u2003•\u2002“\u049A” — equivalent of sound [q].\n",
+					"\u2003•\u2002“\u052E” — equivalent of sound [\u026C]."
+				]
+			},
 			"search_at_library": {
 				"__self": "Library search",
 				"description": [
 					"Combination: {var:Window}{var:LeftAlt} F\n",
 					"Most library symbols have their own tags, which are variants of the symbol name that can be used for insertion through search.\n",
-					"Enter a tag completely or partially (or entry name) to insert the corresponding symbol. You can enter multiple queries at once, separating them with commas. Examples:\n",
+					"Enter the tag completely or partially (or entry name) to insert the corresponding symbol. You can enter multiple queries at once by separating them with commas. Examples:\n",
 					"\u2003•\u2002“hellenic capital letter lambda”, “hel lam”, “hel_c_let_l_lambda” → “Λ”\n",
 					"\u2003•\u2002“дез ди, !дез ди”, “lam, !lam” → “𐐔𐐼”, “Λλ”.\n",
 					"\u2003•\u2002“reference_mark” → “※”.\n\n",
 					"Notes:\n",
-					"\u2003•\u2002The shorter the query — the less precise it is.\n",
-					"\u2003•\u2002The “!” sign at the beginning of a query tells the search to use case sensitivity.\n",
+					"\u2003•\u2002The shorter the query — the less accurate it is.\n",
+					"\u2003•\u2002The “!” sign at the beginning of the query tells the search to use case sensitivity.\n",
 					"\u2003•\u2002Simple regular expressions are supported, for example:\n",
 					"\u2003\u2004\u2002\u2003‣\u2002“fut.*?\\s+\\S+al” → “ᚺ” (Hagalaz rune)\n",
 					"\u2003\u2004\u2002\u2003‣\u2002“az$” → “ᛞ” (Mannaz rune)\n",
-					"\u2003\u2004\u2002\u2003‣\u2002“^фр” → “₣” (Franc)."
+					"\u2003\u2004\u2002\u2003‣\u2002“^фра” → “₣” (Franc)."
 				],
 				"glyph_variations": {
-					"__self": "Glyph variations",
+					"__self": "{@:dictionary.glyph_variations}",
 					"description": [
 						"When searching, you can specify the desired glyph variation by adding “::<VARIATION>” to the end of the query, for example: “lat m::fraktur” → “𝔐”.\n",
-						"\u2003\u2004\u2002\u2003‣\u2002“^фра” → “₣” (Franc).",
-						" • modifier — модификатор, мо, mo.\n",
-						" • superscript — верхний индекс, ви, sup.\n",
-						" • subscript — нижний индекс, ни, sub.\n",
-						" • italic — курсив, ку, it.\n",
-						" • italicBold — курсив полужирный, куп, itb.\n",
-						" • bold — полужирный, п, b.\n",
-						" • fraktur — фрактур, ф, f.\n",
-						" • frakturBold — полужирный фрактур, пф, fb.\n",
-						" • script — рукописный, р, s.\n",
-						" • scriptBold — полужирный рукописный, пр, sb.\n",
-						" • doubleStruck — ds.\n",
-						" • sansSerif — без засечек, бз, ss.\n",
-						" • sansSerifItalic — курсив без засечек, кубз, ssit.\n",
-						" • sansSerifItalicBold — курсив полужирный без засечек, купбз, ssitb.\n",
-						" • sansSerifBold — полужирный без засечек, пбз, ssb.\n",
-						" • monospace — моноширинный, м, m.\n",
-						" • smallCapital — капитель, к, sc.\n",
-						" • small — маленький, мал, sm.\n",
-						" • combining — комбинируемый, ко, c.\n",
-						" • uncombined — некомбинируемый, неко, uc.\n",
-						" • fullwidth — полноширинный, пш, fw.\n"
+						"\u2003•\u2002modifier — модификатор, мо, mo.\n",
+						"\u2003•\u2002superscript — верхний индекс, ви, sup.\n",
+						"\u2003•\u2002subscript — нижний индекс, ни, sub.\n",
+						"\u2003•\u2002italic — курсив, ку, it.\n",
+						"\u2003•\u2002italicBold — курсив полужирный, куп, itb.\n",
+						"\u2003•\u2002bold — полужирный, п, b.\n",
+						"\u2003•\u2002fraktur — фрактур, ф, f.\n",
+						"\u2003•\u2002frakturBold — полужирный фрактур, пф, fb.\n",
+						"\u2003•\u2002script — рукописный, р, s.\n",
+						"\u2003•\u2002scriptBold — полужирный рукописный, пр, sb.\n",
+						"\u2003•\u2002doubleStruck — ds.\n",
+						"\u2003•\u2002sansSerif — без засечек, бз, ss.\n",
+						"\u2003•\u2002sansSerifItalic — курсив без засечек, кубз, ssit.\n",
+						"\u2003•\u2002sansSerifItalicBold — курсив полужирный без засечек, купбз, ssitb.\n",
+						"\u2003•\u2002sansSerifBold — полужирный без засечек, пбз, ssb.\n",
+						"\u2003•\u2002monospace — моноширинный, м, m.\n",
+						"\u2003•\u2002smallCapital — капитель, к, sc.\n",
+						"\u2003•\u2002small — маленький, мал, sm.\n",
+						"\u2003•\u2002combining — комбинируемый, ко, c.\n",
+						"\u2003•\u2002uncombined — некомбинируемый, неко, uc.\n",
+						"\u2003•\u2002fullwidth — полноширинный, пш, fw.\n"
 					]
 				},
 				"funcs": {
 					"__self": "Function and method calls",
 					"description": [
 						"The search field supports the ability to call some functions and methods, including:\n",
-						" • “\\” or “/Reload” — restart the program.\n",
-						" • “/Exit” — close the program.\n",
-						" • “/ChrLib.Print” — generate and open an .HTML file with a list of library symbols.\n",
-						" • “/MyRecipes.Update” — re-initialize custom recipes.\n",
-						" • “/Update.Get” or “/Update.Repair” — get update or repair current version.\n",
-						" • “/KbdBinder.Init” — re-initialize layouts and bindings."
+						" • “\\” or “/Reload” — restart the program.\n",
+						" • “/Exit” — close the program.\n",
+						" • “/ChrLib.Print” — generate and open .HTML file with library symbols list.\n",
+						" • “/MyRecipes.Update” — re-initialize custom recipes.\n",
+						" • “/Update.Get” or “/Update.Repair” — get update or repair current version.\n",
+						" • “/KbdBinder.Init” — re-initialize layouts and bindings."
+					]
+				}
+			},
+			"forge": {
+				"__self": "{@:dictionary.forge}",
+				"description": [
+					"Smelts a sequence (“recipe”) of some symbols into others.\n",
+					"Divided into two usage methods — through an input dialog and through “Composition mode”, activated directly in the input field with the {var:RightAlt}×2 combination.\n\n",
+					"Examples: “AE” → “Æ”, “A◌̆◌́” → “Ắ”, “Bet” → “Ꞵ”, “ΣΤ” → “Ϛ”, “ІАЖ” → “Ѭ”, “ſƷ” → “ẞ”, “TH” → “Þ”.\n\n",
+					"Notes on composition mode:\n",
+					" • “Pause” key — prevents automatic recipe processing.\n",
+					" • Entering “`” allows output to the composition mode field instead of sending to the active window, which will allow continuing the sequence after processing.\n",
+					" • Starting input with “A+/А+/Α+” (aаα) or “U+/Ю+/Υ+” (uюυ) — allows entering symbols by their Alt code or Unicode code point (multiple values can be entered by separating them with a space). Alt code ranges 128–255 and 0128–0255 change code pages depending on keyboard language.\n",
+					" • “Enter” key — confirm input if pause mode or A+/U+ is active.\n",
+					" • “Insert” key — insert clipboard contents.\n",
+					" • Starting with “(<Number>) ” the input result will repeat the specified number of times, “(4) Ups” → “ƱƱƱƱ”.\n",
+					" • Starting with “(~) ” allows entering whole words, “(~) Ra◌̂vna◌̆, S◌̦timat◌̦i” → “Râvnă, Știmați”.\n",
+					" • “(<Number>~) ” — combination of the two previous points.\n",
+					" • Using “##” with “(~)” allows escaping unwanted combinations (tho◌́rr, t##ho◌́rr → þórr, thórr)."
+				]
+			},
+			"alternative_input": {
+				"__self": "{@:dictionary.alternative_input}",
+				"description": [
+					"Combination: {var:Window}{var:LeftAlt} S\n",
+					"Opens a selector with a list of alternative input modes available for activation, representing an additional layer of bindings for various forms of writing, alphabets. Incompatible with {@default:TELEX}-like input mode."
+				]
+			},
+			"glyph_variations": {
+				"__self": "{@:dictionary.glyph_variations}",
+				"description": [
+					"Combination: {var:Window}{var:LeftAlt} A\n",
+					"Opens a selector with a list of glyph variation modes available for activation, representing “rules” that tell the program to send the specified variant of a symbol instead of the symbol itself, if the variant is registered for the symbol."
+				]
+			},
+			"TELEX": {
+				"__self": "{@default:TELEX}-like input mode",
+				"description": [
+					"Facilitates input of target languages by implementing behavior based on TELEX and VNI layouts of Vietnamese language. Incompatible with alternative input modes.\n\n",
+					"Combinations:\n",
+					"{var:Window}{var:LeftAlt} D — open general selector.\n",
+					"{var:RightAlt} F2 — activate mode for Vietnamese and Jarai languages.\n",
+					"{var:RightAlt}{var:RightShift} F2 — activate mode for Pinyin."
+				]
+			},
+			"digit_cases": {
+				"__self": "Digit input modes",
+				"description": [
+					"Combinations:\n",
+					"{var:Window}{var:LeftAlt} ↑ and ↓ — create bindings for entering digits in superscript and subscript (¹²³⁴⁵⁶⁷⁸⁹⁰⁻⁼⁽⁾₁₂₃₄₅₆₇₈₉₀₋₌₍₎), while CapsLock activation inverts the index.\n\n",
+					"Combination:\n",
+					"{var:Window}{var:LeftAlt}{var:RightShift} ↑ — activates Roman numeral input."
+				]
+			},
+			"hotstrings": {
+				"__self": "Hotstrings",
+				"description": [
+					"LaTeX\n",
+					"Input in format $><LaTeX-command>$ is automatically replaced with the corresponding code symbol, if registered, for example: $>\\bar{\\AE}$ → Ǣ."
+				],
+				"temperature_conversion": {
+					"__self": "Temperature conversion",
+					"description": [
+						"Input format: \\{U+200B}tcalc{<FROM><TO>}\n",
+						"Activates value input for temperature conversion from one scale to another. Examples: \\{U+200B}tcalc{cf} → −12 → 10.40 ℉, \\{U+200B}tcalc{rera} → 44,05 → 590,78 °R.\n\n",
+						"The following scales are available: Celsius (C), Fahrenheit (F), Kelvin (K), Delisle (D), Leiden (L), Newton (N), Wedgwood (W), Rankine (RA), Réaumur (RE), Rømer (RO), Dalton (Da).\n\n",
+						"Format variants are available, selected when specifying the fractional part:\n{U+2003}<Integer>.<Fractional> → 999,727.59 ℃\n",
+						"{U+2003}<Integer>,<Fractional> → 999 727,59 ℃\n",
+						"{U+2003}<Integer>.,<Fractional> → 999.727,59 ℃\n{U+2003}<Integer>..<Fractional> → 999 727.59 ℃\n",
+						"{U+2003}<Integer>{U+0027}<Fractional> → 999'727.59 ℃\n",
+						"{U+2003}<Integer>{U+0027}{U+0027}<Fractional> → 999'727,59 ℃\n\n",
+						"Active CapsLock before confirming input disables fractional part rounding."
+					]
+				}
+			},
+			"text_processing": {
+				"__self": "Text processing",
+				"description": "This category describes various processors for text selected in the edit field.",
+				"quotes": {
+					"__self": "Enclose in quotes",
+					"description": [
+						"Combination:\n",
+						"{var:LeftAlt} 2 — encloses selected text in quotes. Sets different quotes depending on keyboard language and presence of quotes in selected text: Меч Танаквиль → Меч «Танаквиль» → «Меч „Танаквиль“», Sword Tanaquil → Sword “Tanaquil” → “Sword ‘Tanaquil’”, Ξίφος Τανακυλλίς → Ξίφος «Τανακυλλίς» → «Ξίφος “Τανακυλλίς”»."
 					]
 				}
 			}
@@ -266,11 +476,19 @@
 				"hanyu_pinyin": "{@:telex_script_processor.labels.chinese_romanization}",
 				"vietnamese": "Vietnamese",
 				"jorai": "Jarai",
-				"chinese_romanization": "Hanyu Pinyin"
+				"chinese_romanization": "HànYǔ PīnYīn"
 			},
 			"warnings": {
 				"incompatible_with_alternative_modes": "Cannot activate {@default:TELEX}-like mode “{}” while alternative mode “{}” is active."
 			}
+		},
+		"symbol_search": {
+			"__self": "Symbol search",
+			"prompt": "!big yus — case sensitive ({U+046B}).\nbig yus — case insensitive ({U+046A} instead of {U+046B})."
+		},
+		"symbol_smelting": {
+			"__self": "Smelt symbols",
+			"prompt": "Insert ingredients."
 		},
 		"script_labels": {
 			"telex_script_processor": {
@@ -284,18 +502,18 @@
 				"subscript": "Subscript characters",
 				"italic": "Italic characters",
 				"bold": "Bold characters",
-				"italic_bold": "Bold italic characters",
+				"italic_bold": "Italic bold characters",
 				"sans_serif": "Sans serif characters",
 				"sans_serif_italic": "Sans serif italic characters",
 				"sans_serif_bold": "Sans serif bold characters",
-				"sans_serif_italic_bold": "Sans serif bold italic characters",
+				"sans_serif_italic_bold": "Sans serif italic bold characters",
 				"monospace": "Monospace characters",
 				"fullwidth": "Fullwidth characters",
 				"small_capital": "Small capitals",
 				"fraktur": "Fraktur characters",
-				"fraktur_bold": "Bold fraktur characters",
+				"fraktur_bold": "Fraktur bold characters",
 				"script": "Script characters",
-				"script_bold": "Bold script characters",
+				"script_bold": "Script bold characters",
 				"double_struck": "Double-struck characters",
 				"double_struck_italic": "Double-struck italic characters",
 				"uncombined": "Uncombined characters"
@@ -303,23 +521,53 @@
 		},
 		"monitor": {
 			"binds": {
-				"disable": "Disable bindings",
+				"disable": "Disable binds",
 				"disabled": {
 					"__self": "(Disabled {})",
 					"by_user": "by user",
 					"by_monitor": "by monitor"
 				},
-				"enable": "Enable bindings"
+				"enable": "Enable binds"
 			}
 		},
 		"side_process": {
 			"support": "Support process"
 		},
+		"current_input_mode": "Активен режим: {}",
+		"unicode_range": "[ Range U+0000–U+10FFFF ]",
+		"altcode_range": "[ Range 0–255 or 0128–0255 ]",
+		"messages": {
+			"input_mode_changed": "Input mode changed to {}",
+			"input_mode_changed_unicode": "characters {@default:unicode}",
+			"input_mode_changed_html": "HTML codes/mnemonics",
+			"input_mode_changed_latex": "LaTeX codes",
+			"fastkeys_activated": "Fast keys activated\n\nNote: AutoHotkey intercepts bound key presses, which may make it difficult to use combinations in applications.",
+			"message_fastkeys_deactivated": "Fast keys deactivated"
+		},
 		"warnings": {
+			"cannot_be_executed": "Cannot execute operation",
+			"wrong_format": "Wrong format.",
+			"wrong_format_unicode": "Valid input: ranges 0000‒10FFFF or U+0000‒10FFFF.",
+			"wrong_format_altcode": "Valid input: only integers in range 1‒255/0128‒0255 with or without “Alt+” at the beginning.",
+			"cancelled_by_user": "Cancelled by user",
+			"recipe_absent": "Recipe not found",
+			"tag_absent": "Characters with specified tags not found:\n\n{}",
+			"duplicate_recipe": "Duplicate recipe detected: {}",
+			"nointernet": "No internet connection or other error.",
 			"user_defined_recipes": {
-				"recipe_or_result_has_empty_value": "Recipe or result for entry “{}” in file “{}” has an empty value and will be skipped.",
+				"recipe_or_result_has_empty_value": "Recipe or result for entry “{}” in file “{}” has empty value and will be skipped.",
 				"recipe_format_is_invalid": "Invalid recipe entry format “{}” in file “{}”."
 			}
+		},
+		"error": {
+			"__self": "Error",
+			"critical": "Critical error",
+			"unknown": "Unknown error",
+			"entry_not_found": "Error getting entry with name “{}”.\n\nEntry does not exist or is invalid.",
+			"entry_not_found_recipe": "Entry “{}”\nRecipe “{}” contains the following error:\n\nEntry with this name does not exist: “{}”",
+			"invalid_variants_at_name": "Number of variants [] in name must be the same.\nFound {}, expected {}\n{}",
+			"at_binds_registratio": "Error during binds registration:",
+			"at_library_registratio": "Error during library registration:"
 		}
 	}
 }

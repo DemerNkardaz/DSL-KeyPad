@@ -220,8 +220,8 @@ Class KbdBinder {
 						for variants in allVariants {
 							if variants.Length != maxVariants {
 								MsgBox((
-									Locale.Read("error_at_binds_registration") "`n"
-									Locale.ReadInject("error_invalid_variants_at_name", [variants.Length, maxVariants, bindString])
+									Locale.Read("error.at_binds_registration") "`n"
+									Locale.ReadInject("error.invalid_variants_at_name", [variants.Length, maxVariants, bindString])
 								), App.Title(), "Iconx")
 								continue 2
 							}
@@ -450,7 +450,7 @@ Class KbdBinder {
 		Cfg.Set(modeActive, "Mode_Fast_Keys" (isTOA ? "_Over" : ""), , isTOA ? "" : "bool")
 
 		if typeofActivation = ""
-			MsgBox(Locale.Read("message_fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
+			MsgBox(Locale.Read("messages.fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
 		this.RebuilBinds()
 	}
@@ -465,8 +465,8 @@ Class KbdBinder {
 		return
 	}
 
-	static SetBinds(name := Locale.Read("gui_options_bindings_none")) {
-		Cfg.Set(name = Locale.Read("gui_options_bindings_none") ? "None" : name, "Active_User_Bindings")
+	static SetBinds(name := Locale.Read("dictionary.bindings_none")) {
+		Cfg.Set(name = Locale.Read("dictionary.bindings_none") ? "None" : name, "Active_User_Bindings")
 		this.RebuilBinds()
 		return
 	}

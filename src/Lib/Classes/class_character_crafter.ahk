@@ -12,12 +12,12 @@ Class ChrCrafter {
 		try {
 		} catch {
 			if this.compositingMode = "InputBox"
-				MsgBox(Locale.Read("warning_recipe_absent"), Locale.Read("symbol_smelting"), 0x30)
+				MsgBox(Locale.Read("warnings.recipe_absent"), Locale.Read("symbol_smelting"), 0x30)
 		}
 	}
 
 	InputBoxMode() {
-		local IB := InputBox(Locale.Read("symbol_smelting_prompt"), Locale.Read("symbol_smelting"), "w256 h92", this.prompt)
+		local IB := InputBox(Locale.Read("symbol_smelting.prompt"), Locale.Read("symbol_smelting"), "w256 h92", this.prompt)
 		if IB.Result = "Cancel"
 			return
 		else
@@ -64,7 +64,7 @@ Class ChrCrafter {
 		)
 
 		composeObject.insertType := ""
-		composeObject.currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
+		composeObject.currentInputMode := Locale.ReadInject("current_input_mode", ["[" Auxiliary.inputMode "]"])
 
 		composeObject.pauseOn := False
 		composeObject.cancelledByUser := False
@@ -106,7 +106,7 @@ Class ChrCrafter {
 				composeObject.input "`n"
 				"[ ]"
 				Chr(0x2002) "`n"
-				Locale.Read("tooltip_compose_" StrLower(composeObject.insertType) "_range")
+				Locale.Read(StrLower(composeObject.insertType) "_range")
 			),
 			"suggested", (*) => ComposeSuggestedTooltip()
 		)
@@ -170,7 +170,7 @@ Class ChrCrafter {
 			hasBacktick := InStr(composeObject.input, "``")
 
 			if composeObject.insertType = "" {
-				composeObject.currentInputMode := Locale.ReadInject("tooltip_input_mode", ["[" Auxiliary.inputMode "]"])
+				composeObject.currentInputMode := Locale.ReadInject("current_input_mode", ["[" Auxiliary.inputMode "]"])
 				ComposeSuggestedTooltip()
 			}
 
@@ -193,7 +193,7 @@ Class ChrCrafter {
 						if code != "" && CharacterInserter.%composeObject.insertType%Validate(code)
 							suggestion .= CharacterInserter.%composeObject.insertType%(code)
 
-					local blockShown := codesArray.Length > 0 ? composeObject.ChrBlockInstance.GetTooltip(codesArray[codesArray.Length], composeObject.insertType) : Locale.Read("tooltip_compose_" StrLower(composeObject.insertType) "_range")
+					local blockShown := codesArray.Length > 0 ? composeObject.ChrBlockInstance.GetTooltip(codesArray[codesArray.Length], composeObject.insertType) : Locale.Read(StrLower(composeObject.insertType) "_range")
 					Util.CaretTooltip(
 						(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 						" "
@@ -301,11 +301,11 @@ Class ChrCrafter {
 		composeObject.ParentHook.Stop()
 
 		if InStr(composeObject.output, "N/A") {
-			Util.CaretTooltip(Chr(0x26A0) " " Locale.Read("warning_recipe_absent"))
+			Util.CaretTooltip(Chr(0x26A0) " " Locale.Read("warnings.recipe_absent"))
 			SetTimer(Tooltip, -1000)
 
 		} else {
-			endTooltip := composeObject.cancelledByUser ? Chr(0x274E) " " Chr(0x2192) " " Locale.Read("warning_compose_cancelled_by_user") : Chr(0x2705) " " composeObject.input " " Chr(0x2192) " " Util.StrFormattedReduce(composeObject.output)
+			endTooltip := composeObject.cancelledByUser ? Chr(0x274E) " " Chr(0x2192) " " Locale.Read("warnings.cancelled_by_user") : Chr(0x2705) " " composeObject.input " " Chr(0x2192) " " Util.StrFormattedReduce(composeObject.output)
 			Util.CaretTooltip(endTooltip)
 			SetTimer(Tooltip, -500)
 			if !InStr(composeObject.output, "N/A") || composeObject.output != composeObject.input {
