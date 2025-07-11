@@ -19,6 +19,7 @@ initialized := False
 
 #Include <External\JSON>
 #Include <External\function_gui_button_icon>
+#Include <external_libs_extension>
 
 #Include <utils>
 #Include <hotstrings>
@@ -105,7 +106,6 @@ TrayMenu.SetTrayItems()
 DottedProgressTooltip(4, &triggerEnds := False, 500)
 triggerEnds := True
 initialized := True
-
 
 Event.OnEvent("UI Language", "Switched", () => TrayMenu.SetTrayItems())
 Event.OnEvent("Scripter Storage", "Item Registered", () => TrayMenu.SetTrayItems())

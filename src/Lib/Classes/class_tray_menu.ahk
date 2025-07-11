@@ -15,7 +15,7 @@ Class TrayMenu {
 				GetKeyState("Control", "P") && GetKeyState("Shift", "P") ? Scripter.SelectorPanel("Glyph Variations")
 					: GetKeyState("Shift", "P") ? Scripter.SelectorPanel()
 					: GetKeyState("Control", "P") ? Cfg.Editor()
-					: GetKeyState("Alt", "P") ? Cfg.SubGUIs("Recipes")
+					: GetKeyState("Alt", "P") ? globalInstances.MyRecipesGUI.Show()
 					: globalInstances.MainGUI.Show()
 				return 1
 			}
@@ -134,7 +134,7 @@ Class TrayMenu {
 		this.tray.Add(labels.layouts, layoutsMenu)
 
 		this.tray.Add()
-		this.tray.Add(labels.userRecipes, (*) => Cfg.SubGUIs("Recipes")), this.tray.SetIcon(labels.userRecipes, ImageRes, 188)
+		this.tray.Add(labels.userRecipes, (*) => globalInstances.MyRecipesGUI.Show()), this.tray.SetIcon(labels.userRecipes, ImageRes, 188)
 		this.tray.Add()
 		this.tray.Add(labels.search, (*) => Search()), this.tray.SetIcon(labels.search, ImageRes, 169)
 		this.tray.Add(labels.forge, (*) => globalInstances.crafter.Start("InputBox")), this.tray.SetIcon(labels.forge, ImageRes, 151)

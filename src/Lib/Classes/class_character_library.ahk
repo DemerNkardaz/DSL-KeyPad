@@ -68,6 +68,31 @@ Class ChrLib {
 		return Event.Trigger("Character Library", "Default Ready")
 	}
 
+	static RenameEntry(entryName, newName) {
+		if this.entries.HasOwnProp(entryName) {
+			local entry := this.GetEntry(entryName)
+
+			local scenarios := Map(
+				"groups", { source: entry["groups"], target: this.entryGroups },
+				"tags", { source: entry["tags"], target: this.entryTags }
+			)
+
+			for scenarioName, scenario in scenarios {
+				for item in scenario.source {
+					if scenario.target.Has(item) && scenario.target.Get(item).HasValue(entryName, &i) {
+						scenario.target[item][i] := newName
+					}
+				}
+			}
+
+			this.entryIdentifiers.Set(entry["index"], newName)
+
+			this.entries.DeleteProp(entryName)
+			this.entries.%newName% := entry
+		}
+		return
+	}
+
 	static RemoveEntry(entryName) {
 		if this.entries.HasOwnProp(entryName) {
 			local entry := this.GetEntry(entryName)
@@ -90,7 +115,6 @@ Class ChrLib {
 			}
 
 			this.entries.DeleteProp(entryName)
-			entry := unset
 		}
 		return
 	}

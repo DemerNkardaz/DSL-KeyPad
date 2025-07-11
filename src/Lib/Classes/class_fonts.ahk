@@ -20,7 +20,6 @@ Class Fonts {
 		return
 	}
 
-
 	static CompareByPair(codePoint, defaultFont := "Segoe UI") {
 		local num := Number("0x" codePoint)
 

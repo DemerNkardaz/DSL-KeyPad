@@ -201,11 +201,11 @@
 				},
 				"warnings": {
 					"remove_confirm": "Do you really want to delete recipe “{}”?",
-					"exists": "A custom recipe with section name “{}” already exists.",
-					"exists_internal": "A recipe with section name “{}” already exists in the standard library.\n\nRename the custom recipe section.",
+					"exists": "A custom recipe with entry name “{}” already exists.",
+					"exists_internal": "A entry with name “{}” already exists in the standard library.\n\nRename the custom recipe entry.",
 					"xcompose_cannot_be_edited": "Recipes extracted from “.XCompose” files cannot be deleted or edited.",
 					"invalid_name": "Name must contain only English letters “a–Z”, numbers (not at the beginning) and underscore “_”.",
-					"invalid_section_name": "Invalid section name.\n{@:gui.recipes.warnings.invalid_name}",
+					"invalid_section_name": "Invalid entry name.\n{@:gui.recipes.warnings.invalid_name}",
 					"invalid_xcompose_name": "Invalid .XCompose file name.\n{@:gui.recipes.warnings.invalid_name}",
 					"invalid_recipe": "Invalid recipe or result.\nRecipe: {}\nResult: {}",
 					"duplicates_found": "Recipe duplication detected: {}",
@@ -213,8 +213,8 @@
 					"autoimported_edit_unable": "Imported recipes cannot be edited or deleted from this window."
 				},
 				"errors": {
-					"read_error": "Recipe list read error: section {}, recipe {}.",
-					"read_error_reinit": "Recipe list read error: section {}, recipe {}.",
+					"read_error": "Recipe list read error: entry {}, recipe {}.",
+					"read_error_reinit": "Recipe list read error: entry {}, recipe {}.",
 					"titles": "Localized recipe name “{}” contains an error (language code is empty or other error)."
 				}
 			},
@@ -544,7 +544,7 @@
 			"input_mode_changed_html": "HTML codes/mnemonics",
 			"input_mode_changed_latex": "LaTeX codes",
 			"fastkeys_activated": "Fast keys activated\n\nNote: AutoHotkey intercepts bound key presses, which may make it difficult to use combinations in applications.",
-			"message_fastkeys_deactivated": "Fast keys deactivated"
+			"fastkeys_deactivated": "Fast keys deactivated"
 		},
 		"warnings": {
 			"cannot_be_executed": "Cannot execute operation",

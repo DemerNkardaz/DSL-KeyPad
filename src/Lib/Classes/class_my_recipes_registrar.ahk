@@ -1,9 +1,9 @@
 Class MyRecipesReg {
-	__New(filePath) {
-		SplitPath(filePath, &fileName, , &ext, &nameNoExt)
-		this.filePath := filePath
+	__New(filePathOrArray) {
+		this.filePath := filePathOrArray is String ? filePathOrArray : MyRecipes.filePath
+		this.entries := filePathOrArray is Array ? filePathOrArray : []
+		SplitPath(this.filePath, &fileName, , &ext)
 		this.fileName := fileName
-		this.nameNoExt := nameNoExt
 		this.ext := ext
 		this.supportedLanguages := Language.GetSupported()
 		this.LoadData()
@@ -12,7 +12,9 @@ Class MyRecipesReg {
 	}
 
 	LoadData() {
-		if this.fileName ~= "i)XCompose" && !(this.ext ~= "i)(ini|json)")
+		if this.entries.Length > 0
+			this.content := this.entries
+		else if this.fileName ~= "i)XCompose" && !(this.ext ~= "i)(ini|json)")
 			this.content := XComposeToEntriesParser(this.filePath).output
 		else if this.ext = "ini"
 			this.content := Util.INIToArray(this.filePath)
@@ -112,7 +114,6 @@ Class MyRecipesReg {
 			for i, recipe in recipeData["recipe"]
 				recipeData["recipe"][i] := recipeData["recipe_prefix"][i <= recipeData["recipe_prefix"].Length ? i : recipeData["recipe_prefix"].Length] (recipeData["no_whitespace"] ? "" : " ") recipe
 
-		MyRecipesStore.lastIndexAdded++
 		recipeData["index"] := MyRecipesStore.lastIndexAdded
 		return
 	}

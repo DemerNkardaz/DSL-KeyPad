@@ -71,10 +71,6 @@ Class Cfg {
 	static optionsTitle := App.Title("+status+version") " — " Locale.Read("gui.options")
 
 	static EditorGUI := Gui()
-	static EditorSubGUIs := {
-		recipesTitle: App.Title("+status+version") " — " Locale.Read("gui.recipes"),
-		recipes: Gui(),
-	}
 
 	static OpenFile(*) {
 		Run(this.ini)
@@ -297,7 +293,7 @@ Class Cfg {
 			iniFilesX := (add := 0, reverse := False) => reverse ? (defaultSizes.groupBoxW - 27 - add) : (25 + add)
 
 			recipesPanelBtn := optionsPanel.AddButton("x" iniFilesX() " y" iniFilesY " w32 h32")
-			recipesPanelBtn.OnEvent("Click", (*) => OpenRecipesPanel())
+			recipesPanelBtn.OnEvent("Click", (*) => globalInstances.MyRecipesGUI.Show())
 			GuiButtonIcon(recipesPanelBtn, ImageRes, 188)
 
 			configFileBtn := optionsPanel.AddButton("x" iniFilesX(32) " y" iniFilesY " w32 h32")
@@ -346,15 +342,6 @@ Class Cfg {
 				Cfg.Set(remapping, "Layout_Remapping", , "bool")
 				KbdBinder.RebuilBinds()
 			}
-
-			OpenRecipesPanel() {
-				if WinExist(this.EditorSubGUIs.recipesTitle) {
-					WinActivate(this.EditorSubGUIs.recipesTitle)
-				} else {
-					this.EditorSubGUIs.recipes := this.SubGUIs("Recipes")
-					this.EditorSubGUIs.recipes.Show()
-				}
-			}
 		}
 
 
@@ -364,132 +351,6 @@ Class Cfg {
 			this.EditorGUI := Constructor()
 			this.EditorGUI.Show()
 		}
-	}
-
-	static SubGUIs(guiName, xPos := 0, yPos := 0) {
-
-		RecipesConstructor() {
-			this.EditorSubGUIs.recipesTitle := App.Title("+status+version") " — " Locale.Read("gui.recipes"),
-				currentRecipe := []
-
-			screenWidth := A_ScreenWidth
-			screenHeight := A_ScreenHeight
-
-			windowWidth := 550
-			windowHeight := 450
-
-			xPos := xPos = 0 ? (screenWidth - windowWidth) / 2 : xPos
-			yPos := yPos = 0 ? screenHeight - windowHeight - 92 : yPos
-
-			if WinExist(this.optionsTitle) && WinActive(this.optionsTitle) {
-				WinGetPos(&optx, &opty, &optw, &opth)
-
-				xPos := xPos - optw
-			}
-
-			recipesPanel := Gui()
-			recipesPanel.title := this.EditorSubGUIs.recipesTitle
-
-
-			defaultSizes := { groupBoxW: windowWidth - 30, groupBoxX: (windowWidth - (windowWidth - 20)) / 2 }
-
-			optionsCommonY := 10
-			optionsCommonH := windowHeight - 80
-			optionsCommon := (h := optionsCommonH, y := optionsCommonY) => "x" defaultSizes.groupBoxX " y" y " w" defaultSizes.groupBoxW " h" h
-
-			listViewCols := [Locale.Read("dictionary.name"), Locale.Read("dictionary.recipe"), Locale.Read("dictionary.result"), Locale.Read("dictionary.entry"), Locale.Read("dictionary.file")]
-
-			recipesLVStyles := "x" defaultSizes.groupBoxX " y" optionsCommonY " w" defaultSizes.groupBoxW " h" optionsCommonH " -Multi"
-			recipesLV := recipesPanel.AddListView(recipesLVStyles, listViewCols)
-			recipesLV.ModifyCol(1, 170)
-			recipesLV.ModifyCol(2, 110)
-			recipesLV.ModifyCol(3, 210)
-			recipesLV.ModifyCol(4, 0)
-			recipesLV.ModifyCol(5, 0)
-			recipesLV.OnEvent("ItemFocus", (LV, RowNumber) => setSelected(LV, RowNumber))
-			recipesLV.OnEvent("DoubleClick", (*) => createEditRecipe(currentRecipe))
-
-			recipesArray := MyRecipes.Read(True, True)
-
-			for recipeEntry in recipesArray {
-				recipeFilePath := recipeEntry.HasOwnProp("filePath") ? recipeEntry.filePath : ""
-				title := !(recipeEntry.section ~= "i)^xcompose") ? MyRecipes.HandleTitles(recipeEntry.name, "") : recipeEntry.name
-				recipesLV.Add(,
-					title ? title : recipeEntry.name,
-					RegExReplace(ChrRecipeHandler.MakeStr(recipeEntry.recipe), "\|", ", "),
-					Util.StrFormattedReduce(ChrRecipeHandler.MakeStr(recipeEntry.result), 20),
-					recipeEntry.section, recipeFilePath)
-			}
-
-
-			recipesPanel.AddGroupBox(optionsCommon(55, (windowHeight - 65)))
-
-			addRemY := windowHeight - 50
-			addRemX := (add := 0) => 25 + add
-
-			addRecipeBtn := recipesPanel.AddButton("x" addRemX() " y" addRemY " w64 h32", "+")
-			addRecipeBtn.SetFont("s16")
-			addRecipeBtn.OnEvent("Click", (*) => createEditRecipe())
-
-			removeRecipeBtn := recipesPanel.AddButton("x" addRemX(64) " y" addRemY " w64 h32", Chr(0x2212))
-			removeRecipeBtn.SetFont("s16")
-			removeRecipeBtn.OnEvent("Click", (*) => removeSelected(currentRecipe))
-
-			updateAllBtn := recipesPanel.AddButton("x" addRemX(128) " y" addRemY " w64 h32")
-			GuiButtonIcon(updateAllBtn, ImageRes, 229)
-			updateAllBtn.OnEvent("Click", (*) => (
-				MyRecipes.Update(),
-				recipesPanel.GetPos(&X, &Y, &W, &H),
-				recipesPanel.Destroy(),
-				this.SubGUIs("Recipes", X, Y)
-			))
-
-			recipesPanel.Show("w" windowWidth " h" windowHeight "x" xPos " y" yPos)
-			return recipesPanel
-
-			setSelected(LV, rowNumber) {
-				currentRecipe := [
-					LV.GetText(RowNumber, 1),
-					LV.GetText(RowNumber, 2),
-					LV.GetText(RowNumber, 3),
-					LV.GetText(RowNumber, 4),
-					rowNumber,
-					LV.GetText(RowNumber, 5),
-				]
-				return
-			}
-
-			createEditRecipe(recipeArray?) {
-				if IsSet(recipeArray) && recipeArray.Length > 0 && (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.filePath)) {
-					attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
-					MsgBox(Locale.Read("gui.recipes.warnings." (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "autoimported_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
-					return
-				} else {
-					MyRecipes.Editor(recipeArray?, recipesLV)
-				}
-			}
-
-			removeSelected(recipeArray) {
-				if recipeArray.Length > 0 {
-					if (InStr(recipeArray[4], "xcompose") || recipeArray[6] != Util.StrTrimPath(MyRecipes.filePath)) {
-						attachmentName := StrLen(recipeArray[6]) > 0 ? recipeArray[6] : ""
-						MsgBox(Locale.Read("gui.recipes.warnings." (InStr(recipeArray[4], "xcompose") ? "xcompose_break" : "autoimported_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" attachmentName, App.Title("+status+version"))
-						return
-					} else {
-						message := Locale.ReadInject("gui.recipes.warnings.remove_confirm", [recipeArray[1]])
-						confirBox := MsgBox(message, App.Title(), 4)
-						if confirBox = "No" {
-							return
-						} else if confirBox = "Yes" {
-							MyRecipes.Remove(recipeArray[4])
-							recipesLV.Delete(recipeArray[5])
-						}
-					}
-				}
-			}
-		}
-
-		return %guiName%Constructor()
 	}
 
 	static Init() {

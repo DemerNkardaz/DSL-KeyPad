@@ -31,8 +31,10 @@ class UIMyRecipes {
 	btnY := this.grpBoxY + (this.grpBoxH - this.btnH) // 2
 	btnX(multi := 1) => (this.grpBoxX + 10 + (this.btnW * (multi - 1)))
 
+	mainFileLast := 0
+	selectedRow := 0
+
 	__New() {
-		this.Constructor()
 		Event.OnEvent("UI Data", "Changed", () => this.setCached := False)
 		Event.OnEvent("UI Language", "Switched", () => this.setCached := False)
 		return
@@ -65,14 +67,15 @@ class UIMyRecipes {
 		createButton.SetFont("s16")
 		deleteButton.SetFont("s16")
 
+		recipesLV.OnEvent("Click", (LV, rowNumber) => this.selectedRow := rowNumber)
 		recipesLV.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemEdit(recipesWindow, LV, rowNumber))
 		createButton.OnEvent("Click", (btn, inf) => this.ItemEdit(recipesWindow, recipesLV))
+		deleteButton.OnEvent("Click", (btn, inf) => this.ItemDelete(recipesLV))
 
 		updateButton.OnEvent("Click", (*) => (
 			MyRecipes.Update(),
-			recipesWindow.GetPos(&X, &Y),
-			recipesWindow.Destroy(),
-			this.Show(X, Y)
+			recipesLV.Delete(),
+			this.Fill(recipesLV)
 		))
 
 		return recipesWindow
@@ -88,28 +91,23 @@ class UIMyRecipes {
 			local recipeEntry := data[index + 1]
 
 			local title := recipeEntry.Has("titles") && recipeEntry["titles"].Has(languageCode) ? recipeEntry["titles"][languageCode] : recipeEntry.Has("name") ? recipeEntry["name"] : recipeName
+			local filePath := recipeEntry["filePath"]
+
+			if filePath = MyRecipes.file
+				this.mainFileLast++
 
 			LV.Add(,
 				title,
-				this.ResultRecipeStrHandle(recipeEntry["recipe"]),
-				this.ResultRecipeStrHandle(recipeEntry["result"], True),
+				UIMyRecipes.ResultRecipeStrHandle(recipeEntry["recipe"]),
+				UIMyRecipes.ResultRecipeStrHandle(recipeEntry["result"], True),
 				recipeName,
-				recipeEntry["filePath"]
+				filePath
 			)
 		}
 
 		return
 	}
 
-	ResultRecipeStrHandle(str, setShort := False) {
-		local output := str is Array ? str.ToString() : str
-
-		output := ChrRecipeHandler.MakeStr(output)
-		if setShort
-			output := Util.StrFormattedReduce(output, 20)
-
-		return output
-	}
 
 	Show(X?, Y?) {
 		if this.title != "" && WinExist(this.title) {
@@ -138,6 +136,34 @@ class UIMyRecipes {
 		}
 
 		return UIMyRecipes.Editor(parentGUI, LV, rowNumber, recipeName, filePath)
+	}
+
+	ItemDelete(LV) {
+		local recipeName := LV.GetText(this.selectedRow, 4)
+		local MB := MsgBox(Locale.ReadInject("gui.recipes.warnings.remove_confirm", [recipeName]), App.Title(), 4)
+
+		if MB = "No" {
+			return
+		} else if MB = "Yes" {
+			MyRecipesStore.Delete(recipeName)
+			ChrLib.RemoveEntry(recipeName)
+			LV.Delete(this.selectedRow)
+			this.selectedRow := 0
+			this.mainFileLast--
+
+			MyRecipesStore.DumpDefault()
+		}
+		return
+	}
+
+	static ResultRecipeStrHandle(str, setShort := False) {
+		local output := str is Array ? str.ToString() : str
+
+		output := ChrRecipeHandler.MakeStr(output)
+		if setShort
+			output := Util.StrFormattedReduce(output, 20)
+
+		return output
 	}
 
 	Class Editor {
@@ -216,8 +242,8 @@ class UIMyRecipes {
 		__New(parentGUI, LV, rowNumber?, recipeName?, filePath?) {
 			this.CalcSizes()
 
-			if IsSet(rowNumber)
-				this.rowNumber := rowNumber
+			this.rowNumber := IsSet(rowNumber) ? rowNumber : False
+			this.LV := LV
 
 			this.recipeName := IsSet(recipeName) ? recipeName : ""
 			this.filePath := IsSet(filePath) ? App.paths.profile "\" filePath : MyRecipes.filePath
@@ -272,8 +298,17 @@ class UIMyRecipes {
 			local saveButton := editorWindow.AddButton(Format("vSaveBtn x{} y{} w{} h{}", this.btnX(1), this.btnY, this.btnW, this.btnH), Locale.Read("dictionary.save"))
 			local cancelButton := editorWindow.AddButton(Format("vCancelBtn x{} y{} w{} h{}", this.btnX(2), this.btnY, this.btnW, this.btnH), Locale.Read("dictionary.cancel"))
 
+			saveButton.OnEvent("Click", (*) => this.RecipeSave())
 			cancelButton.OnEvent("Click", (*) => WinExist(this.title) && WinClose(this.title))
+			resultField.OnEvent("Change", UpdateResultTitle)
 			return editorWindow
+
+			UpdateResultTitle(field, info) {
+				local chrsCount := Util.StrDigitFormat(StrLen(resultField.Value))
+				local pagesCount := Util.StrPagesCalc(resultField.Value)
+				resultTitle.Text := Locale.ReadInject("gui.recipes.create_or_edit.result<>overflow_properties", [chrsCount, pagesCount])
+				return
+			}
 		}
 
 		Show() {
@@ -286,11 +321,66 @@ class UIMyRecipes {
 
 			return
 		}
+
+		RecipeSave() {
+			if this.CollectData(&collectedData) {
+				local newRecipeName := collectedData[1]
+
+				if MyRecipesStore.Has(newRecipeName) || ChrLib.entries.HasOwnProp(newRecipeName) {
+					return MsgBox(Locale.ReadInject("gui.recipes.warnings.exists" (!MyRecipesStore.Has(newRecipeName) ? "_internal" : ""), [newRecipeName]), App.Title(), "Icon!")
+				}
+
+				if this.recipeName != "" && newRecipeName != this.recipeName {
+					MyRecipesStore.Rename(this.recipeName, newRecipeName)
+					ChrLib.RenameEntry(this.recipeName, newRecipeName)
+				}
+
+				MyRecipesReg(collectedData)
+				local newEntry := MyRecipesStore.Get(newRecipeName)
+				local entryToBeRegistered := newEntry.Clone()
+
+				if ChrLib.entries.HasOwnProp(newRecipeName)
+					entryToBeRegistered.Set("index", ChrLib.entries.%newRecipeName%.Get("index"))
+
+				ChrReg([newRecipeName, entryToBeRegistered], "Custom")
+
+				local languageCode := Language.Get()
+				local title := newEntry.Has("titles") && newEntry["titles"].Has(languageCode) ? newEntry["titles"][languageCode] : newEntry.Has("name") ? newEntry["name"] : newRecipeName
+
+				globalInstances.MyRecipesGUI.mainFileLast++
+				local lastIndex := globalInstances.MyRecipesGUI.mainFileLast
+
+				local data := [
+					title,
+					UIMyRecipes.ResultRecipeStrHandle(newEntry["recipe"]),
+					UIMyRecipes.ResultRecipeStrHandle(newEntry["result"], True),
+					newRecipeName,
+					newEntry["filePath"]
+				]
+
+				if this.rowNumber || lastIndex
+					this.LV.%!this.rowNumber ? "Insert" : "Modify"%(!this.rowNumber ? lastIndex : this.rowNumber, , data*)
+				else
+					this.LV.Add(, data*)
+
+				MyRecipesStore.DumpDefault()
+			}
+			return
+		}
+
+		CollectData(&collectedData) {
+			if (this.GUI["SectionField"].Value = "" || this.GUI["NameField"].Value = "" || this.GUI["RecipeField"].Value = "" || this.GUI["ResultField"].Value = "")
+				return False
+			local data := Map(
+				"name", this.GUI["NameField"].Value,
+				"recipe", this.GUI["RecipeField"].Value,
+				"result", [this.GUI["ResultField"].Value],
+			)
+			if this.GUI["TagsField"].Value != ""
+				data.Set("tags", this.GUI["TagsField"].Value)
+
+			collectedData := [this.GUI["SectionField"].Value, data]
+			return True
+		}
 	}
 }
-
-F11:: globalInstances.MyRecipesGUI.Show()
-
-
-; ? For save handling
-; @MyRecipesStore.GetAll(Format("IndexList AsArray File:{}", MyRecipes.file))

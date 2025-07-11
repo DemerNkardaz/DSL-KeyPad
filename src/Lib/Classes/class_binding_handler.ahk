@@ -17,7 +17,7 @@ Class BindHandler {
 					character(combo)
 				} else if RegExMatch(character, "^@(.*)$", &rawMatch) {
 					inputType := "Text"
-					output .= MyRecipes.FormatResult(rawMatch[1], True)
+					output .= Util.FormatResult(rawMatch[1], True)
 					if rawMatch[1] ~= "\\n" || output ~= "[`n`r]"
 						lineBreaks := True
 				} else {

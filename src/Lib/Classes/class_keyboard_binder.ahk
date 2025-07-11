@@ -118,15 +118,15 @@ Class KbdBinder {
 			local bind := value
 
 			if bind is String && bind ~= "[`r`n`t]"
-				bind := MyRecipes.FormatResult(bind)
+				bind := Util.FormatResult(bind)
 			else if bind is Array && bind.Length > 0
 				for i, item in bind
 					if item is String && item ~= "[`r`n`t]"
-						bind[i] := MyRecipes.FormatResult(item)
+						bind[i] := Util.FormatResult(item)
 					else if bind[i] is Array && bind[i].Length > 0
 						for j, childItem in bind[i]
 							if childItem is String && childItem ~= "[`r`n`t]"
-								bind[i][j] := MyRecipes.FormatResult(childItem)
+								bind[i][j] := Util.FormatResult(childItem)
 
 			this.CompileBridge(combo, bind, processed["mapping"])
 		}

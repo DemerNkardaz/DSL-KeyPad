@@ -489,7 +489,6 @@ Class Util {
 		return
 	}
 
-
 	static FormatHotKey(hKey, modifier := "") {
 		local output := ""
 		if hKey is Array && hKey.Length > 0 {
@@ -534,6 +533,21 @@ Class Util {
 		}
 
 		return output
+	}
+
+	static FormatResult(input, revert := False, formatRecipe := False) {
+		local result := input
+		if formatRecipe
+			result := ChrRecipeHandler.MakeStr(result)
+		if revert {
+			result := RegExReplace(result, "\\n(?![^$]*\})", "`n")
+			result := RegExReplace(result, "\\t(?![^$]*\})", "`t")
+		} else {
+			result := StrReplace(result, "`r`n", "\n")
+			result := StrReplace(result, "`n", "\n")
+			result := StrReplace(result, "`t", "\t")
+		}
+		return result
 	}
 
 	static ReplaceModifierKeys(input) {

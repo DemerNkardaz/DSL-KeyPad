@@ -124,8 +124,12 @@ Class ChrReg {
 			brackets := unset
 
 		} else {
+			local isEntryExists := ChrLib.entries.HasOwnProp(entryName)
+			local presavedIndex := isEntryExists ? ChrLib.entries.%entryName%.Get("index") : 0
+
 			ChrLib.entries.%entryName% := Map()
 			ChrLib.entriesSource.%entryName% := entry
+
 			local libEntry := Map()
 			if IsSet(isDump) && isDump {
 				this.ProcessDump(&entryName, &entry)
@@ -137,9 +141,12 @@ Class ChrReg {
 
 				this.TransferProperties(&entryName, &entry)
 
-				local idx := ++ChrLib.lastIndexAdded
-				ChrLib.entries.%entryName%["index"] := idx
-				ChrLib.entryIdentifiers.Set(idx, entryName)
+				if !isEntryExists {
+					local idx := ++ChrLib.lastIndexAdded
+					ChrLib.entries.%entryName%["index"] := idx
+					ChrLib.entryIdentifiers.Set(idx, entryName)
+				} else
+					ChrLib.entries.%entryName%["index"] := presavedIndex
 
 				libEntry := ChrLib.entries.%entryName%
 				this.EntryPostProcessing(&entryName, &libEntry, &instances)
