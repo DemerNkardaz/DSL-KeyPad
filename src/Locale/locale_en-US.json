@@ -194,6 +194,8 @@
 				"attach_list": "Attach list",
 				"create_or_edit": {
 					"__self": "Create/Edit recipe",
+					"create": "Create recipe",
+					"edit": "Edit recipe",
 					"name_restrictions": "(“a–Z” and “_”)",
 					"name": "Recipe name",
 					"result": "{@:dictionary.result}:",

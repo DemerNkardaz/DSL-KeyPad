@@ -194,6 +194,8 @@
 				"attach_list": "Прикрепить список",
 				"create_or_edit": {
 					"__self": "Создание/Редактирование рецепта",
+					"create": "Создать рецепт",
+					"edit": "Редактировать рецепт",
 					"name_restrictions": "(«a–Z» и «_»)",
 					"name": "Имя рецепта",
 					"result": "{@:dictionary.result}:",

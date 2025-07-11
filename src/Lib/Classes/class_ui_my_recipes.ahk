@@ -265,7 +265,7 @@ class UIMyRecipes {
 			editorWindow.Opt("+Resize +MinSize" this.defW "x" this.defH)
 			editorWindow.OnEvent("Size", this.Resize.Bind(this))
 
-			local grpBox := editorWindow.AddGroupBox(Format("vEditorGrpBox x{} y{} w{} h{}", this.grpBoxX, this.grpBoxY, this.grpBoxW, this.grpBoxH))
+			local grpBox := editorWindow.AddGroupBox(Format("vEditorGrpBox x{} y{} w{} h{}", this.grpBoxX, this.grpBoxY, this.grpBoxW, this.grpBoxH), Locale.Read("gui.recipes.create_or_edit." (this.recipeName != "" ? "edit" : "create")) " " this.recipeName)
 
 			local sectionTitle := editorWindow.AddText(Format("vSectionTitle x{} y{} w{} h{}", this.incrementField(1)[2]*), Locale.Read("dictionary.entry_name+gui.recipes.create_or_edit.name_restrictions"))
 			local sectionField := editorWindow.AddEdit(Format("vSectionField x{} y{} w{} h{} Limit48 -Multi", this.incrementField(1)[1]*), this.recipeName)
@@ -326,7 +326,7 @@ class UIMyRecipes {
 			if this.CollectData(&collectedData) {
 				local newRecipeName := collectedData[1]
 
-				if MyRecipesStore.Has(newRecipeName) || ChrLib.entries.HasOwnProp(newRecipeName) {
+				if this.recipeName = "" && (MyRecipesStore.Has(newRecipeName) || ChrLib.entries.HasOwnProp(newRecipeName)) {
 					return MsgBox(Locale.ReadInject("gui.recipes.warnings.exists" (!MyRecipesStore.Has(newRecipeName) ? "_internal" : ""), [newRecipeName]), App.Title(), "Icon!")
 				}
 

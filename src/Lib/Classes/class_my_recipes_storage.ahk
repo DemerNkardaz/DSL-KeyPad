@@ -65,8 +65,12 @@ Class MyRecipesStore {
 				local dividedStrings := []
 				local split := StrSplit(recipeEntry["result"][1], "`n", "`r")
 
-				for _, splitString in split
-					dividedStrings.Push(splitString "`n")
+				for i, splitString in split {
+					if i = split.Length && splitString = ""
+						break
+					else
+						dividedStrings.Push(splitString (i < split.Length ? "`n" : ""))
+				}
 
 				recipeEntry["result"] := dividedStrings
 			}
