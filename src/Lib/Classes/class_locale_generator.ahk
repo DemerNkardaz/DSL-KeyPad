@@ -16,7 +16,7 @@ Class LocaleGenerator {
 
 		local referenceLocale := entry["options"].Has("referenceLocale") && entry["options"]["referenceLocale"] != "" ? entry["options"]["referenceLocale"] : False
 
-		local useSelfPrefixesOnReferenceLocale := entry["options"]["useSelfPrefixesOnReferenceLocale"]
+		local useSelfPostfixesOnReferenceLocale := entry["options"]["useSelfPostfixesOnReferenceLocale"]
 
 		local LTLReference := False
 
@@ -34,7 +34,6 @@ Class LocaleGenerator {
 				if ChrLib.entries.HasOwnProp(referenceName) {
 					entryData := ChrLib.GetValue(referenceName, "data").Clone()
 					entrySymbol := ChrLib.GetValue(referenceName, "symbol").Clone()
-
 				}
 
 				entryName := referenceName
@@ -42,8 +41,8 @@ Class LocaleGenerator {
 				LTLReference := StrReplace(referenceLocale, ":", "")
 			}
 
-			if useSelfPrefixesOnReferenceLocale
-				entryData.postfixes := entry["data"]["postfixes"].Clone()
+			if useSelfPostfixesOnReferenceLocale
+				entryData["postfixes"] := entry["data"]["postfixes"].Clone()
 		}
 
 		local letter := (entrySymbol.Has("letter") && StrLen(entrySymbol["letter"]) > 0) ? entrySymbol["letter"] : entryData["letter"]

@@ -90,6 +90,7 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_keyboard_layout_user_defined>
 #Include <Classes\class_keyboard_monitor>
 
+DottedProgressTooltip(4, &triggerEnds := False, 500)
 #Include <Classes\class_character_legend_storage>
 #Include <Classes\class_ui_glyph_variations_panel>
 #Include <Classes\class_ui_character_legend>
@@ -103,7 +104,6 @@ TrayMenu.SetTrayItems()
 #Include <Classes\class_hotstrings_latex>
 #Include <Classes\class_tempature_converter>
 #Include <Classes\class_dev>
-DottedProgressTooltip(4, &triggerEnds := False, 500)
 triggerEnds := True
 initialized := True
 

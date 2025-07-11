@@ -108,7 +108,7 @@ Class MyRecipesReg {
 		}
 
 		if !recipeData.Has("groups")
-			recipeData["groups"] := ["Custom Composes", "User Composes"]
+			recipeData["groups"] := ["Custom Composes", "Custom User Composes"]
 
 		if recipeData["recipe_prefix"].Length > 0
 			for i, recipe in recipeData["recipe"]

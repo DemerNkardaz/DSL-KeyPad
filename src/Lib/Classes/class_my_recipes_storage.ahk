@@ -43,7 +43,7 @@ Class MyRecipesStore {
 
 			local keysToDelete := []
 			for key, value in recipeEntry {
-				if !whitelist.HasValue(key)
+				if !whitelist.HasValue(key) || value is String && value = ""
 					keysToDelete.Push(key)
 			}
 

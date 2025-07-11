@@ -74,6 +74,7 @@ class UIMyRecipes {
 
 		updateButton.OnEvent("Click", (*) => (
 			MyRecipes.Update(),
+			this.mainFileLast := 0,
 			recipesLV.Delete(),
 			this.Fill(recipesLV)
 		))
@@ -342,6 +343,7 @@ class UIMyRecipes {
 				if ChrLib.entries.HasOwnProp(newRecipeName)
 					entryToBeRegistered.Set("index", ChrLib.entries.%newRecipeName%.Get("index"))
 
+
 				ChrReg([newRecipeName, entryToBeRegistered], "Custom")
 
 				local languageCode := Language.Get()
@@ -375,9 +377,8 @@ class UIMyRecipes {
 				"name", this.GUI["NameField"].Value,
 				"recipe", this.GUI["RecipeField"].Value,
 				"result", [this.GUI["ResultField"].Value],
+				"tags", this.GUI["TagsField"].Value
 			)
-			if this.GUI["TagsField"].Value != ""
-				data.Set("tags", this.GUI["TagsField"].Value)
 
 			collectedData := [this.GUI["SectionField"].Value, data]
 			return True

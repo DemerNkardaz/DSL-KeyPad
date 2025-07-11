@@ -56,11 +56,11 @@ Class XComposeToEntriesParser {
 
 					local section := "xcompose_s" sequenceOrded "_r" resultOrded (StrLen(this.fileNameNoExt) == 0 ? "" : "__file_" this.fileNameNoExt)
 					this.output.Push(section, Map(
-						"name", "[XCompose] " label,
+						"name", "[XCompose] " (label != "" ? label : result),
 						"recipe", [sequence],
 						"result", [result],
 						"tags", label != "" ? [label] : [],
-						"groups", ["Custom Composes", "XCompose"],
+						"groups", ["Custom Composes", "Custom XCompose"],
 						"filePath", cutPath,
 						"isXCompose", True
 					))

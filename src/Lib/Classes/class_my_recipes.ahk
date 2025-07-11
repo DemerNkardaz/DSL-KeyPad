@@ -18,8 +18,8 @@ Class MyRecipes {
 		if !FileExist(this.filePath)
 			FileCopy(this.sampleFile, this.filePath)
 
-		if !FileExist(App.paths.profile "\Autoimport.linux\demo.XCompose")
-			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '"', this.autoimport.xcompose "\demo.XCompose", "UTF-8")
+		if !FileExist(this.autoimport.xcompose "\demo.XCompose")
+			FileAppend('<Multi_key> <0> <0> : "' Chr(0x221E) '" # U+221E INFINITY', this.autoimport.xcompose "\demo.XCompose", "UTF-8")
 
 		MyRecipesReg(this.filePath)
 

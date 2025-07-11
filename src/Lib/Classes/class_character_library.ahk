@@ -139,7 +139,7 @@ Class ChrLib {
 
 	static GetEntry(entryName) {
 		if this.entries.HasOwnProp(entryName) && this.entries.%entryName% is Map {
-			local entry := this.entries.%entryName%.Clone()
+			local entry := this.entries.%entryName%.DeepClone()
 			local referencingTo := this.GetReferenceName(&entryName, &entry)
 
 			if referencingTo != ""

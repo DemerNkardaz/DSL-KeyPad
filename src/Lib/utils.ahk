@@ -21,6 +21,7 @@ Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
 Map.Prototype.DefineProp("GetRef", { Call: _MapGetRef })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
+Object.Prototype.DefineProp("DeepClone", { Call: _ObjDeepClone })
 
 ObjGet(this, j) {
 	local i := 0
@@ -31,6 +32,26 @@ ObjGet(this, j) {
 		i++
 	}
 	return
+}
+
+_ObjDeepClone(this) {
+	local output := {}
+
+	for k, v in this.OwnProps() {
+		if v is String {
+			output.DefineProp(k, { value: v })
+		} else if v is Array {
+			output.DefineProp(k, { value: v.Clone() })
+		} else if v is Map {
+			output.DefineProp(k, { value: v.DeepClone() })
+		} else if v is Object {
+			output.DefineProp(k, { value: v.DeepClone() })
+		} else {
+			output.DefineProp(k, { value: v })
+		}
+	}
+
+	return output
 }
 
 _ObjMaxIndex(this) {

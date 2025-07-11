@@ -1415,19 +1415,26 @@
 				"Moded": {
 					"1": {
 						"+": "exclamation",
+						"<^<!": "[down,up]_tack_below",
+						"<^<!>+": "[down,up]_tack_below::modifier",
 						"<^>!": "lat_n_let_alveolar_click",
 						"<^>!<!": "lat_n_let_retroflex_click"
 					},
 					"2": {
 						"+": "commercial_at",
+						"<^<!": "[right,left]_tack_below",
+						"<^<!>+": "[right,left]_tack_below::modifier",
 						"<^>!": "lat_n_let_dental_click"
 					},
 					"3": {
 						"+": "number_sign",
+						"<^<!": "[right,left]_half_ring_below",
+						"<^<!>+": "[right,left]_half_ring_below::modifier",
 						"<^>!": "lat_n_let_lateral_click"
 					},
 					"4": {
 						"+": "wallet_dollar",
+						"<^<!": "left_angle_above",
 						"<^>!": "lat_n_let_palatal_click"
 					},
 					"5": {
@@ -1445,7 +1452,15 @@
 					"0": {
 						"+": "right_parenthesis"
 					},
-					"Equals": {"+": "plus"},
+					"HyphenMinus": {
+						"+": "underscore",
+						"<^<!": "minus_below"
+					},
+					"Equals": {
+						"+": "plus",
+						"<+>+": "plus::modifier",
+						"<^<!": "plus_below"
+					},
 					"Slash": {"+": "question"},
 					"Backslash": {
 						"+": "vertical_line"
@@ -1456,7 +1471,10 @@
 						"<^<!": "bridge_[below,above]",
 						"<^<!<+": "bridge_inverted_below"
 					},
-					"RightBracket": {"+": "right_brace"},
+					"RightBracket": {
+						"+": "right_brace",
+						"<^<!": "square_below"
+					},
 					"A": {
 						"<^>!": "lat_s_let_a_alpha[_turned,]",
 						"<^>!<+": "lat_s_let_a__diaeresis",
@@ -1469,7 +1487,8 @@
 						"<^>!": "&ipa_[k,s]_let_b[,_beta]"
 					},
 					"C": {
-						"<^>!": "lat_s_let_c__curl"
+						"<^>!": "lat_s_let_c__curl",
+						"<^<!": "caron[_below,]"
 					},
 					"D": {
 						"<^<!": "diaeresis[_below,]",
@@ -1478,6 +1497,7 @@
 						"<^>!<!<+": "lat_s_dig_d[_ezh,z__curl]"
 					},
 					"E": {
+						"<^<!": "rhotic_hook",
 						"<^>!": "lat_s_let_e_epsilon[_reversed,]",
 						"<^>!<+": "lat_s_let_e_epsilon_closed_reversed",
 						"<^>!<!": "lat_s_let_[e_reversed,a_schwa]"
@@ -1534,6 +1554,7 @@
 						"<^>!": "lat_s_let_s_sigma"
 					},
 					"T": {
+						"<^<!": "tilde_[below,above]",
 						"<^>!": "&ipa_s_let_t_theta",
 						"<^>!<!": "lat_s_dig_t[s,c__curl]",
 						"<^>!<!<+": "lat_s_dig_t[s__retroflex_hook,_sigma]"
@@ -1549,7 +1570,8 @@
 						"<^>!": "lat_s_let_v_turned"
 					},
 					"W": {
-						"<^>!": "lat_s_let_w_turned"
+						"<^>!": "lat_s_let_w_turned",
+						"<^<!": "seagull_below"
 					},
 					"X": {
 						"<^>!": "&ipa_s_let_h_chi"
@@ -1568,6 +1590,10 @@
 						"<^>!": "&ipa_n_sym_stress_secondary"
 					},
 					"Comma": {
+						">+": "&ipa_n_sym_light_aspiration"
+					},
+					"Dot": {
+						">+": "&ipa_n_sym_ejective_consonant"
 					}
 				}
 			},
