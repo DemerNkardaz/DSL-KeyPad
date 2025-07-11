@@ -33,7 +33,6 @@ Class App {
 
 
 	static __New() {
-
 		for i, ico in [
 			"app", "germanic", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "tieng_viet", "hanyu_pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian", "hellenic", "latin", "cyrillic",
 			"glyph_combining",
@@ -149,7 +148,7 @@ Class App {
 
 	static Ver(includedFields := ["major", "minor", "patch"], output := "") {
 		static version := ["major", 0, "minor", 1, "patch", 2, "hotfix", 2,
-			"postfix", "-alpha-testing", "pre-release", True]
+			"postfix", "", "pre-release", True]
 
 		if includedFields is String {
 			fields := StrSplit(includedFields, "+")

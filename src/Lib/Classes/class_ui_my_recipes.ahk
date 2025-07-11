@@ -128,8 +128,12 @@ class UIMyRecipes {
 		if !IsSet(rowNumber)
 			return UIMyRecipes.Editor(parentGUI, LV)
 
+
 		local recipeName := LV.GetText(rowNumber, 4)
 		local filePath := LV.GetText(rowNumber, 5)
+
+		if !MyRecipesStore.Has(recipeName)
+			return
 
 		if RegExMatch(filePath, "i)(xcompose|\\)", &match) {
 			MsgBox(Locale.Read("gui.recipes.warnings." (match[1] = "xcompose" ? "xcompose_break" : "autoimported_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" filePath, App.Title("+status+version"), "Icon!")

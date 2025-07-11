@@ -515,9 +515,8 @@ Class UIMainPanel {
 
 		local localizesRowsList := []
 		local src := this.listViewData[attributes.source]
-		for i, item in this.listViewData[attributes.source] {
+		for i, item in this.listViewData[attributes.source]
 			charactersLV.Add(, item[localeData.localeIndex], ArraySlice(item, 2, attributes.columns.Length)*)
-		}
 
 		local characterFilterIcon := panelWindow.AddButton(Format("x{} y{} h{} w{}", this.filterIconX, this.filterIconY, this.filterIconW, this.filterIconH))
 

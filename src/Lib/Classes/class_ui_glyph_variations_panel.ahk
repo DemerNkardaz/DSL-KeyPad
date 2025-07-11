@@ -58,7 +58,7 @@ Class GlyphsPanel {
 
 		previewsCount := 21
 
-		this.title := App.Title() " — " Locale.Read("gui_scripter_glyph_variation_panel")
+		this.title := App.Title() " — " Locale.Read("gui.scripter.glyph_variations.gui_title")
 
 		Constructor() {
 

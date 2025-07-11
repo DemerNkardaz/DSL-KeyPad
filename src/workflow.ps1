@@ -1,4 +1,4 @@
-﻿$ver = "0.1.2.2-alpha-testing"
+﻿$ver = "0.1.2.2"
 $preRelease = "True"
 $title = "DSL KeyPad@0.1.2.2 α"
 $message =@"
@@ -8,13 +8,13 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-07-12 02:25:53
+				&#128228;&emsp14;2025-07-12 02:56:07
 			</td>
 		</tr>
 		<tr>
 			<td><b>Version</b></td>
 			<td>
-				&#128229;&emsp14;<a href="https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/0.1.2.2-alpha-testing/DSL-KeyPad-0.1.2.2-alpha-testing.zip">0.1.2.2-alpha-testing</a>
+				&#128229;&emsp14;<a href="https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/0.1.2.2/DSL-KeyPad-0.1.2.2.zip">0.1.2.2</a>
 			</td>
 		</tr>
 		<tr>
@@ -67,10 +67,10 @@ $message =@"
 		</tr>
 </table>
 
-**Versions compare** [0.1.1.2-alpha-testing&ensp;>>>&ensp;0.1.2.2-alpha-testing](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.1.2-alpha-testing...0.1.2.2-alpha-testing#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Docs](https://demernkardaz.github.io/DSL-KeyPad)
+**Versions compare** [0.1.1.2-alpha-testing&ensp;>>>&ensp;0.1.2.2](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.1.2-alpha-testing...0.1.2.2#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Docs](https://demernkardaz.github.io/DSL-KeyPad)
 
 [Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad.
-<br>[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-0.1.2.2-alpha-testing.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.2.2-alpha-testing) [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/0.1.2.2-alpha-testing?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/0.1.2.2-alpha-testing/)
+<br>[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-0.1.2.2.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.2.2) [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/0.1.2.2?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/0.1.2.2/)
 "@
 
 Write-Host "Version: $ver"

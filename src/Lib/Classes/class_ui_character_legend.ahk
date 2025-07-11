@@ -55,7 +55,7 @@ Class ChrLegend {
 			authorLink: Locale.Read("gui.legend.authors.default"),
 			entry: Locale.Read("dictionary.entry"),
 			unicode: Locale.Read("unicode", "default"),
-			html: Locale.Read("html"),
+			html: Locale.Read("dictionary.html_entity"),
 		}
 
 		panelW := 1300
