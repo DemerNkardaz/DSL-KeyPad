@@ -2372,6 +2372,10 @@
 					">+": "emsp16",
 					"<+>+": "narrow_no_break_space"
 				},
+				"Enter": {
+					"<^>!": "misc_crlf_emspace",
+					"<^>!<+": "misc_lf_emspace"
+				},
 				"Tab": {
 					"<^>!": "zero_width_joiner",
 					"<^>!>+": "zero_width_non_joiner",

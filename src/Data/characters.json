@@ -1130,7 +1130,7 @@
 					"fullwidth": "FF49"
 				}],
 				"options": { "noCalc": true },
-				"recipe": [["\u0130}/"], ["\u0131${dot_above}"]]
+				"recipe": [["\u0130/"], ["\u0131${dot_above}"]]
 			},
 			"lat_[c,s]_let_j", {
 				"unicode": ["004A", "006A"],
@@ -1966,14 +1966,14 @@
 			"emsp", {
 				"unicode": "2003",
 				"tags": ["em space", "emspace", "emsp", "круглая шпация"],
-				"groups": ["Spaces"],
+				"groups": ["Spaces", "Spaces Secondary"],
 				"options": { "fastKey": ">+ Space" },
 				"symbol": { "category": "Spaces" }
 			},
 			"ensp", {
 				"unicode": "2002",
 				"tags": ["en space", "enspace", "ensp", "полукруглая шпация"],
-				"groups": ["Spaces"],
+				"groups": ["Spaces", "Spaces Secondary"],
 				"options": { "fastKey": "<+ Space" },
 				"symbol": { "category": "Spaces" }
 			},
@@ -1994,7 +1994,7 @@
 			"thinspace", {
 				"unicode": "2009",
 				"tags": ["thinsp", "thin space", "узкий пробел", "тонкий пробел"],
-				"groups": ["Spaces"],
+				"groups": ["Spaces", "Spaces Secondary"],
 				"options": { "fastKey": "<! Space" },
 				"symbol": { "category": "Spaces" }
 			},
@@ -2015,21 +2015,21 @@
 			"hairspace", {
 				"unicode": "200A",
 				"tags": ["hsp", "hairsp", "hair space", "волосяная шпация"],
-				"groups": ["Spaces"],
+				"groups": ["Spaces", "Spaces Secondary"],
 				"options": { "fastKey": "<!<+ Space" },
 				"symbol": { "category": "Spaces" }
 			},
 			"punctuation_space", {
 				"unicode": "2008",
 				"tags": ["psp", "puncsp", "punctuation space", "пунктуационный пробел"],
-				"groups": ["Spaces"],
+				"groups": ["Spaces", "Spaces Secondary"],
 				"options": { "fastKey": "<!>+ Space" },
 				"symbol": { "category": "Spaces" }
 			},
 			"zero_width_space", {
 				"unicode": "200B",
 				"tags": ["zwsp", "zero-width space", "пробел нулевой ширины"],
-				"groups": ["Spaces"],
+				"groups": ["Spaces", "Spaces Secondary"],
 				"options": { "fastKey": ">^ Space" },
 				"symbol": { "category": "Spaces" }
 			},
@@ -2043,14 +2043,14 @@
 			"figure_space", {
 				"unicode": "2007",
 				"tags": ["nsp", "numsp", "figure space", "цифровой пробел"],
-				"groups": ["Spaces"],
+				"groups": ["Spaces", "Spaces Secondary"],
 				"options": { "fastKey": "<+>+ Space" },
 				"symbol": { "category": "Spaces" }
 			},
 			"no_break_space", {
 				"unicode": "00A0",
 				"tags": ["nbsp", "no-break space", "неразрывный пробел"],
-				"groups": ["Spaces"],
+				"groups": ["Spaces", "Spaces Secondary"],
 				"options": { "fastKey": "Space" },
 				"symbol": { "category": "Spaces" }
 			},

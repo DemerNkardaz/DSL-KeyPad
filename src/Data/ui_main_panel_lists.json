@@ -53,10 +53,10 @@
 			"Cyrillic Primary", "",
 			"Cyrillic Accented Primary", "",
 			"Special Fast Secondary",
+			"Spaces Secondary", "",
 			"Wallet Signs Secondary", "",
 			"Asian Quotes", "",
 			"Other Signs", "",
-			"Spaces", "",
 			"Format Characters", "",
 			"Misc", "",
 			"Latin Ligatures", "",
@@ -87,7 +87,7 @@
 		"label": "Fast Keys",
 		"type": "Special Combinations",
 		"group": ["Special Combinations"],
-		"groupKey": {"Special Combinations": "@script_labels.special_key"}
+		"groupKey": {"Special Combinations": "@dictionary.combination_special"}
 	}],
 	"secondkeys": {
 		"label": "Second Keys",
