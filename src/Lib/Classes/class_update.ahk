@@ -109,14 +109,17 @@ Class Update {
 			content := FileRead(this.filesManifestPath, "UTF-8")
 			split := StrSplit(content, "`n", "`r")
 			filesToDelete := []
-			whitelist := ["\workflow.ps1"]
+			whitelist := ["\workflow.ps1", "\desktop.ini"]
 
 			Loop Files, App.paths.dir "\*.*", "FR" {
 				currentFilePath := StrReplace(A_LoopFileFullPath, App.paths.dir)
 				if (!split.HasValue(currentFilePath)
 					&& !whitelist.HasValue(currentFilePath))
 					&& !InStr(A_LoopFileFullPath, App.paths.dir "\User")
-					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Mods") {
+					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Mods")
+					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Logs")
+					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Data\Dumps")
+				{
 					filesToDelete.Push(currentFilePath)
 				}
 			}

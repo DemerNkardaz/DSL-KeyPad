@@ -23,7 +23,10 @@ if (-not $KeypadFolder) {
 }
 
 # Gather all files (excluding User and Mods folder if present)
-if ((Test-Path (Join-Path $KeypadFolder.FullName "User")) -or (Test-Path (Join-Path $KeypadFolder.FullName "Mods"))) {
+if ((Test-Path (Join-Path $KeypadFolder.FullName "User")) -or
+	(Test-Path (Join-Path $KeypadFolder.FullName "Mods")) -or
+	(Test-Path (Join-Path $KeypadFolder.FullName "Logs")) -or
+	(Test-Path (Join-Path $KeypadFolder.FullName "Data\Dumps"))) {
 	$IgnoredDirs = @()
 	if (Test-Path (Join-Path $KeypadFolder.FullName "User")) {
 		Write-Host "Ignoring User directory: $(Join-Path $KeypadFolder.FullName 'User')"
@@ -32,6 +35,14 @@ if ((Test-Path (Join-Path $KeypadFolder.FullName "User")) -or (Test-Path (Join-P
 	if (Test-Path (Join-Path $KeypadFolder.FullName "Mods")) {
 		Write-Host "Ignoring Mods directory: $(Join-Path $KeypadFolder.FullName 'Mods')"
 		$IgnoredDirs += "*\Mods\*"
+	}
+	if (Test-Path (Join-Path $KeypadFolder.FullName "Logs")) {
+		Write-Host "Ignoring Logs directory: $(Join-Path $KeypadFolder.FullName 'Logs')"
+		$IgnoredDirs += "*\Logs\*"
+	}
+	if (Test-Path (Join-Path $KeypadFolder.FullName "Data\Dumps")) {
+		Write-Host "Ignoring Data\Dumps directory: $(Join-Path $KeypadFolder.FullName 'Data\Dumps')"
+		$IgnoredDirs += "*\Data\Dumps\*"
 	}
 	$FilesToCopy = Get-ChildItem -Path $KeypadFolder.FullName -Recurse | Where-Object { 
 		$file = $_.FullName

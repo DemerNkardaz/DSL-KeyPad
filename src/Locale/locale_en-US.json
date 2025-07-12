@@ -140,6 +140,7 @@
 				"update_absent": "You already have the latest version installed.",
 				"update_failed": "Update failed to complete.",
 				"update_failed_pshell": "Update failed to complete. PowerShell script exited with code {}.",
+				"update_successful": "Update successful.\nInstalled {} → {}",
 				"update_available": "Update available",
 				"update_repair": {
 					"__self": "Repair",

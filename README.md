@@ -33,8 +33,7 @@ $$
 <br>
 <a href="https://github.com/DemerNkardaz/DSL-KeyPad">
 	<img src="https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&color=yellow" alt="GitHub Downloads"/>
-</a>
-<a href="https://sourceforge.net/projects/dsl-keypad/">
+</a><a href="https://sourceforge.net/projects/dsl-keypad/">
 	<img src="https://img.shields.io/sourceforge/dm/dsl-keypad?logo=sourceforge&color=yellow" alt="SourceForge Downloads"/>
 </a>
 </p>
