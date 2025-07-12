@@ -196,7 +196,13 @@
 				"prosgegrammeni": "просгеграммени",
 				"ypogegrammeni": "ипогеграммени",
 				"zigzag_above": "зигзагом сверху",
-				"rhotic_hook": "ротическим крюком"
+				"rhotic_hook": "ротическим крюком",
+				"vzmet": "взметом",
+				"titlo": "титло",
+				"palatalization": "палатализацией",
+				"pokrytie": "покрытием",
+				"dasia_pneumata": "густым придыханием",
+				"psili_pneumata": "тонким придыханием"
 			}
 		}
 	}

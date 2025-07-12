@@ -3,6 +3,14 @@
 		"script_labels": {
 			"cyrillic": "Кириллица"
 		},
+		"vzmet": "Взмет",
+		"titlo": "Титло",
+		"palatalization": "Палатализация",
+		"pokrytie": "Покрытие",
+		"payerok": "Ерок",
+		"dasia_pneumata": "Густое придыхание (Дасия)",
+		"psili_pneumata": "Тонкое придыхание (Псили)",
+		"millions_sign": "Леодр",
 		"scripts": {
 			"cyrillic": {
 				"c_let_yus_little": { "letter_locale": "Юс малый" },

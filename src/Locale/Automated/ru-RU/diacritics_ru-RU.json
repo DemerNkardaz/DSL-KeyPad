@@ -66,6 +66,17 @@
 		"x_above": "X сверху",
 		"x_below": "X снизу",
 		"zigzag_above": "Зигзаг сверху",
-		"rhotic_hook": "Ротический крюк"
+		"rhotic_hook": "Ротический крюк",
+		"plus_below": "Плюс снизу",
+		"seagull_below": "Чайка снизу",
+		"minus_below": "Минус снизу",
+		"square_below": "Квадрат снизу",
+		"up_tack_below": "Кнопка вверх снизу",
+		"down_tack_below": "Кнопка вниз снизу",
+		"left_tack_below": "Кнопка влево снизу",
+		"right_tack_below": "Кнопка вправо снизу",
+		"left_half_ring_below": "Левое полукольцо снизу",
+		"right_half_ring_below": "Правое полукольцо снизу",
+		"left_angle_above": "Левый угол сверху"
 	}
 }

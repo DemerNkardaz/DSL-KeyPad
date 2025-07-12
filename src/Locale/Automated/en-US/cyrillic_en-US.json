@@ -3,6 +3,14 @@
 		"script_labels": {
 			"cyrillic": "Cyrillic"
 		},
+		"vzmet": "Vzmet",
+		"titlo": "Titlo",
+		"palatalization": "Palatalization",
+		"pokrytie": "Pokrytie",
+		"payerok": "Payerok",
+		"dasia_pneumata": "Dasia pneumata",
+		"psili_pneumata": "Psili pneumata",
+		"millions_sign": "Millions sign",
 		"scripts": {
 			"cyrillic": {
 				"c_let_yus_little": { "letter_locale": "little Yus" },

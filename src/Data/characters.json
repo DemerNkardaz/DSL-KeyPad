@@ -144,7 +144,7 @@
 					"uncombined": "00B8"
 				},
 				"tags": ["cedilla", "седиль"],
-				"groups": ["Diacritics Tertiary", "FK Diacritics Primary"],
+				"groups": ["FK Diacritics Primary"],
 				"options": { "fastKey": ">+ C С" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
@@ -228,7 +228,7 @@
 			"fermata", {
 				"unicode": "0352",
 				"tags": ["fermata", "фермата"],
-				"groups": ["Diacritics Tertiary", "FK Diacritics Primary"],
+				"groups": ["FK Diacritics Primary"],
 				"options": { "fastKey": "F А" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
@@ -429,28 +429,28 @@
 			"stroke_short", {
 				"unicode": "0335",
 				"tags": ["short stroke", "короткое перечёркивание"],
-				"groups": ["Diacritics Quatemary", "FK Diacritics Primary"],
+				"groups": ["FK Diacritics Primary"],
 				"options": { "fastKey": "S Ы" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
 			"stroke_long", {
 				"unicode": "0336",
 				"tags": ["long stroke", "длинное перечёркивание"],
-				"groups": ["Diacritics Quatemary", "FK Diacritics Primary"],
+				"groups": ["FK Diacritics Primary"],
 				"options": { "fastKey": "<+ S Ы" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
 			"solidus_short", {
 				"unicode": "0337",
 				"tags": ["short solidus", "короткая косая черта"],
-				"groups": ["Diacritics Quatemary", "FK Diacritics Primary"],
+				"groups": ["FK Diacritics Primary"],
 				"options": { "fastKey": "/ ." },
 				"symbol": { "category": "Diacritic Mark" }
 			},
 			"solidus_long", {
 				"unicode": "0338",
 				"tags": ["long solidus", "длинная косая черта"],
-				"groups": ["Diacritics Quatemary", "FK Diacritics Primary"],
+				"groups": ["FK Diacritics Primary"],
 				"options": { "fastKey": "<+ / ." },
 				"symbol": { "category": "Diacritic Mark" }
 			},
@@ -577,8 +577,8 @@
 					{ "modifier": "02D2" }
 				],
 				"tags": [
-					["left half right below", "less-rounded", "левая половинка кольца снизу", "менее огублённый"],
-					["right half right below", "more-rounded", "правая половинка кольца снизу", "более огублённый"]
+					["left half right below", "less-rounded", "левое полукольцо снизу", "менее огублённый"],
+					["right half right below", "more-rounded", "правое полукольцо снизу", "более огублённый"]
 				],
 				"groups": ["IPA"],
 				"options": { 
@@ -604,46 +604,61 @@
 				"options": { "altLayoutKey": "<^<! E"  },
 				"symbol": { "category": "Diacritic Mark" }
 			},
-			"cyr_com_vzmet", {
+			"vzmet", {
 				"unicode": "A66F",
 				"tags": ["взмет кириллицы", "cyrillic vzmet"],
-				"groups": ["Cyrillic Diacritics"],
-				"options": { "altLayoutKey": "<^<! В" },
+				"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
+				"options": { "fastKey": "<+ У", "altLayoutKey": "<^<!<+ У" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
-			"cyr_com_titlo", {
+			"titlo", {
 				"unicode": "0483",
 				"tags": ["титло кириллицы", "cyrillic titlo"],
-				"groups": ["Cyrillic Diacritics"],
-				"options": { "altLayoutKey": "<^<! Т" },
+				"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
+				"options": { "fastKey": "У", "altLayoutKey": "<^<!У" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
-			"cyr_com_palatalization", {
+			"palatalization", {
 				"unicode": "0484",
 				"tags": ["палатализация кириллицы", "cyrillic palatalization"],
-				"groups": ["Diacritics Tertiary", "Cyrillic Diacritics"],
-				"options": { "altLayoutKey": "<^<! П" },
+				"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
+				"options": { "fastKey": ">+ Ц", "altLayoutKey": "<^<!>+ Ц" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
-			"cyr_com_pokrytie", {
+			"pokrytie", {
 				"unicode": "0487",
 				"tags": ["покрытие кириллицы", "cyrillic pokrytie"],
-				"groups": ["Diacritics Tertiary", "Cyrillic Diacritics"],
-				"options": { "altLayoutKey": "<^<!<+ П" },
+				"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
+				"options": { "fastKey": "Ц", "altLayoutKey": "<^<! Ц" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
-			"cyr_com_dasia_pneumata", {
+			"payerok", {
+				"unicode": "A67D",
+				"alterations": { "uncombined": "A67F" },
+				"tags": ["ерок кириллицы", "cyrillic payerok"],
+				"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
+				"options": { "fastKey": "<+ Ц", "altLayoutKey": "<^<!<+ Ц" },
+				"symbol": { "category": "Diacritic Mark" }
+			},
+			"dasia_pneumata", {
 				"unicode": "0485",
 				"tags": ["густое придыхание кириллицы", "cyrillic dasia pneumata"],
-				"groups": ["Diacritics Quatemary", "Cyrillic Diacritics", "FK Diacritics Primary"],
-				"options": { "fastKey": ">+ G П", "altLayoutKey": "<^<!>+ П" },
+				"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
+				"options": { "fastKey": "Й", "altLayoutKey": "<^<! Й" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
-			"cyr_com_psili_pneumata", {
+			"psili_pneumata", {
 				"unicode": "0486",
 				"tags": ["тонкое придыхание кириллицы", "cyrillic psili pneumata"],
-				"groups": ["Diacritics Quatemary", "Cyrillic Diacritics", "FK Diacritics Primary"],
-				"options": { "fastKey": "<+>+ G П", "altLayoutKey": "<^<!<+>+ П" },
+				"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
+				"options": { "fastKey": "<+ Й", "altLayoutKey": "<^<!<+ Й" },
+				"symbol": { "category": "Diacritic Mark" }
+			},
+			"millions_sign", {
+				"unicode": "0489",
+				"tags": ["леодр кириллицы", "cyrillic millions sign"],
+				"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
+				"options": { "fastKey": "0", "altLayoutKey": "<^<! 0" },
 				"symbol": { "category": "Diacritic Mark" }
 			},
 			"digit_[0,1,2,3,4,5,6,7,8,9]", {
@@ -9200,7 +9215,7 @@
 				"alterations": [{}, { "combining": "A67B" }],
 				"options": { "useLetterLocale": true, "fastKey": "<! /О/?Secondary" }
 			},
-			"cyr_[c,s]_let_o_omega__cyr_com_titlo", {
+			"cyr_[c,s]_let_o_omega__titlo", {
 				"unicode": ["047C", "047D"],
 				"groups": ["Cyrillic"],
 				"options": { "useLetterLocale": "Origin" }

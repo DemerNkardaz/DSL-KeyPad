@@ -271,7 +271,7 @@
 					"D": {
 						"<^>!": ["germanic_runic_n_rune_d_later_younger_futhark_eth"],
 						"<^>!<+": ["germanic_runic_n_rune_d_later_younger_futhark"],
-						"<^<!": ["cyr_com_vzmet"]
+						"<^<!": ["vzmet"]
 					},
 					"E": {
 						"<+": ["germanic_runic_n_rune_e_futhork_ear"],
@@ -280,11 +280,7 @@
 					},
 					"G": {
 						"<+": ["germanic_runic_n_rune_g_futhork_gar"],
-						"<^>!<!": ["germanic_runic_n_rune_g_medieval"],
-						"<^<!": ["cyr_com_palatalization"],
-						"<^<!<+": ["cyr_com_pokrytie"],
-						"<^<!>+": ["cyr_com_dasia_pneumata"],
-						"<^<!<+>+": ["cyr_com_psili_pneumata"]
+						"<^>!<!": ["germanic_runic_n_rune_g_medieval"]
 					},
 					"H": {
 						"<+": ["germanic_runic_n_rune_h_futhork_haegl"],
@@ -405,6 +401,9 @@
 					"ОбратныйСлэш": ["reverse_solidus"]
 				},
 				"Moded": {
+					"0": {
+						"<^<!": "millions_sign"
+					},
 					"А": {"<^>!": "glagolitic_[c,s]_let_trokutasti_a"},
 					"Ё": {"<!": "glagolitic_[c,s]_let_big_yus_iotified"},
 					"Ж": {"<^>!": "glagolitic_[c,s]_let_djervi"},
@@ -413,13 +412,26 @@
 						"<+": "glagolitic_[c,s]_let_izhe",
 						"<^>!<+": "glagolitic_[c,s]_let_izhitsa"
 					},
+					"Й": {
+						"<^<!": "dasia_pneumata",
+						"<^<!<+": "psili_pneumata"
+					},
 					"О": {
 						"<^>!": "glagolitic_[c,s]_let_otu",
 						"<!": "glagolitic_[c,s]_let_big_yus"
 					},
 					"П": {"<^>!": "glagolitic_[c,s]_let_pe"},
 					"С": {"<^>!": "glagolitic_[c,s]_let_dzelo"},
+					"У": {
+						"<^<!": "titlo",
+						"<^<!<+": "vzmet"
+					},
 					"Х": {"<^>!": "glagolitic_[c,s]_let_spider_ha"},
+					"Ц": {
+						"<^<!": "pokrytie",
+						"<^<!<+": "payerok",
+						"<^<!>+": "palatalization"
+					},
 					"Ф": {"<^>!": "glagolitic_[c,s]_let_fita"},
 					"Ъ": {"<^>!": "glagolitic_[c,s]_let_shtapic"},
 					"Э": {"<^>!": "glagolitic_[c,s]_let_small_yus_iotified"},
@@ -2031,9 +2043,7 @@
 				},
 				"G": {
 					"<^<!": "grave",
-					"<^<!<+": "grave_double",
-					"<^<!>+": "cyr_com_dasia_pneumata",
-					"<^<!<+>+": "cyr_com_psili_pneumata"
+					"<^<!<+": "grave_double"
 				},
 				"H": {
 					"<^<!": "hook_above",
@@ -2043,9 +2053,7 @@
 					"<^<!": "macron",
 					"<^<!<+": "macron_below"
 				},
-				"N": {
-					"<^<!": "cyr_com_titlo"
-				},
+				"N": {},
 				"O": {
 					"<^<!": "ogonek",
 					"<^<!<+": "ogonek_above"
@@ -2086,6 +2094,22 @@
 				"Dot": {
 					"<^<!": "dot_above",
 					"<^<!<+": "diaeresis"
+				},
+				"0": {
+					"<^<!": "millions_sign"
+				},
+				"Й": {
+					"<^<!": "dasia_pneumata",
+					"<^<!<+": "psili_pneumata"
+				},
+				"У": {
+					"<^<!": "titlo",
+					"<^<!<+": "vzmet"
+				},
+				"Ц": {
+					"<^<!": "pokrytie",
+					"<^<!<+": "payerok",
+					"<^<!>+": "palatalization"
 				}
 			}
 		},

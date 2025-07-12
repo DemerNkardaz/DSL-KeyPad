@@ -66,6 +66,17 @@
 		"x_above": "X Above",
 		"x_below": "X Below",
 		"zigzag_above": "Zigzag Above",
-		"rhotic_hook": "Rhotic Hook"
+		"rhotic_hook": "Rhotic Hook",
+		"plus_below": "Plus Below",
+		"seagull_below": "Seagull Below",
+		"minus_below": "Minus Below",
+		"square_below": "Square Below",
+		"up_tack_below": "Up Tack Below",
+		"down_tack_below": "Down Tack Below",
+		"left_tack_below": "Left Tack Below",
+		"right_tack_below": "Right Tack Below",
+		"left_half_ring_below": "Left Half Ring Below",
+		"right_half_ring_below": "Right Half Ring Below",
+		"left_angle_above": "Left Angle Above"
 	}
 }

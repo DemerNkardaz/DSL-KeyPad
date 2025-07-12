@@ -196,7 +196,13 @@
 				"prosgegrammeni": "prosgegrammeni",
 				"ypogegrammeni": "ypogegrammeni",
 				"zigzag_above": "zigzag above",
-				"rhotic_hook": "rhotic hook"
+				"rhotic_hook": "rhotic hook",
+				"vzmet": "vzmet",
+				"titlo": "titlo",
+				"palatalization": "palatalization",
+				"pokrytie": "pokrytie",
+				"dasia_pneumata": "dasia pneumata",
+				"psili_pneumata": "psili pneumata"
 			}
 		}
 	}
