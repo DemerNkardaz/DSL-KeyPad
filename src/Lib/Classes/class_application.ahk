@@ -62,6 +62,15 @@ Class App {
 			"shavian",
 			"blank",
 			"support",
+			"reload",
+			"exit",
+			"settings",
+			"about",
+			"forge",
+			"my_recipes",
+			"legend",
+			"mods",
+			"update",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

@@ -61,14 +61,14 @@ Class TrayMenu {
 		this.tray.Add(labels.app, (*) => Run(App.URL)), this.tray.SetIcon(labels.app, App.icoDLL, App.indexIcos["app"])
 
 		if Update.available
-			this.tray.Add(labels.update, (*) => Update.Check(True)), this.tray.SetIcon(labels.update, ImageRes, 176)
+			this.tray.Add(labels.update, (*) => Update.Check(True)), this.tray.SetIcon(labels.update, App.icoDLL, App.indexIcos["update"])
 
 		this.tray.Add()
 		this.tray.Add(labels.openPanel, (*) => globalInstances.MainGUI.Show())
-		this.tray.Add(labels.legend, (*) => ChrLegend())
-		this.tray.Add(labels.mods, (*) => ModsGUI())
-		this.tray.Add(labels.options, (*) => Cfg.Editor()), this.tray.SetIcon(labels.options, ImageRes, 63)
-		this.tray.Add(labels.about, (*) => globalInstances.AboutGUI.Show())
+		this.tray.Add(labels.legend, (*) => ChrLegend()), this.tray.SetIcon(labels.legend, App.icoDLL, App.indexIcos["legend"])
+		this.tray.Add(labels.mods, (*) => ModsGUI()), this.tray.SetIcon(labels.mods, App.icoDLL, App.indexIcos["mods"])
+		this.tray.Add(labels.options, (*) => Cfg.Editor()), this.tray.SetIcon(labels.options, App.icoDLL, App.indexIcos["settings"])
+		this.tray.Add(labels.about, (*) => globalInstances.AboutGUI.Show()), this.tray.SetIcon(labels.about, App.icoDLL, App.indexIcos["about"])
 		this.tray.Add()
 		this.tray.Add(labels.changelogPanel, (*) => Changelog.Panel())
 		this.tray.Add()
@@ -134,20 +134,20 @@ Class TrayMenu {
 		this.tray.Add(labels.layouts, layoutsMenu)
 
 		this.tray.Add()
-		this.tray.Add(labels.userRecipes, (*) => globalInstances.MyRecipesGUI.Show()), this.tray.SetIcon(labels.userRecipes, ImageRes, 188)
+		this.tray.Add(labels.userRecipes, (*) => globalInstances.MyRecipesGUI.Show()), this.tray.SetIcon(labels.userRecipes, App.icoDLL, App.indexIcos["my_recipes"])
 		this.tray.Add()
 		this.tray.Add(labels.search, (*) => Search()), this.tray.SetIcon(labels.search, ImageRes, 169)
-		this.tray.Add(labels.forge, (*) => globalInstances.crafter.Start("InputBox")), this.tray.SetIcon(labels.forge, ImageRes, 151)
+		this.tray.Add(labels.forge, (*) => globalInstances.crafter.Start("InputBox")), this.tray.SetIcon(labels.forge, App.icoDLL, App.indexIcos["forge"])
 		this.tray.Add(labels.folder, (*) => Run(A_ScriptDir)), this.tray.SetIcon(labels.folder, ImageRes, 180)
 		this.tray.Add()
-		this.tray.Add(labels.reload, (*) => Reload()), this.tray.SetIcon(labels.reload, ImageRes, 229)
+		this.tray.Add(labels.reload, (*) => Reload()), this.tray.SetIcon(labels.reload, App.icoDLL, App.indexIcos["reload"])
 		this.tray.Add()
 
 		this.tray.Add(labels.disableBinds, toggleMonitor.Bind())
 		this.tray.SetIcon(labels.disableBinds, App.icoDLL, App.indexIcos["disabled"])
 
 		this.tray.Add()
-		this.tray.Add(labels.exit, (*) => ExitApp()), this.tray.SetIcon(labels.exit, ImageRes, 085)
+		this.tray.Add(labels.exit, (*) => ExitApp()), this.tray.SetIcon(labels.exit, App.icoDLL, App.indexIcos["exit"])
 
 		HotKey(">^F10", (*) => toggleMonitor(KbdMonitor.Disabled("User") ? labels.enableBinds : labels.disableBinds, 0, this.tray), "On S")
 

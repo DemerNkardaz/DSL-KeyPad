@@ -207,6 +207,15 @@
     <Image Include="DSLKeyPad.app_shavian.ico" />
     <Image Include="DSLKeyPad.app_blank.ico" />
     <Image Include="DSLKeyPad.app_support.ico" />
+    <Image Include="DSLKeyPad.app_reload.ico" />
+    <Image Include="DSLKeyPad.app_exit.ico" />
+    <Image Include="DSLKeyPad.app_settings.ico" />
+    <Image Include="DSLKeyPad.app_about.ico" />
+    <Image Include="DSLKeyPad.app_forge.ico" />
+    <Image Include="DSLKeyPad.app_my_recipes.ico" />
+    <Image Include="DSLKeyPad.app_legend.ico" />
+    <Image Include="DSLKeyPad.app_mods.ico" />
+    <Image Include="DSLKeyPad.app_update.ico" />
     <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -31,11 +31,8 @@ $$
 <img src="https://img.shields.io/gitlab/stars/DemerNkardaz%2Fdsl-keypad" alt="GitLab stars"/>
 <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FDemerNkardaz%2FDSL-KeyPad&label=visits&color=yellow" alt="visits"/>
 <br>
-<a href="https://github.com/DemerNkardaz/DSL-KeyPad">
-	<img src="https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&color=yellow" alt="GitHub Downloads"/>
-</a><a href="https://sourceforge.net/projects/dsl-keypad/">
-	<img src="https://img.shields.io/sourceforge/dm/dsl-keypad?logo=sourceforge&color=yellow" alt="SourceForge Downloads"/>
-</a>
+<a href="https://github.com/DemerNkardaz/DSL-KeyPad"><img src="https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&color=yellow" alt="GitHub Downloads"/></a>
+<a href="https://sourceforge.net/projects/dsl-keypad/"><img src="https://img.shields.io/sourceforge/dm/dsl-keypad?logo=sourceforge&color=yellow" alt="SourceForge Downloads"/></a>
 </p>
 
 <br>

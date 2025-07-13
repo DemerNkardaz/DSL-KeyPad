@@ -150,7 +150,7 @@ Class Cfg {
 			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KbdBinder.SetLayout(CB.Text))
 
 			layoutUpdate := optionsPanel.AddButton("vLayoutUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(23) - 1))
-			GuiButtonIcon(layoutUpdate, ImageRes, 229)
+			GuiButtonIcon(layoutUpdate, App.icoDLL, App.indexIcos["reload"])
 			layoutUpdate.OnEvent("Click", (*) => (
 				KbdLayoutUserDefined.Update(),
 				this.EditorGUI.GetPos(&X, &Y, &W, &H),
@@ -171,7 +171,7 @@ Class Cfg {
 			bindingsSelector.OnEvent("Change", (CB, Zero) => KbdBinder.SetBinds(CB.Text))
 
 			bindingsUpdate := optionsPanel.AddButton("vBindingsUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(32 * 3) - 1))
-			GuiButtonIcon(bindingsUpdate, ImageRes, 229)
+			GuiButtonIcon(bindingsUpdate, App.icoDLL, App.indexIcos["reload"])
 			bindingsUpdate.OnEvent("Click", (*) => (
 				BindingUserDefined.Update(),
 				this.EditorGUI.GetPos(&X, &Y, &W, &H),
@@ -294,7 +294,7 @@ Class Cfg {
 
 			recipesPanelBtn := optionsPanel.AddButton("x" iniFilesX() " y" iniFilesY " w32 h32")
 			recipesPanelBtn.OnEvent("Click", (*) => globalInstances.MyRecipesGUI.Show())
-			GuiButtonIcon(recipesPanelBtn, ImageRes, 188)
+			GuiButtonIcon(recipesPanelBtn, App.icoDLL, App.indexIcos["my_recipes"])
 
 			configFileBtn := optionsPanel.AddButton("x" iniFilesX(32) " y" iniFilesY " w32 h32")
 			configFileBtn.OnEvent("Click", (*) => Cfg.OpenFile())

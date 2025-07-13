@@ -53,6 +53,15 @@
 #define IDI_SHAVIAN 149
 #define IDI_BLANK 150
 #define IDI_SUPPORT 151
+#define IDI_RELOAD 152
+#define IDI_EXIT 153
+#define IDI_SETTINGS 154
+#define IDI_ABOUT 155
+#define IDI_FORGE 156
+#define IDI_MY_RECIPES 157
+#define IDI_LEGEND 158
+#define IDI_MODS 159
+#define IDI_UPDATE 160
 
 // Next default values for new objects
 //
