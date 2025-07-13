@@ -45,7 +45,7 @@ You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-K
 
 <br>
 
-![Sequences Tab](https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/panel_forge_tab_en.png)
+![Sequences Tab](https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/panel_forge_tab_en.png)
 
 <p align="center">
 	<i>Forge’s Sequences Tab</i>
@@ -95,32 +95,32 @@ winget install AutoHotkey.AutoHotkey
 <p align="center">
 	<table>
 		<tr>
-			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/panel_fastkeys_tab_en.png" alt="FastKeys Tab" width="460"></td>
-			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/panel_scripts_tab_en.png" alt="Scripts Tab" width="460"></td>
+			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/panel_fastkeys_tab_en.png" alt="FastKeys Tab" width="460"></td>
+			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/panel_scripts_tab_en.png" alt="Scripts Tab" width="460"></td>
 		</tr>
 		<tr>
 			<th><i>FastKeys Tab</i></th>
 			<th><i>Scripts Tab</i></th>
 		</tr>
 		<tr>
-			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/panel_help_tab_en.png" alt="Help Tab" width="460"></td>
-			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/panel_about_en.png" alt="About" width="460"></td>
+			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/panel_help_tab_en.png" alt="Help Tab" width="460"></td>
+			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/panel_about_en.png" alt="About" width="460"></td>
 		</tr>
 		<tr>
 			<th><i>Help Tab</i></th>
 			<th><i>About</i></th>
 		</tr>
 		<tr>
-			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/scripter_alternative_input.png" alt="Alternative Input Selector" width="460"></td>
-			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/scripter_glyph_variatioins.png" alt="Glyph Variations Selector" width="460"></td>
+			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/scripter_alternative_input.png" alt="Alternative Input Selector" width="460"></td>
+			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/scripter_glyph_variatioins.png" alt="Glyph Variations Selector" width="460"></td>
 		</tr>
 		<tr>
 			<th><i>Alternative Input Selector</i></th>
 			<th><i>Glyph Variations Selector</i></th>
 		</tr>
 		<tr>
-			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/user_recipes_panel_en.png" alt="User Recipes Panel" width="460"></td>
-			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/webpage/media/user_recipes_editor_en.png" alt="User Recipes Editor" width="460"></td>
+			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/user_recipes_panel_en.png" alt="User Recipes Panel" width="460"></td>
+			<td><img src="https://raw.githubusercontent.com/DemerNkardaz/DSL-KeyPad-Docs/refs/heads/main/Media/user_recipes_editor_en.png" alt="User Recipes Editor" width="460"></td>
 		</tr>
 		<tr>
 			<th><i>User-Defined Recipes Panel</i></th>
