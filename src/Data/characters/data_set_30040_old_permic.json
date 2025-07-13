@@ -1,0 +1,159 @@
+[
+	"old_permic_n_let_an", {
+		"unicode": "10350",
+		"options": { "altLayoutKey": "А" },
+		"alterations": { "combining": "10376" }
+	},
+	"old_permic_n_let_bur", {
+		"unicode": "10351",
+		"options": { "altLayoutKey": "Б" }
+	},
+	"old_permic_n_let_ver", {
+		"unicode": "1036E",
+		"options": { "altLayoutKey": "В" }
+	},
+	"old_permic_n_let_gai", {
+		"unicode": "10352",
+		"options": { "altLayoutKey": "Г" }
+	},
+	"old_permic_n_let_doi", {
+		"unicode": "10353",
+		"options": { "altLayoutKey": "Д" },
+		"alterations": { "combining": "10377" }
+	},
+	"old_permic_n_let_e", {
+		"unicode": "10354",
+		"options": { "altLayoutKey": "Е" }
+	},
+	"old_permic_n_let_oo", {
+		"unicode": "1036A",
+		"options": { "altLayoutKey": "Ё" }
+	},
+	"old_permic_n_let_zhoi", {
+		"unicode": "10355",
+		"options": { "altLayoutKey": "Ж" }
+	},
+	"old_permic_n_let_dzhoi", {
+		"unicode": "10356",
+		"options": { "altLayoutKey": ">! Ж" }
+	},
+	"old_permic_n_let_zata", {
+		"unicode": "10357",
+		"options": { "altLayoutKey": "З" },
+		"alterations": { "combining": "10378" }
+	},
+	"old_permic_n_let_dzita", {
+		"unicode": "10358",
+		"options": { "altLayoutKey": ">! З" }
+	},
+	"old_permic_n_let_i", {
+		"unicode": "10359",
+		"options": { "altLayoutKey": "И" }
+	},
+	"old_permic_n_let_ie", {
+		"unicode": "10372",
+		"options": { "altLayoutKey": "Й" }
+	},
+	"old_permic_n_let_koke", {
+		"unicode": "1035A",
+		"options": { "altLayoutKey": "К" }
+	},
+	"old_permic_n_let_lei", {
+		"unicode": "1035B",
+		"options": { "altLayoutKey": "Л" }
+	},
+	"old_permic_n_let_menoe", {
+		"unicode": "1035C",
+		"options": { "altLayoutKey": "М" }
+	},
+	"old_permic_n_let_nenoe", {
+		"unicode": "1035D",
+		"options": { "altLayoutKey": "Н" },
+		"alterations": { "combining": "10379" }
+	},
+	"old_permic_n_let_vooi", {
+		"unicode": "1035E",
+		"options": { "altLayoutKey": "О" }
+	},
+	"old_permic_n_let_o", {
+		"unicode": "10369",
+		"options": { "altLayoutKey": ">! О" }
+	},
+	"old_permic_n_let_peei", {
+		"unicode": "1035F",
+		"options": { "altLayoutKey": "П" }
+	},
+	"old_permic_n_let_rei", {
+		"unicode": "10360",
+		"options": { "altLayoutKey": "Р" }
+	},
+	"old_permic_n_let_sii", {
+		"unicode": "10361",
+		"options": { "altLayoutKey": "С" },
+		"alterations": { "combining": "1037A" }
+	},
+	"old_permic_n_let_tai", {
+		"unicode": "10362",
+		"options": { "altLayoutKey": "Т" }
+	},
+	"old_permic_n_let_u", {
+		"unicode": "10363",
+		"options": { "altLayoutKey": "У" }
+	},
+	"old_permic_n_let_ef", {
+		"unicode": "1036B",
+		"options": { "altLayoutKey": "Ф" }
+	},
+	"old_permic_n_let_ha", {
+		"unicode": "1036C",
+		"options": { "altLayoutKey": "Х" }
+	},
+	"old_permic_n_let_tsiu", {
+		"unicode": "1036D",
+		"options": { "altLayoutKey": "Ц" }
+	},
+	"old_permic_n_let_chery", {
+		"unicode": "10364",
+		"options": { "altLayoutKey": "Ч" }
+	},
+	"old_permic_n_let_shooi", {
+		"unicode": "10365",
+		"options": { "altLayoutKey": "Ш" }
+	},
+	"old_permic_n_let_shchooi", {
+		"unicode": "10366",
+		"options": { "altLayoutKey": "Щ" }
+	},
+	"old_permic_n_let_yeru", {
+		"unicode": "1036F",
+		"options": { "altLayoutKey": "Ъ" }
+	},
+	"old_permic_n_let_yery", {
+		"unicode": "10368",
+		"options": { "altLayoutKey": "Ы" }
+	},
+	"old_permic_n_let_yry", {
+		"unicode": "10367",
+		"options": { "altLayoutKey": ">! Ы" }
+	},
+	"old_permic_n_let_yeri", {
+		"unicode": "10370",
+		"options": { "altLayoutKey": "Ь" }
+	},
+	"old_permic_n_let_yat", {
+		"unicode": "10371",
+		"options": { "altLayoutKey": "Э" }
+	},
+	"old_permic_n_let_yu", {
+		"unicode": "10373",
+		"options": { "altLayoutKey": "Ю" }
+	},
+	"old_permic_n_let_ia", {
+		"unicode": "10375",
+		"options": { "altLayoutKey": "Я" }
+	},
+	"old_permic_n_let_ya", {
+		"unicode": "10374",
+		"options": { "altLayoutKey": ">! Я" }
+	}
+]

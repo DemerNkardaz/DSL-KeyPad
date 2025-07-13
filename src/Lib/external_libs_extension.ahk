@@ -11,4 +11,21 @@ class JSONExt extends JSON {
 
 		return result
 	}
+
+	static BulkLoad(dirPath, options?) {
+		local foundFiles := []
+		local output := []
+
+		Loop Files dirPath "\*", "F"
+			if A_LoopFileFullPath ~= "i)\.json$"
+				foundFiles.Push(A_LoopFileFullPath)
+
+		for each in foundFiles
+			output.MergeWith(super.LoadFile(each, options))
+
+		return output
+	}
 }
+
+
+; JSONExt.BulkLoad(A_ScriptDir "\Data\characters", "UTF-8")

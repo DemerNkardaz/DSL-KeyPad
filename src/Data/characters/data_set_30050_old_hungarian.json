@@ -1,0 +1,229 @@
+[
+	"old_hungarian_[c,s]_rune_a", {
+		"unicode": ["10C80", "10CC0"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_a_aa", {
+		"unicode": ["10C81", "10CC1"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_b_eb", {
+		"unicode": ["10C82", "10CC2"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_b_amb", {
+		"unicode": ["10C83", "10CC3"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_c_ec", {
+		"unicode": ["10C84", "10CC4"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_c_ech", {
+		"unicode": ["10CA9", "10CE9"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_c_ecs", {
+		"unicode": ["10C86", "10CC6"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_d_ed", {
+		"unicode": ["10C87", "10CC7"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_e", {
+		"unicode": ["10C89", "10CC9"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_e_ee", {
+		"unicode": ["10C8B", "10CCB"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_e_enk", {
+		"unicode": ["10C85", "10CC5"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_f_ef", {
+		"unicode": ["10C8C", "10CCC"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_g_eg", {
+		"unicode": ["10C8D", "10CCD"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_g_egy", {
+		"unicode": ["10C8E", "10CCE"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_h_eh", {
+		"unicode": ["10C8F", "10CCF"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_i", {
+		"unicode": ["10C90", "10CD0"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_i_ii", {
+		"unicode": ["10C91", "10CD1"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_y_ej", {
+		"unicode": ["10C92", "10CD2"],
+		"options": { "altLayoutKey": "J" }
+	},
+	"old_hungarian_[c,s]_rune_k_ek", {
+		"unicode": ["10C93", "10CD3"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_k_ak", {
+		"unicode": ["10C94", "10CD4"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_k_unk", {
+		"unicode": ["10C95", "10CD5"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_l_el", {
+		"unicode": ["10C96", "10CD6"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_l_ely", {
+		"unicode": ["10C97", "10CD7"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_m_em", {
+		"unicode": ["10C98", "10CD8"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_n_en", {
+		"unicode": ["10C99", "10CD9"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_n_eny", {
+		"unicode": ["10C9A", "10CDA"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_o", {
+		"unicode": ["10C9B", "10CDB"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_o_oo", {
+		"unicode": ["10C9C", "10CDC"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_o_oe", {
+		"unicode": ["10C9E", "10CDE"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_o_oe_nik", {
+		"unicode": ["10C9D", "10CDD"],
+		"options": { "altLayoutKey": ">!<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_o_oee", {
+		"unicode": ["10C9F", "10CDF"],
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"old_hungarian_[c,s]_rune_p_ep", {
+		"unicode": ["10CA0", "10CE0"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_p_emp", {
+		"unicode": ["10CA1", "10CE1"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_r_er", {
+		"unicode": ["10CA2", "10CE2"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_r_er_short", {
+		"unicode": ["10CA3", "10CE3"],
+		"options": { "altLayoutKey": "<+ $", "referenceLocale": "er$" },
+		"symbol": { "beforeLetter": "short" }
+	},
+	"old_hungarian_[c,s]_rune_s_es", {
+		"unicode": ["10CA4", "10CE4"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_s_esz", {
+		"unicode": ["10CA5", "10CE5"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_s_us", {
+		"unicode": ["10CB2", "10CF2"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_t_et", {
+		"unicode": ["10CA6", "10CE6"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_t_ety", {
+		"unicode": ["10CA8", "10CE8"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_t_ent", {
+		"unicode": ["10CA7", "10CE7"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_hungarian_[c,s]_rune_t_ent_shaped", {
+		"unicode": ["10CB1", "10CF1"],
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"old_hungarian_[c,s]_rune_u", {
+		"unicode": ["10CAA", "10CEA"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_u_uu", {
+		"unicode": ["10CAB", "10CEB"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_v_ev", {
+		"unicode": ["10CAE", "10CEE"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_y_ue", {
+		"unicode": ["10CAD", "10CED"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_y_ue_nik", {
+		"unicode": ["10CAC", "10CEC"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_[c,s]_rune_z_ez", {
+		"unicode": ["10CAF", "10CEF"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_hungarian_[c,s]_rune_z_ezs", {
+		"unicode": ["10CB0", "10CF0"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"old_hungarian_n_num_one", {
+		"unicode": "10CFA",
+		"groups": ["Old Hungarian"],
+		"options": { "altLayoutKey": "1" }
+	},
+	"old_hungarian_n_num_five", {
+		"unicode": "10CFB",
+		"groups": ["Old Hungarian"],
+		"options": { "altLayoutKey": "2" }
+	},
+	"old_hungarian_n_num_ten", {
+		"unicode": "10CFC",
+		"groups": ["Old Hungarian"],
+		"options": { "altLayoutKey": "3" }
+	},
+	"old_hungarian_n_num_fifty", {
+		"unicode": "10CFD",
+		"groups": ["Old Hungarian"],
+		"options": { "altLayoutKey": "4" }
+	},
+	"old_hungarian_n_num_one_hundred", {
+		"unicode": "10CFE",
+		"groups": ["Old Hungarian"],
+		"options": { "altLayoutKey": "5" }
+	},
+	"old_hungarian_n_num_one_thousand", {
+		"unicode": "10CFF",
+		"groups": ["Old Hungarian"],
+		"options": { "altLayoutKey": "6" }
+	}
+]

@@ -1,0 +1,38 @@
+[
+	"symbolistics_chi_rho", {
+		"unicode": "2627",
+		"tags": ["Chi Rho", "Chrismon", "Хризма", "Хримсон", "Хи-Ро"],
+		"groups": ["Extra Symbolistics"],
+		"recipe": ["${hel_c_let_h_chi}${hel_c_let_r_rho}"]
+	},
+	"symbolistics_palmula", {
+		"unicode": "2E19",
+		"tags": ["Palmula", "Ramulus", "Palm Branch", "Пальмула", "Пальмовая Ветвь", "Хи-Ро"],
+		"groups": ["Extra Symbolistics"],
+		"recipe": ["palm", "пальм"]
+	},
+	"symbolistics_rod_of_asclepius", {
+		"unicode": "2695",
+		"tags": ["rod of Asclepius", "посох Асклепия"],
+		"groups": ["Extra Symbolistics"],
+		"recipe": ["ascl", "аскл"]
+	},
+	"symbolistics_caduceus", {
+		"unicode": "2624",
+		"tags": ["Caduceus", "Кадуцей"],
+		"groups": ["Extra Symbolistics"],
+		"recipe": ["cadu", "каду"]
+	},
+	"symbolistics_staff_of_hermes", {
+		"unicode": "269A",
+		"tags": ["staff of Hermes", "посох Гермеса"],
+		"groups": ["Extra Symbolistics"],
+		"recipe": ["herms", "гермс"]
+	},
+	"symbolistics_ankh", {
+		"unicode": "2625",
+		"tags": ["Ankh", "Анх"],
+		"groups": ["Extra Symbolistics"],
+		"recipe": ["ankh", "анх"]
+	}
+]

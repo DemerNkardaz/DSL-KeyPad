@@ -1,0 +1,54 @@
+[
+	"cypriot_syllabary_n_syl_[a,e,i,o,u]", {
+		"unicode": ["10800", "10801", "10802", "10803", "10804"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"cypriot_syllabary_n_syl_k_k[a,e,i,o,u]", {
+		"unicode": ["1080A", "1080B", "1080C", "1080D", "1080E"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O", "$ U"] }
+	},
+	"cypriot_syllabary_n_syl_l_l[a,e,i,o,u]", {
+		"unicode": ["1080F", "10810", "10811", "10812", "10813"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O", "$ U"] }
+	},
+	"cypriot_syllabary_n_syl_m_m[a,e,i,o,u]", {
+		"unicode": ["10814", "10815", "10816", "10817", "10818"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O", "$ U"] }
+	},
+	"cypriot_syllabary_n_syl_n_n[a,e,i,o,u]", {
+		"unicode": ["10819", "1081A", "1081B", "1081C", "1081D"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O", "$ U"] }
+	},
+	"cypriot_syllabary_n_syl_p_p[a,e,i,o,u]", {
+		"unicode": ["1081E", "1081F", "10820", "10821", "10822"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O", "$ U"] }
+	},
+	"cypriot_syllabary_n_syl_r_r[a,e,i,o,u]", {
+		"unicode": ["10823", "10824", "10825", "10826", "10827"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O", "$ U"] }
+	},
+	"cypriot_syllabary_n_syl_s_s[a,e,i,o,u]", {
+		"unicode": ["10828", "10829", "1082A", "1082B", "1082C"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O", "$ U"] }
+	},
+	"cypriot_syllabary_n_syl_t_t[a,e,i,o,u]", {
+		"unicode": ["1082D", "1082E", "1082F", "10830", "10831"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O", "$ U"] }
+	},
+	"cypriot_syllabary_n_syl_w_w[a,e,i,o]", {
+		"unicode": ["10832", "10833", "10834", "10835"],
+		"options": { "altLayoutKey": ["$ A", "$ E", "$ I", "$ O"] }
+	},
+	"cypriot_syllabary_n_syl_x_x[a,e]", {
+		"unicode": ["10837", "10838"],
+		"options": { "altLayoutKey": ["$ A", "$ E"] }
+	},
+	"cypriot_syllabary_n_syl_y_j[a,o]", {
+		"unicode": ["10805", "10808"],
+		"options": { "altLayoutKey": ["$ A", "$ O"] }
+	},
+	"cypriot_syllabary_n_syl_z_z[a,o]", {
+		"unicode": ["1083C", "1083F"],
+		"options": { "altLayoutKey": ["$ A", "$ O"] }
+	}
+]

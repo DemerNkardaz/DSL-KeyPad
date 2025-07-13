@@ -1,0 +1,27 @@
+[
+	"line_below", { "proxy": "macron_below",
+		"groups": [], "options": { "noCalc": true, "hidden": true },
+		"symbol": { "category": "Diacritic Mark" }
+	},
+	"kendema", { "proxy": "grave_double",
+		"groups": [], "options": { "noCalc": true, "hidden": true }
+	},
+	"descender", { "proxy": "arrow_down",
+		"groups": [], "options": { "noCalc": true, "hidden": true }
+	},
+	"horizontal_element_left", { "proxy": "arrow_leftright",
+		"groups": [], "options": { "noCalc": true, "hidden": true }
+	},
+	"long_leg", { "proxy": "arrow_down",
+		"groups": [], "options": { "noCalc": true, "hidden": true }
+	},
+	"upturn", { "proxy": "arrow_up",
+		"groups": [], "options": { "noCalc": true, "hidden": true }
+	},
+	"rtl_tail", { "proxy": "arrow_leftdown",
+		"groups": [], "options": { "noCalc": true, "hidden": true }
+	},
+	"trill", { "proxy": "arrow_up",
+		"groups": [], "options": { "noCalc": true, "hidden": true }
+	}
+]

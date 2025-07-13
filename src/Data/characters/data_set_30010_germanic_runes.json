@@ -1,0 +1,494 @@
+[
+	"germanic_runic_n_rune_a_elder_futhark_ansuz", {
+		"unicode": "16A8",
+		"options": { "altLayoutKey": "$" }
+	},
+	"germanic_runic_n_rune_b_elder_futhark_berkanan", {
+		"unicode": "16D2",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "bjarkan"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "beorc"
+		}] }
+	},
+	"germanic_runic_n_rune_d_elder_futhark_dagaz", {
+		"unicode": "16DE",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "daeg"
+		}] }
+	},
+	"germanic_runic_n_rune_e_elder_futhark_ehwaz", {
+		"unicode": "16D6",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "eh"
+		}] }
+	},
+	"germanic_runic_n_rune_f_elder_futhark_fehu", {
+		"unicode": "16A0",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "fe"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "feoh"
+		}] }
+	},
+	"germanic_runic_n_rune_g_elder_futhark_gebo", {
+		"unicode": "16B7",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "gyfu"
+		}] }
+	},
+	"germanic_runic_n_rune_h_elder_futhark_hagalaz", {
+		"unicode": "16BA",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "haegl"
+		}] }
+	},
+	"germanic_runic_n_rune_i_elder_futhark_isaz", {
+		"unicode": "16C1",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "isa"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "is"
+		}] }
+	},
+	"germanic_runic_n_rune_i_elder_futhark_eihwaz", {
+		"unicode": "16C7",
+		"options": { "altLayoutKey": ">+ $" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "eoh"
+		}] }
+	},
+	"germanic_runic_n_rune_y_elder_futhark_jeran", {
+		"unicode": "16C3",
+		"options": { "altLayoutKey": "J" }
+	},
+	"germanic_runic_n_rune_k_elder_futhark_kenaz", {
+		"unicode": "16B2",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "elder_futhark",
+			"letter": "kauna"
+		}] }
+	},
+	"germanic_runic_n_rune_l_elder_futhark_laguz", {
+		"unicode": "16DA",
+		"groups": ["Futhark Runes"],
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "elder_futhark",
+			"letter": "laukaz"
+		}, {
+			"scriptAdditive": "younger_futhark",
+			"letter": "logr"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "lagu"
+		}] }
+	},
+	"germanic_runic_n_rune_m_elder_futhark_mannaz", {
+		"unicode": "16D7",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "mann"
+		}] }
+	},
+	"germanic_runic_n_rune_n_elder_futhark_naudiz", {
+		"unicode": "16BE",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "naudr"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "nyd"
+		}] }
+	},
+	"germanic_runic_n_rune_n_elder_futhark_ingwaz", {
+		"unicode": "16DC",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"germanic_runic_n_rune_o_elder_futhark_othala", {
+		"unicode": "16DF",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "edel"
+		}] }
+	},
+	"germanic_runic_n_rune_p_elder_futhark_pertho", {
+		"unicode": "16C8",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "peord"
+		}] }
+	},
+	"germanic_runic_n_rune_r_elder_futhark_raido", {
+		"unicode": "16B1",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "reid"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "rad"
+		}] }
+	},
+	"germanic_runic_n_rune_s_elder_futhark_sowilo", {
+		"unicode": "16CA",
+		"options": { "altLayoutKey": "$" }
+	},
+	"germanic_runic_n_rune_t_elder_futhark_tiwaz", {
+		"unicode": "16CF",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "tyr"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "tir"
+		}] }
+	},
+	"germanic_runic_n_rune_t_elder_futhark_thurisaz", {
+		"unicode": "16A6",
+		"options": { "altLayoutKey": ">+ $" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "thurs"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "thorn"
+		}] }
+	},
+	"germanic_runic_n_rune_u_elder_futhark_uruz", {
+		"unicode": "16A2",
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "elder_futhark",
+			"letter": "ura"
+		}, {
+			"scriptAdditive": "younger_futhark",
+			"letter": "ur"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "ur"
+		}] }
+	},
+	"germanic_runic_n_rune_w_elder_futhark_wunjo", {
+		"unicode": "16B9",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "wynn"
+		}] }
+	},
+	"germanic_runic_n_rune_z_elder_futhark_algiz", {
+		"unicode": "16C9",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "futhork",
+			"letter": "eolhx"
+		}] }
+	},
+	"germanic_runic_n_rune_a_futhork_ac", {
+		"unicode": "16AA",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"germanic_runic_n_rune_a_futhork_aesc", {
+		"unicode": "16AB",
+		"options": { "altLayoutKey": ">+ $" },
+		"recipe": ["${germanic_runic_n_rune_a_elder_futhark_ansuz}${germanic_runic_n_rune_e_elder_futhark_ehwaz}"]
+	},
+	"germanic_runic_n_rune_c_futhork_cen", {
+		"unicode": "16B3",
+		"options": { "altLayoutKey": "$" }
+	},
+	"germanic_runic_n_rune_e_futhork_ear", {
+		"unicode": "16E0",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"germanic_runic_n_rune_g_futhork_gar", {
+		"unicode": "16B8",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"germanic_runic_n_rune_h_futhork_haegl", {
+		"unicode": "16BB",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"germanic_runic_n_rune_y_futhork_ger", {
+		"unicode": "16C4",
+		"options": { "altLayoutKey": "<+ J" }
+	},
+	"germanic_runic_n_rune_y_futhork_ior", {
+		"unicode": "16E1",
+		"options": { "altLayoutKey": ">+ J" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "ar"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "gerx"
+		}] }
+	},
+	"germanic_runic_n_rune_k_futhork_cealc", {
+		"unicode": "16E4",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"germanic_runic_n_rune_k_futhork_calc", {
+		"unicode": "16E3",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"germanic_runic_n_rune_n_futhork_ing", {
+		"unicode": "16DD",
+		"tags": ["футорк инг", "futhork ing"],
+		"groups": ["Futhork Runes"],
+		"options": { "altLayoutKey": "<+ N" }
+	},
+	"germanic_runic_n_rune_o_futhork_os", {
+		"unicode": "16A9",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"germanic_runic_n_rune_k_futhork_cweorth", {
+		"unicode": "16E2",
+		"options": { "altLayoutKey": "Q" }
+	},
+	"germanic_runic_n_rune_s_futhork_sigel", {
+		"unicode": "16CB",
+		"options": { "altLayoutKey": "<+ $" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "younger_futhark",
+			"letter": "sol"
+		}] }
+	},
+	"germanic_runic_n_rune_s_futhork_stan", {
+		"unicode": "16E5",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"germanic_runic_n_rune_y_futhork_yr", {
+		"unicode": "16A3",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"germanic_runic_n_rune_a_younger_futhark_ar", {
+		"unicode": "16C5",
+		"tags": ["младший футарк йера", "younger futhark jera", "younger futhark ar", "younger futhark ár"],
+		"groups": ["Younger Futhark Runes"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"germanic_runic_n_rune_a_younger_futhark_ar_short_twig", {
+		"unicode": "16C6",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "_ar$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_b_younger_futhark_bjarkan_short_twig", {
+		"unicode": "16D3",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "bjarkan$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_h_younger_futhark_hagall", {
+		"unicode": "16BC",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"germanic_runic_n_rune_h_younger_futhark_hagall_short_twig", {
+		"unicode": "16BD",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "hagall$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_k_younger_futhark_kaun", {
+		"unicode": "16B4",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"germanic_runic_n_rune_m_younger_futhark_madr", {
+		"unicode": "16D8",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"germanic_runic_n_rune_m_younger_futhark_madr_short_twig", {
+		"unicode": "16D9",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "madr$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_n_younger_futhark_naudr_short_twig", {
+		"unicode": "16BF",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "naudr$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_o_younger_futhark_oss", {
+		"unicode": "16AC",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"germanic_runic_n_rune_o_younger_futhark_oss_short_twig", {
+		"unicode": "16AD",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "oss$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_s_younger_futhark_sol_short_twig", {
+		"unicode": "16CC",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "sol$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_t_younger_futhark_tyr_short_twig", {
+		"unicode": "16D0",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "tyr$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_y_younger_futhark_ur", {
+		"unicode": "16A4",
+		"options": { "altLayoutKey": "$" },
+		"recipe": ["${germanic_runic_n_rune_u_elder_futhark_uruz}."]
+	},
+	"germanic_runic_n_rune_y_younger_futhark_yr", {
+		"unicode": "16E6",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"germanic_runic_n_rune_y_younger_futhark_yr_short_twig", {
+		"unicode": "16E7",
+		"options": { "altLayoutKey": ">!<+ $", "referenceLocale": "yr$" },
+		"symbol": { "beforeLetter": "short_twig" }
+	},
+	"germanic_runic_n_rune_y_younger_futhark_icelandic_yr", {
+		"unicode": "16E8",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"germanic_runic_n_rune_almanac_arlaug", {
+		"unicode": "16EE",
+		"options": { "altLayoutKey": ">! 7" }
+	},
+	"germanic_runic_n_rune_almanac_tvimadur", {
+		"unicode": "16EF",
+		"options": { "altLayoutKey": ">! 8" }
+	},
+	"germanic_runic_n_rune_almanac_belgthor", {
+		"unicode": "16F0",
+		"options": { "altLayoutKey": ">! 9" }
+	},
+	"germanic_runic_n_rune_e_later_younger_futhark", {
+		"unicode": "16C2",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"germanic_runic_n_rune_d_later_younger_futhark_eth", {
+		"unicode": "16A7",
+		"options": { "altLayoutKey": ">! $" },
+		"recipe": ["${germanic_runic_n_rune_t_elder_futhark_thurisaz}."]
+	},
+	"germanic_runic_n_rune_d_later_younger_futhark", {
+		"unicode": "16D1",
+		"options": { "altLayoutKey": ">!<+ $" }
+	},
+	"germanic_runic_n_rune_l_later_younger_futhark", {
+		"unicode": "16DB",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"germanic_runic_n_rune_p_later_younger_futhark", {
+		"unicode": "16D4",
+		"options": { "altLayoutKey": ">! $" },
+		"recipe": ["${germanic_runic_n_rune_b_elder_futhark_berkanan}:"]
+	},
+	"germanic_runic_n_rune_v_later_younger_futhark", {
+		"unicode": "16A1",
+		"options": { "altLayoutKey": "$" },
+		"recipe": ["${germanic_runic_n_rune_f_elder_futhark_fehu}${arrow_up}."]
+	},
+	"germanic_runic_n_rune_c_medieval", {
+		"unicode": "16CD",
+		"options": { "altLayoutKey": ">!<! $" }
+	},
+	"germanic_runic_n_rune_g_medieval", {
+		"unicode": "16B5",
+		"options": { "altLayoutKey": ">!<! $" },
+		"recipe": ["${germanic_runic_n_rune_k_younger_futhark_kaun}${arrow_up}."]
+	},
+	"germanic_runic_n_rune_k_medieval_open", {
+		"unicode": "16D5",
+		"options": { "altLayoutKey": ">!<! $" },
+		"symbol": { "beforeLetter": "open" }
+	},
+	"germanic_runic_n_rune_n_medieval_en", {
+		"unicode": "16C0",
+		"options": { "altLayoutKey": ">!<! $" }
+	},
+	"germanic_runic_n_rune_n_medieval_eng", {
+		"unicode": "16B6",
+		"options": { "altLayoutKey": ">!<!<+ $" },
+		"recipe": ["${germanic_runic_n_rune_k_younger_futhark_kaun}${arrow_left}."]
+	},
+	"germanic_runic_n_rune_o_medieval_on", {
+		"unicode": "16B0",
+		"options": { "altLayoutKey": ">!<! $" }
+	},
+	"germanic_runic_n_rune_o_medieval", {
+		"unicode": "16AE",
+		"options": { "altLayoutKey": ">!<!>+ $" }
+	},
+	"germanic_runic_n_rune_w_medieval", {
+		"unicode": "16A5",
+		"options": { "altLayoutKey": ">!<! $" }
+	},
+	"germanic_runic_n_rune_x_medieval", {
+		"unicode": "16EA",
+		"options": { "altLayoutKey": ">!<! $" }
+	},
+	"germanic_runic_n_rune_z_medieval", {
+		"unicode": "16CE",
+		"options": { "altLayoutKey": ">!<! $" }
+	},
+	"germanic_runic_n_rune_o_franks_casket_os", {
+		"unicode": "16F4",
+		"options": { "altLayoutKey": ">!<!<+ $" },
+		"symbol": { "font": "Catrinity"}
+	},
+	"germanic_runic_n_rune_i_franks_casket_is", {
+		"unicode": "16F5",
+		"options": { "altLayoutKey": ">!<!<+ $" },
+		"symbol": { "font": "Catrinity"}
+	},
+	"germanic_runic_n_rune_e_franks_casket_eh", {
+		"unicode": "16F6",
+		"options": { "altLayoutKey": ">!<!<+ $" },
+		"symbol": { "font": "Catrinity"}
+	},
+	"germanic_runic_n_rune_a_franks_casket_ac", {
+		"unicode": "16F7",
+		"options": { "altLayoutKey": ">!<!<+ $" },
+		"symbol": { "font": "Catrinity"}
+	},
+	"germanic_runic_n_rune_a_franks_casket_aesc", {
+		"unicode": "16F8",
+		"options": { "altLayoutKey": ">!<!<+>+ $" },
+		"symbol": { "font": "Catrinity"}
+	},
+	"runic_single_punctuation", {
+		"unicode": "16EB",
+		"tags": ["руническая одиночное препинание", "runic single punctuation"],
+		"groups": ["Runic Punctuation"],
+		"options": { "altLayoutKey": ">! ." }
+	},
+	"runic_multiple_punctuation", {
+		"unicode": "16EC",
+		"tags": ["руническое двойное препинание", "runic multiple punctuation"],
+		"groups": ["Runic Punctuation"],
+		"options": { "altLayoutKey": ">! Space" }
+	},
+	"runic_cruciform_punctuation", {
+		"unicode": "16ED",
+		"tags": ["руническое крестовидное препинание", "runic cruciform punctuation"],
+		"groups": ["Runic Punctuation"],
+		"options": { "altLayoutKey": ">! ," }
+	}
+]

@@ -1,0 +1,91 @@
+[
+	"&ipa_n_sym_stress_[primary,secondary]", {
+		"&data": { "originScript": "&ipa", "script": "&ipa" },
+		"reference": {
+			"name": "line_vertical[,_below]",
+			"as": "modifier"
+		},
+		"groups": ["IPA"],
+		"tags": [
+			["primary stress", "знак ударения"],
+			["secondary stress", "знак дополнительного ударения"]
+		],
+		"options": { "noCalc": true, "altLayoutKey": ["'", ">! '"], "layoutTitles": true }
+	},
+	"&ipa_n_sym_[light_aspiration,ejective_consonant]", {
+		"&data": { "originScript": "&ipa", "script": "&ipa" },
+		"reference": {
+			"name": "[comma_above_turned,apostrophe]",
+			"as": "modifier"
+		},
+		"groups": ["IPA"],
+		"tags": [
+			["light aspiration", "лёгкое придыхание"],
+			["ejective consonant", "абруптивный согласный"]
+		],
+		"options": { "noCalc": true, "altLayoutKey": [">+ <", ">+ >"], "layoutTitles": true }
+	},
+	"&ipa_k_lig_oe", {
+		"&data": { "originScript": "&ipa", "script": "&ipa" },
+		"reference": {
+			"name": "lat_c_lig_oe",
+			"as": "smallCapital",
+			"include": { "modifier": "smallCapitalModifier"}
+		},
+		"groups": ["IPA"],
+		"tags": ["open front rounded vowel", "огублённый гласный переднего ряда нижнего подъёма"],
+		"options": { "altLayoutKey": "c*>!<!<+ /O/", "layoutTitles": true }
+	},
+	"&ipa_k_let_[b,g,h,i,l,n,r,y]", {
+		"&data": { "originScript": "&ipa", "script": "&ipa" },
+		"reference": {
+			"name": "lat_c_let_[b,g,h,i,l,n,r,y]",
+			"as": "smallCapital",
+			"include": {"modifier": "smallCapitalModifier"}
+		},
+		"groups": ["IPA"],
+		"tags": [
+			["voiced bilabial trill", "губно-губной дрожащий согласный"],
+			["voiced uvular plosive", "звонкий увулярный взрывной согласный"],
+			["voiceless epiglottal fricative", "глухой эпиглоттальный спирант"],
+			["near-close near-front unrounded vowel", "ненапряжённый неогублённый гласный переднего ряда верхнего подъёма"],
+			["voiced velar lateral approximant", "звонкий велярный латеральный аппроксимант"],
+			["voiced uvular nasal", "увулярный носовой согласный"],
+			["voiced uvular trill", "увулярный дрожащий согласный"],
+			["near-close near-front rounded vowel", "ненапряжённый огублённый гласный переднего ряда верхнего подъёма"]
+		],
+		"options": { "noCalc": true, "altLayoutKey": "c*>! $", "layoutTitles": true }
+	},
+	"&ipa_s_let_[b_beta,h_chi]", {
+		"&data": { "originScript": "&ipa", "script": "&ipa" },
+		"reference": {
+			"params": ["Referencing_Rule_Latin", "IPA", true, "bool"],
+			"if": true,
+			"then": "lat_s_let_[b_beta,h_chi]",
+			"else": "hel_s_let_[b_beta,h_chi]"
+		},
+		"tags": [
+			["voiced bilabial fricative", "звонкий губно-губной спирант"],
+			["voiceless uvular fricative", "глухой увулярный фрикатив"]
+		],
+		"groups": ["IPA"],
+		"options": { "noCalc": true, "layoutTitles": true, "altLayoutKey": ">! ~" },
+		"recipe": []
+	},
+	"&ipa_s_let_t_theta", {
+		"&data": { "originScript": "&ipa", "script": "&ipa" },
+		"reference": "hel_s_let_t_theta",
+		"tags": ["voiceless dental fricative", "глухой зубной щелевой согласный"],
+		"groups": ["IPA"],
+		"options": { "noCalc": true, "layoutTitles": true, "altLayoutKey": ">! ~" },
+		"recipe": []
+	},
+	"ipa_s_modifiers", {
+		"unicode": "02B2",
+		"groups": ["IPA"],
+		"options": { "noCalc": true, "altLayoutKey": "F1 On/Off + a-z" },
+		"symbol": {
+			"alt": "◌\u1D43◌\u1D47◌\u1D9C◌\u1D48◌\u1D49◌\u1DA0◌\u1D4D◌\u02B0◌\u02B2◌\u1D4F◌\u02E1"
+		}
+	}
+]

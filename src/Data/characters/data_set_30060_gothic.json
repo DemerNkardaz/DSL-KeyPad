@@ -1,0 +1,112 @@
+[
+	"gothic_n_let_a_ahza", {
+		"unicode": "10330",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_b_bairkan", {
+		"unicode": "10331",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_d_dagz", {
+		"unicode": "10333",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_e_aihvus", {
+		"unicode": "10334",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_f_faihu", {
+		"unicode": "10346",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_g_giba", {
+		"unicode": "10332",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_h_hagl", {
+		"unicode": "10337",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_h_hwair", {
+		"unicode": "10348",
+		"options": { "altLayoutKey": ">! $ | V" }
+	},
+	"gothic_n_let_i_eis", {
+		"unicode": "10339",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_k_kusma", {
+		"unicode": "1033A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_l_lagus", {
+		"unicode": "1033B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_m_manna", {
+		"unicode": "1033C",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_n_nauths", {
+		"unicode": "1033D",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_o_othal", {
+		"unicode": "10349",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_p_pairthra", {
+		"unicode": "10340",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_q_qairthra", {
+		"unicode": "10335",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_r_raida", {
+		"unicode": "10342",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_s_sugil", {
+		"unicode": "10343",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_t_teiws", {
+		"unicode": "10344",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_t_thiuth", {
+		"unicode": "10338",
+		"options": { "altLayoutKey": ">! $ | C" }
+	},
+	"gothic_n_let_u_urus", {
+		"unicode": "1033F",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_w_winja", {
+		"unicode": "10345",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_k_iggws", {
+		"unicode": "10347",
+		"options": { "altLayoutKey": "X" }
+	},
+	"gothic_n_let_y_jer", {
+		"unicode": "1033E",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_let_z_ezek", {
+		"unicode": "10336",
+		"options": { "altLayoutKey": "$" }
+	},
+	"gothic_n_num_ninety", {
+		"unicode": "10341",
+		"groups": ["Gothic"],
+		"options": { "altLayoutKey": ">! P" }
+	},
+	"gothic_n_num_nine_hundred", {
+		"unicode": "1034A",
+		"groups": ["Gothic"],
+		"options": { "altLayoutKey": ">! S" }
+	}
+]

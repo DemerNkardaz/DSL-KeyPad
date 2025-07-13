@@ -1,0 +1,178 @@
+[
+	"old_turkic_n_rune_a_[orkhon,yenisei]_a", {
+		"unicode": ["10C00", "10C01"],
+		"options": { "altLayoutKey": ["A", "c*>! A"] }
+	},
+	"old_turkic_n_rune_a_yenisei_ae", {
+		"unicode": "10C02",
+		"options": { "altLayoutKey": ">! A" }
+	},
+	"old_turkic_n_rune_e_yenisei", {
+		"unicode": "10C05",
+		"options": { "altLayoutKey": "E" }
+	},
+	"old_turkic_n_rune_i_[orkhon,yenisei]", {
+		"unicode": ["10C03", "10C04"],
+		"options": { "altLayoutKey": ["I", "c*>! I"] }
+	},
+	"old_turkic_n_rune_o_orkhon", {
+		"unicode": "10C06",
+		"options": { "altLayoutKey": "O" }
+	},
+	"old_turkic_n_rune_o_[orkhon,yenisei]_oe", {
+		"unicode": ["10C07", "10C08"],
+		"options": { "altLayoutKey": [">! O", "c*>! O"] }
+	},
+	"old_turkic_n_rune_c_[orkhon,yenisei]_ec", {
+		"unicode": ["10C32", "10C33"],
+		"options": { "altLayoutKey": ["C", "c* C"] }
+	},
+	"old_turkic_n_rune_m_orkhon_em", {
+		"unicode": "10C22",
+		"options": { "altLayoutKey": "M" }
+	},
+	"old_turkic_n_rune_n_orkhon_eng", {
+		"unicode": "10C2D",
+		"options": { "altLayoutKey": "<! N" }
+	},
+	"old_turkic_n_rune_p_orkhon_ep", {
+		"unicode": "10C2F",
+		"options": { "altLayoutKey": "P" }
+	},
+	"old_turkic_n_rune_s_[orkhon,yenisei]_esh", {
+		"unicode": ["10C41", "10C42"],
+		"options": { "altLayoutKey": ["<! S", "c*<! S"] }
+	},
+	"old_turkic_n_rune_z_[orkhon,yenisei]_ez", {
+		"unicode": ["10C14", "10C15"],
+		"options": { "altLayoutKey": ["Z", "c* Z"] }
+	},
+	"old_turkic_n_rune_t_orkhon_elt", {
+		"unicode": "10C21",
+		"options": { "altLayoutKey": ">!>+ T" }
+	},
+	"old_turkic_n_rune_n_[orkhon,yenisei]_enc", {
+		"unicode": ["10C28", "10C29"],
+		"options": { "altLayoutKey": [">+ N", "c*>+ N"] }
+	},
+	"old_turkic_n_rune_n_[orkhon,yenisei]_eny", {
+		"unicode": ["10C2A", "10C2B"],
+		"options": { "altLayoutKey": ["<+ N", "c*<+ N"] }
+	},
+	"old_turkic_n_rune_n_[orkhon,yenisei]_ent", {
+		"unicode": ["10C26", "10C27"],
+		"options": { "altLayoutKey": [">!>+ N", "c*>!>+ N"] }
+	},
+	"old_turkic_n_rune_r_orkhon_bash", {
+		"unicode": "10C48",
+		"options": { "altLayoutKey": "<! R" }
+	},
+	"old_turkic_n_rune_b_[orkhon,yenisei]_ab", {
+		"unicode": ["10C09", "10C0A"],
+		"options": { "altLayoutKey": ["B", "c* B"] }
+	},
+	"old_turkic_n_rune_b_[orkhon,yenisei]_aeb", {
+		"unicode": ["10C0B", "10C0C"],
+		"options": { "altLayoutKey": [">! B", "c*>! B"] }
+	},
+	"old_turkic_n_rune_d_[orkhon,yenisei]_ad", {
+		"unicode": ["10C11", "10C12"],
+		"options": { "altLayoutKey": ["D", "c* D"] }
+	},
+	"old_turkic_n_rune_d_orkhon_aed", {
+		"unicode": "10C13",
+		"options": { "altLayoutKey": ">! D" }
+	},
+	"old_turkic_n_rune_l_[orkhon,yenisei]_al", {
+		"unicode": ["10C1E", "10C1F"],
+		"options": { "altLayoutKey": ["L", "c* L"] }
+	},
+	"old_turkic_n_rune_l_orkhon_ael", {
+		"unicode": "10C20",
+		"options": { "altLayoutKey": ">! L" }
+	},
+	"old_turkic_n_rune_n_orkhon_an", {
+		"unicode": "10C23",
+		"options": { "altLayoutKey": "N" }
+	},
+	"old_turkic_n_rune_n_[orkhon,yenisei]_aen", {
+		"unicode": ["10C24", "10C25"],
+		"options": { "altLayoutKey": [">! N", "c*>! N"] }
+	},
+	"old_turkic_n_rune_r_[orkhon,yenisei]_ar", {
+		"unicode": ["10C3A", "10C3B"],
+		"options": { "altLayoutKey": ["R", "c* R"] }
+	},
+	"old_turkic_n_rune_r_orkhon_aer", {
+		"unicode": "10C3C",
+		"options": { "altLayoutKey": ">! R" }
+	},
+	"old_turkic_n_rune_s_orkhon_as", {
+		"unicode": "10C3D",
+		"options": { "altLayoutKey": "S" }
+	},
+	"old_turkic_n_rune_s_orkhon_aes", {
+		"unicode": "10C3E",
+		"options": { "altLayoutKey": ">! S" }
+	},
+	"old_turkic_n_rune_t_[orkhon,yenisei]_at", {
+		"unicode": ["10C43", "10C44"],
+		"options": { "altLayoutKey": ["T", "c* T"] }
+	},
+	"old_turkic_n_rune_t_[orkhon,yenisei]_aet", {
+		"unicode": ["10C45", "10C46"],
+		"options": { "altLayoutKey": [">! T", "c*>! T"] }
+	},
+	"old_turkic_n_rune_y_[orkhon,yenisei]_ay", {
+		"unicode": ["10C16", "10C17"],
+		"options": { "altLayoutKey": ["Y", "c* Y"] }
+	},
+	"old_turkic_n_rune_y_[orkhon,yenisei]_aey", {
+		"unicode": ["10C18", "10C19"],
+		"options": { "altLayoutKey": [">! Y, J", "c*>! Y, J"] }
+	},
+	"old_turkic_n_rune_g_[orkhon,yenisei]_ag", {
+		"unicode": ["10C0D", "10C0E"],
+		"options": { "altLayoutKey": ["G", "c* G"] }
+	},
+	"old_turkic_n_rune_g_[orkhon,yenisei]_aeg", {
+		"unicode": ["10C0F", "10C10"],
+		"options": { "altLayoutKey": [">! G", "c*>! G"] }
+	},
+	"old_turkic_n_rune_k_[orkhon,yenisei]_aq", {
+		"unicode": ["10C34", "10C35"],
+		"options": { "altLayoutKey": ["K", "c* K"] }
+	},
+	"old_turkic_n_rune_k_[orkhon,yenisei]_aek", {
+		"unicode": ["10C1A", "10C1B"],
+		"options": { "altLayoutKey": [">! K", "c*>! K"] }
+	},
+	"old_turkic_n_rune_q_[orkhon,yenisei]_oq", {
+		"unicode": ["10C38", "10C39"],
+		"options": { "altLayoutKey": ["Q", "c* Q"] }
+	},
+	"old_turkic_n_rune_q_[orkhon,yenisei]_oek", {
+		"unicode": ["10C1C", "10C1D"],
+		"options": { "altLayoutKey": [">! Q", "c*>! Q"] }
+	},
+	"old_turkic_n_rune_q_[orkhon,yenisei]_iq", {
+		"unicode": ["10C36", "10C37"],
+		"options": { "altLayoutKey": ["<! Q", "c*<! Q"] }
+	},
+	"old_turkic_n_rune_c_orkhon_ic", {
+		"unicode": "10C31",
+		"options": { "altLayoutKey": ">! C" }
+	},
+	"old_turkic_n_rune_a_[orkhon,yenisei]_ash", {
+		"unicode": ["10C3F", "10C40"],
+		"options": { "altLayoutKey": ["<! A", "c*<! A"] }
+	},
+	"old_turkic_n_rune_p_orkhon_op", {
+		"unicode": "10C30",
+		"options": { "altLayoutKey": "<! P" }
+	},
+	"old_turkic_n_rune_t_orkhon_ot", {
+		"unicode": "10C47",
+		"options": { "altLayoutKey": "<! $" }
+	}
+]

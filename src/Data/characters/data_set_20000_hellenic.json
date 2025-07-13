@@ -1,0 +1,1970 @@
+[
+	"tonos", {
+		"unicode": "0384",
+		"tags": ["tonos", "тонос", "τονος"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! Α" }
+	},
+	"oxia", {
+		"unicode": "1FFD",
+		"tags": ["oxia", "оксия", "οξεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! Ο" }
+	},
+	"varia", {
+		"unicode": "1FEF",
+		"tags": ["varia", "вария", "βαρεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! Ω" }
+	},
+	"dasia", {
+		"unicode": "1FFE",
+		"tags": ["dasia", "дасия", "δασεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! <" }
+	},
+	"psili", {
+		"unicode": "1FBF",
+		"tags": ["psili", "псили", "ψιλη"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! >" }
+	},
+	"perispomeni", {
+		"unicode": "1FC0",
+		"tags": ["perispomeni", "периспомени", "περισπωμενη"],
+		"groups": ["Hellenic Diacritics"],
+		"alterations": { "combining": "0342" },
+		"options": { "altLayoutKey": "<^<! Π" }
+	},
+	"prosgegrammeni", {
+		"unicode": "1FBE",
+		"tags": ["prosgegrammeni", "просгеграммени", "προσγεγραμμενη"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "c*<^<! Y" }
+	},
+	"ypogegrammeni", {
+		"unicode": "037A",
+		"tags": ["ypogegrammeni", "ипогеграммени", "υπογεγραμμενη"],
+		"groups": ["Hellenic Diacritics"],
+		"alterations": { "combining": "0345" },
+		"options": { "altLayoutKey": "<^<! Υ" }
+	},
+	"dialytika", {
+		"unicode": "00A8",
+		"tags": ["dialytika", "диалитика", "διαλυτικα"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "noCalc": true, "altLayoutKey": "<^<! Δ" }
+	},
+	"vrachy", {
+		"unicode": "02D8",
+		"tags": ["vrachy", "врачи", "βραχυ"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "noCalc": true, "altLayoutKey": "<^<! Β" }
+	},
+	"koronis", {
+		"unicode": "1FBD",
+		"tags": ["koronis", "коронис", "κορωνις"],
+		"groups": ["Hellenic Diacritics"],
+		"alterations": { "combining": "0343" },
+		"options": { "noCalc": true, "altLayoutKey": "<^<! Κ" }
+	},
+	"dasia_and_varia", {
+		"unicode": "1FDD",
+		"tags": ["dasia and varia", "дасия и вария", "δασεια βαρεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! Ϟ", "localeCombineAnd": true },
+		"recipe": ["${dasia}${varia}", "${varia}${dasia}"]
+	},
+	"psili_and_varia", {
+		"unicode": "1FCD",
+		"tags": ["psili and varia", "псили и вария", "ψιλη βαρεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<!<+ Ϟ", "localeCombineAnd": true },
+		"recipe": ["${psili}${varia}", "${varia}${psili}"]
+	},
+	"dasia_and_oxia", {
+		"unicode": "1FDE",
+		"tags": ["dasia and oxia", "дасия и оксия", "δασεια οξεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! Ϝ", "localeCombineAnd": true },
+		"recipe": ["${dasia}${oxia}", "${oxia}${dasia}"]
+	},
+	"psili_and_oxia", {
+		"unicode": "1FCE",
+		"tags": ["psili and oxia", "псили и оксия", "ψιλη οξεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<!<+ Ϝ", "localeCombineAnd": true },
+		"recipe": ["${psili}${oxia}", "${oxia}${psili}"]
+	},
+	"dasia_and_perispomeni", {
+		"unicode": "1FDF",
+		"tags": ["dasia and perispomeni", "дасия и периспомени", "δασεια περισπωμενη"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! Ε", "localeCombineAnd": true },
+		"recipe": ["${dasia}${perispomeni}", "${perispomeni}${dasia}"]
+	},
+	"psili_and_perispomeni", {
+		"unicode": "1FCF",
+		"tags": ["psili and perispomeni", "псили и периспомени", "ψιλη περισπωμενη"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<!<+ Ε", "localeCombineAnd": true },
+		"recipe": ["${psili}${perispomeni}", "${perispomeni}${psili}"]
+	},
+	"dialytika_and_tonos", {
+		"unicode": "0385",
+		"tags": ["dialytika and tonos", "диалитика и тонос", "διαλυτικα τονος"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! Ζ", "localeCombineAnd": true },
+		"alterations": { "combining": "0344" },
+		"recipe": ["${dialytika}${tonos}", "${tonos}${dialytika}"]
+	},
+	"dialytika_and_oxia", {
+		"unicode": "1FEE",
+		"tags": ["dialytika and oxia", "диалитика и оксия", "διαλυτικα οξεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<!<+ Ζ", "localeCombineAnd": true },
+		"recipe": ["${dialytika}${oxia}", "${oxia}${dialytika}"]
+	},
+	"dialytika_and_varia", {
+		"unicode": "1FED",
+		"tags": ["dialytika and varia", "диалитика и вария", "διαλυτικα βαρεια"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<! Χ", "localeCombineAnd": true },
+		"recipe": ["${dialytika}${varia}", "${varia}${dialytika}"]
+	},
+	"dialytika_and_perispomeni", {
+		"unicode": "1FC1",
+		"tags": ["dialytika and perispomeni", "диалитика и периспомени", "διαλυτικα περισπωμενη"],
+		"groups": ["Hellenic Diacritics"],
+		"options": { "altLayoutKey": "<^<!<+ Χ", "localeCombineAnd": true },
+		"recipe": ["${dialytika}${perispomeni}", "${perispomeni}${dialytika}"]
+	},
+	"hel_n_sym_ano_teleia", {
+		"unicode": "0387",
+		"tags": ["ελληνικη ανω τελεια"],
+		"groups": ["Hellenic Punctuation"],
+		"options": { "altLayoutKey": ">! ;" }
+	},
+	"hel_n_sym_erotimatiko", {
+		"unicode": "037E",
+		"tags": ["ελληνικη ερωτηματικο"],
+		"groups": ["Hellenic Punctuation"],
+		"options": { "altLayoutKey": "<! ;" }
+	},
+	"hel_n_sym_hypodiastole", {
+		"unicode": "2E12",
+		"tags": ["ελληνικη υποδιαστολη"],
+		"groups": ["Hellenic Punctuation"],
+		"options": { "altLayoutKey": ">!<! `" }
+	},
+	"hel_n_sym_paragraphos[,_forked,_forked_reversed]", {
+		"unicode": ["2E0F", "2E10", "2E11"],
+		"tags": [
+			["ελληνικη παραγραφος"],
+			["ελληνικη παραγραφος διακλαδωμενη"],
+			["ελληνικη παραγραφος διακλαδωμενη αντεστραμμενη"]
+		],
+		"groups": ["Hellenic Punctuation"],
+		"options": {
+			"altLayoutKey": [">! \\", ">!>+ \\", ">!<+ \\"],
+			"useLetterLocale": "paragraphos$"
+		},
+		"symbol": {
+			"beforeLetter": [
+				"",
+				"forked::2",
+				"reversed::2,forked::2"
+			]
+		}
+	},
+	"hel_n_sym_editorial_koronis", {
+		"unicode": "2E0E",
+		"tags": ["ελληνικη κρασις κορωνις"],
+		"groups": ["Hellenic Punctuation"],
+		"options": { "altLayoutKey": "<! 2" }
+	},
+	"hel_n_sym_ancora_[downwards,upwards]", {
+		"unicode": ["2E15", "2E14"],
+		"tags": [
+			["ελληνικη προς τα κατω αγκυρα"],
+			["ελληνικη προς τα πανω αγκυρα"]
+		],
+		"groups": ["Hellenic Punctuation"],
+		"options": {
+			"altLayoutKey": [">!<! 2", "c*>!<! 2"],
+			"useLetterLocale": "ancora$"
+		},
+		"symbol": {
+			"beforeLetter": [
+				"downwards::1",
+				"upwards::1"
+			]
+		}
+	},
+	"hel_n_sym_dotted_obelos", {
+		"unicode": "2E13",
+		"tags": ["ελληνικη οβελος"],
+		"groups": ["Hellenic Punctuation"],
+		"options": { "altLayoutKey": "<! 5" }
+	},
+	"hel_n_sym_diple", {
+		"unicode": "2E16",
+		"tags": ["ελληνικη διπλη"],
+		"groups": ["Hellenic Punctuation"],
+		"options": { "altLayoutKey": ">+ >" }
+	},
+	"hel_n_sym_numeral_sign[,_lower]", {
+		"unicode": ["0374", "0375"],
+		"groups": ["Hellenic Specials"],
+		"options": { "altLayoutKey": ["c*>! '", ">! '"] }
+	},
+	"hel_[c,s]_let_a_alpha", {
+		"unicode": ["0391", "03B1"],
+		"alterations": [{
+			"bold": "1D6A8",
+			"italic": "1D6E2",
+			"italicBold": "1D71C",
+			"sansSerifBold": "1D756",
+			"sansSerifItalicBold": "1D790"
+		}, {
+			"bold": "1D6C2",
+			"italic": "1D6FC",
+			"italicBold": "1D736",
+			"sansSerifBold": "1D770",
+			"sansSerifItalicBold": "1D7AA"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_b_beta", {
+		"unicode": ["0392", "03B2"],
+		"alterations": [{
+			"bold": "1D6A9",
+			"italic": "1D6E3",
+			"italicBold": "1D71D",
+			"sansSerifBold": "1D757",
+			"sansSerifItalicBold": "1D791"
+		}, {
+			"modifier": "1D5D",
+			"subscript": "1D66",
+			"bold": "1D6C3",
+			"italic": "1D6FD",
+			"italicBold": "1D737",
+			"sansSerifBold": "1D771",
+			"sansSerifItalicBold": "1D7AB"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_g_gamma", {
+		"unicode": ["0393", "03B3"],
+		"alterations": [{
+			"bold": "1D6AA",
+			"italic": "1D6E4",
+			"italicBold": "1D71E",
+			"sansSerifBold": "1D758",
+			"sansSerifItalicBold": "1D792",
+			"smallCapital": "1D26"
+		}, {
+			"modifier": "1D5E",
+			"subscript": "1D67",
+			"bold": "1D6C4",
+			"italic": "1D6FE",
+			"italicBold": "1D738",
+			"sansSerifBold": "1D772",
+			"sansSerifItalicBold": "1D7AC"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_d_delta", {
+		"unicode": ["0394", "03B4"],
+		"alterations": [{
+			"bold": "1D6AB",
+			"italic": "1D6E5",
+			"italicBold": "1D71F",
+			"sansSerifBold": "1D759",
+			"sansSerifItalicBold": "1D793"
+		}, {
+			"modifier": "1D5F",
+			"bold": "1D6C5",
+			"italic": "1D6FF",
+			"italicBold": "1D739",
+			"sansSerifBold": "1D773",
+			"sansSerifItalicBold": "1D7AD"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_e_epsilon", {
+		"unicode": ["0395", "03B5"],
+		"alterations": [{
+			"bold": "1D6AC",
+			"italic": "1D6E6",
+			"italicBold": "1D720",
+			"sansSerifBold": "1D75A",
+			"sansSerifItalicBold": "1D794"
+		}, {
+			"bold": "1D6C6",
+			"italic": "1D700",
+			"italicBold": "1D73A",
+			"sansSerifBold": "1D774",
+			"sansSerifItalicBold": "1D7AE"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_z_zeta", {
+		"unicode": ["0396", "03B6"],
+		"alterations": [{
+			"bold": "1D6AD",
+			"italic": "1D6E7",
+			"italicBold": "1D721",
+			"sansSerifBold": "1D75B",
+			"sansSerifItalicBold": "1D795"
+		}, {
+			"bold": "1D6C7",
+			"italic": "1D701",
+			"italicBold": "1D73B",
+			"sansSerifBold": "1D775",
+			"sansSerifItalicBold": "1D7AF"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_h_eta", {
+		"unicode": ["0397", "03B7"],
+		"alterations": [{
+			"bold": "1D6AE",
+			"italic": "1D6E8",
+			"italicBold": "1D722",
+			"sansSerifBold": "1D75C",
+			"sansSerifItalicBold": "1D796"
+		}, {
+			"bold": "1D6C8",
+			"italic": "1D702",
+			"italicBold": "1D73C",
+			"sansSerifBold": "1D776",
+			"sansSerifItalicBold": "1D7B0"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_t_theta", {
+		"unicode": ["0398", "03B8"],
+		"alterations": [{
+			"bold": "1D6AF",
+			"italic": "1D6E9",
+			"italicBold": "1D723",
+			"sansSerifBold": "1D75D",
+			"sansSerifItalicBold": "1D797"
+		}, {
+			"modifier": "1DBF",
+			"bold": "1D6C9",
+			"italic": "1D703",
+			"italicBold": "1D73D",
+			"sansSerifBold": "1D777",
+			"sansSerifItalicBold": "1D7B1"
+		}],
+		"options": { "altLayoutKey": "\\U\\ | >! $" }
+	},
+	"hel_[c,s]_let_i_iota", {
+		"unicode": ["0399", "03B9"],
+		"alterations": [{
+			"bold": "1D6B0",
+			"italic": "1D6EA",
+			"italicBold": "1D724",
+			"sansSerifBold": "1D75E",
+			"sansSerifItalicBold": "1D798"
+		}, {
+			"bold": "1D6CA",
+			"italic": "1D704",
+			"italicBold": "1D73E",
+			"sansSerifBold": "1D778",
+			"sansSerifItalicBold": "1D7B2"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_k_kappa", {
+		"unicode": ["039A", "03BA"],
+		"alterations": [{
+			"bold": "1D6B1",
+			"italic": "1D6EB",
+			"italicBold": "1D725",
+			"sansSerifBold": "1D75F",
+			"sansSerifItalicBold": "1D799"
+		}, {
+			"bold": "1D6CB",
+			"italic": "1D705",
+			"italicBold": "1D73F",
+			"sansSerifBold": "1D779",
+			"sansSerifItalicBold": "1D7B3"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_l_lambda", {
+		"unicode": ["039B", "03BB"],
+		"alterations": [{
+			"bold": "1D6B2",
+			"italic": "1D6EC",
+			"italicBold": "1D726",
+			"sansSerifBold": "1D760",
+			"sansSerifItalicBold": "1D79A",
+			"smallCapital": "1D27"
+		}, {
+			"bold": "1D6CC",
+			"italic": "1D706",
+			"italicBold": "1D740",
+			"sansSerifBold": "1D77A",
+			"sansSerifItalicBold": "1D7B4"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_m_mu", {
+		"unicode": ["039C", "03BC"],
+		"alterations": [{
+			"bold": "1D6B3",
+			"italic": "1D6ED",
+			"italicBold": "1D727",
+			"sansSerifBold": "1D761",
+			"sansSerifItalicBold": "1D79B"
+		}, {
+			"bold": "1D6CD",
+			"italic": "1D707",
+			"italicBold": "1D741",
+			"sansSerifBold": "1D77B",
+			"sansSerifItalicBold": "1D7B5"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_n_nu", {
+		"unicode": ["039D", "03BD"],
+		"alterations": [{
+			"bold": "1D6B4",
+			"italic": "1D6EE",
+			"italicBold": "1D728",
+			"sansSerifBold": "1D762",
+			"sansSerifItalicBold": "1D79C"
+		}, {
+			"bold": "1D6CE",
+			"italic": "1D708",
+			"italicBold": "1D742",
+			"sansSerifBold": "1D77C",
+			"sansSerifItalicBold": "1D7B6"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_x_xi", {
+		"unicode": ["039E", "03BE"],
+		"alterations": [{
+			"bold": "1D6B5",
+			"italic": "1D6EF",
+			"italicBold": "1D729",
+			"sansSerifBold": "1D763",
+			"sansSerifItalicBold": "1D79D"
+		}, {
+			"bold": "1D6CF",
+			"italic": "1D709",
+			"italicBold": "1D743",
+			"sansSerifBold": "1D77D",
+			"sansSerifItalicBold": "1D7B7"
+		}],
+		"options": { "altLayoutKey": "\\J\\" }
+	},
+	"hel_[c,s]_let_o_omicron", {
+		"unicode": ["039F", "03BF"],
+		"alterations": [{
+			"bold": "1D6B6",
+			"italic": "1D6F0",
+			"italicBold": "1D72A",
+			"sansSerifBold": "1D764",
+			"sansSerifItalicBold": "1D79E"
+		}, {
+			"bold": "1D6D0",
+			"italic": "1D70A",
+			"italicBold": "1D744",
+			"sansSerifBold": "1D77E",
+			"sansSerifItalicBold": "1D7B8"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_p_pi", {
+		"unicode": ["03A0", "03C0"],
+		"alterations": [{
+			"bold": "1D6B7",
+			"italic": "1D6F1",
+			"italicBold": "1D72B",
+			"sansSerifBold": "1D765",
+			"sansSerifItalicBold": "1D79F",
+			"smallCapital": "1D28"
+		}, {
+			"bold": "1D6D1",
+			"italic": "1D70B",
+			"italicBold": "1D745",
+			"sansSerifBold": "1D77F",
+			"sansSerifItalicBold": "1D7B9"
+		}],
+		"options": { "altLayoutKey": "\\С\\" }
+	},
+	"hel_[c,s]_let_r_rho", {
+		"unicode": ["03A1", "03C1"],
+		"alterations": [{
+			"bold": "1D6B8",
+			"italic": "1D6F2",
+			"italicBold": "1D72C",
+			"sansSerifBold": "1D766",
+			"sansSerifItalicBold": "1D7A0",
+			"smallCapital": "1D29"
+		}, {
+			"subscript": "1D68",
+			"bold": "1D6D2",
+			"italic": "1D70C",
+			"italicBold": "1D746",
+			"sansSerifBold": "1D780",
+			"sansSerifItalicBold": "1D7BA"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_s_sigma", {
+		"unicode": ["03A3", "03C3"],
+		"alterations": [{
+			"bold": "1D6BA",
+			"italic": "1D6F4",
+			"italicBold": "1D72E",
+			"sansSerifBold": "1D768",
+			"sansSerifItalicBold": "1D7A2"
+		}, {
+			"bold": "1D6D4",
+			"italic": "1D70E",
+			"italicBold": "1D748",
+			"sansSerifBold": "1D782",
+			"sansSerifItalicBold": "1D7BC"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_s_let_s_sigma_final", {
+		"unicode": "03C2",
+		"alterations": {
+			"bold": "1D6D3",
+			"italic": "1D70D",
+			"italicBold": "1D747",
+			"sansSerifBold": "1D781",
+			"sansSerifItalicBold": "1D7BB"
+		},
+		"options": { "altLayoutKey": "<! $", "useLetterLocale": "sigma$" },
+		"symbol": { "beforeLetter": "final" }
+	},
+	"hel_[c,s]_let_t_tau", {
+		"unicode": ["03A4", "03C4"],
+		"alterations": [{
+			"bold": "1D6BB",
+			"italic": "1D6F5",
+			"italicBold": "1D72F",
+			"sansSerifBold": "1D769",
+			"sansSerifItalicBold": "1D7A3"
+		}, {
+			"bold": "1D6D5",
+			"italic": "1D70F",
+			"italicBold": "1D749",
+			"sansSerifBold": "1D783",
+			"sansSerifItalicBold": "1D7BD"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_y_upsilon", {
+		"unicode": ["03A5", "03C5"],
+		"alterations": [{
+			"bold": "1D6BC",
+			"italic": "1D6F6",
+			"italicBold": "1D730",
+			"sansSerifBold": "1D76A",
+			"sansSerifItalicBold": "1D7A4"
+		}, {
+			"bold": "1D6D6",
+			"italic": "1D710",
+			"italicBold": "1D74A",
+			"sansSerifBold": "1D784",
+			"sansSerifItalicBold": "1D7BE"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_f_phi", {
+		"unicode": ["03A6", "03C6"],
+		"alterations": [{
+			"bold": "1D6BD",
+			"italic": "1D6F7",
+			"italicBold": "1D731",
+			"sansSerifBold": "1D76B",
+			"sansSerifItalicBold": "1D7A5"
+		}, {
+			"modifier": "1D60",
+			"subscript": "1D69",
+			"bold": "1D6D7",
+			"italic": "1D711",
+			"italicBold": "1D74B",
+			"sansSerifBold": "1D785",
+			"sansSerifItalicBold": "1D7BF"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_h_chi", {
+		"unicode": ["03A7", "03C7"],
+		"alterations": [{
+			"bold": "1D6BE",
+			"italic": "1D6F8",
+			"italicBold": "1D732",
+			"sansSerifBold": "1D76C",
+			"sansSerifItalicBold": "1D7A6"
+		}, {
+			"modifier": "1D61",
+			"subscript": "1D6A",
+			"bold": "1D6D8",
+			"italic": "1D712",
+			"italicBold": "1D74C",
+			"sansSerifBold": "1D786",
+			"sansSerifItalicBold": "1D7C0"
+		}],
+		"options": { "altLayoutKey": "\\X\\" }
+	},
+	"hel_[c,s]_let_h_heta", {
+		"unicode": ["0370", "0371"],
+		"options": { "altLayoutKey": "<! \\X\\" }
+	},
+	"hel_[c,s]_let_p_psi", {
+		"unicode": ["03A8", "03C8"],
+		"alterations": [{
+			"bold": "1D6BF",
+			"italic": "1D6F9",
+			"italicBold": "1D733",
+			"sansSerifBold": "1D76D",
+			"sansSerifItalicBold": "1D7A7",
+			"smallCapital": "1D2A"
+		}, {
+			"bold": "1D6D9",
+			"italic": "1D713",
+			"italicBold": "1D74D",
+			"sansSerifBold": "1D787",
+			"sansSerifItalicBold": "1D7C1"
+		}],
+		"options": { "altLayoutKey": "\\C\\" }
+	},
+	"hel_[c,s]_let_o_omega", {
+		"unicode": ["03A9", "03C9"],
+		"alterations": [{
+			"bold": "1D6C0",
+			"italic": "1D6FA",
+			"italicBold": "1D734",
+			"sansSerifBold": "1D76E",
+			"sansSerifItalicBold": "1D7A8",
+			"smallCapital": "AB65"
+		}, {
+			"bold": "1D6DA",
+			"italic": "1D714",
+			"italicBold": "1D74E",
+			"sansSerifBold": "1D788",
+			"sansSerifItalicBold": "1D7C2"
+		}],
+		"options": { "altLayoutKey": "\\V\\" }
+	},
+	"hel_[c,s]_let_i_jot", {
+		"unicode": ["037F", "03F3"],
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"hel_[c,s]_let_q_koppa", {
+		"unicode": ["03DE", "03DF"],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_q_koppa_archaic", {
+		"unicode": ["03D8", "03D9"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"hel_[c,s]_let_s_san", {
+		"unicode": ["03FA", "03FB"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"hel_[c,s]_let_s_sampi", {
+		"unicode": ["03E1", "03E0"],
+		"options": { "altLayoutKey": ">!<! $" }
+	},
+	"hel_[c,s]_let_s_sampi_archaic", {
+		"unicode": ["0372", "0373"],
+		"options": { "altLayoutKey": ">!<!<+ $" }
+	},
+	"hel_[c,s]_let_s_sho", {
+		"unicode": ["03F7", "03F8"],
+		"options": { "altLayoutKey": ">!>+ $" }
+	},
+	"hel_[c,s]_let_w_digamma", {
+		"unicode": ["03DC", "03DD"],
+		"alterations": [{
+			"bold": "1D7CA"
+		}, {
+			"bold": "1D7CB"
+		}],
+		"options": { "altLayoutKey": "$" }
+	},
+	"hel_[c,s]_let_w_digamma_pamphylian", {
+		"unicode": ["0376", "0377"],
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"hel_[s]_sym_b_beta", {
+		"unicode": ["03D0"],
+		"options": { "referenceLocale": ":hel_s_let_b_beta", "altLayoutKey": ">+ $" }
+	},
+	"hel_[c,s]_sym_t_theta", {
+		"unicode": ["03F4", "03D1"],
+		"alterations": [{
+			"bold": "1D6B9",
+			"italic": "1D6F3",
+			"italicBold": "1D72D",
+			"sansSerifBold": "1D767",
+			"sansSerifItalicBold": "1D7A1"
+		}, {
+			"bold": "1D6DD",
+			"italic": "1D717",
+			"italicBold": "1D751",
+			"sansSerifBold": "1D78B",
+			"sansSerifItalicBold": "1D7C2"
+		}],
+		"options": { "referenceLocale": ":hel_[c,s]_let_t_theta*?", "altLayoutKey": ">+ \\U\\" }
+	},
+	"hel_[s]_sym_f_phi", {
+		"unicode": ["03D5"],
+		"alterations": {
+			"bold": "1D6DF",
+			"italic": "1D719",
+			"italicBold": "1D753",
+			"sansSerifBold": "1D78D",
+			"sansSerifItalicBold": "1D7C7"
+		},
+		"options": { "referenceLocale": ":hel_s_let_f_phi", "altLayoutKey": ">+ $" }
+	},
+	"hel_[s]_sym_r_rho", {
+		"unicode": ["03F1"],
+		"alterations": {
+			"bold": "1D6E0",
+			"italic": "1D71A",
+			"italicBold": "1D754",
+			"sansSerifBold": "1D78E",
+			"sansSerifItalicBold": "1D7C8"
+		},
+		"options": { "referenceLocale": ":hel_s_let_r_rho", "altLayoutKey": ">+ $" }
+	},
+	"hel_[s]_sym_p_pi", {
+		"unicode": ["03D6"],
+		"alterations": {
+			"bold": "1D6E1",
+			"italic": "1D71B",
+			"italicBold": "1D755",
+			"sansSerifBold": "1D78F",
+			"sansSerifItalicBold": "1D7C9"
+		},
+		"options": { "referenceLocale": ":hel_s_let_p_pi", "altLayoutKey": ">+ $" }
+	},
+	"hel_[s]_sym_k_kappa", {
+		"unicode": ["03F0"],
+		"alterations": {
+			"bold": "1D6DE",
+			"italic": "1D718",
+			"italicBold": "1D752",
+			"sansSerifBold": "1D78C",
+			"sansSerifItalicBold": "1D7C6"
+		},
+		"options": { "referenceLocale": ":hel_s_let_k_kappa", "altLayoutKey": ">+ $" }
+	},
+	"hel_[c,s]_sym_s_sigma_lunate", {
+		"unicode": ["03F9", "03F2"],
+		"options": { "referenceLocale": ":hel_[c,s]_let_s_sigma*?", "altLayoutKey": ">+ $" },
+		"symbol": { "beforeLetter": "lunate" }
+	},
+	"hel_[s]_sym_e_epsilon_lunate", {
+		"unicode": ["03F5"],
+		"alterations": {
+			"bold": "1D6DC",
+			"italic": "1D716",
+			"italicBold": "1D750",
+			"sansSerifBold": "1D78A",
+			"sansSerifItalicBold": "1D7C4"
+		},
+		"options": { "referenceLocale": ":hel_s_let_e_epsilon", "altLayoutKey": ">+ $" },
+		"symbol": { "beforeLetter": "lunate::2" }
+	},
+	"hel_[c,s]_lig_st_stigma", {
+		"unicode": ["03DA", "03DB"],
+		"options": { "altLayoutKey": "<+ Σ" },
+		"recipe": ["${hel_[c,s]_let_s_sigma}${hel_[c,s]_let_t_tau}"]
+	},
+	"hel_[c,s]_lig_k_kai", {
+		"unicode": ["03CF", "03D7"],
+		"options": { "altLayoutKey": ">! Κ" },
+		"recipe": ["${hel_[c,s]_let_k_kappa}${hel_[c,s]_let_a_alpha}${hel_[c,s]_let_i_iota}"]
+	},
+	"hel_[c,s]_let_a_alpha__tonos", {
+		"unicode": ["0386", "03AC"],
+		"options": { "useLetterLocale": "alpha$", "altLayoutKey": "<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__oxia", {
+		"unicode": ["1FBB", "1F71"],
+		"options": { "useLetterLocale": "alpha$", "altLayoutKey": ">!<!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__varia", {
+		"unicode": ["1FBA", "1F70"],
+		"options": { "useLetterLocale": "alpha$", "altLayoutKey": ">!<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__dasia", {
+		"unicode": ["1F09", "1F01"],
+		"options": { "useLetterLocale": "alpha$", "altLayoutKey": ">! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__psili", {
+		"unicode": ["1F08", "1F00"],
+		"options": { "useLetterLocale": "alpha$", "altLayoutKey": ">!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[s]_let_a_alpha__perispomeni", {
+		"unicode": ["1FB6"],
+		"options": { "useLetterLocale": "alpha$" },
+		"symbol": { "letter": "${hel_[s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__macron", {
+		"unicode": ["1FB9", "1FB1"],
+		"options": { "useLetterLocale": "alpha$", "altLayoutKey": ">!>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__vrachy", {
+		"unicode": ["1FB8", "1FB0"],
+		"options": { "useLetterLocale": "alpha$", "altLayoutKey": ">!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FBC", "1FB3"],
+		"options": { "useLetterLocale": "alpha$", "altLayoutKey": ">!<!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__dasia__oxia", {
+		"unicode": ["1F0D", "1F05"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipePush": {
+			"1": ["${dasia_and_oxia}$", "$${dasia_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__psili__oxia", {
+		"unicode": ["1F0C", "1F04"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipePush": {
+			"1": ["${psili_and_oxia}$", "$${psili_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__dasia__varia", {
+		"unicode": ["1F0B", "1F03"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipePush": {
+			"1": ["${dasia_and_varia}$", "$${dasia_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__psili__varia", {
+		"unicode": ["1F0A", "1F02"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipePush": {
+			"1": ["${psili_and_varia}$", "$${psili_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__dasia__perispomeni", {
+		"unicode": ["1F0F", "1F07"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipe": [[
+			"$${dasia}${perispomeni}",
+			"$${perispomeni}${dasia}",
+			"${hel_c_let_a_alpha__dasia}${perispomeni}",
+			"${dasia}${perispomeni}$",
+			"${perispomeni}${dasia}$",
+			"${perispomeni}${hel_c_let_a_alpha__dasia}"
+		], []],
+		"recipePush": {
+			"1": ["${dasia_and_perispomeni}$", "$${dasia_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__psili__perispomeni", {
+		"unicode": ["1F0E", "1F06"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipe": [[
+			"$${psili}${perispomeni}",
+			"$${perispomeni}${psili}",
+			"${hel_c_let_a_alpha__psili}${perispomeni}",
+			"${psili}${perispomeni}$",
+			"${perispomeni}${psili}$",
+			"${perispomeni}${hel_c_let_a_alpha__psili}"
+		], []],
+		"recipePush": {
+			"1": ["${psili_and_perispomeni}$", "$${psili_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__dasia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F89", "1F81"],
+		"options": { "useLetterLocale": "alpha$" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__psili__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F88", "1F80"],
+		"options": { "useLetterLocale": "alpha$" },
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__dasia__varia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F8B", "1F83"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipePush": [{
+			"1": "$${dasia_and_varia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_varia}",
+			"3": "${hel_c_let_a_alpha__prosgegrammeni}${dasia_and_varia}",
+			"4": "${dasia_and_varia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_varia}$",
+			"6": "${dasia_and_varia}${hel_c_let_a_alpha__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_varia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_varia}",
+			"3": "${hel_s_let_a_alpha__ypogegrammeni}${dasia_and_varia}",
+			"4": "${dasia_and_varia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_varia}$",
+			"6": "${dasia_and_varia}${hel_s_let_a_alpha__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__psili__varia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F8A", "1F82"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipePush": [{
+			"1": "$${psili_and_varia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_varia}",
+			"3": "${hel_c_let_a_alpha__prosgegrammeni}${psili_and_varia}",
+			"4": "${psili_and_varia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_varia}$",
+			"6": "${psili_and_varia}${hel_c_let_a_alpha__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_varia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_varia}",
+			"3": "${hel_s_let_a_alpha__ypogegrammeni}${psili_and_varia}",
+			"4": "${psili_and_varia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_varia}$",
+			"6": "${psili_and_varia}${hel_s_let_a_alpha__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__dasia__oxia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F8D", "1F85"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipePush": [{
+			"1": "$${dasia_and_oxia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_oxia}",
+			"3": "${hel_c_let_a_alpha__prosgegrammeni}${dasia_and_oxia}",
+			"4": "${dasia_and_oxia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_oxia}$",
+			"6": "${dasia_and_oxia}${hel_c_let_a_alpha__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_oxia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_oxia}",
+			"3": "${hel_s_let_a_alpha__ypogegrammeni}${dasia_and_oxia}",
+			"4": "${dasia_and_oxia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_oxia}$",
+			"6": "${dasia_and_oxia}${hel_s_let_a_alpha__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__psili__oxia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F8C", "1F84"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipePush": [{
+			"1": "$${psili_and_oxia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_oxia}",
+			"3": "${hel_c_let_a_alpha__prosgegrammeni}${psili_and_oxia}",
+			"4": "${psili_and_oxia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_oxia}$",
+			"6": "${psili_and_oxia}${hel_c_let_a_alpha__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_oxia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_oxia}",
+			"3": "${hel_s_let_a_alpha__ypogegrammeni}${psili_and_oxia}",
+			"4": "${psili_and_oxia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_oxia}$",
+			"6": "${psili_and_oxia}${hel_s_let_a_alpha__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__dasia__perispomeni__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F8F", "1F87"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipe": [[
+			"$${dasia}${perispomeni}${prosgegrammeni}",
+			"$${perispomeni}${dasia}${prosgegrammeni}",
+			"${hel_c_let_a_alpha__dasia}${perispomeni}${prosgegrammeni}",
+			"${dasia}${perispomeni}${prosgegrammeni}$",
+			"${perispomeni}${dasia}${prosgegrammeni}$",
+			"${perispomeni}${prosgegrammeni}${hel_c_let_a_alpha__dasia}"
+		], []],
+		"recipePush": [{
+			"1": "$${dasia_and_perispomeni}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_perispomeni}",
+			"3": "${hel_c_let_a_alpha__prosgegrammeni}${dasia_and_perispomeni}",
+			"4": "${dasia_and_perispomeni}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_perispomeni}$",
+			"6": "${dasia_and_perispomeni}${hel_c_let_a_alpha__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_perispomeni}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_perispomeni}",
+			"3": "${hel_s_let_a_alpha__ypogegrammeni}${dasia_and_perispomeni}",
+			"4": "${dasia_and_perispomeni}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_perispomeni}$",
+			"6": "${dasia_and_perispomeni}${hel_s_let_a_alpha__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_a_alpha__psili__perispomeni__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F8E", "1F86"],
+		"options": { "useLetterLocale": "alpha$" },
+		"recipe": [[
+			"$${psili}${perispomeni}${prosgegrammeni}",
+			"$${perispomeni}${psili}${prosgegrammeni}",
+			"${hel_c_let_a_alpha__psili}${perispomeni}${prosgegrammeni}",
+			"${psili}${perispomeni}${prosgegrammeni}$",
+			"${perispomeni}${psili}${prosgegrammeni}$",
+			"${perispomeni}${prosgegrammeni}${hel_c_let_a_alpha__psili}"
+		], []],
+		"recipePush": [{
+			"1": "$${psili_and_perispomeni}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_perispomeni}",
+			"3": "${hel_c_let_a_alpha__prosgegrammeni}${psili_and_perispomeni}",
+			"4": "${psili_and_perispomeni}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_perispomeni}$",
+			"6": "${psili_and_perispomeni}${hel_c_let_a_alpha__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_perispomeni}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_perispomeni}",
+			"3": "${hel_s_let_a_alpha__ypogegrammeni}${psili_and_perispomeni}",
+			"4": "${psili_and_perispomeni}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_perispomeni}$",
+			"6": "${psili_and_perispomeni}${hel_s_let_a_alpha__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_a_alpha}" }
+	},
+	"hel_[c,s]_let_e_epsilon__tonos", {
+		"unicode": ["0388", "03AD"],
+		"options": { "useLetterLocale": "epsilon$", "altLayoutKey": "<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	},
+	"hel_[c,s]_let_e_epsilon__oxia", {
+		"unicode": ["1FC9", "1F73"],
+		"options": { "useLetterLocale": "epsilon$", "altLayoutKey": ">!<!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	},
+	"hel_[c,s]_let_e_epsilon__varia", {
+		"unicode": ["1FC8", "1F72"],
+		"options": { "useLetterLocale": "epsilon$", "altLayoutKey": ">!<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	},
+	"hel_[c,s]_let_e_epsilon__dasia", {
+		"unicode": ["1F19", "1F11"],
+		"options": { "useLetterLocale": "epsilon$", "altLayoutKey": ">! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	},
+	"hel_[c,s]_let_e_epsilon__psili", {
+		"unicode": ["1F18", "1F10"],
+		"options": { "useLetterLocale": "epsilon$", "altLayoutKey": ">!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	},
+	"hel_[c,s]_let_e_epsilon__dasia__oxia", {
+		"unicode": ["1F1D", "1F15"],
+		"options": { "useLetterLocale": "epsilon$" },
+		"recipePush": {
+			"1": ["${dasia_and_oxia}$", "$${dasia_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	},
+	"hel_[c,s]_let_e_epsilon__psili__oxia", {
+		"unicode": ["1F1C", "1F14"],
+		"options": { "useLetterLocale": "epsilon$" },
+		"recipePush": {
+			"1": ["${psili_and_oxia}$", "$${psili_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	},
+	"hel_[c,s]_let_e_epsilon__dasia__varia", {
+		"unicode": ["1F1B", "1F13"],
+		"options": { "useLetterLocale": "epsilon$" },
+		"recipePush": {
+			"1": ["${dasia_and_varia}$", "$${dasia_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	},
+	"hel_[c,s]_let_e_epsilon__psili__varia", {
+		"unicode": ["1F1A", "1F12"],
+		"options": { "useLetterLocale": "epsilon$" },
+		"recipePush": {
+			"1": ["${psili_and_varia}$", "$${psili_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_e_epsilon}" }
+	}, "hel_[c,s]_let_h_eta__tonos", {
+		"unicode": ["0389", "03AE"],
+		"options": { "useLetterLocale": "eta$", "altLayoutKey": "<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__oxia", {
+		"unicode": ["1FCB", "1F75"],
+		"options": { "useLetterLocale": "eta$", "altLayoutKey": ">!<!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__varia", {
+		"unicode": ["1FCA", "1F74"],
+		"options": { "useLetterLocale": "eta$", "altLayoutKey": ">!<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__dasia", {
+		"unicode": ["1F29", "1F21"],
+		"options": { "useLetterLocale": "eta$", "altLayoutKey": ">! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__psili", {
+		"unicode": ["1F28", "1F20"],
+		"options": { "useLetterLocale": "eta$", "altLayoutKey": ">!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[s]_let_h_eta__perispomeni", {
+		"unicode": ["1FC6"],
+		"options": { "useLetterLocale": "eta$" },
+		"symbol": { "letter": "${hel_[s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FCC", "1FC3"],
+		"options": { "useLetterLocale": "eta$", "altLayoutKey": ">!<!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__dasia__oxia", {
+		"unicode": ["1F2D", "1F25"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipePush": {
+			"1": ["${dasia_and_oxia}$", "$${dasia_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__psili__oxia", {
+		"unicode": ["1F2C", "1F24"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipePush": {
+			"1": ["${psili_and_oxia}$", "$${psili_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__dasia__varia", {
+		"unicode": ["1F2B", "1F23"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipePush": {
+			"1": ["${dasia_and_varia}$", "$${dasia_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__psili__varia", {
+		"unicode": ["1F2A", "1F22"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipePush": {
+			"1": ["${psili_and_varia}$", "$${psili_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__dasia__perispomeni", {
+		"unicode": ["1F2F", "1F27"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipe": [[
+			"$${dasia}${perispomeni}",
+			"$${perispomeni}${dasia}",
+			"${hel_c_let_h_eta__dasia}${perispomeni}",
+			"${dasia}${perispomeni}$",
+			"${perispomeni}${dasia}$",
+			"${perispomeni}${hel_c_let_h_eta__dasia}"
+		], []],
+		"recipePush": {
+			"1": ["${dasia_and_perispomeni}$", "$${dasia_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__psili__perispomeni", {
+		"unicode": ["1F2E", "1F26"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipe": [[
+			"$${psili}${perispomeni}",
+			"$${perispomeni}${psili}",
+			"${hel_c_let_h_eta__psili}${perispomeni}",
+			"${psili}${perispomeni}$",
+			"${perispomeni}${psili}$",
+			"${perispomeni}${hel_c_let_h_eta__psili}"
+		], []],
+		"recipePush": {
+			"1": ["${psili_and_perispomeni}$", "$${psili_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__dasia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F99", "1F91"],
+		"options": { "useLetterLocale": "eta$" },
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__psili__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F98", "1F90"],
+		"options": { "useLetterLocale": "eta$" },
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[s]_let_h_eta__varia__ypogegrammeni", {
+		"unicode": ["1FC2"],
+		"options": { "useLetterLocale": "eta$" },
+		"symbol": { "letter": "${hel_[s]_let_h_eta}" }
+	},
+	"hel_[s]_let_h_eta__oxia__ypogegrammeni", {
+		"unicode": ["1FC4"],
+		"options": { "useLetterLocale": "eta$" },
+		"symbol": { "letter": "${hel_[s]_let_h_eta}" }
+	},
+	"hel_[s]_let_h_eta__perispomeni__ypogegrammeni", {
+		"unicode": ["1FC7"],
+		"options": { "useLetterLocale": "eta$" },
+		"symbol": { "letter": "${hel_[s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__dasia__varia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F9B", "1F93"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipePush": [{
+			"1": "$${dasia_and_varia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_varia}",
+			"3": "${hel_c_let_h_eta__prosgegrammeni}${dasia_and_varia}",
+			"4": "${dasia_and_varia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_varia}$",
+			"6": "${dasia_and_varia}${hel_c_let_h_eta__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_varia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_varia}",
+			"3": "${hel_s_let_h_eta__ypogegrammeni}${dasia_and_varia}",
+			"4": "${dasia_and_varia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_varia}$",
+			"6": "${dasia_and_varia}${hel_s_let_h_eta__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__psili__varia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F9A", "1F92"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipePush": [{
+			"1": "$${psili_and_varia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_varia}",
+			"3": "${hel_c_let_h_eta__prosgegrammeni}${psili_and_varia}",
+			"4": "${psili_and_varia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_varia}$",
+			"6": "${psili_and_varia}${hel_c_let_h_eta__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_varia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_varia}",
+			"3": "${hel_s_let_h_eta__ypogegrammeni}${psili_and_varia}",
+			"4": "${psili_and_varia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_varia}$",
+			"6": "${psili_and_varia}${hel_s_let_h_eta__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__dasia__oxia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F9D", "1F95"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipePush": [{
+			"1": "$${dasia_and_oxia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_oxia}",
+			"3": "${hel_c_let_h_eta__prosgegrammeni}${dasia_and_oxia}",
+			"4": "${dasia_and_oxia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_oxia}$",
+			"6": "${dasia_and_oxia}${hel_c_let_h_eta__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_oxia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_oxia}",
+			"3": "${hel_s_let_h_eta__ypogegrammeni}${dasia_and_oxia}",
+			"4": "${dasia_and_oxia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_oxia}$",
+			"6": "${dasia_and_oxia}${hel_s_let_h_eta__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__psili__oxia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F9C", "1F94"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipePush": [{
+			"1": "$${psili_and_oxia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_oxia}",
+			"3": "${hel_c_let_h_eta__prosgegrammeni}${psili_and_oxia}",
+			"4": "${psili_and_oxia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_oxia}$",
+			"6": "${psili_and_oxia}${hel_c_let_h_eta__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_oxia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_oxia}",
+			"3": "${hel_s_let_h_eta__ypogegrammeni}${psili_and_oxia}",
+			"4": "${psili_and_oxia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_oxia}$",
+			"6": "${psili_and_oxia}${hel_s_let_h_eta__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__dasia__perispomeni__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F9F", "1F97"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipe": [[
+			"$${dasia}${perispomeni}${prosgegrammeni}",
+			"$${perispomeni}${dasia}${prosgegrammeni}",
+			"${hel_c_let_h_eta__dasia}${perispomeni}${prosgegrammeni}",
+			"${dasia}${perispomeni}${prosgegrammeni}$",
+			"${perispomeni}${dasia}${prosgegrammeni}$",
+			"${perispomeni}${prosgegrammeni}${hel_c_let_h_eta__dasia}"
+		], []],
+		"recipePush": [{
+			"1": "$${dasia_and_perispomeni}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_perispomeni}",
+			"3": "${hel_c_let_h_eta__prosgegrammeni}${dasia_and_perispomeni}",
+			"4": "${dasia_and_perispomeni}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_perispomeni}$",
+			"6": "${dasia_and_perispomeni}${hel_c_let_h_eta__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_perispomeni}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_perispomeni}",
+			"3": "${hel_s_let_h_eta__ypogegrammeni}${dasia_and_perispomeni}",
+			"4": "${dasia_and_perispomeni}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_perispomeni}$",
+			"6": "${dasia_and_perispomeni}${hel_s_let_h_eta__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_h_eta__psili__perispomeni__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1F9E", "1F96"],
+		"options": { "useLetterLocale": "eta$" },
+		"recipe": [[
+			"$${psili}${perispomeni}${prosgegrammeni}",
+			"$${perispomeni}${psili}${prosgegrammeni}",
+			"${hel_c_let_h_eta__psili}${perispomeni}${prosgegrammeni}",
+			"${psili}${perispomeni}${prosgegrammeni}$",
+			"${perispomeni}${psili}${prosgegrammeni}$",
+			"${perispomeni}${prosgegrammeni}${hel_c_let_h_eta__psili}"
+		], []],
+		"recipePush": [{
+			"1": "$${psili_and_perispomeni}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_perispomeni}",
+			"3": "${hel_c_let_h_eta__prosgegrammeni}${psili_and_perispomeni}",
+			"4": "${psili_and_perispomeni}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_perispomeni}$",
+			"6": "${psili_and_perispomeni}${hel_c_let_h_eta__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_perispomeni}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_perispomeni}",
+			"3": "${hel_s_let_h_eta__ypogegrammeni}${psili_and_perispomeni}",
+			"4": "${psili_and_perispomeni}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_perispomeni}$",
+			"6": "${psili_and_perispomeni}${hel_s_let_h_eta__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_h_eta}" }
+	},
+	"hel_[c,s]_let_i_iota__tonos", {
+		"unicode": ["038A", "03AF"],
+		"options": { "useLetterLocale": "iota$", "altLayoutKey": "<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__oxia", {
+		"unicode": ["1FDB", "1F77"],
+		"options": { "useLetterLocale": "iota$", "altLayoutKey": ">!<!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__varia", {
+		"unicode": ["1FDA", "1F76"],
+		"options": { "useLetterLocale": "iota$", "altLayoutKey": ">!<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__dasia", {
+		"unicode": ["1F39", "1F31"],
+		"options": { "useLetterLocale": "iota$", "altLayoutKey": ">+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__psili", {
+		"unicode": ["1F38", "1F30"],
+		"options": { "useLetterLocale": "iota$", "altLayoutKey": ">!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[s]_let_i_iota__perispomeni", {
+		"unicode": ["1FD6"],
+		"options": { "useLetterLocale": "iota$" },
+		"symbol": { "letter": "${hel_[s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__macron", {
+		"unicode": ["1FD9", "1FD1"],
+		"options": { "useLetterLocale": "iota$", "altLayoutKey": ">!>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__vrachy", {
+		"unicode": ["1FD8", "1FD0"],
+		"options": { "useLetterLocale": "iota$", "altLayoutKey": ">!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__dialytika", {
+		"unicode": ["03AA", "03CA"],
+		"options": { "useLetterLocale": "iota$", "altLayoutKey": ">! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__dasia__oxia", {
+		"unicode": ["1F3D", "1F35"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipePush": {
+			"1": ["${dasia_and_oxia}$", "$${dasia_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__psili__oxia", {
+		"unicode": ["1F3C", "1F34"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipePush": {
+			"1": ["${psili_and_oxia}$", "$${psili_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__dasia__varia", {
+		"unicode": ["1F3B", "1F33"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipePush": {
+			"1": ["${dasia_and_varia}$", "$${dasia_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__psili__varia", {
+		"unicode": ["1F3A", "1F32"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipePush": {
+			"1": ["${psili_and_varia}$", "$${psili_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__dasia__perispomeni", {
+		"unicode": ["1F3F", "1F37"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipe": [[
+			"$${dasia}${perispomeni}",
+			"$${perispomeni}${dasia}",
+			"${hel_c_let_i_iota__dasia}${perispomeni}",
+			"${dasia}${perispomeni}$",
+			"${perispomeni}${dasia}$",
+			"${perispomeni}${hel_c_let_i_iota__dasia}"
+		], []],
+		"recipePush": {
+			"1": ["${dasia_and_perispomeni}$", "$${dasia_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[c,s]_let_i_iota__psili__perispomeni", {
+		"unicode": ["1F3E", "1F36"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipe": [[
+			"$${psili}${perispomeni}",
+			"$${perispomeni}${psili}",
+			"${hel_c_let_i_iota__psili}${perispomeni}",
+			"${psili}${perispomeni}$",
+			"${perispomeni}${psili}$",
+			"${perispomeni}${hel_c_let_i_iota__psili}"
+		], []],
+		"recipePush": {
+			"1": ["${psili_and_perispomeni}$", "$${psili_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_i_iota}" }
+	},
+	"hel_[s]_let_i_iota__dialytika__tonos", {
+		"unicode": ["0390"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipePush": {
+			"1": ["${dialytika_and_tonos}$", "$${dialytika_and_tonos}"]
+		},
+		"symbol": { "letter": "${hel_[s]_let_i_iota}" }
+	},
+	"hel_[s]_let_i_iota__dialytika__varia", {
+		"unicode": ["1FD2"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipePush": {
+			"1": ["${dialytika_and_varia}$", "$${dialytika_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[s]_let_i_iota}" }
+	},
+	"hel_[s]_let_i_iota__dialytika__oxia", {
+		"unicode": ["1FD3"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipePush": {
+			"1": ["${dialytika_and_oxia}$", "$${dialytika_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[s]_let_i_iota}" }
+	},
+	"hel_[s]_let_i_iota__dialytika__perispomeni", {
+		"unicode": ["1FD7"],
+		"options": { "useLetterLocale": "iota$" },
+		"recipe": [[
+			"$${dialytika}${perispomeni}",
+			"$${perispomeni}${dialytika}",
+			"${hel_s_let_i_iota__dialytika}${perispomeni}",
+			"${dialytika}${perispomeni}$",
+			"${perispomeni}${dialytika}$",
+			"${perispomeni}${hel_s_let_i_iota__dialytika}"
+		], []],
+		"recipePush": {
+			"1": ["${dialytika_and_perispomeni}$", "$${dialytika_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[s]_let_i_iota}" }
+	}, "hel_[c,s]_let_o_omicron__tonos", {
+		"unicode": ["038C", "03CC"],
+		"options": { "useLetterLocale": "omicron$", "altLayoutKey": "<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_o_omicron__oxia", {
+		"unicode": ["1FF9", "1F79"],
+		"options": { "useLetterLocale": "omicron$", "altLayoutKey": ">!<!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_o_omicron__varia", {
+		"unicode": ["1FF8", "1F78"],
+		"options": { "useLetterLocale": "omicron$", "altLayoutKey": ">!<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_o_omicron__dasia", {
+		"unicode": ["1F49", "1F41"],
+		"options": { "useLetterLocale": "omicron$", "altLayoutKey": ">! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_o_omicron__psili", {
+		"unicode": ["1F48", "1F40"],
+		"options": { "useLetterLocale": "omicron$", "altLayoutKey": ">!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_o_omicron__dasia__oxia", {
+		"unicode": ["1F4D", "1F45"],
+		"options": { "useLetterLocale": "omicron$" },
+		"recipePush": {
+			"1": ["${dasia_and_oxia}$", "$${dasia_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_o_omicron__psili__oxia", {
+		"unicode": ["1F4C", "1F44"],
+		"options": { "useLetterLocale": "omicron$" },
+		"recipePush": {
+			"1": ["${psili_and_oxia}$", "$${psili_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_o_omicron__dasia__varia", {
+		"unicode": ["1F4B", "1F43"],
+		"options": { "useLetterLocale": "omicron$" },
+		"recipePush": {
+			"1": ["${dasia_and_varia}$", "$${dasia_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_o_omicron__psili__varia", {
+		"unicode": ["1F4A", "1F42"],
+		"options": { "useLetterLocale": "omicron$" },
+		"recipePush": {
+			"1": ["${psili_and_varia}$", "$${psili_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omicron}" }
+	},
+	"hel_[c,s]_let_r_rho__dasia", {
+		"unicode": ["1FEC", "1FE5"],
+		"options": { "useLetterLocale": "rho$", "altLayoutKey": ">! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_r_rho}" }
+	},
+	"hel_[s]_let_r_rho__psili", {
+		"unicode": ["1FE4"],
+		"options": { "useLetterLocale": "rho$", "altLayoutKey": ">!<+ $" },
+		"symbol": { "letter": "${hel_[s]_let_r_rho}" }
+	},
+	"hel_[c,s]_let_y_upsilon__tonos", {
+		"unicode": ["038E", "03CD"],
+		"options": { "useLetterLocale": "upsilon$", "altLayoutKey": "<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__oxia", {
+		"unicode": ["1FEB", "1F7B"],
+		"options": { "useLetterLocale": "upsilon$", "altLayoutKey": ">!<!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__varia", {
+		"unicode": ["1FEA", "1F7A"],
+		"options": { "useLetterLocale": "upsilon$", "altLayoutKey": ">!<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__dasia", {
+		"unicode": ["1F59", "1F51"],
+		"options": { "useLetterLocale": "upsilon$", "altLayoutKey": ">! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__psili", {
+		"unicode": ["1F50"],
+		"options": { "useLetterLocale": "upsilon$", "altLayoutKey": ">!<+ $" },
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__perispomeni", {
+		"unicode": ["1FE6"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__macron", {
+		"unicode": ["1FE9", "1FE1"],
+		"options": { "useLetterLocale": "upsilon$", "altLayoutKey": ">!>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__vrachy", {
+		"unicode": ["1FE8", "1FE0"],
+		"options": { "useLetterLocale": "upsilon$", "altLayoutKey": ">!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__dialytika", {
+		"unicode": ["03AB", "03CB"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__dialytika__tonos", {
+		"unicode": ["03B0"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__dialytika__varia", {
+		"unicode": ["1FE2"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__dialytika__oxia", {
+		"unicode": ["1FE3"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__dialytika__perispomeni", {
+		"unicode": ["1FE7"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__dasia__oxia", {
+		"unicode": ["1F5D", "1F55"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"recipePush": {
+			"1": ["${dasia_and_oxia}$", "$${dasia_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__psili__oxia", {
+		"unicode": ["1F54"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"recipePush": {
+			"1": ["${psili_and_oxia}$", "$${psili_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__dasia__varia", {
+		"unicode": ["1F5B", "1F53"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"recipePush": {
+			"1": ["${dasia_and_varia}$", "$${dasia_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__psili__varia", {
+		"unicode": ["1F52"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"recipePush": {
+			"1": ["${psili_and_varia}$", "$${psili_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_y_upsilon__dasia__perispomeni", {
+		"unicode": ["1F5F", "1F57"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"recipe": [[
+			"$${dasia}${perispomeni}",
+			"$${perispomeni}${dasia}",
+			"${hel_c_let_y_upsilon__dasia}${perispomeni}",
+			"${dasia}${perispomeni}$",
+			"${perispomeni}${dasia}$",
+			"${perispomeni}${hel_c_let_y_upsilon__dasia}"
+		], []],
+		"recipePush": {
+			"1": ["${dasia_and_perispomeni}$", "$${dasia_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_y_upsilon}" }
+	},
+	"hel_[s]_let_y_upsilon__psili__perispomeni", {
+		"unicode": ["1F56"],
+		"options": { "useLetterLocale": "upsilon$" },
+		"recipe": [[
+			"$${psili}${perispomeni}",
+			"$${perispomeni}${psili}",
+			"${hel_s_let_y_upsilon__psili}${perispomeni}",
+			"${psili}${perispomeni}$",
+			"${perispomeni}${psili}$",
+			"${perispomeni}${hel_s_let_y_upsilon__psili}"
+		], []],
+		"recipePush": {
+			"1": ["${psili_and_perispomeni}$", "$${psili_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[s]_let_y_upsilon}" }
+	},
+	"hel_[c,s]_let_o_omega__tonos", {
+		"unicode": ["038F", "03CE"],
+		"options": { "useLetterLocale": "omega$", "altLayoutKey": "<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__oxia", {
+		"unicode": ["1FFB", "1F7D"],
+		"options": { "useLetterLocale": "omega$", "altLayoutKey": ">!<!<+>+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__varia", {
+		"unicode": ["1FFA", "1F7C"],
+		"options": { "useLetterLocale": "omega$", "altLayoutKey": ">!<! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__dasia", {
+		"unicode": ["1F69", "1F61"],
+		"options": { "useLetterLocale": "omega$", "altLayoutKey": ">! $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__psili", {
+		"unicode": ["1F68", "1F60"],
+		"options": { "useLetterLocale": "omega$", "altLayoutKey": ">!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[s]_let_o_omega__perispomeni", {
+		"unicode": ["1FF6"],
+		"options": { "useLetterLocale": "omega$" },
+		"symbol": { "letter": "${hel_[s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FFC", "1FF3"],
+		"options": { "useLetterLocale": "omega$", "altLayoutKey": ">!<!<+ $" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__dasia__oxia", {
+		"unicode": ["1F6D", "1F65"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipePush": {
+			"1": ["${dasia_and_oxia}$", "$${dasia_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__psili__oxia", {
+		"unicode": ["1F6C", "1F64"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipePush": {
+			"1": ["${psili_and_oxia}$", "$${psili_and_oxia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__dasia__varia", {
+		"unicode": ["1F6B", "1F63"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipePush": {
+			"1": ["${dasia_and_varia}$", "$${dasia_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__psili__varia", {
+		"unicode": ["1F6A", "1F62"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipePush": {
+			"1": ["${psili_and_varia}$", "$${psili_and_varia}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__dasia__perispomeni", {
+		"unicode": ["1F6F", "1F67"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipe": [[
+			"$${dasia}${perispomeni}",
+			"$${perispomeni}${dasia}",
+			"${hel_c_let_o_omega__dasia}${perispomeni}",
+			"${dasia}${perispomeni}$",
+			"${perispomeni}${dasia}$",
+			"${perispomeni}${hel_c_let_o_omega__dasia}"
+		], []],
+		"recipePush": {
+			"1": ["${dasia_and_perispomeni}$", "$${dasia_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__psili__perispomeni", {
+		"unicode": ["1F6E", "1F66"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipe": [[
+			"$${psili}${perispomeni}",
+			"$${perispomeni}${psili}",
+			"${hel_c_let_o_omega__psili}${perispomeni}",
+			"${psili}${perispomeni}$",
+			"${perispomeni}${psili}$",
+			"${perispomeni}${hel_c_let_o_omega__psili}"
+		], []],
+		"recipePush": {
+			"1": ["${psili_and_perispomeni}$", "$${psili_and_perispomeni}"]
+		},
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__dasia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FA9", "1FA1"],
+		"options": { "useLetterLocale": "omega$" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__psili__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FA8", "1FA0"],
+		"options": { "useLetterLocale": "omega$" },
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[s]_let_o_omega__varia__ypogegrammeni", {
+		"unicode": ["1FF2"],
+		"options": { "useLetterLocale": "omega$" },
+		"symbol": { "letter": "${hel_[s]_let_o_omega}" }
+	},
+	"hel_[s]_let_o_omega__oxia__ypogegrammeni", {
+		"unicode": ["1FF4"],
+		"options": { "useLetterLocale": "omega$" },
+		"symbol": { "letter": "${hel_[s]_let_o_omega}" }
+	},
+	"hel_[s]_let_o_omega__perispomeni__ypogegrammeni", {
+		"unicode": ["1FF7"],
+		"options": { "useLetterLocale": "omega$" },
+		"symbol": { "letter": "${hel_[s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__dasia__varia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FAB", "1FA3"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipePush": [{
+			"1": "$${dasia_and_varia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_varia}",
+			"3": "${hel_c_let_o_omega__prosgegrammeni}${dasia_and_varia}",
+			"4": "${dasia_and_varia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_varia}$",
+			"6": "${dasia_and_varia}${hel_c_let_o_omega__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_varia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_varia}",
+			"3": "${hel_s_let_o_omega__ypogegrammeni}${dasia_and_varia}",
+			"4": "${dasia_and_varia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_varia}$",
+			"6": "${dasia_and_varia}${hel_s_let_o_omega__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__psili__varia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FAA", "1FA2"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipePush": [{
+			"1": "$${psili_and_varia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_varia}",
+			"3": "${hel_c_let_o_omega__prosgegrammeni}${psili_and_varia}",
+			"4": "${psili_and_varia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_varia}$",
+			"6": "${psili_and_varia}${hel_c_let_o_omega__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_varia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_varia}",
+			"3": "${hel_s_let_o_omega__ypogegrammeni}${psili_and_varia}",
+			"4": "${psili_and_varia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_varia}$",
+			"6": "${psili_and_varia}${hel_s_let_o_omega__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__dasia__oxia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FAD", "1FA5"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipePush": [{
+			"1": "$${dasia_and_oxia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_oxia}",
+			"3": "${hel_c_let_o_omega__prosgegrammeni}${dasia_and_oxia}",
+			"4": "${dasia_and_oxia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_oxia}$",
+			"6": "${dasia_and_oxia}${hel_c_let_o_omega__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_oxia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_oxia}",
+			"3": "${hel_s_let_o_omega__ypogegrammeni}${dasia_and_oxia}",
+			"4": "${dasia_and_oxia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_oxia}$",
+			"6": "${dasia_and_oxia}${hel_s_let_o_omega__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__psili__oxia__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FAC", "1FA4"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipePush": [{
+			"1": "$${psili_and_oxia}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_oxia}",
+			"3": "${hel_c_let_o_omega__prosgegrammeni}${psili_and_oxia}",
+			"4": "${psili_and_oxia}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_oxia}$",
+			"6": "${psili_and_oxia}${hel_c_let_o_omega__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_oxia}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_oxia}",
+			"3": "${hel_s_let_o_omega__ypogegrammeni}${psili_and_oxia}",
+			"4": "${psili_and_oxia}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_oxia}$",
+			"6": "${psili_and_oxia}${hel_s_let_o_omega__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__dasia__perispomeni__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FAF", "1FA7"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipe": [[
+			"$${dasia}${perispomeni}${prosgegrammeni}",
+			"$${perispomeni}${dasia}${prosgegrammeni}",
+			"${hel_c_let_o_omega__dasia}${perispomeni}${prosgegrammeni}",
+			"${dasia}${perispomeni}${prosgegrammeni}$",
+			"${perispomeni}${dasia}${prosgegrammeni}$",
+			"${perispomeni}${prosgegrammeni}${hel_c_let_o_omega__dasia}"
+		], []],
+		"recipePush": [{
+			"1": "$${dasia_and_perispomeni}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${dasia_and_perispomeni}",
+			"3": "${hel_c_let_o_omega__prosgegrammeni}${dasia_and_perispomeni}",
+			"4": "${dasia_and_perispomeni}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${dasia_and_perispomeni}$",
+			"6": "${dasia_and_perispomeni}${hel_c_let_o_omega__prosgegrammeni}"
+		}, {
+			"1": "$${dasia_and_perispomeni}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${dasia_and_perispomeni}",
+			"3": "${hel_s_let_o_omega__ypogegrammeni}${dasia_and_perispomeni}",
+			"4": "${dasia_and_perispomeni}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${dasia_and_perispomeni}$",
+			"6": "${dasia_and_perispomeni}${hel_s_let_o_omega__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	},
+	"hel_[c,s]_let_o_omega__psili__perispomeni__[prosgegrammeni,ypogegrammeni]", {
+		"unicode": ["1FAE", "1FA6"],
+		"options": { "useLetterLocale": "omega$" },
+		"recipe": [[
+			"$${psili}${perispomeni}${prosgegrammeni}",
+			"$${perispomeni}${psili}${prosgegrammeni}",
+			"${hel_c_let_o_omega__psili}${perispomeni}${prosgegrammeni}",
+			"${psili}${perispomeni}${prosgegrammeni}$",
+			"${perispomeni}${psili}${prosgegrammeni}$",
+			"${perispomeni}${prosgegrammeni}${hel_c_let_o_omega__psili}"
+		], []],
+		"recipePush": [{
+			"1": "$${psili_and_perispomeni}${prosgegrammeni}",
+			"2": "$${prosgegrammeni}${psili_and_perispomeni}",
+			"3": "${hel_c_let_o_omega__prosgegrammeni}${psili_and_perispomeni}",
+			"4": "${psili_and_perispomeni}${prosgegrammeni}$",
+			"5": "${prosgegrammeni}${psili_and_perispomeni}$",
+			"6": "${psili_and_perispomeni}${hel_c_let_o_omega__prosgegrammeni}"
+		}, {
+			"1": "$${psili_and_perispomeni}${ypogegrammeni}",
+			"2": "$${ypogegrammeni}${psili_and_perispomeni}",
+			"3": "${hel_s_let_o_omega__ypogegrammeni}${psili_and_perispomeni}",
+			"4": "${psili_and_perispomeni}${ypogegrammeni}$",
+			"5": "${ypogegrammeni}${psili_and_perispomeni}$",
+			"6": "${psili_and_perispomeni}${hel_s_let_o_omega__ypogegrammeni}"
+		}],
+		"symbol": { "letter": "${hel_[c,s]_let_o_omega}" }
+	}
+]

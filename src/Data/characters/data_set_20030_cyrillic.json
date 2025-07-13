@@ -1,0 +1,809 @@
+[
+	"cyr_[c,s]_let_yus_little", {
+		"unicode": ["0466", "0467"],
+		"alterations": [{}, { "combining": "2DFD" }],
+		"options": { "useLetterLocale": true, "fastKey": "/Я/?Secondary" },
+		"recipe": ["\\ат\\"]
+	},
+	"cyr_[c,s]_let_yus_little_closed", {
+		"unicode": ["A658", "A659"],
+		"options": { "useLetterLocale": true, "fastKey": "/Я/?Primary" },
+		"recipe": ["\\а_т\\", "${cyr_[c,s]_let_yus_little}_"]
+	},
+	"cyr_[c,s]_let_yus_big", {
+		"unicode": ["046A", "046B"],
+		"alterations": [{}, { "combining": "2DFE" }],
+		"options": { "useLetterLocale": true, "fastKey": "<! /У/?Secondary" },
+		"recipe": ["\\аж\\"]
+	},
+	"cyr_[c,s]_let_yus_blended", {
+		"unicode": ["A65A", "A65B"],
+		"options": { "useLetterLocale": true, "fastKey": "/Ь/?Primary" },
+		"recipe": ["\\ажат\\", "${(cyr_[c,s]_let_yus_big|cyr_[c,s]_let_yus_little)}$(*)"]
+	},
+	"cyr_[c,s]_let_a_schwa", {
+		"unicode": ["04D8", "04D9"],
+		"alterations": [{}, { "combining": "1E04B" }],
+		"options": { "useLetterLocale": true, "fastKey": "<! /А/?Secondary" }
+	},
+	"cyr_[c,s]_let_a_schwa__diaeresis", {
+		"unicode": ["04DA", "04DB"],
+		"groups": ["Cyrillic"],
+		"options": { "useLetterLocale": "Origin", "fastKey": "<!>+ /А/?Secondary" }
+	},
+	"cyr_[c,s]_let_ye_anchor", {
+		"unicode": ["0404", "0454"],
+		"alterations": [{}, { "combining": "A674" }],
+		"options": { "secondName": true, "fastKey": "/Э/?Secondary" },
+		"symbol": { "letter": "%self%" }
+	},
+	"cyr_[c,s]_let_ye_yat", {
+		"unicode": ["0462", "0463"],
+		"alterations": [{}, { "combining": "2DFA" }],
+		"options": { "useLetterLocale": true, "fastKey": "<! /Е/?Secondary" },
+		"recipe": ["/Ь/${stroke_long}"]
+	},
+	"cyr_[s]_let_ye_yat_tall", {
+		"unicode": ["1C87"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["ь${stroke_long}${arrow_up}", "${cyr_s_let_ye_yat}${arrow_up}"]
+	},
+	"cyr_[c,s]_let_zh_dzhe", {
+		"unicode": ["040F", "045F"],
+		"alterations": [{}, { "subscript": "1E06A" }],
+		"options": { "useLetterLocale": true, "fastKey": "/Ц/?Primary" },
+		"recipe": ["\\дзж\\"]
+	},
+	"cyr_[c,s]_let_zh_dje", {
+		"unicode": ["0402", "0452"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ /Ж/?Secondary" },
+		"recipe": ["\\джь\\"]
+	},
+	"cyr_[c,s]_let_z_dzelo", {
+		"unicode": ["0405", "0455"],
+		"options": { "useLetterLocale": true, "fastKey": "<! /З/?Secondary" },
+		"recipe": ["\\зел\\"]
+	},
+	"cyr_[c,s]_let_z_dzelo_reversed", {
+		"unicode": ["A644", "A645"],
+		"options": { "useLetterLocale": true, "referenceLocale": "dzelo$" },
+		"recipe": ["\\зел\\${arrow_left}", "${cyr_[c,s]_let_z_dzelo}${arrow_left}"],
+		"symbol": { "beforeLetter": "reversed" }
+	},
+	"cyr_[c,s]_let_z_zemlya", {
+		"unicode": ["A640", "A641"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ /З/?Secondary" },
+		"recipe": ["\\зем\\"]
+	},
+	"cyr_[c,s]_let_z_dzelo_archaic", {
+		"unicode": ["A642", "A643"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["${cyr_[c,s]_let_z_zemlya}-", "-${cyr_[c,s]_let_z_zemlya}"]
+	},
+	"cyr_[c,s]_let_i_decimal", {
+		"unicode": ["0406", "0456"],
+		"alterations": [{}, { "combining": "1E08F", "modifier": "1E04C", "subscript": "1E068" }],
+		"options": { "secondName": true, "fastKey": "/И/?Secondary" }
+	},
+	"cyr_[c,s]_let_i_decimal__diaeresis", {
+		"unicode": ["0407", "0457"],
+		"groups": ["Cyrillic"],
+		"options": { "secondName": true, "fastKey": "/Й/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_i_decimal}" }
+	},
+	"cyr_[c,s]_let_i_iota", {
+		"unicode": ["A646", "A647"],
+		"options": { "useLetterLocale": true, "fastKey": "/И/?Primary" }
+	},
+	"cyr_[c,s]_let_y_jota", {
+		"unicode": ["0408", "0458"],
+		"alterations": [{}, { "modifier": "1E04D" }],
+		"options": { "useLetterLocale": true, "fastKey": "/Й/?Primary" }
+	},
+	"cyr_[c,s]_let_i_izhitsa", {
+		"unicode": ["0474", "0475"],
+		"options": { "secondName": true, "fastKey": "<! /И/?Secondary" }
+	},
+	"cyr_[c,s]_let_i_izhitsa__kendema", {
+		"unicode": ["0476", "0477"],
+		"groups": ["Cyrillic"],
+		"options": { "secondName": "Origin" },
+		"symbol": { "letter": "${cyr_[c,s]_let_i_izhitsa}" }
+	},
+	"cyr_[c,s]_let_k_ksi", {
+		"unicode": ["046E", "046F"],
+		"options": { "useLetterLocale": true, "fastKey": "<! /К/?Secondary" },
+		"recipe": ["\\КС\\"]
+	},
+	"cyr_[c,s]_let_q", {
+		"unicode": ["051A", "051B"],
+		"options": { "secondName": true, "fastKey": ">+ /К/?Secondary" },
+		"recipe": ["\\КА\\"]
+	},
+	"cyr_[c,s]_let_q_koppa", {
+		"unicode": ["0480", "0481"],
+		"options": { "useLetterLocale": true, "fastKey": "<+ /К/?Secondary" },
+		"recipe": ["\\КО\\"]
+	},
+	"cyr_[c,s]_let_l_palochka", {
+		"unicode": ["04C0", "04CF"],
+		"options": { "useLetterLocale": true, "fastKey": "<+<! /Л/?Secondary" }
+	},
+	"cyr_[c,s]_let_o_omega", {
+		"unicode": ["0460", "0461"],
+		"alterations": [{}, { "combining": "A67B" }],
+		"options": { "useLetterLocale": true, "fastKey": "<! /О/?Secondary" }
+	},
+	"cyr_[c,s]_let_o_omega__titlo", {
+		"unicode": ["047C", "047D"],
+		"groups": ["Cyrillic"],
+		"options": { "useLetterLocale": "Origin" }
+	},
+	"cyr_[c,s]_let_o_ot", {
+		"unicode": ["047E", "047F"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["${cyr_[c,s]_let_o_omega}\\Т\\"]
+	},
+	"cyr_[c,s]_let_o_omega_round", {
+		"unicode": ["047A", "047B"],
+		"options": { "useLetterLocale": true, "referenceLocale": "omega$" },
+		"recipe": ["\\О\\:", ".\\О\\."],
+		"symbol": { "beforeLetter": "round" }
+	},
+	"cyr_[c,s]_let_o_crossed", {
+		"unicode": ["A69A", "A69B"],
+		"options": { "referenceLocale": "o$" },
+		"recipe": ["\\ОХ\\"],
+		"symbol": { "beforeLetter": "crossed" }
+	},
+	"cyr_[c,s]_let_o_monocular", {
+		"unicode": ["A668", "A669"],
+		"options": { "referenceLocale": "o$" },
+		"recipe": ["\\О\\."],
+		"symbol": { "beforeLetter": "monocular" }
+	},
+	"cyr_[c,s]_let_o_monocular_double", {
+		"unicode": ["A66C", "A66D"],
+		"options": { "referenceLocale": "o$" },
+		"recipe": ["\\О\\.\\О\\.", "${cyr_[c,s]_let_o_monocular×2}"],
+		"symbol": { "beforeLetter": "double,monocular" }
+	},
+	"cyr_[c,s]_let_o_binocular", {
+		"unicode": ["A66A", "A66B"],
+		"options": { "referenceLocale": "o$" },
+		"recipe": [":\\О\\", "\\О\\.."],
+		"symbol": { "beforeLetter": "binocular" }
+	},
+	"cyr_n_gly_o_multiocular", {
+		"unicode": "A66E",
+		"options": { "referenceLocale": ":cyr_n_gly_o", "fastKey": "<!<+>+ /О/?Secondary" },
+		"recipe": ["О7", "${cyr_c_let_o_monocular×7}"],
+		"symbol": { "beforeLetter": "multiocular", "letter": "${cyr_c_let_o}" }
+	},
+	"cyr_[c,s]_let_p_psi", {
+		"unicode": ["0470", "0471"],
+		"options": { "useLetterLocale": true, "fastKey": "<! /П/?Secondary" },
+		"recipe": ["\\ПС\\"]
+	},
+	"cyr_[c,s]_let_u_straight", {
+		"unicode": ["04AE", "04AF"],
+		"options": { "secondName": true, "fastKey": "/Ъ/?Secondary" }
+	},
+	"cyr_[c,s]_let_u_straight__stroke_short", {
+		"unicode": ["04B0", "04B1"],
+		"groups": ["Cyrillic"],
+		"options": { "secondName": "Origin", "fastKey": "<+ /Ъ/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_u_straight}" }
+	},
+	"cyr_[c,s]_let_f_fita", {
+		"unicode": ["0472", "0473"],
+		"alterations": [{}, { "combining": "2DF4" }],
+		"options": { "useLetterLocale": true, "fastKey": "/Ф/?Secondary" },
+		"recipe": ["\\ФИ\\"]
+	},
+	"cyr_[c,s]_let_w", {
+		"unicode": ["051C", "051D"],
+		"options": { "secondName": true, "fastKey": "/В/?Secondary" },
+		"recipe": ["\\ВЭ\\"]
+	},
+	"cyr_[c,s]_let_h_shha", {
+		"unicode": ["04BA", "04BB"],
+		"options": { "useLetterLocale": true, "fastKey": "/Х/?Secondary" },
+		"recipe": ["\\хх\\"]
+	},
+	"cyr_[c,s]_let_h_shha__descender", {
+		"unicode": ["0526", "0527"],
+		"groups": ["Cyrillic"],
+		"options": { "useLetterLocale": "Origin" },
+		"recipe": ["${cyr_[c,s]_let_h_shha}${descender}", "${descender}${cyr_[c,s]_let_h_shha}"]
+	},
+	"cyr_[c,s]_let_ch_tshe", {
+		"unicode": ["040B", "045B"],
+		"options": { "useLetterLocale": true, "fastKey": "/Ч/?Secondary" },
+		"recipe": ["\\тьч\\", "\\т\\${cyr_[c,s]_let_h_shha}"]
+	},
+	"cyr_[c,s]_let_ch_djerv", {
+		"unicode": ["A648", "A649"],
+		"options": { "useLetterLocale": true, "fastKey": "<+<! /Ч/?Secondary" },
+		"recipe": ["\\чжь\\"]
+	},
+	"cyr_[c,s]_let_semisoft_sign", {
+		"unicode": ["048C", "048D"],
+		"alterations": [{}, { "modifier": "1E06C" }],
+		"options": { "useLetterLocale": true, "fastKey": "<! /Ь/?Secondary" },
+		"recipe": ["/Ь/${stroke_short}"]
+	},
+	"cyr_[c,s]_let_neutral_yer", {
+		"unicode": ["A64E", "A64F"],
+		"options": { "useLetterLocale": true, "fastKey": "/Ь/?Secondary" }
+	},
+	"cyr_[c,s]_let_y_yn", {
+		"unicode": ["A65E", "A65F"],
+		"options": { "useLetterLocale": true, "fastKey": "<! /Ы/?Secondary" },
+		"recipe": ["${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_i_izhitsa}"]
+	},
+	"cyr_[c,s]_let_z_dze", {
+		"unicode": ["04E0", "04E1"],
+		"options": { "useLetterLocale": true, "fastKey": "<!<+ /З/?Secondary" },
+		"recipe": ["\\ДЗЭ\\"]
+	},
+	"cyr_[c,s]_let_z_dzwe", {
+		"unicode": ["A682", "A683"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["${cyr_[c,s]_let_z_dze}${cyr_[c,s]_let_a_schwa}"]
+	},
+	"cyr_[c,s]_let_ts_tswe", {
+		"unicode": ["A68E", "A68F"],
+		"options": { "useLetterLocale": true, "fastKey": "/Ц/?Secondary" },
+		"recipe": ["\\Ц\\${cyr_[c,s]_let_a_schwa}"]
+	},
+	"cyr_[c,s]_let_sh_shwe", {
+		"unicode": ["A696", "A697"],
+		"options": { "useLetterLocale": true, "fastKey": "/Ш/?Secondary" },
+		"recipe": ["\\Ш\\${cyr_[c,s]_let_a_schwa}"]
+	},
+	"cyr_[c,s]_let_t_twe", {
+		"unicode": ["A68C", "A68D"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ /Т/?Secondary" },
+		"recipe": ["\\Т\\${cyr_[c,s]_let_a_schwa}"]
+	},
+	"cyr_[c,s]_let_h_hwe", {
+		"unicode": ["A694", "A695"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ /Х/?Secondary" },
+		"recipe": ["\\Х\\${cyr_[c,s]_let_a_schwa}"]
+	},
+	"cyr_[c,s]_let_h_abkhasian", {
+		"unicode": ["04A8", "04A9"],
+		"options": { "useLetterLocale": true, "fastKey": "/Щ/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_h}" }
+	},
+	"cyr_[c,s]_let_ch_abkhasian", {
+		"unicode": ["04BC", "04BD"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_ch}" }
+	},
+	"cyr_[c,s]_let_de_komi", {
+		"unicode": ["0500", "0501"],
+		"options": { "useLetterLocale": true, "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_d}" },
+		"recipe": ["\\кдэ\\"]
+	},
+	"cyr_[c,s]_let_dje_komi", {
+		"unicode": ["0502", "0503"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_d}" },
+		"recipe": ["\\кде\\"]
+	},
+	"cyr_[c,s]_let_zje_komi", {
+		"unicode": ["0504", "0505"],
+		"options": { "useLetterLocale": true, "fastKey": "<!>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_z}" },
+		"recipe": ["\\кзе\\"]
+	},
+	"cyr_[c,s]_let_dzje_komi", {
+		"unicode": ["0506", "0507"],
+		"options": { "useLetterLocale": true, "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_d}" },
+		"recipe": ["\\кдзе\\"]
+	},
+	"cyr_[c,s]_let_lje_komi", {
+		"unicode": ["0508", "0509"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_l}" },
+		"recipe": ["\\кле\\"]
+	},
+	"cyr_[c,s]_let_nje_komi", {
+		"unicode": ["050A", "050B"],
+		"options": { "useLetterLocale": true, "fastKey": "<!<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_n}" },
+		"recipe": ["\\кне\\"]
+	},
+	"cyr_[c,s]_let_sje_komi", {
+		"unicode": ["050C", "050D"],
+		"options": { "useLetterLocale": true, "fastKey": "<! $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_s}" },
+		"recipe": ["\\ксе\\"]
+	},
+	"cyr_[c,s]_let_tje_komi", {
+		"unicode": ["050E", "050F"],
+		"options": { "useLetterLocale": true, "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_t}" },
+		"recipe": ["\\кте\\"]
+	},
+	"cyr_[c,s]_let_z_reversed", {
+		"unicode": ["0510", "0511"],
+		"options": { "referenceLocale": "z$" },
+		"recipe": ["$${arrow_left}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_z}", "beforeLetter": "reversed" }
+	},
+	"cyr_[c,s]_let_ts_reversed", {
+		"unicode": ["A660", "A661"],
+		"options": { "referenceLocale": "ts$", "fastKey": "<! $?Secondary" },
+		"recipe": ["$${arrow_left}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_ts}", "beforeLetter": "reversed" }
+	},
+	"cyr_[c,s]_lig_yus_little_iotified", {
+		"unicode": ["0468", "0469"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ /Я/?Secondary" },
+		"recipe": ["${cyr_[c,s]_let_i_decimal}\\ат\\", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_yus_little}"]
+	},
+	"cyr_[c,s]_lig_yus_big_iotified", {
+		"unicode": ["046C", "046D"],
+		"options": { "useLetterLocale": true, "fastKey": "<!>+ /У/?Secondary" },
+		"recipe": ["${cyr_[c,s]_let_i_decimal}\\аж\\", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_yus_big}"]
+	},
+	"cyr_[c,s]_lig_yus_little_closed_iotified", {
+		"unicode": ["A65C", "A65D"],
+		"options": { "useLetterLocale": true, "fastKey": "<+>+ /Я/?Secondary" },
+		"recipe": ["${cyr_[c,s]_let_i_decimal}\\а_т\\", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_yus_little_closed}"]
+	},
+	"cyr_[c,s]_lig_ae", {
+		"unicode": ["04D4", "04D5"],
+		"symbol": { "letter": "${cyr_[c,s]_let_a}${cyr_[c,s]_let_ye}" }
+	},
+	"cyr_[c,s]_lig_a_iotified", {
+		"unicode": ["A656", "A657"],
+		"options": { "useLetterLocale": true, "fastKey": "<+ /Я/?Secondary" },
+		"recipe": ["${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_a}"]
+	},
+	"cyr_[c,s]_lig_dche", {
+		"unicode": ["052C", "052D"],
+		"options": {  "fastKey": "<!<+ /Д/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_d}${cyr_[c,s]_let_ch}" }
+	},
+	"cyr_[c,s]_lig_dzzhe", {
+		"unicode": ["052A", "052B"],
+		"options": {  "fastKey": "<! /Д/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_d}${cyr_[c,s]_let_zh}" }
+	},
+	"cyr_[c,s]_lig_ye_iotified", {
+		"unicode": ["0464", "0465"],
+		"options": { "useLetterLocale": true, "fastKey": "<! /Э/?Secondary" },
+		"recipe": ["${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_e}", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_ye_anchor}"]
+	},
+	"cyr_[c,s]_lig_ye_yat_iotified", {
+		"unicode": ["A652", "A653"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["${cyr_[c,s]_let_i_decimal}/Ь/${stroke_long}", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_ye_yat}"]
+	},
+	"cyr_[c,s]_lig_dzze", {
+		"unicode": ["A688", "A689"],
+		"symbol": { "letter": "${cyr_[c,s]_let_d}${cyr_[c,s]_let_z}${cyr_[c,s]_let_z}" }
+	},
+	"cyr_[c,s]_lig_zhwe", {
+		"unicode": ["A684", "A685"],
+		"symbol": { "letter": "${cyr_[c,s]_let_z}${cyr_[c,s]_let_zh}" }
+	},
+	"cyr_[c,s]_lig_lha", {
+		"unicode": ["0514", "0515"],
+		"symbol": { "letter": "${cyr_[c,s]_let_l}${cyr_[c,s]_let_h}" }
+	},
+	"cyr_[c,s]_lig_lje", {
+		"unicode": ["0409", "0459"],
+		"options": { "fastKey": "/Л/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_l}${cyr_[c,s]_let_yeri}" }
+	},
+	"cyr_[c,s]_lig_nje", {
+		"unicode": ["040A", "045A"],
+		"options": { "fastKey": "/Н/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_n}${cyr_[c,s]_let_yeri}" }
+	},
+	"cyr_[c,s]_lig_oo", {
+		"unicode": ["A698", "A699"],
+		"symbol": { "letter": "${cyr_[c,s]_let_o×2}" }
+	},
+	"cyr_[c,s]_lig_rha", {
+		"unicode": ["0516", "0517"],
+		"symbol": { "letter": "${cyr_[c,s]_let_r}${cyr_[c,s]_let_h}" }
+	},
+	"cyr_[c,s]_lig_tetse", {
+		"unicode": ["04B4", "04B5"],
+		"symbol": { "letter": "${cyr_[c,s]_let_t}${cyr_[c,s]_let_ts}" }
+	},
+	"cyr_[c,s]_lig_tsse", {
+		"unicode": ["A690", "A691"],
+		"symbol": { "letter": "${cyr_[c,s]_let_t}${cyr_[c,s]_let_s}${cyr_[c,s]_let_s}" }
+	},
+	"cyr_[c,s]_lig_tche", {
+		"unicode": ["A692", "A693"],
+		"symbol": { "letter": "${cyr_[c,s]_let_t}${cyr_[c,s]_let_ch}" }
+	},
+	"cyr_[c,s]_lig_tje", {
+		"unicode": ["1C89", "1C8A"],
+		"options": { "fastKey": "/Т/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_t}${cyr_[c,s]_let_yeri}" }
+	},
+	"cyr_[c,s]_lig_uk", {
+		"unicode": ["A64A", "A64B"],
+		"options": { "useLetterLocale": true, "fastKey": "/У/?Primary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_o}${arrow_up}${cyr_[c,s]_let_u}" }
+	},
+	"cyr_[s]_lig_uk_unblended", {
+		"unicode": ["1C88"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["${cyr_s_let_i_izhitsa}${cyr_s_let_o}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_o}${cyr_s_let_u}", "afterLetter": "unblended" }
+	},
+	"cyr_[c,s]_lig_cche", {
+		"unicode": ["A686", "A687"],
+		"symbol": { "letter": "${cyr_[c,s]_let_ch}${cyr_[c,s]_let_ch}" }
+	},
+	"cyr_[c,s]_lig_yae", {
+		"unicode": ["0518", "0519"],
+		"symbol": { "letter": "${cyr_[c,s]_let_ya}${cyr_[c,s]_let_ye}" }
+	},
+	"cyr_[c,s]_lig_soft_d", {
+		"unicode": ["A662", "A663"],
+		"recipe": ["$${cyr_[c,s]_let_g}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_d}", "beforeLetter": "soft" }
+	},
+	"cyr_[c,s]_lig_soft_l", {
+		"unicode": ["A664", "A665"],
+		"recipe": ["$${cyr_[c,s]_let_g}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_l}", "beforeLetter": "soft" }
+	},
+	"cyr_[c,s]_lig_soft_m", {
+		"unicode": ["A666", "A667"],
+		"recipe": ["$${cyr_[c,s]_let_g}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_m}", "beforeLetter": "soft" }
+	},
+	"cyr_[c,s]_lig_soft_n", {
+		"unicode": ["04A4", "04A5"],
+		"recipe": ["$${cyr_[c,s]_let_g}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_n}", "beforeLetter": "soft" }
+	},
+	"cyr_[c,s]_dig_uk", {
+		"unicode": ["0478", "0479"],
+		"options": { "useLetterLocale": true },
+		"symbol": { "letter": "${cyr_[c,s]_let_o}${cyr_[c,s]_let_u}" }
+	},
+	"cyr_[c,s]_dig_yeru", {
+		"unicode": ["042B", "044B"],
+		"alterations": [{}, { "combining": "A679", "modifier": "1E047", "subscript": "1E066" }],
+		"options": { "secondName": true, "noCalc": true },
+		"recipe": ["${cyr_[c,s]_let_yeri}${cyr_[c,s]_let_i_decimal}"]
+	},
+	"cyr_[c,s]_dig_yeru__diaeresis", {
+		"unicode": ["04F8", "04F9"],
+		"options": { "secondName": "Origin", "fastKey": "<+ /Ы/?Secondary" },
+		"recipe": [
+			"${cyr_[c,s]_let_yeri}${cyr_[c,s]_let_i_decimal}${diaeresis}",
+			"${cyr_[c,s]_dig_yeru}${diaeresis}"
+		],
+		"symbol": { "letter": "${cyr_[c,s]_dig_yeru}" }
+	},
+	"cyr_[c,s]_dig_yeru_with_back_yer", {
+		"unicode": ["A650", "A651"],
+		"options": { "secondName": true, "fastKey": "/Ы/?Secondary" },
+		"alterations": [{}, { "modifier": "1E06C" }],
+		"recipe": ["${cyr_[c,s]_let_yer}${cyr_[c,s]_let_i_decimal}"]
+	},
+	"cyr_[c,s]_let_a__breve", {
+		"unicode": ["04D0", "04D1"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_a}" }
+	},
+	"cyr_[c,s]_let_a__diaeresis", {
+		"unicode": ["04D2", "04D3"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_a}" }
+	},
+	"cyr_[c,s]_let_g__acute", {
+		"unicode": ["0403", "0453"],
+		"options": { "fastKey": "$?Primary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_g}" }
+	},
+	"cyr_[c,s]_let_g__descender", {
+		"unicode": ["04F6", "04F7"],
+		"options": { "fastKey": "<! $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_g}" }
+	},
+	"cyr_[c,s]_let_g__middle_hook", {
+		"unicode": ["0494", "0495"],
+		"options": { "fastKey": "<!>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_g}" },
+		"recipe": ["$${arrow_right}"]
+	},
+	"cyr_[c,s]_let_g__upturn", {
+		"unicode": ["0490", "0491"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_g}" }
+	},
+	"cyr_[c,s]_let_g__stroke_short", {
+		"unicode": ["0492", "0493"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_g}" }
+	},
+	"cyr_[c,s]_let_g__stroke_short__palatal_hook", {
+		"unicode": ["04FA", "04FB"],
+		"recipe": [
+			"$${stroke_short}${palatal_hook}",
+			"${cyr_[c,s]_let_g__stroke_short}${palatal_hook}",
+			"${stroke_short}${palatal_hook}$",
+			"${palatal_hook}${cyr_[c,s]_let_g__stroke_short}"
+		],
+		"symbol": { "letter": "${cyr_[c,s]_let_g}" }
+	},
+	"cyr_[c,s]_let_d_dwe", {
+		"unicode": ["A680", "A681"],
+		"groups": ["Cyrillic Accented"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["$${arrow_up}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_d}" }
+	},
+	"cyr_[c,s]_let_ye__breve", {
+		"unicode": ["04D6", "04D7"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_ye}" }
+	},
+	"cyr_[c,s]_let_ye__diaeresis", {
+		"unicode": ["0401", "0451"],
+		"options": { "noCalc": true, "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_ye}" }
+	},
+	"cyr_[c,s]_let_ye__grave", {
+		"unicode": ["0400", "0450"],
+		"options": { "fastKey": "$?Tertiary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_ye}" }
+	},
+	"cyr_[c,s]_let_zh__breve", {
+		"unicode": ["04C1", "04C2"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_zh}" }
+	},
+	"cyr_[c,s]_let_zh__diaeresis", {
+		"unicode": ["04DC", "04DD"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_zh}" }
+	},
+	"cyr_[c,s]_let_zh__descender", {
+		"unicode": ["0496", "0497"],
+		"options": { "fastKey": "<! $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_zh}" }
+	},
+	"cyr_[c,s]_let_z__diaeresis", {
+		"unicode": ["04DE", "04DF"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_z}" }
+	},
+	"cyr_[c,s]_let_z__descender", {
+		"unicode": ["0498", "0499"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_z}" }
+	},
+	"cyr_[c,s]_let_i__breve", {
+		"unicode": ["0419", "0439"],
+		"options": { "noCalc": true },
+		"symbol": { "letter": "${cyr_[c,s]_let_i}" }
+	},
+	"cyr_[c,s]_let_i__breve__rtl_tail", {
+		"unicode": ["048A", "048B"],
+		"options": { "fastKey": "<+>+ $?Secondary" },
+		"recipe": [
+			"$${breve}${rtl_tail}",
+			"${cyr_[c,s]_let_i__breve}${rtl_tail}",
+			"${breve}${rtl_tail}$",
+			"${rtl_tail}${cyr_[c,s]_let_i__breve}"
+		],
+		"symbol": { "letter": "${cyr_[c,s]_let_i}" }
+	},
+	"cyr_[c,s]_let_i__diaeresis", {
+		"unicode": ["04E4", "04E5"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_i}" }
+	},
+	"cyr_[c,s]_let_i__macron", {
+		"unicode": ["04E2", "04E3"],
+		"options": { "fastKey": ">+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_i}" }
+	},
+	"cyr_[c,s]_let_k__acute", {
+		"unicode": ["040C", "045C"],
+		"options": { "fastKey": "<! $?Primary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_k}" }
+	},
+	"cyr_[c,s]_let_k__stroke_short", {
+		"unicode": ["049E", "049F"],
+		"options": { "fastKey": "<!<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_k}" }
+	},
+	"cyr_[c,s]_let_k__descender", {
+		"unicode": ["049A", "049B"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_k}" }
+	},
+	"cyr_[c,s]_let_k__horizontal_element_left", {
+		"unicode": ["04A0", "04A1"],
+		"options": { "fastKey": "<+>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_k}" }
+	},
+	"cyr_[c,s]_let_k__stroke_vertical", {
+		"unicode": ["049C", "049D"],
+		"options": { "fastKey": "<!<+>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_k}" },
+		"recipe": ["$|"]
+	},
+	"cyr_[c,s]_let_k__stroke_right", {
+		"unicode": ["051E", "051F"],
+		"options": { "fastKey": "<+>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_k}" },
+		"recipe": ["$\\"]
+	},
+	"cyr_[c,s]_let_k__common_hook", {
+		"unicode": ["04C3", "04C4"],
+		"options": { "fastKey": "<!>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_k}" },
+		"recipe": ["$${arrow_right}"]
+	},
+	"cyr_[c,s]_let_l__descender", {
+		"unicode": ["052E", "052F"],
+		"options": { "fastKey": "<! $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_l}" }
+	},
+	"cyr_[c,s]_let_l__middle_hook", {
+		"unicode": ["0520", "0521"],
+		"options": { "fastKey": "<!>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_l}" },
+		"recipe": ["$${arrow_right}"]
+	},
+	"cyr_[c,s]_let_l__common_hook", {
+		"unicode": ["0512", "0513"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_l}" },
+		"recipe": ["$${arrow_up}"]
+	},
+	"cyr_[c,s]_let_l__rtl_tail", {
+		"unicode": ["04C5", "04C6"],
+		"options": { "fastKey": "<+>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_l}" }
+	},
+	"cyr_[c,s]_let_m__rtl_tail", {
+		"unicode": ["04CD", "04CE"],
+		"options": { "fastKey": "<+>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_m}" }
+	},
+	"cyr_[c,s]_let_n__descender", {
+		"unicode": ["04A2", "04A3"],
+		"options": { "fastKey": "<! $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_n}" }
+	},
+	"cyr_[c,s]_let_n__middle_hook", {
+		"unicode": ["0522", "0523"],
+		"options": { "fastKey": "<!>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_n}" },
+		"recipe": ["$${arrow_right}"]
+	},
+	"cyr_[c,s]_let_n__left_hook", {
+		"unicode": ["0528", "0529"],
+		"options": { "fastKey": ">+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_n}" },
+		"recipe": ["$${arrow_left}"]
+	},
+	"cyr_[c,s]_let_n__common_hook", {
+		"unicode": ["04C7", "04C8"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_n}" },
+		"recipe": ["$${arrow_up}"]
+	},
+	"cyr_[c,s]_let_n__rtl_tail", {
+		"unicode": ["04C9", "04CA"],
+		"options": { "fastKey": "<+>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_n}" }
+	},
+	"cyr_[c,s]_let_o__diaeresis", {
+		"unicode": ["04E6", "04E7"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_o}" }
+	},
+	"cyr_[c,s]_let_o_barred", {
+		"unicode": ["04E8", "04E9"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_o}", "beforeLetter": "barred" },
+		"recipe": ["$-"]
+	},
+	"cyr_[c,s]_let_p__descender", {
+		"unicode": ["0524", "0525"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_p}" }
+	},
+	"cyr_[c,s]_let_p__middle_hook", {
+		"unicode": ["04A6", "04A7"],
+		"options": { "fastKey": "<!>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_p}" },
+		"recipe": ["$${arrow_right}"]
+	},
+	"cyr_[c,s]_let_r__tick", {
+		"unicode": ["048E", "048F"],
+		"options": { "fastKey": ">+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_r}" },
+		"recipe": ["$\\"]
+	},
+	"cyr_[c,s]_let_s__descender", {
+		"unicode": ["04AA", "04AB"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_s}" }
+	},
+	"cyr_[c,s]_let_t__descender", {
+		"unicode": ["04AC", "04AD"],
+		"options": { "fastKey": "<! $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_t}" }
+	},
+	"cyr_[c,s]_let_t__middle_hook", {
+		"unicode": ["A68A", "A68A"],
+		"options": { "fastKey": "<!>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_t}" },
+		"recipe": ["$${arrow_right}"]
+	},
+	"cyr_[c,s]_let_u__breve", {
+		"unicode": ["040E", "045E"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_u}" }
+	},
+	"cyr_[c,s]_let_u__diaeresis", {
+		"unicode": ["04F0", "04F1"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_u}" }
+	},
+	"cyr_[c,s]_let_u__macron", {
+		"unicode": ["04EE", "04EF"],
+		"options": { "fastKey": ">+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_u}" }
+	},
+	"cyr_[c,s]_let_h__descender", {
+		"unicode": ["04B2", "04B3"],
+		"options": { "fastKey": "<! $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_h}" }
+	},
+	"cyr_[c,s]_let_h__common_hook", {
+		"unicode": ["04FC", "04FD"],
+		"options": { "fastKey": "<+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_h}" },
+		"recipe": ["$${arrow_up}"]
+	},
+	"cyr_[c,s]_let_ch__descender", {
+		"unicode": ["04B6", "04B7"],
+		"options": { "fastKey": "<! $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_ch}" }
+	},
+	"cyr_[c,s]_let_ch__diaeresis", {
+		"unicode": ["04F4", "04F5"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_ch}" }
+	},
+	"cyr_[c,s]_let_ch__stroke_vertical", {
+		"unicode": ["04B8", "04B9"],
+		"options": { "fastKey": "<!>+ $?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_ch}" },
+		"recipe": ["$|"]
+	},
+	"cyr_[c,s]_let_ch_abkhasian__descender", {
+		"unicode": ["04BE", "04BF"],
+		"options": { "useLetterLocale": "Origin", "fastKey": "<+>+ /Ч/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_ch_abkhasian}" }
+	},
+	"cyr_[c,s]_let_e__diaeresis", {
+		"unicode": ["04EC", "04ED"],
+		"options": { "fastKey": "$?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_e}" }
+	}
+]

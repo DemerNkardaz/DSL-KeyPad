@@ -53,9 +53,6 @@ Class ChrLib {
 	static __New() {
 		ChrReg(characters.data)
 
-		; if !characters.data.Has("isDump")
-		; 	JSON.DumpFile(ChrLib.entries, this.dumpPath, , "UTF-8")
-
 		if ChrLib.duplicatesList.Count > 0 {
 			TrayTip(Locale.ReadInject("warnings.duplicate_recipe", [ChrLib.duplicatesList.Keys().ToString()]), App.Title("+status+version"), "Icon! Mute")
 			output := ""

@@ -19,9 +19,9 @@ initialized := False
 
 #Include <External\JSON>
 #Include <External\function_gui_button_icon>
-#Include <external_libs_extension>
 
 #Include <utils>
+#Include <external_libs_extension>
 #Include <hotstrings>
 #Include <default_variables>
 ; Supplementary include with binds that calls functions/methods

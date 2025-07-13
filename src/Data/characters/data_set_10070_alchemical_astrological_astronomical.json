@@ -1,0 +1,290 @@
+[
+	"alchemical_element_air", {
+		"unicode": "1F701",
+		"tags": ["alchemical air", "алхимический воздух"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc air"]
+	},
+	"alchemical_element_fire", {
+		"unicode": "1F702",
+		"tags": ["alchemical fire", "алхимический огонь"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc fire"]
+	},
+	"alchemical_element_earth", {
+		"unicode": "1F703",
+		"tags": ["alchemical earth", "алхимическая земля"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc earth"]
+	},
+	"alchemical_element_water", {
+		"unicode": "1F704",
+		"tags": ["alchemical water", "алхимическая вода"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc water"]
+	},
+	"alchemical_acid_nitric", {
+		"unicode": "1F705",
+		"tags": ["alchemical nitric acid", "alchemical aqua fortis", "алхимическая азотная кислота"],
+		"groups": ["Alchemical"],
+		"recipe": ["${alchemical_element_water}F", "alc nitric acid", "alc aqua fortis"]
+	},
+	"alchemical_acid_nitrohydrochloric", {
+		"unicode": "1F706",
+		"tags": ["alchemical nitrohydrochloric acid", "alchemical aqua regia", "алхимическая царская водка"],
+		"groups": ["Alchemical"],
+		"recipe": ["${alchemical_element_water}R", "alc aqua regia"]
+	},
+	"alchemical_acid_vinegar", {
+		"unicode": "1F70A",
+		"tags": ["alchemical acetic acid", "alchemical vinegar", "алхимическая уксусная кислота"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc acetic acid", "alc vinegar"]
+	},
+	"alchemical_acid_vinegar_distilled_1", {
+		"unicode": "1F70B",
+		"tags": ["alchemical distilled acetic acid-1", "alchemical distilled vinegar-1", "алхимическая дистилированная уксусная кислота-1"],
+		"groups": ["Alchemical"],
+		"recipe": [":${alchemical_acid_vinegar}:", "alc dis vinegar-1"]
+	},
+	"alchemical_acid_vinegar_distilled_2", {
+		"unicode": "1F70C",
+		"tags": ["alchemical distilled acetic acid-2", "alchemical distilled vinegar-2", "алхимическая дистилированная уксусная кислота-2"],
+		"groups": ["Alchemical"],
+		"recipe": [":I:", "alc dis vinegar-2"]
+	},
+	"alchemical_sand_bath", {
+		"unicode": "1F707",
+		"tags": ["alchemical sand bath", "alchemical aqua regia-2", "алхимическая песчаная баня", "алхимическая царская водка-2"],
+		"groups": ["Alchemical"],
+		"recipe": ["AR", "alc sand bath"]
+	},
+	"alchemical_ethanol_1", {
+		"unicode": "1F708",
+		"tags": ["alchemical ethanol-1", "alchemical aqua vitae-1", "алхимический этанол-1"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc ethanol-1"]
+	},
+	"alchemical_ethanol_2", {
+		"unicode": "1F709",
+		"tags": ["alchemical ethanol-2", "alchemical aqua vitae-2", "алхимический этанол-2"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc ethanol-2"]
+	},
+	"alchemical_brimstone", {
+		"unicode": "1F70D",
+		"tags": ["alchemical brimstone", "alchemical sulfur", "alchemical sulphur", "алхимическая сера"],
+		"groups": ["Alchemical"],
+		"recipe": ["${alchemical_element_fire}${dagger}", "alc sulfur"]
+	},
+	"alchemical_brimstone_philosophers", {
+		"unicode": "1F70E",
+		"tags": ["alchemical philosophers brimstone", "alchemical philosophers sulfur", "alchemical philosophers sulphur", "алхимическая философская сера"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc phi sulfur"]
+	},
+	"alchemical_brimstone_black", {
+		"unicode": "1F70F",
+		"tags": ["alchemical black brimstone", "alchemical black sulfur", "alchemical black sulphur", "алхимическая чёрная сера"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc black sulfur"]
+	},
+	"alchemical_salt", {
+		"unicode": "1F714",
+		"tags": ["alchemical salt", "archaic astrological Earth", "алхимическая соль", "архаичное астрологическая Земля"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc salt", "ast arc Earth"]
+	},
+	"alchemical_potassium_nitrate", {
+		"unicode": "1F715",
+		"tags": ["alchemical potassium nitrate", "alchemical nitre", "алхимический нитрат калия"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc nitre"]
+	},
+	"alchemical_vitriol_1", {
+		"unicode": "1F716",
+		"tags": ["alchemical metal sulfate-1", "alchemical vitriol-1", "алхимический сульфат металла-1"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc vitriol-1"]
+	},
+	"alchemical_vitriol_2", {
+		"unicode": "1F717",
+		"tags": ["alchemical metal sulfate-2", "alchemical vitriol-2", "алхимический сульфат металла-2"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc vitriol-2"]
+	},
+	"alchemical_rock_salt_1", {
+		"unicode": "1F718",
+		"tags": ["alchemical rock salt-1", "alchemical bismuth", "алхимическая каменная соль-1", "алхимический висмут"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc rock salt-1", "alc bismuth"]
+	},
+	"alchemical_rock_salt_2", {
+		"unicode": "1F719",
+		"tags": ["alchemical rock salt-2", "алхимическая каменная соль-2"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc rock salt-2"]
+	},
+	"alchemical_gold", {
+		"unicode": "1F71A",
+		"tags": ["alchemical gold", "алхимическое золото"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc gold"]
+	},
+	"alchemical_silver", {
+		"unicode": "1F71B",
+		"tags": ["alchemical silver", "алхимическое серебро"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc silver"]
+	},
+	"alchemical_iron_ore_1", {
+		"unicode": "1F71C",
+		"tags": ["alchemical iron ore-1", "алхимическая железая руда-1"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc iron ore-1"]
+	},
+	"alchemical_iron_ore_2", {
+		"unicode": "1F71D",
+		"tags": ["alchemical iron ore-2", "алхимическая железая руда-2"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc iron ore-2"]
+	},
+	"alchemical_copper_ore", {
+		"unicode": "1F720",
+		"tags": ["alchemical copper ore", "алхимическая медная руда"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc cop ore"]
+	},
+	"alchemical_iron_copper_ore", {
+		"unicode": "1F721",
+		"tags": ["alchemical iron-copper ore", "алхимическая медно-железная руда"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc iron cop ore"]
+	},
+	"alchemical_crocus_of_iron", {
+		"unicode": "1F71E",
+		"tags": ["alchemical crocus of iron", "алхимический крокус железа"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc iron croc"]
+	},
+	"alchemical_regulus_of_iron", {
+		"unicode": "1F71F",
+		"tags": ["alchemical regulus of iron", "алхимический регулус железа"],
+		"groups": ["Alchemical"],
+		"recipe": ["alc iron regu"]
+	},
+	"astrological_earth", {
+		"unicode": "1F728",
+		"tags": ["alchemical copper acetate", "alchemical aes viride", "astrological Earth", "алхимический ацетат меди", "астрологическая Земля"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Earth", "alc cop acetate"]
+	},
+	"astrological_neptune", {
+		"unicode": "2646",
+		"tags": ["astrological Neptune", "астрологический Нептун"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Neptune"]
+	},
+	"astrological_uranus", {
+		"unicode": "2645",
+		"tags": ["astrological Uranus", "астрологический Уран"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Uranus"]
+	},
+	"astrological_pluto_1", {
+		"unicode": "2647",
+		"tags": ["astrological Pluto-1", "астрологическая Плутон-1"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Pluto-1"]
+	},
+	"astrological_pluto_2", {
+		"unicode": "2BD3",
+		"tags": ["astrological Pluto-2", "астрологическая Плутон-2"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Pluto-2"]
+	},
+	"astrological_pluto_3", {
+		"unicode": "2BD4",
+		"tags": ["astrological Pluto-3", "астрологическая Плутон-3"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Pluto-3"]
+	},
+	"astrological_pluto_4", {
+		"unicode": "2BD5",
+		"tags": ["astrological Pluto-4", "астрологическая Плутон-4"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Pluto-4"]
+	},
+	"astrological_pluto_5", {
+		"unicode": "2BD6",
+		"tags": ["astrological Pluto-5", "астрологическая Плутон-5"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Pluto-5"]
+	},
+	"astrological_transpluto", {
+		"unicode": "2BD7",
+		"tags": ["astrological Transpluto", "астрологическая Трансплутон"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Transpluto"]
+	},
+	"astrological_vesta", {
+		"unicode": "26B6",
+		"tags": ["astrological Vesta", "астрологическая Веста"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Vesta"]
+	},
+	"astrological_chiron", {
+		"unicode": "26B7",
+		"tags": ["astrological Chiron", "астрологическая Хирон"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Chiron"]
+	},
+	"astrological_proserpina", {
+		"unicode": "2BD8",
+		"tags": ["astrological Proserpina", "астрологическая Прозерпина"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Proserpina"]
+	},
+	"astrological_astraea", {
+		"unicode": "2BD9",
+		"tags": ["astrological Astraea", "астрологическая Астрея"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Astraea"]
+	},
+	"astrological_hygiea", {
+		"unicode": "2BDA",
+		"tags": ["astrological Hygiea", "астрологическая Гигея"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Hygiea"]
+	},
+	"astrological_pholus", {
+		"unicode": "2BDB",
+		"tags": ["astrological Pholus", "астрологическая Фол"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Pholus"]
+	},
+	"astrological_nessus", {
+		"unicode": "2BDC",
+		"tags": ["astrological Nessus", "астрологическая Несс"],
+		"groups": ["Astrology"],
+		"recipe": ["ast Nessus"]
+	},
+	"astronomical_earth", {
+		"unicode": "2641",
+		"tags": ["alchemical antimony trisulfide", "alchemical stibnite", "astronomical Earth", "алхимический стибнит", "алхимический сульфид сурьмы", "астрономическая Земля"],
+		"groups": ["Astronomy"],
+		"recipe": ["asn Earth", "alc stibnite"]
+	},
+	"astronomical_neptune", {
+		"unicode": "2BC9",
+		"tags": ["astronomical Neptune", "астрономический Нептун"],
+		"groups": ["Astrology"],
+		"recipe": ["asn Neptune"]
+	},
+	"astronomical_uranus", {
+		"unicode": "26E2",
+		"tags": ["astronomical Uranus", "астрономический Уран"],
+		"groups": ["Astronomy"],
+		"recipe": ["asn Uranus"]
+	}
+]

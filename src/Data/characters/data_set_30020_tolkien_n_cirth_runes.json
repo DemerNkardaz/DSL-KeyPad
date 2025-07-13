@@ -1,0 +1,14 @@
+[
+	"tolkien_runic_n_rune_k", {
+		"unicode": "16F1",
+		"options": { "altLayoutKey": ">!>+ $", "useLetterLocale": true }
+	},
+	"tolkien_runic_n_rune_s_sh", {
+		"unicode": "16F2",
+		"options": { "altLayoutKey": ">!>+ $", "useLetterLocale": true }
+	},
+	"tolkien_runic_n_rune_o_oo", {
+		"unicode": "16F3",
+		"options": { "altLayoutKey": ">!>+ $", "useLetterLocale": true }
+	}
+]

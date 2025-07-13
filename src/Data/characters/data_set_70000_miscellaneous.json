@@ -1,0 +1,101 @@
+[
+	"amogus", {
+		"titles": {"ru-RU": "Амогус", "en-US": "Amogus"},
+		"tags": ["амогус", "член экипажа", "amogus", "crewmate"],
+		"unicode": "0D9E",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"recipe": ["sus", "сус"]
+	},
+	"replacment_character", {
+		"titles": {"ru-RU": "Заменяющий символ", "en-US": "Replacement character"},
+		"unicode": "FFFD",
+		"options": { "noCalc": true },
+		"recipe": ["null"]
+	},
+	"object_replacement_character", {
+		"titles": {"ru-RU": "Объекто-заменяющий символ", "en-US": "Object replacement character"},
+		"unicode": "FFFC",
+		"options": { "noCalc": true },
+		"recipe": ["obj"]
+	},
+	"left_to_right_mark", {
+		"titles": {"ru-RU": "Маркер направления слева направо", "en-US": "Left to Right Mark"},
+		"tags": ["left to right mark", "ltr mark", "маркер направления слева направо"],
+		"unicode": "200E",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<LTR MARK>" },
+		"recipe": ["LRM"]
+	},
+	"right_to_left_mark", {
+		"titles": {"ru-RU": "Маркер направления справа налево", "en-US": "Right to Left Mark"},
+		"tags": ["right to left mark", "rtl mark", "маркер направления справа налево"],
+		"unicode": "200F",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<RTL MARK>" },
+		"recipe": ["RLM"]
+	},
+	"left_to_right_embedding", {
+		"titles": {"ru-RU": "Вложенное направление слева направо", "en-US": "Left to Right Embedding"},
+		"tags": ["left to right embedding", "ltr embedding", "вложенное направление слева направо"],
+		"unicode": "202A",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<LTR EMBEDDING>" },
+		"recipe": ["LRE"]
+	},
+	"right_to_left_embedding", {
+		"titles": {"ru-RU": "Вложенное направление справа налево", "en-US": "Right to Left Embedding"},
+		"tags": ["right to left embedding", "rtl embedding", "вложенное направление справа налево"],
+		"unicode": "202B",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<RTL EMBEDDING>" },
+		"recipe": ["RLE"]
+	},
+	"left_to_right_override", {
+		"titles": {"ru-RU": "Переопределение направление слева направо", "en-US": "Left to Right Override"},
+		"tags": ["left to right override", "ltr override", "переопределение направление слева направо"],
+		"unicode": "202D",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<LTR OVERRIDE>" },
+		"recipe": ["LRO"]
+	},
+	"right_to_left_override", {
+		"titles": {"ru-RU": "Переопределение направление справа налево", "en-US": "Right to Left Override"},
+		"tags": ["right to left override", "rtl override", "переопределение направление справа налево"],
+		"unicode": "202E",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<RTL OVERRIDE>" },
+		"recipe": ["RLO"]
+	},
+	"left_to_right_isolate", {
+		"titles": {"ru-RU": "Изолированное направление слева направо", "en-US": "Left to Right Isolate"},
+		"tags": ["left to right isolate", "ltr isolate", "изолированное направление слева направо"],
+		"unicode": "2066",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<LTR ISOLATE>" },
+		"recipe": ["LRI"]
+	},
+	"right_to_left_isolate", {
+		"titles": {"ru-RU": "Изолированное направление справа налево", "en-US": "Right to Left Isolate"},
+		"tags": ["right to left isolate", "rtl isolate", "изолированное направление справа налево"],
+		"unicode": "2067",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<RTL ISOLATE>" },
+		"recipe": ["RLI"]
+	},
+	"pop_directional_formatting", {
+		"titles": {"ru-RU": "Выход из встраивания направления", "en-US": "Pop Directional Formatting"},
+		"tags": ["pop directional formatting", "выход из встраивания направления"],
+		"unicode": "202C",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<POP DIR. FORMATTING>" },
+		"recipe": ["PPDF"]
+	},
+	"pop_directional_isolate", {
+		"titles": {"ru-RU": "Выход из изоляции направления", "en-US": "Pop Directional Isolate"},
+		"tags": ["pop directional isolate", "выход из изоляции направления"],
+		"unicode": "2069",
+		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"symbol": { "alt": "<POP DIR. ISOLATE>" },
+		"recipe": ["PPDI"]
+	}
+]

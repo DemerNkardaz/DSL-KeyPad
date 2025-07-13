@@ -1,0 +1,132 @@
+[
+	"south_arabian_n_let_a_alef", {
+		"unicode": "10A71",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_a_ayn", {
+		"unicode": "10A72",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"south_arabian_n_let_b_beth", {
+		"unicode": "10A68",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_d_daleth", {
+		"unicode": "10A75",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_d_dhaleth", {
+		"unicode": "10A79",
+		"options": { "altLayoutKey": ">!>+ $" }
+	},
+	"south_arabian_n_let_d_dhadhe", {
+		"unicode": "10A73",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"south_arabian_n_let_f_fe", {
+		"unicode": "10A70",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_g_gimel", {
+		"unicode": "10A74",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_g_ghayn", {
+		"unicode": "10A76",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"south_arabian_n_let_h_he", {
+		"unicode": "10A60",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_h_heth", {
+		"unicode": "10A62",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"south_arabian_n_let_h_kheth", {
+		"unicode": "10A6D",
+		"options": { "altLayoutKey": ">! $ | X" }
+	},
+	"south_arabian_n_let_k_kaph", {
+		"unicode": "10A6B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_l_lamedh", {
+		"unicode": "10A61",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_m_mem", {
+		"unicode": "10A63",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_n_nun", {
+		"unicode": "10A6C",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_q_qoph", {
+		"unicode": "10A64",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_r_resh", {
+		"unicode": "10A67",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_s_sat", {
+		"unicode": "10A6A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_s_samekh", {
+		"unicode": "10A6F",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"south_arabian_n_let_s_shin", {
+		"unicode": "10A66",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"south_arabian_n_let_s_sadhe", {
+		"unicode": "10A6E",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"south_arabian_n_let_t_taw", {
+		"unicode": "10A69",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_t_theth", {
+		"unicode": "10A7C",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"south_arabian_n_let_t_teth", {
+		"unicode": "10A77",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"south_arabian_n_let_t_thaw", {
+		"unicode": "10A7B",
+		"options": { "altLayoutKey": ">!>+ $" }
+	},
+	"south_arabian_n_let_w_waw", {
+		"unicode": "10A65",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_y_yodh", {
+		"unicode": "10A7A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_let_z_zayn", {
+		"unicode": "10A78",
+		"options": { "altLayoutKey": "$" }
+	},
+	"south_arabian_n_num_one", {
+		"unicode": "10A7D",
+		"groups": ["South Arabian"],
+		"options": { "altLayoutKey": ">! 1" }
+	},
+	"south_arabian_n_num_fifty", {
+		"unicode": "10A7E",
+		"groups": ["South Arabian"],
+		"options": { "altLayoutKey": ">! 5" }
+	},
+	"south_arabian_n_sym_numeral_bracket", {
+		"unicode": "10A7F",
+		"options": { "altLayoutKey": ">! 0" }
+	}
+]

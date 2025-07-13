@@ -1,0 +1,194 @@
+[
+	"shavian_n_let_a_ash", {
+		"unicode": "10468",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_a_ice", {
+		"unicode": "10472",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"shavian_n_let_a_ado", {
+		"unicode": "10469",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"shavian_n_let_a_up", {
+		"unicode": "10473",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"shavian_n_let_a_ah", {
+		"unicode": "1046D",
+		"options": { "altLayoutKey": ">!>+ $" }
+	},
+	"shavian_n_let_b_bib", {
+		"unicode": "1045A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_c_church", {
+		"unicode": "10457",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_d_dead", {
+		"unicode": "1045B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_d_they", {
+		"unicode": "1045E",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"shavian_n_let_e_egg", {
+		"unicode": "10467",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_e_age", {
+		"unicode": "10471",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"shavian_n_let_f_fee", {
+		"unicode": "10453",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_g_gag", {
+		"unicode": "1045C",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_h_ha_ha", {
+		"unicode": "10463",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_i_if", {
+		"unicode": "10466",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_i_eat", {
+		"unicode": "10470",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"shavian_n_let_j_judge", {
+		"unicode": "10461",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_k_kick", {
+		"unicode": "10452",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_l_loll", {
+		"unicode": "10464",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_m_mime", {
+		"unicode": "10465",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_n_nun", {
+		"unicode": "1046F",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_n_hung", {
+		"unicode": "10459",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"shavian_n_let_o_on", {
+		"unicode": "1046A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_o_oak", {
+		"unicode": "10474",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"shavian_n_let_o_awe", {
+		"unicode": "10477",
+		"options": { "altLayoutKey": ">!>+ $" }
+	},
+	"shavian_n_let_p_peep", {
+		"unicode": "10450",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_r_roar", {
+		"unicode": "1046E",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_s_so", {
+		"unicode": "10455",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_s_sure", {
+		"unicode": "10456",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"shavian_n_let_t_tot", {
+		"unicode": "10451",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_t_thigh", {
+		"unicode": "10454",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"shavian_n_let_u_wool", {
+		"unicode": "1046B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_u_ooze", {
+		"unicode": "10475",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"shavian_n_let_v_vow", {
+		"unicode": "1045D",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_y_yea", {
+		"unicode": "10458",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_w_woe", {
+		"unicode": "10462",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_z_zoo", {
+		"unicode": "1045F",
+		"options": { "altLayoutKey": "$" }
+	},
+	"shavian_n_let_z_measure", {
+		"unicode": "10460",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"shavian_n_lig_are", {
+		"unicode": "10478",
+		"options": { "altLayoutKey": ">!<! /A/" },
+		"recipe": ["${shavian_n_let_a_ah}${shavian_n_let_r_roar}"]
+	},
+	"shavian_n_lig_or", {
+		"unicode": "10479",
+		"options": { "altLayoutKey": ">!<! /O/" },
+		"recipe": ["${shavian_n_let_o_awe}${shavian_n_let_r_roar}"]
+	},
+	"shavian_n_lig_air", {
+		"unicode": "1047A",
+		"options": { "altLayoutKey": ">!<! /E/" },
+		"recipe": ["${shavian_n_let_e_egg×2}${shavian_n_let_r_roar}"]
+	},
+	"shavian_n_lig_err", {
+		"unicode": "1047B",
+		"options": { "altLayoutKey": ">!<!<+ /E/" },
+		"recipe": ["${shavian_n_let_e_egg}${shavian_n_let_a_ado}${shavian_n_let_r_roar}"]
+	},
+	"shavian_n_lig_array", {
+		"unicode": "1047C",
+		"options": { "altLayoutKey": ">!<! /R/" },
+		"recipe": ["${shavian_n_let_a_ado}${shavian_n_let_r_roar}"]
+	},
+	"shavian_n_lig_ear", {
+		"unicode": "1047D",
+		"options": { "altLayoutKey": ">!<!<+ /R/" },
+		"recipe": ["${shavian_n_let_i_if}${shavian_n_let_a_ado}${shavian_n_let_r_roar}"]
+	},
+	"shavian_n_lig_ian", {
+		"unicode": "1047E",
+		"options": { "altLayoutKey": ">!<! /I/" },
+		"recipe": ["${shavian_n_let_i_if}${shavian_n_let_a_ado}"]
+	},
+	"shavian_n_lig_yew", {
+		"unicode": "1047F",
+		"options": { "altLayoutKey": ">!<! /J/" },
+		"recipe": ["${shavian_n_let_y_yea}${shavian_n_let_u_ooze}"]
+	}
+]

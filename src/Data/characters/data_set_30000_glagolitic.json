@@ -1,0 +1,230 @@
+[
+	"glagolitic_[c,s]_let_az", {
+		"unicode": ["2C00", "2C30"],
+		"options": { "altLayoutKey": "/А/" },
+		"alterations": { "combining": "1E000" }
+	},
+	"glagolitic_[c,s]_let_buky", {
+		"unicode": ["2C01", "2C31"],
+		"options": { "altLayoutKey": "/Б/" },
+		"alterations": { "combining": "1E001" }
+	},
+	"glagolitic_[c,s]_let_vede", {
+		"unicode": ["2C02", "2C32"],
+		"options": { "altLayoutKey": "/В/" },
+		"alterations": { "combining": "1E002" }
+	},
+	"glagolitic_[c,s]_let_glagoli", {
+		"unicode": ["2C03", "2C33"],
+		"options": { "altLayoutKey": "/Г/" },
+		"alterations": { "combining": "1E003" }
+	},
+	"glagolitic_[c,s]_let_dobro", {
+		"unicode": ["2C04", "2C34"],
+		"options": { "altLayoutKey": "/Д/" },
+		"alterations": { "combining": "1E004" }
+	},
+	"glagolitic_[c,s]_let_yestu", {
+		"unicode": ["2C05", "2C35"],
+		"options": { "altLayoutKey": "/Е/" },
+		"alterations": { "combining": "1E005" }
+	},
+	"glagolitic_[c,s]_let_zhivete", {
+		"unicode": ["2C06", "2C36"],
+		"options": { "altLayoutKey": "/Ж/" },
+		"alterations": { "combining": "1E006" }
+	},
+	"glagolitic_[c,s]_let_dzelo", {
+		"unicode": ["2C07", "2C37"],
+		"options": { "altLayoutKey": ">! /С/" }
+	},
+	"glagolitic_[c,s]_let_zemlja", {
+		"unicode": ["2C08", "2C38"],
+		"options": { "altLayoutKey": "/З/" },
+		"alterations": { "combining": "1E008" }
+	},
+	"glagolitic_[c,s]_let_initial_izhe", {
+		"unicode": ["2C0A", "2C3A"],
+		"options": { "altLayoutKey": ">! /И/" },
+		"alterations": { "combining": "1E00A" }
+	},
+	"glagolitic_[c,s]_let_izhe", {
+		"unicode": ["2C09", "2C39"],
+		"options": { "altLayoutKey": "<+ /И/, /Й/" },
+		"alterations": { "combining": "1E009" }
+	},
+	"glagolitic_[c,s]_let_i", {
+		"unicode": ["2C0B", "2C3B"],
+		"options": { "altLayoutKey": "/И/" },
+		"alterations": { "combining": "1E00B" }
+	},
+	"glagolitic_[c,s]_let_djervi", {
+		"unicode": ["2C0C", "2C3C"],
+		"options": { "altLayoutKey": ">! /Ж/" },
+		"alterations": { "combining": "1E00C" }
+	},
+	"glagolitic_[c,s]_let_kako", {
+		"unicode": ["2C0D", "2C3D"],
+		"options": { "altLayoutKey": "/К/" },
+		"alterations": { "combining": "1E00D" }
+	},
+	"glagolitic_[c,s]_let_ljudije", {
+		"unicode": ["2C0E", "2C3E"],
+		"options": { "altLayoutKey": "/Л/" },
+		"alterations": { "combining": "1E00E" }
+	},
+	"glagolitic_[c,s]_let_myslite", {
+		"unicode": ["2C0F", "2C3F"],
+		"options": { "altLayoutKey": "/М/" },
+		"alterations": { "combining": "1E00F" }
+	},
+	"glagolitic_[c,s]_let_nashi", {
+		"unicode": ["2C10", "2C40"],
+		"options": { "altLayoutKey": "/Н/" },
+		"alterations": { "combining": "1E010" }
+	},
+	"glagolitic_[c,s]_let_onu", {
+		"unicode": ["2C11", "2C41"],
+		"options": { "altLayoutKey": "/О/" },
+		"alterations": { "combining": "1E011" }
+	},
+	"glagolitic_[c,s]_let_pokoji", {
+		"unicode": ["2C12", "2C42"],
+		"options": { "altLayoutKey": "/П/" },
+		"alterations": { "combining": "1E012" }
+	},
+	"glagolitic_[c,s]_let_ritsi", {
+		"unicode": ["2C13", "2C43"],
+		"options": { "altLayoutKey": "/Р/" },
+		"alterations": { "combining": "1E013" }
+	},
+	"glagolitic_[c,s]_let_slovo", {
+		"unicode": ["2C14", "2C44"],
+		"options": { "altLayoutKey": "/С/" },
+		"alterations": { "combining": "1E014" }
+	},
+	"glagolitic_[c,s]_let_tvrido", {
+		"unicode": ["2C15", "2C45"],
+		"options": { "altLayoutKey": "/Т/" },
+		"alterations": { "combining": "1E015" }
+	},
+	"glagolitic_[c,s]_let_izhitsa", {
+		"unicode": ["2C2B", "2C5B"],
+		"options": { "altLayoutKey": ">!<+ /И/" }
+	},
+	"glagolitic_[c,s]_let_uku", {
+		"unicode": ["2C16", "2C46"],
+		"options": { "altLayoutKey": "/У/" },
+		"alterations": { "combining": "1E016" }
+	},
+	"glagolitic_[c,s]_let_fritu", {
+		"unicode": ["2C17", "2C47"],
+		"options": { "altLayoutKey": "/Ф/" },
+		"alterations": { "combining": "1E017" }
+	},
+	"glagolitic_[c,s]_let_heru", {
+		"unicode": ["2C18", "2C48"],
+		"options": { "altLayoutKey": "/Х/" },
+		"alterations": { "combining": "1E018" }
+	},
+	"glagolitic_[c,s]_let_otu", {
+		"unicode": ["2C19", "2C49"],
+		"options": { "altLayoutKey": ">! /О/" }
+	},
+	"glagolitic_[c,s]_let_pe", {
+		"unicode": ["2C1A", "2C4A"],
+		"options": { "altLayoutKey": ">! /П/" }
+	},
+	"glagolitic_[c,s]_let_tsi", {
+		"unicode": ["2C1C", "2C4C"],
+		"options": { "altLayoutKey": "/Ц/" },
+		"alterations": { "combining": "1E01C" }
+	},
+	"glagolitic_[c,s]_let_chrivi", {
+		"unicode": ["2C1D", "2C4D"],
+		"options": { "altLayoutKey": "/Ч/" },
+		"alterations": { "combining": "1E01D" }
+	},
+	"glagolitic_[c,s]_let_sha", {
+		"unicode": ["2C1E", "2C4E"],
+		"options": { "altLayoutKey": "/Ш/" },
+		"alterations": { "combining": "1E01E" }
+	},
+	"glagolitic_[c,s]_let_shta", {
+		"unicode": ["2C1B", "2C4B"],
+		"options": { "altLayoutKey": "/Щ/" },
+		"alterations": { "combining": "1E01B" }
+	},
+	"glagolitic_[c,s]_let_yeru", {
+		"unicode": ["2C1F", "2C4F"],
+		"options": { "altLayoutKey": "/Ъ/" },
+		"alterations": { "combining": "1E01F" }
+	},
+	"glagolitic_[c,s]_let_yery", {
+		"unicode": ["2C1F", "2C4F"],
+		"sequence": [["2C1F", "2C0A"], ["2C4F", "2C3A"]],
+		"options": { "altLayoutKey": "/Ы/" },
+		"alterations": { "combining": "1E01F" },
+		"symbol": { "customs": "s60" }
+	},
+	"glagolitic_[c,s]_let_yeri", {
+		"unicode": ["2C20", "2C50"],
+		"options": { "altLayoutKey": "/Ь/" },
+		"alterations": { "combining": "1E020" }
+	},
+	"glagolitic_[c,s]_let_yati", {
+		"unicode": ["2C21", "2C51"],
+		"options": { "altLayoutKey": "/Я/" },
+		"alterations": { "combining": "1E021" }
+	},
+	"glagolitic_[c,s]_let_yo", {
+		"unicode": ["2C26", "2C56"],
+		"options": { "altLayoutKey": "/Ё/" },
+		"alterations": { "combining": "1E026" }
+	},
+	"glagolitic_[c,s]_let_spider_ha", {
+		"unicode": ["2C22", "2C52"],
+		"options": { "altLayoutKey": ">! /Х/" }
+	},
+	"glagolitic_[c,s]_let_yu", {
+		"unicode": ["2C23", "2C53"],
+		"options": { "altLayoutKey": "/Ю/" },
+		"alterations": { "combining": "1E023" }
+	},
+	"glagolitic_[c,s]_let_small_yus", {
+		"unicode": ["2C24", "2C54"],
+		"options": { "altLayoutKey": "/Э/" },
+		"alterations": { "combining": "1E024" }
+	},
+	"glagolitic_[c,s]_let_small_yus_iotified", {
+		"unicode": ["2C27", "2C57"],
+		"options": { "altLayoutKey": ">! /Э/" },
+		"alterations": { "combining": "1E027" },
+		"recipe": ["${glagolitic_[c,s]_let_yestu}${glagolitic_[c,s]_let_small_yus}"]
+	},
+	"glagolitic_[c,s]_let_big_yus", {
+		"unicode": ["2C28", "2C58"],
+		"options": { "altLayoutKey": "<! /О/" },
+		"alterations": { "combining": "1E028" },
+		"recipe": ["${glagolitic_[c,s]_let_onu}${glagolitic_[c,s]_let_small_yus}"]
+	},
+	"glagolitic_[c,s]_let_big_yus_iotified", {
+		"unicode": ["2C29", "2C59"],
+		"options": { "altLayoutKey": "<! /Ё/" },
+		"alterations": { "combining": "1E029" },
+		"recipe": ["${glagolitic_[c,s]_let_yo}${glagolitic_[c,s]_let_small_yus}"]
+	},
+	"glagolitic_[c,s]_let_fita", {
+		"unicode": ["2C2A", "2C5A"],
+		"options": { "altLayoutKey": ">! /Ф/" },
+		"alterations": { "combining": "1E02A" }
+	},
+	"glagolitic_[c,s]_let_shtapic", {
+		"unicode": ["2C2C", "2C5C"],
+		"options": { "altLayoutKey": ">! /Ъ/" }
+	},
+	"glagolitic_[c,s]_let_trokutasti_a", {
+		"unicode": ["2C2D", "2C5D"],
+		"options": { "altLayoutKey": ">! /А/" }
+	}
+]

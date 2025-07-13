@@ -1,0 +1,114 @@
+[
+	"sidetic_n_let_a_N22", {
+		"unicode": "10955",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"sidetic_n_let_b_N24", {
+		"unicode": "10957",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_c_N09", {
+		"unicode": "10948",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_d_N12", {
+		"unicode": "1094B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_e_N02", {
+		"unicode": "10941",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_g_N19", {
+		"unicode": "10952",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_h_N20", {
+		"unicode": "10953",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_i_N03", {
+		"unicode": "10942",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_k_N23", {
+		"unicode": "10956",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_l_N17", {
+		"unicode": "10950",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_m_N10", {
+		"unicode": "10949",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_n_N16", {
+		"unicode": "1094F",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_n_N25", {
+		"unicode": "10958",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"sidetic_n_let_o_N04", {
+		"unicode": "10943",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_p_N08", {
+		"unicode": "10946",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_r_N21", {
+		"unicode": "10954",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_s_N14", {
+		"unicode": "1094D",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_s_N15", {
+		"unicode": "1094E",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"sidetic_n_let_t_N11", {
+		"unicode": "1094A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_t_N13", {
+		"unicode": "1094C",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"sidetic_n_let_t_N18", {
+		"unicode": "10951",
+		"options": { "altLayoutKey": ">!>+ $" }
+	},
+	"sidetic_n_let_u_N05", {
+		"unicode": "10944",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_w_N06", {
+		"unicode": "10945",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_y_N07", {
+		"unicode": "10946",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_z_N26", {
+		"unicode": "10959",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_unknown_N27", {
+		"unicode": "1095A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_unknown_N28", {
+		"unicode": "1095B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"sidetic_n_let_unknown_N29", {
+		"unicode": "1095C",
+		"options": { "altLayoutKey": "$" }
+	}
+]

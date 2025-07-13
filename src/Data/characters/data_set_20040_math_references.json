@@ -1,0 +1,9 @@
+[
+	"&math_pi_sign", {
+		"reference": "hel_s_let_p_pi",
+		"tags": ["math number pi", "математическое число пи"],
+		"groups": ["Math"],
+		"options": { "noCalc": true, "altLayoutKey": ">! P" },
+		"recipe": ["mth pi"]
+	}
+]

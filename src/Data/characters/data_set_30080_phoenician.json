@@ -1,0 +1,118 @@
+[
+	"phoenician_n_let_a_alef", {
+		"unicode": "10900",
+		"options": { "altLayoutKey": "A" }
+	},
+	"phoenician_n_let_a_ain", {
+		"unicode": "1090F",
+		"options": { "altLayoutKey": "<+ A, O" }
+	},
+	"phoenician_n_let_b_bet", {
+		"unicode": "10901",
+		"options": { "altLayoutKey": "B" }
+	},
+	"phoenician_n_let_g_gaml", {
+		"unicode": "10902",
+		"options": { "altLayoutKey": "G" }
+	},
+	"phoenician_n_let_d_delt", {
+		"unicode": "10903",
+		"options": { "altLayoutKey": "D" }
+	},
+	"phoenician_n_let_h_he", {
+		"unicode": "10904",
+		"options": { "altLayoutKey": "H" }
+	},
+	"phoenician_n_let_h_het", {
+		"unicode": "10907",
+		"options": { "altLayoutKey": ">+ H" }
+	},
+	"phoenician_n_let_w_wau", {
+		"unicode": "10905",
+		"options": { "altLayoutKey": "W" }
+	},
+	"phoenician_n_let_z_zai", {
+		"unicode": "10906",
+		"options": { "altLayoutKey": "Z" }
+	},
+	"phoenician_n_let_y_yod", {
+		"unicode": "10909",
+		"options": { "altLayoutKey": "J Y" }
+	},
+	"phoenician_n_let_k_kaf", {
+		"unicode": "1090A",
+		"options": { "altLayoutKey": "K" }
+	},
+	"phoenician_n_let_l_lamd", {
+		"unicode": "1090B",
+		"options": { "altLayoutKey": "L" }
+	},
+	"phoenician_n_let_m_mem", {
+		"unicode": "1090C",
+		"options": { "altLayoutKey": "M" }
+	},
+	"phoenician_n_let_n_nun", {
+		"unicode": "1090D",
+		"options": { "altLayoutKey": "N" }
+	},
+	"phoenician_n_let_s_semk", {
+		"unicode": "1090E",
+		"options": { "altLayoutKey": "S" }
+	},
+	"phoenician_n_let_s_shin", {
+		"unicode": "10914",
+		"options": { "altLayoutKey": ">+ S" }
+	},
+	"phoenician_n_let_p_pe", {
+		"unicode": "10910",
+		"options": { "altLayoutKey": "P" }
+	},
+	"phoenician_n_let_c_sade", {
+		"unicode": "10911",
+		"options": { "altLayoutKey": "C" }
+	},
+	"phoenician_n_let_q_qof", {
+		"unicode": "10912",
+		"options": { "altLayoutKey": "Q" }
+	},
+	"phoenician_n_let_r_rosh", {
+		"unicode": "10913",
+		"options": { "altLayoutKey": "R" }
+	},
+	"phoenician_n_let_t_tau", {
+		"unicode": "10915",
+		"options": { "altLayoutKey": "T" }
+	},
+	"phoenician_n_let_t_tet", {
+		"unicode": "10908",
+		"options": { "altLayoutKey": ">+ T" }
+	},
+	"phoenician_n_num_one", {
+		"unicode": "10916",
+		"options": { "altLayoutKey": ">! 1" }
+	},
+	"phoenician_n_num_two", {
+		"unicode": "1091A",
+		"options": { "altLayoutKey": ">! 2" }
+	},
+	"phoenician_n_num_three", {
+		"unicode": "1091B",
+		"options": { "altLayoutKey": ">! 3" }
+	},
+	"phoenician_n_num_ten", {
+		"unicode": "10917",
+		"options": { "altLayoutKey": ">! 4" }
+	},
+	"phoenician_n_num_twenty", {
+		"unicode": "10918",
+		"options": { "altLayoutKey": ">! 5" }
+	},
+	"phoenician_n_num_hundred", {
+		"unicode": "10919",
+		"options": { "altLayoutKey": ">! 6" }
+	},
+	"phoenician_n_sym_word_separator", {
+		"unicode": "1091F",
+		"options": { "altLayoutKey": ">! Space" }
+	}
+]

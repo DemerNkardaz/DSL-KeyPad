@@ -1,0 +1,259 @@
+[
+	"wallet_sign", {
+		"unicode": "00A4",
+		"tags": ["знак валюты", "currency sign"],
+		"groups": ["Wallet Signs", "Wallet Signs Right Shift"],
+		"options": { "fastKey": "<+ 4" },
+		"recipe": ["XO"]
+	},
+	"wallet_austral", {
+		"unicode": "20B3",
+		"tags": ["аустраль", "austral"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "c*>+ 4" },
+		"recipe": ["A=", "ARA"]
+	},
+	"wallet_cent", {
+		"unicode": "00A2",
+		"alterations": {
+			"fullwidth": "FFE0"
+		},
+		"tags": ["цент", "cent"],
+		"groups": ["Wallet Signs", "Wallet Signs Primary"],
+		"options": { "fastKey": "c* 4" },
+		"recipe": ["c|", "CNT"]
+	},
+	"wallet_cedi", {
+		"unicode": "20B5",
+		"tags": ["седи", "cedi"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["C|", "GHS", "CED"]
+	},
+	"wallet_colon", {
+		"unicode": "20A1",
+		"tags": ["колон", "colon"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["C//", "CRC", "SVC"]
+	},
+	"wallet_dollar", {
+		"unicode": "0024",
+		"alterations": {
+			"small": "FE69",
+			"fullwidth": "FF04"
+		},
+		"tags": ["доллар", "dollar"],
+		"groups": ["Wallet Signs", "Wallet Signs Left Shift"],
+		"options": { "fastKey": "4" },
+		"recipe": ["S|", "USD", "DLR"]
+	},
+	"wallet_drachma", {
+		"unicode": "20AF",
+		"tags": ["драхма", "drachma", "δραχμη"],
+		"groups": ["Wallet Signs", "Hellenic Specials"],
+		"options": { "altLayoutKey": ">! Δ" },
+		"recipe": ["Δρχ", "DR", "GRD"]
+	},
+	"wallet_dram", {
+		"unicode": "058F",
+		"tags": ["драм", "dram"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["AMD", "DRM"]
+	},
+	"wallet_doromi", {
+		"unicode": "07FE",
+		"tags": ["дороми", "doromi"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["DOR"]
+	},
+	"wallet_eur", {
+		"unicode": "20AC",
+		"tags": ["евро", "euro"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "4" },
+		"recipe": ["C=", "EUR"]
+	},
+	"wallet_franc", {
+		"unicode": "20A3",
+		"tags": ["франк", "franc"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "c* 4" },
+		"recipe": ["F=", "FRF"]
+	},
+	"wallet_guarani", {
+		"unicode": "20B2",
+		"tags": ["гуарани", "guarani"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["G/", "PYG", "GNF"]
+	},
+	"wallet_kip", {
+		"unicode": "20AD",
+		"tags": ["кип", "kip"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["K-", "LAK", "KIP"]
+	},
+	"wallet_lari", {
+		"unicode": "20BE",
+		"tags": ["лари", "lari"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["GEL", "LAR"]
+	},
+	"wallet_naira", {
+		"unicode": "20A6",
+		"tags": ["наира", "naira"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["N=", "NGN", "NAR"]
+	},
+	"wallet_pound", {
+		"unicode": "00A3",
+		"alterations": {
+			"fullwidth": "FFE1"
+		},
+		"tags": ["фунт", "pound"],
+		"groups": ["Wallet Signs", "Wallet Signs Primary"],
+		"options": { "fastKey": "4" },
+		"recipe": ["f_", "GBP"]
+	},
+	"wallet_tournois", {
+		"unicode": "20B6",
+		"tags": ["турский ливр", "tournois"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["lt", "LTF"]
+	},
+	"wallet_spesmilo", {
+		"unicode": "20B7",
+		"tags": ["спесмило", "spesmilo"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["Sm"]
+	},
+	"wallet_rub", {
+		"unicode": "20BD",
+		"tags": ["рубль", "ruble"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "Р" },
+		"recipe": ["Р=", "RUB", "РУБ"]
+	},
+	"wallet_hryvnia", {
+		"unicode": "20B4",
+		"tags": ["гривна", "hryvnia"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": ">+ 4" },
+		"recipe": ["Г=", "UAH", "ГРН"]
+	},
+	"wallet_lira", {
+		"unicode": "20A4",
+		"tags": ["лира", "lira"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "c*<!<+ 4" },
+		"recipe": ["f=", "LIR"]
+	},
+	"wallet_turkish_lira", {
+		"unicode": "20BA",
+		"tags": ["лира", "lira"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "<!<+ 4" },
+		"recipe": ["L=", "TRY"]
+	},
+	"wallet_rupee", {
+		"unicode": "20B9",
+		"tags": ["рупия", "rupee"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "<!>+ 4" },
+		"recipe": ["R=", "INR", "RUP"]
+	},
+	"wallet_won", {
+		"unicode": "20A9",
+		"alterations": {
+			"fullwidth": "FFE6"
+		},
+		"tags": ["вон", "won"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "c*<+ 4" },
+		"recipe": ["W=", "WON", "KRW"]
+	},
+	"wallet_yen", {
+		"unicode": "00A5",
+		"alterations": {
+			"fullwidth": "FFE5"
+		},
+		"tags": ["знак йены", "yen sign"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "<+ 4" },
+		"recipe": ["Y=", "YEN"]
+	},
+	"wallet_jpy_yen", {
+		"unicode": "5186",
+		"tags": ["йена", "yen"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["JPY"]
+	},
+	"wallet_cny_yuan", {
+		"unicode": "5143",
+		"tags": ["юань", "yuan"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["CNY"]
+	},
+	"wallet_viet_dong", {
+		"unicode": "20AB",
+		"tags": ["вьетнамский донг", "vietnamese dong"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "c*<!>+ 4" },
+		"recipe": [
+			"d${(stroke_short|macron_below)}$(*)",
+			"${lat_s_let_d__(stroke_short|line_below)}$(*)",
+			"VND", "DNG"
+		]
+	},
+	"wallet_mongol_tugrik", {
+		"unicode": "20AE",
+		"tags": ["монгольский тугрик", "mongolian tugrik"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "c*<! 4" },
+		"recipe": ["T//", "MNT", "TGK"]
+	},
+	"wallet_qazaq_tenge", {
+		"unicode": "20B8",
+		"tags": ["казахский тенге", "kazakh tenge"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "<! 4" },
+		"recipe": ["T=", "KZT", "TNG"]
+	},
+	"wallet_new_sheqel", {
+		"unicode": "20AA",
+		"tags": ["новый шекель", "new sheqel"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "<+>+ 4" },
+		"recipe": ["NZD", "SHQ"]
+	},
+	"wallet_philippine_peso", {
+		"unicode": "20B1",
+		"tags": ["филиппинский песо", "philippine peso"],
+		"groups": ["Wallet Signs", "Wallet Signs Secondary"],
+		"options": { "fastKey": "c*<+>+ 4" },
+		"recipe": ["P=", "PHP"]
+	},
+	"wallet_roman_[denarius,quinarius,sestertius,dupondius,as]", {
+		"unicode": ["10196", "10197", "10198", "10199", "1019A"],
+		"tags": [
+			["римский денарий", "roman denarius"],
+			["римский квинарий", "roman quinarius"],
+			["римский сестерций", "roman sestertius"],
+			["римский дупондий", "roman dupondius"],
+			["римский асс", "roman as"]
+		],
+		"groups": ["Wallet Signs"],
+		"recipe": [
+			["X-", "DIN"],
+			["V-", "QIN"],
+			["H-S", "SES"],
+			["I-I", "DUP"],
+			["/-", "ASE"]
+		],
+		"symbol": { "font": "Catrinity" }
+	},
+	"wallet_bitcoin", {
+		"unicode": "20BF",
+		"tags": ["биткоин", "bitcoin"],
+		"groups": ["Wallet Signs"],
+		"recipe": ["B||", "BTC"]
+	}
+]

@@ -1,0 +1,170 @@
+[
+	"old_italic_n_let_a", {
+		"unicode": "10300",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_b_be", {
+		"unicode": "10301",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_c_ke", {
+		"unicode": "10302",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_c_che", {
+		"unicode": "1031C",
+		"options": { "altLayoutKey": "<! $" },
+		"symbol": { "scriptAdditive": "umbrian" }
+	},
+	"old_italic_n_let_d_de", {
+		"unicode": "10303",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_e", {
+		"unicode": "10304",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_f_ef", {
+		"unicode": "1031A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_f_ve", {
+		"unicode": "10305",
+		"options": { "altLayoutKey": "V" }
+	},
+	"old_italic_n_let_h_he", {
+		"unicode": "10307",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_i", {
+		"unicode": "10309",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_i_ii", {
+		"unicode": "1031D",
+		"options": { "altLayoutKey": ">+ $" },
+		"symbol": { "scriptAdditive": "oscan" }
+	},
+	"old_italic_n_let_k_ka", {
+		"unicode": "1030A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_k_khe", {
+		"unicode": "10319",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"old_italic_n_let_l_el", {
+		"unicode": "1030B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_m_em", {
+		"unicode": "1030C",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_n_en", {
+		"unicode": "1030D",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_o", {
+		"unicode": "1030F",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_p_pe", {
+		"unicode": "10310",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_p_phe", {
+		"unicode": "10318",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"old_italic_n_let_q_ku", {
+		"unicode": "10312",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_r_er", {
+		"unicode": "10313",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_r_ers", {
+		"unicode": "1031B",
+		"options": { "altLayoutKey": ">+ $" },
+		"symbol": { "scriptAdditive": "umbrian" }
+	},
+	"old_italic_n_let_s_es", {
+		"unicode": "10314",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_s_esh", {
+		"unicode": "1030E",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"old_italic_n_let_s_she", {
+		"unicode": "10311",
+		"options": { "altLayoutKey": "<+ $" }
+	},
+	"old_italic_n_let_s_ess", {
+		"unicode": "1031F",
+		"options": { "altLayoutKey": "<! $" },
+		"symbol": { "scriptAdditive": "sabine" }
+	},
+	"old_italic_n_let_t_te", {
+		"unicode": "10315",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_t_the", {
+		"unicode": "10308",
+		"options": { "altLayoutKey": ">+ $" }
+	},
+	"old_italic_n_let_u", {
+		"unicode": "10316",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_u_uu", {
+		"unicode": "1031E",
+		"options": { "altLayoutKey": ">+ $" },
+		"symbol": { "scriptAdditive": "oscan" }
+	},
+	"old_italic_n_let_x_eks", {
+		"unicode": "10317",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_y_ye", {
+		"unicode": "1032D",
+		"options": { "altLayoutKey": "$" },
+		"symbol": { "scriptAdditive": "north" }
+	},
+	"old_italic_n_let_z_ze", {
+		"unicode": "10306",
+		"options": { "altLayoutKey": "$" }
+	},
+	"old_italic_n_let_c_northern_tse", {
+		"unicode": "1032E",
+		"options": { "altLayoutKey": "W" },
+		"symbol": { "scriptAdditive": "north" }
+	},
+	"old_italic_n_let_c_southern_tse", {
+		"unicode": "1032F",
+		"options": { "altLayoutKey": "<+ W" },
+		"symbol": { "scriptAdditive": "north" }
+	},
+	"old_italic_n_num_one", {
+		"unicode": "10320",
+		"groups": ["Old Italic"],
+		"options": { "altLayoutKey": ">! 1" }
+	},
+	"old_italic_n_num_five", {
+		"unicode": "10321",
+		"groups": ["Old Italic"],
+		"options": { "altLayoutKey": ">! 2" }
+	},
+	"old_italic_n_num_ten", {
+		"unicode": "10322",
+		"groups": ["Old Italic"],
+		"options": { "altLayoutKey": ">! 3" }
+	},
+	"old_italic_n_num_fifty", {
+		"unicode": "10323",
+		"groups": ["Old Italic"],
+		"options": { "altLayoutKey": ">! 4" }
+	}
+]

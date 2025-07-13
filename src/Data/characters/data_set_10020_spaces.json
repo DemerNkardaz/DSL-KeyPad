@@ -1,0 +1,159 @@
+[
+	"space", {
+		"unicode": "0020",
+		"options": { "noCalc": true },
+		"symbol": { "category": "Spaces" }
+	},
+	"emsp", {
+		"unicode": "2003",
+		"tags": ["em space", "emspace", "emsp", "круглая шпация"],
+		"groups": ["Spaces", "Spaces Secondary"],
+		"options": { "fastKey": ">+ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"ensp", {
+		"unicode": "2002",
+		"tags": ["en space", "enspace", "ensp", "полукруглая шпация"],
+		"groups": ["Spaces", "Spaces Secondary"],
+		"options": { "fastKey": "<+ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"emsp13", {
+		"unicode": "2004",
+		"tags": ["emsp13", "1/3emsp", "1/3 круглой Шпации"],
+		"groups": ["Spaces", "Spaces Left Alt"],
+		"options": { "fastKey": "Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"emsp14", {
+		"unicode": "2005",
+		"tags": ["emsp14", "1/4emsp", "1/4 круглой Шпации"],
+		"groups": ["Spaces", "SK Spaces Left Alt"],
+		"options": { "fastKey": "Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"thinspace", {
+		"unicode": "2009",
+		"tags": ["thinsp", "thin space", "узкий пробел", "тонкий пробел"],
+		"groups": ["Spaces", "Spaces Secondary"],
+		"options": { "fastKey": "<! Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"emsp16", {
+		"unicode": "2006",
+		"tags": ["emsp16", "1/6emsp", "1/6 круглой Шпации"],
+		"groups": ["Spaces", "Spaces Right Shift"],
+		"options": { "fastKey": "Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"narrow_no_break_space", {
+		"unicode": "202F",
+		"tags": ["nnbsp", "narrow no-break space", "узкий неразрывный пробел", "тонкий неразрывный пробел"],
+		"groups": ["Spaces", "Spaces Right Shift"],
+		"options": { "fastKey": "<+ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"hairspace", {
+		"unicode": "200A",
+		"tags": ["hsp", "hairsp", "hair space", "волосяная шпация"],
+		"groups": ["Spaces", "Spaces Secondary"],
+		"options": { "fastKey": "<!<+ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"punctuation_space", {
+		"unicode": "2008",
+		"tags": ["psp", "puncsp", "punctuation space", "пунктуационный пробел"],
+		"groups": ["Spaces", "Spaces Secondary"],
+		"options": { "fastKey": "<!>+ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"zero_width_space", {
+		"unicode": "200B",
+		"tags": ["zwsp", "zero-width space", "пробел нулевой ширины"],
+		"groups": ["Spaces", "Spaces Secondary"],
+		"options": { "fastKey": ">^ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"zero_width_no_break_space", {
+		"unicode": "FEFF",
+		"tags": ["zwnbsp", "zero-width no-break space", "неразрывный пробел нулевой ширины"],
+		"groups": ["Spaces", "Spaces Primary"],
+		"options": { "fastKey": "Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"figure_space", {
+		"unicode": "2007",
+		"tags": ["nsp", "numsp", "figure space", "цифровой пробел"],
+		"groups": ["Spaces", "Spaces Secondary"],
+		"options": { "fastKey": "<+>+ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"no_break_space", {
+		"unicode": "00A0",
+		"tags": ["nbsp", "no-break space", "неразрывный пробел"],
+		"groups": ["Spaces", "Spaces Secondary"],
+		"options": { "fastKey": "Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"medium_math_space", {
+		"unicode": "205F",
+		"tags": ["mmsp", "mathsp", "medium math space", "средний математический пробел"],
+		"groups": ["Spaces", "Math Spaces"],
+		"options": { "altLayoutKey": "<! Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"tabulation", {
+		"unicode": "0009",
+		"tags": ["tab", "tabulation", "табуляция"],
+		"groups": ["Spaces"],
+		"options": { "noCalc": true },
+		"symbol": { "category": "Spaces" }
+	},
+	"emquad", {
+		"unicode": "2001",
+		"tags": ["em quad", "emquad", "emqd", "em-квадрат"],
+		"groups": ["Spaces", "SK Spaces Secondary"],
+		"options": { "fastKey": ">+ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"enquad", {
+		"unicode": "2000",
+		"tags": ["en quad", "enquad", "enqd", "en-квадрат"],
+		"groups": ["Spaces", "SK Spaces Secondary"],
+		"options": { "fastKey": "<+ Space" },
+		"symbol": { "category": "Spaces" }
+	},
+	"word_joiner", {
+		"unicode": "2060",
+		"tags": ["wj", "word joiner", "соединитель слов"],
+		"groups": ["Format Characters"],
+		"options": { "fastKey": "<+ Tab" },
+		"symbol": { "category": "Format Character" }
+	},
+	"zero_width_joiner", {
+		"unicode": "200D",
+		"tags": ["zwj", "zero-width joiner", "соединитель нулевой ширины"],
+		"groups": ["Format Characters"],
+		"options": { "fastKey": "Tab" },
+		"symbol": { "category": "Format Character" }
+	},
+	"zero_width_non_joiner", {
+		"unicode": "200C",
+		"tags": ["zwj", "zero-width non-joiner", "разъединитель нулевой ширины"],
+		"groups": ["Format Characters"],
+		"options": { "fastKey": ">+ Tab" },
+		"symbol": { "category": "Format Character" }
+	},
+	"carriage_return", {
+		"unicode": "000D",
+		"tags": ["carriage return", "возврат каретки"],
+		"groups": ["Sys Group"],
+		"symbol": { "set": "0x21B5" }
+	},
+	"new_line", {
+		"unicode": "000A",
+		"tags": ["new line", "перевод строки"],
+		"groups": ["Sys Group"],
+		"symbol": { "set": "\u21B4" }
+	}
+]
