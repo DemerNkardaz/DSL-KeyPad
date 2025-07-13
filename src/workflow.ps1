@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-07-13 03:54:40
+				&#128228;&emsp14;2025-07-13 05:45:14
 			</td>
 		</tr>
 		<tr>
@@ -67,7 +67,7 @@ $message =@"
 		</tr>
 </table>
 
-**Versions compare** [0.1.1.2-alpha-testing&ensp;>>>&ensp;0.1.2.2](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.1.2-alpha-testing...0.1.2.2#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Docs](https://demernkardaz.github.io/DSL-KeyPad)
+**Versions compare** [0.1.1.2-alpha-testing&ensp;>>>&ensp;0.1.2.2](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.1.2-alpha-testing...0.1.2.2#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Docs](https://demernkardaz.github.io/DSL-KeyPad-Docs)
 
 [Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad.
 <br>[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-0.1.2.2.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.2.2) [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/0.1.2.2?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/0.1.2.2/)

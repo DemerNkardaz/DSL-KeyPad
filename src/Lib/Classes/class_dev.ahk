@@ -134,7 +134,7 @@ Class Dev {
 			'			</td>`n'
 			'		</tr>`n'
 			'</table>`n`n'
-			versionCompare '[Changelog](' App.branch["main"] '/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Docs](https://demernkardaz.github.io/DSL-KeyPad)`n`n'
+			versionCompare '[Changelog](' App.branch["main"] '/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Docs](https://demernkardaz.github.io/DSL-KeyPad-Docs)`n`n'
 			'[Yalla Nkardaz’s custom files](' App.URL '-Custom-Files) repository for DSL KeyPad.`n<br>'
 			'[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-' version '.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/' version ') [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/' version '?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/' version '/)'
 		)
