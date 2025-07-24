@@ -1,8 +1,13 @@
 Class Search {
 	static cache := Map()
 
+	static __New() {
+		Event.OnEvent("Input Mode", "Changed", () => this.cache := Map())
+		return
+	}
+
 	__New(action := "send") {
-		this.SearchPrompt(action)
+		return this.SearchPrompt(action)
 	}
 
 	SearchPrompt(action) {
@@ -103,12 +108,12 @@ Class Search {
 		handledQuery := RegExReplace(handledQuery, "\:\:(.*?)$", "")
 
 		if ChrLib.entries.HasOwnProp(handledQuery)
-			return ChrLib.Get(handledQuery, True, Auxiliary.inputMode, alteration)
+			return ChrLib.Get(handledQuery, True, Cfg.SessionGet("Input_Mode"), alteration)
 
 		local isHasExpression := RegExMatch(handledQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
 		local output := ""
 
-		checkBy32ID(&entryName) {
+		checkByID(&entryName) {
 			if RegExMatch(handledQuery, "^#(.*)$", &IDMatch) && ChrLib.entryIdentifiers.Has(Number(IDMatch[1])) {
 				entryName := ChrLib.entryIdentifiers.Get(Number(IDMatch[1]))
 				return True
@@ -171,8 +176,8 @@ Class Search {
 			for j, entryName in indexedEntries {
 				local entry := ChrLib.entries.%entryName%
 
-				if checkBy32ID(&indexedEntryName) {
-					output := ChrLib.Get(indexedEntryName, True, Auxiliary.inputMode, alteration)
+				if checkByID(&indexedEntryName) {
+					output := ChrLib.Get(indexedEntryName, True, Cfg.SessionGet("Input_Mode"), alteration)
 					break 2
 				}
 
@@ -181,7 +186,7 @@ Class Search {
 
 				for tag in entry["tags"]
 					if conditions[i](tag) {
-						output := ChrLib.Get(entryName, True, Auxiliary.inputMode, alteration)
+						output := ChrLib.Get(entryName, True, Cfg.SessionGet("Input_Mode"), alteration)
 						break 3
 					}
 			}

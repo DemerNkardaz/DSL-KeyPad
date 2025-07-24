@@ -55,7 +55,6 @@ initialized := False
 #Include <Classes\class_tray_menu>
 ; Currently has no logic to run
 ; SideProcess.StartDynamic("support", , App.Title("+status+version") "``n" Locale.Read("side_process.support"), App.icoDLL, App.indexIcos["support"], App.PID)
-TrayMenu.SetTrayItems()
 #Include <Classes\class_language>
 #Include <Classes\class_keyboard>
 #Include <Classes\class_locale>
@@ -107,8 +106,17 @@ DottedProgressTooltip(4, &triggerEnds := False, 500)
 triggerEnds := True
 initialized := True
 
-Event.OnEvent("UI Language", "Switched", () => TrayMenu.SetTrayItems())
-Event.OnEvent("Scripter Storage", "Item Registered", () => TrayMenu.SetTrayItems())
+TrayMenu.SetTrayItems()
+
+Class PostEvents {
+	static __New() {
+		Event.OnEvent("UI Data", "Changed", (*) => TrayMenu.SetTrayItems())
+		Event.OnEvent("UI Language", "Switched", (*) => TrayMenu.SetTrayItems())
+		Event.OnEvent("Layouts Storage", "Item Registered", (*) => TrayMenu.SetTrayItems())
+		Event.OnEvent("Scripter Storage", "Item Registered", (*) => TrayMenu.SetTrayItems())
+		return
+	}
+}
 
 ChrLib.CountOfUpdate()
 GlyphsPanel.SetPanelData()

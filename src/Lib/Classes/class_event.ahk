@@ -24,6 +24,9 @@ Class Event {
 			"Ended", [],
 			"Iteration Started", [],
 		),
+		"Input Mode", Map(
+			"Changed", [],
+		),
 		"UI Instance [Panel]", Map(
 			"Created", [],
 			"Destroyed", [],
@@ -37,9 +40,15 @@ Class Event {
 			"Switched", [],
 		),
 		"Binding Storage", Map(
+			"Initialized", [],
 			"Item Registered", [],
 		),
 		"Scripter Storage", Map(
+			"Initialized", [],
+			"Item Registered", [],
+		),
+		"Layouts Storage", Map(
+			"Initialized", [],
 			"Item Registered", [],
 		),
 		"Scripter", Map(

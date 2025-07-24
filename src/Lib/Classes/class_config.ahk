@@ -62,6 +62,10 @@ Class Cfg {
 		],
 	]
 
+	static sessionSettings := Map(
+		"Input_Mode", "Unicode",
+	)
+
 	static ini := App.paths.profile "\Config.ini"
 
 	static __New() {
@@ -413,20 +417,47 @@ Class Cfg {
 	}
 
 	static SwitchSet(valuesVariants, entry, section := "Settings", options := "") {
-		currentValue := this.Get(entry, section)
-		found := false
+		local currentValue := this.Get(entry, section)
+		local found := False
 
 		for i, value in valuesVariants {
 			if (value = currentValue) {
 				nextIndex := (i = valuesVariants.MaxIndex()) ? 1 : i + 1
 				this.Set(valuesVariants[nextIndex], entry, section, options)
-				found := true
+				found := True
 				break
 			}
 		}
 
 		if (!found) {
 			this.Set(valuesVariants[1], entry, section, options)
+		}
+	}
+
+	static SessionSet(value, entry) {
+		this.sessionSettings.Set(value, entry)
+		return
+	}
+
+	static SessionGet(entry) {
+		return this.sessionSettings.Get(entry)
+	}
+
+	static SessionSwitchSet(valuesVariants, entry) {
+		local currentValue := this.sessionSettings.Get(entry)
+		local found := False
+
+		for i, value in valuesVariants {
+			if (value = currentValue) {
+				nextIndex := (i = valuesVariants.MaxIndex()) ? 1 : i + 1
+				this.sessionSettings.Set(entry, valuesVariants[nextIndex])
+				found := True
+				break
+			}
+		}
+
+		if (!found) {
+			this.sessionSettings.Set(entry, valuesVariants[1])
 		}
 	}
 
@@ -546,6 +577,13 @@ Class Options {
 		RunWait(command, , "Hide")
 
 		MsgBox(Locale.Read("gui.options.system_startup.shortcut_created_or_updated"), App.Title(), 0x40)
+		return
+	}
+
+	static ToggleInputMode() {
+		Cfg.SessionSwitchSet(["Unicode", "HTML", "LaTeX"], "Input_Mode")
+		MsgBox(Locale.ReadInject("messages.input_mode_changed", [Locale.Read("messages.input_mode_changed_" StrLower(Cfg.SessionGet("Input_Mode")))]), App.Title(), 0x40)
+		return Event.Trigger("Input Mode", "Changed", Cfg.SessionGet("Input_Mode"))
 	}
 }
 

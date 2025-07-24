@@ -47,7 +47,7 @@ Class ChrLegend {
 
 		labels := {
 			unknown: Locale.Read("dictionary.unknown"),
-			uniTitle: Locale.Read("unicode", "default"),
+			uniTitle: Locale.Read("gui.legend.name_in_unicode"),
 			altTitles: Locale.Read("gui.legend.name_variations"),
 			languages: Locale.Read("dictionary.languages"),
 			description: Locale.Read("gui.legend.description_unavailable"),
@@ -490,7 +490,7 @@ Class ChrLegend {
 				htmlContentDec.Text := Util.StrToHTML(getChar)
 
 				htmlContentHex := legendPanel["HTMLContentHex"]
-				htmlContentHex.Text := Util.StrToHTML(getChar, "Hex")
+				htmlContentHex.Text := Util.StrToHTML(getChar, , "Hex")
 
 				htmlContentEnt := legendPanel["HTMLContentEnt"]
 				htmlContentEnt.Text := entry["entity"] != "" ? entry["entity"] : labels.unknown

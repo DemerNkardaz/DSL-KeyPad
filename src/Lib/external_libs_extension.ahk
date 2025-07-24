@@ -26,6 +26,3 @@ class JSONExt extends JSON {
 		return output
 	}
 }
-
-
-; JSONExt.BulkLoad(A_ScriptDir "\Data\characters", "UTF-8")

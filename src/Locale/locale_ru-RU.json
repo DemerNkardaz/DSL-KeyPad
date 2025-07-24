@@ -251,6 +251,7 @@
 			"legend": {
 				"__self": "Легенда",
 				"description_unavailable": "Описание недоступно",
+				"name_in_unicode": "Название в Unicode",
 				"name_variations": "Варианты названий",
 				"authors": {
 					"__self":"{@:dictionary.authors}:",
@@ -258,7 +259,10 @@
 				}
 			},
 			"mods": {
-				"__self": "Модификации"
+				"__self": "Модификации",
+				"version": "{@:dictionary.version}: {}",
+				"author": "{@:dictionary.authors}: {}",
+				"homepage": "{@:dictionary.homepage}:\n{}"
 			},
 			"changelog": {
 				"__self": "История изменений"
@@ -539,7 +543,7 @@
 		"side_process": {
 			"support": "Вспомогательный процесс"
 		},
-		"current_input_mode": "Current mode: {}",
+		"current_input_mode": "Активен режим: {}",
 		"unicode_range": "[ Диапазон U+0000–U+10FFFF ]",
 		"altcode_range": "[ Диапазон 0–255 или 0128–0255 ]",
 		"messages": {

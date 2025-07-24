@@ -11,7 +11,7 @@ Class ModsGUI {
 	Constructor() {
 		local languageCode := Language.Get()
 
-		local title := App.Title() " — " Locale.Read("dictionary.mods")
+		local title := App.Title("+status+version") " — " Locale.Read("dictionary.mods")
 		ModsGUI.title := title
 
 		local w := 900
@@ -65,7 +65,7 @@ Class ModsGUI {
 		panel.title := ModsGUI.title
 
 		local listTitles := []
-		for each in ["dictionary.name", "dictionary.version", "init", "dictionary.folder"]
+		for each in ["dictionary.title", "dictionary.version", "init", "dictionary.folder"]
 			listTitles.Push(Locale.Read(each))
 		listTitles.Push("")
 
@@ -211,9 +211,9 @@ Class ModsGUI {
 		panel["PreviewImage"].Value := this.GetPreview(&modPath)
 		panel["InfoGroup"].Text := title
 
-		panel["VersionLabel"].Text := Locale.Read("dictionary.version") " " optionsMap["options"]["version"]
-		panel["AuthorLabel"].Text := Locale.Read("dictionary.author") " " author
-		panel["ModPage"].Text := Locale.Read("dictionary.homepage") "`n" url
+		panel["VersionLabel"].Text := Locale.ReadInject("gui.mods.version", [optionsMap["options"]["version"]])
+		panel["AuthorLabel"].Text := Locale.ReadInject("gui.mods.author", [author])
+		panel["ModPage"].Text := Locale.ReadInject("gui.mods.homepage", [url])
 		panel["Description"].Text := Locale.HandleString(description)
 	}
 

@@ -64,7 +64,7 @@ Class ChrCrafter {
 		)
 
 		composeObject.insertType := ""
-		composeObject.currentInputMode := Locale.ReadInject("current_input_mode", ["[" Auxiliary.inputMode "]"])
+		composeObject.currentInputMode := Locale.ReadInject("current_input_mode", ["[" Cfg.SessionGet("Input_Mode") "]"])
 
 		composeObject.pauseOn := False
 		composeObject.cancelledByUser := False
@@ -170,7 +170,7 @@ Class ChrCrafter {
 			hasBacktick := InStr(composeObject.input, "``")
 
 			if composeObject.insertType = "" {
-				composeObject.currentInputMode := Locale.ReadInject("current_input_mode", ["[" Auxiliary.inputMode "]"])
+				composeObject.currentInputMode := Locale.ReadInject("current_input_mode", ["[" Cfg.SessionGet("Input_Mode") "]"])
 				ComposeSuggestedTooltip()
 			}
 
@@ -369,7 +369,7 @@ Class ChrCrafter {
 	}
 
 	SendOutput(&output) {
-		output := Auxiliary.inputMode = "Unicode" ? RegExReplace(output, "\#\#", "") : output
+		output := Cfg.SessionGet("Input_Mode") = "Unicode" ? RegExReplace(output, "\#\#", "") : output
 		if StrLen(output) > 20
 			Clip.Send(&output, , , "Backup & Release")
 		else
@@ -380,7 +380,7 @@ Class ChrCrafter {
 		if prompt = ""
 			return
 
-		inputMode := !hasBacktick ? Auxiliary.inputMode : "Unicode"
+		inputMode := !hasBacktick ? Cfg.SessionGet("Input_Mode") : "Unicode"
 
 		promptBackup := prompt
 		output := ""
@@ -584,12 +584,12 @@ Class ChrCrafter {
 
 	GetComparedChar(&entry) {
 		local output := ""
-		if Auxiliary.inputMode = "HTML" && StrLen(entry["html"]) > 0 {
+		if Cfg.SessionGet("Input_Mode") = "HTML" && StrLen(entry["html"]) > 0 {
 			output :=
 				(this.modifiedCharsType && entry.Has(this.modifiedCharsType "HTML")) ? entry[this.modifiedCharsType "HTML"] :
 				(StrLen(entry["entity"]) > 0 ? entry["entity"] : entry["html"])
 
-		} else if Auxiliary.inputMode = "LaTeX" && entry["LaTeX"].Length > 0 {
+		} else if Cfg.SessionGet("Input_Mode") = "LaTeX" && entry["LaTeX"].Length > 0 {
 			output := Cfg.Get("LaTeX_Mode", , "Text") = "Math" ? entry["LaTeX"][2] : entry["LaTeX"][1]
 
 		} else {

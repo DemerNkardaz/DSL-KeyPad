@@ -1,26 +1,4 @@
 Class Auxiliary {
-
-	static inputMode := "Unicode"
-
-	static ToggleInputMode() {
-		switch this.inputMode {
-			case "Unicode":
-				this.inputMode := "HTML"
-
-			case "HTML":
-				this.inputMode := "LaTeX"
-
-			case "LaTeX":
-				this.inputMode := "Unicode"
-
-			default:
-				this.inputMode := "Unicode"
-		}
-
-		MsgBox(Locale.ReadInject("messages.input_mode_changed", [Locale.Read("messages.input_mode_changed_" StrLower(this.inputMode))]), App.Title(), 0x40)
-
-		return
-	}
 	/*
 	static ToRomanNumeral(IntValue, CapitalLetters := True) {
 		IntValue := Integer(IntValue)

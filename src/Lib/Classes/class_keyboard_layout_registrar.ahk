@@ -14,10 +14,8 @@ Class KbdLayoutReg {
 				if keys.Has("binds")
 					BindReg.Set(item, "Layout Specified", keys["binds"])
 			}
-
-			data := unset
 		}
-		return
+		return Event.Trigger("Layouts Storage", "Initialized")
 	}
 
 	static Get(targetType, layoutName) {
@@ -32,6 +30,7 @@ Class KbdLayoutReg {
 		this.targetType := targetType
 		this.script := layoutName
 		this.Merge(source*)
+		return Event.Trigger("Layouts Storage", "Item Registered", targetType, layoutName)
 	}
 
 	Merge(source*) {

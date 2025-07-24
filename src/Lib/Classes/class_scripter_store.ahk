@@ -9,7 +9,7 @@ Class ScripterStore {
 		ScripterStore("Alternative Modes", alternativeModes)
 		ScripterStore("Glyph Variations", glyphVariations)
 		ScripterStore("TELEX", telex)
-		return
+		return Event.Trigger("Scripter Storage", "Initialized")
 	}
 
 	static Get(target, name) {

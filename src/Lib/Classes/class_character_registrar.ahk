@@ -721,7 +721,7 @@ Class ChrReg {
 	EntryPostProcessing__Sequence(&entryName, &entry, &character) {
 		if entry["sequence"].Length > 1 {
 			for sequenceChr in entry["sequence"]
-				entry["entity"] .= Util.StrToHTML(Util.UnicodeToChar(sequenceChr), "Entities")
+				entry["entity"] .= Util.StrToHTML(Util.UnicodeToChar(sequenceChr), , "Entities")
 		} else {
 
 			for char, htmlCode in characters.supplementaryData["HTML Named Entities"] {

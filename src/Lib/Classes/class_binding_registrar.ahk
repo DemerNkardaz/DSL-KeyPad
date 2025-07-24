@@ -3,7 +3,8 @@ Class BindReg {
 	static userBindings := []
 
 	static __New() {
-		this.storedData := JSON.LoadFile(dataDir "\binds.json", "UTF-8")["entries"]
+		this.storedData := JSON.LoadFile(dataDir "\binds.json", "UTF-8")
+		return
 	}
 
 	static Get(name, inRoot := "", &varReference := Map()) {
@@ -97,3 +98,5 @@ Class BindReg {
 	; }
 
 }
+
+Event.Trigger("Binding Storage", "Initialized")

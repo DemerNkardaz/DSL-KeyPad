@@ -1,1798 +1,1377 @@
 {
-	"entries": {
-		"User": {},
-		"Layout Specified": {},
-		"Script Specified": {
-			"Hellenic": {
-				"ForceSingle": true,
-				"Flat": {
-					"Α": "hel_[c,s]_let_a_alpha",
-					"Β": "hel_[c,s]_let_b_beta",
-					"Γ": "hel_[c,s]_let_g_gamma",
-					"Δ": "hel_[c,s]_let_d_delta",
-					"Ε": "hel_[c,s]_let_e_epsilon",
-					"Ζ": "hel_[c,s]_let_z_zeta",
-					"Η": "hel_[c,s]_let_h_eta",
-					"Θ": "hel_[c,s]_let_t_theta",
-					"Ι": "hel_[c,s]_let_i_iota",
-					"Κ": "hel_[c,s]_let_k_kappa",
-					"Λ": "hel_[c,s]_let_l_lambda",
-					"Μ": "hel_[c,s]_let_m_mu",
-					"Ν": "hel_[c,s]_let_n_nu",
-					"Ξ": "hel_[c,s]_let_x_xi",
-					"Ο": "hel_[c,s]_let_o_omicron",
-					"Π": "hel_[c,s]_let_p_pi",
-					"Ρ": "hel_[c,s]_let_r_rho",
-					"Σ": "hel_[c,s]_let_s_sigma",
-					"Τ": "hel_[c,s]_let_t_tau",
-					"Υ": "hel_[c,s]_let_y_upsilon",
-					"Φ": "hel_[c,s]_let_f_phi",
-					"Χ": "hel_[c,s]_let_h_chi",
-					"Ψ": "hel_[c,s]_let_p_psi",
-					"Ω": "hel_[c,s]_let_o_omega",
-					"Ϟ": "hel_[c,s]_let_q_koppa",
-					"Ϝ": "hel_[c,s]_let_w_digamma",
-					"Ισον": "equals",
-					"Παυλα": "hyphen_minus",
-					"Τελεια": "dot",
-					"Κομμα": "comma",
-					"Σολιδος": "solidus",
-					"ΠισωΣολιδος": "reverse_solidus",
-					"ΑνωΤελεια": "semicolon",
-					"Αποστροφη": "apostrophe",
-					"ΑριστερηΑγκυλη": "left_bracket",
-					"ΔεξιαΑγκυλη": "right_bracket",
-					"Περισπωμενη": "grave_accent"
-				},
-				"Moded": {
-					"Α": {
-						"<!": "hel_[c,s]_let_a_alpha__tonos",
-						"<^>!": "hel_[c,s]_let_a_alpha__dasia",
-						"<^>!<+": "hel_[c,s]_let_a_alpha__psili",
-						"<^>!>+": "hel_[c,s]_let_a_alpha__macron",
-						"<^>!<+>+": "hel_[c,s]_let_a_alpha__vrachy",
-						"<^>!<!": "hel_[c,s]_let_a_alpha__varia",
-						"<^>!<!<+": "hel_[c,s]_let_a_alpha__[prosgegrammeni,ypogegrammeni]",
-						"<^>!<!<+>+": "hel_[c,s]_let_a_alpha__oxia",
-						"<^<!": "tonos"
-					},
-					"Β": {
-						">+": "hel_s_sym_b_beta",
-						"<^<!": "vrachy"
-					},
-					"Γ": {},
-					"Δ": {
-						"<^>!": "wallet_drachma",
-						"<^<!": "dialytika"
-					},
-					"Ε": {
-						">+": "hel_s_sym_e_epsilon_lunate",
-						"<!": "hel_[c,s]_let_e_epsilon__tonos",
-						"<^>!": "hel_[c,s]_let_e_epsilon__dasia",
-						"<^>!<+": "hel_[c,s]_let_e_epsilon__psili",
-						"<^>!<!": "hel_[c,s]_let_e_epsilon__varia",
-						"<^>!<!<+>+": "hel_[c,s]_let_e_epsilon__oxia",
-						"<^<!": "dasia_and_perispomeni",
-						"<^<!<+": "psili_and_perispomeni"
-					},
-					"Ζ": {
-						"<^<!": "dialytika_and_tonos",
-						"<^<!<+": "dialytika_and_oxia"
-					},
-					"Η": {
-						"<!": "hel_[c,s]_let_h_eta__tonos",
-						"<^>!": "hel_[c,s]_let_h_eta__dasia",
-						"<^>!<+": "hel_[c,s]_let_h_eta__psili",
-						"<^>!>+": "hel_[c,s]_let_h_eta__macron",
-						"<^>!<!": "hel_[c,s]_let_h_eta__varia",
-						"<^>!<!<+": "hel_[c,s]_let_h_eta__[prosgegrammeni,ypogegrammeni]",
-						"<^>!<!<+>+": "hel_[c,s]_let_h_eta__oxia"
-					},
-					"Θ": {">+": "hel_[c,s]_sym_t_theta"},
-					"Ι": {
-						"<+": "hel_[c,s]_let_i_jot",
-						">+": "hel_[c,s]_let_i_iota__dasia",
-						"<!": "hel_[c,s]_let_i_iota__tonos",
-						"<^>!": "hel_[c,s]_let_i_iota__dialytika",
-						"<^>!<+": "hel_[c,s]_let_i_iota__psili",
-						"<^>!>+": "hel_[c,s]_let_i_iota__macron",
-						"<^>!<+>+": "hel_[c,s]_let_i_iota__vrachy",
-						"<^>!<!": "hel_[c,s]_let_i_iota__varia",
-						"<^>!<!<+>+": "hel_[c,s]_let_i_iota__oxia"
-					},
-					"Κ": {
-						">+": "hel_s_sym_k_kappa",
-						"<^>!": "hel_[c,s]_lig_k_kai",
-						"<^<!": "koronis"
-					},
-					"Κομμα": {
-						"<^<!": "dasia"
-					},
-					"Λ": {},
-					"Μ": {},
-					"Ν": {},
-					"Ξ": {},
-					"Ο": {
-						"<^<!": "oxia",
-						"<!": "hel_[c,s]_let_o_omicron__tonos",
-						"<^>!": "hel_[c,s]_let_o_omicron__dasia",
-						"<^>!<+": "hel_[c,s]_let_o_omicron__psili",
-						"<^>!<!": "hel_[c,s]_let_o_omicron__varia",
-						"<^>!<!<+>+": "hel_[c,s]_let_o_omicron__oxia"
-					},
-					"Π": {
-						">+": "hel_s_sym_p_pi",
-						"<^<!": "perispomeni"
-					},
-					"Ρ": {
-						">+": "hel_s_sym_r_rho",
-						"<^>!": "hel_[c,s]_let_r_rho__dasia",
-						"<^>!<+": "hel_[s]_let_r_rho__psili"
-					},
-					"Σ": {
-						">+": "hel_[c,s]_sym_s_sigma_lunate",
-						"<+": "hel_[c,s]_lig_st_stigma",
-						"<!": "hel_s_let_s_sigma_final",
-						"<^>!": "hel_[c,s]_let_s_san",
-						"<^>!>+": "hel_[c,s]_let_s_sho",
-						"<^>!<!": "hel_[c,s]_let_s_sampi",
-						"<^>!<!<+": "hel_[c,s]_let_s_sampi_archaic"
-					},
-					"Τ": {"<^>!": "hel_[c,s]_let_t_theta"},
-					"Υ": {
-						"<^<!": "[pros,ypo]gegrammeni",
-						">+": "hel_[c,s]_let_y_upsilon__dasia",
-						"<!": "hel_[c,s]_let_y_upsilon__tonos",
-						"<^>!": "hel_[c,s]_let_y_upsilon__dialytika",
-						"<^>!<+": "hel_[s]_let_y_upsilon__psili",
-						"<^>!>+": "hel_[c,s]_let_y_upsilon__macron",
-						"<^>!<+>+": "hel_[c,s]_let_y_upsilon__vrachy",
-						"<^>!<!": "hel_[c,s]_let_y_upsilon__varia",
-						"<^>!<!<+>+": "hel_[c,s]_let_y_upsilon__oxia"
-					},
-					"Φ": {">+": "hel_s_sym_f_phi"},
-					"Χ": {
-						"<!": "hel_[c,s]_let_h_heta",
-						"<^<!": "dialytika_and_varia",
-						"<^<!<+": "dialytika_and_perispomeni"
-					},
-					"Ψ": {},
-					"Ω": {
-						"<^<!": "varia",
-						"<!": "hel_[c,s]_let_o_omega__tonos",
-						"<^>!": "hel_[c,s]_let_o_omega__dasia",
-						"<^>!<+": "hel_[c,s]_let_o_omega__psili",
-						"<^>!>+": "hel_[c,s]_let_o_omega__macron",
-						"<^>!<+>+": "hel_[c,s]_let_o_omega__vrachy",
-						"<^>!<!": "hel_[c,s]_let_o_omega__varia",
-						"<^>!<!<+": "hel_[c,s]_let_o_omega__[prosgegrammeni,ypogegrammeni]",
-						"<^>!<!<+>+": "hel_[c,s]_let_o_omega__oxia"
-					},
-					"Ϝ": {
-						"<^>!": "hel_[c,s]_let_w_digamma_pamphylian",
-						"<^<!": "dasia_and_oxia",
-						"<^<!<+": "psili_and_oxia"
-					},
-					"Ϟ": {
-						"<^>!": "hel_[c,s]_let_q_koppa_archaic",
-						"<^<!": "dasia_and_varia",
-						"<^<!<+": "psili_and_varia"
-					},
-					"Τελεια": {
-						"<^<!": "psili",
-						">+": "hel_n_sym_diple"
-					},
-					"Ισον": {"+": "plus"},
-					"Παυλα": {"+": "underscore"},
-					"Σολιδος": {"+": "question"},
-					"ΠισωΣολιδος": {
-						"+": "vertical_line",
-						"<^>!": "hel_n_sym_paragraphos",
-						"<^>!>+": "hel_n_sym_paragraphos_forked",
-						"<^>!<+": "hel_n_sym_paragraphos_forked_reversed"
-					},
-					"ΑνωΤελεια": {
-						"+": "colon",
-						"<!": "hel_n_sym_erotimatiko",
-						"<^>!": "hel_n_sym_ano_teleia"
-					},
-					"Αποστροφη": {
-						"+": "quote",
-						"<^>!": "hel_n_sym_numeral_sign[,_lower]"
-					},
-					"Περισπωμενη": {
-						"+": "tilde",
-						"<^>!<!": "hel_n_sym_hypodiastole"
-					},
-					"ΑριστερηΑγκυλη": {"+": "left_brace"},
-					"ΔεξιαΑγκυλη": {"+": "right_brace"},
-					"2": {
-						"<!": "hel_n_sym_editorial_koronis",
-						"<^>!<!": "hel_n_sym_ancora_[downwards,upwards]"
-					},
-					"5": {
-						"<!": "hel_n_sym_dotted_obelos"
-					}
-				}
+	"User": {},
+	"Layout Specified": {},
+	"Script Specified": {
+		"Hellenic": {
+			"ForceSingle": true,
+			"Flat": {
+				"Α": "hel_[c,s]_let_a_alpha",
+				"Β": "hel_[c,s]_let_b_beta",
+				"Γ": "hel_[c,s]_let_g_gamma",
+				"Δ": "hel_[c,s]_let_d_delta",
+				"Ε": "hel_[c,s]_let_e_epsilon",
+				"Ζ": "hel_[c,s]_let_z_zeta",
+				"Η": "hel_[c,s]_let_h_eta",
+				"Θ": "hel_[c,s]_let_t_theta",
+				"Ι": "hel_[c,s]_let_i_iota",
+				"Κ": "hel_[c,s]_let_k_kappa",
+				"Λ": "hel_[c,s]_let_l_lambda",
+				"Μ": "hel_[c,s]_let_m_mu",
+				"Ν": "hel_[c,s]_let_n_nu",
+				"Ξ": "hel_[c,s]_let_x_xi",
+				"Ο": "hel_[c,s]_let_o_omicron",
+				"Π": "hel_[c,s]_let_p_pi",
+				"Ρ": "hel_[c,s]_let_r_rho",
+				"Σ": "hel_[c,s]_let_s_sigma",
+				"Τ": "hel_[c,s]_let_t_tau",
+				"Υ": "hel_[c,s]_let_y_upsilon",
+				"Φ": "hel_[c,s]_let_f_phi",
+				"Χ": "hel_[c,s]_let_h_chi",
+				"Ψ": "hel_[c,s]_let_p_psi",
+				"Ω": "hel_[c,s]_let_o_omega",
+				"Ϟ": "hel_[c,s]_let_q_koppa",
+				"Ϝ": "hel_[c,s]_let_w_digamma",
+				"Ισον": "equals",
+				"Παυλα": "hyphen_minus",
+				"Τελεια": "dot",
+				"Κομμα": "comma",
+				"Σολιδος": "solidus",
+				"ΠισωΣολιδος": "reverse_solidus",
+				"ΑνωΤελεια": "semicolon",
+				"Αποστροφη": "apostrophe",
+				"ΑριστερηΑγκυλη": "left_bracket",
+				"ΔεξιαΑγκυλη": "right_bracket",
+				"Περισπωμενη": "grave_accent"
 			},
-			"Germanic Runes": {
-				"Flat": {
-					"A": ["germanic_runic_n_rune_a_elder_futhark_ansuz"],
-					"B": ["germanic_runic_n_rune_b_elder_futhark_berkanan"],
-					"C": ["germanic_runic_n_rune_c_futhork_cen"],
-					"D": ["germanic_runic_n_rune_d_elder_futhark_dagaz"],
-					"E": ["germanic_runic_n_rune_e_elder_futhark_ehwaz"],
-					"F": ["germanic_runic_n_rune_f_elder_futhark_fehu"],
-					"G": ["germanic_runic_n_rune_g_elder_futhark_gebo"],
-					"H": ["germanic_runic_n_rune_h_elder_futhark_hagalaz"],
-					"I": ["germanic_runic_n_rune_i_elder_futhark_isaz"],
-					"J": ["germanic_runic_n_rune_y_elder_futhark_jeran"],
-					"K": ["germanic_runic_n_rune_k_elder_futhark_kenaz"],
-					"L": ["germanic_runic_n_rune_l_elder_futhark_laguz"],
-					"M": ["germanic_runic_n_rune_m_elder_futhark_mannaz"],
-					"N": ["germanic_runic_n_rune_n_elder_futhark_naudiz"],
-					"O": ["germanic_runic_n_rune_o_elder_futhark_othala"],
-					"P": ["germanic_runic_n_rune_p_elder_futhark_pertho"],
-					"Q": ["germanic_runic_n_rune_k_futhork_cweorth"],
-					"R": ["germanic_runic_n_rune_r_elder_futhark_raido"],
-					"S": ["germanic_runic_n_rune_s_elder_futhark_sowilo"],
-					"T": ["germanic_runic_n_rune_t_elder_futhark_tiwaz"],
-					"U": ["germanic_runic_n_rune_u_elder_futhark_uruz"],
-					"V": ["germanic_runic_n_rune_v_later_younger_futhark"],
-					"W": ["germanic_runic_n_rune_w_elder_futhark_wunjo"],
-					"X": [""],
-					"Y": ["germanic_runic_n_rune_y_younger_futhark_ur"],
-					"Z": ["germanic_runic_n_rune_z_elder_futhark_algiz"],
-					"Equals": ["equals"],
-					"HyphenMinus": ["hyphen_minus"],
-					"Dot": ["dot"],
-					"Comma": ["comma"],
-					"Slash": ["solidus"],
-					"Backslash": ["reverse_solidus"],
-					"Semicolon": ["semicolon"],
-					"Apostrophe": ["apostrophe"],
-					"LeftBracket": ["left_bracket"],
-					"RightBracket": ["right_bracket"],
-					"Tilde": ["grave_accent"]
+			"Moded": {
+				"Α": {
+					"<!": "hel_[c,s]_let_a_alpha__tonos",
+					"<^>!": "hel_[c,s]_let_a_alpha__dasia",
+					"<^>!<+": "hel_[c,s]_let_a_alpha__psili",
+					"<^>!>+": "hel_[c,s]_let_a_alpha__macron",
+					"<^>!<+>+": "hel_[c,s]_let_a_alpha__vrachy",
+					"<^>!<!": "hel_[c,s]_let_a_alpha__varia",
+					"<^>!<!<+": "hel_[c,s]_let_a_alpha__[prosgegrammeni,ypogegrammeni]",
+					"<^>!<!<+>+": "hel_[c,s]_let_a_alpha__oxia",
+					"<^<!": "tonos"
 				},
-				"Moded": {
-					"A": {
-						"<+": ["germanic_runic_n_rune_a_futhork_ac"],
-						">+": ["germanic_runic_n_rune_a_futhork_aesc"],
-						"<^>!": ["germanic_runic_n_rune_a_younger_futhark_ar"],
-						"<^>!<+": ["germanic_runic_n_rune_a_younger_futhark_ar_short_twig"],
-						"<^>!<!<+": ["germanic_runic_n_rune_a_franks_casket_ac"],
-						"<^>!<!<+>+": ["germanic_runic_n_rune_a_franks_casket_aesc"]
-					},
-					"B": {
-						"<^>!<+": ["germanic_runic_n_rune_b_younger_futhark_bjarkan_short_twig"]
-					},
-					"C": {"<^>!<!": ["germanic_runic_n_rune_c_medieval"]},
-					"D": {
-						"<^>!": ["germanic_runic_n_rune_d_later_younger_futhark_eth"],
-						"<^>!<+": ["germanic_runic_n_rune_d_later_younger_futhark"],
-						"<^<!": ["vzmet"]
-					},
-					"E": {
-						"<+": ["germanic_runic_n_rune_e_futhork_ear"],
-						"<^>!": ["germanic_runic_n_rune_e_later_younger_futhark"],
-						"<^>!<!<+": ["germanic_runic_n_rune_e_franks_casket_eh"]
-					},
-					"G": {
-						"<+": ["germanic_runic_n_rune_g_futhork_gar"],
-						"<^>!<!": ["germanic_runic_n_rune_g_medieval"]
-					},
-					"H": {
-						"<+": ["germanic_runic_n_rune_h_futhork_haegl"],
-						"<^>!": ["germanic_runic_n_rune_h_younger_futhark_hagall"],
-						"<^>!<+": ["germanic_runic_n_rune_h_younger_futhark_hagall_short_twig"]
-					},
-					"I": {
-						">+": ["germanic_runic_n_rune_i_elder_futhark_eihwaz"],
-						"<^>!<!<+": ["germanic_runic_n_rune_i_franks_casket_is"]
-					},
-					"J": {
-						"<+": ["germanic_runic_n_rune_y_futhork_ger"],
-						">+": ["germanic_runic_n_rune_y_futhork_ior"]
-					},
-					"K": {
-						"<+": ["germanic_runic_n_rune_k_futhork_cealc"],
-						">+": ["germanic_runic_n_rune_k_futhork_calc"],
-						"<^>!": ["germanic_runic_n_rune_k_younger_futhark_kaun"],
-						"<^>!<!": ["germanic_runic_n_rune_k_medieval_open"],
-						"<^>!>+": ["tolkien_runic_n_rune_k"]
-					},
-					"L": {"<^>!": ["germanic_runic_n_rune_l_later_younger_futhark"]},
-					"M": {
-						"<^>!": ["germanic_runic_n_rune_m_younger_futhark_madr"],
-						"<^>!<+": ["germanic_runic_n_rune_m_younger_futhark_madr_short_twig"]
-					},
-					"N": {
-						">+": ["germanic_runic_n_rune_n_elder_futhark_ingwaz"],
-						"<+": ["germanic_runic_n_rune_n_futhork_ing"],
-						"<^>!<+": ["germanic_runic_n_rune_n_younger_futhark_naudr_short_twig"],
-						"<^>!<!": ["germanic_runic_n_rune_n_medieval_en"],
-						"<^>!<!<++": ["germanic_runic_n_rune_n_medieval_eng"]
-					},
-					"O": {
-						"<+": ["germanic_runic_n_rune_o_futhork_os"],
-						"<^>!": ["germanic_runic_n_rune_o_younger_futhark_oss"],
-						"<^>!<+": ["germanic_runic_n_rune_o_younger_futhark_oss_short_twig"],
-						"<^>!>+": ["tolkien_runic_n_rune_o_oo"],
-						"<^>!<!": ["germanic_runic_n_rune_o_medieval_on"],
-						"<^>!<!>+": ["germanic_runic_n_rune_o_medieval"],
-						"<^>!<!<+": ["germanic_runic_n_rune_o_franks_casket_os"]
-					},
-					"P": {"<^>!": ["germanic_runic_n_rune_p_later_younger_futhark"]},
-					"S": {
-						"<+": ["germanic_runic_n_rune_s_futhork_sigel"],
-						">+": ["germanic_runic_n_rune_s_futhork_stan"],
-						"<^>!<+": ["germanic_runic_n_rune_s_younger_futhark_sol_short_twig"],
-						"<^>!>+": ["tolkien_runic_n_rune_s_sh"]
-					},
-					"T": {
-						">+": ["germanic_runic_n_rune_t_elder_futhark_thurisaz"],
-						"<^>!<+": ["germanic_runic_n_rune_t_younger_futhark_tyr_short_twig"]
-					},
-					"W": {"<^>!<!": ["germanic_runic_n_rune_w_medieval"]},
-					"X": {"<^>!<!": ["germanic_runic_n_rune_x_medieval"]},
-					"Y": {
-						">+": ["germanic_runic_n_rune_y_younger_futhark_icelandic_yr"],
-						"<^>!": ["germanic_runic_n_rune_y_younger_futhark_yr"],
-						"<^>!<+": ["germanic_runic_n_rune_y_younger_futhark_yr_short_twig"],
-						"<+": ["germanic_runic_n_rune_y_futhork_yr"]
-					},
-					"Z": {"<^>!<!": ["germanic_runic_n_rune_z_medieval"]},
-					"Equals": {"+": ["plus"]},
-					"HyphenMinus": {"+": ["underscore"]},
-					"Slash": {"+": ["question"]},
-					"Backslash": {"+": ["vertical_line"]},
-					"Semicolon": {"+": ["colon"]},
-					"Apostrophe": {"+": ["quote"]},
-					"Tilde": {"+": ["tilde"]},
-					"LeftBracket": {"+": ["left_brace"]},
-					"RightBracket": {"+": ["right_brace"]},
-					"Comma": {"<^>!": ["runic_cruciform_punctuation"]},
-					"Dot": {"<^>!": ["runic_single_punctuation"]},
-					"Space": {"<^>!": ["runic_multiple_punctuation"]},
-					"7": {"<^>!": ["germanic_runic_n_rune_almanac_arlaug"]},
-					"8": {"<^>!": ["germanic_runic_n_rune_almanac_tvimadur"]},
-					"9": {"<^>!": ["germanic_runic_n_rune_almanac_belgthor"]}
-				}
-			},
-			"Glagolitic": {
-				"Flat": {
-					"А": "glagolitic_[c,s]_let_az",
-					"Б": "glagolitic_[c,s]_let_buky",
-					"В": "glagolitic_[c,s]_let_vede",
-					"Г": "glagolitic_[c,s]_let_glagoli",
-					"Д": "glagolitic_[c,s]_let_dobro",
-					"Е": "glagolitic_[c,s]_let_yestu",
-					"Ё": "glagolitic_[c,s]_let_yo",
-					"Ж": "glagolitic_[c,s]_let_zhivete",
-					"З": "glagolitic_[c,s]_let_zemlja",
-					"И": "glagolitic_[c,s]_let_i",
-					"Й": "glagolitic_[c,s]_let_izhe",
-					"К": "glagolitic_[c,s]_let_kako",
-					"Л": "glagolitic_[c,s]_let_ljudije",
-					"М": "glagolitic_[c,s]_let_myslite",
-					"Н": "glagolitic_[c,s]_let_nashi",
-					"О": "glagolitic_[c,s]_let_onu",
-					"П": "glagolitic_[c,s]_let_pokoji",
-					"Р": "glagolitic_[c,s]_let_ritsi",
-					"С": "glagolitic_[c,s]_let_slovo",
-					"Т": "glagolitic_[c,s]_let_tvrido",
-					"У": "glagolitic_[c,s]_let_uku",
-					"Ф": "glagolitic_[c,s]_let_fritu",
-					"Х": "glagolitic_[c,s]_let_heru",
-					"Ц": "glagolitic_[c,s]_let_tsi",
-					"Ч": "glagolitic_[c,s]_let_chrivi",
-					"Ш": "glagolitic_[c,s]_let_sha",
-					"Щ": "glagolitic_[c,s]_let_shta",
-					"Ъ": "glagolitic_[c,s]_let_yeru",
-					"Ы": "glagolitic_[c,s]_let_yery",
-					"Ь": "glagolitic_[c,s]_let_yeri",
-					"Э": "glagolitic_[c,s]_let_small_yus",
-					"Ю": "glagolitic_[c,s]_let_yu",
-					"Я": "glagolitic_[c,s]_let_yati",
-					"Равно": ["equals"],
-					"ДефисоМинус": ["hyphen_minus"],
-					"Точка": ["dot"],
-					"ОбратныйСлэш": ["reverse_solidus"]
+				"Β": {
+					">+": "hel_s_sym_b_beta",
+					"<^<!": "vrachy"
 				},
-				"Moded": {
-					"0": {
-						"<^<!": "millions_sign"
-					},
-					"А": {"<^>!": "glagolitic_[c,s]_let_trokutasti_a"},
-					"Ё": {"<!": "glagolitic_[c,s]_let_big_yus_iotified"},
-					"Ж": {"<^>!": "glagolitic_[c,s]_let_djervi"},
-					"И": {
-						"<^>!": "glagolitic_[c,s]_let_initial_izhe",
-						"<+": "glagolitic_[c,s]_let_izhe",
-						"<^>!<+": "glagolitic_[c,s]_let_izhitsa"
-					},
-					"Й": {
-						"<^<!": "dasia_pneumata",
-						"<^<!<+": "psili_pneumata"
-					},
-					"О": {
-						"<^>!": "glagolitic_[c,s]_let_otu",
-						"<!": "glagolitic_[c,s]_let_big_yus"
-					},
-					"П": {"<^>!": "glagolitic_[c,s]_let_pe"},
-					"С": {"<^>!": "glagolitic_[c,s]_let_dzelo"},
-					"У": {
-						"<^<!": "titlo",
-						"<^<!<+": "vzmet"
-					},
-					"Х": {"<^>!": "glagolitic_[c,s]_let_spider_ha"},
-					"Ц": {
-						"<^<!": "pokrytie",
-						"<^<!<+": "payerok",
-						"<^<!>+": "palatalization"
-					},
-					"Ф": {"<^>!": "glagolitic_[c,s]_let_fita"},
-					"Ъ": {"<^>!": "glagolitic_[c,s]_let_shtapic"},
-					"Э": {"<^>!": "glagolitic_[c,s]_let_small_yus_iotified"},
-					"Равно": {"+": ["plus"]},
-					"ДефисоМинус": {"+": ["underscore"]},
-					"Точка": {"+": ["comma"]},
-					"ОбратныйСлэш": {"+": ["solidus"]}
-				}
-			},
-			"Old Turkic": {
-				"Flat": {
-					"A": "old_turkic_n_rune_a_[yenisei,orkhon]_a",
-					"B": "old_turkic_n_rune_b_[yenisei,orkhon]_ab",
-					"C": "old_turkic_n_rune_c_[yenisei,orkhon]_ec",
-					"D": "old_turkic_n_rune_d_[yenisei,orkhon]_ad",
-					"E": "old_turkic_n_rune_e_yenisei",
-					"F": [""],
-					"G": "old_turkic_n_rune_g_[yenisei,orkhon]_ag",
-					"H": [""],
-					"I": "old_turkic_n_rune_i_[yenisei,orkhon]",
-					"J": "old_turkic_n_rune_y_[yenisei,orkhon]_aey",
-					"K": "old_turkic_n_rune_k_[yenisei,orkhon]_aq",
-					"L": "old_turkic_n_rune_l_[yenisei,orkhon]_al",
-					"M": "old_turkic_n_rune_m_orkhon_em",
-					"N": "old_turkic_n_rune_n_orkhon_an",
-					"O": "old_turkic_n_rune_o_orkhon",
-					"P": "old_turkic_n_rune_p_orkhon_ep",
-					"Q": "old_turkic_n_rune_q_[yenisei,orkhon]_oq",
-					"R": "old_turkic_n_rune_r_[yenisei,orkhon]_ar",
-					"S": "old_turkic_n_rune_s_orkhon_as",
-					"T": "old_turkic_n_rune_t_[yenisei,orkhon]_at",
-					"U": [""],
-					"V": [""],
-					"W": [""],
-					"X": [""],
-					"Y": "old_turkic_n_rune_y_[yenisei,orkhon]_ay",
-					"Z": "old_turkic_n_rune_z_[yenisei,orkhon]_ez",
-					"Equals": ["equals"],
-					"HyphenMinus": ["hyphen_minus"],
-					"Dot": ["dot"],
-					"Comma": ["comma"],
-					"Slash": ["solidus"],
-					"Backslash": ["reverse_solidus"],
-					"Semicolon": ["semicolon"],
-					"Apostrophe": ["apostrophe"],
-					"LeftBracket": ["left_bracket"],
-					"RightBracket": ["right_bracket"],
-					"Tilde": ["grave_accent"]
+				"Γ": {},
+				"Δ": {
+					"<^>!": "wallet_drachma",
+					"<^<!": "dialytika"
 				},
-				"Moded": {
-					"A": {
-						"<^>!": "old_turkic_n_rune_a_yenisei_ae",
-						"<!": "old_turkic_n_rune_a_[yenisei,orkhon]_ash"
-					},
-					"B": {"<^>!": "old_turkic_n_rune_b_[yenisei,orkhon]_aeb"},
-					"C": {"<^>!": "old_turkic_n_rune_c_orkhon_ic"},
-					"D": {"<^>!": "old_turkic_n_rune_d_orkhon_aed"},
-					"G": {"<^>!": "old_turkic_n_rune_g_[yenisei,orkhon]_aeg"},
-					"K": {"<^>!": "old_turkic_n_rune_k_[yenisei,orkhon]_aek"},
-					"L": {"<^>!": "old_turkic_n_rune_l_orkhon_ael"},
-					"N": {
-						"<^>!>+": "old_turkic_n_rune_n_[yenisei,orkhon]_ent",
-						"<^>!": "old_turkic_n_rune_n_[yenisei,orkhon]_aen",
-						">+": "old_turkic_n_rune_n_[yenisei,orkhon]_[enc,eny]",
-						"<!": "old_turkic_n_rune_n_orkhon_eng"
-					},
-					"O": {"<^>!": "old_turkic_n_rune_o_[yenisei,orkhon]_oe"},
-					"P": {"<!": "old_turkic_n_rune_p_orkhon_op"},
-					"Q": {
-						"<^>!": "old_turkic_n_rune_q_[yenisei,orkhon]_oek",
-						"<!": "old_turkic_n_rune_q_[yenisei,orkhon]_iq"
-					},
-					"R": {
-						"<^>!": "old_turkic_n_rune_r_orkhon_aer",
-						"<!": "old_turkic_n_rune_r_orkhon_bash"
-					},
-					"S": {
-						"<^>!": "old_turkic_n_rune_s_orkhon_aes",
-						"<!": "old_turkic_n_rune_s_[yenisei,orkhon]_esh"
-					},
-					"T": {
-						"<^>!": "old_turkic_n_rune_t_[yenisei,orkhon]_aet",
-						"<^>!>+": "old_turkic_n_rune_t_orkhon_elt",
-						"<!": "old_turkic_n_rune_t_orkhon_ot"
-					},
-					"Y": {"<^>!": "old_turkic_n_rune_y_[yenisei,orkhon]_aey"},
-					"Equals": {"+": ["plus"]},
-					"HyphenMinus": {"+": ["underscore"]},
-					"Slash": {"+": ["question"]},
-					"Backslash": {"+": ["vertical_line"]},
-					"Semicolon": {"+": ["colon"]},
-					"Apostrophe": {"+": ["quote"]},
-					"Tilde": {"+": ["tilde"]},
-					"LeftBracket": {"+": ["left_brace"]},
-					"RightBracket": {"+": ["right_brace"]},
-					"Comma": {"<^>!": ["runic_cruciform_punctuation"]},
-					"Dot": {"<^>!": ["runic_single_punctuation"]},
-					"Space": {"<^>!": ["runic_multiple_punctuation"]}
-				}
-			},
-			"Old Permic": {
-				"Flat": {
-					"А": ["old_permic_n_let_an"],
-					"Б": ["old_permic_n_let_bur"],
-					"В": ["old_permic_n_let_ver"],
-					"Г": ["old_permic_n_let_gai"],
-					"Д": ["old_permic_n_let_doi"],
-					"Е": ["old_permic_n_let_e"],
-					"Ё": ["old_permic_n_let_oo"],
-					"Ж": ["old_permic_n_let_zhoi"],
-					"З": ["old_permic_n_let_zata"],
-					"И": ["old_permic_n_let_i"],
-					"Й": ["old_permic_n_let_ie"],
-					"К": ["old_permic_n_let_koke"],
-					"Л": ["old_permic_n_let_lei"],
-					"М": ["old_permic_n_let_menoe"],
-					"Н": ["old_permic_n_let_nenoe"],
-					"О": ["old_permic_n_let_vooi"],
-					"П": ["old_permic_n_let_peei"],
-					"Р": ["old_permic_n_let_rei"],
-					"С": ["old_permic_n_let_sii"],
-					"Т": ["old_permic_n_let_tai"],
-					"У": ["old_permic_n_let_u"],
-					"Ф": ["old_permic_n_let_ef"],
-					"Х": ["old_permic_n_let_ha"],
-					"Ц": ["old_permic_n_let_tsiu"],
-					"Ч": ["old_permic_n_let_chery"],
-					"Ш": ["old_permic_n_let_shooi"],
-					"Щ": ["old_permic_n_let_shchooi"],
-					"Ъ": ["old_permic_n_let_yeru"],
-					"Ы": ["old_permic_n_let_yery"],
-					"Ь": ["old_permic_n_let_yeri"],
-					"Э": ["old_permic_n_let_yat"],
-					"Ю": ["old_permic_n_let_yu"],
-					"Я": ["old_permic_n_let_ia"]
+				"Ε": {
+					">+": "hel_s_sym_e_epsilon_lunate",
+					"<!": "hel_[c,s]_let_e_epsilon__tonos",
+					"<^>!": "hel_[c,s]_let_e_epsilon__dasia",
+					"<^>!<+": "hel_[c,s]_let_e_epsilon__psili",
+					"<^>!<!": "hel_[c,s]_let_e_epsilon__varia",
+					"<^>!<!<+>+": "hel_[c,s]_let_e_epsilon__oxia",
+					"<^<!": "dasia_and_perispomeni",
+					"<^<!<+": "psili_and_perispomeni"
 				},
-				"Moded": {
-					"З": {"<^>!": ["old_permic_n_let_dzita"]},
-					"Ы": {"<^>!": ["old_permic_n_let_yry"]},
-					"О": {"<^>!": ["old_permic_n_let_o"]},
-					"Ж": {"<^>!": ["old_permic_n_let_dzhoi"]},
-					"Я": {"<^>!": ["old_permic_n_let_ya"]}
-				}
-			},
-			"Old Hungarian": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "old_hungarian_[c,s]_rune_a",
-					"B": "old_hungarian_[c,s]_rune_b_eb",
-					"C": "old_hungarian_[c,s]_rune_c_ec",
-					"D": "old_hungarian_[c,s]_rune_d_ed",
-					"E": "old_hungarian_[c,s]_rune_e",
-					"F": "old_hungarian_[c,s]_rune_f_ef",
-					"G": "old_hungarian_[c,s]_rune_g_eg",
-					"H": "old_hungarian_[c,s]_rune_h_eh",
-					"I": "old_hungarian_[c,s]_rune_i",
-					"J": "old_hungarian_[c,s]_rune_y_ej",
-					"K": "old_hungarian_[c,s]_rune_k_ek",
-					"L": "old_hungarian_[c,s]_rune_l_el",
-					"M": "old_hungarian_[c,s]_rune_m_em",
-					"N": "old_hungarian_[c,s]_rune_n_en",
-					"O": "old_hungarian_[c,s]_rune_o",
-					"P": "old_hungarian_[c,s]_rune_p_ep",
-					"Q": "",
-					"R": "old_hungarian_[c,s]_rune_r_er",
-					"S": "old_hungarian_[c,s]_rune_s_es",
-					"T": "old_hungarian_[c,s]_rune_t_et",
-					"U": "old_hungarian_[c,s]_rune_u",
-					"V": "old_hungarian_[c,s]_rune_v_ev",
-					"W": "",
-					"X": "",
-					"Y": "old_hungarian_[c,s]_rune_y_ue",
-					"Z": "old_hungarian_[c,s]_rune_z_ez",
-					"1": "old_hungarian_n_num_one",
-					"2": "old_hungarian_n_num_five",
-					"3": "old_hungarian_n_num_ten",
-					"4": "old_hungarian_n_num_fifty",
-					"5": "old_hungarian_n_num_one_hundred",
-					"6": "old_hungarian_n_num_one_thousand"
+				"Ζ": {
+					"<^<!": "dialytika_and_tonos",
+					"<^<!<+": "dialytika_and_oxia"
 				},
-				"Moded": {
-					"A": {"<^>!": "old_hungarian_[c,s]_rune_a_aa"},
-					"B": {"<+": "old_hungarian_[c,s]_rune_b_amb"},
-					"C": {
-						"<^>!": "old_hungarian_[c,s]_rune_c_ecs",
-						"<+": "old_hungarian_[c,s]_rune_c_ech"
-					},
-					"E": {
-						"<^>!": "old_hungarian_[c,s]_rune_e_ee",
-						"<+": "old_hungarian_[c,s]_rune_e_enk"
-					},
-					"G": {"<^>!": "old_hungarian_[c,s]_rune_g_egy"},
-					"I": {"<^>!": "old_hungarian_[c,s]_rune_i_ii"},
-					"K": {
-						"<^>!": "old_hungarian_[c,s]_rune_k_ak",
-						"<+": "old_hungarian_[c,s]_rune_k_unk"
-					},
-					"L": {"<^>!": "old_hungarian_[c,s]_rune_l_ely"},
-					"N": {"<^>!": "old_hungarian_[c,s]_rune_n_eny"},
-					"O": {
-						"<^>!": "old_hungarian_[c,s]_rune_o_oo",
-						"<+": "old_hungarian_[c,s]_rune_o_oe",
-						"<^>!<+": "old_hungarian_[c,s]_rune_o_oe_nik",
-						">+": "old_hungarian_[c,s]_rune_o_oee"
-					},
-					"P": {"<+": "old_hungarian_[c,s]_rune_p_emp"},
-					"R": {"<+": "old_hungarian_[c,s]_rune_r_er_short"},
-					"S": {
-						"<^>!": "old_hungarian_[c,s]_rune_s_esz",
-						"<+": "old_hungarian_[c,s]_rune_s_us"
-					},
-					"T": {
-						"<^>!": "old_hungarian_[c,s]_rune_t_ety",
-						"<+": "old_hungarian_[c,s]_rune_t_ent",
-						">+": "old_hungarian_[c,s]_rune_t_ent_shaped"
-					},
-					"U": {"<^>!": "old_hungarian_[c,s]_rune_u_uu"},
-					"Y": {"<^>!": "old_hungarian_[c,s]_rune_y_ue_nik"},
-					"Z": {"<^>!": "old_hungarian_[c,s]_rune_z_ezs"}
-				}
-			},
-			"Old Italic": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "old_italic_n_let_a",
-					"B": "old_italic_n_let_b_be",
-					"C": "old_italic_n_let_c_ke",
-					"D": "old_italic_n_let_d_de",
-					"E": "old_italic_n_let_e",
-					"F": "old_italic_n_let_f_ef",
-					"G": "",
-					"H": "old_italic_n_let_h_he",
-					"I": "old_italic_n_let_i",
-					"J": "",
-					"K": "old_italic_n_let_k_ka",
-					"L": "old_italic_n_let_l_el",
-					"M": "old_italic_n_let_m_em",
-					"N": "old_italic_n_let_n_en",
-					"O": "old_italic_n_let_o",
-					"P": "old_italic_n_let_p_pe",
-					"Q": "old_italic_n_let_q_ku",
-					"R": "old_italic_n_let_r_er",
-					"S": "old_italic_n_let_s_es",
-					"T": "old_italic_n_let_t_te",
-					"U": "old_italic_n_let_u",
-					"V": "old_italic_n_let_f_ve",
-					"W": "old_italic_n_let_c_northern_tse",
-					"X": "old_italic_n_let_x_eks",
-					"Y": "old_italic_n_let_y_ye",
-					"Z": "old_italic_n_let_z_ze"
+				"Η": {
+					"<!": "hel_[c,s]_let_h_eta__tonos",
+					"<^>!": "hel_[c,s]_let_h_eta__dasia",
+					"<^>!<+": "hel_[c,s]_let_h_eta__psili",
+					"<^>!>+": "hel_[c,s]_let_h_eta__macron",
+					"<^>!<!": "hel_[c,s]_let_h_eta__varia",
+					"<^>!<!<+": "hel_[c,s]_let_h_eta__[prosgegrammeni,ypogegrammeni]",
+					"<^>!<!<+>+": "hel_[c,s]_let_h_eta__oxia"
 				},
-				"Moded": {
-					"C": {"<!": "old_italic_n_let_c_che"},
-					"I": {">+": "old_italic_n_let_i_ii"},
-					"K": {">+": "old_italic_n_let_k_khe"},
-					"P": {">+": "old_italic_n_let_p_phe"},
-					"R": {">+": "old_italic_n_let_r_ers"},
-					"S": {
-						">+": "old_italic_n_let_s_esh",
-						"<+": "old_italic_n_let_s_she",
-						"<!": "old_italic_n_let_s_ess"
-					},
-					"T": {">+": "old_italic_n_let_t_the"},
-					"U": {">+": "old_italic_n_let_u_uu"},
-					"W": {"<+": "old_italic_n_let_c_southern_tse"},
-					"1": {"<^>!": "old_italic_n_num_one"},
-					"2": {"<^>!": "old_italic_n_num_five"},
-					"3": {"<^>!": "old_italic_n_num_ten"},
-					"4": {"<^>!": "old_italic_n_num_fifty"}
-				}
-			},
-			"Gothic": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "gothic_n_let_a_ahza",
-					"B": "gothic_n_let_b_bairkan",
-					"C": "gothic_n_let_t_thiuth",
-					"D": "gothic_n_let_d_dagz",
-					"E": "gothic_n_let_e_aihvus",
-					"F": "gothic_n_let_f_faihu",
-					"G": "gothic_n_let_g_giba",
-					"H": "gothic_n_let_h_hagl",
-					"I": "gothic_n_let_i_eis",
-					"J": "",
-					"K": "gothic_n_let_k_kusma",
-					"L": "gothic_n_let_l_lagus",
-					"M": "gothic_n_let_m_manna",
-					"N": "gothic_n_let_n_nauths",
-					"O": "gothic_n_let_o_othal",
-					"P": "gothic_n_let_p_pairthra",
-					"Q": "gothic_n_let_q_qairthra",
-					"R": "gothic_n_let_r_raida",
-					"S": "gothic_n_let_s_sugil",
-					"T": "gothic_n_let_t_teiws",
-					"U": "gothic_n_let_u_urus",
-					"V": "gothic_n_let_h_hwair",
-					"W": "gothic_n_let_w_winja",
-					"X": "gothic_n_let_k_iggws",
-					"Y": "gothic_n_let_y_jer",
-					"Z": "gothic_n_let_z_ezek"
+				"Θ": {">+": "hel_[c,s]_sym_t_theta"},
+				"Ι": {
+					"<+": "hel_[c,s]_let_i_jot",
+					">+": "hel_[c,s]_let_i_iota__dasia",
+					"<!": "hel_[c,s]_let_i_iota__tonos",
+					"<^>!": "hel_[c,s]_let_i_iota__dialytika",
+					"<^>!<+": "hel_[c,s]_let_i_iota__psili",
+					"<^>!>+": "hel_[c,s]_let_i_iota__macron",
+					"<^>!<+>+": "hel_[c,s]_let_i_iota__vrachy",
+					"<^>!<!": "hel_[c,s]_let_i_iota__varia",
+					"<^>!<!<+>+": "hel_[c,s]_let_i_iota__oxia"
 				},
-				"Moded": {
-					"H": {"<^>!": "gothic_n_let_h_hwair"},
-					"P": {"<^>!": "gothic_n_num_ninety"},
-					"S": {"<^>!": "gothic_n_num_nine_hundred"},
-					"T": {"<^>!": "gothic_n_let_t_thiuth"},
-					"Comma": {"<^>!": "runic_cruciform_punctuation"},
-					"Dot": {"<^>!": "runic_single_punctuation"},
-					"Space": {"<^>!": "runic_multiple_punctuation"}
-				}
-			},
-			"Phoenician": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "phoenician_n_let_a_alef",
-					"B": "phoenician_n_let_b_bet",
-					"C": "phoenician_n_let_c_sade",
-					"D": "phoenician_n_let_d_delt",
-					"E": "",
-					"F": "",
-					"G": "phoenician_n_let_g_gaml",
-					"H": "phoenician_n_let_h_he",
-					"I": "",
-					"J": "phoenician_n_let_y_yod",
-					"K": "phoenician_n_let_k_kaf",
-					"L": "phoenician_n_let_l_lamd",
-					"M": "phoenician_n_let_m_mem",
-					"N": "phoenician_n_let_n_nun",
-					"O": "phoenician_n_let_a_ain",
-					"P": "phoenician_n_let_p_pe",
-					"Q": "phoenician_n_let_q_qof",
-					"R": "phoenician_n_let_r_rosh",
-					"S": "phoenician_n_let_s_semk",
-					"T": "phoenician_n_let_t_tau",
-					"U": "",
-					"V": "",
-					"W": "phoenician_n_let_w_wau",
-					"X": "",
-					"Y": "phoenician_n_let_y_yod",
-					"Z": "phoenician_n_let_z_zai"
+				"Κ": {
+					">+": "hel_s_sym_k_kappa",
+					"<^>!": "hel_[c,s]_lig_k_kai",
+					"<^<!": "koronis"
 				},
-				"Moded": {
-					"A": {"<+": "phoenician_n_let_a_ain"},
-					"H": {">+": "phoenician_n_let_h_het"},
-					"S": {">+": "phoenician_n_let_s_shin"},
-					"T": {">+": "phoenician_n_let_t_tet"},
-					"1": {"<^>!": "phoenician_n_num_one"},
-					"2": {"<^>!": "phoenician_n_num_two"},
-					"3": {"<^>!": "phoenician_n_num_three"},
-					"4": {"<^>!": "phoenician_n_num_ten"},
-					"5": {"<^>!": "phoenician_n_num_twenty"},
-					"6": {"<^>!": "phoenician_n_num_hundred"},
-					"Space": {"<^>!": "phoenician_n_sym_word_separator"}
-				}
-			},
-			"Ancient South Arabian": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "south_arabian_n_let_a_alef",
-					"B": "south_arabian_n_let_b_beth",
-					"C": "",
-					"D": "south_arabian_n_let_d_daleth",
-					"E": "",
-					"F": "south_arabian_n_let_f_fe",
-					"G": "south_arabian_n_let_g_gimel",
-					"H": "south_arabian_n_let_h_he",
-					"I": "",
-					"J": "",
-					"K": "south_arabian_n_let_k_kaph",
-					"L": "south_arabian_n_let_l_lamedh",
-					"M": "south_arabian_n_let_m_mem",
-					"N": "south_arabian_n_let_n_nun",
-					"O": "",
-					"P": "",
-					"Q": "south_arabian_n_let_q_qoph",
-					"R": "south_arabian_n_let_r_resh",
-					"S": "south_arabian_n_let_s_sat",
-					"T": "south_arabian_n_let_t_taw",
-					"U": "",
-					"V": "",
-					"W": "south_arabian_n_let_w_waw",
-					"X": "south_arabian_n_let_h_kheth",
-					"Y": "south_arabian_n_let_y_yodh",
-					"Z": "south_arabian_n_let_z_zayn"
+				"Κομμα": {
+					"<^<!": "dasia"
 				},
-				"Moded": {
-					"A": {"<^>!": "south_arabian_n_let_a_ayn"},
-					"D": {
-						"<^>!": "south_arabian_n_let_d_dhadhe",
-						"<^>!>+": "south_arabian_n_let_d_dhaleth"
-					},
-					"G": {
-						"<^>!": "south_arabian_n_let_g_ghayn"
-					},
-					"H": {
-						"<^>!": "south_arabian_n_let_h_kheth",
-						">+": "south_arabian_n_let_h_heth"
-					},
-					"S": {
-						"<^>!": "south_arabian_n_let_s_sadhe",
-						"<!": "south_arabian_n_let_s_shin",
-						"<+": "south_arabian_n_let_s_samekh"
-					},
-					"T": {
-						"<^>!": "south_arabian_n_let_t_teth",
-						"<^>!>+": "south_arabian_n_let_t_thaw",
-						"<+": "south_arabian_n_let_t_theth"
-					},
-					"1": {"<^>!": "south_arabian_n_num_one"},
-					"5": {"<^>!": "south_arabian_n_num_fifty"},
-					"0": {"<^>!": "south_arabian_n_sym_numeral_bracket"}
-				}
-			},
-			"Ancient North Arabian": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "north_arabian_n_let_a_alef",
-					"B": "north_arabian_n_let_b_beh",
-					"C": "",
-					"D": "north_arabian_n_let_d_dal",
-					"E": "",
-					"F": "north_arabian_n_let_f_feh",
-					"G": "north_arabian_n_let_g_geem",
-					"H": "north_arabian_n_let_h_heh",
-					"I": "",
-					"J": "",
-					"K": "north_arabian_n_let_k_kaf",
-					"L": "north_arabian_n_let_l_lam",
-					"M": "north_arabian_n_let_m_meem",
-					"N": "north_arabian_n_let_n_noon",
-					"O": "",
-					"P": "",
-					"Q": "north_arabian_n_let_q_qaf",
-					"R": "north_arabian_n_let_r_reh",
-					"S": "north_arabian_n_let_s_es",
-					"T": "north_arabian_n_let_t_teh",
-					"U": "",
-					"V": "",
-					"W": "north_arabian_n_let_w_waw",
-					"X": "",
-					"Y": "north_arabian_n_let_y_yeh",
-					"Z": "north_arabian_n_let_z_zain"
+				"Λ": {},
+				"Μ": {},
+				"Ν": {},
+				"Ξ": {},
+				"Ο": {
+					"<^<!": "oxia",
+					"<!": "hel_[c,s]_let_o_omicron__tonos",
+					"<^>!": "hel_[c,s]_let_o_omicron__dasia",
+					"<^>!<+": "hel_[c,s]_let_o_omicron__psili",
+					"<^>!<!": "hel_[c,s]_let_o_omicron__varia",
+					"<^>!<!<+>+": "hel_[c,s]_let_o_omicron__oxia"
 				},
-				"Moded": {
-					"A": {"<^>!": "north_arabian_n_let_a_ain"},
-					"D": {
-						"<^>!": "north_arabian_n_let_d_thal",
-						"<^>!>+": "north_arabian_n_let_d_dad"
-					},
-					"G": {
-						"<^>!": "north_arabian_n_let_g_ghain"
-					},
-					"H": {
-						"<^>!": "north_arabian_n_let_h_hah",
-						">+": "north_arabian_n_let_h_khah"
-					},
-					"S": {
-						"<^>!": "north_arabian_n_let_s_sad",
-						"<!": "north_arabian_n_let_s_esh",
-						"<+": "north_arabian_n_let_s_sh"
-					},
-					"T": {
-						"<+": "north_arabian_n_let_t_zah",
-						"<^>!": "north_arabian_n_let_t_tah",
-						">!>+": "north_arabian_n_let_t_theh"
-					},
-					"Z": {},
-					"1": {"<^>!": "north_arabian_n_num_one"},
-					"2": {"<^>!": "north_arabian_n_num_ten"},
-					"3": {"<^>!": "north_arabian_n_num_twenty"}
-				}
-			},
-			"Carian": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "carian_n_let_a",
-					"B": "carian_n_let_b",
-					"C": "carian_n_let_s_ss",
-					"D": "carian_n_let_d",
-					"E": "carian_n_let_e",
-					"F": "",
-					"G": "carian_n_let_g",
-					"H": "",
-					"I": "carian_n_let_i",
-					"J": "",
-					"K": "carian_n_let_k",
-					"L": "carian_n_let_l",
-					"M": "carian_n_let_m",
-					"N": "carian_n_let_n",
-					"O": "carian_n_let_o",
-					"P": "carian_n_let_p",
-					"Q": "carian_n_let_q",
-					"R": "carian_n_let_r",
-					"S": "carian_n_let_s",
-					"T": "carian_n_let_t",
-					"U": "carian_n_let_u",
-					"V": "",
-					"W": "carian_n_let_w_uu",
-					"X": "",
-					"Y": "carian_n_let_y_ii",
-					"Z": ""
+				"Π": {
+					">+": "hel_s_sym_p_pi",
+					"<^<!": "perispomeni"
 				},
-				"Moded": {
-					"A": {
-						"<!": "carian_n_let_a_a2"
-					},
-					"B": {
-						"<^>!<!": "carian_n_let_b_p2",
-						"<!": "carian_n_let_b_mb",
-						"<+": "carian_n_let_b_mb2",
-						"<^>!": "carian_n_let_b_mb3",
-						">+": "carian_n_let_b_mb4"
-					},
-					"D": {
-						"<!": "carian_n_let_d_d2",
-						"<^>!": "carian_n_let_d_nd"
-					},
-					"E": {
-						"<!": "carian_n_let_e_e2"
-					},
-					"G": {
-						"<^>!": "carian_n_let_g_g2"
-					},
-					"K": {
-						"<^>!": "carian_n_let_k_k2",
-						"<^>!>+": "carian_n_let_k_ng"
-					},
-					"L": {
-						"<^>!": "carian_n_let_l_ld",
-						"<^>!<!": "carian_n_let_l_ld2"
-					},
-					"N": {
-						"<^>!": "carian_n_let_n_nn"
-					},
-					"R": {
-						"<^>!": "carian_n_let_r_rr"
-					},
-					"S": {
-						"<!": "carian_n_let_s_sh",
-						"<+": "carian_n_let_s_sh2",
-						"<^>!": "carian_n_let_s_st",
-						"<^>!>+": "carian_n_let_s_st2"
-					},
-					"T": {
-						"<^>!": "carian_n_let_t_tt",
-						"<^>!>+": "carian_n_let_t_tt2",
-						">+": "carian_n_let_c18",
-						"<+": "carian_n_let_c39"
-					},
-					"Y": {
-						"<^>!": "carian_n_let_y_uuu",
-						"<^>!>+": "carian_n_let_y_uuuu",
-						"<^>!<+": "carian_n_let_y_uuu2",
-						"<^>!<!": "carian_n_let_y_uuu3"
-					}
-				}
-			},
-			"Lycian": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "lycian_n_let_a",
-					"B": "lycian_n_let_b",
-					"C": "",
-					"D": "lycian_n_let_d",
-					"E": "lycian_n_let_e",
-					"F": "",
-					"G": "",
-					"H": "lycian_n_let_h",
-					"I": "",
-					"J": "",
-					"K": "lycian_n_let_k",
-					"L": "lycian_n_let_l",
-					"M": "lycian_n_let_m",
-					"N": "lycian_n_let_n",
-					"O": "",
-					"P": "lycian_n_let_p",
-					"Q": "lycian_n_let_q",
-					"R": "lycian_n_let_r",
-					"S": "lycian_n_let_s",
-					"T": "lycian_n_let_t",
-					"U": "lycian_n_let_u",
-					"V": "",
-					"W": "",
-					"X": "lycian_n_let_x",
-					"Y": "",
-					"Z": ""
+				"Ρ": {
+					">+": "hel_s_sym_r_rho",
+					"<^>!": "hel_[c,s]_let_r_rho__dasia",
+					"<^>!<+": "hel_[s]_let_r_rho__psili"
 				},
-				"Moded": {
-					"A": {
-						"<!": "lycian_n_let_a_an"
-					},
-					"E": {
-						"<!": "lycian_n_let_e_en"
-					},
-					"K": {
-						"<^>!": "lycian_n_let_k_bh",
-						"<^>!>+": "lycian_n_let_k_kk"
-					},
-					"M": {
-						"<^>!": "lycian_n_let_m_mm"
-					},
-					"N": {
-						"<^>!": "lycian_n_let_n_nn"
-					},
-					"T": {
-						"<^>!": "lycian_n_let_t_tt"
-					}
-				}
-			},
-			"Lydian": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "lydian_n_let_a",
-					"B": "lydian_n_let_b",
-					"C": "lydian_n_let_c",
-					"D": "lydian_n_let_d",
-					"E": "lydian_n_let_e",
-					"F": "lydian_n_let_f",
-					"G": "lydian_n_let_g",
-					"H": "",
-					"I": "lydian_n_let_i",
-					"J": "",
-					"K": "lydian_n_let_k",
-					"L": "lydian_n_let_l",
-					"M": "lydian_n_let_m",
-					"N": "lydian_n_let_n",
-					"O": "lydian_n_let_o",
-					"P": "",
-					"Q": "lydian_n_let_q",
-					"R": "lydian_n_let_r",
-					"S": "lydian_n_let_s_ss",
-					"T": "lydian_n_let_t",
-					"U": "lydian_n_let_u",
-					"V": "lydian_n_let_v",
-					"W": "",
-					"X": "",
-					"Y": "lydian_n_let_y",
-					"Z": "lydian_n_sym_triangular_mark"
+				"Σ": {
+					">+": "hel_[c,s]_sym_s_sigma_lunate",
+					"<+": "hel_[c,s]_lig_st_stigma",
+					"<!": "hel_s_let_s_sigma_final",
+					"<^>!": "hel_[c,s]_let_s_san",
+					"<^>!>+": "hel_[c,s]_let_s_sho",
+					"<^>!<!": "hel_[c,s]_let_s_sampi",
+					"<^>!<!<+": "hel_[c,s]_let_s_sampi_archaic"
 				},
-				"Moded": {
-					"A": {
-						"<!": "lydian_n_let_a_an"
-					},
-					"E": {
-						"<!": "lydian_n_let_e_en"
-					},
-					"L": {
-						"<^>!": "lydian_n_let_l_ly"
-					},
-					"N": {
-						"<^>!": "lydian_n_let_n_nn"
-					},
-					"S": {
-						"<!": "lydian_n_let_s"
-					},
-					"T": {
-						"<^>!": "lydian_n_let_t_tt"
-					}
-				}
-			},
-			"Sidetic": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "sidetic_n_let_a_N01",
-					"B": "sidetic_n_let_b_N24",
-					"C": "sidetic_n_let_c_N09",
-					"D": "sidetic_n_let_d_N12",
-					"E": "sidetic_n_let_e_N02",
-					"F": "",
-					"G": "sidetic_n_let_g_N19",
-					"H": "sidetic_n_let_h_N20",
-					"I": "sidetic_n_let_i_N03",
-					"J": "",
-					"K": "sidetic_n_let_k_N23",
-					"L": "sidetic_n_let_l_N17",
-					"M": "sidetic_n_let_m_N10",
-					"N": "sidetic_n_let_n_N16",
-					"O": "sidetic_n_let_o_N04",
-					"P": "sidetic_n_let_p_N08",
-					"Q": "",
-					"R": "sidetic_n_let_r_N21",
-					"S": "sidetic_n_let_S_N14",
-					"T": "sidetic_n_let_t_N11",
-					"U": "sidetic_n_let_u_N05",
-					"V": "",
-					"W": "sidetic_n_let_w_N06",
-					"X": "",
-					"Y": "sidetic_n_let_y_N07",
-					"Z": "sidetic_n_let_z_N26"
+				"Τ": {"<^>!": "hel_[c,s]_let_t_theta"},
+				"Υ": {
+					"<^<!": "[pros,ypo]gegrammeni",
+					">+": "hel_[c,s]_let_y_upsilon__dasia",
+					"<!": "hel_[c,s]_let_y_upsilon__tonos",
+					"<^>!": "hel_[c,s]_let_y_upsilon__dialytika",
+					"<^>!<+": "hel_[s]_let_y_upsilon__psili",
+					"<^>!>+": "hel_[c,s]_let_y_upsilon__macron",
+					"<^>!<+>+": "hel_[c,s]_let_y_upsilon__vrachy",
+					"<^>!<!": "hel_[c,s]_let_y_upsilon__varia",
+					"<^>!<!<+>+": "hel_[c,s]_let_y_upsilon__oxia"
 				},
-				"Moded": {
-					"A": {"<!": "sidetic_n_let_a_N22"},
-					"N": {"<^>!": "sidetic_n_let_n_N25"},
-					"S": {"<!": "sidetic_n_let_S_N15"},
-					"T": {
-						"<^>!": "sidetic_n_let_t_N13",
-						"<^>!>+": "sidetic_n_let_t_N18"
-					}
-				}
-			},
-			"Cypriot Syllabary": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_a')%",
-					"B": "",
-					"C": "",
-					"D": "",
-					"E": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_e')%",
-					"F": "",
-					"G": "",
-					"H": "",
-					"I": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_i')%",
-					"J": "",
-					"O": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_o')%",
-					"Q": "",
-					"U": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_u')%",
-					"V": ""
+				"Φ": {">+": "hel_s_sym_f_phi"},
+				"Χ": {
+					"<!": "hel_[c,s]_let_h_heta",
+					"<^<!": "dialytika_and_varia",
+					"<^<!<+": "dialytika_and_perispomeni"
 				},
-				"Moded": {
-
-				}
-			},
-			"Tifinagh": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "tifinagh_n_let_a_ya",
-					"B": "tifinagh_n_let_b_yah",
-					"C": "tifinagh_n_let_s_yash",
-					"D": "tifinagh_n_let_d_yad",
-					"E": "tifinagh_n_let_e_yey",
-					"F": "tifinagh_n_let_f_yaf",
-					"G": "tifinagh_n_let_g_yag",
-					"H": "tifinagh_n_let_h_tuareg",
-					"I": "tifinagh_n_let_i_yi",
-					"J": "tifinagh_n_let_j_yazh",
-					"K": "tifinagh_n_let_k_yak",
-					"L": "tifinagh_n_let_l_yal",
-					"M": "tifinagh_n_let_m_yam",
-					"N": "tifinagh_n_let_n_yan",
-					"O": "tifinagh_n_let_o_yaa",
-					"P": "tifinagh_n_let_p_yap",
-					"Q": "tifinagh_n_let_q_yaq",
-					"R": "tifinagh_n_let_r_yar",
-					"S": "tifinagh_n_let_s_yas",
-					"T": "tifinagh_n_let_t_yat",
-					"U": "tifinagh_n_let_w_yu",
-					"V": "tifinagh_n_let_v_yav",
-					"W": "tifinagh_n_let_w_yaw",
-					"X": "tifinagh_n_let_g_yagh_tuareg",
-					"Y": "tifinagh_n_let_y_yay",
-					"Z": "tifinagh_n_let_z_yaz"
+				"Ψ": {},
+				"Ω": {
+					"<^<!": "varia",
+					"<!": "hel_[c,s]_let_o_omega__tonos",
+					"<^>!": "hel_[c,s]_let_o_omega__dasia",
+					"<^>!<+": "hel_[c,s]_let_o_omega__psili",
+					"<^>!>+": "hel_[c,s]_let_o_omega__macron",
+					"<^>!<+>+": "hel_[c,s]_let_o_omega__vrachy",
+					"<^>!<!": "hel_[c,s]_let_o_omega__varia",
+					"<^>!<!<+": "hel_[c,s]_let_o_omega__[prosgegrammeni,ypogegrammeni]",
+					"<^>!<!<+>+": "hel_[c,s]_let_o_omega__oxia"
 				},
-				"Moded": {
-					"B": {
-						"<!": "tifinagh_n_let_b_yab",
-						"<+": "tifinagh_n_let_b_yabh",
-						"<^>!": "tifinagh_n_let_b_yah_berber_academy"
-					},
-					"C": {
-						"<!": "tifinagh_n_let_s_yach"
-					},
-					"D": {
-						"<!": "tifinagh_n_let_d_yadh",
-						"<^>!": "tifinagh_n_let_d_yadd",
-						"<^>!>+": "tifinagh_n_let_d_yaddh"
-					},
-					"E": {
-						"<!": "tifinagh_n_let_e_ye"
-					},
-					"G": {
-						"<^>!": "tifinagh_n_let_g_yagh",
-						"<^>!>+": "tifinagh_n_let_g_yaghh",
-						"<!": "tifinagh_n_let_g_yaj"
-					},
-					"J": {
-						"<^>!": "tifinagh_n_let_j_yazh_tuareg",
-						"<^>!>+": "tifinagh_n_let_j_yazh_ahaggar"
-					},
-					"K": {
-						"<!": "tifinagh_n_let_k_yakh",
-						"<^>!<!": "tifinagh_n_let_k_yakh_tuareg",
-						"<^>!": "tifinagh_n_let_k_yakhh",
-						"<^>!>+": "tifinagh_n_let_k_yak_tuareg"
-					},
-					"N": {
-						"<^>!": "tifinagh_n_let_n_yang",
-						"<^>!>+": "tifinagh_n_let_n_yagn"
-					},
-					"O": {
-						"<^>!": "tifinagh_n_let_o_yo"
-					},
-					"Q": {
-						"<+": "tifinagh_n_let_q_yaq_tuareg"
-					},
-					"R": {
-						"<^>!": "tifinagh_n_let_r_yarr"
-					},
-					"S": {
-						"<!": "tifinagh_n_let_s_yass"
-					},
-					"T": {
-						"<^>!": "tifinagh_n_let_t_yatt",
-						"<^>!>+": "tifinagh_n_let_t_yath"
-					},
-					"W": {
-						"<!": "tifinagh_n_let_w_modifier_labialization_mark"
-					},
-					"X": {
-						"<!": "tifinagh_n_let_g_yagh_ayer"
-					},
-					"Z": {
-						"<!": "tifinagh_n_let_z_yazz",
-						"<+": "tifinagh_n_let_z_yaz_tawellement",
-						"<^>!": "tifinagh_n_let_z_yaj_berber_academy"
-					},
-					"Comma": {
-						"<^>!": "tifinagh_n_sym_seprator_mark"
-					},
-					"Backslash": {
-						"<^>!": "tifinagh_n_sym_consonant_joiner"
-					}
-				}
-			},
-			"Ugaritic": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "ugaritic_n_let_a_alpa",
-					"B": "ugaritic_n_let_b_beta",
-					"C": "",
-					"D": "ugaritic_n_let_d_delta",
-					"E": "",
-					"F": "",
-					"G": "ugaritic_n_let_g_gamla",
-					"H": "ugaritic_n_let_h_ho",
-					"I": "ugaritic_n_let_i",
-					"J": "",
-					"K": "ugaritic_n_let_k_kaf",
-					"L": "ugaritic_n_let_l_lamda",
-					"M": "ugaritic_n_let_m_mem",
-					"N": "ugaritic_n_let_n_nun",
-					"O": "",
-					"P": "ugaritic_n_let_p_pu",
-					"Q": "ugaritic_n_let_q_qopa",
-					"R": "ugaritic_n_let_r_rasha",
-					"S": "ugaritic_n_let_s_shin",
-					"T": "ugaritic_n_let_t_to",
-					"U": "ugaritic_n_let_u",
-					"V": "",
-					"W": "ugaritic_n_let_w_wo",
-					"X": "",
-					"Y": "ugaritic_n_let_y_yod",
-					"Z": "ugaritic_n_let_z_zeta",
-					"Space": "ugaritic_n_sym_word_divider"
+				"Ϝ": {
+					"<^>!": "hel_[c,s]_let_w_digamma_pamphylian",
+					"<^<!": "dasia_and_oxia",
+					"<^<!<+": "psili_and_oxia"
 				},
-				"Moded": {
-					"A": {"<^>!": "ugaritic_n_let_a_ain"},
-					"B": {},
-					"C": {},
-					"D": {"<^>!": "ugaritic_n_let_d_dhal"},
-					"E": {},
-					"F": {},
-					"G": {"<^>!": "ugaritic_n_let_g_ghain"},
-					"H": {
-						"<^>!": "ugaritic_n_let_h_kha",
-						"<^>!>+": "ugaritic_n_let_h_hota"
-					},
-					"I": {},
-					"J": {},
-					"K": {},
-					"L": {},
-					"M": {},
-					"N": {},
-					"O": {},
-					"P": {},
-					"Q": {},
-					"R": {},
-					"S": {
-						"<^>!": "ugaritic_n_let_s_sade",
-						"<+": "ugaritic_n_let_s_samka",
-						"<!": "ugaritic_n_let_s_ssu"
-					},
-					"T": {
-						"<^>!": "ugaritic_n_let_t_tet",
-						"<^>!>+": "ugaritic_n_let_t_thanna"
-					},
-					"U": {},
-					"V": {},
-					"W": {},
-					"X": {},
-					"Y": {},
-					"Z": {"<!": "ugaritic_n_let_z_zu"}
-				}
-			},
-			"Old Persian": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "%BindHandler.TimeShell('old_persian_n_sign_a')%",
-					"B": "old_persian_n_sign_b_ba",
-					"C": "old_persian_n_sign_c_ca",
-					"E": "",
-					"F": "old_persian_n_sign_f_fa",
-					"H": "old_persian_n_sign_h_ha",
-					"I": "%BindHandler.TimeShell('old_persian_n_sign_i')%",
-					"L": "old_persian_n_sign_l_la",
-					"O": "",
-					"P": "old_persian_n_sign_p_pa",
-					"Q": "",
-					"S": "old_persian_n_sign_s_sa",
-					"U": "%BindHandler.TimeShell('old_persian_n_sign_u')%",
-					"W": "",
-					"X": "old_persian_n_sign_x_xa",
-					"Y": "old_persian_n_sign_y_ya",
-					"Z": "old_persian_n_sign_z_za",
-					"Space": "old_persian_n_sym_word_divider",
-					"1": "old_persian_n_num_one",
-					"2": "old_persian_n_num_two",
-					"3": "old_persian_n_num_ten",
-					"4": "old_persian_n_num_twenty",
-					"5": "old_persian_n_num_hundred"
+				"Ϟ": {
+					"<^>!": "hel_[c,s]_let_q_koppa_archaic",
+					"<^<!": "dasia_and_varia",
+					"<^<!<+": "psili_and_varia"
 				},
-				"Moded": {
-					"A": {
-						"<!": "old_persian_n_log_auramazdaa",
-						"<+": "old_persian_n_log_auramazdaa_2",
-						"<^>!": "old_persian_n_log_auramazdaaha"
-					},
-					"B": {
-						"<!": "old_persian_n_log_baga",
-						"<+": "old_persian_n_log_buumish"
-					},
-					"D": {
-						"<!": "old_persian_n_log_dahyaaush",
-						"<+": "old_persian_n_log_dahyaaush_2"
-					},
-					"C": {"<!": "old_persian_n_sign_c_ssa"},
-					"S": {"<!": "old_persian_n_sign_s_sha"},
-					"T": {"<^>!": "old_persian_n_sign_t_tha"},
-					"X": {"<!": "old_persian_n_log_xshaayathiya"}
-				}
-			},
-			"IPA": {
-				"ForceSingle": true,
-				"Flat": {
-					"0": "digit_0",
-					"1": "digit_1",
-					"2": "digit_2",
-					"3": "digit_3",
-					"4": "digit_4",
-					"5": "digit_5",
-					"6": "digit_6",
-					"7": "digit_7",
-					"8": "digit_8",
-					"9": "digit_9",
-					"A": "lat_[c,s]_let_a",
-					"B": "lat_[c,s]_let_b",
-					"C": "lat_[c,s]_let_c",
-					"D": "lat_[c,s]_let_d",
-					"E": "lat_[c,s]_let_e",
-					"F": "lat_[c,s]_let_f",
-					"G": "lat_[c,s]_let_g",
-					"H": "lat_[c,s]_let_h",
-					"I": "lat_[c,s]_let_i",
-					"J": "lat_[c,s]_let_j",
-					"K": "lat_[c,s]_let_k",
-					"L": "lat_[c,s]_let_l",
-					"M": "lat_[c,s]_let_m",
-					"N": "lat_[c,s]_let_n",
-					"O": "lat_[c,s]_let_o",
-					"P": "lat_[c,s]_let_p",
-					"Q": "lat_[c,s]_let_q",
-					"R": "lat_[c,s]_let_r",
-					"S": "lat_[c,s]_let_s",
-					"T": "lat_[c,s]_let_t",
-					"U": "lat_[c,s]_let_u",
-					"V": "lat_[c,s]_let_v",
-					"W": "lat_[c,s]_let_w",
-					"X": "lat_[c,s]_let_x",
-					"Y": "lat_[c,s]_let_y",
-					"Z": "lat_[c,s]_let_z",
-					"Equals": "equals",
-					"HyphenMinus": "hyphen_minus",
-					"Dot": "dot",
-					"Comma": "comma",
-					"Slash": "solidus",
-					"Backslash": "reverse_solidus",
-					"Semicolon": "colon_triangle",
-					"Apostrophe": "&ipa_n_sym_stress_primary",
-					"LeftBracket": "left_bracket",
-					"RightBracket": "right_bracket",
-					"Tilde": "grave_accent",
-					"F1": "%(*) => Scripter.ToggleSelectedOption(\"__modifier\", \"Glyph Variations\", True)%"
+				"Τελεια": {
+					"<^<!": "psili",
+					">+": "hel_n_sym_diple"
 				},
-				"Moded": {
-					"1": {
-						"+": "exclamation",
-						"<^<!": "[down,up]_tack_below",
-						"<^<!>+": "[down,up]_tack_below::modifier",
-						"<^>!": "lat_n_let_alveolar_click",
-						"<^>!<!": "lat_n_let_retroflex_click"
-					},
-					"2": {
-						"+": "commercial_at",
-						"<^<!": "[right,left]_tack_below",
-						"<^<!>+": "[right,left]_tack_below::modifier",
-						"<^>!": "lat_n_let_dental_click"
-					},
-					"3": {
-						"+": "number_sign",
-						"<^<!": "[right,left]_half_ring_below",
-						"<^<!>+": "[right,left]_half_ring_below::modifier",
-						"<^>!": "lat_n_let_lateral_click"
-					},
-					"4": {
-						"+": "wallet_dollar",
-						"<^<!": "left_angle_above",
-						"<^>!": "lat_n_let_palatal_click"
-					},
-					"5": {
-						"<^<!": "breve_[below,inverted]_double",
-						"+": "percent",
-						"<^>!": "lat_n_let_bilabial_click"
-					},
-					"6": {
-						"+": "circumflex_accent",
-						"<^>!": "lat_n_let_[bidental,bilabial]_percussive"
-					},
-					"7": {"+": "lat_s_lig_et"},
-					"8": {"+": "asterisk"},
-					"9": {"+": "left_parenthesis"},
-					"0": {
-						"+": "right_parenthesis"
-					},
-					"HyphenMinus": {
-						"+": "underscore",
-						"<^<!": "minus_below"
-					},
-					"Equals": {
-						"+": "plus",
-						"<+>+": "plus::modifier",
-						"<^<!": "plus_below"
-					},
-					"Slash": {"+": "question"},
-					"Backslash": {
-						"+": "vertical_line"
-					},
-					"Tilde": {"+": "tilde"},
-					"LeftBracket": {
-						"+": "left_brace",
-						"<^<!": "bridge_[below,above]",
-						"<^<!<+": "bridge_inverted_below"
-					},
-					"RightBracket": {
-						"+": "right_brace",
-						"<^<!": "square_below"
-					},
-					"A": {
-						"<^>!": "lat_s_let_a_alpha[_turned,]",
-						"<^>!<+": "lat_s_let_a__diaeresis",
-						"<^>!<!": "lat_s_let_a_turned",
-						"<^>!<!<+": "lat_s_lig_ae"
-					},
-					"B": {
-						"<^<!": "breve[_below,]",
-						"<^<!<+": "breve_inverted[_below,]",
-						"<^>!": "&ipa_[k,s]_let_b[,_beta]"
-					},
-					"C": {
-						"<^>!": "lat_s_let_c__curl",
-						"<^<!": "caron[_below,]"
-					},
-					"D": {
-						"<^<!": "diaeresis[_below,]",
-						"<^>!": "lat_s_let_d_eth",
-						"<^>!<!": "lat_s_dig_dz[__retroflex_hook,]",
-						"<^>!<!<+": "lat_s_dig_d[_ezh,z__curl]"
-					},
-					"E": {
-						"<^<!": "rhotic_hook",
-						"<^>!": "lat_s_let_e_epsilon[_reversed,]",
-						"<^>!<+": "lat_s_let_e_epsilon_closed_reversed",
-						"<^>!<!": "lat_s_let_[e_reversed,a_schwa]"
-					},
-					"F": {
-						"<^>!": "lat_s_let_f_phi"
-					},
-					"G": {
-						"<^>!": "[&ipa,lat]_[k,s]_let_g[,_gamma]",
-						"<^>!<!": "lat_s_let_g_script"
-					},
-					"H": {
-						"<^>!": "[&ipa,lat]_[k,s]_let_h[,__stroke_short]",
-						"<^>!<!": "lat_s_let_m_turned__long_leg"
-					},
-					"I": {
-						"<^>!": "[&ipa,lat]_[k,s]_let_i[,__stroke_short]"
-					},
-					"J": {
-						"<^>!": "lat_s_let_j__crossed_tail"
-					},
-					"K": {
-					},
-					"L": {
-						"<^>!": "[&ipa,lat]_[k,s]_let_l[,__belt]",
-						"<^>!<!": "lat_s_let_y_turned",
-						"<^>!<!<+": "lat_s_dig_l[z,s]"
-					},
-					"M": {
-					},
-					"N": {
-						"<^>!": "[&ipa,lat]_[k,s]_let_n[,_eng]",
-						"<^>!<!": "lat_s_dig_feng"
-					},
-					"O": {
-						"<^>!": "lat_s_let_o_rams_horn",
-						"<^>!<+": "lat_s_let_o_open",
-						"<^>!<!": "lat_s_let_o__[tilde_overlay,solidus_long]",
-						"<^>!<!<+": "[&ipa,lat]_[k,s]_lig_oe"
-					},
-					"P": {
-					},
-					"Q": {
-						"<^>!": "lat_n_let_a_glottal_stop[_reversed,]",
-						"<^>!<+": "lat_n_let_a_glottal_stop[_reversed,]__stroke_short",
-						"<^>!<!": "lat_n_let_a_glottal_stop_inverted[__stroke_short,]"
-					},
-					"R": {
-						"<^<!": "ring_[below,above]",
-						"<^>!": "&ipa_k_let_r",
-						"<^>!<!": "lat_s_let_r_turned"
-					},
-					"S": {
-						"<^>!": "lat_s_let_s_sigma"
-					},
-					"T": {
-						"<^<!": "tilde_[below,above]",
-						"<^>!": "&ipa_s_let_t_theta",
-						"<^>!<!": "lat_s_dig_t[s,c__curl]",
-						"<^>!<!<+": "lat_s_dig_t[s__retroflex_hook,_sigma]"
-					},
-					"U": {
-						"<^>!": "lat_s_let_u_upsilon",
-						"<^>!<!": "lat_s_let_m_turned",
-						"<^>!<!<+": "lat_s_let_u__stroke_long"
-					},
-					"V": {
-						"<^<!": "line_vertical[_below,]",
-						"<^<!<+": "line_vertical_double[_below,]",
-						"<^>!": "lat_s_let_v_turned"
-					},
-					"W": {
-						"<^>!": "lat_s_let_w_turned",
-						"<^<!": "seagull_below"
-					},
-					"X": {
-						"<^>!": "&ipa_s_let_h_chi"
-					},
-					"Y": {
-						"<^>!": "&ipa_k_let_y",
-						"<^>!<!": "lat_s_let_h_turned"
-					},
-					"Z": {
-						"<^>!": "lat_s_let_z_ezh"
-					},
-					"Semicolon": {
-						"<^>!": "colon_triangle_half"
-					},
-					"Apostrophe": {
-						"<^>!": "&ipa_n_sym_stress_secondary"
-					},
-					"Comma": {
-						">+": "&ipa_n_sym_light_aspiration"
-					},
-					"Dot": {
-						">+": "&ipa_n_sym_ejective_consonant"
-					}
-				}
-			},
-			"Deseret": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "deseret_[c,s]_let_a_short",
-					"B": "deseret_[c,s]_let_b_bee",
-					"C": "deseret_[c,s]_let_c_chee",
-					"D": "deseret_[c,s]_let_d_dee",
-					"E": "deseret_[c,s]_let_e_short",
-					"F": "deseret_[c,s]_let_f_ef",
-					"G": "deseret_[c,s]_let_g_gay",
-					"H": "deseret_[c,s]_let_h",
-					"I": "deseret_[c,s]_let_i_short",
-					"J": "deseret_[c,s]_let_j_jee",
-					"K": "deseret_[c,s]_let_k_kay",
-					"L": "deseret_[c,s]_let_l_el",
-					"M": "deseret_[c,s]_let_m_em",
-					"N": "deseret_[c,s]_let_n_en",
-					"O": "deseret_[c,s]_let_o_short",
-					"P": "deseret_[c,s]_let_p_pee",
-					"Q": "",
-					"R": "deseret_[c,s]_let_r_er",
-					"S": "deseret_[c,s]_let_s_es",
-					"T": "deseret_[c,s]_let_t_tee",
-					"U": "deseret_[c,s]_let_u_oo_short",
-					"V": "deseret_[c,s]_let_v_vee",
-					"W": "deseret_[c,s]_let_w_wu",
-					"X": "",
-					"Y": "deseret_[c,s]_let_y_yee",
-					"Z": "deseret_[c,s]_let_z_zee"
+				"Ισον": {"+": "plus"},
+				"Παυλα": {"+": "underscore"},
+				"Σολιδος": {"+": "question"},
+				"ΠισωΣολιδος": {
+					"+": "vertical_line",
+					"<^>!": "hel_n_sym_paragraphos",
+					"<^>!>+": "hel_n_sym_paragraphos_forked",
+					"<^>!<+": "hel_n_sym_paragraphos_forked_reversed"
 				},
-				"Moded": {
-					"A": {
-						"<+": "deseret_[c,s]_let_a_long",
-						"<!": "deseret_[c,s]_let_a_ow",
-						"<^>!": "deseret_[c,s]_let_a_ah_short",
-						"<^>!<!": "deseret_[c,s]_let_a_ah_long"
-					},
-					"D": {
-						"<!": "deseret_[c,s]_let_d_thee"
-					},
-					"E": {
-						"<+": "deseret_[c,s]_let_e_long"
-					},
-					"I": {
-						"<!": "deseret_[c,s]_let_i_ay",
-						"<^>!": "deseret_[c,s]_let_i_long"
-					},
-					"N": {
-						"<^>!": "deseret_[c,s]_let_n_eng"
-					},
-					"O": {
-						">+": "deseret_[c,s]_let_o_long",
-						"<^>!": "deseret_[c,s]_let_o_oi"
-					},
-					"U": {
-						"<^>!": "deseret_[c,s]_let_u_oo_long",
-						"<!": "deseret_[c,s]_let_г_ew"
-					},
-					"S": {
-						"<!": "deseret_[c,s]_let_s_esh"
-					},
-					"T": {
-						"<^>!": "deseret_[c,s]_let_t_eth"
-					},
-					"Z": {
-						"<!": "deseret_[c,s]_let_z_zhee"
-					}
-				}
-			},
-			"Shavian": {
-				"ForceSingle": true,
-				"Flat": {
-					"A": "shavian_n_let_a_ash",
-					"B": "shavian_n_let_b_bib",
-					"C": "shavian_n_let_c_church",
-					"D": "shavian_n_let_d_dead",
-					"E": "shavian_n_let_e_egg",
-					"F": "shavian_n_let_f_fee",
-					"G": "shavian_n_let_g_gag",
-					"H": "shavian_n_let_h_ha_ha",
-					"I": "shavian_n_let_i_if",
-					"J": "shavian_n_let_j_judge",
-					"K": "shavian_n_let_k_kick",
-					"L": "shavian_n_let_l_loll",
-					"M": "shavian_n_let_m_mime",
-					"N": "shavian_n_let_n_nun",
-					"O": "shavian_n_let_o_on",
-					"P": "shavian_n_let_p_peep",
-					"Q": "",
-					"R": "shavian_n_let_r_roar",
-					"S": "shavian_n_let_s_so",
-					"T": "shavian_n_let_t_tot",
-					"U": "shavian_n_let_u_wool",
-					"V": "shavian_n_let_v_vow",
-					"W": "shavian_n_let_y_yea",
-					"X": "",
-					"Y": "shavian_n_let_w_woe",
-					"Z": "shavian_n_let_z_zoo"
+				"ΑνωΤελεια": {
+					"+": "colon",
+					"<!": "hel_n_sym_erotimatiko",
+					"<^>!": "hel_n_sym_ano_teleia"
 				},
-				"Moded": {
-					"A": {
-						"<+": "shavian_n_let_a_up",
-						"<!": "shavian_n_let_a_ice",
-						"<^>!": "shavian_n_let_a_ado",
-						"<^>!>+": "shavian_n_let_a_ah",
-						"<^>!<!": "shavian_n_lig_are"
-					},
-					"D": {
-						"<!": "shavian_n_let_d_they"
-					},
-					"E": {
-						"<!": "shavian_n_let_e_age",
-						"<^>!<!": "shavian_n_lig_air",
-						"<^>!<!<+": "shavian_n_lig_err"
-					},
-					"I": {
-						"<^>!": "shavian_n_let_i_eat",
-						"<^>!<!": "shavian_n_lig_ian"
-					},
-					"J": {
-						"<^>!<!": "shavian_n_lig_yew"
-					},
-					"N": {
-						"<^>!": "shavian_n_let_n_hung"
-					},
-					"O": {
-						"<^>!": "shavian_n_let_o_oak",
-						"<^>!>+": "shavian_n_let_o_awe",
-						"<^>!<!": "shavian_n_lig_or"
-					},
-					"R": {
-						"<^>!<!": "shavian_n_lig_array",
-						"<^>!<!<+": "shavian_n_lig_ear"
-					},
-					"S": {
-						"<!": "shavian_n_let_s_sure"
-					},
-					"T": {
-						"<^>!": "shavian_n_let_t_thigh"
-					},
-					"U": {
-						"<^>!": "shavian_n_let_u_ooze"
-					},
-					"Z": {
-						"<!": "shavian_n_let_z_measure"
-					}
-				}
-			},
-			"Math": {
-				"ForceSingle": true,
-				"Flat": {
-					"D": "delta",
-					"E": "[not_an_,]element_of",
-					"I": "[contour_,]integral",
-					"N": "nabla",
-					"L": "",
-					"P": "n_ary_[co,]product",
-					"R": "square_root",
-					"S": "n_ary_summation",
-					"U": "[intersection,union]"
+				"Αποστροφη": {
+					"+": "quote",
+					"<^>!": "hel_n_sym_numeral_sign[,_lower]"
 				},
-				"Moded": {
-					"E": {
-						"<^>!": "[does_not_,]contains_as_member"
-					},
-					"P": {
-						"<^>!": "&math_pi_sign"
-					},
-					"U": {
-						"<^>!": "n_ary_[intersection,union]"
-					},
-					"Space": {
-						"<!": "medium_math_space"
-					},
-					"Comma": {
-						">+": "less_or_equals"
-					},
-					"Dot": {
-						">+": "greater_or_equals"
-					}
+				"Περισπωμενη": {
+					"+": "tilde",
+					"<^>!<!": "hel_n_sym_hypodiastole"
+				},
+				"ΑριστερηΑγκυλη": {"+": "left_brace"},
+				"ΔεξιαΑγκυλη": {"+": "right_brace"},
+				"2": {
+					"<!": "hel_n_sym_editorial_koronis",
+					"<^>!<!": "hel_n_sym_ancora_[downwards,upwards]"
+				},
+				"5": {
+					"<!": "hel_n_sym_dotted_obelos"
 				}
 			}
 		},
-		"Keyboard Default": {
+		"Germanic Runes": {
+			"Flat": {
+				"A": ["germanic_runic_n_rune_a_elder_futhark_ansuz"],
+				"B": ["germanic_runic_n_rune_b_elder_futhark_berkanan"],
+				"C": ["germanic_runic_n_rune_c_futhork_cen"],
+				"D": ["germanic_runic_n_rune_d_elder_futhark_dagaz"],
+				"E": ["germanic_runic_n_rune_e_elder_futhark_ehwaz"],
+				"F": ["germanic_runic_n_rune_f_elder_futhark_fehu"],
+				"G": ["germanic_runic_n_rune_g_elder_futhark_gebo"],
+				"H": ["germanic_runic_n_rune_h_elder_futhark_hagalaz"],
+				"I": ["germanic_runic_n_rune_i_elder_futhark_isaz"],
+				"J": ["germanic_runic_n_rune_y_elder_futhark_jeran"],
+				"K": ["germanic_runic_n_rune_k_elder_futhark_kenaz"],
+				"L": ["germanic_runic_n_rune_l_elder_futhark_laguz"],
+				"M": ["germanic_runic_n_rune_m_elder_futhark_mannaz"],
+				"N": ["germanic_runic_n_rune_n_elder_futhark_naudiz"],
+				"O": ["germanic_runic_n_rune_o_elder_futhark_othala"],
+				"P": ["germanic_runic_n_rune_p_elder_futhark_pertho"],
+				"Q": ["germanic_runic_n_rune_k_futhork_cweorth"],
+				"R": ["germanic_runic_n_rune_r_elder_futhark_raido"],
+				"S": ["germanic_runic_n_rune_s_elder_futhark_sowilo"],
+				"T": ["germanic_runic_n_rune_t_elder_futhark_tiwaz"],
+				"U": ["germanic_runic_n_rune_u_elder_futhark_uruz"],
+				"V": ["germanic_runic_n_rune_v_later_younger_futhark"],
+				"W": ["germanic_runic_n_rune_w_elder_futhark_wunjo"],
+				"X": [""],
+				"Y": ["germanic_runic_n_rune_y_younger_futhark_ur"],
+				"Z": ["germanic_runic_n_rune_z_elder_futhark_algiz"],
+				"Equals": ["equals"],
+				"HyphenMinus": ["hyphen_minus"],
+				"Dot": ["dot"],
+				"Comma": ["comma"],
+				"Slash": ["solidus"],
+				"Backslash": ["reverse_solidus"],
+				"Semicolon": ["semicolon"],
+				"Apostrophe": ["apostrophe"],
+				"LeftBracket": ["left_bracket"],
+				"RightBracket": ["right_bracket"],
+				"Tilde": ["grave_accent"]
+			},
+			"Moded": {
+				"A": {
+					"<+": ["germanic_runic_n_rune_a_futhork_ac"],
+					">+": ["germanic_runic_n_rune_a_futhork_aesc"],
+					"<^>!": ["germanic_runic_n_rune_a_younger_futhark_ar"],
+					"<^>!<+": ["germanic_runic_n_rune_a_younger_futhark_ar_short_twig"],
+					"<^>!<!<+": ["germanic_runic_n_rune_a_franks_casket_ac"],
+					"<^>!<!<+>+": ["germanic_runic_n_rune_a_franks_casket_aesc"]
+				},
+				"B": {
+					"<^>!<+": ["germanic_runic_n_rune_b_younger_futhark_bjarkan_short_twig"]
+				},
+				"C": {"<^>!<!": ["germanic_runic_n_rune_c_medieval"]},
+				"D": {
+					"<^>!": ["germanic_runic_n_rune_d_later_younger_futhark_eth"],
+					"<^>!<+": ["germanic_runic_n_rune_d_later_younger_futhark"],
+					"<^<!": ["vzmet"]
+				},
+				"E": {
+					"<+": ["germanic_runic_n_rune_e_futhork_ear"],
+					"<^>!": ["germanic_runic_n_rune_e_later_younger_futhark"],
+					"<^>!<!<+": ["germanic_runic_n_rune_e_franks_casket_eh"]
+				},
+				"G": {
+					"<+": ["germanic_runic_n_rune_g_futhork_gar"],
+					"<^>!<!": ["germanic_runic_n_rune_g_medieval"]
+				},
+				"H": {
+					"<+": ["germanic_runic_n_rune_h_futhork_haegl"],
+					"<^>!": ["germanic_runic_n_rune_h_younger_futhark_hagall"],
+					"<^>!<+": ["germanic_runic_n_rune_h_younger_futhark_hagall_short_twig"]
+				},
+				"I": {
+					">+": ["germanic_runic_n_rune_i_elder_futhark_eihwaz"],
+					"<^>!<!<+": ["germanic_runic_n_rune_i_franks_casket_is"]
+				},
+				"J": {
+					"<+": ["germanic_runic_n_rune_y_futhork_ger"],
+					">+": ["germanic_runic_n_rune_y_futhork_ior"]
+				},
+				"K": {
+					"<+": ["germanic_runic_n_rune_k_futhork_cealc"],
+					">+": ["germanic_runic_n_rune_k_futhork_calc"],
+					"<^>!": ["germanic_runic_n_rune_k_younger_futhark_kaun"],
+					"<^>!<!": ["germanic_runic_n_rune_k_medieval_open"],
+					"<^>!>+": ["tolkien_runic_n_rune_k"]
+				},
+				"L": {"<^>!": ["germanic_runic_n_rune_l_later_younger_futhark"]},
+				"M": {
+					"<^>!": ["germanic_runic_n_rune_m_younger_futhark_madr"],
+					"<^>!<+": ["germanic_runic_n_rune_m_younger_futhark_madr_short_twig"]
+				},
+				"N": {
+					">+": ["germanic_runic_n_rune_n_elder_futhark_ingwaz"],
+					"<+": ["germanic_runic_n_rune_n_futhork_ing"],
+					"<^>!<+": ["germanic_runic_n_rune_n_younger_futhark_naudr_short_twig"],
+					"<^>!<!": ["germanic_runic_n_rune_n_medieval_en"],
+					"<^>!<!<++": ["germanic_runic_n_rune_n_medieval_eng"]
+				},
+				"O": {
+					"<+": ["germanic_runic_n_rune_o_futhork_os"],
+					"<^>!": ["germanic_runic_n_rune_o_younger_futhark_oss"],
+					"<^>!<+": ["germanic_runic_n_rune_o_younger_futhark_oss_short_twig"],
+					"<^>!>+": ["tolkien_runic_n_rune_o_oo"],
+					"<^>!<!": ["germanic_runic_n_rune_o_medieval_on"],
+					"<^>!<!>+": ["germanic_runic_n_rune_o_medieval"],
+					"<^>!<!<+": ["germanic_runic_n_rune_o_franks_casket_os"]
+				},
+				"P": {"<^>!": ["germanic_runic_n_rune_p_later_younger_futhark"]},
+				"S": {
+					"<+": ["germanic_runic_n_rune_s_futhork_sigel"],
+					">+": ["germanic_runic_n_rune_s_futhork_stan"],
+					"<^>!<+": ["germanic_runic_n_rune_s_younger_futhark_sol_short_twig"],
+					"<^>!>+": ["tolkien_runic_n_rune_s_sh"]
+				},
+				"T": {
+					">+": ["germanic_runic_n_rune_t_elder_futhark_thurisaz"],
+					"<^>!<+": ["germanic_runic_n_rune_t_younger_futhark_tyr_short_twig"]
+				},
+				"W": {"<^>!<!": ["germanic_runic_n_rune_w_medieval"]},
+				"X": {"<^>!<!": ["germanic_runic_n_rune_x_medieval"]},
+				"Y": {
+					">+": ["germanic_runic_n_rune_y_younger_futhark_icelandic_yr"],
+					"<^>!": ["germanic_runic_n_rune_y_younger_futhark_yr"],
+					"<^>!<+": ["germanic_runic_n_rune_y_younger_futhark_yr_short_twig"],
+					"<+": ["germanic_runic_n_rune_y_futhork_yr"]
+				},
+				"Z": {"<^>!<!": ["germanic_runic_n_rune_z_medieval"]},
+				"Equals": {"+": ["plus"]},
+				"HyphenMinus": {"+": ["underscore"]},
+				"Slash": {"+": ["question"]},
+				"Backslash": {"+": ["vertical_line"]},
+				"Semicolon": {"+": ["colon"]},
+				"Apostrophe": {"+": ["quote"]},
+				"Tilde": {"+": ["tilde"]},
+				"LeftBracket": {"+": ["left_brace"]},
+				"RightBracket": {"+": ["right_brace"]},
+				"Comma": {"<^>!": ["runic_cruciform_punctuation"]},
+				"Dot": {"<^>!": ["runic_single_punctuation"]},
+				"Space": {"<^>!": ["runic_multiple_punctuation"]},
+				"7": {"<^>!": ["germanic_runic_n_rune_almanac_arlaug"]},
+				"8": {"<^>!": ["germanic_runic_n_rune_almanac_tvimadur"]},
+				"9": {"<^>!": ["germanic_runic_n_rune_almanac_belgthor"]}
+			}
+		},
+		"Glagolitic": {
+			"Flat": {
+				"А": "glagolitic_[c,s]_let_az",
+				"Б": "glagolitic_[c,s]_let_buky",
+				"В": "glagolitic_[c,s]_let_vede",
+				"Г": "glagolitic_[c,s]_let_glagoli",
+				"Д": "glagolitic_[c,s]_let_dobro",
+				"Е": "glagolitic_[c,s]_let_yestu",
+				"Ё": "glagolitic_[c,s]_let_yo",
+				"Ж": "glagolitic_[c,s]_let_zhivete",
+				"З": "glagolitic_[c,s]_let_zemlja",
+				"И": "glagolitic_[c,s]_let_i",
+				"Й": "glagolitic_[c,s]_let_izhe",
+				"К": "glagolitic_[c,s]_let_kako",
+				"Л": "glagolitic_[c,s]_let_ljudije",
+				"М": "glagolitic_[c,s]_let_myslite",
+				"Н": "glagolitic_[c,s]_let_nashi",
+				"О": "glagolitic_[c,s]_let_onu",
+				"П": "glagolitic_[c,s]_let_pokoji",
+				"Р": "glagolitic_[c,s]_let_ritsi",
+				"С": "glagolitic_[c,s]_let_slovo",
+				"Т": "glagolitic_[c,s]_let_tvrido",
+				"У": "glagolitic_[c,s]_let_uku",
+				"Ф": "glagolitic_[c,s]_let_fritu",
+				"Х": "glagolitic_[c,s]_let_heru",
+				"Ц": "glagolitic_[c,s]_let_tsi",
+				"Ч": "glagolitic_[c,s]_let_chrivi",
+				"Ш": "glagolitic_[c,s]_let_sha",
+				"Щ": "glagolitic_[c,s]_let_shta",
+				"Ъ": "glagolitic_[c,s]_let_yeru",
+				"Ы": "glagolitic_[c,s]_let_yery",
+				"Ь": "glagolitic_[c,s]_let_yeri",
+				"Э": "glagolitic_[c,s]_let_small_yus",
+				"Ю": "glagolitic_[c,s]_let_yu",
+				"Я": "glagolitic_[c,s]_let_yati",
+				"Равно": ["equals"],
+				"ДефисоМинус": ["hyphen_minus"],
+				"Точка": ["dot"],
+				"ОбратныйСлэш": ["reverse_solidus"]
+			},
+			"Moded": {
+				"0": {
+					"<^<!": "millions_sign"
+				},
+				"А": {"<^>!": "glagolitic_[c,s]_let_trokutasti_a"},
+				"Ё": {"<!": "glagolitic_[c,s]_let_big_yus_iotified"},
+				"Ж": {"<^>!": "glagolitic_[c,s]_let_djervi"},
+				"И": {
+					"<^>!": "glagolitic_[c,s]_let_initial_izhe",
+					"<+": "glagolitic_[c,s]_let_izhe",
+					"<^>!<+": "glagolitic_[c,s]_let_izhitsa"
+				},
+				"Й": {
+					"<^<!": "dasia_pneumata",
+					"<^<!<+": "psili_pneumata"
+				},
+				"О": {
+					"<^>!": "glagolitic_[c,s]_let_otu",
+					"<!": "glagolitic_[c,s]_let_big_yus"
+				},
+				"П": {"<^>!": "glagolitic_[c,s]_let_pe"},
+				"С": {"<^>!": "glagolitic_[c,s]_let_dzelo"},
+				"У": {
+					"<^<!": "titlo",
+					"<^<!<+": "vzmet"
+				},
+				"Х": {"<^>!": "glagolitic_[c,s]_let_spider_ha"},
+				"Ц": {
+					"<^<!": "pokrytie",
+					"<^<!<+": "payerok",
+					"<^<!>+": "palatalization"
+				},
+				"Ф": {"<^>!": "glagolitic_[c,s]_let_fita"},
+				"Ъ": {"<^>!": "glagolitic_[c,s]_let_shtapic"},
+				"Э": {"<^>!": "glagolitic_[c,s]_let_small_yus_iotified"},
+				"Равно": {"+": ["plus"]},
+				"ДефисоМинус": {"+": ["underscore"]},
+				"Точка": {"+": ["comma"]},
+				"ОбратныйСлэш": {"+": ["solidus"]}
+			}
+		},
+		"Old Turkic": {
+			"Flat": {
+				"A": "old_turkic_n_rune_a_[yenisei,orkhon]_a",
+				"B": "old_turkic_n_rune_b_[yenisei,orkhon]_ab",
+				"C": "old_turkic_n_rune_c_[yenisei,orkhon]_ec",
+				"D": "old_turkic_n_rune_d_[yenisei,orkhon]_ad",
+				"E": "old_turkic_n_rune_e_yenisei",
+				"F": [""],
+				"G": "old_turkic_n_rune_g_[yenisei,orkhon]_ag",
+				"H": [""],
+				"I": "old_turkic_n_rune_i_[yenisei,orkhon]",
+				"J": "old_turkic_n_rune_y_[yenisei,orkhon]_aey",
+				"K": "old_turkic_n_rune_k_[yenisei,orkhon]_aq",
+				"L": "old_turkic_n_rune_l_[yenisei,orkhon]_al",
+				"M": "old_turkic_n_rune_m_orkhon_em",
+				"N": "old_turkic_n_rune_n_orkhon_an",
+				"O": "old_turkic_n_rune_o_orkhon",
+				"P": "old_turkic_n_rune_p_orkhon_ep",
+				"Q": "old_turkic_n_rune_q_[yenisei,orkhon]_oq",
+				"R": "old_turkic_n_rune_r_[yenisei,orkhon]_ar",
+				"S": "old_turkic_n_rune_s_orkhon_as",
+				"T": "old_turkic_n_rune_t_[yenisei,orkhon]_at",
+				"U": [""],
+				"V": [""],
+				"W": [""],
+				"X": [""],
+				"Y": "old_turkic_n_rune_y_[yenisei,orkhon]_ay",
+				"Z": "old_turkic_n_rune_z_[yenisei,orkhon]_ez",
+				"Equals": ["equals"],
+				"HyphenMinus": ["hyphen_minus"],
+				"Dot": ["dot"],
+				"Comma": ["comma"],
+				"Slash": ["solidus"],
+				"Backslash": ["reverse_solidus"],
+				"Semicolon": ["semicolon"],
+				"Apostrophe": ["apostrophe"],
+				"LeftBracket": ["left_bracket"],
+				"RightBracket": ["right_bracket"],
+				"Tilde": ["grave_accent"]
+			},
+			"Moded": {
+				"A": {
+					"<^>!": "old_turkic_n_rune_a_yenisei_ae",
+					"<!": "old_turkic_n_rune_a_[yenisei,orkhon]_ash"
+				},
+				"B": {"<^>!": "old_turkic_n_rune_b_[yenisei,orkhon]_aeb"},
+				"C": {"<^>!": "old_turkic_n_rune_c_orkhon_ic"},
+				"D": {"<^>!": "old_turkic_n_rune_d_orkhon_aed"},
+				"G": {"<^>!": "old_turkic_n_rune_g_[yenisei,orkhon]_aeg"},
+				"K": {"<^>!": "old_turkic_n_rune_k_[yenisei,orkhon]_aek"},
+				"L": {"<^>!": "old_turkic_n_rune_l_orkhon_ael"},
+				"N": {
+					"<^>!>+": "old_turkic_n_rune_n_[yenisei,orkhon]_ent",
+					"<^>!": "old_turkic_n_rune_n_[yenisei,orkhon]_aen",
+					">+": "old_turkic_n_rune_n_[yenisei,orkhon]_[enc,eny]",
+					"<!": "old_turkic_n_rune_n_orkhon_eng"
+				},
+				"O": {"<^>!": "old_turkic_n_rune_o_[yenisei,orkhon]_oe"},
+				"P": {"<!": "old_turkic_n_rune_p_orkhon_op"},
+				"Q": {
+					"<^>!": "old_turkic_n_rune_q_[yenisei,orkhon]_oek",
+					"<!": "old_turkic_n_rune_q_[yenisei,orkhon]_iq"
+				},
+				"R": {
+					"<^>!": "old_turkic_n_rune_r_orkhon_aer",
+					"<!": "old_turkic_n_rune_r_orkhon_bash"
+				},
+				"S": {
+					"<^>!": "old_turkic_n_rune_s_orkhon_aes",
+					"<!": "old_turkic_n_rune_s_[yenisei,orkhon]_esh"
+				},
+				"T": {
+					"<^>!": "old_turkic_n_rune_t_[yenisei,orkhon]_aet",
+					"<^>!>+": "old_turkic_n_rune_t_orkhon_elt",
+					"<!": "old_turkic_n_rune_t_orkhon_ot"
+				},
+				"Y": {"<^>!": "old_turkic_n_rune_y_[yenisei,orkhon]_aey"},
+				"Equals": {"+": ["plus"]},
+				"HyphenMinus": {"+": ["underscore"]},
+				"Slash": {"+": ["question"]},
+				"Backslash": {"+": ["vertical_line"]},
+				"Semicolon": {"+": ["colon"]},
+				"Apostrophe": {"+": ["quote"]},
+				"Tilde": {"+": ["tilde"]},
+				"LeftBracket": {"+": ["left_brace"]},
+				"RightBracket": {"+": ["right_brace"]},
+				"Comma": {"<^>!": ["runic_cruciform_punctuation"]},
+				"Dot": {"<^>!": ["runic_single_punctuation"]},
+				"Space": {"<^>!": ["runic_multiple_punctuation"]}
+			}
+		},
+		"Old Permic": {
+			"Flat": {
+				"А": ["old_permic_n_let_an"],
+				"Б": ["old_permic_n_let_bur"],
+				"В": ["old_permic_n_let_ver"],
+				"Г": ["old_permic_n_let_gai"],
+				"Д": ["old_permic_n_let_doi"],
+				"Е": ["old_permic_n_let_e"],
+				"Ё": ["old_permic_n_let_oo"],
+				"Ж": ["old_permic_n_let_zhoi"],
+				"З": ["old_permic_n_let_zata"],
+				"И": ["old_permic_n_let_i"],
+				"Й": ["old_permic_n_let_ie"],
+				"К": ["old_permic_n_let_koke"],
+				"Л": ["old_permic_n_let_lei"],
+				"М": ["old_permic_n_let_menoe"],
+				"Н": ["old_permic_n_let_nenoe"],
+				"О": ["old_permic_n_let_vooi"],
+				"П": ["old_permic_n_let_peei"],
+				"Р": ["old_permic_n_let_rei"],
+				"С": ["old_permic_n_let_sii"],
+				"Т": ["old_permic_n_let_tai"],
+				"У": ["old_permic_n_let_u"],
+				"Ф": ["old_permic_n_let_ef"],
+				"Х": ["old_permic_n_let_ha"],
+				"Ц": ["old_permic_n_let_tsiu"],
+				"Ч": ["old_permic_n_let_chery"],
+				"Ш": ["old_permic_n_let_shooi"],
+				"Щ": ["old_permic_n_let_shchooi"],
+				"Ъ": ["old_permic_n_let_yeru"],
+				"Ы": ["old_permic_n_let_yery"],
+				"Ь": ["old_permic_n_let_yeri"],
+				"Э": ["old_permic_n_let_yat"],
+				"Ю": ["old_permic_n_let_yu"],
+				"Я": ["old_permic_n_let_ia"]
+			},
+			"Moded": {
+				"З": {"<^>!": ["old_permic_n_let_dzita"]},
+				"Ы": {"<^>!": ["old_permic_n_let_yry"]},
+				"О": {"<^>!": ["old_permic_n_let_o"]},
+				"Ж": {"<^>!": ["old_permic_n_let_dzhoi"]},
+				"Я": {"<^>!": ["old_permic_n_let_ya"]}
+			}
+		},
+		"Old Hungarian": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "old_hungarian_[c,s]_rune_a",
+				"B": "old_hungarian_[c,s]_rune_b_eb",
+				"C": "old_hungarian_[c,s]_rune_c_ec",
+				"D": "old_hungarian_[c,s]_rune_d_ed",
+				"E": "old_hungarian_[c,s]_rune_e",
+				"F": "old_hungarian_[c,s]_rune_f_ef",
+				"G": "old_hungarian_[c,s]_rune_g_eg",
+				"H": "old_hungarian_[c,s]_rune_h_eh",
+				"I": "old_hungarian_[c,s]_rune_i",
+				"J": "old_hungarian_[c,s]_rune_y_ej",
+				"K": "old_hungarian_[c,s]_rune_k_ek",
+				"L": "old_hungarian_[c,s]_rune_l_el",
+				"M": "old_hungarian_[c,s]_rune_m_em",
+				"N": "old_hungarian_[c,s]_rune_n_en",
+				"O": "old_hungarian_[c,s]_rune_o",
+				"P": "old_hungarian_[c,s]_rune_p_ep",
+				"Q": "",
+				"R": "old_hungarian_[c,s]_rune_r_er",
+				"S": "old_hungarian_[c,s]_rune_s_es",
+				"T": "old_hungarian_[c,s]_rune_t_et",
+				"U": "old_hungarian_[c,s]_rune_u",
+				"V": "old_hungarian_[c,s]_rune_v_ev",
+				"W": "",
+				"X": "",
+				"Y": "old_hungarian_[c,s]_rune_y_ue",
+				"Z": "old_hungarian_[c,s]_rune_z_ez",
+				"1": "old_hungarian_n_num_one",
+				"2": "old_hungarian_n_num_five",
+				"3": "old_hungarian_n_num_ten",
+				"4": "old_hungarian_n_num_fifty",
+				"5": "old_hungarian_n_num_one_hundred",
+				"6": "old_hungarian_n_num_one_thousand"
+			},
+			"Moded": {
+				"A": {"<^>!": "old_hungarian_[c,s]_rune_a_aa"},
+				"B": {"<+": "old_hungarian_[c,s]_rune_b_amb"},
+				"C": {
+					"<^>!": "old_hungarian_[c,s]_rune_c_ecs",
+					"<+": "old_hungarian_[c,s]_rune_c_ech"
+				},
+				"E": {
+					"<^>!": "old_hungarian_[c,s]_rune_e_ee",
+					"<+": "old_hungarian_[c,s]_rune_e_enk"
+				},
+				"G": {"<^>!": "old_hungarian_[c,s]_rune_g_egy"},
+				"I": {"<^>!": "old_hungarian_[c,s]_rune_i_ii"},
+				"K": {
+					"<^>!": "old_hungarian_[c,s]_rune_k_ak",
+					"<+": "old_hungarian_[c,s]_rune_k_unk"
+				},
+				"L": {"<^>!": "old_hungarian_[c,s]_rune_l_ely"},
+				"N": {"<^>!": "old_hungarian_[c,s]_rune_n_eny"},
+				"O": {
+					"<^>!": "old_hungarian_[c,s]_rune_o_oo",
+					"<+": "old_hungarian_[c,s]_rune_o_oe",
+					"<^>!<+": "old_hungarian_[c,s]_rune_o_oe_nik",
+					">+": "old_hungarian_[c,s]_rune_o_oee"
+				},
+				"P": {"<+": "old_hungarian_[c,s]_rune_p_emp"},
+				"R": {"<+": "old_hungarian_[c,s]_rune_r_er_short"},
+				"S": {
+					"<^>!": "old_hungarian_[c,s]_rune_s_esz",
+					"<+": "old_hungarian_[c,s]_rune_s_us"
+				},
+				"T": {
+					"<^>!": "old_hungarian_[c,s]_rune_t_ety",
+					"<+": "old_hungarian_[c,s]_rune_t_ent",
+					">+": "old_hungarian_[c,s]_rune_t_ent_shaped"
+				},
+				"U": {"<^>!": "old_hungarian_[c,s]_rune_u_uu"},
+				"Y": {"<^>!": "old_hungarian_[c,s]_rune_y_ue_nik"},
+				"Z": {"<^>!": "old_hungarian_[c,s]_rune_z_ezs"}
+			}
+		},
+		"Old Italic": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "old_italic_n_let_a",
+				"B": "old_italic_n_let_b_be",
+				"C": "old_italic_n_let_c_ke",
+				"D": "old_italic_n_let_d_de",
+				"E": "old_italic_n_let_e",
+				"F": "old_italic_n_let_f_ef",
+				"G": "",
+				"H": "old_italic_n_let_h_he",
+				"I": "old_italic_n_let_i",
+				"J": "",
+				"K": "old_italic_n_let_k_ka",
+				"L": "old_italic_n_let_l_el",
+				"M": "old_italic_n_let_m_em",
+				"N": "old_italic_n_let_n_en",
+				"O": "old_italic_n_let_o",
+				"P": "old_italic_n_let_p_pe",
+				"Q": "old_italic_n_let_q_ku",
+				"R": "old_italic_n_let_r_er",
+				"S": "old_italic_n_let_s_es",
+				"T": "old_italic_n_let_t_te",
+				"U": "old_italic_n_let_u",
+				"V": "old_italic_n_let_f_ve",
+				"W": "old_italic_n_let_c_northern_tse",
+				"X": "old_italic_n_let_x_eks",
+				"Y": "old_italic_n_let_y_ye",
+				"Z": "old_italic_n_let_z_ze"
+			},
+			"Moded": {
+				"C": {"<!": "old_italic_n_let_c_che"},
+				"I": {">+": "old_italic_n_let_i_ii"},
+				"K": {">+": "old_italic_n_let_k_khe"},
+				"P": {">+": "old_italic_n_let_p_phe"},
+				"R": {">+": "old_italic_n_let_r_ers"},
+				"S": {
+					">+": "old_italic_n_let_s_esh",
+					"<+": "old_italic_n_let_s_she",
+					"<!": "old_italic_n_let_s_ess"
+				},
+				"T": {">+": "old_italic_n_let_t_the"},
+				"U": {">+": "old_italic_n_let_u_uu"},
+				"W": {"<+": "old_italic_n_let_c_southern_tse"},
+				"1": {"<^>!": "old_italic_n_num_one"},
+				"2": {"<^>!": "old_italic_n_num_five"},
+				"3": {"<^>!": "old_italic_n_num_ten"},
+				"4": {"<^>!": "old_italic_n_num_fifty"}
+			}
+		},
+		"Gothic": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "gothic_n_let_a_ahza",
+				"B": "gothic_n_let_b_bairkan",
+				"C": "gothic_n_let_t_thiuth",
+				"D": "gothic_n_let_d_dagz",
+				"E": "gothic_n_let_e_aihvus",
+				"F": "gothic_n_let_f_faihu",
+				"G": "gothic_n_let_g_giba",
+				"H": "gothic_n_let_h_hagl",
+				"I": "gothic_n_let_i_eis",
+				"J": "",
+				"K": "gothic_n_let_k_kusma",
+				"L": "gothic_n_let_l_lagus",
+				"M": "gothic_n_let_m_manna",
+				"N": "gothic_n_let_n_nauths",
+				"O": "gothic_n_let_o_othal",
+				"P": "gothic_n_let_p_pairthra",
+				"Q": "gothic_n_let_q_qairthra",
+				"R": "gothic_n_let_r_raida",
+				"S": "gothic_n_let_s_sugil",
+				"T": "gothic_n_let_t_teiws",
+				"U": "gothic_n_let_u_urus",
+				"V": "gothic_n_let_h_hwair",
+				"W": "gothic_n_let_w_winja",
+				"X": "gothic_n_let_k_iggws",
+				"Y": "gothic_n_let_y_jer",
+				"Z": "gothic_n_let_z_ezek"
+			},
+			"Moded": {
+				"H": {"<^>!": "gothic_n_let_h_hwair"},
+				"P": {"<^>!": "gothic_n_num_ninety"},
+				"S": {"<^>!": "gothic_n_num_nine_hundred"},
+				"T": {"<^>!": "gothic_n_let_t_thiuth"},
+				"Comma": {"<^>!": "runic_cruciform_punctuation"},
+				"Dot": {"<^>!": "runic_single_punctuation"},
+				"Space": {"<^>!": "runic_multiple_punctuation"}
+			}
+		},
+		"Phoenician": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "phoenician_n_let_a_alef",
+				"B": "phoenician_n_let_b_bet",
+				"C": "phoenician_n_let_c_sade",
+				"D": "phoenician_n_let_d_delt",
+				"E": "",
+				"F": "",
+				"G": "phoenician_n_let_g_gaml",
+				"H": "phoenician_n_let_h_he",
+				"I": "",
+				"J": "phoenician_n_let_y_yod",
+				"K": "phoenician_n_let_k_kaf",
+				"L": "phoenician_n_let_l_lamd",
+				"M": "phoenician_n_let_m_mem",
+				"N": "phoenician_n_let_n_nun",
+				"O": "phoenician_n_let_a_ain",
+				"P": "phoenician_n_let_p_pe",
+				"Q": "phoenician_n_let_q_qof",
+				"R": "phoenician_n_let_r_rosh",
+				"S": "phoenician_n_let_s_semk",
+				"T": "phoenician_n_let_t_tau",
+				"U": "",
+				"V": "",
+				"W": "phoenician_n_let_w_wau",
+				"X": "",
+				"Y": "phoenician_n_let_y_yod",
+				"Z": "phoenician_n_let_z_zai"
+			},
+			"Moded": {
+				"A": {"<+": "phoenician_n_let_a_ain"},
+				"H": {">+": "phoenician_n_let_h_het"},
+				"S": {">+": "phoenician_n_let_s_shin"},
+				"T": {">+": "phoenician_n_let_t_tet"},
+				"1": {"<^>!": "phoenician_n_num_one"},
+				"2": {"<^>!": "phoenician_n_num_two"},
+				"3": {"<^>!": "phoenician_n_num_three"},
+				"4": {"<^>!": "phoenician_n_num_ten"},
+				"5": {"<^>!": "phoenician_n_num_twenty"},
+				"6": {"<^>!": "phoenician_n_num_hundred"},
+				"Space": {"<^>!": "phoenician_n_sym_word_separator"}
+			}
+		},
+		"Ancient South Arabian": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "south_arabian_n_let_a_alef",
+				"B": "south_arabian_n_let_b_beth",
+				"C": "",
+				"D": "south_arabian_n_let_d_daleth",
+				"E": "",
+				"F": "south_arabian_n_let_f_fe",
+				"G": "south_arabian_n_let_g_gimel",
+				"H": "south_arabian_n_let_h_he",
+				"I": "",
+				"J": "",
+				"K": "south_arabian_n_let_k_kaph",
+				"L": "south_arabian_n_let_l_lamedh",
+				"M": "south_arabian_n_let_m_mem",
+				"N": "south_arabian_n_let_n_nun",
+				"O": "",
+				"P": "",
+				"Q": "south_arabian_n_let_q_qoph",
+				"R": "south_arabian_n_let_r_resh",
+				"S": "south_arabian_n_let_s_sat",
+				"T": "south_arabian_n_let_t_taw",
+				"U": "",
+				"V": "",
+				"W": "south_arabian_n_let_w_waw",
+				"X": "south_arabian_n_let_h_kheth",
+				"Y": "south_arabian_n_let_y_yodh",
+				"Z": "south_arabian_n_let_z_zayn"
+			},
+			"Moded": {
+				"A": {"<^>!": "south_arabian_n_let_a_ayn"},
+				"D": {
+					"<^>!": "south_arabian_n_let_d_dhadhe",
+					"<^>!>+": "south_arabian_n_let_d_dhaleth"
+				},
+				"G": {
+					"<^>!": "south_arabian_n_let_g_ghayn"
+				},
+				"H": {
+					"<^>!": "south_arabian_n_let_h_kheth",
+					">+": "south_arabian_n_let_h_heth"
+				},
+				"S": {
+					"<^>!": "south_arabian_n_let_s_sadhe",
+					"<!": "south_arabian_n_let_s_shin",
+					"<+": "south_arabian_n_let_s_samekh"
+				},
+				"T": {
+					"<^>!": "south_arabian_n_let_t_teth",
+					"<^>!>+": "south_arabian_n_let_t_thaw",
+					"<+": "south_arabian_n_let_t_theth"
+				},
+				"1": {"<^>!": "south_arabian_n_num_one"},
+				"5": {"<^>!": "south_arabian_n_num_fifty"},
+				"0": {"<^>!": "south_arabian_n_sym_numeral_bracket"}
+			}
+		},
+		"Ancient North Arabian": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "north_arabian_n_let_a_alef",
+				"B": "north_arabian_n_let_b_beh",
+				"C": "",
+				"D": "north_arabian_n_let_d_dal",
+				"E": "",
+				"F": "north_arabian_n_let_f_feh",
+				"G": "north_arabian_n_let_g_geem",
+				"H": "north_arabian_n_let_h_heh",
+				"I": "",
+				"J": "",
+				"K": "north_arabian_n_let_k_kaf",
+				"L": "north_arabian_n_let_l_lam",
+				"M": "north_arabian_n_let_m_meem",
+				"N": "north_arabian_n_let_n_noon",
+				"O": "",
+				"P": "",
+				"Q": "north_arabian_n_let_q_qaf",
+				"R": "north_arabian_n_let_r_reh",
+				"S": "north_arabian_n_let_s_es",
+				"T": "north_arabian_n_let_t_teh",
+				"U": "",
+				"V": "",
+				"W": "north_arabian_n_let_w_waw",
+				"X": "",
+				"Y": "north_arabian_n_let_y_yeh",
+				"Z": "north_arabian_n_let_z_zain"
+			},
+			"Moded": {
+				"A": {"<^>!": "north_arabian_n_let_a_ain"},
+				"D": {
+					"<^>!": "north_arabian_n_let_d_thal",
+					"<^>!>+": "north_arabian_n_let_d_dad"
+				},
+				"G": {
+					"<^>!": "north_arabian_n_let_g_ghain"
+				},
+				"H": {
+					"<^>!": "north_arabian_n_let_h_hah",
+					">+": "north_arabian_n_let_h_khah"
+				},
+				"S": {
+					"<^>!": "north_arabian_n_let_s_sad",
+					"<!": "north_arabian_n_let_s_esh",
+					"<+": "north_arabian_n_let_s_sh"
+				},
+				"T": {
+					"<+": "north_arabian_n_let_t_zah",
+					"<^>!": "north_arabian_n_let_t_tah",
+					">!>+": "north_arabian_n_let_t_theh"
+				},
+				"Z": {},
+				"1": {"<^>!": "north_arabian_n_num_one"},
+				"2": {"<^>!": "north_arabian_n_num_ten"},
+				"3": {"<^>!": "north_arabian_n_num_twenty"}
+			}
+		},
+		"Carian": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "carian_n_let_a",
+				"B": "carian_n_let_b",
+				"C": "carian_n_let_s_ss",
+				"D": "carian_n_let_d",
+				"E": "carian_n_let_e",
+				"F": "",
+				"G": "carian_n_let_g",
+				"H": "",
+				"I": "carian_n_let_i",
+				"J": "",
+				"K": "carian_n_let_k",
+				"L": "carian_n_let_l",
+				"M": "carian_n_let_m",
+				"N": "carian_n_let_n",
+				"O": "carian_n_let_o",
+				"P": "carian_n_let_p",
+				"Q": "carian_n_let_q",
+				"R": "carian_n_let_r",
+				"S": "carian_n_let_s",
+				"T": "carian_n_let_t",
+				"U": "carian_n_let_u",
+				"V": "",
+				"W": "carian_n_let_w_uu",
+				"X": "",
+				"Y": "carian_n_let_y_ii",
+				"Z": ""
+			},
+			"Moded": {
+				"A": {
+					"<!": "carian_n_let_a_a2"
+				},
+				"B": {
+					"<^>!<!": "carian_n_let_b_p2",
+					"<!": "carian_n_let_b_mb",
+					"<+": "carian_n_let_b_mb2",
+					"<^>!": "carian_n_let_b_mb3",
+					">+": "carian_n_let_b_mb4"
+				},
+				"D": {
+					"<!": "carian_n_let_d_d2",
+					"<^>!": "carian_n_let_d_nd"
+				},
+				"E": {
+					"<!": "carian_n_let_e_e2"
+				},
+				"G": {
+					"<^>!": "carian_n_let_g_g2"
+				},
+				"K": {
+					"<^>!": "carian_n_let_k_k2",
+					"<^>!>+": "carian_n_let_k_ng"
+				},
+				"L": {
+					"<^>!": "carian_n_let_l_ld",
+					"<^>!<!": "carian_n_let_l_ld2"
+				},
+				"N": {
+					"<^>!": "carian_n_let_n_nn"
+				},
+				"R": {
+					"<^>!": "carian_n_let_r_rr"
+				},
+				"S": {
+					"<!": "carian_n_let_s_sh",
+					"<+": "carian_n_let_s_sh2",
+					"<^>!": "carian_n_let_s_st",
+					"<^>!>+": "carian_n_let_s_st2"
+				},
+				"T": {
+					"<^>!": "carian_n_let_t_tt",
+					"<^>!>+": "carian_n_let_t_tt2",
+					">+": "carian_n_let_c18",
+					"<+": "carian_n_let_c39"
+				},
+				"Y": {
+					"<^>!": "carian_n_let_y_uuu",
+					"<^>!>+": "carian_n_let_y_uuuu",
+					"<^>!<+": "carian_n_let_y_uuu2",
+					"<^>!<!": "carian_n_let_y_uuu3"
+				}
+			}
+		},
+		"Lycian": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "lycian_n_let_a",
+				"B": "lycian_n_let_b",
+				"C": "",
+				"D": "lycian_n_let_d",
+				"E": "lycian_n_let_e",
+				"F": "",
+				"G": "",
+				"H": "lycian_n_let_h",
+				"I": "",
+				"J": "",
+				"K": "lycian_n_let_k",
+				"L": "lycian_n_let_l",
+				"M": "lycian_n_let_m",
+				"N": "lycian_n_let_n",
+				"O": "",
+				"P": "lycian_n_let_p",
+				"Q": "lycian_n_let_q",
+				"R": "lycian_n_let_r",
+				"S": "lycian_n_let_s",
+				"T": "lycian_n_let_t",
+				"U": "lycian_n_let_u",
+				"V": "",
+				"W": "",
+				"X": "lycian_n_let_x",
+				"Y": "",
+				"Z": ""
+			},
+			"Moded": {
+				"A": {
+					"<!": "lycian_n_let_a_an"
+				},
+				"E": {
+					"<!": "lycian_n_let_e_en"
+				},
+				"K": {
+					"<^>!": "lycian_n_let_k_bh",
+					"<^>!>+": "lycian_n_let_k_kk"
+				},
+				"M": {
+					"<^>!": "lycian_n_let_m_mm"
+				},
+				"N": {
+					"<^>!": "lycian_n_let_n_nn"
+				},
+				"T": {
+					"<^>!": "lycian_n_let_t_tt"
+				}
+			}
+		},
+		"Lydian": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "lydian_n_let_a",
+				"B": "lydian_n_let_b",
+				"C": "lydian_n_let_c",
+				"D": "lydian_n_let_d",
+				"E": "lydian_n_let_e",
+				"F": "lydian_n_let_f",
+				"G": "lydian_n_let_g",
+				"H": "",
+				"I": "lydian_n_let_i",
+				"J": "",
+				"K": "lydian_n_let_k",
+				"L": "lydian_n_let_l",
+				"M": "lydian_n_let_m",
+				"N": "lydian_n_let_n",
+				"O": "lydian_n_let_o",
+				"P": "",
+				"Q": "lydian_n_let_q",
+				"R": "lydian_n_let_r",
+				"S": "lydian_n_let_s_ss",
+				"T": "lydian_n_let_t",
+				"U": "lydian_n_let_u",
+				"V": "lydian_n_let_v",
+				"W": "",
+				"X": "",
+				"Y": "lydian_n_let_y",
+				"Z": "lydian_n_sym_triangular_mark"
+			},
+			"Moded": {
+				"A": {
+					"<!": "lydian_n_let_a_an"
+				},
+				"E": {
+					"<!": "lydian_n_let_e_en"
+				},
+				"L": {
+					"<^>!": "lydian_n_let_l_ly"
+				},
+				"N": {
+					"<^>!": "lydian_n_let_n_nn"
+				},
+				"S": {
+					"<!": "lydian_n_let_s"
+				},
+				"T": {
+					"<^>!": "lydian_n_let_t_tt"
+				}
+			}
+		},
+		"Sidetic": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "sidetic_n_let_a_N01",
+				"B": "sidetic_n_let_b_N24",
+				"C": "sidetic_n_let_c_N09",
+				"D": "sidetic_n_let_d_N12",
+				"E": "sidetic_n_let_e_N02",
+				"F": "",
+				"G": "sidetic_n_let_g_N19",
+				"H": "sidetic_n_let_h_N20",
+				"I": "sidetic_n_let_i_N03",
+				"J": "",
+				"K": "sidetic_n_let_k_N23",
+				"L": "sidetic_n_let_l_N17",
+				"M": "sidetic_n_let_m_N10",
+				"N": "sidetic_n_let_n_N16",
+				"O": "sidetic_n_let_o_N04",
+				"P": "sidetic_n_let_p_N08",
+				"Q": "",
+				"R": "sidetic_n_let_r_N21",
+				"S": "sidetic_n_let_S_N14",
+				"T": "sidetic_n_let_t_N11",
+				"U": "sidetic_n_let_u_N05",
+				"V": "",
+				"W": "sidetic_n_let_w_N06",
+				"X": "",
+				"Y": "sidetic_n_let_y_N07",
+				"Z": "sidetic_n_let_z_N26"
+			},
+			"Moded": {
+				"A": {"<!": "sidetic_n_let_a_N22"},
+				"N": {"<^>!": "sidetic_n_let_n_N25"},
+				"S": {"<!": "sidetic_n_let_S_N15"},
+				"T": {
+					"<^>!": "sidetic_n_let_t_N13",
+					"<^>!>+": "sidetic_n_let_t_N18"
+				}
+			}
+		},
+		"Cypriot Syllabary": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_a')%",
+				"B": "",
+				"C": "",
+				"D": "",
+				"E": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_e')%",
+				"F": "",
+				"G": "",
+				"H": "",
+				"I": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_i')%",
+				"J": "",
+				"O": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_o')%",
+				"Q": "",
+				"U": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_u')%",
+				"V": ""
+			},
+			"Moded": {
+			}
+		},
+		"Tifinagh": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "tifinagh_n_let_a_ya",
+				"B": "tifinagh_n_let_b_yah",
+				"C": "tifinagh_n_let_s_yash",
+				"D": "tifinagh_n_let_d_yad",
+				"E": "tifinagh_n_let_e_yey",
+				"F": "tifinagh_n_let_f_yaf",
+				"G": "tifinagh_n_let_g_yag",
+				"H": "tifinagh_n_let_h_tuareg",
+				"I": "tifinagh_n_let_i_yi",
+				"J": "tifinagh_n_let_j_yazh",
+				"K": "tifinagh_n_let_k_yak",
+				"L": "tifinagh_n_let_l_yal",
+				"M": "tifinagh_n_let_m_yam",
+				"N": "tifinagh_n_let_n_yan",
+				"O": "tifinagh_n_let_o_yaa",
+				"P": "tifinagh_n_let_p_yap",
+				"Q": "tifinagh_n_let_q_yaq",
+				"R": "tifinagh_n_let_r_yar",
+				"S": "tifinagh_n_let_s_yas",
+				"T": "tifinagh_n_let_t_yat",
+				"U": "tifinagh_n_let_w_yu",
+				"V": "tifinagh_n_let_v_yav",
+				"W": "tifinagh_n_let_w_yaw",
+				"X": "tifinagh_n_let_g_yagh_tuareg",
+				"Y": "tifinagh_n_let_y_yay",
+				"Z": "tifinagh_n_let_z_yaz"
+			},
+			"Moded": {
+				"B": {
+					"<!": "tifinagh_n_let_b_yab",
+					"<+": "tifinagh_n_let_b_yabh",
+					"<^>!": "tifinagh_n_let_b_yah_berber_academy"
+				},
+				"C": {
+					"<!": "tifinagh_n_let_s_yach"
+				},
+				"D": {
+					"<!": "tifinagh_n_let_d_yadh",
+					"<^>!": "tifinagh_n_let_d_yadd",
+					"<^>!>+": "tifinagh_n_let_d_yaddh"
+				},
+				"E": {
+					"<!": "tifinagh_n_let_e_ye"
+				},
+				"G": {
+					"<^>!": "tifinagh_n_let_g_yagh",
+					"<^>!>+": "tifinagh_n_let_g_yaghh",
+					"<!": "tifinagh_n_let_g_yaj"
+				},
+				"J": {
+					"<^>!": "tifinagh_n_let_j_yazh_tuareg",
+					"<^>!>+": "tifinagh_n_let_j_yazh_ahaggar"
+				},
+				"K": {
+					"<!": "tifinagh_n_let_k_yakh",
+					"<^>!<!": "tifinagh_n_let_k_yakh_tuareg",
+					"<^>!": "tifinagh_n_let_k_yakhh",
+					"<^>!>+": "tifinagh_n_let_k_yak_tuareg"
+				},
+				"N": {
+					"<^>!": "tifinagh_n_let_n_yang",
+					"<^>!>+": "tifinagh_n_let_n_yagn"
+				},
+				"O": {
+					"<^>!": "tifinagh_n_let_o_yo"
+				},
+				"Q": {
+					"<+": "tifinagh_n_let_q_yaq_tuareg"
+				},
+				"R": {
+					"<^>!": "tifinagh_n_let_r_yarr"
+				},
+				"S": {
+					"<!": "tifinagh_n_let_s_yass"
+				},
+				"T": {
+					"<^>!": "tifinagh_n_let_t_yatt",
+					"<^>!>+": "tifinagh_n_let_t_yath"
+				},
+				"W": {
+					"<!": "tifinagh_n_let_w_modifier_labialization_mark"
+				},
+				"X": {
+					"<!": "tifinagh_n_let_g_yagh_ayer"
+				},
+				"Z": {
+					"<!": "tifinagh_n_let_z_yazz",
+					"<+": "tifinagh_n_let_z_yaz_tawellement",
+					"<^>!": "tifinagh_n_let_z_yaj_berber_academy"
+				},
+				"Comma": {
+					"<^>!": "tifinagh_n_sym_seprator_mark"
+				},
+				"Backslash": {
+					"<^>!": "tifinagh_n_sym_consonant_joiner"
+				}
+			}
+		},
+		"Ugaritic": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "ugaritic_n_let_a_alpa",
+				"B": "ugaritic_n_let_b_beta",
+				"C": "",
+				"D": "ugaritic_n_let_d_delta",
+				"E": "",
+				"F": "",
+				"G": "ugaritic_n_let_g_gamla",
+				"H": "ugaritic_n_let_h_ho",
+				"I": "ugaritic_n_let_i",
+				"J": "",
+				"K": "ugaritic_n_let_k_kaf",
+				"L": "ugaritic_n_let_l_lamda",
+				"M": "ugaritic_n_let_m_mem",
+				"N": "ugaritic_n_let_n_nun",
+				"O": "",
+				"P": "ugaritic_n_let_p_pu",
+				"Q": "ugaritic_n_let_q_qopa",
+				"R": "ugaritic_n_let_r_rasha",
+				"S": "ugaritic_n_let_s_shin",
+				"T": "ugaritic_n_let_t_to",
+				"U": "ugaritic_n_let_u",
+				"V": "",
+				"W": "ugaritic_n_let_w_wo",
+				"X": "",
+				"Y": "ugaritic_n_let_y_yod",
+				"Z": "ugaritic_n_let_z_zeta",
+				"Space": "ugaritic_n_sym_word_divider"
+			},
+			"Moded": {
+				"A": {"<^>!": "ugaritic_n_let_a_ain"},
+				"B": {},
+				"C": {},
+				"D": {"<^>!": "ugaritic_n_let_d_dhal"},
+				"E": {},
+				"F": {},
+				"G": {"<^>!": "ugaritic_n_let_g_ghain"},
+				"H": {
+					"<^>!": "ugaritic_n_let_h_kha",
+					"<^>!>+": "ugaritic_n_let_h_hota"
+				},
+				"I": {},
+				"J": {},
+				"K": {},
+				"L": {},
+				"M": {},
+				"N": {},
+				"O": {},
+				"P": {},
+				"Q": {},
+				"R": {},
+				"S": {
+					"<^>!": "ugaritic_n_let_s_sade",
+					"<+": "ugaritic_n_let_s_samka",
+					"<!": "ugaritic_n_let_s_ssu"
+				},
+				"T": {
+					"<^>!": "ugaritic_n_let_t_tet",
+					"<^>!>+": "ugaritic_n_let_t_thanna"
+				},
+				"U": {},
+				"V": {},
+				"W": {},
+				"X": {},
+				"Y": {},
+				"Z": {"<!": "ugaritic_n_let_z_zu"}
+			}
+		},
+		"Old Persian": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "%BindHandler.TimeShell('old_persian_n_sign_a')%",
+				"B": "old_persian_n_sign_b_ba",
+				"C": "old_persian_n_sign_c_ca",
+				"E": "",
+				"F": "old_persian_n_sign_f_fa",
+				"H": "old_persian_n_sign_h_ha",
+				"I": "%BindHandler.TimeShell('old_persian_n_sign_i')%",
+				"L": "old_persian_n_sign_l_la",
+				"O": "",
+				"P": "old_persian_n_sign_p_pa",
+				"Q": "",
+				"S": "old_persian_n_sign_s_sa",
+				"U": "%BindHandler.TimeShell('old_persian_n_sign_u')%",
+				"W": "",
+				"X": "old_persian_n_sign_x_xa",
+				"Y": "old_persian_n_sign_y_ya",
+				"Z": "old_persian_n_sign_z_za",
+				"Space": "old_persian_n_sym_word_divider",
+				"1": "old_persian_n_num_one",
+				"2": "old_persian_n_num_two",
+				"3": "old_persian_n_num_ten",
+				"4": "old_persian_n_num_twenty",
+				"5": "old_persian_n_num_hundred"
+			},
+			"Moded": {
+				"A": {
+					"<!": "old_persian_n_log_auramazdaa",
+					"<+": "old_persian_n_log_auramazdaa_2",
+					"<^>!": "old_persian_n_log_auramazdaaha"
+				},
+				"B": {
+					"<!": "old_persian_n_log_baga",
+					"<+": "old_persian_n_log_buumish"
+				},
+				"D": {
+					"<!": "old_persian_n_log_dahyaaush",
+					"<+": "old_persian_n_log_dahyaaush_2"
+				},
+				"C": {"<!": "old_persian_n_sign_c_ssa"},
+				"S": {"<!": "old_persian_n_sign_s_sha"},
+				"T": {"<^>!": "old_persian_n_sign_t_tha"},
+				"X": {"<!": "old_persian_n_log_xshaayathiya"}
+			}
+		},
+		"IPA": {
+			"ForceSingle": true,
 			"Flat": {
 				"0": "digit_0",
 				"1": "digit_1",
@@ -1804,1088 +1383,1506 @@
 				"7": "digit_7",
 				"8": "digit_8",
 				"9": "digit_9",
-				"Equals": ["equals"],
-				"HyphenMinus": ["hyphen_minus"],
-				"Dot": ["dot"],
-				"Comma": ["comma"],
-				"Slash": ["solidus"],
-				"Backslash": ["reverse_solidus"],
-				"Semicolon": ["semicolon"],
-				"Apostrophe": ["apostrophe"],
-				"LeftBracket": ["left_bracket"],
-				"RightBracket": ["right_bracket"],
-				"Tilde": ["grave_accent"],
-				"Равно": ["equals"],
-				"ДефисоМинус": ["hyphen_minus"],
-				"Точка": ["dot"],
-				"Запятая": ["comma"],
-				"Слэш": ["solidus"],
-				"ОбратныйСлэш": ["reverse_solidus"],
-				"Апостроф": ["apostrophe"],
-				"Тильда": ["grave_accent"],
-				"ЛеваяКВСкобка": ["left_bracket"],
-				"ПраваяКВСкобка": ["right_bracket"],
-				"A": ["lat_[c,s]_let_a"],
-				"B": ["lat_[c,s]_let_b"],
-				"C": ["lat_[c,s]_let_c"],
-				"D": ["lat_[c,s]_let_d"],
-				"E": ["lat_[c,s]_let_e"],
-				"F": ["lat_[c,s]_let_f"],
-				"G": ["lat_[c,s]_let_g"],
-				"H": ["lat_[c,s]_let_h"],
-				"I": ["lat_[c,s]_let_i"],
-				"J": ["lat_[c,s]_let_j"],
-				"K": ["lat_[c,s]_let_k"],
-				"L": ["lat_[c,s]_let_l"],
-				"M": ["lat_[c,s]_let_m"],
-				"N": ["lat_[c,s]_let_n"],
-				"O": ["lat_[c,s]_let_o"],
-				"P": ["lat_[c,s]_let_p"],
-				"Q": ["lat_[c,s]_let_q"],
-				"R": ["lat_[c,s]_let_r"],
-				"S": ["lat_[c,s]_let_s"],
-				"T": ["lat_[c,s]_let_t"],
-				"U": ["lat_[c,s]_let_u"],
-				"V": ["lat_[c,s]_let_v"],
-				"W": ["lat_[c,s]_let_w"],
-				"X": ["lat_[c,s]_let_x"],
-				"Y": ["lat_[c,s]_let_y"],
-				"Z": ["lat_[c,s]_let_z"],
-				"\u00DE": ["lat_[c,s]_let_t_thorn"], 
-				"\u01F7": ["lat_[c,s]_let_w_wynn"],
-				"\uA768": ["lat_[c,s]_let_v_vend"],
-				"\u01B7": ["lat_[c,s]_let_z_ezh"], 
-				"\u021C": ["lat_[c,s]_let_j_yogh"],
-				"\u1E9E": ["lat_[c,s]_lig_s_eszett"],
-				"\u0194": ["lat_[c,s]_let_g_gamma"],
-				"А": ["cyr_[c,s]_let_a"],
-				"Б": ["cyr_[c,s]_let_b"],
-				"В": ["cyr_[c,s]_let_v"],
-				"Г": ["cyr_[c,s]_let_g"],
-				"Д": ["cyr_[c,s]_let_d"],
-				"Е": ["cyr_[c,s]_let_ye"],
-				"Ё": ["cyr_[c,s]_let_ye__diaeresis"],
-				"Ж": ["cyr_[c,s]_let_zh"],
-				"З": ["cyr_[c,s]_let_z"],
-				"И": ["cyr_[c,s]_let_i"],
-				"Й": ["cyr_[c,s]_let_i__breve"],
-				"К": ["cyr_[c,s]_let_k"],
-				"Л": ["cyr_[c,s]_let_l"],
-				"М": ["cyr_[c,s]_let_m"],
-				"Н": ["cyr_[c,s]_let_n"],
-				"О": ["cyr_[c,s]_let_o"],
-				"П": ["cyr_[c,s]_let_p"],
-				"Р": ["cyr_[c,s]_let_r"],
-				"С": ["cyr_[c,s]_let_s"],
-				"Т": ["cyr_[c,s]_let_t"],
-				"У": ["cyr_[c,s]_let_u"],
-				"Ф": ["cyr_[c,s]_let_f"],
-				"Х": ["cyr_[c,s]_let_h"],
-				"Ц": ["cyr_[c,s]_let_ts"],
-				"Ч": ["cyr_[c,s]_let_ch"],
-				"Ш": ["cyr_[c,s]_let_sh"],
-				"Щ": ["cyr_[c,s]_let_shch"],
-				"Ъ": ["cyr_[c,s]_let_yer"],
-				"Ы": ["cyr_[c,s]_dig_yeru"],
-				"Ь": ["cyr_[c,s]_let_yeri"],
-				"Э": ["cyr_[c,s]_let_e"],
-				"Ю": ["cyr_[c,s]_let_yu"],
-				"Я": ["cyr_[c,s]_let_ya"],
-				"\u0406": ["cyr_[c,s]_let_i_decimal"],
-				"\u0462": ["cyr_[c,s]_let_ye_yat"],
-				"\u046A": ["cyr_[c,s]_let_yus_big"],
-				"\u0466": ["cyr_[c,s]_let_yus_little"],
-				"\u0470": ["cyr_[c,s]_let_p_psi"],
-				"\u046E": ["cyr_[c,s]_let_k_ksi"],
-				"\u0460": ["cyr_[c,s]_let_o_omega"], 
-				"\u0472": ["cyr_[c,s]_let_f_fita"], 
-				"\u051C": ["cyr_[c,s]_let_w"],
-				"\u051A": ["cyr_[c,s]_let_q"],
-				"\uA65E": ["cyr_[c,s]_let_y_yn"]
+				"A": "lat_[c,s]_let_a",
+				"B": "lat_[c,s]_let_b",
+				"C": "lat_[c,s]_let_c",
+				"D": "lat_[c,s]_let_d",
+				"E": "lat_[c,s]_let_e",
+				"F": "lat_[c,s]_let_f",
+				"G": "lat_[c,s]_let_g",
+				"H": "lat_[c,s]_let_h",
+				"I": "lat_[c,s]_let_i",
+				"J": "lat_[c,s]_let_j",
+				"K": "lat_[c,s]_let_k",
+				"L": "lat_[c,s]_let_l",
+				"M": "lat_[c,s]_let_m",
+				"N": "lat_[c,s]_let_n",
+				"O": "lat_[c,s]_let_o",
+				"P": "lat_[c,s]_let_p",
+				"Q": "lat_[c,s]_let_q",
+				"R": "lat_[c,s]_let_r",
+				"S": "lat_[c,s]_let_s",
+				"T": "lat_[c,s]_let_t",
+				"U": "lat_[c,s]_let_u",
+				"V": "lat_[c,s]_let_v",
+				"W": "lat_[c,s]_let_w",
+				"X": "lat_[c,s]_let_x",
+				"Y": "lat_[c,s]_let_y",
+				"Z": "lat_[c,s]_let_z",
+				"Equals": "equals",
+				"HyphenMinus": "hyphen_minus",
+				"Dot": "dot",
+				"Comma": "comma",
+				"Slash": "solidus",
+				"Backslash": "reverse_solidus",
+				"Semicolon": "colon_triangle",
+				"Apostrophe": "&ipa_n_sym_stress_primary",
+				"LeftBracket": "left_bracket",
+				"RightBracket": "right_bracket",
+				"Tilde": "grave_accent",
+				"F1": "%(*) => Scripter.ToggleSelectedOption(\"__modifier\", \"Glyph Variations\", True)%"
 			},
 			"Moded": {
-				"1": {"+": "exclamation"},
-				"2": {"+:LangFlat": ["commercial_at", "quote"]},
-				"3": {"+:LangFlat": ["number_sign", "numero_sign"]},
-				"4": {"+:LangFlat": ["wallet_dollar", "semicolon"]},
-				"5": {"+": "percent"},
-				"6": {"+:LangFlat": ["circumflex_accent", "colon"]},
-				"7": {"+:LangFlat": ["lat_s_lig_et", "question"]},
-				"8": {"+": "asterisk"},
-				"9": {"+": "left_parenthesis"},
-				"0": {"+": "right_parenthesis"},
-				"Equals": {"+": ["plus"]},
-				"HyphenMinus": {"+": ["underscore"]},
-				"Slash": {"+": ["question"]},
-				"Backslash": {"+": ["vertical_line"]},
-				"Semicolon": {"+": ["colon"]},
-				"Apostrophe": {"+": ["quote"]},
-				"Tilde": {"+": ["tilde"]},
-				"LeftBracket": {"+": ["left_brace"]},
-				"RightBracket": {"+": ["right_brace"]},
-				"Равно": {"+": ["plus"]},
-				"ДефисоМинус": {"+": ["underscore"]},
-				"Точка": {
-					"+": ["comma"]
-				},
-				"Ь": {
-					"<!": ["cyr_[c,s]_let_yer"]
-				},
-				"Запятая": {"+": ["question"]},
-				"ОбратныйСлэш": {"+": ["solidus"]}
-			}
-		},
-		"Roman Digits": {
-			"Flat": {
-				"1:Caps": ["lat_[c,s]_num_1"],
-				"2:Caps": ["lat_[c,s]_num_2"],
-				"3:Caps": ["lat_[c,s]_num_3"],
-				"4:Caps": ["lat_[c,s]_num_4"],
-				"5:Caps": ["lat_[c,s]_num_5"],
-				"6:Caps": ["lat_[c,s]_num_6"],
-				"7:Caps": ["lat_[c,s]_num_7"],
-				"8:Caps": ["lat_[c,s]_num_8"],
-				"9:Caps": ["lat_[c,s]_num_9"],
-				"0:Caps": ["lat_[c,s]_num_10"]
-			},
-			"Moded": {
-				"1": {"<+:Caps": ["lat_[c,s]_num_11"]},
-				"2": {"<+:Caps": ["lat_[c,s]_num_12"]},
-				"5": {
-					"<+:Caps": ["lat_[c,s]_num_50"],
-					">+:Caps": ["lat_[c,s]_num_500"],
-					"<^>!": "lat_c_num_5000",
-					"<^>!>+": "lat_c_num_50000",
-					"<^>!<!": "lat_c_num_50_early"
-				},
-				"6": {"<^>!<!": "lat_c_num_6_late"},
-				"0": {
-					">+:Caps": ["lat_[c,s]_num_100"],
-					"<^>!:Caps": ["lat_[c,s]_num_1000"],
-					"<^>!>+": "lat_c_num_10000",
-					"<^>!<+": "lat_c_num_100000"
-				}
-			}
-		},
-		"Subscript Digits": {
-			"Flat": {
-				"0:Caps": ["digit_0::[superscript,subscript]"],
-				"1:Caps": ["digit_1::[superscript,subscript]"],
-				"2:Caps": ["digit_2::[superscript,subscript]"],
-				"3:Caps": ["digit_3::[superscript,subscript]"],
-				"4:Caps": ["digit_4::[superscript,subscript]"],
-				"5:Caps": ["digit_5::[superscript,subscript]"],
-				"6:Caps": ["digit_6::[superscript,subscript]"],
-				"7:Caps": ["digit_7::[superscript,subscript]"],
-				"8:Caps": ["digit_8::[superscript,subscript]"],
-				"9:Caps": ["digit_9::[superscript,subscript]"],
-				"Equals:Caps": ["equals::[superscript,subscript]"],
-				"HyphenMinus:Caps": ["minus::[superscript,subscript]"]
-			},
-			"Moded": {
-				"9": {"+:Caps": ["left_parenthesis::[superscript,subscript]"]},
-				"0": {"+:Caps": ["right_parenthesis::[superscript,subscript]"]},
-				"Equals": {"+:Caps": ["plus::[superscript,subscript]"]}
-			}
-		},
-		"Superscript Digits": {
-			"Flat": {
-				"0:Caps": ["digit_0::[subscript,superscript]"],
-				"1:Caps": ["digit_1::[subscript,superscript]"],
-				"2:Caps": ["digit_2::[subscript,superscript]"],
-				"3:Caps": ["digit_3::[subscript,superscript]"],
-				"4:Caps": ["digit_4::[subscript,superscript]"],
-				"5:Caps": ["digit_5::[subscript,superscript]"],
-				"6:Caps": ["digit_6::[subscript,superscript]"],
-				"7:Caps": ["digit_7::[subscript,superscript]"],
-				"8:Caps": ["digit_8::[subscript,superscript]"],
-				"9:Caps": ["digit_9::[subscript,superscript]"],
-				"Equals:Caps": ["equals::[subscript,superscript]"],
-				"HyphenMinus:Caps": ["minus::[subscript,superscript]"]
-			},
-			"Moded": {
-				"9": {"+:Caps": ["left_parenthesis::[subscript,superscript]"]},
-				"0": {"+:Caps": ["right_parenthesis::[subscript,superscript]"]},
-				"Equals": {"+:Caps": ["plus::[subscript,superscript]"]}
-			}
-		},
-		"Diacritic": {
-			"Flat": {},
-			"Moded": {
-				"6": {
-					"<^<!:Caps": ["breve_[below,inverted]_double"]
-				},
-				"A": {
-					"<^<!": "acute",
-					"<^<!<+": "acute_double",
-					"<^<!>+": "acute_below"
-				},
-				"B": {
-					"<^<!": "breve",
-					"<^<!<+": "breve_inverted",
-					"<^<!>+": "breve_below",
-					"<^<!<+>+": "breve_inverted_below"
-				},
-				"C": {
-					"<^<!": "circumflex",
-					"<^<!<+": "caron",
-					"<^<!>+": "cedilla",
-					"<^<!<+>+": "circumflex_below"
-				},
-				"D": {
-					"<^<!": "dot_above",
-					"<^<!<+": "diaeresis",
-					"<^<!>+": "dot_below",
-					"<^<!<+>+": "diaeresis_below"
-				},
-				"F": {
-					"<^<!": "fermata"
-				},
-				"G": {
-					"<^<!": "grave",
-					"<^<!<+": "grave_double"
-				},
-				"H": {
-					"<^<!": "hook_above",
-					"<^<!<+": "horn"
-				},
-				"M": {
-					"<^<!": "macron",
-					"<^<!<+": "macron_below"
-				},
-				"N": {},
-				"O": {
-					"<^<!": "ogonek",
-					"<^<!<+": "ogonek_above"
-				},
-				"R": {
-					"<^<!": "ring_above",
-					"<^<!<+": "ring_below"
-				},
-				"S": {
-					"<^<!": "stroke_short",
-					"<^<!<+": "stroke_long"
-				},
-				"T": {
-					"<^<!": "tilde_above",
-					"<^<!<+": "tilde_overlay",
-					"<^<!<+>+": "tilde_below",
-					"<^<!>+": "tilde_overlay"
-				},
-				"V": {
-					"<^<!": "line_vertical",
-					"<^<!<+": "line_vertical_double"
-				},
-				"X": {
-					"<^<!": "x_above",
-					"<^<!<+": "x_below"
-				},
-				"Z": {
-					"<^<!": "zigzag_above"
-				},
-				"Slash": {
-					"<^<!": "solidus_short",
-					"<^<!<+": "solidus_long"
-				},
-				"Comma": {
-					"<^<!": "comma_above",
-					"<^<!<+": "comma_below"
-				},
-				"Dot": {
-					"<^<!": "dot_above",
-					"<^<!<+": "diaeresis"
-				},
-				"0": {
-					"<^<!": "millions_sign"
-				},
-				"Й": {
-					"<^<!": "dasia_pneumata",
-					"<^<!<+": "psili_pneumata"
-				},
-				"У": {
-					"<^<!": "titlo",
-					"<^<!<+": "vzmet"
-				},
-				"Ц": {
-					"<^<!": "pokrytie",
-					"<^<!<+": "payerok",
-					"<^<!>+": "palatalization"
-				}
-			}
-		},
-		"Important": {
-			"Flat": {
-				"RAlt": "%(*) => globalInstances.crafter.ComposeActivate()%"
-			},
-			"Moded": {
-				"F1": {
-					"<^>!": "%(*) => KbdBinder.ToggleDefaultMode()%",
-					"<^>!>+": "%(*) => Auxiliary.ToggleInputMode()%",
-					"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Second Keys')%"
-				},
-				"F2": {
-					"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Tertiary Keys')%",
-					"<^>!": "%(*) => Scripter.ToggleSelectedOption(\"Tieng Viet\", \"TELEX\")%",
-					"<^>!>+": "%(*) => Scripter.ToggleSelectedOption(\"HanYu PinYin\", \"TELEX\")%"
-				},
-				"F8": {
-					"<^>!": "%(*) => GREPTypography.SetStyles()%"
-				},
-				"F9": {
-					">^": "%(*) => Cfg.Editor()%",
-					"<^>!": "%(*) => GREPTypography.SetStyles('Paragraphs')%"
-				},
-				"Up": {
-					"<#<!": "%(*) => KbdBinder.ToggleNumStyle('Superscript')%",
-					"<#<!>+": "%(*) => KbdBinder.ToggleNumStyle('Roman')%"
-				},
-				"Down": {
-					"<#<!": "%(*) => KbdBinder.ToggleNumStyle('Subscript')%"
-				},
-				"PgUp": {
-					"<#<!": "%(*) => UnicodeWebResource()%"
-				},
-				"Home": {
-					"<#<!": "%(*) => globalInstances.MainGUI.Show()%"
-				},
-				"2": {
-					"<!": "%FuncBindStore.Get('ToQuote')%"
-				},
-				"A": {
-					"<#<!": "%(*) => Scripter.SelectorPanel('Glyph Variations')%"
-				},
-				"D": {
-					"<#<!": "%(*) => Scripter.SelectorPanel('TELEX')%"
-				},
-				"S": {
-					"<#<!": "%(*) => Scripter.SelectorPanel()%"
-				},
-				"F": {
-					"<#<!": "%(*) => Search()%"
-				},
-				"H": {
-					">^": "%(*) => Util.StrSelToConvert('Entities')%",
-					"<^>^": "%(*) => Util.StrSelToConvert('Hex')%"
-				},
-				"J": {
-					">^": "%(*) => Util.StrSelToConvert('Entities', true)%"
-				},
-				"Backslash": {
-					">^": "%(*) => Util.URLEncoder()%",
-					"<^>^": "%(*) => Util.URLEncoder('decode')%"
-				},
-				"Comma": {
-					"<#<!": "%(*) => GetKeyScanCode()%"
-				},
-				"Y": {
-					">^": "%(*) => Util.StrSelToUnicode('CSS')%"
-				},
-				"U": {
-					">^": "%(*) => Util.StrSelToUnicode()%"
-				},
-				"I": {
-					">^": "%(*) => Util.StrSelToUnicode('Hex')%"
-				}
-			}
-		},
-		"Common": {
-			"Flat": {
-			},
-			"Moded": {
-				"NumpadMult": {
-					"<^>!": "asterisk_two",
-					"<^>!>+": "asterism",
-					"<^>!<+": "asterisk_low"
-				},
-				"NumpadDiv": {
-					"<^>!": "dagger",
-					"<^>!>+": "dagger_double",
-					"<^>!<!": "dagger_tripple",
-					"<^<!": "asterisk_operator",
-					"<^<!<+": "bullet_operator"
-				},
-				"Left": {
-					"<^>!<+": "arrow_left_ushaped",
-					"<^>!>+": "arrow_left_circle"
-				},
-				"Right": {
-					"<^>!<+": "arrow_right_ushaped",
-					"<^>!>+": "arrow_right_circle"
-				},
-				"Up": {
-					"<^>!<+": "arrow_up_ushaped"
-				},
-				"Down": {
-					"<^>!<+": "arrow_down_ushaped"
-				},
 				"1": {
-					"<!": "section",
-					"<^>!": "inverted_exclamation",
-					"<^>!<+": "double_exclamation_question",
-					"<^>!>+": "double_exclamation",
-					"<+>+": "medieval_exclamation",
-					">+:Caps": "interrobang[_inverted,]"
+					"+": "exclamation",
+					"<^<!": "[down,up]_tack_below",
+					"<^<!>+": "[down,up]_tack_below::modifier",
+					"<^>!": "lat_n_let_alveolar_click",
+					"<^>!<!": "lat_n_let_retroflex_click"
 				},
 				"2": {
-					"<^>!:Caps": ["registered", "copyright"],
-					"<^>!<+:Caps": ["servicemark", "trademark"],
-					"<^>!>+": "sound_recording_copyright",
-					"<^>!<!:Caps": "[facsimile,telephone]_sign",
-					">+:LangFlat": "[quote,commercial_at]"
+					"+": "commercial_at",
+					"<^<!": "[right,left]_tack_below",
+					"<^<!>+": "[right,left]_tack_below::modifier",
+					"<^>!": "lat_n_let_dental_click"
 				},
 				"3": {
-					"<^>!:Caps": ["prime_single[_reversed,]"],
-					"<^>!>+:Caps": ["prime_double[_reversed,]"],
-					"<^>!<+:Caps": ["prime_triple[_reversed,]"],
-					"<^>!<+>+": "prime_quadruple",
-					">+:LangFlat": "[numero_sign,number_sign]"
+					"+": "number_sign",
+					"<^<!": "[right,left]_half_ring_below",
+					"<^<!>+": "[right,left]_half_ring_below::modifier",
+					"<^>!": "lat_n_let_lateral_click"
 				},
 				"4": {
-					"<^>!:Caps": "wallet_[franc,eur]",
-					"<^>!<+:Caps": "wallet_[won,yen]",
-					"<^>!>+:Caps": "wallet_[austral,hryvnia]",
-					"<^>!<+>+:Caps": "wallet_[philippine_peso,new_sheqel]",
-					"<^>!<!:Caps": "wallet_[mongol_tugrik,qazaq_tenge]",
-					"<^>!<!<+:Caps": "wallet_[,turkish_]lira",
-					"<^>!<!>+:Caps": "wallet_[viet_dong,rupee]",
-					"<!:Caps": "wallet_[cent,pound]",
-					"<+>+": "wallet_sign",
-					">+:LangFlat": "[semicolon,wallet_dollar]"
+					"+": "wallet_dollar",
+					"<^<!": "left_angle_above",
+					"<^>!": "lat_n_let_palatal_click"
 				},
-				"5": {"<^>!": "permille", "<^>!<+": "pertenthousand"},
+				"5": {
+					"<^<!": "breve_[below,inverted]_double",
+					"+": "percent",
+					"<^>!": "lat_n_let_bilabial_click"
+				},
 				"6": {
-					"<^>!": "division",
-					">+:LangFlat": "[colon,circumflex_accent]"
+					"+": "circumflex_accent",
+					"<^>!": "lat_n_let_[bidental,bilabial]_percussive"
 				},
-				"7": {
-					"<^>!": "inverted_question",
-					"<^>!>+": "double_question",
-					"<^>!<+": "double_question_exclamation",
-					"<^>!<!": "reversed_question",
-					"<+>+": "medieval_question",
-					">+:LangFlat": "[question,lat_s_lig_et]"
-				},
-				"8": {
-					"<^>!": "multiplication",
-					"<^>!<!": "infinity"
-				},
-				"9": {
-					"<^>!": "left_chevron",
-					"<!": "left_bracket",
-					"<!<+": "left_brace"
-				},
+				"7": {"+": "lat_s_lig_et"},
+				"8": {"+": "asterisk"},
+				"9": {"+": "left_parenthesis"},
 				"0": {
-					"<^>!": "right_chevron",
-					"<^>!<!": "large_circle",
-					"<!": "right_bracket",
-					"<!<+": "right_brace"
-				},
-				"Equals": {
-					"<^>!": ["noequals"],
-					"<^>!<!": ["almostequals"],
-					"<^>!<+": ["plusminus"]
+					"+": "right_parenthesis"
 				},
 				"HyphenMinus": {
-					"<^>!>+": ["hyphenation_point"],
-					"<^<!": ["softhyphen"],
-					"<^<!<+": ["minus"],
-					"<^>!": ["emdash"],
-					"<^>!<+": ["endash"],
-					"<!:Caps": ["two_emdash", "three_emdash"],
-					"<^>!<!": ["hyphen"],
-					"<^>!<!<+": ["no_break_hyphen"],
-					"<^>!<!>+": ["figure_dash"]
+					"+": "underscore",
+					"<^<!": "minus_below"
 				},
+				"Equals": {
+					"+": "plus",
+					"<+>+": "plus::modifier",
+					"<^<!": "plus_below"
+				},
+				"Slash": {"+": "question"},
+				"Backslash": {
+					"+": "vertical_line"
+				},
+				"Tilde": {"+": "tilde"},
 				"LeftBracket": {
-					"<^>!<!": ["left_cjk_tortoise_shell"],
-					"<^>!<!<+": ["left_cjk_corner_bracket"],
-					"<^>!<!>+": ["left_cjk_title_bracket"],
-					"<^>!<!<+>+": ["left_double_cjk_title_bracket"],
-					"<^>!": ["left_bracket_with_quill"],
-					"<^>!>+": ["left_white_bracket"],
-					"<^>!<+": ["left_white_tortoise_shell"]
+					"+": "left_brace",
+					"<^<!": "bridge_[below,above]",
+					"<^<!<+": "bridge_inverted_below"
 				},
 				"RightBracket": {
-					"<^>!<!": ["right_cjk_tortoise_shell"],
-					"<^>!<!<+": ["right_cjk_corner_bracket"],
-					"<^>!<!>+": ["right_cjk_title_bracket"],
-					"<^>!<!<+>+": ["right_double_cjk_title_bracket"],
-					"<^>!": ["right_bracket_with_quill"],
-					"<^>!>+": ["right_white_bracket"],
-					"<^>!<+": ["right_white_tortoise_shell"]
-				},
-				"Slash": {
-					"<^>!": "ellipsis",
-					"<^>!<+": "tricolon",
-					"<^>!<+>+": "quartocolon",
-					"<!": "two_dot_punctuation",
-					"<^>!>+": "fraction_slash"
-				},
-				"Backslash": {
-					"<^>!": "grapheme_joiner",
-					"<^<!": "dotted_circle",
-					"<^>!<+": "empty_set",
-					">+": "vertical_line"
-				},
-				"Semicolon": {
-					"<^>!": ["semicolon_[turned,reversed]"]
-				},
-				"Comma": {
-					"<^>!": ["quote_left_double"],
-					"<^>!<+": ["quote_left"],
-					"<^>!>+": ["quote_low_9_double"],
-					"<^>!<+>+": ["quote_low_9"],
-					"<^>!<!": ["quote_angle_left_double"],
-					"<^>!<!<+": ["quote_angle_left"],
-					">+": "medieval_comma"
-				},
-				"Dot": {
-					"<^>!": ["quote_right_double"],
-					"<^>!<+": ["quote_right"],
-					"<^>!>+": ["quote_low_9_double_reversed"],
-					"<^>!<!": ["quote_angle_right_double"],
-					"<^>!<!<+": ["quote_angle_right"]
-				},
-				"Tilde": {
-					"<^>!": "bullet",
-					"<^>!<!": "bullet_hyphen",
-					"<^>!<+": "interpunct",
-					"<^>!>+": "quote_right",
-					"<^>!<!<+": "bullet_triangle",
-					"<^>!<!>+": "bullet_white",
-					">+": "tilde_reversed"
-				},
-				"Apostrophe": {
-					"<^>!": ["lat_[c,s]_let_a_saltillo"]
-				},
-				"Space": {
-					"<^>!": "no_break_space",
-					"<^>!>+": "emsp",
-					"<^>!<+": "ensp",
-					"<^>!<+>+": "figure_space",
-					"<^>!<!": "thinspace",
-					"<^>!<!<+": "hairspace",
-					"<^>!<!>+": "punctuation_space",
-					"<!": "emsp13",
-					"<^>!>^": "zero_width_space",
-					"<^<!": "zero_width_no_break_space",
-					">+": "emsp16",
-					"<+>+": "narrow_no_break_space"
-				},
-				"Enter": {
-					"<^>!": "misc_crlf_emspace",
-					"<^>!<+": "misc_lf_emspace"
-				},
-				"Tab": {
-					"<^>!": "zero_width_joiner",
-					"<^>!>+": "zero_width_non_joiner",
-					"<^>!<+": "word_joiner"
-				},
-				"ДефисоМинус": {
-					"<^>!>+": ["hyphenation_point"],
-					"<^<!": ["softhyphen"],
-					">+": ["minus"],
-					"<^>!": ["emdash"],
-					"<^>!<+": ["endash"],
-					"<!:Caps": ["two_emdash", "three_emdash"],
-					"<^>!<!": ["hyphen"],
-					"<^>!<!<+": ["no_break_hyphen"],
-					"<^>!<!>+": ["figure_dash"]
-				},
-				"Равно": {
-					"<^>!": ["noequals"],
-					"<^>!<!": ["almostequals"],
-					"<^>!<+": ["plusminus"]
+					"+": "right_brace",
+					"<^<!": "square_below"
 				},
 				"A": {
-					"<!": ["lat_[c,s]_let_a__acute"],
-					"<^>!": ["lat_[c,s]_let_a__breve"],
-					"<^>!<!": ["lat_[c,s]_let_a__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_a__ring_above"],
-					"<^>!<!>+": ["lat_[c,s]_let_a__ogonek"],
-					"<^>!>+": ["lat_[c,s]_let_a__macron"],
-					"<^>!<+": ["lat_[c,s]_let_a__diaeresis"],
-					"<^>!<+>+": ["lat_[c,s]_let_a__tilde_above"],
-					">+": ["lat_[c,s]_let_a__grave"],
-					"<+>+": ["lat_[c,s]_let_a__grave_double"]
+					"<^>!": "lat_s_let_a_alpha[_turned,]",
+					"<^>!<+": "lat_s_let_a__diaeresis",
+					"<^>!<!": "lat_s_let_a_turned",
+					"<^>!<!<+": "lat_s_lig_ae"
 				},
 				"B": {
-					"<^>!": ["lat_[c,s]_let_b__dot_above"],
-					"<^>!<!": ["lat_[c,s]_let_b__dot_below"],
-					"<^>!<!<+": ["lat_[c,s]_let_b__flourish"],
-					"<^>!<+": ["lat_[c,s]_let_b__stroke_short"],
-					"<^>!>+": ["lat_[c,s]_let_b__common_hook"],
-					"<^>!<+>+": ["lat_[c,s]_let_b__topbar"]
+					"<^<!": "breve[_below,]",
+					"<^<!<+": "breve_inverted[_below,]",
+					"<^>!": "&ipa_[k,s]_let_b[,_beta]"
 				},
-				"C": {"<!": ["lat_[c,s]_let_c__acute"],
-					"<^>!": ["lat_[c,s]_let_c__dot_above"],
-					"<^>!<!": ["lat_[c,s]_let_c__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_c__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_c__cedilla"],
-					">+": "celsius"
+				"C": {
+					"<^>!": "lat_s_let_c__curl",
+					"<^<!": "caron[_below,]"
 				},
 				"D": {
-					"<!:Caps": "[angle,degree]",
-					"<^>!": ["lat_[c,s]_let_d_eth"],
-					"<^>!<!": ["lat_[c,s]_let_d__stroke_short"],
-					"<^>!>+": ["lat_[c,s]_let_d_afrikan"],
-					"<^>!<!<+": ["lat_[c,s]_let_d__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_d__cedilla"],
-					"<^>!<+>+": ["lat_[c,s]_let_d__circumflex_below"]},
+					"<^<!": "diaeresis[_below,]",
+					"<^>!": "lat_s_let_d_eth",
+					"<^>!<!": "lat_s_dig_dz[__retroflex_hook,]",
+					"<^>!<!<+": "lat_s_dig_d[_ezh,z__curl]"
+				},
 				"E": {
-					"<!": ["lat_[c,s]_let_e__acute"],
-					"<^>!": ["lat_[c,s]_let_a_schwa"],
-					"<^>!<!": ["lat_[c,s]_let_e__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_e__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_e__ogonek"],
-					"<^>!<!<+>+": ["lat_[c,s]_let_e_epsilon"],
-					"<^>!>+": ["lat_[c,s]_let_e__macron"],
-					"<^>!<+": ["lat_[c,s]_let_e__diaeresis"],
-					"<^>!<+>+": ["lat_[c,s]_let_e__tilde_above"],
-					">+": ["lat_[c,s]_let_e__grave"],
-					"<+>+": ["lat_[c,s]_let_e__grave_double"]
+					"<^<!": "rhotic_hook",
+					"<^>!": "lat_s_let_e_epsilon[_reversed,]",
+					"<^>!<+": "lat_s_let_e_epsilon_closed_reversed",
+					"<^>!<!": "lat_s_let_[e_reversed,a_schwa]"
 				},
 				"F": {
-					"<^>!": ["lat_[c,s]_let_f__dot_above"],
-					"<^>!<!": ["lat_s_let_f_phi"],
-					"<^>!>+": ["lat_[c,s]_let_f__common_hook"],
-					"<^>!<+": ["lat_[c,s]_let_f__stroke_short"],
-					">+": "fahrenheit"},
+					"<^>!": "lat_s_let_f_phi"
+				},
 				"G": {
-					"<!": ["lat_[c,s]_let_g__acute"],
-					"<^>!": ["lat_[c,s]_let_g__breve"],
-					"<^>!<!": ["lat_[c,s]_let_g__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_g__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_g__cedilla"],
-					"<^>!<+": ["lat_[c,s]_let_g_insular"],
-					"<^>!>+": ["lat_[c,s]_let_g__macron"],
-					"<^>!<+>+": ["lat_[c,s]_let_g_gamma"],
-					">+": ["lat_[c,s]_let_g__dot_above"]
+					"<^>!": "[&ipa,lat]_[k,s]_let_g[,_gamma]",
+					"<^>!<!": "lat_s_let_g_script"
 				},
 				"H": {
-					"<!": ["lat_[c,s]_let_h_hwair"],
-					"<^>!": ["lat_[c,s]_let_h__stroke_short"],
-					"<^>!<!": ["lat_[c,s]_let_h__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_h__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_h__cedilla"],
-					"<^>!<+": ["lat_[c,s]_let_h__diaeresis"]
+					"<^>!": "[&ipa,lat]_[k,s]_let_h[,__stroke_short]",
+					"<^>!<!": "lat_s_let_m_turned__long_leg"
 				},
 				"I": {
-					"<!": ["lat_[c,s]_let_i__acute"],
-					"<^>!": ["lat_[c,s]_let_i__breve"],
-					"<^>!<!": ["lat_[c,s]_let_i__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_i__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_i__ogonek"],
-					"<^>!>+": ["lat_[c,s]_let_i__macron"],
-					"<^>!<+": ["lat_[c,s]_let_i__diaeresis"],
-					"<^>!<+>+": ["lat_[c,s]_let_i__tilde_above"],
-					">+": ["lat_[c,s]_let_i__grave"],
-					"<+>+": ["lat_[c,s]_let_i__grave_double"],
-					"<^>!<!<+>+": ["lat_[c,s]_let_i_[_dot_above,dotless]"]
+					"<^>!": "[&ipa,lat]_[k,s]_let_i[,__stroke_short]"
 				},
 				"J": {
-					"<^>!": ["lat_[c,s]_let_j__stroke_short"],
-					"<^>!>+": ["lat_[c,s]_let_j_yogh"],
-					"<^>!<!": ["lat_[c,s]_let_j__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_j__caron"]
+					"<^>!": "lat_s_let_j__crossed_tail"
 				},
 				"K": {
-					"<!": ["lat_[c,s]_let_k__acute"],
-					"<^>!<!": ["lat_[c,s]_let_k__dot_below"],
-					"<^>!<!<+": ["lat_[c,s]_let_k__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_k__cedilla"],
-					"<^>!<+": ["lat_[c,s]_let_k_cuatrillo"],
-					">+": "kelvin"
 				},
 				"L": {
-					"<!": ["lat_[c,s]_let_l__acute"],
-					"<^>!": ["lat_[c,s]_let_l__solidus_short"],
-					"<^>!<!<+": ["lat_[c,s]_let_l__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_l__cedilla"],
-					"<^>!<+>+": ["lat_[c,s]_let_l__circumflex_below"]
+					"<^>!": "[&ipa,lat]_[k,s]_let_l[,__belt]",
+					"<^>!<!": "lat_s_let_y_turned",
+					"<^>!<!<+": "lat_s_dig_l[z,s]"
 				},
 				"M": {
-					"<!": ["lat_[c,s]_let_m__acute"],
-					"<^>!": ["lat_[c,s]_let_m__dot_above"],
-					"<^>!<!": ["lat_[c,s]_let_m__dot_below"],
-					"<^>!>+": ["lat_[c,s]_let_m__common_hook"],
-					"<^>!<+": ["lat_c_let_m_epigraphic_archaic"]
 				},
 				"N": {
-					"<!": ["lat_[c,s]_let_n__acute"],
-					"<^>!": ["lat_[c,s]_let_n__tilde_above"],
-					"<^>!<!": ["lat_[c,s]_let_n__dot_below"],
-					"<^>!<!<+": ["lat_[c,s]_let_n__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_n__cedilla"],
-					"<^>!>+": ["lat_[c,s]_let_n__common_hook"],
-					"<^>!<+": ["let_[c,s]_let_n__descender"],
-					"<^>!<+>+": ["lat_[c,s]_let_n__dot_above"],
-					">+": ["lat_[c,s]_let_n__grave"]
+					"<^>!": "[&ipa,lat]_[k,s]_let_n[,_eng]",
+					"<^>!<!": "lat_s_dig_feng"
 				},
 				"O": {
-					"<!": ["lat_[c,s]_let_o__acute"],
-					"<^>!": ["lat_[c,s]_let_o__solidus_long"],
-					"<^>!<!": ["lat_[c,s]_let_o__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_o__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_o__ogonek"],
-					"<^>!>+": ["lat_[c,s]_let_o__macron"],
-					"<^>!<+": ["lat_[c,s]_let_o__diaeresis"],
-					"<^>!<+>+": ["lat_[c,s]_let_o__tilde_above"],
-					">+": ["lat_[c,s]_let_o__grave"],
-					"<+>+": ["lat_[c,s]_let_o__grave_double"],
-					"<^>!<!<+>+": ["lat_[c,s]_let_o__acute_double"]
+					"<^>!": "lat_s_let_o_rams_horn",
+					"<^>!<+": "lat_s_let_o_open",
+					"<^>!<!": "lat_s_let_o__[tilde_overlay,solidus_long]",
+					"<^>!<!<+": "[&ipa,lat]_[k,s]_lig_oe"
 				},
 				"P": {
-					"<!": ["lat_[c,s]_let_p__acute"],
-					"<^>!": ["lat_[c,s]_let_p__dot_above"],
-					"<^>!<!": ["lat_[c,s]_let_p__squirrel_tail"],
-					"<^>!<!<+": ["lat_[c,s]_let_p__flourish"],
-					"<^>!<+": ["lat_[c,s]_let_p__stroke_short"],
-					"<^>!>+": ["lat_[c,s]_let_p__common_hook"]},
+				},
 				"Q": {
-					"<^>!": ["lat_[c,s]_let_a_glottal_stop"],
-					"<^>!<+": ["lat_[c,s]_let_q_tresillo"],
-					"<^>!>+": ["lat_[c,s]_let_q__common_hook"]
+					"<^>!": "lat_n_let_a_glottal_stop[_reversed,]",
+					"<^>!<+": "lat_n_let_a_glottal_stop[_reversed,]__stroke_short",
+					"<^>!<!": "lat_n_let_a_glottal_stop_inverted[__stroke_short,]"
 				},
 				"R": {
-					"<!": ["lat_[c,s]_let_r__acute"],
-					"<^>!": ["lat_[c,s]_let_r__dot_above"],
-					"<^>!<!": ["lat_[c,s]_let_r_dot_below"],
-					"<^>!<!<+": ["lat_[c,s]_let_r__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_r__cedilla"],
-					"<^>!<+": ["lat_[c,s]_let_yr"],
-					"<^>!>+": ["lat_[c,s]_let_r_rotunda"],
-					"<+>+": ["lat_[c,s]_let_r__grave_double"]
+					"<^<!": "ring_[below,above]",
+					"<^>!": "&ipa_k_let_r",
+					"<^>!<!": "lat_s_let_r_turned"
 				},
 				"S": {
-					"<!": ["lat_[c,s]_let_s__acute"],
-					"<^>!": ["lat_[c,s]_let_s__comma_below"],
-					"<^>!<!": ["lat_[c,s]_let_s__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_s__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_s__cedilla"],
-					"<^>!>+": ["lat_s_let_s_long"],
-					"<^>!<+>+": ["lat_[c,s]_let_s_sigma"],
-					"<^>!<+": ["lat_[c,s]_lig_s_eszett"]
+					"<^>!": "lat_s_let_s_sigma"
 				},
 				"T": {
-					"<^>!": ["lat_[c,s]_let_t__comma_below"],
-					"<^>!<!": ["lat_[c,s]_let_t__dot_below"],
-					"<^>!<!<+": ["lat_[c,s]_let_t__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_t__cedilla"],
-					"<^>!>+": ["lat_[c,s]_let_t_thorn"],
-					"<^>!<+": ["lat_[c,s]_let_t__dot_above"],
-					"<^>!<+>+": ["lat_[c,s]_sign_et_tironian"]
+					"<^<!": "tilde_[below,above]",
+					"<^>!": "&ipa_s_let_t_theta",
+					"<^>!<!": "lat_s_dig_t[s,c__curl]",
+					"<^>!<!<+": "lat_s_dig_t[s__retroflex_hook,_sigma]"
 				},
 				"U": {
-					"<!": ["lat_[c,s]_let_u__acute"],
-					"<^>!": ["lat_[c,s]_let_u__breve"],
-					"<^>!<!": ["lat_[c,s]_let_u__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_u__ring_above"],
-					"<^>!<!>+": ["lat_[c,s]_let_u__ogonek"],
-					"<^>!>+": ["lat_[c,s]_let_u__macron"],
-					"<^>!<+": ["lat_[c,s]_let_u__diaeresis"],
-					"<^>!<+>+": ["lat_[c,s]_let_u__tilde_above"],
-					">+": ["lat_[c,s]_let_u__grave"],
-					"<+>+": ["lat_[c,s]_let_u__grave_double"],
-					"<^>!<!<+>+": ["lat_[c,s]_let_u__acute_double"]
+					"<^>!": "lat_s_let_u_upsilon",
+					"<^>!<!": "lat_s_let_m_turned",
+					"<^>!<!<+": "lat_s_let_u__stroke_long"
 				},
 				"V": {
-					"<!": ["lat_[c,s]_let_v__common_hook"],
-					"<^>!": ["lat_[c,s]_let_v__solidus_long"],
-					"<^>!<!": ["lat_[c,s]_let_v__dot_below"],
-					"<^>!<+": ["lat_[c,s]_let_v_middle_welsh"],
-					"<^>!>+": ["lat_[c,s]_let_v_vend"],
-					"<^>!<+>+": ["lat_[c,s]_let_v__tilde_above"]
+					"<^<!": "line_vertical[_below,]",
+					"<^<!<+": "line_vertical_double[_below,]",
+					"<^>!": "lat_s_let_v_turned"
 				},
-				"W": {"<!": ["lat_[c,s]_let_w__acute"],
-					"<^>!": ["lat_[c,s]_let_w__dot_above"],
-					"<^>!<!": ["lat_[c,s]_let_w__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_w__dot_below"],
-					"<^>!<+": ["lat_[c,s]_let_w__diaeresis"],
-					"<^>!>+": ["lat_[c,s]_let_w_wynn"],
-					"<^>!<!>+": ["lat_[c,s]_let_w_anglicana"],
-					">+": ["lat_[c,s]_let_w__grave"]
+				"W": {
+					"<^>!": "lat_s_let_w_turned",
+					"<^<!": "seagull_below"
 				},
 				"X": {
-					"<^>!": ["lat_[c,s]_let_x__dot_above"],
-					"<^>!<+": ["lat_[c,s]_let_x__diaeresis"],
-					"<^>!<!": ["lat_[c,s]_let_h_chi"]
+					"<^>!": "&ipa_s_let_h_chi"
 				},
 				"Y": {
-					"<!": ["lat_[c,s]_let_y__acute"],
-					"<^>!": ["lat_[c,s]_let_y__dot_above"],
-					"<^>!<!": ["lat_[c,s]_let_y__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_y_stroke_short"],
-					"<^>!<!>+": ["lat_[c,s]_let_y__loop"],
-					"<^>!>+": ["lat_[c,s]_let_y__macron"],
-					"<^>!<+": ["lat_[c,s]_let_y__diaeresis"],
-					"<^>!<+>+": ["lat_[c,s]_let_y__tilde_above"],
-					">+": ["lat_[c,s]_let_y__grave"]
+					"<^>!": "&ipa_k_let_y",
+					"<^>!<!": "lat_s_let_h_turned"
 				},
 				"Z": {
-					"<!": ["lat_[c,s]_let_z__acute"],
-					"<^>!": ["lat_[c,s]_let_z__dot_above"],
-					"<^>!<!": ["lat_[c,s]_let_z__circumflex"],
-					"<^>!<!<+": ["lat_[c,s]_let_z__caron"],
-					"<^>!<!>+": ["lat_[c,s]_let_z_visigothic"],
-					"<^>!>+": ["lat_[c,s]_let_z_ezh"],
-					"<^>!<+": ["lat_[c,s]_let_z__stroke_short"]
+					"<^>!": "lat_s_let_z_ezh"
 				},
-				"А": {
-					"<^>!": ["cyr_[c,s]_let_a__breve"],
-					"<^>!<!": ["cyr_[c,s]_let_a_schwa"],
-					"<^>!<!<+": ["cyr_[c,s]_let_a_schwa__diaeresis"],
-					"<^>!<+": ["cyr_[c,s]_let_a__diaeresis"]
+				"Semicolon": {
+					"<^>!": "colon_triangle_half"
 				},
-				"Б": {
-					"<^>!": ["quote_angle_left_double"],
-					"<^>!<+": ["quote_left_double_ghost_ru"],
-					"<^>!>+": ["quote_low_9_double"],
-					"<^>!<!": ["quote_left_double"],
-					"<^>!<!<+": ["quote_angle_left"],
-					"<^>!<+>+": ["quote_low_9"]
+				"Apostrophe": {
+					"<^>!": "&ipa_n_sym_stress_secondary"
 				},
-				"В": {
-					"<^>!": ["cyr_[c,s]_let_w"]
+				"Comma": {
+					">+": "&ipa_n_sym_light_aspiration"
 				},
-				"Г": {
-					"<!": ["cyr_[c,s]_let_g__acute"],
-					"<^>!": ["cyr_[c,s]_let_g__upturn"],
-					"<^>!<+": ["cyr_[c,s]_let_g__stroke_short"],
-					"<^>!<!": ["cyr_[c,s]_let_g__descender"],
-					"<^>!<!>+": ["cyr_[c,s]_let_g__middle_hook"]
-				},
-				"Д": {
-					"<^>!": ["cyr_[c,s]_let_de_komi"],
-					"<^>!>+": ["cyr_[c,s]_let_dje_komi"],
-					"<^>!<+": ["cyr_[c,s]_let_dzje_komi"],
-					"<^>!<!": ["cyr_[c,s]_lig_dzzhe"],
-					"<^>!<!<+": ["cyr_[c,s]_lig_dche"]
-				},
-				"Е": {
-					"<^>!": ["cyr_[c,s]_let_ye__breve"],
-					"<^>!<!": ["cyr_[c,s]_let_ye_yat"],
-					"<^>!<+": ["cyr_[c,s]_let_ye__diaeresis"],
-					">+": ["cyr_[c,s]_let_ye__grave"]
-				},
-				"Ё": {},
-				"Ж": {
-					"<^>!": ["cyr_[c,s]_let_zh__breve"],
-					"<^>!<+": ["cyr_[c,s]_let_zh__diaeresis"],
-					"<^>!>+": ["cyr_[c,s]_let_zh_dje"],
-					"<^>!<!": ["cyr_[c,s]_let_zh__descender"]
-				},
-				"З": {
-					"<^>!": ["cyr_[c,s]_let_z__descender"],
-					"<^>!>+": ["cyr_[c,s]_let_z_zemlya"],
-					"<^>!<+": ["cyr_[c,s]_let_z__diaeresis"],
-					"<^>!<!": ["cyr_[c,s]_let_z_dzelo"],
-					"<^>!<!>+": ["cyr_[c,s]_let_zje_komi"],
-					"<^>!<!<+": ["cyr_[c,s]_let_z_dze"]
-				},
-				"И": {
-					"<^>!": ["cyr_[c,s]_let_i_decimal"],
-					"<^>!<+": ["cyr_[c,s]_let_i__diaeresis"],
-					"<^>!>+": ["cyr_[c,s]_let_i__macron"],
-					"<^>!<!": ["cyr_[c,s]_let_i_izhitsa"],
-					"<!": ["cyr_[c,s]_let_i_iota"]
-				},
-				"Й": {
-					"<!": ["cyr_[c,s]_let_y_jota"],
-					"<^>!": ["cyr_[c,s]_let_i_decimal__diaeresis"],
-					"<^>!<+>+": ["cyr_[c,s]_let_i__breve__rtl_tail"]
-				},
-				"К": {
-					"<!": ["cyr_[c,s]_let_k__acute"],
-					"<^>!": ["cyr_[c,s]_let_k__descender"],
-					"<^>!<!": ["cyr_[c,s]_let_k_ksi"],
-					"<^>!<+": ["cyr_[c,s]_let_q_koppa"],
-					"<^>!>+": ["cyr_[c,s]_let_q"],
-					"<^>!<+>+": ["cyr_[c,s]_let_k__horizontal_element_left"],
-					"<^>!<!>+": ["cyr_[c,s]_let_k__common_hook"],
-					"<^>!<!<+": ["cyr_[c,s]_let_k__stroke_short"],
-					"<^>!<!<+>+": ["cyr_[c,s]_let_k__stroke_vertical"]
-				},
-				"Л": {
-					"<^>!": ["cyr_[c,s]_lig_lje"],
-					"<^>!<!": ["cyr_[c,s]_let_l__descender"],
-					"<^>!<+": ["cyr_[c,s]_let_l__common_hook"],
-					"<^>!>+": ["cyr_[c,s]_let_lje_komi"],
-					"<^>!<!>+": ["cyr_[c,s]_let_l__middle_hook"],
-					"<^>!<+>+": ["cyr_[c,s]_let_l__rtl_tail"],
-					"<^>!<!<+": ["cyr_[c,s]_let_l_palochka"]
-				},
-				"М": {
-					"<^>!<+>+": ["cyr_[c,s]_let_m__rtl_tail"]
-				},
-				"Н": {
-					"<^>!": ["cyr_[c,s]_lig_nje"],
-					"<^>!<!": ["cyr_[c,s]_let_n__descender"],
-					"<^>!<+": ["cyr_[c,s]_let_n__common_hook"],
-					"<^>!>+": ["cyr_[c,s]_let_n__left_hook"],
-					"<^>!<!<+": ["cyr_[c,s]_let_nje_komi"],
-					"<^>!<!>+": ["cyr_[c,s]_let_n__middle_hook"],
-					"<^>!<+>+": ["cyr_[c,s]_let_n__rtl_tail"]
-				},
-				"О": {
-					"<^>!": ["cyr_[c,s]_let_o_barred"],
-					"<^>!<!": ["cyr_[c,s]_let_o_omega"],
-					"<^>!<+": ["cyr_[c,s]_let_o__diaeresis"],
-					"<^>!<!<+>+": ["cyr_n_gly_o_multiocular"]
-				},
-				"П": {
-					"<^>!": ["cyr_[c,s]_let_p__descender"],
-					"<^>!<!": ["cyr_[c,s]_let_p_psi"],
-					"<^>!<!>+": ["cyr_[c,s]_let_p__middle_hook"]
-				},
-				"Р": {
-					"<^>!": ["wallet_rub"],
-					"<^>!>+": ["cyr_[c,s]_let_r__tick"]
-				},
-				"С": {
-					"<^>!": ["cyr_[c,s]_let_s__descender"],
-					"<^>!<!": ["cyr_[c,s]_let_sje_komi"]
-				},
-				"Т": {
-					"<^>!": ["cyr_[c,s]_lig_tje"],
-					"<^>!<+": ["cyr_[c,s]_let_tje_komi"],
-					"<^>!<!": ["cyr_[c,s]_let_t__descender"],
-					"<^>!<!>+": ["cyr_[c,s]_let_t__middle_hook"],
-					"<^>!>+": ["cyr_[c,s]_let_t_twe"]
-				},
-				"У": {
-					"<^>!": ["cyr_[c,s]_let_u__breve"],
-					"<^>!<!": ["cyr_[c,s]_let_yus_big"],
-					"<^>!<!>+": ["cyr_[c,s]_lig_yus_big_iotified"],
-					"<^>!<+": ["cyr_[c,s]_let_u__diaeresis"],
-					"<^>!>+": ["cyr_[c,s]_let_u__macron"],
-					"<!": ["cyr_[c,s]_lig_uk"]
-				},
-				"Ф": {
-					"<^>!": ["cyr_[c,s]_let_f_fita"]
-				},
-				"Х": {
-					"<^>!": ["cyr_[c,s]_let_h_shha"],
-					"<^>!<!": ["cyr_[c,s]_let_h__descender"],
-					"<^>!<+": ["cyr_[c,s]_let_h__common_hook"],
-					"<^>!>+": ["cyr_[c,s]_let_h_hwe"],
-					">+": ["left_bracket"],
-					"<+>+": ["left_brace"]
-				},
-				"Ц": {
-					"<!": ["cyr_[c,s]_let_zh_dzhe"],
-					"<^>!": ["cyr_[c,s]_let_ts_tswe"],
-					"<^>!<!": ["cyr_[c,s]_let_ts_reversed"]
-				},
-				"Ч": {
-					"<^>!": ["cyr_[c,s]_let_ch_tshe"],
-					"<^>!<+": ["cyr_[c,s]_let_ch__diaeresis"],
-					"<^>!>+": ["cyr_[c,s]_let_ch_abkhasian"],
-					"<^>!<+>+": ["cyr_[c,s]_let_ch_abkhasian__descender"],
-					"<^>!<!": ["cyr_[c,s]_let_ch__descender"],
-					"<^>!<!<+": ["cyr_[c,s]_let_ch_djerv"],
-					"<^>!<!>+": ["cyr_[c,s]_let_ch__stroke_vertical"]
-				},
-				"Ш": {
-					"<^>!": ["cyr_[c,s]_let_sh_shwe"]
-				},
-				"Щ": {
-					"<^>!": ["cyr_[c,s]_let_h_abkhasian"]
-				},
-				"Ъ": {
-					"<^>!": ["cyr_[c,s]_let_u_straight"],
-					"<^>!<+": ["cyr_[c,s]_let_u_straight__stroke_short"],
-					">+": ["right_bracket"],
-					"<+>+": ["right_brace"]
-				},
-				"Ы": {
-					"<^>!": ["cyr_[c,s]_dig_yeru_with_back_yer"],
-					"<^>!<!": ["cyr_[c,s]_let_y_yn"],
-					"<^>!<+": ["cyr_[c,s]_dig_yeru__diaeresis"]
-				},
-				"Ь": {
-					"<!": ["cyr_[c,s]_let_yus_blended"],
-					"<^>!": ["cyr_[c,s]_let_neutral_yer"],
-					"<^>!<!": ["cyr_[c,s]_let_semisoft_sign"]
-				},
-				"Э": {
-					"<^>!": ["cyr_[c,s]_let_ye_anchor"],
-					"<^>!<+": ["cyr_[c,s]_let_e__diaeresis"],
-					"<^>!<!": ["cyr_[c,s]_lig_ye_iotified"]
-				},
-				"Ю": {
-					"<^>!": ["quote_angle_right_double"],
-					"<^>!<+": ["quote_right_double_ghost_ru"],
-					"<^>!>+": ["quote_low_9_double_reversed"],
-					"<^>!<!": ["quote_right_double"],
-					"<^>!<!<+": ["quote_angle_right"]
-				},
-				"Я": {
-					"<!": ["cyr_[c,s]_let_yus_little_closed"],
-					"<^>!": ["cyr_[c,s]_let_yus_little"],
-					"<^>!>+": ["cyr_[c,s]_lig_yus_little_iotified"],
-					"<^>!<+": ["cyr_[c,s]_lig_a_iotified"],
-					"<^>!<+>+": ["cyr_[c,s]_lig_yus_little_closed_iotified"]
+				"Dot": {
+					">+": "&ipa_n_sym_ejective_consonant"
 				}
 			}
 		},
-		"Second Keys": {
-			"Flat": {},
+		"Deseret": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "deseret_[c,s]_let_a_short",
+				"B": "deseret_[c,s]_let_b_bee",
+				"C": "deseret_[c,s]_let_c_chee",
+				"D": "deseret_[c,s]_let_d_dee",
+				"E": "deseret_[c,s]_let_e_short",
+				"F": "deseret_[c,s]_let_f_ef",
+				"G": "deseret_[c,s]_let_g_gay",
+				"H": "deseret_[c,s]_let_h",
+				"I": "deseret_[c,s]_let_i_short",
+				"J": "deseret_[c,s]_let_j_jee",
+				"K": "deseret_[c,s]_let_k_kay",
+				"L": "deseret_[c,s]_let_l_el",
+				"M": "deseret_[c,s]_let_m_em",
+				"N": "deseret_[c,s]_let_n_en",
+				"O": "deseret_[c,s]_let_o_short",
+				"P": "deseret_[c,s]_let_p_pee",
+				"Q": "",
+				"R": "deseret_[c,s]_let_r_er",
+				"S": "deseret_[c,s]_let_s_es",
+				"T": "deseret_[c,s]_let_t_tee",
+				"U": "deseret_[c,s]_let_u_oo_short",
+				"V": "deseret_[c,s]_let_v_vee",
+				"W": "deseret_[c,s]_let_w_wu",
+				"X": "",
+				"Y": "deseret_[c,s]_let_y_yee",
+				"Z": "deseret_[c,s]_let_z_zee"
+			},
 			"Moded": {
-				"Comma": {
-					"<^<!": "comma_above_turned",
-					"<^<!<+": "comma_above_reversed",
-					"<^<!>+": "comma_above_right"
-				},
-				"Space": {
-					"<^>!>+": "emquad",
-					"<^>!<+": "enquad",
-					"<!": "emsp14"
-				},
 				"A": {
-					"<^<!": "asterisk_above",
-					"<^<!<+": "asterisk_below"
+					"<+": "deseret_[c,s]_let_a_long",
+					"<!": "deseret_[c,s]_let_a_ow",
+					"<^>!": "deseret_[c,s]_let_a_ah_short",
+					"<^>!<!": "deseret_[c,s]_let_a_ah_long"
 				},
-				"B": {
-					"<^<!": "bridge_above",
-					"<^<!<+": "bridge_below",
-					"<^<!<+>+": "bridge_inverted_below"
+				"D": {
+					"<!": "deseret_[c,s]_let_d_thee"
 				},
-				"C": {
-					"<^<!<+>+": "caron_below"
+				"E": {
+					"<+": "deseret_[c,s]_let_e_long"
 				},
-				"G": {
-					"<^<!": "grave_below"
+				"I": {
+					"<!": "deseret_[c,s]_let_i_ay",
+					"<^>!": "deseret_[c,s]_let_i_long"
 				},
-				"H": {
-					"<^<!": "palatal_hook",
-					"<^<!<+": "retroflex_hook"
+				"N": {
+					"<^>!": "deseret_[c,s]_let_n_eng"
 				},
 				"O": {
-					"<^<!": "overline",
-					"<^<!<+": "overline_double",
-					"<^<!>+": "low_line",
-					"<^<!<+>+": "low_line_double"
+					">+": "deseret_[c,s]_let_o_long",
+					"<^>!": "deseret_[c,s]_let_o_oi"
 				},
-				"R": {
-					"<^<!": "ring_below_double"
+				"U": {
+					"<^>!": "deseret_[c,s]_let_u_oo_long",
+					"<!": "deseret_[c,s]_let_г_ew"
+				},
+				"S": {
+					"<!": "deseret_[c,s]_let_s_esh"
 				},
 				"T": {
-					"<^<!": "tilde_not",
-					"<^<!<+": "tilde_vertical"
+					"<^>!": "deseret_[c,s]_let_t_eth"
 				},
-				"V": {
-					"<^<!": "line_vertical_below",
-					"<^<!<+": "line_vertical_double_below"
+				"Z": {
+					"<!": "deseret_[c,s]_let_z_zhee"
 				}
 			}
 		},
-		"Tertiary Keys": {
-			"Flat": {},
+		"Shavian": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "shavian_n_let_a_ash",
+				"B": "shavian_n_let_b_bib",
+				"C": "shavian_n_let_c_church",
+				"D": "shavian_n_let_d_dead",
+				"E": "shavian_n_let_e_egg",
+				"F": "shavian_n_let_f_fee",
+				"G": "shavian_n_let_g_gag",
+				"H": "shavian_n_let_h_ha_ha",
+				"I": "shavian_n_let_i_if",
+				"J": "shavian_n_let_j_judge",
+				"K": "shavian_n_let_k_kick",
+				"L": "shavian_n_let_l_loll",
+				"M": "shavian_n_let_m_mime",
+				"N": "shavian_n_let_n_nun",
+				"O": "shavian_n_let_o_on",
+				"P": "shavian_n_let_p_peep",
+				"Q": "",
+				"R": "shavian_n_let_r_roar",
+				"S": "shavian_n_let_s_so",
+				"T": "shavian_n_let_t_tot",
+				"U": "shavian_n_let_u_wool",
+				"V": "shavian_n_let_v_vow",
+				"W": "shavian_n_let_y_yea",
+				"X": "",
+				"Y": "shavian_n_let_w_woe",
+				"Z": "shavian_n_let_z_zoo"
+			},
 			"Moded": {
-				"C": {
-					"<^<!": "candrabindu"
+				"A": {
+					"<+": "shavian_n_let_a_up",
+					"<!": "shavian_n_let_a_ice",
+					"<^>!": "shavian_n_let_a_ado",
+					"<^>!>+": "shavian_n_let_a_ah",
+					"<^>!<!": "shavian_n_lig_are"
+				},
+				"D": {
+					"<!": "shavian_n_let_d_they"
+				},
+				"E": {
+					"<!": "shavian_n_let_e_age",
+					"<^>!<!": "shavian_n_lig_air",
+					"<^>!<!<+": "shavian_n_lig_err"
+				},
+				"I": {
+					"<^>!": "shavian_n_let_i_eat",
+					"<^>!<!": "shavian_n_lig_ian"
+				},
+				"J": {
+					"<^>!<!": "shavian_n_lig_yew"
+				},
+				"N": {
+					"<^>!": "shavian_n_let_n_hung"
+				},
+				"O": {
+					"<^>!": "shavian_n_let_o_oak",
+					"<^>!>+": "shavian_n_let_o_awe",
+					"<^>!<!": "shavian_n_lig_or"
+				},
+				"R": {
+					"<^>!<!": "shavian_n_lig_array",
+					"<^>!<!<+": "shavian_n_lig_ear"
+				},
+				"S": {
+					"<!": "shavian_n_let_s_sure"
+				},
+				"T": {
+					"<^>!": "shavian_n_let_t_thigh"
+				},
+				"U": {
+					"<^>!": "shavian_n_let_u_ooze"
+				},
+				"Z": {
+					"<!": "shavian_n_let_z_measure"
 				}
+			}
+		},
+		"Math": {
+			"ForceSingle": true,
+			"Flat": {
+				"D": "delta",
+				"E": "[not_an_,]element_of",
+				"I": "[contour_,]integral",
+				"N": "nabla",
+				"L": "",
+				"P": "n_ary_[co,]product",
+				"R": "square_root",
+				"S": "n_ary_summation",
+				"U": "[intersection,union]"
+			},
+			"Moded": {
+				"E": {
+					"<^>!": "[does_not_,]contains_as_member"
+				},
+				"P": {
+					"<^>!": "&math_pi_sign"
+				},
+				"U": {
+					"<^>!": "n_ary_[intersection,union]"
+				},
+				"Space": {
+					"<!": "medium_math_space"
+				},
+				"Comma": {
+					">+": "less_or_equals"
+				},
+				"Dot": {
+					">+": "greater_or_equals"
+				}
+			}
+		}
+	},
+	"Keyboard Default": {
+		"Flat": {
+			"0": "digit_0",
+			"1": "digit_1",
+			"2": "digit_2",
+			"3": "digit_3",
+			"4": "digit_4",
+			"5": "digit_5",
+			"6": "digit_6",
+			"7": "digit_7",
+			"8": "digit_8",
+			"9": "digit_9",
+			"Equals": ["equals"],
+			"HyphenMinus": ["hyphen_minus"],
+			"Dot": ["dot"],
+			"Comma": ["comma"],
+			"Slash": ["solidus"],
+			"Backslash": ["reverse_solidus"],
+			"Semicolon": ["semicolon"],
+			"Apostrophe": ["apostrophe"],
+			"LeftBracket": ["left_bracket"],
+			"RightBracket": ["right_bracket"],
+			"Tilde": ["grave_accent"],
+			"Равно": ["equals"],
+			"ДефисоМинус": ["hyphen_minus"],
+			"Точка": ["dot"],
+			"Запятая": ["comma"],
+			"Слэш": ["solidus"],
+			"ОбратныйСлэш": ["reverse_solidus"],
+			"Апостроф": ["apostrophe"],
+			"Тильда": ["grave_accent"],
+			"ЛеваяКВСкобка": ["left_bracket"],
+			"ПраваяКВСкобка": ["right_bracket"],
+			"A": ["lat_[c,s]_let_a"],
+			"B": ["lat_[c,s]_let_b"],
+			"C": ["lat_[c,s]_let_c"],
+			"D": ["lat_[c,s]_let_d"],
+			"E": ["lat_[c,s]_let_e"],
+			"F": ["lat_[c,s]_let_f"],
+			"G": ["lat_[c,s]_let_g"],
+			"H": ["lat_[c,s]_let_h"],
+			"I": ["lat_[c,s]_let_i"],
+			"J": ["lat_[c,s]_let_j"],
+			"K": ["lat_[c,s]_let_k"],
+			"L": ["lat_[c,s]_let_l"],
+			"M": ["lat_[c,s]_let_m"],
+			"N": ["lat_[c,s]_let_n"],
+			"O": ["lat_[c,s]_let_o"],
+			"P": ["lat_[c,s]_let_p"],
+			"Q": ["lat_[c,s]_let_q"],
+			"R": ["lat_[c,s]_let_r"],
+			"S": ["lat_[c,s]_let_s"],
+			"T": ["lat_[c,s]_let_t"],
+			"U": ["lat_[c,s]_let_u"],
+			"V": ["lat_[c,s]_let_v"],
+			"W": ["lat_[c,s]_let_w"],
+			"X": ["lat_[c,s]_let_x"],
+			"Y": ["lat_[c,s]_let_y"],
+			"Z": ["lat_[c,s]_let_z"],
+			"\u00DE": ["lat_[c,s]_let_t_thorn"], 
+			"\u01F7": ["lat_[c,s]_let_w_wynn"],
+			"\uA768": ["lat_[c,s]_let_v_vend"],
+			"\u01B7": ["lat_[c,s]_let_z_ezh"], 
+			"\u021C": ["lat_[c,s]_let_j_yogh"],
+			"\u1E9E": ["lat_[c,s]_lig_s_eszett"],
+			"\u0194": ["lat_[c,s]_let_g_gamma"],
+			"А": ["cyr_[c,s]_let_a"],
+			"Б": ["cyr_[c,s]_let_b"],
+			"В": ["cyr_[c,s]_let_v"],
+			"Г": ["cyr_[c,s]_let_g"],
+			"Д": ["cyr_[c,s]_let_d"],
+			"Е": ["cyr_[c,s]_let_ye"],
+			"Ё": ["cyr_[c,s]_let_ye__diaeresis"],
+			"Ж": ["cyr_[c,s]_let_zh"],
+			"З": ["cyr_[c,s]_let_z"],
+			"И": ["cyr_[c,s]_let_i"],
+			"Й": ["cyr_[c,s]_let_i__breve"],
+			"К": ["cyr_[c,s]_let_k"],
+			"Л": ["cyr_[c,s]_let_l"],
+			"М": ["cyr_[c,s]_let_m"],
+			"Н": ["cyr_[c,s]_let_n"],
+			"О": ["cyr_[c,s]_let_o"],
+			"П": ["cyr_[c,s]_let_p"],
+			"Р": ["cyr_[c,s]_let_r"],
+			"С": ["cyr_[c,s]_let_s"],
+			"Т": ["cyr_[c,s]_let_t"],
+			"У": ["cyr_[c,s]_let_u"],
+			"Ф": ["cyr_[c,s]_let_f"],
+			"Х": ["cyr_[c,s]_let_h"],
+			"Ц": ["cyr_[c,s]_let_ts"],
+			"Ч": ["cyr_[c,s]_let_ch"],
+			"Ш": ["cyr_[c,s]_let_sh"],
+			"Щ": ["cyr_[c,s]_let_shch"],
+			"Ъ": ["cyr_[c,s]_let_yer"],
+			"Ы": ["cyr_[c,s]_dig_yeru"],
+			"Ь": ["cyr_[c,s]_let_yeri"],
+			"Э": ["cyr_[c,s]_let_e"],
+			"Ю": ["cyr_[c,s]_let_yu"],
+			"Я": ["cyr_[c,s]_let_ya"],
+			"\u0406": ["cyr_[c,s]_let_i_decimal"],
+			"\u0462": ["cyr_[c,s]_let_ye_yat"],
+			"\u046A": ["cyr_[c,s]_let_yus_big"],
+			"\u0466": ["cyr_[c,s]_let_yus_little"],
+			"\u0470": ["cyr_[c,s]_let_p_psi"],
+			"\u046E": ["cyr_[c,s]_let_k_ksi"],
+			"\u0460": ["cyr_[c,s]_let_o_omega"], 
+			"\u0472": ["cyr_[c,s]_let_f_fita"], 
+			"\u051C": ["cyr_[c,s]_let_w"],
+			"\u051A": ["cyr_[c,s]_let_q"],
+			"\uA65E": ["cyr_[c,s]_let_y_yn"]
+		},
+		"Moded": {
+			"1": {"+": "exclamation"},
+			"2": {"+:LangFlat": ["commercial_at", "quote"]},
+			"3": {"+:LangFlat": ["number_sign", "numero_sign"]},
+			"4": {"+:LangFlat": ["wallet_dollar", "semicolon"]},
+			"5": {"+": "percent"},
+			"6": {"+:LangFlat": ["circumflex_accent", "colon"]},
+			"7": {"+:LangFlat": ["lat_s_lig_et", "question"]},
+			"8": {"+": "asterisk"},
+			"9": {"+": "left_parenthesis"},
+			"0": {"+": "right_parenthesis"},
+			"Equals": {"+": ["plus"]},
+			"HyphenMinus": {"+": ["underscore"]},
+			"Slash": {"+": ["question"]},
+			"Backslash": {"+": ["vertical_line"]},
+			"Semicolon": {"+": ["colon"]},
+			"Apostrophe": {"+": ["quote"]},
+			"Tilde": {"+": ["tilde"]},
+			"LeftBracket": {"+": ["left_brace"]},
+			"RightBracket": {"+": ["right_brace"]},
+			"Равно": {"+": ["plus"]},
+			"ДефисоМинус": {"+": ["underscore"]},
+			"Точка": {
+				"+": ["comma"]
+			},
+			"Ь": {
+				"<!": ["cyr_[c,s]_let_yer"]
+			},
+			"Запятая": {"+": ["question"]},
+			"ОбратныйСлэш": {"+": ["solidus"]}
+		}
+	},
+	"Roman Digits": {
+		"Flat": {
+			"1:Caps": ["lat_[c,s]_num_1"],
+			"2:Caps": ["lat_[c,s]_num_2"],
+			"3:Caps": ["lat_[c,s]_num_3"],
+			"4:Caps": ["lat_[c,s]_num_4"],
+			"5:Caps": ["lat_[c,s]_num_5"],
+			"6:Caps": ["lat_[c,s]_num_6"],
+			"7:Caps": ["lat_[c,s]_num_7"],
+			"8:Caps": ["lat_[c,s]_num_8"],
+			"9:Caps": ["lat_[c,s]_num_9"],
+			"0:Caps": ["lat_[c,s]_num_10"]
+		},
+		"Moded": {
+			"1": {"<+:Caps": ["lat_[c,s]_num_11"]},
+			"2": {"<+:Caps": ["lat_[c,s]_num_12"]},
+			"5": {
+				"<+:Caps": ["lat_[c,s]_num_50"],
+				">+:Caps": ["lat_[c,s]_num_500"],
+				"<^>!": "lat_c_num_5000",
+				"<^>!>+": "lat_c_num_50000",
+				"<^>!<!": "lat_c_num_50_early"
+			},
+			"6": {"<^>!<!": "lat_c_num_6_late"},
+			"0": {
+				">+:Caps": ["lat_[c,s]_num_100"],
+				"<^>!:Caps": ["lat_[c,s]_num_1000"],
+				"<^>!>+": "lat_c_num_10000",
+				"<^>!<+": "lat_c_num_100000"
+			}
+		}
+	},
+	"Subscript Digits": {
+		"Flat": {
+			"0:Caps": ["digit_0::[superscript,subscript]"],
+			"1:Caps": ["digit_1::[superscript,subscript]"],
+			"2:Caps": ["digit_2::[superscript,subscript]"],
+			"3:Caps": ["digit_3::[superscript,subscript]"],
+			"4:Caps": ["digit_4::[superscript,subscript]"],
+			"5:Caps": ["digit_5::[superscript,subscript]"],
+			"6:Caps": ["digit_6::[superscript,subscript]"],
+			"7:Caps": ["digit_7::[superscript,subscript]"],
+			"8:Caps": ["digit_8::[superscript,subscript]"],
+			"9:Caps": ["digit_9::[superscript,subscript]"],
+			"Equals:Caps": ["equals::[superscript,subscript]"],
+			"HyphenMinus:Caps": ["minus::[superscript,subscript]"]
+		},
+		"Moded": {
+			"9": {"+:Caps": ["left_parenthesis::[superscript,subscript]"]},
+			"0": {"+:Caps": ["right_parenthesis::[superscript,subscript]"]},
+			"Equals": {"+:Caps": ["plus::[superscript,subscript]"]}
+		}
+	},
+	"Superscript Digits": {
+		"Flat": {
+			"0:Caps": ["digit_0::[subscript,superscript]"],
+			"1:Caps": ["digit_1::[subscript,superscript]"],
+			"2:Caps": ["digit_2::[subscript,superscript]"],
+			"3:Caps": ["digit_3::[subscript,superscript]"],
+			"4:Caps": ["digit_4::[subscript,superscript]"],
+			"5:Caps": ["digit_5::[subscript,superscript]"],
+			"6:Caps": ["digit_6::[subscript,superscript]"],
+			"7:Caps": ["digit_7::[subscript,superscript]"],
+			"8:Caps": ["digit_8::[subscript,superscript]"],
+			"9:Caps": ["digit_9::[subscript,superscript]"],
+			"Equals:Caps": ["equals::[subscript,superscript]"],
+			"HyphenMinus:Caps": ["minus::[subscript,superscript]"]
+		},
+		"Moded": {
+			"9": {"+:Caps": ["left_parenthesis::[subscript,superscript]"]},
+			"0": {"+:Caps": ["right_parenthesis::[subscript,superscript]"]},
+			"Equals": {"+:Caps": ["plus::[subscript,superscript]"]}
+		}
+	},
+	"Diacritic": {
+		"Flat": {},
+		"Moded": {
+			"6": {
+				"<^<!:Caps": ["breve_[below,inverted]_double"]
+			},
+			"A": {
+				"<^<!": "acute",
+				"<^<!<+": "acute_double",
+				"<^<!>+": "acute_below"
+			},
+			"B": {
+				"<^<!": "breve",
+				"<^<!<+": "breve_inverted",
+				"<^<!>+": "breve_below",
+				"<^<!<+>+": "breve_inverted_below"
+			},
+			"C": {
+				"<^<!": "circumflex",
+				"<^<!<+": "caron",
+				"<^<!>+": "cedilla",
+				"<^<!<+>+": "circumflex_below"
+			},
+			"D": {
+				"<^<!": "dot_above",
+				"<^<!<+": "diaeresis",
+				"<^<!>+": "dot_below",
+				"<^<!<+>+": "diaeresis_below"
+			},
+			"F": {
+				"<^<!": "fermata"
+			},
+			"G": {
+				"<^<!": "grave",
+				"<^<!<+": "grave_double"
+			},
+			"H": {
+				"<^<!": "hook_above",
+				"<^<!<+": "horn"
+			},
+			"M": {
+				"<^<!": "macron",
+				"<^<!<+": "macron_below"
+			},
+			"N": {},
+			"O": {
+				"<^<!": "ogonek",
+				"<^<!<+": "ogonek_above"
+			},
+			"R": {
+				"<^<!": "ring_above",
+				"<^<!<+": "ring_below"
+			},
+			"S": {
+				"<^<!": "stroke_short",
+				"<^<!<+": "stroke_long"
+			},
+			"T": {
+				"<^<!": "tilde_above",
+				"<^<!<+": "tilde_overlay",
+				"<^<!<+>+": "tilde_below",
+				"<^<!>+": "tilde_overlay"
+			},
+			"V": {
+				"<^<!": "line_vertical",
+				"<^<!<+": "line_vertical_double"
+			},
+			"X": {
+				"<^<!": "x_above",
+				"<^<!<+": "x_below"
+			},
+			"Z": {
+				"<^<!": "zigzag_above"
+			},
+			"Slash": {
+				"<^<!": "solidus_short",
+				"<^<!<+": "solidus_long"
+			},
+			"Comma": {
+				"<^<!": "comma_above",
+				"<^<!<+": "comma_below"
+			},
+			"Dot": {
+				"<^<!": "dot_above",
+				"<^<!<+": "diaeresis"
+			},
+			"0": {
+				"<^<!": "millions_sign"
+			},
+			"Й": {
+				"<^<!": "dasia_pneumata",
+				"<^<!<+": "psili_pneumata"
+			},
+			"У": {
+				"<^<!": "titlo",
+				"<^<!<+": "vzmet"
+			},
+			"Ц": {
+				"<^<!": "pokrytie",
+				"<^<!<+": "payerok",
+				"<^<!>+": "palatalization"
+			}
+		}
+	},
+	"Important": {
+		"Flat": {
+			"RAlt": "%(*) => globalInstances.crafter.ComposeActivate()%"
+		},
+		"Moded": {
+			"F1": {
+				"<^>!": "%(*) => KbdBinder.ToggleDefaultMode()%",
+				"<^>!>+": "%(*) => Options.ToggleInputMode()%",
+				"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Second Keys')%"
+			},
+			"F2": {
+				"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Tertiary Keys')%",
+				"<^>!": "%(*) => Scripter.ToggleSelectedOption(\"Tieng Viet\", \"TELEX\")%",
+				"<^>!>+": "%(*) => Scripter.ToggleSelectedOption(\"HanYu PinYin\", \"TELEX\")%"
+			},
+			"F8": {
+				"<^>!": "%(*) => GREPTypography.SetStyles()%"
+			},
+			"F9": {
+				">^": "%(*) => Cfg.Editor()%",
+				"<^>!": "%(*) => GREPTypography.SetStyles('Paragraphs')%"
+			},
+			"Up": {
+				"<#<!": "%(*) => KbdBinder.ToggleNumStyle('Superscript')%",
+				"<#<!>+": "%(*) => KbdBinder.ToggleNumStyle('Roman')%"
+			},
+			"Down": {
+				"<#<!": "%(*) => KbdBinder.ToggleNumStyle('Subscript')%"
+			},
+			"PgUp": {
+				"<#<!": "%(*) => UnicodeWebResource()%"
+			},
+			"Home": {
+				"<#<!": "%(*) => globalInstances.MainGUI.Show()%"
+			},
+			"2": {
+				"<!": "%FuncBindStore.Get('ToQuote')%"
+			},
+			"A": {
+				"<#<!": "%(*) => Scripter.SelectorPanel('Glyph Variations')%"
+			},
+			"D": {
+				"<#<!": "%(*) => Scripter.SelectorPanel('TELEX')%"
+			},
+			"S": {
+				"<#<!": "%(*) => Scripter.SelectorPanel()%"
+			},
+			"F": {
+				"<#<!": "%(*) => Search()%"
+			},
+			"H": {
+				">^": "%(*) => Util.StrSelToConvert('Entities')%",
+				"<^>^": "%(*) => Util.StrSelToConvert('Hex')%"
+			},
+			"J": {
+				">^": "%(*) => Util.StrSelToConvert('Entities', true)%"
+			},
+			"Backslash": {
+				">^": "%(*) => Util.URLEncoder()%",
+				"<^>^": "%(*) => Util.URLEncoder('decode')%"
+			},
+			"Comma": {
+				"<#<!": "%(*) => GetKeyScanCode()%"
+			},
+			"Y": {
+				">^": "%(*) => Util.StrSelToUnicode('CSS')%"
+			},
+			"U": {
+				">^": "%(*) => Util.StrSelToUnicode()%"
+			},
+			"I": {
+				">^": "%(*) => Util.StrSelToUnicode('Hex')%"
+			}
+		}
+	},
+	"Common": {
+		"Flat": {
+		},
+		"Moded": {
+			"NumpadMult": {
+				"<^>!": "asterisk_two",
+				"<^>!>+": "asterism",
+				"<^>!<+": "asterisk_low"
+			},
+			"NumpadDiv": {
+				"<^>!": "dagger",
+				"<^>!>+": "dagger_double",
+				"<^>!<!": "dagger_tripple",
+				"<^<!": "asterisk_operator",
+				"<^<!<+": "bullet_operator"
+			},
+			"Left": {
+				"<^>!<+": "arrow_left_ushaped",
+				"<^>!>+": "arrow_left_circle"
+			},
+			"Right": {
+				"<^>!<+": "arrow_right_ushaped",
+				"<^>!>+": "arrow_right_circle"
+			},
+			"Up": {
+				"<^>!<+": "arrow_up_ushaped"
+			},
+			"Down": {
+				"<^>!<+": "arrow_down_ushaped"
+			},
+			"1": {
+				"<!": "section",
+				"<^>!": "inverted_exclamation",
+				"<^>!<+": "double_exclamation_question",
+				"<^>!>+": "double_exclamation",
+				"<+>+": "medieval_exclamation",
+				">+:Caps": "interrobang[_inverted,]"
+			},
+			"2": {
+				"<^>!:Caps": ["registered", "copyright"],
+				"<^>!<+:Caps": ["servicemark", "trademark"],
+				"<^>!>+": "sound_recording_copyright",
+				"<^>!<!:Caps": "[facsimile,telephone]_sign",
+				">+:LangFlat": "[quote,commercial_at]"
+			},
+			"3": {
+				"<^>!:Caps": ["prime_single[_reversed,]"],
+				"<^>!>+:Caps": ["prime_double[_reversed,]"],
+				"<^>!<+:Caps": ["prime_triple[_reversed,]"],
+				"<^>!<+>+": "prime_quadruple",
+				">+:LangFlat": "[numero_sign,number_sign]"
+			},
+			"4": {
+				"<^>!:Caps": "wallet_[franc,eur]",
+				"<^>!<+:Caps": "wallet_[won,yen]",
+				"<^>!>+:Caps": "wallet_[austral,hryvnia]",
+				"<^>!<+>+:Caps": "wallet_[philippine_peso,new_sheqel]",
+				"<^>!<!:Caps": "wallet_[mongol_tugrik,qazaq_tenge]",
+				"<^>!<!<+:Caps": "wallet_[,turkish_]lira",
+				"<^>!<!>+:Caps": "wallet_[viet_dong,rupee]",
+				"<!:Caps": "wallet_[cent,pound]",
+				"<+>+": "wallet_sign",
+				">+:LangFlat": "[semicolon,wallet_dollar]"
+			},
+			"5": {"<^>!": "permille", "<^>!<+": "pertenthousand"},
+			"6": {
+				"<^>!": "division",
+				">+:LangFlat": "[colon,circumflex_accent]"
+			},
+			"7": {
+				"<^>!": "inverted_question",
+				"<^>!>+": "double_question",
+				"<^>!<+": "double_question_exclamation",
+				"<^>!<!": "reversed_question",
+				"<+>+": "medieval_question",
+				">+:LangFlat": "[question,lat_s_lig_et]"
+			},
+			"8": {
+				"<^>!": "multiplication",
+				"<^>!<!": "infinity"
+			},
+			"9": {
+				"<^>!": "left_chevron",
+				"<!": "left_bracket",
+				"<!<+": "left_brace"
+			},
+			"0": {
+				"<^>!": "right_chevron",
+				"<^>!<!": "large_circle",
+				"<!": "right_bracket",
+				"<!<+": "right_brace"
+			},
+			"Equals": {
+				"<^>!": ["noequals"],
+				"<^>!<!": ["almostequals"],
+				"<^>!<+": ["plusminus"]
+			},
+			"HyphenMinus": {
+				"<^>!>+": ["hyphenation_point"],
+				"<^<!": ["softhyphen"],
+				"<^<!<+": ["minus"],
+				"<^>!": ["emdash"],
+				"<^>!<+": ["endash"],
+				"<!:Caps": ["two_emdash", "three_emdash"],
+				"<^>!<!": ["hyphen"],
+				"<^>!<!<+": ["no_break_hyphen"],
+				"<^>!<!>+": ["figure_dash"]
+			},
+			"LeftBracket": {
+				"<^>!<!": ["left_cjk_tortoise_shell"],
+				"<^>!<!<+": ["left_cjk_corner_bracket"],
+				"<^>!<!>+": ["left_cjk_title_bracket"],
+				"<^>!<!<+>+": ["left_double_cjk_title_bracket"],
+				"<^>!": ["left_bracket_with_quill"],
+				"<^>!>+": ["left_white_bracket"],
+				"<^>!<+": ["left_white_tortoise_shell"]
+			},
+			"RightBracket": {
+				"<^>!<!": ["right_cjk_tortoise_shell"],
+				"<^>!<!<+": ["right_cjk_corner_bracket"],
+				"<^>!<!>+": ["right_cjk_title_bracket"],
+				"<^>!<!<+>+": ["right_double_cjk_title_bracket"],
+				"<^>!": ["right_bracket_with_quill"],
+				"<^>!>+": ["right_white_bracket"],
+				"<^>!<+": ["right_white_tortoise_shell"]
+			},
+			"Slash": {
+				"<^>!": "ellipsis",
+				"<^>!<+": "tricolon",
+				"<^>!<+>+": "quartocolon",
+				"<!": "two_dot_punctuation",
+				"<^>!>+": "fraction_slash"
+			},
+			"Backslash": {
+				"<^>!": "grapheme_joiner",
+				"<^<!": "dotted_circle",
+				"<^>!<+": "empty_set",
+				">+": "vertical_line"
+			},
+			"Semicolon": {
+				"<^>!": ["semicolon_[turned,reversed]"]
+			},
+			"Comma": {
+				"<^>!": ["quote_left_double"],
+				"<^>!<+": ["quote_left"],
+				"<^>!>+": ["quote_low_9_double"],
+				"<^>!<+>+": ["quote_low_9"],
+				"<^>!<!": ["quote_angle_left_double"],
+				"<^>!<!<+": ["quote_angle_left"],
+				">+": "medieval_comma"
+			},
+			"Dot": {
+				"<^>!": ["quote_right_double"],
+				"<^>!<+": ["quote_right"],
+				"<^>!>+": ["quote_low_9_double_reversed"],
+				"<^>!<!": ["quote_angle_right_double"],
+				"<^>!<!<+": ["quote_angle_right"]
+			},
+			"Tilde": {
+				"<^>!": "bullet",
+				"<^>!<!": "bullet_hyphen",
+				"<^>!<+": "interpunct",
+				"<^>!>+": "quote_right",
+				"<^>!<!<+": "bullet_triangle",
+				"<^>!<!>+": "bullet_white",
+				">+": "tilde_reversed"
+			},
+			"Apostrophe": {
+				"<^>!": ["lat_[c,s]_let_a_saltillo"]
+			},
+			"Space": {
+				"<^>!": "no_break_space",
+				"<^>!>+": "emsp",
+				"<^>!<+": "ensp",
+				"<^>!<+>+": "figure_space",
+				"<^>!<!": "thinspace",
+				"<^>!<!<+": "hairspace",
+				"<^>!<!>+": "punctuation_space",
+				"<!": "emsp13",
+				"<^>!>^": "zero_width_space",
+				"<^<!": "zero_width_no_break_space",
+				">+": "emsp16",
+				"<+>+": "narrow_no_break_space"
+			},
+			"Enter": {
+				"<^>!": "misc_crlf_emspace",
+				"<^>!<+": "misc_lf_emspace"
+			},
+			"Tab": {
+				"<^>!": "zero_width_joiner",
+				"<^>!>+": "zero_width_non_joiner",
+				"<^>!<+": "word_joiner"
+			},
+			"ДефисоМинус": {
+				"<^>!>+": ["hyphenation_point"],
+				"<^<!": ["softhyphen"],
+				">+": ["minus"],
+				"<^>!": ["emdash"],
+				"<^>!<+": ["endash"],
+				"<!:Caps": ["two_emdash", "three_emdash"],
+				"<^>!<!": ["hyphen"],
+				"<^>!<!<+": ["no_break_hyphen"],
+				"<^>!<!>+": ["figure_dash"]
+			},
+			"Равно": {
+				"<^>!": ["noequals"],
+				"<^>!<!": ["almostequals"],
+				"<^>!<+": ["plusminus"]
+			},
+			"A": {
+				"<!": ["lat_[c,s]_let_a__acute"],
+				"<^>!": ["lat_[c,s]_let_a__breve"],
+				"<^>!<!": ["lat_[c,s]_let_a__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_a__ring_above"],
+				"<^>!<!>+": ["lat_[c,s]_let_a__ogonek"],
+				"<^>!>+": ["lat_[c,s]_let_a__macron"],
+				"<^>!<+": ["lat_[c,s]_let_a__diaeresis"],
+				"<^>!<+>+": ["lat_[c,s]_let_a__tilde_above"],
+				">+": ["lat_[c,s]_let_a__grave"],
+				"<+>+": ["lat_[c,s]_let_a__grave_double"]
+			},
+			"B": {
+				"<^>!": ["lat_[c,s]_let_b__dot_above"],
+				"<^>!<!": ["lat_[c,s]_let_b__dot_below"],
+				"<^>!<!<+": ["lat_[c,s]_let_b__flourish"],
+				"<^>!<+": ["lat_[c,s]_let_b__stroke_short"],
+				"<^>!>+": ["lat_[c,s]_let_b__common_hook"],
+				"<^>!<+>+": ["lat_[c,s]_let_b__topbar"]
+			},
+			"C": {"<!": ["lat_[c,s]_let_c__acute"],
+				"<^>!": ["lat_[c,s]_let_c__dot_above"],
+				"<^>!<!": ["lat_[c,s]_let_c__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_c__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_c__cedilla"],
+				">+": "celsius"
+			},
+			"D": {
+				"<!:Caps": "[angle,degree]",
+				"<^>!": ["lat_[c,s]_let_d_eth"],
+				"<^>!<!": ["lat_[c,s]_let_d__stroke_short"],
+				"<^>!>+": ["lat_[c,s]_let_d_afrikan"],
+				"<^>!<!<+": ["lat_[c,s]_let_d__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_d__cedilla"],
+				"<^>!<+>+": ["lat_[c,s]_let_d__circumflex_below"]},
+			"E": {
+				"<!": ["lat_[c,s]_let_e__acute"],
+				"<^>!": ["lat_[c,s]_let_a_schwa"],
+				"<^>!<!": ["lat_[c,s]_let_e__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_e__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_e__ogonek"],
+				"<^>!<!<+>+": ["lat_[c,s]_let_e_epsilon"],
+				"<^>!>+": ["lat_[c,s]_let_e__macron"],
+				"<^>!<+": ["lat_[c,s]_let_e__diaeresis"],
+				"<^>!<+>+": ["lat_[c,s]_let_e__tilde_above"],
+				">+": ["lat_[c,s]_let_e__grave"],
+				"<+>+": ["lat_[c,s]_let_e__grave_double"]
+			},
+			"F": {
+				"<^>!": ["lat_[c,s]_let_f__dot_above"],
+				"<^>!<!": ["lat_s_let_f_phi"],
+				"<^>!>+": ["lat_[c,s]_let_f__common_hook"],
+				"<^>!<+": ["lat_[c,s]_let_f__stroke_short"],
+				">+": "fahrenheit"},
+			"G": {
+				"<!": ["lat_[c,s]_let_g__acute"],
+				"<^>!": ["lat_[c,s]_let_g__breve"],
+				"<^>!<!": ["lat_[c,s]_let_g__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_g__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_g__cedilla"],
+				"<^>!<+": ["lat_[c,s]_let_g_insular"],
+				"<^>!>+": ["lat_[c,s]_let_g__macron"],
+				"<^>!<+>+": ["lat_[c,s]_let_g_gamma"],
+				">+": ["lat_[c,s]_let_g__dot_above"]
+			},
+			"H": {
+				"<!": ["lat_[c,s]_let_h_hwair"],
+				"<^>!": ["lat_[c,s]_let_h__stroke_short"],
+				"<^>!<!": ["lat_[c,s]_let_h__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_h__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_h__cedilla"],
+				"<^>!<+": ["lat_[c,s]_let_h__diaeresis"]
+			},
+			"I": {
+				"<!": ["lat_[c,s]_let_i__acute"],
+				"<^>!": ["lat_[c,s]_let_i__breve"],
+				"<^>!<!": ["lat_[c,s]_let_i__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_i__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_i__ogonek"],
+				"<^>!>+": ["lat_[c,s]_let_i__macron"],
+				"<^>!<+": ["lat_[c,s]_let_i__diaeresis"],
+				"<^>!<+>+": ["lat_[c,s]_let_i__tilde_above"],
+				">+": ["lat_[c,s]_let_i__grave"],
+				"<+>+": ["lat_[c,s]_let_i__grave_double"],
+				"<^>!<!<+>+": ["lat_[c,s]_let_i_[_dot_above,dotless]"]
+			},
+			"J": {
+				"<^>!": ["lat_[c,s]_let_j__stroke_short"],
+				"<^>!>+": ["lat_[c,s]_let_j_yogh"],
+				"<^>!<!": ["lat_[c,s]_let_j__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_j__caron"]
+			},
+			"K": {
+				"<!": ["lat_[c,s]_let_k__acute"],
+				"<^>!<!": ["lat_[c,s]_let_k__dot_below"],
+				"<^>!<!<+": ["lat_[c,s]_let_k__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_k__cedilla"],
+				"<^>!<+": ["lat_[c,s]_let_k_cuatrillo"],
+				">+": "kelvin"
+			},
+			"L": {
+				"<!": ["lat_[c,s]_let_l__acute"],
+				"<^>!": ["lat_[c,s]_let_l__solidus_short"],
+				"<^>!<!<+": ["lat_[c,s]_let_l__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_l__cedilla"],
+				"<^>!<+>+": ["lat_[c,s]_let_l__circumflex_below"]
+			},
+			"M": {
+				"<!": ["lat_[c,s]_let_m__acute"],
+				"<^>!": ["lat_[c,s]_let_m__dot_above"],
+				"<^>!<!": ["lat_[c,s]_let_m__dot_below"],
+				"<^>!>+": ["lat_[c,s]_let_m__common_hook"],
+				"<^>!<+": ["lat_c_let_m_epigraphic_archaic"]
+			},
+			"N": {
+				"<!": ["lat_[c,s]_let_n__acute"],
+				"<^>!": ["lat_[c,s]_let_n__tilde_above"],
+				"<^>!<!": ["lat_[c,s]_let_n__dot_below"],
+				"<^>!<!<+": ["lat_[c,s]_let_n__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_n__cedilla"],
+				"<^>!>+": ["lat_[c,s]_let_n__common_hook"],
+				"<^>!<+": ["let_[c,s]_let_n__descender"],
+				"<^>!<+>+": ["lat_[c,s]_let_n__dot_above"],
+				">+": ["lat_[c,s]_let_n__grave"]
+			},
+			"O": {
+				"<!": ["lat_[c,s]_let_o__acute"],
+				"<^>!": ["lat_[c,s]_let_o__solidus_long"],
+				"<^>!<!": ["lat_[c,s]_let_o__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_o__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_o__ogonek"],
+				"<^>!>+": ["lat_[c,s]_let_o__macron"],
+				"<^>!<+": ["lat_[c,s]_let_o__diaeresis"],
+				"<^>!<+>+": ["lat_[c,s]_let_o__tilde_above"],
+				">+": ["lat_[c,s]_let_o__grave"],
+				"<+>+": ["lat_[c,s]_let_o__grave_double"],
+				"<^>!<!<+>+": ["lat_[c,s]_let_o__acute_double"]
+			},
+			"P": {
+				"<!": ["lat_[c,s]_let_p__acute"],
+				"<^>!": ["lat_[c,s]_let_p__dot_above"],
+				"<^>!<!": ["lat_[c,s]_let_p__squirrel_tail"],
+				"<^>!<!<+": ["lat_[c,s]_let_p__flourish"],
+				"<^>!<+": ["lat_[c,s]_let_p__stroke_short"],
+				"<^>!>+": ["lat_[c,s]_let_p__common_hook"]},
+			"Q": {
+				"<^>!": ["lat_[c,s]_let_a_glottal_stop"],
+				"<^>!<+": ["lat_[c,s]_let_q_tresillo"],
+				"<^>!>+": ["lat_[c,s]_let_q__common_hook"]
+			},
+			"R": {
+				"<!": ["lat_[c,s]_let_r__acute"],
+				"<^>!": ["lat_[c,s]_let_r__dot_above"],
+				"<^>!<!": ["lat_[c,s]_let_r_dot_below"],
+				"<^>!<!<+": ["lat_[c,s]_let_r__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_r__cedilla"],
+				"<^>!<+": ["lat_[c,s]_let_yr"],
+				"<^>!>+": ["lat_[c,s]_let_r_rotunda"],
+				"<+>+": ["lat_[c,s]_let_r__grave_double"]
+			},
+			"S": {
+				"<!": ["lat_[c,s]_let_s__acute"],
+				"<^>!": ["lat_[c,s]_let_s__comma_below"],
+				"<^>!<!": ["lat_[c,s]_let_s__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_s__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_s__cedilla"],
+				"<^>!>+": ["lat_s_let_s_long"],
+				"<^>!<+>+": ["lat_[c,s]_let_s_sigma"],
+				"<^>!<+": ["lat_[c,s]_lig_s_eszett"]
+			},
+			"T": {
+				"<^>!": ["lat_[c,s]_let_t__comma_below"],
+				"<^>!<!": ["lat_[c,s]_let_t__dot_below"],
+				"<^>!<!<+": ["lat_[c,s]_let_t__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_t__cedilla"],
+				"<^>!>+": ["lat_[c,s]_let_t_thorn"],
+				"<^>!<+": ["lat_[c,s]_let_t__dot_above"],
+				"<^>!<+>+": ["lat_[c,s]_sign_et_tironian"]
+			},
+			"U": {
+				"<!": ["lat_[c,s]_let_u__acute"],
+				"<^>!": ["lat_[c,s]_let_u__breve"],
+				"<^>!<!": ["lat_[c,s]_let_u__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_u__ring_above"],
+				"<^>!<!>+": ["lat_[c,s]_let_u__ogonek"],
+				"<^>!>+": ["lat_[c,s]_let_u__macron"],
+				"<^>!<+": ["lat_[c,s]_let_u__diaeresis"],
+				"<^>!<+>+": ["lat_[c,s]_let_u__tilde_above"],
+				">+": ["lat_[c,s]_let_u__grave"],
+				"<+>+": ["lat_[c,s]_let_u__grave_double"],
+				"<^>!<!<+>+": ["lat_[c,s]_let_u__acute_double"]
+			},
+			"V": {
+				"<!": ["lat_[c,s]_let_v__common_hook"],
+				"<^>!": ["lat_[c,s]_let_v__solidus_long"],
+				"<^>!<!": ["lat_[c,s]_let_v__dot_below"],
+				"<^>!<+": ["lat_[c,s]_let_v_middle_welsh"],
+				"<^>!>+": ["lat_[c,s]_let_v_vend"],
+				"<^>!<+>+": ["lat_[c,s]_let_v__tilde_above"]
+			},
+			"W": {"<!": ["lat_[c,s]_let_w__acute"],
+				"<^>!": ["lat_[c,s]_let_w__dot_above"],
+				"<^>!<!": ["lat_[c,s]_let_w__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_w__dot_below"],
+				"<^>!<+": ["lat_[c,s]_let_w__diaeresis"],
+				"<^>!>+": ["lat_[c,s]_let_w_wynn"],
+				"<^>!<!>+": ["lat_[c,s]_let_w_anglicana"],
+				">+": ["lat_[c,s]_let_w__grave"]
+			},
+			"X": {
+				"<^>!": ["lat_[c,s]_let_x__dot_above"],
+				"<^>!<+": ["lat_[c,s]_let_x__diaeresis"],
+				"<^>!<!": ["lat_[c,s]_let_h_chi"]
+			},
+			"Y": {
+				"<!": ["lat_[c,s]_let_y__acute"],
+				"<^>!": ["lat_[c,s]_let_y__dot_above"],
+				"<^>!<!": ["lat_[c,s]_let_y__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_y_stroke_short"],
+				"<^>!<!>+": ["lat_[c,s]_let_y__loop"],
+				"<^>!>+": ["lat_[c,s]_let_y__macron"],
+				"<^>!<+": ["lat_[c,s]_let_y__diaeresis"],
+				"<^>!<+>+": ["lat_[c,s]_let_y__tilde_above"],
+				">+": ["lat_[c,s]_let_y__grave"]
+			},
+			"Z": {
+				"<!": ["lat_[c,s]_let_z__acute"],
+				"<^>!": ["lat_[c,s]_let_z__dot_above"],
+				"<^>!<!": ["lat_[c,s]_let_z__circumflex"],
+				"<^>!<!<+": ["lat_[c,s]_let_z__caron"],
+				"<^>!<!>+": ["lat_[c,s]_let_z_visigothic"],
+				"<^>!>+": ["lat_[c,s]_let_z_ezh"],
+				"<^>!<+": ["lat_[c,s]_let_z__stroke_short"]
+			},
+			"А": {
+				"<^>!": ["cyr_[c,s]_let_a__breve"],
+				"<^>!<!": ["cyr_[c,s]_let_a_schwa"],
+				"<^>!<!<+": ["cyr_[c,s]_let_a_schwa__diaeresis"],
+				"<^>!<+": ["cyr_[c,s]_let_a__diaeresis"]
+			},
+			"Б": {
+				"<^>!": ["quote_angle_left_double"],
+				"<^>!<+": ["quote_left_double_ghost_ru"],
+				"<^>!>+": ["quote_low_9_double"],
+				"<^>!<!": ["quote_left_double"],
+				"<^>!<!<+": ["quote_angle_left"],
+				"<^>!<+>+": ["quote_low_9"]
+			},
+			"В": {
+				"<^>!": ["cyr_[c,s]_let_w"]
+			},
+			"Г": {
+				"<!": ["cyr_[c,s]_let_g__acute"],
+				"<^>!": ["cyr_[c,s]_let_g__upturn"],
+				"<^>!<+": ["cyr_[c,s]_let_g__stroke_short"],
+				"<^>!<!": ["cyr_[c,s]_let_g__descender"],
+				"<^>!<!>+": ["cyr_[c,s]_let_g__middle_hook"]
+			},
+			"Д": {
+				"<^>!": ["cyr_[c,s]_let_de_komi"],
+				"<^>!>+": ["cyr_[c,s]_let_dje_komi"],
+				"<^>!<+": ["cyr_[c,s]_let_dzje_komi"],
+				"<^>!<!": ["cyr_[c,s]_lig_dzzhe"],
+				"<^>!<!<+": ["cyr_[c,s]_lig_dche"]
+			},
+			"Е": {
+				"<^>!": ["cyr_[c,s]_let_ye__breve"],
+				"<^>!<!": ["cyr_[c,s]_let_ye_yat"],
+				"<^>!<+": ["cyr_[c,s]_let_ye__diaeresis"],
+				">+": ["cyr_[c,s]_let_ye__grave"]
+			},
+			"Ё": {},
+			"Ж": {
+				"<^>!": ["cyr_[c,s]_let_zh__breve"],
+				"<^>!<+": ["cyr_[c,s]_let_zh__diaeresis"],
+				"<^>!>+": ["cyr_[c,s]_let_zh_dje"],
+				"<^>!<!": ["cyr_[c,s]_let_zh__descender"]
+			},
+			"З": {
+				"<^>!": ["cyr_[c,s]_let_z__descender"],
+				"<^>!>+": ["cyr_[c,s]_let_z_zemlya"],
+				"<^>!<+": ["cyr_[c,s]_let_z__diaeresis"],
+				"<^>!<!": ["cyr_[c,s]_let_z_dzelo"],
+				"<^>!<!>+": ["cyr_[c,s]_let_zje_komi"],
+				"<^>!<!<+": ["cyr_[c,s]_let_z_dze"]
+			},
+			"И": {
+				"<^>!": ["cyr_[c,s]_let_i_decimal"],
+				"<^>!<+": ["cyr_[c,s]_let_i__diaeresis"],
+				"<^>!>+": ["cyr_[c,s]_let_i__macron"],
+				"<^>!<!": ["cyr_[c,s]_let_i_izhitsa"],
+				"<!": ["cyr_[c,s]_let_i_iota"]
+			},
+			"Й": {
+				"<!": ["cyr_[c,s]_let_y_jota"],
+				"<^>!": ["cyr_[c,s]_let_i_decimal__diaeresis"],
+				"<^>!<+>+": ["cyr_[c,s]_let_i__breve__rtl_tail"]
+			},
+			"К": {
+				"<!": ["cyr_[c,s]_let_k__acute"],
+				"<^>!": ["cyr_[c,s]_let_k__descender"],
+				"<^>!<!": ["cyr_[c,s]_let_k_ksi"],
+				"<^>!<+": ["cyr_[c,s]_let_q_koppa"],
+				"<^>!>+": ["cyr_[c,s]_let_q"],
+				"<^>!<+>+": ["cyr_[c,s]_let_k__horizontal_element_left"],
+				"<^>!<!>+": ["cyr_[c,s]_let_k__common_hook"],
+				"<^>!<!<+": ["cyr_[c,s]_let_k__stroke_short"],
+				"<^>!<!<+>+": ["cyr_[c,s]_let_k__stroke_vertical"]
+			},
+			"Л": {
+				"<^>!": ["cyr_[c,s]_lig_lje"],
+				"<^>!<!": ["cyr_[c,s]_let_l__descender"],
+				"<^>!<+": ["cyr_[c,s]_let_l__common_hook"],
+				"<^>!>+": ["cyr_[c,s]_let_lje_komi"],
+				"<^>!<!>+": ["cyr_[c,s]_let_l__middle_hook"],
+				"<^>!<+>+": ["cyr_[c,s]_let_l__rtl_tail"],
+				"<^>!<!<+": ["cyr_[c,s]_let_l_palochka"]
+			},
+			"М": {
+				"<^>!<+>+": ["cyr_[c,s]_let_m__rtl_tail"]
+			},
+			"Н": {
+				"<^>!": ["cyr_[c,s]_lig_nje"],
+				"<^>!<!": ["cyr_[c,s]_let_n__descender"],
+				"<^>!<+": ["cyr_[c,s]_let_n__common_hook"],
+				"<^>!>+": ["cyr_[c,s]_let_n__left_hook"],
+				"<^>!<!<+": ["cyr_[c,s]_let_nje_komi"],
+				"<^>!<!>+": ["cyr_[c,s]_let_n__middle_hook"],
+				"<^>!<+>+": ["cyr_[c,s]_let_n__rtl_tail"]
+			},
+			"О": {
+				"<^>!": ["cyr_[c,s]_let_o_barred"],
+				"<^>!<!": ["cyr_[c,s]_let_o_omega"],
+				"<^>!<+": ["cyr_[c,s]_let_o__diaeresis"],
+				"<^>!<!<+>+": ["cyr_n_gly_o_multiocular"]
+			},
+			"П": {
+				"<^>!": ["cyr_[c,s]_let_p__descender"],
+				"<^>!<!": ["cyr_[c,s]_let_p_psi"],
+				"<^>!<!>+": ["cyr_[c,s]_let_p__middle_hook"]
+			},
+			"Р": {
+				"<^>!": ["wallet_rub"],
+				"<^>!>+": ["cyr_[c,s]_let_r__tick"]
+			},
+			"С": {
+				"<^>!": ["cyr_[c,s]_let_s__descender"],
+				"<^>!<!": ["cyr_[c,s]_let_sje_komi"]
+			},
+			"Т": {
+				"<^>!": ["cyr_[c,s]_lig_tje"],
+				"<^>!<+": ["cyr_[c,s]_let_tje_komi"],
+				"<^>!<!": ["cyr_[c,s]_let_t__descender"],
+				"<^>!<!>+": ["cyr_[c,s]_let_t__middle_hook"],
+				"<^>!>+": ["cyr_[c,s]_let_t_twe"]
+			},
+			"У": {
+				"<^>!": ["cyr_[c,s]_let_u__breve"],
+				"<^>!<!": ["cyr_[c,s]_let_yus_big"],
+				"<^>!<!>+": ["cyr_[c,s]_lig_yus_big_iotified"],
+				"<^>!<+": ["cyr_[c,s]_let_u__diaeresis"],
+				"<^>!>+": ["cyr_[c,s]_let_u__macron"],
+				"<!": ["cyr_[c,s]_lig_uk"]
+			},
+			"Ф": {
+				"<^>!": ["cyr_[c,s]_let_f_fita"]
+			},
+			"Х": {
+				"<^>!": ["cyr_[c,s]_let_h_shha"],
+				"<^>!<!": ["cyr_[c,s]_let_h__descender"],
+				"<^>!<+": ["cyr_[c,s]_let_h__common_hook"],
+				"<^>!>+": ["cyr_[c,s]_let_h_hwe"],
+				">+": ["left_bracket"],
+				"<+>+": ["left_brace"]
+			},
+			"Ц": {
+				"<!": ["cyr_[c,s]_let_zh_dzhe"],
+				"<^>!": ["cyr_[c,s]_let_ts_tswe"],
+				"<^>!<!": ["cyr_[c,s]_let_ts_reversed"]
+			},
+			"Ч": {
+				"<^>!": ["cyr_[c,s]_let_ch_tshe"],
+				"<^>!<+": ["cyr_[c,s]_let_ch__diaeresis"],
+				"<^>!>+": ["cyr_[c,s]_let_ch_abkhasian"],
+				"<^>!<+>+": ["cyr_[c,s]_let_ch_abkhasian__descender"],
+				"<^>!<!": ["cyr_[c,s]_let_ch__descender"],
+				"<^>!<!<+": ["cyr_[c,s]_let_ch_djerv"],
+				"<^>!<!>+": ["cyr_[c,s]_let_ch__stroke_vertical"]
+			},
+			"Ш": {
+				"<^>!": ["cyr_[c,s]_let_sh_shwe"]
+			},
+			"Щ": {
+				"<^>!": ["cyr_[c,s]_let_h_abkhasian"]
+			},
+			"Ъ": {
+				"<^>!": ["cyr_[c,s]_let_u_straight"],
+				"<^>!<+": ["cyr_[c,s]_let_u_straight__stroke_short"],
+				">+": ["right_bracket"],
+				"<+>+": ["right_brace"]
+			},
+			"Ы": {
+				"<^>!": ["cyr_[c,s]_dig_yeru_with_back_yer"],
+				"<^>!<!": ["cyr_[c,s]_let_y_yn"],
+				"<^>!<+": ["cyr_[c,s]_dig_yeru__diaeresis"]
+			},
+			"Ь": {
+				"<!": ["cyr_[c,s]_let_yus_blended"],
+				"<^>!": ["cyr_[c,s]_let_neutral_yer"],
+				"<^>!<!": ["cyr_[c,s]_let_semisoft_sign"]
+			},
+			"Э": {
+				"<^>!": ["cyr_[c,s]_let_ye_anchor"],
+				"<^>!<+": ["cyr_[c,s]_let_e__diaeresis"],
+				"<^>!<!": ["cyr_[c,s]_lig_ye_iotified"]
+			},
+			"Ю": {
+				"<^>!": ["quote_angle_right_double"],
+				"<^>!<+": ["quote_right_double_ghost_ru"],
+				"<^>!>+": ["quote_low_9_double_reversed"],
+				"<^>!<!": ["quote_right_double"],
+				"<^>!<!<+": ["quote_angle_right"]
+			},
+			"Я": {
+				"<!": ["cyr_[c,s]_let_yus_little_closed"],
+				"<^>!": ["cyr_[c,s]_let_yus_little"],
+				"<^>!>+": ["cyr_[c,s]_lig_yus_little_iotified"],
+				"<^>!<+": ["cyr_[c,s]_lig_a_iotified"],
+				"<^>!<+>+": ["cyr_[c,s]_lig_yus_little_closed_iotified"]
+			}
+		}
+	},
+	"Second Keys": {
+		"Flat": {},
+		"Moded": {
+			"Comma": {
+				"<^<!": "comma_above_turned",
+				"<^<!<+": "comma_above_reversed",
+				"<^<!>+": "comma_above_right"
+			},
+			"Space": {
+				"<^>!>+": "emquad",
+				"<^>!<+": "enquad",
+				"<!": "emsp14"
+			},
+			"A": {
+				"<^<!": "asterisk_above",
+				"<^<!<+": "asterisk_below"
+			},
+			"B": {
+				"<^<!": "bridge_above",
+				"<^<!<+": "bridge_below",
+				"<^<!<+>+": "bridge_inverted_below"
+			},
+			"C": {
+				"<^<!<+>+": "caron_below"
+			},
+			"G": {
+				"<^<!": "grave_below"
+			},
+			"H": {
+				"<^<!": "palatal_hook",
+				"<^<!<+": "retroflex_hook"
+			},
+			"O": {
+				"<^<!": "overline",
+				"<^<!<+": "overline_double",
+				"<^<!>+": "low_line",
+				"<^<!<+>+": "low_line_double"
+			},
+			"R": {
+				"<^<!": "ring_below_double"
+			},
+			"T": {
+				"<^<!": "tilde_not",
+				"<^<!<+": "tilde_vertical"
+			},
+			"V": {
+				"<^<!": "line_vertical_below",
+				"<^<!<+": "line_vertical_double_below"
+			}
+		}
+	},
+	"Tertiary Keys": {
+		"Flat": {},
+		"Moded": {
+			"C": {
+				"<^<!": "candrabindu"
 			}
 		}
 	}

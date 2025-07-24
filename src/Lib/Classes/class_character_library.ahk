@@ -20,6 +20,13 @@ Class ChrLib {
 		fastKeys: 0,
 		allKeys: 0,
 	}
+
+	static AddScript(scriptNames*) {
+		for each in scriptNames
+			this.scriptsValidator.Push(each)
+		return
+	}
+
 	static scriptsValidator := [
 		"deseret",
 		"glagolitic",
@@ -362,7 +369,7 @@ Class ChrLib {
 					entity := entry["alterations"][alt "Entity"]
 			}
 
-			return StrLen(entity) > 0 ? entity : Util.StrToHTML(output, Cfg.HTMLMode)
+			return StrLen(entity) > 0 ? entity : Util.StrToHTML(output, , Cfg.HTMLMode)
 
 		} else if (getMode = "LaTeX" && entry["LaTeX"].Length > 0) {
 			return (entry["LaTeX"].Length = 2 && Cfg.LaTeXMode = "Math") ? entry["LaTeX"][2] : entry["LaTeX"][1]

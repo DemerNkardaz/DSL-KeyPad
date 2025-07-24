@@ -22,7 +22,7 @@ Class BindHandler {
 						lineBreaks := True
 				} else {
 					local alt := "None"
-					local inputMode := !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Auxiliary.inputMode : "Unicode"
+					local inputMode := !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting ? Cfg.SessionGet("Input_Mode") : "Unicode"
 					repeatCount := 1
 
 					if !globalInstances.crafter.isComposeInstanceActive && !Scripter.isScripterWaiting {
@@ -59,7 +59,7 @@ Class BindHandler {
 			chrValidation := "[\x{00AE}\x{2122}\x{00A9}\x{2022}\x{25B6}\x{25C0}\x{0021}\x{002B}\x{005E}\x{0023}\x{007B}\x{007D}\x{0060}\x{007E}\x{0025}\x{0009}\x{000A}\x{000D}]"
 
 			if StrLen(inputType) == 0
-				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Auxiliary.inputMode != "Unicode" || StrLen(output) > 10) ? "Text" : ""
+				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.SessionGet("Input_Mode") != "Unicode" || StrLen(output) > 10) ? "Text" : ""
 
 			Event.Trigger("Chracter", "Send", &output, &combo, &inputType)
 
