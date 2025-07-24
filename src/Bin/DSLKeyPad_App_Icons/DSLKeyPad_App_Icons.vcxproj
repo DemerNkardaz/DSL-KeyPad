@@ -216,6 +216,17 @@
     <Image Include="DSLKeyPad.app_legend.ico" />
     <Image Include="DSLKeyPad.app_mods.ico" />
     <Image Include="DSLKeyPad.app_update.ico" />
+    <Image Include="DSLKeyPad.app_support_flat.ico" />
+    <Image Include="DSLKeyPad.app_reload_flat.ico" />
+    <Image Include="DSLKeyPad.app_exit_flat.ico" />
+    <Image Include="DSLKeyPad.app_settings_flat.ico" />
+    <Image Include="DSLKeyPad.app_about_flat.ico" />
+    <Image Include="DSLKeyPad.app_forge_flat.ico" />
+    <Image Include="DSLKeyPad.app_my_recipes_flat.ico" />
+    <Image Include="DSLKeyPad.app_legend_flat.ico" />
+    <Image Include="DSLKeyPad.app_mods_flat.ico" />
+    <Image Include="DSLKeyPad.app_update_flat.ico" />
+    <Image Include="DSLKeyPad.app_legend_small_flat.ico" />
     <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

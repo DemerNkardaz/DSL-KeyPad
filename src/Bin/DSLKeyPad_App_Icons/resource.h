@@ -62,6 +62,17 @@
 #define IDI_LEGEND 158
 #define IDI_MODS 159
 #define IDI_UPDATE 160
+#define IDI_SUPPORT_FLAT 161
+#define IDI_RELOAD_FLAT 162
+#define IDI_EXIT_FLAT 163
+#define IDI_SETTINGS_FLAT 164
+#define IDI_ABOUT_FLAT 165
+#define IDI_FORGE_FLAT 166
+#define IDI_MY_RECIPES_FLAT 167
+#define IDI_LEGEND_FLAT 168
+#define IDI_MODS_FLAT 169
+#define IDI_UPDATE_FLAT 170
+#define IDI_LEGEND_SMALL_FLAT 171
 
 // Next default values for new objects
 //

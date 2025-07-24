@@ -62,7 +62,7 @@ class UIMyRecipes {
 		local createButton := recipesWindow.AddButton(Format("vCreateBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(), this.btnY), "+")
 		local deleteButton := recipesWindow.AddButton(Format("vDeleteBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(2), this.btnY), Chr(0x2212))
 		local updateButton := recipesWindow.AddButton(Format("vUpdateBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(3), this.btnY))
-		GuiButtonIcon(updateButton, App.icoDLL, App.indexIcos["reload"])
+		GuiButtonIcon(updateButton, App.icoDLL, App.indexIcos["reload_flat"])
 
 		createButton.SetFont("s16")
 		deleteButton.SetFont("s16")

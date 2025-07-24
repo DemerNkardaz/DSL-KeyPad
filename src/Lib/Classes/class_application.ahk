@@ -71,6 +71,17 @@ Class App {
 			"legend",
 			"mods",
 			"update",
+			"support_flat",
+			"reload_flat",
+			"exit_flat",
+			"settings_flat",
+			"about_flat",
+			"forge_flat",
+			"my_recipes_flat",
+			"legend_flat",
+			"mods_flat",
+			"update_flat",
+			"legend_small_flat",
 		] {
 			this.indexIcos.Set(ico, i)
 		}
