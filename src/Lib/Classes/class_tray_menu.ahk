@@ -122,12 +122,13 @@ Class TrayMenu {
 		layoutsMenu := Menu()
 		layoutist := [KbdLayoutReg.storedData["latin"].Keys(), KbdLayoutReg.storedData["cyrillic"].Keys()]
 
-		for i, layout in layoutist {
+		for i, layoutType in layoutist {
 			if i > 1
 				layoutsMenu.Add()
-			for each in layout {
-				layoutsMenu.Add(each, (*) => KbdBinder.SetLayout(each))
-				layoutsMenu.SetIcon(each, App.icoDLL, App.indexIcos[i > 1 ? "cyrillic" : "latin"])
+			for layoutName in layoutType {
+				local currentLayout := layoutName
+				layoutsMenu.Add(currentLayout, ((layout) => (*) => KbdBinder.SetLayout(layout))(currentLayout))
+				layoutsMenu.SetIcon(currentLayout, App.icoDLL, App.indexIcos[i > 1 ? "cyrillic" : "latin"])
 			}
 		}
 

@@ -345,7 +345,7 @@
 					"Most library symbols have their own tags, which are variants of the symbol name that can be used for insertion through search.\n",
 					"Enter the tag completely or partially (or entry name) to insert the corresponding symbol. You can enter multiple queries at once by separating them with commas. Examples:\n",
 					"\u2003•\u2002“hellenic capital letter lambda”, “hel lam”, “hel_c_let_l_lambda” → “Λ”\n",
-					"\u2003•\u2002“дез ди, !дез ди”, “lam, !lam” → “𐐔𐐼”, “Λλ”.\n",
+					"\u2003•\u2002“дез ди, !дез ди”, “lamb, !lamb” → “𐐔𐐼”, “Λλ”.\n",
 					"\u2003•\u2002“reference_mark” → “※”.\n\n",
 					"Notes:\n",
 					"\u2003•\u2002The shorter the query — the less accurate it is.\n",

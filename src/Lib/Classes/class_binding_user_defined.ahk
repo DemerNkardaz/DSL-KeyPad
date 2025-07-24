@@ -65,7 +65,7 @@ Class BindingUserDefined {
 	}
 
 	static Update() {
-		KbdLayoutUserDefined()
+		BindingUserDefined()
 		return
 	}
 }
