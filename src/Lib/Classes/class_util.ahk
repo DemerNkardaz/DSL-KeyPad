@@ -15,7 +15,7 @@ Class Util {
 
 	static GetDate(dateStyle := "YYYYMMDDhhmmss") {
 		local currentTime := A_Now
-		static timeFormat := Map(
+		local timeFormat := Map(
 			"YYYY", SubStr(currentTime, 1, 4),
 			"MM", SubStr(currentTime, 5, 2),
 			"DD", SubStr(currentTime, 7, 2),

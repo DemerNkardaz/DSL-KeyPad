@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-07-25 01:31:57
+				&#128228;&emsp14;2025-07-25 13:53:24
 			</td>
 		</tr>
 		<tr>
@@ -36,31 +36,41 @@ $message =@"
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans">Noto Sans</a> <i>Important</i></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Serif">Noto Serif</a> <i>Important</i></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Color+Emoji">Noto Color Emoji</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Math">Noto Sans Math</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Symbols">Noto Sans Symbols</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Runic">Noto Sans Runic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Carian">Noto Sans Carian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Caucasian+Albanian">Noto Sans Caucasian Albanian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Cypriot">Noto Sans Cypriot</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Deseret">Noto Sans Deseret</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Elbasan">Noto Sans Elbasan</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Glagolitic">Noto Sans Glagolitic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Gothic">Noto Sans Gothic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Inscriptional+Parthian">Noto Sans Inscriptional Parthian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Linear+A">Noto Sans Linear A</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Linear+B">Noto Sans Linear B</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Lycian">Noto Sans Lycian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Lydian">Noto Sans Lydian</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Carian">Noto Sans Carian</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Sidetic">Noto Sans Sidetic</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Cypriot">Noto Sans Cypriot</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Mandaic">Noto Sans Mandaic</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Nabataean">Noto Sans Nabataean</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Math">Noto Sans Math</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Hungarian">Noto Sans Old Hungarian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Italic">Noto Sans Old Italic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+North+Arabian">Noto Sans Old North Arabian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Permic">Noto Sans Old Permic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Persian">Noto Sans Old Persian</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Turkic">Noto Sans Old Turkic</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+North+Arabian">Noto Sans Old North Arabian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Sogdian">Noto Sans Old Sogdian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+South+Arabian">Noto Sans Old South Arabian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Turkic">Noto Sans Old Turkic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Osmanya">Noto Sans Osmanya</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Palmyrene">Noto Sans Palmyrene</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Phoenician">Noto Sans Phoenician</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Runic">Noto Sans Runic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Shavian">Noto Sans Shavian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Sidetic">Noto Sans Sidetic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Sogdian">Noto Sans Sogdian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Symbols">Noto Sans Symbols</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Tifinagh">Noto Sans Tifinagh</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Ugaritic">Noto Sans Ugaritic</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Deseret">Noto Sans Deseret</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Shavian">Noto Sans Shavian</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Yi">Noto Sans Yi</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Serif+Vithkuqi">Noto Serif Vithkuqi</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Serif+Todhri">Noto Serif Todhri</a></li>
 					</ul>
 				</details>
 			</td>
