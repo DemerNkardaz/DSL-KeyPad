@@ -261,7 +261,7 @@
 			"mods": {
 				"__self": "Модификации",
 				"version": "{@:dictionary.version}: {}",
-				"author": "{@:dictionary.authors}: {}",
+				"author": "{@:dictionary.author}: {}",
 				"homepage": "{@:dictionary.homepage}:\n{}"
 			},
 			"changelog": {

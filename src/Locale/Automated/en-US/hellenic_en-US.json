@@ -1,7 +1,8 @@
 {
 	"en-US": {
 		"script_labels": {
-			"hellenic": "Hellenic"
+			"hellenic": "Hellenic",
+			"greek": "Greek"
 		},
 		"tonos": "Tonos",
 		"oxia": "Oxia",

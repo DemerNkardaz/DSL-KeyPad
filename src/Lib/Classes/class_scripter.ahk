@@ -51,19 +51,6 @@ Class Scripter {
 		local selectorAntagonist := selectorType != "Alternative Modes" ? "Alternative Modes" : "Glyph Variations"
 		local isGlyphs := selectorType = "Glyph Variations"
 		local keyCodes := [
-			; "SC029",
-			; "SC002",
-			; "SC003",
-			; "SC004",
-			; "SC005",
-			; "SC006",
-			; "SC007",
-			; "SC008",
-			; "SC009",
-			; "SC00A",
-			; "SC00B",
-			; "SC00C",
-			; "SC00D",
 			"SC010",
 			"SC011",
 			"SC012",
@@ -117,7 +104,6 @@ Class Scripter {
 		for key, value in keySymbols
 			keys.HasValue(key, &i) && (keys[i] := value)
 
-
 		local prevAltMode := this.selectedMode.Get(selectorType)
 		local titles := Map(
 			"Alternative Modes", "gui.scripter.alternative_mode",
@@ -134,15 +120,19 @@ Class Scripter {
 			selectorPanel.OnEvent("Close", (Obj) => this.PanelDestroy(selectorType))
 			selectorPanel.title := this.selectorTitle.Get(selectorType)
 
-			; local totalItems := ScripterStore.storedData[selectorType].Length // 2
-			local totalItems := 0
-
+			local visibleItems := []
 			for i, pairs in ScripterStore.storedData[selectorType] {
-				if Mod(i, 2) = 1 && !ScripterStore.storedData[selectorType][i + 1].Has("hidden") {
-					totalItems++
+				if Mod(i, 2) = 1 { ; нечетные индексы содержат имена
+					local dataName := ScripterStore.storedData[selectorType][i]
+					local dataValue := ScripterStore.storedData[selectorType][i + 1]
+
+					if !dataValue.Has("hidden") || !dataValue["hidden"] {
+						visibleItems.Push({ name: dataName, value: dataValue, originalIndex: i })
+					}
 				}
 			}
 
+			local totalItems := visibleItems.Length
 			local totalPages := Ceil(totalItems / maxItems)
 
 			if currentPage > totalPages
@@ -173,27 +163,20 @@ Class Scripter {
 			local panelWidth := optionW * columnCount + optionGap * (columnCount - 1) + 2 * borderPadding
 			local panelHeight := optionH * rowCount + (optionGap // 2) * (rowCount - 1) + 2 * borderPadding
 
-
 			local currentRow := 0
 			local currentCol := 0
 
-			j := 0
 			Loop pageItems {
-				local dataIndex := startIndex + A_Index - 1
-				local i := dataIndex * 2 - 1
-				local dataName := ScripterStore.storedData[selectorType][i]
-				local dataValue := ScripterStore.storedData[selectorType][i + 1]
-				if dataValue.Has("hidden") && dataValue["hidden"]
-					continue
-
-				j++
-				AddOption(dataName, dataValue, j)
+				local itemIndex := startIndex + A_Index - 1
+				if itemIndex <= visibleItems.Length {
+					local item := visibleItems[itemIndex]
+					AddOption(item.name, item.value, A_Index)
+				}
 			}
 
 			selectorPanel.Show("w" panelWidth " h" panelHeight " Center")
 
 			return selectorPanel
-
 
 			AddOption(dataName, dataValue, j) {
 				local optionX := borderPadding + currentCol * (optionW + optionGap)
@@ -214,7 +197,6 @@ Class Scripter {
 					this.PanelDestroy(selectorType),
 					this.ToggleSelectedOption(dataName, selectorType)
 				))
-
 
 				selectorPanel.AddGroupBox("v" dataValue["uiid"] " w" optionW " h" optionH " x" optionX " y" optionY)
 
