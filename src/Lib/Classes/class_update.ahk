@@ -11,7 +11,8 @@ Class Update {
 	static __New() {
 		autocheckOff := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
 		if !autocheckOff
-			Update.Check()
+			Update.Check(, False)
+		return
 	}
 
 	static Repair() {
@@ -138,8 +139,8 @@ Class Update {
 		}
 	}
 
-	static Check(withAcceptUpdate := False) {
-		this.versions := this.ChekVersions()
+	static Check(withAcceptUpdate := False, showErrorMessage := True) {
+		this.versions := this.ChekVersions(, showErrorMessage)
 		if this.versions is Integer
 			return this.versions
 
@@ -195,7 +196,7 @@ Class Update {
 		}
 	}
 
-	static ChekVersions(useFallback := False) {
+	static ChekVersions(useFallback := False, showErrorMessage := True) {
 		http := ComObject("WinHttp.WinHttpRequest.5.1")
 		http.SetTimeouts(1500, 1500, 1500, 1500)
 		http.Open("GET", useFallback ? this.fallbackReleases : this.releasesJson, true)
@@ -212,9 +213,10 @@ Class Update {
 
 		if failed {
 			if !useFallback {
-				return this.ChekVersions(True)
+				return this.ChekVersions(True, showErrorMessage)
 			} else {
-				MsgBox(Locale.Read("gui.options.update_check_failed"), App.Title(), "Iconx")
+				if showErrorMessage
+					MsgBox(Locale.Read("gui.options.update_check_failed"), App.Title(), "Iconx")
 				return 1
 			}
 		}
@@ -331,7 +333,7 @@ Class Changelog {
 
 		if failed && url != fallbackURL
 			return this.GetChangelog(fallbackURL)
-		else {
+		else if !failed {
 			content := http.ResponseText
 			pattern := '<details[^>]*lang="' LanguageCode '"[^>]*>[\s\S]*?<summary>[\s\S]*?</summary>([\s\S]*?)</details>'
 

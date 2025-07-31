@@ -83,7 +83,7 @@ Class Cfg {
 	static Editor(xPos := 0, yPos := 0) {
 		autocheckOff := Cfg.Get("Turn_Off_Autocheck_Update", , False, "bool")
 		if !autocheckOff
-			Update.Check()
+			Update.Check(, False)
 
 		if Update.available {
 			TrayMenu.SetTray()
