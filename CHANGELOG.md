@@ -11,6 +11,10 @@
   - Addded missed cyrillic characters:
     - [ Ӫ ӫ ]
 
+- Changes:
+
+  - Tray menu: Added display of bindings for few commands.
+
 - Fixes:
 
   - Disabled update check error message during background update checking.
@@ -49,6 +53,10 @@
 
   - Добавлены пропущенные символы кириллицы:
     - [ Ӫ ӫ ]
+
+- Изменения:
+
+  - Меню трея: Добавлено отображение привязок для некоторых команд.
 
 - Исправления:
 
