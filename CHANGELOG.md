@@ -14,6 +14,7 @@
 - Changes:
 
   - Tray menu: Added display of bindings for few commands.
+  - Symbols 『』 moved to “RAlt LAlt LShift CapsLock On []” bind.
 
 - Fixes:
 
@@ -57,6 +58,7 @@
 - Изменения:
 
   - Меню трея: Добавлено отображение привязок для некоторых команд.
+  - Символы 『』 перемещены на привязку “RAlt LAlt LShift CapsLock On []”.
 
 - Исправления:
 

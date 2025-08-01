@@ -1931,13 +1931,13 @@
 		"unicode": "300E",
 		"tags": ["cjk left white corner bracket", "восточная левая полая угловая скобка"],
 		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": "<!>+ [" }
+		"options": { "fastKey": "c*<!<+ [" }
 	},
 	"right_cjk_white_corner_bracket", {
 		"unicode": "300F",
 		"tags": ["cjk right white corner bracket", "восточная правая полая угловая скобка"],
 		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": "<!>+ ]" }
+		"options": { "fastKey": "c*<!<+ ]" }
 	},
 	"top_cjk_white_corner_bracket", {
 		"unicode": "FE43",
