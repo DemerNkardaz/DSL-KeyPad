@@ -31,6 +31,8 @@ Class ChrEntry {
 					"useSelfPostfixesOnReferenceLocale", True,
 					"localeCombineAnd", False,
 					"legend", False,
+					"preventLaTeX", False,
+					"preventAltCode", False,
 					"altLayoutKey", "",
 					"showOnAlt", "",
 					"altSpecialKey", "",

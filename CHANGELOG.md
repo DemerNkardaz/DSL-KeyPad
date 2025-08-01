@@ -4,19 +4,26 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [Version 0.1.3.3 α — 2025-08-?? (upcoming update)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
+### [0.1.3.3 α — 2025-08-?? (upcoming update)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
+
+- Additions:
+
+  - Addded missed cyrillic characters:
+    - [ Ӫ ӫ ]
 
 - Fixes:
+
   - Disabled update check error message during background update checking.
   - Fixed minor localization errors.
   - Fixed errors in recipes for “ꭂ” and “ꭁ” symbols.
   - Fixed incorrect url to change log.
 
-### [Version 0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
+### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 
 - First full release of “DSL KeyPad”.
 
 - Main features:
+
   - Support for inputting over 4,700 Unicode symbols.
   - Multi-layer keyboard bindings for symbol input.
     - Support for custom bindings.
@@ -35,19 +42,26 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [Версия 0.1.3.3 α — 2025-08-?? (предстоящее обновление)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
+### [0.1.3.3 α — 2025-08-?? (предстоящее обновление)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
+
+- Дополнения:
+
+  - Добавлены пропущенные символы кириллицы:
+    - [ Ӫ ӫ ]
 
 - Исправления:
+
   - Отключено сообщение об ошибке проверки обновлений при фоновой проверке обновлений.
   - Исправлены мелкие ошибки локализации.
   - Исправлены ошибки в рецептах символов «ꭂ» и «ꭁ».
   - Исправлена некорректная ссылка на журнал изменений.
 
-### [Версия 0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
+### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 
 - Первый полноценный релиз «DSL KeyPad».
 
 - Основные возможности:
+
   - Поддержка ввода более 4 700 символов Юникода.
   - Многослойные клавиатурные привязки для ввода символов.
     - Поддержка пользовательких привязок.

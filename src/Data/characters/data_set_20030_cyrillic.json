@@ -721,6 +721,17 @@
 		"symbol": { "letter": "${cyr_[c,s]_let_o}", "beforeLetter": "barred" },
 		"recipe": ["$-"]
 	},
+	"cyr_[c,s]_let_o_barred__diaeresis", {
+		"unicode": ["04EA", "04EB"],
+		"options": { "fastKey": "$?Secondary", "preventLaTeX": true },
+		"symbol": { "letter": "${cyr_[c,s]_let_o}", "beforeLetter": "barred" },
+		"recipe": [
+			"$-${diaeresis}",
+			"${diaeresis}$-",
+			"${cyr_[c,s]_let_o_barred}${diaeresis}",
+			"${diaeresis}-${cyr_[c,s]_let_o_barred}"
+		]
+	},
 	"cyr_[c,s]_let_p__descender", {
 		"unicode": ["0524", "0525"],
 		"options": { "fastKey": "$?Secondary" },

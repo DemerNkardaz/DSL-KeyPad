@@ -688,7 +688,7 @@ Class ChrReg {
 	}
 
 	EntryPostProcessing__AltCodes(&entryName, &entry, &character) {
-		if entry["altCode"].Length = 0 {
+		if entry["altCode"].Length = 0 && !entry["options"]["preventAltCode"] {
 			local altOutput := []
 
 			for i, page in CodePagesStore.pages {
@@ -878,7 +878,7 @@ Class ChrReg {
 				entry["LaTeX"] := code.Clone()
 		}
 
-		if entry["data"]["postfixes"].Length = 1 {
+		if entry["data"]["postfixes"].Length = 1 && !entry["options"]["preventLaTeX"] {
 			local postfixEntry := ChrLib.GetEntry(entry["data"]["postfixes"][1])
 			local originSymbolEntry := ChrLib.GetEntry(RegExReplace(entryName, "i)^(.*?)__(.*)$", "$1"))
 			if postfixEntry {
