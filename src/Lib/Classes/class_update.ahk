@@ -314,8 +314,8 @@ Class Changelog {
 			targetGUI.AddEdit(UISettings, Locale.Read("warnings.nointernet"))
 	}
 
-	static GetChangelog(url := Update.jsDelivr "@latest/CHANGELOG.md") {
-		static fallbackURL := App.refsHeads["main"] "/CHANGELOG.md"
+	static GetChangelog(url := Update.jsDelivr "@dev/CHANGELOG.md") {
+		static fallbackURL := App.refsHeads["dev"] "/CHANGELOG.md"
 		failed := False
 
 		languageCode := Language.Get(, , 2)

@@ -4,15 +4,30 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [Version 1.0.0 — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/1.0.0)
+### [Version 0.1.3.3 α — 2025-08-?? (upcoming update)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
 
-- Release of the first version of the “DSL KeyPad.”
-- It includes:
-  - Creation of the initial symbol library and an interface for interacting with it.
-  - Basic groups of combinations for diacritics and special symbols.
-  - A “Fast Keys” feature for faster access to a set of symbols.
-  - Functions for inserting symbols by “tag”/Unicode/Alt-code.
-  - …
+- Fixes:
+  - Disabled update check error message during background update checking.
+  - Fixed minor localization errors.
+  - Fixed errors in recipes for “ꭂ” and “ꭁ” symbols.
+  - Fixed incorrect url to change log.
+
+### [Version 0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
+
+- First full release of “DSL KeyPad”.
+
+- Main features:
+  - Support for inputting over 4,700 Unicode symbols.
+  - Multi-layer keyboard bindings for symbol input.
+    - Support for custom bindings.
+  - “Composition” mode for converting character sequences into other characters.
+    - Support for custom sequences.
+  - “Alternative input” — additional binding sets for various writing systems.
+  - “Glyph variations” — a set of modes for inputting symbol variants (A — 𝐴𝙰𝕬…).
+  - TELEX/VNI-like input processor for Vietnamese (with Jarai symbols) and for Pinyin.
+  - Search and insert system for symbols by their tags.
+  - Internal keyboard layouts with support for custom layouts.
+  - Support for modifications.
 
 </details>
 </td>
@@ -20,15 +35,30 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [Версия 1.0.0 — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/1.0.0)
+### [Версия 0.1.3.3 α — 2025-08-?? (предстоящее обновление)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
 
-- Релиз первой версии «DSL KeyPad».
-- Включает:
-  - Создание начальной библиотеки символов и интерфейс для взаимодействия с ними.
-  - Базовые группы комбинаций для диакритик и специальных символов.
-  - Функционал «Быстрых ключей» для быстрого доступа к набору символов.
-  - Функции для вставки символов по тегу/Unicode/Alt-коду.
-  - …
+- Исправления:
+  - Отключено сообщение об ошибке проверки обновлений при фоновой проверке обновлений.
+  - Исправлены мелкие ошибки локализации.
+  - Исправлены ошибки в рецептах символов «ꭂ» и «ꭁ».
+  - Исправлена некорректная ссылка на журнал изменений.
+
+### [Версия 0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
+
+- Первый полноценный релиз «DSL KeyPad».
+
+- Основные возможности:
+  - Поддержка ввода более 4 700 символов Юникода.
+  - Многослойные клавиатурные привязки для ввода символов.
+    - Поддержка пользовательких привязок.
+  - Режим «Композиции» для конверсии последовательности символов в другой символ.
+    - Поддержка пользовательских последовательностей.
+  - «Альтернативный ввод» — дополнительные наборы привязок для различных форм письменности.
+  - «Вариации глифа» — набор режимов для ввода вариантов символа (A — 𝐴𝙰𝕬…).
+  - TELEX/VNI-подобный процессор ввода для Вьетнамского языка (с символами Джарайского) и для Пиньиня.
+  - Система поиска и вставки символов по их тегам.
+  - Внутренние раскладки клавиатуры с поддержкой пользовательских разметок.
+  - Поддержка модификаций.
 
 </details>
 </td>
