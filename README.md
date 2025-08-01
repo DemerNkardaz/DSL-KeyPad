@@ -41,7 +41,7 @@ $$
 
 “DSL KeyPad” is a tool written on [AutoHotkey 2.0](https://www.autohotkey.com/), designed for inputting a wide range of characters using hotkeys, [Compose](https://en.wikipedia.org/wiki/Compose_key)-like mode and auxiliary functions. Its primary focus is on enhancing input capabilities for Latin and Cyrillic scripts, allowing typing in multiple languages without the need for separate keyboard layouts for each language.
 
-You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-KeyPad/). Downloading available on [Releases](https://github.com/DemerNkardaz/DSL-KeyPad/releases) & [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
+You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-KeyPad-Docs/). Downloading available on [Releases](https://github.com/DemerNkardaz/DSL-KeyPad/releases) & [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
 
 <br>
 
@@ -141,7 +141,7 @@ winget install AutoHotkey.AutoHotkey
 
 «DSL KeyPad» — утилита на языке [AutoHotkey 2.0](https://www.autohotkey.com/) для ввода широкого спектра символов посредством горячих клавиш, [Compose](https://en.wikipedia.org/wiki/Compose_key)-подобного режима и вспомогательных функций. Основное направление — расширение возможностей для ввода латиницы и кириллицы, что позволяет писать на множестве языков без использования отдельных раскладок для каждого из языков.
 
-Вы можете ознакомиться с документацией утилиты [здесь](https://demernkardaz.github.io/DSL-KeyPad/). Скачивание доступно в [Релизах](https://github.com/DemerNkardaz/DSL-KeyPad/releases) и на [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
+Вы можете ознакомиться с документацией утилиты [здесь](https://demernkardaz.github.io/DSL-KeyPad-Docs/). Скачивание доступно в [Релизах](https://github.com/DemerNkardaz/DSL-KeyPad/releases) и на [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
 
 ### Краткий список возможностей
 

@@ -2749,12 +2749,22 @@
 	},
 	"lat_[s]_lig_oe_turned__stroke_short", {
 		"unicode": ["AB42"],
-		"recipe": ["$${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe}${arrow_left_circle}${stroke_short}", "${lat_s_lig_oe_turned}${stroke_short}", "$at_s_let_e_turned}o${stroke_short}"],
+		"recipe": [
+			"$${arrow_left_circle}${stroke_short}",
+			"${lat_s_lig_oe}${arrow_left_circle}${stroke_short}",
+			"${lat_s_lig_oe_turned}${stroke_short}",
+			"${lat_s_let_e_turned}o${stroke_short}"
+		],
 		"symbol": { "beforeLetter": "turned" }
 	},
 	"lat_[s]_lig_oe_turned__solidus_long", {
 		"unicode": ["AB41"],
-		"recipe": ["$${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe}${arrow_left_circle}${solidus_long}", "${lat_s_lig_oe_turned}${solidus_long}", "$at_s_let_e_turned}o${solidus_long}"],
+		"recipe": [
+			"$${arrow_left_circle}${solidus_long}",
+			"${lat_s_lig_oe}${arrow_left_circle}${solidus_long}",
+			"${lat_s_lig_oe_turned}${solidus_long}",
+			"${lat_s_let_e_turned}o${solidus_long}"
+		],
 		"symbol": { "beforeLetter": "turned" }
 	},
 	"lat_[s]_lig_oe_inverted", {

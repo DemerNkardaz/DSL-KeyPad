@@ -139,8 +139,8 @@ Class Update {
 		}
 	}
 
-	static Check(withAcceptUpdate := False, showErrorMessage := True) {
-		this.versions := this.ChekVersions(, showErrorMessage)
+	static Check(withAcceptUpdate := False, showErrorMessageOnVersionsCheck := True) {
+		this.versions := this.ChekVersions(, showErrorMessageOnVersionsCheck)
 		if this.versions is Integer
 			return this.versions
 
