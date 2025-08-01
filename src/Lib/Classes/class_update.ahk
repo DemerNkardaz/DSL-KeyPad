@@ -50,11 +50,11 @@ Class Update {
 			), , "Show")
 			
 			if exitCode != 0 {
-				MsgBox(Locale.ReadInject("bundle_creation_failed_pshell", [exitCode]), App.Title())
+				MsgBox(Locale.ReadInject("bundle.creation.failed_pshell", [exitCode]), App.Title())
 			}
 			*/
 		} catch as e {
-			MsgBox(Locale.Read("bundle_creation_failed") "`n`n" e.Message, App.Title(), "Iconx")
+			MsgBox(Locale.Read("bundle.creation.failed") "`n`n" e.Message, App.Title(), "Iconx")
 		}
 	}
 

@@ -123,6 +123,14 @@
 			"before_start": "Before start",
 			"after_start": "After start"
 		},
+		"bundle": {
+			"__self": "Bundle",
+			"creation": {
+				"__self": "Creation",
+				"failed": "Bundle creation failed.",
+				"failed_pshell": "Bundle creation failed. PowerShell script exited with code {}."
+			}
+		},
 		"gui": {
 			"about": {
 				"author_name": "Yalla Nkardaz",

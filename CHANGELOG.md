@@ -14,9 +14,10 @@
 - Fixes:
 
   - Disabled update check error message during background update checking.
-  - Fixed minor localization errors.
-  - Fixed errors in recipes for “ꭂ” and “ꭁ” symbols.
+  - Fixed minor localization mistakes.
+  - Fixed mistake in recipes for “ꭂ” and “ꭁ” symbols.
   - Fixed incorrect url to change log.
+  - Removed erroneous tabulation in the ‱ symbol’s LaTeX command.
 
 ### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 
@@ -55,6 +56,7 @@
   - Исправлены мелкие ошибки локализации.
   - Исправлены ошибки в рецептах символов «ꭂ» и «ꭁ».
   - Исправлена некорректная ссылка на журнал изменений.
+  - Удалена ошибочная табуляция в LaTeX-команде символа ‱.
 
 ### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 

@@ -1144,7 +1144,7 @@
 	},
 	"pertenthousand", {
 		"unicode": "2031",
-		"LaTeX": ["\textpertenthousand"],
+		"LaTeX": ["\\textpertenthousand"],
 		"LaTeXPackage": "textcomp",
 		"tags": ["per ten thousand", "промилле", "basis point", "базисный пункт"],
 		"groups": ["Special Characters", "Smelting Special", "Special Fast Secondary"],
@@ -1194,7 +1194,7 @@
 			"subscript": "208B"
 		},
 		"tags": ["minus", "минус"],
-		"groups": ["Dashes", "Smelting Special", "Special Fast RShif", "Special Combinations"],
+		"groups": ["Dashes", "Smelting Special", "Special Fast RShift", "Special Combinations"],
 		"options": { "altSpecialKey": "NumSub", "fastKey": "-", "send": "Text" },
 		"recipe": ["min"]
 	},
