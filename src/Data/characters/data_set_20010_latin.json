@@ -1496,7 +1496,7 @@
 	},
 	"lat_[c,s]_let_h__stroke_short", {
 		"unicode": ["0126", "0127"],
-		"tags": [[], ["voiceless pharyngeal fricative", "uлухой фарингальный фрикатив"]],
+		"tags": [[], ["voiceless pharyngeal fricative", "глухой фарингальный фрикатив"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"alterations": [{  }, {  "modifier": "10795" }],
 		"options": {
