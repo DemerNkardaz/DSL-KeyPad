@@ -5,7 +5,7 @@
 	<a href="https://bitbucket.org/nkardaz/public/src/"><img src="https://custom-icon-badges.herokuapp.com/badge/Bit-Bucket-eee?logoColor=eee&style=for-the-badge&logo=bitbucket&labelColor=2d79ce" alt="Bitbucket"/></a>
 <br>
 	<a href="https://www.autohotkey.com/boards/viewtopic.php?f=83&t=138452"><img src="https://custom-icon-badges.herokuapp.com/badge/AHK-Forum-ecedef?logoColor=eeeeee&style=for-the-badge&logo=autohotkey&labelColor=79c572" alt="Forum"/></a>
-	<a href="https://habr.com/ru/feed/"><img src="https://custom-icon-badges.herokuapp.com/badge/Хабр-Статья-ecedef?logoColor=eeeeee&style=for-the-badge&logo=habr&labelColor=629ebb" alt="Forum"/></a>
+	<a href="https://habr.com/ru/articles/932600/"><img src="https://custom-icon-badges.herokuapp.com/badge/Хабр-Статья-ecedef?logoColor=eeeeee&style=for-the-badge&logo=habr&labelColor=629ebb" alt="Forum"/></a>
 </p>
 
 <br>
