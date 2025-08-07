@@ -760,6 +760,7 @@
 		"unicode": ["01A9", "0283"],
 		"tags": [[], ["voiceless postalveolar fricative", "глухой постальвеолярный сибилянт"]],
 		"groups": [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
+		"alterations": [{}, { "modifier": "1DB4" }],
 		"options": {
 			"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"], "useLetterLocale": true, "fastKey": "<+>+ $?Secondary"
 		},

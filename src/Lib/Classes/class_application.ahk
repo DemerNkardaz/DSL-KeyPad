@@ -90,11 +90,9 @@ Class App {
 	}
 
 	static Init() {
-		for key, dir in this.paths.OwnProps() {
-			if !DirExist(dir) {
+		for key, dir in this.paths.OwnProps()
+			if !DirExist(dir)
 				DirCreate(dir)
-			}
-		}
 
 		if !FileExist(this.profileFile)
 			IniWrite("default", this.profileFile, "data", "profile")

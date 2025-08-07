@@ -10,6 +10,8 @@
 
   - Addded missed cyrillic characters:
     - [ Ӫ ӫ ]
+  - Addded missed latin characters:
+    - [ ᶴ ]
 
 - Changes:
 
@@ -54,6 +56,8 @@
 
   - Добавлены пропущенные символы кириллицы:
     - [ Ӫ ӫ ]
+  - Добавлены пропущенные символы латиницы:
+    - [ ᶴ ]
 
 - Изменения:
 
