@@ -165,7 +165,7 @@ Class App {
 	}
 
 	static Ver(includedFields := ["major", "minor", "patch"], output := "") {
-		static version := ["major", 0, "minor", 1, "patch", 3, "hotfix", 3,
+		static version := ["major", 0, "minor", 1, "patch", 4, "hotfix", 3,
 			"postfix", "", "pre-release", False]
 
 		if includedFields is String {

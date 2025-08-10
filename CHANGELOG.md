@@ -4,7 +4,7 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.3.3 α — 2025-08-?? (upcoming update)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
+### [0.1.4.3 α — 2025-08-?? (upcoming update)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
 
 - Additions:
 
@@ -13,7 +13,7 @@
   - Addded missed latin characters:
     - [ ᶴ ]
   - Added support for new Latin layouts:
-    - Workman
+    - Workman, Halmak
 
 - Changes:
 
@@ -53,7 +53,7 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [0.1.3.3 α — 2025-08-?? (предстоящее обновление)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
+### [0.1.4.3 α — 2025-08-?? (предстоящее обновление)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
 
 - Дополнения:
 
@@ -62,7 +62,7 @@
   - Добавлены пропущенные символы латиницы:
     - [ ᶴ ]
   - Добавлены поддержка новых раскладок латиницы:
-    - Workman
+    - Workman, Halmak
 
 - Изменения:
 

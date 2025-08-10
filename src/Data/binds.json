@@ -1914,6 +1914,8 @@
 			"0": {"+": "right_parenthesis"},
 			"Equals": {"+": ["plus"]},
 			"HyphenMinus": {"+": ["underscore"]},
+			"Comma": {"+": ["less_than"]},
+			"Dot": {"+": ["greater_than"]},
 			"Slash": {"+": ["question"]},
 			"Backslash": {"+": ["vertical_line"]},
 			"Semicolon": {"+": ["colon"]},
