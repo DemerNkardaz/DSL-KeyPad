@@ -13,7 +13,7 @@
   - Addded missed latin characters:
     - [ ᶴ ]
   - Added support for new Latin layouts:
-    - Workman, Halmak
+    - Workman, Halmak, Norman, AZERTY local variant
 
 - Changes:
 
@@ -62,7 +62,7 @@
   - Добавлены пропущенные символы латиницы:
     - [ ᶴ ]
   - Добавлены поддержка новых раскладок латиницы:
-    - Workman, Halmak
+    - Workman, Halmak, Norman, вариант AZERTY
 
 - Изменения:
 

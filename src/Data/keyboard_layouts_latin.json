@@ -1,5 +1,73 @@
 {
 	"QWERTY": { "keys": {} },
+	"AZERTY DSL KeyPad Variant": {
+		"note": "This variant of the AZERTY layout has been cleared of several special characters for better suitability for the DSL KeyPad’s bindings.",
+		"keys": {
+			"Tilde": "SC029",
+			"HyphenMinus": "SC00C",
+			"Equals": "SC00D",
+			"A": "SC010",
+			"Z": "SC011",
+			"E": "SC012",
+			"R": "SC013",
+			"T": "SC014",
+			"Y": "SC015",
+			"U": "SC016",
+			"I": "SC017",
+			"O": "SC018",
+			"P": "SC019",
+			"LeftBracket": "SC01A",
+			"RightBracket": "SC01B",
+			"Backslash": "SC02B",
+			"Q": "SC01E",
+			"S": "SC01F",
+			"D": "SC020",
+			"F": "SC021",
+			"G": "SC022",
+			"H": "SC023",
+			"J": "SC024",
+			"K": "SC025",
+			"L": "SC026",
+			"M": "SC027",
+			"Apostrophe": "SC028",
+			"W": "SC02C",
+			"X": "SC02D",
+			"C": "SC02E",
+			"V": "SC02F",
+			"B": "SC030",
+			"N": "SC031",
+			"Comma": "SC032",
+			"Semicolon": "SC033",
+			"Colon": "SC034",
+			"Exclamation": "SC035"
+		},
+		"binds": {
+			"Flat": {
+				"[lazy]Colon": ["colon"],
+				"[lazy]Exclamation": ["exclamation"]
+			},
+			"Moded": {
+				"Comma": {"<+": ["question"]},
+				"Semicolon": {"<+": ["dot"]},
+				"Colon": {
+					"<+": ["solidus"],
+					"<^>!": ["quote_right_double"],
+					"<^>!<+": ["quote_right"],
+					"<^>!>+": ["quote_low_9_double_reversed"],
+					"<^>!<!": ["quote_angle_right_double"],
+					"<^>!<!<+": ["quote_angle_right"]
+				},
+				"Exclamation": {
+					"<+": ["section"],
+					"<^>!": "inverted_exclamation",
+					"<^>!<+": "double_exclamation_question",
+					"<^>!>+": "double_exclamation",
+					"<+>+": "medieval_exclamation",
+					">+:Caps": "interrobang[_inverted,]"
+				}
+			}
+		}
+	},
 	"Dvorak": {
 		"keys": {
 			"Tilde": "SC029",
@@ -125,7 +193,58 @@
 			"Y": "SC035"
 		}
 	},
+	"Norman": {
+		"author": "David Norman",
+		"urls": [
+			"https://normanlayout.info",
+			"https://github.com/deekayen/norman"
+		],
+		"keys": {
+			"Tilde": "SC029",
+			"HyphenMinus": "SC00C",
+			"Equals": "SC00D",
+			"Q": "SC010",
+			"W": "SC011",
+			"D": "SC012",
+			"F": "SC013",
+			"K": "SC014",
+			"J": "SC015",
+			"U": "SC016",
+			"R": "SC017",
+			"L": "SC018",
+			"Semicolon": "SC019",
+			"LeftBracket": "SC01A",
+			"RightBracket": "SC01B",
+			"Backslash": "SC02B",
+			"A": "SC01E",
+			"S": "SC01F",
+			"E": "SC020",
+			"T": "SC021",
+			"G": "SC022",
+			"Y": "SC023",
+			"N": "SC024",
+			"I": "SC025",
+			"O": "SC026",
+			"H": "SC027",
+			"Apostrophe": "SC028",
+			"Z": "SC02C",
+			"X": "SC02D",
+			"C": "SC02E",
+			"V": "SC02F",
+			"B": "SC030",
+			"P": "SC031",
+			"M": "SC032",
+			"Comma": "SC033",
+			"Dot": "SC034",
+			"Slash": "SC035"
+		}
+	},
 	"Workman": {
+		"author": "OJ Bucao",
+		"urls": [
+			"https://workmanlayout.org",
+			"https://github.com/workman-layout"
+		],
 		"keys": {
 			"Tilde": "SC029",
 			"HyphenMinus": "SC00C",
