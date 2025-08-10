@@ -12,6 +12,8 @@
     - [ Ӫ ӫ ]
   - Addded missed latin characters:
     - [ ᶴ ]
+  - Added support for new Latin layouts:
+    - Workman
 
 - Changes:
 
@@ -25,6 +27,7 @@
   - Fixed mistake in recipes for “ꭂ” and “ꭁ” symbols.
   - Fixed incorrect url to change log.
   - Removed erroneous tabulation in the ‱ symbol’s LaTeX command.
+  - Fixed missing Shift remapping of letter-keys for keyboard layouts
 
 ### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 
@@ -58,6 +61,8 @@
     - [ Ӫ ӫ ]
   - Добавлены пропущенные символы латиницы:
     - [ ᶴ ]
+  - Добавлены поддержка новых раскладок латиницы:
+    - Workman
 
 - Изменения:
 
@@ -71,6 +76,7 @@
   - Исправлены ошибки в рецептах символов «ꭂ» и «ꭁ».
   - Исправлена некорректная ссылка на журнал изменений.
   - Удалена ошибочная табуляция в LaTeX-команде символа ‱.
+  - Исправлены отсутствующие переназначения буквенных клавиш на Shift для клавиатурных раскладок
 
 ### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 
