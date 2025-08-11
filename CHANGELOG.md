@@ -14,11 +14,14 @@
     - [ ᶴ ]
   - Added support for new Latin layouts:
     - Workman, Halmak, Norman, AZERTY local variant, Canary, Asset
+  - Added new Latin bindings:
+    - “RAlt LAlt LShift RShift N” → “Ɲɲ”
 
 - Changes:
 
   - Tray menu: Added display of bindings for few commands.
   - Symbols 『』 moved to “RAlt LAlt LShift CapsLock On []” bind.
+  - Binding “RAlt RShift N”: characters “Ɲɲ” replaced with “Ŋŋ”.
 
 - Fixes:
 
@@ -27,7 +30,8 @@
   - Fixed mistake in recipes for “ꭂ” and “ꭁ” symbols.
   - Fixed incorrect url to change log.
   - Removed erroneous tabulation in the ‱ symbol’s LaTeX command.
-  - Fixed missing Shift remapping of letter-keys for keyboard layouts
+  - Fixed missing Shift remapping of letter-keys for keyboard layouts.
+  - Fixed mistake in “Ɏ”, “Ꞑ” bindings.
 
 ### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 
@@ -63,11 +67,14 @@
     - [ ᶴ ]
   - Добавлена поддержка новых раскладок латиницы:
     - Workman, Halmak, Norman, вариант AZERTY, Canary, Asset
+  - Добавлены новые привязки латиницы:
+    - «RAlt LAlt LShift RShift N» → «Ɲɲ»
 
 - Изменения:
 
   - Меню трея: Добавлено отображение привязок для некоторых команд.
   - Символы 『』 перемещены на привязку «RAlt LAlt LShift CapsLock On []».
+  - Привязка «RAlt RShift N»: символы «Ɲɲ» заменены на «Ŋŋ».
 
 - Исправления:
 
@@ -76,7 +83,8 @@
   - Исправлены ошибки в рецептах символов «ꭂ» и «ꭁ».
   - Исправлена некорректная ссылка на журнал изменений.
   - Удалена ошибочная табуляция в LaTeX-команде символа ‱.
-  - Исправлены отсутствующие переназначения буквенных клавиш на Shift для клавиатурных раскладок
+  - Исправлены отсутствующие переназначения буквенных клавиш на Shift для клавиатурных раскладок.
+  - Исправлена ошибка в привязках для ввода «Ɏ», «Ꞑ».
 
 ### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 

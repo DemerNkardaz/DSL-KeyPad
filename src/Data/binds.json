@@ -2746,8 +2746,9 @@
 				"<^>!<!": ["lat_[c,s]_let_n__dot_below"],
 				"<^>!<!<+": ["lat_[c,s]_let_n__caron"],
 				"<^>!<!>+": ["lat_[c,s]_let_n__cedilla"],
-				"<^>!>+": ["lat_[c,s]_let_n__common_hook"],
-				"<^>!<+": ["let_[c,s]_let_n__descender"],
+				"<^>!<!<+>+": ["lat_[c,s]_let_n__common_hook"],
+				"<^>!>+": ["lat_[c,s]_let_n_eng"],
+				"<^>!<+": ["lat_[c,s]_let_n__descender"],
 				"<^>!<+>+": ["lat_[c,s]_let_n__dot_above"],
 				">+": ["lat_[c,s]_let_n__grave"]
 			},
@@ -2770,7 +2771,8 @@
 				"<^>!<!": ["lat_[c,s]_let_p__squirrel_tail"],
 				"<^>!<!<+": ["lat_[c,s]_let_p__flourish"],
 				"<^>!<+": ["lat_[c,s]_let_p__stroke_short"],
-				"<^>!>+": ["lat_[c,s]_let_p__common_hook"]},
+				"<^>!>+": ["lat_[c,s]_let_p__common_hook"]
+			},
 			"Q": {
 				"<^>!": ["lat_[c,s]_let_a_glottal_stop"],
 				"<^>!<+": ["lat_[c,s]_let_q_tresillo"],
@@ -2844,7 +2846,7 @@
 				"<!": ["lat_[c,s]_let_y__acute"],
 				"<^>!": ["lat_[c,s]_let_y__dot_above"],
 				"<^>!<!": ["lat_[c,s]_let_y__circumflex"],
-				"<^>!<!<+": ["lat_[c,s]_let_y_stroke_short"],
+				"<^>!<!<+": ["lat_[c,s]_let_y__stroke_short"],
 				"<^>!<!>+": ["lat_[c,s]_let_y__loop"],
 				"<^>!>+": ["lat_[c,s]_let_y__macron"],
 				"<^>!<+": ["lat_[c,s]_let_y__diaeresis"],

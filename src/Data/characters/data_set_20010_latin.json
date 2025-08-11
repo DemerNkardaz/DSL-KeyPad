@@ -193,7 +193,7 @@
 		"groups": [[], ["Latin", "IPA"]],
 		"alterations": [{}, { "modifier": "1D51" }],
 		"options": {
-			"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"],
+			"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"], "fastKey": ">+ $?Secondary",
 			"useLetterLocale": true
 		},
 		"recipe": ["/Ng/"]
@@ -361,7 +361,7 @@
 	},
 	"lat_[c,s]_let_a_glottal_stop", {
 		"unicode": ["0241", "0242"],
-		"options": { "useLetterLocale": true, "fastKey": ">+ /Q/?Secondary" },
+		"options": { "useLetterLocale": true, "fastKey": "/Q/?Secondary" },
 		"recipe": ["/GS/?"]
 	},
 	"lat_[c,s]_let_a_glottal_stop_reversed", {
@@ -1834,7 +1834,7 @@
 	"lat_[c,s]_let_n__common_hook", {
 		"unicode": ["019D", "0272"],
 		"alterations": [{}, { "modifier": "1DAE" }],
-		"options": { "fastKey": ">+ $?Secondary" },
+		"options": { "fastKey": "<!<+>+ $?Secondary" },
 		"recipe": ["$${arrow_leftdown}"]
 	},
 	"lat_[s]_let_n__palatal_hook", {
