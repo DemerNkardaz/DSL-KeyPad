@@ -4,7 +4,7 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.4.3 α — 2025-08-?? (upcoming update)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
+### [0.1.4.3 α — 2025-08-?? (upcoming update)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 
 - Additions:
 
@@ -13,7 +13,7 @@
   - Addded missed latin characters:
     - [ ᶴ ]
   - Added support for new Latin layouts:
-    - Workman, Halmak, Norman, AZERTY local variant, Canary, Asset
+    - Workman, Halmak, Norman, AZERTY local variant, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf
   - Added new Latin bindings:
     - “RAlt LAlt LShift RShift N” → “Ɲɲ”
 
@@ -57,7 +57,7 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [0.1.4.3 α — 2025-08-?? (предстоящее обновление)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.3)
+### [0.1.4.3 α — 2025-08-?? (предстоящее обновление)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 
 - Дополнения:
 
@@ -66,7 +66,7 @@
   - Добавлены пропущенные символы латиницы:
     - [ ᶴ ]
   - Добавлена поддержка новых раскладок латиницы:
-    - Workman, Halmak, Norman, вариант AZERTY, Canary, Asset
+    - Workman, Halmak, Norman, вариант AZERTY, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf
   - Добавлены новые привязки латиницы:
     - «RAlt LAlt LShift RShift N» → «Ɲɲ»
 
