@@ -14,6 +14,8 @@
     - [ ᶴ ]
   - Added support for new Latin layouts:
     - Workman, Halmak, Norman, AZERTY local variant, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf
+  - Added support for new Cyrillic layouts:
+    - ЯШЕРТЫ
   - Added new Latin bindings:
     - “RAlt LAlt LShift RShift N” → “Ɲɲ”
 
@@ -67,6 +69,8 @@
     - [ ᶴ ]
   - Добавлена поддержка новых раскладок латиницы:
     - Workman, Halmak, Norman, вариант AZERTY, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf
+  - Добавлена поддержка новых раскладок кириллицы:
+    - ЯШЕРТЫ
   - Добавлены новые привязки латиницы:
     - «RAlt LAlt LShift RShift N» → «Ɲɲ»
 

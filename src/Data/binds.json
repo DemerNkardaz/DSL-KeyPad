@@ -3057,6 +3057,21 @@
 				"<^>!>+": ["cyr_[c,s]_lig_yus_little_iotified"],
 				"<^>!<+": ["cyr_[c,s]_lig_a_iotified"],
 				"<^>!<+>+": ["cyr_[c,s]_lig_yus_little_closed_iotified"]
+			},
+			"Запятая": {
+				"<^>!": ["quote_angle_left_double"],
+				"<^>!<+": ["quote_left_double_ghost_ru"],
+				"<^>!>+": ["quote_low_9_double"],
+				"<^>!<!": ["quote_left_double"],
+				"<^>!<!<+": ["quote_angle_left"],
+				"<^>!<+>+": ["quote_low_9"]
+			},
+			"Точка": {
+				"<^>!": ["quote_angle_right_double"],
+				"<^>!<+": ["quote_right_double_ghost_ru"],
+				"<^>!>+": ["quote_low_9_double_reversed"],
+				"<^>!<!": ["quote_right_double"],
+				"<^>!<!<+": ["quote_angle_right"]
 			}
 		}
 	},
