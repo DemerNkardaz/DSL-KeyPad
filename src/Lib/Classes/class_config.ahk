@@ -538,9 +538,13 @@ Class Options {
 
 	static SwitchVirualLayout(CB, category) {
 		if category = "Cyrillic" {
-			Cfg.Set(CB.Text, "Layout_Cyrillic")
+			Cfg.Set(CB is String ? CB : CB.Text, "Layout_Cyrillic")
 		} else if category = "Latin" {
-			Cfg.Set(CB.Text, "Layout_Latin")
+			Cfg.Set(CB is String ? CB : CB.Text, "Layout_Latin")
+		} else if category = "Hellenic" {
+			Cfg.Set(CB is String ? CB : CB.Text, "Layout_Hellenic")
+		} else {
+			throw Error("Unknown layout category: " category)
 		}
 	}
 

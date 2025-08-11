@@ -617,6 +617,116 @@
 			"Slash": "SC035"
 		}
 	},
+	"PanQWERTY": {
+		"note": "Custom QWERTY layout for DSL KeyPad with replace of [];',./ with Thorn, Wynn, Eszett, Schwa, Ezh, Gamma and Dot-Comma.",
+		"keys": {
+			"Tilde": "SC029",
+			"HyphenMinus": "SC00C",
+			"Equals": "SC00D",
+			"Q": "SC010",
+			"W": "SC011",
+			"E": "SC012",
+			"R": "SC013",
+			"T": "SC014",
+			"Y": "SC015",
+			"U": "SC016",
+			"I": "SC017",
+			"O": "SC018",
+			"P": "SC019",
+			"Thorn": "SC01A",
+			"Wynn": "SC01B",
+			"Backslash": "SC02B",
+			"A": "SC01E",
+			"S": "SC01F",
+			"D": "SC020",
+			"F": "SC021",
+			"G": "SC022",
+			"H": "SC023",
+			"J": "SC024",
+			"K": "SC025",
+			"L": "SC026",
+			"Eszett": "SC027",
+			"Schwa": "SC028",
+			"Z": "SC02C",
+			"X": "SC02D",
+			"C": "SC02E",
+			"V": "SC02F",
+			"B": "SC030",
+			"N": "SC031",
+			"M": "SC032",
+			"Ezh": "SC033",
+			"Gamma": "SC034",
+			"Dot": "SC035"
+		},
+		"binds": {
+			"Flat": {
+				"[lazy]Thorn": ["lat_[c,s]_let_t_thorn"],
+				"[lazy]Wynn": ["lat_[c,s]_let_w_wynn"],
+				"[lazy]Eszett": ["lat_[c,s]_lig_s_eszett"],
+				"[lazy]Schwa": ["lat_[c,s]_let_a_schwa"],
+				"[lazy]Ezh": ["lat_[c,s]_let_z_ezh"],
+				"[lazy]Gamma": ["lat_[c,s]_let_g_gamma"]
+			},
+			"Moded": {
+				"E": {
+					"<^>!": ["lat_[c,s]_let_e_breve"]
+				},
+				"Thorn": {
+					"<^>!": ["lat_[c,s]_let_t_thorn__stroke_short"],
+					"<^>!>+": ["lat_[c,s]let_t_thorn__stroke_down"],
+					"<+": ["lat_[s,c]_let_t_thorn"],
+					">+": ["left_bracket"],
+					"<+>+": ["left_brace"]
+				},
+				"Wynn": {
+					"<^>!": ["lat_[c,s]_let_v_vend"],
+					"<+": ["lat_[s,c]_let_w_wynn"],
+					">+": ["right_bracket"],
+					"<+>+": ["right_brace"]
+				},
+				"Backslash": {
+					">+": ["solidus"]
+				},
+				"Eszett": {
+					"<+": ["lat_[s,c]_lig_s_eszett"],
+					">+": ["semicolon"],
+					"<+>+": ["colon"]
+				},
+				"Schwa": {
+					"<+": ["lat_[s,c]_let_a_schwa"],
+					">+": ["apostrophe"],
+					"<+>+": ["quote"]
+				},
+				"Ezh": {
+					"+": ["less_than"],
+					"<+": ["lat_[s,c]_let_z_ezh"],
+					"<^>!": ["quote_left_double"],
+					"<^>!<+": ["quote_left"],
+					"<^>!>+": ["quote_low_9_double"],
+					"<^>!<+>+": ["quote_low_9"],
+					"<^>!<!": ["quote_angle_left_double"],
+					"<^>!<!<+": ["quote_angle_left"]
+				},
+				"Gamma": {
+					"+": ["greater_than"],
+					"<+": ["lat_[s,c]_let_g_gamma"],
+					"<^>!": ["quote_right_double"],
+					"<^>!<+": ["quote_right"],
+					"<^>!>+": ["quote_low_9_double_reversed"],
+					"<^>!<!": ["quote_angle_right_double"],
+					"<^>!<!<+": ["quote_angle_right"]
+				},
+				"Dot": {
+					"+": ["comma"],
+					"<^>!": ["ellipsis"],
+					"<^>!<+": ["tricolon"],
+					"<^>!<+>+": ["quartocolon"],
+					"<!": ["two_dot_punctuation"],
+					"<^>!>+": ["fraction_slash"]
+				}
+			}
+		}
+	},
 	"Stronk": {
 		"author": "Oxey",
 		"url": "https://oxey.dev/stronk/index.html",

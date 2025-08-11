@@ -13,7 +13,7 @@
   - Addded missed latin characters:
     - [ ᶴ ]
   - Added support for new Latin layouts:
-    - Workman, Halmak, Norman, AZERTY local variant, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf
+    - Workman, Halmak, Norman, AZERTY local variant, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf, PanQWERTY (Own)
   - Added support for new Cyrillic layouts:
     - ЯШЕРТЫ
   - Added new Latin bindings:
@@ -68,7 +68,7 @@
   - Добавлены пропущенные символы латиницы:
     - [ ᶴ ]
   - Добавлена поддержка новых раскладок латиницы:
-    - Workman, Halmak, Norman, вариант AZERTY, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf
+    - Workman, Halmak, Norman, вариант AZERTY, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf, PanQWERTY (Собственная)
   - Добавлена поддержка новых раскладок кириллицы:
     - ЯШЕРТЫ
   - Добавлены новые привязки латиницы:

@@ -29,7 +29,23 @@ Class KbdBinder {
 	static layoutNames := Map("latin", [], "cyrillic", [], "hellenic", [])
 
 	static __New() {
+		this.ValidateSelectedLayouts()
 		this.Init()
+		return
+	}
+
+	static ValidateSelectedLayouts() {
+		this.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
+
+		if !KbdLayoutReg.Check("latin", latinLayout)
+			Options.SwitchVirualLayout("QWERTY", "Latin")
+
+		if !KbdLayoutReg.Check("cyrillic", cyrillicLayout)
+			Options.SwitchVirualLayout("ЙЦУКЕН", "Cyrillic")
+
+		if !KbdLayoutReg.Check("hellenic", hellenicLayout)
+			Options.SwitchVirualLayout("ϞϜΕΡΤΥ", "Hellenic")
+
 		return
 	}
 
@@ -84,6 +100,7 @@ Class KbdBinder {
 		latin := Cfg.Get("Layout_Latin")
 		cyrillic := Cfg.Get("Layout_Cyrillic")
 		hellenic := Cfg.Get("Layout_Hellenic")
+		return
 	}
 
 	static GetCurrentLayoutMap() {
