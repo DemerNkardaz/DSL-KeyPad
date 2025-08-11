@@ -2544,11 +2544,11 @@
 				"<^>!<+": ["right_white_tortoise_shell"]
 			},
 			"Slash": {
-				"<^>!": "ellipsis",
-				"<^>!<+": "tricolon",
-				"<^>!<+>+": "quartocolon",
-				"<!": "two_dot_punctuation",
-				"<^>!>+": "fraction_slash"
+				"<^>!": ["ellipsis"],
+				"<^>!<+": ["tricolon"],
+				"<^>!<+>+": ["quartocolon"],
+				"<!": ["two_dot_punctuation"],
+				"<^>!>+": ["fraction_slash"]
 			},
 			"Backslash": {
 				"<^>!": "grapheme_joiner",
@@ -3059,19 +3059,13 @@
 				"<^>!<+>+": ["cyr_[c,s]_lig_yus_little_closed_iotified"]
 			},
 			"Запятая": {
-				"<^>!": ["quote_angle_left_double"],
-				"<^>!<+": ["quote_left_double_ghost_ru"],
-				"<^>!>+": ["quote_low_9_double"],
-				"<^>!<!": ["quote_left_double"],
-				"<^>!<!<+": ["quote_angle_left"],
-				"<^>!<+>+": ["quote_low_9"]
 			},
 			"Точка": {
-				"<^>!": ["quote_angle_right_double"],
-				"<^>!<+": ["quote_right_double_ghost_ru"],
-				"<^>!>+": ["quote_low_9_double_reversed"],
-				"<^>!<!": ["quote_right_double"],
-				"<^>!<!<+": ["quote_angle_right"]
+				"<^>!": ["ellipsis"],
+				"<^>!<+": ["tricolon"],
+				"<^>!<+>+": ["quartocolon"],
+				"<!": ["two_dot_punctuation"],
+				"<^>!>+": ["fraction_slash"]
 			}
 		}
 	},

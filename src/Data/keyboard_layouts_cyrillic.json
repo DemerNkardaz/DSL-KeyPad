@@ -43,8 +43,21 @@
 		"binds": {
 			"Flat": {},
 			"Moded": {
+				"Запятая": {
+					"<^>!": ["quote_angle_left_double"],
+					"<^>!<+": ["quote_left_double_ghost_ru"],
+					"<^>!>+": ["quote_low_9_double"],
+					"<^>!<!": ["quote_left_double"],
+					"<^>!<!<+": ["quote_angle_left"],
+					"<^>!<+>+": ["quote_low_9"]
+				},
 				"Точка": {
-					"+": ["exclamation"]
+					"+": ["exclamation"],
+					"<^>!": ["quote_angle_right_double"],
+					"<^>!<+": ["quote_right_double_ghost_ru"],
+					"<^>!>+": ["quote_low_9_double_reversed"],
+					"<^>!<!": ["quote_right_double"],
+					"<^>!<!<+": ["quote_angle_right"]
 				},
 				"Ь": {
 					"<!": ["cyr_[c,s]_let_yer"],
@@ -159,10 +172,21 @@
 					"<^>!<+>+": ["vertical_line"]
 				},
 				"Запятая": {
-					"+": ["semicolon"]
+					"+": ["semicolon"],
+					"<^>!": ["quote_angle_left_double"],
+					"<^>!<+": ["quote_left_double_ghost_ru"],
+					"<^>!>+": ["quote_low_9_double"],
+					"<^>!<!": ["quote_left_double"],
+					"<^>!<!<+": ["quote_angle_left"],
+					"<^>!<+>+": ["quote_low_9"]
 				},
 				"Точка": {
-					"+": ["colon"]
+					"+": ["colon"],
+					"<^>!": ["quote_angle_right_double"],
+					"<^>!<+": ["quote_right_double_ghost_ru"],
+					"<^>!>+": ["quote_low_9_double_reversed"],
+					"<^>!<!": ["quote_right_double"],
+					"<^>!<!<+": ["quote_angle_right"]
 				},
 				"Слэш": {
 					"+": ["question"]
