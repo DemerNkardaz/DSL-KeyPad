@@ -10,6 +10,7 @@ Array.Prototype.DefineProp("MergeWith", { Call: _ArrayMergeWith })
 Array.Prototype.DefineProp("Clear", { Call: _ArrayClear })
 Array.Prototype.DefineProp("ToLower", { Call: _ArrayToLower })
 Array.Prototype.DefineProp("ToUpper", { Call: _ArrayToUpper })
+Array.Prototype.DefineProp("Slice", { Call: _ArraySlice })
 
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("Values", { Call: _MapValues })
@@ -109,6 +110,22 @@ _ArrayToUpper(this) {
 		if item is String
 			result.Push(StrUpper(item))
 
+	return result
+}
+
+_ArraySlice(this, start := 1, length := this.Length, &totalLength := 0) {
+	local result := []
+
+	for index, value in this {
+		if index < start
+			continue
+		if result.Length >= length
+			break
+
+		result.Push(value)
+	}
+
+	totalLength := result.Length
 	return result
 }
 

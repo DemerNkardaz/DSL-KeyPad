@@ -126,7 +126,10 @@ Class Update {
 			}
 
 			if filesToDelete.Length > 0 {
-				MB := MsgBox(Locale.ReadInject("gui.options.update_found_legacy_files", [filesToDelete.ToString('`n')]), App.Title(), "YesNo Icon!")
+				local messageListArray := filesToDelete.Slice(1, 10, &totalItems)
+				local messageList := messageListArray.ToString("`n") (filesToDelete.Length != totalItems ? "`n`n" Locale.ReadInject("gui.options.update_found_legacy_files_overflow_count", [filesToDelete.Length - totalItems]) : "")
+
+				MB := MsgBox(Locale.ReadInject("gui.options.update_found_legacy_files", [messageList]), App.Title(), "YesNo Icon!")
 				if MB = "Yes" {
 					for relative in filesToDelete
 						FileDelete(App.paths.dir relative)

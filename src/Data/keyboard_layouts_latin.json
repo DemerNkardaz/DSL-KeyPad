@@ -669,7 +669,7 @@
 			},
 			"Moded": {
 				"E": {
-					"<^>!": ["lat_[c,s]_let_e_breve"]
+					"<^>!": ["lat_[c,s]_let_e__breve"]
 				},
 				"Thorn": {
 					"<^>!": ["lat_[c,s]_let_t_thorn__stroke_short"],

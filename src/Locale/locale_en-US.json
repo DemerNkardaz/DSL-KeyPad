@@ -157,6 +157,7 @@
 					"success": "Repair completed successfully."
 				},
 				"update_found_legacy_files": "The installation contains library and/or localization files not used in the new version.\n\nWould you like to delete them?\n\nFile list:\n{}",
+				"update_found_legacy_files_overflow_count": "And {} more file(s).",
 				"update_found_legacy_files_deleted": "Deletion completed successfully.",
 				"letterI": "“I” input type",
 				"LaTeX": {
