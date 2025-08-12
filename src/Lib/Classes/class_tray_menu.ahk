@@ -35,6 +35,9 @@ Class TrayMenu {
 			scriptForms: Locale.Read("dictionary.scripts") "`t" Window LeftAlt " S",
 			glyphForms: Locale.Read("dictionary.glyph_variations") "`t" Window LeftAlt " A",
 			layouts: Locale.Read("dictionary.layouts"),
+			layoutsLatin: Locale.Read("script_labels.latin"),
+			layoutsCyrillic: Locale.Read("script_labels.cyrillic"),
+			layoutsHellenic: Locale.Read("script_labels.hellenic", , , , , 2),
 			TSP_TELEX: Locale.Read("telex_script_processor") "`t" Window LeftAlt " D",
 			TSP_TiengViet: Locale.Read("telex_script_processor.labels.tieng_viet") "`t" RightAlt " F2",
 			TSP_HanYuPinYin: Locale.Read("telex_script_processor.labels.hanyu_pinyin") "`t" RightAlt RightShift " F2",
@@ -79,9 +82,9 @@ Class TrayMenu {
 
 		TELEXModes := ScripterStore.storedData["TELEX"].Length // 2
 		Loop TELEXModes {
-			i := A_Index * 2 - 1
-			dataName := ScripterStore.storedData["TELEX"][i]
-			dataValue := ScripterStore.storedData["TELEX"][i + 1]
+			layoutIndex := A_Index * 2 - 1
+			dataName := ScripterStore.storedData["TELEX"][layoutIndex]
+			dataValue := ScripterStore.storedData["TELEX"][layoutIndex + 1]
 			if dataValue.Has("hidden") && dataValue["hidden"]
 				continue
 			this.AddScripterItems(sciptsMenu, dataName, dataValue, "TELEX")
@@ -92,9 +95,9 @@ Class TrayMenu {
 
 		scripterAlts := ScripterStore.storedData["Alternative Modes"].Length // 2
 		Loop scripterAlts {
-			i := A_Index * 2 - 1
-			dataName := ScripterStore.storedData["Alternative Modes"][i]
-			dataValue := ScripterStore.storedData["Alternative Modes"][i + 1]
+			layoutIndex := A_Index * 2 - 1
+			dataName := ScripterStore.storedData["Alternative Modes"][layoutIndex]
+			dataValue := ScripterStore.storedData["Alternative Modes"][layoutIndex + 1]
 			if dataValue.Has("hidden") && dataValue["hidden"]
 				continue
 			this.AddScripterItems(sciptsMenu, dataName, dataValue)
@@ -109,9 +112,9 @@ Class TrayMenu {
 
 		glyphVariants := ScripterStore.storedData["Glyph Variations"].Length // 2
 		Loop glyphVariants {
-			i := A_Index * 2 - 1
-			dataName := ScripterStore.storedData["Glyph Variations"][i]
-			dataValue := ScripterStore.storedData["Glyph Variations"][i + 1]
+			layoutIndex := A_Index * 2 - 1
+			dataName := ScripterStore.storedData["Glyph Variations"][layoutIndex]
+			dataValue := ScripterStore.storedData["Glyph Variations"][layoutIndex + 1]
 			if dataValue.Has("hidden") && dataValue["hidden"]
 				continue
 			this.AddScripterItems(glyphVariantsMenu, dataName, dataValue, "Glyph Variations")
@@ -120,17 +123,44 @@ Class TrayMenu {
 		this.tray.Add(labels.glyphForms, glyphVariantsMenu)
 
 		layoutsMenu := Menu()
-		layoutist := [KbdLayoutReg.storedData["latin"].Keys(), KbdLayoutReg.storedData["cyrillic"].Keys()]
+		layouts := [
+			Map("type", "latin", "list", KbdLayoutReg.storedData["latin"].Keys()),
+			Map("type", "cyrillic", "list", KbdLayoutReg.storedData["cyrillic"].Keys()),
+			Map("type", "hellenic", "list", KbdLayoutReg.storedData["hellenic"].Keys()),
+		]
 
-		for i, layoutType in layoutist {
-			if i > 1
-				layoutsMenu.Add()
-			for layoutName in layoutType {
+		for itemIndex, item in layouts {
+			for layoutIndex, layoutName in item["list"] {
 				local currentLayout := layoutName
+				local headerOptions := ""
+
+				if (itemIndex > 1 && layoutIndex == 1)
+					headerOptions .= "BarBreak"
+
+				if (layoutIndex == 1) {
+					local title := labels.layouts%StrTitle(item["type"])%
+					layoutsMenu.Add(title, (*) => [], headerOptions)
+					layoutsMenu.Disable(title)
+					layoutsMenu.Add()
+				}
+
 				layoutsMenu.Add(currentLayout, ((layout) => (*) => KbdBinder.SetLayout(layout))(currentLayout))
-				layoutsMenu.SetIcon(currentLayout, App.icoDLL, App.indexIcos[i > 1 ? "cyrillic" : "latin"])
+				layoutsMenu.SetIcon(currentLayout, App.icoDLL, App.indexIcos[item["type"]])
 			}
 		}
+
+		; THIS IS LEGACY
+		; layoutist := [KbdLayoutReg.storedData["latin"].Keys(), KbdLayoutReg.storedData["cyrillic"].Keys()]
+
+		; for i, layoutType in layoutist {
+		; 	if i > 1
+		; 		layoutsMenu.Add("", Menu(), "BarBreak")
+		; 	for layoutName in layoutType {
+		; 		local currentLayout := layoutName
+		; 		layoutsMenu.Add(currentLayout, ((layout) => (*) => KbdBinder.SetLayout(layout))(currentLayout))
+		; 		layoutsMenu.SetIcon(currentLayout, App.icoDLL, App.indexIcos[i > 1 ? "cyrillic" : "latin"])
+		; 	}
+		; }
 
 		this.tray.Add(labels.layouts, layoutsMenu)
 

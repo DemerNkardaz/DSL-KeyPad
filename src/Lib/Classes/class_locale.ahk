@@ -94,11 +94,15 @@ Class Locale {
 	}
 
 
-	static Read(entryName, inSection := "", validate := False, &output?, strInjections := []) {
+	static Read(entryName, inSection := "", validate := False, &output?, strInjections := [], variantSelect := 1) {
 		local intermediate := ""
 		local section := Language.Validate(inSection) ? inSection : Language.Get()
 
 		local intermediate := this.ReadStr(section, entryName)
+
+		while (RegExMatch(intermediate, "\$\((.*?)\)", &match)) {
+			intermediate := StrReplace(intermediate, match[0], this.VariantSelect(match[0], variantSelect))
+		}
 
 		while (RegExMatch(intermediate, "\{@([a-zA-Z-]*)(?::([^\}]+))?\}", &match)) {
 			local langCode := (match[1] != "" ? match[1] : section)

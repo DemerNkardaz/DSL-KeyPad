@@ -65,7 +65,15 @@ Class KbdBinder {
 
 
 	static SetLayout(layout) {
-		layoutType := KbdLayoutReg.storedData["latin"].Has(layout) ? "Latin" : KbdLayoutReg.storedData["cyrillic"].Has(layout) ? "Cyrillic" : ""
+		local types := KbdLayoutReg.storedData.Keys()
+		local layoutType := ""
+
+		for each in types {
+			if KbdLayoutReg.storedData[each].Has(layout) {
+				layoutType := StrTitle(each)
+				break
+			}
+		}
 
 		if StrLen(layoutType) > 0 {
 			Cfg.Set(layout, "Layout_" layoutType)

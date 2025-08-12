@@ -103,9 +103,9 @@ Class LocaleGenerator {
 						if RegExMatch(bound, "\:\:(.*?)$", &match) {
 							local index := Integer(match[1])
 							local bound := SubStr(bound, 1, match.Pos(0) - 1)
-							l%boundLink% .= Locale.VariantSelect(Locale.Read(pfx localeKey "." bound, lang), index) (i < splitted.Length ? " " : "")
+							l%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , index) (i < splitted.Length ? " " : "")
 						} else
-							l%boundLink% .= Locale.VariantSelect(Locale.Read(pfx localeKey "." bound, lang), 1) (i < splitted.Length ? " " : "")
+							l%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , 1) (i < splitted.Length ? " " : "")
 					}
 				}
 			}
@@ -118,13 +118,13 @@ Class LocaleGenerator {
 			if isAlt {
 				entry["titles"][langCode] := Util.StrUpper(Locale.Read(pfx "type." lType, lang), 1) " " lBeforeletter postLetter lAfterletter lSecondName proxyMark
 			} else {
-				localedCase := lCase != "neutral" ? Locale.VariantSelect(Locale.Read(pfx "case." lCase, lang), lVariant) " " : ""
+				localedCase := lCase != "neutral" ? Locale.Read(pfx "case." lCase, lang, , , , lVariant) " " : ""
 
 				entry["titles"][langCode] := (
-					Locale.VariantSelect(Locale.Read(pfx "prefix." lScript (!isGermanic ? scriptAdditive : ""), lang), lVariant)
+					Locale.Read(pfx "prefix." lScript (!isGermanic ? scriptAdditive : ""), lang, , , , lVariant)
 					" "
 					localedCase Locale.Read(pfx "type." lType, lang)
-					(isGermanic && scriptAdditive != "" ? " " Locale.VariantSelect(Locale.Read(pfx "prefix." lScript scriptAdditive, lang), lVariant) : "")
+					(isGermanic && scriptAdditive != "" ? " " Locale.Read(pfx "prefix." lScript scriptAdditive, lang, , , , lVariant) : "")
 					" "
 					lBeforeletter
 					postLetter
@@ -164,12 +164,12 @@ Class LocaleGenerator {
 		}
 
 		tagScriptAdditive := Map(
-			"en-US", scriptAdditive ? " " Locale.VariantSelect(Locale.Read(pfx "tag." lScript (scriptAdditive), "en-US"), lVariant) : "",
-			"ru-RU", scriptAdditive ? " " Locale.VariantSelect(Locale.Read(pfx "tag." lScript (scriptAdditive), "ru-RU"), lVariant) : "",
+			"en-US", scriptAdditive ? " " Locale.Read(pfx "tag." lScript (scriptAdditive), "en-US", , , , lVariant) : "",
+			"ru-RU", scriptAdditive ? " " Locale.Read(pfx "tag." lScript (scriptAdditive), "ru-RU", , , , lVariant) : "",
 		)
 
 		tags["en-US"] := (
-			Locale.VariantSelect(Locale.Read(pfx "tag." lScript, "en-US"), lVariant)
+			Locale.Read(pfx "tag." lScript, "en-US", , , , lVariant)
 			(isGermanic ? " " Locale.Read(pfx "type." lType, "en-US") : "")
 			tagScriptAdditive["en-US"] " "
 			tags["en-US"]
@@ -177,7 +177,7 @@ Class LocaleGenerator {
 		tags["ru-RU"] := (
 			cyrillicTasgScriptAtStart ?
 				(
-					Locale.VariantSelect(Locale.Read(pfx "tag." lScript, "ru-RU"), lVariant)
+					Locale.Read(pfx "tag." lScript, "ru-RU", , , , lVariant)
 					(isGermanic ? " " Locale.Read(pfx "type." lType, "ru-RU") : "")
 					tagScriptAdditive["ru-RU"] " "
 					tags["ru-RU"]
@@ -185,7 +185,7 @@ Class LocaleGenerator {
 			: (
 				tags["ru-RU"]
 				" "
-				Locale.VariantSelect(Locale.Read(pfx "tag." lScript, "ru-RU"), lVariant)
+				Locale.Read(pfx "tag." lScript, "ru-RU", , , , lVariant)
 			)
 		)
 
@@ -209,9 +209,9 @@ Class LocaleGenerator {
 				for lang in ["en-US", "ru-RU"] {
 					local curScript := (tagAdd.Has("script") ? tagAdd.script : lScript)
 					local curType := (tagAdd.Has("type") ? tagAdd.type : lType)
-					local aLScript := Locale.VariantSelect(Locale.Read(pfx "tag." curScript, lang), lVariant)
-					local aScriptAdditive := Locale.VariantSelect(Locale.Read(pfx "tag." curScript "." tagAdd["scriptAdditive"], lang), lVariant)
-					local aLType := Locale.VariantSelect(Locale.Read(pfx "type." curType, lang), lVariant)
+					local aLScript := Locale.Read(pfx "tag." curScript, lang, , , , lVariant)
+					local aScriptAdditive := Locale.Read(pfx "tag." curScript "." tagAdd["scriptAdditive"], lang, , , , lVariant)
+					local aLType := Locale.Read(pfx "type." curType, lang, , , , lVariant)
 					local lBuildedName := StrLower("scripts." curScript ".n_" curType "_" letter "_" tagAdd["scriptAdditive"] "_" tagAdd["letter"]) ".letter_locale"
 
 					additionalTags.Push(

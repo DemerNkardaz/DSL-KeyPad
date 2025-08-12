@@ -24,6 +24,8 @@
   - Tray menu: Added display of bindings for few commands.
   - Symbols 『』 moved to “RAlt LAlt LShift CapsLock On []” bind.
   - Binding “RAlt RShift N”: characters “Ɲɲ” replaced with “Ŋŋ”.
+  - Submenu “Layouts” in tray now has columns for Latin, Cyrillic and Hellenic characters.
+  - Variant selection for locale now moved directly to Locale.Read() method.
 
 - Fixes:
 
@@ -79,6 +81,8 @@
   - Меню трея: Добавлено отображение привязок для некоторых команд.
   - Символы 『』 перемещены на привязку «RAlt LAlt LShift CapsLock On []».
   - Привязка «RAlt RShift N»: символы «Ɲɲ» заменены на «Ŋŋ».
+  - Подменю «Раскладки» в трее теперь имеет вид колонок для латиницы, кириллицы и эллиницы.
+  - Выбор варианта локали теперь перенесён непосредственно в метод Locale.Read().
 
 - Исправления:
 
