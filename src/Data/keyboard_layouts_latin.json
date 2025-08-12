@@ -1,5 +1,155 @@
 {
 	"QWERTY": { "keys": {} },
+	"AZERTY": {
+		"note": "This variant of the AZERTY layout has been cleared of several special characters for better suitability for the DSL KeyPad’s bindings.",
+		"keys": {
+			"SubscriptTwo": "SC029",
+			"HyphenMinus": "SC00C",
+			"Equals": "SC00D",
+			"A": "SC010",
+			"Z": "SC011",
+			"E": "SC012",
+			"R": "SC013",
+			"T": "SC014",
+			"Y": "SC015",
+			"U": "SC016",
+			"I": "SC017",
+			"O": "SC018",
+			"P": "SC019",
+			"Accents": "SC01A",
+			"Wallet": "SC01B",
+			"Asterisk": "SC02B",
+			"Q": "SC01E",
+			"S": "SC01F",
+			"D": "SC020",
+			"F": "SC021",
+			"G": "SC022",
+			"H": "SC023",
+			"J": "SC024",
+			"K": "SC025",
+			"L": "SC026",
+			"M": "SC027",
+			"UGrave": "SC028",
+			"ISOThan": "SC056",
+			"W": "SC02C",
+			"X": "SC02D",
+			"C": "SC02E",
+			"V": "SC02F",
+			"B": "SC030",
+			"N": "SC031",
+			"Comma": "SC032",
+			"Semicolon": "SC033",
+			"Colon": "SC034",
+			"Exclamation": "SC035"
+		},
+		"binds": {
+			"Flat": {
+				"[lazy]SubscriptTwo": ["[digit_2::subscript]"],
+				"[lazy]1": ["[digit_1,lat_s_lig_et]"],
+				"[lazy]2": ["[digit_2,lat_s_let_e__acute]"],
+				"[lazy]3": ["[digit_3,quote]"],
+				"[lazy]4": ["[digit_4,apostrophe]"],
+				"[lazy]5": ["[digit_5,left_parenthesis]"],
+				"[lazy]6": ["[digit_6,hyphen_minus]"],
+				"[lazy]7": ["[digit_7,lat_s_let_e__grave]"],
+				"[lazy]8": ["[digit_8,underscore]"],
+				"[lazy]9": ["[digit_9,lat_s_let_c__cedilla]"],
+				"[lazy]0": ["[digit_0,lat_s_let_a__acute]"],
+				"[lazy]HyphenMinus": ["[degree,right_parenthesis]"],
+				"[lazy]Accents": ["circumflex"],
+				"[lazy]Wallet": ["[wallet_pound,wallet_dollar]"],
+				"[lazy]UGrave": ["[percent,lat_s_let_u__grave]"],
+				"[lazy]ISOThan": ["less_than"],
+				"[lazy]Asterisk": ["[hel_s_let_m_mu,asterisk]"],
+				"[lazy]Colon": ["colon"],
+				"[lazy]Exclamation": ["exclamation"]
+			},
+			"Moded": {
+				"SubscriptTwo": {
+					"<^>!": "bullet",
+					"<^>!<!": "bullet_hyphen",
+					"<^>!<+": "interpunct",
+					"<^>!>+": "quote_right",
+					"<^>!<!<+": "bullet_triangle",
+					"<^>!<!>+": "bullet_white",
+					">+": "tilde_reversed"
+				},
+				"1": {
+					"<+": ["[lat_s_lig_et,digit_1]"]
+				},
+				"2": {
+					"<^>!": ["tilde"],
+					"<+": ["[lat_s_let_e__acute,digit_2]"]
+				},
+				"3": {
+					"<^>!": ["number_sign"],
+					"<+": ["[quote,digit_3]"]
+				},
+				"4": {
+					"<^>!": ["left_brace"],
+					"<+": ["[apostrophe,digit_4]"]
+				},
+				"5": {
+					"<^>!": ["left_bracket"],
+					"<+": ["[left_parenthesis,digit_5]"]
+				},
+				"6": {
+					"<^>!": ["vertical_line"],
+					"<+": ["[hyphen_minus,digit_6]"]
+				},
+				"7": {
+					"<^>!": ["grave"],
+					"<+": ["[lat_s_let_e__grave,digit_7]"]
+				},
+				"8": {
+					"<^>!": ["reverse_solidus"],
+					"<+": ["[underscore,digit_8]"]
+				},
+				"9": {
+					"<^>!": ["circumflex_accent"],
+					"<+": ["[lat_s_let_c__cedilla,digit_9]"]
+				},
+				"0": {
+					"<^>!": ["commercial_at"],
+					"<+": ["[lat_s_let_a__acute,digit_0]"]
+				},
+				"HyphenMinus": {
+					"<^>!": ["right_bracket"],
+					"<+": ["[right_parenthesis,degree]"]
+				},
+				"Accents": { "+": ["diaeresis"]},
+				"Wallet": { "<^>!": ["wallet_sign"], "+": ["[wallet_dollar,wallet_pound]"]},
+				"UGrave": { "+": ["[lat_s_let_u__grave,percent]"]},
+				"ISOThan": { "+": ["greater_than"] },
+				"Asterisk": {
+					"+": ["[asterisk,hel_s_let_m_mu]"],
+					"<^>!": "grapheme_joiner",
+					"<^<!": "dotted_circle",
+					"<^>!<+": "empty_set",
+					">+": "vertical_line"
+				},
+				"Equals": { "<^>!": ["right_brace"], "+": ["plus"]},
+				"Comma": { "+": ["question"] },
+				"Semicolon": { "+": ["dot"]},
+				"Colon": {
+					"+": ["solidus"],
+					"<^>!": ["quote_right_double"],
+					"<^>!<+": ["quote_right"],
+					"<^>!>+": ["quote_low_9_double_reversed"],
+					"<^>!<!": ["quote_angle_right_double"],
+					"<^>!<!<+": ["quote_angle_right"]
+				},
+				"Exclamation": {
+					"+": ["section"],
+					"<^>!": ["inverted_exclamation"],
+					"<^>!<+": ["double_exclamation_question"],
+					"<^>!>+": ["double_exclamation"],
+					"<+>+": ["medieval_exclamation"],
+					">+:Caps": "interrobang[_inverted,]"
+				}
+			}
+		}
+	},
 	"AZERTY DSL KeyPad": {
 		"note": "This variant of the AZERTY layout has been cleared of several special characters for better suitability for the DSL KeyPad’s bindings.",
 		"keys": {
