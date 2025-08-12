@@ -2787,6 +2787,10 @@
 		"symbol": { "letter": "${lat_s_let_s_long}t" }
 	},
 	"lat_[s]_lig_st", { "unicode": ["FB06"], "recipe": ["$"] },
+	"lat_[c,s]_lig_t_ezh", {
+		"unicode": ["A728", "A729"],
+		"symbol": { "letter": "${lat_[c,s]_let_t}${lat_[c,s]_let_z_ezh}" }
+	},
 	"lat_[s]_lig_ue", { "unicode": ["1D6B"] },
 	"lat_[s]_lig_uo", { "unicode": ["AB63"] },
 	"lat_[c,s]_lig_s_eszett", {
