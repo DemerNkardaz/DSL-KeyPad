@@ -176,6 +176,11 @@
 		"options": { "noCalc": [true, false], "useLetterLocale": true },
 		"recipe": ["$ra"]
 	},
+	"lat_[c,s]_let_l_broken", {
+		"unicode": ["A746", "A747"],
+		"recipe": ["$/l"],
+		"symbol": { "beforeLetter": "broken" }
+	},
 	"lat_[c,s]_let_o_rams_horn", {
 		"unicode": ["A7CB", "0264"],
 		"tags": [[], ["close-mid back unrounded vowel", "неогублённый гласный заднего ряда средне-верхнего подъёма"]],
