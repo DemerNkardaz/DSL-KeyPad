@@ -532,10 +532,6 @@ Class Options {
 		return Event.Trigger("UI Language", "Switched")
 	}
 
-	static PostSwitchLanguage() {
-		TrayMenu.SetTrayItems()
-	}
-
 	static SwitchVirualLayout(CB, category) {
 		if category = "Cyrillic" {
 			Cfg.Set(CB is String ? CB : CB.Text, "Layout_Cyrillic")

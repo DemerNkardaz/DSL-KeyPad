@@ -6,6 +6,9 @@ Class Event {
 		"Application Class", Map(
 			"Initialized", [],
 		),
+		"Application", Map(
+			"Initialized", [],
+		),
 		"Character Library", Map(
 			"Registration Starts", [],
 			"Registration Ends", [],
@@ -42,14 +45,17 @@ Class Event {
 		"Binding Storage", Map(
 			"Initialized", [],
 			"Item Registered", [],
+			"Updated", [],
 		),
 		"Scripter Storage", Map(
 			"Initialized", [],
 			"Item Registered", [],
+			"Updated", [],
 		),
 		"Layouts Storage", Map(
 			"Initialized", [],
 			"Item Registered", [],
+			"Updated", [],
 		),
 		"Scripter", Map(
 			"On Option Selected", [],

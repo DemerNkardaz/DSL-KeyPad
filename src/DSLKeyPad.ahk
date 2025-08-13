@@ -1,7 +1,7 @@
 /** ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
  *  ▓ @author Yalla Nkardaz (Ялла Нкардаз де Тудерий) aka Demer Nkardaz @DemerNkardaz
  *  ▓ Title:   DSL KeyPad (Diacritics-Spaces-Letters KeyPad)
- *  ▓ Version: 0.1.2
+ *  ▓ Version: 0.1
  *  ▓ Description: Multilingual input tool for typing languages based on
  *                 Latin & Cyrillic scripts, special characters, and historical
  *                 scripts (Old Turkic, Permic, Hungarian, Italic, Runic,
@@ -106,20 +106,7 @@ DottedProgressTooltip(4, &triggerEnds := False, 500)
 triggerEnds := True
 initialized := True
 
-TrayMenu.SetTrayItems()
-
-Class PostEvents {
-	static __New() {
-		Event.OnEvent("UI Data", "Changed", (*) => TrayMenu.SetTrayItems())
-		Event.OnEvent("UI Language", "Switched", (*) => TrayMenu.SetTrayItems())
-		Event.OnEvent("Layouts Storage", "Item Registered", (*) => TrayMenu.SetTrayItems())
-		Event.OnEvent("Scripter Storage", "Item Registered", (*) => TrayMenu.SetTrayItems())
-		return
-	}
-}
-
-ChrLib.CountOfUpdate()
-GlyphsPanel.SetPanelData()
+Event.Trigger("Application", "Initialized")
 
 ; Automatically created/updated by mods injector class
 ; Dynamically loads mods pasted into \Mods\ directory

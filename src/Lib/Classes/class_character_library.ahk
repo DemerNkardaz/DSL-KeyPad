@@ -1,4 +1,11 @@
 Class ChrLib {
+	Class Events {
+		static __New() {
+			Event.OnEvent("Application", "Initialized", (*) => ChrLib.CountOfUpdate())
+			return
+		}
+	}
+
 	static entries := {}
 	static entriesSource := {}
 	static entryGroups := Map("Favorites", [])

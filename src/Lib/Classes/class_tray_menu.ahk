@@ -1,4 +1,27 @@
 Class TrayMenu {
+	Class Events {
+		static SetTrayEvents := Map(
+			"UI Data", "Changed",
+			"UI Language", "Switched",
+			"Layouts Storage", "Item Registered",
+			"Layouts Storage", "Updated",
+			"Scripter Storage", "Item Registered",
+			"Scripter Storage", "Updated"
+		)
+
+		static __New() {
+			return Event.OnEvent("Application", "Initialized", (*) => (TrayMenu.SetTrayItems(), this.RegisterEvents()))
+		}
+
+		static RegisterEvents() {
+			local updateCallback := (*) => TrayMenu.SetTrayItems()
+
+			for eventClass, eventName in this.SetTrayEvents
+				Event.OnEvent(eventClass, eventName, updateCallback)
+			return
+		}
+	}
+
 	static tray := A_TrayMenu
 
 	static __New() {

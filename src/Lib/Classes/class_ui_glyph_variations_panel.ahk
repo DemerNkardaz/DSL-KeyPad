@@ -1,4 +1,11 @@
 Class GlyphsPanel {
+	Class Events {
+		static __New() {
+			Event.OnEvent("Application", "Initialized", (*) => GlyphsPanel.SetPanelData())
+			return
+		}
+	}
+
 	static panelGUI := Gui()
 	static title := ""
 	static glyphsPanelList := []

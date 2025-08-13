@@ -59,6 +59,6 @@ Class KbdLayoutUserDefined {
 
 	static Update() {
 		KbdLayoutUserDefined()
-		return
+		return Event.Trigger("Layouts Storage", "Updated")
 	}
 }
