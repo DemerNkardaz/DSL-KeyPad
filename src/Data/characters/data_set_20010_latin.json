@@ -532,6 +532,57 @@
 		"options": { "useLetterLocale": true },
 		"recipe": ["/Rum/ rot"]
 	},
+	"lat_[c,s]_let_et", {
+		"unicode": ["A76A", "A76B"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["/Et/"]
+	},
+	"lat_[c,s]_let_is", {
+		"unicode": ["A76C", "A76D"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["/Is/"]
+	},
+	"lat_[c,s]_let_con", {
+		"unicode": ["A76E", "A76F"],
+		"alterations": [{}, { "modifier": "A770" }],
+		"options": { "useLetterLocale": true },
+		"recipe": ["/Con/"]
+	},
+	"lat_[s]_let_dum", {
+		"unicode": ["A771"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["dum"]
+	},
+	"lat_[s]_let_lum", {
+		"unicode": ["A772"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["lum"]
+	},
+	"lat_[s]_let_mum", {
+		"unicode": ["A773"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["mum"]
+	},
+	"lat_[s]_let_num", {
+		"unicode": ["A774"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["num"]
+	},
+	"lat_[k,s]_let_rum", {
+		"unicode": ["A776", "A775"],
+		"options": { "useLetterLocale": true },
+		"recipe": [["Rum"], ["rum"]]
+	},
+	"lat_[s]_let_tum", {
+		"unicode": ["A777"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["tum"]
+	},
+	"lat_[s]_let_um", {
+		"unicode": ["A778"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["um"]
+	},
 	"lat_[c,s]_lig_ll_middle_welsh", {
 		"unicode": ["1EFA", "1EFB"],
 		"options": { "referenceLocale": "_l$" },
@@ -2714,12 +2765,13 @@
 			"fullwidth": "FF06"
 		},
 		"tags": ["амперсанд", "ampersand"],
-		"groups": ["Latin Ligatures"]
+		"groups": ["Latin Ligatures"],
+		"recipe": ["amp"]
 	},
 	"lat_[s]_lig_et_turned", {
 		"unicode": ["214B"],
 		"tags": ["перевёрнутый амперсанд", "turned ampersand"],
-		"recipe": ["$${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"],
+		"recipe": ["amp${arrow_left_circle}", "${lat_s_lig_et}${arrow_left_circle}"],
 		"symbol": { "beforeLetter": "turned" }
 	},
 	"lat_[s]_lig_ie", { "unicode": ["AB61"] },

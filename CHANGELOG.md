@@ -11,7 +11,7 @@
   - Addded missed cyrillic characters:
     - [ Ӫ ӫ ]
   - Addded missed latin characters:
-    - [ ᶴ ] [ Ꜩ ꜩ ]
+    - [ ᶴ ] [ Ꜩ ꜩ ] [ ꝱ ꝲ ꝳ ꝴ ꝶ ꝵ ꝷ ꝸ ] [ Ꝫ ꝫ Ꝭ ꝭ Ꝯ ꝯ ꝰ ]
   - Added support for new Latin layouts:
     - Workman, Halmak, Norman, AZERTY default/local variants, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf, PanQWERTY (Own), Qwickly
   - Added support for new Cyrillic layouts:
@@ -26,6 +26,7 @@
   - Binding “RAlt RShift N”: characters “Ɲɲ” replaced with “Ŋŋ”.
   - Submenu “Layouts” in tray now has columns for Latin, Cyrillic and Hellenic characters.
   - Variant selection for locale now moved directly to Locale.Read() method.
+  - Recipe “et” of symbol “&” changed to “amp” to release “et” for symbol “Ꝫ” (Latin letter Et).
 
 - Fixes:
 
@@ -68,7 +69,7 @@
   - Добавлены пропущенные символы кириллицы:
     - [ Ӫ ӫ ]
   - Добавлены пропущенные символы латиницы:
-    - [ ᶴ ] [ Ꜩ ꜩ ]
+    - [ ᶴ ] [ Ꜩ ꜩ ] [ ꝱ ꝲ ꝳ ꝴ ꝶ ꝵ ꝷ ꝸ ] [ Ꝫ ꝫ Ꝭ ꝭ Ꝯ ꝯ ꝰ ]
   - Добавлена поддержка новых раскладок латиницы:
     - Workman, Halmak, Norman, стандартный/локальный вариант AZERTY, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf, PanQWERTY (Собственная), Qwickly
   - Добавлена поддержка новых раскладок кириллицы:
@@ -83,6 +84,7 @@
   - Привязка «RAlt RShift N»: символы «Ɲɲ» заменены на «Ŋŋ».
   - Подменю «Раскладки» в трее теперь имеет вид колонок для латиницы, кириллицы и эллиницы.
   - Выбор варианта локали теперь перенесён непосредственно в метод Locale.Read().
+  - Рецепт «et» символа «&» изменён на «amp» для освобождения «et» для символа «Ꝫ» (Latin letter Et).
 
 - Исправления:
 

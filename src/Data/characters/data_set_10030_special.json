@@ -698,6 +698,7 @@
 	"colon", {
 		"unicode": "003A",
 		"alterations": {
+			"modifier": "A789",
 			"small": "FE55",
 			"fullwidth": "FF1A"
 		},
