@@ -12,6 +12,7 @@
 	"Noto Sans Lydian": ["lydian"],
 	"Noto Sans Cypriot": ["cypriot_syllabary"],
 	"Noto Sans Tifinagh": ["tifinagh"],
+	"Noto Sans Caucasian Albanian": ["caucasian_albanian"],
 	"Segoe UI Historic": ["phoenician", "shavian"],
 	"Segoe UI Symbol": ["deseret"],
 	"Kurinto Sans": ["^alchemical", "^astrological", "^astronomical", "^symbolistics"],

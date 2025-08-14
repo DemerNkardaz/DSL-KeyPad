@@ -85,8 +85,11 @@ Class Event {
 	 * @type {(eventClass: String, eventName: String, action: Callback) => Void}
 	 * 
 	 * @throws {Error} when the specified event class does not exist
-	 * @returns {Void}
+	 * @returns {Integer} 
 	 * 
+	 **/
+
+	/**
 	 * Example of binding on event that triggers when @method {@link BindHandler.Send}(combo, characterNames*) sends an output:
 	 * 
 	 * Stores last sent @output in a @static @variable
@@ -121,26 +124,51 @@ Class Event {
 	 * }
 	 **/
 	static OnEvent(eventClass, eventName, action) {
-		if !this.eventListeners.Has(eventClass)
-			throw "Event '" eventClass "' does not exist."
+		if !this.CheckEventExistence(eventClass, eventName, &message)
+			return Util.MsgError(message)
 
 		this.eventListeners[eventClass][eventName].Push(action)
+		return this.eventListeners[eventClass][eventName].Length
+	}
+
+	static ClearEvent(eventClass, eventName, actionIndex) {
+		if !this.CheckEventExistence(eventClass, eventName, &message)
+			return Util.MsgError(message)
+
+		return this.eventListeners[eventClass][eventName].Delete(actionIndex)
+	}
+
+	static ReplaceEvent(eventClass, eventName, actionIndex, newAction) {
+		if !this.CheckEventExistence(eventClass, eventName, &message)
+			return Util.MsgError(message)
+
+		if !this.eventListeners[eventClass][eventName].Has(actionIndex)
+			return Util.MsgError("Action with index " actionIndex " does not exist in event " eventName " of class " eventClass ".")
+
+		this.eventListeners[eventClass][eventName][actionIndex] := newAction
 		return
 	}
 
 	static Trigger(eventClass, eventName, args*) {
-		if this.eventListeners[eventClass][eventName].Length > 0
-			for action in this.eventListeners[eventClass][eventName] {
-				local maxParams := this.GetFunctionMaxParams(action)
+		if !this.CheckEventExistence(eventClass, eventName, &message)
+			return Util.MsgError(message)
 
-				local trimmedArgs := []
-				local argCount := Min(args.Length, maxParams)
+		local listeners := this.eventListeners[eventClass][eventName]
 
-				Loop argCount {
-					trimmedArgs.Push(args[A_Index])
+		if listeners.Length > 0
+			for i, action in listeners {
+				if listeners.Has(i) && action is Func {
+					local maxParams := this.GetFunctionMaxParams(action)
+
+					local trimmedArgs := []
+					local argCount := Min(args.Length, maxParams)
+
+					Loop argCount {
+						trimmedArgs.Push(args[A_Index])
+					}
+
+					action.Call(trimmedArgs*)
 				}
-
-				action.Call(trimmedArgs*)
 			}
 		return
 	}
@@ -148,6 +176,25 @@ Class Event {
 	static TriggerMulti(arrays*) {
 		for each in arrays
 			this.Trigger(each*)
+		return
+	}
+
+
+	static CheckEventExistence(eventClass, eventName, &message := "") {
+		if !this.eventListeners.Has(eventClass) || !this.eventListeners[eventClass].Has(eventName) {
+			local messageOutputs := [
+				"Error during checking of event existence`n",
+				!this.eventListeners.Has(eventClass)
+					? Format("Event class with name “{}” does not exist.", eventClass)
+				: Format("Event “{}” does not exist in class “{}”.", eventName, eventClass),
+				"Create a new or use existing one."
+			]
+
+			message := messageOutputs.ToString("`n")
+			return False
+		}
+
+		return True
 	}
 
 	static GetFunctionMaxParams(function) {

@@ -255,5 +255,8 @@
     <Image Include="DSLKeyPad.app_legend_small_flat.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_aghwan.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

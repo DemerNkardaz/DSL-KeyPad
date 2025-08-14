@@ -54,6 +54,7 @@ Class ChrLib {
 		"cypriot_syllabary",
 		"tifinagh",
 		"shavian",
+		"caucasian_albanian",
 		;
 		"north_arabian",
 		"south_arabian",

@@ -516,20 +516,19 @@ Class Cfg {
 
 Class Options {
 	static SwitchLanguage(CB) {
-		isLanguageWasChanged := False
+		; local isLanguageWasChanged := False
 
 		for key, value in Language.supported {
 			if value.title = CB.Text {
 				Cfg.Set(key, "User_Language")
-				isLanguageWasChanged := True
-				break
+				return Event.Trigger("UI Language", "Switched", value)
 			}
 		}
 
-		if !isLanguageWasChanged
-			return
+		; if !isLanguageWasChanged
+		; 	return
 
-		return Event.Trigger("UI Language", "Switched")
+		return
 	}
 
 	static SwitchVirualLayout(CB, category) {

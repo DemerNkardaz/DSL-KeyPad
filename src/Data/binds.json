@@ -1755,6 +1755,99 @@
 				}
 			}
 		},
+		"Aghwan": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "caucasian_albanian_n_let_a_alt",
+				"B": "caucasian_albanian_n_let_b_bet",
+				"C": "caucasian_albanian_n_let_c_cha",
+				"D": "caucasian_albanian_n_let_d_dat",
+				"E": "caucasian_albanian_n_let_e_eb",
+				"F": "caucasian_albanian_n_let_f_fam",
+				"G": "caucasian_albanian_n_let_g_gim",
+				"H": "caucasian_albanian_n_let_h_heyt",
+				"I": "caucasian_albanian_n_let_i_irb",
+				"J": "caucasian_albanian_n_let_y_yowd",
+				"K": "caucasian_albanian_n_let_k_kiw",
+				"L": "caucasian_albanian_n_let_l_lan",
+				"M": "caucasian_albanian_n_let_m_maq",
+				"N": "caucasian_albanian_n_let_n_nowc",
+				"O": "caucasian_albanian_n_let_o_on",
+				"P": "caucasian_albanian_n_let_p_pen",
+				"Q": "caucasian_albanian_n_let_q_qar",
+				"R": "caucasian_albanian_n_let_r_rat",
+				"S": "caucasian_albanian_n_let_s_seyk",
+				"T": "caucasian_albanian_n_let_t_tas",
+				"U": "",
+				"V": "caucasian_albanian_n_let_v_veyz",
+				"W": "caucasian_albanian_n_let_w_yayd",
+				"X": "",
+				"Y": "caucasian_albanian_n_let_y_iwn",
+				"Z": "caucasian_albanian_n_let_z_zarl"
+			},
+			"Moded": {
+				"A": {
+					"<^>!": "caucasian_albanian_n_let_a_sha"
+				},
+				"C": {
+					"<^>!": "caucasian_albanian_n_let_c_choy",
+					"<^>!>+": "caucasian_albanian_n_let_c_chi",
+					"<^>!<+": "caucasian_albanian_n_let_c_chat",
+					"<^>!<!": "caucasian_albanian_n_let_c_cyay"
+				},
+				"D": {
+					"<^>!": "caucasian_albanian_n_let_d_dyan",
+					"<^>!>+": "caucasian_albanian_n_let_d_dzay",
+					"<^>!<+": "caucasian_albanian_n_let_d_dzyay"
+				},
+				"E": {
+					"<^>!": "caucasian_albanian_n_let_e_eyn"
+				},
+				"G": {
+					"<^>!": "caucasian_albanian_n_let_g_gheys"
+				},
+				"H": {
+					"<^>!": "caucasian_albanian_n_let_h_xeyn"
+				},
+				"J": {
+					"<^>!": "caucasian_albanian_n_let_d_jhox",
+					"<^>!>+": "caucasian_albanian_n_let_j_jayn"
+				},
+				"K": {
+					"<^>!": "caucasian_albanian_n_let_k_kar"
+				},
+				"L": {
+					"<^>!": "caucasian_albanian_n_let_l_lyit"
+				},
+				"N": {
+					"<^>!": "caucasian_albanian_n_let_n_inya"
+				},
+				"O": {
+					"<^>!": "caucasian_albanian_n_let_o_aor"
+				},
+				"P": {
+					"<^>!": "caucasian_albanian_n_let_p_piwr"
+				},
+				"Q": {
+					"<^>!": "caucasian_albanian_n_let_q_qay"
+				},
+				"S": {
+					"<^>!": "caucasian_albanian_n_let_s_shak",
+					"<^>!>+": "caucasian_albanian_n_let_s_shoy"
+				},
+				"T": {
+					"<^>!": "caucasian_albanian_n_let_t_tyay",
+					"<^>!>+": "caucasian_albanian_n_let_t_ts_car",
+					"<^>!<+": "caucasian_albanian_n_let_t_tiwr",
+					"<^>!<!": "caucasian_albanian_n_let_t_cyaw",
+					"<^>!<!>+": "caucasian_albanian_n_let_t_cyan"
+				},
+				"Z": {
+					"<^>!": "caucasian_albanian_n_let_z_zhill",
+					"<!": "caucasian_albanian_n_let_z_zha"
+				}
+			}
+		},
 		"Math": {
 			"ForceSingle": true,
 			"Flat": {

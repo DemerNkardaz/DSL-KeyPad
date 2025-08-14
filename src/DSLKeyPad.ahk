@@ -1,13 +1,13 @@
 /** ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
  *  ▓ @author Yalla Nkardaz (Ялла Нкардаз де Тудерий) aka Demer Nkardaz @DemerNkardaz
- *  ▓ Title:   DSL KeyPad (Diacritics-Spaces-Letters KeyPad)
- *  ▓ Version: 0.1
+ *  ▓ Title:       DSL KeyPad (Diacritics-Spaces-Letters KeyPad)
+ *  ▓ Version:     0.1 alpha
  *  ▓ Description: Multilingual input tool for typing languages based on
  *                 Latin & Cyrillic scripts, special characters, and historical
  *                 scripts (Old Turkic, Permic, Hungarian, Italic, Runic,
  *                 Phoenician, Glagolitic, etc.).
- *  ▓ Repository: {@link https://github.com/DemerNkardaz/DSL-KeyPad}
- *  ▓ License:    {@license MIT}
+ *  ▓ Repository:  {@link https://github.com/DemerNkardaz/DSL-KeyPad}
+ *  ▓ License:     {@license MIT}
  *  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
  **/
 #SingleInstance Force

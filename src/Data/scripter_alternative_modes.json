@@ -1,4 +1,24 @@
 [
+	"IPA", {
+		"preview": [
+			"/\u02CC\u026Ant\u0259\u02C8n\u00E6\u0283(\u0259)n\u0259l f\u0259\u02C8n\u025Bt\u026Ak \u02C8\u00E6lf\u0259\u02CCb\u025Bt/"
+		],
+		"fonts": ["Noto Sans"],
+		"locale": "ipa",
+		"bindings": ["IPA"],
+		"uiid": "IPA",
+		"icons": ["ipa"]
+	},
+	"Math", {
+		"preview": [
+			"\u2211\u2212+\u00B1\u00D7\u00F7%\u2205\u2237\u2247\u22B9\u222D\u2206\u2207\u22D8\u22D9"
+		],
+		"fonts": ["Noto Serif"],
+		"locale": "math",
+		"bindings": ["Math"],
+		"uiid": "Math",
+		"icons": ["math"]
+	},
 	"Hellenic", {
 		"preview": [
 			"\u1F19\u03BB\u03BB\u03AC\u03B4\u03BF\u03C2 \u03C6\u1FF6\u03C2"
@@ -50,6 +70,16 @@
 		"bindings": ["Gothic"],
 		"uiid": "Gothic",
 		"icons": ["gothic"]
+	},
+	"Aghwan", {
+		"preview": [
+			"\uD801\uDD34\uD801\uDD59\uD801\uDD52\uD801\uDD61\uD801\uDD5A\uD801\uDD30\uD801\uDD3E\uD801\uDD34\uD801\uDD4C"
+		],
+		"fonts": ["Noto Sans Caucasian Albanian"],
+		"locale": "caucasian_albanian",
+		"bindings": ["Aghwan"],
+		"uiid": "Aghwan",
+		"icons": ["aghwan"]
 	},
 	"Old Italic", {
 		"preview": [
@@ -171,16 +201,6 @@
 		"uiid": "OldPersian",
 		"icons": ["persian"]
 	},
-	"IPA", {
-		"preview": [
-			"/\u02CC\u026Ant\u0259\u02C8n\u00E6\u0283(\u0259)n\u0259l f\u0259\u02C8n\u025Bt\u026Ak \u02C8\u00E6lf\u0259\u02CCb\u025Bt/"
-		],
-		"fonts": ["Noto Sans"],
-		"locale": "ipa",
-		"bindings": ["IPA"],
-		"uiid": "IPA",
-		"icons": ["ipa"]
-	},
 	"Deseret", {
 		"preview": [
 			"\uD801\uDC14\uD801\uDC2F\uD801\uDC45\uD801\uDC28\uD801\uDC49\uD801\uDC2F\uD801\uDC3B \uD801\uDC08\uD801\uDC4A\uD801\uDC41\uD801\uDC30\uD801\uDC3A\uD801\uDC2F\uD801\uDC3B"
@@ -200,15 +220,5 @@
 		"bindings": ["Shavian"],
 		"uiid": "Shavian",
 		"icons": ["shavian"]
-	},
-	"Math", {
-		"preview": [
-			"\u2211\u2212+\u00B1\u00D7\u00F7%\u2205\u2237\u2247\u22B9\u222D\u2206\u2207\u22D8\u22D9"
-		],
-		"fonts": ["Noto Serif"],
-		"locale": "math",
-		"bindings": ["Math"],
-		"uiid": "Math",
-		"icons": ["math"]
 	}
 ]

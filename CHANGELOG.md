@@ -20,6 +20,8 @@
     - ЯШЕРТЫ
   - Added new Latin bindings:
     - “RAlt LAlt LShift RShift N” → “Ɲɲ”
+  - Added new Alternative modes:
+    - Aghwan (Caucasian Albanian) script
 
 - Changes:
 
@@ -29,6 +31,7 @@
   - Submenu “Layouts” in tray now has columns for Latin, Cyrillic and Hellenic characters.
   - Variant selection for locale now moved directly to Locale.Read() method.
   - Recipe “et” of symbol “&” changed to “amp” to release “et” for symbol “Ꝫ” (Latin letter Et).
+  - IPA and Math Alternative modes moved to the top of selector for faster access.
 
 - Fixes:
 
@@ -80,6 +83,8 @@
     - ЯШЕРТЫ
   - Добавлены новые привязки латиницы:
     - «RAlt LAlt LShift RShift N» → «Ɲɲ»
+  - Добавлены новые Альтернативные режимы:
+    - Агванское письмо
 
 - Изменения:
 
@@ -89,6 +94,7 @@
   - Подменю «Раскладки» в трее теперь имеет вид колонок для латиницы, кириллицы и эллиницы.
   - Выбор варианта локали теперь перенесён непосредственно в метод Locale.Read().
   - Рецепт «et» символа «&» изменён на «amp» для освобождения «et» для символа «Ꝫ» (Latin letter Et).
+  - МФА и Математический Альтернативные режимы перемещены в начало селектора для более быстрого доступа.
 
 - Исправления:
 

@@ -1,0 +1,67 @@
+{
+	"en-US": {
+		"script_labels": {
+			"caucasian_albanian": "Aghwan"
+		},
+		"generated": {
+			"prefix": { "caucasian_albanian": "Aghwan" },
+			"tag": { "caucasian_albanian": "Aghwan" }
+		},
+		"scripts": {
+			"caucasian_albanian": {
+				"n_let_a_alt": { "letter_locale": "Alt" },
+				"n_let_a_sha": { "letter_locale": "Sha" },
+				"n_let_b_bet": { "letter_locale": "Bet" },
+				"n_let_c_cha": { "letter_locale": "Cha" },
+				"n_let_c_choy": { "letter_locale": "Choy" },
+				"n_let_c_chi": { "letter_locale": "Chi" },
+				"n_let_c_chat": { "letter_locale": "Chat" },
+				"n_let_c_cyay": { "letter_locale": "Cyay" },
+				"n_let_d_dat": { "letter_locale": "Dat" },
+				"n_let_d_dyan": { "letter_locale": "Dyan" },
+				"n_let_d_dzay": { "letter_locale": "Dzay" },
+				"n_let_d_dzyay": { "letter_locale": "Dzyay" },
+				"n_let_e_eb": { "letter_locale": "Eb" },
+				"n_let_e_eyn": { "letter_locale": "Eyn" },
+				"n_let_f_fam": { "letter_locale": "Fam" },
+				"n_let_g_gim": { "letter_locale": "Gim" },
+				"n_let_g_gheys": { "letter_locale": "Gheys" },
+				"n_let_h_heyt": { "letter_locale": "Heyt" },
+				"n_let_h_xeyn": { "letter_locale": "Xeyn" },
+				"n_let_i_irb": { "letter_locale": "Irb" },
+				"n_let_y_yowd": { "letter_locale": "Yowd" },
+				"n_let_d_jhox": { "letter_locale": "Jhox" },
+				"n_let_j_jayn": { "letter_locale": "Jayn" },
+				"n_let_k_kiw": { "letter_locale": "Kiw" },
+				"n_let_k_kar": { "letter_locale": "Kar" },
+				"n_let_l_lan": { "letter_locale": "Lan" },
+				"n_let_l_lyit": { "letter_locale": "Lyit" },
+				"n_let_m_maq": { "letter_locale": "Maq" },
+				"n_let_n_nowc": { "letter_locale": "Nowc" },
+				"n_let_n_inya": { "letter_locale": "Inya" },
+				"n_let_o_on": { "letter_locale": "On" },
+				"n_let_o_aor": { "letter_locale": "Aor" },
+				"n_let_p_pen": { "letter_locale": "Pen" },
+				"n_let_p_piwr": { "letter_locale": "Piwr" },
+				"n_let_q_qar": { "letter_locale": "Qar" },
+				"n_let_q_qay": { "letter_locale": "Qay" },
+				"n_let_r_rat": { "letter_locale": "Rat" },
+				"n_let_s_seyk": { "letter_locale": "Seyk" },
+				"n_let_s_shak": { "letter_locale": "Shak" },
+				"n_let_s_shoy": { "letter_locale": "Shoy" },
+				"n_let_t_tas": { "letter_locale": "Tas" },
+				"n_let_t_tyay": { "letter_locale": "Tyay" },
+				"n_let_t_ts_car": { "letter_locale": "Car" },
+				"n_let_t_tiwr": { "letter_locale": "Tiwr" },
+				"n_let_t_cyaw": { "letter_locale": "Cyaw" },
+				"n_let_t_cyan": { "letter_locale": "Cyan" },
+				"n_let_v_veyz": { "letter_locale": "Veyz" },
+				"n_let_w_yayd": { "letter_locale": "Yayd" },
+				"n_let_y_iwn": { "letter_locale": "Iwn" },
+				"n_let_z_zarl": { "letter_locale": "Zarl" },
+				"n_let_z_zhill": { "letter_locale": "Zhill" },
+				"n_let_z_zha": { "letter_locale": "Zha" }
+			}
+		}
+	}
+}

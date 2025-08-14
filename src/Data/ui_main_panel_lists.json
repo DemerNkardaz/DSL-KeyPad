@@ -120,6 +120,10 @@
 		"label": "Scripts",
 		"type": "Alternative Layout",
 		"group": [
+			"IPA", "",
+			"Mathematical", "",
+			"Math", "",
+			"Math Spaces", "",
 			"Hellenic", "",
 			"Hellenic Accented", "",
 			"Hellenic Diacritics", "",
@@ -143,6 +147,7 @@
 			"Old Permic", "",
 			"Old Hungarian", "",
 			"Gothic", "",
+			"Caucasian Albanian", "",
 			"Old Italic", "",
 			"Phoenician", "",
 			"South Arabian", "",
@@ -155,12 +160,8 @@
 			"Tifinagh", "",
 			"Ugaritic", "",
 			"Old Persian", "",
-			"IPA", "",
 			"Deseret", "",
-			"Shavian", "Shavian Ligatures", "",
-			"Mathematical", "",
-			"Math", "",
-			"Math Spaces"
+			"Shavian", "Shavian Ligatures", ""
 		],
 		"groupKey": {
 			"Hellenic": "@script_labels.hellenic",
@@ -193,6 +194,7 @@
 			"IPA": "@script_labels.ipa.short",
 			"Deseret": "@script_labels.deseret.short",
 			"Shavian": "@script_labels.shavian.short",
+			"Caucasian Albanian": "@script_labels.caucasian_albanian",
 			"Mathematical": "@script_labels.math"
 		}
 	},

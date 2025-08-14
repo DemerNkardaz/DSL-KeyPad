@@ -82,6 +82,7 @@ Class App {
 			"mods_flat",
 			"update_flat",
 			"legend_small_flat",
+			"aghwan",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

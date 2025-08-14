@@ -1,0 +1,67 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"caucasian_albanian": "Агванское письмо"
+		},
+		"generated": {
+			"prefix": { "caucasian_albanian": "Агванск$(ая|ий|ое)" },
+			"tag": { "caucasian_albanian": "агванск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"caucasian_albanian": {
+				"n_let_a_alt": { "letter_locale": "Алт" },
+				"n_let_a_sha": { "letter_locale": "Ша" },
+				"n_let_b_bet": { "letter_locale": "Бет" },
+				"n_let_c_cha": { "letter_locale": "Ча" },
+				"n_let_c_choy": { "letter_locale": "Чой" },
+				"n_let_c_chi": { "letter_locale": "Чи" },
+				"n_let_c_chat": { "letter_locale": "Чат" },
+				"n_let_c_cyay": { "letter_locale": "Цяй" },
+				"n_let_d_dat": { "letter_locale": "Дат" },
+				"n_let_d_dyan": { "letter_locale": "Дян" },
+				"n_let_d_dzay": { "letter_locale": "Дзай" },
+				"n_let_d_dzyay": { "letter_locale": "Дзяй" },
+				"n_let_e_eb": { "letter_locale": "Эб" },
+				"n_let_e_eyn": { "letter_locale": "Эйн" },
+				"n_let_f_fam": { "letter_locale": "Фам" },
+				"n_let_g_gim": { "letter_locale": "Гим" },
+				"n_let_g_gheys": { "letter_locale": "Ғейс" },
+				"n_let_h_heyt": { "letter_locale": "Хейт" },
+				"n_let_h_xeyn": { "letter_locale": "Хейн" },
+				"n_let_i_irb": { "letter_locale": "Ирб" },
+				"n_let_y_yowd": { "letter_locale": "Йуд" },
+				"n_let_d_jhox": { "letter_locale": "Джох" },
+				"n_let_j_jayn": { "letter_locale": "Джайн" },
+				"n_let_k_kiw": { "letter_locale": "Кю" },
+				"n_let_k_kar": { "letter_locale": "Кар" },
+				"n_let_l_lan": { "letter_locale": "Лан" },
+				"n_let_l_lyit": { "letter_locale": "Лит" },
+				"n_let_m_maq": { "letter_locale": "Мак" },
+				"n_let_n_nowc": { "letter_locale": "Нуц" },
+				"n_let_n_inya": { "letter_locale": "Иня" },
+				"n_let_o_on": { "letter_locale": "Он" },
+				"n_let_o_aor": { "letter_locale": "Ор" },
+				"n_let_p_pen": { "letter_locale": "Пен" },
+				"n_let_p_piwr": { "letter_locale": "Пюр" },
+				"n_let_q_qar": { "letter_locale": "Қар" },
+				"n_let_q_qay": { "letter_locale": "Қау" },
+				"n_let_r_rat": { "letter_locale": "Рат" },
+				"n_let_s_seyk": { "letter_locale": "Сейк" },
+				"n_let_s_shak": { "letter_locale": "Шак" },
+				"n_let_s_shoy": { "letter_locale": "Щой" },
+				"n_let_t_tas": { "letter_locale": "Тас" },
+				"n_let_t_tyay": { "letter_locale": "Тяй" },
+				"n_let_t_ts_car": { "letter_locale": "Цар" },
+				"n_let_t_tiwr": { "letter_locale": "Тюр" },
+				"n_let_t_cyaw": { "letter_locale": "Цяу" },
+				"n_let_t_cyan": { "letter_locale": "Цайн" },
+				"n_let_v_veyz": { "letter_locale": "Вейз" },
+				"n_let_w_yayd": { "letter_locale": "Йайд" },
+				"n_let_y_iwn": { "letter_locale": "Юн" },
+				"n_let_z_zarl": { "letter_locale": "Зарл" },
+				"n_let_z_zhill": { "letter_locale": "Жил" },
+				"n_let_z_zha": { "letter_locale": "Жа" }
+			}
+		}
+	}
+}

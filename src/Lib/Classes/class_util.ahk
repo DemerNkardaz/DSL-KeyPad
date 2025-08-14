@@ -6,6 +6,18 @@ Class Util {
 		return
 	}
 
+	static MsgError(message) {
+		return MsgBox(message, App.Title(), "Iconx")
+	}
+
+	static MsgWarning(message) {
+		return MsgBox(message, App.Title(), "Icon!")
+	}
+
+	static MsgInfo(message) {
+		return MsgBox(message, App.Title(), "Iconi")
+	}
+
 	static IsBool(value) {
 		return Type(value) = "Integer" && value >= 0 && value <= 1
 	}
