@@ -1,6 +1,7 @@
 {
 	"en-US": {
 		"wallet_sign": "Currency",
+		"wallet_euro_currency": "European Currency Unit",
 		"wallet_austral": "Austral",
 		"wallet_cent": "Cent",
 		"wallet_cedi": "Cedi",

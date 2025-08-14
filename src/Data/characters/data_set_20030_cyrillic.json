@@ -31,6 +31,17 @@
 		"groups": ["Cyrillic"],
 		"options": { "useLetterLocale": "Origin", "fastKey": "<!>+ /А/?Secondary" }
 	},
+	"cyr_[s]_let_v_rounded", {
+		"unicode": ["1C80"],
+		"recipe": ["во"],
+		"symbol": { "letter": "${cyr_[s]_let_v}", "beforeLetter": "rounded" }
+	},
+	"cyr_[s]_let_d_long_legged", {
+		"unicode": ["1C81"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["д${arrow_down}"],
+		"symbol": { "letter": "${cyr_[s]_let_d}" }
+	},
 	"cyr_[c,s]_let_ye_anchor", {
 		"unicode": ["0404", "0454"],
 		"alterations": [{}, { "combining": "A674" }],
@@ -129,6 +140,11 @@
 		"unicode": ["04C0", "04CF"],
 		"options": { "useLetterLocale": true, "fastKey": "<+<! /Л/?Secondary" }
 	},
+	"cyr_[s]_let_o_narrow", {
+		"unicode": ["1C82"],
+		"recipe": ["$${arrow_left}"],
+		"symbol": { "letter": "${cyr_[s]_let_o}", "beforeLetter": "narrow" }
+	},
 	"cyr_[c,s]_let_o_omega", {
 		"unicode": ["0460", "0461"],
 		"alterations": [{}, { "combining": "A67B" }],
@@ -185,6 +201,11 @@
 		"options": { "useLetterLocale": true, "fastKey": "<! /П/?Secondary" },
 		"recipe": ["\\ПС\\"]
 	},
+	"cyr_[s]_let_s_wide", {
+		"unicode": ["1C83"],
+		"recipe": ["$${arrow_right}"],
+		"symbol": { "letter": "${cyr_[s]_let_s}", "beforeLetter": "wide" }
+	},
 	"cyr_[c,s]_let_u_straight", {
 		"unicode": ["04AE", "04AF"],
 		"options": { "secondName": true, "fastKey": "/Ъ/?Secondary" }
@@ -224,6 +245,7 @@
 	},
 	"cyr_[c,s]_let_ch_djerv", {
 		"unicode": ["A648", "A649"],
+		"alterations": [{}, { "combining": "2DF8" }],
 		"options": { "useLetterLocale": true, "fastKey": "<+<! /Ч/?Secondary" },
 		"recipe": ["\\чжь\\"]
 	},
@@ -236,6 +258,11 @@
 	"cyr_[c,s]_let_neutral_yer", {
 		"unicode": ["A64E", "A64F"],
 		"options": { "useLetterLocale": true, "fastKey": "/Ь/?Secondary" }
+	},
+	"cyr_[s]_let_yer_tall", {
+		"unicode": ["1C86"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["ъ${arrow_up}"]
 	},
 	"cyr_[c,s]_let_y_yn", {
 		"unicode": ["A65E", "A65F"],
@@ -261,6 +288,16 @@
 		"unicode": ["A696", "A697"],
 		"options": { "useLetterLocale": true, "fastKey": "/Ш/?Secondary" },
 		"recipe": ["\\Ш\\${cyr_[c,s]_let_a_schwa}"]
+	},
+	"cyr_[s]_let_t_three_legged", {
+		"unicode": ["1C85"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["т3"]
+	},
+	"cyr_[s]_let_t_tall", {
+		"unicode": ["1C84"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["т${arrow_up}"]
 	},
 	"cyr_[c,s]_let_t_twe", {
 		"unicode": ["A68C", "A68D"],
@@ -349,6 +386,7 @@
 	},
 	"cyr_[c,s]_lig_yus_big_iotified", {
 		"unicode": ["046C", "046D"],
+		"alterations": [{}, { "combining": "2DFF" }],
 		"options": { "useLetterLocale": true, "fastKey": "<!>+ /У/?Secondary" },
 		"recipe": ["${cyr_[c,s]_let_i_decimal}\\аж\\", "${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_yus_big}"]
 	},
@@ -363,6 +401,7 @@
 	},
 	"cyr_[c,s]_lig_a_iotified", {
 		"unicode": ["A656", "A657"],
+		"alterations": [{}, { "combining": "2DFC" }],
 		"options": { "useLetterLocale": true, "fastKey": "<+ /Я/?Secondary" },
 		"recipe": ["${cyr_[c,s]_let_i_decimal}${cyr_[c,s]_let_a}"]
 	},
@@ -612,6 +651,11 @@
 		"options": { "fastKey": "<+ $?Secondary" },
 		"symbol": { "letter": "${cyr_[c,s]_let_i}" }
 	},
+	"cyr_[c,s]_let_i__grave", {
+		"unicode": ["040D", "045D"],
+		"options": { "fastKey": "$?Tertiary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_i}" }
+	},
 	"cyr_[c,s]_let_i__macron", {
 		"unicode": ["04E2", "04E3"],
 		"options": { "fastKey": ">+ $?Secondary" },
@@ -765,6 +809,10 @@
 		"symbol": { "letter": "${cyr_[c,s]_let_t}" },
 		"recipe": ["$${arrow_right}"]
 	},
+	"cyr_[c,s]_let_u__acute_double", {
+		"unicode": ["04F2", "04F3"],
+		"symbol": { "letter": "${cyr_[c,s]_let_u}" }
+	},
 	"cyr_[c,s]_let_u__breve", {
 		"unicode": ["040E", "045E"],
 		"options": { "fastKey": "$?Secondary" },
@@ -791,6 +839,10 @@
 		"symbol": { "letter": "${cyr_[c,s]_let_h}" },
 		"recipe": ["$${arrow_up}"]
 	},
+	"cyr_[c,s]_let_h__stroke_short", {
+		"unicode": ["04FE", "04FF"],
+		"symbol": { "letter": "${cyr_[c,s]_let_h}" }
+	},
 	"cyr_[c,s]_let_ch__descender", {
 		"unicode": ["04B6", "04B7"],
 		"options": { "fastKey": "<! $?Secondary" },
@@ -816,5 +868,10 @@
 		"unicode": ["04EC", "04ED"],
 		"options": { "fastKey": "$?Secondary" },
 		"symbol": { "letter": "${cyr_[c,s]_let_e}" }
+	},
+	"cyr_[n]_sign_thousands", {
+		"unicode": ["0482"],
+		"options": { "useLetterLocale": true },
+		"recipe": ["тыс"]
 	}
 ]

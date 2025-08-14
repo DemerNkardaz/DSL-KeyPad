@@ -62,7 +62,10 @@
 				"old_polish": "Old Polish",
 				"script": "script",
 				"archaic": "archaic",
-				"epigraphic": "epigraphic"
+				"epigraphic": "epigraphic",
+				"rounded": "rounded",
+				"narrow": "narrow",
+				"wide": "wide"
 			},
 			"after_letter": {
 				"late": "(late form)",

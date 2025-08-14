@@ -1,6 +1,7 @@
 {
 	"ru-RU": {
 		"wallet_sign": "Валюта",
+		"wallet_euro_currency": "Символ европейской денежной единицы (ЭКЮ)",
 		"wallet_austral": "Аргентинский Аустраль",
 		"wallet_cent": "Цент",
 		"wallet_cedi": "Седи",

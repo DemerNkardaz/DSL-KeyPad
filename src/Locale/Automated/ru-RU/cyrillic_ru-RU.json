@@ -28,6 +28,7 @@
 				"s_let_semisoft_sign": { "letter_locale": "полумягкий знак" },
 				"c_let_neutral_yer": { "letter_locale": "Нейтральный Ер" },
 				"s_let_neutral_yer": { "letter_locale": "нейтральный ер" },
+				"s_let_yer_tall": { "letter_locale": "высокий ер" },
 				"c_lig_yus_little_iotified": { "letter_locale": "Юс малый йотированный" },
 				"s_lig_yus_little_iotified": { "letter_locale": "юс малый йотированный" },
 				"c_lig_yus_big_iotified": { "letter_locale": "Юс большой йотированный" },
@@ -49,6 +50,7 @@
 				"s_lig_uk_unblended": { "letter_locale": "ук" },
 				"c_let_a_schwa": { "letter_locale": "Шва" },
 				"s_let_a_schwa": { "letter_locale": "шва" },
+				"s_let_d_long_legged": { "letter_locale": "длинноногая д" },
 				"c_let_d_dwe": { "letter_locale": "Двэ" },
 				"s_let_d_dwe": { "letter_locale": "двэ" },
 				"c_let_ch_abkhasian": { "letter_locale": "абхазская Че" },
@@ -99,6 +101,8 @@
 				"s_let_ts_tswe": { "letter_locale": "цвэ" },
 				"c_let_sh_shwe": { "letter_locale": "Швэ" },
 				"s_let_sh_shwe": { "letter_locale": "швэ" },
+				"s_let_t_three_legged": { "letter_locale": "трёхногая т" },
+				"s_let_t_tall": { "letter_locale": "высокая т" },
 				"c_let_t_twe": { "letter_locale": "Твэ" },
 				"s_let_t_twe": { "letter_locale": "твэ" },
 				"c_let_h_hwe": { "letter_locale": "Хвэ" },
@@ -136,7 +140,8 @@
 				"c_let_w": { "second_name": "(Вэ)" },
 				"s_let_w": { "second_name": "(вэ)" },
 				"c_dig_yeru_with_back_yer": { "second_name": "(Еры с Ером)" },
-				"s_dig_yeru_with_back_yer": { "second_name": "(еры с ером)" }
+				"s_dig_yeru_with_back_yer": { "second_name": "(еры с ером)" },
+				"n_sign_thousands": { "letter_locale": "Тысяч" }
 			}
 		}
 	}

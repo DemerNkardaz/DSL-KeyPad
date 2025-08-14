@@ -28,6 +28,7 @@
 				"s_let_semisoft_sign": { "letter_locale": "semisoft sign" },
 				"c_let_neutral_yer": { "letter_locale": "neutral Yer" },
 				"s_let_neutral_yer": { "letter_locale": "neutral yer" },
+				"s_let_yer_tall": { "letter_locale": "tall yer" },
 				"c_lig_yus_little_iotified": { "letter_locale": "iotified Little Yus" },
 				"s_lig_yus_little_iotified": { "letter_locale": "iotified little yus" },
 				"c_lig_yus_big_iotified": { "letter_locale": "iotified Big Yus" },
@@ -49,6 +50,7 @@
 				"s_lig_uk_unblended": { "letter_locale": "uk" },
 				"c_let_a_schwa": { "letter_locale": "Schwa" },
 				"s_let_a_schwa": { "letter_locale": "schwa" },
+				"s_let_d_long_legged": { "letter_locale": "long legged d" },
 				"c_let_d_dwe": { "letter_locale": "Dwe" },
 				"s_let_d_dwe": { "letter_locale": "dwe" },
 				"c_let_ch_abkhasian": { "letter_locale": "abkhasian Che" },
@@ -99,6 +101,8 @@
 				"s_let_ts_tswe": { "letter_locale": "tswe" },
 				"c_let_sh_shwe": { "letter_locale": "Shwe" },
 				"s_let_sh_shwe": { "letter_locale": "shwe" },
+				"s_let_t_three_legged": { "letter_locale": "t three-legged" },
+				"s_let_t_tall": { "letter_locale": "tall t" },
 				"c_let_t_twe": { "letter_locale": "Twe" },
 				"s_let_t_twe": { "letter_locale": "twe" },
 				"c_let_h_hwe": { "letter_locale": "Hwe" },
@@ -136,7 +140,8 @@
 				"c_let_w": { "second_name": "(We)" },
 				"s_let_w": { "second_name": "(we)" },
 				"c_dig_yeru_with_back_yer": { "second_name": "(Yeru with Yer)" },
-				"s_dig_yeru_with_back_yer": { "second_name": "(yeru with yer)" }
+				"s_dig_yeru_with_back_yer": { "second_name": "(yeru with yer)" },
+				"n_sign_thousands": { "letter_locale": "Thousands" }
 			}
 		}
 	}

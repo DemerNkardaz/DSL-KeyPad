@@ -2919,7 +2919,8 @@
 				"<^>!<+": ["cyr_[c,s]_let_i__diaeresis"],
 				"<^>!>+": ["cyr_[c,s]_let_i__macron"],
 				"<^>!<!": ["cyr_[c,s]_let_i_izhitsa"],
-				"<!": ["cyr_[c,s]_let_i_iota"]
+				"<!": ["cyr_[c,s]_let_i_iota"],
+				">+": ["cyr_[c,s]_let_i__grave"]
 			},
 			"Й": {
 				"<!": ["cyr_[c,s]_let_y_jota"],
