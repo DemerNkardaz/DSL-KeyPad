@@ -1,14 +1,14 @@
 {
 	"en-US": {
 		"script_labels": {
-			"parthian": "Parthian"
+			"palmyrene": "Palmyrene"
 		},
 		"generated": {
-			"prefix": { "parthian": "Parthian" },
-			"tag": { "parthian": "parthian" }
+			"prefix": { "palmyrene": "Palmyrene" },
+			"tag": { "palmyrene": "palmyrene" }
 		},
 		"scripts": {
-			"parthian": {
+			"palmyrene": {
 				"n_let_a_aleph": { "letter_locale": "Aleph" },
 				"n_let_a_ayin": { "letter_locale": "Ayin" },
 				"n_let_b_beth": { "letter_locale": "Beth" },
@@ -30,15 +30,16 @@
 				"n_let_t_taw": { "letter_locale": "Taw" },
 				"n_let_w_waw": { "letter_locale": "Waw" },
 				"n_let_y_yodh": { "letter_locale": "Yodh" },
-				"n_let_z_zain": { "letter_locale": "Zain" },
+				"n_let_z_zayin": { "letter_locale": "Zayin" },
 				"n_num_one": { "letter_locale": "One" },
 				"n_num_two": { "letter_locale": "Two" },
 				"n_num_three": { "letter_locale": "Three" },
 				"n_num_four": { "letter_locale": "Four" },
+				"n_num_five": { "letter_locale": "Five" },
 				"n_num_ten": { "letter_locale": "Ten" },
 				"n_num_twenty": { "letter_locale": "Twenty" },
-				"n_num_one_hundred": { "letter_locale": "One Hundred" },
-				"n_num_one_thousand": { "letter_locale": "One Thousand" }
+				"n_sym_left_pointing_fleuron": { "letter_locale": "Left Pointing Fleuron" },
+				"n_sym_right_pointing_fleuron": { "letter_locale": "Right Pointing Fleuron" }
 			}
 		}
 	}

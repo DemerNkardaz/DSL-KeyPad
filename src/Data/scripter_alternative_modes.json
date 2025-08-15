@@ -201,6 +201,16 @@
 		"uiid": "OldPersian",
 		"icons": ["persian"]
 	},
+	"Palmyrene", {
+		"preview": [
+			"\uD802\uDF40\uD802\uDF47\uD802\uDF4C\uD802\uDF53\uD802\uDF4A\uD802\uDF53 \uD802\uDF4C\uD802\uDF55\uD802\uDF53\uD802\uDF43\uD802\uDF55"
+		],
+		"fonts": ["Noto Sans Palmyrene"],
+		"locale": "palmyrene",
+		"bindings": ["Palmyrene"],
+		"uiid": "Palmyrene",
+		"icons": ["palmyrene"]
+	},
 	"Parthian", {
 		"preview": [
 			"\uD802\uDF40\uD802\uDF47\uD802\uDF4C\uD802\uDF53\uD802\uDF4A\uD802\uDF53 \uD802\uDF4C\uD802\uDF55\uD802\uDF53\uD802\uDF43\uD802\uDF55"

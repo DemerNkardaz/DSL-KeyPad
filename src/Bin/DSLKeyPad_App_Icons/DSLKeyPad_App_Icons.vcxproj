@@ -229,6 +229,7 @@
     <Image Include="DSLKeyPad.app_legend_small_flat.ico" />
     <Image Include="DSLKeyPad.app_aghwan.ico" />
     <Image Include="DSLKeyPad.app_parthian.ico" />
+    <Image Include="DSLKeyPad.app_palmyrene.ico" />
     <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

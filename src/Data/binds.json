@@ -1463,6 +1463,68 @@
 				"X": {"<!": "old_persian_n_log_xshaayathiya"}
 			}
 		},
+		"Palmyrene": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "palmyrene_n_let_a_aleph",
+				"B": "palmyrene_n_let_b_beth",
+				"C": "",
+				"D": "palmyrene_n_let_d_daleth",
+				"E": "",
+				"F": "",
+				"G": "palmyrene_n_let_g_gimel",
+				"H": "palmyrene_n_let_h_he",
+				"I": "",
+				"J": "palmyrene_n_let_y_yodh",
+				"K": "palmyrene_n_let_k_kaph",
+				"L": "palmyrene_n_let_l_lamedh",
+				"M": "palmyrene_n_let_m_mem",
+				"N": "palmyrene_n_let_n_nun",
+				"O": "",
+				"P": "palmyrene_n_let_p_pe",
+				"Q": "palmyrene_n_let_q_qoph",
+				"R": "palmyrene_n_let_r_resh",
+				"S": "palmyrene_n_let_s_samekh",
+				"T": "palmyrene_n_let_t_teth",
+				"U": "",
+				"V": "palmyrene_n_let_w_waw",
+				"W": "palmyrene_n_let_w_waw",
+				"X": "palmyrene_n_let_h_heth",
+				"Y": "palmyrene_n_let_y_yodh",
+				"Z": "palmyrene_n_let_z_zayin",
+				"1": "palmyrene_n_num_one",
+				"2": "palmyrene_n_num_two",
+				"3": "palmyrene_n_num_three",
+				"4": "palmyrene_n_num_four",
+				"5": "palmyrene_n_num_five",
+				"LeftBracket": "palmyrene_n_sym_left_pointing_fleuron",
+				"RightBracket": "palmyrene_n_sym_right_pointing_fleuron"
+			},
+			"Moded": {
+				"A": {
+					"<^>!": "palmyrene_n_let_a_ayin"
+				},
+				"H": {
+					"<^>!": "palmyrene_n_let_h_heth"
+				},
+				"N": {
+					"<^>!": "palmyrene_n_let_n_nun_final"
+				},
+				"S": {
+					"<^>!": "palmyrene_n_let_s_sadhe",
+					"<!": "palmyrene_n_let_s_shin"
+				},
+				"T": {
+					"<^>!": "palmyrene_n_let_t_taw"
+				},
+				"1": {
+					"<^>!": "palmyrene_n_num_ten"
+				},
+				"2": {
+					"<^>!": "palmyrene_n_num_twenty"
+				}
+			}
+		},
 		"Parthian": {
 			"ForceSingle": true,
 			"Flat": {

@@ -75,6 +75,7 @@
 #define IDI_LEGEND_SMALL_FLAT 171
 #define IDI_AGHWAN 172
 #define IDI_PARTHIAN 173
+#define IDI_PALMYRENE 174
 
 // Next default values for new objects
 //

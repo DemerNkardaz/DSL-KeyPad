@@ -1,0 +1,127 @@
+[
+	"palmyrene_n_let_a_aleph", {
+		"unicode": "10860",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_a_ayin", {
+		"unicode": "10870",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"palmyrene_n_let_b_beth", {
+		"unicode": "10861",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_d_daleth", {
+		"unicode": "10863",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_g_gimel", {
+		"unicode": "10862",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_h_he", {
+		"unicode": "10864",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_h_heth", {
+		"unicode": "10867",
+		"options": { "altLayoutKey": "X | >! $" }
+	},
+	"palmyrene_n_let_k_kaph", {
+		"unicode": "1086A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_l_lamedh", {
+		"unicode": "1086B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_m_mem", {
+		"unicode": "1086C",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_n_nun", {
+		"unicode": "1086E",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_n_nun_final", {
+		"unicode": "1086D",
+		"options": { "altLayoutKey": ">! $", "useLetterLocale": "nun$" },
+		"symbol": { "beforeLetter": "final" }
+	},
+	"palmyrene_n_let_p_pe", {
+		"unicode": "10871",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_q_qoph", {
+		"unicode": "10873",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_r_resh", {
+		"unicode": "10874",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_s_samekh", {
+		"unicode": "1086F",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_s_shin", {
+		"unicode": "10875",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"palmyrene_n_let_s_sadhe", {
+		"unicode": "10872",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"palmyrene_n_let_t_teth", {
+		"unicode": "10868",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_let_t_taw", {
+		"unicode": "10876",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"palmyrene_n_let_w_waw", {
+		"unicode": "10865",
+		"options": { "altLayoutKey": "$ | V" }
+	},
+	"palmyrene_n_let_y_yodh", {
+		"unicode": "10869",
+		"options": { "altLayoutKey": "$ | J" }
+	},
+	"palmyrene_n_let_z_zayin", {
+		"unicode": "10866",
+		"options": { "altLayoutKey": "$" }
+	},
+	"palmyrene_n_num_one", {
+		"unicode": "10879",
+		"options": { "altLayoutKey": "1" }
+	},
+	"palmyrene_n_num_two", {
+		"unicode": "1087A",
+		"options": { "altLayoutKey": "2" }
+	},
+	"palmyrene_n_num_three", {
+		"unicode": "1087B",
+		"options": { "altLayoutKey": "3" }
+	},
+	"palmyrene_n_num_four", {
+		"unicode": "1087C",
+		"options": { "altLayoutKey": "4" }
+	},
+	"palmyrene_n_num_five", {
+		"unicode": "1087D",
+		"options": { "altLayoutKey": "5" }
+	},
+	"palmyrene_n_num_ten", {
+		"unicode": "1087E",
+		"options": { "altLayoutKey": ">! 1" }
+	},
+	"palmyrene_n_num_twenty", {
+		"unicode": "1087F",
+		"options": { "altLayoutKey": ">! 2" }
+	},
+	"palmyrene_n_sym_[left,right]_pointing_fleuron", {
+		"unicode": ["10877", "10878"],
+		"options": { "altLayoutKey": ["[", "]"] }
+	}
+]

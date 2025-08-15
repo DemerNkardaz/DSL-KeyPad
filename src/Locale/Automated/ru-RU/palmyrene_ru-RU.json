@@ -1,14 +1,14 @@
 {
 	"ru-RU": {
 		"script_labels": {
-			"parthian": "Парфянское письмо"
+			"palmyrene": "Пальмирское письмо"
 		},
 		"generated": {
-			"prefix": { "parthian": "Парфянск$(ая|ий|ое)" },
-			"tag": { "parthian": "парфянск$(ая|ий|ое)" }
+			"prefix": { "palmyrene": "Пальмирск$(ая|ий|ое)" },
+			"tag": { "palmyrene": "пальмирск$(ая|ий|ое)" }
 		},
 		"scripts": {
-			"parthian": {
+			"palmyrene": {
 				"n_let_a_aleph": { "letter_locale": "Алеф" },
 				"n_let_a_ayin": { "letter_locale": "Айн" },
 				"n_let_b_beth": { "letter_locale": "Бет" },
@@ -30,15 +30,16 @@
 				"n_let_t_taw": { "letter_locale": "Тау" },
 				"n_let_w_waw": { "letter_locale": "Вав" },
 				"n_let_y_yodh": { "letter_locale": "Йод" },
-				"n_let_z_zain": { "letter_locale": "Заин" },
+				"n_let_z_zayin": { "letter_locale": "Заин" },
 				"n_num_one": { "letter_locale": "Один" },
 				"n_num_two": { "letter_locale": "Два" },
 				"n_num_three": { "letter_locale": "Три" },
 				"n_num_four": { "letter_locale": "Четыре" },
+				"n_num_five": { "letter_locale": "Пять" },
 				"n_num_ten": { "letter_locale": "Десять" },
 				"n_num_twenty": { "letter_locale": "Двадцать" },
-				"n_num_one_hundred": { "letter_locale": "Сто" },
-				"n_num_one_thousand": { "letter_locale": "Тысяча" }
+				"n_sym_left_pointing_fleuron": { "letter_locale": "Флерон, указывающий влево" },
+				"n_sym_right_pointing_fleuron": { "letter_locale": "Флерон, указывающий вправо" }
 			}
 		}
 	}

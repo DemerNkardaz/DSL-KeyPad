@@ -61,6 +61,7 @@ Class ChrLib {
 		;
 		"ugaritic",
 		"parthian",
+		"palmyrene",
 		;
 		"ipa",
 		"&ipa",

@@ -21,7 +21,7 @@
   - Added new Latin bindings:
     - “RAlt LAlt LShift RShift N” → “Ɲɲ”
   - Added new Alternative modes:
-    - Aghwan (Caucasian Albanian) script, Inscriptional Parthian
+    - Aghwan (Caucasian Albanian), Inscriptional Parthian, Palmyrene
 
 - Changes:
 
@@ -85,7 +85,7 @@
   - Добавлены новые привязки латиницы:
     - «RAlt LAlt LShift RShift N» → «Ɲɲ»
   - Добавлены новые Альтернативные режимы:
-    - Агванское, Парфянское письмо
+    - Агванское, Парфянское, Пальмирское письмо
 
 - Изменения:
 

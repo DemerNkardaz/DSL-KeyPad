@@ -261,5 +261,8 @@
     <Image Include="DSLKeyPad.app_parthian.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_palmyrene.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ $$
 ---
 
 <p align="center">
-<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4800+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4900+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
 <img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-5100+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
 <img src="https://custom-icon-badges.herokuapp.com/badge/binds-2100+/800+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
 <br>

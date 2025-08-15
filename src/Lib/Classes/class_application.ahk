@@ -107,6 +107,7 @@ Class App {
 			"legend_small_flat",
 			"aghwan",
 			"parthian",
+			"palmyrene",
 		] {
 			this.indexIcos.Set(ico, i)
 		}
