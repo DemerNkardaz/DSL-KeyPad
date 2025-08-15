@@ -4,7 +4,7 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.4.3 α — 2025-08-?? (upcoming update)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
+### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 
 - Additions:
 
