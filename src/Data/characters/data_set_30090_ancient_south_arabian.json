@@ -117,12 +117,10 @@
 	},
 	"south_arabian_n_num_one", {
 		"unicode": "10A7D",
-		"groups": ["South Arabian"],
 		"options": { "altLayoutKey": ">! 1" }
 	},
 	"south_arabian_n_num_fifty", {
 		"unicode": "10A7E",
-		"groups": ["South Arabian"],
 		"options": { "altLayoutKey": ">! 5" }
 	},
 	"south_arabian_n_sym_numeral_bracket", {

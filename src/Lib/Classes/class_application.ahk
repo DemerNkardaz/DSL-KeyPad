@@ -34,7 +34,30 @@ Class App {
 
 	static __New() {
 		for i, ico in [
-			"app", "germanic", "glagolitic", "turkic", "permic", "hungarian", "gothic", "ipa", "disabled", "math", "tieng_viet", "hanyu_pinyin", "italic", "phoenician", "south_arabian", "north_arabian", "carian", "lycian", "tifinagh", "ugaritic", "persian", "hellenic", "latin", "cyrillic",
+			"app",
+			"germanic",
+			"glagolitic",
+			"turkic",
+			"permic",
+			"hungarian",
+			"gothic",
+			"ipa",
+			"disabled",
+			"math",
+			"tieng_viet",
+			"hanyu_pinyin",
+			"italic",
+			"phoenician",
+			"south_arabian",
+			"north_arabian",
+			"carian",
+			"lycian",
+			"tifinagh",
+			"ugaritic",
+			"persian",
+			"hellenic",
+			"latin",
+			"cyrillic",
 			"glyph_combining",
 			"glyph_superscript",
 			"glyph_subscript",
@@ -83,6 +106,7 @@ Class App {
 			"update_flat",
 			"legend_small_flat",
 			"aghwan",
+			"parthian",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

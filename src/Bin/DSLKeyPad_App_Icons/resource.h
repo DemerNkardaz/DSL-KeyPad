@@ -74,6 +74,7 @@
 #define IDI_UPDATE_FLAT 170
 #define IDI_LEGEND_SMALL_FLAT 171
 #define IDI_AGHWAN 172
+#define IDI_PARTHIAN 173
 
 // Next default values for new objects
 //

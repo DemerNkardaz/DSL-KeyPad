@@ -201,6 +201,16 @@
 		"uiid": "OldPersian",
 		"icons": ["persian"]
 	},
+	"Parthian", {
+		"preview": [
+			"\uD802\uDF40\uD802\uDF47\uD802\uDF4C\uD802\uDF53\uD802\uDF4A\uD802\uDF53 \uD802\uDF4C\uD802\uDF55\uD802\uDF53\uD802\uDF43\uD802\uDF55"
+		],
+		"fonts": ["Noto Sans Inscriptional Parthian"],
+		"locale": "parthian",
+		"bindings": ["Parthian"],
+		"uiid": "Parthian",
+		"icons": ["parthian"]
+	},
 	"Deseret", {
 		"preview": [
 			"\uD801\uDC14\uD801\uDC2F\uD801\uDC45\uD801\uDC28\uD801\uDC49\uD801\uDC2F\uD801\uDC3B \uD801\uDC08\uD801\uDC4A\uD801\uDC41\uD801\uDC30\uD801\uDC3A\uD801\uDC2F\uD801\uDC3B"

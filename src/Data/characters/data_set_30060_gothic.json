@@ -101,12 +101,10 @@
 	},
 	"gothic_n_num_ninety", {
 		"unicode": "10341",
-		"groups": ["Gothic"],
 		"options": { "altLayoutKey": ">! P" }
 	},
 	"gothic_n_num_nine_hundred", {
 		"unicode": "1034A",
-		"groups": ["Gothic"],
 		"options": { "altLayoutKey": ">! S" }
 	}
 ]

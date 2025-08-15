@@ -97,7 +97,6 @@
 	},
 	"old_persian_n_num_[one,two,ten,twenty,hundred]", {
 		"unicode": ["103D1", "103D2", "103D3", "103D4", "103D5"],
-		"groups": ["Old Persian"],
 		"options": { "altLayoutKey": ["1", "2", "3", "4", "5"] }
 	},
 	"old_persian_n_log_xshaayathiya", {

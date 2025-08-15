@@ -60,6 +60,7 @@ Class ChrLib {
 		"south_arabian",
 		;
 		"ugaritic",
+		"parthian",
 		;
 		"ipa",
 		"&ipa",

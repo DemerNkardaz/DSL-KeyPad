@@ -1,0 +1,45 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"parthian": "Парфянское письмо"
+		},
+		"generated": {
+			"prefix": { "parthian": "Парфянск$(ая|ий|ое)" },
+			"tag": { "parthian": "парфянск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"parthian": {
+				"n_let_a_aleph": { "letter_locale": "Алеф" },
+				"n_let_a_ayin": { "letter_locale": "Айн" },
+				"n_let_b_beth": { "letter_locale": "Бет" },
+				"n_let_g_gimel": { "letter_locale": "Гимель" },
+				"n_let_d_daleth": { "letter_locale": "Далет" },
+				"n_let_h_he": { "letter_locale": "Хе" },
+				"n_let_h_heth": { "letter_locale": "Хет" },
+				"n_let_k_kaph": { "letter_locale": "Каф" },
+				"n_let_l_lamedh": { "letter_locale": "Ламед" },
+				"n_let_m_mem": { "letter_locale": "Мем" },
+				"n_let_n_nun": { "letter_locale": "Нун" },
+				"n_let_p_pe": { "letter_locale": "Пе" },
+				"n_let_q_qoph": { "letter_locale": "Коф" },
+				"n_let_r_resh": { "letter_locale": "Реш" },
+				"n_let_s_samekh": { "letter_locale": "Самек" },
+				"n_let_s_sadhe": { "letter_locale": "Саде" },
+				"n_let_s_shin": { "letter_locale": "Шин" },
+				"n_let_t_teth": { "letter_locale": "Тет" },
+				"n_let_t_taw": { "letter_locale": "Тау" },
+				"n_let_w_waw": { "letter_locale": "Вав" },
+				"n_let_y_yodh": { "letter_locale": "Йод" },
+				"n_let_z_zain": { "letter_locale": "Заин" },
+				"n_num_one": { "letter_locale": "Один" },
+				"n_num_two": { "letter_locale": "Два" },
+				"n_num_three": { "letter_locale": "Три" },
+				"n_num_four": { "letter_locale": "Четыре" },
+				"n_num_ten": { "letter_locale": "Десять" },
+				"n_num_twenty": { "letter_locale": "Двадцать" },
+				"n_num_one_hundred": { "letter_locale": "Сто" },
+				"n_num_one_thousand": { "letter_locale": "Тысяча" }
+			}
+		}
+	}
+}

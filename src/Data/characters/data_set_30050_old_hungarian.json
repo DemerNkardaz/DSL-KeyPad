@@ -198,32 +198,26 @@
 	},
 	"old_hungarian_n_num_one", {
 		"unicode": "10CFA",
-		"groups": ["Old Hungarian"],
 		"options": { "altLayoutKey": "1" }
 	},
 	"old_hungarian_n_num_five", {
 		"unicode": "10CFB",
-		"groups": ["Old Hungarian"],
 		"options": { "altLayoutKey": "2" }
 	},
 	"old_hungarian_n_num_ten", {
 		"unicode": "10CFC",
-		"groups": ["Old Hungarian"],
 		"options": { "altLayoutKey": "3" }
 	},
 	"old_hungarian_n_num_fifty", {
 		"unicode": "10CFD",
-		"groups": ["Old Hungarian"],
 		"options": { "altLayoutKey": "4" }
 	},
 	"old_hungarian_n_num_one_hundred", {
 		"unicode": "10CFE",
-		"groups": ["Old Hungarian"],
 		"options": { "altLayoutKey": "5" }
 	},
 	"old_hungarian_n_num_one_thousand", {
 		"unicode": "10CFF",
-		"groups": ["Old Hungarian"],
 		"options": { "altLayoutKey": "6" }
 	}
 ]

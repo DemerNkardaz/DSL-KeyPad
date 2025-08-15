@@ -21,7 +21,7 @@
   - Added new Latin bindings:
     - “RAlt LAlt LShift RShift N” → “Ɲɲ”
   - Added new Alternative modes:
-    - Aghwan (Caucasian Albanian) script
+    - Aghwan (Caucasian Albanian) script, Inscriptional Parthian
 
 - Changes:
 
@@ -42,6 +42,7 @@
   - Removed erroneous tabulation in the ‱ symbol’s LaTeX command.
   - Fixed missing Shift remapping of letter-keys for keyboard layouts.
   - Fixed mistake in “Ɏ”, “Ꞑ” bindings.
+  - Fixed displaying numerals of some scripts in the “Scripts” tab list.
 
 ### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 
@@ -84,7 +85,7 @@
   - Добавлены новые привязки латиницы:
     - «RAlt LAlt LShift RShift N» → «Ɲɲ»
   - Добавлены новые Альтернативные режимы:
-    - Агванское письмо
+    - Агванское, Парфянское письмо
 
 - Изменения:
 
@@ -105,6 +106,7 @@
   - Удалена ошибочная табуляция в LaTeX-команде символа ‱.
   - Исправлены отсутствующие переназначения буквенных клавиш на Shift для клавиатурных раскладок.
   - Исправлена ошибка в привязках для ввода «Ɏ», «Ꞑ».
+  - Исправлено отображение чисел некоторых письменностей в списке вкладки «Письменности».
 
 ### [0.1.3.2 α — 2025-07-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.3.2)
 

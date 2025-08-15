@@ -117,17 +117,14 @@
 	},
 	"north_arabian_n_num_one", {
 		"unicode": "10A9D",
-		"groups": ["North Arabian"],
 		"options": { "altLayoutKey": ">! 1" }
 	},
 	"north_arabian_n_num_ten", {
 		"unicode": "10A9E",
-		"groups": ["North Arabian"],
 		"options": { "altLayoutKey": ">! 2" }
 	},
 	"north_arabian_n_num_twenty", {
 		"unicode": "10A9F",
-		"groups": ["North Arabian"],
 		"options": { "altLayoutKey": ">! 3" }
 	}
 ]
