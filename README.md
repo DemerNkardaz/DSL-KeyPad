@@ -34,17 +34,33 @@ $$
 <img src="https://img.shields.io/gitlab/stars/DemerNkardaz%2Fdsl-keypad" alt="GitLab stars"/>
 <img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2FDemerNkardaz%2FDSL-KeyPad&label=visits&color=yellow" alt="visits"/>
 <br>
-<a href="https://github.com/DemerNkardaz/DSL-KeyPad"><img src="https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&color=yellow" alt="GitHub Downloads"/></a>
-<a href="https://sourceforge.net/projects/dsl-keypad/"><img src="https://img.shields.io/sourceforge/dm/dsl-keypad?logo=sourceforge&color=yellow" alt="SourceForge Downloads"/></a>
+<a href="https://github.com/DemerNkardaz/DSL-KeyPad"><img src="https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&label=%F0%9F%A1%87&labelColor=ffffff&logoColor=333333&color=yellow" alt="GitHub Downloads"/></a>
+<a href="https://sourceforge.net/projects/dsl-keypad/"><img src="https://img.shields.io/sourceforge/dt/dsl-keypad?logo=sourceforge&label=%F0%9F%A1%87&labelColor=ffffff&color=yellow" alt="SourceForge Downloads"/></a>
+<a href="https://github.com/DemerNkardaz/DSL-KeyPad/releases/latest"><img src="https://img.shields.io/github/v/tag/DemerNkardaz/DSL-KeyPad?label=latest%40version&labelColor=ffffff&color=yellow
+" alt="Latest Version"/></a>
 </p>
 
 <br>
 
-<img src="src/Bin/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="128" align="left">
+<img src="src/Bin/DSLKeyPad_App_Icons/DSLKeyPad.app.ico" alt="" width="74" align="left">
 
-“DSL KeyPad” is a tool written on [AutoHotkey 2.0](https://www.autohotkey.com/), designed for inputting a wide range of characters using hotkeys, [Compose](https://en.wikipedia.org/wiki/Compose_key)-like mode and auxiliary functions. Its primary focus is on enhancing input capabilities for Latin and Cyrillic scripts, allowing typing in multiple languages without the need for separate keyboard layouts for each language.
+“DSL KeyPad” is a tool written on [AutoHotkey 2.0](https://www.autohotkey.com/), designed for inputting a wide range of characters using hotkeys, [Compose](https://en.wikipedia.org/wiki/Compose_key)-like mode and auxiliary functions.
 
-You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-KeyPad-Docs/). Downloading available on [Releases](https://github.com/DemerNkardaz/DSL-KeyPad/releases) & [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
+This tool extends the range of characters available for input directly from the keyboard and primarily focuses on Latin and Cyrillic scripts, but is not limited to them. You only need to have Russian and English keyboard layouts installed in your system to be able to write in multiple languages, for example:
+
+- **Latin**: <span title="Old English">Ænglisċ sprǣċe</span>, <span title="French">Français</span>, <span title="Vietnamese">Tiếng Việt</span>, <span title="Mandarin (Romanization)">Hànyǔ Pīnyīn</span>, <span title="Old Norse">Norrœnt mál</span>, <span title="Romanian">Limba Română</span>, <span title="Spanish">Español</span>, <span title="Polish">Język polski</span>, <span title="Czech">Čeština</span>, <span title="Norwegian Bokmål">Bokmål</span>, <span title="Tamazight">Tamaziɣt</span>, <span title="Turkish">Türkçe</span>, <span title="Skolt Sami">Sää’mǩiõll</span>…
+
+- **Cyrillic**: <span title="Kazakh">Қазақ тілі</span>, <span title="Dungan">Хуэйзў йүян</span>, <span title="Tajik">Забони тоҷикӣ</span>, <span title="Yaghnobi">Йағнобӣ зивок</span>, <span title="Abkhaz">Аԥсуа бызшәа</span>, <span title="Avar">Авар мацӏ</span>, <span title="Ukrainian">Українська мова</span>, <span title="Old Church Slavonic">Словѣньскъ ѩꙁꙑкъ</span>, <span title="Montenegrin">Црногорски језик</span>, <span title="Old Romanian (Cyrillic)">Ли́мба Рꙋмѫнѣскъ</span>, <span title="Itelmen">Итәнмәӈин крвэԓхатас</span>, <span title="Daur">Даһур Усүүэ</span>, <span title="Evenki">Эвэды̄ турэ̄н</span>, <span title="Azerbaijani (Cyrillic)">Азәрбајҹанҹа</span>, <span title="Bashkir">Башҡорт теле</span>, <span title="Talysh">Тэлэңгэт</span>, <span title="Chuvash">Чӑваш чӗлхи</span>…
+
+The tool implements support for inputting various writing systems, for example: Runes, Glagolitic, Old Turkic, Old Permic, Phoenician, Ancient North Arabian etc. An International Phonetic Alphabet input mode is also available.
+
+Downloading available on [Releases](https://github.com/DemerNkardaz/DSL-KeyPad/releases) & [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
+
+**⚠️ AutoHotkey is required to use this tool.** Install it via Powershell or [download from its site](https://www.autohotkey.com/).
+
+```powershell
+winget install AutoHotkey.AutoHotkey
+```
 
 <br>
 
@@ -58,40 +74,54 @@ You can check the docs for this tool [here](https://demernkardaz.github.io/DSL-K
 
 ### Shortlist of Features
 
-- **Multilayer Hotkeys**: Including different for English (“Latin set”) and Russian (“Cyrillic set”).  
+- **Multilayer bindings**: Including different for English (“Latin set”) and Russian (“Cyrillic set”).
   E.g., \[en.\] <kbd>RAlt + A or Z</kbd> → `Ă`/`Ż`, then \[ru.\] <kbd>RAlt + Ф or Я</kbd> → `Ѳ`/`Ѧ`. Supports user-defined key bindings.
 
-- **Compositing Mode, or “Forge”**: Converts a sequence (“recipes”) of one set of characters into another.  
-  E.g., `AE` `OE` `TH` `ІѦ` `ЯЕ` `ⰦⰤ` `Ups` → `Æ` `Œ` `Þ` `Ѩ` `Ԙ` `Ⱙ` `Ʊ`. Supports user-defined recipes.
+- **Compositing mode, or “Forge”**: Converts a sequence (“recipes”) of one set of characters into another.<br>E.g., `AE` `OE` `TH` `ІѦ` `ЯЕ` `ⰦⰤ` `Ups` → `Æ` `Œ` `Þ` `Ѩ` `Ԙ` `Ⱙ` `Ʊ`. Supports user-defined recipes.
 
-- **Alternative Input**: A set of modes for various non-Latin/Cyrillic scripts (primarily historic), IPA, and mathematical symbols.  
-  E.g., \[Runic `ᛢᚹᛖᚱᛏᚤᚢᛁᛟᛈᚨᛊᛞᚠᚷᚺᛃᚲᛚᛉᚳᚡᛒᚾᛗ᛬`\] \[Glagolitic `ⰉⰜⰖⰍⰅⰐⰃⰞⰛⰈⰘⰟⰗⰂⰀⰒⰓⰡⰝⰔⰏⰋⰠⰁⰣⰦ`\].
+- **Alternative input**: A set of modes for various non-Latin/Cyrillic scripts (primarily historic), IPA, and mathematical symbols.<br>E.g., \[Runic `ᛢᚹᛖᚱᛏᚤᚢᛁᛟᛈᚨᛊᛞᚠᚷᚺᛃᚲᛚᛉᚳᚡᛒᚾᛗ᛬`\] \[Glagolitic `ⰉⰜⰖⰍⰅⰐⰃⰞⰛⰈⰘⰟⰗⰂⰀⰒⰓⰡⰝⰔⰏⰋⰠⰁⰣⰦ`\].<br>Available scripts:
 
-- **Glyph Variations**: Allows entering alternative variants of symbols, if available.  
-  E.g., `A` → `ᴬ` `𝐴` `𝐀` `𝑨` `𝙰` `Ａ` `ᴀ` `𝔄` `𝕬` `𝒜` `𝓐` `𝔸`.
+  - [International Phonetic Alphabet](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)
+  - [Runic](https://en.wikipedia.org/wiki/Runic_script)
+  - [Glagolitic](https://en.wikipedia.org/wiki/Glagolitic_script)
+  - [Old Turkic](https://en.wikipedia.org/wiki/Old_Turkic_script)
+  - [Old Permic](https://en.wikipedia.org/wiki/Old_Permic_script)
+  - [Old Hungarian](https://en.wikipedia.org/wiki/Old_Hungarian_script)
+  - [Gothic](https://en.wikipedia.org/wiki/Gothic_alphabet)
+  - [Aghwan](https://en.wikipedia.org/wiki/Caucasian_Albanian_script)
+  - [Etruscan, Oscan, South Picene, Umbrian…](https://en.wikipedia.org/wiki/Old_Italic_scripts)
+  - [Phoenician](https://en.wikipedia.org/wiki/Phoenician_alphabet)
+  - [Ancient South Arabian](https://en.wikipedia.org/wiki/Ancient_South_Arabian_script)
+  - [Ancient North Arabian](https://en.wikipedia.org/wiki/Ancient_North_Arabian)
+  - [Carian](https://en.wikipedia.org/wiki/Carian_alphabets)
+  - [Lycian](https://en.wikipedia.org/wiki/Lycian_alphabet)
+  - [Lydian](https://en.wikipedia.org/wiki/Lydian_alphabet)
+  - [Sidetic](https://en.wikipedia.org/wiki/Sidetic_language#The_Sidetic_script)
+  - [Cypriot Syllabary](https://en.wikipedia.org/wiki/Cypriot_syllabary)
+  - [Tifinagh](https://en.wikipedia.org/wiki/Tifinagh)
+  - [Ugaritic](https://en.wikipedia.org/wiki/Ugaritic_alphabet)
+  - [Old Persian](https://en.wikipedia.org/wiki/Old_Persian_cuneiform)
+  - [Palmyrene](https://en.wikipedia.org/wiki/Palmyrene_alphabet)
+  - [Inscriptional Parthian](https://en.wikipedia.org/wiki/Inscriptional_Parthian)
+  - [Deseret](https://en.wikipedia.org/wiki/Deseret_alphabet)
+  - [Shavian](https://en.wikipedia.org/wiki/Shavian_alphabet)
 
-- **Switch Between Entering Unicode Symbols/HTML Code/ $\LaTeX$ Commands**, if available.  
-  E.g., `Ă` `Ǣ` → `&Abreve;` `&#482;` ${\color{darkorange}\texttt{and}}$ `\u{A}` `\={\AE}` ${\color{darkorange}\texttt{or}}$ `\breve{A}` `\bar{\AE}` $\breve{A}$ $\text{Ǣ}$.
+- **Glyph variations**: Allows entering alternative variants of symbols, if available.<br>E.g., `A` → `ᴬ` `𝐴` `𝐀` `𝑨` `𝙰` `Ａ` `ᴀ` `𝔄` `𝕬` `𝒜` `𝓐` `𝔸`.
 
-- **Search Symbols in Local Library by Tags**: Allows searching for symbols in the local library by tags for easy input.  
-  E.g., `latin small ligature turned oe with short stroke` or shortened `oe tur str` → `ꭂ`.
+- **TELEX/VNI-like modes**: simplifies typing of [Tiếng Việt](https://en.wikipedia.org/wiki/Vietnamese_language) (Vietnamese), [Tơlơi Jơrai](https://en.wikipedia.org/wiki/Jarai_language) (Jarai) and [Hànyǔ Pīnyīn](https://en.wikipedia.org/wiki/Pinyin) with input similar to Vietnamese Telex and VNI layouts.
 
-- **Internal Keyboard Layouts**: Includes support for user-defined layouts.
+- **Switch between entering Unicode symbols/HTML Code/ $\LaTeX$ Commands**, if available.<br>E.g., `Ă` `Ǣ` → `&Abreve;` `&#482;` ${\color{darkorange}\texttt{and}}$ `\u{A}` `\={\AE}` ${\color{darkorange}\texttt{or}}$ `\breve{A}` `\bar{\AE}` $\breve{A}$ $\text{Ǣ}$.
+
+- **Search symbols in local library by tags**: Allows searching for symbols in the local library by tags for easy input.<br>E.g., `latin small ligature turned oe with short stroke` or shortened `oe tur str` → `ꭂ`.
+
+- **Internal keyboard layouts**: Includes support for user-defined layouts.<br>Includes built-in support for:
+
+  - **Latin:** _QWERTY_, [AZERTY](https://en.wikipedia.org/wiki/AZERTY), <span title="© David Piepgrass">[Asset](https://millikeys.sourceforge.net/asset/)</span>, <span title="© Eva Callico, AKL">[Canary](https://github.com/Apsu/Canary)</span>, [Colemak](https://en.wikipedia.org/wiki/Colemak), <span title="© Oxey">[Dhorf](https://oxey.dev/dhorf/index.html)</span>, [Dvorak](https://en.wikipedia.org/wiki/Dvorak_keyboard_layout), <span title="© GalileoBlues">[Gallium](https://github.com/GalileoBlues/Gallium)</span>, <span title="© Richard Davison">[Graphite](github.com/rdavison/graphite-layout)</span>, <span title="© Nikolay Nemshilov">[Halmak](https://github.com/kaievns/halmak)</span>, [JCUKEN](https://en.wikipedia.org/wiki/Phonetic_keyboard_layout#/media/File:UKNCkeyboard.png), <span title="© Smudge">[Nerps](https://github.com/GalileoBlues/Gallium?tab=readme-ov-file#changes)</span>, <span title="© David Norman">[Norman](https://normanlayout.info)</span>, <span title="© Keith Kim">[Qwickly](https://github.com/qwickly-org/Qwickly)</span>, <span title="© Oxey">[Stronk](https://oxey.dev/stronk/index.html)</span>, <span title="© Oxey">[Sturdy](https://oxey.dev/sturdy/index.html)</span>, <span title="© OJ Bucao">[Workman](https://workmanlayout.org)</span>.
+  - **Cyrillic:** _ЙЦУКЕН_, [Диктор](https://github.com/mshkrebtan/diktor), [ИІУКЕН (1907)](https://ru.wikipedia.org/wiki/ЙЦУКЕН#/media/Файл:Underwood.jpg), ЯШЕРТЫ.
+
+- **Modifications**: Allows creating user’s mods.
 
 - **Other Features...**
-
-### Examples of languages/systems that can be typed:
-
-- **Latin**: <span title="Old English">Ænglisċ</span>, <span title="French">Français</span>, <span title="Romanian">Română</span>, <span title="Vietnamese">Tiếng Việt</span>, <span title="Mandarin (Romanization)">Hànyǔ Pīnyīn</span>, <span title="Polish">Język polski</span>, <span title="Czech">Čeština</span>, <span title="Norwegian Bokmål">Bokmål</span>, <span title="Turkish">Türkçe</span>, <span title="Old Norse">Norrœnt Mál</span>.
-- **Cyrillic**: <span title="Old Church Slavonic">Словѣньскъ ѩꙁꙑкъ</span>, <span title="Kazakh">Қазақ тілі</span>, <span title="Romanian (Cyrillic)">Лимба Рѹмѫнѣскъ</span>, <span title="Ukrainian">Українська мова</span>, <span title="Abkhaz">Аԥсуа Бызшәа</span>, <span title="Tajik">Забони тоҷикӣ</span>.
-
-<br>
-
-**⚠️ AutoHotkey is required to use this tool.** Install it via Powershell or [download from its site](https://www.autohotkey.com/).
-
-```powershell
-winget install AutoHotkey.AutoHotkey
-```
 
 <br>
 
@@ -137,51 +167,6 @@ winget install AutoHotkey.AutoHotkey
 **Strong** recommendation: use the extended character set only for text writing, no more.<br>Using these characters for passwords, file names, etc., is dangerous.
 
 **Strong 2** recommendation: turn off all AutoHotkey processes while playing games with sensitive anti-cheat systems. Games do not tolerate people who use AHK for gaining an advantage, and it is possible to be kicked or banned for having an AHK process running, even if the script does not provide an advantage.
-
----
-
-### \[ На Русском \]
-
-«DSL KeyPad» — утилита на языке [AutoHotkey 2.0](https://www.autohotkey.com/) для ввода широкого спектра символов посредством горячих клавиш, [Compose](https://en.wikipedia.org/wiki/Compose_key)-подобного режима и вспомогательных функций. Основное направление — расширение возможностей для ввода латиницы и кириллицы, что позволяет писать на множестве языков без использования отдельных раскладок для каждого из языков.
-
-Вы можете ознакомиться с документацией утилиты [здесь](https://demernkardaz.github.io/DSL-KeyPad-Docs/). Скачивание доступно в [Релизах](https://github.com/DemerNkardaz/DSL-KeyPad/releases) и на [SourceForge](https://sourceforge.net/projects/dsl-keypad/files/).
-
-### Краткий список возможностей
-
-- **Многослойные горячие клавиши**: в том числе — разные для английского («латинский набор») и русского («кириллический набор»).<br>Например, \[en.\] <kbd>RAlt + A или Z</kbd> → `Ă`/`Ż`, затем \[ru.\] <kbd>RAlt + Ф или Я</kbd> → `Ѳ`/`Ѧ`. Поддерживаются пользовательские привязки клавиш.
-
-- **Режим композиции, или «Кузница»**: преобразует последовательность («рецепты») одного набора символов в другой.<br>Например, `AE` `OE` `TH` `ІѦ` `ЯЕ` `ⰦⰤ` `Ups` → `Æ` `Œ` `Þ` `Ѩ` `Ԙ` `Ⱙ` `Ʊ`. Поддерживаются пользовательские рецепты.
-
-- **Альтернативный ввод**: набор режимов для различных нелатинских/некириллических форм письменности (в основном исторических), IPA и математических символов.<br>Например, \[Руны `ᛢᚹᛖᚱᛏᚤᚢᛁᛟᛈᚨᛊᛞᚠᚷᚺᛃᚲᛚᛉᚳᚡᛒᚾᛗ᛬`\] \[Глаголица `ⰉⰜⰖⰍⰅⰐⰃⰞⰛⰈⰘⰟⰗⰂⰀⰒⰓⰡⰝⰔⰏⰋⰠⰁⰣⰦ`\].
-
-- **Вариации глифов**: Позволяет вводить альтернативные варианты символов, если они доступны.<br>Например, `A` → `ᴬ` `𝐴` `𝐀` `𝑨` `𝙰` `Ａ` `ᴀ` `𝔄` `𝕬` `𝒜` `𝓐` `𝔸`.
-
-- **Переключение между вводом Unicode-символов/HTML-кодов/ $\LaTeX$-команд**, если доступно.<br>Например, `Ă` `Ǣ` → `&Abreve;` `&#482;` ${\color{darkorange}\texttt{и}}$ `\u{A}` `\={\AE}` ${\color{darkorange}\texttt{или}}$ `\breve{A}` `\bar{\AE}` $\breve{A}$ $\text{Ǣ}$.
-
-- **Поиск символов в локальной библиотеке по тегам**: позволяет искать символы в локальной библиотеке по тегам для ввода.<br>Например, `latin small ligature turned oe with short stroke` или сокращённо `oe tur str` → `ꭂ`.
-
-- **Внутренние раскладки клавиатуры**: включает поддержку пользовательских раскладок.
-
-- **Другие возможности…**
-
-### Примеры языков/систем, которые могут быть введены:
-
-- **Латиница**: <span title="Древнеанглийский">Ænglisċ</span>, <span title="Французский">Français</span>, <span title="Румынский">Română</span>, <span title="Вьетнамский">Tiếng Việt</span>, <span title="Мандаринский (романизация)">Hànyǔ Pīnyīn</span>, <span title="Польский">Język polski</span>, <span title="Чешский">Čeština</span>, <span title="Норвежский Букмол">Bokmål</span>, <span title="Турецкий">Türkçe</span>, <span title="Древнескандинавский">Norrœnt Mál</span>.
-- **Кириллица**: <span title="Старославянский">Словѣньскъ ѩꙁꙑкъ</span>, <span title="Румынский (Валахо-молдавская кириллица)">Лимба Рѹмѫнѣскъ</span>, <span title="Казахский">Қазақ тілі</span>, <span title="Украинский">Українська мова</span>, <span title="Абхазский">Аԥсуа Бызшәа</span>, <span title="Таджикский">Забони тоҷикӣ</span>.
-
-<br>
-
-**⚠️ Для работы требуется AutoHotkey.** Установите его через Powershell или [скачайте с официального сайта](https://www.autohotkey.com/).
-
-```powershell
-winget install AutoHotkey.AutoHotkey
-```
-
-<br>
-
-**Сильная** рекомендация: используйте расширенный набор символов только для написания текста, не более.<br>Использование этих символов для паролей, имен файлов и т. д. небезопасно.
-
-**Сильная 2** рекомендация: отключайте все процессы AutoHotkey во время игр с чувствительными античит-системами. Некоторые игры не очень толерантны к людям, использующим AHK для получения нечестного преимущества, и это может привести к кику или бану за наличие запущенного процесса AHK, даже если скрипт не предоставляет преимущества.
 
 ---
 
