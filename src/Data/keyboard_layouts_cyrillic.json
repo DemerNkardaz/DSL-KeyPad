@@ -111,6 +111,100 @@
 			"Ѣ": "SC02E"
 		}
 	},
+	"Рулемак (2018)": {
+		"author": "Geert Hendrickx",
+		"url": "https://forum.colemak.com/viewtopic.php?id=519",
+		"keys": {
+			"Ё": "SC029",
+			"ДефисоМинус": "SC00C",
+			"Равно": "SC00D",
+			"Я": "SC010",
+			"Ж": "SC011",
+			"Ф": "SC012",
+			"П": "SC013",
+			"Г": "SC014",
+			"Й": "SC015",
+			"Л": "SC016",
+			"У": "SC017",
+			"Ы": "SC018",
+			"Ю": "SC019",
+			"Ш": "SC01A",
+			"Щ": "SC01B",
+			"Э": "SC02B",
+			"А": "SC01E",
+			"Р": "SC01F",
+			"С": "SC020",
+			"Т": "SC021",
+			"Д": "SC022",
+			"Ч": "SC023",
+			"Н": "SC024",
+			"Е": "SC025",
+			"И": "SC026",
+			"О": "SC027",
+			"Ь": "SC028",
+			"З": "SC02C",
+			"Х": "SC02D",
+			"Ц": "SC02E",
+			"В": "SC02F",
+			"Б": "SC030",
+			"К": "SC031",
+			"М": "SC032",
+			"Запятая": "SC033",
+			"Точка": "SC034",
+			"Слэш": "SC035"
+		},
+		"binds": {
+			"Flat": {},
+			"Moded": {
+				"Ш": {
+					"<^>!": ["quote_angle_left_double"],
+					"<^>!<+": ["quote_left_double_ghost_ru"],
+					"<^>!>+": ["quote_low_9_double"],
+					"<^>!<!": ["quote_left_double"],
+					"<^>!<!<+": ["quote_angle_left"],
+					"<^>!<+>+": ["quote_low_9"],
+					">+": ["left_bracket"],
+					"<+>+": ["left_brace"]
+				},
+				"Щ": {
+					"<^>!": ["quote_angle_right_double"],
+					"<^>!<+": ["quote_right_double_ghost_ru"],
+					"<^>!>+": ["quote_low_9_double_reversed"],
+					"<^>!<!": ["quote_right_double"],
+					"<^>!<!<+": ["quote_angle_right"],
+					">+": ["right_bracket"],
+					"<+>+": ["right_brace"]
+				},
+				"Ь": {
+					"<!": ["cyr_[c,s]_let_yer"],
+					"<^>!<+": ["cyr_[c,s]_let_semisoft_sign"],
+					"<^>!<!": ["cyr_[c,s]_let_u_straight"],
+					"<^>!<!<+": ["cyr_[c,s]_let_u_straight__stroke_short"]
+				},
+				"Э": {
+					">+": ["apostrophe"],
+					"<+>+": ["quote"]
+				},
+				"Ю": {
+					"<^>!": ["semicolon"],
+					"<^>!<+": ["colon"],
+					"<^>!>+": ["colon"]
+				},
+				"Запятая": {
+					"<^>!": ["less_than"],
+					"+": ["semicolon"]
+				},
+				"Точка": {
+					"<^>!": ["greater_than"],
+					"+": ["colon"]
+				},
+				"Слэш": {
+					">+": ["vertical_line"],
+					"<+>+": ["reverse_solidus"]
+				}
+			}
+		}
+	},
 	"Харламак": {
 		"author": "?",
 		"keys": {
@@ -244,7 +338,8 @@
 					"<^>!<!<+": ["quote_angle_right"]
 				},
 				"Слэш": {
-					"+": ["question"]
+					">+": ["vertical_line"],
+					"<+>+": ["reverse_solidus"]
 				}
 			}
 		}

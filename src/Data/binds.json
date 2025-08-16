@@ -3288,6 +3288,14 @@
 				"<^>!<+>+": ["quartocolon"],
 				"<!": ["two_dot_punctuation"],
 				"<^>!>+": ["fraction_slash"]
+			},
+			"Слэш": {
+				"<+": ["question"],
+				"<^>!": ["ellipsis"],
+				"<^>!<+": ["tricolon"],
+				"<^>!<+>+": ["quartocolon"],
+				"<!": ["two_dot_punctuation"],
+				"<^>!>+": ["fraction_slash"]
 			}
 		}
 	},

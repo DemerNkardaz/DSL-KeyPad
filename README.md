@@ -3,8 +3,7 @@
 	<a href="https://sourceforge.net/projects/dsl-keypad/"><img src="https://custom-icon-badges.herokuapp.com/badge/Source-Forge-f76300?logoColor=f76300&style=for-the-badge&logo=sourceforge&labelColor=363B40" alt="SourceForge"/></a>
 	<a href="https://gitlab.com/DemerNkardaz/dsl-keypad"><img src="https://custom-icon-badges.herokuapp.com/badge/Git-Lab-db4128?logoColor=db4128&style=for-the-badge&logo=gitlab&labelColor=363B40" alt="GitLab"/></a>
 	<a href="https://bitbucket.org/nkardaz/public/src/"><img src="https://custom-icon-badges.herokuapp.com/badge/Bit-Bucket-eee?logoColor=eee&style=for-the-badge&logo=bitbucket&labelColor=2d79ce" alt="Bitbucket"/></a>
-	<a href="https://codeberg.org/Yalla/DSL-KeyPad"><img src="https://img.shields.io/badge/Code-Berg-eeeeee?style=for-the-badge&logo=codeberg&logoColor=ffffff&labelColor=2185d0
-	" alt="Codeberg"/></a>
+	<a href="https://codeberg.org/Yalla/DSL-KeyPad"><img src="https://img.shields.io/badge/Code-Berg-eeeeee?style=for-the-badge&logo=codeberg&logoColor=ffffff&labelColor=2185d0	" alt="Codeberg"/></a>
 <br>
 	<a href="https://www.autohotkey.com/boards/viewtopic.php?f=83&t=138452"><img src="https://custom-icon-badges.herokuapp.com/badge/AHK-Forum-ecedef?logoColor=eeeeee&style=for-the-badge&logo=autohotkey&labelColor=79c572" alt="Forum"/></a>
 	<a href="https://habr.com/ru/articles/932600/"><img src="https://custom-icon-badges.herokuapp.com/badge/Хабр-Статья-ecedef?logoColor=eeeeee&style=for-the-badge&logo=habr&labelColor=629ebb" alt="Forum"/></a>
@@ -118,7 +117,7 @@ winget install AutoHotkey.AutoHotkey
 - **Internal keyboard layouts**: Includes support for user-defined layouts.<br>Includes built-in support for:
 
   - **Latin:** _QWERTY_, [AZERTY](https://en.wikipedia.org/wiki/AZERTY), <span title="© David Piepgrass">[Asset](https://millikeys.sourceforge.net/asset/)</span>, <span title="© Eva Callico, AKL">[Canary](https://github.com/Apsu/Canary)</span>, [Colemak](https://en.wikipedia.org/wiki/Colemak), <span title="© Oxey">[Dhorf](https://oxey.dev/dhorf/index.html)</span>, [Dvorak](https://en.wikipedia.org/wiki/Dvorak_keyboard_layout), <span title="© GalileoBlues">[Gallium](https://github.com/GalileoBlues/Gallium)</span>, <span title="© Richard Davison">[Graphite](github.com/rdavison/graphite-layout)</span>, <span title="© Nikolay Nemshilov">[Halmak](https://github.com/kaievns/halmak)</span>, [JCUKEN](https://en.wikipedia.org/wiki/Phonetic_keyboard_layout#/media/File:UKNCkeyboard.png), <span title="© Smudge">[Nerps](https://github.com/GalileoBlues/Gallium?tab=readme-ov-file#changes)</span>, <span title="© David Norman">[Norman](https://normanlayout.info)</span>, <span title="© Keith Kim">[Qwickly](https://github.com/qwickly-org/Qwickly)</span>, <span title="© Oxey">[Stronk](https://oxey.dev/stronk/index.html)</span>, <span title="© Oxey">[Sturdy](https://oxey.dev/sturdy/index.html)</span>, <span title="© OJ Bucao">[Workman](https://workmanlayout.org)</span>.
-  - **Cyrillic:** _ЙЦУКЕН_, [Диктор](https://github.com/mshkrebtan/diktor), [ИІУКЕН (1907)](https://ru.wikipedia.org/wiki/ЙЦУКЕН#/media/Файл:Underwood.jpg), ЯШЕРТЫ, <span title="Kharlamak">Харламак</span>.
+  - **Cyrillic:** _ЙЦУКЕН_, [Диктор](https://github.com/mshkrebtan/diktor), [ИІУКЕН (1907)](https://ru.wikipedia.org/wiki/ЙЦУКЕН#/media/Файл:Underwood.jpg), ЯШЕРТЫ, <span title="Kharlamak">Харламак</span>, <span title="Rulemak © Geert Hendrickx">Рулемак</span>.<br><br>**Note:** the built-in layouts have been adapted, i.e., they do not fully correspond to their originals.
 
 - **Modifications**: Allows creating user’s mods.
 
