@@ -2789,13 +2789,13 @@
 				"<^>!<!<+": ["quote_angle_right"]
 			},
 			"Tilde": {
-				"<^>!": "bullet",
-				"<^>!<!": "bullet_hyphen",
-				"<^>!<+": "interpunct",
-				"<^>!>+": "quote_right",
-				"<^>!<!<+": "bullet_triangle",
-				"<^>!<!>+": "bullet_white",
-				">+": "tilde_reversed"
+				"<^>!": ["bullet"],
+				"<^>!<!": ["bullet_hyphen"],
+				"<^>!<+": ["interpunct"],
+				"<^>!>+": ["quote_right"],
+				"<^>!<!<+": ["bullet_triangle"],
+				"<^>!<!>+": ["bullet_white"],
+				">+": ["tilde_reversed"]
 			},
 			"Apostrophe": {
 				"<^>!": ["lat_[c,s]_let_a_saltillo"]
@@ -3112,7 +3112,15 @@
 				"<^>!<+": ["cyr_[c,s]_let_ye__diaeresis"],
 				">+": ["cyr_[c,s]_let_ye__grave"]
 			},
-			"Ё": {},
+			"Ё": {
+				"<^>!": ["bullet"],
+				"<^>!<!": ["bullet_hyphen"],
+				"<^>!<+": ["interpunct"],
+				"<^>!>+": ["quote_right"],
+				"<^>!<!<+": ["bullet_triangle"],
+				"<^>!<!>+": ["bullet_white"],
+				">+": ["tilde_reversed"]
+			},
 			"Ж": {
 				"<^>!": ["cyr_[c,s]_let_zh__breve"],
 				"<^>!<+": ["cyr_[c,s]_let_zh__diaeresis"],

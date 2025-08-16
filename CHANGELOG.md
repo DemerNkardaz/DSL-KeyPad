@@ -4,6 +4,13 @@
 <details open lang="en">
 <summary>English</summary>
 
+### [0.1.5.3 α — (upcoming release)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.5.3)
+
+- Additions:
+
+  - Added support for new Cyrillic layouts:
+    - Kharlamak
+
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 
 - Additions:
@@ -67,6 +74,13 @@
 <td>
 <details open lang="ru">
 <summary>Русский</summary>
+
+### [0.1.5.3 α — (предстоящий релиз)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.5.3)
+
+- Дополнения:
+
+  - Добавлена поддержка новых раскладок кириллицы:
+    - Харламак
 
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 
