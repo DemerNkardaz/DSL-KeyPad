@@ -1,0 +1,46 @@
+{
+	"en-US": {
+		"script_labels": {
+			"imperial_aramaic": "Imperial Aramaic"
+		},
+		"generated": {
+			"prefix": { "imperial_aramaic": "Imperial Aramaic" },
+			"tag": { "imperial_aramaic": "imperial aramaic" }
+		},
+		"scripts": {
+			"imperial_aramaic": {
+				"n_let_a_aleph": { "letter_locale": "Aleph" },
+				"n_let_a_ayin": { "letter_locale": "Ayin" },
+				"n_let_b_beth": { "letter_locale": "Beth" },
+				"n_let_d_daleth": { "letter_locale": "Daleth" },
+				"n_let_g_gimel": { "letter_locale": "Gimel" },
+				"n_let_h_he": { "letter_locale": "He" },
+				"n_let_h_heth": { "letter_locale": "Heth" },
+				"n_let_k_kaph": { "letter_locale": "Kaph" },
+				"n_let_l_lamedh": { "letter_locale": "Lamedh" },
+				"n_let_m_mem": { "letter_locale": "Mem" },
+				"n_let_n_nun": { "letter_locale": "Nun" },
+				"n_let_p_pe": { "letter_locale": "Pe" },
+				"n_let_q_qoph": { "letter_locale": "Qoph" },
+				"n_let_r_resh": { "letter_locale": "Resh" },
+				"n_let_s_samekh": { "letter_locale": "Samekh" },
+				"n_let_s_sadhe": { "letter_locale": "Sadhe" },
+				"n_let_s_shin": { "letter_locale": "Shin" },
+				"n_let_t_teth": { "letter_locale": "Teth" },
+				"n_let_t_taw": { "letter_locale": "Taw" },
+				"n_let_w_waw": { "letter_locale": "Waw" },
+				"n_let_y_yodh": { "letter_locale": "Yodh" },
+				"n_let_z_zayin": { "letter_locale": "Zayin" },
+				"n_num_one": { "letter_locale": "One" },
+				"n_num_two": { "letter_locale": "Two" },
+				"n_num_three": { "letter_locale": "Three" },
+				"n_num_ten": { "letter_locale": "Ten" },
+				"n_num_twenty": { "letter_locale": "Twenty" },
+				"n_num_one_hundred": { "letter_locale": "One Hundred" },
+				"n_num_one_thousand": { "letter_locale": "One Thousand" },
+				"n_num_ten_thousand": { "letter_locale": "Ten Thousand" },
+				"n_sym_section": { "letter_locale": "Section" }
+			}
+		}
+	}
+}

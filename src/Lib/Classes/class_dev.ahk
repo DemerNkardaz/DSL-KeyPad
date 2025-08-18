@@ -67,6 +67,7 @@ Class Dev {
 			"Elbasan",
 			"Glagolitic",
 			"Gothic",
+			"Imperial Aramaic",
 			"Inscriptional Parthian",
 			"Linear A",
 			"Linear B",

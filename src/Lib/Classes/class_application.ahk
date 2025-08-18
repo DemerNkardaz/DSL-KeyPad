@@ -108,6 +108,7 @@ Class App {
 			"aghwan",
 			"parthian",
 			"palmyrene",
+			"imperial_aramaic",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

@@ -33,6 +33,8 @@ Class Cfg {
 		],
 		"UI", [
 			"Scripter_Selector_Max_Items", 24,
+			"Scripter_Selector_Max_Columns", 4,
+			"Scripter_Selector_Max_Columns_Threshold", 32,
 		],
 		"Compose", [],
 		"Characters", [

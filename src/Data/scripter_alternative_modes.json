@@ -201,6 +201,16 @@
 		"uiid": "OldPersian",
 		"icons": ["persian"]
 	},
+	"Imperial Aramaic", {
+		"preview": [
+			"\ud802\udc46\ud802\udc4c\ud802\udc4d\ud802\udc40 \ud802\udc45\ud802\udc47\ud802\udc45\ud802\udc47\ud802\udc54\ud802\udc55\ud802\udc53"
+		],
+		"fonts": ["Noto Sans Palmyrene"],
+		"locale": "imperial_aramaic",
+		"bindings": ["Imperial Aramaic"],
+		"uiid": "ImperialAramaic",
+		"icons": ["imperial_aramaic"]
+	},
 	"Palmyrene", {
 		"preview": [
 			"\ud802\udc75\ud802\udc6b\ud802\udc6c \ud802\udc76\ud802\udc63\ud802\udc6c\ud802\udc65\ud802\udc74"

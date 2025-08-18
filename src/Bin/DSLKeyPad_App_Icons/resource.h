@@ -76,6 +76,7 @@
 #define IDI_AGHWAN 172
 #define IDI_PARTHIAN 173
 #define IDI_PALMYRENE 174
+#define IDI_IMPERIAL_ARAMAIC 175
 
 // Next default values for new objects
 //

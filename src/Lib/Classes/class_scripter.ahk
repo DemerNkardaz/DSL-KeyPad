@@ -114,6 +114,9 @@ Class Scripter {
 
 		Constructor() {
 			local maxItems := Cfg.Get("Scripter_Selector_Max_Items", "UI", 24, "int")
+			local maxColumns := Cfg.Get("Scripter_Selector_Max_Columns", "UI", 4, "int")
+			local maxColumnsThreshold := Cfg.Get("Scripter_Selector_Max_Columns_Threshold", "UI", 27, "int")
+
 			maxItems := Min(Max(1, maxItems), keysLen)
 
 			local selectorPanel := Gui()
@@ -122,7 +125,7 @@ Class Scripter {
 
 			local visibleItems := []
 			for i, pairs in ScripterStore.storedData[selectorType] {
-				if Mod(i, 2) = 1 { ; нечетные индексы содержат имена
+				if Mod(i, 2) = 1 {
 					local dataName := ScripterStore.storedData[selectorType][i]
 					local dataValue := ScripterStore.storedData[selectorType][i + 1]
 
@@ -146,7 +149,7 @@ Class Scripter {
 			local widthDefault := 256
 			local heightDefault := 256
 
-			local itemsPerRow := totalItems > 24 && !isGlyphs ? 4 : 3
+			local itemsPerRow := pageItems > maxColumnsThreshold && !isGlyphs ? maxColumns : 3
 			local rowCount := Ceil(pageItems / itemsPerRow)
 			local columnCount := Min(pageItems, itemsPerRow)
 

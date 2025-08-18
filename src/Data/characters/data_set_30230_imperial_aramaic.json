@@ -1,0 +1,126 @@
+[
+	"imperial_aramaic_n_let_a_aleph", {
+		"unicode": "10840",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_a_ayin", {
+		"unicode": "1084F",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"imperial_aramaic_n_let_b_beth", {
+		"unicode": "10841",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_d_daleth", {
+		"unicode": "10843",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_g_gimel", {
+		"unicode": "10842",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_h_he", {
+		"unicode": "10844",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_h_heth", {
+		"unicode": "10847",
+		"options": { "altLayoutKey": "X | >! $" }
+	},
+	"imperial_aramaic_n_let_k_kaph", {
+		"unicode": "1084A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_l_lamedh", {
+		"unicode": "1084B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_m_mem", {
+		"unicode": "1084C",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_n_nun", {
+		"unicode": "1084D",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_p_pe", {
+		"unicode": "10850",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_q_qoph", {
+		"unicode": "10852",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_r_resh", {
+		"unicode": "10853",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_s_samekh", {
+		"unicode": "1084E",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_s_sadhe", {
+		"unicode": "10851",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"imperial_aramaic_n_let_s_shin", {
+		"unicode": "10854",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"imperial_aramaic_n_let_t_teth", {
+		"unicode": "10848",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_let_t_taw", {
+		"unicode": "10855",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"imperial_aramaic_n_let_w_waw", {
+		"unicode": "10845",
+		"options": { "altLayoutKey": "$ | V" }
+	},
+	"imperial_aramaic_n_let_y_yodh", {
+		"unicode": "10849",
+		"options": { "altLayoutKey": "$ | J" }
+	},
+	"imperial_aramaic_n_let_z_zayin", {
+		"unicode": "10846",
+		"options": { "altLayoutKey": "$" }
+	},
+	"imperial_aramaic_n_num_one", {
+		"unicode": "10858",
+		"options": { "altLayoutKey": "1" }
+	},
+	"imperial_aramaic_n_num_two", {
+		"unicode": "10859",
+		"options": { "altLayoutKey": "2" }
+	},
+	"imperial_aramaic_n_num_three", {
+		"unicode": "1085A",
+		"options": { "altLayoutKey": "3" }
+	},
+	"imperial_aramaic_n_num_ten", {
+		"unicode": "1085B",
+		"options": { "altLayoutKey": ">! 1" }
+	},
+	"imperial_aramaic_n_num_twenty", {
+		"unicode": "1085C",
+		"options": { "altLayoutKey": ">! 2" }
+	},
+	"imperial_aramaic_n_num_one_hundred", {
+		"unicode": "1085D",
+		"options": { "altLayoutKey": "5" }
+	},
+	"imperial_aramaic_n_num_one_thousand", {
+		"unicode": "1085E",
+		"options": { "altLayoutKey": "6" }
+	},
+	"imperial_aramaic_n_num_ten_thousand", {
+		"unicode": "1085F",
+		"options": { "altLayoutKey": "7" }
+	},
+	"imperial_aramaic_n_sym_section", {
+		"unicode": "10857",
+		"options": { "altLayoutKey": "<! 1" }
+	}
+]

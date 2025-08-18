@@ -10,6 +10,8 @@
 
   - Added support for new Cyrillic layouts:
     - Kharlamak, Rulemak (2018)
+  - Added new Alternative modes:
+    - Imperial Aramaic
 
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 
@@ -81,6 +83,8 @@
 
   - Добавлена поддержка новых раскладок кириллицы:
     - Харламак, Рулемак (2018)
+  - Добавлены новые Альтернативные режимы:
+    - Имперское Арамейское письмо
 
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 

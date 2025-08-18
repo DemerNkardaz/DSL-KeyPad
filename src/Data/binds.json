@@ -1463,6 +1463,65 @@
 				"X": {"<!": "old_persian_n_log_xshaayathiya"}
 			}
 		},
+		"Imperial Aramaic": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "imperial_aramaic_n_let_a_aleph",
+				"B": "imperial_aramaic_n_let_b_beth",
+				"C": "",
+				"D": "imperial_aramaic_n_let_d_daleth",
+				"E": "",
+				"F": "",
+				"G": "imperial_aramaic_n_let_g_gimel",
+				"H": "imperial_aramaic_n_let_h_he",
+				"I": "",
+				"J": "imperial_aramaic_n_let_y_yodh",
+				"K": "imperial_aramaic_n_let_k_kaph",
+				"L": "imperial_aramaic_n_let_l_lamedh",
+				"M": "imperial_aramaic_n_let_m_mem",
+				"N": "imperial_aramaic_n_let_n_nun",
+				"O": "",
+				"P": "imperial_aramaic_n_let_p_pe",
+				"Q": "imperial_aramaic_n_let_q_qoph",
+				"R": "imperial_aramaic_n_let_r_resh",
+				"S": "imperial_aramaic_n_let_s_samekh",
+				"T": "imperial_aramaic_n_let_t_teth",
+				"U": "",
+				"V": "imperial_aramaic_n_let_w_waw",
+				"W": "imperial_aramaic_n_let_w_waw",
+				"X": "imperial_aramaic_n_let_h_heth",
+				"Y": "imperial_aramaic_n_let_y_yodh",
+				"Z": "imperial_aramaic_n_let_z_zayin",
+				"1": "imperial_aramaic_n_num_one",
+				"2": "imperial_aramaic_n_num_two",
+				"3": "imperial_aramaic_n_num_three",
+				"4": "imperial_aramaic_n_num_one_hundred",
+				"5": "imperial_aramaic_n_num_one_thousand",
+				"6": "imperial_aramaic_n_num_ten_thousand"
+			},
+			"Moded": {
+				"A": {
+					"<^>!": "imperial_aramaic_n_let_a_ayin"
+				},
+				"H": {
+					"<^>!": "imperial_aramaic_n_let_h_heth"
+				},
+				"S": {
+					"<^>!": "imperial_aramaic_n_let_s_sadhe",
+					"<!": "imperial_aramaic_n_let_s_shin"
+				},
+				"T": {
+					"<^>!": "imperial_aramaic_n_let_t_taw"
+				},
+				"1": {
+					"<!": "imperial_aramaic_n_sym_section",
+					"<^>!": "imperial_aramaic_n_num_ten"
+				},
+				"2": {
+					"<^>!": "imperial_aramaic_n_num_twenty"
+				}
+			}
+		},
 		"Palmyrene": {
 			"ForceSingle": true,
 			"Flat": {
