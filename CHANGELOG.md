@@ -12,6 +12,8 @@
     - Kharlamak, Rulemak (2018)
   - Added new Alternative modes:
     - Imperial Aramaic
+  - Added new options:
+    - “Scripter” selector: max items per page/max columns/threshold for max columns now can be customized via settings window.
 
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 
@@ -85,6 +87,8 @@
     - Харламак, Рулемак (2018)
   - Добавлены новые Альтернативные режимы:
     - Имперское Арамейское письмо
+  - Добавлены новые настройки:
+    - Селектор «скриптера»: макс. элементов на странице/макс. колонок/порог макс. колонок теперь могут быть настроены через окно настроек.
 
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 

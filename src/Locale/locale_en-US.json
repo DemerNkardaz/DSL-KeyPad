@@ -178,6 +178,18 @@
 				"IPA": {
 					"use_latin_instead_greek": "Latin symbols instead of Greek"
 				},
+				"UI": {
+					"__self": "UI",
+					"scripter": {
+						"selector": {
+							"__self": "Scripter Selector",
+							"max_items": "Max items/page [1-47]",
+							"max_columns": "Max columns [4-12]",
+							"max_columns_threshold": "\u21B3 Items threshold",
+							"use_number_keys": "Use number keys"
+						}
+					}
+				},
 				"remapping": {
 					"__self": "Remapping",
 					"description": "When remapping is enabled, all standard keyboard keys will be reassigned according to the selected layout except QWERTY/QWERTY. This setting may interfere with application bindings, such as games.\n\nRemapping will be relevant for custom layouts.\n\nWhen possible, it is recommended to use a similar system layout instead of remapping."

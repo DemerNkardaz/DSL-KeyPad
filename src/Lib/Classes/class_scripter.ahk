@@ -86,6 +86,24 @@ Class Scripter {
 			"SC035",
 		]
 
+		if Cfg.Get("Scripter_Selector_Use_Number_Keys", "UI", "False", "bool") {
+			keyCodes.InsertAt(1,
+				"SC029",
+				"SC002",
+				"SC003",
+				"SC004",
+				"SC005",
+				"SC006",
+				"SC007",
+				"SC008",
+				"SC009",
+				"SC00A",
+				"SC00B",
+				"SC00C",
+				"SC00D",
+			)
+		}
+
 		local hotkeys := Map()
 		local keys := keyCodes.Clone()
 		local keysLen := keys.Length
@@ -229,13 +247,28 @@ Class Scripter {
 					scriptPreviewY += optionTitleH - 5
 				}
 
-				hotkeys.Set(keys[j], dataName)
-				hotkeys.Set(keys[keyCodes.Length + j], dataName)
-				hotkeys.Set(keys[keyCodes.Length * 2 + j], dataName)
-				hotkeysLabel := selectorPanel.AddText(
+				local pressKeys := [
+					keys[j],
+					keys[keyCodes.Length + j],
+					keys[keyCodes.Length * 2 + j],
+				]
+
+				local visiblePressKeys := ""
+
+				for i, each in pressKeys {
+					hotkeys.Set(each, dataName)
+
+					if !InStr(visiblePressKeys, each) {
+						if (visiblePressKeys != "")
+							visiblePressKeys .= " / "
+						visiblePressKeys .= each
+					}
+				}
+
+				local hotkeysLabel := selectorPanel.AddText(
 					"v" dataValue["uiid"] "Hotkey w" optionTitleW " h" optionTitleH " x" optionTitleX " y" ((optionY + optionH) - optionTitleH)
 					" 0x80 Right +BackgroundTrans",
-					Locale.ReadInject("dynamic_dictionary.press", [keys[j] " / " keys[keyCodes.Length + j] " / " keys[keyCodes.Length * 2 + j]])
+					Locale.ReadInject("dynamic_dictionary.press", [visiblePressKeys])
 				)
 
 				currentCol++
