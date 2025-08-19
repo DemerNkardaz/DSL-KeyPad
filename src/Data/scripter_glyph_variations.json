@@ -194,6 +194,86 @@
 		"uiid": "DoubleStruckItalic",
 		"icons": ["glyph_double_struck_italic"]
 	},
+	"circled", {
+		"preview": [
+			"\u24b8\u24d8\u24e1\u24d2\u24db\u24d4\u24d3"
+		],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_variations.circled",
+		"bindings": [],
+		"uiid": "Circled",
+		"icons": ["glyph_uncombined"]
+	},
+	"negativeCircled", {
+		"preview": [
+			""
+		],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_variations.negativeCircled",
+		"bindings": [],
+		"uiid": "NegativeCircled",
+		"icons": ["glyph_uncombined"]
+	},
+	"squared", {
+		"preview": [
+			""
+		],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_variations.squared",
+		"bindings": [],
+		"uiid": "Squared",
+		"icons": ["glyph_uncombined"]
+	},
+	"negativeSquared", {
+		"preview": [
+			""
+		],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_variations.negativeSquared",
+		"bindings": [],
+		"uiid": "NegativeSquared",
+		"icons": ["glyph_uncombined"]
+	},
+	"parenthesized", {
+		"preview": [
+			""
+		],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_variations.parenthesized",
+		"bindings": [],
+		"uiid": "Parenthesized",
+		"icons": ["glyph_uncombined"]
+	},
+	"fullstop", {
+		"preview": [
+			""
+		],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_variations.fullstop",
+		"bindings": [],
+		"uiid": "Fullstop",
+		"icons": ["glyph_uncombined"]
+	},
+	"comma", {
+		"preview": [
+			""
+		],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_variations.comma",
+		"bindings": [],
+		"uiid": "Comma",
+		"icons": ["glyph_uncombined"]
+	},
+	"doubleCircled", {
+		"preview": [
+			"\u24f5\u24f6\u24f7\u24f8\u24f9\u24fa\u24fb\u24fc\u24fd\u24fe"
+		],
+		"fonts": ["Cabmria Math"],
+		"locale": "glyph_variations.doubleCircled",
+		"bindings": [],
+		"uiid": "DoubleCircled",
+		"icons": ["glyph_uncombined"]
+	},
 	"uncombined", {
 		"preview": [
 			"\u25CC\u00B4\u25CC\u02DD\u25CC\u02D8\u25CC\u00B8\u25CC\u02D9\u25CC\u00A8\u25CC`\u25CC\u00AF\u25CC\u02DB\u25CC\u02DA\u25CC\u02DC"
