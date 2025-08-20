@@ -131,9 +131,9 @@ Class Scripter {
 		this.selectorTitle.Set(selectorType, App.Title("+status+version") " — " Locale.Read(titles.Get(selectorType)))
 
 		Constructor() {
-			local maxItems := Cfg.Get("Scripter_Selector_Max_Items", "UI", 24, "int")
+			local maxItems := Cfg.Get("Scripter_Selector_Max_Items" (isGlyphs ? "_Glyph" : ""), "UI", (isGlyphs ? 32 : 24), "int")
 			local maxColumns := Cfg.Get("Scripter_Selector_Max_Columns", "UI", 4, "int")
-			local maxColumnsThreshold := Cfg.Get("Scripter_Selector_Max_Columns_Threshold", "UI", 27, "int")
+			local maxColumnsThreshold := Cfg.Get("Scripter_Selector_Max_Columns_Threshold" (isGlyphs ? "_Glyph" : ""), "UI", (isGlyphs ? 32 : 24), "int")
 
 			maxItems := Min(Max(1, maxItems), keysLen)
 

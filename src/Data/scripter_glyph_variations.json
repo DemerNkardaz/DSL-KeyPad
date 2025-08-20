@@ -194,6 +194,16 @@
 		"uiid": "DoubleStruckItalic",
 		"icons": ["glyph_double_struck_italic"]
 	},
+	"regionalIndicator", {
+		"preview": [
+			""
+		],
+		"fonts": ["Noto Color Emoji"],
+		"locale": "glyph_variations.regional_indicator",
+		"bindings": [],
+		"uiid": "RegionalIndicator",
+		"icons": ["glyph_uncombined"]
+	},
 	"circled", {
 		"preview": [
 			"\u24b8\u24d8\u24e1\u24d2\u24db\u24d4\u24d3"
@@ -209,7 +219,7 @@
 			""
 		],
 		"fonts": ["Cabmria Math"],
-		"locale": "glyph_variations.negativeCircled",
+		"locale": "glyph_variations.negative_circled",
 		"bindings": [],
 		"uiid": "NegativeCircled",
 		"icons": ["glyph_uncombined"]
@@ -229,14 +239,14 @@
 			""
 		],
 		"fonts": ["Cabmria Math"],
-		"locale": "glyph_variations.negativeSquared",
+		"locale": "glyph_variations.negative_squared",
 		"bindings": [],
 		"uiid": "NegativeSquared",
 		"icons": ["glyph_uncombined"]
 	},
 	"parenthesized", {
 		"preview": [
-			""
+			"\ud83c\udd1f\u249c\u24ad\u24a0\u24a9\u24af\u24a3\u24a0\u24ae\u24a4\u24b5\u24a0\u249f"
 		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.parenthesized",
@@ -246,7 +256,7 @@
 	},
 	"fullstop", {
 		"preview": [
-			""
+			"\u2488\u2489\u248a\u248b\u248c\u248d\u248e\u248f\u2490\u2491"
 		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.fullstop",
@@ -256,7 +266,7 @@
 	},
 	"comma", {
 		"preview": [
-			""
+			"\ud83c\udd01\ud83c\udd02\ud83c\udd03\ud83c\udd04\ud83c\udd05\ud83c\udd06\ud83c\udd07\ud83c\udd08\ud83c\udd09\ud83c\udd0a"
 		],
 		"fonts": ["Cabmria Math"],
 		"locale": "glyph_variations.comma",
@@ -269,7 +279,7 @@
 			"\u24f5\u24f6\u24f7\u24f8\u24f9\u24fa\u24fb\u24fc\u24fd\u24fe"
 		],
 		"fonts": ["Cabmria Math"],
-		"locale": "glyph_variations.doubleCircled",
+		"locale": "glyph_variations.double_circled",
 		"bindings": [],
 		"uiid": "DoubleCircled",
 		"icons": ["glyph_uncombined"]

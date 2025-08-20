@@ -12,6 +12,8 @@
     - Kharlamak, Rulemak (2018)
   - Added new Alternative modes:
     - Imperial Aramaic
+  - Added new Glyphs variations:
+    - Regional Indicator, Circled, Double Circled, Negative Circled, Parenthesized, Squared, Negative Squared, with Dot, with Comma
   - Added new options:
     - “Scripter” selector: max items per page/max columns/threshold for max columns now can be customized via settings window.
 
@@ -87,6 +89,8 @@
     - Харламак, Рулемак (2018)
   - Добавлены новые Альтернативные режимы:
     - Имперское Арамейское письмо
+  - Добавлены новые Вариации глифов:
+    - Региональные индикаторы, в круге, двойном круге, закрашенном круге, скобках, квадрате, закрашенном квадратке, с точкой и с запятой
   - Добавлены новые настройки:
     - Селектор «скриптера»: макс. элементов на странице/макс. колонок/порог макс. колонок теперь могут быть настроены через окно настроек.
 

@@ -563,6 +563,15 @@ Class ChrLib {
 			"uncombined", ["некомбинируемый", "неко", "uc"],
 			"fullwidth", ["полноширинный", "пш", "fw"],
 			"blackletter", ["bl"],
+			"regionalIndicator", ["региональный индикатор", "ри", "ri"],
+			"circled", ["в круге", "вк", "ci"],
+			"negativeCircled", ["в закрашенном круге", "взк", "nci"],
+			"doubleCircled", ["в двойном круге", "вдк", "dci"],
+			"parenthesized", ["в скобках", "вск", "pr"],
+			"squared", ["в квадрате", "вкв", "sq"],
+			"negativeSquared", ["в закрашенном квадрате", "взкв", "nsq"],
+			"fullstop", ["с точкой", "стч", "fs"],
+			"comma", ["с запятой", "сзп", "cm"],
 		)
 
 		for key, value in alterationNames {

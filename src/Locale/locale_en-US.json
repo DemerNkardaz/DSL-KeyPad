@@ -547,7 +547,16 @@
 				"script_bold": "Script bold characters",
 				"double_struck": "Double-struck characters",
 				"double_struck_italic": "Double-struck italic characters",
-				"uncombined": "Uncombined characters"
+				"uncombined": "Uncombined characters",
+				"regional_indicator": "Regional indicators",
+				"circled": "Circled characters",
+				"negative_circled": "Negative circled characters",
+				"double_circled": "Double circled characters",
+				"squared": "Squared characters",
+				"negative_squared": "Negative squared characters",
+				"parenthesized": "Parenthesized characters",
+				"fullstop": "Characters with full stop",
+				"comma": "Characters with comma"
 			}
 		},
 		"monitor": {

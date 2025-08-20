@@ -547,7 +547,16 @@
 				"script_bold": "Рукописные полужирные знаки",
 				"double_struck": "«Double-Struck» знаки",
 				"double_struck_italic": "«Double-Struck» курсивные знаки",
-				"uncombined": "Некомбинируемые знаки"
+				"uncombined": "Некомбинируемые знаки",
+				"regional_indicator": "Региональные индикаторы",
+				"circled": "Знаки в круге",
+				"negative_circled": "Знаки в закрашенном круге",
+				"double_circled": "Знаки в двойном круге",
+				"squared": "Знаки в квадрате",
+				"negative_squared": "Знаки в закрашенном квадрате",
+				"parenthesized": "Знаки в скобках",
+				"fullstop": "Знаки с точкой",
+				"comma": "Знаки с запятой"
 			}
 		},
 		"monitor": {
