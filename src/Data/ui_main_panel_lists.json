@@ -197,6 +197,8 @@
 			"Tifinagh": "@script_labels.tifinagh",
 			"Ugaritic": "@script_labels.ugaritic",
 			"Old Persian": "@script_labels.old_persian",
+			"Imperial Aramaic": "@script_labels.imperial_aramaic",
+			"Palmyrene": "@script_labels.palmyrene",
 			"Parthian": "@script_labels.parthian",
 			"Deseret": "@script_labels.deseret.short",
 			"Shavian": "@script_labels.shavian.short"

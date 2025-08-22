@@ -37,7 +37,8 @@ $$
 <br>
 <a href="https://github.com/DemerNkardaz/DSL-KeyPad"><img src="https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/total?logo=github&label=%F0%9F%A1%87&labelColor=ffffff&logoColor=333333&color=yellow" alt="GitHub Downloads"/></a>
 <a href="https://sourceforge.net/projects/dsl-keypad/"><img src="https://img.shields.io/sourceforge/dt/dsl-keypad?logo=sourceforge&label=%F0%9F%A1%87&labelColor=ffffff&color=yellow" alt="SourceForge Downloads"/></a>
-<a href="https://github.com/DemerNkardaz/DSL-KeyPad/releases/latest"><img src="https://img.shields.io/github/v/tag/DemerNkardaz/DSL-KeyPad?label=latest%40version&labelColor=ffffff&color=yellow" alt="Latest Version"/></a>
+<a href="https://github.com/DemerNkardaz/DSL-KeyPad/releases/latest"><img src="https://img.shields.io/github/v/tag/DemerNkardaz/DSL-KeyPad?label=%E2%9C%AA&labelColor=ffffff&color=yellow" alt="Latest Version"/></a>
+<a href="https://github.com/DemerNkardaz/DSL-KeyPad/releases/latest"><img src="https://img.shields.io/github/release-date/DemerNkardaz/DSL-KeyPad?label=%F0%9F%A1%85&labelColor=ffffff&color=yellow" alt="Latest Version"/></a>
 </p>
 
 <br>
