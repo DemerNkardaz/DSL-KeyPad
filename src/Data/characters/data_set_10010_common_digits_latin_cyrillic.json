@@ -171,9 +171,22 @@
 			"comma": "1F10A",
 			"tag": "E0039"
 		}],
+		"tagsPrefixes": ["number ", "число "],
+		"tags": [
+			["zero", "ноль"],
+			["one", "один"],
+			["two", "два"],
+			["three", "три"],
+			["four", "четыре"],
+			["five", "пять"],
+			["six", "шесть"],
+			["seven", "семь"],
+			["eight", "восемь"],
+			["nine", "девять"]
+		],
 		"options": { "noCalc": true }
 	},
-	"aux_digit_[10,11,12,13,14,15,16,17,18,19,20]", {
+	"aux_number_[10,11,12,13,14,15,16,17,18,19,20]", {
 		"unicode": [
 			"0031",
 			"0031",
@@ -257,11 +270,190 @@
 			"parenthesized": "2487",
 			"fullstop": "249B"
 		}],
-		"options": { "noCalc": true, "useLetterLocale": true },
+		"tagsPrefixes": ["number ", "число "],
+		"tags": [
+			["ten", "десять"],
+			["eleven", "одиннадцать"],
+			["twelve", "двенадцать"],
+			["thirteen", "тринадцать"],
+			["fourteen", "четырнадцать"],
+			["fifteen", "пятнадцать"],
+			["sixteen", "шестнадцать"],
+			["seventeen", "семнадцать"],
+			["eighteen", "восемнадцать"],
+			["nineteen", "девятнадцать"],
+			["twenty", "двадцать"]
+		],
+		"options": { "noCalc": true },
 		"recipe": [
 			["10"], ["11"], ["12"], ["13"], ["14"], ["15"], ["16"], ["17"], ["18"], ["19"], ["20"]
+		]
+	},
+	"aux_number_[21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]", {
+		"unicode": [
+			"0032",
+			"0032",
+			"0032",
+			"0032",
+			"0032",
+			"0032",
+			"0032",
+			"0032",
+			"0032",
+			"0033",
+			"0033",
+			"0033",
+			"0033",
+			"0033",
+			"0033",
+			"0033",
+			"0033",
+			"0033",
+			"0033",
+			"0034",
+			"0034",
+			"0034",
+			"0034",
+			"0034",
+			"0034",
+			"0034",
+			"0034",
+			"0034",
+			"0034",
+			"0035"
 		],
-		"symbol": {"beforeLetter": "aux"}
+		"sequence": [
+			["0032", "0031"],
+			["0032", "0032"],
+			["0032", "0033"],
+			["0032", "0034"],
+			["0032", "0035"],
+			["0032", "0036"],
+			["0032", "0037"],
+			["0032", "0038"],
+			["0032", "0039"],
+			["0033", "0030"],
+			["0033", "0031"],
+			["0033", "0032"],
+			["0033", "0033"],
+			["0033", "0034"],
+			["0033", "0035"],
+			["0033", "0036"],
+			["0033", "0037"],
+			["0033", "0038"],
+			["0033", "0039"],
+			["0034", "0030"],
+			["0034", "0031"],
+			["0034", "0032"],
+			["0034", "0033"],
+			["0034", "0034"],
+			["0034", "0035"],
+			["0034", "0036"],
+			["0034", "0037"],
+			["0034", "0038"],
+			["0034", "0039"],
+			["0035", "0030"]
+		],
+		"alterations": [{
+			"circled": "3251"
+		}, {
+			"circled": "3252"
+		}, {
+			"circled": "3253"
+		}, {
+			"circled": "3254"
+		}, {
+			"circled": "3255"
+		}, {
+			"circled": "3256"
+		}, {
+			"circled": "3257"
+		}, {
+			"circled": "3258"
+		}, {
+			"circled": "3259"
+		}, {
+			"circled": "325A"
+		}, {
+			"circled": "325B"
+		}, {
+			"circled": "325C"
+		}, {
+			"circled": "325D"
+		}, {
+			"circled": "325E"
+		}, {
+			"circled": "325F"
+		}, {
+			"circled": "32B1"
+		}, {
+			"circled": "32B2"
+		}, {
+			"circled": "32B3"
+		}, {
+			"circled": "32B4"
+		}, {
+			"circled": "32B5"
+		}, {
+			"circled": "32B6"
+		}, {
+			"circled": "32B7"
+		}, {
+			"circled": "32B8"
+		}, {
+			"circled": "32B9"
+		}, {
+			"circled": "32BA"
+		}, {
+			"circled": "32BB"
+		}, {
+			"circled": "32BC"
+		}, {
+			"circled": "32BD"
+		}, {
+			"circled": "32BE"
+		}, {
+			"circled": "32BF"
+		}],
+		"tagsPrefixes": ["number ", "число "],
+		"tags": [
+			["twenty one", "двадцать один"],
+			["twenty two", "двадцать два"],
+			["twenty three", "двадцать три"],
+			["twenty four", "двадцать четыре"],
+			["twenty five", "двадцать пять"],
+			["twenty six", "двадцать шесть"],
+			["twenty seven", "двадцать семь"],
+			["twenty eight", "двадцать восемь"],
+			["twenty nine", "двадцать девять"],
+			["thirty", "тридцать"],
+			["thirty one", "тридцать один"],
+			["thirty two", "тридцать два"],
+			["thirty three", "тридцать три"],
+			["thirty four", "тридцать четыре"],
+			["thirty five", "тридцать пять"],
+			["thirty six", "тридцать шесть"],
+			["thirty seven", "тридцать семь"],
+			["thirty eight", "тридцать восемь"],
+			["thirty nine", "тридцать девять"],
+			["forty", "сорок"],
+			["forty one", "сорок один"],
+			["forty two", "сорок два"],
+			["forty three", "сорок три"],
+			["forty four", "сорок четыре"],
+			["forty five", "сорок пять"],
+			["forty six", "сорок шесть"],
+			["forty seven", "сорок семь"],
+			["forty eight", "сорок восемь"],
+			["forty nine", "сорок девять"],
+			["fifty", "пятьдесят"]
+		],
+		"options": { "noCalc": true },
+		"recipe": [
+			["21"], ["22"], ["23"], ["24"], ["25"], ["26"], ["27"], ["28"], ["29"], ["30"],
+			["31"], ["32"], ["33"], ["34"], ["35"], ["36"], ["37"], ["38"], ["39"], ["40"],
+			["41"], ["42"], ["43"], ["44"], ["45"], ["46"], ["47"], ["48"], ["49"], ["50"]
+		]
 	},
 	"lat_[c,s]_let_a", {
 		"unicode": ["0041", "0061"],
@@ -284,6 +476,8 @@
 			"fullwidth": "FF21",
 			"circled": "24B6",
 			"negativeCircled": "1F150",
+			"squared": "1F130",
+			"negativeSquared": "1F170",
 			"regionalIndicator": "1F1E6",
 			"parenthesized": "1F110",
 			"tag": "E0041"
@@ -333,6 +527,8 @@
 			"fullwidth": "FF22",
 			"circled": "24B7",
 			"negativeCircled": "1F151",
+			"squared": "1F131",
+			"negativeSquared": "1F171",
 			"regionalIndicator": "1F1E7",
 			"parenthesized": "1F111",
 			"tag": "E0042"
@@ -380,6 +576,8 @@
 			"fullwidth": "FF23",
 			"circled": "24B8",
 			"negativeCircled": "1F152",
+			"squared": "1F132",
+			"negativeSquared": "1F172",
 			"regionalIndicator": "1F1E8",
 			"parenthesized": "1F112",
 			"tag": "E0043"
@@ -428,6 +626,8 @@
 			"fullwidth": "FF24",
 			"circled": "24B9",
 			"negativeCircled": "1F153",
+			"squared": "1F133",
+			"negativeSquared": "1F173",
 			"regionalIndicator": "1F1E9",
 			"parenthesized": "1F113",
 			"tag": "E0044"
@@ -450,6 +650,7 @@
 			"monospace": "1D68D",
 			"fullwidth": "FF44",
 			"circled": "24D3",
+			"squared": "1F1A5",
 			"parenthesized": "249F",
 			"tag": "E0064"
 		}],
@@ -476,6 +677,8 @@
 			"fullwidth": "FF25",
 			"circled": "24BA",
 			"negativeCircled": "1F154",
+			"squared": "1F134",
+			"negativeSquared": "1F174",
 			"regionalIndicator": "1F1EA",
 			"parenthesized": "1F114",
 			"tag": "E0045"
@@ -526,6 +729,8 @@
 			"fullwidth": "FF26",
 			"circled": "24BB",
 			"negativeCircled": "1F155",
+			"squared": "1F135",
+			"negativeSquared": "1F175",
 			"regionalIndicator": "1F1EB",
 			"parenthesized": "1F115",
 			"tag": "E0046"
@@ -575,6 +780,8 @@
 			"fullwidth": "FF27",
 			"circled": "24BC",
 			"negativeCircled": "1F156",
+			"squared": "1F136",
+			"negativeSquared": "1F176",
 			"regionalIndicator": "1F1EC",
 			"parenthesized": "1F116",
 			"tag": "E0047"
@@ -623,6 +830,8 @@
 			"fullwidth": "FF28",
 			"circled": "24BD",
 			"negativeCircled": "1F157",
+			"squared": "1F137",
+			"negativeSquared": "1F177",
 			"regionalIndicator": "1F1ED",
 			"parenthesized": "1F117",
 			"tag": "E0048"
@@ -672,6 +881,8 @@
 			"fullwidth": "FF29",
 			"circled": "24BE",
 			"negativeCircled": "1F158",
+			"squared": "1F138",
+			"negativeSquared": "1F178",
 			"regionalIndicator": "1F1EE",
 			"parenthesized": "1F118",
 			"tag": "E0049"
@@ -721,6 +932,8 @@
 			"fullwidth": "FF2A",
 			"circled": "24BF",
 			"negativeCircled": "1F159",
+			"squared": "1F139",
+			"negativeSquared": "1F179",
 			"regionalIndicator": "1F1EF",
 			"parenthesized": "1F119",
 			"tag": "E004A"
@@ -769,6 +982,8 @@
 			"fullwidth": "FF2B",
 			"circled": "24C0",
 			"negativeCircled": "1F15A",
+			"squared": "1F13A",
+			"negativeSquared": "1F17A",
 			"regionalIndicator": "1F1F0",
 			"parenthesized": "1F11A",
 			"tag": "E004B"
@@ -819,6 +1034,8 @@
 			"fullwidth": "FF2C",
 			"circled": "24C1",
 			"negativeCircled": "1F15B",
+			"squared": "1F13B",
+			"negativeSquared": "1F17B",
 			"regionalIndicator": "1F1F1",
 			"parenthesized": "1F11B",
 			"tag": "E004C"
@@ -868,6 +1085,8 @@
 			"fullwidth": "FF2D",
 			"circled": "24C2",
 			"negativeCircled": "1F15C",
+			"squared": "1F13C",
+			"negativeSquared": "1F17C",
 			"regionalIndicator": "1F1F2",
 			"parenthesized": "1F11C",
 			"tag": "E004D"
@@ -918,6 +1137,8 @@
 			"fullwidth": "FF2E",
 			"circled": "24C3",
 			"negativeCircled": "1F15D",
+			"squared": "1F13D",
+			"negativeSquared": "1F17D",
 			"regionalIndicator": "1F1F3",
 			"parenthesized": "1F11D",
 			"tag": "E004E"
@@ -965,6 +1186,8 @@
 			"fullwidth": "FF2F",
 			"circled": "24C4",
 			"negativeCircled": "1F15E",
+			"squared": "1F13E",
+			"negativeSquared": "1F17E",
 			"regionalIndicator": "1F1F4",
 			"parenthesized": "1F11E",
 			"tag": "E004F"
@@ -1014,6 +1237,8 @@
 			"fullwidth": "FF30",
 			"circled": "24C5",
 			"negativeCircled": "1F15F",
+			"squared": "1F13F",
+			"negativeSquared": "1F17F",
 			"regionalIndicator": "1F1F5",
 			"parenthesized": "1F11F",
 			"tag": "E0050"
@@ -1062,6 +1287,8 @@
 			"fullwidth": "FF31",
 			"circled": "24C6",
 			"negativeCircled": "1F160",
+			"squared": "1F140",
+			"negativeSquared": "1F180",
 			"regionalIndicator": "1F1F6",
 			"parenthesized": "1F120",
 			"tag": "E0051"
@@ -1109,6 +1336,8 @@
 			"fullwidth": "FF32",
 			"circled": "24C7",
 			"negativeCircled": "1F161",
+			"squared": "1F141",
+			"negativeSquared": "1F181",
 			"regionalIndicator": "1F1F7",
 			"parenthesized": "1F121",
 			"tag": "E0052"
@@ -1156,6 +1385,8 @@
 			"fullwidth": "FF33",
 			"circled": "24C8",
 			"negativeCircled": "1F162",
+			"squared": "1F142",
+			"negativeSquared": "1F182",
 			"regionalIndicator": "1F1F8",
 			"parenthesized": "1F122",
 			"tag": "E0053"
@@ -1204,6 +1435,8 @@
 			"fullwidth": "FF34",
 			"circled": "24C9",
 			"negativeCircled": "1F163",
+			"squared": "1F143",
+			"negativeSquared": "1F183",
 			"regionalIndicator": "1F1F9",
 			"parenthesized": "1F123",
 			"tag": "E0054"
@@ -1252,6 +1485,8 @@
 			"fullwidth": "FF35",
 			"circled": "24CA",
 			"negativeCircled": "1F164",
+			"squared": "1F144",
+			"negativeSquared": "1F184",
 			"regionalIndicator": "1F1FA",
 			"parenthesized": "1F124",
 			"tag": "E0055"
@@ -1300,6 +1535,8 @@
 			"fullwidth": "FF36",
 			"circled": "24CB",
 			"negativeCircled": "1F165",
+			"squared": "1F145",
+			"negativeSquared": "1F185",
 			"regionalIndicator": "1F1FB",
 			"parenthesized": "1F125",
 			"tag": "E0056"
@@ -1348,6 +1585,8 @@
 			"fullwidth": "FF37",
 			"circled": "24CC",
 			"negativeCircled": "1F166",
+			"squared": "1F146",
+			"negativeSquared": "1F186",
 			"regionalIndicator": "1F1FC",
 			"parenthesized": "1F126",
 			"tag": "E0057"
@@ -1394,6 +1633,8 @@
 			"fullwidth": "FF38",
 			"circled": "24CD",
 			"negativeCircled": "1F167",
+			"squared": "1F147",
+			"negativeSquared": "1F187",
 			"regionalIndicator": "1F1FD",
 			"parenthesized": "1F127",
 			"tag": "E0058"
@@ -1442,6 +1683,8 @@
 			"fullwidth": "FF39",
 			"circled": "24CE",
 			"negativeCircled": "1F168",
+			"squared": "1F148",
+			"negativeSquared": "1F188",
 			"regionalIndicator": "1F1FE",
 			"parenthesized": "1F128",
 			"tag": "E0059"
@@ -1487,6 +1730,8 @@
 			"fullwidth": "FF3A",
 			"circled": "24CF",
 			"negativeCircled": "1F169",
+			"squared": "1F149",
+			"negativeSquared": "1F189",
 			"regionalIndicator": "1F1FF",
 			"parenthesized": "1F129",
 			"tag": "E005A"

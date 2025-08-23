@@ -111,7 +111,7 @@ winget install AutoHotkey.AutoHotkey
 - **Glyph variations**: Allows entering alternative variants of symbols, if available.<br>E.g., `A` → `ᴬ` `𝐴` `𝐀` `𝑨` `𝙰` `Ａ` `ᴀ` `𝔄` `𝕬` `𝒜` `𝓐` `𝔸` `Ⓐ` `🅐` `🄰` `🅰` `🄐`.<br>“Reginal indicator” and “Tag” symbols modes also included.
 
   - **Regional indicators example:** `🇦​🇷` → 🇦🇷, `🇻​🇦` → 🇻🇦;
-  - **Tags example:** `🏴gbwls<cancel tag>` → 🏴󠁧󠁢󠁷󠁬󠁳󠁿<br>Actions: Activate “Tags” mode via selector GUI, “Compose” → type “bfl” \[🏴\], type “gbwls”, “Compose” → type “tcancel”.
+  - **Tags example:** `🏴gbwls<cancel tag>` → 🏴󠁧󠁢󠁷󠁬󠁳󠁿<br>Actions: Activate “Tags” mode via selector GUI, “Compose” → type “bfl” \[🏴\], type “gbwls” (text will be invisible), “Compose” → type “tcancel”.
 
 - **TELEX/VNI-like modes**: simplifies typing of [Tiếng Việt](https://en.wikipedia.org/wiki/Vietnamese_language) (Vietnamese), [Tơlơi Jơrai](https://en.wikipedia.org/wiki/Jarai_language) (Jarai) and [Hànyǔ Pīnyīn](https://en.wikipedia.org/wiki/Pinyin) with input similar to Vietnamese Telex and VNI layouts.
 

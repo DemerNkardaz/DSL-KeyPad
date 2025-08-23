@@ -226,7 +226,7 @@
 	},
 	"squared", {
 		"preview": [
-			""
+			"\ud83c\udd42\ud83c\udd40\ud83c\udd44\ud83c\udd30\ud83c\udd41\ud83c\udd34\ud83c\udd33"
 		],
 		"fonts": [""],
 		"locale": "glyph_variations.squared",
@@ -236,7 +236,7 @@
 	},
 	"negativeSquared", {
 		"preview": [
-			""
+			"\ud83c\udd7d\ud83c\udd74\ud83c\udd76\ud83c\udd70\ud83c\udd83\ud83c\udd78\ud83c\udd85\ud83c\udd74 \ud83c\udd82\ud83c\udd80\ud83c\udd84\ud83c\udd70\ud83c\udd81\ud83c\udd74\ud83c\udd73"
 		],
 		"fonts": [""],
 		"locale": "glyph_variations.negative_squared",
