@@ -25,9 +25,9 @@ $$
 ---
 
 <p align="center">
-<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-4900+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-5300+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
 <img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-5100+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
-<img src="https://custom-icon-badges.herokuapp.com/badge/binds-2100+/800+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/binds-2300+/800+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
 <br>
 <img src="https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social" alt="wakatime"/>
 <img src="https://img.shields.io/github/watchers/DemerNkardaz/DSL-KeyPad" alt="GitHub watchers"/>
@@ -108,7 +108,10 @@ winget install AutoHotkey.AutoHotkey
   - [Deseret](https://en.wikipedia.org/wiki/Deseret_alphabet)
   - [Shavian](https://en.wikipedia.org/wiki/Shavian_alphabet)
 
-- **Glyph variations**: Allows entering alternative variants of symbols, if available.<br>E.g., `A` → `ᴬ` `𝐴` `𝐀` `𝑨` `𝙰` `Ａ` `ᴀ` `𝔄` `𝕬` `𝒜` `𝓐` `𝔸`.
+- **Glyph variations**: Allows entering alternative variants of symbols, if available.<br>E.g., `A` → `ᴬ` `𝐴` `𝐀` `𝑨` `𝙰` `Ａ` `ᴀ` `𝔄` `𝕬` `𝒜` `𝓐` `𝔸` `Ⓐ` `🅐` `🄰` `🅰` `🄐`.<br>“Reginal indicator” and “Tag” symbols modes also included.
+
+  - **Regional indicators example:** `🇦​🇷` → 🇦🇷, `🇻​🇦` → 🇻🇦;
+  - **Tags example:** `🏴gbwls<cancel tag>` → 🏴󠁧󠁢󠁷󠁬󠁳󠁿<br>Actions: Activate “Tags” mode via selector GUI, “Compose” → type “bfl” \[🏴\], type “gbwls”, “Compose” → type “tcancel”.
 
 - **TELEX/VNI-like modes**: simplifies typing of [Tiếng Việt](https://en.wikipedia.org/wiki/Vietnamese_language) (Vietnamese), [Tơlơi Jơrai](https://en.wikipedia.org/wiki/Jarai_language) (Jarai) and [Hànyǔ Pīnyīn](https://en.wikipedia.org/wiki/Pinyin) with input similar to Vietnamese Telex and VNI layouts.
 
