@@ -45,7 +45,8 @@
 		"unicode": "0024",
 		"alterations": {
 			"small": "FE69",
-			"fullwidth": "FF04"
+			"fullwidth": "FF04",
+			"tag": "E0024"
 		},
 		"tags": ["доллар", "dollar"],
 		"groups": ["Wallet Signs", "Wallet Signs Left Shift"],

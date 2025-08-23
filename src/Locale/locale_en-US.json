@@ -397,10 +397,22 @@
 						"\u2003•\u2002sansSerifBold — полужирный без засечек, пбз, ssb.\n",
 						"\u2003•\u2002monospace — моноширинный, м, m.\n",
 						"\u2003•\u2002smallCapital — капитель, к, sc.\n",
+						"\u2003•\u2002smallCapitalModifier — капитель-модификатор, км, scm.\n",
 						"\u2003•\u2002small — маленький, мал, sm.\n",
 						"\u2003•\u2002combining — комбинируемый, ко, c.\n",
 						"\u2003•\u2002uncombined — некомбинируемый, неко, uc.\n",
-						"\u2003•\u2002fullwidth — полноширинный, пш, fw.\n"
+						"\u2003•\u2002fullwidth — полноширинный, пш, fw.\n",
+						"\u2003•\u2002blackletter — bl.\n",
+						"\u2003•\u2002regionalIndicator — региональный индикатор, ри, ri.\n",
+						"\u2003•\u2002circled — в круге, вк, ci.\n",
+						"\u2003•\u2002negativeCircled — в закрашенном круге, взк, nci.\n",
+						"\u2003•\u2002doubleCircled — в двойном круге, вдк, dci.\n",
+						"\u2003•\u2002parenthesized — в скобках, вск, pr.\n",
+						"\u2003•\u2002squared — в квадрате, вкв, sq.\n",
+						"\u2003•\u2002negativeSquared — в закрашенном квадрате, взкв, nsq.\n",
+						"\u2003•\u2002fullstop — с точкой, стч, fs.\n",
+						"\u2003•\u2002comma — с запятой, сзп, cm.\n",
+						"\u2003•\u2002tag — тег, т, t.\n"
 					]
 				},
 				"funcs": {
@@ -556,7 +568,8 @@
 				"negative_squared": "Negative squared characters",
 				"parenthesized": "Parenthesized characters",
 				"fullstop": "Characters with full stop",
-				"comma": "Characters with comma"
+				"comma": "Characters with comma",
+				"tag": "Tag-characters"
 			}
 		},
 		"monitor": {

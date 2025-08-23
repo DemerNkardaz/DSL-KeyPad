@@ -240,6 +240,7 @@
     <Image Include="DSLKeyPad.app_glyph_fullstop.ico" />
     <Image Include="DSLKeyPad.app_glyph_comma.ico" />
     <Image Include="DSLKeyPad.app_glyph_double_circled.ico" />
+    <Image Include="DSLKeyPad.app_glyph_tag.ico" />
     <Image Include="icon11.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

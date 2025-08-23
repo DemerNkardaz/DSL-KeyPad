@@ -1,6 +1,9 @@
 [
 	"space", {
 		"unicode": "0020",
+		"alterations": {
+			"tag": "E0020"
+		},
 		"options": { "noCalc": true },
 		"symbol": { "category": "Spaces" }
 	},

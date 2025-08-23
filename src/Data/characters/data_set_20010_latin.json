@@ -2767,7 +2767,8 @@
 		"unicode": ["0026"],
 		"alterations": {
 			"small": "FE60",
-			"fullwidth": "FF06"
+			"fullwidth": "FF06",
+			"tag": "E0026"
 		},
 		"tags": ["амперсанд", "ampersand"],
 		"groups": ["Latin Ligatures"],

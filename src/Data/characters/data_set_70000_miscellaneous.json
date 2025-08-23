@@ -9,20 +9,43 @@
 	"replacment_character", {
 		"titles": {"ru-RU": "Заменяющий символ", "en-US": "Replacement character"},
 		"unicode": "FFFD",
-		"options": { "noCalc": true },
+		"options": { },
 		"recipe": ["null"]
+	},
+	"black_flag", {
+		"titles": {"ru-RU": "Чёрный флаг", "en-US": "Black flag"},
+		"tags": ["black flag", "чёрный флаг"],
+		"unicode": "1F3F4",
+		"options": { "suggestionsAtEnd": true },
+		"recipe": ["bfl"]
+	},
+	"language_tag", {
+		"titles": {"ru-RU": "Языковой тег", "en-US": "Language tag"},
+		"tags": ["language tag", "языковой тег"],
+		"unicode": "E0001",
+		"options": { "suggestionsAtEnd": true },
+		"symbol": { "alt": "<LANGUAGE TAG>" },
+		"recipe": ["tlang"]
+	},
+	"cancel_tag", {
+		"titles": {"ru-RU": "Закрывающий тег", "en-US": "Cancel tag"},
+		"tags": ["cancel tag", "закрывающий тег"],
+		"unicode": "E007F",
+		"options": { "suggestionsAtEnd": true },
+		"symbol": { "alt": "<CANCEL TAG>" },
+		"recipe": ["tcancel"]
 	},
 	"object_replacement_character", {
 		"titles": {"ru-RU": "Объекто-заменяющий символ", "en-US": "Object replacement character"},
 		"unicode": "FFFC",
-		"options": { "noCalc": true },
+		"options": { },
 		"recipe": ["obj"]
 	},
 	"left_to_right_mark", {
 		"titles": {"ru-RU": "Маркер направления слева направо", "en-US": "Left to Right Mark"},
 		"tags": ["left to right mark", "ltr mark", "маркер направления слева направо"],
 		"unicode": "200E",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<LTR MARK>" },
 		"recipe": ["LRM"]
 	},
@@ -30,7 +53,7 @@
 		"titles": {"ru-RU": "Маркер направления справа налево", "en-US": "Right to Left Mark"},
 		"tags": ["right to left mark", "rtl mark", "маркер направления справа налево"],
 		"unicode": "200F",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<RTL MARK>" },
 		"recipe": ["RLM"]
 	},
@@ -38,7 +61,7 @@
 		"titles": {"ru-RU": "Вложенное направление слева направо", "en-US": "Left to Right Embedding"},
 		"tags": ["left to right embedding", "ltr embedding", "вложенное направление слева направо"],
 		"unicode": "202A",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<LTR EMBEDDING>" },
 		"recipe": ["LRE"]
 	},
@@ -46,7 +69,7 @@
 		"titles": {"ru-RU": "Вложенное направление справа налево", "en-US": "Right to Left Embedding"},
 		"tags": ["right to left embedding", "rtl embedding", "вложенное направление справа налево"],
 		"unicode": "202B",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<RTL EMBEDDING>" },
 		"recipe": ["RLE"]
 	},
@@ -54,7 +77,7 @@
 		"titles": {"ru-RU": "Переопределение направление слева направо", "en-US": "Left to Right Override"},
 		"tags": ["left to right override", "ltr override", "переопределение направление слева направо"],
 		"unicode": "202D",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<LTR OVERRIDE>" },
 		"recipe": ["LRO"]
 	},
@@ -62,7 +85,7 @@
 		"titles": {"ru-RU": "Переопределение направление справа налево", "en-US": "Right to Left Override"},
 		"tags": ["right to left override", "rtl override", "переопределение направление справа налево"],
 		"unicode": "202E",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<RTL OVERRIDE>" },
 		"recipe": ["RLO"]
 	},
@@ -70,7 +93,7 @@
 		"titles": {"ru-RU": "Изолированное направление слева направо", "en-US": "Left to Right Isolate"},
 		"tags": ["left to right isolate", "ltr isolate", "изолированное направление слева направо"],
 		"unicode": "2066",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<LTR ISOLATE>" },
 		"recipe": ["LRI"]
 	},
@@ -78,7 +101,7 @@
 		"titles": {"ru-RU": "Изолированное направление справа налево", "en-US": "Right to Left Isolate"},
 		"tags": ["right to left isolate", "rtl isolate", "изолированное направление справа налево"],
 		"unicode": "2067",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<RTL ISOLATE>" },
 		"recipe": ["RLI"]
 	},
@@ -86,7 +109,7 @@
 		"titles": {"ru-RU": "Выход из встраивания направления", "en-US": "Pop Directional Formatting"},
 		"tags": ["pop directional formatting", "выход из встраивания направления"],
 		"unicode": "202C",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<POP DIR. FORMATTING>" },
 		"recipe": ["PPDF"]
 	},
@@ -94,7 +117,7 @@
 		"titles": {"ru-RU": "Выход из изоляции направления", "en-US": "Pop Directional Isolate"},
 		"tags": ["pop directional isolate", "выход из изоляции направления"],
 		"unicode": "2069",
-		"options": { "noCalc": true, "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<POP DIR. ISOLATE>" },
 		"recipe": ["PPDI"]
 	}

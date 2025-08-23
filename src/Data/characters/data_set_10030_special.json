@@ -269,7 +269,8 @@
 		"unicode": "002A",
 		"alterations": {
 			"small": "FE61",
-			"fullwidth": "FF0A"
+			"fullwidth": "FF0A",
+			"tag": "E002A"
 		},
 		"options": { "noCalc": true }
 	},
@@ -526,7 +527,8 @@
 		"unicode": "0023",
 		"alterations": {
 			"small": "FE5F",
-			"fullwidth": "FF03"
+			"fullwidth": "FF03",
+			"tag": "E0023"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
@@ -547,7 +549,8 @@
 		"unicode": "002C",
 		"alterations": {
 			"small": "FE50",
-			"fullwidth": "FF0C"
+			"fullwidth": "FF0C",
+			"tag": "E002C"
 		},
 		"options": { "noCalc": true }
 	},
@@ -555,7 +558,8 @@
 		"unicode": "002E",
 		"alterations": {
 			"small": "FE52",
-			"fullwidth": "FF0E"
+			"fullwidth": "FF0E",
+			"tag": "E002E"
 		},
 		"options": { "noCalc": true }
 	},
@@ -564,7 +568,8 @@
 		"alterations": {
 			"modifier": "A71D",
 			"small": "FE57",
-			"fullwidth": "FF01"
+			"fullwidth": "FF01",
+			"tag": "E0021"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
@@ -572,7 +577,8 @@
 		"unicode": "003F",
 		"alterations": {
 			"small": "FE56",
-			"fullwidth": "FF1F"
+			"fullwidth": "FF1F",
+			"tag": "E003F"
 		},
 		"options": { "noCalc": true }
 	},
@@ -665,7 +671,8 @@
 		"unicode": "0060",
 		"alterations": {
 			"modifier": "02CB",
-			"fullwidth": "FF40"
+			"fullwidth": "FF40",
+			"tag": "E0060"
 		},
 		"options": { "noCalc": true }
 	},
@@ -673,7 +680,8 @@
 		"unicode": "005E",
 		"alterations": {
 			"modifier": "02C6",
-			"fullwidth": "FF3E"
+			"fullwidth": "FF3E",
+			"tag": "E005E"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
@@ -681,7 +689,8 @@
 		"unicode": "003B",
 		"alterations": {
 			"small": "FE54",
-			"fullwidth": "FF1B"
+			"fullwidth": "FF1B",
+			"tag": "E003B"
 		},
 		"options": { "noCalc": true }
 	},
@@ -700,7 +709,8 @@
 		"alterations": {
 			"modifier": "A789",
 			"small": "FE55",
-			"fullwidth": "FF1A"
+			"fullwidth": "FF1A",
+			"tag": "E003A"
 		},
 		"options": { "noCalc": true }
 	},
@@ -708,7 +718,8 @@
 		"unicode": "0027",
 		"alterations": {
 			"modifier": "02BC",
-			"fullwidth": "FF07"
+			"fullwidth": "FF07",
+			"tag": "E0027"
 		},
 		"options": { "noCalc": true }
 	},
@@ -716,14 +727,16 @@
 		"unicode": "0022",
 		"alterations": {
 			"modifier": "02EE",
-			"fullwidth": "FF02"
+			"fullwidth": "FF02",
+			"tag": "E0022"
 		},
 		"options": { "noCalc": true }
 	},
 	"solidus", {
 		"unicode": "002F",
 		"alterations": {
-			"fullwidth": "FF0F"
+			"fullwidth": "FF0F",
+			"tag": "E002F"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
@@ -731,14 +744,16 @@
 		"unicode": "005C",
 		"alterations": {
 			"small": "FE68",
-			"fullwidth": "FF3C"
+			"fullwidth": "FF3C",
+			"tag": "E005C"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
 	"vertical_line", {
 		"unicode": "007C",
 		"alterations": {
-			"fullwidth": "FF5C"
+			"fullwidth": "FF5C",
+			"tag": "E007C"
 		},
 		"groups": ["Special Fast RShif"],
 		"options": { "noCalc": true, "fastKey": ">+ \\", "send": "Text" }
@@ -752,7 +767,8 @@
 		"unicode": "0040",
 		"alterations": {
 			"small": "FE6B",
-			"fullwidth": "FF20"
+			"fullwidth": "FF20",
+			"tag": "E0040"
 		},
 		"options": { "noCalc": true }
 	},
@@ -835,14 +851,16 @@
 		"unicode": "002D",
 		"alterations": {
 			"small": "FE63",
-			"fullwidth": "FF0D"
+			"fullwidth": "FF0D",
+			"tag": "E002D"
 		},
 		"options": { "noCalc": true }
 	},
 	"underscore", {
 		"unicode": "005F",
 		"alterations": {
-			"fullwidth": "FF3F"
+			"fullwidth": "FF3F",
+			"tag": "E005F"
 		},
 		"options": { "noCalc": true }
 	},
@@ -1130,7 +1148,8 @@
 		"unicode": "0025",
 		"alterations": {
 			"small": "FE6A",
-			"fullwidth": "FF05"
+			"fullwidth": "FF05",
+			"tag": "E0025"
 		},
 		"options": { "noCalc": true }
 	},
@@ -1158,7 +1177,8 @@
 			"superscript": "207C",
 			"subscript": "208C",
 			"small": "FE66",
-			"fullwidth": "FF1D"
+			"fullwidth": "FF1D",
+			"tag": "E003D"
 		},
 		"options": { "noCalc": true }
 	},
@@ -1183,7 +1203,8 @@
 			"superscript": "207A",
 			"subscript": "208A",
 			"small": "FE62",
-			"fullwidth": "FF0B"
+			"fullwidth": "FF0B",
+			"tag": "E002B"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
@@ -1262,7 +1283,8 @@
 	"tilde", {
 		"unicode": "007E",
 		"alterations": {
-			"fullwidth": "FF5E"
+			"fullwidth": "FF5E",
+			"tag": "E007E"
 		},
 		"options": { "noCalc": true }
 	},
@@ -1319,7 +1341,8 @@
 		"unicode": "003C",
 		"alterations": {
 			"small": "FE64",
-			"fullwidth": "FF1C"
+			"fullwidth": "FF1C",
+			"tag": "E003C"
 		},
 		"options": { "noCalc": true }
 	},
@@ -1346,7 +1369,8 @@
 		"unicode": "003E",
 		"alterations": {
 			"small": "FE65",
-			"fullwidth": "FF1E"
+			"fullwidth": "FF1E",
+			"tag": "E003E"
 		},
 		"options": { "noCalc": true }
 	},
@@ -1614,7 +1638,8 @@
 			"superscript": "207D",
 			"subscript": "208D",
 			"small": "FE59",
-			"fullwidth": "FF08"
+			"fullwidth": "FF08",
+			"tag": "E0028"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
@@ -1624,7 +1649,8 @@
 			"superscript": "207E",
 			"subscript": "208E",
 			"small": "FE5A",
-			"fullwidth": "FF09"
+			"fullwidth": "FF09",
+			"tag": "E0029"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
@@ -1679,14 +1705,16 @@
 	"left_bracket", {
 		"unicode": "005B",
 		"alterations": {
-			"fullwidth": "FF3B"
+			"fullwidth": "FF3B",
+			"tag": "E005B"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
 	"right_bracket", {
 		"unicode": "005D",
 		"alterations": {
-			"fullwidth": "FF3D"
+			"fullwidth": "FF3D",
+			"tag": "E005D"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
@@ -1778,7 +1806,8 @@
 		"unicode": "007B",
 		"alterations": {
 			"small": "FE5C",
-			"fullwidth": "FF5B"
+			"fullwidth": "FF5B",
+			"tag": "E007B"
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},

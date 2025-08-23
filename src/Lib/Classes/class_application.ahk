@@ -118,6 +118,7 @@ Class App {
 			"glyph_fullstop",
 			"glyph_comma",
 			"glyph_double_circled",
+			"glyph_tag",
 		] {
 			this.indexIcos.Set(ico, i)
 		}

@@ -284,6 +284,16 @@
 		"uiid": "DoubleCircled",
 		"icons": ["glyph_double_circled"]
 	},
+	"tag", {
+		"preview": [
+			""
+		],
+		"fonts": [""],
+		"locale": "glyph_variations.tag",
+		"bindings": [],
+		"uiid": "Tag",
+		"icons": ["glyph_tag"]
+	},
 	"uncombined", {
 		"preview": [
 			"\u25CC\u00B4\u25CC\u02DD\u25CC\u02D8\u25CC\u00B8\u25CC\u02D9\u25CC\u00A8\u25CC`\u25CC\u00AF\u25CC\u02DB\u25CC\u02DA\u25CC\u02DC"
