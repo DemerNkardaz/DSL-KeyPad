@@ -8,7 +8,7 @@
 		"preview": [
 			"\u25CC\u0363\u25CC\u0368\u25CC\u0369\u25CC\u0364\u25CC\u0365\u25CC\u0366\u25CC\u0367"
 		],
-		"fonts": ["Cabmria"],
+		"fonts": [""],
 		"locale": "glyph_variations.combining",
 		"bindings": [],
 		"uiid": "Combining",
@@ -38,7 +38,7 @@
 		"preview": [
 			"\uD835\uDC3C\uD835\uDC61\uD835\uDC4E\uD835\uDC59\uD835\uDC56\uD835\uDC50"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.italic",
 		"bindings": [],
 		"uiid": "Italic",
@@ -48,7 +48,7 @@
 		"preview": [
 			"\uD835\uDC01\uD835\uDC28\uD835\uDC25\uD835\uDC1D"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.bold",
 		"bindings": [],
 		"uiid": "Bold",
@@ -58,7 +58,7 @@
 		"preview": [
 			"\uD835\uDC70\uD835\uDC95\uD835\uDC82\uD835\uDC8D\uD835\uDC8A\uD835\uDC84 \uD835\uDC69\uD835\uDC90\uD835\uDC8D\uD835\uDC85"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.italic_bold",
 		"bindings": [],
 		"uiid": "ItalicBold",
@@ -68,7 +68,7 @@
 		"preview": [
 			"\uD835\uDDB2\uD835\uDDBA\uD835\uDDC7\uD835\uDDCC-\uD835\uDDB2\uD835\uDDBE\uD835\uDDCB\uD835\uDDC2\uD835\uDDBF"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.sans_serif",
 		"bindings": [],
 		"uiid": "SansSerif",
@@ -78,7 +78,7 @@
 		"preview": [
 			"\uD835\uDE1A\uD835\uDE22\uD835\uDE2F\uD835\uDE34-\uD835\uDE1A\uD835\uDE26\uD835\uDE33\uD835\uDE2A\uD835\uDE27 \uD835\uDE10\uD835\uDE35\uD835\uDE22\uD835\uDE2D\uD835\uDE2A\uD835\uDE24"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.sans_serif_italic",
 		"bindings": [],
 		"uiid": "SansSerifItalic",
@@ -88,7 +88,7 @@
 		"preview": [
 			"\uD835\uDDE6\uD835\uDDEE\uD835\uDDFB\uD835\uDE00-\uD835\uDDE6\uD835\uDDF2\uD835\uDDFF\uD835\uDDF6\uD835\uDDF3 \uD835\uDDD5\uD835\uDDFC\uD835\uDDF9\uD835\uDDF1"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.sans_serif_bold",
 		"bindings": [],
 		"uiid": "SansSerifBold",
@@ -98,7 +98,7 @@
 		"preview": [
 			"\uD835\uDE4E\uD835\uDE56\uD835\uDE63\uD835\uDE68-\uD835\uDE4E\uD835\uDE5A\uD835\uDE67\uD835\uDE5E\uD835\uDE5B \uD835\uDE44\uD835\uDE69\uD835\uDE56\uD835\uDE61\uD835\uDE5E\uD835\uDE58 \uD835\uDE3D\uD835\uDE64\uD835\uDE61\uD835\uDE59"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.sans_serif_italic_bold",
 		"bindings": [],
 		"uiid": "SansSerifItalicBold",
@@ -108,7 +108,7 @@
 		"preview": [
 			"\uD835\uDE7C\uD835\uDE98\uD835\uDE97\uD835\uDE98\uD835\uDE9C\uD835\uDE99\uD835\uDE8A\uD835\uDE8C\uD835\uDE8E"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.monospace",
 		"bindings": [],
 		"uiid": "Monospace",
@@ -128,7 +128,7 @@
 		"preview": [
 			"\uA731\u1D0D\u1D00\u029F\u029F \u1D04\u1D00\u1D18\u026A\u1D1B\u1D00\u029F"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.small_capital",
 		"bindings": [],
 		"uiid": "SmallCapital",
@@ -138,7 +138,7 @@
 		"preview": [
 			"\uD835\uDD09\uD835\uDD2F\uD835\uDD1E\uD835\uDD28\uD835\uDD31\uD835\uDD32\uD835\uDD2F"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.fraktur",
 		"bindings": [],
 		"uiid": "Fraktur",
@@ -148,7 +148,7 @@
 		"preview": [
 			"\uD835\uDD71\uD835\uDD97\uD835\uDD86\uD835\uDD90\uD835\uDD99\uD835\uDD9A\uD835\uDD97 \uD835\uDD6D\uD835\uDD94\uD835\uDD91\uD835\uDD89"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.fraktur_bold",
 		"bindings": [],
 		"uiid": "FrakturBold",
@@ -158,7 +158,7 @@
 		"preview": [
 			"\uD835\uDCAE\uD835\uDCB8\uD835\uDCC7\uD835\uDCBE\uD835\uDCC5\uD835\uDCC9"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.script",
 		"bindings": [],
 		"uiid": "Script",
@@ -168,7 +168,7 @@
 		"preview": [
 			"\uD835\uDCE2\uD835\uDCEC\uD835\uDCFB\uD835\uDCF2\uD835\uDCF9\uD835\uDCFD \uD835\uDCD1\uD835\uDCF8\uD835\uDCF5\uD835\uDCED"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.script_bold",
 		"bindings": [],
 		"uiid": "ScriptBold",
@@ -178,7 +178,7 @@
 		"preview": [
 			"\uD835\uDD3B\uD835\uDD60\uD835\uDD66\uD835\uDD53\uD835\uDD5D\uD835\uDD56-\uD835\uDD4A\uD835\uDD65\uD835\uDD63\uD835\uDD66\uD835\uDD54\uD835\uDD5C"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.double_struck",
 		"bindings": [],
 		"uiid": "DoubleStruck",
@@ -188,7 +188,7 @@
 		"preview": [
 			"\u2145\u2146\u2147\u2148\u2149"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.double_struck_italic",
 		"bindings": [],
 		"uiid": "DoubleStruckItalic",
@@ -196,99 +196,99 @@
 	},
 	"regionalIndicator", {
 		"preview": [
-			""
+			"\ud83c\uddfb\ud83c\udde6\u0020\ud83c\uddee\ud83c\uddf9\u0020\ud83c\uddeb\ud83c\uddf7\u0020\ud83c\uddf7\ud83c\uddfa\u0020\ud83c\uddec\ud83c\udde7\u0020\ud83c\uddf0\ud83c\uddf7\u0020\ud83c\uddef\ud83c\uddf5\u0020\ud83c\udde8\ud83c\uddf3\u0020\ud83c\uddfb\ud83c\uddf3\u0020\ud83c\uddea\ud83c\uddfa\u0020\ud83c\udde6\ud83c\uddf7\u0020\ud83c\uddf5\ud83c\udde6"
 		],
-		"fonts": ["Noto Color Emoji"],
+		"fonts": [""],
 		"locale": "glyph_variations.regional_indicator",
 		"bindings": [],
 		"uiid": "RegionalIndicator",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_vatican"]
 	},
 	"circled", {
 		"preview": [
 			"\u24b8\u24d8\u24e1\u24d2\u24db\u24d4\u24d3"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.circled",
 		"bindings": [],
 		"uiid": "Circled",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_circled"]
 	},
 	"negativeCircled", {
 		"preview": [
-			""
+			"\ud83c\udd5d\ud83c\udd54\ud83c\udd56\ud83c\udd50\ud83c\udd63\ud83c\udd58\ud83c\udd65\ud83c\udd54 \ud83c\udd52\ud83c\udd58\ud83c\udd61\ud83c\udd52\ud83c\udd5b\ud83c\udd54\ud83c\udd53"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.negative_circled",
 		"bindings": [],
 		"uiid": "NegativeCircled",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_negative_circled"]
 	},
 	"squared", {
 		"preview": [
 			""
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.squared",
 		"bindings": [],
 		"uiid": "Squared",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_squared"]
 	},
 	"negativeSquared", {
 		"preview": [
 			""
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.negative_squared",
 		"bindings": [],
 		"uiid": "NegativeSquared",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_negative_squared"]
 	},
 	"parenthesized", {
 		"preview": [
 			"\ud83c\udd1f\u249c\u24ad\u24a0\u24a9\u24af\u24a3\u24a0\u24ae\u24a4\u24b5\u24a0\u249f"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.parenthesized",
 		"bindings": [],
 		"uiid": "Parenthesized",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_parenthesized"]
 	},
 	"fullstop", {
 		"preview": [
 			"\u2488\u2489\u248a\u248b\u248c\u248d\u248e\u248f\u2490\u2491"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.fullstop",
 		"bindings": [],
 		"uiid": "Fullstop",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_fullstop"]
 	},
 	"comma", {
 		"preview": [
 			"\ud83c\udd01\ud83c\udd02\ud83c\udd03\ud83c\udd04\ud83c\udd05\ud83c\udd06\ud83c\udd07\ud83c\udd08\ud83c\udd09\ud83c\udd0a"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.comma",
 		"bindings": [],
 		"uiid": "Comma",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_comma"]
 	},
 	"doubleCircled", {
 		"preview": [
 			"\u24f5\u24f6\u24f7\u24f8\u24f9\u24fa\u24fb\u24fc\u24fd\u24fe"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.double_circled",
 		"bindings": [],
 		"uiid": "DoubleCircled",
-		"icons": ["glyph_uncombined"]
+		"icons": ["glyph_double_circled"]
 	},
 	"uncombined", {
 		"preview": [
 			"\u25CC\u00B4\u25CC\u02DD\u25CC\u02D8\u25CC\u00B8\u25CC\u02D9\u25CC\u00A8\u25CC`\u25CC\u00AF\u25CC\u02DB\u25CC\u02DA\u25CC\u02DC"
 		],
-		"fonts": ["Cabmria Math"],
+		"fonts": [""],
 		"locale": "glyph_variations.uncombined",
 		"bindings": [],
 		"uiid": "Uncombined",

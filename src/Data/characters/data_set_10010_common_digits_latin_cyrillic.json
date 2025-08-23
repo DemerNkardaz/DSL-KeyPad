@@ -22,6 +22,7 @@
 			"subscript": "2080",
 			"fullwidth": "FF10",
 			"circled": "24EA",
+			"negativeCircled": "24FF",
 			"fullstop": "1F100",
 			"comma": "1F101"
 		}, {
@@ -34,6 +35,7 @@
 			"subscript": "2081",
 			"fullwidth": "FF11",
 			"circled": "2460",
+			"negativeCircled": "2776",
 			"doubleCircled": "24F5",
 			"parenthesized": "2474",
 			"fullstop": "2488",
@@ -48,6 +50,7 @@
 			"subscript": "2082",
 			"fullwidth": "FF12",
 			"circled": "2461",
+			"negativeCircled": "2777",
 			"doubleCircled": "24F6",
 			"parenthesized": "2475",
 			"fullstop": "2489",
@@ -62,6 +65,7 @@
 			"subscript": "2083",
 			"fullwidth": "FF13",
 			"circled": "2462",
+			"negativeCircled": "2778",
 			"doubleCircled": "24F7",
 			"parenthesized": "2476",
 			"fullstop": "248A",
@@ -76,6 +80,7 @@
 			"subscript": "2084",
 			"fullwidth": "FF14",
 			"circled": "2463",
+			"negativeCircled": "2779",
 			"doubleCircled": "24F8",
 			"parenthesized": "2477",
 			"fullstop": "248B",
@@ -90,6 +95,7 @@
 			"subscript": "2085",
 			"fullwidth": "FF15",
 			"circled": "2464",
+			"negativeCircled": "277A",
 			"doubleCircled": "24F9",
 			"parenthesized": "2478",
 			"fullstop": "248C",
@@ -104,6 +110,7 @@
 			"subscript": "2086",
 			"fullwidth": "FF16",
 			"circled": "2465",
+			"negativeCircled": "277B",
 			"doubleCircled": "24FA",
 			"parenthesized": "2479",
 			"fullstop": "248D",
@@ -118,6 +125,7 @@
 			"subscript": "2087",
 			"fullwidth": "FF17",
 			"circled": "2466",
+			"negativeCircled": "277C",
 			"doubleCircled": "24FB",
 			"parenthesized": "247A",
 			"fullstop": "248E",
@@ -132,6 +140,7 @@
 			"subscript": "2088",
 			"fullwidth": "FF18",
 			"circled": "2467",
+			"negativeCircled": "277D",
 			"doubleCircled": "24FC",
 			"parenthesized": "247B",
 			"fullstop": "248F",
@@ -146,6 +155,7 @@
 			"subscript": "2089",
 			"fullwidth": "FF19",
 			"circled": "2468",
+			"negativeCircled": "277E",
 			"doubleCircled": "24FD",
 			"parenthesized": "247C",
 			"fullstop": "2490",
@@ -182,47 +192,58 @@
 		],
 		"alterations": [{
 			"circled": "2469",
+			"negativeCircled": "277F",
 			"doubleCircled": "24FE",
 			"parenthesized": "247D",
 			"fullstop": "2491"
 		}, {
 			"circled": "246A",
+			"negativeCircled": "24EB",
 			"parenthesized": "247E",
 			"fullstop": "2492"
 		}, {
 			"circled": "246B",
+			"negativeCircled": "24EC",
 			"parenthesized": "247F",
 			"fullstop": "2493"
 		}, {
 			"circled": "246C",
+			"negativeCircled": "24ED",
 			"parenthesized": "2480",
 			"fullstop": "2494"
 		}, {
 			"circled": "246D",
+			"negativeCircled": "24EE",
 			"parenthesized": "2481",
 			"fullstop": "2495"
 		}, {
 			"circled": "246E",
+			"negativeCircled": "24EF",
 			"parenthesized": "2482",
 			"fullstop": "2496"
 		}, {
 			"circled": "246F",
+			"negativeCircled": "24F0",
 			"parenthesized": "2483",
 			"fullstop": "2497"
 		}, {
 			"circled": "2470",
+			"negativeCircled": "24F1",
 			"parenthesized": "2484",
 			"fullstop": "2498"
 		}, {
 			"circled": "2471",
+			"negativeCircled": "24F2",
 			"parenthesized": "2485",
 			"fullstop": "2499"
 		}, {
 			"circled": "2472",
+			"negativeCircled": "24F3",
 			"parenthesized": "2486",
 			"fullstop": "249A"
 		}, {
 			"circled": "2473",
+			"negativeCircled": "24F4",
 			"parenthesized": "2487",
 			"fullstop": "249B"
 		}],
@@ -252,6 +273,7 @@
 			"smallCapital": "1D00",
 			"fullwidth": "FF21",
 			"circled": "24B6",
+			"negativeCircled": "1F150",
 			"regionalIndicator": "1F1E6",
 			"parenthesized": "1F110"
 		}, {
@@ -298,6 +320,7 @@
 			"smallCapitalModifier": "10784",
 			"fullwidth": "FF22",
 			"circled": "24B7",
+			"negativeCircled": "1F151",
 			"regionalIndicator": "1F1E7",
 			"parenthesized": "1F111"
 		}, {
@@ -342,6 +365,7 @@
 			"smallCapital": "1D04",
 			"fullwidth": "FF23",
 			"circled": "24B8",
+			"negativeCircled": "1F152",
 			"regionalIndicator": "1F1E8",
 			"parenthesized": "1F112"
 		}, {
@@ -387,6 +411,7 @@
 			"smallCapital": "1D05",
 			"fullwidth": "FF24",
 			"circled": "24B9",
+			"negativeCircled": "1F153",
 			"regionalIndicator": "1F1E9",
 			"parenthesized": "1F113"
 		}, {
@@ -432,6 +457,7 @@
 			"smallCapital": "1D07",
 			"fullwidth": "FF25",
 			"circled": "24BA",
+			"negativeCircled": "1F154",
 			"regionalIndicator": "1F1EA",
 			"parenthesized": "1F114"
 		}, {
@@ -479,6 +505,7 @@
 			"smallCapital": "A730",
 			"fullwidth": "FF26",
 			"circled": "24BB",
+			"negativeCircled": "1F155",
 			"regionalIndicator": "1F1EB",
 			"parenthesized": "1F115"
 		}, {
@@ -525,6 +552,7 @@
 			"smallCapitalModifier": "10792",
 			"fullwidth": "FF27",
 			"circled": "24BC",
+			"negativeCircled": "1F156",
 			"regionalIndicator": "1F1EC",
 			"parenthesized": "1F116"
 		}, {
@@ -570,6 +598,7 @@
 			"smallCapitalModifier": "10796",
 			"fullwidth": "FF28",
 			"circled": "24BD",
+			"negativeCircled": "1F157",
 			"regionalIndicator": "1F1ED",
 			"parenthesized": "1F117"
 		}, {
@@ -616,6 +645,7 @@
 			"smallCapitalModifier": "1DA6",
 			"fullwidth": "FF29",
 			"circled": "24BE",
+			"negativeCircled": "1F158",
 			"regionalIndicator": "1F1EE",
 			"parenthesized": "1F118"
 		}, {
@@ -662,6 +692,7 @@
 			"smallCapital": "1D0A",
 			"fullwidth": "FF2A",
 			"circled": "24BF",
+			"negativeCircled": "1F159",
 			"regionalIndicator": "1F1EF",
 			"parenthesized": "1F119"
 		}, {
@@ -707,6 +738,7 @@
 			"smallCapital": "1D0B",
 			"fullwidth": "FF2B",
 			"circled": "24C0",
+			"negativeCircled": "1F15A",
 			"regionalIndicator": "1F1F0",
 			"parenthesized": "1F11A"
 		}, {
@@ -754,6 +786,7 @@
 			"smallCapitalModifier": "1DAB",
 			"fullwidth": "FF2C",
 			"circled": "24C1",
+			"negativeCircled": "1F15B",
 			"regionalIndicator": "1F1F1",
 			"parenthesized": "1F11B"
 		}, {
@@ -800,6 +833,7 @@
 			"smallCapital": "1D0D",
 			"fullwidth": "FF2D",
 			"circled": "24C2",
+			"negativeCircled": "1F15C",
 			"regionalIndicator": "1F1F2",
 			"parenthesized": "1F11C"
 		}, {
@@ -847,6 +881,7 @@
 			"smallCapitalModifier": "1DB0",
 			"fullwidth": "FF2E",
 			"circled": "24C3",
+			"negativeCircled": "1F15D",
 			"regionalIndicator": "1F1F3",
 			"parenthesized": "1F11D"
 		}, {
@@ -891,6 +926,7 @@
 			"smallCapital": "1D0F",
 			"fullwidth": "FF2F",
 			"circled": "24C4",
+			"negativeCircled": "1F15E",
 			"regionalIndicator": "1F1F4",
 			"parenthesized": "1F11E"
 		}, {
@@ -937,6 +973,7 @@
 			"smallCapital": "1D18",
 			"fullwidth": "FF30",
 			"circled": "24C5",
+			"negativeCircled": "1F15F",
 			"regionalIndicator": "1F1F5",
 			"parenthesized": "1F11F"
 		}, {
@@ -982,6 +1019,7 @@
 			"smallCapital": "A7AF",
 			"fullwidth": "FF31",
 			"circled": "24C6",
+			"negativeCircled": "1F160",
 			"regionalIndicator": "1F1F6",
 			"parenthesized": "1F120"
 		}, {
@@ -1026,6 +1064,7 @@
 			"smallCapitalModifier": "107AA",
 			"fullwidth": "FF32",
 			"circled": "24C7",
+			"negativeCircled": "1F161",
 			"regionalIndicator": "1F1F7",
 			"parenthesized": "1F121"
 		}, {
@@ -1070,6 +1109,7 @@
 			"smallCapital": "A731",
 			"fullwidth": "FF33",
 			"circled": "24C8",
+			"negativeCircled": "1F162",
 			"regionalIndicator": "1F1F8",
 			"parenthesized": "1F122"
 		}, {
@@ -1115,6 +1155,7 @@
 			"smallCapital": "1D1B",
 			"fullwidth": "FF34",
 			"circled": "24C9",
+			"negativeCircled": "1F163",
 			"regionalIndicator": "1F1F9",
 			"parenthesized": "1F123"
 		}, {
@@ -1160,6 +1201,7 @@
 			"smallCapital": "1D1C",
 			"fullwidth": "FF35",
 			"circled": "24CA",
+			"negativeCircled": "1F164",
 			"regionalIndicator": "1F1FA",
 			"parenthesized": "1F124"
 		}, {
@@ -1205,6 +1247,7 @@
 			"smallCapital": "1D20",
 			"fullwidth": "FF36",
 			"circled": "24CB",
+			"negativeCircled": "1F165",
 			"regionalIndicator": "1F1FB",
 			"parenthesized": "1F125"
 		}, {
@@ -1250,6 +1293,7 @@
 			"smallCapital": "1D21",
 			"fullwidth": "FF37",
 			"circled": "24CC",
+			"negativeCircled": "1F166",
 			"regionalIndicator": "1F1FC",
 			"parenthesized": "1F126"
 		}, {
@@ -1293,6 +1337,7 @@
 			"smallCapital": "0078",
 			"fullwidth": "FF38",
 			"circled": "24CD",
+			"negativeCircled": "1F167",
 			"regionalIndicator": "1F1FD",
 			"parenthesized": "1F127"
 		}, {
@@ -1338,6 +1383,7 @@
 			"smallCapitalModifier": "107B2",
 			"fullwidth": "FF39",
 			"circled": "24CE",
+			"negativeCircled": "1F168",
 			"regionalIndicator": "1F1FE",
 			"parenthesized": "1F128"
 		}, {
@@ -1380,6 +1426,7 @@
 			"smallCapital": "1D22",
 			"fullwidth": "FF3A",
 			"circled": "24CF",
+			"negativeCircled": "1F169",
 			"regionalIndicator": "1F1FF",
 			"parenthesized": "1F129"
 		}, {

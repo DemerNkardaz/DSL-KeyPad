@@ -109,6 +109,15 @@ Class App {
 			"parthian",
 			"palmyrene",
 			"imperial_aramaic",
+			"glyph_vatican",
+			"glyph_circled",
+			"glyph_negative_circled",
+			"glyph_squared",
+			"glyph_negative_squared",
+			"glyph_parenthesized",
+			"glyph_fullstop",
+			"glyph_comma",
+			"glyph_double_circled",
 		] {
 			this.indexIcos.Set(ico, i)
 		}
