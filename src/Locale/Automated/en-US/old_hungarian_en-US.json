@@ -105,12 +105,12 @@
 				"s_rune_z_ez": { "letter_locale": "ez" },
 				"c_rune_z_ezs": { "letter_locale": "Ezs" },
 				"s_rune_z_ezs": { "letter_locale": "ezs" },
-				"n_num_one": { "letter_locale": "1" },
-				"n_num_five": { "letter_locale": "5" },
-				"n_num_ten": { "letter_locale": "10" },
-				"n_num_fifty": { "letter_locale": "50" },
-				"n_num_one_hundred": { "letter_locale": "100" },
-				"n_num_one_thousand": { "letter_locale": "1000" }
+				"n_num_one": { "letter_locale": "Pne" },
+				"n_num_five": { "letter_locale": "Five" },
+				"n_num_ten": { "letter_locale": "Ten" },
+				"n_num_fifty": { "letter_locale": "Fifty" },
+				"n_num_one_hundred": { "letter_locale": "One Hundred" },
+				"n_num_one_thousand": { "letter_locale": "One Thousand" }
 			}
 		}
 	}

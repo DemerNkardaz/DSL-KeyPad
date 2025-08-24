@@ -105,12 +105,12 @@
 				"s_rune_z_ez": { "letter_locale": "эз" },
 				"c_rune_z_ezs": { "letter_locale": "Эж" },
 				"s_rune_z_ezs": { "letter_locale": "эж" },
-				"n_num_one": { "letter_locale": "1" },
-				"n_num_five": { "letter_locale": "5" },
-				"n_num_ten": { "letter_locale": "10" },
-				"n_num_fifty": { "letter_locale": "50" },
-				"n_num_one_hundred": { "letter_locale": "100" },
-				"n_num_one_thousand": { "letter_locale": "1000" }
+				"n_num_one": { "letter_locale": "Один" },
+				"n_num_five": { "letter_locale": "Пять" },
+				"n_num_ten": { "letter_locale": "Десять" },
+				"n_num_fifty": { "letter_locale": "Пятьдесят" },
+				"n_num_one_hundred": { "letter_locale": "Сто" },
+				"n_num_one_thousand": { "letter_locale": "Тысяча" }
 			}
 		}
 	}

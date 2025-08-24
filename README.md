@@ -25,7 +25,7 @@ $$
 ---
 
 <p align="center">
-<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-5300+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-5400+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
 <img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-5100+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
 <img src="https://custom-icon-badges.herokuapp.com/badge/binds-2300+/800+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
 <br>
@@ -122,7 +122,7 @@ winget install AutoHotkey.AutoHotkey
 - **Internal keyboard layouts**: Includes support for user-defined layouts.<br>Includes built-in support for:
 
   - **Latin:** _QWERTY_, [AZERTY](https://en.wikipedia.org/wiki/AZERTY), <span title="© David Piepgrass">[Asset](https://millikeys.sourceforge.net/asset/)</span>, <span title="© Eva Callico, AKL">[Canary](https://github.com/Apsu/Canary)</span>, [Colemak](https://en.wikipedia.org/wiki/Colemak), <span title="© Oxey">[Dhorf](https://oxey.dev/dhorf/index.html)</span>, [Dvorak](https://en.wikipedia.org/wiki/Dvorak_keyboard_layout), <span title="© GalileoBlues">[Gallium](https://github.com/GalileoBlues/Gallium)</span>, <span title="© Richard Davison">[Graphite](github.com/rdavison/graphite-layout)</span>, <span title="© Nikolay Nemshilov">[Halmak](https://github.com/kaievns/halmak)</span>, [JCUKEN](https://en.wikipedia.org/wiki/Phonetic_keyboard_layout#/media/File:UKNCkeyboard.png), <span title="© Smudge">[Nerps](https://github.com/GalileoBlues/Gallium?tab=readme-ov-file#changes)</span>, <span title="© David Norman">[Norman](https://normanlayout.info)</span>, <span title="© Keith Kim">[Qwickly](https://github.com/qwickly-org/Qwickly)</span>, <span title="© Oxey">[Stronk](https://oxey.dev/stronk/index.html)</span>, <span title="© Oxey">[Sturdy](https://oxey.dev/sturdy/index.html)</span>, <span title="© OJ Bucao">[Workman](https://workmanlayout.org)</span>.
-  - **Cyrillic:** _ЙЦУКЕН_, [Диктор](https://github.com/mshkrebtan/diktor), [ИІУКЕН (1907)](https://ru.wikipedia.org/wiki/ЙЦУКЕН#/media/Файл:Underwood.jpg), ЯШЕРТЫ, <span title="Kharlamak">Харламак</span>, <span title="Rulemak © Geert Hendrickx">Рулемак</span>.<br><br>**Note:** the built-in layouts have been adapted, i.e., they do not fully correspond to their originals.
+  - **Cyrillic:** _ЙЦУКЕН_, [Диктор](https://github.com/mshkrebtan/diktor), [ИІУКЕН (1907)](https://ru.wikipedia.org/wiki/ЙЦУКЕН#/media/Файл:Underwood.jpg), ЯШЕРТЫ, <span title="Kharlamak">Харламак</span>, <span title="Rulemak © Geert Hendrickx">[Рулемак](https://forum.colemak.com/viewtopic.php?id=519)</span>.<br><br>**Note:** the built-in layouts have been adapted, i.e., they do not fully correspond to their originals.
 
 - **Modifications**: Allows creating user’s mods.
 

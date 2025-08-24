@@ -241,7 +241,7 @@ Class Scripter {
 				local scriptPreviewY := optionTitleY + optionTitleH - 2
 
 				for i, previewText in dataValue["preview"] {
-					local pt := selectorPanel.AddText("v" dataValue["uiid"] "Preview" i " w" optionTitleW " h" optionTitleH " x" scriptPreviewX " y" scriptPreviewY " 0x80 +BackgroundTrans", previewText)
+					local pt := selectorPanel.AddText(Format("v{}Preview{} w{} h{} x{} y{} 0x80 +BackgroundTrans", dataValue["uiid"], i, optionTitleW, optionTitleH, scriptPreviewX, scriptPreviewY), previewText)
 					pt.SetFont("s" (dataValue.Has("font_size") ? dataValue["font_size"] : (isGlyphs && dataName != "fullwidth" ? 12 : 10)) " c333333", dataValue["fonts"].length > 0 ? dataValue["fonts"][dataValue["fonts"].length > 1 ? i : 1] : "Segoe UI")
 
 					scriptPreviewY += optionTitleH - 5
