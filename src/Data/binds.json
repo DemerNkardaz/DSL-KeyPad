@@ -1227,19 +1227,19 @@
 		"Cypriot Syllabary": {
 			"ForceSingle": true,
 			"Flat": {
-				"A": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_a')%",
+				"A": "<% BindHandler.TimeShell('cypriot_syllabary_n_syl_a') %/>",
 				"B": "",
 				"C": "",
 				"D": "",
-				"E": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_e')%",
+				"E": "<% BindHandler.TimeShell('cypriot_syllabary_n_syl_e') %/>",
 				"F": "",
 				"G": "",
 				"H": "",
-				"I": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_i')%",
+				"I": "<% BindHandler.TimeShell('cypriot_syllabary_n_syl_i') %/>",
 				"J": "",
-				"O": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_o')%",
+				"O": "<% BindHandler.TimeShell('cypriot_syllabary_n_syl_o') %/>",
 				"Q": "",
-				"U": "%BindHandler.TimeShell('cypriot_syllabary_n_syl_u')%",
+				"U": "<% BindHandler.TimeShell('cypriot_syllabary_n_syl_u') %/>",
 				"V": ""
 			},
 			"Moded": {
@@ -1419,19 +1419,19 @@
 		"Old Persian": {
 			"ForceSingle": true,
 			"Flat": {
-				"A": "%BindHandler.TimeShell('old_persian_n_sign_a')%",
+				"A": "<% BindHandler.TimeShell('old_persian_n_sign_a') %/>",
 				"B": "old_persian_n_sign_b_ba",
 				"C": "old_persian_n_sign_c_ca",
 				"E": "",
 				"F": "old_persian_n_sign_f_fa",
 				"H": "old_persian_n_sign_h_ha",
-				"I": "%BindHandler.TimeShell('old_persian_n_sign_i')%",
+				"I": "<% BindHandler.TimeShell('old_persian_n_sign_i') %/>",
 				"L": "old_persian_n_sign_l_la",
 				"O": "",
 				"P": "old_persian_n_sign_p_pa",
 				"Q": "",
 				"S": "old_persian_n_sign_s_sa",
-				"U": "%BindHandler.TimeShell('old_persian_n_sign_u')%",
+				"U": "<% BindHandler.TimeShell('old_persian_n_sign_u') %/>",
 				"W": "",
 				"X": "old_persian_n_sign_x_xa",
 				"Y": "old_persian_n_sign_y_ya",
@@ -1692,7 +1692,7 @@
 				"LeftBracket": "left_bracket",
 				"RightBracket": "right_bracket",
 				"Tilde": "grave_accent",
-				"F1": "%(*) => Scripter.ToggleSelectedOption(\"__modifier\", \"Glyph Variations\", True)%"
+				"F1": "<% (*) => Scripter.ToggleSelectedOption(\"__modifier\", \"Glyph Variations\", True) %/>"
 			},
 			"Moded": {
 				"1": {
@@ -2616,76 +2616,81 @@
 	},
 	"Important": {
 		"Flat": {
-			"RAlt": "%(*) => globalInstances.crafter.ComposeActivate()%"
+			"RAlt": "<% (*) => globalInstances.crafter.ComposeActivate() %/>"
 		},
 		"Moded": {
 			"F1": {
-				"<^>!": "%(*) => KbdBinder.ToggleDefaultMode()%",
-				"<^>!>+": "%(*) => Options.ToggleInputMode()%",
-				"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Second Keys')%"
+				"<^>!": "<% (*) => KbdBinder.ToggleDefaultMode() %/>",
+				"<^>!>+": "<% (*) => Options.ToggleInputMode() %/>",
+				"<^>!<!": "<% (*) => KbdBinder.ToggleDefaultMode('Second Keys') %/>"
 			},
 			"F2": {
-				"<^>!<!": "%(*) => KbdBinder.ToggleDefaultMode('Tertiary Keys')%",
-				"<^>!": "%(*) => Scripter.ToggleSelectedOption(\"Tieng Viet\", \"TELEX\")%",
-				"<^>!>+": "%(*) => Scripter.ToggleSelectedOption(\"HanYu PinYin\", \"TELEX\")%"
+				"<^>!<!": "<% (*) => KbdBinder.ToggleDefaultMode('Tertiary Keys') %/>",
+				"<^>!": "<% (*) => Scripter.ToggleSelectedOption(\"Tieng Viet\", \"TELEX\") %/>",
+				"<^>!>+": "<% (*) => Scripter.ToggleSelectedOption(\"HanYu PinYin\", \"TELEX\") %/>"
 			},
 			"F8": {
-				"<^>!": "%(*) => GREPTypography.SetStyles()%"
+				"<^>!": "<% (*) => GREPTypography.SetStyles() %/>"
 			},
 			"F9": {
-				">^": "%(*) => Cfg.Editor()%",
-				"<^>!": "%(*) => GREPTypography.SetStyles('Paragraphs')%"
+				">^": "<% (*) => Cfg.Editor() %/>",
+				"<^>!": "<% (*) => GREPTypography.SetStyles('Paragraphs') %/>"
 			},
 			"Up": {
-				"<#<!": "%(*) => KbdBinder.ToggleNumStyle('Superscript')%",
-				"<#<!>+": "%(*) => KbdBinder.ToggleNumStyle('Roman')%"
+				"<#<!": "<% (*) => KbdBinder.ToggleNumStyle('Superscript') %/>",
+				"<#<!>+": "<% (*) => KbdBinder.ToggleNumStyle('Roman') %/>"
 			},
 			"Down": {
-				"<#<!": "%(*) => KbdBinder.ToggleNumStyle('Subscript')%"
+				"<#<!": "<% (*) => KbdBinder.ToggleNumStyle('Subscript') %/>"
 			},
 			"PgUp": {
-				"<#<!": "%(*) => UnicodeWebResource()%"
+				"<#<!": "<% (*) => UnicodeWebResource() %/>"
 			},
 			"Home": {
-				"<#<!": "%(*) => globalInstances.MainGUI.Show()%"
+				"<#<!": "<% (*) => globalInstances.MainGUI.Show() %/>"
 			},
 			"2": {
-				"<!": "%FuncBindStore.Get('ToQuote')%"
+				"<!": "<% FuncBindStore.Get('ToQuote') %/>"
 			},
 			"A": {
-				"<#<!": "%(*) => Scripter.SelectorPanel('Glyph Variations')%"
+				"<#<!": "<% (*) => Scripter.SelectorPanel('Glyph Variations') %/>"
 			},
 			"D": {
-				"<#<!": "%(*) => Scripter.SelectorPanel('TELEX')%"
+				"<#<!": "<% (*) => Scripter.SelectorPanel('TELEX') %/>"
 			},
 			"S": {
-				"<#<!": "%(*) => Scripter.SelectorPanel()%"
+				"<#<!": "<% (*) => Scripter.SelectorPanel() %/>"
+			},
+			"T": {
+				">^": "<% (*) => Util.ClipTagConvert() %/>",
+				"<^>^": "<% (*) => Util.ClipTagConvert('Default') %/>"
 			},
 			"F": {
-				"<#<!": "%(*) => Search()%"
+				"<#<!": "<% (*) => Search() %/>"
 			},
 			"H": {
-				">^": "%(*) => Util.StrSelToConvert('Entities')%",
-				"<^>^": "%(*) => Util.StrSelToConvert('Hex')%"
+				">^": "<% (*) => Util.StrSelToConvert('Entities') %/>",
+				"<^>^": "<% (*) => Util.StrSelToConvert('Hex') %/>"
 			},
 			"J": {
-				">^": "%(*) => Util.StrSelToConvert('Entities', true)%"
+				">^": "<% (*) => Util.StrSelToConvert('Entities', true) %/>",
+				"<^>^": "<% (*) => Util.StrSelToConvert('Hex', true) %/>"
 			},
 			"Backslash": {
-				">^": "%(*) => Util.URLEncoder()%",
-				"<^>^": "%(*) => Util.URLEncoder('decode')%"
+				">^": "<% (*) => Util.URLEncoder() %/>",
+				"<^>^": "<% (*) => Util.URLEncoder('decode') %/>"
 			},
 			"Comma": {
-				"<#<!": "%(*) => GetKeyScanCode()%"
+				"<#<!": "<% (*) => GetKeyScanCode() %/>"
 			},
 			"Y": {
-				">^": "%(*) => Util.StrSelToUnicode('CSS')%"
+				">^": "<% (*) => Util.StrSelToUnicode('CSS') %/>"
 			},
 			"U": {
-				">^": "%(*) => Util.StrSelToUnicode()%"
+				">^": "<% (*) => Util.StrSelToUnicode() %/>"
 			},
 			"I": {
-				">^": "%(*) => Util.StrSelToUnicode('Hex')%"
+				">^": "<% (*) => Util.StrSelToUnicode('Hex') %/>"
 			}
 		}
 	},
@@ -2753,9 +2758,14 @@
 				"<+>+": "wallet_sign",
 				">+:LangFlat": "[semicolon,wallet_dollar]"
 			},
-			"5": {"<^>!": "permille", "<^>!<+": "pertenthousand"},
+			"5": {
+				"<^>!": "permille",
+				"<^>!<+": "pertenthousand"
+			},
 			"6": {
 				"<^>!": "division",
+				"<^>!>+": "cancel_tag",
+				"<^>!<+": "black_flag",
 				">+:LangFlat": "[colon,circumflex_accent]"
 			},
 			"7": {

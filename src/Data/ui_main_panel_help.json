@@ -17,6 +17,7 @@
 		"help.hotstrings.temperature_conversion"
 	]},
 	{"help.text_processing": [
-		"help.text_processing.quotes"
+		"help.text_processing.quotes",
+		"help.text_processing.converters"
 	]}
 ]

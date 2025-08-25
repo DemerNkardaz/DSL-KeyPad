@@ -66,10 +66,10 @@ Class ScripterStore {
 	HandleValue(value) {
 		if value is Array {
 			for i, item in value
-				while (RegExMatch(value[i], "(?<!\\)%(.*)%", &match))
+				while (RegExMatch(value[i], "(?<!\\)<%\s(.*)\s%/>", &match))
 					value[i] := StrReplace(value[i], match[0], VariableParser.Parse(match[0]))
 		} else if value is String
-			while (RegExMatch(value, "(?<!\\)%(.*)%", &match))
+			while (RegExMatch(value, "(?<!\\)<%\s(.*)\s%/>", &match))
 				value := StrReplace(value, match[0], VariableParser.Parse(match[0]))
 		return value
 	}

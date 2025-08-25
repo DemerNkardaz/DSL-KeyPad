@@ -122,7 +122,7 @@ Class Locale {
 			intermediate := StrReplace(intermediate, match[0], replacement)
 		}
 
-		while (RegExMatch(intermediate, "(?<!\\)%(.*)%", &match))
+		while (RegExMatch(intermediate, "(?<!\\)<%\s(.*)\s%/>", &match))
 			intermediate := StrReplace(intermediate, match[0], VariableParser.Parse(match[0]))
 
 		while (RegExMatch(intermediate, "\{var:([^\}]+)\}", &match)) {

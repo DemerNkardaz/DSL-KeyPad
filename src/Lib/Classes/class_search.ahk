@@ -30,7 +30,7 @@ Class Search {
 		}
 
 		if RegExMatch(searchQuery, "^\%(.*?)\%$", &match) {
-			local result := VariableParser.Parse("%" match[1] "%")
+			local result := VariableParser.Parse("<% " match[1] " %/>")
 			return result is String && result != "" ? MsgBox(result, App.Title(), "Iconi") : []
 		} else if RegExMatch(searchQuery, "^\/(.*?)$", &match) {
 			local funcRef := StrSplit(match[1], ".")

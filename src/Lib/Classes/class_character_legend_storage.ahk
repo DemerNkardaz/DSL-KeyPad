@@ -60,7 +60,7 @@ Class ChrLegendStore {
 					output[key] := this.MergeLegends(output[key], val)
 				else if val is String {
 					local intermediate := val
-					while (RegExMatch(intermediate, "(?<!\\)%(.*)%", &match))
+					while (RegExMatch(intermediate, "(?<!\\)<%\s(.*)\s%/>", &match))
 						intermediate := StrReplace(intermediate, match[0], VariableParser.Parse(match[0]))
 				} else
 					output.Set(key, val)

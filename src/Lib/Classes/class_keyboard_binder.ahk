@@ -193,7 +193,7 @@ Class KbdBinder {
 					local processedBinds := binds
 					local lastProcessed := ""
 
-					while (RegExMatch(processedBinds, "(?s)(?<!\\)%([^%]+)%", &varExprMatch) && processedBinds != lastProcessed) {
+					while (RegExMatch(processedBinds, "(?s)(?<!\\)<%\s(.*)\s%/>", &varExprMatch) && processedBinds != lastProcessed) {
 						lastProcessed := processedBinds
 
 						try {

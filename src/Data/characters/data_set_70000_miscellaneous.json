@@ -15,8 +15,9 @@
 	"black_flag", {
 		"titles": {"ru-RU": "Чёрный флаг", "en-US": "Black flag"},
 		"tags": ["black flag", "чёрный флаг"],
+		"groups": ["Special Fast Secondary"],
 		"unicode": "1F3F4",
-		"options": { "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true, "fastKey": "<! 6" },
 		"recipe": ["bfl"]
 	},
 	"language_tag", {
@@ -30,8 +31,9 @@
 	"cancel_tag", {
 		"titles": {"ru-RU": "Закрывающий тег", "en-US": "Cancel tag"},
 		"tags": ["cancel tag", "закрывающий тег"],
+		"groups": ["Format Characters"],
 		"unicode": "E007F",
-		"options": { "suggestionsAtEnd": true },
+		"options": { "suggestionsAtEnd": true, "fastKey": ">! 6" },
 		"symbol": { "alt": "<CANCEL TAG>" },
 		"recipe": ["tcancel"]
 	},

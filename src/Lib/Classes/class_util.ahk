@@ -322,6 +322,45 @@ Class Util {
 		return
 	}
 
+	static ClipTagConvert(action := "Tags") {
+		Clip.CopySelected(&text, , "Backup")
+
+		if text = "" {
+			Clip.Release(1)
+			return
+		}
+
+		text := this.TagSymbolsConverter(text, action)
+
+		Clip.Send(&text, , , "Release")
+		return
+	}
+
+	static TagSymbolsConverter(str, action := "Tags") {
+		local output := ""
+		local i := 1
+
+		while (i <= StrLen(str)) {
+			cp := Ord(SubStr(str, i, 1))
+
+			if (cp >= 0xD800 && cp <= 0xDBFF && i < StrLen(str)) {
+				low := Ord(SubStr(str, i + 1, 1))
+				if (low >= 0xDC00 && low <= 0xDFFF) {
+					cp := ((cp - 0xD800) << 10) + (low - 0xDC00) + 0x10000
+					i++
+				}
+			}
+
+			if (action = "Tags" && cp >= 0x0020 && cp <= 0x007E || action = "Default" && cp >= 0xE0020 && cp <= 0xE007E)
+				cp += (action = "Tags" ? 0xE0000 : -0xE0000)
+
+			output .= Chr(cp)
+			i++
+		}
+
+		return output
+	}
+
 	static URLEncoder(action := "encode") {
 		Clip.CopySelected(&text, , "Backup")
 

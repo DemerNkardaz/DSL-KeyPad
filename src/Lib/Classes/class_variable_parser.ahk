@@ -1,7 +1,7 @@
 Class VariableParser {
 	static Parse(str) {
 		local output := ""
-		local pattern := "(?<!\\)%([^%]+)%"
+		local pattern := "(?<!\\)<%\s([^<%]+)\s%/>"
 		local pos := 1
 		local hasOnlyOneVariable := false
 		local varCount := 0
@@ -18,7 +18,7 @@ Class VariableParser {
 			}
 		}
 
-		local fullVariablePattern := "^%([^%]+)%$"
+		local fullVariablePattern := "^<%\s([^<%]+)\s%/>$"
 		local fullMatch := ""
 		if (RegExMatch(str, fullVariablePattern, &fullMatch)) {
 			hasOnlyOneVariable := true

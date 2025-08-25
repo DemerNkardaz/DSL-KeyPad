@@ -33,7 +33,6 @@ initialized := False
 ; Automatically created/updated by mods injector class
 ; Dynamically loads mods pasted into \Mods\ directory
 #Include *i Mods\injector_pre_init.ahk
-
 #Include <Classes\class_progress_bar>
 #Include <Classes\class_progress_tooltip>
 

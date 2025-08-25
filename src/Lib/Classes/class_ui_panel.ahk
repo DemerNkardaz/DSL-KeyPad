@@ -1057,7 +1057,7 @@ Class UIMainPanel {
 	HandleKey(str) {
 		local rules := Map(
 			"^@(\S+)$", (str, match, callBack := Locale.Read.Bind(Locale, match[1])) => RegExReplace(str, match[0], callBack()),
-			"%(.*?)%", (str, match) => RegExReplace(str, match[0], %match[1]%),
+			"<%\s(.*?)\s%/>", (str, match) => RegExReplace(str, match[0], %match[1]%),
 		)
 		try
 			for pattern, call in rules
@@ -1192,7 +1192,7 @@ Class UIMainPanel {
 			panelWindow[prefix "LaTeXFieldText"].Value := this.notAvailable
 			panelWindow[prefix "LaTeXFieldMath"].Value := this.notAvailable
 			panelWindow[prefix "LaTeXPackage"].Text := ""
-			panelWindow[prefix "Group"].Text := Locale.Read("character")
+			panelWindow[prefix "Group"].Text := Locale.Read("dictionary.character")
 			panelWindow[prefix "Font"].Text := ""
 			panelWindow[prefix "EntryName"].Text := "[" Chr(0x2003) this.notAvailable Chr(0x2003) "]"
 

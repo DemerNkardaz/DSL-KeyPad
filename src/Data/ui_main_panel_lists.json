@@ -77,11 +77,11 @@
 			"Spaces Left Shift", ""
 		],
 		"groupKey": {
-			"FK Diacritics Primary": "%LeftControl% %LeftAlt%",
-			"Special Fast Left": "%LeftAlt%",
-			"Special Fast Secondary": "%RightAlt%",
-			"Special Right Shift": "%RightShift%",
-			"Wallet Signs Left Shift": "%LeftShift%"
+			"FK Diacritics Primary": "<% LeftControl %/> <% LeftAlt %/>",
+			"Special Fast Left": "<% LeftAlt %/>",
+			"Special Fast Secondary": "<% RightAlt %/>",
+			"Special Right Shift": "<% RightShift %/>",
+			"Wallet Signs Left Shift": "<% LeftShift %/>"
 		}
 	}, {
 		"label": "Fast Keys",
@@ -101,9 +101,9 @@
 			"SK Spaces Left Alt", ""
 		],
 		"groupKey": {
-			"SK Diacritics Primary": "%LeftControl% %LeftAlt%",
-			"SK Special Secondary": "%RightAlt%",
-			"SK Special Left Alt": "%LeftAlt%"
+			"SK Diacritics Primary": "<% LeftControl %/> <% LeftAlt %/>",
+			"SK Special Secondary": "<% RightAlt %/>",
+			"SK Special Left Alt": "<% LeftAlt %/>"
 		}
 	},
 	"tertiarykeys": {
@@ -113,7 +113,7 @@
 			"TK Diacritics Primary", ""
 		],
 		"groupKey": {
-			"TK Diacritics Primary": "%LeftControl% %LeftAlt%"
+			"TK Diacritics Primary": "<% LeftControl %/> <% LeftAlt %/>"
 		}
 	},
 	"scripts": {
@@ -223,9 +223,9 @@
 			"TELEX/VNI Chinese Romanization": "chinese_romanization"
 		},
 		"combinationKey": {
-			"TELEX/VNI Vietnamese": "%RightAlt% F2",
-			"TELEX/VNI Jorai": "%RightAlt% F2",
-			"TELEX/VNI Chinese Romanization": "%RightAlt% %RightShift% F2"
+			"TELEX/VNI Vietnamese": "<% RightAlt %/> F2",
+			"TELEX/VNI Jorai": "<% RightAlt %/> F2",
+			"TELEX/VNI Chinese Romanization": "<% RightAlt %/> <% RightShift %/> F2"
 		}
 	},
 	"all": {

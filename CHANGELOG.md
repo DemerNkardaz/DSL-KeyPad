@@ -16,6 +16,8 @@
     - Regional Indicator, Circled, Double Circled, Negative Circled, Parenthesized, Squared, Negative Squared, with Dot, with Comma, Tags
   - Added new options:
     - “Scripter” selector: max items per page/max columns/threshold for max columns now can be customized via settings window.
+  - Added function for conversion between symbols and tag-symbols.
+  - Added information about converters to the “Help” tab.
 
 - Changes:
 
@@ -98,6 +100,8 @@
     - Региональные индикаторы, в круге, двойном круге, закрашенном круге, скобках, квадрате, закрашенном квадратке, с точкой и с запятой, теги
   - Добавлены новые настройки:
     - Селектор «скриптера»: макс. элементов на странице/макс. колонок/порог макс. колонок теперь могут быть настроены через окно настроек.
+  - Добавлена функция конвертации между символами и тег-символами.
+  - Добавлена информация о конвертерах во вкладку «Помощь»
 
 - Изменения:
 
