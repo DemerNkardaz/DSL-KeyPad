@@ -112,7 +112,7 @@
 		},
 		"prepare": {
 			"__self": "Preparation",
-			"fonts_not_found": "Fonts used by the utility are missing from the system.\nClose this window to obtain them.\n\nFonts to install:"
+			"fonts_not_found": "The required main fonts are missing from the system.\nAfter pressing “OK”, font pages will open in the browser\n\nFonts to install:"
 		},
 		"init": {
 			"__self": "Initialization",

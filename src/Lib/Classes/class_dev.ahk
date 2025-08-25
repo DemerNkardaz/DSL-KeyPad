@@ -90,7 +90,6 @@ Class Dev {
 			"Shavian",
 			"Sidetic",
 			"Sogdian",
-			"Symbols",
 			"Tifinagh",
 			"Ugaritic",
 			"Yi",
@@ -135,8 +134,9 @@ Class Dev {
 			'				<details>`n'
 			'					<summary>Recommended font list</summary>`n'
 			'					<ul>`n'
+			'						<li><a href="https://fonts.google.com/specimen/Noto+Serif">Noto Serif</a> <i>Required</i></li>`n'
+			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Symbols">Noto Sans Symbols</a> <i>Required</i></li>`n'
 			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans">Noto Sans</a> <i>Important</i></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Serif">Noto Serif</a> <i>Important</i></li>`n'
 			fontsArray.ToString("")
 			'					</ul>`n'
 			'				</details>`n'

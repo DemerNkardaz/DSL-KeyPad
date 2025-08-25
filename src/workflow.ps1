@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-08-24 10:57:07
+				&#128228;&emsp14;2025-08-25 08:58:29
 			</td>
 		</tr>
 		<tr>
@@ -33,8 +33,9 @@ $message =@"
 				<details>
 					<summary>Recommended font list</summary>
 					<ul>
+						<li><a href="https://fonts.google.com/specimen/Noto+Serif">Noto Serif</a> <i>Required</i></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Symbols">Noto Sans Symbols</a> <i>Required</i></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans">Noto Sans</a> <i>Important</i></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Serif">Noto Serif</a> <i>Important</i></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Color+Emoji">Noto Color Emoji</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Carian">Noto Sans Carian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Caucasian+Albanian">Noto Sans Caucasian Albanian</a></li>
@@ -66,7 +67,6 @@ $message =@"
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Shavian">Noto Sans Shavian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Sidetic">Noto Sans Sidetic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Sogdian">Noto Sans Sogdian</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Symbols">Noto Sans Symbols</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Tifinagh">Noto Sans Tifinagh</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Ugaritic">Noto Sans Ugaritic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Yi">Noto Sans Yi</a></li>

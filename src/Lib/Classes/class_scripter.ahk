@@ -234,15 +234,22 @@ Class Scripter {
 
 				local optionTitleW := optionW - (icoX - optionX) - icoW - 20
 
-				local optionTitle := selectorPanel.AddText("v" dataValue["uiid"] "Title w" optionTitleW " h" optionTitleH " x" optionTitleX " y" optionTitleY " 0x80 +BackgroundTrans", Locale.Read("script_labels." dataValue["locale"]))
+				local optionTitle := selectorPanel.AddText(Format("v{}Title w{} h{} x{} y{} 0x80 +BackgroundTrans", dataValue["uiid"], optionTitleW, optionTitleH, optionTitleX, optionTitleY), Locale.Read("script_labels." dataValue["locale"]))
 				optionTitle.SetFont("s10 c333333 Bold", "Segoe UI")
 
-				local scriptPreviewX := optionTitleX
-				local scriptPreviewY := optionTitleY + optionTitleH - 2
+				local scriptPreviewXOffset := dataValue.Has("preview_offset") && dataValue["preview_offset"].Has("X") ?
+					(optionTitleX + dataValue["preview_offset"]["X"])
+					: optionTitleX
+				local scriptPreviewYOffset := dataValue.Has("preview_offset") && dataValue["preview_offset"].Has("Y") ?
+					(optionTitleY + dataValue["preview_offset"]["Y"])
+					: optionTitleY
+
+				local scriptPreviewX := scriptPreviewXOffset
+				local scriptPreviewY := scriptPreviewYOffset + optionTitleH - 2
 
 				for i, previewText in dataValue["preview"] {
 					local pt := selectorPanel.AddText(Format("v{}Preview{} w{} h{} x{} y{} 0x80 +BackgroundTrans", dataValue["uiid"], i, optionTitleW, optionTitleH, scriptPreviewX, scriptPreviewY), previewText)
-					pt.SetFont("s" (dataValue.Has("font_size") ? dataValue["font_size"] : (isGlyphs && dataName != "fullwidth" ? 12 : 10)) " c333333", dataValue["fonts"].length > 0 ? dataValue["fonts"][dataValue["fonts"].length > 1 ? i : 1] : "Segoe UI")
+					pt.SetFont(Format("s{} c333333", (dataValue.Has("font_size") ? dataValue["font_size"] : (isGlyphs && dataName != "fullwidth" ? 12 : 10))), dataValue["fonts"].length > 0 ? dataValue["fonts"][dataValue["fonts"].length > 1 ? i : 1] : "Segoe UI")
 
 					scriptPreviewY += optionTitleH - 5
 				}

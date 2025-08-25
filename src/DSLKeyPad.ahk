@@ -59,6 +59,7 @@ initialized := False
 #Include <Classes\class_keyboard>
 #Include <Classes\class_locale>
 #Include <Classes\class_locale_generator>
+#Include <Classes\class_fonts>
 #Include <Classes\class_character_recipe_handler>
 #Include <Classes\class_character_entity>
 #Include <Classes\class_character_inserter>
@@ -66,7 +67,6 @@ initialized := False
 #Include <Classes\class_character_library>
 #Include <Classes\class_character_crafter>
 #Include <Classes\class_update>
-#Include <Classes\class_fonts>
 #Include <Classes\class_script_processor>
 #Include <Classes\class_functional_bindings_storage>
 #Include <Classes\class_favorites>

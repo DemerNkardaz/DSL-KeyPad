@@ -17,6 +17,11 @@
   - Added new options:
     - “Scripter” selector: max items per page/max columns/threshold for max columns now can be customized via settings window.
 
+- Changes:
+
+  - Noto Sans Symbols now seondary required font.
+  - Suggestion to download missing required fonts now opens the corresponding Google Fonts page instead of downloading the TTF file from GitHub
+
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 
 - Additions:
@@ -93,6 +98,11 @@
     - Региональные индикаторы, в круге, двойном круге, закрашенном круге, скобках, квадрате, закрашенном квадратке, с точкой и с запятой, теги
   - Добавлены новые настройки:
     - Селектор «скриптера»: макс. элементов на странице/макс. колонок/порог макс. колонок теперь могут быть настроены через окно настроек.
+
+- Изменения:
+
+  - Noto Sans Symbols теперь второй обязательный шрифт.
+  - Предложение скачать отсутствующие обязательные шрифты теперь открывает соответствующую страницу Google Fonts вместо загрузки TTF-файла с GitHub.
 
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
 

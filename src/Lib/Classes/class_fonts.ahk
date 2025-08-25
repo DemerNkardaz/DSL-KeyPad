@@ -1,11 +1,8 @@
 Class Fonts {
 	static fontFaces := Map(
-		"Default", { name: "Noto Serif", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSerif/googlefonts/variable-ttf/NotoSerif%5Bwdth%2Cwght%5D.ttf", required: True },
-		"Sans-Serif", { name: "Noto Sans", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSans/googlefonts/variable-ttf/NotoSans%5Bwdth%2Cwght%5D.ttf" },
-		"Noto Sans Old Permic", { name: "Noto Sans Old Permic", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansOldPermic/full/ttf/NotoSansOldPermic-Regular.ttf" },
-		"Noto Sans Old North Arabian", { name: "Noto Sans Old North Arabian", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansOldNorthArabian/full/ttf/NotoSansOldNorthArabian-Regular.ttf" },
-		"Noto Sans Old South Arabian", { name: "Noto Sans Old South Arabian", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansOldSouthArabian/full/ttf/NotoSansOldSouthArabian-Regular.ttf" },
-		"Noto Sans Chorasmian", { name: "Noto Sans Chorasmian", src: "https://raw.githubusercontent.com/notofonts/notofonts.github.io/main/fonts/NotoSansChorasmian/full/ttf/NotoSansChorasmian-Regular.ttf" },
+		"Default", { name: "Noto Serif", required: True },
+		"Symbols", { name: "Noto Sans Symbols", required: True },
+		"Sans-Serif", { name: "Noto Sans" },
 	)
 
 	static URLData := JSON.LoadFile(App.paths.data "\fonts_url_data.json", "UTF-8")
@@ -33,26 +30,21 @@ Class Fonts {
 
 	static Validate() {
 		namesToInstall := "`n"
-		srcsToInstall := []
-		found := False
+		fontsToInstall := []
 
 		for _, font in this.fontFaces {
-			if this.IsInstalled(font.name)
-				found := True
-			else {
-				if font.HasOwnProp("required") && font.required {
-					srcsToInstall.Push(font.src)
-					namesToInstall .= font.name "`n"
-				}
+			if !this.IsInstalled(font.name) && font.HasOwnProp("required") && font.required {
+				fontsToInstall.Push(font.name)
+				namesToInstall .= font.name "`n"
 			}
 		}
 
-		if !found {
-			MsgBox(Locale.Read("prepare.fonts_not_found") namesToInstall, App.Title())
+		if fontsToInstall.Length > 0 {
+			local status := MsgBox(Locale.Read("prepare.fonts_not_found") namesToInstall, App.Title(), "Icon! OKCancel")
 
-			for _, fontSource in srcsToInstall {
-				this.Download(fontSource)
-			}
+			if status = "OK"
+				for _, fontSource in fontsToInstall
+					Run("https://fonts.google.com/download?family=" StrReplace(fontSource, " ", "+"))
 		}
 	}
 
@@ -70,8 +62,8 @@ Class Fonts {
 
 		Sleep 1000
 
-		if FileExist(App.paths.temp "\font-install.log")
-			FileDelete(App.paths.temp "\font-install.log")
+		; if FileExist(App.paths.temp "\font-install.log")
+		; 	FileDelete(App.paths.temp "\font-install.log")
 
 
 		/*

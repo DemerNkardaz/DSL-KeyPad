@@ -208,7 +208,9 @@
 		"preview": [
 			"\u24b8\u24d8\u24e1\u24d2\u24db\u24d4\u24d3"
 		],
-		"fonts": [""],
+		"preview_offset": { "Y": -5 },
+		"font_size": 10,
+		"fonts": ["Noto Sans Symbols"],
 		"locale": "glyph_variations.circled",
 		"bindings": [],
 		"uiid": "Circled",
@@ -218,7 +220,9 @@
 		"preview": [
 			"\ud83c\udd5d\ud83c\udd54\ud83c\udd56\ud83c\udd50\ud83c\udd63\ud83c\udd58\ud83c\udd65\ud83c\udd54 \ud83c\udd52\ud83c\udd58\ud83c\udd61\ud83c\udd52\ud83c\udd5b\ud83c\udd54\ud83c\udd53"
 		],
-		"fonts": [""],
+		"preview_offset": { "Y": -5 },
+		"font_size": 10,
+		"fonts": ["Noto Sans Symbols"],
 		"locale": "glyph_variations.negative_circled",
 		"bindings": [],
 		"uiid": "NegativeCircled",
@@ -228,7 +232,9 @@
 		"preview": [
 			"\ud83c\udd42\ud83c\udd40\ud83c\udd44\ud83c\udd30\ud83c\udd41\ud83c\udd34\ud83c\udd33"
 		],
-		"fonts": [""],
+		"preview_offset": { "Y": -5 },
+		"font_size": 10,
+		"fonts": ["Noto Sans Symbols"],
 		"locale": "glyph_variations.squared",
 		"bindings": [],
 		"uiid": "Squared",
@@ -238,7 +244,9 @@
 		"preview": [
 			"\ud83c\udd7d\ud83c\udd74\ud83c\udd76\ud83c\udd70\ud83c\udd83\ud83c\udd78\ud83c\udd85\ud83c\udd74 \ud83c\udd82\ud83c\udd80\ud83c\udd84\ud83c\udd70\ud83c\udd81\ud83c\udd74\ud83c\udd73"
 		],
-		"fonts": [""],
+		"preview_offset": { "Y": -5 },
+		"font_size": 10,
+		"fonts": ["Noto Sans Symbols"],
 		"locale": "glyph_variations.negative_squared",
 		"bindings": [],
 		"uiid": "NegativeSquared",
@@ -248,7 +256,9 @@
 		"preview": [
 			"\ud83c\udd1f\u249c\u24ad\u24a0\u24a9\u24af\u24a3\u24a0\u24ae\u24a4\u24b5\u24a0\u249f"
 		],
-		"fonts": [""],
+		"preview_offset": { "Y": -5 },
+		"font_size": 10,
+		"fonts": ["Noto Sans Symbols"],
 		"locale": "glyph_variations.parenthesized",
 		"bindings": [],
 		"uiid": "Parenthesized",
@@ -258,7 +268,9 @@
 		"preview": [
 			"\u2488\u2489\u248a\u248b\u248c\u248d\u248e\u248f\u2490\u2491"
 		],
-		"fonts": [""],
+		"preview_offset": { "Y": -5 },
+		"font_size": 11,
+		"fonts": ["Noto Sans Symbols"],
 		"locale": "glyph_variations.fullstop",
 		"bindings": [],
 		"uiid": "Fullstop",
@@ -268,7 +280,9 @@
 		"preview": [
 			"\ud83c\udd01\ud83c\udd02\ud83c\udd03\ud83c\udd04\ud83c\udd05\ud83c\udd06\ud83c\udd07\ud83c\udd08\ud83c\udd09\ud83c\udd0a"
 		],
-		"fonts": [""],
+		"preview_offset": { "Y": -5 },
+		"font_size": 11,
+		"fonts": ["Noto Sans Symbols"],
 		"locale": "glyph_variations.comma",
 		"bindings": [],
 		"uiid": "Comma",
@@ -278,7 +292,9 @@
 		"preview": [
 			"\u24f5\u24f6\u24f7\u24f8\u24f9\u24fa\u24fb\u24fc\u24fd\u24fe"
 		],
-		"fonts": [""],
+		"preview_offset": { "Y": -5 },
+		"font_size": 10,
+		"fonts": ["Noto Sans Symbols"],
 		"locale": "glyph_variations.double_circled",
 		"bindings": [],
 		"uiid": "DoubleCircled",

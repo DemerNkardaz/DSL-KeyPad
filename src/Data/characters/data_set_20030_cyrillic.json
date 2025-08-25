@@ -866,7 +866,7 @@
 	},
 	"cyr_[c,s]_let_e__diaeresis", {
 		"unicode": ["04EC", "04ED"],
-		"options": { "fastKey": "$?Secondary" },
+		"options": { "fastKey": "<+ $?Secondary" },
 		"symbol": { "letter": "${cyr_[c,s]_let_e}" }
 	},
 	"cyr_[n]_sign_thousands", {
