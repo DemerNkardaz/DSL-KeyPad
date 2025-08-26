@@ -101,7 +101,7 @@ Class Cfg {
 			screenHeight := A_ScreenHeight
 
 			windowWidth := 450
-			windowHeight := 720
+			windowHeight := 770
 
 			xPos := xPos = 0 ? (screenWidth - windowWidth) / 2 : xPos
 			yPos := yPos = 0 ? screenHeight - windowHeight - 92 : yPos
@@ -328,6 +328,21 @@ Class Cfg {
 
 
 			optionsTabs.UseTab()
+
+
+			local resourcesTabLabels := [
+				Locale.Read("gui.options.resources")
+			]
+
+			local resourcesTabs := optionsPanel.AddTab3("vResourcesTabs " optionsCommon(100, (optionsCommonY + optionsCommonH + 250) + (84 + 25), 3), resourcesTabLabels)
+
+			resourcesTabs.UseTab(resourcesTabLabels[1])
+
+			local resourcesUrls := JSON.LoadFile(App.paths.data "\settings_resources_urls.json", "UTF-8")
+
+			local layoutsWikiLabel := optionsPanel.AddLink("x" languageSelectorX() " y" languageSelectorY((205) + 300 + 30 + 20 + 28) " w" defaultSizes.groupBoxW - 10 " h80", resourcesUrls.ToString(Chr(0x2003)))
+
+			resourcesTabs.UseTab()
 
 			optionsPanel.AddGroupBox(optionsCommon(55, (windowHeight - 65)))
 

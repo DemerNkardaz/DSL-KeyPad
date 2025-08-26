@@ -197,6 +197,9 @@
 				"system_startup": {
 					"add": "Add to startup",
 					"shortcut_created_or_updated": "Startup shortcut created or updated"
+				},
+				"resources": {
+					"__self": "Resources"
 				}
 			},
 			"panel": {

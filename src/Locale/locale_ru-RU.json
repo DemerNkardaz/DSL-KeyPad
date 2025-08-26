@@ -197,6 +197,9 @@
 				"system_startup": {
 					"add": "Добавить в автозагрузку",
 					"shortcut_created_or_updated": "Ярлык для автозагрузки создан или обновлен"
+				},
+				"resources": {
+					"__self": "Ресурсы"
 				}
 			},
 			"panel": {
