@@ -9,7 +9,7 @@
 - Additions:
 
   - Added support for new Latin layouts:
-    - Blaze, Canary (Standard variant), Engrammer, Focal, Pine v4, Rain, Recurva
+    - Blaze, Canary (Matrix variant), Engrammer, Focal, Pine v4, Rain, Recurva
   - Added support for new Cyrillic layouts:
     - Kharlamak, Rulemak (2018)
   - Added new Alternative modes:
@@ -97,7 +97,7 @@
 - Дополнения:
 
   - Добавлена поддержка новых раскладок латиницы:
-    - Blaze, Canary (стандартная вариант), Engrammer, Focal, Pine v4, Rain, Recurva
+    - Blaze, Canary (Matrix вариант), Engrammer, Focal, Pine v4, Rain, Recurva
   - Добавлена поддержка новых раскладок кириллицы:
     - Харламак, Рулемак (2018)
   - Добавлены новые Альтернативные режимы:
