@@ -8,6 +8,8 @@
 
 - Additions:
 
+  - Addded missed latin characters:
+    - [ ȷ ɟ ʄ ᶡ 𐞘 ]
   - Added support for new Latin layouts:
     - Blaze, Canary (Matrix variant), Engrammer, Focal, Pine v4, Rain, Recurva
   - Added support for new Cyrillic layouts:
@@ -100,6 +102,8 @@
 
 - Дополнения:
 
+  - Добавлены пропущенные символы латиницы:
+    - [ ȷ ɟ ʄ ᶡ 𐞘 ]
   - Добавлена поддержка новых раскладок латиницы:
     - Blaze, Canary (Matrix вариант), Engrammer, Focal, Pine v4, Rain, Recurva
   - Добавлена поддержка новых раскладок кириллицы:

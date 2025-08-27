@@ -165,6 +165,12 @@
 		"recipe": ["$//"],
 		"symbol": { "afterLetter": "dotless" }
 	},
+	"lat_[s]_let_j_dotless", {
+		"unicode": ["0237"],
+		"options": { "fastKey": "<+>+ $?Secondary" },
+		"recipe": ["$//"],
+		"symbol": { "afterLetter": "dotless" }
+	},
 	"lat_[c,s]_let_k_cuatrillo", {
 		"unicode": ["A72C", "A72D"],
 		"options": { "useLetterLocale": true, "fastKey": "<+ $?Secondary" },
@@ -1679,6 +1685,31 @@
 	"lat_[c,s]_let_j__stroke_short", {
 		"unicode": ["0248", "0249"],
 		"options": { "fastKey": "$?Secondary" }
+	},
+	"lat_[s]_let_j_dotless__stroke_short", {
+		"unicode": ["025F"],
+		"tags": [["voiced palatal plosive", "звонкий палатальный взрывной согласный"]],
+		"groups": [["Latin Accented", "IPA"]],
+		"alterations": [{ "modifier": "1DA1" }],
+		"options": { "altLayoutKey": [">!<! j"], "layoutTitles": [true] },
+		"recipePush": [{
+			"1": ["${lat_[s]_let_j__stroke_short}//"]
+		}],
+		"symbol": { "letter": "${lat_[s]_let_j_dotless}", "afterLetter": "dotless" }
+	},
+	"lat_[s]_let_j_dotless__stroke_short__common_hook", {
+		"unicode": ["0284"],
+		"tags": [["voiced palatal implosive", "звонкий палатальный имплозивный согласный"]],
+		"groups": [["Latin Accented", "IPA"]],
+		"alterations": [{ "modifier": "10798" }],
+		"options": { "altLayoutKey": ["c*>!<! j"], "layoutTitles": [true] },
+		"recipe": [
+			"${lat_[s]_let_j__stroke_short}//${arrow_up}",
+			"${lat_[s]_let_j_dotless__stroke_short}${arrow_up}",
+			"$${stroke_short}${arrow_up}",
+			"${stroke_short}${arrow_up}$"
+		],
+		"symbol": { "letter": "${lat_[s]_let_j_dotless}", "afterLetter": "dotless" }
 	},
 	"lat_[c,s]_let_k__acute", {
 		"unicode": ["1E30", "1E31"],

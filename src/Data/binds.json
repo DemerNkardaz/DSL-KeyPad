@@ -1799,7 +1799,8 @@
 					"<^>!": "[&ipa,lat]_[k,s]_let_i[,__stroke_short]"
 				},
 				"J": {
-					"<^>!": "lat_s_let_j__crossed_tail"
+					"<^>!": "lat_s_let_j__crossed_tail",
+					"<^>!<!": "lat_s_let_j_dotless__stroke_short[__common_hook,]"
 				},
 				"K": {
 				},
@@ -2998,7 +2999,8 @@
 				"<^>!": ["lat_[c,s]_let_j__stroke_short"],
 				"<^>!>+": ["lat_[c,s]_let_j_yogh"],
 				"<^>!<!": ["lat_[c,s]_let_j__circumflex"],
-				"<^>!<!<+": ["lat_[c,s]_let_j__caron"]
+				"<^>!<!<+": ["lat_[c,s]_let_j__caron"],
+				"<^>!<+>+": ["lat_s_let_j_dotless"]
 			},
 			"K": {
 				"<!": ["lat_[c,s]_let_k__acute"],

@@ -71,6 +71,8 @@
 				"s_let_h__stroke_short": { "layout_locale": "Voiceless pharyngeal fricative" },
 				"s_let_i__stroke_short": { "layout_locale": "Close central unrounded vowel" },
 				"s_let_j__crossed_tail": { "layout_locale": "Voiced palatal fricative" },
+				"s_let_j_dotless__stroke_short": { "layout_locale": "Voiced palatal plosive" },
+				"s_let_j_dotless__stroke_short__common_hook": { "layout_locale": "Voiced palatal implosive" },
 				"s_let_l__belt": { "layout_locale": "Voiceless alveolar lateral fricative" },
 				"s_let_m_turned": { "layout_locale": "Close back unrounded vowel" },
 				"s_let_m_turned__long_leg": { "layout_locale": "Voiced velar approximant" },

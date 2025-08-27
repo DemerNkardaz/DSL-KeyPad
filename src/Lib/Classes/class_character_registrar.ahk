@@ -404,7 +404,7 @@ Class ChrReg {
 			}
 		}
 
-		if entry.Has("recipePush") && entry["data"]["script"] = "hellenic" && entry["data"]["postfixes"].Length > 1 {
+		if entry.Has("recipePush") {
 			if entry["recipePush"] is Array {
 				if entry["recipePush"].Length > 0
 					for recipe in entry["recipePush"]

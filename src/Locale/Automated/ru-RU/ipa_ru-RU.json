@@ -74,6 +74,8 @@
 				"s_let_h__stroke_short": { "layout_locale": "Глухой фарингальный фрикатив" },
 				"s_let_i__stroke_short": { "layout_locale": "Неогублённый гласный среднего ряда верхнего подъёма" },
 				"s_let_j__crossed_tail": { "layout_locale": "Звонкий палатальный спирант" },
+				"s_let_j_dotless__stroke_short": { "layout_locale": "Звонкий палатальный взрывной согласный" },
+				"s_let_j_dotless__stroke_short__common_hook": { "layout_locale": "Звонкий палатальный имплозивный согласный" },
 				"s_let_l__belt": { "layout_locale": "Глухой альвеолярный латеральный спирант" },
 				"s_let_m_turned": { "layout_locale": "Неогублённый гласный заднего ряда верхнего подъёма" },
 				"s_let_m_turned__long_leg": { "layout_locale": "Велярный аппроксимант" },
