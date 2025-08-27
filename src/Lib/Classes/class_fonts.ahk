@@ -2,7 +2,7 @@ Class Fonts {
 	static fontFaces := Map(
 		"Default", { name: "Noto Serif", required: True },
 		"Symbols", { name: "Noto Sans Symbols", required: True },
-		"Sans-Serif", { name: "Noto Sans" },
+		"Sans-Serif", { name: "Noto Sans", required: True },
 	)
 
 	static URLData := JSON.LoadFile(App.paths.data "\fonts_url_data.json", "UTF-8")

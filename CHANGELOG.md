@@ -20,12 +20,12 @@
     - “Scripter” selector: max items per page/max columns/threshold for max columns now can be customized via settings window.
   - Added function for conversion between symbols and tag-symbols.
   - Added information about converters to the “Help” tab.
-  - Format for referencing variables/function calls inside strings for the parser changed from %…% to <% … %/>.
 
 - Changes:
 
-  - Noto Sans Symbols now seondary required font.
-  - Suggestion to download missing required fonts now opens the corresponding Google Fonts page instead of downloading the TTF file from GitHub
+  - Noto Sans and Noto Sans Symbols now required fonts.
+  - Suggestion to download missing required fonts now opens the corresponding Google Fonts page instead of downloading the TTF file from GitHub.
+  - Format for referencing variables/function calls inside strings for the parser changed from %…% to <% … %/>.
 
 ---
 
@@ -115,7 +115,7 @@
 
 - Изменения:
 
-  - Noto Sans Symbols теперь второй обязательный шрифт.
+  - Noto Sans и Noto Sans Symbols теперь обязательные шрифты.
   - Предложение скачать отсутствующие обязательные шрифты теперь открывает соответствующую страницу Google Fonts вместо загрузки TTF-файла с GitHub.
   - Формат записи ссылок на переменные/вызовы функций внутри строк для парсера изменены с %…% на <% … %/>.
 

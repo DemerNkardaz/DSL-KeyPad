@@ -268,8 +268,8 @@ Class Changelog {
 	static Panel() {
 		this.panelTitle := App.Title() " — " Locale.Read("gui.changelog")
 
-		panelW := 600
-		panelH := 800
+		panelW := 700
+		panelH := 850
 
 		posX := (A_ScreenWidth - panelW) / 2
 		posY := (A_ScreenHeight - panelH) / 2
@@ -287,8 +287,9 @@ Class Changelog {
 		Constructor() {
 			changelogPanel := Gui()
 			changelogPanel.title := this.panelTitle
+			changelogPanel.BackColor := "FFFFFF"
 
-			changelogPanel.AddGroupBox(Format("vChangelogBox w{} h{} x{} y{}", clBoxW, clBoxH, clBoxX, clBoxY), Chr(0x1F310) " " Locale.Read("gui.changelog"))
+			changelogPanel.AddGroupBox(Format("vChangelogBox BackgroundWhite w{} h{} x{} y{}", clBoxW, clBoxH, clBoxX, clBoxY), Chr(0x1F310) " " Locale.Read("gui.changelog"))
 
 			changelogPanel.Show(Format("w{} h{} x{} y{}", panelW, panelH, posX, posY))
 			return changelogPanel
@@ -306,15 +307,15 @@ Class Changelog {
 		PostConstructor() {
 			changelogPanel := this.PanelGUI
 
-			this.InsertChangelog(changelogPanel, Format("vChangelogInfoBoxContent w{} h{} x{} y{} readonly Left Wrap -HScroll -E0x200", clContentW, clContentH, clContentX, clContentY))
+			this.InsertChangelog(changelogPanel, Format("vChangelogInfoBoxContent w{} h{} x{} y{} ReadOnly BackgroundWhite Left Wrap -HScroll -E0x200", clContentW, clContentH, clContentX, clContentY), ["s10 c333333", Fonts.fontFaces["Sans-Serif"].name])
 		}
 	}
 
-	static InsertChangelog(targetGUI, UISettings) {
+	static InsertChangelog(targetGUI, UISettings, fontOptions) {
 		if this.FormatChangelog(this.GetChangelog(), &changelog)
-			targetGUI.AddEdit(UISettings, changelog)
+			targetGUI.AddEdit(UISettings, changelog).SetFont(fontOptions*)
 		else
-			targetGUI.AddEdit(UISettings, Locale.Read("warnings.nointernet"))
+			targetGUI.AddEdit(UISettings, Locale.Read("warnings.nointernet")).SetFont(fontOptions*)
 	}
 
 	static GetChangelog(url := App.refsHeads["dev"] "/CHANGELOG.md") {
@@ -364,7 +365,7 @@ Class Changelog {
 		str := RegExReplace(str, "m)^\s\s- (.*)", "  ‣ $1")
 		str := RegExReplace(str, "m)^\s\s\s\s- (.*)", "   ⁃ $1")
 
-		str := RegExReplace(str, "m)^---", " " Util.StrRepeat(ChrLib.Get("emdash"), 84))
+		str := RegExReplace(str, "m)^---", "`n" Util.StrRepeat(ChrLib.Get("emsp"), 10) Util.StrRepeat(ChrLib.Get("three_emdash"), 10))
 		output := str
 		return str
 	}
