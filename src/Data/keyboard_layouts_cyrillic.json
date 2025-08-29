@@ -64,51 +64,77 @@
 					"<^>!<+": ["cyr_[c,s]_let_semisoft_sign"],
 					"<^>!<!": ["cyr_[c,s]_let_u_straight"],
 					"<^>!<!<+": ["cyr_[c,s]_let_u_straight__stroke_short"]
+				},
+				"Ш": {
+					">+": ["left_bracket"],
+					"<+>+": ["left_brace"]
+				},
+				"Щ": {
+					">+": ["right_bracket"],
+					"<+>+": ["right_brace"]
+				},
+				"Р": {
+					">+": ["semicolon"],
+					"<+>+": ["colon"]
+				},
+				"Й": {
+					">+": ["quote"],
+					"<+>+": ["apostrophe"]
+				},
+				"П": {
+					">+": ["comma"],
+					"<+>+": ["less_than"]
+				},
+				"Г": {
+					">+": ["dot"],
+					"<+>+": ["greater_than"]
+				},
+				"Ж": {
+					">+": ["solidus"],
+					"<+>+": ["question"]
 				}
 			}
 		}
 	},
 	"ЙІУКЕН (1907)": {
 		"keys": {
-			"Ж": "SC028",
-			"Э": "SC00D",
-			"Х": "SC01A",
-			"Ъ": "SC021",
 			"Ё": "SC029",
+			"Ц": "SC00C",
+			"Э": "SC00D",
+			"Й": "SC010",
+			"І": "SC011",
+			"У": "SC012",
+			"К": "SC013",
+			"Е": "SC014",
+			"Н": "SC015",
+			"Г": "SC016",
+			"Ш": "SC017",
+			"Щ": "SC018",
+			"З": "SC019",
+			"Х": "SC01A",
 			"ДефисоМинус": "SC01B",
 			"Равно": "SC02B",
-			"Б": "SC034",
-			"Ю": "SC035",
-			"Точка": "",
-			"ОбратныйСлэш": "",
 			"Ф": "SC01E",
-			"И": "SC031",
-			"С": "SC02F",
+			"Ы": "SC01F",
 			"В": "SC020",
-			"У": "SC012",
+			"Ъ": "SC021",
 			"А": "SC022",
 			"П": "SC023",
 			"Р": "SC024",
-			"Ш": "SC017",
 			"О": "SC025",
 			"Л": "SC026",
 			"Д": "SC027",
-			"Ь": "SC033",
-			"Т": "SC032",
-			"Щ": "SC018",
-			"З": "SC019",
-			"Й": "SC010",
-			"К": "SC013",
-			"Ы": "SC01F",
-			"Е": "SC014",
-			"Г": "SC016",
-			"М": "SC030",
-			"Ц": "SC00C",
-			"Ч": "SC02D",
-			"Н": "SC015",
+			"Ж": "SC028",
 			"Я": "SC02C",
-			"І": "SC011",
-			"Ѣ": "SC02E"
+			"Ч": "SC02D",
+			"Ѣ": "SC02E",
+			"С": "SC02F",
+			"М": "SC030",
+			"И": "SC031",
+			"Т": "SC032",
+			"Ь": "SC033",
+			"Б": "SC034",
+			"Ю": "SC035"
 		}
 	},
 	"Рулемак (2018)": {
@@ -175,13 +201,15 @@
 					">+": ["right_bracket"],
 					"<+>+": ["right_brace"]
 				},
+				"О": {
+					">+": ["semicolon"],
+					"<+>+": ["colon"]
+				},
 				"Ь": {
 					"<!": ["cyr_[c,s]_let_yer"],
 					"<^>!<+": ["cyr_[c,s]_let_semisoft_sign"],
 					"<^>!<!": ["cyr_[c,s]_let_u_straight"],
-					"<^>!<!<+": ["cyr_[c,s]_let_u_straight__stroke_short"]
-				},
-				"Э": {
+					"<^>!<!<+": ["cyr_[c,s]_let_u_straight__stroke_short"],
 					">+": ["apostrophe"],
 					"<+>+": ["quote"]
 				},
@@ -249,6 +277,10 @@
 		"binds": {
 			"Flat": {},
 			"Moded": {
+				"Точка": {
+					">+": ["grave_accent"],
+					"<+>+": ["tilde"]
+				},
 				"Ц": {
 					">+": ["left_bracket"],
 					"<+>+": ["left_brace"]
@@ -256,6 +288,26 @@
 				"Ф": {
 					">+": ["right_bracket"],
 					"<+>+": ["right_brace"]
+				},
+				"В": {
+					">+": ["semicolon"],
+					"<+>+": ["colon"]
+				},
+				"Щ": {
+					">+": ["quote"],
+					"<+>+": ["apostrophe"]
+				},
+				"Л": {
+					">+": ["comma"],
+					"<+>+": ["less_than"]
+				},
+				"Ч": {
+					">+": ["dot"],
+					"<+>+": ["greater_than"]
+				},
+				"Ж": {
+					">+": ["solidus"],
+					"<+>+": ["question"]
 				}
 			}
 		}
@@ -320,6 +372,14 @@
 					"<+>+": ["solidus"],
 					"<^>!<+>+": ["vertical_line"]
 				},
+				"Ч": {
+					">+": ["semicolon"],
+					"<+>+": ["colon"]
+				},
+				"Ь": {
+					">+": ["quote"],
+					"<+>+": ["apostrophe"]
+				},
 				"Запятая": {
 					"+": ["semicolon"],
 					"<^>!": ["quote_angle_left_double"],
@@ -327,7 +387,8 @@
 					"<^>!>+": ["quote_low_9_double"],
 					"<^>!<!": ["quote_left_double"],
 					"<^>!<!<+": ["quote_angle_left"],
-					"<^>!<+>+": ["quote_low_9"]
+					"<^>!<+>+": ["quote_low_9"],
+					"<+>+": ["less_than"]
 				},
 				"Точка": {
 					"+": ["colon"],
@@ -335,7 +396,8 @@
 					"<^>!<+": ["quote_right_double_ghost_ru"],
 					"<^>!>+": ["quote_low_9_double_reversed"],
 					"<^>!<!": ["quote_right_double"],
-					"<^>!<!<+": ["quote_angle_right"]
+					"<^>!<!<+": ["quote_angle_right"],
+					"<+>+": ["greater_than"]
 				},
 				"Слэш": {
 					">+": ["vertical_line"],

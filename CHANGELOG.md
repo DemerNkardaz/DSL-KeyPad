@@ -8,10 +8,11 @@
 
 - Additions:
 
+  - Library extended to 5,400+ Unicode characters.
   - Addded missed latin characters:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
   - Added support for new Latin layouts:
-    - Blaze, Canary (Matrix variant), Engrammer, Focal, Pine v4, Rain, Recurva
+    - Blaze, Canary (Ortho variant), Engrammer, Focal, Pine v4, Rain, Recurva
   - Added support for new Cyrillic layouts:
     - Kharlamak, Rulemak (2018)
   - Added new Alternative modes:
@@ -22,6 +23,8 @@
     - “Scripter” selector: max items per page/max columns/threshold for max columns now can be customized via settings window.
   - Added function for conversion between symbols and tag-symbols.
   - Added information about converters to the “Help” tab.
+  - Added more “mirror” Shift combinations and their description in the “Help” tab.
+  - “Help” info for roman numerals mode extended.
 
 - Changes:
 
@@ -102,10 +105,11 @@
 
 - Дополнения:
 
+  - Библиотека расширена до 5,400+ символов Unicode.
   - Добавлены пропущенные символы латиницы:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
   - Добавлена поддержка новых раскладок латиницы:
-    - Blaze, Canary (Matrix вариант), Engrammer, Focal, Pine v4, Rain, Recurva
+    - Blaze, Canary (Ortho вариант), Engrammer, Focal, Pine v4, Rain, Recurva
   - Добавлена поддержка новых раскладок кириллицы:
     - Харламак, Рулемак (2018)
   - Добавлены новые Альтернативные режимы:
@@ -115,7 +119,9 @@
   - Добавлены новые настройки:
     - Селектор «скриптера»: макс. элементов на странице/макс. колонок/порог макс. колонок теперь могут быть настроены через окно настроек.
   - Добавлена функция конвертации между символами и тег-символами.
-  - Добавлена информация о конвертерах во вкладку «Помощь»
+  - Добавлена информация о конвертерах во вкладку «Помощь».
+  - Добавлено больше «зеркальных Shift-комбинаций» и описание их во вкладке «Помощь».
+  - Расширена информация во вкладке «Помощь» о режиме ввода римских чисел.
 
 - Изменения:
 

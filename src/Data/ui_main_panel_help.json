@@ -13,6 +13,7 @@
 	"help.glyph_variations",
 	"help.TELEX",
 	"help.digit_cases",
+	"help.mirrored_shift",
 	{"help.hotstrings": [
 		"help.hotstrings.temperature_conversion"
 	]},

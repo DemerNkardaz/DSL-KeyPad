@@ -479,9 +479,39 @@
 					"Combinations:\n",
 					"{var:Window}{var:LeftAlt} ↑ and ↓ — create bindings for entering digits in superscript and subscript (¹²³⁴⁵⁶⁷⁸⁹⁰⁻⁼⁽⁾₁₂₃₄₅₆₇₈₉₀₋₌₍₎), while CapsLock activation inverts the index.\n\n",
 					"Combination:\n",
-					"{var:Window}{var:LeftAlt}{var:RightShift} ↑ — activates Roman numeral input."
+					"{var:Window}{var:LeftAlt}{var:RightShift} ↑ — activates Roman numeral input.\n",
+					"\u2003\u2007\u2002Combinations:\n",
+					"\u2003•\u20021234567890 → \u2170 \u2171 \u2172 \u2173 \u2174 \u2175 \u2176 \u2177 \u2178 \u2179 / \u2160 \u2161 \u2162 \u2163 \u2164 \u2165 \u2166 \u2167 \u2168 \u2169\n",
+					"\u2003•\u2002{var:LeftShift} 1 2 5 → \u217A \u217B \u217C / \u216A \u216B \u216C\n",
+					"\u2003•\u2002{var:RightShift} 5 0 → \u217E \u217D / \u216E \u216D\n",
+					"\u2003•\u2002{var:RightAlt} 5 0 → \u2181 \u217F / … \u216F\n",
+					"\u2003•\u2002{var:RightAlt}{var:RightShift} 5 0 → \u2187 \u2182\n",
+					"\u2003•\u2002{var:RightAlt}{var:LeftShift} 0 → \u2188\n",
+					"\u2003•\u2002{var:RightAlt}{var:LeftAlt} 5 6 → \u2186 \u2185\n"
 				]
 			},
+			"mirrored_shift": {
+				"__self": "Mirrored Shift combinations",
+				"description": [
+					"For both English and Russian layouts, the standard Shift combinations are mirrored onto the right Shift.\n",
+					"For example, with the English layout active, Left Shift + 3 will give “#” (normal behavior), but with Right Shift it will instead give “№” (as if Left Shift were pressed on the Russian layout). With the Russian layout active, the behavior is exactly reversed.\n\n",
+					"Mirrored combinations are available for the following keys:\n",
+					"\u2003•\u20022 (@ and \")\n",
+					"\u2003•\u20023 (# and №)\n",
+					"\u2003•\u20024 ($ and ;)\n",
+					"\u2003•\u20026 (^ and :)\n",
+					"\u2003•\u20027 (&& and ?)\n",
+					"\n",
+					"For Cyrillic there are combinations that use both Shifts:\n",
+					"\u2003•\u2002Х, Ъ — “[]”, with added Left Shift — “{}”\n",
+					"\u2003•\u2002Б, Ю, . — “,./”, with added Left Shift — “<>?”\n",
+					"\u2003•\u2002Ж — “;”, with added Left Shift — “:”\n",
+					"\u2003•\u2002Э — “\"”, with added Left Shift — “'”\n",
+					"\u2003•\u2002Ё — “`”, with added Left Shift — “~”\n",
+					"All keys are listed according to the QWERTY/ЙЦУКЕН layout. Keys may differ if another layout is used."
+				]
+			},
+
 			"hotstrings": {
 				"__self": "Hotstrings",
 				"description": [

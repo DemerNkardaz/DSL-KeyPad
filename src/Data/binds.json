@@ -3158,7 +3158,9 @@
 				"<^>!>+": ["quote_low_9_double"],
 				"<^>!<!": ["quote_left_double"],
 				"<^>!<!<+": ["quote_angle_left"],
-				"<^>!<+>+": ["quote_low_9"]
+				"<^>!<+>+": ["quote_low_9"],
+				">+": ["comma"],
+				"<+>+": ["less_than"]
 			},
 			"В": {
 				"<^>!": ["cyr_[c,s]_let_w"]
@@ -3190,13 +3192,16 @@
 				"<^>!>+": ["quote_right"],
 				"<^>!<!<+": ["bullet_triangle"],
 				"<^>!<!>+": ["bullet_white"],
-				">+": ["tilde_reversed"]
+				">+": ["grave_accent"],
+				"<+>+": ["tilde"]
 			},
 			"Ж": {
 				"<^>!": ["cyr_[c,s]_let_zh__breve"],
 				"<^>!<+": ["cyr_[c,s]_let_zh__diaeresis"],
 				"<^>!>+": ["cyr_[c,s]_let_zh_dje"],
-				"<^>!<!": ["cyr_[c,s]_let_zh__descender"]
+				"<^>!<!": ["cyr_[c,s]_let_zh__descender"],
+				">+": ["semicolon"],
+				"<+>+": ["colon"]
 			},
 			"З": {
 				"<^>!": ["cyr_[c,s]_let_z__descender"],
@@ -3335,14 +3340,18 @@
 			"Э": {
 				"<^>!": ["cyr_[c,s]_let_ye_anchor"],
 				"<^>!<+": ["cyr_[c,s]_let_e__diaeresis"],
-				"<^>!<!": ["cyr_[c,s]_lig_ye_iotified"]
+				"<^>!<!": ["cyr_[c,s]_lig_ye_iotified"],
+				">+": ["quote"],
+				"<+>+": ["apostrophe"]
 			},
 			"Ю": {
 				"<^>!": ["quote_angle_right_double"],
 				"<^>!<+": ["quote_right_double_ghost_ru"],
 				"<^>!>+": ["quote_low_9_double_reversed"],
 				"<^>!<!": ["quote_right_double"],
-				"<^>!<!<+": ["quote_angle_right"]
+				"<^>!<!<+": ["quote_angle_right"],
+				">+": ["dot"],
+				"<+>+": ["greater_than"]
 			},
 			"Я": {
 				"<!": ["cyr_[c,s]_let_yus_little_closed"],
@@ -3358,7 +3367,9 @@
 				"<^>!<+": ["tricolon"],
 				"<^>!<+>+": ["quartocolon"],
 				"<!": ["two_dot_punctuation"],
-				"<^>!>+": ["fraction_slash"]
+				"<^>!>+": ["fraction_slash"],
+				">+": ["solidus"],
+				"<+>+": ["question"]
 			},
 			"Слэш": {
 				"<+": ["question"],
