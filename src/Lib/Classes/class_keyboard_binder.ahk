@@ -60,7 +60,7 @@ Class KbdBinder {
 				if !this.layoutNames[script].HasValue(k)
 					this.layoutNames[script].Push(k)
 
-		this.RebuilBinds()
+		this.RebuildBinds()
 	}
 
 
@@ -77,7 +77,7 @@ Class KbdBinder {
 
 		if StrLen(layoutType) > 0 {
 			Cfg.Set(layout, "Layout_" layoutType)
-			this.RebuilBinds()
+			this.RebuildBinds()
 		} else {
 			MsgBox("Wrong layout: " layout)
 		}
@@ -366,8 +366,10 @@ Class KbdBinder {
 				}
 			}
 
-			if useTooltip && !silent
+			if useTooltip && !silent {
+				TooltipPresets.Select()
 				SetTimer(ShowTooltip, 50)
+			}
 
 			Loop comboActions.Length // 2 {
 				i++
@@ -410,7 +412,7 @@ Class KbdBinder {
 		}
 	}
 
-	static RebuilBinds(ignoreAltMode := False, ignoreUnregister := False) {
+	static RebuildBinds(ignoreAltMode := False, ignoreUnregister := False) {
 		this.CurrentLayouts(&latin, &cyrillic, &hellenic)
 
 		local useRemap := Cfg.Get("Layout_Remapping", , False, "bool")
@@ -477,7 +479,7 @@ Class KbdBinder {
 		if typeofActivation = ""
 			MsgBox(Locale.Read("messages.fastkeys_" (!modeActive ? "de" : "") "activated"), "FastKeys", 0x40)
 
-		this.RebuilBinds()
+		this.RebuildBinds()
 	}
 
 	static ToggleNumStyle(style := "Superscript", force := False) {
@@ -485,14 +487,14 @@ Class KbdBinder {
 		this.Registration(BindList.Get(style " Digits"), force ? force : StrLen(this.numStyle) > 0)
 
 		if StrLen(this.numStyle) == 0 {
-			this.RebuilBinds()
+			this.RebuildBinds()
 		}
 		return
 	}
 
 	static SetBinds(name := Locale.Read("dictionary.bindings_none")) {
 		Cfg.Set(name = Locale.Read("dictionary.bindings_none") ? "None" : name, "Active_User_Bindings")
-		this.RebuilBinds()
+		this.RebuildBinds()
 		return
 	}
 }

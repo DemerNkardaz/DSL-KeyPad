@@ -11,6 +11,7 @@ Array.Prototype.DefineProp("Clear", { Call: _ArrayClear })
 Array.Prototype.DefineProp("ToLower", { Call: _ArrayToLower })
 Array.Prototype.DefineProp("ToUpper", { Call: _ArrayToUpper })
 Array.Prototype.DefineProp("Slice", { Call: _ArraySlice })
+Array.Prototype.DefineProp("DeepClone", { Call: _ArrayDeepClone })
 
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("Values", { Call: _MapValues })
@@ -33,6 +34,24 @@ ObjGet(this, j) {
 		i++
 	}
 	return
+}
+
+_ArrayDeepClone(this) {
+	local output := []
+	for item in this {
+		if item is String {
+			output.Push(item)
+		} else if item is Array {
+			output.Push(item.Clone())
+		} else if item is Map {
+			output.Push(item.DeepClone())
+		} else if item is Object {
+			output.Push(item.DeepClone())
+		} else {
+			output.Push(item)
+		}
+	}
+	return output
 }
 
 _ObjDeepClone(this) {

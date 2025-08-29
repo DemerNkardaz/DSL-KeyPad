@@ -18,6 +18,7 @@ A_MaxHotkeysPerInterval := 50
 initialized := False
 
 #Include <External\JSON>
+#Include <External\TooltipOptions>
 #Include <External\function_gui_button_icon>
 
 #Include <utils>
@@ -40,6 +41,7 @@ initialized := False
 
 #Include <Classes\class_clip>
 #Include <Classes\class_util>
+#Include <Classes\class_tooltip_presets>
 #Include <Classes\class_side_process>
 #Include <Classes\class_xcompose_parser>
 #Include <Classes\class_my_recipes_storage>

@@ -42,6 +42,8 @@ Class ChrCrafter {
 	}
 
 	ComposeMode() {
+		TooltipPresets.Select("Compose")
+
 		this.isComposeInstanceActive := True
 		local composeObject := {}
 		composeObject.ChrBlockInstance := ChrBlock()
@@ -112,6 +114,9 @@ Class ChrCrafter {
 		)
 
 		Loop {
+			if TooltipPresets.selected != "Compose"
+				TooltipPresets.Select("Compose")
+
 			iterationObject := {}
 			composeObject.insertType := RegExMatch(composeObject.input, "i)^([uюυaаα])\+", &m) ? (m[1] ~= "i)[uюυ]" ? "Unicode" : "Altcode") : ""
 			iterationObject.codes := RegExReplace(composeObject.input, "i)^([uюυaаα])\+", "")
@@ -316,6 +321,7 @@ Class ChrCrafter {
 		}
 
 		this.isComposeInstanceActive := False
+		TooltipPresets.Select()
 		return
 	}
 
@@ -633,7 +639,7 @@ Class ChrCrafter {
 		return length - symbolCount
 	}
 
-	FormatSuggestions(&suggestions, maxLength := 80) {
+	FormatSuggestions(&suggestions, maxLength := Cfg.Get("Suggestions_Line_Max_Length", "Compose", 80, "int")) {
 		if suggestions = "N/A"
 			return suggestions
 
@@ -675,7 +681,7 @@ Class ChrCrafter {
 		return this.SuggestionsLimiter(&output)
 	}
 
-	SuggestionsLimiter(&suggestions, maxLength := 80 * 8) {
+	SuggestionsLimiter(&suggestions, maxLength := Cfg.Get("Suggestions_Limiter", "Compose", 80, "int") * Cfg.Get("Suggestions_Limiter_Multiplier", "Compose", 8, "int")) {
 		if this.EffectiveLength(&suggestions) <= maxLength
 			return suggestions
 

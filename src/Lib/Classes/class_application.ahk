@@ -58,6 +58,8 @@ Class App {
 			this.paths.pwsh "\set_folder_data.ps1", this.desktopINI), , "Hide")
 
 		this.ReadProfiles()
+
+		TooltipPresets.Select()
 		return
 	}
 

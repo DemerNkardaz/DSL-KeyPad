@@ -25,12 +25,14 @@
   - Added information about converters to the “Help” tab.
   - Added more “mirror” Shift combinations and their description in the “Help” tab.
   - “Help” info for roman numerals mode extended.
+  - Added “ToolTipOptions” external library, allowing changing the appearance of tooltips. https://www.autohotkey.com/boards/viewtopic.php?f=83&t=113308
 
 - Changes:
 
   - Noto Sans and Noto Sans Symbols now required fonts.
   - Suggestion to download missing required fonts now opens the corresponding Google Fonts page instead of downloading the TTF file from GitHub.
   - Format for referencing variables/function calls inside strings for the parser changed from %…% to <% … %/>.
+  - Tooltips (including the “Composition” mode) now use the Noto Sans font.
 
 ---
 
@@ -122,12 +124,14 @@
   - Добавлена информация о конвертерах во вкладку «Помощь».
   - Добавлено больше «зеркальных Shift-комбинаций» и описание их во вкладке «Помощь».
   - Расширена информация во вкладке «Помощь» о режиме ввода римских чисел.
+  - Добавлена сторонняя библиотека «ToolTipOptions», позволяющая изменять вид всплывающих подсказок. https://www.autohotkey.com/boards/viewtopic.php?f=83&t=113308
 
 - Изменения:
 
   - Noto Sans и Noto Sans Symbols теперь обязательные шрифты.
   - Предложение скачать отсутствующие обязательные шрифты теперь открывает соответствующую страницу Google Fonts вместо загрузки TTF-файла с GitHub.
   - Формат записи ссылок на переменные/вызовы функций внутри строк для парсера изменены с %…% на <% … %/>.
+  - Всплывающие подсказки (в том числе режима «Композиции») теперь используют шрифт «Noto Sans».
 
 ---
 

@@ -2,6 +2,7 @@ Class DottedProgressTooltip {
 	increment := 0
 
 	__New(maxIncrement := 4, &triggerEnds := False, startSleep := 1) {
+		TooltipPresets.Select()
 		this.maxIncrement := maxIncrement
 		this.tooltipCall := this.Tooltip.Bind(this, &triggerEnds)
 		SetTimer(this.Timer.Bind(this, &triggerEnds), -startSleep)

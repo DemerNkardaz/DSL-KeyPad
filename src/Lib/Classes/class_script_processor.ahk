@@ -304,7 +304,7 @@ Class TelexScriptProcessor {
 				}
 
 				suggestions := this.GetSuggestions(this.LoggerDuplicates(this.inputLogger))
-				Util.CaretTooltip(this.LoggerDuplicates(this.inputLogger) (suggestions != "" ? "`n" globalInstances.crafter.FormatSuggestions(&suggestions) : ""))
+				Util.CaretTooltip(this.LoggerDuplicates(this.inputLogger) (suggestions != "" ? "`n" globalInstances.crafter.FormatSuggestions(&suggestions) : ""), "Compose")
 
 			} else {
 				this.InH.Stop()
@@ -435,7 +435,7 @@ Class TelexScriptProcessor {
 		if StrLen(this.inputLogger) > 0 && sc = backspaceCode && !this.backspaceLock {
 			this.inputLogger := isCtrlPressed ? "" : SubStr(this.inputLogger, 1, -1)
 
-			Util.CaretTooltip(this.inputLogger)
+			Util.CaretTooltip(this.inputLogger, "Compose")
 		} else if resetKeys.HasValue(sc) {
 			this.inputLogger := ""
 			Tooltip()

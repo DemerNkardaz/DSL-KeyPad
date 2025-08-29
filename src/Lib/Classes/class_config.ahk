@@ -39,7 +39,15 @@ Class Cfg {
 			"Scripter_Selector_Max_Columns_Threshold_Glyph", 32,
 			"Scripter_Selector_Use_Number_Keys", "False",
 		],
-		"Compose", [],
+		"Compose", [
+			"Font_Size", 10,
+			"Font_Name", Fonts.fontFaces["Sans-Serif"].name,
+			"Background_Color", "White",
+			"Font_Color", "333333",
+			"Suggestions_Line_Max_Length", 80,
+			"Suggestions_Limiter", 80,
+			"Suggestions_Limiter_Multiplier", 8,
+		],
 		"Characters", [
 			"I_Dot_Shift_I_Dotless", "Default",
 		],
@@ -397,7 +405,7 @@ Class Cfg {
 					}
 				}
 				Cfg.Set(remapping, "Layout_Remapping", , "bool")
-				KbdBinder.RebuilBinds()
+				KbdBinder.RebuildBinds()
 			}
 		}
 
@@ -607,7 +615,7 @@ Class Options {
 			}
 		}
 
-		KbdBinder.RebuilBinds()
+		KbdBinder.RebuildBinds()
 	}
 
 	static SetLocalisedOption(title, options, entry) {

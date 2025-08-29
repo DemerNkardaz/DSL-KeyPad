@@ -738,7 +738,7 @@ Class UIMainPanel {
 				local bindings := entry["options"]["fastKey"] != "" ? entry["options"]["fastKey"] : entry["options"]["altLayoutKey"] != "" ? entry["options"]["altLayoutKey"] : entry["options"]["altSpecialKey"] != "" ? entry["options"]["altSpecialKey"] : ""
 				bindings := bindings != "" ? (reserveCombinationKey != "" ? reserveCombinationKey " + " : "") bindings : ""
 
-				while (RegExMatch(bindings, "\%([^%]+)\%", &match))
+				while (RegExMatch(bindings, "<%\s([^<%]+)\s%/>", &match))
 					bindings := RegExReplace(bindings, match[0], %match[1]%)
 
 				local entryView := ""

@@ -328,7 +328,7 @@ Class Scripter {
 
 		Event.Trigger("Scripter", "On Option Selected", name, selectorType, terminated)
 		if !ignoreRebuild && selectorType != "TELEX"
-			KbdBinder.RebuilBinds(, altMode != "")
+			KbdBinder.RebuildBinds(, altMode != "")
 
 		WarningISP(name, currentISP, selectorType) {
 			local instanceRef := currentISP != "" ? globalInstances.scriptProcessors[currentISP] : False
