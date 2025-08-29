@@ -34,6 +34,10 @@
   - Format for referencing variables/function calls inside strings for the parser changed from %…% to <% … %/>.
   - Tooltips (including the “Composition” mode) now use the Noto Sans font.
 
+- Fixes:
+
+  - Fixed “Compositing” mode crash with “?” recipes.
+
 ---
 
 ### [0.1.4.3 α — 2025-08-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.4.3)
@@ -132,6 +136,10 @@
   - Предложение скачать отсутствующие обязательные шрифты теперь открывает соответствующую страницу Google Fonts вместо загрузки TTF-файла с GitHub.
   - Формат записи ссылок на переменные/вызовы функций внутри строк для парсера изменены с %…% на <% … %/>.
   - Всплывающие подсказки (в том числе режима «Композиции») теперь используют шрифт «Noto Sans».
+
+- Исправления:
+
+  - Исправлена остановка режима «Композиции» с рецептами символа «?».
 
 ---
 

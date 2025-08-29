@@ -251,6 +251,9 @@ Class TelexScriptProcessor {
 	}
 
 	SequenceHandler(IHObj, input := "", backspaceOn := False) {
+		if TooltipPresets.selected != "TELEX"
+			TooltipPresets.Select("TELEX")
+
 		if this.blockHandler >= 2 {
 			this.blockHandler--
 			return
@@ -304,7 +307,7 @@ Class TelexScriptProcessor {
 				}
 
 				suggestions := this.GetSuggestions(this.LoggerDuplicates(this.inputLogger))
-				Util.CaretTooltip(this.LoggerDuplicates(this.inputLogger) (suggestions != "" ? "`n" globalInstances.crafter.FormatSuggestions(&suggestions) : ""), "Compose")
+				Util.CaretTooltip(this.LoggerDuplicates(this.inputLogger) (suggestions != "" ? "`n" globalInstances.crafter.FormatSuggestions(&suggestions) : ""))
 
 			} else {
 				this.InH.Stop()
@@ -435,7 +438,7 @@ Class TelexScriptProcessor {
 		if StrLen(this.inputLogger) > 0 && sc = backspaceCode && !this.backspaceLock {
 			this.inputLogger := isCtrlPressed ? "" : SubStr(this.inputLogger, 1, -1)
 
-			Util.CaretTooltip(this.inputLogger, "Compose")
+			Util.CaretTooltip(this.inputLogger)
 		} else if resetKeys.HasValue(sc) {
 			this.inputLogger := ""
 			Tooltip()

@@ -306,10 +306,16 @@ Class ChrCrafter {
 		composeObject.ParentHook.Stop()
 
 		if InStr(composeObject.output, "N/A") {
+			TooltipPresets.Select("Compose Absent")
 			Util.CaretTooltip(Chr(0x26A0) " " Locale.Read("warnings.recipe_absent"))
 			SetTimer(Tooltip, -1000)
 
 		} else {
+			if composeObject.cancelledByUser
+				TooltipPresets.Select("Compose Cancelled")
+			else if composeObject.output != ""
+				TooltipPresets.Select("Compose Success")
+
 			endTooltip := composeObject.cancelledByUser ? Chr(0x274E) " " Chr(0x2192) " " Locale.Read("warnings.cancelled_by_user") : Chr(0x2705) " " composeObject.input " " Chr(0x2192) " " Util.StrFormattedReduce(composeObject.output)
 			Util.CaretTooltip(endTooltip)
 			SetTimer(Tooltip, -500)
@@ -407,7 +413,7 @@ Class ChrCrafter {
 
 		if !isPrefixOfLongerRecipe {
 			for validatingValue in ChrLib.entryRecipes {
-				if validatingValue ~= "i)^" promptValidator && validatingValue ~= "i)^(?!" prompt "$).+" {
+				if validatingValue ~= "i)^" promptValidator && validatingValue ~= "i)^(?!" RegExEscape(prompt) "$).+" {
 					isPrefixOfLongerRecipe := True
 					break
 				}
