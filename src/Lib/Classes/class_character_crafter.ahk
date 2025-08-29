@@ -321,7 +321,6 @@ Class ChrCrafter {
 		}
 
 		this.isComposeInstanceActive := False
-		TooltipPresets.Select()
 		return
 	}
 
