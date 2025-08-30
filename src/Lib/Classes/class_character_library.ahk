@@ -64,6 +64,7 @@ Class ChrLib {
 		"palmyrene",
 		"manichaean",
 		"imperial_aramaic",
+		"manichaean",
 		;
 		"ipa",
 		"&ipa",

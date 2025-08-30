@@ -231,6 +231,16 @@
 		"uiid": "Parthian",
 		"icons": ["parthian"]
 	},
+	"Manichaean", {
+		"preview": [
+			"\ud802\uded9\ud802\udee2\ud802\uded7\ud802\udec7\ud802\udecd\ud802\udee1 \ud802\uded7\ud802\uded6\ud802\udecf\ud802\udecd\ud802\uded0"
+		],
+		"fonts": ["Noto Sans Manichaean"],
+		"locale": "manichaean",
+		"bindings": ["Manichaean"],
+		"uiid": "Manichaean",
+		"icons": ["manichaean"]
+	},
 	"Deseret", {
 		"preview": [
 			"\uD801\uDC14\uD801\uDC2F\uD801\uDC45\uD801\uDC28\uD801\uDC49\uD801\uDC2F\uD801\uDC3B \uD801\uDC08\uD801\uDC4A\uD801\uDC41\uD801\uDC30\uD801\uDC3A\uD801\uDC2F\uD801\uDC3B"

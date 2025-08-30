@@ -1,7 +1,7 @@
 {
 	"ru-RU": {
 		"script_labels": {
-			"imperial_aramaic": "Имперский Арамейский"
+			"imperial_aramaic": "Имперский арамейский"
 		},
 		"generated": {
 			"prefix": { "imperial_aramaic": "Арамейск$(ая|ий|ое)" },

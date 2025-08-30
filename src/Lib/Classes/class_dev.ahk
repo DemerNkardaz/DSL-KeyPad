@@ -68,6 +68,7 @@ Class Dev {
 			"Glagolitic",
 			"Gothic",
 			"Imperial Aramaic",
+			"Manichaean",
 			"Inscriptional Parthian",
 			"Linear A",
 			"Linear B",

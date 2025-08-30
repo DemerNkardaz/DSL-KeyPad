@@ -1642,6 +1642,103 @@
 				}
 			}
 		},
+		"Manichaean": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "manichaean_n_let_a_aleph",
+				"B": "manichaean_n_let_b_beth",
+				"C": "",
+				"D": "manichaean_n_let_d_daleth",
+				"E": "",
+				"F": "manichaean_n_let_f_fe",
+				"G": "manichaean_n_let_g_gimel",
+				"H": "manichaean_n_let_h_he",
+				"I": "",
+				"J": "manichaean_n_let_j_jayin",
+				"K": "manichaean_n_let_k_kaph",
+				"L": "manichaean_n_let_l_lamedh",
+				"M": "manichaean_n_let_m_mem",
+				"N": "manichaean_n_let_n_nun",
+				"O": "",
+				"P": "manichaean_n_let_p_pe",
+				"Q": "manichaean_n_let_q_qoph",
+				"R": "manichaean_n_let_r_resh",
+				"S": "manichaean_n_let_s_samekh",
+				"T": "manichaean_n_let_t_teth",
+				"U": "manichaean_n_let_u_ud",
+				"V": "",
+				"W": "manichaean_n_let_w_waw",
+				"X": "manichaean_n_let_x_xaph",
+				"Y": "manichaean_n_let_y_yodh",
+				"Z": "manichaean_n_let_z_zayin",
+				"1": "manichaean_n_num_one",
+				"5": "manichaean_n_num_five",
+				"6": "manichaean_n_num_one_hundred",
+				"Comma": "manichaean_n_sym_star",
+				"Dot": "manichaean_n_sym_dot",
+				"Semicolon": "manichaean_n_sym_two_dots",
+				"Slash": "manichaean_n_sym_line_filler",
+				"Apostrophe": "manichaean_n_sym_dot_within_dot"
+			},
+			"Moded": {
+				"A": {
+					"<^>!": "manichaean_n_let_a_ayin",
+					"<^>!<!": "manichaean_n_let_a_aayin"
+				},
+				"B": {
+					"<^>!": "manichaean_n_let_b_bheth"
+				},
+				"D": {
+					"<^>!": "manichaean_n_let_d_dhamedh"
+				},
+				"G": {
+					"<^>!": "manichaean_n_let_g_ghimel"
+				},
+				"H": {
+					"<^>!": "manichaean_n_let_h_heth"
+				},
+				"J": {
+					"<^>!": "manichaean_n_let_j_jhayin"
+				},
+				"K": {
+					"<^>!": "manichaean_n_let_k_khaph"
+				},
+				"Q": {
+					"<^>!": "manichaean_n_let_q_qhoph"
+				},
+				"S": {
+					"<^<!": "manichaean_n_sym_abbreviation_below",
+					"<^>!": "manichaean_n_let_s_sadhe",
+					"<!": "manichaean_n_let_s_shin",
+					"<^>!<!": "manichaean_n_let_s_sshin"
+				},
+				"T": {
+					"<^>!": "manichaean_n_let_t_taw",
+					"<^>!>+": "manichaean_n_let_t_thamedh"
+				},
+				"W": {
+					"<^<!": "manichaean_n_sym_abbreviation_above"
+				},
+				"X": {
+					"<!": "manichaean_n_let_x_xoph"
+				},
+				"Z": {
+					"<!": "manichaean_n_let_z_zhayin"
+				},
+				"1": {
+					"<^>!": "manichaean_n_num_ten"
+				},
+				"2": {
+					"<^>!": "manichaean_n_num_twenty"
+				},
+				"Comma": {
+					"<^>!": "manichaean_n_sym_fleuron"
+				},
+				"Apostrophe": {
+					"<^>!": "manichaean_n_sym_double_dot_within_dot"
+				}
+			}
+		},
 		"IPA": {
 			"ForceSingle": true,
 			"Flat": {

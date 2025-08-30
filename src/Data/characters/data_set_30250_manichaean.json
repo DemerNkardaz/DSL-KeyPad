@@ -1,0 +1,232 @@
+[
+	"manichaean_n_sym_abbreviation_[above,below]", {
+		"unicode": ["10AE5", "10AE6"],
+		"options": { "altLayoutKey": ["<^<! W", "<^<! S"] }
+	},
+	"manichaean_n_let_a_aleph", {
+		"unicode": "10AC0",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_a_ayin", {
+		"unicode": "10AD9",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"manichaean_n_let_a_aayin", {
+		"unicode": "10ADA",
+		"options": { "altLayoutKey": ">!<! $" },
+		"recipe": [
+			"${manichaean_n_let_a_ayin}${manichaean_n_sym_abbreviation_above}", 
+			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_a_ayin}"
+		]
+	},
+	"manichaean_n_let_b_beth", {
+		"unicode": "10AC1",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"manichaean_n_let_b_bheth", {
+		"unicode": "10AC2",
+		"options": { "altLayoutKey": ">! $" },
+		"recipe": [
+			"${manichaean_n_let_b_beth}${manichaean_n_sym_abbreviation_above}", 
+			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_b_beth}"
+		]
+	},
+	"manichaean_n_let_d_daleth", {
+		"unicode": "10AC5",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_d_dhamedh", {
+		"unicode": "10AD4",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"manichaean_n_let_f_fe", {
+		"unicode": "10ADC",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_g_gimel", {
+		"unicode": "10AC3",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_g_ghimel", {
+		"unicode": "10AC4",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"manichaean_n_let_h_he", {
+		"unicode": "10AC6",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_h_heth", {
+		"unicode": "10ACD",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"manichaean_n_let_j_jayin", {
+		"unicode": "10ACB",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_j_jhayin", {
+		"unicode": "10ACC",
+		"options": { "altLayoutKey": "<! $" },
+		"recipe": [
+			"${manichaean_n_let_j_jayin}${manichaean_n_sym_abbreviation_above}", 
+			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_j_jayin}"
+		]
+	},
+	"manichaean_n_let_k_kaph", {
+		"unicode": "10AD0",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_k_khaph", {
+		"unicode": "10AD2",
+		"options": { "altLayoutKey": ">! $" },
+		"recipe": [
+			"${manichaean_n_let_k_kaph}${manichaean_n_sym_abbreviation_above}", 
+			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_k_kaph}"
+		]
+	},
+	"manichaean_n_let_l_lamedh", {
+		"unicode": "10AD3",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_m_mem", {
+		"unicode": "10AD6",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_n_nun", {
+		"unicode": "10AD7",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_p_pe", {
+		"unicode": "10ADB",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_q_qoph", {
+		"unicode": "10ADE",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_q_qhoph", {
+		"unicode": "10AE0",
+		"options": { "altLayoutKey": ">! $" },
+		"recipe": [
+			"${manichaean_n_let_q_qoph}${manichaean_n_sym_abbreviation_above}", 
+			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_q_qoph}"
+		]
+	},
+	"manichaean_n_let_r_resh", {
+		"unicode": "10AE1",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_s_samekh", {
+		"unicode": "10AD8",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_s_sadhe", {
+		"unicode": "10ADD",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"manichaean_n_let_s_shin", {
+		"unicode": "10AE2",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"manichaean_n_let_s_sshin", {
+		"unicode": "10AE3",
+		"options": { "altLayoutKey": ">!<! $" },
+		"recipe": [
+			"${manichaean_n_let_s_shin}${manichaean_n_sym_abbreviation_above}", 
+			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_s_shin}"
+		]
+	},
+	"manichaean_n_let_t_teth", {
+		"unicode": "10ACE",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_t_taw", {
+		"unicode": "10AE4",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"manichaean_n_let_t_thamedh", {
+		"unicode": "10AD5",
+		"options": { "altLayoutKey": ">!>+ $" }
+	},
+	"manichaean_n_let_u_ud", {
+		"unicode": "10AC8",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_w_waw", {
+		"unicode": "10AC7",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_x_xaph", {
+		"unicode": "10AD1",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_x_xoph", {
+		"unicode": "10ADF",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"manichaean_n_let_y_yodh", {
+		"unicode": "10ACF",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_z_zayin", {
+		"unicode": "10AC9",
+		"options": { "altLayoutKey": "$" }
+	},
+	"manichaean_n_let_z_zhayin", {
+		"unicode": "10ACA",
+		"options": { "altLayoutKey": "<! $" },
+		"recipe": [
+			"${manichaean_n_let_z_zayin}${manichaean_n_sym_abbreviation_above}", 
+			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_z_zayin}"
+		]
+	},
+	"manichaean_n_num_one", {
+		"unicode": "10AEB",
+		"options": { "altLayoutKey": "1" }
+	},
+	"manichaean_n_num_five", {
+		"unicode": "10AEC",
+		"options": { "altLayoutKey": "5" }
+	},
+	"manichaean_n_num_ten", {
+		"unicode": "10AED",
+		"options": { "altLayoutKey": ">! 1" }
+	},
+	"manichaean_n_num_twenty", {
+		"unicode": "10AEE",
+		"options": { "altLayoutKey": ">! 2" }
+	},
+	"manichaean_n_num_one_hundred", {
+		"unicode": "10AEF",
+		"options": { "altLayoutKey": "6" }
+	},
+	"manichaean_n_sym_star", {
+		"unicode": "10AF0",
+		"options": { "altLayoutKey": "," }
+	},
+	"manichaean_n_sym_fleuron", {
+		"unicode": "10AF1",
+		"options": { "altLayoutKey": ">+ ," }
+	},
+	"manichaean_n_sym_dot_within_dot", {
+		"unicode": "10AF3",
+		"options": { "altLayoutKey": "'" }
+	},
+	"manichaean_n_sym_double_dot_within_dot", {
+		"unicode": "10AF2",
+		"options": { "altLayoutKey": ">! '" },
+		"recipe": ["${manichaean_n_sym_dot_within_dot×2}"]
+	},
+	"manichaean_n_sym_dot", {
+		"unicode": "10AF4",
+		"options": { "altLayoutKey": "." }
+	},
+	"manichaean_n_sym_two_dots", {
+		"unicode": "10AF5",
+		"options": { "altLayoutKey": ";" },
+		"recipe": ["${manichaean_n_sym_dot×2}"]
+	},
+	"manichaean_n_sym_line_filler", {
+		"unicode": "10AF6",
+		"options": { "altLayoutKey": "/" }
+	}
+]

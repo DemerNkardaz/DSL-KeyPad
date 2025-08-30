@@ -36,6 +36,7 @@
   - Suggestion to download missing required fonts now opens the corresponding Google Fonts page instead of downloading the TTF file from GitHub.
   - Format for referencing variables/function calls inside strings for the parser changed from %…% to <% … %/>.
   - Tooltips (including the “Composition” mode) now use the Noto Sans font.
+  - Wallet, Miscellaneous, Alchemical, Astrololigical symbol sets reordered.
 
 - Fixes:
 
@@ -142,6 +143,7 @@
   - Предложение скачать отсутствующие обязательные шрифты теперь открывает соответствующую страницу Google Fonts вместо загрузки TTF-файла с GitHub.
   - Формат записи ссылок на переменные/вызовы функций внутри строк для парсера изменены с %…% на <% … %/>.
   - Всплывающие подсказки (в том числе режима «Композиции») теперь используют шрифт «Noto Sans».
+  - Изменён порядок для наборов валютных, алхимических, астрологических и других разных символов.
 
 - Исправления:
 

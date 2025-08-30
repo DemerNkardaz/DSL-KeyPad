@@ -448,6 +448,7 @@ Class TelexScriptProcessor {
 	}
 
 	InitHook() {
+		TooltipPresets.Select("TELEX")
 		this.InH.Start()
 		this.InH.NotifyNonText := True
 		this.InH.KeyOpt("{Backspace}", "N")

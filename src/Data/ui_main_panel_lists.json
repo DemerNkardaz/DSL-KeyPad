@@ -26,6 +26,7 @@
 			"Cirth Runic", "",
 			"Glagolitic", "",
 			"Old Persian", "",
+			"Manichaean", "",
 			"Shavian Ligatures", "",
 			"Smelting Special", "",
 			"Extra Symbolistics", "",
@@ -163,6 +164,7 @@
 			"Imperial Aramaic", "Imperial Aramaic Numerals", "",
 			"Palmyrene", "Palmyrene Numerals", "",
 			"Parthian", "Parthian Numerals", "",
+			"Manichaean", "Manichaean Numerals", "",
 			"Deseret", "",
 			"Shavian", "Shavian Ligatures", ""
 		],
@@ -200,6 +202,7 @@
 			"Imperial Aramaic": "@script_labels.imperial_aramaic",
 			"Palmyrene": "@script_labels.palmyrene",
 			"Parthian": "@script_labels.parthian",
+			"Manichaean": "@script_labels.manichaean",
 			"Deseret": "@script_labels.deseret.short",
 			"Shavian": "@script_labels.shavian.short"
 		}

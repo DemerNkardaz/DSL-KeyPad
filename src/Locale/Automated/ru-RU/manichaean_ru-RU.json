@@ -1,0 +1,66 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"manichaean": "Манихейское письмо"
+		},
+		"generated": {
+			"prefix": { "manichaean": "Манихейск$(ая|ий|ое)" },
+			"tag": { "manichaean": "манихейск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"manichaean": {
+				"n_sym_abbreviation_above": { "letter_locale": "Сокращение сверху" },
+				"n_sym_abbreviation_below": { "letter_locale": "Сокращение снизу" },
+				"n_let_a_aleph": { "letter_locale": "Алеф" },
+				"n_let_a_ayin": { "letter_locale": "Айн" },
+				"n_let_a_aayin": { "letter_locale": "Аайн" },
+				"n_let_b_beth": { "letter_locale": "Бет" },
+				"n_let_b_bheth": { "letter_locale": "Бхет" },
+				"n_let_d_daleth": { "letter_locale": "Далет" },
+				"n_let_d_dhamedh": { "letter_locale": "Дамед" },
+				"n_let_f_fe": { "letter_locale": "Фе" },
+				"n_let_g_gimel": { "letter_locale": "Гимель" },
+				"n_let_g_ghimel": { "letter_locale": "Ғимель" },
+				"n_let_h_he": { "letter_locale": "Хе" },
+				"n_let_h_heth": { "letter_locale": "Хет" },
+				"n_let_j_jayin": { "letter_locale": "Джайн" },
+				"n_let_j_jhayin": { "letter_locale": "Джхайн" },
+				"n_let_k_kaph": { "letter_locale": "Каф" },
+				"n_let_k_khaph": { "letter_locale": "Кхаф" },
+				"n_let_l_lamedh": { "letter_locale": "Ламед" },
+				"n_let_m_mem": { "letter_locale": "Мем" },
+				"n_let_n_nun": { "letter_locale": "Нун" },
+				"n_let_p_pe": { "letter_locale": "Пе" },
+				"n_let_q_qoph": { "letter_locale": "Коф" },
+				"n_let_q_qhoph": { "letter_locale": "Кхоф" },
+				"n_let_r_resh": { "letter_locale": "Реш" },
+				"n_let_s_samekh": { "letter_locale": "Самек" },
+				"n_let_s_sadhe": { "letter_locale": "Цаде" },
+				"n_let_s_shin": { "letter_locale": "Шин" },
+				"n_let_s_sshin": { "letter_locale": "Шшин" },
+				"n_let_t_teth": { "letter_locale": "Тет" },
+				"n_let_t_taw": { "letter_locale": "Тау" },
+				"n_let_t_thamedh": { "letter_locale": "Тамед" },
+				"n_let_u_ud": { "letter_locale": "Уд" },
+				"n_let_w_waw": { "letter_locale": "Вав" },
+				"n_let_x_xaph": { "letter_locale": "Саф" },
+				"n_let_x_xoph": { "letter_locale": "Соф" },
+				"n_let_y_yodh": { "letter_locale": "Йод" },
+				"n_let_z_zayin": { "letter_locale": "Зайн" },
+				"n_let_z_zhayin": { "letter_locale": "Жайн" },
+				"n_num_one": { "letter_locale": "Один" },
+				"n_num_five": { "letter_locale": "Пять" },
+				"n_num_ten": { "letter_locale": "Десять" },
+				"n_num_twenty": { "letter_locale": "Двадцать" },
+				"n_num_one_hundred": { "letter_locale": "Сто" },
+				"n_sym_star": { "letter_locale": "Звезда" },
+				"n_sym_dot_within_dot": { "letter_locale": "Точка внутри точки" },
+				"n_sym_double_dot_within_dot": { "letter_locale": "Две точки внутри точек" },
+				"n_sym_fleuron": { "letter_locale": "Флерон" },
+				"n_sym_dot": { "letter_locale": "Точка" },
+				"n_sym_two_dots": { "letter_locale": "Две точки" },
+				"n_sym_line_filler": { "letter_locale": "Заполнитель" }
+			}
+		}
+	}
+}

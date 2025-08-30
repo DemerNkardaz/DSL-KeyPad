@@ -1,0 +1,66 @@
+{
+	"en-US": {
+		"script_labels": {
+			"manichaean": "Manichaean"
+		},
+		"generated": {
+			"prefix": { "manichaean": "Manichaean" },
+			"tag": { "manichaean": "manichaean" }
+		},
+		"scripts": {
+			"manichaean": {
+				"n_sym_abbreviation_above": { "letter_locale": "Abbreviation Above" },
+				"n_sym_abbreviation_below": { "letter_locale": "Abbreviation Below" },
+				"n_let_a_aleph": { "letter_locale": "Aleph" },
+				"n_let_a_ayin": { "letter_locale": "Ayin" },
+				"n_let_a_aayin": { "letter_locale": "Aayin" },
+				"n_let_b_beth": { "letter_locale": "Beth" },
+				"n_let_b_bheth": { "letter_locale": "Bheth" },
+				"n_let_d_daleth": { "letter_locale": "Daleth" },
+				"n_let_d_dhamedh": { "letter_locale": "Dhamedh" },
+				"n_let_f_fe": { "letter_locale": "Fe" },
+				"n_let_g_gimel": { "letter_locale": "Gimel" },
+				"n_let_g_ghimel": { "letter_locale": "Ghimel" },
+				"n_let_h_he": { "letter_locale": "He" },
+				"n_let_h_heth": { "letter_locale": "Heth" },
+				"n_let_j_jayin": { "letter_locale": "Jayin" },
+				"n_let_j_jhayin": { "letter_locale": "Jhayin" },
+				"n_let_k_kaph": { "letter_locale": "Kaph" },
+				"n_let_k_khaph": { "letter_locale": "Khaph" },
+				"n_let_l_lamedh": { "letter_locale": "Lamedh" },
+				"n_let_m_mem": { "letter_locale": "Mem" },
+				"n_let_n_nun": { "letter_locale": "Nun" },
+				"n_let_p_pe": { "letter_locale": "Pe" },
+				"n_let_q_qoph": { "letter_locale": "Qoph" },
+				"n_let_q_qhoph": { "letter_locale": "Qhoph" },
+				"n_let_r_resh": { "letter_locale": "Resh" },
+				"n_let_s_samekh": { "letter_locale": "Samekh" },
+				"n_let_s_sadhe": { "letter_locale": "Sadhe" },
+				"n_let_s_shin": { "letter_locale": "Shin" },
+				"n_let_s_sshin": { "letter_locale": "Sshin" },
+				"n_let_t_teth": { "letter_locale": "Teth" },
+				"n_let_t_taw": { "letter_locale": "Taw" },
+				"n_let_t_thamedh": { "letter_locale": "Thamedh" },
+				"n_let_u_ud": { "letter_locale": "Ud" },
+				"n_let_w_waw": { "letter_locale": "Waw" },
+				"n_let_x_xaph": { "letter_locale": "Xaph" },
+				"n_let_x_xoph": { "letter_locale": "Xoph" },
+				"n_let_y_yodh": { "letter_locale": "Yodh" },
+				"n_let_z_zayin": { "letter_locale": "Zayin" },
+				"n_let_z_zhayin": { "letter_locale": "Zhayin" },
+				"n_num_one": { "letter_locale": "One" },
+				"n_num_five": { "letter_locale": "Five" },
+				"n_num_ten": { "letter_locale": "Ten" },
+				"n_num_twenty": { "letter_locale": "Twenty" },
+				"n_num_one_hundred": { "letter_locale": "One Hundred" },
+				"n_sym_star": { "letter_locale": "Star" },
+				"n_sym_dot_within_dot": { "letter_locale": "Dot within Dot" },
+				"n_sym_double_dot_within_dot": { "letter_locale": "Double Dot within Dot" },
+				"n_sym_fleuron": { "letter_locale": "Fleuron" },
+				"n_sym_dot": { "letter_locale": "Dot" },
+				"n_sym_two_dots": { "letter_locale": "Two Dots" },
+				"n_sym_line_filler": { "letter_locale": "Line Filler" }
+			}
+		}
+	}
+}
