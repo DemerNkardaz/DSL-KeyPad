@@ -297,5 +297,8 @@
     <Image Include="DSLKeyPad.app_glyph_tag.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="DSLKeyPad.app_manichaean.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
