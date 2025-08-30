@@ -190,6 +190,18 @@
 						}
 					}
 				},
+				"compose": {
+					"__self": "Compose",
+					"title": "“Compose” Mode Settings",
+					"show_suggestions": "Show suggestions",
+					"show_favorites": "Show favorites",
+					"font_size": "Font size",
+					"font_name": "Font name",
+					"background_color": "Background color",
+					"font_color": "Font color",
+					"max_line_length": "Max suggestions line length",
+					"max_length": "Max suggestions length"
+				},
 				"remapping": {
 					"__self": "Remapping",
 					"description": "When remapping is enabled, all standard keyboard keys will be reassigned according to the selected layout except QWERTY/QWERTY. This setting may interfere with application bindings, such as games.\n\nRemapping will be relevant for custom layouts.\n\nWhen possible, it is recommended to use a similar system layout instead of remapping."
