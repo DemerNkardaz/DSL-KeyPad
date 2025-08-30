@@ -47,6 +47,8 @@ Class Cfg {
 			"Suggestions_Line_Max_Length", 80,
 			"Suggestions_Limiter", 80,
 			"Suggestions_Limiter_Multiplier", 8,
+			"Show_Suggestions", "True",
+			"Show_Favorites", "True",
 		],
 		"Characters", [
 			"I_Dot_Shift_I_Dotless", "Default",
@@ -243,7 +245,8 @@ Class Cfg {
 			local tabLabelChars := Locale.Read("gui.options.base")
 			local tabIPA := Locale.Read("script_labels.ipa.short")
 			local uiOptions := Locale.Read("gui.options.UI")
-			local tabLabels := [tabLabelChars, tabIPA, uiOptions]
+			local composeOptions := Locale.Read("gui.options.compose")
+			local tabLabels := [tabLabelChars, tabIPA, uiOptions, composeOptions]
 
 			local optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + (84 + 25), 3), tabLabels)
 
@@ -330,9 +333,75 @@ Class Cfg {
 			local ssThresholdTitle := optionsPanel.AddText("vScripterSelectorMaxColumnsThresholdTitle x" languageSelectorX(64 + 5) " y" languageSelectorY(300 + 30 + 20 + 56) " w256 BackgroundTrans", Locale.Read("gui.options.UI.scripter.selector.max_columns_threshold"))
 
 			; Use Number Keys
-			local ssUseNumberKeysCheckbox := optionsPanel.AddCheckBox("vScripterSelectorUseNumberKeysCheckbox x" languageSelectorX() " y" languageSelectorY(300 + 30 + 18 + 84) " w320", Locale.Read("gui.options.UI.scripter.selector.use_number_keys"))
-			ssUseNumberKeysCheckbox.Value := ssUseNumberKeys
-			ssUseNumberKeysCheckbox.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Scripter_Selector_Use_Number_Keys", "UI", "bool"))
+			local ssUseNumberKeysCheckBox := optionsPanel.AddCheckBox("vScripterSelectorUseNumberKeysCheckbox x" languageSelectorX() " y" languageSelectorY(300 + 30 + 18 + 84) " w320", Locale.Read("gui.options.UI.scripter.selector.use_number_keys"))
+			ssUseNumberKeysCheckBox.Value := ssUseNumberKeys
+			ssUseNumberKeysCheckBox.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Scripter_Selector_Use_Number_Keys", "UI", "bool"))
+
+			optionsTabs.UseTab(composeOptions)
+
+			local composeTitle := optionsPanel.AddText("vComposeTitle x" languageSelectorX() " y" languageSelectorY(300 + 30) " w256 BackgroundTrans", Locale.Read("gui.options.compose.title"))
+
+			local composeShowSuggestionsCheckBox := optionsPanel.AddCheckBox("vComposeShowSuggestionsCheckbox x" languageSelectorX() " y" languageSelectorY(300 + 30 + 18) " w320", Locale.Read("gui.options.compose.show_suggestions"))
+			composeShowSuggestionsCheckBox.Value := Cfg.Get("Show_Suggestions", "Compose", True, "bool")
+			composeShowSuggestionsCheckBox.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Show_Suggestions", "Compose", "bool"))
+
+			local composeShowFavoritesCheckBox := optionsPanel.AddCheckBox("vComposeShowFavoritesCheckbox x" languageSelectorX() " y" languageSelectorY(300 + 30 + (18 * 2)) " w320", Locale.Read("gui.options.compose.show_favorites"))
+			composeShowFavoritesCheckBox.Value := Cfg.Get("Show_Favorites", "Compose", True, "bool")
+			composeShowFavoritesCheckBox.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Show_Favorites", "Compose", "bool"))
+
+			local composeFontSizeEdit := optionsPanel.AddEdit("vComposeFontSizeEdit Number -VScroll -HScroll x" languageSelectorX() " w64 h20 y" languageSelectorY(300 + 30 + (18 * 3) + 3))
+			local composeFontSizeUpDown := optionsPanel.AddUpDown("vComposeFontSizeUpDown Range8-96", Cfg.Get("Font_Size", "Compose", 12, "int"))
+			composeFontSizeEdit.OnEvent("Change", (CB, Zero) => Cfg.Set(CB.Value, "Font_Size", "Compose", "int"))
+			local composeFontSizeTitle := optionsPanel.AddText("vComposeFontSizeTitle x" languageSelectorX(64 + 5) " y" languageSelectorY(300 + 30 + (18 * 3) + 5) " w256 BackgroundTrans", Locale.Read("gui.options.compose.font_size"))
+
+			local composeFontNameEdit := optionsPanel.AddEdit("vComposeFontNameEdit x" languageSelectorX() " w64 h20 y" languageSelectorY(300 + 30 + (18 * 4) + 10 + 3))
+			composeFontNameEdit.Value := Cfg.Get("Font_Name", "Compose", "Noto Sans")
+			composeFontNameEdit.OnEvent("Change", (CB, Zero) => Cfg.Set(CB.Value, "Font_Name", "Compose"))
+			local composeFontNameTitle := optionsPanel.AddText("vComposeFontNameTitle x" languageSelectorX(64 + 5) " y" languageSelectorY(300 + 30 + (18 * 4) + 10 + 5) " w256 BackgroundTrans", Locale.Read("gui.options.compose.font_name"))
+
+			; Background Color
+			local composeBackgroundColorEdit := optionsPanel.AddEdit("vComposeBackgroundColorEdit x" languageSelectorX() " w64 h20 y" languageSelectorY(300 + 30 + (18 * 5) + 20 + 3))
+			composeBackgroundColorEdit.Value := Cfg.Get("Background_Color", "Compose", "White")
+			composeBackgroundColorEdit.OnEvent("Change", (CB, Zero) => ChangeSampleColor(composeBackgroundColorSample, CB.Value, "Background_Color"))
+
+			local composeBackgroundColorSample := optionsPanel.AddProgress("vComposeBackgroundColorSample x" languageSelectorX(64 + 5) " y" languageSelectorY(300 + 30 + (18 * 5) + 20 + 3.5) " w20 h20 BackgroundWhite +Border")
+			composeBackgroundColorSample.Value := 100
+			try
+				composeBackgroundColorSample.Opt("c" composeBackgroundColorEdit.Value)
+
+			local composeBackgroundColorTitle := optionsPanel.AddText("vComposeBackgroundColorTitle x" languageSelectorX(64 + 5 + 25) " y" languageSelectorY(300 + 30 + (18 * 5) + 20 + 5) " w256 BackgroundTrans", Locale.Read("gui.options.compose.background_color"))
+
+
+			; Font Color
+			local composeFontColorEdit := optionsPanel.AddEdit("vComposeFontColorEdit x" languageSelectorX() " w64 h20 y" languageSelectorY(300 + 30 + (18 * 6) + 30 + 3))
+			composeFontColorEdit.Value := Cfg.Get("Font_Color", "Compose", "Black")
+			composeFontColorEdit.OnEvent("Change", (CB, Zero) => ChangeSampleColor(composeFontColorSample, CB.Value, "Font_Color"))
+
+			local composeFontColorSample := optionsPanel.AddProgress("vComposeFontColorSample x" languageSelectorX(64 + 5) " y" languageSelectorY(300 + 30 + (18 * 6) + 30 + 3.5) " w20 h20 BackgroundWhite +Border")
+			composeFontColorSample.Value := 100
+			try
+				composeFontColorSample.Opt("c" composeFontColorEdit.Value)
+
+			local composeFontColorTitle := optionsPanel.AddText("vComposeFontColorTitle x" languageSelectorX(64 + 5 + 25) " y" languageSelectorY(300 + 30 + (18 * 6) + 30 + 5) " w256 BackgroundTrans", Locale.Read("gui.options.compose.font_color"))
+
+
+			;
+
+			local composeMaxLineLengthEdit := optionsPanel.AddEdit("vComposeMaxLineLengthEdit Number -VScroll -HScroll x" languageSelectorX() " w64 h20 y" languageSelectorY(300 + 30 + (18 * 7) + 40 + 3))
+			local composeMaxLineLengthUpDown := optionsPanel.AddUpDown("vComposeMaxLineLengthUpDown Range32-512", Cfg.Get("Suggestions_Line_Max_Length", "Compose", 80, "int"))
+			composeMaxLineLengthEdit.OnEvent("Change", (CB, Zero) => Cfg.Set(CB.Value, "Suggestions_Line_Max_Length", "Compose", "int"))
+			local composeMaxLineLengthTitle := optionsPanel.AddText("vComposeMaxLineLengthTitle x" languageSelectorX(64 + 5) " y" languageSelectorY(300 + 30 + (18 * 7) + 40 + 5) " w256 BackgroundTrans", Locale.Read("gui.options.compose.max_line_length"))
+
+			local composeMaxLimiterEdit := optionsPanel.AddEdit("vComposeMaxLimiterEdit Number -VScroll -HScroll x" languageSelectorX() " w64 h20 y" languageSelectorY(300 + 30 + (18 * 8) + 50 + 3))
+			local composeMaxLimiterUpDown := optionsPanel.AddUpDown("vComposeMaxLimiterUpDown Range32-512", Cfg.Get("Suggestions_Limiter", "Compose", 80, "int"))
+			composeMaxLimiterEdit.OnEvent("Change", (CB, Zero) => Cfg.Set(CB.Value, "Suggestions_Limiter", "Compose", "int"))
+			local composeMaxLimiterMultiplierMark := optionsPanel.AddText("vComposeMaxLimiterMultiplierMark x" languageSelectorX(64 + 2.5) " y" languageSelectorY(300 + 30 + (18 * 8) + 50 + 5) " w16 BackgroundTrans Center", Chr(0x00D7))
+
+			local caomposeMaxLimiterMultiplierEdit := optionsPanel.AddEdit("vComposeMaxLimiterMultiplierEdit Number -VScroll -HScroll x" languageSelectorX(64 + 5 + 16) " w32 h20 y" languageSelectorY(300 + 30 + (18 * 8) + 50 + 3))
+			local composeMaxLimiterMultiplierUpDown := optionsPanel.AddUpDown("vComposeMaxLimiterMultiplierUpDown Range1-96", Cfg.Get("Suggestions_Limiter_Multiplier", "Compose", 2, "int"))
+			caomposeMaxLimiterMultiplierEdit.OnEvent("Change", (CB, Zero) => Cfg.Set(CB.Value, "Suggestions_Limiter_Multiplier", "Compose", "int"))
+
+			local composeMaxLimiterTitle := optionsPanel.AddText("vComposeMaxLimiterTitle x" languageSelectorX(64 + 5 + 16 + 38) " y" languageSelectorY(300 + 30 + (18 * 8) + 50 + 5) " w256 BackgroundTrans", Locale.Read("gui.options.compose.max_length"))
 
 
 			optionsTabs.UseTab()
@@ -406,6 +475,15 @@ Class Cfg {
 				}
 				Cfg.Set(remapping, "Layout_Remapping", , "bool")
 				KbdBinder.RebuildBinds()
+			}
+
+			ChangeSampleColor(guiControl, color, option) {
+				try {
+					guiControl.Opt("c" color)
+					guiControl.Redraw()
+					Cfg.Set(color, option, "Compose")
+				}
+				return
 			}
 		}
 

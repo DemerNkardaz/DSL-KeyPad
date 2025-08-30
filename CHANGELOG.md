@@ -11,6 +11,8 @@
   - Library extended to 5,400+ Unicode characters.
   - Addded missed latin characters:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
+  - Addded missed miscellaneous characters:
+    - [ ⸸ ⸶ ⸷ ]
   - Added support for new Latin layouts:
     - Blaze, Canary (Ortho variant), Engrammer, Focal, Pine v4, Rain, Recurva
   - Added support for new Cyrillic layouts:
@@ -26,6 +28,7 @@
   - Added more “mirror” Shift combinations and their description in the “Help” tab.
   - “Help” info for roman numerals mode extended.
   - Added “ToolTipOptions” external library, allowing changing the appearance of tooltips. https://www.autohotkey.com/boards/viewtopic.php?f=83&t=113308
+  - Added options for “Compose” customization.
 
 - Changes:
 
@@ -114,6 +117,8 @@
   - Библиотека расширена до 5,400+ символов Unicode.
   - Добавлены пропущенные символы латиницы:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
+  - Добавлены пропущенные прочие символы:
+    - [ ⸸ ⸶ ⸷ ]
   - Добавлена поддержка новых раскладок латиницы:
     - Blaze, Canary (Ortho вариант), Engrammer, Focal, Pine v4, Rain, Recurva
   - Добавлена поддержка новых раскладок кириллицы:
@@ -129,6 +134,7 @@
   - Добавлено больше «зеркальных Shift-комбинаций» и описание их во вкладке «Помощь».
   - Расширена информация во вкладке «Помощь» о режиме ввода римских чисел.
   - Добавлена сторонняя библиотека «ToolTipOptions», позволяющая изменять вид всплывающих подсказок. https://www.autohotkey.com/boards/viewtopic.php?f=83&t=113308
+  - Добавлены настройки для кастомизации режима «Композиции».
 
 - Изменения:
 

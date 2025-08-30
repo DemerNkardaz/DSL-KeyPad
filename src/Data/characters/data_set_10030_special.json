@@ -397,6 +397,15 @@
 		"groups": ["Special Characters", "Special Fast Secondary"],
 		"options": { "fastKey": "NumDiv" }
 	},
+	"dagger_[left,right]_guard", {
+		"unicode": ["2E36", "2E37"],
+		"tags": [
+			["dagger with left guard", "даггер с левой гардой"],
+			["dagger with right guard", "даггер с правой гардой"]
+		],
+		"groups": ["Special Characters", "Smelting Special"],
+		"recipe": [["${dagger}\\"], ["${dagger}/"]]
+	},
 	"dagger_double", {
 		"unicode": "2021",
 		"tags": ["double dagger", "двойной даггер", "двойной крест"],
@@ -410,6 +419,12 @@
 		"groups": ["Special Characters"],
 		"options": { "fastKey": "<! NumDiv" },
 		"recipe": ["${dagger×3}", "${dagger_double}${dagger}"]
+	},
+	"dagger_turned", {
+		"unicode": "2E38",
+		"tags": ["turned dagger", "перевёрнутый даггер", "перевёрнутый крест"],
+		"groups": ["Special Characters", "Smelting Special"],
+		"recipe": ["${dagger}${arrow_left_circle}"]
 	},
 	"fraction_slash", {
 		"unicode": "2044",

@@ -44,6 +44,9 @@ Class ChrCrafter {
 	ComposeMode() {
 		TooltipPresets.Select("Compose")
 
+		local showSuggestions := Cfg.Get("Show_Suggestions", "Compose", True, "bool")
+		local showFavorites := Cfg.Get("Show_Favorites", "Compose", True, "bool")
+
 		this.isComposeInstanceActive := True
 		local composeObject := {}
 		composeObject.ChrBlockInstance := ChrBlock()
@@ -54,16 +57,20 @@ Class ChrCrafter {
 		composeObject.pastInput := ""
 
 		composeObject.tooltipSuggestions := ""
-		composeObject.favoriteSuggestions := this.ReadFavorites()
+		composeObject.favoriteSuggestions := ""
 
-		composeObject.favoriteSuggestions := (
-			composeObject.favoriteSuggestions != "" ? (
-				"`n" Chrs([0x2E3B, 10]) "`n"
-				Chr(0x272A) " " Locale.Read("dictionary.favorites") "`n"
-				RegExReplace(composeObject.favoriteSuggestions, ",\s+$", "") "`n"
-				Chrs([0x2E3B, 10])
-			) : ""
-		)
+		if showFavorites {
+			composeObject.favoriteSuggestions := this.ReadFavorites()
+
+			composeObject.favoriteSuggestions := (
+				composeObject.favoriteSuggestions != "" ? (
+					"`n" Chrs([0x2E3B, 10]) "`n"
+					Chr(0x272A) " " Locale.Read("dictionary.favorites") "`n"
+					RegExReplace(composeObject.favoriteSuggestions, ",\s+$", "") "`n"
+					Chrs([0x2E3B, 10])
+				) : ""
+			)
+		}
 
 		composeObject.insertType := ""
 		composeObject.currentInputMode := Locale.ReadInject("current_input_mode", ["[" Cfg.SessionGet("Input_Mode") "]"])
@@ -84,14 +91,14 @@ Class ChrCrafter {
 
 		ComposeSuggestedTooltip() {
 			local recipesToBeSuggested := this.ValidateRecipes(inputWithoutBackticks, True)
-			composeObject.tooltipSuggestions := composeObject.input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
+			composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 			Util.CaretTooltip(
 				(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 				" " composeObject.input "`n"
 				composeObject.currentInputMode
-				(composeObject.favoriteSuggestions)
-				((StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
+				(showFavorites ? composeObject.favoriteSuggestions : "")
+				(showSuggestions && (StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
 			)
 		}
 
@@ -100,7 +107,7 @@ Class ChrCrafter {
 				(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 				" "
 				composeObject.input
-				(composeObject.favoriteSuggestions)
+				(showFavorites ? composeObject.favoriteSuggestions : "")
 			),
 			"unialt", (*) => Util.CaretTooltip(
 				(Chr(0x2B1C))
@@ -249,15 +256,15 @@ Class ChrCrafter {
 
 								if composeObject.insertType = "" {
 									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), True)
-									composeObject.tooltipSuggestions := composeObject.input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
+									composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 									Util.CaretTooltip(
 										(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 										" "
 										composeObject.input "`n"
 										composeObject.currentInputMode
-										(composeObject.favoriteSuggestions)
-										((StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
+										(showFavorites ? composeObject.favoriteSuggestions : "")
+										(showSuggestions && (StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
 									)
 								}
 
@@ -283,15 +290,15 @@ Class ChrCrafter {
 
 								if (composeObject.input != originalInput && composeObject.insertType = "") {
 									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), True)
-									composeObject.tooltipSuggestions := composeObject.input != "" ? this.FormatSuggestions(&recipesToBeSuggested) : ""
+									composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 									Util.CaretTooltip(
 										(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 										" "
 										composeObject.input "`n"
 										composeObject.currentInputMode
-										(composeObject.favoriteSuggestions)
-										((StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
+										(showFavorites ? composeObject.favoriteSuggestions : "")
+										(showSuggestions && (StrLen(composeObject.tooltipSuggestions) > 0) ? "`n" composeObject.tooltipSuggestions : "")
 									)
 								}
 
