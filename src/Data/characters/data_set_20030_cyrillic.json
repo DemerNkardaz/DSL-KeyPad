@@ -804,7 +804,7 @@
 		"symbol": { "letter": "${cyr_[c,s]_let_t}" }
 	},
 	"cyr_[c,s]_let_t__middle_hook", {
-		"unicode": ["A68A", "A68A"],
+		"unicode": ["A68A", "A68B"],
 		"options": { "fastKey": "<!>+ $?Secondary" },
 		"symbol": { "letter": "${cyr_[c,s]_let_t}" },
 		"recipe": ["$${arrow_right}"]

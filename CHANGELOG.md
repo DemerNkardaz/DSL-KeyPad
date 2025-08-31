@@ -41,6 +41,7 @@
 - Fixes:
 
   - Fixed “Compositing” mode crash with “?” recipes.
+  - Fixed a mistake where the small letter [ ꚋ ] was actually capital [ Ꚋ ].
 
 ---
 
@@ -148,6 +149,7 @@
 - Исправления:
 
   - Исправлена остановка режима «Композиции» с рецептами символа «?».
+  - Исправлена ошибка, когда строчный символ [ ꚋ ] на самом деле был прописным [ Ꚋ ].
 
 ---
 
