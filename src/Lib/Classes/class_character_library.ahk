@@ -65,6 +65,7 @@ Class ChrLib {
 		"manichaean",
 		"imperial_aramaic",
 		"manichaean",
+		"samaritan",
 		;
 		"ipa",
 		"&ipa",

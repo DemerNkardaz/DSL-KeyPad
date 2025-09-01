@@ -1,0 +1,90 @@
+[
+	"samaritan_n_let_a_alaf", {
+		"unicode": "0800",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_a_in", {
+		"unicode": "080F",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"samaritan_n_let_b_bit", {
+		"unicode": "0801",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_b_baa", {
+		"unicode": "0805",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"samaritan_n_let_d_dalat", {
+		"unicode": "0803",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_f_fi", {
+		"unicode": "0810",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_g_gaman", {
+		"unicode": "0802",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_h_iy", {
+		"unicode": "0804",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_h_it", {
+		"unicode": "0807",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"samaritan_n_let_k_kaaf", {
+		"unicode": "080A",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_l_labat", {
+		"unicode": "080B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_m_mim", {
+		"unicode": "080C",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_n_nun", {
+		"unicode": "080D",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_q_quf", {
+		"unicode": "0812",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_r_rish", {
+		"unicode": "0813",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_s_shan", {
+		"unicode": "0814",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_s_tsaadiy", {
+		"unicode": "0811",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"samaritan_n_let_s_singaat", {
+		"unicode": "080E",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"samaritan_n_let_t_taaf", {
+		"unicode": "0815",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_let_t_tit", {
+		"unicode": "0808",
+		"options": { "altLayoutKey": ">! $" }
+	},
+	"samaritan_n_let_y_yut", {
+		"unicode": "0809",
+		"options": { "altLayoutKey": "$ | J" }
+	},
+	"samaritan_n_let_z_zen", {
+		"unicode": "0806",
+		"options": { "altLayoutKey": "$" }
+	}
+]

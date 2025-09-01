@@ -1,0 +1,37 @@
+{
+	"en-US": {
+		"script_labels": {
+			"samaritan": "Samaritan"
+		},
+		"generated": {
+			"prefix": { "samaritan": "Samaritan" },
+			"tag": { "samaritan": "samaritan" }
+		},
+		"scripts": {
+			"samaritan": {
+				"n_let_a_alaf": { "letter_locale": "Alaf" },
+				"n_let_a_in": { "letter_locale": "In" },
+				"n_let_b_bit": { "letter_locale": "Bit" },
+				"n_let_b_baa": { "letter_locale": "Baa" },
+				"n_let_d_dalat": { "letter_locale": "Dalat" },
+				"n_let_f_fi": { "letter_locale": "Fi" },
+				"n_let_g_gaman": { "letter_locale": "Gaman" },
+				"n_let_h_iy": { "letter_locale": "Iy" },
+				"n_let_h_it": { "letter_locale": "It" },
+				"n_let_k_kaaf": { "letter_locale": "Kaaf" },
+				"n_let_l_labat": { "letter_locale": "Labat" },
+				"n_let_m_mim": { "letter_locale": "Mim" },
+				"n_let_n_nun": { "letter_locale": "Nun" },
+				"n_let_q_quf": { "letter_locale": "Quf" },
+				"n_let_r_rish": { "letter_locale": "Rish" },
+				"n_let_s_shan": { "letter_locale": "Shan" },
+				"n_let_s_singaat": { "letter_locale": "Singaat" },
+				"n_let_s_tsaadiy": { "letter_locale": "Tsaadiy" },
+				"n_let_t_taaf": { "letter_locale": "Taaf" },
+				"n_let_t_tit": { "letter_locale": "Tit" },
+				"n_let_y_yut": { "letter_locale": "Yut" },
+				"n_let_z_zen": { "letter_locale": "Zen" }
+			}
+		}
+	}
+}

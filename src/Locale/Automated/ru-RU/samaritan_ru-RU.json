@@ -1,0 +1,37 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"samaritan": "Самаритянское письмо"
+		},
+		"generated": {
+			"prefix": { "samaritan": "Самаритянск$(ая|ий|ое)" },
+			"tag": { "samaritan": "самаритянск$(ая|ий|ое)" }
+		},
+		"scripts": {
+			"samaritan": {
+				"n_let_a_alaf": { "letter_locale": "Алаф" },
+				"n_let_a_in": { "letter_locale": "Ин" },
+				"n_let_b_bit": { "letter_locale": "Бит" },
+				"n_let_b_baa": { "letter_locale": "Баа" },
+				"n_let_d_dalat": { "letter_locale": "Далат" },
+				"n_let_f_fi": { "letter_locale": "Фи" },
+				"n_let_g_gaman": { "letter_locale": "Гаман" },
+				"n_let_h_iy": { "letter_locale": "Ий" },
+				"n_let_h_it": { "letter_locale": "Ит" },
+				"n_let_k_kaaf": { "letter_locale": "Кааф" },
+				"n_let_l_labat": { "letter_locale": "Лабат" },
+				"n_let_m_mim": { "letter_locale": "Мим" },
+				"n_let_n_nun": { "letter_locale": "Нун" },
+				"n_let_q_quf": { "letter_locale": "Куф" },
+				"n_let_r_rish": { "letter_locale": "Риш" },
+				"n_let_s_shan": { "letter_locale": "Шан" },
+				"n_let_s_singaat": { "letter_locale": "Сингаат" },
+				"n_let_s_tsaadiy": { "letter_locale": "Цаадий" },
+				"n_let_t_taaf": { "letter_locale": "Тааф" },
+				"n_let_t_tit": { "letter_locale": "Тит" },
+				"n_let_y_yut": { "letter_locale": "Ют" },
+				"n_let_z_zen": { "letter_locale": "Зен" }
+			}
+		}
+	}
+}

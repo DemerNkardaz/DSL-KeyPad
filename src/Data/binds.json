@@ -879,6 +879,47 @@
 				"Space": {"<^>!": "phoenician_n_sym_word_separator"}
 			}
 		},
+		"Samaritan": {
+			"ForceSingle": true,
+			"Flat": {
+				"A": "samaritan_n_let_a_alaf",
+				"B": "samaritan_n_let_b_bit",
+				"C": "",
+				"D": "samaritan_n_let_d_dalat",
+				"E": "",
+				"F": "samaritan_n_let_f_fi",
+				"G": "samaritan_n_let_g_gaman",
+				"H": "samaritan_n_let_h_it",
+				"I": "",
+				"J": "samaritan_n_let_y_yut",
+				"K": "samaritan_n_let_k_kaaf",
+				"L": "samaritan_n_let_l_labat",
+				"M": "samaritan_n_let_m_mim",
+				"N": "samaritan_n_let_n_nun",
+				"O": "",
+				"P": "",
+				"Q": "samaritan_n_let_q_quf",
+				"R": "samaritan_n_let_r_rish",
+				"S": "samaritan_n_let_s_shan",
+				"T": "samaritan_n_let_t_taaf",
+				"U": "",
+				"V": "",
+				"W": "",
+				"X": "",
+				"Y": "samaritan_n_let_y_yut",
+				"Z": "samaritan_n_let_z_zen"
+			},
+			"Moded": {
+				"A": {"<^>!": "samaritan_n_let_a_in"},
+				"B": {"<^>!": "samaritan_n_let_b_baa"},
+				"H": {"<^>!": "samaritan_n_let_h_it"},
+				"S": {
+					"<^>!": "samaritan_n_let_s_singaat",
+					"<!": "samaritan_n_let_s_tsaadiy"
+				},
+				"T": {"<^>!": "samaritan_n_let_t_tit"}
+			}
+		},
 		"Ancient South Arabian": {
 			"ForceSingle": true,
 			"Flat": {

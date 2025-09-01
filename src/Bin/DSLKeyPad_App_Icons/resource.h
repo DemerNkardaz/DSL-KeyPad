@@ -88,6 +88,7 @@
 #define IDI_GLYPH_DOUBLE_CIRCLED 184
 #define IDI_GLYPH_TAG 185
 #define IDI_MANICHAEAN 186
+#define IDI_SAMARITAN 187
 
 // Next default values for new objects
 //

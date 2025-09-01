@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-08-31 18:04:53
+				&#128228;&emsp14;2025-09-01 17:05:10
 			</td>
 		</tr>
 		<tr>
@@ -45,13 +45,13 @@ $message =@"
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Glagolitic">Noto Sans Glagolitic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Gothic">Noto Sans Gothic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Imperial+Aramaic">Noto Sans Imperial Aramaic</a></li>
-						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Manichaean">Noto Sans Manichaean</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Inscriptional+Parthian">Noto Sans Inscriptional Parthian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Linear+A">Noto Sans Linear A</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Linear+B">Noto Sans Linear B</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Lycian">Noto Sans Lycian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Lydian">Noto Sans Lydian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Mandaic">Noto Sans Mandaic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Manichaean">Noto Sans Manichaean</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Math">Noto Sans Math</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Hungarian">Noto Sans Old Hungarian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Old+Italic">Noto Sans Old Italic</a></li>
@@ -65,6 +65,7 @@ $message =@"
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Palmyrene">Noto Sans Palmyrene</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Phoenician">Noto Sans Phoenician</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Runic">Noto Sans Runic</a></li>
+						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Samaritan">Noto Sans Samaritan</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Shavian">Noto Sans Shavian</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Sidetic">Noto Sans Sidetic</a></li>
 						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Sogdian">Noto Sans Sogdian</a></li>

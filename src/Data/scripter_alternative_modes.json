@@ -101,6 +101,16 @@
 		"uiid": "Phoenician",
 		"icons": ["phoenician"]
 	},
+	"Samaritan", {
+		"preview": [
+			"\u0810\u081f\u0813\u080f\u0826\u0804 \u0814\u0805\u080c\u0809\u080c \u0814\u0809\u0800\u0805\u080b"
+		],
+		"fonts": ["Noto Sans Samaritan"],
+		"locale": "samaritan",
+		"bindings": ["Samaritan"],
+		"uiid": "Samaritan",
+		"icons": ["samaritan"]
+	},
 	"Ancient South Arabian", {
 		"preview": [
 			"\uD802\uDE6B\uD802\uDE65\uD802\uDE6B\uD802\uDE68\u2003\uD802\uDE79\uD802\uDE69\uD802\uDE62\uD802\uDE63\uD802\uDE7A\uD802\uDE63"

@@ -17,6 +17,7 @@
 	"Noto Sans Palmyrene": ["palmyrene"],
 	"Noto Sans Manichaean": ["manichaean"],
 	"Noto Sans Imperial Aramaic": ["imperial_aramaic"],
+	"Noto Sans Samaritan": ["samaritan"],
 	"Segoe UI Historic": ["phoenician", "shavian"],
 	"Segoe UI Symbol": ["deseret"],
 	"Kurinto Sans": ["^alchemical", "^astrological", "^astronomical", "^symbolistics"],

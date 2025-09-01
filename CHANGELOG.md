@@ -18,7 +18,7 @@
   - Added support for new Cyrillic layouts:
     - Kharlamak, Rulemak (2018)
   - Added new Alternative modes:
-    - Imperial Aramaic, Manichaean
+    - Imperial Aramaic, Manichaean, Samaritan
   - Added new Glyphs variations:
     - Regional Indicator, Circled, Double Circled, Negative Circled, Parenthesized, Squared, Negative Squared, with Dot, with Comma, Tags
   - Added new options:
@@ -126,7 +126,7 @@
   - Добавлена поддержка новых раскладок кириллицы:
     - Харламак, Рулемак (2018)
   - Добавлены новые Альтернативные режимы:
-    - Имперское арамейское, Манихейское письмо
+    - Имперское арамейское, Манихейское, Самаритянское письмо
   - Добавлены новые Вариации глифов:
     - Региональные индикаторы, в круге, двойном круге, закрашенном круге, скобках, квадрате, закрашенном квадратке, с точкой и с запятой, теги
   - Добавлены новые настройки:
