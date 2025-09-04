@@ -574,7 +574,8 @@ Class ChrLib {
 			"negativeSquared", ["в закрашенном квадрате", "взкв", "nsq"],
 			"fullstop", ["с точкой", "стч", "fs"],
 			"comma", ["с запятой", "сзп", "cm"],
-			"tag", ["тег", "т", "t"]
+			"tag", ["тег", "т", "t"],
+			"oblique", ["косая", "кя", "ob"],
 		)
 
 		for key, value in alterationNames {

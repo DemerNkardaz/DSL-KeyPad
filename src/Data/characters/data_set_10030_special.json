@@ -846,8 +846,16 @@
 		"unicode": "2010",
 		"tags": ["hyphen", "дефис"],
 		"groups": ["Dashes", "Smelting Special", "Special Fast Secondary"],
+		"alterations": { "oblique": "2E5D" },
 		"options": { "fastKey": "<! -" },
 		"recipe": ["1-"]
+	},
+	"hyphen_double", {
+		"unicode": "2E40",
+		"tags": ["double hyphen", "двойной дефис"],
+		"groups": ["Dashes", "Smelting Special"],
+		"alterations": { "oblique": "2E17" },
+		"recipe": ["${hyphen×2}"]
 	},
 	"no_break_hyphen", {
 		"unicode": "2011",
