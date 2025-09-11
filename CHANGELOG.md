@@ -12,7 +12,7 @@
   - Addded missed latin characters:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
   - Addded missed miscellaneous characters:
-    - [ ⸸ ⸶ ⸷ ] [ ⹀ ⹝ ⸗ ]
+    - [ ⸸ ⸶ ⸷ ] [ ⹀ ⹝ ⸗ ] [ ⅏ ]
   - Added support for new Latin layouts:
     - Blaze, Canary (Ortho variant), Engrammer, Focal, Pine v4, Rain, Recurva
   - Added support for new Cyrillic layouts:
@@ -120,7 +120,7 @@
   - Добавлены пропущенные символы латиницы:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
   - Добавлены пропущенные прочие символы:
-    - [ ⸸ ⸶ ⸷ ] [ ⹀ ⹝ ⸗ ]
+    - [ ⸸ ⸶ ⸷ ] [ ⹀ ⹝ ⸗ ] [ ⅏ ]
   - Добавлена поддержка новых раскладок латиницы:
     - Blaze, Canary (Ortho вариант), Engrammer, Focal, Pine v4, Rain, Recurva
   - Добавлена поддержка новых раскладок кириллицы:
