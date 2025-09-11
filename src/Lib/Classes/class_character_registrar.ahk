@@ -952,6 +952,7 @@ Class ChrReg {
 				"let", "letter",
 				"lig", "ligature",
 				"dig", "digraph",
+				"mark", "mark",
 				"num", "numeral",
 				"sym", "symbol",
 				"sign", "sign",

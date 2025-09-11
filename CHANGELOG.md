@@ -4,11 +4,11 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.5.3 α — (upcoming release)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.5.3)
+### [0.1.5.3 α — 2025-09-11](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.5.3)
 
 - Additions:
 
-  - Library extended to 5,400+ Unicode characters.
+  - Library extended to 5,500+ Unicode characters.
   - Addded missed latin characters:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
   - Addded missed miscellaneous characters:
@@ -112,11 +112,11 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [0.1.5.3 α — (предстоящий релиз)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.5.3)
+### [0.1.5.3 α — 2025-09-11](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.5.3)
 
 - Дополнения:
 
-  - Библиотека расширена до 5,400+ символов Unicode.
+  - Библиотека расширена до 5,500+ символов Unicode.
   - Добавлены пропущенные символы латиницы:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
   - Добавлены пропущенные прочие символы:

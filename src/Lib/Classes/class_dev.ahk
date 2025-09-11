@@ -138,7 +138,7 @@ Class Dev {
 			'					<ul>`n'
 			'						<li><a href="https://fonts.google.com/specimen/Noto+Serif">Noto Serif</a> <i>Required</i></li>`n'
 			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans+Symbols">Noto Sans Symbols</a> <i>Required</i></li>`n'
-			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans">Noto Sans</a> <i>Important</i></li>`n'
+			'						<li><a href="https://fonts.google.com/specimen/Noto+Sans">Noto Sans</a> <i>Required</i></li>`n'
 			fontsArray.ToString("")
 			'					</ul>`n'
 			'				</details>`n'

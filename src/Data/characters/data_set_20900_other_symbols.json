@@ -1,0 +1,8 @@
+[
+	"symbol_for_samaritan_source", {
+		"unicode": "214F",
+		"tags": ["symbol for Samaritan source", "символ для Самаритянского источника"],
+		"groups": ["Other Symbols"],
+		"recipe": ["smsr"]
+	}
+]

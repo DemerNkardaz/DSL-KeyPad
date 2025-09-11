@@ -918,20 +918,27 @@
 			},
 			"Moded": {
 				"A": {
+					"<^<!": "samaritan_n_mark_in_alaf",
 					"<^>!": "samaritan_n_let_a_in",
 					"<!": "samaritan_n_sign_a[_long,]_vowel",
 					"<^>!<!": "samaritan_n_sign_a_[overlong,short]_vowel",
 					"<^>!<+": "samaritan_n_sign_a_aa[_long,]_vowel",
 					"<^>!>+": "samaritan_n_sign_a_aa_overlong_vowel"
 				},
-				"B": {"<^>!": "samaritan_n_let_b_baa"},
-				"H": {"<^>!": "samaritan_n_let_h_it"},
+				"B": { "<^>!": "samaritan_n_let_b_baa" },
+				"D": { "<^<!": "samaritan_n_mark_dagesh" },
+				"H": { "<^>!": "samaritan_n_let_h_it" },
+				"I": { "<^<!": "samaritan_n_mark_in" },
+				"J": { "<^<!": "samaritan_n_mark_epenthetic_yut" },
 				"S": {
 					"<^>!": "samaritan_n_let_s_singaat",
 					"<!": "samaritan_n_let_s_tsaadiy"
 				},
-				"T": {"<^>!": "samaritan_n_let_t_tit"},
-				"Slash": {"<^>!": "samaritan_n_sym_punctuation_sof_mashfaat"},
+				"N": { "<^<!": "samaritan_n_mark_nequdaa" },
+				"O": { "<^<!": "samaritan_n_mark_occlusion" },
+				"T": { "<^>!": "samaritan_n_let_t_tit" },
+				"Y": { "<^<!": "samaritan_n_mark_epenthetic_yut" },
+				"Slash": { "<^>!": "samaritan_n_sym_punctuation_sof_mashfaat" },
 				"Semicolon": {
 					"<+": "samaritan_n_sym_punctuation_anged",
 					">+": "samaritan_n_sym_punctuation_turu",
@@ -939,8 +946,8 @@
 					"<^>!<+": "samaritan_n_sym_punctuation_atmaau",
 					"<^>!<!": "samaritan_n_sym_punctuation_shiyyaalaa"
 				},
-				"LeftBracket": {"<^>!": "samaritan_n_sym_punctuation_qitsa"},
-				"RightBracket": {"<^>!": "samaritan_n_sym_punctuation_melodic_qitsa"}
+				"LeftBracket": { "<^>!": "samaritan_n_sym_punctuation_qitsa" },
+				"RightBracket": { "<^>!": "samaritan_n_sym_punctuation_melodic_qitsa" }
 			}
 		},
 		"Ancient South Arabian": {

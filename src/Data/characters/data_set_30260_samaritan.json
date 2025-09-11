@@ -149,6 +149,31 @@
 		"unicode": "082C",
 		"options": { "altLayoutKey": "$" }
 	},
+	"samaritan_n_mark_in", {
+		"unicode": "0816",
+		"options": { "altLayoutKey": "<^<! I" }
+	},
+	"samaritan_n_mark_in_alaf", {
+		"unicode": "0817",
+		"options": { "altLayoutKey": "<^<! A" }
+	},
+	"samaritan_n_mark_dagesh", {
+		"unicode": "0819",
+		"options": { "altLayoutKey": "<^<! D" }
+	},
+	"samaritan_n_mark_nequdaa", {
+		"unicode": "082D",
+		"options": { "altLayoutKey": "<^<! N" }
+	},
+	"samaritan_n_mark_occlusion", {
+		"unicode": "0818",
+		"options": { "altLayoutKey": "<^<! O" }
+	},
+	"samaritan_n_mark_epenthetic_yut", {
+		"unicode": "081B",
+		"alterations": { "modifier": "081A" },
+		"options": { "altLayoutKey": "<^<! Y | <^<! J" }
+	},
 	"samaritan_n_sym_punctuation_annaau", {
 		"unicode": "083E",
 		"options": { "altLayoutKey": "," }

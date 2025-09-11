@@ -22,6 +22,7 @@
 				"letter": "letter",
 				"ligature": "ligature",
 				"digraph": "digraph",
+				"mark": "mark",
 				"numeral": "numeral",
 				"symbol": "symbol",
 				"sign": "sign",

@@ -22,6 +22,7 @@
 				"letter": "буква",
 				"ligature": "лигатура",
 				"digraph": "диграф",
+				"mark": "метка",
 				"numeral": "число",
 				"symbol": "символ",
 				"sign": "знак",
