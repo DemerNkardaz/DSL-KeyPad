@@ -25,5 +25,8 @@
 	],
 	"Noto Sans Glagolitic": [
 		"1E000", "1E02F"
+	],
+	"Noto Sans Samaritan": [
+		"0800", "083F"
 	]
 }

@@ -87,6 +87,68 @@
 		"unicode": "0806",
 		"options": { "altLayoutKey": "$" }
 	},
+	"samaritan_n_sign_a_vowel", {
+		"unicode": "0823",
+		"options": { "altLayoutKey": "<! $" }
+	},
+	"samaritan_n_sign_a_long_vowel", {
+		"unicode": "0822",
+		"options": { "altLayoutKey": "c*<! $" }
+	},
+	"samaritan_n_sign_a_short_vowel", {
+		"unicode": "0825",
+		"alterations": { "modifier": "0824" },
+		"options": { "altLayoutKey": ">!<! $" }
+	},
+	"samaritan_n_sign_a_overlong_vowel", {
+		"unicode": "0821",
+		"options": { "altLayoutKey": "c*>!<! $" }
+	},
+	"samaritan_n_sign_a_aa_vowel", {
+		"unicode": "0820",
+		"options": { "altLayoutKey": ">!<+ $" }
+	},
+	"samaritan_n_sign_a_aa_long_vowel", {
+		"unicode": "081F",
+		"options": { "altLayoutKey": "c*>!<+ $" }
+	},
+	"samaritan_n_sign_a_aa_overlong_vowel", {
+		"unicode": "081E",
+		"options": { "altLayoutKey": ">!>+ $" }
+	},
+	"samaritan_n_sign_e_vowel", {
+		"unicode": "081D",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_sign_e_long_vowel", {
+		"unicode": "081C",
+		"options": { "altLayoutKey": "c* $" }
+	},
+	"samaritan_n_sign_i_vowel", {
+		"unicode": "082A",
+		"alterations": { "modifier": "0828" },
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_sign_i_long_vowel", {
+		"unicode": "0829",
+		"options": { "altLayoutKey": "c* $" }
+	},
+	"samaritan_n_sign_o_vowel", {
+		"unicode": "082B",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_sign_u_vowel", {
+		"unicode": "0827",
+		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_sign_u_long_vowel", {
+		"unicode": "0826",
+		"options": { "altLayoutKey": "c* $" }
+	},
+	"samaritan_n_sign_x_sukun_vowel", {
+		"unicode": "082C",
+		"options": { "altLayoutKey": "$" }
+	},
 	"samaritan_n_sym_punctuation_annaau", {
 		"unicode": "083E",
 		"options": { "altLayoutKey": "," }
