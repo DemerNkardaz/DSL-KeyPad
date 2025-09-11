@@ -92,6 +92,7 @@ winget install AutoHotkey.AutoHotkey
   - [Aghwan](https://en.wikipedia.org/wiki/Caucasian_Albanian_script)
   - [Etruscan, Oscan, South Picene, Umbrian…](https://en.wikipedia.org/wiki/Old_Italic_scripts)
   - [Phoenician](https://en.wikipedia.org/wiki/Phoenician_alphabet)
+  - [Samaritan](https://en.wikipedia.org/wiki/Samaritan_scriptbet)
   - [Ancient South Arabian](https://en.wikipedia.org/wiki/Ancient_South_Arabian_script)
   - [Ancient North Arabian](https://en.wikipedia.org/wiki/Ancient_North_Arabian)
   - [Carian](https://en.wikipedia.org/wiki/Carian_alphabets)
@@ -105,6 +106,7 @@ winget install AutoHotkey.AutoHotkey
   - [Imperial Aramaic](https://en.wikipedia.org/wiki/Aramaic_alphabet)
   - [Palmyrene](https://en.wikipedia.org/wiki/Palmyrene_alphabet)
   - [Inscriptional Parthian](https://en.wikipedia.org/wiki/Inscriptional_Parthian)
+  - [Manichaean](https://en.wikipedia.org/wiki/Manichaean_script)
   - [Deseret](https://en.wikipedia.org/wiki/Deseret_alphabet)
   - [Shavian](https://en.wikipedia.org/wiki/Shavian_alphabet)
 
@@ -123,7 +125,7 @@ winget install AutoHotkey.AutoHotkey
 
 - **Internal keyboard layouts**: Includes support for user-defined layouts.<br>Includes built-in support for:
 
-  - **Latin:** _QWERTY_, [AZERTY](https://en.wikipedia.org/wiki/AZERTY), <span title="© David Piepgrass">[Asset](https://millikeys.sourceforge.net/asset/)</span>, <span title="© Eva Callico, AKL">[Canary](https://github.com/Apsu/Canary)</span>, [Colemak](https://en.wikipedia.org/wiki/Colemak), <span title="© Oxey">[Dhorf](https://oxey.dev/dhorf/index.html)</span>, [Dvorak](https://en.wikipedia.org/wiki/Dvorak_keyboard_layout), <span title="© GalileoBlues">[Gallium](https://github.com/GalileoBlues/Gallium)</span>, <span title="© Richard Davison">[Graphite](github.com/rdavison/graphite-layout)</span>, <span title="© Nikolay Nemshilov">[Halmak](https://github.com/kaievns/halmak)</span>, [JCUKEN](https://en.wikipedia.org/wiki/Phonetic_keyboard_layout#/media/File:UKNCkeyboard.png), <span title="© Smudge">[Nerps](https://github.com/GalileoBlues/Gallium?tab=readme-ov-file#changes)</span>, <span title="© David Norman">[Norman](https://normanlayout.info)</span>, <span title="© Keith Kim">[Qwickly](https://github.com/qwickly-org/Qwickly)</span>, <span title="© Oxey">[Stronk](https://oxey.dev/stronk/index.html)</span>, <span title="© Oxey">[Sturdy](https://oxey.dev/sturdy/index.html)</span>, <span title="© OJ Bucao">[Workman](https://workmanlayout.org)</span>.
+  - **Latin:** _QWERTY_, [AZERTY](https://en.wikipedia.org/wiki/AZERTY), <span title="© David Piepgrass">[Asset](https://millikeys.sourceforge.net/asset/)</span>, <span title="© Oxey">[Blaze](https://layouts.wiki/layouts/2022/blaze/)</span>, <span title="© Eva Callico, AKL">[Canary](https://github.com/Apsu/Canary)</span>, [Colemak](https://en.wikipedia.org/wiki/Colemak), <span title="© Oxey">[Dhorf](https://oxey.dev/dhorf/index.html)</span>, [Dvorak](https://en.wikipedia.org/wiki/Dvorak_keyboard_layout), <span title="© Suraj N. Kurapati">[Engrammer](https://sunaku.github.io/engrammer-keyboard-layout.html)</span>, <span title="© Keyhabit">[Focal](https://github.com/Keyhabit/Focal-keyboard-layout)</span>, <span title="© GalileoBlues">[Gallium](https://github.com/GalileoBlues/Gallium)</span>, <span title="© Richard Davison">[Graphite](https://github.com/rdavison/graphite-layout)</span>, <span title="© Nikolay Nemshilov">[Halmak](https://github.com/kaievns/halmak)</span>, [JCUKEN](https://en.wikipedia.org/wiki/Phonetic_keyboard_layout#/media/File:UKNCkeyboard.png), <span title="© Isla/Danie">[Kuntem](https://layouts.wiki/layouts/2024/kuntem/)</span>, <span title="© Smudge">[Nerps](https://github.com/GalileoBlues/Gallium?tab=readme-ov-file#changes)</span>, <span title="© David Norman">[Norman](https://normanlayout.info)</span>, <span title="QWERTY modification with ÞǷẞƏƷƔ instead of [];',.">PanQWERTY</span>, <span title="© ClemenPine">[Pine](https://layouts.wiki/layouts/2021/pine/)</span>, <span title="© Keith Kim">[Qwickly](https://github.com/qwickly-org/Qwickly)</span>, <span title="© ibrahimab000">[Rain](https://layouts.wiki/layouts/2024/rain/)</span>, <span title="© GalileoBlues">[Recurva](https://github.com/GalileoBlues/Recurva)</span>, <span title="© Oxey">[Stronk](https://oxey.dev/stronk/index.html)</span>, <span title="© Oxey">[Sturdy](https://oxey.dev/sturdy/index.html)</span>, <span title="© OJ Bucao">[Workman](https://workmanlayout.org)</span>.
   - **Cyrillic:** _ЙЦУКЕН_, [Диктор](https://github.com/mshkrebtan/diktor), [ИІУКЕН (1907)](https://ru.wikipedia.org/wiki/ЙЦУКЕН#/media/Файл:Underwood.jpg), ЯШЕРТЫ, <span title="Kharlamak">Харламак</span>, <span title="Rulemak © Geert Hendrickx">[Рулемак](https://forum.colemak.com/viewtopic.php?id=519)</span>.<br><br>**Note:** the built-in layouts have been adapted, i.e., they do not fully correspond to their originals.
 
 - **Modifications**: Allows creating user’s mods.
