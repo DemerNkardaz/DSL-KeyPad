@@ -907,7 +907,14 @@
 				"W": "",
 				"X": "",
 				"Y": "samaritan_n_let_y_yut",
-				"Z": "samaritan_n_let_z_zen"
+				"Z": "samaritan_n_let_z_zen",
+				"Comma": "samaritan_n_sym_punctuation_annaau",
+				"Dot": "samaritan_n_sym_punctuation_nequdaa",
+				"Slash": "samaritan_n_sym_punctuation_arkaanu",
+				"Semicolon": "samaritan_n_sym_punctuation_afsaaq",
+				"Apostrophe": "samaritan_n_sym_punctuation_abbreviation_mark",
+				"LeftBracket": "samaritan_n_sym_punctuation_ziqaa",
+				"RightBracket": "samaritan_n_sym_punctuation_zaef"
 			},
 			"Moded": {
 				"A": {"<^>!": "samaritan_n_let_a_in"},
@@ -917,7 +924,17 @@
 					"<^>!": "samaritan_n_let_s_singaat",
 					"<!": "samaritan_n_let_s_tsaadiy"
 				},
-				"T": {"<^>!": "samaritan_n_let_t_tit"}
+				"T": {"<^>!": "samaritan_n_let_t_tit"},
+				"Slash": {"<^>!": "samaritan_n_sym_punctuation_sof_mashfaat"},
+				"Semicolon": {
+					"<+": "samaritan_n_sym_punctuation_anged",
+					">+": "samaritan_n_sym_punctuation_turu",
+					"<^>!": "samaritan_n_sym_punctuation_bau",
+					"<^>!<+": "samaritan_n_sym_punctuation_atmaau",
+					"<^>!<!": "samaritan_n_sym_punctuation_shiyyaalaa"
+				},
+				"LeftBracket": {"<^>!": "samaritan_n_sym_punctuation_qitsa"},
+				"RightBracket": {"<^>!": "samaritan_n_sym_punctuation_melodic_qitsa"}
 			}
 		},
 		"Ancient South Arabian": {

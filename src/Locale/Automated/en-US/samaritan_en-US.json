@@ -30,7 +30,22 @@
 				"n_let_t_taaf": { "letter_locale": "Taaf" },
 				"n_let_t_tit": { "letter_locale": "Tit" },
 				"n_let_y_yut": { "letter_locale": "Yut" },
-				"n_let_z_zen": { "letter_locale": "Zen" }
+				"n_let_z_zen": { "letter_locale": "Zen" },
+				"n_sym_punctuation_annaau": { "letter_locale": "Annaau" },
+				"n_sym_punctuation_nequdaa": { "letter_locale": "Nequdaa" },
+				"n_sym_punctuation_arkaanu": { "letter_locale": "Arkaanu" },
+				"n_sym_punctuation_sof_mashfaat": { "letter_locale": "Sof Mashfaat" },
+				"n_sym_punctuation_afsaaq": { "letter_locale": "Afsaaq" },
+				"n_sym_punctuation_anged": { "letter_locale": "Anged" },
+				"n_sym_punctuation_turu": { "letter_locale": "Turu" },
+				"n_sym_punctuation_bau": { "letter_locale": "Bau" },
+				"n_sym_punctuation_atmaau": { "letter_locale": "Atmaau" },
+				"n_sym_punctuation_shiyyaalaa": { "letter_locale": "Shiyyaalaa" },
+				"n_sym_punctuation_abbreviation_mark": { "letter_locale": "Abbreviation Mark" },
+				"n_sym_punctuation_ziqaa": { "letter_locale": "Ziqaa" },
+				"n_sym_punctuation_qitsa": { "letter_locale": "Qitsa" },
+				"n_sym_punctuation_zaef": { "letter_locale": "Zaef" },
+				"n_sym_punctuation_melodic_qitsa": { "letter_locale": "Melodic Qitsa" }
 			}
 		}
 	}

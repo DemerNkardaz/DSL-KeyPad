@@ -86,5 +86,65 @@
 	"samaritan_n_let_z_zen", {
 		"unicode": "0806",
 		"options": { "altLayoutKey": "$" }
+	},
+	"samaritan_n_sym_punctuation_annaau", {
+		"unicode": "083E",
+		"options": { "altLayoutKey": "," }
+	},
+	"samaritan_n_sym_punctuation_nequdaa", {
+		"unicode": "0830",
+		"options": { "altLayoutKey": "." }
+	},
+	"samaritan_n_sym_punctuation_arkaanu", {
+		"unicode": "083C",
+		"options": { "altLayoutKey": "/" }
+	},
+	"samaritan_n_sym_punctuation_sof_mashfaat", {
+		"unicode": "083D",
+		"options": { "altLayoutKey": ">! /" }
+	},
+	"samaritan_n_sym_punctuation_afsaaq", {
+		"unicode": "0831",
+		"options": { "altLayoutKey": ";" }
+	},
+	"samaritan_n_sym_punctuation_anged", {
+		"unicode": "0832",
+		"options": { "altLayoutKey": "<+ ;" }
+	},
+	"samaritan_n_sym_punctuation_turu", {
+		"unicode": "083B",
+		"options": { "altLayoutKey": ">+ ;" }
+	},
+	"samaritan_n_sym_punctuation_bau", {
+		"unicode": "0833",
+		"options": { "altLayoutKey": ">! ;" }
+	},
+	"samaritan_n_sym_punctuation_atmaau", {
+		"unicode": "0834",
+		"options": { "altLayoutKey": ">!<+ ;" }
+	},
+	"samaritan_n_sym_punctuation_shiyyaalaa", {
+		"unicode": "0835",
+		"options": { "altLayoutKey": ">!<! ;" }
+	},
+	"samaritan_n_sym_punctuation_abbreviation_mark", {
+		"unicode": "0836",
+		"options": { "altLayoutKey": "'" }
+	},
+	"samaritan_n_sym_punctuation_ziqaa", {
+		"unicode": "0838",
+		"options": { "altLayoutKey": "[" }
+	},
+	"samaritan_n_sym_punctuation_qitsa", {
+		"unicode": "0839",
+		"options": { "altLayoutKey": ">! [" }
+	},
+	"samaritan_n_sym_punctuation_zaef", {
+		"unicode": "083A",
+		"options": { "altLayoutKey": "]" }
+	},
+	"samaritan_n_sym_punctuation_melodic_qitsa", {
+		"unicode": "0837",
+		"options": { "altLayoutKey": ">! ]" }
 	}
 ]

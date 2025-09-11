@@ -30,7 +30,22 @@
 				"n_let_t_taaf": { "letter_locale": "Тааф" },
 				"n_let_t_tit": { "letter_locale": "Тит" },
 				"n_let_y_yut": { "letter_locale": "Ют" },
-				"n_let_z_zen": { "letter_locale": "Зен" }
+				"n_let_z_zen": { "letter_locale": "Зен" },
+				"n_sym_punctuation_annaau": { "letter_locale": "Аннаау" },
+				"n_sym_punctuation_nequdaa": { "letter_locale": "Некудаа" },
+				"n_sym_punctuation_arkaanu": { "letter_locale": "Аркаану" },
+				"n_sym_punctuation_sof_mashfaat": { "letter_locale": "Соф Машфаат" },
+				"n_sym_punctuation_afsaaq": { "letter_locale": "Афсаак" },
+				"n_sym_punctuation_anged": { "letter_locale": "Ангед" },
+				"n_sym_punctuation_turu": { "letter_locale": "Туру" },
+				"n_sym_punctuation_bau": { "letter_locale": "Бау" },
+				"n_sym_punctuation_atmaau": { "letter_locale": "Атмаау" },
+				"n_sym_punctuation_shiyyaalaa": { "letter_locale": "Шийяалаа" },
+				"n_sym_punctuation_abbreviation_mark": { "letter_locale": "Знак сокращения" },
+				"n_sym_punctuation_ziqaa": { "letter_locale": "Сикаа" },
+				"n_sym_punctuation_qitsa": { "letter_locale": "Кица" },
+				"n_sym_punctuation_zaef": { "letter_locale": "Заеф" },
+				"n_sym_punctuation_melodic_qitsa": { "letter_locale": "Мелодический Кица" }
 			}
 		}
 	}
