@@ -94,6 +94,8 @@
 				"s_lig_oe": { "layout_locale": "Огублённый гласный переднего ряда средне-нижнего подъёма" },
 				"s_dig_feng": { "layout_locale": "Велофарингальный фрикативный согласный" },
 				"s_dig_feng__trill": { "layout_locale": "Велофарингальный дрожащий согласный" },
+				"s_dig_l_ezh": { "layout_locale": "Звонкий альвеолярный латеральный фрикативный согласный" },
+				"s_dig_l_ezh__retroflex_hook": { "layout_locale": "Звонкий ретрофлексный латеральный фрикативный согласный" },
 				"n_let_a_glottal_stop__stroke_short": { "layout_locale": "Эпиглоттальный взрывной согласный" },
 				"n_let_a_glottal_stop_reversed__stroke_short": { "layout_locale": "Звонкий эпиглоттальный фрикатив" },
 				"n_let_a_glottal_stop": { "letter_locale": "Гортанная смычка (МФА)" },

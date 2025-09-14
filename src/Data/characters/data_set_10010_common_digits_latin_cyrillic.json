@@ -1370,6 +1370,7 @@
 	"lat_[c,s]_let_s", {
 		"unicode": ["0053", "0073"],
 		"alterations": [{
+			"modifier": "A7F1",
 			"italic": "1D446",
 			"italicBold": "1D47A",
 			"bold": "1D412",

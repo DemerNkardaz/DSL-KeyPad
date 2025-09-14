@@ -91,6 +91,8 @@
 				"s_lig_oe": { "layout_locale": "Open-mid front rounded vowel" },
 				"s_dig_feng": { "layout_locale": "Voiceless velopharyngeal fricative" },
 				"s_dig_feng__trill": { "layout_locale": "Voiceless velopharyngeal trill" },
+				"s_dig_l_ezh": { "layout_locale": "Voiced alveolar lateral fricative" },
+				"s_dig_l_ezh__retroflex_hook": { "layout_locale": "Voiced retroflex lateral fricative" },
 				"n_let_a_glottal_stop__stroke_short": { "layout_locale": "Epiglottal plosive" },
 				"n_let_a_glottal_stop_reversed__stroke_short": { "layout_locale": "Voiced epiglottal fricative" },
 				"n_let_a_glottal_stop": { "letter_locale": "Glottal stop (IPA)" },

@@ -227,6 +227,8 @@ Class UIMainPanel {
 		"secondkeys",
 		"tertiarykeys",
 		"scripts",
+		"ipa_keys",
+		"ipa_recipes",
 		"TELEXVNI",
 		"all",
 		"favorites",
@@ -239,6 +241,8 @@ Class UIMainPanel {
 		"secondkeys",
 		"tertiarykeys",
 		"scripts",
+		"ipa_keys",
+		"ipa_recipes",
 		"TELEXVNI",
 		"all",
 		"favorites",
@@ -303,6 +307,19 @@ Class UIMainPanel {
 		columnWidths: this.listViewColumnWidths.default,
 		source: "scripts",
 		previewType: "Alternative Layout",
+	}, {
+		prefix: "ipa_keys",
+		columns: this.listViewColumnHeaders.default,
+		columnWidths: this.listViewColumnWidths.default,
+		source: "ipa_keys",
+		previewType: "Alternative Layout",
+	}, {
+		prefix: "ipa_recipes",
+		columns: this.listViewColumnHeaders.smelting,
+		columnWidths: this.listViewColumnWidths.default,
+		source: "ipa_recipes",
+		previewType: "Recipe",
+		titleType: "Alternative Layout",
 	}, {
 		prefix: "TELEXVNI",
 		columns: this.listViewColumnHeaders.default,
@@ -489,6 +506,9 @@ Class UIMainPanel {
 		local instance := this
 		if !attributes.HasOwnProp("previewType")
 			attributes.previewType := "Key"
+		if !attributes.HasOwnProp("titleType")
+			attributes.titleType := "Default"
+
 
 		local localizedColumns := []
 		local languageCode := Language.Get()
@@ -634,7 +654,7 @@ Class UIMainPanel {
 
 		local entryNameLabel := panelWindow.AddText(Format("v{}EntryName {} x{} y{} w{} h{} Center", attributes.prefix, this.defaultTextOpts, this.entryNameX, this.entryNameY, this.entryNameW, this.entryNameH), "[" Chr(0x2003) this.notAvailable Chr(0x2003) "]")
 
-		charactersLV.OnEvent("ItemFocus", (LV, rowNumber) => this.ItemSetPreview(panelWindow, LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.previewType }))
+		charactersLV.OnEvent("ItemFocus", (LV, rowNumber) => this.ItemSetPreview(panelWindow, LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType }))
 
 		charactersLV.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemDoubleClick(LV, rowNumber, attributes.prefix))
 
@@ -915,7 +935,7 @@ Class UIMainPanel {
 							throw "Trouble in paradise: " entryName " typeof groupKey" (attributes.Has("groupKey") ? Type(attributes["groupKey"]) : "null") " recipe" Type(entry["recipe"]) " fastKey" Type(entry["options"]["fastKey"]) " specialKey" Type(entry["options"]["specialKey"]) " altLayoutKey" Type(entry["options"]["altLayoutKey"])
 						}
 
-						local characterRawTitle := Format("{}[type::{}]", entryName, attributes["type"])
+						local characterRawTitle := Format("{}[type::{}]", entryName, attributes.Has("useLayoutTitles") && attributes["useLayoutTitles"] ? "Alternative Layout" : attributes["type"])
 
 						local bindings := Map(
 							"Recipe", entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : entry["recipe"].Length > 0 ? entry["recipe"].ToString() : "",
@@ -1018,7 +1038,7 @@ Class UIMainPanel {
 			if hasScript
 				interLabel := RegExReplace(interLabel, "^" lOriginScript "_", "scripts." lScript ".")
 
-			if optionsType = "Alternative Layout" && entry["options"]["layoutTitles"]
+			if (optionsType = "Alternative Layout") && entry["options"]["layoutTitles"]
 				&& (
 					(IsSet(useAlt) && useAlt && Locale.Read(interLabel ".layout_locale_alt", specificLanguage, True, &titleText))
 					|| (IsSet(useAlt) && useAlt && Locale.Read(interLabel ".layout_locale", specificLanguage, True, &titleText))

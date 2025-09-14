@@ -122,7 +122,6 @@
 		"label": "Scripts",
 		"type": "Alternative Layout",
 		"group": [
-			"IPA", "",
 			"Mathematical", "",
 			"Math", "",
 			"Math Spaces", "",
@@ -171,7 +170,6 @@
 			"Shavian", "Shavian Ligatures", ""
 		],
 		"groupKey": {
-			"IPA": "@script_labels.ipa.short",
 			"Mathematical": "@script_labels.math",
 			"Hellenic": "@script_labels.hellenic",
 			"Germanic Runic Elder Futhark": "@script_labels.futhark",
@@ -208,6 +206,29 @@
 			"Manichaean": "@script_labels.manichaean",
 			"Deseret": "@script_labels.deseret.short",
 			"Shavian": "@script_labels.shavian.short"
+		}
+	},
+	"ipa_keys": {
+		"label": "Scripts",
+		"type": "Alternative Layout",
+		"group": [
+			"IPA Commands", "",
+			"IPA"
+		],
+		"groupKey": {
+			"IPA Commands": "@dictionary.commands",
+			"IPA": "@script_labels.ipa.short"
+		}
+	},
+	"ipa_recipes": {
+		"label": "Scripts",
+		"type": "Recipe",
+		"useLayoutTitles": true,
+		"group": [
+			"IPA"
+		],
+		"groupKey": {
+			"IPA": "@script_labels.ipa.short"
 		}
 	},
 	"TELEXVNI": {

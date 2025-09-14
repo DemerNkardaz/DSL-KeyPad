@@ -2943,7 +2943,8 @@
 	"lat_[s]_dig_feng__trill", {
 		"unicode": ["1DF00"],
 		"tags": ["voiceless velopharyngeal trill", "велофарингальный трелевой согласный"],
-		"options": { "useLetterLocale": "Origin" },
+		"groups": [["Latin Digraphs", "IPA"]],
+		"options": { "useLetterLocale": "Origin", "layoutTitles": true },
 		"recipe": ["fng${arrow_up}", "f${lat_s_let_n_eng}${arrow_up}", "${lat_s_dig_feng}${arrow_up}"]
 	},
 	"lat_[s]_dig_ls", {
@@ -2958,14 +2959,18 @@
 	},
 	"lat_[s]_dig_l_ezh", {
 		"unicode": ["026E"],
-		"groups": ["Latin Digraphs", "IPA"],
+		"tags": ["voiced alveolar lateral fricative", "звонкий альвеолярный латеральный фрикативный согласный"],
+		"groups": [["Latin Digraphs", "IPA"]],
 		"alterations": { "modifier": "1079E" },
+		"options": { "layoutTitles": true },
 		"symbol": { "letter": "${lat_[s]_let_l}${lat_[s]_let_z_ezh}" }
 	},
 	"lat_[s]_dig_l_ezh__retroflex_hook", {
 		"unicode": ["1DF05"],
-		"groups": ["Latin Digraphs", "IPA"],
+		"tags": ["voiced retroflex lateral fricative", "звонкий ретрофлексный латеральный фрикативный согласный"],
+		"groups": [["Latin Digraphs", "IPA"]],
 		"alterations": { "modifier": "1079F" },
+		"options": { "layoutTitles": true },
 		"symbol": { "letter": "${lat_[s]_let_l}${lat_[s]_let_z_ezh}" }
 	},
 	"lat_[c,i,s]_dig_nj", {
