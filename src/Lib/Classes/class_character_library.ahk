@@ -591,16 +591,16 @@ Class ChrLib {
 
 	static EntryPreview(entryName, indent := 1) {
 		local entry := this.GetEntry(entryName)
-		local output := "'" entryName "', {`n"
-		output .= this.FormatEntry(entry, indent)
-		output .= "}"
+		local entryType := entry["groups"].HasValue("Custom Composes") ? "UserRecipes" : "InternalLibrary"
+		local output := Format('"{}": ', entryName) JSONExt.Dump(entry, True)
 
 		Constructor() {
 			local pGui := Gui()
-			pGui.title := App.Title() " — [ " entryName " ]"
+			pGui.title := Format("[ λ://DSLKeyPad.ROOT/{}/Entries/{}.JSON ]", entryType, entryName)
+			pGui.BackColor := "White"
 
-			local w := 600
-			local h := 800
+			local w := 650
+			local h := 900
 
 			local xPos := (A_ScreenWidth - w) / 2
 			local yPos := (A_ScreenHeight - h) / 2
@@ -610,7 +610,7 @@ Class ChrLib {
 			local contentX := (w - contentW) / 2
 			local contentY := (h - contentH) / 2
 
-			local content := pGui.AddEdit(Format("vEntryPreviewContent w{} h{} x{} y{} ReadOnly +Wrap -HScroll", contentW, contentH, contentX, contentY), output)
+			local content := pGui.AddEdit(Format("vEntryPreviewContent w{} h{} x{} y{} ReadOnly BackgroundWhite +Wrap -HScroll", contentW, contentH, contentX, contentY), output)
 			content.SetFont("s10", "Courier New")
 
 
