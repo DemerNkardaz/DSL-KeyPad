@@ -220,7 +220,7 @@
 	},
 	"lat_[s]_let_o_sideways", {
 		"unicode": ["1D11"],
-		"options": { "referenceLocale": "o$" },
+		"options": { "referenceLocale": "o$" },	
 		"recipe": ["$${arrow_right_circle}"],
 		"symbol": { "beforeLetter": "sideways" }
 	},
@@ -1776,7 +1776,7 @@
 		"unicode": ["A7AD", "026C"],
 		"tags": [[], ["voiceless alveolar lateral fricative", "глухой альвеолярный латеральный спирант"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
-		"alterations": [{}, { "modifier": "1079B" }],
+		"alterations": [{ "smallCapitalModifier": "1079C" }, { "modifier": "1079B" }],
 		"options": { "altLayoutKey": ["", ">! $"], "layoutTitles": ["", true] },
 		"recipe": ["$${arrow_right_ushaped}"]
 	},
@@ -2755,7 +2755,10 @@
 	"lat_[s]_let_z__tilde_overlay", {
 		"unicode": ["1D76"]
 	},
-	"lat_[c,s]_lig_aa", { "unicode": ["A732", "A733"] },
+	"lat_[c,s]_lig_aa", {
+		"unicode": ["A732", "A733"],
+		"alterations": [{"smallCapitalModifier": "10780"}, {}]
+		},
 	"lat_[s]_lig_a__schwa_reversed", {
 		"unicode": ["AB31"],
 		"recipe": ["$${lat_s_let_a_schwa}${arrow_right_circle}"]
@@ -2957,6 +2960,12 @@
 		"unicode": ["026E"],
 		"groups": ["Latin Digraphs", "IPA"],
 		"alterations": { "modifier": "1079E" },
+		"symbol": { "letter": "${lat_[s]_let_l}${lat_[s]_let_z_ezh}" }
+	},
+	"lat_[s]_dig_l_ezh__retroflex_hook", {
+		"unicode": ["1DF05"],
+		"groups": ["Latin Digraphs", "IPA"],
+		"alterations": { "modifier": "1079F" },
 		"symbol": { "letter": "${lat_[s]_let_l}${lat_[s]_let_z_ezh}" }
 	},
 	"lat_[c,i,s]_dig_nj", {

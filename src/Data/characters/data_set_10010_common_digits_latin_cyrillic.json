@@ -888,6 +888,7 @@
 			"tag": "E0049"
 		}, {
 			"combining": "0365",
+			"modifier": "2071",
 			"subscript": "1D62",
 			"italic": "1D456",
 			"italicBold": "1D48A",
@@ -1293,6 +1294,7 @@
 			"parenthesized": "1F120",
 			"tag": "E0051"
 		}, {
+			"modifier": "107A5",
 			"italic": "1D45E",
 			"italicBold": "1D492",
 			"bold": "1D42A",

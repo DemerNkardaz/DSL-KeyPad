@@ -335,12 +335,14 @@
 		"unicode": "02D0",
 		"tags": ["triangle colon", "знак долготы"],
 		"groups": ["Special Characters", "IPA"],
+		"alterations": { "modifier": "10781" },
 		"options": { "altLayoutKey": ";" }
 	},
 	"colon_triangle_half", {
 		"unicode": "02D1",
 		"tags": ["half triangle colon", "знак полудолготы"],
 		"groups": ["Special Characters", "IPA"],
+		"alterations": { "modifier": "10782" },
 		"options": { "altLayoutKey": ">! ;" }
 	},
 	"degree", {
