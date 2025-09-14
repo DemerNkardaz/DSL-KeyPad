@@ -21,6 +21,8 @@
 
   - Fixed missing Space key in the “Keyboard Default” bind list.
 
+---
+
 ### [0.1.5.3 α — 2025-09-11](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.5.3)
 
 - Additions:
@@ -145,6 +147,8 @@
 - Исправления:
 
   - Исправлено отсутствие клавиши пробела в списке биндов «Keyboard Default».
+
+---
 
 ### [0.1.5.3 α — 2025-09-11](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.5.3)
 
