@@ -26,7 +26,7 @@ Class ChrCrafter {
 		if this.prompt != "" {
 			local output := ""
 			for prompt in StrSplit(this.prompt, " ")
-				output .= this.ValidateRecipes(prompt, , True) " "
+				output .= this.ValidateRecipes(prompt, , , True) " "
 
 			if output = "" || output ~= "^\s+$"
 				return
@@ -47,6 +47,9 @@ Class ChrCrafter {
 		local showSuggestions := Cfg.Get("Show_Suggestions", "Compose", True, "bool")
 		local showFavorites := Cfg.Get("Show_Favorites", "Compose", True, "bool")
 
+		local glyphsMode := Scripter.GetCurrentModeData("Glyph Variations", &modeName)
+		local alt := glyphsMode is Map && glyphsMode.Has("reference") ? glyphsMode["reference"] : modeName
+
 		this.isComposeInstanceActive := True
 		local composeObject := {}
 		composeObject.ChrBlockInstance := ChrBlock()
@@ -60,7 +63,7 @@ Class ChrCrafter {
 		composeObject.favoriteSuggestions := ""
 
 		if showFavorites {
-			composeObject.favoriteSuggestions := this.ReadFavorites()
+			composeObject.favoriteSuggestions := this.ReadFavorites(&alt)
 
 			composeObject.favoriteSuggestions := (
 				composeObject.favoriteSuggestions != "" ? (
@@ -90,7 +93,7 @@ Class ChrCrafter {
 		composeObject.ParentHook.Start()
 
 		ComposeSuggestedTooltip() {
-			local recipesToBeSuggested := this.ValidateRecipes(inputWithoutBackticks, True)
+			local recipesToBeSuggested := this.ValidateRecipes(inputWithoutBackticks, &alt, True)
 			composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 			Util.CaretTooltip(
@@ -233,7 +236,7 @@ Class ChrCrafter {
 						local postInputHasBacktick := InStr(postInput, "``")
 
 						Loop repeatCount {
-							intermediateValue .= this.ValidateRecipes(postInputNoBackticks, , composeObject.input ~= "^\(\d+~\)\s")
+							intermediateValue .= this.ValidateRecipes(postInputNoBackticks, &alt, , composeObject.input ~= "^\(\d+~\)\s")
 
 							local len := StrLen(intermediateValue)
 							if (len >= 2) {
@@ -255,7 +258,7 @@ Class ChrCrafter {
 								composeObject.input := RegExReplace(composeObject.input, RegExEscape(postInput), composeObject.output)
 
 								if composeObject.insertType = "" {
-									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), True)
+									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), &alt, True)
 									composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 									Util.CaretTooltip(
@@ -277,7 +280,7 @@ Class ChrCrafter {
 
 						local inputToCheckNoBackticks := RegExReplace(inputToCheck, "``", "")
 
-						local intermediateValue := this.ValidateRecipes(inputToCheckNoBackticks, , usePartialMode, , hasBacktick)
+						local intermediateValue := this.ValidateRecipes(inputToCheckNoBackticks, &alt, , usePartialMode, , hasBacktick)
 						if intermediateValue != "" {
 							composeObject.output := intermediateValue
 
@@ -289,7 +292,7 @@ Class ChrCrafter {
 								composeObject.input := RegExReplace(composeObject.input, RegExEscape(inputToCheck), composeObject.output)
 
 								if (composeObject.input != originalInput && composeObject.insertType = "") {
-									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), True)
+									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), &alt, True)
 									composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 									Util.CaretTooltip(
@@ -394,7 +397,7 @@ Class ChrCrafter {
 			SendText(output)
 	}
 
-	ValidateRecipes(prompt, getSuggestions := False, breakSkip := False, restrictClasses := [], hasBacktick := False) {
+	ValidateRecipes(prompt, &alt := "", getSuggestions := False, breakSkip := False, restrictClasses := [], hasBacktick := False) {
 		if prompt = ""
 			return
 
@@ -497,16 +500,21 @@ Class ChrCrafter {
 							if caseSensitiveMatch || uniqueRecipeMatch {
 								charFound := True
 								if entry["options"]["suggestionsAtEnd"]
-									indexedAtEndValueResult.Set(entry["index"], this.GetRecipesString(&entryName, &prompt))
+									indexedAtEndValueResult.Set(entry["index"], this.GetRecipesString(&entryName, &prompt, &alt))
 								else
-									indexedValueResult.Set(entry["index"], this.GetRecipesString(&entryName, &prompt))
+									indexedValueResult.Set(entry["index"], this.GetRecipesString(&entryName, &prompt, &alt))
 							}
 						} else if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipeEntry)) {
 							charFound := True
+							local chrGetArgs := [entryName, True, inputMode]
+
+							if alt != ""
+								chrGetArgs.Push(alt)
+
 							if entry["options"]["suggestionsAtEnd"]
-								indexedAtEndValueResult.Set(entry["index"], ChrLib.Get(entryName, True, inputMode))
+								indexedAtEndValueResult.Set(entry["index"], ChrLib.Get(chrGetArgs*))
 							else
-								indexedValueResult.Set(entry["index"], ChrLib.Get(entryName, True, inputMode))
+								indexedValueResult.Set(entry["index"], ChrLib.Get(chrGetArgs*))
 							if !isPrefixOfLongerRecipe
 								break 2
 						}
@@ -559,7 +567,7 @@ Class ChrCrafter {
 		return output
 	}
 
-	ReadFavorites() {
+	ReadFavorites(&alt) {
 		local output := ""
 
 		local getList := FavoriteChars.ReadList()
@@ -570,7 +578,7 @@ Class ChrCrafter {
 					if ChrLib.entries.%line%["recipe"].Length = 0 {
 						continue
 					} else {
-						output .= this.GetRecipesString(&line)
+						output .= this.GetRecipesString(&line, , &alt)
 					}
 				}
 			}
@@ -583,7 +591,7 @@ Class ChrCrafter {
 		return output
 	}
 
-	GetRecipesString(&entryName, &prompt := "") {
+	GetRecipesString(&entryName, &prompt := "", &alt := "") {
 		local output := ""
 
 		local recipe := ChrRecipeHandler.GetStr(entryName, True, " | ", prompt)
@@ -592,7 +600,15 @@ Class ChrCrafter {
 		if StrLen(entry["symbol"]["alt"]) {
 			uniSequence := entry["symbol"]["alt"]
 		} else {
-			uniSequence := Util.StrFormattedReduce(ChrLib.Get(entryName), , True)
+			local chrGetArgs := [entryName, True, "Unicode"]
+
+			if alt != "" {
+				chrGetArgs.Push(alt)
+				if alt = "combining" && entry["alterations"].Has("combining")
+					uniSequence .= DottedCircle
+			}
+
+			uniSequence .= Util.StrFormattedReduce(ChrLib.Get(chrGetArgs*), , True)
 		}
 
 		output .= uniSequence " (" (IsObject(recipe) ? recipe.ToString(" | ") : recipe) "), "

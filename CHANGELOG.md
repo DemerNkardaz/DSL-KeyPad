@@ -13,6 +13,10 @@
   - Addded missed IPA characters:
     - [ 𐞁 𐞂 ]
 
+- Changes:
+
+  - “Compose” character preview in the tooltip now changes depending on the active “Glyph Variations” mode.
+
 - Fixes:
 
   - Fixed missing Space key in the “Keyboard Default” bind list.
@@ -133,6 +137,10 @@
     - [ 𐞥 𐞀 ⁱ ]
   - Добавлены пропущенные символы МФА:
     - [ 𐞁 𐞂 ]
+
+- Изменения:
+
+  - Теперь превью символов в подсказке режима композиции изменяется в зависимости от активного режима Вриации глифов.
 
 - Исправления:
 
