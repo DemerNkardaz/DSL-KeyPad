@@ -89,7 +89,7 @@ Class ModsGUI {
 		for each in ["pre_init", "post_init"] {
 			for key, value in modsRead[each].OwnProps() {
 				local path := mods[key]
-				local modData := this.ReadData(&path, &key)
+				local modData := ModsInjector.ReadModManifest(key)
 				local previewImg := this.GetPreview(&path, , True)
 
 				if previewImg is String {
@@ -99,14 +99,14 @@ Class ModsGUI {
 
 				modsList.Push([
 					(
-						(modData["options"]["status"] = 1 ? "Check " : "")
+						(modData["status"] = 1 ? "Check " : "")
 						("Icon" (previewImg is String ? idx : 1))
 					),
-					modData[modData.Has(languageCode) ? languageCode : "options"]["title"],
-					modData["options"]["version"],
-					modData["options"]["type"] = "pre_init" ? Locale.Read("init.before_start") : Locale.Read("init.after_start"),
-					modData["options"]["folder"],
-					modData["options"]["type"],
+					modData.Has(languageCode) ? modData[languageCode]["title"] : modData["title"],
+					modData["version"],
+					modData["type"] = "pre_init" ? Locale.Read("init.before_start") : Locale.Read("init.after_start"),
+					modData["folder"],
+					modData["type"],
 				])
 			}
 		}
@@ -153,33 +153,6 @@ Class ModsGUI {
 		return
 	}
 
-	ReadData(&modPath, &modFolder) {
-		local output := Map(
-			"options", Map(
-				"title", "",
-				"version", "",
-				"type", "",
-				"author", "",
-				"url", "",
-				"description", "",
-				"folder", modFolder,
-			)
-		)
-
-		local options := Util.INIToMap(modPath "\options")
-
-		for section, keys in options {
-			if !output.Has(section)
-				output.Set(section, Map())
-			for key, value in keys
-				output[section].Set(key, value)
-		}
-
-		output["options"].Set("status", IniRead(ModsInjector.registryINI, output["options"]["type"], modFolder, 1))
-
-		return output
-	}
-
 	SetInfo(&LV, &Item, &panel) {
 		if !item
 			return
@@ -188,32 +161,29 @@ Class ModsGUI {
 		local modFolder := LV.GetText(Item, 4)
 		local modType := LV.GetText(Item, 5)
 		local modPath := mods[modFolder]
-		local optionsMap := this.ReadData(&modPath, &modFolder)
+		local optionsMap := ModsInjector.ReadModManifest(modFolder)
 
-		local title := optionsMap[(
-			optionsMap.Has(languageCode)
-			&& optionsMap[languageCode].Has("title")
-				? languageCode : "options"
-		)]["title"]
+
+		local title := optionsMap.Has(languageCode) && optionsMap[languageCode].Has("title") ? optionsMap[languageCode]["title"] : optionsMap["title"]
 
 		if title = ""
 			title := modFolder
 
-		local url := optionsMap["options"]["url"] != "" ? Format('<a href="{}" target="_blank">{}</a>', optionsMap["options"]["url"], optionsMap["options"]["url"]) : ""
+		local homepage := optionsMap["homepage"] != "" ? Format('<a href="{}" target="_blank">{}</a>', optionsMap["homepage"], optionsMap["homepage"]) : ""
 
-		local author := optionsMap[(optionsMap.Has(languageCode) && optionsMap[languageCode].Has("author") ? languageCode : "options")]["author"]
+		local author := optionsMap.Has(languageCode) && optionsMap[languageCode].Has("author") ? optionsMap[languageCode]["author"] : optionsMap["author"]
 
 		if RegExMatch(author, "^(.*)@(https.*)$", &match)
 			author := Format('<a href="{}" target="_blank">{}</a>', match[2], match[1])
 
-		local description := optionsMap[(optionsMap.Has(languageCode) && optionsMap[languageCode].Has("description") ? languageCode : "options")]["description"]
+		local description := optionsMap.Has(languageCode) && optionsMap[languageCode].Has("description") ? optionsMap[languageCode]["description"] : optionsMap["description"]
 
 		panel["PreviewImage"].Value := this.GetPreview(&modPath)
 		panel["InfoGroup"].Text := title
 
-		panel["VersionLabel"].Text := Locale.ReadInject("gui.mods.version", [optionsMap["options"]["version"]])
+		panel["VersionLabel"].Text := Locale.ReadInject("gui.mods.version", [optionsMap["version"]])
 		panel["AuthorLabel"].Text := Locale.ReadInject("gui.mods.author", [author])
-		panel["ModPage"].Text := Locale.ReadInject("gui.mods.homepage", [url])
+		panel["ModPage"].Text := Locale.ReadInject("gui.mods.homepage", [homepage])
 		panel["Description"].Text := Locale.HandleString(description)
 	}
 

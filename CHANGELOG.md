@@ -17,6 +17,7 @@
 - Changes:
 
   - “Compose” character preview in the tooltip now changes depending on the active “Glyph Variations” mode.
+  - Modification’s “options.ini” replaced with “manifest.json,” base keys now stored in root instead of “[options]” section.
 
 - Fixes:
 
@@ -145,6 +146,7 @@
 - Изменения:
 
   - Теперь превью символов в подсказке режима композиции изменяется в зависимости от активного режима Вриации глифов.
+  - Для модификаций «options.ini» заменен на «manifest.json», базовые ключи теперь хранятся в корне вместо секции «[options]».
 
 - Исправления:
 

@@ -81,18 +81,25 @@ Class ModsInjector {
 		return iniMap
 	}
 
-	static ReadModData(modFolder) {
-		local filePath := this.modsPath "\" modFolder "\options.ini"
-		local output := {
-			title: IniRead(filePath, "options", "title", modFolder),
-			version: IniRead(filePath, "options", "version", ""),
-			author: IniRead(filePath, "options", "author", ""),
-			description: IniRead(filePath, "options", "description", ""),
-			type: IniRead(filePath, "options", "type", "pre_init"),
-			folder: modFolder,
-		}
+	static ReadModManifest(modFolder) {
+		local filePath := this.modsPath "\" modFolder "\manifest.json"
+		local requiredFields := Map(
+			"title", modFolder,
+			"version", "",
+			"author", "",
+			"description", "",
+			"type", "pre_init",
+			"homepage", "",
+			"folder", modFolder
+		)
 
-		output.status := IniRead(this.registryINI, output.type, modFolder, 1)
+		local output := JSON.LoadFile(filePath, "UTF-8")
+
+		for key, defaultValue in requiredFields
+			if !output.Has(key)
+				output.Set(key, defaultValue)
+
+		output["status"] := IniRead(this.registryINI, output["type"], modFolder, 1)
 
 		return output
 	}
@@ -133,8 +140,9 @@ Class ModsInjector {
 
 		Loop Files this.modsPath "\*", "FR" {
 			if RegExMatch(A_LoopFileFullPath, "\\Mods\\(.*)\\(index.ahk)", &match) {
-				local typeInit := IniRead(this.modsPath "\" match[1] "\options.ini", "options", "type", "pre_init")
-				local title := IniRead(this.modsPath "\" match[1] "\options.ini", "options", "title", "") " " IniRead(this.modsPath "\" match[1] "\options.ini", "options", "version", "")
+				local manifest := this.ReadModManifest(match[1])
+				local typeInit := manifest["type"]
+				local title := manifest["title"] " " manifest["version"]
 
 				if (title = " ")
 					title := match[1]
