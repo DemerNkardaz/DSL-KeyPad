@@ -113,6 +113,65 @@ Class Search {
 		local isHasExpression := RegExMatch(handledQuery, "(\^|\*|\+|\?|\.|\$|^\i\))")
 		local output := ""
 
+		IsExtendedVersion(shortTag, longTag) {
+			if StrLen(shortTag) >= StrLen(longTag)
+				return False
+
+			shortTag := StrReplace(shortTag, Chr(0x00A0), " ")
+			longTag := StrReplace(longTag, Chr(0x00A0), " ")
+
+			local shortWords := StrSplit(shortTag, " ")
+			local longWords := StrSplit(longTag, " ")
+
+			local cleanShortWords := []
+			local cleanLongWords := []
+
+			for word in shortWords {
+				if Trim(word) != ""
+					cleanShortWords.Push(Trim(word))
+			}
+
+			for word in longWords {
+				if Trim(word) != ""
+					cleanLongWords.Push(Trim(word))
+			}
+
+			for shortWord in cleanShortWords {
+				local found := False
+				for longWord in cleanLongWords {
+					if isSensitive ? (shortWord == longWord) : (shortWord = longWord) {
+						found := True
+						break
+					}
+				}
+				if !found
+					return False
+			}
+
+			local additionalWords := cleanLongWords.Length - cleanShortWords.Length
+			if additionalWords < 1
+				return False
+
+			if additionalWords >= 2
+				return True
+
+			if additionalWords = 1 {
+				for longWord in cleanLongWords {
+					local isInShort := False
+					for shortWord in cleanShortWords {
+						if isSensitive ? (shortWord == longWord) : (shortWord = longWord) {
+							isInShort := True
+							break
+						}
+					}
+					if !isInShort && StrLen(longWord) > 2
+						return True
+				}
+			}
+
+			return False
+		}
+
 		checkByID(&entryName) {
 			if RegExMatch(handledQuery, "^#(.*)$", &IDMatch) && ChrLib.entryIdentifiers.Has(Number(IDMatch[1])) {
 				entryName := ChrLib.entryIdentifiers.Get(Number(IDMatch[1]))
@@ -173,6 +232,8 @@ Class Search {
 		]
 
 		for i, condition in conditions {
+			local matchedTags := []
+
 			for j, entryName in indexedEntries {
 				local entry := ChrLib.entries.%entryName%
 
@@ -184,11 +245,32 @@ Class Search {
 				if entry["tags"].Length = 0
 					continue
 
-				for tag in entry["tags"]
+				for tag in entry["tags"] {
 					if conditions[i](tag) {
-						output := ChrLib.Get(entryName, True, Cfg.SessionGet("Input_Mode"), alteration)
-						break 3
+						local cleanTag := StrReplace(tag, Chr(0x00A0), " ")
+						matchedTags.Push({
+							entryName: entryName,
+							tag: cleanTag,
+							originalIndex: j
+						})
 					}
+				}
+			}
+
+			if matchedTags.Length > 0 {
+				local bestMatch := matchedTags[1]
+
+				if matchedTags.Length > 1 {
+					for match in matchedTags {
+						if IsExtendedVersion(match.tag, bestMatch.tag)
+							bestMatch := match
+						else if !IsExtendedVersion(bestMatch.tag, match.tag) && match.originalIndex < bestMatch.originalIndex
+							bestMatch := match
+					}
+				}
+
+				output := ChrLib.Get(bestMatch.entryName, True, Cfg.SessionGet("Input_Mode"), alteration)
+				break
 			}
 		}
 

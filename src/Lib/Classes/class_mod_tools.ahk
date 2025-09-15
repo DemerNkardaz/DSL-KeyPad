@@ -1,7 +1,10 @@
 Class ModTools {
 	__New(relativePath := A_LineFile) {
 		this.origin := this.GetOrigin(relativePath)
+		this.dirName := RegExReplace(this.origin, ".*\\", "")
 		this.Cfg := ModTools.__ModTools_Cfg(this.origin)
+
+		return Event.Trigger("Mod", "Registered", this.dirName, this)
 	}
 
 	GetOrigin(relativePath) {

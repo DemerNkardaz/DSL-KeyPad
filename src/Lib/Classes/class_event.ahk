@@ -63,6 +63,9 @@ Class Event {
 		"Favorites", Map(
 			"Changed", [],
 		),
+		"Mod", Map(
+			"Registered", [],
+		),
 	)
 
 	static Create(eventClass, eventNames*) {
