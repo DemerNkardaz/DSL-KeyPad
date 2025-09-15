@@ -31,6 +31,7 @@ initialized := False
 #Include Data\characters.ahk
 #Include <Classes\class_event>
 #Include <Classes\class_mods_injector>
+#Include <Classes\class_mod_tools>
 ; Automatically created/updated by mods injector class
 ; Dynamically loads mods pasted into \Mods\ directory
 #Include *i Mods\injector_pre_init.ahk

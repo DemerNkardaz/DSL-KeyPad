@@ -709,7 +709,7 @@ Class UIMainPanel {
 		EventFuncSetRandom()
 		return Event.OnEvent("UI Instance [Panel]", "Cache Loaded", EventFuncSetRandom)
 
-		EventFuncSetRandom(*) => this.SetRandomPreview(panelWindow, charactersLV, { prefix: attributes.prefix, previewType: attributes.previewType })
+		EventFuncSetRandom(*) => this.SetRandomPreview(panelWindow, charactersLV, { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType })
 	}
 
 	ListViewFavoritesEvent(&faveName, &condition, &preventFromTabChange, panelWindow) {

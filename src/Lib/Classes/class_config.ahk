@@ -525,14 +525,14 @@ Class Cfg {
 		]
 	}
 
-	static Set(value, entry, section := "Settings", options := "") {
+	static Set(value, entry, section := "Settings", options := "", filePath := this.ini) {
 		if this.sections.HasValue(section) {
 			if InStr(options, "bool")
 				value := (value = True || value = "True" || value = 1 || value = "1") ? "True" : "False"
 			else
 				this.OptionsHandler(value, options, &value)
 
-			IniWrite(value, this.ini, section, entry)
+			IniWrite(value, filePath, section, entry)
 			if InStr(value, "_Over") {
 				MsgBox(value)
 			}
@@ -543,9 +543,9 @@ Class Cfg {
 		}
 	}
 
-	static Get(entry, section := "Settings", default := "", options := "") {
+	static Get(entry, section := "Settings", default := "", options := "", filePath := this.ini) {
 		if this.sections.HasValue(section) {
-			value := IniRead(this.ini, section, entry, default)
+			value := IniRead(filePath, section, entry, default)
 			value := value = "" ? default : value
 
 			this.OptionsHandler(value, options, &value)
@@ -555,21 +555,21 @@ Class Cfg {
 		return value
 	}
 
-	static SwitchSet(valuesVariants, entry, section := "Settings", options := "") {
+	static SwitchSet(valuesVariants, entry, section := "Settings", options := "", filePath := this.ini) {
 		local currentValue := this.Get(entry, section)
 		local found := False
 
 		for i, value in valuesVariants {
 			if (value = currentValue) {
 				nextIndex := (i = valuesVariants.MaxIndex()) ? 1 : i + 1
-				this.Set(valuesVariants[nextIndex], entry, section, options)
+				this.Set(valuesVariants[nextIndex], entry, section, options, filePath)
 				found := True
 				break
 			}
 		}
 
 		if (!found) {
-			this.Set(valuesVariants[1], entry, section, options)
+			this.Set(valuesVariants[1], entry, section, options, filePath)
 		}
 	}
 
