@@ -22,6 +22,7 @@ Class App {
 		loc: A_ScriptDir "\Locale",
 		bin: A_ScriptDir "\Bin",
 		user: A_ScriptDir "\User",
+		mods: A_ScriptDir "\Mods",
 		profile: A_ScriptDir "\User\profile-" this.profileName,
 		layouts: A_ScriptDir "\User\profile-" this.profileName "\CustomLayouts",
 		binds: A_ScriptDir "\User\profile-" this.profileName "\CustomBindings",

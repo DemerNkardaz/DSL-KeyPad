@@ -88,7 +88,7 @@ Class ModsGUI {
 		local idx := 1
 		for each in ["pre_init", "post_init"] {
 			for key, value in modsRead[each].OwnProps() {
-				local path := mods[key]
+				local path := App.paths.mods "\" key
 				local modData := ModsInjector.ReadModManifest(key)
 				local previewImg := this.GetPreview(&path, , True)
 
@@ -160,7 +160,7 @@ Class ModsGUI {
 		local languageCode := Language.Get()
 		local modFolder := LV.GetText(Item, 4)
 		local modType := LV.GetText(Item, 5)
-		local modPath := mods[modFolder]
+		local modPath := App.paths.mods "\" modFolder
 		local optionsMap := ModsInjector.ReadModManifest(modFolder)
 
 

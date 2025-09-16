@@ -13,10 +13,6 @@ Class ModsInjector {
 		SetTimer((*) => SetTimer(this.Watcher.Bind(this), 5000), -15000)
 
 		local modKeys := this.Read()
-
-		for each, items in modKeys
-			for item in items.OwnProps()
-				mods.Set(item, this.modsPath "\" item)
 	}
 
 	static Init() {
