@@ -1,5 +1,8 @@
 {
 	"default": {
+		"sys": {
+			"linebreak": "\n"
+		},
 		"misc": {
 			"alembic": "⟨ \u2697 ⟩",
 			"fire": "⟨ \uD83D\uDD25 ⟩",

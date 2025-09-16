@@ -301,7 +301,12 @@
 				"__self": "Modifications",
 				"version": "{@:dictionary.version}: {}",
 				"author": "{@:dictionary.author}: {}",
-				"homepage": "{@:dictionary.homepage}:\n{}"
+				"homepage": "{@:dictionary.homepage}:\n{}",
+				"creation": {
+					"__self": "Create Modification",
+					"mod_created": "Modification {} successfully created.",
+					"want_open_folder": "Do you want to open mod’s folder?"
+				}
 			},
 			"changelog": {
 				"__self": "Changelog"

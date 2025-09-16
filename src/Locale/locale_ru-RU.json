@@ -301,7 +301,12 @@
 				"__self": "Модификации",
 				"version": "{@:dictionary.version}: {}",
 				"author": "{@:dictionary.author}: {}",
-				"homepage": "{@:dictionary.homepage}:\n{}"
+				"homepage": "{@:dictionary.homepage}:\n{}",
+				"creation": {
+					"__self": "Создание модификации",
+					"mod_created": "Модификация «{}» успешно создана.",
+					"want_open_folder": "Открыть папку модификации?"
+				}
 			},
 			"changelog": {
 				"__self": "История изменений"

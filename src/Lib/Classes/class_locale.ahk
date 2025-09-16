@@ -151,6 +151,13 @@ Class Locale {
 
 
 	static ReadStr(section, entry) {
+		local options := []
+
+		if RegExMatch(entry, "^\[(.*?)\](.*)$", &optMatch) {
+			options := StrSplit(optMatch[1], ",")
+			entry := optMatch[2]
+		}
+
 		if RegExMatch(entry, "^(.*?\.)?([^.<]*)<([^>]*)>(.*)$", &multiMatch) {
 			local i := 0
 			local starter := multiMatch[1]
@@ -161,7 +168,8 @@ Class Locale {
 
 			for each in [firstKey, interKey, secondKey]
 				if each != "" {
-					outputString .= (i > 0 ? " " : "") this.ReadStr(section, each)
+					local processedKey := this.ProcessLanguageReferences(each, section)
+					outputString .= (i > 0 && !options.HasValue("-space") ? " " : "") processedKey
 					i++
 				}
 
@@ -173,7 +181,8 @@ Class Locale {
 
 			for each in split
 				if each != "" {
-					outputString .= (i > 0 ? " " : "") this.ReadStr(section, each)
+					local processedKey := this.ProcessLanguageReferences(each, section)
+					outputString .= (i > 0 && !options.HasValue("-space") ? " " : "") processedKey
 					i++
 				}
 			return outputString
@@ -192,6 +201,19 @@ Class Locale {
 			output := str.ToString("")
 
 		return output
+	}
+
+	static ProcessLanguageReferences(keyString, defaultSection) {
+		if RegExMatch(keyString, "^\{@([a-zA-Z-]*)(?::([^\}]+))?\}$", &langMatch) {
+			local langCode := (langMatch[1] != "" ? langMatch[1] : defaultSection)
+			local keyName := (langMatch[2] != "" ? langMatch[2] : keyString)
+
+			if langMatch[2] == "" && langMatch[1] != ""
+				return keyString
+			return this.ReadStr(langCode, keyName)
+		}
+
+		return this.ReadStr(defaultSection, keyString)
 	}
 
 	static GetEntry(&section, &entry) {

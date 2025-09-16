@@ -129,6 +129,16 @@ Class ModTools {
 		this.CreateManifest(data, locales)
 		this.CreateIndexFile(data)
 
+		local openFolderDialog := MsgBox(Locale.ReadInject("[-space]gui.mods.creation.mod_created<{@default:sys.linebreak}>want_open_folder", [data["title"]]), App.Title(), "YesNo") = "Yes"
+		if openFolderDialog
+			this.OpenModFolder(data["folder"])
+		return
+	}
+
+	static OpenModFolder(modFolder) {
+		local fullPath := App.paths.mods "\" modFolder
+		if DirExist(fullPath)
+			Run(fullPath)
 		return
 	}
 
