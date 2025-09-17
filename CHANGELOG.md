@@ -13,6 +13,9 @@
   - Addded missed IPA characters:
     - [ 𐞁 𐞂 ]
   - IPA characters now have dedicated tabs for binds and recipes.
+  - Added “ModTools” class with useful methods and parameters for creating mods.
+  - Added “Create mod” button in Mods GUI.
+  - Added “Options” button in Mods GUI (requires the modmaker to create own GUI in <Mod Class>.tools.config_editor).
 
 - Changes:
 
@@ -142,6 +145,9 @@
   - Добавлены пропущенные символы МФА:
     - [ 𐞁 𐞂 ]
   - Теперь символы МФА имеют собственные вкладки со списками биндов и рецептов.
+  - Добавлен класс «ModTools» с полезными методами и параметрами для создания модов.
+  - Добавлена кнопка «Создать мод» в GUI модификаций.
+  - Добавлена кнопка «Настройки» в GUI модификаций (требует от мододела создание собственного GUI в <Mod Class>.tools.config_editor).
 
 - Изменения:
 

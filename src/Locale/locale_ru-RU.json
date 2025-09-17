@@ -50,6 +50,7 @@
 			"html_entity": "HTML-сущность",
 			"html_entity_named": "Мнемоника",
 			"hybrid": "Гибридный",
+			"initialization": "Инициализация",
 			"internal_id": "Внутренний ID",
 			"key": "Ключ",
 			"keys": "Ключи",
@@ -302,9 +303,13 @@
 				"version": "{@:dictionary.version}: {}",
 				"author": "{@:dictionary.author}: {}",
 				"homepage": "{@:dictionary.homepage}:\n{}",
+				"pre_init": "Пре-инициализация",
+				"post_init": "Пост-инициализация",
 				"creation": {
 					"__self": "Создание модификации",
+					"short": "Создать мод",
 					"mod_created": "Модификация «{}» успешно создана.",
+					"mod_exists": "Модификация с именем папки «{}» уже существует.",
 					"want_open_folder": "Открыть папку модификации?"
 				}
 			},

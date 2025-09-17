@@ -50,6 +50,7 @@
 			"html_entity": "HTML entity",
 			"html_entity_named": "Named entity",
 			"hybrid": "Hybrid",
+			"initialization": "Initialization",
 			"internal_id": "Internal ID",
 			"key": "Key",
 			"keys": "Keys",
@@ -302,9 +303,13 @@
 				"version": "{@:dictionary.version}: {}",
 				"author": "{@:dictionary.author}: {}",
 				"homepage": "{@:dictionary.homepage}:\n{}",
+				"pre_init": "Pre-initialization",
+				"post_init": "Post-initialization",
 				"creation": {
 					"__self": "Create Modification",
+					"short": "Create Mod",
 					"mod_created": "Modification {} successfully created.",
+					"mod_exists": "A modification with the folder’s name “{}” already exists.",
 					"want_open_folder": "Do you want to open mod’s folder?"
 				}
 			},

@@ -21,9 +21,18 @@ Map.Prototype.DefineProp("DeepMergeWith", { Call: _MapDeepMergeWith })
 Map.Prototype.DefineProp("DeepMergeBinds", { Call: _MapDeepMergeBinds })
 Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
 Map.Prototype.DefineProp("GetRef", { Call: _MapGetRef })
+Array.Prototype.DefineProp("DraftMap", { Call: _ArrayToDraftMap })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
 Object.Prototype.DefineProp("ObjKeys", { Call: _ObjKeys })
 Object.Prototype.DefineProp("DeepClone", { Call: _ObjDeepClone })
+
+_ArrayToDraftMap(this, defaultValue) {
+	local output := Map()
+	for item in this
+		output.Set(item, defaultValue)
+
+	return output
+}
 
 ObjGet(this, j) {
 	local i := 0

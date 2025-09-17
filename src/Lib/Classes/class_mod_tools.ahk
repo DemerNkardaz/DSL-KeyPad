@@ -11,6 +11,7 @@ Class ModTools {
 		}
 
 		this.config := ModTools.__ModTools_Cfg(this.origin)
+		this.config_editor := False
 
 		return Event.Trigger("Mod", "Registered", this.dirName, this)
 	}
@@ -97,6 +98,10 @@ Class ModTools {
 		}
 	}
 
+	static FolderToClassName(folderName) {
+		return RegExReplace(folderName, "[^a-zA-Z0-9_-]", "_")
+	}
+
 	static FormatIndexFile(data) {
 		local indexCode := Format((
 			'Class Mod__{} {`r`n'
@@ -104,7 +109,7 @@ Class ModTools {
 			'`tstatic __New() {`r`n'
 			'`t}'
 			'`r`n}'
-		), RegExReplace(data.Get("folder"), "\s", ""))
+		), this.FolderToClassName(data.Get("folder")))
 
 		return indexCode
 	}
@@ -120,6 +125,12 @@ Class ModTools {
 
 	static CreateMod(data := Map("folder", "My Mod", "title", "My Mod", "version", "1.0.0", "author", "", "description", "", "type", "pre_init", "homepage", ""), locales := Map()) {
 		local modPath := App.paths.mods "\" data["folder"]
+
+		if DirExist(modPath) {
+			Util.MsgWarning(Locale.ReadInject("gui.mods.creation.mod_exists", [data["folder"]]))
+			return False
+		}
+
 		local defaultPaths := [modPath, modPath "\Data", modPath "\Locale", modPath "\Lib", modPath "\Resources"]
 
 		for path in defaultPaths
@@ -129,16 +140,30 @@ Class ModTools {
 		this.CreateManifest(data, locales)
 		this.CreateIndexFile(data)
 
+		return True
+	}
+
+	static OpenModFolder(data) {
 		local openFolderDialog := MsgBox(Locale.ReadInject("[-space]gui.mods.creation.mod_created<{@default:sys.linebreak}>want_open_folder", [data["title"]]), App.Title(), "YesNo") = "Yes"
-		if openFolderDialog
-			this.OpenModFolder(data["folder"])
+		local fullPath := App.paths.mods "\" data["folder"]
+		if openFolderDialog && DirExist(fullPath)
+			Run(fullPath)
 		return
 	}
 
-	static OpenModFolder(modFolder) {
-		local fullPath := App.paths.mods "\" modFolder
-		if DirExist(fullPath)
-			Run(fullPath)
+	static OptionsEditor(modFolder, &parentGUI?) {
+		local className := "Mod__" this.FolderToClassName(modFolder)
+		if IsSet(%className%) && %className%.HasOwnProp("tools") && %className%.tools.HasOwnProp("config_editor") && %className%.tools.config_editor is Gui {
+			if IsSet(parentGUI) {
+				parentGUI.GetPos(&parentX, &parentY, &parentW, &parentH)
+				%className%.tools.config_editor.GetPos(&x, &y, &w, &h)
+
+				local xPos := parentX + ((parentW - w) / 2)
+				local yPos := parentY + ((parentH - h) / 2)
+
+				%className%.tools.config_editor.Show((Format("x{} y{}", xPos, yPos)))
+			} else %className%.tools.config_editor.Show()
+		}
 		return
 	}
 
@@ -165,16 +190,3 @@ Class ModTools {
 		}
 	}
 }
-
-; ModTools.CreateMod(Map("folder", "My Mod", "title", "My Mod", "version", "1.0.0", "author", "Mod’s author", "description", "My Mod’s description", "type", "pre_init", "homepage", ""), Map(
-; 	"ru-RU", Map(
-; 		"title", "Мой Мод",
-; 		"author", "Автор Мода",
-; 		"description", "Описание моего мода"
-; 	),
-; 	"ja-JP", Map(
-; 		"title", "私のモッド",
-; 		"author", "モッドの作者",
-; 		"description", "私のモッドの説明"
-; 	)
-; ))
