@@ -460,8 +460,8 @@ Class ChrLegend {
 				chrTitle := legendPanel["Title"]
 				chrTitle.Text := legendEntry.Has("title") && legendEntry["title"] != "" ? legendEntry["title"] : selectedLabel
 
-				chrTitle.SetFont(
-					StrLen(entry["symbol"]["customs"]) > 0 ? entry["symbol"]["customs"] : ("s" (24) " norm c333333"),
+				PV.SetFont(
+					StrLen(entry["symbol"]["customs"]) > 0 ? RegExReplace(entry["symbol"]["customs"], "(s\d{1,3})") : ("s" (70 * 1.5) " norm c333333"),
 					StrLen(entry["symbol"]["font"]) > 0 ? entry["symbol"]["font"] : Fonts.fontFaces["Default"].name
 				)
 

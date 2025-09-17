@@ -132,7 +132,7 @@ Class ModTools {
 			return False
 		}
 
-		local defaultPaths := [modPath, modPath "\Data", modPath "\Locale", modPath "\Lib", modPath "\Resources"]
+		local defaultPaths := [modPath, modPath "\Data", modPath "\Locale", modPath "\Locale\CharacterLegend", modPath "\Lib", modPath "\Resources"]
 
 		for path in defaultPaths
 			if !DirExist(path)

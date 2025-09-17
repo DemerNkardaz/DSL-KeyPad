@@ -25,6 +25,7 @@
 - Fixes:
 
   - Fixed missing Space key in the “Keyboard Default” bind list.
+  - Fixed mistake with applying character’s styles to the incorrect UI element of “Legends”.
 
 ---
 
@@ -157,6 +158,7 @@
 - Исправления:
 
   - Исправлено отсутствие клавиши пробела в списке биндов «Keyboard Default».
+  - Исправлена ошибка с присвоением стилей символа неверному элементу интерфейса «Легенды».
 
 ---
 
