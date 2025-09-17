@@ -25,4 +25,26 @@ class JSONExt extends JSON {
 
 		return output
 	}
+
+	static EscapeString(str, unescape := False) {
+		if (unescape) {
+			str := StrReplace(str, "\t", "`t")
+			str := StrReplace(str, "\r", "`r")
+			str := StrReplace(str, "\n", "`n")
+			str := StrReplace(str, "\f", "`f")
+			str := StrReplace(str, "\b", "`b")
+			str := StrReplace(str, "\`"", "`"")
+			str := StrReplace(str, "\\", "\")
+		} else {
+			str := StrReplace(str, "\", "\\")
+			str := StrReplace(str, "`"", "\`"")
+			str := StrReplace(str, "`b", "\b")
+			str := StrReplace(str, "`f", "\f")
+			str := StrReplace(str, "`n", "\n")
+			str := StrReplace(str, "`r", "\r")
+			str := StrReplace(str, "`t", "\t")
+		}
+
+		return str
+	}
 }

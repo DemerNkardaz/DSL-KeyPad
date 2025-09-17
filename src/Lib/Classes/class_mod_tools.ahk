@@ -125,6 +125,7 @@ Class ModTools {
 
 	static CreateMod(data := Map("folder", "My Mod", "title", "My Mod", "version", "1.0.0", "author", "", "description", "", "type", "pre_init", "homepage", ""), locales := Map()) {
 		local modPath := App.paths.mods "\" data["folder"]
+		data.Set("description", JSONExt.EscapeString(data.Get("description")))
 
 		if DirExist(modPath) {
 			Util.MsgWarning(Locale.ReadInject("gui.mods.creation.mod_exists", [data["folder"]]))

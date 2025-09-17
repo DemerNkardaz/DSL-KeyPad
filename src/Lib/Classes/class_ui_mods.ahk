@@ -190,6 +190,8 @@ Class ModsGUI {
 			author := Format('<a href="{}" target="_blank">{}</a>', match[2], match[1])
 
 		local description := optionsMap.Has(languageCode) && optionsMap[languageCode].Has("description") && optionsMap[languageCode]["description"] != "" ? optionsMap[languageCode]["description"] : optionsMap["description"]
+		if description is Array
+			description := description.ToString("")
 
 		panel["PreviewImage"].Value := this.GetPreview(&modPath)
 		panel["InfoGroup"].Text := title
@@ -216,8 +218,8 @@ Class ModsGUI {
 	Class ModCreation {
 		title := ""
 
-		defW := 400
-		defH := 600
+		defW := 500
+		defH := 700
 		w := this.defW
 		h := this.defH
 
@@ -312,7 +314,7 @@ Class ModsGUI {
 			modWindow["HomepageTitle"].Move(this.incrementField(6)[2]*)
 			modWindow["HomepageField"].Move(this.incrementField(6)[1]*)
 			modWindow["DescriptionTitle"].Move(this.incrementField(7)[2]*)
-			modWindow["DescriptionField"].Move(this.incrementField(7, 6, True)[1]*)
+			modWindow["DescriptionField"].Move(this.incrementField(7, 6 * 12, True)[1]*)
 			modWindow["CreateBtn"].Move(this.btnX(1), this.btnY, this.btnW, this.btnH)
 			modWindow["CancelBtn"].Move(this.btnX(2), this.btnY, this.btnW, this.btnH)
 
@@ -341,8 +343,6 @@ Class ModsGUI {
 
 			local modWindow := Gui()
 			modWindow.Title := this.title
-			modWindow.Opt("+Resize +MinSize" this.w "x" this.h)
-			modWindow.OnEvent("Size", this.Resize.Bind(this))
 
 			local grpBox := modWindow.AddGroupBox(Format("vModGrpBox x{} y{} w{} h{}", this.grpBoxX, this.grpBoxY, this.grpBoxW, this.grpBoxH), Locale.Read("gui.mods.creation"))
 
@@ -365,15 +365,14 @@ Class ModsGUI {
 
 			local typeTitle := modWindow.AddText(Format("vTypeTitle x{} y{} w{} h{}", this.incrementField(5)[2]*), Locale.Read("dictionary.initialization"))
 			local typeField := modWindow.AddDropDownList(Format("vTypeField x{} y{} w{} h{}", this.incrementField(5)[1]*) Format(" R{}", typeFieldOptions.Count), typeFieldOptions.Values())
-			PostMessage(0x0153, -1, 50, typeField)
-			PostMessage(0x0153, 0, 13, typeField)
+			PostMessage(0x0153, -1, 15, typeField)
 			typeField.Choose(typeFieldOptions.Get(this.data.Get("type")))
 
 			local homepageTitle := modWindow.AddText(Format("vHomepageTitle x{} y{} w{} h{}", this.incrementField(6)[2]*), Locale.Read("dictionary.homepage"))
 			local homepageField := modWindow.AddEdit(Format("vHomepageField x{} y{} w{} h{} -Multi", this.incrementField(6)[1]*), this.data.Get("homepage"))
 
 			local descriptionTitle := modWindow.AddText(Format("vDescriptionTitle x{} y{} w{} h{}", this.incrementField(7)[2]*), Locale.Read("dictionary.description"))
-			local descriptionField := modWindow.AddEdit(Format("vDescriptionField x{} y{} w{} h{} Multi WantTab", this.incrementField(7, 6)[1]*), this.data.Get("description"))
+			local descriptionField := modWindow.AddEdit(Format("vDescriptionField x{} y{} w{} h{} Multi WantTab", this.incrementField(7, 10)[1]*), JSONExt.EscapeString(this.data.Get("description"), True))
 
 			titleField.OnEvent("Change", (*) => SetTitleField(titleField.Value))
 			folderField.OnEvent("Change", (*) => SetFolderField(folderField.Value))
@@ -432,9 +431,11 @@ Class ModsGUI {
 		}
 
 		ModCreate() {
-			if ModTools.CreateMod(this.data, this.locales)
+			if ModTools.CreateMod(this.data, this.locales) {
 				WinExist(this.title) && WinClose(this.title)
-			return ModTools.OpenModFolder(this.data)
+				ModTools.OpenModFolder(this.data)
+			}
+			return
 		}
 	}
 }
