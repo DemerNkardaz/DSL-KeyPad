@@ -26,6 +26,7 @@
 
   - Fixed missing Space key in the “Keyboard Default” bind list.
   - Fixed mistake with applying character’s styles to the incorrect UI element of “Legends”.
+  - Fixed wrong letter in recipe of “Ӛ” (Cyrillic Schwa with Diaeresis): “◌̈Ӛ/Ӛ◌̈” → “◌̈Ә/Ә◌̈”.
 
 ---
 
@@ -159,6 +160,7 @@
 
   - Исправлено отсутствие клавиши пробела в списке биндов «Keyboard Default».
   - Исправлена ошибка с присвоением стилей символа неверному элементу интерфейса «Легенды».
+  - Исправлена неверная буква в рецепте «Ӛ» (Кириллическая Шва с диезерисом): «◌̈Ӛ/Ӛ◌̈» → «◌̈Ә/Ә◌̈».
 
 ---
 

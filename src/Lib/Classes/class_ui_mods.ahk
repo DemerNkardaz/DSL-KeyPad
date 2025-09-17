@@ -346,13 +346,13 @@ Class ModsGUI {
 
 			local grpBox := modWindow.AddGroupBox(Format("vModGrpBox x{} y{} w{} h{}", this.grpBoxX, this.grpBoxY, this.grpBoxW, this.grpBoxH), Locale.Read("gui.mods.creation"))
 
-			local titleTitle := modWindow.AddText(Format("vTitleTitle x{} y{} w{} h{}", this.incrementField(1)[2]*), Locale.Read("dictionary.title"))
+			local titleTitle := modWindow.AddText(Format("vTitleTitle x{} y{} w{} h{}", this.incrementField(1)[2]*), "* " Locale.Read("dictionary.title"))
 			local titleField := modWindow.AddEdit(Format("vTitleField x{} y{} w{} h{} -Multi", this.incrementField(1)[1]*), this.data.Get("title"))
 
-			local folderTitle := modWindow.AddText(Format("vFolderTitle x{} y{} w{} h{}", this.incrementField(2)[2]*), Locale.Read("dictionary.folder"))
+			local folderTitle := modWindow.AddText(Format("vFolderTitle x{} y{} w{} h{}", this.incrementField(2)[2]*), "* " Locale.Read("dictionary.folder"))
 			local folderField := modWindow.AddEdit(Format("vFolderField x{} y{} w{} h{} -Multi", this.incrementField(2)[1]*), this.data.Get("folder"))
 
-			local versionTitle := modWindow.AddText(Format("vVersionTitle x{} y{} w{} h{}", this.incrementField(3)[2]*), Locale.Read("dictionary.version"))
+			local versionTitle := modWindow.AddText(Format("vVersionTitle x{} y{} w{} h{}", this.incrementField(3)[2]*), "* " Locale.Read("dictionary.version"))
 			local versionField := modWindow.AddEdit(Format("vVersionField x{} y{} w{} h{} -Multi", this.incrementField(3)[1]*), this.data.Get("version"))
 
 			local authorTitle := modWindow.AddText(Format("vAuthorTitle x{} y{} w{} h{} ", this.incrementField(4)[2]*), Locale.Read("dictionary.author"))
@@ -431,7 +431,10 @@ Class ModsGUI {
 		}
 
 		ModCreate() {
-			if ModTools.CreateMod(this.data, this.locales) {
+			if this.data.Get("title") = "" || this.data.Get("folder") = "" || this.data.Get("version") = "" {
+				local fieldToBeFocused := this.data.Get("title") = "" ? "TitleField" : this.data.Get("folder") = "" ? "FolderField" : "VersionField"
+				this.GUI[fieldToBeFocused].Focus()
+			} else if ModTools.CreateMod(this.data, this.locales) {
 				WinExist(this.title) && WinClose(this.title)
 				ModTools.OpenModFolder(this.data)
 			}

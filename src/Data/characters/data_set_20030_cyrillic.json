@@ -29,7 +29,8 @@
 	"cyr_[c,s]_let_a_schwa__diaeresis", {
 		"unicode": ["04DA", "04DB"],
 		"groups": ["Cyrillic"],
-		"options": { "useLetterLocale": "Origin", "fastKey": "<!>+ /А/?Secondary" }
+		"options": { "useLetterLocale": "Origin", "fastKey": "<!>+ /А/?Secondary" },
+		"symbol": { "letter": "${cyr_[c,s]_let_a_schwa}" }
 	},
 	"cyr_[s]_let_v_rounded", {
 		"unicode": ["1C80"],
