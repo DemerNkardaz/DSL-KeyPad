@@ -16,6 +16,7 @@
   - Added “ModTools” class with useful methods and parameters for creating mods.
   - Added “Create mod” button in Mods GUI.
   - Added “Options” button in Mods GUI (requires the modmaker to create own GUI in <Mod Class>.tools.config_editor).
+  - Added more information in the “Help” tab.
 
 - Changes:
 
@@ -27,6 +28,7 @@
   - Fixed missing Space key in the “Keyboard Default” bind list.
   - Fixed mistake with applying character’s styles to the incorrect UI element of “Legends”.
   - Fixed wrong letter in recipe of “Ӛ” (Cyrillic Schwa with Diaeresis): “◌̈Ӛ/Ӛ◌̈” → “◌̈Ә/Ә◌̈”.
+  - Fixed wrong description of “Glyph variations” in the “Help” tab.
 
 ---
 
@@ -150,6 +152,7 @@
   - Добавлен класс «ModTools» с полезными методами и параметрами для создания модов.
   - Добавлена кнопка «Создать мод» в GUI модификаций.
   - Добавлена кнопка «Настройки» в GUI модификаций (требует от мододела создание собственного GUI в <Mod Class>.tools.config_editor).
+  - Добавлено больше информации во вкладке «Помощь».
 
 - Изменения:
 
@@ -161,6 +164,7 @@
   - Исправлено отсутствие клавиши пробела в списке биндов «Keyboard Default».
   - Исправлена ошибка с присвоением стилей символа неверному элементу интерфейса «Легенды».
   - Исправлена неверная буква в рецепте «Ӛ» (Кириллическая Шва с диезерисом): «◌̈Ӛ/Ӛ◌̈» → «◌̈Ә/Ә◌̈».
+  - Исправлено неверное описание режима Вриации глифов в вкладке «Помощь».
 
 ---
 

@@ -19,6 +19,10 @@
 	]},
 	{"help.text_processing": [
 		"help.text_processing.quotes",
-		"help.text_processing.converters"
+		"help.text_processing.converters",
+		{"help.text_processing.typographer": [
+			"help.text_processing.typographer.language_rules.russian",
+			"help.text_processing.typographer.language_rules.english"
+		]}
 	]}
 ]

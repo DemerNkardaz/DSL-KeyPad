@@ -346,9 +346,8 @@
 					"Bindings and input:\n",
 					"{var:RightControl} F10 — toggle all bindings state (on/off).\n",
 					"{var:RightAlt} F1 — toggle “Fast Keys” state (on/off, saved to settings file).\n",
-					"{var:RightAlt}{var:RightShift} F1 — toggle input mode between {@default:unicode}/HTML codes/LaTeX commands.\n",
-					"{var:RightAlt} F2 — toggle {@default:TELEX} mode for Vietnamese.\n",
-					"{var:RightAlt}{var:RightShift} F2 — toggle {@default:TELEX} mode for Pinyin.\n\n",
+					"{var:RightAlt}{var:LeftAlt} F1/F2 — toggle “Secondary/Tertiary Keys” state (mutually exclusive) (on/off, saved to settings file).\n",
+					"{var:RightAlt}{var:RightShift} F1 — toggle input mode between {@default:unicode}/HTML codes/LaTeX commands.\n\n",
 					"Other:\n",
 					"{var:Window}{var:LeftAlt} PgUp — open {@default:unicode} web resource for selected symbol."
 				]
@@ -483,7 +482,7 @@
 				]
 			},
 			"glyph_variations": {
-				"__self": "{@:dictionary.glyph_variations}",
+				"__self": "{@:dictionary.glyph_variations}\u200D",
 				"description": [
 					"Combination: {var:Window}{var:LeftAlt} A\n",
 					"Opens a selector with a list of glyph variation modes available for activation, representing “rules” that tell the program to send the specified variant of a symbol instead of the symbol itself, if the variant is registered for the symbol."
@@ -579,6 +578,52 @@
 						"{var:RightControl} J or {var:RightControl}{var:LeftControl} J — \u21B3 same as above, but ignores [a-zA-Zа-яА-ЯёЁ0-9., :;!?()`\"'-+=/\\].\n\n",
 						"{var:RightControl} Y, U, I — convert to Unicode code points in formats \\u0020, 0020 and 0x0020.\n"
 					]
+				},
+				"typographer": {
+					"__self": "Typographer",
+					"description": [
+						"Combination: (select text) + {var:RightAlt}F8 / {var:RightAlt}F9 (additional rules)\n\n",
+						"Processes selected text according to specified replacement rules depending on the active keyboard layout language.\n",
+						"May work unstably in some applications. It is recommended to process text in simple editors."
+					],
+					"language_rules": {
+						"russian": {
+							"__self": "Language Rules [Russian]",
+							"description": [
+								"Default rules:",
+								"\n\u2003•\u2002Removing double spaces, spaces at the beginning and end of lines, before “right-side” punctuation marks and after “left-side” ones ([« word »] → [«word»]).",
+								"\n\u2003•\u2002Replacing double hyphen-minus with em dash.",
+								"\n\u2003•\u2002Replacing three dots with ellipsis.",
+								"\n\u2003•\u2002Replacing [\"*\"] with [«*»] and [\"\"*\"\"] with [«„*“»].",
+								"\n\u2003•\u2002Replacing «!/?…|?...|...?» with «!..»/«?..».",
+								"\n\u2003•\u2002Moving period outside closing quotation mark (.» → ».).",
+								"\n\u2003•\u2002Inserting non-breaking space every 3 digits in numbers (150000000 → 150 000 000).",
+								"\n\u2003•\u2002Replacing space with non-breaking space in cases:",
+								"\n\u2003\u2003‣\u2002After dash when it starts a sentence (dialogue).",
+								"\n\u2003\u2003‣\u2002Before and after dash if there’s a punctuation mark before the “before” space (attribution).",
+								"\n\u2003\u2003‣\u2002Before dash if there are no punctuation marks “before” and “after” (subject and predicate, etc.).",
+								"\n\u2003\u2003‣\u2002Between number and currency symbol.",
+								"\n\u2003\u2003‣\u2002After single letters, conjunctions, certain abbreviations and before “б|бы|ж|же|ли|ль”.",
+								"\n\u2003\u2003‣\u2002At the end of paragraph between two words if the last one is shorter than 13 characters.",
+								"\n\u2003•\u2002Replacing space with thin space in initials.",
+								"\n\u2003•\u2002Removing space in cases:",
+								"\n\u2003\u2003‣\u2002Between number and percent, per mille and basis point symbols (% ‰ ‱).",
+								"\n\u2003•\u2002Replacing hyphen-minus in cases:",
+								"\n\u2003\u2003‣\u2002With minus sign before numbers.",
+								"\n\u2003\u2003‣\u2002With en dash between numbers (including Roman numerals) (range).",
+								"\n\u2003\u2003‣\u2002Including en dash — with ellipsis in ranges starting with negative numbers (−70–100\u2009℃ → −70…100\u2009℃).",
+								"\n\nAdditional rules:",
+								"\n\u2003•\u2002Replacing space at the beginning of dialogue with semicircular space.",
+								"\n\u2003•\u2002Adding circular space at the beginning of paragraph to simulate paragraph indent."
+							]
+						},
+						"english": {
+							"__self": "Language Rules [English]",
+							"description": [
+								"Currently unavailable."
+							]
+						}
+					}
 				}
 			}
 		},

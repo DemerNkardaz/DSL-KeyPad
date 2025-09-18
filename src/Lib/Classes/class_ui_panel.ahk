@@ -452,22 +452,64 @@ Class UIMainPanel {
 		helpTree.SetFont("s10")
 		helpTextBox.SetFont("s11")
 
-		for each in this.helpData {
-			if each is String {
-				helpTree.Add(Locale.Read(each))
-			} else if each is Map {
-				for key, value in each {
-					parentalEntry := helpTree.Add(Locale.Read(key), , InStr(key, "smelter") ? "Expand" : "")
-					for eachChild in value {
-						helpTree.Add(Locale.Read(eachChild), parentalEntry)
-					}
-				}
-			}
-		}
+		this.BuildTreeRecursive(helpTree, this.helpData)
 
 		helpTree.OnEvent("ItemSelect", (TV, Item) => this.TreeViewSetDescription(TV, Item, helpText))
 
 		return panelWindow
+	}
+
+	BuildTreeRecursive(treeControl, data, parentItem := 0) {
+		for each in data {
+			if each is String {
+				treeControl.Add(Locale.Read(each), parentItem)
+			} else if each is Map {
+				for key, value in each {
+					newParent := treeControl.Add(
+						Locale.Read(key),
+						parentItem,
+						InStr(key, "smelter") ? "Expand" : ""
+					)
+
+					if value is Array {
+						this.BuildTreeRecursive(treeControl, value, newParent)
+					} else if value is Map {
+						this.BuildTreeRecursive(treeControl, [value], newParent)
+					}
+				}
+			}
+		}
+	}
+
+	FindAndSetText(data, selectedLabel, targetTextBox) {
+		for each in data {
+			if each is String {
+				if Locale.Read(each) = selectedLabel {
+					targetTextBox.Text := Locale.Read(each ".description")
+					targetTextBox.SetFont("s11", "Segoe UI")
+					return true
+				}
+			} else if each is Map {
+				for key, value in each {
+					if Locale.Read(key) = selectedLabel {
+						targetTextBox.Text := Locale.Read(key ".description")
+						targetTextBox.SetFont("s11", "Segoe UI")
+						return true
+					}
+
+					if value is Array {
+						if this.FindAndSetText(value, selectedLabel, targetTextBox) {
+							return true
+						}
+					} else if value is Map {
+						if this.FindAndSetText([value], selectedLabel, targetTextBox) {
+							return true
+						}
+					}
+				}
+			}
+		}
+		return false
 	}
 
 	TreeViewSetDescription(TV, Item, TargetTextBox) {
@@ -476,29 +518,7 @@ Class UIMainPanel {
 
 		selectedLabel := TV.GetText(Item)
 
-		for each in this.helpData {
-			if each is String && Locale.Read(each) = selectedLabel {
-				TargetTextBox.Text := Locale.Read(each ".description")
-				TargetTextBox.SetFont("s11", "Segoe UI")
-				return
-			} else if each is Map {
-				for key, value in each {
-					if Locale.Read(key) = selectedLabel {
-						TargetTextBox.Text := Locale.Read(key ".description")
-						TargetTextBox.SetFont("s11", "Segoe UI")
-						return
-					} else {
-						for eachChild in value {
-							if Locale.Read(eachChild) = selectedLabel {
-								TargetTextBox.Text := Locale.Read(eachChild ".description")
-								TargetTextBox.SetFont("s11", "Segoe UI")
-								return
-							}
-						}
-					}
-				}
-			}
-		}
+		this.FindAndSetText(this.helpData, selectedLabel, TargetTextBox)
 		return
 	}
 
