@@ -29,6 +29,7 @@
   - Fixed mistake with applying character’s styles to the incorrect UI element of “Legends”.
   - Fixed wrong letter in recipe of “Ӛ” (Cyrillic Schwa with Diaeresis): “◌̈Ӛ/Ӛ◌̈” → “◌̈Ә/Ә◌̈”.
   - Fixed wrong description of “Glyph variations” in the “Help” tab.
+  - Fixed error on startup when checking recipes with multi-reference for entries (like ${\m,u,l,t,i/}) would cause an error instead of splitting them for check each separately.
 
 ---
 
@@ -165,6 +166,7 @@
   - Исправлена ошибка с присвоением стилей символа неверному элементу интерфейса «Легенды».
   - Исправлена неверная буква в рецепте «Ӛ» (Кириллическая Шва с диезерисом): «◌̈Ӛ/Ӛ◌̈» → «◌̈Ә/Ә◌̈».
   - Исправлено неверное описание режима Вриации глифов в вкладке «Помощь».
+  - Исправлена ошибка при запуске: при проверке рецептов с мульти-ссылками на записи (например, ${\m,u,l,t,i/}) раньше возникала ошибка «запись не найдена» вместо разделения мульти-ссылки для проверки каждой по отдельности.
 
 ---
 

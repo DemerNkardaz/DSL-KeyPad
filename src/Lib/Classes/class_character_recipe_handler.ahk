@@ -107,8 +107,29 @@ Class ChrRecipeHandler {
 
 		while RegExMatch(tempRecipe, "\${(.*?)}", &match) {
 			characterInfo := this.ParseCharacterInfo(match[1])
+			if RegExMatch(characterInfo.name, "\\(.*?)\/", &multiMatch) {
+				local resolvedValue := ""
+				local split := StrSplit(multiMatch[1], ",")
 
-			if !ChrLib.entries.HasOwnProp(characterInfo.name) {
+				for each in split {
+					local name := each ~= "^\+" ? SubStr(each, 2) : RegExReplace(characterInfo.name, "\\(.*?)\/", each)
+
+					if !ChrLib.entries.HasOwnProp(name) {
+						if skipStatus = "Missing" {
+							MsgBox(Locale.Read("error.critical") "`n`n" Locale.ReadInject("error.entry_not_found_recipe", [entryName, RegExReplace(recipe, "\$(?![{(])"), name]), App.Title(), "Iconx")
+							return tempRecipe
+						}
+					}
+
+					local interValue := ""
+					Loop characterInfo.repeatCount
+						interValue .= ChrLib.Get(name, characterInfo.hasAlteration, "Unicode", characterInfo.alteration)
+					resolvedValue .= interValue
+				}
+
+				tempRecipe := RegExReplace(tempRecipe, "\${" RegExEscape(match[1]) "}", resolvedValue)
+				continue
+			} else if !ChrLib.entries.HasOwnProp(characterInfo.name) {
 				if skipStatus = "Missing" {
 					MsgBox(Locale.Read("error.critical") "`n`n" Locale.ReadInject("error.entry_not_found_recipe", [entryName, RegExReplace(recipe, "\$(?![{(])"), characterInfo.name]), App.Title(), "Iconx")
 					return tempRecipe
@@ -117,7 +138,7 @@ Class ChrRecipeHandler {
 
 			interValue := ""
 			Loop characterInfo.repeatCount
-				interValue .= Chrlib.Get(characterInfo.name, characterInfo.hasAlteration, characterInfo.alteration)
+				interValue .= Chrlib.Get(characterInfo.name, characterInfo.hasAlteration, "Unicode", characterInfo.alteration)
 
 			tempRecipe := RegExReplace(tempRecipe, "\${" RegExEscape(match[1]) "}", interValue)
 		}
