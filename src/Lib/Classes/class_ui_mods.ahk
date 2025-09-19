@@ -95,14 +95,14 @@ Class ModsGUI {
 		local modsList := []
 
 		local imgList := IL_Create()
-		IL_Add(imgList, App.icoDLL, App.indexIcos.Get("blank"))
+		IL_Add(imgList, App.icoDLL, App.indexIcos.Get("mods_flat"))
 
 		local idx := 1
 		for each in ["pre_init", "post_init"] {
 			for key, value in modsRead[each].OwnProps() {
 				local path := App.paths.mods "\" key
 				local modData := ModsInjector.ReadModManifest(key)
-				local previewImg := this.GetPreview(&path, , True)
+				local previewImg := this.GetPreview(&path, , True, "-16")
 
 				if previewImg is String {
 					idx++
@@ -206,13 +206,15 @@ Class ModsGUI {
 		return this.selectedMod := modFolder
 	}
 
-	GetPreview(&modPath?, sizes := 96, returnArray := False) {
-		if IsSet(modPath)
-			Loop Files modPath "\preview.*", "F"
-				if A_LoopFileExt ~= "(ico|png|jpg|jpeg)"
-					return A_LoopFileFullPath
+	GetPreview(&modPath?, sizes := 96, returnArray := False, postfix := "") {
+		if IsSet(modPath) {
+			for suffix in (postfix ? [postfix, ""] : [""])
+				Loop Files modPath "\preview" suffix ".*", "F"
+					if A_LoopFileExt ~= "(ico|png|jpg)"
+						return A_LoopFileFullPath
+		}
 
-		return returnArray ? [App.icoDLL, App.indexIcos.Get("blank")] : "HBITMAP:*" LoadPicture(App.icoDLL, "Icon" App.indexIcos.Get("blank") " " Format("w{} h{}", sizes, sizes))
+		return returnArray ? [App.icoDLL, App.indexIcos.Get("mods")] : "HBITMAP:*" LoadPicture(App.icoDLL, "Icon" App.indexIcos.Get("mods") " " Format("w{} h{}", sizes, sizes))
 	}
 
 	Class ModCreation {

@@ -123,7 +123,7 @@ Class ModTools {
 		return
 	}
 
-	static CreateMod(data := Map("folder", "My Mod", "title", "My Mod", "version", "1.0.0", "author", "", "description", "", "type", "pre_init", "homepage", ""), locales := Map()) {
+	static CreateMod(data := Map("folder", "My_Mod", "title", "My Mod", "version", "1.0.0", "author", "", "description", "", "type", "pre_init", "homepage", ""), locales := Map()) {
 		local modPath := App.paths.mods "\" data["folder"]
 		data.Set("description", JSONExt.EscapeString(data.Get("description")))
 

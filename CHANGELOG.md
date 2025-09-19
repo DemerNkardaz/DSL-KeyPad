@@ -17,6 +17,7 @@
   - Added “Create mod” button in Mods GUI.
   - Added “Options” button in Mods GUI (requires the modmaker to create own GUI in <Mod Class>.tools.config_editor).
   - Added more information in the “Help” tab.
+  - Added possibility to use separate preview-16.(ico|png|jpg) icon for displaying in the list of mods.
 
 - Changes:
 
@@ -154,6 +155,7 @@
   - Добавлена кнопка «Создать мод» в GUI модификаций.
   - Добавлена кнопка «Настройки» в GUI модификаций (требует от мододела создание собственного GUI в <Mod Class>.tools.config_editor).
   - Добавлено больше информации во вкладке «Помощь».
+  - Добавлена возможность использовать отдельную preview-16.(ico|png|jpg) иконку для отображения в списке модификаций.
 
 - Изменения:
 
