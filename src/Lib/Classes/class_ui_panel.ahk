@@ -768,50 +768,65 @@ Class UIMainPanel {
 			local addingRow := []
 
 			if condition = "Added" {
-				local entry := ChrLib.GetEntry(faveName)
-				local reserveCombinationKey := ""
+				local favoritesListView := panelWindow["favoritesLV"]
+				local itemsCount := favoritesListView.GetCount()
+				local alreadyExists := false
 
-				for cgroup, ckey in globalInstances.MainGUI.combinationKeyToGroupPairs
-					reserveCombinationKey := entry["groups"].HasValue(cgroup) ? ckey : reserveCombinationKey
-
-				local recipe := entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : entry["recipe"].Length > 0 ? entry["recipe"].ToString() : ""
-				local bindings := entry["options"]["fastKey"] != "" ? entry["options"]["fastKey"] : entry["options"]["altLayoutKey"] != "" ? entry["options"]["altLayoutKey"] : entry["options"]["altSpecialKey"] != "" ? entry["options"]["altSpecialKey"] : ""
-				bindings := bindings != "" ? (reserveCombinationKey != "" ? reserveCombinationKey " + " : "") bindings : ""
-
-				while (RegExMatch(bindings, "<%\s([^<%]+)\s%/>", &match))
-					bindings := RegExReplace(bindings, match[0], %match[1]%)
-
-				local entryView := ""
-				local actualTitle := ""
-
-				for tabPrefix in allPrefixes {
-					local lv := panelWindow[tabPrefix "LV"]
-					local count := lv.GetCount()
-
-					Loop count {
-						local idx := A_Index
-						local name := lv.GetText(idx, 5)
-
-						if name == faveName {
-							entryView := lv.GetText(idx, 3)
-							actualTitle := lv.GetText(idx, 1)
-							actualTitle := StrReplace(actualTitle, star, "")
-							actualTitle := actualTitle star
-							break
-						}
-					}
-					if entryView != ""
+				Loop itemsCount {
+					local index := A_Index
+					local existingEntryName := favoritesListView.GetText(index, 5)
+					if existingEntryName == faveName {
+						alreadyExists := true
 						break
+					}
 				}
 
-				addingRow := [,
-					actualTitle,
-					recipe,
-					bindings,
-					entryView,
-					faveName,
-					""
-				]
+				if !alreadyExists {
+					local entry := ChrLib.GetEntry(faveName)
+					local reserveCombinationKey := ""
+
+					for cgroup, ckey in globalInstances.MainGUI.combinationKeyToGroupPairs
+						reserveCombinationKey := entry["groups"].HasValue(cgroup) ? ckey : reserveCombinationKey
+
+					local recipe := entry["recipeAlt"].Length > 0 ? entry["recipeAlt"].ToString() : entry["recipe"].Length > 0 ? entry["recipe"].ToString() : ""
+					local bindings := entry["options"]["fastKey"] != "" ? entry["options"]["fastKey"] : entry["options"]["altLayoutKey"] != "" ? entry["options"]["altLayoutKey"] : entry["options"]["altSpecialKey"] != "" ? entry["options"]["altSpecialKey"] : ""
+					bindings := bindings != "" ? (reserveCombinationKey != "" ? reserveCombinationKey " + " : "") bindings : ""
+
+					while (RegExMatch(bindings, "<%\s([^<%]+)\s%/>", &match))
+						bindings := RegExReplace(bindings, match[0], %match[1]%)
+
+					local entryView := ""
+					local actualTitle := ""
+
+					for tabPrefix in allPrefixes {
+						local lv := panelWindow[tabPrefix "LV"]
+						local count := lv.GetCount()
+
+						Loop count {
+							local idx := A_Index
+							local name := lv.GetText(idx, 5)
+
+							if name == faveName {
+								entryView := lv.GetText(idx, 3)
+								actualTitle := lv.GetText(idx, 1)
+								actualTitle := StrReplace(actualTitle, star, "")
+								actualTitle := actualTitle star
+								break
+							}
+						}
+						if entryView != ""
+							break
+					}
+
+					addingRow := [,
+						actualTitle,
+						recipe,
+						bindings,
+						entryView,
+						faveName,
+						""
+					]
+				}
 			}
 
 			this.ListViewAffectFavoritesTab(&faveName, &condition, panelWindow, addingRow)
@@ -833,7 +848,7 @@ Class UIMainPanel {
 					break
 				}
 			}
-		} else if condition = "Added"
+		} else if condition = "Added" && addingRow.Length > 0
 			favoritesListView.Add(addingRow*)
 
 		return
