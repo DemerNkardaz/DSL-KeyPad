@@ -850,7 +850,6 @@ Class UIMainPanel {
 			}
 		} else if condition = "Added" && addingRow.Length > 0
 			favoritesListView.Add(addingRow*)
-
 		return
 	}
 

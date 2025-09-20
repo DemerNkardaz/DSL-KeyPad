@@ -215,7 +215,7 @@
 		"groups": [[], ["Latin", "IPA"]],
 		"alterations": [{}, { "modifier": "1D53" }],
 		"options": { "referenceLocale": "o$", "layoutTitles": ["", true], "altLayoutKey": ["", ">!<+ $"] },
-		"recipe": ["$-"],
+		"recipe": ["$/"],
 		"symbol": { "beforeLetter": "open" }
 	},
 	"lat_[s]_let_o_sideways", {
@@ -852,6 +852,16 @@
 		},
 		"recipe": ["$ps", "-$-"]
 	},
+	"lat_[s]_let_u_upsilon__stroke_short", {
+		"unicode": ["1D7F"],
+		"tags": ["near-close central rounded vowel (reduced)", "ненапряжённый огублённый гласный среднего ряда верхнего подъёма (редуцированный)"],
+		"groups": ["Latino-Hellenic", "IPA"],
+		"alterations": {},
+		"options": {
+			"layoutTitles":  true, "altLayoutKey": "", "useLetterLocale": "Origin"
+		},
+		"symbol": { "letter": "${lat_[s]_let_u_upsilon}" }
+	},
 	"lat_[c,s]_let_a__comma_above", {
 		"unicode": ["A7BA", "A7BB"],
 		"options": { "referenceLocale": "_a$" },
@@ -1318,7 +1328,7 @@
 		"options": {
 			"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"],
 			"useLetterLocale": true, "fastKey": "$?Secondary" },
-		"recipe": ["$${solidus_short}"]
+		"recipe": ["$${solidus_short}", "${solidus_short}$"]
 	},
 	"lat_[c,s]_let_e__acute", {
 		"unicode": ["00C9", "00E9"],
@@ -1564,8 +1574,7 @@
 		"alterations": [{  }, {  "modifier": "10795" }],
 		"options": {
 			"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"],
-			"fastKey": "$?Secondary" },
-		"recipe": ["$${solidus_short}"]
+			"fastKey": "$?Secondary" }
 	},
 	"lat_[c,s]_let_i__acute", {
 		"unicode": ["00CD", "00ED"],
@@ -1642,7 +1651,7 @@
 		"unicode": ["0197", "0268"],
 		"tags": [[], ["close central unrounded vowel", "неогублённый гласный среднего ряда верхнего подъёма"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
-		"alterations": [{ "smallCapital": "1D7B" }, { "modifier": "1DA4" }],
+		"alterations": [{ "smallCapital": "1D7B", "smallCapitalModifier": "1DA7" }, { "modifier": "1DA4" }],
 		"options": { "altLayoutKey": ["", ">! $"], "layoutTitles": ["", true] }
 	},
 	"lat_[c,s]_let_i__ogonek", {
@@ -2078,12 +2087,14 @@
 			"telex__vietnamese": "$ \\X\\"
 		}
 	},
-	"lat_[c,s]_let_o__tilde_overlay", {
+	"lat_[c,s]_let_o_barred", {
 		"unicode": ["019F", "0275"],
 		"tags": [[], ["close-mid central rounded vowel", "огублённый гласный среднего ряда средне-верхнего подъёма"]],
 		"alterations": [{}, { "modifier": "1DB1" }],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
-		"options": { "altLayoutKey": ["", "c*>!<! $"], "layoutTitles": ["", true] }
+		"options": { "altLayoutKey": ["", "c*>!<! $"], "layoutTitles": ["", true] },
+		"symbol": { "beforeLetter": "barred" },
+		"recipe": ["$-", "-$"]
 	},
 	"lat_[c,s]_let_o__circumflex__acute", {
 		"unicode": ["1ED0", "1ED1"],
@@ -2496,7 +2507,7 @@
 	"lat_[c,s]_let_u__stroke_long", {
 		"unicode": ["0244", "0289"],
 		"tags": [[], ["close central rounded vowel", "огублённый гласный среднего ряда верхнего подъёма"]],
-		"alterations": [{}, { "modifier": "1DB6" }],
+		"alterations": [{ "smallCapital": "1D7E" }, { "modifier": "1DB6" }],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"options": { "altLayoutKey": ["", ">!<!<+ $"], "layoutTitles": ["", true] }
 	},

@@ -1964,7 +1964,8 @@
 					"<^>!<!": "lat_s_let_m_turned__long_leg"
 				},
 				"I": {
-					"<^>!": "[&ipa,lat]_[k,s]_let_i[,__stroke_short]"
+					"<^>!": "[&ipa,lat]_[k,s]_let_i[,__stroke_short]",
+					"<^>!<!": "[&ipa]_[k]_let_i[__stroke_short]"
 				},
 				"J": {
 					"<^>!": "lat_s_let_j__crossed_tail",
@@ -1986,7 +1987,7 @@
 				"O": {
 					"<^>!": "lat_s_let_o_rams_horn",
 					"<^>!<+": "lat_s_let_o_open",
-					"<^>!<!": "lat_s_let_o__[tilde_overlay,solidus_long]",
+					"<^>!<!": "lat_s_let_o_[barred,_solidus_long]",
 					"<^>!<!<+": "[&ipa,lat]_[k,s]_lig_oe"
 				},
 				"P": {

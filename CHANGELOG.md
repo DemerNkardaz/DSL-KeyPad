@@ -9,7 +9,7 @@
 - Additions:
 
   - Addded missed latin characters:
-    - [ 𐞥 𐞀 ⁱ ] [ ꟱ ]
+    - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ]
   - Addded missed IPA characters:
     - [ 𐞁 𐞂 ]
   - IPA characters now have dedicated tabs for binds and recipes.
@@ -23,6 +23,8 @@
 
   - “Compose” character preview in the tooltip now changes depending on the active “Glyph Variations” mode.
   - Modification’s “options.ini” replaced with “manifest.json,” base keys now stored in root instead of “[options]” section.
+  - Entries “Lat. Capital/Small Letter O With Overlay Tilde” renamed to “Lat. Capital/Small Letter Barred O”, recipe changed from using middle tilde to hyphen-minus (using middle tile was mistaken).
+  - Recipe of “Lat. Capital/Small Letter Open O” now uses solidus instead of hyphen-minus.
 
 - Fixes:
 
@@ -32,6 +34,7 @@
   - Fixed wrong description of “Glyph variations” in the “Help” tab.
   - Fixed error on startup when checking recipes with multi-reference for entries (like ${\m,u,l,t,i/}) would cause an error instead of splitting them for check each separately.
   - Fixed error with duplication of entries in the “Favorites” tab, also fixed error with removing entries from the “Favorites” tab when there are duplicates.
+  - Fixed mistake with “Ħħ” recipe which used short solidus instead of short stroke.
 
 ---
 
@@ -148,7 +151,7 @@
 - Дополнения:
 
   - Добавлены пропущенные символы латиницы:
-    - [ 𐞥 𐞀 ⁱ ] [ ꟱ ]
+    - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ ]
   - Добавлены пропущенные символы МФА:
     - [ 𐞁 𐞂 ]
   - Теперь символы МФА имеют собственные вкладки со списками биндов и рецептов.
@@ -162,6 +165,8 @@
 
   - Теперь превью символов в подсказке режима композиции изменяется в зависимости от активного режима Вриации глифов.
   - Для модификаций «options.ini» заменен на «manifest.json», базовые ключи теперь хранятся в корне вместо секции «[options]».
+  - Записи «Лат. прописная/строчная буква О с тильдой по середине» переименованы в «Лат. прописная/строчная буква перечёркнутая О», рецепт изменён на использование дефисо-минуса вместо тильды по середине (использование тильды по середине было ошибочно).
+  - Рецепт «Лат. прописная/строчная буква открытая О» теперь использует косую черту вместо дефисо-минуса.
 
 - Исправления:
 
@@ -171,6 +176,7 @@
   - Исправлено неверное описание режима Вриации глифов в вкладке «Помощь».
   - Исправлена ошибка при запуске: при проверке рецептов с мульти-ссылками на записи (например, ${\m,u,l,t,i/}) раньше возникала ошибка «запись не найдена» вместо разделения мульти-ссылки для проверки каждой по отдельности.
   - Исправлена ошибка с дублированием записи во вкладке «Избранное» и ошибка, возникающая при попытке убрать запись из избранного при дублировании.
+  - Исправлена ошибка с рецептом символа «Ħħ», который использовал косую черту вместо штриха.
 
 ---
 

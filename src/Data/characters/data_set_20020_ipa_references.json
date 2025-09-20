@@ -64,6 +64,21 @@
 		"recipe": [],
 		"recipeAlt": []
 	},
+	"&ipa_k_let_[i__stroke_short]", {
+		"&data": { "originScript": "&ipa", "script": "&ipa" },
+		"reference": {
+			"name": "lat_c_let_[i__stroke_short]",
+			"as": "smallCapital",
+			"include": {"modifier": "smallCapitalModifier"}
+		},
+		"groups": ["IPA"],
+		"tags": [
+			["near-close central unrounded vowel (reduced)", "неогублённый гласный среднего ряда верхнего подъёма (редуцированный)"]
+		],
+		"options": { "noCalc": true, "altLayoutKey": ">!<! $", "layoutTitles": true },
+		"recipe": [],
+		"recipeAlt": []
+	},
 	"&ipa_s_let_[b_beta,h_chi]", {
 		"&data": { "originScript": "&ipa", "script": "&ipa" },
 		"reference": {
