@@ -238,7 +238,7 @@
 	"lat_[s]_let_o_open_sideways", {
 		"unicode": ["1D12"],
 		"options": { "referenceLocale": "o$" },
-		"recipe": ["$-${arrow_right_circle}", "${lat_[s]_let_o_sideways}${arrow_left_circle}"],
+		"recipe": ["$/${arrow_right_circle}", "${lat_[s]_let_o_sideways}/", "${lat_[s]_let_o_open}${arrow_right_circle}"],
 		"symbol": { "beforeLetter": "sideways,open" }
 	},
 	"lat_[c,s]_let_q_tresillo", {
