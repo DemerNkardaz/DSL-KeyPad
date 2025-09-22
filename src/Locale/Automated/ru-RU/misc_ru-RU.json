@@ -19,6 +19,10 @@
 		"top_cjk_title_bracket": "Верхняя заголовочная кавычка (CJK)",
 		"top_double_cjk_title_bracket": "Верхняя двойная заголовочная кавычка (CJK)",
 		"bottom_cjk_title_bracket": "Нижняя заголовочная кавычка (CJK)",
-		"bottom_double_cjk_title_bracket": "Нижняя двойная заголовочная кавычка (CJK)"
+		"bottom_double_cjk_title_bracket": "Нижняя двойная заголовочная кавычка (CJK)",
+		"top_left_half_bracket": "Верхняя левая полускобка",
+		"top_right_half_bracket": "Верхняя правая полускобка",
+		"bottom_left_half_bracket": "Нижняя левая полускобка",
+		"bottom_right_half_bracket": "Нижняя правая полускобка"
 	}
 }

@@ -33,7 +33,7 @@
 		"tags": ["cancel tag", "закрывающий тег"],
 		"groups": ["Format Characters"],
 		"unicode": "E007F",
-		"options": { "suggestionsAtEnd": true, "fastKey": ">! 6" },
+		"options": { "suggestionsAtEnd": true, "fastKey": ">+ 6" },
 		"symbol": { "alt": "<CANCEL TAG>" },
 		"recipe": ["tcancel"]
 	},

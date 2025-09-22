@@ -615,7 +615,7 @@
 	},
 	"lat_[c,s]_let_z_visigothic", {
 		"unicode": ["A762", "A763"],
-		"options": { "referenceLocale": "z$", "fastKey": "<!>+ $?Secondary" },
+		"options": { "referenceLocale": "z$", "fastKey": "<!>+ Z?Secondary" },
 		"recipe": ["\\c\\$"],
 		"symbol": { "beforeLetter": "visigothic", "letter": "${lat_[c,s]_let_z_ezh}" }
 	},
@@ -657,6 +657,18 @@
 		"options": { "referenceLocale": "m$", "fastKey": ["", "<+ $?Secondary"] },
 		"recipe": [["epi ${arrow_down}$"], ["epi $"]],
 		"symbol": { "beforeLetter": ["epigraphic,inverted", "epigraphic,archaic"] }
+	},
+	"lat_[c,s]_let_a_egyptological_alef", {
+		"unicode": ["A722", "A723"],
+		"options": { "useLetterLocale": true, "fastKey": "<+ ;?Secondary" },
+		"recipe": ["egt /a/lef"],
+		"symbol": { "beforeLetter": "egyptological::2" }
+	},
+	"lat_[c,s]_let_a_egyptological_ain", {
+		"unicode": ["A724", "A725"],
+		"options": { "useLetterLocale": true, "fastKey": ">+ ;?Secondary" },
+		"recipe": ["egt /a/in"],
+		"symbol": { "beforeLetter": "egyptological::2" }
 	},
 	"lat_s_let_s_voiced_laryngeal_spirant", {
 		"unicode": "1D24",

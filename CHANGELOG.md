@@ -9,9 +9,11 @@
 - Additions:
 
   - Addded missed latin characters:
-    - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ]
+    - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ] [ ꜣ Ꜣ ꜥ Ꜥ (Egyptological Alef and Ain) ]
   - Addded missed IPA characters:
     - [ 𐞁 𐞂 ]
+  - Addded missed miscellaneous characters:
+    - [ ⸢ ⸣ ⸤ ⸥ ]
   - IPA characters now have dedicated tabs for binds and recipes.
   - Added “ModTools” class with useful methods and parameters for creating mods.
   - Added “Create mod” button in Mods GUI.
@@ -151,9 +153,11 @@
 - Дополнения:
 
   - Добавлены пропущенные символы латиницы:
-    - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ ]
+    - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ ] [ ꜣ Ꜣ ꜥ Ꜥ (Египтологические Алеф и Айн) ]
   - Добавлены пропущенные символы МФА:
     - [ 𐞁 𐞂 ]
+  - Добавлены пропущенные прочие символы:
+    - [ ⸢ ⸣ ⸤ ⸥ ]
   - Теперь символы МФА имеют собственные вкладки со списками биндов и рецептов.
   - Добавлен класс «ModTools» с полезными методами и параметрами для создания модов.
   - Добавлена кнопка «Создать мод» в GUI модификаций.

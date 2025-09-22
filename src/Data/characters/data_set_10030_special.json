@@ -849,14 +849,15 @@
 		"tags": ["hyphen", "дефис"],
 		"groups": ["Dashes", "Smelting Special", "Special Fast Secondary"],
 		"alterations": { "oblique": "2E5D" },
-		"options": { "fastKey": "<! -" },
+		"options": { "fastKey": "<! - | <! \\ ⸢Oblique⸣" },
 		"recipe": ["1-"]
 	},
 	"hyphen_double", {
 		"unicode": "2E40",
 		"tags": ["double hyphen", "двойной дефис"],
-		"groups": ["Dashes", "Smelting Special"],
+		"groups": ["Dashes", "Smelting Special", "Special Fast Secondary"],
 		"alterations": { "oblique": "2E17" },
+		"options": { "fastKey": "<!>+ - | <!>+ \\ ⸢Oblique⸣" },
 		"recipe": ["${hyphen×2}"]
 	},
 	"no_break_hyphen", {
@@ -1938,13 +1939,13 @@
 		"unicode": "3014",
 		"tags": ["cjk left tortoise shell bracket", "восточная левая панцирная скобка"],
 		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": "<! [" }
+		"options": { "fastKey": "<+>+ [" }
 	},
 	"right_cjk_tortoise_shell", {
 		"unicode": "3015",
 		"tags": ["cjk right tortoise shell bracket", "восточная правая панцирная скобка"],
 		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": "<! ]" }
+		"options": { "fastKey": "<+>+ ]" }
 	},
 	"top_cjk_tortoise_shell", {
 		"unicode": "FE39",
@@ -2049,6 +2050,35 @@
 			["${(left|right)_cjk_title_bracket}${arrow_up}"],
 			["${top_cjk_title_bracket×2}", "${(left|right)_cjk_title_bracket×2}${arrow_down}"],
 			["${bottom_cjk_title_bracket×2}", "${(left|right)_cjk_title_bracket×2}${arrow_up}"]
+		]
+	},
+	"[top_left,top_right,bottom_left,bottom_right]_half_bracket", {
+		"unicode": [
+			"2E22",
+			"2E23",
+			"2E24",
+			"2E25"
+		],
+		"tags": [
+			["top left half bracket", "верхняя левая полускобка"],
+			["top right half bracket", "верхняя правая полускобка"],
+			["bottom left half bracket", "нижняя левая полускобка"],
+			["bottom right half bracket", "нижняя правая полускобка"]
+		],
+		"groups": ["Brackets", "Smelting Special", "Special Fast Secondary"],
+		"options": {
+			"fastKey": [
+				"c*<! [",
+				"c*<! ]",
+				"<! [",
+				"<! ]"
+			]
+		},
+		"recipe": [
+			["${arrow_leftup}/["],
+			["${arrow_rightup}/]"],
+			["${arrow_leftdown}/["],
+			["${arrow_rightdown}/]"]
 		]
 	},
 	"copyright", {

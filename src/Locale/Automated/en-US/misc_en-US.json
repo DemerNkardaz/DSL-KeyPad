@@ -19,6 +19,10 @@
 		"top_cjk_title_bracket": "Top title quote (CJK)",
 		"top_double_cjk_title_bracket": "Top double title quote (CJK)",
 		"bottom_cjk_title_bracket": "Bottom title quote (CJK)",
-		"bottom_double_cjk_title_bracket": "Bottom double title quote (CJK)"
+		"bottom_double_cjk_title_bracket": "Bottom double title quote (CJK)",
+		"top_left_half_bracket": "Top left half bracket",
+		"top_right_half_bracket": "Top right half bracket",
+		"bottom_left_half_bracket": "Bottom left half bracket",
+		"bottom_right_half_bracket": "Bottom right half bracket"
 	}
 }
