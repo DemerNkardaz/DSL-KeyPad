@@ -8,11 +8,11 @@
 
 - Additions:
 
-  - Addded missed latin characters:
+  - Addded new latin characters:
     - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ] [ ꜣ Ꜣ ꜥ Ꜥ (Egyptological Alef and Ain) ]
-  - Addded missed IPA characters:
+  - Addded new IPA characters:
     - [ 𐞁 𐞂 ]
-  - Addded missed miscellaneous characters:
+  - Addded new miscellaneous characters:
     - [ ⸢ ⸣ ⸤ ⸥ ] [ ꜛ ꜜ ]
   - IPA characters now have dedicated tabs for binds and recipes.
   - Added “ModTools” class with useful methods and parameters for creating mods.
@@ -45,9 +45,9 @@
 - Additions:
 
   - Library extended to 5,500+ Unicode characters.
-  - Addded missed latin characters:
+  - Addded new latin characters:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
-  - Addded missed miscellaneous characters:
+  - Addded new miscellaneous characters:
     - [ ⸸ ⸶ ⸷ ] [ ⹀ ⹝ ⸗ ] [ ⅏ ]
   - Added support for new Latin layouts:
     - Blaze, Canary (Ortho variant), Engrammer, Focal, Pine v4, Rain, Recurva
@@ -86,11 +86,11 @@
 - Additions:
 
   - Library extended to 4,900+ Unicode characters.
-  - Addded missed cyrillic characters:
+  - Addded new cyrillic characters:
     - [ Ӫ ӫ ] [ Ӿ ӿ Ѝ ѝ Ӳ ӳ ᲅ ᲆ ᲄ ᲀ ᲂ ᲃ ᲁ ҂ ]
-  - Addded missed latin characters:
+  - Addded new latin characters:
     - [ ᶴ ] [ Ꜩ ꜩ ] [ ꝱ ꝲ ꝳ ꝴ ꝶ ꝵ ꝷ ꝸ ] [ Ꝫ ꝫ Ꝭ ꝭ Ꝯ ꝯ ꝰ ] [ Ꝇ ꝇ ]
-  - Addded missed miscellaneous characters:
+  - Addded new miscellaneous characters:
     - [ ₠ ]
   - Added support for new Latin layouts:
     - Workman, Halmak, Norman, AZERTY default/local variants, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf, PanQWERTY (Own), Qwickly
@@ -152,11 +152,11 @@
 
 - Дополнения:
 
-  - Добавлены пропущенные символы латиницы:
+  - Добавлены новые символы латиницы:
     - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ ] [ ꜣ Ꜣ ꜥ Ꜥ (Египтологические Алеф и Айн) ]
-  - Добавлены пропущенные символы МФА:
+  - Добавлены новые символы МФА:
     - [ 𐞁 𐞂 ]
-  - Добавлены пропущенные прочие символы:
+  - Добавлены новые прочие символы:
     - [ ⸢ ⸣ ⸤ ⸥ ] [ ꜛ ꜜ ]
   - Теперь символы МФА имеют собственные вкладки со списками биндов и рецептов.
   - Добавлен класс «ModTools» с полезными методами и параметрами для создания модов.
@@ -189,9 +189,9 @@
 - Дополнения:
 
   - Библиотека расширена до 5,500+ символов Unicode.
-  - Добавлены пропущенные символы латиницы:
+  - Добавлены новые символы латиницы:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
-  - Добавлены пропущенные прочие символы:
+  - Добавлены новые прочие символы:
     - [ ⸸ ⸶ ⸷ ] [ ⹀ ⹝ ⸗ ] [ ⅏ ]
   - Добавлена поддержка новых раскладок латиницы:
     - Blaze, Canary (Ortho вариант), Engrammer, Focal, Pine v4, Rain, Recurva
@@ -230,11 +230,11 @@
 - Дополнения:
 
   - Библиотека расширена до 4,900+ символов Unicode.
-  - Добавлены пропущенные символы кириллицы:
+  - Добавлены новые символы кириллицы:
     - [ Ӫ ӫ ] [ Ӿ ӿ Ѝ ѝ Ӳ ӳ ᲅ ᲆ ᲄ ᲀ ᲂ ᲃ ᲁ ҂ ]
-  - Добавлены пропущенные символы латиницы:
+  - Добавлены новые символы латиницы:
     - [ ᶴ ] [ Ꜩ ꜩ ] [ ꝱ ꝲ ꝳ ꝴ ꝶ ꝵ ꝷ ꝸ ] [ Ꝫ ꝫ Ꝭ ꝭ Ꝯ ꝯ ꝰ ] [ Ꝇ ꝇ ]
-  - Добавлены пропущенные прочие символы:
+  - Добавлены новые прочие символы:
     - [ ₠ ]
   - Добавлена поддержка новых раскладок латиницы:
     - Workman, Halmak, Norman, стандартный/локальный вариант AZERTY, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf, PanQWERTY (Собственная), Qwickly

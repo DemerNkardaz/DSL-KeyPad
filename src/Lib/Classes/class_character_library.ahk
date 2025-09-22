@@ -69,6 +69,11 @@ Class ChrLib {
 		;
 		"ipa",
 		"&ipa",
+		;
+		"alchemical",
+		"astrological",
+		"astronomical",
+		"occultic",
 	]
 
 	static decompositionAttributes := Map(
@@ -412,6 +417,9 @@ Class ChrLib {
 
 		alt := this.ValidateAlt(alt)
 		local entry := this.GetEntry(entryName)
+
+		if !entry
+			return False
 
 		if alt = "superscript" && !entry["alterations"].Has("superscript")
 			alt := "modifier"

@@ -67,7 +67,13 @@
 				"egyptological": "egyptological",
 				"rounded": "rounded",
 				"narrow": "narrow",
-				"wide": "wide"
+				"wide": "wide",
+				"philosophers": "philosophers",
+				"black": "black",
+				"t": {
+					"philosophers": "Philosophers",
+					"black": "Black"
+				}
 			},
 			"after_letter": {
 				"late": "(late form)",

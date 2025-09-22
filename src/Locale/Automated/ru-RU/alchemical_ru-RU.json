@@ -1,5 +1,58 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"alchemical": "Алхимия",
+			"astrological": "Астрология",
+			"astronomical": "Астрономия",
+			"occultic": "Оккультизм"
+		},
+		"generated": {
+			"prefix": {
+				"alchemical": "Алхимическ$(ая|ий|ое)",
+				"astrological": "Астрологическ$(ая|ий|ое)",
+				"astronomical": "Астрономическ$(ая|ий|ое)",
+				"occultic": "Оккультн$(ая|ый|ое)"
+			},
+			"tag": {
+				"alchemical": "алхимическ$(ая|ий|ое)",
+				"astrological": "астрологическ$(ая|ий|ое)",
+				"astronomical": "астрономическ$(ая|ий|ое)",
+				"occultic": "оккультн$(ая|ый|ое)"
+			}
+		},
+		"scripts": {
+			"alchemical": {
+				"n_sym_element_air": { "letter_locale": "Воздух" },
+				"n_sym_element_fire": { "letter_locale": "Огонь" },
+				"n_sym_element_earth": { "letter_locale": "Земля" },
+				"n_sym_element_water": { "letter_locale": "Вода" },
+				"n_sym_acid_acetic": { "letter_locale": "Уксусная кислота" },
+				"n_sym_acid_acetic_distilled_1": { "letter_locale": "Уксусная кислота (дистиллированная, 1)" },
+				"n_sym_acid_acetic_distilled_2": { "letter_locale": "Уксусная кислота (дистиллированная, 2)" },
+				"n_sym_acid_nitric": { "letter_locale": "Азотная кислота" },
+				"n_sym_acid_nitrohydrochloric": {
+					"letter_locale": "Нитрогидрохлорная кислота",
+					"alt": "«Царская водка»\nHNO₃ + 3 HCl"
+				},
+				"n_sym_ethanol_1": { "letter_locale": "Этанол (1)" },
+				"n_sym_ethanol_2": { "letter_locale": "Этанол (2)" },
+				"n_sym_aqua_fortis": { "letter_locale": "Сильная вода" },
+				"n_sym_aqua_vitae_1": { "letter_locale": "Вода жизни (1)" },
+				"n_sym_aqua_vitae_2": { "letter_locale": "Вода жизни (2)" },
+				"n_sym_aqua_regia": { "letter_locale": "Царская водка" },
+				"n_sym_aqua_regia_2": { "letter_locale": "Царская водка (2)" },
+				"n_sym_vinegar": { "letter_locale": "Уксус" },
+				"n_sym_vinegar_distilled_1": { "letter_locale": "Уксус (дистиллированный, 1)" },
+				"n_sym_vinegar_distilled_2": { "letter_locale": "Уксус (дистиллированный, 2)" },
+				"n_sym_sand_bath": { "letter_locale": "Песчаная баня" },
+				"n_sym_sulfur": { "letter_locale": "Сера" },
+				"n_sym_sulphur": { "letter_locale": "Сера" },
+				"n_sym_brimstone": { "letter_locale": "Сера" }
+			},
+			"occultic": {
+				"n_sym_leviathan_cross": { "letter_locale": "Крест Левиафана" }
+			}
+		},
 		"symbolistics_chi_rho": "Хризма",
 		"symbolistics_palmula": "Пальмула",
 		"symbolistics_rod_of_asclepius": "Посох Асклепия",

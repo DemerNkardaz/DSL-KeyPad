@@ -473,7 +473,7 @@ Class ChrReg {
 	TransferRecipeProperty(&entryName, &key, &value, &skipStatus := "") {
 		try {
 			local tempRecipe := [value.Clone()]
-			local definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe, entryName, skipStatus)
+			local definedRecipe := (*) => ChrRecipeHandler.Make(tempRecipe, entryName, skipStatus, throwError := True)
 			local interObj := {}
 			interObj.DefineProp("Get", { Get: definedRecipe, Set: definedRecipe })
 			ChrLib.entries.%entryName%[key] := interObj.Get

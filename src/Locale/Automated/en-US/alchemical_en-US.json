@@ -1,5 +1,58 @@
 {
 	"en-US": {
+		"script_labels": {
+			"alchemical": "Alchemy",
+			"astrological": "Astrology",
+			"astronomical": "Astronomy",
+			"occultic": "Occultism"
+		},
+		"generated": {
+			"prefix": {
+				"alchemical": "Alchemical",
+				"astrological": "Astrological",
+				"astronomical": "Astronomical",
+				"occultic": "Occultic"
+			},
+			"tag": {
+				"alchemical": "alchemical",
+				"astrological": "astrological",
+				"astronomical": "astronomical",
+				"occultic": "occultic"
+			}
+		},
+		"scripts": {
+			"alchemical": {
+				"n_sym_element_air": { "letter_locale": "Air" },
+				"n_sym_element_fire": { "letter_locale": "Fire" },
+				"n_sym_element_earth": { "letter_locale": "Earth" },
+				"n_sym_element_water": { "letter_locale": "Water" },
+				"n_sym_acid_acetic": { "letter_locale": "Acetic acid" },
+				"n_sym_acid_acetic_distilled_1": { "letter_locale": "Acetic acid (distilled, 1)" },
+				"n_sym_acid_acetic_distilled_2": { "letter_locale": "Acetic acid (distilled, 2)" },
+				"n_sym_acid_nitric": { "letter_locale": "Nitric acid" },
+				"n_sym_acid_nitrohydrochloric": {
+					"letter_locale": "Nitrohydrochloric acid",
+					"alt": "“Aqua regia”\nHNO₃ + 3 HCl"
+				},
+				"n_sym_ethanol_1": { "letter_locale": "Ethanol (1)" },
+				"n_sym_ethanol_2": { "letter_locale": "Ethanol (2)" },
+				"n_sym_aqua_fortis": { "letter_locale": "Strong water" },
+				"n_sym_aqua_vitae_1": { "letter_locale": "Aqua vitae (1)" },
+				"n_sym_aqua_vitae_2": { "letter_locale": "Aqua vitae (2)" },
+				"n_sym_aqua_regia": { "letter_locale": "Aqua Regia" },
+				"n_sym_aqua_regia_2": { "letter_locale": "Aqua regia (2)" },
+				"n_sym_vinegar": { "letter_locale": "Vinegar" },
+				"n_sym_vinegar_distilled_1": { "letter_locale": "Vinegar (distilled, 1)" },
+				"n_sym_vinegar_distilled_2": { "letter_locale": "Vinegar (distilled, 2)" },
+				"n_sym_sand_bath": { "letter_locale": "Sand bath" },
+				"n_sym_sulfur": { "letter_locale": "Sulfur" },
+				"n_sym_sulphur": { "letter_locale": "Suphur" },
+				"n_sym_brimstone": { "letter_locale": "Brimstone" }
+			},
+			"occultic": {
+				"n_sym_leviathan_cross": { "letter_locale": "Leviathan cross" }
+			}
+		},
 		"symbolistics_chi_rho": "Chi Rho",
 		"symbolistics_palmula": "Palmula",
 		"symbolistics_rod_of_asclepius": "Rod of Asclepius",

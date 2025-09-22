@@ -1,16 +1,16 @@
 Class ChrRecipeHandler {
-	static Make(recipes, entryName := "", skipStatus := "") {
+	static Make(recipes, entryName := "", skipStatus := "", throwError := False) {
 		local output := []
 		local interArr := recipes.ToFlat()
 
 		for recipe in interArr {
-			this.MakeStr(recipe, output, entryName, skipStatus)
+			this.MakeStr(recipe, output, entryName, skipStatus, throwError)
 		}
 
 		return output
 	}
 
-	static MakeStr(recipe, outputArray := "", entryName := "", skipStatus := "") {
+	static MakeStr(recipe, outputArray := "", entryName := "", skipStatus := "", throwError := False) {
 		output := ""
 		if InStr(recipe, "${") {
 			if RegExMatch(recipe, "\((.*?)\|(.*?)\)", &match) {
@@ -23,16 +23,16 @@ Class ChrRecipeHandler {
 
 				for pairRecipe in recipePair {
 					if outputArray is Array {
-						outputArray.Push(this.ProcessRecipeString(pairRecipe, entryName, skipStatus))
+						outputArray.Push(this.ProcessRecipeString(pairRecipe, entryName, skipStatus, throwError))
 					} else {
-						output .= this.ProcessRecipeString(pairRecipe, entryName, skipStatus)
+						output .= this.ProcessRecipeString(pairRecipe, entryName, skipStatus, throwError)
 					}
 				}
 			} else {
 				if outputArray is Array {
-					outputArray.Push(this.ProcessRecipeString(recipe, entryName, skipStatus))
+					outputArray.Push(this.ProcessRecipeString(recipe, entryName, skipStatus, throwError))
 				} else {
-					output .= this.ProcessRecipeString(recipe, entryName, skipStatus)
+					output .= this.ProcessRecipeString(recipe, entryName, skipStatus, throwError)
 				}
 			}
 		} else {
@@ -102,8 +102,9 @@ Class ChrRecipeHandler {
 		return output
 	}
 
-	static ProcessRecipeString(recipe, entryName := "", skipStatus := "") {
+	static ProcessRecipeString(recipe, entryName := "", skipStatus := "", throwError := False) {
 		tempRecipe := recipe
+		outputRecipe := recipe
 
 		while RegExMatch(tempRecipe, "\${(.*?)}", &match) {
 			characterInfo := this.ParseCharacterInfo(match[1])
@@ -122,12 +123,21 @@ Class ChrRecipeHandler {
 					}
 
 					local interValue := ""
-					Loop characterInfo.repeatCount
-						interValue .= ChrLib.Get(name, characterInfo.hasAlteration, "Unicode", characterInfo.alteration)
+					local entryCharacter := ChrLib.Get(name, characterInfo.hasAlteration, "Unicode", characterInfo.alteration)
+
+					if entryCharacter {
+						Loop characterInfo.repeatCount
+							interValue .= entryCharacter
+					} else if !entryCharacter && throwError {
+						throw
+					} else
+						interValue := "${" name "}"
+
 					resolvedValue .= interValue
 				}
 
-				tempRecipe := RegExReplace(tempRecipe, "\${" RegExEscape(match[1]) "}", resolvedValue)
+				outputRecipe := RegExReplace(outputRecipe, "\${" RegExEscape(match[1]) "}", resolvedValue)
+				tempRecipe := RegExReplace(tempRecipe, "\${" RegExEscape(match[1]) "}")
 				continue
 			} else if !ChrLib.entries.HasOwnProp(characterInfo.name) {
 				if skipStatus = "Missing" {
@@ -136,14 +146,22 @@ Class ChrRecipeHandler {
 				}
 			}
 
-			interValue := ""
-			Loop characterInfo.repeatCount
-				interValue .= Chrlib.Get(characterInfo.name, characterInfo.hasAlteration, "Unicode", characterInfo.alteration)
+			local interValue := ""
+			local entryCharacter := Chrlib.Get(characterInfo.name, characterInfo.hasAlteration, "Unicode", characterInfo.alteration)
 
-			tempRecipe := RegExReplace(tempRecipe, "\${" RegExEscape(match[1]) "}", interValue)
+			if entryCharacter {
+				Loop characterInfo.repeatCount
+					interValue .= entryCharacter
+			} else if !entryCharacter && throwError {
+				throw
+			} else
+				interValue := "${" characterInfo.name "}"
+
+			outputRecipe := RegExReplace(outputRecipe, "\${" RegExEscape(match[1]) "}", interValue)
+			tempRecipe := RegExReplace(tempRecipe, "\${" RegExEscape(match[1]) "}")
 		}
 
-		return tempRecipe
+		return outputRecipe
 	}
 
 	static ParseCharacterInfo(characterString) {
