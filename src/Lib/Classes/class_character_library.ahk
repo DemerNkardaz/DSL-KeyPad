@@ -71,6 +71,56 @@ Class ChrLib {
 		"&ipa",
 	]
 
+	static decompositionAttributes := Map(
+		"script", Map(
+			"lat", "latin",
+			"cyr", "cyrillic",
+			"hel", "hellenic",
+		),
+		"case", Map(
+			"c", "capital",
+			"s", "small",
+			"k", "small_capital",
+			"i", "inter",
+			"n", "neutral"
+		),
+		"type", Map(
+			"let", "letter",
+			"lig", "ligature",
+			"dig", "digraph",
+			"mark", "mark",
+			"num", "numeral",
+			"sym", "symbol",
+			"sign", "sign",
+			"rune", "rune",
+			"log", "logogram",
+			"syl", "syllable",
+			"gly", "glyph"
+		),
+		"letter", "",
+		"endPart", "",
+		"postfixes", []
+	)
+
+	static GetDecomposition(subMap, toGet, get := "Value", &output := "") {
+		if get = "Value" {
+			if this.decompositionAttributes[subMap] is Map && this.decompositionAttributes[subMap].Has(toGet) {
+				output := this.decompositionAttributes[subMap][toGet]
+				return this.decompositionAttributes[subMap][toGet]
+			}
+		} else if get = "Key" {
+			if this.decompositionAttributes[subMap] is Map {
+				for key, value in this.decompositionAttributes[subMap] {
+					if value = toGet {
+						output := key
+						return key
+					}
+				}
+			}
+		}
+		return False
+	}
+
 	static __New() {
 		ChrReg(characters.data)
 

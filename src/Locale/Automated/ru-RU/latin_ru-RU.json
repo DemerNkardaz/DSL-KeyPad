@@ -136,6 +136,8 @@
 				"s_let_a_egyptological_alef": { "letter_locale": "алеф" },
 				"c_let_a_egyptological_ain": { "letter_locale": "Айн" },
 				"s_let_a_egyptological_ain": { "letter_locale": "айн" },
+				"c_let_i_egyptological_yod": { "letter_locale": "Йод" },
+				"s_let_i_egyptological_yod": { "letter_locale": "йод" },
 				"c_let_a_alpha": { "letter_locale": "Альфа" },
 				"s_let_a_alpha": { "letter_locale": "альфа" },
 				"c_let_b_beta": { "letter_locale": "Бета" },

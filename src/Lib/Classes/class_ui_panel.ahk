@@ -546,7 +546,7 @@ Class UIMainPanel {
 		localeData.columnsCount := localizedColumns.Length
 
 		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
-		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 10, "int"))
+		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), 'Noto Sans')
 
 		Loop attributes.columns.Length {
 			index := A_Index

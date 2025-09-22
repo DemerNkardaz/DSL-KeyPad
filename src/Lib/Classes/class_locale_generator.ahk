@@ -7,12 +7,12 @@ Class LocaleGenerator {
 		local useLetterLocale := entry["options"]["useLetterLocale"]
 		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "." entry["symbol"]["scriptAdditive"] : ""
 
-		local cyrillicTasgScriptAtStart := False
+		local tagsScriptAtStart := False
 
 		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic"]) {
 			if !useLetterLocale
 				useLetterLocale := True
-			cyrillicTasgScriptAtStart := True
+			tagsScriptAtStart := True
 		}
 
 		local referenceLocale := entry["options"].Has("referenceLocale") && entry["options"]["referenceLocale"] != "" ? entry["options"]["referenceLocale"] : False
@@ -176,7 +176,7 @@ Class LocaleGenerator {
 			tags["en-US"]
 		)
 		tags["ru-RU"] := (
-			cyrillicTasgScriptAtStart ?
+			tagsScriptAtStart ?
 				(
 					Locale.Read(pfx "tag." lScript, "ru-RU", , , , lVariant)
 					(isGermanic ? " " Locale.Read(pfx "type." lType, "ru-RU") : "")
@@ -205,32 +205,87 @@ Class LocaleGenerator {
 		}
 
 		local additionalTags := []
-		if entry["symbol"]["tagAdditive"].Length > 0 && isGermanic {
+		if entry["symbol"]["tagAdditive"].Length > 0 {
 			for tagAdd in entry["symbol"]["tagAdditive"] {
 				for lang in ["en-US", "ru-RU"] {
-					local curScript := (tagAdd.Has("script") ? tagAdd.script : lScript)
-					local curType := (tagAdd.Has("type") ? tagAdd.type : lType)
-					local aLScript := Locale.Read(pfx "tag." curScript, lang, , , , lVariant)
-					local aScriptAdditive := Locale.Read(pfx "tag." curScript "." tagAdd["scriptAdditive"], lang, , , , lVariant)
-					local aLType := Locale.Read(pfx "type." curType, lang, , , , lVariant)
-					local lBuildedName := StrLower("scripts." curScript ".n_" curType "_" letter "_" tagAdd["scriptAdditive"] "_" tagAdd["letter"]) ".letter_locale"
+					local curScript := (tagAdd.Has("script") ? tagAdd["script"] : lScript)
+					local curType := (tagAdd.Has("type") ? tagAdd["type"] : lType)
+					local curCase := (tagAdd.Has("case") ? tagAdd["case"] : lCase)
+					local curLetter := tagAdd["letter"]
 
-					additionalTags.Push(
-						aLScript
-						" " aLType " "
-						aScriptAdditive " "
-						Locale.Read(lBuildedName, lang)
-					)
+					local curScriptKey := ChrLib.GetDecomposition("script", curScript, "Key", &curScriptDecomposeKey) ? curScriptDecomposeKey : curScript
+					local curTypeKey := ChrLib.GetDecomposition("type", curType, "Key", &curTypeDecomposeKey) ? curTypeDecomposeKey : curType
+					local curCaseKey := ChrLib.GetDecomposition("case", curCase, "Key", &curCaseDecomposeKey) ? curCaseDecomposeKey : curCase
+
+					local hasScriptAdditive := tagAdd.Has("scriptAdditive") && StrLen(tagAdd["scriptAdditive"]) > 0
+					local curScriptAdditive := hasScriptAdditive ? "." tagAdd["scriptAdditive"] : ""
+
+					local curLVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(curType) ? 2 : curType = "numeral" ? 3 : 1
+					local curIsGermanic := ["germanic_runic", "cirth_runic"].HasValue(curScript)
+
+					local lAdditionalBeforeLetter := ""
+					local lAdditionalAfterLetter := ""
+
+					for letterBound in ["beforeLetter", "afterLetter"] {
+						if tagAdd.Has(letterBound) && StrLen(tagAdd[letterBound]) > 0 {
+							local boundLink := Util.StrUpper(letterBound, 1)
+							local splitted := StrSplit(Util.StrTrim(tagAdd[letterBound]), ",")
+							local localeKey := RegExReplace(letterBound, "Letter", "_letter")
+
+							for i, bound in splitted {
+								if RegExMatch(bound, "\:\:(.*?)$", &match) {
+									local index := Integer(match[1])
+									local bound := SubStr(bound, 1, match.Pos(0) - 1)
+									lAdditional%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , index) (i < splitted.Length ? " " : "")
+								} else
+									lAdditional%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , 1) (i < splitted.Length ? " " : "")
+							}
+						}
+					}
+
+					lAdditionalBeforeLetter := StrLen(lAdditionalBeforeLetter) > 0 ? lAdditionalBeforeLetter " " : ""
+					lAdditionalAfterLetter := StrLen(lAdditionalAfterLetter) > 0 ? " " lAdditionalAfterLetter : ""
+
+					if curIsGermanic {
+						local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" letter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "") "_" curLetter) ".letter_locale"
+						local additionalPostLetter := Locale.Read(lBuildedName, lang)
+
+						local aLScript := Locale.Read(pfx "tag." curScript, lang, , , , curLVariant)
+						local aScriptAdditive := hasScriptAdditive ? " " Locale.Read(pfx "tag." curScript curScriptAdditive, lang, , , , curLVariant) : ""
+						local aLType := Locale.Read(pfx "type." curType, lang)
+
+						additionalTags.Push(
+							aLScript
+							" " aLType
+							aScriptAdditive " "
+							lAdditionalBeforeLetter
+							additionalPostLetter
+							lAdditionalAfterLetter
+						)
+					} else {
+						local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" curLetter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "")) ".letter_locale"
+						local additionalPostLetter := Locale.Read(lBuildedName, lang)
+
+						local localedCase := curCase != "neutral" ? Locale.Read(pfx "case." curCase, lang, , , , curLVariant) " " : ""
+						local scriptTag := Locale.Read(pfx "tag." curScript, lang, , , , curLVariant)
+
+
+						additionalTags.Push(
+							((lang = "en-US" || lang = "ru-RU" && tagsScriptAtStart) ? scriptTag " " : "")
+							localedCase Locale.Read(pfx "type." curType, lang) " "
+							lAdditionalBeforeLetter
+							additionalPostLetter
+							lAdditionalAfterLetter
+							((lang = "ru-RU" && !tagsScriptAtStart) ? " " scriptTag : "")
+						)
+					}
 				}
 			}
 		}
 
-
-		if additionalTags.Length > 0 {
-			for tag in additionalTags {
+		if additionalTags.Length > 0
+			for tag in additionalTags
 				entry["tags"].Push(tag)
-			}
-		}
 
 		if entry["tags"].Length > 0 {
 			sorting := Map()

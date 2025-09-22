@@ -318,11 +318,15 @@ Class ChrReg {
 	CloneOptions(&sourceOptions, &index) {
 		local tempOptions := sourceOptions.Clone()
 		for key, value in sourceOptions {
-			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 {
-				if sourceOptions[key][index] is Array
-					tempOptions[key] := sourceOptions[key][index].Clone()
-				else
-					tempOptions[key] := sourceOptions[key][index]
+			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 && (key = "tagAdditive" && sourceOptions[key].Has(index) && sourceOptions[key][index] is Array || key != "tagAdditive") {
+				if sourceOptions[key].Has(index) {
+					if sourceOptions[key][index] is Array
+						tempOptions[key] := sourceOptions[key][index].Clone()
+					else
+						tempOptions[key] := sourceOptions[key][index]
+				} else
+					tempOptions[key] := sourceOptions[key][1] is Array ? sourceOptions[key][1].Clone() : sourceOptions[key][1]
+
 			}
 		}
 		return tempOptions
@@ -934,37 +938,9 @@ Class ChrReg {
 		return output
 	}
 
+
 	NameDecompose(&entryName) {
-		local decomposedName := Map(
-			"script", Map(
-				"lat", "latin",
-				"cyr", "cyrillic",
-				"hel", "hellenic",
-			),
-			"case", Map(
-				"c", "capital",
-				"s", "small",
-				"k", "small_capital",
-				"i", "inter",
-				"n", "neutral"
-			),
-			"type", Map(
-				"let", "letter",
-				"lig", "ligature",
-				"dig", "digraph",
-				"mark", "mark",
-				"num", "numeral",
-				"sym", "symbol",
-				"sign", "sign",
-				"rune", "rune",
-				"log", "logogram",
-				"syl", "syllable",
-				"gly", "glyph"
-			),
-			"letter", "",
-			"endPart", "",
-			"postfixes", []
-		)
+		local decomposedName := ChrLib.decompositionAttributes.DeepClone()
 
 		local altInputScript := ""
 		local foundScript := False

@@ -882,7 +882,13 @@
 	"lat_[c,s]_let_i__comma_above", {
 		"unicode": ["A7BC", "A7BD"],
 		"options": { "referenceLocale": "_i$" },
-		"symbol": { "beforeLetter": "glottal" }
+		"symbol": {
+			"beforeLetter": "glottal",
+			"tagAdditive": [{
+				"letter": "i_egyptological_yod",
+				"beforeLetter": "egyptological::2"
+			}]
+		}
 	},
 	"lat_[c,s]_let_u__comma_above", {
 		"unicode": ["A7BE", "A7BF"],

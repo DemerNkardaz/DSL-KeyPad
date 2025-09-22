@@ -17,12 +17,14 @@
 		"unicode": "2191",
 		"tags": ["up arrow", "стрелка вверх"],
 		"groups": ["Special Characters", "Special Fast Secondary"],
+		"alterations": { "modifier": "A71B" },
 		"options": { "fastKey": "\u2191" }
 	},
 	"arrow_down", {
 		"unicode": "2193",
 		"tags": ["down arrow", "стрелка вниз"],
 		"groups": ["Special Characters", "Special Fast Secondary"],
+		"alterations": { "modifier": "A71C" },
 		"options": { "fastKey": "\u2193" }
 	},
 	"arrow_leftup", {
@@ -561,6 +563,12 @@
 		"groups": ["Special Characters", "Smelting Special", "Special Fast Left"],
 		"options": { "fastKey": "1" },
 		"recipe": ["sec", "пар"]
+	},
+	"section_top_half", {
+		"unicode": "2E39",
+		"tags": ["top half section", "верхняя половина параграфа"],
+		"groups": ["Special Characters", "Smelting Special"],
+		"recipe": ["${section}${arrow_up}", "secth", "парвп"]
 	},
 	"comma", {
 		"unicode": "002C",
