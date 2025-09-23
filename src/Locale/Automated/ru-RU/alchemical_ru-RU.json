@@ -62,11 +62,18 @@
 				"n_sym_iron_crocus": { "letter_locale": "Крокус железа" },
 				"n_sym_crocus_martis": { "letter_locale": "Крокус Марса" },
 				"n_sym_iron_regulus": { "letter_locale": "Регулус железа" },
-				"n_sym_regulus_martis": { "letter_locale": "Регулус Марса" }
+				"n_sym_regulus_martis": { "letter_locale": "Регулус Марса" },
+				"n_sym_verdigris": { "letter_locale": "Ярь-медянка" }
 			},
 			"astrological": {
 				"n_sym_planet_earth": { "letter_locale": "Земля" },
+				"n_sym_planet_uranus": { "letter_locale": "Уран" },
+				"n_sym_planet_neptune": { "letter_locale": "Нептун" },
+				"n_sym_planet_pluto": { "letter_locale": "Плутон" },
 				"n_sym_fixed_zodiacal_modality": { "letter_locale": "Фиксированная зодиакальная модальность" }
+			},
+			"astronomical": {
+				"n_sym_asteroid_astraea": { "letter_locale": "(5) Астрея" }
 			},
 			"occultic": {
 				"n_sym_leviathan_cross": { "letter_locale": "Крест Левиафана" }

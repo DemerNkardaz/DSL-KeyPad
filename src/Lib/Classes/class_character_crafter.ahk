@@ -46,6 +46,7 @@ Class ChrCrafter {
 
 		local showSuggestions := Cfg.Get("Show_Suggestions", "Compose", True, "bool")
 		local showFavorites := Cfg.Get("Show_Favorites", "Compose", True, "bool")
+		local showAltRecipes := Cfg.Get("Show_Alt_Recipes", "Compose", True, "bool")
 
 		local glyphsMode := Scripter.GetCurrentModeData("Glyph Variations", &modeName)
 		local alt := glyphsMode is Map && glyphsMode.Has("reference") ? glyphsMode["reference"] : modeName
@@ -84,7 +85,7 @@ Class ChrCrafter {
 
 		composeObject.continueInInput := False
 
-		composeObject.forceSurrogates := ["Old Persian", "Shavian"].HasValue(Scripter.selectedMode.Get("Alternative Modes"))
+		composeObject.forceSurrogates := ["Old Persian", "Manichaean", "Shavian"].HasValue(Scripter.selectedMode.Get("Alternative Modes"))
 		composeObject.symCount := composeObject.forceSurrogates ? 2 : 1
 
 		composeObject.ParentHook := InputHook("L0", "{Escape}")
@@ -93,7 +94,7 @@ Class ChrCrafter {
 		composeObject.ParentHook.Start()
 
 		ComposeSuggestedTooltip() {
-			local recipesToBeSuggested := this.ValidateRecipes(inputWithoutBackticks, &alt, True)
+			local recipesToBeSuggested := this.ValidateRecipes(inputWithoutBackticks, &alt, True, , , , showAltRecipes)
 			composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 			Util.CaretTooltip(
@@ -258,7 +259,7 @@ Class ChrCrafter {
 								composeObject.input := RegExReplace(composeObject.input, RegExEscape(postInput), composeObject.output)
 
 								if composeObject.insertType = "" {
-									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), &alt, True)
+									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), &alt, True, , , , showAltRecipes)
 									composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 									Util.CaretTooltip(
@@ -292,7 +293,7 @@ Class ChrCrafter {
 								composeObject.input := RegExReplace(composeObject.input, RegExEscape(inputToCheck), composeObject.output)
 
 								if (composeObject.input != originalInput && composeObject.insertType = "") {
-									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), &alt, True)
+									local recipesToBeSuggested := this.ValidateRecipes(RegExReplace(composeObject.input, "``", ""), &alt, True, , , , showAltRecipes)
 									composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 									Util.CaretTooltip(
@@ -397,7 +398,7 @@ Class ChrCrafter {
 			SendText(output)
 	}
 
-	ValidateRecipes(prompt, &alt := "", getSuggestions := False, breakSkip := False, restrictClasses := [], hasBacktick := False) {
+	ValidateRecipes(prompt, &alt := "", getSuggestions := False, breakSkip := False, restrictClasses := [], hasBacktick := False, showAltRecipes := False) {
 		if prompt = ""
 			return
 
@@ -500,9 +501,9 @@ Class ChrCrafter {
 							if caseSensitiveMatch || uniqueRecipeMatch {
 								charFound := True
 								if entry["options"]["suggestionsAtEnd"]
-									indexedAtEndValueResult.Set(entry["index"], this.GetRecipesString(&entryName, &prompt, &alt))
+									indexedAtEndValueResult.Set(entry["index"], this.GetRecipesString(&entryName, &prompt, &alt, &showAltRecipes, &uniqueRecipeMatch))
 								else
-									indexedValueResult.Set(entry["index"], this.GetRecipesString(&entryName, &prompt, &alt))
+									indexedValueResult.Set(entry["index"], this.GetRecipesString(&entryName, &prompt, &alt, &showAltRecipes, &uniqueRecipeMatch))
 							}
 						} else if (!monoCaseRecipe && prompt == recipeEntry) || (monoCaseRecipe && StrLower(prompt) == StrLower(recipeEntry)) {
 							charFound := True
@@ -591,10 +592,10 @@ Class ChrCrafter {
 		return output
 	}
 
-	GetRecipesString(&entryName, &prompt := "", &alt := "") {
+	GetRecipesString(&entryName, &prompt := "", &alt := "", &showAltRecipes := False, &isUniqueRecipe := False) {
 		local output := ""
 
-		local recipe := ChrRecipeHandler.GetStr(entryName, True, " | ", prompt)
+		local recipe := ChrRecipeHandler.GetStr(entryName, True, " | ", prompt, showAltRecipes, isUniqueRecipe)
 		local entry := ChrLib.GetEntry(entryName)
 		local uniSequence := ""
 		if StrLen(entry["symbol"]["alt"]) {

@@ -33,6 +33,7 @@ Class ChrEntry {
 					"legend", False,
 					"preventLaTeX", False,
 					"preventAltCode", False,
+					"usesDiacritics", False,
 					"altLayoutKey", "",
 					"showOnAlt", "",
 					"altSpecialKey", "",

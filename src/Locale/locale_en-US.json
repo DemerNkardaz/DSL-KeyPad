@@ -197,6 +197,7 @@
 					"title": "“Compose” Mode Settings",
 					"show_suggestions": "Show suggestions",
 					"show_favorites": "Show favorites",
+					"show_alt_recipes": "Show alt-recipes",
 					"font_size": "Font size",
 					"font_name": "Font name",
 					"background_color": "Background color",

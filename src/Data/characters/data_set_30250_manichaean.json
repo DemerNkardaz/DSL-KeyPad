@@ -13,7 +13,7 @@
 	},
 	"manichaean_n_let_a_aayin", {
 		"unicode": "10ADA",
-		"options": { "altLayoutKey": ">!<! $" },
+		"options": { "altLayoutKey": ">!<! $", "usesDiacritics": true },
 		"recipe": [
 			"${manichaean_n_let_a_ayin}${manichaean_n_sym_abbreviation_above}", 
 			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_a_ayin}"
@@ -25,7 +25,7 @@
 	},
 	"manichaean_n_let_b_bheth", {
 		"unicode": "10AC2",
-		"options": { "altLayoutKey": ">! $" },
+		"options": { "altLayoutKey": ">! $", "usesDiacritics": true },
 		"recipe": [
 			"${manichaean_n_let_b_beth}${manichaean_n_sym_abbreviation_above}", 
 			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_b_beth}"
@@ -65,7 +65,7 @@
 	},
 	"manichaean_n_let_j_jhayin", {
 		"unicode": "10ACC",
-		"options": { "altLayoutKey": "<! $" },
+		"options": { "altLayoutKey": "<! $", "usesDiacritics": true },
 		"recipe": [
 			"${manichaean_n_let_j_jayin}${manichaean_n_sym_abbreviation_above}", 
 			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_j_jayin}"
@@ -77,7 +77,7 @@
 	},
 	"manichaean_n_let_k_khaph", {
 		"unicode": "10AD2",
-		"options": { "altLayoutKey": ">! $" },
+		"options": { "altLayoutKey": ">! $", "usesDiacritics": true },
 		"recipe": [
 			"${manichaean_n_let_k_kaph}${manichaean_n_sym_abbreviation_above}", 
 			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_k_kaph}"
@@ -105,7 +105,7 @@
 	},
 	"manichaean_n_let_q_qhoph", {
 		"unicode": "10AE0",
-		"options": { "altLayoutKey": ">! $" },
+		"options": { "altLayoutKey": ">! $", "usesDiacritics": true },
 		"recipe": [
 			"${manichaean_n_let_q_qoph}${manichaean_n_sym_abbreviation_above}", 
 			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_q_qoph}"
@@ -129,7 +129,7 @@
 	},
 	"manichaean_n_let_s_sshin", {
 		"unicode": "10AE3",
-		"options": { "altLayoutKey": ">!<! $" },
+		"options": { "altLayoutKey": ">!<! $", "usesDiacritics": true },
 		"recipe": [
 			"${manichaean_n_let_s_shin}${manichaean_n_sym_abbreviation_above}", 
 			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_s_shin}"
@@ -173,7 +173,7 @@
 	},
 	"manichaean_n_let_z_zhayin", {
 		"unicode": "10ACA",
-		"options": { "altLayoutKey": "<! $" },
+		"options": { "altLayoutKey": "<! $", "usesDiacritics": true },
 		"recipe": [
 			"${manichaean_n_let_z_zayin}${manichaean_n_sym_abbreviation_above}", 
 			"${manichaean_n_sym_abbreviation_above}${manichaean_n_let_z_zayin}"

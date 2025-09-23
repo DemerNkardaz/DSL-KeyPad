@@ -62,11 +62,18 @@
 				"n_sym_iron_crocus": { "letter_locale": "Crocus of Iron" },
 				"n_sym_crocus_martis": { "letter_locale": "Crocus Martis" },
 				"n_sym_iron_regulus": { "letter_locale": "Regulus of Iron" },
-				"n_sym_regulus_martis": { "letter_locale": "Regulus Martis" }
+				"n_sym_regulus_martis": { "letter_locale": "Regulus Martis" },
+				"n_sym_verdigris": { "letter_locale": "Verdigris" }
 			},
 			"astrological": {
 				"n_sym_planet_earth": { "letter_locale": "Earth" },
+				"n_sym_planet_uranus": { "letter_locale": "Uranus" },
+				"n_sym_planet_neptune": { "letter_locale": "Neptune" },
+				"n_sym_planet_pluto": { "letter_locale": "Pluto" },
 				"n_sym_fixed_zodiacal_modality": { "letter_locale": "Fixed zodiacal modality" }
+			},
+			"astronomical": {
+				"n_sym_asteroid_astraea": { "letter_locale": "(5) Astraea" }
 			},
 			"occultic": {
 				"n_sym_leviathan_cross": { "letter_locale": "Leviathan cross" }

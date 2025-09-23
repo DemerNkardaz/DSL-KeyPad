@@ -582,7 +582,6 @@ Class ChrReg {
 						[StrTitle(script RegExReplace(selectivePart, "_", " ") (hasPostfix ? " Accented" : ""))]
 					)
 				}
-				hasPostfix := unset
 			}
 
 			if StrLen(entry["symbol"]["category"] = 0) {
@@ -591,7 +590,6 @@ Class ChrReg {
 					local hasPostfix := entry["data"]["postfixes"].Length > 0
 					entry["symbol"]["category"] := StrTitle(entry["data"]["script"] " " entry["data"]["type"] (hasPostfix ? " Accented" : ""))
 
-					hasPostfix := unset
 				} else {
 					entry["symbol"]["category"] := "N/A"
 				}
@@ -608,11 +606,15 @@ Class ChrReg {
 			entry["groups"].Push(entry["groups"][1] " " addGroupMatch[1])
 		}
 
-		if entry["recipe"].Length = 0 && entry["data"]["postfixes"].Length > 0 {
-			entry["recipe"] := ["$"]
-			for postfix in entry["data"]["postfixes"] {
-				entry["recipe"][1] .= "${" postfix "}"
+		if entry["data"]["postfixes"].Length > 0 {
+			if entry["recipe"].Length = 0 {
+				entry["recipe"] := ["$"]
+				for postfix in entry["data"]["postfixes"] {
+					entry["recipe"][1] .= "${" postfix "}"
+				}
 			}
+
+			entry["options"].Set("usesDiacritics", True)
 		}
 
 		if entry["recipe"].Length > 0 && !entry.Has("concatenated")

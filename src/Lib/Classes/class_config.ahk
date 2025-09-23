@@ -49,6 +49,7 @@ Class Cfg {
 			"Suggestions_Limiter_Multiplier", 8,
 			"Show_Suggestions", "True",
 			"Show_Favorites", "True",
+			"Show_Alt_Recipes", "False",
 		],
 		"Characters", [
 			"I_Dot_Shift_I_Dotless", "Default",
@@ -341,11 +342,11 @@ Class Cfg {
 
 			local composeTitle := optionsPanel.AddText("vComposeTitle x" languageSelectorX() " y" languageSelectorY(300 + 30) " w256 BackgroundTrans", Locale.Read("gui.options.compose.title"))
 
-			local composeShowSuggestionsCheckBox := optionsPanel.AddCheckBox("vComposeShowSuggestionsCheckbox x" languageSelectorX() " y" languageSelectorY(300 + 30 + 18) " w320", Locale.Read("gui.options.compose.show_suggestions"))
+			local composeShowSuggestionsCheckBox := optionsPanel.AddCheckBox("vComposeShowSuggestionsCheckbox x" languageSelectorX() " y" languageSelectorY(300 + 30 + 18) " w200", Locale.Read("gui.options.compose.show_suggestions"))
 			composeShowSuggestionsCheckBox.Value := Cfg.Get("Show_Suggestions", "Compose", True, "bool")
 			composeShowSuggestionsCheckBox.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Show_Suggestions", "Compose", "bool"))
 
-			local composeShowFavoritesCheckBox := optionsPanel.AddCheckBox("vComposeShowFavoritesCheckbox x" languageSelectorX() " y" languageSelectorY(300 + 30 + (18 * 2)) " w320", Locale.Read("gui.options.compose.show_favorites"))
+			local composeShowFavoritesCheckBox := optionsPanel.AddCheckBox("vComposeShowFavoritesCheckbox x" languageSelectorX() " y" languageSelectorY(300 + 30 + (18 * 2)) " w200", Locale.Read("gui.options.compose.show_favorites"))
 			composeShowFavoritesCheckBox.Value := Cfg.Get("Show_Favorites", "Compose", True, "bool")
 			composeShowFavoritesCheckBox.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Show_Favorites", "Compose", "bool"))
 
@@ -402,6 +403,13 @@ Class Cfg {
 			caomposeMaxLimiterMultiplierEdit.OnEvent("Change", (CB, Zero) => Cfg.Set(CB.Value, "Suggestions_Limiter_Multiplier", "Compose", "int"))
 
 			local composeMaxLimiterTitle := optionsPanel.AddText("vComposeMaxLimiterTitle x" languageSelectorX(64 + 5 + 16 + 38) " y" languageSelectorY(300 + 30 + (18 * 8) + 50 + 5) " w256 BackgroundTrans", Locale.Read("gui.options.compose.max_length"))
+
+
+			; Right col
+
+			local composeShowAltRecipesCheckBox := optionsPanel.AddCheckBox("vComposeShowAltRecipesCheckbox x" languageSelectorX(210) " y" languageSelectorY(300 + 30 + 18) " w200", Locale.Read("gui.options.compose.show_alt_recipes"))
+			composeShowAltRecipesCheckBox.Value := Cfg.Get("Show_Alt_Recipes", "Compose", True, "bool")
+			composeShowAltRecipesCheckBox.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Show_Alt_Recipes", "Compose", "bool"))
 
 
 			optionsTabs.UseTab()

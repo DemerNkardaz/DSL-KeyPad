@@ -47,20 +47,56 @@ Class ChrRecipeHandler {
 			return output
 	}
 
-	static GetStr(entryName, formatted := False, formatChar := ", ", prompt := "") {
-		output := []
-		intermediate := []
+	static GetStr(entryName, formatted := False, formatChar := ", ", prompt := "", showAltRecipes := False, isUniqueRecipe := False) {
+		local output := []
+		local intermediate := []
+		local hasDiacritics := ChrLib.entries.%entryName%["options"]["usesDiacritics"] || ChrLib.entries.%entryName%["data"]["postfixes"].Length > 0
+
 		if ChrLib.entries.%entryName%.Has("recipeAlt") && ChrLib.entries.%entryName%["recipeAlt"].Length > 0 {
 			intermediate := ChrLib.entries.%entryName%["recipeAlt"]
 		} else if ChrLib.entries.%entryName%.Has("recipe") && ChrLib.entries.%entryName%["recipe"].Length > 0 {
 			intermediate := ChrLib.entries.%entryName%["recipe"]
 		}
 
-		if prompt != "" && (intermediate.Length > 2 || (intermediate.Length = 2 && RegExMatch(intermediate[2], "^" Chr(0x25CC)))) {
-			for i, recipe in intermediate {
-				cleanRecipe := RegExReplace(recipe, Chr(0x25CC))
-				if RegExMatch(cleanRecipe, "^" prompt)
-					output.Push(recipe)
+		if prompt != "" {
+			if showAltRecipes && !hasDiacritics {
+				local hasMatchingRecipe := False
+				for i, recipe in intermediate {
+					cleanRecipe := RegExReplace(recipe, Chr(0x25CC))
+					caseSensitiveMatch := RegExMatch(cleanRecipe, "^" prompt)
+					uniqueMatch := isUniqueRecipe && RegExMatch(cleanRecipe, "i)^" prompt)
+
+					if caseSensitiveMatch || uniqueMatch {
+						hasMatchingRecipe := True
+						break
+					}
+				}
+
+				if hasMatchingRecipe
+					output := intermediate
+			} else {
+				if showAltRecipes {
+					if intermediate.Length > 2 || (intermediate.Length = 2 && RegExMatch(intermediate[2], "^" Chr(0x25CC))) {
+						for i, recipe in intermediate {
+							cleanRecipe := RegExReplace(recipe, Chr(0x25CC))
+							caseSensitiveMatch := RegExMatch(cleanRecipe, "^" prompt)
+							uniqueMatch := isUniqueRecipe && RegExMatch(cleanRecipe, "i)^" prompt)
+
+							if caseSensitiveMatch || uniqueMatch
+								output.Push(recipe)
+						}
+					} else
+						output := intermediate
+				} else {
+					for i, recipe in intermediate {
+						cleanRecipe := RegExReplace(recipe, Chr(0x25CC))
+						caseSensitiveMatch := RegExMatch(cleanRecipe, "^" prompt)
+						uniqueMatch := isUniqueRecipe && RegExMatch(cleanRecipe, "i)^" prompt)
+
+						if caseSensitiveMatch || uniqueMatch
+							output.Push(recipe)
+					}
+				}
 			}
 		} else
 			output := intermediate
