@@ -24,27 +24,29 @@
 			[":${alchemical_n_sym_acid_acetic}:", "alc dis vinegar-1"],
 			[":I:", "alc dis vinegar-2"]
 		],
+		"options": { "useLetterLocale": "acetic$" },
 		"symbol": {
+			"beforeLetter": ["", "distilled", "distilled"],
+			"copyNumber": [0, 1, 2],
 			"tagAdditive": [
 				[{ "letter": "vinegar" }],
-				[{ "letter": "vinegar_distilled_1" }],
-				[{ "letter": "vinegar_distilled_2" }]
+				[{ "letter": "vinegar", "beforeLetter": "distilled::2" }],
+				[{ "letter": "vinegar", "beforeLetter": "distilled::2" }]
 			]
 		}
 	},
 	"alchemical_n_sym_sand_bath", {
 		"unicode": "1F707",
 		"recipe": ["AR", "alc sand bath"],
-		"symbol": { "tagAdditive": [{ "letter": "aqua_regia_2" }] }
+		"symbol": { "tagAdditive": [{ "letter": "aqua_regia", "copyNumber": 2 }] }
 	},
 	"alchemical_n_sym_ethanol_[1,2]", {
 		"unicode": ["1F708", "1F709"],
 		"recipe": [["alc ethanol-1"], ["alc ethanol-2"]],
+		"options": { "useLetterLocale": "ethanol$" },
 		"symbol": {
-			"tagAdditive": [
-				[{ "letter": "aqua_vitae_1" }],
-				[{ "letter": "aqua_vitae_2" }]
-			]
+			"copyNumber": [1, 2],
+			"tagAdditive": [{ "letter": "aqua_vitae" }]
 		}
 	},
 	"alchemical_n_sym_sulfur[,_philosophers,_black]", {
@@ -84,83 +86,66 @@
 			]
 		}
 	},
-	"alchemical_potassium_nitrate", {
+	"alchemical_n_sym_potassium_nitrate", {
 		"unicode": "1F715",
-		"tags": ["alchemical potassium nitrate", "alchemical nitre", "алхимический нитрат калия"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc nitre"]
+		"recipe": ["alc nitre"],
+		"symbol": {
+			"tagAdditive": [{ "letter": "nitre" }, { "letter": "saltpetre" }]
+		}
 	},
-	"alchemical_vitriol_1", {
-		"unicode": "1F716",
-		"tags": ["alchemical metal sulfate-1", "alchemical vitriol-1", "алхимический сульфат металла-1"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc vitriol-1"]
+	"alchemical_n_sym_metal_sulfate_[1,2]", {
+		"unicode": ["1F716", "1F717"],
+		"recipe": [["alc vitriol-1"], ["alc vitriol-2"]],
+		"options": { "useLetterLocale": "sulfate$" },
+		"symbol": {
+			"copyNumber": [1, 2],
+			"tagAdditive": [{ "letter": "vitriol" }]
+		}
 	},
-	"alchemical_vitriol_2", {
-		"unicode": "1F717",
-		"tags": ["alchemical metal sulfate-2", "alchemical vitriol-2", "алхимический сульфат металла-2"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc vitriol-2"]
+	"alchemical_n_sym_rock_salt_[1,2]", {
+		"unicode": ["1F718", "1F719"],
+		"recipe": [["alc rock salt-1", "alc bismuth"], ["alc rock salt-2"]],
+		"options": { "useLetterLocale": "salt$" },
+		"symbol": {
+			"copyNumber": [1, 2],
+			"tagAdditive": [[{ "letter": "bismuth", "copyNumber": 0 }], []]
+		}
 	},
-	"alchemical_rock_salt_1", {
-		"unicode": "1F718",
-		"tags": ["alchemical rock salt-1", "alchemical bismuth", "алхимическая каменная соль-1", "алхимический висмут"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc rock salt-1", "alc bismuth"]
+	"alchemical_n_sym_[gold,silver]", {
+		"unicode": ["1F71A", "1F71B"],
+		"recipe": [["alc gold"], ["alc silver"]]
 	},
-	"alchemical_rock_salt_2", {
-		"unicode": "1F719",
-		"tags": ["alchemical rock salt-2", "алхимическая каменная соль-2"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc rock salt-2"]
+	"alchemical_n_sym_iron_ore_[1,2]", {
+		"unicode": ["1F71C", "1F71D"],
+		"recipe": [["alc iron ore-1"], ["alc iron ore-2"]],
+		"options": { "useLetterLocale": "ore$" },
+		"symbol": {
+			"copyNumber": [1, 2],
+			"tagAdditive": [{ "letter": "iron_bearing_mineral" }]
+		}
 	},
-	"alchemical_gold", {
-		"unicode": "1F71A",
-		"tags": ["alchemical gold", "алхимическое золото"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc gold"]
+	"alchemical_n_sym_[,iron_]copper_ore", {
+		"unicode": ["1F720", "1F721"],
+		"recipe": [["alc cop ore"], ["alc iron cop ore"]],
+		"symbol": {
+			"tagAdditive": [
+				[{ "letter": "copper_bearing_mineral" }],
+				[{ "letter": "iron_copper_bearing_mineral" }]
+			]
+		}
 	},
-	"alchemical_silver", {
-		"unicode": "1F71B",
-		"tags": ["alchemical silver", "алхимическое серебро"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc silver"]
-	},
-	"alchemical_iron_ore_1", {
-		"unicode": "1F71C",
-		"tags": ["alchemical iron ore-1", "алхимическая железая руда-1"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc iron ore-1"]
-	},
-	"alchemical_iron_ore_2", {
-		"unicode": "1F71D",
-		"tags": ["alchemical iron ore-2", "алхимическая железая руда-2"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc iron ore-2"]
-	},
-	"alchemical_copper_ore", {
-		"unicode": "1F720",
-		"tags": ["alchemical copper ore", "алхимическая медная руда"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc cop ore"]
-	},
-	"alchemical_iron_copper_ore", {
-		"unicode": "1F721",
-		"tags": ["alchemical iron-copper ore", "алхимическая медно-железная руда"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc iron cop ore"]
-	},
-	"alchemical_crocus_of_iron", {
-		"unicode": "1F71E",
-		"tags": ["alchemical crocus of iron", "алхимический крокус железа"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc iron croc"]
-	},
-	"alchemical_regulus_of_iron", {
-		"unicode": "1F71F",
-		"tags": ["alchemical regulus of iron", "алхимический регулус железа"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc iron regu"]
+	"alchemical_n_sym_iron_[crocus,crocus_archaic,regulus]", {
+		"unicode": ["26A8", "1F71E", "1F71F"],
+		"recipe": [["alc iron croc"], ["alc arc iron croc"], ["alc iron regu"]],
+		"options": { "useLetterLocale": ["crocus$", "crocus$", "regulus$"] },
+		"symbol": {
+			"beforeType": ["", "archaic", ""],
+			"tagAdditive": [
+				[{ "letter": "crocus_martis" }],
+				[],
+				[{ "letter": "regulus_martis" }]
+			]
+		}
 	},
 	"astrological_earth", {
 		"unicode": "1F728",

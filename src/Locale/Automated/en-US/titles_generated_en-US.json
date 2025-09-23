@@ -68,12 +68,9 @@
 				"rounded": "rounded",
 				"narrow": "narrow",
 				"wide": "wide",
+				"distilled": "distilled",
 				"philosophers": "philosophers",
-				"black": "black",
-				"t": {
-					"philosophers": "Philosophers",
-					"black": "Black"
-				}
+				"black": "black"
 			},
 			"after_letter": {
 				"late": "(late form)",
