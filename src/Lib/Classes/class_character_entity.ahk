@@ -48,6 +48,8 @@ Class ChrEntry {
 					"letter", "",
 					"afterLetter", "",
 					"beforeLetter", "",
+					"afterType", "",
+					"beforeType", "",
 					"scriptAdditive", "",
 					"tagAdditive", [],
 					"set", "",

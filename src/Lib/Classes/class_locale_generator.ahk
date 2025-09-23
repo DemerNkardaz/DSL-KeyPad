@@ -83,6 +83,8 @@ Class LocaleGenerator {
 
 			local lBeforeletter := ""
 			local lAfterletter := ""
+			local lBeforeType := ""
+			local lAfterType := ""
 			local lSecondName := ""
 
 			if entry["options"]["secondName"] {
@@ -92,13 +94,13 @@ Class LocaleGenerator {
 				lSecondName := " " Locale.Read(("Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref) ".second_name", lang)
 			}
 
-			for letterBound in ["beforeLetter", "afterLetter"] {
+			for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType"] {
 				if entry["symbol"].Has(letterBound) && StrLen(entry["symbol"][letterBound]) > 0 {
 					local boundLink := Util.StrUpper(letterBound, 1)
 					local entryBoundReference := entry["symbol"][letterBound]
 					local splitted := StrSplit(Util.StrTrim(entry["symbol"][letterBound]), ",")
 
-					local localeKey := RegExReplace(letterBound, "Letter", "_letter")
+					local localeKey := RegExReplace(letterBound, "(Letter|Type)", "_letter")
 
 					for i, bound in splitted {
 						if RegExMatch(bound, "\:\:(.*?)$", &match) {
@@ -106,13 +108,15 @@ Class LocaleGenerator {
 							local bound := SubStr(bound, 1, match.Pos(0) - 1)
 							l%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , index) (i < splitted.Length ? " " : "")
 						} else
-							l%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , 1) (i < splitted.Length ? " " : "")
+							l%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , (InStr(boundLink, "Type") ? lVariant : 1)) (i < splitted.Length ? " " : "")
 					}
 				}
 			}
 
 			lBeforeletter := StrLen(lBeforeletter) > 0 ? lBeforeletter " " : ""
 			lAfterletter := StrLen(lAfterletter) > 0 ? " " lAfterletter : ""
+			lBeforeType := StrLen(lBeforeType) > 0 ? lBeforeType " " : ""
+			lAfterType := StrLen(lAfterType) > 0 ? " " lAfterType : ""
 
 			local proxyMark := StrLen(entry["proxy"]) > 0 ? " " Locale.Read("gen.proxy", lang) : ""
 
@@ -124,7 +128,9 @@ Class LocaleGenerator {
 				entry["titles"][langCode] := (
 					Locale.Read(pfx "prefix." lScript (!isGermanic ? scriptAdditive : ""), lang, , , , lVariant)
 					" "
+					lBeforeType
 					localedCase Locale.Read(pfx "type." lType, lang)
+					lAfterType
 					(isGermanic && scriptAdditive != "" ? " " Locale.Read(pfx "prefix." lScript scriptAdditive, lang, , , , lVariant) : "")
 					" "
 					lBeforeletter
@@ -134,7 +140,9 @@ Class LocaleGenerator {
 					proxyMark
 				)
 				tags[langCode] := (
+					lBeforeType
 					(!isGermanic ? localedCase Locale.Read(pfx "type." lType, lang) " " : "")
+					lAfterType
 					lBeforeletter
 					postLetter
 					lAfterletter
@@ -225,12 +233,14 @@ Class LocaleGenerator {
 
 					local lAdditionalBeforeLetter := ""
 					local lAdditionalAfterLetter := ""
+					local lAdditionalBeforeType := ""
+					local lAdditionalAfterType := ""
 
-					for letterBound in ["beforeLetter", "afterLetter"] {
+					for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType"] {
 						if tagAdd.Has(letterBound) && StrLen(tagAdd[letterBound]) > 0 {
 							local boundLink := Util.StrUpper(letterBound, 1)
 							local splitted := StrSplit(Util.StrTrim(tagAdd[letterBound]), ",")
-							local localeKey := RegExReplace(letterBound, "Letter", "_letter")
+							local localeKey := RegExReplace(letterBound, "(Letter|Type)", "_letter")
 
 							for i, bound in splitted {
 								if RegExMatch(bound, "\:\:(.*?)$", &match) {
@@ -238,13 +248,15 @@ Class LocaleGenerator {
 									local bound := SubStr(bound, 1, match.Pos(0) - 1)
 									lAdditional%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , index) (i < splitted.Length ? " " : "")
 								} else
-									lAdditional%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , 1) (i < splitted.Length ? " " : "")
+									lAdditional%boundLink% .= Locale.Read(pfx localeKey "." bound, lang, , , , (InStr(boundLink, "Type") ? curLVariant : 1)) (i < splitted.Length ? " " : "")
 							}
 						}
 					}
 
 					lAdditionalBeforeLetter := StrLen(lAdditionalBeforeLetter) > 0 ? lAdditionalBeforeLetter " " : ""
 					lAdditionalAfterLetter := StrLen(lAdditionalAfterLetter) > 0 ? " " lAdditionalAfterLetter : ""
+					lAdditionalBeforeType := StrLen(lAdditionalBeforeType) > 0 ? lAdditionalBeforeType " " : ""
+					lAdditionalAfterType := StrLen(lAdditionalAfterType) > 0 ? " " lAdditionalAfterType : ""
 
 					if curIsGermanic {
 						local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" letter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "") "_" curLetter) ".letter_locale"
@@ -256,7 +268,9 @@ Class LocaleGenerator {
 
 						additionalTags.Push(
 							aLScript
+							lAdditionalBeforeType
 							" " aLType
+							lAdditionalAfterType
 							aScriptAdditive " "
 							lAdditionalBeforeLetter
 							additionalPostLetter
@@ -272,7 +286,9 @@ Class LocaleGenerator {
 
 						additionalTags.Push(
 							((lang = "en-US" || lang = "ru-RU" && tagsScriptAtStart) ? scriptTag " " : "")
+							lAdditionalBeforeType
 							localedCase Locale.Read(pfx "type." curType, lang) " "
+							lAdditionalAfterType
 							lAdditionalBeforeLetter
 							additionalPostLetter
 							lAdditionalAfterLetter

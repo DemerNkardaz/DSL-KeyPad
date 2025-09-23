@@ -47,7 +47,12 @@
 				"n_sym_sand_bath": { "letter_locale": "Sand bath" },
 				"n_sym_sulfur": { "letter_locale": "Sulfur" },
 				"n_sym_sulphur": { "letter_locale": "Suphur" },
-				"n_sym_brimstone": { "letter_locale": "Brimstone" }
+				"n_sym_brimstone": { "letter_locale": "Brimstone" },
+				"n_sym_salt": { "letter_locale": "Salt" }
+			},
+			"astrological": {
+				"n_sym_planet_earth": { "letter_locale": "Earth" },
+				"n_sym_fixed_zodiacal_modality": { "letter_locale": "Fixed zodiacal modality" }
 			},
 			"occultic": {
 				"n_sym_leviathan_cross": { "letter_locale": "Leviathan cross" }

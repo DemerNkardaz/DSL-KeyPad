@@ -74,11 +74,15 @@
 			]
 		}
 	},
-	"alchemical_salt", {
+	"alchemical_n_sym_salt", {
 		"unicode": "1F714",
-		"tags": ["alchemical salt", "archaic astrological Earth", "алхимическая соль", "архаичное астрологическая Земля"],
-		"groups": ["Alchemical"],
-		"recipe": ["alc salt", "ast arc Earth"]
+		"recipe": ["alc salt", "ast arc Earth", "ast fzm"],
+		"symbol": {
+			"tagAdditive": [
+				{ "script": "astrological", "letter": "planet_earth", "beforeType": "archaic" },
+				{ "script": "astrological", "letter": "fixed_zodiacal_modality" }
+			]
+		}
 	},
 	"alchemical_potassium_nitrate", {
 		"unicode": "1F715",
