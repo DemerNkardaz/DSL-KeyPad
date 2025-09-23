@@ -63,6 +63,7 @@
 				"old_polish": "Old Polish",
 				"script": "script",
 				"archaic": "archaic",
+				"obsolete": "obsolete",
 				"epigraphic": "epigraphic",
 				"egyptological": "egyptological",
 				"rounded": "rounded",
@@ -70,7 +71,14 @@
 				"wide": "wide",
 				"distilled": "distilled",
 				"philosophers": "philosophers",
-				"black": "black"
+				"black": "black",
+				"planet": "planet",
+				"asteroid": "asteroid",
+				"comet": "comet",
+				"meteor": "meteor",
+				"star": "star",
+				"satellite": "satellite",
+				"element": "element"
 			},
 			"after_letter": {
 				"late": "(late form)",

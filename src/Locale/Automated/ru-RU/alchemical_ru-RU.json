@@ -45,10 +45,13 @@
 				"n_sym_potassium_nitrate": { "letter_locale": "Нитрат калия" },
 				"n_sym_nitre": { "letter_locale": "Селитра" },
 				"n_sym_saltpetre": { "letter_locale": "Селитра" },
+				"n_sym_stibnite": { "letter_locale": "Стибнит (Sb\u2082S\u2083)" },
+				"n_sym_antimony_ore": { "letter_locale": "Сурьмяная руда" },
 				"n_sym_metal_sulfate": { "letter_locale": "Сульфат металла (\ud835\udc65SO\u2084)" },
 				"n_sym_vitriol": { "letter_locale": "Купорос" },
 				"n_sym_rock_salt": { "letter_locale": "Каменная соль" },
 				"n_sym_bismuth": { "letter_locale": "Висмут" },
+				"n_sym_platinum": { "letter_locale": "Платина" },
 				"n_sym_gold": { "letter_locale": "Золото" },
 				"n_sym_silver": { "letter_locale": "Серебро" },
 				"n_sym_copper": { "letter_locale": "Медь" },
@@ -70,10 +73,28 @@
 				"n_sym_planet_uranus": { "letter_locale": "Уран" },
 				"n_sym_planet_neptune": { "letter_locale": "Нептун" },
 				"n_sym_planet_pluto": { "letter_locale": "Плутон" },
+				"n_sym_planet_transpluto": { "letter_locale": "Трансплутон" },
+				"n_sym_planet_proserpina": { "letter_locale": "Прозерпина" },
+				"n_sym_asteroid_astraea": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_astraea.letter_locale}" },
+				"n_sym_asteroid_vesta": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_vesta.letter_locale}" },
+				"n_sym_asteroid_chiron": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_chiron.letter_locale}" },
+				"n_sym_asteroid_hygiea": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_hygiea.letter_locale}" },
+				"n_sym_asteroid_pholus": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_pholus.letter_locale}" },
+				"n_sym_asteroid_nessus": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_nessus.letter_locale}" },
 				"n_sym_fixed_zodiacal_modality": { "letter_locale": "Фиксированная зодиакальная модальность" }
 			},
 			"astronomical": {
-				"n_sym_asteroid_astraea": { "letter_locale": "(5) Астрея" }
+				"n_sym_planet_earth": { "letter_locale": "Земля" },
+				"n_sym_planet_uranus": { "letter_locale": "Уран" },
+				"n_sym_planet_neptune": { "letter_locale": "Нептун" },
+				"n_sym_planet_pluto": { "letter_locale": "Плутон" },
+				"n_sym_asteroid_astraea": { "letter_locale": "(5) Астрея" },
+				"n_sym_asteroid_proserpina": { "letter_locale": "(26) Прозерпина" },
+				"n_sym_asteroid_vesta": { "letter_locale": "(4) Веста" },
+				"n_sym_asteroid_chiron": { "letter_locale": "(2060) Хирон" },
+				"n_sym_asteroid_hygiea": { "letter_locale": "(10) Гигея" },
+				"n_sym_asteroid_pholus": { "letter_locale": "(5145) Фол" },
+				"n_sym_asteroid_nessus": { "letter_locale": "(7066) Несс" }
 			},
 			"occultic": {
 				"n_sym_leviathan_cross": { "letter_locale": "Крест Левиафана" }

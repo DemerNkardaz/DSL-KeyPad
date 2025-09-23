@@ -89,7 +89,7 @@ Class LocaleGenerator {
 
 			local copyNumber := entry["symbol"]["copyNumber"]
 			local hasCopyNumber := copyNumber > 0
-			local lCopyNumber := hasCopyNumber ? " (" copyNumber ")" : ""
+			local lCopyNumber := hasCopyNumber ? " [" copyNumber "]" : ""
 
 			if entry["options"]["secondName"] {
 				if hasScript
@@ -231,7 +231,7 @@ Class LocaleGenerator {
 					local curScript := (tagAdd.Has("script") ? tagAdd["script"] : lScript)
 					local curType := (tagAdd.Has("type") ? tagAdd["type"] : lType)
 					local curCase := (tagAdd.Has("case") ? tagAdd["case"] : lCase)
-					local curLetter := tagAdd["letter"]
+					local curLetter := (tagAdd.Has("letter") ? tagAdd["letter"] : letter)
 					local curCopyNumber := (tagAdd.Has("copyNumber") ? tagAdd["copyNumber"] : copyNumber)
 					local curHasCopyNumber := curCopyNumber > 0
 
@@ -249,7 +249,7 @@ Class LocaleGenerator {
 					local lAdditionalAfterLetter := ""
 					local lAdditionalBeforeType := ""
 					local lAdditionalAfterType := ""
-					local lAdditionalCopyNumber := curHasCopyNumber ? " (" curCopyNumber ")" : ""
+					local lAdditionalCopyNumber := curHasCopyNumber ? " [" curCopyNumber "]" : ""
 
 					for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType"] {
 						if tagAdd.Has(letterBound) && StrLen(tagAdd[letterBound]) > 0 {

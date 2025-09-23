@@ -1,7 +1,8 @@
 [
 	"alchemical_n_sym_element_[air,fire,earth,water]", {
 		"unicode": ["1F701", "1F702", "1F703", "1F704"],
-		"recipe": [["alc air"], ["alc fire"], ["alc earth", "alc ert"], ["alc water", "alc wtr"]]
+		"recipe": [["alc air"], ["alc fire"], ["alc earth", "alc ert"], ["alc water", "alc wtr"]],
+		"symbol": { "beforeLetter": "element::2" }
 	},
 
 	"alchemical_n_sym_acid_[nitric,nitrohydrochloric]", {
@@ -81,7 +82,7 @@
 		"recipe": ["alc salt", "ast arc Earth", "ast aErt", "ast fzm"],
 		"symbol": {
 			"tagAdditive": [
-				{ "script": "astrological", "letter": "planet_earth", "beforeType": "archaic" },
+				{ "script": "astrological", "letter": "planet_earth", "beforeType": "archaic", "beforeLetter": "planet" },
 				{ "script": "astrological", "letter": "fixed_zodiacal_modality" }
 			]
 		}
@@ -155,6 +156,7 @@
 			["ast Neptune", "ast Npt"]
 		],
 		"symbol": {
+			"beforeLetter": "planet",
 			"tagAdditive": [ [{ "script": "alchemical", "letter": "verdigris" }], [], [] ]
 		}
 	},
@@ -163,84 +165,58 @@
 		"recipe": [
 			["ast Pluto-1", "ast Plt1"],
 			["ast Pluto-2", "ast Plt2"],
-			["ast Pluto-3", "ast Plt3", "asn Astraea", "asn Asr"],
+			["ast Pluto-3", "ast Plt3", "asn obs Astraea", "asn oAsr"],
 			["ast Pluto-4", "ast Plt4"],
 			["ast Pluto-5", "ast Plt5"]
 		],
 		"options": { "useLetterLocale": "pluto$" },
 		"symbol": {
 			"copyNumber": [1, 2, 3, 4, 5],
+			"beforeLetter": "planet",
 			"tagAdditive": [
 				[], [],
-				[{ "script": "astronomical", "letter": "asteroid_astraea", "copyNumber": 0 }],
+				[{ "script": "astronomical", "letter": "asteroid_astraea", "beforeType": "obsolete", "beforeLetter": "asteroid", "copyNumber": 0 }],
 				[], []
 			]
 		}
 	},
-	"astrological_transpluto", {
-		"unicode": "2BD7",
-		"tags": ["astrological Transpluto", "астрологическая Трансплутон"],
-		"groups": ["Astrological"],
-		"recipe": ["ast Transpluto"]
+	"astrological_n_sym_planet_[transpluto,proserpina]", {
+		"unicode": ["2BD7", "2BD8"],
+		"recipe": [["ast Transpluto", "ast Tplt"], ["ast Proserpina", "ast Prs"]],
+		"symbol": { "beforeLetter": "planet" }
 	},
-	"astrological_vesta", {
-		"unicode": "26B6",
-		"tags": ["astrological Vesta", "астрологическая Веста"],
-		"groups": ["Astrological"],
-		"recipe": ["ast Vesta"]
+	"astrological_n_sym_asteroid_[vesta,chiron,astraea,hygiea,pholus,nessus]", {
+		"unicode": ["26B6", "26B7", "2BD9", "2BDA", "2BDB", "2BDC"],
+		"recipe": [
+			["ast Vesta", "ast Vst"],
+			["ast Chiron", "ast Chr"],
+			["ast Astraea", "ast Asr"],
+			["ast Hygiea", "ast Hyg"],
+			["ast Pholus", "ast Phl"],
+			["ast Nessus", "ast Nes"]
+		],
+		"symbol": {
+			"beforeLetter": "asteroid",
+			"tagAdditive": [
+				[{ "script": "astronomical", "letter": "asteroid_vesta", "beforeLetter": "asteroid" }],
+				[], [], [], [], []
+			]
+		}
 	},
-	"astrological_chiron", {
-		"unicode": "26B7",
-		"tags": ["astrological Chiron", "астрологическая Хирон"],
-		"groups": ["Astrological"],
-		"recipe": ["ast Chiron"]
-	},
-	"astrological_proserpina", {
-		"unicode": "2BD8",
-		"tags": ["astrological Proserpina", "астрологическая Прозерпина"],
-		"groups": ["Astrological"],
-		"recipe": ["ast Proserpina"]
-	},
-	"astrological_astraea", {
-		"unicode": "2BD9",
-		"tags": ["astrological Astraea", "астрологическая Астрея"],
-		"groups": ["Astrological"],
-		"recipe": ["ast Astraea"]
-	},
-	"astrological_hygiea", {
-		"unicode": "2BDA",
-		"tags": ["astrological Hygiea", "астрологическая Гигея"],
-		"groups": ["Astrological"],
-		"recipe": ["ast Hygiea"]
-	},
-	"astrological_pholus", {
-		"unicode": "2BDB",
-		"tags": ["astrological Pholus", "астрологическая Фол"],
-		"groups": ["Astrological"],
-		"recipe": ["ast Pholus"]
-	},
-	"astrological_nessus", {
-		"unicode": "2BDC",
-		"tags": ["astrological Nessus", "астрологическая Несс"],
-		"groups": ["Astrological"],
-		"recipe": ["ast Nessus"]
-	},
-	"astronomical_earth", {
-		"unicode": "2641",
-		"tags": ["alchemical antimony trisulfide", "alchemical stibnite", "astronomical Earth", "алхимический стибнит", "алхимический сульфид сурьмы", "астрономическая Земля"],
-		"groups": ["Astronomical"],
-		"recipe": ["asn Earth", "alc stibnite"]
-	},
-	"astronomical_neptune", {
-		"unicode": "2BC9",
-		"tags": ["astronomical Neptune", "астрономический Нептун"],
-		"groups": ["Astrological"],
-		"recipe": ["asn Neptune"]
-	},
-	"astronomical_uranus", {
-		"unicode": "26E2",
-		"tags": ["astronomical Uranus", "астрономический Уран"],
-		"groups": ["Astronomical"],
-		"recipe": ["asn Uranus"]
+	"astronomical_n_sym_planet_[earth,uranus,neptune]", {
+		"unicode": ["2641", "26E2", "2BC9"],
+		"recipe": [
+			["asn Earth", "asn Ert", "alc stibnite", "alc stb"],
+			["asn Uranus", "asn Urs"],
+			["asn Neptune", "asn Npt"]
+		],
+		"symbol": {
+			"beforeLetter": "planet",
+			"tagAdditive": [
+				[{ "script": "alchemical", "letter": "stibnite" }, { "script": "alchemical", "letter": "antimony_ore" }],
+				[{ "script": "astrological", "letter": "planet_uranus", "copyNumber": 2 }, { "script": "alchemical", "letter": "platinum" }],
+				[]
+			]
+		}
 	}
 ]

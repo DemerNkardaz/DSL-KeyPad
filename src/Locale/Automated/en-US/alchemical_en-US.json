@@ -45,10 +45,13 @@
 				"n_sym_potassium_nitrate": { "letter_locale": "Potassium nitrate" },
 				"n_sym_nitre": { "letter_locale": "Nitre" },
 				"n_sym_saltpetre": { "letter_locale": "Saltpetre" },
+				"n_sym_stibnite": { "letter_locale": "Stibnite (Sb\u2082S\u2083)" },
+				"n_sym_antimony_ore": { "letter_locale": "Antimony ore" },
 				"n_sym_metal_sulfate": { "letter_locale": "Metal sulfate (\ud835\udc65SO\u2084)" },
 				"n_sym_vitriol": { "letter_locale": "Vitriol" },
 				"n_sym_rock_salt": { "letter_locale": "Rock salt" },
 				"n_sym_bismuth": { "letter_locale": "Bismuth" },
+				"n_sym_platinum": { "letter_locale": "Platinum" },
 				"n_sym_gold": { "letter_locale": "Gold" },
 				"n_sym_silver": { "letter_locale": "Silver" },
 				"n_sym_copper": { "letter_locale": "Copper" },
@@ -70,10 +73,28 @@
 				"n_sym_planet_uranus": { "letter_locale": "Uranus" },
 				"n_sym_planet_neptune": { "letter_locale": "Neptune" },
 				"n_sym_planet_pluto": { "letter_locale": "Pluto" },
+				"n_sym_planet_transpluto": { "letter_locale": "Transpluto" },
+				"n_sym_planet_proserpina": { "letter_locale": "Proserpina" },
+				"n_sym_asteroid_astraea": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_astraea.letter_locale}" },
+				"n_sym_asteroid_vesta": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_vesta.letter_locale}" },
+				"n_sym_asteroid_chiron": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_chiron.letter_locale}" },
+				"n_sym_asteroid_hygiea": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_hygiea.letter_locale}" },
+				"n_sym_asteroid_pholus": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_pholus.letter_locale}" },
+				"n_sym_asteroid_nessus": { "letter_locale": "{@:scripts.astronomical.n_sym_asteroid_nessus.letter_locale}" },
 				"n_sym_fixed_zodiacal_modality": { "letter_locale": "Fixed zodiacal modality" }
 			},
 			"astronomical": {
-				"n_sym_asteroid_astraea": { "letter_locale": "(5) Astraea" }
+				"n_sym_planet_earth": { "letter_locale": "Earth" },
+				"n_sym_planet_uranus": { "letter_locale": "Uranus" },
+				"n_sym_planet_neptune": { "letter_locale": "Neptune" },
+				"n_sym_planet_pluto": { "letter_locale": "Pluto" },
+				"n_sym_asteroid_astraea": { "letter_locale": "(5) Astraea" },
+				"n_sym_asteroid_proserpina": { "letter_locale": "(26) Proserpina" },
+				"n_sym_asteroid_vesta": { "letter_locale": "(4) Vesta" },
+				"n_sym_asteroid_chiron": { "letter_locale": "(2060) Chiron" },
+				"n_sym_asteroid_hygiea": { "letter_locale": "(10) Hygiea" },
+				"n_sym_asteroid_pholus": { "letter_locale": "(5145) Pholus" },
+				"n_sym_asteroid_nessus": { "letter_locale": "(7066) Nessus" }
 			},
 			"occultic": {
 				"n_sym_leviathan_cross": { "letter_locale": "Leviathan cross" }
