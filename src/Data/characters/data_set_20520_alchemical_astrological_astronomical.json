@@ -66,7 +66,7 @@
 			"beforeLetter": ["", "distilled", "distilled"],
 			"copyNumber": [0, 1, 2],
 			"tagAdditive": [
-				[{ "letter": "vinegar" }],
+				[{ "letter": "vinegar" }, { "letter": "acid" }],
 				[{ "letter": "vinegar", "beforeLetter": "distilled::2" }],
 				[{ "letter": "vinegar", "beforeLetter": "distilled::2" }]
 			]
@@ -89,25 +89,26 @@
 	"alchemical_n_sym_sulfur[,_philosophers,_black]", {
 		"unicode": ["1F70D", "1F70E", "1F70F"],
 		"recipe": [
-			["${dagger}${alchemical_n_sym_element_fire}","${alchemical_n_sym_element_fire}${dagger}", "alc sulfur", "alc slf"],
+			["${alchemical_n_sym_acid_acetic}${alchemical_n_sym_element_fire}","${alchemical_n_sym_element_fire}${alchemical_n_sym_acid_acetic}", "alc sulfur", "alc slf"],
 			["alc phi sulfur", "alc pslf"],
 			["alc black sulfur", "alc bslf"]
 		],
 		"options": { "useLetterLocale": "sulfur$" },
 		"symbol": {
-			"beforeLetter": ["", "t.philosophers", "t.black"],
+			"beforeLetter": ["element", "t.philosophers", "t.black"],
 			"tagAdditive": [
 				[
-					{ "letter": "sulphur" },
-					{ "letter": "brimstone" }
+					{ "beforeLetter": "element", "letter": "sulphur" },
+					{ "beforeLetter": "element", "letter": "brimstone" },
+					{ "script": "astrological", "letter": "cardinal_zodiacal_modality" }
 				],
 				[
-					{ "letter": "sulphur", "beforeLetter": "t.philosophers" },
-					{ "letter": "brimstone", "beforeLetter": "t.philosophers"}
+					{ "beforeLetter": "t.philosophers", "letter": "sulphur" },
+					{ "beforeLetter": "t.philosophers", "letter": "brimstone"}
 				],
 				[
-					{ "letter": "sulphur", "beforeLetter": "t.black" },
-					{ "letter": "brimstone", "beforeLetter": "t.black" },
+					{ "beforeLetter": "t.black", "letter": "sulphur" },
+					{ "beforeLetter": "t.black", "letter": "brimstone"},
 					{ "script": "occultic", "letter": "leviathan_cross" }
 				]
 			]
@@ -121,6 +122,14 @@
 				{ "script": "astrological", "letter": "planet_earth", "beforeType": "archaic", "beforeLetter": "planet" },
 				{ "script": "astrological", "letter": "fixed_zodiacal_modality" }
 			]
+		}
+	},
+	"alchemical_n_sym_alkali_[1,2]", {
+		"unicode": ["1F736", "1F737"],
+		"recipe": [["alc alkali-1", "alc alk1"], ["alc alkali-2", "alc alk2"]],
+		"options": { "useLetterLocale": "alkali$" },
+		"symbol": {
+			"copyNumber": [1, 2]
 		}
 	},
 	"alchemical_n_sym_potassium_nitrate", {
@@ -139,6 +148,32 @@
 			"tagAdditive": [{ "letter": "vitriol" }]
 		}
 	},
+	"alchemical_n_sym_[gold,silver]", {
+		"unicode": ["1F71A", "1F71B"],
+		"recipe": [["alc arc gold", "alc agld", "ast arc Sun"], ["alc arc silver", "alc aslv", "ast arc Moon"]],
+		"symbol": {
+			"beforeType": "archaic",
+			"beforeLetter": "element", 
+			"tagAdditive": [
+				[{ "script": "astrological", "beforeType": "archaic", "letter": "star_sun"}],
+				[{ "script": "astrological", "beforeType": "archaic", "letter": "satellite_moon"}]
+			]
+		}
+	},
+	"alchemical_n_sym_mineral_[marcasite,sal_ammoniac]", {
+		"unicode": ["1F738", "1F739"],
+		"recipe": [
+			["alc marcasite", "alc mrcs", "alc pyrite", "alc prt"],
+			["alc sal ammoniac", "alc sna"]
+		],
+		"symbol": {
+			"beforeLetter": "mineral",
+			"tagAdditive": [
+				[{ "beforeLetter": "mineral", "letter": "mineral_pyrite" }],
+				[{ "letter": "ammonium_chloride" }, { "letter": "star_regulus" }]
+			]
+		}
+	},
 	"alchemical_n_sym_rock_salt_[1,2]", {
 		"unicode": ["1F718", "1F719"],
 		"recipe": [["alc rock salt-1", "alc rs1", "alc bismuth", "alc bsm"], ["alc rock salt-2", "alc rs2"]],
@@ -147,10 +182,6 @@
 			"copyNumber": [1, 2],
 			"tagAdditive": [[{ "letter": "bismuth", "copyNumber": 0 }], []]
 		}
-	},
-	"alchemical_n_sym_[gold,silver]", {
-		"unicode": ["1F71A", "1F71B"],
-		"recipe": [["alc gold", "alc gld"], ["alc silver", "alc slv"]]
 	},
 	"alchemical_n_sym_iron_ore_[1,2]", {
 		"unicode": ["1F71C", "1F71D"],
@@ -171,6 +202,21 @@
 			]
 		}
 	},
+	"alchemical_n_sym_[tin,lead,antimony]_ore", {
+		"unicode": ["1F729", "1F72A", "1F72B"],
+		"recipe": [
+			["alc tin ore", "alc toe"],
+			["alc lead ore", "alc loe"],
+			["alc antimony ore", "alc aoe", "alc stibnite", "alc stb"]
+		],
+		"symbol": {
+			"tagAdditive": [
+				[{ "letter": "tin_bearing_mineral" }],
+				[{ "letter": "lead_bearing_mineral" }],
+				[{ "letter": "antimony_bearing_mineral" }, { "letter": "stibnite" }]
+			]
+		}
+	},
 	"alchemical_n_sym_iron_[crocus,crocus_archaic,regulus]", {
 		"unicode": ["26A8", "1F71E", "1F71F"],
 		"recipe": [["alc iron croc", "alc icr"], ["alc arc iron croc", "alc aicr"], ["alc iron regu", "alc irg"]],
@@ -184,19 +230,117 @@
 			]
 		}
 	},
-	"astrological_n_sym_planet_[earth,uranus,neptune]", {
-		"unicode": ["1F728", "2645", "2646"],
+	"alchemical_n_sym_copper_[crocus_1,crocus_2]", {
+		"unicode": ["1F723", "1F724"],
+		"recipe": [["alc cop croc-1", "alc ccr1"], ["alc cop croc-2", "alc ccr2"]],
+		"options": { "useLetterLocale": "crocus$" },
+		"symbol": {
+			"copyNumber": [1, 2],
+			"tagAdditive": [{ "letter": "crocus_veneris" }]
+		}
+	},
+	"alchemical_n_sym_[copper,antimony]_sublimate", {
+		"unicode": ["1F722", "1F72C"],
+		"recipe": [["alc cop sublimate", "alc cst"], ["alc antimony sublimate", "alc ast"]],
+		"symbol": {
+			"tagAdditive": [
+				[{ "script": "astrological", "letter": "planetoid" }],
+				[
+					{ "script": "astrological", "letter": "asteroid" },
+					{ "beforeType": "archaic", "letter": "stibnite" },
+					{ "beforeType": "archaic", "beforeLetter": "mineral", "letter": "mineral_sal_ammoniac" }
+				]
+			]
+		}
+	},
+	"alchemical_n_sym_mercury_sublimate_[1,2,3]", {
+		"unicode": ["1F710", "1F711", "1F712"],
 		"recipe": [
+			["${astrological_n_sym_planet_mercury}${alchemical_n_sym_sublimate}", "alc mercury sublimate-1", "alc mst1"],
+			["alc mercury sublimate-2", "alc mst2"],
+			["alc mercury sublimate-3", "alc mst3"]
+		],
+		"options": { "useLetterLocale": "sublimate$" },
+		"symbol": { "copyNumber": [1, 2, 3] }
+	},
+	"astrological_n_sym_star_sun", {
+		"unicode": "2609",
+		"recipe": ["ast Sun", "alc gold", "alc gld"],
+		"symbol": {
+			"beforeLetter": "star",
+			"tagAdditive": [
+				{ "script": "astronomical", "beforeLetter": "star", "letter": "star_sun" },
+				{ "script": "alchemical", "beforeLetter": "element", "letter": "gold" }
+			]
+		}
+	},
+	"astrological_n_sym_satellite_moon_[1,2]", {
+		"unicode": ["263E", "263D"],
+		"recipe": [["ast moon-1", "ast mn1"], ["ast moon-2", "ast mn2"]],
+		"options": { "useLetterLocale": "moon$" },
+		"symbol": {
+			"copyNumber": [1, 2],
+			"beforeLetter": "satellite",
+			"tagAdditive": [
+					[
+						{ "script": "alchemical", "beforeLetter": "element", "letter": "silver" }
+					],
+					[
+						{ "script": "alchemical", "beforeLetter": "element", "letter": "silver" },
+						{ "script": "alchemical", "beforeLetter": "element", "letter": "quicksilver" }
+					]
+				]
+		}
+	},
+	"astrological_n_sym_planet_[mercury,venus,earth,mars,jupiter,saturn,uranus,neptune]", {
+		"unicode": [
+			"263F",
+			"2640",
+			"1F728",
+			"2642",
+			"2643",
+			"2644",
+			"2645",
+			"2646"
+		],
+		"sequence": [
+			[], ["2640", "FE0E"],
+			[], ["2642", "FE0E"],
+			[], [], [], []
+		],
+		"recipe": [
+			["ast Mercury", "ast Mrc"],
+			["ast Venus", "ast Vns"],
 			["ast Earth", "ast Ert", "alc vers"],
+			["ast Mars", "ast Mrs"],
+			["ast Jupiter", "ast Jpr"],
+			["ast Saturn", "ast Stn"],
 			["ast Uranus", "ast Urs"],
 			["ast Neptune", "ast Npt"]
 		],
 		"symbol": {
 			"beforeLetter": "planet",
-			"tagAdditive": [ [{ "script": "alchemical", "letter": "verdigris" }], [], [] ]
+			"tagAdditive": [
+				[
+					{ "script": "alchemical", "beforeLetter": "element", "letter": "mercury" },
+					{ "script": "alchemical", "beforeLetter": "element", "letter": "quicksilver" },
+					{ "script": "alchemical", "beforeType": "archaic", "beforeLetter": "element",  "letter": "tin" },
+					{ "script": "astrological", "letter": "mutable_zodiacal_modality", "copyNumber": 2 }
+				],
+				[{ "script": "alchemical", "beforeLetter": "element", "letter": "copper" }],
+				[{ "script": "alchemical", "letter": "verdigris" }],
+				[{ "script": "alchemical", "beforeLetter": "element", "letter": "iron" }],
+				[
+					{ "script": "alchemical", "beforeLetter": "element",  "letter": "tin" },
+					{ "script": "alchemical", "beforeType": "archaic", "letter": "electrum" }
+				],
+				[{ "script": "alchemical", "beforeLetter": "element",  "letter": "lead" }],
+				[],
+				[]
+			]
 		}
 	},
-	"astrological_n_sym_planet_pluto_[1,2,3,4,5]", {
+	"astrological_n_sym_dwarf_planet_pluto_[1,2,3,4,5]", {
 		"unicode": ["2647", "2BD3", "2BD4", "2BD5", "2BD6"],
 		"recipe": [
 			["ast Pluto-1", "ast Plt1"],
@@ -208,13 +352,18 @@
 		"options": { "useLetterLocale": "pluto$" },
 		"symbol": {
 			"copyNumber": [1, 2, 3, 4, 5],
-			"beforeLetter": "planet",
+			"beforeLetter": "dwarf_planet",
 			"tagAdditive": [
 				[], [],
 				[{ "script": "astronomical", "letter": "asteroid_astraea", "beforeType": "obsolete", "beforeLetter": "asteroid", "copyNumber": 0 }],
 				[], []
 			]
 		}
+	},
+	"astrological_n_sym_dwarf_planet_[ceres]", {
+		"unicode": ["26B3"],
+		"recipe": [["ast Ceres", "ast Crs"]],
+		"symbol": { "beforeLetter": "dwarf_planet" }
 	},
 	"astrological_n_sym_planet_[transpluto,proserpina]", {
 		"unicode": ["2BD7", "2BD8"],
@@ -269,18 +418,18 @@
 			["2653", "FE0E"]
 		],
 		"recipe": [
-			["ast Aries", "ast Ari"],
-			["ast Taurus", "ast Tau"],
-			["ast Gemini", "ast Gem"],
-			["ast Cancer", "ast Can"],
+			["ast Aries", "ast Ars"],
+			["ast Taurus", "ast Tas"],
+			["ast Gemini", "ast Gmi"],
+			["ast Cancer", "ast Cnr"],
 			["ast Leo"],
-			["ast Virgo", "ast Vir"],
-			["ast Libra", "ast Lib"],
-			["ast Scorpio", "ast Sco"],
-			["ast Sagittarius", "ast Sag"],
-			["ast Capricorn", "ast Cap"],
+			["ast Virgo", "ast Vrg"],
+			["ast Libra", "ast Lbr"],
+			["ast Scorpio", "ast Scr"],
+			["ast Sagittarius", "ast Sgt"],
+			["ast Capricorn", "ast Cpc"],
 			["ast Aquarius", "ast Aqr"],
-			["ast Pisces", "ast Pis"]
+			["ast Pisces", "ast Pss"]
 		],
 		"symbol": {
 			"beforeType": "zodiacal",
@@ -306,14 +455,14 @@
 	"astronomical_n_sym_planet_[earth,uranus,neptune]", {
 		"unicode": ["2641", "26E2", "2BC9"],
 		"recipe": [
-			["asn Earth", "asn Ert", "alc stibnite", "alc stb"],
+			["asn Earth", "asn Ert"],
 			["asn Uranus", "asn Urs"],
 			["asn Neptune", "asn Npt"]
 		],
 		"symbol": {
 			"beforeLetter": "planet",
 			"tagAdditive": [
-				[{ "script": "alchemical", "letter": "stibnite" }, { "script": "alchemical", "letter": "antimony_ore" }],
+				[{ "script": "alchemical", "letter": "stibnite", "copyNumber": 2 }, { "script": "alchemical", "letter": "antimony_ore" }],
 				[{ "script": "astrological", "letter": "planet_uranus", "beforeLetter": "planet", "copyNumber": 2 }, { "script": "alchemical", "letter": "platinum" }],
 				[]
 			]
