@@ -717,8 +717,22 @@ Class ChrReg {
 
 	EntryPostProcessing__Sequence(&entryName, &entry, &character) {
 		if entry["sequence"].Length > 1 {
-			for sequenceChr in entry["sequence"]
-				entry["entity"] .= Util.StrToHTML(Util.UnicodeToChar(sequenceChr), , "Entities")
+			local entityOutput := ""
+			local foundNamedEntity := False
+
+			for each in entry["sequence"] {
+				local sequenceCharacter := Util.UnicodeToChar(each)
+				local entity := Util.CheckEntity(sequenceCharacter)
+
+				if entity {
+					foundNamedEntity := True
+					entityOutput .= entity
+				} else
+					entityOutput .= Util.StrToHTML(sequenceCharacter)
+			}
+
+			if foundNamedEntity
+				entry["entity"] := entityOutput
 		} else {
 
 			for char, htmlCode in characters.supplementaryData["HTML Named Entities"] {
