@@ -242,10 +242,12 @@
 		"options": { "altLayoutKey": ">+ J" },
 		"symbol": { "tagAdditive": [{
 			"scriptAdditive": "younger_futhark",
-			"letter": "ar"
+			"letter": "ar",
+			"copyNumber": 1
 		}, {
 			"scriptAdditive": "futhork",
-			"letter": "gerx"
+			"letter": "ger",
+			"copyNumber": 2
 		}] }
 	},
 	"germanic_runic_n_rune_k_futhork_cealc", {

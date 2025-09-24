@@ -69,6 +69,7 @@
 				"rounded": "rounded",
 				"narrow": "narrow",
 				"wide": "wide",
+				"zodiacal": "zodiacal",
 				"distilled": "distilled",
 				"philosophers": "philosophers",
 				"black": "black",
@@ -78,6 +79,7 @@
 				"meteor": "meteor",
 				"star": "star",
 				"satellite": "satellite",
+				"constellation": "constellation",
 				"element": "element"
 			},
 			"after_letter": {

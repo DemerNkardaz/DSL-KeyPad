@@ -47,7 +47,7 @@ Class ChrReg {
 				}
 			}
 
-			local entries := {}
+			local entries := Map()
 
 			for i in Range(1, maxVariants) {
 				local variantName := entryName
@@ -103,26 +103,17 @@ Class ChrReg {
 					variantEntry["concatenated"] := True
 				}
 
-				entries.e%i%_%variantName% := variantEntry
-				variantName := unset
-				variantEntry := unset
+				entries.Set(i, Map("name", variantName, "entry", variantEntry))
 			}
 
-			for entryName, entry in entries.OwnProps() {
-				RegExMatch(entryName, "i)^e(\d+)_(.*)", &nameMatch)
-				local noIndexName := nameMatch[2]
+			for entryIndex, entryObj in entries {
+				local variantName := entryObj["name"]
+				local variantEntry := entryObj["entry"]
 				local variant := allVariants[1]
-				this.ProcessRecipe(&entry, &variant)
-				local value := ChrEntry().Get(entry)
-				this.AddEntry(&noIndexName, &value, &progress, &instances)
-
-				value := unset
+				this.ProcessRecipe(&variantEntry, &variant)
+				local value := ChrEntry().Get(variantEntry)
+				this.AddEntry(&variantName, &value, &progress, &instances)
 			}
-
-			entries := unset
-			allVariants := unset
-			brackets := unset
-
 		} else {
 			local isEntryExists := ChrLib.entries.HasOwnProp(entryName)
 			local presavedIndex := isEntryExists ? ChrLib.entries.%entryName%.Get("index") : 0

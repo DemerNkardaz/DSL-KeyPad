@@ -4,12 +4,48 @@
 		"recipe": [["alc air"], ["alc fire"], ["alc earth", "alc ert"], ["alc water", "alc wtr"]],
 		"symbol": { "beforeLetter": "element::2" }
 	},
-
+	"alchemical_n_sym_dissolve_[1,2]", {
+		"unicode": ["1F761", "1F762"],
+		"recipe": [["alc dissolve-1", "alc ds1"], ["alc dissolve-2", "alc ds2"]],
+		"options": { "useLetterLocale": "dissolve$" },
+		"symbol": { 
+			"copyNumber": [1, 2],
+			"tagAdditive": [
+				[{ "letter": "solvere" }, { "letter": "element_water", "beforeType": "obsolete" }],
+				[{ "letter": "solvere" }]
+			]
+		}
+	},
+	"alchemical_n_sym_[distill,sublimate,precipitate,fermentation]", {
+		"unicode": ["1F760", "1F75E", "1F75F", "1F764"],
+		"recipe":[ ["alc distill", "alc dsl"], ["alc sublimate", "alc sbm"], ["alc precipitate", "alc prc"], ["alc fermentation", "alc frn", "alc putrefaction", "alc ptf"]],
+		"symbol": {
+			"tagAdditive": [
+				[],
+				[],
+				[],
+				[{ "letter": "putrefaction" }]
+			]
+		}
+	},
+	"alchemical_n_sym_regulus_[1,2,3,4]", {
+		"unicode": ["1F732", "1F733", "1F734", "1F735"],
+		"recipe": [["alc regulus-1", "alc rgl1"], ["alc regulus-2", "alc rgl2", "ast mzm"], ["alc regulus-3", "alc rgl3"], ["alc regulus-4", "alc rgl4"]],
+		"options": { "useLetterLocale": "regulus$" },
+		"symbol": {
+			"copyNumber": [1, 2, 3, 4],
+			"tagAdditive": [
+				[],
+				[{ "script": "astrological", "letter": "mutable_zodiacal_modality", "copyNumber": 1 }],
+				[], []
+			]
+		}
+	},
 	"alchemical_n_sym_acid_[nitric,nitrohydrochloric]", {
 		"unicode": ["1F705", "1F706"],
 		"recipe": [
-			["${alchemical_n_sym_element_water}F", "alc nitric acid", "alc ntac", "alc aqua fortis", "alc af"],
-			["${alchemical_n_sym_element_water}R", "alc aqua regia", "alc ar"]
+			["AqF", "${alchemical_n_sym_element_water}F", "alc nitric acid", "alc ntac", "alc aqua fortis", "alc af"],
+			["AqR", "${alchemical_n_sym_element_water}R", "alc aqua regia", "alc ar"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -43,7 +79,7 @@
 	},
 	"alchemical_n_sym_ethanol_[1,2]", {
 		"unicode": ["1F708", "1F709"],
-		"recipe": [["alc ethanol-1", "alc etl1"], ["alc ethanol-2", "alc etl2"]],
+		"recipe": [["AqV1", "alc ethanol-1", "alc etl1"], ["AqV2", "alc ethanol-2", "alc etl2"]],
 		"options": { "useLetterLocale": "ethanol$" },
 		"symbol": {
 			"copyNumber": [1, 2],
@@ -53,7 +89,7 @@
 	"alchemical_n_sym_sulfur[,_philosophers,_black]", {
 		"unicode": ["1F70D", "1F70E", "1F70F"],
 		"recipe": [
-			["${alchemical_n_sym_element_fire}${dagger}", "alc sulfur", "alc slf"],
+			["${dagger}${alchemical_n_sym_element_fire}","${alchemical_n_sym_element_fire}${dagger}", "alc sulfur", "alc slf"],
 			["alc phi sulfur", "alc pslf"],
 			["alc black sulfur", "alc bslf"]
 		],
@@ -203,6 +239,70 @@
 			]
 		}
 	},
+	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]", {
+		"unicode": [
+			"2648",
+			"2649",
+			"264A",
+			"264B",
+			"264C",
+			"264D",
+			"264E",
+			"264F",
+			"2650",
+			"2651",
+			"2652",
+			"2653"
+		],
+		"sequence": [
+			["2648", "FE0E"],
+			["2649", "FE0E"],
+			["264A", "FE0E"],
+			["264B", "FE0E"],
+			["264C", "FE0E"],
+			["264D", "FE0E"],
+			["264E", "FE0E"],
+			["264F", "FE0E"],
+			["2650", "FE0E"],
+			["2651", "FE0E"],
+			["2652", "FE0E"],
+			["2653", "FE0E"]
+		],
+		"recipe": [
+			["ast Aries", "ast Ari"],
+			["ast Taurus", "ast Tau"],
+			["ast Gemini", "ast Gem"],
+			["ast Cancer", "ast Can"],
+			["ast Leo"],
+			["ast Virgo", "ast Vir"],
+			["ast Libra", "ast Lib"],
+			["ast Scorpio", "ast Sco"],
+			["ast Sagittarius", "ast Sag"],
+			["ast Capricorn", "ast Cap"],
+			["ast Aquarius", "ast Aqr"],
+			["ast Pisces", "ast Pis"]
+		],
+		"symbol": {
+			"beforeType": "zodiacal",
+			"tagAdditive": [
+				[{ "script": "alchemical", "letter": "calcination", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "congelation", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "fixation", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "dissolve", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "digestion", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "distill", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "sublimate", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "separation", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "ceration", "type": "symbol", "beforeType": "archaic" }],
+				[
+					{ "script": "alchemical", "letter": "fermentation", "type": "symbol", "beforeType": "archaic" },
+					{ "script": "alchemical", "letter": "putrefaction", "type": "symbol", "beforeType": "archaic" }
+				],
+				[{ "script": "alchemical", "letter": "multiplication", "type": "symbol", "beforeType": "archaic" }],
+				[{ "script": "alchemical", "letter": "projection", "type": "symbol", "beforeType": "archaic" }]
+			]
+		}
+	},
 	"astronomical_n_sym_planet_[earth,uranus,neptune]", {
 		"unicode": ["2641", "26E2", "2BC9"],
 		"recipe": [
@@ -214,7 +314,7 @@
 			"beforeLetter": "planet",
 			"tagAdditive": [
 				[{ "script": "alchemical", "letter": "stibnite" }, { "script": "alchemical", "letter": "antimony_ore" }],
-				[{ "script": "astrological", "letter": "planet_uranus", "copyNumber": 2 }, { "script": "alchemical", "letter": "platinum" }],
+				[{ "script": "astrological", "letter": "planet_uranus", "beforeLetter": "planet", "copyNumber": 2 }, { "script": "alchemical", "letter": "platinum" }],
 				[]
 			]
 		}
