@@ -1,14 +1,14 @@
 [
 	"card_n_suit_[spade,heart,diamond,club]_black", {
 		"unicode": ["2660", "2665", "2666", "2663"],
-		"options": { "useLetterLocale": ["spade$", "heart$", "diamond$", "club$"] },
+		"options": { "useLetterLocale": ["spade$", "heart$", "diamond$", "club$"], "applyFontOnRecipeField": false },
 		"symbol": { "beforeType": "filled", "customs": "[,cd63534,cffca43,c39993f]" },
 		"recipePrefixes": ["csf "],
 		"recipe": [["s"], ["h"], ["d"], ["c"]]
 	},
 	"card_n_suit_[spade,heart,diamond,club]_white", {
 		"unicode": ["2664", "2661", "2662", "2667"],
-		"options": { "useLetterLocale": ["spade$", "heart$", "diamond$", "club$"] },
+		"options": { "useLetterLocale": ["spade$", "heart$", "diamond$", "club$"], "applyFontOnRecipeField": false },
 		"symbol": { "beforeType": "outlined", "customs": "[,cd63534,cffca43,c39993f]" },
 		"recipePrefixes": ["csu "],
 		"recipe": [["s"], ["h"], ["d"], ["c"]]
@@ -16,7 +16,7 @@
 	"card_n_suit_[spade,heart,diamond,club]_emoji", {
 		"unicode": ["2660", "2665", "2666", "2663"],
 		"sequence": [["2660", "FE0F"], ["2665", "FE0F"], ["2666", "FE0F"], ["2663", "FE0F"]],
-		"options": { "useLetterLocale": ["spade$", "heart$", "diamond$", "club$"], "noCalc": true },
+		"options": { "useLetterLocale": ["spade$", "heart$", "diamond$", "club$"], "noCalc": true, "applyFontOnRecipeField": false },
 		"symbol": { "beforeLetter": "emoji", "customs": "[,cd63534,cffca43,c39993f]" },
 		"recipePrefixes": ["cse ", "e"],
 		"recipe": [["s", "${card_n_suit_spade_black}"], ["h", "${card_n_suit_heart_black}"], ["d", "${card_n_suit_diamond_black}"], ["c", "${card_n_suit_club_black}"]]

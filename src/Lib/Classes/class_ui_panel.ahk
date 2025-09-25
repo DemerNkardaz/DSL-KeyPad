@@ -1372,6 +1372,7 @@ Class UIMainPanel {
 		local combinationLen := StrLen(combinationKey)
 		local titleLen := StrLen(characterTitle)
 		local entityLen := StrLen(entry["entity"])
+		local applyFontOnRecipeField := entry["options"]["applyFontOnRecipeField"]
 
 		panelWindow[prefix "Symbol"].SetFont(this.fontColorDefault,
 			entryFont != "" ? entryFont : Fonts.fontFaces["Default"].name)
@@ -1393,7 +1394,7 @@ Class UIMainPanel {
 		panelWindow[prefix "LaTeXFieldText"].SetFont(panelWindow[prefix "LaTeXField"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "LaTeXFieldMath"].SetFont(panelWindow[prefix "LaTeXField"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "EntryName"].SetFont(panelWindow[prefix "EntryName"].Text ~= this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
-		panelWindow[prefix "RecipeField"].SetFont(, entryFont != "" && previewType = "Recipe" ? entryFont : "Noto Serif")
+		panelWindow[prefix "RecipeField"].SetFont(, entryFont != "" && applyFontOnRecipeField && previewType = "Recipe" ? entryFont : "Noto Sans")
 		panelWindow[prefix "RecipeField"].Move(, , , keyLen > 32 ? this.fieldH * (this.reservedRecipeSteps * 1.25) : this.fieldH)
 
 		return

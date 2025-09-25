@@ -34,6 +34,7 @@ Class ChrEntry {
 					"preventLaTeX", False,
 					"preventAltCode", False,
 					"usesDiacritics", False,
+					"applyFontOnRecipeField", True,
 					"altLayoutKey", "",
 					"showOnAlt", "",
 					"altSpecialKey", "",

@@ -1,41 +1,54 @@
 [
 	"playing_card_n_card_[ace,two,three,four,five,six,seven,eight,nine,ten,jack,knight,queen,king]_spades", {
 		"unicode": ["1F0A1", "1F0A2", "1F0A3", "1F0A4", "1F0A5", "1F0A6", "1F0A7", "1F0A8", "1F0A9", "1F0AA", "1F0AB", "1F0AC", "1F0AD", "1F0AE"],
-		"options": { "useLetterLocale": ["ace$", "two$", "three$", "four$", "five$", "six$", "seven$", "eight$", "nine$", "ten$", "jack$", "knight$", "queen$", "king$"] },
+		"options": {
+			"useLetterLocale": ["ace$", "two$", "three$", "four$", "five$", "six$", "seven$", "eight$", "nine$", "ten$", "jack$", "knight$", "queen$", "king$"],
+			"applyFontOnRecipeField": false
+		},
 		"symbol": { "beforeLetter": "spades[::2,,,,,,,,,,::2,::2,,::2]<ru-RU>", "afterLetter": "spades<!ru-RU>" },
 		"recipePrefixes": ["pcs "],
 		"recipe": [["a"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"], ["j"], ["k"], ["q"], ["r"]]
 	},
 	"playing_card_n_card_[ace,two,three,four,five,six,seven,eight,nine,ten,jack,knight,queen,king]_hearts", {
 		"unicode": ["1F0B1", "1F0B2", "1F0B3", "1F0B4", "1F0B5", "1F0B6", "1F0B7", "1F0B8", "1F0B9", "1F0BA", "1F0BB", "1F0BC", "1F0BD", "1F0BE"],
-		"options": { "useLetterLocale": ["ace$", "two$", "three$", "four$", "five$", "six$", "seven$", "eight$", "nine$", "ten$", "jack$", "knight$", "queen$", "king$"] },
+		"options": {
+			"useLetterLocale": ["ace$", "two$", "three$", "four$", "five$", "six$", "seven$", "eight$", "nine$", "ten$", "jack$", "knight$", "queen$", "king$"],
+			"applyFontOnRecipeField": false
+		},
 		"symbol": { "beforeLetter": "hearts[::2,,,,,,,,,,::2,::2,,::2]<ru-RU>", "afterLetter": "hearts<!ru-RU>", "customs": "cd63534" },
 		"recipePrefixes": ["pch "],
 		"recipe": [["a"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"], ["j"], ["k"], ["q"], ["r"]]
 	},	
 	"playing_card_n_card_[ace,two,three,four,five,six,seven,eight,nine,ten,jack,knight,queen,king]_diamonds", {
 		"unicode": ["1F0C1", "1F0C2", "1F0C3", "1F0C4", "1F0C5", "1F0C6", "1F0C7", "1F0C8", "1F0C9", "1F0CA", "1F0CB", "1F0CC", "1F0CD", "1F0CE"],
-		"options": { "useLetterLocale": ["ace$", "two$", "three$", "four$", "five$", "six$", "seven$", "eight$", "nine$", "ten$", "jack$", "knight$", "queen$", "king$"] },
+		"options": {
+			"useLetterLocale": ["ace$", "two$", "three$", "four$", "five$", "six$", "seven$", "eight$", "nine$", "ten$", "jack$", "knight$", "queen$", "king$"],
+			"applyFontOnRecipeField": false
+		},
 		"symbol": { "beforeLetter": "diamonds[::2,,,,,,,,,,::2,::2,,::2]<ru-RU>", "afterLetter": "diamonds<!ru-RU>", "customs": "cffca43" },
 		"recipePrefixes": ["pcd "],
 		"recipe": [["a"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"], ["j"], ["k"], ["q"], ["r"]]
 	},
 	"playing_card_n_card_[ace,two,three,four,five,six,seven,eight,nine,ten,jack,knight,queen,king]_clubs", {
 		"unicode": ["1F0D1", "1F0D2", "1F0D3", "1F0D4", "1F0D5", "1F0D6", "1F0D7", "1F0D8", "1F0D9", "1F0DA", "1F0DB", "1F0DC", "1F0DD", "1F0DE"],
-		"options": { "useLetterLocale": ["ace$", "two$", "three$", "four$", "five$", "six$", "seven$", "eight$", "nine$", "ten$", "jack$", "knight$", "queen$", "king$"] },
+		"options": {
+			"useLetterLocale": ["ace$", "two$", "three$", "four$", "five$", "six$", "seven$", "eight$", "nine$", "ten$", "jack$", "knight$", "queen$", "king$"],
+			"applyFontOnRecipeField": false
+		},
 		"symbol": { "beforeLetter": "clubs[::2,,,,,,,,,,::2,::2,,::2]<ru-RU>", "afterLetter": "clubs<!ru-RU>", "customs": "c39993f" },
 		"recipePrefixes": ["pcc "],
 		"recipe": [["a"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"], ["j"], ["k"], ["q"], ["r"]]
 	},
 	"playing_card_n_card_joker_[red,white,black]", {
 		"unicode": ["1F0BF", "1F0CF", "1F0DF"],
-		"options": { "useLetterLocale": "joker$" },
+		"options": { "useLetterLocale": "joker$", "applyFontOnRecipeField": false },
 		"symbol": { "beforeLetter": "[red,white,black]::2" },
 		"recipePrefixes": ["pcj "],
 		"recipe": [["r"], ["w"], ["b"]]
 	},
 	"playing_card_n_card_back", {
 		"unicode": "1F0A0",
+		"options": { "applyFontOnRecipeField": false },
 		"recipe": ["pcb"]
 	},
 	"playing_card_n_card_fool", {
@@ -66,7 +79,7 @@
 			"1F0F4",
 			"1F0F5"
 		],
-		"symbol": { "beforeType": "trump", "afterLetter": "TarotNouveau" },
+		"options": { "beforeType": "trump", "afterLetter": "TarotNouveau", "applyFontOnRecipeField": false },
 		"recipePrefixes": ["pct ", "pct "],
 		"recipe": [
 			["i", "1"],

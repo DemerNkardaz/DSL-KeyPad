@@ -1,14 +1,14 @@
 [
 	"chess_n_fig_[king,queen,rook,bishop,knight,pawn]_white", {
 		"unicode": ["2654", "2655", "2656", "2657", "2658", "2659"],
-		"options": { "useLetterLocale": ["king$", "queen$", "rook$", "bishop$", "knight$", "pawn$"] },
+		"options": { "useLetterLocale": ["king$", "queen$", "rook$", "bishop$", "knight$", "pawn$"], "applyFontOnRecipeField": false },
 		"symbol": { "beforeType": "white" },
 		"recipePrefixes": ["cw "],
 		"recipe": [["k"], ["q"], ["r"], ["b"], ["n"], ["p"]]
 	},
 	"chess_n_fig_[king,queen,rook,bishop,knight,pawn]_black", {
 		"unicode": ["265A", "265B", "265C", "265D", "265E", "265F"],
-		"options": { "useLetterLocale": ["king$", "queen$", "rook$", "bishop$", "knight$", "pawn$"] },
+		"options": { "useLetterLocale": ["king$", "queen$", "rook$", "bishop$", "knight$", "pawn$"], "applyFontOnRecipeField": false },
 		"symbol": { "beforeType": "black" },
 		"recipePrefixes": ["cb "],
 		"recipe": [["k"], ["q"], ["r"], ["b"], ["n"], ["p"]]
