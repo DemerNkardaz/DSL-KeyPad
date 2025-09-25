@@ -306,7 +306,7 @@ Class ChrReg {
 		return
 	}
 
-	CloneOptions(&sourceOptions, &index) {
+	CloneOptions2(&sourceOptions, &index) {
 		local tempOptions := sourceOptions.Clone()
 		for key, value in sourceOptions {
 			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 && (key = "tagAdditive" && sourceOptions[key].Has(index) && sourceOptions[key][index] is Array || key != "tagAdditive") {
@@ -318,6 +318,38 @@ Class ChrReg {
 				} else
 					tempOptions[key] := sourceOptions[key][1] is Array ? sourceOptions[key][1].Clone() : sourceOptions[key][1]
 
+			}
+		}
+		return tempOptions
+	}
+
+	CloneOptions(&sourceOptions, &index) {
+		local tempOptions := sourceOptions.Clone()
+		local indexBanned := ["letter"]
+		for key, value in sourceOptions {
+			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 && (key = "tagAdditive" && sourceOptions[key].Has(index) && sourceOptions[key][index] is Array || key != "tagAdditive") {
+				if sourceOptions[key].Has(index) {
+					if sourceOptions[key][index] is Array
+						tempOptions[key] := sourceOptions[key][index].Clone()
+					else
+						tempOptions[key] := sourceOptions[key][index]
+				} else
+					tempOptions[key] := sourceOptions[key][1] is Array ? sourceOptions[key][1].Clone() : sourceOptions[key][1]
+			} else if sourceOptions[key] is String {
+				if RegExMatch(sourceOptions[key], "\[(.*?)\]", &match) && !indexBanned.HasValue(key) {
+					local arrayContent := match[1]
+					local elements := StrSplit(arrayContent, ",")
+
+					if index <= elements.Length {
+						local selectedElement := elements[index]
+						tempOptions[key] := RegExReplace(sourceOptions[key], "\[.*?\]", selectedElement)
+					} else {
+						local selectedElement := elements[1]
+						tempOptions[key] := RegExReplace(sourceOptions[key], "\[.*?\]", selectedElement)
+					}
+				} else {
+					tempOptions[key] := sourceOptions[key]
+				}
 			}
 		}
 		return tempOptions

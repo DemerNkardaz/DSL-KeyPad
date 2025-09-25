@@ -25,8 +25,8 @@ $$
 ---
 
 <p align="center">
-<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-5600+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
-<img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-5300+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-5700+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-5500+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
 <img src="https://custom-icon-badges.herokuapp.com/badge/binds-2400+/800+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
 <br>
 <img src="https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social" alt="wakatime"/>

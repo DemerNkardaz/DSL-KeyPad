@@ -74,6 +74,9 @@ Class ChrLib {
 		"astrological",
 		"astronomical",
 		"occultic",
+		"chess",
+		"card",
+		"playing_card",
 	]
 
 	static decompositionAttributes := Map(
@@ -93,6 +96,7 @@ Class ChrLib {
 			"let", "letter",
 			"lig", "ligature",
 			"dig", "digraph",
+			"fig", "figure",
 			"mark", "mark",
 			"num", "numeral",
 			"sym", "symbol",
@@ -100,7 +104,9 @@ Class ChrLib {
 			"rune", "rune",
 			"log", "logogram",
 			"syl", "syllable",
-			"gly", "glyph"
+			"gly", "glyph",
+			"suit", "suite",
+			"card", "card"
 		),
 		"letter", "",
 		"endPart", "",

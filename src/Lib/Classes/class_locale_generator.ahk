@@ -110,6 +110,16 @@ Class LocaleGenerator {
 						local titlelizeFirstLetter := bound ~= "i)^t\."
 						local boundKey := RegExReplace(bound, "i)^t\.")
 
+						if RegExMatch(boundKey, "<(!?)(.*?)>$", &languageRuleMatch) {
+							local isBan := languageRuleMatch[1] = "!"
+							local languageRule := languageRuleMatch[2]
+
+							if !InStr(langCode, languageRule) && !isBan || InStr(langCode, languageRule) && isBan
+								continue
+
+							boundKey := RegExReplace(boundKey, languageRuleMatch[0])
+						}
+
 						if RegExMatch(boundKey, "\:\:(.*?)$", &match) {
 							local index := Integer(match[1])
 							local cleanBound := SubStr(boundKey, 1, match.Pos(0) - 1)
@@ -260,6 +270,16 @@ Class LocaleGenerator {
 							for i, bound in splitted {
 								local titlelizeFirstLetter := bound ~= "i)^t\."
 								local boundKey := RegExReplace(bound, "i)^t\.")
+
+								if RegExMatch(boundKey, "<(!?)(.*?)>$", &languageRuleMatch) {
+									local isBan := languageRuleMatch[1] = "!"
+									local languageRule := languageRuleMatch[2]
+
+									if !InStr(langCode, languageRule) && !isBan || InStr(langCode, languageRule) && isBan
+										continue
+
+									boundKey := RegExReplace(boundKey, languageRuleMatch[0])
+								}
 
 								if RegExMatch(boundKey, "\:\:(.*?)$", &match) {
 									local index := Integer(match[1])

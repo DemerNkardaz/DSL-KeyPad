@@ -93,6 +93,8 @@
 				"n_sym_lead_bearing_mineral": { "letter_locale": "Свинецсодержащий минерал" },
 				"n_sym_antimony_ore": { "letter_locale": "Сурьмяная руда" },
 				"n_sym_antimony_bearing_mineral": { "letter_locale": "Сурьмасодержащий минерал" },
+				"n_sym_bismuth_ore": { "letter_locale": "Висмутовая руда" },
+				"n_sym_bismuth_bearing_mineral": { "letter_locale": "Висмутсодержащий минерал" },
 				"n_sym_iron_copper_ore": { "letter_locale": "Железомедная руда" },
 				"n_sym_iron_copper_bearing_mineral": { "letter_locale": "Железо-медьсодержащий минерал" },
 				"n_sym_iron_crocus": { "letter_locale": "Крокус железа" },

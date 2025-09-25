@@ -1,0 +1,16 @@
+[
+	"card_n_suit_[spade,heart,diamond,club]_black", {
+		"unicode": ["2660", "2665", "2666", "2663"],
+		"options": { "useLetterLocale": ["spade$", "heart$", "diamond$", "club$"] },
+		"symbol": { "beforeType": "filled" },
+		"recipePrefixes": ["csf "],
+		"recipe": [["s"], ["h"], ["d"], ["c"]]
+	},
+	"card_n_suit_[spade,heart,diamond,club]_white", {
+		"unicode": ["2664", "2661", "2662", "2667"],
+		"options": { "useLetterLocale": ["spade$", "heart$", "diamond$", "club$"] },
+		"symbol": { "beforeType": "unfilled" },
+		"recipePrefixes": ["csu "],
+		"recipe": [["s"], ["h"], ["d"], ["c"]]
+	}
+]

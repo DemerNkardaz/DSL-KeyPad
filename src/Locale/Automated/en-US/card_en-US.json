@@ -1,0 +1,79 @@
+{
+	"en-US": {
+		"script_labels": {
+			"card": "Card",
+			"playing_card": "Playing Card"
+		},
+		"generated": {
+			"prefix": {
+				"card": "Card",
+				"playing_card": "Playing"
+			},
+			"tag": {
+				"card": "card",
+				"playing_card": "playing"
+			},
+			"before_letter": {
+				"trump": "trump",
+				"spades": "spades",
+				"hearts": "hearts",
+				"diamonds": "diamonds",
+				"clubs": "clubs"
+			},
+			"after_letter": {
+				"spades": "of Spades",
+				"hearts": "of Hearts",
+				"diamonds": "of Diamonds",
+				"clubs": "of Clubs"
+			}
+		},
+		"scripts": {
+			"card": {
+				"n_suit_spade": { "letter_locale": "Spade" },
+				"n_suit_heart": { "letter_locale": "Heart" },
+				"n_suit_diamond": { "letter_locale": "Diamond" },
+				"n_suit_club": { "letter_locale": "Club" }
+			},
+			"playing_card": {
+				"n_card_ace": { "letter_locale": "Ace" },
+				"n_card_two": { "letter_locale": "Two" },
+				"n_card_three": { "letter_locale": "Three" },
+				"n_card_four": { "letter_locale": "Four" },
+				"n_card_five": { "letter_locale": "Five" },
+				"n_card_six": { "letter_locale": "Six" },
+				"n_card_seven": { "letter_locale": "Seven" },
+				"n_card_eight": { "letter_locale": "Eight" },
+				"n_card_nine": { "letter_locale": "Nine" },
+				"n_card_ten": { "letter_locale": "Ten" },
+				"n_card_jack": { "letter_locale": "Jack" },
+				"n_card_knight": { "letter_locale": "Knight" },
+				"n_card_queen": { "letter_locale": "Queen" },
+				"n_card_king": { "letter_locale": "King" },
+				"n_card_joker": { "letter_locale": "Joker" },
+				"n_card_back": { "letter_locale": "(Back)" },
+				"n_card_fool": { "letter_locale": "Fool" },
+				"n_card_trump_individual": { "letter_locale": "Individual" },
+				"n_card_trump_childhood": { "letter_locale": "Childhood" },
+				"n_card_trump_youth": { "letter_locale": "Youth" },
+				"n_card_trump_maturity": { "letter_locale": "Maturity" },
+				"n_card_trump_old_age": { "letter_locale": "Old Age" },
+				"n_card_trump_morning": { "letter_locale": "Morning" },
+				"n_card_trump_afternoon": { "letter_locale": "Afternoon" },
+				"n_card_trump_evening": { "letter_locale": "Evening" },
+				"n_card_trump_night": { "letter_locale": "Night" },
+				"n_card_trump_earth_and_air": { "letter_locale": "Earth and Air" },
+				"n_card_trump_water_and_fire": { "letter_locale": "Water and Fire" },
+				"n_card_trump_dance": { "letter_locale": "Dance" },
+				"n_card_trump_shopping": { "letter_locale": "Shopping" },
+				"n_card_trump_open_air": { "letter_locale": "Open Air" },
+				"n_card_trump_visual_arts": { "letter_locale": "Visual Arts" },
+				"n_card_trump_spring": { "letter_locale": "Spring" },
+				"n_card_trump_summer": { "letter_locale": "Summer" },
+				"n_card_trump_autumn": { "letter_locale": "Autumn" },
+				"n_card_trump_winter": { "letter_locale": "Winter" },
+				"n_card_trump_the_game": { "letter_locale": "The Game" },
+				"n_card_trump_collective": { "letter_locale": "Collective" }
+			}
+		}
+	}
+}

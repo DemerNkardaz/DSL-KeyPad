@@ -22,6 +22,7 @@
 				"letter": "letter",
 				"ligature": "ligature",
 				"digraph": "digraph",
+				"figure": "figure",
 				"mark": "mark",
 				"numeral": "numeral",
 				"symbol": "symbol",
@@ -29,7 +30,9 @@
 				"rune": "rune",
 				"logogram": "logogram",
 				"syllable": "syllable",
-				"glyph": "glyph"
+				"glyph": "glyph",
+				"suite": "suite",
+				"card": "card"
 			},
 			"before_letter": {
 				"turned": "turned",
@@ -69,10 +72,14 @@
 				"rounded": "rounded",
 				"narrow": "narrow",
 				"wide": "wide",
+				"filled": "filled",
+				"unfilled": "unfilled",
 				"zodiacal": "zodiacal",
 				"distilled": "distilled",
 				"philosophers": "philosopher’s",
 				"black": "black",
+				"white": "white",
+				"red": "red",
 				"mineral": "mineral",
 				"metal": "metal",
 				"planet": "planet",
@@ -83,7 +90,8 @@
 				"star": "star",
 				"satellite": "satellite",
 				"constellation": "constellation",
-				"element": "element"
+				"element": "element",
+				"process": "process"
 			},
 			"after_letter": {
 				"late": "(late form)",

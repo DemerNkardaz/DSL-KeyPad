@@ -1,0 +1,79 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"card": "Карты",
+			"playing_card": "Игральные карты"
+		},
+		"generated": {
+			"prefix": {
+				"card": "Карточн$(ая|ый|ое)",
+				"playing_card": "Игральн$(ая|ой|ое)"
+			},
+			"tag": {
+				"card": "карточн$(ая|ый|ое)",
+				"playing_card": "игральн$(ая|ой|ое)"
+			},
+			"before_letter": {
+				"trump": "козырн$(ая|ый|ое)",
+				"spades": "пиков$(ая|ый|ое)",
+				"hearts": "червонн$(ая|ый|ое)",
+				"diamonds": "бубнов$(ая|ый|ое)",
+				"clubs": "трефов$(ая|ый|ое)"
+			},
+			"after_letter": {
+				"spades": "пик",
+				"hearts": "черв",
+				"diamonds": "бубен",
+				"clubs": "треф"
+			}
+		},
+		"scripts": {
+			"card": {
+				"n_suit_spade": { "letter_locale": "Пики" },
+				"n_suit_heart": { "letter_locale": "Червы" },
+				"n_suit_diamond": { "letter_locale": "Бубны" },
+				"n_suit_club": { "letter_locale": "Трефы" }
+			},
+			"playing_card": {
+				"n_card_ace": { "letter_locale": "Туз" },
+				"n_card_two": { "letter_locale": "Двойка" },
+				"n_card_three": { "letter_locale": "Тройка" },
+				"n_card_four": { "letter_locale": "Четвёрка" },
+				"n_card_five": { "letter_locale": "Пятёрка" },
+				"n_card_six": { "letter_locale": "Шестёрка" },
+				"n_card_seven": { "letter_locale": "Семёрка" },
+				"n_card_eight": { "letter_locale": "Восьмёрка" },
+				"n_card_nine": { "letter_locale": "Девятка" },
+				"n_card_ten": { "letter_locale": "Десятка" },
+				"n_card_jack": { "letter_locale": "Валет" },
+				"n_card_knight": { "letter_locale": "Кавалер" },
+				"n_card_queen": { "letter_locale": "Дама" },
+				"n_card_king": { "letter_locale": "Король" },
+				"n_card_joker": { "letter_locale": "Джокер" },
+				"n_card_back": { "letter_locale": "(Рубашка)" },
+				"n_card_fool": { "letter_locale": "Дурак" },
+				"n_card_trump_individual": { "letter_locale": "Камерные" },
+				"n_card_trump_childhood": { "letter_locale": "Детство" },
+				"n_card_trump_youth": { "letter_locale": "Юность" },
+				"n_card_trump_maturity": { "letter_locale": "Зрелость" },
+				"n_card_trump_old_age": { "letter_locale": "Старость" },
+				"n_card_trump_morning": { "letter_locale": "Утро" },
+				"n_card_trump_afternoon": { "letter_locale": "День" },
+				"n_card_trump_evening": { "letter_locale": "Вечер" },
+				"n_card_trump_night": { "letter_locale": "Ночь" },
+				"n_card_trump_earth_and_air": { "letter_locale": "Земля и Воздух" },
+				"n_card_trump_water_and_fire": { "letter_locale": "Вода и Огонь" },
+				"n_card_trump_dance": { "letter_locale": "Танец" },
+				"n_card_trump_shopping": { "letter_locale": "Покупки" },
+				"n_card_trump_open_air": { "letter_locale": "На открытом воздухе" },
+				"n_card_trump_visual_arts": { "letter_locale": "Творчество" },
+				"n_card_trump_spring": { "letter_locale": "Весна" },
+				"n_card_trump_summer": { "letter_locale": "Лето" },
+				"n_card_trump_autumn": { "letter_locale": "Осень" },
+				"n_card_trump_winter": { "letter_locale": "Зима" },
+				"n_card_trump_the_game": { "letter_locale": "Игры" },
+				"n_card_trump_collective": { "letter_locale": "Массовые" }
+			}
+		}
+	}
+}

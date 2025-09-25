@@ -1,0 +1,25 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"chess": "Шахматы"
+		},
+		"generated": {
+			"prefix": {
+				"chess": "Шахматн$(ая|ий|ое)"
+			},
+			"tag": {
+				"chess": "шахматн$(ая|ий|ое)"
+			}
+		},
+		"scripts": {
+			"chess": {
+				"n_fig_king": { "letter_locale": "Король" },
+				"n_fig_queen": { "letter_locale": "Королева" },
+				"n_fig_rook": { "letter_locale": "Ладья" },
+				"n_fig_bishop": { "letter_locale": "Слон" },
+				"n_fig_knight": { "letter_locale": "Конь" },
+				"n_fig_pawn": { "letter_locale": "Пешка" }
+			}
+		}
+	}
+}

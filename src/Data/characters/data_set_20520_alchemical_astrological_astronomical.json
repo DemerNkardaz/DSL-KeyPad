@@ -176,11 +176,11 @@
 	},
 	"alchemical_n_sym_rock_salt_[1,2]", {
 		"unicode": ["1F718", "1F719"],
-		"recipe": [["alc rock salt-1", "alc rs1", "alc bismuth", "alc bsm"], ["alc rock salt-2", "alc rs2"]],
+		"recipe": [["alc rock salt-1", "alc rs1"], ["alc rock salt-2", "alc rs2"]],
 		"options": { "useLetterLocale": "salt$" },
 		"symbol": {
 			"copyNumber": [1, 2],
-			"tagAdditive": [[{ "letter": "bismuth", "copyNumber": 0 }], []]
+			"tagAdditive": [[{ "beforeType": "archaic", "beforeLetter": "element", "letter": "bismuth", "copyNumber": 1 }], []]
 		}
 	},
 	"alchemical_n_sym_iron_ore_[1,2]", {
@@ -202,18 +202,20 @@
 			]
 		}
 	},
-	"alchemical_n_sym_[tin,lead,antimony]_ore", {
-		"unicode": ["1F729", "1F72A", "1F72B"],
+	"alchemical_n_sym_[tin,lead,antimony,bismuth]_ore", {
+		"unicode": ["1F729", "1F72A", "1F72B", "1F73E"],
 		"recipe": [
 			["alc tin ore", "alc toe"],
 			["alc lead ore", "alc loe"],
-			["alc antimony ore", "alc aoe", "alc stibnite", "alc stb"]
+			["alc antimony ore", "alc aoe", "alc stibnite", "alc stb"],
+			["alc bismuth ore", "alc boe"]
 		],
 		"symbol": {
 			"tagAdditive": [
 				[{ "letter": "tin_bearing_mineral" }],
 				[{ "letter": "lead_bearing_mineral" }],
-				[{ "letter": "antimony_bearing_mineral" }, { "letter": "stibnite" }]
+				[{ "letter": "antimony_bearing_mineral" }, { "letter": "stibnite" }],
+				[]
 			]
 		}
 	},
@@ -336,7 +338,7 @@
 				],
 				[{ "script": "alchemical", "beforeLetter": "element",  "letter": "lead" }],
 				[],
-				[]
+				[{ "script": "alchemical", "beforeType": "archaic", "beforeLetter": "element",  "letter": "bismuth", "copyNumber": 2 }]
 			]
 		}
 	},

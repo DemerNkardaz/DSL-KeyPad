@@ -93,6 +93,8 @@
 				"n_sym_lead_bearing_mineral": { "letter_locale": "Lead-bearing mineral" },
 				"n_sym_antimony_ore": { "letter_locale": "Antimony ore" },
 				"n_sym_antimony_bearing_mineral": { "letter_locale": "Antimony-bearing mineral" },
+				"n_sym_bismuth_ore": { "letter_locale": "Bismuth ore" },
+				"n_sym_bismuth_bearing_mineral": { "letter_locale": "Bismuth-bearing mineral" },
 				"n_sym_iron_copper_ore": { "letter_locale": "Iron-Copper ore" },
 				"n_sym_iron_copper_bearing_mineral": { "letter_locale": "Iron and Copper-bearing mineral" },
 				"n_sym_iron_crocus": { "letter_locale": "Crocus of Iron" },

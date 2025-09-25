@@ -1,0 +1,25 @@
+{
+	"en-US": {
+		"script_labels": {
+			"chess": "Chess"
+		},
+		"generated": {
+			"prefix": {
+				"chess": "Chess"
+			},
+			"tag": {
+				"chess": "chess"
+			}
+		},
+		"scripts": {
+			"chess": {
+				"n_fig_king": { "letter_locale": "King" },
+				"n_fig_queen": { "letter_locale": "Queen" },
+				"n_fig_rook": { "letter_locale": "Rook" },
+				"n_fig_bishop": { "letter_locale": "Bishop" },
+				"n_fig_knight": { "letter_locale": "Knight" },
+				"n_fig_pawn": { "letter_locale": "Pawn" }
+			}
+		}
+	}
+}
