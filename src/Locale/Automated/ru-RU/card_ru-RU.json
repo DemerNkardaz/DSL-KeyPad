@@ -21,6 +21,7 @@
 				"clubs": "трефов$(ая|ый|ое)"
 			},
 			"after_letter": {
+				"TarotNouveau": "(Таро Нуво)",
 				"spades": "пик",
 				"hearts": "черв",
 				"diamonds": "бубен",

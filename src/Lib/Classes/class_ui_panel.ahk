@@ -546,7 +546,7 @@ Class UIMainPanel {
 		localeData.columnsCount := localizedColumns.Length
 
 		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
-		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), 'Noto Sans')
+		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), "Noto Sans")
 
 		Loop attributes.columns.Length {
 			index := A_Index
@@ -1379,6 +1379,8 @@ Class UIMainPanel {
 		panelWindow[prefix "Symbol"].SetFont(entry["symbol"]["customs"] != "" ? entry["symbol"]["customs"] : "norm")
 
 		panelWindow[prefix "Title"].SetFont("s" (titleLen > 32 ? this.fontSizes.titleSmall : this.fontSizes.title) " " (panelWindow[prefix "Title"].Text = this.notAvailable ? this.field : this.fontColorDefault))
+
+		panelWindow[prefix "HTMLFieldDecimal"].SetFont("s" (entityLen > 14 ? this.fontSizes.fieldSmall : this.fontSizes.field))
 		panelWindow[prefix "HTMLFieldNamed"].SetFont("s" (entityLen > 14 ? this.fontSizes.fieldSmall : this.fontSizes.field))
 
 		panelWindow[prefix "UnicodeField"].SetFont(panelWindow[prefix "UnicodeField"].Text = this.defaultUnicode ? this.fontColorNoData : this.fontColorDefault)

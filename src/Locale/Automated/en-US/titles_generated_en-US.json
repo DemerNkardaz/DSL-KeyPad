@@ -74,6 +74,7 @@
 				"wide": "wide",
 				"filled": "filled",
 				"unfilled": "unfilled",
+				"outlined": "outlined",
 				"zodiacal": "zodiacal",
 				"distilled": "distilled",
 				"philosophers": "philosopher’s",
@@ -91,7 +92,8 @@
 				"satellite": "satellite",
 				"constellation": "constellation",
 				"element": "element",
-				"process": "process"
+				"process": "process",
+				"emoji": "emoji"
 			},
 			"after_letter": {
 				"late": "(late form)",

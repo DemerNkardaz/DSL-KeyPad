@@ -2,7 +2,7 @@
 	"alchemical_n_sym_element_[air,fire,earth,water]", {
 		"unicode": ["1F701", "1F702", "1F703", "1F704"],
 		"recipe": [["alc air"], ["alc fire"], ["alc earth", "alc ert"], ["alc water", "alc wtr"]],
-		"symbol": { "beforeLetter": "element::2" }
+		"symbol": { "beforeLetter": "element::2", "customs": "[c98d8db,cff8e46,cfdca52,c4898ee]" }
 	},
 	"alchemical_n_sym_dissolve_[1,2]", {
 		"unicode": ["1F761", "1F762"],
@@ -95,6 +95,7 @@
 		],
 		"options": { "useLetterLocale": "sulfur$" },
 		"symbol": {
+			"customs": "[ce1d833,cf75c2b,]",
 			"beforeLetter": ["element", "t.philosophers", "t.black"],
 			"tagAdditive": [
 				[
@@ -269,6 +270,7 @@
 		"unicode": "2609",
 		"recipe": ["ast Sun", "alc gold", "alc gld"],
 		"symbol": {
+			"customs": "cf7c631",
 			"beforeLetter": "star",
 			"tagAdditive": [
 				{ "script": "astronomical", "beforeLetter": "star", "letter": "star_sun" },
@@ -281,6 +283,7 @@
 		"recipe": [["ast moon-1", "ast mn1"], ["ast moon-2", "ast mn2"]],
 		"options": { "useLetterLocale": "moon$" },
 		"symbol": {
+			"customs": "c8b94b0",
 			"copyNumber": [1, 2],
 			"beforeLetter": "satellite",
 			"tagAdditive": [
@@ -321,6 +324,7 @@
 			["ast Neptune", "ast Npt"]
 		],
 		"symbol": {
+			"customs": "[ca8a3a0,cdcb572,c688ecf,cdb7755,cd1c498,cf4e7a8,caad4ed,c585ad8]",
 			"beforeLetter": "planet",
 			"tagAdditive": [
 				[
@@ -353,6 +357,7 @@
 		],
 		"options": { "useLetterLocale": "pluto$" },
 		"symbol": {
+			"customs": "c9e240e",
 			"copyNumber": [1, 2, 3, 4, 5],
 			"beforeLetter": "dwarf_planet",
 			"tagAdditive": [
@@ -365,12 +370,17 @@
 	"astrological_n_sym_dwarf_planet_[ceres]", {
 		"unicode": ["26B3"],
 		"recipe": [["ast Ceres", "ast Crs"]],
-		"symbol": { "beforeLetter": "dwarf_planet" }
+		"symbol": { 
+			"customs": "[cf3b6c2]",
+			"beforeLetter": "dwarf_planet"
+		}
 	},
 	"astrological_n_sym_planet_[transpluto,proserpina]", {
 		"unicode": ["2BD7", "2BD8"],
 		"recipe": [["ast Transpluto", "ast Tplt"], ["ast Proserpina", "ast Prs"]],
-		"symbol": { "beforeLetter": "planet" }
+		"symbol": {
+			"beforeLetter": "planet"
+		}
 	},
 	"astrological_n_sym_asteroid_[vesta,chiron,astraea,hygiea,pholus,nessus]", {
 		"unicode": ["26B6", "26B7", "2BD9", "2BDA", "2BDB", "2BDC"],
@@ -391,20 +401,7 @@
 		}
 	},
 	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]", {
-		"unicode": [
-			"2648",
-			"2649",
-			"264A",
-			"264B",
-			"264C",
-			"264D",
-			"264E",
-			"264F",
-			"2650",
-			"2651",
-			"2652",
-			"2653"
-		],
+		"unicode": ["2648", "2649", "264A", "264B", "264C", "264D", "264E", "264F", "2650", "2651", "2652", "2653"],
 		"sequence": [
 			["2648", "FE0E"],
 			["2649", "FE0E"],
@@ -454,6 +451,42 @@
 			]
 		}
 	},
+	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]_emoji", {
+		"unicode": ["2648", "2649", "264A", "264B", "264C", "264D", "264E", "264F", "2650", "2651", "2652", "2653"],
+		"sequence": [
+			["2648", "FE0F"],
+			["2649", "FE0F"],
+			["264A", "FE0F"],
+			["264B", "FE0F"],
+			["264C", "FE0F"],
+			["264D", "FE0F"],
+			["264E", "FE0F"],
+			["264F", "FE0F"],
+			["2650", "FE0F"],
+			["2651", "FE0F"],
+			["2652", "FE0F"],
+			["2653", "FE0F"]
+		],
+		"recipe": [
+			["emoji Aries", "emoji Ars"],
+			["emoji Taurus", "emoji Tas"],
+			["emoji Gemini", "emoji Gmi"],
+			["emoji Cancer", "emoji Cnr"],
+			["emoji Leo"],
+			["emoji Virgo", "emoji Vrg"],
+			["emoji Libra", "emoji Lbr"],
+			["emoji Scorpio", "emoji Scr"],
+			["emoji Sagittarius", "emoji Sgt"],
+			["emoji Capricorn", "emoji Cpc"],
+			["emoji Aquarius", "emoji Aqr"],
+			["emoji Pisces", "emoji Pss"]
+		],
+		"options": {
+			"useLetterLocale": ["aries$", "taurus$", "gemini$", "cancer$", "leo$", "virgo$", "libra$", "scorpio$", "sagittarius$", "capricorn$", "aquarius$", "pisces$"],
+			"noCalc": true
+		},
+		"symbol": { "beforeType": "zodiacal", "beforeLetter": "emoji" }
+	},
 	"astronomical_n_sym_planet_[earth,uranus,neptune]", {
 		"unicode": ["2641", "26E2", "2BC9"],
 		"recipe": [
@@ -462,6 +495,7 @@
 			["asn Neptune", "asn Npt"]
 		],
 		"symbol": {
+			"customs": "[c688ecf,caad4ed,c585ad8]",
 			"beforeLetter": "planet",
 			"tagAdditive": [
 				[{ "script": "alchemical", "letter": "stibnite", "copyNumber": 2 }, { "script": "alchemical", "letter": "antimony_ore" }],
