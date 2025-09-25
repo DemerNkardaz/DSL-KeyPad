@@ -13,12 +13,12 @@
 		},
 		"scripts": {
 			"chess": {
-				"n_fig_king": { "letter_locale": "Король" },
-				"n_fig_queen": { "letter_locale": "Королева" },
-				"n_fig_rook": { "letter_locale": "Ладья" },
-				"n_fig_bishop": { "letter_locale": "Слон" },
-				"n_fig_knight": { "letter_locale": "Конь" },
-				"n_fig_pawn": { "letter_locale": "Пешка" }
+				"n_piece_king": { "letter_locale": "Король" },
+				"n_piece_queen": { "letter_locale": "Ферзь" },
+				"n_piece_rook": { "letter_locale": "Ладья" },
+				"n_piece_bishop": { "letter_locale": "Слон" },
+				"n_piece_knight": { "letter_locale": "Конь" },
+				"n_piece_pawn": { "letter_locale": "Пешка" }
 			}
 		}
 	}

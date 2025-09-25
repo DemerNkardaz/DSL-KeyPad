@@ -31,6 +31,7 @@
 				"logogram": "logogram",
 				"syllable": "syllable",
 				"glyph": "glyph",
+				"piece": "piece",
 				"suite": "suite",
 				"card": "card"
 			},

@@ -105,7 +105,8 @@ Class ChrLib {
 			"log", "logogram",
 			"syl", "syllable",
 			"gly", "glyph",
-			"suit", "suite",
+			"piece", "piece",
+			"suite", "suite",
 			"card", "card"
 		),
 		"letter", "",

@@ -30,10 +30,10 @@
 		},
 		"scripts": {
 			"card": {
-				"n_suit_spade": { "letter_locale": "Spade" },
-				"n_suit_heart": { "letter_locale": "Heart" },
-				"n_suit_diamond": { "letter_locale": "Diamond" },
-				"n_suit_club": { "letter_locale": "Club" }
+				"n_suite_spade": { "letter_locale": "Spade" },
+				"n_suite_heart": { "letter_locale": "Heart" },
+				"n_suite_diamond": { "letter_locale": "Diamond" },
+				"n_suite_club": { "letter_locale": "Club" }
 			},
 			"playing_card": {
 				"n_card_ace": { "letter_locale": "Ace" },

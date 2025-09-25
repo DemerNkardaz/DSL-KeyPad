@@ -30,10 +30,10 @@
 		},
 		"scripts": {
 			"card": {
-				"n_suit_spade": { "letter_locale": "Пики" },
-				"n_suit_heart": { "letter_locale": "Червы" },
-				"n_suit_diamond": { "letter_locale": "Бубны" },
-				"n_suit_club": { "letter_locale": "Трефы" }
+				"n_suite_spade": { "letter_locale": "Пики" },
+				"n_suite_heart": { "letter_locale": "Червы" },
+				"n_suite_diamond": { "letter_locale": "Бубны" },
+				"n_suite_club": { "letter_locale": "Трефы" }
 			},
 			"playing_card": {
 				"n_card_ace": { "letter_locale": "Туз" },
