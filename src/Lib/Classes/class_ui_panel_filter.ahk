@@ -1,10 +1,13 @@
 Class UIMainPanelFilter {
-	__New(&panelWindow, &filterField, &LV, &dataList, &localeData) {
+	__New(&panelWindow, &filterField, &LV, &dataList, &localeData, prefix) {
 		this.panelWindow := panelWindow
 		this.filterField := filterField
 		this.LV := LV
 		this.dataList := dataList
 		this.localeData := localeData
+
+		this.prefix := prefix
+		this.isCurrentTabFavorites := prefix = "favorites"
 	}
 
 	Populate() {
@@ -80,12 +83,13 @@ Class UIMainPanelFilter {
 							reserveTexts.Push(StrReplace(item[index], Chr(0x00A0), " "))
 
 					local tags := []
-					if item[5] != "" {
-						reserveTexts.MergeWith([item[5]], ChrLib.GetValue(item[5], "tags"))
-						tags := ChrLib.GetValue(item[5], "tags")
+					local entryName := item[5]
+					if entryName != "" {
+						reserveTexts.MergeWith([entryName], ChrLib.GetValue(entryName, "tags"))
+						tags := ChrLib.GetValue(entryName, "tags")
 					}
 
-					local isFavorite := InStr(itemText, Chr(0x2605))
+					local isFavorite := InStr(itemText, Chr(0x2605)) || ChrLib.entryGroups["Favorites"].HasValue(entryName)
 					local isMatch := False
 					local matchedTag := ""
 					local displayText := itemText
@@ -101,7 +105,7 @@ Class UIMainPanelFilter {
 							matchedTag := this.FindMatchingTag(&tags, &filterText)
 							if matchedTag != "" {
 								isMatch := True
-								displayText := Util.StrUpper(matchedTag, 1)
+								displayText := Util.StrUpper(matchedTag, 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
 							} else
 								isMatch := this.MatchInArray(&reserveTexts, &filterText)
 						}

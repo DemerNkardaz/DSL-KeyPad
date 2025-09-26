@@ -351,10 +351,10 @@ Class UIMainPanel {
 
 		Event.OnEvent("UI Data", "Changed", () => this.setCached := False)
 		Event.OnEvent("UI Language", "Switched", () => this.setCached := False)
-		Event.OnEvent("Favorites", "Changed", (faveName, condition, preventFromTabChange) =>
-			WinExist(this.title)
-			&& this.ListViewFavoritesEvent(&faveName, &condition, &preventFromTabChange, this.GUI)
-		)
+		Event.OnEvent("Favorites", "Changed", (faveName, condition, preventFromTabChange) => (
+			WinExist(this.title) && this.ListViewFavoritesEvent(&faveName, &condition, &preventFromTabChange, this.GUI),
+			this.setCached := False
+		))
 
 		return Event.Trigger("UI Instance [Panel]", "Created", this)
 	}
@@ -565,7 +565,7 @@ Class UIMainPanel {
 			this.filterX, this.filterY, this.filterW, this.filterH, attributes.prefix), "")
 		characterFilter.SetFont("s10")
 
-		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &src, &localeData)
+		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &src, &localeData, attributes.prefix)
 
 		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
 
