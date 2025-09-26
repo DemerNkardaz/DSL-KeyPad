@@ -24,6 +24,8 @@ Class LocaleGenerator {
 		local entryData := entry["data"].Clone()
 		local entrySymbol := entry["symbol"].Clone()
 
+		local tagsCollector := Map("en-US", [], "ru-RU", [])
+
 		if referenceLocale {
 			if !(referenceLocale ~= "i)^:") {
 				local referenceName := entryName
@@ -205,6 +207,7 @@ Class LocaleGenerator {
 			tagScriptAdditive["en-US"] " "
 			tags["en-US"]
 		)
+
 		tags["ru-RU"] := (
 			tagsScriptAtStart ?
 				(
@@ -220,139 +223,150 @@ Class LocaleGenerator {
 			)
 		)
 
+		tagsCollector["en-US"].Push(this.LocaleRules(tags["en-US"], "en-US"))
+		tagsCollector["ru-RU"].Push(this.LocaleRules(tags["ru-RU"], "ru-RU"))
+
 		for _, langCode in langCodes {
 			entry["titles"][langCode] := this.LocaleRules(entry["titles"][langCode], langCode)
-			if !InStr(langCode, "_alt") {
-				tags[langCode] := this.LocaleRules(tags[langCode], langCode)
-			}
-		}
-
-		local hasTags := entry["tags"].Length > 0
-		local tagIndex := 0
-		for tag in tags {
-			tagIndex++
-			entry["tags"].InsertAt(tagIndex, tags[tag])
 		}
 
 		local additionalTags := []
 		if entry["symbol"]["tagAdditive"].Length > 0 {
 			for tagAdd in entry["symbol"]["tagAdditive"] {
 				for lang in ["en-US", "ru-RU"] {
-					local curScript := (tagAdd.Has("script") ? tagAdd["script"] : lScript)
-					local curType := (tagAdd.Has("type") ? tagAdd["type"] : lType)
-					local curCase := (tagAdd.Has("case") ? tagAdd["case"] : lCase)
-					local curLetter := (tagAdd.Has("letter") ? tagAdd["letter"] : letter)
-					local curCopyNumber := (tagAdd.Has("copyNumber") ? tagAdd["copyNumber"] : copyNumber)
-					local curHasCopyNumber := curCopyNumber > 0
+					if tagsCollector.Has(lang) {
 
-					local curScriptKey := ChrLib.GetDecomposition("script", curScript, "Key", &curScriptDecomposeKey) ? curScriptDecomposeKey : curScript
-					local curTypeKey := ChrLib.GetDecomposition("type", curType, "Key", &curTypeDecomposeKey) ? curTypeDecomposeKey : curType
-					local curCaseKey := ChrLib.GetDecomposition("case", curCase, "Key", &curCaseDecomposeKey) ? curCaseDecomposeKey : curCase
+						local curScript := (tagAdd.Has("script") ? tagAdd["script"] : lScript)
+						local curType := (tagAdd.Has("type") ? tagAdd["type"] : lType)
+						local curCase := (tagAdd.Has("case") ? tagAdd["case"] : lCase)
+						local curLetter := (tagAdd.Has("letter") ? tagAdd["letter"] : letter)
+						local curCopyNumber := (tagAdd.Has("copyNumber") ? tagAdd["copyNumber"] : copyNumber)
+						local curHasCopyNumber := curCopyNumber > 0
 
-					local hasScriptAdditive := tagAdd.Has("scriptAdditive") && StrLen(tagAdd["scriptAdditive"]) > 0
-					local curScriptAdditive := hasScriptAdditive ? "." tagAdd["scriptAdditive"] : ""
+						local curScriptKey := ChrLib.GetDecomposition("script", curScript, "Key", &curScriptDecomposeKey) ? curScriptDecomposeKey : curScript
+						local curTypeKey := ChrLib.GetDecomposition("type", curType, "Key", &curTypeDecomposeKey) ? curTypeDecomposeKey : curType
+						local curCaseKey := ChrLib.GetDecomposition("case", curCase, "Key", &curCaseDecomposeKey) ? curCaseDecomposeKey : curCase
 
-					local curLVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(curType) ? 2 : curType = "numeral" ? 3 : 1
-					local curIsGermanic := ["germanic_runic", "cirth_runic"].HasValue(curScript)
+						local hasScriptAdditive := tagAdd.Has("scriptAdditive") && StrLen(tagAdd["scriptAdditive"]) > 0
+						local curScriptAdditive := hasScriptAdditive ? "." tagAdd["scriptAdditive"] : ""
 
-					local lAdditionalBeforeLetter := ""
-					local lAdditionalAfterLetter := ""
-					local lAdditionalBeforeType := ""
-					local lAdditionalAfterType := ""
-					local lAdditionalCopyNumber := curHasCopyNumber ? " [" curCopyNumber "]" : ""
+						local curLVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(curType) ? 2 : curType = "numeral" ? 3 : 1
+						local curIsGermanic := ["germanic_runic", "cirth_runic"].HasValue(curScript)
 
-					for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType"] {
-						if tagAdd.Has(letterBound) && StrLen(tagAdd[letterBound]) > 0 {
-							local boundLink := Util.StrUpper(letterBound, 1)
-							local splitted := StrSplit(Util.StrTrim(tagAdd[letterBound]), ",")
-							local localeKey := RegExReplace(letterBound, "(Letter|Type)", "_letter")
+						local lAdditionalBeforeLetter := ""
+						local lAdditionalAfterLetter := ""
+						local lAdditionalBeforeType := ""
+						local lAdditionalAfterType := ""
+						local lAdditionalCopyNumber := curHasCopyNumber ? " [" curCopyNumber "]" : ""
 
-							for i, bound in splitted {
-								local titlelizeFirstLetter := bound ~= "i)^t\."
-								local boundKey := RegExReplace(bound, "i)^t\.")
+						for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType"] {
+							if tagAdd.Has(letterBound) && StrLen(tagAdd[letterBound]) > 0 {
+								local boundLink := Util.StrUpper(letterBound, 1)
+								local splitted := StrSplit(Util.StrTrim(tagAdd[letterBound]), ",")
+								local localeKey := RegExReplace(letterBound, "(Letter|Type)", "_letter")
 
-								if RegExMatch(boundKey, "<(!?)(.*?)>$", &languageRuleMatch) {
-									local isBan := languageRuleMatch[1] = "!"
-									local languageRule := languageRuleMatch[2]
+								for i, bound in splitted {
+									local titlelizeFirstLetter := bound ~= "i)^t\."
+									local boundKey := RegExReplace(bound, "i)^t\.")
 
-									if !InStr(langCode, languageRule) && !isBan || InStr(langCode, languageRule) && isBan
-										continue
+									if RegExMatch(boundKey, "<(!?)(.*?)>$", &languageRuleMatch) {
+										local isBan := languageRuleMatch[1] = "!"
+										local languageRule := languageRuleMatch[2]
 
-									boundKey := RegExReplace(boundKey, languageRuleMatch[0])
+										if !InStr(langCode, languageRule) && !isBan || InStr(langCode, languageRule) && isBan
+											continue
+
+										boundKey := RegExReplace(boundKey, languageRuleMatch[0])
+									}
+
+									if RegExMatch(boundKey, "\:\:(.*?)$", &match) {
+										local index := Integer(match[1])
+										local cleanBound := SubStr(boundKey, 1, match.Pos(0) - 1)
+										lAdditional%boundLink% .= Locale.Read(pfx localeKey "." cleanBound, lang, , , , index) (i < splitted.Length ? " " : "")
+									} else
+										lAdditional%boundLink% .= Locale.Read(pfx localeKey "." boundKey, lang, , , , (InStr(boundLink, "Type") ? curLVariant : 1)) (i < splitted.Length ? " " : "")
+
+									if titlelizeFirstLetter
+										lAdditional%boundLink% := Util.StrUpper(lAdditional%boundLink%, 1)
 								}
-
-								if RegExMatch(boundKey, "\:\:(.*?)$", &match) {
-									local index := Integer(match[1])
-									local cleanBound := SubStr(boundKey, 1, match.Pos(0) - 1)
-									lAdditional%boundLink% .= Locale.Read(pfx localeKey "." cleanBound, lang, , , , index) (i < splitted.Length ? " " : "")
-								} else
-									lAdditional%boundLink% .= Locale.Read(pfx localeKey "." boundKey, lang, , , , (InStr(boundLink, "Type") ? curLVariant : 1)) (i < splitted.Length ? " " : "")
-
-								if titlelizeFirstLetter
-									lAdditional%boundLink% := Util.StrUpper(lAdditional%boundLink%, 1)
 							}
 						}
-					}
 
-					lAdditionalBeforeLetter := StrLen(lAdditionalBeforeLetter) > 0 ? lAdditionalBeforeLetter " " : ""
-					lAdditionalAfterLetter := StrLen(lAdditionalAfterLetter) > 0 ? " " lAdditionalAfterLetter : ""
-					lAdditionalBeforeType := StrLen(lAdditionalBeforeType) > 0 ? lAdditionalBeforeType " " : ""
-					lAdditionalAfterType := StrLen(lAdditionalAfterType) > 0 ? " " lAdditionalAfterType : ""
+						lAdditionalBeforeLetter := StrLen(lAdditionalBeforeLetter) > 0 ? lAdditionalBeforeLetter " " : ""
+						lAdditionalAfterLetter := StrLen(lAdditionalAfterLetter) > 0 ? " " lAdditionalAfterLetter : ""
+						lAdditionalBeforeType := StrLen(lAdditionalBeforeType) > 0 ? lAdditionalBeforeType " " : ""
+						lAdditionalAfterType := StrLen(lAdditionalAfterType) > 0 ? " " lAdditionalAfterType : ""
 
-					if curIsGermanic {
-						local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" letter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "") "_" curLetter) ".letter_locale"
-						local additionalPostLetter := Locale.Read(lBuildedName, lang)
+						if curIsGermanic {
+							local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" letter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "") "_" curLetter) ".letter_locale"
+							local additionalPostLetter := Locale.Read(lBuildedName, lang)
 
-						local aLScript := Locale.Read(pfx "tag." curScript, lang, , , , curLVariant)
-						local aScriptAdditive := hasScriptAdditive ? " " Locale.Read(pfx "tag." curScript curScriptAdditive, lang, , , , curLVariant) : ""
-						local aLType := Locale.Read(pfx "type." curType, lang)
+							local aLScript := Locale.Read(pfx "tag." curScript, lang, , , , curLVariant)
+							local aScriptAdditive := hasScriptAdditive ? " " Locale.Read(pfx "tag." curScript curScriptAdditive, lang, , , , curLVariant) : ""
+							local aLType := Locale.Read(pfx "type." curType, lang)
 
-						additionalTags.Push(
-							aLScript
-							lAdditionalBeforeType
-							" " aLType
-							lAdditionalAfterType
-							aScriptAdditive " "
-							lAdditionalBeforeLetter
-							additionalPostLetter
-							lAdditionalAfterLetter
-							lAdditionalCopyNumber
-						)
-					} else {
-						local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" curLetter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "")) ".letter_locale"
-						local additionalPostLetter := Locale.Read(lBuildedName, lang)
+							tagsCollector[lang].Push(
+								aLScript
+								lAdditionalBeforeType
+								" " aLType
+								lAdditionalAfterType
+								aScriptAdditive " "
+								lAdditionalBeforeLetter
+								additionalPostLetter
+								lAdditionalAfterLetter
+								lAdditionalCopyNumber
+							)
+						} else {
+							local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" curLetter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "")) ".letter_locale"
+							local additionalPostLetter := Locale.Read(lBuildedName, lang)
 
-						local localedCase := curCase != "neutral" ? Locale.Read(pfx "case." curCase, lang, , , , curLVariant) " " : ""
-						local scriptTag := Locale.Read(pfx "tag." curScript, lang, , , , curLVariant)
+							local localedCase := curCase != "neutral" ? Locale.Read(pfx "case." curCase, lang, , , , curLVariant) " " : ""
+							local scriptTag := Locale.Read(pfx "tag." curScript, lang, , , , curLVariant)
 
-
-						additionalTags.Push(
-							((lang = "en-US" || lang = "ru-RU" && tagsScriptAtStart) ? scriptTag " " : "")
-							lAdditionalBeforeType
-							localedCase Locale.Read(pfx "type." curType, lang) " "
-							lAdditionalAfterType
-							lAdditionalBeforeLetter
-							additionalPostLetter
-							lAdditionalAfterLetter
-							lAdditionalCopyNumber
-							((lang = "ru-RU" && !tagsScriptAtStart) ? " " scriptTag : "")
-						)
+							tagsCollector[lang].Push(
+								((lang = "en-US" || lang = "ru-RU" && tagsScriptAtStart) ? scriptTag " " : "")
+								lAdditionalBeforeType
+								localedCase Locale.Read(pfx "type." curType, lang) " "
+								lAdditionalAfterType
+								lAdditionalBeforeLetter
+								additionalPostLetter
+								lAdditionalAfterLetter
+								lAdditionalCopyNumber
+								((lang = "ru-RU" && !tagsScriptAtStart) ? " " scriptTag : "")
+							)
+						}
 					}
 				}
 			}
 		}
 
-		if additionalTags.Length > 0
-			for tag in additionalTags
-				entry["tags"].Push(tag)
+		local hasTags := entry["tags"].Length > 0
+		local tagsBackup := []
 
-		if entry["tags"].Length > 0 {
-			sorting := Map()
-			for i, tag in entry["tags"]
-				sorting.Set(tag, i)
+		if hasTags {
+			for each in entry["tags"] {
+				if RegExMatch(each, "^<(.*?)>(.*)", &match) {
+					local lang := match[1]
+					local tagContent := match[2]
 
-			entry["tags"] := sorting.Keys()
+					if tagsCollector.Has(lang)
+						tagsCollector[lang].Push(tagContent)
+				} else
+					tagsBackup.Push(each)
+			}
+
+			entry["tags"] := []
 		}
+
+		for lang in ["en-US", "ru-RU"]
+			for each in tagsCollector[lang]
+				if !entry["tags"].HasValue(each)
+					entry["tags"].Push(each)
+
+		if tagsBackup.Length > 0
+			for each in tagsBackup
+				if !entry["tags"].HasValue(each)
+					entry["tags"].Push(each)
 
 		return entry
 	}

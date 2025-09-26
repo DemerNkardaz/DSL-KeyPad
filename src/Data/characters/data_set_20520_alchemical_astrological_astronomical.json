@@ -20,8 +20,8 @@
 		"symbol": { 
 			"copyNumber": [1, 2],
 			"tagAdditive": [
-				[{ "letter": "solvere" }, { "letter": "element_water", "beforeType": "obsolete" }],
-				[{ "letter": "solvere" }]
+				[{ "letter": "solvere" }],
+				[{ "letter": "solvere" }, { "letter": "element_water", "beforeType": "obsolete" }]
 			]
 		}
 	},

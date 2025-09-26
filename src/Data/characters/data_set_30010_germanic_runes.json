@@ -90,7 +90,6 @@
 	},
 	"germanic_runic_n_rune_l_elder_futhark_laguz", {
 		"unicode": "16DA",
-		"groups": ["Futhark Runes"],
 		"options": { "altLayoutKey": "$" },
 		"symbol": { "tagAdditive": [{
 			"scriptAdditive": "elder_futhark",
@@ -260,8 +259,6 @@
 	},
 	"germanic_runic_n_rune_n_futhork_ing", {
 		"unicode": "16DD",
-		"tags": ["футорк инг", "futhork ing"],
-		"groups": ["Futhork Runes"],
 		"options": { "altLayoutKey": "<+ N" }
 	},
 	"germanic_runic_n_rune_o_futhork_os", {
@@ -290,8 +287,6 @@
 	},
 	"germanic_runic_n_rune_a_younger_futhark_ar", {
 		"unicode": "16C5",
-		"tags": ["младший футарк йера", "younger futhark jera", "younger futhark ar", "younger futhark ár"],
-		"groups": ["Younger Futhark Runes"],
 		"options": { "altLayoutKey": ">! $" }
 	},
 	"germanic_runic_n_rune_a_younger_futhark_ar_short_twig", {
@@ -477,19 +472,19 @@
 	},
 	"runic_single_punctuation", {
 		"unicode": "16EB",
-		"tags": ["руническая одиночное препинание", "runic single punctuation"],
+		"tags": ["runic single punctuation", "руническая одиночное препинание"],
 		"groups": ["Runic Punctuation"],
 		"options": { "altLayoutKey": ">! ." }
 	},
 	"runic_multiple_punctuation", {
 		"unicode": "16EC",
-		"tags": ["руническое двойное препинание", "runic multiple punctuation"],
+		"tags": ["runic multiple punctuation", "руническое двойное препинание"],
 		"groups": ["Runic Punctuation"],
 		"options": { "altLayoutKey": ">! Space" }
 	},
 	"runic_cruciform_punctuation", {
 		"unicode": "16ED",
-		"tags": ["руническое крестовидное препинание", "runic cruciform punctuation"],
+		"tags": ["runic cruciform punctuation", "руническое крестовидное препинание"],
 		"groups": ["Runic Punctuation"],
 		"options": { "altLayoutKey": ">! ," }
 	}
