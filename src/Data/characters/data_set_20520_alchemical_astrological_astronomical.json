@@ -4,6 +4,15 @@
 		"recipe": [["alc air"], ["alc fire"], ["alc earth", "alc ert"], ["alc water", "alc wtr"]],
 		"symbol": { "beforeLetter": "element::2", "customs": "[c98d8db,cff8e46,cfdca52,c4898ee]" }
 	},
+	"alchemical_n_sym_[spirit]", {
+		"unicode": ["1F747"],
+		"recipe": [["alc spirit", "alc si", "alc vapor", "alc vpr"]],
+		"symbol": {
+			"tagAdditive": [
+				[{ "letter": "vapor" }]
+			]
+		}
+	},
 	"alchemical_n_sym_dissolve_[1,2]", {
 		"unicode": ["1F761", "1F762"],
 		"recipe": [["alc dissolve-1", "alc ds1"], ["alc dissolve-2", "alc ds2"]],
@@ -41,55 +50,58 @@
 			]
 		}
 	},
-	"alchemical_n_sym_acid_[nitric,nitrohydrochloric]", {
-		"unicode": ["1F705", "1F706"],
+	"alchemical_n_sym_aqua_[fortis,regia_1,regia_2,vitae_1,vitae_2]", {
+		"unicode": ["1F705", "1F706", "1F707", "1F708", "1F709"],
 		"recipe": [
 			["AqF", "${alchemical_n_sym_element_water}F", "alc nitric acid", "alc ntac", "alc aqua fortis", "alc af"],
-			["AqR", "${alchemical_n_sym_element_water}R", "alc aqua regia", "alc ar"]
+			["AqR", "${alchemical_n_sym_element_water}R", "alc aqua regia", "alc ar"],
+			["AR", "alc sand bath", "alc sbh"],
+			["AqV1", "alc aqua vatiae-1", "alc ethanol-1", "alc etl1"],
+			["AqV2", "alc aqua vatiae-2", "alc ethanol-2", "alc etl2"]
 		],
+		"options": { "useLetterLocale": [true, "regia$", "regia$", "vitae$", "vitae$"] },
 		"symbol": {
+			"copyNumber": [0, 1, 2, 1, 2],
 			"tagAdditive": [
-				[{ "letter": "aqua_fortis" }],
-				[{ "letter": "aqua_regia" }]
+				[{ "letter": "acid_nitric" }],
+				[
+					{ "letter": "acid_nitrohydrochloric" },
+					{ "letter": "acid_nitrohydrochloric.formula1" },
+					{ "letter": "acid_nitrohydrochloric.formula2" }
+				],
+				[
+					{ "letter": "acid_nitrohydrochloric" },
+					{ "letter": "acid_nitrohydrochloric.formula1" },
+					{ "letter": "acid_nitrohydrochloric.formula2" },
+					{ "letter": "sand_bath", "copyNumber": 0 }
+				],
+				[{ "letter": "ethanol" }],
+				[{ "letter": "ethanol" }]
 			]
 		}
 	},
-	"alchemical_n_sym_acid_[acetic,acetic_distilled_1,acetic_distilled_2]", {
+	"alchemical_n_sym_vinegar[,_distilled_1,_distilled_2]", {
 		"unicode": ["1F70A", "1F70B", "1F70C"],
 		"recipe": [
-			["alc acetic acid", "alc acac", "alc vinegar", "alc vgr"],
-			[":${alchemical_n_sym_acid_acetic}:", "alc dis vinegar-1", "alc dvgr1"],
+			["alc vinegar", "alc vgr", "alc acetic acid", "alc acac"],
+			[":${alchemical_n_sym_vinegar}:", "alc dis vinegar-1", "alc dvgr1"],
 			[":I:", "alc dis vinegar-2", "alc dvgr2"]
 		],
-		"options": { "useLetterLocale": "acetic$" },
+		"options": { "useLetterLocale": "vinegar$" },
 		"symbol": {
 			"beforeLetter": ["", "distilled", "distilled"],
 			"copyNumber": [0, 1, 2],
 			"tagAdditive": [
-				[{ "letter": "vinegar" }, { "letter": "acid" }],
-				[{ "letter": "vinegar", "beforeLetter": "distilled::2" }],
-				[{ "letter": "vinegar", "beforeLetter": "distilled::2" }]
+				[{ "letter": "acid_acetic" }, { "letter": "acid" }],
+				[{ "letter": "acid_acetic", "beforeLetter": "distilled::2" }],
+				[{ "letter": "acid_acetic", "beforeLetter": "distilled::2" }]
 			]
-		}
-	},
-	"alchemical_n_sym_sand_bath", {
-		"unicode": "1F707",
-		"recipe": ["AR", "alc sand bath", "alc sbh"],
-		"symbol": { "tagAdditive": [{ "letter": "aqua_regia", "copyNumber": 2 }] }
-	},
-	"alchemical_n_sym_ethanol_[1,2]", {
-		"unicode": ["1F708", "1F709"],
-		"recipe": [["AqV1", "alc ethanol-1", "alc etl1"], ["AqV2", "alc ethanol-2", "alc etl2"]],
-		"options": { "useLetterLocale": "ethanol$" },
-		"symbol": {
-			"copyNumber": [1, 2],
-			"tagAdditive": [{ "letter": "aqua_vitae" }]
 		}
 	},
 	"alchemical_n_sym_sulfur[,_philosophers,_black]", {
 		"unicode": ["1F70D", "1F70E", "1F70F"],
 		"recipe": [
-			["${alchemical_n_sym_acid_acetic}${alchemical_n_sym_element_fire}","${alchemical_n_sym_element_fire}${alchemical_n_sym_acid_acetic}", "alc sulfur", "alc slf"],
+			["${alchemical_n_sym_vinegar}${alchemical_n_sym_element_fire}","${alchemical_n_sym_element_fire}${alchemical_n_sym_vinegar}", "alc sulfur", "alc slf"],
 			["alc phi sulfur", "alc pslf"],
 			["alc black sulfur", "alc bslf"]
 		],
@@ -133,12 +145,44 @@
 			"copyNumber": [1, 2]
 		}
 	},
-	"alchemical_n_sym_potassium_nitrate", {
-		"unicode": "1F715",
-		"recipe": ["alc nitre", "alc ntr"],
+	"alchemical_n_sym_[quicklime]", {
+		"unicode": ["1F741"],
+		"recipe": [["alc quicklime", "alc ql"]],
 		"symbol": {
-			"tagAdditive": [{ "letter": "nitre" }, { "letter": "saltpetre" }]
+			"tagAdditive": [
+				[{ "letter": "calx_viva" }, { "letter": "calx", "copyNumber": 2 }]
+			]
 		}
+	},
+	"alchemical_n_sym_borax_[1,2,3]", {
+		"unicode": ["1F742", "1F743", "1F744"],
+		"recipe": [
+			["alc borax-1", "alc bx1"],
+			["alc borax-2", "alc bx2"],
+			["alc borax-3", "alc bx3"]
+		],
+		"options": { "useLetterLocale": "borax$" },
+		"symbol": {
+			"copyNumber": [1, 2, 3],
+			"tagAdditive": [{ "letter": "sodium_tetraborate" }]
+		}
+	},
+	"alchemical_n_sym_[alum,nitre]", {
+		"unicode": ["1F745", "1F715"],
+		"recipe": [
+			["alc alum", "alc am"],
+			["alc nitre", "alc ntr"]
+		],
+		"symbol": {
+			"tagAdditive": [
+				[],
+				[{ "letter": "potassium_nitrate" }, { "letter": "saltpetre" }]
+			]
+		}
+	},
+	"alchemical_n_sym_[tutty,caput_mortuum]", {
+		"unicode": ["1F74D", "1F74E"],
+		"recipe": [["alc tutty", "alc ty"], ["alc caput mortuum", "alc cm"]]
 	},
 	"alchemical_n_sym_metal_sulfate_[1,2]", {
 		"unicode": ["1F716", "1F717"],
@@ -147,6 +191,28 @@
 		"symbol": {
 			"copyNumber": [1, 2],
 			"tagAdditive": [{ "letter": "vitriol" }]
+		}
+	},
+	"alchemical_n_sym_oil", {
+		"unicode": "1F746",
+		"recipe": ["alc oil"]
+	},
+	"alchemical_n_sym_[tincture,gum,wax,powder,calx]", {
+		"unicode": ["1F748", "1F749", "1F74A", "1F74B", "1F74C"],
+		"recipe": [
+			["alc tincture", "alc tcr"],
+			["alc gum", "alc resin", "alc balm"],
+			["alc wax", "alc cera"],
+			["alc powder", "alc pwd", "alc pulvis", "alc pvs"],
+			["alc calx", "alc cx"]
+		],
+		"symbol": {
+			"tagAdditive": [
+				[],
+				[{ "letter": "resin" }, { "letter": "balm" }],
+				[{ "letter": "cera" }, { "script": "astrological", "beforeLetter": "asteroid", "letter": "asteroid_harmonia" }],
+				[{ "letter": "pulvis" }]
+			]
 		}
 	},
 	"alchemical_n_sym_[gold,silver]", {

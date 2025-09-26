@@ -30,6 +30,7 @@
   - Modification’s “options.ini” replaced with “manifest.json,” base keys now stored in root instead of “[options]” section.
   - Entries “Lat. Capital/Small Letter O With Overlay Tilde” renamed to “Lat. Capital/Small Letter Barred O”, recipe changed from using middle tilde to hyphen-minus (using middle tile was mistaken).
   - Recipe of “Lat. Capital/Small Letter Open O” now uses solidus instead of hyphen-minus.
+  - Search in “Panel”: matching tags now replace displayed symbol name in the first column.
 
 - Fixes:
 
@@ -178,6 +179,7 @@
   - Для модификаций «options.ini» заменен на «manifest.json», базовые ключи теперь хранятся в корне вместо секции «[options]».
   - Записи «Лат. прописная/строчная буква О с тильдой по середине» переименованы в «Лат. прописная/строчная буква перечёркнутая О», рецепт изменён на использование дефисо-минуса вместо тильды по середине (использование тильды по середине было ошибочно).
   - Рецепт «Лат. прописная/строчная буква открытая О» теперь использует косую черту вместо дефисо-минуса.
+  - Поиск в «Панели»: совпадения тегов теперь заменяют отображаемое имя символа в первой колонке.
 
 - Исправления:
 

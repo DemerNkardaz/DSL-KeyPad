@@ -79,7 +79,8 @@
 			"1F0F4",
 			"1F0F5"
 		],
-		"options": { "beforeType": "trump", "afterLetter": "TarotNouveau", "applyFontOnRecipeField": false },
+		"options": { "applyFontOnRecipeField": false },
+		"symbol": { "beforeType": "trump", "afterLetter": "TarotNouveau" },
 		"recipePrefixes": ["pct ", "pct "],
 		"recipe": [
 			["i", "1"],

@@ -41,6 +41,17 @@ Class UIMainPanelFilter {
 		return False
 	}
 
+	FindMatchingTag(&textsArray, &filterText) {
+		for each in textsArray {
+			local escaped := RegExEscape(each)
+			if escaped = filterText
+				|| escaped ~= filterText
+				|| filterText ~= escaped
+				return each
+		}
+		return ""
+	}
+
 	Filter(&filterText) {
 		filterText := filterText
 		this.LV.Delete()
@@ -68,16 +79,38 @@ Class UIMainPanelFilter {
 						if index != this.localeData.localeIndex
 							reserveTexts.Push(StrReplace(item[index], Chr(0x00A0), " "))
 
-					if item[5] != ""
+					local tags := []
+					if item[5] != "" {
 						reserveTexts.MergeWith([item[5]], ChrLib.GetValue(item[5], "tags"))
+						tags := ChrLib.GetValue(item[5], "tags")
+					}
 
 					local isFavorite := InStr(itemText, Chr(0x2605))
-					local isMatch := keyOrRecipeMark ? (item[2] ~= filterText) : (isFavorite && filterText ~= "^(изб|fav|\*)") || filterText != "*" && (itemText ~= filterText || this.MatchInArray(&reserveTexts, &filterText))
+					local isMatch := False
+					local matchedTag := ""
+					local displayText := itemText
+
+					if keyOrRecipeMark {
+						isMatch := item[2] ~= filterText
+					} else if isFavorite && filterText ~= "^(изб|fav|\*)" {
+						isMatch := True
+					} else if filterText != "*" {
+						if itemText ~= filterText {
+							isMatch := True
+						} else {
+							matchedTag := this.FindMatchingTag(&tags, &filterText)
+							if matchedTag != "" {
+								isMatch := True
+								displayText := Util.StrUpper(matchedTag, 1)
+							} else
+								isMatch := this.MatchInArray(&reserveTexts, &filterText)
+						}
+					}
 
 					if isMatch {
 						if !groupStarted
 							groupStarted := True
-						this.LV.Add(, item[this.localeData.localeIndex], ArraySlice(item, 2, this.localeData.columnsCount)*)
+						this.LV.Add(, displayText, ArraySlice(item, 2, this.localeData.columnsCount)*)
 					} else if groupStarted
 						groupStarted := False
 
@@ -87,7 +120,6 @@ Class UIMainPanelFilter {
 
 				if groupStarted
 					this.LV.Add()
-
 
 				if previousGroupName != ""
 					this.LV.Add()

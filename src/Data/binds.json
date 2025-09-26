@@ -3071,15 +3071,16 @@
 				"<^>!<+": "word_joiner"
 			},
 			"ДефисоМинус": {
-				"<^>!>+": ["hyphenation_point"],
 				"<^<!": ["softhyphen"],
-				">+": ["minus"],
 				"<^>!": ["emdash"],
+				"<^<!<+": ["minus"],
+				"<^>!>+": ["hyphenation_point"],
 				"<^>!<+": ["endash"],
-				"<!:Caps": ["two_emdash", "three_emdash"],
+				"<!:Caps": ["[two,three]_emdash"],
 				"<^>!<!": ["hyphen"],
 				"<^>!<!<+": ["no_break_hyphen"],
-				"<^>!<!>+": ["figure_dash"]
+				"<^>!<!>+": ["hyphen_double"],
+				"<^>!<!<+>+": ["figure_dash"]
 			},
 			"Равно": {
 				"<^>!": ["noequals"],
