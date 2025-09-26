@@ -46,11 +46,7 @@
 				"n_sym_regulus": { "letter_locale": "Regulus" },
 				"n_sym_acid_acetic": { "letter_locale": "Acetic acid" },
 				"n_sym_acid_nitric": { "letter_locale": "Nitric acid" },
-				"n_sym_acid_nitrohydrochloric": {
-					"letter_locale": "Nitrohydrochloric acid (HNO\u2083 + 3 HCl)",
-					"formula1": {"letter_locale":  "HNO\u2083 + 3 HCl"},
-					"formula2": {"letter_locale":  "HNO3 + 3 HCl"}
-				},
+				"n_sym_acid_nitrohydrochloric": { "letter_locale": "Nitrohydrochloric acid (HNO\u2083 + 3 HCl)" },
 				"n_sym_ethanol": { "letter_locale": "Ethanol" },
 				"n_sym_aqua_fortis": { "letter_locale": "Strong water" },
 				"n_sym_aqua_vitae": { "letter_locale": "Aqua vitae" },
@@ -68,22 +64,13 @@
 				"n_sym_calx_viva": { "letter_locale": "Calx viva" },
 				"n_sym_calx": { "letter_locale": "Calx" },
 				"n_sym_borax": { "letter_locale": "Borax" },
-				"n_sym_sodium_tetraborate": {
-					"letter_locale": "Sodium tetraborate",
-					"formula": { "letter_locale":  "Na\u2082B\u2084O\u2087" }
-				},
-				"n_sym_potassium_nitrate": {
-					"letter_locale": "Potassium nitrate",
-					"formula": { "letter_locale":  "KNO\u2083" }
-				},
-				"n_sym_ammonium_chloride": {
-					"letter_locale": "Ammonium chloride",
-					"formula": {"letter_locale":  "NH\u2084Cl" }
-				},
+				"n_sym_sodium_tetraborate": { "letter_locale": "Sodium tetraborate" },
+				"n_sym_potassium_nitrate": { "letter_locale": "Potassium nitrate" },
+				"n_sym_ammonium_chloride": { "letter_locale": "Ammonium chloride" },
 				"n_sym_alum": { "letter_locale": "Alum" },
 				"n_sym_nitre": { "letter_locale": "Nitre" },
 				"n_sym_saltpetre": { "letter_locale": "Saltpetre" },
-				"n_sym_stibnite": { "letter_locale": "Stibnite (Sb\u2082S\u2083)" },
+				"n_sym_stibnite": { "letter_locale": "Stibnite" },
 				"n_sym_tutty": { "letter_locale": "Tutty" },
 				"n_sym_caput_mortuum": { "letter_locale": "Caput mortuum" },
 				"n_sym_metal_sulfate": { "letter_locale": "Metal sulfate (\ud835\udc65SO\u2084)" },
@@ -95,7 +82,7 @@
 				"n_sym_wax": { "letter_locale": "Wax" },
 				"n_sym_cera": { "letter_locale": "Cera" },
 				"n_sym_powder": { "letter_locale": "Powder" },
-				"n_sym_puvlis": { "letter_locale": "Puvlis" },
+				"n_sym_pulvis": { "letter_locale": "Pulvis" },
 				"n_sym_vitriol": { "letter_locale": "Vitriol" },
 				"n_sym_rock_salt": { "letter_locale": "Rock salt" },
 				"n_sym_mineral_marcasite": { "letter_locale": "Marcasite" },

@@ -64,17 +64,8 @@
 			"copyNumber": [0, 1, 2, 1, 2],
 			"tagAdditive": [
 				[{ "letter": "acid_nitric" }],
-				[
-					{ "letter": "acid_nitrohydrochloric" },
-					{ "letter": "acid_nitrohydrochloric.formula1" },
-					{ "letter": "acid_nitrohydrochloric.formula2" }
-				],
-				[
-					{ "letter": "acid_nitrohydrochloric" },
-					{ "letter": "acid_nitrohydrochloric.formula1" },
-					{ "letter": "acid_nitrohydrochloric.formula2" },
-					{ "letter": "sand_bath", "copyNumber": 0 }
-				],
+				[{ "letter": "acid_nitrohydrochloric" }],
+				[{ "letter": "acid_nitrohydrochloric" }, { "letter": "sand_bath", "copyNumber": 0 }],
 				[{ "letter": "ethanol" }],
 				[{ "letter": "ethanol" }]
 			]
@@ -89,12 +80,12 @@
 		],
 		"options": { "useLetterLocale": "vinegar$" },
 		"symbol": {
-			"beforeLetter": ["", "distilled", "distilled"],
+			"beforeLetter": ["", "distilled::2", "distilled::2"],
 			"copyNumber": [0, 1, 2],
 			"tagAdditive": [
 				[{ "letter": "acid_acetic" }, { "letter": "acid" }],
-				[{ "letter": "acid_acetic", "beforeLetter": "distilled::2" }],
-				[{ "letter": "acid_acetic", "beforeLetter": "distilled::2" }]
+				[{ "letter": "acid_acetic", "beforeLetter": "distilled" }],
+				[{ "letter": "acid_acetic", "beforeLetter": "distilled" }]
 			]
 		}
 	},

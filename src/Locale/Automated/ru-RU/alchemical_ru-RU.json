@@ -46,11 +46,7 @@
 				"n_sym_regulus": { "letter_locale": "Регулус" },
 				"n_sym_acid_acetic": { "letter_locale": "Уксусная кислота" },
 				"n_sym_acid_nitric": { "letter_locale": "Азотная кислота" },
-				"n_sym_acid_nitrohydrochloric": {
-					"letter_locale": "Нитрогидрохлорная кислота",
-					"formula1": { "letter_locale":  "{@en-US}" },
-					"formula2": { "letter_locale":  "{@en-US}" }
-				},
+				"n_sym_acid_nitrohydrochloric": { "letter_locale": "Нитрогидрохлорная кислота" },
 				"n_sym_ethanol": { "letter_locale": "Этанол" },
 				"n_sym_aqua_fortis": { "letter_locale": "Сильная вода" },
 				"n_sym_aqua_vitae": { "letter_locale": "Вода жизни" },
@@ -68,22 +64,13 @@
 				"n_sym_calx_viva": { "letter_locale": "Негашенная известь" },
 				"n_sym_calx": { "letter_locale": "Известь" },
 				"n_sym_borax": { "letter_locale": "Бура" },
-				"n_sym_sodium_tetraborate": {
-					"letter_locale": "Тетраборат натрия",
-					"formula": { "letter_locale":  "{@en-US}" }
-				},
-				"n_sym_potassium_nitrate": {
-					"letter_locale": "Нитрат калия",
-					"formula": { "letter_locale":  "{@en-US}" }
-				},
-				"n_sym_ammonium_chloride": {
-					"letter_locale": "Хлорид аммония",
-					"formula": {"letter_locale":  "{@en-US}" }
-				},
+				"n_sym_sodium_tetraborate": { "letter_locale": "Тетраборат натрия" },
+				"n_sym_potassium_nitrate": { "letter_locale": "Нитрат калия" },
+				"n_sym_ammonium_chloride": { "letter_locale": "Хлорид аммония" },
 				"n_sym_alum": { "letter_locale": "Квасцы" },
 				"n_sym_nitre": { "letter_locale": "Селитра" },
 				"n_sym_saltpetre": { "letter_locale": "Селитра" },
-				"n_sym_stibnite": { "letter_locale": "Стибнит (Sb\u2082S\u2083)" },
+				"n_sym_stibnite": { "letter_locale": "Стибнит" },
 				"n_sym_tutty": { "letter_locale": "Тутти (Порошок из нечистого оксида цинка)" },
 				"n_sym_caput_mortuum": { "letter_locale": "Капут мортуум" },
 				"n_sym_metal_sulfate": { "letter_locale": "Сульфат металла (\ud835\udc65SO\u2084)" },
@@ -95,7 +82,7 @@
 				"n_sym_wax": { "letter_locale": "Воск" },
 				"n_sym_cera": { "letter_locale": "Воск" },
 				"n_sym_powder": { "letter_locale": "Порошок" },
-				"n_sym_puvlis": { "letter_locale": "Порошок" },
+				"n_sym_pulvis": { "letter_locale": "Порошок" },
 				"n_sym_vitriol": { "letter_locale": "Купорос" },
 				"n_sym_rock_salt": { "letter_locale": "Каменная соль" },
 				"n_sym_mineral_marcasite": { "letter_locale": "Марказит" },
