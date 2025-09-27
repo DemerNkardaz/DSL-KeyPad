@@ -358,16 +358,17 @@ Class LocaleGenerator {
 			entry["tags"] := []
 		}
 
-		for lang in ["en-US", "ru-RU"]
-			for each in tagsCollector[lang]
-				if !entry["tags"].HasValue(each) {
+		for lang in ["en-US", "ru-RU"] {
+			for each in tagsCollector[lang] {
+				if !entry["tags"].HasValue(each)
 					entry["tags"].Push(each)
 
-					if !entry["tagsMap"].Has(lang)
-						entry["tagsMap"].Set(lang, [])
+				if !entry["tagsMap"].Has(lang)
+					entry["tagsMap"].Set(lang, [])
 
-					entry["tagsMap"][lang].Push(each)
-				}
+				entry["tagsMap"][lang].Push(each)
+			}
+		}
 
 		entry["options"].Set("isTagsMirrored", True)
 
