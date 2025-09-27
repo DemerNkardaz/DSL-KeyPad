@@ -589,21 +589,21 @@
 		"symbol": {
 			"beforeType": "zodiacal",
 			"tagAdditive": [
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "calcination" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "congelation" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "fixation" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "dissolve" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "digestion" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "distill" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "sublimate" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "separation" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "ceration" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "calcination" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "congelation" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "fixation" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "dissolve" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "digestion" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "distill" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "sublimate" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "separation" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "ceration" }],
 				[
-					{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "fermentation" },
-					{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "putrefaction" }
+					{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "fermentation" },
+					{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "putrefaction" }
 				],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "multiplication" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeType": "archaic", "letter": "projection" }]
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "multiplication" }],
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "projection" }]
 			]
 		}
 	},

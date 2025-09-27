@@ -234,13 +234,40 @@ Class ChrLib {
 
 	static GetValue(entryName, value, useRef := False, &output?) {
 		if useRef {
-			if this.entries.%entryName%.Has(value) {
+			if InStr(value, ".") {
+				local split := StrSplit(value, ".")
+				local current := this.entries.%entryName%
+
+				for index, segment in split {
+					if current.Has(segment)
+						current := current[segment]
+					else
+						return False
+				}
+
+				output := current
+				return True
+			} else if this.entries.%entryName%.Has(value) {
 				output := this.entries.%entryName%[value]
 				return True
 			} else {
 				return False
 			}
 		} else {
+			if InStr(value, ".") {
+				local split := StrSplit(value, ".")
+				local current := this.entries.%entryName%
+
+				for index, segment in split {
+					if current.Has(segment)
+						current := current[segment]
+					else
+						return
+				}
+
+				return current
+			}
+
 			return this.entries.%entryName%[value]
 		}
 		return

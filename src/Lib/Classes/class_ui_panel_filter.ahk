@@ -62,6 +62,7 @@ Class UIMainPanelFilter {
 		if filterText = "" {
 			this.Populate()
 		} else {
+			local languageCode := Language.Get()
 			local groupStarted := False
 			local previousGroupName := ""
 			local keyOrRecipeMark := False
@@ -83,10 +84,14 @@ Class UIMainPanelFilter {
 							reserveTexts.Push(StrReplace(item[index], Chr(0x00A0), " "))
 
 					local tags := []
+					local tagsMap := Map()
+					local isTagsMirrored := False
 					local entryName := item[5]
 					if entryName != "" {
 						reserveTexts.MergeWith([entryName], ChrLib.GetValue(entryName, "tags"))
 						tags := ChrLib.GetValue(entryName, "tags")
+						tagsMap := ChrLib.GetValue(entryName, "tagsMap")
+						isTagsMirrored := ChrLib.GetValue(entryName, "options.isTagsMirrored")
 					}
 
 					local isFavorite := InStr(itemText, Chr(0x2605)) || ChrLib.entryGroups["Favorites"].HasValue(entryName)
@@ -105,7 +110,16 @@ Class UIMainPanelFilter {
 							matchedTag := this.FindMatchingTag(&tags, &filterText)
 							if matchedTag != "" {
 								isMatch := True
-								displayText := Util.StrUpper(matchedTag, 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+								if tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag)
+									displayText := Util.StrUpper(matchedTag, 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+								else if isTagsMirrored {
+									for lang, tags in tagsMap
+										for i, tag in tags
+											if tag = matchedTag && tagsMap[languageCode].Has(i) {
+												displayText := Util.StrUpper(tagsMap[languageCode][i], 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+												break 2
+											}
+								}
 							} else
 								isMatch := this.MatchInArray(&reserveTexts, &filterText)
 						}

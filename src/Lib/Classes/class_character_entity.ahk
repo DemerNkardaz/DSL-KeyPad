@@ -18,6 +18,7 @@ Class ChrEntry {
 				"name", "",
 				"filePath", "",
 				"tags", [],
+				"tagsMap", Map(),
 				"groups", [],
 				"alterations", Map(),
 				"options", Map(
@@ -35,6 +36,7 @@ Class ChrEntry {
 					"preventAltCode", False,
 					"usesDiacritics", False,
 					"applyFontOnRecipeField", True,
+					"isTagsMirrored", False,
 					"altLayoutKey", "",
 					"showOnAlt", "",
 					"altSpecialKey", "",
