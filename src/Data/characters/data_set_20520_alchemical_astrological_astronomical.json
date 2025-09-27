@@ -376,7 +376,7 @@
 		],
 		"symbol": {
 			"tagAdditive": [
-				[{ "letter": "antimony_bearing_mineral" }, { "letter": "stibnite" }]
+				[{ "letter": "antimony_bearing_mineral" }]
 			]
 		}
 	},
@@ -406,7 +406,7 @@
 			"tagAdditive": [
 				[
 					{ "script": "astrological", "letter": "asteroid" },
-					{ "beforeType": "archaic", "letter": "stibnite" },
+					{ "beforeType": "archaic", "beforeLetter": "mineral", "letter": "mineral_stibnite" },
 					{ "beforeType": "archaic", "beforeLetter": "mineral", "letter": "mineral_sal_ammoniac" }
 				], []
 			]
@@ -654,7 +654,10 @@
 			"customs": "[c688ecf,caad4ed,c585ad8]",
 			"beforeLetter": "planet",
 			"tagAdditive": [
-				[{ "script": "alchemical", "letter": "stibnite", "copyNumber": 2 }, { "script": "alchemical", "letter": "antimony_ore" }],
+				[
+					{ "script": "alchemical", "beforeLetter": "element", "letter": "antimony" },
+					{ "script": "alchemical", "beforeLetter": "mineral", "letter": "mineral_stibnite" }
+				],
 				[{ "script": "astrological", "letter": "planet_uranus", "beforeLetter": "planet", "copyNumber": 2 }, { "script": "alchemical", "letter": "platinum" }],
 				[]
 			]
