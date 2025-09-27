@@ -1284,6 +1284,7 @@ Class UIMainPanel {
 
 		local char := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
 		local htmlCode := Util.StrToHTML(char)
+		local htmlCodeLen := StrLen(htmlCode)
 		local previewSymbol := StrLen(entry["symbol"]["alt"]) > 0 ? entry["symbol"]["alt"] : entry["symbol"]["set"]
 		local characterTitle := this.HandleTitle(entryName "[type::" previewType "]", &languageCode, True)
 
@@ -1381,7 +1382,7 @@ Class UIMainPanel {
 
 		panelWindow[prefix "Title"].SetFont("s" (titleLen > 32 ? this.fontSizes.titleSmall : this.fontSizes.title) " " (panelWindow[prefix "Title"].Text = this.notAvailable ? this.field : this.fontColorDefault))
 
-		panelWindow[prefix "HTMLFieldDecimal"].SetFont("s" (entityLen > 14 ? this.fontSizes.fieldSmall : this.fontSizes.field))
+		panelWindow[prefix "HTMLFieldDecimal"].SetFont("s" (htmlCodeLen > 14 ? this.fontSizes.fieldSmall : this.fontSizes.field))
 		panelWindow[prefix "HTMLFieldNamed"].SetFont("s" (entityLen > 14 ? this.fontSizes.fieldSmall : this.fontSizes.field))
 
 		panelWindow[prefix "UnicodeField"].SetFont(panelWindow[prefix "UnicodeField"].Text = this.defaultUnicode ? this.fontColorNoData : this.fontColorDefault)

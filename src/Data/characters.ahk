@@ -30,6 +30,7 @@ GeneratedEntries() {
 		output.Push(
 			"variantion_selector_" index, Map(
 				"titles", Map("ru-RU", "Селектор варианта " index, "en-US", "Variation selector " index),
+				"tags", ["Variation selector " index, "Селектор варианта " index],
 				"unicode", "" unicodeValue "",
 				"options", Map("noCalc", True, "suggestionsAtEnd", True),
 				"recipe", ["vs" index],
@@ -52,6 +53,7 @@ GeneratedEntries() {
 					"ru-RU", "Модификатор Фицпатрика " index
 				),
 				"unicode", "" unicodeValue "",
+				"tags", ["Emoji Modifier Fitzpatrick " index, "Модификатор Фицпатрика " index],
 				"options", Map("noCalc", True, "suggestionsAtEnd", True),
 				"recipe", ["ftz" index],
 				"symbol", Map("alt", "<EMOJI MODIFIER FITZPATRICK TYPE-" (index = 1 ? "1-2" : index) ">")
@@ -79,6 +81,7 @@ GeneratedEntries() {
 					"ru-RU", "Компонент эмодзи " title
 				),
 				"unicode", "" unicodeValue "",
+				"tags", ["Emoji Component " title, "Компонент эмодзи " title],
 				"options", Map("noCalc", True, "suggestionsAtEnd", True),
 				"recipe", ["ecmp " emoji_hairs[index][2], "ecmp " StrReplace(entryPost, "_", " ")],
 				"symbol", Map("alt", "<EMOJI COMPONENT " StrUpper(title) ">")

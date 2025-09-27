@@ -1,4 +1,8 @@
 [
+	"alchemical_n_sym_quintessence", {
+		"unicode": "1F700",
+		"recipe": ["QE", "alc qe"]
+	},
 	"alchemical_n_sym_element_[air,fire,earth,water]", {
 		"unicode": ["1F701", "1F702", "1F703", "1F704"],
 		"recipe": [["alc air"], ["alc fire"], ["alc earth", "alc ert"], ["alc water", "alc wtr"]],
@@ -53,8 +57,8 @@
 	"alchemical_n_sym_aqua_[fortis,regia_1,regia_2,vitae_1,vitae_2]", {
 		"unicode": ["1F705", "1F706", "1F707", "1F708", "1F709"],
 		"recipe": [
-			["AqF", "${alchemical_n_sym_element_water}F", "alc nitric acid", "alc ntac", "alc aqua fortis", "alc af"],
-			["AqR", "${alchemical_n_sym_element_water}R", "alc aqua regia", "alc ar"],
+			["AqF", "${alchemical_n_sym_element_water}F", "alc nitric acid", "alc ntac", "alc aqua fortis", "alc aqf"],
+			["AqR", "${alchemical_n_sym_element_water}R", "alc aqua regia", "alc aqr"],
 			["AR", "alc sand bath", "alc sbh"],
 			["AqV1", "alc aqua vatiae-1", "alc ethanol-1", "alc etl1"],
 			["AqV2", "alc aqua vatiae-2", "alc ethanol-2", "alc etl2"]
@@ -171,6 +175,21 @@
 			]
 		}
 	},
+	"alchemical_n_sym_tartar_[1,2]", {
+		"unicode": ["1F73F", "1F740"],
+		"recipe": [
+			["alc tartar-1", "alc tr1"],
+			["alc tartar-2", "alc tr2"]
+		],
+		"options": { "useLetterLocale": "tartar$" },
+		"symbol": {
+			"copyNumber": [1, 2],
+			"tagAdditive": [
+				[{ "letter": "potassium_tartrate" }],
+				[{ "letter": "potassium_tartrate" }]
+			]
+		}
+	},
 	"alchemical_n_sym_[tutty,caput_mortuum]", {
 		"unicode": ["1F74D", "1F74E"],
 		"recipe": [["alc tutty", "alc ty"], ["alc caput mortuum", "alc cm"]]
@@ -208,7 +227,10 @@
 	},
 	"alchemical_n_sym_[gold,silver]", {
 		"unicode": ["1F71A", "1F71B"],
-		"recipe": [["alc arc gold", "alc agld", "ast arc Sun"], ["alc arc silver", "alc aslv", "ast arc Moon"]],
+		"recipe": [
+			["alc arc gold", "alc agld", "ast arc Sun"],
+			["alc arc silver", "alc aslv", "ast arc Moon"]
+		],
 		"symbol": {
 			"beforeType": "archaic",
 			"beforeLetter": "element", 
@@ -218,17 +240,39 @@
 			]
 		}
 	},
-	"alchemical_n_sym_mineral_[marcasite,sal_ammoniac]", {
-		"unicode": ["1F738", "1F739"],
+	"alchemical_n_sym_[arsenic]", {
+		"unicode": ["1F73A"],
+		"recipe": [["alc arsenic", "alc asn"]],
+		"symbol": { "beforeLetter": "element" }
+	},
+	"alchemical_n_sym_mineral_[cinnabar,marcasite,sal_ammoniac,auripigment]", {
+		"unicode": ["1F713", "1F738", "1F739", "1F73D"],
 		"recipe": [
+			["alc cinnabar", "alc cnb"],
 			["alc marcasite", "alc mrcs", "alc pyrite", "alc prt"],
-			["alc sal ammoniac", "alc sna"]
+			["alc sal ammoniac", "alc sna"],
+			["alc auripigment", "alc arp"]
 		],
 		"symbol": {
 			"beforeLetter": "mineral",
 			"tagAdditive": [
+				[],
 				[{ "beforeLetter": "mineral", "letter": "mineral_pyrite" }],
-				[{ "letter": "ammonium_chloride" }, { "letter": "star_regulus" }]
+				[{ "letter": "ammonium_chloride" }, { "letter": "star_regulus" }],
+				[{ "letter": "arsenic_trisulfide" }, { "beforeLetter": "mineral",  "letter": "mineral_orpiment" }]
+			]
+		}
+	},
+	"alchemical_n_sym_mineral_realgar_[1,2]", {
+		"unicode": ["1F73B", "1F73C"],
+		"recipe": [["alc realgar-1", "alc rg1"], ["alc realgar-2", "alc rg2"]],
+		"options": { "useLetterLocale": "realgar$" },
+		"symbol": {
+			"beforeLetter": "mineral",
+			"copyNumber": [1, 2],
+			"tagAdditive": [
+				[{ "letter": "arsenic_sulfide" }],
+				[{ "letter": "arsenic_sulfide" }]
 			]
 		}
 	},
@@ -241,6 +285,30 @@
 			"tagAdditive": [[{ "beforeType": "archaic", "beforeLetter": "element", "letter": "bismuth", "copyNumber": 1 }], []]
 		}
 	},
+	"alchemical_n_sym_[tin,lead,bismuth]_ore", {
+		"unicode": ["1F729", "1F72A", "1F73E"],
+		"recipe": [
+			["alc tin ore", "alc toe"],
+			["alc lead ore", "alc loe"],
+			["alc bismuth ore", "alc boe"]
+		],
+		"symbol": {
+			"tagAdditive": [
+				[{ "letter": "tin_bearing_mineral" }],
+				[{ "letter": "lead_bearing_mineral" }],
+				[]
+			]
+		}
+	},
+	"alchemical_n_sym_[iron_]copper_ore", {
+		"unicode": ["1F721"],
+		"recipe": [["alc iron cop ore", "alc icoe"]],
+		"symbol": {
+			"tagAdditive": [
+				[{ "letter": "iron_copper_bearing_mineral" }]
+			]
+		}
+	},
 	"alchemical_n_sym_iron_ore_[1,2]", {
 		"unicode": ["1F71C", "1F71D"],
 		"recipe": [["alc iron ore-1", "alc ioe1"], ["alc iron ore-2", "alc ioe2"]],
@@ -248,33 +316,6 @@
 		"symbol": {
 			"copyNumber": [1, 2],
 			"tagAdditive": [{ "letter": "iron_bearing_mineral" }]
-		}
-	},
-	"alchemical_n_sym_[,iron_]copper_ore", {
-		"unicode": ["1F720", "1F721"],
-		"recipe": [["alc cop ore", "alc coe"], ["alc iron cop ore", "alc icoe"]],
-		"symbol": {
-			"tagAdditive": [
-				[{ "letter": "copper_bearing_mineral" }],
-				[{ "letter": "iron_copper_bearing_mineral" }]
-			]
-		}
-	},
-	"alchemical_n_sym_[tin,lead,antimony,bismuth]_ore", {
-		"unicode": ["1F729", "1F72A", "1F72B", "1F73E"],
-		"recipe": [
-			["alc tin ore", "alc toe"],
-			["alc lead ore", "alc loe"],
-			["alc antimony ore", "alc aoe", "alc stibnite", "alc stb"],
-			["alc bismuth ore", "alc boe"]
-		],
-		"symbol": {
-			"tagAdditive": [
-				[{ "letter": "tin_bearing_mineral" }],
-				[{ "letter": "lead_bearing_mineral" }],
-				[{ "letter": "antimony_bearing_mineral" }, { "letter": "stibnite" }],
-				[]
-			]
 		}
 	},
 	"alchemical_n_sym_iron_[crocus,crocus_archaic,regulus]", {
@@ -290,7 +331,16 @@
 			]
 		}
 	},
-	"alchemical_n_sym_copper_[crocus_1,crocus_2]", {
+	"alchemical_n_sym_[copper]_ore", {
+		"unicode": ["1F721"],
+		"recipe": [["alc cop ore", "alc coe"]],
+		"symbol": {
+			"tagAdditive": [
+				[{ "letter": "copper_bearing_mineral" }]
+			]
+		}
+	},
+	"alchemical_n_sym_copper_crocus_[1,2]", {
 		"unicode": ["1F723", "1F724"],
 		"recipe": [["alc cop croc-1", "alc ccr1"], ["alc cop croc-2", "alc ccr2"]],
 		"options": { "useLetterLocale": "crocus$" },
@@ -299,17 +349,66 @@
 			"tagAdditive": [{ "letter": "crocus_veneris" }]
 		}
 	},
-	"alchemical_n_sym_[copper,antimony]_sublimate", {
-		"unicode": ["1F722", "1F72C"],
-		"recipe": [["alc cop sublimate", "alc cst"], ["alc antimony sublimate", "alc ast"]],
+	"alchemical_n_sym_copper_[antimoniate,antimoniate_salt]", {
+		"unicode": ["1F725", "1F726"],
+		"recipe": [
+			["alc cop antimoniate", "alc cnt"],
+			["alc cop antimoniate salt", "alc cns"]
+		]
+	},
+	"alchemical_n_sym_copper[,_salt]_sublimate", {
+		"unicode": ["1F722", "1F727"],
+		"recipe": [
+			["alc cop sublimate", "alc cst"],
+			["alc cop salt sublimate", "alc css"]
+		],
 		"symbol": {
 			"tagAdditive": [
 				[{ "script": "astrological", "letter": "planetoid" }],
+				[]
+			]
+		}
+	},
+	"alchemical_n_sym_[antimony]_ore", {
+		"unicode": ["1F72B"],
+		"recipe": [
+			["alc antimony ore", "alc aoe", "alc stibnite", "alc stb"]
+		],
+		"symbol": {
+			"tagAdditive": [
+				[{ "letter": "antimony_bearing_mineral" }, { "letter": "stibnite" }]
+			]
+		}
+	},
+	"alchemical_n_sym_antimony_regulus_[1,2]", {
+		"unicode": ["1F730", "1F731"],
+		"recipe": [["alc antimony regu-1", "alc amr1"], ["alc antimony regu-2", "alc amr2"]],
+		"options": { "useLetterLocale": "regulus$" },
+		"symbol": {
+			"copyNumber": [1, 2],
+			"tagAdditive": [[{ "letter": "regulus", "copyNumber": 5 }], []]
+		}
+	},
+	"alchemical_n_sym_antimony_[salt,vinegar]", {
+		"unicode": ["1F72D", "1F72F"],
+		"recipe": [
+			["alc antimony salt", "alc aslt"],
+			["alc antimony vinegar", "alc avgr"]
+		]
+	},
+	"alchemical_n_sym_antimony[,_salt]_sublimate", {
+		"unicode": ["1F72C", "1F72E"],
+		"recipe": [
+			["alc antimony sublimate", "alc ast"],
+			["alc antimony salt sublimate", "alc asst"]
+		],
+		"symbol": {
+			"tagAdditive": [
 				[
 					{ "script": "astrological", "letter": "asteroid" },
 					{ "beforeType": "archaic", "letter": "stibnite" },
 					{ "beforeType": "archaic", "beforeLetter": "mineral", "letter": "mineral_sal_ammoniac" }
-				]
+				], []
 			]
 		}
 	},
