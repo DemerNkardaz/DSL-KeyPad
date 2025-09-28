@@ -1,0 +1,22 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"liturgy": "Литургия"
+		},
+		"generated": {
+			"prefix": {
+				"liturgy": "Литургическ$(ая|ий|ое)"
+			},
+			"tag": {
+				"liturgy": "литургическ$(ая|ий|ое)"
+			}
+		},
+		"scripts": {
+			"liturgy": {
+				"n_sym_versicle": { "letter_locale": "Стих" },
+				"n_sym_response": { "letter_locale": "Ответ" }
+			}
+		}
+		
+	}
+}

@@ -332,6 +332,7 @@
 		"options": {
 			"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"], "useLetterLocale": true, "fastKey": ">+ ~?Secondary"
 		},
+		"symbol": { "tagAdditive": [[], [{ "tagScriptAtStart": true, "script": "pharmaceutical", "case": "neutral", "type": "symbol", "letter": "dram" }]] },
 		"recipe": ["/E/zh"]
 	},
 	"lat_[c,s]_let_z_ezh_reversed", {
@@ -2917,7 +2918,10 @@
 		"unicode": ["1E9E", "00DF"],
 		"options": { "useLetterLocale": true, "fastKey": "<+ ~?Secondary" },
 		"recipe": ["$", "${lat_s_let_s_long}${lat_[c,s]_let_s}", "${lat_s_let_s_long}${lat_[c,s]_let_z_ezh}"],
-		"symbol": { "letter": ["SS", "ss"] }
+		"symbol": {
+			"letter": ["SS", "ss"],
+			"tagAdditive": [[], [{ "tagScriptAtStart": true, "script": "pharmaceutical", "case": "neutral", "type": "symbol", "beforeType": "apothecary", "letter": "half" }]]
+		} 
 	},
 	"lat_[c,s]_lig_vy", {
 		"unicode": ["A760", "A761"]

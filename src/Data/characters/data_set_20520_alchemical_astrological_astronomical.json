@@ -301,7 +301,7 @@
 	"alchemical_n_sym_mineral_[cinnabar,marcasite,sal_ammoniac,auripigment]", {
 		"unicode": ["1F713", "1F738", "1F739", "1F73D"],
 		"recipe": [
-			["alc cinnabar", "alc cnb"],
+			["${lat_s_let_z_ezh×2}", "alc cinnabar", "alc cnb"],
 			["alc marcasite", "alc mrcs", "alc pyrite", "alc prt"],
 			["alc sal ammoniac", "alc sna"],
 			["alc auripigment", "alc arp"]
@@ -774,17 +774,18 @@
 			["ast dcnd"]
 		]
 	},
-	"astrological_n_sym_[conjuction,opposition,sextile,semisextile,quincunx,sesquiquadrate]", {
-		"unicode": ["260C", "260D", "26B9", "26BA", "26BB", "26BC"],
+	"astrological_n_sym_[conjuction,opposition,sextile,semisextile,quincunx,sesquiquadrate,retrograde]", {
+		"unicode": ["260C", "260D", "26B9", "26BA", "26BB", "26BC", "211E"],
 		"recipe": [
 			["ast cnj", "alc day", "alc dy"],
 			["ast opp"],
 			["ast sxt"],
 			["ast ssx"],
 			["ast qnx"],
-			["ast sqx"]
+			["ast sqx"],
+			["ast ret", "ph rcp"]
 		],
-		"symbol": { "tagAdditive": [ [{ "script": "alchemical", "letter": "day" }], [], [], [], [], [] ] }
+		"symbol": { "tagAdditive": [ [{ "script": "alchemical", "letter": "day" }], [], [], [], [], [], [{ "script": "pharmaceutical", "letter": "prescription" }] ] }
 	},
 	"astrological_n_sym_lot_of_fortune", {
 		"unicode": "1F774",

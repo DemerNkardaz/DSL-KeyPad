@@ -25,8 +25,13 @@
 		},
 		"scripts": {
 			"pharmaceutical": {
+				"n_sym_dram": { "letter_locale": "Dram" },
+				"n_sym_half": { "letter_locale": "Half" },
 				"n_sym_ounce": { "letter_locale": "Ounce" },
-				"n_sym_scruple": { "letter_locale": "Scruple" }
+				"n_sym_half_dram": { "letter_locale": "Half Dram" },
+				"n_sym_half_ounce": { "letter_locale": "Half Ounce" },
+				"n_sym_scruple": { "letter_locale": "Scruple" },
+				"n_sym_prescription": { "letter_locale": "Prescription" }
 			},
 			"alchemical": {
 				"n_sym_quintessence": { "letter_locale": "Quintessence" },
@@ -181,8 +186,8 @@
 				"n_sym_night": { "letter_locale": "Night" },
 				"n_sym_twenty_four": { "letter_locale": "Twenty-four hours (Day & Night)" },
 				"n_sym_month": { "letter_locale": "Month" },
-				"n_sym_half_dram": { "letter_locale": "Half Dram" },
-				"n_sym_half_ounce": { "letter_locale": "Half Ounce" },
+				"n_sym_half_dram": { "letter_locale": "{@:scripts.pharmaceutical.n_sym_half_dram.letter_locale}" },
+				"n_sym_half_ounce": { "letter_locale": "{@:scripts.pharmaceutical.n_sym_half_ounce.letter_locale}" },
 				"n_sym_scepter_of_jove": { "letter_locale": "Scepter of Jove" },
 				"n_sym_caduceus": { "letter_locale": "Caduceus" },
 				"n_sym_trident": { "letter_locale": "Trident" },
@@ -258,6 +263,7 @@
 				"n_sym_semisextile": { "letter_locale": "Semisextile" },
 				"n_sym_quincunx": { "letter_locale": "Quincunx" },
 				"n_sym_sesquiquadrate": { "letter_locale": "Sesquiquadrate" },
+				"n_sym_retrograde": { "letter_locale": "Retrograde motion" },
 				"n_sym_lot_of_fortune": { "letter_locale": "Lot of Fortune" },
 				"n_sym_occultation": { "letter_locale": "Occultation" },
 				"n_sym_lunar_eclipse": { "letter_locale": "Lunar Eclipse" }

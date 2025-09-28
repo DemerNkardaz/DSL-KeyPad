@@ -7,12 +7,12 @@ Class LocaleGenerator {
 		local useLetterLocale := entry["options"]["useLetterLocale"]
 		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "." entry["symbol"]["scriptAdditive"] : ""
 
-		local tagsScriptAtStart := False
+		local tagScriptAtStart := False
 
 		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic"]) {
 			if !useLetterLocale
 				useLetterLocale := True
-			tagsScriptAtStart := True
+			tagScriptAtStart := True
 		}
 
 		local referenceLocale := entry["options"].Has("referenceLocale") && entry["options"]["referenceLocale"] != "" ? entry["options"]["referenceLocale"] : False
@@ -209,7 +209,7 @@ Class LocaleGenerator {
 		)
 
 		tags["ru-RU"] := (
-			tagsScriptAtStart ?
+			tagScriptAtStart ?
 				(
 					Locale.Read(pfx "tag." lScript, "ru-RU", , , , lVariant)
 					(isGermanic ? " " Locale.Read(pfx "type." lType, "ru-RU") : "")
@@ -242,6 +242,7 @@ Class LocaleGenerator {
 						local curLetter := (tagAdd.Has("letter") ? tagAdd["letter"] : letter)
 						local curCopyNumber := (tagAdd.Has("copyNumber") ? tagAdd["copyNumber"] : copyNumber)
 						local curHasCopyNumber := curCopyNumber > 0
+						local curTagScriptAtStart := (tagAdd.Has("tagScriptAtStart") ? tagAdd["tagScriptAtStart"] : tagScriptAtStart)
 
 						local curScriptKey := ChrLib.GetDecomposition("script", curScript, "Key", &curScriptDecomposeKey) ? curScriptDecomposeKey : curScript
 						local curTypeKey := ChrLib.GetDecomposition("type", curType, "Key", &curTypeDecomposeKey) ? curTypeDecomposeKey : curType
@@ -324,7 +325,7 @@ Class LocaleGenerator {
 							local scriptTag := Locale.Read(pfx "tag." curScript, lang, , , , curLVariant)
 
 							tagsCollector[lang].Push(
-								((lang = "en-US" || lang = "ru-RU" && tagsScriptAtStart) ? scriptTag " " : "")
+								((lang = "en-US" || lang = "ru-RU" && curTagScriptAtStart) ? scriptTag " " : "")
 								lAdditionalBeforeType
 								localedCase Locale.Read(pfx "type." curType, lang) " "
 								lAdditionalAfterType
@@ -332,7 +333,7 @@ Class LocaleGenerator {
 								additionalPostLetter
 								lAdditionalAfterLetter
 								lAdditionalCopyNumber
-								((lang = "ru-RU" && !tagsScriptAtStart) ? " " scriptTag : "")
+								((lang = "ru-RU" && !curTagScriptAtStart) ? " " scriptTag : "")
 							)
 						}
 					}

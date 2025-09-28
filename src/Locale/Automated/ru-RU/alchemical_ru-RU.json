@@ -25,8 +25,13 @@
 		},
 		"scripts": {
 			"pharmaceutical": {
+				"n_sym_dram": { "letter_locale": "Драхма" },
+				"n_sym_half": { "letter_locale": "Половина" },
 				"n_sym_ounce": { "letter_locale": "Унция" },
-				"n_sym_scruple": { "letter_locale": "Скрупул" }
+				"n_sym_half_dram": { "letter_locale": "Half Dram" },
+				"n_sym_half_ounce": { "letter_locale": "Half Ounce" },
+				"n_sym_scruple": { "letter_locale": "Скрупул" },
+				"n_sym_prescription": { "letter_locale": "Рецепт" }
 			},
 			"alchemical": {
 				"n_sym_quintessence": { "letter_locale": "Квинтэссенция" },
@@ -181,8 +186,8 @@
 				"n_sym_night": { "letter_locale": "Ночь" },
 				"n_sym_twenty_four": { "letter_locale": "Сутки" },
 				"n_sym_month": { "letter_locale": "Месяц" },
-				"n_sym_half_dram": { "letter_locale": "Пол драхмы" },
-				"n_sym_half_ounce": { "letter_locale": "Пол унции" },
+				"n_sym_half_dram": { "letter_locale": "{@:scripts.pharmaceutical.n_sym_half_dram.letter_locale}" },
+				"n_sym_half_ounce": { "letter_locale": "{@:scripts.pharmaceutical.n_sym_half_ounce.letter_locale}" },
 				"n_sym_scepter_of_jove": { "letter_locale": "Скипетр Юпитера" },
 				"n_sym_caduceus": { "letter_locale": "Кадуцей" },
 				"n_sym_trident": { "letter_locale": "Трезубец" },
@@ -258,6 +263,7 @@
 				"n_sym_semisextile": { "letter_locale": "Полусекстиль" },
 				"n_sym_quincunx": { "letter_locale": "Квиконс" },
 				"n_sym_sesquiquadrate": { "letter_locale": "Сесквиквадрат" },
+				"n_sym_retrograde": { "letter_locale": "Ретроградное движение" },
 				"n_sym_lot_of_fortune": { "letter_locale": "Лот Фортуны" },
 				"n_sym_occultation": { "letter_locale": "Покрытие" },
 				"n_sym_lunar_eclipse": { "letter_locale": "Лунное затмение" }

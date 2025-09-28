@@ -15,7 +15,7 @@
   - Addded new IPA characters:
     - [ 𐞁 𐞂 ]
   - Addded new miscellaneous characters:
-    - [ ⸢ ⸣ ⸤ ⸥ ] [ ꜛ ꜜ ] [ ℥ ℈ ℀ ℁ ⅍ ℅ ℆ ℄ ]
+    - [ ⸢ ⸣ ⸤ ⸥ ] [ ꜛ ꜜ ] [ ℥ ℈ ℀ ℁ ⅍ ℅ ℆ ℄ ] [ ℣ ℟ ]
   - IPA characters now have dedicated tabs for binds and recipes.
   - Added “ModTools” class with useful methods and parameters for creating mods.
   - Added “Create mod” button in Mods GUI.
@@ -165,7 +165,7 @@
   - Добавлены новые символы МФА:
     - [ 𐞁 𐞂 ]
   - Добавлены новые прочие символы:
-    - [ ⸢ ⸣ ⸤ ⸥ ] [ ꜛ ꜜ ] [ ℥ ℈ ℀ ℁ ⅍ ℅ ℆ ℄ ]
+    - [ ⸢ ⸣ ⸤ ⸥ ] [ ꜛ ꜜ ] [ ℥ ℈ ℀ ℁ ⅍ ℅ ℆ ℄ ] [ ℣ ℟ ]
   - Теперь символы МФА имеют собственные вкладки со списками биндов и рецептов.
   - Добавлен класс «ModTools» с полезными методами и параметрами для создания модов.
   - Добавлена кнопка «Создать мод» в GUI модификаций.

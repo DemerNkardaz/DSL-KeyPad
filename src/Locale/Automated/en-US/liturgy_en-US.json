@@ -1,0 +1,22 @@
+{
+	"en-US": {
+		"script_labels": {
+			"liturgy": "Liturgy"
+		},
+		"generated": {
+			"prefix": {
+				"liturgy": "Liturgy"
+			},
+			"tag": {
+				"liturgy": "liturgy"
+			}
+		},
+		"scripts": {
+			"liturgy": {
+				"n_sym_versicle": { "letter_locale": "Versicle" },
+				"n_sym_response": { "letter_locale": "Response" }
+			}
+		}
+		
+	}
+}

@@ -1,0 +1,6 @@
+[
+	"liturgy_n_sym_[versicle,response]", {
+		"unicode": ["2123", "211F"],
+		"recipe": [["lt vr"], ["lt rp"]]
+	}
+]
