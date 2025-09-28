@@ -10,7 +10,6 @@ Class Fonts {
 
 
 	static __New() {
-		this.Validate()
 		for fontName, pairs in this.fontByCodePoint
 			for i, each in pairs
 				this.fontByCodePoint[fontName][i] := Number("0x" each)
@@ -149,3 +148,5 @@ Class Fonts {
 		return
 	}
 }
+
+Fonts.Validate()

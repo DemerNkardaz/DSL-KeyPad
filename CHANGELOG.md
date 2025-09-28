@@ -42,6 +42,7 @@
   - Fixed error with duplication of entries in the “Favorites” tab, also fixed error with removing entries from the “Favorites” tab when there are duplicates.
   - Fixed mistake with “Ħħ” recipe which used short solidus instead of short stroke.
   - Fixed wrong ordering on processing of multientries.
+  - Fixed critical error with launching on Windows 11 caused by Fonts.Validation().
 
 ---
 
@@ -191,6 +192,7 @@
   - Исправлена ошибка с дублированием записи во вкладке «Избранное» и ошибка, возникающая при попытке убрать запись из избранного при дублировании.
   - Исправлена ошибка с рецептом символа «Ħħ», который использовал косую черту вместо штриха.
   - Исправлена неправильная последовательность при обработке мультизаписей.
+  - Исправлена критичная ошибка при запуске на Windows 11, вызванная Fonts.Validation().
 
 ---
 
