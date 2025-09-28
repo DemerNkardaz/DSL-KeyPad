@@ -74,6 +74,7 @@ Class ChrLib {
 		"astrological",
 		"astronomical",
 		"occultic",
+		"geomantic",
 		"pharmaceutical",
 		"liturgy",
 		"chess",

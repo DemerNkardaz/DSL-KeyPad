@@ -5,6 +5,7 @@
 			"astrological": "Астрология",
 			"astronomical": "Астрономия",
 			"occultic": "Оккультизм",
+			"geomantic": "Геомантия",
 			"pharmaceutical": "Фармацевтика"
 		},
 		"generated": {
@@ -13,6 +14,7 @@
 				"astrological": "Астрологическ$(ая|ий|ое)",
 				"astronomical": "Астрономическ$(ая|ий|ое)",
 				"occultic": "Оккультн$(ая|ый|ое)",
+				"geomantic": "Геомантическ$(ая|ый|ое)",
 				"pharmaceutical": "Фармацевтическ$(ая|ий|ое)"
 			},
 			"tag": {
@@ -20,6 +22,7 @@
 				"astrological": "астрологическ$(ая|ий|ое)",
 				"astronomical": "астрономическ$(ая|ий|ое)",
 				"occultic": "оккультн$(ая|ый|ое)",
+				"geomantic": "геомантическ$(ая|ый|ое)",
 				"pharmaceutical": "фармацевтическ$(ая|ий|ое)"
 			}
 		},
@@ -321,9 +324,28 @@
 				"n_sym_asteroid_bellona": { "letter_locale": "(28) Беллона" },
 				"n_sym_asteroid_amphitrite": { "letter_locale": "(29) Амфитрита" },
 				"n_sym_asteroid_leukothea": { "letter_locale": "(35) Левкофея" },
+				"n_sym_typhon": { "letter_locale": "(42355) Тифон" },
 				"n_sym_planetoid": { "letter_locale": "Планетоид" },
 				"n_sym_asteroid": { "letter_locale": "Астероид" },
 				"n_sym_comet": { "letter_locale": "Комета" }
+			},
+			"geomantic": {
+				"n_fig_via": { "letter_locale": "Путь" },
+				"n_fig_cauda_draconis": { "letter_locale": "Хвост дракона" },
+				"n_fig_puer": { "letter_locale": "Мальчик" },
+				"n_fig_fortuna_minor": { "letter_locale": "Малое везение" },
+				"n_fig_puella": { "letter_locale": "Девочка" },
+				"n_fig_amissio": { "letter_locale": "Утрата" },
+				"n_fig_carcer": { "letter_locale": "Тюрьма" },
+				"n_fig_laetitia": { "letter_locale": "Радость" },
+				"n_fig_caput_draconis": { "letter_locale": "Голова дракона" },
+				"n_fig_conjuctio": { "letter_locale": "Единство" },
+				"n_fig_acquisitio": { "letter_locale": "Прибыль" },
+				"n_fig_rubeus": { "letter_locale": "Красный" },
+				"n_fig_fortuna_major": { "letter_locale": "Большое везение" },
+				"n_fig_albus": { "letter_locale": "Белый" },
+				"n_fig_tristitia": { "letter_locale": "Горе" },
+				"n_fig_populus": { "letter_locale": "Народ" }
 			},
 			"occultic": {
 				"n_sym_leviathan_cross": { "letter_locale": "Крест Левиафана" },

@@ -5,6 +5,7 @@
 			"astrological": "Astrology",
 			"astronomical": "Astronomy",
 			"occultic": "Occultism",
+			"geomantic": "Geomancy",
 			"pharmaceutical": "Pharmacy"
 		},
 		"generated": {
@@ -13,6 +14,7 @@
 				"astrological": "Astrological",
 				"astronomical": "Astronomical",
 				"occultic": "Occultic",
+				"geomantic": "Geomantic",
 				"pharmaceutical": "Pharmaceutical"
 			},
 			"tag": {
@@ -20,6 +22,7 @@
 				"astrological": "astrological",
 				"astronomical": "astronomical",
 				"occultic": "occultic",
+				"geomantic": "geomantic",
 				"pharmaceutical": "pharmaceutical"
 			}
 		},
@@ -321,10 +324,29 @@
 				"n_sym_asteroid_bellona": { "letter_locale": "(28) Bellona" },
 				"n_sym_asteroid_amphitrite": { "letter_locale": "(29) Amphitrite" },
 				"n_sym_asteroid_leukothea": { "letter_locale": "(35) Leukothea" },
+				"n_sym_typhon": { "letter_locale": "(42355) Typhon" },
 				"n_sym_asteroid_planetoid": { "letter_locale": "Planetoid" },
 				"n_sym_planetoid": { "letter_locale": "Planetoid" },
 				"n_sym_asteroid": { "letter_locale": "Asteroid" },
 				"n_sym_comet": { "letter_locale": "Comet" }
+			},
+			"geomantic": {
+				"n_fig_via": { "letter_locale": "Via" },
+				"n_fig_cauda_draconis": { "letter_locale": "Cauda draconis" },
+				"n_fig_puer": { "letter_locale": "Puer" },
+				"n_fig_fortuna_minor": { "letter_locale": "Fortuna minor" },
+				"n_fig_puella": { "letter_locale": "Puella" },
+				"n_fig_amissio": { "letter_locale": "Amissio" },
+				"n_fig_carcer": { "letter_locale": "Carcer" },
+				"n_fig_laetitia": { "letter_locale": "Laetitia" },
+				"n_fig_caput_draconis": { "letter_locale": "Caput draconis" },
+				"n_fig_conjuctio": { "letter_locale": "Conjuctio" },
+				"n_fig_acquisitio": { "letter_locale": "Acquisitio" },
+				"n_fig_rubeus": { "letter_locale": "Rubeus" },
+				"n_fig_fortuna_major": { "letter_locale": "Fortuna major" },
+				"n_fig_albus": { "letter_locale": "Albus" },
+				"n_fig_tristitia": { "letter_locale": "Tristitia" },
+				"n_fig_populus": { "letter_locale": "Populus" }
 			},
 			"occultic": {
 				"n_sym_leviathan_cross": { "letter_locale": "Leviathan cross" },

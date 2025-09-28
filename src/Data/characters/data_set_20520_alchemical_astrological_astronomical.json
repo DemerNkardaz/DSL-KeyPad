@@ -957,6 +957,12 @@
 		],
 		"symbol": { "beforeLetter": "asteroid" }
 	},
+	"astronomical_n_sym_typhon", {
+		"unicode": "1F300",
+		"sequence": ["1F300", "FE0E"],
+		"recipe": ["asn Tph"],
+		"symbol": { "beforeLetter": "transneptunian::2,object" }
+	},
 	"occultic_n_sym_pentagram[,_right_handed_interlaced,_left_handed_interlaced,inverted]", {
 		"unicode": ["26E4", "26E5", "26E6", "26E7"],
 		"recipe": [
@@ -965,5 +971,27 @@
 			["occ PntL"],
 			["occ PntI"]
 		]
+	},
+	"geomantic_n_fig_[via,cauda_draconis,puer,fortuna_minor,puella,amissio,carcer,laetitia,caput_draconis,conjuctio,acquisitio,rubeus,fortuna_major,albus,tristitia,populus]", {
+		"unicode": ["1CEEF","1CEEE","1CEED","1CEEC","1CEEB","1CEEA","1CEE9","1CEE8","1CEE7","1CEE6","1CEE5","1CEE4","1CEE3","1CEE2","1CEE1","1CEE0"],
+		"recipe": [
+			["geo via"],
+			["geo cdc"],
+			["geo puer"],
+			["geo fmi"],
+			["geo pll"],
+			["geo ams"],
+			["geo crc"],
+			["geo ltt"],
+			["geo cac"],
+			["geo cnj"],
+			["geo acq"],
+			["geo rbs"],
+			["geo fmj"],
+			["geo alb"],
+			["geo trt"],
+			["geo ps"]
+		],
+		"symbol": { "font": "Catrinity" }
 	}
 ]

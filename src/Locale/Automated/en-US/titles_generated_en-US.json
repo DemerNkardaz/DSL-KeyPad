@@ -93,6 +93,7 @@
 				"meteor": "meteor",
 				"star": "star",
 				"satellite": "satellite",
+				"object": "object",
 				"constellation": "constellation",
 				"element": "element",
 				"process": "process",

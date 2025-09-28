@@ -93,6 +93,7 @@
 				"meteor": "метеор",
 				"star": "звезда",
 				"satellite": "спутник",
+				"object": "объект",
 				"constellation": "созвездие",
 				"element": "$(элемент|стихия)",
 				"process": "процесс",
