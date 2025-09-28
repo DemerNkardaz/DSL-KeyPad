@@ -4,10 +4,11 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.6.3 α — ?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
+### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 
 - Additions:
 
+  - Library extended to 5,800+ Unicode characters.
   - Bundle of Alchemical, Astrological, Astronomical symbols was reworked and extended.
   - Added Chess, Card Suits and Playing Cards symbols.
   - Addded new latin characters:
@@ -154,10 +155,11 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [0.1.6.3 α — ?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
+### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 
 - Дополнения:
 
+  - Библиотека расширена до 5,800+ символов Unicode.
   - Набор Алхимических, Астрологических, Астрономических символов переработан и расширен.
   - Добавлены символы шахмат, карточных мастей и игральных карт.
   - Добавлены новые символы латиницы:
