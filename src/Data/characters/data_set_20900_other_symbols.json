@@ -1,4 +1,26 @@
 [
+	"[account_of,adressed_to_subject,aktieselskab,care_of,cada_una,centreline,property_line]", {
+		"unicode": ["2100", "2101", "214D", "2105", "2106", "2104", "214A"],
+		"tags": [
+			["account of", "в счёт"],
+			["adressed to subject", "обращено к теме"],
+			["aktieselskab", "акционерное общество"],
+			["care of", "в адрес"],
+			["cada una", "each one", "каждый"],
+			["centreline", "центральная линия"],
+			["property line", "линия собственности"]
+		],
+		"groups": ["Other Symbols"],
+		"recipe": [
+			["a/c"],
+			["a/s"],
+			["A/S"],
+			["c/a"],
+			["c/u"],
+			["cL"],
+			["PL"]
+		]
+	},
 	"symbol_for_samaritan_source", {
 		"unicode": "214F",
 		"tags": ["symbol for Samaritan source", "символ для Самаритянского источника"],

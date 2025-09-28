@@ -1,5 +1,12 @@
 {
 	"ru-RU": {
+		"account_of": "В счёт …",
+		"adressed_to_subject": "Обращено к теме",
+		"aktieselskab": "Акционерное общество",
+		"care_of": "В адрес …",
+		"cada_una": "Каждый",
+		"centreline": "Центральная линия",
+		"property_line": "Линия собственности",
 		"symbol_for_samaritan_source": "Символ для Самаритянского источника"
 	}
 }

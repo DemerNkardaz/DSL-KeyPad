@@ -179,7 +179,7 @@
 	"alchemical_n_sym_[alum,nitre]", {
 		"unicode": ["1F745", "1F715"],
 		"recipe": [
-			["alc alum", "alc am"],
+			["alc alum"],
 			["alc nitre", "alc ntr"]
 		],
 		"symbol": {
@@ -220,6 +220,11 @@
 	"alchemical_n_sym_oil", {
 		"unicode": "1F746",
 		"recipe": ["alc oil"]
+	},
+	"alchemical_n_sym_amber", {
+		"unicode": "26AD",
+		"tags": ["<en-US>symbol for marriage", "<ru-RU>символ брака"],
+		"recipe": ["alc amb"]
 	},
 	"alchemical_n_sym_[tincture,gum,wax,powder,calx]", {
 		"unicode": ["1F748", "1F749", "1F74A", "1F74B", "1F74C"],
@@ -371,15 +376,27 @@
 			"tagAdditive": [{ "letter": "iron_bearing_mineral" }]
 		}
 	},
-	"alchemical_n_sym_iron_[crocus,crocus_archaic,regulus]", {
-		"unicode": ["26A8", "1F71E", "1F71F"],
-		"recipe": [["alc iron croc", "alc icr"], ["alc arc iron croc", "alc aicr"], ["alc iron regu", "alc irg"]],
-		"options": { "useLetterLocale": ["crocus$", "crocus$", "regulus$"] },
+	"alchemical_n_sym_iron_crocus_[1,2,3]", {
+		"unicode": ["26A8", "1F71E", "26A9"],
+		"recipe": [
+			["alc iron croc-1", "alc icr1"],
+			["alc iron croc-2", "alc icr2"],
+			["alc iron croc-3", "alc icr3"]
+		],
+		"options": { "useLetterLocale": "crocus$" },
 		"symbol": {
-			"beforeType": ["", "archaic", ""],
+			"copyNumber": [1, 2, 3],
 			"tagAdditive": [
 				[{ "letter": "crocus_martis" }],
-				[],
+				[], []
+			]
+		}
+	},
+	"alchemical_n_sym_iron_[regulus]", {
+		"unicode": ["1F71F"],
+		"recipe": [["alc iron regu", "alc irg"]],
+		"symbol": {
+			"tagAdditive": [
 				[{ "letter": "regulus_martis" }]
 			]
 		}
@@ -700,8 +717,8 @@
 			"beforeLetter": "planet"
 		}
 	},
-	"astrological_n_sym_asteroid_[vesta,chiron,astraea,hygiea,pholus,nessus,pallas,juno]", {
-		"unicode": ["26B6", "26B7", "2BD9", "2BDA", "2BDB", "2BDC", "26B4", "26B5"],
+	"astrological_n_sym_asteroid_[vesta,chiron,astraea,hygiea,pholus,nessus,pallas,juno,sappho]", {
+		"unicode": ["26B6", "26B7", "2BD9", "2BDA", "2BDB", "2BDC", "26B4", "26B5", "26A2"],
 		"recipe": [
 			["ast Vesta", "ast Vst"],
 			["ast Chiron", "ast Chr"],
@@ -710,13 +727,14 @@
 			["ast Pholus", "ast Phl"],
 			["ast Nessus", "ast Nes"],
 			["ast Pallas", "ast Pls"],
-			["ast Juno"]
+			["ast Juno"],
+			["ast Sappho", "ast Sph"]
 		],
 		"symbol": {
 			"beforeLetter": "asteroid",
 			"tagAdditive": [
 				[{ "script": "astronomical", "letter": "asteroid_vesta", "beforeLetter": "asteroid" }],
-				[], [], [], [], [], [], []
+				[], [], [], [], [], [], [], []
 			]
 		}
 	},

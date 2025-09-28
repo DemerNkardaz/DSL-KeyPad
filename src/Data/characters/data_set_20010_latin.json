@@ -2900,7 +2900,6 @@
 	"lat_[c,s]_lig_ou", {
 		"unicode": ["0222", "0223"]
 	},
-	"lat_[s]_lig_pl", { "unicode": ["214A"] },
 	"lat_[s]_lig_qp", { "unicode": ["0239"] },
 	"lat_[s]_lig_st_long", {
 		"unicode": ["FB05"],
