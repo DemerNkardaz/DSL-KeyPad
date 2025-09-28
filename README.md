@@ -19,8 +19,18 @@ $$
 \small \text{Ænglisċ sprǣċ | Français | Română | Tiếng Việt … } \\
 \small \text{Ελληνική γλώσσα | 𐐔𐐯𐑅𐐨𐑉𐐯𐐻 𐐈𐑊𐑁𐐰𐐺𐐯𐐻 | ᚹᛟᛞᛁᚾᛊ᛫ᚱᚢᚾᛟ … } \\
 \small \text{Словѣньскъ ѩꙁыкъ | Қазақ тілі | Рꙋмѫнѣскъ | Аԥсуа бызшәа … }
+\\
+\\
+\\
+\\
+\\
+\normalsize \mathbf{et \ various \ symbols \ too } \\
 \end{array}
 $$
+
+<p align="center">
+🜁🜃🜂🜄🝞🝟🜲🜅🜆🜊🜍🝁🝆🝗🝘🜬🝩⚶⚴☊♉︎☄︎⚲⛤☤⚚☥♕♔♥♣⅍℆⌬⮃⬱⇶‽⁗⅝≋∰∜ …
+</p>
 
 ---
 
