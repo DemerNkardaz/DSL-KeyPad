@@ -266,7 +266,13 @@
 				"n_sym_retrograde": { "letter_locale": "Retrograde motion" },
 				"n_sym_lot_of_fortune": { "letter_locale": "Lot of Fortune" },
 				"n_sym_occultation": { "letter_locale": "Occultation" },
-				"n_sym_lunar_eclipse": { "letter_locale": "Lunar Eclipse" }
+				"n_sym_lunar_eclipse": { "letter_locale": "Lunar Eclipse" },
+				"n_sym_russian_vigintile": { "letter_locale": "Vigintile" },
+				"n_sym_russian_novile": { "letter_locale": "Novile" },
+				"n_sym_russian_quintile": { "letter_locale": "Quintile" },
+				"n_sym_russian_binovile": { "letter_locale": "Binovile" },
+				"n_sym_russian_centile": { "letter_locale": "Centile" },
+				"n_sym_russian_tredecile": { "letter_locale": "Tredecile" }
 			},
 			"astronomical": {
 				"n_sym_star_sun": { "letter_locale": "Sun" },
@@ -300,11 +306,33 @@
 				"n_sym_asteroid_sappho": { "letter_locale": "(80) Sappho" },
 				"n_sym_asteroid_harmonia": { "letter_locale": "(40) Harmonia" },
 				"n_sym_asteroid_parthenope": { "letter_locale": "(11) Parthenope" },
+				"n_sym_asteroid_hebe": { "letter_locale": "(6) Hebe" },
+				"n_sym_asteroid_iris": { "letter_locale": "(7) Iris" },
+				"n_sym_asteroid_flora": { "letter_locale": "(8) Flora" },
+				"n_sym_asteroid_metis": { "letter_locale": "(9) Metis" },
+				"n_sym_asteroid_victoria": { "letter_locale": "(12) Victoria" },
+				"n_sym_asteroid_egeria": { "letter_locale": "(13) Egeria" },
+				"n_sym_asteroid_irene": { "letter_locale": "(14) Irene" },
+				"n_sym_asteroid_eunomia": { "letter_locale": "(15) Eunomia" },
+				"n_sym_asteroid_psyche": { "letter_locale": "(16) Psyche" },
+				"n_sym_asteroid_thetis": { "letter_locale": "(17) Thetis" },
+				"n_sym_asteroid_melpomene": { "letter_locale": "(18) Melpomene" },
+				"n_sym_asteroid_fortuna": { "letter_locale": "(19) Fortuna" },
+				"n_sym_asteroid_bellona": { "letter_locale": "(28) Bellona" },
+				"n_sym_asteroid_amphitrite": { "letter_locale": "(29) Amphitrite" },
+				"n_sym_asteroid_leukothea": { "letter_locale": "(35) Leukothea" },
+				"n_sym_asteroid_planetoid": { "letter_locale": "Planetoid" },
 				"n_sym_planetoid": { "letter_locale": "Planetoid" },
-				"n_sym_asteroid": { "letter_locale": "Asteroid" }
+				"n_sym_asteroid": { "letter_locale": "Asteroid" },
+				"n_sym_comet": { "letter_locale": "Comet" }
 			},
 			"occultic": {
-				"n_sym_leviathan_cross": { "letter_locale": "Leviathan cross" }
+				"n_sym_leviathan_cross": { "letter_locale": "Leviathan cross" },
+				"n_sym_pentagram": { "letter_locale": "Pentagram" },
+				"n_sym_pentagram_right_handed_interlaced": { "letter_locale": "Right-handed interlaced pentagram" },
+				"n_sym_pentagram_left_handed_interlaced": { "letter_locale": "Left-handed interlaced pentagram" },
+				"n_sym_pentagraminverted": { "letter_locale": "Inverted pentagram" }
+
 			}
 		},
 		"symbolistics_chi_rho": "Chi Rho",

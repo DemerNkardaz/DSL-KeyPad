@@ -332,7 +332,7 @@
 	"alchemical_n_sym_lodestone", {
 		"unicode": "1F753",
 		"recipe": ["alc lodestone", "alc lds"],
-		"symbol": { "tagAdditive": [{ "letter": "magner" }] }
+		"symbol": { "tagAdditive": [{ "letter": "magnes" }] }
 	},
 	"alchemical_n_sym_rock_salt_[1,2]", {
 		"unicode": ["1F718", "1F719"],
@@ -787,6 +787,18 @@
 		],
 		"symbol": { "tagAdditive": [ [{ "script": "alchemical", "letter": "day" }], [], [], [], [], [], [{ "script": "pharmaceutical", "letter": "prescription" }] ] }
 	},
+	"astrological_n_sym_russian_[vigintile,novile,quintile,binovile,centile,tredecile]", {
+		"unicode": ["2BF3", "2BF4", "2BF5", "2BF6", "2BF7", "2BF8"],
+		"recipe": [
+			["ast vig"],
+			["ast nov"],
+			["ast qnt"],
+			["ast bin"],
+			["ast cnt"],
+			["ast tre"]
+		],
+		"symbol": { "beforeType": "russian" }
+	},
 	"astrological_n_sym_lot_of_fortune", {
 		"unicode": "1F774",
 		"recipe": ["alc lot fort", "alc lof"],
@@ -887,6 +899,11 @@
 		},
 		"symbol": { "beforeType": "zodiacal", "beforeLetter": "emoji" }
 	},
+	"astronomical_n_sym_[comet]", {
+		"unicode": ["2604"],
+		"sequence": [["2604", "FE0E"]],
+		"recipe": [["asn Comet", "asn Cmt"]]
+	},
 	"astronomical_n_sym_planet_[earth,uranus,neptune]", {
 		"unicode": ["2641", "26E2", "2BC9"],
 		"recipe": [
@@ -906,5 +923,47 @@
 				[]
 			]
 		}
+	},
+	"astronomical_n_sym_planet_[venus]_classical", {
+		"unicode": ["26B2"],
+		"recipe": [["asn cl Venus", "asn cVns"]],
+		"options": { "useLetterLocale": ["venus$"] },
+		"symbol": {
+			"customs": "[cdcb572]",
+			"beforeType": "classical",
+			"beforeLetter": "planet"
+		}
+	},
+	"astronomical_n_sym_asteroid_[hebe,iris,flora,metis,parthenope,victoria,egeria,irene,eunomia,psyche,thetis,melpomene,fortuna,proserpina,bellona,amphitrite,leukothea]", {
+		"unicode": ["1CEC0", "1CEC1", "1CEC2", "1CEC3", "1CEC4", "1CEC5", "1CEC6", "1CEC7", "1CEC8", "1CEC9", "1CECA", "1CECB", "1CECC", "1CECD", "1CECE", "1CECF", "1CED0"],
+		"recipe": [
+			["asn Hebe", "asn Hb"],
+			["asn Iris", "asn Is"],
+			["asn Flora", "asn Fr"],
+			["asn Metis", "asn Ms"],
+			["asn Parthenope", "asn Pth"],
+			["asn Victoria", "asn Vct"],
+			["asn Egeria", "asn Egr"],
+			["asn Irene", "asn Irn"],
+			["asn Eunomia", "asn Enm"],
+			["asn Psyche", "asn Psh"],
+			["asn Thetis", "asn Ths"],
+			["asn Melpomene", "asn Mlp"],
+			["asn Fortuna", "asn Ftn"],
+			["asn Proserpina", "asn Prs"],
+			["asn Bellona", "asn Bln"],
+			["asn Amphitrite", "asn Amp"],
+			["asn Leukothea", "asn Lkt"]
+		],
+		"symbol": { "beforeLetter": "asteroid" }
+	},
+	"occultic_n_sym_pentagram[,_right_handed_interlaced,_left_handed_interlaced,inverted]", {
+		"unicode": ["26E4", "26E5", "26E6", "26E7"],
+		"recipe": [
+			["occ Pntg"],
+			["occ PntR"],
+			["occ PntL"],
+			["occ PntI"]
+		]
 	}
 ]

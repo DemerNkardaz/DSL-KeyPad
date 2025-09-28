@@ -4,7 +4,7 @@
 		"symbol": { "category": "Diacritic Mark" }
 	},
 	"kendema", { "proxy": "grave_double",
-		"groups": [], "options": { "noCalc": true, "hidden": true }
+		"groups": [], "options": { "noCalc": true, "hidden": true }, "recipe": []
 	},
 	"descender", { "proxy": "arrow_down",
 		"groups": [], "options": { "noCalc": true, "hidden": true }

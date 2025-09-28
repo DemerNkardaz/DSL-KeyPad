@@ -13,7 +13,8 @@
 		"groups": ["FK Diacritics Primary"],
 		"alterations": { "uncombined": "02DD", "modifier": "02F6" },
 		"options": { "fastKey": "<+ A Ф" },
-		"symbol": { "category": "Diacritic Mark" }
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": ["${acute×2}"]
 	},
 	"acute_below", {
 		"unicode": "0317",
@@ -72,6 +73,14 @@
 		"groups": ["FK Diacritics Primary", "IPA"],
 		"options": { "fastKey": ">+ B И", "altLayoutKey": "c*<^<! B" },
 		"symbol": { "category": "Diacritic Mark" }
+	},
+	"breve_double", {
+		"unicode": "035D",
+		"tags": ["dobule breve", "двойная кратка", "двойное бреве"],
+		"groups": ["TK Diacritics Primary"],
+		"options": { "fastKey": "B И" },
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": ["${breve×2}"]
 	},
 	"breve_below_double", {
 		"unicode": "035C",
@@ -250,7 +259,8 @@
 		"tags": ["double grave", "двойной гравис"],
 		"groups": ["FK Diacritics Primary"],
 		"options": { "fastKey": "<+ G П" },
-		"symbol": { "category": "Diacritic Mark" }
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": ["${grave×2}"]
 	},
 	"grave_below", {
 		"unicode": "0316",
@@ -316,6 +326,14 @@
 		"options": { "fastKey": "<+ M Ь" },
 		"symbol": { "category": "Diacritic Mark" }
 	},
+	"macron_double[,_below]", {
+		"unicode": ["035E", "035F"],
+		"tags": [["dobule macron", "двойной макрон"], ["dobule macron below", "двойной макрон снизу"]],
+		"groups": ["TK Diacritics Primary"],
+		"options": { "fastKey": ["M Ь", "<+ M Ь"] },
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": [["${macron×2}"], ["${macron_below×2}"]]
+	},
 	"ogonek", {
 		"unicode": "0328",
 		"alterations": {
@@ -345,7 +363,8 @@
 		"tags": ["overline", "черта сверху"],
 		"groups": ["SK Diacritics Primary"],
 		"options": { "fastKey": "<+ O Щ" },
-		"symbol": { "category": "Diacritic Mark" }
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": ["${overline×2}"]
 	},
 	"low_line", {
 		"unicode": "0332",
@@ -359,7 +378,8 @@
 		"tags": ["double low line", "двойная черта снизу"],
 		"groups": ["SK Diacritics Primary"],
 		"options": { "fastKey": "<+>+ O Щ" },
-		"symbol": { "category": "Diacritic Mark" }
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": ["${low_line×2}"]
 	},
 	"ring_above", {
 		"unicode": "030A",
@@ -386,7 +406,8 @@
 		"tags": ["double ring below", "двойное кольцо снизу"],
 		"groups": ["SK Diacritics Primary"],
 		"options": { "fastKey": "R К" },
-		"symbol": { "category": "Diacritic Mark" }
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": ["${ring_below×2}"]
 	},
 	"line_vertical", {
 		"unicode": "030D",
@@ -401,7 +422,8 @@
 		"tags": ["double vertical line", "двойная вертикальная черта"],
 		"groups": ["FK Diacritics Primary", "IPA"],
 		"options": { "fastKey": "<+ V М", "altLayoutKey": "<^<!<+ V" },
-		"symbol": { "category": "Diacritic Mark" }
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": ["${line_vertical×2}"]
 	},
 	"line_vertical_below", {
 		"unicode": "0329",
@@ -416,7 +438,8 @@
 		"tags": ["double vertical line below", "двойная вертикальная черта снизу"],
 		"groups": ["SK Diacritics Primary", "IPA"],
 		"options": { "fastKey": "<+ V М", "altLayoutKey": "c*<^<!<+ V" },
-		"symbol": { "category": "Diacritic Mark" }
+		"symbol": { "category": "Diacritic Mark" },
+		"recipe": ["${line_vertical_below×2}"]
 	},
 	"seagull_below", {
 		"unicode": "033C",

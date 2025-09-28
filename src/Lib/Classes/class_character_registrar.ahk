@@ -896,8 +896,6 @@ Class ChrReg {
 						entry["recipeAlt"][i] := RegExReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
 					}
 				}
-
-				diacriticChr := unset
 			}
 
 			for i, aR in entry["recipeAlt"] {

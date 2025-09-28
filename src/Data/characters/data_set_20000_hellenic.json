@@ -719,7 +719,7 @@
 			"sansSerifBold": "1D78B",
 			"sansSerifItalicBold": "1D7C2"
 		}],
-		"options": { "referenceLocale": ":hel_[c,s]_let_t_theta*?", "altLayoutKey": ">+ \\U\\" }
+		"options": { "referenceLocale": ":hel_[c,s]_let_t_theta", "altLayoutKey": ">+ \\U\\" }
 	},
 	"hel_[s]_sym_f_phi", {
 		"unicode": ["03D5"],
@@ -767,7 +767,7 @@
 	},
 	"hel_[c,s]_sym_s_sigma_lunate", {
 		"unicode": ["03F9", "03F2"],
-		"options": { "referenceLocale": ":hel_[c,s]_let_s_sigma*?", "altLayoutKey": ">+ $" },
+		"options": { "referenceLocale": ":hel_[c,s]_let_s_sigma", "altLayoutKey": ">+ $" },
 		"symbol": { "beforeLetter": "lunate" }
 	},
 	"hel_[s]_sym_e_epsilon_lunate", {

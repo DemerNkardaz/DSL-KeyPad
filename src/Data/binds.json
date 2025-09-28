@@ -3613,8 +3613,15 @@
 	"Tertiary Keys": {
 		"Flat": {},
 		"Moded": {
+			"B": {
+				"<^<!": "breve_double"
+			},
 			"C": {
 				"<^<!": "candrabindu"
+			},
+			"M": {
+				"<^<!": "macron_double",
+				"<^<!<+": "macron_double_below"
 			}
 		}
 	}

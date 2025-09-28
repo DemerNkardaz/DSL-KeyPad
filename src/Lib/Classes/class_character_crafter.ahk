@@ -94,8 +94,9 @@ Class ChrCrafter {
 		composeObject.ParentHook.Start()
 
 		ComposeSuggestedTooltip() {
-			local recipesToBeSuggested := this.ValidateRecipes(inputWithoutBackticks, &alt, True, , , , showAltRecipes)
-			composeObject.tooltipSuggestions := composeObject.input != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
+			local currentInputWithoutBackticks := RegExReplace(composeObject.input, "``", "")
+			local recipesToBeSuggested := this.ValidateRecipes(currentInputWithoutBackticks, &alt, True, , , , showAltRecipes)
+			composeObject.tooltipSuggestions := currentInputWithoutBackticks != "" && showSuggestions ? this.FormatSuggestions(&recipesToBeSuggested) : ""
 
 			Util.CaretTooltip(
 				(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
@@ -598,8 +599,8 @@ Class ChrCrafter {
 		local recipe := ChrRecipeHandler.GetStr(entryName, True, " | ", prompt, showAltRecipes, isUniqueRecipe)
 		local entry := ChrLib.GetEntry(entryName)
 		local uniSequence := ""
-		if StrLen(entry["symbol"]["alt"]) {
-			uniSequence := entry["symbol"]["alt"]
+		if StrLen(entry["symbol"]["alt"]) > 0 {
+			uniSequence .= entry["symbol"]["alt"]
 		} else {
 			local chrGetArgs := [entryName, True, "Unicode"]
 
@@ -608,6 +609,9 @@ Class ChrCrafter {
 				if alt = "combining" && entry["alterations"].Has("combining")
 					uniSequence .= DottedCircle
 			}
+
+			if entry["symbol"]["category"] = "Diacritic Mark" && !InStr(uniSequence, DottedCircle)
+				uniSequence .= DottedCircle
 
 			uniSequence .= Util.StrFormattedReduce(ChrLib.Get(chrGetArgs*), , True)
 		}

@@ -935,6 +935,14 @@ Class UIMainPanel {
 			local outputArray := []
 			local intermediateMap := Map()
 
+			local useCategoryInsteadGroup := False
+			local currentGroup := attributes["group"]
+
+			if RegExMatch(attributes["group"], "^<(.*?)>(.*?)$", &match) {
+				useCategoryInsteadGroup := match[1] = "cat"
+				currentGroup := match[2]
+			}
+
 			if attributes.Has("groupKey")
 				if (attributes["groupKey"] is String && StrLen(attributes["groupKey"]) > 0
 					|| attributes["groupKey"] is Func) {
@@ -943,8 +951,8 @@ Class UIMainPanel {
 					outputArray.Push(groupRow)
 				}
 
-			for groupKey, entryNamesArray in ChrLib.entryGroups {
-				if !([groupKey].HasRegEx(attributes["group"])) || entryNamesArray.Length = 0 {
+			for groupKey, entryNamesArray in (useCategoryInsteadGroup ? ChrLib.entryCategories : ChrLib.entryGroups) {
+				if !([groupKey].HasRegEx(currentGroup)) || entryNamesArray.Length = 0 {
 					continue
 				} else {
 					for entryName in entryNamesArray {
@@ -954,7 +962,7 @@ Class UIMainPanel {
 						try {
 							if (entry["options"]["hidden"]) ||
 								(attributes.Has("blacklist") && attributes["blacklist"].HasRegEx(entryName)) ||
-								(!entry["groups"].HasRegEx(attributes["group"])) ||
+								((useCategoryInsteadGroup && entry["symbol"]["category"] != currentGroup) || (!useCategoryInsteadGroup && !entry["groups"].HasRegEx(currentGroup))) ||
 								(attributes["type"] = "Recipe" && (entry["recipe"].Length = 0)) ||
 								(attributes["type"] = "Fast Key" && (StrLen(entry["options"]["fastKey"]) < 2)) ||
 								(attributes["type"] = "Fast Key Special" && (StrLen(entry["options"]["specialKey"]) < 2)) ||
@@ -994,25 +1002,25 @@ Class UIMainPanel {
 
 						local entryRow := defaultRow.Clone()
 
-						entryRow[2] := attributes["group"] = "Favorites"
+						entryRow[2] := currentGroup = "Favorites"
 							? bindings["Recipe"]
-						: ((attributes.Has("label") && attributes["label"] != "All" || !attributes.Has("label")) ? characterBinding : "")
+							: ((attributes.Has("label") && attributes["label"] != "All" || !attributes.Has("label")) ? characterBinding : "")
 
-						entryRow[3] := attributes["group"] = "Favorites"
+						entryRow[3] := currentGroup = "Favorites"
 							? (bindings["Fast Key"] != "" ? reserveCombinationKey bindings["Fast Key"]
 								: bindings["Alternative Layout"] != "" ? reserveCombinationKey bindings["Alternative Layout"]
 								: "")
-						: entry["symbol"]["alt"] != "" ? entry["symbol"]["alt"] : (entry["symbol"]["category"] = "Spaces" ? "[" characterSymbol "]" : characterSymbol)
+							: entry["symbol"]["alt"] != "" ? entry["symbol"]["alt"] : (entry["symbol"]["category"] = "Spaces" ? "[" characterSymbol "]" : characterSymbol)
 						entryRow[3] := this.HandleKey(entryRow[3])
 
-						entryRow[4] := attributes["group"] = "Favorites"
+						entryRow[4] := currentGroup = "Favorites"
 							? characterSymbol
-						: Util.ExtractHex(entry["unicode"])
+							: Util.ExtractHex(entry["unicode"])
 
 						entryRow[5] := entryName
-						entryRow[6] := attributes["group"] = "Favorites"
+						entryRow[6] := currentGroup = "Favorites"
 							? ""
-						: (attributes.Has("combinationKey") ? attributes["combinationKey"] : attributes.Has("groupKey") ? attributes["groupKey"] : "")
+							: (attributes.Has("combinationKey") ? attributes["combinationKey"] : attributes.Has("groupKey") ? attributes["groupKey"] : "")
 						entryRow[6] := this.HandleKey(entryRow[6])
 
 						for each in columnsData.supportedLanguages {

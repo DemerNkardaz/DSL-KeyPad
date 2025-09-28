@@ -6,9 +6,12 @@ Class ChrBlock {
 		"vi", "vietnamese",
 	]
 
-	GetBlock(input := "0000", isFor := "Unicode", &outputVar := { block: "Unknown", name: "Unknown" }) {
+	GetBlock(input := "0000", isFor := "Unicode", &outputVar := {}) {
+		outputVar := { block: "Unknown", name: "Unknown" }
+
 		if input = ""
-			return
+			return outputVar
+
 		if isFor = "Unicode" {
 			for block, name in characters.blocksData["Unicode"] {
 				split := StrSplit(block, "...")
@@ -22,6 +25,8 @@ Class ChrBlock {
 				}
 			}
 		} else if isFor = "Altcode" {
+			outputVar := { pageRange: "Unknown", name: "Unknown" }
+
 			for pageRange, name in characters.blocksData["Code Pages"] {
 				split := StrSplit(pageRange, "...")
 				startPageNum := Number(split[1])

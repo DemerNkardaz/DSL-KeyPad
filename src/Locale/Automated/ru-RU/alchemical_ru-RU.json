@@ -28,8 +28,8 @@
 				"n_sym_dram": { "letter_locale": "Драхма" },
 				"n_sym_half": { "letter_locale": "Половина" },
 				"n_sym_ounce": { "letter_locale": "Унция" },
-				"n_sym_half_dram": { "letter_locale": "Half Dram" },
-				"n_sym_half_ounce": { "letter_locale": "Half Ounce" },
+				"n_sym_half_dram": { "letter_locale": "Пол драхмы" },
+				"n_sym_half_ounce": { "letter_locale": "Пол унции" },
 				"n_sym_scruple": { "letter_locale": "Скрупул" },
 				"n_sym_prescription": { "letter_locale": "Рецепт" }
 			},
@@ -266,7 +266,13 @@
 				"n_sym_retrograde": { "letter_locale": "Ретроградное движение" },
 				"n_sym_lot_of_fortune": { "letter_locale": "Лот Фортуны" },
 				"n_sym_occultation": { "letter_locale": "Покрытие" },
-				"n_sym_lunar_eclipse": { "letter_locale": "Лунное затмение" }
+				"n_sym_lunar_eclipse": { "letter_locale": "Лунное затмение" },
+				"n_sym_russian_vigintile": { "letter_locale": "Вигинтиль" },
+				"n_sym_russian_novile": { "letter_locale": "Новиль" },
+				"n_sym_russian_quintile": { "letter_locale": "Квинтиль" },
+				"n_sym_russian_binovile": { "letter_locale": "Биновиль" },
+				"n_sym_russian_centile": { "letter_locale": "Центиль" },
+				"n_sym_russian_tredecile": { "letter_locale": "Тридециль" }
 			},
 			"astronomical": {
 				"n_sym_star_sun": { "letter_locale": "Солнце" },
@@ -300,11 +306,31 @@
 				"n_sym_asteroid_sappho": { "letter_locale": "(80) Сапфо" },
 				"n_sym_asteroid_harmonia": { "letter_locale": "(40) Гармония" },
 				"n_sym_asteroid_parthenope": { "letter_locale": "(11) Парфенопа" },
+				"n_sym_asteroid_hebe": { "letter_locale": "(6) Геба" },
+				"n_sym_asteroid_iris": { "letter_locale": "(7) Ирида" },
+				"n_sym_asteroid_flora": { "letter_locale": "(8) Флора" },
+				"n_sym_asteroid_metis": { "letter_locale": "(9) Метида" },
+				"n_sym_asteroid_victoria": { "letter_locale": "(12) Виктория" },
+				"n_sym_asteroid_egeria": { "letter_locale": "(13) Эгерия" },
+				"n_sym_asteroid_irene": { "letter_locale": "(14) Ирена" },
+				"n_sym_asteroid_eunomia": { "letter_locale": "(15) Эвномия" },
+				"n_sym_asteroid_psyche": { "letter_locale": "(16) Психея" },
+				"n_sym_asteroid_thetis": { "letter_locale": "(17) Тетис" },
+				"n_sym_asteroid_melpomene": { "letter_locale": "(18) Мельпомена" },
+				"n_sym_asteroid_fortuna": { "letter_locale": "(19) Фортуна" },
+				"n_sym_asteroid_bellona": { "letter_locale": "(28) Беллона" },
+				"n_sym_asteroid_amphitrite": { "letter_locale": "(29) Амфитрита" },
+				"n_sym_asteroid_leukothea": { "letter_locale": "(35) Левкофея" },
 				"n_sym_planetoid": { "letter_locale": "Планетоид" },
-				"n_sym_asteroid": { "letter_locale": "Астероид" }
+				"n_sym_asteroid": { "letter_locale": "Астероид" },
+				"n_sym_comet": { "letter_locale": "Комета" }
 			},
 			"occultic": {
-				"n_sym_leviathan_cross": { "letter_locale": "Крест Левиафана" }
+				"n_sym_leviathan_cross": { "letter_locale": "Крест Левиафана" },
+				"n_sym_pentagram": { "letter_locale": "Пентаграма" },
+				"n_sym_pentagram_right_handed_interlaced": { "letter_locale": "Правостороння переплетённая пентаграма" },
+				"n_sym_pentagram_left_handed_interlaced": { "letter_locale": "Левостороння переплетённая пентаграма" },
+				"n_sym_pentagraminverted": { "letter_locale": "Перевёрнутая пентаграма" }
 			}
 		},
 		"symbolistics_chi_rho": "Хризма",

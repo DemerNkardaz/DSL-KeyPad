@@ -96,7 +96,9 @@
 				"constellation": "constellation",
 				"element": "element",
 				"process": "process",
-				"emoji": "emoji"
+				"emoji": "emoji",
+				"classical": "classical",
+				"russian": "russian"
 			},
 			"after_letter": {
 				"late": "(late form)",
@@ -166,6 +168,7 @@
 				"retroflex_hook": "retroflex hook",
 				"macron": "macron",
 				"macron_below": "macron below",
+				"macron_double": "double macron",
 				"notch": "notch",
 				"ogonek": "ogonek",
 				"ogonek_above": "ogonek above",
