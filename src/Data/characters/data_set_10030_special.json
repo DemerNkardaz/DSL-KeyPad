@@ -1250,8 +1250,8 @@
 			"subscript": "208B"
 		},
 		"tags": ["minus", "минус"],
-		"groups": ["Dashes", "Smelting Special", "Special Fast RShift", "Special Combinations"],
-		"options": { "altSpecialKey": "NumSub", "fastKey": "-", "send": "Text" },
+		"groups": ["Dashes", "Smelting Special", "Special Fast Primary", "Special Combinations"],
+		"options": { "altSpecialKey": "NumSub", "fastKey": "<+ -", "send": "Text" },
 		"recipe": ["min"]
 	},
 	"minusdot", {

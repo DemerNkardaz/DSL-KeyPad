@@ -86,6 +86,7 @@ Class Cfg {
 
 	static __New() {
 		this.Init()
+		return
 	}
 
 	static optionsTitle := App.Title("+status+version") " — " Locale.Read("gui.options")

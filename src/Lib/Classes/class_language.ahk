@@ -65,7 +65,7 @@ Class Language {
 	}
 
 	static Get(language := "", getTitle := False, endLen := 0) {
-		userLanguage := language != "" ? language : Cfg.Get("User_Language")
+		local userLanguage := language != "" ? language : Cfg.Get("User_Language")
 		userLanguage := !IsSpace(userLanguage) ? userLanguage : this.GetSys()
 
 		if this.Validate(userLanguage) {

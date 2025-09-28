@@ -807,6 +807,8 @@ Class ChrReg {
 
 	EntryPostProcessing__Fonts(&entryName, &entry) {
 		for fontName, scriptArrays in characters.fontAssignation {
+			if entry["symbol"]["font"] != ""
+				break
 			if scriptArrays.HasRegEx(entry["data"]["script"] != "" ? entry["data"]["script"] : entryName) {
 				entry["symbol"]["font"] := fontName
 				break
