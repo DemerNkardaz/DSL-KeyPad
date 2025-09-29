@@ -496,3 +496,12 @@ Range(start, end, step := 1) {
 ModPath(modName) {
 	return A_ScriptDir "\Mods\" modName
 }
+
+ArrayPrefix(prefix, stringsArray) {
+	local output := []
+
+	for each in stringsArray
+		output.Push(prefix each)
+
+	return output
+}

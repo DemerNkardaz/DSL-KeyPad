@@ -1,5 +1,6 @@
 Class BindHandler {
 	static waitTimeSend := False
+	static sendType := ""
 
 	static Send(combo := "", characterNames*) {
 		if !initialized
@@ -8,9 +9,9 @@ Class BindHandler {
 		Keyboard.CheckLayout(&lang)
 
 		if Language.Validate(lang, "bindings") {
-			output := ""
-			inputType := ""
-			lineBreaks := False
+			local output := ""
+			local inputType := this.sendType
+			local lineBreaks := False
 
 			for _, character in characterNames {
 				if character is Func {
@@ -58,8 +59,11 @@ Class BindHandler {
 			keysValidation := "SC(14B|148|14D|150|04A)"
 			chrValidation := "[\x{00AE}\x{2122}\x{00A9}\x{2022}\x{25B6}\x{25C0}\x{0021}\x{002B}\x{005E}\x{0023}\x{007B}\x{007D}\x{0060}\x{007E}\x{0025}\x{0009}\x{000A}\x{000D}]"
 
-			if StrLen(inputType) == 0
-				inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.SessionGet("Input_Mode") != "Unicode" || StrLen(output) > 10) ? "Text" : ""
+			if StrLen(inputType) == 0 && (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.SessionGet("Input_Mode") != "Unicode" || StrLen(output) > 10)
+				inputType := "Text"
+
+			; if StrLen(inputType) == 0 || inputType == "Event"
+			; inputType := (RegExMatch(combo, keysValidation) || RegExMatch(output, chrValidation) || Cfg.SessionGet("Input_Mode") != "Unicode" || StrLen(output) > 10) ? "Text" : "Event"
 
 			Event.Trigger("Chracter", "Send", &output, &combo, &inputType)
 
@@ -231,7 +235,7 @@ Class BindHandler {
 		arrowKeys := RegExMatch(combo, "SC(14B|148|14D|150)")
 
 		Util.StrBind(combo, &keyRef, &modRef, &rulRef)
-		Send(
+		Send%this.sendType%(
 			arrowKeys ? "{" keyRef "}" :
 			("{Blind}" modRef (StrLen(keyRef) > 1 ? "{" keyRef "}" : keyRef))
 		)

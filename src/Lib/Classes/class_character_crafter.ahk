@@ -42,6 +42,7 @@ Class ChrCrafter {
 	}
 
 	ComposeMode() {
+		BindHandler.sendType := "Event"
 		TooltipPresets.Select("Compose")
 
 		local showSuggestions := Cfg.Get("Show_Suggestions", "Compose", True, "bool")
@@ -339,7 +340,7 @@ Class ChrCrafter {
 		}
 
 		this.isComposeInstanceActive := False
-		return
+		return BindHandler.sendType := ""
 	}
 
 	parseUniAlt(str, input, insertType) {

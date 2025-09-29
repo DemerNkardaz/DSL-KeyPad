@@ -103,7 +103,7 @@ Class Cfg {
 			Update.Check(, False)
 
 		if Update.available {
-			TrayMenu.SetTray()
+			TrayMenu.SetTrayItems()
 		}
 
 		this.optionsTitle := App.Title("+status+version") " — " Locale.Read("gui.options")

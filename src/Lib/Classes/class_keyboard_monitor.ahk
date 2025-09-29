@@ -72,7 +72,6 @@ Class KbdMonitor {
 
 		if stateChanged {
 			Suspend(isDisabled ? 1 : 0)
-			TrayMenu.SetTray()
 		}
 
 		return True

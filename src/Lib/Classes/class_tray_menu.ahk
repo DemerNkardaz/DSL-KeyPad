@@ -10,7 +10,7 @@ Class TrayMenu {
 		)
 
 		static __New() {
-			return Event.OnEvent("Application", "Initialized", (*) => (TrayMenu.SetTrayItems(), this.RegisterEvents()))
+			return Event.OnEvent("Application", "Initialized", (*) => (TrayMenu.SetTrayActions(), TrayMenu.SetTrayItems(), this.RegisterEvents()))
 		}
 
 		static RegisterEvents() {
@@ -32,6 +32,9 @@ Class TrayMenu {
 	static SetTray() {
 		A_IconTip := App.Title("+status+version")
 		TraySetIcon(App.icoDLL, App.indexIcos["app"], True)
+	}
+
+	static SetTrayActions() {
 		OnMessage 0x404, Received_AHK_NOTIFYICON
 		Received_AHK_NOTIFYICON(wParam, lParam, nMsg, hwnd) {
 			if lParam = 0x202 {

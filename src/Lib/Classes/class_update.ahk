@@ -116,6 +116,7 @@ Class Update {
 				currentFilePath := StrReplace(A_LoopFileFullPath, App.paths.dir)
 				if (!split.HasValue(currentFilePath)
 					&& !whitelist.HasValue(currentFilePath))
+					&& !InStr(A_LoopFileFullPath, App.paths.dir "\.git")
 					&& !InStr(A_LoopFileFullPath, App.paths.dir "\User")
 					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Mods")
 					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Logs")

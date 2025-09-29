@@ -33,6 +33,7 @@ Class TelexScriptProcessor {
 	}
 
 	Start(reloadHs := False) {
+		BindHandler.sendType := "Event"
 		local previousMode := TelexScriptProcessor.GetActiveMode()
 		if previousMode {
 			globalInstances.scriptProcessors[previousMode].Stop()
@@ -56,6 +57,7 @@ Class TelexScriptProcessor {
 		this.InH.Stop()
 		this.inputLogger := ""
 		Tooltip()
+		BindHandler.sendType := ""
 	}
 
 	GenerateSequences(libLink, ending?, replaceWith?) {
