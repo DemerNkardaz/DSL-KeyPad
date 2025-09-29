@@ -4,6 +4,12 @@
 <details open lang="en">
 <summary>English</summary>
 
+### [0.1.7.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
+
+- Changes:
+
+  - When searching for tags, if the query does not contain a space, it now looks for the presence of a whole word before proceeding with other comparison options.
+
 ### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 
 - Additions:
@@ -155,6 +161,12 @@
 <td>
 <details open lang="ru">
 <summary>Русский</summary>
+
+### [0.1.7.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
+
+- Изменения:
+
+  - При поиске тегов, если запрос не содержит пробела, теперь ищет наличие целого слова в теге перед тем, как провести остальные варианты сравнения.
 
 ### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 

@@ -192,6 +192,15 @@ Class Search {
 			return handledQuery = tag
 		}
 
+		checkTagSingleWord(tag) {
+			if !InStr(handledQuery, " ") {
+				tag := StrReplace(tag, Chr(0x00A0), " ")
+				local escapedQuery := RegExEscape(handledQuery)
+				return tag ~= nonSensitiveMark "^" escapedQuery "$|^" escapedQuery "\s|\s" escapedQuery "\s|\s" escapedQuery "$"
+			}
+			return False
+		}
+
 		checkTagPartial(tag) {
 			tag := StrReplace(tag, Chr(0x00A0), " ")
 			return tag ~= nonSensitiveMark handledQuery
@@ -225,6 +234,7 @@ Class Search {
 		local conditions := [
 			(tag) => (isHasExpression ? checkTagByUserRegEx(tag) : False),
 			(tag) => (checkTagExact(tag)),
+			(tag) => (checkTagSingleWord(tag)),
 			(tag) => (checkTagPartial(tag) || checkTagSplittedPartial(tag)),
 			(tag) => (checkTagSplittedPartial(tag, False)),
 			(tag) => (checkTagLowAccSequental(tag)),
