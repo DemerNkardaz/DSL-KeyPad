@@ -396,7 +396,8 @@
 			"useLetterLocale": "Origin",
 			"layoutTitles": true,
 			"altLayoutKey": ">!<+ Q"
-		}
+		},
+		"symbol": { "letter": "${lat_n_let_a_glottal_stop}" }
 	},
 	"lat_n_let_a_glottal_stop_reversed", {
 		"unicode": "0295",
@@ -415,7 +416,7 @@
 		"tags": ["<en-US>voiced epiglottal fricative", "<ru-RU>звонкий эпиглоттальный фрикатив"],
 		"alterations": { "modifier": "107B4" },
 		"options": { "useLetterLocale": "Origin", "layoutTitles": true, "altLayoutKey": "c*>!<+ Q" },
-		"symbol": { "letter": "${lat_n_let_a_glottal_stop}" }
+		"symbol": { "letter": "${lat_n_let_a_glottal_stop_reversed}" }
 	},
 	"lat_n_let_a_glottal_stop_inverted", {
 		"unicode": "0296",
@@ -426,7 +427,7 @@
 			"altLayoutKey": ">!<! Q"
 		},
 		"recipe": ["${lat_n_let_a_glottal_stop}${arrow_right_circle}"],
-		"symbol": { "beforeLetter": "inverted" }
+		"symbol": { "beforeLetter": "inverted", "letter": "${lat_n_let_a_glottal_stop_reversed}" }
 	},
 	"lat_n_let_a_glottal_stop_inverted__stroke_short", {
 		"unicode": "01BE",
