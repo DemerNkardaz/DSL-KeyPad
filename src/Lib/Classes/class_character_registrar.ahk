@@ -63,8 +63,9 @@ Class ChrReg {
 					)
 				}
 
-				if InStr(variantName, "{i}") {
-					variantName := StrReplace(variantName, "{i}", i)
+				if RegExMatch(variantName, "\{(\d+)?(?:\.\.\.)?i\}", &match) {
+					local addition := match[1] ? Integer(match[1]) : 0
+					variantName := RegExReplace(variantName, match[0], i + addition)
 				}
 
 				local variantEntry := entry.Clone()

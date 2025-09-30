@@ -12,8 +12,14 @@
 		"options": { "fastKey": ["<! 9?Secondary", "c*<! 9?Secondary"] },
 		"symbol": {
 			"beforeLetter": "{i}",
+			"beforeType": "t.yao<en-US>",
+			"afterType": "t.yao<ru-RU>",
 			"type": "monogram",
-			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"]
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"tagAdditive": [
+				[{ "typeOriginPath": true, "script": "taixuanjing", "afterTitle": "/self/meaning", "beforeLetter": "{i}", "letter": "monogram_1_di" }],
+				[{ "typeOriginPath": true, "script": "taixuanjing", "afterTitle": "/self/meaning", "beforeLetter": "{i}", "letter": "monogram_2_tian" }]
+			]
 		}
 	},
 	"yijing_n_sym_digram_{i}_[greater_yin,lesser_yang,lesser_yin,greater_yang]", {
@@ -30,7 +36,13 @@
 			"beforeType": "t.si_xiang<en-US>",
 			"afterType": "t.si_xiang<ru-RU>",
 			"type": "digram",
-			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"]
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"tagAdditive": [
+				[{ "typeOriginPath": true, "script": "taixuanjing", "beforeLetter": "{i}", "letter": "digram_1_di_di" }],
+				[{ "typeOriginPath": true, "script": "taixuanjing", "beforeLetter": "{i}", "letter": "digram_2_tian_di" }],
+				[{ "typeOriginPath": true, "script": "taixuanjing", "beforeLetter": "{i}", "letter": "digram_3_di_tian" }],
+				[{ "typeOriginPath": true, "script": "taixuanjing", "beforeLetter": "{i}", "letter": "digram_4_tian_tian" }]
+			]
 		}
 	},
 	"yijing_n_sym_trigram_{i}_[qian,dui,li,zhen,xun,kan,gen,kun]", {
@@ -436,6 +448,35 @@
 			"afterTitle": "/self/meaning",
 			"type": "hexagram",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"]
+		}
+	},
+	"taixuanjing_n_sym_monogram_{2...i}_[ren]", {
+		"unicode": ["1D300"],
+		"recipe": [["t rn"]],
+		"options": { "altTitleUseLineBreak": true },
+		"symbol": {
+			"beforeLetter": "{2...i}",
+			"type": "monogram",
+			"afterTitle": "/self/meaning",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"font": "Catrinity"
+		}
+	},
+	"taixuanjing_n_sym_digram_{4...i}_[tian_ren,di_ren,ren_tian,ren_di,ren_ren]", {
+		"unicode": ["1D301", "1D302", "1D303", "1D304", "1D305"],
+		"recipe": [
+			[ "t tr"],
+			[ "t dr"],
+			[ "t rt"],
+			[ "t rd"],
+			[ "t rr"]
+		],
+		"options": { "altTitleUseLineBreak": true },
+		"symbol": {
+			"beforeLetter": "{4...i}",
+			"type": "digram",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"font": "Catrinity"
 		}
 	}
 ]

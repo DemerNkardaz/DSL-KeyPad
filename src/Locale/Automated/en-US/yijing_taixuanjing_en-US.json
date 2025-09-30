@@ -24,11 +24,13 @@
 				"hexagram": "hexagram"
 			},
 			"before_letter": {
+				"yao": "yáo",
 				"si_xiang": "sìxiàng",
 				"bagua": "bāguà",
 				"liushisigua": "liùshísìguà"
 			},
 			"after_letter": {
+				"yao": "yáo",
 				"si_xiang": "sìxiàng",
 				"bagua": "bāguà",
 				"liushisigua": "liùshísìguà"
@@ -335,6 +337,55 @@
 				}
 			},
 			"taixuanjing": {
+				"n_sym_monogram_1_di": {
+					"letter_locale": "Dì",
+					"meaning": "[ Earth ]"
+				},
+				"n_sym_monogram_2_tian": {
+					"letter_locale": "Tiān",
+					"meaning": "[ Heaven ]"
+				},
+				"n_sym_monogram_3_ren": {
+					"letter_locale": "Rén",
+					"meaning": "[ People ]"
+				},
+				"n_sym_digram_1_di_di": {
+					"letter_locale": "Dì dì",
+					"meaning": ""
+				},
+				"n_sym_digram_2_tian_di": {
+					"letter_locale": "Tiān dì",
+					"meaning": ""
+				},
+				"n_sym_digram_3_di_tian": {
+					"letter_locale": "Dì tiān",
+					"meaning": ""
+				},
+				"n_sym_digram_4_tian_tian": {
+					"letter_locale": "Tiān tiān",
+					"meaning": ""
+				},
+				"n_sym_digram_5_tian_ren": {
+					"letter_locale": "Tiān rén",
+					"meaning": ""
+				},
+				"n_sym_digram_6_di_ren": {
+					"letter_locale": "Dì rén",
+					"meaning": ""
+				},
+				"n_sym_digram_7_ren_tian": {
+					"letter_locale": "Rén tiān",
+					"meaning": ""
+				},
+				"n_sym_digram_8_ren_di": {
+					"letter_locale": "Rén dì",
+					"meaning": ""
+				},
+				"n_sym_digram_9_ren_ren": {
+					"letter_locale": "Rén rén",
+					"meaning": ""
+				}
+				
 			}
 		}
 	}

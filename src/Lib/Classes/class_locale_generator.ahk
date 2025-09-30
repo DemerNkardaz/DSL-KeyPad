@@ -8,7 +8,7 @@ Class LocaleGenerator {
 		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "." entry["symbol"]["scriptAdditive"] : ""
 
 		local tagScriptAtStart := False
-		local isJingGrams := entryName ~= "^(yijing|taixuangjing)"
+		local isJingGrams := entryName ~= "^(yijing|taixuanjing)"
 		local scriptBounds := entry["symbol"]["scriptBounds"]
 
 		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic"]) {
@@ -154,8 +154,12 @@ Class LocaleGenerator {
 								continue
 
 							boundKey := RegExReplace(boundKey, languageRuleMatch[0])
-						} else if boundKey = "{i}" {
-							l%boundLink% .= entry["variantPos"]
+						} else if RegExMatch(boundKey, "\{(\d+)?(?:\.\.\.)?i\}", &match) {
+							local addition := match[1] ? Integer(match[1]) : 0
+							l%boundLink% .= Integer(entry["variantPos"]) + addition
+							continue
+						} else if RegExMatch(boundKey, "@(.*?)", &match) {
+							l%boundLink% .= match[1]
 							continue
 						}
 
@@ -226,12 +230,14 @@ Class LocaleGenerator {
 					lAfterTitle
 				)
 				tags[langCode] := (
+					lBeforeTitle
 					(!isGermanic ? localedCase lBeforeType Locale.Read(pfx "type." lType, lang) lAfterType " " : "")
 					lBeforeletter
 					postLetter
 					lAfterletter
 					lSecondName
 					lCopyNumber
+					lAfterTitle
 				)
 			}
 		}
@@ -263,23 +269,19 @@ Class LocaleGenerator {
 		)
 
 		tags["en-US"] := (
-			lBeforeTitle
 			Locale.Read(pfx "tag." lScript, "en-US", , , , lVariant)
 			(isGermanic ? " " Locale.Read(pfx "type." lType, "en-US") : "")
 			tagScriptAdditive["en-US"] " "
 			tags["en-US"]
-			lAfterTitle
 		)
 
 		tags["ru-RU"] := (
 			tagScriptAtStart ?
 				(
-					lBeforeTitle
 					Locale.Read(pfx "tag." lScript, "ru-RU", , , , lVariant)
 					(isGermanic ? " " Locale.Read(pfx "type." lType, "ru-RU") : "")
 					tagScriptAdditive["ru-RU"] " "
 					tags["ru-RU"]
-					lAfterTitle
 				)
 			: (
 				tags["ru-RU"]
@@ -310,9 +312,10 @@ Class LocaleGenerator {
 						local curTagScriptAtStart := (tagAdd.Has("tagScriptAtStart") ? tagAdd["tagScriptAtStart"] : tagScriptAtStart)
 						local curAltTitleUseLineBreak := tagAdd.Has("altTitleUseLineBreak") ? tagAdd["altTitleUseLineBreak"] : altTitleUseLineBreak
 
+						local useOriginalTypePath := tagAdd.Has("typeOriginPath") ? tagAdd["typeOriginPath"] : False
 
 						local curScriptKey := ChrLib.GetDecomposition("script", curScript, "Key", &curScriptDecomposeKey) ? curScriptDecomposeKey : curScript
-						local curTypeKey := ChrLib.GetDecomposition("type", curType, "Key", &curTypeDecomposeKey) ? curTypeDecomposeKey : curType
+						local curTypeKey := ChrLib.GetDecomposition("type", (useOriginalTypePath ? entryData["type"] : curType), "Key", &curTypeDecomposeKey) ? curTypeDecomposeKey : (useOriginalTypePath ? entryData["type"] : curType)
 						local curCaseKey := ChrLib.GetDecomposition("case", curCase, "Key", &curCaseDecomposeKey) ? curCaseDecomposeKey : curCase
 
 						local hasScriptAdditive := tagAdd.Has("scriptAdditive") && StrLen(tagAdd["scriptAdditive"]) > 0
@@ -330,6 +333,7 @@ Class LocaleGenerator {
 						local lAdditionalBeforeTitle := ""
 						local lAdditionalAfterTitle := ""
 
+						local draftRef := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" curLetter)
 
 						for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType", "beforeTitle", "afterTitle"] {
 							if tagAdd.Has(letterBound) && StrLen(tagAdd[letterBound]) > 0 {
@@ -355,14 +359,21 @@ Class LocaleGenerator {
 											continue
 
 										boundKey := RegExReplace(boundKey, languageRuleMatch[0])
+									} else if RegExMatch(boundKey, "\{(\d+)?(?:\.\.\.)?i\}", &match) {
+										local addition := match[1] ? Integer(match[1]) : 0
+										lAdditional%boundLink% .= Integer(entry["variantPos"]) + addition
+										continue
+									} else if RegExMatch(boundKey, "@(.*?)", &match) {
+										lAdditional%boundLink% .= match[1]
+										continue
 									}
 
 									if RegExMatch(boundKey, "\:\:(.*?)$", &match) {
 										local index := Integer(match[1])
 										local cleanBound := SubStr(boundKey, 1, match.Pos(0) - 1)
-										lAdditional%boundLink% .= Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." cleanBound, lang, , , , index) (i < splitted.Length ? " " : "")
+										lAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." cleanBound, lang, , , , index) (i < splitted.Length ? " " : "")
 									} else
-										lAdditional%boundLink% .= Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." boundKey, lang, , , , (InStr(boundLink, "Type") ? curLVariant : 1)) (i < splitted.Length ? " " : "")
+										lAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." boundKey, lang, , , , (InStr(boundLink, "Type") ? curLVariant : 1)) (i < splitted.Length ? " " : "")
 
 									if titlelizeFirstLetter
 										lAdditional%boundLink% := Util.StrUpper(lAdditional%boundLink%, 1)
@@ -370,12 +381,14 @@ Class LocaleGenerator {
 							}
 						}
 
-						lAdditionalBeforeLetter := StrLen(lAdditionalBeforeLetter) > 0 ? lAdditionalBeforeLetter " " : ""
-						lAdditionalAfterLetter := StrLen(lAdditionalAfterLetter) > 0 ? " " lAdditionalAfterLetter : ""
+						lAdditionalBeforeLetter := lAdditionalBeforeLetter != "" ? lAdditionalBeforeLetter " " : ""
+						lAdditionalAfterLetter := lAdditionalAfterLetter != "" ? " " lAdditionalAfterLetter : ""
 
-						lAdditionalBeforeType := StrLen(lAdditionalBeforeType) > 0 ? lAdditionalBeforeType " " : ""
-						lAdditionalAfterType := StrLen(lAdditionalAfterType) > 0 ? " " lAdditionalAfterType : ""
+						lAdditionalBeforeType := lAdditionalBeforeType != "" ? lAdditionalBeforeType " " : ""
+						lAdditionalAfterType := lAdditionalAfterType != "" ? " " lAdditionalAfterType : ""
 
+						lAdditionalBeforeTitle := lAdditionalBeforeTitle != "" ? lAdditionalBeforeTitle " " : ""
+						lAdditionalAfterTitle := lAdditionalAfterTitle != "" ? " " lAdditionalAfterTitle : ""
 
 						if curIsGermanic {
 							local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" letter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "") "_" curLetter) ".letter_locale"
@@ -415,8 +428,8 @@ Class LocaleGenerator {
 								additionalPostLetter
 								lAdditionalAfterLetter
 								lAdditionalCopyNumber
-								((lang = "ru-RU" && !curTagScriptAtStart) ? " " scriptTag : "")
 								lAdditionalAfterTitle
+								((lang = "ru-RU" && !curTagScriptAtStart) ? " " scriptTag : "")
 							)
 						}
 					}

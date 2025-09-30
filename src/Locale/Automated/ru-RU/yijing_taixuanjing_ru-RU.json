@@ -24,11 +24,13 @@
 				"hexagram": "гексаграмма"
 			},
 			"before_letter": {
+				"yao": "яо",
 				"si_xiang": "сысян",
 				"bagua": "багуа",
 				"liushisigua": "люшисыгуа"
 			},
 			"after_letter": {
+				"yao": "яо",
 				"si_xiang": "сысян",
 				"bagua": "багуа",
 				"liushisigua": "люшисыгуа"
@@ -335,6 +337,54 @@
 				}
 			},
 			"taixuanjing": {
+				"n_sym_monogram_1_di": {
+					"letter_locale": "Ди",
+					"meaning": "[ Земля ]"
+				},
+				"n_sym_monogram_2_tian": {
+					"letter_locale": "Тянь",
+					"meaning": "[ Небо ]"
+				},
+				"n_sym_monogram_3_ren": {
+					"letter_locale": "Жэнь",
+					"meaning": "[ Человек ]"
+				},
+				"n_sym_digram_1_di_di": {
+					"letter_locale": "Ди-ди",
+					"meaning": ""
+				},
+				"n_sym_digram_2_tian_di": {
+					"letter_locale": "Тянь-ди",
+					"meaning": ""
+				},
+				"n_sym_digram_3_di_tian": {
+					"letter_locale": "Ди-тянь",
+					"meaning": ""
+				},
+				"n_sym_digram_4_tian_tian": {
+					"letter_locale": "Тянь-тянь",
+					"meaning": ""
+				},
+				"n_sym_digram_5_tian_ren": {
+					"letter_locale": "Тянь-джэнь",
+					"meaning": ""
+				},
+				"n_sym_digram_6_di_ren": {
+					"letter_locale": "Ди-жэнь",
+					"meaning": ""
+				},
+				"n_sym_digram_7_ren_tian": {
+					"letter_locale": "Жэнь-тянь",
+					"meaning": ""
+				},
+				"n_sym_digram_8_ren_di": {
+					"letter_locale": "Жэнь-ди",
+					"meaning": ""
+				},
+				"n_sym_digram_9_ren_ren": {
+					"letter_locale": "Жэнь-жэнь",
+					"meaning": ""
+				}
 			}
 		}
 	}
