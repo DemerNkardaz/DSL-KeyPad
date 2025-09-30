@@ -9,6 +9,7 @@
 	"yijing_n_sym_monogram_[yin,yang]", {
 		"unicode": ["268B", "268A"],
 		"recipe": [["y yi"], ["y ya"]],
+		"options": { "fastKey": ["<! 9?Secondary", "c*<! 9?Secondary"] },
 		"symbol": {
 			"type": "monogram"
 		}
@@ -21,6 +22,7 @@
 			["${yijing_n_sym_monogram_yin}${yijing_n_sym_monogram_yang}", "y li"],
 			["${yijing_n_sym_monogram_yang×2}", "y ga"]
 		],
+		"options": { "fastKey": ["<!<+ 9?Secondary", "<!>+ 9?Secondary", "c*<!>+ 9?Secondary", "c*<!<+ 9?Secondary"] },
 		"symbol": {
 			"type": "digram"
 		}
@@ -28,17 +30,291 @@
 	"yijing_n_sym_trigram_[qian,dui,li,zhen,xun,kan,gen,kun]", {
 		"unicode": ["2630", "2631", "2632", "2633", "2634", "2635", "2636", "2637"],
 		"recipe": [
-			["${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_greater_yang}", "${yijing_n_sym_digram_greater_yang}${yijing_n_sym_monogram_yang}", "t tq"],
-			["${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_greater_yang}", "t td"],
-			["${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_lesser_yin}", "t tl"],
-			["${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_lesser_yin}", "t tz"],
-			["${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_lesser_yang}", "t tx"],
-			["${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_lesser_yang}", "t tk"],
-			["${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_greater_yin}", "t tg"],
-			["${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_greater_yin}", "${yijing_n_sym_digram_greater_yin}${yijing_n_sym_monogram_yin}", "t tn"]
+			[
+				"${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_greater_yang}",
+				"${yijing_n_sym_digram_greater_yang}${yijing_n_sym_monogram_yang}",
+				"${yijing_n_sym_monogram_yang×3}",
+				"y tq"
+			],
+			[
+				"${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_greater_yang}",
+				"${yijing_n_sym_digram_greater_yang}${yijing_n_sym_monogram_yin}",
+				"${yijing_n_sym_monogram_yin}${yijing_n_sym_monogram_yang×2}",
+				"y td"
+			],
+			[
+				"${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_lesser_yin}",
+				"${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_monogram_yang}",
+				"${yijing_n_sym_monogram_yang}${yijing_n_sym_monogram_yin}${yijing_n_sym_monogram_yang}",
+				"y tl"
+			],
+			[
+				"${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_lesser_yin}",
+				"${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_monogram_yin}",
+				"${yijing_n_sym_monogram_yin×2}${yijing_n_sym_monogram_yang}",
+				"y tz"
+			],
+			[
+				"${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_lesser_yang}",
+				"${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_monogram_yang}",
+				"${yijing_n_sym_monogram_yang×2}${yijing_n_sym_monogram_yin}",
+				"y tx"
+			],
+			[
+				"${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_lesser_yang}",
+				"${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_monogram_yin}",
+				"${yijing_n_sym_monogram_yin}${yijing_n_sym_monogram_yang}${yijing_n_sym_monogram_yin}",
+				"y tk"
+			],
+			[
+				"${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_greater_yin}",
+				"${yijing_n_sym_digram_greater_yin}${yijing_n_sym_monogram_yang}",
+				"${yijing_n_sym_monogram_yang}${yijing_n_sym_monogram_yin×2}",
+				"y tg"
+			],
+			[
+				"${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_greater_yin}",
+				"${yijing_n_sym_digram_greater_yin}${yijing_n_sym_monogram_yin}",
+				"${yijing_n_sym_monogram_yin×3}",
+				"y tn"
+			]
 		],
 		"symbol": {
 			"type": "trigram"
+		}
+	},
+	"yijing_n_sym_hexagram_{i}_[qian,kun,zhun,meng,xu,song,shi,bi,xiachu,li,tai,pi,tongren,dayou,qian,yu,sui,gu,lin,guan,shi_ke,bi,bo,fu,wu_wang,da_chu,yi,da_guo,kan,li,xian,heng,dun,da_zhuang,jin,ming_yi,jia_ren,kui,jian,xie,sun,yi,guai,gou,cui,sheng,kun,jing,ge,ding,zhen,gen,jian,gui_mei,feng,lu,xun,dui,huan,jie,zhong_fu,xiao_guo,ji_ji,wei_ji]", {
+		"unicode": [
+			"4DC0","4DC1","4DC2","4DC3","4DC4","4DC5","4DC6","4DC7",
+			"4DC8","4DC9","4DCA","4DCB","4DCC","4DCD","4DCE","4DCF",
+			"4DD0","4DD1","4DD2","4DD3","4DD4","4DD5","4DD6","4DD7",
+			"4DD8","4DD9","4DDA","4DDB","4DDC","4DDD","4DDE","4DDF",
+			"4DE0","4DE1","4DE2","4DE3","4DE4","4DE5","4DE6","4DE7",
+			"4DE8","4DE9","4DEA","4DEB","4DEC","4DED","4DEE","4DEF",
+			"4DF0","4DF1","4DF2","4DF3","4DF4","4DF5","4DF6","4DF7",
+			"4DF8","4DF9","4DFA","4DFB","4DFC","4DFD","4DFE","4DFF"
+		],
+		"recipe": [
+			[
+				"${yijing_n_sym_trigram_qian×2}",
+				"${yijing_n_sym_digram_greater_yang×3}",
+				"y hq1"
+			],
+			[
+				"${yijing_n_sym_trigram_kun×2}",
+				"${yijing_n_sym_digram_greater_yin×3}",
+				"y hk1"
+			],
+			[
+				"${yijing_n_sym_trigram_kan}${yijing_n_sym_trigram_zhen}",
+				"${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_digram_greater_yin}${yijing_n_sym_digram_lesser_yin}",
+				"y hz1"
+			],
+			[
+				"${yijing_n_sym_trigram_gen}${yijing_n_sym_trigram_kan}",
+				"${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_greater_yin}${yijing_n_sym_digram_lesser_yang}",
+				"y hm1"
+			],
+			[
+				"${yijing_n_sym_trigram_kan}${yijing_n_sym_trigram_qian}",
+				"${yijing_n_sym_digram_lesser_yin×2}${yijing_n_sym_digram_greater_yang}",
+				"y hx1"
+			],
+			[
+				"${yijing_n_sym_trigram_qian}${yijing_n_sym_trigram_kan}",
+				"${yijing_n_sym_digram_greater_yang}${yijing_n_sym_digram_lesser_yang×2}",
+				"y hs1"
+			],
+			[
+				"${yijing_n_sym_trigram_kun}${yijing_n_sym_trigram_kan}",
+				"${yijing_n_sym_digram_greater_yin×2}${yijing_n_sym_digram_lesser_yang}",
+				"y hs2"
+			],
+			[
+				"${yijing_n_sym_trigram_kan}${yijing_n_sym_trigram_kun}",
+				"${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_digram_greater_yin×2}",
+				"y hb1"
+			],
+			[
+				"${yijing_n_sym_trigram_xun}${yijing_n_sym_trigram_qian}",
+				"${yijing_n_sym_digram_greater_yang}${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_digram_greater_yang}",
+				"y hx2"
+			],
+			[
+				"${yijing_n_sym_trigram_qian}${yijing_n_sym_trigram_dui}",
+				"${yijing_n_sym_digram_greater_yang}${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_greater_yang}",
+				"y hl1"
+			],
+			[
+				"${yijing_n_sym_trigram_kun}${yijing_n_sym_trigram_qian}",
+				"${yijing_n_sym_digram_greater_yin}${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_digram_greater_yang}",
+				"y ht1"
+			],
+			[
+				"${yijing_n_sym_trigram_qian}${yijing_n_sym_trigram_kun}",
+				"${yijing_n_sym_digram_greater_yang}${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_greater_yin}",
+				"y hp1"
+			],
+			[
+				"y ht2"
+			],
+			[
+				"y hd1"
+			],
+			[
+				"y hq2"
+			],
+			[
+				"y hy1"
+			],
+			[
+				"y hs3"
+			],
+			[
+				"y hg1"
+			],
+			[
+				"y hl2"
+			],
+			[
+				"y hg2"
+			],
+			[
+				"y hs4"
+			],
+			[
+				"y hb2"
+			],
+			[
+				"y hb3"
+			],
+			[
+				"y hf1"
+			],
+			[
+				"y hw1"
+			],
+			[
+				"y hd2"
+			],
+			[
+				"y hy2"
+			],
+			[
+				"y hd3"
+			],
+			[
+				"y hk2"
+			],
+			[
+				"y hl3"
+			],
+			[
+				"y hx3"
+			],
+			[
+				"y hh1"
+			],
+			[
+				"y hd4"
+			],
+			[
+				"y hd5"
+			],
+			[
+				"y hj1"
+			],
+			[
+				"y hm2"
+			],
+			[
+				"y hj2"
+			],
+			[
+				"y hk3"
+			],
+			[
+				"y hj3"
+			],
+			[
+				"y hx4"
+			],
+			[
+				"y hs5"
+			],
+			[
+				"y hy3"
+			],
+			[
+				"y hg3"
+			],
+			[
+				"y hg4"
+			],
+			[
+				"y hc1"
+			],
+			[
+				"y hs6"
+			],
+			[
+				"y hk4"
+			],
+			[
+				"y hj4"
+			],
+			[
+				"y hg5"
+			],
+			[
+				"y hd6"
+			],
+			[
+				"y hz2"
+			],
+			[
+				"y hg6"
+			],
+			[
+				"y hj5"
+			],
+			[
+				"y hg7"
+			],
+			[
+				"y hf2"
+			],
+			[
+				"y hl4"
+			],
+			[
+				"y hx5"
+			],
+			[
+				"y hd7"
+			],
+			[
+				"y hh2"
+			],
+			[
+				"y hj6"
+			],
+			[
+				"y hz3"
+			],
+			[
+				"y hx6"
+			],
+			[
+				"y hj7"
+			],
+			[
+				"y hw2"
+			]
+		],
+		"symbol": {
+			"beforeLetter": "{i}",
+			"type": "hexagram"
 		}
 	}
 ]

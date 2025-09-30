@@ -63,6 +63,10 @@ Class ChrReg {
 					)
 				}
 
+				if InStr(variantName, "{i}") {
+					variantName := StrReplace(variantName, "{i}", i)
+				}
+
 				local variantEntry := entry.Clone()
 
 				for item in ["unicode", "proxy", "alterations"] {

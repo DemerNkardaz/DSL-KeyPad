@@ -123,6 +123,9 @@ Class LocaleGenerator {
 								continue
 
 							boundKey := RegExReplace(boundKey, languageRuleMatch[0])
+						} else if boundKey = "{i}" {
+							l%boundLink% .= entry["variantPos"]
+							continue
 						}
 
 						if RegExMatch(boundKey, "\:\:(.*?)$", &match) {

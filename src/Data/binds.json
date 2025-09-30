@@ -2954,7 +2954,10 @@
 			"9": {
 				"<^>!": "left_chevron",
 				"<!": "left_bracket",
-				"<!<+": "left_brace"
+				"<!<+": "left_brace",
+				"<^>!<!": "yijing_n_sym_monogram_[yang,yin]",
+				"<^>!<!<+": "yijing_n_sym_digram_[greater_yang,greater_yin]",
+				"<^>!<!>+": "yijing_n_sym_digram_[lesser_yin,lesser_yang]"
 			},
 			"0": {
 				"<^>!": "right_chevron",
