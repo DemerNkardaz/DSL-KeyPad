@@ -1,0 +1,51 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"taoist": "Дао",
+			"yijing": "И-Цзин",
+			"taixuanjing": "Тайсюань-Цзин"
+		},
+		"generated": {
+			"prefix": {
+				"taoist": "Даосск$(ая|ий|ое)",
+				"yijing": "И-Цзин",
+				"taixuanjing": "Тайсюань-Цзин"
+			},
+			"tag": {
+				"taoist": "даосск$(ая|ий|ое)",
+				"yijing": "и-цзин",
+				"taixuanjing": "тайсюань-цзин"
+			},
+			"type": {
+				"monogram": "энаграмма",
+				"digram": "диграмма",
+				"trigram": "триграмма",
+				"tetragram": "тетраграмма",
+				"hexagram": "гексаграмма"
+			}
+		},
+		"scripts": {
+			"taoist": {
+				"n_sym_yinyang": { "letter_locale": "Инь и Ян" }
+			},
+			"yijing": {
+				"n_sym_monogram_yin": { "letter_locale": "Инь" },
+				"n_sym_monogram_yang": { "letter_locale": "Ян" },
+				"n_sym_digram_greater_yin": { "letter_locale": "Старый Инь" },
+				"n_sym_digram_lesser_yang": { "letter_locale": "Молодой Ян" },
+				"n_sym_digram_lesser_yin": { "letter_locale": "Молодой Инь" },
+				"n_sym_digram_greater_yang": { "letter_locale": "Старый Ян" },
+				"n_sym_trigram_qian": { "letter_locale": "Цянь" },
+				"n_sym_trigram_dui": { "letter_locale": "Дуй" },
+				"n_sym_trigram_li": { "letter_locale": "Ли" },
+				"n_sym_trigram_zhen": { "letter_locale": "Чжэнь" },
+				"n_sym_trigram_xun": { "letter_locale": "Сюнь" },
+				"n_sym_trigram_kan": { "letter_locale": "Кань" },
+				"n_sym_trigram_gen": { "letter_locale": "Гэнь" },
+				"n_sym_trigram_kun": { "letter_locale": "Кунь" }
+			},
+			"taixuanjing": {
+			}
+		}
+	}
+}

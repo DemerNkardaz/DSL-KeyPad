@@ -50,6 +50,7 @@ Class ChrEntry {
 				"symbol", Map(
 					"category", "",
 					"letter", "",
+					"type", "",
 					"afterLetter", "",
 					"beforeLetter", "",
 					"afterType", "",

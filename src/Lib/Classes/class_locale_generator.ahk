@@ -8,11 +8,14 @@ Class LocaleGenerator {
 		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "." entry["symbol"]["scriptAdditive"] : ""
 
 		local tagScriptAtStart := False
+		local isJingGrams := entryName ~= "^(yijing|taixuangjing)"
+		local useBracketsOnScript := isJingGrams
 
 		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic"]) {
 			if !useLetterLocale
 				useLetterLocale := True
-			tagScriptAtStart := True
+			if !isJingGrams
+				tagScriptAtStart := True
 		}
 
 		local referenceLocale := entry["options"].Has("referenceLocale") && entry["options"]["referenceLocale"] != "" ? entry["options"]["referenceLocale"] : False
@@ -52,7 +55,7 @@ Class LocaleGenerator {
 		local lScript := entryData["script"]
 		local lOriginScript := entryData["originScript"]
 		local lCase := entryData["case"]
-		local lType := entryData["type"]
+		local lType := entry["symbol"]["type"] != "" ? entry["symbol"]["type"] : entryData["type"]
 		local lPostfixes := entryData["postfixes"]
 		local lVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
@@ -148,7 +151,9 @@ Class LocaleGenerator {
 				localedCase := lCase != "neutral" ? Locale.Read(pfx "case." lCase, lang, , , , lVariant) " " : ""
 
 				entry["titles"][langCode] := (
+					(useBracketsOnScript ? "[" : "")
 					Locale.Read(pfx "prefix." lScript (!isGermanic ? scriptAdditive : ""), lang, , , , lVariant)
+					(useBracketsOnScript ? "]" : "")
 					" "
 					lBeforeType
 					localedCase Locale.Read(pfx "type." lType, lang)

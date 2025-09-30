@@ -17,7 +17,7 @@
 		"tags": ["black flag", "чёрный флаг"],
 		"groups": ["Special Fast Secondary"],
 		"unicode": "1F3F4",
-		"options": { "suggestionsAtEnd": true, "fastKey": "<! 6" },
+		"options": { "suggestionsAtEnd": true, "fastKey": "<+ 6" },
 		"recipe": ["bfl"]
 	},
 	"language_tag", {

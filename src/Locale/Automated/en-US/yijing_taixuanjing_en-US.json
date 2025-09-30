@@ -1,0 +1,51 @@
+{
+	"en-US": {
+		"script_labels": {
+			"taoist": "Taoist",
+			"yijing": "Yijing",
+			"taixuanjing": "Taixuanjing"
+		},
+		"generated": {
+			"prefix": {
+				"taoist": "Taoist",
+				"yijing": "Yijing",
+				"taixuanjing": "Taixuanjing"
+			},
+			"tag": {
+				"taoist": "taoist",
+				"yijing": "yijing",
+				"taixuanjing": "taixuanjing"
+			},
+			"type": {
+				"monogram": "monogram",
+				"digram": "digram",
+				"trigram": "trigram",
+				"tetragram": "tetragram",
+				"hexagram": "hexagram"
+			}
+		},
+		"scripts": {
+			"taoist": {
+				"n_sym_yinyang": { "letter_locale": "Yin Yang" }
+			},
+			"yijing": {
+				"n_sym_monogram_yin": { "letter_locale": "Yin" },
+				"n_sym_monogram_yang": { "letter_locale": "Yang" },
+				"n_sym_digram_greater_yin": { "letter_locale": "Greater Yin" },
+				"n_sym_digram_lesser_yang": { "letter_locale": "Lesser Yang" },
+				"n_sym_digram_lesser_yin": { "letter_locale": "Lesser Yin" },
+				"n_sym_digram_greater_yang": { "letter_locale": "Greater Yang" },
+				"n_sym_trigram_qian": { "letter_locale": "Qian" },
+				"n_sym_trigram_dui": { "letter_locale": "Dui" },
+				"n_sym_trigram_li": { "letter_locale": "Li" },
+				"n_sym_trigram_zhen": { "letter_locale": "Zhen" },
+				"n_sym_trigram_xun": { "letter_locale": "Xun" },
+				"n_sym_trigram_kan": { "letter_locale": "Kan" },
+				"n_sym_trigram_gen": { "letter_locale": "Gen" },
+				"n_sym_trigram_kun": { "letter_locale": "Kun" }
+			},
+			"taixuanjing": {
+			}
+		}
+	}
+}

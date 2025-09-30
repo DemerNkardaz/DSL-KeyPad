@@ -1,0 +1,44 @@
+[
+	"taoist_n_sym_yinyang[,_emoji]", {
+		"unicode": ["262F", "262F"],
+		"sequence": [["262F", "FE0E"], ["262F", "FE0F"]],
+		"recipe": [["t yy"], ["emoji yy"]],
+		"options": { "useLetterLocale": "yinyang$", "noCalc": [false, true] },
+		"symbol": { "beforeLetter": "[,emoji]" }
+	},
+	"yijing_n_sym_monogram_[yin,yang]", {
+		"unicode": ["268B", "268A"],
+		"recipe": [["y yi"], ["y ya"]],
+		"symbol": {
+			"type": "monogram"
+		}
+	},
+	"yijing_n_sym_digram_[greater_yin,lesser_yang,lesser_yin,greater_yang]", {
+		"unicode": ["268F", "268E", "268D", "268C"],
+		"recipe": [
+			["${yijing_n_sym_monogram_yin×2}", "y gi"],
+			["${yijing_n_sym_monogram_yang}${yijing_n_sym_monogram_yin}", "y la"],
+			["${yijing_n_sym_monogram_yin}${yijing_n_sym_monogram_yang}", "y li"],
+			["${yijing_n_sym_monogram_yang×2}", "y ga"]
+		],
+		"symbol": {
+			"type": "digram"
+		}
+	},
+	"yijing_n_sym_trigram_[qian,dui,li,zhen,xun,kan,gen,kun]", {
+		"unicode": ["2630", "2631", "2632", "2633", "2634", "2635", "2636", "2637"],
+		"recipe": [
+			["${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_greater_yang}", "${yijing_n_sym_digram_greater_yang}${yijing_n_sym_monogram_yang}", "t tq"],
+			["${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_greater_yang}", "t td"],
+			["${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_lesser_yin}", "t tl"],
+			["${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_lesser_yin}", "t tz"],
+			["${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_lesser_yang}", "t tx"],
+			["${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_lesser_yang}", "t tk"],
+			["${yijing_n_sym_monogram_yang}${yijing_n_sym_digram_greater_yin}", "t tg"],
+			["${yijing_n_sym_monogram_yin}${yijing_n_sym_digram_greater_yin}", "${yijing_n_sym_digram_greater_yin}${yijing_n_sym_monogram_yin}", "t tn"]
+		],
+		"symbol": {
+			"type": "trigram"
+		}
+	}
+]

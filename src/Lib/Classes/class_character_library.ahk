@@ -80,6 +80,9 @@ Class ChrLib {
 		"chess",
 		"card",
 		"playing_card",
+		"taoist",
+		"yijing",
+		"taixuanjing",
 	]
 
 	static decompositionAttributes := Map(
