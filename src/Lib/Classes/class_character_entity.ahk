@@ -62,6 +62,7 @@ Class ChrEntry {
 					"beforeAltTitle", "",
 					"copyNumber", 0,
 					"scriptAdditive", "",
+					"scriptBounds", [],
 					"tagAdditive", [],
 					"set", "",
 					"view", "",

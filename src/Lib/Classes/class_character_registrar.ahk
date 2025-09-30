@@ -329,9 +329,10 @@ Class ChrReg {
 
 	CloneOptions(&sourceOptions, &index) {
 		local tempOptions := sourceOptions.Clone()
-		local indexBanned := ["letter"]
+		local strIndexBanned := ["letter"]
+		local arrIndexBanned := ["tagAdditive", "scriptBounds"]
 		for key, value in sourceOptions {
-			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 && (key = "tagAdditive" && sourceOptions[key].Has(index) && sourceOptions[key][index] is Array || key != "tagAdditive") {
+			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 && (arrIndexBanned.HasValue(key) && sourceOptions[key].Has(index) && sourceOptions[key][index] is Array || !arrIndexBanned.HasValue(key)) {
 				if sourceOptions[key].Has(index) {
 					if sourceOptions[key][index] is Array
 						tempOptions[key] := sourceOptions[key][index].Clone()
@@ -340,7 +341,7 @@ Class ChrReg {
 				} else
 					tempOptions[key] := sourceOptions[key][1] is Array ? sourceOptions[key][1].Clone() : sourceOptions[key][1]
 			} else if sourceOptions[key] is String {
-				if RegExMatch(sourceOptions[key], "\[(.*?)\]", &match) && !indexBanned.HasValue(key) {
+				if RegExMatch(sourceOptions[key], "\[(.*?)\]", &match) && !strIndexBanned.HasValue(key) {
 					local arrayContent := match[1]
 					local elements := StrSplit(arrayContent, ",")
 

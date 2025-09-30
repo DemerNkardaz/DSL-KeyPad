@@ -22,6 +22,16 @@
 				"trigram": "trigram",
 				"tetragram": "tetragram",
 				"hexagram": "hexagram"
+			},
+			"before_letter": {
+				"si_xiang": "sìxiàng",
+				"bagua": "bāguà",
+				"liushisigua": "liùshísìguà"
+			},
+			"after_letter": {
+				"si_xiang": "sìxiàng",
+				"bagua": "bāguà",
+				"liushisigua": "liùshísìguà"
 			}
 		},
 		"scripts": {
@@ -29,41 +39,41 @@
 				"n_sym_yinyang": { "letter_locale": "Yīn Yáng" }
 			},
 			"yijing": {
-				"n_sym_monogram_yin": { "letter_locale": "Yīn" },
-				"n_sym_monogram_yang": { "letter_locale": "Yáng" },
-				"n_sym_digram_greater_yin": { "letter_locale": "Greater Yīn" },
-				"n_sym_digram_lesser_yang": { "letter_locale": "Lesser Yáng" },
-				"n_sym_digram_lesser_yin": { "letter_locale": "Lesser Yīn" },
-				"n_sym_digram_greater_yang": { "letter_locale": "Greater Yáng" },
-				"n_sym_trigram_qian": {
+				"n_sym_monogram_1_yin": { "letter_locale": "Yīn" },
+				"n_sym_monogram_2_yang": { "letter_locale": "Yáng" },
+				"n_sym_digram_1_greater_yin": { "letter_locale": "Greater Yīn" },
+				"n_sym_digram_2_lesser_yang": { "letter_locale": "Lesser Yáng" },
+				"n_sym_digram_3_lesser_yin": { "letter_locale": "Lesser Yīn" },
+				"n_sym_digram_4_greater_yang": { "letter_locale": "Greater Yáng" },
+				"n_sym_trigram_1_qian": {
 					"letter_locale": "Qián",
 					"meaning": "[ Heaven ][ South ]"
 				},
-				"n_sym_trigram_dui": {
+				"n_sym_trigram_2_dui": {
 					"letter_locale": "Duì",
 					"meaning": "[ Lake ][ Southeast ]"
 				},
-				"n_sym_trigram_li": {
+				"n_sym_trigram_3_li": {
 					"letter_locale": "Lí",
 					"meaning": "[ Fire ][ East ]"
 				},
-				"n_sym_trigram_zhen": {
+				"n_sym_trigram_4_zhen": {
 					"letter_locale": "Zhèn",
 					"meaning": "[ Thunder ][ Northeast ]"
 				},
-				"n_sym_trigram_xun": {
+				"n_sym_trigram_5_xun": {
 					"letter_locale": "Xùn",
 					"meaning": "[ Wind ][ Southwest ]"
 				},
-				"n_sym_trigram_kan": {
+				"n_sym_trigram_6_kan": {
 					"letter_locale": "Kǎn",
 					"meaning": "[ Water ][ West ]"
 				},
-				"n_sym_trigram_gen": {
+				"n_sym_trigram_7_gen": {
 					"letter_locale": "Gèn",
 					"meaning": "[ Mountain ][ Northwest ]"
 				},
-				"n_sym_trigram_kun": {
+				"n_sym_trigram_8_kun": {
 					"letter_locale": "Kūn",
 					"meaning": "[ Eath ][ North ]"
 				},

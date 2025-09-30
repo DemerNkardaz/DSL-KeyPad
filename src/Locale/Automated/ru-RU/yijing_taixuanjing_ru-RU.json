@@ -22,6 +22,16 @@
 				"trigram": "триграмма",
 				"tetragram": "тетраграмма",
 				"hexagram": "гексаграмма"
+			},
+			"before_letter": {
+				"si_xiang": "сысян",
+				"bagua": "багуа",
+				"liushisigua": "люшисыгуа"
+			},
+			"after_letter": {
+				"si_xiang": "сысян",
+				"bagua": "багуа",
+				"liushisigua": "люшисыгуа"
 			}
 		},
 		"scripts": {
@@ -29,41 +39,41 @@
 				"n_sym_yinyang": { "letter_locale": "Инь и Ян" }
 			},
 			"yijing": {
-				"n_sym_monogram_yin": { "letter_locale": "Инь" },
-				"n_sym_monogram_yang": { "letter_locale": "Ян" },
-				"n_sym_digram_greater_yin": { "letter_locale": "Старый Инь" },
-				"n_sym_digram_lesser_yang": { "letter_locale": "Молодой Ян" },
-				"n_sym_digram_lesser_yin": { "letter_locale": "Молодой Инь" },
-				"n_sym_digram_greater_yang": { "letter_locale": "Старый Ян" },
-				"n_sym_trigram_qian": {
+				"n_sym_monogram_1_yin": { "letter_locale": "Инь" },
+				"n_sym_monogram_2_yang": { "letter_locale": "Ян" },
+				"n_sym_digram_1_greater_yin": { "letter_locale": "Старый Инь" },
+				"n_sym_digram_2_lesser_yang": { "letter_locale": "Молодой Ян" },
+				"n_sym_digram_3_lesser_yin": { "letter_locale": "Молодой Инь" },
+				"n_sym_digram_4_greater_yang": { "letter_locale": "Старый Ян" },
+				"n_sym_trigram_1_qian": {
 					"letter_locale": "Цянь",
 					"meaning": "[ Небо ][ Юг ]"
 				},
-				"n_sym_trigram_dui": {
+				"n_sym_trigram_2_dui": {
 					"letter_locale": "Дуй",
 					"meaning": "[ Водоём ][ Юго-Восток ]"
 				},
-				"n_sym_trigram_li": {
+				"n_sym_trigram_3_li": {
 					"letter_locale": "Ли",
 					"meaning": "[ Огонь ][ Восток ]"
 				},
-				"n_sym_trigram_zhen": {
+				"n_sym_trigram_4_zhen": {
 					"letter_locale": "Чжэнь",
 					"meaning": "[ Гром ][ Северо-Восток ]"
 				},
-				"n_sym_trigram_xun": {
+				"n_sym_trigram_5_xun": {
 					"letter_locale": "Сюнь",
 					"meaning": "[ Ветер ][ Юго-Запад ]"
 				},
-				"n_sym_trigram_kan": {
+				"n_sym_trigram_6_kan": {
 					"letter_locale": "Кань",
 					"meaning": "[ Вода ][ Запад ]"
 				},
-				"n_sym_trigram_gen": {
+				"n_sym_trigram_7_gen": {
 					"letter_locale": "Гэнь",
 					"meaning": "[ Гора ][ Северо-Запад ]"
 				},
-				"n_sym_trigram_kun": {
+				"n_sym_trigram_8_kun": {
 					"letter_locale": "Кунь",
 					"meaning": "[ Земля ][ Север ]"
 				},
@@ -321,7 +331,7 @@
 				},
 				"n_sym_hexagram_64_wei_ji": {
 					"letter_locale": "Вэй-цзи",
-					"meaning": "[ Еще не конец ]"
+					"meaning": "[ Ещё не конец ]"
 				}
 			},
 			"taixuanjing": {
