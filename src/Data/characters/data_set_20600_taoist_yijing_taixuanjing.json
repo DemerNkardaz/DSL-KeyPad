@@ -79,7 +79,9 @@
 				"y tn"
 			]
 		],
+		"options": { "altTitleUseLineBreak": true },
 		"symbol": {
+			"afterTitle": "/self/meaning",
 			"type": "trigram"
 		}
 	},
@@ -156,39 +158,63 @@
 				"y hp1"
 			],
 			[
+				"${yijing_n_sym_trigram_qian}${yijing_n_sym_trigram_li}",
+				"${yijing_n_sym_digram_greater_yang×2}${yijing_n_sym_digram_lesser_yin}",
 				"y ht2"
 			],
 			[
+				"${yijing_n_sym_trigram_li}${yijing_n_sym_trigram_qian}",
+				"${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_greater_yang×2}",
 				"y hd1"
 			],
 			[
+				"${yijing_n_sym_trigram_kun}${yijing_n_sym_trigram_gen}",
+				"${yijing_n_sym_digram_greater_yin}${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_digram_greater_yin}",
 				"y hq2"
 			],
 			[
+				"${yijing_n_sym_trigram_zhen}${yijing_n_sym_trigram_kun}",
+				"${yijing_n_sym_digram_greater_yin}${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_greater_yin}",
 				"y hy1"
 			],
 			[
+				"${yijing_n_sym_trigram_dui}${yijing_n_sym_trigram_zhen}",
+				"${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_lesser_yin}",
 				"y hs3"
 			],
 			[
+				"${yijing_n_sym_trigram_gen}${yijing_n_sym_trigram_xun}",
+				"${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_lesser_yin}${yijing_n_sym_digram_lesser_yang}",
 				"y hg1"
 			],
 			[
+				"${yijing_n_sym_trigram_kun}${yijing_n_sym_trigram_dui}",
+				"${yijing_n_sym_digram_greater_yin×2}${yijing_n_sym_digram_greater_yang}",
 				"y hl2"
 			],
 			[
+				"${yijing_n_sym_trigram_xun}${yijing_n_sym_trigram_kun}",
+				"${yijing_n_sym_digram_greater_yang}${yijing_n_sym_digram_greater_yin×2}",
 				"y hg2"
 			],
 			[
+				"${yijing_n_sym_trigram_li}${yijing_n_sym_trigram_zhen}",
+				"${yijing_n_sym_digram_lesser_yang×2}${yijing_n_sym_digram_lesser_yin}",
 				"y hs4"
 			],
 			[
+				"${yijing_n_sym_trigram_gen}${yijing_n_sym_trigram_li}",
+				"${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_lesser_yin×2}",
 				"y hb2"
 			],
 			[
+				"${yijing_n_sym_trigram_gen}${yijing_n_sym_trigram_kun}",
+				"${yijing_n_sym_digram_lesser_yang}${yijing_n_sym_digram_greater_yin×2}",
 				"y hb3"
 			],
 			[
+				"${yijing_n_sym_trigram_kun}${yijing_n_sym_trigram_zhen}",
+				"${yijing_n_sym_digram_greater_yin×2}${yijing_n_sym_digram_lesser_yin}",
 				"y hf1"
 			],
 			[
@@ -312,8 +338,10 @@
 				"y hw2"
 			]
 		],
+		"options": { "altTitleUseLineBreak": true },
 		"symbol": {
 			"beforeLetter": "{i}",
+			"afterTitle": "/self/meaning",
 			"type": "hexagram"
 		}
 	}
