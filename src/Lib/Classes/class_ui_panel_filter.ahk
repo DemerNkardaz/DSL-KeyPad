@@ -83,14 +83,19 @@ Class UIMainPanelFilter {
 						if index != this.localeData.localeIndex
 							reserveTexts.Push(StrReplace(item[index], Chr(0x00A0), " "))
 
+					local titles := []
+					local titlesMap := Map()
 					local tags := []
 					local tagsMap := Map()
 					local isTagsMirrored := False
 					local entryName := item[5]
+
 					if entryName != "" {
-						reserveTexts.MergeWith([entryName], ChrLib.GetValue(entryName, "tags"))
+						titles := ChrLib.GetValue(entryName, "altTitles")
+						titlesMap := ChrLib.GetValue(entryName, "altTitlesMap")
 						tags := ChrLib.GetValue(entryName, "tags")
 						tagsMap := ChrLib.GetValue(entryName, "tagsMap")
+						reserveTexts.MergeWith([entryName], titles, tags)
 						isTagsMirrored := ChrLib.GetValue(entryName, "options.isTagsMirrored")
 					}
 
@@ -107,18 +112,20 @@ Class UIMainPanelFilter {
 						if itemText ~= filterText {
 							isMatch := True
 						} else {
-							matchedTag := this.FindMatchingTag(&tags, &filterText)
+							local unitedTitleTags := ArrayMerge(titles, tags)
+							matchedTag := this.FindMatchingTag(&unitedTitleTags, &filterText)
 							if matchedTag != "" {
 								isMatch := True
-								if tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag)
+								if (tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag)) || (tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag))
 									displayText := Util.StrUpper(matchedTag, 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
 								else if isTagsMirrored {
-									for lang, tags in tagsMap
-										for i, tag in tags
-											if tag = matchedTag && tagsMap[languageCode].Has(i) {
-												displayText := Util.StrUpper(tagsMap[languageCode][i], 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
-												break 2
-											}
+									for eachMap in [titlesMap, tagsMap]
+										for lang, tags in eachMap
+											for i, tag in tags
+												if tag = matchedTag && eachMap[languageCode].Has(i) {
+													displayText := Util.StrUpper(eachMap[languageCode][i], 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+													break 2
+												}
 								}
 							} else
 								isMatch := this.MatchInArray(&reserveTexts, &filterText)

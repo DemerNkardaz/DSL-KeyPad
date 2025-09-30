@@ -8,7 +8,7 @@
 	},
 	"yijing_n_sym_monogram_{i}_[yin,yang]", {
 		"unicode": ["268B", "268A"],
-		"recipe": [["y yi"], ["y ya"]],
+		"recipe": [["y yi", "t md"], ["y ya", "t mt"]],
 		"options": { "fastKey": ["<! 9?Secondary", "c*<! 9?Secondary"] },
 		"symbol": {
 			"beforeLetter": "{i}",
@@ -25,10 +25,10 @@
 	"yijing_n_sym_digram_{i}_[greater_yin,lesser_yang,lesser_yin,greater_yang]", {
 		"unicode": ["268F", "268E", "268D", "268C"],
 		"recipe": [
-			["${yijing_n_sym_monogram_1_yin×2}", "y gi"],
-			["${yijing_n_sym_monogram_2_yang}${yijing_n_sym_monogram_1_yin}", "y la"],
-			["${yijing_n_sym_monogram_1_yin}${yijing_n_sym_monogram_2_yang}", "y li"],
-			["${yijing_n_sym_monogram_2_yang×2}", "y ga"]
+			["${yijing_n_sym_monogram_1_yin×2}", "y gi", "t ddd"],
+			["${yijing_n_sym_monogram_2_yang}${yijing_n_sym_monogram_1_yin}", "y la", "t dtd"],
+			["${yijing_n_sym_monogram_1_yin}${yijing_n_sym_monogram_2_yang}", "y li", "t ddt"],
+			["${yijing_n_sym_monogram_2_yang×2}", "y ga", "t dtt"]
 		],
 		"options": { "fastKey": ["<!<+ 9?Secondary", "<!>+ 9?Secondary", "c*<!>+ 9?Secondary", "c*<!<+ 9?Secondary"] },
 		"symbol": {
@@ -452,7 +452,7 @@
 	},
 	"taixuanjing_n_sym_monogram_{2...i}_[ren]", {
 		"unicode": ["1D300"],
-		"recipe": [["t rn"]],
+		"recipe": [["t mn"]],
 		"options": { "altTitleUseLineBreak": true },
 		"symbol": {
 			"beforeLetter": "{2...i}",
@@ -465,11 +465,11 @@
 	"taixuanjing_n_sym_digram_{4...i}_[tian_ren,di_ren,ren_tian,ren_di,ren_ren]", {
 		"unicode": ["1D301", "1D302", "1D303", "1D304", "1D305"],
 		"recipe": [
-			[ "t tr"],
-			[ "t dr"],
-			[ "t rt"],
-			[ "t rd"],
-			[ "t rr"]
+			[ "t dtr"],
+			[ "t ddr"],
+			[ "t drt"],
+			[ "t drd"],
+			[ "t drr"]
 		],
 		"options": { "altTitleUseLineBreak": true },
 		"symbol": {

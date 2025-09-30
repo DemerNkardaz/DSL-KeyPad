@@ -28,6 +28,7 @@ Class LocaleGenerator {
 		local entrySymbol := entry["symbol"].Clone()
 
 		local tagsCollector := Map("en-US", [], "ru-RU", [])
+		local titlesCollector := Map("en-US", [], "ru-RU", [])
 
 		local boundsCollector := Map(
 			"script", Map("en-US", [], "ru-RU", [])
@@ -299,6 +300,8 @@ Class LocaleGenerator {
 
 		local additionalTags := []
 		if entry["symbol"]["tagAdditive"].Length > 0 {
+			local allowsMultiTitles := entry["options"]["allowsMultiTitles"]
+
 			for tagAdd in entry["symbol"]["tagAdditive"] {
 				for lang in ["en-US", "ru-RU"] {
 					if tagsCollector.Has(lang) {
@@ -431,6 +434,28 @@ Class LocaleGenerator {
 								lAdditionalAfterTitle
 								((lang = "ru-RU" && !curTagScriptAtStart) ? " " scriptTag : "")
 							)
+
+							if titlesCollector.Has(lang) && (allowsMultiTitles || tagAdd.Has("script")) {
+								titlesCollector[lang].Push(
+									lAdditionalBeforeTitle
+									(boundsCollector["script"][lang].Length > 0 ? boundsCollector["script"][lang][1] : "")
+									Locale.Read(pfx "prefix." curScript (!isGermanic ? curScriptAdditive : ""), lang, , , , curLVariant)
+									(boundsCollector["script"][lang].Length > 0 ? boundsCollector["script"][lang][2] : "")
+									" "
+									lAdditionalBeforeType
+									localedCase Locale.Read(pfx "type." curType, lang)
+									lAdditionalAfterType
+									(isGermanic && scriptAdditive != "" ? " " Locale.Read(pfx "prefix." curScript curScriptAdditive, lang, , , , curLVariant) : "")
+									" "
+									lAdditionalBeforeLetter
+									additionalPostLetter
+									lAdditionalAfterLetter
+									; lSecondName
+									lAdditionalCopyNumber
+									proxyMark
+									lAdditionalAfterTitle
+								)
+							}
 						}
 					}
 				}
@@ -465,6 +490,16 @@ Class LocaleGenerator {
 
 				entry["tagsMap"][lang].Push(each)
 			}
+
+			for each in titlesCollector[lang] {
+				if !entry["altTitles"].HasValue(each)
+					entry["altTitles"].Push(each)
+
+				if !entry["altTitlesMap"].Has(lang)
+					entry["altTitlesMap"].Set(lang, [])
+
+				entry["altTitlesMap"][lang].Push(each)
+			}
 		}
 
 		entry["options"].Set("isTagsMirrored", True)
@@ -473,6 +508,7 @@ Class LocaleGenerator {
 			for each in tagsBackup
 				if !entry["tags"].HasValue(each)
 					entry["tags"].Push(each)
+
 
 		return entry
 	}
