@@ -25,7 +25,8 @@
 			"negativeCircled": "24FF",
 			"fullstop": "1F100",
 			"comma": "1F101",
-			"tag": "E0030"
+			"tag": "E0030",
+			"segmented": "1FBF0"
 		}, {
 			"doubleStruck": "1D7D9",
 			"bold": "1D7CF",
@@ -41,7 +42,8 @@
 			"parenthesized": "2474",
 			"fullstop": "2488",
 			"comma": "1F102",
-			"tag": "E0031"
+			"tag": "E0031",
+			"segmented": "1FBF1"
 		}, {
 			"doubleStruck": "1D7DA",
 			"bold": "1D7D0",
@@ -57,7 +59,8 @@
 			"parenthesized": "2475",
 			"fullstop": "2489",
 			"comma": "1F103",
-			"tag": "E0032"
+			"tag": "E0032",
+			"segmented": "1FBF2"
 		}, {
 			"doubleStruck": "1D7DB",
 			"bold": "1D7D1",
@@ -73,7 +76,8 @@
 			"parenthesized": "2476",
 			"fullstop": "248A",
 			"comma": "1F104",
-			"tag": "E0033"
+			"tag": "E0033",
+			"segmented": "1FBF3"
 		}, {
 			"doubleStruck": "1D7DC",
 			"bold": "1D7D2",
@@ -89,7 +93,8 @@
 			"parenthesized": "2477",
 			"fullstop": "248B",
 			"comma": "1F105",
-			"tag": "E0034"
+			"tag": "E0034",
+			"segmented": "1FBF4"
 		}, {
 			"doubleStruck": "1D7DD",
 			"bold": "1D7D3",
@@ -105,7 +110,8 @@
 			"parenthesized": "2478",
 			"fullstop": "248C",
 			"comma": "1F106",
-			"tag": "E0035"
+			"tag": "E0035",
+			"segmented": "1FBF5"
 		}, {
 			"doubleStruck": "1D7DE",
 			"bold": "1D7D4",
@@ -121,7 +127,8 @@
 			"parenthesized": "2479",
 			"fullstop": "248D",
 			"comma": "1F107",
-			"tag": "E0036"
+			"tag": "E0036",
+			"segmented": "1FBF6"
 		}, {
 			"doubleStruck": "1D7DF",
 			"bold": "1D7D5",
@@ -137,7 +144,8 @@
 			"parenthesized": "247A",
 			"fullstop": "248E",
 			"comma": "1F108",
-			"tag": "E0037"
+			"tag": "E0037",
+			"segmented": "1FBF7"
 		}, {
 			"doubleStruck": "1D7E0",
 			"bold": "1D7D6",
@@ -153,7 +161,8 @@
 			"parenthesized": "247B",
 			"fullstop": "248F",
 			"comma": "1F109",
-			"tag": "E0038"
+			"tag": "E0038",
+			"segmented": "1FBF8"
 		}, {
 			"doubleStruck": "1D7E1",
 			"bold": "1D7D7",
@@ -169,7 +178,8 @@
 			"parenthesized": "247C",
 			"fullstop": "2490",
 			"comma": "1F10A",
-			"tag": "E0039"
+			"tag": "E0039",
+			"segmented": "1FBF9"
 		}],
 		"tagsPrefixes": ["number ", "число ", ""],
 		"tags": [

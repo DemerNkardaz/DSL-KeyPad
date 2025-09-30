@@ -674,6 +674,7 @@ Class ChrLib {
 			"comma", ["с запятой", "сзп", "cm"],
 			"tag", ["тег", "т", "t"],
 			"oblique", ["косая", "кя", "ob"],
+			"segmented", ["сегментированный", "сг", "sg"],
 		)
 
 		for key, value in alterationNames {

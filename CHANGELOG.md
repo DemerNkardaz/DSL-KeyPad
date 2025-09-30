@@ -6,6 +6,11 @@
 
 ### [0.1.7.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
 
+- Additions:
+
+  - Added symbol sets: Yin and Yang (☯︎); monograms, bigrams, trigrams and hexagrams of Yijing; monograms, bigrams and tetragrams of Taixuanjing.
+  - Added segmented variants of numbers.
+
 - Changes:
 
   - When searching for tags, if the query does not contain a space, it now looks for the presence of a whole word before proceeding with other comparison options.
@@ -163,6 +168,11 @@
 <summary>Русский</summary>
 
 ### [0.1.7.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
+
+- Добавления:
+
+  - Добавлены наборы символов: Инь и Ян (☯︎); монограммы, диграммы, триграммы и гексаграммы И-Цзин; монограммы, диграммы и тетраграммы Тайсюань-Цзин.
+  - Добавлены сегментированные варианты цифр.
 
 - Изменения:
 
