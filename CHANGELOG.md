@@ -8,12 +8,18 @@
 
 - Additions:
 
+  - Library extended to 6,000+ Unicode characters.
   - Added symbol sets: Yin and Yang (☯︎); monograms, bigrams, trigrams and hexagrams of Yijing; monograms, bigrams and tetragrams of Taixuanjing.
   - Added segmented variants of numbers.
 
 - Changes:
 
   - When searching for tags, if the query does not contain a space, it now looks for the presence of a whole word before proceeding with other comparison options.
+  - Titltes/tags generation for symbols entries, also “Search” and filtering in main window was improved.
+
+- Fixes:
+
+  - Fixed Windows 11 error, when symbols are ignored in the “Compositions” mode.
 
 ### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 
@@ -171,12 +177,18 @@
 
 - Добавления:
 
+  - Библиотека расширена до 6,000+ символов Unicode.
   - Добавлены наборы символов: Инь и Ян (☯︎); монограммы, диграммы, триграммы и гексаграммы И-Цзин; монограммы, диграммы и тетраграммы Тайсюань-Цзин.
   - Добавлены сегментированные варианты цифр.
 
 - Изменения:
 
   - При поиске тегов, если запрос не содержит пробела, теперь ищет наличие целого слова в теге перед тем, как провести остальные варианты сравнения.
+  - Улучшены: генерация названий/тегов для записей символов, «Поиск» и фильтрация в главном окне.
+
+- Исправления:
+
+  - Исправлена ошибка в Windows 11, при которой символы привязок игнорировались режимом «Композиции».
 
 ### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 
