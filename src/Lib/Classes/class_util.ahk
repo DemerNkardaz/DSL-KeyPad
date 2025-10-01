@@ -221,6 +221,11 @@ Class Util {
 		return False
 	}
 
+	static IsHighSurrogate(character) {
+		local code := Ord(SubStr(character, 1, 1))
+		return (code >= 0xD800 && code <= 0xDBFF)
+	}
+
 	static StrToUnicode(inputString, mode := "") {
 		local output := ""
 		local len := StrLen(inputString)

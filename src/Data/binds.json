@@ -2949,21 +2949,24 @@
 			},
 			"8": {
 				"<^>!": "multiplication",
-				"<^>!<!": "infinity"
+				"<^>!<!": "infinity",
+				"<^>!<+": "large_circle"
 			},
 			"9": {
 				"<^>!": "left_chevron",
 				"<!": "left_bracket",
 				"<!<+": "left_brace",
-				"<^>!<!": "yijing_n_sym_monogram_[yang,yin]",
-				"<^>!<!<+": "yijing_n_sym_digram_[greater_yang,greater_yin]",
-				"<^>!<!>+": "yijing_n_sym_digram_[lesser_yin,lesser_yang]"
+				"<^>!<!:Caps": "yijing_n_sym_monogram_[2,1]_[yang,yin]",
+				"<^>!<!<+:Caps": "yijing_n_sym_digram_[4,1]_[greater_yang,greater_yin]",
+				"<^>!<!>+:Caps": "yijing_n_sym_digram_[3,2]_[lesser_yin,lesser_yang]"
 			},
 			"0": {
 				"<^>!": "right_chevron",
-				"<^>!<!": "large_circle",
 				"<!": "right_bracket",
-				"<!<+": "right_brace"
+				"<!<+": "right_brace",
+				"<^>!<!:Caps": "taixuanjing_n_sym_[di,mono]gram_[9,3]_[ren_,]ren",
+				"<^>!<!<+:Caps": "taixuanjing_n_sym_digram_[6,5]_[di_ren,tian_ren]",
+				"<^>!<!>+:Caps": "taixuanjing_n_sym_digram_[8,7]_[ren_di,ren_tian]"
 			},
 			"Equals": {
 				"<^>!": ["noequals"],

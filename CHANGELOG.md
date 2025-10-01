@@ -16,6 +16,7 @@
 
   - When searching for tags, if the query does not contain a space, it now looks for the presence of a whole word before proceeding with other comparison options.
   - Titltes/tags generation for symbols entries, also “Search” and filtering in main window was improved.
+  - “Compose” mode now accepts both normal characters and surrogate pairs.
 
 - Fixes:
 
@@ -185,6 +186,7 @@
 
   - При поиске тегов, если запрос не содержит пробела, теперь ищет наличие целого слова в теге перед тем, как провести остальные варианты сравнения.
   - Улучшены: генерация названий/тегов для записей символов, «Поиск» и фильтрация в главном окне.
+  - Режим «Композиции» теперь одновременно принимает ввод и обычных символов, и символов из суррогатных пар.
 
 - Исправления:
 

@@ -481,7 +481,7 @@
 			"beforeType": "t.sancai<en-US>",
 			"afterType": "t.sancai<ru-RU>",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
-			"font": "Catrinity"
+			"font": "Segoe UI Symbol"
 		}
 	},
 	"taixuanjing_n_sym_digram_{4...i}_[tian_ren,di_ren,ren_tian,ren_di,ren_ren]", {
@@ -498,7 +498,7 @@
 			"beforeLetter": "{4...i}",
 			"type": "digram",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
-			"font": "Catrinity"
+			"font": "Segoe UI Symbol"
 		}
 	},
 	"taixuanjing_n_sym_tetragram_{i}_[zhong,zhou,xin,xian,shao,li,shang,gan,shu,xian,cha,tong,zeng,rui,da,jiao,ruan,xi,cong,jin,shi,ge,yi,le,zheng,wu,shi,geng,duan,yi,zhuang,zhong,mi,qin,lian,qiang,sui,sheng,ju,fa,ying,ying,yu,zao,da,kuo,wen,li,tao,tang,chang,du,yong,kun,jian,jin,shou,xi,ju,ji,shi,yi,shi,chen,nei,qu,hui,meng,qiong,ge,zhi,jian,cheng,zhi,shi,ju,xun,jiang,nan,qin,yang]", {
@@ -603,7 +603,7 @@
 			"beforeType": "t.bashiyishou<en-US>",
 			"afterType": "t.bashiyishou<ru-RU>",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
-			"font": "Catrinity"
+			"font": "Segoe UI Symbol"
 		}
 	}
 ]

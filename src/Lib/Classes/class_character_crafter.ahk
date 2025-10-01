@@ -3,6 +3,8 @@ Class ChrCrafter {
 	composeKeyTimer := ""
 	isComposeInstanceActive := False
 
+	surrogateBuffer := ""
+
 	Start(compositingMode := "InputBox") {
 		this.compositingMode := compositingMode
 		this.modifiedCharsType := Scripter.selectedMode.Get("Glyph Variations")
@@ -42,6 +44,8 @@ Class ChrCrafter {
 	}
 
 	ComposeMode() {
+		this.surrogateBuffer := ""
+
 		BindHandler.sendType := "Event"
 		TooltipPresets.Select("Compose")
 
@@ -126,11 +130,14 @@ Class ChrCrafter {
 			"suggested", (*) => ComposeSuggestedTooltip()
 		)
 
+
 		Loop {
 			if TooltipPresets.selected != "Compose"
 				TooltipPresets.Select("Compose")
 
 			iterationObject := {}
+			iterationObject.released := False
+
 			composeObject.insertType := RegExMatch(composeObject.input, "i)^([uюυaаα])\+", &m) ? (m[1] ~= "i)[uюυ]" ? "Unicode" : "Altcode") : ""
 			iterationObject.codes := RegExReplace(composeObject.input, "i)^([uюυaаα])\+", "")
 
@@ -144,6 +151,8 @@ Class ChrCrafter {
 
 			iterationObject.IterationHook := InputHook("L" composeObject.symCount, "{Escape}{Backspace}{Enter}{Pause}{Tab}{Insert}")
 			iterationObject.IterationHook.Start(), iterationObject.IterationHook.Wait()
+			iterationObject.input := iterationObject.IterationHook.Input
+
 
 			Event.Trigger("Compose Mode", "Iteration Started", &iterationObject, &composeObject)
 
@@ -157,11 +166,16 @@ Class ChrCrafter {
 				composeObject.cancelledByUser := True
 				composeObject.ParentHook.Stop()
 				break
-			} else if iterationObject.IterationHook.Input != "" {
-				composeObject.input .= this.parseUniAlt(iterationObject.IterationHook.Input, composeObject.input, composeObject.insertType)
+			} else if iterationObject.input != "" {
+				if Util.IsHighSurrogate(iterationObject.input) {
+					iterationObject.input := this.surrogateBuffer
+					this.surrogateBuffer := ""
+				}
+
+				composeObject.input .= this.parseUniAlt(iterationObject.input, composeObject.input, composeObject.insertType)
 
 				if TelexScriptProcessor.GetActiveMode() && StrLen(composeObject.input) > 1 {
-					local charPair := StrLen(composeObject.input) > 2 && composeObject.previousInput = "\" ? composeObject.pastInput composeObject.previousInput iterationObject.IterationHook.Input : composeObject.previousInput iterationObject.IterationHook.Input
+					local charPair := StrLen(composeObject.input) > 2 && composeObject.previousInput = "\" ? composeObject.pastInput composeObject.previousInput iterationObject.input : composeObject.previousInput iterationObject.input
 					local telexChar := TelexScriptProcessor.TelexReturn(&charPair)
 
 					if telexChar != charPair {
@@ -171,7 +185,7 @@ Class ChrCrafter {
 				}
 
 				composeObject.pastInput := composeObject.previousInput
-				composeObject.previousInput := iterationObject.IterationHook.Input
+				composeObject.previousInput := iterationObject.input
 			}
 
 			if composeObject.cleanPastInput {
@@ -340,6 +354,7 @@ Class ChrCrafter {
 		}
 
 		this.isComposeInstanceActive := False
+		this.surrogateBuffer := ""
 		return BindHandler.sendType := ""
 	}
 

@@ -1616,7 +1616,7 @@
 		"unicode": "25EF",
 		"tags": ["large circle", "большой круг"],
 		"groups": ["Special Fast Secondary"],
-		"options": { "fastKey": "<! 0" }
+		"options": { "fastKey": "<+ 8" }
 	},
 	"circled_minus", {
 		"unicode": "2296",
