@@ -21,6 +21,8 @@ Class ChrEntry {
 				"filePath", "",
 				"tags", [],
 				"tagsMap", Map(),
+				"hiddenTags", [],
+				"hiddenTagsMap", Map(),
 				"groups", [],
 				"alterations", Map(),
 				"options", Map(
@@ -41,6 +43,9 @@ Class ChrEntry {
 					"isTagsMirrored", False,
 					"altTitleUseLineBreak", False,
 					"allowsMultiTitles", False,
+					"ignoreCaseOnPanelFilter", False,
+					"useHiddenTags", False,
+					"hiddenTagsLanguage", "",
 					"altLayoutKey", "",
 					"showOnAlt", "",
 					"altSpecialKey", "",

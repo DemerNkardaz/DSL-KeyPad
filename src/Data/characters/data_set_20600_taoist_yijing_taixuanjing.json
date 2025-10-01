@@ -3,13 +3,13 @@
 		"unicode": ["262F", "262F"],
 		"sequence": [["262F", "FE0E"], ["262F", "FE0F"]],
 		"recipe": [["t yy"], ["emoji yy"]],
-		"options": { "useLetterLocale": "yinyang$", "noCalc": [false, true] },
+		"options": { "useLetterLocale": "yinyang$", "noCalc": [false, true], "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true },
 		"symbol": { "beforeLetter": "[,emoji]" }
 	},
 	"yijing_n_sym_monogram_{i}_[yin,yang]", {
 		"unicode": ["268B", "268A"],
 		"recipe": [["y yi", "t md"], ["y ya", "t mt"]],
-		"options": { "fastKey": ["<! 9?Secondary", "c*<! 9?Secondary"] },
+		"options": { "fastKey": ["<! 9?Secondary", "c*<! 9?Secondary"], "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
 		"symbol": {
 			"beforeLetter": "{i}",
 			"beforeType": "t.yao<en-US>",
@@ -17,8 +17,28 @@
 			"type": "monogram",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
 			"tagAdditive": [
-				[{ "typeOriginPath": true, "script": "taixuanjing", "afterTitle": "/self/meaning", "beforeLetter": "{i}", "letter": "monogram_1_di" }],
-				[{ "typeOriginPath": true, "script": "taixuanjing", "afterTitle": "/self/meaning", "beforeLetter": "{i}", "letter": "monogram_2_tian" }]
+				[
+					{ 
+						"typeOriginPath": true,
+						"script": "taixuanjing",
+						"afterTitle": "/self/meaning",
+						"beforeLetter": "{i}",
+						"beforeType": "t.sancai<en-US>",
+						"afterType": "t.sancai<ru-RU>",
+						"letter": "monogram_1_di"
+					}
+				],
+				[
+					{
+						"typeOriginPath": true,
+						"script": "taixuanjing",
+						"afterTitle": "/self/meaning",
+						"beforeLetter": "{i}",
+						"beforeType": "t.sancai<en-US>",
+						"afterType": "t.sancai<ru-RU>",
+						"letter": "monogram_2_tian"
+					}
+				]
 			]
 		}
 	},
@@ -30,7 +50,7 @@
 			["${yijing_n_sym_monogram_1_yin}${yijing_n_sym_monogram_2_yang}", "y li", "t ddt"],
 			["${yijing_n_sym_monogram_2_yang×2}", "y ga", "t dtt"]
 		],
-		"options": { "fastKey": ["<!<+ 9?Secondary", "<!>+ 9?Secondary", "c*<!>+ 9?Secondary", "c*<!<+ 9?Secondary"] },
+		"options": { "fastKey": ["<!<+ 9?Secondary", "<!>+ 9?Secondary", "c*<!>+ 9?Secondary", "c*<!<+ 9?Secondary"], "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
 		"symbol": {
 			"beforeLetter": "{i}",
 			"beforeType": "t.si_xiang<en-US>",
@@ -97,7 +117,7 @@
 				"y tn"
 			]
 		],
-		"options": { "altTitleUseLineBreak": true },
+		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
 		"symbol": {
 			"beforeLetter": "{i}",
 			"beforeType": "t.bagua<en-US>",
@@ -440,7 +460,7 @@
 				"y hw2"
 			]
 		],
-		"options": { "altTitleUseLineBreak": true },
+		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US" },
 		"symbol": {
 			"beforeLetter": "{i}",
 			"beforeType": "t.liushisigua<en-US>",
@@ -453,11 +473,13 @@
 	"taixuanjing_n_sym_monogram_{2...i}_[ren]", {
 		"unicode": ["1D300"],
 		"recipe": [["t mn"]],
-		"options": { "altTitleUseLineBreak": true },
+		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
 		"symbol": {
 			"beforeLetter": "{2...i}",
 			"type": "monogram",
 			"afterTitle": "/self/meaning",
+			"beforeType": "t.sancai<en-US>",
+			"afterType": "t.sancai<ru-RU>",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
 			"font": "Catrinity"
 		}
@@ -471,7 +493,7 @@
 			[ "t drd"],
 			[ "t drr"]
 		],
-		"options": { "altTitleUseLineBreak": true },
+		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
 		"symbol": {
 			"beforeLetter": "{4...i}",
 			"type": "digram",

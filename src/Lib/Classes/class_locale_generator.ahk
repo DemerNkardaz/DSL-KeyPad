@@ -30,6 +30,10 @@ Class LocaleGenerator {
 		local tagsCollector := Map("en-US", [], "ru-RU", [])
 		local titlesCollector := Map("en-US", [], "ru-RU", [])
 
+		local useHiddenTags := entry["options"]["useHiddenTags"]
+		local hiddenTagsLanguage := entry["options"]["hiddenTagsLanguage"]
+		local hiddenTagsCollector := Map("en-US", [], "ru-RU", [])
+
 		local boundsCollector := Map(
 			"script", Map("en-US", [], "ru-RU", [])
 		)
@@ -83,6 +87,7 @@ Class LocaleGenerator {
 
 		local langCodes := ["en-US", "ru-RU", "en-US_alt", "ru-RU_alt"]
 		local tags := Map()
+		local hiddenTags := Map("en-US", "", "ru-RU", "")
 		entry["titles"] := Map()
 
 		local ref := LTLReference ? LTLReference : entryName
@@ -105,6 +110,9 @@ Class LocaleGenerator {
 
 			local postLetter := useLetterLocale ? Locale.Read(interLetter (useLetterLocale ? ".letter_locale" : ""), lang) : letter
 
+			if useLetterLocale && useHiddenTags
+				hiddenLetter := Locale.Read(interLetter (useLetterLocale ? ".letter_locale.__hidden" : ""), lang, True, &hidden) ? hidden : postLetter
+
 			local lBeforeletter := ""
 			local lAfterletter := ""
 			local lBeforeType := ""
@@ -115,6 +123,20 @@ Class LocaleGenerator {
 			local lAfterTitle := ""
 			local lBeforeAltTitle := ""
 			local lAfterAltTitle := ""
+
+			if useHiddenTags {
+				lHiddenBeforeletter := ""
+				lHiddenAfterletter := ""
+				lHiddenBeforeType := ""
+				lHiddenAfterType := ""
+				lHiddenSecondName := ""
+
+				lHiddenBeforeTitle := ""
+				lHiddenAfterTitle := ""
+				lHiddenBeforeAltTitle := ""
+				lHiddenAfterAltTitle := ""
+			}
+
 
 			local altTitleUseLineBreak := entry["options"]["altTitleUseLineBreak"]
 
@@ -158,9 +180,13 @@ Class LocaleGenerator {
 						} else if RegExMatch(boundKey, "\{(\d+)?(?:\.\.\.)?i\}", &match) {
 							local addition := match[1] ? Integer(match[1]) : 0
 							l%boundLink% .= Integer(entry["variantPos"]) + addition
+							if useHiddenTags
+								lHidden%boundLink% .= Integer(entry["variantPos"]) + addition
 							continue
 						} else if RegExMatch(boundKey, "@(.*?)", &match) {
 							l%boundLink% .= match[1]
+							if useHiddenTags
+								lHidden%boundLink% .= match[1]
 							continue
 						}
 
@@ -168,12 +194,21 @@ Class LocaleGenerator {
 							local index := Integer(match[1])
 							local cleanBound := SubStr(boundKey, 1, match.Pos(0) - 1)
 							l%boundLink% .= Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." cleanBound, lang, , , , index) (i < splitted.Length ? " " : "")
+
+							if useHiddenTags
+								lHidden%boundLink% .= (Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." cleanBound ".__hidden", lang, True, &hidden, , index) ? hidden : l%boundLink%) (i < splitted.Length ? " " : "")
 						} else {
 							l%boundLink% .= Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." boundKey, lang, , , , (InStr(boundLink, "Type") ? lVariant : 1)) (i < splitted.Length ? " " : "")
+
+							if useHiddenTags
+								lHidden%boundLink% .= (Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." boundKey ".__hidden", lang, True, &hidden, , (InStr(boundLink, "Type") ? lVariant : 1)) ? hidden : l%boundLink%) (i < splitted.Length ? " " : "")
 						}
 
-						if titlelizeFirstLetter
-							l%boundLink% := Util.StrUpper(l%boundLink%, 1)
+						if titlelizeFirstLetter {
+							l%boundLink% := StrTitle(l%boundLink%)
+							if useHiddenTags
+								lHidden%boundLink% := StrTitle(lHidden%boundLink%)
+						}
 					}
 				}
 			}
@@ -183,6 +218,7 @@ Class LocaleGenerator {
 
 			lBeforeletter := lBeforeletter != "" ? lBeforeletter " " : ""
 			lAfterletter := lAfterletter != "" ? " " lAfterletter : ""
+
 
 			if lBeforeAltTitle = "" && lBeforeTitle != ""
 				lBeforeAltTitle := lBeforeTitle
@@ -194,6 +230,26 @@ Class LocaleGenerator {
 
 			lBeforeAltTitle := lBeforeAltTitle != "" ? lBeforeAltTitle (altTitleUseLineBreak ? "`n" : " ") : ""
 			lAfterAltTitle := lAfterAltTitle != "" ? (altTitleUseLineBreak ? "`n" : " ") lAfterAltTitle : ""
+
+			if useHiddenTags {
+				lHiddenBeforeType := lHiddenBeforeType != "" ? lHiddenBeforeType " " : ""
+				lHiddenAfterType := lHiddenAfterType != "" ? " " lHiddenAfterType : ""
+
+				lHiddenBeforeletter := lHiddenBeforeletter != "" ? lHiddenBeforeletter " " : ""
+				lHiddenAfterletter := lHiddenAfterletter != "" ? " " lHiddenAfterletter : ""
+
+				if lHiddenBeforeAltTitle = "" && lHiddenBeforeTitle != ""
+					lHiddenBeforeAltTitle := lHiddenBeforeTitle
+				if lHiddenAfterAltTitle = "" && lHiddenAfterTitle != ""
+					lHiddenAfterAltTitle := lHiddenAfterTitle
+
+
+				lHiddenBeforeTitle := lHiddenBeforeTitle != "" ? lHiddenBeforeTitle " " : ""
+				lHiddenAfterTitle := lHiddenAfterTitle != "" ? " " lHiddenAfterTitle : ""
+
+				lHiddenBeforeAltTitle := lHiddenBeforeAltTitle != "" ? lHiddenBeforeAltTitle (altTitleUseLineBreak ? "`n" : " ") : ""
+				lHiddenAfterAltTitle := lHiddenAfterAltTitle != "" ? (altTitleUseLineBreak ? "`n" : " ") lHiddenAfterAltTitle : ""
+			}
 
 			local proxyMark := entry["proxy"] != "" ? " " Locale.Read("gen.proxy", lang) : ""
 
@@ -240,6 +296,21 @@ Class LocaleGenerator {
 					lCopyNumber
 					lAfterTitle
 				)
+
+				if useHiddenTags && (hiddenTagsLanguage = "" || hiddenTagsLanguage != "" && InStr(hiddenTagsLanguage, langCode)) {
+					local tag := (
+						lHiddenBeforeTitle
+						(!isGermanic ? localedCase lHiddenBeforeType (Locale.Read(pfx "type." lType, lang, True, &hidden) ? hidden : Locale.Read(pfx "type." lType, lang)) lHiddenAfterType " " : "")
+						lHiddenBeforeletter
+						hiddenLetter
+						lHiddenAfterletter
+						lSecondName
+						lCopyNumber
+						lHiddenAfterTitle
+					)
+
+					hiddenTags[langCode] := tag
+				}
 			}
 		}
 
@@ -294,6 +365,31 @@ Class LocaleGenerator {
 		tagsCollector["en-US"].Push(this.LocaleRules(tags["en-US"], "en-US"))
 		tagsCollector["ru-RU"].Push(this.LocaleRules(tags["ru-RU"], "ru-RU"))
 
+		if useHiddenTags {
+			for lang in ["en-US", "ru-RU"] {
+				if hiddenTags[lang] != "" {
+					local hiddenTagScriptAdditive := scriptAdditive ? " " (Locale.Read(pfx "tag." lScript (scriptAdditive) ".__hidden", lang, True, &hidden) ? hidden : tagScriptAdditive[lang]) : ""
+
+					local hiddenTag := (
+						tagScriptAtStart ?
+							(
+								(Locale.Read(pfx "tag." lScript ".__hidden", lang, True, &hidden, , lVariant) ? hidden : Locale.Read(pfx "tag." lScript, lang, , , , lVariant))
+								(isGermanic ? " " (Locale.Read(pfx "type." lType ".__hidden", lang, True, &hidden) ? hidden : Locale.Read(pfx "type." lType, lang)) : "")
+								hiddenTagScriptAdditive " "
+								hiddenTags[lang]
+							)
+						: (
+							hiddenTags[lang]
+							" "
+							(Locale.Read(pfx "tag." lScript ".__hidden", lang, True, &hidden, , lVariant) ? hidden : Locale.Read(pfx "tag." lScript, lang, , , , lVariant))
+						)
+					)
+
+					hiddenTagsCollector[lang].Push(this.LocaleRules(hiddenTag, lang))
+				}
+			}
+		}
+
 		for _, langCode in langCodes {
 			entry["titles"][langCode] := this.LocaleRules(entry["titles"][langCode], langCode)
 		}
@@ -314,6 +410,7 @@ Class LocaleGenerator {
 						local curHasCopyNumber := curCopyNumber > 0
 						local curTagScriptAtStart := (tagAdd.Has("tagScriptAtStart") ? tagAdd["tagScriptAtStart"] : tagScriptAtStart)
 						local curAltTitleUseLineBreak := tagAdd.Has("altTitleUseLineBreak") ? tagAdd["altTitleUseLineBreak"] : altTitleUseLineBreak
+						local curUseHiddenTags := (tagAdd.Has("useHiddenTags") ? tagAdd["useHiddenTags"] : useHiddenTags)
 
 						local useOriginalTypePath := tagAdd.Has("typeOriginPath") ? tagAdd["typeOriginPath"] : False
 
@@ -335,6 +432,18 @@ Class LocaleGenerator {
 
 						local lAdditionalBeforeTitle := ""
 						local lAdditionalAfterTitle := ""
+
+						if curUseHiddenTags {
+							lHiddenAdditionalBeforeletter := ""
+							lHiddenAdditionalAfterletter := ""
+							lHiddenAdditionalBeforeType := ""
+							lHiddenAdditionalAfterType := ""
+
+							lHiddenAdditionalBeforeTitle := ""
+							lHiddenAdditionalAfterTitle := ""
+							lHiddenAdditionalBeforeAltTitle := ""
+							lHiddenAdditionalAfterAltTitle := ""
+						}
 
 						local draftRef := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" curLetter)
 
@@ -358,16 +467,20 @@ Class LocaleGenerator {
 										local isBan := languageRuleMatch[1] = "!"
 										local languageRule := languageRuleMatch[2]
 
-										if !InStr(langCode, languageRule) && !isBan || InStr(langCode, languageRule) && isBan
+										if !InStr(lang, languageRule) && !isBan || InStr(lang, languageRule) && isBan
 											continue
 
 										boundKey := RegExReplace(boundKey, languageRuleMatch[0])
 									} else if RegExMatch(boundKey, "\{(\d+)?(?:\.\.\.)?i\}", &match) {
 										local addition := match[1] ? Integer(match[1]) : 0
 										lAdditional%boundLink% .= Integer(entry["variantPos"]) + addition
+										if curUseHiddenTags
+											lHiddenAdditional%boundLink% .= Integer(entry["variantPos"]) + addition
 										continue
 									} else if RegExMatch(boundKey, "@(.*?)", &match) {
 										lAdditional%boundLink% .= match[1]
+										if curUseHiddenTags
+											lHiddenAdditional%boundLink% .= match[1]
 										continue
 									}
 
@@ -375,11 +488,24 @@ Class LocaleGenerator {
 										local index := Integer(match[1])
 										local cleanBound := SubStr(boundKey, 1, match.Pos(0) - 1)
 										lAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." cleanBound, lang, , , , index) (i < splitted.Length ? " " : "")
-									} else
+
+										if curUseHiddenTags {
+											lHiddenAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." cleanBound ".__hidden", lang, True, &hidden, , index) ? hidden : lAdditional%boundLink%
+										}
+									} else {
 										lAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." boundKey, lang, , , , (InStr(boundLink, "Type") ? curLVariant : 1)) (i < splitted.Length ? " " : "")
 
-									if titlelizeFirstLetter
-										lAdditional%boundLink% := Util.StrUpper(lAdditional%boundLink%, 1)
+										if curUseHiddenTags {
+											lHiddenAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." boundKey ".__hidden", lang, True, &hidden) ? hidden : lAdditional%boundLink%
+										}
+									}
+
+									if titlelizeFirstLetter {
+										lAdditional%boundLink% := StrTitle(lAdditional%boundLink%)
+										if curUseHiddenTags {
+											lHiddenAdditional%boundLink% := StrTitle(lHiddenAdditional%boundLink%)
+										}
+									}
 								}
 							}
 						}
@@ -393,6 +519,22 @@ Class LocaleGenerator {
 						lAdditionalBeforeTitle := lAdditionalBeforeTitle != "" ? lAdditionalBeforeTitle " " : ""
 						lAdditionalAfterTitle := lAdditionalAfterTitle != "" ? " " lAdditionalAfterTitle : ""
 
+						if curUseHiddenTags {
+							lHiddenAdditionalBeforeType := lHiddenAdditionalBeforeType != "" ? lHiddenAdditionalBeforeType " " : ""
+							lHiddenAdditionalAfterType := lHiddenAdditionalAfterType != "" ? " " lHiddenAdditionalAfterType : ""
+
+							lHiddenAdditionalBeforeletter := lHiddenAdditionalBeforeletter != "" ? lHiddenAdditionalBeforeletter " " : ""
+							lHiddenAdditionalAfterletter := lHiddenAdditionalAfterletter != "" ? " " lHiddenAdditionalAfterletter : ""
+
+							if lHiddenAdditionalBeforeAltTitle = "" && lHiddenAdditionalBeforeTitle != ""
+								lHiddenAdditionalBeforeAltTitle := lHiddenAdditionalBeforeTitle
+							if lHiddenAdditionalAfterAltTitle = "" && lHiddenAdditionalAfterTitle != ""
+								lHiddenAdditionalAfterAltTitle := lHiddenAdditionalAfterTitle
+
+							lHiddenAdditionalBeforeTitle := lHiddenAdditionalBeforeTitle != "" ? lHiddenAdditionalBeforeTitle " " : ""
+							lHiddenAdditionalAfterTitle := lHiddenAdditionalAfterTitle != "" ? " " lHiddenAdditionalAfterTitle : ""
+						}
+
 						if curIsGermanic {
 							local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" letter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "") "_" curLetter) ".letter_locale"
 							local additionalPostLetter := Locale.Read(lBuildedName, lang)
@@ -405,7 +547,7 @@ Class LocaleGenerator {
 								lAdditionalBeforeTitle
 								aLScript
 								lAdditionalBeforeType
-								" " aLType
+								aLType
 								lAdditionalAfterType
 								aScriptAdditive " "
 								lAdditionalBeforeLetter
@@ -414,19 +556,45 @@ Class LocaleGenerator {
 								lAdditionalCopyNumber
 								lAdditionalAfterTitle
 							)
+
+							if curUseHiddenTags && (hiddenTagsLanguage = "" || hiddenTagsLanguage != "" && InStr(hiddenTagsLanguage, lang)) {
+								local additionalHiddenLetter := Locale.Read(lBuildedName ".__hidden", lang, True, &hidden) ? hidden : additionalPostLetter
+								local aLHiddenScript := Locale.Read(pfx "tag." curScript ".__hidden", lang, True, &hidden) ? hidden : aLScript
+								local aHiddenScriptAdditive := hasScriptAdditive ? " " (Locale.Read(pfx "tag." curScript curScriptAdditive ".__hidden", lang, True, &hidden) ? hidden : aScriptAdditive) : ""
+								local aLHiddenType := Locale.Read(pfx "type." curType ".__hidden", lang, True, &hidden) ? hidden : aLType
+
+								local tag := (
+									lHiddenAdditionalBeforeTitle
+									aLHiddenScript
+									lHiddenAdditionalBeforeType
+									" " aLHiddenType
+									lHiddenAdditionalAfterType
+									aHiddenScriptAdditive " "
+									lHiddenAdditionalBeforeLetter
+									additionalHiddenLetter
+									lHiddenAdditionalAfterLetter
+									lAdditionalCopyNumber
+									lHiddenAdditionalAfterTitle
+								)
+
+								hiddenTagsCollector[lang].Push(tag)
+							}
+
+
 						} else {
 							local lBuildedName := StrLower("scripts." curScript "." curCaseKey "_" curTypeKey "_" curLetter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "")) ".letter_locale"
 							local additionalPostLetter := Locale.Read(lBuildedName, lang)
 
 							local localedCase := curCase != "neutral" ? Locale.Read(pfx "case." curCase, lang, , , , curLVariant) " " : ""
 							local scriptTag := Locale.Read(pfx "tag." curScript, lang, , , , curLVariant)
+							local typeTag := Locale.Read(pfx "type." curType, lang)
 
 							tagsCollector[lang].Push(
 								lAdditionalBeforeTitle
 								((lang = "en-US" || lang = "ru-RU" && curTagScriptAtStart) ? scriptTag " " : "")
 								lAdditionalBeforeType
-								localedCase Locale.Read(pfx "type." curType, lang) " "
-								lAdditionalAfterType
+								localedCase typeTag
+								lAdditionalAfterType " "
 								lAdditionalBeforeLetter
 								additionalPostLetter
 								lAdditionalAfterLetter
@@ -443,7 +611,7 @@ Class LocaleGenerator {
 									(boundsCollector["script"][lang].Length > 0 ? boundsCollector["script"][lang][2] : "")
 									" "
 									lAdditionalBeforeType
-									localedCase Locale.Read(pfx "type." curType, lang)
+									localedCase typeTag
 									lAdditionalAfterType
 									(isGermanic && scriptAdditive != "" ? " " Locale.Read(pfx "prefix." curScript curScriptAdditive, lang, , , , curLVariant) : "")
 									" "
@@ -455,6 +623,29 @@ Class LocaleGenerator {
 									proxyMark
 									lAdditionalAfterTitle
 								)
+							}
+
+							if curUseHiddenTags && (hiddenTagsLanguage = "" || hiddenTagsLanguage != "" && InStr(hiddenTagsLanguage, lang)) {
+								local additionalHiddenLetter := Locale.Read(lBuildedName ".__hidden", lang, True, &hidden) ? hidden : additionalPostLetter
+								local localedHiddenCase := curCase != "neutral" ? (Locale.Read(pfx "case." curCase ".__hidden", lang, True, &hidden, , curLVariant) ? hidden : localedCase) " " : ""
+								local scriptHiddenTag := Locale.Read(pfx "tag." curScript ".__hidden", lang, True, &hidden, , curLVariant) ? hidden : scriptTag
+								local typeHiddenTag := Locale.Read(pfx "type." curType ".__hidden", lang, True, &hidden) ? hidden : typeTag
+
+								local tag := (
+									lHiddenAdditionalBeforeTitle
+									((lang = "en-US" || lang = "ru-RU" && curTagScriptAtStart) ? scriptHiddenTag " " : "")
+									lHiddenAdditionalBeforeType
+									localedHiddenCase typeHiddenTag " "
+									lHiddenAdditionalAfterType
+									lHiddenAdditionalBeforeLetter
+									additionalHiddenLetter
+									lHiddenAdditionalAfterLetter
+									lAdditionalCopyNumber
+									lHiddenAdditionalAfterTitle
+									((lang = "ru-RU" && !curTagScriptAtStart) ? " " scriptHiddenTag : "")
+								)
+
+								hiddenTagsCollector[lang].Push(tag)
 							}
 						}
 					}
@@ -489,6 +680,18 @@ Class LocaleGenerator {
 					entry["tagsMap"].Set(lang, [])
 
 				entry["tagsMap"][lang].Push(each)
+			}
+
+			if useHiddenTags {
+				for each in hiddenTagsCollector[lang] {
+					if (each = "" || !entry["hiddenTags"].HasValue(each))
+						entry["hiddenTags"].Push(each)
+
+					if !entry["hiddenTagsMap"].Has(lang)
+						entry["hiddenTagsMap"].Set(lang, [])
+
+					entry["hiddenTagsMap"][lang].Push(each)
+				}
 			}
 
 			for each in titlesCollector[lang] {

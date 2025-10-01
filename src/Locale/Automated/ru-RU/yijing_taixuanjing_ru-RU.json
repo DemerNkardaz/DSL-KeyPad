@@ -27,13 +27,17 @@
 				"yao": "яо",
 				"si_xiang": "сысян",
 				"bagua": "багуа",
-				"liushisigua": "люшисыгуа"
+				"liushisigua": "люшисыгуа",
+				"sancai": "санцяй",
+				"bashiyishou": "башийшоу"
 			},
 			"after_letter": {
 				"yao": "яо",
 				"si_xiang": "сысян",
 				"bagua": "багуа",
-				"liushisigua": "люшисыгуа"
+				"liushisigua": "люшисыгуа",
+				"sancai": "санцяй",
+				"bashiyishou": "башийшоу"
 			}
 		},
 		"scripts": {

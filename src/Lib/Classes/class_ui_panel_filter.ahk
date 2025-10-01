@@ -44,12 +44,14 @@ Class UIMainPanelFilter {
 		return False
 	}
 
-	FindMatchingTag(&textsArray, &filterText) {
+	FindMatchingTag(&textsArray, &filterText, &caseSensitiveMark) {
 		for each in textsArray {
+			if each = "" || StrLen(each) = 0
+				continue
 			local escaped := RegExEscape(each)
 			if escaped = filterText
-				|| escaped ~= filterText
-				|| filterText ~= escaped
+				|| escaped ~= caseSensitiveMark filterText
+				|| filterText ~= caseSensitiveMark escaped
 				return each
 		}
 		return ""
@@ -63,8 +65,6 @@ Class UIMainPanelFilter {
 			this.Populate()
 		} else {
 			local languageCode := Language.Get()
-			local groupStarted := False
-			local previousGroupName := ""
 			local keyOrRecipeMark := False
 
 			if filterText ~= "i)^(R::|Р::)" {
@@ -73,6 +73,8 @@ Class UIMainPanelFilter {
 			}
 
 			try {
+				local matchedItems := []
+
 				for item in this.dataList {
 					if item[this.localeData.localeIndex] = ""
 						continue
@@ -87,7 +89,11 @@ Class UIMainPanelFilter {
 					local titlesMap := Map()
 					local tags := []
 					local tagsMap := Map()
+					local hiddenTags := []
+					local hiddenTagsMap := Map()
+					local useHiddenTags := False
 					local isTagsMirrored := False
+					local caseSensitiveMark := ""
 					local entryName := item[5]
 
 					if entryName != "" {
@@ -95,7 +101,16 @@ Class UIMainPanelFilter {
 						titlesMap := ChrLib.GetValue(entryName, "altTitlesMap")
 						tags := ChrLib.GetValue(entryName, "tags")
 						tagsMap := ChrLib.GetValue(entryName, "tagsMap")
-						reserveTexts.MergeWith([entryName], titles, tags)
+						caseSensitiveMark := ChrLib.GetValue(entryName, "options.ignoreCaseOnPanelFilter") && !InStr(filterText, "i)") ? "i)" : ""
+
+						useHiddenTags := ChrLib.GetValue(entryName, "options.useHiddenTags")
+
+						if useHiddenTags {
+							hiddenTagsMap := ChrLib.GetValue(entryName, "hiddenTagsMap")
+							hiddenTags := ChrLib.GetValue(entryName, "hiddenTags")
+						}
+
+						reserveTexts.MergeWith([entryName], titles, tags, hiddenTags)
 						isTagsMirrored := ChrLib.GetValue(entryName, "options.isTagsMirrored")
 					}
 
@@ -112,20 +127,28 @@ Class UIMainPanelFilter {
 						if itemText ~= filterText {
 							isMatch := True
 						} else {
-							local unitedTitleTags := ArrayMerge(titles, tags)
-							matchedTag := this.FindMatchingTag(&unitedTitleTags, &filterText)
+							local unitedTitleTags := ArrayMerge(titles, tags, hiddenTags)
+							matchedTag := this.FindMatchingTag(&unitedTitleTags, &filterText, &caseSensitiveMark)
 							if matchedTag != "" {
 								isMatch := True
 								if (tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag)) || (tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag))
 									displayText := Util.StrUpper(matchedTag, 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
 								else if isTagsMirrored {
-									for eachMap in [titlesMap, tagsMap]
-										for lang, tags in eachMap
-											for i, tag in tags
-												if tag = matchedTag && eachMap[languageCode].Has(i) {
-													displayText := Util.StrUpper(eachMap[languageCode][i], 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
-													break 2
+									for mapIndex, eachMap in [titlesMap, tagsMap, hiddenTagsMap] {
+										for lang, tags in eachMap {
+											for i, tag in tags {
+												if tag != "" {
+													if mapIndex = 3 && tag = matchedTag && tagsMap[languageCode].Has(i) {
+														displayText := Util.StrUpper(tagsMap[languageCode][i], 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+														break 2
+													} else if tag = matchedTag && eachMap[languageCode].Has(i) {
+														displayText := Util.StrUpper(eachMap[languageCode][i], 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+														break 2
+													}
 												}
+											}
+										}
+									}
 								}
 							} else
 								isMatch := this.MatchInArray(&reserveTexts, &filterText)
@@ -133,24 +156,93 @@ Class UIMainPanelFilter {
 					}
 
 					if isMatch {
-						if !groupStarted
-							groupStarted := True
-						this.LV.Add(, displayText, ArraySlice(item, 2, this.localeData.columnsCount)*)
-					} else if groupStarted
-						groupStarted := False
-
-					if itemText != "" && itemText != previousGroupName
-						previousGroupName := itemText
+						matchedItems.Push({
+							displayText: displayText,
+							item: item,
+							originalText: itemText
+						})
+					}
 				}
 
-				if groupStarted
-					this.LV.Add()
+				local groupedItems := this.GroupAndSortMatches(matchedItems)
 
-				if previousGroupName != ""
+				local previousGroupName := ""
+				for groupItem in groupedItems {
+					this.LV.Add(, groupItem.displayText, ArraySlice(groupItem.item, 2, this.localeData.columnsCount)*)
+
+					if groupItem.originalText != "" && groupItem.originalText != previousGroupName
+						previousGroupName := groupItem.originalText
+				}
+
+				if groupedItems.Length > 0
 					this.LV.Add()
 
 			} catch
 				this.Populate()
 		}
+	}
+
+	GroupAndSortMatches(matchedItems) {
+		if matchedItems.Length = 0
+			return []
+
+		local groups := Map()
+		local groupOrder := []
+
+		for item in matchedItems {
+			local groupKey := this.ExtractGroupPattern(item.displayText)
+
+			if !groups.Has(groupKey) {
+				groups[groupKey] := []
+				groupOrder.Push(groupKey)
+			}
+
+			groups[groupKey].Push(item)
+		}
+
+		local result := []
+		for groupKey in groupOrder {
+			local groupItems := groups[groupKey]
+
+			this.SortGroupItems(&groupItems)
+
+			for item in groupItems
+				result.Push(item)
+		}
+
+		return result
+	}
+
+	ExtractGroupPattern(text) {
+		if RegExMatch(text, "^(.*?)\s*(\d+)", &match)
+			return match[1]
+
+		return text
+	}
+
+	SortGroupItems(&items) {
+		local n := items.Length
+
+		loop n - 1 {
+			local i := A_Index
+			loop n - i {
+				local j := A_Index
+
+				local num1 := this.ExtractNumber(items[j].displayText)
+				local num2 := this.ExtractNumber(items[j + 1].displayText)
+
+				if num1 != "" && num2 != "" && (num1 > num2) {
+					local temp := items[j]
+					items[j] := items[j + 1]
+					items[j + 1] := temp
+				}
+			}
+		}
+	}
+
+	ExtractNumber(text) {
+		if RegExMatch(text, "\d+", &match)
+			return Integer(match[0])
+		return ""
 	}
 }

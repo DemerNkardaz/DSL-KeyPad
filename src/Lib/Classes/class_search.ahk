@@ -255,14 +255,16 @@ Class Search {
 				if entry["tags"].Length = 0
 					continue
 
-				for tag in entry["tags"] {
-					if conditions[i](tag) {
-						local cleanTag := StrReplace(tag, Chr(0x00A0), " ")
-						matchedTags.Push({
-							entryName: entryName,
-							tag: cleanTag,
-							originalIndex: j
-						})
+				for tagArray in [entry["tags"], entry["hiddenTags"]] {
+					for tag in tagArray {
+						if tag != "" && conditions[i](tag) {
+							local cleanTag := StrReplace(tag, Chr(0x00A0), " ")
+							matchedTags.Push({
+								entryName: entryName,
+								tag: cleanTag,
+								originalIndex: j
+							})
+						}
 					}
 				}
 			}

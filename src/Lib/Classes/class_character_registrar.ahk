@@ -841,12 +841,16 @@ Class ChrReg {
 		if !ChrLib.entryCategories.Get(entry["symbol"]["category"]).HasValue(entryName)
 			ChrLib.entryCategories[entry["symbol"]["category"]].Push(entryName)
 
-		if entry["tags"].Length > 0 {
-			for tag in entry["tags"] {
-				if !ChrLib.entryTags.Has(tag)
-					ChrLib.entryTags.Set(tag, [])
+		for eachTagArray in [entry["tags"], entry["hiddenTags"]] {
+			if eachTagArray.Length > 0 {
+				for tag in eachTagArray {
+					if tag != "" {
+						if !ChrLib.entryTags.Has(tag)
+							ChrLib.entryTags.Set(tag, [])
 
-				ChrLib.entryTags[tag].Push(entryName)
+						ChrLib.entryTags[tag].Push(entryName)
+					}
+				}
 			}
 		}
 		return

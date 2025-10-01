@@ -1,20 +1,20 @@
 {
 	"en-US": {
 		"script_labels": {
-			"taoist": "Taoist",
-			"yijing": "Yijing",
-			"taixuanjing": "Taixuanjing"
+			"taoist": { "__self": "Dàojiào", "__hidden": "Daojiao" },
+			"yijing": { "__self": "Yìjīng", "__hidden": "Yijing" },
+			"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" }
 		},
 		"generated": {
 			"prefix": {
-				"taoist": "Taoist",
-				"yijing": "Yijing",
-				"taixuanjing": "Taixuanjing"
+				"taoist": { "__self": "Dàojiào", "__hidden": "daojiao" },
+				"yijing": { "__self": "Yìjīng", "__hidden": "Yijing" },
+				"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" }
 			},
 			"tag": {
-				"taoist": "taoist",
-				"yijing": "yijing",
-				"taixuanjing": "taixuanjing"
+				"taoist": { "__self": "dàojiào", "__hidden": "daojiao" },
+				"yijing": { "__self": "yìjīng", "__hidden": "yijing" },
+				"taixuanjing": { "__self": "tàixuánjīng", "__hidden": "taixuanjing" }
 			},
 			"type": {
 				"monogram": "monogram",
@@ -24,365 +24,422 @@
 				"hexagram": "hexagram"
 			},
 			"before_letter": {
-				"yao": "yáo",
-				"si_xiang": "sìxiàng",
-				"bagua": "bāguà",
-				"liushisigua": "liùshísìguà"
+				"yao": {
+					"__self": "yáo",
+					"__hidden": "yao"
+				},
+				"si_xiang": {
+					"__self": "sìxiàng",
+					"__hidden": "sixiang"
+				},
+				"bagua": {
+					"__self": "bāguà",
+					"__hidden": "bagua"
+				},
+				"liushisigua": {
+					"__self": "liùshísìguà",
+					"__hidden": "liushisigua"
+				},
+				"sancai": {
+					"__self": "sāncái",
+					"__hidden": "sancai"
+				},
+				"bashiyishou": {
+					"__self": "bāshíyīshǒu",
+					"__hidden": "bashiyishou"
+				}
 			},
 			"after_letter": {
-				"yao": "yáo",
-				"si_xiang": "sìxiàng",
-				"bagua": "bāguà",
-				"liushisigua": "liùshísìguà"
+				"yao": {
+					"__self": "yáo",
+					"__hidden": "yao"
+				},
+				"si_xiang": {
+					"__self": "sìxiàng",
+					"__hidden": "sixiang"
+				},
+				"bagua": {
+					"__self": "bāguà",
+					"__hidden": "bagua"
+				},
+				"liushisigua": {
+					"__self": "liùshísìguà",
+					"__hidden": "liushisigua"
+				},
+				"sancai": {
+					"__self": "sāncái",
+					"__hidden": "sancai"
+				},
+				"bashiyishou": {
+					"__self": "bāshíyīshǒu",
+					"__hidden": "bashiyishou"
+				}
 			}
 		},
 		"scripts": {
 			"taoist": {
-				"n_sym_yinyang": { "letter_locale": "Yīn Yáng" }
+				"n_sym_yinyang": { 
+					"letter_locale": { 
+						"__self": "Yīn Yáng", 
+						"__hidden": "Yin Yang" 
+					} 
+				}
 			},
 			"yijing": {
-				"n_sym_monogram_1_yin": { "letter_locale": "Yīn" },
-				"n_sym_monogram_2_yang": { "letter_locale": "Yáng" },
-				"n_sym_digram_1_greater_yin": { "letter_locale": "Greater Yīn" },
-				"n_sym_digram_2_lesser_yang": { "letter_locale": "Lesser Yáng" },
-				"n_sym_digram_3_lesser_yin": { "letter_locale": "Lesser Yīn" },
-				"n_sym_digram_4_greater_yang": { "letter_locale": "Greater Yáng" },
+				"n_sym_monogram_1_yin": { 
+					"letter_locale": { "__self": "Yīn", "__hidden": "Yin" } 
+				},
+				"n_sym_monogram_2_yang": { 
+					"letter_locale": { "__self": "Yáng", "__hidden": "Yang" } 
+				},
+				"n_sym_digram_1_greater_yin": { 
+					"letter_locale": { "__self": "Greater Yīn", "__hidden": "Greater Yin" } 
+				},
+				"n_sym_digram_2_lesser_yang": { 
+					"letter_locale": { "__self": "Lesser Yáng", "__hidden": "Lesser Yang" } 
+				},
+				"n_sym_digram_3_lesser_yin": { 
+					"letter_locale": { "__self": "Lesser Yīn", "__hidden": "Lesser Yin" } 
+				},
+				"n_sym_digram_4_greater_yang": { 
+					"letter_locale": { "__self": "Greater Yáng", "__hidden": "Greater Yang" } 
+				},
 				"n_sym_trigram_1_qian": {
-					"letter_locale": "Qián",
+					"letter_locale": { "__self": "Qián", "__hidden": "Qian" },
 					"meaning": "[ Heaven ][ South ]"
 				},
 				"n_sym_trigram_2_dui": {
-					"letter_locale": "Duì",
+					"letter_locale": { "__self": "Duì", "__hidden": "Dui" },
 					"meaning": "[ Lake ][ Southeast ]"
 				},
 				"n_sym_trigram_3_li": {
-					"letter_locale": "Lí",
+					"letter_locale": { "__self": "Lí", "__hidden": "Li" },
 					"meaning": "[ Fire ][ East ]"
 				},
 				"n_sym_trigram_4_zhen": {
-					"letter_locale": "Zhèn",
+					"letter_locale": { "__self": "Zhèn", "__hidden": "Zhen" },
 					"meaning": "[ Thunder ][ Northeast ]"
 				},
 				"n_sym_trigram_5_xun": {
-					"letter_locale": "Xùn",
+					"letter_locale": { "__self": "Xùn", "__hidden": "Xun" },
 					"meaning": "[ Wind ][ Southwest ]"
 				},
 				"n_sym_trigram_6_kan": {
-					"letter_locale": "Kǎn",
+					"letter_locale": { "__self": "Kǎn", "__hidden": "Kan" },
 					"meaning": "[ Water ][ West ]"
 				},
 				"n_sym_trigram_7_gen": {
-					"letter_locale": "Gèn",
+					"letter_locale": { "__self": "Gèn", "__hidden": "Gen" },
 					"meaning": "[ Mountain ][ Northwest ]"
 				},
 				"n_sym_trigram_8_kun": {
-					"letter_locale": "Kūn",
+					"letter_locale": { "__self": "Kūn", "__hidden": "Kun" },
 					"meaning": "[ Eath ][ North ]"
 				},
 				"n_sym_hexagram_1_qian": {
-					"letter_locale": "Qián",
+					"letter_locale": { "__self": "Qián", "__hidden": "Qian" },
 					"meaning": "[ Force ]"
 				},
 				"n_sym_hexagram_2_kun": {
-					"letter_locale": "Kūn",
+					"letter_locale": { "__self": "Kūn", "__hidden": "Kun" },
 					"meaning": "[ Field ]"
 				},
 				"n_sym_hexagram_3_zhun": {
-					"letter_locale": "Zhūn",
+					"letter_locale": { "__self": "Zhūn", "__hidden": "Zhun" },
 					"meaning": "[ Sprouting ]"
 				},
 				"n_sym_hexagram_4_meng": {
-					"letter_locale": "Mēng",
+					"letter_locale": { "__self": "Mēng", "__hidden": "Meng" },
 					"meaning": "[ Enveloping ]"
 				},
 				"n_sym_hexagram_5_xu": {
-					"letter_locale": "Xū",
+					"letter_locale": { "__self": "Xū", "__hidden": "Xu" },
 					"meaning": "[ Attending ]"
 				},
 				"n_sym_hexagram_6_song": {
-					"letter_locale": "Sòng",
+					"letter_locale": { "__self": "Sòng", "__hidden": "Song" },
 					"meaning": "[ Arguing ]"
 				},
 				"n_sym_hexagram_7_shi": {
-					"letter_locale": "Shī",
+					"letter_locale": { "__self": "Shī", "__hidden": "Shi" },
 					"meaning": "[ Leading ]"
 				},
 				"n_sym_hexagram_8_bi": {
-					"letter_locale": "Bì",
+					"letter_locale": { "__self": "Bì", "__hidden": "Bi" },
 					"meaning": "[ Grouping ]"
 				},
 				"n_sym_hexagram_9_xiachu": {
-					"letter_locale": "Xiǎochù",
+					"letter_locale": { "__self": "Xiǎochù", "__hidden": "Xiaochu" },
 					"meaning": "[ Small Harvest ]"
 				},
 				"n_sym_hexagram_10_li": {
-					"letter_locale": "Lǐ",
+					"letter_locale": { "__self": "Lǐ", "__hidden": "Li" },
 					"meaning": "[ Treading ]"
 				},
 				"n_sym_hexagram_11_tai": {
-					"letter_locale": "Tài",
+					"letter_locale": { "__self": "Tài", "__hidden": "Tai" },
 					"meaning": "[ Pervading ]"
 				},
 				"n_sym_hexagram_12_pi": {
-					"letter_locale": "Pǐ",
+					"letter_locale": { "__self": "Pǐ", "__hidden": "Pi" },
 					"meaning": "[ Obstruction ]"
 				},
 				"n_sym_hexagram_13_tongren": {
-					"letter_locale": "Tóngrén",
+					"letter_locale": { "__self": "Tóngrén", "__hidden": "Tongren" },
 					"meaning": "[ Concording People ]"
 				},
 				"n_sym_hexagram_14_dayou": {
-					"letter_locale": "Dàyǒu",
+					"letter_locale": { "__self": "Dàyǒu", "__hidden": "Dayou" },
 					"meaning": "[ Great Possessing ]"
 				},
 				"n_sym_hexagram_15_qian": {
-					"letter_locale": "Qiān",
+					"letter_locale": { "__self": "Qiān", "__hidden": "Qian" },
 					"meaning": "[ Humbling ]"
 				},
 				"n_sym_hexagram_16_yu": {
-					"letter_locale": "Yù",
+					"letter_locale": { "__self": "Yù", "__hidden": "Yu" },
 					"meaning": "[ Providing-For ]"
 				},
 				"n_sym_hexagram_17_sui": {
-					"letter_locale": "Suí",
+					"letter_locale": { "__self": "Suí", "__hidden": "Sui" },
 					"meaning": "[ Following ]"
 				},
 				"n_sym_hexagram_18_gu": {
-					"letter_locale": "Gǔ",
+					"letter_locale": { "__self": "Gǔ", "__hidden": "Gu" },
 					"meaning": "[ Correcting ]"
 				},
 				"n_sym_hexagram_19_lin": {
-					"letter_locale": "Lín",
+					"letter_locale": { "__self": "Lín", "__hidden": "Lin" },
 					"meaning": "[ Nearing ]"
 				},
 				"n_sym_hexagram_20_guan": {
-					"letter_locale": "Guān",
+					"letter_locale": { "__self": "Guān", "__hidden": "Guan" },
 					"meaning": "[ Viewing ]"
 				},
 				"n_sym_hexagram_21_shi_ke": {
-					"letter_locale": "Shì kè",
+					"letter_locale": { "__self": "Shì kè", "__hidden": "Shi ke" },
 					"meaning": "[ Gnawing Bite ]"
 				},
 				"n_sym_hexagram_22_bi": {
-					"letter_locale": "Bì",
+					"letter_locale": { "__self": "Bì", "__hidden": "Bi" },
 					"meaning": "[ Adorning ]"
 				},
 				"n_sym_hexagram_23_bo": {
-					"letter_locale": "Bō",
+					"letter_locale": { "__self": "Bō", "__hidden": "Bo" },
 					"meaning": "[ Stripping ]"
 				},
 				"n_sym_hexagram_24_fu": {
-					"letter_locale": "Fù",
+					"letter_locale": { "__self": "Fù", "__hidden": "Fu" },
 					"meaning": "[ Returning ]"
 				},
 				"n_sym_hexagram_25_wu_wang": {
-					"letter_locale": "Wú wàng",
+					"letter_locale": { "__self": "Wú wàng", "__hidden": "Wu wang" },
 					"meaning": "[ Innocence ]"
 				},
 				"n_sym_hexagram_26_da_chu": {
-					"letter_locale": "Dà chù",
+					"letter_locale": { "__self": "Dà chù", "__hidden": "Da chu" },
 					"meaning": "[ Great Accumulating ]"
 				},
 				"n_sym_hexagram_27_yi": {
-					"letter_locale": "Yí",
+					"letter_locale": { "__self": "Yí", "__hidden": "Yi" },
 					"meaning": "[ Swallowing ]"
 				},
 				"n_sym_hexagram_28_da_guo": {
-					"letter_locale": "Dà guò",
+					"letter_locale": { "__self": "Dà guò", "__hidden": "Da guo" },
 					"meaning": "[ Great Exceeding ]"
 				},
 				"n_sym_hexagram_29_kan": {
-					"letter_locale": "Kǎn",
+					"letter_locale": { "__self": "Kǎn", "__hidden": "Kan" },
 					"meaning": "[ Gorge ]"
 				},
 				"n_sym_hexagram_30_li": {
-					"letter_locale": "Lí",
+					"letter_locale": { "__self": "Lí", "__hidden": "Li" },
 					"meaning": "[ Radiance ]"
 				},
 				"n_sym_hexagram_31_xian": {
-					"letter_locale": "Xián",
+					"letter_locale": { "__self": "Xián", "__hidden": "Xian" },
 					"meaning": "[ Conjoining ]"
 				},
 				"n_sym_hexagram_32_heng": {
-					"letter_locale": "Héng",
+					"letter_locale": { "__self": "Héng", "__hidden": "Heng" },
 					"meaning": "[ Persevering ]"
 				},
 				"n_sym_hexagram_33_dun": {
-					"letter_locale": "Dùn",
+					"letter_locale": { "__self": "Dùn", "__hidden": "Dun" },
 					"meaning": "[ Retiring ]"
 				},
 				"n_sym_hexagram_34_da_zhuang": {
-					"letter_locale": "Dà zhuàng",
+					"letter_locale": { "__self": "Dà zhuàng", "__hidden": "Da zhuang" },
 					"meaning": "[ Great Invigorating ]"
 				},
 				"n_sym_hexagram_35_jin": {
-					"letter_locale": "Jìn",
+					"letter_locale": { "__self": "Jìn", "__hidden": "Jin" },
 					"meaning": "[ Prospering ]"
 				},
 				"n_sym_hexagram_36_ming_yi": {
-					"letter_locale": "Míng yí",
+					"letter_locale": { "__self": "Míng yí", "__hidden": "Ming yi" },
 					"meaning": "[ Intelligence Hidden ]"
 				},
 				"n_sym_hexagram_37_jia_ren": {
-					"letter_locale": "Jiā rén",
+					"letter_locale": { "__self": "Jiā rén", "__hidden": "Jia ren" },
 					"meaning": "[ Dwelling People ]"
 				},
 				"n_sym_hexagram_38_kui": {
-					"letter_locale": "Kuí",
+					"letter_locale": { "__self": "Kuí", "__hidden": "Kui" },
 					"meaning": "[ Polarising ]"
 				},
 				"n_sym_hexagram_39_jian": {
-					"letter_locale": "Jiǎn",
+					"letter_locale": { "__self": "Jiǎn", "__hidden": "Jian" },
 					"meaning": "[ Limping ]"
 				},
 				"n_sym_hexagram_40_xie": {
-					"letter_locale": "Xiè",
+					"letter_locale": { "__self": "Xiè", "__hidden": "Xie" },
 					"meaning": "[ Deliverance ]"
 				},
 				"n_sym_hexagram_41_sun": {
-					"letter_locale": "Sǔn",
+					"letter_locale": { "__self": "Sǔn", "__hidden": "Sun" },
 					"meaning": "[ Diminishing ]"
 				},
 				"n_sym_hexagram_42_yi": {
-					"letter_locale": "Yì",
+					"letter_locale": { "__self": "Yì", "__hidden": "Yi" },
 					"meaning": "[ Augmenting ]"
 				},
 				"n_sym_hexagram_43_guai": {
-					"letter_locale": "Guài",
+					"letter_locale": { "__self": "Guài", "__hidden": "Guai" },
 					"meaning": "[ Displacement ]"
 				},
 				"n_sym_hexagram_44_gou": {
-					"letter_locale": "Gòu",
+					"letter_locale": { "__self": "Gòu", "__hidden": "Gou" },
 					"meaning": "[ Coupling ]"
 				},
 				"n_sym_hexagram_45_cui": {
-					"letter_locale": "Cuì",
+					"letter_locale": { "__self": "Cuì", "__hidden": "Cui" },
 					"meaning": "[ Clustering ]"
 				},
 				"n_sym_hexagram_46_sheng": {
-					"letter_locale": "Shēng",
+					"letter_locale": { "__self": "Shēng", "__hidden": "Sheng" },
 					"meaning": "[ Ascending ]"
 				},
 				"n_sym_hexagram_47_kun": {
-					"letter_locale": "Kùn",
+					"letter_locale": { "__self": "Kùn", "__hidden": "Kun" },
 					"meaning": "[ Confining ]"
 				},
 				"n_sym_hexagram_48_jing": {
-					"letter_locale": "Jǐng",
+					"letter_locale": { "__self": "Jǐng", "__hidden": "Jing" },
 					"meaning": "[ Welling ]"
 				},
 				"n_sym_hexagram_49_ge": {
-					"letter_locale": "Gé",
+					"letter_locale": { "__self": "Gé", "__hidden": "Ge" },
 					"meaning": "[ Skinning ]"
 				},
 				"n_sym_hexagram_50_ding": {
-					"letter_locale": "Dǐng",
+					"letter_locale": { "__self": "Dǐng", "__hidden": "Ding" },
 					"meaning": "[ Holding ]"
 				},
 				"n_sym_hexagram_51_zhen": {
-					"letter_locale": "Zhèn",
+					"letter_locale": { "__self": "Zhèn", "__hidden": "Zhen" },
 					"meaning": "[ Shake ]"
 				},
 				"n_sym_hexagram_52_gen": {
-					"letter_locale": "Gèn",
+					"letter_locale": { "__self": "Gèn", "__hidden": "Gen" },
 					"meaning": "[ Bound ]"
 				},
 				"n_sym_hexagram_53_jian": {
-					"letter_locale": "Jiàn",
+					"letter_locale": { "__self": "Jiàn", "__hidden": "Jian" },
 					"meaning": "[ Infiltrating ]"
 				},
 				"n_sym_hexagram_54_gui_mei": {
-					"letter_locale": "Guī mèi",
+					"letter_locale": { "__self": "Guī mèi", "__hidden": "Gui mei" },
 					"meaning": "[ Converting the Maiden ]"
 				},
 				"n_sym_hexagram_55_feng": {
-					"letter_locale": "Fēng",
+					"letter_locale": { "__self": "Fēng", "__hidden": "Feng" },
 					"meaning": "[ Abounding ]"
 				},
 				"n_sym_hexagram_56_lu": {
-					"letter_locale": "Lǚ",
+					"letter_locale": { "__self": "Lǚ", "__hidden": "Lu" },
 					"meaning": "[ Sojourning ]"
 				},
 				"n_sym_hexagram_57_xun": {
-					"letter_locale": "Xùn",
+					"letter_locale": { "__self": "Xùn", "__hidden": "Xun" },
 					"meaning": "[ Ground ]"
 				},
 				"n_sym_hexagram_58_dui": {
-					"letter_locale": "Duì",
+					"letter_locale": { "__self": "Duì", "__hidden": "Dui" },
 					"meaning": "[ Open ]"
 				},
 				"n_sym_hexagram_59_huan": {
-					"letter_locale": "Huàn",
+					"letter_locale": { "__self": "Huàn", "__hidden": "Huan" },
 					"meaning": "[ Dispersing ]"
 				},
 				"n_sym_hexagram_60_jie": {
-					"letter_locale": "Jié",
+					"letter_locale": { "__self": "Jié", "__hidden": "Jie" },
 					"meaning": "[ Articulating ]"
 				},
 				"n_sym_hexagram_61_zhong_fu": {
-					"letter_locale": "Zhōng fú",
+					"letter_locale": { "__self": "Zhōng fú", "__hidden": "Zhong fu" },
 					"meaning": "[ Inner Truth ]"
 				},
 				"n_sym_hexagram_62_xiao_guo": {
-					"letter_locale": "Xiǎo guò",
+					"letter_locale": { "__self": "Xiǎo guò", "__hidden": "Xiao guo" },
 					"meaning": "[ Small Exceeding ]"
 				},
 				"n_sym_hexagram_63_ji_ji": {
-					"letter_locale": "Jì jì",
+					"letter_locale": { "__self": "Jì jì", "__hidden": "Ji ji" },
 					"meaning": "[ Already Fording ]"
 				},
 				"n_sym_hexagram_64_wei_ji": {
-					"letter_locale": "Wèi jì",
+					"letter_locale": { "__self": "Wèi jì", "__hidden": "Wei ji" },
 					"meaning": "[ Before Completion ]"
 				}
 			},
 			"taixuanjing": {
 				"n_sym_monogram_1_di": {
-					"letter_locale": "Dì",
+					"letter_locale": { "__self": "Dì", "__hidden": "Di" },
 					"meaning": "[ Earth ]"
 				},
 				"n_sym_monogram_2_tian": {
-					"letter_locale": "Tiān",
+					"letter_locale": { "__self": "Tiān", "__hidden": "Tian" },
 					"meaning": "[ Heaven ]"
 				},
 				"n_sym_monogram_3_ren": {
-					"letter_locale": "Rén",
+					"letter_locale": { "__self": "Rén", "__hidden": "Ren" },
 					"meaning": "[ People ]"
 				},
 				"n_sym_digram_1_di_di": {
-					"letter_locale": "Dì dì",
+					"letter_locale": { "__self": "Dì dì", "__hidden": "Di di" },
 					"meaning": ""
 				},
 				"n_sym_digram_2_tian_di": {
-					"letter_locale": "Tiān dì",
+					"letter_locale": { "__self": "Tiān dì", "__hidden": "Tian di" },
 					"meaning": ""
 				},
 				"n_sym_digram_3_di_tian": {
-					"letter_locale": "Dì tiān",
+					"letter_locale": { "__self": "Dì tiān", "__hidden": "Di tian" },
 					"meaning": ""
 				},
 				"n_sym_digram_4_tian_tian": {
-					"letter_locale": "Tiān tiān",
+					"letter_locale": { "__self": "Tiān tiān", "__hidden": "Tian tian" },
 					"meaning": ""
 				},
 				"n_sym_digram_5_tian_ren": {
-					"letter_locale": "Tiān rén",
+					"letter_locale": { "__self": "Tiān rén", "__hidden": "Tian ren" },
 					"meaning": ""
 				},
 				"n_sym_digram_6_di_ren": {
-					"letter_locale": "Dì rén",
+					"letter_locale": { "__self": "Dì rén", "__hidden": "Di ren" },
 					"meaning": ""
 				},
 				"n_sym_digram_7_ren_tian": {
-					"letter_locale": "Rén tiān",
+					"letter_locale": { "__self": "Rén tiān", "__hidden": "Ren tian" },
 					"meaning": ""
 				},
 				"n_sym_digram_8_ren_di": {
-					"letter_locale": "Rén dì",
+					"letter_locale": { "__self": "Rén dì", "__hidden": "Ren di" },
 					"meaning": ""
 				},
 				"n_sym_digram_9_ren_ren": {
-					"letter_locale": "Rén rén",
+					"letter_locale": { "__self": "Rén rén", "__hidden": "Ren ren" },
 					"meaning": ""
 				}
 				
