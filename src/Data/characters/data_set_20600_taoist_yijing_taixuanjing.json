@@ -473,7 +473,7 @@
 	"taixuanjing_n_sym_monogram_{2...i}_[ren]", {
 		"unicode": ["1D300"],
 		"recipe": [["t mn"]],
-		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
+		"options": { "fastKey": ["<! 0?Secondary"], "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
 		"symbol": {
 			"beforeLetter": "{2...i}",
 			"type": "monogram",
@@ -487,13 +487,13 @@
 	"taixuanjing_n_sym_digram_{4...i}_[tian_ren,di_ren,ren_tian,ren_di,ren_ren]", {
 		"unicode": ["1D301", "1D302", "1D303", "1D304", "1D305"],
 		"recipe": [
-			["${yijing_n_sym_monogram_2_yang}${taixuanjing_n_sym_monogram_3_ren}", "t dtr"],
-			["${yijing_n_sym_monogram_1_yin}${taixuanjing_n_sym_monogram_3_ren}", "t ddr"],
-			["${taixuanjing_n_sym_monogram_3_ren}${yijing_n_sym_monogram_2_yang}", "t drt"],
+			["${taixuanjing_n_sym_monogram_3_ren}${yijing_n_sym_monogram_2_yang}", "t dtr"],
+			["${yijing_n_sym_monogram_2_yang}${taixuanjing_n_sym_monogram_3_ren}", "t ddr"],
+			["${yijing_n_sym_monogram_1_yin}${taixuanjing_n_sym_monogram_3_ren}", "t drt"],
 			["${taixuanjing_n_sym_monogram_3_ren}${yijing_n_sym_monogram_1_yin}", "t drd"],
 			["${taixuanjing_n_sym_monogram_3_ren}${taixuanjing_n_sym_monogram_3_ren}", "t drr"]
 		],
-		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
+		"options": { "fastKey": ["<!<+ 0?Secondary", "c*<!<+ 0?Secondary", "<!>+ 0?Secondary", "c*<!>+ 0?Secondary", "c*<! 0?Secondary"], "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
 		"symbol": {
 			"beforeLetter": "{4...i}",
 			"type": "digram",
@@ -513,87 +513,330 @@
 			"1D34C","1D34D","1D34E","1D34F","1D350","1D351","1D352","1D353","1D354","1D355","1D356"
 		],
 		"recipe": [
-			["t tzho1"],
-			["t tzho2"],
-			["t txin1"],
-			["t txin2"],
-			["t tsha1"],
-			["t tli1"],
-			["t tsha2"],
-			["t tgan1"],
-			["t tsho1"],
-			["t txin3"],
-			["t tcha1"],
-			["t tton1"],
-			["t tzen1"],
-			["t trui1"],
-			["t tda1"],
-			["t tjia1"],
-			["t trua1"],
-			["t txi1"],
-			["t tcon1"],
-			["t tjin1"],
-			["t tshi1"],
-			["t tge1"],
-			["t tyi1"],
-			["t tle1"],
-			["t tzhe1"],
-			["t twu1"],
-			["t tshi2"],
-			["t tgen1"],
-			["t tdua1"],
-			["t tyi2"],
-			["t tzhu1"],
-			["t tzho3"],
-			["t tmi1"],
-			["t tqin1"],
-			["t tlia1"],
-			["t tqia1"],
-			["t tsui1"],
-			["t tshe1"],
-			["t tju1"],
-			["t tfa1"],
-			["t tyin1"],
-			["t tyin2"],
-			["t tyu1"],
-			["t tzao1"],
-			["t tda2"],
-			["t tkuo1"],
-			["t twe1"],
-			["t tli2"],
-			["t ttao1"],
-			["t ttan1"],
-			["t tcha2"],
-			["t tdu1"],
-			["t tyon1"],
-			["t tkun1"],
-			["t tjia2"],
-			["t tjin2"],
-			["t tsho2"],
-			["t txi2"],
-			["t tju2"],
-			["t tji1"],
-			["t tshi3"],
-			["t tyi3"],
-			["t tshi4"],
-			["t tche1"],
-			["t tnei1"],
-			["t tqu1"],
-			["t thui1"],
-			["t tmen1"],
-			["t tqio1"],
-			["t tge2"],
-			["t tzhi1"],
-			["t tjia3"],
-			["t tche2"],
-			["t tzhi2"],
-			["t tshi5"],
-			["t tju3"],
-			["t txi3"],
-			["t tjia4"],
-			["t tna1"],
-			["t tqin2"],
-			["t tyan1"]
+			[
+				"${yijing_n_sym_digram_4_greater_yang×2}",
+				"t tzho1"
+			],
+			[
+				"${yijing_n_sym_digram_4_greater_yang}${yijing_n_sym_digram_2_lesser_yang}",
+				"t tzho2"
+			],
+			[
+				"${yijing_n_sym_digram_4_greater_yang}${taixuanjing_n_sym_digram_6_di_ren}",
+				"t txin1"
+			],
+			[
+				"${yijing_n_sym_digram_4_greater_yang}${yijing_n_sym_digram_3_lesser_yin}",
+				"t txin2"
+			],
+			[
+				"${yijing_n_sym_digram_4_greater_yang}${yijing_n_sym_digram_1_greater_yin}",
+				"t tsha1"
+			],
+			[
+				"${yijing_n_sym_digram_4_greater_yang}${taixuanjing_n_sym_digram_7_ren_tian}",
+				"t tli1"
+			],
+			[
+				"${yijing_n_sym_digram_4_greater_yang}${taixuanjing_n_sym_digram_5_tian_ren}",
+				"t tsha2"
+			],
+			[
+				"${yijing_n_sym_digram_4_greater_yang}${taixuanjing_n_sym_digram_8_ren_di}",
+				"t tgan1"
+			],
+			[
+				"${yijing_n_sym_digram_4_greater_yang}${taixuanjing_n_sym_digram_9_ren_ren}",
+				"t tsho1"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang}${yijing_n_sym_digram_4_greater_yang}",
+				"t txin3"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang×2}",
+				"t tcha1"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang}${taixuanjing_n_sym_digram_6_di_ren}",
+				"t tton1"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang}${yijing_n_sym_digram_3_lesser_yin}",
+				"t tzen1"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang}${yijing_n_sym_digram_1_greater_yin}",
+				"t trui1"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang}${taixuanjing_n_sym_digram_7_ren_tian}",
+				"t tda1"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang}${taixuanjing_n_sym_digram_5_tian_ren}",
+				"t tjia1"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang}${taixuanjing_n_sym_digram_8_ren_di}",
+				"t trua1"
+			],
+			[
+				"${yijing_n_sym_digram_2_lesser_yang}${taixuanjing_n_sym_digram_9_ren_ren}",
+				"t txi1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren}${yijing_n_sym_digram_4_greater_yang}",
+				"t tcon1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren}${yijing_n_sym_digram_2_lesser_yang}",
+				"t tjin1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren×2}",
+				"t tshi1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren}${yijing_n_sym_digram_3_lesser_yin}",
+				"t tge1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren}${yijing_n_sym_digram_1_greater_yin}",
+				"t tyi1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren}${taixuanjing_n_sym_digram_7_ren_tian}",
+				"t tle1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren}${taixuanjing_n_sym_digram_5_tian_ren}",
+				"t tzhe1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren}${taixuanjing_n_sym_digram_8_ren_di}",
+				"t twu1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_6_di_ren}${taixuanjing_n_sym_digram_9_ren_ren}",
+				"t tshi2"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin}${yijing_n_sym_digram_4_greater_yang}",
+				"t tgen1"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin}${yijing_n_sym_digram_2_lesser_yang}",
+				"t tdua1"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin}${taixuanjing_n_sym_digram_6_di_ren}",
+				"t tyi2"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin×2}",
+				"t tzhu1"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin}${yijing_n_sym_digram_1_greater_yin}",
+				"t tzho3"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin}${taixuanjing_n_sym_digram_7_ren_tian}",
+				"t tmi1"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin}${taixuanjing_n_sym_digram_5_tian_ren}",
+				"t tqin1"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin}${taixuanjing_n_sym_digram_8_ren_di}",
+				"t tlia1"
+			],
+			[
+				"${yijing_n_sym_digram_3_lesser_yin}${taixuanjing_n_sym_digram_9_ren_ren}",
+				"t tqia1"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin}${yijing_n_sym_digram_4_greater_yang}",
+				"t tsui1"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin}${yijing_n_sym_digram_2_lesser_yang}",
+				"t tshe1"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin}${taixuanjing_n_sym_digram_6_di_ren}",
+				"t tju1"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin}${yijing_n_sym_digram_3_lesser_yin}",
+				"t tfa1"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin×2}",
+				"t tyin1"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin}${taixuanjing_n_sym_digram_7_ren_tian}",
+				"t tyin2"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin}${taixuanjing_n_sym_digram_5_tian_ren}",
+				"t tyu1"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin}${taixuanjing_n_sym_digram_8_ren_di}",
+				"t tzao1"
+			],
+			[
+				"${yijing_n_sym_digram_1_greater_yin}${taixuanjing_n_sym_digram_9_ren_ren}",
+				"t tda2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian}${yijing_n_sym_digram_4_greater_yang}",
+				"t tkuo1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian}${yijing_n_sym_digram_2_lesser_yang}",
+				"t twe1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian}${taixuanjing_n_sym_digram_6_di_ren}",
+				"t tli2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian}${yijing_n_sym_digram_3_lesser_yin}",
+				"t ttao1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian}${yijing_n_sym_digram_1_greater_yin}",
+				"t ttan1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian×2}",
+				"t tcha2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian}${taixuanjing_n_sym_digram_5_tian_ren}",
+				"t tdu1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian}${taixuanjing_n_sym_digram_8_ren_di}",
+				"t tyon1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_7_ren_tian}${taixuanjing_n_sym_digram_9_ren_ren}",
+				"t tkun1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren}${yijing_n_sym_digram_4_greater_yang}",
+				"t tjia2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren}${yijing_n_sym_digram_2_lesser_yang}",
+				"t tjin2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren}${taixuanjing_n_sym_digram_6_di_ren}",
+				"t tsho2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren}${yijing_n_sym_digram_3_lesser_yin}",
+				"t txi2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren}${yijing_n_sym_digram_1_greater_yin}",
+				"t tju2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren}${taixuanjing_n_sym_digram_7_ren_tian}",
+				"t tji1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren×2}",
+				"t tshi3"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren}${taixuanjing_n_sym_digram_8_ren_di}",
+				"t tyi3"
+			],
+			[
+				"${taixuanjing_n_sym_digram_5_tian_ren}${taixuanjing_n_sym_digram_9_ren_ren}",
+				"t tshi4"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di}${yijing_n_sym_digram_4_greater_yang}",
+				"t tche1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di}${yijing_n_sym_digram_2_lesser_yang}",
+				"t tnei1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di}${taixuanjing_n_sym_digram_6_di_ren}",
+				"t tqu1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di}${yijing_n_sym_digram_3_lesser_yin}",
+				"t thui1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di}${yijing_n_sym_digram_1_greater_yin}",
+				"t tmen1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di}${taixuanjing_n_sym_digram_7_ren_tian}",
+				"t tqio1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di}${taixuanjing_n_sym_digram_5_tian_ren}",
+				"t tge2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di×2}",
+				"t tzhi1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_8_ren_di}${taixuanjing_n_sym_digram_9_ren_ren}",
+				"t tjia3"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren}${yijing_n_sym_digram_4_greater_yang}",
+				"t tche2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren}${yijing_n_sym_digram_2_lesser_yang}",
+				"t tzhi2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren}${taixuanjing_n_sym_digram_6_di_ren}",
+				"t tshi5"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren}${yijing_n_sym_digram_3_lesser_yin}",
+				"t tju3"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren}${yijing_n_sym_digram_1_greater_yin}",
+				"t txi3"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren}${taixuanjing_n_sym_digram_7_ren_tian}",
+				"t tjia4"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren}${taixuanjing_n_sym_digram_5_tian_ren}",
+				"t tna1"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren}${taixuanjing_n_sym_digram_8_ren_di}",
+				"t tqin2"
+			],
+			[
+				"${taixuanjing_n_sym_digram_9_ren_ren×2}",
+				"t tyan1"
+			]
 		],
 		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
 		"symbol": {
