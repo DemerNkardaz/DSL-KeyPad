@@ -11,6 +11,11 @@ Class UIMainPanelFilter {
 		this.isCurrentTabFavorites := prefix = "favorites"
 	}
 
+	UpdateDataList(&newDataList) {
+		this.dataList := newDataList
+		return
+	}
+
 	Populate() {
 		this.LV.Delete()
 		this.LV.Visible := False
@@ -66,6 +71,8 @@ Class UIMainPanelFilter {
 		filterText := filterText
 		this.LV.Delete()
 
+		local star := Chr(0x2002) Chr(0x2605)
+
 		if filterText = "" {
 			this.Populate()
 		} else {
@@ -84,6 +91,7 @@ Class UIMainPanelFilter {
 					if item[this.localeData.localeIndex] = ""
 						continue
 					local itemText := StrReplace(item[this.localeData.localeIndex], Chr(0x00A0), " ")
+					itemText := StrReplace(itemText, star, "")
 
 					local reserveTexts := []
 					for key, index in this.localeData.localeIndexMap
@@ -99,6 +107,7 @@ Class UIMainPanelFilter {
 					local useHiddenTags := False
 					local isTagsMirrored := False
 					local caseSensitiveMark := ""
+					local isFavorite := False
 					local entryName := item[5]
 
 					if entryName != "" {
@@ -107,6 +116,7 @@ Class UIMainPanelFilter {
 						tags := ChrLib.GetValue(entryName, "tags")
 						tagsMap := ChrLib.GetValue(entryName, "tagsMap")
 						caseSensitiveMark := ChrLib.GetValue(entryName, "options.ignoreCaseOnPanelFilter") && !InStr(filterText, "i)") ? "i)" : ""
+						isFavorite := ChrLib.GetValue(entryName, "groups").HasValue("Favorites")
 
 						useHiddenTags := ChrLib.GetValue(entryName, "options.useHiddenTags")
 
@@ -119,7 +129,6 @@ Class UIMainPanelFilter {
 						isTagsMirrored := ChrLib.GetValue(entryName, "options.isTagsMirrored")
 					}
 
-					local isFavorite := InStr(itemText, Chr(0x2605)) || ChrLib.entryGroups["Favorites"].HasValue(entryName)
 					local isMatch := False
 					local matchedTag := ""
 					local displayText := itemText
@@ -137,17 +146,17 @@ Class UIMainPanelFilter {
 							if matchedTag != "" {
 								isMatch := True
 								if (tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag)) || (tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag))
-									displayText := Util.StrUpper(matchedTag, 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+									displayText := Util.StrUpper(matchedTag, 1)
 								else if isTagsMirrored {
 									for mapIndex, eachMap in [titlesMap, tagsMap, hiddenTagsMap] {
 										for lang, tags in eachMap {
 											for i, tag in tags {
 												if tag != "" {
 													if mapIndex = 3 && tag = matchedTag && tagsMap[languageCode].Has(i) {
-														displayText := Util.StrUpper(tagsMap[languageCode][i], 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+														displayText := Util.StrUpper(tagsMap[languageCode][i], 1)
 														break 2
 													} else if tag = matchedTag && eachMap[languageCode].Has(i) {
-														displayText := Util.StrUpper(eachMap[languageCode][i], 1) (isFavorite ? Chr(0x2002) Chr(0x2605) : "")
+														displayText := Util.StrUpper(eachMap[languageCode][i], 1)
 														break 2
 													}
 												}
@@ -155,9 +164,14 @@ Class UIMainPanelFilter {
 										}
 									}
 								}
+
 							} else
 								isMatch := this.MatchInArray(&reserveTexts, &filterText)
 						}
+					}
+
+					if isFavorite && displayText != "" && !InStr(displayText, star, , -StrLen(star)) {
+						displayText .= star
 					}
 
 					if isMatch {

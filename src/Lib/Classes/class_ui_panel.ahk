@@ -8,6 +8,8 @@ Class UIMainPanel {
 		tagsExpanded: False
 	}
 
+	filterInstances := Map()
+
 	setCached := False
 	title := ""
 
@@ -352,8 +354,7 @@ Class UIMainPanel {
 		Event.OnEvent("UI Data", "Changed", () => this.setCached := False)
 		Event.OnEvent("UI Language", "Switched", () => this.setCached := False)
 		Event.OnEvent("Favorites", "Changed", (faveName, condition, preventFromTabChange) => (
-			WinExist(this.title) && this.ListViewFavoritesEvent(&faveName, &condition, &preventFromTabChange, this.GUI),
-			this.setCached := False
+			WinExist(this.title) && this.ListViewFavoritesEvent(&faveName, &condition, &preventFromTabChange, this.GUI)
 		))
 
 		return Event.Trigger("UI Instance [Panel]", "Created", this)
@@ -572,6 +573,7 @@ Class UIMainPanel {
 		characterFilter.SetFont("s10")
 
 		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &charactersLVForFilter, &src, &localeData, attributes.prefix)
+		this.filterInstances.Set(attributes.prefix, filterInstance)
 
 		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
 
@@ -741,7 +743,7 @@ Class UIMainPanel {
 		EventFuncSetRandom()
 		return Event.OnEvent("UI Instance [Panel]", "Cache Loaded", EventFuncSetRandom)
 
-		EventFuncSetRandom(*) => this.SetRandomPreview(panelWindow, charactersLV, { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType })
+		EventFuncSetRandom(*) => this.SetRandomPreview(panelWindow, [charactersLV, charactersLVForFilter], { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType })
 	}
 
 	ListViewFavoritesEvent(&faveName, &condition, &preventFromTabChange, panelWindow) {
@@ -753,25 +755,32 @@ Class UIMainPanel {
 
 		for tabPrefix in allPrefixes {
 			local listView := panelWindow[tabPrefix "LV"]
-			local itemsCount := listView.GetCount()
+			local filterListView := panelWindow[tabPrefix "LVForFilter"]
 
-			Loop itemsCount {
-				local index := A_Index
-				local entryName := listView.GetText(index, 5)
+			for eachListView in [listView, filterListView] {
+				local itemsCount := eachListView.GetCount()
 
-				if entryName == faveName {
-					local entryTitle := listView.GetText(index, 1)
+				if !itemsCount
+					continue
 
-					if condition = "Added" {
-						if !InStr(entryTitle, star) {
-							listView.Modify(index, , entryTitle star)
+				Loop itemsCount {
+					local index := A_Index
+					local entryName := eachListView.GetText(index, 5)
+
+					if entryName == faveName {
+						local entryTitle := eachListView.GetText(index, 1)
+
+						if condition = "Added" {
+							if !InStr(entryTitle, star) {
+								eachListView.Modify(index, , entryTitle star)
+							}
+						} else if condition = "Removed" {
+							if InStr(entryTitle, star) {
+								eachListView.Modify(index, , StrReplace(entryTitle, star, ""))
+							}
 						}
-					} else if condition = "Removed" {
-						if InStr(entryTitle, star) {
-							listView.Modify(index, , StrReplace(entryTitle, star, ""))
-						}
+						break
 					}
-					break
 				}
 			}
 		}
@@ -860,10 +869,60 @@ Class UIMainPanel {
 					break
 				}
 			}
-		} else if condition = "Added" && addingRow.Length > 0
-			favoritesListView.Add(addingRow*)
+
+			local favoritesData := this.listViewData["favorites"]
+			local i := favoritesData.Length
+
+			while i >= 1 {
+				if favoritesData[i][5] = faveName {
+					favoritesData.RemoveAt(i)
+					break
+				}
+				i--
+			}
+
+			if this.filterInstances.Has("favorites") {
+				this.filterInstances["favorites"].UpdateDataList(&favoritesData)
+			}
+
+		} else if condition = "Added" {
+			local allData := this.listViewData["all"]
+			local sourceRow := ""
+
+			for item in allData {
+				if item[5] = faveName {
+					sourceRow := item.Clone()
+					break
+				}
+			}
+
+			if sourceRow != "" {
+				local alreadyExists := false
+				Loop itemsCount {
+					if favoritesListView.GetText(A_Index, 5) = faveName {
+						alreadyExists := true
+						break
+					}
+				}
+
+				if !alreadyExists {
+					local languageCode := Language.Get()
+					local localeIndex := this.listViewLocaleColumnsIndexes.Get(languageCode)
+					local star := Chr(0x2002) Chr(0x2605)
+					favoritesListView.Add(, sourceRow[localeIndex] (!InStr(sourceRow[localeIndex], star) ? star : ""), ArraySlice(sourceRow, 2, this.listViewColumnHeaders.favorites.Length)*)
+
+					local favoritesData := this.listViewData["favorites"]
+					favoritesData.Push(sourceRow)
+
+					if this.filterInstances.Has("favorites") {
+						this.filterInstances["favorites"].UpdateDataList(&favoritesData)
+					}
+				}
+			}
+		}
 		return
 	}
+
 
 	FillListViewData(&source, &columnsData) {
 		for category, attributes in source
@@ -875,6 +934,10 @@ Class UIMainPanel {
 		for category, attributes in source {
 			local ref := this.listViewData[category]
 			ArrayMergeTo(&ref, this.GetEntries(&attributes, &columnsData))
+
+			if this.filterInstances.Has(category) {
+				this.filterInstances[category].UpdateDataList(&ref)
+			}
 		}
 		return Event.Trigger("UI Data", "Changed")
 	}
@@ -1421,23 +1484,28 @@ Class UIMainPanel {
 		return
 	}
 
-	SetRandomPreview(panelWindow, LV, options) {
-		local count := LV.GetCount()
-		local rand := 0
-		local maxTries := 20
+	SetRandomPreview(panelWindow, LVArray, options) {
+		for LV in LVArray {
+			if LV.Visible && LV.Enabled {
+				local count := LV.GetCount()
+				local rand := 0
+				local maxTries := 20
 
-		if count > 0
-			Loop maxTries {
-				rand := Random(1, count)
-				col1 := LV.GetText(rand, 1)
-				col4 := LV.GetText(rand, 4)
-				if (col1 != "" && col4 != "")
-					break
+				if count > 0
+					Loop maxTries {
+						rand := Random(1, count)
+						col1 := LV.GetText(rand, 1)
+						col4 := LV.GetText(rand, 4)
+						if (col1 != "" && col4 != "")
+							break
+					}
+
+				if rand != 0 {
+					LV.Modify(rand, "+Select +Focus")
+					this.ItemSetPreview(panelWindow, LV, rand, options)
+				}
+				return
 			}
-
-		if rand != 0 {
-			LV.Modify(rand, "+Select +Focus")
-			this.ItemSetPreview(panelWindow, LV, rand, options)
 		}
 		return
 	}
