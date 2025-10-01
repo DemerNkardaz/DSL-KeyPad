@@ -441,8 +441,331 @@
 				"n_sym_digram_9_ren_ren": {
 					"letter_locale": { "__self": "Rén rén", "__hidden": "Ren ren" },
 					"meaning": ""
+				},
+				"n_sym_tetragram_1_zhong": {
+					"letter_locale": { "__self": "Zhōng", "__hidden": "Zhong" },
+					"meaning": "[ Centre ]"
+				},
+				"n_sym_tetragram_2_zhou": {
+					"letter_locale": { "__self": "Zhōu", "__hidden": "Zhou" },
+					"meaning": "[ Full Circle ]"
+				},
+				"n_sym_tetragram_3_xin": {
+					"letter_locale": { "__self": "Xín", "__hidden": "Xin" },
+					"meaning": "[ Mired ]"
+				},
+				"n_sym_tetragram_4_xian": {
+					"letter_locale": { "__self": "Xián", "__hidden": "Xian" },
+					"meaning": "[ Barrier ]"
+				},
+				"n_sym_tetragram_5_shao": {
+					"letter_locale": { "__self": "Shǎo", "__hidden": "Shao" },
+					"meaning": "[ Keeping Small ]"
+				},
+				"n_sym_tetragram_6_li": {
+					"letter_locale": { "__self": "Lì", "__hidden": "Li" },
+					"meaning": "[ Contrariety ]"
+				},
+				"n_sym_tetragram_7_shang": {
+					"letter_locale": { "__self": "Shàng", "__hidden": "Shang" },
+					"meaning": "[ Ascent ]"
+				},
+				"n_sym_tetragram_8_gan": {
+					"letter_locale": { "__self": "Gān", "__hidden": "Gan" },
+					"meaning": "[ Opposition ]"
+				},
+				"n_sym_tetragram_9_shu": {
+					"letter_locale": { "__self": "Shū", "__hidden": "Shu" },
+					"meaning": "[ Branching Out ]"
+				},
+				"n_sym_tetragram_10_xian": {
+					"letter_locale": { "__self": "Xiàn", "__hidden": "Xian" },
+					"meaning": "[ Defectiveness Or Distortion ]"
+				},
+				"n_sym_tetragram_11_cha": {
+					"letter_locale": { "__self": "Chā", "__hidden": "Cha" },
+					"meaning": "[ Divergence ]"
+				},
+				"n_sym_tetragram_12_tong": {
+					"letter_locale": { "__self": "Tóng", "__hidden": "Tong" },
+					"meaning": "[ Youthfulness ]"
+				},
+				"n_sym_tetragram_13_zeng": {
+					"letter_locale": { "__self": "Zēng", "__hidden": "Zeng" },
+					"meaning": "[ Increase ]"
+				},
+				"n_sym_tetragram_14_rui": {
+					"letter_locale": { "__self": "Ruì", "__hidden": "Rui" },
+					"meaning": "[ Penetration ]"
+				},
+				"n_sym_tetragram_15_da": {
+					"letter_locale": { "__self": "Dá", "__hidden": "Da" },
+					"meaning": "[ Reach ]"
+				},
+				"n_sym_tetragram_16_jiao": {
+					"letter_locale": { "__self": "Jiāo", "__hidden": "Jiao" },
+					"meaning": "[ Contact ]"
+				},
+				"n_sym_tetragram_17_ruan": {
+					"letter_locale": { "__self": "Ruǎn", "__hidden": "Ruan" },
+					"meaning": "[ Holding Back ]"
+				},
+				"n_sym_tetragram_18_xi": {
+					"letter_locale": { "__self": "Xī", "__hidden": "Xi" },
+					"meaning": "[ Waiting ]"
+				},
+				"n_sym_tetragram_19_cong": {
+					"letter_locale": { "__self": "Cóng", "__hidden": "Cong" },
+					"meaning": "[ Following ]"
+				},
+				"n_sym_tetragram_20_jin": {
+					"letter_locale": { "__self": "Jìn", "__hidden": "Jin" },
+					"meaning": "[ Advance ]"
+				},
+				"n_sym_tetragram_21_shi": {
+					"letter_locale": { "__self": "Shì", "__hidden": "Shi" },
+					"meaning": "[ Release ]"
+				},
+				"n_sym_tetragram_22_ge": {
+					"letter_locale": { "__self": "Gé", "__hidden": "Ge" },
+					"meaning": "[ Resistance ]"
+				},
+				"n_sym_tetragram_23_yi": {
+					"letter_locale": { "__self": "Yí", "__hidden": "Yi" },
+					"meaning": "[ Ease ]"
+				},
+				"n_sym_tetragram_24_le": {
+					"letter_locale": { "__self": "Lè", "__hidden": "Le" },
+					"meaning": "[ Joy ]"
+				},
+				"n_sym_tetragram_25_zheng": {
+					"letter_locale": { "__self": "Zhēng", "__hidden": "Zheng" },
+					"meaning": "[ Contention ]"
+				},
+				"n_sym_tetragram_26_wu": {
+					"letter_locale": { "__self": "Wù", "__hidden": "Wu" },
+					"meaning": "[ Endeavour ]"
+				},
+				"n_sym_tetragram_27_shi": {
+					"letter_locale": { "__self": "Shì", "__hidden": "Shi" },
+					"meaning": "[ Duties ]"
+				},
+				"n_sym_tetragram_28_geng": {
+					"letter_locale": { "__self": "Gēng", "__hidden": "Geng" },
+					"meaning": "[ Change ]"
+				},
+				"n_sym_tetragram_29_duan": {
+					"letter_locale": { "__self": "Duàn", "__hidden": "Duan" },
+					"meaning": "[ Decisiveness ]"
+				},
+				"n_sym_tetragram_30_yi": {
+					"letter_locale": { "__self": "Yì", "__hidden": "Yi" },
+					"meaning": "[ Bold Resolution ]"
+				},
+				"n_sym_tetragram_31_zhuang": {
+					"letter_locale": { "__self": "Zhuāng", "__hidden": "Zhuang" },
+					"meaning": "[ Packing ]"
+				},
+				"n_sym_tetragram_32_zhong": {
+					"letter_locale": { "__self": "Zhòng", "__hidden": "Zhong" },
+					"meaning": "[ Legion ]"
+				},
+				"n_sym_tetragram_33_mi": {
+					"letter_locale": { "__self": "Mì", "__hidden": "Mi" },
+					"meaning": "[ Closeness ]"
+				},
+				"n_sym_tetragram_34_qin": {
+					"letter_locale": { "__self": "Qīn", "__hidden": "Qin" },
+					"meaning": "[ Kinship ]"
+				},
+				"n_sym_tetragram_35_lian": {
+					"letter_locale": { "__self": "Liǎn", "__hidden": "Lian" },
+					"meaning": "[ Gathering ]"
+				},
+				"n_sym_tetragram_36_qiang": {
+					"letter_locale": { "__self": "Qiáng", "__hidden": "Qiang" },
+					"meaning": "[ Strength ]"
+				},
+				"n_sym_tetragram_37_sui": {
+					"letter_locale": { "__self": "Suì", "__hidden": "Sui" },
+					"meaning": "[ Purity ]"
+				},
+				"n_sym_tetragram_38_sheng": {
+					"letter_locale": { "__self": "Shèng", "__hidden": "Sheng" },
+					"meaning": "[ Fullness ]"
+				},
+				"n_sym_tetragram_39_ju": {
+					"letter_locale": { "__self": "Jū", "__hidden": "Ju" },
+					"meaning": "[ Residence ]"
+				},
+				"n_sym_tetragram_40_fa": {
+					"letter_locale": { "__self": "Fǎ", "__hidden": "Fa" },
+					"meaning": "[ Law Or Model ]"
+				},
+				"n_sym_tetragram_41_ying": {
+					"letter_locale": { "__self": "Yīng", "__hidden": "Ying" },
+					"meaning": "[ Response ]"
+				},
+				"n_sym_tetragram_42_ying": {
+					"letter_locale": { "__self": "Yíng", "__hidden": "Ying" },
+					"meaning": "[ Going To Meet ]"
+				},
+				"n_sym_tetragram_43_yu": {
+					"letter_locale": { "__self": "Yù", "__hidden": "Yu" },
+					"meaning": "[ Encounters ]"
+				},
+				"n_sym_tetragram_44_zao": {
+					"letter_locale": { "__self": "Zào", "__hidden": "Zao" },
+					"meaning": "[ Stove ]"
+				},
+				"n_sym_tetragram_45_da": {
+					"letter_locale": { "__self": "Dà", "__hidden": "Da" },
+					"meaning": "[ Greatness ]"
+				},
+				"n_sym_tetragram_46_kuo": {
+					"letter_locale": { "__self": "Kuò", "__hidden": "Kuo" },
+					"meaning": "[ Enlargement ]"
+				},
+				"n_sym_tetragram_47_wen": {
+					"letter_locale": { "__self": "Wén", "__hidden": "Wen" },
+					"meaning": "[ Pattern ]"
+				},
+				"n_sym_tetragram_48_li": {
+					"letter_locale": { "__self": "Lǐ", "__hidden": "Li" },
+					"meaning": "[ Ritual ]"
+				},
+				"n_sym_tetragram_49_tao": {
+					"letter_locale": { "__self": "Táo", "__hidden": "Tao" },
+					"meaning": "[ Flight ]"
+				},
+				"n_sym_tetragram_50_tang": {
+					"letter_locale": { "__self": "Táng", "__hidden": "Tang" },
+					"meaning": "[ Vastness Or Wasting ]"
+				},
+				"n_sym_tetragram_51_chang": {
+					"letter_locale": { "__self": "Cháng", "__hidden": "Chang" },
+					"meaning": "[ Constancy ]"
+				},
+				"n_sym_tetragram_52_du": {
+					"letter_locale": { "__self": "Dù", "__hidden": "Du" },
+					"meaning": "[ Measure ]"
+				},
+				"n_sym_tetragram_53_yong": {
+					"letter_locale": { "__self": "Yǒng", "__hidden": "Yong" },
+					"meaning": "[ Eternity ]"
+				},
+				"n_sym_tetragram_54_kun": {
+					"letter_locale": { "__self": "Kūn", "__hidden": "Kun" },
+					"meaning": "[ Unity ]"
+				},
+				"n_sym_tetragram_55_jian": {
+					"letter_locale": { "__self": "Jiǎn", "__hidden": "Jian" },
+					"meaning": "[ Diminishment ]"
+				},
+				"n_sym_tetragram_56_jin": {
+					"letter_locale": { "__self": "Jìn", "__hidden": "Jin" },
+					"meaning": "[ Closed Mouth ]"
+				},
+				"n_sym_tetragram_57_shou": {
+					"letter_locale": { "__self": "Shǒu", "__hidden": "Shou" },
+					"meaning": "[ Guardedness ]"
+				},
+				"n_sym_tetragram_58_xi": {
+					"letter_locale": { "__self": "Xī", "__hidden": "Xi" },
+					"meaning": "[ Gathering In ]"
+				},
+				"n_sym_tetragram_59_ju": {
+					"letter_locale": { "__self": "Jù", "__hidden": "Ju" },
+					"meaning": "[ Massing ]"
+				},
+				"n_sym_tetragram_60_ji": {
+					"letter_locale": { "__self": "Jī", "__hidden": "Ji" },
+					"meaning": "[ Accumulation ]"
+				},
+				"n_sym_tetragram_61_shi": {
+					"letter_locale": { "__self": "Shì", "__hidden": "Shi" },
+					"meaning": "[ Embellishment ]"
+				},
+				"n_sym_tetragram_62_yi": {
+					"letter_locale": { "__self": "Yí", "__hidden": "Yi" },
+					"meaning": "[ Doubt ]"
+				},
+				"n_sym_tetragram_63_shi": {
+					"letter_locale": { "__self": "Shì", "__hidden": "Shi" },
+					"meaning": "[ Watch ]"
+				},
+				"n_sym_tetragram_64_chen": {
+					"letter_locale": { "__self": "Chén", "__hidden": "Chen" },
+					"meaning": "[ Sinking ]"
+				},
+				"n_sym_tetragram_65_nei": {
+					"letter_locale": { "__self": "Nèi", "__hidden": "Nei" },
+					"meaning": "[ Inner ]"
+				},
+				"n_sym_tetragram_66_qu": {
+					"letter_locale": { "__self": "Qù", "__hidden": "Qu" },
+					"meaning": "[ Departure ]"
+				},
+				"n_sym_tetragram_67_hui": {
+					"letter_locale": { "__self": "Huì", "__hidden": "Hui" },
+					"meaning": "[ Darkening ]"
+				},
+				"n_sym_tetragram_68_meng": {
+					"letter_locale": { "__self": "Méng", "__hidden": "Meng" },
+					"meaning": "[ Dimming ]"
+				},
+				"n_sym_tetragram_69_qiong": {
+					"letter_locale": { "__self": "Qióng", "__hidden": "Qiong" },
+					"meaning": "[ Exhaustion ]"
+				},
+				"n_sym_tetragram_70_ge": {
+					"letter_locale": { "__self": "Gē", "__hidden": "Ge" },
+					"meaning": "[ Severance ]"
+				},
+				"n_sym_tetragram_71_zhi": {
+					"letter_locale": { "__self": "Zhǐ", "__hidden": "Zhi" },
+					"meaning": "[ Stoppage ]"
+				},
+				"n_sym_tetragram_72_jian": {
+					"letter_locale": { "__self": "Jiān", "__hidden": "Jian" },
+					"meaning": "[ Hardness ]"
+				},
+				"n_sym_tetragram_73_cheng": {
+					"letter_locale": { "__self": "Chéng", "__hidden": "Cheng" },
+					"meaning": "[ Completion ]"
+				},
+				"n_sym_tetragram_74_zhi": {
+					"letter_locale": { "__self": "Zhì", "__hidden": "Zhi" },
+					"meaning": "[ Closure ]"
+				},
+				"n_sym_tetragram_75_shi": {
+					"letter_locale": { "__self": "Shī", "__hidden": "Shi" },
+					"meaning": "[ Failure ]"
+				},
+				"n_sym_tetragram_76_ju": {
+					"letter_locale": { "__self": "Jù", "__hidden": "Ju" },
+					"meaning": "[ Aggravation ]"
+				},
+				"n_sym_tetragram_77_xun": {
+					"letter_locale": { "__self": "Xún", "__hidden": "Xun" },
+					"meaning": "[ Compliance ]"
+				},
+				"n_sym_tetragram_78_jiang": {
+					"letter_locale": { "__self": "Jiāng", "__hidden": "Jiang" },
+					"meaning": "[ On The Verge ]"
+				},
+				"n_sym_tetragram_79_nan": {
+					"letter_locale": { "__self": "Nán", "__hidden": "Nan" },
+					"meaning": "[ Difficulties ]"
+				},
+				"n_sym_tetragram_80_qin": {
+					"letter_locale": { "__self": "Qín", "__hidden": "Qin" },
+					"meaning": "[ Labouring ]"
+				},
+				"n_sym_tetragram_81_yang": {
+					"letter_locale": { "__self": "Yǎng", "__hidden": "Yang" },
+					"meaning": "[ Fostering ]"
 				}
-				
 			}
 		}
 	}

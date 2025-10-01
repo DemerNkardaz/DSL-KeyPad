@@ -388,6 +388,330 @@
 				"n_sym_digram_9_ren_ren": {
 					"letter_locale": "Жэнь-жэнь",
 					"meaning": ""
+				},
+				"n_sym_tetragram_1_zhong": {
+					"letter_locale": "Чжун",
+					"meaning": "[ Центр ]"
+				},
+				"n_sym_tetragram_2_zhou": {
+					"letter_locale": "Чжоу",
+					"meaning": "[ Полный круг ]"
+				},
+				"n_sym_tetragram_3_xin": {
+					"letter_locale": "Синь",
+					"meaning": "[ Трясина ]"
+				},
+				"n_sym_tetragram_4_xian": {
+					"letter_locale": "Сянь",
+					"meaning": "[ Преграда ]"
+				},
+				"n_sym_tetragram_5_shao": {
+					"letter_locale": "Шао",
+					"meaning": "[ Сохранение малого ]"
+				},
+				"n_sym_tetragram_6_li": {
+					"letter_locale": "Ли",
+					"meaning": "[ Противоположность ]"
+				},
+				"n_sym_tetragram_7_shang": {
+					"letter_locale": "Шан",
+					"meaning": "[ Восхождение ]"
+				},
+				"n_sym_tetragram_8_gan": {
+					"letter_locale": "Гань",
+					"meaning": "[ Противодействие ]"
+				},
+				"n_sym_tetragram_9_shu": {
+					"letter_locale": "Шу",
+					"meaning": "[ Ответвление ]"
+				},
+				"n_sym_tetragram_10_xian": {
+					"letter_locale": "Сянь",
+					"meaning": "[ Несовершенство или искажение ]"
+				},
+				"n_sym_tetragram_11_cha": {
+					"letter_locale": "Ча",
+					"meaning": "[ Расхождение ]"
+				},
+				"n_sym_tetragram_12_tong": {
+					"letter_locale": "Тун",
+					"meaning": "[ Юность ]"
+				},
+				"n_sym_tetragram_13_zeng": {
+					"letter_locale": "Цзэн",
+					"meaning": "[ Увеличение ]"
+				},
+				"n_sym_tetragram_14_rui": {
+					"letter_locale": "Жуй",
+					"meaning": "[ Проникновение ]"
+				},
+				"n_sym_tetragram_15_da": {
+					"letter_locale": "Да",
+					"meaning": "[ Достижение ]"
+				},
+				"n_sym_tetragram_16_jiao": {
+					"letter_locale": "Цзяо",
+					"meaning": "[ Контакт ]"
+				},
+				"n_sym_tetragram_17_ruan": {
+					"letter_locale": "Жуань",
+					"meaning": "[ Сдерживание ]"
+				},
+				"n_sym_tetragram_18_xi": {
+					"letter_locale": "Си",
+					"meaning": "[ Ожидание ]"
+				},
+				"n_sym_tetragram_19_cong": {
+					"letter_locale": "Цун",
+					"meaning": "[ Следование ]"
+				},
+				"n_sym_tetragram_20_jin": {
+					"letter_locale": "Цзинь",
+					"meaning": "[ Продвижение ]"
+				},
+				"n_sym_tetragram_21_shi": {
+					"letter_locale": "Ши",
+					"meaning": "[ Освобождение ]"
+				},
+				"n_sym_tetragram_22_ge": {
+					"letter_locale": "Гэ",
+					"meaning": "[ Сопротивление ]"
+				},
+				"n_sym_tetragram_23_yi": {
+					"letter_locale": "И",
+					"meaning": "[ Лёгкость ]"
+				},
+				"n_sym_tetragram_24_le": {
+					"letter_locale": "Лэ",
+					"meaning": "[ Радость ]"
+				},
+				"n_sym_tetragram_25_zheng": {
+					"letter_locale": "Чжэн",
+					"meaning": "[ Соперничество ]"
+				},
+				"n_sym_tetragram_26_wu": {
+					"letter_locale": "У",
+					"meaning": "[ Усердие ]"
+				},
+				"n_sym_tetragram_27_shi": {
+					"letter_locale": "Ши",
+					"meaning": "[ Обязанности ]"
+				},
+				"n_sym_tetragram_28_geng": {
+					"letter_locale": "Гэн",
+					"meaning": "[ Изменение ]"
+				},
+				"n_sym_tetragram_29_duan": {
+					"letter_locale": "Дуань",
+					"meaning": "[ Решительность ]"
+				},
+				"n_sym_tetragram_30_yi": {
+					"letter_locale": "И",
+					"meaning": "[ Смелое решение ]"
+				},
+				"n_sym_tetragram_31_zhuang": {
+					"letter_locale": "Чжуан",
+					"meaning": "[ Упаковывание ]"
+				},
+				"n_sym_tetragram_32_zhong": {
+					"letter_locale": "Чжун",
+					"meaning": "[ Легион ]"
+				},
+				"n_sym_tetragram_33_mi": {
+					"letter_locale": "Ми",
+					"meaning": "[ Близость ]"
+				},
+				"n_sym_tetragram_34_qin": {
+					"letter_locale": "Цинь",
+					"meaning": "[ Родство ]"
+				},
+				"n_sym_tetragram_35_lian": {
+					"letter_locale": "Лянь",
+					"meaning": "[ Собирание ]"
+				},
+				"n_sym_tetragram_36_qiang": {
+					"letter_locale": "Цян",
+					"meaning": "[ Сила ]"
+				},
+				"n_sym_tetragram_37_sui": {
+					"letter_locale": "Суй",
+					"meaning": "[ Чистота ]"
+				},
+				"n_sym_tetragram_38_sheng": {
+					"letter_locale": "Шэн",
+					"meaning": "[ Полнота ]"
+				},
+				"n_sym_tetragram_39_ju": {
+					"letter_locale": "Цзюй",
+					"meaning": "[ Местопребывание ]"
+				},
+				"n_sym_tetragram_40_fa": {
+					"letter_locale": "Фа",
+					"meaning": "[ Закон или образец ]"
+				},
+				"n_sym_tetragram_41_ying": {
+					"letter_locale": "Ин",
+					"meaning": "[ Ответ ]"
+				},
+				"n_sym_tetragram_42_ying": {
+					"letter_locale": "Ин",
+					"meaning": "[ Встречание ]"
+				},
+				"n_sym_tetragram_43_yu": {
+					"letter_locale": "Юй",
+					"meaning": "[ Встречи ]"
+				},
+				"n_sym_tetragram_44_zao": {
+					"letter_locale": "Цзао",
+					"meaning": "[ Очаг ]"
+				},
+				"n_sym_tetragram_45_da": {
+					"letter_locale": "Да",
+					"meaning": "[ Величие ]"
+				},
+				"n_sym_tetragram_46_kuo": {
+					"letter_locale": "Ко",
+					"meaning": "[ Расширение ]"
+				},
+				"n_sym_tetragram_47_wen": {
+					"letter_locale": "Вэнь",
+					"meaning": "[ Узор ]"
+				},
+				"n_sym_tetragram_48_li": {
+					"letter_locale": "Ли",
+					"meaning": "[ Ритуал ]"
+				},
+				"n_sym_tetragram_49_tao": {
+					"letter_locale": "Тао",
+					"meaning": "[ Бегство ]"
+				},
+				"n_sym_tetragram_50_tang": {
+					"letter_locale": "Тан",
+					"meaning": "[ Обширность или расточительство ]"
+				},
+				"n_sym_tetragram_51_chang": {
+					"letter_locale": "Чан",
+					"meaning": "[ Постоянство ]"
+				},
+				"n_sym_tetragram_52_du": {
+					"letter_locale": "Ду",
+					"meaning": "[ Мера ]"
+				},
+				"n_sym_tetragram_53_yong": {
+					"letter_locale": "Юн",
+					"meaning": "[ Вечность ]"
+				},
+				"n_sym_tetragram_54_kun": {
+					"letter_locale": "Кунь",
+					"meaning": "[ Единство ]"
+				},
+				"n_sym_tetragram_55_jian": {
+					"letter_locale": "Цзянь",
+					"meaning": "[ Уменьшение ]"
+				},
+				"n_sym_tetragram_56_jin": {
+					"letter_locale": "Цзинь",
+					"meaning": "[ Замкнутый рот ]"
+				},
+				"n_sym_tetragram_57_shou": {
+					"letter_locale": "Шоу",
+					"meaning": "[ Осторожность ]"
+				},
+				"n_sym_tetragram_58_xi": {
+					"letter_locale": "Си",
+					"meaning": "[ Собирание внутрь ]"
+				},
+				"n_sym_tetragram_59_ju": {
+					"letter_locale": "Цзюй",
+					"meaning": "[ Скучивание ]"
+				},
+				"n_sym_tetragram_60_ji": {
+					"letter_locale": "Цзи",
+					"meaning": "[ Накопление ]"
+				},
+				"n_sym_tetragram_61_shi": {
+					"letter_locale": "Ши",
+					"meaning": "[ Украшение ]"
+				},
+				"n_sym_tetragram_62_yi": {
+					"letter_locale": "И",
+					"meaning": "[ Сомнение ]"
+				},
+				"n_sym_tetragram_63_shi": {
+					"letter_locale": "Ши",
+					"meaning": "[ Наблюдение ]"
+				},
+				"n_sym_tetragram_64_chen": {
+					"letter_locale": "Чэнь",
+					"meaning": "[ Погружение ]"
+				},
+				"n_sym_tetragram_65_nei": {
+					"letter_locale": "Нэй",
+					"meaning": "[ Внутреннее ]"
+				},
+				"n_sym_tetragram_66_qu": {
+					"letter_locale": "Цюй",
+					"meaning": "[ Уход ]"
+				},
+				"n_sym_tetragram_67_hui": {
+					"letter_locale": "Хуэй",
+					"meaning": "[ Затемнение ]"
+				},
+				"n_sym_tetragram_68_meng": {
+					"letter_locale": "Мэн",
+					"meaning": "[ Помрачение ]"
+				},
+				"n_sym_tetragram_69_qiong": {
+					"letter_locale": "Цюн",
+					"meaning": "[ Истощение ]"
+				},
+				"n_sym_tetragram_70_ge": {
+					"letter_locale": "Гэ",
+					"meaning": "[ Разрыв ]"
+				},
+				"n_sym_tetragram_71_zhi": {
+					"letter_locale": "Чжи",
+					"meaning": "[ Остановка ]"
+				},
+				"n_sym_tetragram_72_jian": {
+					"letter_locale": "Цзянь",
+					"meaning": "[ Твёрдость ]"
+				},
+				"n_sym_tetragram_73_cheng": {
+					"letter_locale": "Чэн",
+					"meaning": "[ Завершение ]"
+				},
+				"n_sym_tetragram_74_zhi": {
+					"letter_locale": "Чжи",
+					"meaning": "[ Замыкание ]"
+				},
+				"n_sym_tetragram_75_shi": {
+					"letter_locale": "Ши",
+					"meaning": "[ Неудача ]"
+				},
+				"n_sym_tetragram_76_ju": {
+					"letter_locale": "Цзюй",
+					"meaning": "[ Усугубление ]"
+				},
+				"n_sym_tetragram_77_xun": {
+					"letter_locale": "Сюнь",
+					"meaning": "[ Соответствие ]"
+				},
+				"n_sym_tetragram_78_jiang": {
+					"letter_locale": "Цзян",
+					"meaning": "[ На грани ]"
+				},
+				"n_sym_tetragram_79_nan": {
+					"letter_locale": "Нань",
+					"meaning": "[ Трудности ]"
+				},
+				"n_sym_tetragram_80_qin": {
+					"letter_locale": "Цинь",
+					"meaning": "[ Трудолюбие ]"
+				},
+				"n_sym_tetragram_81_yang": {
+					"letter_locale": "Ян",
+					"meaning": "[ Взращивание ]"
 				}
 			}
 		}
