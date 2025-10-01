@@ -4,7 +4,7 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.7.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
+### [0.1.7.3 α — 2025-10-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
 
 - Additions:
 
@@ -17,6 +17,7 @@
   - When searching for tags, if the query does not contain a space, it now looks for the presence of a whole word before proceeding with other comparison options.
   - Titltes/tags generation for symbols entries, also “Search” and filtering in main window was improved.
   - “Compose” mode now accepts both normal characters and surrogate pairs.
+  - Main window’s tabs now have a separate list element for displaying all symbols and a separate list for displaying search results (now there is no need to fill the list again when the search is canceled).
 
 - Fixes:
 
@@ -174,7 +175,7 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [0.1.7.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
+### [0.1.7.3 α — 2025-10-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
 
 - Добавления:
 
@@ -187,6 +188,7 @@
   - При поиске тегов, если запрос не содержит пробела, теперь ищет наличие целого слова в теге перед тем, как провести остальные варианты сравнения.
   - Улучшены: генерация названий/тегов для записей символов, «Поиск» и фильтрация в главном окне.
   - Режим «Композиции» теперь одновременно принимает ввод и обычных символов, и символов из суррогатных пар.
+  - Вкладки главного окна теперь имеют по два элемента списков: один для отображения всех символов, второй для отображения результатов поиска по списку (теперь не требуется повторное заполнения списка при отмены поиска).
 
 - Исправления:
 

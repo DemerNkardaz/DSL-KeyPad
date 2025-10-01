@@ -1,7 +1,8 @@
 Class UIMainPanelFilter {
-	__New(&panelWindow, &filterField, &LV, &dataList, &localeData, prefix) {
+	__New(&panelWindow, &filterField, &originLV, &LV, &dataList, &localeData, prefix) {
 		this.panelWindow := panelWindow
 		this.filterField := filterField
+		this.originLV := originLV
 		this.LV := LV
 		this.dataList := dataList
 		this.localeData := localeData
@@ -12,8 +13,12 @@ Class UIMainPanelFilter {
 
 	Populate() {
 		this.LV.Delete()
-		for item in this.dataList
-			this.LV.Add(, item[this.localeData.localeIndex], ArraySlice(item, 2, this.localeData.columnsCount)*)
+		this.LV.Visible := False
+		this.LV.Enabled := False
+		this.originLV.Visible := True
+		this.originLV.Enabled := True
+		; for item in this.dataList
+		; 	this.LV.Add(, item[this.localeData.localeIndex], ArraySlice(item, 2, this.localeData.columnsCount)*)
 		return
 	}
 
@@ -177,6 +182,13 @@ Class UIMainPanelFilter {
 				if groupedItems.Length > 0
 					this.LV.Add()
 
+
+				this.LV.Visible := True
+				this.LV.Enabled := True
+
+				this.originLV.Modify(0, "-Select -Focus")
+				this.originLV.Visible := False
+				this.originLV.Enabled := False
 			} catch
 				this.Populate()
 		}

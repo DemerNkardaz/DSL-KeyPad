@@ -546,11 +546,17 @@ Class UIMainPanel {
 		localeData.columnsCount := localizedColumns.Length
 
 		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
+		charactersLVForFilter := panelWindow.AddListView(Format("v{}LVForFilter w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
+
 		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), "Noto Sans")
+		charactersLVForFilter.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), "Noto Sans")
+		charactersLVForFilter.Visible := False
+		charactersLVForFilter.Enabled := False
 
 		Loop attributes.columns.Length {
 			index := A_Index
 			charactersLV.ModifyCol(index, attributes.columnWidths[index])
+			charactersLVForFilter.ModifyCol(index, attributes.columnWidths[index])
 		}
 
 		local localizesRowsList := []
@@ -565,7 +571,7 @@ Class UIMainPanel {
 			this.filterX, this.filterY, this.filterW, this.filterH, attributes.prefix), "")
 		characterFilter.SetFont("s10")
 
-		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &src, &localeData, attributes.prefix)
+		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &charactersLVForFilter, &src, &localeData, attributes.prefix)
 
 		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
 
@@ -679,6 +685,12 @@ Class UIMainPanel {
 		charactersLV.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemDoubleClick(LV, rowNumber, attributes.prefix))
 
 		charactersLV.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.ItemContextMenu(panelWindow, LV, rowNumber, isRMB, X, Y, attributes.prefix))
+
+		charactersLVForFilter.OnEvent("ItemFocus", (LV, rowNumber) => this.ItemSetPreview(panelWindow, LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType }))
+
+		charactersLVForFilter.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemDoubleClick(LV, rowNumber, attributes.prefix))
+
+		charactersLVForFilter.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.ItemContextMenu(panelWindow, LV, rowNumber, isRMB, X, Y, attributes.prefix))
 
 		characterFilter.OnEvent("Change", (Ctrl, Info) => (
 			filterText := Ctrl.Text,

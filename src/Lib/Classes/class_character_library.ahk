@@ -83,6 +83,7 @@ Class ChrLib {
 		"taoist",
 		"yijing",
 		"taixuanjing",
+		"mahjong",
 	]
 
 	static decompositionAttributes := Map(
