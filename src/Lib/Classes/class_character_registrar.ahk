@@ -1,4 +1,9 @@
 Class ChrReg {
+	static recipeAltReplaces := [
+		["([" Chrs(0x21BA, 0x21BB, 0x2190, 0x2191, 0x2193, 0x2192, 0x2196, 0x2197, 0x2199, 0x2198, 0x2194, 0x2195, 0x2B8C, 0x2B8E, 0x2B8D, 0x2B8F) "])(" DottedCircle ")", "$1" Chr(0xE0020) "$2"]
+	]
+
+
 	__New(rawEntries, typeOfInit := "Internal", preventProgressGUI := False, defaultLib := False) {
 		Event.Trigger("Character Library", "Registration Starts", rawEntries, typeOfInit, preventProgressGUI)
 
@@ -910,7 +915,13 @@ Class ChrReg {
 
 			for i, aR in entry["recipeAlt"] {
 				entry["recipeAlt"][i] := RegExReplace(aR, DottedCircle DottedCircle, DottedCircle)
+				for eachReplace in ChrReg.recipeAltReplaces {
+					if RegExMatch(entry["recipeAlt"][i], eachReplace[1], &match) {
+						entry["recipeAlt"][i] := RegExReplace(entry["recipeAlt"][i], eachReplace[1], eachReplace[2])
+					}
+				}
 			}
+
 		}
 
 		return

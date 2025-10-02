@@ -18,10 +18,12 @@
   - Titltes/tags generation for symbols entries, also “Search” and filtering in main window was improved.
   - “Compose” mode now accepts both normal characters and surrogate pairs.
   - Main window’s tabs now have a separate list element for displaying all symbols and a separate list for displaying search results (now there is no need to fill the list again when the search is canceled).
+  - “Enter” key in “Compose” mode now allows to confirm any input. If the recipe was not completed, the input field will contain the entered sequence.
 
 - Fixes:
 
   - Fixed Windows 11 error, when symbols are ignored in the “Compositions” mode.
+  - Fixed “Compose” mode crash with typing “()[]+” symbols.
 
 ### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 
@@ -189,10 +191,12 @@
   - Улучшены: генерация названий/тегов для записей символов, «Поиск» и фильтрация в главном окне.
   - Режим «Композиции» теперь одновременно принимает ввод и обычных символов, и символов из суррогатных пар.
   - Вкладки главного окна теперь имеют по два элемента списков: один для отображения всех символов, второй для отображения результатов поиска по списку (теперь не требуется повторное заполнения списка при отмены поиска).
+  - Теперь клавиша «Enter» в режиме «Композиции» позволяет подтвердить любой ввод. Если рецепт не был завершён — в поле ввода окажется введённая последовательность символов.
 
 - Исправления:
 
   - Исправлена ошибка в Windows 11, при которой символы привязок игнорировались режимом «Композиции».
+  - Исправлена ошибка режима «Композиции», когда ввод символов «()[]+» останавливал его работу.
 
 ### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 

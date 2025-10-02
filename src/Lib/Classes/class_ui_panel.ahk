@@ -909,7 +909,11 @@ Class UIMainPanel {
 					local languageCode := Language.Get()
 					local localeIndex := this.listViewLocaleColumnsIndexes.Get(languageCode)
 					local star := Chr(0x2002) Chr(0x2605)
-					favoritesListView.Add(, sourceRow[localeIndex] (!InStr(sourceRow[localeIndex], star) ? star : ""), ArraySlice(sourceRow, 2, this.listViewColumnHeaders.favorites.Length)*)
+
+					if !InStr(sourceRow[localeIndex], star)
+						sourceRow[localeIndex] .= star
+
+					favoritesListView.Add(, sourceRow[localeIndex], ArraySlice(sourceRow, 2, this.listViewColumnHeaders.favorites.Length)*)
 
 					local favoritesData := this.listViewData["favorites"]
 					favoritesData.Push(sourceRow)
