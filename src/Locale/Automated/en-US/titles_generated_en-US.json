@@ -33,7 +33,8 @@
 				"glyph": "glyph",
 				"piece": "piece",
 				"suite": "suite",
-				"card": "card"
+				"card": "card",
+				"dice": "dice"
 			},
 			"before_letter": {
 				"turned": "turned",

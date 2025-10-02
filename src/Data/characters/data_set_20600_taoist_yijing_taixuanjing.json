@@ -3,13 +3,24 @@
 		"unicode": ["262F", "262F"],
 		"sequence": [["262F", "FE0E"], ["262F", "FE0F"]],
 		"recipe": [["t yy"], ["emoji yy"]],
-		"options": { "useLetterLocale": "yinyang$", "noCalc": [false, true], "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true },
+		"options": {
+			"useLetterLocale": "yinyang$",
+			"noCalc": [false, true],
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
 		"symbol": { "beforeLetter": "[,emoji]" }
 	},
 	"yijing_n_sym_monogram_{i}_[yin,yang]", {
 		"unicode": ["268B", "268A"],
 		"recipe": [["y yi", "t md"], ["y ya", "t mt"]],
-		"options": { "fastKey": ["<! 9?Secondary", "c*<! 9?Secondary"], "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
+		"options": {
+			"fastKey": ["<! 9?Secondary", "c*<! 9?Secondary"],
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
 		"symbol": {
 			"beforeLetter": "{i}",
 			"beforeType": "t.yao<en-US>",
@@ -50,7 +61,12 @@
 			["${yijing_n_sym_monogram_1_yin}${yijing_n_sym_monogram_2_yang}", "y li", "t ddt"],
 			["${yijing_n_sym_monogram_2_yang×2}", "y ga", "t dtt"]
 		],
-		"options": { "fastKey": ["<!<+ 9?Secondary", "<!>+ 9?Secondary", "c*<!>+ 9?Secondary", "c*<!<+ 9?Secondary"], "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
+		"options": {
+			"fastKey": ["<!<+ 9?Secondary", "<!>+ 9?Secondary", "c*<!>+ 9?Secondary", "c*<!<+ 9?Secondary"],
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
 		"symbol": {
 			"beforeLetter": "{i}",
 			"beforeType": "t.si_xiang<en-US>",
@@ -117,7 +133,12 @@
 				"y tn"
 			]
 		],
-		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
+		"options": {
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
 		"symbol": {
 			"beforeLetter": "{i}",
 			"beforeType": "t.bagua<en-US>",
@@ -473,7 +494,13 @@
 	"taixuanjing_n_sym_monogram_{2...i}_[ren]", {
 		"unicode": ["1D300"],
 		"recipe": [["t mn"]],
-		"options": { "fastKey": ["<! 0?Secondary"], "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
+		"options": {
+			"fastKey": ["<! 0?Secondary"],
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
 		"symbol": {
 			"beforeLetter": "{2...i}",
 			"type": "monogram",
@@ -493,7 +520,13 @@
 			["${taixuanjing_n_sym_monogram_3_ren}${yijing_n_sym_monogram_1_yin}", "t drd"],
 			["${taixuanjing_n_sym_monogram_3_ren}${taixuanjing_n_sym_monogram_3_ren}", "t drr"]
 		],
-		"options": { "fastKey": ["<!<+ 0?Secondary", "c*<!<+ 0?Secondary", "<!>+ 0?Secondary", "c*<!>+ 0?Secondary", "c*<! 0?Secondary"], "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
+		"options": {
+			"fastKey": ["<!<+ 0?Secondary", "c*<!<+ 0?Secondary", "<!>+ 0?Secondary", "c*<!>+ 0?Secondary", "c*<! 0?Secondary"],
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
 		"symbol": {
 			"beforeLetter": "{4...i}",
 			"type": "digram",
@@ -838,7 +871,12 @@
 				"t tyan1"
 			]
 		],
-		"options": { "altTitleUseLineBreak": true, "useHiddenTags": true, "hiddenTagsLanguage": "en-US", "ignoreCaseOnPanelFilter": true  },
+		"options": {
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
 		"symbol": {
 			"beforeLetter": "{i}",
 			"type": "tetragram",
@@ -847,6 +885,192 @@
 			"afterType": "t.bashiyishou<ru-RU>",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
 			"font": "Segoe UI Symbol"
+		}
+	},
+	"mahjong_n_dice_suited_{i}_[yi,er,san,si,wu,liu,qi,ba,jiu]_tongzi", {
+		"unicode": ["1F019", "1F01A", "1F01B", "1F01C", "1F01D", "1F01E", "1F01F", "1F020", "1F021"],
+		"recipe": [
+			["mj t1"],
+			["mj t2"],
+			["mj t3"],
+			["mj t4"],
+			["mj t5"],
+			["mj t6"],
+			["mj t7"],
+			["mj t8"],
+			["mj t9"]
+		],
+		"options": {
+			"useLetterLocale": "_tongzi$(remove)",
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeLetter": "t.tongzi,{i}",
+			"afterType": "suited",
+			"afterTitle": "/self/meaning.tongzi",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "c273892"
+		}
+	},
+	"mahjong_n_dice_suited_{i}_[yi,er,san,si,wu,liu,qi,ba,jiu]_suozi", {
+		"unicode": ["1F010", "1F011", "1F012", "1F013", "1F014", "1F015", "1F016", "1F017", "1F018"],
+		"recipe": [
+			["mj s1"],
+			["mj s2"],
+			["mj s3"],
+			["mj s4"],
+			["mj s5"],
+			["mj s6"],
+			["mj s7"],
+			["mj s8"],
+			["mj s9"]
+		],
+		"options": {
+			"useLetterLocale": "_suozi$(remove)",
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeLetter": "t.suozi,{i}",
+			"afterType": "suited",
+			"afterTitle": "/self/meaning.suozi",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "c008248"
+		}
+	},
+	"mahjong_n_dice_suited_{i}_[yi,er,san,si,wu,liu,qi,ba,jiu]_wanzi", {
+		"unicode": ["1F007", "1F008", "1F009", "1F00A", "1F00B", "1F00C", "1F00D", "1F00E", "1F00F"],
+		"recipe": [
+			["mj w1"],
+			["mj w2"],
+			["mj w3"],
+			["mj w4"],
+			["mj w5"],
+			["mj w6"],
+			["mj w7"],
+			["mj w8"],
+			["mj w9"]
+		],
+		"options": {
+			"useLetterLocale": "_wanzi$(remove)",
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeLetter": "t.wanzi,{i}",
+			"afterType": "suited",
+			"afterTitle": "/self/meaning.wanzi",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "cc03311"
+		}
+	},
+	"mahjong_n_dice_honors_{i}_[dong,nan,xi,bei]_feng", {
+		"unicode": ["1F000", "1F001", "1F002", "1F003"],
+		"recipe": [
+			["mj a1"],
+			["mj a2"],
+			["mj a3"],
+			["mj a4"]
+		],
+		"options": {
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeLetter": "{i}",
+			"beforeType": "honors<ru-RU>",
+			"afterType": "honors<en-US>",
+			"afterTitle": "/self/meaning",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "c273892"
+		}
+	},
+	"mahjong_n_dice_honors_{4...i}_[hongzhong,facai,baiban]", {
+		"unicode": ["1F004", "1F005", "1F006"],
+		"recipe": [
+			["mj d1"],
+			["mj d2"],
+			["mj d3"]
+		],
+		"options": {
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeLetter": "{4...i}",
+			"beforeType": "honors<ru-RU>",
+			"afterType": "honors<en-US>",
+			"afterTitle": "/self/meaning",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "[cc03311,c008248,c273892]"
+		}
+	},
+	"mahjong_n_dice_flowers_{i}_[meihua,lanhua,juhua,zhuzi]", {
+		"unicode": ["1F022", "1F023", "1F025", "1F024"],
+		"recipe": [
+			["mj f1"],
+			["mj f2"],
+			["mj f3"],
+			["mj f4"]
+		],
+		"options": {
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeLetter": "{i}",
+			"afterType": "flowers",
+			"afterTitle": "/self/meaning",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "[cc03311,cc03311,cd37f10,c008248]"
+		}
+	},
+	"mahjong_n_dice_seasons_{i}_[chun,xia,qiu,dong]", {
+		"unicode": ["1F026", "1F027", "1F028", "1F029"],
+		"recipe": [
+			["mj j1"],
+			["mj j2"],
+			["mj j3"],
+			["mj j4"]
+		],
+		"options": {
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeLetter": "{i}",
+			"afterType": "seasons",
+			"afterTitle": "/self/meaning",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "[cd37f10,cbd2705,cd37f10,c008248]"
+		}
+	},
+	"mahjong_n_dice_[back,joker]", {
+		"unicode": ["1F02B", "1F02A"],
+		"recipe": [["mj b"], ["mj jk"]],
+		"options": {
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "c273892"
 		}
 	}
 ]

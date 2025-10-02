@@ -3,18 +3,21 @@
 		"script_labels": {
 			"taoist": "Дао",
 			"yijing": "И-Цзин",
-			"taixuanjing": "Тайсюань-Цзин"
+			"taixuanjing": "Тайсюань-Цзин",
+			"mahjong": "Мацзян"
 		},
 		"generated": {
 			"prefix": {
 				"taoist": "Даосск$(ая|ий|ое)",
 				"yijing": "И-Цзин",
-				"taixuanjing": "Тайсюань-Цзин"
+				"taixuanjing": "Тайсюань-Цзин",
+				"mahjong": "Мацзян"
 			},
 			"tag": {
 				"taoist": "даосск$(ая|ий|ое)",
 				"yijing": "и-цзин",
-				"taixuanjing": "тайсюань-цзин"
+				"taixuanjing": "тайсюань-цзин",
+				"mahjong": "мацзян"
 			},
 			"type": {
 				"monogram": "энаграмма",
@@ -29,7 +32,11 @@
 				"bagua": "багуа",
 				"liushisigua": "люшисыгуа",
 				"sancai": "санцяй",
-				"bashiyishou": "башийшоу"
+				"bashiyishou": "башийшоу",
+				"tongzi": "тунцзы",
+				"suozi": "соцзы",
+				"wanzi": "ваньцзы",
+				"honors": "благородн$(ая|ый|ое)"
 			},
 			"after_letter": {
 				"yao": "яо",
@@ -37,7 +44,13 @@
 				"bagua": "багуа",
 				"liushisigua": "люшисыгуа",
 				"sancai": "санцяй",
-				"bashiyishou": "башийшоу"
+				"bashiyishou": "башийшоу",
+				"tongzi": "тунцзы",
+				"suozi": "соцзы",
+				"wanzi": "ваньцзы",
+				"flowers": "цветов",
+				"seasons": "сезонов",
+				"suited": "мастей"
 			}
 		},
 		"scripts": {
@@ -713,6 +726,142 @@
 					"letter_locale": "Ян",
 					"meaning": "[ Взращивание ]"
 				}
+			},
+			"mahjong": {
+				"n_dice_suited_1_yi": {
+					"letter_locale": "И",
+					"meaning": {
+						"tongzi": "[ Единица кругов ]",
+						"suozi": "[ Единица бамбуков ]",
+						"wanzi": "[ Единица тьмы ]"
+					}
+				},
+				"n_dice_suited_2_er": {
+					"letter_locale": "Эр",
+					"meaning": {
+						"tongzi": "[ Двойка кругов ]",
+						"suozi": "[ Двойка бамбуков ]",
+						"wanzi": "[ Двойка тьмы ]"
+					}
+				},
+				"n_dice_suited_3_san": {
+					"letter_locale": "Сань",
+					"meaning": {
+						"tongzi": "[ Тройка кругов ]",
+						"suozi": "[ Тройка бамбуков ]",
+						"wanzi": "[ Тройка тьмы ]"
+					}
+				},
+				"n_dice_suited_4_si": {
+					"letter_locale": "Сы",
+					"meaning": {
+						"tongzi": "[ Четвёрка кругов ]",
+						"suozi": "[ Четвёрка бамбуков ]",
+						"wanzi": "[ Четвёрка тьмы ]"
+					}
+				},
+				"n_dice_suited_5_wu": {
+					"letter_locale": "У",
+					"meaning": {
+						"tongzi": "[ Пятёрка кругов ]",
+						"suozi": "[ Пятёрка бамбуков ]",
+						"wanzi": "[ Пятёрка тьмы ]"
+					}
+				},
+				"n_dice_suited_6_liu": {
+					"letter_locale": "Лю",
+					"meaning": {
+						"tongzi": "[ Шестёрка кругов ]",
+						"suozi": "[ Шестёрка бамбуков ]",
+						"wanzi": "[ Шестёрка тьмы ]"
+					}
+				},
+				"n_dice_suited_7_qi": {
+					"letter_locale": "Ци",
+					"meaning": {
+						"tongzi": "[ Семёрка кругов ]",
+						"suozi": "[ Семёрка бамбуков ]",
+						"wanzi": "[ Семёрка тьмы ]"
+					}
+				},
+				"n_dice_suited_8_ba": {
+					"letter_locale": "Ба",
+					"meaning": {
+						"tongzi": "[ Восьмёрка кругов ]",
+						"suozi": "[ Восьмёрка бамбуков ]",
+						"wanzi": "[ Восьмёрка тьмы ]"
+					}
+				},
+				"n_dice_suited_9_jiu": {
+					"letter_locale": "Цзю",
+					"meaning": {
+						"tongzi": "[ Девятка кругов ]",
+						"suozi": "[ Девятка бамбуков ]",
+						"wanzi": "[ Девятка тьмы ]"
+					}
+				},
+				"n_dice_honors_1_dong_feng": {
+					"letter_locale": "Дун Фэнь",
+					"meaning": "[ Восточный ветер ]"
+				},
+				"n_dice_honors_2_nan_feng": {
+					"letter_locale": "Нань Фэнь",
+					"meaning": "[ Южный ветер ]"
+				},
+				"n_dice_honors_3_xi_feng": {
+					"letter_locale": "Си Фэнь",
+					"meaning": "[ Западный ветер ]"
+				},
+				"n_dice_honors_4_bei_feng": {
+					"letter_locale": "Бэй Фэн",
+					"meaning": "[ Северный ветер ]"
+				},
+				"n_dice_honors_5_hongzhong": {
+					"letter_locale": "Хунчжун",
+					"meaning": "[ Красный дракон ]"
+				},
+				"n_dice_honors_6_facai": {
+					"letter_locale": "Фацай",
+					"meaning": "[ Зелёный дракон ]"
+				},
+				"n_dice_honors_7_baiban": {
+					"letter_locale": "Байбань",
+					"meaning": "[ Белый дракон ]"
+				},
+				"n_dice_flowers_1_meihua": {
+					"letter_locale": "Мэй Хуа",
+					"meaning": "[ Цветок сливы ]"
+				},
+				"n_dice_flowers_2_lanhua": {
+					"letter_locale": "Лань Хуа",
+					"meaning": "[ Цветок орхидеи ]"
+				},
+				"n_dice_flowers_3_juhua": {
+					"letter_locale": "Цзюй Хуа",
+					"meaning": "[ Цветок хризантемы ]"
+				},
+				"n_dice_flowers_4_zhuzi": {
+					"letter_locale": "Чжу Цзы",
+					"meaning": "[ Бамбук ]"
+				},
+				"n_dice_seasons_1_chun": {
+					"letter_locale": "Чунь",
+					"meaning": "[ Весна ]"
+				},
+				"n_dice_seasons_2_xia": {
+					"letter_locale": "Ся",
+					"meaning": "[ Лето ]"
+				},
+				"n_dice_seasons_3_qiu": {
+					"letter_locale": "Цю",
+					"meaning": "[ Осень ]"
+				},
+				"n_dice_seasons_4_dong": {
+					"letter_locale": "Дун",
+					"meaning": "[ Зима ]"
+				},
+				"n_dice_back": { "letter_locale": "(Тыльная сторона)" },
+				"n_dice_joker": { "letter_locale": "Джокер (Американский Маджонг)" }
 			}
 		}
 	}

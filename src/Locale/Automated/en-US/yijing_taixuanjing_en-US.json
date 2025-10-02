@@ -3,18 +3,21 @@
 		"script_labels": {
 			"taoist": { "__self": "Dàojiào", "__hidden": "Daojiao" },
 			"yijing": { "__self": "Yìjīng", "__hidden": "Yijing" },
-			"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" }
+			"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" },
+			"mahjong": { "__self": "Májiàng", "__hidden": "Majiang" }
 		},
 		"generated": {
 			"prefix": {
 				"taoist": { "__self": "Dàojiào", "__hidden": "daojiao" },
 				"yijing": { "__self": "Yìjīng", "__hidden": "Yijing" },
-				"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" }
+				"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" },
+				"mahjong": { "__self": "Májiàng", "__hidden": "Majiang" }
 			},
 			"tag": {
 				"taoist": { "__self": "dàojiào", "__hidden": "daojiao" },
 				"yijing": { "__self": "yìjīng", "__hidden": "yijing" },
-				"taixuanjing": { "__self": "tàixuánjīng", "__hidden": "taixuanjing" }
+				"taixuanjing": { "__self": "tàixuánjīng", "__hidden": "taixuanjing" },
+				"mahjong": { "__self": "májiàng", "__hidden": "majiang" }
 			},
 			"type": {
 				"monogram": "monogram",
@@ -47,6 +50,18 @@
 				"bashiyishou": {
 					"__self": "bāshíyīshǒu",
 					"__hidden": "bashiyishou"
+				},
+				"tongzi": {
+					"__self": "tǒngzi",
+					"__hidden": "tongzi"
+				},
+				"suozi": {
+					"__self": "suǒzi",
+					"__hidden": "suozi"
+				},
+				"wanzi": {
+					"__self": "wànzi",
+					"__hidden": "wanzi"
 				}
 			},
 			"after_letter": {
@@ -73,7 +88,23 @@
 				"bashiyishou": {
 					"__self": "bāshíyīshǒu",
 					"__hidden": "bashiyishou"
-				}
+				},
+				"tongzi": {
+					"__self": "tǒngzi",
+					"__hidden": "tongzi"
+				},
+				"suozi": {
+					"__self": "suǒzi",
+					"__hidden": "suozi"
+				},
+				"wanzi": {
+					"__self": "wànzi",
+					"__hidden": "wanzi"
+				},
+				"flowers": "flowers",
+				"seasons": "seasons",
+				"suited": "suited",
+				"honors": "honors"
 			}
 		},
 		"scripts": {
@@ -766,6 +797,142 @@
 					"letter_locale": { "__self": "Yǎng", "__hidden": "Yang" },
 					"meaning": "[ Fostering ]"
 				}
+			},
+			"mahjong": {
+				"n_dice_suited_1_yi": {
+					"letter_locale": { "__self": "Yī", "__hidden": "Yi" },
+					"meaning": {
+						"tongzi": "[ One of Circles ]",
+						"suozi": "[ One of Bamboos ]",
+						"wanzi": "[ One of Myriads ]"
+					}
+				},
+				"n_dice_suited_2_er": {
+					"letter_locale": { "__self": "Èr", "__hidden": "Er" },
+					"meaning": {
+						"tongzi": "[ Two of Circles ]",
+						"suozi": "[ Two of Bamboos ]",
+						"wanzi": "[ Two of Myriads ]"
+					}
+				},
+				"n_dice_suited_3_san": {
+					"letter_locale": { "__self": "Sān", "__hidden": "San" },
+					"meaning": {
+						"tongzi": "[ Three of Circles ]",
+						"suozi": "[ Three of Bamboos ]",
+						"wanzi": "[ Three of Myriads ]"
+					}
+				},
+				"n_dice_suited_4_si": {
+					"letter_locale": { "__self": "Sì", "__hidden": "Si" },
+					"meaning": {
+						"tongzi": "[ Four of Circles ]",
+						"suozi": "[ Four of Bamboos ]",
+						"wanzi": "[ Four of Myriads ]"
+					}
+				},
+				"n_dice_suited_5_wu": {
+					"letter_locale": { "__self": "Wǔ", "__hidden": "Wu" },
+					"meaning": {
+						"tongzi": "[ Five of Circles ]",
+						"suozi": "[ Five of Bamboos ]",
+						"wanzi": "[ Five of Myriads ]"
+					}
+				},
+				"n_dice_suited_6_liu": {
+					"letter_locale": { "__self": "Liù", "__hidden": "Liu" },
+					"meaning": {
+						"tongzi": "[ Six of Circles ]",
+						"suozi": "[ Six of Bamboos ]",
+						"wanzi": "[ Six of Myriads ]"
+					}
+				},
+				"n_dice_suited_7_qi": {
+					"letter_locale": { "__self": "Qī", "__hidden": "Qi" },
+					"meaning": {
+						"tongzi": "[ Seven of Circles ]",
+						"suozi": "[ Seven of Bamboos ]",
+						"wanzi": "[ Seven of Myriads ]"
+					}
+				},
+				"n_dice_suited_8_ba": {
+					"letter_locale": { "__self": "Bā", "__hidden": "Ba" },
+					"meaning": {
+						"tongzi": "[ Eight of Circles ]",
+						"suozi": "[ Eight of Bamboos ]",
+						"wanzi": "[ Eight of Myriads ]"
+					}
+				},
+				"n_dice_suited_9_jiu": {
+					"letter_locale": { "__self": "Jiǔ", "__hidden": "Jiu" },
+					"meaning": {
+						"tongzi": "[ Nine of Circles ]",
+						"suozi": "[ Nine of Bamboos ]",
+						"wanzi": "[ Nine of Myriads ]"
+					}
+				},
+				"n_dice_honors_1_dong_feng": {
+					"letter_locale": { "__self": "Dōngfēng", "__hidden": "Dongfeng" },
+					"meaning": "[ Estern Wind ]"
+				},
+				"n_dice_honors_2_nan_feng": {
+					"letter_locale": { "__self": "Nánfeng", "__hidden": "Nanfeng" },
+					"meaning": "[ South Wind ]"
+				},
+				"n_dice_honors_3_xi_feng": {
+					"letter_locale": { "__self": "Xīfēng", "__hidden": "Xifeng" },
+					"meaning": "[ West Wind ]"
+				},
+				"n_dice_honors_4_bei_feng": {
+					"letter_locale": { "__self": "Běifēng", "__hidden": "Beifeng" },
+					"meaning": "[ North Wind ]"
+				},
+				"n_dice_honors_5_hongzhong": {
+					"letter_locale": "Hóngzhōng",
+					"meaning": "[ Red Dragon ]"
+				},
+				"n_dice_honors_6_facai": {
+					"letter_locale": "Fācái",
+					"meaning": "[ Green Dragon ]"
+				},
+				"n_dice_honors_7_baiban": {
+					"letter_locale": "Báibǎn",
+					"meaning": "[ White Dragon ]"
+				},
+				"n_dice_flowers_1_meihua": {
+					"letter_locale": { "__self": "Méihuā", "__hidden": "Meihua" },
+					"meaning": "[ Plum blossom ]"
+				},
+				"n_dice_flowers_2_lanhua": {
+					"letter_locale": { "__self": "Lánhuā", "__hidden": "Lanhua" },
+					"meaning": "[ Orchid ]"
+				},
+				"n_dice_flowers_3_juhua": {
+					"letter_locale": { "__self": "Júhuā", "__hidden": "Juhua" },
+					"meaning": "[ Chrysanthemum ]"
+				},
+				"n_dice_flowers_4_zhuzi": {
+					"letter_locale": { "__self": "Zhúzi", "__hidden": "Zhuzi" },
+					"meaning": "[ Bamboo ]"
+				},
+				"n_dice_seasons_1_chun": {
+					"letter_locale": { "__self": "Chūn", "__hidden": "Chun" },
+					"meaning": "[ Spring ]"
+				},
+				"n_dice_seasons_2_xia": {
+					"letter_locale": { "__self": "Xià", "__hidden": "Xia" },
+					"meaning": "[ Summer ]"
+				},
+				"n_dice_seasons_3_qiu": {
+					"letter_locale": { "__self": "Qiū", "__hidden": "Qiu" },
+					"meaning": "[ Autumn ]"
+				},
+				"n_dice_seasons_4_dong": {
+					"letter_locale": { "__self": "Dōng", "__hidden": "Dong" },
+					"meaning": "[ Winter ]"
+				},
+				"n_dice_back": { "letter_locale": "(Back)" },
+				"n_dice_joker": { "letter_locale": "Joker (American Mahjong)" }
 			}
 		}
 	}

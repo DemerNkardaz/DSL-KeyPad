@@ -114,7 +114,8 @@ Class ChrLib {
 			"gly", "glyph",
 			"piece", "piece",
 			"suite", "suite",
-			"card", "card"
+			"card", "card",
+			"dice", "dice",
 		),
 		"letter", "",
 		"endPart", "",

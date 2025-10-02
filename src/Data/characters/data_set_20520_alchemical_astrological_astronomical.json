@@ -746,7 +746,7 @@
 			["ast obs Hygiea", "ast oHyg"],
 			["ast obs Parthenope", "ast oPth"]
 		],
-		"options": { "useLetterLocale": ["vesta$", "astraea$", "hygiea$", "parthenope$"] },
+		"options": { "useLetterLocale": "_obsolete$(remove)" },
 		"symbol": {
 			"beforeType": "obsolete",
 			"beforeLetter": "asteroid",
@@ -894,7 +894,7 @@
 			["emoji Pisces", "emoji Pss"]
 		],
 		"options": {
-			"useLetterLocale": ["aries$", "taurus$", "gemini$", "cancer$", "leo$", "virgo$", "libra$", "scorpio$", "sagittarius$", "capricorn$", "aquarius$", "pisces$"],
+			"useLetterLocale": "_emoji$(remove)",
 			"noCalc": true
 		},
 		"symbol": { "beforeType": "zodiacal", "beforeLetter": "emoji" }
@@ -927,7 +927,7 @@
 	"astronomical_n_sym_planet_[venus]_classical", {
 		"unicode": ["26B2"],
 		"recipe": [["asn cl Venus", "asn cVns"]],
-		"options": { "useLetterLocale": ["venus$"] },
+		"options": { "useLetterLocale": "_classical$(remove)" },
 		"symbol": {
 			"customs": "[cdcb572]",
 			"beforeType": "classical",

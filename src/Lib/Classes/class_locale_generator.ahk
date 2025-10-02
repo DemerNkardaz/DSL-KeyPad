@@ -99,9 +99,12 @@ Class LocaleGenerator {
 			local interLetter := ref
 
 			if useLetterLocale {
-				if RegExMatch(useLetterLocale, "i)^(.*?)\$", &refMatch)
-					interLetter := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1")
-				else if useLetterLocale = "Origin"
+				if RegExMatch(useLetterLocale, "i)^(.*?)\$(\(.*?\))?", &refMatch) {
+					if refMatch[2] != "" && InStr(refMatch[2], "remove") {
+						interLetter := RegExReplace(entryName, "i)" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1"))
+					} else
+						interLetter := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1")
+				} else if useLetterLocale = "Origin"
 					interLetter := RegExReplace(ref, "i)^(.*?)__.*", "$1")
 
 				if hasScript
