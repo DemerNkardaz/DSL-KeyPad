@@ -35,8 +35,8 @@ $$
 ---
 
 <p align="center">
-<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-6000+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
-<img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-6200+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/unicode_symbols-6200+-yellow?logo=unicode&labelColor=ffffff" alt="unicode"/>
+<img src="https://custom-icon-badges.herokuapp.com/badge/forge’s_sequences-6300+-yellow?logoColor=333333&logo=anvil&labelColor=ffffff" alt="forge"/>
 <img src="https://custom-icon-badges.herokuapp.com/badge/binds-2600+/800+-yellow?logo=keybind&labelColor=ffffff" alt="binds"/>
 <br>
 <img src="https://wakatime.com/badge/user/e572f348-6192-4188-a508-7efe46e45cd5/project/687cb256-bc63-49cf-b4c8-fc242ad60efb.svg?style=social" alt="wakatime"/>
@@ -59,7 +59,7 @@ $$
 
 This tool extends the range of characters available for input directly from the keyboard and primarily focuses on Latin and Cyrillic scripts, but is not limited to them. You only need to have Russian and English keyboard layouts installed in your system to be able to write in multiple languages, for example:
 
-- **Latin**: <span title="Old English">Ænglisċ sprǣċe</span>, <span title="French">Français</span>, <span title="Vietnamese">Tiếng Việt</span>, <span title="Mandarin (Romanization)">Hànyǔ Pīnyīn</span>, <span title="Old Norse">Norrœnt mál</span>, </span title="Faroese">Føroyskt mál</span>, <span title="Romanian">Limba Română</span>, <span title="Spanish">Español</span>, <span title="Polish">Język polski</span>, <span title="Czech">Čeština</span>, <span title="Norwegian Bokmål">Bokmål</span>, <span title="Tamazight">Tamaziɣt</span>, <span title="Turkish">Türkçe</span>, <span title="Skolt Sami">Sää’mǩiõll</span>, <span title="Lithuanian">Lietùvių kalbà</span>…
+- **Latin**: <span title="Old English">Ænglisċ sprǣċe</span>, <span title="French">Français</span>, <span title="Vietnamese">Tiếng Việt</span>, <span title="Mandarin (Romanization)">Hànyǔ Pīnyīn</span>, <span title="Old Norse">Norrœnt mál</span>, <span title="Faroese">Føroyskt mál</span>, <span title="Romanian">Limba Română</span>, <span title="Spanish">Español</span>, <span title="Polish">Język polski</span>, <span title="Czech">Čeština</span>, <span title="Norwegian Bokmål">Bokmål</span>, <span title="Tamazight">Tamaziɣt</span>, <span title="Turkish">Türkçe</span>, <span title="Skolt Sami">Sää’mǩiõll</span>, <span title="Lithuanian">Lietùvių kalbà</span>…
 
 - **Cyrillic**: <span title="Kazakh">Қазақ тілі</span>, <span title="Dungan">Хуэйзў йүян</span>, <span title="Tajik">Забони тоҷикӣ</span>, <span title="Yaghnobi">Йағнобӣ зивок</span>, <span title="Abkhaz">Аԥсуа бызшәа</span>, <span title="Avar">Авар мацӏ</span>, <span title="Ukrainian">Українська мова</span>, <span title="Old Church Slavonic">Словѣньскъ ѩꙁꙑкъ</span>, <span title="Montenegrin">Црногорски језик</span>, <span title="Old Romanian (Cyrillic)">Ли́мба Рꙋмѫнѣскъ</span>, <span title="Itelmen">Итәнмәӈин крвэԓхатас</span>, <span title="Daur">Даһур Усүүэ</span>, <span title="Evenki">Эвэды̄ турэ̄н</span>, <span title="Azerbaijani (Cyrillic)">Азәрбајҹанҹа</span>, <span title="Bashkir">Башҡорт теле</span>, <span title="Talysh">Тэлэңгэт</span>, <span title="Chuvash">Чӑваш чӗлхи</span>…
 

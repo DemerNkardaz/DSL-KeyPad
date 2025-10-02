@@ -1,0 +1,20 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"domino": "Домино"
+		},
+		"generated": {
+			"prefix": {
+				"domino": "Домино"
+			},
+			"tag": {
+				"domino": "домино"
+			}
+		},
+		"scripts": {
+			"domino": {
+				"n_tile_back": { "letter_locale": "(Тыльная сторона)" }
+			}
+		}
+	}
+}

@@ -8,10 +8,10 @@ Class LocaleGenerator {
 		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "." entry["symbol"]["scriptAdditive"] : ""
 
 		local tagScriptAtStart := False
-		local isJingGrams := entryName ~= "^(yijing|taixuanjing)"
+		local isJingGrams := entryName ~= "^(yijing|taixuanjing|mahjong)"
 		local scriptBounds := entry["symbol"]["scriptBounds"]
 
-		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic"]) {
+		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic", "domino"]) {
 			if !useLetterLocale
 				useLetterLocale := True
 			if !isJingGrams
@@ -180,11 +180,11 @@ Class LocaleGenerator {
 								continue
 
 							boundKey := RegExReplace(boundKey, languageRuleMatch[0])
-						} else if RegExMatch(boundKey, "\{(\d+)?(?:\.\.\.)?i\}", &match) {
+						} else if RegExMatch(boundKey, "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
 							local addition := match[1] ? Integer(match[1]) : 0
-							l%boundLink% .= Integer(entry["variantPos"]) + addition
+							l%boundLink% .= addition + Integer(entry["variantPos"])
 							if useHiddenTags
-								lHidden%boundLink% .= Integer(entry["variantPos"]) + addition
+								lHidden%boundLink% .= addition + Integer(entry["variantPos"])
 							continue
 						} else if RegExMatch(boundKey, "@(.*?)", &match) {
 							l%boundLink% .= match[1]
@@ -474,11 +474,11 @@ Class LocaleGenerator {
 											continue
 
 										boundKey := RegExReplace(boundKey, languageRuleMatch[0])
-									} else if RegExMatch(boundKey, "\{(\d+)?(?:\.\.\.)?i\}", &match) {
+									} else if RegExMatch(boundKey, "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
 										local addition := match[1] ? Integer(match[1]) : 0
-										lAdditional%boundLink% .= Integer(entry["variantPos"]) + addition
+										lAdditional%boundLink% .= addition + Integer(entry["variantPos"])
 										if curUseHiddenTags
-											lHiddenAdditional%boundLink% .= Integer(entry["variantPos"]) + addition
+											lHiddenAdditional%boundLink% .= addition + Integer(entry["variantPos"])
 										continue
 									} else if RegExMatch(boundKey, "@(.*?)", &match) {
 										lAdditional%boundLink% .= match[1]

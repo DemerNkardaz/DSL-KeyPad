@@ -1,0 +1,20 @@
+{
+	"en-US": {
+		"script_labels": {
+			"domino": "Domino"
+		},
+		"generated": {
+			"prefix": {
+				"domino": "Domino"
+			},
+			"tag": {
+				"domino": "domino"
+			}
+		},
+		"scripts": {
+			"domino": {
+				"n_tile_back": { "letter_locale": "(Back)" }
+			}
+		}
+	}
+}

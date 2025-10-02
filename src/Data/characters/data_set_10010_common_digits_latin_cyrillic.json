@@ -26,7 +26,8 @@
 			"fullstop": "1F100",
 			"comma": "1F101",
 			"tag": "E0030",
-			"segmented": "1FBF0"
+			"segmented": "1FBF0",
+			"outlined": "1CCF0"
 		}, {
 			"doubleStruck": "1D7D9",
 			"bold": "1D7CF",
@@ -43,7 +44,8 @@
 			"fullstop": "2488",
 			"comma": "1F102",
 			"tag": "E0031",
-			"segmented": "1FBF1"
+			"segmented": "1FBF1",
+			"outlined": "1CCF1"
 		}, {
 			"doubleStruck": "1D7DA",
 			"bold": "1D7D0",
@@ -60,7 +62,8 @@
 			"fullstop": "2489",
 			"comma": "1F103",
 			"tag": "E0032",
-			"segmented": "1FBF2"
+			"segmented": "1FBF2",
+			"outlined": "1CCF2"
 		}, {
 			"doubleStruck": "1D7DB",
 			"bold": "1D7D1",
@@ -77,7 +80,8 @@
 			"fullstop": "248A",
 			"comma": "1F104",
 			"tag": "E0033",
-			"segmented": "1FBF3"
+			"segmented": "1FBF3",
+			"outlined": "1CCF3"
 		}, {
 			"doubleStruck": "1D7DC",
 			"bold": "1D7D2",
@@ -94,7 +98,8 @@
 			"fullstop": "248B",
 			"comma": "1F105",
 			"tag": "E0034",
-			"segmented": "1FBF4"
+			"segmented": "1FBF4",
+			"outlined": "1CCF4"
 		}, {
 			"doubleStruck": "1D7DD",
 			"bold": "1D7D3",
@@ -111,7 +116,8 @@
 			"fullstop": "248C",
 			"comma": "1F106",
 			"tag": "E0035",
-			"segmented": "1FBF5"
+			"segmented": "1FBF5",
+			"outlined": "1CCF5"
 		}, {
 			"doubleStruck": "1D7DE",
 			"bold": "1D7D4",
@@ -128,7 +134,8 @@
 			"fullstop": "248D",
 			"comma": "1F107",
 			"tag": "E0036",
-			"segmented": "1FBF6"
+			"segmented": "1FBF6",
+			"outlined": "1CCF6"
 		}, {
 			"doubleStruck": "1D7DF",
 			"bold": "1D7D5",
@@ -145,7 +152,8 @@
 			"fullstop": "248E",
 			"comma": "1F108",
 			"tag": "E0037",
-			"segmented": "1FBF7"
+			"segmented": "1FBF7",
+			"outlined": "1CCF7"
 		}, {
 			"doubleStruck": "1D7E0",
 			"bold": "1D7D6",
@@ -162,7 +170,8 @@
 			"fullstop": "248F",
 			"comma": "1F109",
 			"tag": "E0038",
-			"segmented": "1FBF8"
+			"segmented": "1FBF8",
+			"outlined": "1CCF8"
 		}, {
 			"doubleStruck": "1D7E1",
 			"bold": "1D7D7",
@@ -179,7 +188,8 @@
 			"fullstop": "2490",
 			"comma": "1F10A",
 			"tag": "E0039",
-			"segmented": "1FBF9"
+			"segmented": "1FBF9",
+			"outlined": "1CCF9"
 		}],
 		"tagsPrefixes": ["number ", "число ", ""],
 		"tags": [
@@ -490,7 +500,8 @@
 			"negativeSquared": "1F170",
 			"regionalIndicator": "1F1E6",
 			"parenthesized": "1F110",
-			"tag": "E0041"
+			"tag": "E0041",
+			"outlined": "1CCD6"
 		}, {
 			"combining": "0363",
 			"modifier": "1D43",
@@ -541,7 +552,8 @@
 			"negativeSquared": "1F171",
 			"regionalIndicator": "1F1E7",
 			"parenthesized": "1F111",
-			"tag": "E0042"
+			"tag": "E0042",
+			"outlined": "1CCD7"
 		}, {
 			"combining": "1DE8",
 			"modifier": "1D47",
@@ -590,7 +602,8 @@
 			"negativeSquared": "1F172",
 			"regionalIndicator": "1F1E8",
 			"parenthesized": "1F112",
-			"tag": "E0043"
+			"tag": "E0043",
+			"outlined": "1CCD8"
 		}, {
 			"combining": "0368",
 			"modifier": "1D9C",
@@ -640,7 +653,8 @@
 			"negativeSquared": "1F173",
 			"regionalIndicator": "1F1E9",
 			"parenthesized": "1F113",
-			"tag": "E0044"
+			"tag": "E0044",
+			"outlined": "1CCD9"
 		}, {
 			"combining": "0369",
 			"modifier": "1D48",
@@ -691,7 +705,8 @@
 			"negativeSquared": "1F174",
 			"regionalIndicator": "1F1EA",
 			"parenthesized": "1F114",
-			"tag": "E0045"
+			"tag": "E0045",
+			"outlined": "1CCDA"
 		}, {
 			"combining": "0364",
 			"modifier": "1D49",
@@ -743,7 +758,8 @@
 			"negativeSquared": "1F175",
 			"regionalIndicator": "1F1EB",
 			"parenthesized": "1F115",
-			"tag": "E0046"
+			"tag": "E0046",
+			"outlined": "1CCDB"
 		}, {
 			"combining": "1DEB",
 			"modifier": "1DA0",
@@ -794,7 +810,8 @@
 			"negativeSquared": "1F176",
 			"regionalIndicator": "1F1EC",
 			"parenthesized": "1F116",
-			"tag": "E0047"
+			"tag": "E0047",
+			"outlined": "1CCDC"
 		}, {
 			"combining": "1DDA",
 			"modifier": "1D4D",
@@ -844,7 +861,8 @@
 			"negativeSquared": "1F177",
 			"regionalIndicator": "1F1ED",
 			"parenthesized": "1F117",
-			"tag": "E0048"
+			"tag": "E0048",
+			"outlined": "1CCDD"
 		}, {
 			"combining": "036A",
 			"modifier": "02B0",
@@ -895,7 +913,8 @@
 			"negativeSquared": "1F178",
 			"regionalIndicator": "1F1EE",
 			"parenthesized": "1F118",
-			"tag": "E0049"
+			"tag": "E0049",
+			"outlined": "1CCDE"
 		}, {
 			"combining": "0365",
 			"modifier": "2071",
@@ -947,7 +966,8 @@
 			"negativeSquared": "1F179",
 			"regionalIndicator": "1F1EF",
 			"parenthesized": "1F119",
-			"tag": "E004A"
+			"tag": "E004A",
+			"outlined": "1CCDF"
 		}, {
 			"modifier": "02B2",
 			"subscript": "2C7C",
@@ -997,7 +1017,8 @@
 			"negativeSquared": "1F17A",
 			"regionalIndicator": "1F1F0",
 			"parenthesized": "1F11A",
-			"tag": "E004B"
+			"tag": "E004B",
+			"outlined": "1CCE0"
 		}, {
 			"combining": "1DDC",
 			"modifier": "1D4F",
@@ -1049,7 +1070,8 @@
 			"negativeSquared": "1F17B",
 			"regionalIndicator": "1F1F1",
 			"parenthesized": "1F11B",
-			"tag": "E004C"
+			"tag": "E004C",
+			"outlined": "1CCE1"
 		}, {
 			"combining": "1DDD",
 			"modifier": "02E1",
@@ -1100,7 +1122,8 @@
 			"negativeSquared": "1F17C",
 			"regionalIndicator": "1F1F2",
 			"parenthesized": "1F11C",
-			"tag": "E004D"
+			"tag": "E004D",
+			"outlined": "1CCE2"
 		}, {
 			"combining": "036B",
 			"modifier": "1D50",
@@ -1152,7 +1175,8 @@
 			"negativeSquared": "1F17D",
 			"regionalIndicator": "1F1F3",
 			"parenthesized": "1F11D",
-			"tag": "E004E"
+			"tag": "E004E",
+			"outlined": "1CCE3"
 		}, {
 			"combining": "1DE0",
 			"subscript": "2099",
@@ -1201,7 +1225,8 @@
 			"negativeSquared": "1F17E",
 			"regionalIndicator": "1F1F4",
 			"parenthesized": "1F11E",
-			"tag": "E004F"
+			"tag": "E004F",
+			"outlined": "1CCE4"
 		}, {
 			"combining": "0366",
 			"modifier": "1D52",
@@ -1252,7 +1277,8 @@
 			"negativeSquared": "1F17F",
 			"regionalIndicator": "1F1F5",
 			"parenthesized": "1F11F",
-			"tag": "E0050"
+			"tag": "E0050",
+			"outlined": "1CCE5"
 		}, {
 			"combining": "1DEE",
 			"modifier": "1D56",
@@ -1302,7 +1328,8 @@
 			"negativeSquared": "1F180",
 			"regionalIndicator": "1F1F6",
 			"parenthesized": "1F120",
-			"tag": "E0051"
+			"tag": "E0051",
+			"outlined": "1CCE6"
 		}, {
 			"modifier": "107A5",
 			"italic": "1D45E",
@@ -1352,7 +1379,8 @@
 			"negativeSquared": "1F181",
 			"regionalIndicator": "1F1F7",
 			"parenthesized": "1F121",
-			"tag": "E0052"
+			"tag": "E0052",
+			"outlined": "1CCE7"
 		}, {
 			"combining": "036C",
 			"modifier": "02B3",
@@ -1402,7 +1430,8 @@
 			"negativeSquared": "1F182",
 			"regionalIndicator": "1F1F8",
 			"parenthesized": "1F122",
-			"tag": "E0053"
+			"tag": "E0053",
+			"outlined": "1CCE8"
 		}, {
 			"combining": "1DE4",
 			"modifier": "02E2",
@@ -1452,7 +1481,8 @@
 			"negativeSquared": "1F183",
 			"regionalIndicator": "1F1F9",
 			"parenthesized": "1F123",
-			"tag": "E0054"
+			"tag": "E0054",
+			"outlined": "1CCE9"
 		}, {
 			"combining": "036D",
 			"modifier": "1D57",
@@ -1502,7 +1532,8 @@
 			"negativeSquared": "1F184",
 			"regionalIndicator": "1F1FA",
 			"parenthesized": "1F124",
-			"tag": "E0055"
+			"tag": "E0055",
+			"outlined": "1CCEA"
 		}, {
 			"combining": "0367",
 			"modifier": "1D58",
@@ -1552,7 +1583,8 @@
 			"negativeSquared": "1F185",
 			"regionalIndicator": "1F1FB",
 			"parenthesized": "1F125",
-			"tag": "E0056"
+			"tag": "E0056",
+			"outlined": "1CCEB"
 		}, {
 			"combining": "036E",
 			"modifier": "1D5B",
@@ -1602,7 +1634,8 @@
 			"negativeSquared": "1F186",
 			"regionalIndicator": "1F1FC",
 			"parenthesized": "1F126",
-			"tag": "E0057"
+			"tag": "E0057",
+			"outlined": "1CCEC"
 		}, {
 			"combining": "1DF1",
 			"modifier": "02B7",
@@ -1650,7 +1683,8 @@
 			"negativeSquared": "1F187",
 			"regionalIndicator": "1F1FD",
 			"parenthesized": "1F127",
-			"tag": "E0058"
+			"tag": "E0058",
+			"outlined": "1CCED"
 		}, {
 			"combining": "036F",
 			"modifier": "02E3",
@@ -1700,7 +1734,8 @@
 			"negativeSquared": "1F188",
 			"regionalIndicator": "1F1FE",
 			"parenthesized": "1F128",
-			"tag": "E0059"
+			"tag": "E0059",
+			"outlined": "1CCEE"
 		}, {
 			"modifier": "02B8",
 			"italic": "1D466",
@@ -1767,7 +1802,8 @@
 			"fullwidth": "FF5A",
 			"circled": "24E9",
 			"parenthesized": "24B5",
-			"tag": "E007A"
+			"tag": "E007A",
+			"outlined": "1CCEF"
 		}],
 		"options": { "noCalc": true }
 	},

@@ -1,0 +1,84 @@
+[
+	"domino_n_tile_back_horizontal", {
+		"unicode": "1F030",
+		"recipe": ["dm hb"],
+		"options": { "useLetterLocale": "back$" },
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "beforeType": "horizontal" }
+	},
+	"domino_n_tile_00_0{-1...i}[×7]_horizontal", {
+		"unicode": ["1F031", "1F032", "1F033", "1F034", "1F035", "1F036", "1F037"],
+		"recipe": ["dm h0{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "00-0{-1...i}", "beforeType": "horizontal" }
+	},
+	"domino_n_tile_01_1{-1...i}[×7]_horizontal", {
+		"unicode": ["1F038", "1F039", "1F03A", "1F03B", "1F03C", "1F03D", "1F03E"],
+		"recipe": ["dm h1{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "01-0{-1...i}", "beforeType": "horizontal" }
+	},
+	"domino_n_tile_02_0{-1...i}[×7]_horizontal", {
+		"unicode": ["1F03F", "1F040", "1F041", "1F042", "1F043", "1F044", "1F045"],
+		"recipe": ["dm h2{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "02-0{-1...i}", "beforeType": "horizontal" }
+	},
+	"domino_n_tile_03_0{-1...i}[×7]_horizontal", {
+		"unicode": ["1F046", "1F047", "1F048", "1F049", "1F04A", "1F04B", "1F04C"],
+		"recipe": ["dm h3{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "03-0{-1...i}", "beforeType": "horizontal" }
+	},
+	"domino_n_tile_04_0{-1...i}[×7]_horizontal", {
+		"unicode": ["1F04D", "1F04E", "1F04F", "1F050", "1F051", "1F052", "1F053"],
+		"recipe": ["dm h4{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "04-0{-1...i}", "beforeType": "horizontal" }
+	},
+	"domino_n_tile_05_0{-1...i}[×7]_horizontal", {
+		"unicode": ["1F054", "1F055", "1F056", "1F057", "1F058", "1F059", "1F05A"],
+		"recipe": ["dm h5{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "05-0{-1...i}", "beforeType": "horizontal" }
+	},
+	"domino_n_tile_06_0{-1...i}[×7]_horizontal", {
+		"unicode": ["1F05B", "1F05C", "1F05D", "1F05E", "1F05F", "1F060", "1F061"],
+		"recipe": ["dm h6{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "06-0{-1...i}", "beforeType": "horizontal" }
+	},
+	"domino_n_tile_back_vertical", {
+		"unicode": "1F062",
+		"recipe": ["dm vb"],
+		"options": { "useLetterLocale": "back$" },
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "beforeType": "vertical" }
+	},
+	"domino_n_tile_00_0{-1...i}[×7]_vertical", {
+		"unicode": ["1F063", "1F064", "1F065", "1F066", "1F067", "1F068", "1F069"],
+		"recipe": ["dm v0{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "00-0{-1...i}", "beforeType": "vertical" }
+	},
+	"domino_n_tile_01_1{-1...i}[×7]_vertical", {
+		"unicode": ["1F06A", "1F06B", "1F06C", "1F06D", "1F06E", "1F06F", "1F070"],
+		"recipe": ["dm v1{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "01-0{-1...i}", "beforeType": "vertical" }
+	},
+	"domino_n_tile_02_0{-1...i}[×7]_vertical", {
+		"unicode": ["1F071", "1F072", "1F073", "1F074", "1F075", "1F076", "1F077"],
+		"recipe": ["dm v2{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "02-0{-1...i}", "beforeType": "vertical" }
+	},
+	"domino_n_tile_03_0{-1...i}[×7]_vertical", {
+		"unicode": ["1F078", "1F079", "1F07A", "1F07B", "1F07C", "1F07D", "1F07E"],
+		"recipe": ["dm v3{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "03-0{-1...i}", "beforeType": "vertical" }
+	},
+	"domino_n_tile_04_0{-1...i}[×7]_vertical", {
+		"unicode": ["1F07F", "1F080", "1F081", "1F082", "1F083", "1F084", "1F085"],
+		"recipe": ["dm v4{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "04-0{-1...i}", "beforeType": "vertical" }
+	},
+	"domino_n_tile_05_0{-1...i}[×7]_vertical", {
+		"unicode": ["1F086", "1F087", "1F088", "1F089", "1F08A", "1F08B", "1F08C"],
+		"recipe": ["dm v5{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "05-0{-1...i}", "beforeType": "vertical" }
+	},
+	"domino_n_tile_06_0{-1...i}[×7]_vertical", {
+		"unicode": ["1F08D", "1F08E", "1F08F", "1F090", "1F091", "1F092", "1F093"],
+		"recipe": ["dm v6{-1...i}"],
+		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "06-0{-1...i}", "beforeType": "vertical" }
+	}
+]

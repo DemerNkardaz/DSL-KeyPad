@@ -34,7 +34,8 @@
 				"piece": "piece",
 				"suite": "suite",
 				"card": "card",
-				"dice": "dice"
+				"dice": "dice",
+				"tile": "tile"
 			},
 			"before_letter": {
 				"turned": "turned",
@@ -100,7 +101,9 @@
 				"process": "process",
 				"emoji": "emoji",
 				"classical": "classical",
-				"russian": "russian"
+				"russian": "russian",
+				"horizontal": "horizontal",
+				"vertical": "vertical"
 			},
 			"after_letter": {
 				"late": "(late form)",

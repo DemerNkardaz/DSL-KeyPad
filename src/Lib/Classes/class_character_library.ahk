@@ -84,6 +84,7 @@ Class ChrLib {
 		"yijing",
 		"taixuanjing",
 		"mahjong",
+		"domino",
 	]
 
 	static decompositionAttributes := Map(
@@ -116,6 +117,7 @@ Class ChrLib {
 			"suite", "suite",
 			"card", "card",
 			"dice", "dice",
+			"tile", "tile",
 		),
 		"letter", "",
 		"endPart", "",
@@ -677,6 +679,7 @@ Class ChrLib {
 			"tag", ["тег", "т", "t"],
 			"oblique", ["косая", "кя", "ob"],
 			"segmented", ["сегментированный", "сг", "sg"],
+			"outlined", ["контурный", "кн", "ol"],
 		)
 
 		for key, value in alterationNames {
