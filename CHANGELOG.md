@@ -11,6 +11,8 @@
   - Library extended to 6,000+ Unicode characters.
   - Added symbol sets: Yin and Yang (☯︎); monograms, bigrams, trigrams and hexagrams of Yijing; monograms, bigrams and tetragrams of Taixuanjing; Majiang tiles/dices.
   - Added segmented variants of numbers.
+  - Added new Alternative modes:
+    - Yijing & Taixuanjing.
 
 - Changes:
 
@@ -184,6 +186,8 @@
   - Библиотека расширена до 6,000+ символов Unicode.
   - Добавлены наборы символов: Инь и Ян (☯︎); монограммы, диграммы, триграммы и гексаграммы И-Цзин; монограммы, диграммы и тетраграммы Тайсюань-Цзин; Плитки/кости Мацзян.
   - Добавлены сегментированные варианты цифр.
+  - Добавлены новые Альтернативные режимы:
+    - И-Цзин и Тайсюань-Цзин.
 
 - Изменения:
 

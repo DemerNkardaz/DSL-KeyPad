@@ -181,7 +181,10 @@
 			"Parthian", "Parthian Numerals", "",
 			"Manichaean", "Manichaean Numerals", "",
 			"Deseret", "",
-			"Shavian", "Shavian Ligatures", ""
+			"Shavian", "Shavian Ligatures", "",
+			"Taoist", "",
+			"Yijing", "",
+			"Taixuanjing", ""
 		],
 		"groupKey": {
 			"Mathematical": "@script_labels.math",
@@ -219,7 +222,10 @@
 			"Parthian": "@script_labels.parthian",
 			"Manichaean": "@script_labels.manichaean",
 			"Deseret": "@script_labels.deseret.short",
-			"Shavian": "@script_labels.shavian.short"
+			"Shavian": "@script_labels.shavian.short",
+			"Taoist": "@script_labels.taoist",
+			"Yijing": "@script_labels.yijing",
+			"Taixuanjing": "@script_labels.taixuanjing"
 		}
 	},
 	"ipa_keys": {

@@ -270,5 +270,15 @@
 		"bindings": ["Shavian"],
 		"uiid": "Shavian",
 		"icons": ["shavian"]
+	},
+	"Yijing & Taixuanjing", {
+		"preview": [
+			"\u262F\uFE0E \u268a\u268b\ud834\udf00 \u2630\u2631\u2632\u2633\u2634\u2635\u2636\u2637"
+		],
+		"fonts": ["Segoe UI Symbol"],
+		"locale": "yijing<dictionary.et>taixuanjing",
+		"bindings": ["Yijing & Taixuanjing"],
+		"uiid": "YijingTaixuanjing",
+		"icons": ["dao"]
 	}
 ]

@@ -89,6 +89,7 @@
 #define IDI_GLYPH_TAG 185
 #define IDI_MANICHAEAN 186
 #define IDI_SAMARITAN 187
+#define IDI_DAO 188
 
 // Next default values for new objects
 //

@@ -2230,6 +2230,141 @@
 					">+": "greater_or_equals"
 				}
 			}
+		},
+		"Yijing & Taixuanjing": {
+			"ForceSingle": true,
+			"Flat": {
+				"Tilde": "taoist_n_sym_yinyang",
+				"1": "yijing_n_sym_[digram,trigram]_1_[greater_yin,qian]",
+				"2": "yijing_n_sym_[digram,trigram]_2_[lesser_yang,dui]",
+				"3": "yijing_n_sym_[digram,trigram]_3_[lesser_yin,li]",
+				"4": "yijing_n_sym_[digram,trigram]_4_[greater_yang,zhen]",
+				"5": "[taixuanjing,yijing]_n_sym_[digram,trigram]_5_[tian_ren,xun]",
+				"6": "[taixuanjing,yijing]_n_sym_[digram,trigram]_6_[di_ren,kan]",
+				"7": "[taixuanjing,yijing]_n_sym_[digram,trigram]_7_[ren_tian,gen]",
+				"8": "[taixuanjing,yijing]_n_sym_[digram,trigram]_8_[ren_di,kun]",
+				"9": "[taixuanjing_n_sym_digram_9_ren_ren,]",
+				"0": "taixuanjing_n_sym_monogram_3_ren",
+				"HyphenMinus": "yijing_n_sym_monogram_2_yang",
+				"Equals": "yijing_n_sym_monogram_1_yin",
+				"Q": "yijing_n_sym_hexagram_[2,1]_[kun,qian]",
+				"W": "yijing_n_sym_hexagram_[4,3]_[meng,zhun]",
+				"E": "yijing_n_sym_hexagram_[6,5]_[song,xu]",
+				"R": "yijing_n_sym_hexagram_[8,7]_[bi,shi]",
+				"T": "yijing_n_sym_hexagram_[10,9]_[li,xiachu]",
+				"Y": "yijing_n_sym_hexagram_[12,11]_[pi,tai]",
+				"U": "yijing_n_sym_hexagram_[14,13]_[dayou,tongren]",
+				"I": "yijing_n_sym_hexagram_[16,15]_[yu,qian]",
+				"O": "yijing_n_sym_hexagram_[18,17]_[gu,sui]",
+				"P": "yijing_n_sym_hexagram_[20,19]_[guan,lin]",
+				"LeftBracket": "yijing_n_sym_hexagram_[22,21]_[bi,shi_ke]",
+				"RightBracket": "yijing_n_sym_hexagram_[24,23]_[fu,bo]",
+				"A": "yijing_n_sym_hexagram_[26,25]_[da_chu,wu_wang]",
+				"S": "yijing_n_sym_hexagram_[28,27]_[da_guo,yi]",
+				"D": "yijing_n_sym_hexagram_[30,29]_[li,kan]",
+				"F": "yijing_n_sym_hexagram_[32,31]_[heng,xian]",
+				"G": "yijing_n_sym_hexagram_[34,33]_[da_zhuang,dun]",
+				"H": "yijing_n_sym_hexagram_[36,35]_[ming_yi,jin]",
+				"J": "yijing_n_sym_hexagram_[38,37]_[kui,jia_ren]",
+				"K": "yijing_n_sym_hexagram_[40,39]_[sun,jian]",
+				"L": "yijing_n_sym_hexagram_[42,41]_[yi,xie]",
+				"Semicolon": "yijing_n_sym_hexagram_[44,43]_[gou,guai]",
+				"Apostrophe": "yijing_n_sym_hexagram_[46,45]_[sheng,cui]",
+				"Z": "yijing_n_sym_hexagram_[48,47]_[jing,kun]",
+				"X": "yijing_n_sym_hexagram_[50,49]_[ding,ge]",
+				"C": "yijing_n_sym_hexagram_[52,51]_[gen,zhen]",
+				"V": "yijing_n_sym_hexagram_[54,53]_[gui_mei,jian]",
+				"B": "yijing_n_sym_hexagram_[56,55]_[lu,feng]",
+				"N": "yijing_n_sym_hexagram_[58,57]_[dui,xun]",
+				"M": "yijing_n_sym_hexagram_[60,59]_[jie,huan]",
+				"Comma": "yijing_n_sym_hexagram_[62,61]_[xiao_guo,zhong_fu]",
+				"Dot": "yijing_n_sym_hexagram_[64,63]_[wei_ji,ji_ji]"
+			},
+			"Moded": {
+				"Q": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[2,1]_[zhou,zhong]",
+					"<!":  "taixuanjing_n_sym_tetragram_[4,3]_[xian,xin]"
+				},
+				"W": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[6,5]_[li,shao]",
+					"<!":  "taixuanjing_n_sym_tetragram_[8,7]_[gan,shang]"
+				},
+				"E": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[10,9]_[xian,shu]",
+					"<!":  "taixuanjing_n_sym_tetragram_[12,11]_[tong,cha]"
+				},
+				"R": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[14,13]_[rui,zeng]",
+					"<!":  "taixuanjing_n_sym_tetragram_[16,15]_[jiao,da]"
+				},
+				"T": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[18,17]_[xi,ruan]",
+					"<!":  "taixuanjing_n_sym_tetragram_[20,19]_[jin,cong]"
+				},
+				"Y": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[22,21]_[ge,shi]",
+					"<!":  "taixuanjing_n_sym_tetragram_[24,23]_[le,yi]"
+				},
+				"U": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[26,25]_[wu,zheng]",
+					"<!":  "taixuanjing_n_sym_tetragram_[28,27]_[geng,shi]"
+				},
+				"I": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[30,29]_[yi,duan]",
+					"<!":  "taixuanjing_n_sym_tetragram_[32,31]_[zhong,zhuang]"
+				},
+				"O": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[34,33]_[qin,mi]",
+					"<!":  "taixuanjing_n_sym_tetragram_[36,35]_[qiang,lian]"
+				},
+				"P": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[38,37]_[sheng,sui]",
+					"<!":  "taixuanjing_n_sym_tetragram_[40,39]_[fa,ju]"
+				},
+				"LeftBracket": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[42,41]_ying",
+					"<!":  "taixuanjing_n_sym_tetragram_[44,43]_[zao,yu]"
+				},
+				"RightBracket": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[46,45]_[kuo,da]",
+					"<!":  "taixuanjing_n_sym_tetragram_[48,47]_[li,wen]"
+				},
+				"A": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[50,49]_[tang,tao]",
+					"<!":  "taixuanjing_n_sym_tetragram_[52,51]_[du,chang]"
+				},
+				"S": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[54,53]_[kun,yong]",
+					"<!":  "taixuanjing_n_sym_tetragram_[56,55]_[jin,jian]"
+				},
+				"D": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[58,57]_[xi,shou]",
+					"<!":  "taixuanjing_n_sym_tetragram_[60,59]_[ji,ju]"
+				},
+				"F": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[62,61]_[yi,shi]",
+					"<!":  "taixuanjing_n_sym_tetragram_[64,63]_[chen,shi]"
+				},
+				"G": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[66,65]_[qu,nei]",
+					"<!":  "taixuanjing_n_sym_tetragram_[68,67]_[meng,hui]"
+				},
+				"H": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[70,69]_[ge,qiong]",
+					"<!":  "taixuanjing_n_sym_tetragram_[72,71]_[jian,zhi]"
+				},
+				"J": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[74,73]_[zhi,cheng]",
+					"<!":  "taixuanjing_n_sym_tetragram_[76,75]_[ju,shi]"
+				},
+				"K": {
+					"<^>!": "taixuanjing_n_sym_tetragram_[78,77]_[jiang,xun]",
+					"<!":  "taixuanjing_n_sym_tetragram_[80,79]_[qin,nan]"
+				},
+				"L": {
+					"<^>!": "taixuanjing_n_sym_tetragram_81_yang"
+				}
+			}
 		}
 	},
 	"Keyboard Default": {
