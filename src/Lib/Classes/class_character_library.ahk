@@ -444,6 +444,13 @@ Class ChrLib {
 		return output
 	}
 
+	static glyphVariantsFallbacks := Map(
+		"superscript", "modifier",
+		"fraktur", "blackletter",
+		"bold", "heavy",
+		"sansSerifBold", "sansSerifHeavy",
+	)
+
 	static Get(entryName, extraRules := False, getMode := "Unicode", alt := Scripter.selectedMode.Get("Glyph Variations")) {
 		if RegExMatch(entryName, "\\(.*?)\/", &multiMatch) {
 			local output := ""
@@ -466,10 +473,16 @@ Class ChrLib {
 		if !entry
 			return False
 
-		if alt = "superscript" && !entry["alterations"].Has("superscript")
-			alt := "modifier"
-		else if alt = "fraktur" && !entry["alterations"].Has("fraktur")
-			alt := "blackletter"
+		; if alt = "superscript" && !entry["alterations"].Has("superscript")
+		; 	alt := "modifier"
+		; else if alt = "fraktur" && !entry["alterations"].Has("fraktur")
+		; 	alt := "blackletter"
+		; else if alt = "bold" && !entry["alterations"].Has("bold")
+		; 	alt := "heavy"
+
+		if this.glyphVariantsFallbacks.Has(alt) && !entry["alterations"].Has(alt)
+			alt := this.glyphVariantsFallbacks.Get(alt)
+
 
 		getMode := StrLen(getMode) ? getMode : "Unicode"
 

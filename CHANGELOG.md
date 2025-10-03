@@ -12,7 +12,7 @@
   - Added symbol sets: Yin and Yang (☯︎); monograms, bigrams, trigrams and hexagrams of Yijing; monograms, bigrams and tetragrams of Taixuanjing; Majiang tiles/dices; Domino tiles.
   - Added segmented variants of numbers, outlined variants A-Z letters and numbers.
   - Addded new miscellaneous characters:
-    - [ ⸨⸩ ⹉ ⹍ ⹎ ⸚ ⸛ ⸞ ⸟ ⹊  ⸜⸝ ⸌⸍ ⹕⹖ ⹗⹘ ]
+    - [ ⸨⸩ ⹉ ⹍ ⹎ ⸚ ⸛ ⸞ ⸟ ⹊  ⸜⸝ ⸌⸍ ⹕⹖ ⹗⹘ ] [ 🙶🙷🙸🙻🙺🙹 ]
   - Added new Alternative modes:
     - Yijing & Taixuanjing.
 
@@ -191,7 +191,7 @@
   - Добавлены новые Альтернативные режимы:
     - И-Цзин и Тайсюань-Цзин.
   - Добавлены новые прочие символы:
-    - [ ⸨⸩ ⹉ ⹍ ⹎ ⸚ ⸛ ⸞ ⸟ ⹊  ⸜⸝ ⸌⸍ ⹕⹖ ⹗⹘ ]
+    - [ ⸨⸩ ⹉ ⹍ ⹎ ⸚ ⸛ ⸞ ⸟ ⹊  ⸜⸝ ⸌⸍ ⹕⹖ ⹗⹘ ] [ 🙶🙷🙸🙻🙺🙹 ]
 
 - Изменения:
 

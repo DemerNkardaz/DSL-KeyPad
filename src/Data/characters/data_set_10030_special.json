@@ -698,6 +698,11 @@
 	},
 	"interrobang", {
 		"unicode": "203D",
+		"alterations": {
+			"heavy": "1F679",
+			"sansSerif": "1F67A",
+			"sansSerifHeavy": "1F67B"
+		},
 		"tags": ["interrobang", "интерробанг", "лигатура !?", "ligature !?"],
 		"groups": ["Smelting Special", "Special Fast RShift"],
 		"options": { "fastKey": "1" },
@@ -1047,6 +1052,21 @@
 			"201A",
 			"201E",
 			"2E42"
+		],
+		"alterations": [
+			{},
+			{},
+			{
+				"sansSerifHeavy": "1F676"
+			},
+			{
+				"sansSerifHeavy": "1F677"
+			},
+			{},
+			{
+				"sansSerifHeavy": "1F678"
+			},
+			{}
 		],
 		"tags": [
 			["left quote", "левая кавычка"],
