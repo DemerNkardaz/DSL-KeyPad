@@ -540,7 +540,7 @@
 		"unicode": "2116",
 		"tags": ["numero sign", "знак номера"],
 		"groups": ["Smelting Special"],
-		"recipe": ["no"]
+		"recipe": ["No"]
 	},
 	"number_sign", {
 		"unicode": "0023",
@@ -555,7 +555,7 @@
 		"unicode": "00AC",
 		"tags": ["not sign", "отрицание"],
 		"groups": ["Smelting Special"],
-		"recipe": ["-|"]
+		"recipe": ["not"]
 	},
 	"section", {
 		"unicode": "00A7",
@@ -678,6 +678,24 @@
 		"options": { "fastKey": "<" },
 		"recipe": [".,"]
 	},
+	"medieval_paragraphus", {
+		"unicode": "2E4D",
+		"tags": ["medieval paragraphus", "средневековый параграфус"],
+		"groups": ["Smelting Special"],
+		"recipe": ["pgr"]
+	},
+	"medieval_punctus_elevatus", {
+		"unicode": "2E4E",
+		"tags": ["medieval punctus elevatus", "средневековый параграфус"],
+		"groups": ["Smelting Special"],
+		"recipe": ["pte"]
+	},
+	"medieval_virgula_suspensiva", {
+		"unicode": "2E4A",
+		"tags": ["medieval virgula suspensiva", "dotted solidus", "средневековый параграфус", "косая черта с точкой"],
+		"groups": ["Smelting Special"],
+		"recipe": ["./"]
+	},
 	"interrobang", {
 		"unicode": "203D",
 		"tags": ["interrobang", "интерробанг", "лигатура !?", "ligature !?"],
@@ -739,6 +757,13 @@
 		},
 		"options": { "noCalc": true }
 	},
+	"double_stacked_comma", {
+		"unicode": "2E49",
+		"tags": ["double stacked comma", "двоезапятие"],
+		"groups": ["Smelting Special", "Special Fast Secondary"],
+		"options": { "fastKey": "<! ;" },
+		"recipe": [",,"]
+	},
 	"apostrophe", {
 		"unicode": "0027",
 		"alterations": {
@@ -783,8 +808,21 @@
 		"groups": ["Special Fast RShif"],
 		"options": { "noCalc": true, "fastKey": ">+ \\", "send": "Text" }
 	},
+	"left_vertical_bar_with_quill", {
+		"unicode": "2E20",
+		"tags": ["left vertical bar with quill", "левая вертикальная черта со стержнем"],
+		"groups": ["Smelting Special"],
+		"recipe": ["|-"]
+	},
+	"right_vertical_bar_with_quill", {
+		"unicode": "2E21",
+		"tags": ["right vertical bar with quill", "правая вертикальная черта со стержнем"],
+		"groups": ["Smelting Special"],
+		"recipe": ["-|"]
+	},
 	"vertical_line_double", {
 		"unicode": "2016",
+		"tags": ["double vertical line", "двойная вертикальная черта"],
 		"groups": ["Smelting Special"],
 		"recipe": ["${vertical_line×2}"]
 	},
@@ -859,6 +897,12 @@
 		"alterations": { "oblique": "2E5D" },
 		"options": { "fastKey": "<! - | <! \\ ⸢Oblique⸣" },
 		"recipe": ["1-"]
+	},
+	"hyphen_diaeresis", {
+		"unicode": "2E1A",
+		"tags": ["hyphen with diaeresis", "дефис с диерезисом"],
+		"groups": ["Dashes", "Smelting Special"],
+		"recipe": ["${hyphen}${diaeresis}", "-${diaeresis}", "${diaeresis}${hyphen}", "${diaeresis}-"]
 	},
 	"hyphen_double", {
 		"unicode": "2E40",
@@ -1322,6 +1366,24 @@
 		},
 		"options": { "noCalc": true }
 	},
+	"tilde_ring_above", {
+		"unicode": "2E1B",
+		"tags": ["tilde with ring above", "дефис с кольцом сверху"],
+		"groups": ["Smelting Special"],
+		"recipe": ["${(tilde|ring_above)}$(*)"]
+	},
+	"tilde_dot_above", {
+		"unicode": "2E1E",
+		"tags": ["tilde with dot above", "дефис с точкой сверху"],
+		"groups": ["Smelting Special"],
+		"recipe": ["${(tilde|dot_above)}$(*)"]
+	},
+	"tilde_dot_below", {
+		"unicode": "2E1F",
+		"tags": ["tilde with dot below", "дефис с точкой снизу"],
+		"groups": ["Smelting Special"],
+		"recipe": ["${(tilde|dot_below)}$(*)"]
+	},
 	"nottilde", {
 		"unicode": "2241",
 		"tags": ["не эквивалентно", "not tilde"],
@@ -1688,6 +1750,12 @@
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
+	"[left,right]_parenthesis_double", {
+		"unicode": ["2E28", "2E29"],
+		"tags": [["double left parenthesis", "двойная левая круглая скобка"], ["double right parenthesis", "двойная правая круглая скобка"]],
+		"groups": ["Brackets", "Smelting Special"],
+		"recipe": ["${[i:left,right]_parenthesis×2}"]
+	},
 	"top_parenthesis", {
 		"unicode": "23DC",
 		"tags": ["top parenthesis", "верхняя круглая скобка"],
@@ -1736,6 +1804,20 @@
 		"groups": ["Brackets", "Smelting Special"],
 		"recipe": ["${right_parenthesis}${arrow_rightdown}"]
 	},
+	"[left,right]_paraphrase_bracket", {
+		"unicode": ["2E1C", "2E1D"],
+		"tags": [["left paraphrase bracket", "левая скобка парафраза"], ["right paraphrase bracket", "правая скобка парафраза"]],
+		"groups": ["Brackets", "Smelting Special", "Special Fast Secondary"],
+		"options": { "fastKey": ["<!<+ '", "<!>+ '"] },
+		"recipe": [["pr\\"], ["pr/"]]
+	},
+	"[left,right]_omission_bracket", {
+		"unicode": ["2E0C", "2E0D"],
+		"tags": [["left omission bracket", "левая скобка пропуска"], ["right omission bracket", "правая скобка пропуска"]],
+		"groups": ["Brackets", "Smelting Special", "Special Fast Secondary"],
+		"options": { "fastKey": ["c*<!<+ '", "c*<!>+ '"] },
+		"recipe": [["om\\"], ["om/"]]
+	},
 	"left_bracket", {
 		"unicode": "005B",
 		"alterations": {
@@ -1766,15 +1848,29 @@
 	},
 	"left_bracket_with_quill", {
 		"unicode": "2045",
-		"tags": ["left bracket with quill", "левая квадратная скобка с чертой"],
-		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": "[" }
+		"tags": ["left bracket with quill", "левая квадратная скобка со стержнем"],
+		"groups": ["Brackets", "Smelting Special", "Special Fast Secondary"],
+		"options": { "fastKey": "[" },
+		"recipe": ["[-"]
 	},
 	"right_bracket_with_quill", {
 		"unicode": "2046",
-		"tags": ["right bracket with quill", "правая квадратная скобка с чертой"],
-		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": "]" }
+		"tags": ["right bracket with quill", "правая квадратная скобка со стержнем"],
+		"groups": ["Brackets", "Smelting Special", "Special Fast Secondary"],
+		"options": { "fastKey": "]" },
+		"recipe": ["]-"]
+	},
+	"[left,right]_bracket_with_stroke", {
+		"unicode": ["2E55", "2E56"],
+		"tags": ["left bracket with stroke", "левая квадратная скобка с чертой"],
+		"groups": ["Brackets", "Smelting Special"],
+		"recipe": [["[${stroke_short}"], ["]${stroke_short}"]]
+	},
+	"[left,right]_bracket_with_double_stroke", {
+		"unicode": ["2E57", "2E58"],
+		"tags": ["left bracket with double stroke", "левая квадратная скобка с двойной чертой"],
+		"groups": ["Brackets", "Smelting Special"],
+		"recipe": [["[${stroke_short×2}"], ["]${stroke_short×2}"]]
 	},
 	"left_white_bracket", {
 		"unicode": "27E6",

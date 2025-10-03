@@ -27,7 +27,7 @@
 		"recipe": [["t yy"], ["emoji yy"]],
 		"options": {
 			"useLetterLocale": "yinyang$",
-			"altLayoutKey": ["~", ""],
+			"altLayoutKey": ["`", ""],
 			"noCalc": [false, true],
 			"useHiddenTags": true,
 			"hiddenTagsLanguage": "en-US",
@@ -89,7 +89,6 @@
 			["${yijing_n_sym_monogram_2_yang×2}", "y ga", "t dtt"]
 		],
 		"options": {
-			"fastKey": ["<!<+ 9?Secondary", "<!>+ 9?Secondary", "c*<!>+ 9?Secondary", "c*<!<+ 9?Secondary"],
 			"altLayoutKey": ["c* 1", "c* 2", "c* 3", "c* 4"],
 			"useHiddenTags": true,
 			"hiddenTagsLanguage": "en-US",
@@ -560,7 +559,6 @@
 			["${taixuanjing_n_sym_monogram_3_ren}${taixuanjing_n_sym_monogram_3_ren}", "t drr"]
 		],
 		"options": {
-			"fastKey": ["<!<+ 0?Secondary", "c*<!<+ 0?Secondary", "<!>+ 0?Secondary", "c*<!>+ 0?Secondary", "c*<! 0?Secondary"],
 			"altLayoutKey": ["c* 5", "c* 6", "c* 7", "c* 8", "c* 9"],
 			"altTitleUseLineBreak": true,
 			"useHiddenTags": true,

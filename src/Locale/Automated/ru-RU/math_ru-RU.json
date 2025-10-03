@@ -109,6 +109,10 @@
 		"right_parenthesis_extension": "Расширение правой круглой скобки",
 		"left_parenthesis_lower_hook": "Нижний крюк левой круглой скобки",
 		"right_parenthesis_lower_hook": "Нижний крюк правой круглой скобки",
+		"left_paraphrase_bracket": "Левая скобка парафраза",
+		"right_paraphrase_bracket": "Правая скобка парафраза",
+		"left_omission_bracket": "Левая скобка пропуска",
+		"right_omission_bracket": "Правая скобка пропуска",
 		"top_bracket": "Верхняя квадратная скобка",
 		"bottom_bracket": "Нижняя квадратная скобка",
 		"left_white_bracket": "Левая полая скобка",
@@ -136,8 +140,12 @@
 		"right_chevron_with_dot": "Правая угловая скобка с точкой",
 		"left_chevron_double": "Двойная левая угловая скобка",
 		"right_chevron_double": "Двойная правая угловая скобка",
-		"left_bracket_with_quill": "Левая скобка с чертой",
-		"right_bracket_with_quill": "Правая скобка с чертой",
+		"left_bracket_with_quill": "Левая скобка со стержнем",
+		"right_bracket_with_quill": "Правая скобка со стержнем",
+		"left_bracket_with_stroke": "Левая скобка с чертой",
+		"right_bracket_with_stroke": "Правая скобка с чертой",
+		"left_bracket_with_double_stroke": "Двойная левая скобка с чертой",
+		"right_bracket_with_double_stroke": "Двойная правая скобка с чертой",
 		"&math_pi_sign": "Число Пи"
 	}
 }

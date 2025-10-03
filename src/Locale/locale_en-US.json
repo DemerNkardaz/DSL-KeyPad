@@ -575,7 +575,7 @@
 					"__self": "Converters",
 					"description": [
 						"Combination: (select text) +\n",
-						"{var:RightControl} / or {var:RightControl}{var:LeftControl} / — encode to URI/decode from URI: Текст ↔ %D0%A2%D0%B5%D0%BA%D1%81%D1%82.\n\n",
+						"{var:RightControl} \\ or {var:RightControl}{var:LeftControl} \\ — encode to URI/decode from URI: Текст ↔ %D0%A2%D0%B5%D0%BA%D1%81%D1%82.\n\n",
 						"{var:RightControl} T or {var:RightControl}{var:LeftControl} T — convert to tag characters (0xE0020–0xE007E) or from them to regular ones (0x0020–0x007E).\n\n",
 						"{var:RightControl} H or {var:RightControl}{var:LeftControl} H — convert to HTML entities (decimal and named/hexadecimal).\n\n",
 						"{var:RightControl} J or {var:RightControl}{var:LeftControl} J — \u21B3 same as above, but ignores [a-zA-Zа-яА-ЯёЁ0-9., :;!?()`\"'-+=/\\].\n\n",

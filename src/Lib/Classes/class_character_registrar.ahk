@@ -487,6 +487,11 @@ Class ChrReg {
 			for i, recipe in tempRecipe {
 				endPart := entry["data"]["endPart"] != "" ? "_" entry["data"]["endPart"] : ""
 
+				while RegExMatch(recipe, "\[i:(.*?)\]", &varMatch) {
+					local splittedVariants := StrSplit(varMatch[1], ",")
+					recipe := RegExReplace(recipe, "\[i:.*?\]", splittedVariants[entry["variantPos"]], , 1)
+				}
+
 				tempRecipe[i] := RegExReplace(recipe, "\[.*?\]", SubStr(entry["data"]["case"], 1, 1))
 				tempRecipe[i] := RegExReplace(tempRecipe[i], "@", entry["data"]["letter"])
 				tempRecipe[i] := RegExReplace(tempRecipe[i], "\?\?", endPart)

@@ -57,10 +57,12 @@ Class ChrCrafter {
 		local alt := glyphsMode is Map && glyphsMode.Has("reference") ? glyphsMode["reference"] : modeName
 
 		this.isComposeInstanceActive := True
+
 		local composeObject := {}
 		composeObject.ChrBlockInstance := ChrBlock()
 
 		composeObject.output := ""
+		composeObject.reverseOutput := ""
 		composeObject.input := ""
 		composeObject.previousInput := ""
 		composeObject.pastInput := ""
@@ -134,6 +136,10 @@ Class ChrCrafter {
 			if TooltipPresets.selected != "Compose"
 				TooltipPresets.Select("Compose")
 
+			if composeObject.input = "N/A"
+				composeObject.input := ""
+
+
 			iterationObject := {}
 			iterationObject.released := False
 
@@ -168,12 +174,6 @@ Class ChrCrafter {
 
 			(iterationObject.IterationHook.EndKey = "Insert") && ClipWait(0.5, 1) && composeObject.input .= this.parseUniAlt(A_Clipboard, composeObject.input, composeObject.insertType)
 			(iterationObject.IterationHook.EndKey = "Pause") && composeObject.pauseOn := !composeObject.pauseOn
-
-			if iterationObject.IterationHook.EndKey = "Enter" && composeObject.insertType = "" && !(composeObject.input ~= "i)^\(([~0-9]|\~)") {
-				composeObject.output := composeObject.input
-				break
-			}
-
 
 			if (iterationObject.IterationHook.EndKey = "Escape") {
 				composeObject.input := ""
@@ -286,9 +286,11 @@ Class ChrCrafter {
 						if intermediateValue != "" {
 							composeObject.output := intermediateValue
 							composeObject.continueInInput := postInputHasBacktick
-							if !composeObject.continueInInput
+							if !composeObject.continueInInput {
+								if iterationObject.IterationHook.EndKey = "Enter"
+									composeObject.reverseOutput := composeObject.input
 								break
-							else {
+							} else {
 								composeObject.input := RegExReplace(composeObject.input, RegExEscape(postInput), composeObject.output)
 
 								if composeObject.insertType = "" {
@@ -323,9 +325,11 @@ Class ChrCrafter {
 							composeObject.output := intermediateValue
 
 							composeObject.continueInInput := hasBacktick
-							if !composeObject.continueInInput
+							if !composeObject.continueInInput {
+								if iterationObject.IterationHook.EndKey = "Enter"
+									composeObject.reverseOutput := composeObject.input
 								break
-							else {
+							} else {
 								local originalInput := composeObject.input
 								composeObject.input := RegExReplace(composeObject.input, RegExEscape(inputToCheck), composeObject.output)
 
@@ -351,6 +355,13 @@ Class ChrCrafter {
 						}
 					}
 				}
+
+				if iterationObject.IterationHook.EndKey = "Enter" && composeObject.insertType = "" && !(composeObject.input ~= "i)^\(([~0-9]|\~)") {
+					composeObject.reverseOutput := composeObject.input
+					if (composeObject.input = "" && composeObject.output = "")
+						composeObject.cancelledByUser := True
+					break
+				}
 			}
 		}
 
@@ -361,6 +372,10 @@ Class ChrCrafter {
 			Util.CaretTooltip(Chr(0x26A0) " " Locale.Read("warnings.recipe_absent"))
 			SetTimer(Tooltip, -1000)
 
+
+			local output := composeObject.reverseOutput
+			if output != "" && output != "N/A"
+				this.SendOutput(&output)
 		} else {
 			if composeObject.cancelledByUser
 				TooltipPresets.Select("Compose Cancelled")
@@ -370,9 +385,10 @@ Class ChrCrafter {
 			endTooltip := composeObject.cancelledByUser ? Chr(0x274E) " " Chr(0x2192) " " Locale.Read("warnings.cancelled_by_user") : Chr(0x2705) " " composeObject.input " " Chr(0x2192) " " Util.StrFormattedReduce(composeObject.output)
 			Util.CaretTooltip(endTooltip)
 			SetTimer(Tooltip, -500)
+
 			if !InStr(composeObject.output, "N/A") || composeObject.output != composeObject.input {
 				Event.Trigger("Compose Mode", "Ended", &this, &composeObject)
-				local output := composeObject.output
+				local output := composeObject.output != "" ? composeObject.output : composeObject.reverseOutput
 				this.SendOutput(&output)
 			}
 		}
@@ -655,7 +671,7 @@ Class ChrCrafter {
 			uniSequence .= Util.StrFormattedReduce(ChrLib.Get(chrGetArgs*), , True)
 		}
 
-		output .= uniSequence " (" (IsObject(recipe) ? recipe.ToString(" | ") : recipe) "), "
+		output .= uniSequence " " Chr(0x29FC) (IsObject(recipe) ? recipe.ToString(" | ") : recipe) Chr(0x29FD) ", "
 
 		return output
 	}
@@ -717,11 +733,11 @@ Class ChrCrafter {
 
 		local output := ""
 		local currentLine := ""
-		local parts := StrSplit(suggestions, "), ")
+		local parts := StrSplit(suggestions, Chr(0x29FD) ", ")
 
 		local uniqueParts := []
 		for index, part in parts {
-			part := part ")"
+			part := part Chr(0x29FD)
 
 			local isUnique := True
 			for uniquePart in uniqueParts {
@@ -769,7 +785,7 @@ Class ChrCrafter {
 			if effectivePos > maxLength
 				break
 
-			if char = ")"
+			if char = Chr(0x29FD)
 				lastParenPos := A_Index
 		}
 

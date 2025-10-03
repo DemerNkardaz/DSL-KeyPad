@@ -109,6 +109,10 @@
 		"right_parenthesis_extension": "Right parenthesis extension",
 		"left_parenthesis_lower_hook": "Left parenthesis lower hook",
 		"right_parenthesis_lower_hook": "Right parenthesis lower hook",
+		"left_paraphrase_bracket": "Left paraphrase bracket",
+		"right_paraphrase_bracket": "Right paraphrase bracket",
+		"left_omission_bracket": "Left omission bracket",
+		"right_omission_bracket": "Right omission bracket",
 		"top_bracket": "Top bracket",
 		"bottom_bracket": "Bottom bracket",
 		"left_white_bracket": "Left white bracket",
@@ -138,6 +142,10 @@
 		"right_chevron_double": "Double right chevron",
 		"left_bracket_with_quill": "Left bracket with quill",
 		"right_bracket_with_quill": "Right bracket with quill",
+		"left_bracket_with_stroke": "Left bracket with stroke",
+		"right_bracket_with_stroke": "Right bracket with stroke",
+		"left_bracket_with_double_stroke": "Left bracket with double stroke",
+		"right_bracket_with_double_stroke": "Right bracket with double stroke",
 		"&math_pi_sign": "Number Pi sign"
 	}
 }

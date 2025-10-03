@@ -574,7 +574,7 @@
 					"__self": "Конвертеры",
 					"description": [
 						"Комбинация: (выделить текст) +\n",
-						"{var:RightControl} / или {var:RightControl}{var:LeftControl} / — кодировать в URI/декодировать из URI: Текст ↔ %D0%A2%D0%B5%D0%BA%D1%81%D1%82.\n\n",
+						"{var:RightControl} \\ или {var:RightControl}{var:LeftControl} \\ — кодировать в URI/декодировать из URI: Текст ↔ %D0%A2%D0%B5%D0%BA%D1%81%D1%82.\n\n",
 						"{var:RightControl} T или {var:RightControl}{var:LeftControl} T — преобразовать в тег-символы (0xE0020–0xE007E) или из них в обычные (0x0020–0x007E).\n\n",
 						"{var:RightControl} H или {var:RightControl}{var:LeftControl} H — преобразовать в HTML-энтити (десятиричные и именованные/шестнадцатеричные).\n\n",
 						"{var:RightControl} J или {var:RightControl}{var:LeftControl} J — \u21B3 то же самое, но игнорирует [a-zA-Zа-яА-ЯёЁ0-9., :;!?()`\"'-+=/\\].\n\n",

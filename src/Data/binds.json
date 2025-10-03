@@ -3097,17 +3097,13 @@
 				"<^>!": "left_chevron",
 				"<!": "left_bracket",
 				"<!<+": "left_brace",
-				"<^>!<!:Caps": "yijing_n_sym_monogram_[2,1]_[yang,yin]",
-				"<^>!<!<+:Caps": "yijing_n_sym_digram_[4,1]_[greater_yang,greater_yin]",
-				"<^>!<!>+:Caps": "yijing_n_sym_digram_[3,2]_[lesser_yin,lesser_yang]"
+				"<^>!<!:Caps": "yijing_n_sym_monogram_[2,1]_[yang,yin]"
 			},
 			"0": {
 				"<^>!": "right_chevron",
 				"<!": "right_bracket",
 				"<!<+": "right_brace",
-				"<^>!<!:Caps": "taixuanjing_n_sym_[di,mono]gram_[9,3]_[ren_,]ren",
-				"<^>!<!<+:Caps": "taixuanjing_n_sym_digram_[6,5]_[di_ren,tian_ren]",
-				"<^>!<!>+:Caps": "taixuanjing_n_sym_digram_[8,7]_[ren_di,ren_tian]"
+				"<^>!<!": "taixuanjing_n_sym_monogram_3_ren"
 			},
 			"Equals": {
 				"<^>!": ["noequals"],
@@ -3164,7 +3160,8 @@
 			"Semicolon": {
 				"<^>!": ["semicolon_[turned,reversed]"],
 				"<^>!<+": ["lat_[c,s]_let_a_egyptological_alef"],
-				"<^>!>+": ["lat_[c,s]_let_a_egyptological_ain"]
+				"<^>!>+": ["lat_[c,s]_let_a_egyptological_ain"],
+				"<^>!<!": ["double_stacked_comma"]
 			},
 			"Comma": {
 				"<^>!": ["quote_left_double"],
@@ -3192,7 +3189,9 @@
 				">+": ["tilde_reversed"]
 			},
 			"Apostrophe": {
-				"<^>!": ["lat_[c,s]_let_a_saltillo"]
+				"<^>!": ["lat_[c,s]_let_a_saltillo"],
+				"<^>!<!<+": "left_[omission,paraphrase]_bracket",
+				"<^>!<!>+": "right_[omission,paraphrase]_bracket"
 			},
 			"Space": {
 				"<^>!": "no_break_space",
