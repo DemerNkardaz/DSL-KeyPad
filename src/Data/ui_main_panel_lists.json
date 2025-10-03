@@ -38,6 +38,7 @@
 			"Astronomical", "",
 			"Occultic", "",
 			"Geomantic", "",
+			"Zhongguo", "",
 			"Taoist", "",
 			"Yijing", "",
 			"Taixuanjing", "",
@@ -183,6 +184,7 @@
 			"Manichaean", "Manichaean Numerals", "",
 			"Deseret", "",
 			"Shavian", "Shavian Ligatures", "",
+			"Zhongguo", "",
 			"Taoist", "",
 			"Yijing", "",
 			"Taixuanjing", ""
@@ -224,6 +226,7 @@
 			"Manichaean": "@script_labels.manichaean",
 			"Deseret": "@script_labels.deseret.short",
 			"Shavian": "@script_labels.shavian.short",
+			"Zhongguo": "@script_labels.zhongguo",
 			"Taoist": "@script_labels.taoist",
 			"Yijing": "@script_labels.yijing",
 			"Taixuanjing": "@script_labels.taixuanjing"

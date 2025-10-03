@@ -1,4 +1,26 @@
 [
+	"zhongguo_n_sym_[fu,lu,shou,xi,shuangxi,cai]", {
+		"unicode": ["1F260", "1F261", "1F262", "1F263", "1F264", "1F265"],
+		"recipe": [
+			["zh f"],
+			["zh l"],
+			["zh sh"],
+			["zh x"],
+			["zh sx"],
+			["zh c"]
+		],
+		"options": {
+			"altLayoutKey": [">! 1", ">! 2", ">! 3", ">! 4", ">! 5", ">! 6"],
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US"
+		},
+		"symbol": {
+			"beforeLetter": "auspicious_motif",
+			"afterTitle": "/self/meaning",
+			"font": "BabelStone Han"
+		}
+	},
 	"taoist_n_sym_yinyang[,_emoji]", {
 		"unicode": ["262F", "262F"],
 		"sequence": [["262F", "FE0E"], ["262F", "FE0F"]],
@@ -11,7 +33,10 @@
 			"hiddenTagsLanguage": "en-US",
 			"ignoreCaseOnPanelFilter": true
 		},
-		"symbol": { "beforeLetter": "[,emoji]" }
+		"symbol": {
+			"beforeLetter": "[,emoji]",
+			"font": "[BabelStone Han,]"
+		}
 	},
 	"yijing_n_sym_monogram_{i}_[yin,yang]", {
 		"unicode": ["268B", "268A"],

@@ -103,7 +103,10 @@
 				"classical": "classical",
 				"russian": "russian",
 				"horizontal": "horizontal",
-				"vertical": "vertical"
+				"vertical": "vertical",
+				"stylized": "stylized",
+				"motif": "motif",
+				"auspicious_motif": "auspicious motif"
 			},
 			"after_letter": {
 				"late": "(late form)",

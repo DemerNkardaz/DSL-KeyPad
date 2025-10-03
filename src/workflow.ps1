@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-10-02 20:14:03
+				&#128228;&emsp14;2025-10-03 09:09:27
 			</td>
 		</tr>
 		<tr>
@@ -29,7 +29,8 @@ $message =@"
 			<td>
 				<img src="https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/favicon.svg" width="16">&emsp14;<a href="https://fonts.google.com/?query=noto">Noto fonts (search)</a><br>
 				<img src="https://www.kurinto.com/favicon.ico" width="16">&emsp14;<a href="https://www.kurinto.com/download.htm">Kurinto fonts</a><br>
-				&emsp;&emsp14;&hairsp;<a href="https://catrinity-font.de">Catrinity font</a>
+				&emsp;&emsp14;&hairsp;<a href="https://catrinity-font.de">Catrinity font</a><br>
+				&emsp;&emsp14;&hairsp;<a href="https://www.babelstone.co.uk/Fonts/Han.html">BabelStone Han</a>
 				<details>
 					<summary>Recommended font list</summary>
 					<ul>

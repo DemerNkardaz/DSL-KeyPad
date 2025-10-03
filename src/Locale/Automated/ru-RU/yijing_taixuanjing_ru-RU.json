@@ -1,6 +1,7 @@
 {
 	"ru-RU": {
 		"script_labels": {
+			"zhongguo": "Китай",
 			"taoist": "Дао",
 			"yijing": "И-Цзин",
 			"taixuanjing": "Тайсюань-Цзин",
@@ -8,12 +9,14 @@
 		},
 		"generated": {
 			"prefix": {
+				"zhongguo": "Китайск$(ая|ий|ое)",
 				"taoist": "Даосск$(ая|ий|ое)",
 				"yijing": "И-Цзин",
 				"taixuanjing": "Тайсюань-Цзин",
 				"mahjong": "Мацзян"
 			},
 			"tag": {
+				"zhongguo": "китайск$(ая|ий|ое)",
 				"taoist": "даосск$(ая|ий|ое)",
 				"yijing": "и-цзин",
 				"taixuanjing": "тайсюань-цзин",
@@ -54,6 +57,32 @@
 			}
 		},
 		"scripts": {
+			"zhongguo": {
+				"n_sym_fu": {
+					"letter_locale": "Фу",
+					"meaning": "[ Удача ]"
+				},
+				"n_sym_lu": {
+					"letter_locale": "Люй",
+					"meaning": "[ Процветание ]"
+				},
+				"n_sym_shou": {
+					"letter_locale": "Шоу",
+					"meaning": "[ Долголетие ]"
+				},
+				"n_sym_xi": {
+					"letter_locale": "Си",
+					"meaning": "[ Счастье ]"
+				},
+				"n_sym_shuangxi": {
+					"letter_locale": "Шуанси",
+					"meaning": "[ Любовь ][ Свадьба ]"
+				},
+				"n_sym_cai": {
+					"letter_locale": "Цай",
+					"meaning": "[ Богатство ]"
+				}
+			},
 			"taoist": {
 				"n_sym_yinyang": { "letter_locale": "Инь и Ян" }
 			},

@@ -687,6 +687,8 @@
 				"parenthesized": "Parenthesized characters",
 				"fullstop": "Characters with full stop",
 				"comma": "Characters with comma",
+				"outlined": "Outlined characters",
+				"segmented": "Segmented characters",
 				"tag": "Tag-characters"
 			}
 		},

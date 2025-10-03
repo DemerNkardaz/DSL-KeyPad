@@ -2281,6 +2281,12 @@
 				"Dot": "yijing_n_sym_hexagram_[64,63]_[wei_ji,ji_ji]"
 			},
 			"Moded": {
+				"1": { "<^>!": "zhongguo_n_sym_fu" },
+				"2": { "<^>!": "zhongguo_n_sym_lu" },
+				"3": { "<^>!": "zhongguo_n_sym_shou" },
+				"4": { "<^>!": "zhongguo_n_sym_xi" },
+				"5": { "<^>!": "zhongguo_n_sym_shuangxi" },
+				"6": { "<^>!": "zhongguo_n_sym_cai" },
 				"Q": {
 					"<^>!": "taixuanjing_n_sym_tetragram_[2,1]_[zhou,zhong]",
 					"<!":  "taixuanjing_n_sym_tetragram_[4,3]_[xian,xin]"

@@ -89,157 +89,7 @@ Class ChrReg {
 				}
 
 				if RegExMatch(variantName, "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
-					local addition := match[1] ? Integer(match[1]) : 0
-					variantName := RegExReplace(variantName, match[0], addition + i)
-				}
-
-				local variantEntry := entry.Clone()
-
-				for item in ["unicode", "proxy", "alterations"] {
-					if entry[item] is Array
-						variantEntry[item] := (
-							entry[item][i] is Object ? entry[item][i].Clone() : entry[item][i]
-						)
-				}
-
-				if entry.Has("recipePush")
-					&& entry["recipePush"] is Array
-					&& entry["recipePush"][i] is Object {
-					variantEntry["recipePush"] := entry["recipePush"][i].Clone()
-				}
-
-				if entry.Has("reference") {
-					if entry["reference"] is Array
-						variantEntry["reference"] := entry["reference"][i].Clone()
-				}
-
-				if entry["sequence"].Length > 0 && entry["sequence"][i] is Array
-					variantEntry["sequence"] := entry["sequence"][i].Clone()
-
-				variantEntry := this.SetDecomposedData(&variantName, &variantEntry)
-
-				local symbolRef := entry["symbol"]
-				variantEntry["symbol"] := this.CloneOptions(&symbolRef, &i)
-
-				this.ProcessProperties(&variantEntry, &entry, &i)
-
-				local optionsRef := entry["options"]
-				variantEntry["options"] := this.CloneOptions(&optionsRef, &i)
-				variantEntry["variant"] := allVariants[1][i]
-				variantEntry["variantPos"] := i
-
-				if variantEntry["recipe"].Length > 0 {
-					variantEntry["recipe"] := Util.ProcessConcatenation(variantEntry["recipe"])
-					variantEntry["concatenated"] := True
-				}
-
-				entries.Set(i, Map("name", variantName, "entry", variantEntry))
-			}
-
-			for entryIndex, entryObj in entries {
-				local variantName := entryObj["name"]
-				local variantEntry := entryObj["entry"]
-				local variant := allVariants[1]
-				this.ProcessRecipe(&variantEntry, &variant)
-				local value := ChrEntry().Get(variantEntry)
-				this.AddEntry(&variantName, &value, &progress, &instances)
-			}
-		} else {
-			local isEntryExists := ChrLib.entries.HasOwnProp(entryName)
-			local presavedIndex := isEntryExists ? ChrLib.entries.%entryName%.Get("index") : 0
-
-			ChrLib.entries.%entryName% := Map()
-			ChrLib.entriesSource.%entryName% := entry
-
-			local libEntry := Map()
-			if IsSet(isDump) && isDump {
-				this.ProcessDump(&entryName, &entry)
-				libEntry := ChrLib.entries.%entryName%
-
-				this.TransferProperties(&entryName, &entry)
-			} else {
-				this.EntryPreProcessing(&entryName, &entry, &instances)
-
-				this.TransferProperties(&entryName, &entry)
-
-				if !isEntryExists {
-					local idx := ++ChrLib.lastIndexAdded
-					ChrLib.entries.%entryName%["index"] := idx
-					ChrLib.entryIdentifiers.Set(idx, entryName)
-				} else
-					ChrLib.entries.%entryName%["index"] := presavedIndex
-
-				libEntry := ChrLib.entries.%entryName%
-				this.EntryPostProcessing(&entryName, &libEntry, &instances)
-			}
-			if progress {
-				progress.data.progressName := StrLen(entryName) > 50 ? SubStr(entryName, 1, 50) "…" : entryName
-				progress.data.progressBarCurrent++
-				progress.data.progressPercent := Floor((progress.data.progressBarCurrent / progress.data.maxCountOfEntries) * 100)
-			}
-			entry := unset
-		}
-		return
-	}
-
-	AddEntry2(&entryName, &entry, &progress, &instances, &isDump?) {
-		if !IsSet(entry)
-			return
-
-		local brackets := []
-		local pos := 1
-		while (pos := RegExMatch(entryName, "\[(.*?)\]", &match, pos)) {
-			brackets.Push({
-				fullMatch: match[0],
-				content: match[1],
-				startPos: pos,
-				endPos: pos + StrLen(match[0]) - 1
-			})
-			pos += StrLen(match[0])
-		}
-
-		if brackets.Length > 0 {
-			local allVariants := []
-			local maxVariants := 0
-
-			for bracket in brackets {
-				local variants := StrSplit(bracket.content, ",")
-				for i, variant in variants {
-					variants[i] := Trim(variant)
-				}
-				allVariants.Push(variants)
-				if variants.Length > maxVariants
-					maxVariants := variants.Length
-			}
-
-			for variants in allVariants {
-				if variants.Length != maxVariants {
-					MsgBox((
-						Locale.Read("error.at_library_registration") "`n"
-						Locale.ReadInject("error.invalid_variants_at_name", [variants.Length, maxVariants, entryName])
-					), App.Title(), "Iconx")
-					return
-				}
-			}
-
-			local entries := Map()
-
-			for i in Range(1, maxVariants) {
-				local variantName := entryName
-
-				for j in Range(brackets.Length, 1, -1) {
-					local bracket := brackets[j]
-					local variant := allVariants[j][i]
-
-					variantName := (
-						SubStr(variantName, 1, bracket.startPos - 1)
-						variant
-						SubStr(variantName, bracket.endPos + 1)
-					)
-				}
-
-				if RegExMatch(variantName, "\{(\d+)?(?:\.\.\.)?i\}", &match) {
-					local addition := match[1] ? Integer(match[1]) : 0
+					local addition := match[1] != "" ? Integer(match[1]) : 0
 					variantName := RegExReplace(variantName, match[0], addition + i)
 				}
 
@@ -458,7 +308,7 @@ Class ChrReg {
 				RegExMatch(targetEntry["data"]["letter"], "^[a-zA-Z0-9]+$") {
 				targetEntry["symbol"]["letter"] := Util.UnicodeToChar(targetEntry["unicode"])
 			} else if RegExMatch(targetEntry["symbol"]["letter"], "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
-				local addition := match[1] ? Integer(match[1]) : 0
+				local addition := match[1] != "" ? Integer(match[1]) : 0
 				targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], match[0], addition + targetEntry["variantPos"])
 			}
 		}
@@ -647,7 +497,7 @@ Class ChrReg {
 					tempRecipe[i] := RegExReplace(tempRecipe[i], "\\(.*?)\\", entry["data"]["case"] = "capital" ? StrUpper(match[1]) : StrLower(match[1]))
 				}
 				if RegExMatch(tempRecipe[i], "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
-					local addition := match[1] ? Integer(match[1]) : 0
+					local addition := match[1] != "" ? Integer(match[1]) : 0
 					tempRecipe[i] := RegExReplace(tempRecipe[i], match[0], addition + entry["variantPos"])
 				}
 			}

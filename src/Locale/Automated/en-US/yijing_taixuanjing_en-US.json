@@ -1,6 +1,7 @@
 {
 	"en-US": {
 		"script_labels": {
+			"zhongguo": { "__self": "Zhōngguó", "__hidden": "Zhongguo" },
 			"taoist": { "__self": "Dàojiào", "__hidden": "Daojiao" },
 			"yijing": { "__self": "Yìjīng", "__hidden": "Yijing" },
 			"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" },
@@ -8,12 +9,14 @@
 		},
 		"generated": {
 			"prefix": {
+				"zhongguo": { "__self": "Zhōngguó", "__hidden": "Zhongguo" },
 				"taoist": { "__self": "Dàojiào", "__hidden": "daojiao" },
 				"yijing": { "__self": "Yìjīng", "__hidden": "Yijing" },
 				"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" },
 				"mahjong": { "__self": "Májiàng", "__hidden": "Majiang" }
 			},
 			"tag": {
+				"zhongguo": { "__self": "zhongguo", "__hidden": "zhongguo" },
 				"taoist": { "__self": "dàojiào", "__hidden": "daojiao" },
 				"yijing": { "__self": "yìjīng", "__hidden": "yijing" },
 				"taixuanjing": { "__self": "tàixuánjīng", "__hidden": "taixuanjing" },
@@ -108,6 +111,32 @@
 			}
 		},
 		"scripts": {
+			"zhongguo": {
+				"n_sym_fu": {
+					"letter_locale": { "__self": "Fú", "__hidden": "Fu" } ,
+					"meaning": "[ Good Fortune ]"
+				},
+				"n_sym_lu": {
+					"letter_locale": { "__self": "Lù", "__hidden": "Lu" } ,
+					"meaning": "[ Prosperity ]"
+				},
+				"n_sym_shou": {
+					"letter_locale": { "__self": "Shòu", "__hidden": "Shou" } ,
+					"meaning": "[ Longevity ]"
+				},
+				"n_sym_xi": {
+					"letter_locale": { "__self": "Xǐ", "__hidden": "Xi" } ,
+					"meaning": "[ Happiness ]"
+				},
+				"n_sym_shuangxi": {
+					"letter_locale": { "__self": "Shuāngxi", "__hidden": "Shuangxi" } ,
+					"meaning": "[ Love ][ Marriage ]"
+				},
+				"n_sym_cai": {
+					"letter_locale": { "__self": "Cái", "__hidden": "Cai" } ,
+					"meaning": "[ Wealth ]"
+				}
+			},
 			"taoist": {
 				"n_sym_yinyang": { 
 					"letter_locale": { 

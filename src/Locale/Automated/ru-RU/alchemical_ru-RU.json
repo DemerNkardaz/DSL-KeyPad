@@ -350,8 +350,8 @@
 			"occultic": {
 				"n_sym_leviathan_cross": { "letter_locale": "Крест Левиафана" },
 				"n_sym_pentagram": { "letter_locale": "Пентаграма" },
-				"n_sym_pentagram_right_handed_interlaced": { "letter_locale": "Правостороння переплетённая пентаграма" },
-				"n_sym_pentagram_left_handed_interlaced": { "letter_locale": "Левостороння переплетённая пентаграма" },
+				"n_sym_pentagram_right_handed_interlaced": { "letter_locale": "Правосторонняя переплетённая пентаграма" },
+				"n_sym_pentagram_left_handed_interlaced": { "letter_locale": "Левосторонняя переплетённая пентаграма" },
 				"n_sym_pentagraminverted": { "letter_locale": "Перевёрнутая пентаграма" }
 			}
 		},

@@ -300,6 +300,28 @@
 		"uiid": "DoubleCircled",
 		"icons": ["glyph_double_circled"]
 	},
+	"outlined", {
+		"preview": [
+			"\ud833\udce4\ud833\udcea\ud833\udce9\ud833\udce1\ud833\udcde\ud833\udce3\ud833\udcda\ud833\udcd9"
+		],
+		"fonts": ["Noto Sans Symbols"],
+		"locale": "glyph_variations.outlined",
+		"bindings": [],
+		"uiid": "Outlined",
+		"icons": ["glyph_double_circled"],
+		"hidden": true
+	},
+	"segmented", {
+		"preview": [
+			"\ud83e\udff1\ud83e\udff2\ud83e\udff3\ud83e\udff4\ud83e\udff5\ud83e\udff6\ud83e\udff7\ud83e\udff8\ud83e\udff9\ud83e\udff0"
+		],
+		"fonts": ["Noto Sans Symbols"],
+		"locale": "glyph_variations.segmented",
+		"bindings": [],
+		"uiid": "Segmented",
+		"icons": ["glyph_double_circled"],
+		"hidden": true
+	},
 	"tag", {
 		"preview": [
 			""
