@@ -97,6 +97,7 @@
 				"s_let_w_digamma_pamphylian": { "letter_locale": "памфилийская дигамма" },
 				"c_lig_st_stigma": { "letter_locale": "Стигма" },
 				"s_lig_st_stigma": { "letter_locale": "стигма" },
+				"n_lig_tr_tau_rho": { "letter_locale": "Тау Ро" },
 				"c_lig_k_kai": { "letter_locale": "Кай" },
 				"s_lig_k_kai": { "letter_locale": "кай" }
 			}

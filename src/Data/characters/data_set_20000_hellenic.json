@@ -784,13 +784,21 @@
 	},
 	"hel_[c,s]_lig_st_stigma", {
 		"unicode": ["03DA", "03DB"],
-		"options": { "altLayoutKey": "<+ Σ" },
-		"recipe": ["${hel_[c,s]_let_s_sigma}${hel_[c,s]_let_t_tau}"]
+		"options": { "altLayoutKey": "<+ $" },
+		"recipe": ["${hel_[c,s]_let_s_sigma}${hel_[c,s]_let_t_tau}"],
+		"symbol": { "letter": "${hel_[c,s]_let_s_sigma}" }
+	},
+	"hel_n_lig_tr_tau_rho", {
+		"unicode": "101A0",
+		"options": { "altLayoutKey": "<+ Τ" },
+		"recipe": ["${hel_c_let_t_tau}${hel_c_let_r_rho}"],
+		"symbol": { "font": "Noto Sans Symbols 2", "letter": "${hel_c_let_t_tau}" }
 	},
 	"hel_[c,s]_lig_k_kai", {
 		"unicode": ["03CF", "03D7"],
-		"options": { "altLayoutKey": ">! Κ" },
-		"recipe": ["${hel_[c,s]_let_k_kappa}${hel_[c,s]_let_a_alpha}${hel_[c,s]_let_i_iota}"]
+		"options": { "altLayoutKey": ">! $" },
+		"recipe": ["${hel_[c,s]_let_k_kappa}${hel_[c,s]_let_a_alpha}${hel_[c,s]_let_i_iota}"],
+		"symbol": { "letter": "${hel_[c,s]_let_k_kappa}" }
 	},
 	"hel_[c,s]_let_a_alpha__tonos", {
 		"unicode": ["0386", "03AC"],

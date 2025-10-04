@@ -86,6 +86,7 @@ Class ChrLib {
 		"mahjong",
 		"zhongguo",
 		"domino",
+		"roman",
 	]
 
 	static decompositionAttributes := Map(
@@ -119,6 +120,8 @@ Class ChrLib {
 			"card", "card",
 			"dice", "dice",
 			"tile", "tile",
+			"unit", "unit",
+			"abbr", "abbreviation",
 		),
 		"letter", "",
 		"endPart", "",

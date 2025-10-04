@@ -339,27 +339,11 @@ Class ChrReg {
 		return
 	}
 
-	CloneOptions2(&sourceOptions, &index) {
-		local tempOptions := sourceOptions.Clone()
-		for key, value in sourceOptions {
-			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 && (key = "tagAdditive" && sourceOptions[key].Has(index) && sourceOptions[key][index] is Array || key != "tagAdditive") {
-				if sourceOptions[key].Has(index) {
-					if sourceOptions[key][index] is Array
-						tempOptions[key] := sourceOptions[key][index].Clone()
-					else
-						tempOptions[key] := sourceOptions[key][index]
-				} else
-					tempOptions[key] := sourceOptions[key][1] is Array ? sourceOptions[key][1].Clone() : sourceOptions[key][1]
-
-			}
-		}
-		return tempOptions
-	}
-
 	CloneOptions(&sourceOptions, &index) {
 		local tempOptions := sourceOptions.Clone()
 		local strIndexBanned := ["letter"]
 		local arrIndexBanned := ["tagAdditive", "scriptBounds"]
+
 		for key, value in sourceOptions {
 			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 && (arrIndexBanned.HasValue(key) && sourceOptions[key].Has(index) && sourceOptions[key][index] is Array || !arrIndexBanned.HasValue(key)) {
 				if sourceOptions[key].Has(index) {
@@ -370,20 +354,41 @@ Class ChrReg {
 				} else
 					tempOptions[key] := sourceOptions[key][1] is Array ? sourceOptions[key][1].Clone() : sourceOptions[key][1]
 			} else if sourceOptions[key] is String {
-				if RegExMatch(sourceOptions[key], "\[(.*?)\]", &match) && !strIndexBanned.HasValue(key) {
-					local arrayContent := match[1]
-					local elements := StrSplit(arrayContent, ",")
+				local option := sourceOptions[key]
 
-					if index <= elements.Length {
-						local selectedElement := elements[index]
-						tempOptions[key] := RegExReplace(sourceOptions[key], "\[.*?\]", selectedElement)
-					} else {
-						local selectedElement := elements[1]
-						tempOptions[key] := RegExReplace(sourceOptions[key], "\[.*?\]", selectedElement)
+				if !strIndexBanned.HasValue(key) {
+					local result := ""
+					local lastPos := 1
+
+					while RegExMatch(option, "\[(.*?)\]", &match, lastPos) {
+						result .= SubStr(option, lastPos, match.Pos - lastPos)
+
+						local arrayContent := match[1]
+						local elements := StrSplit(arrayContent, ",")
+						local selectedElement := ""
+
+						if index <= elements.Length {
+							selectedElement := elements[index]
+
+							if RegExMatch(selectedElement, "^\{\<(\d+)\}$", &indexPointMatch) {
+								local indexPoint := Integer(indexPointMatch[1])
+								if indexPoint > 0 && indexPoint <= elements.Length
+									selectedElement := elements[indexPoint]
+							}
+						} else {
+							selectedElement := elements[1]
+						}
+
+						result .= selectedElement
+
+						lastPos := match.Pos + match.Len
 					}
-				} else {
-					tempOptions[key] := sourceOptions[key]
+
+					result .= SubStr(option, lastPos)
+					option := result
 				}
+
+				tempOptions[key] := option
 			}
 		}
 		return tempOptions

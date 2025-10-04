@@ -44,7 +44,7 @@ Class LocaleGenerator {
 			for item in scriptBounds {
 				local boundSplit := StrSplit(item, ",")
 				for each in boundSplit {
-					if RegExMatch(each, "(.*?)<(.*?)>$", &match) {
+					if RegExMatch(each, "^(.+)<([^<>]+)>$", &match) {
 						local bound := match[1]
 						local lang := match[2]
 
@@ -188,6 +188,11 @@ Class LocaleGenerator {
 
 			for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType", "beforeTitle", "afterTitle", "beforeAltTitle", "afterAltTitle"] {
 				if entry["symbol"].Has(letterBound) && StrLen(entry["symbol"][letterBound]) > 0 {
+					if entry["symbol"][letterBound] ~= "^<(!?)" langCode ">$" {
+						entry["symbol"][letterBound] := ""
+						continue
+					}
+
 					local boundLink := Util.StrUpper(letterBound, 1)
 					local entryBoundReference := entry["symbol"][letterBound]
 					local splitted := StrSplit(Util.StrTrim(entry["symbol"][letterBound]), ",")
@@ -204,7 +209,7 @@ Class LocaleGenerator {
 							boundKey := RegExReplace(boundKey, selfRefMatch[0])
 						}
 
-						if RegExMatch(boundKey, "<(!?)(.*?)>$", &languageRuleMatch) {
+						if RegExMatch(boundKey, "<(!?)([^<>]+)>$", &languageRuleMatch) {
 							local isBan := languageRuleMatch[1] = "!"
 							local languageRule := languageRuleMatch[2]
 

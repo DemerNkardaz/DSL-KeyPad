@@ -137,7 +137,10 @@
 					"<^>!<!": "hel_[c,s]_let_s_sampi",
 					"<^>!<!<+": "hel_[c,s]_let_s_sampi_archaic"
 				},
-				"Τ": {"<^>!": "hel_[c,s]_let_t_theta"},
+				"Τ": {
+					"<^>!": "hel_[c,s]_let_t_theta",
+					"<+": "hel_n_lig_tr_tau_rho"
+				},
 				"Υ": {
 					"<^<!": "[pros,ypo]gegrammeni",
 					">+": "hel_[c,s]_let_y_upsilon__dasia",
@@ -2766,33 +2769,33 @@
 	},
 	"Roman Digits": {
 		"Flat": {
-			"1:Caps": ["lat_[c,s]_num_1"],
-			"2:Caps": ["lat_[c,s]_num_2"],
-			"3:Caps": ["lat_[c,s]_num_3"],
-			"4:Caps": ["lat_[c,s]_num_4"],
-			"5:Caps": ["lat_[c,s]_num_5"],
-			"6:Caps": ["lat_[c,s]_num_6"],
-			"7:Caps": ["lat_[c,s]_num_7"],
-			"8:Caps": ["lat_[c,s]_num_8"],
-			"9:Caps": ["lat_[c,s]_num_9"],
-			"0:Caps": ["lat_[c,s]_num_10"]
+			"1:Caps": ["roman_[c,s]_num_1"],
+			"2:Caps": ["roman_[c,s]_num_2"],
+			"3:Caps": ["roman_[c,s]_num_3"],
+			"4:Caps": ["roman_[c,s]_num_4"],
+			"5:Caps": ["roman_[c,s]_num_5"],
+			"6:Caps": ["roman_[c,s]_num_6"],
+			"7:Caps": ["roman_[c,s]_num_7"],
+			"8:Caps": ["roman_[c,s]_num_8"],
+			"9:Caps": ["roman_[c,s]_num_9"],
+			"0:Caps": ["roman_[c,s]_num_10"]
 		},
 		"Moded": {
-			"1": {"<+:Caps": ["lat_[c,s]_num_11"]},
-			"2": {"<+:Caps": ["lat_[c,s]_num_12"]},
+			"1": {"<+:Caps": ["roman_[c,s]_num_11"]},
+			"2": {"<+:Caps": ["roman_[c,s]_num_12"]},
 			"5": {
-				"<+:Caps": ["lat_[c,s]_num_50"],
-				">+:Caps": ["lat_[c,s]_num_500"],
-				"<^>!": "lat_c_num_5000",
-				"<^>!>+": "lat_c_num_50000",
-				"<^>!<!": "lat_c_num_50_early"
+				"<+:Caps": ["roman_[c,s]_num_50"],
+				">+:Caps": ["roman_[c,s]_num_500"],
+				"<^>!": "roman_c_num_5000",
+				"<^>!>+": "roman_c_num_50000",
+				"<^>!<!": "roman_c_num_50_early"
 			},
-			"6": {"<^>!<!": "lat_c_num_6_late"},
+			"6": {"<^>!<!": "roman_c_num_6_late"},
 			"0": {
-				">+:Caps": ["lat_[c,s]_num_100"],
-				"<^>!:Caps": ["lat_[c,s]_num_1000"],
-				"<^>!>+": "lat_c_num_10000",
-				"<^>!<+": "lat_c_num_100000"
+				">+:Caps": ["roman_[c,s]_num_100"],
+				"<^>!:Caps": ["roman_[c,s]_num_1000"],
+				"<^>!>+": "roman_c_num_10000",
+				"<^>!<+": "roman_c_num_100000"
 			}
 		}
 	},

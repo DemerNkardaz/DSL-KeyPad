@@ -238,25 +238,6 @@
 		"options": { "fastKey": "c*<+>+ 4" },
 		"recipe": ["P=", "PHP"]
 	},
-	"wallet_roman_[denarius,quinarius,sestertius,dupondius,as]", {
-		"unicode": ["10196", "10197", "10198", "10199", "1019A"],
-		"tags": [
-			["roman denarius", "римский денарий"],
-			["roman quinarius", "римский квинарий"],
-			["roman sestertius", "римский сестерций"],
-			["roman dupondius", "римский дупондий"],
-			["roman as", "римский асс"]
-		],
-		"groups": ["Wallet Signs"],
-		"recipe": [
-			["X-", "DIN"],
-			["V-", "QIN"],
-			["H-S", "SES"],
-			["I-I", "DUP"],
-			["/-", "ASE"]
-		],
-		"symbol": { "font": "Catrinity" }
-	},
 	"wallet_bitcoin", {
 		"unicode": "20BF",
 		"tags": ["bitcoin", "биткоин"],

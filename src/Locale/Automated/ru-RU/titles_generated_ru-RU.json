@@ -35,7 +35,9 @@
 				"suite": "масть",
 				"card": "карта",
 				"dice": "кость",
-				"tile": "плитка"
+				"tile": "плитка",
+				"unit": "единица",
+				"abbreviation": "аббревиатура"
 			},
 			"before_letter": {
 				"turned": "перевёрнут$(ая|ый|ое|ые)",
@@ -106,7 +108,9 @@
 				"vertical": "вертикальн$(ая|ый|ое)",
 				"stylized": "стилизованн$(ая|ый|ое)",
 				"motif": "мотив",
-				"auspicious_motif": "благоприятный мотив"
+				"auspicious_motif": "благоприятный мотив",
+				"weight": "вес",
+				"currency": "валюта"
 			},
 			"after_letter": {
 				"late": "(поздняя форма)",
@@ -114,7 +118,9 @@
 				"unblended": "несмешанный",
 				"dotless": "без точки",
 				"anglicana": "англиканы",
-				"longa": "лонга"
+				"longa": "лонга",
+				"weight": "веса",
+				"currency": "валюты"
 			},
 			"postfix": {
 				"with": "с",

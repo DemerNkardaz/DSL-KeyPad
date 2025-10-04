@@ -97,6 +97,7 @@
 				"s_let_w_digamma_pamphylian": { "letter_locale": "pamphylian digamma" },
 				"c_lig_st_stigma": { "letter_locale": "Stigma" },
 				"s_lig_st_stigma": { "letter_locale": "stigma" },
+				"n_lig_tr_tau_rho": { "letter_locale": "Tau Rho" },
 				"c_lig_k_kai": { "letter_locale": "Kai" },
 				"s_lig_k_kai": { "letter_locale": "kai" }
 			}

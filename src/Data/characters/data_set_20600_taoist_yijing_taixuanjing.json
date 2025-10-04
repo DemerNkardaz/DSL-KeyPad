@@ -50,7 +50,7 @@
 		},
 		"symbol": {
 			"beforeLetter": "{i}",
-			"beforeType": "t.yao<en-US>",
+			"beforeType": "t.yao<!ru-RU>",
 			"afterType": "t.yao<ru-RU>",
 			"type": "monogram",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
@@ -61,7 +61,7 @@
 						"script": "taixuanjing",
 						"afterTitle": "/self/meaning",
 						"beforeLetter": "{i}",
-						"beforeType": "t.sancai<en-US>",
+						"beforeType": "t.sancai<!ru-RU>",
 						"afterType": "t.sancai<ru-RU>",
 						"letter": "monogram_1_di"
 					}
@@ -72,7 +72,7 @@
 						"script": "taixuanjing",
 						"afterTitle": "/self/meaning",
 						"beforeLetter": "{i}",
-						"beforeType": "t.sancai<en-US>",
+						"beforeType": "t.sancai<!ru-RU>",
 						"afterType": "t.sancai<ru-RU>",
 						"letter": "monogram_2_tian"
 					}
@@ -96,7 +96,7 @@
 		},
 		"symbol": {
 			"beforeLetter": "{i}",
-			"beforeType": "t.si_xiang<en-US>",
+			"beforeType": "t.si_xiang<!ru-RU>",
 			"afterType": "t.si_xiang<ru-RU>",
 			"type": "digram",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
@@ -169,7 +169,7 @@
 		},
 		"symbol": {
 			"beforeLetter": "{i}",
-			"beforeType": "t.bagua<en-US>",
+			"beforeType": "t.bagua<!ru-RU>",
 			"afterType": "t.bagua<ru-RU>",
 			"afterTitle": "/self/meaning",
 			"type": "trigram",
@@ -521,7 +521,7 @@
 		},
 		"symbol": {
 			"beforeLetter": "{i}",
-			"beforeType": "t.liushisigua<en-US>",
+			"beforeType": "t.liushisigua<!ru-RU>",
 			"afterType": "t.liushisigua<ru-RU>",
 			"afterTitle": "/self/meaning",
 			"type": "hexagram",
@@ -543,7 +543,7 @@
 			"beforeLetter": "{2...i}",
 			"type": "monogram",
 			"afterTitle": "/self/meaning",
-			"beforeType": "t.sancai<en-US>",
+			"beforeType": "t.sancai<!ru-RU>",
 			"afterType": "t.sancai<ru-RU>",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
 			"font": "Segoe UI Symbol"
@@ -942,7 +942,7 @@
 			"beforeLetter": "{i}",
 			"type": "tetragram",
 			"afterTitle": "/self/meaning",
-			"beforeType": "t.bashiyishou<en-US>",
+			"beforeType": "t.bashiyishou<!ru-RU>",
 			"afterType": "t.bashiyishou<ru-RU>",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
 			"font": "Segoe UI Symbol"
@@ -1049,7 +1049,7 @@
 		"symbol": {
 			"beforeLetter": "{i}",
 			"beforeType": "honors<ru-RU>",
-			"afterType": "honors<en-US>",
+			"afterType": "honors<!ru-RU>",
 			"afterTitle": "/self/meaning",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
 			"customs": "c273892"
@@ -1071,7 +1071,7 @@
 		"symbol": {
 			"beforeLetter": "{4...i}",
 			"beforeType": "honors<ru-RU>",
-			"afterType": "honors<en-US>",
+			"afterType": "honors<!ru-RU>",
 			"afterTitle": "/self/meaning",
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
 			"customs": "[cc03311,c008248,c273892]"

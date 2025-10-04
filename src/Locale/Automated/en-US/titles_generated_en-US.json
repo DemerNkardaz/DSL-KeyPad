@@ -35,7 +35,9 @@
 				"suite": "suite",
 				"card": "card",
 				"dice": "dice",
-				"tile": "tile"
+				"tile": "tile",
+				"unit": "unit",
+				"abbreviation": "abbreviation"
 			},
 			"before_letter": {
 				"turned": "turned",
@@ -106,7 +108,9 @@
 				"vertical": "vertical",
 				"stylized": "stylized",
 				"motif": "motif",
-				"auspicious_motif": "auspicious motif"
+				"auspicious_motif": "auspicious motif",
+				"weight": "weight",
+				"currency": "currency"
 			},
 			"after_letter": {
 				"late": "(late form)",
@@ -114,7 +118,9 @@
 				"unblended": "unblended",
 				"dotless": "dotless",
 				"anglicana": "anglicana",
-				"longa": "longa"
+				"longa": "longa",
+				"weight": "weight",
+				"currency": "currency"
 			},
 			"postfix": {
 				"with": "with",
