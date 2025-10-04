@@ -4,11 +4,11 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.7.3 α — 2025-10-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
+### [0.1.7.3 α — 2025-10-04](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
 
 - Additions:
 
-  - Library extended to 6,200+ Unicode characters.
+  - Library extended to 6,300+ Unicode characters.
   - Added symbol sets: Yin and Yang (☯︎); monograms, bigrams, trigrams and hexagrams of Yijing; monograms, bigrams and tetragrams of Taixuanjing; Majiang tiles/dices; Xiangqi pieces; Domino tiles.
   - Extended Chess symbols set.
   - Added segmented variants of numbers, outlined variants A-Z letters and numbers.
@@ -184,11 +184,11 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [0.1.7.3 α — 2025-10-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
+### [0.1.7.3 α — 2025-10-04](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
 
 - Добавления:
 
-  - Библиотека расширена до 6,200+ символов Unicode.
+  - Библиотека расширена до 6,300+ символов Unicode.
   - Добавлены наборы символов: Инь и Ян (☯︎); монограммы, диграммы, триграммы и гексаграммы И-Цзин; монограммы, диграммы и тетраграммы Тайсюань-Цзин; Плитки/кости Мацзян; фигуры Сянци; Плитки домино.
   - Расширен набор символов шахматных фигур.
   - Добавлены сегментированные варианты цифр, контурные варианты A-Z и цифр.
