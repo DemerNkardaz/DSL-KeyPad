@@ -5,7 +5,8 @@
 			"taoist": "Дао",
 			"yijing": "И-Цзин",
 			"taixuanjing": "Тайсюань-Цзин",
-			"mahjong": "Мацзян"
+			"mahjong": "Мацзян",
+			"xiangqi": "Сянци"
 		},
 		"generated": {
 			"prefix": {
@@ -13,14 +14,16 @@
 				"taoist": "Даосск$(ая|ий|ое)",
 				"yijing": "И-Цзин",
 				"taixuanjing": "Тайсюань-Цзин",
-				"mahjong": "Мацзян"
+				"mahjong": "Мацзян",
+				"xiangqi": "Сянци"
 			},
 			"tag": {
 				"zhongguo": "китайск$(ая|ий|ое)",
 				"taoist": "даосск$(ая|ий|ое)",
 				"yijing": "и-цзин",
 				"taixuanjing": "тайсюань-цзин",
-				"mahjong": "мацзян"
+				"mahjong": "мацзян",
+				"xiangqi": "сянци"
 			},
 			"type": {
 				"monogram": "энаграмма",
@@ -891,6 +894,64 @@
 				},
 				"n_dice_back": { "letter_locale": "(Тыльная сторона)" },
 				"n_dice_joker": { "letter_locale": "Джокер (Американский Маджонг)" }
+			},
+			"xiangqi": {
+				"n_piece_hongse_1_shuai": {
+					"letter_locale": "Шуай",
+					"meaning": "[ Маршал ]"
+				},
+				"n_piece_hongse_2_shi": {
+					"letter_locale": "Ши",
+					"meaning": "[ Советник ]"
+				},
+				"n_piece_hongse_3_xiang": {
+					"letter_locale": "Сян",
+					"meaning": "[ Министр ]"
+				},
+				"n_piece_hongse_4_ma": {
+					"letter_locale": "Ма",
+					"meaning": "[ Конь ]"
+				},
+				"n_piece_hongse_5_che": {
+					"letter_locale": "Чэ",
+					"meaning": "[ Ладья ]"
+				},
+				"n_piece_hongse_7_bing": {
+					"letter_locale": "Бин",
+					"meaning": "[ Солдат ]"
+				},
+				"n_piece_hongse_6_pao": {
+					"letter_locale": "Пао",
+					"meaning": "[ Пушка ]"
+				},
+				"n_piece_heise_1_jiang": {
+					"letter_locale": "Цзянь",
+					"meaning": "[ Генерал ]"
+				},
+				"n_piece_heise_2_shi": {
+					"letter_locale": "Ши",
+					"meaning": "[ Советник ]"
+				},
+				"n_piece_heise_3_xiang": {
+					"letter_locale": "Сян",
+					"meaning": "[ Слон ]"
+				},
+				"n_piece_heise_4_ma": {
+					"letter_locale": "Ма",
+					"meaning": "[ Конь ]"
+				},
+				"n_piece_heise_5_che": {
+					"letter_locale": "Чэ",
+					"meaning": "[ Колесница ]"
+				},
+				"n_piece_heise_6_pao": {
+					"letter_locale": "Пао",
+					"meaning": "[ Катапульта ]"
+				},
+				"n_piece_heise_7_zu": {
+					"letter_locale": "Цзу",
+					"meaning": "[ Рядовой ]"
+				}
 			}
 		}
 	}

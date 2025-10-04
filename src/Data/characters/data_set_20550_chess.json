@@ -1,16 +1,23 @@
 [
-	"chess_n_piece_[king,queen,rook,bishop,knight,pawn]_white", {
-		"unicode": ["2654", "2655", "2656", "2657", "2658", "2659"],
+	"chess_n_piece_[king,queen,rook,bishop,knight,pawn,equihopper,knight_queen,knight_rook,knight_bishop,ferz,alfil]_white", {
+		"unicode": ["2654", "2655", "2656", "2657", "2658", "2659", "1FA48", "1FA4E", "1FA4F", "1FA50", "1FA54", "1FA55"],
 		"options": { "useLetterLocale": "_white$(remove)", "applyFontOnRecipeField": false },
-		"symbol": { "beforeType": "white" },
-		"recipePrefixes": ["cw "],
-		"recipe": [["k"], ["q"], ["r"], ["b"], ["n"], ["p"]]
+		"symbol": { "beforeType": "white", "font": "Noto Sans Symbols 2" },
+		"recipePrefixes": ["chw "],
+		"recipe": [["k"], ["q"], ["r"], ["b"], ["nt"], ["p"], ["eq"], ["nq"], ["nr"], ["nb"], ["f"], ["a"]]
 	},
-	"chess_n_piece_[king,queen,rook,bishop,knight,pawn]_black", {
-		"unicode": ["265A", "265B", "265C", "265D", "265E", "265F"],
+	"chess_n_piece_[king,queen,rook,bishop,knight,pawn,equihopper,knight_queen,knight_rook,knight_bishop,ferz,alfil]_black", {
+		"unicode": ["265A", "265B", "265C", "265D", "265E", "265F", "1FA49", "1FA51", "1FA52", "1FA53", "1FA56", "1FA57"],
 		"options": { "useLetterLocale": "_black$(remove)", "applyFontOnRecipeField": false },
-		"symbol": { "beforeType": "black" },
-		"recipePrefixes": ["cb "],
-		"recipe": [["k"], ["q"], ["r"], ["b"], ["n"], ["p"]]
+		"symbol": { "beforeType": "black", "font": "Noto Sans Symbols 2" },
+		"recipePrefixes": ["chb "],
+		"recipe": [["k"], ["q"], ["r"], ["b"], ["nt"], ["p"], ["eq"], ["nq"], ["nr"], ["nb"], ["f"], ["a"]]
+	},
+	"chess_n_piece_[king,queen,rook,bishop,knight,pawn,equihopper]_neutral", {
+		"unicode": ["1FA00", "1FA01", "1FA02", "1FA03", "1FA04", "1FA05", "1FA4A"],
+		"options": { "useLetterLocale": "_neutral$(remove)", "applyFontOnRecipeField": false },
+		"symbol": { "beforeType": "neutral", "font": "Noto Sans Symbols 2" },
+		"recipePrefixes": ["chn "],
+		"recipe": [["k"], ["q"], ["r"], ["b"], ["nt"], ["p"], ["eq"]]
 	}
 ]

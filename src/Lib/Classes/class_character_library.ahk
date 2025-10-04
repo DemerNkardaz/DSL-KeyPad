@@ -84,6 +84,7 @@ Class ChrLib {
 		"yijing",
 		"taixuanjing",
 		"mahjong",
+		"xiangqi",
 		"zhongguo",
 		"domino",
 		"roman",

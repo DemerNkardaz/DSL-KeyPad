@@ -5,7 +5,8 @@
 			"taoist": { "__self": "Dàojiào", "__hidden": "Daojiao" },
 			"yijing": { "__self": "Yìjīng", "__hidden": "Yijing" },
 			"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" },
-			"mahjong": { "__self": "Májiàng", "__hidden": "Majiang" }
+			"mahjong": { "__self": "Májiàng", "__hidden": "Majiang" },
+			"xiangqi": { "__self": "Xiàngqí", "__hidden": "Xiangqi" }
 		},
 		"generated": {
 			"prefix": {
@@ -13,14 +14,16 @@
 				"taoist": { "__self": "Dàojiào", "__hidden": "daojiao" },
 				"yijing": { "__self": "Yìjīng", "__hidden": "Yijing" },
 				"taixuanjing": { "__self": "Tàixuánjīng", "__hidden": "Taixuanjing" },
-				"mahjong": { "__self": "Májiàng", "__hidden": "Majiang" }
+				"mahjong": { "__self": "Májiàng", "__hidden": "Majiang" },
+				"xiangqi": { "__self": "Xiàngqí", "__hidden": "Xiangqi" }
 			},
 			"tag": {
 				"zhongguo": { "__self": "zhōngguó", "__hidden": "zhongguo" },
 				"taoist": { "__self": "dàojiào", "__hidden": "daojiao" },
 				"yijing": { "__self": "yìjīng", "__hidden": "yijing" },
 				"taixuanjing": { "__self": "tàixuánjīng", "__hidden": "taixuanjing" },
-				"mahjong": { "__self": "májiàng", "__hidden": "majiang" }
+				"mahjong": { "__self": "májiàng", "__hidden": "majiang" },
+				"xiangqi": { "__self": "xiàngqí", "__hidden": "xiangqi" }
 			},
 			"type": {
 				"monogram": "monogram",
@@ -962,6 +965,64 @@
 				},
 				"n_dice_back": { "letter_locale": "(Back)" },
 				"n_dice_joker": { "letter_locale": "Joker (American Mahjong)" }
+			},
+			"xiangqi": {
+				"n_piece_hongse_1_shuai": {
+					"letter_locale": { "__self": "Shuài", "__hidden": "Shuai" },
+					"meaning": "[ Marshal ]"
+				},
+				"n_piece_hongse_2_shi": {
+					"letter_locale": { "__self": "Shì", "__hidden": "Shi" },
+					"meaning": "[ Advisor ]"
+				},
+				"n_piece_hongse_3_xiang": {
+					"letter_locale": { "__self": "Xiàng", "__hidden": "Xiang" },
+					"meaning": "[ Minister ]"
+				},
+				"n_piece_hongse_4_ma": {
+					"letter_locale": { "__self": "Mà", "__hidden": "Ma" },
+					"meaning": "[ Horse ]"
+				},
+				"n_piece_hongse_5_che": {
+					"letter_locale": { "__self": "Chē", "__hidden": "Che" },
+					"meaning": "[ Chariot ]"
+				},
+				"n_piece_hongse_6_pao": {
+					"letter_locale": { "__self": "Pào", "__hidden": "Pao" },
+					"meaning": "[ Cannon ]"
+				},
+				"n_piece_hongse_7_bing": {
+					"letter_locale": { "__self": "Bīng", "__hidden": "Bing" },
+					"meaning": "[ Soldier ]"
+				},
+				"n_piece_heise_1_jiang": {
+					"letter_locale": { "__self": "Jiàng", "__hidden": "Jiang" },
+					"meaning": "[ General ]"
+				},
+				"n_piece_heise_2_shi": {
+					"letter_locale": { "__self": "Shì", "__hidden": "Shi" },
+					"meaning": "[ Advisor ]"
+				},
+				"n_piece_heise_3_xiang": {
+					"letter_locale": { "__self": "Xiàng", "__hidden": "Xiang" },
+					"meaning": "[ Elephant ]"
+				},
+				"n_piece_heise_4_ma": {
+					"letter_locale": { "__self": "Mǎ", "__hidden": "Ma" },
+					"meaning": "[ Horse ]"
+				},
+				"n_piece_heise_5_che": {
+					"letter_locale": { "__self": "Chē", "__hidden": "Che" },
+					"meaning": "[ Chariot ]"
+				},
+				"n_piece_heise_6_pao": {
+					"letter_locale": { "__self": "Pào", "__hidden": "Pao" },
+					"meaning": "[ Catapult ]"
+				},
+				"n_piece_heise_7_zu": {
+					"letter_locale": { "__self": "Zú", "__hidden": "Zu" },
+					"meaning": "[ Soldier ]"
+				}
 			}
 		}
 	}

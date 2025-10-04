@@ -10,13 +10,13 @@ Class LocaleGenerator {
 		local scriptAdditive := entry["symbol"]["scriptAdditive"] != "" ? "." entry["symbol"]["scriptAdditive"] : ""
 
 		local tagScriptAtStart := False
-		local isJingGrams := entryName ~= "^(yijing|taixuanjing|mahjong)"
+		local bannedFromScriptAtStart := entryName ~= "^(yijing|taixuanjing|mahjong|xiangqi)"
 		local scriptBounds := entry["symbol"]["scriptBounds"]
 
 		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic", "domino"]) {
 			if !useLetterLocale
 				useLetterLocale := True
-			if !isJingGrams
+			if !bannedFromScriptAtStart
 				tagScriptAtStart := True
 		}
 

@@ -18,7 +18,13 @@
 				"n_piece_rook": { "letter_locale": "Rook" },
 				"n_piece_bishop": { "letter_locale": "Bishop" },
 				"n_piece_knight": { "letter_locale": "Knight" },
-				"n_piece_pawn": { "letter_locale": "Pawn" }
+				"n_piece_pawn": { "letter_locale": "Pawn" },
+				"n_piece_equihopper": { "letter_locale": "Equihopper" },
+				"n_piece_knight_queen": { "letter_locale": "Knight-Queen" },
+				"n_piece_knight_rook": { "letter_locale": "Knight-Rook" },
+				"n_piece_knight_bishop": { "letter_locale": "Knight-Bishop" },
+				"n_piece_ferz": { "letter_locale": "Ferz" },
+				"n_piece_alfil": { "letter_locale": "Alfil" }
 			}
 		}
 	}

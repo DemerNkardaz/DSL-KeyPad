@@ -110,7 +110,8 @@
 				"motif": "motif",
 				"auspicious_motif": "auspicious motif",
 				"weight": "weight",
-				"currency": "currency"
+				"currency": "currency",
+				"neutral": "neutral"
 			},
 			"after_letter": {
 				"late": "(late form)",

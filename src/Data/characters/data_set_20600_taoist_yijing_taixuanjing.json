@@ -1133,5 +1133,54 @@
 			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
 			"customs": "c273892"
 		}
+	},
+	"xiangqi_n_piece_hongse_{i}_[shuai,shi,xiang,ma,che,pao,bing]", {
+		"unicode": ["1FA60", "1FA61", "1FA62", "1FA63", "1FA64", "1FA65", "1FA66"],
+		"recipe": [
+			["xq rj"],
+			["xq rs"],
+			["xq rx"],
+			["xq rm"],
+			["xq rjua"],
+			["xq rp"],
+			["xq rb"]
+		],
+		"options": {
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeType": "red",
+			"afterTitle": "/self/meaning",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"customs": "ccd0201",
+			"font": "Noto Sans Symbols 2"
+		}
+	},
+	"xiangqi_n_piece_heise_{i}_[jiang,shi,xiang,ma,che,pao,zu]", {
+		"unicode": ["1FA67", "1FA68", "1FA69", "1FA6A", "1FA6B", "1FA6C", "1FA6D"],
+		"recipe": [
+			["xq bj"],
+			["xq bs"],
+			["xq bx"],
+			["xq bm"],
+			["xq bjua"],
+			["xq bp"],
+			["xq bb"]
+		],
+		"options": {
+			"altTitleUseLineBreak": true,
+			"useHiddenTags": true,
+			"hiddenTagsLanguage": "en-US",
+			"ignoreCaseOnPanelFilter": true
+		},
+		"symbol": {
+			"beforeType": "black",
+			"afterTitle": "/self/meaning",
+			"scriptBounds": ["[<ru-RU>", "]<ru-RU>"],
+			"font": "Noto Sans Symbols 2"
+		}
 	}
 ]

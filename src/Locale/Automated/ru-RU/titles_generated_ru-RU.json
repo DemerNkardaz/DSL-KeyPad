@@ -110,7 +110,8 @@
 				"motif": "мотив",
 				"auspicious_motif": "благоприятный мотив",
 				"weight": "вес",
-				"currency": "валюта"
+				"currency": "валюта",
+				"neutral": "нейтральн$(ая|ый|ое)"
 			},
 			"after_letter": {
 				"late": "(поздняя форма)",

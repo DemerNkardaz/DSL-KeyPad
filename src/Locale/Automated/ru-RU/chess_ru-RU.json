@@ -18,7 +18,13 @@
 				"n_piece_rook": { "letter_locale": "Ладья" },
 				"n_piece_bishop": { "letter_locale": "Слон" },
 				"n_piece_knight": { "letter_locale": "Конь" },
-				"n_piece_pawn": { "letter_locale": "Пешка" }
+				"n_piece_pawn": { "letter_locale": "Пешка" },
+				"n_piece_equihopper": { "letter_locale": "Эквихоппер" },
+				"n_piece_knight_queen": { "letter_locale": "Конь-Ферзь" },
+				"n_piece_knight_rook": { "letter_locale": "Конь-Ладья" },
+				"n_piece_knight_bishop": { "letter_locale": "Конь-Слон" },
+				"n_piece_ferz": { "letter_locale": "Ферц" },
+				"n_piece_alfil": { "letter_locale": "Алфил" }
 			}
 		}
 	}
