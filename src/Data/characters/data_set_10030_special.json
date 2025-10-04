@@ -440,7 +440,7 @@
 		"unicode": "034F",
 		"tags": ["grapheme joiner", "соединитель графем"],
 		"groups": ["Special Characters"],
-		"options": { "fastKey": "\\" }
+		"options": { "fastKey": ">+ \\" }
 	},
 	"dotted_circle", {
 		"unicode": "25CC",
@@ -810,8 +810,15 @@
 			"fullwidth": "FF5C",
 			"tag": "E007C"
 		},
-		"groups": ["Special Fast RShif"],
-		"options": { "noCalc": true, "fastKey": ">+ \\", "send": "Text" }
+		"groups": ["Special Fast RShift"],
+		"options": { "noCalc": true, "fastKey": "\\", "send": "Text" }
+	},
+	"broken_bar", {
+		"unicode": "00A6",
+		"tags": ["broken bar", "ломаная черта"],
+		"groups": ["Smelting Special", "Special Fast Secondary"],
+		"options": { "fastKey": "\\" },
+		"recipe": ["|/"]
 	},
 	"left_vertical_bar_with_quill", {
 		"unicode": "2E20",

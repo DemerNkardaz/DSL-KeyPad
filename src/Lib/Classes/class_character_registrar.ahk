@@ -672,6 +672,23 @@ Class ChrReg {
 			entry["groups"].Push(entry["groups"][1] " " addGroupMatch[1])
 		}
 
+		for each in ["&data", "data"] {
+			if entry.Has(each) {
+				for key, value in entry[each] {
+					if value is String && value != "" && InStr(value, "[i:") {
+						local newValue := value
+
+						while RegExMatch(newValue, "\[i:(.*?)\]", &varMatch) {
+							local splittedVariants := StrSplit(varMatch[1], ",")
+							local newValue := RegExReplace(newValue, "\[i:.*?\]", splittedVariants[entry["variantPos"]], , 1)
+						}
+
+						entry[each].Set(key, newValue)
+					}
+				}
+			}
+		}
+
 		if entry["data"]["postfixes"].Length > 0 {
 			if entry["recipe"].Length = 0 {
 				entry["recipe"] := ["$"]
@@ -741,6 +758,16 @@ Class ChrReg {
 		this.EntryPostProcessing__Categories(&entryName, &entry)
 		this.EntryPostProcessing__Notation(&entryName, &entry)
 		this.EntryPostProcessing__Recipes(&entryName, &entry)
+
+		local generationConditions := [
+			StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["case"]) > 0 && StrLen(entry["data"]["letter"]) > 0,
+			entry.Has("&data") && entry["&data"].Has("script") && entry["&data"].Has("case") && entry["&data"].Has("letter") && StrLen(entry["&data"]["script"]) > 0 && StrLen(entry["&data"]["case"]) > 0 && StrLen(entry["&data"]["letter"]) > 0
+		]
+
+		if generationConditions[1] || generationConditions[2]
+			entry := instances.LocaleGenerator.Generate(entryName, entry, generationConditions[2] ? "&data" : "data")
+
+
 		this.EntryPostProcessing__LaTeX(&entryName, &entry, &instances, &character)
 
 
@@ -960,9 +987,6 @@ Class ChrReg {
 	}
 
 	EntryPostProcessing__LaTeX(&entryName, &entry, &instances, &character) {
-		if StrLen(entry["data"]["script"]) > 0 && StrLen(entry["data"]["case"]) > 0 && StrLen(entry["data"]["letter"]) > 0 && entry["data"]["originScript"] != "&ipa"
-			entry := instances.LocaleGenerator.Generate(entryName, entry)
-
 		if characters.supplementaryData["LaTeX Commands"].Has(character) && entry["LaTeX"].Length = 0 {
 			local code := characters.supplementaryData["LaTeX Commands"][character]
 

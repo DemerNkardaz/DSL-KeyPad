@@ -100,7 +100,6 @@
 	"lat_[c,s]_let_a_schwa", {
 		"unicode": ["018F", "0259"],
 		"alterations": [{}, { "combining": "1DEA", "modifier": "1D4A", "subscript": "2094" }],
-		"tags": [[], ["<en-US>mid central vowel", "<ru-RU>неогублённый гласный среднего ряда среднего подъёма"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"options": {
 			"layoutTitles": ["", true], "altLayoutKey": ["", ">!<! /E/"], "useLetterLocale": true, "fastKey": "/E/?Secondary"
@@ -189,7 +188,6 @@
 	},
 	"lat_[c,s]_let_o_rams_horn", {
 		"unicode": ["A7CB", "0264"],
-		"tags": [[], ["<en-US>close-mid back unrounded vowel", "<ru-RU>неогублённый гласный заднего ряда средне-верхнего подъёма"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"alterations": [{}, { "modifier": "10791" }],
 		"options": {
@@ -200,7 +198,6 @@
 	},
 	"lat_[c,s]_let_n_eng", {
 		"unicode": ["014A", "014B"],
-		"tags": [[], ["<en-US>voiced velar nasal", "<ru-RU>велярный носовой согласный"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"alterations": [{}, { "modifier": "1D51" }],
 		"options": {
@@ -211,7 +208,6 @@
 	},
 	"lat_[c,s]_let_o_open", {
 		"unicode": ["0186", "0254"],
-		"tags": [[], ["<en-US>open-mid back rounded vowel", "<ru-RU>огублённый гласный заднего ряда средне-нижнего подъёма"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"alterations": [{}, { "modifier": "1D53" }],
 		"options": { "referenceLocale": "o$", "layoutTitles": ["", true], "altLayoutKey": ["", ">!<+ $"] },
@@ -326,7 +322,6 @@
 	},
 	"lat_[c,s]_let_z_ezh", {
 		"unicode": ["01B7", "0292"],
-		"tags": [[], ["<en-US>voiced postalveolar fricative", "<ru-RU>звонкий зубной щелевой согласный"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"alterations": [{}, { "modifier": "1DBE" }],
 		"options": {
@@ -385,12 +380,11 @@
 		"unicode": "0294",
 		"groups": ["Latin", "IPA"],
 		"alterations": { "modifier": "02C0" },
-		"options": { "useLetterLocale": true, "altLayoutKey": ">! Q" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": ">! Q" }
 	},
 	"lat_n_let_a_glottal_stop__stroke_short", {
 		"unicode": "02A1",
 		"groups": ["Latin", "IPA"],
-		"tags": ["<en-US>epiglottal plosive", "<ru-RU>эпиглоттальный взрывной согласный"],
 		"alterations": { "modifier": "107B3" },
 		"options": {
 			"useLetterLocale": "Origin",
@@ -404,7 +398,7 @@
 		"groups": ["Latin", "IPA"],
 		"alterations": { "modifier": "02C1" },
 		"options": {
-			"useLetterLocale": true,
+			"useLetterLocale": true, "layoutTitles": true,
 			"altLayoutKey": "c*>! Q"
 		},
 		"recipe": ["${lat_n_let_a_glottal_stop}${arrow_left}"],
@@ -413,7 +407,6 @@
 	"lat_n_let_a_glottal_stop_reversed__stroke_short", {
 		"unicode": "02A2",
 		"groups": ["Latin", "IPA"],
-		"tags": ["<en-US>voiced epiglottal fricative", "<ru-RU>звонкий эпиглоттальный фрикатив"],
 		"alterations": { "modifier": "107B4" },
 		"options": { "useLetterLocale": "Origin", "layoutTitles": true, "altLayoutKey": "c*>!<+ Q" },
 		"symbol": { "letter": "${lat_n_let_a_glottal_stop_reversed}" }
@@ -441,47 +434,47 @@
 	"lat_n_let_alveolar_click", {
 		"unicode": "01C3",
 		"groups": ["Latin", "IPA"],
-		"options": { "useLetterLocale": true, "altLayoutKey": ">! 1" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": ">! 1" }
 	},
 	"lat_n_let_retroflex_click", {
 		"unicode": "1DF0A",
 		"groups": ["Latin", "IPA"],
 		"alterations": { "modifier": "107B9" },
-		"options": { "useLetterLocale": true, "altLayoutKey": ">!<! 1" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": ">!<! 1" }
 	},
 	"lat_n_let_dental_click", {
 		"unicode": "01C0",
 		"groups": ["Latin", "IPA"],
 		"alterations": { "modifier": "107B6" },
-		"options": { "useLetterLocale": true, "altLayoutKey": ">! 2" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": ">! 2" }
 	},
 	"lat_n_let_lateral_click", {
 		"unicode": "01C1",
 		"groups": ["Latin", "IPA"],
 		"alterations": { "modifier": "107B7" },
-		"options": { "useLetterLocale": true, "altLayoutKey": ">! 3" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": ">! 3" }
 	},
 	"lat_n_let_palatal_click", {
 		"unicode": "01C2",
 		"groups": ["Latin", "IPA"],
 		"alterations": { "modifier": "107B8" },
-		"options": { "useLetterLocale": true, "altLayoutKey": ">! 4" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": ">! 4" }
 	},
 	"lat_n_let_bilabial_click", {
 		"unicode": "0298",
 		"groups": ["Latin", "IPA"],
 		"alterations": { "modifier": "107B5" },
-		"options": { "useLetterLocale": true, "altLayoutKey": ">! 5" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": ">! 5" }
 	},
 	"lat_n_let_bilabial_percussive", {
 		"unicode": "02AC",
 		"groups": ["Latin", "IPA"],
-		"options": { "useLetterLocale": true, "altLayoutKey": ">! 6" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": ">! 6" }
 	},
 	"lat_n_let_bidental_percussive", {
 		"unicode": "02AD",
 		"groups": ["Latin", "IPA"],
-		"options": { "useLetterLocale": true, "altLayoutKey": "c*>!  6" }
+		"options": { "useLetterLocale": true, "layoutTitles": true, "altLayoutKey": "c*>!  6" }
 	},
 	"lat_[c,s]_let_d_insular", {
 		"unicode": ["A779", "A77A"],
@@ -629,7 +622,6 @@
 	},
 	"lat_[c,s]_let_g_script", {
 		"unicode": ["A7AC", "0261"],
-		"tags": [[], ["<en-US>voiced velar plosive", "<ru-RU>звонкий велярный взрывной согласный"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"alterations": [{ }, {  "modifier": "1DA2" }],
 		"options": {
@@ -683,7 +675,6 @@
 	"lat_[c,s]_let_a_alpha", {
 		"unicode": ["2C6D", "0251"],
 		"alterations": [{}, { "combining": "1DE7", "modifier": "1D45" }],
-		"tags": [[], ["<en-US>open back unrounded vowel", "<ru-RU>неогублённый гласный заднего ряда нижнего подъёма"]],
 		"groups": [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 		"options": {
 			"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"], "useLetterLocale": true
@@ -706,7 +697,6 @@
 	"lat_[c,s]_let_a_alpha_turned", {
 		"unicode": ["2C70", "0252"],
 		"alterations": [{}, { "modifier": "1D9B" }],
-		"tags": [[], ["<en-US>open back rounded vowel", "<ru-RU>огублённый гласный заднего ряда нижнего подъёма"]],
 		"groups": [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 		"options": {
 			"layoutTitles": ["", true], "altLayoutKey": ["", "c*>! $"], "useLetterLocale": true, "referenceLocale": "alpha$"
@@ -728,7 +718,6 @@
 	},
 	"lat_[c,s]_let_e_epsilon", {
 		"unicode": ["0190", "025B"],
-		"tags": [[], ["<en-US>open-mid front unrounded vowel", "<ru-RU>неогублённый гласный переднего ряда средне-нижнего подъёма"]],
 		"groups": [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 		"alterations": [{}, { "modifier": "1D4B" }],
 		"options": {
@@ -738,7 +727,6 @@
 	},
 	"lat_[c,s]_let_e_epsilon_reversed", {
 		"unicode": ["A7AB", "025C"],
-		"tags": [[], ["<en-US>open-mid central unrounded vowel", "<ru-RU>неогублённый гласный среднего ряда средне-нижнего подъёма"]],
 		"groups": [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 		"alterations": [{}, { "modifier": "1D9F" }],
 		"options": {
@@ -764,7 +752,6 @@
 	},
 	"lat_[s]_let_e_epsilon_closed_reversed", {
 		"unicode": ["025E"],
-		"tags": ["<en-US>open-mid central rounded vowel", "<ru-RU>огублённый гласный среднего ряда средне-нижнего подъёма"],
 		"groups": ["Latino-Hellenic", "IPA"],
 		"alterations": { "modifier": "1078F" },
 		"options": {
@@ -775,7 +762,6 @@
 	},
 	"lat_s_let_f_phi", {
 		"unicode": "0278",
-		"tags": ["<en-US>voiceless bilabial fricative", "<ru-RU>глухой губно-губной спирант"],
 		"groups": ["Latino-Hellenic", "IPA"],
 		"alterations": { "modifier": "1DB2" },
 		"options": {
@@ -787,7 +773,6 @@
 	"lat_[c,s]_let_g_gamma", {
 		"unicode": ["0194", "0263"],
 		"alterations": [{}, { "modifier": "02E0" }],
-		"tags": [[], ["<en-US>voiced velar fricative", "<ru-RU>звонкий велярный спирант"]],
 		"groups": [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 		"options": {
 			"layoutTitles": ["", true], "altLayoutKey": ["", ">! $"], "useLetterLocale": true, "fastKey": "<+>+ $?Secondary"
@@ -834,7 +819,6 @@
 	},
 	"lat_[c,s]_let_s_sigma", {
 		"unicode": ["01A9", "0283"],
-		"tags": [[], ["<en-US>voiceless postalveolar fricative", "<ru-RU>глухой постальвеолярный сибилянт"]],
 		"groups": [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 		"alterations": [{}, { "modifier": "1DB4" }],
 		"options": {
@@ -858,7 +842,6 @@
 	},
 	"lat_[c,s]_let_u_upsilon", {
 		"unicode": ["01B1", "028A"],
-		"tags": [[], ["<en-US>near-close near-back rounded vowel", "<ru-RU>ненапряжённый огублённый гласный заднего ряда верхнего подъёма"]],
 		"groups": [["Latino-Hellenic"], ["Latino-Hellenic", "IPA"]],
 		"alterations": [{}, { "modifier": "1DB7" }],
 		"options": {
@@ -868,7 +851,6 @@
 	},
 	"lat_[s]_let_u_upsilon__stroke_short", {
 		"unicode": ["1D7F"],
-		"tags": ["<en-US>near-close central rounded vowel (reduced)", "<ru-RU>ненапряжённый огублённый гласный среднего ряда верхнего подъёма (редуцированный)"],
 		"groups": ["Latino-Hellenic", "IPA"],
 		"alterations": {},
 		"options": {
@@ -899,7 +881,6 @@
 	},
 	"lat_[c,s]_let_a_turned", {
 		"unicode": ["2C6F", "0250"],
-		"tags": [[], ["<en-US>near-open central vowel", "<ru-RU>ненапряжённый неогублённый гласный среднего ряда нижнего подъёма"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"options": { "layoutTitles": ["", true], "altLayoutKey": ["", ">!<! $"] },
 		"alterations": [{}, { "modifier": "1D44" }],
@@ -914,7 +895,6 @@
 	},
 	"lat_[s]_let_e_reversed", {
 		"unicode": ["0258"],
-		"tags": ["<en-US>close-mid central unrounded vowel", "<ru-RU>неогублённый гласный среднего ряда средне-верхнего подъёма"],
 		"groups": ["Latin", "IPA"],
 		"options": { "layoutTitles": true, "altLayoutKey": "c*>!<! $" },
 		"alterations": { "modifier": "1078E" },
@@ -923,7 +903,6 @@
 	},
 	"lat_[c,s]_let_h_turned", {
 		"unicode": ["A78D", "0265"],
-		"tags": [[], ["<en-US>voiced labial–palatal approximant", "<ru-RU>лабиопалатальный аппроксимант"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"options": { "layoutTitles": ["", true], "altLayoutKey": ["", ">!<! /Y/"] },
 		"alterations": [{}, { "modifier": "1DA3" }],
@@ -944,7 +923,6 @@
 	},
 	"lat_[c,s]_let_m_turned", {
 		"unicode": ["019C", "026F"],
-		"tags": [[], ["<en-US>close back unrounded vowel", "<ru-RU>неогублённый гласный заднего ряда верхнего подъёма"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"options": { "layoutTitles": ["", true], "altLayoutKey": ["", ">!<! /U/"] },
 		"alterations": [{}, { "modifier": "1D5A" }],
@@ -953,7 +931,6 @@
 	},
 	"lat_[s]_let_m_turned__long_leg", {
 		"unicode": ["0270"],
-		"tags": ["<en-US>voiced velar approximant", "<ru-RU>велярный аппроксимант"],
 		"groups": ["Latin", "IPA"],
 		"options": { "layoutTitles": true, "altLayoutKey": ">!<! /H/" },
 		"alterations": { "modifier": "1DAD" },
@@ -983,7 +960,6 @@
 	},
 	"lat_[k,s]_let_r_turned", {
 		"unicode": ["1D1A", "0279"],
-		"tags": [[], ["<en-US>voiced alveolar approximant", "<ru-RU>альвеолярный аппроксимант"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"options": { "layoutTitles": ["", true], "altLayoutKey": ["", ">! $"] },
 		"alterations": [{}, { "modifier": "02B4" }],
@@ -997,7 +973,6 @@
 	},
 	"lat_[c,s]_let_v_turned", {
 		"unicode": ["0245", "028C"],
-		"tags": [[], ["<en-US>open-mid back unrounded vowel", "<ru-RU>неогублённый гласный заднего ряда средне-нижнего подъёма"]],
 		"groups": [[], ["Latin", "IPA"]],
 		"options": { "layoutTitles": ["", true], "altLayoutKey": ["", ">! $"] },
 		"alterations": [{}, { "modifier": "1DBA" }],
@@ -1006,7 +981,6 @@
 	},
 	"lat_[s]_let_w_turned", {
 		"unicode": ["028D"],
-		"tags": ["<en-US>voiceless labial–velar fricative", "<ru-RU>глухой лабиовелярный аппроксимант"],
 		"groups": ["Latin", "IPA"],
 		"options": { "layoutTitles": true, "altLayoutKey": ">! $" },
 		"alterations": { "modifier": "AB69" },
@@ -1015,7 +989,6 @@
 	},
 	"lat_[s]_let_y_turned", {
 		"unicode": ["028E"],
-		"tags": ["<en-US>voiced palatal lateral approximant", "<ru-RU>боковой палатальный сонант"],
 		"groups": ["Latin", "IPA"],
 		"options": { "layoutTitles": true, "altLayoutKey": ">!<! /L/" },
 		"alterations": { "modifier": "107A0" },
@@ -1064,7 +1037,6 @@
 	},
 	"lat_[c,s]_let_a__diaeresis", {
 		"unicode": ["00C4", "00E4"],
-		"tags": [[], ["<en-US>open central unrounded vowel", "<ru-RU>открытый средний неокруглённый гласный"]],
 		"groups": [[], ["Latin Accented", "IPA"]],
 		"options": { "fastKey": "<+ $?Secondary", "layoutTitles": ["", true], "altLayoutKey": ["", ">!<+ $"] },
 		"alterations": [{}, { "combining": "1DF2" }]
@@ -1248,7 +1220,6 @@
 	},
 	"lat_[s]_let_c__curl", {
 		"unicode": ["0255"],
-		"tags": ["<en-US>voiceless alveolo-palatal fricative", "<ru-RU>глухой альвеоло-палатальный сибилянт"],
 		"groups": ["Latin Accented", "IPA"],
 		"alterations": { "modifier": "1D9D" },
 		"options": { "layoutTitles": true, "altLayoutKey": ">! $" },
@@ -1342,7 +1313,6 @@
 	},
 	"lat_[c,s]_let_d_eth", {
 		"unicode": ["00D0", "00F0"],
-		"tags": [[], ["<en-US>voiced dental fricative", "<ru-RU>звонкий зубной щелевой согласный"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"alterations": [{ "smallCapital": "1D06" }, { "combining": "1DD9", "modifier": "1D9E" }],
 		"options": {
@@ -1589,7 +1559,6 @@
 	},
 	"lat_[c,s]_let_h__stroke_short", {
 		"unicode": ["0126", "0127"],
-		"tags": [[], ["<en-US>voiceless pharyngeal fricative", "<ru-RU>глухой фарингальный фрикатив"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"alterations": [{  }, {  "modifier": "10795" }],
 		"options": {
@@ -1669,7 +1638,6 @@
 	},
 	"lat_[c,s]_let_i__stroke_short", {
 		"unicode": ["0197", "0268"],
-		"tags": [[], ["<en-US>close central unrounded vowel", "<ru-RU>неогублённый гласный среднего ряда верхнего подъёма"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"alterations": [{ "smallCapital": "1D7B", "smallCapitalModifier": "1DA7" }, { "modifier": "1DA4" }],
 		"options": { "altLayoutKey": ["", ">! $"], "layoutTitles": ["", true] }
@@ -1705,7 +1673,6 @@
 	},
 	"lat_[c,s]_let_j__crossed_tail", {
 		"unicode": ["A7B2", "029D"],
-		"tags": [[], ["<en-US>voiced palatal fricative", "<ru-RU>звонкий палатальный спирант"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"alterations": [{}, { "modifier": "1DA8" }],
 		"options": { "altLayoutKey": ["", ">! $"], "layoutTitles": ["", true] },
@@ -1717,7 +1684,6 @@
 	},
 	"lat_[s]_let_j_dotless__stroke_short", {
 		"unicode": ["025F"],
-		"tags": [["<en-US>voiced palatal plosive", "<ru-RU>звонкий палатальный взрывной согласный"]],
 		"groups": [["Latin Accented", "IPA"]],
 		"alterations": [{ "modifier": "1DA1" }],
 		"options": { "altLayoutKey": [">!<! j"], "layoutTitles": [true] },
@@ -1728,7 +1694,6 @@
 	},
 	"lat_[s]_let_j_dotless__stroke_short__common_hook", {
 		"unicode": ["0284"],
-		"tags": [["<en-US>voiced palatal implosive", "<ru-RU>звонкий палатальный имплозивный согласный"]],
 		"groups": [["Latin Accented", "IPA"]],
 		"alterations": [{ "modifier": "10798" }],
 		"options": { "altLayoutKey": ["c*>!<! j"], "layoutTitles": [true] },
@@ -1803,7 +1768,6 @@
 	},
 	"lat_[c,s]_let_l__belt", {
 		"unicode": ["A7AD", "026C"],
-		"tags": [[], ["<en-US>voiceless alveolar lateral fricative", "<ru-RU>глухой альвеолярный латеральный спирант"]],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"alterations": [{ "smallCapitalModifier": "1079C" }, { "modifier": "1079B" }],
 		"options": { "altLayoutKey": ["", ">! $"], "layoutTitles": ["", true] },
@@ -2082,7 +2046,6 @@
 	},
 	"lat_[c,s]_let_o__solidus_long", {
 		"unicode": ["00D8", "00F8"],
-		"tags": [[], ["<en-US>close-mid front rounded vowel", "<ru-RU>огублённый гласный переднего ряда средне-верхнего подъёма"]],
 		"alterations": [{}, { "modifier": "107A2", "blackletter": "AB3E" }],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"options": { "fastKey": "$?Secondary", "altLayoutKey": ["", ">!<! $"], "layoutTitles": ["", true] }
@@ -2109,7 +2072,6 @@
 	},
 	"lat_[c,s]_let_o_barred", {
 		"unicode": ["019F", "0275"],
-		"tags": [[], ["<en-US>close-mid central rounded vowel", "<ru-RU>огублённый гласный среднего ряда средне-верхнего подъёма"]],
 		"alterations": [{}, { "modifier": "1DB1" }],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"options": { "altLayoutKey": ["", "c*>!<! $"], "layoutTitles": ["", true] },
@@ -2526,7 +2488,6 @@
 	},
 	"lat_[c,s]_let_u__stroke_long", {
 		"unicode": ["0244", "0289"],
-		"tags": [[], ["<en-US>close central rounded vowel", "<ru-RU>огублённый гласный среднего ряда верхнего подъёма"]],
 		"alterations": [{ "smallCapital": "1D7E" }, { "modifier": "1DB6" }],
 		"groups": [["Latin Accented"], ["Latin Accented", "IPA"]],
 		"options": { "altLayoutKey": ["", ">!<!<+ $"], "layoutTitles": ["", true] }
@@ -2798,7 +2759,6 @@
 		"unicode": ["00C6", "00E6"],
 		"alterations": [{ "modifier": "1D2D", "smallCapital": "1D01" }, { "combining": "1DD4", "modifier": "10783" }],
 		"groups": [[], ["Latin Ligatures", "IPA"]],
-		"tags": [[], ["<en-US>near-open front unrounded vowel", "<ru-RU>ненапряжённый неогублённый гласный переднего ряда нижнего подъёма"]],
 		"options": { "altLayoutKey": ["", ">!<!<+ /A/"], "layoutTitles": [false, true] },
 		"recipe": ["$"]
 	},
@@ -2862,7 +2822,6 @@
 	"lat_[c,s]_lig_oe", {
 		"unicode": ["0152", "0153"],
 		"groups": [[], ["Latin Ligatures", "IPA"]],
-		"tags": [[], ["<en-US>open-mid front rounded vowel", "<ru-RU>огублённый гласный переднего ряда средне-нижнего подъёма"]],
 		"options": { "altLayoutKey": ["", ">!<!<+ /O/"], "layoutTitles": [false, true] },
 		"alterations": [{ "smallCapital": "0276", "smallCapitalModifier": "107A3" }, { "modifier": "A7F9" }]
 	},
@@ -2964,7 +2923,6 @@
 	},
 	"lat_[s]_dig_feng", {
 		"unicode": ["02A9"],
-		"tags": ["<en-US>voiceless velopharyngeal fricative", "<ru-RU>велофарингальный фрикативный согласный"],
 		"groups": [["Latin Digraphs", "IPA"]],
 		"alterations": { "modifier": "10790" },
 		"options": {
@@ -2975,7 +2933,6 @@
 	},
 	"lat_[s]_dig_feng__trill", {
 		"unicode": ["1DF00"],
-		"tags": ["<en-US>voiceless velopharyngeal trill", "<ru-RU>велофарингальный трелевой согласный"],
 		"groups": [["Latin Digraphs", "IPA"]],
 		"options": { "useLetterLocale": "Origin", "layoutTitles": true },
 		"recipe": ["fng${arrow_up}", "f${lat_s_let_n_eng}${arrow_up}", "${lat_s_dig_feng}${arrow_up}"]
@@ -2992,7 +2949,6 @@
 	},
 	"lat_[s]_dig_l_ezh", {
 		"unicode": ["026E"],
-		"tags": ["<en-US>voiced alveolar lateral fricative", "<ru-RU>звонкий альвеолярный латеральный фрикативный согласный"],
 		"groups": [["Latin Digraphs", "IPA"]],
 		"alterations": { "modifier": "1079E" },
 		"options": { "layoutTitles": true },
@@ -3000,7 +2956,6 @@
 	},
 	"lat_[s]_dig_l_ezh__retroflex_hook", {
 		"unicode": ["1DF05"],
-		"tags": ["<en-US>voiced retroflex lateral fricative", "<ru-RU>звонкий ретрофлексный латеральный фрикативный согласный"],
 		"groups": [["Latin Digraphs", "IPA"]],
 		"alterations": { "modifier": "1079F" },
 		"options": { "layoutTitles": true },

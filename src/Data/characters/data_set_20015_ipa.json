@@ -1,0 +1,22 @@
+[
+	"ipa_n_let_tone_bar_[extra_high,high,mid,low,extra_low]", {
+		"unicode": ["02E5", "02E6", "02E7", "02E8", "02E9"],
+		"options": { "altLayoutKey": [">! 7", ">! 8", ">! 9", ">! 0", ">! -"], "layoutTitles": true, "layoutTitlesAsMain": true },
+		"recipe": [["tn eh"], ["tn h"], ["tn m"], ["tn l"], ["tn el"]]
+	},
+	"ipa_n_let_tone_bar_[extra_high,high,mid,low,extra_low]_left_stem", {
+		"unicode": ["A712", "A713", "A714", "A715", "A716"],
+		"options": { "altLayoutKey": ["c*>! 7", "c*>! 8", "c*>! 9", "c*>! 0", "c*>! -"], "layoutTitles": true, "layoutTitlesAsMain": true },
+		"recipe": [["tnl eh"], ["tnl h"], ["tnl m"], ["tnl l"], ["tnl el"]]
+	},
+	"ipa_n_let_tone_bar_[extra_high,high,mid,low,extra_low]_dotted", {
+		"unicode": ["A708", "A709", "A70A", "A70B", "A70C"],
+		"options": { "altLayoutKey": [">!<! 7", ">!<! 8", ">!<! 9", ">!<! 0", ">!<! -"], "layoutTitles": true, "layoutTitlesAsMain": true },
+		"recipe": [["tnd eh"], ["tnd h"], ["tnd m"], ["tnd l"], ["tnd el"]]
+	},
+	"ipa_n_let_tone_bar_[extra_high,high,mid,low,extra_low]_dotted_left_stem", {
+		"unicode": ["A70D", "A70E", "A70F", "A710", "A711"],
+		"options": { "altLayoutKey": ["c*>!<! 7", "c*>!<! 8", "c*>!<! 9", "c*>!<! 0", "c*>!<! -"], "layoutTitles": true, "layoutTitlesAsMain": true },
+		"recipe": [["tndl eh"], ["tndl h"], ["tndl m"], ["tndl l"], ["tndl el"]]
+	}
+]

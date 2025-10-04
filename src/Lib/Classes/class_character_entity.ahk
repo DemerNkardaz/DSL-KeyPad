@@ -32,6 +32,7 @@ Class ChrEntry {
 					"secondName", False,
 					"useLetterLocale", False,
 					"layoutTitles", False,
+					"layoutTitlesAsMain", False,
 					"referenceLocale", "",
 					"useSelfPostfixesOnReferenceLocale", True,
 					"localeCombineAnd", False,

@@ -50,6 +50,28 @@
 				"s_let_t_theta": { "layout_locale": "Voiceless dental fricative" },
 				"k_lig_oe": { "layout_locale": "Open front rounded vowel" }
 			},
+			"ipa": {
+				"n_let_tone_bar_extra_high": { "layout_locale": "Extra-high tone bar" },
+				"n_let_tone_bar_high": { "layout_locale": "High tone bar" },
+				"n_let_tone_bar_mid": { "layout_locale": "Mid tone bar" },
+				"n_let_tone_bar_low": { "layout_locale": "Low tone bar" },
+				"n_let_tone_bar_extra_low": { "layout_locale": "Extra-low tone bar" },
+				"n_let_tone_bar_extra_high_left_stem": { "layout_locale": "Extra-high left-stem tone bar" },
+				"n_let_tone_bar_high_left_stem": { "layout_locale": "High left-stem tone bar" },
+				"n_let_tone_bar_mid_left_stem": { "layout_locale": "Mid left-stem tone bar" },
+				"n_let_tone_bar_low_left_stem": { "layout_locale": "Low left-stem tone bar" },
+				"n_let_tone_bar_extra_low_left_stem": { "layout_locale": "Extra-low left-stem tone bar" },
+				"n_let_tone_bar_extra_high_dotted": { "layout_locale": "Extra-high dotted tone bar" },
+				"n_let_tone_bar_high_dotted": { "layout_locale": "High dotted tone bar" },
+				"n_let_tone_bar_mid_dotted": { "layout_locale": "Mid dotted tone bar" },
+				"n_let_tone_bar_low_dotted": { "layout_locale": "Low dotted tone bar" },
+				"n_let_tone_bar_extra_low_dotted": { "layout_locale": "Extra-low dotted tone bar" },
+				"n_let_tone_bar_extra_high_dotted_left_stem": { "layout_locale": "Extra-high left-stem dotted tone bar" },
+				"n_let_tone_bar_high_dotted_left_stem": { "layout_locale": "High left-stem dotted tone bar" },
+				"n_let_tone_bar_mid_dotted_left_stem": { "layout_locale": "Mid left-stem dotted tone bar" },
+				"n_let_tone_bar_low_dotted_left_stem": { "layout_locale": "Low left-stem dotted tone bar" },
+				"n_let_tone_bar_extra_low_dotted_left_stem": { "layout_locale": "Extra-low left-stem dotted tone bar" }
+			},
 			"latin": {
 				"s_let_a_alpha": { "layout_locale": "Open back unrounded vowel" },
 				"s_let_b_beta": { "layout_locale": "Voiced bilabial fricative" },
@@ -97,16 +119,16 @@
 				"s_dig_l_ezh__retroflex_hook": { "layout_locale": "Voiced retroflex lateral fricative" },
 				"n_let_a_glottal_stop__stroke_short": { "layout_locale": "Epiglottal plosive" },
 				"n_let_a_glottal_stop_reversed__stroke_short": { "layout_locale": "Voiced epiglottal fricative" },
-				"n_let_a_glottal_stop": { "letter_locale": "Glottal stop (IPA)" },
-				"n_let_a_glottal_stop_reversed": { "letter_locale": "Voiced pharyngeal fricative (IPA)" },
-				"n_let_alveolar_click": { "letter_locale": "Alveolar click" },
-				"n_let_dental_click": { "letter_locale": "Dental click" },
-				"n_let_lateral_click": { "letter_locale": "Lateral click" },
-				"n_let_retroflex_click": { "letter_locale": "Retroflex click" },
-				"n_let_palatal_click": { "letter_locale": "Palatal click" },
-				"n_let_bilabial_click": { "letter_locale": "Bilabial click" },
-				"n_let_bilabial_percussive": { "letter_locale": "Bilabial percussive" },
-				"n_let_bidental_percussive": { "letter_locale": "Bidental percussive" }
+				"n_let_a_glottal_stop": { "letter_locale": "Glottal stop (IPA)", "layout_locale": "Glottal stop" },
+				"n_let_a_glottal_stop_reversed": { "letter_locale": "Voiced pharyngeal fricative (IPA)", "layout_locale": "Voiced pharyngeal fricative" },
+				"n_let_alveolar_click": { "letter_locale": "Alveolar click", "layout_locale": "Alveolar click" },
+				"n_let_dental_click": { "letter_locale": "Dental click", "layout_locale": "Dental click" },
+				"n_let_lateral_click": { "letter_locale": "Lateral click", "layout_locale": "Lateral click" },
+				"n_let_retroflex_click": { "letter_locale": "Retroflex click", "layout_locale": "Retroflex click" },
+				"n_let_palatal_click": { "letter_locale": "Palatal click", "layout_locale": "Palatal click" },
+				"n_let_bilabial_click": { "letter_locale": "Bilabial click", "layout_locale": "Bilabial click" },
+				"n_let_bilabial_percussive": { "letter_locale": "Bilabial percussive", "layout_locale": "Bilabial percussive" },
+				"n_let_bidental_percussive": { "letter_locale": "Bidental percussive", "layout_locale": "Bidental percussive"}
 			}
 		}
 	}

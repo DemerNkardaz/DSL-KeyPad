@@ -50,6 +50,28 @@
 				"s_let_t_theta": { "layout_locale": "Глухой зубной щелевой согласный" },
 				"k_lig_oe": { "layout_locale": "Огублённый гласный переднего ряда нижнего подъёма" }
 			},
+			"ipa": {
+				"n_let_tone_bar_extra_high": { "layout_locale": "Сверхвысокий тон" },
+				"n_let_tone_bar_high": { "layout_locale": "Высокий тон" },
+				"n_let_tone_bar_mid": { "layout_locale": "Средний тон" },
+				"n_let_tone_bar_low": { "layout_locale": "Низкий тон" },
+				"n_let_tone_bar_extra_low": { "layout_locale": "Низкий тон" },
+				"n_let_tone_bar_extra_high_left_stem": { "layout_locale": "Сверхвысокий тон со стержнем слева" },
+				"n_let_tone_bar_high_left_stem": { "layout_locale": "Высокий тон со стержнем слева" },
+				"n_let_tone_bar_mid_left_stem": { "layout_locale": "Средний тон со стержнем слева" },
+				"n_let_tone_bar_low_left_stem": { "layout_locale": "Низкий тон со стержнем слева" },
+				"n_let_tone_bar_extra_low_left_stem": { "layout_locale": "Низкий тон со стержнем слева" },
+				"n_let_tone_bar_extra_high_dotted": { "layout_locale": "Сверхвысокий пунктирный тон" },
+				"n_let_tone_bar_high_dotted": { "layout_locale": "Высокий пунктирный тон" },
+				"n_let_tone_bar_mid_dotted": { "layout_locale": "Средний пунктирный тон" },
+				"n_let_tone_bar_low_dotted": { "layout_locale": "Низкий пунктирный тон" },
+				"n_let_tone_bar_extra_low_dotted": { "layout_locale": "Низкий пунктирный тон" },
+				"n_let_tone_bar_extra_high_dotted_left_stem": { "layout_locale": "Сверхвысокий пунктирный тон со стержнем слева" },
+				"n_let_tone_bar_high_dotted_left_stem": { "layout_locale": "Высокий пунктирный тон со стержнем слева" },
+				"n_let_tone_bar_mid_dotted_left_stem": { "layout_locale": "Средний пунктирный тон со стержнем слева" },
+				"n_let_tone_bar_low_dotted_left_stem": { "layout_locale": "Низкий пунктирный тон со стержнем слева" },
+				"n_let_tone_bar_extra_low_dotted_left_stem": { "layout_locale": "Низкий пунктирный тон со стержнем слева" }
+			},
 			"latin": {
 				"s_let_a_alpha": { "layout_locale": "Неогублённый гласный заднего ряда нижнего подъёма" },
 				"s_let_b_beta": { "layout_locale": "Звонкий губно-губной спирант" },
@@ -100,16 +122,16 @@
 				"s_dig_l_ezh__retroflex_hook": { "layout_locale": "Звонкий ретрофлексный латеральный фрикативный согласный" },
 				"n_let_a_glottal_stop__stroke_short": { "layout_locale": "Эпиглоттальный взрывной согласный" },
 				"n_let_a_glottal_stop_reversed__stroke_short": { "layout_locale": "Звонкий эпиглоттальный фрикатив" },
-				"n_let_a_glottal_stop": { "letter_locale": "Гортанная смычка (МФА)" },
-				"n_let_a_glottal_stop_reversed": { "letter_locale": "Звонкий фарингальный фрикатив (МФА)" },
-				"n_let_alveolar_click": { "letter_locale": "Альвеолярный щелчок" },
-				"n_let_dental_click": { "letter_locale": "Зубный щелчок" },
-				"n_let_lateral_click": { "letter_locale": "Боковой щелчок" },
-				"n_let_retroflex_click": { "letter_locale": "Ретрофлексный щелчок" },
-				"n_let_palatal_click": { "letter_locale": "Палатальный щелчок" },
-				"n_let_bilabial_click": { "letter_locale": "Губно-губной щелчок" },
-				"n_let_bilabial_percussive": { "letter_locale": "Губно-губный ударный звук" },
-				"n_let_bidental_percussive": { "letter_locale": "Зубно-зубной ударный звук" }
+				"n_let_a_glottal_stop": { "letter_locale": "Гортанная смычка (МФА)", "layout_locale": "Гортанная смычка" },
+				"n_let_a_glottal_stop_reversed": { "letter_locale": "Звонкий фарингальный фрикатив (МФА)", "layout_locale": "Звонкий фарингальный фрикатив" },
+				"n_let_alveolar_click": { "letter_locale": "Альвеолярный щелчок", "layout_locale": "Альвеолярный щелчок" },
+				"n_let_dental_click": { "letter_locale": "Зубный щелчок", "layout_locale": "Зубной щелчок" },
+				"n_let_lateral_click": { "letter_locale": "Боковой щелчок", "layout_locale": "Боковой щелчок" },
+				"n_let_retroflex_click": { "letter_locale": "Ретрофлексный щелчок", "layout_locale": "Ретрофлексный щелчок" },
+				"n_let_palatal_click": { "letter_locale": "Палатальный щелчок", "layout_locale": "Палатальный щелчок" },
+				"n_let_bilabial_click": { "letter_locale": "Губно-губной щелчок", "layout_locale": "Губно-губной щелчок" },
+				"n_let_bilabial_percussive": { "letter_locale": "Губно-губный ударный звук", "layout_locale": "Губно-губный ударный звук" },
+				"n_let_bidental_percussive": { "letter_locale": "Зубно-зубной ударный звук", "layout_locale": "Зубно-зубной ударный звук"}
 			}
 		}
 	}
