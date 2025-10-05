@@ -8,6 +8,11 @@
 
 - Additions:
 
+  - Addded new Hellenic characters:
+    - [ ϶ ]
+  - Addded new miscellaneous characters:
+    - [ ⧼⧽ ]
+
 - Changes:
 
 - Fixes:
@@ -197,6 +202,11 @@
 ### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.9.3)
 
 - Добавления:
+
+  - Добавлены новые символы эллиницы:
+    - [ ϶ ]
+  - Добавлены новые прочие символы:
+    - [ ⧼⧽ ]
 
 - Изменения:
 

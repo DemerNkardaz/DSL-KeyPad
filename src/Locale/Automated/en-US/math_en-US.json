@@ -136,6 +136,8 @@
 		"left_brace_lower_hook": "Left brace lower hook",
 		"left_chevron": "Left chevron",
 		"right_chevron": "Right chevron",
+		"left_chevron_curved": "Left curved chevron",
+		"right_chevron_curved": "Right curved chevron",
 		"left_chevron_with_dot": "Left chevron with dot",
 		"right_chevron_with_dot": "Right chevron with dot",
 		"left_chevron_double": "Double left chevron",

@@ -2030,17 +2030,23 @@
 		"groups": ["Brackets", "Smelting Special"],
 		"recipe": ["${right_brace}${arrow_rightdown}"]
 	},
-	"left_chevron", {
-		"unicode": "27E8",
-		"tags": ["mathematical left angle bracket", "математическая левая угловая скобка"],
+	"[left,right]_chevron", {
+		"unicode": ["27E8", "27E9"],
+		"tags": [
+			["mathematical left angle bracket", "математическая левая угловая скобка"],
+			["mathematical right angle bracket", "математическая правая угловая скобка"]
+		],
 		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": "9" }
+		"options": { "fastKey": ["9", "0"] }
 	},
-	"right_chevron", {
-		"unicode": "27E9",
-		"tags": ["mathematical right angle bracket", "математическая правая угловая скобка"],
+	"[left,right]_chevron_curved", {
+		"unicode": ["29FC", "29FD"],
+		"tags": [
+			["mathematical left curved angle bracket", "математическая левая изогнутая угловая скобка"],
+			["mathematical right curved angle bracket", "математическая правая изогнутая угловая скобка"]
+		],
 		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": "0" }
+		"options": { "fastKey": ["<1 9", "<1 0"] }
 	},
 	"left_chevron_with_dot", {
 		"unicode": "2991",

@@ -782,6 +782,12 @@
 		"options": { "referenceLocale": ":hel_s_let_e_epsilon", "altLayoutKey": ">+ $" },
 		"symbol": { "beforeLetter": "lunate::2" }
 	},
+	"hel_[s]_sym_e_epsilon_lunate_reversed", {
+		"unicode": ["03F6"],
+		"options": { "referenceLocale": ":hel_s_let_e_epsilon", "altLayoutKey": "<+>+ $" },
+		"recipe": ["${hel_s_sym_e_epsilon_lunate}${arrow_right_circle}"],
+		"symbol": { "beforeLetter": "reversed::2,lunate::2" }
+	},
 	"hel_[c,s]_lig_st_stigma", {
 		"unicode": ["03DA", "03DB"],
 		"options": { "altLayoutKey": "<+ $" },

@@ -657,7 +657,7 @@
 			"layoutTitles": ["", true], "altLayoutKey": ["", "c*>! $"], "useLetterLocale": true, "referenceLocale": "epsilon$"
 		},
 		"recipe": ["$ps${arrow_right_circle}", "${lat_[c,s]_let_@_epsilon}${arrow_right_circle}"],
-		"symbol": { "beforeLetter": "reversed" }
+		"symbol": { "beforeLetter": "reversed::2" }
 	},
 	"lat_[s]_let_e_epsilon_reversed__rhotic_hook", {
 		"unicode": ["025D"],
@@ -665,14 +665,14 @@
 		"options": {
 			"useLetterLocale": true, "referenceLocale": "epsilon$"
 		},
-		"symbol": { "beforeLetter": "reversed", "letter": "${lat_[s]_let_e_epsilon_reversed}" }
+		"symbol": { "beforeLetter": "reversed::2", "letter": "${lat_[s]_let_e_epsilon_reversed}" }
 	},
 	"lat_[s]_let_e_epsilon_closed", {
 		"unicode": ["029A"],
 		"groups": ["Latino-Hellenic"],
 		"options": { "useLetterLocale": true, "referenceLocale": "epsilon$" },
 		"recipe": ["$ps-", "${lat_[c,s]_let_@_epsilon}-"],
-		"symbol": { "beforeLetter": "closed" }
+		"symbol": { "beforeLetter": "closed::2" }
 	},
 	"lat_[s]_let_e_epsilon_closed_reversed", {
 		"unicode": ["025E"],
@@ -682,7 +682,7 @@
 			"layoutTitles": true, "altLayoutKey": ">!<+ $", "useLetterLocale": true, "referenceLocale": "epsilon$"
 		},
 		"recipe": ["$ps-${arrow_right_circle}", "${lat_[c,s]_let_@_epsilon_closed}${arrow_right_circle}"],
-		"symbol": { "beforeLetter": "closed,reversed" }
+		"symbol": { "beforeLetter": "reversed::2,closed::2" }
 	},
 	"lat_s_let_f_phi", {
 		"unicode": "0278",

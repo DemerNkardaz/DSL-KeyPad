@@ -42,7 +42,7 @@
 		"unicode": ["268B", "268A"],
 		"recipe": [["y yi", "t md"], ["y ya", "t mt"]],
 		"options": {
-			"fastKey": ["<! 9?Secondary", "c*<! 9?Secondary"],
+			"fastKey": ["<!<+ 9?Secondary", "c*<!<+ 9?Secondary"],
 			"altLayoutKey": ["=", "-"],
 			"useHiddenTags": true,
 			"hiddenTagsLanguage": "en-US",
@@ -533,7 +533,7 @@
 		"recipe": [["t mn"]],
 		"options": {
 			"altLayoutKey": ["0"],
-			"fastKey": ["<! 0?Secondary"],
+			"fastKey": ["<!<+ 0?Secondary"],
 			"altTitleUseLineBreak": true,
 			"useHiddenTags": true,
 			"hiddenTagsLanguage": "en-US",

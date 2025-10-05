@@ -66,6 +66,7 @@
 				},
 				"Ε": {
 					">+": "hel_s_sym_e_epsilon_lunate",
+					"<+>+": "hel_s_sym_e_epsilon_lunate_reversed",
 					"<!": "hel_[c,s]_let_e_epsilon__tonos",
 					"<^>!": "hel_[c,s]_let_e_epsilon__dasia",
 					"<^>!<+": "hel_[c,s]_let_e_epsilon__psili",
@@ -3114,15 +3115,17 @@
 			},
 			"9": {
 				"<^>!": "left_chevron",
+				"<^>!<!": "left_chevron_curved",
 				"<!": "left_bracket",
 				"<!<+": "left_brace",
-				"<^>!<!:Caps": "yijing_n_sym_monogram_[2,1]_[yang,yin]"
+				"<^>!<!<+:Caps": "yijing_n_sym_monogram_[2,1]_[yang,yin]"
 			},
 			"0": {
 				"<^>!": "right_chevron",
+				"<^>!<!": "right_chevron_curved",
 				"<!": "right_bracket",
 				"<!<+": "right_brace",
-				"<^>!<!": "taixuanjing_n_sym_monogram_3_ren"
+				"<^>!<!<+": "taixuanjing_n_sym_monogram_3_ren"
 			},
 			"Equals": {
 				"<^>!": ["noequals"],
