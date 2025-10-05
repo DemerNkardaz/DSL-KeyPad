@@ -1902,28 +1902,28 @@
 				},
 				"7": {
 					"+": "lat_s_lig_et",
-					"<^>!": "ipa_n_let_tone_bar_extra_high[_left_stem,]",
+					"<!": "ipa_n_let_tone_bar_extra_high[_left_stem,]",
 					"<^>!<!": "ipa_n_let_tone_bar_extra_high_dotted[_left_stem,]"
 				},
 				"8": {
 					"+": "asterisk",
-					"<^>!": "ipa_n_let_tone_bar_high[_left_stem,]",
+					"<!": "ipa_n_let_tone_bar_high[_left_stem,]",
 					"<^>!<!": "ipa_n_let_tone_bar_high_dotted[_left_stem,]"
 				},
 				"9": {
 					"+": "left_parenthesis",
-					"<^>!": "ipa_n_let_tone_bar_mid[_left_stem,]",
+					"<!": "ipa_n_let_tone_bar_mid[_left_stem,]",
 					"<^>!<!": "ipa_n_let_tone_bar_mid_dotted[_left_stem,]"
 				},
 				"0": {
 					"+": "right_parenthesis",
-					"<^>!": "ipa_n_let_tone_bar_low[_left_stem,]",
+					"<!": "ipa_n_let_tone_bar_low[_left_stem,]",
 					"<^>!<!": "ipa_n_let_tone_bar_low_dotted[_left_stem,]"
 				},
 				"HyphenMinus": {
 					"+": "underscore",
 					"<^<!": "minus_below",
-					"<^>!": "ipa_n_let_tone_bar_extra_low[_left_stem,]",
+					"<!": "ipa_n_let_tone_bar_extra_low[_left_stem,]",
 					"<^>!<!": "ipa_n_let_tone_bar_extra_low_dotted[_left_stem,]"
 				},
 				"Equals": {
@@ -3782,6 +3782,9 @@
 			"V": {
 				"<^<!": "line_vertical_below",
 				"<^<!<+": "line_vertical_double_below"
+			},
+			"Slash": {
+				"<^<!<+": "solidus_long_double"
 			}
 		}
 	},

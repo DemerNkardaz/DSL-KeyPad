@@ -11,9 +11,11 @@
   - Addded new Hellenic characters:
     - [ ϶ ]
   - Addded new miscellaneous characters:
-    - [ ⧼⧽ ]
+    - [ ⧼⧽ ⫽ ⫻ ◌⃫ ]
 
 - Changes:
+
+  - Binds for IPA tone bars moved from right Alt to left (to keep ⟨⟩ on the original right Alt + 9/0 combination).
 
 - Fixes:
 
@@ -206,9 +208,11 @@
   - Добавлены новые символы эллиницы:
     - [ ϶ ]
   - Добавлены новые прочие символы:
-    - [ ⧼⧽ ]
+    - [ ⧼⧽ ⫽ ⫻ ◌⃫ ]
 
 - Изменения:
+
+  - Привязки для символов тона МФА перемещены с правого Alt на левый (чтобы оставить ⟨⟩ на прежней комбинации правый Alt + 9/0).
 
 - Исправления:
 

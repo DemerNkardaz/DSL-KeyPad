@@ -185,6 +185,8 @@
 		"quote": "Quote",
 		"solidus": "Solidus",
 		"reverse_solidus": "Reverse Solidus",
+		"solidus_double": "Double Solidus Operator",
+		"solidus_tripple": "Tripple Solidus Binary Relation",
 		"vertical_line": "Vertical Line",
 		"broken_bar": "Broken Bar",
 		"right_vertical_bar_with_quill": "Right Vertical Bar with Quill",

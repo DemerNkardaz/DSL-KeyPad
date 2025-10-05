@@ -476,6 +476,14 @@
 		"options": { "fastKey": "<+ / ." },
 		"symbol": { "category": "Diacritic Mark" }
 	},
+	"solidus_long_double", {
+		"unicode": "20EB",
+		"tags": ["long double solidus", "длинная двойная косая черта"],
+		"groups": ["SK Diacritics Primary"],
+		"options": { "fastKey": "<+ / ." },
+		"recipe": ["${solidus_long×2}"],
+		"symbol": { "category": "Diacritic Mark", "font": "Segoe UI Symbol" }
+	},
 	"tilde_above", {
 		"unicode": "0303",
 		"alterations": {

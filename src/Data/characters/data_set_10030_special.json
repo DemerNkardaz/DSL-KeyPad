@@ -804,6 +804,15 @@
 		},
 		"options": { "noCalc": true, "send": "Text" }
 	},
+	"solidus_[double,tripple]", {
+		"unicode": ["2AFD", "2AFB"],
+		"tags": [
+			["double solidus operator", "двойная косая черта (оператор)"],
+			["tripple solidus binary relation", "тройная косая черта (двоичное отношение)"]
+		],
+		"groups": ["Smelting Special", "Special Fast Secondary"],
+		"recipe": [["//"], ["///", "${solidus_double}/"]]
+	},
 	"vertical_line", {
 		"unicode": "007C",
 		"alterations": {
@@ -1899,17 +1908,15 @@
 		"groups": ["Brackets", "Smelting Special"],
 		"recipe": [["[${stroke_short×2}"], ["]${stroke_short×2}"]]
 	},
-	"left_white_bracket", {
-		"unicode": "27E6",
-		"tags": ["left white bracket", "левая квадратная полая скобка"],
-		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": ">+ [" }
-	},
-	"right_white_bracket", {
-		"unicode": "27E7",
-		"tags": ["right white bracket", "правая квадратная полая скобка"],
-		"groups": ["Brackets", "Special Fast Secondary"],
-		"options": { "fastKey": ">+ ]" }
+	"[left,right]_white_bracket", {
+		"unicode": ["27E6", "27E7"],
+		"tags": [
+			["left white bracket", "левая квадратная полая скобка"],
+			["right white bracket", "правая квадратная полая скобка"]
+		],
+		"groups": ["Brackets", "Special Fast Secondary", "Smelting Special"],
+		"options": { "fastKey": [">+ [", ">+ ]"] },
+		"recipe": [["[["], ["]]"]]
 	},
 	"left_white_tortoise_shell", {
 		"unicode": "27EC",
