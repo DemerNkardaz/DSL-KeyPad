@@ -164,7 +164,7 @@ _ArrayToString(this, separator := ", ", bounds := "") {
 			if value is Array {
 				str .= (bounds is Array ? bounds[1] : bounds) value.ToString(separator, bounds) (bounds is Array ? bounds[2] : bounds)
 			} else {
-				str .= (bounds is Array ? bounds[2] : bounds) value (bounds is Array ? bounds[2] : bounds)
+				str .= (bounds is Array ? bounds[1] : bounds) value (bounds is Array ? bounds[2] : bounds)
 			}
 			break
 		}

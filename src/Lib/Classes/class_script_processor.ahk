@@ -334,13 +334,13 @@ Class TelexScriptProcessor {
 					priority := 0
 
 					if this.EntriesComparator(input, key, &a, &b, True) {
-						suggestion := RegExReplace(b, "^" RegExEscape(a), "-") "(" StrReplace(value, "[escape]") ")"
+						suggestion := RegExReplace(b, "^" RegExEscape(a), "–") Chr(0x29FC) StrReplace(value, "[escape]") Chr(0x29FD)
 						if (a == input)
 							priority := 1000
 						else
 							priority := 500 + StrLen(a)
 					} else if (RegExMatch(key, "^" RegExEscape(input))) {
-						suggestion := RegExReplace(key, "^" RegExEscape(input), "-") "(" StrReplace(value, "[escape]") ")"
+						suggestion := RegExReplace(key, "^" RegExEscape(input), "–") Chr(0x29FC) StrReplace(value, "[escape]") Chr(0x29FD)
 						priority := 100 + (1000 - StrLen(key))
 					}
 

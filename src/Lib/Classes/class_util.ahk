@@ -245,7 +245,9 @@ Class Util {
 			if mode = "Hex" {
 				output .= "0x" this.ChrToUnicode(symbol)
 			} else if mode == "CSS" {
-				output .= Surrogated ? "\u{" this.ChrToUnicode(symbol) "}" : "\u" this.ChrToUnicode(symbol)
+				output .= surrogated ? "\u{" this.ChrToUnicode(symbol) "}" : "\u" this.ChrToUnicode(symbol)
+			} else if mode == "JSON" {
+				output .= this.ChrToUnicode(symbol, , surrogated, True).ToString("", ["\u", ""])
 			} else {
 				output .= this.ChrToUnicode(symbol)
 			}
@@ -494,7 +496,28 @@ Class Util {
 		return output
 	}
 
-	static ChrToUnicode(symbol, startFormat := "") {
+	static ChrToUnicode(symbol, startFormat := "", getPair := False, useArray := False) {
+		local symOrd := Ord(symbol)
+		local codes := []
+
+		if (getPair && symOrd > 0xFFFF) {
+			local high := Floor((symOrd - 0x10000) / 0x400) + 0xD800
+			local low := Mod(symOrd - 0x10000, 0x400) + 0xDC00
+
+			codes.Push(startFormat Format("{:04X}", high))
+			codes.Push(startFormat Format("{:04X}", low))
+		} else {
+			codes.Push(startFormat Format("{:04X}", symOrd))
+		}
+
+		if (useArray) {
+			return codes
+		} else {
+			return codes[1]
+		}
+	}
+
+	static ChrToUnicode2(symbol, startFormat := "", getPair := False, useArray := False) {
 		local symOrd := Ord(symbol)
 		local code := startFormat Format("{:04X}", symOrd)
 

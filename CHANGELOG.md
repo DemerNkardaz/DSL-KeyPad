@@ -4,7 +4,7 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.9.3)
+### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.8.3)
 
 - Additions:
 
@@ -18,6 +18,8 @@
   - Binds for IPA tone bars moved from right Alt to left (to keep ⟨⟩ on the original right Alt + 9/0 combination).
 
 - Fixes:
+
+  - Fixed wrong parenthesis in TELEX/VNI-like tooltip.
 
 ---
 
@@ -201,7 +203,7 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.9.3)
+### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.8.3)
 
 - Добавления:
 
@@ -215,6 +217,8 @@
   - Привязки для символов тона МФА перемещены с правого Alt на левый (чтобы оставить ⟨⟩ на прежней комбинации правый Alt + 9/0).
 
 - Исправления:
+
+  - Исправлено использование некорректных скобок в подсказке TELEX/VNI-подобного режима.
 
 ---
 

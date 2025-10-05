@@ -3016,7 +3016,7 @@
 				"<#<!": "<% (*) => GetKeyScanCode() %/>"
 			},
 			"Y": {
-				">^": "<% (*) => Util.StrSelToUnicode('CSS') %/>"
+				">^": "<% (*) => Util.StrSelToUnicode('JSON') %/>"
 			},
 			"U": {
 				">^": "<% (*) => Util.StrSelToUnicode() %/>"
