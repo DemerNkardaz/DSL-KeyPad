@@ -90,7 +90,7 @@ Class UIMainPanelFilter {
 				for item in this.dataList {
 					if item[this.localeData.localeIndex] = ""
 						continue
-					local itemText := StrReplace(item[this.localeData.localeIndex], Chr(0x00A0), " ")
+					local itemText := item[this.localeData.localeIndex]
 					itemText := StrReplace(itemText, star, "")
 
 					local reserveTexts := []

@@ -1,6 +1,6 @@
-﻿$ver = "0.1.7.3"
+﻿$ver = "0.1.8.3"
 $preRelease = "False"
-$title = "DSL KeyPad@0.1.7.3 α"
+$title = "DSL KeyPad@0.1.8.3 α"
 $message =@"
 &#128230;&emsp14;Automatically created/updated via build process in workflow.<br>
 
@@ -8,13 +8,13 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2025-10-04 12:12:46
+				&#128228;&emsp14;2025-10-05 09:04:44
 			</td>
 		</tr>
 		<tr>
 			<td><b>Version</b></td>
 			<td>
-				&#128229;&emsp14;<a href="https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/0.1.7.3/DSL-KeyPad-0.1.7.3.zip">0.1.7.3</a>
+				&#128229;&emsp14;<a href="https://github.com/DemerNkardaz/DSL-KeyPad/releases/download/0.1.8.3/DSL-KeyPad-0.1.8.3.zip">0.1.8.3</a>
 			</td>
 		</tr>
 		<tr>
@@ -82,10 +82,10 @@ $message =@"
 		</tr>
 </table>
 
-**Versions compare** [0.1.6.3&ensp;>>>&ensp;0.1.7.3](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.6.3...0.1.7.3#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Customization Stuff](https://github.com/DemerNkardaz/DSL-KeyPad-Customization-Stuff) | [Docs](https://demernkardaz.github.io/DSL-KeyPad-Docs)
+**Versions compare** [0.1.7.3&ensp;>>>&ensp;0.1.8.3](https://github.com/DemerNkardaz/DSL-KeyPad/compare/0.1.7.3...0.1.8.3#files_bucket) | [Changelog](https://github.com/DemerNkardaz/DSL-KeyPad/tree/main/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Customization Stuff](https://github.com/DemerNkardaz/DSL-KeyPad-Customization-Stuff) | [Docs](https://demernkardaz.github.io/DSL-KeyPad-Docs)
 
 [Yalla Nkardaz’s custom files](https://github.com/DemerNkardaz/DSL-KeyPad-Custom-Files) repository for DSL KeyPad.
-<br>[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-0.1.7.3.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3) [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/0.1.7.3?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/0.1.7.3/)
+<br>[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-0.1.8.3.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.8.3) [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/0.1.8.3?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/0.1.8.3/)
 "@
 
 Write-Host "Version: $ver"

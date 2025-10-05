@@ -775,6 +775,16 @@ Class ChrReg {
 
 		this.EntryPostProcessing__LaTeX(&entryName, &entry, &instances, &character)
 
+		; for eachTagArray in [entry["tags"], entry["hiddenTags"]] {
+		; 	if eachTagArray.Length > 0 {
+		; 		for tag in eachTagArray {
+		; 			if tag != "" {
+		; 				ChrLib.entryTags.Push(tag, entryName)
+
+		; 			}
+		; 		}
+		; 	}
+		; }
 
 		ChrLib.entries.%entryName% := entry
 		return
@@ -910,18 +920,6 @@ Class ChrReg {
 		if !ChrLib.entryCategories.Get(entry["symbol"]["category"]).HasValue(entryName)
 			ChrLib.entryCategories[entry["symbol"]["category"]].Push(entryName)
 
-		for eachTagArray in [entry["tags"], entry["hiddenTags"]] {
-			if eachTagArray.Length > 0 {
-				for tag in eachTagArray {
-					if tag != "" {
-						if !ChrLib.entryTags.Has(tag)
-							ChrLib.entryTags.Set(tag, [])
-
-						ChrLib.entryTags[tag].Push(entryName)
-					}
-				}
-			}
-		}
 		return
 	}
 

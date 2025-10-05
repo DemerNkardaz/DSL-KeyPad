@@ -4,6 +4,16 @@
 <details open lang="en">
 <summary>English</summary>
 
+### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.9.3)
+
+- Additions:
+
+- Changes:
+
+- Fixes:
+
+---
+
 ### [0.1.7.3 α — 2025-10-04](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
 
 - Additions:
@@ -184,6 +194,16 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
+### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.9.3)
+
+- Добавления:
+
+- Изменения:
+
+- Исправления:
+
+---
+
 ### [0.1.7.3 α — 2025-10-04](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.3)
 
 - Добавления:
@@ -211,6 +231,8 @@
 
   - Исправлена ошибка в Windows 11, при которой символы привязок игнорировались режимом «Композиции».
   - Исправлена ошибка режима «Композиции», когда ввод символов «()[]+» останавливал его работу.
+
+---
 
 ### [0.1.6.3 α — 2025-09-29](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.6.3)
 

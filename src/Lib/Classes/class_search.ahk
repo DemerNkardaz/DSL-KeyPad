@@ -117,9 +117,6 @@ Class Search {
 			if StrLen(shortTag) >= StrLen(longTag)
 				return False
 
-			shortTag := StrReplace(shortTag, Chr(0x00A0), " ")
-			longTag := StrReplace(longTag, Chr(0x00A0), " ")
-
 			local shortWords := StrSplit(shortTag, " ")
 			local longWords := StrSplit(longTag, " ")
 
@@ -181,12 +178,10 @@ Class Search {
 		}
 
 		checkTagByUserRegEx(tag) {
-			tag := StrReplace(tag, Chr(0x00A0), " ")
 			return tag ~= handledQuery
 		}
 
 		checkTagExact(tag) {
-			tag := StrReplace(tag, Chr(0x00A0), " ")
 			if isSensitive
 				return handledQuery == tag
 			return handledQuery = tag
@@ -194,7 +189,6 @@ Class Search {
 
 		checkTagSingleWord(tag) {
 			if !InStr(handledQuery, " ") {
-				tag := StrReplace(tag, Chr(0x00A0), " ")
 				local escapedQuery := RegExEscape(handledQuery)
 				return tag ~= nonSensitiveMark "^" escapedQuery "$|^" escapedQuery "\s|\s" escapedQuery "\s|\s" escapedQuery "$"
 			}
@@ -202,12 +196,10 @@ Class Search {
 		}
 
 		checkTagPartial(tag) {
-			tag := StrReplace(tag, Chr(0x00A0), " ")
 			return tag ~= nonSensitiveMark handledQuery
 		}
 
 		checkTagSplittedPartial(tag, strict3 := True) {
-			tag := StrReplace(tag, Chr(0x00A0), " ")
 			local splitSearchQuery := StrSplit(handledQuery, " ")
 			for _, part in splitSearchQuery {
 				if StrLen(part) < 3 && strict3 {
@@ -222,12 +214,10 @@ Class Search {
 		}
 
 		checkTagLowAccSequental(tag) {
-			tag := StrReplace(tag, Chr(0x00A0), " ")
 			return Util.HasSequentialCharacters(tag, handledQuery, nonSensitiveMark = "")
 		}
 
 		checkTagLowAcc(tag) {
-			tag := StrReplace(tag, Chr(0x00A0), " ")
 			return Util.HasAllCharacters(tag, nonSensitiveMark handledQuery)
 		}
 
@@ -258,10 +248,9 @@ Class Search {
 				for tagArray in [entry["tags"], entry["hiddenTags"]] {
 					for tag in tagArray {
 						if tag != "" && conditions[i](tag) {
-							local cleanTag := StrReplace(tag, Chr(0x00A0), " ")
 							matchedTags.Push({
 								entryName: entryName,
-								tag: cleanTag,
+								tag: tag,
 								originalIndex: j
 							})
 						}

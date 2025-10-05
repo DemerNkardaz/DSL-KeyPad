@@ -121,18 +121,30 @@ Class LocaleGenerator {
 				continue
 			}
 
-			local postfixText := ""
+			local titlePostfixText := ""
+			local altTitlePostfixText := ""
 
 			if lPostfixes.Length > 0 {
-				postfixText .= " {conjuction}" nbsp Locale.Read(pfx "postfix." lPostfixes[1], lang)
+				local postfixText := Locale.Read(pfx "postfix." lPostfixes[1], lang)
 
-				Loop lPostfixes.Length - 2
-					postfixText .= ", " Locale.Read(pfx "postfix." lPostfixes[A_Index + 1], lang)
+				titlePostfixText .= " {conjuction} " postfixText
+				altTitlePostfixText .= " {conjuction}" nbsp postfixText
 
-				if lPostfixes.Length > 1
-					postfixText .= " " Locale.Read(pfx "postfix.and", lang) nbsp Locale.Read(pfx "postfix." lPostfixes[lPostfixes.Length], lang)
+				Loop lPostfixes.Length - 2 {
+					titlePostfixText .= ", " Locale.Read(pfx "postfix." lPostfixes[A_Index + 1], lang)
+					altTitlePostfixText .= titlePostfixText
+				}
 
-				postfixText := this.LocaleRules(postfixText, lang)
+				if lPostfixes.Length > 1 {
+					local postfixAnd := Locale.Read(pfx "postfix.and", lang)
+					local postfixText := Locale.Read(pfx "postfix." lPostfixes[lPostfixes.Length], lang)
+
+					titlePostfixText .= " " postfixAnd " " postfixText
+					altTitlePostfixText .= " " postfixAnd nbsp postfixText
+				}
+
+				altTitlePostfixText := this.LocaleRules(altTitlePostfixText, lang)
+				titlePostfixText := this.LocaleRules(titlePostfixText, lang, " ")
 			}
 
 			local postLetter := useLetterLocale ? Locale.Read(interLetter (useLetterLocale ? ".letter_locale" : ""), lang) : letter
@@ -305,7 +317,7 @@ Class LocaleGenerator {
 					lAfterAltTitle
 				)
 
-				entry["titles"][langCode] := title postfixText
+				entry["titles"][langCode] := title altTitlePostfixText
 			} else {
 				localedCase := lCase != "neutral" ? Locale.Read(pfx "case." lCase, lang, , , , lVariant) " " : ""
 
@@ -329,7 +341,7 @@ Class LocaleGenerator {
 					lAfterTitle
 				)
 
-				entry["titles"][langCode] := title postfixText
+				entry["titles"][langCode] := title titlePostfixText
 
 				tagScriptAdditive := scriptAdditive ? " " Locale.Read(pfx "tag." lScript (scriptAdditive), lang, , , , lVariant) : ""
 
@@ -368,7 +380,7 @@ Class LocaleGenerator {
 					)
 				}
 
-				tagsCollector[lang].Push(tag postfixText)
+				tagsCollector[lang].Push(tag titlePostfixText)
 
 				if useLayoutTitles {
 					titlesCollector[lang].Push(layoutTitle)
@@ -404,7 +416,7 @@ Class LocaleGenerator {
 						)
 					)
 
-					hiddenTagsCollector[lang].Push(hiddenTag postfixText)
+					hiddenTagsCollector[lang].Push(hiddenTag titlePostfixText)
 				}
 			}
 		}
@@ -732,12 +744,12 @@ Class LocaleGenerator {
 		return entry
 	}
 
-	LocaleRules(input, lang) {
+	LocaleRules(input, lang, spaceSymbol := Chr(160)) {
 		lang := RegExReplace(lang, "_alt")
-		nbsp := Chr(160)
+		; nbsp := Chr(160)
 		rules := Map(
 			"ru-RU", Map(
-				"conjunction", (str) => (InStr(str, "{conjuction}" nbsp "с") || InStr(str, "{conjuction}" nbsp "ш")) ? RegExReplace(str, "\{conjuction\}", Locale.Read("generated.postfix.with_2", lang)) : RegExReplace(str, "\{conjuction\}", Locale.Read("generated.postfix.with", lang))
+				"conjunction", (str) => (InStr(str, "{conjuction}" spaceSymbol "с") || InStr(str, "{conjuction}" spaceSymbol "ш")) ? RegExReplace(str, "\{conjuction\}", Locale.Read("generated.postfix.with_2", lang)) : RegExReplace(str, "\{conjuction\}", Locale.Read("generated.postfix.with", lang))
 			),
 			"en-US", Map(
 				"conjunction", (str) => RegExReplace(str, "\{conjuction\}", Locale.Read("generated.postfix.with", lang)

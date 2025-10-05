@@ -11,7 +11,7 @@ Class ChrLib {
 	static entryGroups := Map("Favorites", [])
 	static entryCategories := Map()
 	static entryRecipes := Map()
-	static entryTags := Map()
+	static entryTags := []
 	static entryIdentifiers := Map()
 	static dumpPath := App.paths.temp "\characters_dump.json"
 	static duplicatesList := Map()
