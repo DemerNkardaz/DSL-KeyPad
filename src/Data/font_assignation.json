@@ -18,9 +18,9 @@
 	"Noto Sans Manichaean": ["manichaean"],
 	"Noto Sans Imperial Aramaic": ["imperial_aramaic"],
 	"Noto Sans Samaritan": ["samaritan"],
-	"Noto Sans Symbols 2": ["playing_card", "card", "chess"],
+	"Noto Sans Symbols 2": ["alchemical", "astrological", "astronomical", "symbolistics", "playing_card", "card", "chess"],
 	"Segoe UI Historic": ["phoenician", "shavian"],
 	"Segoe UI Symbol": ["deseret"],
-	"Kurinto Sans": ["^alchemical", "^astrological", "^astronomical", "^symbolistics"],
+	"Kurinto Sans": [],
 	"Catrinity": ["cirth_runic", "tolkien_runic"]
 }

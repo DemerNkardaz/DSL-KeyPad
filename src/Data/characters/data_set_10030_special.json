@@ -1335,7 +1335,7 @@
 		"recipe": ["min"]
 	},
 	"minusdot", {
-		"unicode": "2213",
+		"unicode": "2238",
 		"tags": ["dot minus", "минус с точкой"],
 		"groups": ["Smelting Special"],
 		"recipe": ["-."]

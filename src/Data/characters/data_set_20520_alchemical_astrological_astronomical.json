@@ -706,8 +706,7 @@
 			["ast Orcus", "ast Ocs"]
 		],
 		"symbol": {
-			"beforeLetter": "dwarf_planet",
-			"font": "Catrinity"
+			"beforeLetter": "dwarf_planet"
 		}
 	},
 	"astrological_n_sym_planet_[transpluto,proserpina]", {
@@ -749,8 +748,7 @@
 		"options": { "useLetterLocale": "_obsolete$(remove)" },
 		"symbol": {
 			"beforeType": "obsolete",
-			"beforeLetter": "asteroid",
-			"font": "Catrinity"
+			"beforeLetter": "asteroid"
 		}
 	},
 	"astrological_n_sym_[black,white]_moon_[lilith,selena]", {
@@ -801,16 +799,14 @@
 	},
 	"astrological_n_sym_lot_of_fortune", {
 		"unicode": "1F774",
-		"recipe": ["alc lot fort", "alc lof"],
-		"symbol": { "font": "Catrinity" }
+		"recipe": ["alc lot fort", "alc lof"]
 	},
 	"astrological_n_sym_[occultation,lunar_eclipse]", {
 		"unicode": ["1F775", "1F776"],
 		"recipe": [
 			["ast occult", "alc occ"],
 			["ast lunar eclipse", "alc lec"]
-		],
-		"symbol": { "font": "Catrinity" }
+		]
 	},
 	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]", {
 		"unicode": ["2648", "2649", "264A", "264B", "264C", "264D", "264E", "264F", "2650", "2651", "2652", "2653"],
@@ -991,7 +987,6 @@
 			["geo alb"],
 			["geo trt"],
 			["geo ps"]
-		],
-		"symbol": { "font": "Catrinity" }
+		]
 	}
 ]

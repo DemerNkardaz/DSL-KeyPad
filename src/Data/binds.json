@@ -2962,7 +2962,8 @@
 				"<^>!>+": "<% (*) => Scripter.ToggleSelectedOption(\"HanYu PinYin\", \"TELEX\") %/>"
 			},
 			"F8": {
-				"<^>!": "<% (*) => GREPTypography.SetStyles() %/>"
+				"<^>!": "<% (*) => GREPTypography.SetStyles() %/>",
+				">^": "<% (*) => testGui() %/>"
 			},
 			"F9": {
 				">^": "<% (*) => Cfg.Editor() %/>",
