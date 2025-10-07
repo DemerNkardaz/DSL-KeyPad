@@ -6,37 +6,37 @@
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "beforeType": "horizontal" }
 	},
 	"domino_n_tile_00_0{-1...i}[×7]_horizontal", {
-		"unicode": ["{1F030...i}"],
+		"unicode": ["{1F031...i-1}"],
 		"recipe": ["dm h0{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "00-0{-1...i}", "beforeType": "horizontal" }
 	},
 	"domino_n_tile_01_1{-1...i}[×7]_horizontal", {
-		"unicode": ["{1F037...i}"],
+		"unicode": ["{1F038...i-1}"],
 		"recipe": ["dm h1{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "01-0{-1...i}", "beforeType": "horizontal" }
 	},
 	"domino_n_tile_02_0{-1...i}[×7]_horizontal", {
-		"unicode": ["{1F03E...i}"],
+		"unicode": ["{1F03F...i-1}"],
 		"recipe": ["dm h2{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "02-0{-1...i}", "beforeType": "horizontal" }
 	},
 	"domino_n_tile_03_0{-1...i}[×7]_horizontal", {
-		"unicode": ["{1F045...i}"],
+		"unicode": ["{1F046...i-1}"],
 		"recipe": ["dm h3{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "03-0{-1...i}", "beforeType": "horizontal" }
 	},
 	"domino_n_tile_04_0{-1...i}[×7]_horizontal", {
-		"unicode": ["{1F04C...i}"],
+		"unicode": ["{1F04D...i-1}"],
 		"recipe": ["dm h4{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "04-0{-1...i}", "beforeType": "horizontal" }
 	},
 	"domino_n_tile_05_0{-1...i}[×7]_horizontal", {
-		"unicode": ["{1F053...i}"],
+		"unicode": ["{1F054...i-1}"],
 		"recipe": ["dm h5{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "05-0{-1...i}", "beforeType": "horizontal" }
 	},
 	"domino_n_tile_06_0{-1...i}[×7]_horizontal", {
-		"unicode": ["{1F05A...i}"],
+		"unicode": ["{1F05B...i-1}"],
 		"recipe": ["dm h6{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "06-0{-1...i}", "beforeType": "horizontal" }
 	},
@@ -47,37 +47,37 @@
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "beforeType": "vertical" }
 	},
 	"domino_n_tile_00_0{-1...i}[×7]_vertical", {
-		"unicode": ["{1F062...i}"],
+		"unicode": ["{1F063...i-1}"],
 		"recipe": ["dm v0{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "00-0{-1...i}", "beforeType": "vertical" }
 	},
 	"domino_n_tile_01_1{-1...i}[×7]_vertical", {
-		"unicode": ["{1F069...i}"],
+		"unicode": ["{1F06A...i-1}"],
 		"recipe": ["dm v1{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "01-0{-1...i}", "beforeType": "vertical" }
 	},
 	"domino_n_tile_02_0{-1...i}[×7]_vertical", {
-		"unicode": ["{1F070...i}"],
+		"unicode": ["{1F071...i-1}"],
 		"recipe": ["dm v2{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "02-0{-1...i}", "beforeType": "vertical" }
 	},
 	"domino_n_tile_03_0{-1...i}[×7]_vertical", {
-		"unicode": ["{1F077...i}"],
+		"unicode": ["{1F078...i-1}"],
 		"recipe": ["dm v3{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "03-0{-1...i}", "beforeType": "vertical" }
 	},
 	"domino_n_tile_04_0{-1...i}[×7]_vertical", {
-		"unicode": ["{1F07E...i}"],
+		"unicode": ["{1F07F...i-1}"],
 		"recipe": ["dm v4{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "04-0{-1...i}", "beforeType": "vertical" }
 	},
 	"domino_n_tile_05_0{-1...i}[×7]_vertical", {
-		"unicode": ["{1F085...i}"],
+		"unicode": ["{1F086...i-1}"],
 		"recipe": ["dm v5{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "05-0{-1...i}", "beforeType": "vertical" }
 	},
 	"domino_n_tile_06_0{-1...i}[×7]_vertical", {
-		"unicode": ["{1F08C...i}"],
+		"unicode": ["{1F08D...i-1}"],
 		"recipe": ["dm v6{-1...i}"],
 		"symbol": { "scriptBounds": ["[<ru-RU>", "]<ru-RU>"], "letter": "06-0{-1...i}", "beforeType": "vertical" }
 	}

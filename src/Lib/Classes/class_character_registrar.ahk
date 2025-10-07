@@ -633,10 +633,18 @@ Class ChrReg {
 
 		local entryVariantPos := entry["variantPos"]
 
-		if RegExMatch(entry["unicode"], "\{(-?(?:0x)?[0-9A-Fa-f]+)?(?:\.\.\.)?i\}", &match) {
-			local isHexFormat := RegExMatch(match[1], "^(?:0x)?[A-Fa-f0-9]+$")
-			local addition := match[1] != "" ? Integer((isHexFormat && !InStr(match[1], "0x") ? "0x" : "") match[1]) : 0
-			local value := addition + entryVariantPos
+		if RegExMatch(entry["unicode"], "(-?)\{(-?(?:0x)?[0-9A-Fa-f]+(?=(?:\.\.\.)?i))?(?:\.\.\.)?i(-?\d+)?\}", &match) {
+			local isToSubtract := match[1] = "-"
+			local isHexFormat := RegExMatch(match[2], "^(?:0x)?[A-Fa-f0-9]+$")
+			local addition := match[2] != "" ? Integer((isHexFormat && !InStr(match[2], "0x") ? "0x" : "") match[2]) : 0
+			local secondaryAddition := match[3] != "" ? Integer(match[3]) : 0
+			local calculatedValue := (entryVariantPos) + (secondaryAddition)
+
+			if isToSubtract
+				calculatedValue := -calculatedValue
+
+			local value := addition + calculatedValue
+
 			if isHexFormat
 				value := Format("{:04X}", value)
 

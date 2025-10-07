@@ -931,7 +931,7 @@
 		}
 	},
 	"astronomical_n_sym_asteroid_[hebe,iris,flora,metis,parthenope,victoria,egeria,irene,eunomia,psyche,thetis,melpomene,fortuna,proserpina,bellona,amphitrite,leukothea]", {
-		"unicode": ["1CEC0", "1CEC1", "1CEC2", "1CEC3", "1CEC4", "1CEC5", "1CEC6", "1CEC7", "1CEC8", "1CEC9", "1CECA", "1CECB", "1CECC", "1CECD", "1CECE", "1CECF", "1CED0"],
+		"unicode": ["{1CEC0...i-1}"],
 		"recipe": [
 			["asn Hebe", "asn Hb"],
 			["asn Iris", "asn Is"],
@@ -969,7 +969,7 @@
 		]
 	},
 	"geomantic_n_fig_[via,cauda_draconis,puer,fortuna_minor,puella,amissio,carcer,laetitia,caput_draconis,conjuctio,acquisitio,rubeus,fortuna_major,albus,tristitia,populus]", {
-		"unicode": ["1CEEF","1CEEE","1CEED","1CEEC","1CEEB","1CEEA","1CEE9","1CEE8","1CEE7","1CEE6","1CEE5","1CEE4","1CEE3","1CEE2","1CEE1","1CEE0"],
+		"unicode": ["-{1CEEF...i-1}"],
 		"recipe": [
 			["geo via"],
 			["geo cdc"],
