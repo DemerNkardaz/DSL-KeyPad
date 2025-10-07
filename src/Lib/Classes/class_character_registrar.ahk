@@ -97,9 +97,9 @@ Class ChrReg {
 
 				for item in ["unicode", "proxy", "alterations"] {
 					if entry[item] is Array
-						variantEntry[item] := (
+						variantEntry[item] := entry[item].Has(i) ? (
 							entry[item][i] is Object ? entry[item][i].Clone() : entry[item][i]
-						)
+						) : (entry[item][1] is Object ? entry[item][1].Clone() : entry[item][1])
 				}
 
 				if entry.Has("recipePush")
@@ -630,6 +630,18 @@ Class ChrReg {
 	EntryPreProcessing(&entryName, &entry, &instances) {
 		if !IsSet(entry)
 			return
+
+		local entryVariantPos := entry["variantPos"]
+
+		if RegExMatch(entry["unicode"], "\{(-?(?:0x)?[0-9A-Fa-f]+)?(?:\.\.\.)?i\}", &match) {
+			local isHexFormat := RegExMatch(match[1], "^(?:0x)?[A-Fa-f0-9]+$")
+			local addition := match[1] != "" ? Integer((isHexFormat && !InStr(match[1], "0x") ? "0x" : "") match[1]) : 0
+			local value := addition + entryVariantPos
+			if isHexFormat
+				value := Format("{:04X}", value)
+
+			entry["unicode"] := RegExReplace(entry["unicode"], match[0], value)
+		}
 
 		entry := this.SetDecomposedData(&entryName, &entry)
 
