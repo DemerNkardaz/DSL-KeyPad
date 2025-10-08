@@ -809,21 +809,8 @@
 		]
 	},
 	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]", {
-		"unicode": ["2648", "2649", "264A", "264B", "264C", "264D", "264E", "264F", "2650", "2651", "2652", "2653"],
-		"sequence": [
-			["2648", "FE0E"],
-			["2649", "FE0E"],
-			["264A", "FE0E"],
-			["264B", "FE0E"],
-			["264C", "FE0E"],
-			["264D", "FE0E"],
-			["264E", "FE0E"],
-			["264F", "FE0E"],
-			["2650", "FE0E"],
-			["2651", "FE0E"],
-			["2652", "FE0E"],
-			["2653", "FE0E"]
-		],
+		"unicode": ["{2648...i-1}"],
+		"sequence": ["{2648...i-1}", "FE0E"],
 		"recipe": [
 			["ast Aries", "ast Ars"],
 			["ast Taurus", "ast Tas"],
@@ -860,21 +847,8 @@
 		}
 	},
 	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]_emoji", {
-		"unicode": ["2648", "2649", "264A", "264B", "264C", "264D", "264E", "264F", "2650", "2651", "2652", "2653"],
-		"sequence": [
-			["2648", "FE0F"],
-			["2649", "FE0F"],
-			["264A", "FE0F"],
-			["264B", "FE0F"],
-			["264C", "FE0F"],
-			["264D", "FE0F"],
-			["264E", "FE0F"],
-			["264F", "FE0F"],
-			["2650", "FE0F"],
-			["2651", "FE0F"],
-			["2652", "FE0F"],
-			["2653", "FE0F"]
-		],
+		"unicode": ["{2648...i-1}"],
+		"sequence": ["{2648...i-1}", "FE0F"],
 		"recipe": [
 			["emoji Aries", "emoji Ars"],
 			["emoji Taurus", "emoji Tas"],

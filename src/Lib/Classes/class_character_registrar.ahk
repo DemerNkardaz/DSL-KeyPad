@@ -3,6 +3,8 @@ Class ChrReg {
 		["([" Chrs(0x21BA, 0x21BB, 0x2190, 0x2191, 0x2193, 0x2192, 0x2196, 0x2197, 0x2199, 0x2198, 0x2194, 0x2195, 0x2B8C, 0x2B8E, 0x2B8D, 0x2B8F) "])(" DottedCircle ")", "$1" Chr(0xE0020) "$2"]
 	]
 
+	static dynamicIDPattern := "(-?)\{(-?(?:0x)?[0-9A-Fa-f]+(?=(?:\.\.\.)?i))?(?:\.\.\.)?i(-?\d+)?\}"
+
 
 	__New(rawEntries, typeOfInit := "Internal", preventProgressGUI := False, defaultLib := False) {
 		Event.Trigger("Character Library", "Registration Starts", rawEntries, typeOfInit, preventProgressGUI)
@@ -113,8 +115,10 @@ Class ChrReg {
 						variantEntry["reference"] := entry["reference"][i].Clone()
 				}
 
-				if entry["sequence"].Length > 0 && entry["sequence"][i] is Array
-					variantEntry["sequence"] := entry["sequence"][i].Clone()
+				if entry["sequence"].Length > 0 {
+					local sequence := entry["sequence"].Has(i) ? entry["sequence"][i] : entry["sequence"][1]
+					variantEntry["sequence"] := sequence is Array ? sequence.Clone() : entry["sequence"].Clone()
+				}
 
 				variantEntry := this.SetDecomposedData(&variantName, &variantEntry)
 
@@ -633,7 +637,7 @@ Class ChrReg {
 
 		local entryVariantPos := entry["variantPos"]
 
-		if RegExMatch(entry["unicode"], "(-?)\{(-?(?:0x)?[0-9A-Fa-f]+(?=(?:\.\.\.)?i))?(?:\.\.\.)?i(-?\d+)?\}", &match) {
+		if RegExMatch(entry["unicode"], ChrReg.dynamicIDPattern, &match) {
 			local isToSubtract := match[1] = "-"
 			local isHexFormat := RegExMatch(match[2], "^(?:0x)?[A-Fa-f0-9]+$")
 			local addition := match[2] != "" ? Integer((isHexFormat && !InStr(match[2], "0x") ? "0x" : "") match[2]) : 0
@@ -649,6 +653,32 @@ Class ChrReg {
 				value := Format("{:04X}", value)
 
 			entry["unicode"] := RegExReplace(entry["unicode"], match[0], value)
+		}
+
+		if entry["sequence"].Length > 0 {
+			local newSequence := []
+			for sequence in entry["sequence"] {
+				if sequence is String && RegExMatch(sequence, ChrReg.dynamicIDPattern, &match) {
+					local isToSubtract := match[1] = "-"
+					local isHexFormat := RegExMatch(match[2], "^(?:0x)?[A-Fa-f0-9]+$")
+					local addition := match[2] != "" ? Integer((isHexFormat && !InStr(match[2], "0x") ? "0x" : "") match[2]) : 0
+					local secondaryAddition := match[3] != "" ? Integer(match[3]) : 0
+					local calculatedValue := (entryVariantPos) + (secondaryAddition)
+
+					if isToSubtract
+						calculatedValue := -calculatedValue
+
+					local value := addition + calculatedValue
+
+					if isHexFormat
+						value := Format("{:04X}", value)
+
+					newSequence.Push(RegExReplace(sequence, match[0], value))
+				} else {
+					newSequence.Push(sequence)
+				}
+			}
+			entry["sequence"] := newSequence
 		}
 
 		entry := this.SetDecomposedData(&entryName, &entry)
