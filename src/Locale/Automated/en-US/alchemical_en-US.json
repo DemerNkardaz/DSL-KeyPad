@@ -258,6 +258,8 @@
 				"n_sym_fixed_zodiacal_modality": { "letter_locale": "Fixed zodiacal modality" },
 				"n_sym_cardinal_zodiacal_modality": { "letter_locale": "Cardinal zodiacal modality" },
 				"n_sym_mutable_zodiacal_modality": { "letter_locale": "Mutable zodiacal modality" },
+				"n_sym_venus_mirror": { "letter_locale": "Mirror of Venus" },
+				"n_sym_mars_shield_and_spear": { "letter_locale": "Shield and Spear of Mars" },
 				"n_sym_ascending_node": { "letter_locale": "Ascending Node" },
 				"n_sym_descending_node": { "letter_locale": "Descending Node" },
 				"n_sym_conjuction": { "letter_locale": "Conjuction" },

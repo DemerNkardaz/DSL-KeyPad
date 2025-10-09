@@ -12,12 +12,12 @@
 	},
 	"alchemical_n_sym_element_[air,fire,earth,water]", {
 		"unicode": ["1F701", "1F702", "1F703", "1F704"],
-		"recipe": [["alc air"], ["alc fire"], ["alc earth", "alc ert"], ["alc water", "alc wtr"]],
+		"recipe": [["alc air"], ["alc fire"], ["alc ert"], ["alc wtr"]],
 		"symbol": { "beforeLetter": "element::2", "customs": "[c98d8db,cff8e46,cfdca52,c4898ee]" }
 	},
 	"alchemical_n_sym_[spirit]", {
 		"unicode": ["1F747"],
-		"recipe": [["alc spirit", "alc si", "alc vapor", "alc vpr"]],
+		"recipe": [["alc spi", "alc vpr"]],
 		"symbol": {
 			"tagAdditive": [
 				[{ "letter": "vapor" }]
@@ -26,7 +26,7 @@
 	},
 	"alchemical_n_sym_dissolve_[1,2]", {
 		"unicode": ["1F761", "1F762"],
-		"recipe": [["alc dissolve-1", "alc ds1"], ["alc dissolve-2", "alc ds2"]],
+		"recipe": [["alc ds1"], ["alc ds2"]],
 		"options": { "useLetterLocale": "dissolve$" },
 		"symbol": { 
 			"copyNumber": [1, 2],
@@ -39,11 +39,11 @@
 	"alchemical_n_sym_[distill,sublimate,precipitate,fermentation,purify]", {
 		"unicode": ["1F760", "1F75E", "1F75F", "1F764", "1F763"],
 		"recipe":[
-			["alc distill", "alc dsl"],
-			["alc sublimate", "alc sbm"],
-			["alc precipitate", "alc prc"],
-			["alc fermentation", "alc frn", "alc putrefaction", "alc ptf"],
-			["alc purify", "alc prf"]
+			[ "alc dsl"],
+			["alc sbm"],
+			["alc prc"],
+			["alc frn", "alc ptf"],
+			["alc prf"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -57,7 +57,12 @@
 	},
 	"alchemical_n_sym_regulus_[1,2,3,4]", {
 		"unicode": ["1F732", "1F733", "1F734", "1F735"],
-		"recipe": [["alc regulus-1", "alc rgl1"], ["alc regulus-2", "alc rgl2", "ast mzm"], ["alc regulus-3", "alc rgl3"], ["alc regulus-4", "alc rgl4"]],
+		"recipe": [
+			["alc rgl1"],
+			["alc rgl2", "ast mzm"],
+			["alc rgl3"],
+			["alc rgl4"]
+		],
 		"options": { "useLetterLocale": "regulus$" },
 		"symbol": {
 			"copyNumber": [1, 2, 3, 4],
@@ -71,11 +76,11 @@
 	"alchemical_n_sym_aqua_[fortis,regia_1,regia_2,vitae_1,vitae_2]", {
 		"unicode": ["1F705", "1F706", "1F707", "1F708", "1F709"],
 		"recipe": [
-			["AqF", "${alchemical_n_sym_element_water}F", "alc nitric acid", "alc ntac", "alc aqua fortis", "alc aqf"],
-			["AqR", "${alchemical_n_sym_element_water}R", "alc aqua regia", "alc aqr"],
-			["AR", "alc sand bath", "alc sbh"],
-			["AqV1", "alc aqua vatiae-1", "alc ethanol-1", "alc etl1"],
-			["AqV2", "alc aqua vatiae-2", "alc ethanol-2", "alc etl2"]
+			["AqF", "${alchemical_n_sym_element_water}F", "alc ntac", "alc aqf"],
+			["AqR", "${alchemical_n_sym_element_water}R", "alc aqr"],
+			["AR", "alc sbh"],
+			["AqV1", "alc aqv1", "alc etl1"],
+			["AqV2", "alc aqv2", "alc etl2"]
 		],
 		"options": { "useLetterLocale": [true, "regia$", "regia$", "vitae$", "vitae$"] },
 		"symbol": {
@@ -92,9 +97,9 @@
 	"alchemical_n_sym_vinegar[,_distilled_1,_distilled_2]", {
 		"unicode": ["1F70A", "1F70B", "1F70C"],
 		"recipe": [
-			["alc vinegar", "alc vgr", "alc acetic acid", "alc acac"],
-			[":${alchemical_n_sym_vinegar}:", "alc dis vinegar-1", "alc dvgr1"],
-			[":I:", "alc dis vinegar-2", "alc dvgr2"]
+			["alc vgr", "alc acac"],
+			[":${alchemical_n_sym_vinegar}:", "alc dvgr1"],
+			[":I:", "alc dvgr2"]
 		],
 		"options": { "useLetterLocale": "vinegar$" },
 		"symbol": {
@@ -110,9 +115,9 @@
 	"alchemical_n_sym_sulfur[,_philosophers,_black]", {
 		"unicode": ["1F70D", "1F70E", "1F70F"],
 		"recipe": [
-			["${alchemical_n_sym_vinegar}${alchemical_n_sym_element_fire}","${alchemical_n_sym_element_fire}${alchemical_n_sym_vinegar}", "alc sulfur", "alc slf"],
-			["alc phi sulfur", "alc pslf"],
-			["alc black sulfur", "alc bslf"]
+			["${alchemical_n_sym_vinegar}${alchemical_n_sym_element_fire}","${alchemical_n_sym_element_fire}${alchemical_n_sym_vinegar}", "alc slf"],
+			["alc pslf"],
+			["alc bslf"]
 		],
 		"options": { "useLetterLocale": "sulfur$" },
 		"symbol": {
@@ -138,7 +143,7 @@
 	},
 	"alchemical_n_sym_salt", {
 		"unicode": "1F714",
-		"recipe": ["alc salt", "ast arc Earth", "ast aErt", "ast fzm"],
+		"recipe": ["alc salt", "ast a Ert", "ast fzm"],
 		"symbol": {
 			"tagAdditive": [
 				{ "script": "astrological", "letter": "planet_earth", "beforeType": "archaic", "beforeLetter": "planet" },
@@ -148,7 +153,7 @@
 	},
 	"alchemical_n_sym_alkali_[1,2]", {
 		"unicode": ["1F736", "1F737"],
-		"recipe": [["alc alkali-1", "alc alk1"], ["alc alkali-2", "alc alk2"]],
+		"recipe": [["alc alk1"], ["alc alk2"]],
 		"options": { "useLetterLocale": "alkali$" },
 		"symbol": {
 			"copyNumber": [1, 2]
@@ -156,7 +161,7 @@
 	},
 	"alchemical_n_sym_[quicklime]", {
 		"unicode": ["1F741"],
-		"recipe": [["alc quicklime", "alc ql"]],
+		"recipe": [["alc ql"]],
 		"symbol": {
 			"tagAdditive": [
 				[{ "letter": "calx_viva" }, { "letter": "calx", "copyNumber": 2 }]
@@ -166,9 +171,9 @@
 	"alchemical_n_sym_borax_[1,2,3]", {
 		"unicode": ["1F742", "1F743", "1F744"],
 		"recipe": [
-			["alc borax-1", "alc bx1"],
-			["alc borax-2", "alc bx2"],
-			["alc borax-3", "alc bx3"]
+			["alc bx1"],
+			["alc bx2"],
+			["alc bx3"]
 		],
 		"options": { "useLetterLocale": "borax$" },
 		"symbol": {
@@ -180,7 +185,7 @@
 		"unicode": ["1F745", "1F715"],
 		"recipe": [
 			["alc alum"],
-			["alc nitre", "alc ntr"]
+			["alc ntr"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -192,8 +197,8 @@
 	"alchemical_n_sym_tartar_[1,2]", {
 		"unicode": ["1F73F", "1F740"],
 		"recipe": [
-			["alc tartar-1", "alc tr1"],
-			["alc tartar-2", "alc tr2"]
+			["alc tr1"],
+			["alc tr2"]
 		],
 		"options": { "useLetterLocale": "tartar$" },
 		"symbol": {
@@ -206,11 +211,11 @@
 	},
 	"alchemical_n_sym_[tutty,caput_mortuum]", {
 		"unicode": ["1F74D", "1F74E"],
-		"recipe": [["alc tutty", "alc ty"], ["alc caput mortuum", "alc cm"]]
+		"recipe": [["alc ty"], ["alc cm"]]
 	},
 	"alchemical_n_sym_metal_sulfate_[1,2]", {
 		"unicode": ["1F716", "1F717"],
-		"recipe": [["alc vitriol-1", "alc vtr1"], ["alc vitriol-2", "alc vtr2"]],
+		"recipe": [["alc vtr1"], ["alc vtr2"]],
 		"options": { "useLetterLocale": "sulfate$" },
 		"symbol": {
 			"copyNumber": [1, 2],
@@ -229,11 +234,11 @@
 	"alchemical_n_sym_[tincture,gum,wax,powder,calx]", {
 		"unicode": ["1F748", "1F749", "1F74A", "1F74B", "1F74C"],
 		"recipe": [
-			["alc tincture", "alc tcr"],
-			["alc gum", "alc resin", "alc balm"],
+			["alc tcr"],
+			["alc gum", "alc rsn", "alc balm"],
 			["alc wax", "alc cera"],
-			["alc powder", "alc pwd", "alc pulvis", "alc pvs"],
-			["alc calx", "alc cx"]
+			["alc pwd", "alc pvs"],
+			["alc cx"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -247,14 +252,14 @@
 	"alchemical_n_sym_[ashes,pot_ashes,soap,urine,horse_dung,brick,pounded_brick,amalgam]", {
 		"unicode": ["1F757", "1F758", "1F754", "1F755", "1F756", "1F759", "1F75A", "1F75B"],
 		"recipe": [
-			["alc ashes", "alc ahs"],
-			["alc pot ashes", "alc phs"],
+			["alc ash"],
+			["alc pash"],
 			["alc soap"],
-			["alc urine", "alc urn"],
-			["alc horse dung", "alc hd"],
-			["alc brick", "alc brk"],
-			["alc pounded brick", "alc pbrk"],
-			["aaa", "${lat_s_let_a__macron×3}", "alc amalgam", "alc aml"]
+			["alc urn"],
+			["alc hd"],
+			["alc brk"],
+			["alc pbrk"],
+			["aaa", "${lat_s_let_a__macron×3}", "alc aml"]
 		],
 		"symbol": { 
 			"tagAdditive": [
@@ -272,8 +277,8 @@
 	"alchemical_n_sym_stratum_super_stratum_[1,2]", {
 		"unicode": ["1F75C", "1F75D"],
 		"recipe": [
-			["sss", "alc str sup str-1", "alc sss1"],
-			["${lat_s_let_s_long×3}", "alc str sup str-2", "alc sss2"]
+			["sss", "alc sss1"],
+			["${lat_s_let_s_long×3}", "alc sss2"]
 		],
 		"options": { "useLetterLocale": "super_stratum$" },
 		"symbol": { "copyNumber": [1, 2] }
@@ -281,8 +286,8 @@
 	"alchemical_n_sym_[gold,silver]", {
 		"unicode": ["1F71A", "1F71B"],
 		"recipe": [
-			["alc arc gold", "alc agld", "ast arc Sun"],
-			["alc arc silver", "alc aslv", "ast arc Moon"]
+			["alc a gld", "ast a Sun"],
+			["alc a slv", "ast a Moon"]
 		],
 		"symbol": {
 			"beforeType": "archaic",
@@ -295,16 +300,16 @@
 	},
 	"alchemical_n_sym_[arsenic]", {
 		"unicode": ["1F73A"],
-		"recipe": [["alc arsenic", "alc asn"]],
+		"recipe": [["alc asn"]],
 		"symbol": { "beforeLetter": "element" }
 	},
 	"alchemical_n_sym_mineral_[cinnabar,marcasite,sal_ammoniac,auripigment]", {
 		"unicode": ["1F713", "1F738", "1F739", "1F73D"],
 		"recipe": [
-			["${lat_s_let_z_ezh×2}", "alc cinnabar", "alc cnb"],
-			["alc marcasite", "alc mrcs", "alc pyrite", "alc prt"],
-			["alc sal ammoniac", "alc sna"],
-			["alc auripigment", "alc arp"]
+			["${lat_s_let_z_ezh×2}", "alc cnb"],
+			["alc mrcs", "alc prt"],
+			["alc sna"],
+			["alc arp"]
 		],
 		"symbol": {
 			"beforeLetter": "mineral",
@@ -318,7 +323,7 @@
 	},
 	"alchemical_n_sym_mineral_realgar_[1,2]", {
 		"unicode": ["1F73B", "1F73C"],
-		"recipe": [["alc realgar-1", "alc rg1"], ["alc realgar-2", "alc rg2"]],
+		"recipe": [["alc rg1"], ["alc rg2"]],
 		"options": { "useLetterLocale": "realgar$" },
 		"symbol": {
 			"beforeLetter": "mineral",
@@ -331,12 +336,12 @@
 	},
 	"alchemical_n_sym_lodestone", {
 		"unicode": "1F753",
-		"recipe": ["alc lodestone", "alc lds"],
+		"recipe": ["alc lds"],
 		"symbol": { "tagAdditive": [{ "letter": "magnes" }] }
 	},
 	"alchemical_n_sym_rock_salt_[1,2]", {
 		"unicode": ["1F718", "1F719"],
-		"recipe": [["alc rock salt-1", "alc rs1"], ["alc rock salt-2", "alc rs2"]],
+		"recipe": [["alc rs1"], ["alc rs2"]],
 		"options": { "useLetterLocale": "salt$" },
 		"symbol": {
 			"copyNumber": [1, 2],
@@ -346,9 +351,9 @@
 	"alchemical_n_sym_[tin,lead,bismuth]_ore", {
 		"unicode": ["1F729", "1F72A", "1F73E"],
 		"recipe": [
-			["alc tin ore", "alc toe"],
-			["alc lead ore", "alc loe"],
-			["alc bismuth ore", "alc boe"]
+			["alc toe"],
+			["alc loe"],
+			["alc boe"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -360,7 +365,7 @@
 	},
 	"alchemical_n_sym_[iron_]copper_ore", {
 		"unicode": ["1F721"],
-		"recipe": [["alc iron cop ore", "alc icoe"]],
+		"recipe": [["alc icoe"]],
 		"symbol": {
 			"tagAdditive": [
 				[{ "letter": "iron_copper_bearing_mineral" }]
@@ -369,7 +374,7 @@
 	},
 	"alchemical_n_sym_iron_ore_[1,2]", {
 		"unicode": ["1F71C", "1F71D"],
-		"recipe": [["alc iron ore-1", "alc ioe1"], ["alc iron ore-2", "alc ioe2"]],
+		"recipe": [["alc ioe1"], ["alc ioe2"]],
 		"options": { "useLetterLocale": "ore$" },
 		"symbol": {
 			"copyNumber": [1, 2],
@@ -379,9 +384,9 @@
 	"alchemical_n_sym_iron_crocus_[1,2,3]", {
 		"unicode": ["26A8", "1F71E", "26A9"],
 		"recipe": [
-			["alc iron croc-1", "alc icr1"],
-			["alc iron croc-2", "alc icr2"],
-			["alc iron croc-3", "alc icr3"]
+			["alc icr1"],
+			["alc icr2"],
+			["alc icr3"]
 		],
 		"options": { "useLetterLocale": "crocus$" },
 		"symbol": {
@@ -394,7 +399,7 @@
 	},
 	"alchemical_n_sym_iron_[regulus]", {
 		"unicode": ["1F71F"],
-		"recipe": [["alc iron regu", "alc irg"]],
+		"recipe": [["alc irg"]],
 		"symbol": {
 			"tagAdditive": [
 				[{ "letter": "regulus_martis" }]
@@ -403,7 +408,7 @@
 	},
 	"alchemical_n_sym_[copper]_ore", {
 		"unicode": ["1F721"],
-		"recipe": [["alc cop ore", "alc coe"]],
+		"recipe": [["alc coe"]],
 		"symbol": {
 			"tagAdditive": [
 				[{ "letter": "copper_bearing_mineral" }]
@@ -412,7 +417,10 @@
 	},
 	"alchemical_n_sym_copper_crocus_[1,2]", {
 		"unicode": ["1F723", "1F724"],
-		"recipe": [["alc cop croc-1", "alc ccr1"], ["alc cop croc-2", "alc ccr2"]],
+		"recipe": [
+			["alc ccr1"],
+			["alc ccr2"]
+		],
 		"options": { "useLetterLocale": "crocus$" },
 		"symbol": {
 			"copyNumber": [1, 2],
@@ -422,15 +430,15 @@
 	"alchemical_n_sym_copper_[antimoniate,antimoniate_salt]", {
 		"unicode": ["1F725", "1F726"],
 		"recipe": [
-			["alc cop antimoniate", "alc cnt"],
-			["alc cop antimoniate salt", "alc cns"]
+			["alc cnt"],
+			["alc cns"]
 		]
 	},
 	"alchemical_n_sym_copper[,_salt]_sublimate", {
 		"unicode": ["1F722", "1F727"],
 		"recipe": [
-			["alc cop sublimate", "alc cst"],
-			["alc cop salt sublimate", "alc css"]
+			["alc cst"],
+			["alc css"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -442,7 +450,7 @@
 	"alchemical_n_sym_[antimony]_ore", {
 		"unicode": ["1F72B"],
 		"recipe": [
-			["alc antimony ore", "alc aoe", "alc stibnite", "alc stb"]
+			["alc aoe", "alc stb"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -452,7 +460,10 @@
 	},
 	"alchemical_n_sym_antimony_regulus_[1,2]", {
 		"unicode": ["1F730", "1F731"],
-		"recipe": [["alc antimony regu-1", "alc amr1"], ["alc antimony regu-2", "alc amr2"]],
+		"recipe": [
+			["alc amr1"],
+			["alc amr2"]
+		],
 		"options": { "useLetterLocale": "regulus$" },
 		"symbol": {
 			"copyNumber": [1, 2],
@@ -462,15 +473,15 @@
 	"alchemical_n_sym_antimony_[salt,vinegar]", {
 		"unicode": ["1F72D", "1F72F"],
 		"recipe": [
-			["alc antimony salt", "alc aslt"],
-			["alc antimony vinegar", "alc avgr"]
+			["alc aslt"],
+			["alc avgr"]
 		]
 	},
 	"alchemical_n_sym_antimony[,_salt]_sublimate", {
 		"unicode": ["1F72C", "1F72E"],
 		"recipe": [
-			["alc antimony sublimate", "alc ast"],
-			["alc antimony salt sublimate", "alc asst"]
+			["alc ast"],
+			["alc asst"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -485,9 +496,9 @@
 	"alchemical_n_sym_mercury_sublimate_[1,2,3]", {
 		"unicode": ["1F710", "1F711", "1F712"],
 		"recipe": [
-			["${astrological_n_sym_planet_mercury}${alchemical_n_sym_sublimate}", "alc mercury sublimate-1", "alc mst1"],
-			["alc mercury sublimate-2", "alc mst2"],
-			["alc mercury sublimate-3", "alc mst3"]
+			["${astrological_n_sym_planet_mercury}${alchemical_n_sym_sublimate}", "alc mst1"],
+			["alc mst2"],
+			["alc mst3"]
 		],
 		"options": { "useLetterLocale": "sublimate$" },
 		"symbol": { "copyNumber": [1, 2, 3] }
@@ -495,11 +506,11 @@
 	"alchemical_n_sym_crucible_[1,2,3,4,5]", {
 		"unicode": ["1F765", "1F766", "1F767", "1F768", "1F769"],
 		"recipe": [
-			["alc crucible-1", "alc cr1"],
-			["alc crucible-2", "alc cr2"],
-			["alc crucible-3", "alc cr3"],
-			["alc crucible-4", "alc cr4"],
-			["alc crucible-5", "alc cr5"]
+			["alc cr1"],
+			["alc cr2"],
+			["alc cr3"],
+			["alc cr4"],
+			["alc cr5"]
 		],
 		"options": { "useLetterLocale": "crucible$" },
 		"symbol": {
@@ -516,15 +527,15 @@
 	"alchemical_n_sym_[alembic,retort]", {
 		"unicode": ["1F76A", "1F76D"],
 		"recipe": [
-			["alc alembic", "alc amc"],
-			["alc retort", "alc rt"]
+			["alc almb"],
+			["alc rt"]
 		]
 	},
 	"alchemical_n_sym_[mary,vapours]_bath", {
 		"unicode": ["1F76B", "1F76C"],
 		"recipe": [
-			["alc mary bath", "alc mby"],
-			["alc vapours bath", "alc vby"]
+			["alc mby"],
+			["alc vby"]
 		],
 		"symbol": {
 			"tagAdditive": [
@@ -536,31 +547,31 @@
 	"alchemical_n_sym_[hour,night,twenty_four,month]", {
 		"unicode": ["1F76E", "1F76F", "1F770", "1F771"],
 		"recipe": [
-			["alc hour", "alc hr"],
-			["alc night", "alc ngt"],
-			["alc twenty four", "alc tf"],
-			["alc month", "alc mth"]
+			["alc hr"],
+			["alc ngt"],
+			["alc tf"],
+			["alc mth"]
 		]
 	},
 	"alchemical_n_sym_half_[dram,ounce]", {
 		"unicode": ["1F772", "1F773"],
 		"recipe": [
-			["${lat_s_let_z_ezh}${lat_s_lig_s_eszett}", "alc half dram", "alc hdrm"],
-			["${pharmaceutical_n_sym_ounce}${lat_s_lig_s_eszett}", "alc half ounce", "alc hnc"]
+			["${lat_s_let_z_ezh}${lat_s_lig_s_eszett}", "alc hdrm"],
+			["${pharmaceutical_n_sym_ounce}${lat_s_lig_s_eszett}", "alc hnc"]
 		]
 	},
 	"alchemical_n_sym_[scepter_of_jove,caduceus,trident,trident_starred]", {
 		"unicode": ["1F74F", "1F750", "1F751", "1F752"],
 		"recipe": [
-			["alc scep jove", "alc soj"],
-			["alc caduceus", "alc cds"],
-			["alc trident", "alc trd"],
-			["alc star trident", "alc strd"]
+			["alc soj"],
+			["alc cds"],
+			["alc trd"],
+			["alc strd"]
 		]
 	},
 	"astrological_n_sym_star_sun", {
 		"unicode": "2609",
-		"recipe": ["ast Sun", "alc gold", "alc gld"],
+		"recipe": ["ast Sun", "alc gld"],
 		"symbol": {
 			"customs": "cf7c631",
 			"beforeLetter": "star",
@@ -572,7 +583,7 @@
 	},
 	"astrological_n_sym_satellite_moon_[1,2]", {
 		"unicode": ["263E", "263D"],
-		"recipe": [["ast moon-1", "ast mn1"], ["ast moon-2", "ast mn2"]],
+		"recipe": [["ast mn1"], ["ast mn2"]],
 		"options": { "useLetterLocale": "moon$" },
 		"symbol": {
 			"customs": "c8b94b0",
@@ -606,14 +617,14 @@
 			[], [], [], []
 		],
 		"recipe": [
-			["ast Mercury", "ast Mrc"],
-			["ast Venus", "ast Vns"],
-			["ast Earth", "ast Ert", "alc vers"],
-			["ast Mars", "ast Mrs"],
-			["ast Jupiter", "ast Jpr"],
-			["ast Saturn", "ast Stn"],
-			["ast Uranus", "ast Urs"],
-			["ast Neptune", "ast Npt"]
+			["ast Mrc"],
+			["ast Vns"],
+			["ast Ert", "alc vers"],
+			["ast Mrs"],
+			["ast Jpr"],
+			["ast Stn"],
+			["ast Urs"],
+			["ast Npt"]
 		],
 		"symbol": {
 			"customs": "[ca8a3a0,cdcb572,c688ecf,cdb7755,cd1c498,cf4e7a8,caad4ed,c585ad8]",
@@ -625,9 +636,15 @@
 					{ "script": "alchemical", "beforeType": "archaic", "beforeLetter": "element",  "letter": "tin" },
 					{ "script": "astrological", "letter": "mutable_zodiacal_modality", "copyNumber": 2 }
 				],
-				[{ "script": "alchemical", "beforeLetter": "element", "letter": "copper" }],
+				[
+					{ "letter": "venus_mirror" },
+					{ "script": "alchemical", "beforeLetter": "element", "letter": "copper" }
+				],
 				[{ "script": "alchemical", "letter": "verdigris" }],
-				[{ "script": "alchemical", "beforeLetter": "element", "letter": "iron" }],
+				[
+					{ "letter": "mars_shield_and_spear" },
+					{ "script": "alchemical", "beforeLetter": "element", "letter": "iron" }
+				],
 				[
 					{ "script": "alchemical", "beforeLetter": "element",  "letter": "tin" },
 					{ "script": "alchemical", "beforeType": "archaic", "letter": "electrum" }
@@ -641,25 +658,25 @@
 	"astrological_n_sym_planet_[cupido,hades,zeus,kronos,apollon,admetos,vulcanus,poseidon]", {
 		"unicode": ["2BE0", "2BE1", "2BE2", "2BE3", "2BE4", "2BE5", "2BE6", "2BE7"],
 		"recipe": [
-			["ast Cupido", "ast Cpd"],
-			["ast Hades", "ast Hds"],
-			["ast Zeus", "ast Zs"],
-			["ast Kronos", "ast Krn"],
-			["ast Apollon", "ast Apl"],
-			["ast Admetos", "ast Adm"],
-			["ast Vulcanus", "ast Vls"],
-			["ast Poseidon", "ast Psn"]
+			["ast Cpd"],
+			["ast Hds"],
+			["ast Zs"],
+			["ast Krn"],
+			["ast Apl"],
+			["ast Adm"],
+			["ast Vls"],
+			["ast Psn"]
 		],
 		"symbol": { "beforeLetter": "transneptunian,planet" }
 	},
 	"astrological_n_sym_dwarf_planet_pluto_[1,2,3,4,5]", {
 		"unicode": ["2647", "2BD3", "2BD4", "2BD5", "2BD6"],
 		"recipe": [
-			["ast Pluto-1", "ast Plt1"],
-			["ast Pluto-2", "ast Plt2"],
-			["ast Pluto-3", "ast Plt3", "asn obs Astraea", "asn oAsr"],
-			["ast Pluto-4", "ast Plt4"],
-			["ast Pluto-5", "ast Plt5"]
+			["ast Plt1"],
+			["ast Plt2"],
+			["ast Plt3", "asn o Asr"],
+			["ast Plt4"],
+			["ast Plt5"]
 		],
 		"options": { "useLetterLocale": "pluto$" },
 		"symbol": {
@@ -676,8 +693,8 @@
 	"astrological_n_sym_dwarf_planet_[ceres,sedna]", {
 		"unicode": ["26B3", "2BF2"],
 		"recipe": [
-			["ast Ceres", "ast Crs"],
-			["ast Sedna", "ast Sdn"]
+			["ast Crs"],
+			["ast Sdn"]
 		],
 		"symbol": { 
 			"customs": "[cf3b6c2,]",
@@ -687,8 +704,8 @@
 	"astrological_n_sym_dwarf_planet_eris_[1,2]", {
 		"unicode": ["2BF0", "2BF1"],
 		"recipe": [
-			["ast Eris-1", "ast Ers1"],
-			["ast Eris-2", "ast Ers2"]
+			["ast Ers1"],
+			["ast Ers2"]
 		],
 		"options": { "useLetterLocale": "eris$" },
 		"symbol": { 
@@ -699,11 +716,11 @@
 	"astrological_n_sym_dwarf_planet_[haumea,makemake,gonggong,quaoar,orcus]", {
 		"unicode": ["1F77B", "1F77C", "1F77D", "1F77E", "1F77F"],
 		"recipe": [
-			["ast Haumea", "ast Hme"],
-			["ast Makemake", "ast Mkm"],
-			["ast Gonggong", "ast Gng"],
-			["ast Quaoar", "ast Qar"],
-			["ast Orcus", "ast Ocs"]
+			["ast Hme"],
+			["ast Mkm"],
+			["ast Gng"],
+			["ast Qar"],
+			["ast Ocs"]
 		],
 		"symbol": {
 			"beforeLetter": "dwarf_planet"
@@ -711,7 +728,10 @@
 	},
 	"astrological_n_sym_planet_[transpluto,proserpina]", {
 		"unicode": ["2BD7", "2BD8"],
-		"recipe": [["ast Transpluto", "ast Tplt"], ["ast Proserpina", "ast Prs"]],
+		"recipe": [
+			["ast Tplt"],
+			["ast Prs"]
+		],
 		"symbol": {
 			"beforeLetter": "planet"
 		}
@@ -719,15 +739,15 @@
 	"astrological_n_sym_asteroid_[vesta,chiron,astraea,hygiea,pholus,nessus,pallas,juno,sappho]", {
 		"unicode": ["26B6", "26B7", "2BD9", "2BDA", "2BDB", "2BDC", "26B4", "26B5", "26A2"],
 		"recipe": [
-			["ast Vesta", "ast Vst"],
-			["ast Chiron", "ast Chr"],
-			["ast Astraea", "ast Asr"],
-			["ast Hygiea", "ast Hyg"],
-			["ast Pholus", "ast Phl"],
-			["ast Nessus", "ast Nes"],
-			["ast Pallas", "ast Pls"],
+			["ast Vst"],
+			["ast Chr"],
+			["ast Asr"],
+			["ast Hyg"],
+			["ast Phl"],
+			["ast Nes"],
+			["ast Pls"],
 			["ast Juno"],
-			["ast Sappho", "ast Sph"]
+			["${astrological_n_sym_planet_venus×2}", "ast Sph"]
 		],
 		"symbol": {
 			"beforeLetter": "asteroid",
@@ -740,10 +760,10 @@
 	"astrological_n_sym_asteroid_[vesta,astraea,hygiea,parthenope]_obsolete", {
 		"unicode": ["1F777", "1F778", "1F779", "1F77A"],
 		"recipe": [
-			["ast obs Vesta", "ast oVst"],
-			["ast obs Astraea", "ast oAsr"],
-			["ast obs Hygiea", "ast oHyg"],
-			["ast obs Parthenope", "ast oPth"]
+			["ast o Vst"],
+			["ast o Asr"],
+			["ast o Hyg"],
+			["ast o Pth"]
 		],
 		"options": { "useLetterLocale": "_obsolete$(remove)" },
 		"symbol": {
@@ -754,8 +774,8 @@
 	"astrological_n_sym_[black,white]_moon_[lilith,selena]", {
 		"unicode": ["26B8", "2BDD"],
 		"recipe": [
-			["ast Lilith", "ast Lth"],
-			["ast Selene", "ast Sln"]
+			["ast Lth"],
+			["ast Sln"]
 		]
 	},
 	"astrological_n_sym_true_[black,white]_moon", {
@@ -775,7 +795,7 @@
 	"astrological_n_sym_[conjuction,opposition,sextile,semisextile,quincunx,sesquiquadrate,retrograde]", {
 		"unicode": ["260C", "260D", "26B9", "26BA", "26BB", "26BC", "211E"],
 		"recipe": [
-			["ast cnj", "alc day", "alc dy"],
+			["ast cnj", "alc dy"],
 			["ast opp"],
 			["ast sxt"],
 			["ast ssx"],
@@ -799,31 +819,31 @@
 	},
 	"astrological_n_sym_lot_of_fortune", {
 		"unicode": "1F774",
-		"recipe": ["alc lot fort", "alc lof"]
+		"recipe": ["alc lof"]
 	},
 	"astrological_n_sym_[occultation,lunar_eclipse]", {
 		"unicode": ["1F775", "1F776"],
 		"recipe": [
-			["ast occult", "alc occ"],
-			["ast lunar eclipse", "alc lec"]
+			["alc occ"],
+			["alc lec"]
 		]
 	},
 	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]", {
 		"unicode": ["{2648...i-1}"],
 		"sequence": ["{2648...i-1}", "FE0E"],
 		"recipe": [
-			["ast Aries", "ast Ars"],
-			["ast Taurus", "ast Tas"],
-			["ast Gemini", "ast Gmi"],
-			["ast Cancer", "ast Cnr"],
+			["ast Ars"],
+			["ast Tas"],
+			["ast Gmi"],
+			["ast Cnr"],
 			["ast Leo"],
-			["ast Virgo", "ast Vrg"],
-			["ast Libra", "ast Lbr"],
-			["ast Scorpio", "ast Scr"],
-			["ast Sagittarius", "ast Sgt"],
-			["ast Capricorn", "ast Cpc"],
-			["ast Aquarius", "ast Aqr"],
-			["ast Pisces", "ast Pss"]
+			["ast Vrg"],
+			["ast Lbr"],
+			["ast Scr"],
+			["ast Sgt"],
+			["ast Cpc"],
+			["ast Aqr"],
+			["ast Psc"]
 		],
 		"symbol": {
 			"beforeType": "zodiacal",
@@ -850,18 +870,18 @@
 		"unicode": ["{2648...i-1}"],
 		"sequence": ["{2648...i-1}", "FE0F"],
 		"recipe": [
-			["emoji Aries", "emoji Ars"],
-			["emoji Taurus", "emoji Tas"],
-			["emoji Gemini", "emoji Gmi"],
-			["emoji Cancer", "emoji Cnr"],
-			["emoji Leo"],
-			["emoji Virgo", "emoji Vrg"],
-			["emoji Libra", "emoji Lbr"],
-			["emoji Scorpio", "emoji Scr"],
-			["emoji Sagittarius", "emoji Sgt"],
-			["emoji Capricorn", "emoji Cpc"],
-			["emoji Aquarius", "emoji Aqr"],
-			["emoji Pisces", "emoji Pss"]
+			["emj Ars"],
+			["emj Tas"],
+			["emj Gmi"],
+			["emj Cnr"],
+			["emj Leo"],
+			["emj Vrg"],
+			["emj Lbr"],
+			["emj Scr"],
+			["emj Sgt"],
+			["emj Cpc"],
+			["emj Aqr"],
+			["emj Psc"]
 		],
 		"options": {
 			"useLetterLocale": "_emoji$(remove)",
@@ -872,14 +892,14 @@
 	"astronomical_n_sym_[comet]", {
 		"unicode": ["2604"],
 		"sequence": [["2604", "FE0E"]],
-		"recipe": [["asn Comet", "asn Cmt"]]
+		"recipe": [["asn Cmt"]]
 	},
 	"astronomical_n_sym_planet_[earth,uranus,neptune]", {
 		"unicode": ["2641", "26E2", "2BC9"],
 		"recipe": [
-			["asn Earth", "asn Ert"],
-			["asn Uranus", "asn Urs"],
-			["asn Neptune", "asn Npt"]
+			["asn Ert"],
+			["asn Urs"],
+			["asn Npt"]
 		],
 		"symbol": {
 			"customs": "[c688ecf,caad4ed,c585ad8]",
@@ -896,7 +916,7 @@
 	},
 	"astronomical_n_sym_planet_[venus]_classical", {
 		"unicode": ["26B2"],
-		"recipe": [["asn cl Venus", "asn cVns"]],
+		"recipe": [["asn c Vns"]],
 		"options": { "useLetterLocale": "_classical$(remove)" },
 		"symbol": {
 			"customs": "[cdcb572]",
@@ -907,23 +927,23 @@
 	"astronomical_n_sym_asteroid_[hebe,iris,flora,metis,parthenope,victoria,egeria,irene,eunomia,psyche,thetis,melpomene,fortuna,proserpina,bellona,amphitrite,leukothea]", {
 		"unicode": ["{1CEC0...i-1}"],
 		"recipe": [
-			["asn Hebe", "asn Hb"],
-			["asn Iris", "asn Is"],
-			["asn Flora", "asn Fr"],
-			["asn Metis", "asn Ms"],
-			["asn Parthenope", "asn Pth"],
-			["asn Victoria", "asn Vct"],
-			["asn Egeria", "asn Egr"],
-			["asn Irene", "asn Irn"],
-			["asn Eunomia", "asn Enm"],
-			["asn Psyche", "asn Psh"],
-			["asn Thetis", "asn Ths"],
-			["asn Melpomene", "asn Mlp"],
-			["asn Fortuna", "asn Ftn"],
-			["asn Proserpina", "asn Prs"],
-			["asn Bellona", "asn Bln"],
-			["asn Amphitrite", "asn Amp"],
-			["asn Leukothea", "asn Lkt"]
+			["asn Hb"],
+			["asn Is"],
+			["asn Fr"],
+			["asn Ms"],
+			["asn Pth"],
+			["asn Vct"],
+			["asn Egr"],
+			["asn Irn"],
+			["asn Enm"],
+			["asn Psh"],
+			["asn Ths"],
+			["asn Mlp"],
+			["asn Ftn"],
+			["asn Prs"],
+			["asn Bln"],
+			["asn Amp"],
+			["asn Lkt"]
 		],
 		"symbol": { "beforeLetter": "asteroid" }
 	},

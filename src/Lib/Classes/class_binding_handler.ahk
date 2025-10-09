@@ -67,7 +67,7 @@ Class BindHandler {
 
 			Event.Trigger("Chracter", "Send", &output, &combo, &inputType)
 
-			if globalInstances.crafter.isComposeInstanceActive && StrLen(output) = 2 && Util.IsHighSurrogate(output)
+			if globalInstances.crafter.isComposeInstanceActive && StrLen(output) = 2
 				globalInstances.crafter.surrogateBuffer := output
 
 			if StrLen(output) > 4 || lineBreaks

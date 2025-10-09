@@ -16,6 +16,7 @@
 - Changes:
 
   - Binds for IPA tone bars moved from right Alt to left (to keep ⟨⟩ on the original right Alt + 9/0 combination).
+  - Removed long recipe versions for symbols of Alchemy, Astrology and Astronomy (due to their lack of relevance and violation of the “Composition” mode concept).
 
 - Fixes:
 
@@ -215,6 +216,7 @@
 - Изменения:
 
   - Привязки для символов тона МФА перемещены с правого Alt на левый (чтобы оставить ⟨⟩ на прежней комбинации правый Alt + 9/0).
+  - Удалены длинные версии рецептов для символов Алхимии, Астрологии и Астрономии (в связи с отсутствием их уместности и нарушением концепции режима «Композиции»).
 
 - Исправления:
 

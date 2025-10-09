@@ -182,7 +182,7 @@ Class ChrCrafter {
 				composeObject.ParentHook.Stop()
 				break
 			} else if iterationObject.input != "" {
-				if Util.IsHighSurrogate(iterationObject.input) {
+				if this.surrogateBuffer != "" {
 					iterationObject.input := this.surrogateBuffer
 					this.surrogateBuffer := ""
 				}

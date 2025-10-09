@@ -258,6 +258,8 @@
 				"n_sym_fixed_zodiacal_modality": { "letter_locale": "Фиксированная зодиакальная модальность" },
 				"n_sym_cardinal_zodiacal_modality": { "letter_locale": "Кардинальная зодиакальная модальность" },
 				"n_sym_mutable_zodiacal_modality": { "letter_locale": "Изменчивая зодиакальная модальность" },
+				"n_sym_venus_mirror": { "letter_locale": "Зеркало Венеры" },
+				"n_sym_mars_shield_and_spear": { "letter_locale": "Щит и копьё Марса" },
 				"n_sym_ascending_node": { "letter_locale": "Восходящий узел" },
 				"n_sym_descending_node": { "letter_locale": "Нисходящий узел" },
 				"n_sym_conjuction": { "letter_locale": "Соединение" },

@@ -24,7 +24,7 @@
 	"taoist_n_sym_yinyang[,_emoji]", {
 		"unicode": ["262F", "262F"],
 		"sequence": [["262F", "FE0E"], ["262F", "FE0F"]],
-		"recipe": [["t yy"], ["emoji yy"]],
+		"recipe": [["t yy"], ["emj yy"]],
 		"options": {
 			"useLetterLocale": "yinyang$",
 			"altLayoutKey": ["`", ""],
