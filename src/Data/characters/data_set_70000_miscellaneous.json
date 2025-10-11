@@ -7,7 +7,7 @@
 		"recipe": ["sus", "сус"]
 	},
 	"replacment_character", {
-		"titles": {"ru-RU": "Заменяющий символ", "en-US": "Replacement character"},
+		"titles": {"ru-RU": "Заменяющий символ", "en-US": "Replacement character"},
 		"unicode": "FFFD",
 		"options": { },
 		"recipe": ["null"]
@@ -21,8 +21,8 @@
 		"recipe": ["bfl"]
 	},
 	"language_tag", {
-		"titles": {"ru-RU": "Языковой тег", "en-US": "Language tag"},
-		"tags": ["language tag", "языковой тег"],
+		"titles": {"ru-RU": "Языковой тег", "en-US": "Language tag"},
+		"tags": ["language tag", "языковой тег"],
 		"unicode": "E0001",
 		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<LANGUAGE TAG>" },
@@ -38,7 +38,7 @@
 		"recipe": ["tcancel"]
 	},
 	"object_replacement_character", {
-		"titles": {"ru-RU": "Объекто-заменяющий символ", "en-US": "Object replacement character"},
+		"titles": {"ru-RU": "Объекто-заменяющий символ", "en-US": "Object replacement character"},
 		"unicode": "FFFC",
 		"options": { },
 		"recipe": ["obj"]

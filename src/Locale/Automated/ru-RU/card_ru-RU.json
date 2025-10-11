@@ -38,7 +38,7 @@
 			"playing_card": {
 				"n_card_ace": { "letter_locale": "Туз" },
 				"n_card_two": { "letter_locale": "Двойка" },
-				"n_card_three": { "letter_locale": "Тройка" },
+				"n_card_three": { "letter_locale": "Тройка" },
 				"n_card_four": { "letter_locale": "Четвёрка" },
 				"n_card_five": { "letter_locale": "Пятёрка" },
 				"n_card_six": { "letter_locale": "Шестёрка" },
