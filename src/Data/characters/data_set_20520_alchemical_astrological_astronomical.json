@@ -828,9 +828,9 @@
 			["alc lec"]
 		]
 	},
-	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]", {
-		"unicode": ["{2648...i-1}"],
-		"sequence": ["{2648...i-1}", "FE0E"],
+	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces,ophiuchus]", {
+		"unicode": ["(if i<13:{2648...i-1}|26CE)"],
+		"sequence": ["(if i<13:{2648...i-1}|26CE)", "FE0E"],
 		"recipe": [
 			["ast Ars"],
 			["ast Tas"],
@@ -843,7 +843,8 @@
 			["ast Sgt"],
 			["ast Cpc"],
 			["ast Aqr"],
-			["ast Psc"]
+			["ast Psc"],
+			["ast Oph"]
 		],
 		"symbol": {
 			"beforeType": "zodiacal",
@@ -862,13 +863,14 @@
 					{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "putrefaction" }
 				],
 				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "multiplication" }],
-				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "projection" }]
+				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "projection" }],
+				[{}]
 			]
 		}
 	},
-	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces]_emoji", {
-		"unicode": ["{2648...i-1}"],
-		"sequence": ["{2648...i-1}", "FE0F"],
+	"astrological_n_sign_zodiacal_[aries,taurus,gemini,cancer,leo,virgo,libra,scorpio,sagittarius,capricorn,aquarius,pisces,ophiuchus]_emoji", {
+		"unicode": ["(if i<13:{2648...i-1}|26CE)"],
+		"sequence": ["(if i<13:{2648...i-1}|26CE)", "FE0F"],
 		"recipe": [
 			["emj Ars"],
 			["emj Tas"],
@@ -881,7 +883,8 @@
 			["emj Sgt"],
 			["emj Cpc"],
 			["emj Aqr"],
-			["emj Psc"]
+			["emj Psc"],
+			["emj Oph"]
 		],
 		"options": {
 			"useLetterLocale": "_emoji$(remove)",

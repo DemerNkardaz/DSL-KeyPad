@@ -631,18 +631,37 @@ Class ChrReg {
 		return
 	}
 
-	EntryPreProcessing(&entryName, &entry, &instances) {
-		if !IsSet(entry)
-			return
+	StringIf(str, comparable) {
+		local output := ""
 
-		local entryVariantPos := entry["variantPos"]
+		if RegExMatch(str, "\(if\si([=<>])(\d+):(.*?)\|(.*?)\)", &match) {
+			local condition := match[1]
+			local conditionValue := Integer(match[2])
+			local trueValue := match[3]
+			local falseValue := match[4]
 
-		if RegExMatch(entry["unicode"], ChrReg.dynamicIDPattern, &match) {
+			if (condition = "=" && comparable = conditionValue)
+				|| (condition = "<" && comparable < conditionValue)
+				|| (condition = ">" && comparable > conditionValue) {
+				output := trueValue
+			} else
+				output := falseValue
+
+		} else
+			output := str
+
+		return output
+	}
+
+	StringDynamicID(str, idValue) {
+		local output := ""
+
+		if RegExMatch(str, ChrReg.dynamicIDPattern, &match) {
 			local isToSubtract := match[1] = "-"
 			local isHexFormat := RegExMatch(match[2], "^(?:0x)?[A-Fa-f0-9]+$")
 			local addition := match[2] != "" ? Integer((isHexFormat && !InStr(match[2], "0x") ? "0x" : "") match[2]) : 0
 			local secondaryAddition := match[3] != "" ? Integer(match[3]) : 0
-			local calculatedValue := (entryVariantPos) + (secondaryAddition)
+			local calculatedValue := (idValue) + (secondaryAddition)
 
 			if isToSubtract
 				calculatedValue := -calculatedValue
@@ -652,32 +671,28 @@ Class ChrReg {
 			if isHexFormat
 				value := Format("{:04X}", value)
 
-			entry["unicode"] := RegExReplace(entry["unicode"], match[0], value)
-		}
+			output := RegExReplace(str, match[0], value)
+		} else
+			output := str
+
+		return output
+
+	}
+
+	EntryPreProcessing(&entryName, &entry, &instances) {
+		if !IsSet(entry)
+			return
+
+		local entryVariantPos := entry["variantPos"]
+
+		entry["unicode"] := this.StringDynamicID(this.StringIf(entry["unicode"], entryVariantPos), entryVariantPos)
 
 		if entry["sequence"].Length > 0 {
 			local newSequence := []
-			for sequence in entry["sequence"] {
-				if sequence is String && RegExMatch(sequence, ChrReg.dynamicIDPattern, &match) {
-					local isToSubtract := match[1] = "-"
-					local isHexFormat := RegExMatch(match[2], "^(?:0x)?[A-Fa-f0-9]+$")
-					local addition := match[2] != "" ? Integer((isHexFormat && !InStr(match[2], "0x") ? "0x" : "") match[2]) : 0
-					local secondaryAddition := match[3] != "" ? Integer(match[3]) : 0
-					local calculatedValue := (entryVariantPos) + (secondaryAddition)
 
-					if isToSubtract
-						calculatedValue := -calculatedValue
+			for sequence in entry["sequence"]
+				newSequence.Push(sequence is String ? this.StringDynamicID(this.StringIf(sequence, entryVariantPos), entryVariantPos) : sequence)
 
-					local value := addition + calculatedValue
-
-					if isHexFormat
-						value := Format("{:04X}", value)
-
-					newSequence.Push(RegExReplace(sequence, match[0], value))
-				} else {
-					newSequence.Push(sequence)
-				}
-			}
 			entry["sequence"] := newSequence
 		}
 

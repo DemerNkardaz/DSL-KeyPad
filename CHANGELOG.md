@@ -8,6 +8,8 @@
 
 - Additions:
 
+  - Addded new Astrological characters:
+    - [ ⛎︎ ]
   - Addded new Hellenic characters:
     - [ ϶ ]
   - Addded new miscellaneous characters:
@@ -208,6 +210,8 @@
 
 - Добавления:
 
+  - Добавлены новые символы астрологии:
+    - [ ⛎︎ ]
   - Добавлены новые символы эллиницы:
     - [ ϶ ]
   - Добавлены новые прочие символы:

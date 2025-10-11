@@ -255,6 +255,7 @@
 				"n_sign_zodiacal_capricorn": { "letter_locale": "Capricorn" },
 				"n_sign_zodiacal_aquarius": { "letter_locale": "Aquarius" },
 				"n_sign_zodiacal_pisces": { "letter_locale": "Pisces" },
+				"n_sign_zodiacal_ophiuchus": { "letter_locale": "Ophiuchus" },
 				"n_sym_fixed_zodiacal_modality": { "letter_locale": "Fixed zodiacal modality" },
 				"n_sym_cardinal_zodiacal_modality": { "letter_locale": "Cardinal zodiacal modality" },
 				"n_sym_mutable_zodiacal_modality": { "letter_locale": "Mutable zodiacal modality" },
