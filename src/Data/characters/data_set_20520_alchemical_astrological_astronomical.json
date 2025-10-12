@@ -407,7 +407,7 @@
 		}
 	},
 	"alchemical_n_sym_[copper]_ore", {
-		"unicode": ["1F721"],
+		"unicode": ["1F720"],
 		"recipe": [["alc coe"]],
 		"symbol": {
 			"tagAdditive": [

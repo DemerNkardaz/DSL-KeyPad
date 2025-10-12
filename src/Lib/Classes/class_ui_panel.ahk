@@ -1473,7 +1473,7 @@ Class UIMainPanel {
 		panelWindow[prefix "HTMLFieldNamed"].SetFont("s" (entityLen > 14 ? this.fontSizes.fieldSmall : this.fontSizes.field))
 
 		panelWindow[prefix "UnicodeField"].SetFont(panelWindow[prefix "UnicodeField"].Text = this.defaultUnicode ? this.fontColorNoData : this.fontColorDefault)
-		panelWindow[prefix "InternalIDField"].SetFont(panelWindow[prefix "UnicodeField"].Text = 0 ? this.fontColorNoData : this.fontColorDefault)
+		panelWindow[prefix "InternalIDField"].SetFont(panelWindow[prefix "UnicodeField"].Text = "0" ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "HTMLField"].SetFont(panelWindow[prefix "HTMLField"].Text = this.defaultHTML ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "HTMLFieldDecimal"].SetFont(panelWindow[prefix "HTMLFieldDecimal"].Text = this.defaultHTML ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "HTMLFieldNamed"].SetFont(panelWindow[prefix "HTMLFieldNamed"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
