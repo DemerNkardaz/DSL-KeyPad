@@ -435,9 +435,15 @@
 					"<^<!<+": "payerok",
 					"<^<!>+": "palatalization"
 				},
+				"Ч": {
+					"<!": "glagolitic_[c,s]_let_chrivi_caudate"
+				},
 				"Ф": {"<^>!": "glagolitic_[c,s]_let_fita"},
 				"Ъ": {"<^>!": "glagolitic_[c,s]_let_shtapic"},
-				"Э": {"<^>!": "glagolitic_[c,s]_let_small_yus_iotified"},
+				"Э": {
+					"<^>!": "glagolitic_[c,s]_let_small_yus__tail",
+					"<!": "glagolitic_[c,s]_let_small_yus_iotified"
+				},
 				"Равно": {"+": ["plus"]},
 				"ДефисоМинус": {"+": ["underscore"]},
 				"Точка": {"+": ["comma"]},

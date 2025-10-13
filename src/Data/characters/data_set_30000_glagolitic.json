@@ -145,6 +145,11 @@
 		"options": { "altLayoutKey": "/Ч/" },
 		"alterations": { "combining": "1E01D" }
 	},
+	"glagolitic_[c,s]_let_chrivi_caudate", {
+		"unicode": ["2C2F", "2C5F"],
+		"options": { "altLayoutKey": "<! /Ч/" },
+		"symbol": { "font": "Catrinity" }
+	},
 	"glagolitic_[c,s]_let_sha", {
 		"unicode": ["2C1E", "2C4E"],
 		"options": { "altLayoutKey": "/Ш/" },
@@ -196,9 +201,15 @@
 		"options": { "altLayoutKey": "/Э/" },
 		"alterations": { "combining": "1E024" }
 	},
+	"glagolitic_[c,s]_let_small_yus__tail", {
+		"unicode": ["2C25", "2C55"],
+		"groups": ["Glagolitic"],
+		"options": { "altLayoutKey": ">! /Э/", "useLetterLocale": "yus$" },
+		"recipe": ["${glagolitic_[c,s]_let_small_yus}${arrow_left}"]
+	},
 	"glagolitic_[c,s]_let_small_yus_iotified", {
 		"unicode": ["2C27", "2C57"],
-		"options": { "altLayoutKey": ">! /Э/" },
+		"options": { "altLayoutKey": "<! /Э/" },
 		"alterations": { "combining": "1E027" },
 		"recipe": ["${glagolitic_[c,s]_let_yestu}${glagolitic_[c,s]_let_small_yus}"]
 	},

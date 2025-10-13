@@ -10,6 +10,8 @@
 
   - Addded new Astrological characters:
     - [ ⛎︎ ]
+  - Addded new Glagolitic characters:
+    - [ ⰯⱟⰥⱕ ]
   - Addded new Hellenic characters:
     - [ ϶ ]
   - Addded new miscellaneous characters:
@@ -212,6 +214,8 @@
 
   - Добавлены новые символы астрологии:
     - [ ⛎︎ ]
+  - Добавлены новые символы глаголицы:
+    - [ ⰯⱟⰥⱕ ]
   - Добавлены новые символы эллиницы:
     - [ ϶ ]
   - Добавлены новые прочие символы:

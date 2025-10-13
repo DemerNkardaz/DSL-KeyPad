@@ -69,6 +69,8 @@
 				"s_let_tsi": { "letter_locale": "цы" },
 				"c_let_chrivi": { "letter_locale": "Червь" },
 				"s_let_chrivi": { "letter_locale": "червь" },
+				"c_let_chrivi_caudate": { "letter_locale": "Червь хвостатый" },
+				"s_let_chrivi_caudate": { "letter_locale": "червь хвостатый" },
 				"c_let_sha": { "letter_locale": "Ша" },
 				"s_let_sha": { "letter_locale": "ша" },
 				"c_let_shta": { "letter_locale": "Шта" },
@@ -88,19 +90,19 @@
 				"c_let_yu": { "letter_locale": "Ю" },
 				"s_let_yu": { "letter_locale": "ю" },
 				"c_let_small_yus": { "letter_locale": "Малый Юс" },
-				"s_let_small_yus": { "letter_locale": "Малый Юс" },
-				"c_let_small_yus_iotified": { "letter_locale": "Малый Юс Йотированный" },
-				"s_let_small_yus_iotified": { "letter_locale": "Малый Юс Йотированный" },
+				"s_let_small_yus": { "letter_locale": "малый юс" },
+				"c_let_small_yus_iotified": { "letter_locale": "Малый Юс йотированный" },
+				"s_let_small_yus_iotified": { "letter_locale": "малый юс йотированный" },
 				"c_let_big_yus": { "letter_locale": "Большый Юс" },
-				"s_let_big_yus": { "letter_locale": "Большый Юс" },
-				"c_let_big_yus_iotified": { "letter_locale": "Большый Юс Йотированный" },
-				"s_let_big_yus_iotified": { "letter_locale": "Большый Юс Йотированный" },
+				"s_let_big_yus": { "letter_locale": "большый юс" },
+				"c_let_big_yus_iotified": { "letter_locale": "Большый Юс йотированный" },
+				"s_let_big_yus_iotified": { "letter_locale": "большый юс йотированный" },
 				"c_let_fita": { "letter_locale": "Фита" },
 				"s_let_fita": { "letter_locale": "фита" },
 				"c_let_shtapic": { "letter_locale": "Штапик" },
 				"s_let_shtapic": { "letter_locale": "штапик" },
 				"c_let_trokutasti_a": { "letter_locale": "Треугольная А" },
-				"s_let_trokutasti_a": { "letter_locale": "Треугольная а" }
+				"s_let_trokutasti_a": { "letter_locale": "треугольная а" }
 			}
 		}
 	}
