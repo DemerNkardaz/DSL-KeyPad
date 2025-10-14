@@ -57,8 +57,11 @@ Class LocaleGenerator {
 		if referenceLocale {
 			if !(referenceLocale ~= "i)^:") {
 				local referenceName := entryName
-				if RegExMatch(referenceLocale, "i)^(.*?)\$", &refMatch) {
-					referenceName := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1")
+				if RegExMatch(referenceLocale, "i)^(.*?)\$(\(.*?\))?", &refMatch) {
+					if refMatch[2] != "" && InStr(refMatch[2], "remove") {
+						referenceName := RegExReplace(entryName, "i)" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1"))
+					} else
+						referenceName := RegExReplace(entryName, "i)^(.*?" RegExReplace(refMatch[1], "([\\.\^$*+?()[\]{}|])", "\$1") ").*", "$1")
 				} else
 					referenceName := referenceLocale
 

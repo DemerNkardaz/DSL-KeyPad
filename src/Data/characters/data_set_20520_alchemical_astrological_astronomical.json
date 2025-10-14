@@ -864,7 +864,7 @@
 				],
 				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "multiplication" }],
 				[{ "script": "alchemical", "type": "symbol", "beforeLetter": "process", "letter": "projection" }],
-				[{}]
+				[]
 			]
 		}
 	},

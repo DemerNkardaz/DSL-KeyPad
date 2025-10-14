@@ -204,9 +204,9 @@
 	},
 	"lat_[c,s]_let_t_thorn_double", {
 		"unicode": ["A7D2", "A7D3"],
-		"options": { "useLetterLocale": true },
+		"options": { "useLetterLocale": "thorn$" },
 		"recipe": ["$$", "${lat_[c,s]_let_@_thorn×2}"],
-		"symbol": { "letter": ["TH", "th"] }
+		"symbol": { "letter": ["TH", "th"], "beforeLetter": "double::2" }
 	},
 	"lat_[s]_let_u_sideways", {
 		"unicode": ["1D1D"],
@@ -240,9 +240,9 @@
 	},
 	"lat_[c,s]_let_w_wynn_double", {
 		"unicode": ["A7D4", "A7D5"],
-		"options": { "useLetterLocale": true },
+		"options": { "useLetterLocale": "wynn$" },
 		"recipe": ["$$", "${lat_[c,s]_let_@_wynn×2}"],
-		"symbol": { "letter": ["WY", "wy"] }
+		"symbol": { "letter": ["WY", "wy"], "beforeLetter": "double::2" }
 	},
 	"lat_[c,s]_let_z_ezh", {
 		"unicode": ["01B7", "0292"],
@@ -403,47 +403,53 @@
 	"lat_[c,s]_let_d_insular", {
 		"unicode": ["A779", "A77A"],
 		"alterations": [{}, { "combining": "1DD8" }],
-		"options": { "useLetterLocale": true },
+		"options": { "referenceLocale": "_insular$(remove)" },
+		"symbol": { "beforeLetter": "insular" },
 		"recipe": ["$ ins"]
 	},
 	"lat_[c,s]_let_f_insular", {
 		"unicode": ["A77B", "A77C"],
-		"options": { "useLetterLocale": true },
+		"options": { "referenceLocale": "_insular$(remove)" },
+		"symbol": { "beforeLetter": "insular" },
 		"recipe": ["$ ins"]
 	},
 	"lat_[c,s]_let_g_insular", {
 		"unicode": ["A77D", "1D79"],
 		"alterations": [{}, { "combining": "1ACC" }],
-		"options": { "useLetterLocale": true, "fastKey": "<+ $?Secondary" },
+		"options": { "referenceLocale": "_insular$(remove)", "fastKey": "<+ $?Secondary" },
+		"symbol": { "beforeLetter": "insular" },
 		"recipe": ["$ ins"]
 	},
 	"lat_[c,s]_let_g_insular_closed", {
 		"unicode": ["A7D0", "A7D1"],
-		"options": { "useLetterLocale": true, "referenceLocale": "insular$" },
+		"options": { "referenceLocale": "_insular$(remove)" },
 		"recipe": ["$- ins", "${lat_[c,s]_let_@_insular}-"],
-		"symbol": { "beforeLetter": "closed" }
+		"symbol": { "beforeLetter": "closed,insular" }
 	},
 	"lat_[c,s]_let_g_insular_turned", {
 		"unicode": ["A77E", "A77F"],
-		"options": { "useLetterLocale": true, "referenceLocale": "insular$" },
+		"options": { "referenceLocale": "_insular$(remove)" },
 		"recipe": ["$${arrow_left_circle} ins", "${lat_[c,s]_let_@_insular}${arrow_left_circle}"],
-		"symbol": { "beforeLetter": "turned" }
+		"symbol": { "beforeLetter": "turned,insular" }
 	},
 	"lat_[c,s]_let_s_insular", {
 		"unicode": ["A784", "A785"],
-		"options": { "useLetterLocale": true },
+		"options": { "referenceLocale": "_insular$(remove)" },
+		"symbol": { "beforeLetter": "insular" },
 		"recipe": ["$ ins"]
 	},
 	"lat_[c,s]_let_r_insular", {
 		"unicode": ["A782", "A783"],
 		"alterations": [{}, { "combining": "1ACD" }],
-		"options": { "useLetterLocale": true },
+		"options": { "referenceLocale": "_insular$(remove)" },
+		"symbol": { "beforeLetter": "insular" },
 		"recipe": ["$ ins"]
 	},
 	"lat_[c,s]_let_t_insular", {
 		"unicode": ["A786", "A787"],
 		"alterations": [{}, { "combining": "1ACE" }],
-		"options": { "useLetterLocale": true },
+		"options": { "referenceLocale": "_insular$(remove)" },
+		"symbol": { "beforeLetter": "insular" },
 		"recipe": ["$ ins"]
 	},
 	"lat_[c,s]_sign_et_tironian", {
@@ -454,13 +460,33 @@
 	"lat_[c,s]_let_r_rotunda", {
 		"unicode": ["A75A", "A75B"],
 		"alterations": [{}, { "combining": "1DE3" }],
-		"options": { "useLetterLocale": true },
+		"options": { "referenceLocale": "_rotunda$(remove)" },
+		"symbol": { "afterLetter": "rotunda" },
 		"recipe": ["$ rot"]
 	},
 	"lat_[c,s]_let_rum_rotunda", {
 		"unicode": ["A75C", "A75D"],
 		"options": { "useLetterLocale": true },
+		"symbol": { "afterLetter": "rotunda" },
 		"recipe": ["/Rum/ rot"]
+	},
+	"lat_[c,s]_let_ae_volapuk", {
+		"unicode": ["A79A", "A79B"],
+		"options": { "referenceLocale": "_volapuk$(remove)" },
+		"symbol": { "beforeLetter": "volapuk" },
+		"recipe": ["vlp $"]
+	},
+	"lat_[c,s]_let_oe_volapuk", {
+		"unicode": ["A79C", "A79D"],
+		"options": { "referenceLocale": "_volapuk$(remove)" },
+		"symbol": { "beforeLetter": "volapuk" },
+		"recipe": ["vlp $"]
+	},
+	"lat_[c,s]_let_ue_volapuk", {
+		"unicode": ["A79E", "A79F"],
+		"options": { "referenceLocale": "_volapuk$(remove)" },
+		"symbol": { "beforeLetter": "volapuk" },
+		"recipe": ["vlp $"]
 	},
 	"lat_[c,s]_let_et", {
 		"unicode": ["A76A", "A76B"],
@@ -512,6 +538,12 @@
 		"unicode": ["A778"],
 		"options": { "useLetterLocale": true },
 		"recipe": ["um"]
+	},
+	"lat_[c,s]_let_s_middle_scots", {
+		"unicode": ["A7D6", "A7D7"],
+		"options": { "referenceLocale": "_middle_scots$(remove)" },
+		"symbol": { "beforeLetter": "middle_scots" },
+		"recipe": ["$ sct"]
 	},
 	"lat_[c,s]_lig_ll_middle_welsh", {
 		"unicode": ["1EFA", "1EFB"],

@@ -111,7 +111,10 @@
 				"auspicious_motif": "auspicious motif",
 				"weight": "weight",
 				"currency": "currency",
-				"neutral": "neutral"
+				"neutral": "neutral",
+				"insular": "insular",
+				"middle_scots": "middle scots",
+				"volapuk": "volapük"
 			},
 			"after_letter": {
 				"late": "(late form)",
@@ -121,7 +124,8 @@
 				"anglicana": "anglicana",
 				"longa": "longa",
 				"weight": "weight",
-				"currency": "currency"
+				"currency": "currency",
+				"rotunda": "rotunda"
 			},
 			"postfix": {
 				"with": "with",
