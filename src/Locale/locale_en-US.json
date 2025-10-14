@@ -338,6 +338,16 @@
 					"{var:CapsLock} — CapsLock in active state."
 				]
 			},
+			"notes": {
+				"__self": "Notes",
+				"description": [
+					"1.\u2003The program is limited to a fixed list of language layouts to prevent interference with the operation of language layouts that the program is not designed for. The program is primarily designed for English and Russian layouts. All input methods will be active only on the following language layouts:\n\n",
+					"\u2003•\u2002English — USA, Canada, United Kingdom, Ireland, Australia, Singapore, UAE, New Zealand, Belize, Philippines, Jamaica, Caribbean, South Africa, Zimbabwe, Trinidad and Tobago\n",
+					"\u2003•\u2002Russian — Russia, Belarus, Moldova, Ukraine, Kazakhstan, Kyrgyzstan\n",
+					"\u2003•\u2002Greek\n",
+					"\u2003•\u2002Vietnamese\n"
+				]
+			},
 			"common_binds": {
 				"__self": "Common bindings",
 				"description": [
