@@ -923,6 +923,8 @@ Class ChrReg {
 					break
 				}
 			}
+
+			; entry["unicodeName"] := Util.GetUnicodeName(entry["unicode"])
 		}
 
 		return

@@ -1595,7 +1595,7 @@
 		"recipe": ["elf", "прин"]
 	},
 	"small_element_of", {
-		"unicode": "2208",
+		"unicode": "220A",
 		"tags": ["small element of", "малая принадлежность"],
 		"groups": ["Smelting Special", "Math"],
 		"recipe": ["smelf", "малприн"]

@@ -42,6 +42,89 @@ Class Util {
 		return currentTime
 	}
 
+	static GetUnicodeName(input) {
+		if input is String {
+			if StrLen(input) >= 4 {
+				codepoint := Number("0x" input)
+			} else if StrLen(input) = 1 {
+				codepoint := Ord(input)
+			} else if StrLen(input) = 2 {
+				code := Ord(SubStr(input, 1, 1))
+				if (code >= 0xD800 && code <= 0xDBFF) {
+					low := Ord(SubStr(input, 2, 1))
+					if (low >= 0xDC00 && low <= 0xDFFF)
+						codepoint := 0x10000 + ((code - 0xD800) << 10) + (low - 0xDC00)
+					else
+						codepoint := code
+				} else {
+					codepoint := code
+				}
+			} else {
+				return ""
+			}
+		} else {
+			codepoint := input
+		}
+
+		static icuLib := ""
+		if (icuLib = "") {
+			for lib in ["icuuc.dll", "icuuc74.dll", "icuuc73.dll", "icuuc72.dll"] {
+				try {
+					DllCall(lib "\u_charName", "UInt", 0x41, "Int", 0, "Ptr", 0, "Int", 0, "Ptr", 0, "Int")
+					icuLib := lib
+					break
+				}
+			}
+			if (icuLib = "")
+				return ""
+		}
+
+		local nameBuffer := Buffer(256, 0)
+		local errorCode := Buffer(4, 0)
+
+		try {
+			length := DllCall(icuLib "\u_charName",
+				"UInt", codepoint,
+				"Int", 0,
+				"Ptr", nameBuffer.Ptr,
+				"Int", nameBuffer.Size,
+				"Ptr", errorCode.Ptr,
+				"Int")
+
+			if (length > 0) {
+				name := StrGet(nameBuffer.Ptr, "UTF-8")
+				if (name != "" && name != " ")
+					return name
+			}
+		}
+
+		return ""
+	}
+
+	static GetUnicodeNamesFromArray(sourceArray) {
+		local result := []
+
+		for value in sourceArray {
+			result.Push(this.GetUnicodeName(value))
+		}
+
+		return result
+	}
+
+	static GetUnicodeRangeNames(startCodepoint, endCodepoint) {
+		local result := Map()
+
+		Loop (endCodepoint - startCodepoint + 1) {
+			local codepoint := startCodepoint + A_Index - 1
+			local name := this.GetUnicodeName(codepoint)
+
+			if (name != "")
+				result.Set(Format("{:04X}", codepoint), name)
+		}
+
+		return result
+	}
+
 	static SendDate(dateStyle := "YYYYMMDDhhmmss") {
 		SendText(this.GetDate(dateStyle))
 		return

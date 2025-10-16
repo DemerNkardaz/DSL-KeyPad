@@ -25,7 +25,7 @@ Class UIMainPanel {
 	}
 
 	w := 1250
-	h := 900
+	h := 930
 
 	xPos := 0
 	yPos := 0
@@ -188,10 +188,15 @@ Class UIMainPanel {
 	unicodeBlockX := this.defaultFrameX
 	unicodeBlockY := (this.tagsLVY + this.tagsLVH) + 15
 
-	entryNameW := this.previewGrpBoxW - 10
+	unicodeNameW := this.previewGrpBoxW - 10
+	unicodeNameH := 30
+	unicodeNameX := this.previewGrpBoxX + (this.previewGrpBoxW - this.unicodeNameW) / 2
+	unicodeNameY := (this.unicodeBlockY + this.unicodeBlockH) + 5
+
+	entryNameW := this.unicodeNameW
 	entryNameH := 24
-	entryNameX := this.previewGrpBoxX + (this.previewGrpBoxW - this.entryNameW) / 2
-	entryNameY := (this.unicodeBlockY + this.unicodeBlockH) + 15
+	entryNameX := this.unicodeNameX
+	entryNameY := (this.unicodeNameY + this.unicodeNameH) + 5
 
 	defaultUnicode := "0000"
 	defaultUnicodeBlock := "0000...10FFFF`n<UNKNOWN>"
@@ -680,6 +685,8 @@ Class UIMainPanel {
 
 		local unicodeBlock := panelWindow.AddText(Format("v{}UnicodeBlock {} x{} y{} w{} h{} c5088c8 Center", attributes.prefix, this.defaultTextOpts, this.unicodeBlockX, this.unicodeBlockY, this.unicodeBlockW, this.unicodeBlockH), this.defaultUnicodeBlock)
 
+		local unicodeName := panelWindow.AddText(Format("v{}UnicodeName {} x{} y{} w{} h{} Center", attributes.prefix, this.defaultTextOpts, this.unicodeNameX, this.unicodeNameY, this.unicodeNameW, this.unicodeNameH))
+
 		local entryNameLabel := panelWindow.AddText(Format("v{}EntryName {} x{} y{} w{} h{} Center", attributes.prefix, this.defaultTextOpts, this.entryNameX, this.entryNameY, this.entryNameW, this.entryNameH), "[" Chr(0x2003) this.notAvailable Chr(0x2003) "]")
 
 		charactersLV.OnEvent("ItemFocus", (LV, rowNumber) => this.ItemSetPreview(panelWindow, LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType }))
@@ -740,6 +747,9 @@ Class UIMainPanel {
 		LaTeX_LTX_Title.SetFont("s10", "Cambria")
 		LaTeX_A_Title.SetFont("s9", "Cambria")
 		LaTeX_E_Title.SetFont("s10", "Cambria")
+
+		unicodeName.SetFont("s9")
+
 		EventFuncSetRandom()
 		return Event.OnEvent("UI Instance [Panel]", "Cache Loaded", EventFuncSetRandom)
 
@@ -1324,6 +1334,7 @@ Class UIMainPanel {
 			panelWindow[prefix "UnicodeField"].Value := this.defaultUnicode
 			panelWindow[prefix "InternalIDField"].Value := 0
 			panelWindow[prefix "UnicodeBlock"].Value := this.defaultUnicodeBlock
+			panelWindow[prefix "UnicodeName"].Value := ""
 			panelWindow[prefix "HTMLField"].Value := this.defaultHTML
 			panelWindow[prefix "HTMLFieldDecimal"].Value := this.defaultHTML
 			panelWindow[prefix "HTMLFieldNamed"].Value := this.notAvailable
@@ -1388,6 +1399,7 @@ Class UIMainPanel {
 		panelWindow[prefix "UnicodeField"].Value := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
 		panelWindow[prefix "InternalIDField"].Value := entry["index"]
 		panelWindow[prefix "UnicodeBlock"].Text := unicodeBlock
+		panelWindow[prefix "UnicodeName"].Text := entry["sequence"].Length = 2 ? Util.GetUnicodeNamesFromArray(entry["sequence"]).ToString(" +`n") : Util.GetUnicodeName(entry["unicode"])
 		panelWindow[prefix "AltCodePages"].Text := entry["altCodePages"].Length > 0 ? Locale.ReadInject("dynamic_dictionary.code_page", [Util.StrCutToComma(altCodePages, 24)]) : ""
 		panelWindow[prefix "LaTeXPackage"].Text := StrLen(entry["LaTeXPackage"]) > 0 ? Chrs(0x1F4E6, 0x2005) entry["LaTeXPackage"] : ""
 		panelWindow[prefix "Font"].Text := entryFont != "" ? this.fontMarker entryFont : ""
