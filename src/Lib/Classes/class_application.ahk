@@ -6,6 +6,7 @@ Class App {
 	static profileList := ["default"]
 	static repository := "DemerNkardaz/DSL-KeyPad"
 	static URL := "https://github.com/" this.repository
+	static DocsURL := "https://demernkardaz.github.io/DSL-KeyPad-Docs"
 	static API := "https://api.github.com/repos/" this.repository
 	static gitUserContent := "https://raw.githubusercontent.com/" this.repository
 	static branch := Map("main", this.URL "/tree/main", "dev", this.URL "/tree/dev")

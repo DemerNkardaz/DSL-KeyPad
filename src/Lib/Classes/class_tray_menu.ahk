@@ -87,7 +87,7 @@ Class TrayMenu {
 		local labels := this.TrayLabels()
 
 		this.tray.Delete()
-		this.tray.Add(labels.app, (*) => Run(App.URL)), this.tray.SetIcon(labels.app, App.icoDLL, App.indexIcos["app"])
+		this.tray.Add(labels.app, (*) => Run(App.DocsURL)), this.tray.SetIcon(labels.app, App.icoDLL, App.indexIcos["app"])
 
 		if Update.available
 			this.tray.Add(labels.update, (*) => Update.Check(True)), this.tray.SetIcon(labels.update, App.icoDLL, App.indexIcos["update"])
