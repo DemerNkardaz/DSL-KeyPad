@@ -384,6 +384,14 @@
 					"Left-click with {var:LeftControl}{var:LeftShift} held — open Glyph Variations selector."
 				]
 			},
+			"selector_binds": {
+				"__self": "Selector bindings",
+				"description": [
+					"F1–12 — select page.\n",
+					"Number (optional), letter keys — select one of the modes.\n",
+					"Space key — disable current active mode.\n"
+				]
+			},
 			"uncommon_titles": {
 				"__self": "Uncommon titles",
 				"description": [

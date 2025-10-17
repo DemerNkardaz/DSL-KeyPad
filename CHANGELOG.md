@@ -24,6 +24,7 @@
   - Binds for IPA tone bars moved from right Alt to left (to keep ⟨⟩ on the original right Alt + 9/0 combination).
   - Removed long recipe versions for symbols of Alchemy, Astrology and Astronomy (due to their lack of relevance and violation of the “Composition” mode concept).
   - In the main Panel now shows Unicode name of character in the side preview.
+  - Space key now disables current Alternative mode/Glyph variation/TELEX-like mode when Selector is open.
 
 - Fixes:
 
@@ -231,6 +232,7 @@
   - Привязки для символов тона МФА перемещены с правого Alt на левый (чтобы оставить ⟨⟩ на прежней комбинации правый Alt + 9/0).
   - Удалены длинные версии рецептов для символов Алхимии, Астрологии и Астрономии (в связи с отсутствием их уместности и нарушением концепции режима «Композиции»).
   - В главной панели теперь отображается имя символа в Юникоде в боковом превью.
+  - Теперь пробел отключает текущий Альтернативный режим/Вариант глифа/TELEX-подобный режим, когда открыт соответствующее окно селектора.
 
 - Исправления:
 

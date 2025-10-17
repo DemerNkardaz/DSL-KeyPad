@@ -4,6 +4,7 @@
 	"help.common_binds",
 	"help.panel_commands",
 	"help.tray_commands",
+	"help.selector_binds",
 	"help.uncommon_titles",
 	{"help.search_at_library": [
 		"help.search_at_library.glyph_variations",

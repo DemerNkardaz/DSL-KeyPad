@@ -358,7 +358,7 @@ Class Scripter {
 		Loop 12
 			fKeys .= "{F" A_Index "}"
 
-		local IH := InputHook("L1 M", fKeys)
+		local IH := InputHook("L1 M", fKeys "{Space}")
 		IH.OnEnd := OnEnd
 		IH.Start()
 		SetTimer(WaitCheckGUI, 50)
@@ -375,6 +375,7 @@ Class Scripter {
 		}
 
 		OnEnd(*) {
+
 			if GetKeyState("Shift", "P") || GetKeyState("Ctrl", "P") || GetKeyState("Alt", "P") || GetKeyState("LWin", "P") || GetKeyState("RWin", "P") {
 				this.WaitForKey(hotkeys, selectorType)
 				return
@@ -383,16 +384,21 @@ Class Scripter {
 					this.PanelDestroy(selectorType)
 				this.SelectorPanel(selectorType, page[1])
 				return
+			} else if currentMode != "" && (IH.EndKey = "Space" || IH.Input = " ") {
+				this.HandleWaiting(IH.EndKey, hotkeys, selectorType, currentMode)
+				return
 			}
 			this.HandleWaiting(StrUpper(IH.Input), hotkeys, selectorType)
 		}
 	}
 
-	static HandleWaiting(endKey, hotkeys, selectorType) {
+	static HandleWaiting(endKey, hotkeys, selectorType, currentMode?) {
+		local isSpaceKey := ["Space", " "].HasValue(endKey)
+
 		this.PanelDestroy(selectorType)
-		if endKey != "" && hotkeys.Has(endKey) {
+		if endKey != "" && (hotkeys.Has(endKey) || isSpaceKey) {
 			this.activatedViaMonitor := False
-			this.ToggleSelectedOption(hotkeys.Get(endKey), selectorType)
+			this.ToggleSelectedOption(isSpaceKey && currentMode != "" ? currentMode : hotkeys.Get(endKey), selectorType)
 		}
 	}
 
