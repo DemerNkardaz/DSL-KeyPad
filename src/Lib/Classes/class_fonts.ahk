@@ -27,24 +27,68 @@ Class Fonts {
 		return defaultFont
 	}
 
-	static Validate() {
-		namesToInstall := "`n"
-		fontsToInstall := []
+	static CheckRequiredFontsAvailability(showMissedFontsMessage := True) {
+		local requiredFonts := this.GetListedFontsNames("Required")
+		local missedRequiredFontNames := []
+
+		this.IsFontsInstalled(requiredFonts, missedRequiredFontNames)
+
+		if showMissedFontsMessage && missedRequiredFontNames.Length > 0
+			this.RequiredFontsInstallationMessage(missedRequiredFontNames)
+
+		return missedRequiredFontNames
+	}
+
+	static RequiredFontsInstallationMessage(fontNames) {
+		local messageStatus := MsgBox(Locale.Read("prepare.fonts_not_found") "`n" fontNames.ToString("`n"), App.Title(), "Icon! OKCancel")
+
+		if messageStatus = "OK"
+			for _, fontSource in fontNames
+				Run("https://fonts.google.com/download?family=" StrReplace(fontSource, " ", "+"))
+	}
+
+	static GetListedFontsNames(variants := "Required") {
+		local output := []
 
 		for _, font in this.fontFaces {
-			if !this.IsInstalled(font.name) && font.HasOwnProp("required") && font.required {
-				fontsToInstall.Push(font.name)
-				namesToInstall .= font.name "`n"
-			}
+			local wasSetRequired := font.HasOwnProp("required") && font.required
+
+			if (variants = "All" || wasSetRequired = (variants = "Required"))
+				output.Push(font.name)
 		}
 
-		if fontsToInstall.Length > 0 {
-			local status := MsgBox(Locale.Read("prepare.fonts_not_found") namesToInstall, App.Title(), "Icon! OKCancel")
+		return output
+	}
 
-			if status = "OK"
-				for _, fontSource in fontsToInstall
-					Run("https://fonts.google.com/download?family=" StrReplace(fontSource, " ", "+"))
+	static IsFontsInstalled(fontNames, missingNamesArray?, foundNamesArray?) {
+		if fontNames is String
+			fontNames := [fontNames]
+
+		local result := Map()
+		local hDC := Gdi.GetDC(0)
+		local allFontNames := Map()
+
+		local lf := LOGFONTW()
+		lf.lfFaceName := ""
+		lf.lfCharSet := FONT_CHARSET.DEFAULT_CHARSET
+
+		local callback := CallbackCreate((lpelfe, lpntme, fontType, lparam) => (ObjFromPtrAddRef(lparam)[LOGFONTW(lpelfe).lfFaceName] := True, 1), "Fast", 4)
+
+		Gdi.EnumFontFamiliesExW(hDC, lf, callback, ObjPtr(allFontNames), 0)
+		CallbackFree(callback)
+		Gdi.ReleaseDC(0, hDC)
+
+		for fontName in fontNames {
+			local found := allFontNames.Has(fontName)
+			result[fontName] := found
+
+			if (!found && IsSet(missingNamesArray))
+				missingNamesArray.Push(fontName)
+			else if (found && IsSet(foundNamesArray))
+				foundNamesArray.Push(fontName)
 		}
+
+		return result.Count = 1 ? result.Values()[1] : result
 	}
 
 	static InstallRecommended() {
@@ -88,24 +132,6 @@ Class Fonts {
 		*/
 	}
 
-	static IsInstalled(fontName) {
-		for suffix in [" Regular (TrueType)", " Regular", ""] {
-			fullName := fontName suffix
-
-			Loop Reg, "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" {
-				if fullName = A_LoopRegName {
-					return True
-				}
-			}
-			Loop Reg, "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" {
-				if fullName = A_LoopRegName {
-					return True
-				}
-			}
-		}
-
-		return False
-	}
 
 	static Download(fontSource) {
 		tempFolder := A_Temp "\DSLTemp"
@@ -149,4 +175,4 @@ Class Fonts {
 	}
 }
 
-Fonts.Validate()
+Fonts.CheckRequiredFontsAvailability()
