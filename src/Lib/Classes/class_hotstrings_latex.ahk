@@ -1,3 +1,26 @@
+Class CommonHotstrings {
+	static collection := Map(
+		"gtgz", () => Util.Date.generalized,
+		"gttd", () => Util.Date.today,
+		"gtft", () => Util.Date.formatted,
+		"gtch", () => Util.Date.time,
+		"gtfl", () => Util.Date.filename,
+	)
+
+	static __New() {
+		for hString, action in this.collection {
+			local callback := ObjBindMethod(CommonHotstrings, "Send", action)
+			HotString(":C?0:" hString, callback)
+		}
+
+		return
+	}
+
+	static Send(text, *) {
+		return SendText(text is Func ? text() : text)
+	}
+}
+
 Class LaTeXHotstrings {
 	static collection := Map()
 	static __New() {
@@ -29,16 +52,11 @@ Class LaTeXHotstrings {
 	__New(stance := True) {
 		for code, char in LaTeXHotstrings.collection {
 			if StrLen(code) > 0 && StrLen(char) < 38 {
-				local callback := ObjBindMethod(LaTeXHotstrings, "Send", char)
+				local callback := ObjBindMethod(CommonHotstrings, "Send", char)
 				HotString(":*C?:$>" code "$", callback, stance)
 			}
 		}
 
-		return
-	}
-
-	static Send(char, *) {
-		SendText(char)
 		return
 	}
 }

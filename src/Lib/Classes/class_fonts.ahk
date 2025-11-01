@@ -1,6 +1,5 @@
 Class Fonts {
 	static fontFaces := JSON.LoadFile(App.paths.data "\font_faces.json", "UTF-8")
-
 	static fallbackFont := "Segoe UI"
 
 	static Get(fontType := "Default", variant?) {
@@ -17,14 +16,6 @@ Class Fonts {
 		return output
 	}
 
-	static GetFontByAssignation(assignationScriptContext) {
-		for fontName, assignedContextes in this.fontFaces["Assignation"]
-			if assignedContextes.HasRegEx(assignationScriptContext)
-				return fontName
-
-		return ""
-	}
-
 	static Set(fontName, fontType := "Default", variant?) {
 		local useVariants := IsSet(variant) && variant is Integer
 		local usedData := useVariants ? "variants" : "name"
@@ -37,6 +28,14 @@ Class Fonts {
 		}
 
 		return
+	}
+
+	static GetFontByAssignation(assignationScriptContext) {
+		for fontName, assignedContextes in this.fontFaces["Assignation"]
+			if assignedContextes.HasRegEx(assignationScriptContext)
+				return fontName
+
+		return ""
 	}
 
 	static GetFontByCodePoint(codePoint, defaultFont := this.fallbackFont) {

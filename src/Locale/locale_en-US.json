@@ -79,6 +79,7 @@
 			"scripts": "Scripts",
 			"search": "Search",
 			"search_by_tag": "Search by tag",
+			"seconds_variative": "second$(|s|s)",
 			"separated": "Separated",
 			"status": "Status",
 			"symbol": "Symbol",
@@ -561,6 +562,9 @@
 			"hotstrings": {
 				"__self": "Hotstrings",
 				"description": [
+					"Date and time\n",
+					"gtgz, gttd, gtft, gtch, gtfl return the current date/time in formats like 20251101114040, 2025-11-01, 2025-11-01 11:40:48, 11:40:51 and 2025_11_01-11_40_53 respectively\n",
+					"\n",
 					"LaTeX\n",
 					"Input in format $><LaTeX-command>$ is automatically replaced with the corresponding code symbol, if registered, for example: $>\\bar{\\AE}$ → Ǣ."
 				],

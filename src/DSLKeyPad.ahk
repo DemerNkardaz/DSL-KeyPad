@@ -25,7 +25,6 @@ initialized := False
 
 #Include <utils>
 #Include <external_libs_extension>
-#Include <hotstrings>
 #Include <default_variables>
 ; Supplementary include with binds that calls functions/methods
 #Include Data\binds.ahk

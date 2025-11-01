@@ -1,4 +1,60 @@
 Class Util {
+	Class Date {
+		static now => A_Now
+		static today => FormatTime(A_Now, "yyyy-MM-dd")
+		static time => FormatTime(A_Now, "HH:mm:ss")
+		static timestamp => A_TickCount
+
+		static startTime := A_Now
+		static startTick := A_TickCount
+		static appLaunchTime := FormatTime(A_Now, "HH:mm:ss")
+
+		static Format(dateString := A_Now, template := "YYYYMMDDhhmmss") {
+			return FormatTime(dateString, template)
+		}
+
+		static readable => FormatTime(A_Now, "dddd, d MMMM, yyyy")
+		static formatted => FormatTime(A_Now, "yyyy-MM-dd HH:mm:ss")
+
+		static long => FormatTime(A_Now, "dddd, d MMMM yyyy, HH:mm")
+		static short => FormatTime(this.date, "dd.MM.yyyy")
+		static year => FormatTime(A_Now, "yyyy")
+		static month => FormatTime(A_Now, "MM")
+		static day => FormatTime(A_Now, "dd")
+
+		static iso8601 => FormatTime(A_Now, "yyyy-MM-ddTHH:mm:ss")
+		static filename => FormatTime(A_Now, "yyyy_MM_dd-HH_mm_ss")
+		static generalized => FormatTime(A_Now, "yyyyMMddHHmmss")
+
+		static uptime => Round((A_TickCount - this.startTick) / 1000, 2) " " Locale.Read("dictionary.seconds_variative")
+
+		static Yesterday() {
+			local date := A_Now
+			date := DateAdd(date, -1, "Days")
+			return FormatTime(date, "yyyy-MM-dd")
+		}
+
+		static Tomorrow() {
+			local date := A_Now
+			date := DateAdd(date, 1, "Days")
+			return FormatTime(date, "yyyy-MM-dd")
+		}
+
+		static weekday => FormatTime(A_Now, "dddd")
+		static weekNumber => FormatTime(A_Now, "YWeek")
+
+		__New(dateString := "") {
+			this.date := dateString ? dateString : A_Now
+		}
+
+		formatted => FormatTime(this.date, "yyyy-MM-dd HH:mm:ss")
+		short => FormatTime(this.date, "dd.MM.yyyy")
+		long => FormatTime(this.date, "dddd, d MMMM yyyy, HH:mm")
+		year => FormatTime(this.date, "yyyy")
+		month => FormatTime(this.date, "MM")
+		day => FormatTime(this.date, "dd")
+	}
+
 	static ClearDumps() {
 		Loop Files, App.paths.dumps "\*.*", "FR"
 			if (A_LoopFileName ~= "i)dump_.*\.json$")
@@ -23,23 +79,6 @@ Class Util {
 	}
 	static GetTimeStr() {
 		return FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss")
-	}
-
-	static GetDate(dateStyle := "YYYYMMDDhhmmss") {
-		local currentTime := A_Now
-		local timeFormat := Map(
-			"YYYY", SubStr(currentTime, 1, 4),
-			"MM", SubStr(currentTime, 5, 2),
-			"DD", SubStr(currentTime, 7, 2),
-			"hh", SubStr(currentTime, 9, 2),
-			"mm", SubStr(currentTime, 11, 2),
-			"ss", SubStr(currentTime, 13, 2)
-		)
-		for Key, Value in timeFormat {
-			dateStyle := StrReplace(dateStyle, Key, Value, True)
-		}
-		currentTime := dateStyle
-		return currentTime
 	}
 
 	static GetUnicodeName(input) {
@@ -123,11 +162,6 @@ Class Util {
 		}
 
 		return result
-	}
-
-	static SendDate(dateStyle := "YYYYMMDDhhmmss") {
-		SendText(this.GetDate(dateStyle))
-		return
 	}
 
 	static StrCountOfChr(str, char) {

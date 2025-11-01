@@ -111,7 +111,7 @@ Class Dev {
 			'		<tr>`n'
 			'			<td><b>Stamp</b></td>`n'
 			'			<td>`n'
-			'				&#128228;&emsp14;' Util.GetDate("YYYY-MM-DD hh:mm:ss") '`n'
+			'				&#128228;&emsp14;' Util.Date.formatted '`n'
 			'			</td>`n'
 			'		</tr>`n'
 			'		<tr>`n'
