@@ -41,7 +41,7 @@ Class Cfg {
 		],
 		"Compose", [
 			"Font_Size", 10,
-			"Font_Name", Fonts.fontFaces["Sans-Serif"].name,
+			"Font_Name", Fonts.Get("Sans-Serif"),
 			"Background_Color", "White",
 			"Font_Color", "333333",
 			"Suggestions_Line_Max_Length", 80,

@@ -958,14 +958,12 @@ Class ChrReg {
 	}
 
 	EntryPostProcessing__Fonts(&entryName, &entry) {
-		for fontName, scriptArrays in characters.fontAssignation {
-			if entry["symbol"]["font"] != ""
-				break
-			if scriptArrays.HasRegEx(entry["data"]["script"] != "" ? entry["data"]["script"] : entryName) {
-				entry["symbol"]["font"] := fontName
-				break
-			}
-		}
+		local hasFont := entry["symbol"]["font"] != ""
+		local scriptContext := entry["data"]["script"] != "" ? entry["data"]["script"] : entryName
+
+		if !hasFont
+			entry["symbol"]["font"] := Fonts.GetFontByAssignation(scriptContext)
+
 		return
 	}
 

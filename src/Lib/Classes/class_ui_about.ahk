@@ -22,6 +22,8 @@ Class AboutPanel {
 		[4320, 7680]
 	]
 
+	fontFamily := Fonts.Get()
+
 	bgX := 10
 	bgY := 10
 	bgW := this.w - 20
@@ -159,14 +161,14 @@ Class AboutPanel {
 
 		local aboutSampleWordsContent := aboutWindow.AddText(Format("vAboutSampleWordsContent BackgroundWhite x{} y{} w{} h{}", this.aboutSampleWordsContentX, this.aboutSampleWordsContentY, this.aboutSampleWordsContentW, this.aboutSampleWordsContentH), Locale.Read("about.scripts_words", "default"))
 
-		aboutTitle.SetFont("s18 c333333", Fonts.fontFaces["Default"].name)
-		aboutVersion.SetFont("s11 c333333", Fonts.fontFaces["Default"].name)
-		aboutRepoLink.SetFont("s11", Fonts.fontFaces["Default"].name)
-		aboutAuthor.SetFont("s11 c333333", Fonts.fontFaces["Default"].name)
-		aboutDescBox.SetFont("s11 c333333", Fonts.fontFaces["Default"].name)
-		aboutDescription.SetFont("s11 c333333", Fonts.fontFaces["Default"].name)
-		aboutChrCount.SetFont("s10 c333333", Fonts.fontFaces["Default"].name)
-		aboutSampleWordsContent.SetFont("s11 c555555", Fonts.fontFaces["Default"].name)
+		aboutTitle.SetFont("s18 c333333", this.fontFamily)
+		aboutVersion.SetFont("s11 c333333", this.fontFamily)
+		aboutRepoLink.SetFont("s11", this.fontFamily)
+		aboutAuthor.SetFont("s11 c333333", this.fontFamily)
+		aboutDescBox.SetFont("s11 c333333", this.fontFamily)
+		aboutDescription.SetFont("s11 c333333", this.fontFamily)
+		aboutChrCount.SetFont("s10 c333333", this.fontFamily)
+		aboutSampleWordsContent.SetFont("s11 c555555", this.fontFamily)
 
 		aboutRepoLink.OnEvent("Click", (*) => Run(Locale.Read("gui.about.repository_url")))
 		return aboutWindow

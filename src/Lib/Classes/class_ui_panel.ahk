@@ -24,6 +24,9 @@ Class UIMainPanel {
 		extraSmall: 9
 	}
 
+	fontFamily := Fonts.Get()
+	lvFontFamily := Fonts.Get("Sans-Serif")
+
 	w := 1250
 	h := 930
 
@@ -554,8 +557,8 @@ Class UIMainPanel {
 		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
 		charactersLVForFilter := panelWindow.AddListView(Format("v{}LVForFilter w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
 
-		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), "Noto Sans")
-		charactersLVForFilter.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), "Noto Sans")
+		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), this.lvFontFamily)
+		charactersLVForFilter.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), this.lvFontFamily)
 		charactersLVForFilter.Visible := False
 		charactersLVForFilter.Enabled := False
 
@@ -717,7 +720,7 @@ Class UIMainPanel {
 		legendButton.OnEvent("Click", (B, I) => this.PreviewButtonsBridge(panelWindow, attributes.prefix, "ChrLegend"))
 		glyphsVariantsButton.OnEvent("Click", (B, I) => this.PreviewButtonsBridge(panelWindow, attributes.prefix, "GlyphsPanel"))
 
-		fontMarker.SetFont("s11", Fonts.fontFaces["Default"].name)
+		fontMarker.SetFont("s11", this.fontFamily)
 
 		legendButton.SetFont("s11")
 		legendButton.Enabled := False
@@ -726,8 +729,8 @@ Class UIMainPanel {
 		openTagsButton.SetFont("s11")
 		openTagsButton.Enabled := False
 
-		previewSymbol.SetFont("s" this.fontSizes.preview, Fonts.fontFaces["Default"].name)
-		title.SetFont("s" this.fontSizes.title, Fonts.fontFaces["Default"].name)
+		previewSymbol.SetFont("s" this.fontSizes.preview, this.fontFamily)
+		title.SetFont("s" this.fontSizes.title, this.fontFamily)
 
 		keyRecipeField.SetFont("s" this.fontSizes.field)
 		unicodeField.SetFont("s" this.fontSizes.field)
@@ -1348,8 +1351,8 @@ Class UIMainPanel {
 			panelWindow[prefix "Font"].Text := ""
 			panelWindow[prefix "EntryName"].Text := "[" Chr(0x2003) this.notAvailable Chr(0x2003) "]"
 
-			panelWindow[prefix "Title"].SetFont("s" this.fontSizes.title " norm " this.fontColorNoData, Fonts.fontFaces["Default"].name)
-			panelWindow[prefix "Symbol"].SetFont("s" this.fontSizes.preview " norm " this.fontColorNoData, Fonts.fontFaces["Default"].name)
+			panelWindow[prefix "Title"].SetFont("s" this.fontSizes.title " norm " this.fontColorNoData, this.fontFamily)
+			panelWindow[prefix "Symbol"].SetFont("s" this.fontSizes.preview " norm " this.fontColorNoData, this.fontFamily)
 			panelWindow[prefix "UnicodeField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "InternalIDField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
 			panelWindow[prefix "HTMLField"].SetFont("s" this.fontSizes.field " " this.fontColorNoData)
@@ -1462,7 +1465,7 @@ Class UIMainPanel {
 			local character := notHasAlt ? Util.UnicodeToChar(alterationSymbols[index]) : this.defaultAlteration
 			local fontColor := notHasAlt ? this.fontColorDefault : this.fontColorNoData
 			panelWindow[prefix "AlterationPreview" index].Text := character
-			panelWindow[prefix "AlterationPreview" index].SetFont(fontColor, notHasAlt ? Fonts.CompareByPair(alterationSymbols[index]) : "Segoe UI")
+			panelWindow[prefix "AlterationPreview" index].SetFont(fontColor, notHasAlt ? Fonts.GetFontByCodePoint(alterationSymbols[index]) : "Segoe UI")
 		}
 
 		panelWindow[prefix "LegendButton"].Enabled := entry["options"]["legend"]
@@ -1475,7 +1478,7 @@ Class UIMainPanel {
 		local applyFontOnRecipeField := entry["options"]["applyFontOnRecipeField"]
 
 		panelWindow[prefix "Symbol"].SetFont(this.fontColorDefault,
-			entryFont != "" ? entryFont : Fonts.fontFaces["Default"].name)
+			entryFont != "" ? entryFont : this.fontFamily)
 
 		panelWindow[prefix "Symbol"].SetFont(entry["symbol"]["customs"] != "" ? entry["symbol"]["customs"] : "norm")
 
@@ -1494,7 +1497,7 @@ Class UIMainPanel {
 		panelWindow[prefix "LaTeXFieldText"].SetFont(panelWindow[prefix "LaTeXField"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "LaTeXFieldMath"].SetFont(panelWindow[prefix "LaTeXField"].Text = this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
 		panelWindow[prefix "EntryName"].SetFont(panelWindow[prefix "EntryName"].Text ~= this.notAvailable ? this.fontColorNoData : this.fontColorDefault)
-		panelWindow[prefix "RecipeField"].SetFont(, entryFont != "" && applyFontOnRecipeField && previewType = "Recipe" ? entryFont : "Noto Sans")
+		panelWindow[prefix "RecipeField"].SetFont(, entryFont != "" && applyFontOnRecipeField && previewType = "Recipe" ? entryFont : this.lvFontFamily)
 		panelWindow[prefix "RecipeField"].Move(, , , keyLen > 32 ? this.fieldH * (this.reservedRecipeSteps * 1.25) : this.fieldH)
 
 		return

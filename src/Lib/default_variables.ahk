@@ -125,5 +125,4 @@ characters := {
 	data: ArrayMerge(JSONExt.BulkLoad(App.paths.data "\characters", "UTF-8"), GeneratedEntries()),
 	supplementaryData: JSON.LoadFile(App.paths.data "\supplementary.json", "UTF-8"),
 	blocksData: JSON.LoadFile(App.paths.data "\character_blocks.json", "UTF-8"),
-	fontAssignation: JSON.LoadFile(App.paths.data "\font_assignation.json", "UTF-8"),
 }

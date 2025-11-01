@@ -21,9 +21,7 @@ initialized := False
 #Include <External\TooltipOptions>
 #Include <External\function_gui_button_icon>
 
-#Include <External\AhkWin32Projection\Windows\Graphics\Gdi\Apis>
-#Include <External\AhkWin32Projection\Windows\Graphics\Gdi\FONT_CHARSET>
-#Include <External\AhkWin32Projection\Windows\Graphics\Gdi\LOGFONTW>
+#Include <External\AhkWin32Projection>
 
 #Include <utils>
 #Include <external_libs_extension>

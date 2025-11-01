@@ -1,28 +1,55 @@
 Class Fonts {
-	static fontFaces := Map(
-		"Default", { name: "Noto Serif", required: True },
-		"Symbols", { name: "Noto Sans Symbols", required: True },
-		"Sans-Serif", { name: "Noto Sans", required: True },
-	)
+	static fontFaces := JSON.LoadFile(App.paths.data "\font_faces.json", "UTF-8")
 
-	static URLData := JSON.LoadFile(App.paths.data "\fonts_url_data.json", "UTF-8")
-	static fontByCodePoint := JSON.LoadFile(App.paths.data "\font_by_code_points.json", "UTF-8")
+	static fallbackFont := "Segoe UI"
 
+	static Get(fontType := "Default", variant?) {
+		local output := this.fallbackFont
 
-	static __New() {
-		for fontName, pairs in this.fontByCodePoint
-			for i, each in pairs
-				this.fontByCodePoint[fontName][i] := Number("0x" each)
+		local useVariants := IsSet(variant) && variant is Integer
+		local usedData := useVariants ? "variants" : "name"
+
+		if this.fontFaces["GUI Common"].Has(fontType) {
+			output := this.fontFaces["GUI Common"][fontType][usedData]
+			output := output is Array ? output[useVariants ? variant : 1] : output
+		}
+
+		return output
+	}
+
+	static GetFontByAssignation(assignationScriptContext) {
+		for fontName, assignedContextes in this.fontFaces["Assignation"]
+			if assignedContextes.HasRegEx(assignationScriptContext)
+				return fontName
+
+		return ""
+	}
+
+	static Set(fontName, fontType := "Default", variant?) {
+		local useVariants := IsSet(variant) && variant is Integer
+		local usedData := useVariants ? "variants" : "name"
+
+		if this.fontFaces["GUI Common"].Has(fontType) {
+			if useVariants
+				this.fontFaces["GUI Common"][fontType][usedData][variant] := fontName
+			else
+				this.fontFaces["GUI Common"][fontType][usedData] := fontName
+		}
+
 		return
 	}
 
-	static CompareByPair(codePoint, defaultFont := "Segoe UI") {
+	static GetFontByCodePoint(codePoint, defaultFont := this.fallbackFont) {
 		local num := Number("0x" codePoint)
 
-		for fontName, pairs in this.fontByCodePoint
-			for i, pair in pairs
-				if Mod(i, 2) = 1 && num >= pairs[i] && num <= pairs[i + 1]
+		for fontName, rangeStrings in this.fontFaces["Code Points"] {
+			for each in rangeStrings {
+				local range := StrSplit(each, "-").StringsPrepend("0x").StringsToNumbers()
+
+				if num >= range[1] && num <= range[2]
 					return fontName
+			}
+		}
 
 		return defaultFont
 	}
@@ -45,16 +72,18 @@ Class Fonts {
 		if messageStatus = "OK"
 			for _, fontSource in fontNames
 				Run("https://fonts.google.com/download?family=" StrReplace(fontSource, " ", "+"))
+
+		return
 	}
 
 	static GetListedFontsNames(variants := "Required") {
 		local output := []
 
-		for _, font in this.fontFaces {
-			local wasSetRequired := font.HasOwnProp("required") && font.required
+		for _, font in this.fontFaces["GUI Common"] {
+			local wasSetRequired := font.Has("required") && font["required"]
 
 			if (variants = "All" || wasSetRequired = (variants = "Required"))
-				output.Push(font.name)
+				output.Push(font["name"])
 		}
 
 		return output
@@ -91,48 +120,6 @@ Class Fonts {
 		return result.Count = 1 ? result.Values()[1] : result
 	}
 
-	static InstallRecommended() {
-		sources := []
-
-		for _, font in this.fontFaces {
-			if !font.HasOwnProp("required") {
-				src := font.src
-				dest := App.paths.temp "\" StrSplit(src, "/").Pop()
-				Download(src, dest)
-
-			}
-		}
-
-		Sleep 1000
-
-		; if FileExist(App.paths.temp "\font-install.log")
-		; 	FileDelete(App.paths.temp "\font-install.log")
-
-
-		/*
-		
-				shell := ComObject("Shell.Application")
-				folder := shell.Namespace(App.paths.temp)
-		
-				Loop Files App.paths.temp "\*.ttf" {
-		
-					name := A_LoopFileName
-					item := folder.ParseName(name)
-		
-					if item {
-						item.InvokeVerb("Install")
-						FileAppend "Installed: " name "`n", App.paths.temp "\font-install.log"
-					} else {
-						FileAppend "Failed to parse: " name "`n", App.paths.temp "\font-install.log"
-					}
-		
-					Sleep 100
-					FileDelete(App.paths.temp "\" name)
-				}
-		*/
-	}
-
-
 	static Download(fontSource) {
 		tempFolder := A_Temp "\DSLTemp"
 		DirCreate(tempFolder)
@@ -163,14 +150,16 @@ Class Fonts {
 		if fontName ~= "^" Chr(0x1D4D5)
 			fontName := SubStr(fontName, 4)
 
-		if this.URLData["Google Fonts"].HasRegEx(fontName) {
-			fontName := StrReplace(fontName, " ", "+")
-			Run("https://fonts.google.com/specimen/" fontName)
-		} else if this.URLData.Has(fontName) && this.URLData[fontName] is String
-			Run(this.URLData.Get(fontName))
-		else
-			Run("https://google.com/search?q=" fontName)
+		local url := "https://google.com/search?q="
 
+		if this.fontFaces["URLs"]["Google Fonts"].HasRegEx(fontName)
+			url := "https://fonts.google.com/specimen/" StrReplace(fontName, " ", "+")
+		else if this.fontFaces["URLs"].Has(fontName) && this.fontFaces["URLs"][fontName] is String
+			url := this.fontFaces["URLs"].Get(fontName)
+		else
+			url .= fontName
+
+		Run(url)
 		return
 	}
 }

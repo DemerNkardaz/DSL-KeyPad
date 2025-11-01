@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0 64-bit
-#Include Win32FixedArray.ahk
+; #Include Win32FixedArray.ahk
 
 /**
  * A Win32Struct is the base class from which all generated structs are derived. It's a 

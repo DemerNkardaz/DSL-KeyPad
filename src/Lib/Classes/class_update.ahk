@@ -308,7 +308,7 @@ Class Changelog {
 		PostConstructor() {
 			changelogPanel := this.PanelGUI
 
-			this.InsertChangelog(changelogPanel, Format("vChangelogInfoBoxContent w{} h{} x{} y{} ReadOnly BackgroundWhite Left Wrap -HScroll -E0x200", clContentW, clContentH, clContentX, clContentY), ["s10 c333333", Fonts.fontFaces["Sans-Serif"].name])
+			this.InsertChangelog(changelogPanel, Format("vChangelogInfoBoxContent w{} h{} x{} y{} ReadOnly BackgroundWhite Left Wrap -HScroll -E0x200", clContentW, clContentH, clContentX, clContentY), ["s10 c333333", Fonts.Get("Sans-Serif")])
 		}
 	}
 

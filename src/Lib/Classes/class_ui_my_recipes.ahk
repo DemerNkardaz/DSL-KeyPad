@@ -51,7 +51,7 @@ class UIMyRecipes {
 			localizedCols.Push(Locale.Read(column))
 
 		local recipesLV := recipesWindow.AddListView(Format("vRecipesLV w{} h{} x{} y{} +NoSort -Multi", this.lvW, this.lvH, this.lvX, this.lvY), localizedCols)
-		recipesLV.SetFont("s8", "Noto Sans")
+		recipesLV.SetFont("s8", Fonts.Get("Sans-Serif"))
 
 		for i, _ in this.columnWidths
 			recipesLV.ModifyCol(i, this.columnWidths[i])

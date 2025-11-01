@@ -22,6 +22,7 @@ Class ChrLegend {
 		local entriesInGroups := []
 
 		local languageCode := Language.Get()
+		local fontFamily := Fonts.Get()
 
 		for key, value in legendGroups {
 			nameToEntry.Set(Chr(0x269C) " " Locale.Read("legend.groups." key), "")
@@ -288,7 +289,7 @@ Class ChrLegend {
 			tabs.UseTab()
 
 			TV := legendPanel.AddTreeView(opts.TV)
-			TV.SetFont("s" (11) " c333333", Fonts.fontFaces["Default"].name)
+			TV.SetFont("s" (11) " c333333", fontFamily)
 
 			for key, value in legendGroups {
 				local parent := ""
@@ -313,7 +314,7 @@ Class ChrLegend {
 					TV.Add(this.SetTreeTitle(each, languageCode))
 			}
 
-			TV.OnEvent("ItemSelect", (TV, Item) => this.PanelSelect(&TV, &item, &nameToEntry))
+			TV.OnEvent("ItemSelect", (TV, Item) => this.PanelSelect(&TV, &item, &nameToEntry, &fontFamily))
 
 			for each in [ipaLV, transLV, namesLV] {
 				each.SetFont("s" (11) " c333333")
@@ -326,10 +327,10 @@ Class ChrLegend {
 			GB := legendPanel.AddGroupBox(opts.GB)
 
 			PV := legendPanel.AddEdit(opts.PV, Chr(0x25CC))
-			PV.SetFont("s" (70 * 1.5) " c333333", Fonts.fontFaces["Default"].name)
+			PV.SetFont("s" (70 * 1.5) " c333333", fontFamily)
 
 			chrTitle := legendPanel.AddText(opts.chrTitle, labels.unknown)
-			chrTitle.SetFont("s" (24) " c333333", Fonts.fontFaces["Default"].name)
+			chrTitle.SetFont("s" (24) " c333333", fontFamily)
 
 			uniTitle := legendPanel.AddText(opts.uniTitle, labels.uniTitle)
 			uniTitle.SetFont("s" (11) " c333333 bold")
@@ -370,10 +371,10 @@ Class ChrLegend {
 			this.panelGUI.Show()
 		}
 
-		this.PanelAftermath(&preselectEntry, &nameToEntry)
+		this.PanelAftermath(&preselectEntry, &nameToEntry, &fontFamily)
 	}
 
-	static PanelAftermath(&preselectEntry, &nameToEntry) {
+	static PanelAftermath(&preselectEntry, &nameToEntry, &fontFamily) {
 		TV := this.panelGUI["TV"]
 		if preselectEntry = ""
 			TV.Focus()
@@ -397,7 +398,7 @@ Class ChrLegend {
 						itemText := TV.GetText(itemID)
 						if itemText = label {
 							TV.Modify(itemID, "Select")
-							this.PanelSelect(&TV, &itemID, &nameToEntry)
+							this.PanelSelect(&TV, &itemID, &nameToEntry, &fontFamily)
 							return True
 						}
 
@@ -423,16 +424,17 @@ Class ChrLegend {
 
 				if firstChild {
 					TV.Modify(firstChild, "Select")
-					this.PanelSelect(&TV, &firstChild, &nameToEntry)
+					this.PanelSelect(&TV, &firstChild, &nameToEntry, &fontFamily)
 				} else {
 					TV.Modify(itemID, "Select")
-					this.PanelSelect(&TV, &itemID, &nameToEntry)
+					this.PanelSelect(&TV, &itemID, &nameToEntry, &fontFamily)
 				}
 				break
 			}
 		}
 	}
-	static PanelSelect(&TV, &item, &nameToEntry) {
+
+	static PanelSelect(&TV, &item, &nameToEntry, &fontFamily) {
 		if !item
 			return
 
@@ -462,7 +464,7 @@ Class ChrLegend {
 
 				PV.SetFont(
 					StrLen(entry["symbol"]["customs"]) > 0 ? RegExReplace(entry["symbol"]["customs"], "(s\d{1,3})") : ("s" (70 * 1.5) " norm c333333"),
-					StrLen(entry["symbol"]["font"]) > 0 ? entry["symbol"]["font"] : Fonts.fontFaces["Default"].name
+					StrLen(entry["symbol"]["font"]) > 0 ? entry["symbol"]["font"] : fontFamily
 				)
 
 				uniTitleContent := legendPanel["UnicodeTitleContent"]

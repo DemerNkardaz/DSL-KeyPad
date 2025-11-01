@@ -198,7 +198,7 @@ Class GlyphsPanel {
 			if entryAlts.HasOwnProp(each) {
 				local unicode := Util.UnicodeToChar(entryAlts.%each%)
 				local code := entryAlts.%each%
-				local fontFamily := Fonts.CompareByPair(code, "")
+				local fontFamily := Fonts.GetFontByCodePoint(code, "")
 				code := Number("0x" code)
 				local addition := ["combining", "modifier", "superscript", "subscript"].HasValue(each) && !(code >= 0x1E000 && code <= 0x1E02F) ? DottedCircle : ""
 

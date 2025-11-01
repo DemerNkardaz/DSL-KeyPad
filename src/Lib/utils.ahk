@@ -12,6 +12,9 @@ Array.Prototype.DefineProp("ToLower", { Call: _ArrayToLower })
 Array.Prototype.DefineProp("ToUpper", { Call: _ArrayToUpper })
 Array.Prototype.DefineProp("Slice", { Call: _ArraySlice })
 Array.Prototype.DefineProp("DeepClone", { Call: _ArrayDeepClone })
+Array.Prototype.DefineProp("StringsPrepend", { Call: _ArrayStringsPrepend })
+Array.Prototype.DefineProp("StringsAppend", { Call: _ArrayStringsAppend })
+Array.Prototype.DefineProp("StringsToNumbers", { Call: _ArrayStringsToNumbers })
 
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("Values", { Call: _MapValues })
@@ -97,6 +100,34 @@ _ObjKeys(this) {
 
 _ArrayClear(this) {
 	this.Length := 0
+	return this
+}
+
+_ArrayStringsPrepend(this, value, maxAffected := this.Length) {
+	for i, item in this {
+		if i > maxAffected
+			break
+
+		this[i] := value item
+	}
+	return this
+}
+
+_ArrayStringsAppend(this, value, maxAffected := this.Length) {
+	for i, item in this {
+		if i > maxAffected
+			break
+
+		this[i] := item value
+	}
+	return this
+}
+
+_ArrayStringsToNumbers(this) {
+	for i, item in this {
+		if item is String && item ~= "([0-9]+(\.[0-9]+)?|0x[0-9a-f]+)"
+			this[i] = Number(item)
+	}
 	return this
 }
 

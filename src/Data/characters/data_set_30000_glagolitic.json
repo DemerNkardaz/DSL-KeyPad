@@ -169,7 +169,6 @@
 		"unicode": ["2C1F", "2C4F"],
 		"sequence": [["2C1F", "2C0A"], ["2C4F", "2C3A"]],
 		"options": { "altLayoutKey": "/Ы/" },
-		"alterations": { "combining": "1E01F" },
 		"symbol": { "customs": "s60" }
 	},
 	"glagolitic_[c,s]_let_yeri", {
