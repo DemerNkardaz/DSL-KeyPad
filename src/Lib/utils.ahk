@@ -234,6 +234,14 @@ _ArrayHasRegEx(this, valueToFind, &indexID?, boundRegEx := [], skipValues := [])
 	return false
 }
 
+RegExMatchArray(arr, valueToFind) {
+	for item in arr {
+		if item ~= valueToFind
+			return True
+	}
+	return False
+}
+
 
 _ArrayContains(this, valueToFind, &indexID?) {
 	for index, value in this {

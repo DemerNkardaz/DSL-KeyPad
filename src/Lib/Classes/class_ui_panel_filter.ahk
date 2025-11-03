@@ -1,14 +1,25 @@
 Class UIMainPanelFilter {
-	__New(&panelWindow, &filterField, &originLV, &LV, &dataList, &localeData, prefix) {
+	__New(&panelWindow, &filterField, &originLV, &LV, &dataList, &localeData, &attributes) {
 		this.panelWindow := panelWindow
 		this.filterField := filterField
 		this.originLV := originLV
 		this.LV := LV
 		this.dataList := dataList
 		this.localeData := localeData
+		this.attributes := attributes
 
-		this.prefix := prefix
-		this.isCurrentTabFavorites := prefix = "favorites"
+		this.filterGeneration := 0
+		this.isFilterRegExOn := Cfg.Get("RegEx_Search", "PanelGUI", True, "bool")
+
+		return Event.OnEvent("UI Instance [Panel]", "Filter RegEx Toggled", (*) => this.OnFilterRegExToggled())
+	}
+
+	OnFilterRegExToggled() {
+		currentFilterText := this.filterField.Text
+
+		if currentFilterText != ""
+			this.FilterBridge(&currentFilterText)
+		return
 	}
 
 	UpdateDataList(&newDataList) {
@@ -22,8 +33,7 @@ Class UIMainPanelFilter {
 		this.LV.Enabled := False
 		this.originLV.Visible := True
 		this.originLV.Enabled := True
-		; for item in this.dataList
-		; 	this.LV.Add(, item[this.localeData.localeIndex], ArraySlice(item, 2, this.localeData.columnsCount)*)
+		this.filterGeneration := 0
 		return
 	}
 
@@ -44,31 +54,35 @@ Class UIMainPanelFilter {
 	}
 
 	MatchInArray(&textsArray, &filterText) {
+		local value := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
 		for each in textsArray {
-			local escaped := RegExEscape(each)
-			if escaped = filterText
-				|| escaped ~= filterText
-				|| filterText ~= escaped
+			if each = filterText
+				|| each ~= value
 				return True
 		}
 		return False
 	}
 
 	FindMatchingTag(&textsArray, &filterText, &caseSensitiveMark) {
+		local value := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
 		for each in textsArray {
 			if each = "" || StrLen(each) = 0
 				continue
-			local escaped := RegExEscape(each)
-			if escaped = filterText
-				|| escaped ~= caseSensitiveMark filterText
-				|| filterText ~= caseSensitiveMark escaped
+			if each = filterText
+				|| each ~= caseSensitiveMark value
 				return each
 		}
 		return ""
 	}
 
 	Filter(&filterText) {
-		filterText := filterText
+		this.filterGeneration++
+		local currentGeneration := this.filterGeneration
+		this.isFilterRegExOn := Cfg.Get("RegEx_Search", "PanelGUI", True, "bool")
+
+		if currentGeneration != this.filterGeneration
+			return
+
 		this.LV.Delete()
 
 		local star := Chr(0x2002) Chr(0x2605)
@@ -77,17 +91,32 @@ Class UIMainPanelFilter {
 			this.Populate()
 		} else {
 			local languageCode := Language.Get()
-			local keyOrRecipeMark := False
+			local filterTextModes := Map(
+				"i)^(R|Р):", "Recipe",
+				"i)^(K|К):", "Key",
+				"i)^(C|С):", "Symbol",
+			)
 
-			if filterText ~= "i)^(R::|Р::)" {
-				keyOrRecipeMark := True
-				filterText := RegExReplace(filterText, "i)^(R::|Р::)")
+			local searchMode := ""
+
+			for pattern, patternMode in filterTextModes {
+				if filterText ~= pattern {
+					searchMode := patternMode
+					filterText := RegExReplace(filterText, pattern)
+					break
+				}
 			}
+
+			local isSearchModeActive := searchMode != ""
 
 			try {
 				local matchedItems := []
+				local previewType := this.attributes.previewType
 
 				for item in this.dataList {
+					if currentGeneration != this.filterGeneration
+						return
+
 					if item[this.localeData.localeIndex] = ""
 						continue
 					local itemText := item[this.localeData.localeIndex]
@@ -108,67 +137,57 @@ Class UIMainPanelFilter {
 					local isTagsMirrored := False
 					local caseSensitiveMark := ""
 					local isFavorite := False
+					local symbolSequence := ""
+					local specialMatch := { key: "", recipe: [] }
 					local entryName := item[5]
+					local entry := Map()
 
 					if entryName != "" {
-						titles := ChrLib.GetValue(entryName, "altTitles")
-						titlesMap := ChrLib.GetValue(entryName, "altTitlesMap")
-						tags := ChrLib.GetValue(entryName, "tags")
-						tagsMap := ChrLib.GetValue(entryName, "tagsMap")
-						caseSensitiveMark := ChrLib.GetValue(entryName, "options.ignoreCaseOnPanelFilter") && !InStr(filterText, "i)") ? "i)" : ""
-						isFavorite := ChrLib.GetValue(entryName, "groups").HasValue("Favorites")
+						entry := ChrLib.GetEntry(entryName)
 
-						useHiddenTags := ChrLib.GetValue(entryName, "options.useHiddenTags")
+						if !isSearchModeActive {
+							titles := entry["altTitles"]
+							titlesMap := entry["altTitlesMap"]
+							tags := entry["tags"]
+							tagsMap := entry["tagsMap"]
+						}
+
+						caseSensitiveMark := entry["options"]["ignoreCaseOnPanelFilter"] && !InStr(filterText, "i)") ? "i)" : ""
+						isFavorite := entry["groups"].HasValue("Favorites")
+						symbolSequence := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
+
+						useHiddenTags := entry["options"]["useHiddenTags"]
 
 						if useHiddenTags {
-							hiddenTagsMap := ChrLib.GetValue(entryName, "hiddenTagsMap")
-							hiddenTags := ChrLib.GetValue(entryName, "hiddenTags")
+							hiddenTagsMap := entry["hiddenTagsMap"]
+							hiddenTags := entry["hiddenTags"]
 						}
 
-						reserveTexts.MergeWith([entryName], titles, tags, hiddenTags)
-						isTagsMirrored := ChrLib.GetValue(entryName, "options.isTagsMirrored")
+						specialMatch.key := previewType ~= "i)(Key|Alternative)" ? entry["options"][previewType = "Key" ? "fastKey" : "altLayoutKey"] : ""
+						specialMatch.recipe := previewType = "Recipe" ? ArrayMerge(entry["recipe"], entry["recipeAlt"]) : []
+
+						reserveTexts.MergeWith([symbolSequence, entryName], titles, tags, hiddenTags)
+						isTagsMirrored := entry["options"]["isTagsMirrored"]
 					}
 
-					local isMatch := False
-					local matchedTag := ""
 					local displayText := itemText
-
-					if keyOrRecipeMark {
-						isMatch := item[2] ~= filterText
-					} else if isFavorite && filterText ~= "^(изб|fav|\*)" {
-						isMatch := True
-					} else if filterText != "*" {
-						if itemText ~= filterText {
-							isMatch := True
-						} else {
-							local unitedTitleTags := ArrayMerge(titles, tags, hiddenTags)
-							matchedTag := this.FindMatchingTag(&unitedTitleTags, &filterText, &caseSensitiveMark)
-							if matchedTag != "" {
-								isMatch := True
-								if (tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag)) || (tagsMap.Has(languageCode) && tagsMap[languageCode].HasValue(matchedTag))
-									displayText := Util.StrUpper(matchedTag, 1)
-								else if isTagsMirrored {
-									for mapIndex, eachMap in [titlesMap, tagsMap, hiddenTagsMap] {
-										for lang, tags in eachMap {
-											for i, tag in tags {
-												if tag != "" {
-													if mapIndex = 3 && tag = matchedTag && tagsMap[languageCode].Has(i) {
-														displayText := Util.StrUpper(tagsMap[languageCode][i], 1)
-														break 2
-													} else if tag = matchedTag && eachMap[languageCode].Has(i) {
-														displayText := Util.StrUpper(eachMap[languageCode][i], 1)
-														break 2
-													}
-												}
-											}
-										}
-									}
-								}
-
-							} else
-								isMatch := this.MatchInArray(&reserveTexts, &filterText)
-						}
+					local filterData := {
+						isFavorite: isFavorite,
+						itemText: itemText,
+						titles: titles,
+						tags: tags,
+						hiddenTags: hiddenTags,
+						titlesMap: titlesMap,
+						tagsMap: tagsMap,
+						hiddenTagsMap: hiddenTagsMap,
+						isTagsMirrored: isTagsMirrored,
+						key: specialMatch.key,
+						recipe: specialMatch.recipe,
+						symbol: symbolSequence,
+						searchMode: searchMode
 					}
+
+					local isMatch := isSearchModeActive ? this.SearchModeCompare(&filterData, &filterText) : this.FilterCompare(&filterData, &filterText, &caseSensitiveMark, &reserveTexts, &displayText, &languageCode)
 
 					if isFavorite && displayText != "" && !InStr(displayText, star, , -StrLen(star)) {
 						displayText .= star
@@ -183,19 +202,27 @@ Class UIMainPanelFilter {
 					}
 				}
 
+				if currentGeneration != this.filterGeneration
+					return
+
 				local groupedItems := this.GroupAndSortMatches(matchedItems)
+
+				if currentGeneration != this.filterGeneration
+					return
 
 				local previousGroupName := ""
 				for groupItem in groupedItems {
+					if currentGeneration != this.filterGeneration
+						return
+
 					this.LV.Add(, groupItem.displayText, ArraySlice(groupItem.item, 2, this.localeData.columnsCount)*)
 
 					if groupItem.originalText != "" && groupItem.originalText != previousGroupName
 						previousGroupName := groupItem.originalText
 				}
 
-				if groupedItems.Length > 0
-					this.LV.Add()
-
+				if currentGeneration != this.filterGeneration
+					return
 
 				this.LV.Visible := True
 				this.LV.Enabled := True
@@ -203,9 +230,61 @@ Class UIMainPanelFilter {
 				this.originLV.Modify(0, "-Select -Focus")
 				this.originLV.Visible := False
 				this.originLV.Enabled := False
+
+				this.filterGeneration := 0
 			} catch
 				this.Populate()
 		}
+	}
+
+	FilterCompare(&data, &filterText, &caseSensitiveMark, &reserveTexts, &displayText, &languageCode) {
+		local output := False
+		local matchedTag := ""
+		local filterValue := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
+
+		if data.isFavorite && filterText ~= "^(изб|fav|\*)" {
+			output := True
+		} else if filterText != "*" {
+			if data.itemText ~= filterValue {
+				output := True
+			} else {
+				local unitedTitleTags := ArrayMerge(data.titles, data.tags, data.hiddenTags)
+				matchedTag := this.FindMatchingTag(&unitedTitleTags, &filterText, &caseSensitiveMark)
+				if matchedTag != "" {
+					output := True
+					if (data.tagsMap.Has(languageCode) && data.tagsMap[languageCode].HasValue(matchedTag)) || (data.tagsMap.Has(languageCode) && data.tagsMap[languageCode].HasValue(matchedTag))
+						displayText := Util.StrUpper(matchedTag, 1)
+					else if data.isTagsMirrored {
+						for mapIndex, eachMap in [data.titlesMap, data.tagsMap, data.hiddenTagsMap] {
+							for lang, tags in eachMap {
+								for i, tag in tags {
+									if tag != "" {
+										if mapIndex = 3 && tag = matchedTag && data.tagsMap[languageCode].Has(i) {
+											displayText := Util.StrUpper(data.tagsMap[languageCode][i], 1)
+											break 2
+										} else if tag = matchedTag && eachMap[languageCode].Has(i) {
+											displayText := Util.StrUpper(eachMap[languageCode][i], 1)
+											break 2
+										}
+									}
+								}
+							}
+						}
+					}
+
+				} else
+					output := this.MatchInArray(&reserveTexts, &filterText)
+			}
+		}
+
+		return output
+	}
+
+	SearchModeCompare(&data, &filterText) {
+		local matchReferences := Map("Recipe", data.recipe, "Key", data.key, "Symbol", data.symbol)
+		local matchableValue := matchReferences[data.searchMode]
+
+		return (matchableValue is Array && RegExMatchArray(matchableValue, filterText)) || (matchableValue is String && matchableValue ~= filterText)
 	}
 
 	GroupAndSortMatches(matchedItems) {

@@ -35,6 +35,7 @@ Class Event {
 			"Destroyed", [],
 			"Shown", [],
 			"Cache Loaded", [],
+			"Filter RegEx Toggled", [],
 		),
 		"UI Data", Map(
 			"Changed", [],

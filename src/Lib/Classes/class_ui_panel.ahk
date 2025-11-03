@@ -65,10 +65,16 @@ Class UIMainPanel {
 	filterIconW := 24
 	filterIconH := 24
 
+	filterRegExBtnY := this.filterIconY
+	filterRegExBtnW := 64
+	filterRegExBtnH := this.filterIconH
+
 	filterX := this.filterIconX + 28
 	filterY := this.filterIconY
-	filterW := (this.lvW - this.filterIconW) - 4
+	filterW := ((this.lvW - this.filterIconW) - 4) - (this.filterRegExBtnW + 8)
 	filterH := this.filterIconH
+
+	filterRegExBtnX := this.filterX + this.filterW + 8
 
 	previewGrpBoxX := this.lvX + this.lvW + 10
 	previewGrpBoxY := this.lvY
@@ -570,7 +576,7 @@ Class UIMainPanel {
 
 		local localizesRowsList := []
 		local src := this.listViewData[attributes.source]
-		for i, item in this.listViewData[attributes.source]
+		for i, item in src
 			charactersLV.Add(, item[localeData.localeIndex], ArraySlice(item, 2, attributes.columns.Length)*)
 
 		local characterFilterIcon := panelWindow.AddButton(Format("x{} y{} h{} w{}", this.filterIconX, this.filterIconY, this.filterIconW, this.filterIconH))
@@ -580,8 +586,12 @@ Class UIMainPanel {
 			this.filterX, this.filterY, this.filterW, this.filterH, attributes.prefix), "")
 		characterFilter.SetFont("s10")
 
-		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &charactersLVForFilter, &src, &localeData, attributes.prefix)
+		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &charactersLVForFilter, &src, &localeData, &attributes)
 		this.filterInstances.Set(attributes.prefix, filterInstance)
+
+		local filterRegExBtn := panelWindow.AddCheckBox(Format("v{}RegExBtn x{} y{} h{} w{}", attributes.prefix, this.filterRegExBtnX, this.filterRegExBtnY, this.filterRegExBtnH, this.filterRegExBtnW), "RegEx")
+		filterRegExBtn.Value := Cfg.Get("RegEx_Search", "PanelGUI", True, "bool")
+		filterRegExBtn.OnEvent("Click", (CB, Zero) => ToggleFilterRegEx(CB.Value))
 
 		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
 
@@ -755,6 +765,15 @@ Class UIMainPanel {
 
 		EventFuncSetRandom()
 		return Event.OnEvent("UI Instance [Panel]", "Cache Loaded", EventFuncSetRandom)
+
+		ToggleFilterRegEx(toggleValue) {
+			Cfg.Set(toggleValue, "RegEx_Search", "PanelGUI", "bool")
+
+			for prefix in this.listViewTabs
+				panelWindow[prefix "RegExBtn"].Value := toggleValue
+
+			return Event.Trigger("UI Instance [Panel]", "Filter RegEx Toggled")
+		}
 
 		EventFuncSetRandom(*) => this.SetRandomPreview(panelWindow, [charactersLV, charactersLVForFilter], { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType })
 	}

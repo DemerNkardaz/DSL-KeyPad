@@ -30,6 +30,7 @@ Class Cfg {
 		"PanelGUI", [
 			"List_Items_Font_Size", "",
 			"Preview_Font_Family", "",
+			"RegEx_Search", "True",
 		],
 		"UI", [
 			"Scripter_Selector_Max_Items", 24,

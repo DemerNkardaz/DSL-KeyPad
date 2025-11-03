@@ -821,7 +821,7 @@
 	},
 	"lat_[c,s]_let_i__comma_above", {
 		"unicode": ["A7BC", "A7BD"],
-		"options": { "referenceLocale": "_i$" },
+		"options": { "referenceLocale": "_i$", "allowsMultiTitles": true },
 		"symbol": {
 			"beforeLetter": "glottal",
 			"tagAdditive": [{

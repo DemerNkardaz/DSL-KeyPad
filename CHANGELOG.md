@@ -25,6 +25,9 @@
   - Removed long recipe versions for symbols of Alchemy, Astrology and Astronomy (due to their lack of relevance and violation of the “Composition” mode concept).
   - In the main Panel now shows Unicode name of character in the side preview.
   - Space key now disables current Alternative mode/Glyph variation/TELEX-like mode when Selector is open.
+  - Search in the main Panel now supports searching for symbols’ entries by their symbols.
+  - “Search modes” in the main Panel was changed: starting type with “R:” search will be limited to recipes, with “K:” limited to keys (for recipes and keys must be in the corresponding tab), with “C:” limited to symbols.
+  - Added the option to disable interpretation of input as a regular expression in the main Panel search.
 
 - Fixes:
 
@@ -233,6 +236,9 @@
   - Удалены длинные версии рецептов для символов Алхимии, Астрологии и Астрономии (в связи с отсутствием их уместности и нарушением концепции режима «Композиции»).
   - В главной панели теперь отображается имя символа в Юникоде в боковом превью.
   - Теперь пробел отключает текущий Альтернативный режим/Вариант глифа/TELEX-подобный режим, когда открыто соответствующее окно селектора.
+  - Поиск в Главной панели теперь поддерживает поиск записей символов по самим же символам.
+  - Изменены «режимы» поиска в Главной панели: начав ввод с «R: или Р:» поиск будет происходить строго по рецептам, с «K: или К:» строго по ключам (для рецептов и ключей необходимо находится в соответствующей вкладке), с «C: или С:» строго по символам.
+  - Для поиска в Главной панели добавлена возможность отключить интерпретацию ввода как регулярного выражения.
 
 - Исправления:
 
