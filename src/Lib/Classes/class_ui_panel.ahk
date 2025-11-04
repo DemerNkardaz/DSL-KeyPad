@@ -73,16 +73,27 @@ Class UIMainPanel {
 	filterCaseSensitiveCheckBoxW := 32 + 8
 	filterCaseSensitiveCheckBoxH := this.filterRegExCheckBoxH
 
-	filterModeDropDownY := this.filterIconY
+	filterClearBtnW := this.filterIconW
+	filterClearBtnH := this.filterIconH
+	filterClearBtnY := this.filterIconY
+
+	filterModeDropDownY := this.filterIconY + 1
 	filterModeDropDownW := 128
 	filterModeDropDownH := this.filterIconH + 14
 
 	filterX := this.filterIconX + 28
 	filterY := this.filterIconY
-	filterW := ((this.lvW - this.filterIconW) - 4) - ((this.filterRegExCheckBoxW + this.filterCaseSensitiveCheckBoxW + this.filterModeDropDownW) + (8 * 3))
+	filterW := ((this.lvW - this.filterIconW) - 4) - (
+		(
+			this.filterRegExCheckBoxW +
+			this.filterCaseSensitiveCheckBoxW +
+			this.filterModeDropDownW +
+			this.filterClearBtnW
+		) + (8 * 4)
+	)
 	filterH := this.filterIconH
-
-	filterModeDropDownX := this.filterX + this.filterW + 8
+	filterClearBtnX := this.filterX + this.filterW + 8
+	filterModeDropDownX := this.filterClearBtnX + this.filterClearBtnW + 8
 
 	filterCaseSensitiveCheckBoxX := this.filterModeDropDownX + this.filterModeDropDownW + 8
 	filterRegExCheckBoxX := this.filterCaseSensitiveCheckBoxX + this.filterCaseSensitiveCheckBoxW + 8
@@ -605,6 +616,9 @@ Class UIMainPanel {
 		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &charactersLVForFilter, &src, &localeData, &attributes)
 		this.filterInstances.Set(attributes.prefix, filterInstance)
 
+		local filterClearBtn := panelWindow.AddButton(Format("v{}FilterClearButton x{} y{} w{} h{}", attributes.prefix, this.filterClearBtnX, this.filterClearBtnY, this.filterClearBtnW, this.filterClearBtnH), Chr(0x2715))
+		filterClearBtn.OnEvent("Click", (*) => ClearFilter())
+
 		local filterModeDropDown := panelWindow.AddDropDownList(Format("v{}FilterMode x{} y{} w{}", attributes.prefix, this.filterModeDropDownX, this.filterModeDropDownY, this.filterModeDropDownW), this.filterModes.Values())
 		PostMessage(0x0153, -1, 15, filterModeDropDown)
 		filterModeDropDown.Choose(this.currentFilterModeLocale)
@@ -780,13 +794,10 @@ Class UIMainPanel {
 		EventFuncSetRandom()
 		return Event.OnEvent("UI Instance [Panel]", "Cache Loaded", EventFuncSetRandom)
 
-		ToggleFilterRegEx(toggleValue) {
-			Cfg.Set(toggleValue, "Filter_RegEx", "PanelGUI", "bool")
-
-			for prefix in this.listViewTabs
-				panelWindow[prefix "RegExCheckBox"].Value := toggleValue
-
-			return Event.Trigger("UI Instance [Panel]", "Filter State Changed")
+		ClearFilter() {
+			local limitedToCurrentTab := True
+			characterFilter.Value := ""
+			return Event.Trigger("UI Instance [Panel]", "Filter State Changed", &attributes, &limitedToCurrentTab)
 		}
 
 		SwitchFilterMode(CB, Zero) {
@@ -797,7 +808,7 @@ Class UIMainPanel {
 					for prefix in this.listViewTabs
 						panelWindow[prefix "FilterMode"].Choose(CB.Text)
 
-					return Event.Trigger("UI Instance [Panel]", "Filter State Changed")
+					return Event.Trigger("UI Instance [Panel]", "Filter State Changed", &attributes)
 				}
 			}
 		}
@@ -810,7 +821,16 @@ Class UIMainPanel {
 				panelWindow[prefix "CaseSensitiveCheckBox"].Text := this.caseSensitiveMarks.Get(toggleValue)
 			}
 
-			return Event.Trigger("UI Instance [Panel]", "Filter State Changed")
+			return Event.Trigger("UI Instance [Panel]", "Filter State Changed", &attributes)
+		}
+
+		ToggleFilterRegEx(toggleValue) {
+			Cfg.Set(toggleValue, "Filter_RegEx", "PanelGUI", "bool")
+
+			for prefix in this.listViewTabs
+				panelWindow[prefix "RegExCheckBox"].Value := toggleValue
+
+			return Event.Trigger("UI Instance [Panel]", "Filter State Changed", &attributes)
 		}
 
 		EventFuncSetRandom(*) => this.SetRandomPreview(panelWindow, [charactersLV, charactersLVForFilter], { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType })
