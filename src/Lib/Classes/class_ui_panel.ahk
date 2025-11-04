@@ -606,7 +606,7 @@ Class UIMainPanel {
 		charactersLV.Populate(&src, localeData.localeIndex)
 
 		local characterFilterIcon := panelWindow.AddButton(Format("x{} y{} h{} w{}", this.filterIconX, this.filterIconY, this.filterIconW, this.filterIconH))
-		characterFilterIcon.OnEvent("Click", (*) => Event.Trigger("UI Instance [Panel]", "Filter State Changed"))
+		characterFilterIcon.OnEvent("Click", (*) => FilterBtnDefaultAction())
 
 		GuiButtonIcon(characterFilterIcon, ImageRes, 169)
 		characterFilter := panelWindow.AddEdit(Format("x{} y{} w{} h{} v{}Filter",
@@ -793,6 +793,11 @@ Class UIMainPanel {
 
 		EventFuncSetRandom()
 		return Event.OnEvent("UI Instance [Panel]", "Cache Loaded", EventFuncSetRandom)
+
+		FilterBtnDefaultAction() {
+			local limitedToCurrentTab := True
+			return Event.Trigger("UI Instance [Panel]", "Filter State Changed", &attributes, &limitedToCurrentTab)
+		}
 
 		ClearFilter() {
 			local limitedToCurrentTab := True

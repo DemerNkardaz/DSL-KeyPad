@@ -11,10 +11,10 @@ Class UIMainPanelFilter {
 		this.filterGeneration := 0
 		this.isFilterRegExOn := Cfg.Get("Filter_RegEx", "PanelGUI", True, "bool")
 
-		return Event.OnEvent("UI Instance [Panel]", "Filter State Changed", (&attributes, &limitedToCurrentTab) => this.OnFilterRegExToggled(&attributes, &limitedToCurrentTab))
+		return Event.OnEvent("UI Instance [Panel]", "Filter State Changed", (&attributes, &limitedToCurrentTab?) => this.OnFilterRegExToggled(&attributes, &limitedToCurrentTab?))
 	}
 
-	OnFilterRegExToggled(&attributes, &limitedToCurrentTab) {
+	OnFilterRegExToggled(&attributes, &limitedToCurrentTab?) {
 		if IsSet(limitedToCurrentTab) && limitedToCurrentTab && attributes.prefix != this.attributes.prefix
 			return
 
