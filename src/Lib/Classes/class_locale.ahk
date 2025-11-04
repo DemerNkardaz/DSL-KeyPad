@@ -162,7 +162,7 @@ Class Locale {
 			local i := 0
 			local starter := multiMatch[1]
 			local firstKey := starter multiMatch[2]
-			local secondKey := starter multiMatch[4]
+			local secondKey := (multiMatch[4] ~= "^[.:]" ? firstKey : starter) multiMatch[4]
 			local interKey := multiMatch[3]
 			local outputString := ""
 

@@ -65,16 +65,27 @@ Class UIMainPanel {
 	filterIconW := 24
 	filterIconH := 24
 
-	filterRegExBtnY := this.filterIconY
-	filterRegExBtnW := 64
-	filterRegExBtnH := this.filterIconH
+	filterRegExCheckBoxY := this.filterIconY
+	filterRegExCheckBoxW := 64
+	filterRegExCheckBoxH := this.filterIconH
+
+	filterCaseSensitiveCheckBoxY := this.filterRegExCheckBoxY
+	filterCaseSensitiveCheckBoxW := 32 + 8
+	filterCaseSensitiveCheckBoxH := this.filterRegExCheckBoxH
+
+	filterModeDropDownY := this.filterIconY
+	filterModeDropDownW := 128
+	filterModeDropDownH := this.filterIconH + 14
 
 	filterX := this.filterIconX + 28
 	filterY := this.filterIconY
-	filterW := ((this.lvW - this.filterIconW) - 4) - (this.filterRegExBtnW + 8)
+	filterW := ((this.lvW - this.filterIconW) - 4) - ((this.filterRegExCheckBoxW + this.filterCaseSensitiveCheckBoxW + this.filterModeDropDownW) + (8 * 3))
 	filterH := this.filterIconH
 
-	filterRegExBtnX := this.filterX + this.filterW + 8
+	filterModeDropDownX := this.filterX + this.filterW + 8
+
+	filterCaseSensitiveCheckBoxX := this.filterModeDropDownX + this.filterModeDropDownW + 8
+	filterRegExCheckBoxX := this.filterCaseSensitiveCheckBoxX + this.filterCaseSensitiveCheckBoxW + 8
 
 	previewGrpBoxX := this.lvX + this.lvW + 10
 	previewGrpBoxY := this.lvY
@@ -355,6 +366,25 @@ Class UIMainPanel {
 		previewType: "Recipe",
 	}]
 
+
+	filterModes => Map(
+		"Names", Locale.Read("gui.panel.search_mode<>.names"),
+		"Symbols", Locale.Read("gui.panel.search_mode<>.symbols"),
+		"Recipes", Locale.Read("gui.panel.search_mode<>.recipes"),
+		"Keys", Locale.Read("gui.panel.search_mode<>.keys")
+	)
+
+	currentFilterMode => Cfg.Get("Filter_Mode", "PanelGUI", "Names")
+	currentFilterModeLocale => this.filterModes.Get(this.currentFilterMode)
+
+	caseSensitiveMarks := Map(
+		True, "A" Chr(0x2260) "a",
+		False, "A=a"
+	)
+
+	currentFilterCaseSensitivity => Cfg.Get("Filter_Case_Sensitive", "PanelGUI", False, "bool")
+
+
 	__New() {
 		local JSONLists := JSON.LoadFile(App.paths.data "\ui_main_panel_lists.json", "UTF-8")
 		this.helpData := JSON.LoadFile(App.paths.data "\ui_main_panel_help.json", "UTF-8")
@@ -565,6 +595,7 @@ Class UIMainPanel {
 		charactersLV.Populate(&src, localeData.localeIndex)
 
 		local characterFilterIcon := panelWindow.AddButton(Format("x{} y{} h{} w{}", this.filterIconX, this.filterIconY, this.filterIconW, this.filterIconH))
+		characterFilterIcon.OnEvent("Click", (*) => Event.Trigger("UI Instance [Panel]", "Filter State Changed"))
 
 		GuiButtonIcon(characterFilterIcon, ImageRes, 169)
 		characterFilter := panelWindow.AddEdit(Format("x{} y{} w{} h{} v{}Filter",
@@ -574,9 +605,19 @@ Class UIMainPanel {
 		local filterInstance := UIMainPanelFilter(&panelWindow, &characterFilter, &charactersLV, &charactersLVForFilter, &src, &localeData, &attributes)
 		this.filterInstances.Set(attributes.prefix, filterInstance)
 
-		local filterRegExBtn := panelWindow.AddCheckBox(Format("v{}RegExBtn x{} y{} h{} w{}", attributes.prefix, this.filterRegExBtnX, this.filterRegExBtnY, this.filterRegExBtnH, this.filterRegExBtnW), "RegEx")
-		filterRegExBtn.Value := Cfg.Get("RegEx_Search", "PanelGUI", True, "bool")
-		filterRegExBtn.OnEvent("Click", (CB, Zero) => ToggleFilterRegEx(CB.Value))
+		local filterModeDropDown := panelWindow.AddDropDownList(Format("v{}FilterMode x{} y{} w{}", attributes.prefix, this.filterModeDropDownX, this.filterModeDropDownY, this.filterModeDropDownW), this.filterModes.Values())
+		PostMessage(0x0153, -1, 15, filterModeDropDown)
+		filterModeDropDown.Choose(this.currentFilterModeLocale)
+		filterModeDropDown.OnEvent("Change", (CB, Zero) => SwitchFilterMode(CB, Zero))
+
+
+		local filterRegExCheckBox := panelWindow.AddCheckBox(Format("v{}RegExCheckBox x{} y{} h{} w{}", attributes.prefix, this.filterRegExCheckBoxX, this.filterRegExCheckBoxY, this.filterRegExCheckBoxH, this.filterRegExCheckBoxW), "RegEx")
+		filterRegExCheckBox.Value := Cfg.Get("Filter_RegEx", "PanelGUI", True, "bool")
+		filterRegExCheckBox.OnEvent("Click", (CB, Zero) => ToggleFilterRegEx(CB.Value))
+
+		local filterCaseSensitiveCheckBox := panelWindow.AddCheckBox(Format("v{}CaseSensitiveCheckBox x{} y{} h{} w{}", attributes.prefix, this.filterCaseSensitiveCheckBoxX, this.filterCaseSensitiveCheckBoxY, this.filterCaseSensitiveCheckBoxH, this.filterCaseSensitiveCheckBoxW), this.caseSensitiveMarks.Get(this.currentFilterCaseSensitivity))
+		filterCaseSensitiveCheckBox.Value := this.currentFilterCaseSensitivity
+		filterCaseSensitiveCheckBox.OnEvent("Click", (CB, Zero) => ToggleFilterCaseSensitivity(CB.Value))
 
 		local previewGroupBox := panelWindow.AddGroupBox(Format("v{}Group x{} y{} w{} h{} Center", attributes.prefix, this.previewGrpBoxX, this.previewGrpBoxY, this.previewGrpBoxW, this.previewGrpBoxH), Locale.Read("dictionary.character"))
 
@@ -740,12 +781,36 @@ Class UIMainPanel {
 		return Event.OnEvent("UI Instance [Panel]", "Cache Loaded", EventFuncSetRandom)
 
 		ToggleFilterRegEx(toggleValue) {
-			Cfg.Set(toggleValue, "RegEx_Search", "PanelGUI", "bool")
+			Cfg.Set(toggleValue, "Filter_RegEx", "PanelGUI", "bool")
 
 			for prefix in this.listViewTabs
-				panelWindow[prefix "RegExBtn"].Value := toggleValue
+				panelWindow[prefix "RegExCheckBox"].Value := toggleValue
 
-			return Event.Trigger("UI Instance [Panel]", "Filter RegEx Toggled")
+			return Event.Trigger("UI Instance [Panel]", "Filter State Changed")
+		}
+
+		SwitchFilterMode(CB, Zero) {
+			for key, value in this.filterModes {
+				if value = CB.Text {
+					Cfg.Set(key, "Filter_Mode", "PanelGUI")
+
+					for prefix in this.listViewTabs
+						panelWindow[prefix "FilterMode"].Choose(CB.Text)
+
+					return Event.Trigger("UI Instance [Panel]", "Filter State Changed")
+				}
+			}
+		}
+
+		ToggleFilterCaseSensitivity(toggleValue) {
+			Cfg.Set(toggleValue, "Filter_Case_Sensitive", "PanelGUI", "bool")
+
+			for prefix in this.listViewTabs {
+				panelWindow[prefix "CaseSensitiveCheckBox"].Value := toggleValue
+				panelWindow[prefix "CaseSensitiveCheckBox"].Text := this.caseSensitiveMarks.Get(toggleValue)
+			}
+
+			return Event.Trigger("UI Instance [Panel]", "Filter State Changed")
 		}
 
 		EventFuncSetRandom(*) => this.SetRandomPreview(panelWindow, [charactersLV, charactersLVForFilter], { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType })

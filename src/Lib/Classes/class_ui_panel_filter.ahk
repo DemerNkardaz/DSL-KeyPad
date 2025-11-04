@@ -9,9 +9,9 @@ Class UIMainPanelFilter {
 		this.attributes := attributes
 
 		this.filterGeneration := 0
-		this.isFilterRegExOn := Cfg.Get("RegEx_Search", "PanelGUI", True, "bool")
+		this.isFilterRegExOn := Cfg.Get("Filter_RegEx", "PanelGUI", True, "bool")
 
-		return Event.OnEvent("UI Instance [Panel]", "Filter RegEx Toggled", (*) => this.OnFilterRegExToggled())
+		return Event.OnEvent("UI Instance [Panel]", "Filter State Changed", (*) => this.OnFilterRegExToggled())
 	}
 
 	OnFilterRegExToggled() {
@@ -51,32 +51,10 @@ Class UIMainPanelFilter {
 		}
 	}
 
-	MatchInArray(&textsArray, &filterText) {
-		local value := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
-		for each in textsArray {
-			if each = filterText
-				|| each ~= value
-				return True
-		}
-		return False
-	}
-
-	FindMatchingTag(&textsArray, &filterText, &caseSensitiveMark) {
-		local value := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
-		for each in textsArray {
-			if each = "" || StrLen(each) = 0
-				continue
-			if each = filterText
-				|| each ~= caseSensitiveMark value
-				return each
-		}
-		return ""
-	}
-
 	Filter(&filterText) {
 		this.filterGeneration++
 		local currentGeneration := this.filterGeneration
-		this.isFilterRegExOn := Cfg.Get("RegEx_Search", "PanelGUI", True, "bool")
+		this.isFilterRegExOn := Cfg.Get("Filter_RegEx", "PanelGUI", True, "bool")
 
 		if currentGeneration != this.filterGeneration
 			return
@@ -90,12 +68,13 @@ Class UIMainPanelFilter {
 		} else {
 			local languageCode := Language.Get()
 			local filterTextModes := Map(
-				"i)^(R|Р):", "Recipe",
-				"i)^(K|К):", "Key",
-				"i)^(C|С):", "Symbol",
+				"i)^(R|Р):", "Recipes",
+				"i)^(K|К):", "Keys",
+				"i)^(C|С):", "Symbols",
 			)
 
-			local searchMode := ""
+			local searchMode := Cfg.Get("Filter_Mode", "PanelGUI", "Names")
+			local caseSensitive := Cfg.Get("Filter_Case_Sensitive", "PanelGUI", True, "bool")
 
 			for pattern, patternMode in filterTextModes {
 				if filterText ~= pattern {
@@ -105,7 +84,7 @@ Class UIMainPanelFilter {
 				}
 			}
 
-			local isSearchModeActive := searchMode != ""
+			local isSearchModeActive := searchMode != "Names"
 
 			try {
 				local matchedItems := []
@@ -143,6 +122,8 @@ Class UIMainPanelFilter {
 					if entryName != "" {
 						entry := ChrLib.GetEntry(entryName)
 
+						caseSensitiveMark := (!caseSensitive || entry["options"]["ignoreCaseOnPanelFilter"]) && !(filterText ~= "^i\)") ? "i)" : ""
+
 						if !isSearchModeActive {
 							titles := entry["altTitles"]
 							titlesMap := entry["altTitlesMap"]
@@ -150,7 +131,6 @@ Class UIMainPanelFilter {
 							tagsMap := entry["tagsMap"]
 						}
 
-						caseSensitiveMark := entry["options"]["ignoreCaseOnPanelFilter"] && !InStr(filterText, "i)") ? "i)" : ""
 						isFavorite := entry["groups"].HasValue("Favorites")
 						symbolSequence := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
 
@@ -185,7 +165,7 @@ Class UIMainPanelFilter {
 						searchMode: searchMode
 					}
 
-					local isMatch := isSearchModeActive ? this.SearchModeCompare(&filterData, &filterText) : this.FilterCompare(&filterData, &filterText, &caseSensitiveMark, &reserveTexts, &displayText, &languageCode)
+					local isMatch := isSearchModeActive ? this.SearchModeCompare(&filterData, &filterText, &caseSensitiveMark) : this.FilterCompare(&filterData, &filterText, &caseSensitiveMark, &reserveTexts, &displayText, &languageCode)
 
 					if isFavorite && displayText != "" && !InStr(displayText, star, , -StrLen(star)) {
 						displayText .= star
@@ -228,7 +208,7 @@ Class UIMainPanelFilter {
 				this.originLV.Off()
 
 				this.filterGeneration := 0
-			} catch
+			} catch as e
 				this.Populate()
 		}
 	}
@@ -238,10 +218,10 @@ Class UIMainPanelFilter {
 		local matchedTag := ""
 		local filterValue := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
 
-		if data.isFavorite && filterText ~= "^(изб|fav|\*)" {
+		if data.isFavorite && filterText ~= "i)^(изб|fav|\*)" {
 			output := True
 		} else if filterText != "*" {
-			if data.itemText ~= filterValue {
+			if data.itemText ~= caseSensitiveMark filterValue {
 				output := True
 			} else {
 				local unitedTitleTags := ArrayMerge(data.titles, data.tags, data.hiddenTags)
@@ -269,18 +249,41 @@ Class UIMainPanelFilter {
 					}
 
 				} else
-					output := this.MatchInArray(&reserveTexts, &filterText)
+					output := this.MatchInArray(&reserveTexts, &filterText, &caseSensitiveMark)
 			}
 		}
 
 		return output
 	}
 
-	SearchModeCompare(&data, &filterText) {
-		local matchReferences := Map("Recipe", data.recipe, "Key", data.key, "Symbol", data.symbol)
+	SearchModeCompare(&data, &filterText, &caseSensitiveMark) {
+		local matchReferences := Map("Recipes", data.recipe, "Keys", data.key, "Symbols", data.symbol)
 		local matchableValue := matchReferences[data.searchMode]
+		local value := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
 
-		return (matchableValue is Array && RegExMatchArray(matchableValue, filterText)) || (matchableValue is String && matchableValue ~= filterText)
+		return (matchableValue is Array && RegExMatchArray(matchableValue, caseSensitiveMark value)) || (matchableValue is String && matchableValue ~= caseSensitiveMark value)
+	}
+
+	MatchInArray(&textsArray, &filterText, &caseSensitiveMark) {
+		local value := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
+		for each in textsArray {
+			if each = filterText
+				|| each ~= caseSensitiveMark value
+				return True
+		}
+		return False
+	}
+
+	FindMatchingTag(&textsArray, &filterText, &caseSensitiveMark) {
+		local value := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
+		for each in textsArray {
+			if each = "" || StrLen(each) = 0
+				continue
+			if each = filterText
+				|| each ~= caseSensitiveMark value
+				return each
+		}
+		return ""
 	}
 
 	GroupAndSortMatches(matchedItems) {

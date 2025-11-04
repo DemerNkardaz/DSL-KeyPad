@@ -18,6 +18,8 @@
     - [ ꟖꟗꞚꞛꞜꞝꞞꞟ ]
   - Addded new miscellaneous characters:
     - [ ⧼⧽ ⫽ ⫻ ◌⃫ ]
+  - Added the option to disable interpretation of input as a regular expression in the main Panel search.
+  - Also added the options to toggle case-sessitivity and select search mode in the main Panel search.
 
 - Changes:
 
@@ -27,7 +29,6 @@
   - Space key now disables current Alternative mode/Glyph variation/TELEX-like mode when Selector is open.
   - Search in the main Panel now supports searching for symbols’ entries by their symbols.
   - “Search modes” in the main Panel was changed: starting type with “R:” search will be limited to recipes, with “K:” limited to keys (for recipes and keys must be in the corresponding tab), with “C:” limited to symbols.
-  - Added the option to disable interpretation of input as a regular expression in the main Panel search.
 
 - Fixes:
 
@@ -229,6 +230,8 @@
     - [ ꟖꟗꞚꞛꞜꞝꞞꞟ ]
   - Добавлены новые прочие символы:
     - [ ⧼⧽ ⫽ ⫻ ◌⃫ ]
+  - Для поиска в Главной панели добавлена возможность отключить интерпретацию ввода как регулярного выражения.
+  - Так же добавлены опции для переключения чувствительности к регистру и выбора режима поиска в Главной панели.
 
 - Изменения:
 
@@ -238,7 +241,6 @@
   - Теперь пробел отключает текущий Альтернативный режим/Вариант глифа/TELEX-подобный режим, когда открыто соответствующее окно селектора.
   - Поиск в Главной панели теперь поддерживает поиск записей символов по самим же символам.
   - Изменены «режимы» поиска в Главной панели: начав ввод с «R: или Р:» поиск будет происходить строго по рецептам, с «K: или К:» строго по ключам (для рецептов и ключей необходимо находится в соответствующей вкладке), с «C: или С:» строго по символам.
-  - Для поиска в Главной панели добавлена возможность отключить интерпретацию ввода как регулярного выражения.
 
 - Исправления:
 

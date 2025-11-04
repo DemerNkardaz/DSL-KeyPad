@@ -229,6 +229,13 @@
 					"glyph_variations": "{@:dictionary.glyph_variations}",
 					"legend": "{@:gui.legend}",
 					"show_entry": "Open entry {}"
+				},
+				"search_mode": {
+					"__self": "Search:",
+					"names": "Names",
+					"symbols": "Symbols",
+					"recipes": "Recipes",
+					"keys": "Keys"
 				}
 			},
 			"recipes": {
