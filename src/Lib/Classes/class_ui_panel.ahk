@@ -409,8 +409,6 @@ Class UIMainPanel {
 	}
 
 	Constructor() {
-		;
-
 		local screenWidth := A_ScreenWidth
 		local screenHeight := A_ScreenHeight
 
@@ -548,8 +546,8 @@ Class UIMainPanel {
 		local localizedColumns := []
 		local languageCode := Language.Get()
 		local localeData := {
-			supportedLanguages: Language.GetSupported(, , useIndex := True),
 			localeIndex: this.listViewLocaleColumnsIndexes.Get(languageCode),
+			supportedLanguages: Language.GetSupported(, , useIndex := True),
 			localeIndexMap: this.listViewLocaleColumnsIndexes,
 		}
 
@@ -560,24 +558,11 @@ Class UIMainPanel {
 
 		localeData.columnsCount := localizedColumns.Length
 
-		charactersLV := panelWindow.AddListView(Format("v{}LV w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
-		charactersLVForFilter := panelWindow.AddListView(Format("v{}LVForFilter w{} h{} x{} y{} +NoSort -Multi", attributes.prefix, this.lvW, this.lvH, this.lvX, this.lvY), localizedColumns)
+		charactersLV := UIMainPanel.CharactersListView(&instance, &panelWindow, &attributes, &localizedColumns)
+		charactersLVForFilter := UIMainPanel.CharactersListView(&instance, &panelWindow, &attributes, &localizedColumns, "Off", "ForFilter")
 
-		charactersLV.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), this.lvFontFamily)
-		charactersLVForFilter.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), this.lvFontFamily)
-		charactersLVForFilter.Visible := False
-		charactersLVForFilter.Enabled := False
-
-		Loop attributes.columns.Length {
-			index := A_Index
-			charactersLV.ModifyCol(index, attributes.columnWidths[index])
-			charactersLVForFilter.ModifyCol(index, attributes.columnWidths[index])
-		}
-
-		local localizesRowsList := []
 		local src := this.listViewData[attributes.source]
-		for i, item in src
-			charactersLV.Add(, item[localeData.localeIndex], ArraySlice(item, 2, attributes.columns.Length)*)
+		charactersLV.Populate(&src, localeData.localeIndex)
 
 		local characterFilterIcon := panelWindow.AddButton(Format("x{} y{} h{} w{}", this.filterIconX, this.filterIconY, this.filterIconW, this.filterIconH))
 
@@ -701,18 +686,6 @@ Class UIMainPanel {
 		local unicodeName := panelWindow.AddText(Format("v{}UnicodeName {} x{} y{} w{} h{} Center", attributes.prefix, this.defaultTextOpts, this.unicodeNameX, this.unicodeNameY, this.unicodeNameW, this.unicodeNameH))
 
 		local entryNameLabel := panelWindow.AddText(Format("v{}EntryName {} x{} y{} w{} h{} Center", attributes.prefix, this.defaultTextOpts, this.entryNameX, this.entryNameY, this.entryNameW, this.entryNameH), "[" Chr(0x2003) this.notAvailable Chr(0x2003) "]")
-
-		charactersLV.OnEvent("ItemFocus", (LV, rowNumber) => this.ItemSetPreview(panelWindow, LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType }))
-
-		charactersLV.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemDoubleClick(LV, rowNumber, attributes.prefix))
-
-		charactersLV.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.ItemContextMenu(panelWindow, LV, rowNumber, isRMB, X, Y, attributes.prefix))
-
-		charactersLVForFilter.OnEvent("ItemFocus", (LV, rowNumber) => this.ItemSetPreview(panelWindow, LV, rowNumber, { prefix: attributes.prefix, previewType: attributes.titleType != "Default" ? attributes.titleType : attributes.previewType }))
-
-		charactersLVForFilter.OnEvent("DoubleClick", (LV, rowNumber) => this.ItemDoubleClick(LV, rowNumber, attributes.prefix))
-
-		charactersLVForFilter.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => this.ItemContextMenu(panelWindow, LV, rowNumber, isRMB, X, Y, attributes.prefix))
 
 		characterFilter.OnEvent("Change", (Ctrl, Info) => (
 			filterText := Ctrl.Text,
@@ -1636,5 +1609,81 @@ Class UIMainPanel {
 			}
 			return tagsWindow.Show(Format("x{} y{} w{} h{}", this.x, this.y, this.w, this.h))
 		}
+	}
+
+	Class CharactersListView {
+		__New(&parentClass, &panelWindow, &attributes, &localizedColumns, startState := "", postfix := "") {
+			this.attributes := attributes
+			this.localizedColumns := localizedColumns
+			this.postfix := postfix
+
+			this.lv := this.CreateListView(&parentClass, &panelWindow, &localizedColumns)
+			this.SetStyles(&parentClass)
+			this.SetEvents(&parentClass, &panelWindow)
+
+			if startState = "Off" {
+				this.lv.Enabled := False
+				this.lv.Visible := False
+			}
+		}
+
+		CreateListView(&parentClass, &panelWindow, &localizedColumns) {
+			local options := Format("v{}LV{} w{} h{} x{} y{} +NoSort -Multi", this.attributes.prefix, this.postfix, parentClass.lvW, parentClass.lvH, parentClass.lvX, parentClass.lvY)
+			local lv := panelWindow.AddListView(options, localizedColumns)
+
+			return lv
+		}
+
+		SetStyles(&parentClass) {
+			this.lv.SetFont("s" Cfg.Get("List_Items_Font_Size", "PanelGUI", 9, "int"), parentClass.lvFontFamily)
+
+			Loop this.attributes.columns.Length {
+				index := A_Index
+				this.lv.ModifyCol(index, this.attributes.columnWidths[index])
+			}
+		}
+
+		SetEvents(&parentClass, &panelWindow) {
+			this.lv.OnEvent("ItemFocus", (LV, rowNumber) => parentClass.ItemSetPreview(panelWindow, LV, rowNumber, { prefix: this.attributes.prefix, previewType: this.attributes.titleType != "Default" ? this.attributes.titleType : this.attributes.previewType }))
+
+			this.lv.OnEvent("DoubleClick", (LV, rowNumber) => parentClass.ItemDoubleClick(LV, rowNumber, this.attributes.prefix))
+
+			this.lv.OnEvent("ContextMenu", (LV, rowNumber, isRMB, X, Y) => parentClass.ItemContextMenu(panelWindow, LV, rowNumber, isRMB, X, Y, this.attributes.prefix))
+
+		}
+
+		Off() {
+			this.lv.Enabled := False
+			this.lv.Visible := False
+		}
+
+		On() {
+			this.lv.Enabled := True
+			this.lv.Visible := True
+		}
+
+		Hide() {
+			this.lv.Visible := False
+		}
+
+		Show() {
+			this.lv.Visible := True
+		}
+
+		Disable() {
+			this.lv.Enabled := False
+		}
+
+		Enable() {
+			this.lv.Enabled := True
+		}
+
+		Populate(&dataList, localeIndex) {
+			for i, item in dataList
+				this.lv.Add(, item[localeIndex], ArraySlice(item, 2, this.attributes.columns.Length)*)
+		}
+
+		__Get(name, params) => this.lv.%name%
+		__Call(name, params) => this.lv.%name%(params*)
 	}
 }

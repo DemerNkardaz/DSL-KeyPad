@@ -29,10 +29,8 @@ Class UIMainPanelFilter {
 
 	Populate() {
 		this.LV.Delete()
-		this.LV.Visible := False
-		this.LV.Enabled := False
-		this.originLV.Visible := True
-		this.originLV.Enabled := True
+		this.LV.Off()
+		this.originLV.On()
 		this.filterGeneration := 0
 		return
 	}
@@ -224,12 +222,10 @@ Class UIMainPanelFilter {
 				if currentGeneration != this.filterGeneration
 					return
 
-				this.LV.Visible := True
-				this.LV.Enabled := True
+				this.LV.On()
 
 				this.originLV.Modify(0, "-Select -Focus")
-				this.originLV.Visible := False
-				this.originLV.Enabled := False
+				this.originLV.Off()
 
 				this.filterGeneration := 0
 			} catch
