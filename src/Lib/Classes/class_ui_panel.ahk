@@ -1484,7 +1484,7 @@ Class UIMainPanel {
 		panelWindow[prefix "UnicodeField"].Value := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
 		panelWindow[prefix "InternalIDField"].Value := entry["index"]
 		panelWindow[prefix "UnicodeBlock"].Text := unicodeBlock
-		panelWindow[prefix "UnicodeName"].Text := entry["sequence"].Length = 2 ? Util.GetUnicodeNamesFromArray(entry["sequence"]).ToString(" +`n") : Util.GetUnicodeName(entry["unicode"])
+		panelWindow[prefix "UnicodeName"].Text := entry["sequence"].Length = 2 ? UnicodeUtils.GetBatchUnicodeNames(entry["sequence"]).ToString(" +`n") : UnicodeUtils.GetName(entry["unicode"])
 		panelWindow[prefix "AltCodePages"].Text := entry["altCodePages"].Length > 0 ? Locale.ReadInject("dynamic_dictionary.code_page", [Util.StrCutToComma(altCodePages, 24)]) : ""
 		panelWindow[prefix "LaTeXPackage"].Text := StrLen(entry["LaTeXPackage"]) > 0 ? Chrs(0x1F4E6, 0x2005) entry["LaTeXPackage"] : ""
 		panelWindow[prefix "Font"].Text := entryFont != "" ? this.fontMarker entryFont : ""

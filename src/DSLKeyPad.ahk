@@ -43,6 +43,7 @@ initialized := False
 
 #Include <Classes\class_clip>
 #Include <Classes\class_util>
+#Include <Classes\class_unicode_utils>
 #Include <Classes\class_tooltip_presets>
 #Include <Classes\class_side_process>
 #Include <Classes\class_xcompose_parser>
