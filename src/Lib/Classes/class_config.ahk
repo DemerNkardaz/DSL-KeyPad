@@ -616,9 +616,9 @@ Class Cfg {
 		if value = ""
 			return
 		if InStr(options, "toHex")
-			output := Util.ChrToHexaDecimal(value)
+			output := UnicodeUtils.GetCodePoint(value, "Hex4")
 		if InStr(options, "fromHex")
-			output := Util.HexaDecimalToChr(value)
+			output := UnicodeUtils.GetSymbol(value)
 		if InStr(options, "bool")
 			output := (value = "True" || value = 1 || value = "1")
 		if InStr(options, "int")

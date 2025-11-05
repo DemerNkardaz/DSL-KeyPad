@@ -453,7 +453,7 @@ Class ChrLegend {
 
 				entry := ChrLib.GetEntry(entryName)
 				previewSymbol := StrLen(entry["symbol"]["alt"]) > 0 ? entry["symbol"]["alt"] : entry["symbol"]["set"]
-				getChar := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
+				getChar := entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"])
 
 				legendPanel := this.panelGUI
 				PV := legendPanel["PV"]
@@ -489,10 +489,10 @@ Class ChrLegend {
 				unicodeContent.Text := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
 
 				htmlContentDec := legendPanel["HTMLContentDec"]
-				htmlContentDec.Text := Util.StrToHTML(getChar)
+				htmlContentDec.Text := UnicodeUtils.GetCodePoint(getChar, "HTML")
 
 				htmlContentHex := legendPanel["HTMLContentHex"]
-				htmlContentHex.Text := Util.StrToHTML(getChar, , "Hex")
+				htmlContentHex.Text := UnicodeUtils.GetCodePoint(getChar, "XML4")
 
 				htmlContentEnt := legendPanel["HTMLContentEnt"]
 				htmlContentEnt.Text := entry["entity"] != "" ? entry["entity"] : labels.unknown

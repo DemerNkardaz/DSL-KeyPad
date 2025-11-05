@@ -165,7 +165,7 @@ Class ChrCrafter {
 				local cuttedStr := SubStr(composeObject.input, 1, -1)
 				local lastChr := SubStr(cuttedStr, -1)
 
-				if Util.IsHighSurrogate(lastChr) {
+				if UnicodeUtils.IsHighSurrogate(lastChr) {
 					cuttedStr := SubStr(cuttedStr, 1, -1)
 				}
 
@@ -698,18 +698,16 @@ Class ChrCrafter {
 			if IsObject(entry["alterations"][this.modifiedCharsType]) {
 				local tempValue := ""
 				for modifier in entry["alterations"][this.modifiedCharsType] {
-					tempValue .= Util.UnicodeToChar(modifier)
+					tempValue .= UnicodeUtils.GetSymbol(modifier)
 				}
 				output := tempValue
 			} else {
-				output := Util.UnicodeToChar(entry["alterations"][this.modifiedCharsType])
+				output := UnicodeUtils.GetSymbol(entry["alterations"][this.modifiedCharsType])
 			}
 		} else if entry["sequence"].Length > 0 {
-			for unicode in entry["sequence"] {
-				output .= Util.UnicodeToChar(unicode)
-			}
+			output .= UnicodeUtils.GetBatchSymbols(entry["sequence"], "")
 		} else {
-			output := Util.UnicodeToChar(entry["unicode"])
+			output := UnicodeUtils.GetSymbol(entry["unicode"])
 		}
 		return output
 	}

@@ -1383,7 +1383,7 @@ Class UIMainPanel {
 				isShiftDown := GetKeyState("LShift")
 
 				if (isCtrlDown) {
-					unicodeCodePoint := Util.UnicodeToChar(sequence.length > 1 ? sequence : unicode)
+					unicodeCodePoint := sequence.Length > 0 ? UnicodeUtils.GetBatchSymbols(sequence, "") : UnicodeUtils.GetSymbol(unicode)
 					A_Clipboard := unicodeCodePoint
 
 					SoundPlay("C:\Windows\Media\Speech On.wav")
@@ -1465,8 +1465,8 @@ Class UIMainPanel {
 		local entry := ChrLib.GetEntry(entryName)
 		local isReferenced := entry["reference"] is Object || entry["reference"] != ""
 
-		local char := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
-		local htmlCode := Util.StrToHTML(char)
+		local char := entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"])
+		local htmlCode := UnicodeUtils.GetCodePoint(char, "HTML")
 		local htmlCodeLen := StrLen(htmlCode)
 		local previewSymbol := StrLen(entry["symbol"]["alt"]) > 0 ? entry["symbol"]["alt"] : entry["symbol"]["set"]
 		local characterTitle := this.HandleTitle(entryName "[type::" previewType "]", &languageCode, True)
@@ -1484,7 +1484,7 @@ Class UIMainPanel {
 		panelWindow[prefix "UnicodeField"].Value := entry["sequence"].Length > 0 ? entry["sequence"].ToString(" ") : entry["unicode"]
 		panelWindow[prefix "InternalIDField"].Value := entry["index"]
 		panelWindow[prefix "UnicodeBlock"].Text := unicodeBlock
-		panelWindow[prefix "UnicodeName"].Text := entry["sequence"].Length = 2 ? UnicodeUtils.GetBatchUnicodeNames(entry["sequence"]).ToString(" +`n") : UnicodeUtils.GetName(entry["unicode"])
+		panelWindow[prefix "UnicodeName"].Text := entry["sequence"].Length = 2 ? UnicodeUtils.GetBatchNames(entry["sequence"]).ToString(" +`n") : UnicodeUtils.GetName(entry["unicode"])
 		panelWindow[prefix "AltCodePages"].Text := entry["altCodePages"].Length > 0 ? Locale.ReadInject("dynamic_dictionary.code_page", [Util.StrCutToComma(altCodePages, 24)]) : ""
 		panelWindow[prefix "LaTeXPackage"].Text := StrLen(entry["LaTeXPackage"]) > 0 ? Chrs(0x1F4E6, 0x2005) entry["LaTeXPackage"] : ""
 		panelWindow[prefix "Font"].Text := entryFont != "" ? this.fontMarker entryFont : ""
@@ -1544,7 +1544,7 @@ Class UIMainPanel {
 		Loop this.previewAlterationsCount {
 			local index := A_Index
 			local notHasAlt := index <= alterationSymbols.Length
-			local character := notHasAlt ? Util.UnicodeToChar(alterationSymbols[index]) : this.defaultAlteration
+			local character := notHasAlt ? UnicodeUtils.GetSymbol(alterationSymbols[index]) : this.defaultAlteration
 			local fontColor := notHasAlt ? this.fontColorDefault : this.fontColorNoData
 			panelWindow[prefix "AlterationPreview" index].Text := character
 			panelWindow[prefix "AlterationPreview" index].SetFont(fontColor, notHasAlt ? Fonts.GetFontByCodePoint(alterationSymbols[index]) : "Segoe UI")

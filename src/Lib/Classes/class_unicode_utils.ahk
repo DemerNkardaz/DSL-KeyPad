@@ -6,6 +6,9 @@ class UnicodeUtils {
 	static U_UNICODE_10_CHAR_NAME := 1
 	static U_EXTENDED_CHAR_NAME := 2
 
+	static U_DEFAULT_SYMBOLS := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
+	static U_ASCII_SYMBOLS := "[\x00-\x7F]"
+
 	static U_CHARACTER_CATEGORIES := Map(
 		0, ["UNASSIGNED", "Not assigned", "Cn", "Not assigned (Cn)"],
 		1, ["UPPERCASE_LETTER", "Letter, uppercase", "Lu", "Letter, uppercase (Lu)"],
@@ -39,6 +42,22 @@ class UnicodeUtils {
 		29, ["FINAL_PUNCTUATION", "Punctuation, final quote", "Pf", "Punctuation, final quote (Pf)"]
 	)
 
+	static U_CODEPOINT_FORMATS := Map(
+		"Default", "{:04X}",
+		"Hex", "0x{:X}",
+		"Hex4", "0x{:04X}",
+		"Dec", "{}",
+		"JSON", "\u{:04X}",
+		"CSS", "\u{:04X}",
+		"CSS-10000", "\u{{:04X}}",
+		"Python", "\u{:04X}",
+		"Python-10000", "\U{:08X}",
+		"U+", "U+{:04X}",
+		"XML", "&#x{:X};",
+		"XML4", "&#x{:04X};",
+		"HTML", "&#{};"
+	)
+
 	static InitICU() {
 		if (this.icuLib != "")
 			return true
@@ -59,13 +78,13 @@ class UnicodeUtils {
 		return false
 	}
 
-	static ParseCodepoint(input) {
+	static ParseCodePoint(input) {
 		if !(input is String)
 			return input
 
-		len := StrLen(input)
+		local len := StrLen(input)
 
-		if (len >= 4)
+		if (len >= 4) && input ~= "^[0-9A-Fa-f]{4,8}$"
 			return Number("0x" input)
 
 		if (len = 1)
@@ -74,12 +93,18 @@ class UnicodeUtils {
 		if (len = 2)
 			return this.DecodeSurrogatePair(input)
 
+		if (len >= 4) && RegExMatch(input, "&#x([0-9A-Fa-f]{1,8});", &m)
+			return Number("0x" m[1])
+
+		if (len >= 3) && RegExMatch(input, "&#([0-9]{1,10});", &m)
+			return Number(m[1])
+
 		return -1
 	}
 
 	static DecodeSurrogatePair(str) {
-		high := Ord(SubStr(str, 1, 1))
-		low := Ord(SubStr(str, 2, 1))
+		local high := Ord(SubStr(str, 1, 1))
+		local low := Ord(SubStr(str, 2, 1))
 
 		if (high >= 0xD800 && high <= 0xDBFF && low >= 0xDC00 && low <= 0xDFFF)
 			return 0x10000 + ((high - 0xD800) << 10) + (low - 0xDC00)
@@ -87,8 +112,103 @@ class UnicodeUtils {
 		return high
 	}
 
+	static IsSurrogate(input, skipParse := False) {
+		local codepoint := !skipParse ? this.ParseCodePoint(input) : input
+		return (codepoint >= 0x10000)
+	}
+
+	static IsHighSurrogate(input, skipParse := False) {
+		local codepoint := !skipParse ? this.ParseCodePoint(input) : input
+		return (codepoint >= 0xD800 && codepoint <= 0xDBFF)
+	}
+
+	static IsLowSurrogate(input, skipParse := False) {
+		local codepoint := !skipParse ? this.ParseCodePoint(input) : input
+		return (codepoint >= 0xDC00 && codepoint <= 0xDFFF)
+	}
+
+	static GetFormat(formatLabel) {
+		local output := formatLabel
+
+		if this.U_CODEPOINT_FORMATS.Has(formatLabel)
+			output := this.U_CODEPOINT_FORMATS.Get(formatLabel)
+		else if InStr(formatLabel, "-10000") && this.U_CODEPOINT_FORMATS.Has(StrReplace(formatLabel, "-10000"))
+			output := this.U_CODEPOINT_FORMATS.Get(StrReplace(formatLabel, "-10000"))
+
+		return output
+	}
+
+	static GetCodePoint(input, outputFormat := "Default") {
+		local codepoint := this.ParseCodePoint(input)
+
+		if (codepoint < 0)
+			return ""
+
+		return Format(this.GetFormat(outputFormat), codepoint)
+	}
+
+	static GetSurrogatePair(input, outputFormat := "Default") {
+		local codepoint := this.ParseCodePoint(input)
+
+		if !this.IsSurrogate(codepoint, True)
+			return this.GetCodePoint(codepoint, outputFormat)
+
+		codepoint -= 0x10000
+		local highSurrogate := 0xD800 + (codepoint >> 10)
+		local lowSurrogate := 0xDC00 + (codepoint & 0x3FF)
+
+		outputFormat := this.GetFormat(outputFormat)
+
+		return [Format(outputFormat, highSurrogate), Format(outputFormat, lowSurrogate)]
+	}
+
+	static GetBatchCodePoints(sourceArray, outputFormat := "Default", splitSurrogates := False, skipASCII := False) {
+		local output := []
+
+		if sourceArray is String
+			sourceArray := this.StrSplitChars(sourceArray)
+
+		for value in sourceArray {
+			if skipASCII && RegExMatch(value, "i)^" this.U_ASCII_SYMBOLS "$") {
+				output.Push(value)
+				continue
+			}
+
+			local isSurrogate := this.IsSurrogate(value)
+			local currentFormat := isSurrogate ? outputFormat "-10000" : outputFormat
+
+			if splitSurrogates {
+				local symbolValue := this.GetSurrogatePair(value, currentFormat)
+
+				if (isSurrogate)
+					output.Push(symbolValue[1], symbolValue[2])
+				else
+					output.Push(symbolValue)
+
+			} else
+				output.Push(this.GetCodePoint(value, currentFormat))
+		}
+
+		return output
+	}
+
+	static GetRangeOfCodePoints(startCodepoint, endCodepoint) {
+		local output := []
+
+		startCodepoint := this.ParseCodePoint(startCodepoint)
+		endCodepoint := this.ParseCodePoint(endCodepoint)
+
+		Loop (endCodepoint - startCodepoint + 1) {
+			local codepoint := startCodepoint + A_Index - 1
+			output.Push(Format("{:04X}", codepoint))
+		}
+
+		return output
+	}
+
 	static GetSymbol(input) {
-		codepoint := this.ParseCodepoint(input)
+		local codepoint := this.ParseCodePoint(input)
+
 		if (codepoint < 0)
 			return ""
 
@@ -96,42 +216,55 @@ class UnicodeUtils {
 			return Chr(codepoint)
 
 		codepoint -= 0x10000
-		highSurrogate := 0xD800 + (codepoint >> 10)
-		lowSurrogate := 0xDC00 + (codepoint & 0x3FF)
+		local highSurrogate := 0xD800 + (codepoint >> 10)
+		local lowSurrogate := 0xDC00 + (codepoint & 0x3FF)
 
-		return Chr(highSurrogate) . Chr(lowSurrogate)
+		return Chr(highSurrogate) Chr(lowSurrogate)
+	}
+
+	static GetBatchSymbols(sourceArray, outputType := []) {
+		local output := []
+
+		if sourceArray is String
+			sourceArray := this.StrSplit(sourceArray, " ")
+
+		for value in sourceArray
+			output.Push(this.GetSymbol(value))
+
+		return outputType is String ? output.ToString("") : output
 	}
 
 	static GetRangeOfSymbols(startCodepoint, endCodepoint) {
-		local result := []
+		local output := []
 
-		startCodepoint := this.ParseCodepoint(startCodepoint)
-		endCodepoint := this.ParseCodepoint(endCodepoint)
+		startCodepoint := this.ParseCodePoint(startCodepoint)
+		endCodepoint := this.ParseCodePoint(endCodepoint)
 
 		Loop (endCodepoint - startCodepoint + 1) {
 			local codepoint := startCodepoint + A_Index - 1
 			local symbol := this.GetSymbol(codepoint)
 
 			if (symbol != "")
-				result.Push(symbol)
+				output.Push(symbol)
 		}
 
-		return result
+		return output
 	}
 
 	static GetName(input, nameType := 0) {
 		if !this.InitICU()
 			return ""
 
-		codepoint := this.ParseCodepoint(input)
+		local codepoint := this.ParseCodePoint(input)
+
 		if (codepoint < 0)
 			return ""
 
-		nameBuffer := Buffer(256, 0)
-		errorCode := Buffer(4, 0)
+		local nameBuffer := Buffer(256, 0)
+		local errorCode := Buffer(4, 0)
 
 		try {
-			length := DllCall(this.icuLib "\u_charName",
+			local length := DllCall(this.icuLib "\u_charName",
 				"UInt", codepoint,
 				"Int", nameType,
 				"Ptr", nameBuffer.Ptr,
@@ -140,7 +273,7 @@ class UnicodeUtils {
 				"Int")
 
 			if (length > 0) {
-				name := StrGet(nameBuffer.Ptr, "UTF-8")
+				local name := StrGet(nameBuffer.Ptr, "UTF-8")
 				return (name != "" && name != " ") ? name : ""
 			}
 		}
@@ -148,60 +281,63 @@ class UnicodeUtils {
 		return ""
 	}
 
-	static GetBatchUnicodeNames(sourceArray) {
-		local result := []
+	static GetBatchNames(sourceArray) {
+		local output := []
+
+		if sourceArray is String
+			sourceArray := this.StrSplitChars(sourceArray)
 
 		for value in sourceArray
-			result.Push(this.GetName(value))
+			output.Push(this.GetName(value))
 
-		return result
+		return output
 	}
 
 	static GetRangeOfNames(startCodepoint, endCodepoint) {
-		local result := Map()
+		local output := Map()
 
-		startCodepoint := this.ParseCodepoint(startCodepoint)
-		endCodepoint := this.ParseCodepoint(endCodepoint)
+		startCodepoint := this.ParseCodePoint(startCodepoint)
+		endCodepoint := this.ParseCodePoint(endCodepoint)
 
 		Loop (endCodepoint - startCodepoint + 1) {
 			local codepoint := startCodepoint + A_Index - 1
 			local name := this.GetName(codepoint)
 
 			if (name != "")
-				result.Set(Format("{:04X}", codepoint), name)
+				output.Set(Format("{:04X}", codepoint), name)
 		}
 
-		return result
+		return output
 	}
 
 	static GetAllNames(input) {
-		result := Map()
+		local output := Map()
 
-		standardName := this.GetName(input, this.U_UNICODE_CHAR_NAME)
+		local standardName := this.GetName(input, this.U_UNICODE_CHAR_NAME)
 		if (standardName != "")
-			result["Standard"] := standardName
+			output["Standard"] := standardName
 
-		unicode10Name := this.GetName(input, this.U_UNICODE_10_CHAR_NAME)
+		local unicode10Name := this.GetName(input, this.U_UNICODE_10_CHAR_NAME)
 		if (unicode10Name != "")
-			result["Unicode 1.0"] := unicode10Name
+			output["Unicode 1.0"] := unicode10Name
 
-		extendedName := this.GetName(input, this.U_EXTENDED_CHAR_NAME)
+		local extendedName := this.GetName(input, this.U_EXTENDED_CHAR_NAME)
 		if (extendedName != "")
-			result["Extended"] := extendedName
+			output["Extended"] := extendedName
 
-		return result
+		return output
 	}
 
 	static GetSymbolCategory(input, nameType := 1) {
 		if !this.InitICU()
 			return ""
 
-		codepoint := this.ParseCodepoint(input)
+		local codepoint := this.ParseCodePoint(input)
 		if (codepoint < 0)
 			return ""
 
 		try {
-			category := DllCall(this.icuLib "\u_charType",
+			local category := DllCall(this.icuLib "\u_charType",
 				"UInt", codepoint)
 
 			category := category & 0xFF
@@ -211,6 +347,241 @@ class UnicodeUtils {
 
 		return ""
 	}
-}
 
-MsgBox UnicodeUtils.GetRangeOfSymbols("𐌰", "𐍊").ToString("") "`n`n" UnicodeUtils.GetRangeOfNames("𐌰", "𐍊").Values().ToString("`n")
+	static GetNamedEntity(symbol, skipASCII := False, outputFormat := "XML4", parseSymbol := False) {
+		if parseSymbol
+			symbol := this.GetSymbol(symbol)
+
+		if skipASCII && RegExMatch(symbol, "i)^" this.U_ASCII_SYMBOLS "$")
+			return symbol
+
+		for char, htmlCode in characters.supplementaryData["HTML Named Entities"] {
+			if char == symbol
+				return htmlCode
+		}
+
+		return this.GetCodePoint(symbol, outputFormat)
+	}
+
+	static GetBatchNamedEntities(sourceArray, skipASCII := False, outputFormat := "XML4", parseSymbol := False) {
+		local output := []
+
+		if sourceArray is String
+			sourceArray := this.StrSplitChars(sourceArray)
+
+		for value in sourceArray
+			output.Push(this.GetNamedEntity(value, skipASCII, outputFormat, parseSymbol))
+
+		return output
+	}
+
+	static ConvertSelectedStrToCodePoints(outputFormat := "Default", stringJoiner := "", splitSurrogates := False, skipASCII := False) {
+		Clip.CopySelected(&text, , "Backup")
+
+		if text = "" {
+			Clip.Release(1)
+			return
+		}
+
+		text := outputFormat = "Entities" ? this.GetBatchNamedEntities(text, skipASCII).ToString(stringJoiner) : this.GetBatchCodePoints(text, outputFormat, splitSurrogates, skipASCII).ToString(stringJoiner)
+
+		Clip.Send(&text, , , "Release")
+		return
+	}
+
+	static StrSplit(str, delimiters := "", omitChars := "", maxParts := -1) {
+		if (delimiters = "")
+			return this.StrSplitChars(str, omitChars, maxParts)
+
+		if (delimiters is String) {
+			delimArray := this.StrSplitChars(delimiters)
+		} else if (delimiters is Array) {
+			delimArray := delimiters
+		} else {
+			throw ValueError("Delimiters must be a String or Array")
+		}
+
+		local output := []
+		local currentPart := ""
+		local charArray := this.StrSplitChars(str)
+		local partCount := 0
+
+		for index, char in charArray {
+			if (maxParts > 0 && partCount >= maxParts - 1) {
+				currentPart .= char
+				continue
+			}
+
+			local isDelimiter := False
+			for _, delim in delimArray {
+				if (char = delim) {
+					isDelimiter := True
+					break
+				}
+			}
+
+			if (isDelimiter) {
+				trimmed := this.TrimChars(currentPart, omitChars)
+				output.Push(trimmed)
+				currentPart := ""
+				partCount++
+			} else {
+				currentPart .= char
+			}
+		}
+
+		trimmed := this.TrimChars(currentPart, omitChars)
+		output.Push(trimmed)
+
+		return output
+	}
+
+	static TrimChars(str, omitChars) {
+		if (omitChars = "" || str = "")
+			return str
+
+		local omitArray := this.StrSplitChars(omitChars)
+		local chars := this.StrSplitChars(str)
+
+		local startIdx := 1
+		for index, char in chars {
+			local found := False
+			for _, omit in omitArray {
+				if (char = omit) {
+					found := True
+					break
+				}
+			}
+			if (!found) {
+				startIdx := index
+				break
+			}
+		}
+
+		local endIdx := chars.Length
+		Loop chars.Length {
+			idx := chars.Length - A_Index + 1
+			if (idx < startIdx)
+				break
+
+			local char := chars[idx]
+			local found := False
+			for _, omit in omitArray {
+				if (char = omit) {
+					found := True
+					break
+				}
+			}
+			if (!found) {
+				endIdx := idx
+				break
+			}
+		}
+
+		if (startIdx > endIdx)
+			return ""
+
+		local output := ""
+		loop endIdx - startIdx + 1 {
+			output .= chars[startIdx + A_Index - 1]
+		}
+
+		return output
+	}
+
+	static StrSplitChars(str, omitChars := "", maxParts := -1) {
+		local chars := []
+		local i := 1
+		local len := StrLen(str)
+		local partCount := 0
+
+		while (i <= len) {
+			if (maxParts > 0 && partCount >= maxParts)
+				break
+
+
+			local code := Ord(SubStr(str, i, 1))
+			local char := ""
+
+			if (code >= 0xD800 && code <= 0xDBFF && i < len) {
+				nextCode := Ord(SubStr(str, i + 1, 1))
+
+				if (nextCode >= 0xDC00 && nextCode <= 0xDFFF) {
+					char := SubStr(str, i, 2)
+					i += 2
+				} else {
+					char := SubStr(str, i, 1)
+					i++
+				}
+			} else {
+				char := SubStr(str, i, 1)
+				i++
+			}
+
+			if (omitChars != "") {
+				local skip := False
+				Loop Parse, omitChars {
+					if (char = A_LoopField) {
+						skip := True
+						break
+					}
+				}
+				if (skip)
+					continue
+			}
+
+			chars.Push(char)
+			partCount++
+		}
+
+		return chars
+	}
+
+	static SubStr(str, startingPos, length := unset) {
+		if (str = "")
+			return ""
+
+		chars := this.StrSplitChars(str)
+		totalChars := chars.Length
+
+		if (startingPos = 0 || Abs(startingPos) > totalChars)
+			return ""
+
+
+		if (startingPos < 0)
+			startingPos := totalChars + startingPos + 1
+
+
+		if (startingPos < 1)
+			startingPos := 1
+
+		if (!IsSet(length))
+			length := totalChars - startingPos + 1
+
+		if (length < 0) {
+			length := totalChars - startingPos + 1 + length
+			if (length < 0)
+				return ""
+		}
+
+		if (startingPos + length - 1 > totalChars)
+			length := totalChars - startingPos + 1
+
+		if (length <= 0)
+			return ""
+
+		result := ""
+		loop length {
+			idx := startingPos + A_Index - 1
+			if (idx > totalChars)
+				break
+			result .= chars[idx]
+		}
+
+		return result
+	}
+
+	static StrLen(str) {
+		return this.StrSplitChars(str).Length
+	}
+}

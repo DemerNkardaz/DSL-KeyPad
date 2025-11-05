@@ -299,8 +299,12 @@ Class ChrLib {
 		local i := 0
 		for entryName, entry in this.entries.OwnProps() {
 			i++
-			local characterContent := (entry["symbol"]["category"] = "Diacritic Mark" ? DottedCircle : "") (entry["result"].Length = 1 ? (
-				Util.StrToHTML(entry["result"][1])) : Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"]))
+			local characterContent := (
+				entry["symbol"]["category"] = "Diacritic Mark" ? DottedCircle : "") (
+					entry["result"].Length = 1 ? (
+						UnicodeUtils.GetCodePoint(entry["result"][1], "HTML")) : (entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"])
+					)
+				)
 
 			local characterAlts := ""
 
@@ -310,7 +314,7 @@ Class ChrLib {
 				for key, value in entry["alterations"] {
 					j++
 					if !InStr(key, "HTML") {
-						characterAlts .= (j = 1 ? "`n" : "") '<span class="small-text">' key ':</span> ' DottedCircle Util.UnicodeToChar(value) (j < maxJ ? "`n" : "")
+						characterAlts .= (j = 1 ? "`n" : "") '<span class="small-text">' key ':</span> ' DottedCircle UnicodeUtils.GetSymbol(value) (j < maxJ ? "`n" : "")
 					}
 				}
 			}
@@ -426,7 +430,7 @@ Class ChrLib {
 			&& entrySource["alterations"].Count > 0
 			&& entrySource["alterations"].Has(entryToModify["reference"]["as"]) {
 			output["unicode"] := entrySource["alterations"][entryToModify["reference"]["as"]]
-			output["symbol"]["set"] := Util.UnicodeToChar(entrySource["alterations"][entryToModify["reference"]["as"]])
+			output["symbol"]["set"] := UnicodeUtils.GetSymbol(entrySource["alterations"][entryToModify["reference"]["as"]])
 			output["sequence"] := []
 			output["alterations"] := Map()
 			output["altCode"] := []
@@ -490,30 +494,30 @@ Class ChrLib {
 
 		getMode := StrLen(getMode) ? getMode : "Unicode"
 
-		local getChar := entry["result"].Length = 1 ? entry["result"][1] : Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
+		local getChar := entry["result"].Length = 1 ? entry["result"][1] : (entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"]))
 
 		if (getMode = "HTML") {
 			local output := getChar
 			local entity := entry["entity"]
 
 			if (extraRules && StrLen(alt) > 0 && entry["alterations"].Has(alt)) {
-				output := Util.UnicodeToChar(entry["alterations"][alt])
+				output := UnicodeUtils.GetSymbol(entry["alterations"][alt])
 
 				if entry["alterations"].Has(alt "Entity") && entry["alterations"][alt "Entity"] != ""
 					entity := entry["alterations"][alt "Entity"]
 			}
 
-			return StrLen(entity) > 0 ? entity : Util.StrToHTML(output, , Cfg.HTMLMode)
+			return StrLen(entity) > 0 ? entity : UnicodeUtils.GetCodePoint(output, Cfg.HTMLMode = "Decimal" ? "XML4" : "HTML")
 
 		} else if (getMode = "LaTeX" && entry["LaTeX"].Length > 0) {
 			return (entry["LaTeX"].Length = 2 && Cfg.LaTeXMode = "Math") ? entry["LaTeX"][2] : entry["LaTeX"][1]
 
 		} else {
 			if (extraRules && StrLen(alt) > 0 && entry["alterations"].Has(alt)) {
-				return Util.UnicodeToChar(entry["alterations"][alt])
+				return UnicodeUtils.GetSymbol(entry["alterations"][alt])
 
 			} else if (extraRules && getMode != "Unicode" && entry["alterations"].Has(getMode)) {
-				return Util.UnicodeToChar(entry["alterations"][getMode])
+				return UnicodeUtils.GetSymbol(entry["alterations"][getMode])
 			} else {
 				try {
 					return getChar

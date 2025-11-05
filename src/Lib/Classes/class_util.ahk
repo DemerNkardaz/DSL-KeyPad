@@ -255,114 +255,6 @@ Class Util {
 		return False
 	}
 
-	static IsHighSurrogate(character) {
-		local code := Ord(SubStr(character, 1, 1))
-		return (code >= 0xD800 && code <= 0xDBFF)
-	}
-
-	static StrToUnicode(inputString, mode := "") {
-		local output := ""
-		local len := StrLen(inputString)
-
-		local i := 1
-		while (i <= len) {
-			local symbol := SubStr(inputString, i, 1)
-			local code := Ord(symbol)
-			local surrogated := False
-			if (code >= 0xD800 && code <= 0xDBFF) {
-				local nextSymbol := SubStr(inputString, i + 1, 1)
-				symbol .= nextSymbol
-				surrogated := True
-				i += 1
-			}
-
-			if mode = "Hex" {
-				output .= "0x" this.ChrToUnicode(symbol)
-			} else if mode == "CSS" {
-				output .= surrogated ? "\u{" this.ChrToUnicode(symbol) "}" : "\u" this.ChrToUnicode(symbol)
-			} else if mode == "JSON" {
-				output .= this.ChrToUnicode(symbol, , surrogated, True).ToString("", ["\u", ""])
-			} else {
-				output .= this.ChrToUnicode(symbol)
-			}
-
-			output .= (i < len ? " " : "")
-
-			i += 1
-		}
-		return output
-	}
-
-	static StrSelToUnicode(mode := "") {
-		Clip.CopySelected(&text, , "Backup")
-
-		if text = "" {
-			Clip.Release(1)
-			return
-		}
-
-		text := this.StrToUnicode(text, mode)
-
-		Clip.Send(&text, , , "Release")
-		return
-	}
-
-
-	static StrToHTML(inputString, ignoreDefaultSymbols := False, mode := "", reverse := False) {
-		static defaultSymbols := "[a-zA-Zа-яА-ЯёЁ0-9.,\s:;!?()\`"'-+=/\\]"
-		local output := ""
-
-		local i := 1
-		while (i <= StrLen(inputString)) {
-			local symbol := SubStr(inputString, i, 1)
-			local code := Ord(symbol)
-
-			if (code >= 0xD800 && code <= 0xDBFF) {
-				local nextSymbol := SubStr(inputString, i + 1, 1)
-				symbol .= nextSymbol
-				i += 1
-			}
-
-			if (ignoreDefaultSymbols && RegExMatch(symbol, defaultSymbols)) {
-				output .= symbol
-			} else {
-				if InStr(mode, "Entities") {
-					local found := false
-					for char, htmlCode in characters.supplementaryData["HTML Named Entities"] {
-						if (char == symbol) {
-							output .= htmlCode
-							found := true
-							break
-						}
-					}
-
-					if (!found) {
-						output .= "&#" (InStr(mode, "Hex") ? "x" this.ChrToHexaDecimal(symbol, "") : this.ChrToDecimal(symbol)) ";"
-					}
-				} else {
-					output .= "&#" (InStr(mode, "Hex") ? "x" this.ChrToHexaDecimal(symbol, "") : this.ChrToDecimal(symbol)) ";"
-				}
-			}
-
-			i += 1
-		}
-		return output
-	}
-
-	static StrSelToConvert(mode := "", ignoreDefaultSymbols := False, reverse := False) {
-		Clip.CopySelected(&text, , "Backup")
-
-		if text = "" {
-			Clip.Release(1)
-			return
-		}
-
-		text := this.StrToHTML(text, ignoreDefaultSymbols, mode, reverse)
-
-		Clip.Send(&text, , , "Release")
-		return
-	}
-
 	static ClipTagConvert(action := "Tags") {
 		Clip.CopySelected(&text, , "Backup")
 
@@ -474,10 +366,6 @@ Class Util {
 		return pair[1] space str space pair[2]
 	}
 
-	static UniTrim(Str) {
-		return SubStr(Str, 4, StrLen(Str) - 4)
-	}
-
 	static HexNonLatinToLatin(str) {
 		static replacements := [
 			"А", "A", "Б", "B", "С", "C", "Ц", "C", "Д", "D", "Е", "E", "Ф", "F",
@@ -493,77 +381,8 @@ Class Util {
 		return RegExReplace(Str, "[^0-9A-Fa-f]", "")
 	}
 
-	static UnicodeToChar(unicode) {
-		if IsObject(unicode) {
-			local hexStr := ""
 
-			for value in unicode {
-				local intermediate := this.ExtractHex(value)
-				if StrLen(intermediate) > 0 {
-					local num := Format("0x{1}", intermediate)
-					hexStr .= Chr(num)
-				}
-			}
-
-			if StrLen(hexStr) > 0 {
-				return hexStr
-			}
-		} else {
-			local hexStr := this.ExtractHex(unicode)
-			if StrLen(hexStr) > 0 {
-				local num := Format("0x{1}", hexStr)
-				return Chr(num)
-			}
-		}
-		return
-	}
-
-	static UnicodeToChars(unicode*) {
-		local output := ""
-
-		if unicode.Length = 1 && unicode[1] is Array
-			unicode := unicode[1]
-
-		for value in unicode
-			output .= this.UnicodeToChar(value)
-
-		return output
-	}
-
-	static ChrToUnicode(symbol, startFormat := "", getPair := False, useArray := False) {
-		local symOrd := Ord(symbol)
-		local codes := []
-
-		if (getPair && symOrd > 0xFFFF) {
-			local high := Floor((symOrd - 0x10000) / 0x400) + 0xD800
-			local low := Mod(symOrd - 0x10000, 0x400) + 0xDC00
-
-			codes.Push(startFormat Format("{:04X}", high))
-			codes.Push(startFormat Format("{:04X}", low))
-		} else {
-			codes.Push(startFormat Format("{:04X}", symOrd))
-		}
-
-		if (useArray) {
-			return codes
-		} else {
-			return codes[1]
-		}
-	}
-
-	static ChrToUnicode2(symbol, startFormat := "", getPair := False, useArray := False) {
-		local symOrd := Ord(symbol)
-		local code := startFormat Format("{:04X}", symOrd)
-
-		return code
-	}
-
-	static ChrToDecimal(Symbol) {
-		local hexCode := this.ChrToUnicode(Symbol)
-		return Format("{:d}", "0x" hexCode)
-	}
-
-	static ChrToHexaDecimal(stringInput, startFromat := "0x") {
+	static ChrToHexaDecimal(stringInput, startFromat := "Hex4") {
 		if stringInput != "" {
 			local output := ""
 			local i := 1
@@ -578,7 +397,7 @@ Class Util {
 					i += 1
 				}
 
-				output .= this.ChrToUnicode(symbol, startFromat) "-"
+				output .= UnicodeUtils.GetCodePoint(symbol, startFromat) "-"
 				i += 1
 			}
 

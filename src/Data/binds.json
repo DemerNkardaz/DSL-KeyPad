@@ -3007,29 +3007,12 @@
 			"F": {
 				"<#<!": "<% (*) => Search() %/>"
 			},
-			"H": {
-				">^": "<% (*) => Util.StrSelToConvert('Entities') %/>",
-				"<^>^": "<% (*) => Util.StrSelToConvert('Hex') %/>"
-			},
-			"J": {
-				">^": "<% (*) => Util.StrSelToConvert('Entities', true) %/>",
-				"<^>^": "<% (*) => Util.StrSelToConvert('Hex', true) %/>"
-			},
 			"Backslash": {
 				">^": "<% (*) => Util.URLEncoder() %/>",
 				"<^>^": "<% (*) => Util.URLEncoder('decode') %/>"
 			},
 			"Comma": {
 				"<#<!": "<% (*) => GetKeyScanCode() %/>"
-			},
-			"Y": {
-				">^": "<% (*) => Util.StrSelToUnicode('JSON') %/>"
-			},
-			"U": {
-				">^": "<% (*) => Util.StrSelToUnicode() %/>"
-			},
-			"I": {
-				">^": "<% (*) => Util.StrSelToUnicode('Hex') %/>"
 			}
 		}
 	},

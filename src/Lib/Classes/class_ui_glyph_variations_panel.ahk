@@ -23,12 +23,12 @@ Class GlyphsPanel {
 				entries.Set(entry["index"], entryName)
 
 		for index, entryName in entries {
-			unicode := Util.UnicodeToChar(ChrLib.entries.%entryName%["unicode"])
+			unicode := UnicodeUtils.GetSymbol(ChrLib.entries.%entryName%["unicode"])
 			alts := ""
 
 			for key, alt in ChrLib.entries.%entryName%["alterations"]
 				if !(key ~= "i)HTML$")
-					alts .= (key = "combining" ? DottedCircle : "") Util.UnicodeToChar(alt) " "
+					alts .= (key = "combining" ? DottedCircle : "") UnicodeUtils.GetSymbol(alt) " "
 
 			output.Push([unicode, alts, entryName])
 		}
@@ -191,12 +191,12 @@ Class GlyphsPanel {
 		entryAlts := {}
 
 		for key, value in entry["alterations"]
-			if !(key ~= "i)HTML$")
+			if !(key ~= "i)(HTML|Entity)")
 				entryAlts.%key% := value
 
 		for i, each in order {
 			if entryAlts.HasOwnProp(each) {
-				local unicode := Util.UnicodeToChar(entryAlts.%each%)
+				local unicode := UnicodeUtils.GetSymbol(entryAlts.%each%)
 				local code := entryAlts.%each%
 				local fontFamily := Fonts.GetFontByCodePoint(code, "")
 				code := Number("0x" code)

@@ -118,7 +118,7 @@ Class Locale {
 
 		while (RegExMatch(intermediate, "\{U\+(.*?)\}", &match)) {
 			local unicode := StrSplit(match[1], ",")
-			local replacement := Util.UnicodeToChars(unicode*)
+			local replacement := UnicodeUtils.GetBatchSymbols(unicode, "")
 			intermediate := StrReplace(intermediate, match[0], replacement)
 		}
 

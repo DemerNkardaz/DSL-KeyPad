@@ -300,7 +300,7 @@ Class ChrReg {
 
 	ProcessSymbolLetter(&targetEntry) {
 		if targetEntry["symbol"]["letter"] is String {
-			targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], "\%self\%", Util.UnicodeToChar(targetEntry["unicode"]))
+			targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], "\%self\%", UnicodeUtils.GetSymbol(targetEntry["unicode"]))
 			if InStr(targetEntry["symbol"]["letter"], "${") {
 				while RegExMatch(targetEntry["symbol"]["letter"], "\[(.*?)\]", &varMatch) {
 					local splittedVariants := StrSplit(varMatch[1], ",")
@@ -310,7 +310,7 @@ Class ChrReg {
 				targetEntry["symbol"]["letter"] := ChrRecipeHandler.MakeStr(targetEntry["symbol"]["letter"])
 			} else if targetEntry["data"]["script"] = "cyrillic" &&
 				RegExMatch(targetEntry["data"]["letter"], "^[a-zA-Z0-9]+$") {
-				targetEntry["symbol"]["letter"] := Util.UnicodeToChar(targetEntry["unicode"])
+				targetEntry["symbol"]["letter"] := UnicodeUtils.GetSymbol(targetEntry["unicode"])
 			} else if RegExMatch(targetEntry["symbol"]["letter"], "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
 				local addition := match[1] != "" ? Integer(match[1]) : 0
 				targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], match[0], addition + targetEntry["variantPos"])
@@ -322,7 +322,7 @@ Class ChrReg {
 	ProcessOptionStrings(&targetEntry) {
 		for key, value in targetEntry["options"] {
 			if targetEntry["options"][key] is String {
-				targetEntry["options"][key] := RegExReplace(targetEntry["options"][key], "\%self\%", Util.UnicodeToChar(targetEntry["unicode"]))
+				targetEntry["options"][key] := RegExReplace(targetEntry["options"][key], "\%self\%", UnicodeUtils.GetSymbol(targetEntry["unicode"]))
 
 				if InStr(targetEntry["options"][key], "${") || InStr(targetEntry["options"][key], "*?") {
 					endPart := targetEntry["data"]["endPart"] != "" ? "_" targetEntry["data"]["endPart"] : ""
@@ -788,14 +788,14 @@ Class ChrReg {
 			return
 
 		if entry["result"].Length > 0
-			entry["unicode"] := Util.ChrToUnicode(SubStr(entry["result"][1], 1, 1))
+			entry["unicode"] := UnicodeUtils.GetCodePoint(UnicodeUtils.SubStr(entry["result"][1], 1, 1))
 
 
 		if instances.ChrBlock.GetBlock(entry["unicode"], , &block) && block.name != "Unknown"
 			entry["unicodeBlock"] := block.block "`n" block.name
 
-		local character := Util.UnicodeToChar(entry["unicode"])
-		local characterSequence := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
+		local character := UnicodeUtils.GetSymbol(entry["unicode"])
+		local characterSequence := entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"])
 
 
 		this.EntryPostProcessing__Alterations(&entryName, &entry)
@@ -858,7 +858,7 @@ Class ChrReg {
 	EntryPostProcessing__Alterations(&entryName, &entry) {
 		for alteration, value in entry["alterations"] {
 			if !InStr(alteration, "Entity") {
-				local entity := Util.CheckEntity(Util.UnicodeToChar(value))
+				local entity := Util.CheckEntity(UnicodeUtils.GetSymbol(value))
 				if entity
 					entry["alterations"][alteration "Entity"] := entity
 			}
@@ -903,14 +903,14 @@ Class ChrReg {
 			local foundNamedEntity := False
 
 			for each in entry["sequence"] {
-				local sequenceCharacter := Util.UnicodeToChar(each)
+				local sequenceCharacter := UnicodeUtils.GetSymbol(each)
 				local entity := Util.CheckEntity(sequenceCharacter)
 
 				if entity {
 					foundNamedEntity := True
 					entityOutput .= entity
 				} else
-					entityOutput .= Util.StrToHTML(sequenceCharacter)
+					entityOutput .= UnicodeUtils.GetCodePoint(sequenceCharacter, "HTML")
 			}
 
 			if foundNamedEntity
@@ -1016,7 +1016,7 @@ Class ChrReg {
 				if !ChrLib.entryRecipes.Has(recipe) {
 					ChrLib.entryRecipes.Set(
 						recipe, {
-							chr: Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"]),
+							chr: entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"]),
 							index: entry["index"],
 							name: entryName
 						})
@@ -1032,7 +1032,7 @@ Class ChrReg {
 			entry["recipeAlt"] := entry["recipe"].Clone()
 
 			for diacriticName in ChrLib.entryCategories["Diacritic Mark"] {
-				local diacriticChr := Util.UnicodeToChar(ChrLib.entries.%diacriticName%["unicode"])
+				local diacriticChr := UnicodeUtils.GetSymbol(ChrLib.entries.%diacriticName%["unicode"])
 				for i, altRecipe in entry["recipeAlt"] {
 					if InStr(altRecipe, diacriticChr) {
 						entry["recipeAlt"][i] := RegExReplace(altRecipe, diacriticChr, DottedCircle diacriticChr)
@@ -1070,7 +1070,7 @@ Class ChrReg {
 			local postfixEntry := ChrLib.GetEntry(entry["data"]["postfixes"][1])
 			local originSymbolEntry := ChrLib.GetEntry(RegExReplace(entryName, "i)^(.*?)__(.*)$", "$1"))
 			if postfixEntry {
-				postfixSymbol := Util.UnicodeToChar(postfixEntry["unicode"])
+				postfixSymbol := UnicodeUtils.GetSymbol(postfixEntry["unicode"])
 
 				local originLTXLen := originSymbolEntry ? originSymbolEntry["LaTeX"].Length : 0
 				local postfixLTXLen := postfixEntry["LaTeX"].Length

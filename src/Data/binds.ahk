@@ -52,6 +52,28 @@ BindReg(Map(
 			),
 		),
 	),
+	"Important", Map(
+		"Flat", Map(),
+		"Moded", Map(
+			"H", Map(
+				">^", (*) => UnicodeUtils.ConvertSelectedStrToCodePoints("Entities"),
+				"<^>^", (*) => UnicodeUtils.ConvertSelectedStrToCodePoints("XML4")
+			),
+			"J", Map(
+				">^", (*) => UnicodeUtils.ConvertSelectedStrToCodePoints("Entities", , , True),
+				"<^>^", (*) => UnicodeUtils.ConvertSelectedStrToCodePoints("XML4", , , True)
+			),
+			"Y", Map(
+				">^", (*) => UnicodeUtils.ConvertSelectedStrToCodePoints("JSON", , True)
+			),
+			"U", Map(
+				">^", (*) => UnicodeUtils.ConvertSelectedStrToCodePoints("Default", " ")
+			),
+			"I", Map(
+				">^", (*) => UnicodeUtils.ConvertSelectedStrToCodePoints("Hex4", " ")
+			),
+		)
+	),
 	"Common", Map(
 		"Flat", Map(
 			"NumpadAdd", BindHandler.TimeSend.Bind(BindHandler, , ["[NumpadSub]", "[minusplus]"]),

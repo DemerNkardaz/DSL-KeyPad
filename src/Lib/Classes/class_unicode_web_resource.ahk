@@ -16,7 +16,8 @@ Class UnicodeWebResource {
 	__New(useType := "Clipboard", text := "") {
 		if useType = "Clipboard" {
 			Clip.CopySelected(&text, 0.25, "Backup & Release", ["Control", "Insert"])
-			text := Util.ChrToUnicode(text)
+			text := UnicodeUtils.SubStr(text, 1, 1)
+			text := UnicodeUtils.GetCodePoint(text)
 		}
 
 		if text != "" {

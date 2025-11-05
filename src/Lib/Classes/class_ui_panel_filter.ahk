@@ -137,7 +137,7 @@ Class UIMainPanelFilter {
 						}
 
 						isFavorite := entry["groups"].HasValue("Favorites")
-						symbolSequence := Util.UnicodeToChar(entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"])
+						symbolSequence := entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"])
 
 						useHiddenTags := entry["options"]["useHiddenTags"]
 
