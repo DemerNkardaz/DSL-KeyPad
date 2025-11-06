@@ -16,6 +16,7 @@ Array.Prototype.DefineProp("StringsPrepend", { Call: _ArrayStringsPrepend })
 Array.Prototype.DefineProp("StringsAppend", { Call: _ArrayStringsAppend })
 Array.Prototype.DefineProp("StringsToNumbers", { Call: _ArrayStringsToNumbers })
 Array.Prototype.DefineProp("ToMap", { Call: _ArrayToMap })
+Array.Prototype.DefineProp("ToObject", { Call: _ArrayToObject })
 
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("Values", { Call: _MapValues })
@@ -150,6 +151,14 @@ _ArrayToMap(this, defaultValue?) {
 		}
 	}
 
+	return output
+}
+
+_ArrayToObject(this) {
+	local output := {}
+	for item in this {
+		output.%item% := %item%
+	}
 	return output
 }
 
