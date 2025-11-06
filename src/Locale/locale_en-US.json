@@ -16,6 +16,9 @@
 			"characters": "Characters",
 			"clear": "Clear",
 			"code_page": "Code page",
+			"code_pages": "Code pages",
+			"code_point": "Code point",
+			"code_points": "Code points",
 			"column": "Column",
 			"commands": "Commands",
 			"combining_character": "Combining character",
@@ -232,10 +235,11 @@
 				},
 				"search_mode": {
 					"__self": "Search:",
-					"names": "Names",
-					"symbols": "Symbols",
-					"recipes": "Recipes",
-					"keys": "Keys"
+					"names": "{@:dictionary.names}",
+					"symbols": "{@:dictionary.symbols}",
+					"recipes": "{@:dictionary.recipes}",
+					"keys": "{@:dictionary.keys}",
+					"code_points": "{@:dictionary.code_points}"
 				}
 			},
 			"recipes": {

@@ -1,38 +1,38 @@
 Class App {
 	static PID := WinGetPID(A_ScriptHwnd)
 
-	static profileFile := A_ScriptDir "\User\Profile.ini"
-	static profileName := IniRead(this.profileFile, "data", "profile", "default")
-	static profileList := ["default"]
-	static repository := "DemerNkardaz/DSL-KeyPad"
-	static URL := "https://github.com/" this.repository
-	static DocsURL := "https://demernkardaz.github.io/DSL-KeyPad-Docs"
-	static API := "https://api.github.com/repos/" this.repository
-	static gitUserContent := "https://raw.githubusercontent.com/" this.repository
-	static branch := Map("main", this.URL "/tree/main", "dev", this.URL "/tree/dev")
-	static refsHeads := Map("main", this.gitUserContent "/refs/heads/main", "dev", this.gitUserContent "/refs/heads/dev")
-	static desktopINI := A_ScriptDir "\desktop.ini"
+	static PROFILE_FILE := A_ScriptDir "\User\Profile.ini"
+	static PROFILE_NAME := IniRead(this.PROFILE_FILE, "data", "profile", "default")
+	static REPOSITORY := "DemerNkardaz/DSL-KeyPad"
+	static URL := "https://github.com/" this.REPOSITORY
+	static GITHUB_PAGE := "https://demernkardaz.github.io/DSL-KeyPad-Docs"
+	static API := "https://api.github.com/repos/" this.REPOSITORY
+	static GIT_USER_CONTENT := "https://raw.githubusercontent.com/" this.REPOSITORY
+	static BRANCH := Map("main", this.URL "/tree/main", "dev", this.URL "/tree/dev")
+	static REFS_HEADS := Map("main", this.GIT_USER_CONTENT "/refs/heads/main", "dev", this.GIT_USER_CONTENT "/refs/heads/dev")
+	static DESKTOP_INI := A_ScriptDir "\desktop.ini"
 
-	static paths := {
-		dir: A_ScriptDir,
-		data: A_ScriptDir "\Data",
-		dumps: A_ScriptDir "\Data\Dumps",
-		lib: A_ScriptDir "\Lib",
-		sidProc: A_ScriptDir "\Lib\SideProcesses",
-		pwsh: A_ScriptDir "\Lib\powershell",
-		loc: A_ScriptDir "\Locale",
-		bin: A_ScriptDir "\Bin",
-		user: A_ScriptDir "\User",
-		mods: A_ScriptDir "\Mods",
-		profile: A_ScriptDir "\User\profile-" this.profileName,
-		layouts: A_ScriptDir "\User\profile-" this.profileName "\CustomLayouts",
-		binds: A_ScriptDir "\User\profile-" this.profileName "\CustomBindings",
-		temp: A_Temp "\DSLKeyPad",
+	static PATHS := {
+		DIR: A_ScriptDir,
+		DATA: A_ScriptDir "\Data",
+		DUMPS: A_ScriptDir "\Data\Dumps",
+		LIB: A_ScriptDir "\Lib",
+		SIDE_PROCESSES: A_ScriptDir "\Lib\SideProcesses",
+		PWSH: A_ScriptDir "\Lib\powershell",
+		LOC: A_ScriptDir "\Locale",
+		BIN: A_ScriptDir "\Bin",
+		USER: A_ScriptDir "\User",
+		MODS: A_ScriptDir "\Mods",
+		PROFILE: A_ScriptDir "\User\profile-" this.PROFILE_NAME,
+		LAYOUTS: A_ScriptDir "\User\profile-" this.PROFILE_NAME "\CustomLayouts",
+		BINDS: A_ScriptDir "\User\profile-" this.PROFILE_NAME "\CustomBindings",
+		TEMP: A_Temp "\DSLKeyPad",
 	}
 
-	static icoDLL := this.paths.bin "\DSLKeyPad_App_Icons.dll"
-	static indexIcos := Map()
+	static ICONS_DLL := this.PATHS.BIN "\DSLKeyPad_App_Icons.dll"
 
+	static indexIcos := Map()
+	static profileList := ["default"]
 
 	static __New() {
 		this.IconsIndexing()
@@ -41,7 +41,7 @@ Class App {
 	}
 
 	static IconsIndexing() {
-		local labelsData := JSON.LoadFile(this.paths.data "\icon_labels_index.json", "UTF-8")
+		local labelsData := JSON.LoadFile(this.PATHS.DATA "\icon_labels_index.json", "UTF-8")
 		for i, ico in labelsData {
 			this.indexIcos.Set(ico, i)
 		}
@@ -49,15 +49,15 @@ Class App {
 	}
 
 	static Init() {
-		for key, dir in this.paths.OwnProps()
+		for key, dir in this.PATHS.OwnProps()
 			if !DirExist(dir)
 				DirCreate(dir)
 
-		if !FileExist(this.profileFile)
-			IniWrite("default", this.profileFile, "data", "profile")
+		if !FileExist(this.PROFILE_FILE)
+			IniWrite("default", this.PROFILE_FILE, "data", "profile")
 
 		Run(Format('powershell.exe -NoProfile -ExecutionPolicy Bypass -File "{}" -IniPath {}',
-			this.paths.pwsh "\set_folder_data.ps1", this.desktopINI), , "Hide")
+			this.PATHS.PWSH "\set_folder_data.ps1", this.DESKTOP_INI), , "Hide")
 
 		this.ReadProfiles()
 
@@ -66,15 +66,15 @@ Class App {
 	}
 
 	static DeleteINI() {
-		if FileExist(this.desktopINI) {
-			RunWait('cmd.exe /c attrib -s -h "' this.desktopINI '"')
-			FileDelete(this.desktopINI)
+		if FileExist(this.DESKTOP_INI) {
+			RunWait('cmd.exe /c attrib -s -h "' this.DESKTOP_INI '"')
+			FileDelete(this.DESKTOP_INI)
 		}
 		return
 	}
 
 	static ReadProfiles() {
-		Loop Files App.paths.user "\profile-*", "D" {
+		Loop Files App.PATHS.USER "\profile-*", "D" {
 			name := A_LoopFileName
 			if name != "profile-default" {
 				this.profileList.Push(RegExReplace(name, "profile-", ""))
@@ -85,12 +85,12 @@ Class App {
 
 	static SetProfile(profile) {
 		profile := profile = Locale.Read("profile.default") ? "default" : profile
-		IniWrite(profile, this.profileFile, "data", "profile")
+		IniWrite(profile, this.PROFILE_FILE, "data", "profile")
 		Reload
 	}
 
 	static GetProfile() {
-		profile := IniRead(this.profileFile, "data", "profile", "default")
+		profile := IniRead(this.PROFILE_FILE, "data", "profile", "default")
 		return profile = "default" ? Locale.Read("profile.default") : profile
 	}
 

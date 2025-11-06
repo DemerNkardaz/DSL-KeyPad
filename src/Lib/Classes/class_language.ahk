@@ -1,45 +1,48 @@
 Class Language {
-	static optionsFile := App.paths.loc "\locale.options.ini"
+	static optionsFile := App.PATHS.LOC "\locale.options.ini"
 	static supported := Map()
 	static links := Map()
 
 	static __New() {
 		this.Init()
+		return
 	}
 
 	static Init() {
 		languages := Util.INIGetSections([this.optionsFile])
 
 		for i, iso in languages {
-			data := {
-				parent: IniRead(this.optionsFile, iso, "parent", ""),
-				title: IniRead(this.optionsFile, iso, "title", ""),
-				code: IniRead(this.optionsFile, iso, "code", ""),
-				locale: IniRead(this.optionsFile, iso, "is_locale", False),
-				bindings: IniRead(this.optionsFile, iso, "is_bindings", False),
-				altInput: IniRead(this.optionsFile, iso, "alt_input", ""),
-				index: i,
-			}
+			data := Map(
+				"parent", IniRead(this.optionsFile, iso, "parent", ""),
+				"title", IniRead(this.optionsFile, iso, "title", ""),
+				"code", IniRead(this.optionsFile, iso, "code", ""),
+				"locale", IniRead(this.optionsFile, iso, "is_locale", False),
+				"generatedLocale", IniRead(this.optionsFile, iso, "is_generated_locale", False),
+				"bindings", IniRead(this.optionsFile, iso, "is_bindings", False),
+				"altInput", IniRead(this.optionsFile, iso, "alt_input", ""),
+				"index", i,
+			)
 
-			data.code := data.code != "" ? Number(data.code) : ""
-			data.locale := data.locale = "True" ? True : False
-			data.bindings := data.bindings = "True" ? True : False
+			data["code"] := data["code"] != "" ? Number(data["code"]) : ""
+			data["locale"] := data["locale"] = "True" ? True : False
+			data["bindings"] := data["bindings"] = "True" ? True : False
 
 			this.supported.Set(iso, data)
-			if data.code != ""
-				this.links.Set(data.code, iso)
+			if data["code"] != ""
+				this.links.Set(data["code"], iso)
 		}
+		return
 	}
 
 	static GetSupported(by := "locale", get := "key", useIndex := False) {
 		output := useIndex ? Map() : []
 
 		for key, value in this.supported
-			if value.%by% && !(value.code is String)
+			if value.Has(by) && value[by] && !(value["code"] is String)
 				if useIndex
-					output.Set(value.index, get = "key" ? key : value.title)
+					output.Set(value["index"], get = "key" ? key : value["title"])
 				else
-					output.Push(get = "key" ? key : value.title)
+					output.Push(get = "key" ? key : value["title"])
 
 		return useIndex ? output.Values() : output
 	}
@@ -49,7 +52,7 @@ Class Language {
 			input := this.links.Get(input)
 
 		if input is String && input != "" {
-			extraRuleValidate := (!IsSet(extraRule) || IsSet(extraRule) && (HasProp(this.supported[input], extraRule) ? this.supported[input].%extraRule% : False))
+			extraRuleValidate := (!IsSet(extraRule) || IsSet(extraRule) && (this.supported[input].Has(extraRule) ? this.supported[input][extraRule] : False))
 
 			if this.supported.Has(input) && extraRuleValidate
 				return True
@@ -69,9 +72,9 @@ Class Language {
 		userLanguage := !IsSpace(userLanguage) ? userLanguage : this.GetSys()
 
 		if this.Validate(userLanguage) {
-			return getTitle ? this.supported.Get(userLanguage).title : endLen > 0 ? SubStr(userLanguage, 1, endLen) : userLanguage
+			return getTitle ? this.supported.Get(userLanguage)["title"] : endLen > 0 ? SubStr(userLanguage, 1, endLen) : userLanguage
 		} else {
-			return getTitle ? this.supported.Get("en-US").title : endLen > 0 ? SubStr("en-US", 1, endLen) : "en-US"
+			return getTitle ? this.supported.Get("en-US")["title"] : endLen > 0 ? SubStr("en-US", 1, endLen) : "en-US"
 		}
 	}
 

@@ -2,7 +2,7 @@ Class KbdLayout {
 	layout := Map()
 
 	__New(base, layoutData := Map("keys", Map()), path?) {
-		local defaultMappingData := JSON.LoadFile(App.paths.data "\keyboard_default_mapping.json", "UTF-8")
+		local defaultMappingData := JSON.LoadFile(App.PATHS.DATA "\keyboard_default_mapping.json", "UTF-8")
 		local targetLayoutData := IsSet(path) ? JSON.LoadFile(path, "UTF-8") : layoutData
 		this.layout := Map()
 

@@ -85,7 +85,7 @@ Class Cfg {
 		"Input_Mode", "Unicode",
 	)
 
-	static ini := App.paths.profile "\Config.ini"
+	static ini := App.PATHS.PROFILE "\Config.ini"
 
 	static __New() {
 		this.Init()
@@ -174,7 +174,7 @@ Class Cfg {
 			layoutCyrillicSelector.OnEvent("Change", (CB, Zero) => KbdBinder.SetLayout(CB.Text))
 
 			local layoutUpdate := optionsPanel.AddButton("vLayoutUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(23) - 1))
-			GuiButtonIcon(layoutUpdate, App.icoDLL, App.indexIcos["reload_flat"])
+			GuiButtonIcon(layoutUpdate, App.ICONS_DLL, App.indexIcos["reload_flat"])
 			layoutUpdate.OnEvent("Click", (*) => (
 				KbdLayoutUserDefined.Update(),
 				this.EditorGUI.GetPos(&X, &Y, &W, &H),
@@ -195,7 +195,7 @@ Class Cfg {
 			bindingsSelector.OnEvent("Change", (CB, Zero) => KbdBinder.SetBinds(CB.Text))
 
 			local bindingsUpdate := optionsPanel.AddButton("vBindingsUpdate x" languageSelectorX(130) " w28 y" languageSelectorY(layouSelectorY(32 * 3) - 1))
-			GuiButtonIcon(bindingsUpdate, App.icoDLL, App.indexIcos["reload_flat"])
+			GuiButtonIcon(bindingsUpdate, App.ICONS_DLL, App.indexIcos["reload_flat"])
 			bindingsUpdate.OnEvent("Click", (*) => (
 				BindingUserDefined.Update(),
 				this.EditorGUI.GetPos(&X, &Y, &W, &H),
@@ -427,7 +427,7 @@ Class Cfg {
 
 			resourcesTabs.UseTab(resourcesTabLabels[1])
 
-			local resourcesUrls := JSON.LoadFile(App.paths.data "\settings_resources_urls.json", "UTF-8")
+			local resourcesUrls := JSON.LoadFile(App.PATHS.DATA "\settings_resources_urls.json", "UTF-8")
 
 			local layoutsWikiLabel := optionsPanel.AddLink("x" languageSelectorX() " y" languageSelectorY((205) + 300 + 30 + 20 + 28) " w" defaultSizes.groupBoxW - 10 " h80", resourcesUrls.ToString(Chr(0x2003)))
 
@@ -440,7 +440,7 @@ Class Cfg {
 
 			local recipesPanelBtn := optionsPanel.AddButton("x" iniFilesX() " y" iniFilesY " w32 h32")
 			recipesPanelBtn.OnEvent("Click", (*) => globalInstances.MyRecipesGUI.Show())
-			GuiButtonIcon(recipesPanelBtn, App.icoDLL, App.indexIcos["my_recipes_flat"])
+			GuiButtonIcon(recipesPanelBtn, App.ICONS_DLL, App.indexIcos["my_recipes_flat"])
 
 			local configFileBtn := optionsPanel.AddButton("x" iniFilesX(32) " y" iniFilesY " w32 h32")
 			configFileBtn.OnEvent("Click", (*) => Cfg.OpenFile())
@@ -670,7 +670,7 @@ Class Options {
 		; local isLanguageWasChanged := False
 
 		for key, value in Language.supported {
-			if value.title = CB.Text {
+			if value["title"] = CB.Text {
 				Cfg.Set(key, "User_Language")
 				return Event.Trigger("UI Language", "Switched", value)
 			}
@@ -723,7 +723,7 @@ Class Options {
 			FileDelete(shortcutPath)
 
 		iconIndex := 0
-		command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" shortcutPath "'); $shortcut.TargetPath = '" currentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" App.icoDLL "," iconIndex "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()"
+		command := "powershell -command " "$shell = New-Object -ComObject WScript.Shell; $shortcut = $shell.CreateShortcut('" shortcutPath "'); $shortcut.TargetPath = '" currentScriptPath "'; $shortcut.WorkingDirectory = '" A_ScriptDir "'; $shortcut.IconLocation = '" App.ICONS_DLL "," iconIndex "'; $shortcut.Description = 'DSLKeyPad AutoHotkey Script'; $shortcut.Save()"
 		RunWait(command, , "Hide")
 
 		MsgBox(Locale.Read("gui.options.system_startup.shortcut_created_or_updated"), App.Title(), 0x40)

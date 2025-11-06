@@ -16,6 +16,9 @@
 			"characters": "Знаки",
 			"clear": "Очистить",
 			"code_page": "Кодовая страница",
+			"code_pages": "Кодовые страницы",
+			"code_point": "Кодовая точка",
+			"code_points": "Кодовые точки",
 			"column": "Колонка",
 			"commands": "Команды",
 			"combining_character": "Комбинируемый знак",
@@ -232,10 +235,11 @@
 				},
 				"search_mode": {
 					"__self": "Поиск:",
-					"names": "Имена",
-					"symbols": "Символы",
-					"recipes": "Рецепты",
-					"keys": "Ключи"
+					"names": "{@:dictionary.names}",
+					"symbols": "{@:dictionary.symbols}",
+					"recipes": "{@:dictionary.recipes}",
+					"keys": "{@:dictionary.keys}",
+					"code_points": "{@:dictionary.code_points}"
 				}
 			},
 			"recipes": {

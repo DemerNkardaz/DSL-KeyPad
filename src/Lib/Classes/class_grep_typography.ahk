@@ -4,7 +4,7 @@
 			leftSided: "\x{00A1}\x{00BF}\x{2E18}\x{2E2E}",
 			rightSided: "\x{203C}\x{2049}\x{2047}\x{2048}\x{203D}.,!?…"
 		}
-		static dictionariesPaths := [App.paths.data "\grep_rule_sets.json"]
+		static dictionariesPaths := [App.PATHS.DATA "\grep_rule_sets.json"]
 		static dictionaries := Map()
 
 		static __New() {

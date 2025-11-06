@@ -47,9 +47,9 @@ Class Keyboard {
 		currentLayout := this.CurrentLayout()
 		previousLeyout := Cfg.Get("Prev_Layout", "ServiceFields")
 
-		if currentLayout != Language.supported["en-US"].code {
+		if currentLayout != Language.supported["en-US"]["code"] {
 			Cfg.Set(currentLayout, "Prev_Layout", "ServiceFields")
-			this.SwitchLayout(Language.supported["en-US"].code, 2)
+			this.SwitchLayout(Language.supported["en-US"]["code"], 2)
 			this.blockedForReload := True
 			Reload
 		} else if StrLen(previousLeyout) > 0 {

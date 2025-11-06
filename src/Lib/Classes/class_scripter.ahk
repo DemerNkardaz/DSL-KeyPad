@@ -225,7 +225,7 @@ Class Scripter {
 					if ico ~= "file::" {
 						selectorPanel.AddPicture("v" dataValue["uiid"] "Ico" i " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans", StrReplace(ico, "file::"))
 					} else
-						selectorPanel.AddPicture("v" dataValue["uiid"] "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans Icon" App.indexIcos[ico], App.icoDLL)
+						selectorPanel.AddPicture("v" dataValue["uiid"] "Ico" ico " w" icoW " h" icoH " x" icoX " y" (icoY + icoShift) " BackgroundTrans Icon" App.indexIcos[ico], App.ICONS_DLL)
 					icoShift += icoH + 5
 				}
 

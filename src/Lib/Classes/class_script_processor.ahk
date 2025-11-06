@@ -6,7 +6,7 @@ Class TelexScriptProcessor {
 
 	static TelexReturn(&input) {
 		local output := input
-		local sequences := JSON.LoadFile(App.paths.data "\telex_script_processor_sequences.json", "UTF-8")
+		local sequences := JSON.LoadFile(App.PATHS.DATA "\telex_script_processor_sequences.json", "UTF-8")
 
 		for key, value in sequences[Scripter.GetCurrentMode("TELEX")] {
 			isValid := input == key || InStr(input, "\") && (key == (SubStr(input, 1, 1) SubStr(input, 3)))
@@ -21,7 +21,7 @@ Class TelexScriptProcessor {
 	}
 
 	__New(mode := "Tieng Viet", customData?) {
-		this.library := IsSet(customData) ? customData : JSON.LoadFile(App.paths.data "\telex_script_processor_library.json", "UTF-8")
+		this.library := IsSet(customData) ? customData : JSON.LoadFile(App.PATHS.DATA "\telex_script_processor_library.json", "UTF-8")
 		this.sequences := Map("Escaped", Map(), "Default", Map())
 		this.tag := StrLower(StrReplace(mode, " ", "_"))
 		this.mode := mode
@@ -184,7 +184,7 @@ Class TelexScriptProcessor {
 	}
 
 	SetSequences() {
-		local sequences := JSON.LoadFile(App.paths.data "\telex_script_processor_sequences.json", "UTF-8")
+		local sequences := JSON.LoadFile(App.PATHS.DATA "\telex_script_processor_sequences.json", "UTF-8")
 
 		for script, groups in sequences {
 			if script != this.mode

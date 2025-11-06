@@ -15,6 +15,7 @@ Array.Prototype.DefineProp("DeepClone", { Call: _ArrayDeepClone })
 Array.Prototype.DefineProp("StringsPrepend", { Call: _ArrayStringsPrepend })
 Array.Prototype.DefineProp("StringsAppend", { Call: _ArrayStringsAppend })
 Array.Prototype.DefineProp("StringsToNumbers", { Call: _ArrayStringsToNumbers })
+Array.Prototype.DefineProp("ToMap", { Call: _ArrayToMap })
 
 Map.Prototype.DefineProp("Keys", { Call: _MapKeys })
 Map.Prototype.DefineProp("Values", { Call: _MapValues })
@@ -129,6 +130,27 @@ _ArrayStringsToNumbers(this) {
 			this[i] = Number(item)
 	}
 	return this
+}
+
+_ArrayToMap(this, defaultValue?) {
+	local output := Map()
+
+	if IsSet(defaultValue) {
+		for item in this {
+			if defaultValue is Array || defaultValue is Map || defaultValue is Object
+				output.Set(item, defaultValue.Clone())
+			else
+				output.Set(item, defaultValue)
+		}
+	} else {
+		Loop this.Length // 2 {
+			local i := A_Index * 2 - 1
+			local v := i + 1
+			output.Set(this[i], this[v])
+		}
+	}
+
+	return output
 }
 
 _ArrayMergeWith(this, arrays*) {

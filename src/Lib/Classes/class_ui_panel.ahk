@@ -78,7 +78,7 @@ Class UIMainPanel {
 	filterClearBtnY := this.filterIconY
 
 	filterModeDropDownY := this.filterIconY + 1
-	filterModeDropDownW := 128
+	filterModeDropDownW := 128 + 16
 	filterModeDropDownH := this.filterIconH + 14
 
 	filterX := this.filterIconX + 28
@@ -382,7 +382,8 @@ Class UIMainPanel {
 		"Names", Locale.Read("gui.panel.search_mode<>.names"),
 		"Symbols", Locale.Read("gui.panel.search_mode<>.symbols"),
 		"Recipes", Locale.Read("gui.panel.search_mode<>.recipes"),
-		"Keys", Locale.Read("gui.panel.search_mode<>.keys")
+		"Keys", Locale.Read("gui.panel.search_mode<>.keys"),
+		"Code Points", Locale.Read("gui.panel.search_mode<>.code_points")
 	)
 
 	currentFilterMode => Cfg.Get("Filter_Mode", "PanelGUI", "Names")
@@ -397,8 +398,8 @@ Class UIMainPanel {
 
 
 	__New() {
-		local JSONLists := JSON.LoadFile(App.paths.data "\ui_main_panel_lists.json", "UTF-8")
-		this.helpData := JSON.LoadFile(App.paths.data "\ui_main_panel_help.json", "UTF-8")
+		local JSONLists := JSON.LoadFile(App.PATHS.DATA "\ui_main_panel_lists.json", "UTF-8")
+		this.helpData := JSON.LoadFile(App.PATHS.DATA "\ui_main_panel_help.json", "UTF-8")
 
 		this.GetColumnsData(&columnsData)
 

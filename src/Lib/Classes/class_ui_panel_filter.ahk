@@ -76,6 +76,7 @@ Class UIMainPanelFilter {
 				"i)^(R|Р):", "Recipes",
 				"i)^(K|К):", "Keys",
 				"i)^(C|С):", "Symbols",
+				"i)^(P|Т):", "Code Points",
 			)
 
 			local searchMode := Cfg.Get("Filter_Mode", "PanelGUI", "Names")
@@ -122,6 +123,7 @@ Class UIMainPanelFilter {
 					local symbolSequence := ""
 					local specialMatch := { key: "", recipe: [] }
 					local entryName := item[5]
+					local codePoint := item[4]
 					local entry := Map()
 
 					if entryName != "" {
@@ -138,6 +140,7 @@ Class UIMainPanelFilter {
 
 						isFavorite := entry["groups"].HasValue("Favorites")
 						symbolSequence := entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"])
+						codePoint := entry["sequence"].Length > 0 ? entry["sequence"] : entry["unicode"]
 
 						useHiddenTags := entry["options"]["useHiddenTags"]
 
@@ -167,6 +170,7 @@ Class UIMainPanelFilter {
 						key: specialMatch.key,
 						recipe: specialMatch.recipe,
 						symbol: symbolSequence,
+						codePoint: codePoint,
 						searchMode: searchMode
 					}
 
@@ -262,7 +266,7 @@ Class UIMainPanelFilter {
 	}
 
 	SearchModeCompare(&data, &filterText, &caseSensitiveMark) {
-		local matchReferences := Map("Recipes", data.recipe, "Keys", data.key, "Symbols", data.symbol)
+		local matchReferences := Map("Recipes", data.recipe, "Keys", data.key, "Symbols", data.symbol, "Code Points", data.codePoint)
 		local matchableValue := matchReferences[data.searchMode]
 		local value := this.isFilterRegExOn ? filterText : RegExEscape(filterText)
 

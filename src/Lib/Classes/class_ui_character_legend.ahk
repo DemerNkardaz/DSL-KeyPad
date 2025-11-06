@@ -1,5 +1,5 @@
 Class ChrLegend {
-	static legendsPath := App.paths.loc "\CharacterLegend\"
+	static legendsPath := App.PATHS.LOC "\CharacterLegend\"
 	static legends := Map()
 	static panelGUI := Gui()
 	static title := ""

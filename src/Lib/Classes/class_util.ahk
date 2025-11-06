@@ -56,7 +56,7 @@ Class Util {
 	}
 
 	static ClearDumps() {
-		Loop Files, App.paths.dumps "\*.*", "FR"
+		Loop Files, App.PATHS.DUMPS "\*.*", "FR"
 			if (A_LoopFileName ~= "i)dump_.*\.json$")
 				FileDelete(A_LoopFileFullPath)
 		return
@@ -515,7 +515,7 @@ Class Util {
 		return str
 	}
 
-	static TrimBasePath(filePath, basePath := App.paths.profile "\") {
+	static TrimBasePath(filePath, basePath := App.PATHS.PROFILE "\") {
 		if (InStr(filePath, basePath) == 1) {
 			return SubStr(filePath, StrLen(basePath) + 1)
 		}

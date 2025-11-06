@@ -6,7 +6,7 @@ Class KbdLayoutReg {
 	static __New() {
 		for each in this.layoutTypes {
 			this.storedData.Set(each, Map())
-			local data := JSON.LoadFile(App.paths.data "\keyboard_layouts_" each ".json", "UTF-8")
+			local data := JSON.LoadFile(App.PATHS.DATA "\keyboard_layouts_" each ".json", "UTF-8")
 
 			for item, keys in data {
 				this.layoutNames[each].Push(item)

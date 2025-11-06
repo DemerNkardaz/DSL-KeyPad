@@ -130,7 +130,7 @@ Class AboutPanel {
 
 		local aboutLeftPanelFrame := aboutWindow.AddGroupBox(Format("vAboutLeftPanelFrame BackgroundWhite x{} y{} w{} h{}", this.aboutLeftPanelFrameX, this.aboutLeftPanelFrameY, this.aboutLeftPanelFrameW, this.aboutLeftPanelFrameH))
 
-		local aboutLeftIcon := aboutWindow.AddPicture(Format("vAboutLeftIcon BackgroundWhite x{} y{} w{} h{}", this.aboutLeftIconX, this.aboutLeftIconY, this.aboutLeftIconW, this.aboutLeftIconH), App.icoDLL)
+		local aboutLeftIcon := aboutWindow.AddPicture(Format("vAboutLeftIcon BackgroundWhite x{} y{} w{} h{}", this.aboutLeftIconX, this.aboutLeftIconY, this.aboutLeftIconW, this.aboutLeftIconH), App.ICONS_DLL)
 
 		local aboutTitle := aboutWindow.AddText(Format("vAboutTitle BackgroundWhite x{} y{} w{} h{} Center", this.aboutTitleX, this.aboutTitleY, this.aboutTitleW, this.aboutTitleH), App.Title())
 

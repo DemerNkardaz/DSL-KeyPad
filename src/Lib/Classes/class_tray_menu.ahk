@@ -31,7 +31,7 @@ Class TrayMenu {
 
 	static SetTray() {
 		A_IconTip := App.Title("+status+version")
-		TraySetIcon(App.icoDLL, App.indexIcos["app"], True)
+		TraySetIcon(App.ICONS_DLL, App.indexIcos["app"], True)
 	}
 
 	static SetTrayActions() {
@@ -87,17 +87,17 @@ Class TrayMenu {
 		local labels := this.TrayLabels()
 
 		this.tray.Delete()
-		this.tray.Add(labels.app, (*) => Run(App.DocsURL)), this.tray.SetIcon(labels.app, App.icoDLL, App.indexIcos["app"])
+		this.tray.Add(labels.app, (*) => Run(App.GITHUB_PAGE)), this.tray.SetIcon(labels.app, App.ICONS_DLL, App.indexIcos["app"])
 
 		if Update.available
-			this.tray.Add(labels.update, (*) => Update.Check(True)), this.tray.SetIcon(labels.update, App.icoDLL, App.indexIcos["update"])
+			this.tray.Add(labels.update, (*) => Update.Check(True)), this.tray.SetIcon(labels.update, App.ICONS_DLL, App.indexIcos["update"])
 
 		this.tray.Add()
 		this.tray.Add(labels.openPanel, (*) => globalInstances.MainGUI.Show())
-		this.tray.Add(labels.legend, (*) => ChrLegend()), this.tray.SetIcon(labels.legend, App.icoDLL, App.indexIcos["legend_small_flat"])
-		this.tray.Add(labels.mods, (*) => ModsGUI()), this.tray.SetIcon(labels.mods, App.icoDLL, App.indexIcos["mods_flat"])
-		this.tray.Add(labels.options, (*) => Cfg.Editor()), this.tray.SetIcon(labels.options, App.icoDLL, App.indexIcos["settings_flat"])
-		this.tray.Add(labels.about, (*) => globalInstances.AboutGUI.Show()), this.tray.SetIcon(labels.about, App.icoDLL, App.indexIcos["about_flat"])
+		this.tray.Add(labels.legend, (*) => ChrLegend()), this.tray.SetIcon(labels.legend, App.ICONS_DLL, App.indexIcos["legend_small_flat"])
+		this.tray.Add(labels.mods, (*) => ModsGUI()), this.tray.SetIcon(labels.mods, App.ICONS_DLL, App.indexIcos["mods_flat"])
+		this.tray.Add(labels.options, (*) => Cfg.Editor()), this.tray.SetIcon(labels.options, App.ICONS_DLL, App.indexIcos["settings_flat"])
+		this.tray.Add(labels.about, (*) => globalInstances.AboutGUI.Show()), this.tray.SetIcon(labels.about, App.ICONS_DLL, App.indexIcos["about_flat"])
 		this.tray.Add()
 		this.tray.Add(labels.changelogPanel, (*) => Changelog.Panel())
 		this.tray.Add()
@@ -171,7 +171,7 @@ Class TrayMenu {
 				}
 
 				layoutsMenu.Add(currentLayout, ((layout) => (*) => KbdBinder.SetLayout(layout))(currentLayout))
-				layoutsMenu.SetIcon(currentLayout, App.icoDLL, App.indexIcos[item["type"]])
+				layoutsMenu.SetIcon(currentLayout, App.ICONS_DLL, App.indexIcos[item["type"]])
 			}
 		}
 
@@ -191,20 +191,20 @@ Class TrayMenu {
 		this.tray.Add(labels.layouts, layoutsMenu)
 
 		this.tray.Add()
-		this.tray.Add(labels.userRecipes, (*) => globalInstances.MyRecipesGUI.Show()), this.tray.SetIcon(labels.userRecipes, App.icoDLL, App.indexIcos["my_recipes_flat"])
+		this.tray.Add(labels.userRecipes, (*) => globalInstances.MyRecipesGUI.Show()), this.tray.SetIcon(labels.userRecipes, App.ICONS_DLL, App.indexIcos["my_recipes_flat"])
 		this.tray.Add()
 		this.tray.Add(labels.search, (*) => Search()), this.tray.SetIcon(labels.search, ImageRes, 169)
-		this.tray.Add(labels.forge, (*) => globalInstances.crafter.Start("InputBox")), this.tray.SetIcon(labels.forge, App.icoDLL, App.indexIcos["forge_flat"])
+		this.tray.Add(labels.forge, (*) => globalInstances.crafter.Start("InputBox")), this.tray.SetIcon(labels.forge, App.ICONS_DLL, App.indexIcos["forge_flat"])
 		this.tray.Add(labels.folder, (*) => Run(A_ScriptDir)), this.tray.SetIcon(labels.folder, ImageRes, 180)
 		this.tray.Add()
-		this.tray.Add(labels.reload, (*) => Reload()), this.tray.SetIcon(labels.reload, App.icoDLL, App.indexIcos["reload"])
+		this.tray.Add(labels.reload, (*) => Reload()), this.tray.SetIcon(labels.reload, App.ICONS_DLL, App.indexIcos["reload"])
 		this.tray.Add()
 
 		this.tray.Add(labels.disableBinds, toggleMonitor.Bind())
-		this.tray.SetIcon(labels.disableBinds, App.icoDLL, App.indexIcos["disabled"])
+		this.tray.SetIcon(labels.disableBinds, App.ICONS_DLL, App.indexIcos["disabled"])
 
 		this.tray.Add()
-		this.tray.Add(labels.exit, (*) => ExitApp()), this.tray.SetIcon(labels.exit, App.icoDLL, App.indexIcos["exit"])
+		this.tray.Add(labels.exit, (*) => ExitApp()), this.tray.SetIcon(labels.exit, App.ICONS_DLL, App.indexIcos["exit"])
 
 		HotKey(">^F10", (*) => toggleMonitor(KbdMonitor.Disabled("User") ? labels.enableBinds : labels.disableBinds, 0, this.tray), "On S")
 
@@ -228,12 +228,12 @@ Class TrayMenu {
 		KbdBinder.CurrentLayouts(&latinLayout, &cyrillicLayout, &hellenicLayout)
 		Keyboard.CheckLayout(&lang)
 
-		if lang != "" && Language.supported[lang].parent != ""
-			lang := Language.supported[lang].parent
+		if lang != "" && Language.supported[lang]["parent"] != ""
+			lang := Language.supported[lang]["parent"]
 
 		local iconCode := App.indexIcos["app"]
 		local trayTitle := App.Title("+status+version") "`n" latinLayout "/" cyrillicLayout "/" hellenicLayout
-		local iconFile := App.icoDLL
+		local iconFile := App.ICONS_DLL
 		local keyboardStatus := KbdMonitor.Disabled()
 		if keyboardStatus is String
 			keyboardStatus := StrLower(keyboardStatus)
@@ -281,7 +281,7 @@ Class TrayMenu {
 		if dataValue["icons"][1] ~= "file::" {
 			menuElement.SetIcon(Locale.Read("script_labels." dataValue["locale"]), StrReplace(dataValue["icons"][1], "file::"))
 		} else
-			menuElement.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.icoDLL, App.indexIcos[dataValue["icons"][1]])
+			menuElement.SetIcon(Locale.Read("script_labels." dataValue["locale"]), App.ICONS_DLL, App.indexIcos[dataValue["icons"][1]])
 	}
 
 }

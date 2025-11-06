@@ -60,9 +60,11 @@ initialized := False
 ; Currently has no logic to run
 ; SideProcess.StartDynamic("support", , App.Title("+status+version") "``n" Locale.Read("side_process.support"), App.icoDLL, App.indexIcos["support"], App.PID)
 #Include <Classes\class_language>
+Event.Trigger("Language", "Initialized")
 #Include <Classes\class_keyboard>
 #Include <Classes\class_locale>
 #Include <Classes\class_locale_generator>
+Event.Trigger("Locale", "Initialized")
 #Include <Classes\class_fonts>
 #Include <Classes\class_character_recipe_handler>
 #Include <Classes\class_character_entity>

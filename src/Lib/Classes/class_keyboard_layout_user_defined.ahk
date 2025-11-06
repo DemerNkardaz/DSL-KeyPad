@@ -14,7 +14,7 @@ Class KbdLayoutUserDefined {
 	Reg() {
 		handled := Map("latin", [], "cyrillic", [], "hellenic", [])
 
-		Loop Files App.paths.layouts "\*.json" {
+		Loop Files App.PATHS.LAYOUTS "\*.json" {
 			local data := JSON.LoadFile(A_LoopFileFullPath, "UTF-8")
 
 			if !data.Has("info") || !data.Has("keys")

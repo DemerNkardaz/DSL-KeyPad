@@ -13,7 +13,7 @@ Class ChrLib {
 	static entryRecipes := Map()
 	static entryTags := []
 	static entryIdentifiers := Map()
-	static dumpPath := App.paths.temp "\characters_dump.json"
+	static dumpPath := App.PATHS.TEMP "\characters_dump.json"
 	static duplicatesList := Map()
 	static lastIndexAdded := -1
 	static countOf := {
@@ -290,7 +290,7 @@ Class ChrLib {
 
 	static Print() {
 		local lang := Language.Get(, , 2)
-		local printPath := App.paths.temp "\printed_pairs.html"
+		local printPath := App.PATHS.TEMP "\printed_pairs.html"
 		local tableRows := ""
 
 		if FileExist(printPath)
@@ -507,7 +507,7 @@ Class ChrLib {
 					entity := entry["alterations"][alt "Entity"]
 			}
 
-			return StrLen(entity) > 0 ? entity : UnicodeUtils.GetCodePoint(output, Cfg.HTMLMode = "Decimal" ? "XML4" : "HTML")
+			return StrLen(entity) > 0 ? entity : UnicodeUtils.GetCodePoint(output, Cfg.HTMLMode = "Hexadecimal" ? "XML4" : "HTML")
 
 		} else if (getMode = "LaTeX" && entry["LaTeX"].Length > 0) {
 			return (entry["LaTeX"].Length = 2 && Cfg.LaTeXMode = "Math") ? entry["LaTeX"][2] : entry["LaTeX"][1]

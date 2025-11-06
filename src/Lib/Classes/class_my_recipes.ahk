@@ -1,8 +1,8 @@
 Class MyRecipes {
 	static file := "CustomRecipes.json"
-	static filePath := App.paths.profile "\" this.file
-	static sampleFile := App.paths.data "\user_defined_recipes_sample.json"
-	static autoimport := { xcompose: App.paths.profile "\XCompose", CustomRecipes: App.paths.profile "\CustomRecipes" }
+	static filePath := App.PATHS.PROFILE "\" this.file
+	static sampleFile := App.PATHS.DATA "\user_defined_recipes_sample.json"
+	static autoimport := { xcompose: App.PATHS.PROFILE "\XCompose", CustomRecipes: App.PATHS.PROFILE "\CustomRecipes" }
 	static sectionValidator := "^[A-Za-z_][A-Za-z0-9_]*$"
 
 	static __New() {

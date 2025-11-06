@@ -10,7 +10,7 @@ Class ChrLegendStore {
 	static Fill() {
 		local pathsArray := []
 
-		Loop Files App.paths.loc "\CharacterLegend\*", "FR"
+		Loop Files App.PATHS.LOC "\CharacterLegend\*", "FR"
 			if A_LoopFileFullPath ~= "i)\.(ini|json)$"
 				pathsArray.Push(A_LoopFileFullPath)
 

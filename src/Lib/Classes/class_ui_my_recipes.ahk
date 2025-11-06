@@ -63,7 +63,7 @@ class UIMyRecipes {
 		local createButton := recipesWindow.AddButton(Format("vCreateBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(), this.btnY), "+")
 		local deleteButton := recipesWindow.AddButton(Format("vDeleteBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(2), this.btnY), Chr(0x2212))
 		local updateButton := recipesWindow.AddButton(Format("vUpdateBtn w{} h{} x{} y{}", this.btnW, this.btnH, this.btnX(3), this.btnY))
-		GuiButtonIcon(updateButton, App.icoDLL, App.indexIcos["reload_flat"])
+		GuiButtonIcon(updateButton, App.ICONS_DLL, App.indexIcos["reload_flat"])
 
 		createButton.SetFont("s16")
 		deleteButton.SetFont("s16")
@@ -137,7 +137,7 @@ class UIMyRecipes {
 			return
 
 		if RegExMatch(filePath, "i)(xcompose|\\)", &match) {
-			MsgBox(Locale.Read("gui.recipes.warnings." (match[1] = "xcompose" ? "xcompose_break" : "autoimported_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.profileName "\" filePath, App.Title("+status+version"), "Icon!")
+			MsgBox(Locale.Read("gui.recipes.warnings." (match[1] = "xcompose" ? "xcompose_break" : "autoimported_edit_unable")) "`n`n" Chr(0x2026) "\User\profile-" App.PROFILE_NAME "\" filePath, App.Title("+status+version"), "Icon!")
 			return
 		}
 
@@ -252,7 +252,7 @@ class UIMyRecipes {
 			this.LV := LV
 
 			this.recipeName := IsSet(recipeName) ? recipeName : ""
-			this.filePath := IsSet(filePath) ? App.paths.profile "\" filePath : MyRecipes.filePath
+			this.filePath := IsSet(filePath) ? App.PATHS.PROFILE "\" filePath : MyRecipes.filePath
 
 			parentGUI.GetPos(&parentX, &parentY, &parentW, &parentH)
 

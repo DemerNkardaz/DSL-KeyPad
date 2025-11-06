@@ -7,7 +7,7 @@ Class XComposeToEntriesParser {
 		this.fileName := fileName
 		this.fileNameNoExt := fileNameNoExt
 		this.content := FileRead(filePath, "UTF-8")
-		this.replacesData := JSON.LoadFile(App.paths.data "\xcompose_parse_replaces.json", "UTF-8")
+		this.replacesData := JSON.LoadFile(App.PATHS.DATA "\xcompose_parse_replaces.json", "UTF-8")
 		this.Parse()
 		return
 	}
@@ -52,7 +52,7 @@ Class XComposeToEntriesParser {
 						sequenceOrded .= Format("{:X}", Ord(SubStr(sequence, A_Index, 1)))
 					}
 
-					local cutPath := StrReplace(this.filePath, App.paths.profile "\")
+					local cutPath := StrReplace(this.filePath, App.PATHS.PROFILE "\")
 
 					local section := "xcompose_s" sequenceOrded "_r" resultOrded (StrLen(this.fileNameNoExt) == 0 ? "" : "__file_" this.fileNameNoExt)
 					this.output.Push(section, Map(

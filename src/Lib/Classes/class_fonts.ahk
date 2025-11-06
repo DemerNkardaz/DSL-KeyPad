@@ -1,5 +1,5 @@
 Class Fonts {
-	static fontFaces := JSON.LoadFile(App.paths.data "\font_faces.json", "UTF-8")
+	static fontFaces := JSON.LoadFile(App.PATHS.DATA "\font_faces.json", "UTF-8")
 	static fallbackFont := "Segoe UI"
 
 	static Get(fontType := "Default", variant?) {

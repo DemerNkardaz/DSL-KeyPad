@@ -4,6 +4,7 @@ Class Locale {
 
 	static __New() {
 		this.Fill()
+		return
 	}
 
 	static Fill() {
@@ -11,19 +12,19 @@ Class Locale {
 		local pathsArray := []
 
 		for lang, value in Language.supported {
-			if value.locale {
-				local iniPath := App.paths.loc "\locale_" lang ".ini"
-				local jsonPath := App.paths.loc "\locale_" lang ".json"
+			if value["locale"] {
+				local iniPath := App.PATHS.LOC "\locale_" lang ".ini"
+				local jsonPath := App.PATHS.LOC "\locale_" lang ".json"
 
 				if FileExist(iniPath)
-					pathsArray.Push(App.paths.loc "\locale_" lang ".ini")
+					pathsArray.Push(App.PATHS.LOC "\locale_" lang ".ini")
 
 				if FileExist(jsonPath)
-					pathsArray.Push(App.paths.loc "\locale_" lang ".json")
+					pathsArray.Push(App.PATHS.LOC "\locale_" lang ".json")
 			}
 		}
 
-		Loop Files App.paths.loc "\Automated\*", "FR"
+		Loop Files App.PATHS.LOC "\Automated\*", "FR"
 			if A_LoopFileFullPath ~= "i)\.(ini|json)$"
 				pathsArray.Push(A_LoopFileFullPath)
 
@@ -37,7 +38,7 @@ Class Locale {
 							pathsArray.Push(A_LoopFileFullPath)
 
 		this.localeObj := this.ParseSourceFiles(pathsArray)
-		return
+		return Event.Trigger("Locale", "Filled")
 	}
 
 	static ParseSourceFiles(pathsArray) {

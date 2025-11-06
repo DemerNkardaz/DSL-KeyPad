@@ -91,7 +91,7 @@ Class ModTools {
 	}
 
 	static CreateManifest(data, locales) {
-		local filePath := App.paths.mods "\" data["folder"] "\manifest.json"
+		local filePath := App.PATHS.MODS "\" data["folder"] "\manifest.json"
 		if !FileExist(filePath) {
 			local manifest := this.FormatManifest(data, locales)
 			FileAppend(manifest, filePath, "UTF-8")
@@ -115,7 +115,7 @@ Class ModTools {
 	}
 
 	static CreateIndexFile(data) {
-		local filePath := App.paths.mods "\" data["folder"] "\index.ahk"
+		local filePath := App.PATHS.MODS "\" data["folder"] "\index.ahk"
 		if !FileExist(filePath) {
 			local indexCode := this.FormatIndexFile(data)
 			FileAppend(indexCode, filePath, "UTF-8")
@@ -124,7 +124,7 @@ Class ModTools {
 	}
 
 	static CreateMod(data := Map("folder", "My_Mod", "title", "My Mod", "version", "1.0.0", "author", "", "description", "", "type", "pre_init", "homepage", ""), locales := Map()) {
-		local modPath := App.paths.mods "\" data["folder"]
+		local modPath := App.PATHS.MODS "\" data["folder"]
 		data.Set("description", JSONExt.EscapeString(data.Get("description")))
 
 		if DirExist(modPath) {
@@ -146,7 +146,7 @@ Class ModTools {
 
 	static OpenModFolder(data) {
 		local openFolderDialog := MsgBox(Locale.ReadInject("[-space]gui.mods.creation.mod_created<{@default:sys.linebreak}>want_open_folder", [data["title"]]), App.Title(), "YesNo") = "Yes"
-		local fullPath := App.paths.mods "\" data["folder"]
+		local fullPath := App.PATHS.MODS "\" data["folder"]
 		if openFolderDialog && DirExist(fullPath)
 			Run(fullPath)
 		return

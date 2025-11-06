@@ -14,7 +14,7 @@ Class BindingUserDefined {
 	Reg() {
 		handled := []
 
-		Loop Files App.paths.binds "\*.json" {
+		Loop Files App.PATHS.BINDS "\*.json" {
 			local data := JSON.LoadFile(A_LoopFileFullPath, "UTF-8")
 			if !data.Has("info") || !data.Has("binds")
 				|| (!data["info"].Has("name") || data["info"].Get("name") = "") {

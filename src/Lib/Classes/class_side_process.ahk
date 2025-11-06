@@ -3,7 +3,7 @@ class SideProcess {
 
 	static Start(paths) {
 		for path in paths {
-			fullPath := FileExist(path) ? path : App.paths.sidProc "\" path ".ahk"
+			fullPath := FileExist(path) ? path : App.PATHS.SIDE_PROCESSES "\" path ".ahk"
 			if !FileExist(fullPath)
 				throw Error("File not found: " fullPath)
 
@@ -15,7 +15,7 @@ class SideProcess {
 	}
 
 	static StartDynamic(name, addContent := "", title := "", icon := "", iconIndex := 0, parentPID := 0) {
-		local path := FileExist(name) ? name : App.paths.sidProc "\" name ".ahk"
+		local path := FileExist(name) ? name : App.PATHS.SIDE_PROCESSES "\" name ".ahk"
 		if !FileExist(path)
 			throw Error("File not found: " path)
 
@@ -36,7 +36,7 @@ class SideProcess {
 		)
 		content .= "`n" addContent
 
-		local fullPath := App.paths.temp "\" name ".ahk"
+		local fullPath := App.PATHS.TEMP "\" name ".ahk"
 		if FileExist(fullPath)
 			FileDelete(fullPath)
 

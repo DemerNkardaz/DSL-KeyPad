@@ -3,9 +3,9 @@ Class ScripterStore {
 	static valuesIndex := Map("Alternative Modes", Map(), "Glyph Variations", Map(), "TELEX", Map())
 
 	static __New() {
-		local alternativeModes := JSON.LoadFile(App.paths.data "\scripter_alternative_modes.json", "UTF-8")
-		local glyphVariations := JSON.LoadFile(App.paths.data "\scripter_glyph_variations.json", "UTF-8")
-		local telex := JSON.LoadFile(App.paths.data "\scripter_telex.json", "UTF-8")
+		local alternativeModes := JSON.LoadFile(App.PATHS.DATA "\scripter_alternative_modes.json", "UTF-8")
+		local glyphVariations := JSON.LoadFile(App.PATHS.DATA "\scripter_glyph_variations.json", "UTF-8")
+		local telex := JSON.LoadFile(App.PATHS.DATA "\scripter_telex.json", "UTF-8")
 		ScripterStore("Alternative Modes", alternativeModes)
 		ScripterStore("Glyph Variations", glyphVariations)
 		ScripterStore("TELEX", telex)

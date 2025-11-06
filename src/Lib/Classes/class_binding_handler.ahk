@@ -91,8 +91,8 @@ Class BindHandler {
 	static LangSend(combo := "", charactersMap := Map("en-US", "", "ru-RU", ""), reverse := Map("en-US", False "ru-RU", False)) {
 		Keyboard.CheckLayout(&lang)
 
-		if lang != "" && Language.supported[lang].parent != ""
-			lang := Language.supported[lang].parent
+		if lang != "" && Language.supported[lang]["parent"] != ""
+			lang := Language.supported[lang]["parent"]
 
 		if !charactersMap.Has(lang)
 			lang := "en-US"
@@ -113,8 +113,8 @@ Class BindHandler {
 	static LangCall(commandsMap := Map("en-US", "", "ru-RU", ""), additionalRules := []) {
 		Keyboard.CheckLayout(&lang)
 
-		if lang != "" && Language.supported[lang].parent != "" && !commandsMap.Has(lang)
-			lang := Language.supported[lang].parent
+		if lang != "" && Language.supported[lang]["parent"] != "" && !commandsMap.Has(lang)
+			lang := Language.supported[lang]["parent"]
 
 		if !commandsMap.Has(lang)
 			lang := "en-US"

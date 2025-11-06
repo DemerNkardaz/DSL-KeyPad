@@ -3,7 +3,7 @@ Class Update {
 	static releasesJson := "https://data.jsdelivr.com/v1/package/gh/DemerNkardaz/DSL-KeyPad"
 	static fallbackReleases := App.API "/releases"
 	static filesManifest := "DSLKeyPad-FilesManifest.txt"
-	static filesManifestPath := App.paths.temp "\" this.filesManifest
+	static filesManifestPath := App.PATHS.TEMP "\" this.filesManifest
 	static available := False
 	static availableVersion := ""
 	static versions := []
@@ -66,7 +66,7 @@ Class Update {
 		sourceForgeRelease := "https://deac-ams.dl.sourceforge.net/project/dsl-keypad/" version "/DSL-KeyPad-" version ".zip?viasf=1"
 
 		zipSource := fallbackSourceForge ? sourceForgeRelease : gitRelease
-		downloadPath := App.paths.temp
+		downloadPath := App.PATHS.TEMP
 		downloadName := "DSL-KeyPad.zip"
 
 		if FileExist(downloadPath "\" downloadName)
@@ -75,12 +75,12 @@ Class Update {
 		try {
 			exitCode := RunWait(Format(
 				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" -Url "{}" -Destination "{}" -FileName "{}"',
-				App.paths.lib "\powershell\download.ps1", zipSource, downloadPath, downloadName
+				App.PATHS.LIB "\powershell\download.ps1", zipSource, downloadPath, downloadName
 			), , "Show")
 
 			exitCode := RunWait(Format(
 				'powershell -ExecutionPolicy Bypass -NoProfile -File "{}" -ZipPath "{}" -Destination "{}" -Version "{}" -ManifestName "{}"',
-				App.paths.lib "\powershell\update_supporter.ps1", downloadPath "\" downloadName, App.paths.dir, version, this.filesManifest
+				App.PATHS.LIB "\powershell\update_supporter.ps1", downloadPath "\" downloadName, App.PATHS.DIR, version, this.filesManifest
 			), , "Show")
 
 			if exitCode != 0 {
@@ -112,15 +112,15 @@ Class Update {
 			filesToDelete := []
 			whitelist := ["\workflow.ps1", "\desktop.ini"]
 
-			Loop Files, App.paths.dir "\*.*", "FR" {
-				currentFilePath := StrReplace(A_LoopFileFullPath, App.paths.dir)
+			Loop Files, App.PATHS.DIR "\*.*", "FR" {
+				currentFilePath := StrReplace(A_LoopFileFullPath, App.PATHS.DIR)
 				if (!split.HasValue(currentFilePath)
 					&& !whitelist.HasValue(currentFilePath))
-					&& !InStr(A_LoopFileFullPath, App.paths.dir "\.git")
-					&& !InStr(A_LoopFileFullPath, App.paths.dir "\User")
-					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Mods")
-					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Logs")
-					&& !InStr(A_LoopFileFullPath, App.paths.dir "\Data\Dumps")
+					&& !InStr(A_LoopFileFullPath, App.PATHS.DIR "\.git")
+					&& !InStr(A_LoopFileFullPath, App.PATHS.DIR "\User")
+					&& !InStr(A_LoopFileFullPath, App.PATHS.DIR "\Mods")
+					&& !InStr(A_LoopFileFullPath, App.PATHS.DIR "\Logs")
+					&& !InStr(A_LoopFileFullPath, App.PATHS.DIR "\Data\Dumps")
 				{
 					filesToDelete.Push(currentFilePath)
 				}
@@ -133,7 +133,7 @@ Class Update {
 				MB := MsgBox(Locale.ReadInject("gui.options.update_found_legacy_files", [messageList]), App.Title(), "YesNo Icon!")
 				if MB = "Yes" {
 					for relative in filesToDelete
-						FileDelete(App.paths.dir relative)
+						FileDelete(App.PATHS.DIR relative)
 					MsgBox(Locale.ReadInject("gui.options.update_found_legacy_files_deleted"), App.Title(), "Iconi")
 				}
 				return
@@ -319,7 +319,7 @@ Class Changelog {
 			targetGUI.AddEdit(UISettings, Locale.Read("warnings.nointernet")).SetFont(fontOptions*)
 	}
 
-	static GetChangelog(url := App.refsHeads["dev"] "/CHANGELOG.md") {
+	static GetChangelog(url := App.REFS_HEADS["dev"] "/CHANGELOG.md") {
 		static fallbackURL := Update.jsDelivr "@dev/CHANGELOG.md"
 		failed := False
 

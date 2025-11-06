@@ -6,7 +6,7 @@ Class Dev {
 		this.CreateWorkflowScript()
 
 		if StrLen(gitPath) > 0 && RegExMatch(gitPath, "i)^[a-z]:\\") {
-			DirCopy(App.paths.dir, srcPath, True)
+			DirCopy(App.PATHS.DIR, srcPath, True)
 
 			for path in [srcPath, srcPath "\Bin"] {
 				Loop Files, path "\*.*" {
@@ -31,7 +31,7 @@ Class Dev {
 	}
 
 	static CreateWorkflowScript() {
-		path := App.paths.dir "\workflow.ps1"
+		path := App.PATHS.DIR "\workflow.ps1"
 		version := App.Ver("+hotfix+postfix")
 		isPre := App.Ver(["pre-release"]) = "1"
 		status := StrLen(App.Title(["status"])) > 0 ? " " App.Title(["status"]) : ""
@@ -147,7 +147,7 @@ Class Dev {
 			'			</td>`n'
 			'		</tr>`n'
 			'</table>`n`n'
-			versionCompare '[Changelog](' App.branch["main"] '/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Customization Stuff](' App.URL '-Customization-Stuff) | [Docs](https://demernkardaz.github.io/DSL-KeyPad-Docs)`n`n'
+			versionCompare '[Changelog](' App.BRANCH["main"] '/CHANGELOG.md) | [Features Kanban](https://github.com/users/DemerNkardaz/projects/2) | [Customization Stuff](' App.URL '-Customization-Stuff) | [Docs](https://demernkardaz.github.io/DSL-KeyPad-Docs)`n`n'
 			'[Yalla Nkardaz’s custom files](' App.URL '-Custom-Files) repository for DSL KeyPad.`n<br>'
 			'[![Downloads GitHub](https://img.shields.io/github/downloads/DemerNkardaz/DSL-KeyPad/DSL-KeyPad-' version '.zip?logo=github&color=yellow)](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/' version ') [![Downloads SourceForge](https://img.shields.io/sourceforge/dt/dsl-keypad/' version '?logo=sourceforge&color=yellow)](https://sourceforge.net/projects/dsl-keypad/files/' version '/)'
 		)

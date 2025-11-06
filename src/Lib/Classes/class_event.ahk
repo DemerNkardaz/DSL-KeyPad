@@ -9,6 +9,13 @@ Class Event {
 		"Application", Map(
 			"Initialized", [],
 		),
+		"Language", Map(
+			"Initialized", [],
+		),
+		"Locale", Map(
+			"Initialized", [],
+			"Filled", [],
+		),
 		"Character Library", Map(
 			"Registration Starts", [],
 			"Registration Ends", [],

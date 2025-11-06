@@ -95,12 +95,12 @@ Class ModsGUI {
 		local modsList := []
 
 		local imgList := IL_Create()
-		IL_Add(imgList, App.icoDLL, App.indexIcos.Get("mods_flat"))
+		IL_Add(imgList, App.ICONS_DLL, App.indexIcos.Get("mods_flat"))
 
 		local idx := 1
 		for each in ["pre_init", "post_init"] {
 			for key, value in modsRead[each].OwnProps() {
-				local path := App.paths.mods "\" key
+				local path := App.PATHS.MODS "\" key
 				local modData := ModsInjector.ReadModManifest(key)
 				local previewImg := this.GetPreview(&path, , True, "-16")
 
@@ -172,7 +172,7 @@ Class ModsGUI {
 		local languageCode := Language.Get()
 		local modFolder := LV.GetText(Item, 4)
 		local modType := LV.GetText(Item, 5)
-		local modPath := App.paths.mods "\" modFolder
+		local modPath := App.PATHS.MODS "\" modFolder
 		local optionsMap := ModsInjector.ReadModManifest(modFolder)
 		local className := "Mod__" ModTools.FolderToClassName(modFolder)
 
@@ -214,7 +214,7 @@ Class ModsGUI {
 						return A_LoopFileFullPath
 		}
 
-		return returnArray ? [App.icoDLL, App.indexIcos.Get("mods")] : "HBITMAP:*" LoadPicture(App.icoDLL, "Icon" App.indexIcos.Get("mods") " " Format("w{} h{}", sizes, sizes))
+		return returnArray ? [App.ICONS_DLL, App.indexIcos.Get("mods")] : "HBITMAP:*" LoadPicture(App.ICONS_DLL, "Icon" App.indexIcos.Get("mods") " " Format("w{} h{}", sizes, sizes))
 	}
 
 	Class ModCreation {

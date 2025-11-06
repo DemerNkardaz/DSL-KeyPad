@@ -81,7 +81,7 @@ Class MyRecipesReg {
 		if !recipeData.Has("tags")
 			recipeData["tags"] := []
 		if !recipeData.Has("filePath") {
-			local cutPath := StrReplace(this.filePath, App.paths.profile "\")
+			local cutPath := StrReplace(this.filePath, App.PATHS.PROFILE "\")
 			recipeData["filePath"] := cutPath
 		}
 

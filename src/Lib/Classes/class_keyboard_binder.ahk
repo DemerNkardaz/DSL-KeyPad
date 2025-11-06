@@ -20,8 +20,8 @@ Class KbdBinder {
 	]
 
 	static autoimport := {
-		layouts: App.paths.profile "\CustomLayouts",
-		binds: App.paths.profile "\CustomBindings",
+		layouts: App.PATHS.PROFILE "\CustomLayouts",
+		binds: App.PATHS.PROFILE "\CustomBindings",
 	}
 
 	static numStyle := ""
