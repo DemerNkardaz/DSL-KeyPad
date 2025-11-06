@@ -5,7 +5,7 @@ Class Language {
 
 	static __New() {
 		this.Init()
-		return
+		return Event.OnEvent("Language", "Initialized", (*) => this.ValidateActiveLocale())
 	}
 
 	static Init() {
@@ -31,6 +31,13 @@ Class Language {
 			if data["code"] != ""
 				this.links.Set(data["code"], iso)
 		}
+		return
+	}
+
+	static ValidateActiveLocale() {
+		local currentLanguage := Cfg.Get("User_Language")
+		if currentLanguage != "" && !this.Validate(currentLanguage, "locale")
+			Cfg.Set("", "User_Language")
 		return
 	}
 
