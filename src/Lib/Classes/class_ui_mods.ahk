@@ -40,6 +40,7 @@ Class ModsGUI {
 		local reloadBtnX := w - BtnW - 10
 		local createModBtnX := lvX
 		local optionsBtnX := infoGroupX
+		local editDataBtnX := optionsBtnX + BtnW + 5
 
 		local previewImageW := 96
 		local previewImageH := 96
@@ -83,6 +84,10 @@ Class ModsGUI {
 
 		local optionsBtn := panel.AddButton(Format("vOptionsBtn w{} h{} x{} y{}", BtnW, BtnH, optionsBtnX, BtnY), Locale.Read("gui.options"))
 		optionsBtn.OnEvent("Click", (*) => ModTools.OptionsEditor(this.selectedMod, &panel))
+		optionsBtn.Enabled := False
+
+		local editDataBtn := panel.AddButton(Format("vEditDataBtn w{} h{} x{} y{}", BtnW, BtnH, editDataBtnX, BtnY), Locale.Read("dictionary.edit"))
+		editDataBtn.OnEvent("Click", (*) => ModsGUI.ModCreation(&panel, this.selectedMod))
 		optionsBtn.Enabled := False
 
 		local reloadBtn := panel.AddButton(Format("vReloadBtn w{} h{} x{} y{}", BtnW, BtnH, reloadBtnX, BtnY), Locale.Read("dictionary.reload"))
@@ -202,6 +207,7 @@ Class ModsGUI {
 		panel["Description"].Text := Locale.HandleString(description)
 
 		panel["OptionsBtn"].Enabled := IsSet(%className%) && %className%.HasOwnProp("tools") && %className%.tools.HasOwnProp("config_editor") && %className%.tools.config_editor is Gui
+		panel["EditDataBtn"].Enabled := IsSet(%className%) && %className%.HasOwnProp("tools") && %className%.tools.HasOwnProp("config_editor") && %className%.tools.isEditable
 
 		return this.selectedMod := modFolder
 	}
@@ -323,8 +329,27 @@ Class ModsGUI {
 			return
 		}
 
-		__New(&parentGUI?) {
+		__New(&parentGUI?, selectedMod?) {
 			this.CalcSizes()
+			local modClassName := IsSet(selectedMod) ? "Mod__" ModTools.FolderToClassName(selectedMod) : "MOD_CLASS_DOES_NOT_EXIST"
+
+			this.selectedMod := IsSet(selectedMod) ? selectedMod : unset
+			this.modClassName := modClassName
+			this.selectedModIsValid := IsSet(selectedMod) && IsSet(modClassName) && %modClassName%.HasOwnProp("tools")
+			this.selectedModManifest := this.selectedModIsValid ? JSON.LoadFile(%modClassName%.tools.paths.manifest, "UTF-8") : False
+
+			if this.selectedModManifest {
+				for key, value in this.selectedModManifest {
+					if this.data.Has(key) {
+						this.data.Set(key, value)
+					} else if this.locales.Has(key) {
+						for localeKey, localeValue in value
+							this.locales[key].Set(localeKey, localeValue)
+					}
+				}
+
+				this.data.Set("folder", this.selectedMod)
+			}
 
 			if IsSet(parentGUI) {
 				parentGUI.GetPos(&parentX, &parentY, &parentW, &parentH)
@@ -341,12 +366,12 @@ Class ModsGUI {
 		}
 
 		Constructor() {
-			this.title := App.Title("+status+version") " — " Locale.Read("gui.mods.creation")
+			this.title := App.Title("+status+version") " — " Locale.Read("gui.mods." (this.selectedModIsValid ? "edit" : "creation"))
 
 			local modWindow := Gui()
 			modWindow.Title := this.title
 
-			local grpBox := modWindow.AddGroupBox(Format("vModGrpBox x{} y{} w{} h{}", this.grpBoxX, this.grpBoxY, this.grpBoxW, this.grpBoxH), Locale.Read("gui.mods.creation"))
+			local grpBox := modWindow.AddGroupBox(Format("vModGrpBox x{} y{} w{} h{}", this.grpBoxX, this.grpBoxY, this.grpBoxW, this.grpBoxH), Locale.Read("gui.mods." (this.selectedModIsValid ? "edit" : "creation")))
 
 			local titleTitle := modWindow.AddText(Format("vTitleTitle x{} y{} w{} h{}", this.incrementField(1)[2]*), "* " Locale.Read("dictionary.title"))
 			local titleField := modWindow.AddEdit(Format("vTitleField x{} y{} w{} h{} -Multi", this.incrementField(1)[1]*), this.data.Get("title"))
@@ -377,28 +402,36 @@ Class ModsGUI {
 			local descriptionField := modWindow.AddEdit(Format("vDescriptionField x{} y{} w{} h{} Multi WantTab", this.incrementField(7, 10)[1]*), JSONExt.EscapeString(this.data.Get("description"), True))
 
 			titleField.OnEvent("Change", (*) => SetTitleField(titleField.Value))
-			folderField.OnEvent("Change", (*) => SetFolderField(folderField.Value))
 			versionField.OnEvent("Change", (*) => this.data.Set("version", versionField.Value))
 			authorField.OnEvent("Change", (*) => this.data.Set("author", authorField.Value))
 			typeField.OnEvent("Change", (*) => SetTypeField(typeField.Text))
 			homepageField.OnEvent("Change", (*) => this.data.Set("homepage", homepageField.Value))
 			descriptionField.OnEvent("Change", (*) => this.data.Set("description", descriptionField.Value))
 
-			local createButton := modWindow.AddButton(Format("vCreateBtn x{} y{} w{} h{}", this.btnX(1), this.btnY, this.btnW, this.btnH), Locale.Read("dictionary.create"))
+			local createButton := modWindow.AddButton(Format("vCreateBtn x{} y{} w{} h{}", this.btnX(1), this.btnY, this.btnW, this.btnH), Locale.Read("dictionary." (this.selectedModIsValid ? "save" : "create")))
 			local cancelButton := modWindow.AddButton(Format("vCancelBtn x{} y{} w{} h{}", this.btnX(2), this.btnY, this.btnW, this.btnH), Locale.Read("dictionary.cancel"))
 
-			createButton.OnEvent("Click", (*) => this.ModCreate())
+			createButton.OnEvent("Click", (*) => this.Mod%this.selectedModIsValid ? "EditManifest" : "Create"%())
 			cancelButton.OnEvent("Click", (*) => WinExist(this.title) && WinClose(this.title))
+
+			if this.selectedModIsValid {
+				folderField.Enabled := False
+			} else {
+				folderField.OnEvent("Change", (*) => SetFolderField(folderField.Value))
+			}
 
 			return modWindow
 
 			SetTitleField(value) {
 				this.data.Set("title", titleField.Value)
-				local folder := ModTools.FolderToClassName(titleField.Value)
 
-				if !this.changeFolderNameTriggered {
-					folderField.Value := folder
-					this.data.Set("folder", folder)
+				if !this.selectedModIsValid {
+					local folder := ModTools.FolderToClassName(titleField.Value)
+
+					if !this.changeFolderNameTriggered {
+						folderField.Value := folder
+						this.data.Set("folder", folder)
+					}
 				}
 
 				return
@@ -437,10 +470,23 @@ Class ModsGUI {
 				local fieldToBeFocused := this.data.Get("title") = "" ? "TitleField" : this.data.Get("folder") = "" ? "FolderField" : "VersionField"
 				this.GUI[fieldToBeFocused].Focus()
 			} else if ModTools.CreateMod(this.data, this.locales) {
+				ModTools.SetEditable(this.data["folder"])
+				ModsInjector.Build(False)
+
 				WinExist(this.title) && WinClose(this.title)
-				ModTools.OpenModFolder(this.data)
+
+				if WinExist(ModsGUI.title) {
+					WinClose(ModsGUI.title)
+					SetTimer((*) => ModsGUI(), -100)
+				}
+
+				SetTimer((*) => ModTools.OpenModFolder(this.data), -150)
 			}
 			return
+		}
+
+		ModEditManifest() {
+
 		}
 	}
 }

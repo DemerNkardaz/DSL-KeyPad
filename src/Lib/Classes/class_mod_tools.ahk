@@ -1,4 +1,29 @@
 Class ModTools {
+	static editableListFile := App.PATHS.PROFILE "\EditableMods.json"
+
+	static __New() {
+		if !FileExist(this.editableListFile)
+			JSON.DumpFile([], this.editableListFile, 1, "UTF-8")
+
+		this.editableList := JSON.LoadFile(this.editableListFile, "UTF-8")
+	}
+
+	static SetEditable(modFolder) {
+		if !this.editableList.HasValue(modFolder)
+			this.editableList.Push(modFolder)
+		JSON.DumpFile(this.editableList, this.editableListFile, 1, "UTF-8")
+	}
+
+	static IsEditable(modFolder) {
+		return this.editableList.HasValue(modFolder)
+	}
+
+	SetEditable() {
+		ModTools.SetEditable(this.dirName)
+	}
+
+	isEditable => ModTools.IsEditable(this.dirName)
+
 	__New(relativePath := A_LineFile) {
 		this.origin := this.GetOrigin(relativePath)
 		this.dirName := RegExReplace(this.origin, ".*\\", "")
@@ -8,6 +33,7 @@ Class ModTools {
 			locale: this.origin "\Locale",
 			lib: this.origin "\Lib",
 			resources: this.origin "\Resources",
+			manifest: this.origin "\manifest.json"
 		}
 
 		this.config := ModTools.__ModTools_Cfg(this.origin)

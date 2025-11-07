@@ -324,6 +324,7 @@ Class Changelog {
 		failed := False
 
 		languageCode := Language.Get(, , 2)
+		fallbackLanguageCode := "en"
 		http := ComObject("WinHttp.WinHttpRequest.5.1")
 		http.SetTimeouts(1500, 1500, 1500, 1500)
 		http.Open("GET", url, True)
@@ -340,11 +341,11 @@ Class Changelog {
 			return this.GetChangelog(fallbackURL)
 		else if !failed {
 			content := http.ResponseText
-			pattern := '<details[^>]*lang="' LanguageCode '"[^>]*>[\s\S]*?<summary>[\s\S]*?</summary>([\s\S]*?)</details>'
+			pattern(lang) => '<details[^>]*lang="' lang '"[^>]*>[\s\S]*?<summary>[\s\S]*?</summary>([\s\S]*?)</details>'
 
-			if RegExMatch(content, pattern, &match) {
+			if RegExMatch(content, pattern(languageCode), &match) || RegExMatch(content, pattern(fallbackLanguageCode), &match)
 				return match[1]
-			}
+
 		}
 		return False
 	}

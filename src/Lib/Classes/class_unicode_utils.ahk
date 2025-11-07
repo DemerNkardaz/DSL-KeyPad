@@ -78,11 +78,14 @@ class UnicodeUtils {
 		return false
 	}
 
-	static ParseCodePoint(input) {
+	static ParseCodePoint(input, prefix := "") {
 		if !(input is String)
 			return input
 
 		local len := StrLen(input)
+
+		if prefix = "0x" && input ~= "^[0-9A-Fa-f]{1,8}$"
+			return Number("0x" input)
 
 		if (len >= 4) && input ~= "^[0-9A-Fa-f]{4,8}$"
 			return Number("0x" input)
@@ -251,11 +254,11 @@ class UnicodeUtils {
 		return output
 	}
 
-	static GetName(input, nameType := 0) {
+	static GetName(input, prefix := "", nameType := 0) {
 		if !this.InitICU()
 			return ""
 
-		local codepoint := this.ParseCodePoint(input)
+		local codepoint := this.ParseCodePoint(input, prefix)
 
 		if (codepoint < 0)
 			return ""
@@ -281,14 +284,14 @@ class UnicodeUtils {
 		return ""
 	}
 
-	static GetBatchNames(sourceArray) {
+	static GetBatchNames(sourceArray, prefix := "") {
 		local output := []
 
 		if sourceArray is String
 			sourceArray := this.StrSplitChars(sourceArray)
 
 		for value in sourceArray
-			output.Push(this.GetName(value))
+			output.Push(this.GetName(value, prefix))
 
 		return output
 	}

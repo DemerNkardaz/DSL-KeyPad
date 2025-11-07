@@ -9,39 +9,31 @@ Class Util {
 		static startTick := A_TickCount
 		static appLaunchTime := FormatTime(A_Now, "HH:mm:ss")
 
-		static Format(dateString := A_Now, template := "YYYYMMDDhhmmss") {
-			return FormatTime(dateString, template)
-		}
-
 		static readable => FormatTime(A_Now, "dddd, d MMMM, yyyy")
 		static formatted => FormatTime(A_Now, "yyyy-MM-dd HH:mm:ss")
 
 		static long => FormatTime(A_Now, "dddd, d MMMM yyyy, HH:mm")
-		static short => FormatTime(this.date, "dd.MM.yyyy")
+		static short => FormatTime(A_Now, "dd.MM.yyyy")
 		static year => FormatTime(A_Now, "yyyy")
 		static month => FormatTime(A_Now, "MM")
 		static day => FormatTime(A_Now, "dd")
 
 		static iso8601 => FormatTime(A_Now, "yyyy-MM-ddTHH:mm:ss")
 		static filename => FormatTime(A_Now, "yyyy_MM_dd-HH_mm_ss")
+		static fullStampFilename => FormatTime(A_Now, "yyyy-MM-dd_HH-mm-ss_") Format("{:03}", A_MSec)
 		static generalized => FormatTime(A_Now, "yyyyMMddHHmmss")
 
 		static uptime => Round((A_TickCount - this.startTick) / 1000, 2) " " Locale.Read("dictionary.seconds_variative")
 
-		static Yesterday() {
-			local date := A_Now
-			date := DateAdd(date, -1, "Days")
-			return FormatTime(date, "yyyy-MM-dd")
-		}
-
-		static Tomorrow() {
-			local date := A_Now
-			date := DateAdd(date, 1, "Days")
-			return FormatTime(date, "yyyy-MM-dd")
-		}
+		static yesterday => FormatTime(DateAdd(A_Now, -1, "Days"), "yyyy-MM-dd")
+		static tomorrow => FormatTime(DateAdd(A_Now, 1, "Days"), "yyyy-MM-dd")
 
 		static weekday => FormatTime(A_Now, "dddd")
 		static weekNumber => FormatTime(A_Now, "YWeek")
+
+		static Format(dateString := A_Now, template := "YYYYMMDDhhmmss") {
+			return FormatTime(dateString, template)
+		}
 
 		__New(dateString := "") {
 			this.date := dateString ? dateString : A_Now

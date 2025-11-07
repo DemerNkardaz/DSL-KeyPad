@@ -50,15 +50,16 @@ Class ChrBlock {
 	}
 
 	GetTooltip(input := "0000", isFor := "Unicode") {
-		blockData := this.GetBlock(input, isFor)
+		local blockData := this.GetBlock(input, isFor)
+		; local characterName := UnicodeUtils.GetName(Number("0x" input))
 		if isFor = "Unicode" {
 			if blockData.block != "Unknown"
-				return "[ U+" StrReplace(blockData.block, "...", "–U+") " ] " blockData.name
+				return ("[ U+" StrReplace(blockData.block, "...", "–U+") " ] " blockData.name) ;(characterName != "" ? "`n" characterName : "")
 		} else if isFor = "Altcode" {
 			Keyboard.CheckLayout(&lang)
 
 			tooltips := Map(
-				"default", (name, pageRange) => "[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " name,
+				"default", (name, pageRange) => ("[ ALT+" StrReplace(pageRange, "...", "–ALT+") " ] " name),
 				"localised", (name, pageRange) => (
 					"[ ALT+"
 					StrReplace(pageRange, "...", "–ALT+")

@@ -240,7 +240,9 @@ Class ChrCrafter {
 						if code != "" && CharacterInserter.%composeObject.insertType%Validate(code)
 							suggestion .= CharacterInserter.%composeObject.insertType%(code)
 
-					local blockShown := codesArray.Length > 0 ? composeObject.ChrBlockInstance.GetTooltip(codesArray[codesArray.Length], composeObject.insertType) : Locale.Read(StrLower(composeObject.insertType) "_range")
+					local namesList := composeObject.insertType = "Unicode" ? UnicodeUtils.GetBatchNames(codesArray, "0x") : []
+					local blockShown := codesArray.Length > 0 ? ((composeObject.ChrBlockInstance.GetTooltip(codesArray[codesArray.Length], composeObject.insertType)) (namesList.Length > 0 ? "`n" namesList.StringsIndexify().ToString("`n") : "")) : Locale.Read(StrLower(composeObject.insertType) "_range")
+
 					Util.CaretTooltip(
 						(composeObject.pauseOn ? Chr(0x23F8) : Chr(0x2B1C))
 						" "

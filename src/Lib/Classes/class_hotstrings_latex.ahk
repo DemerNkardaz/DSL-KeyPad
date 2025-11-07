@@ -5,6 +5,7 @@ Class CommonHotstrings {
 		"gtft", () => Util.Date.formatted,
 		"gtch", () => Util.Date.time,
 		"gtfl", () => Util.Date.filename,
+		"gtfs", () => Util.Date.fullStampFilename,
 	)
 
 	static __New() {

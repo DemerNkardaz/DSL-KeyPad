@@ -12,6 +12,7 @@ Array.Prototype.DefineProp("ToLower", { Call: _ArrayToLower })
 Array.Prototype.DefineProp("ToUpper", { Call: _ArrayToUpper })
 Array.Prototype.DefineProp("Slice", { Call: _ArraySlice })
 Array.Prototype.DefineProp("DeepClone", { Call: _ArrayDeepClone })
+Array.Prototype.DefineProp("StringsIndexify", { Call: _ArrayStringsIndexify })
 Array.Prototype.DefineProp("StringsPrepend", { Call: _ArrayStringsPrepend })
 Array.Prototype.DefineProp("StringsAppend", { Call: _ArrayStringsAppend })
 Array.Prototype.DefineProp("StringsToNumbers", { Call: _ArrayStringsToNumbers })
@@ -105,32 +106,65 @@ _ArrayClear(this) {
 	return this
 }
 
-_ArrayStringsPrepend(this, value, maxAffected := this.Length) {
+_ArrayStringsIndexify(this, style := "{i}. {value}", mutateOrigin := True) {
+	local output := []
+	for i, item in this {
+		local newValue := RegExReplace(style, "{i}", i)
+		newValue := RegExReplace(newValue, "{value}", item)
+
+		if mutateOrigin
+			this[i] := newValue
+		else
+			output.Push(newValue)
+	}
+
+	return mutateOrigin ? this : output
+}
+
+_ArrayStringsPrepend(this, value, mutateOrigin := True, maxAffected := this.Length) {
+	local output := []
+
 	for i, item in this {
 		if i > maxAffected
 			break
 
-		this[i] := value item
+		if mutateOrigin
+			this[i] := value item
+		else
+			output.Push(value item)
 	}
-	return this
+
+	return mutateOrigin ? this : output
 }
 
-_ArrayStringsAppend(this, value, maxAffected := this.Length) {
+_ArrayStringsAppend(this, value, mutateOrigin := True, maxAffected := this.Length) {
+	local output := []
+
 	for i, item in this {
 		if i > maxAffected
 			break
 
-		this[i] := item value
+		if mutateOrigin
+			this[i] := item value
+		else
+			output.Push(item value)
 	}
-	return this
+
+	return mutateOrigin ? this : output
 }
 
-_ArrayStringsToNumbers(this) {
-	for i, item in this {
-		if item is String && item ~= "([0-9]+(\.[0-9]+)?|0x[0-9a-f]+)"
-			this[i] = Number(item)
-	}
-	return this
+_ArrayStringsToNumbers(this, mutateOrigin := True) {
+	local output := []
+
+	for i, item in this
+		if item is String && item ~= "([0-9]+(\.[0-9]+)?|0x[0-9a-f]+)" {
+			if mutateOrigin
+				this[i] := Number(item)
+			else
+				output.Push(Number(item))
+		}
+
+	return mutateOrigin ? this : output
 }
 
 _ArrayToMap(this, defaultValue?) {
@@ -574,4 +608,9 @@ ArrayPrefix(prefix, stringsArray) {
 		output.Push(prefix each)
 
 	return output
+}
+
+
+Class Constant Extends Object {
+
 }

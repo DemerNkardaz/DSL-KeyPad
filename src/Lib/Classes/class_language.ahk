@@ -1,5 +1,8 @@
 Class Language {
-	static optionsFile := App.PATHS.LOC "\locale.options.ini"
+	static OPTIONS_FILE := App.PATHS.LOC "\locale.options.ini"
+	static SYSTEM_LOCALE := Number("0x" A_Language)
+	static FALLBACK_LOCALE := { ISO: "en-US", HEX: 0x0409 }
+
 	static supported := Map()
 	static links := Map()
 
@@ -9,17 +12,17 @@ Class Language {
 	}
 
 	static Init() {
-		languages := Util.INIGetSections([this.optionsFile])
+		languages := Util.INIGetSections([this.OPTIONS_FILE])
 
 		for i, iso in languages {
 			data := Map(
-				"parent", IniRead(this.optionsFile, iso, "parent", ""),
-				"title", IniRead(this.optionsFile, iso, "title", ""),
-				"code", IniRead(this.optionsFile, iso, "code", ""),
-				"locale", IniRead(this.optionsFile, iso, "is_locale", False),
-				"generatedLocale", IniRead(this.optionsFile, iso, "is_generated_locale", False),
-				"bindings", IniRead(this.optionsFile, iso, "is_bindings", False),
-				"altInput", IniRead(this.optionsFile, iso, "alt_input", ""),
+				"parent", IniRead(this.OPTIONS_FILE, iso, "parent", ""),
+				"title", IniRead(this.OPTIONS_FILE, iso, "title", ""),
+				"code", IniRead(this.OPTIONS_FILE, iso, "code", ""),
+				"locale", IniRead(this.OPTIONS_FILE, iso, "is_locale", False),
+				"generatedLocale", IniRead(this.OPTIONS_FILE, iso, "is_generated_locale", False),
+				"bindings", IniRead(this.OPTIONS_FILE, iso, "is_bindings", False),
+				"altInput", IniRead(this.OPTIONS_FILE, iso, "alt_input", ""),
 				"index", i,
 			)
 
@@ -31,6 +34,7 @@ Class Language {
 			if data["code"] != ""
 				this.links.Set(data["code"], iso)
 		}
+
 		return
 	}
 
@@ -81,7 +85,7 @@ Class Language {
 		if this.Validate(userLanguage) {
 			return getTitle ? this.supported.Get(userLanguage)["title"] : endLen > 0 ? SubStr(userLanguage, 1, endLen) : userLanguage
 		} else {
-			return getTitle ? this.supported.Get("en-US")["title"] : endLen > 0 ? SubStr("en-US", 1, endLen) : "en-US"
+			return getTitle ? this.supported.Get(this.FALLBACK_LOCALE.ISO)["title"] : endLen > 0 ? SubStr(this.FALLBACK_LOCALE.ISO, 1, endLen) : this.FALLBACK_LOCALE.ISO
 		}
 	}
 
@@ -98,7 +102,7 @@ Class Language {
 	}
 
 	static GetSys(endLen := 0) {
-		regVal := RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName")
-		return endLen > 0 ? SubStr(RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName"), 1, endLen) : regVal
+		languageValue := this.links.Get(this.SYSTEM_LOCALE, this.FALLBACK_LOCALE.ISO) ; || RegRead("HKEY_CURRENT_USER\Control Panel\International", "LocaleName")
+		return endLen > 0 ? SubStr(languageValue, 1, endLen) : languageValue
 	}
 }
