@@ -1,14 +1,29 @@
 Class Locale {
-	static localeObj := Map()
-	static localesPath := A_ScriptDir "\Locale\"
+	static LOCALE_OBJECT := Map()
+	static LOCALES_PATH := A_ScriptDir "\Locale\"
+	static READ_RULES := Map(
+		"en-US", Map("[On Combine] Add Space", True),
+	)
 
 	static __New() {
 		this.Fill()
 		return
 	}
 
+	static GetReadRules(locale) {
+		return this.READ_RULES.Get(locale, this.READ_RULES.Get(Language.FALLBACK_LOCALE.ISO))
+	}
+
+	static InitReadRuleLocale(locale) {
+		this.READ_RULES.Set(locale, this.READ_RULES.Get(Language.FALLBACK_LOCALE.ISO).Clone())
+	}
+
+	static SetReadRule(locale, name, value) {
+		this.READ_RULES[locale].Set(name, value)
+	}
+
 	static Fill() {
-		this.localeObj := Map()
+		this.LOCALE_OBJECT.Clear()
 		local pathsArray := []
 
 		for lang, value in Language.supported {
@@ -37,7 +52,7 @@ Class Locale {
 						if A_LoopFileFullPath ~= "i)\.(ini|json)$" && !(A_LoopFileFullPath ~= "CharacterLegend")
 							pathsArray.Push(A_LoopFileFullPath)
 
-		this.localeObj := this.ParseSourceFiles(pathsArray)
+		this.LOCALE_OBJECT := this.ParseSourceFiles(pathsArray)
 		return Event.Trigger("Locale", "Filled")
 	}
 
@@ -81,7 +96,7 @@ Class Locale {
 	}
 
 	static OpenDir(*) {
-		Run(this.localesPath)
+		Run(this.LOCALES_PATH)
 	}
 
 	static HandleString(str) {
@@ -98,8 +113,9 @@ Class Locale {
 	static Read(entryName, inSection := "", validate := False, &output?, strInjections := [], variantSelect := 1) {
 		local intermediate := ""
 		local section := Language.Validate(inSection) ? inSection : Language.Get()
+		local combineRules := this.GetReadRules(section)
 
-		local intermediate := this.ReadStr(section, entryName)
+		local intermediate := this.ReadStr(&section, &entryName, &combineRules)
 
 		while (RegExMatch(intermediate, "\$\((.*?)\)", &match)) {
 			intermediate := StrReplace(intermediate, match[0], this.VariantSelect(match[0], variantSelect))
@@ -112,7 +128,7 @@ Class Locale {
 			if customEntry = entryName && langCode = section {
 				intermediate := StrReplace(intermediate, match[0], "DUPLICATED KEY REFERENCE (" entryName ") IN " section)
 			} else {
-				local replacement := this.ReadStr(langCode, customEntry)
+				local replacement := this.ReadStr(&langCode, &customEntry, &combineRules)
 				intermediate := StrReplace(intermediate, match[0], replacement)
 			}
 		}
@@ -151,7 +167,7 @@ Class Locale {
 	}
 
 
-	static ReadStr(section, entry) {
+	static ReadStr(&section, &entry, &combineRules) {
 		local options := []
 
 		if RegExMatch(entry, "^\[(.*?)\](.*)$", &optMatch) {
@@ -169,8 +185,8 @@ Class Locale {
 
 			for each in [firstKey, interKey, secondKey]
 				if each != "" {
-					local processedKey := this.ProcessLanguageReferences(each, section)
-					outputString .= (i > 0 && !options.HasValue("-space") ? " " : "") processedKey
+					local processedKey := this.ProcessLanguageReferences(&each, &section, &combineRules)
+					outputString .= (i > 0 && (combineRules["[On Combine] Add Space"] && !options.HasValue("-space")) ? " " : "") processedKey
 					i++
 				}
 
@@ -182,8 +198,8 @@ Class Locale {
 
 			for each in split
 				if each != "" {
-					local processedKey := this.ProcessLanguageReferences(each, section)
-					outputString .= (i > 0 && !options.HasValue("-space") ? " " : "") processedKey
+					local processedKey := this.ProcessLanguageReferences(&each, &section, &combineRules)
+					outputString .= (i > 0 && (combineRules["[On Combine] Add Space"] && !options.HasValue("-space")) ? " " : "") processedKey
 					i++
 				}
 			return outputString
@@ -204,41 +220,41 @@ Class Locale {
 		return output
 	}
 
-	static ProcessLanguageReferences(keyString, defaultSection) {
+	static ProcessLanguageReferences(&keyString, &defaultSection, &combineRules) {
 		if RegExMatch(keyString, "^\{@([a-zA-Z-]*)(?::([^\}]+))?\}$", &langMatch) {
 			local langCode := (langMatch[1] != "" ? langMatch[1] : defaultSection)
 			local keyName := (langMatch[2] != "" ? langMatch[2] : keyString)
 
 			if langMatch[2] == "" && langMatch[1] != ""
 				return keyString
-			return this.ReadStr(langCode, keyName)
+			return this.ReadStr(&langCode, &keyName, &combineRules)
 		}
 
-		return this.ReadStr(defaultSection, keyString)
+		return this.ReadStr(&defaultSection, &keyString, &combineRules)
 	}
 
 	static GetEntry(&section, &entry) {
 		if RegExMatch(entry, "[.:]") {
 			local split := RegExSplit(entry, "[.:]")
 
-			if !this.localeObj.Has(section)
+			if !this.LOCALE_OBJECT.Has(section)
 				return ""
 
-			local current := this.localeObj[section]
+			local current := this.LOCALE_OBJECT[section]
 
 			for index, key in split {
 				if current.HasProp("Has") && current.Has(key) {
 					current := current[key]
 				} else {
-					if this.localeObj.Has(section) && this.localeObj[section].Has(entry)
-						return this.localeObj[section][entry]
+					if this.LOCALE_OBJECT.Has(section) && this.LOCALE_OBJECT[section].Has(entry)
+						return this.LOCALE_OBJECT[section][entry]
 					return ""
 				}
 			}
 			return current
 
-		} else if this.localeObj.Has(section) && this.localeObj[section].Has(entry) {
-			return this.localeObj[section][entry]
+		} else if this.LOCALE_OBJECT.Has(section) && this.LOCALE_OBJECT[section].Has(entry) {
+			return this.LOCALE_OBJECT[section][entry]
 		}
 		return ""
 	}

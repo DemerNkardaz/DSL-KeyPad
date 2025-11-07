@@ -92,7 +92,7 @@ class UIMyRecipes {
 			local recipeName := data[index]
 			local recipeEntry := data[index + 1]
 
-			local title := recipeEntry.Has("titles") && recipeEntry["titles"].Has(languageCode) ? recipeEntry["titles"][languageCode] : recipeEntry.Has("name") ? recipeEntry["name"] : recipeName
+			local title := recipeEntry.Has("titles") && recipeEntry["titles"].Has(languageCode) ? recipeEntry["titles"][languageCode] : recipeEntry.Has("titles") && recipeEntry["titles"].Has(Language.FALLBACK_LOCALE.ISO) ? recipeEntry["titles"][Language.FALLBACK_LOCALE.ISO] : recipeEntry.Has("name") ? recipeEntry["name"] : recipeName
 			local filePath := recipeEntry["filePath"]
 
 			if filePath = MyRecipes.file
@@ -352,7 +352,7 @@ class UIMyRecipes {
 				ChrReg([newRecipeName, entryToBeRegistered], "Custom")
 
 				local languageCode := Language.Get()
-				local title := newEntry.Has("titles") && newEntry["titles"].Has(languageCode) ? newEntry["titles"][languageCode] : newEntry.Has("name") ? newEntry["name"] : newRecipeName
+				local title := newEntry.Has("titles") && newEntry["titles"].Has(languageCode) ? newEntry["titles"][languageCode] : newEntry.Has("titles") && newEntry["titles"].Has(Language.FALLBACK_LOCALE.ISO) ? newEntry["titles"][Language.FALLBACK_LOCALE.ISO] : newEntry.Has("name") ? newEntry["name"] : newRecipeName
 
 				globalInstances.MyRecipesGUI.mainFileLast++
 				local lastIndex := globalInstances.MyRecipesGUI.mainFileLast
