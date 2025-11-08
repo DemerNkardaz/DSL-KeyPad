@@ -252,24 +252,41 @@ _ArraySlice(this, start := 1, length := this.Length, &totalLength := 0) {
 	totalLength := result.Length
 	return result
 }
-
-_ArrayToString(this, separator := ", ", bounds := "") {
+_ArrayToString(this, separator := ", ", bounds := "", blackList := [], skipSeparator := [], skipSeparatorIfNext := []) {
 	local str := ""
+	local pendingSeparator := false
+
 	for index, value in this {
-		if index = this.Length {
-			if value is Array {
-				str .= (bounds is Array ? bounds[1] : bounds) value.ToString(separator, bounds) (bounds is Array ? bounds[2] : bounds)
-			} else {
-				str .= (bounds is Array ? bounds[1] : bounds) value (bounds is Array ? bounds[2] : bounds)
-			}
-			break
+		if blackList.Length > 0 && blackList.HasValue(value)
+			continue
+		else if skipSeparator.Length > 0 && skipSeparator.HasValue(value) {
+			str .= (bounds is Array ? bounds[1] : bounds) value (bounds is Array ? bounds[2] : bounds)
+			pendingSeparator := false
+			continue
 		}
+		else if skipSeparatorIfNext.Length > 0 && index < this.Length && skipSeparatorIfNext.HasValue(this[index + 1]) {
+			str .= (bounds is Array ? bounds[1] : bounds) value (bounds is Array ? bounds[2] : bounds)
+			pendingSeparator := false
+			continue
+		}
+
+		if value = "" || (value is Array && value.Length = 0) {
+			continue
+		}
+
+		if pendingSeparator {
+			str .= separator
+		}
+
 		if value is Array {
-			str .= (bounds is Array ? bounds[1] : bounds) value.ToString(separator, bounds) (bounds is Array ? bounds[2] : bounds) separator
+			str .= (bounds is Array ? bounds[1] : bounds) value.ToString(separator, bounds, blackList, skipSeparator, skipSeparatorIfNext) (bounds is Array ? bounds[2] : bounds)
 		} else {
-			str .= (bounds is Array ? bounds[1] : bounds) value (bounds is Array ? bounds[2] : bounds) separator
+			str .= (bounds is Array ? bounds[1] : bounds) value (bounds is Array ? bounds[2] : bounds)
 		}
+
+		pendingSeparator := true
 	}
+
 	return str
 }
 

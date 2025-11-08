@@ -205,7 +205,9 @@ Class ChrReg {
 					local entryName := rawEntries[index]
 					local entry := rawEntries[index + 1]
 
-					if RegExMatch(entryName, "\[(.*?)\]", &match) {
+					if RegExMatch(entryName, "\[×(\d+)\]", &match) {
+						progress.data.maxCountOfEntries += Integer(match[1])
+					} else if RegExMatch(entryName, "\[(.*?)\]", &match) {
 						local splitVariants := StrSplit(match[1], ",")
 						progress.data.maxCountOfEntries += splitVariants.Length
 					} else {

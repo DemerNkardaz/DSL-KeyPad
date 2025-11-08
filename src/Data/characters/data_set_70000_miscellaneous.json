@@ -133,7 +133,7 @@
 		"unicode": ["1F3FB"],
 		"recipe": ["ftz{i}"],
 		"options": { "useLetterLocale": "fitzpatrick$", "suggestionsAtEnd": true, "noCalc": true },
-		"symbol": { "afterLetter": "{i},@-2", "alt": "<FZST-{i}-2>" }
+		"symbol": { "afterLetter": "{i},@–2", "alt": "<FZST-{i}–2>" }
 	},
 	"display_modifier_n_neu_fitzpatrick_{2...i}[×4]", {
 		"unicode": ["{1F3FB...i}"],
