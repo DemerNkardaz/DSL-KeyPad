@@ -64,7 +64,6 @@ Class ChrLib {
 		"palmyrene",
 		"manichaean",
 		"imperial_aramaic",
-		"manichaean",
 		"samaritan",
 		;
 		"ipa",
@@ -88,6 +87,9 @@ Class ChrLib {
 		"zhongguo",
 		"domino",
 		"roman",
+		;
+		"display_modifier",
+		"emoji_component",
 	]
 
 	static decompositionAttributes := Map(
@@ -123,6 +125,7 @@ Class ChrLib {
 			"tile", "tile",
 			"unit", "unit",
 			"abbr", "abbreviation",
+			"neu", "neutral"
 		),
 		"letter", "",
 		"endPart", "",

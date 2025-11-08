@@ -1,5 +1,31 @@
 {
 	"ru-RU": {
+		"script_labels": {
+			"display_modifier": "Модификатор вида",
+			"emoji_component": "Компонент эмодзи"
+		},
+		"generated": {
+			"prefix": {
+				"display_modifier": "[Модификатор вида]",
+				"emoji_component": "[Компонент эмодзи]"
+			},
+			"tag": {
+				"display_modifier": "модификатор вида",
+				"emoji_component": "компонент эмодзи"
+			}
+		},
+		"scripts": {
+			"display_modifier": {
+				"n_neu_variation_selector": { "letter_locale": "Селектор варианта" },
+				"n_neu_fitzpatrick": { "letter_locale": "Фототип Фитцпатрика" }
+			},
+			"emoji_component": {
+				"n_neu_red_hair": { "letter_locale": "Красные волосы" },
+				"n_neu_curly_hair": { "letter_locale": "Кудрявые волосы" },
+				"n_neu_bald": { "letter_locale": "Без волос" },
+				"n_neu_white_hair": { "letter_locale": "Белые волосы" }
+			}
+		},
 		"left_cjk_tortoise_shell": "Левая панцирная скобка (CJK)",
 		"right_cjk_tortoise_shell": "Правая панцирная скобка (CJK)",
 		"top_cjk_tortoise_shell": "Верхняя панцирная скобка (CJK)",

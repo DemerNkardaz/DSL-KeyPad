@@ -298,22 +298,22 @@ Class ChrReg {
 		}
 	}
 
-	ProcessSymbolLetter(&targetEntry) {
-		if targetEntry["symbol"]["letter"] is String {
-			targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], "\%self\%", UnicodeUtils.GetSymbol(targetEntry["unicode"]))
-			if InStr(targetEntry["symbol"]["letter"], "${") {
-				while RegExMatch(targetEntry["symbol"]["letter"], "\[(.*?)\]", &varMatch) {
+	ProcessSymbolAttribute(&targetEntry, attributeName := "letter") {
+		if targetEntry["symbol"][attributeName] is String {
+			targetEntry["symbol"][attributeName] := RegExReplace(targetEntry["symbol"][attributeName], "\%self\%", UnicodeUtils.GetSymbol(targetEntry["unicode"]))
+			if InStr(targetEntry["symbol"][attributeName], "${") {
+				while RegExMatch(targetEntry["symbol"][attributeName], "\[(.*?)\]", &varMatch) {
 					local splittedVariants := StrSplit(varMatch[1], ",")
-					targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], "\[.*?\]", splittedVariants[targetEntry["variantPos"]], , 1)
+					targetEntry["symbol"][attributeName] := RegExReplace(targetEntry["symbol"][attributeName], "\[.*?\]", splittedVariants[targetEntry["variantPos"]], , 1)
 				}
 
-				targetEntry["symbol"]["letter"] := ChrRecipeHandler.MakeStr(targetEntry["symbol"]["letter"])
+				targetEntry["symbol"][attributeName] := ChrRecipeHandler.MakeStr(targetEntry["symbol"][attributeName])
 			} else if targetEntry["data"]["script"] = "cyrillic" &&
-				RegExMatch(targetEntry["data"]["letter"], "^[a-zA-Z0-9]+$") {
-				targetEntry["symbol"]["letter"] := UnicodeUtils.GetSymbol(targetEntry["unicode"])
-			} else if RegExMatch(targetEntry["symbol"]["letter"], "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
+				RegExMatch(targetEntry["data"][attributeName], "^[a-zA-Z0-9]+$") {
+				targetEntry["symbol"][attributeName] := UnicodeUtils.GetSymbol(targetEntry["unicode"])
+			} else if RegExMatch(targetEntry["symbol"][attributeName], "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
 				local addition := match[1] != "" ? Integer(match[1]) : 0
-				targetEntry["symbol"]["letter"] := RegExReplace(targetEntry["symbol"]["letter"], match[0], addition + targetEntry["variantPos"])
+				targetEntry["symbol"][attributeName] := RegExReplace(targetEntry["symbol"][attributeName], match[0], addition + targetEntry["variantPos"])
 			}
 		}
 		return
@@ -777,7 +777,9 @@ Class ChrReg {
 			entry.Delete("concatenated")
 
 		this.ProcessReference(&entry)
-		this.ProcessSymbolLetter(&entry)
+		this.ProcessSymbolAttribute(&entry)
+		if entry["symbol"]["alt"] != ""
+			this.ProcessSymbolAttribute(&entry, "alt")
 		this.ProcessOptionStrings(&entry)
 
 		return

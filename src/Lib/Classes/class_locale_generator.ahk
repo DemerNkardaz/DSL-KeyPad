@@ -36,7 +36,7 @@ Class LocaleGenerator {
 				(data.boundsCollector["script"][data.langCode].Length > 0 ? data.boundsCollector["script"][data.langCode][2] : "")
 				data.wordSeparator
 				data.lBeforeType
-				data.localedCase Locale.Read(data.pfx "type." data.lType, data.lang)
+				data.localedCase (data.typeIsNeutral ? "" : Locale.Read(data.pfx "type." data.lType, data.lang))
 				data.lAfterType
 				(data.isGermanic && data.scriptAdditive != "" ? data.wordSeparator Locale.Read(data.pfx "prefix." data.lScript data.scriptAdditive, data.lang, , , , data.lVariant) : "")
 				data.wordSeparator
@@ -51,7 +51,7 @@ Class LocaleGenerator {
 			),
 			"titleAlt", (&data) => (
 				data.lBeforeAltTitle
-				Util.StrUpper(Locale.Read(data.pfx "type." data.lType, data.lang), 1) data.wordSeparator
+				(data.typeIsNeutral ? "" : Util.StrUpper(Locale.Read(data.pfx "type." data.lType, data.lang), 1) data.wordSeparator)
 				data.lBeforeletter
 				data.postLetter
 				data.lAfterletter
@@ -63,7 +63,7 @@ Class LocaleGenerator {
 			"tagBase", (&data) => (
 				(
 					data.lBeforeTitle
-					(!data.isGermanic ? data.localedCase data.lBeforeType Locale.Read(data.pfx "type." data.lType, data.lang) data.lAfterType data.wordSeparator : "")
+					(data.typeIsNeutral ? "" : (!data.isGermanic ? data.localedCase data.lBeforeType Locale.Read(data.pfx "type." data.lType, data.lang) data.lAfterType data.wordSeparator : ""))
 					data.lBeforeletter
 					data.postLetter
 					data.lAfterletter
@@ -74,14 +74,14 @@ Class LocaleGenerator {
 			),
 			"tag", (&data, tagBase) => (
 				Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant)
-				(data.isGermanic ? data.wordSeparator Locale.Read(data.pfx "type." data.lType, data.lang) : "")
+				(data.typeIsNeutral ? "" : (data.isGermanic ? data.wordSeparator Locale.Read(data.pfx "type." data.lType, data.lang) : ""))
 				data.tagScriptAdditive data.wordSeparator
 				tagBase
 				data.titlePostfixText
 			),
 			"hiddenTagBase", (&data) => (
 				data.lHiddenBeforeTitle
-				(!data.isGermanic ? data.localedCase data.lHiddenBeforeType (Locale.Read(data.pfx "type." data.lType, data.lang, True, &hidden) ? hidden : Locale.Read(data.pfx "type." data.lType, data.lang)) data.lHiddenAfterType data.wordSeparator : "")
+				(data.typeIsNeutral ? "" : (!data.isGermanic ? data.localedCase data.lHiddenBeforeType (Locale.Read(data.pfx "type." data.lType, data.lang, True, &hidden) ? hidden : Locale.Read(data.pfx "type." data.lType, data.lang)) data.lHiddenAfterType data.wordSeparator : ""))
 				data.lHiddenBeforeletter
 				data.hiddenLetter
 				data.lHiddenAfterletter
@@ -94,7 +94,7 @@ Class LocaleGenerator {
 					data.tagScriptAtStart ?
 						(
 							(Locale.Read(data.pfx "tag." data.lScript ".__hidden", data.lang, True, &hidden, , data.lVariant) ? hidden : Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant))
-							(data.isGermanic ? data.wordSeparator (Locale.Read(data.pfx "type." data.lType ".__hidden", data.lang, True, &hidden) ? hidden : Locale.Read(data.pfx "type." data.lType, data.lang)) : "")
+							(data.typeIsNeutral ? "" : (data.isGermanic ? data.wordSeparator (Locale.Read(data.pfx "type." data.lType ".__hidden", data.lang, True, &hidden) ? hidden : Locale.Read(data.pfx "type." data.lType, data.lang)) : ""))
 							data.hiddenTagScriptAdditive data.wordSeparator
 							hiddenTagBase
 						)
@@ -156,7 +156,7 @@ Class LocaleGenerator {
 					data.tagScriptAtStart ?
 						(
 							Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant)
-							(data.isGermanic ? data.wordSeparator Locale.Read(data.pfx "type." data.lType, data.lang) : "")
+							(data.typeIsNeutral ? "" : (data.isGermanic ? data.wordSeparator Locale.Read(data.pfx "type." data.lType, data.lang) : ""))
 							data.tagScriptAdditive data.wordSeparator
 							tagBase
 						)
@@ -568,6 +568,7 @@ Class LocaleGenerator {
 			}
 
 			data.proxyMark := entry["proxy"] != "" ? data.wordSeparator Locale.Read("gen.proxy", lang) : ""
+			data.typeIsNeutral := lType = "neutral"
 
 			if isAlt {
 				local title := currentFormats["titleAlt"](&data)
@@ -638,6 +639,7 @@ Class LocaleGenerator {
 
 						local hasScriptAdditive := tagAdd.Has("scriptAdditive") && StrLen(tagAdd["scriptAdditive"]) > 0
 						additiveData.curScriptAdditive := hasScriptAdditive ? "." tagAdd["scriptAdditive"] : ""
+						additiveData.typeIsNeutral := curType = "neutral"
 
 						additiveData.curLVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(curType) ? 2 : curType = "numeral" ? 3 : 1
 						additiveData.curIsGermanic := ["germanic_runic", "cirth_runic"].HasValue(additiveData.curScript)

@@ -122,5 +122,29 @@
 		"options": { "suggestionsAtEnd": true },
 		"symbol": { "alt": "<POP DIR. ISOLATE>" },
 		"recipe": ["PPDI"]
+	},
+	"display_modifier_n_neu_variation_selector_{i}[×256]", {
+		"unicode": ["(if i>16:{E0100...i-17}|{FE00...i-1})"],
+		"recipe": ["vs{i}"],
+		"options": { "useLetterLocale": "selector$", "suggestionsAtEnd": true, "noCalc": true },
+		"symbol": { "afterLetter": "{i}", "alt": "<VS-{i}>" }
+	},
+	"display_modifier_n_neu_fitzpatrick_{i}-2[×1]", {
+		"unicode": ["1F3FB"],
+		"recipe": ["ftz{i}"],
+		"options": { "useLetterLocale": "fitzpatrick$", "suggestionsAtEnd": true, "noCalc": true },
+		"symbol": { "afterLetter": "{i},@-2", "alt": "<FZST-{i}-2>" }
+	},
+	"display_modifier_n_neu_fitzpatrick_{2...i}[×4]", {
+		"unicode": ["{1F3FB...i}"],
+		"recipe": ["ftz{2...i}"],
+		"options": { "useLetterLocale": "fitzpatrick$", "suggestionsAtEnd": true, "noCalc": true },
+		"symbol": { "afterLetter": "{2...i}", "alt": "<FZST-{2...i}>" }
+	},
+	"emoji_component_n_neu_[red_hair,curly_hair,bald,white_hair]", {
+		"unicode": ["{1F9B0...i-1}"],
+		"recipePrefixes": ["ec "],
+		"recipe": [["rh"], ["ch"], ["ba"], ["wh"]],
+		"options": { "suggestionsAtEnd": true, "noCalc": true }
 	}
 ]

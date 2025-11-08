@@ -1,5 +1,31 @@
 {
 	"en-US": {
+		"script_labels": {
+			"display_modifier": "Display Modifier",
+			"emoji_component": "Emoji Component"
+		},
+		"generated": {
+			"prefix": {
+				"display_modifier": "[Display Modifier]",
+				"emoji_component": "[Emoji Component]"
+			},
+			"tag": {
+				"display_modifier": "display modifier",
+				"emoji_component": "emoji component"
+			}
+		},
+		"scripts": {
+			"display_modifier": {
+				"n_neu_variation_selector": { "letter_locale": "Variation Selector" },
+				"n_neu_fitzpatrick": { "letter_locale": "Fitzpatrick Skin-Type" }
+			},
+			"emoji_component": {
+				"n_neu_red_hair": { "letter_locale": "Red Hair" },
+				"n_neu_curly_hair": { "letter_locale": "Curly Hair" },
+				"n_neu_bald": { "letter_locale": "Bald" },
+				"n_neu_white_hair": { "letter_locale": "White Hair" }
+			}
+		},
 		"left_cjk_tortoise_shell": "Left tortoise shell (CJK)",
 		"right_cjk_tortoise_shell": "Right tortoise shell (CJK)",
 		"top_cjk_tortoise_shell": "Top tortoise shell (CJK)",
