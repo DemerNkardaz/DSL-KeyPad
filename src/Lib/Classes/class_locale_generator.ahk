@@ -23,6 +23,7 @@ Class LocaleGenerator {
 				data.wordAltSeparator,
 				postfixText,
 			],
+			"copyNumber", (&data, &copyNumber) => ("[" copyNumber "]"),
 			"title", (&data) => [
 				data.lBeforeTitle,
 				(
@@ -214,6 +215,10 @@ Class LocaleGenerator {
 	static wordAltSeparators := this.GetLocales().ToMap(Chr(160))
 	static postfixSeparators := this.GetLocales().ToMap(", ")
 
+	static __New() {
+		return Event.OnEvent("Application", "Initialized", () => LocaleGenerator.ClearCache())
+	}
+
 	static AddLocale(locale) {
 		if !LocaleGenerator.HANDLING_LOCALES.HasValue(locale)
 			LocaleGenerator.HANDLING_LOCALES.Push(locale)
@@ -248,7 +253,7 @@ Class LocaleGenerator {
 			local currentFormat := formatEntry.Get(formatName, LocaleGenerator.FORMATS[LocaleGenerator.FALLBACK_LOCALE].Get(formatName))
 			currentFormat := IsSet(secondArg) ? currentFormat(&data, &secondArg) : currentFormat(&data)
 			local toStringArgs := [
-				separaotr := data.wordSeparator,
+				separator := data.wordSeparator,
 				bounds := "",
 				blackList := ["", data.wordSeparator],
 				skipSeparator := ["`n", data.wordAltSeparator],
@@ -289,6 +294,10 @@ Class LocaleGenerator {
 
 	static CheckCache(lang, key) {
 		return this.localesCache.Has(lang) && this.localesCache[lang].Has(key)
+	}
+
+	static ClearCache() {
+		this.localesCache.Clear()
 	}
 
 	static GetLocale(entryName, lang, validate := False, strInjections := [], variantSelect := 1) {
@@ -530,7 +539,7 @@ Class LocaleGenerator {
 
 			local copyNumber := entry["symbol"]["copyNumber"]
 			local hasCopyNumber := copyNumber > 0
-			data.lCopyNumber := hasCopyNumber ? " [" copyNumber "]" : ""
+			data.lCopyNumber := hasCopyNumber ? currentFormatBridge.Get("copyNumber", &data, &copyNumber) : ""
 
 			if entry["options"]["secondName"] {
 				if hasScript
@@ -701,7 +710,7 @@ Class LocaleGenerator {
 						additiveData.lAdditionalAfterLetter := ""
 						additiveData.lAdditionalBeforeType := ""
 						additiveData.lAdditionalAfterType := ""
-						additiveData.lAdditionalCopyNumber := curHasCopyNumber ? " [" curCopyNumber "]" : ""
+						additiveData.lAdditionalCopyNumber := curHasCopyNumber ? currentFormatBridge.Get("copyNumber", &data, &copyNumber) : ""
 
 						additiveData.lAdditionalBeforeTitle := ""
 						additiveData.lAdditionalAfterTitle := ""
