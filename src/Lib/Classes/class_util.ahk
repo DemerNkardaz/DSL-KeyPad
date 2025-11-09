@@ -413,6 +413,24 @@ Class Util {
 		return
 	}
 
+	static SplitNumberParts(num) {
+		local parts := []
+		local str := String(num)
+		local len := StrLen(str)
+
+		for i, ch in StrSplit(str) {
+			digit := Integer(ch)
+			if digit = 0
+				continue
+
+			power := len - i
+			value := digit * (10 ** power)
+			parts.Push(value)
+		}
+
+		return parts
+	}
+
 	static FormatHotKey(hKey, modifier := "") {
 		local output := ""
 		if hKey is Array && hKey.Length > 0 {

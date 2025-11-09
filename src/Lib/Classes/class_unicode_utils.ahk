@@ -392,6 +392,32 @@ class UnicodeUtils {
 		return
 	}
 
+	static FullWidth(str, variant := "To") {
+		local split := this.StrSplitChars(str)
+		local output := ""
+
+		for char in split {
+			local code := this.ParseCodePoint(char)
+
+			if (variant = "To") {
+				if (code == 32)
+					code := 0x3000
+				else if (code >= 33 && code <= 126)
+					code += 0xFEE0
+			} else if (variant = "From") {
+				if (code == 0x3000)
+					code := 32
+				else if (code >= 0xFF01 && code <= 0xFF5E)
+					code -= 0xFEE0
+			}
+
+			output .= Chr(code)
+		}
+
+		return output
+	}
+
+
 	static StrSplit(str, delimiters := "", omitChars := "", maxParts := -1) {
 		if (delimiters = "")
 			return this.StrSplitChars(str, omitChars, maxParts)

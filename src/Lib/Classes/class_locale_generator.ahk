@@ -24,6 +24,7 @@ Class LocaleGenerator {
 				postfixText,
 			],
 			"copyNumber", (&data, &copyNumber) => ("[" copyNumber "]"),
+			"indexNumber", (&data, &indexNumber) => (indexNumber),
 			"title", (&data) => [
 				data.lBeforeTitle,
 				(
@@ -277,6 +278,35 @@ Class LocaleGenerator {
 
 	static SetFormatEntry(locale, value) {
 		return this.FORMATS.Set(locale, value)
+	}
+
+	static RenderNumberBaseRule(&parts, &part, &i) {
+		str := String(part)
+		if SubStr(str, 1, 1) = "1" && RegExMatch(str, "^1(0+)$", &match)
+			return "number." part
+
+		if RegExMatch(str, "^[2-9]\d*0+$") {
+			firstDigit := SubStr(str, 1, 1)
+			zeros := StrLen(str) - 1
+			base := 10 ** zeros
+			return "number." firstDigit "<>" base
+		}
+
+		return "number." part
+	}
+
+	static RenderNumber(parts, lang, rule := ObjBindMethod(this, "RenderNumberBaseRule")) {
+		if parts is String
+			parts := Number(parts)
+		if parts is Number
+			parts := Util.SplitNumberParts(parts)
+
+		local str := ""
+		for i, part in parts {
+			local key := rule(&parts, &part, &i)
+			str .= LocaleGenerator.GetLocale(key, lang)
+		}
+		return str
 	}
 
 	static localesCache := Map()
@@ -580,11 +610,15 @@ Class LocaleGenerator {
 
 							boundKey := RegExReplace(boundKey, languageRuleMatch[0])
 						} else if RegExMatch(boundKey, "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
-							local addition := match[1] ? Integer(match[1]) : 0
-							data.l%boundLink% .= addition + Integer(entry["variantPos"])
+							local indexNumber := match[1] ? Integer(match[1]) : 0
+							indexNumber := indexNumber + Integer(entry["variantPos"])
+							indexNumber := currentFormatBridge.Get("indexNumber", &data, &indexNumber)
+
+							data.l%boundLink% .= indexNumber
 							if useHiddenTags
-								data.lHidden%boundLink% .= addition + Integer(entry["variantPos"])
+								data.lHidden%boundLink% .= indexNumber
 							continue
+
 						} else if RegExMatch(boundKey, "^@(.+)$", &match) {
 							data.l%boundLink% .= match[1]
 							if useHiddenTags
@@ -754,10 +788,13 @@ Class LocaleGenerator {
 
 										boundKey := RegExReplace(boundKey, languageRuleMatch[0])
 									} else if RegExMatch(boundKey, "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
-										local addition := match[1] ? Integer(match[1]) : 0
-										additiveData.lAdditional%boundLink% .= addition + Integer(entry["variantPos"])
+										local indexNumber := match[1] ? Integer(match[1]) : 0
+										indexNumber := indexNumber + Integer(entry["variantPos"])
+										indexNumber := currentFormatBridge.Get("indexNumber", &data, &indexNumber)
+
+										additiveData.lAdditional%boundLink% .= indexNumber
 										if curUseHiddenTags
-											additiveData.lHiddenAdditional%boundLink% .= addition + Integer(entry["variantPos"])
+											additiveData.lHiddenAdditional%boundLink% .= indexNumber
 										continue
 									} else if RegExMatch(boundKey, "^@(.+)$", &match) {
 										additiveData.lAdditional%boundLink% .= match[1]
