@@ -294,8 +294,8 @@ Class LocaleGenerator {
 	static GetLocale(entryName, lang, validate := False, strInjections := [], variantSelect := 1) {
 		local key := entryName is String ? entryName : entryName.path entryName.end
 
-		if this.CheckCache(lang, key)
-			return this.GetCache(lang, key)
+		if this.CheckCache(lang, key "::" variantSelect)
+			return this.GetCache(lang, key "::" variantSelect)
 		else {
 			local localeStr := ""
 			if validate
@@ -303,7 +303,7 @@ Class LocaleGenerator {
 			else
 				localeStr := Locale.Read(key, lang, validate, , strInjections, variantSelect)
 
-			this.SetCache(lang, key, localeStr)
+			this.SetCache(lang, key "::" variantSelect, localeStr)
 			return localeStr
 		}
 	}
