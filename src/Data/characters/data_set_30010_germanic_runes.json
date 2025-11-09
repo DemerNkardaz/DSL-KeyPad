@@ -64,6 +64,9 @@
 			"scriptAdditive": "younger_futhark",
 			"letter": "isa"
 		}, {
+			"scriptAdditive": "younger_futhark",
+			"letter": "iss"
+		}, {
 			"scriptAdditive": "futhork",
 			"letter": "is"
 		}] }
@@ -74,6 +77,9 @@
 		"symbol": { "tagAdditive": [{
 			"scriptAdditive": "futhork",
 			"letter": "eoh"
+		}, {
+			"scriptAdditive": "futhork",
+			"letter": "iw"
 		}] }
 	},
 	"germanic_runic_n_rune_y_elder_futhark_jeran", {
@@ -123,7 +129,11 @@
 	},
 	"germanic_runic_n_rune_n_elder_futhark_ingwaz", {
 		"unicode": "16DC",
-		"options": { "altLayoutKey": ">+ $" }
+		"options": { "altLayoutKey": ">+ $" },
+		"symbol": { "tagAdditive": [{
+			"scriptAdditive": "elder_futhark",
+			"letter": "inguz"
+		}] }
 	},
 	"germanic_runic_n_rune_o_elder_futhark_othala", {
 		"unicode": "16DF",
@@ -180,6 +190,7 @@
 	},
 	"germanic_runic_n_rune_u_elder_futhark_uruz", {
 		"unicode": "16A2",
+		"options": { "altLayoutKey": "$" },
 		"symbol": { "tagAdditive": [{
 			"scriptAdditive": "elder_futhark",
 			"letter": "ura"

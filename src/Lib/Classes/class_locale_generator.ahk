@@ -140,6 +140,32 @@ Class LocaleGenerator {
 				data.lAdditionalCopyNumber,
 				data.lHiddenAdditionalAfterTitle,
 			],
+			"additiveGermanicTag", (&data) => [
+				data.lAdditionalBeforeTitle,
+				data.aLScript,
+				data.lAdditionalBeforeType,
+				data.aLType,
+				data.lAdditionalAfterType,
+				data.aScriptAdditive,
+				data.lAdditionalBeforeLetter,
+				data.additionalPostLetter,
+				data.lAdditionalAfterLetter,
+				data.lAdditionalCopyNumber,
+				data.lAdditionalAfterTitle,
+			],
+			"additiveGermanicHiddenTag", (&data) => [
+				data.lHiddenAdditionalBeforeTitle,
+				data.aLHiddenScript,
+				data.lHiddenAdditionalBeforeType,
+				data.aLHiddenType,
+				data.lHiddenAdditionalAfterType,
+				data.aHiddenScriptAdditive,
+				data.lHiddenAdditionalBeforeletter,
+				data.additionalHiddenLetter,
+				data.lHiddenAdditionalAfterletter,
+				data.lAdditionalCopyNumber,
+				data.lHiddenAdditionalAfterTitle,
+			],
 		),
 		"ru-RU", Map(
 			"tag", (&data) => [
@@ -744,7 +770,7 @@ Class LocaleGenerator {
 						additiveData.lAdditionalAfterLetter := ""
 						additiveData.lAdditionalBeforeType := ""
 						additiveData.lAdditionalAfterType := ""
-						additiveData.lAdditionalCopyNumber := curHasCopyNumber ? currentFormatBridge.Get("copyNumber", &data, &copyNumber) : ""
+						additiveData.lAdditionalCopyNumber := curHasCopyNumber ? currentFormatBridge.Get("copyNumber", &data, &curCopyNumber) : ""
 
 						additiveData.lAdditionalBeforeTitle := ""
 						additiveData.lAdditionalAfterTitle := ""
@@ -840,45 +866,23 @@ Class LocaleGenerator {
 							local lBuildedName := StrLower("scripts." additiveData.curScript "." curCaseKey "_" curTypeKey "_" letter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "") "_" curLetter) ".letter_locale"
 							additiveData.additionalPostLetter := LocaleGenerator.GetLocale(lBuildedName, lang)
 
-							local aLScript := LocaleGenerator.GetLocale(pfx "tag." additiveData.curScript, lang, , , additiveData.curLVariant)
-							local aScriptAdditive := hasScriptAdditive ? data.wordSeparator LocaleGenerator.GetLocale(pfx "tag." additiveData.curScript additiveData.curScriptAdditive, lang, , , additiveData.curLVariant) : ""
-							local aLType := LocaleGenerator.GetLocale(pfx "type." curType, lang)
+							additiveData.aLScript := LocaleGenerator.GetLocale(pfx "tag." additiveData.curScript, lang, , , additiveData.curLVariant)
+							additiveData.aScriptAdditive := hasScriptAdditive ? LocaleGenerator.GetLocale(pfx "tag." additiveData.curScript additiveData.curScriptAdditive, lang, , , additiveData.curLVariant) : ""
+							additiveData.aLType := LocaleGenerator.GetLocale(pfx "type." curType, lang)
 
-							tagsCollector[lang].Push(
-								additiveData.lAdditionalBeforeTitle
-								aLScript
-								additiveData.lAdditionalBeforeType
-								aLType
-								additiveData.lAdditionalAfterType
-								aScriptAdditive data.wordSeparator
-								additiveData.lAdditionalBeforeLetter
-								additiveData.additionalPostLetter
-								additiveData.lAdditionalAfterLetter
-								additiveData.lAdditionalCopyNumber
-								additiveData.lAdditionalAfterTitle
-							)
+							local tag := currentFormatBridge.Get("additiveGermanicTag", &additiveData)
+
+							tagsCollector[lang].Push(this.LocaleRules(tag, lang))
 
 							if curUseHiddenTags && (hiddenTagsLanguage = "" || hiddenTagsLanguage != "" && InStr(hiddenTagsLanguage, lang)) {
 								additiveData.additionalHiddenLetter := LocaleGenerator.GetLocale({ path: lBuildedName, end: ".__hidden" }, lang, True)
-								local aLHiddenScript := LocaleGenerator.GetLocale({ path: pfx "tag." additiveData.curScript, end: ".__hidden" }, lang, True)
-								local aHiddenScriptAdditive := hasScriptAdditive ? data.wordSeparator (LocaleGenerator.GetLocale({ path: pfx "tag." additiveData.curScript additiveData.curScriptAdditive, end: ".__hidden" }, lang, True)) : ""
-								local aLHiddenType := LocaleGenerator.GetLocale({ path: pfx "type." curType, end: ".__hidden" }, lang, True)
+								additiveData.aLHiddenScript := LocaleGenerator.GetLocale({ path: pfx "tag." additiveData.curScript, end: ".__hidden" }, lang, True)
+								additiveData.aHiddenScriptAdditive := hasScriptAdditive ? (LocaleGenerator.GetLocale({ path: pfx "tag." additiveData.curScript additiveData.curScriptAdditive, end: ".__hidden" }, lang, True)) : ""
+								additiveData.aLHiddenType := LocaleGenerator.GetLocale({ path: pfx "type." curType, end: ".__hidden" }, lang, True)
 
-								local tag := (
-									additiveData.lHiddenAdditionalBeforeTitle
-									aLHiddenScript
-									additiveData.lHiddenAdditionalBeforeType
-									data.wordSeparator aLHiddenType
-									additiveData.lHiddenAdditionalAfterType
-									aHiddenScriptAdditive data.wordSeparator
-									additiveData.lHiddenAdditionalBeforeletter
-									additiveData.additionalHiddenLetter
-									additiveData.lHiddenAdditionalAfterletter
-									additiveData.lAdditionalCopyNumber
-									additiveData.lHiddenAdditionalAfterTitle
-								)
+								local tag := currentFormatBridge.Get("additiveGermanicHiddenTag", &additiveData)
 
-								hiddenTagsCollector[lang].Push(this.LocaleRules((tag), lang))
+								hiddenTagsCollector[lang].Push(this.LocaleRules(tag, lang))
 							}
 
 

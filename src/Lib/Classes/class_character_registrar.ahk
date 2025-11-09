@@ -772,6 +772,9 @@ Class ChrReg {
 			entry["options"].Set("usesDiacritics", True)
 		}
 
+		if entry["data"]["script"] = "germanic_runic"
+			entry["options"]["useHiddenTags"] := True
+
 		if entry["recipe"].Length > 0 && !entry.Has("concatenated")
 			entry["recipe"] := Util.ProcessConcatenation(entry["recipe"])
 

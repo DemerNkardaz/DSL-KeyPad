@@ -2670,7 +2670,7 @@
 	"lat_[s]_let_z__curl", {
 		"unicode": ["0291"],
 		"alterations": [{ "modifier": "1DBD" }],
-		"recipe": ["$${arrow_right_ushaped}"]
+		"recipe": ["$${arrow_left_ushaped}"]
 	},
 	"lat_[c,s]_let_z__dot_above", {
 		"unicode": ["017B", "017C"],
