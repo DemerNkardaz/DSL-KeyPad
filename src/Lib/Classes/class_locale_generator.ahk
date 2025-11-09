@@ -25,14 +25,16 @@ Class LocaleGenerator {
 			],
 			"title", (&data) => [
 				data.lBeforeTitle,
-				(data.boundsCollector["script"][data.langCode].Length > 0 ? data.boundsCollector["script"][data.langCode][1] : ""),
-				Locale.Read(data.pfx "prefix." data.lScript (!data.isGermanic ? data.scriptAdditive : ""), data.lang, , , , data.lVariant),
-				(data.boundsCollector["script"][data.langCode].Length > 0 ? data.boundsCollector["script"][data.langCode][2] : ""),
+				(
+					(data.boundsCollector["script"][data.langCode].Length > 0 ? data.boundsCollector["script"][data.langCode][1] : "")
+					LocaleGenerator.GetLocale(data.pfx "prefix." data.lScript (!data.isGermanic ? data.scriptAdditive : ""), data.lang, , , data.lVariant)
+					(data.boundsCollector["script"][data.langCode].Length > 0 ? data.boundsCollector["script"][data.langCode][2] : "")
+				),
 				data.lBeforeType,
 				data.localedCase,
-				(data.typeIsNeutral ? "" : Locale.Read(data.pfx "type." data.lType, data.lang)),
+				(data.typeIsNeutral ? "" : LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang)),
 				data.lAfterType,
-				(data.isGermanic && data.scriptAdditive != "" ? Locale.Read(data.pfx "prefix." data.lScript data.scriptAdditive, data.lang, , , , data.lVariant) : ""),
+				(data.isGermanic && data.scriptAdditive != "" ? LocaleGenerator.GetLocale(data.pfx "prefix." data.lScript data.scriptAdditive, data.lang, , , data.lVariant) : ""),
 				data.lBeforeletter,
 				data.postLetter,
 				data.lAfterletter,
@@ -45,7 +47,7 @@ Class LocaleGenerator {
 			"titleAlt", (&data) => [
 				data.lBeforeAltTitle,
 				(data.altTitleUseLineBreak && data.lBeforeAltTitle != "" ? "`n" : ""),
-				(data.typeIsNeutral ? "" : Util.StrUpper(Locale.Read(data.pfx "type." data.lType, data.lang), 1)),
+				(data.typeIsNeutral ? "" : Util.StrUpper(LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang), 1)),
 				data.lBeforeletter,
 				data.postLetter,
 				data.lAfterletter,
@@ -56,14 +58,14 @@ Class LocaleGenerator {
 				data.altTitlePostfixText,
 			],
 			"tag", (&data) => [
-				Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant),
-				(data.typeIsNeutral ? "" : (data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
+				LocaleGenerator.GetLocale(data.pfx "tag." data.lScript, data.lang, , , data.lVariant),
+				(data.typeIsNeutral ? "" : (data.isGermanic ? LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang) : "")),
 				data.tagScriptAdditive,
 				; Tag Base [
 				data.lBeforeTitle,
 				data.localedCase,
 				data.lBeforeType,
-				(data.typeIsNeutral ? "" : (!data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
+				(data.typeIsNeutral ? "" : (!data.isGermanic ? LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang) : "")),
 				data.lAfterType,
 				data.lBeforeletter,
 				data.postLetter,
@@ -75,15 +77,14 @@ Class LocaleGenerator {
 				data.titlePostfixText,
 			],
 			"hiddenTag", (&data) => [
-				(Locale.Read(data.pfx "tag." data.lScript ".__hidden", data.lang, True, &hidden, , data.lVariant) ? hidden : Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant)),
-				(data.typeIsNeutral ? "" : (data.isGermanic ? (Locale.Read(data.pfx "type." data.lType ".__hidden", data.lang, True, &hidden) ? hidden : Locale.Read(data.pfx "type." data.lType, data.lang)) : "")),
-				(data.typeIsNeutral ? "" : (data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
+				(LocaleGenerator.GetLocale({ path: data.pfx "tag." data.lScript, end: ".__hidden" }, data.lang, True, , data.lVariant)),
+				(data.typeIsNeutral ? "" : (data.isGermanic ? (LocaleGenerator.GetLocale({ path: data.pfx "type." data.lType, end: ".__hidden" }, data.lang, True)) : "")),
 				data.hiddenTagScriptAdditive,
 				; Tag Base [
 				data.lHiddenBeforeTitle,
 				data.localedCase,
 				data.lHiddenBeforeType,
-				(data.typeIsNeutral ? "" : (!data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
+				(data.typeIsNeutral ? "" : (!data.isGermanic ? LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang) : "")),
 				data.lHiddenAfterType,
 				data.lHiddenBeforeletter,
 				data.hiddenLetter,
@@ -96,13 +97,15 @@ Class LocaleGenerator {
 			],
 			"additiveTitle", (&data) => [
 				data.lAdditionalBeforeTitle,
-				(data.boundsCollector["script"][data.lang].Length > 0 ? data.boundsCollector["script"][data.lang][1] : ""),
-				Locale.Read(data.pfx "prefix." data.curScript (!data.curIsGermanic ? data.curScriptAdditive : ""), data.lang, , , , data.curLVariant),
-				(data.boundsCollector["script"][data.lang].Length > 0 ? data.boundsCollector["script"][data.lang][2] : ""),
+				(
+					(data.boundsCollector["script"][data.lang].Length > 0 ? data.boundsCollector["script"][data.lang][1] : "")
+					LocaleGenerator.GetLocale(data.pfx "prefix." data.curScript (!data.curIsGermanic ? data.curScriptAdditive : ""), data.lang, , , data.curLVariant)
+					(data.boundsCollector["script"][data.lang].Length > 0 ? data.boundsCollector["script"][data.lang][2] : "")
+				),
 				data.lAdditionalBeforeType,
 				data.localedCase data.typeTag,
 				data.lAdditionalAfterType,
-				(data.curIsGermanic && data.scriptAdditive != "" ? Locale.Read(data.pfx "prefix." data.curScript data.curScriptAdditive, data.lang, , , , data.curLVariant) : ""),
+				(data.curIsGermanic && data.scriptAdditive != "" ? LocaleGenerator.GetLocale(data.pfx "prefix." data.curScript data.curScriptAdditive, data.lang, , , data.curLVariant) : ""),
 				data.lAdditionalBeforeLetter,
 				data.additionalPostLetter,
 				data.lAdditionalAfterLetter,
@@ -137,50 +140,15 @@ Class LocaleGenerator {
 			],
 		),
 		"ru-RU", Map(
-			"ta2", (&data) => data.tagScriptAtStart ? [
-				Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant),
-				(data.typeIsNeutral ? "" : (data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
-				data.tagScriptAdditive,
-				; Tag Base [
-				data.lBeforeTitle,
-				data.localedCase,
-				data.lBeforeType,
-				(data.typeIsNeutral ? "" : (!data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
-				data.lAfterType,
-				data.lBeforeletter,
-				data.postLetter,
-				data.lAfterletter,
-				data.lSecondName,
-				data.lCopyNumber,
-				data.lAfterTitle,
-				; ]
-				data.titlePostfixText,
-			] : [
-				; Tag Base [
-				data.lBeforeTitle,
-				data.localedCase,
-				data.lBeforeType,
-				(data.typeIsNeutral ? "" : (!data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
-				data.lAfterType,
-				data.lBeforeletter,
-				data.postLetter,
-				data.lAfterletter,
-				data.lSecondName,
-				data.lCopyNumber,
-				data.lAfterTitle,
-				; ]
-				Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant),
-				data.titlePostfixText,
-			],
 			"tag", (&data) => [
-				data.tagScriptAtStart ? Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant) : "",
-				(data.typeIsNeutral ? "" : (data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
+				data.tagScriptAtStart ? LocaleGenerator.GetLocale(data.pfx "tag." data.lScript, data.lang, , , data.lVariant) : "",
+				(data.typeIsNeutral ? "" : (data.isGermanic ? LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang) : "")),
 				data.tagScriptAdditive,
 				; Tag Base [
 				data.lBeforeTitle,
 				data.localedCase,
 				data.lBeforeType,
-				(data.typeIsNeutral ? "" : (!data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
+				(data.typeIsNeutral ? "" : (!data.isGermanic ? LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang) : "")),
 				data.lAfterType,
 				data.lBeforeletter,
 				data.postLetter,
@@ -190,18 +158,18 @@ Class LocaleGenerator {
 				data.lAfterTitle,
 				; ]
 				data.titlePostfixText,
-				!data.tagScriptAtStart ? Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant) : "",
+				!data.tagScriptAtStart ? LocaleGenerator.GetLocale(data.pfx "tag." data.lScript, data.lang, , , data.lVariant) : "",
 			],
 			"hiddenTag", (&data) => [
-				data.tagScriptAtStart ? (Locale.Read(data.pfx "tag." data.lScript ".__hidden", data.lang, True, &hidden, , data.lVariant) ? hidden : Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant)) : "",
-				(data.typeIsNeutral ? "" : (data.isGermanic ? (Locale.Read(data.pfx "type." data.lType ".__hidden", data.lang, True, &hidden) ? hidden : Locale.Read(data.pfx "type." data.lType, data.lang)) : "")),
-				(data.typeIsNeutral ? "" : (data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
+				data.tagScriptAtStart ? (LocaleGenerator.GetLocale({ path: data.pfx "tag." data.lScript, end: ".__hidden" }, data.lang, True, , data.lVariant)) : "",
+				(data.typeIsNeutral ? "" : (data.isGermanic ? (LocaleGenerator.GetLocale({ path: data.pfx "type." data.lType, end: ".__hidden" }, data.lang, True)) : "")),
+				(data.typeIsNeutral ? "" : (data.isGermanic ? LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang) : "")),
 				data.hiddenTagScriptAdditive,
 				; Tag Base [
 				data.lHiddenBeforeTitle,
 				data.localedCase,
 				data.lHiddenBeforeType,
-				(data.typeIsNeutral ? "" : (!data.isGermanic ? Locale.Read(data.pfx "type." data.lType, data.lang) : "")),
+				(data.typeIsNeutral ? "" : (!data.isGermanic ? LocaleGenerator.GetLocale(data.pfx "type." data.lType, data.lang) : "")),
 				data.lHiddenAfterType,
 				data.lHiddenBeforeletter,
 				data.hiddenLetter,
@@ -211,7 +179,7 @@ Class LocaleGenerator {
 				data.lHiddenAfterTitle,
 				; ]
 				data.titlePostfixText,
-				!data.tagScriptAtStart ? (Locale.Read(data.pfx "tag." data.lScript ".__hidden", data.lang, True, &hidden, , data.lVariant) ? hidden : Locale.Read(data.pfx "tag." data.lScript, data.lang, , , , data.lVariant)) : "",
+				!data.tagScriptAtStart ? (LocaleGenerator.GetLocale({ path: data.pfx "tag." data.lScript, end: ".__hidden" }, data.lang, True, , data.lVariant)) : "",
 			],
 			"additiveTag", (&data) => [
 				data.lAdditionalBeforeTitle,
@@ -257,7 +225,7 @@ Class LocaleGenerator {
 	}
 
 	static GetLocales() {
-		return LocaleGenerator.HANDLING_LOCALES.Clone()
+		return LocaleGenerator.HANDLING_LOCALES
 	}
 
 	static GetFormatEntry(locale) {
@@ -306,9 +274,43 @@ Class LocaleGenerator {
 		return this.FORMATS.Set(locale, value)
 	}
 
+	static localesCache := Map()
+
+	static SetCache(lang, key, value) {
+		if !this.localesCache.Has(lang)
+			this.localesCache.Set(lang, Map())
+
+		this.localesCache[lang].Set(key, value)
+	}
+
+	static GetCache(lang, key) {
+		return this.localesCache.Get(lang).Get(key)
+	}
+
+	static CheckCache(lang, key) {
+		return this.localesCache.Has(lang) && this.localesCache[lang].Has(key)
+	}
+
+	static GetLocale(entryName, lang, validate := False, strInjections := [], variantSelect := 1) {
+		local key := entryName is String ? entryName : entryName.path entryName.end
+
+		if this.CheckCache(lang, key)
+			return this.GetCache(lang, key)
+		else {
+			local localeStr := ""
+			if validate
+				localeStr := Locale.Read(key, lang, True, &end, strInjections, variantSelect) ? end : LocaleGenerator.GetLocale(entryName.path, lang, , , variantSelect)
+			else
+				localeStr := Locale.Read(key, lang, validate, , strInjections, variantSelect)
+
+			this.SetCache(lang, key, localeStr)
+			return localeStr
+		}
+	}
+
 	Generate(entryName, entry, dataEntry := "data") {
 		local handlingLocales := LocaleGenerator.GetLocales()
-		local altHandlingLocales := LocaleGenerator.GetLocales().StringsAppend("_alt")
+		local altHandlingLocales := LocaleGenerator.GetLocales().StringsAppend("_alt", False)
 
 		local originalName := entryName
 		local nbsp := Chr(160)
@@ -336,8 +338,9 @@ Class LocaleGenerator {
 
 		local LTLReference := False
 
-		local entryData := entry[dataEntry].Clone()
-		local entrySymbol := entry["symbol"].Clone()
+		local entryData := ""
+		local entrySymbol := ""
+		local lPostfixes := ""
 
 		local tagsCollector := handlingLocales.ToMap([])
 		local titlesCollector := handlingLocales.ToMap([])
@@ -376,26 +379,34 @@ Class LocaleGenerator {
 					referenceName := referenceLocale
 
 				if ChrLib.entries.HasOwnProp(referenceName) {
-					entryData := ChrLib.GetValue(referenceName, "data").Clone()
-					entrySymbol := ChrLib.GetValue(referenceName, "symbol").Clone()
+					entryData := ChrLib.GetValue(referenceName, "data")
+					entrySymbol := ChrLib.GetValue(referenceName, "symbol")
 				}
 
 				entryName := referenceName
-			} else {
+			} else
 				LTLReference := StrReplace(referenceLocale, ":", "")
-			}
+
 
 			if useSelfPostfixesOnReferenceLocale
-				entryData["postfixes"] := entry[dataEntry]["postfixes"].Clone()
+				lPostfixes := entry[dataEntry]["postfixes"]
 		}
 
+		if entryData = ""
+			entryData := entry[dataEntry]
+
+		if entrySymbol = ""
+			entrySymbol := entry["symbol"]
+
+		if lPostfixes = ""
+			lPostfixes := entryData["postfixes"]
 
 		local letter := (entrySymbol.Has("letter") && StrLen(entrySymbol["letter"]) > 0) ? entrySymbol["letter"] : entryData["letter"]
 		local lScript := entryData["script"]
 		local lOriginScript := entryData["originScript"]
 		local lCase := entryData["case"]
 		local lType := entry["symbol"]["type"] != "" ? entry["symbol"]["type"] : entryData["type"]
-		local lPostfixes := entryData["postfixes"]
+		; local lPostfixes := entryData["postfixes"]
 		local lVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
 
 		local hasScript := lScript != ""
@@ -448,7 +459,7 @@ Class LocaleGenerator {
 			}
 
 			if useLayoutTitlesAsMain {
-				entry["titles"][langCode] := Locale.Read(interLetter ".layout_locale", lang)
+				entry["titles"][langCode] := LocaleGenerator.GetLocale(interLetter ".layout_locale", lang)
 				if !isAlt
 					tagsCollector[lang].Push(StrLower(entry["titles"][langCode]))
 				continue
@@ -458,37 +469,37 @@ Class LocaleGenerator {
 			data.altTitlePostfixText := ""
 
 			if lPostfixes.Length > 0 {
-				local postfixText := Locale.Read(pfx "postfix." lPostfixes[1], lang)
+				local postfixText := LocaleGenerator.GetLocale(pfx "postfix." lPostfixes[1], lang)
 
 				data.titlePostfixText .= currentFormatBridge.Get("titlePostfix", &data, &postfixText)
 				data.altTitlePostfixText .= currentFormatBridge.Get("titleAltPostfix", &data, &postfixText)
 
 				Loop lPostfixes.Length - 2 {
-					data.titlePostfixText .= data.postfixSeparator Locale.Read(pfx "postfix." lPostfixes[A_Index + 1], lang)
+					data.titlePostfixText .= data.postfixSeparator LocaleGenerator.GetLocale(pfx "postfix." lPostfixes[A_Index + 1], lang)
 					data.altTitlePostfixText .= data.titlePostfixText
 				}
 
 				if lPostfixes.Length > 1 {
-					data.postfixAnd := Locale.Read(pfx "postfix.and", lang)
-					local postfixText := Locale.Read(pfx "postfix." lPostfixes[lPostfixes.Length], lang)
+					data.postfixAnd := LocaleGenerator.GetLocale(pfx "postfix.and", lang)
+					local postfixText := LocaleGenerator.GetLocale(pfx "postfix." lPostfixes[lPostfixes.Length], lang)
 
 					data.titlePostfixText .= currentFormatBridge.Get("titlePostfixMulti", &data, &postfixText)
 					data.altTitlePostfixText .= currentFormatBridge.Get("titleAltPostfixMulti", &data, &postfixText)
 				}
 			}
 
-			data.postLetter := useLetterLocale ? Locale.Read(interLetter (useLetterLocale ? ".letter_locale" : ""), lang) : letter
+			data.postLetter := useLetterLocale ? LocaleGenerator.GetLocale(interLetter (useLetterLocale ? ".letter_locale" : ""), lang) : letter
 			local interPath := originalName
 
 			if useLayoutTitles {
 				if hasScript
 					interPath := RegExReplace(interPath, "^" lOriginScript "_", "scripts." lScript ".")
 
-				layoutTitle := Locale.Read(interPath ".layout_locale", lang)
+				layoutTitle := LocaleGenerator.GetLocale(interPath ".layout_locale", lang)
 			}
 
 			if useLetterLocale && useHiddenTags
-				data.hiddenLetter := Locale.Read(interLetter (useLetterLocale ? ".letter_locale.__hidden" : ""), lang, True, &hidden) ? hidden : data.postLetter
+				data.hiddenLetter := LocaleGenerator.GetLocale({ path: interLetter (useLetterLocale ? ".letter_locale" : ""), end: (useLetterLocale ? ".__hidden" : "") }, lang, True)
 
 			data.lBeforeletter := ""
 			data.lAfterletter := ""
@@ -525,7 +536,7 @@ Class LocaleGenerator {
 				if hasScript
 					ref := RegExReplace(ref, "^" lOriginScript "_", "scripts." lScript ".")
 
-				data.lSecondName := " " Locale.Read(("Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref) ".second_name", lang)
+				data.lSecondName := " " LocaleGenerator.GetLocale(("Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref) ".second_name", lang)
 			}
 
 			for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType", "beforeTitle", "afterTitle", "beforeAltTitle", "afterAltTitle"] {
@@ -575,15 +586,15 @@ Class LocaleGenerator {
 						if RegExMatch(boundKey, "\:\:(.*?)$", &match) {
 							local index := Integer(match[1])
 							local cleanBound := SubStr(boundKey, 1, match.Pos(0) - 1)
-							data.l%boundLink% .= Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." cleanBound, lang, , , , index) (i < splitted.Length ? data.wordSeparator : "")
+							data.l%boundLink% .= LocaleGenerator.GetLocale((useSelfReference ? interLetter : pfx localeKey) "." cleanBound, lang, , , index) (i < splitted.Length ? data.wordSeparator : "")
 
 							if useHiddenTags
-								data.lHidden%boundLink% .= (Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." cleanBound ".__hidden", lang, True, &hidden, , index) ? hidden : data.l%boundLink%) (i < splitted.Length ? data.wordSeparator : "")
+								data.lHidden%boundLink% .= (LocaleGenerator.GetLocale({ path: (useSelfReference ? interLetter : pfx localeKey) "." cleanBound, end: ".__hidden" }, lang, True, , index)) (i < splitted.Length ? data.wordSeparator : "")
 						} else {
-							data.l%boundLink% .= Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." boundKey, lang, , , , (InStr(boundLink, "Type") ? lVariant : 1)) (i < splitted.Length ? data.wordSeparator : "")
+							data.l%boundLink% .= LocaleGenerator.GetLocale((useSelfReference ? interLetter : pfx localeKey) "." boundKey, lang, , , (InStr(boundLink, "Type") ? lVariant : 1)) (i < splitted.Length ? data.wordSeparator : "")
 
 							if useHiddenTags
-								data.lHidden%boundLink% .= (Locale.Read((useSelfReference ? interLetter : pfx localeKey) "." boundKey ".__hidden", lang, True, &hidden, , (InStr(boundLink, "Type") ? lVariant : 1)) ? hidden : data.l%boundLink%) (i < splitted.Length ? data.wordSeparator : "")
+								data.lHidden%boundLink% .= (LocaleGenerator.GetLocale({ path: (useSelfReference ? interLetter : pfx localeKey) "." boundKey, end: ".__hidden" }, lang, True, , (InStr(boundLink, "Type") ? lVariant : 1))) (i < splitted.Length ? data.wordSeparator : "")
 						}
 
 						if titlelizeFirstLetter {
@@ -607,7 +618,7 @@ Class LocaleGenerator {
 					data.lHiddenAfterAltTitle := data.lHiddenAfterTitle
 			}
 
-			data.proxyMark := entry["proxy"] != "" ? Locale.Read("gen.proxy", lang) : ""
+			data.proxyMark := entry["proxy"] != "" ? LocaleGenerator.GetLocale("gen.proxy", lang) : ""
 			data.typeIsNeutral := lType = "neutral"
 
 			if isAlt {
@@ -616,14 +627,14 @@ Class LocaleGenerator {
 
 				entry["titles"][langCode] := title
 			} else {
-				data.localedCase := lCase != "neutral" ? Locale.Read(pfx "case." lCase, lang, , , , lVariant) : ""
+				data.localedCase := lCase != "neutral" ? LocaleGenerator.GetLocale(pfx "case." lCase, lang, , , lVariant) : ""
 
 				local title := currentFormatBridge.Get("title", &data)
 				title := this.LocaleRules(title, lang, data.wordSeparator)
 
 				entry["titles"][langCode] := title
 
-				data.tagScriptAdditive := scriptAdditive ? Locale.Read(pfx "tag." lScript (scriptAdditive), lang, , , , lVariant) : ""
+				data.tagScriptAdditive := scriptAdditive ? LocaleGenerator.GetLocale(pfx "tag." lScript (scriptAdditive), lang, , , lVariant) : ""
 
 				local tag := currentFormatBridge.Get("tag", &data)
 
@@ -638,7 +649,7 @@ Class LocaleGenerator {
 
 				if useHiddenTags && (hiddenTagsLanguage = "" || hiddenTagsLanguage != "" && InStr(hiddenTagsLanguage, langCode)) {
 
-					data.hiddenTagScriptAdditive := scriptAdditive ? (Locale.Read(pfx "tag." lScript (scriptAdditive) ".__hidden", lang, True, &hidden) ? hidden : data.tagScriptAdditive[lang]) : ""
+					data.hiddenTagScriptAdditive := scriptAdditive ? (LocaleGenerator.GetLocale({ path: pfx "tag." lScript (scriptAdditive), end: ".__hidden" }, lang, True)) : ""
 
 					local hiddenTag := currentFormatBridge.Get("hiddenTag", &data)
 					hiddenTag := this.LocaleRules(hiddenTag, lang, data.wordSeparator)
@@ -749,16 +760,16 @@ Class LocaleGenerator {
 									if RegExMatch(boundKey, "\:\:(.*?)$", &match) {
 										local index := Integer(match[1])
 										local cleanBound := SubStr(boundKey, 1, match.Pos(0) - 1)
-										additiveData.lAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." cleanBound, lang, , , , index) (i < splitted.Length ? data.wordSeparator : "")
+										additiveData.lAdditional%boundLink% .= LocaleGenerator.GetLocale((useSelfReference ? draftRef : pfx localeKey) "." cleanBound, lang, , , index) (i < splitted.Length ? data.wordSeparator : "")
 
 										if curUseHiddenTags {
-											additiveData.lHiddenAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." cleanBound ".__hidden", lang, True, &hidden, , index) ? hidden : additiveData.lAdditional%boundLink%
+											additiveData.lHiddenAdditional%boundLink% .= LocaleGenerator.GetLocale({ path: (useSelfReference ? draftRef : pfx localeKey) "." cleanBound, end: ".__hidden" }, lang, True, , index)
 										}
 									} else {
-										additiveData.lAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." boundKey, lang, , , , (InStr(boundLink, "Type") ? additiveData.curLVariant : 1)) (i < splitted.Length ? data.wordSeparator : "")
+										additiveData.lAdditional%boundLink% .= LocaleGenerator.GetLocale((useSelfReference ? draftRef : pfx localeKey) "." boundKey, lang, , , (InStr(boundLink, "Type") ? additiveData.curLVariant : 1)) (i < splitted.Length ? data.wordSeparator : "")
 
 										if curUseHiddenTags {
-											additiveData.lHiddenAdditional%boundLink% .= Locale.Read((useSelfReference ? draftRef : pfx localeKey) "." boundKey ".__hidden", lang, True, &hidden) ? hidden : additiveData.lAdditional%boundLink%
+											additiveData.lHiddenAdditional%boundLink% .= LocaleGenerator.GetLocale({ path: (useSelfReference ? draftRef : pfx localeKey) "." boundKey, end: ".__hidden" }, lang, True)
 										}
 									}
 
@@ -781,11 +792,11 @@ Class LocaleGenerator {
 
 						if additiveData.curIsGermanic {
 							local lBuildedName := StrLower("scripts." additiveData.curScript "." curCaseKey "_" curTypeKey "_" letter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "") "_" curLetter) ".letter_locale"
-							additiveData.additionalPostLetter := Locale.Read(lBuildedName, lang)
+							additiveData.additionalPostLetter := LocaleGenerator.GetLocale(lBuildedName, lang)
 
-							local aLScript := Locale.Read(pfx "tag." additiveData.curScript, lang, , , , additiveData.curLVariant)
-							local aScriptAdditive := hasScriptAdditive ? data.wordSeparator Locale.Read(pfx "tag." additiveData.curScript additiveData.curScriptAdditive, lang, , , , additiveData.curLVariant) : ""
-							local aLType := Locale.Read(pfx "type." curType, lang)
+							local aLScript := LocaleGenerator.GetLocale(pfx "tag." additiveData.curScript, lang, , , additiveData.curLVariant)
+							local aScriptAdditive := hasScriptAdditive ? data.wordSeparator LocaleGenerator.GetLocale(pfx "tag." additiveData.curScript additiveData.curScriptAdditive, lang, , , additiveData.curLVariant) : ""
+							local aLType := LocaleGenerator.GetLocale(pfx "type." curType, lang)
 
 							tagsCollector[lang].Push(
 								additiveData.lAdditionalBeforeTitle
@@ -802,10 +813,10 @@ Class LocaleGenerator {
 							)
 
 							if curUseHiddenTags && (hiddenTagsLanguage = "" || hiddenTagsLanguage != "" && InStr(hiddenTagsLanguage, lang)) {
-								additiveData.additionalHiddenLetter := Locale.Read(lBuildedName ".__hidden", lang, True, &hidden) ? hidden : additiveData.additionalPostLetter
-								local aLHiddenScript := Locale.Read(pfx "tag." additiveData.curScript ".__hidden", lang, True, &hidden) ? hidden : aLScript
-								local aHiddenScriptAdditive := hasScriptAdditive ? data.wordSeparator (Locale.Read(pfx "tag." additiveData.curScript additiveData.curScriptAdditive ".__hidden", lang, True, &hidden) ? hidden : aScriptAdditive) : ""
-								local aLHiddenType := Locale.Read(pfx "type." curType ".__hidden", lang, True, &hidden) ? hidden : aLType
+								additiveData.additionalHiddenLetter := LocaleGenerator.GetLocale({ path: lBuildedName, end: ".__hidden" }, lang, True)
+								local aLHiddenScript := LocaleGenerator.GetLocale({ path: pfx "tag." additiveData.curScript, end: ".__hidden" }, lang, True)
+								local aHiddenScriptAdditive := hasScriptAdditive ? data.wordSeparator (LocaleGenerator.GetLocale({ path: pfx "tag." additiveData.curScript additiveData.curScriptAdditive, end: ".__hidden" }, lang, True)) : ""
+								local aLHiddenType := LocaleGenerator.GetLocale({ path: pfx "type." curType, end: ".__hidden" }, lang, True)
 
 								local tag := (
 									additiveData.lHiddenAdditionalBeforeTitle
@@ -827,11 +838,11 @@ Class LocaleGenerator {
 
 						} else {
 							local lBuildedName := StrLower("scripts." additiveData.curScript "." curCaseKey "_" curTypeKey "_" curLetter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "")) ".letter_locale"
-							additiveData.additionalPostLetter := Locale.Read(lBuildedName, lang)
+							additiveData.additionalPostLetter := LocaleGenerator.GetLocale(lBuildedName, lang)
 
-							additiveData.localedCase := curCase != "neutral" ? Locale.Read(pfx "case." curCase, lang, , , , additiveData.curLVariant) : ""
-							additiveData.scriptTag := Locale.Read(pfx "tag." additiveData.curScript, lang, , , , additiveData.curLVariant)
-							additiveData.typeTag := Locale.Read(pfx "type." curType, lang)
+							additiveData.localedCase := curCase != "neutral" ? LocaleGenerator.GetLocale(pfx "case." curCase, lang, , , additiveData.curLVariant) : ""
+							additiveData.scriptTag := LocaleGenerator.GetLocale(pfx "tag." additiveData.curScript, lang, , , additiveData.curLVariant)
+							additiveData.typeTag := LocaleGenerator.GetLocale(pfx "type." curType, lang)
 
 							local tag := currentFormatBridge.Get("additiveTag", &additiveData)
 							tagsCollector[lang].Push(this.LocaleRules((tag), lang))
@@ -843,10 +854,10 @@ Class LocaleGenerator {
 							}
 
 							if curUseHiddenTags && (hiddenTagsLanguage = "" || hiddenTagsLanguage != "" && InStr(hiddenTagsLanguage, lang)) {
-								additiveData.additionalHiddenLetter := Locale.Read(lBuildedName ".__hidden", lang, True, &hidden) ? hidden : additiveData.additionalPostLetter
-								additiveData.localedHiddenCase := curCase != "neutral" ? (Locale.Read(pfx "case." curCase ".__hidden", lang, True, &hidden, , additiveData.curLVariant) ? hidden : additiveData.localedCase) : ""
-								additiveData.scriptHiddenTag := Locale.Read(pfx "tag." additiveData.curScript ".__hidden", lang, True, &hidden, , additiveData.curLVariant) ? hidden : additiveData.scriptTag
-								additiveData.typeHiddenTag := Locale.Read(pfx "type." curType ".__hidden", lang, True, &hidden) ? hidden : additiveData.typeTag
+								additiveData.additionalHiddenLetter := LocaleGenerator.GetLocale({ path: lBuildedName, end: ".__hidden" }, lang, True)
+								additiveData.localedHiddenCase := curCase != "neutral" ? (LocaleGenerator.GetLocale({ path: pfx "case." curCase, end: ".__hidden" }, lang, True, , additiveData.curLVariant)) : ""
+								additiveData.scriptHiddenTag := LocaleGenerator.GetLocale({ path: pfx "tag." additiveData.curScript, end: ".__hidden" }, lang, True, , additiveData.curLVariant)
+								additiveData.typeHiddenTag := LocaleGenerator.GetLocale({ path: pfx "type." curType, end: ".__hidden" }, lang, True)
 
 								local tag := currentFormatBridge.Get("additiveHiddenTag", &additiveData)
 								tag := this.LocaleRules(tag, lang)
@@ -925,10 +936,10 @@ Class LocaleGenerator {
 
 	static localeRuleSets := Map(
 		"ru-RU", Map(
-			"conjunction", (str, lang, spaceSymbol := Chr(160)) => (InStr(str, "{conjuction}" spaceSymbol "с") || InStr(str, "{conjuction}" spaceSymbol "ш")) ? RegExReplace(str, "\{conjuction\}", Locale.Read("generated.postfix.with_2", lang)) : RegExReplace(str, "\{conjuction\}", Locale.Read("generated.postfix.with", lang))
+			"conjunction", (str, lang, spaceSymbol := Chr(160)) => (InStr(str, "{conjuction}" spaceSymbol "с") || InStr(str, "{conjuction}" spaceSymbol "ш")) ? RegExReplace(str, "\{conjuction\}", LocaleGenerator.GetLocale("generated.postfix.with_2", lang)) : RegExReplace(str, "\{conjuction\}", LocaleGenerator.GetLocale("generated.postfix.with", lang))
 		),
 		"en-US", Map(
-			"conjunction", (str, lang, *) => RegExReplace(str, "\{conjuction\}", Locale.Read("generated.postfix.with", lang)
+			"conjunction", (str, lang, *) => RegExReplace(str, "\{conjuction\}", LocaleGenerator.GetLocale("generated.postfix.with", lang)
 			)
 		)
 	)
