@@ -1251,6 +1251,7 @@
 	"lat_[c,s]_let_d__stroke_short", {
 		"unicode": ["0110", "0111"],
 		"options": {
+			"fastKey": "<! $?Secondary",
 			"telex__vietnamese": "$ $"
 		}
 	},
