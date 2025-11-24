@@ -112,6 +112,7 @@ Class ChrLib {
 			"fig", "figure",
 			"mark", "mark",
 			"num", "numeral",
+			"number", "number",
 			"sym", "symbol",
 			"sign", "sign",
 			"rune", "rune",

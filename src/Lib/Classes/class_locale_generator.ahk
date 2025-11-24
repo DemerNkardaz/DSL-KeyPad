@@ -472,7 +472,7 @@ Class LocaleGenerator {
 		local lCase := entryData["case"]
 		local lType := entry["symbol"]["type"] != "" ? entry["symbol"]["type"] : entryData["type"]
 		; local lPostfixes := entryData["postfixes"]
-		local lVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(lType) ? 2 : lType = "numeral" ? 3 : 1
+		local lVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(lType) ? 2 : lType = "number" ? 3 : 1
 
 		local hasScript := lScript != ""
 		local isGermanic := ["germanic_runic", "cirth_runic"].HasValue(lScript)
@@ -763,7 +763,7 @@ Class LocaleGenerator {
 						additiveData.curScriptAdditive := hasScriptAdditive ? "." tagAdd["scriptAdditive"] : ""
 						additiveData.typeIsNeutral := curType = "neutral"
 
-						additiveData.curLVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(curType) ? 2 : curType = "numeral" ? 3 : 1
+						additiveData.curLVariant := ["digraph", "symbol", "sign", "syllable", "glyph"].HasValue(curType) ? 2 : curType = "number" ? 3 : 1
 						additiveData.curIsGermanic := ["germanic_runic", "cirth_runic"].HasValue(additiveData.curScript)
 
 						additiveData.lAdditionalBeforeLetter := ""

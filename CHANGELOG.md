@@ -19,7 +19,7 @@
   - Addded new miscellaneous characters:
     - [ ⧼⧽ ⫽ ⫻ ◌⃫ ]
   - Added the option to disable interpretation of input as a regular expression in the main Panel search.
-  - Also added the options to toggle case-sessitivity and select search mode in the main Panel search.
+  - Also added the options to toggle case-sensitivity and select search mode in the main Panel search.
 
 - Changes:
 

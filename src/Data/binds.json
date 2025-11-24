@@ -3210,7 +3210,7 @@
 				"<^>!": ["lat_[c,s]_let_a_saltillo"],
 				"<^>!<!<+": "left_[omission,paraphrase]_bracket",
 				"<^>!<!>+": "right_[omission,paraphrase]_bracket",
-				">+": ["apostrophe"]
+				">+": ["quote"]
 			},
 			"Space": {
 				"<^>!": "no_break_space",
@@ -3684,8 +3684,8 @@
 				"<^>!": ["cyr_[c,s]_let_ye_anchor"],
 				"<^>!<+": ["cyr_[c,s]_let_e__diaeresis"],
 				"<^>!<!": ["cyr_[c,s]_lig_ye_iotified"],
-				">+": ["quote"],
-				"<+>+": ["apostrophe"]
+				">+": ["apostrophe"],
+				"<+>+": ["quote"]
 			},
 			"Ю": {
 				"<^>!": ["quote_angle_right_double"],

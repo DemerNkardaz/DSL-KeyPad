@@ -715,7 +715,7 @@ Class ChrReg {
 				local hasPostfix := entry["data"]["postfixes"].Length > 0
 				if ArrayMerge(ChrLib.scriptsValidator, ["hellenic", "latin", "cyrillic"]).HasValue(entry["data"]["script"]) {
 					script := StrReplace(entry["data"]["script"], "_", " ")
-					entry["groups"] := (StrLen(entry["data"]["type"]) > 0 && ["digraph", "ligature", "numeral"].HasValue(entry["data"]["type"]) ?
+					entry["groups"] := (StrLen(entry["data"]["type"]) > 0 && ["digraph", "ligature", "numeral", "number"].HasValue(entry["data"]["type"]) ?
 						[StrTitle(script RegExReplace(selectivePart, "_", " ") " " entry["data"]["type"] "s")] :
 						[StrTitle(script RegExReplace(selectivePart, "_", " ") (hasPostfix ? " Accented" : ""))]
 					)
