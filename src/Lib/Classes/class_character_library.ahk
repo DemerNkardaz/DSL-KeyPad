@@ -72,6 +72,7 @@ Class ChrLib {
 		"alchemical",
 		"astrological",
 		"astronomical",
+		"musical",
 		"occultic",
 		"geomantic",
 		"pharmaceutical",
@@ -126,7 +127,8 @@ Class ChrLib {
 			"tile", "tile",
 			"unit", "unit",
 			"abbr", "abbreviation",
-			"neu", "neutral"
+			"neu", "neutral",
+			"note", "note",
 		),
 		"letter", "",
 		"endPart", "",

@@ -1,0 +1,23 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"musical": "Музыкальные символы"
+		},
+		"generated": {
+			"prefix": { "musical": "Музыкальн$(ая|ый|ое)" },
+			"tag": { "musical": "музыкальн$(ая|ый|ое)" }
+		},
+		"scripts": {
+			"musical": {
+				"n_note_quarter": { "letter_locale": "Четвертная" },
+				"n_note_eighth": { "letter_locale": "Восьмая" },
+				"n_note_beamed_eighth": { "letter_locale": "Восьмая (Вязка)" },
+				"n_note_sixteenth": { "letter_locale": "Шестнадцатая" },
+				"n_note_beamed_sixteenth": { "letter_locale": "Шестнадцатая (Вязка)" },
+				"n_sign_flat": { "letter_locale": "Бемоль" },
+				"n_sign_natural": { "letter_locale": "Бекар" },
+				"n_sign_sharp": { "letter_locale": "Диез" }
+			}
+		}
+	}
+}

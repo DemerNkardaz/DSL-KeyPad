@@ -1,0 +1,16 @@
+[
+	"musical_n_note_[quarter,eighth,beamed_eighth,beamed_sixteenth]_decorative", {
+		"unicode": ["{2669...i-1}"],
+		"options": { "useLetterLocale": "_decorative$(remove)" },
+		"recipePrefixes": ["msl "],
+		"recipe": [["qr"], ["eg"], ["be"], ["bs"]],
+		"symbol": { "beforeType": "decorative,text" }
+	},
+	"musical_n_sign_[flat,natural,sharp]_decorative", {
+		"unicode": ["{266D...i-1}"],
+		"options": { "useLetterLocale": "_decorative$(remove)" },
+		"recipePrefixes": ["msl "],
+		"recipe": [["f"], ["n"], ["s"]],
+		"symbol": { "beforeType": "decorative,text" }
+	}
+]

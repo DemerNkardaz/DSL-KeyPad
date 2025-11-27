@@ -38,7 +38,8 @@
 				"dice": "dice",
 				"tile": "tile",
 				"unit": "unit",
-				"abbreviation": "abbreviation"
+				"abbreviation": "abbreviation",
+				"note": "note"
 			},
 			"before_letter": {
 				"turned": "turned",
@@ -115,7 +116,10 @@
 				"neutral": "neutral",
 				"insular": "insular",
 				"middle_scots": "middle scots",
-				"volapuk": "volapük"
+				"volapuk": "volapük",
+				"legacy": "legacy",
+				"text": "text",
+				"decorative": "decorative"
 			},
 			"after_letter": {
 				"late": "(late form)",

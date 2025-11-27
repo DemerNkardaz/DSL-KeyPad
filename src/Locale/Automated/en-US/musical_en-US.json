@@ -1,0 +1,23 @@
+{
+	"en-US": {
+		"script_labels": {
+			"musical": "Musical Symbols"
+		},
+		"generated": {
+			"prefix": { "musical": "Musical" },
+			"tag": { "musical": "musical" }
+		},
+		"scripts": {
+			"musical": {
+				"n_note_quarter": { "letter_locale": "Quarter" },
+				"n_note_eighth": { "letter_locale": "Eighth" },
+				"n_note_beamed_eighth": { "letter_locale": "Beamed Eighth" },
+				"n_note_sixteenth": { "letter_locale": "Sixteenth" },
+				"n_note_beamed_sixteenth": { "letter_locale": "Beamed Sixteenth" },
+				"n_sign_flat": { "letter_locale": "Flat" },
+				"n_sign_natural": { "letter_locale": "Natural" },
+				"n_sign_sharp": { "letter_locale": "Sharp" }
+			}
+		}
+	}
+}
