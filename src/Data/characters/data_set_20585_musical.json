@@ -2,15 +2,23 @@
 	"musical_n_note_[quarter,eighth,beamed_eighth,beamed_sixteenth]_decorative", {
 		"unicode": ["{2669...i-1}"],
 		"options": { "useLetterLocale": "_decorative$(remove)" },
-		"recipePrefixes": ["msl "],
+		"recipePrefixes": ["ml "],
 		"recipe": [["qr"], ["eg"], ["be"], ["bs"]],
 		"symbol": { "beforeType": "decorative,text" }
 	},
-	"musical_n_sign_[flat,natural,sharp]_decorative", {
+	"musical_n_sym_[flat,natural,sharp]", {
 		"unicode": ["{266D...i-1}"],
-		"options": { "useLetterLocale": "_decorative$(remove)" },
-		"recipePrefixes": ["msl "],
-		"recipe": [["f"], ["n"], ["s"]],
-		"symbol": { "beforeType": "decorative,text" }
+		"recipePrefixes": ["m "],
+		"recipe": [["f"], ["n"], ["s"]]
+	},
+	"musical_n_sym_barline_[single,double,final,reverse_final,dashed,short]", {
+		"unicode": ["{1D100...i-1}"],
+		"options": { "useLetterLocale": "_barline$" },
+		"recipePrefixes": ["m "],
+		"recipe": [["bls"], ["bld"], ["blf"], ["blrf"], ["blds"], ["blsh"]],
+		"symbol": {
+			"beforeLetter": ["", "double", "final_2", "reverse,final_2", "dashed", "short"],
+			"font": "Segoe UI Symbol"
+		}
 	}
 ]

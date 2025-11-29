@@ -44,6 +44,7 @@
 			"before_letter": {
 				"turned": "turned",
 				"reversed": "reversed",
+				"reverse": "reverse",
 				"inverted": "inverted",
 				"barred": "barred",
 				"broken": "broken",
@@ -69,6 +70,8 @@
 				"downwards": "downwards",
 				"upwards": "upwards",
 				"final": "final",
+				"final_2": "final",
+				"end": "end",
 				"visigothic": "visigothic",
 				"old_polish": "Old Polish",
 				"script": "script",
@@ -119,7 +122,11 @@
 				"volapuk": "volapük",
 				"legacy": "legacy",
 				"text": "text",
-				"decorative": "decorative"
+				"decorative": "decorative",
+				"dashed": "dashed",
+				"bold": "bold",
+				"italic": "italic",
+				"oblique": "oblique"
 			},
 			"after_letter": {
 				"late": "(late form)",
