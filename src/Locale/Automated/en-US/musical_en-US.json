@@ -15,6 +15,13 @@
 				"n_note_sixteenth": { "letter_locale": "Sixteenth" },
 				"n_note_beamed_sixteenth": { "letter_locale": "Beamed Sixteenth" },
 				"n_sym_barline": { "letter_locale": "Barline" },
+				"n_sym_coda_left_repeat": { "letter_locale": "Left Repeat" },
+				"n_sym_coda_right_repeat": { "letter_locale": " Right Repeat" },
+				"n_sym_coda_repeat_dots": { "letter_locale": "Repeat Dots" },
+				"n_sym_coda_dal_segno": { "letter_locale": "Dal Segno" },
+				"n_sym_coda_da_capo": { "letter_locale": "Da Capo" },
+				"n_sym_coda_segno": { "letter_locale": "Segno" },
+				"n_sym_coda": { "letter_locale": "Coda" },
 				"n_sym_flat": { "letter_locale": "Flat" },
 				"n_sym_natural": { "letter_locale": "Natural" },
 				"n_sym_sharp": { "letter_locale": "Sharp" }

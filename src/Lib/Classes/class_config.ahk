@@ -249,9 +249,17 @@ Class Cfg {
 
 			local tabLabelChars := Locale.Read("gui.options.base")
 			local tabIPA := Locale.Read("script_labels.ipa.short")
-			local uiOptions := Locale.Read("gui.options.UI")
-			local composeOptions := Locale.Read("gui.options.compose")
-			local tabLabels := [tabLabelChars, tabIPA, uiOptions, composeOptions]
+			local tabUIOptions := Locale.Read("gui.options.UI")
+			local tabComposeOptions := Locale.Read("gui.options.compose")
+			local tabCache := Locale.Read("dictionary.cache")
+			local tabLabels := [tabLabelChars, tabIPA, tabUIOptions, tabComposeOptions, tabCache]
+
+
+			; TODO: Добавить:
+			; * Toggle для включения и отключения кэширования библиотеки символов
+			; * Кнопку очистки кэша
+			; * Кэш должен быть версиезависимым, т.е. в директории кэша — под-директория текущей версии для её кэша
+			; * Кэш остальных версия по умолчанию удаляется
 
 			local optionsTabs := optionsPanel.AddTab3("vOptionsTabs " optionsCommon(250, (optionsCommonY + optionsCommonH) + (84 + 25), 3), tabLabels)
 
@@ -310,7 +318,7 @@ Class Cfg {
 			referencingMode.Value := Cfg.Get("Referencing_Rule_Latin", "IPA", False, "bool")
 			referencingMode.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Referencing_Rule_Latin", "IPA", "bool"))
 
-			optionsTabs.UseTab(uiOptions)
+			optionsTabs.UseTab(tabUIOptions)
 
 			local scripterSelectorTitle := optionsPanel.AddText("vScripterSelectorTitle x" languageSelectorX() " y" languageSelectorY(300 + 30) " w256 BackgroundTrans", Locale.Read("gui.options.UI.scripter.selector"))
 
@@ -342,7 +350,7 @@ Class Cfg {
 			ssUseNumberKeysCheckBox.Value := ssUseNumberKeys
 			ssUseNumberKeysCheckBox.OnEvent("Click", (CB, Zero) => Cfg.Set(CB.Value, "Scripter_Selector_Use_Number_Keys", "UI", "bool"))
 
-			optionsTabs.UseTab(composeOptions)
+			optionsTabs.UseTab(tabComposeOptions)
 
 			local composeTitle := optionsPanel.AddText("vComposeTitle x" languageSelectorX() " y" languageSelectorY(300 + 30) " w256 BackgroundTrans", Locale.Read("gui.options.compose.title"))
 

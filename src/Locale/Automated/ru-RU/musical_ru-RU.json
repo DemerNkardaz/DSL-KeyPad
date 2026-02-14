@@ -15,6 +15,13 @@
 				"n_note_sixteenth": { "letter_locale": "Шестнадцатая" },
 				"n_note_beamed_sixteenth": { "letter_locale": "Шестнадцатая (Вязка)" },
 				"n_sym_barline": { "letter_locale": "Тактовая черта" },
+				"n_sym_coda_left_repeat": { "letter_locale": "Левая Реприза" },
+				"n_sym_coda_right_repeat": { "letter_locale": " Правая Реприза" },
+				"n_sym_coda_repeat_dots": { "letter_locale": "Точки репризы" },
+				"n_sym_coda_dal_segno": { "letter_locale": "Даль Сеньо" },
+				"n_sym_coda_da_capo": { "letter_locale": "Да Капо" },
+				"n_sym_coda_segno": { "letter_locale": "Сеньо" },
+				"n_sym_coda": { "letter_locale": "Кода" },
 				"n_sym_flat": { "letter_locale": "Бемоль" },
 				"n_sym_natural": { "letter_locale": "Бекар" },
 				"n_sym_sharp": { "letter_locale": "Диез" }

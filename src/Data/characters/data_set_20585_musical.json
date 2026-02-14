@@ -20,5 +20,13 @@
 			"beforeLetter": ["", "double", "final_2", "reverse,final_2", "dashed", "short"],
 			"font": "Segoe UI Symbol"
 		}
+	},
+	"musical_n_sym_coda[_left_repeat,_right_repeat,_repeat_dots,_dal_segno,_da_capo,_segno,]", {
+		"unicode": ["{1D106...i-1}"],
+		"recipePrefixes": ["m "],
+		"recipe": [["clr"], ["crr"], ["crd"], ["cds"], ["cdc"], ["cs"], ["cod"]],
+		"symbol": {
+			"font": "Segoe UI Symbol"
+		}
 	}
 ]

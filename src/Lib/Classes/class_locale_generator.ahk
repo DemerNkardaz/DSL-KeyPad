@@ -1,6 +1,8 @@
 Class LocaleGenerator {
 	static HANDLING_LOCALES := Language.GetSupported("generatedLocale", , True)
 	static FALLBACK_LOCALE := "en-US"
+	static namesCollection := []
+	static tagsCollection := []
 
 	static FORMATS_DEFAULT_VARIANTS := ["titlePostfix", "titleAltPostfix", "titlePostfixMulti", "titleAltPostfixMulti", "title", "titleAlt", "tag", "hiddenTag", "additiveTitle", "additiveTag", "additiveHiddenTag"]
 	static FORMATS := Map(
@@ -921,6 +923,7 @@ Class LocaleGenerator {
 
 		}
 
+		local symbl := (entry["sequence"].Length > 0 ? UnicodeUtils.GetBatchSymbols(entry["sequence"], "") : UnicodeUtils.GetSymbol(entry["unicode"])) '`t'
 
 		local hasTags := entry["tags"].Length > 0
 		local tagsBackup := []
@@ -933,6 +936,9 @@ Class LocaleGenerator {
 
 					if tagsCollector.Has(lang)
 						tagsCollector[lang].Push(tagContent)
+
+					; if lang ~= "ru" && !LocaleGenerator.tagsCollection.Has(symbl tagContent)
+					; 	LocaleGenerator.tagsCollection.Push(symbl tagContent)
 				} else
 					tagsBackup.Push(each)
 			}
@@ -949,6 +955,8 @@ Class LocaleGenerator {
 					entry["tagsMap"].Set(lang, [])
 
 				entry["tagsMap"][lang].Push(each)
+				; if lang ~= "ru" && !LocaleGenerator.tagsCollection.Has(symbl each)
+				; 	LocaleGenerator.tagsCollection.Push(symbl each)
 			}
 
 			if useHiddenTags {
@@ -963,6 +971,9 @@ Class LocaleGenerator {
 				}
 			}
 
+			; if lang ~= "ru" && !LocaleGenerator.namesCollection.Has(symbl entry["titles"][lang])
+			; 	LocaleGenerator.namesCollection.Push(symbl entry["titles"][lang])
+
 			for each in titlesCollector[lang] {
 				if !entry["altTitles"].HasValue(each)
 					entry["altTitles"].Push(each)
@@ -971,6 +982,8 @@ Class LocaleGenerator {
 					entry["altTitlesMap"].Set(lang, [])
 
 				entry["altTitlesMap"][lang].Push(each)
+				; if lang ~= "ru" && !LocaleGenerator.namesCollection.Has(symbl each)
+				; 	LocaleGenerator.namesCollection.Push(symbl each)
 			}
 		}
 

@@ -4,7 +4,12 @@
 <details open lang="en">
 <summary>English</summary>
 
-### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.8.3)
+### [Reforging — Future](https://github.com/DemerNkardaz/DSL-KeyPad)
+  
+- A long-planned project to rewrite DSL KeyPad in Rust has finally begun. This will take some time and will include the development of own language intended for storing dynamic data and implementing a mod system within DSL KeyPad. There will most likely be no major updates to the AHK version. 
+- The Rust version will be more performant; the interface is planned to use web technologies for greater flexibility and broader capabilities, with support for Linux systems and expanded symbol data accessible directly from the interface.
+
+### [0.1.7.4 α — 2026-02-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.4)
 
 - Additions:
 
@@ -18,6 +23,7 @@
     - [ ꟖꟗꞚꞛꞜꞝꞞꞟ ]
   - Addded new miscellaneous characters:
     - [ ⧼⧽ ⫽ ⫻ ◌⃫ ]
+  - Partially added musical notation characters.
   - Added the option to disable interpretation of input as a regular expression in the main Panel search.
   - Also added the options to toggle case-sensitivity and select search mode in the main Panel search.
 
@@ -217,7 +223,12 @@
 <details open lang="ru">
 <summary>Русский</summary>
 
-### [0.1.8.3 α — 2025-?-?](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.8.3)
+### [Перековка — Будущее](https://github.com/DemerNkardaz/DSL-KeyPad)
+
+- Начат давно запланированный проект по переписи DSL KeyPad  на языке Rust. Это займёт какое-то время, включая разработку собственного языка, который будет использоваться для хранения динамических данных и реализации системы модов в DSL KeyPad. Скорее всего больших обновлений AHK-версии не последует.
+- Версия на Rust будет производительнее, планируется использование веб-технологий в интерфейсе для гибкости и больших возможностей, поддержка Linux систем, расширение данных о символах, доступных напрямую из интерфейса.
+
+### [0.1.7.4 α — 2026-02-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.4)
 
 - Добавления:
 
@@ -231,6 +242,7 @@
     - [ ꟖꟗꞚꞛꞜꞝꞞꞟ ]
   - Добавлены новые прочие символы:
     - [ ⧼⧽ ⫽ ⫻ ◌⃫ ]
+  - Частично добавлены символы музыкальной нотации.
   - Для поиска в Главной панели добавлена возможность отключить интерпретацию ввода как регулярного выражения.
   - Так же добавлены опции для переключения чувствительности к регистру и выбора режима поиска в Главной панели.
 

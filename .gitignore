@@ -33,3 +33,4 @@ testing/
 LEGACY_*.ahk
 desktop.ini
 .VSCodeCounter
+.vscode

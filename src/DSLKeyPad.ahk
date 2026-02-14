@@ -114,6 +114,8 @@ initialized := True
 
 Event.Trigger("Application", "Initialized")
 
+; FileAppend(LocaleGenerator.namesCollection.ToString('`n'), "names.txt", "UTF-8")
+; FileAppend(LocaleGenerator.tagsCollection.ToString('`n'), "tags.txt", "UTF-8")
 ; Automatically created/updated by mods injector class
 ; Dynamically loads mods pasted into \Mods\ directory
 #Include *i Mods\injector_post_init.ahk
