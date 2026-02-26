@@ -107,7 +107,7 @@ Class LocaleGenerator {
 					(data.boundsCollector["script"][data.lang].Length > 0 ? data.boundsCollector["script"][data.lang][2] : "")
 				),
 				data.lAdditionalBeforeType,
-				data.localedCase data.typeTag,
+				data.localedCase, data.typeTag,
 				data.lAdditionalAfterType,
 				(data.curIsGermanic && data.scriptAdditive != "" ? LocaleGenerator.GetLocale(data.pfx "prefix." data.curScript data.curScriptAdditive, data.lang, , , data.curLVariant) : ""),
 				data.lAdditionalBeforeLetter,
@@ -122,7 +122,7 @@ Class LocaleGenerator {
 				data.lAdditionalBeforeTitle,
 				data.scriptTag,
 				data.lAdditionalBeforeType,
-				data.localedCase data.typeTag,
+				data.localedCase, data.typeTag,
 				data.lAdditionalAfterType,
 				data.lAdditionalBeforeLetter,
 				data.additionalPostLetter,
@@ -215,7 +215,7 @@ Class LocaleGenerator {
 				data.lAdditionalBeforeTitle,
 				(data.curTagScriptAtStart ? data.scriptTag : ""),
 				data.lAdditionalBeforeType,
-				data.localedCase data.typeTag,
+				data.localedCase, data.typeTag,
 				data.lAdditionalAfterType,
 				data.lAdditionalBeforeLetter,
 				data.additionalPostLetter,
@@ -228,7 +228,7 @@ Class LocaleGenerator {
 				data.lHiddenAdditionalBeforeTitle,
 				(data.curTagScriptAtStart ? data.scriptHiddenTag : ""),
 				data.lHiddenAdditionalBeforeType,
-				data.localedHiddenCase data.typeHiddenTag,
+				data.localedHiddenCase, data.typeHiddenTag,
 				data.lHiddenAdditionalAfterType,
 				data.lHiddenAdditionalBeforeletter,
 				data.additionalHiddenLetter,
@@ -603,7 +603,7 @@ Class LocaleGenerator {
 				if hasScript
 					ref := RegExReplace(ref, "^" lOriginScript "_", "scripts." lScript ".")
 
-				data.lSecondName := " " LocaleGenerator.GetLocale(("Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref) ".second_name", lang)
+				data.lSecondName := LocaleGenerator.GetLocale(("Origin" ? RegExReplace(ref, "i)^(.*?)__.*", "$1") : ref) ".second_name", lang)
 			}
 
 			for letterBound in ["beforeLetter", "afterLetter", "beforeType", "afterType", "beforeTitle", "afterTitle", "beforeAltTitle", "afterAltTitle"] {
@@ -749,6 +749,7 @@ Class LocaleGenerator {
 						local curType := (tagAdd.Has("type") ? tagAdd["type"] : lType)
 						local curCase := (tagAdd.Has("case") ? tagAdd["case"] : lCase)
 						local curLetter := (tagAdd.Has("letter") ? tagAdd["letter"] : letter)
+
 						local curCopyNumber := (tagAdd.Has("copyNumber") ? tagAdd["copyNumber"] : copyNumber)
 						local curHasCopyNumber := curCopyNumber > 0
 						additiveData.curTagScriptAtStart := (tagAdd.Has("tagScriptAtStart") ? tagAdd["tagScriptAtStart"] : tagScriptAtStart)
@@ -760,6 +761,8 @@ Class LocaleGenerator {
 						local curScriptKey := ChrLib.GetDecomposition("script", additiveData.curScript, "Key", &curScriptDecomposeKey) ? curScriptDecomposeKey : additiveData.curScript
 						local curTypeKey := ChrLib.GetDecomposition("type", (useOriginalTypePath ? entryData["type"] : curType), "Key", &curTypeDecomposeKey) ? curTypeDecomposeKey : (useOriginalTypePath ? entryData["type"] : curType)
 						local curCaseKey := ChrLib.GetDecomposition("case", curCase, "Key", &curCaseDecomposeKey) ? curCaseDecomposeKey : curCase
+
+						local curUseLetterLocale := (tagAdd.Has("useLetterLocale") ? tagAdd["useLetterLocale"] : useLetterLocale)
 
 						local hasScriptAdditive := tagAdd.Has("scriptAdditive") && StrLen(tagAdd["scriptAdditive"]) > 0
 						additiveData.curScriptAdditive := hasScriptAdditive ? "." tagAdd["scriptAdditive"] : ""
@@ -889,8 +892,8 @@ Class LocaleGenerator {
 
 
 						} else {
-							local lBuildedName := StrLower("scripts." additiveData.curScript "." curCaseKey "_" curTypeKey "_" curLetter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "")) ".letter_locale"
-							additiveData.additionalPostLetter := LocaleGenerator.GetLocale(lBuildedName, lang)
+							local lBuildedName := curUseLetterLocale ? StrLower("scripts." additiveData.curScript "." curCaseKey "_" curTypeKey "_" curLetter (hasScriptAdditive ? "_" tagAdd["scriptAdditive"] : "")) ".letter_locale" : ""
+							additiveData.additionalPostLetter := curUseLetterLocale ? LocaleGenerator.GetLocale(lBuildedName, lang) : curLetter
 
 							additiveData.localedCase := curCase != "neutral" ? LocaleGenerator.GetLocale(pfx "case." curCase, lang, , , additiveData.curLVariant) : ""
 							additiveData.scriptTag := LocaleGenerator.GetLocale(pfx "tag." additiveData.curScript, lang, , , additiveData.curLVariant)
@@ -900,13 +903,12 @@ Class LocaleGenerator {
 							tagsCollector[lang].Push(this.LocaleRules((tag), lang))
 
 							if titlesCollector.Has(lang) && (allowsMultiTitles || tagAdd.Has("script")) {
-
 								local title := currentFormatBridge.Get("additiveTitle", &additiveData)
 								titlesCollector[lang].Push(this.LocaleRules((title), lang))
 							}
 
 							if curUseHiddenTags && (hiddenTagsLanguage = "" || hiddenTagsLanguage != "" && InStr(hiddenTagsLanguage, lang)) {
-								additiveData.additionalHiddenLetter := LocaleGenerator.GetLocale({ path: lBuildedName, end: ".__hidden" }, lang, True)
+								additiveData.additionalHiddenLetter := curUseLetterLocale ? LocaleGenerator.GetLocale({ path: lBuildedName, end: ".__hidden" }, lang, True) : curLetter
 								additiveData.localedHiddenCase := curCase != "neutral" ? (LocaleGenerator.GetLocale({ path: pfx "case." curCase, end: ".__hidden" }, lang, True, , additiveData.curLVariant)) : ""
 								additiveData.scriptHiddenTag := LocaleGenerator.GetLocale({ path: pfx "tag." additiveData.curScript, end: ".__hidden" }, lang, True, , additiveData.curLVariant)
 								additiveData.typeHiddenTag := LocaleGenerator.GetLocale({ path: pfx "type." curType, end: ".__hidden" }, lang, True)

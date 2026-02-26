@@ -2459,10 +2459,10 @@
 			"X": ["lat_[c,s]_let_x"],
 			"Y": ["lat_[c,s]_let_y"],
 			"Z": ["lat_[c,s]_let_z"],
-			"\u00DE": ["lat_[c,s]_let_t_thorn"], 
+			"\u00DE": ["lat_[c,s]_let_t_thorn"],
 			"\u01F7": ["lat_[c,s]_let_w_wynn"],
 			"\uA768": ["lat_[c,s]_let_v_vend"],
-			"\u01B7": ["lat_[c,s]_let_z_ezh"], 
+			"\u01B7": ["lat_[c,s]_let_z_ezh"],
 			"\u021C": ["lat_[c,s]_let_j_yogh"],
 			"\u1E9E": ["lat_[c,s]_lig_s_eszett"],
 			"\u0194": ["lat_[c,s]_let_g_gamma"],
@@ -2505,8 +2505,8 @@
 			"\u0466": ["cyr_[c,s]_let_yus_little"],
 			"\u0470": ["cyr_[c,s]_let_p_psi"],
 			"\u046E": ["cyr_[c,s]_let_k_ksi"],
-			"\u0460": ["cyr_[c,s]_let_o_omega"], 
-			"\u0472": ["cyr_[c,s]_let_f_fita"], 
+			"\u0460": ["cyr_[c,s]_let_o_omega"],
+			"\u0472": ["cyr_[c,s]_let_f_fita"],
 			"\u051C": ["cyr_[c,s]_let_w"],
 			"\u051A": ["cyr_[c,s]_let_q"],
 			"\uA65E": ["cyr_[c,s]_let_y_yn"]
@@ -3526,7 +3526,8 @@
 				"<^>!": ["cyr_[c,s]_let_ye__breve"],
 				"<^>!<!": ["cyr_[c,s]_let_ye_yat"],
 				"<^>!<+": ["cyr_[c,s]_let_ye__diaeresis"],
-				">+": ["cyr_[c,s]_let_ye__grave"]
+				">+": ["cyr_[c,s]_let_ye__grave"],
+				"<^>!<!<+>+": ["cyr_[c,s]_let_ye_epsilon"]
 			},
 			"Ё": {
 				"<^>!": ["bullet"],

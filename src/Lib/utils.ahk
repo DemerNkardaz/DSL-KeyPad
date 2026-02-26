@@ -56,8 +56,10 @@ _ArrayDeepClone(this) {
 	for item in this {
 		if item is String {
 			output.Push(item)
+		} else if item is Func {
+			output.Push(item)
 		} else if item is Array {
-			output.Push(item.Clone())
+			output.Push(item.DeepClone())
 		} else if item is Map {
 			output.Push(item.DeepClone())
 		} else if item is Object {
@@ -75,8 +77,10 @@ _ObjDeepClone(this) {
 	for k, v in this.OwnProps() {
 		if v is String {
 			output.DefineProp(k, { value: v })
+		} else if v is Func {
+			output.DefineProp(k, { value: v })
 		} else if v is Array {
-			output.DefineProp(k, { value: v.Clone() })
+			output.DefineProp(k, { value: v.DeepClone() })
 		} else if v is Map {
 			output.DefineProp(k, { value: v.DeepClone() })
 		} else if v is Object {

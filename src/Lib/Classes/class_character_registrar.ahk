@@ -300,22 +300,23 @@ Class ChrReg {
 		}
 	}
 
-	ProcessSymbolAttribute(&targetEntry, attributeName := "letter") {
-		if targetEntry["symbol"][attributeName] is String {
-			targetEntry["symbol"][attributeName] := RegExReplace(targetEntry["symbol"][attributeName], "\%self\%", UnicodeUtils.GetSymbol(targetEntry["unicode"]))
-			if InStr(targetEntry["symbol"][attributeName], "${") {
-				while RegExMatch(targetEntry["symbol"][attributeName], "\[(.*?)\]", &varMatch) {
+	ProcessSymbolAttribute(&targetEntry, &parentEntry, attributeName := "letter") {
+		if targetEntry[attributeName] is String {
+			targetEntry[attributeName] := RegExReplace(targetEntry[attributeName], "\%self\%", UnicodeUtils.GetSymbol(parentEntry["unicode"]))
+			if InStr(targetEntry[attributeName], "${") {
+				while RegExMatch(targetEntry[attributeName], "\[(.*?)\]", &varMatch) {
 					local splittedVariants := StrSplit(varMatch[1], ",")
-					targetEntry["symbol"][attributeName] := RegExReplace(targetEntry["symbol"][attributeName], "\[.*?\]", splittedVariants[targetEntry["variantPos"]], , 1)
+					targetEntry[attributeName] := RegExReplace(targetEntry[attributeName], "\[.*?\]", splittedVariants[parentEntry["variantPos"]], , 1)
 				}
 
-				targetEntry["symbol"][attributeName] := ChrRecipeHandler.MakeStr(targetEntry["symbol"][attributeName])
-			} else if targetEntry["data"]["script"] = "cyrillic" &&
-				RegExMatch(targetEntry["data"][attributeName], "^[a-zA-Z0-9]+$") {
-				targetEntry["symbol"][attributeName] := UnicodeUtils.GetSymbol(targetEntry["unicode"])
-			} else if RegExMatch(targetEntry["symbol"][attributeName], "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
+				targetEntry[attributeName] := ChrRecipeHandler.MakeStr(targetEntry[attributeName])
+			} else if parentEntry["data"]["script"] = "cyrillic" &&
+				RegExMatch(parentEntry["data"][attributeName], "^[a-zA-Z0-9]+$") &&
+				targetEntry[attributeName] = parentEntry["data"][attributeName] {
+				targetEntry[attributeName] := UnicodeUtils.GetSymbol(parentEntry["unicode"])
+			} else if RegExMatch(targetEntry[attributeName], "\{(-?\d+)?(?:\.\.\.)?i\}", &match) {
 				local addition := match[1] != "" ? Integer(match[1]) : 0
-				targetEntry["symbol"][attributeName] := RegExReplace(targetEntry["symbol"][attributeName], match[0], addition + targetEntry["variantPos"])
+				targetEntry[attributeName] := RegExReplace(targetEntry[attributeName], match[0], addition + parentEntry["variantPos"])
 			}
 		}
 		return
@@ -348,17 +349,37 @@ Class ChrReg {
 	CloneOptions(&sourceOptions, &index) {
 		local tempOptions := sourceOptions.Clone()
 		local strIndexBanned := ["letter"]
-		local arrIndexBanned := ["tagAdditive", "scriptBounds"]
+		local arrLevels := Map("tagAdditive", 2, "scriptBounds", 2)
 
 		for key, value in sourceOptions {
-			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 && (arrIndexBanned.HasValue(key) && sourceOptions[key].Has(index) && sourceOptions[key][index] is Array || !arrIndexBanned.HasValue(key)) {
-				if sourceOptions[key].Has(index) {
-					if sourceOptions[key][index] is Array
-						tempOptions[key] := sourceOptions[key][index].Clone()
-					else
-						tempOptions[key] := sourceOptions[key][index]
-				} else
-					tempOptions[key] := sourceOptions[key][1] is Array ? sourceOptions[key][1].Clone() : sourceOptions[key][1]
+			if sourceOptions[key] is Array && sourceOptions[key].Length > 0 {
+				if arrLevels.Has(key) {
+					local level := arrLevels[key]
+					local current := sourceOptions[key]
+					local depth := 1
+
+					while depth < level && current[1] is Array {
+						current := current[1]
+						depth++
+					}
+
+					if depth = level {
+						if sourceOptions[key].Has(index)
+							tempOptions[key] := sourceOptions[key][index].DeepClone()
+						else
+							tempOptions[key] := sourceOptions[key][1].DeepClone()
+					} else {
+						tempOptions[key] := sourceOptions[key].DeepClone()
+					}
+				} else {
+					if sourceOptions[key].Has(index) {
+						if sourceOptions[key][index] is Array
+							tempOptions[key] := sourceOptions[key][index].DeepClone()
+						else
+							tempOptions[key] := sourceOptions[key][index]
+					} else
+						tempOptions[key] := sourceOptions[key][1] is Array ? sourceOptions[key][1].DeepClone() : sourceOptions[key][1]
+				}
 			} else if sourceOptions[key] is String {
 				local option := sourceOptions[key]
 
@@ -386,7 +407,6 @@ Class ChrReg {
 						}
 
 						result .= selectedElement
-
 						lastPos := match.Pos + match.Len
 					}
 
@@ -429,47 +449,45 @@ Class ChrReg {
 					}
 				} else if entry["data"]["postfixes"].Length = 2 {
 					entry["recipe"] := [
-						(
-							"$${(" entry["data"]["postfixes"][1]
-							"|" entry["data"]["postfixes"][2] ")}$(*)"
-						),
-						(
-							"${" SubStr(entry["data"]["script"], 1, 3)
-							"_[" splitVariants.ToString(",") "]_"
-							SubStr(entry["data"]["type"], 1, 3) "_@??__("
-							entry["data"]["postfixes"][1] "|"
-							entry["data"]["postfixes"][2] ")}$(*)"
-						),
-						(
-							"${(" entry["data"]["postfixes"][1] "|"
-							entry["data"]["postfixes"][2] ")}$(*)$"
-						),
-						(
-							"${" entry["data"]["postfixes"][1] "}"
-							"${" SubStr(entry["data"]["script"], 1, 3)
-							"_[" splitVariants.ToString(",") "]_"
-							SubStr(entry["data"]["type"], 1, 3) "_@??__"
-							entry["data"]["postfixes"][2] "}"
-						),
-						(
-							"${" entry["data"]["postfixes"][2] "}"
-							"${" SubStr(entry["data"]["script"], 1, 3)
-							"_[" splitVariants.ToString(",") "]_"
-							SubStr(entry["data"]["type"], 1, 3) "_@??__"
-							entry["data"]["postfixes"][1] "}"
-						),
-					]
+					(
+						"$${(" entry["data"]["postfixes"][1]
+						"|" entry["data"]["postfixes"][2] ")}$(*)"
+					),
+					(
+						"${" SubStr(entry["data"]["script"], 1, 3)
+						"_[" splitVariants.ToString(",") "]_"
+						SubStr(entry["data"]["type"], 1, 3) "_@??__("
+						entry["data"]["postfixes"][1] "|"
+						entry["data"]["postfixes"][2] ")}$(*)"
+					),
+					(
+						"${(" entry["data"]["postfixes"][1] "|"
+						entry["data"]["postfixes"][2] ")}$(*)$"
+					),
+					(
+						"${" entry["data"]["postfixes"][1] "}"
+						"${" SubStr(entry["data"]["script"], 1, 3)
+						"_[" splitVariants.ToString(",") "]_"
+						SubStr(entry["data"]["type"], 1, 3) "_@??__"
+						entry["data"]["postfixes"][2] "}"
+					),
+					(
+						"${" entry["data"]["postfixes"][2] "}"
+						"${" SubStr(entry["data"]["script"], 1, 3)
+						"_[" splitVariants.ToString(",") "]_"
+						SubStr(entry["data"]["type"], 1, 3) "_@??__"
+						entry["data"]["postfixes"][1] "}"
+					),]
 				} else if entry["data"]["postfixes"].Length = 3 {
 					entry["recipe"] := [
-						(
-							"$${" entry["data"]["postfixes"][1] "}"
-							"${" entry["data"]["postfixes"][2] "}${" entry["data"]["postfixes"][3] "}"
-						),
-						(
-							"${" entry["data"]["postfixes"][1] "}"
-							"${" entry["data"]["postfixes"][2] "}${" entry["data"]["postfixes"][3] "}$"
-						),
-					]
+					(
+						"$${" entry["data"]["postfixes"][1] "}"
+						"${" entry["data"]["postfixes"][2] "}${" entry["data"]["postfixes"][3] "}"
+					),
+					(
+						"${" entry["data"]["postfixes"][1] "}"
+						"${" entry["data"]["postfixes"][2] "}${" entry["data"]["postfixes"][3] "}$"
+					),]
 				}
 			} else if ["ligature", "digraph"].HasValue(entry["data"]["type"]) && entry["data"]["postfixes"].Length = 0 {
 				entry["recipe"] := ["$"]
@@ -782,9 +800,23 @@ Class ChrReg {
 			entry.Delete("concatenated")
 
 		this.ProcessReference(&entry)
-		this.ProcessSymbolAttribute(&entry)
+
+		local entrySymbol := entry["symbol"]
+		this.ProcessSymbolAttribute(&entrySymbol, &entry)
 		if entry["symbol"]["alt"] != ""
-			this.ProcessSymbolAttribute(&entry, "alt")
+			this.ProcessSymbolAttribute(&entrySymbol, &entry, "alt")
+
+		if entry["symbol"].Has("tagAdditive") && entry["symbol"]["tagAdditive"].Length > 0 {
+			for i, each in entry["symbol"]["tagAdditive"] {
+				local subEntry := each
+
+				if subEntry.Has("letter") {
+					this.ProcessSymbolAttribute(&subEntry, &entry, "letter")
+					entry["symbol"]["tagAdditive"][i] := subEntry
+				}
+			}
+		}
+
 		this.ProcessOptionStrings(&entry)
 
 		return

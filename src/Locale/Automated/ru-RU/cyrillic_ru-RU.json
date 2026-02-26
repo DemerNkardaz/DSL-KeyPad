@@ -141,7 +141,9 @@
 				"s_let_w": { "second_name": "(вэ)" },
 				"c_dig_yeru_with_back_yer": { "second_name": "(Еры с Ером)" },
 				"s_dig_yeru_with_back_yer": { "second_name": "(еры с ером)" },
-				"n_sign_thousands": { "letter_locale": "Тысяч" }
+				"n_sign_thousands": { "letter_locale": "Тысяч" },
+				"c_let_ye_epsilon": {"letter_locale": "Эпсилон"},
+				"s_let_ye_epsilon": {"letter_locale": "эпсилон"}
 			}
 		}
 	}

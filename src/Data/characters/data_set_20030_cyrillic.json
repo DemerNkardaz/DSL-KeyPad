@@ -49,6 +49,18 @@
 		"options": { "secondName": true, "fastKey": "/Э/?Secondary" },
 		"symbol": { "letter": "%self%" }
 	},
+	"cyr_[c,s]_let_ye_epsilon", {
+		"unicode": ["0510", "0511"],
+		"options": {
+			"fastKey": "<!<+>+ З?Secondary", "useLetterLocale": true
+		},
+		"symbol": { "letter": "${cyr_[c,s]_let_ye}",
+			"tagAdditive": [
+				{ "beforeLetter": "reversed", "letter": "${cyr_[c,s]_let_z}", "useLetterLocale": false }
+			]
+		},
+		"recipe": ["\\З\\${arrow_left}", "$пс", "$3"]
+	},
 	"cyr_[c,s]_let_ye_yat", {
 		"unicode": ["0462", "0463"],
 		"alterations": [{}, { "combining": "2DFA" }],
@@ -368,12 +380,6 @@
 		"symbol": { "letter": "${cyr_[c,s]_let_t}" },
 		"recipe": ["\\кте\\"]
 	},
-	"cyr_[c,s]_let_z_reversed", {
-		"unicode": ["0510", "0511"],
-		"options": { "referenceLocale": "z$" },
-		"recipe": ["$${arrow_left}"],
-		"symbol": { "letter": "${cyr_[c,s]_let_z}", "beforeLetter": "reversed" }
-	},
 	"cyr_[c,s]_let_ts_reversed", {
 		"unicode": ["A660", "A661"],
 		"options": { "referenceLocale": "ts$", "fastKey": "<! $?Secondary" },
@@ -521,6 +527,7 @@
 		"unicode": ["042B", "044B"],
 		"alterations": [{}, { "combining": "A679", "modifier": "1E047", "subscript": "1E066" }],
 		"options": { "secondName": true, "noCalc": true },
+		"symbol": { "letter": "%self%" },
 		"recipe": ["${cyr_[c,s]_let_yeri}${cyr_[c,s]_let_i_decimal}"]
 	},
 	"cyr_[c,s]_dig_yeru__diaeresis", {
@@ -536,6 +543,7 @@
 		"unicode": ["A650", "A651"],
 		"options": { "secondName": true, "fastKey": "/Ы/?Secondary" },
 		"alterations": [{}, { "modifier": "1E06C" }],
+		"symbol": { "letter": "%self%" },
 		"recipe": ["${cyr_[c,s]_let_yer}${cyr_[c,s]_let_i_decimal}"]
 	},
 	"cyr_[c,s]_let_a__breve", {

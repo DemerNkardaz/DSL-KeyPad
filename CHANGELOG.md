@@ -9,6 +9,18 @@
 - A long-planned project to rewrite DSL KeyPad in Rust has finally begun. This will take some time and will include the development of own language intended for storing dynamic data and implementing a mod system within DSL KeyPad. There will most likely be no major updates to the AHK version. 
 - The Rust version will be more performant; the interface is planned to use web technologies for greater flexibility and broader capabilities, with support for Linux systems and expanded symbol data accessible directly from the interface.
 
+### [0.1.7.5 α — 2026-??-??](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.5)
+
+- Additions:
+  - Added a combination for the Cyrillic “Epsilon” character (Ԑԑ) similar to the one for Latin “Epsilon” (L/RAlt + L/RShift + Е).
+  - Addded new miscellaneous characters:
+    - [ ⬚ ⯐ ]
+- Changes:
+  - Cyrillic “Reversed Ze” has been renamed to Cyrillic “Epsilon”, with the original name preserved as an alternative.
+- Fixes:
+  - Fixed a name generation bug that caused the case and type labels of a character to be merged into a single word (the issue was noticeable on the “Egyptological Yod” letter).
+  - Fixed an extra space being inserted before secondary names (“Ы⬚⬚(Yeru with Yer)” → “Ы⬚(Yeru with Yer)”).
+
 ### [0.1.7.4 α — 2026-02-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.4)
 
 - Additions:
@@ -227,6 +239,18 @@
 
 - Начат давно запланированный проект по переписи DSL KeyPad  на языке Rust. Это займёт какое-то время, включая разработку собственного языка, который будет использоваться для хранения динамических данных и реализации системы модов в DSL KeyPad. Скорее всего больших обновлений AHK-версии не последует.
 - Версия на Rust будет производительнее, планируется использование веб-технологий в интерфейсе для гибкости и больших возможностей, поддержка Linux систем, расширение данных о символах, доступных напрямую из интерфейса.
+
+### [0.1.7.5 α — 2026-??-??](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.5)
+
+- Добавления:
+  - Для символа «Эпсилон» кириллицы (Ԑԑ) добавлена комбинация аналогичная для «Эпсилон» латиницы (L/RAlt + L/RShift + Е).
+  - Добавлены новые прочие символы:
+    - [ ⬚ ⯐ ]
+- Изменения:
+  - Символ «Обратная З» кириллицы переименован в «Эпсилон» кириллицы, но исходное название сохранено как альтернативное.
+- Исправления:
+  - Исправлена ошибка генерации названий, из-за которой название регистра и типа символа слипались в одно слово (проблема была заметна на букве «Египтологический Йод»).
+  - Исправлена вставка лишнего пробела перед вторичными именами («Ы⬚⬚(Еры с Ерем)» → «Ы⬚(Еры с Ерем)»).
 
 ### [0.1.7.4 α — 2026-02-15](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.4)
 

@@ -141,7 +141,9 @@
 				"s_let_w": { "second_name": "(we)" },
 				"c_dig_yeru_with_back_yer": { "second_name": "(Yeru with Yer)" },
 				"s_dig_yeru_with_back_yer": { "second_name": "(yeru with yer)" },
-				"n_sign_thousands": { "letter_locale": "Thousands" }
+				"n_sign_thousands": { "letter_locale": "Thousands" },
+				"c_let_ye_epsilon": {"letter_locale": "Epsilon"},
+				"s_let_ye_epsilon": {"letter_locale": "epsilon"}
 			}
 		}
 	}

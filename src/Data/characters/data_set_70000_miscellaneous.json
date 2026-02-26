@@ -6,8 +6,23 @@
 		"options": { "noCalc": true, "suggestionsAtEnd": true },
 		"recipe": ["sus", "сус"]
 	},
+	"dotted_square", {
+		"titles": {"ru-RU": "Пунктирный квадрат", "en-US": "Dotted Square"},
+		"tags": ["dotted square", "пунктирный квадрат"],
+		"unicode": "2B1A",
+		"options": { },
+		"recipe": ["dosq"]
+	},
+	"square_position_indicator", {
+		"titles": {"ru-RU": "Квадратный указатель позиции", "en-US": "Square position indicator"},
+		"tags": ["square position indicator", "квадратный указатель позиции"],
+		"unicode": "2BD0",
+		"options": { },
+		"recipe": ["sqpoi"]
+	},
 	"replacment_character", {
 		"titles": {"ru-RU": "Заменяющий символ", "en-US": "Replacement character"},
+		"tags": ["replacement character", "заменяющий символ"],
 		"unicode": "FFFD",
 		"options": { },
 		"recipe": ["null"]
