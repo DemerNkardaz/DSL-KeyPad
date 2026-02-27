@@ -140,7 +140,7 @@
 	},
 	"lat_[s]_let_o_sideways", {
 		"unicode": ["1D11"],
-		"options": { "referenceLocale": "o$" },	
+		"options": { "referenceLocale": "o$" },
 		"recipe": ["$${arrow_right_circle}"],
 		"symbol": { "beforeLetter": "sideways" }
 	},
@@ -585,7 +585,7 @@
 			"referenceLocale": "g$" },
 		"recipe": ["$'/S/"],
 		"symbol": { "beforeLetter": "script" }
-		
+
 	},
 	"lat_c_let_[f,p]_epigraphic_reversed", {
 		"unicode": ["A7FB", "A7FC"],
@@ -2559,7 +2559,7 @@
 	},
 	"lat_[c,s]_let_w__circumflex", {
 		"unicode": ["0174", "0175"],
-		"options": { "fastKey": "<!$?Secondary" }
+		"options": { "fastKey": "<! $?Secondary" }
 	},
 	"lat_[c,s]_let_w__dot_above", {
 		"unicode": ["1E86", "1E87"],
@@ -2567,11 +2567,11 @@
 	},
 	"lat_[c,s]_let_w__dot_below", {
 		"unicode": ["1E88", "1E89"],
-		"options": { "fastKey": "<!<+$?Secondary" }
+		"options": { "fastKey": "<!<+ $?Secondary" }
 	},
 	"lat_[c,s]_let_w__diaeresis", {
 		"unicode": ["1E84", "1E85"],
-		"options": { "fastKey": "<+$?Secondary" }
+		"options": { "fastKey": "<+ $?Secondary" }
 	},
 	"lat_[c,s]_let_w__grave", {
 		"unicode": ["1E80", "1E81"],
@@ -2838,7 +2838,7 @@
 		"symbol": {
 			"letter": ["SS", "ss"],
 			"tagAdditive": [[], [{ "tagScriptAtStart": true, "script": "pharmaceutical", "case": "neutral", "type": "symbol", "beforeType": "apothecary", "letter": "half" }]]
-		} 
+		}
 	},
 	"lat_[c,s]_lig_vy", {
 		"unicode": ["A760", "A761"]

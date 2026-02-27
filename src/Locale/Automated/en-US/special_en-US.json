@@ -62,6 +62,8 @@
 		"bullet_operator": "Bullet Operator",
 		"equals": "Equals",
 		"plus": "Plus",
+		"plus_double": "Double Plus",
+		"plus_triple": "Triple Plus",
 		"plusminus": "Plus Minus",
 		"minusplus": "Minus Plus",
 		"plusequals_above": "Plus with Equals Above",

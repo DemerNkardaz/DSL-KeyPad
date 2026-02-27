@@ -1340,6 +1340,16 @@
 		"groups": ["Smelting Special"],
 		"recipe": ["-."]
 	},
+	"plus_[double,triple]", {
+		"unicode": ["29FA", "29FB"],
+		"tags": [
+			["double plus", "двойной плюс"],
+			["triple plus", "тройной плюс"]
+		],
+		"groups": ["Special Characters", "Smelting Special"],
+		"options": { },
+		"recipe": [["${plus×2}"], ["${plus×3}"]]
+	},
 	"plusminus", {
 		"unicode": "00B1",
 		"tags": ["plus minus", "плюс-минус"],
