@@ -3166,7 +3166,7 @@
 			},
 			"Backslash": {
 				"<^>!": "broken_bar",
-				"<^<!": "dotted_circle",
+				"<^<!": "dotted_[square,circle]",
 				"<^>!<+": "empty_set",
 				"<^>!>+": "grapheme_joiner",
 				">+": "vertical_line",

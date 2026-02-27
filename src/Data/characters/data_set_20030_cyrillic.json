@@ -386,6 +386,12 @@
 		"recipe": ["$${arrow_left}"],
 		"symbol": { "letter": "${cyr_[c,s]_let_ts}", "beforeLetter": "reversed" }
 	},
+	"cyr_[c,s]_let_yu_reversed", {
+		"unicode": ["A654", "A655"],
+		"options": { "referenceLocale": "yu$" },
+		"recipe": ["$${arrow_left}"],
+		"symbol": { "letter": "${cyr_[c,s]_let_yu}", "beforeLetter": "reversed" }
+	},
 	"cyr_[c,s]_lig_yus_little_iotified", {
 		"unicode": ["0468", "0469"],
 		"options": { "useLetterLocale": true, "fastKey": ">+ /Я/?Secondary" },

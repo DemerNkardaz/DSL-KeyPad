@@ -16,7 +16,9 @@
 
 - Additions:
   - Added a combination for the Cyrillic “Epsilon” character (Ԑԑ) similar to the one for Latin “Epsilon” (L/RAlt + L/RShift + Е).
-  - Addded new miscellaneous characters:
+  - Added new Cyrillic characters:
+    - [ Ꙕꙕ ]
+  - Added new miscellaneous characters:
     - [ ⬚ ⯐ ]
 - Changes:
   - Cyrillic “Reversed Ze” has been renamed to Cyrillic “Epsilon”, with the original name preserved as an alternative.
@@ -31,15 +33,15 @@
 
 - Additions:
 
-  - Addded new Astrological characters:
+  - Added new Astrological characters:
     - [ ⛎︎ ]
-  - Addded new Glagolitic characters:
+  - Added new Glagolitic characters:
     - [ ⰯⱟⰥⱕ ]
-  - Addded new Hellenic characters:
+  - Added new Hellenic characters:
     - [ ϶ ]
-  - Addded new Latin characters:
+  - Added new Latin characters:
     - [ ꟖꟗꞚꞛꞜꞝꞞꞟ ]
-  - Addded new miscellaneous characters:
+  - Added new miscellaneous characters:
     - [ ⧼⧽ ⫽ ⫻ ◌⃫ ]
   - Partially added musical notation characters.
   - Added the option to disable interpretation of input as a regular expression in the main Panel search.
@@ -71,9 +73,9 @@
   - Added segmented variants of numbers, outlined variants A-Z letters and numbers.
   - Added new Alternative modes:
     - Yijing & Taixuanjing.
-  - Addded new IPA characters:
+  - Added new IPA characters:
     - [ ˥ ˦ ˧ ˨ ˩ ꜒ ꜓ ꜔ ꜕ ꜖ ꜈ ꜉ ꜊ ꜋ ꜌ ꜍ ꜎ ꜔ ꜐ ꜑ ]
-  - Addded new miscellaneous characters:
+  - Added new miscellaneous characters:
     - [ ¦ ⸨⸩ ⹉ ⹍ ⹎ ⸚ ⸛ ⸞ ⸟ ⹊  ⸜⸝ ⸌⸍ ⹕⹖ ⹗⹘ ] [ 🙶🙷🙸🙻🙺🙹 ] [ 𐆠 𐆐𐆑𐆒𐆓𐆔𐆕𐆛𐆜 ]
 
 - Changes:
@@ -97,11 +99,11 @@
   - Bundle of Alchemical, Astrological, Astronomical symbols was reworked and extended.
   - Added the Sixteen Figures of Geomancy.
   - Added Chess, Card Suits and Playing Cards symbols.
-  - Addded new latin characters:
+  - Added new latin characters:
     - [ 𐞥 𐞀 ⁱ ] [ ꟱ ᶧ ᵾ ᵿ] [ ꜣ Ꜣ ꜥ Ꜥ (Egyptological Alef and Ain) ]
-  - Addded new IPA characters:
+  - Added new IPA characters:
     - [ 𐞁 𐞂 ]
-  - Addded new miscellaneous characters:
+  - Added new miscellaneous characters:
     - [ ⸢ ⸣ ⸤ ⸥ ] [ ꜛ ꜜ ] [ ℥ ℈ ℀ ℁ ⅍ ℅ ℆ ℄ ] [ ℣ ℟ ] [ ◌͞ ◌͟ ◌͝ ]
   - IPA characters now have dedicated tabs for binds and recipes.
   - Added “ModTools” class with useful methods and parameters for creating mods.
@@ -138,9 +140,9 @@
 - Additions:
 
   - Library extended to 5,500+ Unicode characters.
-  - Addded new latin characters:
+  - Added new latin characters:
     - [ ȷ ɟ ʄ ᶡ 𐞘 ]
-  - Addded new miscellaneous characters:
+  - Added new miscellaneous characters:
     - [ ⸸ ⸶ ⸷ ] [ ⹀ ⹝ ⸗ ] [ ⅏ ]
   - Added support for new Latin layouts:
     - Blaze, Canary (Ortho variant), Engrammer, Focal, Pine v4, Rain, Recurva
@@ -179,11 +181,11 @@
 - Additions:
 
   - Library extended to 4,900+ Unicode characters.
-  - Addded new cyrillic characters:
+  - Added new cyrillic characters:
     - [ Ӫ ӫ ] [ Ӿ ӿ Ѝ ѝ Ӳ ӳ ᲅ ᲆ ᲄ ᲀ ᲂ ᲃ ᲁ ҂ ]
-  - Addded new latin characters:
+  - Added new latin characters:
     - [ ᶴ ] [ Ꜩ ꜩ ] [ ꝱ ꝲ ꝳ ꝴ ꝶ ꝵ ꝷ ꝸ ] [ Ꝫ ꝫ Ꝭ ꝭ Ꝯ ꝯ ꝰ ] [ Ꝇ ꝇ ]
-  - Addded new miscellaneous characters:
+  - Added new miscellaneous characters:
     - [ ₠ ]
   - Added support for new Latin layouts:
     - Workman, Halmak, Norman, AZERTY default/local variants, Canary, Asset, JCUKEN, Graphite, Gallium, Nerps, Sturdy, Stronk, Dhorf, PanQWERTY (Own), Qwickly
@@ -253,6 +255,8 @@
 
 - Добавления:
   - Для символа «Эпсилон» кириллицы (Ԑԑ) добавлена комбинация аналогичная для «Эпсилон» латиницы (L/RAlt + L/RShift + Е).
+  - Добавлены новые символы кириллицы:
+    - [ Ꙕꙕ ]
   - Добавлены новые прочие символы:
     - [ ⬚ ⯐ ]
 - Изменения:

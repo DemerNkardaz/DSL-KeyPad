@@ -1810,150 +1810,180 @@
 	"cyr_[c,s]_let_a", {
 		"unicode": ["0410", "0430"],
 		"alterations": [{}, { "combining": "2DF6", "modifier": "1E030", "subscript": "1E051" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_b", {
 		"unicode": ["0411", "0431"],
 		"alterations": [{}, { "combining": "2DE0", "modifier": "1E031", "subscript": "1E052" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_v", {
 		"unicode": ["0412", "0432"],
 		"alterations": [{}, { "combining": "2DE1", "modifier": "1E032", "subscript": "1E053" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_g", {
 		"unicode": ["0413", "0433"],
 		"alterations": [{}, { "combining": "2DE2", "modifier": "1E033", "subscript": "1E054" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_d", {
 		"unicode": ["0414", "0434"],
 		"alterations": [{}, { "combining": "2DE3", "modifier": "1E034", "subscript": "1E055" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_ye", {
 		"unicode": ["0415", "0435"],
 		"alterations": [{}, { "combining": "2DF7", "modifier": "1E035", "subscript": "1E056" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_zh", {
 		"unicode": ["0416", "0436"],
 		"alterations": [{}, { "combining": "2DE4", "modifier": "1E036", "subscript": "1E057" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_z", {
 		"unicode": ["0417", "0437"],
 		"alterations": [{}, { "combining": "2DE5", "modifier": "1E037", "subscript": "1E058" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_i", {
 		"unicode": ["0418", "0438"],
 		"alterations": [{}, { "combining": "A675", "modifier": "1E038", "subscript": "1E059" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_k", {
 		"unicode": ["041A", "043A"],
 		"alterations": [{}, { "combining": "2DE6", "modifier": "1E039", "subscript": "1E05A" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_l", {
 		"unicode": ["041B", "043B"],
 		"alterations": [{}, { "combining": "2DE7", "modifier": "1E03A", "subscript": "1E05B" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_m", {
 		"unicode": ["041C", "043C"],
 		"alterations": [{}, { "combining": "2DE8", "modifier": "1E03B" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_n", {
 		"unicode": ["041D", "043D"],
 		"alterations": [{}, { "combining": "2DE9", "modifier": "1D78" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_o", {
 		"unicode": ["041E", "043E"],
 		"alterations": [{}, { "combining": "2DEA", "modifier": "1E03C", "subscript": "1E05C" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_p", {
 		"unicode": ["041F", "043F"],
 		"alterations": [{}, { "combining": "2DEB", "modifier": "1E03D", "subscript": "1E05D" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_r", {
 		"unicode": ["0420", "0440"],
 		"alterations": [{}, { "combining": "2DEC", "modifier": "1E03E" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_s", {
 		"unicode": ["0421", "0441"],
 		"alterations": [{}, { "combining": "2DED", "modifier": "1E03F", "subscript": "1E05E" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_t", {
 		"unicode": ["0422", "0442"],
 		"alterations": [{}, { "combining": "2DEE", "modifier": "1E040" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_u", {
 		"unicode": ["0423", "0443"],
 		"alterations": [{}, { "combining": "A677", "modifier": "1E041", "subscript": "1E05F" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_f", {
 		"unicode": ["0424", "0444"],
 		"alterations": [{}, { "combining": "A69E", "modifier": "1E042", "subscript": "1E060" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_h", {
 		"unicode": ["0425", "0445"],
 		"alterations": [{}, { "combining": "2DEF", "modifier": "1E043", "subscript": "1E061" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_ts", {
 		"unicode": ["0426", "0446"],
 		"alterations": [{}, { "combining": "2DF0", "modifier": "1E044", "subscript": "1E062" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_ch", {
 		"unicode": ["0427", "0447"],
 		"alterations": [{}, { "combining": "2DF1", "modifier": "1E045", "subscript": "1E063" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_sh", {
 		"unicode": ["0428", "0448"],
 		"alterations": [{}, { "combining": "2DF2", "modifier": "1E046", "subscript": "1E064" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_shch", {
 		"unicode": ["0429", "0449"],
 		"alterations": [{}, { "combining": "2DF3" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_yer", {
 		"unicode": ["042A", "044A"],
 		"alterations": [{}, { "combining": "A678", "modifier": "A69C", "subscript": "1E065" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_yeri", {
 		"unicode": ["042C", "044C"],
 		"alterations": [{}, { "combining": "A67A", "modifier": "A69D" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_e", {
 		"unicode": ["042D", "044D"],
 		"alterations": [{}, { "modifier": "1E048" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_yu", {
 		"unicode": ["042E", "044E"],
 		"alterations": [{}, { "combining": "2DFB", "modifier": "1E049" }],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	},
 	"cyr_[c,s]_let_ya", {
 		"unicode": ["042F", "044F"],
-		"options": { "noCalc": true }
+		"options": { "noCalc": true },
+		"symbol": { "letter": "%self%" }
 	}
 ]

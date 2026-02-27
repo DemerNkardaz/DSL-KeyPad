@@ -10,7 +10,8 @@
 		"titles": {"ru-RU": "Пунктирный квадрат", "en-US": "Dotted Square"},
 		"tags": ["dotted square", "пунктирный квадрат"],
 		"unicode": "2B1A",
-		"options": { },
+		"groups": ["Special Fast Primary"],
+		"options": { "fastKey": "c* \\" },
 		"recipe": ["dosq"]
 	},
 	"square_position_indicator", {
