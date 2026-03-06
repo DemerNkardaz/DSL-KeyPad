@@ -20,6 +20,7 @@
     - [ Ꙕꙕ ]
   - Added new miscellaneous characters:
     - [ ⬚ ⯐ ⧺⧻ ]
+  - Added Block elements symbols.
 - Changes:
   - Cyrillic “Reversed Ze” has been renamed to Cyrillic “Epsilon”, with the original name preserved as an alternative.
 - Fixes:
@@ -259,6 +260,7 @@
     - [ Ꙕꙕ ]
   - Добавлены новые прочие символы:
     - [ ⬚ ⯐ ⧺⧻ ]
+  - Добавлены символы Блочных элементов.
 - Изменения:
   - Символ «Обратная З» кириллицы переименован в «Эпсилон» кириллицы, но исходное название сохранено как альтернативное.
 - Исправления:

@@ -1,0 +1,47 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"block_element": "[Блочные элементы]"
+		},
+		"generated": {
+			"prefix": { "block_element": "[Блочные элементы]" },
+			"tag": { "block_element": "[блочные элементы]" }
+		},
+		"scripts": {
+			"block_element": {
+				"n_block_upper_half":                                    { "letter_locale": "Верхняя половина" },
+				"n_block_lower_one_eighth":                              { "letter_locale": "Нижняя одна восьмая" },
+				"n_block_lower_one_quarter":                             { "letter_locale": "Нижняя одна четверть" },
+				"n_block_lower_three_eighths":                           { "letter_locale": "Нижние три восьмых" },
+				"n_block_lower_half":                                    { "letter_locale": "Нижняя половина" },
+				"n_block_lower_five_eighths":                            { "letter_locale": "Нижние пять восьмых" },
+				"n_block_lower_three_quarters":                          { "letter_locale": "Нижние три четверти" },
+				"n_block_lower_seven_eighths":                           { "letter_locale": "Нижние семь восьмых" },
+				"n_block_full":                                          { "letter_locale": "Полный блок" },
+				"n_block_left_seven_eighths":                            { "letter_locale": "Левые семь восьмых" },
+				"n_block_left_three_quarters":                           { "letter_locale": "Левые три четверти" },
+				"n_block_left_five_eighths":                             { "letter_locale": "Левые пять восьмых" },
+				"n_block_left_half":                                     { "letter_locale": "Левая половина" },
+				"n_block_left_three_eighths":                            { "letter_locale": "Левые три восьмых" },
+				"n_block_left_one_quarter":                              { "letter_locale": "Левая одна четверть" },
+				"n_block_left_one_eighth":                               { "letter_locale": "Левая одна восьмая" },
+				"n_block_right_half":                                    { "letter_locale": "Правая половина" },
+				"n_block_light_shade":                                   { "letter_locale": "Светлая штриховка" },
+				"n_block_medium_shade":                                  { "letter_locale": "Средняя штриховка" },
+				"n_block_dark_shade":                                    { "letter_locale": "Тёмная штриховка" },
+				"n_block_upper_one_eighth":                              { "letter_locale": "Верхняя одна восьмая" },
+				"n_block_right_one_eighth":                              { "letter_locale": "Правая одна восьмая" },
+				"n_block_quadrant_lower_left":                           { "letter_locale": "Квадрант нижний левый" },
+				"n_block_quadrant_lower_right":                          { "letter_locale": "Квадрант нижний правый" },
+				"n_block_quadrant_upper_left":                           { "letter_locale": "Квадрант верхний левый" },
+				"n_block_quadrant_upper_left_lower_left_lower_right":    { "letter_locale": "Квадрант верхний левый, нижний левый и нижний правый" },
+				"n_block_quadrant_upper_left_lower_right":               { "letter_locale": "Квадрант верхний левый и нижний правый" },
+				"n_block_quadrant_upper_left_upper_right_lower_left":    { "letter_locale": "Квадрант верхний левый, верхний правый и нижний левый" },
+				"n_block_quadrant_upper_left_upper_right_lower_right":   { "letter_locale": "Квадрант верхний левый, верхний правый и нижний правый" },
+				"n_block_quadrant_upper_right":                          { "letter_locale": "Квадрант верхний правый" },
+				"n_block_quadrant_upper_right_lower_left":               { "letter_locale": "Квадрант верхний правый и нижний левый" },
+				"n_block_quadrant_upper_right_lower_left_lower_right":   { "letter_locale": "Квадрант верхний правый, нижний левый и нижний правый" }
+			}
+		}
+	}
+}

@@ -3101,6 +3101,7 @@
 			"8": {
 				"<^>!": "multiplication",
 				"<^>!<!": "infinity",
+				"<^>!<!<+": "block_element_n_block_full",
 				"<^>!<+": "large_circle"
 			},
 			"9": {

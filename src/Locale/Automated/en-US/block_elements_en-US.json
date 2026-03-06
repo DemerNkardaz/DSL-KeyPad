@@ -1,0 +1,47 @@
+{
+	"en-US": {
+		"script_labels": {
+			"block_element": "[Block Elements]"
+		},
+		"generated": {
+			"prefix": { "block_element": "[Block Elements]" },
+			"tag": { "block_element": "[block elements]" }
+		},
+		"scripts": {
+			"block_element": {
+				"n_block_upper_half":                                    { "letter_locale": "Upper Half" },
+				"n_block_lower_one_eighth":                              { "letter_locale": "Lower One Eighth" },
+				"n_block_lower_one_quarter":                             { "letter_locale": "Lower One Quarter" },
+				"n_block_lower_three_eighths":                           { "letter_locale": "Lower Three Eighths" },
+				"n_block_lower_half":                                    { "letter_locale": "Lower Half" },
+				"n_block_lower_five_eighths":                            { "letter_locale": "Lower Five Eighths" },
+				"n_block_lower_three_quarters":                          { "letter_locale": "Lower Three Quarters" },
+				"n_block_lower_seven_eighths":                           { "letter_locale": "Lower Seven Eighths" },
+				"n_block_full":                                          { "letter_locale": "Full" },
+				"n_block_left_seven_eighths":                            { "letter_locale": "Left Seven Eighths" },
+				"n_block_left_three_quarters":                           { "letter_locale": "Left Three Quarters" },
+				"n_block_left_five_eighths":                             { "letter_locale": "Left Five Eighths" },
+				"n_block_left_half":                                     { "letter_locale": "Left Half" },
+				"n_block_left_three_eighths":                            { "letter_locale": "Left Three Eighths" },
+				"n_block_left_one_quarter":                              { "letter_locale": "Left One Quarter" },
+				"n_block_left_one_eighth":                               { "letter_locale": "Left One Eighth" },
+				"n_block_right_half":                                    { "letter_locale": "Right Half" },
+				"n_block_light_shade":                                   { "letter_locale": "Light Shade" },
+				"n_block_medium_shade":                                  { "letter_locale": "Medium Shade" },
+				"n_block_dark_shade":                                    { "letter_locale": "Dark Shade" },
+				"n_block_upper_one_eighth":                              { "letter_locale": "Upper One Eighth" },
+				"n_block_right_one_eighth":                              { "letter_locale": "Right One Eighth" },
+				"n_block_quadrant_lower_left":                           { "letter_locale": "Quadrant Lower Left" },
+				"n_block_quadrant_lower_right":                          { "letter_locale": "Quadrant Lower Right" },
+				"n_block_quadrant_upper_left":                           { "letter_locale": "Quadrant Upper Left" },
+				"n_block_quadrant_upper_left_lower_left_lower_right":    { "letter_locale": "Quadrant Upper Left, Lower Left and Lower Right" },
+				"n_block_quadrant_upper_left_lower_right":               { "letter_locale": "Quadrant Upper Left and Lower Right" },
+				"n_block_quadrant_upper_left_upper_right_lower_left":    { "letter_locale": "Quadrant Upper Left, Upper Right and Lower Left" },
+				"n_block_quadrant_upper_left_upper_right_lower_right":   { "letter_locale": "Quadrant Upper Left, Upper Right and Lower Right" },
+				"n_block_quadrant_upper_right":                          { "letter_locale": "Quadrant Upper Right" },
+				"n_block_quadrant_upper_right_lower_left":               { "letter_locale": "Quadrant Upper Right and Lower Left" },
+				"n_block_quadrant_upper_right_lower_left_lower_right":   { "letter_locale": "Quadrant Upper Right, Lower Left and Lower Right" }
+			}
+		}
+	}
+}

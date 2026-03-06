@@ -19,6 +19,7 @@
 				"inter": "mixed"
 			},
 			"type": {
+				"block": "block",
 				"letter": "letter",
 				"ligature": "ligature",
 				"digraph": "digraph",

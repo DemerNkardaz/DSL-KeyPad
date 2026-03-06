@@ -89,6 +89,8 @@ Class ChrLib {
 		"domino",
 		"roman",
 		;
+		"block_element",
+		;
 		"display_modifier",
 		"emoji_component",
 	]
@@ -129,6 +131,7 @@ Class ChrLib {
 			"abbr", "abbreviation",
 			"neu", "neutral",
 			"note", "note",
+			"block", "block"
 		),
 		"letter", "",
 		"endPart", "",

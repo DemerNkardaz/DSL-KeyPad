@@ -1,0 +1,44 @@
+[
+	"block_element_n_block_[upper_half,lower_one_eighth,lower_one_quarter,lower_three_eighths,lower_half,lower_five_eighths,lower_three_quarters,lower_seven_eighths,full,left_seven_eighths,left_three_quarters,left_five_eighths,left_half,left_three_eighths,left_one_quarter,left_one_eighth,right_half,light_shade,medium_shade,dark_shade,upper_one_eighth,right_one_eighth,quadrant_lower_left,quadrant_lower_right,quadrant_upper_left,quadrant_upper_left_lower_left_lower_right,quadrant_upper_left_lower_right,quadrant_upper_left_upper_right_lower_left,quadrant_upper_left_upper_right_lower_right,quadrant_upper_right,quadrant_upper_right_lower_left,quadrant_upper_right_lower_left_lower_right]", {
+		"unicode": ["{2580...i-1}"],
+		"groups": ["Graphical Symbols"],
+		"options": {
+			"fastKey": ["", "", "", "", "", "", "", "", "<!<+ 8", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+		},
+		"recipePrefixes": ["be "],
+		"recipe": [
+			["upha"],
+			["loei"],
+			["loqu"],
+			["lotr"],
+			["loha"],
+			["lofe"],
+			["lotq"],
+			["lose"],
+			["fu"],
+			["lese"],
+			["letq"],
+			["lefe"],
+			["leha"],
+			["letr"],
+			["lequ"],
+			["leei"],
+			["riha"],
+			["lish"],
+			["mesh"],
+			["dash"],
+			["upei"],
+			["riei"],
+			["qll"],
+			["qlr"],
+			["qul"],
+			["qulllr"],
+			["qullr"],
+			["qulurlll"],
+			["qulurllr"],
+			["qur"],
+			["qurll"],
+			["qurlllr"]
+		]
+	}
+]
