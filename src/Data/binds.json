@@ -404,8 +404,23 @@
 				"ОбратныйСлэш": ["reverse_solidus"]
 			},
 			"Moded": {
+				"5": {
+					"<^<!": "cyr_n_sign_ten_thousands"
+				},
+				"6": {
+					"<^<!": "cyr_n_sign_hundred_thousands"
+				},
+				"7": {
+					"<^<!": "cyr_n_sign_millions"
+				},
+				"8": {
+					"<^<!": "cyr_n_sign_ten_millions"
+				},
+				"9": {
+					"<^<!": "cyr_n_sign_hundred_millions"
+				},
 				"0": {
-					"<^<!": "millions_sign"
+					"<^<!": "cyr_n_sign_thousand_millions"
 				},
 				"А": {"<^>!": "glagolitic_[c,s]_let_trokutasti_a"},
 				"Ё": {"<!": "glagolitic_[c,s]_let_big_yus_iotified"},
@@ -2851,7 +2866,7 @@
 	"Diacritic": {
 		"Flat": {},
 		"Moded": {
-			"6": {
+			"1": {
 				"<^<!:Caps": ["breve_[below,inverted]_double"]
 			},
 			"A": {
@@ -2934,8 +2949,23 @@
 				"<^<!": "dot_above",
 				"<^<!<+": "diaeresis"
 			},
+			"5": {
+				"<^<!": "cyr_n_sign_ten_thousands"
+			},
+			"6": {
+				"<^<!": "cyr_n_sign_hundred_thousands"
+			},
+			"7": {
+				"<^<!": "cyr_n_sign_millions"
+			},
+			"8": {
+				"<^<!": "cyr_n_sign_ten_millions"
+			},
+			"9": {
+				"<^<!": "cyr_n_sign_hundred_millions"
+			},
 			"0": {
-				"<^<!": "millions_sign"
+				"<^<!": "cyr_n_sign_thousand_millions"
 			},
 			"Й": {
 				"<^<!": "dasia_pneumata",
@@ -3167,7 +3197,7 @@
 			},
 			"Backslash": {
 				"<^>!": "broken_bar",
-				"<^<!": "dotted_[square,circle]",
+				"<^<!:Caps": ["dotted_[square,circle]"],
 				"<^>!<+": "empty_set",
 				"<^>!>+": "grapheme_joiner",
 				">+": "vertical_line",

@@ -17,12 +17,13 @@
 - Additions:
   - Added a combination for the Cyrillic “Epsilon” character (Ԑԑ) similar to the one for Latin “Epsilon” (L/RAlt + L/RShift + Е).
   - Added new Cyrillic characters:
-    - [ Ꙕꙕ ]
+    - [ Ꙕꙕ ◌⃝ ◌҈ ◌҉ ◌꙰ ◌꙱ ◌꙲ ]
   - Added new miscellaneous characters:
     - [ ⬚ ⯐ ⧺⧻ ]
   - Added Block elements symbols.
 - Changes:
   - Cyrillic “Reversed Ze” has been renamed to Cyrillic “Epsilon”, with the original name preserved as an alternative.
+  - Both symbols ◌͡ and ◌͜ have been moved from combination 6 to 1, to place newely added Cyrillic diacritics on keys 5–0.
 - Fixes:
   - Fixed a name generation bug that caused the case and type labels of a character to be merged into a single word (the issue was noticeable on the “Egyptological Yod” letter).
   - Fixed an extra space being inserted before secondary names (“Ы⬚⬚(Yeru with Yer)” → “Ы⬚(Yeru with Yer)”).
@@ -257,12 +258,13 @@
 - Добавления:
   - Для символа «Эпсилон» кириллицы (Ԑԑ) добавлена комбинация аналогичная для «Эпсилон» латиницы (L/RAlt + L/RShift + Е).
   - Добавлены новые символы кириллицы:
-    - [ Ꙕꙕ ]
+    - [ Ꙕꙕ ◌⃝ ◌҈ ◌҉ ◌꙰ ◌꙱ ◌꙲ ]
   - Добавлены новые прочие символы:
     - [ ⬚ ⯐ ⧺⧻ ]
   - Добавлены символы Блочных элементов.
 - Изменения:
   - Символ «Обратная З» кириллицы переименован в «Эпсилон» кириллицы, но исходное название сохранено как альтернативное.
+  - Символы ◌͡ и ◌͜ перемещены с комбинации «6» на комбинацию «1» для расположения нововведённых кириллических диакритических знаков на клавишах «5–0».
 - Исправления:
   - Исправлена ошибка генерации названий, из-за которой название регистра и типа символа слипались в одно слово (проблема была заметна на букве «Египтологический Йод»).
   - Исправлена вставка лишнего пробела перед вторичными именами («Ы⬚⬚(Еры с Ерем)» → «Ы⬚(Еры с Ерем)»).

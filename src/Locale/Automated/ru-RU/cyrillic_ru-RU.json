@@ -10,9 +10,14 @@
 		"payerok": "Ерок",
 		"dasia_pneumata": "Густое придыхание (Дасия)",
 		"psili_pneumata": "Тонкое придыхание (Псили)",
-		"millions_sign": "Леодр",
 		"scripts": {
 			"cyrillic": {
+				"n_sign_ten_thousands": { "letter_locale": "Тьма" },
+				"n_sign_hundred_thousands": { "letter_locale": "Легеон" },
+				"n_sign_millions": { "letter_locale": "Леодр" },
+				"n_sign_ten_millions": { "letter_locale": "Вран" },
+				"n_sign_hundred_millions": { "letter_locale": "Колода" },
+				"n_sign_thousand_millions": { "letter_locale": "Тьма тем" },
 				"c_let_yus_little": { "letter_locale": "Юс малый" },
 				"s_let_yus_little": { "letter_locale": "юс малый" },
 				"c_let_yus_big": { "letter_locale": "Юс большой" },

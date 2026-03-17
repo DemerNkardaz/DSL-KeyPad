@@ -10,9 +10,14 @@
 		"payerok": "Payerok",
 		"dasia_pneumata": "Dasia pneumata",
 		"psili_pneumata": "Psili pneumata",
-		"millions_sign": "Millions sign",
 		"scripts": {
 			"cyrillic": {
+				"n_sign_ten_thousands": { "letter_locale": "Ten Thousands" },
+				"n_sign_hundred_thousands": { "letter_locale": "Hundred Thousands" },
+				"n_sign_millions": { "letter_locale": "Millions" },
+				"n_sign_ten_millions": { "letter_locale": "Ten Millions" },
+				"n_sign_hundred_millions": { "letter_locale": "Hundred Millions" },
+				"n_sign_thousand_millions": { "letter_locale": "Thousand Millions" },
 				"c_let_yus_little": { "letter_locale": "Little Yus" },
 				"s_let_yus_little": { "letter_locale": "little yus" },
 				"c_let_yus_big": { "letter_locale": "Big Yus" },

@@ -63,7 +63,7 @@
 		"unicode": "0361",
 		"tags": ["double inverted breve", "двойное перевёрнутое бреве", "двойная перевёрнутая кратка"],
 		"groups": ["FK Diacritics Primary"],
-		"options": { "fastKey": "6" },
+		"options": { "fastKey": "1" },
 		"symbol": { "category": "Diacritic Mark" },
 		"recipe": ["${breve_inverted×2}"]
 	},
@@ -86,7 +86,7 @@
 		"unicode": "035C",
 		"tags": ["double breve below", "двойное бреве снизу", "двойная кратка снизу"],
 		"groups": ["FK Diacritics Primary"],
-		"options": { "fastKey": "c* 6" },
+		"options": { "fastKey": "c* 1" },
 		"symbol": { "category": "Diacritic Mark" },
 		"recipe": ["${breve_below×2}"]
 	},
@@ -586,7 +586,7 @@
 			["right tack below", "retracted tongue root", "кнопка вправо снизу", "отодвинутый корень языка"]
 		],
 		"groups": ["IPA"],
-		"options": { 
+		"options": {
 			"altLayoutKey": [
 				"<^<! 1",
 				"c*<^<! 1",
@@ -611,7 +611,7 @@
 			["right half right below", "more-rounded", "правое полукольцо снизу", "более огублённый"]
 		],
 		"groups": ["IPA"],
-		"options": { 
+		"options": {
 			"altLayoutKey": [
 				"<^<! 3",
 				"c*<^<! 3"
@@ -684,11 +684,10 @@
 		"options": { "fastKey": "<+ Й", "altLayoutKey": "<^<!<+ Й" },
 		"symbol": { "category": "Diacritic Mark" }
 	},
-	"millions_sign", {
-		"unicode": "0489",
-		"tags": ["леодр кириллицы", "cyrillic millions sign"],
+	"cyr_n_sign_[ten_thousands,hundred_thousands,millions,ten_millions,hundred_millions,thousand_millions]", {
+		"unicode": ["20DD", "0488", "0489", "A670", "A671", "A672"],
 		"groups": ["Cyrillic Diacritics", "FK Diacritics Primary"],
-		"options": { "fastKey": "0", "altLayoutKey": "<^<! 0" },
+		"options": { "fastKey": ["5", "6", "7", "8", "9", "0"], "altLayoutKey": ["<^<! 5", "<^<! 6", "<^<! 7", "<^<! 8", "<^<! 9", "<^<! 0"], "useLetterLocale": true },
 		"symbol": { "category": "Diacritic Mark" }
 	}
 ]
