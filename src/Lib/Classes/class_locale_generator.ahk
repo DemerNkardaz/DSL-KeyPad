@@ -57,7 +57,7 @@ Class LocaleGenerator {
 				data.lAfterletter,
 				data.lSecondName,
 				data.proxyMark,
-				(data.altTitleUseLineBreak && data.lAfterletter != "" ? "`n" : ""),
+				(data.altTitleUseLineBreak && (data.lAfterletter != "" || data.lAfterAltTitle != "") ? "`n" : ""),
 				data.lAfterAltTitle,
 				data.altTitlePostfixText,
 			],
