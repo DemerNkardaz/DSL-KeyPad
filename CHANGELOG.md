@@ -27,6 +27,7 @@
 - Fixes:
   - Fixed a name generation bug that caused the case and type labels of a character to be merged into a single word (the issue was noticeable on the “Egyptological Yod” letter).
   - Fixed an extra space being inserted before secondary names (“Ы⬚⬚(Yeru with Yer)” → “Ы⬚(Yeru with Yer)”).
+  - Fixed alternative titles generation mistake with multiple postfixes.
 
 
 ---
@@ -268,6 +269,7 @@
 - Исправления:
   - Исправлена ошибка генерации названий, из-за которой название регистра и типа символа слипались в одно слово (проблема была заметна на букве «Египтологический Йод»).
   - Исправлена вставка лишнего пробела перед вторичными именами («Ы⬚⬚(Еры с Ерем)» → «Ы⬚(Еры с Ерем)»).
+  - Исправлена ошибка при генерации альтернативных названий с множественными постфиксами.
 
 
 ---

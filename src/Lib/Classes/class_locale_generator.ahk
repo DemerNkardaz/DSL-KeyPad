@@ -542,8 +542,9 @@ Class LocaleGenerator {
 				data.altTitlePostfixText .= currentFormatBridge.Get("titleAltPostfix", &data, &postfixText)
 
 				Loop lPostfixes.Length - 2 {
-					data.titlePostfixText .= data.postfixSeparator LocaleGenerator.GetLocale(pfx "postfix." lPostfixes[A_Index + 1], lang)
-					data.altTitlePostfixText .= data.titlePostfixText
+					local currentPostfixText := data.postfixSeparator LocaleGenerator.GetLocale(pfx "postfix." lPostfixes[A_Index + 1], lang)
+					data.titlePostfixText .= currentPostfixText
+					data.altTitlePostfixText .= currentPostfixText
 				}
 
 				if lPostfixes.Length > 1 {
