@@ -92,9 +92,9 @@
 			"yijing": {
 				"n_sym_monogram_1_yin": { "letter_locale": "Инь" },
 				"n_sym_monogram_2_yang": { "letter_locale": "Ян" },
-				"n_sym_digram_1_greater_yin": { "letter_locale": "Старый Инь" },
+				"n_sym_digram_1_greater_yin": { "letter_locale": "Старая Инь" },
 				"n_sym_digram_2_lesser_yang": { "letter_locale": "Молодой Ян" },
-				"n_sym_digram_3_lesser_yin": { "letter_locale": "Молодой Инь" },
+				"n_sym_digram_3_lesser_yin": { "letter_locale": "Молодая Инь" },
 				"n_sym_digram_4_greater_yang": { "letter_locale": "Старый Ян" },
 				"n_sym_trigram_1_qian": {
 					"letter_locale": "Цянь",
