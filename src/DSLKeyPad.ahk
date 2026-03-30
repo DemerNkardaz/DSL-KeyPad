@@ -10,6 +10,7 @@
  *  ▓ License:     {@license MIT}
  *  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
  **/
+#Requires AutoHotkey <=2.0.21
 #SingleInstance Force
 SetKeyDelay(0, 50)
 A_HotkeyInterval := 1000

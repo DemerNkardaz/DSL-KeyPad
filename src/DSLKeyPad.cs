@@ -76,18 +76,20 @@ class Program
 			return;
 		}
 
-		string autoHotkeyPath = @"C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe";
-		if (File.Exists(autoHotkeyPath))
-		{
-			Process.Start(new ProcessStartInfo(
-				autoHotkeyPath,
-				"/restart /script \"" + filePath + "\"")
-			{ UseShellExecute = true });
-		}
-		else
-		{
-			Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
-		}
+		Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
+
+		// string autoHotkeyPath = @"C:\Program Files\AutoHotkey\v2\AutoHotkey64.exe";
+		// if (File.Exists(autoHotkeyPath))
+		// {
+		// 	Process.Start(new ProcessStartInfo(
+		// 		autoHotkeyPath,
+		// 		"/restart /script \"" + filePath + "\"")
+		// 	{ UseShellExecute = true });
+		// }
+		// else
+		// {
+		// 	Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
+		// }
 	}
 
 	static bool HasFileAssociation(string path)
