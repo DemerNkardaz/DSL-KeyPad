@@ -1,6 +1,6 @@
 Class Event {
 	/**
-	 * 
+	 *
 	 **/
 	static eventListeners := Map(
 		"Application Class", Map(
@@ -19,6 +19,7 @@ Class Event {
 		"Character Library", Map(
 			"Registration Starts", [],
 			"Registration Ends", [],
+			"Raw Entries Counted", [],
 			"Default Ready", [],
 		),
 		"Chracter", Map(
@@ -89,48 +90,48 @@ Class Event {
 	}
 	/**
 	 * @method OnEvent binds an action to an @event [eventClass][eventName]
-	 * 
+	 *
 	 * @param {String} eventClass — name of the event class that @contains <eventNames*>
 	 * @param {String} eventName — name of the event to listen to
 	 * @param {Callback} action — action which will be called when the event is triggered
 	 * @type {(eventClass: String, eventName: String, action: Callback) => Void}
-	 * 
+	 *
 	 * @throws {Error} when the specified event class does not exist
-	 * @returns {Integer} 
-	 * 
+	 * @returns {Integer}
+	 *
 	 **/
 
 	/**
 	 * Example of binding on event that triggers when @method {@link BindHandler.Send}(combo, characterNames*) sends an output:
-	 * 
+	 *
 	 * Stores last sent @output in a @static @variable
-	 * 
+	 *
 	 * Disables Timer that clears the static variable
-	 * 
+	 *
 	 * @IF “Compose” @instance is active => @returns {Void}
-	 * 
+	 *
 	 * @IF next character is “Combining Acute Accent” {@link https://en.wiktionary.org/wiki/%CC%81} =>
 	 * Replaces “A with Breve” {@link https://en.wiktionary.org/wiki/%C4%82} with “A with Breve & Acute” {@link https://en.wiktionary.org/wiki/%E1%BA%AE}
-	 * 
+	 *
 	 * @returns {Timer} which will clear static variable after 5 seconds
-	 * 
+	 *
 	 * @example
 	 * Event.OnEvent("Chracter", "Send", MyEvent)
 	 * MyEvent(&output) {
 	 * 	static storage := ""
 	 * 	static clear := _Clear.Bind()
-	 * 
+	 *
 	 * 	SetTimer(clear, 0)
-	 * 
+	 *
 	 * 	if globalInstances.crafter.isComposeInstanceActive
 	 * 		return
-	 * 
+	 *
 	 * 	if storage == Chr(0x0102) && output == Chr(0x0301)
 	 * 		SendEvent("{BackSpace}"), output := Chr(0x1EAE)
-	 * 
+	 *
 	 * 	storage := output
 	 * 	return SetTimer(clear, -5000)
-	 * 
+	 *
 	 * 	static _Clear() => storage := ""
 	 * }
 	 **/

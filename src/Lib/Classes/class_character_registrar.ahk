@@ -5,9 +5,10 @@ Class ChrReg {
 
 	static dynamicIDPattern := "(-?)\{(-?(?:0x)?[0-9A-Fa-f]+(?=(?:\.\.\.)?i))?(?:\.\.\.)?i(-?\d+)?\}"
 
+	nameToID := Map()
 
 	__New(rawEntries, typeOfInit := "Internal", preventProgressGUI := False, defaultLib := False) {
-		Event.Trigger("Character Library", "Registration Starts", rawEntries, typeOfInit, preventProgressGUI)
+		Event.Trigger("Character Library", "Registration Starts", &rawEntries, &typeOfInit, &preventProgressGUI)
 
 		this.AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI)
 
@@ -186,6 +187,21 @@ Class ChrReg {
 		return
 	}
 
+	ModifyRawEntry(&entryName, &rawEntries, &modificationEntry) {
+		local nameID := this.nameToID.Get(entryName)
+		local entryID := nameID + 1
+		local entry := rawEntries[entryID]
+		entry.FullMergeWith(modificationEntry)
+
+		if FileExist(App.PATHS.DIR "\Logs\modify_entry.log")
+			FileDelete(App.PATHS.DIR "\Logs\modify_entry.log")
+		FileAppend(entryName '`n' JSONExt.Dump(entry, True), App.PATHS.DIR "\Logs\modify_entry.log")
+	}
+
+	IsRawEntryExists(&entryName) {
+		return this.nameToID.Has(entryName)
+	}
+
 	AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI) {
 		local progress := !preventProgressGUI ? PorgressBar({ typeOfInit: typeOfInit }) : False
 		local setProgress := !preventProgressGUI ? progress.SetProgressBarValue.Bind(progress) : False
@@ -199,12 +215,12 @@ Class ChrReg {
 
 
 		if rawEntries is Array && rawEntries.Length >= 2 {
-			if progress {
-				Loop rawEntries.Length // 2 {
-					local index := A_Index * 2 - 1
-					local entryName := rawEntries[index]
-					local entry := rawEntries[index + 1]
+			Loop rawEntries.Length // 2 {
+				local index := A_Index * 2 - 1
+				local entryName := rawEntries[index]
+				local entry := rawEntries[index + 1]
 
+				if progress {
 					if RegExMatch(entryName, "\[×(\d+)\]", &match) {
 						progress.data.maxCountOfEntries += Integer(match[1])
 					} else if RegExMatch(entryName, "\[(.*?)\]", &match) {
@@ -215,8 +231,13 @@ Class ChrReg {
 					}
 				}
 
+				this.nameToID.Set(entryName, index)
+
 				SetTimer(setProgress, 25, 0)
 			}
+
+			local nameToID := this.nameToID
+			Event.Trigger("Character Library", "Raw Entries Counted", &this, &rawEntries, &nameToID)
 
 			Loop rawEntries.Length // 2 {
 				local index := A_Index * 2 - 1

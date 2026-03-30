@@ -26,6 +26,7 @@ Map.Prototype.DefineProp("MergeWith", { Call: _MapMergeWith })
 Map.Prototype.DefineProp("DeepMergeWith", { Call: _MapDeepMergeWith })
 Map.Prototype.DefineProp("DeepMergeBinds", { Call: _MapDeepMergeBinds })
 Map.Prototype.DefineProp("DeepClone", { Call: _MapDeepClone })
+Map.Prototype.DefineProp("FullMergeWith", { Call: _MapFullMergeWith })
 Map.Prototype.DefineProp("GetRef", { Call: _MapGetRef })
 Array.Prototype.DefineProp("DraftMap", { Call: _ArrayToDraftMap })
 Object.Prototype.DefineProp("MaxIndex", { Call: _ObjMaxIndex })
@@ -503,6 +504,82 @@ _MapDeepMergeWith(this, maps*) {
 	}
 	return this
 }
+
+_MapFullMergeWith(this, maps*) {
+	for mapIdx, mapToMerge in maps {
+		if mapToMerge.Count = 0
+			continue
+
+		for key, val in mapToMerge {
+			if RegExMatch(key, "i)^(.*)\[RW\]$", &matches) {
+				local baseKey := matches[1]
+				this.Set(baseKey, val)
+			} else if RegExMatch(key, "^(.*?)(\[[\d:a-zA-Z()]+\])+$", &matches) {
+				_MapApplyIndexedOp(this, key, val)
+			} else if this.Has(key) && this[key] is Map {
+				this[key].FullMergeWith(val)
+			} else if this.Has(key) && this[key] is Array && val is Array {
+				this[key].MergeWith(val)
+			} else {
+				this.Set(key, val)
+			}
+		}
+	}
+	return this
+}
+_MapApplyIndexedOp(map, key, val) {
+	; Парсим имя ключа и цепочку индексов
+	; Пример: "name[1][2:push]" -> baseKey="name", segments=[{idx:1,op:""},{idx:2,op:"push"}]
+	if !RegExMatch(key, "^([^\[]+)((?:\[[^\]]+\])+)$", &m)
+		return
+
+	local baseKey := m[1]
+	local rawSegs := m[2]
+
+	; Разбиваем на отдельные [...] блоки
+	local segments := []
+	local pos := 1
+	while RegExMatch(rawSegs, "\[([^\]]+)\]", &seg, pos) {
+		local inner := seg[1]          ; например "1", "2:push", "3:insertAt(2)"
+		local idx := ""
+		local op := ""
+
+		if RegExMatch(inner, "^(\d+):(.+)$", &parts) {
+			idx := Integer(parts[1])
+			op := parts[2]
+		} else {
+			idx := Integer(inner)
+			op := ""
+		}
+
+		segments.Push({ idx: idx, op: op })
+		pos := seg.Pos + seg.Len
+	}
+
+	if segments.Length = 0
+		return
+
+	; Идём по цепочке до предпоследнего элемента
+	local current := map[baseKey]
+	local i := 1
+	while i < segments.Length {
+		current := current[segments[i].idx]
+		i++
+	}
+
+	; Применяем операцию на последнем сегменте
+	local last := segments[segments.Length]
+	local op := last.op
+
+	if op = "" || op = "RW" {
+		current[last.idx] := val
+	} else if op = "push" {
+		current[last.idx].Push(val)
+	} else if RegExMatch(op, "^insertAt\((\d+)\)$", &insertMatch) {
+		current[last.idx].InsertAt(Integer(insertMatch[1]), val)
+	}
+}
+
 
 _MapDeepMergeBinds(this, maps*) {
 	for mapIdx, mapToMerge in maps {
