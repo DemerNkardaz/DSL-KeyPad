@@ -1,0 +1,27 @@
+{
+	"en-US": {
+		"script_labels": {
+			"biological": "Biology",
+			"botanical": "Botany"
+		},
+		"generated": {
+			"prefix": {
+				"biological": "Biological",
+				"botanical": "Botanical"
+			},
+			"tag": {
+				"biological": "biological",
+				"botanical": "botanical"
+			}
+		},
+		"scripts": {
+			"biological": {
+				"n_sym_sex_female": { "letter_locale": "Female" },
+				"n_sym_sex_male": { "letter_locale": "Male" }
+			},
+			"botanical": {
+				"n_sym_asexual_reproduction": { "letter_locale": "Asexual Reproduction" }
+			}
+		}
+	}
+}

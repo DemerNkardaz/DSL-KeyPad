@@ -93,6 +93,10 @@ Class ChrLib {
 		;
 		"display_modifier",
 		"emoji_component",
+		;
+		"biological",
+		"botanical",
+		"chemical",
 	]
 
 	static decompositionAttributes := Map(

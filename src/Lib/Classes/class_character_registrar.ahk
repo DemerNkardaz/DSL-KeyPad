@@ -204,7 +204,7 @@ Class ChrReg {
 
 	AddEntries(&rawEntries, &typeOfInit, &preventProgressGUI) {
 		local progress := !preventProgressGUI ? PorgressBar({ typeOfInit: typeOfInit }) : False
-		local setProgress := !preventProgressGUI ? progress.SetProgressBarValue.Bind(progress) : False
+		local setProgress := !preventProgressGUI ? progress.SetProgressBarValue.Bind(progress) : () => []
 		local instances := {
 			ChrBlock: ChrBlock(),
 			LocaleGenerator: LocaleGenerator(),

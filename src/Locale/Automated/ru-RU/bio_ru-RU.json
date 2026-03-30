@@ -1,0 +1,27 @@
+{
+	"ru-RU": {
+		"script_labels": {
+			"biological": "Биология",
+			"botanical": "Ботаника"
+		},
+		"generated": {
+			"prefix": {
+				"biological": "Биологическ$(ая|ий|ое)",
+				"botanical": "Ботаническ$(ая|ий|ое)"
+			},
+			"tag": {
+				"biological": "биологическ$(ая|ий|ое)",
+				"botanical": "ботаническ$(ая|ий|ое)"
+			}
+		},
+		"scripts": {
+			"biological": {
+				"n_sym_sex_female": { "letter_locale": "Женский пол" },
+				"n_sym_sex_male": { "letter_locale": "Мужской пол" }
+			},
+			"botanical": {
+				"n_sym_asexual_reproduction": { "letter_locale": "Бесполое размножение" }
+			}
+		}
+	}
+}

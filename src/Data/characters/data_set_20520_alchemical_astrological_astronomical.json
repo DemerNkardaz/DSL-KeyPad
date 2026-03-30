@@ -28,7 +28,7 @@
 		"unicode": ["1F761", "1F762"],
 		"recipe": [["alc ds1"], ["alc ds2"]],
 		"options": { "useLetterLocale": "dissolve$" },
-		"symbol": { 
+		"symbol": {
 			"copyNumber": [1, 2],
 			"tagAdditive": [
 				[{ "letter": "solvere" }],
@@ -261,7 +261,7 @@
 			["alc pbrk"],
 			["aaa", "${lat_s_let_a__macron×3}", "alc aml"]
 		],
-		"symbol": { 
+		"symbol": {
 			"tagAdditive": [
 				[{ "letter": "cineres" }],
 				[{ "letter": "cineres_clavellati" }, { "letter": "potash" }],
@@ -291,7 +291,7 @@
 		],
 		"symbol": {
 			"beforeType": "archaic",
-			"beforeLetter": "element", 
+			"beforeLetter": "element",
 			"tagAdditive": [
 				[{ "script": "astrological", "beforeType": "archaic", "beforeLetter": "star", "letter": "star_sun"}],
 				[{ "script": "astrological", "beforeType": "archaic", "beforeLetter": "satellite", "letter": "satellite_moon"}]
@@ -638,12 +638,14 @@
 				],
 				[
 					{ "letter": "venus_mirror" },
-					{ "script": "alchemical", "beforeLetter": "element", "letter": "copper" }
+					{ "script": "alchemical", "beforeLetter": "element", "letter": "copper" },
+					{ "script": "biological", "letter": "sex_female" }
 				],
 				[{ "script": "alchemical", "letter": "verdigris" }],
 				[
 					{ "letter": "mars_shield_and_spear" },
-					{ "script": "alchemical", "beforeLetter": "element", "letter": "iron" }
+					{ "script": "alchemical", "beforeLetter": "element", "letter": "iron" },
+					{ "script": "biological", "letter": "sex_male" }
 				],
 				[
 					{ "script": "alchemical", "beforeLetter": "element",  "letter": "tin" },
@@ -696,7 +698,7 @@
 			["ast Crs"],
 			["ast Sdn"]
 		],
-		"symbol": { 
+		"symbol": {
 			"customs": "[cf3b6c2,]",
 			"beforeLetter": "dwarf_planet"
 		}
@@ -708,7 +710,7 @@
 			["ast Ers2"]
 		],
 		"options": { "useLetterLocale": "eris$" },
-		"symbol": { 
+		"symbol": {
 			"copyNumber": [1, 2],
 			"beforeLetter": "dwarf_planet"
 		}
@@ -924,7 +926,10 @@
 		"symbol": {
 			"customs": "[cdcb572]",
 			"beforeType": "classical",
-			"beforeLetter": "planet"
+			"beforeLetter": "planet",
+			"tagAdditive": [
+				{ "script": "botanical", "letter": "asexual_reproduction" }
+			]
 		}
 	},
 	"astronomical_n_sym_asteroid_[hebe,iris,flora,metis,parthenope,victoria,egeria,irene,eunomia,psyche,thetis,melpomene,fortuna,proserpina,bellona,amphitrite,leukothea]", {

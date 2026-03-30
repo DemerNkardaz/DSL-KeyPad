@@ -129,7 +129,7 @@ Class Locale {
 				intermediate := StrReplace(intermediate, match[0], "DUPLICATED KEY REFERENCE (" entryName ") IN " section)
 			} else {
 				local replacement := this.ReadStr(&langCode, &customEntry, &combineRules)
-				intermediate := StrReplace(intermediate, match[0], replacement)
+				intermediate := StrReplace(intermediate, match[0], this.VariantSelect(replacement, variantSelect))
 			}
 		}
 
