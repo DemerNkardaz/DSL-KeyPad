@@ -2,16 +2,22 @@
 	"ru-RU": {
 		"script_labels": {
 			"biological": "Биология",
-			"botanical": "Ботаника"
+			"botanical": "Ботаника",
+			"entomological": "Энтомология",
+			"calendrical": "Календарь"
 		},
 		"generated": {
 			"prefix": {
 				"biological": "Биологическ$(ая|ий|ое)",
-				"botanical": "Ботаническ$(ая|ий|ое)"
+				"botanical": "Ботаническ$(ая|ий|ое)",
+				"entomological": "Энтомологическ$(ая|ий|ое)",
+				"calendrical": "Календарн$(ая|ый|ое)"
 			},
 			"tag": {
 				"biological": "биологическ$(ая|ий|ое)",
-				"botanical": "ботаническ$(ая|ий|ое)"
+				"botanical": "ботаническ$(ая|ий|ое)",
+				"entomological": "энтомологическ$(ая|ий|ое)",
+				"calendrical": "календарн$(ая|ый|ое)"
 			}
 		},
 		"scripts": {
@@ -20,7 +26,27 @@
 				"n_sym_sex_male": { "letter_locale": "Мужской пол" }
 			},
 			"botanical": {
-				"n_sym_asexual_reproduction": { "letter_locale": "Бесполое размножение" }
+				"n_sym_asexual_reproduction": { "letter_locale": "Бесполое размножение" },
+				"n_sym_perfect_flower": { "letter_locale": "Обоеполый цветок, Гермафродит" },
+				"n_sym_pistillate_flower": { "letter_locale": "Пестичный цветок (Женский)" },
+				"n_sym_staminate_flower": { "letter_locale": "Тычинковый цветок (Мужской)" },
+				"n_sym_annual_plant": { "letter_locale": "Однолетнее растение" },
+				"n_sym_biennial_plant": { "letter_locale": "Двулетнее растение" },
+				"n_sym_perennial_plant": { "letter_locale": "Многолетнее растение" },
+				"n_sym_herbaceous_perennial_plant": { "letter_locale": "Травянистое многолетнее растение" },
+				"n_sym_woody_perennial_plant": { "letter_locale": "Древесное многолетнее растение" }
+			},
+			"entomological": {
+				"n_sym_worker": { "letter_locale": "Рабочий (муравей, пчела, термит)" }
+			},
+			"calendrical": {
+				"n_sym_sunday": { "letter_locale": "Воскресенье" },
+				"n_sym_monday": { "letter_locale": "Понедельник" },
+				"n_sym_tuesday": { "letter_locale": "Вторник" },
+				"n_sym_wednesday": { "letter_locale": "Среда" },
+				"n_sym_thursday": { "letter_locale": "Четверг" },
+				"n_sym_friday": { "letter_locale": "Пятница" },
+				"n_sym_saturday": { "letter_locale": "Суббота" }
 			}
 		}
 	}

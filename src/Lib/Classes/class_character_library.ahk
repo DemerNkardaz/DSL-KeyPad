@@ -96,7 +96,9 @@ Class ChrLib {
 		;
 		"biological",
 		"botanical",
+		"entomological",
 		"chemical",
+		"calendrical",
 	]
 
 	static decompositionAttributes := Map(

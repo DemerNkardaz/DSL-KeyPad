@@ -193,9 +193,9 @@ Class ChrReg {
 		local entry := rawEntries[entryID]
 		entry.FullMergeWith(modificationEntry)
 
-		if FileExist(App.PATHS.DIR "\Logs\modify_entry.log")
-			FileDelete(App.PATHS.DIR "\Logs\modify_entry.log")
-		FileAppend(entryName '`n' JSONExt.Dump(entry, True), App.PATHS.DIR "\Logs\modify_entry.log")
+		; if FileExist(App.PATHS.DIR "\Logs\modify_entry.log")
+		; 	FileDelete(App.PATHS.DIR "\Logs\modify_entry.log")
+		; FileAppend(entryName '`n' JSONExt.Dump(entry, True), App.PATHS.DIR "\Logs\modify_entry.log")
 	}
 
 	IsRawEntryExists(&entryName) {

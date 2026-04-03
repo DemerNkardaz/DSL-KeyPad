@@ -2,16 +2,22 @@
 	"en-US": {
 		"script_labels": {
 			"biological": "Biology",
-			"botanical": "Botany"
+			"botanical": "Botany",
+			"entomological": "Entomology",
+			"calendrical": "Calendar"
 		},
 		"generated": {
 			"prefix": {
 				"biological": "Biological",
-				"botanical": "Botanical"
+				"botanical": "Botanical",
+				"entomological": "Entomological",
+				"calendrical": "Calendrical"
 			},
 			"tag": {
 				"biological": "biological",
-				"botanical": "botanical"
+				"botanical": "botanical",
+				"entomological": "entomological",
+				"calendrical": "calendrical"
 			}
 		},
 		"scripts": {
@@ -20,7 +26,27 @@
 				"n_sym_sex_male": { "letter_locale": "Male" }
 			},
 			"botanical": {
-				"n_sym_asexual_reproduction": { "letter_locale": "Asexual Reproduction" }
+				"n_sym_asexual_reproduction": { "letter_locale": "Asexual Reproduction" },
+				"n_sym_perfect_flower": { "letter_locale": "Perfect flower, Hermaphrodite" },
+				"n_sym_pistillate_flower": { "letter_locale": "Pistillate flower (Female)" },
+				"n_sym_staminate_flower": { "letter_locale": "Staminate flower (Male)" },
+				"n_sym_annual_plant": { "letter_locale": "Annual plant" },
+				"n_sym_biennial_plant": { "letter_locale": "Biennial plant" },
+				"n_sym_perennial_plant": { "letter_locale": "Perennial plant" },
+				"n_sym_herbaceous_perennial_plant": { "letter_locale": "Herbaceous perennial plant" },
+				"n_sym_woody_perennial_plant": { "letter_locale": "Woody perennial plant" }
+			},
+			"entomological": {
+				"n_sym_worker": { "letter_locale": "Worker (ant, bee, termite)" }
+			},
+			"calendrical": {
+				"n_sym_sunday": { "letter_locale": "Sunday" },
+				"n_sym_monday": { "letter_locale": "Monday" },
+				"n_sym_tuesday": { "letter_locale": "Tuesday" },
+				"n_sym_wednesday": { "letter_locale": "Wednesday" },
+				"n_sym_thursday": { "letter_locale": "Thursday" },
+				"n_sym_friday": { "letter_locale": "Friday" },
+				"n_sym_saturday": { "letter_locale": "Saturday" }
 			}
 		}
 	}

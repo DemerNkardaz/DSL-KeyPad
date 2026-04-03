@@ -577,7 +577,9 @@
 			"beforeLetter": "star",
 			"tagAdditive": [
 				{ "script": "astronomical", "beforeLetter": "star", "letter": "star_sun" },
-				{ "script": "alchemical", "beforeLetter": "element", "letter": "gold" }
+				{ "script": "alchemical", "beforeLetter": "element", "letter": "gold" },
+				{ "script": "botanical", "letter": "annual_plant" },
+					{ "script": "calendrical", "letter": "sunday" }
 			]
 		}
 	},
@@ -591,11 +593,13 @@
 			"beforeLetter": "satellite",
 			"tagAdditive": [
 					[
-						{ "script": "alchemical", "beforeLetter": "element", "letter": "silver" }
+						{ "script": "alchemical", "beforeLetter": "element", "letter": "silver" },
+						{ "script": "calendrical", "letter": "monday", "copyNumber": 1 }
 					],
 					[
 						{ "script": "alchemical", "beforeLetter": "element", "letter": "silver" },
-						{ "script": "alchemical", "beforeLetter": "element", "letter": "quicksilver" }
+						{ "script": "alchemical", "beforeLetter": "element", "letter": "quicksilver" },
+						{ "script": "calendrical", "letter": "monday", "copyNumber": 2 }
 					]
 				]
 		}
@@ -634,24 +638,37 @@
 					{ "script": "alchemical", "beforeLetter": "element", "letter": "mercury" },
 					{ "script": "alchemical", "beforeLetter": "element", "letter": "quicksilver" },
 					{ "script": "alchemical", "beforeType": "archaic", "beforeLetter": "element",  "letter": "tin" },
-					{ "script": "astrological", "letter": "mutable_zodiacal_modality", "copyNumber": 2 }
+					{ "script": "astrological", "letter": "mutable_zodiacal_modality", "copyNumber": 2 },
+					{ "script": "botanical", "beforeType": "obsolete", "letter": "perfect_flower" },
+					{ "script": "entomological", "letter": "worker" },
+					{ "script": "calendrical", "letter": "wednesday" }
 				],
 				[
 					{ "letter": "venus_mirror" },
 					{ "script": "alchemical", "beforeLetter": "element", "letter": "copper" },
-					{ "script": "biological", "letter": "sex_female" }
+					{ "script": "biological", "letter": "sex_female" },
+					{ "script": "botanical", "letter": "pistillate_flower" },
+					{ "script": "calendrical", "letter": "friday" }
 				],
 				[{ "script": "alchemical", "letter": "verdigris" }],
 				[
 					{ "letter": "mars_shield_and_spear" },
 					{ "script": "alchemical", "beforeLetter": "element", "letter": "iron" },
-					{ "script": "biological", "letter": "sex_male" }
+					{ "script": "biological", "letter": "sex_male" },
+					{ "script": "botanical", "letter": "staminate_flower" },
+					{ "script": "calendrical", "letter": "tuesday" }
 				],
 				[
 					{ "script": "alchemical", "beforeLetter": "element",  "letter": "tin" },
-					{ "script": "alchemical", "beforeType": "archaic", "letter": "electrum" }
+					{ "script": "alchemical", "beforeType": "archaic", "letter": "electrum" },
+					{ "script": "botanical", "beforeType": "obsolete", "letter": "herbaceous_perennial_plant" },
+					{ "script": "calendrical", "letter": "thursday" }
 				],
-				[{ "script": "alchemical", "beforeLetter": "element",  "letter": "lead" }],
+				[
+					{ "script": "alchemical", "beforeLetter": "element",  "letter": "lead" },
+					{ "script": "botanical", "beforeType": "obsolete", "letter": "woody_perennial_plant" },
+					{ "script": "calendrical", "letter": "saturday" }
+				],
 				[],
 				[{ "script": "alchemical", "beforeLetter": "element",  "letter": "bismuth", "copyNumber": 2 }]
 			]
