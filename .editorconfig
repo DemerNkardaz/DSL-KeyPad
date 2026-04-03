@@ -4,6 +4,11 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[*.ini]
+charset = utf-16le
+end_of_line = crlf
+insert_final_newline = true
+
 [*.md]
 indent_style = space
 indent_size = 2
