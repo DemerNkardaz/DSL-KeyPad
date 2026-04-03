@@ -381,18 +381,20 @@
 			"tagAdditive": [{ "letter": "iron_bearing_mineral" }]
 		}
 	},
-	"alchemical_n_sym_iron_crocus_[1,2,3]", {
-		"unicode": ["26A8", "1F71E", "26A9"],
+	"alchemical_n_sym_iron_crocus_[1,2,3,4]", {
+		"unicode": ["26A8", "26A6", "26A9", "1F71E"],
 		"recipe": [
 			["alc icr1"],
 			["alc icr2"],
-			["alc icr3"]
+			["alc icr3"],
+			["alc icr4"]
 		],
 		"options": { "useLetterLocale": "crocus$" },
 		"symbol": {
-			"copyNumber": [1, 2, 3],
+			"copyNumber": [1, 2, 3, 4],
 			"tagAdditive": [
-				[{ "letter": "crocus_martis" }],
+				[{ "letter": "crocus_martis", "copyNumber": 1 }],
+				[{ "letter": "crocus_martis", "copyNumber": 2 }],
 				[], []
 			]
 		}
@@ -437,7 +439,7 @@
 	"alchemical_n_sym_copper[,_salt]_sublimate", {
 		"unicode": ["1F722", "1F727"],
 		"recipe": [
-			["alc cst"],
+			["${astrological_n_sym_planet_venus}${alchemical_n_sym_mineral_sal_ammoniac}", "alc cst"],
 			["alc css"]
 		],
 		"symbol": {
@@ -480,7 +482,7 @@
 	"alchemical_n_sym_antimony[,_salt]_sublimate", {
 		"unicode": ["1F72C", "1F72E"],
 		"recipe": [
-			["alc ast"],
+			["${astronomical_n_sym_planet_earth}${alchemical_n_sym_mineral_sal_ammoniac}", "alc ast"],
 			["alc asst"]
 		],
 		"symbol": {
