@@ -1,0 +1,42 @@
+{
+  "script": {
+    "lat": "latin",
+    "cyr": "cyrillic",
+    "hel": "hellenic"
+  },
+  "case": {
+    "c": "capital",
+    "s": "small",
+    "k": "small_capital",
+    "i": "inter",
+    "n": "neutral"
+  },
+  "type": {
+    "let": "letter",
+    "lig": "ligature",
+    "dig": "digraph",
+    "fig": "figure",
+    "mark": "mark",
+    "num": "numeral",
+    "number": "number",
+    "sym": "symbol",
+    "sign": "sign",
+    "rune": "rune",
+    "log": "logogram",
+    "syl": "syllable",
+    "gly": "glyph",
+    "piece": "piece",
+    "suite": "suite",
+    "card": "card",
+    "dice": "dice",
+    "tile": "tile",
+    "unit": "unit",
+    "abbr": "abbreviation",
+    "neu": "neutral",
+    "note": "note",
+    "block": "block"
+  },
+  "letter": "",
+  "endPart": "",
+  "postfixes": []
+}

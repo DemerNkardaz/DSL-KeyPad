@@ -392,7 +392,7 @@ Class LocaleGenerator {
 		local bannedFromScriptAtStart := entryName ~= "^(yijing|taixuanjing|mahjong|xiangqi)"
 		local scriptBounds := entry["symbol"]["scriptBounds"]
 
-		if ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic", "domino"]) {
+		if ChrLib.domainsList.HasRegEx(entryName, &i, ["^", "_"], ["sidetic", "glagolitic", "tolkien_runic", "domino"]) {
 			if !useLetterLocale
 				useLetterLocale := True
 			if !bannedFromScriptAtStart

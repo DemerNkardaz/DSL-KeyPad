@@ -752,7 +752,7 @@ Class ChrReg {
 
 			if entry["groups"].Length = 0 {
 				local hasPostfix := entry["data"]["postfixes"].Length > 0
-				if ArrayMerge(ChrLib.scriptsValidator, ["hellenic", "latin", "cyrillic"]).HasValue(entry["data"]["script"]) {
+				if ArrayMerge(ChrLib.domainsList, ["hellenic", "latin", "cyrillic"]).HasValue(entry["data"]["script"]) {
 					script := StrReplace(entry["data"]["script"], "_", " ")
 					entry["groups"] := (StrLen(entry["data"]["type"]) > 0 && ["digraph", "ligature", "numeral", "number"].HasValue(entry["data"]["type"]) ?
 						[StrTitle(script RegExReplace(selectivePart, "_", " ") " " entry["data"]["type"] "s")] :
@@ -1184,27 +1184,27 @@ Class ChrReg {
 
 
 	NameDecompose(&entryName) {
-		local decomposedName := ChrLib.decompositionAttributes.DeepClone()
+		local decomposedName := ChrLib.labelNormalizationList.DeepClone()
 
 		local altInputScript := ""
 		local foundScript := False
 
-		for key, value in decomposedName["script"] {
+		for key, _ in decomposedName["script"] {
 			if entryName ~= "^" key "_" {
 				foundScript := True
 				break
 			}
 		}
 
-		if !foundScript && ChrLib.scriptsValidator.HasRegEx(entryName, &i, ["^", "_"]) {
+		if !foundScript && ChrLib.domainsList.HasRegEx(entryName, &i, ["^", "_"]) {
 			foundScript := True
-			altInputScript := ChrLib.scriptsValidator[i]
+			altInputScript := ChrLib.domainsList[i]
 		}
 
 		if !foundScript
 			return entryName
 
-		for key, value in decomposedName["case"] {
+		for key, _ in decomposedName["case"] {
 			if !RegExMatch(entryName, "i)_" key "_") {
 				foundScript := False
 			} else {
@@ -1216,7 +1216,7 @@ Class ChrReg {
 		if !foundScript
 			return entryName
 
-		for key, value in decomposedName["type"] {
+		for key, _ in decomposedName["type"] {
 			if !RegExMatch(entryName, "i)_" key "_") {
 				foundScript := False
 			} else {

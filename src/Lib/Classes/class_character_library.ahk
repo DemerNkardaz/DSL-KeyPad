@@ -28,131 +28,32 @@ Class ChrLib {
 		allKeys: 0,
 	}
 
-	static AddScript(scriptNames*) {
+	static AddDomain(scriptNames*) {
 		for each in scriptNames
-			this.scriptsValidator.Push(each)
+			this.domainsList.Push(each)
 		return
 	}
 
-	static scriptsValidator := [
-		"deseret",
-		"glagolitic",
-		"germanic_runic",
-		"cirth_runic",
-		"tolkien_runic",
-		"gothic",
-		"old_hungarian",
-		"old_italic",
-		"old_permic",
-		"old_persian",
-		"old_turkic",
-		"phoenician",
-		"carian",
-		"sidetic",
-		"lycian",
-		"lydian",
-		"cypriot_syllabary",
-		"tifinagh",
-		"shavian",
-		"caucasian_albanian",
-		;
-		"north_arabian",
-		"south_arabian",
-		;
-		"ugaritic",
-		"parthian",
-		"palmyrene",
-		"manichaean",
-		"imperial_aramaic",
-		"samaritan",
-		;
-		"ipa",
-		"&ipa",
-		;
-		"alchemical",
-		"astrological",
-		"astronomical",
-		"musical",
-		"occultic",
-		"geomantic",
-		"pharmaceutical",
-		"liturgy",
-		"chess",
-		"card",
-		"playing_card",
-		"taoist",
-		"yijing",
-		"taixuanjing",
-		"mahjong",
-		"xiangqi",
-		"zhongguo",
-		"domino",
-		"roman",
-		;
-		"block_element",
-		;
-		"display_modifier",
-		"emoji_component",
-		;
-		"biological",
-		"botanical",
-		"entomological",
-		"chemical",
-		"calendrical",
-	]
+	static AddScript(scriptNames*) {
+		return this.AddDomain(scriptNames*)
+		; temporary alias
+	}
 
-	static decompositionAttributes := Map(
-		"script", Map(
-			"lat", "latin",
-			"cyr", "cyrillic",
-			"hel", "hellenic",
-		),
-		"case", Map(
-			"c", "capital",
-			"s", "small",
-			"k", "small_capital",
-			"i", "inter",
-			"n", "neutral"
-		),
-		"type", Map(
-			"let", "letter",
-			"lig", "ligature",
-			"dig", "digraph",
-			"fig", "figure",
-			"mark", "mark",
-			"num", "numeral",
-			"number", "number",
-			"sym", "symbol",
-			"sign", "sign",
-			"rune", "rune",
-			"log", "logogram",
-			"syl", "syllable",
-			"gly", "glyph",
-			"piece", "piece",
-			"suite", "suite",
-			"card", "card",
-			"dice", "dice",
-			"tile", "tile",
-			"unit", "unit",
-			"abbr", "abbreviation",
-			"neu", "neutral",
-			"note", "note",
-			"block", "block"
-		),
-		"letter", "",
-		"endPart", "",
-		"postfixes", []
-	)
+
+	static domainsList := JSON.LoadFile(App.PATHS.DATA "\character_domains.json", "UTF-8")
+	static casesList := JSON.LoadFile(App.PATHS.DATA "\character_cases.json", "UTF-8")
+	static typesList := JSON.LoadFile(App.PATHS.DATA "\character_types.json", "UTF-8")
+	static labelNormalizationList := JSON.LoadFile(App.PATHS.DATA "\character_label_normalize.json", "UTF-8")
 
 	static GetDecomposition(subMap, toGet, get := "Value", &output := "") {
 		if get = "Value" {
-			if this.decompositionAttributes[subMap] is Map && this.decompositionAttributes[subMap].Has(toGet) {
-				output := this.decompositionAttributes[subMap][toGet]
-				return this.decompositionAttributes[subMap][toGet]
+			if this.labelNormalizationList[subMap] is Map && this.labelNormalizationList[subMap].Has(toGet) {
+				output := this.labelNormalizationList[subMap][toGet]
+				return this.labelNormalizationList[subMap][toGet]
 			}
 		} else if get = "Key" {
-			if this.decompositionAttributes[subMap] is Map {
-				for key, value in this.decompositionAttributes[subMap] {
+			if this.labelNormalizationList[subMap] is Map {
+				for key, value in this.labelNormalizationList[subMap] {
 					if value = toGet {
 						output := key
 						return key
