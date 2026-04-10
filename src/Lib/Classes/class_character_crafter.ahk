@@ -426,6 +426,7 @@ Class ChrCrafter {
 	}
 
 	ComposeActivate() {
+		Send("{Blind}{vkE8}")
 		if this.composeKeyClicks = 1 {
 			this.composeKeyClicks := 0
 			this.Start("Compose")

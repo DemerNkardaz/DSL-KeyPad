@@ -2984,9 +2984,12 @@
 	},
 	"Important": {
 		"Flat": {
-			"RAlt": "<% (*) => globalInstances.crafter.ComposeActivate() %/>"
 		},
 		"Moded": {
+			"RAlt": {
+				"~": "<% (*) => globalInstances.crafter.ComposeActivate() %/>",
+				"~<^": "<% (*) => globalInstances.crafter.ComposeActivate() %/>"
+			},
 			"F1": {
 				"<^>!": "<% (*) => KbdBinder.ToggleDefaultMode() %/>",
 				"<^>!>+": "<% (*) => Options.ToggleInputMode() %/>",
@@ -2998,8 +3001,7 @@
 				"<^>!>+": "<% (*) => Scripter.ToggleSelectedOption(\"HanYu PinYin\", \"TELEX\") %/>"
 			},
 			"F8": {
-				"<^>!": "<% (*) => GREPTypography.SetStyles() %/>",
-				">^": "<% (*) => testGui() %/>"
+				"<^>!": "<% (*) => GREPTypography.SetStyles() %/>"
 			},
 			"F9": {
 				">^": "<% (*) => Cfg.Editor() %/>",

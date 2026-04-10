@@ -349,7 +349,7 @@ Class KbdBinder {
 		return output
 	}
 
-	static Registration(bindingsMap := Map(), rule := True, silent := False) {
+	static Registration(bindingsMap := Map(), enabled := True, silent := False) {
 		bindingsMap := this.CompileBinds(bindingsMap)
 		total := bindingsMap["mapping"].Count
 		useTooltip := Cfg.Get("Bind_Register_Tooltip_Progress_Bar", , True, "bool")
@@ -377,7 +377,7 @@ Class KbdBinder {
 				local comboSeq := comboActions[index]
 				local actionSeq := comboActions[index + 1]
 				local isPersistent := bindingsMap["persistent"].HasValue(comboSeq)
-				local options := [rule ? "On" : "Off", isPersistent ? "S" : ""]
+				local options := [enabled ? "On" : "Off", isPersistent ? "S" : ""]
 
 				try {
 					if comboSeq != ""
