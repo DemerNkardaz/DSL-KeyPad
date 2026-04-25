@@ -1,6 +1,6 @@
 ﻿$ver = "0.1.7.5"
 $preRelease = "False"
-$title = "DSL KeyPad@0.1.7.5 α"
+$title = "DSL KeyPad@0.1.7.5 β"
 $message =@"
 &#128230;&emsp14;Automatically created/updated via build process in workflow.<br>
 
@@ -8,7 +8,7 @@ $message =@"
 		<tr>
 			<td><b>Stamp</b></td>
 			<td>
-				&#128228;&emsp14;2026-04-25 08:18:13
+				&#128228;&emsp14;2026-04-25 08:30:35
 			</td>
 		</tr>
 		<tr>

@@ -12,7 +12,7 @@
 
 ---
 
-### [0.1.7.5 α — 2026-??-??](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.5)
+### [0.1.7.5 α — 2026-04-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.5)
 
 - Additions:
   - Added a combination for the Cyrillic “Epsilon” character (Ԑԑ) similar to the one for Latin “Epsilon” (L/RAlt + L/RShift + Е).
