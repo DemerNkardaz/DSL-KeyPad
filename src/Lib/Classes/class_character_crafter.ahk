@@ -1,6 +1,7 @@
 Class ChrCrafter {
 	composeKeyClicks := 0
 	composeKeyTimer := ""
+	isComposeKeyHeld := False
 	isComposeInstanceActive := False
 
 	surrogateBuffer := ""
@@ -425,8 +426,16 @@ Class ChrCrafter {
 		return output
 	}
 
+	ComposeKeyUpAction() {
+		this.isComposeKeyHeld := False
+	}
+
 	ComposeActivate() {
 		Send("{Blind}{vkE8}")
+
+		if this.isComposeKeyHeld
+			return
+
 		if this.composeKeyClicks = 1 {
 			this.composeKeyClicks := 0
 			this.Start("Compose")
@@ -435,6 +444,8 @@ Class ChrCrafter {
 			this.composeKeyClicks++
 			this.ComposeActivationWait()
 		}
+
+		this.isComposeKeyHeld := True
 	}
 
 	ComposeActivationWait() {

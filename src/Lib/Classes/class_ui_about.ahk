@@ -119,7 +119,7 @@ Class AboutPanel {
 		this.xPos := screenWidth - this.w - 50
 		this.yPos := screenHeight - this.h - 92
 
-		this.title := App.Title("+status+version") " — " Locale.Read("dictionary.about")
+		this.title := App.Title("+status+version") " — " Locale.Read("dictionary.about") " — AutoHotkey " A_AhkVersion
 
 		local aboutWindow := Gui()
 		aboutWindow.Title := this.title

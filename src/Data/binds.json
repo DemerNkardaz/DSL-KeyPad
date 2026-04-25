@@ -2990,6 +2990,10 @@
 				"~": "<% (*) => globalInstances.crafter.ComposeActivate() %/>",
 				"~<^": "<% (*) => globalInstances.crafter.ComposeActivate() %/>"
 			},
+			"RAlt Up": {
+				"~": "<% (*) => globalInstances.crafter.ComposeKeyUpAction() %/>",
+				"~<^": "<% (*) => globalInstances.crafter.ComposeKeyUpAction() %/>"
+			},
 			"F1": {
 				"<^>!": "<% (*) => KbdBinder.ToggleDefaultMode() %/>",
 				"<^>!>+": "<% (*) => Options.ToggleInputMode() %/>",

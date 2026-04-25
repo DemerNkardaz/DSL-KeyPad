@@ -293,6 +293,7 @@ Class KbdBinder {
 				for scanCode, keyNamesArray in layout {
 					if RegExMatch(combo, "(?:\[(?<modKey>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(?=:)?\]|(?<key>[a-zA-Zа-яА-ЯёЁѣѢіІ0-9\-\x{0370}-\x{03FF}\x{1F00}-\x{1FFF}]+)(?=:)?)(?=[:\]]|$)", &match) {
 						keyLetter := match["modKey"] != "" ? match["modKey"] : match["key"]
+
 						if keyNamesArray.HasValue(keyLetter) {
 							isCyrillicKey := RegExMatch(keyLetter, matchRu)
 							isHellenicKey := RegExMatch(keyLetter, metchEl)

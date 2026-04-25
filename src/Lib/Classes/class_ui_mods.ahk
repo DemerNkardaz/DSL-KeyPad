@@ -115,16 +115,15 @@ Class ModsGUI {
 				}
 
 				modsList.Push([
-					(
-						(modData["status"] = 1 ? "Check " : "")
-						("Icon" (previewImg is String ? idx : 1))
-					),
-					modData.Has(languageCode) && modData[languageCode].Has("title") && modData[languageCode]["title"] != "" ? modData[languageCode]["title"] : modData["title"],
-					modData["version"],
-					modData["type"] = "pre_init" ? Locale.Read("init.before_start") : Locale.Read("init.after_start"),
-					modData["folder"],
-					modData["type"],
-				])
+				(
+					(modData["status"] = 1 ? "Check " : "")
+					("Icon" (previewImg is String ? idx : 1))
+				),
+				modData.Has(languageCode) && modData[languageCode].Has("title") && modData[languageCode]["title"] != "" ? modData[languageCode]["title"] : modData["title"],
+				modData["version"],
+				modData["type"] = "pre_init" ? Locale.Read("init.before_start") : Locale.Read("init.after_start"),
+				modData["folder"],
+				modData["type"],])
 			}
 		}
 

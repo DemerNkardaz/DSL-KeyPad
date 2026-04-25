@@ -84,13 +84,12 @@ Class UIMainPanel {
 	filterX := this.filterIconX + 28
 	filterY := this.filterIconY
 	filterW := ((this.lvW - this.filterIconW) - 4) - (
-		(
-			this.filterRegExCheckBoxW +
-			this.filterCaseSensitiveCheckBoxW +
-			this.filterModeDropDownW +
-			this.filterClearBtnW
-		) + (8 * 4)
-	)
+	(
+		this.filterRegExCheckBoxW +
+		this.filterCaseSensitiveCheckBoxW +
+		this.filterModeDropDownW +
+		this.filterClearBtnW
+	) + (8 * 4))
 	filterH := this.filterIconH
 	filterClearBtnX := this.filterX + this.filterW + 8
 	filterModeDropDownX := this.filterClearBtnX + this.filterClearBtnW + 8

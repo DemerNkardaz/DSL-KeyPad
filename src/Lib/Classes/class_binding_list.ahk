@@ -64,7 +64,15 @@ Class BindList {
 						rule := ":" ruleMatch[1]
 						modifier := RegExReplace(modifier, ":(.*?)$", "")
 					}
-					entryKey := modifier "[" letterKey "]" rule
+
+					keyState := ""
+					cleanLetterKey := letterKey
+					if RegExMatch(letterKey, "i)^(.+?)\s(Up|Down)$", &stateMatch) {
+						cleanLetterKey := stateMatch[1]
+						keyState := " " stateMatch[2]
+					}
+
+					entryKey := modifier "[" cleanLetterKey "]" rule keyState
 					this.mapping.Set(entryKey, value)
 				}
 			}
