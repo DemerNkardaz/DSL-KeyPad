@@ -255,7 +255,7 @@
 
 ---
 
-### [0.1.7.5 α — 2026-??-??](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.5)
+### [0.1.7.5 α — 2026-04-25](https://github.com/DemerNkardaz/DSL-KeyPad/releases/tag/0.1.7.5)
 
 - Добавления:
   - Для символа «Эпсилон» кириллицы (Ԑԑ) добавлена комбинация аналогичная для «Эпсилон» латиницы (L/RAlt + L/RShift + Е).
