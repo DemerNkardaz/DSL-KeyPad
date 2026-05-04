@@ -1317,7 +1317,7 @@ Class UIMainPanel {
 				local unicode := entry["unicode"]
 				local unicodeBlock := entry["unicodeBlock"]
 				local sequence := entry["sequence"]
-				local altsCount := ObjOwnPropCount(entry["alterations"])
+				local altsCount := entry["alterations"].Count
 				local hasLegend := entry["options"]["legend"]
 
 				if StrLen(unicode) > 0 {
